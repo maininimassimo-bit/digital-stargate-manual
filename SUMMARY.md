@@ -1,22 +1,28 @@
-# Sommario
+# Sommario – Digital StarGate Technical Manual
 
-- [Introduzione](docs/chapters/01-introduzione.md)
-- [Architettura generale](docs/chapters/02-architettura-generale.md)
-- [Struttura della cupola](docs/chapters/03-struttura-cupola.md)
-- [Impianto elettrico](docs/chapters/04-impianto-elettrico.md)
-- [Infrastruttura di rete](docs/chapters/05-infrastruttura-rete.md)
-- [PrimaLuceLab EAGLE](docs/chapters/06-eagle.md)
-- [Celestron CGX-L](docs/chapters/07-cgx-l.md)
-- [Celestron C8 XLT](docs/chapters/08-c8-xlt.md)
-- [Sky-Watcher Quattro 200P](docs/chapters/09-quattro-200p.md)
-- [Camere e treno ottico](docs/chapters/10-camere-treno-ottico.md)
-- [N.I.N.A.](docs/chapters/11-nina.md)
-- [PHD2 Guiding](docs/chapters/12-phd2.md)
-- [CPWI](docs/chapters/13-cpwi.md)
-- [ASCOM Platform](docs/chapters/14-ascom.md)
-- [Architettura dell'automazione](docs/chapters/15-automazione.md)
-- [SOP: avvio dell'osservatorio](docs/chapters/16-sop-avvio.md)
-- [Acquisizione automatica](docs/chapters/17-acquisizione-automatica.md)
-- [Emergenze e recovery](docs/chapters/18-emergenze-recovery.md)
-- [Manutenzione preventiva](docs/chapters/19-manutenzione-preventiva.md)
-- [Registro revisioni](docs/appendices/registro-revisioni.md)
+## Capitoli
+
+1. Introduzione
+2. Architettura generale
+3. Struttura della cupola
+4. Impianto elettrico
+5. Infrastruttura di rete
+6. PrimaLuceLab EAGLE
+7. Celestron CGX-L
+8. Celestron C8 XLT
+9. Sky-Watcher Quattro 200P
+10. Camere e treno ottico
+11. N.I.N.A.
+12. PHD2 Guiding
+13. CPWI
+14. ASCOM Platform
+15. Architettura dell'automazione
+16. SOP avvio osservatorio
+17. Acquisizione automatica
+18. Emergenze e recovery
+19. Manutenzione preventiva
+20. Gestione delle configurazioni e versioning
+21. Backup e Disaster Recovery
+22. Inventario tecnico e Asset Management
+23. Collaudo e validazione del sistema
+24. Sicurezza informatica e accessi remoti
