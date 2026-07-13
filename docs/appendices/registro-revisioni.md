@@ -1,11 +1,13 @@
 # Registro revisioni
 
-| Versione | Capitoli | Descrizione | Stato |
+| Versione | Data | Contenuto | Stato |
 |---|---|---|---|
-| 0.2 | 1–5 | Generalità e infrastruttura | Completato |
-| 0.3 | 6–10 | EAGLE e sistema astronomico | Completato |
-| 0.4 | 11–15 | Software e automazione | Completato |
-| 0.5 | 16–19 | Operations, recovery e manutenzione | Completato |
-| 0.6 | 20–24 | Governance, continuità e sicurezza | Completato |
-| 0.7 | 25–29 | Operations avanzate e dati | Completato |
-| 0.8 | 30–34 | Troubleshooting, problem management, ricambi, roadmap e release | Completato |
+| 0.1 | 2026-07 | Impostazione iniziale del manuale | Superata |
+| 0.2 | 2026-07 | Capitoli 1–5 | Consolidata |
+| 0.3 | 2026-07 | Capitoli 6–10 | Consolidata |
+| 0.4 | 2026-07 | Capitoli 11–15 | Consolidata |
+| 0.5 | 2026-07 | Capitoli 16–19 | Consolidata |
+| 0.6 | 2026-07 | Capitoli 20–24 | Consolidata |
+| 0.7 | 2026-07 | Capitoli 25–29 | Consolidata |
+| 0.8 | 2026-07 | Capitoli 30–34 | Consolidata |
+| 0.9 | 2026-07 | Capitoli 35–39 | Draft |
