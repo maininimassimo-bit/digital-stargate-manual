@@ -15,4 +15,8 @@
 - [CPWI](docs/chapters/13-cpwi.md)
 - [ASCOM Platform](docs/chapters/14-ascom.md)
 - [Architettura dell'automazione](docs/chapters/15-automazione.md)
+- [SOP: avvio dell'osservatorio](docs/chapters/16-sop-avvio.md)
+- [Acquisizione automatica](docs/chapters/17-acquisizione-automatica.md)
+- [Emergenze e recovery](docs/chapters/18-emergenze-recovery.md)
+- [Manutenzione preventiva](docs/chapters/19-manutenzione-preventiva.md)
 - [Registro revisioni](docs/appendices/registro-revisioni.md)
