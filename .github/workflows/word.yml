@@ -1,0 +1,29 @@
+name: Genera manuale Word
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-word:
+    runs-on: windows-latest
+
+    steps:
+      - name: Recupera repository
+        uses: actions/checkout@v4
+
+      - name: Installa Pandoc
+        run: choco install pandoc -y
+
+      - name: Genera documento Word
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build.ps1
+
+      - name: Carica documento generato
+        uses: actions/upload-artifact@v4
+        with:
+          name: DSG-TM-001-Word
+          path: release/DSG-TM-001_Digital_StarGate_Master.docx
