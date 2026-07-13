@@ -1,33 +1,49 @@
-# Sommario – Digital StarGate Technical Manual
+# Sommario
 
-## Capitoli
+## Capitoli 1–5
+- Introduzione
+- Architettura generale
+- Struttura della cupola
+- Impianto elettrico
+- Infrastruttura di rete
 
-1. Introduzione
-2. Architettura generale
-3. Struttura della cupola
-4. Impianto elettrico
-5. Infrastruttura di rete
-6. PrimaLuceLab EAGLE
-7. Celestron CGX-L
-8. Celestron C8 XLT
-9. Sky-Watcher Quattro 200P
-10. Camere e treno ottico
-11. N.I.N.A.
-12. PHD2 Guiding
-13. CPWI
-14. ASCOM Platform
-15. Architettura dell'automazione
-16. SOP avvio osservatorio
-17. Acquisizione automatica
-18. Emergenze e recovery
-19. Manutenzione preventiva
-20. Gestione delle configurazioni e versioning
-21. Backup e Disaster Recovery
-22. Inventario tecnico e Asset Management
-23. Collaudo e validazione del sistema
-24. Sicurezza informatica e accessi remoti
-25. Chiusura controllata dell'osservatorio
-26. Monitoraggio meteo e sicurezza ambientale
-27. Sistema AllSky
-28. Gestione dei dati e archiviazione
-29. Reportistica operativa e KPI
+## Capitoli 6–10
+- EAGLE
+- CGX-L
+- C8 XLT
+- Quattro 200P
+- Camere e treno ottico
+
+## Capitoli 11–15
+- N.I.N.A.
+- PHD2
+- CPWI
+- ASCOM
+- Architettura automazione
+
+## Capitoli 16–19
+- Avvio osservatorio
+- Acquisizione automatica
+- Emergenze e recovery
+- Manutenzione preventiva
+
+## Capitoli 20–24
+- Gestione configurazioni
+- Backup e Disaster Recovery
+- Inventario tecnico
+- Collaudo e validazione
+- Sicurezza informatica
+
+## Capitoli 25–29
+- Chiusura osservatorio
+- Monitoraggio meteo
+- Sistema AllSky
+- Gestione dati
+- Reportistica e KPI
+
+## Capitoli 30–34
+- Metodologia troubleshooting
+- Problem Management e post-mortem
+- Ricambi e obsolescenza
+- Roadmap evolutiva
+- Gestione documentale e release
