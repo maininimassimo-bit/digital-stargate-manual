@@ -1,19 +1,8 @@
 # Registro revisioni
 
-| Revisione | Data | Contenuto | Stato |
+| Versione | Data | Descrizione | Stato |
 |---|---|---|---|
-| 0.1 | Luglio 2026 | Creazione struttura iniziale del repository | Superata |
-| 0.2 | Luglio 2026 | Consolidamento Capitoli 1–5 | Integrata |
-| 0.3 | Luglio 2026 | Consolidamento Capitoli 6–10: EAGLE, CGX-L, C8, Quattro, camere e treno ottico | Corrente |
-
-## Regole di aggiornamento
-
-Ogni revisione deve riportare:
-
-- autore;
-- file modificati;
-- descrizione sintetica;
-- dati tecnici validati;
-- procedure aggiunte o modificate;
-- esito della build MkDocs e Word;
-- riferimento al commit Git.
+| 0.1 | 2026-07 | Struttura iniziale del manuale | Superata |
+| 0.2 | 2026-07 | Consolidamento capitoli 1–5 | Completata |
+| 0.3 | 2026-07 | Consolidamento capitoli 6–10 | Completata |
+| 0.4 | 2026-07 | Consolidamento capitoli 11–15 | Completata |
