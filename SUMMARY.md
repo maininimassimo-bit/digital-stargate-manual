@@ -63,3 +63,11 @@
 * Registri, checklist e modelli
 * Glossario, acronimi e riferimenti
 
+## Capitoli 40–44
+
+* Requisiti e matrice di tracciabilità
+* Analisi dei rischi e FMEA
+* Ruoli, formazione e handover
+* Accettazione del manuale e release 1.0
+* Allegati tecnici e piano di completamento
+

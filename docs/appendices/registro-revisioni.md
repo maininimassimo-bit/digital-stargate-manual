@@ -10,4 +10,5 @@
 | 0.6 | 2026-07 | Capitoli 20–24 | Consolidata |
 | 0.7 | 2026-07 | Capitoli 25–29 | Consolidata |
 | 0.8 | 2026-07 | Capitoli 30–34 | Consolidata |
-| 0.9 | 2026-07 | Capitoli 35–39 | Draft |
+| 0.9 | 2026-07 | Capitoli 35–39 | Consolidata |
+| 1.0 | 2026-07 | Capitoli 40–44, chiusura architettura documentale | Draft |
