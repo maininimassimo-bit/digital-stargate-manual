@@ -26,3 +26,8 @@
 22. Inventario tecnico e Asset Management
 23. Collaudo e validazione del sistema
 24. Sicurezza informatica e accessi remoti
+25. Chiusura controllata dell'osservatorio
+26. Monitoraggio meteo e sicurezza ambientale
+27. Sistema AllSky
+28. Gestione dei dati e archiviazione
+29. Reportistica operativa e KPI
