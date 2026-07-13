@@ -1,5 +1,23 @@
-*.docx
-*.pdf
-*.tmp
-~$*
-.DS_Store
+﻿# Python
+.venv/
+__pycache__/
+*.pyc
+
+# MkDocs
+site/
+
+# Build
+build/
+release/
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Office temporary files
+~$*.docx
+~$*.xlsx
+
+# Editors
+.vscode/
+.idea/

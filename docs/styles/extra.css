@@ -1,0 +1,29 @@
+@'
+:root {
+  --dsg-border: #d5d9e0;
+}
+
+.md-typeset h1 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.md-typeset h2 {
+  border-bottom: 1px solid var(--dsg-border);
+  padding-bottom: 0.25rem;
+}
+
+.md-typeset table:not([class]) {
+  font-size: 0.85rem;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 0.35rem;
+}
+
+.dsg-document-code {
+  font-family: monospace;
+  font-weight: 700;
+}
+'@ | Set-Content ".\docs\styles\extra.css" -Encoding UTF8

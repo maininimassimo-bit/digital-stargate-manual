@@ -1,0 +1,99 @@
+site_name: Digital StarGate
+site_description: Manuale Tecnico dell'Osservatorio Remoto di Manciano
+site_author: Massimo Mainini
+
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  language: it
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - content.code.copy
+    - search.highlight
+    - search.suggest
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Passa alla modalità scura
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Passa alla modalità chiara
+
+plugins:
+  - search:
+      lang: it
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+extra_css:
+  - styles/extra.css
+
+nav:
+  - Home: index.md
+
+  - Generalità:
+      - Introduzione: chapters/01-introduzione.md
+      - Architettura generale: chapters/02-architettura-generale.md
+
+  - Infrastruttura:
+      - Struttura della cupola: chapters/03-struttura-cupola.md
+      - Impianto elettrico: chapters/04-impianto-elettrico.md
+      - Infrastruttura di rete: chapters/05-infrastruttura-rete.md
+      - Computer EAGLE: chapters/06-eagle.md
+
+  - Sistema astronomico:
+      - Montatura CGX-L: chapters/07-cgx-l.md
+      - Celestron C8 XLT: chapters/08-c8-xlt.md
+      - Sky-Watcher Quattro 200P: chapters/09-quattro-200p.md
+      - Camere e treno ottico: chapters/10-camere-treno-ottico.md
+
+  - Software:
+      - N.I.N.A.: chapters/11-nina.md
+      - PHD2: chapters/12-phd2.md
+      - CPWI: chapters/13-cpwi.md
+      - ASCOM Platform: chapters/14-ascom.md
+
+  - Automazione:
+      - Architettura dell'automazione: chapters/15-automazione.md
+      - Avvio dell'osservatorio: chapters/16-sop-avvio.md
+      - Acquisizione automatica: chapters/17-acquisizione-automatica.md
+
+  - Sicurezza e manutenzione:
+      - Emergenze e recovery: chapters/18-emergenze-recovery.md
+      - Manutenzione preventiva: chapters/19-manutenzione-preventiva.md
+
+  - Appendici:
+      - Dati da validare: appendices/dati-da-validare.md
+      - Registro revisioni: appendices/registro-revisioni.md
