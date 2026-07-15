@@ -1,0 +1,52 @@
+name: Analyze Observatory Session
+
+on:
+  workflow_dispatch:
+    inputs:
+      session_id:
+        description: Session ID (YYYY-MM-DD_YYYY-MM-DD)
+        required: true
+  push:
+    paths:
+      - 'data/sessions/**/manifest.json'
+
+permissions:
+  contents: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Resolve session
+        id: session
+        shell: bash
+        run: |
+          if [ -n "${{ github.event.inputs.session_id }}" ]; then
+            echo "id=${{ github.event.inputs.session_id }}" >> "$GITHUB_OUTPUT"
+          else
+            file=$(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep 'data/sessions/.*/manifest.json' | head -n 1)
+            echo "id=$(basename "$(dirname "$file")")" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Analyze
+        shell: bash
+        run: |
+          id='${{ steps.session.outputs.id }}'
+          year=${id:0:4}
+          month=${id:5:2}
+          session="data/sessions/$year/$month/$id"
+          python dsg-analytics/analyzer/analyze_session.py --session "$session"
+          python dsg-analytics/reporter/generate_markdown_report.py \
+            --metrics "$session/normalized/session-metrics.json" \
+            --output "docs/session-reports/$year/$month/$id/report-sessione.md"
+      - name: Commit report
+        shell: bash
+        run: |
+          git config user.name 'Digital StarGate Bot'
+          git config user.email 'digital-stargate-bot@users.noreply.github.com'
+          git add data/sessions docs/session-reports
+          git commit -m 'Generate session analysis' || exit 0
+          git push
