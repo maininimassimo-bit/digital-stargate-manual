@@ -31,17 +31,49 @@ jobs:
             file=$(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep 'data/sessions/.*/manifest.json' | head -n 1)
             echo "id=$(basename "$(dirname "$file")")" >> "$GITHUB_OUTPUT"
           fi
-      - name: Analyze
-        shell: bash
-        run: |
-          id='${{ steps.session.outputs.id }}'
-          year=${id:0:4}
-          month=${id:5:2}
-          session="data/sessions/$year/$month/$id"
-          python dsg-analytics/analyzer/analyze_session.py --session "$session"
-          python dsg-analytics/reporter/generate_markdown_report.py \
-            --metrics "$session/normalized/session-metrics.json" \
-            --output "docs/session-reports/$year/$month/$id/report-sessione.md"
+      - name: Analyze session
+  shell: bash
+  env:
+    SESSION_ID: ${{ inputs.session_id }}
+  run: |
+    set -euo pipefail
+
+    id="$(printf '%s' "$SESSION_ID" | xargs)"
+
+    if [[ "$id" == session_id* ]]; then
+      id="${id#session_id}"
+      id="${id# = }"
+      id="${id#=}"
+      id="$(printf '%s' "$id" | xargs)"
+    fi
+
+    if [[ ! "$id" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+      echo "Formato session_id non valido: '$id'"
+      echo "Formato richiesto: YYYY-MM-DD_YYYY-MM-DD"
+      exit 1
+    fi
+
+    year="${id:0:4}"
+    month="${id:5:2}"
+    session="data/sessions/$year/$month/$id"
+
+    echo "Session ID: $id"
+    echo "Percorso sessione: $session"
+
+    if [[ ! -d "$session" ]]; then
+      echo "Sessione non trovata: $session"
+      find data/sessions -maxdepth 4 -type d | sort
+      exit 1
+    fi
+
+    python dsg-analytics/analyzer/analyze_session.py \
+      --session "$session"
+
+    mkdir -p "docs/session-reports/$year/$month/$id"
+
+    python dsg-analytics/reporter/generate_markdown_report.py \
+      --metrics "$session/normalized/session-metrics.json" \
+      --output "docs/session-reports/$year/$month/$id/report-sessione.md"
       - name: Commit report
         shell: bash
         run: |
