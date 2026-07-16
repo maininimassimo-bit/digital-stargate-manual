@@ -1,84 +1,66 @@
 name: Analyze Observatory Session
-
 on:
   workflow_dispatch:
     inputs:
       session_id:
-        description: Session ID (YYYY-MM-DD_YYYY-MM-DD)
+        description: "Session ID nel formato YYYY-MM-DD_YYYY-MM-DD"
         required: true
+        type: string
   push:
+    branches: [main]
     paths:
-      - 'data/sessions/**/manifest.json'
-
+      - "data/sessions/**/manifest.json"
 permissions:
   contents: write
-
 jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - name: Checkout repository
+        uses: actions/checkout@v6
         with:
-          python-version: '3.12'
-      - name: Resolve session
+          fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Resolve session id
         id: session
         shell: bash
+        env:
+          MANUAL_ID: ${{ github.event.inputs.session_id }}
         run: |
-          if [ -n "${{ github.event.inputs.session_id }}" ]; then
-            echo "id=${{ github.event.inputs.session_id }}" >> "$GITHUB_OUTPUT"
-          else
-            file=$(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep 'data/sessions/.*/manifest.json' | head -n 1)
-            echo "id=$(basename "$(dirname "$file")")" >> "$GITHUB_OUTPUT"
+          set -euo pipefail
+          id="$(printf '%s' "${MANUAL_ID:-}" | xargs)"
+          if [[ -z "$id" ]]; then
+            manifest="$(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep -E '^data/sessions/[0-9]{4}/[0-9]{2}/[^/]+/manifest\.json$' | head -n1 || true)"
+            [[ -n "$manifest" ]] || { echo "Nessun manifest individuato"; exit 1; }
+            id="$(basename "$(dirname "$manifest")")"
           fi
-      - name: Analyze session
-  shell: bash
-  env:
-    SESSION_ID: ${{ inputs.session_id }}
-  run: |
-    set -euo pipefail
-
-    id="$(printf '%s' "$SESSION_ID" | xargs)"
-
-    if [[ "$id" == session_id* ]]; then
-      id="${id#session_id}"
-      id="${id# = }"
-      id="${id#=}"
-      id="$(printf '%s' "$id" | xargs)"
-    fi
-
-    if [[ ! "$id" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
-      echo "Formato session_id non valido: '$id'"
-      echo "Formato richiesto: YYYY-MM-DD_YYYY-MM-DD"
-      exit 1
-    fi
-
-    year="${id:0:4}"
-    month="${id:5:2}"
-    session="data/sessions/$year/$month/$id"
-
-    echo "Session ID: $id"
-    echo "Percorso sessione: $session"
-
-    if [[ ! -d "$session" ]]; then
-      echo "Sessione non trovata: $session"
-      find data/sessions -maxdepth 4 -type d | sort
-      exit 1
-    fi
-
-    python dsg-analytics/analyzer/analyze_session.py \
-      --session "$session"
-
-    mkdir -p "docs/session-reports/$year/$month/$id"
-
-    python dsg-analytics/reporter/generate_markdown_report.py \
-      --metrics "$session/normalized/session-metrics.json" \
-      --output "docs/session-reports/$year/$month/$id/report-sessione.md"
-      - name: Commit report
+          if [[ "$id" == session_id* ]]; then
+            id="${id#session_id}"; id="${id# = }"; id="${id#=}"; id="$(printf '%s' "$id" | xargs)"
+          fi
+          [[ "$id" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || { echo "Formato non valido: $id"; exit 1; }
+          echo "id=$id" >> "$GITHUB_OUTPUT"
+          echo "year=${id:0:4}" >> "$GITHUB_OUTPUT"
+          echo "month=${id:5:2}" >> "$GITHUB_OUTPUT"
+      - name: Analyze and generate Markdown report
         shell: bash
         run: |
-          git config user.name 'Digital StarGate Bot'
-          git config user.email 'digital-stargate-bot@users.noreply.github.com'
+          set -euo pipefail
+          id="${{ steps.session.outputs.id }}"; year="${{ steps.session.outputs.year }}"; month="${{ steps.session.outputs.month }}"
+          session="data/sessions/$year/$month/$id"
+          test -d "$session" || { echo "Sessione non trovata: $session"; exit 1; }
+          python dsg-analytics/analyzer/analyze_session.py --session "$session"
+          python dsg-analytics/reporter/generate_markdown_report.py --metrics "$session/normalized/session-metrics.json" --output "docs/session-reports/$year/$month/$id/report-sessione.md"
+      - name: Commit generated results
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Digital StarGate Bot"
+          git config user.email "digital-stargate-bot@users.noreply.github.com"
           git add data/sessions docs/session-reports
-          git commit -m 'Generate session analysis' || exit 0
-          git push
+          git diff --cached --quiet && exit 0
+          git commit -m "Regenerate analytics report ${{ steps.session.outputs.id }}"
+          git pull --rebase origin main
+          git push origin HEAD:main

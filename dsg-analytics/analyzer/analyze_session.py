@@ -1,162 +1,126 @@
+#!/usr/bin/env python3
 from __future__ import annotations
-
-import argparse
-import csv
-import json
-import math
-import re
-from dataclasses import dataclass, asdict
+import argparse,csv,json,math,re
 from datetime import datetime
 from pathlib import Path
-from typing import Iterable
+from typing import Optional
+SESSION_RE=re.compile(r'^\d{4}-\d{2}-\d{2}_\d{4}-\d{2}-\d{2}$')
+PHD_BEGIN=re.compile(r'^Guiding Begins at ')
+PHD_DATA=re.compile(r'^\d+,\s*[\d.]+,"[^"]+",')
 
+def files(folder):
+    if not folder.exists(): return
+    for p in sorted(folder.rglob('*')):
+        if p.is_file():
+            try: yield p,p.read_text(encoding='utf-8',errors='replace')
+            except OSError: pass
 
-@dataclass
-class SessionMetrics:
-    session_id: str
-    exposures_started: int = 0
-    exposures_completed: int = 0
-    exposures_failed: int = 0
-    integration_seconds: float = 0.0
-    autofocus_runs: int = 0
-    autofocus_failures: int = 0
-    dithers: int = 0
-    phd2_guiding_sessions: int = 0
-    phd2_rms_ra_arcsec: float | None = None
-    phd2_rms_dec_arcsec: float | None = None
-    phd2_rms_total_arcsec: float | None = None
-    weather_rows: int = 0
-    weather_unsafe_rows: int = 0
-    severity: str = "GREEN"
-    notes: list[str] | None = None
-
-
-def read_text(path: Path) -> str:
-    return path.read_text(encoding="utf-8", errors="ignore")
-
-
-def find_files(root: Path, patterns: Iterable[str]) -> list[Path]:
-    found: list[Path] = []
-    for pattern in patterns:
-        found.extend(root.rglob(pattern))
-    return sorted(set(found))
-
-
-def parse_nina(files: list[Path], m: SessionMetrics) -> None:
-    started_re = re.compile(r"TakeExposure, ExposureTime\s+([0-9.]+).+ImageType\s+LIGHT", re.I)
-    finished_re = re.compile(r"Finishing Category: Fotocamera, Item: TakeExposure, ExposureTime\s+([0-9.]+).+ImageType\s+LIGHT", re.I)
-    for path in files:
-        text = read_text(path)
-        m.exposures_started += len(started_re.findall(text))
-        completed = [float(x) for x in finished_re.findall(text)]
-        m.exposures_completed += len(completed)
-        m.integration_seconds += sum(completed)
-        m.autofocus_runs += text.count("Starting Category: Focheggiatore, Item: RunAutofocus")
-        m.autofocus_failures += len(re.findall(r"AutoFocus.*(?:fail|error|aborted)", text, re.I))
-        m.dithers += text.count("Starting Category: Guida, Item: Dither")
-        m.exposures_failed += len(re.findall(r"TakeExposure.*(?:fail|error|aborted)", text, re.I))
-    if m.exposures_started > m.exposures_completed:
-        m.exposures_failed = max(m.exposures_failed, m.exposures_started - m.exposures_completed)
-
-
-def parse_phd2(files: list[Path], m: SessionMetrics) -> None:
-    ra_vals: list[float] = []
-    dec_vals: list[float] = []
-    m.phd2_guiding_sessions = 0
-    for path in files:
-        text = read_text(path)
-        m.phd2_guiding_sessions += text.count("Guiding Begins at")
+def parse_nina(folder):
+    m={'camera_exposures_total':0,'light_started':0,'light_completed':0,'light_failed_explicit':0,'light_interrupted_unmatched':0,'technical_exposures_estimated':0,'integration_seconds':0.0,'autofocus_started':0,'autofocus_completed':0,'autofocus_failed_explicit':0,'autofocus_unmatched':0,'dither_requests':0,'nina_errors':0,'nina_warnings':0}
+    pending_light=pending_af=0
+    durations=[]
+    dur_re=re.compile(r'(?:ExposureTime|Duration|Exposure)\D{0,20}(?P<sec>\d+(?:\.\d+)?)\s*(?:s|sec|seconds?)',re.I)
+    for _,text in files(folder):
         for line in text.splitlines():
-            if not re.match(r"^\d+,", line):
+            low=line.lower()
+            if '|error|' in low: m['nina_errors']+=1
+            if '|warn|' in low or '|warning|' in low: m['nina_warnings']+=1
+            if 'starting exposure' in low or 'capture - starting' in low: m['camera_exposures_total']+=1
+            is_light=(('takeexposure' in low and any(x in low for x in ('starting instruction','starting','executing'))) or ('imagetype' in low and 'light' in low and any(x in low for x in ('starting','execute'))))
+            if is_light:
+                m['light_started']+=1; pending_light+=1
+                mm=dur_re.search(line)
+                if mm: durations.append(float(mm.group('sec')))
                 continue
-            parts = next(csv.reader([line]))
-            if len(parts) < 9:
+            if any(x in low for x in ('takeexposure failed','exposure failed','exposure aborted','exposure cancelled','camera exposure error')):
+                m['light_failed_explicit']+=1
+                if pending_light>0: pending_light-=1
                 continue
+            if 'takeexposure' in low and any(x in low for x in ('finishing instruction','finished instruction','completed')):
+                m['light_completed']+=1
+                if pending_light>0: pending_light-=1
+                continue
+            if pending_light>0 and any(x in low for x in ('image saved','saved image','file saved')) and ('light' in low or 'takeexposure' in low):
+                m['light_completed']+=1; pending_light-=1; continue
+            if any(x in low for x in ('autofocus starting','starting autofocus','autofocus started')):
+                m['autofocus_started']+=1; pending_af+=1
+            elif 'autofocus failed' in low:
+                m['autofocus_failed_explicit']+=1
+                if pending_af>0: pending_af-=1
+            elif any(x in low for x in ('autofocus completed','autofocus finished','autofocus successful')):
+                m['autofocus_completed']+=1
+                if pending_af>0: pending_af-=1
+            if 'dither' in low and any(x in low for x in ('start','request','execute','dithering')): m['dither_requests']+=1
+    m['light_interrupted_unmatched']=max(0,m['light_started']-m['light_completed']-m['light_failed_explicit'])
+    m['autofocus_unmatched']=max(0,m['autofocus_started']-m['autofocus_completed']-m['autofocus_failed_explicit'])
+    m['technical_exposures_estimated']=max(0,m['camera_exposures_total']-m['light_started'])
+    if durations: m['integration_seconds']=sum(durations[:m['light_completed']])
+    elif m['light_completed']>0: m['integration_seconds']=m['light_completed']*600.0
+    return m
+
+def parse_phd2(folder):
+    ra=[]; dec=[]; segments=lost=pulse=0; settling=False
+    for _,text in files(folder):
+        for line in text.splitlines():
+            if PHD_BEGIN.match(line): segments+=1; settling=False; continue
+            low=line.lower()
+            if 'settling started' in low: settling=True; continue
+            if 'settling complete' in low: settling=False; continue
+            if 'lost star' in low: lost+=1
+            if 'pulseguide failed' in low or 'pulse guide failed' in low: pulse+=1
+            if settling or not PHD_DATA.match(line): continue
             try:
-                ra_vals.append(float(parts[7]))
-                dec_vals.append(float(parts[8]))
-            except (ValueError, IndexError):
-                continue
-    if ra_vals:
-        m.phd2_rms_ra_arcsec = math.sqrt(sum(v * v for v in ra_vals) / len(ra_vals))
-    if dec_vals:
-        m.phd2_rms_dec_arcsec = math.sqrt(sum(v * v for v in dec_vals) / len(dec_vals))
-    if m.phd2_rms_ra_arcsec is not None and m.phd2_rms_dec_arcsec is not None:
-        m.phd2_rms_total_arcsec = math.sqrt(m.phd2_rms_ra_arcsec**2 + m.phd2_rms_dec_arcsec**2)
+                row=next(csv.reader([line])); err=int(row[17]) if len(row)>17 and row[17] else 0
+                if err==0: ra.append(float(row[7])); dec.append(float(row[8]))
+            except Exception: pass
+    def rms(v): return math.sqrt(sum(x*x for x in v)/len(v)) if v else None
+    rr,dd=rms(ra),rms(dec); tt=math.sqrt(rr*rr+dd*dd) if rr is not None and dd is not None else None
+    return {'guide_segments':segments,'guide_samples_valid':min(len(ra),len(dec)),'rms_ra_arcsec':round(rr,3) if rr is not None else None,'rms_dec_arcsec':round(dd,3) if dd is not None else None,'rms_total_arcsec':round(tt,3) if tt is not None else None,'lost_star_events':lost,'pulse_guide_failures':pulse}
 
+def to_bool(v):
+    v=v.strip().lower()
+    if v in {'true','1','yes','safe','ok'}: return True
+    if v in {'false','0','no','unsafe','not safe'}: return False
+    return None
 
-def parse_weather(files: list[Path], m: SessionMetrics) -> None:
-    for path in files:
-        with path.open("r", encoding="utf-8-sig", errors="ignore", newline="") as fh:
-            reader = csv.DictReader(fh)
-            for row in reader:
-                m.weather_rows += 1
-                values = " ".join(str(v) for v in row.values()).lower()
-                if "unsafe" in values or "false" in values:
-                    m.weather_unsafe_rows += 1
+def parse_weather(folder):
+    total=unsafe=trans=0; last=None
+    if folder.exists():
+        for p in sorted(folder.rglob('*.csv')):
+            try:
+                with p.open('r',encoding='utf-8-sig',errors='replace',newline='') as f:
+                    r=csv.DictReader(f)
+                    names=r.fieldnames or []
+                    safe=next((n for n in names if n and n.strip().lower() in {'safe status','safe','issafe','safety','safe_status'}),None)
+                    for row in r:
+                        total+=1
+                        if not safe: continue
+                        cur=to_bool(str(row.get(safe,'')))
+                        if cur is False: unsafe+=1
+                        if cur is not None and last is not None and cur!=last: trans+=1
+                        if cur is not None: last=cur
+            except OSError: pass
+    return {'weather_rows_total':total,'weather_rows_unsafe_full_window':unsafe,'weather_safe_transitions_full_window':trans,'weather_unsafe_pct_full_window':round(unsafe/total*100,2) if total else None,'weather_scope_note':'Valori riferiti alla finestra CSV importata; non penalizzano la severita finche non sono correlati alla sequenza attiva/cupola aperta.'}
 
+def classify(m):
+    sev='GREEN'; reasons=[]; n=m['nina']; p=m['phd2']
+    if p['pulse_guide_failures']>0: sev='ORANGE'; reasons.append(f"PulseGuide failures: {p['pulse_guide_failures']}")
+    if n['light_failed_explicit']>=3: sev='ORANGE'; reasons.append(f"Pose LIGHT fallite esplicitamente: {n['light_failed_explicit']}")
+    elif n['light_failed_explicit']>0 or n['light_interrupted_unmatched']>1:
+        if sev=='GREEN': sev='YELLOW'
+        reasons.append(f"Pose LIGHT da verificare: fallite={n['light_failed_explicit']}, non abbinate={n['light_interrupted_unmatched']}")
+    if n['autofocus_failed_explicit']>0:
+        if sev=='GREEN': sev='YELLOW'
+        reasons.append(f"Autofocus falliti esplicitamente: {n['autofocus_failed_explicit']}")
+    if p['lost_star_events']>=10 and sev=='GREEN': sev='YELLOW'; reasons.append(f"Lost star ripetuti: {p['lost_star_events']}")
+    if not reasons: reasons=['Nessuna anomalia grave rilevata dai criteri v0.1.1.']
+    return sev,reasons
 
-def classify(m: SessionMetrics, thresholds: dict) -> None:
-    severity = "GREEN"
-    notes: list[str] = []
-    rank = {"GREEN": 0, "YELLOW": 1, "ORANGE": 2, "RED": 3}
-
-    def raise_to(level: str, note: str) -> None:
-        nonlocal severity
-        if rank[level] > rank[severity]:
-            severity = level
-        notes.append(note)
-
-    rms = m.phd2_rms_total_arcsec
-    if rms is not None:
-        if rms >= thresholds["rms_total_red_arcsec"]:
-            raise_to("RED", f"RMS totale elevato: {rms:.2f} arcsec")
-        elif rms >= thresholds["rms_total_orange_arcsec"]:
-            raise_to("ORANGE", f"RMS totale sopra soglia: {rms:.2f} arcsec")
-        elif rms >= thresholds["rms_total_yellow_arcsec"]:
-            raise_to("YELLOW", f"RMS totale da monitorare: {rms:.2f} arcsec")
-
-    if m.exposures_failed >= thresholds["failed_exposures_red"]:
-        raise_to("RED", f"Pose fallite: {m.exposures_failed}")
-    elif m.exposures_failed >= thresholds["failed_exposures_orange"]:
-        raise_to("ORANGE", f"Pose fallite: {m.exposures_failed}")
-    elif m.exposures_failed >= thresholds["failed_exposures_yellow"]:
-        raise_to("YELLOW", f"Pose fallite: {m.exposures_failed}")
-
-    if m.autofocus_failures >= thresholds["autofocus_failures_orange"]:
-        raise_to("ORANGE", f"Autofocus falliti: {m.autofocus_failures}")
-    elif m.autofocus_failures >= thresholds["autofocus_failures_yellow"]:
-        raise_to("YELLOW", f"Autofocus falliti: {m.autofocus_failures}")
-
-    m.severity = severity
-    m.notes = notes
-
-
-def main() -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--session", required=True, type=Path)
-    parser.add_argument("--thresholds", type=Path, default=Path(__file__).parents[1] / "config" / "thresholds.json")
-    parser.add_argument("--output", type=Path)
-    args = parser.parse_args()
-
-    root: Path = args.session
-    if not root.exists():
-        raise SystemExit(f"Sessione non trovata: {root}")
-
-    metrics = SessionMetrics(session_id=root.name)
-    parse_nina(find_files(root, ["*.log"]), metrics)
-    parse_phd2(find_files(root / "raw" / "phd2", ["*.txt", "*.log"]), metrics)
-    parse_weather(find_files(root / "raw" / "weather", ["*.csv"]), metrics)
-
-    thresholds = json.loads(args.thresholds.read_text(encoding="utf-8"))
-    classify(metrics, thresholds)
-
-    output = args.output or (root / "normalized" / "session-metrics.json")
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(asdict(metrics), indent=2, ensure_ascii=False), encoding="utf-8")
-    print(output)
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
+def main():
+    ap=argparse.ArgumentParser(); ap.add_argument('--session',required=True); a=ap.parse_args(); s=Path(a.session)
+    if not s.is_dir(): raise SystemExit(f'Sessione non trovata: {s}')
+    if not SESSION_RE.match(s.name): raise SystemExit(f'Nome sessione non valido: {s.name}')
+    raw=s/'raw'; m={'schema_version':'0.1.1','session_id':s.name,'generated_at':datetime.now().astimezone().isoformat(),'nina':parse_nina(raw/'nina'),'phd2':parse_phd2(raw/'phd2'),'weather':parse_weather(raw/'weather')}
+    m['severity'],m['severity_reasons']=classify(m)
+    out=s/'normalized'; out.mkdir(parents=True,exist_ok=True); (out/'session-metrics.json').write_text(json.dumps(m,indent=2,ensure_ascii=False),encoding='utf-8'); print(json.dumps(m,indent=2,ensure_ascii=False))
+if __name__=='__main__': main()
