@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Digital StarGate Analytics 2.0B.1 - historical consolidation and validation.
+"""Digital StarGate Analytics 2.1 - historical consolidation and validation.
 
 Scans session-metrics.json files, normalizes the most common field aliases,
 upserts data/analytics/history/sessions.csv and writes validation reports.
@@ -24,6 +24,7 @@ DEFAULT_CSV = REPO_ROOT / "data" / "analytics" / "history" / "sessions.csv"
 DEFAULT_JSON_REPORT = REPO_ROOT / "data" / "analytics" / "history" / "validation-report.json"
 DEFAULT_MD_REPORT = REPO_ROOT / "docs" / "analytics" / "history-validation.md"
 DEFAULT_CONFIGURATION_MAP = REPO_ROOT / "data" / "analytics" / "configurations" / "session-configuration-map.csv"
+DEFAULT_EQUIPMENT_REGISTRY = REPO_ROOT / "data" / "analytics" / "configurations" / "equipment-registry.csv"
 METRICS_GLOB = "data/sessions/**/normalized/session-metrics.json"
 
 ALIASES = {
@@ -191,11 +192,56 @@ def load_session_configuration_map(path: Path) -> Dict[str, Dict[str, str]]:
     return result
 
 
+
+def load_equipment_registry(path: Path) -> Dict[str, Dict[str, str]]:
+    """Load and validate the central equipment registry."""
+    if not path.exists() or path.stat().st_size == 0:
+        return {}
+
+    required_columns = {
+        "configuration_id",
+        "telescope",
+        "camera",
+        "status",
+        "active_from",
+        "active_to",
+    }
+    result: Dict[str, Dict[str, str]] = {}
+
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        actual_columns = set(reader.fieldnames or [])
+        missing = required_columns - actual_columns
+        if missing:
+            raise ValueError(
+                f"Colonne mancanti in {path}: {', '.join(sorted(missing))}"
+            )
+
+        for row_number, raw in enumerate(reader, start=2):
+            configuration_id = (raw.get("configuration_id") or "").strip()
+            if not configuration_id:
+                raise ValueError(
+                    f"configuration_id mancante nel registro alla riga {row_number}"
+                )
+            if configuration_id in result:
+                raise ValueError(
+                    f"configuration_id duplicato nel registro alla riga {row_number}: {configuration_id}"
+                )
+
+            result[configuration_id] = {
+                key: (value or "").strip()
+                for key, value in raw.items()
+                if key is not None
+            }
+
+    return result
+
 def normalize(
     metrics: Dict[str, Any],
     path: Path,
     schema: Dict[str, Any],
     session_configuration_map: Optional[Dict[str, Dict[str, str]]] = None,
+    equipment_registry: Optional[Dict[str, Dict[str, str]]] = None,
 ) -> Dict[str, str]:
     row: Dict[str, Any] = {column: "" for column in schema["canonical_columns"]}
     row["schema_version"] = schema["schema_version"]
@@ -216,6 +262,17 @@ def normalize(
         mapped_value = mapped_configuration.get(field, "").strip()
         if mapped_value:
             row[field] = mapped_value
+
+    if equipment_registry is None:
+        equipment_registry = {}
+    registry_configuration = equipment_registry.get(
+        str(row.get("configuration_id") or "").strip(), {}
+    )
+    # The registry is the authoritative source for shared equipment details.
+    for field in ("telescope", "camera"):
+        registry_value = registry_configuration.get(field, "").strip()
+        if registry_value:
+            row[field] = registry_value
 
     # Backward compatibility for legacy metrics files that do not contain
     # explicit session_start/session_end fields. When possible, derive them
@@ -277,10 +334,16 @@ def parse_dt(value: str) -> Optional[datetime]:
         return None
 
 
-def validate(rows: List[Dict[str, str]], schema: Dict[str, Any]) -> Dict[str, Any]:
+def validate(
+    rows: List[Dict[str, str]],
+    schema: Dict[str, Any],
+    equipment_registry: Optional[Dict[str, Dict[str, str]]] = None,
+) -> Dict[str, Any]:
     errors: List[Dict[str, str]] = []
     warnings: List[Dict[str, str]] = []
     seen: Dict[str, int] = {}
+    if equipment_registry is None:
+        equipment_registry = {}
 
     for index, row in enumerate(rows, start=2):
         sid = row.get("session_id", "")
@@ -326,8 +389,68 @@ def validate(rows: List[Dict[str, str]], schema: Dict[str, Any]) -> Dict[str, An
         if duration is not None and integration is not None and integration > duration * 1.05:
             warnings.append({"row": str(index), "session_id": sid, "field": "integration_hours", "message": "Integrazione superiore alla durata della sessione"})
 
-        if row.get("configuration_id") == "UNKNOWN":
+        configuration_id = row.get("configuration_id", "").strip()
+        if configuration_id == "UNKNOWN":
             warnings.append({"row": str(index), "session_id": sid, "field": "configuration_id", "message": "Configurazione non identificata"})
+        elif configuration_id:
+            registry_entry = equipment_registry.get(configuration_id)
+            if registry_entry is None:
+                errors.append({
+                    "row": str(index),
+                    "session_id": sid,
+                    "field": "configuration_id",
+                    "message": f"Configurazione non presente nel registro: {configuration_id}",
+                })
+            else:
+                status = registry_entry.get("status", "").strip().upper()
+                if status and status != "ACTIVE":
+                    warnings.append({
+                        "row": str(index),
+                        "session_id": sid,
+                        "field": "configuration_id",
+                        "message": f"Configurazione con stato {status}",
+                    })
+
+                active_from_raw = registry_entry.get("active_from", "").strip()
+                active_to_raw = registry_entry.get("active_to", "").strip()
+                try:
+                    active_from = datetime.fromisoformat(active_from_raw) if active_from_raw else None
+                except ValueError:
+                    active_from = None
+                    errors.append({
+                        "row": str(index),
+                        "session_id": sid,
+                        "field": "configuration_id",
+                        "message": f"active_from non valido nel registro: {active_from_raw}",
+                    })
+                try:
+                    active_to = datetime.fromisoformat(active_to_raw) if active_to_raw else None
+                except ValueError:
+                    active_to = None
+                    errors.append({
+                        "row": str(index),
+                        "session_id": sid,
+                        "field": "configuration_id",
+                        "message": f"active_to non valido nel registro: {active_to_raw}",
+                    })
+
+                session_start = parse_dt(row.get("session_start", ""))
+                if session_start is not None:
+                    session_date = session_start.replace(tzinfo=None)
+                    if active_from and session_date < active_from:
+                        warnings.append({
+                            "row": str(index),
+                            "session_id": sid,
+                            "field": "configuration_id",
+                            "message": "Sessione precedente alla data di attivazione della configurazione",
+                        })
+                    if active_to and session_date > active_to:
+                        warnings.append({
+                            "row": str(index),
+                            "session_id": sid,
+                            "field": "configuration_id",
+                            "message": "Sessione successiva alla data di disattivazione della configurazione",
+                        })
 
     return {
         "schema_version": schema["schema_version"],
@@ -395,7 +518,7 @@ def write_reports(report: Dict[str, Any], json_path: Path, md_path: Path) -> Non
 
 
 def main() -> int:
-    global REPO_ROOT, DEFAULT_CSV, DEFAULT_JSON_REPORT, DEFAULT_MD_REPORT, DEFAULT_CONFIGURATION_MAP
+    global REPO_ROOT, DEFAULT_CSV, DEFAULT_JSON_REPORT, DEFAULT_MD_REPORT, DEFAULT_CONFIGURATION_MAP, DEFAULT_EQUIPMENT_REGISTRY
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo-root", type=Path, default=REPO_ROOT)
     parser.add_argument("--mode", choices=["update", "rebuild", "check"], default="update")
@@ -407,10 +530,13 @@ def main() -> int:
     DEFAULT_JSON_REPORT = REPO_ROOT / "data" / "analytics" / "history" / "validation-report.json"
     DEFAULT_MD_REPORT = REPO_ROOT / "docs" / "analytics" / "history-validation.md"
     DEFAULT_CONFIGURATION_MAP = REPO_ROOT / "data" / "analytics" / "configurations" / "session-configuration-map.csv"
+    DEFAULT_EQUIPMENT_REGISTRY = REPO_ROOT / "data" / "analytics" / "configurations" / "equipment-registry.csv"
 
     schema = load_schema()
     session_configuration_map = load_session_configuration_map(DEFAULT_CONFIGURATION_MAP)
+    equipment_registry = load_equipment_registry(DEFAULT_EQUIPMENT_REGISTRY)
     print(f"Mapping configurazioni: {DEFAULT_CONFIGURATION_MAP} | sessioni caricate: {len(session_configuration_map)}")
+    print(f"Registro attrezzatura: {DEFAULT_EQUIPMENT_REGISTRY} | configurazioni caricate: {len(equipment_registry)}")
     existing = read_existing(DEFAULT_CSV)
 
     if args.mode == "check":
@@ -420,7 +546,7 @@ def main() -> int:
         for path in sorted(REPO_ROOT.glob(METRICS_GLOB)):
             try:
                 metrics = json.loads(path.read_text(encoding="utf-8-sig"))
-                discovered.append(normalize(metrics, path, schema, session_configuration_map))
+                discovered.append(normalize(metrics, path, schema, session_configuration_map, equipment_registry))
             except Exception as exc:  # Continue and surface as a synthetic validation row.
                 discovered.append({
                     **{column: "" for column in schema["canonical_columns"]},
@@ -441,7 +567,7 @@ def main() -> int:
             rows = list(by_id.values())
         write_csv(DEFAULT_CSV, rows, schema["canonical_columns"])
 
-    report = validate(rows, schema)
+    report = validate(rows, schema, equipment_registry)
     write_reports(report, DEFAULT_JSON_REPORT, DEFAULT_MD_REPORT)
     print(f"Storico: {DEFAULT_CSV}")
     print(f"Sessioni: {report['row_count']} | Errori: {report['error_count']} | Avvisi: {report['warning_count']} | Stato: {report['status']}")
