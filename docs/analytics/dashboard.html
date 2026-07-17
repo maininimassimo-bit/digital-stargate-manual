@@ -1,25 +1,410 @@
 <!doctype html>
-<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Digital StarGate Analytics</title>
 <style>
-:root{--bg:#07111f;--panel:#0d1b2d;--panel2:#10243d;--text:#eef5ff;--muted:#9fb2ca;--accent:#58a6ff;--accent2:#8bd5ff;--border:#233a58;--good:#57d18c;--warn:#ffc857;--bad:#ff6b6b;color-scheme:dark}
-*{box-sizing:border-box} body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top right,rgba(88,166,255,.12),transparent 34rem),var(--bg);color:var(--text)}
-.container{width:min(1480px,calc(100% - 32px));margin:0 auto} header{padding:44px 0 24px} .eyebrow{color:var(--accent2);text-transform:uppercase;letter-spacing:.16em;font-size:.78rem;font-weight:700}
-h1{margin:8px 0 6px;font-size:clamp(2rem,5vw,4rem);line-height:1} .subtitle,.section-intro,.muted{color:var(--muted)} .subtitle{max-width:900px}
-.kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:22px 0} .card{background:linear-gradient(180deg,rgba(16,36,61,.98),rgba(13,27,45,.98));border:1px solid var(--border);border-radius:18px;padding:20px;box-shadow:0 14px 40px rgba(0,0,0,.18)}
-.kpi-label{color:var(--muted);font-size:.88rem} .kpi-value{margin-top:8px;font-size:clamp(1.6rem,4vw,2.5rem);font-weight:750} .kpi-note{margin-top:4px;color:var(--muted);font-size:.78rem}
-.section{margin:24px 0} .section h2{margin:0 0 6px;font-size:1.3rem} .section-intro{margin:0 0 16px;font-size:.9rem} .chart,.table-wrap{overflow-x:auto} svg{width:100%;min-width:760px;height:auto}
-.axis{stroke:#6f88a6} .grid{stroke:#223954} .bar{fill:var(--accent)} .efficiency-line{fill:none;stroke:var(--good);stroke-width:3} .efficiency-point{fill:var(--good);stroke:var(--panel);stroke-width:2}
-.tick,.xlabel{fill:var(--muted);font-size:12px} .value{fill:var(--text);font-size:12px;font-weight:700} .subvalue{fill:var(--muted);font-size:11px}
-table{width:100%;border-collapse:collapse;min-width:1080px} th,td{padding:13px 12px;border-bottom:1px solid var(--border);text-align:left} th{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.07em} td{font-size:.9rem} .num{text-align:right;font-variant-numeric:tabular-nums} .muted{font-size:.78rem;margin-top:4px} .mono{font-family:Consolas,'Courier New',monospace} .empty,.empty-cell{color:var(--muted);padding:24px;text-align:center}
-.status{display:inline-block;padding:4px 9px;border-radius:999px;font-size:.74rem;font-weight:700} .status-good{color:var(--good);background:rgba(87,209,140,.12)} .status-warn{color:var(--warn);background:rgba(255,200,87,.12)} .status-bad{color:var(--bad);background:rgba(255,107,107,.12)} .status-neutral{color:var(--muted);background:rgba(159,178,202,.10)} footer{color:var(--muted);padding:18px 0 40px;font-size:.78rem}
-@media(max-width:1000px){.kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}} @media(max-width:560px){.container{width:min(100% - 20px,1480px)}.kpi-grid{grid-template-columns:1fr}header{padding-top:28px}}
-</style></head><body><div class="container">
-<header><div class="eyebrow">Digital StarGate Observatory</div><h1>Executive Analytics Dashboard</h1><div class="subtitle">Sintesi operativa delle sessioni, dell'efficienza di acquisizione, della qualità di guida e dell'affidabilità dei processi automatici.</div></header>
+:root {
+  --bg:#07111f;
+  --panel:#0d1b2d;
+  --panel2:#10243d;
+  --text:#eef5ff;
+  --muted:#9fb2ca;
+  --accent:#58a6ff;
+  --accent2:#8bd5ff;
+  --border:#233a58;
+  --good:#57d18c;
+  --warn:#ffc857;
+  --bad:#ff6b6b;
+  color-scheme:dark;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(88,166,255,.12),
+      transparent 34rem
+    ),
+    var(--bg);
+  color:var(--text);
+}
+.container {
+  width:min(1480px,calc(100% - 32px));
+  margin:0 auto;
+}
+header { padding:44px 0 24px; }
+.eyebrow {
+  color:var(--accent2);
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:.78rem;
+  font-weight:700;
+}
+h1 {
+  margin:8px 0 6px;
+  font-size:clamp(2rem,5vw,4rem);
+  line-height:1;
+}
+.subtitle,
+.section-intro,
+.muted {
+  color:var(--muted);
+}
+.subtitle { max-width:980px; }
+.section-label {
+  margin:32px 0 12px;
+  color:var(--accent2);
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.75rem;
+  font-weight:800;
+}
+.kpi-grid {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:16px;
+  margin:16px 0 22px;
+}
+.card {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(16,36,61,.98),
+      rgba(13,27,45,.98)
+    );
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 14px 40px rgba(0,0,0,.18);
+}
+.kpi-label {
+  color:var(--muted);
+  font-size:.88rem;
+}
+.kpi-value {
+  margin-top:8px;
+  font-size:clamp(1.6rem,4vw,2.5rem);
+  font-weight:750;
+  overflow-wrap:anywhere;
+}
+.kpi-note {
+  margin-top:4px;
+  color:var(--muted);
+  font-size:.78rem;
+}
+.section { margin:24px 0; }
+.section h2 {
+  margin:0 0 6px;
+  font-size:1.3rem;
+}
+.section-intro {
+  margin:0 0 16px;
+  font-size:.9rem;
+}
+.chart,
+.table-wrap {
+  overflow-x:auto;
+}
+svg {
+  width:100%;
+  min-width:760px;
+  height:auto;
+}
+.axis { stroke:#6f88a6; }
+.grid { stroke:#223954; }
+.bar { fill:var(--accent); }
+.efficiency-line {
+  fill:none;
+  stroke:var(--good);
+  stroke-width:3;
+}
+.efficiency-point {
+  fill:var(--good);
+  stroke:var(--panel);
+  stroke-width:2;
+}
+.tick,
+.xlabel {
+  fill:var(--muted);
+  font-size:12px;
+}
+.value {
+  fill:var(--text);
+  font-size:12px;
+  font-weight:700;
+}
+.subvalue {
+  fill:var(--muted);
+  font-size:11px;
+}
+.split-grid {
+  display:grid;
+  grid-template-columns:minmax(0,1.55fr) minmax(320px,.75fr);
+  gap:16px;
+}
+.filter-bars {
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  padding:6px 0;
+}
+.filter-heading {
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  color:var(--text);
+  font-size:.9rem;
+}
+.filter-heading span {
+  color:var(--muted);
+  font-size:.8rem;
+  text-align:right;
+}
+.bar-track {
+  height:12px;
+  background:rgba(159,178,202,.10);
+  border:1px solid var(--border);
+  border-radius:999px;
+  margin-top:8px;
+  overflow:hidden;
+}
+.bar-fill {
+  height:100%;
+  background:linear-gradient(
+    90deg,
+    var(--accent),
+    var(--accent2)
+  );
+  border-radius:999px;
+}
+table {
+  width:100%;
+  border-collapse:collapse;
+  min-width:1080px;
+}
+th,
+td {
+  padding:13px 12px;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+}
+th {
+  color:var(--muted);
+  font-size:.78rem;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+}
+td { font-size:.9rem; }
+.num {
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+.rank {
+  width:46px;
+  color:var(--accent2);
+  font-weight:800;
+  text-align:center;
+}
+.muted {
+  font-size:.78rem;
+  margin-top:4px;
+}
+.mono {
+  font-family:Consolas,"Courier New",monospace;
+}
+.empty,
+.empty-cell {
+  color:var(--muted);
+  padding:24px;
+  text-align:center;
+}
+.status {
+  display:inline-block;
+  padding:4px 9px;
+  border-radius:999px;
+  font-size:.74rem;
+  font-weight:700;
+}
+.status-good {
+  color:var(--good);
+  background:rgba(87,209,140,.12);
+}
+.status-warn {
+  color:var(--warn);
+  background:rgba(255,200,87,.12);
+}
+.status-bad {
+  color:var(--bad);
+  background:rgba(255,107,107,.12);
+}
+.status-neutral {
+  color:var(--muted);
+  background:rgba(159,178,202,.10);
+}
+footer {
+  color:var(--muted);
+  padding:18px 0 40px;
+  font-size:.78rem;
+}
+@media(max-width:1100px) {
+  .split-grid {
+    grid-template-columns:1fr;
+  }
+}
+@media(max-width:1000px) {
+  .kpi-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media(max-width:560px) {
+  .container {
+    width:min(100% - 20px,1480px);
+  }
+  .kpi-grid {
+    grid-template-columns:1fr;
+  }
+  header {
+    padding-top:28px;
+  }
+  .filter-heading {
+    flex-direction:column;
+  }
+  .filter-heading span {
+    text-align:left;
+  }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <div class="eyebrow">Digital StarGate Observatory</div>
+  <h1>Executive Observatory Dashboard</h1>
+  <div class="subtitle">
+    Sintesi operativa delle sessioni, dei target osservati,
+    dell'efficienza di acquisizione, della qualità di guida
+    e dell'affidabilità dei processi automatici.
+  </div>
+</header>
+
+<div class="section-label">Session Analytics</div>
 <section class="kpi-grid">
-<article class="card"><div class="kpi-label">Sessioni</div><div class="kpi-value">3</div><div class="kpi-note">sessioni consolidate</div></article><article class="card"><div class="kpi-label">Durata totale</div><div class="kpi-value">39 h</div><div class="kpi-note">tempo complessivo di osservazione</div></article><article class="card"><div class="kpi-label">Integrazione</div><div class="kpi-value">31,8 h</div><div class="kpi-note">tempo utile acquisito</div></article><article class="card"><div class="kpi-label">Efficienza</div><div class="kpi-value">81,6%</div><div class="kpi-note">integrazione / durata</div></article><article class="card"><div class="kpi-label">Completamento medio</div><div class="kpi-value">77,2%</div><div class="kpi-note">media delle sessioni</div></article><article class="card"><div class="kpi-label">RMS medio</div><div class="kpi-value">0,79″</div><div class="kpi-note">qualità media della guida</div></article><article class="card"><div class="kpi-label">Successo frame</div><div class="kpi-value">65,9%</div><div class="kpi-note">191 completati · 99 falliti</div></article><article class="card"><div class="kpi-label">Meteo sicuro medio</div><div class="kpi-value">—</div><div class="kpi-note">disponibilità condizioni sicure</div></article><article class="card"><div class="kpi-label">Autofocus</div><div class="kpi-value">86</div><div class="kpi-note">successo 97,7%</div></article><article class="card"><div class="kpi-label">Dithering</div><div class="kpi-value">335</div><div class="kpi-note">successo 100%</div></article><article class="card"><div class="kpi-label">Sessioni OK</div><div class="kpi-value">0</div><div class="kpi-note">stato positivo esplicito</div></article><article class="card"><div class="kpi-label">Configurazioni</div><div class="kpi-value">1</div><div class="kpi-note">profili strumentali consolidati</div></article>
+<article class="card"><div class="kpi-label">Sessioni</div><div class="kpi-value">3</div><div class="kpi-note">sessioni consolidate</div></article><article class="card"><div class="kpi-label">Durata totale</div><div class="kpi-value">39 h</div><div class="kpi-note">tempo complessivo di osservazione</div></article><article class="card"><div class="kpi-label">Integrazione sessioni</div><div class="kpi-value">31,8 h</div><div class="kpi-note">tempo utile acquisito</div></article><article class="card"><div class="kpi-label">Efficienza</div><div class="kpi-value">81,6%</div><div class="kpi-note">integrazione / durata</div></article><article class="card"><div class="kpi-label">Completamento medio</div><div class="kpi-value">77,2%</div><div class="kpi-note">media delle sessioni</div></article><article class="card"><div class="kpi-label">RMS medio</div><div class="kpi-value">0,79″</div><div class="kpi-note">qualità media della guida</div></article><article class="card"><div class="kpi-label">Successo frame</div><div class="kpi-value">65,9%</div><div class="kpi-note">191 completati · 99 falliti</div></article><article class="card"><div class="kpi-label">Meteo sicuro medio</div><div class="kpi-value">—</div><div class="kpi-note">disponibilità condizioni sicure</div></article><article class="card"><div class="kpi-label">Autofocus</div><div class="kpi-value">86</div><div class="kpi-note">successo 97,7%</div></article><article class="card"><div class="kpi-label">Dithering</div><div class="kpi-value">335</div><div class="kpi-note">successo 100%</div></article><article class="card"><div class="kpi-label">Sessioni OK</div><div class="kpi-value">0</div><div class="kpi-note">stato positivo esplicito</div></article><article class="card"><div class="kpi-label">Configurazioni</div><div class="kpi-value">1</div><div class="kpi-note">profili strumentali consolidati</div></article>
 </section>
-<section class="section card"><h2>Trend mensile</h2><p class="section-intro">Le barre indicano le ore di integrazione; la linea verde rappresenta l'efficienza mensile. Sotto ogni mese sono riportati sessioni e RMS.</p><div class="chart"><svg viewBox="0 0 920 360" role="img" aria-label="Trend mensile"><line x1="60" y1="34" x2="60" y2="274" class="axis"/><line x1="60" y1="274" x2="890" y2="274" class="axis"/><line x1="60" y1="274.0" x2="890" y2="274.0" class="grid"/><text x="52" y="278.0" text-anchor="end" class="tick">0</text><line x1="60" y1="214.0" x2="890" y2="214.0" class="grid"/><text x="52" y="218.0" text-anchor="end" class="tick">8,0</text><line x1="60" y1="154.0" x2="890" y2="154.0" class="grid"/><text x="52" y="158.0" text-anchor="end" class="tick">15,9</text><line x1="60" y1="94.0" x2="890" y2="94.0" class="grid"/><text x="52" y="98.0" text-anchor="end" class="tick">23,9</text><line x1="60" y1="34.0" x2="890" y2="34.0" class="grid"/><text x="52" y="38.0" text-anchor="end" class="tick">31,8</text><rect x="447.0" y="34.0" width="56.0" height="240.0" rx="7" class="bar"><title>Lug 2026: 31,8 h; 3 sessioni; efficienza 81,6%</title></rect><text x="475.0" y="26.0" text-anchor="middle" class="value">31,8h</text><text x="475.0" y="298" text-anchor="middle" class="xlabel">Lug 2026</text><text x="475.0" y="318" text-anchor="middle" class="subvalue">3 sessioni</text><text x="475.0" y="336" text-anchor="middle" class="subvalue">RMS 0,79″</text><circle cx="475.0" cy="78.1" r="5" class="efficiency-point"><title>Efficienza 81,6%</title></circle></svg></div></section>
-<section class="section card"><h2>Prestazioni per configurazione</h2><p class="section-intro">Ordinamento per integrazione totale prodotta.</p><div class="table-wrap"><table><thead><tr><th>Configurazione</th><th>Telescopio</th><th>Camera</th><th class="num">Sessioni</th><th class="num">Durata h</th><th class="num">Integrazione h</th><th class="num">Efficienza %</th><th class="num">RMS ″</th></tr></thead><tbody><tr><td><strong>Quattro 200P + ToupTek 294MC PRO BIN1</strong><div class='muted mono'>QUATTRO200_TOUPTEK294_BIN1</div></td><td>Sky-Watcher Quattro 200P</td><td>ToupTek 294MC PRO</td><td class='num'>3</td><td class='num'>39</td><td class='num'>31.8333</td><td class='num'>81.62</td><td class='num'>0.789</td></tr></tbody></table></div></section>
-<section class="section card"><h2>Ultime sessioni</h2><p class="section-intro">Dettaglio operativo delle 12 sessioni più recenti.</p><div class="table-wrap"><table><thead><tr><th>Sessione</th><th>Configurazione</th><th>Inizio</th><th class="num">Durata h</th><th class="num">Integrazione h</th><th class="num">Completamento %</th><th class="num">RMS ″</th><th class="num">Meteo %</th><th class="num">Autofocus</th><th>Stato</th></tr></thead><tbody><tr><td class='mono'>2026-07-16_2026-07-17</td><td>QUATTRO200_TOUPTEK294_BIN1</td><td>2026-07-16T18:00:00</td><td class='num'>13.0</td><td class='num'>10.5</td><td class='num'>100.0</td><td class='num'>0.397</td><td class='num'>—</td><td class='num'>10</td><td><span class='status status-bad'>GREEN</span></td></tr><tr><td class='mono'>2026-07-15_2026-07-16</td><td>QUATTRO200_TOUPTEK294_BIN1</td><td>2026-07-15T18:00:00</td><td class='num'>13.0</td><td class='num'>13.3333</td><td class='num'>98.77</td><td class='num'>0.437</td><td class='num'>—</td><td class='num'>52</td><td><span class='status status-bad'>GREEN</span></td></tr><tr><td class='mono'>2026-07-14_2026-07-15</td><td>QUATTRO200_TOUPTEK294_BIN1</td><td>2026-07-14T18:00:00</td><td class='num'>13.0</td><td class='num'>8.0</td><td class='num'>32.88</td><td class='num'>1.533</td><td class='num'>—</td><td class='num'>24</td><td><span class='status status-bad'>RED</span></td></tr></tbody></table></div></section>
-<footer>Generato automaticamente il 2026-07-17T12:44:16+00:00 · Digital StarGate Analytics v2.7</footer></div></body></html>
+
+<section class="section card">
+  <h2>Trend mensile</h2>
+  <p class="section-intro">
+    Le barre indicano le ore di integrazione; la linea verde
+    rappresenta l'efficienza mensile. Sotto ogni mese sono
+    riportati sessioni e RMS.
+  </p>
+  <div class="chart"><svg viewBox="0 0 920 360" role="img" aria-label="Trend mensile"><line x1="60" y1="34" x2="60" y2="274" class="axis"/><line x1="60" y1="274" x2="890" y2="274" class="axis"/><line x1="60" y1="274.0" x2="890" y2="274.0" class="grid"/><text x="52" y="278.0" text-anchor="end" class="tick">0</text><line x1="60" y1="214.0" x2="890" y2="214.0" class="grid"/><text x="52" y="218.0" text-anchor="end" class="tick">8,0</text><line x1="60" y1="154.0" x2="890" y2="154.0" class="grid"/><text x="52" y="158.0" text-anchor="end" class="tick">15,9</text><line x1="60" y1="94.0" x2="890" y2="94.0" class="grid"/><text x="52" y="98.0" text-anchor="end" class="tick">23,9</text><line x1="60" y1="34.0" x2="890" y2="34.0" class="grid"/><text x="52" y="38.0" text-anchor="end" class="tick">31,8</text><rect x="447.0" y="34.0" width="56.0" height="240.0" rx="7" class="bar"><title>Lug 2026: 31,8 h; 3 sessioni; efficienza 81,6%</title></rect><text x="475.0" y="26.0" text-anchor="middle" class="value">31,8h</text><text x="475.0" y="298" text-anchor="middle" class="xlabel">Lug 2026</text><text x="475.0" y="318" text-anchor="middle" class="subvalue">3 sessioni</text><text x="475.0" y="336" text-anchor="middle" class="subvalue">RMS 0,79″</text><circle cx="475.0" cy="78.1" r="5" class="efficiency-point"><title>Efficienza 81,6%</title></circle></svg></div>
+</section>
+
+<div class="section-label">Target Analytics</div>
+<section class="kpi-grid">
+<article class="card"><div class="kpi-label">Target distinti</div><div class="kpi-value">1</div><div class="kpi-note">oggetti astronomici consolidati</div></article><article class="card"><div class="kpi-label">Immagini target</div><div class="kpi-value">191</div><div class="kpi-note">frame associati ai target</div></article><article class="card"><div class="kpi-label">Integrazione target</div><div class="kpi-value">31,83 h</div><div class="kpi-note">tempo utile ricostruito dai log NINA</div></article><article class="card"><div class="kpi-label">Sessioni target</div><div class="kpi-value">3</div><div class="kpi-note">sessioni con target riconosciuto</div></article><article class="card"><div class="kpi-label">Target principale</div><div class="kpi-value">LDN 1320</div><div class="kpi-note">primo per ore di integrazione</div></article><article class="card"><div class="kpi-label">Filtro principale</div><div class="kpi-value">LPRO</div><div class="kpi-note">primo per ore di utilizzo</div></article><article class="card"><div class="kpi-label">Ultimo target</div><div class="kpi-value">LDN 1320</div><div class="kpi-note">ultimo oggetto acquisito</div></article>
+</section>
+
+<section class="section split-grid">
+  <article class="card">
+    <h2>Classifica target</h2>
+    <p class="section-intro">
+      Ordinamento per ore complessive di integrazione.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Target</th>
+            <th>Filtri</th>
+            <th class="num">Integrazione h</th>
+            <th class="num">Immagini</th>
+            <th class="num">Sessioni</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class='rank'>1</td><td><strong>LDN 1320</strong></td><td>LPRO</td><td class='num'>31,83</td><td class='num'>191</td><td class='num'>3</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="card">
+    <h2>Distribuzione filtri</h2>
+    <p class="section-intro">
+      Ore di integrazione e immagini per filtro.
+    </p>
+    <div class="filter-bars"><div class="filter-row"><div class="filter-heading"><strong>LPRO</strong><span>31,83 h · 191 immagini · 1 target</span></div><div class="bar-track"><div class="bar-fill" style="width:100.00%"></div></div></div></div>
+  </article>
+</section>
+
+<div class="section-label">Configuration Analytics</div>
+<section class="section card">
+  <h2>Prestazioni per configurazione</h2>
+  <p class="section-intro">
+    Ordinamento per integrazione totale prodotta.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Configurazione</th>
+          <th>Telescopio</th>
+          <th>Camera</th>
+          <th class="num">Sessioni</th>
+          <th class="num">Durata h</th>
+          <th class="num">Integrazione h</th>
+          <th class="num">Efficienza %</th>
+          <th class="num">RMS ″</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Quattro 200P + ToupTek 294MC PRO BIN1</strong><div class='muted mono'>QUATTRO200_TOUPTEK294_BIN1</div></td><td>Sky-Watcher Quattro 200P</td><td>ToupTek 294MC PRO</td><td class='num'>3</td><td class='num'>39</td><td class='num'>31.8333</td><td class='num'>81.62</td><td class='num'>0.789</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="section-label">Operational Detail</div>
+<section class="section card">
+  <h2>Ultime sessioni</h2>
+  <p class="section-intro">
+    Dettaglio operativo delle 12 sessioni più recenti.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Sessione</th>
+          <th>Configurazione</th>
+          <th>Inizio</th>
+          <th class="num">Durata h</th>
+          <th class="num">Integrazione h</th>
+          <th class="num">Completamento %</th>
+          <th class="num">RMS ″</th>
+          <th class="num">Meteo %</th>
+          <th class="num">Autofocus</th>
+          <th>Stato</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class='mono'>2026-07-16_2026-07-17</td><td>QUATTRO200_TOUPTEK294_BIN1</td><td>2026-07-16T18:00:00</td><td class='num'>13.0</td><td class='num'>10.5</td><td class='num'>100.0</td><td class='num'>0.397</td><td class='num'>—</td><td class='num'>10</td><td><span class='status status-bad'>GREEN</span></td></tr><tr><td class='mono'>2026-07-15_2026-07-16</td><td>QUATTRO200_TOUPTEK294_BIN1</td><td>2026-07-15T18:00:00</td><td class='num'>13.0</td><td class='num'>13.3333</td><td class='num'>98.77</td><td class='num'>0.437</td><td class='num'>—</td><td class='num'>52</td><td><span class='status status-bad'>GREEN</span></td></tr><tr><td class='mono'>2026-07-14_2026-07-15</td><td>QUATTRO200_TOUPTEK294_BIN1</td><td>2026-07-14T18:00:00</td><td class='num'>13.0</td><td class='num'>8.0</td><td class='num'>32.88</td><td class='num'>1.533</td><td class='num'>—</td><td class='num'>24</td><td><span class='status status-bad'>RED</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  Generato automaticamente il 2026-07-17T14:44:23+00:00
+  · Digital StarGate Analytics v3.0
+</footer>
+</div>
+</body>
+</html>
