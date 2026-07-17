@@ -36,18 +36,75 @@ ALIASES = {
     "camera": ["camera", "imaging_camera", "main_camera"],
     "guide_profile": ["guide_profile", "phd2_profile", "guiding_profile"],
     "duration_hours": ["duration_hours", "session_duration_hours", "durationHours"],
-    "integration_hours": ["integration_hours", "total_integration_hours", "useful_integration_hours", "integrationHours"],
-    "light_started": ["light_started", "lights_started", "light_exposures_started", "started_light_frames"],
-    "light_completed": ["light_completed", "lights_completed", "light_exposures_completed", "completed_light_frames"],
-    "light_failed": ["light_failed", "lights_failed", "light_exposures_failed", "failed_light_frames"],
+    "integration_hours": [
+        "integration_hours",
+        "total_integration_hours",
+        "useful_integration_hours",
+        "integrationHours",
+    ],
+    "light_started": [
+        "light_started",
+        "lights_started",
+        "light_exposures_started",
+        "started_light_frames",
+        "exposures_started",
+    ],
+    "light_completed": [
+        "light_completed",
+        "lights_completed",
+        "light_exposures_completed",
+        "completed_light_frames",
+        "exposures_completed",
+    ],
+    "light_failed": [
+        "light_failed",
+        "lights_failed",
+        "light_exposures_failed",
+        "failed_light_frames",
+        "exposures_failed",
+        "light_failed_explicit",
+    ],
     "completion_pct": ["completion_pct", "light_completion_pct", "completionPercent"],
-    "rms_ra_arcsec": ["rms_ra_arcsec", "ra_rms_arcsec", "rms_ra", "raRms"],
-    "rms_dec_arcsec": ["rms_dec_arcsec", "dec_rms_arcsec", "rms_dec", "decRms"],
-    "rms_total_arcsec": ["rms_total_arcsec", "total_rms_arcsec", "rms_total", "totalRms"],
+    "rms_ra_arcsec": [
+        "rms_ra_arcsec",
+        "ra_rms_arcsec",
+        "rms_ra",
+        "raRms",
+        "phd2_rms_ra_arcsec",
+    ],
+    "rms_dec_arcsec": [
+        "rms_dec_arcsec",
+        "dec_rms_arcsec",
+        "rms_dec",
+        "decRms",
+        "phd2_rms_dec_arcsec",
+    ],
+    "rms_total_arcsec": [
+        "rms_total_arcsec",
+        "total_rms_arcsec",
+        "rms_total",
+        "totalRms",
+        "phd2_rms_total_arcsec",
+    ],
     "weather_safe_pct": ["weather_safe_pct", "safe_pct", "weatherSafePercent"],
-    "autofocus_count": ["autofocus_count", "autofocus_runs", "focus_runs"],
-    "autofocus_failed": ["autofocus_failed", "autofocus_failures", "focus_failures"],
-    "dither_count": ["dither_count", "dithers", "dither_runs"],
+    "autofocus_count": [
+        "autofocus_count",
+        "autofocus_runs",
+        "focus_runs",
+        "autofocus_started",
+    ],
+    "autofocus_failed": [
+        "autofocus_failed",
+        "autofocus_failures",
+        "focus_failures",
+        "autofocus_failed_explicit",
+    ],
+    "dither_count": [
+        "dither_count",
+        "dithers",
+        "dither_runs",
+        "dither_requests",
+    ],
     "dither_failed": ["dither_failed", "dither_failures"],
     "severity": ["severity", "status", "session_severity"]
 }
@@ -287,6 +344,30 @@ def normalize(
     row["session_start"] = to_iso(row["session_start"])
     row["session_end"] = to_iso(row["session_end"])
 
+    # Calculate the effective session-window duration when it is missing.
+    if row["duration_hours"] in (None, ""):
+        start_dt = parse_dt(row["session_start"])
+        end_dt = parse_dt(row["session_end"])
+
+        if start_dt is not None and end_dt is not None and end_dt > start_dt:
+            row["duration_hours"] = round(
+                (end_dt - start_dt).total_seconds() / 3600.0,
+                4,
+            )
+
+    # Convert integration_seconds from both the legacy schema and the
+    # v0.1.1 schema, where the value is nested below "nina".
+    if row["integration_hours"] in (None, ""):
+        integration_seconds = to_float(
+            find_value(metrics, ["integration_seconds"])
+        )
+
+        if integration_seconds is not None:
+            row["integration_hours"] = round(
+                integration_seconds / 3600.0,
+                4,
+            )
+
     integer_fields = {
         "light_started", "light_completed", "light_failed", "autofocus_count",
         "autofocus_failed", "dither_count", "dither_failed"
@@ -301,6 +382,14 @@ def normalize(
     for field in float_fields:
         value = to_float(row[field])
         row[field] = "" if value is None else round(value, 4)
+
+    interrupted = to_int(
+        find_value(metrics, ["light_interrupted_unmatched"])
+    )
+    explicit_failed = to_int(row["light_failed"])
+
+    if interrupted is not None:
+        row["light_failed"] = (explicit_failed or 0) + interrupted
 
     started = to_int(row["light_started"])
     completed = to_int(row["light_completed"])
