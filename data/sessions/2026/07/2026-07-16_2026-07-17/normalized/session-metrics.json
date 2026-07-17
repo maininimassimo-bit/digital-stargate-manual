@@ -1,0 +1,41 @@
+{
+  "schema_version": "0.1.1",
+  "session_id": "2026-07-16_2026-07-17",
+  "generated_at": "2026-07-17T05:44:04.398414+00:00",
+  "nina": {
+    "camera_exposures_total": 139,
+    "light_started": 63,
+    "light_completed": 63,
+    "light_failed_explicit": 0,
+    "light_interrupted_unmatched": 0,
+    "technical_exposures_estimated": 76,
+    "integration_seconds": 37800.0,
+    "autofocus_started": 10,
+    "autofocus_completed": 5,
+    "autofocus_failed_explicit": 0,
+    "autofocus_unmatched": 5,
+    "dither_requests": 125,
+    "nina_errors": 30,
+    "nina_warnings": 14
+  },
+  "phd2": {
+    "guide_segments": 9,
+    "guide_samples_valid": 18809,
+    "rms_ra_arcsec": 0.338,
+    "rms_dec_arcsec": 0.208,
+    "rms_total_arcsec": 0.397,
+    "lost_star_events": 0,
+    "pulse_guide_failures": 0
+  },
+  "weather": {
+    "weather_rows_total": 4680,
+    "weather_rows_unsafe_full_window": 1943,
+    "weather_safe_transitions_full_window": 2,
+    "weather_unsafe_pct_full_window": 41.52,
+    "weather_scope_note": "Valori riferiti alla finestra CSV importata; non penalizzano la severita finche non sono correlati alla sequenza attiva/cupola aperta."
+  },
+  "severity": "GREEN",
+  "severity_reasons": [
+    "Nessuna anomalia grave rilevata dai criteri v0.1.1."
+  ]
+}
