@@ -23,6 +23,7 @@ SCHEMA_PATH = SCRIPT_DIR / "history_schema.json"
 DEFAULT_CSV = REPO_ROOT / "data" / "analytics" / "history" / "sessions.csv"
 DEFAULT_JSON_REPORT = REPO_ROOT / "data" / "analytics" / "history" / "validation-report.json"
 DEFAULT_MD_REPORT = REPO_ROOT / "docs" / "analytics" / "history-validation.md"
+DEFAULT_CONFIGURATION_MAP = REPO_ROOT / "data" / "analytics" / "configurations" / "session-configuration-map.csv"
 METRICS_GLOB = "data/sessions/**/normalized/session-metrics.json"
 
 ALIASES = {
@@ -146,7 +147,56 @@ def derive_session_times(session_id: str) -> Tuple[str, str]:
     )
 
 
-def normalize(metrics: Dict[str, Any], path: Path, schema: Dict[str, Any]) -> Dict[str, str]:
+def load_session_configuration_map(path: Path) -> Dict[str, Dict[str, str]]:
+    """Load the explicit session-to-equipment mapping CSV."""
+    if not path.exists() or path.stat().st_size == 0:
+        return {}
+
+    required_columns = {
+        "session_id",
+        "configuration_id",
+        "telescope",
+        "camera",
+        "guide_profile",
+        "notes",
+    }
+    result: Dict[str, Dict[str, str]] = {}
+
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        actual_columns = set(reader.fieldnames or [])
+        missing = required_columns - actual_columns
+        if missing:
+            raise ValueError(
+                f"Colonne mancanti in {path}: {', '.join(sorted(missing))}"
+            )
+
+        for row_number, raw in enumerate(reader, start=2):
+            session_id = (raw.get("session_id") or "").strip()
+            if not session_id:
+                continue
+            if session_id in result:
+                raise ValueError(
+                    f"session_id duplicato nel mapping alla riga {row_number}: {session_id}"
+                )
+
+            result[session_id] = {
+                "configuration_id": (raw.get("configuration_id") or "UNKNOWN").strip(),
+                "telescope": (raw.get("telescope") or "").strip(),
+                "camera": (raw.get("camera") or "").strip(),
+                "guide_profile": (raw.get("guide_profile") or "").strip(),
+                "notes": (raw.get("notes") or "").strip(),
+            }
+
+    return result
+
+
+def normalize(
+    metrics: Dict[str, Any],
+    path: Path,
+    schema: Dict[str, Any],
+    session_configuration_map: Optional[Dict[str, Dict[str, str]]] = None,
+) -> Dict[str, str]:
     row: Dict[str, Any] = {column: "" for column in schema["canonical_columns"]}
     row["schema_version"] = schema["schema_version"]
     for field, aliases in ALIASES.items():
@@ -154,6 +204,18 @@ def normalize(metrics: Dict[str, Any], path: Path, schema: Dict[str, Any]) -> Di
 
     if not row["session_id"]:
         row["session_id"] = derive_session_id(path)
+    row["session_id"] = str(row["session_id"]).strip()
+
+    if session_configuration_map is None:
+        session_configuration_map = {}
+    mapped_configuration = session_configuration_map.get(row["session_id"], {})
+    mapped_configuration_id = mapped_configuration.get("configuration_id", "").strip()
+    if mapped_configuration_id and mapped_configuration_id != "UNKNOWN":
+        row["configuration_id"] = mapped_configuration_id
+    for field in ("telescope", "camera", "guide_profile"):
+        mapped_value = mapped_configuration.get(field, "").strip()
+        if mapped_value:
+            row[field] = mapped_value
 
     # Backward compatibility for legacy metrics files that do not contain
     # explicit session_start/session_end fields. When possible, derive them
@@ -333,7 +395,7 @@ def write_reports(report: Dict[str, Any], json_path: Path, md_path: Path) -> Non
 
 
 def main() -> int:
-    global REPO_ROOT, DEFAULT_CSV, DEFAULT_JSON_REPORT, DEFAULT_MD_REPORT
+    global REPO_ROOT, DEFAULT_CSV, DEFAULT_JSON_REPORT, DEFAULT_MD_REPORT, DEFAULT_CONFIGURATION_MAP
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo-root", type=Path, default=REPO_ROOT)
     parser.add_argument("--mode", choices=["update", "rebuild", "check"], default="update")
@@ -344,8 +406,11 @@ def main() -> int:
     DEFAULT_CSV = REPO_ROOT / "data" / "analytics" / "history" / "sessions.csv"
     DEFAULT_JSON_REPORT = REPO_ROOT / "data" / "analytics" / "history" / "validation-report.json"
     DEFAULT_MD_REPORT = REPO_ROOT / "docs" / "analytics" / "history-validation.md"
+    DEFAULT_CONFIGURATION_MAP = REPO_ROOT / "data" / "analytics" / "configurations" / "session-configuration-map.csv"
 
     schema = load_schema()
+    session_configuration_map = load_session_configuration_map(DEFAULT_CONFIGURATION_MAP)
+    print(f"Mapping configurazioni: {DEFAULT_CONFIGURATION_MAP} | sessioni caricate: {len(session_configuration_map)}")
     existing = read_existing(DEFAULT_CSV)
 
     if args.mode == "check":
@@ -355,7 +420,7 @@ def main() -> int:
         for path in sorted(REPO_ROOT.glob(METRICS_GLOB)):
             try:
                 metrics = json.loads(path.read_text(encoding="utf-8-sig"))
-                discovered.append(normalize(metrics, path, schema))
+                discovered.append(normalize(metrics, path, schema, session_configuration_map))
             except Exception as exc:  # Continue and surface as a synthetic validation row.
                 discovered.append({
                     **{column: "" for column in schema["canonical_columns"]},
