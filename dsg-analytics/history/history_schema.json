@@ -1,0 +1,52 @@
+{
+  "schema_version": "2.0B.1",
+  "required": [
+    "session_id",
+    "session_start",
+    "session_end",
+    "source_metrics_path"
+  ],
+  "canonical_columns": [
+    "schema_version",
+    "session_id",
+    "session_start",
+    "session_end",
+    "configuration_id",
+    "telescope",
+    "camera",
+    "guide_profile",
+    "duration_hours",
+    "integration_hours",
+    "light_started",
+    "light_completed",
+    "light_failed",
+    "completion_pct",
+    "rms_ra_arcsec",
+    "rms_dec_arcsec",
+    "rms_total_arcsec",
+    "weather_safe_pct",
+    "autofocus_count",
+    "autofocus_failed",
+    "dither_count",
+    "dither_failed",
+    "severity",
+    "source_metrics_path",
+    "updated_at_utc"
+  ],
+  "numeric_ranges": {
+    "duration_hours": [0, 24],
+    "integration_hours": [0, 24],
+    "light_started": [0, 100000],
+    "light_completed": [0, 100000],
+    "light_failed": [0, 100000],
+    "completion_pct": [0, 100],
+    "rms_ra_arcsec": [0, 20],
+    "rms_dec_arcsec": [0, 20],
+    "rms_total_arcsec": [0, 20],
+    "weather_safe_pct": [0, 100],
+    "autofocus_count": [0, 10000],
+    "autofocus_failed": [0, 10000],
+    "dither_count": [0, 10000],
+    "dither_failed": [0, 10000]
+  }
+}

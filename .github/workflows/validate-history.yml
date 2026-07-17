@@ -1,0 +1,45 @@
+name: Validate Digital StarGate History
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'data/sessions/**/normalized/session-metrics.json'
+      - 'dsg-analytics/history/**'
+      - '.github/workflows/validate-history.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  consolidate-history:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Consolidate and validate history
+        run: python dsg-analytics/history/consolidate_history.py --mode update
+
+      - name: Commit consolidated history
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "No history changes to publish."
+            exit 0
+          fi
+          git config user.name "digital-stargate-bot"
+          git config user.email "digital-stargate-bot@users.noreply.github.com"
+          git add data/analytics/history/sessions.csv \
+                  data/analytics/history/validation-report.json \
+                  docs/analytics/history-validation.md
+          git commit -m "analytics: consolidate and validate session history"
+          git push

@@ -1,0 +1,30 @@
+name: Validate session package
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'data/sessions/**'
+      - 'docs/session-reports/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate manifests and required folders
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $manifests = Get-ChildItem data/sessions -Filter manifest.json -Recurse
+          if (-not $manifests) { throw 'Nessun manifest trovato.' }
+          foreach ($manifestFile in $manifests) {
+            $m = Get-Content $manifestFile.FullName -Raw | ConvertFrom-Json
+            $root = Split-Path $manifestFile.FullName
+            foreach ($required in @('raw/nina','raw/phd2','raw/weather','report')) {
+              if (-not (Test-Path (Join-Path $root $required))) {
+                throw "Cartella mancante: $required in $root"
+              }
+            }
+            Write-Host "OK: $($m.session_id)"
+          }
