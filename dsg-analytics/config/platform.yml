@@ -1,0 +1,72 @@
+# ==========================================================
+# Digital StarGate Platform Configuration
+# Version: 4.0
+# ==========================================================
+
+platform:
+  name: Digital StarGate
+  version: "4.0"
+
+repository:
+  root: .
+  branch: main
+
+paths:
+
+  documentation: docs
+
+  analytics: data/analytics
+
+  sessions: data/sessions
+
+  weather: data/analytics/weather
+
+  live: data/analytics/live
+
+  history: data/analytics/history
+
+  dashboard: docs/analytics
+
+  homepage: docs
+
+  observatory: docs/status
+
+  reports: docs/session-reports
+
+  architecture: docs/architecture
+
+  build: site
+
+modules:
+
+  weather: true
+
+  observatory_status: true
+
+  homepage: true
+
+  analytics: true
+
+  dashboard: true
+
+  session_reports: true
+
+  architecture: true
+
+future:
+
+  telemetry: false
+
+  allsky: false
+
+  ai_assistant: false
+
+  maintenance: false
+
+build:
+
+  strict: true
+
+  clean: true
+
+  publish: github-pages
