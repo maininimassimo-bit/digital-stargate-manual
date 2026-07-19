@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "observatory": {"name": "Digital StarGate", "location": "Manciano (GR)", "last_update": null},
+  "systems": {
+    "dome": {"state": "UNKNOWN", "safe": null},
+    "mount": {"state": "UNKNOWN", "parked": null, "tracking": null},
+    "camera": {"state": "UNKNOWN", "cooling": null, "temperature_c": null},
+    "power": {"state": "UNKNOWN", "ups_on_battery": null},
+    "network": {"state": "UNKNOWN", "primary_link": "Starlink", "active_link": null, "vpn": null, "lte_failover": null}
+  },
+  "safety": {"overall": "UNKNOWN", "reasons": []},
+  "pipeline": {"analytics": "UNKNOWN", "dashboard": "UNKNOWN", "backup": "UNKNOWN", "last_build": null}
+}

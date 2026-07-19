@@ -1,17 +1,26 @@
-@'
 :root {
   --dsg-border: #d5d9e0;
+  --dsg-primary: #3f51b5;
+  --dsg-primary-light: #6573c3;
+  --dsg-accent: #2196f3;
+  --dsg-surface: rgba(255, 255, 255, 0.72);
+  --dsg-surface-dark: rgba(30, 33, 41, 0.88);
+  --dsg-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
+/* Titoli */
+
 .md-typeset h1 {
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-weight: 750;
+  letter-spacing: -0.03em;
 }
 
 .md-typeset h2 {
   border-bottom: 1px solid var(--dsg-border);
-  padding-bottom: 0.25rem;
+  padding-bottom: 0.3rem;
 }
+
+/* Tabelle e riquadri */
 
 .md-typeset table:not([class]) {
   font-size: 0.85rem;
@@ -19,11 +28,186 @@
 
 .md-typeset .admonition,
 .md-typeset details {
-  border-radius: 0.35rem;
+  border-radius: 0.45rem;
 }
 
 .dsg-document-code {
   font-family: monospace;
   font-weight: 700;
 }
-'@ | Set-Content ".\docs\styles\extra.css" -Encoding UTF8
+
+/* Hero della Home */
+
+.dsg-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 3.2rem 2.4rem;
+  margin: 0 0 2rem;
+  border-radius: 1rem;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at top right, rgba(33, 150, 243, 0.5), transparent 42%),
+    linear-gradient(135deg, #172554 0%, #283593 48%, #0d47a1 100%);
+  box-shadow: var(--dsg-shadow);
+}
+
+.dsg-hero::after {
+  content: "";
+  position: absolute;
+  width: 22rem;
+  height: 22rem;
+  right: -8rem;
+  bottom: -12rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+}
+
+.dsg-hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 46rem;
+}
+
+.dsg-hero__eyebrow {
+  margin: 0 0 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.dsg-hero h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(2rem, 5vw, 3.7rem);
+  line-height: 1.05;
+}
+
+.dsg-hero__subtitle {
+  margin: 1rem 0 1.5rem;
+  max-width: 40rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  opacity: 0.92;
+}
+
+.dsg-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.dsg-hero .md-button {
+  margin: 0;
+}
+
+.dsg-hero .md-button:not(.md-button--primary) {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.65);
+}
+
+/* Card principali */
+
+.md-typeset .grid.cards > ul > li,
+.md-typeset .grid.cards > ol > li {
+  border-radius: 0.8rem;
+  border: 1px solid var(--dsg-border);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.md-typeset .grid.cards > ul > li:hover,
+.md-typeset .grid.cards > ol > li:hover {
+  transform: translateY(-4px);
+  border-color: var(--dsg-primary-light);
+  box-shadow: var(--dsg-shadow);
+}
+
+.md-typeset .grid.cards .lg {
+  color: var(--dsg-primary);
+}
+
+/* KPI */
+
+.dsg-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin: 1.2rem 0 2rem;
+}
+
+.dsg-kpi {
+  padding: 1.1rem;
+  border: 1px solid var(--dsg-border);
+  border-radius: 0.75rem;
+  background: var(--dsg-surface);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.dsg-kpi__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.dsg-kpi__value {
+  display: block;
+  font-size: 1.65rem;
+  font-weight: 750;
+  line-height: 1.1;
+  color: var(--dsg-primary);
+}
+
+.dsg-kpi__detail {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* Tema scuro */
+
+[data-md-color-scheme="slate"] {
+  --dsg-border: rgba(255, 255, 255, 0.12);
+  --dsg-surface: var(--dsg-surface-dark);
+}
+
+[data-md-color-scheme="slate"] .dsg-kpi__value,
+[data-md-color-scheme="slate"] .md-typeset .grid.cards .lg {
+  color: #82b1ff;
+}
+
+/* Mobile */
+
+@media screen and (max-width: 800px) {
+  .dsg-hero {
+    padding: 2.2rem 1.4rem;
+  }
+
+  .dsg-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .dsg-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dsg-hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dsg-hero__actions .md-button {
+    text-align: center;
+  }
+}

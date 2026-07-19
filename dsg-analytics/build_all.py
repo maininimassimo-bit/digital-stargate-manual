@@ -1,17 +1,5 @@
 #!/usr/bin/env python3
-"""Digital StarGate Analytics - Complete build pipeline.
-
-Pipeline order:
-1. Consolidate session history
-2. Build configuration summary
-3. Extract target exposure metrics from NINA logs
-4. Build aggregated targets dataset
-5. Build HTML dashboard
-
-The script stops immediately if any stage fails.
-Standard library only.
-"""
-
+"""Digital StarGate Analytics - Complete build pipeline."""
 from __future__ import annotations
 
 import argparse
@@ -34,24 +22,15 @@ def run_step(step: BuildStep, repo_root: Path) -> None:
             f"Required script not found for step '{step.name}': {step.script}"
         )
 
-    command = [
-        sys.executable,
-        str(step.script),
-        "--repo-root",
-        str(repo_root),
-    ]
+    command = [sys.executable, str(step.script), "--repo-root", str(repo_root)]
 
     print()
     print("=" * 78)
     print(f"STEP: {step.name}")
     print("=" * 78)
-    print("Command:", " ".join(f'"{part}"' if " " in part else part for part in command))
+    print("Command:", " ".join(f'"{p}"' if " " in p else p for p in command))
 
-    completed = subprocess.run(
-        command,
-        cwd=repo_root,
-        check=False,
-    )
+    completed = subprocess.run(command, cwd=repo_root, check=False)
 
     if completed.returncode != 0:
         raise RuntimeError(
@@ -65,38 +44,31 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Run the complete Digital StarGate Analytics build."
     )
-    parser.add_argument(
-        "--repo-root",
-        type=Path,
-        default=Path.cwd(),
-        help="Repository root; default is current directory.",
-    )
-    parser.add_argument(
-        "--skip-dashboard",
-        action="store_true",
-        help="Run all data-generation steps without rebuilding the dashboard.",
-    )
+    parser.add_argument("--repo-root", type=Path, default=Path.cwd())
+    parser.add_argument("--skip-dashboard", action="store_true")
+    parser.add_argument("--skip-homepage", action="store_true")
+    parser.add_argument("--skip-status", action="store_true")
     args = parser.parse_args()
 
-    repo_root = args.repo_root.resolve()
-    analytics_root = repo_root / "dsg-analytics"
+    root = args.repo_root.resolve()
+    analytics = root / "dsg-analytics"
 
     steps = [
         BuildStep(
             "Consolidate session history",
-            analytics_root / "history" / "consolidate_history.py",
+            analytics / "history" / "consolidate_history.py",
         ),
         BuildStep(
             "Build configuration summary",
-            analytics_root / "configuration" / "build_configuration_summary.py",
+            analytics / "configuration" / "build_configuration_summary.py",
         ),
         BuildStep(
             "Extract target metrics",
-            analytics_root / "target" / "extract_target_metrics.py",
+            analytics / "target" / "extract_target_metrics.py",
         ),
         BuildStep(
             "Build targets dataset",
-            analytics_root / "target" / "build_targets.py",
+            analytics / "target" / "build_targets.py",
         ),
     ]
 
@@ -104,50 +76,64 @@ def main() -> int:
         steps.append(
             BuildStep(
                 "Build dashboard",
-                analytics_root / "dashboard" / "build_dashboard.py",
+                analytics / "dashboard" / "build_dashboard.py",
             )
         )
 
-    started_at = datetime.now()
+    if not args.skip_status:
+        steps.append(
+            BuildStep(
+                "Build Observatory Status",
+                analytics / "status" / "build_observatory_status.py",
+            )
+        )
+
+    if not args.skip_homepage:
+        steps.append(
+            BuildStep(
+                "Update dynamic homepage",
+                analytics / "homepage" / "build_homepage.py",
+            )
+        )
+
+    started = datetime.now()
 
     print("=" * 78)
     print("DIGITAL STARGATE ANALYTICS - COMPLETE BUILD")
     print("=" * 78)
-    print(f"Repository: {repo_root}")
-    print(f"Started at: {started_at.isoformat(timespec='seconds')}")
+    print(f"Repository: {root}")
+    print(f"Started at: {started.isoformat(timespec='seconds')}")
     print(f"Python: {sys.executable}")
 
     try:
         for step in steps:
-            run_step(step, repo_root)
+            run_step(step, root)
     except (FileNotFoundError, RuntimeError) as exc:
         print()
         print("BUILD FAILED")
         print(str(exc))
         return 1
 
-    finished_at = datetime.now()
-    duration = finished_at - started_at
+    finished = datetime.now()
 
     print()
     print("=" * 78)
     print("BUILD COMPLETED SUCCESSFULLY")
     print("=" * 78)
-    print(f"Finished at: {finished_at.isoformat(timespec='seconds')}")
-    print(f"Duration: {duration}")
-    print()
-    print("Generated datasets:")
-    print(f"- {repo_root / 'data' / 'analytics' / 'history' / 'sessions.csv'}")
-    print(
-        f"- {repo_root / 'data' / 'analytics' / 'history' / 'configuration-summary.csv'}"
-    )
-    print(
-        f"- {repo_root / 'data' / 'analytics' / 'history' / 'target-exposures.csv'}"
-    )
-    print(f"- {repo_root / 'data' / 'analytics' / 'history' / 'targets.csv'}")
+    print(f"Finished at: {finished.isoformat(timespec='seconds')}")
+    print(f"Duration: {finished - started}")
 
     if not args.skip_dashboard:
-        print("Dashboard rebuild requested.")
+        print("Dashboard rebuilt.")
+
+    if not args.skip_status:
+        print(
+            "Observatory Status updated: "
+            f"{root / 'docs' / 'status' / 'index.md'}"
+        )
+
+    if not args.skip_homepage:
+        print(f"Homepage updated: {root / 'docs' / 'index.md'}")
 
     return 0
 
