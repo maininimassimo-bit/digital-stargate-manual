@@ -70,3 +70,40 @@ build:
   clean: true
 
   publish: github-pages
+
+pipeline:
+
+  - id: history
+    name: Consolidate session history
+    enabled: true
+    script: history/consolidate_history.py
+
+  - id: configuration
+    name: Build configuration summary
+    enabled: true
+    script: configuration/build_configuration_summary.py
+
+  - id: target-metrics
+    name: Extract target metrics
+    enabled: true
+    script: target/extract_target_metrics.py
+
+  - id: targets
+    name: Build targets dataset
+    enabled: true
+    script: target/build_targets.py
+
+  - id: dashboard
+    name: Build dashboard
+    enabled: true
+    script: dashboard/build_dashboard.py
+
+  - id: status
+    name: Build Observatory Status
+    enabled: true
+    script: status/build_observatory_status.py
+
+  - id: homepage
+    name: Update dynamic homepage
+    enabled: true
+    script: homepage/build_homepage.py
