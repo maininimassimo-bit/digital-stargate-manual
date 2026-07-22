@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "datasets": [
+    {
+      "name": "sessions",
+      "filename": "sessions.parquet",
+      "description": "One row for each consolidated observing session.",
+      "primary_key": [
+        "session_id"
+      ],
+      "columns": [
+        "schema_version",
+        "session_id",
+        "session_start",
+        "session_end",
+        "session_date",
+        "configuration_id",
+        "telescope",
+        "camera",
+        "guide_profile",
+        "duration_hours",
+        "integration_hours",
+        "integration_efficiency_pct",
+        "light_started",
+        "light_completed",
+        "light_failed",
+        "completion_pct",
+        "rms_ra_arcsec",
+        "rms_dec_arcsec",
+        "rms_total_arcsec",
+        "weather_safe_pct",
+        "autofocus_count",
+        "autofocus_failed",
+        "dither_count",
+        "dither_failed",
+        "severity",
+        "source_metrics_path",
+        "updated_at_utc"
+      ]
+    },
+    {
+      "name": "targets",
+      "filename": "targets.parquet",
+      "description": "Aggregated observing statistics by astronomical target.",
+      "primary_key": [
+        "target_name"
+      ],
+      "columns": [
+        "target_name",
+        "session_count",
+        "integration_hours",
+        "image_count",
+        "configurations",
+        "filters",
+        "first_acquisition",
+        "last_acquisition"
+      ]
+    },
+    {
+      "name": "equipment",
+      "filename": "equipment.parquet",
+      "description": "Aggregated utilization statistics by equipment item.",
+      "primary_key": [
+        "equipment_id"
+      ],
+      "columns": [
+        "equipment_id",
+        "equipment_name",
+        "equipment_type",
+        "session_count",
+        "usage_hours",
+        "target_count",
+        "last_used_at",
+        "usage_percent"
+      ]
+    },
+    {
+      "name": "weather",
+      "filename": "weather.parquet",
+      "description": "Environmental conditions associated with sessions.",
+      "primary_key": [
+        "session_id"
+      ],
+      "columns": [
+        "session_id",
+        "session_date",
+        "sqm",
+        "cloud_cover_percent",
+        "humidity_percent",
+        "wind_kmh",
+        "temperature_c",
+        "dew_point_c"
+      ]
+    },
+    {
+      "name": "quality",
+      "filename": "quality.parquet",
+      "description": "Image quality metrics associated with sessions.",
+      "primary_key": [
+        "session_id"
+      ],
+      "columns": [
+        "session_id",
+        "session_date",
+        "target_name",
+        "fwhm_arcsec",
+        "hfr_pixels",
+        "seeing_arcsec",
+        "star_count",
+        "quality_score"
+      ]
+    }
+  ]
+}

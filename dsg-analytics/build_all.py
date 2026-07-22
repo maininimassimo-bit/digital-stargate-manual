@@ -1,95 +1,53 @@
 #!/usr/bin/env python3
-"""Digital StarGate Analytics - Complete build pipeline."""
+"""Digital StarGate Analytics - Dependency-aware build pipeline."""
 
 from __future__ import annotations
 
 import argparse
 import importlib.util
+import logging
 import subprocess
 import sys
-from dataclasses import dataclass
-from datetime import datetime
 from pathlib import Path
 from types import ModuleType
 from typing import Any
 
+from orchestration.pipeline import (
+    PipelineOrchestrationError,
+    PipelinePlan,
+    PipelineStep,
+    create_pipeline_plan,
+)
+from orchestration.reporting import (
+    BuildExecutionReport,
+    BuildReportingError,
+    SkippedStepReport,
+    StepExecutionReport,
+    configure_build_logger,
+    create_build_id,
+    persist_build_report,
+)
 
-@dataclass(frozen=True)
-class BuildStep:
-    """Single pipeline step."""
 
-    identifier: str
-    name: str
-    script: Path
+def load_module_from_file(
+    module_name: str,
+    module_path: Path,
+) -> ModuleType:
+    """Load a Python module from a file path."""
 
-
-def run_step(step: BuildStep, repo_root: Path) -> None:
-    """Run a single build step and stop the pipeline on failure."""
-
-    if not step.script.is_file():
+    if not module_path.is_file():
         raise FileNotFoundError(
-            f"Required script not found for step "
-            f"'{step.identifier}' ({step.name}): {step.script}"
-        )
-
-    command = [
-        sys.executable,
-        str(step.script),
-        "--repo-root",
-        str(repo_root),
-    ]
-
-    print()
-    print("=" * 78)
-    print(f"STEP: {step.name}")
-    print(f"ID:   {step.identifier}")
-    print("=" * 78)
-    print(
-        "Command:",
-        " ".join(
-            f'"{part}"' if " " in part else part
-            for part in command
-        ),
-    )
-
-    completed = subprocess.run(
-        command,
-        cwd=repo_root,
-        check=False,
-    )
-
-    if completed.returncode != 0:
-        raise RuntimeError(
-            f"Step '{step.identifier}' failed "
-            f"with exit code {completed.returncode}."
-        )
-
-    print(f"Completed: {step.name}")
-
-
-def load_configuration_module(repo_root: Path) -> ModuleType:
-    """Load the Digital StarGate configuration loader module."""
-
-    loader_file = (
-        repo_root
-        / "dsg-analytics"
-        / "config"
-        / "loader.py"
-    )
-
-    if not loader_file.is_file():
-        raise FileNotFoundError(
-            f"Configuration loader not found: {loader_file}"
+            f"Configuration loader not found: {module_path}"
         )
 
     spec = importlib.util.spec_from_file_location(
-        "dsg_platform_loader",
-        loader_file,
+        module_name,
+        module_path,
     )
 
     if spec is None or spec.loader is None:
-        raise RuntimeError(
-            f"Unable to load configuration loader: {loader_file}"
+        raise ImportError(
+            f"Unable to load module from {module_path}"
         )
 
     module = importlib.util.module_from_spec(spec)
@@ -98,190 +56,323 @@ def load_configuration_module(repo_root: Path) -> ModuleType:
     return module
 
 
-def load_platform_configuration(
-    repo_root: Path,
+def load_configurations(
+    repository_root: Path,
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
-    """Load the platform configuration and configured pipeline."""
+    """Load and validate platform and pipeline configuration."""
 
-    module = load_configuration_module(repo_root)
-
-    load_function = getattr(
-        module,
-        "load_platform_config",
-        None,
+    loader = load_module_from_file(
+        "dsg_config_loader",
+        repository_root
+        / "dsg-analytics"
+        / "config"
+        / "loader.py",
     )
 
-    pipeline_function = getattr(
-        module,
-        "get_pipeline",
-        None,
+    platform_config = loader.load_platform_config(
+        repository_root
     )
+    pipeline_config = loader.load_pipeline_config(
+        repository_root
+    )
+    pipeline = loader.get_pipeline(pipeline_config)
 
-    if not callable(load_function):
-        raise RuntimeError(
-            "The configuration loader does not expose "
-            "'load_platform_config(repo_root)'."
-        )
-
-    if not callable(pipeline_function):
-        raise RuntimeError(
-            "The configuration loader does not expose "
-            "'get_pipeline(config)'."
-        )
-
-    config = load_function(repo_root)
-
-    if not isinstance(config, dict):
-        raise RuntimeError(
-            "The platform configuration loader returned "
-            "an invalid value."
-        )
-
-    pipeline = pipeline_function(config)
-
-    if not isinstance(pipeline, list):
-        raise RuntimeError(
-            "The pipeline loader returned an invalid value."
-        )
-
-    return config, pipeline
+    return platform_config, pipeline
 
 
-def build_steps_from_config(
-    analytics_root: Path,
-    pipeline: list[dict[str, Any]],
-    args: argparse.Namespace,
-) -> list[BuildStep]:
-    """Create executable build steps from platform.yml."""
-
-    skip_identifiers = set()
-
-    if args.skip_dashboard:
-        skip_identifiers.add("dashboard")
-
-    if args.skip_status:
-        skip_identifiers.add("status")
-
-    if args.skip_homepage:
-        skip_identifiers.add("homepage")
-
-    steps: list[BuildStep] = []
-    identifiers: set[str] = set()
-
-    for position, item in enumerate(pipeline, start=1):
-        if not isinstance(item, dict):
-            raise RuntimeError(
-                f"Pipeline item {position} must be a YAML mapping."
-            )
-
-        identifier = item.get("id")
-        name = item.get("name")
-        script = item.get("script")
-        enabled = item.get("enabled", True)
-
-        if not isinstance(identifier, str) or not identifier.strip():
-            raise RuntimeError(
-                f"Pipeline item {position} has an invalid or missing 'id'."
-            )
-
-        identifier = identifier.strip()
-
-        if identifier in identifiers:
-            raise RuntimeError(
-                f"Duplicate pipeline identifier: {identifier}"
-            )
-
-        identifiers.add(identifier)
-
-        if not isinstance(name, str) or not name.strip():
-            raise RuntimeError(
-                f"Pipeline step '{identifier}' "
-                "has an invalid or missing 'name'."
-            )
-
-        if not isinstance(script, str) or not script.strip():
-            raise RuntimeError(
-                f"Pipeline step '{identifier}' "
-                "has an invalid or missing 'script'."
-            )
-
-        if not isinstance(enabled, bool):
-            raise RuntimeError(
-                f"Pipeline step '{identifier}' "
-                "must use true or false for 'enabled'."
-            )
-
-        if not enabled:
-            print(
-                f"Skipping disabled pipeline step: "
-                f"{identifier} ({name})"
-            )
-            continue
-
-        if identifier in skip_identifiers:
-            print(
-                f"Skipping pipeline step requested "
-                f"from command line: {identifier}"
-            )
-            continue
-
-        script_path = analytics_root / Path(script)
-
-        steps.append(
-            BuildStep(
-                identifier=identifier,
-                name=name.strip(),
-                script=script_path,
-            )
-        )
-
-    if not steps:
-        raise RuntimeError(
-            "No enabled pipeline steps are available for execution."
-        )
-
-    return steps
-
-
-def main() -> int:
-    """Run the complete Digital StarGate Analytics pipeline."""
+def parse_arguments() -> argparse.Namespace:
+    """Parse command-line arguments."""
 
     parser = argparse.ArgumentParser(
         description=(
-            "Run the complete Digital StarGate Analytics build."
+            "Build all Digital StarGate analytics outputs with "
+            "dependency-aware orchestration and execution reports."
         )
     )
 
     parser.add_argument(
         "--repo-root",
         type=Path,
-        default=Path.cwd(),
+        default=Path("."),
+        help="Repository root directory.",
     )
     parser.add_argument(
         "--skip-dashboard",
         action="store_true",
-    )
-    parser.add_argument(
-        "--skip-homepage",
-        action="store_true",
+        help="Skip dashboard and dependent steps.",
     )
     parser.add_argument(
         "--skip-status",
         action="store_true",
+        help="Skip status and dependent steps.",
+    )
+    parser.add_argument(
+        "--skip-homepage",
+        action="store_true",
+        help="Skip homepage generation.",
+    )
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="Show debug-level console logging.",
     )
 
-    args = parser.parse_args()
+    return parser.parse_args()
 
-    root = args.repo_root.resolve()
-    analytics_root = root / "dsg-analytics"
+
+def get_platform_name(
+    configuration: dict[str, Any],
+) -> str:
+    """Return a human-readable platform name."""
+
+    platform = configuration.get("platform", {})
+
+    if isinstance(platform, dict):
+        name = platform.get("name")
+
+        if isinstance(name, str) and name.strip():
+            return name.strip()
+
+    return "Digital StarGate Analytics"
+
+
+def create_execution_report(
+    build_id: str,
+    platform_name: str,
+    repository_root: Path,
+    pipeline_count: int,
+    plan: PipelinePlan,
+) -> BuildExecutionReport:
+    """Create the initial in-memory build report."""
+
+    step_reports = [
+        StepExecutionReport(
+            identifier=step.identifier,
+            name=step.name,
+            script=str(step.script),
+            depends_on=list(step.depends_on),
+        )
+        for step in plan.steps
+    ]
+
+    skipped_reports = [
+        SkippedStepReport(
+            identifier=step.identifier,
+            name=step.name,
+            reason=step.reason,
+        )
+        for step in plan.skipped
+    ]
+
+    from datetime import datetime
+
+    return BuildExecutionReport(
+        build_id=build_id,
+        platform_name=platform_name,
+        repository_root=str(repository_root),
+        started_at=datetime.now().astimezone().isoformat(
+            timespec="seconds"
+        ),
+        finished_at=None,
+        duration_seconds=None,
+        status="running",
+        configured_steps=pipeline_count,
+        executable_steps=len(plan.steps),
+        steps=step_reports,
+        skipped_steps=skipped_reports,
+    )
+
+
+def log_pipeline_plan(
+    logger: logging.Logger,
+    configured_count: int,
+    plan: PipelinePlan,
+) -> None:
+    """Write the resolved execution plan to console and log file."""
+
+    logger.info("Configured steps: %s", configured_count)
+    logger.info("Executable steps: %s", len(plan.steps))
+    logger.info("Execution order:")
+
+    for position, step in enumerate(plan.steps, start=1):
+        dependencies = (
+            ", ".join(step.depends_on)
+            if step.depends_on
+            else "none"
+        )
+
+        logger.info(
+            "  %s. %s (depends on: %s)",
+            position,
+            step.identifier,
+            dependencies,
+        )
+
+    if plan.skipped:
+        logger.info("Skipped steps:")
+
+        for step in plan.skipped:
+            logger.info(
+                "  - %s: %s",
+                step.identifier,
+                step.reason,
+            )
+
+
+def run_step(
+    step: PipelineStep,
+    step_report: StepExecutionReport,
+    repository_root: Path,
+    logger: logging.Logger,
+) -> None:
+    """Run one pipeline step and update its execution report."""
+
+    if not step.script.is_file():
+        message = (
+            f"Required script not found for step "
+            f"'{step.identifier}' ({step.name}): {step.script}"
+        )
+        step_report.start()
+        step_report.finish(
+            status="failed",
+            exit_code=None,
+            error=message,
+        )
+        raise FileNotFoundError(message)
+
+    command = [
+        sys.executable,
+        str(step.script),
+        "--repo-root",
+        str(repository_root),
+    ]
+
+    logger.info("")
+    logger.info("=" * 72)
+    logger.info("STEP: %s", step.identifier)
+    logger.info("NAME: %s", step.name)
+    logger.info("SCRIPT: %s", step.script)
+    logger.info("=" * 72)
+    logger.debug("Command: %s", command)
+
+    step_report.start()
 
     try:
-        config, pipeline = load_platform_configuration(root)
+        completed = subprocess.run(
+            command,
+            cwd=repository_root,
+            check=False,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+        )
+    except OSError as exc:
+        step_report.finish(
+            status="failed",
+            exit_code=None,
+            error=str(exc),
+        )
+        raise
 
-        steps = build_steps_from_config(
+    if completed.stdout:
+        for line in completed.stdout.rstrip().splitlines():
+            logger.info(line)
+
+    if completed.returncode != 0:
+        message = (
+            f"Step '{step.identifier}' failed with exit code "
+            f"{completed.returncode}."
+        )
+        step_report.finish(
+            status="failed",
+            exit_code=completed.returncode,
+            error=message,
+        )
+        raise RuntimeError(message)
+
+    step_report.finish(
+        status="success",
+        exit_code=completed.returncode,
+    )
+
+    logger.info(
+        "STEP COMPLETED: %s | duration: %.3f s",
+        step.identifier,
+        step_report.duration_seconds or 0.0,
+    )
+
+
+def persist_report_safely(
+    repository_root: Path,
+    report: BuildExecutionReport,
+    logger: logging.Logger,
+) -> None:
+    """Persist report and log any persistence failure."""
+
+    try:
+        latest_path, history_path = persist_build_report(
+            repository_root,
+            report,
+        )
+    except BuildReportingError as exc:
+        logger.error("REPORTING ERROR")
+        logger.error("%s", exc)
+        return
+
+    logger.info("Latest report: %s", latest_path)
+    logger.info("Build history: %s", history_path)
+
+
+def main() -> int:
+    """Run the complete build pipeline."""
+
+    args = parse_arguments()
+
+    repository_root = args.repo_root.resolve()
+    analytics_root = repository_root / "dsg-analytics"
+    build_id = create_build_id()
+
+    try:
+        logger, log_path = configure_build_logger(
+            repository_root,
+            build_id,
+            verbose=args.verbose,
+        )
+    except (OSError, BuildReportingError) as exc:
+        print()
+        print("LOGGING ERROR")
+        print(str(exc))
+        return 1
+
+    logger.info("")
+    logger.info("=" * 72)
+    logger.info("Digital StarGate Analytics")
+    logger.info("RELEASE 4.2 BUILD PIPELINE")
+    logger.info("Build ID: %s", build_id)
+    logger.info("Repository root: %s", repository_root)
+    logger.info("Log file: %s", log_path)
+    logger.info("=" * 72)
+
+    try:
+        configuration, pipeline = load_configurations(
+            repository_root
+        )
+
+        requested_skips: set[str] = set()
+
+        if args.skip_dashboard:
+            requested_skips.add("dashboard")
+
+        if args.skip_status:
+            requested_skips.add("status")
+
+        if args.skip_homepage:
+            requested_skips.add("homepage")
+
+        plan = create_pipeline_plan(
             analytics_root=analytics_root,
             pipeline=pipeline,
-            args=args,
+            requested_skips=requested_skips,
         )
 
     except (
@@ -289,81 +380,81 @@ def main() -> int:
         RuntimeError,
         OSError,
         ImportError,
+        PipelineOrchestrationError,
     ) as exc:
-        print()
-        print("CONFIGURATION ERROR")
-        print(str(exc))
+        logger.error("")
+        logger.error("CONFIGURATION ERROR")
+        logger.error("%s", exc)
         return 1
 
-    except Exception as exc:
-        print()
-        print("CONFIGURATION ERROR")
-        print(
-            "Unexpected error while loading "
-            f"the platform configuration: {exc}"
-        )
-        return 1
+    platform_name = get_platform_name(configuration)
 
-    platform = config["platform"]
-    started = datetime.now()
+    report = create_execution_report(
+        build_id=build_id,
+        platform_name=platform_name,
+        repository_root=repository_root,
+        pipeline_count=len(pipeline),
+        plan=plan,
+    )
 
-    print("=" * 78)
-    print("DIGITAL STARGATE ANALYTICS - COMPLETE BUILD")
-    print("=" * 78)
-    print(f"Repository: {root}")
-    print(
-        f"Platform: "
-        f"{platform['name']} {platform['version']}"
-    )
-    print(f"Configured steps: {len(pipeline)}")
-    print(f"Executable steps: {len(steps)}")
-    print(
-        f"Started at: "
-        f"{started.isoformat(timespec='seconds')}"
-    )
-    print(f"Python: {sys.executable}")
+    logger.info("Platform: %s", platform_name)
+    log_pipeline_plan(logger, len(pipeline), plan)
 
     try:
-        for step in steps:
-            run_step(step, root)
+        for step, step_report in zip(
+            plan.steps,
+            report.steps,
+            strict=True,
+        ):
+            run_step(
+                step=step,
+                step_report=step_report,
+                repository_root=repository_root,
+                logger=logger,
+            )
 
-    except (FileNotFoundError, RuntimeError) as exc:
-        print()
-        print("BUILD FAILED")
-        print(str(exc))
+    except (
+        FileNotFoundError,
+        RuntimeError,
+        OSError,
+    ) as exc:
+        report.finish(
+            status="failed",
+            error=str(exc),
+        )
+
+        logger.error("")
+        logger.error("BUILD FAILED")
+        logger.error("%s", exc)
+        logger.error(
+            "Build duration: %.3f s",
+            report.duration_seconds or 0.0,
+        )
+
+        persist_report_safely(
+            repository_root,
+            report,
+            logger,
+        )
+
         return 1
 
-    finished = datetime.now()
+    report.finish(status="success")
 
-    print()
-    print("=" * 78)
-    print("BUILD COMPLETED SUCCESSFULLY")
-    print("=" * 78)
-    print(
-        f"Finished at: "
-        f"{finished.isoformat(timespec='seconds')}"
+    logger.info("")
+    logger.info("=" * 72)
+    logger.info("BUILD COMPLETED SUCCESSFULLY")
+    logger.info(
+        "Build duration: %.3f s",
+        report.duration_seconds or 0.0,
     )
-    print(f"Duration: {finished - started}")
+    logger.info("=" * 72)
 
-    executed_identifiers = {
-        step.identifier
-        for step in steps
-    }
-
-    if "dashboard" in executed_identifiers:
-        print("Dashboard rebuilt.")
-
-    if "status" in executed_identifiers:
-        print(
-            "Observatory Status updated: "
-            f"{root / 'docs' / 'status' / 'index.md'}"
-        )
-
-    if "homepage" in executed_identifiers:
-        print(
-            f"Homepage updated: "
-            f"{root / 'docs' / 'index.md'}"
-        )
+    persist_report_safely(
+        repository_root,
+        report,
+        logger,
+    )
 
     return 0
 

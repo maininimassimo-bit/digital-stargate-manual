@@ -1,0 +1,79 @@
+"""Warehouse architecture builder for Release 5.1 Sprint 1."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Any
+
+from .models import (
+    WarehouseMetadata,
+    WarehouseSchema,
+    default_warehouse_schema,
+)
+from .repository import WarehouseRepository
+from .validators import validate_schema
+
+
+class WarehouseBuildError(RuntimeError):
+    """Raised when warehouse initialization fails."""
+
+
+def _atomic_write_json(
+    path: Path,
+    payload: dict[str, Any],
+) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary_path = path.with_suffix(path.suffix + ".tmp")
+
+    try:
+        temporary_path.write_text(
+            json.dumps(
+                payload,
+                ensure_ascii=False,
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        temporary_path.replace(path)
+    except OSError as exc:
+        raise WarehouseBuildError(
+            f"Unable to write {path}: {exc}"
+        ) from exc
+
+
+def initialize_warehouse(
+    repository_root: Path,
+    schema: WarehouseSchema | None = None,
+) -> tuple[Path, Path]:
+    """
+    Initialize the warehouse architecture.
+
+    Sprint 1 writes schema and metadata only. Parquet datasets are
+    populated during Sprint 2.
+    """
+
+    effective_schema = schema or default_warehouse_schema()
+    validate_schema(effective_schema)
+
+    repository = WarehouseRepository(repository_root)
+    repository.warehouse_root.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    metadata = WarehouseMetadata.architecture_ready(
+        effective_schema
+    )
+
+    _atomic_write_json(
+        repository.schema_path,
+        effective_schema.to_dict(),
+    )
+    _atomic_write_json(
+        repository.metadata_path,
+        metadata.to_dict(),
+    )
+
+    return repository.schema_path, repository.metadata_path

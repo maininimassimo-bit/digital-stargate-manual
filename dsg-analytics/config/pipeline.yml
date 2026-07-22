@@ -1,0 +1,49 @@
+pipeline:
+  - id: history
+    name: Consolidate session history
+    script: history/consolidate_history.py
+    depends_on: []
+
+  - id: configuration
+    name: Build configuration summary
+    script: configuration/build_configuration_summary.py
+    depends_on:
+      - history
+
+  - id: target-metrics
+    name: Extract target metrics
+    script: target/extract_target_metrics.py
+    depends_on:
+      - history
+
+  - id: targets
+    name: Build targets dataset
+    script: target/build_targets.py
+    depends_on:
+      - target-metrics
+
+  - id: warehouse
+    name: Initialize Observatory Data Warehouse
+    script: warehouse/build_warehouse.py
+    depends_on:
+      - configuration
+      - targets
+
+  - id: dashboard
+    name: Build dashboard
+    script: dashboard/build_dashboard.py
+    depends_on:
+      - warehouse
+
+  - id: status
+    name: Build Observatory Status
+    script: status/build_observatory_status.py
+    depends_on:
+      - history
+
+  - id: homepage
+    name: Update dynamic homepage
+    script: homepage/build_homepage.py
+    depends_on:
+      - dashboard
+      - status

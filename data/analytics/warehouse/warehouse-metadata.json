@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "status": "partially_populated",
+  "created_at": "2026-07-22T23:43:00+02:00",
+  "updated_at": "2026-07-22T23:43:00+02:00",
+  "datasets": {
+    "sessions": {
+      "filename": "sessions.parquet",
+      "rows": 3,
+      "status": "populated",
+      "source": "data/analytics/history/sessions.csv",
+      "updated_at": "2026-07-22T23:43:00+02:00"
+    },
+    "targets": {
+      "filename": "targets.parquet",
+      "rows": 0,
+      "status": "not_populated"
+    },
+    "equipment": {
+      "filename": "equipment.parquet",
+      "rows": 0,
+      "status": "not_populated"
+    },
+    "weather": {
+      "filename": "weather.parquet",
+      "rows": 0,
+      "status": "not_populated"
+    },
+    "quality": {
+      "filename": "quality.parquet",
+      "rows": 0,
+      "status": "not_populated"
+    }
+  },
+  "source_files": [
+    "data/analytics/history/sessions.csv"
+  ],
+  "warnings": [
+    "Sprint 3.1 populates sessions.parquet only. Targets, equipment, weather and quality datasets remain pending."
+  ]
+}

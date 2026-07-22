@@ -1,0 +1,51 @@
+pipeline:
+
+  - id: history
+    name: Consolidate session history
+    enabled: true
+    script: history/consolidate_history.py
+    depends_on: []
+
+  - id: configuration
+    name: Build configuration summary
+    enabled: true
+    script: configuration/build_configuration_summary.py
+    depends_on:
+      - history
+
+  - id: target-metrics
+    name: Extract target metrics
+    enabled: true
+    script: target/extract_target_metrics.py
+    depends_on:
+      - history
+
+  - id: targets
+    name: Build targets dataset
+    enabled: true
+    script: target/build_targets.py
+    depends_on:
+      - target-metrics
+
+  - id: dashboard
+    name: Build dashboard
+    enabled: true
+    script: dashboard/build_dashboard.py
+    depends_on:
+      - configuration
+      - targets
+
+  - id: status
+    name: Build Observatory Status
+    enabled: true
+    script: status/build_observatory_status.py
+    depends_on:
+      - history
+
+  - id: homepage
+    name: Update dynamic homepage
+    enabled: true
+    script: homepage/build_homepage.py
+    depends_on:
+      - dashboard
+      - status

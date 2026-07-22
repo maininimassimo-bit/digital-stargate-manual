@@ -1,0 +1,112 @@
+2026-07-22 13:26:33,381 | INFO | 
+2026-07-22 13:26:33,381 | INFO | ========================================================================
+2026-07-22 13:26:33,382 | INFO | Digital StarGate Analytics
+2026-07-22 13:26:33,382 | INFO | RELEASE 4.2 BUILD PIPELINE
+2026-07-22 13:26:33,382 | INFO | Build ID: 20260722T132633+0200
+2026-07-22 13:26:33,382 | INFO | Repository root: C:\DigitalStarGate\digital-stargate-manual
+2026-07-22 13:26:33,382 | INFO | Log file: C:\DigitalStarGate\digital-stargate-manual\data\analytics\builds\logs\build-20260722T132633+0200.log
+2026-07-22 13:26:33,383 | INFO | ========================================================================
+2026-07-22 13:26:33,407 | INFO | Platform: Digital StarGate
+2026-07-22 13:26:33,407 | INFO | Configured steps: 7
+2026-07-22 13:26:33,407 | INFO | Executable steps: 7
+2026-07-22 13:26:33,407 | INFO | Execution order:
+2026-07-22 13:26:33,407 | INFO |   1. history (depends on: none)
+2026-07-22 13:26:33,408 | INFO |   2. configuration (depends on: history)
+2026-07-22 13:26:33,408 | INFO |   3. target-metrics (depends on: history)
+2026-07-22 13:26:33,408 | INFO |   4. targets (depends on: target-metrics)
+2026-07-22 13:26:33,408 | INFO |   5. dashboard (depends on: configuration, targets)
+2026-07-22 13:26:33,408 | INFO |   6. status (depends on: history)
+2026-07-22 13:26:33,408 | INFO |   7. homepage (depends on: dashboard, status)
+2026-07-22 13:26:33,408 | INFO | 
+2026-07-22 13:26:33,408 | INFO | ========================================================================
+2026-07-22 13:26:33,408 | INFO | STEP: history
+2026-07-22 13:26:33,408 | INFO | NAME: Consolidate session history
+2026-07-22 13:26:33,409 | INFO | SCRIPT: C:\DigitalStarGate\digital-stargate-manual\dsg-analytics\history\consolidate_history.py
+2026-07-22 13:26:33,409 | INFO | ========================================================================
+2026-07-22 13:26:33,409 | DEBUG | Command: ['C:\\DigitalStarGate\\digital-stargate-manual\\.venv\\Scripts\\python.exe', 'C:\\DigitalStarGate\\digital-stargate-manual\\dsg-analytics\\history\\consolidate_history.py', '--repo-root', 'C:\\DigitalStarGate\\digital-stargate-manual']
+2026-07-22 13:26:33,492 | INFO | Mapping configurazioni: C:\DigitalStarGate\digital-stargate-manual\data\analytics\configurations\session-configuration-map.csv | sessioni caricate: 3
+2026-07-22 13:26:33,492 | INFO | Registro attrezzatura: C:\DigitalStarGate\digital-stargate-manual\data\analytics\configurations\equipment-registry.csv | configurazioni caricate: 1
+2026-07-22 13:26:33,493 | INFO | Storico: C:\DigitalStarGate\digital-stargate-manual\data\analytics\history\sessions.csv
+2026-07-22 13:26:33,493 | INFO | Sessioni: 3 | Errori: 0 | Avvisi: 0 | Stato: OK
+2026-07-22 13:26:33,493 | INFO | STEP COMPLETED: history | duration: 0.084 s
+2026-07-22 13:26:33,493 | INFO | 
+2026-07-22 13:26:33,493 | INFO | ========================================================================
+2026-07-22 13:26:33,493 | INFO | STEP: configuration
+2026-07-22 13:26:33,493 | INFO | NAME: Build configuration summary
+2026-07-22 13:26:33,493 | INFO | SCRIPT: C:\DigitalStarGate\digital-stargate-manual\dsg-analytics\configuration\build_configuration_summary.py
+2026-07-22 13:26:33,494 | INFO | ========================================================================
+2026-07-22 13:26:33,494 | DEBUG | Command: ['C:\\DigitalStarGate\\digital-stargate-manual\\.venv\\Scripts\\python.exe', 'C:\\DigitalStarGate\\digital-stargate-manual\\dsg-analytics\\configuration\\build_configuration_summary.py', '--repo-root', 'C:\\DigitalStarGate\\digital-stargate-manual']
+2026-07-22 13:26:33,572 | INFO | Sessioni lette: 3
+2026-07-22 13:26:33,572 | INFO | Configurazioni riepilogate: 1
+2026-07-22 13:26:33,573 | INFO | CSV: C:\DigitalStarGate\digital-stargate-manual\data\analytics\history\configuration-summary.csv
+2026-07-22 13:26:33,573 | INFO | Markdown: C:\DigitalStarGate\digital-stargate-manual\docs\analytics\configuration-summary.md
+2026-07-22 13:26:33,573 | INFO | STEP COMPLETED: configuration | duration: 0.079 s
+2026-07-22 13:26:33,573 | INFO | 
+2026-07-22 13:26:33,574 | INFO | ========================================================================
+2026-07-22 13:26:33,574 | INFO | STEP: target-metrics
+2026-07-22 13:26:33,574 | INFO | NAME: Extract target metrics
+2026-07-22 13:26:33,574 | INFO | SCRIPT: C:\DigitalStarGate\digital-stargate-manual\dsg-analytics\target\extract_target_metrics.py
+2026-07-22 13:26:33,574 | INFO | ========================================================================
+2026-07-22 13:26:33,574 | DEBUG | Command: ['C:\\DigitalStarGate\\digital-stargate-manual\\.venv\\Scripts\\python.exe', 'C:\\DigitalStarGate\\digital-stargate-manual\\dsg-analytics\\target\\extract_target_metrics.py', '--repo-root', 'C:\\DigitalStarGate\\digital-stargate-manual']
+2026-07-22 13:26:33,758 | INFO | NINA logs scanned: 6
+2026-07-22 13:26:33,758 | INFO | Saved images parsed: 191
+2026-07-22 13:26:33,759 | INFO | Created: C:\DigitalStarGate\digital-stargate-manual\data\analytics\history\target-exposures.csv
+2026-07-22 13:26:33,759 | INFO | Created: C:\DigitalStarGate\digital-stargate-manual\data\analytics\history\target-summary.csv
+2026-07-22 13:26:33,759 | INFO | Created: C:\DigitalStarGate\digital-stargate-manual\data\analytics\history\target-metrics-report.txt
+2026-07-22 13:26:33,760 | INFO | STEP COMPLETED: target-metrics | duration: 0.186 s
+2026-07-22 13:26:33,760 | INFO | 
+2026-07-22 13:26:33,760 | INFO | ========================================================================
+2026-07-22 13:26:33,760 | INFO | STEP: targets
+2026-07-22 13:26:33,760 | INFO | NAME: Build targets dataset
+2026-07-22 13:26:33,760 | INFO | SCRIPT: C:\DigitalStarGate\digital-stargate-manual\dsg-analytics\target\build_targets.py
+2026-07-22 13:26:33,760 | INFO | ========================================================================
+2026-07-22 13:26:33,760 | DEBUG | Command: ['C:\\DigitalStarGate\\digital-stargate-manual\\.venv\\Scripts\\python.exe', 'C:\\DigitalStarGate\\digital-stargate-manual\\dsg-analytics\\target\\build_targets.py', '--repo-root', 'C:\\DigitalStarGate\\digital-stargate-manual']
+2026-07-22 13:26:33,847 | INFO | Exposure rows read: 191
+2026-07-22 13:26:33,847 | INFO | Aggregated target rows: 3
+2026-07-22 13:26:33,848 | INFO | Created: C:\DigitalStarGate\digital-stargate-manual\data\analytics\history\targets.csv
+2026-07-22 13:26:33,848 | INFO | Created: C:\DigitalStarGate\digital-stargate-manual\data\analytics\history\targets-report.txt
+2026-07-22 13:26:33,848 | INFO | STEP COMPLETED: targets | duration: 0.088 s
+2026-07-22 13:26:33,849 | INFO | 
+2026-07-22 13:26:33,849 | INFO | ========================================================================
+2026-07-22 13:26:33,849 | INFO | STEP: dashboard
+2026-07-22 13:26:33,849 | INFO | NAME: Build dashboard
+2026-07-22 13:26:33,849 | INFO | SCRIPT: C:\DigitalStarGate\digital-stargate-manual\dsg-analytics\dashboard\build_dashboard.py
+2026-07-22 13:26:33,849 | INFO | ========================================================================
+2026-07-22 13:26:33,849 | DEBUG | Command: ['C:\\DigitalStarGate\\digital-stargate-manual\\.venv\\Scripts\\python.exe', 'C:\\DigitalStarGate\\digital-stargate-manual\\dsg-analytics\\dashboard\\build_dashboard.py', '--repo-root', 'C:\\DigitalStarGate\\digital-stargate-manual']
+2026-07-22 13:26:33,930 | INFO | Sessioni lette: 3
+2026-07-22 13:26:33,930 | INFO | Configurazioni lette: 1
+2026-07-22 13:26:33,931 | INFO | Righe target lette: 3
+2026-07-22 13:26:33,931 | INFO | Dashboard v3.0: C:\DigitalStarGate\digital-stargate-manual\docs\analytics\dashboard.html
+2026-07-22 13:26:33,931 | INFO | STEP COMPLETED: dashboard | duration: 0.082 s
+2026-07-22 13:26:33,931 | INFO | 
+2026-07-22 13:26:33,931 | INFO | ========================================================================
+2026-07-22 13:26:33,931 | INFO | STEP: status
+2026-07-22 13:26:33,931 | INFO | NAME: Build Observatory Status
+2026-07-22 13:26:33,932 | INFO | SCRIPT: C:\DigitalStarGate\digital-stargate-manual\dsg-analytics\status\build_observatory_status.py
+2026-07-22 13:26:33,932 | INFO | ========================================================================
+2026-07-22 13:26:33,932 | DEBUG | Command: ['C:\\DigitalStarGate\\digital-stargate-manual\\.venv\\Scripts\\python.exe', 'C:\\DigitalStarGate\\digital-stargate-manual\\dsg-analytics\\status\\build_observatory_status.py', '--repo-root', 'C:\\DigitalStarGate\\digital-stargate-manual']
+2026-07-22 13:26:34,003 | INFO | Observatory Status aggiornato con successo.
+2026-07-22 13:26:34,003 | INFO | - Pagina: C:\DigitalStarGate\digital-stargate-manual\docs\status\index.md
+2026-07-22 13:26:34,004 | INFO | - Righe meteo: 0
+2026-07-22 13:26:34,004 | INFO | - Sessioni: 3
+2026-07-22 13:26:34,004 | INFO | STEP COMPLETED: status | duration: 0.072 s
+2026-07-22 13:26:34,005 | INFO | 
+2026-07-22 13:26:34,005 | INFO | ========================================================================
+2026-07-22 13:26:34,005 | INFO | STEP: homepage
+2026-07-22 13:26:34,005 | INFO | NAME: Update dynamic homepage
+2026-07-22 13:26:34,005 | INFO | SCRIPT: C:\DigitalStarGate\digital-stargate-manual\dsg-analytics\homepage\build_homepage.py
+2026-07-22 13:26:34,005 | INFO | ========================================================================
+2026-07-22 13:26:34,005 | DEBUG | Command: ['C:\\DigitalStarGate\\digital-stargate-manual\\.venv\\Scripts\\python.exe', 'C:\\DigitalStarGate\\digital-stargate-manual\\dsg-analytics\\homepage\\build_homepage.py', '--repo-root', 'C:\\DigitalStarGate\\digital-stargate-manual']
+2026-07-22 13:26:34,074 | INFO | Dynamic homepage updated successfully.
+2026-07-22 13:26:34,074 | INFO | Sessions: 3
+2026-07-22 13:26:34,075 | INFO | Integration hours: 31,83
+2026-07-22 13:26:34,075 | INFO | Completed images: 191
+2026-07-22 13:26:34,075 | INFO | Distinct targets: 1
+2026-07-22 13:26:34,075 | INFO | STEP COMPLETED: homepage | duration: 0.070 s
+2026-07-22 13:26:34,075 | INFO | 
+2026-07-22 13:26:34,075 | INFO | ========================================================================
+2026-07-22 13:26:34,076 | INFO | BUILD COMPLETED SUCCESSFULLY
+2026-07-22 13:26:34,076 | INFO | Build duration: 0.669 s
+2026-07-22 13:26:34,076 | INFO | ========================================================================
+2026-07-22 13:26:34,078 | INFO | Latest report: C:\DigitalStarGate\digital-stargate-manual\data\analytics\builds\latest-build.json
+2026-07-22 13:26:34,078 | INFO | Build history: C:\DigitalStarGate\digital-stargate-manual\data\analytics\builds\build-history.jsonl
