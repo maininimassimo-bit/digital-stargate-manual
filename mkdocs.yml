@@ -63,11 +63,26 @@ markdown_extensions:
 extra_css:
   - styles/extra.css
 
+not_in_nav: |
+  session-reports/**/report-sessione.md
+
 nav:
   - Home: index.md
 
   - Architettura:
       - Panoramica della piattaforma: architecture/index.md
+
+      - Decisioni architetturali:
+          - ADR-001 - Session Layer: architecture/ADR-001-Session-Layer.md
+          - ADR-002 - Analytics Quality Gates: architecture/ADR-002-Analytics-Quality-Gates.md
+          - ADR-003 - Warehouse Engine: architecture/ADR-003-Warehouse-Engine.md
+
+      - Architettura del Warehouse:
+          - Panoramica: architecture/warehouse/index.md
+
+      - Assessment tecnici:
+          - EA-001 - Ambiente e repository: architecture/assessments/EA-001-Environment-Repository-Assessment.md
+          - EA-002 - Repository e Warehouse: architecture/assessments/EA-002-Integrated-Repository-and-Warehouse-Assessment.md
 
   - Observatory:
       - Observatory Status: status/index.md
