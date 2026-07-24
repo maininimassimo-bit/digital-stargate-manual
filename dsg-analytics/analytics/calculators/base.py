@@ -9,6 +9,7 @@ from abc import ABC, abstractmethod
 import pandas as pd
 
 from analytics.context import PipelineContext
+from analytics.models import AnalyticsDataset
 
 
 class BaseCalculator(ABC):
@@ -22,8 +23,14 @@ class BaseCalculator(ABC):
     #: Output parquet filename
     output_filename: str = ""
 
+    #: Dataset definition handled by this calculator
+    dataset: AnalyticsDataset
+
     @abstractmethod
-    def run(self, context: PipelineContext) -> pd.DataFrame:
+    def run(
+        self,
+        context: PipelineContext,
+    ) -> pd.DataFrame:
         """
         Execute the calculator.
 
