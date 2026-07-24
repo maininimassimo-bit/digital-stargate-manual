@@ -45,7 +45,7 @@
       <div class="dsg-fact-icon">↗</div>
       <div>
         <span class="dsg-hero__fact-label">Release</span>
-        <span class="dsg-hero__fact-value">5.1.3</span>
+        <span class="dsg-hero__fact-value">6.0</span>
         <span class="dsg-hero__fact-detail">Landing Page &amp; UX</span>
       </div>
     </div>
@@ -157,25 +157,25 @@ Digital StarGate nasce dall’incontro tra passione astronomica, automazione e i
 
 <div class="dsg-kpi">
   <span class="dsg-kpi__label">Sessioni</span>
-  <span class="dsg-kpi__value">3</span>
+  <span class="dsg-kpi__value dsg-counter" data-value="3">0</span>
   <span class="dsg-kpi__detail">storico disponibile</span>
 </div>
 
 <div class="dsg-kpi">
   <span class="dsg-kpi__label">Integrazione</span>
-  <span class="dsg-kpi__value">31,83 h</span>
+  <span class="dsg-kpi__value dsg-counter" data-value="31.83" data-decimals="2" data-suffix=" h">0</span>
   <span class="dsg-kpi__detail">totale acquisito</span>
 </div>
 
 <div class="dsg-kpi">
   <span class="dsg-kpi__label">Immagini</span>
-  <span class="dsg-kpi__value">191</span>
+  <span class="dsg-kpi__value dsg-counter" data-value="191">0</span>
   <span class="dsg-kpi__detail">light completati</span>
 </div>
 
 <div class="dsg-kpi">
   <span class="dsg-kpi__label">Target</span>
-  <span class="dsg-kpi__value">1</span>
+  <span class="dsg-kpi__value dsg-counter" data-value="1">0</span>
   <span class="dsg-kpi__detail">oggetti distinti</span>
 </div>
 
@@ -195,6 +195,84 @@ Digital StarGate nasce dall’incontro tra passione astronomica, automazione e i
 | Stato | 🟢 GREEN |
 
 <!-- DSG:AUTO-HOMEPAGE:END -->
+
+<section class="dsg-showcase">
+  <div class="dsg-showcase__media" role="img" aria-label="Osservatorio Digital StarGate a Manciano"></div>
+
+  <div class="dsg-showcase__content">
+    <span class="dsg-section-kicker">ULTIMA OSSERVAZIONE</span>
+    <h2>LDN 1320</h2>
+    <p>
+      Ultima sessione registrata dal portale con acquisizione automatizzata,
+      controllo della guida e monitoraggio dei parametri operativi.
+    </p>
+
+    <div class="dsg-showcase__metrics">
+      <div>
+        <strong>10,50 h</strong>
+        <span>Integrazione</span>
+      </div>
+      <div>
+        <strong>63</strong>
+        <span>Light completati</span>
+      </div>
+      <div>
+        <strong>0,397″</strong>
+        <span>RMS totale</span>
+      </div>
+    </div>
+
+    <a class="md-button md-button--primary" href="./session-reports/">
+      Apri il report della sessione →
+    </a>
+  </div>
+</section>
+
+<section class="dsg-roadmap">
+  <div class="dsg-section-intro">
+    <span class="dsg-section-kicker">EVOLUZIONE DEL PROGETTO</span>
+    <h2>La roadmap di Digital StarGate</h2>
+  </div>
+
+  <div class="dsg-timeline">
+    <article class="dsg-timeline__item is-complete">
+      <span class="dsg-timeline__dot"></span>
+      <div>
+        <span class="dsg-timeline__date">2025</span>
+        <h3>Osservatorio operativo</h3>
+        <p>Completamento della cupola, dell’infrastruttura remota e delle prime sessioni automatizzate.</p>
+      </div>
+    </article>
+
+    <article class="dsg-timeline__item is-complete">
+      <span class="dsg-timeline__dot"></span>
+      <div>
+        <span class="dsg-timeline__date">2026 · Fase 1</span>
+        <h3>Manuale tecnico</h3>
+        <p>Consolidamento della documentazione, delle procedure operative e della governance tecnica.</p>
+      </div>
+    </article>
+
+    <article class="dsg-timeline__item is-current">
+      <span class="dsg-timeline__dot"></span>
+      <div>
+        <span class="dsg-timeline__date">2026 · Fase 2</span>
+        <h3>Analytics e session reporting</h3>
+        <p>Automazione dei KPI, controllo della qualità e pubblicazione dei report delle sessioni.</p>
+      </div>
+    </article>
+
+    <article class="dsg-timeline__item">
+      <span class="dsg-timeline__dot"></span>
+      <div>
+        <span class="dsg-timeline__date">Roadmap</span>
+        <h3>Osservatorio data-driven</h3>
+        <p>Evoluzione del portale verso monitoraggio avanzato, automazioni predittive e analisi storica.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
 
 ---
 
@@ -232,10 +310,32 @@ Digital StarGate nasce dall’incontro tra passione astronomica, automazione e i
 | Sistema | Digital StarGate |
 | Proprietario | Massimo Mainini |
 | Località | Manciano (GR) |
-| Release del portale | 5.1.3 |
+| Release del portale | 6.0 |
 | Pubblicazione | GitHub Pages |
 | Automazione | GitHub Actions |
 | Stato | In continua evoluzione |
+
+
+
+<div class="dsg-home-footer">
+  <div>
+    <img src="./assets/images/dsg-logo.svg" alt="" class="dsg-home-footer__logo">
+    <div>
+      <strong>Digital StarGate</strong>
+      <span>Osservatorio Astronomico Remoto · Manciano (GR)</span>
+    </div>
+  </div>
+
+  <div class="dsg-home-footer__links">
+    <a href="./chapters/01-introduzione/">Manuale</a>
+    <a href="./analytics/">Analytics</a>
+    <a href="./session-reports/">Sessioni</a>
+    <a href="./status/">Stato</a>
+  </div>
+
+  <span class="dsg-home-footer__release">Release 6.0</span>
+</div>
+
 
 !!! warning "Dati da validare"
 
