@@ -200,18 +200,28 @@ def default_warehouse_schema() -> WarehouseSchema:
                 name="weather",
                 filename="weather.parquet",
                 description=(
-                    "Environmental conditions associated with sessions."
+                    "Weather observations acquired from the observatory "
+                    "environment monitoring system."
                 ),
-                primary_key=("session_id",),
+                primary_key=(
+                    "timestamp",
+                    "source",
+                ),
                 columns=(
-                    "session_id",
-                    "session_date",
-                    "sqm",
-                    "cloud_cover_percent",
-                    "humidity_percent",
-                    "wind_kmh",
+                    "timestamp",
+                    "source",
                     "temperature_c",
+                    "humidity_pct",
                     "dew_point_c",
+                    "wind_speed_kmh",
+                    "wind_gust_kmh",
+                    "cloud_cover_pct",
+                    "rain_rate_mm_h",
+                    "pressure_hpa",
+                    "sqm_mag_arcsec2",
+                    "sky_temperature_c",
+                    "safe",
+                    "notes",
                 ),
             ),
             DatasetDefinition(

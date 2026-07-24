@@ -48,6 +48,7 @@ class WarehouseBuilderTests(unittest.TestCase):
             targets_path,
             equipment_path,
             quality_path,
+            weather_path,
         ) = build_warehouse(self.temp_dir)
 
         #
@@ -61,6 +62,7 @@ class WarehouseBuilderTests(unittest.TestCase):
         self.assertTrue(targets_path.exists())
         self.assertTrue(equipment_path.exists())
         self.assertTrue(quality_path.exists())
+        self.assertTrue(weather_path.exists())
 
         #
         # JSON validity
@@ -87,11 +89,15 @@ class WarehouseBuilderTests(unittest.TestCase):
         targets = pd.read_parquet(targets_path)
         equipment = pd.read_parquet(equipment_path)
         quality = pd.read_parquet(quality_path)
+        weather = pd.read_parquet(weather_path)
 
         self.assertGreater(len(sessions), 0)
         self.assertGreater(len(targets), 0)
         self.assertGreater(len(equipment), 0)
         self.assertGreater(len(quality), 0)
+
+        # Weather può anche essere vuoto (CSV con sola intestazione)
+        self.assertGreaterEqual(len(weather), 0)
 
         #
         # Metadata consistency
@@ -118,6 +124,11 @@ class WarehouseBuilderTests(unittest.TestCase):
         )
 
         self.assertEqual(
+            metadata["datasets"]["weather"]["rows"],
+            len(weather),
+        )
+
+        self.assertEqual(
             metadata["datasets"]["sessions"]["status"],
             "populated",
         )
@@ -138,13 +149,32 @@ class WarehouseBuilderTests(unittest.TestCase):
         )
 
         self.assertEqual(
+            metadata["datasets"]["weather"]["status"],
+            "populated",
+        )
+
+        #
+        # Warehouse completed
+        #
+
+        self.assertEqual(
             metadata["status"],
-            "partially_populated",
+            "populated",
+        )
+
+        self.assertEqual(
+            metadata["warnings"],
+            [],
         )
 
         self.assertEqual(
             len(metadata["datasets"]["quality"]["source"]),
             2,
+        )
+
+        self.assertGreaterEqual(
+            len(metadata["datasets"]["weather"]["source"]),
+            1,
         )
 
 

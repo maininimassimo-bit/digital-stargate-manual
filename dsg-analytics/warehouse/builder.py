@@ -12,6 +12,7 @@ from .datasets import (
     build_quality_dataset,
     build_sessions_dataset,
     build_targets_dataset,
+    build_weather_dataset,
 )
 from .models import (
     WarehouseMetadata,
@@ -127,7 +128,7 @@ def _relative_source_path(
 
 def build_warehouse(
     repository_root: Path,
-) -> tuple[Path, Path, Path, Path, Path, Path]:
+) -> tuple[Path, Path, Path, Path, Path, Path, Path]:
     """Initialize and populate the current warehouse datasets."""
 
     schema_path, metadata_path = initialize_warehouse(
@@ -152,6 +153,10 @@ def build_warehouse(
 
     quality_path, quality_rows, quality_sources = (
         build_quality_dataset(repository)
+    )
+
+    weather_path, weather_rows, weather_source = (
+        build_weather_dataset(repository)
     )
 
     metadata = repository.metadata()
@@ -180,7 +185,12 @@ def build_warehouse(
         for source_path in quality_sources
     ]
 
-    metadata["status"] = "partially_populated"
+    relative_weather_source = _relative_source_path(
+        repository,
+        weather_source,
+    )
+
+    metadata["status"] = "populated"
     metadata["updated_at"] = now
 
     metadata["source_files"] = [
@@ -188,16 +198,10 @@ def build_warehouse(
         relative_targets_source,
         relative_equipment_source,
         *relative_quality_sources,
+        relative_weather_source,
     ]
 
-    metadata["warnings"] = [
-        (
-            "Release 5.2 populates sessions.parquet, "
-            "targets.parquet, equipment.parquet and "
-            "quality.parquet. The weather dataset "
-            "remains pending."
-        )
-    ]
+    metadata["warnings"] = []
 
     metadata["datasets"]["sessions"].update(
         {
@@ -235,6 +239,15 @@ def build_warehouse(
         }
     )
 
+    metadata["datasets"]["weather"].update(
+        {
+            "rows": weather_rows,
+            "status": "populated",
+            "source": relative_weather_source,
+            "updated_at": now,
+        }
+    )
+
     _atomic_write_json(
         metadata_path,
         metadata,
@@ -247,4 +260,5 @@ def build_warehouse(
         targets_path,
         equipment_path,
         quality_path,
+        weather_path,
     )
