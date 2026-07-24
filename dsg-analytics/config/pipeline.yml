@@ -30,8 +30,8 @@ pipeline:
       - targets
 
   - id: dashboard
-    name: Build dashboard
-    script: dashboard/build_dashboard.py
+    name: Build native MkDocs dashboard v3.1
+    script: dashboard/build_dashboard_v31.py
     depends_on:
       - warehouse
 
