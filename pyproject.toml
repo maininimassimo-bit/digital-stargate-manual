@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "digital-stargate-analytics"
+version = "0.1.0"
+description = "Warehouse and analytics modules for Digital StarGate."
+requires-python = ">=3.13"
+dependencies = [
+    "pandas>=2.2",
+    "pyarrow>=18",
+]
+
+[tool.setuptools]
+package-dir = {"" = "dsg-analytics"}
+
+[tool.setuptools.packages.find]
+where = ["dsg-analytics"]
+include = [
+    "warehouse*",
+    "analytics*",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "dsg-analytics/warehouse/Tests",
+    "dsg-analytics/analytics/Tests",
+]
