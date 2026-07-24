@@ -1,0 +1,99 @@
+/* Digital StarGate Analytics - Material integration layer */
+
+.dsg-dashboard-shell {
+  margin-top: 1rem;
+}
+
+.dsg-dashboard-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: .9rem;
+}
+
+.dsg-dashboard-status {
+  color: var(--md-default-fg-color--light);
+  font-size: .85rem;
+}
+
+.dsg-dashboard-status::before {
+  content: "";
+  display: inline-block;
+  width: .55rem;
+  height: .55rem;
+  margin-right: .45rem;
+  border-radius: 50%;
+  background: var(--md-accent-fg-color);
+  box-shadow: 0 0 .7rem color-mix(in srgb, var(--md-accent-fg-color) 70%, transparent);
+}
+
+.dsg-analytics-frame {
+  display: block;
+  width: 100%;
+  min-height: 2400px;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .7rem;
+  background: var(--md-default-bg-color);
+  box-shadow: var(--dsg-shadow-soft);
+}
+
+.dsg-analytics-links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.4rem 0 2rem;
+}
+
+.dsg-analytics-link-card {
+  display: block;
+  min-height: 8rem;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .7rem;
+  color: var(--md-default-fg-color);
+  background: var(--md-default-bg-color);
+  box-shadow: var(--dsg-shadow-soft);
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+.dsg-analytics-link-card:hover {
+  border-color: var(--md-accent-fg-color);
+  color: var(--md-default-fg-color);
+  transform: translateY(-2px);
+  box-shadow: var(--dsg-shadow);
+}
+
+.dsg-analytics-link-card strong,
+.dsg-analytics-link-card span {
+  display: block;
+}
+
+.dsg-analytics-link-card strong {
+  margin-bottom: .35rem;
+  color: var(--md-primary-fg-color);
+  font-size: 1rem;
+}
+
+.dsg-analytics-link-card span {
+  color: var(--md-default-fg-color--light);
+  font-size: .82rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .dsg-analytics-links {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .dsg-dashboard-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dsg-analytics-frame {
+    min-height: 3200px;
+  }
+}
