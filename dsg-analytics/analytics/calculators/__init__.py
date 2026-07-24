@@ -1,7 +1,9 @@
-from analytics.calculators.base import BaseCalculator
-from analytics.calculators.sessions import SessionCalculator
+from .base import BaseCalculator
+from .sessions import SessionCalculator
+from .registry import get_calculators
 
 __all__ = [
     "BaseCalculator",
     "SessionCalculator",
+    "get_calculators",
 ]

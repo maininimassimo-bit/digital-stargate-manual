@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from analytics.calculators import SessionCalculator
+from analytics.calculators import get_calculators
 from analytics.repository import AnalyticsRepository
 
 
@@ -22,9 +22,7 @@ class AnalyticsBuilder:
         self.repository = AnalyticsRepository(warehouse_directory)
         self.output_directory = Path(output_directory)
 
-        self.calculators = (
-            SessionCalculator(),
-        )
+        self.calculators = get_calculators()
 
     def _load_datasets(self) -> dict[str, pd.DataFrame]:
 
