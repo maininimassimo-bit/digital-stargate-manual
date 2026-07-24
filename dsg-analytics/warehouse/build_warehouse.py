@@ -20,7 +20,10 @@ from warehouse.builder import (
     build_warehouse,
 )
 from warehouse.datasets import (
+    EquipmentDatasetBuildError,
+    QualityDatasetBuildError,
     SessionsDatasetBuildError,
+    TargetsDatasetBuildError,
 )
 from warehouse.validators import (
     WarehouseValidationError,
@@ -58,31 +61,50 @@ def main() -> int:
             schema_path,
             metadata_path,
             sessions_path,
+            targets_path,
+            equipment_path,
+            quality_path,
         ) = build_warehouse(repository_root)
+
     except (
         WarehouseBuildError,
         WarehouseValidationError,
         SessionsDatasetBuildError,
+        TargetsDatasetBuildError,
+        EquipmentDatasetBuildError,
+        QualityDatasetBuildError,
         FileNotFoundError,
         ImportError,
         OSError,
         ValueError,
     ) as exc:
+        print()
         print("WAREHOUSE BUILD ERROR")
+        print()
         print(str(exc))
         return 1
 
-    print(
-        "Observatory Data Warehouse build completed."
-    )
-    print(f"- Schema: {schema_path}")
-    print(f"- Metadata: {metadata_path}")
-    print(f"- Sessions: {sessions_path}")
-    print("- Sessions status: populated")
-    print(
-        "- Remaining datasets: "
-        "targets, equipment, weather, quality"
-    )
+    print()
+    print("Observatory Data Warehouse build completed.")
+    print()
+
+    print(f"Schema:     {schema_path}")
+    print(f"Metadata:   {metadata_path}")
+    print(f"Sessions:   {sessions_path}")
+    print(f"Targets:    {targets_path}")
+    print(f"Equipment:  {equipment_path}")
+    print(f"Quality:    {quality_path}")
+
+    print()
+    print("Datasets populated:")
+    print("  ✓ sessions")
+    print("  ✓ targets")
+    print("  ✓ equipment")
+    print("  ✓ quality")
+
+    print()
+    print("Pending datasets:")
+    print("  • weather")
 
     return 0
 

@@ -174,18 +174,26 @@ def default_warehouse_schema() -> WarehouseSchema:
                 name="equipment",
                 filename="equipment.parquet",
                 description=(
-                    "Aggregated utilization statistics by equipment item."
+                    "Aggregated utilization and performance statistics "
+                    "for each acquisition configuration."
                 ),
-                primary_key=("equipment_id",),
+                primary_key=("configuration_id",),
                 columns=(
-                    "equipment_id",
-                    "equipment_name",
-                    "equipment_type",
+                    "configuration_id",
+                    "configuration_name",
+                    "telescope",
+                    "camera",
                     "session_count",
-                    "usage_hours",
-                    "target_count",
-                    "last_used_at",
-                    "usage_percent",
+                    "total_duration_hours",
+                    "total_integration_hours",
+                    "integration_efficiency_pct",
+                    "light_started",
+                    "light_completed",
+                    "light_failed",
+                    "average_completion_pct",
+                    "average_rms_total_arcsec",
+                    "first_session_start",
+                    "last_session_end",
                 ),
             ),
             DatasetDefinition(
@@ -210,18 +218,27 @@ def default_warehouse_schema() -> WarehouseSchema:
                 name="quality",
                 filename="quality.parquet",
                 description=(
-                    "Image quality metrics associated with sessions."
+                    "Aggregated image quality metrics grouped by session, "
+                    "target and filter."
                 ),
-                primary_key=("session_id",),
+                primary_key=(
+                    "session_id",
+                    "target_name",
+                    "filter_name",
+                ),
                 columns=(
                     "session_id",
-                    "session_date",
                     "target_name",
-                    "fwhm_arcsec",
-                    "hfr_pixels",
-                    "seeing_arcsec",
-                    "star_count",
-                    "quality_score",
+                    "filter_name",
+                    "image_count",
+                    "average_fwhm",
+                    "minimum_fwhm",
+                    "maximum_fwhm",
+                    "fwhm_stddev",
+                    "average_camera_temperature_c",
+                    "integration_hours",
+                    "first_timestamp",
+                    "last_timestamp",
                 ),
             ),
         ),

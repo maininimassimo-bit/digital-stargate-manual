@@ -1,25 +1,29 @@
 {
   "schema_version": 1,
   "status": "partially_populated",
-  "created_at": "2026-07-22T23:43:00+02:00",
-  "updated_at": "2026-07-22T23:43:00+02:00",
+  "created_at": "2026-07-23T17:17:22+02:00",
+  "updated_at": "2026-07-23T17:17:23+02:00",
   "datasets": {
     "sessions": {
       "filename": "sessions.parquet",
       "rows": 3,
       "status": "populated",
       "source": "data/analytics/history/sessions.csv",
-      "updated_at": "2026-07-22T23:43:00+02:00"
+      "updated_at": "2026-07-23T17:17:23+02:00"
     },
     "targets": {
       "filename": "targets.parquet",
-      "rows": 0,
-      "status": "not_populated"
+      "rows": 3,
+      "status": "populated",
+      "source": "data/analytics/history/targets.csv",
+      "updated_at": "2026-07-23T17:17:23+02:00"
     },
     "equipment": {
       "filename": "equipment.parquet",
-      "rows": 0,
-      "status": "not_populated"
+      "rows": 1,
+      "status": "populated",
+      "source": "data/analytics/history/configuration-summary.csv",
+      "updated_at": "2026-07-23T17:17:23+02:00"
     },
     "weather": {
       "filename": "weather.parquet",
@@ -28,14 +32,23 @@
     },
     "quality": {
       "filename": "quality.parquet",
-      "rows": 0,
-      "status": "not_populated"
+      "rows": 3,
+      "status": "populated",
+      "source": [
+        "data/analytics/history/target-exposures.csv",
+        "data/analytics/history/target-summary.csv"
+      ],
+      "updated_at": "2026-07-23T17:17:23+02:00"
     }
   },
   "source_files": [
-    "data/analytics/history/sessions.csv"
+    "data/analytics/history/sessions.csv",
+    "data/analytics/history/targets.csv",
+    "data/analytics/history/configuration-summary.csv",
+    "data/analytics/history/target-exposures.csv",
+    "data/analytics/history/target-summary.csv"
   ],
   "warnings": [
-    "Sprint 3.1 populates sessions.parquet only. Targets, equipment, weather and quality datasets remain pending."
+    "Release 5.2 populates sessions.parquet, targets.parquet, equipment.parquet and quality.parquet. The weather dataset remains pending."
   ]
 }

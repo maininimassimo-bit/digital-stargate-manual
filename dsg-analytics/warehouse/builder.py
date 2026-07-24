@@ -8,6 +8,8 @@ from pathlib import Path
 from typing import Any
 
 from .datasets import (
+    build_equipment_dataset,
+    build_quality_dataset,
     build_sessions_dataset,
     build_targets_dataset,
 )
@@ -125,7 +127,7 @@ def _relative_source_path(
 
 def build_warehouse(
     repository_root: Path,
-) -> tuple[Path, Path, Path, Path]:
+) -> tuple[Path, Path, Path, Path, Path, Path]:
     """Initialize and populate the current warehouse datasets."""
 
     schema_path, metadata_path = initialize_warehouse(
@@ -136,18 +138,20 @@ def build_warehouse(
         repository_root
     )
 
-    #
-    # Build sessions
-    #
     sessions_path, session_rows, sessions_source = (
         build_sessions_dataset(repository)
     )
 
-    #
-    # Build targets
-    #
     targets_path, target_rows, targets_source = (
         build_targets_dataset(repository)
+    )
+
+    equipment_path, equipment_rows, equipment_source = (
+        build_equipment_dataset(repository)
+    )
+
+    quality_path, quality_rows, quality_sources = (
+        build_quality_dataset(repository)
     )
 
     metadata = repository.metadata()
@@ -163,25 +167,38 @@ def build_warehouse(
         targets_source,
     )
 
+    relative_equipment_source = _relative_source_path(
+        repository,
+        equipment_source,
+    )
+
+    relative_quality_sources = [
+        _relative_source_path(
+            repository,
+            source_path,
+        )
+        for source_path in quality_sources
+    ]
+
     metadata["status"] = "partially_populated"
     metadata["updated_at"] = now
 
     metadata["source_files"] = [
         relative_sessions_source,
         relative_targets_source,
+        relative_equipment_source,
+        *relative_quality_sources,
     ]
 
     metadata["warnings"] = [
         (
-            "Sprint 3.2 populates sessions.parquet and "
-            "targets.parquet. Equipment, weather and quality "
-            "datasets remain pending."
+            "Release 5.2 populates sessions.parquet, "
+            "targets.parquet, equipment.parquet and "
+            "quality.parquet. The weather dataset "
+            "remains pending."
         )
     ]
 
-    #
-    # sessions metadata
-    #
     metadata["datasets"]["sessions"].update(
         {
             "rows": session_rows,
@@ -191,14 +208,29 @@ def build_warehouse(
         }
     )
 
-    #
-    # targets metadata
-    #
     metadata["datasets"]["targets"].update(
         {
             "rows": target_rows,
             "status": "populated",
             "source": relative_targets_source,
+            "updated_at": now,
+        }
+    )
+
+    metadata["datasets"]["equipment"].update(
+        {
+            "rows": equipment_rows,
+            "status": "populated",
+            "source": relative_equipment_source,
+            "updated_at": now,
+        }
+    )
+
+    metadata["datasets"]["quality"].update(
+        {
+            "rows": quality_rows,
+            "status": "populated",
+            "source": relative_quality_sources,
             "updated_at": now,
         }
     )
@@ -213,4 +245,6 @@ def build_warehouse(
         metadata_path,
         sessions_path,
         targets_path,
+        equipment_path,
+        quality_path,
     )
