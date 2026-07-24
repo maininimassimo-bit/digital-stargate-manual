@@ -3,6 +3,7 @@ from pathlib import Path
 import pandas as pd
 
 from analytics.builder import AnalyticsBuilder
+from analytics.context import PipelineContext
 
 
 def test_builder_initialization(tmp_path: Path):
@@ -43,13 +44,21 @@ def test_builder_returns_generated_files(tmp_path: Path, monkeypatch):
         }
     )
 
+    empty = pd.DataFrame()
+
     monkeypatch.setattr(
         builder,
         "_load_datasets",
-        lambda: {},
+        lambda: PipelineContext(
+            sessions=empty,
+            targets=empty,
+            equipment=empty,
+            quality=empty,
+            weather=empty,
+        ),
     )
 
-    builder.calculators[0].run = lambda warehouse: dataframe
+    builder.calculators[0].run = lambda context: dataframe
 
     generated = builder.build()
 

@@ -8,6 +8,8 @@ from abc import ABC, abstractmethod
 
 import pandas as pd
 
+from analytics.context import PipelineContext
+
 
 class BaseCalculator(ABC):
     """
@@ -21,14 +23,14 @@ class BaseCalculator(ABC):
     output_filename: str = ""
 
     @abstractmethod
-    def run(self, warehouse: dict[str, pd.DataFrame]) -> pd.DataFrame:
+    def run(self, context: PipelineContext) -> pd.DataFrame:
         """
         Execute the calculator.
 
         Parameters
         ----------
-        warehouse
-            Dictionary containing Warehouse datasets.
+        context
+            Shared Analytics pipeline context containing Warehouse datasets.
 
         Returns
         -------
