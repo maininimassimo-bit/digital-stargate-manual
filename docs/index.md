@@ -1,95 +1,140 @@
 <div class="dsg-hero">
+  <div class="dsg-hero__overlay"></div>
+
   <div class="dsg-hero__content">
+    <p class="dsg-hero__eyebrow">
+      OSSERVATORIO ASTRONOMICO REMOTO <span>•</span> MANCIANO (GR)
+    </p>
 
-  <p class="dsg-hero__eyebrow">
-    OSSERVATORIO REMOTO • MANCIANO (GR)
-  </p>
+    <h1>Digital StarGate</h1>
 
-# Digital StarGate
+    <p class="dsg-hero__tagline">
+      Astronomia, automazione e ingegneria dei dati
+    </p>
 
-### Portale tecnico dell'Osservatorio Astronomico Remoto
+    <p class="dsg-hero__subtitle">
+      Digital StarGate è il portale tecnico dell’Osservatorio Astronomico Remoto
+      di Manciano: una piattaforma che integra documentazione, automazione,
+      controllo operativo, analisi delle sessioni osservative e gestione
+      dell’infrastruttura.
+    </p>
 
-Una piattaforma unica che integra documentazione tecnica, automazione dell'osservatorio, analisi delle sessioni osservative e gestione dell'infrastruttura.
+    <div class="dsg-hero__actions">
+      <a class="md-button md-button--primary" href="./chapters/01-introduzione/">
+        <span class="dsg-button-icon">▣</span>
+        Esplora il Manuale
+        <span aria-hidden="true">→</span>
+      </a>
 
-<div class="dsg-hero__actions">
+      <a class="md-button" href="./analytics/">
+        <span class="dsg-button-icon">▥</span>
+        Apri Analytics
+        <span aria-hidden="true">→</span>
+      </a>
 
-<a class="md-button md-button--primary" href="chapters/01-introduzione.md">
-📖 Manuale Tecnico
-</a>
+      <a class="md-button" href="./session-reports/">
+        <span class="dsg-button-icon">⌁</span>
+        Sessioni osservative
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
 
-<a class="md-button" href="analytics/index.md">
-📊 Portale Analytics
-</a>
+  <div class="dsg-hero__facts">
+    <div class="dsg-hero__fact">
+      <div class="dsg-fact-icon">↗</div>
+      <div>
+        <span class="dsg-hero__fact-label">Release</span>
+        <span class="dsg-hero__fact-value">5.1.3</span>
+        <span class="dsg-hero__fact-detail">Landing Page &amp; UX</span>
+      </div>
+    </div>
 
-</div>
+    <div class="dsg-hero__fact">
+      <div class="dsg-fact-icon">☁</div>
+      <div>
+        <span class="dsg-hero__fact-label">GitHub Pages</span>
+        <span class="dsg-hero__fact-value">Online</span>
+        <span class="dsg-hero__fact-detail">Pubblicazione automatica</span>
+      </div>
+    </div>
 
+    <div class="dsg-hero__fact">
+      <div class="dsg-fact-icon">⌁</div>
+      <div>
+        <span class="dsg-hero__fact-label">Analytics</span>
+        <span class="dsg-hero__fact-value">Attivo</span>
+        <span class="dsg-hero__fact-detail">Elaborazione automatica</span>
+      </div>
+    </div>
+
+    <div class="dsg-hero__fact">
+      <div class="dsg-fact-icon">⌂</div>
+      <div>
+        <span class="dsg-hero__fact-label">Osservatorio</span>
+        <span class="dsg-hero__fact-value">Remoto</span>
+        <span class="dsg-hero__fact-detail">Manciano (GR)</span>
+      </div>
+    </div>
   </div>
 </div>
 
----
+<section class="dsg-section-intro">
+  <span class="dsg-section-kicker">ESPLORA LA PIATTAFORMA</span>
+  <h2>Un unico portale per documentazione, dati e operazioni</h2>
+</section>
 
-# Esplora il Portale
+<div class="grid cards dsg-feature-grid" markdown>
 
-<div class="grid cards" markdown>
+- :material-book-open-page-variant:{ .lg .middle } **Manuale tecnico**
 
-- :material-book-open-page-variant:{ .lg .middle } **Manuale Tecnico**
+    La documentazione completa dell’osservatorio.
 
-    ---
+    - Architettura del sistema
+    - Infrastruttura e networking
+    - Strumentazione astronomica
+    - Software e automazione
+    - Sicurezza e procedure
+    - Manutenzione e troubleshooting
 
-    Documentazione completa dell'osservatorio:
-
-    - Architettura
-    - Infrastruttura
-    - Sistema astronomico
-    - Software
-    - Automazione
-    - Sicurezza
-    - Operations
-
-    [:octicons-arrow-right-24: Apri il Manuale](chapters/01-introduzione.md)
+    [:octicons-arrow-right-24: Apri il manuale](chapters/01-introduzione.md)
 
 - :material-chart-box:{ .lg .middle } **Analytics**
 
-    ---
+    Il portale di analisi delle sessioni osservative.
 
-    Dashboard e report generati automaticamente.
-
-    Comprende:
-
-    - KPI
-    - Sessioni
-    - Target
-    - Configurazioni
-    - Validazione dati
+    - KPI operativi
+    - Statistiche di acquisizione
+    - Analisi dei target
+    - Configurazioni utilizzate
+    - Controlli di qualità
+    - Report automatici
 
     [:octicons-arrow-right-24: Apri Analytics](analytics/index.md)
 
-- :material-telescope:{ .lg .middle } **Sessioni Osservative**
+- :material-telescope:{ .lg .middle } **Sessioni osservative**
 
-    ---
+    L’archivio cronologico delle attività dell’osservatorio.
 
-    Archivio cronologico delle attività.
+    - Report delle sessioni
+    - Target osservati
+    - Tempi di integrazione
+    - Immagini acquisite
+    - Dati di guida
+    - Configurazioni strumentali
 
-    Include:
-
-    - report giornalieri
-    - immagini
-    - integrazione
-    - target osservati
-
-    [:octicons-arrow-right-24: Visualizza report](session-reports/index.md)
+    [:octicons-arrow-right-24: Consulta le sessioni](session-reports/index.md)
 
 - :material-tools:{ .lg .middle } **Engineering**
 
-    ---
-
-    Tutta la documentazione tecnica dell'infrastruttura.
+    Schemi e documentazione tecnica dell’infrastruttura.
 
     - Cablaggi
-    - Schemi
+    - Schemi elettrici
     - Configurazioni
-    - Asset
-    - Check list
+    - Asset hardware
+    - Procedure di verifica
+    - Checklist operative
 
     [:octicons-arrow-right-24: Apri Engineering](chapters/35-schemi-elettrici-cablaggi.md)
 
@@ -97,19 +142,46 @@ Una piattaforma unica che integra documentazione tecnica, automazione dell'osser
 
 ---
 
-# Panoramica operativa
+## La missione
+
+> Progettare e documentare un osservatorio astronomico remoto affidabile, automatizzato ed evolutivo, capace di integrare strumenti astronomici, infrastruttura di rete, software di controllo e analisi dei dati in un unico ecosistema operativo.
+
+Digital StarGate nasce dall’incontro tra passione astronomica, automazione e ingegneria del software. Ogni componente del sistema viene descritto, verificato e mantenuto secondo un approccio tecnico strutturato, documentato e replicabile.
+
+---
+
+## Panoramica operativa
 
 <!-- DSG:AUTO-HOMEPAGE:START -->
 <div class="dsg-kpi-grid">
 
-<div class="dsg-kpi"><span class="dsg-kpi__label">Sessioni</span><span class="dsg-kpi__value">3</span><span class="dsg-kpi__detail">storico disponibile</span></div>
-<div class="dsg-kpi"><span class="dsg-kpi__label">Integrazione</span><span class="dsg-kpi__value">31,83 h</span><span class="dsg-kpi__detail">totale acquisito</span></div>
-<div class="dsg-kpi"><span class="dsg-kpi__label">Immagini</span><span class="dsg-kpi__value">191</span><span class="dsg-kpi__detail">light completati</span></div>
-<div class="dsg-kpi"><span class="dsg-kpi__label">Target</span><span class="dsg-kpi__value">1</span><span class="dsg-kpi__detail">oggetti distinti</span></div>
+<div class="dsg-kpi">
+  <span class="dsg-kpi__label">Sessioni</span>
+  <span class="dsg-kpi__value">3</span>
+  <span class="dsg-kpi__detail">storico disponibile</span>
+</div>
+
+<div class="dsg-kpi">
+  <span class="dsg-kpi__label">Integrazione</span>
+  <span class="dsg-kpi__value">31,83 h</span>
+  <span class="dsg-kpi__detail">totale acquisito</span>
+</div>
+
+<div class="dsg-kpi">
+  <span class="dsg-kpi__label">Immagini</span>
+  <span class="dsg-kpi__value">191</span>
+  <span class="dsg-kpi__detail">light completati</span>
+</div>
+
+<div class="dsg-kpi">
+  <span class="dsg-kpi__label">Target</span>
+  <span class="dsg-kpi__value">1</span>
+  <span class="dsg-kpi__detail">oggetti distinti</span>
+</div>
 
 </div>
 
-## Ultima sessione
+### Ultima sessione
 
 | Campo | Valore |
 |---|---|
@@ -126,56 +198,45 @@ Una piattaforma unica che integra documentazione tecnica, automazione dell'osser
 
 ---
 
-# Accesso rapido
+## Accesso rapido
 
 <div class="grid cards" markdown>
 
-- **📊 Dashboard Analytics**
+- :material-view-dashboard:{ .lg .middle } **Dashboard Analytics**
 
-    [Apri Dashboard](analytics/dashboard.html)
+    Consulta KPI, grafici e statistiche delle sessioni.
 
-- **📑 Dati da validare**
+    [:octicons-arrow-right-24: Apri la dashboard](analytics/dashboard.html)
 
-    [Apri elenco](appendices/dati-da-validare.md)
+- :material-clipboard-alert-outline:{ .lg .middle } **Dati da validare**
 
-- **📝 Registro revisioni**
+    Visualizza le informazioni che richiedono una verifica tecnica.
 
-    [Consulta](appendices/registro-revisioni.md)
+    [:octicons-arrow-right-24: Apri l’elenco](appendices/dati-da-validare.md)
+
+- :material-file-document-edit-outline:{ .lg .middle } **Registro revisioni**
+
+    Consulta la cronologia delle modifiche apportate alla documentazione.
+
+    [:octicons-arrow-right-24: Consulta il registro](appendices/registro-revisioni.md)
 
 </div>
 
 ---
 
-# Digital StarGate Analytics
-
-Il motore Analytics elabora automaticamente le sessioni osservative producendo:
-
-- KPI operativi
-- integrazione per target
-- statistiche per filtro
-- configurazioni utilizzate
-- cronologia delle sessioni
-- controlli di qualità
-- dashboard HTML
-- report di validazione
-
-<a class="md-button md-button--primary" href="analytics/index.md">
-Apri il Portale Analytics
-</a>
-
----
-
-# Informazioni sul documento
+## Informazioni sul progetto
 
 | Campo | Valore |
-|------|--------|
+|---|---|
 | Documento | `DSG-TM-001` |
 | Sistema | Digital StarGate |
 | Proprietario | Massimo Mainini |
 | Località | Manciano (GR) |
-| Versione | 4.0 |
+| Release del portale | 5.1.3 |
+| Pubblicazione | GitHub Pages |
+| Automazione | GitHub Actions |
 | Stato | In continua evoluzione |
 
 !!! warning "Dati da validare"
 
-    Tutti i valori contrassegnati come **DA VALIDARE** devono essere verificati direttamente sull'impianto prima della pubblicazione definitiva.
+    Tutti i valori contrassegnati come **DA VALIDARE** devono essere verificati direttamente sull’impianto prima della pubblicazione definitiva.

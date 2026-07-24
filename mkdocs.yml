@@ -8,8 +8,11 @@ site_dir: site
 theme:
   name: material
   language: it
+  logo: assets/images/dsg-logo.svg
+  favicon: assets/images/dsg-logo.svg
   features:
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
     - navigation.top
     - navigation.footer
@@ -62,6 +65,9 @@ markdown_extensions:
 
 extra_css:
   - styles/extra.css
+
+extra_javascript:
+  - javascripts/nav-scroll.js
 
 not_in_nav: |
   session-reports/**/report-sessione.md
