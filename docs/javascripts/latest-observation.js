@@ -11,6 +11,11 @@
     });
   };
 
+  const formatCoordinate = (value, suffix) => {
+    const number = Number(value);
+    return Number.isFinite(number) ? `${formatNumber(number, 4)}° ${suffix}` : "Risoluzione per nome";
+  };
+
   const injectStyles = () => {
     if (document.getElementById("dsg-latest-observation-styles")) return;
 
@@ -23,22 +28,31 @@
         background: #07162d;
       }
 
-      .dsg-showcase__sky {
+      .dsg-showcase__sky,
+      .dsg-showcase__sky-canvas {
         position: absolute;
         inset: 0;
         width: 100%;
         height: 100%;
         min-height: 25rem;
-        background: center / cover no-repeat var(--dsg-observation-fallback, url("../assets/images/osservatorio-hero.jpg"));
       }
 
-      .dsg-showcase__sky::after {
-        content: "";
+      .dsg-showcase__sky {
+        background: center / cover no-repeat url("../assets/images/osservatorio-hero.jpg");
+      }
+
+      .dsg-showcase__sky-canvas {
+        z-index: 1;
+      }
+
+      .dsg-showcase__sky-shade {
         position: absolute;
         inset: 0;
         z-index: 2;
         pointer-events: none;
-        background: linear-gradient(90deg, rgba(5, 18, 42, 0.08), rgba(5, 18, 42, 0.42));
+        background:
+          linear-gradient(90deg, rgba(5, 18, 42, 0.04), rgba(5, 18, 42, 0.48)),
+          linear-gradient(180deg, rgba(5, 18, 42, 0.18), transparent 38%, rgba(5, 18, 42, 0.42));
       }
 
       .dsg-showcase__sky-status {
@@ -52,7 +66,7 @@
         padding: 0.48rem 0.7rem;
         border: 1px solid rgba(125, 190, 255, 0.28);
         border-radius: 999px;
-        background: rgba(5, 18, 42, 0.76);
+        background: rgba(5, 18, 42, 0.78);
         color: #b9e8ff;
         font-size: 0.62rem;
         font-weight: 800;
@@ -68,6 +82,40 @@
         border-radius: 50%;
         background: #67d6ff;
         box-shadow: 0 0 0.75rem rgba(103, 214, 255, 0.85);
+      }
+
+      .dsg-showcase__sky-panel {
+        position: absolute;
+        z-index: 4;
+        right: 1rem;
+        bottom: 1rem;
+        width: min(18rem, calc(100% - 2rem));
+        padding: 0.8rem 0.9rem;
+        border: 1px solid rgba(125, 190, 255, 0.22);
+        border-radius: 0.8rem;
+        background: rgba(5, 18, 42, 0.80);
+        color: rgba(235, 247, 255, 0.84);
+        font-size: 0.66rem;
+        backdrop-filter: blur(10px);
+      }
+
+      .dsg-showcase__sky-panel strong {
+        display: block;
+        margin-bottom: 0.4rem;
+        color: #ffffff;
+        font-size: 0.9rem;
+      }
+
+      .dsg-showcase__sky-meta {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.2rem 0.65rem;
+      }
+
+      .dsg-showcase__sky-meta span:nth-child(odd) {
+        color: #75d5ff;
+        font-weight: 750;
+        text-transform: uppercase;
       }
 
       .dsg-showcase__sky.is-loading::before {
@@ -106,8 +154,16 @@
 
       @media (max-width: 760px) {
         .dsg-showcase__sky,
+        .dsg-showcase__sky-canvas,
         .dsg-showcase__media {
           min-height: 19rem;
+        }
+
+        .dsg-showcase__sky-panel {
+          right: 0.75rem;
+          bottom: 0.75rem;
+          left: 0.75rem;
+          width: auto;
         }
       }
     `;
@@ -119,6 +175,7 @@
 
     const existing = document.querySelector(`script[src="${ALADIN_SRC}"]`);
     if (existing) {
+      if (existing.dataset.loaded === "true") return Promise.resolve();
       return new Promise((resolve, reject) => {
         existing.addEventListener("load", resolve, { once: true });
         existing.addEventListener("error", reject, { once: true });
@@ -130,7 +187,10 @@
       script.src = ALADIN_SRC;
       script.charset = "utf-8";
       script.async = true;
-      script.addEventListener("load", resolve, { once: true });
+      script.addEventListener("load", () => {
+        script.dataset.loaded = "true";
+        resolve();
+      }, { once: true });
       script.addEventListener("error", reject, { once: true });
       document.head.appendChild(script);
     });
@@ -151,9 +211,7 @@
     if (metricValues[2]) metricValues[2].textContent = `${formatNumber(metrics.rms_total_arcsec, 3)}″`;
 
     const reportLink = document.querySelector(".dsg-showcase__content .md-button");
-    if (reportLink && data.report_url) {
-      reportLink.href = new URL(data.report_url, document.baseURI).href;
-    }
+    if (reportLink && data.report_url) reportLink.href = new URL(data.report_url, document.baseURI).href;
   };
 
   const buildTarget = (data) => {
@@ -163,10 +221,19 @@
     return data.target?.name || "LDN 1320";
   };
 
-  const enableFallback = (sky, status, fallbackUrl) => {
+  const updatePanel = (panel, data) => {
+    panel.querySelector("strong").textContent = data.target?.name || "Ultima osservazione";
+    panel.querySelector("[data-sky-survey]").textContent = data.sky_view?.survey || "P/DSS2/color";
+    panel.querySelector("[data-sky-fov]").textContent = `${formatNumber(data.sky_view?.field_of_view_deg || 1.5, 1)}°`;
+    panel.querySelector("[data-sky-ra]").textContent = formatCoordinate(data.target?.ra_deg, "RA");
+    panel.querySelector("[data-sky-dec]").textContent = formatCoordinate(data.target?.dec_deg, "DEC");
+  };
+
+  const enableFallback = (sky, canvas, status, fallbackUrl) => {
     sky.classList.remove("is-loading");
     sky.classList.add("is-fallback");
-    status.textContent = "Anteprima non disponibile";
+    status.textContent = "Immagine di fallback";
+    canvas.style.display = "none";
     if (fallbackUrl) {
       sky.style.backgroundImage = `linear-gradient(90deg, rgba(5,18,42,.10), rgba(5,18,42,.62)), url("${fallbackUrl}")`;
       sky.style.backgroundSize = "cover";
@@ -182,13 +249,26 @@
     injectStyles();
     media.setAttribute("aria-label", "Mappa dinamica dell'ultima osservazione astronomica");
     media.innerHTML = `
-      <div id="dsg-latest-sky" class="dsg-showcase__sky is-loading" aria-label="Vista astronomica dinamica">
+      <div id="dsg-latest-sky" class="dsg-showcase__sky is-loading">
+        <div id="dsg-latest-sky-canvas" class="dsg-showcase__sky-canvas" aria-label="Vista astronomica interattiva"></div>
+        <div class="dsg-showcase__sky-shade" aria-hidden="true"></div>
         <span class="dsg-showcase__sky-status">Caricamento survey</span>
+        <div class="dsg-showcase__sky-panel">
+          <strong>Ultima osservazione</strong>
+          <div class="dsg-showcase__sky-meta">
+            <span>Survey</span><span data-sky-survey>—</span>
+            <span>FOV</span><span data-sky-fov>—</span>
+            <span>RA</span><span data-sky-ra>—</span>
+            <span>DEC</span><span data-sky-dec>—</span>
+          </div>
+        </div>
       </div>
     `;
 
     const sky = media.querySelector("#dsg-latest-sky");
+    const canvas = media.querySelector("#dsg-latest-sky-canvas");
     const status = media.querySelector(".dsg-showcase__sky-status");
+    const panel = media.querySelector(".dsg-showcase__sky-panel");
 
     let data;
     try {
@@ -196,9 +276,10 @@
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       data = await response.json();
       applyData(data);
+      updatePanel(panel, data);
     } catch (error) {
       console.warn("Digital StarGate: latest observation data unavailable", error);
-      enableFallback(sky, status, new URL("assets/images/osservatorio-hero.jpg", document.baseURI).href);
+      enableFallback(sky, canvas, status, new URL("assets/images/osservatorio-hero.jpg", document.baseURI).href);
       return;
     }
 
@@ -210,7 +291,7 @@
       await loadAladin();
       await window.A.init;
 
-      window.A.aladin("#dsg-latest-sky", {
+      window.A.aladin("#dsg-latest-sky-canvas", {
         survey: data.sky_view?.survey || "P/DSS2/color",
         target: buildTarget(data),
         fov: Number(data.sky_view?.field_of_view_deg) || 1.5,
@@ -226,10 +307,10 @@
       });
 
       sky.classList.remove("is-loading");
-      status.textContent = `${data.sky_view?.survey || "DSS2"} · FOV ${formatNumber(data.sky_view?.field_of_view_deg || 1.5, 1)}°`;
+      status.textContent = `Survey attiva · FOV ${formatNumber(data.sky_view?.field_of_view_deg || 1.5, 1)}°`;
     } catch (error) {
       console.warn("Digital StarGate: Aladin Lite unavailable", error);
-      enableFallback(sky, status, fallbackUrl);
+      enableFallback(sky, canvas, status, fallbackUrl);
     }
   };
 
