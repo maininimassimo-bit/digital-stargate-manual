@@ -56,18 +56,20 @@ jobs:
           session="data/sessions/$year/$month/$id"
           metrics="$session/normalized/session-metrics.json"
           report_dir="docs/session-reports/$year/$month/$id"
+          latest_observation="docs/data/realtime/latest-observation.json"
           python dsg-analytics/analyzer/analyze_session.py --session "$session"
           mkdir -p "$report_dir"
           python dsg-analytics/reporter/generate_markdown_report.py --metrics "$metrics" --output "$report_dir/report-sessione.md"
           python dsg-analytics/reporter/generate_pdf_report.py --metrics "$metrics" --output "$report_dir/Report_Sessione_$id.pdf"
           python dsg-analytics/history/update_history.py --metrics "$metrics" --history "data/analytics/history/sessions.csv"
+          python dsg-analytics/reporter/update_latest_observation.py --session "$session" --output "$latest_observation"
       - name: Commit generated analytics
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "Digital StarGate Bot"
           git config user.email "digital-stargate-bot@users.noreply.github.com"
-          git add data/sessions data/analytics docs/session-reports
+          git add data/sessions data/analytics docs/session-reports docs/data/realtime/latest-observation.json
           if git diff --cached --quiet; then
             echo "Nessun risultato nuovo."
             exit 0
