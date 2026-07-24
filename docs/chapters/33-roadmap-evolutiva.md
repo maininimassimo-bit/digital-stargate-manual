@@ -1,7 +1,7 @@
 # Capitolo 33 – Roadmap Evolutiva dell’Osservatorio
 
 **Codice documento:** DSG-TM-001-33  
-**Revisione:** 0.2 Draft
+**Revisione:** 0.3 Draft
 
 ## 33.1 Scopo
 
@@ -47,14 +47,15 @@ Ogni evoluzione deve:
 
 | Orizzonte | Iniziativa | Priorità | Stato |
 |---|---|---|---|
-| Breve termine | Immagine dinamica dell’ultima osservazione con Aladin Lite | Alta | In implementazione |
+| Breve termine | Immagine dinamica dell’ultima osservazione con Aladin Lite | Alta | Completata |
 | Breve termine | Contratto dati `latest-observation.json` | Alta | Completata |
+| Breve termine | Aggiornamento automatico dell’ultima osservazione dalla pipeline Analytics | Alta | Completata |
 | Breve termine | Validazione sensori e procedure safe | Alta | Pianificata |
 | Breve termine | Backup configurazioni automatizzato | Alta | Pianificata |
-| Medio termine | Parsing automatico RA/DEC da N.I.N.A. e plate solving | Alta | Pianificata |
+| Medio termine | Miglioramento parsing automatico RA/DEC da N.I.N.A. e plate solving | Alta | Pianificata |
 | Medio termine | Monitoraggio centralizzato KPI | Media | Da valutare |
 | Medio termine | Ridondanza alimentazione e rete | Alta | Da valutare |
-| Medio termine | Operations Center e Live Observatory | Alta | In roadmap |
+| Medio termine | Operations Center e Live Observatory | Alta | In standby |
 | Lungo termine | Evoluzione ottica e camere | Media | Da valutare |
 
 ## 33.6 Live Observatory
@@ -75,7 +76,7 @@ Sono previsti:
 - avanzamento delle esposizioni;
 - cronologia degli eventi operativi.
 
-Questa evoluzione sarà sviluppata dopo il consolidamento del contratto dati e dell’EAGLE Agent.
+La componente **Live Observatory è attualmente in standby**. Rimane confermata nella roadmap e sarà ripresa dopo il consolidamento della pubblicazione web, del contratto dati e dell’EAGLE Agent.
 
 ## 33.7 Criteri di successo
 
