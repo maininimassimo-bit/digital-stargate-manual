@@ -2,133 +2,152 @@
 
 | Campo | Valore |
 |---|---|
-| Documento | Standard Operating Procedures enterprise |
+| Documento | Standard Operating Procedures |
 | Identificativo | `DSG-SOP-001` |
 | Roadmap | `DSG-MR-001` |
-| Versione | 1.0 |
-| Stato | Approvata per revisione |
+| Stato | Approvato per baseline |
+| Versione | 1.1 |
 | Owner | Massimo Mainini |
-| Data baseline | 26/07/2026 |
+| Data | 26/07/2026 |
+| Fonte gerarchica | `DSG-MR-001` |
 
 ## 1. Scopo
 
-Questo documento definisce le procedure operative standard necessarie a governare documentazione, dati, release e incidenti nel contesto `DSG-MR-001`.
+Definire le SOP enterprise per documentazione, dati, release, incident, change management, assessment, configuration/security e Disaster Recovery.
 
-Le SOP non duplicano le procedure specialistiche già presenti nei capitoli tecnici: le collegano a trigger, ruoli, output e controlli enterprise.
+Le SOP non duplicano le procedure tecniche dei capitoli operativi: le collegano a prerequisiti, responsabilita, controlli, evidenze e rollback.
 
-## 2. SOP documentazione - `DSG-SOP-DOC-001`
+## 2. Principi comuni
+
+| ID | Principio | Applicazione |
+|---|---|---|
+| `DSG-SOP-PRN-001` | Safety-first | Incertezza operativa -> stato conservativo |
+| `DSG-SOP-PRN-002` | Evidence | Ogni procedura produce evidenza |
+| `DSG-SOP-PRN-003` | Registry update | Cambiamenti significativi aggiornano i registri |
+| `DSG-SOP-PRN-004` | Nessun contenuto sensibile | Nessuna configurazione sensibile nei documenti |
+
+## 3. SOP documentazione - `DSG-SOP-DOC-001`
 
 | Campo | Valore |
 |---|---|
+| Prerequisiti | Roadmap, documento fonte, `mkdocs.yml` |
+| Responsabilita | Documentation Owner, Reviewer |
 | Trigger | Nuovo documento o modifica strutturale |
-| Ruoli | Documentation Owner, Reviewer |
+| Input | Roadmap, registry, file Markdown |
 | Output | Documento aggiornato, registri aggiornati, navigazione coerente |
-| Controlli | `DSG-CTL-DOC-001`, `DSG-CTL-QA-001` |
+| Controlli | `DSG-CTL-DOC-001`, `DSG-CTL-QA-001`, `QG-DOC` |
 
-### Passi
+Procedura: verificare fonte esistente, creare nuovi file solo se necessari, inserire ID/stato/owner/data/scopo/ambito, collegare `DSG-MR-001`, aggiornare `mkdocs.yml`, controllare link, ID, duplicazioni e TBD.
 
-1. Identificare il documento impattato.
-2. Verificare se la modifica è collegata a un requisito, rischio o deliverable.
-3. Aggiornare il contenuto mantenendo lo stile MkDocs.
-4. Aggiornare `mkdocs.yml` se la pagina deve essere pubblicata.
-5. Aggiornare registri e change log.
-6. Verificare link interni e marcatori aperti.
-7. Preparare commit e PR.
+Gestione errori: se un link non e verificabile nel runtime ma risulta gia in `mkdocs.yml`, annotare il limite; se manca anche dalla navigazione, correggere prima del commit.
 
-### Criterio di controllo
+Evidenze: diff file, controllo YAML, controllo link.
 
-La modifica è accettabile quando il documento è navigabile, tracciato e privo di marcatori aperti.
+Rollback: ripristinare la voce MkDocs e il documento modificato nel commit correttivo.
 
-## 3. SOP dati e analytics - `DSG-SOP-DATA-001`
+Elementi TBD: automazione completa link checker.
+
+## 4. SOP dati e analytics - `DSG-SOP-DATA-001`
 
 | Campo | Valore |
 |---|---|
-| Trigger | Nuova sessione osservativa, ricalcolo KPI o variazione schema |
-| Ruoli | Data Owner, Architecture Owner |
-| Output | Dataset validato, report aggiornato, eventuale nota di release |
-| Controlli | `DSG-CTL-DATA-001` |
+| Prerequisiti | Fonte dati, periodo, schema o descrizione dataset |
+| Responsabilita | Data Owner, Architecture Owner |
+| Trigger | Nuova sessione, ricalcolo KPI, variazione schema |
+| Input | Log, report, dataset |
+| Output | Dataset validato, report aggiornato |
+| Controlli | `DSG-CTL-DATA-001`, `QG-DATA` |
 
-### Passi
+Procedura: identificare origine e periodo, separare dati grezzi/normalizzati/aggregati/pubblicati, validare completezza, marcare dati mancanti come `N/D`, `TBD` o `Da validare`, aggiornare report solo con fonte indicata, registrare anomalie.
 
-1. Identificare origine dati e periodo.
-2. Verificare completezza minima di sessione, target, integrazione e qualità guida.
-3. Applicare quality gate warehouse/analytics.
-4. Registrare dati mancanti come `N/D` quando il valore non è disponibile.
-5. Aggiornare dashboard o report collegati.
-6. Documentare anomalie e record esclusi.
+Gestione errori: bloccare KPI senza fonte; documentare record esclusi.
 
-### Criterio di controllo
+Evidenze: report validazione, dashboard aggiornata, note anomalie.
 
-I KPI pubblicati devono indicare fonte, periodo e stato di qualità.
+Rollback: tornare al dataset/report precedente e registrare la motivazione.
 
-## 4. SOP release - `DSG-SOP-REL-001`
+Elementi TBD: schema finale data catalog.
 
-| Campo | Valore |
-|---|---|
-| Trigger | Preparazione release documentale o milestone enterprise |
-| Ruoli | Release Owner, Documentation Owner, Reviewer |
-| Output | Release notes, readiness checklist, rollback plan |
-| Controlli | `DSG-CTL-REL-001`, `DSG-CTL-QA-001` |
-
-### Passi
-
-1. Confermare deliverable e milestone completate.
-2. Verificare navigazione e registri.
-3. Controllare link e sezioni incomplete.
-4. Preparare note di release.
-5. Definire criteri di rollback.
-6. Aprire PR verso `main`.
-7. Conservare evidenze di validazione.
-
-### Criterio di controllo
-
-La release è pronta quando tutte le condizioni di readiness sono soddisfatte o documentate come follow-up non bloccanti.
-
-## 5. SOP incident - `DSG-SOP-INC-001`
+## 5. SOP release - `DSG-SOP-REL-001`
 
 | Campo | Valore |
 |---|---|
-| Trigger | Stato non sicuro, perdita accesso, errore cupola, meteo avverso o blocco EAGLE |
-| Ruoli | Operations Owner, Infrastructure Owner |
+| Prerequisiti | Deliverable completati, registry aggiornato |
+| Responsabilita | Release Owner, Documentation Owner, Reviewer |
+| Trigger | Preparazione release documentale o milestone |
+| Input | Commit, validazioni, release notes |
+| Output | Readiness checklist, rollback plan, PR summary |
+| Controlli | `DSG-CTL-REL-001`, `QG-REL`, `QG-DOC`, `QG-SEC` |
+
+Procedura: confermare scope release, verificare file pubblicabili, verificare link e contenuti sensibili, aggiornare release documentation e project history, definire rollback, preparare PR solo se richiesto.
+
+Gestione errori: se build MkDocs non e disponibile, completare controlli statici e demandare build a PC Principale/GitHub Actions.
+
+Evidenze: log validazione, commit hash, release checklist.
+
+Rollback: rimuovere o correggere voci MkDocs e documenti impattati.
+
+Elementi TBD: automazione release readiness.
+
+## 6. SOP incident - `DSG-SOP-INC-001`
+
+| Campo | Valore |
+|---|---|
+| Prerequisiti | Accesso sicuro, stato meteo/safety disponibile se possibile |
+| Responsabilita | Operations Owner, Infrastructure Owner |
+| Trigger | Stato non sicuro, perdita accesso, errore cupola, blocco EAGLE |
+| Input | Stato osservatorio, log, sintomi |
 | Output | Stato conservativo, log incidente, azione correttiva |
-| Controlli | `DSG-CTL-SAF-001`, `DSG-CTL-OPS-001` |
+| Controlli | `DSG-CTL-SAF-001`, `DSG-CTL-OPS-001`, `QG-OPS` |
 
-### Passi
+Procedura: assumere la condizione piu conservativa, verificare meteo/copertura/montatura/alimentazione, completare la chiusura solo se sicura, evitare comandi distruttivi se lo stato e incerto, registrare timestamp/sintomo/azione/risultato, aprire post-mortem se necessario, aggiornare DSRA/SOP/registry.
 
-1. Assumere la condizione più conservativa.
-2. Verificare stato meteo, copertura, montatura e alimentazione.
-3. Se la chiusura è sicura, completare la chiusura osservatorio.
-4. Se lo stato è incerto, evitare comandi potenzialmente distruttivi.
-5. Registrare timestamp, sintomo, azione e risultato.
-6. Aprire un post-mortem se l'incidente è ricorrente o ad alto impatto.
-7. Aggiornare rischio, controllo o SOP interessata.
+Gestione errori: se l'accesso remoto non e affidabile, privilegiare recovery documentata e intervento sicuro.
 
-### Criterio di controllo
+Evidenze: log incidente, checklist, post-mortem.
 
-La procedura è chiusa solo quando stato fisico, stato documentale e azione correttiva sono allineati.
+Rollback: tornare a stato operativo precedente solo dopo verifica safety.
 
-## 6. SOP change management - `DSG-SOP-CHG-001`
+Elementi TBD: soglie escalation e tempi target.
+
+## 7. SOP change management - `DSG-SOP-CHG-001`
 
 | Campo | Valore |
 |---|---|
+| Prerequisiti | Descrizione modifica e impatto stimato |
+| Responsabilita | Governance Owner, Architecture Owner, Documentation Owner |
 | Trigger | Modifica hardware, software, dati, architettura o governance |
-| Ruoli | Governance Owner, Architecture Owner, Documentation Owner |
-| Output | Change log, ADR se necessario, registri aggiornati |
-| Controlli | `DSG-CTL-ADR-001`, `DSG-CTL-DOC-001` |
+| Input | Change request, ADR, rischio, documento |
+| Output | Change log, ADR se necessario, registry aggiornato |
+| Controlli | `DSG-CTL-ADR-001`, `DSG-CTL-DOC-001`, `QG-ARCH` |
 
-### Passi
+Procedura: descrivere cambiamento e impatto, classificare area e stato AS-IS/Transition/TO-BE, verificare Roadmap Freeze Policy, redigere ADR solo per decisione reale, aggiornare registri e documenti, validare con controlli appropriati.
 
-1. Descrivere cambiamento, motivazione e impatto.
-2. Classificare l'area interessata.
-3. Valutare rischi e dipendenze.
-4. Redigere ADR se la decisione è strutturale.
-5. Aggiornare registri e documenti.
-6. Validare con checklist o test appropriati.
-7. Chiudere il cambiamento nella release o nel change log.
+Gestione errori: se il cambio introduce ambito non approvato, marcarlo `Proposed` o `TBD` e non pubblicarlo come baseline.
 
-## 7. Collegamenti
+Evidenze: ADR, registry diff, commit.
 
-- [DSRA](DSRA-risk-assessment.md)
-- [Registri](registries/index.md)
+Rollback: revert documentale o commit correttivo tracciato.
+
+Elementi TBD: template change request.
+
+## 8. SOP assessment - `DSG-SOP-ASMT-001`
+
+Prerequisiti: fonti interne disponibili. Responsabilita: Governance Owner, Reviewer. Procedura: separare evidenze da analisi, non trasformare ipotesi in fatti, indicare data o `Da validare`, collegare fonti interne, registrare gap e raccomandazioni. Rollback: ripristinare conclusione precedente se la nuova evidenza non regge. Elementi TBD: scoring automatico.
+
+## 9. SOP configuration/security - `DSG-SOP-CFG-SEC-001`
+
+Prerequisiti: diff o configurazione da revisionare. Responsabilita: Security Owner, Documentation Owner. Procedura: classificare configurazione come pubblicabile, sensibile o `Da validare`, rimuovere valori privati, aggiornare Configuration Registry, bloccare release in caso di finding sensibile. Rollback: rimozione immediata e commit correttivo. Elementi TBD: tooling dedicato.
+
+## 10. SOP Disaster Recovery - `DSG-SOP-DR-001`
+
+Prerequisiti: piano rollback o backup disponibile. Responsabilita: Infrastructure Owner, Release Owner. Procedura: identificare oggetto da ripristinare, verificare ultimo stato valido noto, applicare rollback documentale o recovery, registrare risultato e limiti, aggiornare DSRA e registry se il rischio cambia. Rollback: definito per singola release. Elementi TBD: RTO/RPO target e frequenza test.
+
+## 11. Riferimenti
+
+- [DSG-MR-001](../enterprise-roadmap/DSG-MR-001-master-roadmap.md)
+- [Enterprise Program Portfolio](program-portfolio.md)
+- [Enterprise Registry](registries/index.md)
 - [Governance](governance.md)
 - [Release documentation](release-documentation.md)
+- [Assessment](assessment.md)
