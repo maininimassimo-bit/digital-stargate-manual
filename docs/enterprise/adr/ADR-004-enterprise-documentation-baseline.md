@@ -41,7 +41,7 @@ La sezione enterprise diventa il punto di governo della documentazione, mentre i
 
 ## Collegamenti
 
-- Roadmap: [DSG-MR-001](../DSG-MR-001-master-roadmap.md)
+- Roadmap: [DSG-MR-001](../../enterprise-roadmap/DSG-MR-001-master-roadmap.md)
 - Architecture: [DSG-EA-001](../enterprise-architecture.md)
 - Registri: [DSG-REG-001](../registries/index.md)
 - Governance: [DSG-GOV-001](../governance.md)
