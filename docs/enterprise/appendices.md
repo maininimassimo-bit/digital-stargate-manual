@@ -5,36 +5,84 @@
 | Documento | Appendici Enterprise |
 | Identificativo | `DSG-APP-001` |
 | Roadmap | `DSG-MR-001` |
-| Versione | 1.0 |
-| Stato | Approvata per revisione |
+| Stato | Approvato per baseline |
+| Versione | 1.1 |
 | Owner | Massimo Mainini |
-| Data baseline | 26/07/2026 |
+| Data | 26/07/2026 |
+| Fonte gerarchica | `DSG-MR-001` |
 
-## 1. Glossario
+## 1. Scopo
+
+Le appendici consolidano glossario, acronimi, riferimenti, template e mapping documentali della baseline enterprise. Il [Knowledge Index](knowledge-index.md) resta il punto di accesso alla traceability matrix.
+
+## 2. Glossario
 
 | Termine | Definizione |
 |---|---|
-| ADR | Architecture Decision Record, documento che registra una decisione architetturale |
-| DSRA | Digital StarGate Risk Assessment |
-| EAGLE | Computer operativo PrimaLuceLab installato presso l'osservatorio |
-| Evidence | Evidenza verificabile usata per dimostrare un controllo |
-| MkDocs | Generatore del portale documentale |
-| Quality gate | Controllo obbligatorio prima di una pubblicazione o release |
-| RPN | Risk Priority Number, prodotto di probabilità, impatto e rilevabilità |
-| SOP | Standard Operating Procedure |
+| AS-IS | Stato corrente documentato |
+| Transition | Stato in consolidamento |
+| TO-BE | Stato target non necessariamente implementato |
+| ADR | Documento che registra una decisione architetturale reale |
+| Capability | Capacita governabile collegata a roadmap o programma |
+| Configuration Registry | Registro delle configurazioni pubblicabili, sensibili o da validare |
+| Data lineage | Tracciabilita da origine dati a KPI o pubblicazione |
+| Evidence | Log, checklist, commit, build, report o review |
+| Knowledge Graph | Modello semantico della conoscenza; schema `TBD` |
+| Quality gate | Controllo obbligatorio prima di pubblicazione o release |
+| Roadmap Freeze Policy | Policy `DSG-GOV-001` che impedisce estensioni non approvate |
 | Warehouse | Livello dati consolidato per analytics e storico |
 
-## 2. Mapping documentale
+## 3. Acronimi
 
-| Roadmap | Documento | Registro |
+| Acronimo | Significato |
+|---|---|
+| ACM | Asset and Configuration Management |
+| ADR | Architecture Decision Record |
+| AI | Artificial Intelligence |
+| DSRA | Digital StarGate Reference/Risk Architecture, secondo contesto |
+| EAGLE | Computer operativo PrimaLuceLab presso l'osservatorio |
+| EAM | Enterprise Architecture Meta Model |
+| KPI | Key Performance Indicator |
+| PR | Pull Request |
+| RACI | Responsible, Accountable, Consulted, Informed |
+| RPN | Risk Priority Number |
+| SOP | Standard Operating Procedure |
+
+## 4. Mapping documentale
+
+| Gerarchia | Documento | Registro |
 |---|---|---|
-| `DSG-MR-M1` | Master Roadmap e indice | Deliverable, change log |
-| `DSG-MR-M2` | Enterprise Architecture, ADR-004 | Decisioni, requisiti |
-| `DSG-MR-M3` | DSRA | Rischi, controlli |
-| `DSG-MR-M4` | Handbook, SOP, Governance | Requisiti, controlli |
-| `DSG-MR-M5` | Assessment, Release, Appendici | Deliverable, readiness |
+| `DSG-MR-001` | Master Roadmap | Deliverable, traceability |
+| `DSG-EAM-001` | Enterprise Architecture Meta Model | Component/Platform Registry |
+| `DSRA-000` | Vision Target Architecture | Planning/Vision |
+| `DSRA-001` | Reference Architecture | Component Registry |
+| ADR | ADR Index e ADR esistenti | Decision Registry |
+| Assessments | Enterprise Assessment | Risk/Control Registry |
+| SOP | Standard Operating Procedures | Control Registry |
+| Engineering Handbook | Handbook | Quality gates |
+| Release Notes | Release documentation | Change log |
+| Project History | Project History | Change log |
+| Technical Manuals | Capitoli MkDocs | Knowledge Registry |
 
-## 3. Template requisito
+## 5. References index
+
+| Area | Riferimento |
+|---|---|
+| Roadmap | [DSG-MR-001](../enterprise-roadmap/DSG-MR-001-master-roadmap.md) |
+| Architecture | [DSG-EAM-001](../enterprise-architecture/DSG-EAM-001-enterprise-architecture-meta-model.md), [DSRA-000](../enterprise-architecture/DSRA-000-vision-target-architecture.md), [DSRA-001](../enterprise-architecture/DSRA-001-reference-architecture.md) |
+| ADR | [ADR Index](adr/index.md), [ADR-004](adr/ADR-004-enterprise-documentation-baseline.md) |
+| Portfolio | [Program Portfolio](program-portfolio.md) |
+| Registry | [Enterprise Registry](registries/index.md) |
+| Governance | [Governance](governance.md) |
+| SOP | [SOP](sop.md) |
+| Handbook | [Engineering Handbook](handbook.md) |
+| Assessment | [Enterprise Assessment](assessment.md) |
+| Release | [Release documentation](release-documentation.md) |
+| Knowledge | [Knowledge Index](knowledge-index.md) |
+| History | [Project History](project-history.md) |
+| Vision | [Vision](vision.md) |
+
+## 6. Template requisito
 
 ```markdown
 | Campo | Valore |
@@ -42,14 +90,14 @@
 | ID | DSG-REQ-AREA-000 |
 | Titolo |  |
 | Categoria |  |
-| Priorità |  |
-| Stato | Proposto |
+| Priorita |  |
+| Stato | Proposed |
 | Fonte | DSG-MR-001 |
 | Verifica |  |
-| Owner |  |
+| Owner | Da validare |
 ```
 
-## 4. Template rischio
+## 7. Template rischio
 
 ```markdown
 | Campo | Valore |
@@ -57,61 +105,66 @@
 | ID | DSG-RSK-AREA-000 |
 | Rischio |  |
 | Area |  |
-| Probabilità | 1-5 |
+| Probabilita | 1-5 |
 | Impatto | 1-5 |
-| Rilevabilità | 1-5 |
+| Rilevabilita | 1-5 |
 | Controlli |  |
-| Stato | Proposto |
+| Stato | Proposed |
 ```
 
-## 5. Template ADR
+## 8. Template ADR
 
 ```markdown
 # ADR-000 - Titolo
 
-## Contesto
+| Campo | Valore |
+|---|---|
+| Stato | Proposed |
+| Data | Da validare |
+| Roadmap | DSG-MR-001 |
 
-## Opzioni considerate
+## Contesto
 
 ## Decisione
 
 ## Conseguenze
 
-## Collegamenti
+## Riferimenti
 ```
 
-## 6. Template SOP
+## 9. Template SOP
 
 ```markdown
 # DSG-SOP-AREA-000 - Titolo
 
 | Campo | Valore |
 |---|---|
+| Prerequisiti |  |
+| Responsabilita |  |
 | Trigger |  |
-| Ruoli |  |
+| Input |  |
 | Output |  |
 | Controlli |  |
 
-## Passi
+## Procedura
 
-## Criteri di controllo
+## Gestione errori
+
+## Evidenze
+
+## Rollback
+
+## Elementi TBD
 ```
 
-## 7. Riferimenti interni
+## 10. Elementi TBD
 
-- [Master Roadmap](DSG-MR-001-master-roadmap.md)
-- [Enterprise Architecture](enterprise-architecture.md)
-- [DSRA](DSRA-risk-assessment.md)
-- [Registri](registries/index.md)
-- [Governance](governance.md)
-- [Release documentation](release-documentation.md)
+| ID | Elemento | Stato |
+|---|---|
+| `DSG-APP-TBD-001` | Glossario completo dei capitoli tecnici | Da validare |
+| `DSG-APP-TBD-002` | Acronimi operativi specialistici | Da validare |
+| `DSG-APP-TBD-003` | Template automatici per issue/PR | TBD |
 
-## 8. Regole di aggiornamento appendici
+## 11. Regole di aggiornamento
 
-Le appendici devono essere aggiornate quando:
-
-- viene introdotto un nuovo prefisso ID;
-- un template cambia forma;
-- una milestone della roadmap aggiunge un tipo documentale;
-- un termine tecnico diventa ricorrente nei documenti enterprise;
-- un mapping non rappresenta più lo stato reale della baseline.
+Le appendici vengono aggiornate quando viene introdotto un nuovo prefisso ID, un template cambia forma, una milestone aggiunge un tipo documentale, un termine tecnico diventa ricorrente o un mapping non rappresenta piu lo stato reale della baseline.
