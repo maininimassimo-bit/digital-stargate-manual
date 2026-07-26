@@ -52,5 +52,5 @@ La sezione enterprise diventa il punto di governo della documentazione, mentre i
 - la sezione enterprise è presente nella navigazione;
 - i documenti minimi della roadmap sono disponibili;
 - i registri collegano requisiti, rischi, controlli e deliverable;
-- nessun documento enterprise contiene placeholder aperti;
+- nessun documento enterprise contiene marcatori operativi aperti;
 - la PR finale documenta commit, milestone e validazioni.

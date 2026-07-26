@@ -75,6 +75,6 @@ La baseline è considerata completa per revisione quando:
 - tutti i documenti in tabella sono pubblicati in MkDocs;
 - la navigazione include la sezione enterprise;
 - ogni registro contiene riferimenti a `DSG-MR-001`;
-- non sono presenti placeholder aperti;
+- non sono presenti marcatori operativi aperti;
 - i link interni principali sono risolti;
 - la Pull Request verso `main` contiene il riepilogo delle milestone.
