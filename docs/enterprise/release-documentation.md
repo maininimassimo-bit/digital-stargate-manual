@@ -1,109 +1,117 @@
-# DSG-REL-001 - Release Documentation
+# DSG-REL-001 - Release Documentation and Notes Structure
 
 | Campo | Valore |
 |---|---|
-| Documento | Release Documentation |
+| Documento | Release Documentation and Notes Structure |
 | Identificativo | `DSG-REL-001` |
 | Roadmap | `DSG-MR-001` |
-| Versione | 1.0 |
-| Stato | Approvata per revisione |
+| Stato | Approvato per baseline |
+| Versione | 1.1 |
 | Owner | Massimo Mainini |
-| Data baseline | 26/07/2026 |
+| Data | 26/07/2026 |
+| Fonte gerarchica | `DSG-MR-001` |
 
 ## 1. Scopo
 
-Questo documento definisce criteri, readiness, note e rollback per il rilascio della documentazione enterprise `DSG-MR-001`.
+Definire release strategy, release readiness, rollback e struttura delle release notes per la baseline documentale `DSG-MR-001`.
 
-## 2. Release scope
+## 2. Ambito
 
-La release include:
+Include release documentation, release notes structure, readiness checklist, rollback, evidenze, follow-up e collegamento a project history.
 
-- nuova sezione MkDocs `Enterprise DSG-MR-001`;
-- master roadmap;
-- enterprise architecture;
-- DSRA;
-- ADR-004;
-- registri;
-- handbook;
-- SOP;
-- assessment;
-- governance;
-- appendici.
+## 3. Release scope
 
-## 3. Readiness checklist
+La baseline include Master Roadmap, Enterprise Architecture baseline, Program Portfolio, Enterprise Registry, Governance Framework, ADR Index, Assessment, SOP, Engineering Handbook, Planning, Knowledge Index, Project History, Vision e Appendici.
+
+## 4. Release notes structure
+
+```markdown
+# Release YYYY.N - Titolo
+
+## Summary
+
+## Scope
+
+## Added
+
+## Changed
+
+## Validation
+
+## Risks and TBD
+
+## Rollback
+
+## References
+```
+
+## 5. Readiness checklist
 
 | ID | Controllo | Esito atteso |
 |---|---|---|
-| `DSG-REL-RDY-001` | Tutti i deliverable minimi sono presenti | Conforme |
-| `DSG-REL-RDY-002` | `mkdocs.yml` include la sezione enterprise | Conforme |
-| `DSG-REL-RDY-003` | Link relativi principali risolti | Conforme |
-| `DSG-REL-RDY-004` | Registri aggiornati | Conforme |
-| `DSG-REL-RDY-005` | ADR-004 presente e collegato | Conforme |
-| `DSG-REL-RDY-006` | Nessun marcatore operativo aperto | Conforme |
-| `DSG-REL-RDY-007` | PR verso `main` con riepilogo milestone | Conforme a valle dell'apertura PR |
+| `DSG-REL-RDY-001` | Deliverable previsti presenti | Conforme |
+| `DSG-REL-RDY-002` | `mkdocs.yml` aggiornato e valido | Conforme |
+| `DSG-REL-RDY-003` | Link relativi principali verificati | Conforme o limite documentato |
+| `DSG-REL-RDY-004` | Registry aggiornato | Conforme |
+| `DSG-REL-RDY-005` | ADR Index presente e collegato | Conforme |
+| `DSG-REL-RDY-006` | SOP e Handbook aggiornati | Conforme |
+| `DSG-REL-RDY-007` | Assessment con evidenze/analisi/conclusioni | Conforme |
+| `DSG-REL-RDY-008` | Security check senza finding | Conforme |
+| `DSG-REL-RDY-009` | Build MkDocs strict | Da eseguire su PC/GitHub Actions se runtime non disponibile |
 
-## 4. Note di release
+## 6. Release process
 
-### Aggiunte
+1. Confermare milestone e scope.
+2. Aggiornare registry e traceability.
+3. Verificare MkDocs YAML.
+4. Verificare link Markdown relativi.
+5. Verificare assenza contenuti sensibili.
+6. Eseguire build MkDocs se disponibile.
+7. Registrare limiti e TBD.
+8. Creare commit logici.
+9. Aprire PR solo quando richiesto.
 
-- Baseline enterprise `DSG-MR-001`.
-- Sezione MkDocs dedicata.
-- Matrici di tracciabilità tra obiettivi, requisiti, rischi, controlli e deliverable.
-- DSRA con piano di trattamento e controlli.
-- Governance RACI e quality gate.
-- SOP documentazione, dati, release, incident e change management.
-- Assessment di maturità e appendici operative.
+## 7. Rollback
 
-### Impatti
-
-| Area | Impatto |
+| Scenario | Azione |
 |---|---|
-| Lettori | Nuova vista enterprise del progetto |
-| Maintainer | Registri e quality gate diventano riferimento operativo |
-| Reviewer | PR più verificabili grazie a criteri espliciti |
-| Release | Readiness e rollback documentati |
+| Errore in navigazione | Correggere o rimuovere voce `mkdocs.yml` |
+| Link errato | Correggere link relativo e validare |
+| Documento duplicato | Consolidare nella fonte corretta |
+| Contenuto sensibile | Rimuovere immediatamente e registrare remediation |
+| Build fallita | Correggere errore e ripetere build |
 
-### Compatibilità
+Il rollback documentale non modifica dati osservativi o procedure fisiche dell'osservatorio.
 
-Non sono modificati i percorsi dei capitoli tecnici esistenti. La release aggiunge una sezione di governo e cross-reference.
+## 8. Evidenze di validazione
 
-## 5. Rollback
+Le evidenze accettate includono diff dei file Markdown, diff di `mkdocs.yml`, controllo YAML, controllo link, controllo identificativi, scansione contenuti sensibili, log build MkDocs se disponibile, commit hash e PR summary quando aperta.
 
-In caso di regressione documentale:
+## 9. Collegamento a project history
 
-1. rimuovere la sezione enterprise da `mkdocs.yml`;
-2. mantenere i file enterprise sul branch di lavoro per correzione;
-3. correggere link, naming o contenuti incoerenti;
-4. ripetere i controlli documentali;
-5. riaprire la PR o aggiornarla con commit correttivo.
+Ogni release significativa aggiorna [Project History](project-history.md) con data, evento, evidenza e stato. Le date non confermate restano `Da validare`.
 
-Il rollback non impatta i dati osservativi né le procedure fisiche dell'osservatorio.
-
-## 6. Evidenze di validazione
-
-Le evidenze attese includono:
-
-- diff dei file Markdown;
-- diff di `mkdocs.yml`;
-- controllo link interni;
-- controllo marcatori aperti;
-- riepilogo commit;
-- PR verso `main`.
-
-## 7. Follow-up non bloccanti
+## 10. Follow-up non bloccanti
 
 | ID | Follow-up | Motivazione |
 |---|---|---|
-| `DSG-FUP-001` | Collegare evidenze operative reali alle checklist dopo le prossime sessioni | Le evidenze nascono dall'uso operativo |
-| `DSG-FUP-002` | Riesaminare DSRA dopo test failover e safety | Il rischio residuo migliora con dati reali |
-| `DSG-FUP-003` | Allineare future release notes alla baseline `DSG-REL-001` | Mantiene continuità governance |
+| `DSG-FUP-001` | Collegare evidenze operative reali alle checklist | Le evidenze nascono dall'uso operativo |
+| `DSG-FUP-002` | Riesaminare DSRA dopo test failover e safety | Migliora rischio residuo |
+| `DSG-FUP-003` | Eseguire build MkDocs su PC Principale/GitHub Actions | Runtime corrente non include MkDocs |
+| `DSG-FUP-004` | Formalizzare release notes future | Mantiene continuita governance |
 
-## 8. Criterio di pubblicazione
+## 11. Elementi TBD
 
-La release può essere proposta a `main` quando la PR contiene:
+| ID | Elemento | Stato |
+|---|---|
+| `DSG-REL-TBD-001` | Numerazione release formale | Da validare |
+| `DSG-REL-TBD-002` | Automazione release notes | TBD |
+| `DSG-REL-TBD-003` | Integrazione build GitHub Actions | Da validare |
 
-- milestone completate;
-- commit logici;
-- validazioni eseguite;
-- limiti noti non bloccanti;
-- riferimento esplicito a `DSG-MR-001`.
+## 12. Riferimenti
+
+- [DSG-MR-001](../enterprise-roadmap/DSG-MR-001-master-roadmap.md)
+- [Planning](planning.md)
+- [Project History](project-history.md)
+- [Enterprise Registry](registries/index.md)
+- [Governance](governance.md)
