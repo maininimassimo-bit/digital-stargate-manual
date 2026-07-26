@@ -34,6 +34,7 @@ La documentazione copre:
 | Documento | ID | Scopo | Stato |
 |---|---|---|---|
 | [Master Roadmap](DSG-MR-001-master-roadmap.md) | `DSG-MR-001` | Obiettivi, milestone, deliverable e criteri di completamento | Approvata |
+| [Enterprise Program Portfolio](program-portfolio.md) | `DSG-PRG-001` | Portfolio programmi, capability, controlli, rischi e KPI | Approvato per baseline |
 | [Enterprise Architecture](enterprise-architecture.md) | `DSG-EA-001` | Vista integrata di domini, componenti, dati e deployment | Approvata per revisione |
 | [DSRA](DSRA-risk-assessment.md) | `DSG-DSRA-001` | Registro rischi, controlli e mitigazioni | Approvata per revisione |
 | [ADR-004](adr/ADR-004-enterprise-documentation-baseline.md) | `DSG-ADR-004` | Decisione sulla baseline documentale enterprise | Approvata |
@@ -52,6 +53,7 @@ Ogni documento della baseline:
 - usa identificativi stabili;
 - richiama `DSG-MR-001`;
 - collega requisiti, rischi, controlli, evidenze e decisioni;
+- collega programmi e capability al portfolio `DSG-PRG-001`;
 - mantiene continuità con i capitoli del manuale tecnico esistenti;
 - evita dati sensibili, credenziali o parametri non verificabili;
 - prevede owner, stato, criteri di controllo e manutenzione.
