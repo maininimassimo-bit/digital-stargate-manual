@@ -68,6 +68,8 @@ Sono esclusi:
 
 `CAP-SCH-001 - Observation Scheduling` e il primo capability package di scheduling documentato sotto questo baseline. La sincronizzazione release registra in `CAP-000` status `Documented`, readiness `Implementation Ready`, version `0.1` e collegamento a `docs/capabilities/observation-scheduling/`.
 
+`CAP-EQR-001 - Equipment Registry` e il capability package documentato che governa il registro autorevole degli asset fisici e logici. La sincronizzazione release registra in `CAP-000` status `Documented`, readiness `Implementation Ready`, version `0.1` e collegamento a `docs/capabilities/equipment-registry/`.
+
 ## Release Lifecycle
 
 ```mermaid
@@ -311,4 +313,5 @@ Continuous improvement does not bypass governance. If a retrospective identifies
 - `docs/design-system/DSG-DS-001-design-system-baseline.md`
 - `docs/capabilities/CAP-000-capability-registry.md`
 - `docs/capabilities/observation-scheduling/index.md`
+- `docs/capabilities/equipment-registry/index.md`
 - `docs/enterprise/release-documentation.md`
