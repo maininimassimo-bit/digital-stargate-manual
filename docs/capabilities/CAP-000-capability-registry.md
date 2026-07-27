@@ -39,7 +39,7 @@ flowchart TD
 
 | Domain | Blueprint | Scope | Included capability references |
 |---|---|---|---|
-| Core Observatory | `docs/domains/DOM-001-core-observatory-domain.md` | Consolidated blueprint for documented core observatory capabilities. | `CAP-OSM-001`, `CAP-SCH-001`, `CAP-EQR-001`, `CAP-TGT-001` |
+| Core Observatory | `docs/domains/DOM-001-core-observatory-domain.md` | Consolidated blueprint for documented core observatory capabilities. | `CAP-OSM-001`, `CAP-SCH-001`, `CAP-EQR-001`, `CAP-TGT-001`, `CAP-WEA-001` |
 
 ## Capability Identifier Convention
 
@@ -139,8 +139,11 @@ flowchart TD
     OPS --> REMOTE[Remote Access]
     OPS --> OSM[Observation Session Management]
     TARGET[Target Registry] --> SCHED[Observation Scheduling]
+    WEATHER --> SCHED
+    WEATHER --> OSM
     SCHED --> OSM
-    EQUIP[Equipment Registry] --> SCHED
+    EQUIP[Equipment Registry] --> WEATHER
+    EQUIP --> SCHED
     EQUIP --> OSM
     CAL[Calibration Management] --> ACQ[Image Acquisition]
     OSM --> ACQ
@@ -208,7 +211,7 @@ flowchart LR
 | Analytics | In Progress | ADR + dashboard docs | ADR-002, ADR-003 | Release docs | OPEN | Analytics and warehouse docs | OPEN | UI 6.1 | Architecture Complete |
 | Remote Access | Planned | Technology/Security architecture + manual chapter | OPEN | Chapter 24 | OPEN | Chapters 5, 24 | OPEN | OPEN | Architecture Complete |
 | Observatory Safety | In Progress | DSRA + Observability + manuals | ADR-001 related | Chapters 18, 25, 26 | Capability safety runbooks related | Chapters 18, 25, 26 | OPEN | OPEN | Architecture Complete |
-| Weather Monitoring | In Progress | Observability + manual chapter | OPEN | Chapter 26 | Weather Unsafe runbook related | Chapter 26 | OPEN | OPEN | Architecture Complete |
+| Weather Monitoring | Documented | Full capability package | 2 capability ADR | 4 | 4 | 1 | 1 | 0.1 | Implementation Ready |
 | Backup & Recovery | Planned | Technology/Security + manual chapter | OPEN | Chapter 21 | OPEN | Chapter 21 | OPEN | OPEN | Architecture Complete |
 
 ## Capability Registry Entries
@@ -234,7 +237,7 @@ flowchart LR
 | `CAP-ANL-001` | Analytics | Produrre KPI, dashboard, warehouse datasets and quality evidence. | Validate Results / Continuous Improvement | Analytics Owner | In Progress | Documented | Architecture Complete | UI 6.1 | Not yet available | `ADR-002`, `ADR-003` | Release docs | OPEN | Analytics and warehouse docs | OPEN | OPEN | Data Platform, Observation Catalog, Documentation Platform | Metrics catalog and dashboard publication rules |
 | `CAP-RAC-001` | Remote Access | Supportare operazioni remote tramite VPN, connettivita e access governance. | Observatory Operations / Security | Security / Infrastructure Owner | Planned | Defined | Architecture Complete | OPEN | Not yet available | OPEN | Chapter 24 reference | OPEN | Chapters 5, 24 | OPEN | OPEN | Teltonika, VPN, Internet Connectivity, EAGLE, Security Architecture | Identity/access model and audit requirements |
 | `CAP-SAF-001` | Observatory Safety | Proteggere osservatorio, equipment and session execution from unsafe conditions. | Operate Observatory / Security | Operations Owner | In Progress | Documented | Architecture Complete | OPEN | Partially covered by OSM runbooks | `ADR-001` related | Chapters 18, 25, 26; OSM Abort/Recover | Weather Unsafe, Roof Failure, Emergency Stop | Chapters 18, 25, 26 | OSM recovery tests related | OSM operational acceptance related | Weather Monitoring, Remote Access, Equipment Registry, Observatory Operations | Alerting rules and safety evidence model |
-| `CAP-WEA-001` | Weather Monitoring | Acquisire e classificare evidenze meteo per readiness and safety decisions. | Observatory Safety / Operations | Operations Owner | In Progress | Documented | Architecture Complete | OPEN | Partially covered by OSM Weather Unsafe | OPEN | Chapter 26, OSM Prepare/Abort | Weather Unsafe | Chapter 26, AllSky Chapter 27 | OSM recovery tests related | OSM operational acceptance related | Weather Station, AllSky, Observatory Safety, OSM | Freshness thresholds and alerting model |
+| `CAP-WEA-001` | Weather Monitoring | Fornire la valutazione meteo operativa autorevole per schedule, session readiness, suspend/resume e safety evidence. | Observatory Safety / Operations | Operations Owner | Documented | Documented | Implementation Ready | 0.1 | `docs/capabilities/weather-monitoring/` | `WEA-ADR-001`, `WEA-ADR-002` | `monitor-weather.md`, `validate-weather-state.md`, `suspend-observation.md`, `resume-observation.md` | `weather-station-offline.md`, `conflicting-weather-data.md`, `unsafe-weather-state.md`, `weather-monitor-recovery.md` | `technical-manual.md`, Chapters 26-27 | `test-plan.md` | `acceptance-criteria.md` | CAP-OSM-001, CAP-SCH-001, CAP-EQR-001, CAP-TGT-001, DOM-001, Observatory Safety | Final threshold values, multi-source arbitration, state publication interface, retention |
 | `CAP-BRC-001` | Backup & Recovery | Preservare e ripristinare repository, configurazioni, dati osservativi and archive evidence. | Business Continuity / Preserve Knowledge | Infrastructure / Data Owner | Planned | Defined | Architecture Complete | OPEN | Not yet available | OPEN | Chapter 21 reference | OPEN | Chapter 21 | OPEN | OPEN | Observation Archive, Cloud Storage/NAS, Documentation Platform, Security | RTO/RPO, backup encryption, retention, restore testing |
 
 ## Maturity Summary
@@ -253,9 +256,9 @@ flowchart LR
 | Readiness | Count | Capabilities |
 |---|---:|---|
 | Not Started | 0 | None |
-| Architecture Complete | 16 | All catalogued capabilities except Observation Session Management, Observation Scheduling, Equipment Registry, Target Registry and Documentation Platform |
+| Architecture Complete | 15 | All catalogued capabilities except Observation Session Management, Observation Scheduling, Equipment Registry, Target Registry, Weather Monitoring and Documentation Platform |
 | Documentation Complete | 0 | None |
-| Implementation Ready | 4 | Observation Session Management, Observation Scheduling, Equipment Registry, Target Registry |
+| Implementation Ready | 5 | Observation Session Management, Observation Scheduling, Equipment Registry, Target Registry, Weather Monitoring |
 | Operational | 1 | Documentation Platform |
 | **Total** | **21** |  |
 
@@ -269,7 +272,7 @@ flowchart LR
 | Capabilities with Enterprise Architecture reference | 21 / 21 |
 | Capabilities with Knowledge Framework reference | 21 / 21 |
 | Capabilities with Design System reference or explicit UI condition | 21 / 21 |
-| Capabilities with dedicated package | 4 / 21 |
+| Capabilities with dedicated package | 5 / 21 |
 | Duplicate capability identifiers | 0 |
 
 ## Release Notes
