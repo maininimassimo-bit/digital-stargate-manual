@@ -172,6 +172,36 @@ nav:
       - Design Governance: design-system/design-governance.md
       - Implementation Guidelines: design-system/implementation-guidelines.md
 
+  - Capability Documentation:
+      - Observation Session Management:
+          - Overview: capabilities/observation-session-management/index.md
+          - Business Process: capabilities/observation-session-management/business-process.md
+          - Requirements: capabilities/observation-session-management/requirements.md
+          - Architecture Mapping: capabilities/observation-session-management/architecture-mapping.md
+          - Data Model: capabilities/observation-session-management/data-model.md
+          - ADR:
+              - OSM-ADR-001 - Session Governance Boundary: capabilities/observation-session-management/adr/OSM-ADR-001-session-governance-boundary.md
+              - OSM-ADR-002 - Session Manifest Evidence Binder: capabilities/observation-session-management/adr/OSM-ADR-002-session-manifest-evidence-binder.md
+          - SOP:
+              - Prepare Session: capabilities/observation-session-management/sop/prepare-session.md
+              - Execute Session: capabilities/observation-session-management/sop/execute-session.md
+              - Abort Session: capabilities/observation-session-management/sop/abort-session.md
+              - Recover Session: capabilities/observation-session-management/sop/recover-session.md
+              - Close Session: capabilities/observation-session-management/sop/close-session.md
+          - Runbooks:
+              - Scheduler Failure: capabilities/observation-session-management/runbooks/scheduler-failure.md
+              - Weather Unsafe: capabilities/observation-session-management/runbooks/weather-unsafe.md
+              - Roof Failure: capabilities/observation-session-management/runbooks/roof-failure.md
+              - Camera Failure: capabilities/observation-session-management/runbooks/camera-failure.md
+              - Mount Failure: capabilities/observation-session-management/runbooks/mount-failure.md
+              - N.I.N.A. Failure: capabilities/observation-session-management/runbooks/nina-failure.md
+              - ASCOM Failure: capabilities/observation-session-management/runbooks/ascom-failure.md
+              - Emergency Stop: capabilities/observation-session-management/runbooks/emergency-stop.md
+          - Technical Manual: capabilities/observation-session-management/technical-manual.md
+          - Test Plan: capabilities/observation-session-management/test-plan.md
+          - Acceptance Criteria: capabilities/observation-session-management/acceptance-criteria.md
+          - Traceability: capabilities/observation-session-management/traceability.md
+
   - Observatory:
       - Observatory Status: status/index.md
       - Session Reports: session-reports/index.md
