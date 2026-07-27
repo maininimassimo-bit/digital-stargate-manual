@@ -35,6 +35,75 @@ flowchart TD
 - Se owner, ADR, SOP, runbook, manuale, test o release non sono presenti, il campo resta `OPEN` o `Not yet available`.
 - Capability package futuri devono essere aggiunti qui prima della pubblicazione come riferimento ufficiale.
 
+## Capability Identifier Convention
+
+### Identifier Format
+
+Capability identifiers SHALL use:
+
+```text
+CAP-<DOMAIN>-<NUMBER>
+```
+
+Where:
+
+- `CAP` identifies a governed capability.
+- `<DOMAIN>` is a short uppercase domain prefix.
+- `<NUMBER>` is a three-digit sequence within the domain.
+
+### Domain Prefixes
+
+| Prefix | Domain |
+|---|---|
+| `OSM` | Observation Session Management |
+| `SCH` | Observation Scheduling |
+| `EQR` | Equipment Registry |
+| `TGT` | Target Registry |
+| `OPS` | Observatory Operations |
+| `CAL` | Calibration Management |
+| `ACQ` | Image Acquisition |
+| `PRC` | Image Processing |
+| `DAT` | Astronomical Data Platform |
+| `ARC` | Observation Archive |
+| `KG` | Knowledge Graph |
+| `AI` | AI Assistant |
+| `SCI` | Science Portal |
+| `ENG` | Engineering Portal |
+| `MNT` | Maintenance Portal |
+| `DOC` | Documentation Platform |
+| `ANL` | Analytics |
+| `RAC` | Remote Access |
+| `SAF` | Observatory Safety |
+| `WEA` | Weather Monitoring |
+| `BRC` | Backup & Recovery |
+
+### Governance Rules
+
+- Identifier allocation is governed by `CAP-000`.
+- Existing capability identifiers SHALL NOT be changed by routine package updates.
+- A new capability package SHALL reference its registry identifier in all primary artefacts.
+- Identifier changes require governance review and traceability impact assessment.
+- Historical aliases, if any, must remain traceable rather than silently removed.
+
+### Validation Rules
+
+- Capability identifiers must be unique in `CAP-000`.
+- Capability package paths must map to exactly one registry identifier.
+- Related ADR, SOP, runbook, manual, test and acceptance artefacts must reference the owning capability.
+- Validation shall check duplicate identifiers and missing registry/package cross references.
+
+### Artifact Identifier Conventions
+
+| Artefact | Convention | Example |
+|---|---|---|
+| ADR | `<DOMAIN>-ADR-<NUMBER>-<short-title>` | `TGT-ADR-001-authoritative-target-model.md` |
+| SOP | Verb phrase in package `sop/` folder | `register-target.md` |
+| Runbook | Failure/recovery phrase in package `runbooks/` folder | `duplicate-target.md` |
+| Manual | Package-level `technical-manual.md` | `technical-manual.md` |
+| Test Plan | Package-level `test-plan.md` | `test-plan.md` |
+| Acceptance Criteria | Package-level `acceptance-criteria.md` | `acceptance-criteria.md` |
+| Traceability | Package-level `traceability.md` | `traceability.md` |
+
 ## Maturity Indicators
 
 | Maturity | Meaning |
@@ -63,8 +132,8 @@ flowchart TD
     OPS --> WEATHER[Weather Monitoring]
     OPS --> REMOTE[Remote Access]
     OPS --> OSM[Observation Session Management]
-    SCHED[Observation Scheduling] --> OSM
-    TARGET[Target Registry] --> SCHED
+    TARGET[Target Registry] --> SCHED[Observation Scheduling]
+    SCHED --> OSM
     EQUIP[Equipment Registry] --> SCHED
     EQUIP --> OSM
     CAL[Calibration Management] --> ACQ[Image Acquisition]
@@ -118,7 +187,7 @@ flowchart LR
 | Observation Scheduling | Documented | Full capability package | 2 capability ADR | 4 | 4 | 1 | 1 | 0.1 | Implementation Ready |
 | Observatory Operations | In Progress | Architecture + manuals/SOP chapters | ADR-001 | Chapters 16, 25, 26 | Chapter 18 / capability runbooks related | Chapters 5, 6, 16, 25, 26 | OPEN | OPEN | Architecture Complete |
 | Equipment Registry | Documented | Full capability package | 2 capability ADR | 4 | 4 | 1 | 1 | 0.1 | Implementation Ready |
-| Target Registry | Planned | Architecture only | OPEN | OPEN | OPEN | Chapter 17 reference | OPEN | OPEN | Architecture Complete |
+| Target Registry | Documented | Full capability package | 2 capability ADR | 4 | 4 | 1 | 1 | 0.1 | Implementation Ready |
 | Calibration Management | Planned | Architecture + manual references | OPEN | Chapter 28 | OPEN | Chapters 10, 28 | OPEN | OPEN | Architecture Complete |
 | Image Acquisition | In Progress | Architecture + manuals + ADR-001 | ADR-001 | Chapter 17 | Capability camera/N.I.N.A./ASCOM runbooks related | Chapters 11-17 | OPEN | OPEN | Architecture Complete |
 | Image Processing | Planned | Architecture + manual references | OPEN | Chapter 28 | OPEN | Chapter 28 | OPEN | OPEN | Architecture Complete |
@@ -141,10 +210,10 @@ flowchart LR
 | Identifier | Capability | Purpose | Domain | Owner | Status | Maturity | Readiness | Version | Package | ADR | SOP | Runbooks | Manuals | Tests | Acceptance | Dependencies | Open decisions |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | `CAP-OSM-001` | Observation Session Management | Governare la sessione osservativa come unita operativa, informativa e di tracciabilita. | Observatory Operations / Data / Knowledge | Lead Solution Architect / Operations Owner | In Progress | Documented | Implementation Ready | OPEN | `docs/capabilities/observation-session-management/` | `ADR-001`, `OSM-ADR-001`, `OSM-ADR-002` | 5 package SOP | 8 package runbooks | `technical-manual.md`, Chapters 11-17, 28 | `test-plan.md` | `acceptance-criteria.md` | Scheduler, Target Registry, Equipment Registry, N.I.N.A., ASCOM, Data Platform, Weather/Safety | Manifest schema, session ID format, session quality scale |
-| `CAP-SCH-001` | Observation Scheduling | Preparare piani osservativi usando target, finestra, meteo, profilo ottico e priorita. | Prepare Observation / Automation | OPEN | Documented | Documented | Implementation Ready | 0.1 | `docs/capabilities/observation-scheduling/` | `OSD-ADR-001`, `OSD-ADR-002` | `create-schedule.md`, `update-schedule.md`, `approve-schedule.md`, `cancel-schedule.md` | `scheduling-conflict.md`, `weather-window-lost.md`, `resource-unavailable.md`, `schedule-recovery.md` | `technical-manual.md`, Chapter 17 reference | `test-plan.md` | `acceptance-criteria.md` | Target Registry, Equipment Registry, Weather Monitoring, Observatory Safety, CAP-001 | Priority scoring model, schedule evidence retention, future scheduling UI, notification behavior |
+| `CAP-SCH-001` | Observation Scheduling | Preparare piani osservativi usando target, finestra, meteo, profilo ottico e priorita. | Prepare Observation / Automation | OPEN | Documented | Documented | Implementation Ready | 0.1 | `docs/capabilities/observation-scheduling/` | `OSD-ADR-001`, `OSD-ADR-002` | `create-schedule.md`, `update-schedule.md`, `approve-schedule.md`, `cancel-schedule.md` | `scheduling-conflict.md`, `weather-window-lost.md`, `resource-unavailable.md`, `schedule-recovery.md` | `technical-manual.md`, Chapter 17 reference | `acceptance-criteria.md` | Target Registry, Equipment Registry, Weather Monitoring, Observatory Safety, CAP-001 | Priority scoring model, schedule evidence retention, future scheduling UI, notification behavior |
 | `CAP-OPS-001` | Observatory Operations | Operare osservatorio remoto in modo sicuro, ripetibile e tracciabile. | Operate Observatory | Operations Owner | In Progress | Documented | Architecture Complete | OPEN | Not yet available | `ADR-001` related | Chapters 16, 25, 26 | OSM emergency/weather/roof runbooks related | Chapters 5, 6, 16, 18, 25, 26 | OPEN | OPEN | Remote Access, Weather Monitoring, Observatory Safety, Equipment Registry | Operational metrics and release evidence refinement |
-| `CAP-EQR-001` | Equipment Registry | Governare asset, configurazioni, driver, firmware, gruppi logici, stato e lifecycle equipment. | Support Engineering / Observatory Operations | Engineering Owner / OPEN | Documented | Documented | Implementation Ready | 0.1 | `docs/capabilities/equipment-registry/` | `EQR-ADR-001`, `EQR-ADR-002` | `register-equipment.md`, `update-equipment.md`, `verify-equipment.md`, `retire-equipment.md` | `equipment-not-found.md`, `configuration-mismatch.md`, `equipment-offline.md`, `registry-recovery.md` | `technical-manual.md`, Chapters 7-10, 22 | `test-plan.md` | `acceptance-criteria.md` | CAP-001, CAP-002, Observatory Safety, Maintenance Portal, Engineering Portal, Knowledge Framework | Identifier format, physical storage model, telemetry ingestion, compatibility matrix |
-| `CAP-TGR-001` | Target Registry | Gestire target candidati e osservati, coordinate, priorita e stato osservativo. | Prepare Observation / Support Scientific Research | Science Owner | Planned | Defined | Architecture Complete | OPEN | Not yet available | OPEN | OPEN | Scheduler Failure related | Chapter 17 reference | OPEN | OPEN | Scheduling, Science Portal, Observation Catalog | Target registry structure, priority model |
+| `CAP-EQR-001` | Equipment Registry | Governare asset, configurazioni, driver, firmware, gruppi logici, stato e lifecycle equipment. | Support Engineering / Observatory Operations | Engineering Owner / OPEN | Documented | Documented | Implementation Ready | 0.1 | `docs/capabilities/equipment-registry/` | `EQR-ADR-001`, `EQR-ADR-002` | `register-equipment.md`, `update-equipment.md`, `verify-equipment.md`, `retire-equipment.md` | `equipment-not-found.md`, `configuration-mismatch.md`, `equipment-offline.md`, `registry-recovery.md` | `technical-manual.md`, Chapters 7-10, 22 | `test-plan.md` | `acceptance-criteria.md` | CAP-OSM-001, CAP-SCH-001, Observatory Safety, Maintenance Portal, Engineering Portal, Knowledge Framework | Identifier format, physical storage model, telemetry ingestion, compatibility matrix |
+| `CAP-TGT-001` | Target Registry | Governare identita, riferimenti catalogo, coordinate, classificazione, vincoli e lifecycle dei target astronomici. | Prepare Observation / Support Scientific Research | Science Owner / OPEN | Documented | Documented | Implementation Ready | 0.1 | `docs/capabilities/target-registry/` | `TGT-ADR-001`, `TGT-ADR-002` | `register-target.md`, `update-target.md`, `validate-target.md`, `retire-target.md` | `duplicate-target.md`, `unresolved-identifier.md`, `invalid-coordinates.md`, `registry-recovery.md` | `technical-manual.md`, Chapter 17 reference | `test-plan.md` | `acceptance-criteria.md` | CAP-SCH-001, CAP-OSM-001, CAP-EQR-001, Knowledge Framework, Data Platform | Target identifier format, physical storage model, automated catalogue import, moving target ephemeris handling |
 | `CAP-CAL-001` | Calibration Management | Governare calibration frames e master calibration per acquisizione e processing. | Calibrate Data | Imaging Owner | Planned | Defined | Architecture Complete | OPEN | Not yet available | OPEN | Chapter 28 reference | OPEN | Chapters 10, 28 | OPEN | OPEN | Equipment Registry, Image Acquisition, Image Processing | Calibration library validity and storage decisions |
 | `CAP-ACQ-001` | Image Acquisition | Acquisire e organizzare FITS, header, log e raw workspace durante sessioni osservative. | Acquire Scientific Data | Operations / Imaging Owner | In Progress | Documented | Architecture Complete | OPEN | Covered by OSM as related acquisition phase | `ADR-001` | Chapter 17; OSM Execute Session | Camera, N.I.N.A., ASCOM, Mount runbooks in OSM package | Chapters 11-17 | OSM test plan related | OSM acceptance related | OSM, Observatory Control, N.I.N.A., ASCOM, PHD2, Calibration Management | Raw/intermediate retention and manifest schema |
 | `CAP-PRC-001` | Image Processing | Trasformare raw data in registered, integrated, processed images and scientific products. | Process Images | Imaging Owner | Planned | Defined | Architecture Complete | OPEN | Not yet available | OPEN | Chapter 28 reference | OPEN | Chapter 28 | OPEN | OPEN | Calibration Management, Data Platform, PixInsight, ASTAP, Archive | Processing quality metrics and publication criteria |
@@ -167,8 +236,8 @@ flowchart LR
 | Maturity | Count | Capabilities |
 |---|---:|---|
 | Not Started | 0 | None catalogued with this maturity. |
-| Defined | 10 | Target Registry, Calibration Management, Image Processing, Observation Archive, Knowledge Graph, AI Assistant, Science Portal, Maintenance Portal, Remote Access, Backup & Recovery |
-| Documented | 10 | Observation Session Management, Observation Scheduling, Observatory Operations, Equipment Registry, Image Acquisition, Astronomical Data Platform, Engineering Portal, Analytics, Observatory Safety, Weather Monitoring |
+| Defined | 9 | Calibration Management, Image Processing, Observation Archive, Knowledge Graph, AI Assistant, Science Portal, Maintenance Portal, Remote Access, Backup & Recovery |
+| Documented | 11 | Observation Session Management, Observation Scheduling, Observatory Operations, Equipment Registry, Target Registry, Image Acquisition, Astronomical Data Platform, Engineering Portal, Analytics, Observatory Safety, Weather Monitoring |
 | Validated | 0 | None validated by release/assessment evidence in this registry. |
 | Operational | 1 | Documentation Platform |
 | **Total** | **21** |  |
@@ -178,9 +247,9 @@ flowchart LR
 | Readiness | Count | Capabilities |
 |---|---:|---|
 | Not Started | 0 | None |
-| Architecture Complete | 17 | All catalogued capabilities except Observation Session Management, Observation Scheduling, Equipment Registry and Documentation Platform |
+| Architecture Complete | 16 | All catalogued capabilities except Observation Session Management, Observation Scheduling, Equipment Registry, Target Registry and Documentation Platform |
 | Documentation Complete | 0 | None |
-| Implementation Ready | 3 | Observation Session Management, Observation Scheduling, Equipment Registry |
+| Implementation Ready | 4 | Observation Session Management, Observation Scheduling, Equipment Registry, Target Registry |
 | Operational | 1 | Documentation Platform |
 | **Total** | **21** |  |
 
@@ -194,7 +263,7 @@ flowchart LR
 | Capabilities with Enterprise Architecture reference | 21 / 21 |
 | Capabilities with Knowledge Framework reference | 21 / 21 |
 | Capabilities with Design System reference or explicit UI condition | 21 / 21 |
-| Capabilities with dedicated package | 3 / 21 |
+| Capabilities with dedicated package | 4 / 21 |
 | Duplicate capability identifiers | 0 |
 
 ## Release Notes
