@@ -74,6 +74,8 @@ Sono esclusi:
 
 `CAP-WEA-001 - Weather Monitoring` e il capability package documentato che governa la valutazione meteo operativa autorevole per scheduling, session readiness, suspend/resume e safety evidence. La sincronizzazione release registra in `CAP-000` status `Documented`, maturity `Documented`, readiness `Implementation Ready`, version `0.1` e collegamento a `docs/capabilities/weather-monitoring/`.
 
+`CAP-SAF-001 - Observatory Safety` e il capability package documentato che governa safety policy, safety state, fail-safe posture, allow/suspend/abort/recovery e audit evidence del Core Observatory. La sincronizzazione release registra in `CAP-000` status `Documented`, maturity `Documented`, readiness `Implementation Ready`, version `0.1` e collegamento a `docs/capabilities/observatory-safety/`.
+
 ## Release Lifecycle
 
 ```mermaid
@@ -320,4 +322,5 @@ Continuous improvement does not bypass governance. If a retrospective identifies
 - `docs/capabilities/equipment-registry/index.md`
 - `docs/capabilities/target-registry/index.md`
 - `docs/capabilities/weather-monitoring/index.md`
+- `docs/capabilities/observatory-safety/index.md`
 - `docs/enterprise/release-documentation.md`
