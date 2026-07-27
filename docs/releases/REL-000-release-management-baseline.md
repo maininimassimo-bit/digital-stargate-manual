@@ -66,6 +66,8 @@ Sono esclusi:
 | Owner | Confermare o aggiornare owner quando governato. |
 | Related artefacts | Collegare ADR, SOP, runbook, manuali, test, acceptance e release notes. |
 
+`CAP-SCH-001 - Observation Scheduling` e il primo capability package di scheduling documentato sotto questo baseline. La sincronizzazione release registra in `CAP-000` status `Documented`, readiness `Implementation Ready`, version `0.1` e collegamento a `docs/capabilities/observation-scheduling/`.
+
 ## Release Lifecycle
 
 ```mermaid
@@ -308,4 +310,5 @@ Continuous improvement does not bypass governance. If a retrospective identifies
 - `docs/knowledge/traceability-matrix.md`
 - `docs/design-system/DSG-DS-001-design-system-baseline.md`
 - `docs/capabilities/CAP-000-capability-registry.md`
+- `docs/capabilities/observation-scheduling/index.md`
 - `docs/enterprise/release-documentation.md`
