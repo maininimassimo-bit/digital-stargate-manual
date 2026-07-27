@@ -274,6 +274,29 @@ nav:
           - Test Plan: capabilities/target-registry/test-plan.md
           - Acceptance Criteria: capabilities/target-registry/acceptance-criteria.md
           - Traceability: capabilities/target-registry/traceability.md
+      - Weather Monitoring:
+          - Overview: capabilities/weather-monitoring/index.md
+          - Business Process: capabilities/weather-monitoring/business-process.md
+          - Requirements: capabilities/weather-monitoring/requirements.md
+          - Architecture Mapping: capabilities/weather-monitoring/architecture-mapping.md
+          - Data Model: capabilities/weather-monitoring/data-model.md
+          - ADR:
+              - WEA-ADR-001 - Authoritative Weather State: capabilities/weather-monitoring/adr/WEA-ADR-001-authoritative-weather-state.md
+              - WEA-ADR-002 - Operational Safety Thresholds: capabilities/weather-monitoring/adr/WEA-ADR-002-operational-safety-thresholds.md
+          - SOP:
+              - Monitor Weather: capabilities/weather-monitoring/sop/monitor-weather.md
+              - Validate Weather State: capabilities/weather-monitoring/sop/validate-weather-state.md
+              - Suspend Observation: capabilities/weather-monitoring/sop/suspend-observation.md
+              - Resume Observation: capabilities/weather-monitoring/sop/resume-observation.md
+          - Runbooks:
+              - Weather Station Offline: capabilities/weather-monitoring/runbooks/weather-station-offline.md
+              - Conflicting Weather Data: capabilities/weather-monitoring/runbooks/conflicting-weather-data.md
+              - Unsafe Weather State: capabilities/weather-monitoring/runbooks/unsafe-weather-state.md
+              - Weather Monitor Recovery: capabilities/weather-monitoring/runbooks/weather-monitor-recovery.md
+          - Technical Manual: capabilities/weather-monitoring/technical-manual.md
+          - Test Plan: capabilities/weather-monitoring/test-plan.md
+          - Acceptance Criteria: capabilities/weather-monitoring/acceptance-criteria.md
+          - Traceability: capabilities/weather-monitoring/traceability.md
 
   - Observatory:
       - Observatory Status: status/index.md
