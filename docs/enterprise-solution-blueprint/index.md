@@ -5,39 +5,36 @@
 | Documento | Enterprise Solution Blueprint |
 | Identificativo | `DSG-ESB-001` |
 | Stato | Proposed architecture baseline |
-| Versione | 0.1 |
+| Versione | 0.2 |
 | Owner | Massimo Mainini |
-| Data | 2026-07-26 |
+| Data | 2026-07-27 |
 | Fonte gerarchica | `DSG-MR-001` |
 | Baseline correlate | `DSG-EAM-001`, `DSRA-000`, `DSRA-001` |
 | Policy applicabile | `DSG-GOV-001` - Roadmap Freeze Policy |
 
 ## Scopo
 
-Questo documento definisce il blueprint tecnico complessivo della piattaforma Digital StarGate. Traduce la baseline enterprise in una vista di soluzione che identifica macro-componenti, responsabilita, relazioni, confini operativi, dipendenze e vincoli di evoluzione.
+Questo blueprint descrive la piattaforma reale Digital StarGate: un osservatorio astronomico remoto governato da EAGLE, N.I.N.A., CPWI, PHD2, ASCOM, ASTAP, montatura Celestron CGX-L, ottiche C8 XLT e Sky-Watcher Quattro 200P, camere astronomiche, AllSky, monitoraggio meteo, rete RUT955/Starlink/VPN, repository documentale MkDocs, data platform, analytics e archiviazione osservativa.
 
-Il blueprint non implementa software, backend, frontend, API o database. Le tecnologie citate sono raccomandazioni architetturali e devono essere formalizzate tramite governance, ADR o roadmap implementativa prima di diventare baseline esecutiva.
+Il documento non crea software, backend, frontend, API o database. Quando una informazione non e tracciabile alla documentazione esistente, viene registrata in [Open Architectural Decisions](open-decisions.md).
 
 ## Ambito
 
 In ambito:
 
-- architettura tecnica end-to-end della piattaforma Digital StarGate;
-- domini applicativi e container logici;
-- flussi dati principali;
-- integrazioni esterne previste;
-- requisiti non funzionali;
-- modello di deployment locale/remoto;
-- raccomandazioni tecnologiche;
-- milestone implementative verificabili.
+- architettura funzionale dell'osservatorio automatizzato;
+- domini osservativi, strumentali, dati, processing, portali e conoscenza;
+- lifecycle dei dati astronomici;
+- component registry e integration catalog;
+- requisiti non funzionali e deployment model;
+- decisioni architetturali aperte.
 
 Fuori ambito:
 
-- sviluppo applicativo;
-- implementazione di API, servizi, database o UI;
-- modifica della roadmap congelata `DSG-MR-001`;
-- modifica di `DSG-EAM-001`, `DSRA-000`, `DSRA-001`, ADR approvati o Governance, salvo riferimenti futuri strettamente necessari;
-- pubblicazione di credenziali, indirizzi sensibili, chiavi, token o configurazioni private.
+- modifica della roadmap `DSG-MR-001`;
+- modifica di `DSG-EAM-001`, `DSRA-000`, `DSRA-001`, ADR approvati o Governance;
+- introduzione di prodotti non presenti nel repository;
+- pubblicazione di segreti, indirizzi sensibili, token o configurazioni private.
 
 ## Posizionamento nella baseline enterprise
 
@@ -46,114 +43,106 @@ Fuori ambito:
 | [DSG-MR-001](../enterprise-roadmap/DSG-MR-001-master-roadmap.md) | Fonte gerarchica e perimetro congelato |
 | [DSG-EAM-001](../enterprise-architecture/DSG-EAM-001-enterprise-architecture-meta-model.md) | Meta-modello di domini, capability, componenti ed evidenze |
 | [DSRA-000](../enterprise-architecture/DSRA-000-vision-target-architecture.md) | Visione target AS-IS / Transition / TO-BE |
-| [DSRA-001](../enterprise-architecture/DSRA-001-reference-architecture.md) | Reference architecture operativa PC Principale / EAGLE |
+| [DSRA-001](../enterprise-architecture/DSRA-001-reference-architecture.md) | Separazione PC Principale / EAGLE |
 | [Governance](../enterprise/governance.md) | Freeze policy, quality gate, change management e security governance |
-| [DSRA Risk Assessment](../enterprise/DSRA-risk-assessment.md) | Rischi, controlli e mitigazioni enterprise |
-| [ADR Index](../enterprise/adr/index.md) | Registro delle decisioni approvate e criteri per ADR futuri |
+| [ADR Index](../enterprise/adr/index.md) | Decisioni approvate e candidate ADR future |
 
-## Principi architetturali
+## Principi architetturali applicati
 
-| ID | Principio | Applicazione nel blueprint |
+| ID | Principio | Applicazione Digital StarGate |
 |---|---|---|
-| `DSG-ESB-PRN-001` | Roadmap-first | Ogni componente deve mappare a `DSG-MR-001` |
-| `DSG-ESB-PRN-002` | Operational separation | EAGLE governa le operazioni sul campo; PC Principale governa engineering, documentazione, analytics e release |
-| `DSG-ESB-PRN-003` | Safety boundary | AI, automation remota e dashboard non comandano funzioni safety senza controlli approvati |
-| `DSG-ESB-PRN-004` | Evidence and lineage | Dati, immagini, log e decisioni devono essere collegabili a sessioni, sorgenti e controlli |
-| `DSG-ESB-PRN-005` | Local-first operations | L'osservatorio deve poter raggiungere uno stato sicuro anche in caso di perdita cloud o VPN |
-| `DSG-ESB-PRN-006` | Progressive enablement | Le capability TO-BE vengono abilitate per milestone indipendenti e verificabili |
-| `DSG-ESB-PRN-007` | Secure by default | Nessuna credenziale o configurazione sensibile nel repository; accessi remoti governati da VPN e IAM |
+| `DSG-ESB-PRN-001` | Observatory-first | La piattaforma e modellata intorno alla sessione osservativa e alla sicurezza dell'osservatorio, non intorno a componenti enterprise generici. |
+| `DSG-ESB-PRN-002` | EAGLE operational boundary | EAGLE resta il nodo operativo per N.I.N.A., CPWI, PHD2, ASCOM, ASTAP, dispositivi e acquisizione. |
+| `DSG-ESB-PRN-003` | PC Principale engineering boundary | PC Principale governa documentazione, GitHub, MkDocs, processing, analytics, release e architettura. |
+| `DSG-ESB-PRN-004` | Single device control path | La montatura CGX-L e controllata direttamente da CPWI; N.I.N.A. e PHD2 passano da ASCOM. |
+| `DSG-ESB-PRN-005` | Safety before automation | Meteo UNKNOWN o incoerente non autorizza apertura; AI e portali non comandano safety. |
+| `DSG-ESB-PRN-006` | FITS lineage | Raw images, calibrazioni, session manifest, catalogo e archive devono restare collegati. |
+| `DSG-ESB-PRN-007` | Evidence-based architecture | Ogni statement architetturale deve rimandare a capitoli, ADR, governance o open decisions. |
 
-## Macro-componenti della piattaforma
+## Macro-capability Digital StarGate
 
-| ID | Macro-componente | Responsabilita | Nodo primario | Stato architetturale |
+| ID | Capability | Responsabilita | Nodo primario | Stato |
 |---|---|---|---|---|
-| `DSG-MC-OBS` | Observatory Control | Strumentazione, cupola/tetto, montatura, camere, fuoco, alimentazioni e stato campo | EAGLE / componenti locali | AS-IS / Transition |
-| `DSG-MC-AUT` | Automation Orchestration | Sequenze, pre-check, acquisizione, recovery operativo, sincronizzazioni | EAGLE | Transition |
-| `DSG-MC-IMG` | Imaging Pipeline | FITS, calibrazione, elaborazione, prodotti finali e quality assessment immagini | EAGLE + PC Principale | Transition |
-| `DSG-MC-SCH` | Scheduler | Pianificazione sessioni, finestre meteo, priorita target e readiness | PC Principale + EAGLE | TO-BE / Da validare |
-| `DSG-MC-DAT` | Data Platform | Storage osservativo, warehouse, data catalog, lineage, retention | PC Principale / Storage | Transition |
-| `DSG-MC-KG` | Knowledge Graph | Modello semantico di asset, osservazioni, documenti, decisioni e rischi | PC Principale / Cloud | TO-BE / TBD |
-| `DSG-MC-AI` | AI Assistance | Analisi assistita, sintesi, classificazione, supporto troubleshooting non safety | PC Principale / Cloud | TO-BE / TBD |
-| `DSG-MC-ANL` | Analytics and Dashboard | KPI, dashboard, report, quality gates e trend | PC Principale / GitHub Pages | AS-IS / Transition |
-| `DSG-MC-DOC` | Documentation Platform | MkDocs, handbook, SOP, ADR, registri, release documentation | PC Principale / GitHub | AS-IS / Transition |
-| `DSG-MC-PORTAL` | User Portal | Pubblicazione documentale, consultazione dashboard, stato e contenuti divulgativi | GitHub Pages / Cloud | AS-IS / Transition |
-| `DSG-MC-INT` | Integration Layer | Contratti logici con N.I.N.A., ASCOM, CPWI, PHD2, AllSky, meteo e servizi esterni | EAGLE + PC Principale | Transition |
-| `DSG-MC-SEC` | Identity and Access | VPN, account, permessi, segreti, autorizzazioni e audit accessi | RUT955 / GitHub / Cloud | Transition |
-| `DSG-MC-OPS` | Monitoring, Logging and Alerting | Log applicativi, eventi rete, metriche operative, notifiche, incident evidence | EAGLE + PC Principale | Transition |
-| `DSG-MC-BRC` | Backup, Recovery and Continuity | Copie, restore test, disaster recovery, readiness e continuita | Storage locale + remoto | Transition |
+| `DSG-CAP-OBS` | Observatory Readiness and Safety | Stato osservatorio, meteo, copertura, rete, EAGLE, Park/Unpark e condizioni SAFE | EAGLE / campo | AS-IS / Transition |
+| `DSG-CAP-EQP` | Equipment Control and Configuration | CGX-L, C8, Quattro, camere, filtri, fuocheggiatori, flat panel, profili e mapping hardware | EAGLE / documentazione tecnica | AS-IS / Transition |
+| `DSG-CAP-SES` | Observation Session Management | Avvio, sequenza, log, eventi, report sessione e chiusura dati | EAGLE | Transition |
+| `DSG-CAP-SCH` | Observation Scheduling | Target, finestre, priorita, readiness, profilo ottico e piano sessione | PC Principale / EAGLE | TO-BE / Decisione aperta |
+| `DSG-CAP-CAL` | Calibration Management | Dark, flat, bias, dark-flat, master calibration e validita librerie | EAGLE + PC Principale | Transition |
+| `DSG-CAP-ACQ` | Image Acquisition | FITS raw, header, naming, guida, solve, autofocus, dithering e meridian flip | EAGLE | AS-IS / Transition |
+| `DSG-CAP-PROC` | Image Processing | Calibrazione, registrazione, integrazione, processing, metriche e export | PC Principale | Transition |
+| `DSG-CAP-DATA` | Astronomical Data Platform | Session manifest, catalogo osservazioni, warehouse, metadata, lineage e quality gates | PC Principale / Storage | Transition |
+| `DSG-CAP-ARCH` | Observation Archive and Recovery | Raw, processed, configurazioni, log, copie, restore evidence e retention | Storage locale/remoto | Transition |
+| `DSG-CAP-KG` | Knowledge Graph | Relazioni tra target, sessioni, asset, documenti, ADR, rischi e dataset | PC Principale | TO-BE / Decisione aperta |
+| `DSG-CAP-AI` | AI Assistant | Supporto documentale e analisi non safety su fonti approvate | PC Principale / provider approvato | TO-BE / Decisione aperta |
+| `DSG-CAP-DOC` | Documentation Platform | MkDocs, manuale, SOP, ADR, registri, release evidence | PC Principale / GitHub | AS-IS / Transition |
+| `DSG-CAP-ANL` | Analytics | KPI, dashboard, quality gate, validation history e trend | PC Principale / GitHub Pages | AS-IS / Transition |
+| `DSG-CAP-SCI` | Science Portal | Pubblicazione osservazioni, immagini finali, metadati e contenuti scientifici validati | MkDocs / GitHub Pages | TO-BE / Transition |
+| `DSG-CAP-ENG` | Engineering Portal | Architettura, registri, dashboard tecniche, release e publication guidelines | MkDocs / GitHub Pages | Transition |
+| `DSG-CAP-MNT` | Maintenance Portal | Manutenzione, incident, recovery, backup, asset e obsolescenza | MkDocs / GitHub Pages | Transition |
+| `DSG-CAP-REMOTE` | Remote Access and Network Continuity | VPN, RUT955, Starlink, LTE failover, desktop remoto e log rete | RUT955 / EAGLE | AS-IS / Transition |
 
-## Relazioni principali
+## Concetti generici sostituiti
+
+| Concetto precedente | Trattamento nel blueprint raffinato |
+|---|---|
+| API Gateway | Non e una capability operativa attuale. Rimane decisione aperta `DSG-OAD-025` solo se emergera un caso d'uso reale. |
+| Identity & Access | Sostituito da `DSG-CAP-REMOTE`: VPN RUT955, account GitHub, segreti fuori repository e access governance. |
+| Notification | Sostituito da evidenze di sessione, incident/recovery e decisione aperta sui canali di escalation. |
+| Monitoring | Sostituito da Observatory Readiness, meteo SAFE/UNSAFE, log sessione, dashboard analytics e health evidence. |
+| Logging | Sostituito da log reali N.I.N.A., PHD2, CPWI, ASCOM, Windows, RUT955, AllSky e correlazione sessione. |
+| Backup | Sostituito da Observation Archive and Recovery, coerente con dati FITS, configurazioni, repository e restore evidence. |
+
+## Relazione logica principale
 
 ```text
-Operatori / Maintainer
-        |
-        v
-User Portal / Documentation / Dashboard
-        |
-        v
-PC Principale -- GitHub -- Cloud Storage / Remote Services
-        |
-        v
-VPN / Remote Access / RUT955
-        |
-        v
-EAGLE -- N.I.N.A. -- ASCOM -- CPWI -- CGX-L
-  |          |         |        
-  |          |         +-- PHD2 / guiding
-  |          +-- camera / focuser / filter wheel / solver
-  +-- local storage / logs / telemetry / sync
-        |
-        v
-Data Platform -> Analytics -> Knowledge Graph -> AI Assistance
-        |
-        v
-Backup / Archive / Publication
+Operatore / Maintainer
+  -> Science Portal / Engineering Portal / Maintenance Portal
+  -> Scheduling
+  -> Observation Session Management
+  -> N.I.N.A.
+  -> ASCOM / CPWI / PHD2 / ASTAP
+  -> CGX-L / camere / fuocheggiatori / filtri / AllSky / meteo
+  -> Image Acquisition
+  -> Astronomical Data Platform
+  -> Image Processing
+  -> Observation Catalog / Archive
+  -> Knowledge Graph / AI Assistant
+  -> Documentation Platform / Analytics
 ```
-
-La relazione e logica. Non implica un bus applicativo implementato, un database operativo o API gia disponibili.
 
 ## Vista AS-IS / Transition / TO-BE
 
 | Area | AS-IS | Transition | TO-BE |
 |---|---|---|---|
-| Operazioni campo | EAGLE, N.I.N.A., CPWI, PHD2, ASCOM e procedure documentate | Controlli readiness, logging e sync tracciati | Operazioni orchestrate con evidenze complete e safety gate |
-| Dati osservativi | FITS, log, report e archiviazione documentata | Data catalog, lineage, quality gates e retention | Data platform scientifica governata e interrogabile |
-| Analytics | Dashboard e warehouse documentati | KPI consolidati e controlli qualita | Dashboard operative e direzionali con trend affidabili |
-| Knowledge | Manuale MkDocs e registri | Mapping semantico preliminare | Knowledge Graph interrogabile e versionato |
-| AI | Ambito previsto ma non operativo | Use case e guardrail approvati | AI assistiva auditabile, non autonoma su safety |
-| Portal | MkDocs e contenuti pubblicati | Navigazione enterprise estesa | Portale unico per manuale, dashboard e release evidence |
-| Continuity | Backup e recovery documentati | Restore test e classificazione dati | Business continuity misurabile con RTO/RPO validati |
-
-## Mappa di tracciabilita macro-componenti
-
-| Macro-componente | Roadmap | Baseline | Evidenza esistente o attesa |
-|---|---|---|---|
-| `DSG-MC-OBS` | Observatory, Operations | `DSRA-001` | Capitoli osservatorio, EAGLE, strumenti |
-| `DSG-MC-AUT` | Automation, Live Operations | `DSRA-000`, `DSRA-001` | SOP avvio, acquisizione, chiusura, recovery |
-| `DSG-MC-IMG` | Image and Scientific Repository | `DSG-MR-001` | Capitolo gestione dati, pipeline processing |
-| `DSG-MC-SCH` | Operations / Live Operations | `DSRA-000` | `TBD`, richiede validazione requisiti |
-| `DSG-MC-DAT` | Data | `ADR-003`, Data Governance | Warehouse, dataset, schema, quality gate |
-| `DSG-MC-KG` | Knowledge | `DSRA-000`, `DSRA-001` | `TBD`, modello semantico futuro |
-| `DSG-MC-AI` | AI | Governance AI | `TBD`, use case approvati richiesti |
-| `DSG-MC-ANL` | Analytics and Reporting | `ADR-002` | Dashboard, KPI, validation |
-| `DSG-MC-DOC` | Documentation | `DSG-ADR-004` | MkDocs, registri, SOP, handbook |
-| `DSG-MC-PORTAL` | Documentation / Community | Governance release | GitHub Pages / portale documentale |
-| `DSG-MC-SEC` | Security | Governance Security | VPN, account, policy segreti |
-| `DSG-MC-OPS` | Operations / Security | DSRA Risk Assessment | Log, monitoraggio, alert, incident evidence |
-| `DSG-MC-BRC` | Disaster Recovery | Governance DR | Backup, restore, continuity evidence |
+| Operazioni campo | EAGLE, N.I.N.A., CPWI, PHD2, ASCOM, ASTAP e procedure | Session manifest, evidence e readiness consolidati | Session management tracciato end-to-end |
+| Equipment | CGX-L, C8, Quattro, QHY/ToupTek, filtri, fuocheggiatori documentati | Equipment Registry e configurazioni standard | Scheduling basato su configurazione verificata |
+| Dati osservativi | FITS, log, report e archiviazione | Catalogo osservazioni, lineage e quality gates | Data platform astronomica interrogabile |
+| Processing | PixInsight e workflow documentati in termini architetturali | Metriche e processing evidence | Pipeline ripetibile e collegata a catalogo |
+| Portali | MkDocs e analytics pubblicabili | Science/Engineering/Maintenance Portal come viste logiche | Esperienza integrata senza introdurre app dinamiche non approvate |
+| Knowledge/AI | Previsti ma non implementati | Open decisions e governance | KG e AI Assistant auditabili e non safety |
 
 ## Documenti della sezione
 
-- [System Decomposition](system-decomposition.md): domini applicativi, confini, container logici e protocolli.
-- [Data Flow and Integrations](data-flow-integrations.md): flussi dati principali e integrazioni esterne previste.
-- [NFR, Deployment and Roadmap](nfr-deployment-roadmap.md): requisiti non funzionali, deployment model, technology decisions, milestone e validazione.
+- [Component Registry](component-registry.md): componenti software/logici reali e lifecycle status.
+- [Astronomical Data Architecture](data-architecture.md): lifecycle completo dei dati astronomici.
+- [Data Flow and Integrations](data-flow-integrations.md): flussi dati principali e integrazioni.
+- [Integration Catalog](integration-catalog.md): protocolli, failure mode e recovery delle integrazioni.
+- [Logical Architecture](logical-architecture.md): functional architecture e diagrammi logici.
+- [NFR, Deployment and Roadmap](nfr-deployment-roadmap.md): requisiti non funzionali, deployment e milestone.
+- [Open Architectural Decisions](open-decisions.md): backlog delle decisioni non finalizzate.
+- [System Decomposition](system-decomposition.md): decomposizione precedente mantenuta come vista di container logici, da leggere insieme ai nuovi registri.
 
-## Elementi TBD
+## Tracciabilita minima
 
-| ID | Elemento | Motivazione | Governance richiesta |
-|---|---|---|---|
-| `DSG-ESB-TBD-001` | Contratti telemetria EAGLE -> PC Principale | Non risultano ancora baseline tecniche complete | Assessment + eventuale ADR |
-| `DSG-ESB-TBD-002` | Modello dati Knowledge Graph | Capability TO-BE non implementata | AI/Knowledge governance |
-| `DSG-ESB-TBD-003` | Scheduler operativo e regole di priorita | Requisiti e safety gate da validare | Architecture governance |
-| `DSG-ESB-TBD-004` | RTO/RPO numerici per dataset e servizi | Valori non presenti nella baseline | DR governance |
-| `DSG-ESB-TBD-005` | Provider cloud/storage definitivo | Decisione tecnologica non ancora approvata | ADR futuro |
+| Capability | Documenti sorgente principali |
+|---|---|
+| Observatory Readiness and Safety | `docs/chapters/05-infrastruttura-rete.md`, `docs/chapters/16-sop-avvio.md`, `docs/chapters/26-monitoraggio-meteo-sicurezza-ambientale.md` |
+| Equipment Control and Configuration | `docs/chapters/07-cgx-l.md`, `docs/chapters/08-c8-xlt.md`, `docs/chapters/09-quattro-200p.md`, `docs/chapters/10-camere-treno-ottico.md` |
+| Observation Session Management | `docs/chapters/11-nina.md`, `docs/chapters/12-phd2.md`, `docs/chapters/13-cpwi.md`, `docs/chapters/14-ascom.md`, `docs/chapters/17-acquisizione-automatica.md` |
+| Astronomical Data Platform | `docs/chapters/28-gestione-dati-archiviazione.md`, `docs/architecture/ADR-003-Warehouse-Engine.md`, `docs/architecture/warehouse/datasets-and-schema.md` |
+| Documentation and Analytics | `mkdocs.yml`, `docs/analytics/index.md`, `docs/enterprise/release-documentation.md`, `docs/developer/portal-publication-guidelines.md` |
+| Backup and Recovery | `docs/chapters/21-backup-disaster-recovery.md`, `docs/chapters/18-emergenze-recovery.md` |
+
+## Open Architectural Decisions
+
+Le informazioni non finalizzate sono consolidate in [Open Architectural Decisions](open-decisions.md). Questo blueprint non assegna risposte definitive a scheduler, manifest, target registry, equipment registry completo, cloud storage, Knowledge Graph, AI Assistant, TNS/AAVSO o ASCOM Alpaca.
