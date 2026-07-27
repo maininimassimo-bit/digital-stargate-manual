@@ -72,6 +72,8 @@ Sono esclusi:
 
 `CAP-TGT-001 - Target Registry` e il capability package documentato che governa il modello concettuale autorevole dei target astronomici gestiti da Digital StarGate. La sincronizzazione release registra in `CAP-000` status `Documented`, maturity `Documented`, readiness `Implementation Ready`, version `0.1` e collegamento a `docs/capabilities/target-registry/`.
 
+`CAP-WEA-001 - Weather Monitoring` e il capability package documentato che governa la valutazione meteo operativa autorevole per scheduling, session readiness, suspend/resume e safety evidence. La sincronizzazione release registra in `CAP-000` status `Documented`, maturity `Documented`, readiness `Implementation Ready`, version `0.1` e collegamento a `docs/capabilities/weather-monitoring/`.
+
 ## Release Lifecycle
 
 ```mermaid
@@ -317,4 +319,5 @@ Continuous improvement does not bypass governance. If a retrospective identifies
 - `docs/capabilities/observation-scheduling/index.md`
 - `docs/capabilities/equipment-registry/index.md`
 - `docs/capabilities/target-registry/index.md`
+- `docs/capabilities/weather-monitoring/index.md`
 - `docs/enterprise/release-documentation.md`
