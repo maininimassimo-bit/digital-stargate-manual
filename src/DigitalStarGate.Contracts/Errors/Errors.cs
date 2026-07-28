@@ -2,10 +2,10 @@ namespace DigitalStarGate.Contracts.Errors;
 
 public enum ErrorCategory
 {
-    Validation,
-    Business,
-    Infrastructure,
-    Security
+  Validation,
+  Business,
+  Infrastructure,
+  Security
 }
 
 public sealed record ErrorCode(string Value);

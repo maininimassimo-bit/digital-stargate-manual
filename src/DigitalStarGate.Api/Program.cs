@@ -21,22 +21,22 @@ app.MapPost(
         CreateObservationSessionHandler handler,
         CancellationToken cancellationToken) =>
     {
-        try
-        {
-            var session = await handler.HandleAsync(command, cancellationToken);
-            return Results.Created($"/api/v1/observation-sessions/{session.Id.Value}", session);
-        }
-        catch (ArgumentException exception)
-        {
-            return Results.Problem(
-                title: "Richiesta non valida",
-                detail: exception.Message,
-                statusCode: StatusCodes.Status400BadRequest,
-                extensions: new Dictionary<string, object?>
-                {
-                    ["errorCode"] = "observation-session.validation"
-                });
-        }
+      try
+      {
+        var session = await handler.HandleAsync(command, cancellationToken);
+        return Results.Created($"/api/v1/observation-sessions/{session.Id.Value}", session);
+      }
+      catch (ArgumentException exception)
+      {
+        return Results.Problem(
+            title: "Richiesta non valida",
+            detail: exception.Message,
+            statusCode: StatusCodes.Status400BadRequest,
+            extensions: new Dictionary<string, object?>
+            {
+              ["errorCode"] = "observation-session.validation"
+            });
+      }
     });
 
 app.MapGet(
@@ -46,11 +46,11 @@ app.MapGet(
         GetObservationSessionHandler handler,
         CancellationToken cancellationToken) =>
     {
-        var session = await handler.HandleAsync(
-            new GetObservationSession(new ObservationSessionId(id)),
-            cancellationToken);
+      var session = await handler.HandleAsync(
+          new GetObservationSession(new ObservationSessionId(id)),
+          cancellationToken);
 
-        return session is null ? Results.NotFound() : Results.Ok(session);
+      return session is null ? Results.NotFound() : Results.Ok(session);
     });
 
 app.MapHealthChecks("/health");

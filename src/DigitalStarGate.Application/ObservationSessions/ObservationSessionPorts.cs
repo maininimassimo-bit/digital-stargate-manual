@@ -6,12 +6,12 @@ namespace DigitalStarGate.Application.ObservationSessions;
 
 public interface IObservationSessionRepository
 {
-    Task AddAsync(ObservationSession session, CancellationToken cancellationToken);
+  Task AddAsync(ObservationSession session, CancellationToken cancellationToken);
 
-    Task<ObservationSession?> GetAsync(ObservationSessionId id, CancellationToken cancellationToken);
+  Task<ObservationSession?> GetAsync(ObservationSessionId id, CancellationToken cancellationToken);
 }
 
 public interface IPlatformEventPublisher
 {
-    Task PublishAsync(IPlatformEvent platformEvent, CancellationToken cancellationToken);
+  Task PublishAsync(IPlatformEvent platformEvent, CancellationToken cancellationToken);
 }

@@ -6,14 +6,14 @@ namespace DigitalStarGate.Infrastructure.Events;
 
 public sealed class InMemoryPlatformEventPublisher : IPlatformEventPublisher
 {
-    private readonly ConcurrentQueue<IPlatformEvent> events = new();
+  private readonly ConcurrentQueue<IPlatformEvent> events = new();
 
-    public IReadOnlyCollection<IPlatformEvent> PublishedEvents => events.ToArray();
+  public IReadOnlyCollection<IPlatformEvent> PublishedEvents => events.ToArray();
 
-    public Task PublishAsync(IPlatformEvent platformEvent, CancellationToken cancellationToken)
-    {
-        cancellationToken.ThrowIfCancellationRequested();
-        events.Enqueue(platformEvent);
-        return Task.CompletedTask;
-    }
+  public Task PublishAsync(IPlatformEvent platformEvent, CancellationToken cancellationToken)
+  {
+    cancellationToken.ThrowIfCancellationRequested();
+    events.Enqueue(platformEvent);
+    return Task.CompletedTask;
+  }
 }
