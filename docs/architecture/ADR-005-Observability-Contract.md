@@ -1,8 +1,8 @@
-# ADR-005 – Observability Contract
+# ADR-005 – Contratto di osservabilità
 
-## Status
+## Stato
 
-Proposed
+Proposto
 
 ## Versione
 
@@ -94,14 +94,14 @@ Questa decisione supporta:
 
 ## Conseguenze
 
-### Positive
+### Conseguenze positive
 
 - correlazione più semplice tra processi e ambienti;
 - riduzione dei parser specifici;
 - base stabile per KPI operativi e incident analysis;
 - migrazione futura più semplice verso strumenti centralizzati.
 
-### Negative
+### Conseguenze negative
 
 - adeguamento progressivo dei componenti esistenti;
 - necessità di governare nomi evento e versioni;
