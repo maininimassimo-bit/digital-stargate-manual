@@ -2,7 +2,7 @@
 
 ## Scopo
 
-Questa guida descrive la fondazione di sviluppo e i contratti canonici introdotti dalla Release 1.5 “Developer Edition”. Le prime due Pull Request preparano compilazione, test, analisi statica e linguaggio comune senza introdurre logica applicativa.
+Questa guida descrive la fondazione di sviluppo, i contratti canonici e il primo vertical slice introdotti dalla Release 1.5 “Developer Edition”.
 
 ## Prerequisiti
 
@@ -47,16 +47,28 @@ tools/
 | `DigitalStarGate.IntegrationTests` | Test di integrazione dell’host e delle dipendenze esterne |
 | `DigitalStarGate.ArchitectureTests` | Verifica automatica dei confini architetturali |
 
-La direzione delle dipendenze è dall’esterno verso l’interno. `Domain` non deve dipendere da `Application`, `Infrastructure` o `Api`. I contratti pubblici e inter-processo appartengono a `DigitalStarGate.Contracts`; le primitive strettamente interne restano in `SharedKernel`.
+La direzione delle dipendenze è dall’esterno verso l’interno. `Domain` non deve dipendere da `Application`, `Infrastructure` o `Api`.
 
 ## Uso dei contratti
 
-Prima di introdurre un nuovo DTO, Command, Query, Event o identificativo verificare il [catalogo canonico](platform-contracts.md). Un contratto esistente deve essere esteso secondo le regole di versionamento, non duplicato in un altro progetto.
+Prima di introdurre un nuovo DTO, Command, Query, Event o identificativo verificare il [catalogo canonico](platform-contracts.md). Un contratto esistente deve essere esteso secondo le regole di versionamento, non duplicato.
 
 Gli artefatti machine-readable sono:
 
 - `contracts/openapi/digital-stargate-v1.yaml`;
 - `contracts/events/platform-events.schema.json`.
+
+## Capability implementata
+
+La [Capability 001 – Observation Session](capability-001-observation-session.md) dimostra il primo vertical slice con:
+
+- `CreateObservationSessionHandler`;
+- `GetObservationSessionHandler`;
+- repository InMemory;
+- pubblicazione InMemory di `SessionCreated`;
+- endpoint POST e GET;
+- health check;
+- test unitari, applicativi, di integrazione e architetturali.
 
 ## Build
 
@@ -71,7 +83,7 @@ dotnet build DigitalStarGate.sln --configuration Release
 dotnet test DigitalStarGate.sln --configuration Release
 ```
 
-I progetti di test sono inizialmente vuoti. I test reali saranno introdotti insieme alle capability, evitando test fittizi creati solo per aumentare il conteggio.
+I test devono verificare comportamento reale. Non devono essere aggiunti test fittizi per aumentare il conteggio.
 
 ## Analisi statica e formattazione
 
@@ -94,4 +106,4 @@ La workflow `.github/workflows/developer-foundation.yml` esegue restore, build R
 
 ## Ambito escluso
 
-Le PR 1 e 2 non includono persistenza, handler applicativi, autenticazione operativa, health check eseguibili o vertical slice. Questi elementi sono riservati alla PR 3 della Release 1.5 o alla Release 2.0.
+La Release 1.5 non introduce database reale, Event Bus, N.I.N.A., ASCOM, PHD2, PixInsight, scheduler completo, Kubernetes o alta disponibilità. Queste capability appartengono alla Release 2.0.

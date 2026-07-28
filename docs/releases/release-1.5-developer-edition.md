@@ -12,9 +12,9 @@ La Release 1.5 accorpa le precedenti ipotesi di Release 1.2, 1.3 e 1.4 e prepara
 
 | Pull Request | Ambito | Stato |
 | --- | --- | --- |
-| PR 1 | Developer Foundation | Base della PR 2 |
-| PR 2 | Platform Contracts & Canonical Model | In revisione |
-| PR 3 | Observation Session Vertical Slice | Pianificata dopo approvazione PR 2 |
+| PR 1 | Developer Foundation | Completata |
+| PR 2 | Platform Contracts & Canonical Model | Completata |
+| PR 3 | Observation Session Vertical Slice | In revisione |
 
 ## Manifest PR 1 – Developer Foundation
 
@@ -41,7 +41,21 @@ La seconda Pull Request introduce esclusivamente il linguaggio comune della piat
 - JSON Schema degli Event;
 - regole di versionamento e compatibilità.
 
-Non introduce handler, persistenza, endpoint eseguibili, autenticazione operativa o integrazioni con dispositivi.
+## Manifest PR 3 – Capability 001 Observation Session
+
+La terza Pull Request introduce il primo vertical slice completo:
+
+- aggregato `ObservationSession` con stati `Created`, `Running`, `Completed` e `Aborted`;
+- `CreateObservationSessionHandler` e `GetObservationSessionHandler`;
+- mapping verso `ObservationSessionDto` canonico;
+- repository InMemory;
+- publisher InMemory per `SessionCreated`;
+- endpoint POST e GET previsti da OpenAPI;
+- health check;
+- logging strutturato con `CorrelationId`;
+- test unitari, applicativi, API e architetturali.
+
+Non introduce database, Event Bus o integrazioni astronomiche avanzate.
 
 ## Changelog PR 1
 
@@ -65,10 +79,21 @@ Non introduce handler, persistenza, endpoint eseguibili, autenticazione operativ
 - pubblicato il documento canonico dei contratti;
 - aggiornata la guida di sviluppo e la navigazione MkDocs.
 
+## Changelog PR 3
+
+- implementata la creazione di una Observation Session;
+- implementata la lettura tramite identificativo;
+- configurate Application, Infrastructure e API tramite Dependency Injection;
+- aggiunti repository e publisher InMemory;
+- pubblicato esclusivamente `SessionCreated`;
+- aggiunti health check e logging strutturato;
+- aggiunta copertura comportamentale del vertical slice.
+
 ## Tracciabilità
 
 - [Guida di sviluppo](../developer/development-guide.md)
 - [Contratti canonici della piattaforma](../developer/platform-contracts.md)
+- [Capability 001 – Observation Session](../developer/capability-001-observation-session.md)
 - [Architettura Digital StarGate](../architecture/index.md)
 - [Dataset e schema Warehouse](../architecture/warehouse/datasets-and-schema.md)
 - [Gestione documentale e release](../chapters/34-gestione-documentale-release.md)

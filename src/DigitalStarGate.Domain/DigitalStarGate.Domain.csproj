@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\DigitalStarGate.SharedKernel\DigitalStarGate.SharedKernel.csproj" />
+    <ProjectReference Include="../DigitalStarGate.Contracts/DigitalStarGate.Contracts.csproj" />
+    <ProjectReference Include="../DigitalStarGate.SharedKernel/DigitalStarGate.SharedKernel.csproj" />
   </ItemGroup>
 </Project>
