@@ -2,10 +2,10 @@ namespace DigitalStarGate.Contracts.Errors;
 
 public enum ErrorCategory
 {
-    Validation,
-    Business,
-    Infrastructure,
-    Security
+  Validation,
+  Business,
+  Infrastructure,
+  Security
 }
 
 public sealed record ErrorCode(string Value);
@@ -19,12 +19,12 @@ public sealed record InfrastructureError(ErrorCode Code, string Message, bool Is
 public sealed record SecurityError(ErrorCode Code, string Message);
 
 public sealed record ProblemDetailsContract(
-    string Type,
-    string Title,
-    int Status,
-    string? Detail,
-    string? Instance,
-    ErrorCode ErrorCode,
-    ErrorCategory Category,
-    IReadOnlyList<ValidationError>? Errors,
-    string? CorrelationId);
+  string Type,
+  string Title,
+  int Status,
+  string? Detail,
+  string? Instance,
+  ErrorCode ErrorCode,
+  ErrorCategory Category,
+  IReadOnlyList<ValidationError>? Errors,
+  string? CorrelationId);
