@@ -10,4 +10,4 @@
 - aw/phd2
 - aw/weather
 - eport
-- manifest.json
+- manifest.json
