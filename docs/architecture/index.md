@@ -84,4 +84,4 @@ L’architettura segue questi principi:
 - [ADR-001 – Session Layer](ADR-001-Session-Layer.md)
 - [ADR-002 – Analytics Quality Gates](ADR-002-Analytics-Quality-Gates.md)
 - [ADR-003 – Warehouse Engine](ADR-003-Warehouse-Engine.md)
-- [ADR-005 – Observability Contract](ADR-005-Observability-Contract.md) — proposta di contratto comune per eventi, metriche e stato operativo.
+- [ADR-005 – Contratto di osservabilità](ADR-005-Observability-Contract.md) — proposta di contratto comune per eventi, metriche e stato operativo.
