@@ -2,7 +2,7 @@
 
 ## Scopo
 
-Questa guida descrive la fondazione di sviluppo introdotta dalla Release 1.5 “Developer Edition”. La PR 1 prepara compilazione, test, analisi statica e pubblicazione documentale senza introdurre logica applicativa.
+Questa guida descrive la fondazione di sviluppo e i contratti canonici introdotti dalla Release 1.5 “Developer Edition”. Le prime due Pull Request preparano compilazione, test, analisi statica e linguaggio comune senza introdurre logica applicativa.
 
 ## Prerequisiti
 
@@ -17,6 +17,7 @@ DigitalStarGate.sln
 src/
   DigitalStarGate.Api
   DigitalStarGate.Application
+  DigitalStarGate.Contracts
   DigitalStarGate.Domain
   DigitalStarGate.Infrastructure
   DigitalStarGate.SharedKernel
@@ -25,6 +26,8 @@ tests/
   DigitalStarGate.IntegrationTests
   DigitalStarGate.ArchitectureTests
 contracts/
+  openapi/
+  events/
 infrastructure/
 scripts/
 tools/
@@ -35,15 +38,25 @@ tools/
 | Progetto | Responsabilità iniziale |
 | --- | --- |
 | `DigitalStarGate.Api` | Host ASP.NET Core e composizione dell’applicazione |
-| `DigitalStarGate.Application` | Casi d’uso, command, query e porte applicative |
+| `DigitalStarGate.Application` | Casi d’uso, Command, Query e porte applicative |
+| `DigitalStarGate.Contracts` | DTO, Command, Query, Event, errori, telemetria e configurazione condivisi |
 | `DigitalStarGate.Domain` | Modello di dominio e regole di business |
 | `DigitalStarGate.Infrastructure` | Persistenza e integrazioni tecniche |
-| `DigitalStarGate.SharedKernel` | Primitive condivise prive di dipendenze infrastrutturali |
+| `DigitalStarGate.SharedKernel` | Primitive interne condivise prive di dipendenze infrastrutturali |
 | `DigitalStarGate.UnitTests` | Test unitari di Domain e Application |
 | `DigitalStarGate.IntegrationTests` | Test di integrazione dell’host e delle dipendenze esterne |
 | `DigitalStarGate.ArchitectureTests` | Verifica automatica dei confini architetturali |
 
-La direzione delle dipendenze è dall’esterno verso l’interno. `Domain` non deve dipendere da `Application`, `Infrastructure` o `Api`.
+La direzione delle dipendenze è dall’esterno verso l’interno. `Domain` non deve dipendere da `Application`, `Infrastructure` o `Api`. I contratti pubblici e inter-processo appartengono a `DigitalStarGate.Contracts`; le primitive strettamente interne restano in `SharedKernel`.
+
+## Uso dei contratti
+
+Prima di introdurre un nuovo DTO, Command, Query, Event o identificativo verificare il [catalogo canonico](platform-contracts.md). Un contratto esistente deve essere esteso secondo le regole di versionamento, non duplicato in un altro progetto.
+
+Gli artefatti machine-readable sono:
+
+- `contracts/openapi/digital-stargate-v1.yaml`;
+- `contracts/events/platform-events.schema.json`.
 
 ## Build
 
@@ -81,4 +94,4 @@ La workflow `.github/workflows/developer-foundation.yml` esegue restore, build R
 
 ## Ambito escluso
 
-Questa fondazione non include contratti API, persistenza, autenticazione, health check, osservabilità applicativa o vertical slice. Tali elementi sono riservati alle PR 2 e 3 della Release 1.5.
+Le PR 1 e 2 non includono persistenza, handler applicativi, autenticazione operativa, health check eseguibili o vertical slice. Questi elementi sono riservati alla PR 3 della Release 1.5 o alla Release 2.0.
