@@ -25,132 +25,30 @@
     "payload": { "type": "object" }
   },
   "oneOf": [
-    { "$ref": "#/$defs/sessionCreated" },
-    { "$ref": "#/$defs/sessionStarted" },
-    { "$ref": "#/$defs/sessionCompleted" },
-    { "$ref": "#/$defs/sessionAborted" },
-    { "$ref": "#/$defs/targetAcquired" },
-    { "$ref": "#/$defs/exposureStarted" },
-    { "$ref": "#/$defs/exposureCompleted" },
-    { "$ref": "#/$defs/calibrationCompleted" },
-    { "$ref": "#/$defs/weatherUnsafeDetected" },
-    { "$ref": "#/$defs/roofOpened" },
-    { "$ref": "#/$defs/roofClosed" },
-    { "$ref": "#/$defs/mountParked" },
-    { "$ref": "#/$defs/telemetryCollected" },
-    { "$ref": "#/$defs/alertRaised" },
+    { "$ref": "#/$defs/sessionCreated" }, { "$ref": "#/$defs/sessionStarted" },
+    { "$ref": "#/$defs/sessionCompleted" }, { "$ref": "#/$defs/sessionAborted" },
+    { "$ref": "#/$defs/targetAcquired" }, { "$ref": "#/$defs/exposureStarted" },
+    { "$ref": "#/$defs/exposureCompleted" }, { "$ref": "#/$defs/calibrationCompleted" },
+    { "$ref": "#/$defs/weatherUnsafeDetected" }, { "$ref": "#/$defs/roofOpened" },
+    { "$ref": "#/$defs/roofClosed" }, { "$ref": "#/$defs/mountParked" },
+    { "$ref": "#/$defs/telemetryCollected" }, { "$ref": "#/$defs/alertRaised" },
     { "$ref": "#/$defs/configurationChanged" }
   ],
   "$defs": {
     "uuid": { "type": "string", "format": "uuid" },
-    "sessionPayload": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["sessionId"],
-      "properties": { "sessionId": { "$ref": "#/$defs/uuid" } }
-    },
-    "sessionCreatedPayload": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["sessionId", "targetId", "observatoryId"],
-      "properties": {
-        "sessionId": { "$ref": "#/$defs/uuid" },
-        "targetId": { "$ref": "#/$defs/uuid" },
-        "observatoryId": { "$ref": "#/$defs/uuid" }
-      }
-    },
-    "sessionAbortedPayload": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["sessionId", "reason"],
-      "properties": {
-        "sessionId": { "$ref": "#/$defs/uuid" },
-        "reason": { "type": "string", "minLength": 1 }
-      }
-    },
-    "targetAcquiredPayload": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["sessionId", "targetId"],
-      "properties": {
-        "sessionId": { "$ref": "#/$defs/uuid" },
-        "targetId": { "$ref": "#/$defs/uuid" }
-      }
-    },
-    "exposureStartedPayload": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["sessionId", "exposureTimeSeconds"],
-      "properties": {
-        "sessionId": { "$ref": "#/$defs/uuid" },
-        "exposureTimeSeconds": { "type": "number", "exclusiveMinimum": 0 }
-      }
-    },
-    "exposureCompletedPayload": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["sessionId", "imageId"],
-      "properties": {
-        "sessionId": { "$ref": "#/$defs/uuid" },
-        "imageId": { "$ref": "#/$defs/uuid" }
-      }
-    },
-    "calibrationCompletedPayload": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["sessionId", "imageIds"],
-      "properties": {
-        "sessionId": { "$ref": "#/$defs/uuid" },
-        "imageIds": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/uuid" } }
-      }
-    },
-    "weatherUnsafeDetectedPayload": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["observatoryId", "reason"],
-      "properties": {
-        "observatoryId": { "$ref": "#/$defs/uuid" },
-        "reason": { "type": "string", "minLength": 1 }
-      }
-    },
-    "equipmentPayload": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["equipmentId"],
-      "properties": { "equipmentId": { "$ref": "#/$defs/uuid" } }
-    },
-    "telemetryCollectedPayload": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["source", "metric", "value", "unit"],
-      "properties": {
-        "source": { "type": "string", "minLength": 1 },
-        "metric": { "type": "string", "minLength": 1 },
-        "value": { "type": "number" },
-        "unit": { "type": "string", "minLength": 1 }
-      }
-    },
-    "alertRaisedPayload": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["alertId", "severity", "code", "message"],
-      "properties": {
-        "alertId": { "$ref": "#/$defs/uuid" },
-        "severity": { "type": "string", "enum": ["debug", "info", "warning", "error", "critical"] },
-        "code": { "type": "string", "minLength": 1 },
-        "message": { "type": "string", "minLength": 1 }
-      }
-    },
-    "configurationChangedPayload": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["section", "key", "source"],
-      "properties": {
-        "section": { "type": "string", "minLength": 1 },
-        "key": { "type": "string", "minLength": 1 },
-        "source": { "type": "string", "minLength": 1 }
-      }
-    },
+    "sessionPayload": { "type": "object", "additionalProperties": false, "required": ["sessionId"], "properties": { "sessionId": { "$ref": "#/$defs/uuid" } } },
+    "sessionCreatedPayload": { "type": "object", "additionalProperties": false, "required": ["sessionId", "targetId", "observatoryId"], "properties": { "sessionId": { "$ref": "#/$defs/uuid" }, "targetId": { "$ref": "#/$defs/uuid" }, "observatoryId": { "$ref": "#/$defs/uuid" } } },
+    "sessionAbortedPayload": { "type": "object", "additionalProperties": false, "required": ["sessionId", "reason"], "properties": { "sessionId": { "$ref": "#/$defs/uuid" }, "reason": { "type": "string", "minLength": 1 } } },
+    "targetAcquiredPayload": { "type": "object", "additionalProperties": false, "required": ["sessionId", "targetId"], "properties": { "sessionId": { "$ref": "#/$defs/uuid" }, "targetId": { "$ref": "#/$defs/uuid" } } },
+    "exposureStartedPayload": { "type": "object", "additionalProperties": false, "required": ["sessionId", "exposureTimeSeconds"], "properties": { "sessionId": { "$ref": "#/$defs/uuid" }, "exposureTimeSeconds": { "type": "number", "exclusiveMinimum": 0 } } },
+    "exposureCompletedPayload": { "type": "object", "additionalProperties": false, "required": ["sessionId", "imageId"], "properties": { "sessionId": { "$ref": "#/$defs/uuid" }, "imageId": { "$ref": "#/$defs/uuid" } } },
+    "calibrationCompletedPayload": { "type": "object", "additionalProperties": false, "required": ["sessionId", "imageIds"], "properties": { "sessionId": { "$ref": "#/$defs/uuid" }, "imageIds": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/uuid" } } } },
+    "weatherUnsafeDetectedPayload": { "type": "object", "additionalProperties": false, "required": ["observatoryId", "reason"], "properties": { "observatoryId": { "$ref": "#/$defs/uuid" }, "reason": { "type": "string", "minLength": 1 } } },
+    "roofPayload": { "type": "object", "additionalProperties": false, "required": ["roofId"], "properties": { "roofId": { "$ref": "#/$defs/uuid" } } },
+    "mountPayload": { "type": "object", "additionalProperties": false, "required": ["mountId"], "properties": { "mountId": { "$ref": "#/$defs/uuid" } } },
+    "telemetryCollectedPayload": { "type": "object", "additionalProperties": false, "required": ["source", "metric", "value", "unit"], "properties": { "source": { "type": "string", "minLength": 1 }, "metric": { "type": "string", "minLength": 1 }, "value": { "type": "number" }, "unit": { "type": "string", "minLength": 1 } } },
+    "alertRaisedPayload": { "type": "object", "additionalProperties": false, "required": ["alertId", "severity", "code", "message"], "properties": { "alertId": { "$ref": "#/$defs/uuid" }, "severity": { "type": "string", "enum": ["debug", "info", "warning", "error", "critical"] }, "code": { "type": "string", "minLength": 1 }, "message": { "type": "string", "minLength": 1 } } },
+    "configurationChangedPayload": { "type": "object", "additionalProperties": false, "required": ["section", "key", "source"], "properties": { "section": { "type": "string", "minLength": 1 }, "key": { "type": "string", "minLength": 1 }, "source": { "type": "string", "minLength": 1 } } },
     "sessionCreated": { "properties": { "eventName": { "const": "SessionCreated" }, "payload": { "$ref": "#/$defs/sessionCreatedPayload" } } },
     "sessionStarted": { "properties": { "eventName": { "const": "SessionStarted" }, "payload": { "$ref": "#/$defs/sessionPayload" } } },
     "sessionCompleted": { "properties": { "eventName": { "const": "SessionCompleted" }, "payload": { "$ref": "#/$defs/sessionPayload" } } },
@@ -160,9 +58,9 @@
     "exposureCompleted": { "properties": { "eventName": { "const": "ExposureCompleted" }, "payload": { "$ref": "#/$defs/exposureCompletedPayload" } } },
     "calibrationCompleted": { "properties": { "eventName": { "const": "CalibrationCompleted" }, "payload": { "$ref": "#/$defs/calibrationCompletedPayload" } } },
     "weatherUnsafeDetected": { "properties": { "eventName": { "const": "WeatherUnsafeDetected" }, "payload": { "$ref": "#/$defs/weatherUnsafeDetectedPayload" } } },
-    "roofOpened": { "properties": { "eventName": { "const": "RoofOpened" }, "payload": { "$ref": "#/$defs/equipmentPayload" } } },
-    "roofClosed": { "properties": { "eventName": { "const": "RoofClosed" }, "payload": { "$ref": "#/$defs/equipmentPayload" } } },
-    "mountParked": { "properties": { "eventName": { "const": "MountParked" }, "payload": { "$ref": "#/$defs/equipmentPayload" } } },
+    "roofOpened": { "properties": { "eventName": { "const": "RoofOpened" }, "payload": { "$ref": "#/$defs/roofPayload" } } },
+    "roofClosed": { "properties": { "eventName": { "const": "RoofClosed" }, "payload": { "$ref": "#/$defs/roofPayload" } } },
+    "mountParked": { "properties": { "eventName": { "const": "MountParked" }, "payload": { "$ref": "#/$defs/mountPayload" } } },
     "telemetryCollected": { "properties": { "eventName": { "const": "TelemetryCollected" }, "payload": { "$ref": "#/$defs/telemetryCollectedPayload" } } },
     "alertRaised": { "properties": { "eventName": { "const": "AlertRaised" }, "payload": { "$ref": "#/$defs/alertRaisedPayload" } } },
     "configurationChanged": { "properties": { "eventName": { "const": "ConfigurationChanged" }, "payload": { "$ref": "#/$defs/configurationChangedPayload" } } }
