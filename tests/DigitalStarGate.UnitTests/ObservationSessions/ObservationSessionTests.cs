@@ -6,7 +6,7 @@ namespace DigitalStarGate.UnitTests.ObservationSessions;
 public sealed class ObservationSessionTests
 {
     [Fact]
-    public void Create_WithValidValues_CreatesSessionInCreatedState()
+    public void CreateWithValidValuesCreatesSessionInCreatedState()
     {
         var session = ObservationSession.Create(
             new ObservationSessionId(Guid.NewGuid()),
@@ -20,7 +20,7 @@ public sealed class ObservationSessionTests
     }
 
     [Fact]
-    public void Create_WithEmptyTarget_ThrowsArgumentException()
+    public void CreateWithEmptyTargetThrowsArgumentException()
     {
         Assert.Throws<ArgumentException>(() => ObservationSession.Create(
             new ObservationSessionId(Guid.NewGuid()),

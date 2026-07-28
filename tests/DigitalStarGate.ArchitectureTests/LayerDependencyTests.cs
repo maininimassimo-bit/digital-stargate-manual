@@ -5,7 +5,7 @@ namespace DigitalStarGate.ArchitectureTests;
 public sealed class LayerDependencyTests
 {
     [Fact]
-    public void Domain_DoesNotReferenceOuterLayers()
+    public void DomainDoesNotReferenceOuterLayers()
     {
         var references = typeof(ObservationSession).Assembly
             .GetReferencedAssemblies()

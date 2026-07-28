@@ -13,6 +13,12 @@ public sealed class CreateObservationSessionHandler(
     TimeProvider timeProvider,
     ILogger<CreateObservationSessionHandler> logger)
 {
+    private static readonly Action<ILogger, Guid, Guid, Guid, Exception?> LogObservationSessionCreated =
+        LoggerMessage.Define<Guid, Guid, Guid>(
+            LogLevel.Information,
+            new EventId(1001, nameof(CreateObservationSession)),
+            "Observation Session {ObservationSessionId} creata per Target {TargetId} con CorrelationId {CorrelationId}");
+
     public async Task<ObservationSessionDto> HandleAsync(
         CreateObservationSession command,
         CancellationToken cancellationToken)
@@ -21,6 +27,7 @@ public sealed class CreateObservationSessionHandler(
         Validate(command);
 
         var createdAt = timeProvider.GetUtcNow();
+
         var session = ObservationSession.Create(
             new ObservationSessionId(Guid.NewGuid()),
             command.TargetId,
@@ -42,11 +49,12 @@ public sealed class CreateObservationSessionHandler(
                 session.ObservatoryId),
             cancellationToken);
 
-        logger.LogInformation(
-            "Observation Session {ObservationSessionId} creata per Target {TargetId} con CorrelationId {CorrelationId}",
+        LogObservationSessionCreated(
+            logger,
             session.Id.Value,
             session.TargetId.Value,
-            command.CorrelationId.Value);
+            command.CorrelationId.Value,
+            null);
 
         return ObservationSessionMapper.ToDto(session);
     }

@@ -10,11 +10,12 @@ namespace DigitalStarGate.UnitTests.ObservationSessions;
 public sealed class CreateObservationSessionHandlerTests
 {
     [Fact]
-    public async Task HandleAsync_PersistsSessionAndPublishesSessionCreated()
+    public async Task HandleAsyncPersistsSessionAndPublishesSessionCreated()
     {
         var repository = new TestRepository();
         var publisher = new TestPublisher();
         var now = new DateTimeOffset(2026, 7, 28, 20, 0, 0, TimeSpan.Zero);
+
         var handler = new CreateObservationSessionHandler(
             repository,
             publisher,
@@ -26,10 +27,11 @@ public sealed class CreateObservationSessionHandlerTests
                 new TargetId(Guid.NewGuid()),
                 new ObservatoryId(Guid.NewGuid()),
                 new CorrelationId(Guid.NewGuid())),
-            CancellationToken.None);
+            TestContext.Current.CancellationToken);
 
         var persisted = Assert.IsType<ObservationSession>(repository.Session);
         Assert.Equal(result.Id, persisted.Id);
+
         var created = Assert.IsType<SessionCreated>(publisher.Event);
         Assert.Equal(result.Id, created.SessionId);
         Assert.Equal(now, created.OccurredAt);
@@ -45,15 +47,19 @@ public sealed class CreateObservationSessionHandlerTests
             return Task.CompletedTask;
         }
 
-        public Task<ObservationSession?> GetAsync(ObservationSessionId id, CancellationToken cancellationToken) =>
-            Task.FromResult(Session?.Id == id ? Session : null);
+        public Task<ObservationSession?> GetAsync(
+            ObservationSessionId id,
+            CancellationToken cancellationToken)
+            => Task.FromResult(Session?.Id == id ? Session : null);
     }
 
     private sealed class TestPublisher : IPlatformEventPublisher
     {
         public IPlatformEvent? Event { get; private set; }
 
-        public Task PublishAsync(IPlatformEvent platformEvent, CancellationToken cancellationToken)
+        public Task PublishAsync(
+            IPlatformEvent platformEvent,
+            CancellationToken cancellationToken)
         {
             Event = platformEvent;
             return Task.CompletedTask;

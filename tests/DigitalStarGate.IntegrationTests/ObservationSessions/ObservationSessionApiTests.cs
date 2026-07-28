@@ -17,8 +17,10 @@ public sealed class ObservationSessionApiTests : IClassFixture<WebApplicationFac
     }
 
     [Fact]
-    public async Task CreateThenGet_ReturnsPersistedObservationSession()
+    public async Task CreateThenGetReturnsPersistedObservationSession()
     {
+        var token = TestContext.Current.CancellationToken;
+
         var command = new CreateObservationSession(
             new TargetId(Guid.NewGuid()),
             new ObservatoryId(Guid.NewGuid()),
@@ -26,23 +28,32 @@ public sealed class ObservationSessionApiTests : IClassFixture<WebApplicationFac
 
         var createResponse = await client.PostAsJsonAsync(
             "/api/v1/observation-sessions",
-            command);
+            command,
+            token);
 
         Assert.Equal(HttpStatusCode.Created, createResponse.StatusCode);
-        var created = await createResponse.Content.ReadFromJsonAsync<ObservationSessionDto>();
+
+        var created = await createResponse.Content.ReadFromJsonAsync<ObservationSessionDto>(token);
         Assert.NotNull(created);
 
-        var getResponse = await client.GetAsync($"/api/v1/observation-sessions/{created.Id.Value}");
+        var getResponse = await client.GetAsync(
+            $"/api/v1/observation-sessions/{created!.Id.Value}",
+            token);
+
         Assert.Equal(HttpStatusCode.OK, getResponse.StatusCode);
 
-        var retrieved = await getResponse.Content.ReadFromJsonAsync<ObservationSessionDto>();
+        var retrieved = await getResponse.Content.ReadFromJsonAsync<ObservationSessionDto>(token);
+
         Assert.Equal(created, retrieved);
     }
 
     [Fact]
-    public async Task Health_ReturnsSuccess()
+    public async Task HealthReturnsSuccess()
     {
-        var response = await client.GetAsync("/health");
+        var response = await client.GetAsync(
+            "/health",
+            TestContext.Current.CancellationToken);
+
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 }
