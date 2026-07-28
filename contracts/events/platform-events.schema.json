@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/schemas/platform-events/1.0.0",
+  "title": "Digital StarGate Platform Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["eventId", "eventName", "occurredAt", "producer", "version", "correlationId", "payload"],
+  "properties": {
+    "eventId": { "type": "string", "format": "uuid" },
+    "eventName": {
+      "type": "string",
+      "enum": [
+        "SessionCreated", "SessionStarted", "SessionCompleted", "SessionAborted",
+        "TargetAcquired", "ExposureStarted", "ExposureCompleted", "CalibrationCompleted",
+        "WeatherUnsafeDetected", "RoofOpened", "RoofClosed", "MountParked",
+        "TelemetryCollected", "AlertRaised", "ConfigurationChanged"
+      ]
+    },
+    "occurredAt": { "type": "string", "format": "date-time" },
+    "producer": { "type": "string", "minLength": 1 },
+    "version": { "const": "1.0.0" },
+    "correlationId": { "type": "string", "format": "uuid" },
+    "causationId": { "type": ["string", "null"], "format": "uuid" },
+    "traceId": { "type": ["string", "null"] },
+    "payload": { "$ref": "#/$defs/payload" }
+  },
+  "$defs": {
+    "payload": {
+      "type": "object",
+      "minProperties": 1,
+      "description": "Il contenuto varia in base a eventName ed è definito nel catalogo eventi canonico. Le proprietà esistenti non cambiano significato nella stessa major version."
+    }
+  }
+}
