@@ -29,6 +29,7 @@ L’architettura segue questi principi:
 5. GitHub Pages distribuisce il portale Digital StarGate.
 6. I contenuti generati devono essere riproducibili a partire dai dati presenti nel repository.
 7. I moduli devono essere indipendenti e coordinati da un orchestratore centrale.
+8. La telemetria strutturata deve usare campi, severità e identificativi di correlazione coerenti.
 
 ---
 
@@ -76,3 +77,11 @@ L’architettura segue questi principi:
                   | analytics                   |
                   | manuale tecnico             |
                   +-----------------------------+
+```
+
+## Decisioni architetturali
+
+- [ADR-001 – Session Layer](ADR-001-Session-Layer.md)
+- [ADR-002 – Analytics Quality Gates](ADR-002-Analytics-Quality-Gates.md)
+- [ADR-003 – Warehouse Engine](ADR-003-Warehouse-Engine.md)
+- [ADR-005 – Contratto di osservabilità](ADR-005-Observability-Contract.md) — proposta di contratto comune per eventi, metriche e stato operativo.
