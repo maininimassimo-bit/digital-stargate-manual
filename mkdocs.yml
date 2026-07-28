@@ -1,4 +1,4 @@
-site_name: Digital StarGate
+﻿site_name: Digital StarGate
 site_description: Manuale Tecnico dell'Osservatorio Remoto di Manciano
 site_author: Massimo Mainini
 
@@ -27,14 +27,14 @@ theme:
       accent: blue
       toggle:
         icon: material/brightness-7
-        name: Passa alla modalità scura
+        name: Passa alla modalitÃ  scura
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: indigo
       accent: blue
       toggle:
         icon: material/brightness-4
-        name: Passa alla modalità chiara
+        name: Passa alla modalitÃ  chiara
 
 plugins:
   - search:
@@ -92,7 +92,7 @@ nav:
           - Flusso dei dati: architecture/warehouse/data-flow.md
           - Dataset e schema: architecture/warehouse/datasets-and-schema.md
           - Validazione e quality gate: architecture/warehouse/validation-and-quality-gates.md
-          - Build e operatività: architecture/warehouse/build-and-operations.md
+          - Build e operativitÃ : architecture/warehouse/build-and-operations.md
 
       - Assessment tecnici:
           - EA-001 - Ambiente e repository: architecture/assessments/EA-001-Environment-Repository-Assessment.md
@@ -102,12 +102,14 @@ nav:
   - Enterprise DSG-MR-001:
       - Indice enterprise: enterprise/index.md
       - Master Roadmap: enterprise-roadmap/DSG-MR-001-master-roadmap.md
+      - DSG-MR-001 - Release 1.1 Change Set: enterprise-roadmap/DSG-MR-001-release-1-1-change-set.md
       - Enterprise Program Portfolio: enterprise/program-portfolio.md
       - Enterprise Planning Framework: enterprise/planning.md
       - Enterprise Architecture Baseline:
           - EAM-001 - Enterprise Architecture Meta Model: enterprise-architecture/DSG-EAM-001-enterprise-architecture-meta-model.md
           - DSRA-000 - Vision Target Architecture: enterprise-architecture/DSRA-000-vision-target-architecture.md
           - DSRA-001 - Reference Architecture: enterprise-architecture/DSRA-001-reference-architecture.md
+          - DSRA-002 - Next Generation Reference Architecture: enterprise-architecture/DSRA-002-next-generation-reference-architecture.md
       - Enterprise Solution Blueprint:
           - Overview: enterprise-solution-blueprint/index.md
           - Astronomical Data Architecture: enterprise-solution-blueprint/data-architecture.md
@@ -123,12 +125,18 @@ nav:
       - Architecture Decision Records:
           - ADR Index: enterprise/adr/index.md
           - ADR-004 - Enterprise documentation baseline: enterprise/adr/ADR-004-enterprise-documentation-baseline.md
-      - Registri e tracciabilità: enterprise/registries/index.md
+          - ADR-005 - EAGLE Operational Authority: enterprise/adr/ADR-005-eagle-operational-authority.md
+          - ADR-006 - Scientific Session Aggregate: enterprise/adr/ADR-006-scientific-session-aggregate.md
+          - ADR-007 - Event-Driven Immutable Telemetry: enterprise/adr/ADR-007-event-driven-immutable-telemetry.md
+          - ADR-008 - Logical Scientific Repository: enterprise/adr/ADR-008-logical-scientific-repository.md
+          - ADR-009 - AI Advisory Boundary: enterprise/adr/ADR-009-ai-advisory-boundary.md
+      - Registri e tracciabilitÃ : enterprise/registries/index.md
       - Handbook: enterprise/handbook.md
       - SOP: enterprise/sop.md
       - Assessment: enterprise/assessment.md
       - Governance: enterprise/governance.md
       - Release documentation: enterprise/release-documentation.md
+      - Release 1.1 - Enterprise Software Architecture: enterprise/release-1.1-enterprise-software-architecture.md
       - Project History: enterprise/project-history.md
       - Knowledge Index: enterprise/knowledge-index.md
       - Long-Term Vision: enterprise/vision.md
@@ -520,7 +528,7 @@ nav:
       - Observatory Status: status/index.md
       - Session Reports: session-reports/index.md
 
-  - Generalità:
+  - GeneralitÃ :
       - Introduzione: chapters/01-introduzione.md
       - Architettura generale: chapters/02-architettura-generale.md
 
@@ -551,7 +559,7 @@ nav:
       - Emergenze e recovery: chapters/18-emergenze-recovery.md
       - Manutenzione preventiva: chapters/19-manutenzione-preventiva.md
 
-  - Governance e continuità:
+  - Governance e continuitÃ :
       - Gestione configurazioni e versioning: chapters/20-gestione-configurazioni-versioning.md
       - Backup e Disaster Recovery: chapters/21-backup-disaster-recovery.md
       - Inventario e Asset Management: chapters/22-inventario-asset-management.md
@@ -565,7 +573,7 @@ nav:
       - Gestione dati e archiviazione: chapters/28-gestione-dati-archiviazione.md
       - Reportistica e KPI: chapters/29-reportistica-operativa-kpi.md
 
-  - Affidabilità e governance:
+  - AffidabilitÃ  e governance:
       - Metodologia troubleshooting: chapters/30-metodologia-troubleshooting.md
       - Problem Management e post-mortem: chapters/31-problem-management-post-mortem.md
       - Ricambi e obsolescenza: chapters/32-ricambi-obsolescenza.md
@@ -580,7 +588,7 @@ nav:
       - Glossario, acronimi e riferimenti: chapters/39-glossario-acronimi-riferimenti.md
 
   - Chiusura e validazione:
-      - Requisiti e tracciabilità: chapters/40-requisiti-tracciabilita.md
+      - Requisiti e tracciabilitÃ : chapters/40-requisiti-tracciabilita.md
       - Analisi rischi e FMEA: chapters/41-analisi-rischi-fmea.md
       - Ruoli, formazione e handover: chapters/42-ruoli-formazione-handover.md
       - Accettazione e release 1.0: chapters/43-accettazione-release-v1.md
