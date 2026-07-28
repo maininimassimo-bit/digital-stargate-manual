@@ -1,0 +1,60 @@
+name: Developer Foundation
+
+on:
+  push:
+    branches:
+      - main
+      - release/1.5-developer-foundation
+  pull_request:
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "*.sln"
+      - "*.props"
+      - "global.json"
+      - ".editorconfig"
+      - "docs/**"
+      - "mkdocs.yml"
+      - "requirements.txt"
+      - ".github/workflows/developer-foundation.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+          cache: true
+          cache-dependency-path: Directory.Packages.props
+
+      - name: Restore
+        run: dotnet restore DigitalStarGate.sln
+
+      - name: Build
+        run: dotnet build DigitalStarGate.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test DigitalStarGate.sln --configuration Release --no-build
+
+      - name: Verify formatting
+        run: dotnet format DigitalStarGate.sln --verify-no-changes --no-restore
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install documentation dependencies
+        run: python -m pip install --requirement requirements.txt
+
+      - name: Verify MkDocs
+        run: mkdocs build --strict
