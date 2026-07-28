@@ -4,11 +4,11 @@ namespace DigitalStarGate.Contracts.Events;
 
 public interface IPlatformEvent
 {
-    Guid EventId { get; }
-    DateTimeOffset OccurredAt { get; }
-    CorrelationId CorrelationId { get; }
-    CausationId? CausationId { get; }
-    string Version { get; }
+  Guid EventId { get; }
+  DateTimeOffset OccurredAt { get; }
+  CorrelationId CorrelationId { get; }
+  CausationId? CausationId { get; }
+  string Version { get; }
 }
 
 public abstract record PlatformEvent(Guid EventId, DateTimeOffset OccurredAt, CorrelationId CorrelationId, CausationId? CausationId, string Version) : IPlatformEvent;
