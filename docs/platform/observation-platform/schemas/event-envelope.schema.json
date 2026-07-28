@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:digital-stargate:schema:event-envelope:1.0",
+  "title": "Digital StarGate Event Envelope",
+  "type": "object",
+  "required": ["eventId", "eventType", "eventVersion", "occurredAt", "source", "subject", "correlationId", "data"],
+  "properties": {
+    "eventId": { "type": "string", "format": "uuid" },
+    "eventType": { "type": "string", "minLength": 1 },
+    "eventVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "occurredAt": { "type": "string", "format": "date-time" },
+    "source": { "type": "string", "minLength": 1 },
+    "subject": { "type": "string", "minLength": 1 },
+    "correlationId": { "type": "string", "format": "uuid" },
+    "causationId": { "type": ["string", "null"], "format": "uuid" },
+    "data": { "type": "object" }
+  },
+  "additionalProperties": false
+}

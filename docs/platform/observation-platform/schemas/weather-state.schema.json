@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:digital-stargate:schema:weather-state:1.0",
+  "title": "Weather State",
+  "type": "object",
+  "required": ["observedAt", "quality", "measurements"],
+  "properties": {
+    "observedAt": { "type": "string", "format": "date-time" },
+    "quality": { "type": "string", "enum": ["GOOD", "STALE", "SUSPECT", "MISSING", "ERROR"] },
+    "measurements": {
+      "type": "object",
+      "properties": {
+        "temperatureC": { "type": ["number", "null"] },
+        "humidityPercent": { "type": ["number", "null"], "minimum": 0, "maximum": 100 },
+        "windSpeedMps": { "type": ["number", "null"], "minimum": 0 },
+        "rainDetected": { "type": ["boolean", "null"] }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

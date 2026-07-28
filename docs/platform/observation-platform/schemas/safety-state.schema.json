@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:digital-stargate:schema:safety-state:1.0",
+  "title": "Safety State",
+  "type": "object",
+  "required": ["state", "evaluatedAt", "authority", "reasonCodes", "policyVersion"],
+  "properties": {
+    "state": { "type": "string", "enum": ["SAFE", "UNSAFE", "UNKNOWN"] },
+    "evaluatedAt": { "type": "string", "format": "date-time" },
+    "authority": { "type": "string", "minLength": 1 },
+    "reasonCodes": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "policyVersion": { "type": "string", "minLength": 1 },
+    "validUntil": { "type": ["string", "null"], "format": "date-time" }
+  },
+  "additionalProperties": false
+}

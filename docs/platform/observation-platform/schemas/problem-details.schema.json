@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:digital-stargate:schema:problem-details:1.0",
+  "title": "Digital StarGate Problem Details",
+  "type": "object",
+  "required": ["type", "title", "status", "code", "correlationId", "severity", "recoverable"],
+  "properties": {
+    "type": { "type": "string" },
+    "title": { "type": "string" },
+    "status": { "type": "integer", "minimum": 400, "maximum": 599 },
+    "code": { "type": "string", "pattern": "^DSG-[A-Z]{3}-[0-9]{3}$" },
+    "detail": { "type": ["string", "null"] },
+    "instance": { "type": ["string", "null"] },
+    "correlationId": { "type": "string", "format": "uuid" },
+    "severity": { "type": "string", "enum": ["INFO", "WARNING", "ERROR", "CRITICAL"] },
+    "recoverable": { "type": "boolean" },
+    "retryAfterSeconds": { "type": ["integer", "null"], "minimum": 0 }
+  },
+  "additionalProperties": true
+}
