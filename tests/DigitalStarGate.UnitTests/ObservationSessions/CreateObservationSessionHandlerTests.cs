@@ -28,8 +28,8 @@ public sealed class CreateObservationSessionHandlerTests
                 new CorrelationId(Guid.NewGuid())),
             CancellationToken.None);
 
-        Assert.NotNull(repository.Session);
-        Assert.Equal(result.Id, repository.Session.Id);
+        var persisted = Assert.IsType<ObservationSession>(repository.Session);
+        Assert.Equal(result.Id, persisted.Id);
         var created = Assert.IsType<SessionCreated>(publisher.Event);
         Assert.Equal(result.Id, created.SessionId);
         Assert.Equal(now, created.OccurredAt);
