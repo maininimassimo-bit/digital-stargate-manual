@@ -322,6 +322,36 @@ nav:
           - Failed Deployment: engineering/runbooks/failed-deployment.md
           - Emergency Hotfix: engineering/runbooks/emergency-hotfix.md
 
+  - Scientific Data Platform:
+      - Overview: data-platform/index.md
+      - Data Platform Registry: data-platform/DATA-000-data-platform-registry.md
+      - Architecture: data-platform/architecture.md
+      - Scientific Data Model: data-platform/data-model.md
+      - Storage and Data Lifecycle: data-platform/storage-lifecycle.md
+      - Ingestion:
+          - Acquisition Ingestion: data-platform/ingestion/acquisition-ingestion.md
+          - Metadata Extraction: data-platform/ingestion/metadata-extraction.md
+          - Data Quality Validation: data-platform/ingestion/data-quality-validation.md
+      - Processing:
+          - Pipeline Architecture: data-platform/processing/pipeline-architecture.md
+          - Calibration and Integration: data-platform/processing/calibration-integration.md
+          - Processing Profiles: data-platform/processing/processing-profiles.md
+      - Catalog:
+          - Catalog and Metadata: data-platform/catalog/catalog-metadata.md
+          - Data Lineage: data-platform/catalog/data-lineage.md
+          - Naming Conventions: data-platform/catalog/naming-conventions.md
+      - Governance:
+          - Data Governance: data-platform/governance/data-governance.md
+          - Retention and Archiving: data-platform/governance/retention-archiving.md
+          - Access and Security: data-platform/governance/access-security.md
+      - Analytics:
+          - Quality Metrics: data-platform/analytics/quality-metrics.md
+          - Reporting: data-platform/analytics/reporting.md
+      - Runbooks:
+          - Ingestion Failure: data-platform/runbooks/ingestion-failure.md
+          - Pipeline Recovery: data-platform/runbooks/pipeline-recovery.md
+          - Storage Pressure: data-platform/runbooks/storage-pressure.md
+
   - Capability Documentation:
       - Capability Registry: capabilities/CAP-000-capability-registry.md
       - Observation Session Management:
