@@ -248,6 +248,30 @@ nav:
           - OBS-012 Power Protection: observatory/assets/OBS-012-ups.md
           - OBS-013 Safety Sensors: observatory/assets/OBS-013-safety-sensors.md
 
+  - Automation Engine:
+      - Overview: automation/index.md
+      - Automation Registry: automation/AUTO-000-automation-registry.md
+      - Architecture: automation/architecture.md
+      - Orchestration Model: automation/orchestration-model.md
+      - Night Scheduler: automation/scheduler.md
+      - Safety Gates: automation/safety-gates.md
+      - Workflows:
+          - Safe Startup: automation/workflows/safe-startup.md
+          - Target Acquisition: automation/workflows/target-acquisition.md
+          - Autofocus: automation/workflows/autofocus.md
+          - Guiding Startup: automation/workflows/guiding-startup.md
+          - Meridian Flip: automation/workflows/meridian-flip.md
+          - Imaging Loop: automation/workflows/imaging-loop.md
+          - Controlled Shutdown: automation/workflows/controlled-shutdown.md
+          - Unsafe Weather Emergency: automation/workflows/unsafe-weather-emergency.md
+          - Recovery Coordinator: automation/workflows/recovery-coordinator.md
+      - State Machines:
+          - Session State Machine: automation/state-machines/session-state-machine.md
+          - Device State Model: automation/state-machines/device-state-model.md
+      - Runbooks:
+          - Automation Operations: automation/runbooks/automation-operations.md
+          - Failure Escalation: automation/runbooks/failure-escalation.md
+
   - Capability Documentation:
       - Capability Registry: capabilities/CAP-000-capability-registry.md
       - Observation Session Management:
