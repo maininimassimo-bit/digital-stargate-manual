@@ -11,8 +11,8 @@
 | Data | 30/07/2026 |
 | Autorità | Digital StarGate Chief Architect |
 | Sponsor | Project Owner / Architecture Sponsor — Massimo Mainini |
-| Dipendenze | AP-003; AP-004; AP-005; AP-006; AP-007; AP-008; AP-009; AP-010; AP-011; OPSC-REF-001; OPSC-CMD-001 |
-| Stato | In development — Sprint AP-012.1 |
+| Dipendenze | AP-003; AP-004; AP-005; AP-006; AP-007; AP-008; AP-009; AP-010; AP-011; OPSC-REF-001; OPSC-CMD-001; OPSC-ALM-001; OPSC-RUN-001; OPSC-RACI-001 |
+| Stato | In development — Sprint AP-012.2 document baseline complete |
 | Target release | Da assegnare |
 
 ## 1. Scopo
@@ -120,7 +120,7 @@ flowchart TB
 | Operator Console | stato, allarmi, workflow, decisioni e comandi | non contiene logica safety autorevole |
 | Operations Supervisor | coordina stato operativo e workflow | non bypassa authorization o integration |
 | Session Manager | lifecycle delle sessioni e handover | rispetta stato safety e readiness |
-| Alarm and Incident Coordinator | triage, acknowledgement, escalation, timeline | tassonomia e lifecycle conformi ad AP-007 |
+| Alarm and Incident Coordinator | triage, acknowledgement, escalation, timeline | tassonomia e lifecycle conformi ad AP-007 e OPSC-ALM-001 |
 | Maintenance Coordinator | work item, finestre e ritorno in servizio | CI e baseline conformi ad AP-006 |
 | Command Authorization Service | policy, approvazioni, token e scadenze | deny by default; evidence obbligatoria |
 | Notification Service | canali e destinatari | nessuna decisione implicita da mancata consegna |
@@ -185,7 +185,7 @@ I dettagli normativi sono definiti in OPSC-CMD-001.
 
 ## 11. Alarm e incident integration
 
-Il DSOC distingue event, alert e incident secondo AP-007. Un alert deve mostrare source, severity candidate, affected service/CI, first seen, last seen, freshness, acknowledgement, suppression state e runbook reference.
+Il DSOC distingue event, alarm e incident secondo AP-007 e OPSC-ALM-001. Un alarm deve mostrare source, severity candidate, affected service/CI, first seen, last seen, freshness, acknowledgement, suppression state e runbook reference.
 
 L'acknowledgement non equivale a risoluzione. La chiusura richiede verifica del servizio e, quando applicabile, stato fisico sicuro.
 
@@ -287,6 +287,9 @@ Il deployment segue AP-009. Il DSOC deve supportare almeno:
 | Safety enforcement | deny/stop da Safety Plane | Non eseguita |
 | Idempotency | duplicate command e retry tests | Non eseguita |
 | Freshness | stale e unknown blocking | Non eseguita |
+| Alarm handling | correlation, suppression, escalation e acknowledgement scenarios | Non eseguita |
+| Runbook execution | precondition, stop, rollback, timeout e recovery drills | Non eseguita |
+| Responsibility governance | role assignment, delegation e four-eyes enforcement | Non eseguita |
 | Degraded mode | loss of telemetry/network/console drill | Non eseguita |
 | Audit | end-to-end correlation e evidence integrity | Non eseguita |
 | Recovery | restore e resumption exercise | Non eseguita |
@@ -301,9 +304,28 @@ Il deployment segue AP-009. Il DSOC deve supportare almeno:
 | command control | explicit authorization | OPSC-CMD-001 | policy tests |
 | integration | no direct device access | AP-008 / OPSC-REF-001 | architecture and access tests |
 | analytics | read-only advisory | AP-011 / AP-012 | no-command-path inspection |
+| alarm and incident | governed taxonomy, lifecycle and escalation | OPSC-ALM-001 | correlation, suppression and escalation scenarios |
+| runbook governance | governed authoring, execution and recovery | OPSC-RUN-001 | runbook drills and evidence review |
+| responsibility | explicit authority, RACI and segregation | OPSC-RACI-001 | role assignment and access review |
 | audit | evidence by design | AP-004 / AP-012 | correlation test |
 
-## 21. Acceptance criteria Sprint AP-012.1
+## 21. Deliverable baseline
+
+### Sprint AP-012.1
+
+- AP-012 — Enterprise Operations Center Architecture;
+- OPSC-REF-001 — Enterprise Operations Center Reference Architecture;
+- OPSC-CMD-001 — Command Authorization Model.
+
+### Sprint AP-012.2
+
+- OPSC-ALM-001 — Alarm & Incident Model;
+- OPSC-RUN-001 — Operational Runbook Standard;
+- OPSC-RACI-001 — Operations Responsibility Matrix.
+
+La presenza degli artefatti costituisce completamento documentale e non prova efficacia, disponibilità, safety o readiness runtime.
+
+## 22. Acceptance criteria Sprint AP-012.1
 
 - AP-012 presente e pubblicato;
 - OPSC-REF-001 presente;
@@ -311,21 +333,35 @@ Il deployment segue AP-009. Il DSOC deve supportare almeno:
 - confini con AP-007, AP-010 e AP-011 espliciti;
 - lifecycle e classi di comando definiti;
 - roadmap, traceability e MkDocs aggiornati;
-- nessuna dichiarazione di certificazione runtime;
-- AP-012.2 pianificato per alarm, runbook e RACI specialistici.
+- nessuna dichiarazione di certificazione runtime.
 
-## 22. Open issues
+## 23. Acceptance criteria Sprint AP-012.2
 
-- piattaforma HMI e workflow engine;
-- owner operativo e approver nominativi;
-- soglie di freshness e timeout;
-- matrice definitiva comando/ruolo;
+- OPSC-ALM-001 presente e pubblicato;
+- OPSC-RUN-001 presente e pubblicato;
+- OPSC-RACI-001 presente e pubblicato;
+- tassonomia, lifecycle, correlation, escalation e suppression definiti;
+- runbook metamodel, safety checkpoint, rollback, timeout, recovery ed evidence definiti;
+- ruoli, authority chain, RACI, segregation of duties e four-eyes principle definiti;
+- roadmap, traceability e MkDocs aggiornati con gli artefatti Sprint 2;
+- nessuna abilitazione command runtime derivata dalla sola baseline documentale;
+- validation evidence e decisione ARB-012 mantenute come gate aperti.
+
+## 24. Open issues
+
+- piattaforma HMI, ITSM e workflow engine;
+- owner operativo, approver e deleghe nominative;
+- soglie di freshness, acknowledgement, escalation e timeout;
 - protocollo di dispatch e idempotency key;
+- catalogo e baseline delle regole di correlation e suppression;
 - retention e immutabilità audit;
 - strategia HA e RTO/RPO;
 - comportamento offline della console;
-- criteri di abilitazione C2–C4.
+- criteri di abilitazione C1–C4;
+- enforcement tecnico del four-eyes principle;
+- campagna di drill degraded, recovery ed emergency;
+- validazione runtime e review indipendente ARB-012.
 
-## 23. Disposizione
+## 25. Disposizione
 
-AP-012 è avviato come **In development — Sprint AP-012.1**. Il package definisce la baseline documentale del DSOC ma non autorizza ancora comandi runtime, non certifica safety, disponibilità o recovery e non sostituisce la review indipendente ARB-012. Il passaggio a operazioni attive richiede gli artefatti AP-012.2, evidence di validazione e decisione ARB.
+Sprint AP-012.1 e AP-012.2 sono completati a livello documentale. AP-012 resta **In development — Sprint AP-012.2 document baseline complete**: non autorizza comandi runtime, non certifica safety, disponibilità, recovery o operabilità e non sostituisce la review indipendente ARB-012. Il passaggio a operazioni attive richiede evidence di validazione, assegnazione e attivazione dei ruoli, collaudo dei controlli command e safety e decisione formale ARB-012.
