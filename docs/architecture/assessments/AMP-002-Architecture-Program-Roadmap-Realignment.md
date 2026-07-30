@@ -71,6 +71,18 @@ Governa il Digital StarGate Operations Center (DSOC): stato live, freshness, hea
 
 Il **Digital StarGate Portal (DSGP)** è il punto di accesso unificato a DSAP e DSOC e non costituisce una safety authority.
 
+### Wave 7 — Scientific Image and Processing Heritage
+
+**AP-013 — Scientific Image Repository Architecture**
+
+Governa il ciclo di vita degli asset scientifici: RAW, calibration, master, intermedi, progetti PixInsight, prodotti finali, preview, checksum, immutabilità, retention, backup, storage esterno e processing provenance.
+
+**AP-014 — Scientific Observation Catalog and Search Architecture**
+
+Governa il catalogo GitHub dei metadati, i link allo storage esterno, la ricerca, l'indicizzazione, i manifest di sessione e di elaborazione, il provenance graph e la sincronizzazione automatica con PixInsight tramite adapter e script governati.
+
+GitHub conserva conoscenza, metadati, workflow, manifest e riferimenti; non è lo storage primario dei RAW o degli altri file binari ad alto volume.
+
 ## 4. Capability introdotte
 
 | Capability | Nome | Stato iniziale | Package principale |
@@ -78,6 +90,9 @@ Il **Digital StarGate Portal (DSGP)** è il punto di accesso unificato a DSAP e 
 | CAP-34 | Enterprise Analytics Platform | Planned | AP-011 |
 | CAP-35 | Enterprise Operations Center | Planned | AP-012 |
 | CAP-36 | Digital StarGate Portal | Planned | AP-011 / AP-012 |
+| CAP-37 | Scientific Image Repository | Planned | AP-013 |
+| CAP-38 | Scientific Observation Catalog and Search | Planned | AP-014 |
+| CAP-39 | Scientific Processing Provenance | Planned | AP-013 / AP-014 |
 
 Lo stato `Planned` non implica implementazione, deployment o readiness operativa.
 
@@ -88,6 +103,10 @@ Lo stato `Planned` non implica implementazione, deployment o readiness operativa
 3. **Unknown is not safe.** Stato mancante, stale o degradato deve essere esplicito e non può essere interpretato come sicuro.
 4. **Commands cross application boundaries.** La UI non accede direttamente a device, relay, driver o protocolli infrastrutturali.
 5. **Read-only before control.** DSOC deve essere validato inizialmente in modalità osservativa; i comandi richiedono autorizzazione, audit, policy e safety review dedicate.
+6. **Scientific images are immutable assets.** I RAW originali non vengono modificati; ogni derivato possiede provenance esplicita.
+7. **GitHub stores knowledge, not bulk pixels.** GitHub conserva catalogo, manifest, workflow, checksum e link; lo storage esterno conserva i binari voluminosi.
+8. **Workflow definition and execution history are separate.** Una ricetta PixInsight versionata non prova la sua esecuzione; ogni elaborazione genera una Processing Run immutabile.
+9. **Automation preserves truth.** Gli step PixInsight non acquisibili automaticamente devono essere dichiarati manualmente o marcati `unknown`, mai inventati.
 
 ## 6. Dipendenze
 
@@ -104,9 +123,17 @@ AP-007 Operations and Service Management
         +--> AP-011 Analytics Platform ----+
         |                                  |
         +--> AP-012 Operations Center -----+--> DSGP
+        |
+        +--> AP-013 Scientific Image Repository
+                |
+                +--> AP-014 Scientific Catalog, Search and PixInsight Sync
+                        |
+                        +--> AP-011 Scientific and Processing Analytics
 ```
 
 AP-011 dipende almeno da AP-002, AP-004, AP-006 e AP-007. AP-012 dipende almeno da AP-003, AP-004, AP-005, AP-006, AP-007, AP-008, AP-009 e AP-010.
+
+AP-013 dipende almeno da AP-002, AP-006, AP-008 e AP-009. AP-014 dipende da AP-013 e usa i contratti di AP-008. L'integrazione PixInsight deve mantenere il prodotto come sistema esterno attraverso un adapter infrastrutturale.
 
 ## 7. Sequenza di esecuzione
 
@@ -114,16 +141,21 @@ AP-011 dipende almeno da AP-002, AP-004, AP-006 e AP-007. AP-012 dipende almeno 
 2. Sottoporre AP-007 a review ARB indipendente.
 3. Produrre AP-008, AP-009 e AP-010 in ordine dipendente dalle decisioni emerse.
 4. Avviare AP-011 e AP-012 soltanto quando contratti, ownership, freshness, authorization e safety boundary sono stabili.
-5. Implementare DSGP per incrementi, mantenendo DSAP e DSOC separati nei boundary applicativi.
+5. Produrre AP-013 dopo le decisioni su storage, data governance, backup e asset identity.
+6. Produrre AP-014 dopo AP-013, includendo catalogo GitHub, ricerca, manifest e proof of concept della sincronizzazione PixInsight.
+7. Implementare DSGP per incrementi, mantenendo DSAP, DSOC e Scientific Catalog separati nei boundary applicativi.
 
 ## 8. Acceptance criteria del riallineamento
 
 - AP-001…AP-006 non sono rinumerati.
 - AMP-001 è conservato come fonte storica ma non governa più la numerazione futura.
-- AP-007…AP-012 hanno scope univoci.
-- CAP-34…CAP-36 sono registrate come `Planned`.
-- traceability register e MkDocs includono AMP-002 e la Portal Vision.
+- AP-007…AP-014 hanno scope univoci.
+- CAP-34…CAP-39 sono registrate come `Planned`.
+- traceability register e MkDocs includono AMP-002, Portal Vision e Scientific Image Lifecycle Vision.
 - nessuna dashboard è dichiarata safety authority.
+- RAW e binari voluminosi non sono pianificati nel repository GitHub.
+- Processing Run, workflow version, input/output checksum e step manuali sono previsti dal modello di provenance.
+- gli script PixInsight non contengono credenziali GitHub privilegiate.
 - build, link check e runtime validation sono registrati separatamente.
 
 ## 9. Validazioni
@@ -133,15 +165,19 @@ AP-011 dipende almeno da AP-002, AP-004, AP-006 e AP-007. AP-012 dipende almeno 
 - verifica del repository e del branch `main`;
 - verifica di AMP-001, metamodel, traceability register e `mkdocs.yml`;
 - verifica della presenza e delle review di AP-001…AP-006;
-- verifica dell'assenza di AMP-002.
+- verifica dei riferimenti PixInsight già presenti nel repository;
+- verifica della separazione corrente tra catalogo documentale GitHub e storage scientifico futuro.
 
 ### Non eseguite
 
 - `mkdocs build --strict`;
 - link checker automatico;
 - CI GitHub Actions;
-- test runtime di dashboard, telemetry, command, safety o analytics.
+- test runtime di dashboard, telemetry, command, safety o analytics;
+- proof of concept PixInsight;
+- export reale di process history o metadata XISF;
+- sincronizzazione con storage esterno o catalogo GitHub.
 
 ## 10. Decisione
 
-AMP-002 è approvato come nuova fonte autorevole della roadmap di programma successiva ad AP-006. Ogni Architecture Package resta soggetto a produzione specialistica, validazione e review ARB indipendente.
+AMP-002 è approvato come fonte autorevole della roadmap di programma successiva ad AP-006. AP-013 e AP-014 includono formalmente la gestione del repository scientifico separato e la processing provenance PixInsight automatizzabile. Ogni Architecture Package resta soggetto a produzione specialistica, validazione e review ARB indipendente.
