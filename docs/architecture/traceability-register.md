@@ -16,128 +16,133 @@
 - Le righe descrivono esclusivamente artefatti verificati nel repository.
 - L'assenza di una review o release è indicata esplicitamente.
 - Uno stato capability non viene promosso da questo registro.
-- I locator di evidenza devono diventare puntuali quando usati per certificazione.
 - Gli identificatori esistenti non vengono rinumerati retroattivamente.
-- Una workflow definition versionata non costituisce prova di una Processing Run eseguita.
-- Una knowledge projection o inferenza AI non costituisce una fonte autorevole senza provenance e citation locator.
+- Una workflow definition versionata non prova una Processing Run eseguita.
+- Una knowledge projection o inferenza AI non è fonte autorevole senza provenance e citation.
+- Un Architecture Package `Proposed for review` non è `Completed` finché non è sottoposto a review e le condizioni non sono governate.
 
 ## 2. Baseline certificata e capability pianificate
 
 | Capability / Scope | Stato verificato | Fonte autorevole | Evidence / Implementation | Review / Certificate | Disposizione |
 |---|---|---|---|---|---|
-| CAP-01 Analytics pipeline | Implemented, con limiti dichiarati | PAA-002 v1.1 | ABC-001 Evidence Annex | ARB-002 / ABC-001 | Fondazione esistente; non ricostruire greenfield |
-| CAP-02 Historical Analytics Dashboard | Implemented, operatività continua non certificata | PAA-002 v1.1 | ABC-001 Evidence Annex | ARB-002 / ABC-001 | Evoluzione controllata e futura integrazione DSAP |
-| CAP-03 Data Warehouse | Implemented, consumer layer incompleto | PAA-002 v1.1 | ABC-001 Evidence Annex | ARB-002 / ABC-001 / ARB-004 / ARB-006 | AP-002 governa data product; condizioni operative aperte |
-| CAP-04 Warehouse metadata and validation | Implemented, release certification assente | PAA-002 v1.1 | ABC-001 Evidence Annex | ARB-002 / ABC-001 / ARB-004 / ARB-006 | Quality e observability definite; evidence runtime da completare |
-| CAP-08 Live telemetry | Planned | PAA-002 v1.1 | AP-004 e reference architecture | ARB-002 / ABC-001 / ARB-006 | Nessuna promozione senza pilot e OPS |
-| CAP-15 AllSky integration | Planned | PAA-002 v1.1 | `future.allsky: false` | ARB-002 / ABC-001 | Richiede contratti e health |
-| CAP-16 Observatory Automation | Partial | PAA-002 v1.1 | AP-003 e documentazione operativa | ARB-005…ARB-008 | Nessun runtime automatico autorizzato |
-| CAP-17 Local safety interlocks | Partial | PAA-002 v1.1 | Evidenza documentale | ARB-005…ARB-008 | Autorità locale preservata |
-| CAP-18 AI boundary contracts | Prepared | PAA-002 v1.1 | contratti AI presenti | ARB-004 / ARB-006 / ARB-007 | Nessun privilegio implicito |
-| CAP-19 AI Assistant | Planned | PAA-002 v1.1 | `future.ai_assistant: false` | ARB-002 / ABC-001 | Read-only first |
-| CAP-31 Architecture Governance | Partial | PAA-002 v1.1 | AP-001, metamodel e registro | ARB-003…ARB-008 | Condizioni aperte |
-| CAP-32 Documentation Governance | Partial | PAA-002 v1.1 | MkDocs, package e standard | ARB-003…ARB-008 | Standardizzare e automatizzare |
-| CAP-33 Release Quality Governance | Partial | PAA-002 v1.1 | processi e release note | ARB-003…ARB-008 | Release mapping incompleto |
-| CAP-34 Enterprise Analytics Platform | Planned | AMP-002 / DSGP-VIS-001 | Nessuna implementazione certificata | Nessuna review AP-011 | Governare DSAP senza pipeline parallele |
-| CAP-35 Enterprise Operations Center | Planned | AMP-002 / DSGP-VIS-001 | Nessuna implementazione certificata | Nessuna review AP-012 | DSOC read-only first |
-| CAP-36 Digital StarGate Portal | Planned | AMP-002 / DSGP-VIS-001 | Vision documentale | Nessuna review AP-011/AP-012 | Presentation boundary; non safety authority |
-| CAP-37 Scientific Image Repository | Planned | AMP-002 / SIR-VIS-001 | Vision documentale | Nessuna review AP-013 | RAW e derivati su storage esterno |
-| CAP-38 Scientific Observation Catalog and Search | Planned | AMP-002 / SIR-VIS-001 | Vision documentale | Nessuna review AP-014 | GitHub conserva catalogo, manifest e link |
-| CAP-39 Scientific Processing Provenance | Planned | AMP-002 / SIR-VIS-001 | Contratto minimo proposto | Nessuna review AP-013/AP-014 | Processing Run immutabili e workflow versionati |
-| CAP-40 Scientific Knowledge Layer | Planned | AMP-002 / SKL-VIS-001 | Vision documentale | Nessuna review AP-015 | Entità, relazioni, claim, citation e projection governate |
+| CAP-01 Analytics pipeline | Implemented, con limiti | PAA-002 v1.1 | ABC-001 Evidence Annex | ARB-002 / ABC-001 | Fondazione esistente |
+| CAP-02 Historical Analytics Dashboard | Implemented, continuità non certificata | PAA-002 v1.1 | ABC-001 Evidence Annex | ARB-002 / ABC-001 | Evoluzione DSAP |
+| CAP-03 Data Warehouse | Implemented, consumer incompleto | PAA-002 v1.1 | ABC-001 Evidence Annex | ARB-004 / ARB-006 | Condizioni operative aperte |
+| CAP-04 Warehouse metadata and validation | Implemented, release non certificata | PAA-002 v1.1 | ABC-001 Evidence Annex | ARB-004 / ARB-006 | Evidence runtime da completare |
+| CAP-08 Live telemetry | Planned | PAA-002 / AP-004 | Reference architecture | ARB-006 | Pilot e OPS richiesti |
+| CAP-15 AllSky integration | Planned | PAA-002 | feature futura | ARB-002 | Contratti e health richiesti |
+| CAP-16 Observatory Automation | Partial | AP-003 | documentazione operativa | ARB-005…ARB-008 | Runtime non autorizzato |
+| CAP-17 Local safety interlocks | Partial | AP-003 | evidenza documentale | ARB-005…ARB-008 | Autorità locale preservata |
+| CAP-18 AI boundary contracts | Prepared | PAA-002 | contratti presenti | ARB-004/006/007 | Nessun privilegio implicito |
+| CAP-19 AI Assistant | Planned | PAA-002 | feature futura | ARB-002 | Read-only first |
+| CAP-31 Architecture Governance | Partial | AP-001 | metamodel e registro | ARB-003…ARB-008 | Condizioni aperte |
+| CAP-32 Documentation Governance | Partial | AP-001 | MkDocs e standard | ARB-003…ARB-008 | Automazione progressiva |
+| CAP-33 Release Quality Governance | Partial | AP-001 | release note | ARB-003…ARB-008 | Mapping incompleto |
+| CAP-34 Enterprise Analytics Platform | Planned | AMP-002 / DSGP-VIS-001 | vision | Nessuna review AP-011 | DSAP governato |
+| CAP-35 Enterprise Operations Center | Planned | AMP-002 / DSGP-VIS-001 | vision | Nessuna review AP-012 | DSOC read-only first |
+| CAP-36 Digital StarGate Portal | Planned | AMP-002 / DSGP-VIS-001 | vision | Nessuna review AP-011/AP-012 | Non safety authority |
+| CAP-37 Scientific Image Repository | Planned | AMP-002 / SIR-VIS-001 | vision | Nessuna review AP-013 | Storage esterno |
+| CAP-38 Scientific Observation Catalog and Search | Planned | AMP-002 / SIR-VIS-001 | vision | Nessuna review AP-014 | Catalogo e manifest |
+| CAP-39 Scientific Processing Provenance | Planned | AMP-002 / SIR-VIS-001 | contratto proposto | Nessuna review AP-013/AP-014 | Processing Run immutabili |
+| CAP-40 Scientific Knowledge Layer | Planned | AMP-002 / SKL-VIS-001 | vision | Nessuna review AP-015 | Claim e citation governati |
 
 ## 3. Architecture Package Register
 
-| Package | Scope | Capability interessate | Artefatti | Review | Stato |
-|---|---|---|---|---|---|
-| AP-001 | Enterprise Metamodel and Repository Information Architecture | CAP-31, CAP-32, CAP-33 | package, metamodel e registro | ARB-003 | Approved with conditions |
-| AP-002 | Enterprise Data Governance | CAP-03, CAP-04 e consumer | package e standard | ARB-004 | Approved with conditions |
-| AP-003 | Observatory Automation Architecture | CAP-16, CAP-17 | package e reference architecture | ARB-005 | Approved with conditions |
-| AP-004 | Enterprise Telemetry and Observability Architecture | CAP-08 e trasversali | package e reference architecture | ARB-006 | Approved with conditions |
-| AP-005 | Identity, Access and Remote Operations Security Architecture | trasversale | package e reference architecture | ARB-007 | Approved with conditions, 91/100 |
-| AP-006 | Enterprise Configuration and Asset Management Architecture | trasversale | package e reference architecture | ARB-008 | Approved with conditions, 92/100 |
-| AP-007 | Enterprise Operations and Service Management Architecture | operations, incident, problem, change, runbook e KPI | da produrre | Nessuna | Planned — next package |
-| AP-008 | Enterprise Integration Architecture | API, eventi, adapter e contratti | da produrre | Nessuna | Planned |
-| AP-009 | Enterprise Infrastructure Architecture | rete, compute, storage, backup e resilience | da produrre | Nessuna | Planned |
-| AP-010 | Enterprise Safety Assurance Architecture | CAP-16, CAP-17 | da produrre | Nessuna | Planned |
-| AP-011 | Enterprise Analytics Platform Architecture | CAP-02, CAP-03, CAP-04, CAP-34, CAP-36 | DSGP-VIS-001 | Nessuna | Planned |
-| AP-012 | Enterprise Operations Center Architecture | CAP-08, CAP-15, CAP-16, CAP-17, CAP-35, CAP-36 | DSGP-VIS-001 | Nessuna | Planned |
-| AP-013 | Scientific Image Repository Architecture | CAP-37, CAP-39 | SIR-VIS-001 | Nessuna | Planned |
-| AP-014 | Scientific Observation Catalog and Search Architecture | CAP-38, CAP-39; supporta CAP-34 e CAP-36 | SIR-VIS-001 | Nessuna | Planned |
-| AP-015 | Scientific Knowledge Platform Architecture | CAP-40; supporta CAP-34, CAP-36 e CAP-19 | SKL-VIS-001 | Nessuna | Planned |
+| Package | Scope | Artefatti | Review | Stato |
+|---|---|---|---|---|
+| AP-001 | Metamodel e repository IA | package, metamodel, registro | ARB-003 | Approved with conditions |
+| AP-002 | Data Governance | package e standard | ARB-004 | Approved with conditions |
+| AP-003 | Observatory Automation | package e reference architecture | ARB-005 | Approved with conditions |
+| AP-004 | Telemetry and Observability | package e reference architecture | ARB-006 | Approved with conditions |
+| AP-005 | Identity and Remote Security | package e reference architecture | ARB-007 | Approved with conditions, 91/100 |
+| AP-006 | Configuration and Asset Management | package e reference architecture | ARB-008 | Approved with conditions, 92/100 |
+| AP-007 | Operations and Service Management | package AP-007 e OPS-REF-001 | Nessuna | Proposed for independent ARB review |
+| AP-008 | Enterprise Integration | da produrre | Nessuna | Planned |
+| AP-009 | Enterprise Infrastructure | da produrre | Nessuna | Planned |
+| AP-010 | Enterprise Safety Assurance | da produrre | Nessuna | Planned |
+| AP-011 | Analytics Platform | DSGP-VIS-001 | Nessuna | Planned |
+| AP-012 | Operations Center | DSGP-VIS-001 | Nessuna | Planned |
+| AP-013 | Scientific Image Repository | SIR-VIS-001 | Nessuna | Planned |
+| AP-014 | Scientific Catalog and Search | SIR-VIS-001 | Nessuna | Planned |
+| AP-015 | Scientific Knowledge Platform | SKL-VIS-001 | Nessuna | Planned |
 
 ## 4. Data Product Candidate Register
 
-| ID | Data product | Fonte contrattuale verificata | Owner | Stato |
-|---|---|---|---|---|
-| DP-001 | `sessions.parquet` | Warehouse schema; locator eseguibile da verificare | proposto | Candidate baseline |
-| DP-002 | `targets.parquet` | stessa fonte | proposto | Candidate baseline |
-| DP-003 | `equipment.parquet` | stessa fonte | proposto | Candidate baseline |
-| DP-004 | `quality.parquet` | stessa fonte | proposto | Candidate baseline |
-| DP-005 | `weather.parquet` | stessa fonte | proposto | Candidate baseline |
-| DP-006 | Scientific Asset Manifest | SIR-VIS-001; schema da produrre in AP-013 | proposto | Planned candidate |
-| DP-007 | Processing Run Manifest | SIR-VIS-001; schema da produrre in AP-013/AP-014 | proposto | Planned candidate |
-| DP-008 | Workflow Definition | SIR-VIS-001; schema da produrre in AP-014 | proposto | Planned candidate |
-| DP-009 | Knowledge Entity and Relation Projection | SKL-VIS-001; schema da produrre in AP-015 | proposto | Planned candidate |
-| DP-010 | Scientific Claim and Citation Projection | SKL-VIS-001; schema da produrre in AP-015 | proposto | Planned candidate |
-
-Gli ID DP-001…DP-010 non costituiscono certificazione finché owner, grain, schema locator, consumer, quality, retention e lineage non sono verificati.
+| ID | Data product | Fonte | Stato |
+|---|---|---|---|
+| DP-001 | `sessions.parquet` | Warehouse schema | Candidate baseline |
+| DP-002 | `targets.parquet` | Warehouse schema | Candidate baseline |
+| DP-003 | `equipment.parquet` | Warehouse schema | Candidate baseline |
+| DP-004 | `quality.parquet` | Warehouse schema | Candidate baseline |
+| DP-005 | `weather.parquet` | Warehouse schema | Candidate baseline |
+| DP-006 | Scientific Asset Manifest | SIR-VIS-001 / AP-013 | Planned candidate |
+| DP-007 | Processing Run Manifest | SIR-VIS-001 / AP-013/AP-014 | Planned candidate |
+| DP-008 | Workflow Definition | SIR-VIS-001 / AP-014 | Planned candidate |
+| DP-009 | Knowledge Entity and Relation Projection | SKL-VIS-001 / AP-015 | Planned candidate |
+| DP-010 | Scientific Claim and Citation Projection | SKL-VIS-001 / AP-015 | Planned candidate |
 
 ## 5. Assessment and governance chain
 
-| Artefatto | Ruolo | Input | Output / Decision | Stato |
-|---|---|---|---|---|
-| PAA-002 v1.1 | Capability gap assessment | baseline repository | capability matrix, gap e dipendenze | Reviewed |
-| ARB-002 | Independent review | PAA-002 v1.1 | Approved with conditions, 90/100 | Completed |
-| ABC-001 | Baseline certificate | PAA-002 e ARB-002 | Conditionally certified | Completed |
-| AMP-001 | Historical Architecture Master Plan | ABC-001 | baseline iniziale; roadmap futura superata | Superseded in roadmap sections |
-| AMP-002 | Architecture Program Roadmap Realignment | AP-001…AP-006 | Roadmap AP-007…AP-015 e CAP-34…CAP-40 | Approved for planning |
-| DSGP-VIS-001 | Digital Platforms vision | AMP-002 | Vision DSGP, DSAP e DSOC | Planned architecture vision |
-| SIR-VIS-001 | Scientific image and processing provenance vision | AMP-002 | Vision asset lifecycle, catalogo e PixInsight sync | Approved for architecture planning |
-| SKL-VIS-001 | Scientific Knowledge Layer vision | AMP-002, SIR-VIS-001, metamodel | Vision semantic layer, claims e citations | Approved for architecture planning |
-| AP-001 / ARB-003 | Metamodel and repository IA | governance baseline | Approved with conditions, 86/100 | Completed |
-| AP-002 / ARB-004 | Enterprise Data Governance | Warehouse baseline | Approved with conditions, 88/100 | Completed |
-| AP-003 / ARB-005 | Observatory Automation | safety e operations docs | Approved with conditions, 89/100 | Completed |
-| AP-004 / ARB-006 | Telemetry and Observability | AP-002/AP-003 | Approved with conditions, 90/100 | Completed |
-| AP-005 / ARB-007 | Identity and Remote Security | AP-002…AP-004 | Approved with conditions, 91/100 | Completed |
-| AP-006 / ARB-008 | Configuration and Asset Management | AP-001…AP-005 | Approved with conditions, 92/100 | Completed |
+| Artefatto | Ruolo | Stato |
+|---|---|---|
+| PAA-002 v1.1 | Capability gap assessment | Reviewed |
+| ARB-002 | Independent review PAA-002 | Completed, 90/100 |
+| ABC-001 | Baseline certificate | Conditionally certified |
+| AMP-001 | Historical master plan | Superseded in roadmap sections |
+| AMP-002 | Roadmap AP-007…AP-015 | Approved for planning |
+| DSGP-VIS-001 | Digital Platforms vision | Planned vision |
+| SIR-VIS-001 | Scientific image and provenance vision | Approved for planning |
+| SKL-VIS-001 | Scientific Knowledge Layer vision | Approved for planning |
+| AP-001 / ARB-003 | Metamodel | Approved with conditions |
+| AP-002 / ARB-004 | Data Governance | Approved with conditions |
+| AP-003 / ARB-005 | Automation | Approved with conditions |
+| AP-004 / ARB-006 | Observability | Approved with conditions |
+| AP-005 / ARB-007 | Identity and Security | Approved with conditions |
+| AP-006 / ARB-008 | Configuration and Assets | Approved with conditions |
+| AP-007 / OPS-REF-001 | Operations and Service Management | Proposed for independent ARB review |
 
 ## 6. Open traceability gaps
 
 | ID | Gap | Impatto | Trattamento |
 |---|---|---|---|
-| TR-G01 | AMP-001 non coerente con i package realizzati | numerazione futura ambigua | AMP-002 e review indipendente |
-| TR-G02 | Release-package mapping non sistematico | scope release difficile da certificare | aggiornamento release note |
-| TR-G05 | Build strict e link check non eseguiti | pubblicabilità non certificata | CI o workspace |
-| TR-G06 | Owner AP-001…AP-006 non formalmente assegnati | governance non operativa | RACI |
+| TR-G01 | AMP-001 non coerente con package realizzati | numerazione ambigua | AMP-002 |
+| TR-G02 | Release-package mapping incompleto | scope release non certificabile | release governance |
+| TR-G05 | Build strict e link check non eseguiti | pubblicabilità non certificata | CI/workspace |
+| TR-G06 | Owner fondazione non tutti formalizzati | accountability incompleta | RACI |
 | TR-G07 | Schema DP-001…DP-005 non collegati | data product non certificabili | locator immutabili |
-| TR-G08 | Retention non deliberate | lifecycle incompleto | decisione per data product e signal |
-| TR-G09 | Lineage Analytics → Warehouse → consumer incompleto | riproducibilità limitata | Evidence Annex AP-002 |
-| TR-G10 | Inventario sensori/controller/interlock non certificato | AP-003 non commissionabile | inventory e owner |
-| TR-G12 | Fault injection e isolamento non provati | CAP-16/17 non promuovibili | validation matrix |
+| TR-G08 | Retention non deliberate | lifecycle incompleto | policy data product |
+| TR-G09 | Lineage analytics incompleto | riproducibilità limitata | AP-002 evidence |
+| TR-G10 | Inventario safety non certificato | AP-003 non commissionabile | inventory e owner |
+| TR-G12 | Fault injection non provata | CAP-16/17 non promuovibili | AP-010 validation |
 | TR-G13 | Condizioni ARB-004 aperte | data product non certificabili | remediation AP-002 |
-| TR-G15 | ADR-005 e Capability 002 restano Proposed | safety policy non deliberata | AP-010 |
-| TR-G16 | Command authorization e audit contract assenti | comandi non governabili | AP-005/AP-012 |
-| TR-G19 | SLI, SLO, routing ed escalation non deliberati | operations non certificabili | AP-007/AP-012 |
+| TR-G15 | ADR-005/Capability 002 Proposed | safety policy non deliberata | AP-010 |
+| TR-G16 | Command authorization incompleta | comandi non governabili | AP-005/AP-012 |
+| TR-G19 | SLI, SLO, routing ed escalation non deliberati | operations non certificabili | AP-007 pilot |
 | TR-G24 | Continuous operations evidence assente | CAP-08 non promuovibile | OPS evidence |
 | TR-G38 | Ownership KPI DSAP non definita | dashboard ambigua | AP-011 |
-| TR-G39 | Protocollo live e freshness UI non deliberati | DSOC può mostrare stato ingannevole | AP-008/AP-012 |
+| TR-G39 | Protocollo live/freshness non deliberato | stato DSOC ingannevole | AP-008/AP-012 |
 | TR-G40 | BFF e command path non definiti | rischio UI-to-device | AP-008/AP-012 |
-| TR-G41 | Degraded-mode UX non validata | portale non operabile in emergenza | AP-012 |
-| TR-G42 | Storage scientifico, URI scheme e asset identity non deliberati | link fragili | AP-009/AP-013 |
-| TR-G43 | Schema Processing Run e Workflow Definition assenti | storico PixInsight non confrontabile | AP-013/AP-014 |
-| TR-G44 | Export process history PixInsight non provato | automazione potenzialmente incompleta | PoC con fallback manuale |
-| TR-G45 | Checksum, idempotenza e reconciliation sync non testati | catalogo e storage divergenti | AP-008/AP-014 |
-| TR-G46 | Credenziali script/adapter non definite | esposizione token | AP-005/AP-008 |
-| TR-G47 | Versioni PixInsight, moduli e script non baselined | processing non riproducibile | AP-006/AP-013 |
-| TR-G48 | Provenance step manuali non standardizzata | storia incompleta | schema con `manual` e `unknown` |
-| TR-G49 | Vocabolario scientifico e ownership non definiti | entità e relazioni incoerenti | AP-015 semantic governance |
-| TR-G50 | Regole di conflitto tra fonti assenti | claim contraddittori o fuorvianti | AP-015 conflict model |
-| TR-G51 | Citation locator e confidence model non definiti | risultati non verificabili | AP-015 contract e validation |
-| TR-G52 | Tecnologia graph/vector non valutata su query e volumi reali | lock-in o complessità prematura | PoC comparativo dopo AP-014 |
-| TR-G53 | Governance delle inferenze AI non definita | inferenze trattate come fatti | AP-015/AP-019 read-only policy |
-| TR-G54 | Reconciliation della knowledge projection non testata | indice semantico stale | AP-008/AP-015 validation matrix |
+| TR-G41 | Degraded-mode UX non validata | portale fragile in emergenza | AP-012 |
+| TR-G42 | Storage scientifico e URI non deliberati | link fragili | AP-009/AP-013 |
+| TR-G43 | Processing Run schema assente | storico non confrontabile | AP-013/AP-014 |
+| TR-G44 | Export PixInsight non provato | automazione incompleta | PoC |
+| TR-G45 | Reconciliation sync non testata | divergenza catalogo/storage | AP-008/AP-014 |
+| TR-G46 | Credenziali adapter non definite | esposizione token | AP-005/AP-008 |
+| TR-G47 | Versioni PixInsight non baselined | processing non riproducibile | AP-006/AP-013 |
+| TR-G48 | Step manuali non standardizzati | provenance incompleta | schema manual/unknown |
+| TR-G49 | Vocabolario scientifico senza owner | semantica incoerente | AP-015 |
+| TR-G50 | Conflitti tra fonti non governati | claim fuorvianti | AP-015 |
+| TR-G51 | Citation/confidence model assente | risultati non verificabili | AP-015 |
+| TR-G52 | Graph/vector non valutato | lock-in prematuro | PoC dopo AP-014 |
+| TR-G53 | Inferenze AI non governate | inferenze trattate come fatti | AP-015 |
+| TR-G54 | Knowledge reconciliation non testata | indice stale | AP-008/AP-015 |
+| TR-G55 | Service catalog e service owner non formalizzati | supporto ed escalation non attribuibili | AP-007 inventory e nomine |
+| TR-G56 | Severity, priority e major incident process non collaudati | risposta non uniforme | AP-007 pilot/exercise |
+| TR-G57 | Runbook non testati end-to-end | procedure non dimostrate | AP-007 evidence annex |
+| TR-G58 | Operational Readiness Review non eseguita | attivazioni non governate | pilot AP-007 |
+| TR-G59 | Degraded mode per servizio non definita | continuità rischiosa | service records AP-007 |
+| TR-G60 | SLO numerici senza baseline misurata | obiettivi arbitrari | baseline SLI prima degli SLO |
 
 ## 7. Validazione del registro
 
-Il registro copre la governance AP-001…AP-006, le review ARB-003…ARB-008, il riallineamento AMP-002 e le capability pianificate CAP-34…CAP-40. Non certifica implementazione, storage esterno, sincronizzazione PixInsight, knowledge graph, semantic index, vector search, RAG o operatività del catalogo e della SKL.
+Il registro include AP-007 e OPS-REF-001 come artefatti proposti per review. Non certifica operatività continua, service ownership, SLO, runbook, escalation, degraded mode, readiness o risultato di una review ARB indipendente.
