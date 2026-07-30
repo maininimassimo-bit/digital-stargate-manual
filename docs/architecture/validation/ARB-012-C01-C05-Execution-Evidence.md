@@ -1,4 +1,4 @@
-# ARB-012 C01/C05 — Simulated Execution Evidence
+# ARB-012 C01/C05 — Partial Simulated Execution Evidence
 
 | Campo | Valore |
 |---|---|
@@ -14,41 +14,62 @@
 | Job | `quality-gate` — job ID `90980032234` |
 | Data verifica | 30/07/2026 |
 | Autorità | Digital StarGate Release and Quality Governor |
-| Esito | Passed in simulated scope |
+| Esito | Partial simulated coverage — gates not closed |
 
 ## 1. Scope della prova
 
-La prova valida esclusivamente il comportamento del test harness simulato. Non sono presenti collegamenti a cupola, montatura, ASCOM, Alpaca, N.I.N.A., rete operativa o altri dispositivi fisici.
+La prova valida esclusivamente un sottoinsieme del comportamento del test harness simulato. Non sono presenti collegamenti a cupola, montatura, ASCOM, Alpaca, N.I.N.A., rete operativa o altri dispositivi fisici.
 
-Il risultato non autorizza l'abilitazione di command path runtime.
+Il risultato non autorizza l'abilitazione di command path runtime e non costituisce chiusura complessiva di C01 o C05.
 
-## 2. Scenari ARB-012-C01 verificati
+## 2. Copertura ARB-012-C01
+
+Copertura verificata:
 
 - comando autorizzato eseguito una sola volta e auditato;
-- four-eyes obbligatorio per comandi privilegiati;
+- denial four-eyes quando requester e approver coincidono;
 - autorizzazione scaduta negata;
 - telemetry stale, unknown o conflicting negata per comandi safety-relevant;
 - diniego della Safety Authority prevalente;
-- retry e duplicati gestiti senza doppia esecuzione;
-- privilegio revocato prima dell'esecuzione negato;
-- decisioni registrate nell'audit append-only simulato.
+- replay duplicato gestito senza doppia esecuzione;
+- identità revocata negata;
+- decisioni registrate nell'audit sink simulato.
 
-**Decisione C01:** `Passed — simulated scope`.
+Copertura ancora mancante o incompleta:
 
-## 3. Scenari ARB-012-C05 verificati
+- timeout e riconciliazione modellati esplicitamente;
+- revoca tra approval ed execution come transizione distinta;
+- security event dedicato per utente senza ruolo;
+- ruolo, correlation ID, safety decision, payload hash e approval chain nell'audit record;
+- log JSON, fixture versionate e report scenario-level richiesti dal piano.
 
-- privileged access limitato per scope e durata;
+**Stato C01:** `Not Executed — partial simulated coverage`.
+
+## 3. Copertura ARB-012-C05
+
+Copertura verificata:
+
+- accesso privilegiato limitato per scope e durata;
 - accesso fuori scope negato;
-- break-glass con motivazione obbligatoria;
-- scadenza e revoca del grant;
+- motivazione break-glass obbligatoria;
+- accesso negato dopo expiry o revoca;
 - Security Authority priva di authority safety e command authority implicita;
-- Auditor privo di capacità di dispatch e con sola lettura audit.
+- Auditor privo di capacità di dispatch e con lettura audit.
 
-**Decisione C05:** `Passed — simulated scope`.
+Copertura ancora mancante o incompleta:
 
-## 4. Evidenza CI
+- approvatore del grant;
+- notifica del break-glass;
+- evento esplicito di revoca automatica alla scadenza;
+- security event per riuso dopo revoca;
+- post-review obbligatoria e blocco della chiusura conforme se assente;
+- catena evidence completa del break-glass.
 
-Il workflow `Developer Foundation` run 170 ha completato con conclusione `success`.
+**Stato C05:** `Not Executed — partial simulated coverage`.
+
+## 4. Evidenza CI dell'esecuzione parziale
+
+Il workflow `Developer Foundation` run 170 ha completato con conclusione `success` sul commit dell'esecuzione.
 
 | Gate | Esito |
 |---|---|
@@ -60,14 +81,19 @@ Il workflow `Developer Foundation` run 170 ha completato con conclusione `succes
 | Install documentation dependencies | Passed |
 | Verify MkDocs | Passed |
 
-## 5. Limitazioni e condizioni residue
+Il superamento della CI prova che il sottoinsieme implementato compila e supera i test; non prova il soddisfacimento degli scenari o degli artefatti non implementati.
 
-- C04 resta `Blocked` fino alle nomine nominative e alla verifica delle segregazioni organizzative;
-- la prova usa identità e ruoli simulati e non costituisce assegnazione organizzativa;
-- non sono validate integrazioni runtime, dispositivi fisici o interlock locali;
+## 5. Relazione con C04
+
+Le identità e i ruoli del test harness sono fixture simulate e possono essere usati per validazione tecnica non operativa. C04 resta `Blocked` e rimane prerequisito per assegnazioni reali, four-eyes organizzativo, privilegi operativi e chiusura runtime di C01/C05.
+
+## 6. Condizioni residue
+
 - C02, C03, C06 e C07 restano `Not Executed`;
+- C04 resta `Blocked` fino alle nomine nominative e alla verifica delle segregazioni organizzative;
+- non sono validate integrazioni runtime, dispositivi fisici o interlock locali;
 - l'abilitazione runtime di AP-012 resta proibita fino alla re-review finale delle condizioni applicabili.
 
-## 6. Disposizione
+## 7. Disposizione
 
-Le condizioni C01 e C05 sono chiuse per lo scope simulato definito dalla campagna. Ogni futura implementazione runtime dovrà ripetere le prove sull'implementazione effettiva prima dell'abilitazione operativa.
+L'evidenza viene accettata come prova parziale di avanzamento tecnico in ambiente simulato. Non chiude C01 o C05. Il prossimo incremento deve completare gli scenari e gli artefatti mancanti oppure mantenere esplicitamente i gate non chiusi.
