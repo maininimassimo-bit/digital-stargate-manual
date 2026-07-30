@@ -3,8 +3,8 @@
   "updatedAt": "2026-07-30",
   "authority": "AMP-002",
   "projectStatus": "Attivo",
-  "currentPackage": "AP-011",
-  "nextMilestone": "Independent ARB review of AP-011 Enterprise Analytics Platform Architecture",
+  "currentPackage": "AP-012",
+  "nextMilestone": "Plan AP-012 Enterprise Operations Center Architecture using AP-009, AP-010 and AP-011 guard rails",
   "target": "AP-015 / Scientific Knowledge Platform",
   "waves": [
     {
@@ -36,8 +36,8 @@
       "title": "Digital Platforms",
       "status": "active",
       "items": [
-        {"id":"AP-011","title":"Enterprise Analytics Platform Architecture (DSAP)","status":"active","note":"Package AP-011, ANA-REF-001, ANA-PIPE-001, ANA-KPI-001 and ANA-GOV-001 produced; independent ARB review pending. Analytics remains read-only toward operations and has no safety authority"},
-        {"id":"AP-012","title":"Enterprise Operations Center Architecture (DSOC)","status":"planned"}
+        {"id":"AP-011","title":"Enterprise Analytics Platform Architecture (DSAP)","status":"completed","review":"ARB-011","note":"Approved with conditions, 97/100. ARB-011-C01…C07 remain open; analytics runtime is not certified and has no command or safety authority"},
+        {"id":"AP-012","title":"Enterprise Operations Center Architecture (DSOC)","status":"active","note":"Architecture planning may commence. Read-only first; command paths require explicit authorization and safety controls"}
       ]
     },
     {
@@ -65,6 +65,7 @@
     {"id":"M-AP008","title":"AP-008 Enterprise Integration Architecture","date":"2026-07-30","status":"active","description":"Package prodotto; review e pilot restano aperti.","image":null},
     {"id":"M-AP009","title":"AP-009 Enterprise Infrastructure Architecture","date":"2026-07-30","status":"completed","description":"Approved with conditions by ARB-009, 94/100; evidence runtime aperta.","image":null},
     {"id":"M-AP010","title":"AP-010 Enterprise Safety Assurance Architecture","date":"2026-07-30","status":"completed","description":"Approved with conditions by ARB-010, 97/100; safety evidence aperta.","image":null},
-    {"id":"M-AP011","title":"AP-011 Enterprise Analytics Platform Architecture","date":"2026-07-30","status":"active","description":"Package e artefatti DSAP prodotti. Review ARB indipendente, quality evidence, lineage, recovery e KPI ownership restano aperti.","image":null}
+    {"id":"M-AP011","title":"AP-011 Enterprise Analytics Platform Architecture","date":"2026-07-30","status":"completed","description":"Approved with conditions by ARB-011, 97/100. Data catalog, KPI governance, quality gates, lineage, recovery, capacity e semantic governance restano aperti.","image":null},
+    {"id":"M-AP012","title":"AP-012 Enterprise Operations Center Architecture","date":"2026-07-30","status":"active","description":"Pianificazione autorizzata dopo la chiusura del gate documentale AP-011. DSOC deve adottare read-only first e rispettare safety authority locale.","image":null}
   ]
 }
