@@ -65,7 +65,7 @@ public sealed class AuditRetentionTimeValidationTests
   [Fact]
   public void C07_untrusted_clock_source_is_rejected()
   {
-    var clock = new ClockEvidence("local-unsynchronized", trusted: false, maximumObservedSkew: TimeSpan.FromSeconds(4));
+    var clock = new ClockEvidence("local-unsynchronized", Trusted: false, MaximumObservedSkew: TimeSpan.FromSeconds(4));
 
     Assert.False(TimeIntegrityPolicy.IsAccepted(clock));
   }
@@ -74,7 +74,7 @@ public sealed class AuditRetentionTimeValidationTests
   public void C07_excessive_clock_skew_is_rejected_without_operational_threshold_claim()
   {
     var candidatePolicy = new TimeIntegrityPolicy(TimeSpan.FromSeconds(2));
-    var clock = new ClockEvidence("simulated-trusted-source", trusted: true, maximumObservedSkew: TimeSpan.FromSeconds(3));
+    var clock = new ClockEvidence("simulated-trusted-source", Trusted: true, MaximumObservedSkew: TimeSpan.FromSeconds(3));
 
     Assert.False(candidatePolicy.Accepts(clock));
   }
@@ -116,7 +116,7 @@ public sealed class AuditRetentionTimeValidationTests
   {
     private readonly List<AuditRecord> records = [];
 
-    public IReadOnlyList<AuditRecord> Records => records;
+    public List<AuditRecord> Records => records;
 
     public void Append(
       string actor,
