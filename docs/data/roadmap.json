@@ -4,7 +4,7 @@
   "authority": "AMP-002",
   "projectStatus": "Attivo",
   "currentPackage": "AP-012",
-  "nextMilestone": "Complete AP-012.2 with alarm, runbook and RACI artifacts, then conduct ARB-012",
+  "nextMilestone": "Conduct ARB-012 independent review of AP-012 Sprint 1 and Sprint 2, then plan validation evidence",
   "target": "AP-015 / Scientific Knowledge Platform",
   "waves": [
     {
@@ -37,7 +37,7 @@
       "status": "active",
       "items": [
         {"id":"AP-011","title":"Enterprise Analytics Platform Architecture (DSAP)","status":"completed","review":"ARB-011","note":"Approved with conditions, 97/100. ARB-011-C01…C07 remain open; analytics runtime is not certified and has no command or safety authority"},
-        {"id":"AP-012","title":"Enterprise Operations Center Architecture (DSOC)","status":"active","note":"Sprint AP-012.1 completed: AP-012, OPSC-REF-001 and OPSC-CMD-001 published. Runtime command enablement remains prohibited pending AP-012.2, validation evidence and ARB-012"}
+        {"id":"AP-012","title":"Enterprise Operations Center Architecture (DSOC)","status":"active","note":"Sprint AP-012.1 and AP-012.2 completed at document level: AP-012, OPSC-REF-001, OPSC-CMD-001, OPSC-ALM-001, OPSC-RUN-001 and OPSC-RACI-001 published. Runtime command enablement remains prohibited pending validation evidence and ARB-012"}
       ]
     },
     {
@@ -46,7 +46,7 @@
       "status": "planned",
       "items": [
         {"id":"AP-013","title":"Scientific Image Repository Architecture","status":"planned"},
-        {"id":"AP-014","title":"Scientific Observation Catalog and Search Architecture","status":"planned","note":"Includes governed PixInsight synchronization"}
+        {"id":"AP-014","title":"Scientific Observation Catalog and Search","status":"planned","note":"Includes governed PixInsight synchronization"}
       ]
     },
     {
@@ -66,6 +66,6 @@
     {"id":"M-AP009","title":"AP-009 Enterprise Infrastructure Architecture","date":"2026-07-30","status":"completed","description":"Approved with conditions by ARB-009, 94/100; evidence runtime aperta.","image":null},
     {"id":"M-AP010","title":"AP-010 Enterprise Safety Assurance Architecture","date":"2026-07-30","status":"completed","description":"Approved with conditions by ARB-010, 97/100; safety evidence aperta.","image":null},
     {"id":"M-AP011","title":"AP-011 Enterprise Analytics Platform Architecture","date":"2026-07-30","status":"completed","description":"Approved with conditions by ARB-011, 97/100. Data catalog, KPI governance, quality gates, lineage, recovery, capacity e semantic governance restano aperti.","image":null},
-    {"id":"M-AP012","title":"AP-012 Enterprise Operations Center Architecture","date":"2026-07-30","status":"active","description":"Sprint AP-012.1 completato a livello documentale con package, reference architecture e command authorization model. AP-012.2, validazione e ARB-012 restano aperti.","image":null}
+    {"id":"M-AP012","title":"AP-012 Enterprise Operations Center Architecture","date":"2026-07-30","status":"active","description":"Sprint AP-012.1 e AP-012.2 completati a livello documentale con package, reference architecture, command authorization, alarm and incident model, runbook standard e responsibility matrix. Validazione runtime e ARB-012 restano aperti.","image":null}
   ]
 }
