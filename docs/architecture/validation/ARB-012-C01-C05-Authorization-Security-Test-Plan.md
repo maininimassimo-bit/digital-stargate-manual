@@ -6,7 +6,7 @@
 | Package | AP-012 — Enterprise Operations Center Architecture |
 | Condizioni | ARB-012-C01 / ARB-012-C05 |
 | Ambiente | Simulato o non operativo |
-| Stato | Partial simulated execution completed — closure criteria pending |
+| Stato | Complete simulated scenario implementation — CI evidence pending |
 | Data | 30/07/2026 |
 | Autorità | Digital StarGate Release and Quality Governor |
 
@@ -31,10 +31,10 @@ Le identità e i ruoli usati dal test harness sono fixture tecniche. Non costitu
 
 ### 2.2 Dipendenze per la chiusura operativa
 
-- ARB-012-C04 Role Assignment Register completato;
-- decisione nominativa dello Sponsor registrata nell'issue #11;
+- ARB-012-C04 Role Assignment Register completato con identità distinte;
 - deleghe, conflict register e access review verificati;
-- prova four-eyes con identità realmente autorizzate.
+- prova four-eyes con identità realmente autorizzate;
+- validazione in ambiente non simulato autorizzata da un futuro gate specifico.
 
 C04 non blocca l'esecuzione tecnica simulata, ma resta obbligatoria prima di qualunque chiusura operativa o runtime di C01/C05.
 
@@ -48,56 +48,61 @@ C04 non blocca l'esecuzione tecnica simulata, ma resta obbligatoria prima di qua
 | Four-Eyes Coordinator | secondo approvatore per C3/C4 | identità distinta dal requester |
 | Fake Command Dispatcher | registra l'intento senza effetto fisico | nessuna integrazione device |
 | Idempotency Store | command ID ed execution outcome | duplicati senza doppio effetto |
-| Audit Sink | timeline append-only | correlation ID e payload hash richiesti per la chiusura |
-| Break-Glass Controller | accesso temporaneo e revoca | approvazione, notifica e post-review richiesti per la chiusura |
+| Audit Sink | timeline append-only | correlation ID, payload hash e approval chain |
+| Break-Glass Controller | accesso temporaneo, notifica, revoca e post-review | approvatore distinto richiesto |
+| Security Event Sink | eventi di abuso o accesso negato | simulato, nessun SIEM operativo |
 
 ## 4. Dataset minimo
 
-Le identità simulate includono Operator, Senior Operator, Maintainer, Security Authority, Safety Authority, Auditor e utente senza ruolo. Sono esclusivamente fixture di test.
+Le identità simulate includono Operator, Senior Operator, Security Authority, Safety Authority, Auditor e utente senza ruolo. Sono esclusivamente fixture di test.
 
 Le classi simulate sono C1, C2, C3 e C4. C3 richiede four-eyes; C4 richiede four-eyes e decisione prevalente della Safety Authority.
 
 ## 5. Scenari ARB-012-C01
 
-| ID | Scenario | Stato corrente |
+| ID | Scenario | Stato implementazione |
 |---|---|---|
-| C01-S01 | C1 con identità, ruolo e scope validi | Executed |
-| C01-S02 | C3 senza secondo approvatore | Executed tramite approvatore non distinto |
-| C01-S03 | C3 con requester e approver identici | Executed |
-| C01-S04 | autorizzazione scaduta | Executed |
-| C01-S05 | telemetry stale/unknown/conflicting | Executed |
-| C01-S06 | Safety Authority deny | Executed |
-| C01-S07 | command ID duplicato | Executed |
-| C01-S08 | retry dopo timeout con riconciliazione esplicita | Partial — replay idempotente verificato, timeout non modellato |
-| C01-S09 | privilegio revocato tra approval ed execution | Partial — revoca prima della chiamata verificata |
-| C01-S10 | utente senza ruolo con security event | Partial — deny verificato, security event dedicato non prodotto |
+| C01-S01 | C1 con identità, ruolo e scope validi | Implemented |
+| C01-S02 | C3 senza secondo approvatore distinto | Implemented |
+| C01-S03 | C3 con requester e approver identici | Implemented |
+| C01-S04 | autorizzazione scaduta | Implemented |
+| C01-S05 | telemetry stale/unknown/conflicting | Implemented |
+| C01-S06 | Safety Authority deny | Implemented |
+| C01-S07 | command ID duplicato | Implemented |
+| C01-S08 | timeout dopo dispatch e riconciliazione esplicita | Implemented |
+| C01-S09 | privilegio revocato tra approval ed execution | Implemented |
+| C01-S10 | utente senza ruolo con security event | Implemented |
 
-### Criterio di chiusura C01
+### Criterio di chiusura simulata C01
 
-Tutti gli scenari devono passare e ogni decisione deve riportare actor, role, policy version, command ID, correlation ID, reason code, safety decision, timestamp e outcome. L'implementazione corrente non produce ancora tutti questi campi e artefatti; pertanto C01 resta `Not Executed — partial simulated coverage`.
+Tutti gli scenari devono passare in CI. Ogni decisione deve riportare actor, role, policy version, command class, command ID, correlation ID, reason code, safety decision, timestamp, payload hash, approval chain e outcome.
+
+L'implementazione è completa nel test harness; lo stato resta `Not Executed — implementation complete, CI evidence pending` fino al completamento positivo del workflow sulla branch corrente.
 
 ## 6. Scenari ARB-012-C05
 
-| ID | Scenario | Stato corrente |
+| ID | Scenario | Stato implementazione |
 |---|---|---|
-| C05-S01 | privileged access approvato e time-bound | Partial — durata e scope verificati, approvatore non modellato |
-| C05-S02 | accesso fuori scope | Executed |
-| C05-S03 | break-glass con motivazione valida, expiry e notifica | Partial — motivazione ed expiry verificate, notifica assente |
-| C05-S04 | break-glass senza motivazione | Executed |
-| C05-S05 | scadenza break-glass | Executed come denial dopo expiry; evento di revoca automatica non prodotto |
-| C05-S06 | riuso dopo revoca con security event | Partial — deny verificato, security event dedicato assente |
-| C05-S07 | Security Authority tenta di dichiarare safe state | Executed |
-| C05-S08 | amministratore tenta comando senza ruolo operativo | Executed |
-| C05-S09 | post-review mancante | Not Executed |
-| C05-S10 | Auditor tenta dispatch | Executed |
+| C05-S01 | privileged access approvato, con approvatore distinto e time-bound | Implemented |
+| C05-S02 | accesso fuori scope | Implemented |
+| C05-S03 | break-glass con motivazione, expiry e notifica | Implemented |
+| C05-S04 | break-glass senza motivazione | Implemented |
+| C05-S05 | scadenza con revoca automatica | Implemented |
+| C05-S06 | riuso dopo revoca con security event | Implemented |
+| C05-S07 | Security Authority tenta di dichiarare safe state | Implemented |
+| C05-S08 | amministratore tenta comando senza ruolo operativo | Implemented |
+| C05-S09 | post-review mancante blocca la chiusura | Implemented |
+| C05-S10 | Auditor tenta dispatch | Implemented |
 
-### Criterio di chiusura C05
+### Criterio di chiusura simulata C05
 
-Ogni break-glass deve avere approvatore, motivo, scope, durata, notifica, revoca e post-review. Poiché approvatore, notifica, post-review e catena completa di evidenza non sono ancora implementati, C05 resta `Not Executed — partial simulated coverage`.
+Ogni break-glass deve avere approvatore distinto, motivo, scope, durata, notifica, revoca e post-review. La chiusura deve essere negata finché il post-review non è completato.
 
-## 7. Evidence package richiesto
+L'implementazione è completa nel test harness; lo stato resta `Not Executed — implementation complete, CI evidence pending` fino al completamento positivo del workflow sulla branch corrente.
 
-L'esecuzione completa deve produrre almeno:
+## 7. Evidence package
+
+L'esecuzione deve produrre o rendere verificabili almeno:
 
 ```text
 run_id
@@ -119,20 +124,19 @@ break_glass_record
 notification_record
 revocation_record
 post_review_record
-audit_hash
+payload_hash
 assertion_results
 ```
 
-Artefatti obbligatori per la chiusura:
+Artefatti richiesti per la chiusura simulata:
 
-- report JUnit o equivalente;
-- log strutturati JSON;
-- policy fixture versionata;
-- identity e role fixture;
-- audit timeline;
+- report test del workflow GitHub Actions;
+- test harness versionato;
+- audit record simulati verificati tramite assertion;
+- fixture di identità e ruoli nel test harness;
 - summary Passed/Failed per scenario;
 - approvazione del Release and Quality Governor;
-- riesame indipendente ARB.
+- riesame indipendente ARB prima di qualunque interpretazione operativa.
 
 ## 8. Stop conditions
 
@@ -140,12 +144,12 @@ Interrompere immediatamente la prova se il dispatcher è collegato a dispositivi
 
 ## 9. Stato e disposizione
 
-- ARB-012-C01: `Not Executed — partial simulated coverage`;
-- ARB-012-C05: `Not Executed — partial simulated coverage`;
-- test design: `Prepared`;
-- test harness: `Partially implemented`;
-- execution: `Partial`;
-- C04 organizational prerequisite: `Blocked`;
+- ARB-012-C01: `Not Executed — implementation complete, CI evidence pending`;
+- ARB-012-C05: `Not Executed — implementation complete, CI evidence pending`;
+- test design: `Complete for simulated scope`;
+- test harness: `Implemented for all listed simulated scenarios`;
+- execution evidence: `Pending CI on current head`;
+- C04 organizational prerequisite: `Blocked — bootstrap assignments recorded`;
 - runtime enablement: `Prohibited`.
 
-Il prossimo incremento tecnico deve completare esclusivamente gli scenari e gli artefatti mancanti in ambiente simulato, senza adattatori verso hardware o sistemi operativi reali.
+Un esito positivo della CI potrà dimostrare esclusivamente la copertura simulata completa. Non chiuderà i requisiti organizzativi, operativi o runtime collegati a C04 e non autorizzerà adattatori verso hardware o sistemi reali.
