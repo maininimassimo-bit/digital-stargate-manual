@@ -1,3 +1,4 @@
+#pragma warning disable CA1707
 using System.Collections.Concurrent;
 
 namespace DigitalStarGate.UnitTests.OperationsCenter;
@@ -280,10 +281,7 @@ public sealed class AuthorizationSecurityValidationTests
                 throw new ArgumentException("Break-glass reason is required.", nameof(reason));
             }
 
-            if (expiresAt <= issuedAt)
-            {
-                throw new ArgumentOutOfRangeException(nameof(expiresAt));
-            }
+            ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(expiresAt, issuedAt);
 
             var token = Guid.NewGuid().ToString("N");
             var grant = new BreakGlassGrant(token, principal, scope, issuedAt, expiresAt, false);
@@ -350,3 +348,4 @@ public sealed class AuthorizationSecurityValidationTests
 
     private sealed record BreakGlassAudit(string Token, string Action, DateTimeOffset Timestamp);
 }
+#pragma warning restore CA1707
