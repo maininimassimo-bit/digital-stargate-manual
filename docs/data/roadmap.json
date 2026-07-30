@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0",
+  "updatedAt": "2026-07-30",
+  "authority": "AMP-002",
+  "projectStatus": "Attivo",
+  "currentPackage": "AP-007",
+  "nextMilestone": "Enterprise Operations and Service Management Architecture",
+  "target": "AP-015 / Scientific Knowledge Platform",
+  "waves": [
+    {
+      "id": "wave-1",
+      "title": "Foundation",
+      "status": "completed",
+      "items": [
+        {"id":"AP-001","title":"Enterprise Metamodel and Repository Information Architecture","status":"completed","review":"ARB-003","note":"Approved with conditions"},
+        {"id":"AP-002","title":"Enterprise Data Governance","status":"completed","review":"ARB-004","note":"Approved with conditions"},
+        {"id":"AP-003","title":"Observatory Automation Architecture","status":"completed","review":"ARB-005","note":"Approved with conditions"},
+        {"id":"AP-004","title":"Enterprise Telemetry and Observability Architecture","status":"completed","review":"ARB-006","note":"Approved with conditions"},
+        {"id":"AP-005","title":"Identity, Access and Remote Operations Security","status":"completed","review":"ARB-007","note":"Approved with conditions"},
+        {"id":"AP-006","title":"Enterprise Configuration and Asset Management","status":"completed","review":"ARB-008","note":"Approved with conditions"}
+      ]
+    },
+    {
+      "id": "wave-2-5",
+      "title": "Operations, Integration, Infrastructure and Safety",
+      "status": "active",
+      "items": [
+        {"id":"AP-007","title":"Enterprise Operations and Service Management Architecture","status":"active","note":"Next package"},
+        {"id":"AP-008","title":"Enterprise Integration Architecture","status":"planned"},
+        {"id":"AP-009","title":"Enterprise Infrastructure Architecture","status":"planned"},
+        {"id":"AP-010","title":"Enterprise Safety Assurance Architecture","status":"planned"}
+      ]
+    },
+    {
+      "id": "wave-6",
+      "title": "Digital Platforms",
+      "status": "planned",
+      "items": [
+        {"id":"AP-011","title":"Enterprise Analytics Platform Architecture (DSAP)","status":"planned"},
+        {"id":"AP-012","title":"Enterprise Operations Center Architecture (DSOC)","status":"planned"}
+      ]
+    },
+    {
+      "id": "wave-7",
+      "title": "Scientific Image and Processing Heritage",
+      "status": "planned",
+      "items": [
+        {"id":"AP-013","title":"Scientific Image Repository Architecture","status":"planned"},
+        {"id":"AP-014","title":"Scientific Observation Catalog and Search Architecture","status":"planned","note":"Includes governed PixInsight synchronization"}
+      ]
+    },
+    {
+      "id": "wave-8",
+      "title": "Scientific Knowledge Platform",
+      "status": "planned",
+      "items": [
+        {"id":"AP-015","title":"Scientific Knowledge Platform Architecture","status":"planned","note":"CAP-40 Scientific Knowledge Layer"}
+      ]
+    }
+  ],
+  "milestones": [
+    {
+      "id": "M-FOUNDATION",
+      "title": "Architecture Foundation AP-001–AP-006",
+      "date": "2026-07-30",
+      "status": "completed",
+      "description": "Baseline enterprise, governance, automation, observability, security e configuration management completata con condizioni ARB aperte.",
+      "image": null
+    },
+    {
+      "id": "M-ROADMAP",
+      "title": "Roadmap realigned through AP-015",
+      "date": "2026-07-30",
+      "status": "completed",
+      "description": "AMP-002 estesa a Digital Platforms, repository scientifico, provenance PixInsight e Scientific Knowledge Layer.",
+      "image": null
+    },
+    {
+      "id": "M-AP007",
+      "title": "AP-007 Operations and Service Management",
+      "date": null,
+      "status": "active",
+      "description": "Prossima milestone architetturale da produrre e sottoporre a review indipendente.",
+      "image": null
+    }
+  ]
+}
