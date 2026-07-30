@@ -16,6 +16,17 @@
     <span><i class="is-planned"></i> Pianificato</span>
   </div>
 
+  <section class="dsg-roadmap-overview" aria-labelledby="roadmap-overview-title">
+    <div class="dsg-roadmap-section-heading">
+      <span class="dsg-roadmap-kicker">AVANZAMENTO COMPLESSIVO</span>
+      <h2 id="roadmap-overview-title">Completato e ancora da realizzare</h2>
+      <p>Riepilogo calcolato automaticamente dagli Architecture Package presenti nel registro dinamico.</p>
+    </div>
+    <div class="dsg-roadmap-overview__content" data-roadmap-overview>
+      <p>Calcolo dell’avanzamento in corso…</p>
+    </div>
+  </section>
+
   <div class="dsg-roadmap-progress" aria-label="Avanzamento complessivo">
     <div class="dsg-roadmap-progress__bar" data-roadmap-progress></div>
   </div>
