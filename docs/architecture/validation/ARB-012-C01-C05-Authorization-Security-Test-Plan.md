@@ -6,7 +6,7 @@
 | Package | AP-012 — Enterprise Operations Center Architecture |
 | Condizioni | ARB-012-C01 / ARB-012-C05 |
 | Ambiente | Simulato o non operativo |
-| Stato | Test plan approved for preparation — execution pending |
+| Stato | Partial simulated execution completed — closure criteria pending |
 | Data | 30/07/2026 |
 | Autorità | Digital StarGate Release and Quality Governor |
 
@@ -14,18 +14,29 @@
 
 Definire una campagna riproducibile per verificare command authorization, identity, role scope, four-eyes, safety denial, idempotency, privileged access e break-glass senza collegare il test harness a dispositivi reali, ASCOM, N.I.N.A., cupola, montatura o altri asset fisici.
 
-Questo documento autorizza esclusivamente la preparazione e l'esecuzione in ambiente simulato. Non autorizza command path operativi.
+Questo documento autorizza esclusivamente preparazione ed esecuzione in ambiente simulato. Non autorizza command path operativi.
 
 ## 2. Dipendenze
 
+### 2.1 Dipendenze per l'esecuzione simulata
+
 - OPSC-CMD-001 — Command Authorization Model;
 - OPSC-RACI-001 — Operations Responsibility Matrix;
-- ARB-012-C04 Role Assignment Register;
-- decisione nominativa dello Sponsor registrata nell'issue #11;
 - identity e policy store simulati;
 - audit sink simulato append-only;
 - Safety Authority stub indipendente;
 - command dispatcher fake privo di integrazioni fisiche.
+
+Le identità e i ruoli usati dal test harness sono fixture tecniche. Non costituiscono nomine organizzative.
+
+### 2.2 Dipendenze per la chiusura operativa
+
+- ARB-012-C04 Role Assignment Register completato;
+- decisione nominativa dello Sponsor registrata nell'issue #11;
+- deleghe, conflict register e access review verificati;
+- prova four-eyes con identità realmente autorizzate.
+
+C04 non blocca l'esecuzione tecnica simulata, ma resta obbligatoria prima di qualunque chiusura operativa o runtime di C01/C05.
 
 ## 3. Componenti del test harness
 
@@ -37,71 +48,56 @@ Questo documento autorizza esclusivamente la preparazione e l'esecuzione in ambi
 | Four-Eyes Coordinator | secondo approvatore per C3/C4 | identità distinta dal requester |
 | Fake Command Dispatcher | registra l'intento senza effetto fisico | nessuna integrazione device |
 | Idempotency Store | command ID ed execution outcome | duplicati senza doppio effetto |
-| Audit Sink | timeline append-only | correlation ID e payload hash |
-| Break-Glass Controller | accesso temporaneo e revoca | scope minimo e post-review |
+| Audit Sink | timeline append-only | correlation ID e payload hash richiesti per la chiusura |
+| Break-Glass Controller | accesso temporaneo e revoca | approvazione, notifica e post-review richiesti per la chiusura |
 
 ## 4. Dataset minimo
 
-### Identità simulate
+Le identità simulate includono Operator, Senior Operator, Maintainer, Security Authority, Safety Authority, Auditor e utente senza ruolo. Sono esclusivamente fixture di test.
 
-- `operator-a` — Operator;
-- `operator-b` — Senior Operator / approvatore candidato;
-- `maintainer-a` — Maintainer;
-- `security-authority-a` — Security Authority;
-- `safety-authority-a` — Safety Authority;
-- `auditor-a` — Auditor read-only;
-- `unknown-user` — nessun ruolo valido.
-
-Le identità sono esclusivamente fixture di test e non costituiscono nomine organizzative.
-
-### Classi di comando
-
-- C1 — osservazione o azione non critica simulata;
-- C2 — azione operativa controllata simulata;
-- C3 — azione privilegiata simulata con four-eyes;
-- C4 — azione safety-relevant simulata con four-eyes e Safety Authority.
+Le classi simulate sono C1, C2, C3 e C4. C3 richiede four-eyes; C4 richiede four-eyes e decisione prevalente della Safety Authority.
 
 ## 5. Scenari ARB-012-C01
 
-| ID | Scenario | Risultato atteso |
+| ID | Scenario | Stato corrente |
 |---|---|---|
-| C01-S01 | C1 con identità, ruolo e scope validi | Permit e singola registrazione nel fake dispatcher |
-| C01-S02 | C3 senza secondo approvatore | Deny; nessun dispatch |
-| C01-S03 | C3 con requester e approver identici | Deny per violazione four-eyes |
-| C01-S04 | autorizzazione scaduta | Deny con reason code `authorization_expired` |
-| C01-S05 | telemetry stale/unknown/conflicting | Deny o block secondo policy; mai permit implicito |
-| C01-S06 | Safety Authority deny | Deny prevalente e audit completo |
-| C01-S07 | command ID duplicato | stesso outcome; nessun secondo effetto |
-| C01-S08 | retry dopo timeout | riconciliazione senza doppia esecuzione |
-| C01-S09 | privilegio revocato tra approval ed execution | Deny prima del dispatch |
-| C01-S10 | utente senza ruolo | Deny e security event |
+| C01-S01 | C1 con identità, ruolo e scope validi | Executed |
+| C01-S02 | C3 senza secondo approvatore | Executed tramite approvatore non distinto |
+| C01-S03 | C3 con requester e approver identici | Executed |
+| C01-S04 | autorizzazione scaduta | Executed |
+| C01-S05 | telemetry stale/unknown/conflicting | Executed |
+| C01-S06 | Safety Authority deny | Executed |
+| C01-S07 | command ID duplicato | Executed |
+| C01-S08 | retry dopo timeout con riconciliazione esplicita | Partial — replay idempotente verificato, timeout non modellato |
+| C01-S09 | privilegio revocato tra approval ed execution | Partial — revoca prima della chiamata verificata |
+| C01-S10 | utente senza ruolo con security event | Partial — deny verificato, security event dedicato non prodotto |
 
 ### Criterio di chiusura C01
 
-Tutti gli scenari devono passare; nessun comando negato deve raggiungere il fake dispatcher; ogni decisione deve riportare actor, role, policy version, command ID, correlation ID, reason code, safety decision, timestamp e outcome.
+Tutti gli scenari devono passare e ogni decisione deve riportare actor, role, policy version, command ID, correlation ID, reason code, safety decision, timestamp e outcome. L'implementazione corrente non produce ancora tutti questi campi e artefatti; pertanto C01 resta `Not Executed — partial simulated coverage`.
 
 ## 6. Scenari ARB-012-C05
 
-| ID | Scenario | Risultato atteso |
+| ID | Scenario | Stato corrente |
 |---|---|---|
-| C05-S01 | privileged access approvato e time-bound | accesso entro scope e durata |
-| C05-S02 | accesso fuori scope | Deny e audit |
-| C05-S03 | break-glass con motivazione valida | accesso minimo, expiry obbligatoria e notifica |
-| C05-S04 | break-glass senza motivazione | Deny |
-| C05-S05 | scadenza break-glass | revoca automatica |
-| C05-S06 | riuso dopo revoca | Deny e security event |
-| C05-S07 | Security Authority tenta di dichiarare safe state | Deny per authority boundary |
-| C05-S08 | amministratore tenta comando senza ruolo operativo | Deny; admin non implica command authority |
-| C05-S09 | post-review mancante | sessione non chiudibile come conforme |
-| C05-S10 | Auditor tenta dispatch | Deny; read-only preservato |
+| C05-S01 | privileged access approvato e time-bound | Partial — durata e scope verificati, approvatore non modellato |
+| C05-S02 | accesso fuori scope | Executed |
+| C05-S03 | break-glass con motivazione valida, expiry e notifica | Partial — motivazione ed expiry verificate, notifica assente |
+| C05-S04 | break-glass senza motivazione | Executed |
+| C05-S05 | scadenza break-glass | Executed come denial dopo expiry; evento di revoca automatica non prodotto |
+| C05-S06 | riuso dopo revoca con security event | Partial — deny verificato, security event dedicato assente |
+| C05-S07 | Security Authority tenta di dichiarare safe state | Executed |
+| C05-S08 | amministratore tenta comando senza ruolo operativo | Executed |
+| C05-S09 | post-review mancante | Not Executed |
+| C05-S10 | Auditor tenta dispatch | Executed |
 
 ### Criterio di chiusura C05
 
-Tutti gli accessi fuori policy devono essere negati. Ogni break-glass deve avere approvatore, motivo, scope, durata, notifica, revoca e post-review. Nessuna autorità security o amministrativa deve acquisire authority safety o command authority implicita.
+Ogni break-glass deve avere approvatore, motivo, scope, durata, notifica, revoca e post-review. Poiché approvatore, notifica, post-review e catena completa di evidenza non sono ancora implementati, C05 resta `Not Executed — partial simulated coverage`.
 
-## 7. Evidence package
+## 7. Evidence package richiesto
 
-L'esecuzione deve produrre:
+L'esecuzione completa deve produrre almeno:
 
 ```text
 run_id
@@ -120,40 +116,36 @@ reason_code
 safety_decision
 approval_chain
 break_glass_record
+notification_record
 revocation_record
+post_review_record
 audit_hash
 assertion_results
 ```
 
-Artefatti attesi:
+Artefatti obbligatori per la chiusura:
 
 - report JUnit o equivalente;
 - log strutturati JSON;
 - policy fixture versionata;
 - identity e role fixture;
 - audit timeline;
-- summary con Passed/Failed per scenario;
+- summary Passed/Failed per scenario;
 - approvazione del Release and Quality Governor;
-- riesame indipendente per la chiusura delle condizioni.
+- riesame indipendente ARB.
 
 ## 8. Stop conditions
 
-Interrompere immediatamente la prova se:
-
-- il dispatcher risulta collegato a un dispositivo reale;
-- viene rilevato un endpoint ASCOM/Alpaca/N.I.N.A. operativo;
-- un test modifica configurazioni reali;
-- il Safety Authority stub non prevale;
-- un comando negato produce un effetto;
-- l'audit trail non è disponibile.
+Interrompere immediatamente la prova se il dispatcher è collegato a dispositivi reali, se viene rilevato un endpoint operativo, se un test modifica configurazioni reali, se il Safety Authority stub non prevale, se un comando negato produce un effetto o se l'audit trail non è disponibile.
 
 ## 9. Stato e disposizione
 
-- ARB-012-C01: `Not Executed`;
-- ARB-012-C05: `Not Executed`;
+- ARB-012-C01: `Not Executed — partial simulated coverage`;
+- ARB-012-C05: `Not Executed — partial simulated coverage`;
 - test design: `Prepared`;
-- implementation del test harness: `Missing`;
-- esecuzione: `Missing`;
+- test harness: `Partially implemented`;
+- execution: `Partial`;
+- C04 organizational prerequisite: `Blocked`;
 - runtime enablement: `Prohibited`.
 
-Il prossimo incremento tecnico deve implementare esclusivamente il test harness simulato e i test automatici descritti, senza adattatori verso hardware o sistemi operativi reali.
+Il prossimo incremento tecnico deve completare esclusivamente gli scenari e gli artefatti mancanti in ambiente simulato, senza adattatori verso hardware o sistemi operativi reali.
