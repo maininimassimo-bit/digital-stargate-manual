@@ -3,8 +3,8 @@
   "updatedAt": "2026-07-30",
   "authority": "AMP-002",
   "projectStatus": "Attivo",
-  "currentPackage": "AP-008",
-  "nextMilestone": "Independent ARB review of AP-008",
+  "currentPackage": "AP-010",
+  "nextMilestone": "Independent ARB review and evidence planning for AP-009 and AP-010 before AP-011",
   "target": "AP-015 / Scientific Knowledge Platform",
   "waves": [
     {
@@ -26,9 +26,9 @@
       "status": "active",
       "items": [
         {"id":"AP-007","title":"Enterprise Operations and Service Management Architecture","status":"active","note":"Package and reference architecture produced; independent ARB review remains unrecorded in the repository"},
-        {"id":"AP-008","title":"Enterprise Integration Architecture","status":"active","note":"Package, reference architecture and initial contract catalog produced; independent ARB review pending"},
-        {"id":"AP-009","title":"Enterprise Infrastructure Architecture","status":"planned"},
-        {"id":"AP-010","title":"Enterprise Safety Assurance Architecture","status":"planned"}
+        {"id":"AP-008","title":"Enterprise Integration Architecture","status":"active","note":"Package, reference architecture and initial contract catalog produced; independent ARB review remains unrecorded in the repository"},
+        {"id":"AP-009","title":"Enterprise Infrastructure Architecture","status":"active","note":"Package AP-009 and INF-REF-001 produced; as-built inventory, recovery evidence and independent ARB review pending"},
+        {"id":"AP-010","title":"Enterprise Safety Assurance Architecture","status":"active","note":"Package AP-010, SAF-REF-001 and SAF-CAT-001 produced; hazard ownership, validation evidence and independent ARB review pending"}
       ]
     },
     {
@@ -36,7 +36,7 @@
       "title": "Digital Platforms",
       "status": "planned",
       "items": [
-        {"id":"AP-011","title":"Enterprise Analytics Platform Architecture (DSAP)","status":"planned"},
+        {"id":"AP-011","title":"Enterprise Analytics Platform Architecture (DSAP)","status":"planned","note":"Do not commence until AP-009 and AP-010 repository review gates are dispositioned"},
         {"id":"AP-012","title":"Enterprise Operations Center Architecture (DSOC)","status":"planned"}
       ]
     },
@@ -88,7 +88,23 @@
       "title": "AP-008 Enterprise Integration Architecture",
       "date": "2026-07-30",
       "status": "active",
-      "description": "Enterprise Integration Fabric, reference architecture e catalogo iniziale dei contratti prodotti. La milestone resta attiva fino alla review ARB, al pilot e alla readiness evidence.",
+      "description": "Enterprise Integration Fabric, reference architecture e catalogo iniziale dei contratti prodotti. Review ARB e pilot restano da registrare.",
+      "image": null
+    },
+    {
+      "id": "M-AP009",
+      "title": "AP-009 Enterprise Infrastructure Architecture",
+      "date": "2026-07-30",
+      "status": "active",
+      "description": "Architecture Package e INF-REF-001 prodotti. Inventory as-built, capacity, failover, restore e recovery evidence restano aperti.",
+      "image": null
+    },
+    {
+      "id": "M-AP010",
+      "title": "AP-010 Enterprise Safety Assurance Architecture",
+      "date": "2026-07-30",
+      "status": "active",
+      "description": "Architecture Package, SAF-REF-001 e catalogo hazard/stati prodotti. Validation scenario, hazard ownership e Safety Readiness Review restano aperti.",
       "image": null
     }
   ]
