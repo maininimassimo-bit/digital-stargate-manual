@@ -8,6 +8,7 @@
 | Branch | `main` |
 | Stato | Active baseline — conditions open |
 | Data | 30/07/2026 |
+| Roadmap autorevole | AMP-002 per i package successivi ad AP-006 |
 
 ## 1. Regole
 
@@ -16,47 +17,57 @@
 - L'assenza di una review o release è indicata esplicitamente.
 - Uno stato capability non viene promosso da questo registro.
 - I locator di evidenza devono diventare puntuali quando usati per certificazione.
+- Gli identificatori esistenti non vengono rinumerati retroattivamente.
 
-## 2. Baseline certificata
+## 2. Baseline certificata e capability pianificate
 
 | Capability / Scope | Stato verificato | Fonte autorevole | Evidence / Implementation | Review / Certificate | Disposizione |
 |---|---|---|---|---|---|
 | CAP-01 Analytics pipeline | Implemented, con limiti dichiarati | PAA-002 v1.1 | ABC-001 Evidence Annex | ARB-002 / ABC-001 | Fondazione esistente; non ricostruire greenfield |
-| CAP-02 Historical Analytics Dashboard | Implemented, operatività continua non certificata | PAA-002 v1.1 | ABC-001 Evidence Annex | ARB-002 / ABC-001 | Evoluzione controllata |
+| CAP-02 Historical Analytics Dashboard | Implemented, operatività continua non certificata | PAA-002 v1.1 | ABC-001 Evidence Annex | ARB-002 / ABC-001 | Evoluzione controllata e futura integrazione DSAP |
 | CAP-03 Data Warehouse | Implemented, consumer layer incompleto | PAA-002 v1.1 | ABC-001 Evidence Annex | ARB-002 / ABC-001 / ARB-004 / ARB-006 | AP-002 governa data product; AP-004 abilita evidence, condizioni operative aperte |
 | CAP-04 Warehouse metadata and validation | Implemented, release certification assente | PAA-002 v1.1 | ABC-001 Evidence Annex | ARB-002 / ABC-001 / ARB-004 / ARB-006 | Quality e observability definite; evidence runtime da completare |
 | CAP-08 Live telemetry | Planned | PAA-002 v1.1 | AP-004 e Enterprise Observability Reference Architecture; nessun runtime verificato | ARB-002 / ABC-001 / ARB-006 | AP-004 approvato con condizioni; nessuna promozione senza pilot e operations evidence |
 | CAP-15 AllSky integration | Planned | PAA-002 v1.1 | `future.allsky: false` registrato da PAA-002 | ARB-002 / ABC-001 | Richiede contratti e health |
-| CAP-16 Observatory Automation | Partial | PAA-002 v1.1 | Procedura di chiusura, ADR-005, Capability 002 e AP-003 | ARB-002 / ABC-001 / ARB-005 / ARB-006 / ARB-007 / ARB-008 | AP-005 governa identità; AP-006 governa CI e baseline; nessun runtime automatico autorizzato |
-| CAP-17 Local safety interlocks | Partial | PAA-002 v1.1 | Evidenza documentale; hardware e fault test non inclusi | ARB-002 / ABC-001 / ARB-005 / ARB-006 / ARB-007 / ARB-008 | Autorità locale preservata; IAM, CMDB e accesso remoto non sono safety authority |
+| CAP-16 Observatory Automation | Partial | PAA-002 v1.1 | Procedura di chiusura, ADR-005, Capability 002 e AP-003 | ARB-002 / ABC-001 / ARB-005 / ARB-006 / ARB-007 / ARB-008 | Nessun runtime automatico autorizzato |
+| CAP-17 Local safety interlocks | Partial | PAA-002 v1.1 | Evidenza documentale; hardware e fault test non inclusi | ARB-002 / ABC-001 / ARB-005 / ARB-006 / ARB-007 / ARB-008 | Autorità locale preservata; IAM, CMDB e portale non sono safety authority |
 | CAP-18 AI boundary contracts | Prepared | PAA-002 v1.1 | `src/DigitalStarGate.Contracts/Ai/AiContracts.cs` | ARB-002 / ABC-001 / ARB-004 / ARB-006 / ARB-007 | AI usa dati governati; nessun privilegio o change implicito da AI |
 | CAP-19 AI Assistant | Planned | PAA-002 v1.1 | `future.ai_assistant: false` registrato da PAA-002 | ARB-002 / ABC-001 | Read-only first |
-| CAP-31 Architecture Governance | Partial | PAA-002 v1.1 | AP-001, metamodel e registro | ARB-003 / ARB-004 / ARB-005 / ARB-006 / ARB-007 / ARB-008 | Package review operativa; condizioni e automazione aperte |
-| CAP-32 Documentation Governance | Partial | PAA-002 v1.1 | MkDocs, package e standard | ARB-003 / ARB-004 / ARB-005 / ARB-006 / ARB-007 / ARB-008 | Standardizzare, assegnare owner e automatizzare |
-| CAP-33 Release Quality Governance | Partial | PAA-002 v1.1 | Processi e release note distribuiti | ARB-003 / ARB-004 / ARB-005 / ARB-006 / ARB-007 / ARB-008 | AP-005 introduce security gate; AP-006 introduce baseline model; release mapping resta incompleto |
+| CAP-31 Architecture Governance | Partial | PAA-002 v1.1 | AP-001, metamodel e registro | ARB-003…ARB-008 | Package review operativa; condizioni e automazione aperte |
+| CAP-32 Documentation Governance | Partial | PAA-002 v1.1 | MkDocs, package e standard | ARB-003…ARB-008 | Standardizzare, assegnare owner e automatizzare |
+| CAP-33 Release Quality Governance | Partial | PAA-002 v1.1 | Processi e release note distribuiti | ARB-003…ARB-008 | Release mapping resta incompleto |
+| CAP-34 Enterprise Analytics Platform | Planned | AMP-002 / DSGP-VIS-001 | Nessuna implementazione certificata | Nessuna review AP-011 | Governare DSAP, KPI, historical analytics e reporting senza pipeline parallele |
+| CAP-35 Enterprise Operations Center | Planned | AMP-002 / DSGP-VIS-001 | Nessuna implementazione certificata | Nessuna review AP-012 | DSOC read-only first; freshness e health espliciti |
+| CAP-36 Digital StarGate Portal | Planned | AMP-002 / DSGP-VIS-001 | Vision documentale | Nessuna review AP-011/AP-012 | Presentation boundary unificato; non safety authority |
 
 ## 3. Architecture Package Register
 
 | Package | Scope | Capability interessate | Artefatti | Review | Stato |
 |---|---|---|---|---|---|
-| AP-001 | Enterprise Metamodel and Repository Information Architecture | CAP-31, CAP-32, CAP-33; trasversale | `packages/AP-001-Enterprise-Metamodel-and-Repository-Information-Architecture.md`, `enterprise-metamodel.md`, presente registro | ARB-003 | Approved with conditions |
-| AP-002 | Enterprise Data Governance | CAP-03, CAP-04, CAP-31, CAP-32, CAP-33; abilita consumer, telemetry e AI | `packages/AP-002-Enterprise-Data-Governance.md`, `data-governance-standard.md` | ARB-004 | Approved with conditions |
-| AP-003 | Observatory Automation Architecture | CAP-16, CAP-17; dipendenze su weather safety, operations e contracts | `packages/AP-003-Observatory-Automation-Architecture.md`, `observatory-automation-reference-architecture.md`, ADR-005, Capability 002 | ARB-005 | Approved with conditions; non autorizza automation runtime o safety certification |
-| AP-004 | Enterprise Telemetry and Observability Architecture | CAP-08; supporta CAP-03, CAP-04, CAP-16, CAP-17, CAP-31, CAP-33 | `packages/AP-004-Enterprise-Telemetry-and-Observability-Architecture.md`, `enterprise-observability-reference-architecture.md` | ARB-006 | Approved with conditions; nessun runtime, stack o observability readiness certificati |
-| AP-005 | Identity, Access and Remote Operations Security Architecture | trasversale; supporta CAP-16, CAP-17, CAP-18, CAP-31, CAP-33 | `packages/AP-005-Identity-Access-and-Remote-Operations-Security-Architecture.md`, `enterprise-identity-and-trust-reference-architecture.md` | ARB-007 | Approved with conditions, 91/100; nessun IAM, MFA, VPN, break-glass o privileged-access readiness certificati |
-| AP-006 | Enterprise Configuration and Asset Management Architecture | trasversale; supporta CAP-16, CAP-17, CAP-31, CAP-32, CAP-33 e operations | `packages/AP-006-Enterprise-Configuration-and-Asset-Management-Architecture.md`, `enterprise-configuration-and-asset-management-reference-architecture.md`, Capitoli 20 e 22 | ARB-008 | Approved with conditions, 92/100; nessun inventario, CMDB, baseline o drift readiness certificati |
+| AP-001 | Enterprise Metamodel and Repository Information Architecture | CAP-31, CAP-32, CAP-33; trasversale | package, metamodel e registro | ARB-003 | Approved with conditions |
+| AP-002 | Enterprise Data Governance | CAP-03, CAP-04 e consumer | package e data governance standard | ARB-004 | Approved with conditions |
+| AP-003 | Observatory Automation Architecture | CAP-16, CAP-17 | package, reference architecture, ADR-005 | ARB-005 | Approved with conditions; non autorizza runtime o safety certification |
+| AP-004 | Enterprise Telemetry and Observability Architecture | CAP-08 e trasversali | package e observability reference architecture | ARB-006 | Approved with conditions; nessuna readiness runtime certificata |
+| AP-005 | Identity, Access and Remote Operations Security Architecture | trasversale | package e identity/trust reference architecture | ARB-007 | Approved with conditions, 91/100 |
+| AP-006 | Enterprise Configuration and Asset Management Architecture | trasversale | package e configuration/asset reference architecture | ARB-008 | Approved with conditions, 92/100 |
+| AP-007 | Enterprise Operations and Service Management Architecture | operations, incident, problem, change, runbook e KPI | da produrre | Nessuna | Planned — next package |
+| AP-008 | Enterprise Integration Architecture | API, eventi, adapter e contratti | da produrre | Nessuna | Planned |
+| AP-009 | Enterprise Infrastructure Architecture | rete, compute, controller, storage, backup e resilience | da produrre | Nessuna | Planned |
+| AP-010 | Enterprise Safety Assurance Architecture | CAP-16, CAP-17 e safety assurance | da produrre | Nessuna | Planned |
+| AP-011 | Enterprise Analytics Platform Architecture | CAP-02, CAP-03, CAP-04, CAP-34, CAP-36 | da produrre; vision DSGP-VIS-001 | Nessuna | Planned |
+| AP-012 | Enterprise Operations Center Architecture | CAP-08, CAP-15, CAP-16, CAP-17, CAP-35, CAP-36 | da produrre; vision DSGP-VIS-001 | Nessuna | Planned |
 
 ## 4. Data Product Candidate Register
 
 | ID | Data product | Fonte contrattuale verificata | Owner | Stato |
 |---|---|---|---|---|
 | DP-001 | `sessions.parquet` | `architecture/warehouse/datasets-and-schema.md`; schema eseguibile da localizzare | proposto | Candidate baseline |
-| DP-002 | `targets.parquet` | `architecture/warehouse/datasets-and-schema.md`; schema eseguibile da localizzare | proposto | Candidate baseline |
-| DP-003 | `equipment.parquet` | `architecture/warehouse/datasets-and-schema.md`; schema eseguibile da localizzare | proposto | Candidate baseline |
-| DP-004 | `quality.parquet` | `architecture/warehouse/datasets-and-schema.md`; schema eseguibile da localizzare | proposto | Candidate baseline |
-| DP-005 | `weather.parquet` | `architecture/warehouse/datasets-and-schema.md`; schema eseguibile da localizzare | proposto | Candidate baseline |
+| DP-002 | `targets.parquet` | stessa fonte | proposto | Candidate baseline |
+| DP-003 | `equipment.parquet` | stessa fonte | proposto | Candidate baseline |
+| DP-004 | `quality.parquet` | stessa fonte | proposto | Candidate baseline |
+| DP-005 | `weather.parquet` | stessa fonte | proposto | Candidate baseline |
 
-Gli ID DP-001…DP-005 sono proposti da AP-002 e non costituiscono certificazione finché owner, grain, schema locator, consumer, quality, retention e lineage non sono verificati.
+Gli ID DP-001…DP-005 non costituiscono certificazione finché owner, grain, schema locator, consumer, quality, retention e lineage non sono verificati.
 
 ## 5. Assessment and governance chain
 
@@ -65,62 +76,62 @@ Gli ID DP-001…DP-005 sono proposti da AP-002 e non costituiscono certificazion
 | PAA-002 v1.1 | Capability gap assessment | Baseline repository | Capability matrix, gap, dipendenze | Reviewed |
 | ARB-002 | Independent review | PAA-002 v1.1 | Approved with conditions, 90/100 | Completed |
 | ABC-001 | Baseline certificate | PAA-002, ARB-002, Evidence Annex | Conditionally certified | Completed |
-| AMP-001 | Architecture Master Plan | ABC-001 | Priorità AP-001; contenuto repository verificato incompleto | Remediation required |
-| AP-001 | Enterprise architecture package | PAA-002, ARB-002, ABC-001 | Metamodel e information architecture | Reviewed |
-| ARB-003 | Independent review | AP-001 baseline `a97f2291a2376e2a0123e1a9a07405b22f74e1bd` | Approved with conditions, 86/100 | Completed |
-| AP-002 | Enterprise architecture package | Warehouse baseline, platform contracts, AP-001, ARB-003 | Enterprise Data Governance | Reviewed |
-| ARB-004 | Independent review | AP-002 publication baseline `6d485f59126afc83a55d0f034d012ff0563186c2` | Approved with conditions, 88/100 | Completed |
-| AP-003 | Infrastructure and automation architecture package | PAA-002, ADR-005, Capability 002, operations documentation, AP-001/AP-002 | Observatory Automation Architecture | Reviewed |
-| ARB-005 | Independent review | AP-003 and Observatory Automation Reference Architecture on `main` | Approved with conditions, 89/100 | Completed |
-| AP-004 | Infrastructure and observability architecture package | AP-002/ARB-004, AP-003/ARB-005, PAA-002 | Enterprise Telemetry and Observability Architecture | Reviewed |
-| ARB-006 | Independent review | AP-004 and Enterprise Observability Reference Architecture on `main` | Approved with conditions, 90/100 | Completed |
-| AP-005 | Infrastructure and security architecture package | rete/VPN, sicurezza informatica, ruoli/handover, AP-002/004, AP-003 | Identity, Access and Remote Operations Security Architecture | Reviewed |
-| ARB-007 | Independent review | AP-005 and Enterprise Identity and Trust Reference Architecture on `main` | Approved with conditions, 91/100 | Completed |
-| AP-006 | Infrastructure and governance architecture package | Capitoli 20/22, AP-001…AP-005, traceability e MkDocs | Enterprise Configuration and Asset Management Architecture | Reviewed |
-| ARB-008 | Independent review | AP-006 and Enterprise Configuration and Asset Management Reference Architecture on `main` | Approved with conditions, 92/100 | Completed |
+| AMP-001 | Historical Architecture Master Plan | ABC-001 | Baseline iniziale e roadmap futura ora superata | Superseded in roadmap sections by AMP-002 |
+| AMP-002 | Architecture Program Roadmap Realignment | AP-001…AP-006, ARB-003…ARB-008 | Roadmap autorevole AP-007…AP-012 e CAP-34…CAP-36 | Approved for planning |
+| DSGP-VIS-001 | Digital Platforms vision | AMP-002, AP-002…AP-006 | Vision DSGP, DSAP e DSOC | Planned architecture vision |
+| AP-001 / ARB-003 | Metamodel and repository IA | baseline governance | Approved with conditions, 86/100 | Completed |
+| AP-002 / ARB-004 | Enterprise Data Governance | AP-001 e Warehouse baseline | Approved with conditions, 88/100 | Completed |
+| AP-003 / ARB-005 | Observatory Automation | safety e operations docs | Approved with conditions, 89/100 | Completed |
+| AP-004 / ARB-006 | Telemetry and Observability | AP-002/AP-003 | Approved with conditions, 90/100 | Completed |
+| AP-005 / ARB-007 | Identity and Remote Security | AP-002…AP-004 | Approved with conditions, 91/100 | Completed |
+| AP-006 / ARB-008 | Configuration and Asset Management | AP-001…AP-005 | Approved with conditions, 92/100 | Completed |
 
 ## 6. Open traceability gaps
 
 | ID | Gap | Impatto | Trattamento |
 |---|---|---|---|
-| TR-G01 | AMP-001 incompleto rispetto al riepilogo precedente | Handoff e roadmap non completamente ripetibili | Correzione separata e review |
-| TR-G02 | Release-package mapping non sistematico | Scope release difficile da certificare | Aggiornamento progressivo release note |
-| TR-G03 | Metadati non uniformi nei documenti storici | Automazione e query limitate | Normalizzazione quando i file vengono modificati |
-| TR-G04 | Alcuni ADR non sono nella directory canonica | Information architecture non uniforme | Inventario e migrazione non distruttiva |
-| TR-G05 | Build strict e link check non eseguiti | Pubblicabilità non certificata | Eseguire in CI o workspace con checkout |
-| TR-G06 | Owner AP-001…AP-006 non formalmente assegnati | Governance non operativa | RACI e nomina esplicita |
-| TR-G07 | Schema eseguibili dei cinque dataset non ancora collegati nel registro | Data product non certificabili | Inventario con locator immutabili |
-| TR-G08 | Retention concrete non deliberate | Lifecycle incompleto | Decisione per data product e signal |
-| TR-G09 | Lineage Analytics → Warehouse → consumer non registrato end-to-end | Impatto e riproducibilità limitati | Evidence Annex AP-002 |
-| TR-G10 | Inventario sensori, controller, interlock e protocolli non certificato | AP-003 non commissionabile | AP-003 Fase 0 con locator e owner |
-| TR-G11 | Timeout, retry, heartbeat e soglie safety non validati | rischio di comportamento non deterministico | commissioning e ADR/decisioni dedicate |
-| TR-G12 | Nessuna evidenza fault injection o isolamento rete/alimentazione | CAP-16 e CAP-17 non promuovibili | validation matrix ed Evidence Annex AP-003 |
-| TR-G13 | Condizioni ARB-004 non chiuse | Contratti dati definitivi e data product non certificabili | remediation AP-002 e re-review mirata |
-| TR-G14 | Matrice accessi per classificazione e lifecycle Data Issue assenti | Controlli security e gestione qualità incompleti | completare standard operativo AP-002 |
-| TR-G15 | ADR-005 e Capability 002 restano Proposed | policy safety applicativa non deliberata | review coordinata prima dei comandi automatici |
-| TR-G16 | Command authorization matrix e audit event contract assenti | accesso fisico e audit non completamente governati | completare condizioni ARB-007 con contratto concreto e test |
-| TR-G17 | Shadow mode, rollback e commissioning non collaudati | automation runtime non autorizzabile | eseguire validation matrix e re-review mirata |
-| TR-G18 | Inventory di producer, signal, stack, protocolli, volumi e cardinalità assente | AP-004 non implementabile in modo ripetibile | Fase 0 AP-004 e pilot misurato |
-| TR-G19 | SLI, SLO, soglie, routing e escalation non deliberati | alerting e operations non certificabili | baseline misurata e decisioni owner-specific |
-| TR-G20 | Buffering, backpressure, clock drift e notification failure non testati | perdita o alterazione dei signal non quantificata | pilot end-to-end e validation evidence |
-| TR-G21 | Semantic contracts AP-004 non machine-readable | compatibility e validation non automatizzabili | pubblicare schema versionati e test |
-| TR-G22 | Audit integrity, accesso e disposal non verificati | evidence non certificabile | policy e test allineati ad AP-002/ARB-004 |
-| TR-G23 | Cardinality budget e storage-priority policy assenti | rischio costi, perdita signal o saturazione | budget, waiver e drop/sampling policy |
-| TR-G24 | Pilot e continuous operations evidence assenti | CAP-08 non promuovibile | validation matrix, operations evidence e re-review |
-| TR-G25 | Inventory di identità, account, service identity, token, chiavi e certificati assente | privilegi e revoca non verificabili | Fase 0 AP-005 con owner, scope e scadenza |
-| TR-G26 | Metodo VPN, MFA, device trust e session assurance non verificati | accesso remoto non certificabile | assessment e pilot AP-005 |
-| TR-G27 | Joiner/mover/leaver, access review e revocation non testati | account dormienti o privilegi eccessivi | policy, test e evidence |
-| TR-G28 | Break-glass non definito operativamente o collaudato | recovery o abuso non governati | procedura, custodia, exercise e post-review |
-| TR-G29 | Session timeout, re-authentication, recording e termination non deliberati | sessioni privilegiate non governabili | session contract e validation matrix |
-| TR-G30 | Inventario asset e CI non completo o verificato | impact analysis, maintenance e recovery incompleti | discovery AP-006 con owner ed evidence locator |
-| TR-G31 | Seriali, date, warranty, licenze e support status non verificati | lifecycle e obsolescenza non governabili | inventory reconciliation protetta |
-| TR-G32 | Versioni firmware, driver, software e profili non baselined | compatibility e rollback non ripetibili | baseline pilot e last-known-good locator |
-| TR-G33 | Relazioni tra asset, CI, servizi, rete, alimentazione e safety non verificate | failure impact analysis incompleta | relationship register e verifica locale |
-| TR-G34 | Drift detection e reconciliation non implementati o testati | modifiche non autorizzate non rilevabili | pilot observed-vs-desired senza auto-remediation safety |
-| TR-G35 | Commissioning, decommissioning, backup restore e rollback non dimostrati | readiness e recovery non certificabili | validation matrix, exercise ed evidence annex AP-006 |
-| TR-G36 | Policy IAM, session, secret e break-glass non machine-readable | validazione e compatibility gate non automatizzabili | schema versionati, esempi e test ARB-007 |
-| TR-G37 | Pilot AP-005 e security failure exercise assenti | privileged-access readiness non certificabile | pilot non safety-critical, exercise ed evidence immutabile |
+| TR-G01 | AMP-001 non coerente con i package effettivamente realizzati | numerazione futura ambigua | AMP-002 creato; richiede review indipendente |
+| TR-G02 | Release-package mapping non sistematico | scope release difficile da certificare | aggiornamento progressivo release note |
+| TR-G03 | Metadati non uniformi nei documenti storici | automazione e query limitate | normalizzazione incrementale |
+| TR-G04 | Alcuni ADR non sono nella directory canonica | information architecture non uniforme | inventario e migrazione non distruttiva |
+| TR-G05 | Build strict e link check non eseguiti | pubblicabilità non certificata | eseguire in CI o workspace con checkout |
+| TR-G06 | Owner AP-001…AP-006 non formalmente assegnati | governance non operativa | RACI e nomina esplicita |
+| TR-G07 | Schema eseguibili DP-001…DP-005 non collegati | data product non certificabili | locator immutabili |
+| TR-G08 | Retention concrete non deliberate | lifecycle incompleto | decisione per data product e signal |
+| TR-G09 | Lineage Analytics → Warehouse → consumer incompleto | riproducibilità limitata | Evidence Annex AP-002 |
+| TR-G10 | Inventario sensori, controller, interlock e protocolli non certificato | AP-003 non commissionabile | inventory con owner ed evidence |
+| TR-G11 | Timeout, retry, heartbeat e soglie safety non validati | comportamento non deterministico | commissioning e decisioni dedicate |
+| TR-G12 | Fault injection e isolamento rete/alimentazione non provati | CAP-16/17 non promuovibili | validation matrix AP-003/AP-010 |
+| TR-G13 | Condizioni ARB-004 aperte | data product non certificabili | remediation AP-002 |
+| TR-G14 | Matrice accessi dati e Data Issue lifecycle assenti | security e quality incompleti | completare AP-002 |
+| TR-G15 | ADR-005 e Capability 002 restano Proposed | safety policy non deliberata | review coordinata AP-010 |
+| TR-G16 | Command authorization matrix e audit event contract assenti | comandi non governabili | AP-005/AP-012 con test |
+| TR-G17 | Shadow mode, rollback e commissioning non collaudati | automation runtime non autorizzabile | validation evidence |
+| TR-G18 | Inventory producer/signal/stack/volumi assente | AP-004 non implementabile ripetibilmente | pilot misurato |
+| TR-G19 | SLI, SLO, soglie, routing ed escalation non deliberati | alerting e operations non certificabili | AP-007/AP-012 |
+| TR-G20 | Buffering, backpressure, clock drift e notification failure non testati | perdita signal non quantificata | pilot end-to-end |
+| TR-G21 | Semantic contracts AP-004 non machine-readable | compatibility non automatizzabile | schema versionati e test |
+| TR-G22 | Audit integrity, accesso e disposal non verificati | evidence non certificabile | policy e test |
+| TR-G23 | Cardinality budget e storage-priority policy assenti | costi e saturazione | budget e sampling policy |
+| TR-G24 | Pilot e continuous operations evidence assenti | CAP-08 non promuovibile | operations evidence |
+| TR-G25 | Inventory identità, account, token, chiavi e certificati assente | privilegi non verificabili | AP-005 remediation |
+| TR-G26 | VPN, MFA, device trust e session assurance non verificati | accesso remoto non certificabile | assessment e pilot |
+| TR-G27 | Joiner/mover/leaver e revocation non testati | privilegi eccessivi | policy e test |
+| TR-G28 | Break-glass non collaudato | recovery/abuso non governati | exercise e post-review |
+| TR-G29 | Session timeout, re-authentication e termination non deliberati | sessioni privilegiate non governabili | session contract |
+| TR-G30 | Inventario asset e CI non completo | impact analysis incompleta | discovery AP-006 |
+| TR-G31 | Seriali, warranty, licenze e support status non verificati | lifecycle non governabile | inventory reconciliation |
+| TR-G32 | Firmware, driver, software e profili non baselined | rollback non ripetibile | baseline pilot |
+| TR-G33 | Relazioni asset/servizi/rete/alimentazione/safety non verificate | failure impact incompleto | relationship register |
+| TR-G34 | Drift detection non implementato | modifiche non rilevabili | pilot observed-vs-desired |
+| TR-G35 | Commissioning, decommissioning, restore e rollback non dimostrati | readiness non certificabile | exercise ed evidence |
+| TR-G36 | Policy IAM/session/secret non machine-readable | gate non automatizzabili | schema e test |
+| TR-G37 | Pilot AP-005 e security failure exercise assenti | privileged access non certificabile | pilot ed evidence |
+| TR-G38 | Ownership KPI e metric contract DSAP non definiti | dashboard storica semanticamente ambigua | AP-011 |
+| TR-G39 | Protocollo live, subscription e freshness UI non deliberati | DSOC può mostrare stato ingannevole | AP-008/AP-012 |
+| TR-G40 | Boundary Backend for Frontend e command path non definiti | rischio accesso UI-to-device | AP-008/AP-012 |
+| TR-G41 | Accessibility, responsive e degraded-mode UX non validati | portale non operabile in emergenza | AP-012 e design validation |
 
 ## 7. Validazione del registro
 
-Il registro copre gli elementi necessari ad AP-001, ARB-003, AP-002, ARB-004, AP-003, ARB-005, AP-004, ARB-006, AP-005, ARB-007, AP-006 e ARB-008. Non rappresenta ancora un inventario esaustivo di ogni file, schema, dispositivo, signal, identità, secret, asset, CI, relazione, baseline, requirement, test o work item del repository.
+Il registro copre la governance AP-001…AP-006, le review ARB-003…ARB-008, il riallineamento AMP-002 e le capability pianificate CAP-34…CAP-36. Non rappresenta ancora un inventario esaustivo di file, schema, dispositivo, signal, identità, asset, CI, relazione, requirement, test o work item.
