@@ -7,50 +7,70 @@
 | Progetto | Digital StarGate |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch di riferimento | `main` |
-| Versione | 1.0 |
-| Stato | Assessment completato — revisione ARB richiesta |
+| Commit baseline | `c07a0863bc05851654a422297a23444dd6576c48` |
+| Versione | 1.1 |
+| Stato | Revised — ready for independent ARB review |
 | Responsabile | Massimo Mainini |
-| Data | 30/07/2026 |
-| Documenti precedenti | PAA-001, EA-001, EA-002 |
+| Data assessment originario | 30/07/2026 |
+| Data revisione | 30/07/2026 |
+| Documenti correlati | PAA-001, EA-001, EA-002, ADR-003 |
 
 ---
 
 ## 1. Scopo
 
-Questo assessment verifica la copertura reale del repository prima della produzione del Digital StarGate Architecture Master Plan.
+Questo assessment verifica la copertura effettivamente dimostrabile delle capability della piattaforma Digital StarGate prima della produzione dell'Architecture Master Plan.
 
-L'obiettivo è distinguere in modo documentato:
+La revisione 1.1:
 
-- capacità già implementate;
-- capacità parzialmente implementate;
-- capacità predisposte ma non operative;
-- capacità pianificate;
-- capacità mancanti;
-- duplicazioni da evitare nella futura roadmap.
+- corregge le classificazioni non sostenute da evidenza sufficiente;
+- introduce un modello esplicito di evidenza;
+- completa la matrice con Observatory Automation e Architecture Governance;
+- distingue documentazione, configurazione, codice, integrazione e operatività;
+- chiarisce la disposizione del flusso dati obsoleto contenuto in PAA-001;
+- prepara un baseline package verificabile per una review ARB indipendente.
 
-L'assessment dedica particolare attenzione a:
-
-- dashboard;
-- monitoraggio live;
-- telemetria;
-- Analytics;
-- Data Warehouse;
-- Reporting;
-- observability;
-- AllSky;
-- AI Assistant;
-- AI Operations Copilot;
-- predictive analytics e predictive maintenance.
-
-Il documento non autorizza nuovi Architecture Package e non sostituisce il futuro Architecture Master Plan.
+Il documento non autorizza nuovi Architecture Package, non certifica l'operatività runtime e non sostituisce il futuro Architecture Master Plan.
 
 ---
 
-## 2. Baseline verificata
+## 2. Baseline e metodo di verifica
 
-La baseline di verifica è il branch `main` del repository GitHub autorevole.
+### 2.1 Baseline autorevole
 
-Sono stati esaminati almeno i seguenti artefatti:
+La baseline verificata è il branch `main` al commit:
+
+```text
+c07a0863bc05851654a422297a23444dd6576c48
+```
+
+Il commit è registrato per rendere ripetibile la review. Le modifiche successive richiedono una nuova verifica delle evidenze interessate.
+
+### 2.2 Tipi di evidenza
+
+| Codice | Tipo | Valore probatorio |
+|---|---|---|
+| DOC | Documentazione | Descrive intenzione, regole o procedure; non prova da sola l'esecuzione |
+| CFG | Configurazione | Prova che una capability è configurata o prevista |
+| SRC | Codice sorgente | Prova l'esistenza di implementazione sostanziale |
+| TST | Test | Prova comportamento entro lo scope eseguito e registrato |
+| INT | Integrazione | Prova collegamento tra producer, contract e consumer |
+| OPS | Evidenza operativa | Prova esecuzione, freshness, health o risultati runtime |
+| GOV | Evidenza di governance | Prova ownership, decisioni, lifecycle e quality gate |
+
+### 2.3 Regole di classificazione
+
+| Stato | Criterio minimo |
+|---|---|
+| Implemented | Evidenza SRC e almeno TST o INT; OPS richiesta quando si dichiara operatività reale |
+| Partial | Implementazione o documentazione significativa, ma integrazione, validazione o operatività incomplete |
+| Prepared | Contratti, interfacce o struttura concreta predisposti, senza capability completa |
+| Planned | Presenza solo in roadmap, documentazione futura o configurazione disabilitata |
+| Missing | Nessuna evidenza sufficiente nella baseline |
+
+Una directory, una pagina generata o un flag di configurazione non dimostrano da soli una capability live end-to-end.
+
+### 2.4 Artefatti principali esaminati
 
 ```text
 docs/architecture/index.md
@@ -60,87 +80,114 @@ docs/architecture/assessments/EA-002-Integrated-Repository-and-Warehouse-Assessm
 docs/analytics/index.md
 docs/analytics/dashboard-integrated.md
 docs/status/index.md
+docs/chapters/20-*.md
 docs/chapters/26-monitoraggio-meteo-sicurezza-ambientale.md
 docs/chapters/27-sistema-allsky.md
 docs/chapters/29-reportistica-operativa-kpi.md
 docs/chapters/33-roadmap-evolutiva.md
+docs/chapters/34-*.md
+docs/chapters/38-*.md
+docs/chapters/42-*.md
 dsg-analytics/config/platform.yml
 dsg-analytics/dashboard/build_dashboard_v31.py
 src/DigitalStarGate.Contracts/Ai/AiContracts.cs
 mkdocs.yml
 ```
 
+L'elenco identifica il nucleo della verifica, non sostituisce l'inventario completo del repository.
+
 ---
 
 ## 3. Risultato esecutivo
 
-Digital StarGate non è soltanto un manuale tecnico. Il repository contiene già elementi concreti di piattaforma dati e portale operativo.
+La baseline contiene fondazioni concrete per Analytics, Warehouse, dashboard storica, portale documentale e contratti AI iniziali. Queste capability non devono essere riproposte come iniziative greenfield.
 
-Le seguenti capacità non devono essere riproposte nella roadmap come iniziative greenfield:
+La baseline non dimostra invece una piattaforma live integrata. In particolare:
 
-- Analytics pipeline;
-- dashboard Analytics;
-- pagina di stato dell'osservatorio;
-- dataset meteo;
-- Data Warehouse in formato Parquet;
-- schema, metadati e controlli di qualità;
-- portale MkDocs/GitHub Pages;
-- contratti AI iniziali.
+- `future.telemetry: false` classifica la telemetria come futura e disabilitata;
+- una pagina Observatory Status non prova ingestion live, heartbeat o freshness;
+- la configurazione AllSky è futura e disabilitata;
+- observability applicativa, SLI/SLO e tracing non risultano formalizzati end-to-end;
+- le funzioni di automazione dell'osservatorio sono ampiamente documentate, ma non risultano certificate come capability software integrata nella baseline esaminata;
+- la governance architetturale è distribuita tra ADR, assessment, roadmap e capitoli, ma non è dimostrato un operating model unitario e applicato end-to-end.
 
-Le priorità reali sono il consolidamento, l'integrazione dei consumatori, l'alimentazione live, la telemetria, l'observability e l'introduzione controllata dell'AI.
+Le priorità reali sono quindi consolidamento dei contratti dati, integrazione dei consumer, telemetria live, observability, automazione governata e introduzione controllata dell'AI.
 
 ---
 
-## 4. Matrice di copertura
+## 4. Matrice completa di copertura
 
-### 4.1 Scala di classificazione
-
-| Stato | Significato |
-|---|---|
-| Implemented | Capacità presente con artefatti operativi o codice sostanziale |
-| Partial | Capacità presente ma incompleta, non integrata o non certificata end-to-end |
-| Prepared | Struttura o contratto predisposto, senza capacità operativa completa |
-| Planned | Esplicitamente prevista nella configurazione o nella documentazione |
-| Missing | Nessuna implementazione sufficiente rilevata |
-
-### 4.2 Copertura rilevata
-
-| Capacità | Stato | Evidenza sintetica | Azione futura |
-|---|---|---|---|
-| Analytics pipeline | Implemented | area `dsg-analytics`, dataset normalizzati, validazioni e test | Stabilizzare contratti e versionamento |
-| Historical Analytics Dashboard | Implemented | dashboard integrata e builder dedicato | Evoluzione controllata, non ricostruzione |
-| Data Warehouse | Implemented | dataset Parquet sessions, targets, equipment, quality, weather | Consolidare query e consumer layer |
-| Warehouse metadata and validation | Implemented | schema, lineage, row count, controlli e test | Certificare release e contratti |
-| Reporting | Partial | materiale esistente, integrazione Warehouse non formalmente completata | Integrare senza duplicare pipeline |
-| Observatory Status page | Partial | UI e generatori presenti, campi operativi esposti | Collegare sorgenti reali e freshness |
-| Weather monitoring | Partial | modello dati e indicatori presenti | Certificare ingestion e safety status |
-| Live telemetry | Prepared | percorso dati live presente, modulo disabilitato | Definire architettura e contratti canonici |
-| Event streaming | Missing | nessun meccanismo end-to-end certificato | Valutare tramite ADR |
-| Time-series storage | Missing | Warehouse storico presente, store live non formalizzato | Selezionare tecnologia e retention |
-| Alerting and notifications | Partial | concetti operativi presenti nei capitoli | Definire servizio, severità e routing |
-| Application observability | Missing | metriche, tracing e SLI non formalizzati | Creare architettura dedicata |
-| Infrastructure monitoring | Partial | procedure manuali e indicatori previsti | Automatizzare health e availability |
-| Network and VPN monitoring | Partial | topologia, failover e controlli documentati | Integrare telemetria e allarmi |
-| AllSky integration | Planned | modulo configurato come futuro | Definire ingestion, immagini e health |
-| AI boundary contracts | Prepared | `AiRequestContext` e `AiResultReference` | Completare governance e interfacce |
-| AI Assistant | Planned | modulo centrale disabilitato | Prima release read-only |
-| AI Operations Copilot | Missing | nessuna implementazione sufficiente | Dipendente da observability e audit |
-| RAG / knowledge retrieval | Missing | non rilevato un sottosistema governato | Definire fonti, indicizzazione e citazioni |
-| AI tool execution | Missing | nessuna capacità approvata | Introdurre solo con human approval |
-| Predictive analytics | Missing | nessun modello operativo certificato | Attendere qualità e volume dati |
-| Predictive maintenance | Missing | manutenzione futura ma non implementata | Dipendente da telemetria storica affidabile |
-| Intelligent scheduling | Missing | non rilevato un motore AI governato | Separare raccomandazione da controllo |
-| Data governance | Partial | principi presenti, retention e archival incompleti | Formalizzare ADR e policy |
-| Incremental Warehouse build | Missing | indicato come non implementato | Inserire nel consolidation backlog |
-| Delta update | Missing | indicato come non implementato | Inserire nel consolidation backlog |
-| DuckDB/query access layer | Missing | indicato come non implementato | Creare consumer access layer |
-| Dashboard SQL consumption | Missing | indicato come non implementato | Migrare gradualmente i consumer |
+| ID | Capability | Stato | Evidenza | Limite dell'evidenza | Azione futura |
+|---|---|---|---|---|---|
+| CAP-01 | Analytics pipeline | Implemented | SRC/TST: area `dsg-analytics`, normalizzazione, validazioni e test documentati | Operatività continua non certificata in questo assessment | Stabilizzare contratti e versionamento |
+| CAP-02 | Historical Analytics Dashboard | Implemented | SRC/DOC: builder dedicato e dashboard integrata | Freshness e deployment runtime non certificati | Evoluzione controllata, non ricostruzione |
+| CAP-03 | Data Warehouse | Implemented | SRC/DOC: dataset Parquet per sessioni, target, equipment, quality e weather | Consumer access layer incompleto | Consolidare query e contratti |
+| CAP-04 | Warehouse metadata and validation | Implemented | SRC/TST/DOC: schema, lineage, row count e controlli | Evidenza di release certification assente | Certificare release e compatibilità |
+| CAP-05 | Reporting | Partial | DOC/SRC: materiali e output esistenti | Integrazione canonica con Warehouse non completata | Integrare senza pipeline parallele |
+| CAP-06 | Observatory Status page | Partial | SRC/DOC/CFG: pagina, generatori e percorso `docs/status` | Nessuna prova sufficiente di live ingestion e freshness | Collegare sorgenti reali e health |
+| CAP-07 | Weather monitoring | Partial | DOC/CFG: modello e indicatori; modulo weather abilitato | Ingestion operativa e uso safety non certificati | Validare source, timestamp e safety status |
+| CAP-08 | Live telemetry | Planned | CFG: `future.telemetry: false`; path live configurato | Path e flag futuro non costituiscono implementazione o contratto | Definire architettura e contratti canonici |
+| CAP-09 | Event streaming | Missing | Nessun meccanismo end-to-end dimostrato | Nessuna evidenza INT/OPS | Valutare mediante ADR |
+| CAP-10 | Time-series storage | Missing | Warehouse storico presente | Nessuno store live formalizzato | Selezionare tecnologia, retention e integrazione |
+| CAP-11 | Alerting and notifications | Partial | DOC: concetti e procedure operative | Servizio, severità, routing e test non dimostrati | Definire servizio e matrice di escalation |
+| CAP-12 | Application observability | Partial | DOC/SRC: logging e diagnostica presenti in forma distribuita | Tracing, SLI/SLO, metriche e correlation end-to-end non formalizzati | Definire observability architecture |
+| CAP-13 | Infrastructure monitoring | Partial | DOC: procedure e indicatori infrastrutturali | Automazione health e disponibilità non certificata | Automatizzare health e availability |
+| CAP-14 | Network and VPN monitoring | Partial | DOC: topologia, failover e controlli | Telemetria, alert e prove di failover non integrate | Integrare misure e allarmi |
+| CAP-15 | AllSky integration | Planned | CFG/DOC: `future.allsky: false` e capitolo dedicato | Nessuna ingestion o health integrata dimostrata | Definire immagini, metadati e health |
+| CAP-16 | Observatory Automation | Partial | DOC: procedure, apparati, sequenze e vincoli fail-safe descritti | Nessuna prova unica di orchestrazione integrata, contratti canonici e validation end-to-end | Separare safety locale, orchestration e supervisory control |
+| CAP-17 | Local safety interlocks | Partial | DOC: requisiti fail-safe e indipendenza locale | Certificazione hardware/software e test di fault non inclusi | Definire evidenze e test di sicurezza |
+| CAP-18 | AI boundary contracts | Prepared | SRC: `AiRequestContext` e `AiResultReference` | Contratti insufficienti per governance completa | Completare autorizzazioni, audit e versioning |
+| CAP-19 | AI Assistant | Planned | CFG: `future.ai_assistant: false` | Nessuna capability runtime | Prima release read-only |
+| CAP-20 | AI Operations Copilot | Missing | Nessuna implementazione sufficiente | Dipende da telemetry, observability e audit | Posticipare fino a readiness dimostrata |
+| CAP-21 | RAG / knowledge retrieval | Missing | Nessun sottosistema governato rilevato | Fonti, indice e citazioni assenti | Definire architecture e source governance |
+| CAP-22 | AI tool execution | Missing | Nessuna capacità approvata | Mancano policy e human approval | Introdurre solo dopo safety review |
+| CAP-23 | Predictive analytics | Missing | Nessun modello operativo certificato | Dati e evaluation non dimostrati | Attendere dataset affidabili |
+| CAP-24 | Predictive maintenance | Missing | Solo prospettiva futura | Dipende da telemetria storica affidabile | Definire readiness criteria |
+| CAP-25 | Intelligent scheduling | Missing | Nessun motore governato rilevato | Nessuna separazione formalizzata tra consiglio e controllo | Progettare come recommendation-only |
+| CAP-26 | Data governance | Partial | DOC: principi, schema e lineage | Retention, archival, immutabilità e privacy incomplete | Formalizzare policy e ADR |
+| CAP-27 | Incremental Warehouse build | Missing | Indicato come non implementato | Nessuna evidenza SRC/TST | Inserire nel consolidation backlog |
+| CAP-28 | Delta update | Missing | Indicato come non implementato | Nessuna evidenza SRC/TST | Inserire nel consolidation backlog |
+| CAP-29 | DuckDB/query access layer | Missing | Nessun layer canonico rilevato | Consumer contract assente | Creare query access layer |
+| CAP-30 | Dashboard SQL consumption | Missing | Dashboard non dimostrata come consumer SQL canonico | Migrazione non avviata | Migrare gradualmente i consumer |
+| CAP-31 | Architecture Governance | Partial | GOV/DOC: ADR, assessment, roadmap, release e capitoli di governance | Autorità, lifecycle ed evidenze sono distribuiti; applicazione end-to-end non certificata | Consolidare operating model, traceability e review gates |
+| CAP-32 | Documentation governance | Partial | DOC/CFG: MkDocs, navigazione e convenzioni | Metadati e cross-reference non uniformi | Standardizzare e automatizzare controlli |
+| CAP-33 | Release quality governance | Partial | GOV/DOC: processi e note di release presenti | Evidenza uniforme dei gate non dimostrata | Collegare release, validation e approval |
 
 ---
 
-## 5. Architettura dati autorevole
+## 5. Registro delle evidenze principali
 
-Il flusso da preservare nella futura roadmap è:
+| Evidence ID | Artefatto | Tipo | Capability supportate | Osservazione |
+|---|---|---|---|---|
+| EV-001 | `dsg-analytics/config/platform.yml` | CFG | CAP-06, CAP-07, CAP-08, CAP-15, CAP-19 | Telemetry, AllSky e AI Assistant risultano future e disabilitate |
+| EV-002 | `dsg-analytics/dashboard/build_dashboard_v31.py` | SRC | CAP-02 | Prova implementazione del builder, non operatività continua |
+| EV-003 | `docs/analytics/dashboard-integrated.md` | DOC | CAP-02 | Descrive dashboard storica integrata |
+| EV-004 | `docs/status/index.md` | DOC/SRC | CAP-06 | Prova pagina di stato, non live chain end-to-end |
+| EV-005 | `EA-002-Integrated-Repository-and-Warehouse-Assessment.md` | DOC/GOV | CAP-01–CAP-05 | Supporta il flusso Analytics → Warehouse → consumer |
+| EV-006 | `PAA-001-Project-Architecture-Assessment.md` | DOC/GOV | Baseline storica | Contiene flusso Reporting → Warehouse → Analytics, non più autorevole per il data flow corrente |
+| EV-007 | `src/DigitalStarGate.Contracts/Ai/AiContracts.cs` | SRC | CAP-18 | Prova contratti iniziali, non AI capability completa |
+| EV-008 | capitoli operativi e infrastrutturali | DOC | CAP-07, CAP-11–CAP-17 | Evidenza progettuale e procedurale, non certificazione runtime |
+| EV-009 | ADR, roadmap e documentazione release | GOV/DOC | CAP-31–CAP-33 | Governance presente ma distribuita |
+| EV-010 | `mkdocs.yml` | CFG | CAP-32 | Prova struttura di pubblicazione e navigazione |
+
+### 5.1 Evidenza non disponibile
+
+Questo assessment non include:
+
+- log runtime acquisiti durante la review;
+- misure di freshness o heartbeat;
+- esiti di fault injection sugli interblocchi;
+- prove di failover rete/VPN;
+- report CI aggiornati al commit baseline;
+- certificazioni di safety o security indipendenti.
+
+Le capability dipendenti da tali prove non possono essere classificate come pienamente operative.
+
+---
+
+## 6. Architettura dati autorevole
+
+Il flusso corrente da preservare è:
 
 ```text
 Sorgenti dell'osservatorio
@@ -163,45 +210,24 @@ Warehouse: persistenza curata, schema e lineage
 Dashboard                Reporting                 AI
 ```
 
-Dashboard, Reporting e AI non devono accedere direttamente ai log grezzi o introdurre pipeline parallele non governate.
+Dashboard, Reporting e AI non devono accedere direttamente ai log grezzi né introdurre pipeline parallele non governate.
 
----
+### 6.1 Disposizione di PAA-001
 
-## 6. Incoerenze e debito documentale
+PAA-001 resta uno snapshot storico in stato Draft. Il suo flusso:
 
-### 6.1 Divergenza PAA-001 / EA-002
+```text
+Automation / Collection → Reporting → Warehouse → Analytics
+```
 
-PAA-001 descrive un flusso target nel quale Reporting precede Warehouse e Analytics.
+è dichiarato **superseded esclusivamente per la rappresentazione del data flow** da EA-002, ADR-003 e PAA-002 v1.1.
 
-EA-002, supportato dall'implementazione più recente, stabilisce invece che:
+Questa disposizione:
 
-- Analytics interpreta e valida le sorgenti;
-- Warehouse consuma i dataset Analytics validati;
-- Reporting, Dashboard e AI sono consumatori downstream.
-
-La futura formalizzazione architetturale deve risolvere questa divergenza. Fino a tale decisione, il modello EA-002 e ADR-003 è considerato il riferimento tecnico più recente.
-
-### 6.2 Stato dei documenti
-
-PAA-001 è ancora marcato `Draft`, pur contenendo valutazioni e punteggi usati come riferimento.
-
-Occorre stabilire se:
-
-- approvarlo come snapshot storico;
-- correggerlo;
-- dichiararlo superseded da PAA-002 e dagli assessment successivi.
-
-### 6.3 Nomenclatura live
-
-La presenza di una pagina `Observatory Status` non prova da sola l'esistenza di monitoraggio live end-to-end.
-
-La documentazione deve distinguere chiaramente:
-
-- pagina generata;
-- dato aggiornato periodicamente;
-- near-real-time;
-- real-time streaming;
-- stato locale fail-safe.
+- non approva retroattivamente PAA-001;
+- non rende obsolete le altre osservazioni ancora valide;
+- impedisce che il vecchio flusso sia usato come architettura target;
+- deve essere recepita in una futura manutenzione documentale di PAA-001 o nell'indice degli assessment.
 
 ---
 
@@ -209,99 +235,63 @@ La documentazione deve distinguere chiaramente:
 
 ### GAP-01 — Canonical Live Telemetry Model
 
-Manca un modello canonico governato per stato, misure ed eventi di:
-
-- cupola o tetto;
-- interblocchi locali;
-- montatura;
-- camera;
-- focheggiatore;
-- alimentazione e UPS;
-- meteo;
-- rete, VPN e failover;
-- EAGLE;
-- AllSky;
-- sessione osservativa.
+Manca un modello canonico governato per stato, misure ed eventi di tetto/cupola, interblocchi, montatura, camera, focuser, alimentazione, meteo, rete, VPN, EAGLE, AllSky e sessione osservativa.
 
 ### GAP-02 — Live Ingestion and Freshness
 
-Mancano evidenze di una catena certificata con:
-
-- source timestamp;
-- ingestion timestamp;
-- heartbeat;
-- freshness;
-- online/offline;
-- degraded mode;
-- gestione dei dati mancanti;
-- retry e buffering.
+Manca una catena certificata con source timestamp, ingestion timestamp, heartbeat, freshness, online/offline, degraded mode, retry, buffering e gestione dei dati mancanti.
 
 ### GAP-03 — Time-Series and Event Access
 
-Il Warehouse storico non sostituisce necessariamente uno store per telemetria ad alta frequenza.
-
-Deve essere presa una decisione architetturale su:
-
-- persistenza live;
-- retention;
-- aggregazioni;
-- query;
-- eventi operativi;
-- integrazione con Warehouse.
+Il Warehouse storico non sostituisce uno store per telemetria ad alta frequenza. Persistenza live, retention, aggregazioni, query ed eventi richiedono una decisione architetturale.
 
 ### GAP-04 — Observability
 
-Non è ancora formalizzata una piattaforma per:
+Logging, metriche, tracing, correlation/causation ID, health check, audit, SLI/SLO e alert routing non formano ancora una capability end-to-end governata.
 
-- log strutturati;
-- metriche applicative;
-- tracing;
-- correlation e causation ID;
-- health check;
-- audit;
-- SLI/SLO;
-- alert routing.
+### GAP-05 — Observatory Automation Boundary
 
-### GAP-05 — Warehouse Consumer Layer
+Devono essere formalmente separati:
 
-Mancano accesso SQL/DuckDB, query stabili e contratti per Dashboard, Reporting e AI.
+- interblocchi e safety locale;
+- device control;
+- orchestration applicativa;
+- supervisory monitoring;
+- operazioni manuali e override;
+- recovery e degraded modes.
 
-### GAP-06 — AI Governance and Safety
+### GAP-06 — Warehouse Consumer Layer
 
-I contratti AI iniziali non coprono ancora:
+Mancano accesso SQL/DuckDB, query stabili e contratti canonici per Dashboard, Reporting e AI.
 
-- autorizzazioni;
-- audit delle richieste e risposte;
-- fonti e citazioni;
-- valutazione dei modelli;
-- prompt and model versioning;
-- data leakage;
-- fallback;
-- human approval;
-- separazione tra consiglio e comando operativo.
+### GAP-07 — AI Governance and Safety
 
-### GAP-07 — Data Governance
+I contratti iniziali non coprono autorizzazioni, audit, fonti, citazioni, evaluation, prompt/model versioning, data leakage, fallback, human approval e separazione tra consiglio e comando.
+
+### GAP-08 — Data Governance
 
 Retention, archival, immutabilità, backup, checksum, privacy e versionamento dei dataset non sono completamente formalizzati.
+
+### GAP-09 — Architecture Governance Evidence
+
+Manca una vista unitaria e verificabile che colleghi authority, work item, Architecture Package, ADR, implementation evidence, review, approval, release e stato documentale.
 
 ---
 
 ## 8. Vincoli di sicurezza
 
-La futura piattaforma deve rispettare i seguenti vincoli:
-
-1. gli interblocchi fisici e locali restano indipendenti dal software applicativo;
-2. la chiusura di sicurezza non dipende dal cloud, dal portale o dall'AI;
-3. la perdita di rete non deve impedire le azioni locali fail-safe;
-4. l'AI non deve comandare direttamente apparati nella prima fase;
-5. ogni futura azione AI deve essere autorizzata, tracciata e reversibile dove tecnicamente possibile;
-6. la dashboard non deve essere considerata fonte unica della verità per la sicurezza fisica.
+1. Gli interblocchi fisici e locali restano indipendenti dal software applicativo.
+2. La chiusura di sicurezza non dipende da cloud, portale, dashboard o AI.
+3. La perdita di rete non impedisce le azioni locali fail-safe.
+4. Monitoring e safety non sono sinonimi.
+5. L'AI non comanda direttamente apparati nella prima fase.
+6. Ogni futura azione automatizzata ad alto impatto deve essere autorizzata, tracciata e reversibile dove tecnicamente possibile.
+7. Stato sconosciuto, dato stale o health degradato non possono essere interpretati come stato sicuro.
+8. Manual override, recovery e audit devono essere espliciti per ogni capability di automazione.
 
 ---
 
 ## 9. Backlog dipendente dalle evidenze
-
-Il backlog seguente non assegna ancora numeri AP definitivi.
 
 ### Wave A — Architecture and Data Consolidation
 
@@ -313,16 +303,17 @@ Il backlog seguente non assegna ancora numeri AP definitivi.
 6. Warehouse query and consumer access layer.
 7. Reporting integration.
 
-### Wave B — Live Observatory Platform
+### Wave B — Safe Observatory Automation and Live Platform
 
-1. Live Telemetry Architecture.
-2. Device and Sensor Canonical Contracts.
-3. Live Ingestion and Connectivity Resilience.
-4. Time-Series and Event Storage decision.
-5. Operational Health Model.
-6. Live Dashboard evolution.
-7. Alerting and Notification Architecture.
-8. AllSky integration.
+1. Observatory Automation boundary and safety model.
+2. Canonical device, sensor and state contracts.
+3. Live Telemetry Architecture.
+4. Live Ingestion and Connectivity Resilience.
+5. Time-Series and Event Storage decision.
+6. Operational Health Model.
+7. Live Dashboard evolution.
+8. Alerting and Notification Architecture.
+9. AllSky integration.
 
 ### Wave C — Observability and Operations
 
@@ -330,10 +321,9 @@ Il backlog seguente non assegna ancora numeri AP definitivi.
 2. Infrastructure and EAGLE Monitoring.
 3. Network, VPN and Failover Monitoring.
 4. Audit and Correlation Model.
-5. Incident Detection.
-6. Operational Runbook integration.
+5. Incident Detection and operational runbooks.
 
-### Wave D — AI Foundation
+### Wave D — Governed AI Foundation
 
 1. AI Architecture Principles.
 2. AI Security, Safety and Human-Approval Boundaries.
@@ -349,44 +339,41 @@ Il backlog seguente non assegna ancora numeri AP definitivi.
 3. Predictive Analytics.
 4. Predictive Maintenance.
 5. Intelligent Scheduling Recommendations.
-6. Controlled operational actions, only after independent safety review.
+6. Controlled operational actions only after independent safety review.
 
 ---
 
 ## 10. Dipendenze principali
 
 ```text
-Enterprise Metamodel
+Repository and Architecture Governance
+        |
+        v
+Enterprise Metamodel and Capability Taxonomy
         |
         +--> Data Governance
+        |       |
+        |       +--> Analytics/Warehouse Contracts
+        |               |
+        |               +--> Consumer Query Layer
+        |                       +--> Reporting
+        |                       +--> Historical Dashboard
+        |                       +--> Read-only AI
         |
-        +--> Canonical Contracts
-                    |
-                    +--> Live Telemetry
-                    |       |
-                    |       +--> Live Dashboard
-                    |       +--> Alerting
-                    |       +--> Observability
-                    |
-                    +--> Warehouse Consumer Layer
-                            |
-                            +--> Reporting
-                            +--> Historical Dashboard
-                            +--> Read-only AI Assistant
-                                      |
-                                      +--> AI Copilot
-                                      +--> Predictive Analytics
-                                      +--> Predictive Maintenance
+        +--> Observatory Automation Boundary
+                |
+                +--> Canonical Device and Sensor Contracts
+                        |
+                        +--> Live Telemetry and Ingestion
+                                |
+                                +--> Time-Series/Event Access
+                                +--> Live Dashboard
+                                +--> Alerting
+                                +--> Observability
+                                +--> AI Operations Readiness
 ```
 
-L'AI avanzata non deve precedere:
-
-- contratti dati stabili;
-- qualità e lineage;
-- observability;
-- audit;
-- autorizzazioni;
-- dataset storici sufficienti.
+L'AI avanzata non deve precedere contratti stabili, qualità e lineage, observability, audit, autorizzazioni, safety review e dataset sufficienti.
 
 ---
 
@@ -394,79 +381,91 @@ L'AI avanzata non deve precedere:
 
 | ID | Rischio | Severità | Trattamento |
 |---|---|---:|---|
-| R-01 | Duplicazione di Analytics o Dashboard già esistenti | Alta | Usare inventario e current-state come gate |
-| R-02 | Uso improprio del termine live | Alta | Definire livelli di aggiornamento e freshness |
+| R-01 | Duplicazione di Analytics o Dashboard esistenti | Alta | Usare inventario e current-state come gate |
+| R-02 | Uso improprio del termine live | Alta | Definire heartbeat, freshness e livelli di aggiornamento |
 | R-03 | AI collegata direttamente agli apparati | Critica | Read-only first e human approval |
 | R-04 | Pipeline parallele che bypassano Analytics/Warehouse | Alta | Contratti e architecture compliance |
-| R-05 | Data contract drift | Alta | Versionamento, schema validation e compatibility policy |
-| R-06 | Dashboard basata su dati stale senza evidenza | Alta | Timestamp, freshness e source health |
+| R-05 | Data contract drift | Alta | Versionamento e compatibility policy |
+| R-06 | Dashboard basata su dati stale | Alta | Timestamp, freshness e source health |
 | R-07 | Confusione tra safety e monitoring | Critica | Interblocchi locali indipendenti |
-| R-08 | Predictive analytics su dati insufficienti | Media | Readiness criteria e model evaluation |
-| R-09 | Reporting migrato senza inventario | Alta | Consolidamento controllato e non distruttivo |
-| R-10 | Roadmap numerata prima di validare dipendenze | Media | Master Plan solo dopo revisione PAA-002 |
+| R-08 | Predictive analytics su dati insufficienti | Media | Readiness criteria ed evaluation |
+| R-09 | Reporting migrato senza inventario | Alta | Consolidamento controllato |
+| R-10 | Roadmap numerata prima delle dipendenze | Media | Master Plan dopo ARB |
+| R-11 | Documentazione interpretata come prova operativa | Alta | Applicare il modello di evidenza |
+| R-12 | Governance dichiarata ma non tracciata end-to-end | Alta | Evidence chain e quality gate verificabili |
+| R-13 | Automazione remota che indebolisce il fail-safe locale | Critica | Safety boundary e independent review |
 
 ---
 
-## 12. Quality gates per il futuro Master Plan
+## 12. Quality gate per Architecture Master Plan
 
-La roadmap definitiva può essere prodotta solo quando:
+L'Architecture Master Plan può essere prodotto solo quando:
 
-- PAA-002 è stato sottoposto a revisione indipendente ARB;
-- è stata risolta la divergenza PAA-001 / EA-002;
-- ogni capacità è classificata come Implemented, Partial, Prepared, Planned o Missing;
-- sono state identificate le dipendenze obbligatorie;
-- sono stati esclusi package duplicati;
-- è stata definita la relazione tra il repository Architecture Office e il repository prodotto;
-- la sicurezza locale fail-safe è esplicitamente protetta;
+- PAA-002 v1.1 ha superato una review ARB indipendente;
+- la disposizione del data flow PAA-001 è accettata;
+- la matrice capability è giudicata completa o le esclusioni sono esplicite;
+- ogni classificazione critica è collegata a evidenza ripetibile;
+- sono identificate le dipendenze obbligatorie;
+- sono esclusi package duplicati;
+- la safety locale fail-safe è protetta;
+- Observatory Automation e Architecture Governance sono incluse nel modello;
 - il primo package successivo è autorizzato dallo Sponsor.
 
 ---
 
-## 13. Raccomandazione del Program Architect
+## 13. Raccomandazione
 
-Il prossimo package resta:
+Il primo package successivo resta **Enterprise Metamodel and Repository Information Architecture**, con scope sufficiente a definire:
 
-**Enterprise Metamodel and Repository Information Architecture**.
+- tassonomia delle capability;
+- relazioni tra fonti operative, automation, Analytics, Warehouse, consumer, telemetry, observability e AI;
+- identificatori e ownership;
+- evidenze richieste per i maturity state;
+- collegamenti tra Architecture Package, ADR, review, release e documentazione.
 
-Il suo scope deve essere ampliato affinché definisca anche la tassonomia delle capacità di piattaforma e le relazioni tra:
-
-- fonti operative;
-- Analytics;
-- Warehouse;
-- dashboard;
-- Reporting;
-- telemetria;
-- observability;
-- AI;
-- documentazione;
-- ADR;
-- Architecture Package.
-
-Subito dopo devono essere avviati, nell'ordine:
+Ordine raccomandato successivo:
 
 1. Data Governance and Canonical Data Contracts;
-2. Warehouse Consumer and Query Layer;
-3. Live Telemetry Architecture;
-4. Operational Dashboard Evolution;
-5. Observability Architecture;
-6. Read-only AI Observatory Assistant.
+2. Observatory Automation Boundary and Safety Model;
+3. Warehouse Consumer and Query Layer;
+4. Live Telemetry Architecture;
+5. Operational Dashboard Evolution;
+6. Observability Architecture;
+7. Read-only AI Observatory Assistant.
 
-La roadmap con numerazione AP definitiva deve essere prodotta soltanto dopo la revisione indipendente di questo assessment.
+La numerazione AP definitiva resta subordinata all'ARB.
 
 ---
 
-## 14. Stato di completamento
+## 14. Matrice di tracciabilità della revisione
+
+| Finding della review precedente | Correzione v1.1 | Sezione |
+|---|---|---|
+| Capability matrix incompleta | Aggiunte Observatory Automation, safety interlocks, Architecture Governance, Documentation e Release Governance | 4 |
+| Telemetria sovrastimata | Riclassificata da Prepared a Planned sulla base di `future.telemetry: false` | 4, EV-001 |
+| Observability troppo assoluta | Riclassificata Partial, distinguendo elementi distribuiti da capability end-to-end | 4, GAP-04 |
+| Nessuna current-main lineage proof | Aggiunto commit baseline e registro evidenze | 2, 5 |
+| Nessun evidence model | Introdotti tipi, criteri e limiti probatori | 2 |
+| Tracciabilità insufficiente | Aggiunti Evidence ID, capability ID e matrice findings-to-fix | 4, 5, 14 |
+| PAA-001 non disposto | Dichiarato superseded per il solo data flow, mantenuto come snapshot storico Draft | 6.1 |
+| Architecture Governance assente | Aggiunta CAP-31 e GAP-09 | 4, 7 |
+
+---
+
+## 15. Stato di completamento
 
 | Attività | Stato |
 |---|---|
-| Repository verificato | Completato |
-| Dashboard e Analytics mappati | Completato |
-| Warehouse mappato | Completato |
-| Live monitoring verificato | Completato con gap rilevati |
-| AI foundation verificata | Completato con capacità solo predisposte |
-| Gap classificati | Completato |
-| Backlog dipendente dalle evidenze | Completato |
-| Roadmap AP definitiva | Non ancora autorizzata |
+| Baseline commit identificato | Completato |
+| Modello di evidenza definito | Completato |
+| Capability matrix completata | Completato per lo scope dichiarato |
+| Telemetria riclassificata | Completato |
+| Observability riclassificata | Completato |
+| Observatory Automation inclusa | Completato |
+| Architecture Governance inclusa | Completato |
+| Disposizione PAA-001 definita | Completato nel presente assessment |
+| Runtime/CI validation | Non eseguita in questa revisione documentale |
 | Revisione indipendente ARB | Richiesta |
+| Roadmap AP definitiva | Non autorizzata |
 
-**Esito:** PASS WITH REQUIRED ARCHITECTURE CONSOLIDATION AND ARB REVIEW.
+**Esito:** READY FOR INDEPENDENT ARB REVIEW — operational claims remain subject to runtime evidence.
