@@ -11,7 +11,8 @@
 | Autorità | Digital StarGate Chief Architect |
 | Sponsor | Project Owner / Architecture Sponsor — Massimo Mainini |
 | Dipendenze | AP-003…AP-009; SAF-REF-001; SAF-CAT-001 |
-| Stato | Proposed for independent ARB review |
+| Review | ARB-010 |
+| Stato | Approved with conditions |
 | Target release | Da assegnare |
 
 ## 1. Scopo
@@ -148,7 +149,7 @@ Apertura, chiusura, slew e park richiedono precondizioni compatibili. Le collisi
 
 ## 12. Power and infrastructure safety
 
-AP-009 fornisce fault domains e recovery controls. AP-010 richiede che perdita rete, compute, storage o alimentazione sia collegata a hazard, modalità degradata, safe-state transition e recovery hold.
+AP-009 fornisce fault domain e recovery controls. AP-010 richiede che perdita rete, compute, storage o alimentazione sia collegata a hazard, modalità degradata, safe-state transition e recovery hold.
 
 ## 13. Manual override and maintenance
 
@@ -156,7 +157,7 @@ AP-009 fornisce fault domains e recovery controls. AP-010 richiede che perdita r
 - motivazione, durata, scope e approvatore registrati;
 - nessun override permanente o invisibile;
 - maintenance mode chiaramente distinguibile dalla normale operatività;
-- ritorno al servizio subordinato a checklist e evidence.
+- ritorno al servizio subordinato a checklist ed evidence.
 
 ## 14. Safety observability
 
@@ -193,15 +194,15 @@ Ogni evidence possiede identificatore, data, versione, owner, metodo, risultato,
 
 | Scenario | Expected result | Stato |
 |---|---|---|
-| pioggia durante acquisizione | abort e chiusura/protezione | Non eseguito |
-| weather telemetry stale | nuove aperture inibite | Non eseguito |
-| perdita WAN | safety locale preservata | Non eseguito |
-| perdita controller applicativo | PLC/interlock mantengono protezione | Non eseguito |
-| comando duplicato | idempotenza e nessun movimento incoerente | Non eseguito |
-| montatura non parked | chiusura governata da collision rules | Non eseguito |
-| perdita alimentazione | transizione e shutdown definiti | Non eseguito |
-| override manuale | audit, expiry e recovery hold | Non eseguito |
-| riavvio dopo emergenza | nessuna ripartenza automatica non autorizzata | Non eseguito |
+| pioggia durante acquisizione | abort e chiusura/protezione | Non eseguito — ARB-010-C02 |
+| weather telemetry stale | nuove aperture inibite | Non eseguito — ARB-010-C02 |
+| perdita WAN | safety locale preservata | Non eseguito — ARB-010-C02/C04 |
+| perdita controller applicativo | PLC/interlock mantengono protezione | Non eseguito — ARB-010-C02/C04 |
+| comando duplicato | idempotenza e nessun movimento incoerente | Non eseguito — ARB-010-C02/C04 |
+| montatura non parked | chiusura governata da collision rules | Non eseguito — ARB-010-C02 |
+| perdita alimentazione | transizione e shutdown definiti | Non eseguito — ARB-010-C02/C04 |
+| override manuale | audit, expiry e recovery hold | Non eseguito — ARB-010-C02/C04 |
+| riavvio dopo emergenza | nessuna ripartenza automatica non autorizzata | Non eseguito — ARB-010-C02/C04 |
 
 ## 17. Safety readiness gates
 
@@ -227,7 +228,7 @@ Prima dell'attivazione di una capability safety-relevant sono obbligatori:
 5. collegare eventi e metriche AP-004/AP-008;
 6. eseguire tabletop exercise;
 7. svolgere test controllati e raccogliere evidence;
-8. sottoporre package e safety case incrementale a review.
+8. chiudere le condizioni ARB-010 con evidence verificabile.
 
 ## 19. Traceability
 
@@ -238,6 +239,7 @@ Prima dell'attivazione di una capability safety-relevant sono obbligatori:
 | comando remoto non autorizzato | identity, authorization, safety veto | AP-005 / AP-008 / AP-010 | access e contract test |
 | stato stale | freshness e unknown handling | AP-004 / AP-008 / AP-010 | stale-data test |
 | recovery prematuro | recovery hold | AP-007 / AP-010 | recovery drill |
+| review | approval with conditions | ARB-010 | C01…C05 closure evidence |
 
 ## 20. Acceptance criteria
 
@@ -245,19 +247,22 @@ Prima dell'attivazione di una capability safety-relevant sono obbligatori:
 - authority e safe-state model definiti;
 - hazard lifecycle e validation matrix definiti;
 - roadmap, traceability e MkDocs aggiornati;
-- nessuna certificazione runtime non supportata;
-- review ARB indipendente richiesta prima di AP-011.
+- review ARB-010 registrata;
+- condizioni ARB-010-C01…C05 governate;
+- nessuna certificazione runtime non supportata.
 
 ## 21. Open issues
 
-- hazard owner e approvatori definitivi;
+- ARB-010-C01 — Formal Hazard Register;
+- ARB-010-C02 — Safety Validation Plan;
+- ARB-010-C03 — Safety Requirements Traceability Matrix;
+- ARB-010-C04 — Failure Injection and Emergency Exercise;
+- ARB-010-C05 — Safety Evidence Annex;
 - soglie meteo e persistence;
 - collision envelope as-built;
-- comportamento in perdita alimentazione;
 - policy di riapertura e recovery;
-- modalità e limiti dell'override;
-- frequenza dei drill e retention evidence.
+- modalità e limiti dell'override.
 
 ## 22. Disposizione
 
-AP-010 è **proposto per review ARB indipendente**. Lo scope approvato in conversazione è registrato, ma la safety assurance resta non certificata fino a review ed evidence.
+AP-010 è **Approved with conditions** mediante ARB-010, score 97/100. Il gate architetturale documentale è chiuso e AP-011 può utilizzare AP-010 come guard rail. L'osservatorio e le capability di controllo safety-relevant restano non certificati fino alla chiusura di ARB-010-C01…C05 e delle Safety Readiness Review applicabili.
