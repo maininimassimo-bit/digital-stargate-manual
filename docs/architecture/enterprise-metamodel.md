@@ -11,7 +11,7 @@
 
 ## 1. Scopo
 
-Questo documento definisce il vocabolario canonico per descrivere e collegare gli artefatti architetturali, implementativi, probatori e di release di Digital StarGate.
+Questo documento definisce il vocabolario canonico per descrivere e collegare gli artefatti architetturali, implementativi, probatori, scientifici e di release di Digital StarGate.
 
 ## 2. Concetti canonici
 
@@ -37,15 +37,7 @@ Una review ARB è indipendente dall'autore del package. Valuta coerenza, complet
 
 ### Evidence
 
-L'evidenza segue la tassonomia PAA-002:
-
-- `DOC` — documentazione;
-- `CFG` — configurazione;
-- `SRC` — codice sorgente;
-- `TST` — test;
-- `INT` — integrazione;
-- `OPS` — evidenza operativa;
-- `GOV` — governance.
+L'evidenza segue la tassonomia PAA-002: `DOC`, `CFG`, `SRC`, `TST`, `INT`, `OPS` e `GOV`.
 
 ### Release
 
@@ -67,6 +59,38 @@ L'Analytics Platform consuma data product e access layer governati per KPI, repo
 
 L'Operations Center presenta stato live, freshness, health, eventi e workflow operativi. Un eventuale comando attraversa use case applicativi autorizzati, auditabili e soggetti a precondizioni safety.
 
+### Scientific Asset
+
+Un Scientific Asset è un file o insieme di file identificato in modo persistente, come RAW, calibration, master, intermedio, progetto PixInsight, preview o prodotto finale. Il catalogo conserva URI, checksum, metadata e lifecycle; lo storage esterno conserva i binari voluminosi.
+
+### Processing Run
+
+Una Processing Run è una registrazione immutabile di una specifica esecuzione di elaborazione. Collega input, workflow versionato, parametri, software, step manuali, output, checksum, timestamp e operatore.
+
+### Scientific Knowledge Layer
+
+La Scientific Knowledge Layer è un livello semantico governato che collega fonti autorevoli mediante entità, relazioni, provenance e citation locator. Non sostituisce Warehouse, catalogo, GitHub o storage scientifico.
+
+### Knowledge Entity
+
+Una Knowledge Entity è un'entità semanticamente identificata, come target, sessione, asset, strumento, workflow, processing run, report o data product.
+
+### Knowledge Relation
+
+Una Knowledge Relation è una relazione tipizzata e versionata tra due Knowledge Entity, con fonte e validità esplicite.
+
+### Scientific Claim
+
+Uno Scientific Claim è un'affermazione derivata da evidenze. Deve dichiarare fonte, metodo, versione, timestamp e livello di confidenza. Non diventa fatto autorevole per il solo fatto di essere generato da analytics o AI.
+
+### Knowledge Projection
+
+Una Knowledge Projection è una vista derivata per ricerca, analytics, portale o AI. Può essere ricostruita dalle fonti e non è automaticamente autorevole.
+
+### Citation Locator
+
+Un Citation Locator è un riferimento verificabile a documento, manifest, asset, checksum, data product, commit o altra evidenza.
+
 ## 3. Relazioni
 
 | Origine | Relazione | Destinazione | Obbligo |
@@ -82,6 +106,13 @@ L'Operations Center presenta stato live, freshness, health, eventi e workflow op
 | Portal | presents | Application use case / Read model | Obbligatorio |
 | Analytics Platform | consumes | Governed data product | Obbligatorio |
 | Operations Center | consumes | Live projection / Health model | Obbligatorio |
+| Scientific Catalog | references | Scientific Asset / Processing Run | Obbligatorio |
+| Processing Run | uses | Scientific Asset / Workflow Definition | Obbligatorio |
+| Processing Run | produces | Scientific Asset | Obbligatorio |
+| Scientific Knowledge Layer | references | Authoritative source | Obbligatorio |
+| Knowledge Entity | related through | Knowledge Relation | Quando pubblicata |
+| Scientific Claim | supported by | Evidence / Citation Locator | Obbligatorio |
+| Knowledge Projection | derived from | Knowledge Entity / Relation | Obbligatorio |
 | Authorized command | invokes | Application use case | Obbligatorio |
 | Application use case | uses | Infrastructure port | Quando accede a sistemi esterni |
 
@@ -99,6 +130,12 @@ L'Operations Center presenta stato live, freshness, health, eventi e workflow op
 10. Stato mancante, stale o degradato deve essere esplicito e non può essere interpretato come safe.
 11. La UI non accede direttamente a relay, driver, protocollo o device.
 12. La prima esposizione di una capability operativa remota deve essere read-only salvo decisione, evidence e review dedicate.
+13. **Scientific images are immutable assets:** i RAW originali non vengono modificati e ogni derivato conserva provenance.
+14. Una Workflow Definition non prova una Processing Run eseguita.
+15. **Knowledge references authoritative sources:** la SKL non sostituisce né modifica silenziosamente le fonti.
+16. **Claims require provenance and citations:** ogni claim derivato deve essere verificabile.
+17. Conflitti tra fonti sono rappresentati esplicitamente come data issue o knowledge conflict.
+18. Inferenze AI restano inferenze finché non sono validate e approvate come evidenza.
 
 ## 5. Domini architetturali
 
@@ -111,6 +148,8 @@ L'Operations Center presenta stato live, freshness, health, eventi e workflow op
 | Persistence | durabilità, schema fisico, query e retention | decisioni di dominio |
 | Messaging | trasporto, retry, dead letter e delivery | semantica dei Domain Event |
 | Digital Platforms | DSGP, DSAP e DSOC come composizione governata | duplicazione di dominio, dati o safety authority |
+| Scientific Data | asset, catalogo, processing provenance e lifecycle | bulk binary in GitHub |
+| Scientific Knowledge | entità, relazioni, claim, citation e projection | sostituzione delle fonti autorevoli |
 
 ## 6. Metadati minimi
 
@@ -128,6 +167,8 @@ Validations executed
 Validations not executed
 ```
 
+Per Knowledge Entity, Relation e Scientific Claim sono inoltre richiesti source locator, provenance, validity/version e confidence quando applicabile.
+
 ## 7. Lifecycle
 
 ```text
@@ -143,7 +184,7 @@ Approved / Approved with conditions
   +--> Deprecated
 ```
 
-Una modifica sostanziale a capability status, canonical data flow, safety boundary, remote command model o AI tool execution richiede re-review.
+Una modifica sostanziale a capability status, canonical data flow, safety boundary, remote command model, scientific asset identity, knowledge authority o AI tool execution richiede re-review.
 
 ## 8. Boundary DDD e C4
 
@@ -155,6 +196,8 @@ Una modifica sostanziale a capability status, canonical data flow, safety bounda
 - Le projection sono modelli di lettura derivati, non la fonte autorevole del dominio.
 - Nel modello C4, persone e sistemi esterni appartengono al Context; applicazioni e data store principali al Container; componenti interni al Component view.
 - DSGP è Presentation; DSAP e DSOC includono presentation e application capabilities ma non inglobano il Domain né gli adapter infrastrutturali.
+- PixInsight è un sistema esterno integrato tramite adapter.
+- La SKL è un bounded context applicativo/semantico distinto da Warehouse, Scientific Catalog e storage esterno.
 
 ## 9. Governance
 
