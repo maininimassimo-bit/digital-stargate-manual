@@ -3,8 +3,8 @@
   "updatedAt": "2026-07-30",
   "authority": "AMP-002",
   "projectStatus": "Attivo",
-  "currentPackage": "AP-010",
-  "nextMilestone": "Independent ARB review and evidence planning for AP-009 and AP-010 before AP-011",
+  "currentPackage": "AP-011",
+  "nextMilestone": "Plan AP-011 Enterprise Analytics Platform Architecture using AP-009 and AP-010 approved guard rails",
   "target": "AP-015 / Scientific Knowledge Platform",
   "waves": [
     {
@@ -27,16 +27,16 @@
       "items": [
         {"id":"AP-007","title":"Enterprise Operations and Service Management Architecture","status":"active","note":"Package and reference architecture produced; independent ARB review remains unrecorded in the repository"},
         {"id":"AP-008","title":"Enterprise Integration Architecture","status":"active","note":"Package, reference architecture and initial contract catalog produced; independent ARB review remains unrecorded in the repository"},
-        {"id":"AP-009","title":"Enterprise Infrastructure Architecture","status":"active","note":"Package AP-009 and INF-REF-001 produced; as-built inventory, recovery evidence and independent ARB review pending"},
-        {"id":"AP-010","title":"Enterprise Safety Assurance Architecture","status":"active","note":"Package AP-010, SAF-REF-001 and SAF-CAT-001 produced; hazard ownership, validation evidence and independent ARB review pending"}
+        {"id":"AP-009","title":"Enterprise Infrastructure Architecture","status":"completed","review":"ARB-009","note":"Approved with conditions, 94/100. ARB-009-C01…C05 remain open; runtime resilience is not certified"},
+        {"id":"AP-010","title":"Enterprise Safety Assurance Architecture","status":"completed","review":"ARB-010","note":"Approved with conditions, 97/100. ARB-010-C01…C05 remain open; runtime safety is not certified"}
       ]
     },
     {
       "id": "wave-6",
       "title": "Digital Platforms",
-      "status": "planned",
+      "status": "active",
       "items": [
-        {"id":"AP-011","title":"Enterprise Analytics Platform Architecture (DSAP)","status":"planned","note":"Do not commence until AP-009 and AP-010 repository review gates are dispositioned"},
+        {"id":"AP-011","title":"Enterprise Analytics Platform Architecture (DSAP)","status":"active","note":"Architecture planning may commence. AP-009 and AP-010 conditions remain mandatory constraints; no safety authority is delegated to analytics"},
         {"id":"AP-012","title":"Enterprise Operations Center Architecture (DSOC)","status":"planned"}
       ]
     },
@@ -95,16 +95,24 @@
       "id": "M-AP009",
       "title": "AP-009 Enterprise Infrastructure Architecture",
       "date": "2026-07-30",
-      "status": "active",
-      "description": "Architecture Package e INF-REF-001 prodotti. Inventory as-built, capacity, failover, restore e recovery evidence restano aperti.",
+      "status": "completed",
+      "description": "ARB-009 ha approvato AP-009 con condizioni, score 94/100. Inventory, as-built, recovery, baseline e capacity evidence restano aperti.",
       "image": null
     },
     {
       "id": "M-AP010",
       "title": "AP-010 Enterprise Safety Assurance Architecture",
       "date": "2026-07-30",
+      "status": "completed",
+      "description": "ARB-010 ha approvato AP-010 con condizioni, score 97/100. Hazard ownership, validation, traceability, failure injection ed evidence annex restano aperti.",
+      "image": null
+    },
+    {
+      "id": "M-AP011",
+      "title": "AP-011 Enterprise Analytics Platform Architecture",
+      "date": "2026-07-30",
       "status": "active",
-      "description": "Architecture Package, SAF-REF-001 e catalogo hazard/stati prodotti. Validation scenario, hazard ownership e Safety Readiness Review restano aperti.",
+      "description": "Gate documentali AP-009 e AP-010 chiusi con condizioni. La pianificazione AP-011 può iniziare senza attribuire authority safety o controllo operativo all'analytics.",
       "image": null
     }
   ]
