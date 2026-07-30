@@ -76,3 +76,32 @@ L’architettura segue questi principi:
                   | analytics                   |
                   | manuale tecnico             |
                   +-----------------------------+
+```
+
+---
+
+## Governance architetturale
+
+La baseline enterprise è governata dagli assessment, dalle review indipendenti e dai certificate presenti in `architecture/assessments/`.
+
+AP-001 introduce gli artefatti canonici seguenti:
+
+- [AP-001 — Enterprise Metamodel and Repository Information Architecture](packages/AP-001-Enterprise-Metamodel-and-Repository-Information-Architecture.md)
+- [Enterprise Metamodel](enterprise-metamodel.md)
+- [Architecture Traceability Register](traceability-register.md)
+
+Questi documenti definiscono vocabolario, relazioni, stati, metadati e tracciabilità. Il loro stato è **Proposed for independent ARB review** e non costituisce certificazione runtime.
+
+## Canonical data flow
+
+La rappresentazione autorevole definita da PAA-002 preserva il flusso:
+
+```text
+Sorgenti → Ingestion / Collection → Analytics → Dataset validati → Warehouse → Dashboard / Reporting / AI
+```
+
+Dashboard, Reporting e AI non devono introdurre pipeline parallele non governate dai log grezzi.
+
+## Safety boundary
+
+Gli interblocchi fisici e locali restano indipendenti dal software applicativo, dalla rete, dal portale, dal cloud e dall’AI. Monitoring e safety non sono equivalenti e uno stato sconosciuto o stale non può essere interpretato come sicuro.
