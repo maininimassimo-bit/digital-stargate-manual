@@ -66,11 +66,9 @@ public sealed class IntegratedNonOperationalValidationTests
   [Fact]
   public void Integrated_validation_never_enables_runtime_or_physical_adapter()
   {
-    var scenario = IntegratedScenario.Create();
-
-    Assert.False(scenario.RuntimeEnabled);
-    Assert.False(scenario.PhysicalAdapterAttached);
-    Assert.False(scenario.LocalInterlockBypassed);
+    Assert.False(IntegratedScenario.RuntimeEnabled);
+    Assert.False(IntegratedScenario.PhysicalAdapterAttached);
+    Assert.False(IntegratedScenario.LocalInterlockBypassed);
   }
 
   private sealed class IntegratedScenario
@@ -88,9 +86,9 @@ public sealed class IntegratedNonOperationalValidationTests
     public bool AuthorizationGranted { get; private set; }
     public bool DispatchAllowed { get; private set; }
     public bool IsFullyHealthy => Mode == OperatingMode.Normal;
-    public bool RuntimeEnabled => false;
-    public bool PhysicalAdapterAttached => false;
-    public bool LocalInterlockBypassed => false;
+    public static bool RuntimeEnabled => false;
+    public static bool PhysicalAdapterAttached => false;
+    public static bool LocalInterlockBypassed => false;
     public List<string> Evidence { get; } = [];
 
     public static IntegratedScenario Create() => new();
