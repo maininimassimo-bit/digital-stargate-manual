@@ -8,7 +8,7 @@
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Data | 30/07/2026 |
 | Autorità | Digital StarGate Release and Quality Governor |
-| Stato | Active validation campaign — C01/C02/C03/C05 simulated scope completed |
+| Stato | Active validation campaign — C01/C02/C03/C05/C06 simulated scope completed |
 | Readiness | Not Ready for runtime enablement |
 
 ## 1. Regole di classificazione
@@ -24,7 +24,7 @@ Gli stati del gate complessivo restano `Passed`, `Failed`, `Not Executed`, `Bloc
 | ARB-012-C03 | Passed | Blocked | precondition, safety checkpoint, timeout, reconciliation, rollback e recovery verificati in simulazione; drill operativo e return-to-service mancanti |
 | ARB-012-C04 | Not Applicable | Blocked | bootstrap a identità unica; four-eyes e segregazione assenti |
 | ARB-012-C05 | Passed | Blocked | copertura simulata completa; C04 e privileged access reale mancanti |
-| ARB-012-C06 | Not Executed | Not Executed | degraded mode e dependency failure da validare |
+| ARB-012-C06 | Passed | Blocked | degraded mode, safe restriction, dependency recovery e return-to-service gates verificati in simulazione; fault injection e operatività reale mancanti |
 | ARB-012-C07 | Not Executed | Not Executed | audit retention e time integrity da validare |
 | ARB-012-C08 | Passed | Passed | CI e pubblicazione verificate |
 
@@ -36,7 +36,7 @@ Gli stati del gate complessivo restano `Passed`, `Failed`, `Not Executed`, `Bloc
 | E-ARB012-C02-01 | C02 | Passed nello scope simulato | `ARB-012-C02-Execution-Evidence.md`; run #184; commit `1e4299e61b5b6252388f78b37e64a2cc731f2dcf` |
 | E-ARB012-C03-01 | C03 | Passed nello scope simulato | `ARB-012-C03-Execution-Evidence.md`; run #188; commit `bf951fa70f4a4342568a7e336842991a5dc29141` |
 | E-ARB012-C04-01 | C04 | Blocked | `ARB-012-C04-Role-Assignment-Register.md`; issue #11 |
-| E-ARB012-C06-01 | C06 | Missing | da produrre |
+| E-ARB012-C06-01 | C06 | Passed nello scope simulato | `ARB-012-C06-Execution-Evidence.md`; run #192; commit `4298739b9deb75a96636176c2d7fbb4926db0c7f` |
 | E-ARB012-C07-01 | C07 | Missing | da produrre |
 | E-ARB012-C08-01 | C08 | Passed | `ARB-012-C08-CI-Publication-Evidence.md` |
 
@@ -52,16 +52,13 @@ Developer Foundation run `30580630651`, run number 184, job `90999681590`, ha co
 
 ### 4.3 C03
 
-Developer Foundation run `30581522228`, run number 188, job `91002675834`, ha completato con successo:
+Developer Foundation run `30581522228`, run number 188, job `91002675834`, ha completato con successo restore, build, test, formatting, dipendenze documentali e MkDocs strict verification.
 
-- restore;
-- build;
-- test;
-- formatting;
-- installazione dipendenze documentali;
-- MkDocs strict verification.
+### 4.4 C06
 
-I risultati C01, C02, C03 e C05 coprono esclusivamente fixture e componenti simulati. Nessun endpoint, adattatore, routing operativo, sistema di notifica, backup reale, restore point o dispositivo fisico è stato validato.
+Developer Foundation run `30582095625`, run number 192, job `91004582671`, ha completato con successo restore, build, test, formatting, dipendenze documentali e MkDocs strict verification.
+
+I risultati C01, C02, C03, C05 e C06 coprono esclusivamente fixture e componenti simulati. Nessun endpoint, adattatore, routing operativo, sistema di notifica, backup reale, restore point, fault injection o dispositivo fisico è stato validato.
 
 ## 5. Risk and waiver register
 
@@ -74,16 +71,16 @@ I risultati C01, C02, C03 e C05 coprono esclusivamente fixture e componenti simu
 | R-ARB012-05 | audit/retention non validati | High | completare C07 | solo ambiente simulato |
 | R-ARB012-06 | escalation o suppression operative senza routing, owner e approvazioni validate | Critical | mantenere C02 operativo bloccato | non ammesso |
 | R-ARB012-07 | recovery o rollback operativo senza restore point, drill e return-to-service validati | Critical | mantenere C03 operativo bloccato | non ammesso |
+| R-ARB012-08 | degraded mode operativo senza dependency monitoring, fault injection e safety verification reali | Critical | mantenere C06 operativo bloccato | non ammesso |
 
 ## 6. Ordine di esecuzione aggiornato
 
-1. mantenere C01/C02/C03/C05 e C08 verificati nello scope dichiarato;
-2. validare C06 — Degraded Mode and Dependency Failure;
-3. validare C07 — Audit, Retention and Time Integrity;
-4. completare C04 con identità distinte, sostituti, access review e prove four-eyes;
-5. eseguire una validazione integrata non operativa;
-6. sottoporre C01–C08 a re-review ARB finale;
-7. valutare separatamente qualsiasi futura readiness runtime.
+1. mantenere C01/C02/C03/C05/C06 e C08 verificati nello scope dichiarato;
+2. validare C07 — Audit, Retention and Time Integrity;
+3. completare C04 con identità distinte, sostituti, access review e prove four-eyes;
+4. eseguire una validazione integrata non operativa;
+5. sottoporre C01–C08 a re-review ARB finale;
+6. valutare separatamente qualsiasi futura readiness runtime.
 
 Tutte le prove iniziali devono restare simulate o non operative. Nessuna prova può disabilitare interlock locali o mettere a rischio persone, cupola, montatura o altri asset fisici.
 
@@ -91,4 +88,4 @@ Tutte le prove iniziali devono restare simulate o non operative. Nessuna prova p
 
 **NOT READY FOR RUNTIME ENABLEMENT**
 
-C01, C02, C03 e C05 hanno validazione tecnica simulata completa; C08 è verificata. C06 e C07 non sono eseguite e C04 è bloccata dalla configurazione organizzativa a identità unica. C3/C4 runtime, break-glass runtime e self-approval restano proibiti.
+C01, C02, C03, C05 e C06 hanno validazione tecnica simulata completa; C08 è verificata. C07 non è eseguita e C04 è bloccata dalla configurazione organizzativa a identità unica. C3/C4 runtime, break-glass runtime e self-approval restano proibiti.
