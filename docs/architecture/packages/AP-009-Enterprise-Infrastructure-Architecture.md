@@ -11,7 +11,8 @@
 | Autorità | Digital StarGate Chief Architect |
 | Sponsor | Project Owner / Architecture Sponsor — Massimo Mainini |
 | Dipendenze | AP-003…AP-008; INF-REF-001 |
-| Stato | Proposed for independent ARB review |
+| Review | ARB-009 |
+| Stato | Approved with conditions |
 | Target release | Da assegnare |
 
 ## 1. Scopo
@@ -141,8 +142,6 @@ I servizi di piattaforma includono, quando adottati, scheduling, configuration m
 
 ## 11. Storage e dati
 
-Classi iniziali:
-
 | Classe | Esempi | Requisito minimo |
 |---|---|---|
 | Operational state | configurazioni, queue, state store | consistenza, backup e restore |
@@ -192,20 +191,20 @@ Dashboard e alert devono indicare owner, impatto, freshness e runbook.
 5. validare backup/restore e WAN failover;
 6. applicare segmentazione e hardening in incrementi reversibili;
 7. eseguire recovery drill;
-8. sottoporre il package e l'evidence a review indipendente.
+8. chiudere le condizioni ARB-009 con evidence verificabile.
 
 ## 16. Validation matrix
 
 | Area | Evidenza richiesta | Stato |
 |---|---|---|
-| Inventory | asset, owner, versione, dipendenze | Non eseguita |
-| Network | diagramma as-built, routing, VPN, failover test | Non eseguita |
-| Power | UPS test e shutdown/recovery | Non eseguita |
-| Backup | restore di campione con checksum | Non eseguita |
-| Compute | baseline, patch e resource test | Non eseguita |
-| Storage | capacity, integrity e retention | Non eseguita |
-| Observability | metriche, alert e runbook | Non eseguita |
-| Recovery | tabletop e drill tecnico | Non eseguita |
+| Inventory | asset, owner, versione, dipendenze | Non eseguita — ARB-009-C01 |
+| Network | diagramma as-built, routing, VPN, failover test | Non eseguita — ARB-009-C02/C03 |
+| Power | UPS test e shutdown/recovery | Non eseguita — ARB-009-C03 |
+| Backup | restore di campione con checksum | Non eseguita — ARB-009-C03 |
+| Compute | baseline, patch e resource test | Non eseguita — ARB-009-C04/C05 |
+| Storage | capacity, integrity e retention | Non eseguita — ARB-009-C05 |
+| Observability | metriche, alert e runbook | Non eseguita — ARB-009-C05 |
+| Recovery | tabletop e drill tecnico | Non eseguita — ARB-009-C03 |
 
 ## 17. Traceability
 
@@ -214,8 +213,9 @@ Dashboard e alert devono indicare owner, impatto, freshness e runbook.
 | continuità locale | Local autonomy | AP-009 / INF-REF-001 | WAN-loss test |
 | recuperabilità | Recovery first | AP-009 | restore evidence |
 | sicurezza | governed admin path | AP-005 / AP-009 | access review |
-| osservabilità | health and capacity model | AP-004 / AP-009 | dashboards e alerts |
+| osservabilità | health and capacity model | AP-004 / AP-009 | dashboard e alert |
 | safety | fault isolation | AP-003 / AP-010 | hazard controls |
+| review | approval with conditions | ARB-009 | C01…C05 closure evidence |
 
 ## 18. Acceptance criteria
 
@@ -223,19 +223,21 @@ Dashboard e alert devono indicare owner, impatto, freshness e runbook.
 - capability model definito;
 - dipendenze AP-003…AP-008 esplicite;
 - roadmap, traceability e MkDocs aggiornati;
-- review indipendente richiesta;
+- review ARB-009 registrata;
+- condizioni ARB-009-C01…C05 governate;
 - nessuna dichiarazione runtime priva di evidence.
 
 ## 19. Open issues
 
+- ARB-009-C01 — Infrastructure Inventory;
+- ARB-009-C02 — As-built Network and Power Architecture;
+- ARB-009-C03 — Recovery Validation;
+- ARB-009-C04 — Configuration Baseline;
+- ARB-009-C05 — Capacity and Continuity Model;
 - ownership definitiva dei componenti;
-- segmentazione e indirizzamento target;
 - RTO/RPO/retention;
-- baseline di capacità;
-- politica container/virtualizzazione;
-- ubicazione e tecnologia dello storage scientifico;
-- frequenza dei recovery drill.
+- ubicazione e tecnologia dello storage scientifico.
 
 ## 20. Disposizione
 
-AP-009 è **proposto per review ARB indipendente**. L'approvazione conversazionale dello scope non equivale a certificazione dell'implementazione o chiusura delle evidenze operative.
+AP-009 è **Approved with conditions** mediante ARB-009, score 94/100. Il gate architetturale documentale è chiuso e AP-011 può utilizzare AP-009 come fondazione. Disponibilità, failover, restore e readiness operativa restano non certificati fino alla chiusura di ARB-009-C01…C05.
