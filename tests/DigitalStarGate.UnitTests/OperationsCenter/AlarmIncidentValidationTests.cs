@@ -44,11 +44,10 @@ public sealed class AlarmIncidentValidationTests
   [Fact]
   public void C02_related_alarms_are_correlated_without_losing_original_records()
   {
-    var engine = new CorrelationEngine();
     var first = AlarmRecord.Open("alm-004", safetyRelevant: false, Now, serviceId: "dsoc", ciId: "telemetry");
     var second = AlarmRecord.Open("alm-005", safetyRelevant: false, Now.AddSeconds(10), serviceId: "dsoc", ciId: "telemetry");
 
-    var group = engine.Correlate(first, second);
+    var group = CorrelationEngine.Correlate(first, second);
 
     Assert.Equal(2, group.AlarmIds.Count);
     Assert.Contains("alm-004", group.AlarmIds);
@@ -169,9 +168,9 @@ public sealed class AlarmIncidentValidationTests
     }
   }
 
-  private sealed class CorrelationEngine
+  private static class CorrelationEngine
   {
-    public CorrelationGroup Correlate(params AlarmRecord[] alarms)
+    public static CorrelationGroup Correlate(params AlarmRecord[] alarms)
     {
       var first = alarms[0];
       var related = alarms.Where(alarm => alarm.ServiceId == first.ServiceId && alarm.CiId == first.CiId).ToArray();
