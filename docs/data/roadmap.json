@@ -4,7 +4,7 @@
   "authority": "AMP-002",
   "projectStatus": "Attivo",
   "currentPackage": "AP-011",
-  "nextMilestone": "Plan AP-011 Enterprise Analytics Platform Architecture using AP-009 and AP-010 approved guard rails",
+  "nextMilestone": "Independent ARB review of AP-011 Enterprise Analytics Platform Architecture",
   "target": "AP-015 / Scientific Knowledge Platform",
   "waves": [
     {
@@ -36,7 +36,7 @@
       "title": "Digital Platforms",
       "status": "active",
       "items": [
-        {"id":"AP-011","title":"Enterprise Analytics Platform Architecture (DSAP)","status":"active","note":"Architecture planning may commence. AP-009 and AP-010 conditions remain mandatory constraints; no safety authority is delegated to analytics"},
+        {"id":"AP-011","title":"Enterprise Analytics Platform Architecture (DSAP)","status":"active","note":"Package AP-011, ANA-REF-001, ANA-PIPE-001, ANA-KPI-001 and ANA-GOV-001 produced; independent ARB review pending. Analytics remains read-only toward operations and has no safety authority"},
         {"id":"AP-012","title":"Enterprise Operations Center Architecture (DSOC)","status":"planned"}
       ]
     },
@@ -59,61 +59,12 @@
     }
   ],
   "milestones": [
-    {
-      "id": "M-FOUNDATION",
-      "title": "Architecture Foundation AP-001–AP-006",
-      "date": "2026-07-30",
-      "status": "completed",
-      "description": "Baseline enterprise, governance, automation, observability, security e configuration management completata con condizioni ARB aperte.",
-      "image": null
-    },
-    {
-      "id": "M-ROADMAP",
-      "title": "Roadmap realigned through AP-015",
-      "date": "2026-07-30",
-      "status": "completed",
-      "description": "AMP-002 estesa a Digital Platforms, repository scientifico, provenance PixInsight e Scientific Knowledge Layer.",
-      "image": null
-    },
-    {
-      "id": "M-AP007",
-      "title": "AP-007 Operations and Service Management",
-      "date": "2026-07-30",
-      "status": "active",
-      "description": "Architecture Package e reference architecture prodotti. La review ARB indipendente non risulta ancora registrata nel repository.",
-      "image": null
-    },
-    {
-      "id": "M-AP008",
-      "title": "AP-008 Enterprise Integration Architecture",
-      "date": "2026-07-30",
-      "status": "active",
-      "description": "Enterprise Integration Fabric, reference architecture e catalogo iniziale dei contratti prodotti. Review ARB e pilot restano da registrare.",
-      "image": null
-    },
-    {
-      "id": "M-AP009",
-      "title": "AP-009 Enterprise Infrastructure Architecture",
-      "date": "2026-07-30",
-      "status": "completed",
-      "description": "ARB-009 ha approvato AP-009 con condizioni, score 94/100. Inventory, as-built, recovery, baseline e capacity evidence restano aperti.",
-      "image": null
-    },
-    {
-      "id": "M-AP010",
-      "title": "AP-010 Enterprise Safety Assurance Architecture",
-      "date": "2026-07-30",
-      "status": "completed",
-      "description": "ARB-010 ha approvato AP-010 con condizioni, score 97/100. Hazard ownership, validation, traceability, failure injection ed evidence annex restano aperti.",
-      "image": null
-    },
-    {
-      "id": "M-AP011",
-      "title": "AP-011 Enterprise Analytics Platform Architecture",
-      "date": "2026-07-30",
-      "status": "active",
-      "description": "Gate documentali AP-009 e AP-010 chiusi con condizioni. La pianificazione AP-011 può iniziare senza attribuire authority safety o controllo operativo all'analytics.",
-      "image": null
-    }
+    {"id":"M-FOUNDATION","title":"Architecture Foundation AP-001–AP-006","date":"2026-07-30","status":"completed","description":"Baseline enterprise completata con condizioni ARB aperte.","image":null},
+    {"id":"M-ROADMAP","title":"Roadmap realigned through AP-015","date":"2026-07-30","status":"completed","description":"AMP-002 estesa fino alla Scientific Knowledge Platform.","image":null},
+    {"id":"M-AP007","title":"AP-007 Operations and Service Management","date":"2026-07-30","status":"active","description":"Package prodotto; review indipendente non registrata.","image":null},
+    {"id":"M-AP008","title":"AP-008 Enterprise Integration Architecture","date":"2026-07-30","status":"active","description":"Package prodotto; review e pilot restano aperti.","image":null},
+    {"id":"M-AP009","title":"AP-009 Enterprise Infrastructure Architecture","date":"2026-07-30","status":"completed","description":"Approved with conditions by ARB-009, 94/100; evidence runtime aperta.","image":null},
+    {"id":"M-AP010","title":"AP-010 Enterprise Safety Assurance Architecture","date":"2026-07-30","status":"completed","description":"Approved with conditions by ARB-010, 97/100; safety evidence aperta.","image":null},
+    {"id":"M-AP011","title":"AP-011 Enterprise Analytics Platform Architecture","date":"2026-07-30","status":"active","description":"Package e artefatti DSAP prodotti. Review ARB indipendente, quality evidence, lineage, recovery e KPI ownership restano aperti.","image":null}
   ]
 }
