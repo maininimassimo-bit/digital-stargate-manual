@@ -11,7 +11,9 @@
 | Autorità | Digital StarGate Chief Architect |
 | Sponsor | Project Owner / Architecture Sponsor — Massimo Mainini |
 | Dipendenze | AP-002; AP-004; AP-006…AP-010; DSGP-VIS-001; ANA-REF-001; ANA-PIPE-001; ANA-KPI-001; ANA-GOV-001 |
-| Stato | Proposed for independent ARB review |
+| Stato | Approved with conditions |
+| Review | ARB-011 — 97/100 |
+| Condizioni aperte | ARB-011-C01…C07 |
 | Target release | Da assegnare |
 
 ## 1. Scopo
@@ -161,17 +163,18 @@ Metriche minime:
 
 ## 15. Validation matrix
 
-| Area | Evidenza richiesta | Stato |
-|---|---|---|
-| Contracts | schema e compatibility test | Non eseguita |
-| Quality | test su dati validi, invalidi e mancanti | Non eseguita |
-| Lineage | source-to-KPI trace | Non eseguita |
-| Freshness | stale e unknown handling | Non eseguita |
-| Reproducibility | rebuild dello stesso output | Non eseguita |
-| Security | access e data classification review | Non eseguita |
-| Recovery | restore e reprocessing | Non eseguita |
-| Performance | volume, latency e capacity baseline | Non eseguita |
-| Models | baseline, drift e human review | Non applicabile finché non introdotti |
+| Area | Evidenza richiesta | Stato | Condizione ARB |
+|---|---|---|---|
+| Contracts e catalog | schema, ownership e compatibility test | Non eseguita | ARB-011-C01 |
+| KPI governance | formula, grain, owner e metric test | Non eseguita | ARB-011-C02 |
+| Quality | test su dati validi, invalidi, duplicati e mancanti | Non eseguita | ARB-011-C03 |
+| Lineage | source-to-KPI trace | Non eseguita | ARB-011-C04 |
+| Freshness | stale e unknown handling | Non eseguita | ARB-011-C03/C04 |
+| Reproducibility e recovery | restore, replay e reprocessing | Non eseguita | ARB-011-C05 |
+| Performance | volume, latency e capacity baseline | Non eseguita | ARB-011-C06 |
+| Semantic layer | glossary, canonical entities e dimensions | Non eseguita | ARB-011-C07 |
+| Security | access, classification e no-command review | Non eseguita | vincolo AP-005/AP-010 |
+| Models | baseline, drift e human review | Non applicabile finché non introdotti | governance obbligatoria |
 
 ## 16. Traceability
 
@@ -183,16 +186,29 @@ Metriche minime:
 | continuità | recoverable pipelines | AP-009 / AP-011 | restore/reprocess test |
 | safety | no command path | AP-010 / AP-011 | architecture inspection e access test |
 
-## 17. Acceptance criteria
+## 17. Condizioni ARB-011
+
+| ID | Condizione | Stato |
+|---|---|---|
+| ARB-011-C01 | Enterprise Data Catalog | Open |
+| ARB-011-C02 | KPI Governance | Open |
+| ARB-011-C03 | Analytics Quality Gates | Open |
+| ARB-011-C04 | Metadata and Lineage | Open |
+| ARB-011-C05 | Analytics Recovery | Open |
+| ARB-011-C06 | Capacity Model | Open |
+| ARB-011-C07 | Semantic Layer Governance | Open |
+
+## 18. Acceptance criteria
 
 - package e quattro artefatti di riferimento presenti;
 - DSAP separata da operations e safety authority;
 - data zone, product, quality e semantic model definiti;
 - roadmap, traceability e MkDocs aggiornati;
-- review ARB indipendente richiesta;
+- review ARB-011 registrata;
+- condizioni ARB-011-C01…C07 tracciate;
 - nessuna certificazione runtime priva di evidence.
 
-## 18. Open issues
+## 19. Open issues
 
 - owner definitivi di DP-001…DP-005;
 - technology selection per compute, orchestration e serving;
@@ -203,6 +219,6 @@ Metriche minime:
 - baseline di volume e crescita;
 - model governance owner.
 
-## 19. Disposizione
+## 20. Disposizione
 
-AP-011 è **proposto per review ARB indipendente**. L'approvazione dello scope non certifica pipeline, data quality, KPI, dashboard o modelli runtime.
+AP-011 è **Approved with conditions** tramite ARB-011, score 97/100. Il gate architetturale documentale è chiuso; ARB-011-C01…C07 restano aperte. L'approvazione non certifica pipeline, data quality, lineage, KPI, dashboard, recovery, capacity o modelli runtime. AP-012 può iniziare come successivo Architecture Package applicando un approccio read-only first e rispettando i vincoli AP-009, AP-010 e AP-011.
