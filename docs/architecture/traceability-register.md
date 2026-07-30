@@ -37,7 +37,7 @@
 | CAP-32 Documentation Governance | Partial | AP-001 | MkDocs e standard | ARB-003…ARB-011 | Automazione progressiva |
 | CAP-33 Release Quality Governance | Partial | AP-001 | release note | ARB-003…ARB-011 | Mapping incompleto |
 | CAP-34 Enterprise Analytics Platform | Approved with conditions | AP-011 / ANA-REF-001 / ANA-PIPE-001 / ANA-KPI-001 / ANA-GOV-001 | package e reference artifacts | ARB-011, 97/100 | Gate documentale chiuso; C01…C07 aperte |
-| CAP-35 Enterprise Operations Center | In development — Sprint AP-012.1 | AP-012 / OPSC-REF-001 / OPSC-CMD-001 | package, reference architecture e authorization model | Nessuna review AP-012 | AP-012.2, validation evidence e ARB-012 richiesti |
+| CAP-35 Enterprise Operations Center | In development — Sprint AP-012.2 document baseline complete | AP-012 / OPSC-REF-001 / OPSC-CMD-001 / OPSC-ALM-001 / OPSC-RUN-001 / OPSC-RACI-001 | package, reference architecture, authorization, alarm/incident, runbook e responsibility governance | Nessuna review AP-012 | validation evidence e ARB-012 richiesti; runtime non autorizzato |
 | CAP-36 Digital StarGate Portal | Planned | DSGP-VIS-001 / AP-011 / AP-012 | semantic serving e operator-console boundary | ARB-011; nessuna review AP-012 | Non Safety Authority |
 | CAP-37 Scientific Image Repository | Planned | SIR-VIS-001 / AP-009 | storage boundary | ARB-009 | Storage technology aperta |
 | CAP-38 Scientific Observation Catalog and Search | Planned | SIR-VIS-001 / AP-008 / AP-011 | catalog e semantic boundary | ARB-011; nessuna review AP-014 | Manifest richiesti |
@@ -59,7 +59,7 @@
 | AP-009 | Enterprise Infrastructure | AP-009, INF-REF-001 | ARB-009 | Approved with conditions, 94/100 |
 | AP-010 | Enterprise Safety Assurance | AP-010, SAF-REF-001, SAF-CAT-001 | ARB-010 | Approved with conditions, 97/100 |
 | AP-011 | Analytics Platform | AP-011, ANA-REF-001, ANA-PIPE-001, ANA-KPI-001, ANA-GOV-001 | ARB-011 | Approved with conditions, 97/100 |
-| AP-012 | Operations Center | AP-012, OPSC-REF-001, OPSC-CMD-001 | Nessuna | In development — Sprint AP-012.1 complete; runtime not authorized |
+| AP-012 | Operations Center | AP-012, OPSC-REF-001, OPSC-CMD-001, OPSC-ALM-001, OPSC-RUN-001, OPSC-RACI-001 | Nessuna | In development — Sprint AP-012.2 document baseline complete; runtime not authorized |
 | AP-013 | Scientific Image Repository | SIR-VIS-001 | Nessuna | Planned |
 | AP-014 | Scientific Catalog and Search | SIR-VIS-001 | Nessuna | Planned |
 | AP-015 | Scientific Knowledge Platform | SKL-VIS-001 | Nessuna | Planned |
@@ -83,6 +83,9 @@
 | ARB-011 | Independent Review of AP-011 | AP-011 | Completed | 97/100; C01…C07 open |
 | OPSC-REF-001 | Enterprise Operations Center Reference Architecture | AP-012 | Draft baseline — Sprint AP-012.1 | documentale; runtime validation non eseguita |
 | OPSC-CMD-001 | Command Authorization Model | AP-012 | Draft baseline — Sprint AP-012.1 | policy, role, freshness, safety e idempotency test non eseguiti |
+| OPSC-ALM-001 | Alarm & Incident Model | AP-012 | Draft baseline — Sprint AP-012.2 | taxonomy, lifecycle, correlation, escalation e audit definiti; runtime non validato |
+| OPSC-RUN-001 | Operational Runbook Standard | AP-012 | Draft baseline — Sprint AP-012.2 | metamodel, safety checkpoint, rollback, recovery e versioning definiti; drill non eseguiti |
+| OPSC-RACI-001 | Operations Responsibility Matrix | AP-012 | Draft baseline — Sprint AP-012.2 | ruoli, authority chain, RACI e segregation definiti; nomine aperte |
 
 ## 5. Data Product Candidate Register
 
@@ -113,7 +116,7 @@
 | AP-009 / INF-REF-001 / ARB-009 | Infrastructure | Approved with conditions; C01…C05 open |
 | AP-010 / SAF-REF-001 / SAF-CAT-001 / ARB-010 | Safety assurance | Approved with conditions; C01…C05 open |
 | AP-011 / ANA-REF-001 / ANA-PIPE-001 / ANA-KPI-001 / ANA-GOV-001 / ARB-011 | Enterprise Analytics Platform | Approved with conditions; C01…C07 open |
-| AP-012 / OPSC-REF-001 / OPSC-CMD-001 | Enterprise Operations Center | Sprint AP-012.1 documentale completato; AP-012.2 e ARB-012 aperti |
+| AP-012 / OPSC-REF-001 / OPSC-CMD-001 / OPSC-ALM-001 / OPSC-RUN-001 / OPSC-RACI-001 | Enterprise Operations Center | Sprint AP-012.1 e AP-012.2 completati a livello documentale; validation e ARB-012 aperti |
 
 ## 7. Open traceability gaps and conditions
 
@@ -124,7 +127,7 @@
 | TR-G10 | inventario safety non certificato | automation non commissionabile | ARB-010-C01/C05 |
 | TR-G12 | fault injection non provata | capability non promuovibili | ARB-010-C04 |
 | TR-G16 | command authorization non validata runtime | comandi non abilitabili | OPSC-CMD-001 test ed ARB-012 |
-| TR-G19 | SLI/SLO/routing/escalation non deliberati | operations non certificabili | AP-007 pilot / AP-012.2 |
+| TR-G19 | SLI/SLO/routing/escalation non deliberati | operations non certificabili | AP-007 pilot e AP-012 validation |
 | TR-G38 / ARB-011-C02 | ownership KPI DSAP non definita | dashboard ambigua | ANA-KPI-001 owner assignment |
 | TR-G79 / ARB-011-C01 | data product owner DP-001…DP-005 non nominati | qualità e lifecycle non attribuibili | enterprise data catalog |
 | TR-G80 / ARB-011-C03 | quality gate suite non eseguita | dati errati pubblicabili | ANA-PIPE-001 validation |
@@ -135,13 +138,15 @@
 | TR-G85 / ARB-011-C06 | volume, latency e capacity baseline assenti | saturation non prevedibile | AP-009/AP-011 measurement |
 | TR-G86 | model governance owner non nominato | AI non governata | ANA-GOV-001 |
 | TR-G87 | isolamento read-only/no-command non testato | rischio di bypass operativo | OPSC-REF-001 architecture and access test |
-| TR-G88 | alarm, runbook e RACI specialistici AP-012 assenti | package incompleto | AP-012.2: OPSC-ALM-001, OPSC-RUN-001, OPSC-RACI-001 |
+| TR-G88 | alarm, runbook e RACI specialistici AP-012 | baseline documentale completata, efficacia non provata | OPSC-ALM-001, OPSC-RUN-001, OPSC-RACI-001; validation e ARB-012 |
 | TR-G89 | idempotency, expiry e safety denial non provati | esecuzione duplicata o non governata | OPSC-CMD-001 validation scenarios |
-| TR-G90 | degraded, recovery ed emergency drill non eseguiti | comportamento in failure non certificato | AP-012.2 e validation campaign |
+| TR-G90 | degraded, recovery ed emergency drill non eseguiti | comportamento in failure non certificato | OPSC-RUN-001 validation campaign |
+| TR-G91 | alarm correlation, suppression ed escalation non collaudate | missed alarm o alarm noise | OPSC-ALM-001 scenario validation |
+| TR-G92 | ruoli nominativi, deleghe e four-eyes non attivati | responsabilità non operative | OPSC-RACI-001 assignment e access review |
 | ARB-009-C01…C05 | infrastructure evidence aperta | runtime resilience non certificata | remediation AP-009 |
 | ARB-010-C01…C05 | safety evidence aperta | runtime safety non certificata | remediation AP-010 |
 | ARB-011-C01…C07 | analytics evidence aperta | runtime analytics non certificato | remediation AP-011 |
 
 ## 8. Validazione del registro
 
-Il registro verifica la presenza repository di AP-012, OPSC-REF-001 e OPSC-CMD-001 e registra lo Sprint AP-012.1 come baseline documentale completata. AP-012 resta `In development`: non sono certificati command authorization, safety enforcement, idempotency, degraded mode, recovery o disponibilità runtime. OPSC-ALM-001, OPSC-RUN-001, OPSC-RACI-001, la validazione e ARB-012 restano necessari prima di qualsiasi avanzamento del gate.
+Il registro verifica la presenza repository degli artefatti AP-012 Sprint 1 e Sprint 2. AP-012 resta `In development`: non sono certificati command authorization, alarm handling, safety enforcement, idempotency, role assignment, degraded mode, recovery o disponibilità runtime. La review indipendente ARB-012 e la successiva campagna di validazione restano necessarie prima di qualsiasi avanzamento del gate.
