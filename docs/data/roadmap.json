@@ -4,7 +4,7 @@
   "authority": "AMP-002",
   "projectStatus": "Attivo",
   "currentPackage": "AP-012",
-  "nextMilestone": "Plan AP-012 Enterprise Operations Center Architecture using AP-009, AP-010 and AP-011 guard rails",
+  "nextMilestone": "Complete AP-012.2 with alarm, runbook and RACI artifacts, then conduct ARB-012",
   "target": "AP-015 / Scientific Knowledge Platform",
   "waves": [
     {
@@ -37,7 +37,7 @@
       "status": "active",
       "items": [
         {"id":"AP-011","title":"Enterprise Analytics Platform Architecture (DSAP)","status":"completed","review":"ARB-011","note":"Approved with conditions, 97/100. ARB-011-C01…C07 remain open; analytics runtime is not certified and has no command or safety authority"},
-        {"id":"AP-012","title":"Enterprise Operations Center Architecture (DSOC)","status":"active","note":"Architecture planning may commence. Read-only first; command paths require explicit authorization and safety controls"}
+        {"id":"AP-012","title":"Enterprise Operations Center Architecture (DSOC)","status":"active","note":"Sprint AP-012.1 completed: AP-012, OPSC-REF-001 and OPSC-CMD-001 published. Runtime command enablement remains prohibited pending AP-012.2, validation evidence and ARB-012"}
       ]
     },
     {
@@ -66,6 +66,6 @@
     {"id":"M-AP009","title":"AP-009 Enterprise Infrastructure Architecture","date":"2026-07-30","status":"completed","description":"Approved with conditions by ARB-009, 94/100; evidence runtime aperta.","image":null},
     {"id":"M-AP010","title":"AP-010 Enterprise Safety Assurance Architecture","date":"2026-07-30","status":"completed","description":"Approved with conditions by ARB-010, 97/100; safety evidence aperta.","image":null},
     {"id":"M-AP011","title":"AP-011 Enterprise Analytics Platform Architecture","date":"2026-07-30","status":"completed","description":"Approved with conditions by ARB-011, 97/100. Data catalog, KPI governance, quality gates, lineage, recovery, capacity e semantic governance restano aperti.","image":null},
-    {"id":"M-AP012","title":"AP-012 Enterprise Operations Center Architecture","date":"2026-07-30","status":"active","description":"Pianificazione autorizzata dopo la chiusura del gate documentale AP-011. DSOC deve adottare read-only first e rispettare safety authority locale.","image":null}
+    {"id":"M-AP012","title":"AP-012 Enterprise Operations Center Architecture","date":"2026-07-30","status":"active","description":"Sprint AP-012.1 completato a livello documentale con package, reference architecture e command authorization model. AP-012.2, validazione e ARB-012 restano aperti.","image":null}
   ]
 }
