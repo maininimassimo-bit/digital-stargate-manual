@@ -15,12 +15,15 @@ This record documents the verified absence of an authoritative implementation re
 
 ## 2. Verified repository scope
 
-The connected GitHub installation exposes only:
+The complete connected GitHub repository inventory currently exposes:
 
-- `maininimassimo-bit/digital-stargate-manual`;
-- `maininimassimo-bit/digital-stargate-architecture-office`.
+- `maininimassimo-bit/digital-stargate-manual` — architecture and documentation repository;
+- `maininimassimo-bit/digital-stargate-architecture-office` — Architecture Office governance repository;
+- `maininimassimo-bit/DigitalStarGate.Reporting` — PowerShell reporting module for N.I.N.A., PHD2 and CloudWatcher log collection, SHA-256 manifests, Git publication and second-level diagnostic cases.
 
-No accessible repository is currently identified as the authoritative DSOC implementation repository. No application component, configuration baseline, simulator version or immutable tested commit SHA can therefore be recorded.
+`DigitalStarGate.Reporting` is not identified as the DSOC command, approval, four-eyes or runtime implementation. Its published purpose does not provide the application component, authorization policy, simulator package, canonical fixtures or non-production configuration required by C04-W06.
+
+No accessible repository is currently identified as the authoritative DSOC implementation repository. No DSOC application component, configuration baseline, simulator version or immutable tested commit SHA can therefore be recorded.
 
 ## 3. Affected controls
 
