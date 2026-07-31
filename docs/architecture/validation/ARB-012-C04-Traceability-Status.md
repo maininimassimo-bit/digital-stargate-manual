@@ -8,7 +8,7 @@
 | Updated | 2026-07-31 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch | `validation/arb-012-c04-w06-immutable-baseline` |
-| Pull request | Pending |
+| Pull request | `#32` |
 
 ## Work-item traceability
 
