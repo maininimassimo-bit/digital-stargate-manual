@@ -4,7 +4,7 @@
   "authority": "AMP-002",
   "projectStatus": "Attivo",
   "currentPackage": "AP-013",
-  "nextMilestone": "Plan AP-013 Scientific Image Repository Architecture while completing ARB-012-C04 identity, environment and four-eyes validation evidence before any DSOC runtime enablement",
+  "nextMilestone": "Complete ARB-012-C04 W06 isolated validation-environment provisioning and account setup before four-eyes scenario execution or any DSOC runtime enablement",
   "target": "AP-015 / Scientific Knowledge Platform",
   "waves": [
     {
@@ -37,7 +37,7 @@
       "status": "completed",
       "items": [
         {"id":"AP-011","title":"Enterprise Analytics Platform Architecture (DSAP)","status":"completed","review":"ARB-011","note":"Approved with conditions, 97/100. ARB-011-C01…C07 remain open; analytics runtime is not certified and has no command or safety authority"},
-        {"id":"AP-012","title":"Enterprise Operations Center Architecture (DSOC)","status":"completed","review":"ARB-012","note":"Approved with conditions, 96/100. ARB-012-C04 closure preparation now includes sponsor nomination, role allocation, identity/training/access review, four-eyes validation plan and isolated validation-environment baseline. C04 remains blocked: W03 evidence, environment provisioning/acceptance and scenario execution are not complete; runtime command enablement remains prohibited"}
+        {"id":"AP-012","title":"Enterprise Operations Center Architecture (DSOC)","status":"completed","review":"ARB-012","note":"Approved with conditions, 96/100. ARB-012-C04 W06 provisioning preparation is in progress. No validation host, account, simulator, database, audit store or isolation control is yet accepted; W03 evidence and W07 scenario execution remain incomplete; runtime command enablement remains prohibited"}
       ]
     },
     {
@@ -66,8 +66,8 @@
     {"id":"M-AP009","title":"AP-009 Enterprise Infrastructure Architecture","date":"2026-07-30","status":"completed","description":"Approved with conditions by ARB-009, 94/100; evidence runtime aperta.","image":null},
     {"id":"M-AP010","title":"AP-010 Enterprise Safety Assurance Architecture","date":"2026-07-30","status":"completed","description":"Approved with conditions by ARB-010, 97/100; safety evidence aperta.","image":null},
     {"id":"M-AP011","title":"AP-011 Enterprise Analytics Platform Architecture","date":"2026-07-30","status":"completed","description":"Approved with conditions by ARB-011, 97/100. Data catalog, KPI governance, quality gates, lineage, recovery, capacity e semantic governance restano aperti.","image":null},
-    {"id":"M-AP012","title":"AP-012 Enterprise Operations Center Architecture","date":"2026-07-31","status":"completed","description":"Approved with conditions by ARB-012, 96/100. ARB-012-C04 closure preparation has progressed through W05, but identity evidence, environment acceptance and four-eyes execution remain open. DSOC runtime and physical-device control remain unauthorized.","image":null},
-    {"id":"M-ARB012-C04","title":"ARB-012-C04 Role Assignment and Four-Eyes Enforcement","date":"2026-07-31","status":"active","description":"W01–W05 preparation recorded. W03 evidence completion, isolated environment provisioning and acceptance, FE-01…FE-12 execution, independent audit closure and ARB re-review remain pending.","image":null},
+    {"id":"M-AP012","title":"AP-012 Enterprise Operations Center Architecture","date":"2026-07-31","status":"completed","description":"Approved with conditions by ARB-012, 96/100. ARB-012-C04 remains blocked and DSOC runtime and physical-device control remain unauthorized.","image":null},
+    {"id":"M-ARB012-C04","title":"ARB-012-C04 Role Assignment and Four-Eyes Enforcement","date":"2026-07-31","status":"active","description":"W01–W05 preparation is recorded and W06 provisioning preparation is in progress. PRV-001…PRV-012, ACC-001…ACC-002 and ENV-001…ENV-012 remain pending or not executed. W03 evidence, W07 scenarios, independent audit closure and ARB re-review remain pending.","image":null},
     {"id":"M-AP013","title":"AP-013 Scientific Image Repository Architecture","date":"2026-07-30","status":"planned","description":"Prossimo Architecture Package pianificato dopo la chiusura del gate documentale AP-012.","image":null}
   ]
 }
