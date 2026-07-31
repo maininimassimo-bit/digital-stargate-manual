@@ -4,11 +4,11 @@
 |---|---|
 | Condition | `ARB-012-C04` |
 | Scope | Role Assignment and Four-Eyes Enforcement |
-| Status | `Blocked — immutable DSOC baseline recorded; isolated provisioning pending` |
+| Status | `Blocked — ENV-011 campaign and host evidence procedure defined; isolated provisioning pending` |
 | Updated | 2026-07-31 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
-| Branch | `validation/arb-012-c04-w06-immutable-baseline` |
-| Pull request | `#32` |
+| Branch | `validation/arb-012-c04-w06-env011-host-evidence` |
+| Pull request | Pending |
 
 ## Work-item traceability
 
@@ -19,7 +19,7 @@
 | C04-W03 | `ARB-012-C04-Identity-Training-Access-Review.md` | Defined; evidence incomplete |
 | C04-W04 | `ARB-012-C04-Four-Eyes-Validation-Plan.md` | Defined; FE-01…FE-12 not executed |
 | C04-W05 | `ARB-012-C04-Validation-Environment-Baseline.md` | Baseline defined; environment not provisioned or accepted |
-| C04-W06 | `ARB-012-C04-Validation-Environment-Provisioning-Record.md` | Immutable DSOC source baseline recorded; PRV-005 baselined, PRV-006/009/010 source evidence identified, isolated environment and accounts still pending |
+| C04-W06 | `ARB-012-C04-Validation-Environment-Provisioning-Record.md`, `ARB-012-C04-W06-ENV011-Execution-Campaign.md`, and `ARB-012-C04-W06-ENV011-Host-Provisioning-Evidence-Procedure.md` | Immutable DSOC source baseline recorded; execution campaign and operator-ready host evidence procedure defined; isolated environment, accounts and evidence remain pending |
 | C04-W07 | Four-eyes scenario execution and evidence | Blocked by W03 and W06 acceptance |
 | C04-W08 | Validation report and independent ARB re-review | Not started |
 
@@ -35,6 +35,7 @@
 | Runtime | `.NET 8` |
 | Configuration mode | simulator-only |
 | Fixture SHA-256 | `d4071db1a4b534d8cfb0e8dee9f931665d28307a26b000e7c3ec61811f091c94` |
+| Latest documentation baseline | `6e43a7597594b44094c2231a285705ae5e9d20e5` |
 
 ## Evidence status
 
@@ -44,15 +45,17 @@
 | PRV-006 — Non-production configuration | Partially satisfied: simulator-only source baseline recorded; deployed configuration checksum pending |
 | PRV-009 — Simulation adapters | Source baseline identified; deployment evidence pending |
 | PRV-010 — Canonical fixtures | Source manifest and fixture checksum identified; load verification pending |
-| ENV-011 — Immutable tested commit and configuration | Ready for execution; application SHA recorded, environment-specific configuration checksum pending |
+| ENV-011 — Immutable tested commit and configuration | Ready for execution; campaign and host evidence procedure defined; E-ENV011-01…06 remain Not Executed |
 
 ## Governance disposition
 
-- The authoritative DSOC implementation repository and immutable source commit are now recorded.
+- The authoritative DSOC implementation repository and immutable source commit are recorded.
+- The ENV-011 execution campaign and operator-ready host provisioning/evidence procedure are defined.
 - The immutable baseline is simulator-only and contains no authorized production route, credential or physical-device adapter.
 - CI build and unit tests succeeded for the merged application baseline.
 - Identity, authentication, training, least-privilege and revocation evidence remains incomplete.
 - No isolated validation host, account, database, audit store, network-deny control or accepted reset baseline is yet recorded.
+- All ENV-011 evidence items remain `Not Executed`.
 - All four-eyes validation scenarios remain `Not Executed`.
 - No positive C4 validation is possible without a third independent actor.
 - The provisional Auditor is not independent.
@@ -60,7 +63,7 @@
 
 ## Published-roadmap projection
 
-`docs/data/roadmap.json` records `M-ARB012-C04` as active. It identifies the immutable DSOC baseline as recorded and isolated environment provisioning as the next required step. W03 evidence, the remaining PRV and ENV evidence, W07 scenarios, independent audit closure and ARB re-review remain pending.
+`docs/data/roadmap.json` records `M-ARB012-C04` as active. Isolated environment provisioning and evidence collection remain the next required execution step. W03 evidence, the remaining PRV and ENV evidence, W07 scenarios, independent audit closure and ARB re-review remain pending.
 
 ## Exit criteria
 
