@@ -6,16 +6,16 @@
 | Work item | C04-W06 — Validation Environment Provisioning and Account Setup |
 | Package | AP-012 — Enterprise Operations Center Architecture |
 | Condition | ARB-012-C04 — Role Assignment and Four-Eyes Enforcement |
-| Version | 1.0 |
+| Version | 1.1 |
 | Date | 2026-07-31 |
-| Status | Provisioning record established; environment and accounts not yet created |
+| Status | Immutable DSOC implementation baseline recorded; isolated environment and accounts not yet provisioned |
 | Runtime effect | None |
 
 ## 1. Purpose
 
 This record governs the controlled provisioning of the isolated environment defined by `ARB-012-C04-Validation-Environment-Baseline.md` and the creation of the two distinct non-production accounts required for later four-eyes validation.
 
-It does not assert that any host, container, database, identity account, simulator, route-control rule or evidence store has already been provisioned. All execution fields remain pending until supported by verifiable evidence.
+The authoritative DSOC implementation repository and immutable application baseline are now identified. This record does not assert that any validation host, container, database, identity account, audit store, isolation rule or runtime environment has already been provisioned. Execution fields remain pending unless supported by verifiable evidence.
 
 ## 2. Preconditions
 
@@ -47,7 +47,27 @@ flowchart LR
 
 The denied path to operational networks and devices must be enforced by configuration and network controls, not only by operator intent.
 
-## 4. Provisioning register
+## 4. Immutable implementation baseline
+
+| Baseline field | Recorded value |
+|---|---|
+| Repository | `maininimassimo-bit/DigitalStarGate.Control` |
+| Default branch | `main` |
+| Immutable merge commit | `37bbd581f37b62243f012cb7a72057207ab10ca6` |
+| Source pull request | `DigitalStarGate.Control#1` |
+| CI workflow | `DSOC Bootstrap CI` run `#2` |
+| CI result | `success` |
+| Component | `DigitalStarGate.Control.Domain` fail-safe safety policy and tests |
+| Runtime target | `.NET 8` |
+| Configuration mode | simulator-only; no production endpoint fallback |
+| Simulator manifest | `validation/simulators/manifest.json` at the immutable commit |
+| Fixture manifest | `validation/fixtures/manifest.json` at the immutable commit |
+| Canonical fixture | `validation/fixtures/unsafe-weather.json` |
+| Fixture SHA-256 | `d4071db1a4b534d8cfb0e8dee9f931665d28307a26b000e7c3ec61811f091c94` |
+
+This baseline authorizes only isolated provisioning preparation and deterministic simulator validation. It does not authorize deployment to an operational host, physical-device adapters, production routes, credentials, positive C4, break-glass, self-approval or local-interlock bypass.
+
+## 5. Provisioning register
 
 | Item ID | Item | Required recorded value | Evidence reference | Owner | Reviewer | Status |
 |---|---|---|---|---|---|---|
@@ -55,16 +75,16 @@ The denied path to operational networks and devices must be enforced by configur
 | PRV-002 | Operating system | Product, edition and exact version | Pending | Pending | Pending | Not provisioned |
 | PRV-003 | Isolation mechanism | VM, container network or dedicated host boundary | Pending | Pending | Pending | Not provisioned |
 | PRV-004 | Network deny controls | Rules denying operational subnets, VPN routes and device endpoints | Pending | Pending | Pending | Not configured |
-| PRV-005 | Validation application | Repository, component and immutable commit SHA | Pending | Pending | Pending | Not baselined |
-| PRV-006 | Non-production configuration | Configuration identifier and checksum | Pending | Pending | Pending | Not created |
+| PRV-005 | Validation application | Repository, component and immutable commit SHA | `DigitalStarGate.Control` `main` at `37bbd581f37b62243f012cb7a72057207ab10ca6` | Massimo Mainini | Independent review pending | Baselined |
+| PRV-006 | Non-production configuration | Configuration identifier and checksum | Simulator-only baseline embedded in immutable commit; environment-specific checksum pending provisioning | Massimo Mainini | Independent review pending | Baseline identified; deployment evidence pending |
 | PRV-007 | Test database | Engine, version and instance identifier | Pending | Pending | Pending | Not provisioned |
 | PRV-008 | Audit evidence store | Store identifier, append-only control and retention setting | Pending | Pending | Pending | Not provisioned |
-| PRV-009 | Simulation adapters | Package or commit version | Pending | Pending | Pending | Not provisioned |
-| PRV-010 | Canonical fixtures | Fixture bundle version and checksum | Pending | Pending | Pending | Not loaded |
+| PRV-009 | Simulation adapters | Package or commit version | `validation/simulators/manifest.json` at `37bbd581f37b62243f012cb7a72057207ab10ca6` | Massimo Mainini | Independent review pending | Source baseline identified; not deployed |
+| PRV-010 | Canonical fixtures | Fixture bundle version and checksum | `validation/fixtures/manifest.json`; fixture SHA-256 `d4071db1a4b534d8cfb0e8dee9f931665d28307a26b000e7c3ec61811f091c94` | Massimo Mainini | Independent review pending | Source baseline identified; not loaded |
 | PRV-011 | Reset method | Snapshot, seed or rebuild procedure | Pending | Pending | Pending | Not verified |
 | PRV-012 | Time source | Time synchronization source and timezone | Pending | Pending | Pending | Not verified |
 
-## 5. Account setup register
+## 6. Account setup register
 
 Only distinct, named, non-production accounts are permitted.
 
@@ -85,7 +105,7 @@ Mandatory controls:
 - immediate revocation effect before later authorization checks;
 - credentials excluded from repository evidence.
 
-## 6. Role-to-permission mapping
+## 7. Role-to-permission mapping
 
 | Permission | Massimo test account | Leonardo test account | Notes |
 |---|---|---|---|
@@ -101,23 +121,25 @@ Mandatory controls:
 | Production network, credentials or devices | Deny | Deny | Mandatory isolation |
 | Modify immutable evidence | Deny | Deny | Evidence administration separated where available |
 
-## 7. Provisioning procedure
+## 8. Provisioning procedure
 
 1. Record the target host and operator.
 2. Install or initialize the isolated execution context.
 3. Apply network deny controls before application deployment.
-4. verify that operational subnets, VPN routes and device endpoints are unreachable.
-5. Deploy the exact immutable application commit and configuration.
-6. Provision separate database and audit stores.
-7. Deploy only deterministic simulation adapters.
-8. Create ACC-001 and ACC-002 with deny-by-default privileges.
-9. Capture role-to-permission exports without secrets.
-10. Configure audit events and correlation identifiers.
-11. Create the initial snapshot or reset baseline.
-12. Execute ENV-001 through ENV-012 and record results.
-13. Freeze the accepted baseline before W07 begins.
+4. Verify that operational subnets, VPN routes and device endpoints are unreachable.
+5. Deploy exact commit `37bbd581f37b62243f012cb7a72057207ab10ca6` from `maininimassimo-bit/DigitalStarGate.Control`.
+6. Generate and record the environment-specific non-production configuration checksum.
+7. Provision separate database and audit stores.
+8. Deploy only the simulation adapters declared by the immutable simulator manifest.
+9. Verify the canonical fixture checksum before loading fixtures.
+10. Create ACC-001 and ACC-002 with deny-by-default privileges.
+11. Capture role-to-permission exports without secrets.
+12. Configure audit events and correlation identifiers.
+13. Create the initial snapshot or reset baseline.
+14. Execute ENV-001 through ENV-012 and record results.
+15. Freeze the accepted environment baseline before W07 begins.
 
-## 8. Evidence package structure
+## 9. Evidence package structure
 
 The W06 evidence package shall contain:
 
@@ -137,24 +159,24 @@ The W06 evidence package shall contain:
 
 No passwords, tokens, private keys, certificates, recovery codes, identity-document images or production endpoint secrets may be committed.
 
-## 9. Acceptance checklist
+## 10. Acceptance checklist
 
 | Check ID | Acceptance criterion | Evidence | Result |
 |---|---|---|---|
 | ENV-001 | Operational subnets and VPN routes are unreachable | Pending | Not executed |
 | ENV-002 | No production credential or secret is present | Pending | Not executed |
-| ENV-003 | All device adapters resolve only to simulators | Pending | Not executed |
+| ENV-003 | All device adapters resolve only to simulators | Immutable simulator source baseline identified; deployment evidence pending | Ready for execution |
 | ENV-004 | Two distinct authenticated accounts exist | Pending | Not executed |
 | ENV-005 | Role-to-permission mapping matches C04-W03 | Pending | Not executed |
-| ENV-006 | Self-approval is denied by policy | Pending | Not executed |
+| ENV-006 | Self-approval is denied by policy | Domain fail-safe policy and unit-test baseline identified; environment evidence pending | Ready for execution |
 | ENV-007 | Revocation is enforced before execution | Pending | Not executed |
 | ENV-008 | Test database and audit store are non-production | Pending | Not executed |
 | ENV-009 | Initial state can be reset deterministically | Pending | Not executed |
 | ENV-010 | Logs, correlation IDs and evidence export are available | Pending | Not executed |
-| ENV-011 | Tested commit and configuration are immutable and recorded | Pending | Not executed |
-| ENV-012 | C4, break-glass and physical control remain unavailable | Pending | Not executed |
+| ENV-011 | Tested commit and configuration are immutable and recorded | Application commit recorded; environment configuration checksum pending | Ready for execution |
+| ENV-012 | C4, break-glass and physical control remain unavailable | Source baseline prohibits physical adapters and production endpoints; environment evidence pending | Ready for execution |
 
-## 10. Stop conditions
+## 11. Stop conditions
 
 Provisioning or validation must stop immediately if:
 
@@ -168,16 +190,18 @@ Provisioning or validation must stop immediately if:
 - the tested commit or configuration cannot be identified;
 - simulator configuration can fall back to production endpoints.
 
-## 11. Traceability
+## 12. Traceability
 
 | Source | Relationship |
 |---|---|
+| `maininimassimo-bit/DigitalStarGate.Control` commit `37bbd581f37b62243f012cb7a72057207ab10ca6` | Authoritative immutable DSOC source baseline for W06 provisioning |
+| `ARB-012-C04-W06-DSOC-Implementation-Repository-Bootstrap-Specification.md` | Defines repository bootstrap and simulator-only constraints |
 | `ARB-012-C04-Identity-Training-Access-Review.md` | Defines identity, training, least-privilege and revocation prerequisites |
 | `ARB-012-C04-Validation-Environment-Baseline.md` | Defines the mandatory environment baseline and ENV-001 through ENV-012 |
 | `ARB-012-C04-Four-Eyes-Validation-Plan.md` | Defines W07 scenarios that remain blocked until this environment is accepted |
 | `ARB-012-C04-Traceability-Status.md` | Records package-level status and remaining blockers |
 
-## 12. Work-item exit criteria
+## 13. Work-item exit criteria
 
 C04-W06 may be marked complete only when:
 
@@ -190,8 +214,10 @@ C04-W06 may be marked complete only when:
 - an identified reviewer accepts the environment;
 - no production access or physical-device path exists.
 
-## 13. Current disposition
+## 14. Current disposition
 
-**C04-W06: IN PROGRESS — provisioning and account-setup record established; execution evidence remains pending.**
+**C04-W06: IN PROGRESS — immutable DSOC source baseline recorded; isolated provisioning and account setup remain pending.**
+
+`ENV-011` is **Ready for Execution**, not passed: the application commit is immutable and recorded, while the environment-specific configuration checksum still requires provisioning evidence.
 
 C04-W07 remains blocked. `ARB-012-C04` remains `Blocked`. Runtime activation, physical-device control, positive C4, break-glass, self-approval and local-interlock bypass remain prohibited.
