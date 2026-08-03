@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0",
-  "updatedAt": "2026-07-31",
+  "updatedAt": "2026-08-03",
   "authority": "AMP-002",
   "projectStatus": "Attivo",
   "currentPackage": "AP-013",
-  "nextMilestone": "Execute the merged ARB-012-C04 W06 ENV-011 campaign and host provisioning evidence procedure on an isolated non-production host, collect and independently review E-ENV011-01 through E-ENV011-06, then continue ENV-001 through ENV-012 before four-eyes scenarios or any DSOC runtime enablement",
+  "nextMilestone": "Complete E-ENV011-01 host provisioning identification and E-ENV011-06 independent review, then execute and accept the remaining ENV-001 through ENV-012 controls before four-eyes scenarios or any DSOC runtime enablement",
   "target": "AP-015 / Scientific Knowledge Platform",
   "waves": [
     {
@@ -37,7 +37,7 @@
       "status": "completed",
       "items": [
         {"id":"AP-011","title":"Enterprise Analytics Platform Architecture (DSAP)","status":"completed","review":"ARB-011","note":"Approved with conditions, 97/100. ARB-011-C01…C07 remain open; analytics runtime is not certified and has no command or safety authority"},
-        {"id":"AP-012","title":"Enterprise Operations Center Architecture (DSOC)","status":"completed","review":"ARB-012","note":"Approved with conditions, 96/100. ARB-012-C04 W06 records immutable DigitalStarGate.Control commit 37bbd581f37b62243f012cb7a72057207ab10ca6 with successful CI and simulator-only source evidence. The ENV-011 Execution Campaign is merged at 6e43a7597594b44094c2231a285705ae5e9d20e5 and the Host Provisioning Evidence Procedure is merged at 1966d831c0232dcb27106baa59ca21932d3daad0. ENV-011 remains READY FOR EXECUTION and is not executed or passed; no isolated validation host, account, database, audit store or network-deny control is accepted; W03 evidence, ENV execution and W07 scenarios remain incomplete; runtime command enablement remains prohibited"}
+        {"id":"AP-012","title":"Enterprise Operations Center Architecture (DSOC)","status":"completed","review":"ARB-012","note":"Approved with conditions, 96/100. ENV-011 was technically executed on isolated Hyper-V host dsg-arb012-c04-val against immutable DigitalStarGate.Control commit 37bbd581f37b62243f012cb7a72057207ab10ca6. Four tests passed online and offline; evidence E-ENV011-02 through E-ENV011-05 is merged at 7363e1b9b1bfb84277c378dbed52348c9716c70e. Formal acceptance remains pending E-ENV011-01, E-ENV011-06 and the remaining PRV/ENV controls. W03 and W07 remain incomplete; runtime command enablement remains prohibited"}
       ]
     },
     {
@@ -67,7 +67,7 @@
     {"id":"M-AP010","title":"AP-010 Enterprise Safety Assurance Architecture","date":"2026-07-30","status":"completed","description":"Approved with conditions by ARB-010, 97/100; safety evidence aperta.","image":null},
     {"id":"M-AP011","title":"AP-011 Enterprise Analytics Platform Architecture","date":"2026-07-30","status":"completed","description":"Approved with conditions by ARB-011, 97/100. Data catalog, KPI governance, quality gates, lineage, recovery, capacity e semantic governance restano aperti.","image":null},
     {"id":"M-AP012","title":"AP-012 Enterprise Operations Center Architecture","date":"2026-07-31","status":"completed","description":"Approved with conditions by ARB-012, 96/100. ARB-012-C04 remains blocked and DSOC runtime and physical-device control remain unauthorized.","image":null},
-    {"id":"M-ARB012-C04","title":"ARB-012-C04 Role Assignment and Four-Eyes Enforcement","date":"2026-07-31","status":"active","description":"W01–W05 preparation is recorded. W06 records immutable DigitalStarGate.Control commit 37bbd581f37b62243f012cb7a72057207ab10ca6, successful CI, simulator manifest and canonical fixture checksum. The ENV-011 Execution Campaign and Host Provisioning Evidence Procedure are merged and define controlled collection of E-ENV011-01 through E-ENV011-06. ENV-011 remains READY FOR EXECUTION; no execution or pass is claimed. Isolated environment provisioning, accounts, deployed configuration checksum, ENV-001…ENV-012, W03 evidence, W07 scenarios, independent audit closure and ARB re-review remain pending.","image":null},
+    {"id":"M-ARB012-C04","title":"ARB-012-C04 Role Assignment and Four-Eyes Enforcement","date":"2026-08-03","status":"active","description":"ENV-011 technical execution completed with positive result on isolated Hyper-V host: immutable commit verified, 4/4 tests passed online and offline, simulator-only evidence E-ENV011-02 through E-ENV011-05 merged. Formal acceptance remains pending E-ENV011-01, E-ENV011-06, remaining PRV/ENV controls, W03 evidence, W07 scenarios, independent audit and ARB re-review. Runtime command enablement and physical-device control remain prohibited.","image":null},
     {"id":"M-AP013","title":"AP-013 Scientific Image Repository Architecture","date":"2026-07-30","status":"planned","description":"Prossimo Architecture Package pianificato dopo la chiusura del gate documentale AP-012.","image":null}
   ]
 }
