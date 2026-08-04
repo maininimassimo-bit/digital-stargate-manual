@@ -61,12 +61,12 @@
 
   const updateControls = (theme) => {
     const nextTheme = theme === 'dark' ? 'light' : 'dark';
-    const next = THEMES[theme];
+    const state = THEMES[theme];
 
     document.querySelectorAll('[data-dsg-theme]').forEach((control) => {
-      control.textContent = `${next.icon} ${next.action.replace('Attiva ', '')}`;
-      control.setAttribute('aria-label', next.action);
-      control.setAttribute('title', next.action);
+      control.textContent = `${state.icon} ${state.action.replace('Attiva ', '')}`;
+      control.setAttribute('aria-label', state.action);
+      control.setAttribute('title', state.action);
       control.setAttribute('aria-pressed', String(theme === 'dark'));
       control.dataset.dsgThemeCurrent = theme;
       control.dataset.dsgThemeNext = nextTheme;
@@ -89,7 +89,6 @@
       paletteInput.dispatchEvent(new Event('change', { bubbles: true }));
     }
 
-    // Fallback and immediate synchronization for Material and custom components.
     document.body?.setAttribute('data-md-color-scheme', THEMES[theme].scheme);
     document.documentElement.setAttribute('data-dsg-theme', theme);
 
@@ -111,7 +110,9 @@
   const synchronizeFromMaterial = () => {
     const materialTheme = detectMaterialTheme();
     if (!materialTheme || materialTheme === currentTheme) return;
+
     currentTheme = materialTheme;
+    savePreference(materialTheme);
     updateControls(materialTheme);
     dispatchThemeChange(materialTheme, 'material-palette');
   };
@@ -140,6 +141,11 @@
     });
   };
 
-  document.addEventListener('DOMContentLoaded', initialize);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialize, { once: true });
+  } else {
+    initialize();
+  }
+
   if (typeof document$ !== 'undefined') document$.subscribe(initialize);
 })();
