@@ -1,15 +1,5 @@
 (() => {
-  const root = document.querySelector('.dsg-roadmap-app');
-  if (!root) return;
-
-  const source = root.dataset.roadmapSource;
-  const wavesEl = root.querySelector('[data-roadmap-waves]');
-  const summaryEl = root.querySelector('[data-roadmap-summary]');
-  const overviewEl = root.querySelector('[data-roadmap-overview]');
-  const galleryEl = root.querySelector('[data-roadmap-gallery]');
-  const progressEl = root.querySelector('[data-roadmap-progress]');
-  const currentEl = root.querySelector('[data-roadmap-current]');
-  const nextEl = root.querySelector('[data-roadmap-next]');
+  'use strict';
 
   const labels = { completed: 'Completato', active: 'In corso', planned: 'Pianificato' };
   const escapeHtml = value => String(value ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
@@ -26,7 +16,7 @@
     </article>`;
   }
 
-  function renderOverview({ completed, active, planned, total, percent }) {
+  function renderOverview(overviewEl, { completed, active, planned, total, percent }) {
     const remaining = active + planned;
     const activeStart = percent;
     const activeEnd = total ? Math.round(((completed + active) / total) * 100) : 0;
@@ -46,7 +36,7 @@
       </div>`;
   }
 
-  function renderCurrent(data, items) {
+  function renderCurrent(currentEl, data, items) {
     if (!currentEl) return;
     const current = items.find(item => item.id === data.currentPackage) || items.find(item => item.status === 'active');
     if (!current) {
@@ -54,18 +44,12 @@
       return;
     }
     currentEl.innerHTML = `
-      <div>
-        <span>PACKAGE CORRENTE</span>
-        <strong>${escapeHtml(current.id)}</strong>
-      </div>
-      <div>
-        <h2>${escapeHtml(current.title)}</h2>
-        <p>${escapeHtml(current.note || 'Stato derivato dal registro versionato.')}</p>
-      </div>
+      <div><span>PACKAGE CORRENTE</span><strong>${escapeHtml(current.id)}</strong></div>
+      <div><h2>${escapeHtml(current.title)}</h2><p>${escapeHtml(current.note || 'Stato derivato dal registro versionato.')}</p></div>
       <div class="dsg-roadmap-current__status is-${escapeHtml(current.status)}">${labels[current.status] || escapeHtml(current.status)}</div>`;
   }
 
-  function renderNext(data, items) {
+  function renderNext(nextEl, data, items) {
     if (!nextEl) return;
     const candidates = items.filter(item => item.status !== 'completed').slice(0, 4);
     const cards = candidates.map(item => `
@@ -82,50 +66,83 @@
       </article>`;
   }
 
-  function render(data) {
-    const items = data.waves.flatMap(w => w.items);
-    const completed = items.filter(i => i.status === 'completed').length;
-    const active = items.filter(i => i.status === 'active').length;
-    const planned = items.filter(i => i.status === 'planned').length;
-    const percent = items.length ? Math.round((completed / items.length) * 100) : 0;
+  const initialize = async ({ events } = {}) => {
+    const root = document.querySelector('.dsg-roadmap-app');
+    if (!root || root.dataset.dsgRoadmapReady === 'true') return;
+    root.dataset.dsgRoadmapReady = 'true';
 
-    summaryEl.innerHTML = `
-      <div><span>Stato progetto</span><strong>${escapeHtml(data.projectStatus)}</strong></div>
-      <div><span>Package corrente</span><strong>${escapeHtml(data.currentPackage)}</strong></div>
-      <div><span>Prossima milestone</span><strong>${escapeHtml(data.nextMilestone)}</strong></div>
-      <div><span>Target</span><strong>${escapeHtml(data.target)}</strong></div>`;
+    const source = root.dataset.roadmapSource;
+    const wavesEl = root.querySelector('[data-roadmap-waves]');
+    const summaryEl = root.querySelector('[data-roadmap-summary]');
+    const overviewEl = root.querySelector('[data-roadmap-overview]');
+    const galleryEl = root.querySelector('[data-roadmap-gallery]');
+    const progressEl = root.querySelector('[data-roadmap-progress]');
+    const currentEl = root.querySelector('[data-roadmap-current]');
+    const nextEl = root.querySelector('[data-roadmap-next]');
 
-    renderCurrent(data, items);
-    renderOverview({ completed, active, planned, total: items.length, percent });
-    renderNext(data, items);
+    const render = data => {
+      const items = data.waves.flatMap(wave => wave.items);
+      const completed = items.filter(item => item.status === 'completed').length;
+      const active = items.filter(item => item.status === 'active').length;
+      const planned = items.filter(item => item.status === 'planned').length;
+      const percent = items.length ? Math.round((completed / items.length) * 100) : 0;
 
-    progressEl.style.width = `${percent}%`;
-    progressEl.setAttribute('aria-valuenow', String(percent));
-    progressEl.title = `${completed} completati, ${active} in corso, ${planned} pianificati`;
+      summaryEl.innerHTML = `
+        <div><span>Stato progetto</span><strong>${escapeHtml(data.projectStatus)}</strong></div>
+        <div><span>Package corrente</span><strong>${escapeHtml(data.currentPackage)}</strong></div>
+        <div><span>Prossima milestone</span><strong>${escapeHtml(data.nextMilestone)}</strong></div>
+        <div><span>Target</span><strong>${escapeHtml(data.target)}</strong></div>`;
 
-    wavesEl.innerHTML = data.waves.map(wave => `
-      <section class="dsg-roadmap-wave is-${escapeHtml(wave.status)}">
-        <header><span>${escapeHtml(wave.id.toUpperCase())}</span><h2>${escapeHtml(wave.title)}</h2></header>
-        <div class="dsg-roadmap-grid">${wave.items.map(itemMarkup).join('')}</div>
-      </section>`).join('');
+      renderCurrent(currentEl, data, items);
+      renderOverview(overviewEl, { completed, active, planned, total: items.length, percent });
+      renderNext(nextEl, data, items);
 
-    galleryEl.innerHTML = data.milestones.map(m => `
-      <article class="dsg-roadmap-milestone is-${escapeHtml(m.status)}">
-        ${m.image ? `<a href="${escapeHtml(m.image)}"><img src="${escapeHtml(m.image)}" alt="Roadmap della milestone ${escapeHtml(m.title)}" loading="lazy"></a>` : `<div class="dsg-roadmap-milestone__placeholder" aria-hidden="true">${escapeHtml(m.id)}</div>`}
-        <div><span>${m.date ? escapeHtml(m.date) : labels[m.status]}</span><h3>${escapeHtml(m.title)}</h3><p>${escapeHtml(m.description)}</p></div>
-      </article>`).join('');
-  }
+      progressEl.style.width = `${percent}%`;
+      progressEl.setAttribute('aria-valuenow', String(percent));
+      progressEl.title = `${completed} completati, ${active} in corso, ${planned} pianificati`;
 
-  fetch(source, { cache: 'no-store' })
-    .then(response => {
+      wavesEl.innerHTML = data.waves.map(wave => `
+        <section class="dsg-roadmap-wave is-${escapeHtml(wave.status)}">
+          <header><span>${escapeHtml(wave.id.toUpperCase())}</span><h2>${escapeHtml(wave.title)}</h2></header>
+          <div class="dsg-roadmap-grid">${wave.items.map(itemMarkup).join('')}</div>
+        </section>`).join('');
+
+      galleryEl.innerHTML = data.milestones.map(milestone => `
+        <article class="dsg-roadmap-milestone is-${escapeHtml(milestone.status)}">
+          ${milestone.image ? `<a href="${escapeHtml(milestone.image)}"><img src="${escapeHtml(milestone.image)}" alt="Roadmap della milestone ${escapeHtml(milestone.title)}" loading="lazy"></a>` : `<div class="dsg-roadmap-milestone__placeholder" aria-hidden="true">${escapeHtml(milestone.id)}</div>`}
+          <div><span>${milestone.date ? escapeHtml(milestone.date) : labels[milestone.status]}</span><h3>${escapeHtml(milestone.title)}</h3><p>${escapeHtml(milestone.description)}</p></div>
+        </article>`).join('');
+    };
+
+    try {
+      const response = await fetch(source, { cache: 'no-store' });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      return response.json();
-    })
-    .then(render)
-    .catch(error => {
+      render(await response.json());
+      events?.emit('roadmap-ready', { source });
+    } catch (error) {
+      root.dataset.dsgRoadmapReady = 'error';
       wavesEl.innerHTML = `<div class="admonition warning"><p class="admonition-title">Roadmap non disponibile</p><p>Impossibile caricare il registro dinamico: ${escapeHtml(error.message)}</p></div>`;
       if (overviewEl) overviewEl.innerHTML = '<p>Riepilogo grafico non disponibile.</p>';
       if (currentEl) currentEl.innerHTML = '<p>Package corrente non disponibile.</p>';
       if (nextEl) nextEl.innerHTML = '<p>Prossime attività non disponibili.</p>';
+      events?.emit('roadmap-error', { source, error });
+    }
+  };
+
+  if (window.DSG?.components) {
+    window.DSG.components.register({
+      name: 'roadmap-center',
+      order: 70,
+      initialize
     });
+    return;
+  }
+
+  const fallback = () => initialize();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fallback, { once: true });
+  } else {
+    fallback();
+  }
+  if (window.document$?.subscribe) window.document$.subscribe(fallback);
 })();
