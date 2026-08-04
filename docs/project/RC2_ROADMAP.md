@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-RC2-RDM-001 |
-| Versione | 1.0 |
+| Versione | 1.1 |
 | Stato | Active |
 | Data avvio | 05/08/2026 |
 | Baseline di partenza | `docs/architecture/baselines/RC1_BASELINE.md` |
@@ -26,9 +26,9 @@ Portare il Digital StarGate Enterprise Portal dalla baseline RC1 a una piattafor
 
 | WP | Titolo | Stato | Outcome |
 |---|---|---|---|
-| WP-01 | Enterprise Foundation Framework | In Progress | Component Registry, lifecycle comune, Event Bus e bootstrap centralizzato |
-| WP-02 | Scientific Platform 2.0 | Planned | SDE v2 con cache, eventi, lazy loading, metriche e contratti |
-| WP-03 | Enterprise Theme Framework | Planned | modalità System, Theme API e branding governato |
+| WP-01 | Enterprise Foundation Framework | Completed | Component Registry, lifecycle comune, Event Bus e bootstrap centralizzato |
+| WP-02 | Scientific Platform 2.0 | Completed | SDE 2.1 con cache, eventi, metriche, Session Store indicizzato e componenti scientifici migrati |
+| WP-03 | Enterprise Theme Framework | In Progress | modalità System, Theme API e branding governato |
 | WP-04 | Enterprise Search Center | Planned | ricerca federata e filtri enterprise |
 | WP-05 | Operations Dashboard | Planned | repository health, CI/CD e KPI piattaforma |
 | WP-06 | Enterprise Plugin SDK | Planned | estensioni modulari senza modifica del core |
@@ -36,9 +36,9 @@ Portare il Digital StarGate Enterprise Portal dalla baseline RC1 a una piattafor
 ## 4. Sequenza
 
 ```text
-WP-01 Foundation
-  -> WP-02 Scientific Platform 2.0
-  -> WP-03 Theme Framework
+WP-01 Foundation [Completed]
+  -> WP-02 Scientific Platform 2.0 [Completed]
+  -> WP-03 Theme Framework [In Progress]
   -> WP-04 Search Center
   -> WP-05 Operations Dashboard
   -> WP-06 Plugin SDK
