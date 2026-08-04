@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0",
+  "mode": "DRY_RUN",
+  "source": {
+    "sourceId": "SRC-EAGLE30154-NINA-001",
+    "host": "EAGLE30154",
+    "rootPath": "\\\\EAGLE30154\\NINA-Images",
+    "allowedExtensions": [".xisf", ".fits", ".fit", ".fts"],
+    "minimumStableMinutes": 10
+  },
+  "destination": {
+    "storageVolumeId": "DSG-STORAGE-ACTIVE-F",
+    "rootPath": "F:\\Astrofotografia",
+    "expectedVolumeLabel": "Elements",
+    "useDateSubfolders": true
+  },
+  "evidence": {
+    "outputRoot": "C:\\Users\\MassimoMainini\\DSG-Inventory\\SessionImporter"
+  },
+  "window": {
+    "notBeforeLocal": "07:35",
+    "doNotStartAfterLocal": "08:10",
+    "mustFinishBeforeLocal": "08:25"
+  },
+  "parser": {
+    "version": "0.1.0",
+    "knownTelescopes": [
+      "Skywatcher quattro 200p",
+      "OptiCo 60mm f-15",
+      "Celestron C8 XLT"
+    ]
+  },
+  "safety": {
+    "sourceCleanupAuthorized": false,
+    "allowTransferMode": false,
+    "allowDestinationWrites": false
+  }
+}
