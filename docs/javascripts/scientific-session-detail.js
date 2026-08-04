@@ -2,6 +2,12 @@
   const root = document.querySelector('[data-session-detail]');
   if (!root) return;
 
+  const engine = window.DSGScientificDataEngine;
+  if (!engine) {
+    console.error('Scientific Data Engine is not available.');
+    return;
+  }
+
   const source = root.dataset.sessionCatalog;
   const params = new URLSearchParams(window.location.search);
   const sessionId = params.get('sessionId');
@@ -35,6 +41,41 @@
       <small>${esc(value)}</small>
     </article>`;
 
+  const renderGraph = (session, graphModel) => {
+    graph.innerHTML = `
+      <div class="dsg-graph-row">
+        ${node(graphModel.target.type, graphModel.target.label, 'Scientific object', 'is-target')}
+      </div>
+      <div class="dsg-graph-connector">↓ observed in</div>
+      <div class="dsg-graph-row">
+        ${node(graphModel.session.type, graphModel.session.label, displayDate(session.observationDate), 'is-session')}
+      </div>
+      <div class="dsg-graph-connector">↓ acquired with</div>
+      <div class="dsg-graph-row dsg-graph-row--triple">
+        ${node(graphModel.equipment[0].type, graphModel.equipment[0].label, session.configurationId)}
+        ${node(graphModel.equipment[1].type, graphModel.equipment[1].label, `${session.binning} · gain ${session.gain}`)}
+        ${node(graphModel.equipment[2].type, graphModel.equipment[2].label, `${session.exposureSeconds} s exposures`)}
+      </div>
+      <div class="dsg-graph-connector">↓ produces</div>
+      <div class="dsg-graph-row dsg-graph-row--triple">
+        ${graphModel.outputs.map((output) => node(
+          output.type,
+          output.available ? 'Session metrics' : 'Not represented',
+          output.state,
+          output.available ? 'is-available' : 'is-missing'
+        )).join('')}
+      </div>`;
+  };
+
+  const renderLineage = (steps) => {
+    lineage.innerHTML = steps.map((step, index) => `
+      <article class="dsg-lineage-step is-${esc(step.state)}">
+        <span>${String(index + 1).padStart(2, '0')}</span>
+        <strong>${esc(step.label)}</strong>
+        <small>${esc(step.detail)}</small>
+      </article>`).join('');
+  };
+
   const render = (session) => {
     title.textContent = `${session.target} · ${session.sessionId}`;
     subtitle.textContent = `${displayDate(session.observationDate)} · ${session.telescope} · ${session.camera}`;
@@ -62,41 +103,8 @@
     ];
     metadata.innerHTML = fields.map(([label, value]) => metric(label, value)).join('');
 
-    graph.innerHTML = `
-      <div class="dsg-graph-row">
-        ${node('TARGET', session.target, 'Scientific object', 'is-target')}
-      </div>
-      <div class="dsg-graph-connector">↓ observed in</div>
-      <div class="dsg-graph-row">
-        ${node('SESSION', session.sessionId, displayDate(session.observationDate), 'is-session')}
-      </div>
-      <div class="dsg-graph-connector">↓ acquired with</div>
-      <div class="dsg-graph-row dsg-graph-row--triple">
-        ${node('TELESCOPE', session.telescope, session.configurationId)}
-        ${node('CAMERA', session.camera, `${session.binning} · gain ${session.gain}`)}
-        ${node('FILTER', session.filter, `${session.exposureSeconds} s exposures`)}
-      </div>
-      <div class="dsg-graph-connector">↓ produces</div>
-      <div class="dsg-graph-row dsg-graph-row--triple">
-        ${node('METRICS', 'Session metrics', session.evidenceState, 'is-available')}
-        ${node('MANIFEST', 'Not represented', session.manifestState, 'is-missing')}
-        ${node('TRANSFER', 'Not represented', session.transferState, 'is-missing')}
-      </div>`;
-
-    const lineageSteps = [
-      ['Observation session', 'represented', session.sessionId],
-      ['Acquisition metrics', 'represented', `${session.lightCompleted} completed light frames`],
-      ['Scientific assets', 'partial', 'paths and binary inventory not exposed in this catalog'],
-      ['Manifest', 'missing', session.manifestState],
-      ['Processing', 'missing', 'not represented'],
-      ['Publication', 'missing', 'not represented']
-    ];
-    lineage.innerHTML = lineageSteps.map(([label, state, detail], index) => `
-      <article class="dsg-lineage-step is-${esc(state)}">
-        <span>${String(index + 1).padStart(2, '0')}</span>
-        <strong>${esc(label)}</strong>
-        <small>${esc(detail)}</small>
-      </article>`).join('');
+    renderGraph(session, engine.getKnowledgeGraph(session));
+    renderLineage(engine.getLineage(session));
 
     const sourceHref = `../../${session.sourceMetricsPath}`;
     sources.innerHTML = `
@@ -118,13 +126,8 @@
     return;
   }
 
-  fetch(source)
-    .then((response) => {
-      if (!response.ok) throw new Error(`Catalog request failed: ${response.status}`);
-      return response.json();
-    })
-    .then((catalog) => {
-      const session = (catalog.sessions || []).find((item) => item.sessionId === sessionId);
+  engine.getSession(source, sessionId)
+    .then((session) => {
       if (!session) throw new Error(`Session not found: ${sessionId}`);
       render(session);
     })
