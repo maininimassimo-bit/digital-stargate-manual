@@ -48,6 +48,15 @@
     });
   };
 
+  const emitThemeChange = (theme) => {
+    const detail = { theme, source: 'enterprise-control' };
+    if (window.DSG?.events) {
+      window.DSG.events.emit('theme-change', detail);
+      return;
+    }
+    document.dispatchEvent(new CustomEvent('dsg:theme-change', { detail }));
+  };
+
   const toggleTheme = () => {
     const activeInput = getActiveInput();
     const nextInput = getNextInput(activeInput);
@@ -56,12 +65,7 @@
     nextInput.click();
     window.requestAnimationFrame(() => {
       updateControls();
-      document.dispatchEvent(new CustomEvent('dsg:theme-change', {
-        detail: {
-          theme: getThemeName(getActiveInput()),
-          source: 'enterprise-control'
-        }
-      }));
+      emitThemeChange(getThemeName(getActiveInput()));
     });
   };
 
@@ -84,11 +88,20 @@
     updateControls();
   };
 
+  if (window.DSG?.components) {
+    window.DSG.components.register({
+      name: 'theme-adapter',
+      order: 30,
+      initialize
+    });
+    return;
+  }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initialize, { once: true });
   } else {
     initialize();
   }
 
-  if (typeof document$ !== 'undefined') document$.subscribe(initialize);
+  if (window.document$?.subscribe) window.document$.subscribe(initialize);
 })();
