@@ -1,9 +1,15 @@
 (() => {
   'use strict';
 
-  const VERSION = '1.0.0-rc2';
+  const VERSION = '1.0.1-rc2';
   const DEFAULT_LIMIT = 20;
-  const MKDOCS_INDEX_PATH = 'search/search_index.json';
+  const SCRIPT_URL = document.currentScript?.src || null;
+  const SITE_ROOT = SCRIPT_URL
+    ? new URL('../', SCRIPT_URL)
+    : new URL('./', document.baseURI);
+  const MKDOCS_INDEX_URL = new URL('search/search_index.json', SITE_ROOT);
+  const SCIENTIFIC_CATALOG_URL = new URL('data/scientific-session-catalog.json', SITE_ROOT);
+
   const state = {
     documents: [],
     scientific: [],
@@ -54,7 +60,7 @@
     type: 'documentation',
     title: doc.title || doc.location,
     text: doc.text || '',
-    location: doc.location,
+    location: new URL(doc.location, SITE_ROOT).href,
     section: doc.title || 'Documentazione',
     keywords: tokenize(`${doc.title || ''} ${doc.text || ''}`)
   });
@@ -73,7 +79,7 @@
       session.qualityState,
       session.observationDate
     ].filter(Boolean).join(' '),
-    location: `scientific-session-detail/?sessionId=${encodeURIComponent(session.sessionId)}`,
+    location: new URL(`scientific-session-detail/?sessionId=${encodeURIComponent(session.sessionId)}`, SITE_ROOT).href,
     section: 'Scientific Platform',
     keywords: unique([
       ...tokenize(session.target),
@@ -96,8 +102,7 @@
   });
 
   const loadMkDocsIndex = async () => {
-    const url = new URL(MKDOCS_INDEX_PATH, document.baseURI);
-    const response = await fetch(url, { cache: 'no-store' });
+    const response = await fetch(MKDOCS_INDEX_URL, { cache: 'no-store' });
     if (!response.ok) throw new Error(`Search index request failed: ${response.status}`);
     const payload = await response.json();
     return (payload.docs || []).map(mapDocument);
@@ -110,7 +115,7 @@
     const candidates = [
       document.querySelector('[data-session-catalog]')?.dataset.sessionCatalog,
       document.querySelector('[data-session-detail]')?.dataset.sessionCatalog,
-      new URL('data/scientific-session-catalog.json', document.baseURI).href
+      SCIENTIFIC_CATALOG_URL.href
     ];
 
     const source = candidates.find(Boolean);
