@@ -11,18 +11,6 @@
     document.head.appendChild(link);
   };
 
-  const loadThemeManager = () => {
-    if (document.querySelector('script[data-dsg-theme-manager]')) return;
-    const currentScript = [...document.scripts]
-      .find((script) => /javascripts\/page-enhancements\.js(?:\?|$)/.test(script.src));
-    if (!currentScript) return;
-    const script = document.createElement('script');
-    script.src = currentScript.src.replace(/page-enhancements\.js(?:\?.*)?$/, 'dsg-theme-manager.js');
-    script.defer = true;
-    script.dataset.dsgThemeManager = 'true';
-    document.head.appendChild(script);
-  };
-
   const openSearch = (query = '') => {
     document.querySelector('label[for="__search"]')?.click();
     window.setTimeout(() => {
@@ -188,7 +176,6 @@
   };
 
   loadEnterpriseStyles();
-  loadThemeManager();
   document.addEventListener('DOMContentLoaded', buildEnterpriseNavigation);
   if (typeof document$ !== 'undefined') document$.subscribe(buildEnterpriseNavigation);
 })();
