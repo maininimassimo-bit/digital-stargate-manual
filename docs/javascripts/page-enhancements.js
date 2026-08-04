@@ -44,10 +44,12 @@
       </div>
       <div class="dsg-docs-drawer__links">
         <a href="${href()}"><span>⌂ Home</span><span>›</span></a>
+        <a href="${href('mission-control/')}"><span>◉ Mission Control</span><span>›</span></a>
         <a href="${href('documentation/')}"><span>▤ Documentation Center</span><span>›</span></a>
         <a href="${href('roadmap/')}"><span>⚑ Roadmap Center</span><span>›</span></a>
         <a href="${href('architecture/')}"><span>◇ Architecture Center</span><span>›</span></a>
         <a href="${href('scientific-platform/')}"><span>♢ Scientific Platform</span><span>›</span></a>
+        <a href="${href('scientific-session-catalog/')}"><span>✦ Session Explorer</span><span>›</span></a>
         <a href="${href('operations/')}"><span>⚙ Operations Center</span><span>›</span></a>
         <a href="${href('repository-intelligence/')}"><span>◎ Repository Intelligence</span><span>›</span></a>
         <a href="${href('repository-analytics/')}"><span>⌁ Repository Analytics</span><span>›</span></a>
@@ -77,6 +79,7 @@
       </a>
       <div class="dsg-enterprise-nav__links">
         <a class="dsg-enterprise-nav__link" href="${href()}">Home</a>
+        <a class="dsg-enterprise-nav__link" href="${href('mission-control/')}">Mission Control</a>
         ${menuItem('Programma', [
           ['Documentation Center', 'documentation/'],
           ['Roadmap Center', 'roadmap/'],
@@ -93,10 +96,10 @@
         ], href)}
         ${menuItem('Scientific Platform', [
           ['Scientific Platform Center', 'scientific-platform/'],
+          ['Session Explorer', 'scientific-session-catalog/'],
           ['Scientific Intelligence', 'scientific-platform-intelligence/'],
           ['AP-013 Scientific Repository', 'architecture/packages/AP-013-Scientific-Image-Repository-Architecture/'],
           ['Scientific Data Manager', 'architecture/scientific-assets/DSDM-001-Scientific-Data-Manager-Conceptual-Model/'],
-          ['Session Importer', 'architecture/scientific-assets/DSDM-004-Session-Importer-Architecture-and-Safe-Transfer-Design/'],
           ['Transfer Readiness', 'architecture/validation/AP-013-Transfer-Readiness-Gate/']
         ], href)}
         ${menuItem('Operations', [
