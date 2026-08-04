@@ -1,18 +1,33 @@
 (() => {
   'use strict';
 
-  const VERSION = '2.0.0-rc2';
+  const VERSION = '2.1.0-rc2';
   const STORAGE_KEY = 'dsg-theme-preference';
   const CONTROL_SELECTOR = '[data-dsg-theme]';
   const PALETTE_SELECTOR = '[data-md-component="palette"] input[name="__palette"]';
   const VALID_PREFERENCES = Object.freeze(['light', 'dark', 'system']);
   const SYSTEM_QUERY = '(prefers-color-scheme: dark)';
+  const TOKEN_STYLESHEET_ID = 'dsg-theme-tokens';
+  const SCRIPT_URL = document.currentScript?.src || null;
 
   let listenersBound = false;
   let systemListenerBound = false;
   let preference = 'system';
   const subscribers = new Set();
   const systemMedia = window.matchMedia(SYSTEM_QUERY);
+
+  const ensureThemeTokens = () => {
+    if (document.getElementById(TOKEN_STYLESHEET_ID)) return;
+
+    const stylesheet = document.createElement('link');
+    stylesheet.id = TOKEN_STYLESHEET_ID;
+    stylesheet.rel = 'stylesheet';
+    stylesheet.href = SCRIPT_URL
+      ? new URL('../styles/theme-tokens.css', SCRIPT_URL).href
+      : new URL('styles/theme-tokens.css', document.baseURI).href;
+    stylesheet.dataset.dsgThemeAsset = 'tokens';
+    document.head.appendChild(stylesheet);
+  };
 
   const getPaletteInputs = () => [...document.querySelectorAll(PALETTE_SELECTOR)];
 
@@ -190,6 +205,7 @@
   window.DSGThemeService = themeService;
 
   const initialize = () => {
+    ensureThemeTokens();
     bindListeners();
     preference = readPreference();
     applyResolvedTheme('initialize');
