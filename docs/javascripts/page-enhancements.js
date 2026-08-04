@@ -1,3 +1,152 @@
+(() => {
+  const loadEnterpriseStyles = () => {
+    if (document.querySelector('link[data-dsg-enterprise-navigation]')) return;
+    const anchor = [...document.querySelectorAll('link[rel="stylesheet"]')]
+      .find((link) => /styles\/extra\.css(?:\?|$)/.test(link.href));
+    if (!anchor) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = anchor.href.replace(/extra\.css(?:\?.*)?$/, 'enterprise-navigation.css');
+    link.dataset.dsgEnterpriseNavigation = 'true';
+    document.head.appendChild(link);
+  };
+
+  const buildEnterpriseNavigation = () => {
+    const header = document.querySelector('.md-header');
+    if (!header || header.querySelector('.dsg-enterprise-nav')) return;
+
+    const nativeLogo = document.querySelector('.md-header__button.md-logo');
+    const rootUrl = nativeLogo ? new URL(nativeLogo.href, document.baseURI) : new URL('./', document.baseURI);
+    const href = (path = '') => new URL(path, rootUrl).href;
+    const logoSource = nativeLogo?.querySelector('img')?.src || href('assets/images/dsg-logo.svg');
+
+    const navigation = document.createElement('nav');
+    navigation.className = 'dsg-enterprise-nav';
+    navigation.setAttribute('aria-label', 'Navigazione principale Digital StarGate');
+
+    navigation.innerHTML = `
+      <a class="dsg-enterprise-nav__brand" href="${href()}">
+        <img src="${logoSource}" alt="Logo Digital StarGate">
+        <div><strong>DIGITAL STARGATE</strong><span>DOCUMENTATION PORTAL</span></div>
+      </a>
+      <div class="dsg-enterprise-nav__links">
+        <a class="dsg-enterprise-nav__link" href="${href()}">Home</a>
+        ${menuItem('Programma', [
+          ['Roadmap', 'roadmap/'],
+          ['Architecture Package', 'architecture/packages/AP-013-Scientific-Image-Repository-Architecture/'],
+          ['Milestone e stato', 'roadmap/'],
+          ['Release Notes', 'releases/release-1.5-developer-edition/']
+        ], href)}
+        ${menuItem('Architettura', [
+          ['Panoramica', 'architecture/'],
+          ['Decisioni ADR', 'architecture/ADR-001-Session-Layer/'],
+          ['Governance e Metamodel', 'architecture/enterprise-metamodel/'],
+          ['Assessment', 'architecture/assessments/ARB-012-AP-012-Independent-Architecture-Review/'],
+          ['Validation e Review', 'architecture/validation/'],
+          ['Architecture Package', 'architecture/packages/AP-013-Scientific-Image-Repository-Architecture/']
+        ], href)}
+        ${menuItem('Scientific Platform', [
+          ['AP-013 Scientific Repository', 'architecture/packages/AP-013-Scientific-Image-Repository-Architecture/'],
+          ['Scientific Data Manager', 'architecture/scientific-assets/DSDM-001-Scientific-Data-Manager-Conceptual-Model/'],
+          ['Session Importer', 'architecture/scientific-assets/DSDM-004-Session-Importer-Architecture-and-Safe-Transfer-Design/'],
+          ['Asset Inventory', 'architecture/scientific-assets/AP13-W02-Current-State-Scientific-Asset-Inventory-Specification/'],
+          ['Provenance e Manifest', 'architecture/scientific-assets/DSDM-003-Contract-and-Manifest-Model/'],
+          ['Transfer Readiness', 'architecture/validation/AP-013-Transfer-Readiness-Gate/']
+        ], href)}
+        ${menuItem('Operations', [
+          ['Observatory Status', 'status/'],
+          ['Automazione', 'chapters/15-automazione/'],
+          ['Procedure operative', 'chapters/16-sop-avvio/'],
+          ['Sicurezza e manutenzione', 'chapters/18-emergenze-recovery/'],
+          ['Infrastructure', 'chapters/05-infrastruttura-rete/']
+        ], href)}
+        ${menuItem('Analytics', [
+          ['Portale Analytics', 'analytics/'],
+          ['Dashboard', 'analytics/dashboard-integrated/'],
+          ['Qualità e storico', 'analytics/history-validation/'],
+          ['Configurazioni', 'analytics/configuration-summary/']
+        ], href)}
+      </div>
+      <div class="dsg-enterprise-nav__utilities">
+        <button class="dsg-enterprise-nav__action" type="button" data-dsg-search>⌕ Cerca</button>
+        <a class="dsg-enterprise-nav__action" href="https://github.com/maininimassimo-bit/digital-stargate-manual">◉ GitHub</a>
+        <button class="dsg-enterprise-nav__action" type="button" data-dsg-theme>◐ Tema</button>
+        <button class="dsg-enterprise-nav__action dsg-enterprise-nav__docs" type="button" data-dsg-docs>☰ Tutta la documentazione</button>
+      </div>`;
+
+    header.appendChild(navigation);
+    document.body.insertAdjacentHTML('beforeend', drawerMarkup(href));
+
+    const currentPath = window.location.pathname.replace(/\/+$/, '');
+    [...navigation.querySelectorAll('a.dsg-enterprise-nav__link')].forEach((link) => {
+      if (new URL(link.href).pathname.replace(/\/+$/, '') === currentPath) link.classList.add('is-active');
+    });
+
+    navigation.querySelectorAll('[data-dsg-menu]').forEach((button) => {
+      button.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const item = button.closest('.dsg-enterprise-nav__item');
+        navigation.querySelectorAll('.dsg-enterprise-nav__item.is-open').forEach((open) => {
+          if (open !== item) open.classList.remove('is-open');
+        });
+        item.classList.toggle('is-open');
+        button.setAttribute('aria-expanded', item.classList.contains('is-open'));
+      });
+    });
+
+    document.addEventListener('click', () => navigation.querySelectorAll('.dsg-enterprise-nav__item.is-open').forEach((item) => item.classList.remove('is-open')));
+    navigation.querySelector('[data-dsg-search]')?.addEventListener('click', () => document.querySelector('label[for="__search"]')?.click());
+    navigation.querySelector('[data-dsg-theme]')?.addEventListener('click', () => document.querySelector('[data-md-component="palette"] label')?.click());
+
+    const drawer = document.querySelector('.dsg-docs-drawer');
+    const backdrop = document.querySelector('.dsg-docs-backdrop');
+    const setDrawer = (open) => {
+      drawer?.classList.toggle('is-open', open);
+      backdrop?.classList.toggle('is-open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+    navigation.querySelector('[data-dsg-docs]')?.addEventListener('click', () => setDrawer(true));
+    drawer?.querySelector('[data-dsg-docs-close]')?.addEventListener('click', () => setDrawer(false));
+    backdrop?.addEventListener('click', () => setDrawer(false));
+    drawer?.querySelector('[data-dsg-drawer-search]')?.addEventListener('click', () => {
+      setDrawer(false);
+      document.querySelector('label[for="__search"]')?.click();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setDrawer(false);
+    });
+  };
+
+  const menuItem = (label, links, href) => {
+    const groups = [];
+    for (let index = 0; index < links.length; index += 2) {
+      groups.push(`<div class="dsg-mega-menu__group"><strong>${index === 0 ? label.toUpperCase() : 'RISORSE'}</strong>${links.slice(index, index + 2).map(([title, path]) => `<a href="${href(path)}">${title}</a>`).join('')}</div>`);
+    }
+    return `<div class="dsg-enterprise-nav__item"><button class="dsg-enterprise-nav__action" type="button" data-dsg-menu aria-expanded="false">${label}⌄</button><div class="dsg-mega-menu">${groups.join('')}</div></div>`;
+  };
+
+  const drawerMarkup = (href) => `
+    <div class="dsg-docs-backdrop"></div>
+    <aside class="dsg-docs-drawer" aria-label="Tutta la documentazione">
+      <div class="dsg-docs-drawer__header"><strong>TUTTA LA DOCUMENTAZIONE</strong><button class="dsg-docs-drawer__close" type="button" data-dsg-docs-close aria-label="Chiudi">×</button></div>
+      <button class="dsg-docs-drawer__search" type="button" data-dsg-drawer-search>⌕ Cerca nella documentazione…</button>
+      <div class="dsg-docs-drawer__links">
+        <a href="${href()}"><span>⌂ Home</span><span>›</span></a>
+        <a href="${href('roadmap/')}"><span>⚑ Programma</span><span>›</span></a>
+        <a href="${href('architecture/')}"><span>◇ Architettura</span><span>›</span></a>
+        <a href="${href('architecture/packages/AP-013-Scientific-Image-Repository-Architecture/')}"><span>♢ Scientific Platform</span><span>›</span></a>
+        <a href="${href('chapters/15-automazione/')}"><span>⚙ Operations</span><span>›</span></a>
+        <a href="${href('analytics/')}"><span>⌁ Analytics</span><span>›</span></a>
+        <a href="${href('developer/development-guide/')}"><span>&lt;/&gt; Developer</span><span>›</span></a>
+        <a href="${href('chapters/01-introduzione/')}"><span>▤ Manuale tecnico</span><span>›</span></a>
+      </div>
+    </aside>`;
+
+  loadEnterpriseStyles();
+  document.addEventListener('DOMContentLoaded', buildEnterpriseNavigation);
+  if (typeof document$ !== 'undefined') document$.subscribe(buildEnterpriseNavigation);
+})();
+
 document.addEventListener("DOMContentLoaded", () => {
   const content = document.querySelector(".md-content__inner");
   if (!content) return;
@@ -5,7 +154,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const firstHeading = content.querySelector(":scope > h1");
   if (!firstHeading) return;
 
-  // Homepage excluded: it already has its dedicated visual header.
   if (document.querySelector(".dsg-hero")) return;
 
   const pathParts = window.location.pathname
@@ -38,22 +186,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   content.insertBefore(breadcrumb, firstHeading);
 
-  // Build previous/next navigation from the visible primary navigation.
   const navLinks = [...document.querySelectorAll(".md-nav--primary a.md-nav__link")]
     .filter((link) => {
       const href = link.getAttribute("href");
       return href && !href.startsWith("#") && link.textContent.trim();
     });
 
-  const currentUrl = new URL(window.location.href);
   const normalize = (url) => {
     const parsed = new URL(url, document.baseURI);
     return parsed.pathname.replace(/index\.html$/, "").replace(/\/+$/, "");
   };
 
-  const currentPath = normalize(currentUrl.href);
+  const currentPath = normalize(window.location.href);
   const currentIndex = navLinks.findIndex((link) => normalize(link.href) === currentPath);
-
   if (currentIndex === -1) return;
 
   const previous = navLinks[currentIndex - 1];
@@ -67,21 +212,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const createCard = (link, label, direction) => {
     const card = document.createElement("a");
     card.href = link.href;
-
     const small = document.createElement("span");
     small.className = "dsg-page-nav__label";
     small.textContent = direction === "previous" ? `← ${label}` : `${label} →`;
-
     const title = document.createElement("span");
     title.className = "dsg-page-nav__title";
     title.textContent = link.textContent.trim();
-
     card.append(small, title);
     return card;
   };
 
   if (previous) pageNav.appendChild(createCard(previous, "Pagina precedente", "previous"));
   if (next) pageNav.appendChild(createCard(next, "Pagina successiva", "next"));
-
   content.appendChild(pageNav);
 });
