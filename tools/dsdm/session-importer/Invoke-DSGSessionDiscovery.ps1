@@ -1,15 +1,8 @@
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory = $false)]
     [string]$ConfigurationPath = (Join-Path $PSScriptRoot 'session-importer.sample.json'),
-
-    [Parameter(Mandatory = $false)]
     [string]$SourcePath,
-
-    [Parameter(Mandatory = $false)]
     [string]$OutputRoot,
-
-    [Parameter(Mandatory = $false)]
     [switch]$IgnoreOperatingWindow
 )
 
@@ -17,14 +10,10 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 function ConvertTo-DSGSafePathSegment {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$Value
-    )
+    param([Parameter(Mandatory = $true)][string]$Value)
 
+    $builder = New-Object System.Text.StringBuilder
     $invalidCharacters = [System.IO.Path]::GetInvalidFileNameChars()
-    $builder = [System.Text.StringBuilder]::new()
 
     foreach ($character in $Value.ToCharArray()) {
         if ($invalidCharacters -contains $character) {
@@ -44,11 +33,7 @@ function ConvertTo-DSGSafePathSegment {
 }
 
 function ConvertTo-DSGTimeSpanToday {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$Value
-    )
+    param([Parameter(Mandatory = $true)][string]$Value)
 
     $parsed = [TimeSpan]::Zero
     if (-not [TimeSpan]::TryParseExact(
@@ -64,20 +49,16 @@ function ConvertTo-DSGTimeSpanToday {
 }
 
 function Test-DSGOperatingWindow {
-    [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true)]
-        $Window,
-
-        [Parameter(Mandatory = $true)]
-        [datetime]$LocalNow
+        [Parameter(Mandatory = $true)]$Window,
+        [Parameter(Mandatory = $true)][datetime]$LocalNow
     )
 
     $notBefore = ConvertTo-DSGTimeSpanToday -Value $Window.notBeforeLocal
     $doNotStartAfter = ConvertTo-DSGTimeSpanToday -Value $Window.doNotStartAfterLocal
     $current = $LocalNow.TimeOfDay
 
-    [pscustomobject]@{
+    return [pscustomobject]@{
         IsAllowed = ($current -ge $notBefore -and $current -le $doNotStartAfter)
         LocalNow = $LocalNow.ToString('o')
         NotBeforeLocal = $Window.notBeforeLocal
@@ -87,13 +68,45 @@ function Test-DSGOperatingWindow {
 }
 
 function New-DSGIdentifier {
-    [CmdletBinding()]
+    param([Parameter(Mandatory = $true)][string]$Entity)
+    return ('DSG-{0}-{1}' -f $Entity.ToUpperInvariant(), ([guid]::NewGuid().ToString()))
+}
+
+function Get-DSGCount {
+    param([object[]]$Items)
+    return @($Items).Count
+}
+
+function Get-DSGInt64Sum {
     param(
-        [Parameter(Mandatory = $true)]
-        [string]$Entity
+        [object[]]$Items,
+        [Parameter(Mandatory = $true)][string]$PropertyName
     )
 
-    return 'DSG-{0}-{1}' -f $Entity.ToUpperInvariant(), ([guid]::NewGuid().ToString())
+    [int64]$sum = 0
+    foreach ($item in @($Items)) {
+        if ($null -ne $item -and $null -ne $item.$PropertyName) {
+            $sum += [int64]$item.$PropertyName
+        }
+    }
+
+    return $sum
+}
+
+function Get-DSGDoubleSum {
+    param(
+        [object[]]$Items,
+        [Parameter(Mandatory = $true)][string]$PropertyName
+    )
+
+    [double]$sum = 0
+    foreach ($item in @($Items)) {
+        if ($null -ne $item -and $null -ne $item.$PropertyName) {
+            $sum += [double]$item.$PropertyName
+        }
+    }
+
+    return $sum
 }
 
 if (-not (Test-Path -LiteralPath $ConfigurationPath -PathType Leaf)) {
@@ -103,17 +116,14 @@ if (-not (Test-Path -LiteralPath $ConfigurationPath -PathType Leaf)) {
 $configuration = Get-Content -LiteralPath $ConfigurationPath -Raw | ConvertFrom-Json
 
 if ($configuration.mode -ne 'DRY_RUN') {
-    throw "Only DRY_RUN mode is supported by this implementation. Observed: $($configuration.mode)"
+    throw "Only DRY_RUN mode is supported. Observed: $($configuration.mode)"
 }
-
 if ($configuration.safety.allowTransferMode -ne $false) {
     throw 'Safety violation: allowTransferMode must be false.'
 }
-
 if ($configuration.safety.allowDestinationWrites -ne $false) {
     throw 'Safety violation: allowDestinationWrites must be false.'
 }
-
 if ($configuration.safety.sourceCleanupAuthorized -ne $false) {
     throw 'Safety violation: sourceCleanupAuthorized must be false.'
 }
@@ -138,18 +148,21 @@ if (-not (Test-Path -LiteralPath $effectiveSourcePath -PathType Container)) {
 
 $windowResult = Test-DSGOperatingWindow -Window $configuration.window -LocalNow (Get-Date)
 if (-not $IgnoreOperatingWindow -and -not $windowResult.IsAllowed) {
-    throw "Current local time is outside the configured discovery window. Use -IgnoreOperatingWindow only for an explicitly controlled test."
+    throw 'Current local time is outside the configured discovery window.'
 }
 
 $modulePath = Join-Path $PSScriptRoot 'DSG.SessionImporter.psm1'
 Import-Module $modulePath -Force
+
+$sourceRootItem = Get-Item -LiteralPath $effectiveSourcePath -ErrorAction Stop
+$sourceRootProviderPath = $sourceRootItem.FullName.TrimEnd('\')
 
 $runId = New-DSGIdentifier -Entity 'DISCOVERY-RUN'
 $runDirectory = Join-Path $effectiveOutputRoot $runId
 New-Item -ItemType Directory -Path $runDirectory -Force | Out-Null
 
 $startedAtUtc = (Get-Date).ToUniversalTime()
-$allowedExtensions = @($configuration.source.allowedExtensions | ForEach-Object { $_.ToLowerInvariant() })
+$allowedExtensions = @($configuration.source.allowedExtensions | ForEach-Object { ([string]$_).ToLowerInvariant() })
 $minimumStableMinutes = [int]$configuration.source.minimumStableMinutes
 $knownTelescopes = @($configuration.parser.knownTelescopes)
 $useDateSubfolders = [bool]$configuration.destination.useDateSubfolders
@@ -161,34 +174,22 @@ $files = @(
         Sort-Object FullName
 )
 
-$entries = [System.Collections.Generic.List[object]]::new()
+$entries = @()
 
 foreach ($file in $files) {
-    $parsed = ConvertFrom-DSGNinaFileName `
-        -FileName $file.Name `
-        -KnownTelescopes $knownTelescopes
+    $parsed = ConvertFrom-DSGNinaFileName -FileName $file.Name -KnownTelescopes $knownTelescopes
 
     $ageMinutes = ((Get-Date) - $file.LastWriteTime).TotalMinutes
-    $stabilityStatus = if ($ageMinutes -ge $minimumStableMinutes) {
-        'STABLE_BY_AGE'
-    }
-    else {
-        'DEFER_UNSTABLE'
-    }
+    $stabilityStatus = if ($ageMinutes -ge $minimumStableMinutes) { 'STABLE_BY_AGE' } else { 'DEFER_UNSTABLE' }
 
     $observingDate = $null
     if ($parsed.DateTimeObserved -match '^(?<date>\d{4}-\d{2}-\d{2})_') {
         $observingDate = $Matches['date']
     }
 
-    $targetName = if ($parsed.ParseStatus -eq 'PARSED') {
-        [string]$parsed.Target
-    }
-    else {
-        '_UNRESOLVED'
-    }
-
+    $targetName = if ($parsed.ParseStatus -eq 'PARSED') { [string]$parsed.Target } else { '_UNRESOLVED' }
     $safeTarget = ConvertTo-DSGSafePathSegment -Value $targetName
+
     $imageTypeDirectory = switch ($parsed.ImageType) {
         'LIGHT' { 'Light' }
         'DARK' { 'Dark' }
@@ -198,9 +199,7 @@ foreach ($file in $files) {
         default { '_Unclassified' }
     }
 
-    $destinationDirectory = Join-Path $destinationRoot $safeTarget
-    $destinationDirectory = Join-Path $destinationDirectory $imageTypeDirectory
-
+    $destinationDirectory = Join-Path (Join-Path $destinationRoot $safeTarget) $imageTypeDirectory
     if ($useDateSubfolders -and -not [string]::IsNullOrWhiteSpace($observingDate)) {
         $destinationDirectory = Join-Path $destinationDirectory $observingDate
     }
@@ -223,9 +222,12 @@ foreach ($file in $files) {
         'COPY_NEW'
     }
 
-    $relativePath = $file.FullName.Substring($effectiveSourcePath.TrimEnd('\').Length).TrimStart('\')
+    $relativePath = $file.Name
+    if ($file.FullName.StartsWith($sourceRootProviderPath, [System.StringComparison]::OrdinalIgnoreCase)) {
+        $relativePath = $file.FullName.Substring($sourceRootProviderPath.Length).TrimStart('\')
+    }
 
-    $entries.Add([pscustomobject][ordered]@{
+    $entries += [pscustomobject][ordered]@{
         EntryId = New-DSGIdentifier -Entity 'DISCOVERY-ENTRY'
         SourceRelativePath = $relativePath
         SourceFullPath = $file.FullName
@@ -250,80 +252,87 @@ foreach ($file in $files) {
         ObservingDate = $observingDate
         FwhmObserved = $parsed.FwhmObserved
         FocusPosition = $parsed.FocusPosition
-        SessionKey = '{0}|{1}|{2}' -f $targetName, $observingDate, $parsed.Telescope
+        SessionKey = ('{0}|{1}|{2}' -f $targetName, $observingDate, $parsed.Telescope)
         PlannedDestination = $plannedDestination
         PlannedAction = $action
         ParseErrors = @($parsed.Errors)
-    })
+        ParseWarnings = @($parsed.Warnings)
+    }
 }
 
-$sessionGroups = @(
-    $entries |
-        Group-Object -Property SessionKey |
-        ForEach-Object {
-            $groupEntries = @($_.Group)
-            $first = $groupEntries[0]
-            $imageTypeSummary = [ordered]@{}
-            $filterSummary = [ordered]@{}
+$sessionGroups = @()
+foreach ($group in @($entries | Group-Object -Property SessionKey)) {
+    $groupEntries = @($group.Group)
+    if ($groupEntries.Count -eq 0) {
+        continue
+    }
 
-            foreach ($imageTypeGroup in @($groupEntries | Group-Object ImageType)) {
-                $key = if ([string]::IsNullOrWhiteSpace([string]$imageTypeGroup.Name)) { 'UNKNOWN' } else { $imageTypeGroup.Name }
-                $imageTypeSummary[$key] = $imageTypeGroup.Count
-            }
+    $first = $groupEntries[0]
+    $imageTypeSummary = [ordered]@{}
+    $filterSummary = [ordered]@{}
 
-            foreach ($filterGroup in @($groupEntries | Group-Object Filter)) {
-                $key = if ([string]::IsNullOrWhiteSpace([string]$filterGroup.Name)) { 'UNKNOWN' } else { $filterGroup.Name }
-                $filterSummary[$key] = $filterGroup.Count
-            }
+    foreach ($imageTypeGroup in @($groupEntries | Group-Object ImageType)) {
+        $key = if ([string]::IsNullOrWhiteSpace([string]$imageTypeGroup.Name)) { 'UNKNOWN' } else { [string]$imageTypeGroup.Name }
+        $imageTypeSummary[$key] = $imageTypeGroup.Count
+    }
 
-            [pscustomobject][ordered]@{
-                SessionId = New-DSGIdentifier -Entity 'SESSION'
-                SessionKey = $_.Name
-                Target = $first.Target
-                Telescope = $first.Telescope
-                ObservingDate = $first.ObservingDate
-                FileCount = $groupEntries.Count
-                TotalBytes = [int64](($groupEntries | Measure-Object -Property SizeBytes -Sum).Sum)
-                TotalExposureSeconds = [double](($groupEntries | Where-Object { $_.ImageType -eq 'LIGHT' } | Measure-Object -Property ExposureSeconds -Sum).Sum)
-                ImageTypeSummary = $imageTypeSummary
-                FilterSummary = $filterSummary
-                StableFileCount = @($groupEntries | Where-Object { $_.StabilityStatus -eq 'STABLE_BY_AGE' }).Count
-                AmbiguousFileCount = @($groupEntries | Where-Object { $_.ParseStatus -eq 'AMBIGUOUS' }).Count
-                FailedFileCount = @($groupEntries | Where-Object { $_.ParseStatus -eq 'FAILED' }).Count
-                PlannedCopyCount = @($groupEntries | Where-Object { $_.PlannedAction -eq 'COPY_NEW' }).Count
-                BlockingFindingCount = @($groupEntries | Where-Object {
-                    $_.PlannedAction -in @(
-                        'DEFER_UNSTABLE',
-                        'QUARANTINE',
-                        'REVIEW_PARSE_AMBIGUITY',
-                        'REVIEW_DESTINATION_COLLISION'
-                    )
-                }).Count
-            }
-        }
-)
+    foreach ($filterGroup in @($groupEntries | Group-Object Filter)) {
+        $key = if ([string]::IsNullOrWhiteSpace([string]$filterGroup.Name)) { 'UNKNOWN' } else { [string]$filterGroup.Name }
+        $filterSummary[$key] = $filterGroup.Count
+    }
+
+    $lightEntries = @($groupEntries | Where-Object { $_.ImageType -eq 'LIGHT' })
+    $blockingEntries = @($groupEntries | Where-Object {
+        $_.PlannedAction -in @(
+            'DEFER_UNSTABLE',
+            'QUARANTINE',
+            'REVIEW_PARSE_AMBIGUITY',
+            'REVIEW_DESTINATION_COLLISION'
+        )
+    })
+
+    $sessionGroups += [pscustomobject][ordered]@{
+        SessionId = New-DSGIdentifier -Entity 'SESSION'
+        SessionKey = $group.Name
+        Target = $first.Target
+        Telescope = $first.Telescope
+        ObservingDate = $first.ObservingDate
+        FileCount = $groupEntries.Count
+        TotalBytes = Get-DSGInt64Sum -Items $groupEntries -PropertyName 'SizeBytes'
+        TotalExposureSeconds = Get-DSGDoubleSum -Items $lightEntries -PropertyName 'ExposureSeconds'
+        ImageTypeSummary = $imageTypeSummary
+        FilterSummary = $filterSummary
+        StableFileCount = Get-DSGCount -Items @($groupEntries | Where-Object { $_.StabilityStatus -eq 'STABLE_BY_AGE' })
+        AmbiguousFileCount = Get-DSGCount -Items @($groupEntries | Where-Object { $_.ParseStatus -eq 'AMBIGUOUS' })
+        FailedFileCount = Get-DSGCount -Items @($groupEntries | Where-Object { $_.ParseStatus -eq 'FAILED' })
+        WarningFileCount = Get-DSGCount -Items @($groupEntries | Where-Object { $_.ParseWarnings.Count -gt 0 })
+        PlannedCopyCount = Get-DSGCount -Items @($groupEntries | Where-Object { $_.PlannedAction -eq 'COPY_NEW' })
+        BlockingFindingCount = $blockingEntries.Count
+    }
+}
 
 $completedAtUtc = (Get-Date).ToUniversalTime()
-
 $summary = [pscustomobject][ordered]@{
-    SchemaVersion = '1.0'
+    SchemaVersion = '1.1'
     RunId = $runId
     Mode = 'DRY_RUN'
     SourcePath = $effectiveSourcePath
+    SourceProviderPath = $sourceRootProviderPath
     DestinationRoot = $destinationRoot
     StartedAtUtc = $startedAtUtc.ToString('o')
     CompletedAtUtc = $completedAtUtc.ToString('o')
     OperatingWindow = $windowResult
     FileCount = $entries.Count
-    TotalBytes = [int64](($entries | Measure-Object -Property SizeBytes -Sum).Sum)
+    TotalBytes = Get-DSGInt64Sum -Items $entries -PropertyName 'SizeBytes'
     SessionCount = $sessionGroups.Count
-    ParsedCount = @($entries | Where-Object { $_.ParseStatus -eq 'PARSED' }).Count
-    AmbiguousCount = @($entries | Where-Object { $_.ParseStatus -eq 'AMBIGUOUS' }).Count
-    FailedCount = @($entries | Where-Object { $_.ParseStatus -eq 'FAILED' }).Count
-    StableByAgeCount = @($entries | Where-Object { $_.StabilityStatus -eq 'STABLE_BY_AGE' }).Count
-    DeferredUnstableCount = @($entries | Where-Object { $_.StabilityStatus -eq 'DEFER_UNSTABLE' }).Count
-    CopyNewCount = @($entries | Where-Object { $_.PlannedAction -eq 'COPY_NEW' }).Count
-    CollisionReviewCount = @($entries | Where-Object { $_.PlannedAction -eq 'REVIEW_DESTINATION_COLLISION' }).Count
+    ParsedCount = Get-DSGCount -Items @($entries | Where-Object { $_.ParseStatus -eq 'PARSED' })
+    AmbiguousCount = Get-DSGCount -Items @($entries | Where-Object { $_.ParseStatus -eq 'AMBIGUOUS' })
+    FailedCount = Get-DSGCount -Items @($entries | Where-Object { $_.ParseStatus -eq 'FAILED' })
+    WarningCount = Get-DSGCount -Items @($entries | Where-Object { $_.ParseWarnings.Count -gt 0 })
+    StableByAgeCount = Get-DSGCount -Items @($entries | Where-Object { $_.StabilityStatus -eq 'STABLE_BY_AGE' })
+    DeferredUnstableCount = Get-DSGCount -Items @($entries | Where-Object { $_.StabilityStatus -eq 'DEFER_UNSTABLE' })
+    CopyNewCount = Get-DSGCount -Items @($entries | Where-Object { $_.PlannedAction -eq 'COPY_NEW' })
+    CollisionReviewCount = Get-DSGCount -Items @($entries | Where-Object { $_.PlannedAction -eq 'REVIEW_DESTINATION_COLLISION' })
     Safety = [ordered]@{
         SourceCleanupAuthorized = $false
         DestinationWritesPerformed = $false
@@ -331,9 +340,9 @@ $summary = [pscustomobject][ordered]@{
         ScientificFilesModified = 0
     }
     Limitations = @(
-        'Stability is assessed from file age in this version; repeated size observation is not yet implemented.',
+        'Stability is assessed from file age; repeated size observation is not yet implemented.',
         'Destination collision checks compare path existence only; size and hash comparison are not yet implemented.',
-        'No session merge across midnight is performed in this version.',
+        'No session merge across midnight is performed.',
         'No scientific file is copied or modified.'
     )
 }
@@ -343,35 +352,17 @@ $entriesCsvPath = Join-Path $runDirectory 'transfer-plan.csv'
 $sessionsJsonPath = Join-Path $runDirectory 'session-summary.json'
 $summaryJsonPath = Join-Path $runDirectory 'discovery-run.json'
 
-$entries | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $entriesJsonPath -Encoding UTF8
-$entries | Select-Object `
-    SourceRelativePath,
-    FileName,
-    SizeBytes,
-    StabilityStatus,
-    ParseStatus,
-    ImageType,
-    Target,
-    Telescope,
-    Filter,
-    ObservingDate,
-    PlannedDestination,
-    PlannedAction |
-    Export-Csv -LiteralPath $entriesCsvPath -NoTypeInformation -Encoding UTF8
-$sessionGroups | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $sessionsJsonPath -Encoding UTF8
-$summary | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $summaryJsonPath -Encoding UTF8
+ConvertTo-Json -InputObject @($entries) -Depth 8 | Set-Content -LiteralPath $entriesJsonPath -Encoding UTF8
+$entries | Select-Object SourceRelativePath, FileName, SizeBytes, StabilityStatus, ParseStatus, ImageType, Target, Telescope, Filter, ObservingDate, PlannedDestination, PlannedAction | Export-Csv -LiteralPath $entriesCsvPath -NoTypeInformation -Encoding UTF8
+ConvertTo-Json -InputObject @($sessionGroups) -Depth 8 | Set-Content -LiteralPath $sessionsJsonPath -Encoding UTF8
+ConvertTo-Json -InputObject $summary -Depth 8 | Set-Content -LiteralPath $summaryJsonPath -Encoding UTF8
 
-$evidenceFiles = @(
-    $entriesJsonPath,
-    $entriesCsvPath,
-    $sessionsJsonPath,
-    $summaryJsonPath
-)
-
+$evidenceFiles = @($entriesJsonPath, $entriesCsvPath, $sessionsJsonPath, $summaryJsonPath)
 $checksumPath = Join-Path $runDirectory 'evidence-checksums.txt'
-$checksumLines = foreach ($evidenceFile in $evidenceFiles) {
+$checksumLines = @()
+foreach ($evidenceFile in $evidenceFiles) {
     $hash = Get-FileHash -LiteralPath $evidenceFile -Algorithm SHA256
-    '{0}  {1}' -f $hash.Hash.ToLowerInvariant(), (Split-Path -Leaf $evidenceFile)
+    $checksumLines += ('{0}  {1}' -f $hash.Hash.ToLowerInvariant(), (Split-Path -Leaf $evidenceFile))
 }
 $checksumLines | Set-Content -LiteralPath $checksumPath -Encoding ASCII
 
@@ -383,6 +374,7 @@ Write-Host "Sessions: $($sessionGroups.Count)"
 Write-Host "Parsed: $($summary.ParsedCount)"
 Write-Host "Ambiguous: $($summary.AmbiguousCount)"
 Write-Host "Failed: $($summary.FailedCount)"
+Write-Host "Warnings: $($summary.WarningCount)"
 Write-Host "Planned COPY_NEW actions: $($summary.CopyNewCount)"
 Write-Host "Evidence directory: $runDirectory"
 Write-Host ''
@@ -392,5 +384,5 @@ Write-Host 'No scientific files were copied, moved, renamed, deleted or modified
     RunId = $runId
     EvidenceDirectory = $runDirectory
     Summary = $summary
-    Sessions = $sessionGroups
+    Sessions = @($sessionGroups)
 }
