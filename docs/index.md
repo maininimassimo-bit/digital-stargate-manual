@@ -1,342 +1,215 @@
+<link rel="stylesheet" href="./styles/enterprise-home.css">
+
+<div class="dsg-enterprise-home">
+
 <div class="dsg-hero">
   <div class="dsg-hero__overlay"></div>
 
   <div class="dsg-hero__content">
-    <p class="dsg-hero__eyebrow">
-      OSSERVATORIO ASTRONOMICO REMOTO <span>•</span> MANCIANO (GR)
-    </p>
-
+    <p class="dsg-hero__eyebrow">OSSERVATORIO ASTRONOMICO REMOTO <span>•</span> MANCIANO (GR)</p>
     <h1>Digital StarGate</h1>
-
-    <p class="dsg-hero__tagline">
-      Astronomia, automazione e ingegneria dei dati
-    </p>
-
+    <p class="dsg-hero__tagline">Enterprise Documentation Portal</p>
     <p class="dsg-hero__subtitle">
-      Digital StarGate è il portale tecnico dell’Osservatorio Astronomico Remoto
-      di Manciano: una piattaforma che integra documentazione, automazione,
-      controllo operativo, analisi delle sessioni osservative e gestione
-      dell’infrastruttura.
+      La piattaforma documentale ufficiale per l’architettura, le operazioni,
+      l’osservatorio e la gestione governata dei dati scientifici.
     </p>
 
     <div class="dsg-hero__actions">
-      <a class="md-button md-button--primary" href="./chapters/01-introduzione/">
-        <span class="dsg-button-icon">▣</span>
-        Esplora il Manuale
-        <span aria-hidden="true">→</span>
+      <a class="md-button md-button--primary" href="./architecture/">
+        Esplora l’architettura <span aria-hidden="true">→</span>
       </a>
+      <a class="md-button" href="./roadmap/">
+        Apri la roadmap <span aria-hidden="true">→</span>
+      </a>
+      <a class="md-button" href="./status/">
+        Stato osservatorio <span aria-hidden="true">→</span>
+      </a>
+    </div>
 
-      <a class="md-button" href="./analytics/">
-        <span class="dsg-button-icon">▥</span>
-        Apri Analytics
-        <span aria-hidden="true">→</span>
-      </a>
-
-      <a class="md-button" href="./session-reports/">
-        <span class="dsg-button-icon">⌁</span>
-        Sessioni osservative
-        <span aria-hidden="true">→</span>
-      </a>
+    <div class="dsg-hero__principles">
+      <div class="dsg-principle">
+        <span class="dsg-principle__icon">◈</span>
+        <div><strong>Governance</strong><span>Framework, tracciabilità e conformità enterprise.</span></div>
+      </div>
+      <div class="dsg-principle">
+        <span class="dsg-principle__icon">▤</span>
+        <div><strong>Scientific Data</strong><span>Gestione governata del repository scientifico.</span></div>
+      </div>
+      <div class="dsg-principle">
+        <span class="dsg-principle__icon">↗</span>
+        <div><strong>Innovation</strong><span>Architettura modulare e sviluppo continuo.</span></div>
+      </div>
     </div>
   </div>
 
-  <div class="dsg-hero__facts">
-    <div class="dsg-hero__fact">
-      <div class="dsg-fact-icon">↗</div>
-      <div>
-        <span class="dsg-hero__fact-label">Release</span>
-        <span class="dsg-hero__fact-value">6.0</span>
-        <span class="dsg-hero__fact-detail">Landing Page &amp; UX</span>
-      </div>
-    </div>
-
-    <div class="dsg-hero__fact">
-      <div class="dsg-fact-icon">☁</div>
-      <div>
-        <span class="dsg-hero__fact-label">GitHub Pages</span>
-        <span class="dsg-hero__fact-value">Online</span>
-        <span class="dsg-hero__fact-detail">Pubblicazione automatica</span>
-      </div>
-    </div>
-
-    <div class="dsg-hero__fact">
-      <div class="dsg-fact-icon">⌁</div>
-      <div>
-        <span class="dsg-hero__fact-label">Analytics</span>
-        <span class="dsg-hero__fact-value">Attivo</span>
-        <span class="dsg-hero__fact-detail">Elaborazione automatica</span>
-      </div>
-    </div>
-
-    <div class="dsg-hero__fact">
-      <div class="dsg-fact-icon">⌂</div>
-      <div>
-        <span class="dsg-hero__fact-label">Osservatorio</span>
-        <span class="dsg-hero__fact-value">Remoto</span>
-        <span class="dsg-hero__fact-detail">Manciano (GR)</span>
-      </div>
-    </div>
-  </div>
+  <aside class="dsg-mission-panel">
+    <span>LA NOSTRA MISSIONE</span>
+    <p>
+      Rendere i dati astronomici accessibili, affidabili e utili alla comunità
+      scientifica attraverso tecnologia, rigorosa governance e innovazione continua.
+    </p>
+  </aside>
 </div>
 
-<section class="dsg-section-intro">
-  <span class="dsg-section-kicker">ESPLORA LA PIATTAFORMA</span>
-  <h2>Un unico portale per documentazione, dati e operazioni</h2>
+<section class="dsg-domain-section">
+  <div class="dsg-section-intro">
+    <span class="dsg-section-kicker">ESPLORA PER DOMINIO</span>
+    <h2>Un portale organizzato per responsabilità e capacità</h2>
+  </div>
+
+  <div class="dsg-domain-grid">
+    <article class="dsg-domain-card is-executive">
+      <span class="dsg-domain-card__icon">▥</span>
+      <h3>Executive</h3>
+      <p>Visione, programma, governance e pianificazione dell’evoluzione Digital StarGate.</p>
+      <a href="./roadmap/">Apri la roadmap →</a>
+    </article>
+
+    <article class="dsg-domain-card is-architecture">
+      <span class="dsg-domain-card__icon">⌘</span>
+      <h3>Architecture</h3>
+      <p>Architettura enterprise, metamodel, decisioni, principi e Architecture Package.</p>
+      <a href="./architecture/">Esplora l’architettura →</a>
+    </article>
+
+    <article class="dsg-domain-card is-scientific">
+      <span class="dsg-domain-card__badge">ATTIVO</span>
+      <span class="dsg-domain-card__icon">♢</span>
+      <h3>Scientific Platform</h3>
+      <p>AP-013, Scientific Repository, Session Importer, manifest e dati scientifici.</p>
+      <a href="./architecture/packages/AP-013-Scientific-Image-Repository-Architecture/">Apri AP-013 →</a>
+    </article>
+
+    <article class="dsg-domain-card is-operations">
+      <span class="dsg-domain-card__icon">⚙</span>
+      <h3>Operations</h3>
+      <p>Procedure operative, automazione, runbook e gestione dell’infrastruttura.</p>
+      <a href="./chapters/15-automazione/">Apri Operations →</a>
+    </article>
+
+    <article class="dsg-domain-card is-validation">
+      <span class="dsg-domain-card__icon">◇</span>
+      <h3>Validation &amp; Certification</h3>
+      <p>Review indipendenti, assessment, validation campaign, evidenze e readiness gate.</p>
+      <a href="./architecture/validation/">Apri Validation →</a>
+    </article>
+
+    <article class="dsg-domain-card is-analytics">
+      <span class="dsg-domain-card__icon">⌁</span>
+      <h3>Analytics</h3>
+      <p>KPI, dashboard, qualità dei dati, osservabilità e insight delle sessioni.</p>
+      <a href="./analytics/">Apri Analytics →</a>
+    </article>
+
+    <article class="dsg-domain-card is-developer">
+      <span class="dsg-domain-card__icon">&lt;/&gt;</span>
+      <h3>Developer</h3>
+      <p>Guide di sviluppo, contratti canonici, capability e standard di pubblicazione.</p>
+      <a href="./developer/development-guide/">Apri Developer →</a>
+    </article>
+
+    <article class="dsg-domain-card is-observatory">
+      <span class="dsg-domain-card__icon">⌂</span>
+      <h3>Observatory</h3>
+      <p>Strumentazione, acquisizione, stato operativo, ambiente e sessioni osservative.</p>
+      <a href="./status/">Apri Observatory →</a>
+    </article>
+  </div>
 </section>
 
-<div class="grid cards dsg-feature-grid" markdown>
+<section class="dsg-program-section">
+  <div class="dsg-section-intro">
+    <span class="dsg-section-kicker">STATO DEL PROGRAMMA</span>
+    <h2>Architettura e avanzamento corrente</h2>
+  </div>
 
-- :material-book-open-page-variant:{ .lg .middle } **Manuale tecnico**
+  <div class="dsg-program-panel">
+    <article>
+      <span class="dsg-program-label">ARCHITECTURE PACKAGE</span>
+      <span class="dsg-program-value">AP-013 <span class="dsg-status-pill">IN CORSO</span></span>
+      <span class="dsg-program-detail">Scientific Image Repository Architecture</span>
+      <div class="dsg-progress" aria-label="Avanzamento AP-013: 70 percento"><span></span></div>
+    </article>
 
-    La documentazione completa dell’osservatorio.
+    <article>
+      <span class="dsg-program-label">PROSSIMA MILESTONE</span>
+      <span class="dsg-program-value">M3.3</span>
+      <span class="dsg-program-detail">Repository scientifico, manifest, catalogo SHA-256 e metadata.</span>
+    </article>
 
-    - Architettura del sistema
-    - Infrastruttura e networking
-    - Strumentazione astronomica
-    - Software e automazione
-    - Sicurezza e procedure
-    - Manutenzione e troubleshooting
+    <article>
+      <span class="dsg-program-label">BASELINE OPERATIVA</span>
+      <span class="dsg-program-value">Limited Pilot</span>
+      <span class="dsg-program-detail">Discovery 203 file · 11 sessioni · COPY_ONLY · 1 file per run.</span>
+    </article>
 
-    [:octicons-arrow-right-24: Apri il manuale](chapters/01-introduzione.md)
-
-- :material-chart-box:{ .lg .middle } **Analytics**
-
-    Il portale di analisi delle sessioni osservative.
-
-    - KPI operativi
-    - Statistiche di acquisizione
-    - Analisi dei target
-    - Configurazioni utilizzate
-    - Controlli di qualità
-    - Report automatici
-
-    [:octicons-arrow-right-24: Apri Analytics](analytics/index.md)
-
-- :material-telescope:{ .lg .middle } **Sessioni osservative**
-
-    L’archivio cronologico delle attività dell’osservatorio.
-
-    - Report delle sessioni
-    - Target osservati
-    - Tempi di integrazione
-    - Immagini acquisite
-    - Dati di guida
-    - Configurazioni strumentali
-
-    [:octicons-arrow-right-24: Consulta le sessioni](session-reports/index.md)
-
-- :material-tools:{ .lg .middle } **Engineering**
-
-    Schemi e documentazione tecnica dell’infrastruttura.
-
-    - Cablaggi
-    - Schemi elettrici
-    - Configurazioni
-    - Asset hardware
-    - Procedure di verifica
-    - Checklist operative
-
-    [:octicons-arrow-right-24: Apri Engineering](chapters/35-schemi-elettrici-cablaggi.md)
-
-</div>
-
----
-
-## La missione
-
-> Progettare e documentare un osservatorio astronomico remoto affidabile, automatizzato ed evolutivo, capace di integrare strumenti astronomici, infrastruttura di rete, software di controllo e analisi dei dati in un unico ecosistema operativo.
-
-Digital StarGate nasce dall’incontro tra passione astronomica, automazione e ingegneria del software. Ogni componente del sistema viene descritto, verificato e mantenuto secondo un approccio tecnico strutturato, documentato e replicabile.
-
----
-
-## Panoramica operativa
+    <article>
+      <span class="dsg-program-label">SAFETY BOUNDARY</span>
+      <span class="dsg-program-value">Protetta</span>
+      <span class="dsg-program-detail">Overwrite, bulk transfer e source cleanup non autorizzati.</span>
+    </article>
+  </div>
+</section>
 
 <!-- DSG:AUTO-HOMEPAGE:START -->
-<div class="dsg-kpi-grid">
+<section class="dsg-program-section">
+  <div class="dsg-section-intro">
+    <span class="dsg-section-kicker">OSSERVATORIO E DATI</span>
+    <h2>Indicatori operativi</h2>
+  </div>
 
-<div class="dsg-kpi">
-  <span class="dsg-kpi__label">Sessioni</span>
-  <span class="dsg-kpi__value dsg-counter" data-value="3">0</span>
-  <span class="dsg-kpi__detail">storico disponibile</span>
-</div>
-
-<div class="dsg-kpi">
-  <span class="dsg-kpi__label">Integrazione</span>
-  <span class="dsg-kpi__value dsg-counter" data-value="31.83" data-decimals="2" data-suffix=" h">0</span>
-  <span class="dsg-kpi__detail">totale acquisito</span>
-</div>
-
-<div class="dsg-kpi">
-  <span class="dsg-kpi__label">Immagini</span>
-  <span class="dsg-kpi__value dsg-counter" data-value="191">0</span>
-  <span class="dsg-kpi__detail">light completati</span>
-</div>
-
-<div class="dsg-kpi">
-  <span class="dsg-kpi__label">Target</span>
-  <span class="dsg-kpi__value dsg-counter" data-value="1">0</span>
-  <span class="dsg-kpi__detail">oggetti distinti</span>
-</div>
-
-</div>
-
-### Ultima sessione
-
-| Campo | Valore |
-|---|---|
-| Sessione | `2026-07-16_2026-07-17` |
-| Data | 16/07/2026 18:00 → 17/07/2026 07:00 |
-| Target | LDN 1320 |
-| Configurazione | Sky-Watcher Quattro 200P · ToupTek 294MC PRO |
-| Integrazione | 10,50 h |
-| Immagini completate | 63 |
-| RMS totale | 0,397 arcsec |
-| Stato | 🟢 GREEN |
-
+  <div class="dsg-kpi-grid">
+    <div class="dsg-kpi">
+      <span class="dsg-kpi__label">Sessioni</span>
+      <span class="dsg-kpi__value dsg-counter" data-value="3">0</span>
+      <span class="dsg-kpi__detail">storico disponibile</span>
+    </div>
+    <div class="dsg-kpi">
+      <span class="dsg-kpi__label">Integrazione</span>
+      <span class="dsg-kpi__value dsg-counter" data-value="31.83" data-decimals="2" data-suffix=" h">0</span>
+      <span class="dsg-kpi__detail">totale acquisito</span>
+    </div>
+    <div class="dsg-kpi">
+      <span class="dsg-kpi__label">Immagini</span>
+      <span class="dsg-kpi__value dsg-counter" data-value="191">0</span>
+      <span class="dsg-kpi__detail">light completati</span>
+    </div>
+    <div class="dsg-kpi">
+      <span class="dsg-kpi__label">Target</span>
+      <span class="dsg-kpi__value dsg-counter" data-value="1">0</span>
+      <span class="dsg-kpi__detail">oggetti distinti</span>
+    </div>
+  </div>
+</section>
 <!-- DSG:AUTO-HOMEPAGE:END -->
 
-<section class="dsg-showcase">
-  <div class="dsg-showcase__media" role="img" aria-label="Osservatorio Digital StarGate a Manciano"></div>
-
-  <div class="dsg-showcase__content">
-    <span class="dsg-section-kicker">ULTIMA OSSERVAZIONE</span>
-    <h2>LDN 1320</h2>
-    <p>
-      Ultima sessione registrata dal portale con acquisizione automatizzata,
-      controllo della guida e monitoraggio dei parametri operativi.
-    </p>
-
-    <div class="dsg-showcase__metrics">
-      <div>
-        <strong>10,50 h</strong>
-        <span>Integrazione</span>
-      </div>
-      <div>
-        <strong>63</strong>
-        <span>Light completati</span>
-      </div>
-      <div>
-        <strong>0,397″</strong>
-        <span>RMS totale</span>
-      </div>
-    </div>
-
-    <a class="md-button md-button--primary" href="./session-reports/">
-      Apri il report della sessione →
-    </a>
-  </div>
-</section>
-
-<section class="dsg-roadmap">
+<section class="dsg-quick-section">
   <div class="dsg-section-intro">
-    <span class="dsg-section-kicker">EVOLUZIONE DEL PROGETTO</span>
-    <h2>La roadmap di Digital StarGate</h2>
+    <span class="dsg-section-kicker">ACCESSO RAPIDO</span>
+    <h2>Documenti e strumenti principali</h2>
   </div>
 
-  <div class="dsg-timeline">
-    <article class="dsg-timeline__item is-complete">
-      <span class="dsg-timeline__dot"></span>
-      <div>
-        <span class="dsg-timeline__date">2025</span>
-        <h3>Osservatorio operativo</h3>
-        <p>Completamento della cupola, dell’infrastruttura remota e delle prime sessioni automatizzate.</p>
-      </div>
-    </article>
-
-    <article class="dsg-timeline__item is-complete">
-      <span class="dsg-timeline__dot"></span>
-      <div>
-        <span class="dsg-timeline__date">2026 · Fase 1</span>
-        <h3>Manuale tecnico</h3>
-        <p>Consolidamento della documentazione, delle procedure operative e della governance tecnica.</p>
-      </div>
-    </article>
-
-    <article class="dsg-timeline__item is-current">
-      <span class="dsg-timeline__dot"></span>
-      <div>
-        <span class="dsg-timeline__date">2026 · Fase 2</span>
-        <h3>Analytics e session reporting</h3>
-        <p>Automazione dei KPI, controllo della qualità e pubblicazione dei report delle sessioni.</p>
-      </div>
-    </article>
-
-    <article class="dsg-timeline__item">
-      <span class="dsg-timeline__dot"></span>
-      <div>
-        <span class="dsg-timeline__date">Roadmap</span>
-        <h3>Osservatorio data-driven</h3>
-        <p>Evoluzione del portale verso monitoraggio avanzato, automazioni predittive e analisi storica.</p>
-      </div>
-    </article>
+  <div class="dsg-quick-grid">
+    <a class="dsg-quick-card" href="./roadmap/"><strong>Roadmap</strong><span>Stato e pianificazione del programma.</span><em>→</em></a>
+    <a class="dsg-quick-card" href="./architecture/packages/AP-013-Scientific-Image-Repository-Architecture/"><strong>Architecture Packages</strong><span>Elenco e stato degli AP attivi.</span><em>→</em></a>
+    <a class="dsg-quick-card" href="./architecture/assessments/ARB-012-AP-012-Independent-Architecture-Review/"><strong>Assessment</strong><span>Review e assessment indipendenti.</span><em>→</em></a>
+    <a class="dsg-quick-card" href="./chapters/01-introduzione/"><strong>Documentazione tecnica</strong><span>Manuale tecnico e procedure.</span><em>→</em></a>
+    <a class="dsg-quick-card" href="https://github.com/maininimassimo-bit/digital-stargate-manual"><strong>Repository</strong><span>Codice sorgente e strumenti.</span><em>→</em></a>
   </div>
 </section>
 
-
----
-
-## Accesso rapido
-
-<div class="grid cards" markdown>
-
-- :material-view-dashboard:{ .lg .middle } **Dashboard Analytics**
-
-    Consulta KPI, grafici e statistiche delle sessioni.
-
-    [:octicons-arrow-right-24: Apri la dashboard](analytics/dashboard.html)
-
-- :material-clipboard-alert-outline:{ .lg .middle } **Dati da validare**
-
-    Visualizza le informazioni che richiedono una verifica tecnica.
-
-    [:octicons-arrow-right-24: Apri l’elenco](appendices/dati-da-validare.md)
-
-- :material-file-document-edit-outline:{ .lg .middle } **Registro revisioni**
-
-    Consulta la cronologia delle modifiche apportate alla documentazione.
-
-    [:octicons-arrow-right-24: Consulta il registro](appendices/registro-revisioni.md)
-
+<div class="dsg-enterprise-footer">
+  <blockquote class="dsg-enterprise-quote">
+    “L’universo non è fatto solo di stelle, ma di dati che raccontano storie.
+    Noi costruiamo il ponte per comprenderle.”
+  </blockquote>
+  <div class="dsg-enterprise-meta">
+    <strong>DOCUMENTAZIONE</strong>
+    <span>Digital StarGate</span>
+    <span>Maintainer: Massimo Mainini</span>
+    <span>GitHub Pages · MkDocs Material</span>
+    <span>Stato: in continua evoluzione</span>
+  </div>
 </div>
 
----
-
-## Informazioni sul progetto
-
-| Campo | Valore |
-|---|---|
-| Documento | `DSG-TM-001` |
-| Sistema | Digital StarGate |
-| Proprietario | Massimo Mainini |
-| Località | Manciano (GR) |
-| Release del portale | 6.0 |
-| Pubblicazione | GitHub Pages |
-| Automazione | GitHub Actions |
-| Stato | In continua evoluzione |
-
-
-
-<div class="dsg-home-footer">
-  <div>
-    <img src="./assets/images/dsg-logo.svg" alt="" class="dsg-home-footer__logo">
-    <div>
-      <strong>Digital StarGate</strong>
-      <span>Osservatorio Astronomico Remoto · Manciano (GR)</span>
-    </div>
-  </div>
-
-  <div class="dsg-home-footer__links">
-    <a href="./chapters/01-introduzione/">Manuale</a>
-    <a href="./analytics/">Analytics</a>
-    <a href="./session-reports/">Sessioni</a>
-    <a href="./status/">Stato</a>
-  </div>
-
-  <span class="dsg-home-footer__release">Release 6.0</span>
 </div>
-
-
-!!! warning "Dati da validare"
-
-    Tutti i valori contrassegnati come **DA VALIDARE** devono essere verificati direttamente sull’impianto prima della pubblicazione definitiva.
