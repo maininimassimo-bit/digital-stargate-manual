@@ -112,7 +112,10 @@ if ($eligibleEntries.Count -eq 0) {
 
 $runId = New-DSGIdentifier -Entity 'TRANSFER-RUN'
 $runDirectory = Join-Path $evidenceRoot $runId
-New-Item -ItemType Directory -Path $runDirectory -Force | Out-Null
+
+# Evidence is intentionally produced even for -WhatIf runs.
+# WhatIf applies only to scientific destination writes.
+New-Item -ItemType Directory -Path $runDirectory -Force -WhatIf:$false | Out-Null
 
 $startedAtUtc = (Get-Date).ToUniversalTime()
 $results = @()
@@ -211,15 +214,19 @@ $manifestPath = Join-Path $runDirectory 'transfer-manifest.json'
 $manifestCsvPath = Join-Path $runDirectory 'transfer-results.csv'
 $checksumPath = Join-Path $runDirectory 'evidence-checksums.txt'
 
-$manifest | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $manifestPath -Encoding UTF8
-$results | Export-Csv -LiteralPath $manifestCsvPath -NoTypeInformation -Encoding UTF8
+$manifest |
+    ConvertTo-Json -Depth 8 |
+    Set-Content -LiteralPath $manifestPath -Encoding UTF8 -WhatIf:$false
+
+$results |
+    Export-Csv -LiteralPath $manifestCsvPath -NoTypeInformation -Encoding UTF8 -WhatIf:$false
 
 $checksumLines = @()
 foreach ($evidenceFile in @($manifestPath, $manifestCsvPath)) {
     $hash = Get-FileHash -LiteralPath $evidenceFile -Algorithm SHA256
     $checksumLines += ('{0}  {1}' -f $hash.Hash.ToLowerInvariant(), (Split-Path -Leaf $evidenceFile))
 }
-$checksumLines | Set-Content -LiteralPath $checksumPath -Encoding ASCII
+$checksumLines | Set-Content -LiteralPath $checksumPath -Encoding ASCII -WhatIf:$false
 
 Write-Host ''
 Write-Host 'DSG COPY-ONLY TRANSFER RUN COMPLETED' -ForegroundColor Green
