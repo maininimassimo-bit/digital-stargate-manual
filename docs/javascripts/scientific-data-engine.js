@@ -1,14 +1,16 @@
 (() => {
   'use strict';
 
-  const VERSION = '2.0.0-rc2';
+  const VERSION = '2.1.0-rc2';
   const cache = new Map();
   const metrics = {
     requests: 0,
     networkLoads: 0,
     cacheHits: 0,
     failures: 0,
-    invalidations: 0
+    invalidations: 0,
+    indexBuilds: 0,
+    indexedLookups: 0
   };
 
   const now = () => Date.now();
@@ -22,12 +24,42 @@
       .sort((a, b) => String(b.observationDate).localeCompare(String(a.observationDate))))
   });
 
+  const buildIndexes = (catalog) => {
+    const byId = new Map();
+    const byTarget = new Map();
+    const byYear = new Map();
+
+    catalog.sessions.forEach((session) => {
+      byId.set(session.sessionId, session);
+
+      const targetSessions = byTarget.get(session.target) || [];
+      targetSessions.push(session);
+      byTarget.set(session.target, targetSessions);
+
+      const year = String(session.observationDate).slice(0, 4);
+      const yearSessions = byYear.get(year) || [];
+      yearSessions.push(session);
+      byYear.set(year, yearSessions);
+    });
+
+    metrics.indexBuilds += 1;
+    return Object.freeze({
+      byId,
+      byTarget,
+      byYear,
+      targets: Object.freeze([...byTarget.keys()].sort()),
+      years: Object.freeze([...byYear.keys()].sort().reverse())
+    });
+  };
+
   const snapshot = (source, entry) => ({
     source,
     state: entry?.state || 'idle',
     loadedAt: entry?.loadedAt || null,
     durationMs: entry?.durationMs ?? null,
     sessionCount: entry?.catalog?.sessions?.length ?? null,
+    targetCount: entry?.indexes?.targets?.length ?? null,
+    yearCount: entry?.indexes?.years?.length ?? null,
     error: entry?.error?.message || null
   });
 
@@ -58,6 +90,7 @@
       loadedAt: null,
       durationMs: null,
       catalog: null,
+      indexes: null,
       error: null,
       promise: null
     };
@@ -76,6 +109,8 @@
         entry.loadedAt = now();
         entry.durationMs = entry.loadedAt - startedAt;
         entry.catalog = catalog;
+        entry.indexes = buildIndexes(catalog);
+        emit('store-ready', snapshot(source, entry));
         emit('load-ready', snapshot(source, entry));
         return catalog;
       })
@@ -92,6 +127,11 @@
     return entry.promise;
   };
 
+  const ensureEntry = async (source, options) => {
+    await loadCatalog(source, options);
+    return cache.get(source);
+  };
+
   const preload = (sources, options = {}) => Promise.all(
     [...new Set(Array.isArray(sources) ? sources : [sources])]
       .filter(Boolean)
@@ -99,19 +139,43 @@
   );
 
   const getSessions = async (source, options) => (await loadCatalog(source, options)).sessions;
+
   const getSession = async (source, sessionId, options) => {
-    const sessions = await getSessions(source, options);
-    return sessions.find((session) => session.sessionId === sessionId) || null;
+    const entry = await ensureEntry(source, options);
+    metrics.indexedLookups += 1;
+    return entry.indexes.byId.get(sessionId) || null;
   };
 
-  const getTargets = async (source, options) => [...new Set((await getSessions(source, options)).map((session) => session.target))].sort();
-  const getYears = async (source, options) => [...new Set((await getSessions(source, options)).map((session) => String(session.observationDate).slice(0, 4)))].sort().reverse();
+  const getTargets = async (source, options) => {
+    const entry = await ensureEntry(source, options);
+    metrics.indexedLookups += 1;
+    return [...entry.indexes.targets];
+  };
+
+  const getYears = async (source, options) => {
+    const entry = await ensureEntry(source, options);
+    metrics.indexedLookups += 1;
+    return [...entry.indexes.years];
+  };
+
+  const getSessionsByTarget = async (source, target, options) => {
+    const entry = await ensureEntry(source, options);
+    metrics.indexedLookups += 1;
+    return [...(entry.indexes.byTarget.get(target) || [])];
+  };
+
+  const getSessionsByYear = async (source, year, options) => {
+    const entry = await ensureEntry(source, options);
+    metrics.indexedLookups += 1;
+    return [...(entry.indexes.byYear.get(String(year)) || [])];
+  };
 
   const getKPIs = async (source, options) => {
-    const sessions = await getSessions(source, options);
+    const entry = await ensureEntry(source, options);
+    const sessions = entry.catalog.sessions;
     return {
       sessionCount: sessions.length,
-      targetCount: new Set(sessions.map((session) => session.target)).size,
+      targetCount: entry.indexes.targets.length,
       integrationHours: sessions.reduce((sum, session) => sum + Number(session.integrationHours || 0), 0),
       validatedCount: sessions.filter((session) => session.qualityState === 'VALIDATED_ANALYTICS').length
     };
@@ -127,6 +191,14 @@
         && (!filters.target || session.target === filters.target)
         && (!filters.quality || session.qualityState === filters.quality);
     });
+  };
+
+  const querySessions = async (source, filters = {}, options) => {
+    let sessions;
+    if (filters.target) sessions = await getSessionsByTarget(source, filters.target, options);
+    else if (filters.year) sessions = await getSessionsByYear(source, filters.year, options);
+    else sessions = await getSessions(source, options);
+    return filterSessions(sessions, filters);
   };
 
   const getKnowledgeGraph = (session) => ({
@@ -154,12 +226,15 @@
   ];
 
   const clearCache = (source) => {
-    const cleared = source ? cache.delete(source) : Boolean(cache.size && cache.clear() === undefined);
-    if (cleared) {
+    const hadEntries = source ? cache.has(source) : cache.size > 0;
+    if (source) cache.delete(source);
+    else cache.clear();
+
+    if (hadEntries) {
       metrics.invalidations += 1;
       emit('cache-invalidated', { source: source || '*', reason: 'manual' });
     }
-    return cleared;
+    return hadEntries;
   };
 
   const getStatus = (source) => source
@@ -170,7 +245,8 @@
     ...metrics,
     cacheEntries: cache.size,
     readyEntries: [...cache.values()].filter((entry) => entry.state === 'ready').length,
-    errorEntries: [...cache.values()].filter((entry) => entry.state === 'error').length
+    errorEntries: [...cache.values()].filter((entry) => entry.state === 'error').length,
+    indexedSessions: [...cache.values()].reduce((sum, entry) => sum + (entry.indexes?.byId?.size || 0), 0)
   });
 
   window.DSGScientificDataEngine = Object.freeze({
@@ -181,8 +257,11 @@
     getSession,
     getTargets,
     getYears,
+    getSessionsByTarget,
+    getSessionsByYear,
     getKPIs,
     filterSessions,
+    querySessions,
     getKnowledgeGraph,
     getLineage,
     clearCache,
@@ -190,5 +269,5 @@
     getMetrics
   });
 
-  emit('engine-ready', { capabilities: ['cache', 'events', 'metrics', 'preload'] });
+  emit('engine-ready', { capabilities: ['cache', 'events', 'metrics', 'preload', 'session-store', 'indexes', 'query'] });
 })();
