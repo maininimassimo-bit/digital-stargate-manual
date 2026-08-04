@@ -148,7 +148,6 @@
 
     document.addEventListener('click', () => navigation.querySelectorAll('.dsg-enterprise-nav__item.is-open').forEach((item) => item.classList.remove('is-open')));
     navigation.querySelector('[data-dsg-search]')?.addEventListener('click', () => openSearch());
-    navigation.querySelector('[data-dsg-theme]')?.addEventListener('click', () => document.querySelector('[data-md-component="palette"] label')?.click());
 
     const drawer = document.querySelector('.dsg-docs-drawer');
     const backdrop = document.querySelector('.dsg-docs-backdrop');
