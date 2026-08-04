@@ -38,7 +38,7 @@
           ['Release Notes', 'releases/release-1.5-developer-edition/']
         ], href)}
         ${menuItem('Architettura', [
-          ['Panoramica', 'architecture/'],
+          ['Architecture Center', 'architecture/'],
           ['Decisioni ADR', 'architecture/ADR-001-Session-Layer/'],
           ['Governance e Metamodel', 'architecture/enterprise-metamodel/'],
           ['Assessment', 'architecture/assessments/ARB-012-AP-012-Independent-Architecture-Review/'],
@@ -46,10 +46,10 @@
           ['Architecture Package', 'architecture/packages/AP-013-Scientific-Image-Repository-Architecture/']
         ], href)}
         ${menuItem('Scientific Platform', [
+          ['Scientific Platform Center', 'scientific-platform/'],
           ['AP-013 Scientific Repository', 'architecture/packages/AP-013-Scientific-Image-Repository-Architecture/'],
           ['Scientific Data Manager', 'architecture/scientific-assets/DSDM-001-Scientific-Data-Manager-Conceptual-Model/'],
           ['Session Importer', 'architecture/scientific-assets/DSDM-004-Session-Importer-Architecture-and-Safe-Transfer-Design/'],
-          ['Asset Inventory', 'architecture/scientific-assets/AP13-W02-Current-State-Scientific-Asset-Inventory-Specification/'],
           ['Provenance e Manifest', 'architecture/scientific-assets/DSDM-003-Contract-and-Manifest-Model/'],
           ['Transfer Readiness', 'architecture/validation/AP-013-Transfer-Readiness-Gate/']
         ], href)}
@@ -133,8 +133,8 @@
       <div class="dsg-docs-drawer__links">
         <a href="${href()}"><span>⌂ Home</span><span>›</span></a>
         <a href="${href('roadmap/')}"><span>⚑ Programma</span><span>›</span></a>
-        <a href="${href('architecture/')}"><span>◇ Architettura</span><span>›</span></a>
-        <a href="${href('architecture/packages/AP-013-Scientific-Image-Repository-Architecture/')}"><span>♢ Scientific Platform</span><span>›</span></a>
+        <a href="${href('architecture/')}"><span>◇ Architecture Center</span><span>›</span></a>
+        <a href="${href('scientific-platform/')}"><span>♢ Scientific Platform</span><span>›</span></a>
         <a href="${href('chapters/15-automazione/')}"><span>⚙ Operations</span><span>›</span></a>
         <a href="${href('analytics/')}"><span>⌁ Analytics</span><span>›</span></a>
         <a href="${href('developer/development-guide/')}"><span>&lt;/&gt; Developer</span><span>›</span></a>
