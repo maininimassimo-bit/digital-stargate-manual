@@ -66,4 +66,5 @@
 
 </div>
 
+<script src="../javascripts/scientific-data-engine.js"></script>
 <script src="../javascripts/scientific-session-explorer.js"></script>
