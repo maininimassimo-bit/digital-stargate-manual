@@ -8,6 +8,8 @@
   const overviewEl = root.querySelector('[data-roadmap-overview]');
   const galleryEl = root.querySelector('[data-roadmap-gallery]');
   const progressEl = root.querySelector('[data-roadmap-progress]');
+  const currentEl = root.querySelector('[data-roadmap-current]');
+  const nextEl = root.querySelector('[data-roadmap-next]');
 
   const labels = { completed: 'Completato', active: 'In corso', planned: 'Pianificato' };
   const escapeHtml = value => String(value ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
@@ -27,7 +29,7 @@
   function renderOverview({ completed, active, planned, total, percent }) {
     const remaining = active + planned;
     const activeStart = percent;
-    const activeEnd = Math.round(((completed + active) / total) * 100);
+    const activeEnd = total ? Math.round(((completed + active) / total) * 100) : 0;
 
     overviewEl.innerHTML = `
       <div class="dsg-roadmap-donut" style="--completed:${percent};--active-start:${activeStart};--active-end:${activeEnd}" role="img" aria-label="${completed} package completati, ${active} in corso e ${planned} pianificati su ${total}">
@@ -44,6 +46,42 @@
       </div>`;
   }
 
+  function renderCurrent(data, items) {
+    if (!currentEl) return;
+    const current = items.find(item => item.id === data.currentPackage) || items.find(item => item.status === 'active');
+    if (!current) {
+      currentEl.innerHTML = '<p>Nessun package corrente identificato nel registro.</p>';
+      return;
+    }
+    currentEl.innerHTML = `
+      <div>
+        <span>PACKAGE CORRENTE</span>
+        <strong>${escapeHtml(current.id)}</strong>
+      </div>
+      <div>
+        <h2>${escapeHtml(current.title)}</h2>
+        <p>${escapeHtml(current.note || 'Stato derivato dal registro versionato.')}</p>
+      </div>
+      <div class="dsg-roadmap-current__status is-${escapeHtml(current.status)}">${labels[current.status] || escapeHtml(current.status)}</div>`;
+  }
+
+  function renderNext(data, items) {
+    if (!nextEl) return;
+    const candidates = items.filter(item => item.status !== 'completed').slice(0, 4);
+    const cards = candidates.map(item => `
+      <article class="is-${escapeHtml(item.status)}">
+        <span>${escapeHtml(item.id)}</span>
+        <strong>${escapeHtml(item.title)}</strong>
+        <small>${escapeHtml(item.note || labels[item.status])}</small>
+      </article>`).join('');
+    nextEl.innerHTML = `${cards}
+      <article class="is-governance">
+        <span>PROSSIMA MILESTONE</span>
+        <strong>${escapeHtml(data.nextMilestone)}</strong>
+        <small>Fonte: ${escapeHtml(data.authority)}</small>
+      </article>`;
+  }
+
   function render(data) {
     const items = data.waves.flatMap(w => w.items);
     const completed = items.filter(i => i.status === 'completed').length;
@@ -57,7 +95,9 @@
       <div><span>Prossima milestone</span><strong>${escapeHtml(data.nextMilestone)}</strong></div>
       <div><span>Target</span><strong>${escapeHtml(data.target)}</strong></div>`;
 
+    renderCurrent(data, items);
     renderOverview({ completed, active, planned, total: items.length, percent });
+    renderNext(data, items);
 
     progressEl.style.width = `${percent}%`;
     progressEl.setAttribute('aria-valuenow', String(percent));
@@ -85,5 +125,7 @@
     .catch(error => {
       wavesEl.innerHTML = `<div class="admonition warning"><p class="admonition-title">Roadmap non disponibile</p><p>Impossibile caricare il registro dinamico: ${escapeHtml(error.message)}</p></div>`;
       if (overviewEl) overviewEl.innerHTML = '<p>Riepilogo grafico non disponibile.</p>';
+      if (currentEl) currentEl.innerHTML = '<p>Package corrente non disponibile.</p>';
+      if (nextEl) nextEl.innerHTML = '<p>Prossime attività non disponibili.</p>';
     });
 })();
