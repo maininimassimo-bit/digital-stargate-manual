@@ -45,4 +45,5 @@
   <section class="dsg-session-detail__error" data-detail-error hidden></section>
 </div>
 
+<script src="../javascripts/scientific-data-engine.js"></script>
 <script src="../javascripts/scientific-session-detail.js"></script>
