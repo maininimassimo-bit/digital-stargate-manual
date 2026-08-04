@@ -1,35 +1,114 @@
 (() => {
+  'use strict';
+
+  const VERSION = '2.0.0-rc2';
   const cache = new Map();
-
-  const normalize = (catalog) => ({
-    ...catalog,
-    sessions: [...(catalog.sessions || [])]
-      .map((session) => ({ ...session }))
-      .sort((a, b) => String(b.observationDate).localeCompare(String(a.observationDate)))
-  });
-
-  const loadCatalog = async (source) => {
-    if (!source) throw new Error('Scientific Data Engine: catalog source is required.');
-    if (!cache.has(source)) {
-      cache.set(source, fetch(source).then((response) => {
-        if (!response.ok) throw new Error(`Catalog request failed: ${response.status}`);
-        return response.json();
-      }).then(normalize));
-    }
-    return cache.get(source);
+  const metrics = {
+    requests: 0,
+    networkLoads: 0,
+    cacheHits: 0,
+    failures: 0,
+    invalidations: 0
   };
 
-  const getSessions = async (source) => (await loadCatalog(source)).sessions;
-  const getSession = async (source, sessionId) => {
-    const sessions = await getSessions(source);
+  const now = () => Date.now();
+  const eventBus = () => window.DSG?.events || null;
+  const emit = (type, detail = {}) => eventBus()?.emit(`science-${type}`, { version: VERSION, ...detail });
+
+  const normalize = (catalog) => Object.freeze({
+    ...catalog,
+    sessions: Object.freeze([...(catalog.sessions || [])]
+      .map((session) => Object.freeze({ ...session }))
+      .sort((a, b) => String(b.observationDate).localeCompare(String(a.observationDate))))
+  });
+
+  const snapshot = (source, entry) => ({
+    source,
+    state: entry?.state || 'idle',
+    loadedAt: entry?.loadedAt || null,
+    durationMs: entry?.durationMs ?? null,
+    sessionCount: entry?.catalog?.sessions?.length ?? null,
+    error: entry?.error?.message || null
+  });
+
+  const loadCatalog = async (source, options = {}) => {
+    if (!source) throw new Error('Scientific Data Engine: catalog source is required.');
+
+    metrics.requests += 1;
+    const { force = false, maxAgeMs = Infinity, signal } = options;
+    const existing = cache.get(source);
+    const fresh = existing?.state === 'ready'
+      && now() - existing.loadedAt <= maxAgeMs;
+
+    if (!force && (fresh || existing?.state === 'loading')) {
+      metrics.cacheHits += 1;
+      emit('cache-hit', snapshot(source, existing));
+      return existing.promise;
+    }
+
+    if (force && existing) {
+      cache.delete(source);
+      metrics.invalidations += 1;
+      emit('cache-invalidated', { source, reason: 'forced-reload' });
+    }
+
+    const startedAt = now();
+    const entry = {
+      state: 'loading',
+      loadedAt: null,
+      durationMs: null,
+      catalog: null,
+      error: null,
+      promise: null
+    };
+
+    metrics.networkLoads += 1;
+    emit('load-start', { source });
+
+    entry.promise = fetch(source, { signal })
+      .then((response) => {
+        if (!response.ok) throw new Error(`Catalog request failed: ${response.status}`);
+        return response.json();
+      })
+      .then(normalize)
+      .then((catalog) => {
+        entry.state = 'ready';
+        entry.loadedAt = now();
+        entry.durationMs = entry.loadedAt - startedAt;
+        entry.catalog = catalog;
+        emit('load-ready', snapshot(source, entry));
+        return catalog;
+      })
+      .catch((error) => {
+        entry.state = 'error';
+        entry.durationMs = now() - startedAt;
+        entry.error = error;
+        metrics.failures += 1;
+        emit('load-error', snapshot(source, entry));
+        throw error;
+      });
+
+    cache.set(source, entry);
+    return entry.promise;
+  };
+
+  const preload = (sources, options = {}) => Promise.all(
+    [...new Set(Array.isArray(sources) ? sources : [sources])]
+      .filter(Boolean)
+      .map((source) => loadCatalog(source, options))
+  );
+
+  const getSessions = async (source, options) => (await loadCatalog(source, options)).sessions;
+  const getSession = async (source, sessionId, options) => {
+    const sessions = await getSessions(source, options);
     return sessions.find((session) => session.sessionId === sessionId) || null;
   };
 
-  const getTargets = async (source) => [...new Set((await getSessions(source)).map((session) => session.target))].sort();
-  const getYears = async (source) => [...new Set((await getSessions(source)).map((session) => String(session.observationDate).slice(0, 4)))].sort().reverse();
+  const getTargets = async (source, options) => [...new Set((await getSessions(source, options)).map((session) => session.target))].sort();
+  const getYears = async (source, options) => [...new Set((await getSessions(source, options)).map((session) => String(session.observationDate).slice(0, 4)))].sort().reverse();
 
-  const getKPIs = async (source) => {
-    const sessions = await getSessions(source);
+  const getKPIs = async (source, options) => {
+    const sessions = await getSessions(source, options);
     return {
       sessionCount: sessions.length,
       targetCount: new Set(sessions.map((session) => session.target)).size,
@@ -74,10 +153,30 @@
     { label: 'Publication', state: 'missing', detail: 'not represented' }
   ];
 
-  const clearCache = (source) => source ? cache.delete(source) : cache.clear();
+  const clearCache = (source) => {
+    const cleared = source ? cache.delete(source) : Boolean(cache.size && cache.clear() === undefined);
+    if (cleared) {
+      metrics.invalidations += 1;
+      emit('cache-invalidated', { source: source || '*', reason: 'manual' });
+    }
+    return cleared;
+  };
+
+  const getStatus = (source) => source
+    ? snapshot(source, cache.get(source))
+    : [...cache.entries()].map(([key, entry]) => snapshot(key, entry));
+
+  const getMetrics = () => Object.freeze({
+    ...metrics,
+    cacheEntries: cache.size,
+    readyEntries: [...cache.values()].filter((entry) => entry.state === 'ready').length,
+    errorEntries: [...cache.values()].filter((entry) => entry.state === 'error').length
+  });
 
   window.DSGScientificDataEngine = Object.freeze({
+    version: VERSION,
     loadCatalog,
+    preload,
     getSessions,
     getSession,
     getTargets,
@@ -86,6 +185,10 @@
     filterSessions,
     getKnowledgeGraph,
     getLineage,
-    clearCache
+    clearCache,
+    getStatus,
+    getMetrics
   });
+
+  emit('engine-ready', { capabilities: ['cache', 'events', 'metrics', 'preload'] });
 })();
