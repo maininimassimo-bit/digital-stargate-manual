@@ -1,144 +1,87 @@
 (() => {
   'use strict';
 
-  const STORAGE_KEY = 'dsg.theme.preference';
-  const THEMES = Object.freeze({
-    light: Object.freeze({ scheme: 'default', icon: '☾', action: 'Attiva tema scuro' }),
-    dark: Object.freeze({ scheme: 'slate', icon: '☀', action: 'Attiva tema chiaro' })
-  });
-  const MODES = new Set(['light', 'dark', 'system']);
+  const CONTROL_SELECTOR = '[data-dsg-theme]';
+  const PALETTE_SELECTOR = '[data-md-component="palette"] input[name="__palette"]';
 
-  let currentTheme = null;
-  let initialized = false;
+  let listenersBound = false;
 
-  const getStoredPreference = () => {
-    try {
-      const preference = window.localStorage.getItem(STORAGE_KEY);
-      return MODES.has(preference) ? preference : null;
-    } catch {
-      return null;
-    }
+  const getPaletteInputs = () => [...document.querySelectorAll(PALETTE_SELECTOR)];
+
+  const getActiveInput = () => {
+    const inputs = getPaletteInputs();
+    return inputs.find((input) => input.checked)
+      || inputs.find((input) => input.dataset.mdColorScheme === document.body?.dataset.mdColorScheme)
+      || inputs[0]
+      || null;
   };
 
-  const savePreference = (preference) => {
-    if (!MODES.has(preference)) return;
-    try {
-      window.localStorage.setItem(STORAGE_KEY, preference);
-    } catch {
-      // Storage can be unavailable in private or restricted browser contexts.
-    }
+  const getNextInput = (activeInput) => {
+    const inputs = getPaletteInputs();
+    if (!inputs.length) return null;
+
+    const currentIndex = Math.max(0, inputs.indexOf(activeInput));
+    return inputs[(currentIndex + 1) % inputs.length];
   };
 
-  const detectSystemTheme = () =>
-    window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-
-  const detectMaterialTheme = () => {
-    const scheme = document.body?.getAttribute('data-md-color-scheme')
-      || document.documentElement.getAttribute('data-md-color-scheme');
-
-    if (scheme === THEMES.dark.scheme) return 'dark';
-    if (scheme === THEMES.light.scheme) return 'light';
-
-    const selectedPalette = document.querySelector(
-      '[data-md-component="palette"] input[data-md-color-scheme]:checked'
-    );
-
-    if (selectedPalette?.dataset.mdColorScheme === THEMES.dark.scheme) return 'dark';
-    if (selectedPalette?.dataset.mdColorScheme === THEMES.light.scheme) return 'light';
-
-    return null;
+  const getThemeName = (input) => {
+    if (!input) return 'unknown';
+    if (input.dataset.mdColorScheme === 'slate') return 'dark';
+    if (input.dataset.mdColorScheme === 'default') return 'light';
+    return input.dataset.mdColorScheme || 'unknown';
   };
 
-  const resolveTheme = (preference) => {
-    if (preference === 'system') return detectSystemTheme();
-    if (preference === 'light' || preference === 'dark') return preference;
-    return detectMaterialTheme() || detectSystemTheme();
-  };
+  const updateControls = () => {
+    const activeInput = getActiveInput();
+    const nextInput = getNextInput(activeInput);
+    const currentTheme = getThemeName(activeInput);
+    const action = nextInput?.getAttribute('aria-label') || 'Cambia tema';
+    const icon = currentTheme === 'dark' ? '☀' : '☾';
 
-  const getPaletteInput = (theme) => document.querySelector(
-    `[data-md-component="palette"] input[data-md-color-scheme="${THEMES[theme].scheme}"]`
-  );
-
-  const updateControls = (theme) => {
-    const nextTheme = theme === 'dark' ? 'light' : 'dark';
-    const state = THEMES[theme];
-
-    document.querySelectorAll('[data-dsg-theme]').forEach((control) => {
-      control.textContent = `${state.icon} ${state.action.replace('Attiva ', '')}`;
-      control.setAttribute('aria-label', state.action);
-      control.setAttribute('title', state.action);
-      control.setAttribute('aria-pressed', String(theme === 'dark'));
-      control.dataset.dsgThemeCurrent = theme;
-      control.dataset.dsgThemeNext = nextTheme;
+    document.querySelectorAll(CONTROL_SELECTOR).forEach((control) => {
+      control.textContent = `${icon} ${action.replace(/^Passa alla /, '').replace(/^Attiva /, '')}`;
+      control.setAttribute('aria-label', action);
+      control.setAttribute('title', action);
+      control.setAttribute('aria-pressed', String(currentTheme === 'dark'));
+      control.dataset.dsgThemeCurrent = currentTheme;
+      control.dataset.dsgThemeNext = getThemeName(nextInput);
     });
-  };
-
-  const dispatchThemeChange = (theme, source) => {
-    document.dispatchEvent(new CustomEvent('dsg:theme-change', {
-      detail: { theme, source }
-    }));
-  };
-
-  const applyTheme = (theme, { persist = false, source = 'initialization' } = {}) => {
-    if (!THEMES[theme]) return;
-
-    const paletteInput = getPaletteInput(theme);
-    if (paletteInput && !paletteInput.checked) {
-      paletteInput.checked = true;
-      paletteInput.dispatchEvent(new Event('input', { bubbles: true }));
-      paletteInput.dispatchEvent(new Event('change', { bubbles: true }));
-    }
-
-    document.body?.setAttribute('data-md-color-scheme', THEMES[theme].scheme);
-    document.documentElement.setAttribute('data-dsg-theme', theme);
-
-    currentTheme = theme;
-    updateControls(theme);
-
-    if (persist) savePreference(theme);
-    dispatchThemeChange(theme, source);
   };
 
   const toggleTheme = () => {
-    const activeTheme = detectMaterialTheme() || currentTheme || resolveTheme(getStoredPreference());
-    applyTheme(activeTheme === 'dark' ? 'light' : 'dark', {
-      persist: true,
-      source: 'enterprise-control'
+    const activeInput = getActiveInput();
+    const nextInput = getNextInput(activeInput);
+    if (!nextInput) return;
+
+    nextInput.click();
+    window.requestAnimationFrame(() => {
+      updateControls();
+      document.dispatchEvent(new CustomEvent('dsg:theme-change', {
+        detail: {
+          theme: getThemeName(getActiveInput()),
+          source: 'enterprise-control'
+        }
+      }));
     });
   };
 
-  const synchronizeFromMaterial = () => {
-    const materialTheme = detectMaterialTheme();
-    if (!materialTheme || materialTheme === currentTheme) return;
-
-    currentTheme = materialTheme;
-    savePreference(materialTheme);
-    updateControls(materialTheme);
-    dispatchThemeChange(materialTheme, 'material-palette');
-  };
-
-  const initialize = () => {
-    const preference = getStoredPreference();
-    applyTheme(resolveTheme(preference), { source: 'initialization' });
-
-    if (initialized) return;
-    initialized = true;
+  const bindListeners = () => {
+    if (listenersBound) return;
+    listenersBound = true;
 
     document.addEventListener('click', (event) => {
-      if (event.target.closest('[data-dsg-theme]')) toggleTheme();
+      if (event.target.closest(CONTROL_SELECTOR)) toggleTheme();
     });
 
     document.addEventListener('change', (event) => {
-      if (event.target.matches('[data-md-component="palette"] input[data-md-color-scheme]')) {
-        window.setTimeout(synchronizeFromMaterial, 0);
-      }
+      if (!event.target.matches(PALETTE_SELECTOR)) return;
+      window.requestAnimationFrame(updateControls);
     });
+  };
 
-    window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change', () => {
-      if (getStoredPreference() === 'system') {
-        applyTheme(detectSystemTheme(), { source: 'system-preference' });
-      }
-    });
+  const initialize = () => {
+    bindListeners();
+    updateControls();
   };
 
   if (document.readyState === 'loading') {
