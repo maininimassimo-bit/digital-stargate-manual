@@ -2,6 +2,12 @@
   const root = document.querySelector('[data-session-catalog]');
   if (!root) return;
 
+  const engine = window.DSGScientificDataEngine;
+  if (!engine) {
+    console.error('Scientific Data Engine is not available.');
+    return;
+  }
+
   const source = root.dataset.sessionCatalog;
   const grid = root.querySelector('[data-session-grid]');
   const kpis = root.querySelector('[data-session-kpis]');
@@ -30,29 +36,29 @@
     ? 'Validated analytics'
     : 'Attention required';
 
-  const renderKpis = () => {
-    const sessions = state.sessions;
-    const targets = new Set(sessions.map((item) => item.target));
-    const integration = sessions.reduce((sum, item) => sum + Number(item.integrationHours || 0), 0);
-    const validated = sessions.filter((item) => item.qualityState === 'VALIDATED_ANALYTICS').length;
-    const values = [
-      String(sessions.length),
-      String(targets.size),
-      `${dec(integration)} h`,
-      `${validated}/${sessions.length}`
+  const renderKpis = async () => {
+    const values = await engine.getKPIs(source);
+    const display = [
+      String(values.sessionCount),
+      String(values.targetCount),
+      `${dec(values.integrationHours)} h`,
+      `${values.validatedCount}/${values.sessionCount}`
     ];
-    [...kpis.querySelectorAll('strong')].forEach((node, index) => { node.textContent = values[index] || '—'; });
+    [...kpis.querySelectorAll('strong')].forEach((node, index) => { node.textContent = display[index] || '—'; });
   };
 
-  const populateFilters = () => {
-    const years = [...new Set(state.sessions.map((item) => item.observationDate.slice(0, 4)))].sort().reverse();
-    const targets = [...new Set(state.sessions.map((item) => item.target))].sort();
+  const populateFilters = async () => {
+    const [years, targets] = await Promise.all([
+      engine.getYears(source),
+      engine.getTargets(source)
+    ]);
     years.forEach((value) => year.insertAdjacentHTML('beforeend', `<option value="${esc(value)}">${esc(value)}</option>`));
     targets.forEach((value) => target.insertAdjacentHTML('beforeend', `<option value="${esc(value)}">${esc(value)}</option>`));
   };
 
   const card = (session) => {
     const tone = session.qualityState === 'VALIDATED_ANALYTICS' ? 'is-green' : 'is-red';
+    const detailUrl = `../scientific-session-detail/?sessionId=${encodeURIComponent(session.sessionId)}`;
     return `
       <article class="dsg-session-card ${tone}">
         <div class="dsg-session-card__topline">
@@ -76,23 +82,16 @@
           <span>Manifest: ${esc(session.manifestState)}</span>
           <span>Transfer: ${esc(session.transferState)}</span>
         </div>
-        <a href="../../${esc(session.sourceMetricsPath)}">Apri metriche sorgente →</a>
+        <a href="${detailUrl}">Apri sessione →</a>
       </article>`;
   };
 
   const render = () => {
-    const query = search.value.trim().toLowerCase();
-    const selectedYear = year.value;
-    const selectedTarget = target.value;
-    const selectedQuality = quality.value;
-
-    state.filtered = state.sessions.filter((item) => {
-      const haystack = [item.sessionId, item.target, item.telescope, item.camera, item.filter, item.configurationId]
-        .join(' ').toLowerCase();
-      return (!query || haystack.includes(query))
-        && (!selectedYear || item.observationDate.startsWith(selectedYear))
-        && (!selectedTarget || item.target === selectedTarget)
-        && (!selectedQuality || item.qualityState === selectedQuality);
+    state.filtered = engine.filterSessions(state.sessions, {
+      query: search.value,
+      year: year.value,
+      target: target.value,
+      quality: quality.value
     });
 
     count.textContent = `${state.filtered.length} sessioni visualizzate su ${state.sessions.length}`;
@@ -110,16 +109,13 @@
     render();
   });
 
-  fetch(source)
-    .then((response) => {
-      if (!response.ok) throw new Error(`Catalog request failed: ${response.status}`);
-      return response.json();
-    })
-    .then((catalog) => {
-      state.sessions = [...(catalog.sessions || [])]
-        .sort((a, b) => String(b.observationDate).localeCompare(String(a.observationDate)));
-      renderKpis();
-      populateFilters();
+  Promise.all([
+    engine.getSessions(source),
+    renderKpis(),
+    populateFilters()
+  ])
+    .then(([sessions]) => {
+      state.sessions = sessions;
       render();
     })
     .catch((error) => {
