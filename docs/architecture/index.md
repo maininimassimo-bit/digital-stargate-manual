@@ -92,6 +92,36 @@ AP-001 introduce gli artefatti canonici seguenti:
 
 Questi documenti definiscono vocabolario, relazioni, stati, metadati e tracciabilità. Il loro stato è **Proposed for independent ARB review** e non costituisce certificazione runtime.
 
+## AP-013 — Scientific Image Repository
+
+AP-013 è attivo in modalità **limited automated pilot**. La baseline tecnica pubblicata comprende architettura, modello dati, contratti, session importer, evidenze di discovery e gate di readiness del trasferimento.
+
+### Package e modelli
+
+- [AP-013 — Scientific Image Repository Architecture](packages/AP-013-Scientific-Image-Repository-Architecture.md)
+- [AP13-W02 — Current-State Scientific Asset Inventory Specification](scientific-assets/AP13-W02-Current-State-Scientific-Asset-Inventory-Specification.md)
+- [DSDM-001 — Scientific Data Manager Conceptual Model](scientific-assets/DSDM-001-Scientific-Data-Manager-Conceptual-Model.md)
+- [DSDM-002 — Scientific Data Manager Logical Data Model](scientific-assets/DSDM-002-Scientific-Data-Manager-Logical-Data-Model.md)
+- [DSDM-003 — Contract and Manifest Model](scientific-assets/DSDM-003-Contract-and-Manifest-Model.md)
+- [DSDM-004 — Session Importer Architecture and Safe Transfer Design](scientific-assets/DSDM-004-Session-Importer-Architecture-and-Safe-Transfer-Design.md)
+
+### Evidenze e readiness
+
+- [E-AP13-W02-01 — Source Authorization and Scope Record](scientific-assets/evidence/AP13-W02/E-AP13-W02-01-Source-Authorization-and-Scope-Record.md)
+- [AP-013 — Session Discovery Execution Evidence](validation/AP-013-Session-Discovery-Execution-Evidence.md)
+- [AP-013 — Transfer Readiness Gate](validation/AP-013-Transfer-Readiness-Gate.md)
+
+### Stato operativo verificato al 4 agosto 2026
+
+- discovery eseguita su **203 file** e **11 sessioni**;
+- **203 file parsed**, zero ambiguous e zero failed;
+- motore `COPY_ONLY` e primitive di trasferimento verificati con test automatici;
+- pilot reale limitato a un file con verifica SHA-256;
+- launcher protetto e attività pianificata giornaliera alle 07:30;
+- massimo **1 file per esecuzione** durante il pilot;
+- overwrite, bulk transfer e cancellazione della sorgente non autorizzati;
+- prima esecuzione unattended ancora richiesta come evidenza operativa.
+
 ## Canonical data flow
 
 La rappresentazione autorevole definita da PAA-002 preserva il flusso:
