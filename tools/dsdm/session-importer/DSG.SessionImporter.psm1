@@ -29,7 +29,7 @@ function Resolve-DSGTargetAndTelescope {
     )
 
     $matches = @(
-        foreach ($telescope in $KnownTelescopes) {
+        foreach ($telescope in @($KnownTelescopes)) {
             if ([string]::IsNullOrWhiteSpace($telescope)) {
                 continue
             }
@@ -58,9 +58,14 @@ function Resolve-DSGTargetAndTelescope {
         }
     }
 
-    $bestLength = ($matches | Measure-Object -Property MatchLength -Maximum).Maximum
-    $best = @($matches | Where-Object { $_.MatchLength -eq $bestLength })
+    $bestLength = 0
+    foreach ($match in $matches) {
+        if ($match.MatchLength -gt $bestLength) {
+            $bestLength = $match.MatchLength
+        }
+    }
 
+    $best = @($matches | Where-Object { $_.MatchLength -eq $bestLength })
     if ($best.Count -ne 1) {
         return [pscustomobject]@{
             Status = 'AMBIGUOUS'
@@ -93,10 +98,11 @@ function ConvertFrom-DSGNinaFileName {
         $originalFileName = [System.IO.Path]::GetFileName($FileName)
         $extension = [System.IO.Path]::GetExtension($originalFileName)
         $baseName = [System.IO.Path]::GetFileNameWithoutExtension($originalFileName)
-        $errors = [System.Collections.Generic.List[string]]::new()
+        $errors = New-Object 'System.Collections.Generic.List[string]'
+        $warnings = New-Object 'System.Collections.Generic.List[string]'
 
         $result = [ordered]@{
-            ParserVersion = '0.1.0'
+            ParserVersion = '0.2.0'
             OriginalFileName = $originalFileName
             Extension = $extension
             ParseStatus = 'FAILED'
@@ -115,17 +121,24 @@ function ConvertFrom-DSGNinaFileName {
             FwhmObserved = $null
             FocusPosition = $null
             Errors = @()
+            Warnings = @()
         }
 
         try {
-            $focusMatch = [regex]::Match($baseName, '^(?<prefix>.+)_Fok_(?<focus>-?\d+)$')
+            $focusMatch = [regex]::Match($baseName, '^(?<prefix>.+)_Fok_(?<focus>-?\d*)$')
             if (-not $focusMatch.Success) {
                 throw 'Missing or invalid _Fok_ segment.'
             }
 
-            $result.FocusPosition = [int64]$focusMatch.Groups['focus'].Value
-            $beforeFocus = $focusMatch.Groups['prefix'].Value
+            $focusValue = $focusMatch.Groups['focus'].Value
+            if ([string]::IsNullOrWhiteSpace($focusValue)) {
+                $warnings.Add('Focus position is empty.')
+            }
+            else {
+                $result.FocusPosition = [int64]$focusValue
+            }
 
+            $beforeFocus = $focusMatch.Groups['prefix'].Value
             $fwhmMatch = [regex]::Match($beforeFocus, '^(?<prefix>.+)_FWHM_(?<fwhm>-?\d+(?:\.\d+)?)$')
             if (-not $fwhmMatch.Success) {
                 throw 'Missing or invalid _FWHM_ segment.'
@@ -134,15 +147,22 @@ function ConvertFrom-DSGNinaFileName {
             $result.FwhmObserved = ConvertTo-DSGInvariantDecimal -Value $fwhmMatch.Groups['fwhm'].Value
             $prefix = $fwhmMatch.Groups['prefix'].Value
 
-            $suffixPattern = '^(?<head>.+)_(?<filter>[^_]+)_(?<frame>\d+)_(?<date>\d{4}-\d{2}-\d{2})_(?<time>\d{2}-\d{2}-\d{2})$'
+            $suffixPattern = '^(?<head>.+)_(?<filter>[^_]*)_(?<frame>\d+)_(?<date>\d{4}-\d{2}-\d{2})_(?<time>\d{2}-\d{2}-\d{2})$'
             $suffixMatch = [regex]::Match($prefix, $suffixPattern)
             if (-not $suffixMatch.Success) {
                 throw 'Unable to parse filter, frame number, date and time suffix.'
             }
 
-            $result.Filter = $suffixMatch.Groups['filter'].Value
+            $filterValue = $suffixMatch.Groups['filter'].Value
+            if ([string]::IsNullOrWhiteSpace($filterValue)) {
+                $warnings.Add('Filter value is empty.')
+            }
+            else {
+                $result.Filter = $filterValue
+            }
+
             $result.FrameNumber = [int]$suffixMatch.Groups['frame'].Value
-            $result.DateTimeObserved = '{0}_{1}' -f $suffixMatch.Groups['date'].Value, $suffixMatch.Groups['time'].Value
+            $result.DateTimeObserved = ('{0}_{1}' -f $suffixMatch.Groups['date'].Value, $suffixMatch.Groups['time'].Value)
 
             $head = $suffixMatch.Groups['head'].Value
             $temperatureMatch = [regex]::Match($head, '^(?<prefix>.+)__(?<temperature>-?\d+(?:\.\d+)?)C$')
@@ -166,10 +186,7 @@ function ConvertFrom-DSGNinaFileName {
             $result.Gain = ConvertTo-DSGInvariantDecimal -Value $leftMatch.Groups['gain'].Value
             $result.Offset = ConvertTo-DSGInvariantDecimal -Value $leftMatch.Groups['offset'].Value
 
-            $resolution = Resolve-DSGTargetAndTelescope `
-                -CombinedValue $leftMatch.Groups['center'].Value `
-                -KnownTelescopes $KnownTelescopes
-
+            $resolution = Resolve-DSGTargetAndTelescope -CombinedValue $leftMatch.Groups['center'].Value -KnownTelescopes $KnownTelescopes
             $result.Target = $resolution.Target
             $result.Telescope = $resolution.Telescope
 
@@ -187,6 +204,7 @@ function ConvertFrom-DSGNinaFileName {
         }
 
         $result.Errors = @($errors)
+        $result.Warnings = @($warnings)
         [pscustomobject]$result
     }
 }
