@@ -129,12 +129,8 @@ function ConvertFrom-DSGNinaFileName {
             if (-not $focusMatch.Success) {
                 throw 'Missing or invalid _Fok_ segment.'
             }
-
             $focusValue = $focusMatch.Groups['focus'].Value
-            if ([string]::IsNullOrWhiteSpace($focusValue)) {
-                $warnings.Add('Focus position is empty.')
-            }
-            else {
+            if (-not [string]::IsNullOrWhiteSpace($focusValue)) {
                 $result.FocusPosition = [int64]$focusValue
             }
 
@@ -152,10 +148,9 @@ function ConvertFrom-DSGNinaFileName {
             if (-not $suffixMatch.Success) {
                 throw 'Unable to parse filter, frame number, date and time suffix.'
             }
-
             $filterValue = $suffixMatch.Groups['filter'].Value
             if ([string]::IsNullOrWhiteSpace($filterValue)) {
-                $warnings.Add('Filter value is empty.')
+                $result.Filter = 'UNKNOWN'
             }
             else {
                 $result.Filter = $filterValue

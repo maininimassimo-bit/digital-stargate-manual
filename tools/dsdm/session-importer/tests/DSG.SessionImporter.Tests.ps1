@@ -26,7 +26,7 @@ Describe 'ConvertFrom-DSGNinaFileName' {
         $result.Offset | Should -Be 99.0
         $result.Target | Should -Be 'LDN 1320'
         $result.Telescope | Should -Be 'Skywatcher quattro 200p'
-        $result.SensorTemperatureC | Should -Be -10.0
+        [double]$result.SensorTemperatureC | Should -Be ([double]-10.0)
         $result.Filter | Should -Be 'LPRO'
         $result.FrameNumber | Should -Be 163
         $result.DateTimeObserved | Should -Be '2026-07-17_04-16-06'
@@ -47,7 +47,7 @@ Describe 'ConvertFrom-DSGNinaFileName' {
         $result.Target | Should -Be 'M33'
         $result.Telescope | Should -Be 'OptiCo 60mm f-15'
         $result.ExposureSeconds | Should -Be 10.21
-        $result.SensorTemperatureC | Should -Be -15.0
+        [double]$result.SensorTemperatureC | Should -Be ([double]-15.0)
         $result.Filter | Should -Be 'L'
         $result.FrameNumber | Should -Be 1
         $result.FwhmObserved | Should -Be 4.23
