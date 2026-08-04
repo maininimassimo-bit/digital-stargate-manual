@@ -1,7 +1,9 @@
-$modulePath = Join-Path $PSScriptRoot '..\DSG.SessionTransfer.psm1'
-$orchestratorPath = Join-Path $PSScriptRoot '..\Invoke-DSGSessionTransfer.ps1'
+BeforeAll {
+    $script:modulePath = Join-Path $PSScriptRoot '..\DSG.SessionTransfer.psm1'
+    $script:orchestratorPath = Join-Path $PSScriptRoot '..\Invoke-DSGSessionTransfer.ps1'
 
-Import-Module $modulePath -Force
+    Import-Module $script:modulePath -Force
+}
 
 Describe 'DSG.SessionTransfer primitives' {
     BeforeEach {
@@ -181,7 +183,7 @@ Describe 'Invoke-DSGSessionTransfer synthetic orchestration' {
 
         $configuration | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $configurationPath -Encoding UTF8
 
-        & $orchestratorPath `
+        & $script:orchestratorPath `
             -ConfigurationPath $configurationPath `
             -TransferPlanPath $planPath `
             -WhatIf | Out-Null
