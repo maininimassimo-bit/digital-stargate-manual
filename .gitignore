@@ -51,3 +51,16 @@ Desktop.ini
 !.env.example
 secrets.json
 appsettings.*.local.json
+
+# Digital StarGate local runtime configuration
+tools/dsdm/session-importer/session-importer.local.json
+tools/dsdm/session-importer/session-transfer.local.json
+tools/dsdm/session-importer/session-transfer.local.before-pilot-*.json
+
+# Digital StarGate local credentials and runtime evidence
+*.credential.xml
+DSG-Inventory/
+SessionImporter/
+SessionTransfer/
+SessionTransfer-Launcher/
+*.log
