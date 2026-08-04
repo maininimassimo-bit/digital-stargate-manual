@@ -122,9 +122,22 @@ $results = @()
 $runStatus = 'COMPLETED'
 
 foreach ($entry in $eligibleEntries) {
-    $sourcePath = [string]$entry.SourceFullPath
+    $sourcePath = $null
+    $sourceFullPathProperty = $entry.PSObject.Properties['SourceFullPath']
+
+    if ($null -ne $sourceFullPathProperty) {
+        $sourcePath = [string]$sourceFullPathProperty.Value
+    }
+
     if ([string]::IsNullOrWhiteSpace($sourcePath)) {
-        $sourcePath = Join-Path ([string]$configuration.source.rootPath) ([string]$entry.SourceRelativePath)
+        $sourceRelativePathProperty = $entry.PSObject.Properties['SourceRelativePath']
+        if ($null -eq $sourceRelativePathProperty -or [string]::IsNullOrWhiteSpace([string]$sourceRelativePathProperty.Value)) {
+            throw 'Transfer plan entry contains neither SourceFullPath nor SourceRelativePath.'
+        }
+
+        $sourcePath = Join-Path `
+            ([string]$configuration.source.rootPath) `
+            ([string]$sourceRelativePathProperty.Value)
     }
 
     $destinationPath = [string]$entry.PlannedDestination
