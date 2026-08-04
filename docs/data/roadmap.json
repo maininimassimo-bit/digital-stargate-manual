@@ -4,7 +4,7 @@
   "authority": "AMP-002",
   "projectStatus": "Attivo",
   "currentPackage": "AP-013",
-  "nextMilestone": "Complete E-ENV011-06 attributable independent review, then execute and accept the remaining ENV-001 through ENV-012 controls before four-eyes scenarios or any DSOC runtime enablement",
+  "nextMilestone": "Validate the first unattended AP-013 scheduled COPY_ONLY run and complete the remaining AP-012 ENV acceptance activities",
   "target": "AP-015 / Scientific Knowledge Platform",
   "waves": [
     {
@@ -45,7 +45,7 @@
       "title": "Scientific Image and Processing Heritage",
       "status": "active",
       "items": [
-        {"id":"AP-013","title":"Scientific Image Repository Architecture","status":"planned"},
+        {"id":"AP-013","title":"Scientific Image Repository Architecture","status":"active","note":"Session discovery, guarded COPY_ONLY transfer engine, synthetic validation, limited real pilot and protected scheduled launcher completed. Automated pilot remains limited to one file per run. Bulk transfer and source cleanup remain prohibited pending operational evidence and independent readiness review."},
         {"id":"AP-014","title":"Scientific Observation Catalog and Search","status":"planned","note":"Includes governed PixInsight synchronization"}
       ]
     },
@@ -68,6 +68,6 @@
     {"id":"M-AP011","title":"AP-011 Enterprise Analytics Platform Architecture","date":"2026-07-30","status":"completed","description":"Approved with conditions by ARB-011, 97/100. Data catalog, KPI governance, quality gates, lineage, recovery, capacity e semantic governance restano aperti.","image":null},
     {"id":"M-AP012","title":"AP-012 Enterprise Operations Center Architecture","date":"2026-07-31","status":"completed","description":"Approved with conditions by ARB-012, 96/100. ARB-012-C04 remains blocked and DSOC runtime and physical-device control remain unauthorized.","image":null},
     {"id":"M-ARB012-C04","title":"ARB-012-C04 Role Assignment and Four-Eyes Enforcement","date":"2026-08-04","status":"active","description":"ENV-011 technical evidence is complete on isolated Hyper-V host dsg-arb012-c04-val: immutable commit verified, 4/4 tests passed online and offline, host identity recorded, Chrony synchronization verified, effective simulator configuration identified as DSOC-ENV011-SIM-CONFIG-001 and raw offline transcript merged through DigitalStarGate.Control PR #4 at 8883c596849907cd63a76c33347ff01386bdd34c. Formal acceptance remains pending E-ENV011-06, remaining PRV/ENV controls, W03 evidence, W07 scenarios, independent audit and ARB re-review. Runtime command enablement, production credentials, observatory routes and physical-device control remain prohibited.","image":null},
-    {"id":"M-AP013","title":"AP-013 Scientific Image Repository Architecture","date":"2026-07-30","status":"planned","description":"Prossimo Architecture Package pianificato dopo la chiusura del gate documentale AP-012.","image":null}
+    {"id":"M-AP013","title":"AP-013 Scientific Image Repository Architecture","date":"2026-08-04","status":"active","description":"Session discovery validated on 203 files and 11 sessions. Guarded COPY_ONLY engine and orchestrator validated through synthetic tests and a limited one-file real pilot with SHA-256 verification. Protected daily scheduling is configured for 07:30. Bulk transfer and source cleanup remain unauthorized pending unattended-run evidence and independent readiness review.","image":null}
   ]
 }
