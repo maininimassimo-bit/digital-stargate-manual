@@ -1,4 +1,6 @@
 (() => {
+  'use strict';
+
   const ALADIN_SRC = "https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js";
   const DATA_PATH = "data/realtime/latest-observation.json";
 
@@ -241,12 +243,13 @@
     }
   };
 
-  const initLatestObservation = async () => {
+  const initialize = async ({ events } = {}) => {
     const media = document.querySelector(".dsg-showcase__media");
     if (!media || media.dataset.dynamicSkyReady === "true") return;
     media.dataset.dynamicSkyReady = "true";
 
     injectStyles();
+    media.classList.add("is-loading");
     media.setAttribute("aria-label", "Mappa dinamica dell'ultima osservazione astronomica");
     media.innerHTML = `
       <div id="dsg-latest-sky" class="dsg-showcase__sky is-loading">
@@ -277,9 +280,19 @@
       data = await response.json();
       applyData(data);
       updatePanel(panel, data);
+      events?.emit("latest-observation-data-ready", {
+        target: data.target?.name || null,
+        source: DATA_PATH
+      });
     } catch (error) {
       console.warn("Digital StarGate: latest observation data unavailable", error);
       enableFallback(sky, canvas, status, new URL("assets/images/osservatorio-hero.jpg", document.baseURI).href);
+      media.classList.remove("is-loading", "is-ready");
+      media.classList.add("is-degraded");
+      events?.emit("latest-observation-degraded", {
+        reason: "data-unavailable",
+        message: error.message
+      });
       return;
     }
 
@@ -307,18 +320,42 @@
       });
 
       sky.classList.remove("is-loading");
+      media.classList.remove("is-loading", "is-degraded");
+      media.classList.add("is-ready");
       status.textContent = `Survey attiva · FOV ${formatNumber(data.sky_view?.field_of_view_deg || 1.5, 1)}°`;
+      events?.emit("latest-observation-ready", {
+        target: data.target?.name || null,
+        survey: data.sky_view?.survey || "P/DSS2/color",
+        fieldOfViewDeg: Number(data.sky_view?.field_of_view_deg) || 1.5
+      });
     } catch (error) {
       console.warn("Digital StarGate: Aladin Lite unavailable", error);
       enableFallback(sky, canvas, status, fallbackUrl);
+      media.classList.remove("is-loading", "is-ready");
+      media.classList.add("is-degraded");
+      events?.emit("latest-observation-degraded", {
+        reason: "aladin-unavailable",
+        message: error.message,
+        target: data.target?.name || null
+      });
     }
   };
 
+  if (window.DSG?.components) {
+    window.DSG.components.register({
+      name: "latest-observation",
+      order: 68,
+      initialize
+    });
+    return;
+  }
+
+  const fallback = () => initialize();
   if (window.document$?.subscribe) {
-    window.document$.subscribe(initLatestObservation);
+    window.document$.subscribe(fallback);
   } else if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initLatestObservation, { once: true });
+    document.addEventListener("DOMContentLoaded", fallback, { once: true });
   } else {
-    initLatestObservation();
+    fallback();
   }
 })();
