@@ -67,6 +67,9 @@ jobs:
       - name: Test Enterprise Plugin SDK
         run: node --test .github/scripts/test-plugin-sdk.mjs
 
+      - name: Test Enterprise Search Center
+        run: node --test .github/scripts/test-search-center.mjs
+
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
