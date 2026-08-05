@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="../styles/operations-center.css">
+<link rel="stylesheet" href="../styles/operations-dashboard.css">
 
 <div class="dsg-operations-center">
 
@@ -11,9 +12,9 @@
     i capitoli tecnici e le evidenze restano le fonti autorevoli.
   </p>
   <div class="dsg-operations-actions">
+    <a href="#enterprise-operations-dashboard">Operations Dashboard</a>
     <a href="../status/">Stato osservatorio</a>
     <a href="../chapters/16-sop-avvio/">SOP avvio</a>
-    <a href="../chapters/25-chiusura-osservatorio/">SOP chiusura</a>
     <a href="../chapters/18-emergenze-recovery/">Emergenze e recovery</a>
   </div>
 </section>
@@ -24,6 +25,60 @@
   <div class="dsg-operations-kpi"><span>TRANSFER</span><strong>07:30</strong><small>COPY_ONLY, un file per run</small></div>
   <div class="dsg-operations-kpi"><span>RUNBOOK</span><strong>Versionati</strong><small>Avvio, acquisizione, chiusura e recovery</small></div>
 </div>
+
+<section class="dsg-operations-section" id="enterprise-operations-dashboard">
+  <span>ENTERPRISE OBSERVABILITY</span>
+  <h2>Operations Dashboard</h2>
+  <p>Snapshot read-only della piattaforma RC2. I dati provengono esclusivamente dalle API pubbliche dei servizi enterprise e dalla telemetria dell’Event Bus.</p>
+
+  <div class="dsg-operations-dashboard" data-dsg-operations-dashboard>
+    <div class="dsg-operations-dashboard__toolbar">
+      <div>
+        <strong>Platform health snapshot</strong>
+        <p data-operations-generated>Preparazione dello snapshot operativo…</p>
+      </div>
+      <button class="dsg-operations-dashboard__refresh" type="button" data-operations-refresh>Aggiorna snapshot</button>
+    </div>
+
+    <section class="dsg-operations-dashboard__kpis" data-operations-kpis aria-label="KPI della piattaforma">
+      <div class="dsg-operations-dashboard__empty">Caricamento KPI…</div>
+    </section>
+
+    <div class="dsg-operations-dashboard__grid">
+      <section class="dsg-operations-dashboard__panel">
+        <h3>Component Registry</h3>
+        <div class="dsg-operations-dashboard__list" data-operations-components>
+          <div class="dsg-operations-dashboard__empty">Caricamento componenti…</div>
+        </div>
+      </section>
+
+      <section class="dsg-operations-dashboard__panel">
+        <h3>Enterprise Services</h3>
+        <div class="dsg-operations-dashboard__services" data-operations-services>
+          <div class="dsg-operations-dashboard__empty">Caricamento servizi…</div>
+        </div>
+      </section>
+
+      <section class="dsg-operations-dashboard__panel">
+        <h3>Runtime Event Stream</h3>
+        <div class="dsg-operations-dashboard__list" data-operations-events>
+          <div class="dsg-operations-dashboard__empty">In attesa di eventi runtime…</div>
+        </div>
+      </section>
+
+      <section class="dsg-operations-dashboard__panel">
+        <h3>AP-013 Operational Acceptance</h3>
+        <div data-operations-ap013>
+          <div class="dsg-operations-dashboard__empty">Caricamento stato AP-013…</div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="dsg-operations-warning">
+    La dashboard non costituisce un sistema di comando e non sostituisce le evidenze versionate. Stati runtime e dati di validazione sono presentati separatamente.
+  </div>
+</section>
 
 <section class="dsg-operations-section">
   <span>OPERATING MODEL</span>
@@ -85,3 +140,8 @@
 </section>
 
 </div>
+
+<script src="../javascripts/scientific-data-engine.js"></script>
+<script src="../javascripts/dsg-search-service.js"></script>
+<script src="../javascripts/dsg-operations-service.js"></script>
+<script src="../javascripts/dsg-operations-dashboard.js"></script>
