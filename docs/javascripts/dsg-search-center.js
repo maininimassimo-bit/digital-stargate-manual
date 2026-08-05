@@ -34,32 +34,49 @@
     const statusNode = scope.querySelector('[data-search-status]');
     const resultNode = scope.querySelector('[data-search-results]');
     const statsNode = scope.querySelector('[data-search-stats]');
+    const filterPanel = scope.querySelector('.dsg-search-center__filters');
 
-    const controls = {
-      queryInput,
-      typeFilter,
-      yearFilter,
-      targetFilter,
-      qualityFilter,
-      resetButton,
-      statusNode,
-      resultNode,
-      statsNode
-    };
-    const missing = Object.entries(controls)
-      .filter(([, value]) => !value)
-      .map(([name]) => name);
+    const controls = { queryInput, typeFilter, yearFilter, targetFilter, qualityFilter, resetButton, statusNode, resultNode, statsNode, filterPanel };
+    const missing = Object.entries(controls).filter(([, value]) => !value).map(([name]) => name);
 
     if (missing.length) {
       console.error('Search Center DOM incomplete', { missing });
       root.classList.add('is-error');
       if (statusNode) statusNode.textContent = 'Ricerca non disponibile';
-      if (resultNode) {
-        resultNode.innerHTML = '<div class="dsg-search-center__error">Struttura del Search Center incompleta.</div>';
-      }
+      if (resultNode) resultNode.innerHTML = '<div class="dsg-search-center__error">Struttura del Search Center incompleta.</div>';
       events?.emit('search-center-error', { reason: 'dom-incomplete', missing });
       return;
     }
+
+    filterPanel.insertAdjacentHTML('beforeend', `
+      <label>Filtro
+        <select data-search-filter><option value="">Tutti i filtri</option></select>
+      </label>
+      <label>Telescopio
+        <select data-search-telescope><option value="">Tutti i telescopi</option></select>
+      </label>
+      <label>Camera
+        <select data-search-camera><option value="">Tutte le camere</option></select>
+      </label>
+      <label>Ordina per
+        <select data-search-sort>
+          <option value="relevance">Rilevanza</option>
+          <option value="year-desc">Data più recente</option>
+          <option value="quality">Qualità</option>
+          <option value="title">Titolo</option>
+        </select>
+      </label>`);
+
+    const filterFilter = scope.querySelector('[data-search-filter]');
+    const telescopeFilter = scope.querySelector('[data-search-telescope]');
+    const cameraFilter = scope.querySelector('[data-search-camera]');
+    const sortFilter = scope.querySelector('[data-search-sort]');
+
+    const suggestionList = document.createElement('datalist');
+    suggestionList.id = 'dsg-search-suggestions';
+    queryInput.setAttribute('list', suggestionList.id);
+    queryInput.insertAdjacentElement('afterend', suggestionList);
+    queryInput.placeholder = 'Cerca oppure usa target:, year:, filter:, quality:, telescope:…';
 
     root.dataset.dsgSearchCenterReady = 'true';
     root.classList.add('is-loading');
@@ -67,22 +84,31 @@
 
     const fillSelect = (select, values) => {
       select.querySelectorAll('option:not(:first-child)').forEach((option) => option.remove());
-      values.forEach((value) => {
-        select.insertAdjacentHTML('beforeend', `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`);
-      });
+      values.forEach((value) => select.insertAdjacentHTML('beforeend', `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`));
     };
 
     const filters = () => ({
       type: typeFilter.value,
       year: yearFilter.value,
       target: targetFilter.value,
-      quality: qualityFilter.value
+      quality: qualityFilter.value,
+      filter: filterFilter.value,
+      telescope: telescopeFilter.value,
+      camera: cameraFilter.value
     });
+
+    const rankingExplanation = (item) => {
+      const explanation = item.scoreExplanation;
+      if (!explanation) return '';
+      const terms = explanation.matchedTerms?.length ? ` · termini: ${explanation.matchedTerms.join(', ')}` : '';
+      return `<details class="dsg-search-result__explanation"><summary>Perché questo risultato?</summary><p>Punteggio ${escapeHtml(item.score)}: testo ${escapeHtml(explanation.text)}, autorità ${escapeHtml(explanation.authority)}, qualità ${escapeHtml(explanation.quality)}${escapeHtml(terms)}.</p></details>`;
+    };
 
     const render = async () => {
       root.classList.add('is-searching');
       const query = queryInput.value.trim();
-      const results = await service.search(query, { filters: filters(), limit: 50 });
+      const results = await service.search(query, { filters: filters(), sort: sortFilter.value, limit: 50 });
+      const parsed = service.parseQuery?.(query);
 
       statusNode.textContent = query
         ? `${results.length} risultati per “${query}”`
@@ -94,22 +120,27 @@
             <div class="dsg-search-result__meta">
               <span>${item.type === 'scientific-session' ? 'Sessione scientifica' : 'Documentazione'}</span>
               <span>${escapeHtml(item.section)}</span>
+              <span>Score ${escapeHtml(item.score)}</span>
             </div>
             <h2><a href="${escapeHtml(item.location)}">${escapeHtml(item.title)}</a></h2>
             <p>${escapeHtml(excerpt(item.text))}</p>
-            ${item.metadata ? `<div class="dsg-search-result__facts">
-              <span>${escapeHtml(item.metadata.observationDate || '')}</span>
-              <span>${escapeHtml(item.metadata.telescope || '')}</span>
-              <span>${escapeHtml(item.metadata.camera || '')}</span>
-              <span>${escapeHtml(item.metadata.filter || '')}</span>
+            ${item.type === 'scientific-session' ? `<div class="dsg-search-result__facts">
+              <span>${escapeHtml(item.metadata?.year || '')}</span>
+              <span>${escapeHtml(item.metadata?.target || '')}</span>
+              <span>${escapeHtml(item.metadata?.telescope || '')}</span>
+              <span>${escapeHtml(item.metadata?.camera || '')}</span>
+              <span>${escapeHtml(item.metadata?.filter || '')}</span>
+              <span>${escapeHtml(item.metadata?.qualityState || '')}</span>
             </div>` : ''}
+            ${rankingExplanation(item)}
           </article>`).join('')
         : '<div class="dsg-search-center__empty">Nessun risultato corrisponde ai criteri selezionati.</div>';
 
       const serviceStatus = service.getStatus();
-      statsNode.textContent = `${serviceStatus.documentCount} documenti · ${serviceStatus.scientificCount} sessioni scientifiche`;
+      const structuredCount = Object.keys(parsed?.filters || {}).length;
+      statsNode.textContent = `${serviceStatus.documentCount} documenti · ${serviceStatus.scientificCount} sessioni scientifiche${structuredCount ? ` · ${structuredCount} filtri nella query` : ''}`;
       root.classList.remove('is-searching');
-      events?.emit('search-center-results', { query, resultCount: results.length, filters: filters() });
+      events?.emit('search-center-results', { query, parsed, resultCount: results.length, filters: filters(), sort: sortFilter.value });
     };
 
     const handleError = (error) => {
@@ -133,16 +164,27 @@
       fillSelect(yearFilter, facets.years);
       fillSelect(targetFilter, facets.targets);
       fillSelect(qualityFilter, facets.qualities);
+      fillSelect(filterFilter, facets.filters || []);
+      fillSelect(telescopeFilter, facets.telescopes || []);
+      fillSelect(cameraFilter, facets.cameras || []);
 
-      [queryInput, typeFilter, yearFilter, targetFilter, qualityFilter]
+      const suggestions = [
+        ...(facets.targets || []).map((value) => `target:${value}`),
+        ...(facets.years || []).map((value) => `year:${value}`),
+        ...(facets.filters || []).map((value) => `filter:${value}`),
+        ...(facets.qualities || []).map((value) => `quality:${value}`),
+        ...(facets.telescopes || []).map((value) => `telescope:\"${value}\"`),
+        ...(facets.cameras || []).map((value) => `camera:\"${value}\"`)
+      ];
+      suggestionList.innerHTML = suggestions.map((value) => `<option value="${escapeHtml(value)}"></option>`).join('');
+
+      [queryInput, typeFilter, yearFilter, targetFilter, qualityFilter, filterFilter, telescopeFilter, cameraFilter, sortFilter]
         .forEach((control) => control.addEventListener('input', scheduleRender));
 
       resetButton.addEventListener('click', () => {
         queryInput.value = '';
-        typeFilter.value = '';
-        yearFilter.value = '';
-        targetFilter.value = '';
-        qualityFilter.value = '';
+        [typeFilter, yearFilter, targetFilter, qualityFilter, filterFilter, telescopeFilter, cameraFilter].forEach((control) => { control.value = ''; });
+        sortFilter.value = 'relevance';
         render().catch(handleError);
       });
 
@@ -156,15 +198,7 @@
     }
   };
 
-  if (window.DSG?.components) {
-    window.DSG.components.register({
-      name: 'search-center',
-      order: 75,
-      initialize
-    });
-  } else if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => initialize(), { once: true });
-  } else {
-    initialize();
-  }
+  if (window.DSG?.components) window.DSG.components.register({ name: 'search-center', order: 75, initialize });
+  else if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => initialize(), { once: true });
+  else initialize();
 })();
