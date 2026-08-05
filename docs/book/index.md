@@ -81,12 +81,15 @@ La stima complessiva è di circa 100.000-120.000 parole, da verificare in fase d
 - [Piano editoriale e architettura del volume](editorial-blueprint.md)
 - [Capitolo 1 - Prima dell'enterprise](01-prima-dell-enterprise.md)
 - [Capitolo 2 - Il cambio di prospettiva](02-il-cambio-di-prospettiva.md)
-- [Capitolo 3 - Il modello DSG-EOM](03-il-modello-dsg-eom.md)
+- [Capitolo 3 - Quando il remoto cambia tutto](03-quando-il-remoto-cambia-tutto.md)
+- [Capitolo 4 - La nascita di una roadmap](04-la-nascita-di-una-roadmap.md)
+- [Overview del modello DSG-EOM](model-overview.md)
+- [Cronologia verificata](verified-timeline.md)
 - [Matrice delle fonti e tracciabilità](source-traceability.md)
 
 ## Stato del manoscritto
 
-Questa prima baseline stabilisce il posizionamento, l'indice ragionato, il modello interpretativo e il nucleo narrativo iniziale. I capitoli successivi saranno sviluppati in ordine di dipendenza, verificando ogni volta la fonte autorevole e l'evoluzione effettiva del repository.
+Questa baseline stabilisce il posizionamento, l'indice ragionato, il modello interpretativo, la cronologia verificata e la Parte I del nucleo narrativo. I capitoli successivi saranno sviluppati in ordine di dipendenza, verificando ogni volta la fonte autorevole e l'evoluzione effettiva del repository.
 
 ## Fonti principali
 
