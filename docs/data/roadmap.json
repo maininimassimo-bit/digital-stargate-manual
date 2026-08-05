@@ -2,14 +2,14 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-08-05",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "b17f45c391dbe75c9b72c0a2639740a39df478d6d473a94ad64fb94011078f36",
+  "sourceDigest": "fb09aca7bc45f1a8a44ced26875277ddcdbe728a96cdafaed30b961ac3018006",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
-  "currentPackage": "RC2-BASELINE",
-  "nextMilestone": "Freeze the RC2 baseline and complete integrated acceptance",
-  "target": "RC2 Baseline and Acceptance",
-  "summary": {"total":22,"completed":16,"active":4,"planned":2,"percentCompleted":73},
-  "evidenceSummary": {"sources":7,"completionReports":6,"evidenceManifests":1},
+  "currentPackage": "AP-014",
+  "nextMilestone": "Complete AP14-W06 PixInsight Synchronization Adapter",
+  "target": "AP-014 completion and RC3 readiness",
+  "summary": {"total":22,"completed":16,"active":5,"planned":1,"percentCompleted":73},
+  "evidenceSummary": {"sources":8,"completionReports":6,"evidenceManifests":2},
   "waves": [
     {"id":"rc2-enterprise-portal","title":"RC2 Enterprise Portal","status":"active","items":[
       {"id":"WP-01","title":"Enterprise Foundation Framework","evidencePath":"docs/architecture/validation/WP-01-Enterprise-Foundation-Framework-Completion-Report.md","note":"Component Registry, lifecycle comune, Event Bus e bootstrap centralizzato.","status":"completed","evidenceStatus":"Accepted","evidence":{"present":1,"accepted":1,"required":1}},
@@ -34,7 +34,7 @@
       {"id":"AP-011","title":"Enterprise Analytics Platform Architecture","status":"completed","review":"ARB-011","note":"Approved with conditions, 97/100; analytics runtime is not certified."},
       {"id":"AP-012","title":"Enterprise Operations Center Architecture","status":"completed","review":"ARB-012","note":"Approved with conditions, 96/100; remaining PRV/ENV controls and formal acceptance remain open."},
       {"id":"AP-013","title":"Scientific Image Repository Architecture","evidencePath":".github/roadmap/evidence/AP-013.evidence.json","note":"COPY_ONLY engine, protected scheduler and one-file evidence completed; final ARB, OAT and operational acceptance remain open.","status":"active","evidenceStatus":"active","evidence":{"manifest":".github/roadmap/evidence/AP-013.evidence.json","required":4,"present":1,"accepted":1,"missing":["architecture-review","operational-acceptance-test","operational-acceptance"],"rejected":[]}},
-      {"id":"AP-014","title":"Scientific Observation Catalog and Search","status":"planned","note":"Includes governed PixInsight synchronization."},
+      {"id":"AP-014","title":"Scientific Observation Catalog and Search","evidencePath":".github/roadmap/evidence/AP-014.evidence.json","note":"AP14-W01–W05 delivered; AP14-W06 PixInsight synchronization and AP14-W07 operational acceptance remain open.","status":"active","evidenceStatus":"active","evidence":{"manifest":".github/roadmap/evidence/AP-014.evidence.json","required":8,"present":7,"accepted":7,"missing":["operational-acceptance"],"rejected":[]}},
       {"id":"AP-015","title":"Scientific Knowledge Platform Architecture","status":"planned","note":"CAP-40 Scientific Knowledge Layer."}
     ]}
   ],
