@@ -5,6 +5,7 @@ import process from 'node:process';
 const SOURCE_PATH = '.github/roadmap/roadmap-source.json';
 const OUTPUT_PATH = 'docs/data/roadmap.json';
 const VALID_STATUSES = new Set(['completed', 'active', 'planned']);
+const VALID_STATUS_SOURCES = new Set(['completion-report']);
 
 const readJson = async (path) => JSON.parse(await readFile(path, 'utf8'));
 const stableJson = (value) => `${JSON.stringify(value, null, 2)}\n`;
@@ -15,7 +16,7 @@ const assert = (condition, message) => {
 
 const validateSource = (source) => {
   assert(source && typeof source === 'object', 'Roadmap source must be an object');
-  assert(source.schemaVersion === '2.0', 'Roadmap source schemaVersion must be 2.0');
+  assert(source.schemaVersion === '2.1', 'Roadmap source schemaVersion must be 2.1');
   assert(typeof source.updatedAt === 'string' && source.updatedAt, 'updatedAt is required');
   assert(typeof source.authority === 'string' && source.authority, 'authority is required');
   assert(Array.isArray(source.streams) && source.streams.length > 0, 'At least one stream is required');
@@ -32,7 +33,17 @@ const validateSource = (source) => {
       assert(!ids.has(item.id), `Duplicate roadmap item id: ${item.id}`);
       ids.add(item.id);
       assert(typeof item.title === 'string' && item.title, `Item ${item.id} requires a title`);
-      assert(VALID_STATUSES.has(item.status), `Item ${item.id} has invalid status: ${item.status}`);
+
+      const hasExplicitStatus = typeof item.status === 'string';
+      const hasStatusSource = typeof item.statusSource === 'string';
+      assert(hasExplicitStatus !== hasStatusSource, `Item ${item.id} must define exactly one of status or statusSource`);
+
+      if (hasExplicitStatus) {
+        assert(VALID_STATUSES.has(item.status), `Item ${item.id} has invalid status: ${item.status}`);
+      } else {
+        assert(VALID_STATUS_SOURCES.has(item.statusSource), `Item ${item.id} has invalid statusSource`);
+        assert(typeof item.evidencePath === 'string' && item.evidencePath, `Item ${item.id} requires evidencePath`);
+      }
     }
   }
 
@@ -43,8 +54,42 @@ const validateSource = (source) => {
     assert(typeof milestone.id === 'string' && milestone.id, 'Each milestone requires an id');
     assert(!milestoneIds.has(milestone.id), `Duplicate milestone id: ${milestone.id}`);
     milestoneIds.add(milestone.id);
-    assert(VALID_STATUSES.has(milestone.status), `Milestone ${milestone.id} has invalid status`);
+    assert(typeof milestone.itemRef === 'string' && ids.has(milestone.itemRef), `Milestone ${milestone.id} has invalid itemRef`);
   }
+};
+
+const extractCompletionStatus = (markdown, itemId, evidencePath) => {
+  const match = markdown.match(/^\|\s*Stato\s*\|\s*([^|]+?)\s*\|\s*$/im);
+  assert(match, `Completion report for ${itemId} does not contain a Stato field: ${evidencePath}`);
+  return match[1].trim();
+};
+
+const deriveItem = async (item, evidenceRecords) => {
+  if (!item.statusSource) return Object.freeze({ ...item });
+
+  if (item.statusSource === 'completion-report') {
+    const markdown = await readFile(item.evidencePath, 'utf8').catch(() => null);
+    assert(markdown !== null, `Completion report not found for ${item.id}: ${item.evidencePath}`);
+
+    const evidenceStatus = extractCompletionStatus(markdown, item.id, item.evidencePath);
+    const normalizedStatus = evidenceStatus.toLowerCase() === 'accepted' ? 'completed' : 'active';
+
+    evidenceRecords.push({
+      itemId: item.id,
+      path: item.evidencePath,
+      status: evidenceStatus,
+      digest: createHash('sha256').update(markdown).digest('hex')
+    });
+
+    const { statusSource, ...publicItem } = item;
+    return Object.freeze({
+      ...publicItem,
+      status: normalizedStatus,
+      evidenceStatus
+    });
+  }
+
+  throw new Error(`Unsupported statusSource for ${item.id}: ${item.statusSource}`);
 };
 
 const streamStatus = (items) => {
@@ -53,19 +98,42 @@ const streamStatus = (items) => {
   return 'planned';
 };
 
-const buildOutput = (source) => {
+const buildOutput = async (source) => {
   validateSource(source);
 
-  const sourceDigest = createHash('sha256')
-    .update(stableJson(source))
-    .digest('hex');
+  const evidenceRecords = [];
+  const waves = [];
 
-  const waves = source.streams.map((stream) => ({
-    id: stream.id,
-    title: stream.title,
-    status: streamStatus(stream.items),
-    items: stream.items
+  for (const stream of source.streams) {
+    const items = [];
+    for (const item of stream.items) {
+      items.push(await deriveItem(item, evidenceRecords));
+    }
+
+    waves.push({
+      id: stream.id,
+      title: stream.title,
+      status: streamStatus(items),
+      items
+    });
+  }
+
+  const itemIndex = new Map(
+    waves.flatMap((wave) => wave.items).map((item) => [item.id, item])
+  );
+
+  const milestones = source.milestones.map((milestone) => ({
+    ...milestone,
+    status: itemIndex.get(milestone.itemRef).status
   }));
+
+  const governanceInput = {
+    source,
+    evidence: evidenceRecords.sort((left, right) => left.itemId.localeCompare(right.itemId))
+  };
+  const sourceDigest = createHash('sha256')
+    .update(stableJson(governanceInput))
+    .digest('hex');
 
   const items = waves.flatMap((wave) => wave.items);
   const completed = items.filter((item) => item.status === 'completed').length;
@@ -89,8 +157,12 @@ const buildOutput = (source) => {
       planned,
       percentCompleted: items.length ? Math.round((completed / items.length) * 100) : 0
     },
+    evidenceSummary: {
+      completionReports: evidenceRecords.length,
+      accepted: evidenceRecords.filter((record) => record.status.toLowerCase() === 'accepted').length
+    },
     waves,
-    milestones: source.milestones
+    milestones
   };
 };
 
@@ -99,7 +171,7 @@ const main = async () => {
   assert(['--check', '--write', '--print'].includes(mode), `Unsupported mode: ${mode}`);
 
   const source = await readJson(SOURCE_PATH);
-  const generated = stableJson(buildOutput(source));
+  const generated = stableJson(await buildOutput(source));
 
   if (mode === '--print') {
     process.stdout.write(generated);
@@ -108,20 +180,18 @@ const main = async () => {
 
   if (mode === '--write') {
     await writeFile(OUTPUT_PATH, generated, 'utf8');
-    process.stdout.write(`Generated ${OUTPUT_PATH} from ${SOURCE_PATH}\n`);
+    process.stdout.write(`Generated ${OUTPUT_PATH} from governed evidence.\n`);
     return;
   }
 
   const current = await readFile(OUTPUT_PATH, 'utf8').catch(() => '');
   if (current !== generated) {
-    process.stderr.write(
-      `Roadmap drift detected. Run: node .github/scripts/generate-roadmap.mjs --write\n`
-    );
+    process.stderr.write('Roadmap drift detected. Run: node .github/scripts/generate-roadmap.mjs --write\n');
     process.exitCode = 1;
     return;
   }
 
-  process.stdout.write('Roadmap artifact is aligned with the canonical source.\n');
+  process.stdout.write('Roadmap artifact is aligned with canonical source and completion evidence.\n');
 };
 
 main().catch((error) => {
