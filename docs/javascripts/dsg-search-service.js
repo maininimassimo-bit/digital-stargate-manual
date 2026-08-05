@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const VERSION = '1.0.1-rc2';
+  const VERSION = '2.0.0-rc2';
   const DEFAULT_LIMIT = 20;
   const SCRIPT_URL = document.currentScript?.src || null;
   const SITE_ROOT = SCRIPT_URL
@@ -27,7 +27,20 @@
   const eventBus = () => window.DSG?.events || null;
   const emit = (type, detail = {}) => eventBus()?.emit(`search-${type}`, { version: VERSION, ...detail });
 
-  const normalizeText = (value) => String(value || '')
+  const decodeHtml = (value) => {
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = String(value || '');
+    return textarea.value;
+  };
+
+  const stripHtml = (value) => decodeHtml(String(value || '')
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' '))
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  const normalizeText = (value) => stripHtml(value)
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase();
@@ -38,6 +51,25 @@
 
   const unique = (values) => [...new Set(values.filter(Boolean))];
 
+  const classifyDocument = (location, title) => {
+    const path = String(location || '').toLowerCase();
+    const label = normalizeText(title);
+
+    if (path.includes('roadmap')) return { section: 'Roadmap', priority: 100 };
+    if (path.includes('/architecture/packages/') || /\bap-\d+/.test(label)) return { section: 'Architecture Package', priority: 95 };
+    if (path.includes('/architecture/adr-') || /\badr-\d+/.test(label)) return { section: 'ADR', priority: 90 };
+    if (path.includes('/architecture/assessments/') || /\barb-\d+/.test(label)) return { section: 'Assessment', priority: 86 };
+    if (path.includes('/architecture/validation/')) return { section: 'Validation', priority: 84 };
+    if (path.includes('/scientific-platform') || path.includes('/scientific-session')) return { section: 'Scientific Platform', priority: 82 };
+    if (path.includes('/chapters/16-') || path.includes('sop')) return { section: 'SOP', priority: 80 };
+    if (path.includes('/operations/')) return { section: 'Operations', priority: 78 };
+    if (path.includes('/developer/')) return { section: 'Developer', priority: 68 };
+    if (path.includes('/chapters/')) return { section: 'Manuale tecnico', priority: 64 };
+    if (path.includes('/appendices/') || path.includes('/assets/')) return { section: 'Allegato tecnico', priority: 34 };
+    if (/^<code>|\.parquet|enum|status$/i.test(String(title || '').trim())) return { section: 'Riferimento tecnico', priority: 20 };
+    return { section: 'Documentazione', priority: 50 };
+  };
+
   const scoreText = (queryTokens, fields) => {
     if (!queryTokens.length) return 0;
     const normalized = fields.map((field) => normalizeText(field));
@@ -46,24 +78,31 @@
     queryTokens.forEach((token) => {
       normalized.forEach((field, index) => {
         if (!field) return;
-        if (field === token) score += 20 - index;
-        else if (field.startsWith(token)) score += 12 - Math.min(index, 6);
-        else if (field.includes(token)) score += 6 - Math.min(index, 4);
+        if (field === token) score += 30 - index;
+        else if (field.startsWith(token)) score += 18 - Math.min(index, 6);
+        else if (field.includes(token)) score += 9 - Math.min(index, 4);
       });
     });
 
     return score;
   };
 
-  const mapDocument = (doc) => Object.freeze({
-    id: `doc:${doc.location}`,
-    type: 'documentation',
-    title: doc.title || doc.location,
-    text: doc.text || '',
-    location: new URL(doc.location, SITE_ROOT).href,
-    section: doc.title || 'Documentazione',
-    keywords: tokenize(`${doc.title || ''} ${doc.text || ''}`)
-  });
+  const mapDocument = (doc) => {
+    const title = stripHtml(doc.title || doc.location);
+    const text = stripHtml(doc.text || '');
+    const classification = classifyDocument(doc.location, title);
+
+    return Object.freeze({
+      id: `doc:${doc.location}`,
+      type: 'documentation',
+      title: title || doc.location,
+      text,
+      location: new URL(doc.location, SITE_ROOT).href,
+      section: classification.section,
+      priority: classification.priority,
+      keywords: tokenize(`${title} ${text} ${classification.section}`)
+    });
+  };
 
   const mapScientificSession = (session) => Object.freeze({
     id: `science:${session.sessionId}`,
@@ -81,6 +120,7 @@
     ].filter(Boolean).join(' '),
     location: new URL(`scientific-session-detail/?sessionId=${encodeURIComponent(session.sessionId)}`, SITE_ROOT).href,
     section: 'Scientific Platform',
+    priority: 88,
     keywords: unique([
       ...tokenize(session.target),
       ...tokenize(session.sessionId),
@@ -183,11 +223,14 @@
 
     const results = corpus
       .filter((entry) => matchesFilters(entry, options.filters))
-      .map((entry) => ({
-        ...entry,
-        score: scoreText(queryTokens, [entry.title, entry.section, entry.text, entry.keywords.join(' ')])
-      }))
-      .filter((entry) => queryTokens.length === 0 || entry.score > 0)
+      .map((entry) => {
+        const relevance = scoreText(queryTokens, [entry.title, entry.section, entry.keywords.join(' '), entry.text]);
+        return {
+          ...entry,
+          score: relevance + (queryTokens.length ? Math.round(entry.priority / 4) : entry.priority)
+        };
+      })
+      .filter((entry) => queryTokens.length === 0 || entry.score > Math.round(entry.priority / 4))
       .sort((left, right) => right.score - left.score || left.title.localeCompare(right.title, 'it'))
       .slice(0, limit);
 
