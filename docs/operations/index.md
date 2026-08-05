@@ -80,6 +80,15 @@
   </div>
 </section>
 
+<section class="dsg-operations-section" id="plugin-sdk-validation">
+  <span>ENTERPRISE PLUGIN SDK</span>
+  <h2>Provider validation demo</h2>
+  <p>Host dimostrativo per la validazione end-to-end del contratto <code>operations-widget</code>. Il contenuto seguente è prodotto esclusivamente dal plugin registrato nel repository.</p>
+  <div data-dsg-plugin-operations-health-demo>
+    <div class="dsg-operations-dashboard__empty">Inizializzazione del plugin dimostrativo…</div>
+  </div>
+</section>
+
 <section class="dsg-operations-section">
   <span>OPERATING MODEL</span>
   <h2>Capability operative</h2>
@@ -145,4 +154,9 @@
 <script src="../javascripts/dsg-search-service.js"></script>
 <script src="../javascripts/dsg-operations-service.js"></script>
 <script src="../javascripts/dsg-operations-widgets.js"></script>
+<script src="../javascripts/dsg-plugin-registry.js"></script>
+<script src="../javascripts/dsg-plugin-dependency-resolver.js"></script>
+<script src="../javascripts/dsg-plugin-runtime.js"></script>
+<script src="../javascripts/dsg-plugin-provider-contracts.js"></script>
+<script src="../javascripts/plugins/dsg-operations-health-demo-plugin.js"></script>
 <script src="../javascripts/dsg-operations-dashboard.js"></script>
