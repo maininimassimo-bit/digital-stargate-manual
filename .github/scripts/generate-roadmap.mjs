@@ -67,29 +67,16 @@ const extractCompletionStatus = (markdown, itemId, evidencePath) => {
 const deriveItem = async (item, evidenceRecords) => {
   if (!item.statusSource) return Object.freeze({ ...item });
 
-  if (item.statusSource === 'completion-report') {
-    const markdown = await readFile(item.evidencePath, 'utf8').catch(() => null);
-    assert(markdown !== null, `Completion report not found for ${item.id}: ${item.evidencePath}`);
+  const markdown = await readFile(item.evidencePath, 'utf8').catch(() => null);
+  assert(markdown !== null, `Completion report not found for ${item.id}: ${item.evidencePath}`);
 
-    const evidenceStatus = extractCompletionStatus(markdown, item.id, item.evidencePath);
-    const normalizedStatus = evidenceStatus.toLowerCase() === 'accepted' ? 'completed' : 'active';
+  const evidenceStatus = extractCompletionStatus(markdown, item.id, item.evidencePath);
+  const normalizedStatus = evidenceStatus.toLowerCase() === 'accepted' ? 'completed' : 'active';
 
-    evidenceRecords.push({
-      itemId: item.id,
-      path: item.evidencePath,
-      status: evidenceStatus,
-      digest: createHash('sha256').update(markdown).digest('hex')
-    });
+  evidenceRecords.push({ itemId: item.id, path: item.evidencePath, status: evidenceStatus });
 
-    const { statusSource, ...publicItem } = item;
-    return Object.freeze({
-      ...publicItem,
-      status: normalizedStatus,
-      evidenceStatus
-    });
-  }
-
-  throw new Error(`Unsupported statusSource for ${item.id}: ${item.statusSource}`);
+  const { statusSource, ...publicItem } = item;
+  return Object.freeze({ ...publicItem, status: normalizedStatus, evidenceStatus });
 };
 
 const streamStatus = (items) => {
@@ -100,39 +87,24 @@ const streamStatus = (items) => {
 
 const buildOutput = async (source) => {
   validateSource(source);
-
   const evidenceRecords = [];
   const waves = [];
 
   for (const stream of source.streams) {
     const items = [];
-    for (const item of stream.items) {
-      items.push(await deriveItem(item, evidenceRecords));
-    }
-
-    waves.push({
-      id: stream.id,
-      title: stream.title,
-      status: streamStatus(items),
-      items
-    });
+    for (const item of stream.items) items.push(await deriveItem(item, evidenceRecords));
+    waves.push({ id: stream.id, title: stream.title, status: streamStatus(items), items });
   }
 
-  const itemIndex = new Map(
-    waves.flatMap((wave) => wave.items).map((item) => [item.id, item])
-  );
-
+  const itemIndex = new Map(waves.flatMap((wave) => wave.items).map((item) => [item.id, item]));
   const milestones = source.milestones.map((milestone) => ({
     ...milestone,
     status: itemIndex.get(milestone.itemRef).status
   }));
 
-  const governanceInput = {
-    source,
-    evidence: evidenceRecords.sort((left, right) => left.itemId.localeCompare(right.itemId))
-  };
+  evidenceRecords.sort((left, right) => left.itemId.localeCompare(right.itemId));
   const sourceDigest = createHash('sha256')
-    .update(stableJson(governanceInput))
+    .update(stableJson({ source, evidence: evidenceRecords }))
     .digest('hex');
 
   const items = waves.flatMap((wave) => wave.items);
@@ -173,11 +145,7 @@ const main = async () => {
   const source = await readJson(SOURCE_PATH);
   const generated = stableJson(await buildOutput(source));
 
-  if (mode === '--print') {
-    process.stdout.write(generated);
-    return;
-  }
-
+  if (mode === '--print') return void process.stdout.write(generated);
   if (mode === '--write') {
     await writeFile(OUTPUT_PATH, generated, 'utf8');
     process.stdout.write(`Generated ${OUTPUT_PATH} from governed evidence.\n`);
