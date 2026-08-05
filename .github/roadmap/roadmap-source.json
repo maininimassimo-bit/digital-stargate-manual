@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "2.0",
+  "schemaVersion": "2.1",
   "updatedAt": "2026-08-05",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
@@ -11,12 +11,12 @@
       "id": "rc2-enterprise-portal",
       "title": "RC2 Enterprise Portal",
       "items": [
-        {"id":"WP-01","title":"Enterprise Foundation Framework","status":"completed","note":"Component Registry, lifecycle comune, Event Bus e bootstrap centralizzato."},
-        {"id":"WP-02","title":"Scientific Platform 2.0","status":"completed","note":"Scientific Data Engine 2.1, cache, eventi, metriche e Session Store indicizzato."},
-        {"id":"WP-03","title":"Enterprise Theme Framework","status":"completed","note":"Theme API, modalità System, token enterprise e adapter Material governato."},
-        {"id":"WP-04","title":"Enterprise Search Center","status":"completed","note":"Ricerca federata, filtri, ranking e integrazione con i servizi della piattaforma."},
-        {"id":"WP-05","title":"Operations Dashboard","status":"completed","note":"Snapshot read-only, KPI, health dei componenti, telemetria runtime e widget riutilizzabili."},
-        {"id":"WP-06","title":"Enterprise Plugin SDK","status":"completed","note":"Plugin Registry, Dependency Resolver, Runtime, Provider Contracts, demo end-to-end, test automatici e documentazione ufficiale."},
+        {"id":"WP-01","title":"Enterprise Foundation Framework","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-01-Enterprise-Foundation-Framework-Completion-Report.md","note":"Component Registry, lifecycle comune, Event Bus e bootstrap centralizzato."},
+        {"id":"WP-02","title":"Scientific Platform 2.0","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-02-Scientific-Platform-2.0-Completion-Report.md","note":"Scientific Data Engine 2.1, cache, eventi, metriche e Session Store indicizzato."},
+        {"id":"WP-03","title":"Enterprise Theme Framework","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-03-Enterprise-Theme-Framework-Completion-Report.md","note":"Theme API, modalità System, token enterprise e adapter Material governato."},
+        {"id":"WP-04","title":"Enterprise Search Center","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-04-Enterprise-Search-Center-Completion-Report.md","note":"Ricerca federata, filtri, ranking e integrazione con i servizi della piattaforma."},
+        {"id":"WP-05","title":"Operations Dashboard","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-05-Operations-Dashboard-Completion-Report.md","note":"Snapshot read-only, KPI, health dei componenti, telemetria runtime e widget riutilizzabili."},
+        {"id":"WP-06","title":"Enterprise Plugin SDK","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-06-Enterprise-Plugin-SDK-Completion-Report.md","note":"Plugin Registry, Dependency Resolver, Runtime, Provider Contracts, demo end-to-end, test automatici e documentazione ufficiale."},
         {"id":"RC2-BASELINE","title":"RC2 Baseline and Integrated Acceptance","status":"active","note":"Congelamento della baseline RC2, verifica Pages, compatibility review e acceptance integrata."}
       ]
     },
@@ -43,13 +43,13 @@
     }
   ],
   "milestones": [
-    {"id":"M-RC2-WP01","title":"WP-01 Enterprise Foundation","date":"2026-08-05","status":"completed","description":"Lifecycle, Component Registry and Event Bus delivered.","image":null},
-    {"id":"M-RC2-WP02","title":"WP-02 Scientific Platform 2.0","date":"2026-08-05","status":"completed","description":"Scientific Data Engine and indexed scientific services delivered.","image":null},
-    {"id":"M-RC2-WP03","title":"WP-03 Enterprise Theme Framework","date":"2026-08-05","status":"completed","description":"Governed theme capability delivered.","image":null},
-    {"id":"M-RC2-WP04","title":"WP-04 Enterprise Search Center","date":"2026-08-05","status":"completed","description":"Federated search capability delivered.","image":null},
-    {"id":"M-RC2-WP05","title":"WP-05 Operations Dashboard","date":"2026-08-05","status":"completed","description":"Operations observability dashboard completed and accepted.","image":null},
-    {"id":"M-RC2-WP06","title":"WP-06 Enterprise Plugin SDK","date":"2026-08-05","status":"completed","description":"Plugin SDK, provider contracts, tests, CI gate and developer documentation completed.","image":null},
-    {"id":"M-RC2-BASELINE","title":"RC2 Baseline and Integrated Acceptance","date":"2026-08-05","status":"active","description":"Baseline freeze, integrated compatibility review and final acceptance are in progress.","image":null},
-    {"id":"M-AP013","title":"AP-013 Scientific Image Repository Architecture","date":"2026-08-05","status":"active","description":"Final unattended COPY_NEW evidence review and operational acceptance remain open.","image":null}
+    {"id":"M-RC2-WP01","itemRef":"WP-01","title":"WP-01 Enterprise Foundation","date":"2026-08-05","description":"Lifecycle, Component Registry and Event Bus delivered.","image":null},
+    {"id":"M-RC2-WP02","itemRef":"WP-02","title":"WP-02 Scientific Platform 2.0","date":"2026-08-05","description":"Scientific Data Engine and indexed scientific services delivered.","image":null},
+    {"id":"M-RC2-WP03","itemRef":"WP-03","title":"WP-03 Enterprise Theme Framework","date":"2026-08-05","description":"Governed theme capability delivered.","image":null},
+    {"id":"M-RC2-WP04","itemRef":"WP-04","title":"WP-04 Enterprise Search Center","date":"2026-08-05","description":"Federated search capability delivered.","image":null},
+    {"id":"M-RC2-WP05","itemRef":"WP-05","title":"WP-05 Operations Dashboard","date":"2026-08-05","description":"Operations observability dashboard completed and accepted.","image":null},
+    {"id":"M-RC2-WP06","itemRef":"WP-06","title":"WP-06 Enterprise Plugin SDK","date":"2026-08-05","description":"Plugin SDK, provider contracts, tests, CI gate and developer documentation completed.","image":null},
+    {"id":"M-RC2-BASELINE","itemRef":"RC2-BASELINE","title":"RC2 Baseline and Integrated Acceptance","date":"2026-08-05","description":"Baseline freeze, integrated compatibility review and final acceptance are in progress.","image":null},
+    {"id":"M-AP013","itemRef":"AP-013","title":"AP-013 Scientific Image Repository Architecture","date":"2026-08-05","description":"Final unattended COPY_NEW evidence review and operational acceptance remain open.","image":null}
   ]
 }
