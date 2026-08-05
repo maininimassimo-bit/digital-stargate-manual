@@ -17,6 +17,7 @@ on:
       - "mkdocs.yml"
       - "requirements.txt"
       - ".github/scripts/**"
+      - ".github/roadmap/**"
       - ".github/workflows/developer-foundation.yml"
 
 permissions:
@@ -52,6 +53,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+
+      - name: Verify generated roadmap
+        run: node .github/scripts/generate-roadmap.mjs --check
 
       - name: Test Enterprise Plugin SDK
         run: node --test .github/scripts/test-plugin-sdk.mjs
