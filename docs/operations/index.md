@@ -144,4 +144,5 @@
 <script src="../javascripts/scientific-data-engine.js"></script>
 <script src="../javascripts/dsg-search-service.js"></script>
 <script src="../javascripts/dsg-operations-service.js"></script>
+<script src="../javascripts/dsg-operations-widgets.js"></script>
 <script src="../javascripts/dsg-operations-dashboard.js"></script>
