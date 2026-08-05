@@ -17,6 +17,7 @@
     const root = document.querySelector('[data-dsg-search-center]');
     if (!root || root.dataset.dsgSearchCenterReady === 'true') return;
 
+    const scope = root.closest('[data-dsg-documentation-center]') || document;
     const service = window.DSGSearchService;
     if (!service) {
       root.innerHTML = '<div class="dsg-search-center__error">Search Service non disponibile.</div>';
@@ -24,22 +25,48 @@
       return;
     }
 
+    const queryInput = scope.querySelector('[data-search-query]');
+    const typeFilter = scope.querySelector('[data-search-type]');
+    const yearFilter = scope.querySelector('[data-search-year]');
+    const targetFilter = scope.querySelector('[data-search-target]');
+    const qualityFilter = scope.querySelector('[data-search-quality]');
+    const resetButton = scope.querySelector('[data-search-reset]');
+    const statusNode = scope.querySelector('[data-search-status]');
+    const resultNode = scope.querySelector('[data-search-results]');
+    const statsNode = scope.querySelector('[data-search-stats]');
+
+    const controls = {
+      queryInput,
+      typeFilter,
+      yearFilter,
+      targetFilter,
+      qualityFilter,
+      resetButton,
+      statusNode,
+      resultNode,
+      statsNode
+    };
+    const missing = Object.entries(controls)
+      .filter(([, value]) => !value)
+      .map(([name]) => name);
+
+    if (missing.length) {
+      console.error('Search Center DOM incomplete', { missing });
+      root.classList.add('is-error');
+      if (statusNode) statusNode.textContent = 'Ricerca non disponibile';
+      if (resultNode) {
+        resultNode.innerHTML = '<div class="dsg-search-center__error">Struttura del Search Center incompleta.</div>';
+      }
+      events?.emit('search-center-error', { reason: 'dom-incomplete', missing });
+      return;
+    }
+
     root.dataset.dsgSearchCenterReady = 'true';
     root.classList.add('is-loading');
-
-    const queryInput = root.querySelector('[data-search-query]');
-    const typeFilter = root.querySelector('[data-search-type]');
-    const yearFilter = root.querySelector('[data-search-year]');
-    const targetFilter = root.querySelector('[data-search-target]');
-    const qualityFilter = root.querySelector('[data-search-quality]');
-    const resetButton = root.querySelector('[data-search-reset]');
-    const statusNode = root.querySelector('[data-search-status]');
-    const resultNode = root.querySelector('[data-search-results]');
-    const statsNode = root.querySelector('[data-search-stats]');
-
     let timer = null;
 
     const fillSelect = (select, values) => {
+      select.querySelectorAll('option:not(:first-child)').forEach((option) => option.remove());
       values.forEach((value) => {
         select.insertAdjacentHTML('beforeend', `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`);
       });
@@ -85,11 +112,6 @@
       events?.emit('search-center-results', { query, resultCount: results.length, filters: filters() });
     };
 
-    const scheduleRender = () => {
-      window.clearTimeout(timer);
-      timer = window.setTimeout(() => render().catch(handleError), 160);
-    };
-
     const handleError = (error) => {
       console.error(error);
       root.classList.remove('is-loading', 'is-searching', 'is-ready');
@@ -97,6 +119,11 @@
       statusNode.textContent = 'Ricerca non disponibile';
       resultNode.innerHTML = '<div class="dsg-search-center__error">Impossibile caricare gli indici federati.</div>';
       events?.emit('search-center-error', { message: error.message });
+    };
+
+    const scheduleRender = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => render().catch(handleError), 160);
     };
 
     try {
