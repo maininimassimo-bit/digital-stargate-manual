@@ -105,13 +105,13 @@ Assenza fisica, dipendenze, condizioni ambientali, comunicazioni e irreversibili
 
 ### Parte II - Progettare l'impresa intorno al cielo - 68-76 pagine
 
-**Capitolo 5. L'architettura come linguaggio comune** - 11-13 pagine  
+**Capitolo 5. L'architettura come linguaggio comune** - 11-13 pagine — prima stesura completata  
 Domini, capability, componenti, confini e relazioni.
 
-**Capitolo 6. Il repository come memoria istituzionale** - 10-12 pagine  
+**Capitolo 6. Il repository come memoria istituzionale** - 10-12 pagine — prima stesura completata  
 Fonte autorevole, BootAI, Knowledge Map e continuità tra sessioni di lavoro.
 
-**Capitolo 7. Decidere in modo tracciabile** - 10-12 pagine  
+**Capitolo 7. Decidere in modo tracciabile** - 10-12 pagine — prima stesura completata  
 ADR, Decision Log, assessment e conseguenze.
 
 **Capitolo 8. Autorità, responsabilità e separazione dei ruoli** - 12-14 pagine  

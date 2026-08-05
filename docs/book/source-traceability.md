@@ -53,6 +53,9 @@ La cronologia precedente al 13 luglio e la storia dell'osservatorio fisico resta
 | Prima dell'enterprise | Manuale tecnico 1-44 | `DSG-HIST-001` | Ricostruzione con date non note |
 | Cambio di prospettiva | `DSG-MR-001`, Project Governance Center | Commit e PR di pubblicazione | Fatto verificato e lettura editoriale |
 | Modello DSG-EOM | Tutto il corpus | Questa matrice | Sintesi editoriale dichiarata |
+| Architettura come linguaggio comune | `DSG-EAM-001`, AP-001, Enterprise Metamodel | ARB-003, ABC-001, traceability register | Baseline approvata e sintesi editoriale |
+| Repository come memoria istituzionale | `AI_BOOTSTRAP.md`, Enterprise Architecture Context, Knowledge Map | Decision Log, commit e cronologia verificata | Capacita organizzativa attiva |
+| Decisioni tracciabili | ADR, Decision Log, AP-001 | Assessment, ARB, ABC-001 e traceability register | Metodo di governance verificato |
 | Architettura enterprise | `DSG-EAM-001`, DSRA, AP-001 | Assessment e ABC-001 | Baseline approvata |
 | Automazione | AP-003, ADR-004 | review ed evidence applicabili | Baseline più stato dimostrato |
 | Osservabilità | AP-004 | ARB ed execution evidence | Baseline più stato dimostrato |
