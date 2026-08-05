@@ -24,6 +24,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Generate governed roadmap
+        run: node .github/scripts/generate-roadmap.mjs --write
+
+      - name: Generate scientific observation index
+        run: node .github/scripts/generate-scientific-catalog.mjs --write
+
       - name: Set up Python
         uses: actions/setup-python@v6
         with:

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "AP-014",
+  "title": "Scientific Observation Catalog and Search",
+  "statusPolicy": {
+    "planned": "No required evidence is present.",
+    "active": "At least one required evidence item is present, but one or more completion conditions are not satisfied.",
+    "completed": "All required evidence items are present and every acceptance rule evaluates to accepted."
+  },
+  "evidence": [
+    {
+      "id": "architecture-package",
+      "type": "architecture-package",
+      "path": "docs/architecture/packages/AP-014-Scientific-Observation-Catalog-and-Search.md",
+      "required": true,
+      "acceptance": { "mode": "exists" }
+    },
+    {
+      "id": "catalog-index",
+      "type": "implementation-evidence",
+      "path": "docs/data/scientific-observation-index.json",
+      "required": true,
+      "acceptance": { "mode": "exists" }
+    },
+    {
+      "id": "projection-generator",
+      "type": "implementation-evidence",
+      "path": ".github/scripts/generate-scientific-catalog.mjs",
+      "required": true,
+      "acceptance": { "mode": "exists" }
+    },
+    {
+      "id": "search-service",
+      "type": "implementation-evidence",
+      "path": "docs/javascripts/dsg-search-service.js",
+      "required": true,
+      "acceptance": { "mode": "exists" }
+    },
+    {
+      "id": "enterprise-search-integration",
+      "type": "implementation-evidence",
+      "path": "docs/javascripts/dsg-search-center.js",
+      "required": true,
+      "acceptance": { "mode": "exists" }
+    },
+    {
+      "id": "enterprise-search-tests",
+      "type": "test-evidence",
+      "path": ".github/scripts/test-search-center.mjs",
+      "required": true,
+      "acceptance": { "mode": "exists" }
+    },
+    {
+      "id": "pixinsight-synchronization-adapter",
+      "type": "implementation-evidence",
+      "path": "docs/architecture/integration/AP14-W06-PixInsight-Synchronization-Adapter.md",
+      "required": true,
+      "acceptance": { "mode": "exists" }
+    },
+    {
+      "id": "operational-acceptance",
+      "type": "operational-acceptance",
+      "path": "docs/architecture/validation/AP-014-Operational-Acceptance.md",
+      "required": true,
+      "acceptance": {
+        "mode": "markdown-field",
+        "field": "Stato",
+        "acceptedValues": ["Accepted"]
+      }
+    }
+  ],
+  "expectedStatus": "active",
+  "notes": [
+    "AP14-W01 through AP14-W05 are represented by the architecture package, generated catalog, search services and CI-protected Search Center tests.",
+    "AP14-W06 and AP14-W07 remain required before AP-014 can be promoted to completed.",
+    "The roadmap status is derived from governed evidence and must not be inferred from commit messages alone."
+  ]
+}

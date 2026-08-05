@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalStarGate.Contracts\DigitalStarGate.Contracts.csproj" />
+    <ProjectReference Include="..\DigitalStarGate.Domain\DigitalStarGate.Domain.csproj" />
+    <ProjectReference Include="..\DigitalStarGate.SharedKernel\DigitalStarGate.SharedKernel.csproj" />
+  </ItemGroup>
+</Project>

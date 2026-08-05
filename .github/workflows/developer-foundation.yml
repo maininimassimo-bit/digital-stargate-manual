@@ -1,0 +1,92 @@
+name: Developer Foundation
+
+on:
+  push:
+    branches:
+      - main
+      - release/1.5-developer-foundation
+  pull_request:
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "*.sln"
+      - "*.props"
+      - "global.json"
+      - ".editorconfig"
+      - "docs/**"
+      - "mkdocs.yml"
+      - "requirements.txt"
+      - ".github/scripts/**"
+      - ".github/roadmap/**"
+      - ".github/workflows/developer-foundation.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+          cache: true
+          cache-dependency-path: Directory.Packages.props
+
+      - name: Restore
+        run: dotnet restore DigitalStarGate.sln
+
+      - name: Build
+        run: dotnet build DigitalStarGate.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test DigitalStarGate.sln --configuration Release --no-build
+
+      - name: Verify formatting
+        run: dotnet format DigitalStarGate.sln --verify-no-changes --no-restore
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Verify generated roadmap
+        shell: bash
+        run: |
+          node .github/scripts/generate-roadmap.mjs --print | jq --sort-keys . > /tmp/roadmap-generated.json
+          jq --sort-keys . docs/data/roadmap.json > /tmp/roadmap-committed.json
+          diff --unified /tmp/roadmap-committed.json /tmp/roadmap-generated.json
+
+      - name: Verify scientific observation index
+        run: node .github/scripts/generate-scientific-catalog.mjs --check
+
+      - name: Test Enterprise Plugin SDK
+        run: node --test .github/scripts/test-plugin-sdk.mjs
+
+      - name: Test Enterprise Search Center
+        run: node --test .github/scripts/test-search-center.mjs
+
+      - name: Test PixInsight Manifest Contract
+        run: node --test .github/scripts/test-pixinsight-manifest.mjs
+
+      - name: Test PixInsight Synchronization Ledger
+        run: node --test .github/scripts/test-pixinsight-ledger.mjs
+
+      - name: Test PixInsight Read-Only Reconciliation
+        run: node --test .github/scripts/test-pixinsight-reconciliation.mjs
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install documentation dependencies
+        run: python -m pip install --requirement requirements.txt
+
+      - name: Verify MkDocs
+        run: mkdocs build --strict

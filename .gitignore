@@ -1,18 +1,41 @@
-﻿# Python
+# Python
 .venv/
+venv/
 __pycache__/
 *.pyc
+*.py[cod]
+*.egg-info/
 
 # MkDocs
 site/
+.cache/
 
-# Build
+# Build e release esistenti
 build/
 release/
+dist/
+backup-analytics-v0.1.0/
+
+# .NET
+bin/
+obj/
+artifacts/
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
 
 # Windows
 Thumbs.db
 Desktop.ini
+
+# macOS
+.DS_Store
 
 # Office temporary files
 ~$*.docx
@@ -22,9 +45,22 @@ Desktop.ini
 .vscode/
 .idea/
 
-backup-analytics-v0.1.0/
+# Secret e configurazioni locali
+.env
+.env.*
+!.env.example
+secrets.json
+appsettings.*.local.json
 
-# Python packaging artifacts
-*.egg-info/
-build/
-dist/
+# Digital StarGate local runtime configuration
+tools/dsdm/session-importer/session-importer.local.json
+tools/dsdm/session-importer/session-transfer.local.json
+tools/dsdm/session-importer/session-transfer.local.before-pilot-*.json
+
+# Digital StarGate local credentials and runtime evidence
+*.credential.xml
+DSG-Inventory/
+SessionImporter/
+SessionTransfer/
+SessionTransfer-Launcher/
+*.log

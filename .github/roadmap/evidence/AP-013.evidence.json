@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "AP-013",
+  "title": "Scientific Image Repository Architecture",
+  "statusPolicy": {
+    "planned": "No required evidence is present.",
+    "active": "At least one required evidence item is present, but one or more completion conditions are not satisfied.",
+    "completed": "All required evidence items are present and every acceptance rule evaluates to accepted."
+  },
+  "evidence": [
+    {
+      "id": "architecture-package",
+      "type": "architecture-package",
+      "path": "docs/architecture/packages/AP-013-Scientific-Image-Repository-Architecture.md",
+      "required": true,
+      "acceptance": {
+        "mode": "exists"
+      }
+    },
+    {
+      "id": "architecture-review",
+      "type": "arb-review",
+      "path": "docs/architecture/reviews/ARB-013-Scientific-Image-Repository-Architecture-Review.md",
+      "required": true,
+      "acceptance": {
+        "mode": "markdown-field",
+        "field": "Decision",
+        "acceptedValues": [
+          "Approved",
+          "Approved with conditions",
+          "Accepted"
+        ]
+      }
+    },
+    {
+      "id": "operational-acceptance-test",
+      "type": "oat",
+      "path": "docs/architecture/validation/AP-013-OAT-001.md",
+      "required": true,
+      "acceptance": {
+        "mode": "markdown-field",
+        "field": "Stato",
+        "acceptedValues": [
+          "Accepted",
+          "Passed"
+        ]
+      }
+    },
+    {
+      "id": "operational-acceptance",
+      "type": "operational-acceptance",
+      "path": "docs/architecture/validation/AP-013-Operational-Acceptance.md",
+      "required": true,
+      "acceptance": {
+        "mode": "markdown-field",
+        "field": "Stato",
+        "acceptedValues": [
+          "Accepted"
+        ]
+      }
+    }
+  ],
+  "expectedStatus": "active",
+  "notes": [
+    "The architecture package is present.",
+    "The final ARB review, final OAT record and formal operational acceptance are not currently versioned at the declared paths.",
+    "The manifest must not promote AP-013 to completed until all required evidence is present and accepted."
+  ]
+}
