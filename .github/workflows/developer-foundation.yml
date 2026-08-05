@@ -70,6 +70,9 @@ jobs:
       - name: Test Enterprise Search Center
         run: node --test .github/scripts/test-search-center.mjs
 
+      - name: Test PixInsight Manifest Contract
+        run: node --test .github/scripts/test-pixinsight-manifest.mjs
+
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
