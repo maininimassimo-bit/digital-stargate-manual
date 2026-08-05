@@ -55,7 +55,14 @@ jobs:
           node-version: "22"
 
       - name: Verify generated roadmap
-        run: node .github/scripts/generate-roadmap.mjs --check
+        shell: bash
+        run: |
+          node .github/scripts/generate-roadmap.mjs --print | jq --sort-keys . > /tmp/roadmap-generated.json
+          jq --sort-keys . docs/data/roadmap.json > /tmp/roadmap-committed.json
+          diff --unified /tmp/roadmap-committed.json /tmp/roadmap-generated.json
+
+      - name: Verify scientific observation index
+        run: node .github/scripts/generate-scientific-catalog.mjs --check
 
       - name: Test Enterprise Plugin SDK
         run: node --test .github/scripts/test-plugin-sdk.mjs
