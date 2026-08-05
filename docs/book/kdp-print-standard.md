@@ -6,7 +6,7 @@
 | Progetto | DSG-BOOK-001 |
 | Stato | Baseline vincolante |
 | Data | 5 agosto 2026 |
-| Template | `templates/kdp/amazon-kdp-5.5x8.5-template.docx` |
+| Template sorgente | Amazon KDP 5,5 × 8,5 pollici, allegato editoriale `01-13-97-x-21-59-cm-1-.docx` |
 | Destinazione | Amazon KDP paperback |
 | Interno | Bianco e nero, senza bleed |
 
@@ -20,7 +20,7 @@ Il manoscritto usa il formato Amazon KDP:
 - direzione di lettura: sinistra-destra;
 - bleed interno: nessuno.
 
-Il formato deriva direttamente dal template Amazon fornito per il progetto. Non coincide con A5 ISO, che misura 14,8 × 21 cm. Nei documenti editoriali il formato viene quindi indicato come **KDP 5,5 × 8,5 pollici**.
+Il formato deriva direttamente dal template Amazon fornito per il progetto. Le specifiche numeriche e gli stili vincolanti sono registrati in questo standard, così la rigenerazione non dipende dalla presenza del file binario nel repository. Non coincide con A5 ISO, che misura 14,8 × 21 cm. Nei documenti editoriali il formato viene quindi indicato come **KDP 5,5 × 8,5 pollici**.
 
 ## 2. Margini
 
