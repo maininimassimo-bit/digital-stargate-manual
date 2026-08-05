@@ -66,18 +66,34 @@ markdown_extensions:
 extra_css:
   - styles/extra.css
   - styles/analytics.css
+  - styles/roadmap.css
 
 extra_javascript:
+  - javascripts/dsg-enterprise-core.js
   - javascripts/nav-scroll.js
   - javascripts/homepage-effects.js
   - javascripts/page-enhancements.js
+  - javascripts/dsg-theme-manager.js
   - javascripts/latest-observation.js
+  - javascripts/roadmap.js
 
 not_in_nav: |
   session-reports/**/report-sessione.md
 
 nav:
   - Home: index.md
+  - Roadmap: roadmap/index.md
+
+  - Project Governance:
+      - Governance Center: project/index.md
+      - Enterprise Architecture Context: project/ENTERPRISE_ARCHITECTURE_CONTEXT.md
+      - Repository Knowledge Map: project/REPOSITORY_KNOWLEDGE_MAP.md
+      - Development Workflow: project/DEVELOPMENT_WORKFLOW.md
+      - Coding Standards: project/CODING_STANDARDS.md
+      - Release Playbook: project/RELEASE_PLAYBOOK.md
+      - Technical Debt Register: project/TECHNICAL_DEBT.md
+      - Decision Log: project/DECISION_LOG.md
+      - Project Backlog: project/BACKLOG.md
 
   - Architettura:
       - Panoramica della piattaforma: architecture/index.md
@@ -86,6 +102,87 @@ nav:
           - ADR-001 - Session Layer: architecture/ADR-001-Session-Layer.md
           - ADR-002 - Analytics Quality Gates: architecture/ADR-002-Analytics-Quality-Gates.md
           - ADR-003 - Warehouse Engine: architecture/ADR-003-Warehouse-Engine.md
+          - ADR-005 - Weather Safety Interlock: architecture/ADR-005-Weather-Safety-Interlock.md
+
+      - Governance e metamodel:
+          - Enterprise Metamodel: architecture/enterprise-metamodel.md
+          - Enterprise Data Governance Standard: architecture/data-governance-standard.md
+          - Architecture Traceability Register: architecture/traceability-register.md
+          - AP-001 - Enterprise Metamodel and Repository Information Architecture: architecture/packages/AP-001-Enterprise-Metamodel-and-Repository-Information-Architecture.md
+          - AP-002 - Enterprise Data Governance: architecture/packages/AP-002-Enterprise-Data-Governance.md
+          - AP-003 - Observatory Automation Architecture: architecture/packages/AP-003-Observatory-Automation-Architecture.md
+          - AP-004 - Enterprise Telemetry and Observability Architecture: architecture/packages/AP-004-Enterprise-Telemetry-and-Observability-Architecture.md
+          - AP-005 - Identity, Access and Remote Operations Security Architecture: architecture/packages/AP-005-Identity-Access-and-Remote-Operations-Security-Architecture.md
+          - AP-006 - Enterprise Configuration and Asset Management Architecture: architecture/packages/AP-006-Enterprise-Configuration-and-Asset-Management-Architecture.md
+          - AP-007 - Enterprise Operations and Service Management Architecture: architecture/packages/AP-007-Enterprise-Operations-and-Service-Management-Architecture.md
+          - AP-008 - Enterprise Integration Architecture: architecture/packages/AP-008-Enterprise-Integration-Architecture.md
+          - AP-009 - Enterprise Infrastructure Architecture: architecture/packages/AP-009-Enterprise-Infrastructure-Architecture.md
+          - AP-010 - Enterprise Safety Assurance Architecture: architecture/packages/AP-010-Enterprise-Safety-Assurance-Architecture.md
+          - AP-011 - Enterprise Analytics Platform Architecture: architecture/packages/AP-011-Enterprise-Analytics-Platform-Architecture.md
+          - AP-012 - Enterprise Operations Center Architecture: architecture/packages/AP-012-Enterprise-Operations-Center-Architecture.md
+          - AP-013 - Scientific Image Repository Architecture: architecture/packages/AP-013-Scientific-Image-Repository-Architecture.md
+
+      - Scientific Image Repository:
+          - Current-State Scientific Asset Inventory: architecture/scientific-assets/AP13-W02-Current-State-Scientific-Asset-Inventory-Specification.md
+          - DSDM-001 - Conceptual Model: architecture/scientific-assets/DSDM-001-Scientific-Data-Manager-Conceptual-Model.md
+          - DSDM-002 - Logical Data Model: architecture/scientific-assets/DSDM-002-Scientific-Data-Manager-Logical-Data-Model.md
+          - DSDM-003 - Contract and Manifest Model: architecture/scientific-assets/DSDM-003-Contract-and-Manifest-Model.md
+          - DSDM-004 - Session Importer and Safe Transfer Design: architecture/scientific-assets/DSDM-004-Session-Importer-Architecture-and-Safe-Transfer-Design.md
+          - Source Authorization and Scope Record: architecture/scientific-assets/evidence/AP13-W02/E-AP13-W02-01-Source-Authorization-and-Scope-Record.md
+
+      - Validation e Architecture Review:
+          - Indice: architecture/validation/index.md
+          - ARB-012 - Validation Campaign: architecture/validation/ARB-012-Validation-Campaign.md
+          - ARB-012 - Integrated Non-Operational Evidence: architecture/validation/ARB-012-Integrated-Non-Operational-Execution-Evidence.md
+          - ARB-012-C04 - Closure Plan: architecture/validation/ARB-012-C04-Closure-Plan.md
+          - ARB-012-C04 - ENV-011 Execution Result: architecture/validation/ARB-012-C04-W06-ENV011-Execution-Result.md
+          - AP-013 - Session Discovery Evidence: architecture/validation/AP-013-Session-Discovery-Execution-Evidence.md
+          - AP-013 - Transfer Readiness Gate: architecture/validation/AP-013-Transfer-Readiness-Gate.md
+          - ARB-012 - Final Re-Review: architecture/reviews/ARB-012-Final-Re-Review.md
+
+      - Enterprise Operations:
+          - Operations and Service Management Reference Architecture: architecture/enterprise-operations-and-service-management-reference-architecture.md
+
+      - Enterprise Operations Center:
+          - Operations Center Reference Architecture: architecture/enterprise-operations-center-reference-architecture.md
+          - Command Authorization Model: architecture/operations-command-authorization-model.md
+          - Alarm & Incident Model: architecture/alarm-and-incident-model.md
+          - Operational Runbook Standard: architecture/operational-runbook-standard.md
+          - Operations Responsibility Matrix: architecture/operations-responsibility-matrix.md
+
+      - Enterprise Integration:
+          - Enterprise Integration Reference Architecture: architecture/enterprise-integration-reference-architecture.md
+          - Integration Contract Catalog: architecture/integration-contract-catalog.md
+
+      - Enterprise Infrastructure:
+          - Enterprise Infrastructure Reference Architecture: architecture/enterprise-infrastructure-reference-architecture.md
+
+      - Enterprise Safety Assurance:
+          - Enterprise Safety Reference Architecture: architecture/enterprise-safety-reference-architecture.md
+          - Safety Hazard and State Catalog: architecture/safety-hazard-and-state-catalog.md
+
+      - Enterprise Analytics Platform:
+          - Enterprise Analytics Reference Architecture: architecture/enterprise-analytics-reference-architecture.md
+          - Analytics Data Pipeline Reference: architecture/analytics-data-pipeline-reference.md
+          - Analytics KPI Catalog: architecture/analytics-kpi-catalog.md
+          - Analytics Governance Standard: architecture/analytics-governance-standard.md
+
+      - Digital Platforms:
+          - Digital StarGate Portal Vision: architecture/digital-stargate-portal-vision.md
+          - Scientific Image Lifecycle and Processing Provenance Vision: architecture/scientific-image-lifecycle-and-processing-provenance-vision.md
+          - Scientific Knowledge Layer Vision: architecture/scientific-knowledge-layer-vision.md
+
+      - Observatory Automation:
+          - Reference Architecture: architecture/observatory-automation-reference-architecture.md
+
+      - Telemetry and Observability:
+          - Enterprise Observability Reference Architecture: architecture/enterprise-observability-reference-architecture.md
+
+      - Identity and Remote Security:
+          - Enterprise Identity and Trust Reference Architecture: architecture/enterprise-identity-and-trust-reference-architecture.md
+
+      - Configuration and Asset Management:
+          - Enterprise Configuration and Asset Management Reference Architecture: architecture/enterprise-configuration-and-asset-management-reference-architecture.md
 
       - Architettura del Warehouse:
           - Panoramica: architecture/warehouse/index.md
@@ -98,6 +195,23 @@ nav:
           - EA-001 - Ambiente e repository: architecture/assessments/EA-001-Environment-Repository-Assessment.md
           - EA-002 - Repository e Warehouse: architecture/assessments/EA-002-Integrated-Repository-and-Warehouse-Assessment.md
           - PAA-001 - Project Architecture Assessment: architecture/assessments/PAA-001-Project-Architecture-Assessment.md
+          - PAA-002 - Platform Capability Gap Assessment: architecture/assessments/PAA-002-Platform-Capability-Gap-Assessment.md
+          - ARB-002 - Independent Review of PAA-002: architecture/assessments/ARB-002-PAA-002-Independent-Architecture-Review.md
+          - ARB-003 - Independent Review of AP-001: architecture/assessments/ARB-003-AP-001-Independent-Architecture-Review.md
+          - ARB-004 - Independent Review of AP-002: architecture/assessments/ARB-004-AP-002-Independent-Architecture-Review.md
+          - ARB-005 - Independent Review of AP-003: architecture/assessments/ARB-005-AP-003-Independent-Architecture-Review.md
+          - ARB-006 - Independent Review of AP-004: architecture/assessments/ARB-006-AP-004-Independent-Architecture-Review.md
+          - ARB-007 - Independent Review of AP-005: architecture/assessments/ARB-007-AP-005-Identity-Access-and-Remote-Operations-Security-Architecture.md
+          - ARB-008 - Independent Review of AP-006: architecture/assessments/ARB-008-AP-006-Enterprise-Configuration-and-Asset-Management-Architecture.md
+          - ARB-009 - Independent Review of AP-009: architecture/assessments/ARB-009-AP-009-Independent-Architecture-Review.md
+          - ARB-010 - Independent Review of AP-010: architecture/assessments/ARB-010-AP-010-Independent-Architecture-Review.md
+          - ARB-011 - Independent Review of AP-011: architecture/assessments/ARB-011-AP-011-Independent-Architecture-Review.md
+          - ARB-012 - Independent Review of AP-012: architecture/assessments/ARB-012-AP-012-Independent-Architecture-Review.md
+          - ABC-001 - Architecture Baseline Certificate: architecture/assessments/ABC-001-Architecture-Baseline-Certificate.md
+          - ABC-001 - Evidence Annex: architecture/assessments/ABC-001-Evidence-Annex.md
+          - AMP-001 - Architecture Master Plan: architecture/assessments/AMP-001-Architecture-Master-Plan.md
+          - AMP-002 - Architecture Program Roadmap Realignment: architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md
+          - ADR-004 - Operational Architecture: architecture/assessments/ADR-004-Operational-Architecture.md
 
   - Enterprise DSG-MR-001:
       - Indice enterprise: enterprise/index.md
@@ -405,6 +519,10 @@ nav:
       - Configurazioni: analytics/configuration-summary.md
 
   - Developer:
+      - Guida di sviluppo: developer/development-guide.md
+      - Contratti canonici della piattaforma: developer/platform-contracts.md
+      - Capability 001 - Observation Session: developer/capability-001-observation-session.md
+      - Capability 002 - Weather Safety Interlock: developer/capability-002-weather-safety-interlock.md
       - Portal Publication Guidelines: developer/portal-publication-guidelines.md
 
   - UI / UX:
@@ -414,4 +532,5 @@ nav:
       - REL-000 - Release Management Baseline: releases/REL-000-release-management-baseline.md
 
   - Release Notes:
+      - Release 1.5 - Developer Edition: releases/release-1.5-developer-edition.md
       - UI 6.1: releases/ui-6.1.md
