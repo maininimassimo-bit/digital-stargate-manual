@@ -73,6 +73,9 @@ jobs:
       - name: Test PixInsight Manifest Contract
         run: node --test .github/scripts/test-pixinsight-manifest.mjs
 
+      - name: Test PixInsight Synchronization Ledger
+        run: node --test .github/scripts/test-pixinsight-ledger.mjs
+
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
