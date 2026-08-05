@@ -35,8 +35,9 @@
     const resultNode = scope.querySelector('[data-search-results]');
     const statsNode = scope.querySelector('[data-search-stats]');
     const filterPanel = scope.querySelector('.dsg-search-center__filters');
+    const toolbar = scope.querySelector('.dsg-search-center__toolbar');
 
-    const controls = { queryInput, typeFilter, yearFilter, targetFilter, qualityFilter, resetButton, statusNode, resultNode, statsNode, filterPanel };
+    const controls = { queryInput, typeFilter, yearFilter, targetFilter, qualityFilter, resetButton, statusNode, resultNode, statsNode, filterPanel, toolbar };
     const missing = Object.entries(controls).filter(([, value]) => !value).map(([name]) => name);
 
     if (missing.length) {
@@ -67,10 +68,13 @@
         </select>
       </label>`);
 
+    resetButton.insertAdjacentHTML('beforebegin', '<button class="dsg-search-center__reset" type="button" data-search-share>Condividi ricerca</button>');
+
     const filterFilter = scope.querySelector('[data-search-filter]');
     const telescopeFilter = scope.querySelector('[data-search-telescope]');
     const cameraFilter = scope.querySelector('[data-search-camera]');
     const sortFilter = scope.querySelector('[data-search-sort]');
+    const shareButton = scope.querySelector('[data-search-share]');
 
     const suggestionList = document.createElement('datalist');
     suggestionList.id = 'dsg-search-suggestions';
@@ -81,10 +85,22 @@
     root.dataset.dsgSearchCenterReady = 'true';
     root.classList.add('is-loading');
     let timer = null;
+    let restoringState = false;
 
     const fillSelect = (select, values) => {
       select.querySelectorAll('option:not(:first-child)').forEach((option) => option.remove());
       values.forEach((value) => select.insertAdjacentHTML('beforeend', `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`));
+    };
+
+    const controlsByParameter = {
+      type: typeFilter,
+      year: yearFilter,
+      target: targetFilter,
+      quality: qualityFilter,
+      filter: filterFilter,
+      telescope: telescopeFilter,
+      camera: cameraFilter,
+      sort: sortFilter
     };
 
     const filters = () => ({
@@ -97,6 +113,39 @@
       camera: cameraFilter.value
     });
 
+    const buildSearchUrl = () => {
+      const url = new URL(window.location.href);
+      const parameters = new URLSearchParams();
+      if (queryInput.value.trim()) parameters.set('q', queryInput.value.trim());
+      Object.entries(controlsByParameter).forEach(([name, control]) => {
+        const value = control.value;
+        if (value && !(name === 'sort' && value === 'relevance')) parameters.set(name, value);
+      });
+      url.search = parameters.toString();
+      url.hash = 'enterprise-search-center';
+      return url;
+    };
+
+    const persistUrlState = () => {
+      if (restoringState) return;
+      const url = buildSearchUrl();
+      window.history.replaceState({ dsgSearch: true }, '', url.href);
+      events?.emit('search-center-url-updated', { url: url.href });
+    };
+
+    const restoreUrlState = () => {
+      restoringState = true;
+      const parameters = new URLSearchParams(window.location.search);
+      queryInput.value = parameters.get('q') || '';
+      Object.entries(controlsByParameter).forEach(([name, control]) => {
+        const value = parameters.get(name);
+        control.value = value && [...control.options].some((option) => option.value === value)
+          ? value
+          : (name === 'sort' ? 'relevance' : '');
+      });
+      restoringState = false;
+    };
+
     const rankingExplanation = (item) => {
       const explanation = item.scoreExplanation;
       if (!explanation) return '';
@@ -104,7 +153,7 @@
       return `<details class="dsg-search-result__explanation"><summary>Perché questo risultato?</summary><p>Punteggio ${escapeHtml(item.score)}: testo ${escapeHtml(explanation.text)}, autorità ${escapeHtml(explanation.authority)}, qualità ${escapeHtml(explanation.quality)}${escapeHtml(terms)}.</p></details>`;
     };
 
-    const render = async () => {
+    const render = async ({ persist = true } = {}) => {
       root.classList.add('is-searching');
       const query = queryInput.value.trim();
       const results = await service.search(query, { filters: filters(), sort: sortFilter.value, limit: 50 });
@@ -140,6 +189,7 @@
       const structuredCount = Object.keys(parsed?.filters || {}).length;
       statsNode.textContent = `${serviceStatus.documentCount} documenti · ${serviceStatus.scientificCount} sessioni scientifiche${structuredCount ? ` · ${structuredCount} filtri nella query` : ''}`;
       root.classList.remove('is-searching');
+      if (persist) persistUrlState();
       events?.emit('search-center-results', { query, parsed, resultCount: results.length, filters: filters(), sort: sortFilter.value });
     };
 
@@ -178,6 +228,8 @@
       ];
       suggestionList.innerHTML = suggestions.map((value) => `<option value="${escapeHtml(value)}"></option>`).join('');
 
+      restoreUrlState();
+
       [queryInput, typeFilter, yearFilter, targetFilter, qualityFilter, filterFilter, telescopeFilter, cameraFilter, sortFilter]
         .forEach((control) => control.addEventListener('input', scheduleRender));
 
@@ -188,9 +240,27 @@
         render().catch(handleError);
       });
 
+      shareButton.addEventListener('click', async () => {
+        const url = buildSearchUrl();
+        try {
+          await navigator.clipboard.writeText(url.href);
+          shareButton.textContent = 'Link copiato';
+          window.setTimeout(() => { shareButton.textContent = 'Condividi ricerca'; }, 1600);
+          events?.emit('search-center-share', { url: url.href, method: 'clipboard' });
+        } catch {
+          window.prompt('Copia il link della ricerca:', url.href);
+          events?.emit('search-center-share', { url: url.href, method: 'prompt' });
+        }
+      });
+
+      window.addEventListener('popstate', () => {
+        restoreUrlState();
+        render({ persist: false }).catch(handleError);
+      });
+
       root.classList.remove('is-loading');
       root.classList.add('is-ready');
-      await render();
+      await render({ persist: false });
       queryInput.focus({ preventScroll: true });
       events?.emit('search-center-ready', service.getStatus());
     } catch (error) {
