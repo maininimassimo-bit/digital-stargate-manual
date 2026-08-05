@@ -86,13 +86,16 @@ La stima complessiva è di circa 100.000-120.000 parole, da verificare in fase d
 - [Capitolo 5 - L'architettura come linguaggio comune](05-architettura-linguaggio-comune.md)
 - [Capitolo 6 - Il repository come memoria istituzionale](06-repository-memoria-istituzionale.md)
 - [Capitolo 7 - Decidere in modo tracciabile](07-decidere-modo-tracciabile.md)
+- [Capitolo 8 - Autorità, responsabilità e separazione dei ruoli](08-autorita-responsabilita-ruoli.md)
+- [Capitolo 9 - Safety e security come architettura](09-safety-security-architettura.md)
+- [Capitolo 10 - Assurance: dal disegno alla prova](10-assurance-disegno-prova.md)
 - [Overview del modello DSG-EOM](model-overview.md)
 - [Cronologia verificata](verified-timeline.md)
 - [Matrice delle fonti e tracciabilità](source-traceability.md)
 
 ## Stato del manoscritto
 
-Questa baseline stabilisce il posizionamento, l'indice ragionato, il modello interpretativo, la cronologia verificata, la Parte I e il primo arco della Parte II. I capitoli successivi saranno sviluppati in ordine di dipendenza, verificando ogni volta la fonte autorevole e l'evoluzione effettiva del repository.
+Questa baseline stabilisce il posizionamento, l'indice ragionato, il modello interpretativo, la cronologia verificata e le Parti I-II del nucleo narrativo. I capitoli successivi saranno sviluppati in ordine di dipendenza, verificando ogni volta la fonte autorevole e l'evoluzione effettiva del repository.
 
 ## Fonti principali
 

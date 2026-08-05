@@ -114,13 +114,13 @@ Fonte autorevole, BootAI, Knowledge Map e continuità tra sessioni di lavoro.
 **Capitolo 7. Decidere in modo tracciabile** - 10-12 pagine — prima stesura completata  
 ADR, Decision Log, assessment e conseguenze.
 
-**Capitolo 8. Autorità, responsabilità e separazione dei ruoli** - 12-14 pagine  
+**Capitolo 8. Autorità, responsabilità e separazione dei ruoli** - 12-14 pagine — prima stesura completata  
 Operatore, automazione, portale, controller locale, four-eyes e sponsor.
 
-**Capitolo 9. Safety e security come architettura** - 12-14 pagine  
+**Capitolo 9. Safety e security come architettura** - 12-14 pagine — prima stesura completata  
 Precedenza della sicurezza, stato unknown, accesso remoto e controllo degradato.
 
-**Capitolo 10. Assurance: dal disegno alla prova** - 13-15 pagine  
+**Capitolo 10. Assurance: dal disegno alla prova** - 13-15 pagine — prima stesura completata  
 Review, gate, evidence, ambiente isolato e differenza fra dimostrazione tecnica e accettazione.
 
 ### Parte III - Dall'osservazione al patrimonio informativo - 56-64 pagine

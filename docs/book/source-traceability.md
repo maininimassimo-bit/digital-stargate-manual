@@ -56,6 +56,9 @@ La cronologia precedente al 13 luglio e la storia dell'osservatorio fisico resta
 | Architettura come linguaggio comune | `DSG-EAM-001`, AP-001, Enterprise Metamodel | ARB-003, ABC-001, traceability register | Baseline approvata e sintesi editoriale |
 | Repository come memoria istituzionale | `AI_BOOTSTRAP.md`, Enterprise Architecture Context, Knowledge Map | Decision Log, commit e cronologia verificata | Capacita organizzativa attiva |
 | Decisioni tracciabili | ADR, Decision Log, AP-001 | Assessment, ARB, ABC-001 e traceability register | Metodo di governance verificato |
+| Autorità e separazione dei ruoli | AP-005, AP-012, OPSC-CMD-001, OPSC-RACI-001 | ARB-007, ARB-012-FRR-001 | Baseline approvata con condizioni organizzative aperte |
+| Safety e security | AP-005, AP-010, SAF-CAT-001 | ARB-007 e ARB-010 | Framework approvati; runtime non certificato |
+| Assurance dal disegno alla prova | Enterprise Metamodel, AP-010, AP-012 | ENV-011, E-ARB012-INT-01, ARB-012-FRR-001 | Evidence tecnica limitata allo scope dichiarato |
 | Architettura enterprise | `DSG-EAM-001`, DSRA, AP-001 | Assessment e ABC-001 | Baseline approvata |
 | Automazione | AP-003, ADR-004 | review ed evidence applicabili | Baseline più stato dimostrato |
 | Osservabilità | AP-004 | ARB ed execution evidence | Baseline più stato dimostrato |
