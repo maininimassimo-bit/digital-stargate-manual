@@ -1,7 +1,14 @@
-<link rel="stylesheet" href="../styles/documentation-center.css">
-<link rel="stylesheet" href="../styles/search-center.css">
+---
+title: Documentation Center
+description: Catalogo visuale e Search Center della documentazione Digital StarGate.
+---
 
-<div class="dsg-documentation-center">
+<style>
+@import url("../styles/documentation-center.css");
+@import url("../styles/search-center.css");
+</style>
+
+<div class="dsg-documentation-center" data-dsg-documentation-center>
 
 <section class="dsg-documentation-hero">
   <span class="dsg-documentation-hero__eyebrow">DIGITAL STARGATE · DOCUMENTATION CENTER</span>
@@ -21,9 +28,9 @@
 
 <div class="dsg-documentation-kpis">
   <div class="dsg-documentation-kpi"><span>DOMINI</span><strong>8</strong><small>Accessi principali del portale</small></div>
-  <div class="dsg-documentation-kpi"><span>ARCHITECTURE PACKAGE</span><strong>13</strong><small>AP-001 → AP-013</small></div>
-  <div class="dsg-documentation-kpi"><span>MANUALE TECNICO</span><strong>44</strong><small>Capitoli operativi e ingegneristici</small></div>
-  <div class="dsg-documentation-kpi"><span>BASELINE ATTIVA</span><strong>AP-013</strong><small>Scientific Image Repository</small></div>
+  <div class="dsg-documentation-kpi"><span>ARCHITECTURE PACKAGE</span><strong data-doc-kpi-ap-count>15</strong><small data-doc-kpi-ap-range>AP-001 → AP-015</small></div>
+  <div class="dsg-documentation-kpi"><span>AP ATTIVI</span><strong data-doc-kpi-active-ap>3</strong><small>Stato derivato dalla roadmap governata</small></div>
+  <div class="dsg-documentation-kpi"><span>PACKAGE CORRENTE</span><strong data-doc-kpi-current-package>RC2-BASELINE</strong><small data-doc-kpi-current-note>RC2 Baseline and Integrated Acceptance</small></div>
 </div>
 
 <section class="dsg-documentation-section" id="enterprise-search-center">
@@ -153,9 +160,5 @@
 
 <script src="../javascripts/scientific-data-engine.js"></script>
 <script src="../javascripts/dsg-search-service.js"></script>
+<script src="../javascripts/dsg-documentation-center.js"></script>
 <script src="../javascripts/dsg-search-center.js"></script>
-<script>
-document.querySelector('[data-dsg-doc-search]')?.addEventListener('click', () => {
-  document.querySelector('label[for="__search"]')?.click();
-});
-</script>
