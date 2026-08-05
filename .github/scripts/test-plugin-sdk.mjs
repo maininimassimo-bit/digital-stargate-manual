@@ -38,13 +38,11 @@ const createSdkContext = async () => {
       emitted.push({ type, detail });
     }
   };
-
   const window = {
     DSG: { components, events, version: 'test' },
     console,
     document
   };
-
   const context = vm.createContext({
     window,
     document,
@@ -99,12 +97,10 @@ test('Plugin Registry validates, registers idempotently and rejects conflicting 
   assert.equal(first, second);
   assert.equal(registry.status().pluginCount, 1);
   assert.equal(registry.findByCapability('operations-widget').length, 1);
-
   assert.throws(
     () => registry.register(plugin('alpha-plugin', [], { initialize: () => 'different' })),
     /already registered/
   );
-
   assert.throws(
     () => registry.register({ ...manifest, id: 'Invalid ID' }),
     /kebab-case/
@@ -130,7 +126,10 @@ test('Dependency Resolver returns deterministic order and reports missing depend
   const analysis = resolver.analyze(['missing-consumer']);
   assert.equal(analysis.valid, false);
   assert.deepEqual(
-    analysis.missingDependencies.map((item) => `${item.pluginId}->${item.dependencyId}`),
+    Array.from(
+      analysis.missingDependencies,
+      (item) => `${item.pluginId}->${item.dependencyId}`
+    ),
     ['missing-consumer->not-registered']
   );
 });
@@ -163,7 +162,6 @@ test('Plugin Runtime initializes in dependency order and disposes in reverse ord
     },
     dispose: () => calls.push('dispose:base')
   }));
-
   registry.register(plugin('feature-plugin', ['base-plugin'], {
     initialize: (context) => {
       calls.push(`init:feature:${context.plugin.id}`);
