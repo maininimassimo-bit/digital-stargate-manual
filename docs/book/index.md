@@ -13,6 +13,7 @@
 | Lingua | Italiano |
 | Forma | Case study ragionato |
 | Estensione prevista | 300-400 pagine |
+| Formato di stampa | Amazon KDP 5,5 × 8,5 pollici, senza bleed |
 | Baseline iniziale | Repository Digital StarGate, 5 agosto 2026 |
 
 ## Un osservatorio come sistema
@@ -79,6 +80,7 @@ La stima complessiva è di circa 100.000-120.000 parole, da verificare in fase d
 ## Materiali disponibili
 
 - [Piano editoriale e architettura del volume](editorial-blueprint.md)
+- [Standard di stampa Amazon KDP 5,5 × 8,5 pollici](kdp-print-standard.md)
 - [Capitolo 1 - Prima dell'enterprise](01-prima-dell-enterprise.md)
 - [Capitolo 2 - Il cambio di prospettiva](02-il-cambio-di-prospettiva.md)
 - [Capitolo 3 - Quando il remoto cambia tutto](03-quando-il-remoto-cambia-tutto.md)
