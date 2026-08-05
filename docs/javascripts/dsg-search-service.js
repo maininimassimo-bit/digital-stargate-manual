@@ -1,20 +1,21 @@
 (() => {
   'use strict';
 
-  const VERSION = '2.0.0-rc2';
+  const VERSION = '2.1.0-ap14';
   const DEFAULT_LIMIT = 20;
   const SCRIPT_URL = document.currentScript?.src || null;
   const SITE_ROOT = SCRIPT_URL
     ? new URL('../', SCRIPT_URL)
     : new URL('./', document.baseURI);
   const MKDOCS_INDEX_URL = new URL('search/search_index.json', SITE_ROOT);
-  const SCIENTIFIC_CATALOG_URL = new URL('data/scientific-session-catalog.json', SITE_ROOT);
+  const SCIENTIFIC_INDEX_URL = new URL('data/scientific-observation-index.json', SITE_ROOT);
 
   const state = {
     documents: [],
     scientific: [],
     loaded: false,
     loading: null,
+    scientificIndex: null,
     metrics: {
       loads: 0,
       queries: 0,
@@ -50,6 +51,7 @@
     .filter((token) => token.length > 1);
 
   const unique = (values) => [...new Set(values.filter(Boolean))];
+  const firstFacet = (facets, name) => Array.isArray(facets?.[name]) ? facets[name][0] || null : null;
 
   const classifyDocument = (location, title) => {
     const path = String(location || '').toLowerCase();
@@ -104,42 +106,49 @@
     });
   };
 
-  const mapScientificSession = (session) => Object.freeze({
-    id: `science:${session.sessionId}`,
-    type: 'scientific-session',
-    title: `${session.target} · ${session.sessionId}`,
-    text: [
-      session.target,
-      session.sessionId,
-      session.telescope,
-      session.camera,
-      session.filter,
-      session.configurationId,
-      session.qualityState,
-      session.observationDate
-    ].filter(Boolean).join(' '),
-    location: new URL(`scientific-session-detail/?sessionId=${encodeURIComponent(session.sessionId)}`, SITE_ROOT).href,
-    section: 'Scientific Platform',
-    priority: 88,
-    keywords: unique([
-      ...tokenize(session.target),
-      ...tokenize(session.sessionId),
-      ...tokenize(session.telescope),
-      ...tokenize(session.camera),
-      ...tokenize(session.filter),
-      String(session.observationDate || '').slice(0, 4),
-      normalizeText(session.qualityState)
-    ]),
-    metadata: Object.freeze({
-      sessionId: session.sessionId,
-      target: session.target,
-      observationDate: session.observationDate,
-      telescope: session.telescope,
-      camera: session.camera,
-      filter: session.filter,
-      qualityState: session.qualityState
-    })
-  });
+  const mapScientificDocument = (document) => {
+    const facets = document.facetValues || {};
+    const target = firstFacet(facets, 'target');
+    const year = firstFacet(facets, 'year');
+    const telescope = firstFacet(facets, 'telescope');
+    const camera = firstFacet(facets, 'camera');
+    const filter = firstFacet(facets, 'filter');
+    const qualityState = firstFacet(facets, 'quality');
+    const sessionId = String(document.catalogItemId || '').replace(/^CAT-SESSION-/, '').replace(/-/g, '_');
+
+    return Object.freeze({
+      id: `science:${document.searchDocumentId}`,
+      type: 'scientific-session',
+      title: stripHtml(document.title),
+      text: stripHtml(document.summary || document.normalizedText || ''),
+      location: new URL(document.sourceUrl, SITE_ROOT).href,
+      section: 'Scientific Platform',
+      priority: 88,
+      keywords: unique([
+        ...(document.keywords || []).map(normalizeText),
+        ...tokenize(document.normalizedText || ''),
+        normalizeText(target),
+        normalizeText(telescope),
+        normalizeText(camera),
+        normalizeText(filter),
+        normalizeText(qualityState),
+        year
+      ]),
+      metadata: Object.freeze({
+        sessionId,
+        target,
+        observationDate: year,
+        telescope,
+        camera,
+        filter,
+        qualityState,
+        catalogItemId: document.catalogItemId,
+        indexBuildId: document.indexBuildId,
+        sourceDigest: document.sourceDigest,
+        rankingSignals: Object.freeze({ ...(document.rankingSignals || {}) })
+      })
+    });
+  };
 
   const loadMkDocsIndex = async () => {
     const response = await fetch(MKDOCS_INDEX_URL, { cache: 'no-store' });
@@ -149,25 +158,23 @@
   };
 
   const loadScientificIndex = async () => {
-    const engine = window.DSGScientificDataEngine;
-    if (!engine) return [];
+    const response = await fetch(SCIENTIFIC_INDEX_URL, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`Scientific observation index request failed: ${response.status}`);
 
-    const candidates = [
-      document.querySelector('[data-session-catalog]')?.dataset.sessionCatalog,
-      document.querySelector('[data-session-detail]')?.dataset.sessionCatalog,
-      SCIENTIFIC_CATALOG_URL.href
-    ];
-
-    const source = candidates.find(Boolean);
-    if (!source) return [];
-
-    try {
-      const sessions = await engine.getSessions(source);
-      return sessions.map(mapScientificSession);
-    } catch (error) {
-      emit('source-degraded', { source: 'scientific', message: error.message });
-      return [];
+    const payload = await response.json();
+    if (!Array.isArray(payload.searchDocuments)) {
+      throw new Error('Scientific observation index does not contain searchDocuments');
     }
+
+    state.scientificIndex = Object.freeze({
+      algorithmVersion: payload.algorithmVersion || null,
+      sourceSnapshotDigest: payload.sourceSnapshotDigest || null,
+      indexBuildId: payload.indexBuild?.indexBuildId || null,
+      outputDigest: payload.indexBuild?.outputDigest || null,
+      reconciliationMatched: payload.summary?.reconciliationMatched || 0
+    });
+
+    return payload.searchDocuments.map(mapScientificDocument);
   };
 
   const load = async (options = {}) => {
@@ -205,7 +212,7 @@
 
     if (entry.type === 'scientific-session') {
       const meta = entry.metadata || {};
-      if (filters.year && !String(meta.observationDate || '').startsWith(String(filters.year))) return false;
+      if (filters.year && String(meta.observationDate || '') !== String(filters.year)) return false;
       if (filters.target && meta.target !== filters.target) return false;
       if (filters.quality && meta.qualityState !== filters.quality) return false;
     }
@@ -225,9 +232,12 @@
       .filter((entry) => matchesFilters(entry, options.filters))
       .map((entry) => {
         const relevance = scoreText(queryTokens, [entry.title, entry.section, entry.keywords.join(' '), entry.text]);
+        const scientificQualityBonus = entry.type === 'scientific-session'
+          ? Math.round(Number(entry.metadata?.rankingSignals?.qualityWeight || 0) * 10)
+          : 0;
         return {
           ...entry,
-          score: relevance + (queryTokens.length ? Math.round(entry.priority / 4) : entry.priority)
+          score: relevance + (queryTokens.length ? Math.round(entry.priority / 4) : entry.priority) + scientificQualityBonus
         };
       })
       .filter((entry) => queryTokens.length === 0 || entry.score > Math.round(entry.priority / 4))
@@ -250,7 +260,7 @@
       types: Object.freeze(unique([...state.documents, ...state.scientific].map((entry) => entry.type)).sort()),
       sections: Object.freeze(unique([...state.documents, ...state.scientific].map((entry) => entry.section)).sort()),
       targets: Object.freeze(unique(state.scientific.map((entry) => entry.metadata?.target)).sort()),
-      years: Object.freeze(unique(state.scientific.map((entry) => String(entry.metadata?.observationDate || '').slice(0, 4))).sort().reverse()),
+      years: Object.freeze(unique(state.scientific.map((entry) => entry.metadata?.observationDate)).sort().reverse()),
       qualities: Object.freeze(unique(state.scientific.map((entry) => entry.metadata?.qualityState)).sort())
     });
   };
@@ -262,12 +272,14 @@
     documentCount: state.metrics.documentCount,
     scientificCount: state.metrics.scientificCount,
     totalCount: state.metrics.documentCount + state.metrics.scientificCount,
+    scientificIndex: state.scientificIndex,
     metrics: Object.freeze({ ...state.metrics })
   });
 
   const clear = () => {
     state.documents = [];
     state.scientific = [];
+    state.scientificIndex = null;
     state.loaded = false;
     emit('cache-cleared');
   };
