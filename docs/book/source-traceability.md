@@ -27,10 +27,14 @@ La prevalenza delle fonti segue `AI_BOOTSTRAP.md`:
 
 ## 2. Timeline minima verificata
 
+La ricostruzione estesa, con commit e limiti interpretativi, è disponibile nella [Cronologia verificata del progetto](verified-timeline.md).
+
 | Data | Passaggio | Fonte | Uso nel libro |
 |---|---|---|---|
-| Da validare | Costruzione della prima baseline del manuale tecnico | Capitoli 1-44 e Project History | Origine operativa, senza attribuire date non provate |
-| Da validare | Introduzione di warehouse, analytics e dashboard | Architettura warehouse, assessment EA-002, Project History | Prima espansione dal manuale ai dati |
+| 13/07/2026 | Configurazione Docs-as-Code e completamento progressivo dei capitoli 1-44 | Commit `cf4535f`, `57de947`-`93ba824` | Nascita verificabile della baseline documentale nel repository |
+| 15-17/07/2026 | Report di sessione, reporting automatico e validazione analytics | Commit `d96150a`, `9d976b9`, `b87700e` | Collegamento tra osservazione, reporting e dati |
+| 19/07/2026 | Prima architettura della piattaforma | Commit `10e0edf` | Passaggio dal manuale al disegno di piattaforma |
+| 23-24/07/2026 | Dataset Warehouse, assessment EA-001/EA-002 e architettura dati | Commit `8669bb4`, `5128a72`, `cc98567` | Consolidamento della data platform |
 | 26/07/2026 | Approvazione della Master Roadmap `DSG-MR-001` | Master Roadmap e `DSG-HIST-001` | Svolta enterprise e separazione AS-IS/Transition/TO-BE |
 | 26/07/2026 | Baseline EAM/DSRA, portfolio, registri e governance | `DSG-HIST-001` | Fondazione enterprise |
 | 31/07/2026 | Preparazione ed esecuzione progressiva della campagna ENV-011 | PR e documenti `ARB-012-C04-W06` | Esempio di evidence entro perimetro isolato |
@@ -40,7 +44,7 @@ La prevalenza delle fonti segue `AI_BOOTSTRAP.md`:
 | 04/08/2026 | Baseline del Project Governance Center e Knowledge Map | Documenti `docs/project/` | Memoria istituzionale |
 | 05/08/2026 | Decisioni operative di continuità e delega AI registrate | Decision Log v1.1 | AI come collaboratore governato |
 
-Le date precedenti al 26 luglio non saranno inventate. La cronologia sarà ampliata attraverso commit, release e documenti quando verranno redatti i capitoli successivi.
+La cronologia precedente al 13 luglio e la storia dell'osservatorio fisico restano da ricostruire. Le motivazioni personali saranno raccolte come testimonianza dell'autore e non confuse con le evidenze repository.
 
 ## 3. Matrice capitoli-fonti
 
