@@ -53,16 +53,52 @@
     });
   };
 
+  const destroyComponent = async (entry, context) => {
+    if (entry.lastCycle === 0) return;
+
+    try {
+      if (typeof entry.cleanup === 'function') {
+        await entry.cleanup();
+      }
+      if (entry.definition.destroy) {
+        await entry.definition.destroy(context);
+      }
+      entry.cleanup = null;
+      entry.state = 'destroyed';
+      entry.error = null;
+      events.emit('component-destroyed', {
+        name: entry.definition.name,
+        previousCycle: entry.lastCycle,
+        cycle: context.cycle
+      });
+    } catch (error) {
+      entry.cleanup = null;
+      entry.state = 'destroy-error';
+      entry.error = error;
+      console.error(`Digital StarGate component destroy failed: ${entry.definition.name}`, error);
+      events.emit('component-destroy-error', {
+        name: entry.definition.name,
+        previousCycle: entry.lastCycle,
+        cycle: context.cycle,
+        error
+      });
+    }
+  };
+
   const runComponent = async (entry, context) => {
     if (entry.lastCycle === context.cycle) return;
+
+    await destroyComponent(entry, context);
 
     try {
       const result = await entry.definition.initialize(context);
       entry.lastCycle = context.cycle;
       entry.state = 'ready';
       entry.cleanup = typeof result === 'function' ? result : null;
+      entry.error = null;
       events.emit('component-ready', { name: entry.definition.name, cycle: context.cycle });
     } catch (error) {
+      entry.lastCycle = context.cycle;
       entry.state = 'error';
       entry.error = error;
       console.error(`Digital StarGate component failed: ${entry.definition.name}`, error);
