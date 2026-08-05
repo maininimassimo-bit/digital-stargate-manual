@@ -3,9 +3,9 @@
   "updatedAt": "2026-08-05",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
-  "currentPackage": "RC2-BASELINE",
-  "nextMilestone": "Freeze the RC2 baseline and complete integrated acceptance",
-  "target": "RC2 Baseline and Acceptance",
+  "currentPackage": "AP-014",
+  "nextMilestone": "Complete AP14-W06 PixInsight Synchronization Adapter",
+  "target": "AP-014 completion and RC3 readiness",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -37,7 +37,7 @@
         {"id":"AP-011","title":"Enterprise Analytics Platform Architecture","status":"completed","review":"ARB-011","note":"Approved with conditions, 97/100; analytics runtime is not certified."},
         {"id":"AP-012","title":"Enterprise Operations Center Architecture","status":"completed","review":"ARB-012","note":"Approved with conditions, 96/100; remaining PRV/ENV controls and formal acceptance remain open."},
         {"id":"AP-013","title":"Scientific Image Repository Architecture","statusSource":"evidence-manifest","evidencePath":".github/roadmap/evidence/AP-013.evidence.json","note":"COPY_ONLY engine, protected scheduler and one-file evidence completed; final ARB, OAT and operational acceptance remain open."},
-        {"id":"AP-014","title":"Scientific Observation Catalog and Search","status":"planned","note":"Includes governed PixInsight synchronization."},
+        {"id":"AP-014","title":"Scientific Observation Catalog and Search","statusSource":"evidence-manifest","evidencePath":".github/roadmap/evidence/AP-014.evidence.json","note":"AP14-W01–W05 delivered; AP14-W06 PixInsight synchronization and AP14-W07 operational acceptance remain open."},
         {"id":"AP-015","title":"Scientific Knowledge Platform Architecture","status":"planned","note":"CAP-40 Scientific Knowledge Layer."}
       ]
     }
