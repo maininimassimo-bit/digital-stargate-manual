@@ -16,6 +16,7 @@ on:
       - "docs/**"
       - "mkdocs.yml"
       - "requirements.txt"
+      - ".github/scripts/**"
       - ".github/workflows/developer-foundation.yml"
 
 permissions:
@@ -46,6 +47,14 @@ jobs:
 
       - name: Verify formatting
         run: dotnet format DigitalStarGate.sln --verify-no-changes --no-restore
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Test Enterprise Plugin SDK
+        run: node --test .github/scripts/test-plugin-sdk.mjs
 
       - name: Setup Python
         uses: actions/setup-python@v6
