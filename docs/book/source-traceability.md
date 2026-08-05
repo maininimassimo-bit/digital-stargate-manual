@@ -43,6 +43,7 @@ La ricostruzione estesa, con commit e limiti interpretativi, è disponibile nell
 | 04/08/2026 | Integrazione Enterprise Portal e command center | PR #39 | Evoluzione della documentazione in piattaforma |
 | 04/08/2026 | Baseline del Project Governance Center e Knowledge Map | Documenti `docs/project/` | Memoria istituzionale |
 | 05/08/2026 | Decisioni operative di continuità e delega AI registrate | Decision Log v1.1 | AI come collaboratore governato |
+| 05/08/2026 | AP-014 evolve da baseline concettuale a catalogo e ricerca con evidence governata | AP-014, indice scientifico, Search Center, AP14-W06 ed evidence manifest | Passaggio dal patrimonio alla discovery, con accettazione operativa ancora aperta |
 
 La cronologia precedente al 13 luglio e la storia dell'osservatorio fisico restano da ricostruire. Le motivazioni personali saranno raccolte come testimonianza dell'autore e non confuse con le evidenze repository.
 
@@ -59,6 +60,10 @@ La cronologia precedente al 13 luglio e la storia dell'osservatorio fisico resta
 | Autorità e separazione dei ruoli | AP-005, AP-012, OPSC-CMD-001, OPSC-RACI-001 | ARB-007, ARB-012-FRR-001 | Baseline approvata con condizioni organizzative aperte |
 | Safety e security | AP-005, AP-010, SAF-CAT-001 | ARB-007 e ARB-010 | Framework approvati; runtime non certificato |
 | Assurance dal disegno alla prova | Enterprise Metamodel, AP-010, AP-012 | ENV-011, E-ARB012-INT-01, ARB-012-FRR-001 | Evidence tecnica limitata allo scope dichiarato |
+| Sessione come unità di senso | ADR-001, Capability 001, DSDM-001/004 | E-AP013-SD-001 | Oggetto canonico e discovery read-only validate entro scope |
+| Ciclo di vita dell'immagine | SIR-VIS-001, AP-013, DSDM-003/004 | readiness gate e evidence di transfer | Modello governato; copy-only non equivale a repository accettato |
+| Dal dato all'informazione | ADR-003, architettura Warehouse, AP-011 | quality gate ed EA-002 | Data product validati e lineage, con maturity distinta |
+| Dall'informazione alla conoscenza | AP-014, SKL-VIS-001 | evidence AP-014 e roadmap AMP-002 | AP-014 active con 7/8 evidence; AP-015 planned |
 | Architettura enterprise | `DSG-EAM-001`, DSRA, AP-001 | Assessment e ABC-001 | Baseline approvata |
 | Automazione | AP-003, ADR-004 | review ed evidence applicabili | Baseline più stato dimostrato |
 | Osservabilità | AP-004 | ARB ed execution evidence | Baseline più stato dimostrato |
@@ -71,7 +76,7 @@ La cronologia precedente al 13 luglio e la storia dell'osservatorio fisico resta
 | Analytics | AP-011, warehouse | ARB-011 e quality gate | Capacità e maturity separate |
 | Operations Center | AP-012 | ARB-012, ENV-011 | Evidenza limitata, non runtime generale |
 | Repository scientifico | AP-013, DSDM-001/004 | discovery evidence e readiness gate | Pilot `COPY_ONLY` |
-| Catalogo scientifico | AP-014 | roadmap `AMP-002` | Pianificato |
+| Catalogo scientifico | AP-014 | indice, Search Center, test, AP14-W06 ed evidence manifest | Active; operational acceptance AP14-W07 aperta |
 | Knowledge Platform | AP-015 e knowledge vision | roadmap `AMP-002` | Pianificato |
 | BootAI | `AI_BOOTSTRAP.md`, Decision Log | commit e governance | Capacità organizzativa attiva |
 | AI scientifica | vision e contratti AI | evidence future | Visione, non capacità dichiarata |
@@ -141,7 +146,7 @@ Distinguere:
 | BOOK-TBD-004 | Sequenza completa AP-001/AP-013 | Architecture Master Plan, PR e certificate |
 | BOOK-TBD-005 | Risultati osservativi rappresentativi | Session report verificati e selezione editoriale |
 | BOOK-TBD-006 | Stato finale AP-012/AP-013 al momento della chiusura libro | Verifica sulla baseline di pubblicazione |
-| BOOK-TBD-007 | Evoluzione AP-014/AP-015 | Trattare come pianificata finché priva di evidence |
+| BOOK-TBD-007 | Chiusura AP-014 e avvio AP-015 | Verificare Operational Acceptance AP14-W07 e mantenere AP-015 planned finché privo di evidence implementativa |
 
 Questi elementi non sono placeholder nel testo pubblicato. Sono il backlog di ricerca per i capitoli futuri.
 

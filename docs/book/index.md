@@ -89,13 +89,18 @@ La stima complessiva è di circa 100.000-120.000 parole, da verificare in fase d
 - [Capitolo 8 - Autorità, responsabilità e separazione dei ruoli](08-autorita-responsabilita-ruoli.md)
 - [Capitolo 9 - Safety e security come architettura](09-safety-security-architettura.md)
 - [Capitolo 10 - Assurance: dal disegno alla prova](10-assurance-disegno-prova.md)
+- [Capitolo 11 - La sessione come unità di senso](11-sessione-unita-di-senso.md)
+- [Capitolo 12 - Il ciclo di vita dell'immagine scientifica](12-ciclo-vita-immagine-scientifica.md)
+- [Capitolo 13 - Il repository scientifico](13-repository-scientifico.md)
+- [Capitolo 14 - Dal dato all'informazione](14-dal-dato-all-informazione.md)
+- [Capitolo 15 - Dall'informazione alla conoscenza](15-dall-informazione-alla-conoscenza.md)
 - [Overview del modello DSG-EOM](model-overview.md)
 - [Cronologia verificata](verified-timeline.md)
 - [Matrice delle fonti e tracciabilità](source-traceability.md)
 
 ## Stato del manoscritto
 
-Questa baseline stabilisce il posizionamento, l'indice ragionato, il modello interpretativo, la cronologia verificata e le Parti I-II del nucleo narrativo. I capitoli successivi saranno sviluppati in ordine di dipendenza, verificando ogni volta la fonte autorevole e l'evoluzione effettiva del repository.
+Questa baseline stabilisce il posizionamento, l'indice ragionato, il modello interpretativo, la cronologia verificata e le Parti I-III del nucleo narrativo. I capitoli successivi saranno sviluppati in ordine di dipendenza, verificando ogni volta la fonte autorevole e l'evoluzione effettiva del repository.
 
 ## Fonti principali
 
@@ -106,7 +111,7 @@ La baseline iniziale deriva da:
 - [Enterprise Architecture Context](../project/ENTERPRISE_ARCHITECTURE_CONTEXT.md);
 - [Repository Knowledge Map](../project/REPOSITORY_KNOWLEDGE_MAP.md);
 - [Architecture Program Roadmap Realignment](../architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md);
-- Architecture Package `AP-001`-`AP-013`;
+- Architecture Package `AP-001`-`AP-014` e vision `AP-015`;
 - assessment, review ed evidence `ARB`;
 - manuale tecnico dell'osservatorio, capitoli 1-44;
 - release e cronologia verificabile del repository.

@@ -128,6 +128,8 @@ Il commit dimostra che una modifica è stata registrata nel repository. Non dimo
 - BootAI diventa punto di ingresso obbligatorio;
 - il Decision Log registra repository truth, responsabilità modulari e delega AI entro boundary approvati;
 - framework di foundation, tema, ricerca, operations dashboard e plugin SDK proseguono l'evoluzione controllata.
+- AP-014 viene avviato e sviluppato attraverso modello concettuale e logico, proiezione deterministica, indice scientifico, query e ranking spiegabile, integrazione Enterprise Search e boundary PixInsight;
+- l'evidence manifest AP-014 registra sette elementi richiesti presenti e accettati su otto; l'Operational Acceptance rimane aperta e AP-015 resta planned.
 
 **Lettura consentita:** il progetto integra documentazione, portale, piattaforma scientifica, governance e AI-assisted engineering.
 

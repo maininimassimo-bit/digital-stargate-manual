@@ -125,19 +125,19 @@ Review, gate, evidence, ambiente isolato e differenza fra dimostrazione tecnica 
 
 ### Parte III - Dall'osservazione al patrimonio informativo - 56-64 pagine
 
-**Capitolo 11. La sessione come unità di senso** - 10-12 pagine  
+**Capitolo 11. La sessione come unità di senso** - 10-12 pagine — prima stesura completata  
 Dalla sequenza tecnica all'oggetto governato.
 
-**Capitolo 12. Il ciclo di vita dell'immagine scientifica** - 12-14 pagine  
+**Capitolo 12. Il ciclo di vita dell'immagine scientifica** - 12-14 pagine — prima stesura completata  
 Origine, trasferimento, integrità, conservazione e uso.
 
-**Capitolo 13. Il repository scientifico** - 12-14 pagine  
+**Capitolo 13. Il repository scientifico** - 12-14 pagine — prima stesura completata  
 AP-013, inventario, manifest, checksum, provenance e pilot protetto.
 
-**Capitolo 14. Dal dato all'informazione** - 10-12 pagine  
+**Capitolo 14. Dal dato all'informazione** - 10-12 pagine — prima stesura completata  
 Warehouse, qualità, KPI e rappresentazioni.
 
-**Capitolo 15. Dall'informazione alla conoscenza** - 12-14 pagine  
+**Capitolo 15. Dall'informazione alla conoscenza** - 12-14 pagine — prima stesura completata  
 Catalogo, relazioni, lineage e Scientific Knowledge Platform come visione.
 
 ### Parte IV - Automazione con responsabilità - 56-64 pagine
