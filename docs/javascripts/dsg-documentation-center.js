@@ -5,6 +5,34 @@
   const SITE_ROOT = SCRIPT_URL ? new URL('../', SCRIPT_URL) : new URL('./', document.baseURI);
   const ROADMAP_URL = new URL('data/roadmap.json', SITE_ROOT);
 
+  const loadStyle = (path, marker) => {
+    if (document.querySelector(`link[data-${marker}]`)) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = new URL(path, SITE_ROOT).href;
+    link.dataset[marker] = 'true';
+    document.head.appendChild(link);
+  };
+
+  const loadScript = (path, marker) => new Promise((resolve, reject) => {
+    const existing = document.querySelector(`script[data-${marker}]`);
+    if (existing) {
+      if (existing.dataset.loaded === 'true') resolve();
+      else existing.addEventListener('load', resolve, { once: true });
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = new URL(path, SITE_ROOT).href;
+    script.dataset[marker] = 'true';
+    script.addEventListener('load', () => {
+      script.dataset.loaded = 'true';
+      resolve();
+    }, { once: true });
+    script.addEventListener('error', () => reject(new Error(`Unable to load ${path}`)), { once: true });
+    document.head.appendChild(script);
+  });
+
   const setText = (root, selector, value) => {
     const node = root.querySelector(selector);
     if (node && value !== undefined && value !== null) node.textContent = String(value);
@@ -35,7 +63,20 @@
     }
   };
 
-  const initialize = ({ events } = {}) => {
+  const loadPageAssets = async () => {
+    loadStyle('styles/documentation-center.css', 'dsgDocumentationStyle');
+    loadStyle('styles/search-center.css', 'dsgSearchStyle');
+
+    if (!window.DSGScientificDataEngine) {
+      await loadScript('javascripts/scientific-data-engine.js', 'dsgScientificEngine');
+    }
+    if (!window.DSGSearchService) {
+      await loadScript('javascripts/dsg-search-service.js', 'dsgSearchService');
+    }
+    await loadScript('javascripts/dsg-search-center.js', 'dsgSearchCenter');
+  };
+
+  const initialize = async ({ events } = {}) => {
     const root = document.querySelector('[data-dsg-documentation-center]');
     if (!root || root.dataset.dsgDocumentationReady === 'true') return;
 
@@ -45,13 +86,18 @@
       document.querySelector('label[for="__search"]')?.click();
     });
 
-    loadRoadmap(root, events);
+    await Promise.all([loadRoadmap(root, events), loadPageAssets()]);
 
     events?.emit('documentation-center-ready', {
       title: document.title,
       searchCenter: Boolean(root.querySelector('[data-dsg-search-center]'))
     });
   };
+
+  const run = () => initialize({ events: window.DSG?.events }).catch((error) => {
+    console.error('Documentation Center initialization failed', error);
+    window.DSG?.events?.emit('documentation-center-error', { message: error.message });
+  });
 
   if (window.DSG?.components) {
     window.DSG.components.register({
@@ -60,8 +106,8 @@
       initialize
     });
   } else if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => initialize(), { once: true });
+    document.addEventListener('DOMContentLoaded', run, { once: true });
   } else {
-    initialize();
+    run();
   }
 })();
