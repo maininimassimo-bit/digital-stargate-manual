@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "AP-013",
+  "updatedAt": "2026-08-06",
+  "transferMode": "COPY_ONLY",
+  "syntheticValidation": {
+    "status": "passed",
+    "evidencePath": "docs/architecture/validation/AP-013-COPY-ONLY-Synthetic-Test-Evidence.md",
+    "testsPassed": 11,
+    "testsFailed": 0
+  },
+  "limitedPilot": {
+    "status": "passed",
+    "runId": "DSG-TRANSFER-RUN-9c993706-341b-4eb8-9412-89a76d8d0e63",
+    "evidencePath": "docs/architecture/validation/AP-013-COPY-ONLY-Limited-Pilot-Evidence.md",
+    "requestedFiles": 1,
+    "copiedVerified": 1,
+    "failed": 0,
+    "whatIf": 0,
+    "sourceFilesDeleted": 0
+  },
+  "gateStatus": {
+    "TR-15": "passed",
+    "TR-16": "passed",
+    "TR-17": "open",
+    "TR-18": "open-prohibited"
+  },
+  "productionContinuousCopyOnly": "not-authorized",
+  "sourceCleanup": "prohibited"
+}
