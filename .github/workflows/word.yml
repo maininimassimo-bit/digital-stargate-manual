@@ -14,8 +14,32 @@ jobs:
       - name: Recupera repository
         uses: actions/checkout@v4
 
-      - name: Installa Pandoc
-        run: choco install pandoc -y
+      - name: Installa Pandoc con retry
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          if (Get-Command pandoc -ErrorAction SilentlyContinue) {
+            pandoc --version
+            exit 0
+          }
+
+          $maxAttempts = 3
+          for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
+            Write-Host "Tentativo $attempt di $maxAttempts per installare Pandoc..."
+            choco install pandoc -y --no-progress
+
+            if (Get-Command pandoc -ErrorAction SilentlyContinue) {
+              pandoc --version
+              exit 0
+            }
+
+            if ($attempt -lt $maxAttempts) {
+              Start-Sleep -Seconds (15 * $attempt)
+            }
+          }
+
+          throw 'Pandoc non disponibile dopo 3 tentativi di installazione.'
 
       - name: Genera documento Word
         shell: powershell
