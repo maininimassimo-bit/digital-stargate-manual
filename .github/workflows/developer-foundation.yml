@@ -79,6 +79,9 @@ jobs:
       - name: Test PixInsight Read-Only Reconciliation
         run: node --test .github/scripts/test-pixinsight-reconciliation.mjs
 
+      - name: Test PixInsight Processing Projection
+        run: node --test .github/scripts/test-pixinsight-processing-projection.mjs
+
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
