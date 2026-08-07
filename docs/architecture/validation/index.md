@@ -49,6 +49,7 @@ La pubblicazione di un documento in questa sezione **non equivale ad autorizzazi
 
 - [Session Discovery Execution Evidence](AP-013-Session-Discovery-Execution-Evidence.md)
 - [Transfer Readiness Gate](AP-013-Transfer-Readiness-Gate.md)
+- [AP-013B — OneDrive Transport Operational Acceptance](AP-013B-OneDrive-Transport-Operational-Acceptance.md)
 
 ## Stato di pubblicazione
 
