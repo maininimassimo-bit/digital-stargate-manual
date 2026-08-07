@@ -15,6 +15,7 @@ Import-Module (Join-Path $PSScriptRoot 'DSG.OneDriveTransport.psm1') -Force
 if (-not (Test-Path -LiteralPath $TransferPlanPath -PathType Leaf)) { throw "Transfer plan not found: $TransferPlanPath" }
 if (-not (Test-Path -LiteralPath $TransportRoot -PathType Container)) { throw "Transport root not found: $TransportRoot" }
 if (-not (Test-Path -LiteralPath $DestinationRoot -PathType Container)) { throw "Destination root not found: $DestinationRoot" }
+if ($MaxFilesPerRun -lt 1) { throw 'MaxFilesPerRun must be greater than zero.' }
 
 $plan = Import-Csv -LiteralPath $TransferPlanPath
 $planByName = @{}
@@ -35,21 +36,28 @@ $runDir = Join-Path $EvidenceRoot $runId
 New-Item -ItemType Directory -Path $runDir -Force | Out-Null
 
 $results = @()
-$manifests = Get-ChildItem -LiteralPath $TransportRoot -Filter '*.ready.json' -File |
-    Sort-Object LastWriteTime |
-    Select-Object -First $MaxFilesPerRun
+$alreadyImportedSkipped = 0
+$deferredNoPlan = 0
+$deferredTransportNotReady = 0
+$candidates = New-Object System.Collections.Generic.List[System.IO.FileInfo]
 
-foreach ($manifestFile in $manifests) {
+$manifestFiles = Get-ChildItem -LiteralPath $TransportRoot -Filter '*.ready.json' -File |
+    Sort-Object LastWriteTime, Name
+
+foreach ($manifestFile in $manifestFiles) {
+    if ($candidates.Count -ge $MaxFilesPerRun) { break }
+
     try {
         $manifest = Get-Content -LiteralPath $manifestFile.FullName -Raw | ConvertFrom-Json
         $fileName = [string]$manifest.FileName
-        if (-not $planByName.ContainsKey($fileName)) {
+
+        if ([string]$manifest.State -ne 'READY' -or [string]::IsNullOrWhiteSpace($fileName)) {
             $results += [pscustomobject][ordered]@{
-                Status = 'DEFER_NO_PLAN'
+                Status = 'FAILED'
                 ManifestPath = $manifestFile.FullName
                 FileName = $fileName
                 DestinationPath = $null
-                Error = 'No matching transfer-plan entry.'
+                Error = 'Manifest is not a valid READY manifest.'
                 SourceDeleted = $false
                 TransportDeleted = $false
                 OverwritePerformed = $false
@@ -57,11 +65,68 @@ foreach ($manifestFile in $manifests) {
             continue
         }
 
+        if (-not $planByName.ContainsKey($fileName)) {
+            $deferredNoPlan++
+            continue
+        }
+
         $entry = $planByName[$fileName]
         $destinationPath = [string]$entry.PlannedDestination
         if ([string]::IsNullOrWhiteSpace($destinationPath)) {
-            throw "Transfer-plan destination is empty for $fileName"
+            $results += [pscustomobject][ordered]@{
+                Status = 'FAILED'
+                ManifestPath = $manifestFile.FullName
+                FileName = $fileName
+                DestinationPath = $null
+                Error = 'Transfer-plan destination is empty.'
+                SourceDeleted = $false
+                TransportDeleted = $false
+                OverwritePerformed = $false
+            }
+            continue
         }
+
+        $transportPath = Join-Path $TransportRoot $fileName
+        if (-not (Test-Path -LiteralPath $transportPath -PathType Leaf)) {
+            $deferredTransportNotReady++
+            continue
+        }
+
+        if (Test-Path -LiteralPath $destinationPath -PathType Leaf) {
+            $destinationItem = Get-Item -LiteralPath $destinationPath -ErrorAction Stop
+            if ([int64]$destinationItem.Length -eq [int64]$manifest.SizeBytes) {
+                $destinationHash = Get-DSGTransportSha256 -LiteralPath $destinationPath
+                if ($destinationHash -eq ([string]$manifest.Sha256).ToLowerInvariant()) {
+                    $alreadyImportedSkipped++
+                    continue
+                }
+            }
+        }
+
+        $candidates.Add($manifestFile)
+    }
+    catch {
+        $results += [pscustomobject][ordered]@{
+            Status = 'FAILED'
+            ManifestPath = $manifestFile.FullName
+            FileName = $manifestFile.Name
+            DestinationPath = $null
+            Error = $_.Exception.Message
+            SourceDeleted = $false
+            TransportDeleted = $false
+            OverwritePerformed = $false
+        }
+    }
+}
+
+$manifests = @($candidates)
+
+foreach ($manifestFile in $manifests) {
+    try {
+        $manifest = Get-Content -LiteralPath $manifestFile.FullName -Raw | ConvertFrom-Json
+        $fileName = [string]$manifest.FileName
+        $entry = $planByName[$fileName]
+        $destinationPath = [string]$entry.PlannedDestination
 
         $result = Import-DSGOneDriveTransportFile `
             -ManifestPath $manifestFile.FullName `
@@ -94,10 +159,13 @@ $summary = [pscustomobject][ordered]@{
     TransferPlanPath = $TransferPlanPath
     TransportRoot = $TransportRoot
     DestinationRoot = $DestinationRoot
+    ReadyManifestsObserved = @($manifestFiles).Count
+    AlreadyImportedSkipped = $alreadyImportedSkipped
+    DeferredNoPlan = $deferredNoPlan
+    DeferredTransportNotReady = $deferredTransportNotReady
     Requested = @($manifests).Count
     CopiedVerified = @($results | Where-Object { $_.Status -eq 'COPIED_VERIFIED' }).Count
     SkippedIdentical = @($results | Where-Object { $_.Status -eq 'SKIP_IDENTICAL' }).Count
-    DeferredNoPlan = @($results | Where-Object { $_.Status -eq 'DEFER_NO_PLAN' }).Count
     Failed = @($results | Where-Object { $_.Status -eq 'FAILED' }).Count
     SourceFilesDeleted = 0
     TransportFilesDeleted = 0
