@@ -14,19 +14,63 @@ Import-Module (Join-Path $PSScriptRoot 'DSG.OneDriveTransport.psm1') -Force
 
 if (-not (Test-Path -LiteralPath $SourceRoot -PathType Container)) { throw "Source root not found: $SourceRoot" }
 if (-not (Test-Path -LiteralPath $TransportRoot -PathType Container)) { throw "Transport root not found: $TransportRoot" }
+if ($MaxFilesPerRun -lt 1) { throw 'MaxFilesPerRun must be greater than zero.' }
 
 $runId = 'DSG-OD-EXPORT-' + [guid]::NewGuid().ToString()
 $runDir = Join-Path $EvidenceRoot $runId
 New-Item -ItemType Directory -Path $runDir -Force | Out-Null
 
 $results = @()
-$files = Get-ChildItem -LiteralPath $SourceRoot -Filter '*.xisf' -File |
-    Sort-Object LastWriteTime |
-    Select-Object -First $MaxFilesPerRun
+$alreadyReady = 0
+$candidates = New-Object System.Collections.Generic.List[System.IO.FileInfo]
+
+$sourceFiles = Get-ChildItem -LiteralPath $SourceRoot -Filter '*.xisf' -File |
+    Sort-Object LastWriteTime, Name
+
+foreach ($file in $sourceFiles) {
+    if ($candidates.Count -ge $MaxFilesPerRun) { break }
+
+    $transportPath = Join-Path $TransportRoot $file.Name
+    $manifestPath = $transportPath + '.ready.json'
+    $isCompleted = $false
+
+    if (
+        (Test-Path -LiteralPath $transportPath -PathType Leaf) -and
+        (Test-Path -LiteralPath $manifestPath -PathType Leaf)
+    ) {
+        try {
+            $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+            $transportItem = Get-Item -LiteralPath $transportPath -ErrorAction Stop
+
+            $isCompleted = (
+                [string]$manifest.State -eq 'READY' -and
+                [string]$manifest.FileName -eq $file.Name -and
+                [int64]$manifest.SizeBytes -eq [int64]$file.Length -and
+                [int64]$transportItem.Length -eq [int64]$file.Length -and
+                -not [string]::IsNullOrWhiteSpace([string]$manifest.Sha256)
+            )
+        }
+        catch {
+            $isCompleted = $false
+        }
+    }
+
+    if ($isCompleted) {
+        $alreadyReady++
+        continue
+    }
+
+    $candidates.Add($file)
+}
+
+$files = @($candidates)
 
 foreach ($file in $files) {
     try {
-        $result = Export-DSGOneDriveTransportFile -SourcePath $file.FullName -TransportRoot $TransportRoot -StabilityDelaySeconds $StabilityDelaySeconds
+        $result = Export-DSGOneDriveTransportFile `
+            -SourcePath $file.FullName `
+            -TransportRoot $TransportRoot `
+            -StabilityDelaySeconds $StabilityDelaySeconds
         $results += $result
     }
     catch {
@@ -50,6 +94,8 @@ $summary = [pscustomobject][ordered]@{
     Mode = 'COPY_ONLY_ONEDRIVE_EXPORT'
     SourceRoot = $SourceRoot
     TransportRoot = $TransportRoot
+    SourceFilesObserved = @($sourceFiles).Count
+    AlreadyReadySkipped = $alreadyReady
     Requested = @($files).Count
     Ready = @($results | Where-Object { $_.Status -eq 'READY' }).Count
     Deferred = @($results | Where-Object { $_.Status -eq 'DEFER_UNSTABLE' }).Count
