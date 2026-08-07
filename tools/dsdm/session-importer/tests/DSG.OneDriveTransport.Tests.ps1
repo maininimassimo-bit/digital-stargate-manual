@@ -5,7 +5,7 @@ BeforeAll {
 
 Describe 'DSG.OneDriveTransport export' {
     BeforeEach {
-        $root = Join-Path $TestDrive 'export'
+        $root = Join-Path $TestDrive ('export-' + [guid]::NewGuid().ToString('N'))
         $sourceRoot = Join-Path $root 'source'
         $transportRoot = Join-Path $root 'transport'
         New-Item -ItemType Directory -Path $sourceRoot -Force | Out-Null
@@ -68,7 +68,7 @@ Describe 'DSG.OneDriveTransport export' {
 
 Describe 'DSG.OneDriveTransport import' {
     BeforeEach {
-        $root = Join-Path $TestDrive 'import'
+        $root = Join-Path $TestDrive ('import-' + [guid]::NewGuid().ToString('N'))
         $transportRoot = Join-Path $root 'transport'
         $destinationRoot = Join-Path $root 'destination'
         New-Item -ItemType Directory -Path $transportRoot -Force | Out-Null
