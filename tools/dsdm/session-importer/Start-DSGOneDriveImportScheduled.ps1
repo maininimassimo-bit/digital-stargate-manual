@@ -35,7 +35,3 @@ $transferPlanPath = Join-Path $latestDiscovery.FullName 'transfer-plan.csv'
     -DestinationRoot $DestinationRoot `
     -MaxFilesPerRun $MaxFilesPerRun `
     -EvidenceRoot $EvidenceRoot
-
-if ($LASTEXITCODE -ne $null -and $LASTEXITCODE -ne 0) {
-    exit $LASTEXITCODE
-}
