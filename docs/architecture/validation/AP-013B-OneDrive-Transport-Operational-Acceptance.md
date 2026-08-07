@@ -5,7 +5,7 @@
 | Identificativo | `OAT-AP013B-001` |
 | Package | AP-013 — Scientific Image Repository Architecture |
 | Incremento | AP-013B — OneDrive-mediated COPY_ONLY Transport |
-| Stato | In validation |
+| Stato | OAT partially passed — recovery/security gates open |
 | Modalità | `COPY_ONLY` |
 | Source cleanup | Prohibited |
 | Overwrite | Prohibited |
@@ -15,21 +15,23 @@
 
 Definire la Operational Acceptance del trasporto scientifico mediato da OneDrive che sostituisce il data path SMB/VPN diretto tra EAGLE e PC principale, senza modificare le invarianti di sicurezza e integrità del motore AP-013.
 
-Il documento separa esplicitamente evidenze già osservate, validazioni non ancora eseguite e gate necessari prima della schedulazione produttiva.
+Il documento separa esplicitamente evidenze già osservate, validazioni non ancora eseguite e gate necessari prima della promozione definitiva.
 
 ## 2. Current State verificato
 
-Il pilot manuale end-to-end ha validato il percorso:
+Il percorso end-to-end validato è:
 
 ```text
 D:\Images NINA\Target
+  -> DSG OneDrive Export Agent
   -> OneDrive locale EAGLE
   -> sincronizzazione Microsoft OneDrive
   -> OneDrive locale PC principale
+  -> DSG OneDrive Import Agent
   -> F:\Astrofotografia
 ```
 
-Per il file pilot `DARK_1x1_1.05s_910_99_Flat_LDN1320_Skywatcher quattro 200p__-0.90C_LPRO_0002_2026-07-09_17-35-59_FWHM_0.00_Fok_.xisf` sono state osservate le seguenti evidenze:
+Per il pilot iniziale sul file `DARK_1x1_1.05s_910_99_Flat_LDN1320_Skywatcher quattro 200p__-0.90C_LPRO_0002_2026-07-09_17-35-59_FWHM_0.00_Fok_.xisf` sono state osservate le seguenti evidenze:
 
 - dimensione: `23190016` byte;
 - SHA-256 sorgente EAGLE: `44a636a84a141f8108038f613649af093385425c9c56b9fbbe29208d3da13ade`;
@@ -44,11 +46,9 @@ Per il file pilot `DARK_1x1_1.05s_910_99_Flat_LDN1320_Skywatcher quattro 200p__-
 - hash OneDrive sul PC principale: circa `1.12 s`, `19.71 MiB/s` osservati;
 - precedente lettura SMB/UNC dello stesso file: circa `71.19 s`, `0.31 MiB/s` osservati.
 
-Queste misure descrivono il pilot osservato e non costituiscono ancora una SLA o una soglia di produzione.
+Queste misure descrivono il pilot osservato e non costituiscono una SLA.
 
 ## 3. Target State
-
-Il target AP-013B separa il trasferimento in due agenti:
 
 ```mermaid
 flowchart LR
@@ -75,110 +75,153 @@ Regole vincolanti:
 
 Repository: `maininimassimo-bit/digital-stargate-manual`.
 
-Componenti introdotti:
+Componenti:
 
 - `tools/dsdm/session-importer/DSG.OneDriveTransport.psm1`;
 - `tools/dsdm/session-importer/Start-DSGOneDriveExport.ps1`;
 - `tools/dsdm/session-importer/Start-DSGOneDriveImport.ps1`;
+- `tools/dsdm/session-importer/Start-DSGOneDriveImportScheduled.ps1`;
 - `tools/dsdm/session-importer/tests/DSG.OneDriveTransport.Tests.ps1`.
 
-Commit verificati:
+Commit principali verificati:
 
 - `b5c435c9b0ebfcb1f0123ae9d89c9984ba4cb939` — transport module;
 - `381c52e80c2e6eb5e7c5cdb5a5f2c8c3b69b8137` — export agent;
 - `3ef1118bb5d78c178eb4f3d4901674ed7c2f6075` — import agent;
-- `b9b9f6d1e2db8cee896839eaf57086d4ff0fb14e` — Pester coverage definition.
+- `b9b9f6d1e2db8cee896839eaf57086d4ff0fb14e` — Pester coverage definition;
+- `142b2f92f5cd3578d4ece5cfdc790e44a1047db6` — Pester isolation fix;
+- `0b00d1f23c825a2f753cef2a13fc41d2ea5e3b1a` — export backlog progression fix;
+- `6a26af52b33a4e2a17846c7852a064dee951ec1b` — scheduled import launcher;
+- `55b0e81cc123341dae07f82e9051181566a8caf1` — scheduled launcher exit handling fix;
+- `5323cb5a5c3aa3ac809603a26e1b1a46ddc57dfc` — import backlog progression fix.
 
-La presenza dei test nel repository non equivale a test eseguiti.
+## 5. Runtime evidence — 07/08/2026
 
-## 5. Quality-gate matrix
+### 5.1 Synthetic regression
 
-| Gate | Criterio | Stato | Evidenza / azione richiesta |
-|---|---|---|---|
-| QG-01 Architecture | OneDrive resta transport, repository finale resta `F:` | Passed | Pilot e design AP-013B |
-| QG-02 Source immutability | nessuna cancellazione sorgente | Passed | pilot: `SourceDeleted=False`; implementazione COPY_ONLY |
-| QG-03 No overwrite | destinazioni esistenti non sovrascritte | Passed | pilot: `SKIP_IDENTICAL`, `OverwritePerformed=False` |
-| QG-04 End-to-end integrity | SHA-256 EAGLE = OneDrive = final | Passed | hash pilot identici |
-| QG-05 Manifest READY | import soltanto dopo pubblicazione READY | Passed by design / runtime pilot partial | manifest pilot osservato; suite Pester definita |
-| QG-06 Unit/Pester | nuova suite OneDrive passa integralmente | Not Executed | eseguire `Invoke-Pester` sul PC principale |
-| QG-07 Existing regression | test SessionImporter e SessionTransfer restano verdi | Not Executed for AP-013B baseline | rieseguire suite completa |
-| QG-08 Batch 10 | 10 file completati senza failure/deletion/overwrite | Not Executed | OAT-RUN-010 |
-| QG-09 Batch 100 | 100 file completati con reconciliation completa | Not Executed | OAT-RUN-100 |
-| QG-10 Batch 1000 | soak/capacity test su 1000 file | Not Executed | OAT-RUN-1000; può essere post-pilot ma pre-scale |
-| QG-11 Sync interruption | stop/sospensione OneDrive non produce import incompleto | Not Executed | fault injection controllata |
-| QG-12 Restart recovery | reboot EAGLE/PC non corrompe manifest o destinazioni | Not Executed | recovery test |
-| QG-13 Tamper detection | mismatch hash blocca import | Not Executed runtime | Pester case definito, da eseguire |
-| QG-14 Conflict | destinazione diversa blocca senza overwrite | Passed in existing AP-013; AP-013B runtime not executed | eseguire scenario AP-013B |
-| QG-15 Idempotency | retry produce `SKIP_IDENTICAL` | Passed pilot single-file | estendere a batch |
-| QG-16 Evidence | export/import producono CSV/JSON per run | Not Executed runtime | eseguire agenti reali |
-| QG-17 Scheduler | task disabilitabili, no overlap, logging | Blocked | creare solo dopo OAT minimo |
-| QG-18 Security | OneDrive account e ACL appropriate; no secrets negli script | Partially Passed | account condiviso verificato; ACL review ancora richiesta |
-| QG-19 Operations | runbook AP-013B e rollback disponibili | In Progress | aggiornamento documentale richiesto |
-| QG-20 Production authorization | disposizione esplicita dopo review | Blocked | dipende dai gate OAT |
+Eseguito sul PC principale:
 
-## 6. OAT execution sequence
+- `DSG.OneDriveTransport.Tests.ps1`: `9 passed`, `0 failed`;
+- `DSG.SessionTransfer.Tests.ps1`: completed with `Failed = 0`;
+- `DSG.SessionImporter.Tests.ps1`: completed with `Failed = 0`.
 
-### Phase A — Synthetic regression
+### 5.2 OAT-RUN-010 — controlled 10-file export/import
 
-Eseguire sul PC principale, dopo aggiornamento del checkout:
+EAGLE Export:
 
-```powershell
-git pull
-Invoke-Pester .\tools\dsdm\session-importer\tests\DSG.OneDriveTransport.Tests.ps1 -Output Detailed
-Invoke-Pester .\tools\dsdm\session-importer\tests\DSG.SessionTransfer.Tests.ps1 -Output Detailed
-Invoke-Pester .\tools\dsdm\session-importer\tests\DSG.SessionImporter.Tests.ps1 -Output Detailed
-```
+- `Requested = 10`;
+- `Ready = 10`;
+- `Deferred = 0`;
+- `Failed = 0`;
+- `SourceFilesDeleted = 0`.
 
-Criterio PASS: `Failed: 0` per tutte le suite.
+OneDrive PC principale:
 
-### Phase B — Controlled batch 10
+- `10 XISF` e `10 READY` osservati;
+- `10/10` file presenti nel transfer plan selezionato.
 
-Eseguire prima l'export EAGLE con `MaxFilesPerRun=10`, attendere la sincronizzazione OneDrive e poi l'import sul PC principale con lo stesso limite.
+PC Import:
 
-Criteri PASS:
+- `Requested = 10`;
+- `CopiedVerified = 10`;
+- `SkippedIdentical = 0`;
+- `DeferredNoPlan = 0`;
+- `Failed = 0`;
+- `SourceFilesDeleted = 0`;
+- `TransportFilesDeleted = 0`;
+- `OverwritesPerformed = 0`.
 
-- export `Failed = 0`;
-- import `Failed = 0`;
+Retry idempotente tramite scheduled launcher:
+
+- `Requested = 10`;
+- `SkippedIdentical = 10`;
+- `Failed = 0`;
+- process exit code `0`.
+
+### 5.3 Scheduler pilot
+
+Configurazione verificata:
+
+- `Digital StarGate - OneDrive Export` su EAGLE;
+- `Digital StarGate - OneDrive Import` sul PC principale;
+- `MultipleInstances = IgnoreNew`;
+- execution policy bypass limitato al processo PowerShell schedulato;
+- legacy `Digital StarGate - Morning Transfer` disabilitata e mantenuta come rollback.
+
+Sono state osservate esecuzioni autonome con `LastTaskResult = 0` su entrambi gli host e avanzamento del backlog senza intervento manuale.
+
+### 5.4 Batch operativo 30 e progression evidence
+
+EAGLE Export completato:
+
+- `SourceFilesObserved = 203`;
+- `AlreadyReadySkipped = 130`;
+- `Requested = 30`;
+- `Ready = 30`;
+- `Deferred = 0`;
+- `Failed = 0`;
+- `SourceFilesDeleted = 0`;
+- durata osservata: circa `6m44s`;
+- scheduler interval: `10 min`;
+- `LastTaskResult = 0`.
+
+PC Import completato:
+
+- `ReadyManifestsObserved = 165`;
+- `AlreadyImportedSkipped = 123`;
+- `DeferredNoPlan = 0`;
+- `DeferredTransportNotReady = 0`;
+- `Requested = 30`;
+- `CopiedVerified = 30`;
+- `SkippedIdentical = 0`;
+- `Failed = 0`;
 - `SourceFilesDeleted = 0`;
 - `TransportFilesDeleted = 0`;
 - `OverwritesPerformed = 0`;
-- ogni `COPIED_VERIFIED` presenta hash coerenti;
-- ogni destinazione preesistente identica produce `SKIP_IDENTICAL`;
-- nessun `.dsg-partial` residuo.
+- scheduler `LastTaskResult = 0`.
 
-### Phase C — Controlled batch 100
+Durante la sincronizzazione sono stati osservati temporaneamente conteggi diversi tra READY e XISF (`97 READY / 91 XISF` e successivamente `176 READY / 172 XISF`), coerenti con sincronizzazione asincrona. L'Importer aggiornato differisce i manifest il cui payload XISF non è ancora localmente disponibile.
 
-Ripetere con dataset rappresentativo di almeno 100 file e raccogliere:
+Il sistema ha quindi superato la soglia cumulativa di 100 asset osservati/importabili, con batch limitato a 30 per singola esecuzione e backlog progression verificata.
 
-- durata export;
-- tempo fino alla disponibilità dei manifest READY sul PC principale;
-- durata import;
-- numero di copied/skipped/deferred/failed;
-- distribuzione dimensioni file;
-- backlog OneDrive iniziale/finale;
-- eventuali throttling, placeholder o download on-demand.
+## 6. Quality-gate matrix
 
-Non fissare soglie prestazionali definitive prima della baseline osservata.
+| Gate | Criterio | Stato | Evidenza / azione richiesta |
+|---|---|---|---|
+| QG-01 Architecture | OneDrive resta transport, repository finale resta `F:` | Passed | pilot e runtime AP-013B |
+| QG-02 Source immutability | nessuna cancellazione sorgente | Passed | tutti i run: `SourceFilesDeleted=0` |
+| QG-03 No overwrite | destinazioni esistenti non sovrascritte | Passed | `OverwritesPerformed=0`; retry `SKIP_IDENTICAL` |
+| QG-04 End-to-end integrity | SHA-256 EAGLE = OneDrive = final | Passed | pilot hash end-to-end + `COPIED_VERIFIED` runtime |
+| QG-05 Manifest READY | import soltanto dopo pubblicazione READY | Passed | runtime e Pester |
+| QG-06 Unit/Pester | nuova suite OneDrive passa integralmente | Passed | 9/9, Failed=0 |
+| QG-07 Existing regression | SessionImporter e SessionTransfer restano verdi | Passed | entrambe le suite rieseguite con Failed=0 |
+| QG-08 Batch 10 | 10 file completati senza failure/deletion/overwrite | Passed | OAT-RUN-010 |
+| QG-09 Batch 100 | almeno 100 asset gestiti con progression e reconciliation | Passed | >100 READY osservati, progression autonoma, batch 30 verificati |
+| QG-10 Batch 1000 | soak/capacity test su 1000 file | Not Executed | opzionale prima di scale-out oltre batch limitato |
+| QG-11 Sync interruption | stop/sospensione OneDrive non produce import incompleto | Not Executed | fault injection controllata ancora richiesta |
+| QG-12 Restart recovery | reboot EAGLE/PC non corrompe manifest o destinazioni | Not Executed | recovery test ancora richiesto |
+| QG-13 Tamper detection | mismatch hash blocca import | Passed synthetic | Pester dedicato passato; runtime destructive fault non necessario per pilot |
+| QG-14 Conflict | destinazione diversa blocca senza overwrite | Passed synthetic | Pester dedicato passato; runtime conflict injection ancora opzionale |
+| QG-15 Idempotency | retry produce `SKIP_IDENTICAL` | Passed | scheduled launcher: 10/10 SKIP_IDENTICAL, exit 0 |
+| QG-16 Evidence | export/import producono CSV/JSON per run | Passed | evidence runtime su EAGLE e PC principale |
+| QG-17 Scheduler | task disabilitabili, no overlap, logging/evidence | Passed for pilot | Export/Import schedulati; legacy SMB disabilitato; IgnoreNew attivo |
+| QG-18 Security | OneDrive account e ACL appropriate; no secrets negli script | Partially Passed | account/path verificati; ACL review formale ancora richiesta |
+| QG-19 Operations | runbook AP-013B e rollback disponibili | In Progress | aggiornamento runbook ancora richiesto |
+| QG-20 Production authorization | disposizione esplicita dopo review | Blocked | dipende da QG-11, QG-12, QG-18, QG-19 |
 
-### Phase D — Failure and recovery
+## 7. Failure and recovery validation ancora richiesta
 
-Eseguire separatamente:
+Prima della chiusura piena dell'OAT eseguire almeno:
 
 1. sospensione OneDrive durante sincronizzazione file;
-2. manifest non READY;
-3. file transport alterato dopo manifest;
-4. destinazione in conflict;
-5. riavvio EAGLE dopo staging ma prima del READY;
-6. riavvio PC principale prima dell'import;
-7. rilancio identico dopo completamento.
+2. riavvio EAGLE dopo staging ma prima del completamento di un batch;
+3. riavvio PC principale prima/durante una finestra Import;
+4. verifica che il retry successivo non generi overwrite o duplicazioni;
+5. ACL review sul transport OneDrive e sui task principal.
 
 Ogni scenario deve preservare source, transport e destinazione verificata; nessun recupero può usare overwrite automatico.
 
-### Phase E — Scale/soak 1000
-
-Eseguire solo dopo Phase B e C positive. Il test misura capacità e operabilità; non è necessario per autorizzare un pilot limitato a 10 file, ma è richiesto prima di una promozione a volumi elevati senza batch limit.
-
-## 7. Evidence bundle richiesto
+## 8. Evidence bundle
 
 Per ogni run conservare almeno:
 
@@ -194,57 +237,53 @@ Per ogni run conservare almeno:
 
 I log grezzi locali non devono essere pubblicati automaticamente nel repository; vanno prima curati e trasformati in evidence documentale.
 
-## 8. Risk and waiver register
+## 9. Risk and waiver register
 
 | Rischio | Stato | Mitigazione / waiver |
 |---|---|---|
-| ritardo o throttling OneDrive | Open | batch limitato, READY manifest, misure Phase C |
-| Files On-Demand / placeholder | Open | rendere il transport disponibile localmente sul PC importatore e verificare hash prima del copy |
-| sincronizzazione selettiva | Mitigated for pilot path | usare `Manciano\DigitalStarGate-Transport`; percorso già sincronizzato sui due host |
+| ritardo o throttling OneDrive | Mitigated for pilot | batch 30, READY manifest, scheduler indipendenti, IgnoreNew |
+| Files On-Demand / placeholder | Mitigated in importer | nessun import senza payload locale; hash prima del copy |
+| sincronizzazione selettiva | Mitigated for pilot path | `Manciano\DigitalStarGate-Transport` verificato sui due host |
 | duplicazione temporanea dati | Accepted during OAT | nessun cleanup fino a policy separata |
-| indisponibilità cloud | Open | fail-safe: nessun import senza file+READY validi; retry successivo |
-| account OneDrive compromesso | Open | ACL/account review e nessun secret nel codice |
-| backlog crescente | Open | metriche backlog e batch tuning dopo Phase C |
-| dipendenza da path locali | Technical debt | introdurre configurazioni locali governate prima della produzione |
+| indisponibilità cloud | Open but fail-safe | nessun import senza file+READY validi; retry successivo |
+| account OneDrive compromesso | Open | ACL/account review ancora richiesta |
+| backlog crescente | Mitigated | progression verificata; export ~6m44s per batch 30 sotto intervallo 10m |
+| dipendenza da path locali | Technical debt | configurazioni locali governate da formalizzare |
 
 Nessun waiver autorizza cancellazioni, overwrite o bypass degli hash.
 
-## 9. Rollback
+## 10. Rollback
 
 Rollback AP-013B:
 
-1. disabilitare gli scheduler OneDrive, se creati;
+1. disabilitare `Digital StarGate - OneDrive Export` e `Digital StarGate - OneDrive Import`;
 2. non cancellare sorgenti, transport o destinazioni verificate;
 3. conservare evidence del run;
 4. rimuovere solo `.dsg-partial` dopo controllo manuale;
-5. ripristinare il precedente workflow soltanto come fallback controllato e non come azione automatica;
+5. riabilitare `Digital StarGate - Morning Transfer` soltanto dopo decisione esplicita di rollback;
 6. rieseguire Pester e un batch limitato prima di una nuova promozione.
 
-Il precedente trasferimento SMB/VPN non è dichiarato production-ready come conseguenza di questo documento.
+## 11. Readiness recommendation corrente
 
-## 10. Readiness recommendation corrente
+**Recommendation: CONDITIONALLY READY FOR LIMITED PRODUCTION PILOT.**
 
-**Recommendation: CONDITIONALLY READY FOR CONTROLLED OAT.**
+Sono passati i gate software, regressione, batch-10, batch-100 cumulativo, idempotenza, scheduler pilot, evidence e backlog progression.
 
-È autorizzabile il proseguimento della validazione con batch controllati. Non è ancora autorizzata la schedulazione produttiva continuativa.
+La promozione a piena produzione resta bloccata da:
 
-Blocker principali:
+- fault injection OneDrive (QG-11);
+- restart/recovery test EAGLE e PC principale (QG-12);
+- ACL/security review formale (QG-18);
+- runbook operativo finale (QG-19).
 
-- Pester AP-013B non ancora eseguito;
-- regression suite non ancora rieseguita sulla baseline AP-013B;
-- batch 10 e batch 100 non ancora eseguiti con gli agenti automatici;
-- recovery/fault injection non ancora eseguiti;
-- ACL/operational review da completare;
-- scheduler non ancora sottoposti a OAT.
+Il batch operativo candidato resta `30` file per run. Non aumentare oltre questa soglia fino alla chiusura dei gate residui.
 
-## 11. Exit criteria
+## 12. Exit criteria
 
-Per dichiarare `Operational Acceptance: PASSED` devono essere almeno `Passed`:
+Per dichiarare `Operational Acceptance: PASSED` devono essere `Passed`:
 
 - QG-01..QG-09;
-- QG-11..QG-16;
-- QG-18..QG-19.
+- QG-11..QG-19, salvo waiver esplicito approvato;
+- QG-20 nella successiva promotion decision.
 
-QG-10 (1000 file) può restare pianificato soltanto se la produzione iniziale mantiene un batch limitato approvato e non viene dichiarata capacità scale-out non dimostrata.
-
-QG-17 e QG-20 vengono chiusi nella successiva promotion decision dopo OAT positiva.
+QG-10 (1000 file) può restare `Not Executed` se la produzione mantiene il batch limitato a 30 e non viene dichiarata capacità scale-out non dimostrata.
