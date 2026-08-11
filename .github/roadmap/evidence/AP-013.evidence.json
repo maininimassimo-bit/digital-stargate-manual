@@ -13,9 +13,7 @@
       "type": "architecture-package",
       "path": "docs/architecture/packages/AP-013-Scientific-Image-Repository-Architecture.md",
       "required": true,
-      "acceptance": {
-        "mode": "exists"
-      }
+      "acceptance": {"mode": "exists"}
     },
     {
       "id": "architecture-review",
@@ -25,11 +23,7 @@
       "acceptance": {
         "mode": "markdown-field",
         "field": "Decision",
-        "acceptedValues": [
-          "Approved",
-          "Approved with conditions",
-          "Accepted"
-        ]
+        "acceptedValues": ["Approved", "Approved with conditions", "Accepted"]
       }
     },
     {
@@ -40,10 +34,7 @@
       "acceptance": {
         "mode": "markdown-field",
         "field": "Stato",
-        "acceptedValues": [
-          "Accepted",
-          "Passed"
-        ]
+        "acceptedValues": ["Accepted", "Passed"]
       }
     },
     {
@@ -54,16 +45,15 @@
       "acceptance": {
         "mode": "markdown-field",
         "field": "Stato",
-        "acceptedValues": [
-          "Accepted"
-        ]
+        "acceptedValues": ["Accepted"]
       }
     }
   ],
-  "expectedStatus": "active",
+  "expectedStatus": "completed",
   "notes": [
-    "The architecture package is present.",
-    "The final ARB review, final OAT record and formal operational acceptance are not currently versioned at the declared paths.",
-    "The manifest must not promote AP-013 to completed until all required evidence is present and accepted."
+    "AP-013 architecture review is Approved with conditions via ARB-013.",
+    "AP-013-OAT-001 is Passed for the bounded validated operational scope.",
+    "Formal operational acceptance is Accepted.",
+    "Open ARB-013 conditions constrain future preservation, provenance, migration and scale-out claims but do not block architecture-package closure."
   ]
 }
