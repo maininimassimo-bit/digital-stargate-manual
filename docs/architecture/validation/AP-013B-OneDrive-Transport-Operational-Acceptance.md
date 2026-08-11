@@ -5,7 +5,7 @@
 | Identificativo | `OAT-AP013B-001` |
 | Package | AP-013 — Scientific Image Repository Architecture |
 | Incremento | AP-013B — OneDrive-mediated COPY_ONLY Transport |
-| Stato | OAT partially passed — security/runbook gates open |
+| Stato | OAT ready for promotion review |
 | Modalità | `COPY_ONLY` |
 | Source cleanup | Prohibited |
 | Overwrite | Prohibited |
@@ -53,7 +53,7 @@ flowchart LR
 Regole vincolanti:
 
 - la sorgente NINA non viene cancellata;
-- il transport OneDrive non viene cancellato durante l'acceptance;
+- il transport OneDrive non viene cancellato automaticamente;
 - il manifest `*.ready.json` viene pubblicato solo dopo verifica del file transport;
 - l'import considera soltanto manifest `READY`;
 - ogni file viene verificato per dimensione e SHA-256 prima dell'import;
@@ -150,7 +150,6 @@ Test isolato in `DigitalStarGate-QG11` con destinazione `F:\DSG-OAT\QG11-Destina
 Durante l'interruzione del client OneDrive sul PC principale:
 
 - Export EAGLE completato nel transport locale;
-- nessun payload/manifest disponibile al PC durante l'interruzione;
 - destinazione finale rimasta assente (`FinalExists = False`);
 - nessun import incompleto osservato.
 
@@ -165,8 +164,6 @@ Dopo riavvio OneDrive:
 - `OverwritesPerformed = 0`;
 - SHA-256 manifest = transport = destination;
 - `EndToEndVerified = True`.
-
-Conclusione: perdita temporanea del canale OneDrive è fail-safe e il recovery successivo preserva l'integrità end-to-end.
 
 ### 5.5 QG-12A — PC principal restart recovery
 
@@ -183,17 +180,11 @@ Dopo reboot/login:
 - zero delete/overwrite;
 - `EndToEndVerified = True`.
 
-Conclusione: reboot del PC importatore non corrompe transport o destinazione e il recovery è deterministico.
-
 ### 5.6 QG-12B — EAGLE restart recovery
 
 Test isolato in `DigitalStarGate-QG12B`.
 
-Prima del reboot è stato predisposto uno stato di staging interrotto contenente solo:
-
-```text
-<file>.xisf.dsg-partial
-```
+Prima del reboot è stato predisposto uno stato di staging interrotto contenente solo `<file>.xisf.dsg-partial`.
 
 Dopo reboot EAGLE il partial era ancora presente e nessun READY era stato pubblicato. Il retry dell'Exporter ha:
 
@@ -211,13 +202,52 @@ Sul PC principale, dopo sincronizzazione:
 
 - `SizeMatch = True`;
 - `HashMatch = True`;
-- destinazione pre-import assente;
 - import: `Requested = 1`, `CopiedVerified = 1`, `Failed = 0`;
 - zero delete/overwrite;
-- SHA-256 manifest = transport = destination;
 - `EndToEndVerified = True`.
 
-Conclusione: reboot EAGLE durante uno staging incompleto non pubblica uno stato READY invalido e il retry ricostruisce in sicurezza il transport.
+### 5.7 QG-18 — Security and ACL review
+
+EAGLE transport ACL:
+
+- owner `BUILTIN\Administrators`;
+- `NT AUTHORITY\SYSTEM` — `FullControl`;
+- `BUILTIN\Administrators` — `FullControl`;
+- `EAGLE30154\PrimaLuceLab` — `FullControl`;
+- `Everyone` — inherited `Deny DeleteSubdirectoriesAndFiles`;
+- nessuna ACE generica con `Write`, `Modify` o `FullControl`.
+
+Scheduled Task Export:
+
+- principal `PrimaLuceLab`;
+- `LogonType = Interactive`;
+- `RunLevel = Highest`;
+- `MultipleInstances = IgnoreNew`;
+- script AP-013B esplicito;
+- `-NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass`;
+- nessun secret, token o credential path negli argomenti.
+
+PC principale transport ACL:
+
+- owner/group `AzureAD\MassimoMainini`;
+- `NT AUTHORITY\SYSTEM` — `FullControl`;
+- `BUILTIN\Administrators` — `FullControl`;
+- `AzureAD\MassimoMainini` — `FullControl`;
+- `Everyone` — inherited `Deny DeleteSubdirectoriesAndFiles`;
+- nessuna ACE generica con `Write`, `Modify` o `FullControl`.
+
+Scheduled Task Import:
+
+- principal `MassimoMainini`;
+- `LogonType = Interactive`;
+- `RunLevel = Limited`;
+- `MultipleInstances = IgnoreNew`;
+- script `Start-DSGOneDriveImportScheduled.ps1`;
+- `-NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass`;
+- `-MaxFilesPerRun 30`;
+- nessun secret, token o credential path negli argomenti.
+
+Conclusione: ACL e task principal sono coerenti con l'uso previsto del transport; il bypass della execution policy è limitato al singolo processo schedulato e non modifica la policy di sistema.
 
 ## 6. Quality-gate matrix
 
@@ -239,18 +269,144 @@ Conclusione: reboot EAGLE durante uno staging incompleto non pubblica uno stato 
 | QG-14 Conflict | destinazione diversa blocca senza overwrite | Passed synthetic | Pester dedicato |
 | QG-15 Idempotency | retry produce stato sicuro | Passed | SKIP_IDENTICAL e progression runtime |
 | QG-16 Evidence | export/import producono CSV/JSON | Passed | evidence runtime per run |
-| QG-17 Scheduler | no overlap, disabilitabili, hidden, evidence | Passed for pilot | Export/Import operativi, IgnoreNew, legacy disabilitato |
-| QG-18 Security | account/ACL appropriati; no secret negli script | Partially Passed | ACL review formale ancora richiesta |
-| QG-19 Operations | runbook AP-013B e rollback disponibili | In Progress | aggiornamento runbook ancora richiesto |
-| QG-20 Production authorization | disposizione esplicita dopo review | Blocked | dipende da QG-18/QG-19 e promotion review |
+| QG-17 Scheduler | no overlap, disabilitabili, hidden, evidence | Passed | Export/Import operativi, IgnoreNew, legacy disabilitato |
+| QG-18 Security | account/ACL appropriati; no secret negli script | Passed | ACL + principal/task action review EAGLE/PC |
+| QG-19 Operations | runbook AP-013B e rollback disponibili | Passed | runbook operativo §7 |
+| QG-20 Production authorization | disposizione esplicita dopo review | Blocked | promotion/release review richiesta |
 
-## 7. Validation residua
+## 7. Runbook operativo AP-013B
 
-Restano da completare prima della chiusura piena dell'OAT:
+### 7.1 Baseline operativa
 
-1. ACL/security review del transport OneDrive e dei principal delle Scheduled Task;
-2. runbook operativo finale AP-013B;
-3. promotion/release review finale.
+- EAGLE source: `D:\Images NINA\Target`;
+- EAGLE transport: `C:\Users\PrimaLuceLab\OneDrive - Massimo Mainini\Manciano\DigitalStarGate-Transport`;
+- PC transport: `C:\Users\MassimoMainini\OneDrive - Massimo Mainini\Manciano\DigitalStarGate-Transport`;
+- repository finale: `F:\Astrofotografia`;
+- batch massimo autorizzato: `30` file/run;
+- task Export: `Digital StarGate - OneDrive Export`;
+- task Import: `Digital StarGate - OneDrive Import`;
+- task legacy SMB: `Digital StarGate - Morning Transfer`, disabilitata.
+
+### 7.2 Controllo giornaliero rapido
+
+Su EAGLE:
+
+```powershell
+Get-ScheduledTaskInfo -TaskName 'Digital StarGate - OneDrive Export' |
+    Format-List LastRunTime,LastTaskResult,NextRunTime
+```
+
+Sul PC principale:
+
+```powershell
+Get-ScheduledTaskInfo -TaskName 'Digital StarGate - OneDrive Import' |
+    Format-List LastRunTime,LastTaskResult,NextRunTime
+```
+
+Condizione nominale: `LastTaskResult = 0`. Durante un run attivo `267009 / 0x41301` indica task in esecuzione e non va classificato come failure.
+
+### 7.3 Verifica evidence
+
+EAGLE:
+
+```powershell
+$LatestRun = Get-ChildItem "$env:USERPROFILE\DSG-Inventory\OneDriveExport" -Directory |
+    Where-Object { Test-Path (Join-Path $_.FullName 'export-manifest.json') } |
+    Sort-Object LastWriteTime -Descending |
+    Select-Object -First 1
+Get-Content (Join-Path $LatestRun.FullName 'export-manifest.json') -Raw | ConvertFrom-Json | Format-List
+```
+
+PC principale:
+
+```powershell
+$LatestRun = Get-ChildItem "$env:USERPROFILE\DSG-Inventory\OneDriveImport" -Directory |
+    Where-Object { Test-Path (Join-Path $_.FullName 'import-manifest.json') } |
+    Sort-Object LastWriteTime -Descending |
+    Select-Object -First 1
+Get-Content (Join-Path $LatestRun.FullName 'import-manifest.json') -Raw | ConvertFrom-Json | Format-List
+```
+
+Stop/escalation se `Failed > 0`, `SourceFilesDeleted > 0`, `TransportFilesDeleted > 0` o `OverwritesPerformed > 0`.
+
+### 7.4 Verifica transport
+
+```powershell
+Get-ChildItem -LiteralPath $TransportRoot -File |
+    Group-Object {
+        if ($_.Name -like '*.ready.json') { 'READY' }
+        elseif ($_.Name -like '*.xisf') { 'XISF' }
+        elseif ($_.Name -like '*.dsg-partial') { 'PARTIAL' }
+        else { 'OTHER' }
+    } |
+    Select-Object Name,Count
+```
+
+Un mismatch temporaneo tra READY e XISF può essere dovuto alla sincronizzazione asincrona; l'Importer deve differire i payload non ancora localmente disponibili. La presenza persistente di `.dsg-partial` richiede controllo del run EAGLE prima di qualsiasi cleanup manuale.
+
+### 7.5 OneDrive non disponibile
+
+- non forzare import da file incompleti;
+- verificare che la destinazione non sia stata creata;
+- ripristinare il client OneDrive;
+- attendere la presenza locale di XISF + READY;
+- verificare dimensione/SHA-256;
+- lasciare che il run Import successivo completi il recovery.
+
+QG-11 ha verificato questo comportamento end-to-end.
+
+### 7.6 Restart recovery
+
+PC principale:
+
+- dopo reboot verificare che OneDrive sia avviato;
+- attendere riconvergenza XISF + READY;
+- verificare manifest/hash;
+- eseguire o attendere Import;
+- verificare `CopiedVerified`/`SkippedIdentical` e `Failed = 0`.
+
+EAGLE:
+
+- un `.dsg-partial` residuo non equivale a READY;
+- il retry Export rimuove lo staging residuo e ricostruisce il payload verificato;
+- verificare `PartialCount = 0`, XISF presente e READY presente dopo il retry.
+
+QG-12A/B ha verificato entrambi i percorsi.
+
+### 7.7 Stop conditions
+
+Interrompere la promozione o disabilitare le nuove task se si osserva uno dei seguenti eventi:
+
+- mismatch SHA-256;
+- overwrite eseguito o richiesto;
+- cancellazione di source o transport;
+- failure ripetute;
+- `.dsg-partial` persistenti senza recovery;
+- ACL modificate con scrittura generica;
+- task principal/arguments diversi dalla baseline approvata;
+- backlog in crescita tale da superare stabilmente la capacità del batch 30.
+
+### 7.8 Rollback
+
+1. disabilitare `Digital StarGate - OneDrive Export`;
+2. disabilitare `Digital StarGate - OneDrive Import`;
+3. non cancellare sorgenti, transport o destinazioni verificate;
+4. conservare evidence dell'ultimo run;
+5. ispezionare eventuali `.dsg-partial` prima di rimuoverli;
+6. riabilitare `Digital StarGate - Morning Transfer` soltanto dopo decisione esplicita di rollback;
+7. rieseguire Pester e un batch limitato prima di una nuova promozione.
+
+### 7.9 Change control
+
+Richiedono nuova validazione prima dell'uso operativo:
+
+- aumento `MaxFilesPerRun` oltre `30`;
+- modifica dei path source/transport/destination;
+- modifica principal o logon type delle Scheduled Task;
+- modifica della logica hash/READY/staging;
+- introduzione di cleanup automatico;
+- modifica della semantica `COPY_ONLY`;
+- riattivazione permanente del data path SMB/VPN.
 
 ## 8. Evidence bundle
 
@@ -272,40 +428,27 @@ Per ogni run conservare almeno:
 | ritardo/throttling OneDrive | Mitigated for pilot | batch 30, READY, IgnoreNew |
 | Files On-Demand / placeholder | Mitigated | nessun import senza payload locale verificato |
 | sincronizzazione selettiva | Mitigated for pilot path | path verificato sui due host |
-| duplicazione temporanea dati | Accepted during OAT | nessun cleanup automatico |
-| indisponibilità cloud | Mitigated / fail-safe | QG-11 Passed; retry dopo recovery |
+| duplicazione temporanea dati | Accepted | nessun cleanup automatico |
+| indisponibilità cloud | Mitigated / fail-safe | QG-11 Passed |
 | restart host | Mitigated | QG-12A/B Passed |
-| account OneDrive compromesso | Open | ACL/account review richiesta |
+| ACL/account exposure | Mitigated | QG-18 Passed; ACL/principal verificati |
 | backlog crescente | Mitigated | progression verificata; batch 30 |
-| dipendenza da path locali | Technical debt | configurazione governata da formalizzare |
+| dipendenza da path locali | Technical debt | change control §7.9 |
 
 Nessun waiver autorizza cancellazioni, overwrite o bypass hash.
 
-## 10. Rollback
+## 10. CI baseline prima della chiusura QG-18/QG-19
 
-1. disabilitare `Digital StarGate - OneDrive Export` e `Digital StarGate - OneDrive Import`;
-2. non cancellare sorgenti, transport o destinazioni verificate;
-3. conservare evidence;
-4. gestire `.dsg-partial` solo dopo controllo;
-5. riabilitare `Digital StarGate - Morning Transfer` soltanto dopo decisione esplicita di rollback;
-6. rieseguire Pester e batch limitato prima di nuova promozione.
+Commit precedente `152e4295c28d43aa89aa2711255de4e9ce30cc65`: GitHub Actions verificati verdi prima dell'aggiornamento documentale. I check osservati, inclusi `quality-gate`, `deploy` e `build-word`, risultavano `completed/success`.
 
 ## 11. Readiness recommendation corrente
 
-**Recommendation: CONDITIONALLY READY FOR LIMITED PRODUCTION PILOT.**
+**Recommendation: READY FOR QG-20 PROMOTION REVIEW.**
 
-Sono passati i gate architetturali, integrità, regression, batch-10, batch-100 cumulativo, idempotenza, scheduler, evidence, sync interruption e restart/recovery.
+QG-01..QG-09 e QG-11..QG-19 risultano `Passed`. QG-10 resta `Not Executed` ed è esplicitamente non bloccante finché il batch operativo resta limitato a `30` file/run e non viene dichiarata capacità scale-out a 1000 file.
 
-La piena produzione resta bloccata da:
-
-- ACL/security review formale (QG-18);
-- runbook operativo finale (QG-19);
-- promotion decision (QG-20).
-
-Il batch operativo candidato resta `30` file per run. Non aumentare oltre questa soglia prima della chiusura dei gate residui.
+La piena produzione non è ancora dichiarata: resta necessaria la disposition esplicita QG-20.
 
 ## 12. Exit criteria
 
-Per dichiarare `Operational Acceptance: PASSED` devono essere chiusi QG-18 e QG-19 e deve essere completata la promotion decision QG-20.
-
-QG-10 (1000 file) può restare `Not Executed` se la produzione mantiene il batch limitato a 30 e non viene dichiarata capacità scale-out non dimostrata.
+Per dichiarare `Operational Acceptance: PASSED` resta da completare esclusivamente QG-20 — Production Authorization / promotion review.
