@@ -5,7 +5,7 @@
 | Identificativo | `OA-AP013-001` |
 | Package | AP-013 — Scientific Image Repository Architecture |
 | Data | 11/08/2026 |
-| Stato | **Accepted** |
+| Stato | Accepted |
 | Architecture review | ARB-013 — Approved with conditions |
 | OAT | AP-013-OAT-001 — Passed |
 | Operational increment | AP-013B — Limited Production |
