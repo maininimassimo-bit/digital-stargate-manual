@@ -1,6 +1,9 @@
 name: Deploy MkDocs artifact to GitHub Pages
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -9,8 +12,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-artifact-manual
-  cancel-in-progress: false
+  group: pages-artifact-main
+  cancel-in-progress: true
 
 jobs:
   build:
