@@ -102,7 +102,7 @@ function ConvertFrom-DSGNinaFileName {
         $warnings = New-Object 'System.Collections.Generic.List[string]'
 
         $result = [ordered]@{
-            ParserVersion = '0.2.0'
+            ParserVersion = '0.2.1'
             OriginalFileName = $originalFileName
             Extension = $extension
             ParseStatus = 'FAILED'
@@ -135,12 +135,19 @@ function ConvertFrom-DSGNinaFileName {
             }
 
             $beforeFocus = $focusMatch.Groups['prefix'].Value
-            $fwhmMatch = [regex]::Match($beforeFocus, '^(?<prefix>.+)_FWHM_(?<fwhm>-?\d+(?:\.\d+)?)$')
+            $fwhmMatch = [regex]::Match($beforeFocus, '^(?<prefix>.+)_FWHM_(?<fwhm>(?:-?\d+(?:\.\d+)?|NaN))$', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
             if (-not $fwhmMatch.Success) {
                 throw 'Missing or invalid _FWHM_ segment.'
             }
 
-            $result.FwhmObserved = ConvertTo-DSGInvariantDecimal -Value $fwhmMatch.Groups['fwhm'].Value
+            $fwhmValue = $fwhmMatch.Groups['fwhm'].Value
+            if ($fwhmValue -ieq 'NaN') {
+                $result.FwhmObserved = $null
+                $warnings.Add('FWHM is unavailable in the NINA filename (NaN).')
+            }
+            else {
+                $result.FwhmObserved = ConvertTo-DSGInvariantDecimal -Value $fwhmValue
+            }
             $prefix = $fwhmMatch.Groups['prefix'].Value
 
             $suffixPattern = '^(?<head>.+)_(?<filter>[^_]*)_(?<frame>\d+)_(?<date>\d{4}-\d{2}-\d{2})_(?<time>\d{2}-\d{2}-\d{2})$'
