@@ -38,6 +38,7 @@ New-Item -ItemType Directory -Path $runDir -Force | Out-Null
 $results = @()
 $alreadyImportedSkipped = 0
 $deferredNoPlan = 0
+$deferredPlanAction = 0
 $deferredTransportNotReady = 0
 $candidates = New-Object System.Collections.Generic.List[System.IO.FileInfo]
 
@@ -71,6 +72,12 @@ foreach ($manifestFile in $manifestFiles) {
         }
 
         $entry = $planByName[$fileName]
+        $plannedAction = [string]$entry.PlannedAction
+        if ($plannedAction -ne 'COPY_NEW') {
+            $deferredPlanAction++
+            continue
+        }
+
         $destinationPath = [string]$entry.PlannedDestination
         if ([string]::IsNullOrWhiteSpace($destinationPath)) {
             $results += [pscustomobject][ordered]@{
@@ -153,7 +160,7 @@ $resultsPath = Join-Path $runDir 'import-results.csv'
 $results | Export-Csv -LiteralPath $resultsPath -NoTypeInformation -Encoding UTF8
 
 $summary = [pscustomobject][ordered]@{
-    SchemaVersion = '1.0'
+    SchemaVersion = '1.1'
     RunId = $runId
     Mode = 'COPY_ONLY_ONEDRIVE_IMPORT'
     TransferPlanPath = $TransferPlanPath
@@ -162,6 +169,7 @@ $summary = [pscustomobject][ordered]@{
     ReadyManifestsObserved = @($manifestFiles).Count
     AlreadyImportedSkipped = $alreadyImportedSkipped
     DeferredNoPlan = $deferredNoPlan
+    DeferredPlanAction = $deferredPlanAction
     DeferredTransportNotReady = $deferredTransportNotReady
     Requested = @($manifests).Count
     CopiedVerified = @($results | Where-Object { $_.Status -eq 'COPIED_VERIFIED' }).Count
