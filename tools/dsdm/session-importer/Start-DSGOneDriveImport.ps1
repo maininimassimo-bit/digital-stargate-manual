@@ -41,6 +41,10 @@ $deferredNoPlan = 0
 $deferredPlanAction = 0
 $deferredTransportNotReady = 0
 $candidates = New-Object System.Collections.Generic.List[System.IO.FileInfo]
+$allowedPlanActions = @(
+    'COPY_NEW',
+    'REVIEW_DESTINATION_COLLISION'
+)
 
 $manifestFiles = Get-ChildItem -LiteralPath $TransportRoot -Filter '*.ready.json' -File |
     Sort-Object LastWriteTime, Name
@@ -73,7 +77,7 @@ foreach ($manifestFile in $manifestFiles) {
 
         $entry = $planByName[$fileName]
         $plannedAction = [string]$entry.PlannedAction
-        if ($plannedAction -ne 'COPY_NEW') {
+        if ($plannedAction -notin $allowedPlanActions) {
             $deferredPlanAction++
             continue
         }
