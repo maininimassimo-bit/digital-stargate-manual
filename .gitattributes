@@ -14,3 +14,6 @@
 *.ps1 text eol=crlf
 *.bat text eol=crlf
 *.cmd text eol=crlf
+
+# Scientific session raw evidence must remain byte-identical to the manifest SHA-256.
+data/sessions/**/raw/** -text
