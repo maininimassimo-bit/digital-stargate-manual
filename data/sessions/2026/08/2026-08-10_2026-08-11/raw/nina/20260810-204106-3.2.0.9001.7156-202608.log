@@ -1,0 +1,45 @@
+----------------------------------------------------------------------
+--------------N.I.N.A. - Nighttime Imaging 'N' Astronomy--------------
+--------------------------Version 3.2.0.9001--------------------------
+-------------------------2026-08-10T20:46:45--------------------------
+----------------------------------------------------------------------
+---------------------Microsoft Windows 10.0.17763---------------------
+-------------------------OS Architecture X64--------------------------
+-----------------------Process Architecture X64-----------------------
+-----------------------------.NET 8.0.21------------------------------
+----------------------------------------------------------------------
+--------------------------Processor Count 2---------------------------
+--------------------Total Physical Memory 11.68 GB--------------------
+----------------------------------------------------------------------
+DATE|LEVEL|SOURCE|MEMBER|LINE|MESSAGE
+2026-08-10T20:46:45.2024|ERROR|AscomDevice.cs|Connected|147|Pegasus Astro Focus Controller should be connected but reports to be disconnected. Trying to reconnect...
+2026-08-10T22:50:52.7400|ERROR|ASTAPSolver.cs|ReadResult|62|ASTAP - Plate solve failed.
+ Star database limit was reached!
+
+2026-08-10T23:10:25.0742|ERROR|ASTAPSolver.cs|ReadResult|62|ASTAP - Plate solve failed.
+ Star database limit was reached!
+
+2026-08-10T23:39:17.9794|ERROR|ASTAPSolver.cs|ReadResult|62|ASTAP - Plate solve failed.
+ Star database limit was reached!
+
+2026-08-11T00:20:11.9657|ERROR|PHD2Guider.cs|ProcessEvent|937|PHD2 error:timed-out waiting for guider to settle
+2026-08-11T01:05:53.2868|ERROR|ASTAPSolver.cs|ReadResult|62|ASTAP - Plate solve failed.
+ Star database limit was reached!
+
+2026-08-11T01:28:12.6552|ERROR|ASTAPSolver.cs|ReadResult|62|ASTAP - Plate solve failed.
+ Star database limit was reached!
+
+2026-08-11T02:26:34.5510|ERROR|ASTAPSolver.cs|ReadResult|62|ASTAP - Plate solve failed.
+ Star database limit was reached!
+
+2026-08-11T05:00:13.6305|ERROR|ExternalCommandExecutor.cs|RunSequenceCompleteCommandTask|35|Command not found: 
+2026-08-11T05:00:13.6332|ERROR|SequenceItem.cs|Run|263|Category: Utilità, Item: ExternalScript, Script:  - 
+NINA.Core.Model.SequenceEntityFailedException: Comando esterno non è stato eseguito con successo
+   at NINA.Sequencer.SequenceItem.Utility.ExternalScript.Execute(IProgress`1 progress, CancellationToken token) in /_/NINA.Sequencer/SequenceItem/Utility/ExternalScript.cs:line 92
+   at NINA.Sequencer.SequenceItem.SequenceItem.Run(IProgress`1 progress, CancellationToken token) in /_/NINA.Sequencer/SequenceItem/SequenceItem.cs:line 249
+2026-08-11T05:00:13.7781|ERROR|SequenceItem.cs|RunErrorBehavior|190|Instruction Script Esterno failed after 1 attempt. Error behavior is set to SkipToSequenceEndInstructions. Skipping to end of sequence instructions.
+2026-08-11T05:09:32.4950|ERROR|MeridianFlipTrigger.cs|ShouldTrigger|183|Meridian Flip - Telescope is not connected to evaluate if a flip should happen!
+2026-08-11T05:09:32.4958|ERROR|MeridianFlipTrigger.cs|ShouldTrigger|183|Meridian Flip - Telescope is not connected to evaluate if a flip should happen!
+2026-08-11T05:09:32.5639|ERROR|MeridianFlipTrigger.cs|ShouldTrigger|183|Meridian Flip - Telescope is not connected to evaluate if a flip should happen!
+2026-08-11T05:09:32.5769|ERROR|MeridianFlipTrigger.cs|ShouldTrigger|183|Meridian Flip - Telescope is not connected to evaluate if a flip should happen!
+2026-08-11T05:09:32.6650|ERROR|MeridianFlipTrigger.cs|ShouldTrigger|183|Meridian Flip - Telescope is not connected to evaluate if a flip should happen!
