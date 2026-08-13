@@ -4,7 +4,7 @@
     "data/analytics/history/sessions.csv",
     "data/analytics/history/targets.csv"
   ],
-  "catalogStatus": "INITIAL_VERSIONED_PROJECTION",
+  "catalogStatus": "VERSIONED_ANALYTICS_PROJECTION",
   "authoritativeNote": "This catalog is a navigable projection of versioned analytics datasets. Source session records and technical evidence remain authoritative.",
   "sessions": [
     {
@@ -21,7 +21,7 @@
       "gain": 910,
       "offset": 99,
       "exposureSeconds": 600,
-      "integrationHours": 8.0,
+      "integrationHours": 8,
       "targetIntegrationHours": 3.1667,
       "lightStarted": 146,
       "lightCompleted": 48,
@@ -30,7 +30,7 @@
       "severity": "RED",
       "qualityState": "ATTENTION_REQUIRED",
       "transferState": "NOT_REPRESENTED",
-      "manifestState": "NOT_REPRESENTED",
+      "manifestState": "VERSIONED",
       "evidenceState": "SOURCE_METRICS_AVAILABLE",
       "sourceMetricsPath": "data/sessions/2026/07/2026-07-14_2026-07-15/normalized/session-metrics.json"
     },
@@ -57,7 +57,7 @@
       "severity": "GREEN",
       "qualityState": "VALIDATED_ANALYTICS",
       "transferState": "NOT_REPRESENTED",
-      "manifestState": "NOT_REPRESENTED",
+      "manifestState": "VERSIONED",
       "evidenceState": "SOURCE_METRICS_AVAILABLE",
       "sourceMetricsPath": "data/sessions/2026/07/2026-07-15_2026-07-16/normalized/session-metrics.json"
     },
@@ -79,14 +79,41 @@
       "targetIntegrationHours": 5.1667,
       "lightStarted": 63,
       "lightCompleted": 63,
-      "completionPct": 100.0,
+      "completionPct": 100,
       "rmsTotalArcsec": 0.397,
       "severity": "GREEN",
       "qualityState": "VALIDATED_ANALYTICS",
       "transferState": "NOT_REPRESENTED",
-      "manifestState": "NOT_REPRESENTED",
+      "manifestState": "VERSIONED",
       "evidenceState": "SOURCE_METRICS_AVAILABLE",
       "sourceMetricsPath": "data/sessions/2026/07/2026-07-16_2026-07-17/normalized/session-metrics.json"
+    },
+    {
+      "sessionId": "2026-08-10_2026-08-11",
+      "observationDate": "2026-08-10",
+      "start": "2026-08-10T18:00:00",
+      "end": "2026-08-11T07:00:00",
+      "target": "UNKNOWN",
+      "configurationId": "UNKNOWN",
+      "telescope": "UNKNOWN",
+      "camera": "UNKNOWN",
+      "filter": "UNKNOWN",
+      "binning": "UNKNOWN",
+      "gain": null,
+      "offset": null,
+      "exposureSeconds": null,
+      "integrationHours": 0,
+      "targetIntegrationHours": null,
+      "lightStarted": 0,
+      "lightCompleted": 0,
+      "completionPct": null,
+      "rmsTotalArcsec": 0.226,
+      "severity": "GREEN",
+      "qualityState": "VALIDATED_ANALYTICS",
+      "transferState": "NOT_REPRESENTED",
+      "manifestState": "VERSIONED",
+      "evidenceState": "SOURCE_METRICS_AVAILABLE",
+      "sourceMetricsPath": "data/sessions/2026/08/2026-08-10_2026-08-11/normalized/session-metrics.json"
     }
   ]
 }
