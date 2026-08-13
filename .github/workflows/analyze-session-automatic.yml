@@ -2,6 +2,11 @@ name: Analyze Observatory Session Automatically
 
 on:
   workflow_dispatch:
+    inputs:
+      session_id:
+        description: 'Session ID YYYY-MM-DD_YYYY-MM-DD'
+        required: true
+        type: string
   push:
     paths:
       - 'data/sessions/**/manifest.json'
@@ -18,46 +23,78 @@ jobs:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v6
         with:
           python-version: '3.13'
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
 
-      - name: Validate complete session packages
+      - name: Install report dependencies
+        run: python -m pip install --disable-pip-version-check reportlab
+
+      - name: Resolve session
+        id: resolve
+        shell: bash
+        env:
+          MANUAL_ID: ${{ github.event.inputs.session_id }}
+        run: |
+          set -euo pipefail
+          id="$(printf '%s' "${MANUAL_ID:-}" | xargs)"
+          if [[ -z "$id" ]]; then
+            manifest="$(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep -E '^data/sessions/[0-9]{4}/[0-9]{2}/[^/]+/manifest\.json$' | head -n1 || true)"
+            test -n "$manifest" || { echo 'Manifest not identified.'; exit 1; }
+            id="$(basename "$(dirname "$manifest")")"
+          fi
+          [[ "$id" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || { echo "Invalid session ID: $id"; exit 1; }
+          echo "id=$id" >> "$GITHUB_OUTPUT"
+          echo "year=${id:0:4}" >> "$GITHUB_OUTPUT"
+          echo "month=${id:5:2}" >> "$GITHUB_OUTPUT"
+
+      - name: Validate selected session package
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
-          $manifests = Get-ChildItem data/sessions -Filter manifest.json -Recurse
-          if (-not $manifests) { throw 'No session manifest found.' }
-          foreach ($manifestFile in $manifests) {
-            $manifest = Get-Content $manifestFile.FullName -Raw | ConvertFrom-Json
-            if ([string]$manifest.report_status -ne 'COMPLETE') {
-              throw "Session package is not COMPLETE: $($manifest.session_id)"
-            }
-            $root = Split-Path $manifestFile.FullName
-            foreach ($required in @('raw/nina','raw/phd2','raw/weather')) {
-              $requiredPath = Join-Path $root $required
-              if (-not (Test-Path $requiredPath -PathType Container)) {
-                throw "Missing evidence directory: $required in $root"
-              }
-              if (-not (Get-ChildItem $requiredPath -File -Recurse | Select-Object -First 1)) {
-                throw "Missing evidence files: $required in $root"
-              }
-            }
+          $id = '${{ steps.resolve.outputs.id }}'
+          $year = '${{ steps.resolve.outputs.year }}'
+          $month = '${{ steps.resolve.outputs.month }}'
+          $root = Join-Path 'data/sessions' (Join-Path $year (Join-Path $month $id))
+          $manifestPath = Join-Path $root 'manifest.json'
+          if (-not (Test-Path $manifestPath -PathType Leaf)) { throw "Manifest missing: $manifestPath" }
+          $manifest = Get-Content $manifestPath -Raw | ConvertFrom-Json
+          if ([string]$manifest.session_id -ne $id) { throw "Manifest session ID mismatch: $($manifest.session_id)" }
+          if ([string]$manifest.report_status -ne 'COMPLETE') { throw "Session package is not COMPLETE: $id" }
+          foreach ($required in @('raw/nina','raw/phd2','raw/weather')) {
+            $requiredPath = Join-Path $root $required
+            if (-not (Test-Path $requiredPath -PathType Container)) { throw "Missing evidence directory: $required" }
+            if (-not (Get-ChildItem $requiredPath -File -Recurse | Select-Object -First 1)) { throw "Missing evidence files: $required" }
           }
 
-      - name: Analyze sessions
-        run: python dsg-analytics/analyzer/analyze_session.py
-
-      - name: Update analytics history
-        run: python dsg-analytics/history/update_history.py
+      - name: Analyze selected session and update history
+        shell: bash
+        run: |
+          set -euo pipefail
+          id='${{ steps.resolve.outputs.id }}'
+          year='${{ steps.resolve.outputs.year }}'
+          month='${{ steps.resolve.outputs.month }}'
+          session="data/sessions/$year/$month/$id"
+          metrics="$session/normalized/session-metrics.json"
+          report_dir="docs/session-reports/$year/$month/$id"
+          latest_observation='docs/data/realtime/latest-observation.json'
+          python dsg-analytics/analyzer/analyze_session.py --session "$session"
+          mkdir -p "$report_dir"
+          python dsg-analytics/reporter/generate_markdown_report.py --metrics "$metrics" --output "$report_dir/report-sessione.md"
+          python dsg-analytics/reporter/generate_pdf_report.py --metrics "$metrics" --output "$report_dir/Report_Sessione_$id.pdf"
+          python dsg-analytics/history/update_history.py --metrics "$metrics" --history 'data/analytics/history/sessions.csv'
+          python dsg-analytics/reporter/update_latest_observation.py --session "$session" --output "$latest_observation"
 
       - name: Consolidate analytics history
         run: python dsg-analytics/history/consolidate_history.py
@@ -68,14 +105,10 @@ jobs:
       - name: Rebuild target aggregate projection
         run: python dsg-analytics/target/build_targets.py --repo-root .
 
-      - name: Rebuild scientific session catalog
-        run: node .github/scripts/generate-scientific-session-catalog.mjs --write
-
-      - name: Rebuild scientific observation index
-        run: node .github/scripts/generate-scientific-catalog.mjs --write
-
-      - name: Verify deterministic projections
+      - name: Rebuild AP-014 projections
         run: |
+          node .github/scripts/generate-scientific-session-catalog.mjs --write
+          node .github/scripts/generate-scientific-catalog.mjs --write
           node .github/scripts/generate-scientific-session-catalog.mjs --check
           node .github/scripts/generate-scientific-catalog.mjs --check
 
@@ -85,10 +118,15 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- data/analytics data/sessions docs/data/scientific-session-catalog.json docs/data/scientific-observation-index.json
+          git add -- data/sessions data/analytics docs/session-reports docs/data/realtime/latest-observation.json docs/data/scientific-session-catalog.json docs/data/scientific-observation-index.json
           if git diff --cached --quiet; then
             echo 'No analytics or catalog changes to publish.'
             exit 0
           fi
-          git commit -m 'chore(analytics): refresh scientific projections'
-          git push origin HEAD:main
+          git commit -m "chore(analytics): refresh ${{ steps.resolve.outputs.id }} projections"
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep 20
+          done
+          echo 'Push results failed.'
+          exit 1
