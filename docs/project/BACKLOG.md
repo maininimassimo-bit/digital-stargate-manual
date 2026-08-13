@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 1.0 |
+| Versione | 1.1 |
 | Stato | Active |
-| Data baseline | 04/08/2026 |
+| Data baseline | 13/08/2026 |
 
 ## 1. Scopo
 
@@ -41,7 +41,8 @@ Stati ammessi: `Planned`, `Ready`, `In Progress`, `Blocked`, `Done`, `Cancelled`
 | BKL-010 | P1 | Ridurre script inline nel portale | Planned | Inventario pagine con script inline | Moduli JS proprietari e Instant Navigation sicura | TD-002 |
 | BKL-011 | P1 | Completare evidence residue ARB-012-C04 | In Progress | W03/W06/W07 e controlli PRV/ENV | Acceptance formalmente riesaminabile | AP-012 |
 | BKL-012 | P1 | Validare primo unattended AP-013 COPY_ONLY run | In Progress | Scheduler, launcher protetto, evidence | Evidenza operativa prima di ampliare scope | AP-013 |
-| BKL-013 | P1 | Avviare AP-014 Observation Catalog and Search | Planned | Stabilizzazione AP-013 | Package architetturale e catalogo governato | AMP-002 |
+| BKL-013 | P1 | Completare AP-014 Observation Catalog and Search | In Progress | AP14-W01-W06 implementati; W07 OAT aperto | Catalogo/search governati con acceptance operativa reale | AP-014, AP14-W07 |
+| BKL-018 | P0 | Eseguire EAGLE runtime inspection e M27 end-to-end OAT | Ready | Accesso EAGLE; evidence NINA/PHD2/CloudWatcher M27; runtime contract | `AP14-W07-EAGLE-M27-OAT-Result.md` Accepted e `AP-014-Operational-Acceptance.md` Accepted | AP-014, AP14-W07-EAGLE-OAT-001, AP14-INT-EAGLE-PUBLISH-001 |
 | BKL-014 | P2 | Preparare AP-015 Scientific Knowledge Platform | Planned | AP-014 e Knowledge Graph | Architecture Package CAP-40 | AMP-002 |
 | BKL-015 | P2 | Implementare repository Knowledge Graph machine-readable | Planned | Governance Foundation e schema relazioni | Relazioni AP/ADR/component/evidence interrogabili | TD-008, GP-003 |
 | BKL-016 | P2 | Contestualizzare release e guide storiche in root | Planned | Inventario e supersession map | Lineage chiaro e baseline corrente distinguibile | TD-007 |
@@ -57,7 +58,9 @@ Governance Foundation completion
   -> RC1-HF01 Theme Manager
   -> RC1 consolidation
   -> AP-012/AP-013 evidence closure
-  -> AP-014
+  -> AP-014 implementation
+  -> EAGLE runtime inspection + M27 OAT
+  -> AP-014 operational acceptance
   -> AP-015 / Knowledge Graph
 ```
 
