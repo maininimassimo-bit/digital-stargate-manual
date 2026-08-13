@@ -2,7 +2,7 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-08-11",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "6a0099bdde20b034e7d0abcb28fe57a6d4549a68ccbee77851d935015fdbb1c4",
+  "sourceDigest": "bc9f0553a1ff52f7d42764206f6f1fa474de9244f16511da07ade92694f52861",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "AP-014",
@@ -34,7 +34,7 @@
       {"id":"AP-011","title":"Enterprise Analytics Platform Architecture","status":"completed","review":"ARB-011","note":"Approved with conditions, 97/100; analytics runtime is not certified."},
       {"id":"AP-012","title":"Enterprise Operations Center Architecture","status":"completed","review":"ARB-012","note":"Approved with conditions, 96/100; remaining PRV/ENV controls and formal acceptance remain open."},
       {"id":"AP-013","title":"Scientific Image Repository Architecture","evidencePath":".github/roadmap/evidence/AP-013.evidence.json","note":"Completed with conditions. AP-013B COPY_ONLY OneDrive ingestion accepted for limited production; preservation/provenance/migration scale claims remain bounded by ARB-013 conditions.","review":"ARB-013","status":"completed","evidenceStatus":"completed","evidence":{"manifest":".github/roadmap/evidence/AP-013.evidence.json","required":4,"present":4,"accepted":4,"missing":[],"rejected":[]}},
-      {"id":"AP-014","title":"Scientific Observation Catalog and Search","evidencePath":".github/roadmap/evidence/AP-014.evidence.json","note":"AP14-W01–W06 delivered, including PixInsight synchronization and operational hardening; AP14-W07 validation and operational acceptance remain open.","status":"active","evidenceStatus":"active","evidence":{"manifest":".github/roadmap/evidence/AP-014.evidence.json","required":8,"present":7,"accepted":7,"missing":["operational-acceptance"],"rejected":[]}},
+      {"id":"AP-014","title":"Scientific Observation Catalog and Search","evidencePath":".github/roadmap/evidence/AP-014.evidence.json","note":"AP14-W01–W06 delivered, including PixInsight synchronization and operational hardening; AP14-W07 validation and operational acceptance remain open.","status":"active","evidenceStatus":"active","evidence":{"manifest":".github/roadmap/evidence/AP-014.evidence.json","required":10,"present":9,"accepted":8,"missing":["eagle-runtime-inspection"],"rejected":["operational-acceptance"]}},
       {"id":"AP-015","title":"Scientific Knowledge Platform Architecture","status":"planned","note":"CAP-40 Scientific Knowledge Layer."}
     ]}
   ],
