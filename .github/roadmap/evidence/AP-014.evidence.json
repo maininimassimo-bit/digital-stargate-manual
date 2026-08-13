@@ -58,6 +58,24 @@
       "acceptance": { "mode": "exists" }
     },
     {
+      "id": "eagle-runtime-contract",
+      "type": "runtime-contract",
+      "path": "docs/architecture/integration/AP14-EAGLE-Session-Publisher-Runtime-Contract.md",
+      "required": true,
+      "acceptance": { "mode": "exists" }
+    },
+    {
+      "id": "eagle-runtime-inspection",
+      "type": "operational-evidence",
+      "path": "docs/architecture/validation/AP14-W07-EAGLE-M27-OAT-Result.md",
+      "required": true,
+      "acceptance": {
+        "mode": "markdown-field",
+        "field": "Stato",
+        "acceptedValues": ["Accepted"]
+      }
+    },
+    {
       "id": "operational-acceptance",
       "type": "operational-acceptance",
       "path": "docs/architecture/validation/AP-014-Operational-Acceptance.md",
@@ -73,6 +91,7 @@
   "notes": [
     "AP14-W01 through AP14-W05 are represented by the architecture package, generated catalog, search services and CI-protected Search Center tests.",
     "AP14-W06 and AP14-W07 remain required before AP-014 can be promoted to completed.",
+    "AP14-W07 requires real EAGLE runtime conformance and an M27 end-to-end OAT result; repository implementation alone is insufficient.",
     "The roadmap status is derived from governed evidence and must not be inferred from commit messages alone."
   ]
 }
