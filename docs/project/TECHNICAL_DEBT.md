@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEBT-001 |
-| Versione | 1.0 |
+| Versione | 1.1 |
 | Stato | Active |
 
 ## 1. Scopo
@@ -30,6 +30,7 @@ Priorità: `P0` critica, `P1` alta, `P2` media, `P3` bassa.
 | TD-006 | Documentation IA | Project Governance Center non ancora integrato nella nav MkDocs | Documenti canonici difficili da scoprire | P1 | Scheduled | Aggiornare `mkdocs.yml` nello stesso package di chiusura |
 | TD-007 | Release History | Guide e release storiche in root non sempre contestualizzate | Possibile confusione con baseline corrente | P2 | Accepted | Creare indice storico e dichiarare stato/supersession |
 | TD-008 | Knowledge Traceability | Collegamenti AP/ADR/componenti/evidence non ancora machine-readable | Analisi manuale e rischio di gap | P2 | Accepted | GP-003 Knowledge Graph e schema di relazione versionato |
+| TD-009 | EAGLE Reporting Automation | `Invoke-DSGAutomaticSession.ps1`, launcher della task `Digital StarGate - Daily Session Upload`, è una dipendenza runtime documentata ma non è versionata nei repository accessibili | Impossibile ricostruire e validare integralmente l'automazione EAGLE dalla source of truth; rischio di configuration drift e regressioni non tracciate | P1 | Accepted | Ispezionare il file installato sull'EAGLE, acquisire SHA-256 e task definition, riconciliare con `DigitalStarGate.Reporting`, quindi promuovere una baseline governata solo dopo OAT |
 
 ## 4. Criteri di rimozione
 
