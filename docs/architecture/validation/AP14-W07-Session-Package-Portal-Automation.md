@@ -1,26 +1,26 @@
 # AP-014 Session Package to Scientific Portal Automation
 
 - **Identifier:** AP14-W07-AUTO-001
-- **Status:** Implemented, operational evidence pending
-- **Version:** 1.1
+- **Status:** Downstream implemented; EAGLE producer OAT pending
+- **Version:** 1.2
 - **Target:** AP-014 / RC3 readiness
-- **Dependencies:** AP-013B OneDrive ingestion, versioned session packages, DSG Analytics v2.8, AP-014 catalog projections
+- **Dependencies:** DigitalStarGate.Reporting, versioned session packages, DSG Analytics v2.8, AP-014 catalog projections
 
 ## Purpose
 
-Close the governed automation gap between an operational scientific-file import and the AP-014 Scientific Portal without making the operational filesystem an AP-014 source of truth.
+Close the governed automation gap between the EAGLE-produced session package and the AP-014 Scientific Portal without making XISF transport or the operational image repository an AP-014 source of truth.
 
 ## Architecture rule
 
-The portal remains a projection of versioned scientific analytics. XISF filenames, transfer plans, OneDrive READY manifests and `F:\Astrofotografia` are not direct catalog inputs and must not be used to invent quality, guiding, weather or scientific metrics.
+The EAGLE is the producer of NINA, PHD2 and CloudWatcher evidence and of the governed session package. The PC Principale remains the development/integration and downstream analytics environment. AP-013B XISF transport is a separate data path.
 
 ## Target flow
 
 ```mermaid
 flowchart TD
-    A[AP-013B scientific file import] --> B[PC Principale session publisher]
-    B --> C{NINA + PHD2 + weather complete?}
-    C -- No --> D[DEFERRED: evidence only, no repository publication]
+    A[NINA + PHD2 + CloudWatcher on EAGLE] --> B[DigitalStarGate.Reporting Import-DSGSession]
+    B --> C{Package COMPLETE?}
+    C -- No --> D[PARTIAL / NO_SESSION: no AP-014 promotion]
     C -- Yes --> E[Versioned data/sessions manifest]
     E --> F[Automatic analytics]
     F --> G[sessions.csv]
@@ -32,58 +32,46 @@ flowchart TD
     K --> L[GitHub Pages]
 ```
 
-## Implementation
+## Verified producer
 
-1. `tools/dsdm/session-importer/Publish-DSGSessionPackage.ps1` is the PC Principale bridge. It reads an external production configuration, collects only NINA/PHD2/weather evidence into temporary staging, and publishes only when all three evidence streams are present.
-2. Publication is additive. Existing identical files are accepted; an existing file with different SHA-256 aborts publication rather than overwriting evidence.
-3. `tools/dsdm/session-importer/Start-DSGPreviousNightSessionPublish.ps1` provides the scheduler-friendly previous-night wrapper. No scheduler is installed by repository code.
-4. `scripts/reporting/Common.ps1` and `Export-WeatherWindow.ps1` remain the canonical manifest/weather helpers.
-5. `.github/workflows/analyze-session-automatic.yml` validates the selected versioned package, runs analytics/report/history/target projections, regenerates both AP-014 catalog projections and commits the derived outputs.
-6. `.github/scripts/generate-scientific-session-catalog.mjs` deterministically derives the AP-014 session catalog from `sessions.csv` and `targets.csv`.
-7. `.github/workflows/session-publisher-contract.yml` validates publisher PowerShell syntax on Windows and validates the sample configuration contract.
+The certified `maininimassimo-bit/DigitalStarGate.Reporting` module is the existing session-package producer. Its configuration uses the EAGLE `PrimaLuceLab` NINA/PHD2 paths and the local CloudWatcher CSV. `Import-DSGSession` copies the three evidence streams into the session package, writes `manifest.json` and sets `COMPLETE`, `PARTIAL` or `NO_SESSION` according to actual evidence.
 
-## Production configuration
+The detailed alignment and M 27 OAT sequence are recorded in `AP14-W07-EAGLE-Session-Package-Producer.md`.
 
-Production filesystem paths are intentionally not stored in Git. Copy `tools/dsdm/session-importer/session-publisher.sample.json` to:
+## Downstream implementation
 
-`%USERPROFILE%\DSG-Inventory\SessionPublisher\session-publisher.production.json`
+1. A versioned `data/sessions/**/manifest.json` is the trigger boundary for AP-014 processing.
+2. `.github/workflows/analyze-session-automatic.yml` validates package completeness, runs analytics/report/history/target projections, regenerates the scientific session catalog and observation index, verifies deterministic output, and commits only derived versioned projections.
+3. `.github/scripts/generate-scientific-session-catalog.mjs` deterministically derives the AP-014 session catalog from `sessions.csv` and `targets.csv`.
+4. `.github/scripts/generate-scientific-catalog.mjs` remains the observation-index generator from the session catalog.
+5. AP-013B continues to transport XISF files independently to `F:\Astrofotografia`; those files are not used to synthesize missing NINA/PHD2/weather evidence.
 
-and replace the placeholder paths with the actual PC Principale locations for the repository clone, NINA logs, PHD2 logs and CloudWatcher CSV.
+## Superseded implementation note
 
-## M 27 OAT command
-
-After the production configuration is populated on PC Principale, the governed M 27 OAT command is:
-
-```powershell
-pwsh -File .\tools\dsdm\session-importer\Publish-DSGSessionPackage.ps1 `
-  -SessionStart '2026-08-10T18:00:00' `
-  -SessionEnd '2026-08-11T08:00:00'
-```
-
-The exact time window may be adjusted to the actual observing session before execution. The publisher never derives NINA/PHD2/weather evidence from the 34 XISF files.
+The PC-side collector introduced in commit `5d9f954e0cff39b5ac85a5f7db64e6a8d0891a4f` was based on an incorrect ownership assumption and is superseded by this architecture correction. It must not be deployed or scheduled. The authoritative producer is the existing EAGLE reporting flow.
 
 ## Fail-safe and idempotency rules
 
-- Incomplete evidence produces `DEFERRED_INCOMPLETE_EVIDENCE` and no repository publication.
-- Missing NINA, PHD2 or weather evidence stops publication/analytics.
+- `PARTIAL` and `NO_SESSION` are not promoted into AP-014 analytics/catalog projections.
+- Missing NINA, PHD2 or weather evidence is never inferred from XISF filenames or AP-013B transport metadata.
 - No quality metric is synthesized when analytics does not provide it.
-- Re-running with unchanged evidence is a no-op.
-- Existing differing evidence is never overwritten.
-- Scientific XISF files are never deleted, overwritten or moved by this slice.
-- AP-013B transport/import behavior is unchanged.
-- The workflow does not recursively trigger itself because its projection commit does not modify a session manifest and bot-triggered runs are excluded.
+- Scientific XISF files are never deleted, overwritten or moved by AP-014.
+- AP-013B transport/import behavior remains unchanged.
+- Re-running deterministic downstream projections with unchanged inputs produces no new projection commit.
 
 ## Validation matrix
 
 | Check | Status |
 | --- | --- |
-| Session catalog generator deterministic check | PASS |
-| Developer Foundation on implementation HEAD | PASS |
-| GitHub Pages deployment on implementation HEAD | PASS |
-| PC publisher Windows syntax/contract | CI added |
-| M 27 evidence package | BLOCKED until real NINA/PHD2/weather paths/evidence are available on PC Principale |
-| M 27 end-to-end analytics/catalog OAT | Pending package publication |
+| EAGLE responsibility documented in EA-001 | VERIFIED |
+| DigitalStarGate.Reporting EAGLE paths | VERIFIED |
+| Import-DSGSession package/evidence behavior | VERIFIED |
+| AP-013B XISF transport separation | VERIFIED |
+| AP-014 downstream analytics/catalog automation | IMPLEMENTED |
+| Actual EAGLE scheduled reporting task/script | TO INSPECT / OAT |
+| M 27 EAGLE package | OAT PENDING |
+| M 27 end-to-end analytics/catalog | Pending package publication |
 
 ## Acceptance criteria
 
-The slice is operationally accepted only when a complete M 27 session package is published from real PC Principale evidence and the automatic chain creates versioned analytics containing that session, regenerates both AP-014 projections, passes CI, deploys Pages, and shows M 27 without manual catalog edits.
+The slice is operationally accepted only when the existing EAGLE reporting automation produces a real `COMPLETE` M 27 session package, versions it to the authoritative repository, and the downstream automatic chain creates analytics containing that session, regenerates both AP-014 projections, passes CI, deploys Pages, and shows M 27 without manual catalog edits.
