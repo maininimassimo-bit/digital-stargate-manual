@@ -4,7 +4,7 @@
 |---|---|
 | Documento | AP14-W07 EAGLE M27 OAT Result |
 | Identificativo | AP14-W07-EAGLE-M27-OAT-RESULT |
-| Versione | 1.2 |
+| Versione | 1.3 |
 | Data | 2026-08-13 |
 | Stato | Pending |
 | Owner | Digital StarGate Architecture Office |
@@ -55,43 +55,46 @@ Historical deviations from AP14-INT-EAGLE-PUBLISH-001 were confirmed:
 - Runtime clone: `C:\DigitalStarGate\digital-stargate-manual-ap14-runtime`.
 - Branch: `main`.
 - Clone HEAD at creation/verification: `7e8a57884cf740ae1a3584e044144f7234c795b4`.
-- `HEAD...origin/main = 0 0` at verification.
-- Working tree clean at verification.
+- `HEAD...origin/main = 0 0` at creation.
+- Working tree was restored to clean after removing the obsolete untracked `templates/reporting/reporting.config.psd1` created by the pre-fix installer.
 
 ### Reporting runtime reconciliation
 
-- Governed Reporting source repository synchronized to commit `f27330da5f4e8363fcfea9af2ccfa808592091b7` for installation logic and later `5b82235bd1aab21bfac5f47a11c38538ee3f264b` for task deployment logic.
 - Reporting `1.0.4` installed successfully at `C:\Users\PrimaLuceLab\Documents\WindowsPowerShell\Modules\DigitalStarGate.Reporting\1.0.4`.
-- Effective Reporting configuration installed at `C:\DigitalStarGate\digital-stargate-manual-ap14-runtime\templates\reporting\reporting.config.psd1`.
-- Effective `RepositoryRoot`: `C:\DigitalStarGate\digital-stargate-manual-ap14-runtime`.
+- Reporting source repository advanced through:
+  - `fedb5564fc1009dd356f20d7c5739fc4ca4cc1e6` — actual EAGLE CloudWatcher source path;
+  - `0b7edd2f1d175b157d4ba52fb1cedbbdb52103ed` — runtime config kept outside Git working tree;
+  - `518a91bd17c9d4dbb055c7febc158edeac03ae27` — task default aligned to external runtime config.
+- Runtime config: `C:\DigitalStarGate\Automation\reporting.config.psd1`.
+- Effective RepositoryRoot: `C:\DigitalStarGate\digital-stargate-manual-ap14-runtime`.
 - NINA source: `C:\Users\PrimaLuceLab\AppData\Local\NINA\Logs`.
 - PHD2 source: `C:\Users\PrimaLuceLab\Documents\PHD2`.
-- Weather source: `C:\DigitalStarGate\Weather\CloudWatcher.csv`.
+- CloudWatcher source: `C:\Users\PrimaLuceLab\Documents\CloudWatcher\CloudWatcher.csv`.
+- CloudWatcher source existence check: PASS.
+- Runtime repository remained clean after external-config installation: PASS.
 
 ### Scheduled Task cutover
 
 Cutover completed successfully on the physical EAGLE.
 
 - Task: `Digital StarGate - Daily Session Upload`.
-- State after cutover: `Ready`.
+- State: `Ready`.
 - UserId: `PrimaLuceLab`.
 - LogonType: `S4U`.
 - RunLevel: `Highest`.
 - Execute: `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe`.
-- Arguments: `-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "C:\DigitalStarGate\Automation\Invoke-DSGAutomaticSession.ps1" -ConfigPath "C:\DigitalStarGate\digital-stargate-manual-ap14-runtime\templates\reporting\reporting.config.psd1"`.
+- Arguments: `-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "C:\DigitalStarGate\Automation\Invoke-DSGAutomaticSession.ps1" -ConfigPath "C:\DigitalStarGate\Automation\reporting.config.psd1"`.
 - WorkingDirectory: `C:\DigitalStarGate\Automation`.
-- Trigger start boundary after cutover: `2026-08-13T07:20:00+02:00`; enabled.
-- Next run observed: `2026-08-14 07:20:20` local.
-- `LastTaskResult = 1` remains the historical pre-cutover run result and is not evidence of the new runtime behavior.
-- Runtime launcher SHA-256 after cutover: `7CCA0699E880F5F416D535B24834B6EC8C413EE197EF3CFFAEE6EE60FAA4A110`.
+- Trigger: daily `07:20` local; enabled.
+- Next run observed after final alignment: `2026-08-14 07:20:20` local.
+- `LastTaskResult = 1` remains the historical pre-cutover result and is not evidence of the new runtime behavior.
+- Runtime launcher SHA-256: `7CCA0699E880F5F416D535B24834B6EC8C413EE197EF3CFFAEE6EE60FAA4A110`.
 - Governed source launcher SHA-256: `7CCA0699E880F5F416D535B24834B6EC8C413EE197EF3CFFAEE6EE60FAA4A110`.
 - Source/runtime SHA-256 equality: PASS.
 
 ### Runtime conformance assessment after cutover
 
-**Installed runtime configuration: CONFORMANT BY INSPECTION with AP14-INT-EAGLE-PUBLISH-001; operational execution evidence remains pending.**
-
-The installed launcher/task/config now satisfy the structural runtime contract for unattended execution, governed repository root, Reporting 1.0.4, and governed launcher identity. M27 replay and a successful scheduled execution are still required before operational acceptance.
+**Installed runtime configuration: CONFORMANT BY INSPECTION with AP14-INT-EAGLE-PUBLISH-001; scheduled operational execution evidence remains pending.**
 
 Runtime evidence bundle from pre-cutover inspection:
 
@@ -99,27 +102,44 @@ Runtime evidence bundle from pre-cutover inspection:
 
 ## 3. M27 source evidence
 
-- Actual session start: PENDING — must be derived from NINA/PHD2 evidence.
-- Actual session end: PENDING — must be derived from NINA/PHD2 evidence.
-- NINA evidence count in broad inspection window: `1` file.
-- PHD2 evidence count in broad inspection window: `2` files.
-- CloudWatcher evidence: source exists and is actively locked by CloudWatcher; hash unavailable while producer holds the file.
-- Source evidence observations: evidence presence is confirmed, but the exact scientific session window has not yet been derived from content/timestamps and no package has yet been generated.
+Evidence-derived observations for the M 27 session:
 
-The actual observing window must be derived from NINA/PHD2 evidence. A nominal 19:00-06:00 window must not be treated as authoritative without confirmation.
+- NINA log found: `20260810-204106-3.2.0.9001.7156-202608.log`.
+- NINA log header timestamp: `2026-08-10T20:46:45`.
+- NINA activity observed through at least `2026-08-11T05:09:32`.
+- PHD2 DebugLog and GuideLog found for the same night.
+- PHD2 guiding begins: `2026-08-10 22:18:22`.
+- PHD2 guiding ends: `2026-08-11 05:00:14`.
+- CloudWatcher source confirmed at `C:\Users\PrimaLuceLab\Documents\CloudWatcher\CloudWatcher.csv`.
+- CloudWatcher source is a long-running historical CSV containing Date/Time, cloud/rain/brightness conditions, ambient temperature, wind, humidity, dew point, pressure and Safe Status.
+- Broad M27 weather check found `3960` rows between `2026-08-10 20:00` and `2026-08-11 06:59`.
+- First inspected M27 weather row: `2026-08-10 20:00:05`.
+- Last inspected M27 weather row: `2026-08-11 06:59:56`.
+
+Controlled package window selected for replay:
+
+- SessionStart: `2026-08-10 20:00:00` local.
+- SessionEnd: `2026-08-11 06:00:00` local.
+
+This window safely contains the real NINA/PHD2 observing activity while avoiding the non-scientific PHD2 application-open tail through 09:42.
 
 ## 4. Session package result
 
-- Session ID: PENDING
-- `Import-DSGSession` preview status: PENDING
-- `Import-DSGSession -CopyToRepository` status: PENDING
-- Manifest path: PENDING
-- Manifest SHA-256 verification: PENDING
-- NINA package evidence: PENDING
-- PHD2 package evidence: PENDING
-- Weather package evidence: PENDING
+Controlled preview executed on the EAGLE without `-CopyToRepository`.
 
-Acceptance requires `Status = COMPLETE`.
+- Session ID: `2026-08-10_2026-08-11`.
+- Staging root: `C:\DigitalStarGate\SessionReports\incoming\2026\08\2026-08-10_2026-08-11`.
+- `Import-DSGSession` preview status: **COMPLETE / PASS**.
+- NINA files packaged: `1`.
+- PHD2 files packaged: `2`.
+- Weather file: `raw\weather\CloudWatcher_2026-08-10_2026-08-11.csv`.
+- Weather rows exported for the controlled 20:00-06:00 package window: `3600`.
+- Source weather coverage in the broader 20:00-06:59 inspection window: `3960` rows.
+- `Import-DSGSession -CopyToRepository` status: PENDING.
+- Manifest SHA-256 verification: PENDING.
+- Repository package content/hash verification against staging: PENDING.
+
+Acceptance gate `Status = COMPLETE` is satisfied for the staging preview.
 
 ## 5. Publication and promotion
 
@@ -154,20 +174,23 @@ No manual catalog or page edit is permitted for acceptance.
 
 ## 8. Safety and idempotency checks
 
-- Scientific XISF files unchanged through inspection/cutover: PASS.
-- AP-013B transport/import unchanged through inspection/cutover: PASS.
+- Scientific XISF files unchanged through inspection/cutover/preview: PASS.
+- AP-013B transport/import unchanged: PASS.
 - No source NINA/PHD2/weather evidence deleted: PASS.
 - No force push/history rewrite: PASS.
 - Historical runtime rollback package retained: PASS.
+- Preview performed only in staging: PASS.
+- Runtime Git working tree clean before repository-copy gate: PASS.
 - Re-run behavior idempotent: PENDING.
 - PARTIAL/NO_SESSION protection verified in production: PENDING.
 
 ## 9. CI/quality gates
 
-- `digital-stargate-manual` baseline workflow gate before EAGLE inspection: PASS on the previously validated main baseline.
 - Reporting collector/locked-weather Quality Gate run `31694911434`: PASS on `591984ae9cbb6e7b4d54ef3ab6a696fb2a98e700`.
 - Reporting repository-root installer Quality Gate run `31696735200`: PASS on `f27330da5f4e8363fcfea9af2ccfa808592091b7`.
 - Reporting unattended-task semantics Quality Gate run `31697194103`: PASS on `5b82235bd1aab21bfac5f47a11c38538ee3f264b`.
+- Reporting actual CloudWatcher path Quality Gate run `31698320816`: PASS on `fedb5564fc1009dd356f20d7c5739fc4ca4cc1e6`.
+- Quality gates for external-runtime-config commits `0b7edd2f...` / `518a91bd...`: verification required before final OAT acceptance.
 - Post-OAT Developer Foundation: PENDING.
 - Post-OAT Pages: PENDING.
 
@@ -175,6 +198,6 @@ No manual catalog or page edit is permitted for acceptance.
 
 **Stato: Pending**
 
-EAGLE runtime inspection and structural reconciliation are complete. The new task/runtime is conformant by inspection but has not yet produced accepted operational evidence. The next gate is the controlled M27 replay using the actual session window derived from real NINA/PHD2 evidence.
+The EAGLE runtime is structurally reconciled and the M27 staging preview is COMPLETE with real NINA, PHD2 and CloudWatcher evidence. The next gate is a controlled repository copy followed by manifest/content/hash verification before any branch publication.
 
-This record may be changed to `Accepted` only when all mandatory session, promotion, analytics, portal and safety evidence is recorded and verifiable.
+This record may be changed to `Accepted` only when all mandatory repository-copy, promotion, analytics, portal, idempotency and scheduled-runtime evidence is recorded and verifiable.
