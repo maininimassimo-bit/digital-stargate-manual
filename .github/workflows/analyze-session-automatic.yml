@@ -118,21 +118,49 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- data/sessions data/analytics docs/session-reports docs/data/realtime/latest-observation.json docs/data/scientific-session-catalog.json docs/data/scientific-observation-index.json
+
+          governed_paths=(
+            data/sessions
+            data/analytics
+            docs/session-reports
+            docs/data/realtime/latest-observation.json
+            docs/data/scientific-session-catalog.json
+            docs/data/scientific-observation-index.json
+          )
+
+          git add -- "${governed_paths[@]}"
+
           if git diff --cached --quiet; then
             echo 'No analytics or catalog changes to publish.'
-          else
-            git commit -m "chore(analytics): refresh ${{ steps.resolve.outputs.id }} projections"
-            pushed=0
-            for attempt in 1 2 3 4 5; do
-              if git pull --rebase origin main && git push origin HEAD:main; then
-                pushed=1
-                break
-              fi
-              sleep 20
-            done
-            test "$pushed" -eq 1 || { echo 'Push results failed.'; exit 1; }
+            exit 0
           fi
+
+          git commit -m "chore(analytics): refresh ${{ steps.resolve.outputs.id }} projections"
+
+          # A second normalization pass absorbs any governed files that become
+          # dirty after the first commit because of repository EOL attributes.
+          git add -- "${governed_paths[@]}"
+          if ! git diff --cached --quiet; then
+            git commit --amend --no-edit
+          fi
+
+          if [[ -n "$(git status --porcelain --untracked-files=all)" ]]; then
+            echo 'Unexpected dirty workspace after governed analytics commit:'
+            git status --short --untracked-files=all
+            exit 1
+          fi
+
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            if git rebase origin/main && git push origin HEAD:main; then
+              pushed=1
+              break
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep 20
+          done
+          test "$pushed" -eq 1 || { echo 'Push results failed.'; exit 1; }
 
       - name: Deploy refreshed portal
         env:
