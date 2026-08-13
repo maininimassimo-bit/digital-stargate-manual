@@ -62,12 +62,12 @@ jobs:
             throw "Session package is not COMPLETE: $id"
           }
 
-          foreach ($required in @('raw/nina','raw/phd2','raw/weather','report')) {
+          foreach ($required in @('raw/nina','raw/phd2','raw/weather')) {
             $requiredPath = Join-Path $root $required
             if (-not (Test-Path $requiredPath -PathType Container)) {
-              throw "Missing required directory: $required"
+              throw "Missing required evidence directory: $required"
             }
-            if ($required -ne 'report' -and -not (Get-ChildItem $requiredPath -File -Recurse | Select-Object -First 1)) {
+            if (-not (Get-ChildItem $requiredPath -File -Recurse | Select-Object -First 1)) {
               throw "Missing evidence files: $required"
             }
           }
