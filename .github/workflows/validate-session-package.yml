@@ -6,6 +6,11 @@ on:
     paths:
       - 'data/sessions/**'
       - 'docs/session-reports/**'
+  pull_request:
+    paths:
+      - 'data/sessions/**'
+      - 'docs/session-reports/**'
+      - '.github/workflows/validate-session-package.yml'
 
 jobs:
   validate:
