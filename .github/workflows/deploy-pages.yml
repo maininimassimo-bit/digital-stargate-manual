@@ -54,7 +54,10 @@ jobs:
           fi
 
       - name: Build documentation
-        run: mkdocs build --strict
+        run: mkdocs build --strict --config-file mkdocs.pages.yml
+
+      - name: Verify published-site integrity
+        run: python .github/scripts/verify-published-site.py --site site
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
