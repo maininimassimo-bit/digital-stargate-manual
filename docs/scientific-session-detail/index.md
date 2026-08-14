@@ -24,6 +24,11 @@
     <span>WEATHER CONDITIONS</span>
     <h2>Condizioni meteo della sessione</h2>
     <div class="dsg-session-weather" data-detail-weather></div>
+    <div class="dsg-session-weather-detail" data-detail-weather-detail></div>
+    <div class="dsg-session-weather-chart" data-detail-weather-chart hidden>
+      <div class="dsg-session-weather-chart__legend"><span>Temperatura</span><span>Umidità</span><span>Dew point</span></div>
+      <svg viewBox="0 0 1000 260" role="img" aria-label="Andamento meteo CloudWatcher della sessione" data-detail-weather-svg></svg>
+    </div>
     <p class="dsg-session-detail__note" data-detail-weather-note></p>
   </section>
 
@@ -31,24 +36,11 @@
     <span>KNOWLEDGE GRAPH</span>
     <h2>Relazioni della sessione</h2>
     <div class="dsg-session-graph" data-detail-graph></div>
-    <p class="dsg-session-detail__note">
-      Il grafo rappresenta soltanto relazioni presenti nel catalogo attuale. Manifest, transfer,
-      processing e publication restano esplicitamente non rappresentati quando non disponibili.
-    </p>
+    <p class="dsg-session-detail__note">Il grafo rappresenta soltanto relazioni presenti nel catalogo attuale. Manifest, transfer, processing e publication restano esplicitamente non rappresentati quando non disponibili.</p>
   </section>
 
-  <section class="dsg-session-detail__section">
-    <span>DATA LINEAGE</span>
-    <h2>Catena informativa corrente</h2>
-    <div class="dsg-session-lineage" data-detail-lineage></div>
-  </section>
-
-  <section class="dsg-session-detail__section">
-    <span>EVIDENCE &amp; SOURCES</span>
-    <h2>Collegamenti autorevoli</h2>
-    <div class="dsg-session-detail__sources" data-detail-sources></div>
-  </section>
-
+  <section class="dsg-session-detail__section"><span>DATA LINEAGE</span><h2>Catena informativa corrente</h2><div class="dsg-session-lineage" data-detail-lineage></div></section>
+  <section class="dsg-session-detail__section"><span>EVIDENCE &amp; SOURCES</span><h2>Collegamenti autorevoli</h2><div class="dsg-session-detail__sources" data-detail-sources></div></section>
   <section class="dsg-session-detail__error" data-detail-error hidden></section>
 </div>
 
