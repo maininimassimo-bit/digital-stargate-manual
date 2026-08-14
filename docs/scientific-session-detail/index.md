@@ -21,6 +21,13 @@
   </section>
 
   <section class="dsg-session-detail__section">
+    <span>WEATHER CONDITIONS</span>
+    <h2>Condizioni meteo della sessione</h2>
+    <div class="dsg-session-weather" data-detail-weather></div>
+    <p class="dsg-session-detail__note" data-detail-weather-note></p>
+  </section>
+
+  <section class="dsg-session-detail__section">
     <span>KNOWLEDGE GRAPH</span>
     <h2>Relazioni della sessione</h2>
     <div class="dsg-session-graph" data-detail-graph></div>
