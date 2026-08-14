@@ -34,6 +34,11 @@
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
 
+    const isKnown = (value) => {
+      const normalized = String(value ?? '').trim().toUpperCase();
+      return Boolean(normalized) && normalized !== 'UNKNOWN' && normalized !== 'N/A';
+    };
+    const displayValue = (value, fallback = 'Non disponibile') => isKnown(value) ? value : fallback;
     const dec = (value, digits = 2) => Number(value || 0).toFixed(digits).replace('.', ',');
     const displayDate = (value) => {
       const date = new Date(`${value}T00:00:00`);
@@ -49,6 +54,15 @@
       </article>`;
 
     const renderGraph = (session, graphModel) => {
+      const equipment = graphModel.equipment.filter((item) => isKnown(item.label));
+      const equipmentNodes = equipment.length
+        ? equipment.map((item) => {
+            if (item.type === 'TELESCOPE') return node(item.type, item.label, displayValue(session.configurationId));
+            if (item.type === 'CAMERA') return node(item.type, item.label, isKnown(session.binning) ? `${session.binning}${session.gain !== null ? ` · gain ${session.gain}` : ''}` : 'Metadata parziali');
+            return node(item.type, item.label, session.exposureSeconds !== null ? `${session.exposureSeconds} s exposures` : 'Metadata parziali');
+          }).join('')
+        : node('EQUIPMENT', 'Metadata non attestati', session.metadataState || 'INCOMPLETE', 'is-missing');
+
       graph.innerHTML = `
         <div class="dsg-graph-row">
           ${node(graphModel.target.type, graphModel.target.label, 'Scientific object', 'is-target')}
@@ -58,11 +72,7 @@
           ${node(graphModel.session.type, graphModel.session.label, displayDate(session.observationDate), 'is-session')}
         </div>
         <div class="dsg-graph-connector">↓ acquired with</div>
-        <div class="dsg-graph-row dsg-graph-row--triple">
-          ${node(graphModel.equipment[0].type, graphModel.equipment[0].label, session.configurationId)}
-          ${node(graphModel.equipment[1].type, graphModel.equipment[1].label, `${session.binning} · gain ${session.gain}`)}
-          ${node(graphModel.equipment[2].type, graphModel.equipment[2].label, `${session.exposureSeconds} s exposures`)}
-        </div>
+        <div class="dsg-graph-row dsg-graph-row--triple">${equipmentNodes}</div>
         <div class="dsg-graph-connector">↓ produces</div>
         <div class="dsg-graph-row dsg-graph-row--triple">
           ${graphModel.outputs.map((output) => node(
@@ -85,26 +95,31 @@
 
     const render = (session) => {
       title.textContent = `${session.target} · ${session.sessionId}`;
-      subtitle.textContent = `${displayDate(session.observationDate)} · ${session.telescope} · ${session.camera}`;
+      const subtitleParts = [displayDate(session.observationDate)];
+      if (isKnown(session.telescope)) subtitleParts.push(session.telescope);
+      if (isKnown(session.camera)) subtitleParts.push(session.camera);
+      if (session.qualityState === 'METADATA_INCOMPLETE') subtitleParts.push('metadata scientifici incompleti');
+      subtitle.textContent = subtitleParts.join(' · ');
 
       summary.innerHTML = [
-        metric('Qualità', session.qualityState),
+        metric('Qualità catalogo', session.qualityState),
+        metric('Esito analytics', session.analyticsState || session.severity),
         metric('Integrazione', `${dec(session.integrationHours)} h`),
-        metric('Completamento', `${dec(session.completionPct)}%`),
         metric('RMS totale', `${dec(session.rmsTotalArcsec, 3)}″`)
       ].join('');
 
       const fields = [
         ['Session ID', session.sessionId],
         ['Data osservativa', displayDate(session.observationDate)],
-        ['Configuration ID', session.configurationId],
-        ['Target', session.target],
-        ['Telescopio', session.telescope],
-        ['Camera', session.camera],
-        ['Filtro', session.filter],
-        ['Binning', session.binning],
-        ['Gain / Offset', `${session.gain} / ${session.offset}`],
-        ['Esposizione', `${session.exposureSeconds} s`],
+        ['Metadata state', session.metadataState || 'UNREGISTERED'],
+        ['Configuration ID', displayValue(session.configurationId)],
+        ['Target', displayValue(session.target)],
+        ['Telescopio', displayValue(session.telescope)],
+        ['Camera', displayValue(session.camera)],
+        ['Filtro', displayValue(session.filter)],
+        ['Binning', displayValue(session.binning)],
+        ['Gain / Offset', session.gain !== null || session.offset !== null ? `${session.gain ?? '—'} / ${session.offset ?? '—'}` : 'Non disponibile'],
+        ['Esposizione', session.exposureSeconds !== null ? `${session.exposureSeconds} s` : 'Non disponibile'],
         ['Light completati', `${session.lightCompleted} / ${session.lightStarted}`],
         ['Evidence state', session.evidenceState]
       ];
