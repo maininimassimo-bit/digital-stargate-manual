@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    paths:
+      - '.github/workflows/word.yml'
+      - 'build.ps1'
+      - 'docs/**'
   workflow_dispatch:
 
 jobs:
@@ -14,22 +19,24 @@ jobs:
       - name: Recupera repository
         uses: actions/checkout@v4
 
-      - name: Installa Pandoc con retry
+      - name: Verifica Pandoc e fallback Chocolatey
         shell: powershell
         run: |
           $ErrorActionPreference = 'Stop'
 
           if (Get-Command pandoc -ErrorAction SilentlyContinue) {
+            Write-Host 'Pandoc gia disponibile sul runner.'
             pandoc --version
             exit 0
           }
 
+          Write-Warning 'Pandoc non presente sul runner; uso Chocolatey come fallback.'
           $maxAttempts = 3
           for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
             Write-Host "Tentativo $attempt di $maxAttempts per installare Pandoc..."
             choco install pandoc -y --no-progress
 
-            if (Get-Command pandoc -ErrorAction SilentlyContinue) {
+            if ($LASTEXITCODE -eq 0 -and (Get-Command pandoc -ErrorAction SilentlyContinue)) {
               pandoc --version
               exit 0
             }
@@ -39,7 +46,7 @@ jobs:
             }
           }
 
-          throw 'Pandoc non disponibile dopo 3 tentativi di installazione.'
+          throw 'Pandoc non disponibile sul runner e fallback Chocolatey non riuscito.'
 
       - name: Genera documento Word
         shell: powershell
