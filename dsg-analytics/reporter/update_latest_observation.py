@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 """Generate docs/data/realtime/latest-observation.json from a completed session.
 
-The updater intentionally separates stable metrics from best-effort astronomical
-metadata. Metrics come from normalized/session-metrics.json. Target name and
-coordinates are extracted from N.I.N.A. logs when recognizable; otherwise the
-existing latest-observation.json values are preserved.
+Stable metrics come from normalized/session-metrics.json. Astronomical metadata
+is resolved only from sources belonging to the selected session: first from the
+governed scientific metadata registry, then from recognizable N.I.N.A. log
+content. Metadata from a previous observation is never inherited.
 """
 
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import re
 from datetime import datetime, timezone
@@ -99,6 +100,40 @@ def extract_astronomical_metadata(session_dir: Path) -> tuple[str | None, float 
     return target, ra, dec
 
 
+def find_repo_root(session_dir: Path) -> Path | None:
+    current = session_dir.resolve()
+    for candidate in (current, *current.parents):
+        if (candidate / "data" / "analytics").exists() and (candidate / ".github").exists():
+            return candidate
+    return None
+
+
+def read_governed_metadata(session_dir: Path) -> dict[str, str]:
+    repo_root = find_repo_root(session_dir)
+    if repo_root is None:
+        return {}
+
+    registry = repo_root / "data" / "analytics" / "metadata" / "session-scientific-metadata.csv"
+    if not registry.exists():
+        return {}
+
+    with registry.open("r", encoding="utf-8-sig", newline="") as handle:
+        for row in csv.DictReader(handle):
+            if str(row.get("session_id") or "").strip() == session_dir.name:
+                return {key: str(value or "").strip() for key, value in row.items()}
+    return {}
+
+
+def float_or_none(value: str | None) -> float | None:
+    text = str(value or "").strip()
+    if not text:
+        return None
+    try:
+        return float(text)
+    except ValueError:
+        return None
+
+
 def relative_report_url(session_id: str) -> str:
     year = session_id[0:4]
     month = session_id[5:7]
@@ -111,24 +146,36 @@ def build_payload(
     existing: dict[str, Any],
 ) -> dict[str, Any]:
     session_id = str(metrics.get("session_id") or session_dir.name)
-    old_target = existing.get("target") if isinstance(existing.get("target"), dict) else {}
     old_sky = existing.get("sky_view") if isinstance(existing.get("sky_view"), dict) else {}
 
+    governed = read_governed_metadata(session_dir)
     parsed_name, parsed_ra, parsed_dec = extract_astronomical_metadata(session_dir)
-    name = parsed_name or old_target.get("name") or "Target non disponibile"
-    ra = parsed_ra if parsed_ra is not None else old_target.get("ra_deg")
-    dec = parsed_dec if parsed_dec is not None else old_target.get("dec_deg")
 
-    coordinate_source = "nina-log" if parsed_ra is not None and parsed_dec is not None else old_target.get(
-        "coordinate_source", "aladin-name-resolver"
-    )
+    governed_name = clean_target(governed.get("target_name", ""))
+    governed_ra = float_or_none(governed.get("ra_deg"))
+    governed_dec = float_or_none(governed.get("dec_deg"))
+
+    name = governed_name or parsed_name or "Target non disponibile"
+    ra = governed_ra if governed_ra is not None else parsed_ra
+    dec = governed_dec if governed_dec is not None else parsed_dec
+
+    if governed_name or governed_ra is not None or governed_dec is not None:
+        coordinate_source = "governed-registry"
+    elif parsed_name or parsed_ra is not None or parsed_dec is not None:
+        coordinate_source = "nina-log"
+    else:
+        coordinate_source = "unavailable"
+
+    metadata_state = str(governed.get("metadata_state") or "").strip().upper()
+    if not metadata_state:
+        metadata_state = "RESOLVED" if name != "Target non disponibile" else "INCOMPLETE"
 
     nina = metrics.get("nina") if isinstance(metrics.get("nina"), dict) else {}
     phd2 = metrics.get("phd2") if isinstance(metrics.get("phd2"), dict) else {}
     integration_seconds = float(nina.get("integration_seconds") or 0.0)
 
     return {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "session_id": session_id,
         "target": {
             "name": name,
@@ -136,6 +183,7 @@ def build_payload(
             "dec_deg": dec,
             "coordinate_source": coordinate_source,
         },
+        "metadata_state": metadata_state,
         "sky_view": {
             "survey": old_sky.get("survey", "P/DSS2/color"),
             "field_of_view_deg": old_sky.get("field_of_view_deg", 1.5),
