@@ -10,7 +10,7 @@
     I valori derivano dalla baseline versionata e non rappresentano telemetria live dell’EAGLE o del PC Principale.
   </p>
   <div class="dsg-intelligence-actions">
-    <a href="./">Scientific Platform Center</a>
+    <a href="../scientific-platform/">Scientific Platform Center</a>
     <a href="../architecture/packages/AP-013-Scientific-Image-Repository-Architecture/">AP-013</a>
     <a href="../architecture/validation/AP-013-Session-Discovery-Execution-Evidence/">Discovery Evidence</a>
     <a href="../architecture/validation/AP-013-Transfer-Readiness-Gate/">Readiness Gate</a>

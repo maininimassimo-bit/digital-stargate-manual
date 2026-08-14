@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../styles/roadmap-center.css">
+<link rel="stylesheet" href="../styles/roadmap.css">
 
 <div class="dsg-roadmap-app" data-roadmap-source="../data/roadmap.json?v=20260811-ap013">
   <header class="dsg-roadmap-hero dsg-roadmap-center-hero">

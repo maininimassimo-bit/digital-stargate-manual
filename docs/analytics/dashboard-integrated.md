@@ -7,11 +7,11 @@ La dashboard raccoglie i principali indicatori delle sessioni osservative, dei t
     <strong>Executive overview</strong>
     <span>KPI aggregati, andamento mensile e stato operativo delle sessioni.</span>
   </a>
-  <a class="dsg-analytics-link-card" href="history-validation/">
+  <a class="dsg-analytics-link-card" href="../history-validation/">
     <strong>Validazione storico</strong>
     <span>Controlli di qualità, coerenza e completezza dei dataset consolidati.</span>
   </a>
-  <a class="dsg-analytics-link-card" href="configuration-summary/">
+  <a class="dsg-analytics-link-card" href="../configuration-summary/">
     <strong>Configurazioni</strong>
     <span>Prestazioni e utilizzo dei profili strumentali dell’osservatorio.</span>
   </a>
