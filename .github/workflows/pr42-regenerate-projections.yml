@@ -1,0 +1,71 @@
+name: PR42 Regenerate Scientific Projections
+
+on:
+  push:
+    branches:
+      - feature/guiding-trend-scientific-alignment
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v5
+        with:
+          ref: feature/guiding-trend-scientific-alignment
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Regenerate governed projections
+        run: |
+          node .github/scripts/generate-scientific-session-catalog.mjs --write
+          node .github/scripts/generate-scientific-catalog.mjs --write
+
+      - name: Validate M27 guiding projection
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFile } from 'node:fs/promises';
+          const catalog = JSON.parse(await readFile('docs/data/scientific-session-catalog.json', 'utf8'));
+          const metrics = JSON.parse(await readFile('data/sessions/2026/08/2026-08-10_2026-08-11/normalized/session-metrics.json', 'utf8'));
+          const session = catalog.sessions.find((item) => item.sessionId === '2026-08-10_2026-08-11');
+          if (!session) throw new Error('M27 session missing from catalog');
+          if (session.guiding?.state !== 'AVAILABLE') throw new Error(`Guiding state is ${session.guiding?.state}`);
+          if (!(session.guiding?.detail?.sampleCount > 0)) throw new Error('Guiding detail has no samples');
+          if (!Array.isArray(session.guiding?.detail?.samples) || session.guiding.detail.samples.length === 0) throw new Error('Guiding trend is empty');
+          const expected = metrics.phd2 || {};
+          for (const [catalogKey, metricKey] of [['rmsRaArcsec','rms_ra_arcsec'],['rmsDecArcsec','rms_dec_arcsec'],['rmsTotalArcsec','rms_total_arcsec']]) {
+            const projected = Number(session.guiding?.[catalogKey]);
+            const authoritative = Number(expected[metricKey]);
+            if (!Number.isFinite(projected) || !Number.isFinite(authoritative) || Math.abs(projected - authoritative) > 0.001) {
+              throw new Error(`${catalogKey} mismatch: ${projected} vs ${authoritative}`);
+            }
+          }
+          console.log(JSON.stringify({
+            sessionId: session.sessionId,
+            guidingState: session.guiding.state,
+            sampleCount: session.guiding.detail.sampleCount,
+            trendPoints: session.guiding.detail.samples.length,
+            rmsRaArcsec: session.guiding.rmsRaArcsec,
+            rmsDecArcsec: session.guiding.rmsDecArcsec,
+            rmsTotalArcsec: session.guiding.rmsTotalArcsec
+          }, null, 2));
+          NODE
+
+      - name: Commit generated projections
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/scientific-session-catalog.json docs/data/scientific-observation-index.json
+          if git diff --cached --quiet; then
+            echo "Scientific projections already aligned."
+            exit 0
+          fi
+          git commit -m "chore(science): regenerate guiding projections"
+          git push origin HEAD:feature/guiding-trend-scientific-alignment
