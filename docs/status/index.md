@@ -2,14 +2,16 @@
 
 <!-- DSG:AUTO-STATUS:START -->
 
+> **Separazione delle sorgenti.** I KPI sistemi e il meteo sottostanti rappresentano telemetria operativa realtime quando disponibile. La sezione **Ultima sessione scientifica** è invece una proiezione storica versionata e non descrive lo stato corrente dell'osservatorio.
+
 <div class="dsg-kpi-grid">
-<div class="dsg-kpi"><span class="dsg-kpi__label">Sicurezza meteo</span><span class="dsg-kpi__value">🟡 UNKNOWN</span><span class="dsg-kpi__detail">Nessun dato meteo disponibile</span></div>
-<div class="dsg-kpi"><span class="dsg-kpi__label">Cupola</span><span class="dsg-kpi__value">🟡 UNKNOWN</span><span class="dsg-kpi__detail">safe: —</span></div>
-<div class="dsg-kpi"><span class="dsg-kpi__label">Montatura</span><span class="dsg-kpi__value">🟡 UNKNOWN</span><span class="dsg-kpi__detail">tracking: —</span></div>
-<div class="dsg-kpi"><span class="dsg-kpi__label">Rete</span><span class="dsg-kpi__value">🟡 UNKNOWN</span><span class="dsg-kpi__detail">link: —</span></div>
+<div class="dsg-kpi"><span class="dsg-kpi__label">Sicurezza meteo realtime</span><span class="dsg-kpi__value">🟡 UNKNOWN</span><span class="dsg-kpi__detail">Nessun dato meteo realtime disponibile</span></div>
+<div class="dsg-kpi"><span class="dsg-kpi__label">Cupola realtime</span><span class="dsg-kpi__value">🟡 UNKNOWN</span><span class="dsg-kpi__detail">safe: —</span></div>
+<div class="dsg-kpi"><span class="dsg-kpi__label">Montatura realtime</span><span class="dsg-kpi__value">🟡 UNKNOWN</span><span class="dsg-kpi__detail">tracking: —</span></div>
+<div class="dsg-kpi"><span class="dsg-kpi__label">Rete realtime</span><span class="dsg-kpi__value">🟡 UNKNOWN</span><span class="dsg-kpi__detail">link: —</span></div>
 </div>
 
-## Meteo
+## Meteo operativo realtime
 
 | Parametro | Valore |
 |---|---|
@@ -27,7 +29,7 @@
 | Temperatura cielo | — |
 | Sicurezza | 🟡 UNKNOWN |
 
-## Stato sistemi
+## Stato sistemi realtime
 
 | Sistema | Stato | Dettaglio |
 |---|---|---|
@@ -37,17 +39,18 @@
 | Alimentazione | 🟡 UNKNOWN | UPS su batteria: — |
 | Rete | 🟡 UNKNOWN | attivo: —; VPN: —; LTE: — |
 
-## Ultima sessione
+## Ultima sessione scientifica
 
 | Campo | Valore |
 |---|---|
-| Sessione | `2026-07-16_2026-07-17` |
-| Data | 16/07/2026 18:00 → 17/07/2026 07:00 |
-| Target | LDN 1320 |
-| Configurazione | Sky-Watcher Quattro 200P · ToupTek 294MC PRO |
-| Integrazione | 10,50 h |
-| Immagini completate | 63 |
-| RMS totale | 0,397 arcsec |
+| Sessione | `2026-08-10_2026-08-11` |
+| Data | 10/08/2026 18:00 → 11/08/2026 07:00 |
+| Target | M 27 |
+| Metadata | PARTIAL |
+| Configurazione | UNKNOWN |
+| Integrazione | 0,00 h |
+| Immagini completate | 0 |
+| RMS totale | 0,226 arcsec |
 | Stato sessione | 🟢 GREEN |
 
 <!-- DSG:AUTO-STATUS:END -->
