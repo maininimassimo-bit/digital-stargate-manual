@@ -1,6 +1,7 @@
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import process from 'node:process';
+import { parseGuideLog } from './phd2-guiding.mjs';
 
 const SESSIONS_PATH = 'data/analytics/history/sessions.csv';
 const TARGETS_PATH = 'data/analytics/history/targets.csv';
@@ -11,14 +12,14 @@ const assert=(condition,message)=>{if(!condition)throw new Error(message);};
 const parseCsv=(text)=>{const rows=[];let row=[];let field='';let quoted=false;const source=text.replace(/^\uFEFF/,'');for(let i=0;i<source.length;i+=1){const ch=source[i];if(quoted){if(ch==='"'&&source[i+1]==='"'){field+='"';i+=1;}else if(ch==='"'){quoted=false;}else field+=ch;}else if(ch==='"')quoted=true;else if(ch===','){row.push(field);field='';}else if(ch==='\n'){row.push(field.replace(/\r$/,''));if(row.some(v=>v!==''))rows.push(row);row=[];field='';}else field+=ch;}if(field.length||row.length){row.push(field.replace(/\r$/,''));if(row.some(v=>v!==''))rows.push(row);}assert(rows.length>0,'CSV is empty');const headers=rows[0];return rows.slice(1).map(values=>Object.fromEntries(headers.map((h,i)=>[h,values[i]??''])));};
 const numberOrNull=(value)=>{const text=String(value??'').trim().replace(',','.');if(!text)return null;const parsed=Number(text);return Number.isFinite(parsed)?parsed:null;};
 const valueOrNull=(value)=>{const text=String(value??'').trim();return text||null;};
-const analyticsQuality=(severity)=>{const n=String(severity||'').trim().toUpperCase();if(n==='GREEN')return 'VALIDATED_ANALYTICS';if(['RED','AMBER','YELLOW'].includes(n))return 'ATTENTION_REQUIRED';return 'UNKNOWN';};
+const analyticsQuality=(severity)=>{const n=String(severity||'').trim().toUpperCase();if(n==='GREEN')return 'VALIDATED_ANALYTICS';if(['RED','ORANGE','AMBER','YELLOW'].includes(n))return 'ATTENTION_REQUIRED';return 'UNKNOWN';};
 const chooseTarget=(targets)=>targets.length?[...targets].sort((a,b)=>(numberOrNull(b.integration_hours)??0)-(numberOrNull(a.integration_hours)??0))[0]:null;
 const isKnown=(value)=>{const v=String(value??'').trim().toUpperCase();return Boolean(v)&&v!=='UNKNOWN'&&v!=='N/A';};
 const metadataQuality=(record)=>['target','configurationId','telescope','camera'].every(k=>isKnown(record[k]))?'COMPLETE':'METADATA_INCOMPLETE';
 const round=(value,digits=2)=>value===null?null:Number(value.toFixed(digits));
 const numericStats=(rows,key)=>{const values=rows.map(row=>numberOrNull(row[key])).filter(value=>value!==null);if(!values.length)return null;return {min:round(Math.min(...values)),avg:round(values.reduce((sum,value)=>sum+value,0)/values.length),max:round(Math.max(...values))};};
 const mode=(rows,key)=>{const counts=new Map();for(const row of rows){const value=valueOrNull(row[key]);if(value)counts.set(value,(counts.get(value)||0)+1);}return [...counts.entries()].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]))[0]?.[0]||null;};
-const downsample=(rows,maxPoints=48)=>{if(rows.length<=maxPoints)return rows;const step=(rows.length-1)/(maxPoints-1);return Array.from({length:maxPoints},(_,i)=>rows[Math.round(i*step)]);};
+const downsample=(rows,maxPoints=96)=>{if(rows.length<=maxPoints)return rows;const step=(rows.length-1)/(maxPoints-1);return Array.from({length:maxPoints},(_,i)=>rows[Math.round(i*step)]);};
 
 const readWeatherDetail=async(metricsPath)=>{
   if(!metricsPath)return null;
@@ -30,62 +31,27 @@ const readWeatherDetail=async(metricsPath)=>{
     const weatherPath=join(weatherDir,files[0]);
     const rows=parseCsv(await readFile(weatherPath,'utf8'));
     if(!rows.length)return null;
-    const samples=downsample(rows).map(row=>({
-      timestamp:`${valueOrNull(row.Date)||''}T${valueOrNull(row.Time)||''}`,
-      ambientTemperature:numberOrNull(row['Ambient Temperature']),
-      relativeHumidity:numberOrNull(row['Relative Humidity']),
-      dewPoint:numberOrNull(row['Dew Point']),
-      windValue:numberOrNull(row['Wind Value']),
-      cloudValue:numberOrNull(row['Cloud Value']),
-      safeStatus:valueOrNull(row['Safe Status']),
-      cloudCondition:valueOrNull(row['Cloud Condition'])
-    }));
-    return {
-      sourcePath:weatherPath.replaceAll('\\','/'),
-      firstTimestamp:samples[0]?.timestamp||null,
-      lastTimestamp:samples.at(-1)?.timestamp||null,
-      ambientTemperature:numericStats(rows,'Ambient Temperature'),
-      relativeHumidity:numericStats(rows,'Relative Humidity'),
-      dewPoint:numericStats(rows,'Dew Point'),
-      windValue:numericStats(rows,'Wind Value'),
-      cloudValue:numericStats(rows,'Cloud Value'),
-      dominantCloudCondition:mode(rows,'Cloud Condition'),
-      dominantRainCondition:mode(rows,'Rain Condition'),
-      dominantWindCondition:mode(rows,'Wind Condition'),
-      samples
-    };
+    const samples=downsample(rows,48).map(row=>({timestamp:`${valueOrNull(row.Date)||''}T${valueOrNull(row.Time)||''}`,ambientTemperature:numberOrNull(row['Ambient Temperature']),relativeHumidity:numberOrNull(row['Relative Humidity']),dewPoint:numberOrNull(row['Dew Point']),windValue:numberOrNull(row['Wind Value']),cloudValue:numberOrNull(row['Cloud Value']),safeStatus:valueOrNull(row['Safe Status']),cloudCondition:valueOrNull(row['Cloud Condition'])}));
+    return {sourcePath:weatherPath.replaceAll('\\','/'),firstTimestamp:samples[0]?.timestamp||null,lastTimestamp:samples.at(-1)?.timestamp||null,ambientTemperature:numericStats(rows,'Ambient Temperature'),relativeHumidity:numericStats(rows,'Relative Humidity'),dewPoint:numericStats(rows,'Dew Point'),windValue:numericStats(rows,'Wind Value'),cloudValue:numericStats(rows,'Cloud Value'),dominantCloudCondition:mode(rows,'Cloud Condition'),dominantRainCondition:mode(rows,'Rain Condition'),dominantWindCondition:mode(rows,'Wind Condition'),samples};
   }catch{return null;}
 };
 
-const weatherProjection=(metrics,detail)=>{
-  const weather=metrics?.weather;
-  if(!weather||typeof weather!=='object')return {state:'NOT_AVAILABLE',rowsTotal:null,rowsUnsafe:null,unsafePct:null,safePct:null,safeTransitions:null,scopeNote:null,detail};
-  const rowsTotal=numberOrNull(weather.weather_rows_total);
-  const rowsUnsafe=numberOrNull(weather.weather_rows_unsafe_full_window);
-  const unsafePct=numberOrNull(weather.weather_unsafe_pct_full_window);
-  const safePct=unsafePct===null?null:round(100-unsafePct);
-  return {state:rowsTotal&&rowsTotal>0?'AVAILABLE':'NOT_AVAILABLE',rowsTotal,rowsUnsafe,unsafePct,safePct,safeTransitions:numberOrNull(weather.weather_safe_transitions_full_window),scopeNote:valueOrNull(weather.weather_scope_note),detail};
+const readGuidingDetail=async(metricsPath)=>{
+  if(!metricsPath)return null;
+  const sessionRoot=dirname(dirname(metricsPath));
+  const phd2Dir=join(sessionRoot,'raw','phd2');
+  try{
+    const files=(await readdir(phd2Dir)).filter(name=>/^PHD2_GuideLog_.*\.txt$/i.test(name)).sort();
+    for(const name of files){const path=join(phd2Dir,name);const detail=parseGuideLog(await readFile(path,'utf8'),path);if(detail)return detail;}
+    return null;
+  }catch{return null;}
 };
 
-const buildCatalog=(sessions,targets,metadata,metricsBySession,weatherDetailBySession)=>{
-  const targetsBySession=new Map();for(const target of targets){const id=String(target.session_id||'').trim();if(!id)continue;if(!targetsBySession.has(id))targetsBySession.set(id,[]);targetsBySession.get(id).push(target);}
-  const metadataBySession=new Map(metadata.map(row=>[String(row.session_id||'').trim(),row]));
-  const outputSessions=sessions.filter(s=>String(s.session_id||'').trim()).sort((a,b)=>String(a.session_id).localeCompare(String(b.session_id))).map(session=>{
-    const sessionId=String(session.session_id).trim();const target=chooseTarget(targetsBySession.get(sessionId)||[]);const governed=metadataBySession.get(sessionId)||{};const start=valueOrNull(session.session_start);
-    const record={sessionId,observationDate:start?start.slice(0,10):sessionId.slice(0,10),start,end:valueOrNull(session.session_end),target:valueOrNull(governed.target_name)??valueOrNull(target?.target_name)??'UNKNOWN',configurationId:valueOrNull(governed.configuration_id)??valueOrNull(session.configuration_id)??'UNKNOWN',telescope:valueOrNull(governed.telescope)??valueOrNull(session.telescope)??valueOrNull(target?.telescope)??'UNKNOWN',camera:valueOrNull(governed.camera)??valueOrNull(session.camera)??'UNKNOWN',filter:valueOrNull(governed.filter_name)??valueOrNull(target?.filter_name)??'UNKNOWN',binning:valueOrNull(governed.binning)??valueOrNull(target?.binning)??'UNKNOWN',gain:numberOrNull(target?.gain),offset:numberOrNull(target?.offset),exposureSeconds:numberOrNull(target?.average_exposure_seconds),integrationHours:numberOrNull(session.integration_hours),targetIntegrationHours:numberOrNull(target?.integration_hours),lightStarted:numberOrNull(session.light_started),lightCompleted:numberOrNull(session.light_completed),completionPct:numberOrNull(session.completion_pct),rmsTotalArcsec:numberOrNull(session.rms_total_arcsec),severity:valueOrNull(session.severity)??'UNKNOWN',analyticsState:analyticsQuality(session.severity),metadataState:valueOrNull(governed.metadata_state)??'UNREGISTERED',transferState:'NOT_REPRESENTED',manifestState:'VERSIONED',evidenceState:valueOrNull(session.source_metrics_path)?'SOURCE_METRICS_AVAILABLE':'UNKNOWN',sourceMetricsPath:valueOrNull(session.source_metrics_path),weather:weatherProjection(metricsBySession.get(sessionId),weatherDetailBySession.get(sessionId)||null)};
-    record.qualityState=metadataQuality(record)==='COMPLETE'?record.analyticsState:'METADATA_INCOMPLETE';return record;
-  });
-  return {schemaVersion:'1.3',generatedFrom:[SESSIONS_PATH,TARGETS_PATH,METADATA_PATH,'session-metrics.json','raw/weather/*.csv'],catalogStatus:'VERSIONED_ANALYTICS_PROJECTION',authoritativeNote:'Severity/analyticsState represent analytics outcome. qualityState additionally reflects scientific metadata completeness. weather is a normalized and downsampled projection from the session CloudWatcher evidence and does not alter analytics severity without temporal correlation to the active sequence.',sessions:outputSessions};
-};
+const weatherProjection=(metrics,detail)=>{const weather=metrics?.weather;if(!weather||typeof weather!=='object')return {state:'NOT_AVAILABLE',rowsTotal:null,rowsUnsafe:null,unsafePct:null,safePct:null,safeTransitions:null,scopeNote:null,detail};const rowsTotal=numberOrNull(weather.weather_rows_total);const rowsUnsafe=numberOrNull(weather.weather_rows_unsafe_full_window);const unsafePct=numberOrNull(weather.weather_unsafe_pct_full_window);const safePct=unsafePct===null?null:round(100-unsafePct);return {state:rowsTotal&&rowsTotal>0?'AVAILABLE':'NOT_AVAILABLE',rowsTotal,rowsUnsafe,unsafePct,safePct,safeTransitions:numberOrNull(weather.weather_safe_transitions_full_window),scopeNote:valueOrNull(weather.weather_scope_note),detail};};
+const guidingProjection=(metrics,detail)=>{const guide=metrics?.phd2;const sampleCount=numberOrNull(guide?.guide_samples_valid)??detail?.sampleCount??null;return {state:sampleCount&&sampleCount>0?'AVAILABLE':'NOT_AVAILABLE',sampleCount,segmentCount:numberOrNull(guide?.guide_segments)??detail?.segmentCount??null,rmsRaArcsec:numberOrNull(guide?.rms_ra_arcsec)??detail?.rmsRaArcsec??null,rmsDecArcsec:numberOrNull(guide?.rms_dec_arcsec)??detail?.rmsDecArcsec??null,rmsTotalArcsec:numberOrNull(guide?.rms_total_arcsec)??detail?.rmsTotalArcsec??null,lostStarEvents:numberOrNull(guide?.lost_star_events),pulseGuideFailures:numberOrNull(guide?.pulse_guide_failures),scopeNote:'Proiezione scientifica storica derivata dal PHD2 GuideLog. Usa gli stessi campioni validi dell analytics (settling escluso, ErrorCode=0) e non rappresenta telemetria operativa realtime.',detail};};
+
+const buildCatalog=(sessions,targets,metadata,metricsBySession,weatherDetailBySession,guidingDetailBySession)=>{const targetsBySession=new Map();for(const target of targets){const id=String(target.session_id||'').trim();if(!id)continue;if(!targetsBySession.has(id))targetsBySession.set(id,[]);targetsBySession.get(id).push(target);}const metadataBySession=new Map(metadata.map(row=>[String(row.session_id||'').trim(),row]));const outputSessions=sessions.filter(s=>String(s.session_id||'').trim()).sort((a,b)=>String(a.session_id).localeCompare(String(b.session_id))).map(session=>{const sessionId=String(session.session_id).trim();const target=chooseTarget(targetsBySession.get(sessionId)||[]);const governed=metadataBySession.get(sessionId)||{};const start=valueOrNull(session.session_start);const metrics=metricsBySession.get(sessionId);const record={sessionId,observationDate:start?start.slice(0,10):sessionId.slice(0,10),start,end:valueOrNull(session.session_end),target:valueOrNull(governed.target_name)??valueOrNull(target?.target_name)??'UNKNOWN',configurationId:valueOrNull(governed.configuration_id)??valueOrNull(session.configuration_id)??'UNKNOWN',telescope:valueOrNull(governed.telescope)??valueOrNull(session.telescope)??valueOrNull(target?.telescope)??'UNKNOWN',camera:valueOrNull(governed.camera)??valueOrNull(session.camera)??'UNKNOWN',filter:valueOrNull(governed.filter_name)??valueOrNull(target?.filter_name)??'UNKNOWN',binning:valueOrNull(governed.binning)??valueOrNull(target?.binning)??'UNKNOWN',gain:numberOrNull(target?.gain),offset:numberOrNull(target?.offset),exposureSeconds:numberOrNull(target?.average_exposure_seconds),integrationHours:numberOrNull(session.integration_hours),targetIntegrationHours:numberOrNull(target?.integration_hours),lightStarted:numberOrNull(session.light_started),lightCompleted:numberOrNull(session.light_completed),completionPct:numberOrNull(session.completion_pct),rmsTotalArcsec:numberOrNull(session.rms_total_arcsec),severity:valueOrNull(session.severity)??'UNKNOWN',analyticsState:analyticsQuality(session.severity),metadataState:valueOrNull(governed.metadata_state)??'UNREGISTERED',transferState:'NOT_REPRESENTED',manifestState:'VERSIONED',evidenceState:valueOrNull(session.source_metrics_path)?'SOURCE_METRICS_AVAILABLE':'UNKNOWN',sourceMetricsPath:valueOrNull(session.source_metrics_path),weather:weatherProjection(metrics,weatherDetailBySession.get(sessionId)||null),guiding:guidingProjection(metrics,guidingDetailBySession.get(sessionId)||null)};record.qualityState=metadataQuality(record)==='COMPLETE'?record.analyticsState:'METADATA_INCOMPLETE';return record;});return {schemaVersion:'1.4',generatedFrom:[SESSIONS_PATH,TARGETS_PATH,METADATA_PATH,'session-metrics.json','raw/weather/*.csv','raw/phd2/PHD2_GuideLog_*.txt'],catalogStatus:'VERSIONED_ANALYTICS_PROJECTION',authoritativeNote:'Severity/analyticsState represent analytics outcome. qualityState additionally reflects scientific metadata completeness. weather and guiding are normalized, downsampled scientific-history projections from session evidence; neither is realtime observatory telemetry.',sessions:outputSessions};};
 
 const stableJson=(value)=>`${JSON.stringify(value,null,2)}\n`;
-const main=async()=>{
-  const mode=process.argv[2]||'--check';assert(['--check','--write','--print'].includes(mode),`Unsupported mode: ${mode}`);
-  const [sessionsText,targetsText,metadataText]=await Promise.all([readFile(SESSIONS_PATH,'utf8'),readFile(TARGETS_PATH,'utf8'),readFile(METADATA_PATH,'utf8').catch(()=> 'session_id\n')]);
-  const sessions=parseCsv(sessionsText);const metricsBySession=new Map();const weatherDetailBySession=new Map();
-  await Promise.all(sessions.map(async(session)=>{const sessionId=String(session.session_id||'').trim();const path=valueOrNull(session.source_metrics_path);if(!sessionId||!path)return;try{metricsBySession.set(sessionId,JSON.parse(await readFile(path,'utf8')));}catch{metricsBySession.set(sessionId,null);}weatherDetailBySession.set(sessionId,await readWeatherDetail(path));}));
-  const generated=stableJson(buildCatalog(sessions,parseCsv(targetsText),parseCsv(metadataText),metricsBySession,weatherDetailBySession));
-  if(mode==='--print'){process.stdout.write(generated);return;}if(mode==='--write'){await writeFile(OUTPUT_PATH,generated,'utf8');process.stdout.write(`Generated ${OUTPUT_PATH}.\n`);return;}
-  const current=await readFile(OUTPUT_PATH,'utf8').catch(()=>'');if(current!==generated){process.stderr.write('Scientific session catalog drift detected. Run: node .github/scripts/generate-scientific-session-catalog.mjs --write\n');process.exitCode=1;return;}process.stdout.write('Scientific session catalog is aligned with analytics history, governed metadata and CloudWatcher weather evidence.\n');
-};
+const main=async()=>{const mode=process.argv[2]||'--check';assert(['--check','--write','--print'].includes(mode),`Unsupported mode: ${mode}`);const [sessionsText,targetsText,metadataText]=await Promise.all([readFile(SESSIONS_PATH,'utf8'),readFile(TARGETS_PATH,'utf8'),readFile(METADATA_PATH,'utf8').catch(()=> 'session_id\n')]);const sessions=parseCsv(sessionsText);const metricsBySession=new Map();const weatherDetailBySession=new Map();const guidingDetailBySession=new Map();await Promise.all(sessions.map(async(session)=>{const sessionId=String(session.session_id||'').trim();const path=valueOrNull(session.source_metrics_path);if(!sessionId||!path)return;try{metricsBySession.set(sessionId,JSON.parse(await readFile(path,'utf8')));}catch{metricsBySession.set(sessionId,null);}const [weather,guiding]=await Promise.all([readWeatherDetail(path),readGuidingDetail(path)]);weatherDetailBySession.set(sessionId,weather);guidingDetailBySession.set(sessionId,guiding);}));const generated=stableJson(buildCatalog(sessions,parseCsv(targetsText),parseCsv(metadataText),metricsBySession,weatherDetailBySession,guidingDetailBySession));if(mode==='--print'){process.stdout.write(generated);return;}if(mode==='--write'){await writeFile(OUTPUT_PATH,generated,'utf8');process.stdout.write(`Generated ${OUTPUT_PATH}.\n`);return;}const current=await readFile(OUTPUT_PATH,'utf8').catch(()=>'');if(current!==generated){process.stderr.write('Scientific session catalog drift detected. Run: node .github/scripts/generate-scientific-session-catalog.mjs --write\n');process.exitCode=1;return;}process.stdout.write('Scientific session catalog is aligned with analytics history, governed metadata, CloudWatcher weather evidence and PHD2 guiding evidence.\n');};
 main().catch(error=>{console.error(error.message);process.exitCode=1;});

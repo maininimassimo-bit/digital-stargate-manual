@@ -64,6 +64,12 @@ jobs:
       - name: Verify scientific observation index
         run: node .github/scripts/generate-scientific-catalog.mjs --check
 
+      - name: Test scientific PHD2 guiding parser
+        run: node --test .github/scripts/test-phd2-guiding.mjs
+
+      - name: Verify scientific session catalog
+        run: node .github/scripts/generate-scientific-session-catalog.mjs --check
+
       - name: Test Enterprise Plugin SDK
         run: node --test .github/scripts/test-plugin-sdk.mjs
 
