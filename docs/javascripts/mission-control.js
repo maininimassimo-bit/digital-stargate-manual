@@ -35,14 +35,19 @@
     const items = sessions.slice(0, 3);
     recent.innerHTML = items.length
       ? items.map((session) => {
-          const tone = session.qualityState === 'VALIDATED_ANALYTICS' ? 'is-green' : 'is-amber';
+          const accepted = session.qualityState === 'VALIDATED_ANALYTICS';
+          const incomplete = session.qualityState === 'METADATA_INCOMPLETE';
+          const tone = accepted ? 'is-green' : 'is-amber';
           const detailUrl = `../scientific-session-detail/?sessionId=${encodeURIComponent(session.sessionId)}`;
+          const qualityLabel = incomplete
+            ? 'Metadata scientifici incompleti'
+            : (session.qualityState || session.analyticsState || 'Stato non disponibile');
           return `
             <article class="dsg-mission-session ${tone}">
               <div>
                 <span>${esc(session.sessionId)}</span>
                 <strong>${esc(session.target)}</strong>
-                <small>${esc(formatDate(session.observationDate))}</small>
+                <small>${esc(formatDate(session.observationDate))} · ${esc(qualityLabel)}</small>
               </div>
               <div>
                 <span>Integrazione</span>
