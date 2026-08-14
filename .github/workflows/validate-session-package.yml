@@ -12,19 +12,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate manifests and required folders
+      - name: Validate manifests and package evidence
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
           $manifests = Get-ChildItem data/sessions -Filter manifest.json -Recurse
           if (-not $manifests) { throw 'Nessun manifest trovato.' }
+
           foreach ($manifestFile in $manifests) {
             $m = Get-Content $manifestFile.FullName -Raw | ConvertFrom-Json
             $root = Split-Path $manifestFile.FullName
-            foreach ($required in @('raw/nina','raw/phd2','raw/weather','report')) {
-              if (-not (Test-Path (Join-Path $root $required))) {
-                throw "Cartella mancante: $required in $root"
+
+            if (-not $m.session_id) { throw "session_id mancante in $($manifestFile.FullName)" }
+            if (-not $m.files -or $m.files.Count -eq 0) { throw "Nessun file dichiarato nel manifest $($m.session_id)" }
+
+            foreach ($file in $m.files) {
+              if (-not $file.path) { throw "File senza path nel manifest $($m.session_id)" }
+              $relativePath = $file.path -replace '\\', [IO.Path]::DirectorySeparatorChar
+              $fullPath = Join-Path $root $relativePath
+              if (-not (Test-Path -LiteralPath $fullPath -PathType Leaf)) {
+                throw "File dichiarato ma mancante: $($file.path) in $root"
               }
             }
-            Write-Host "OK: $($m.session_id)"
+
+            foreach ($required in @('raw/nina','raw/phd2','raw/weather')) {
+              if (-not (Test-Path (Join-Path $root $required) -PathType Container)) {
+                throw "Cartella raw mancante: $required in $root"
+              }
+            }
+
+            Write-Host "OK: $($m.session_id) - $($m.files.Count) file verificati"
           }
