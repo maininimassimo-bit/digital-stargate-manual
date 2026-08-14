@@ -1,16 +1,16 @@
 {
-  "schemaVersion": "1.0",
-  "algorithmVersion": "1.0.0",
+  "schemaVersion": "1.1",
+  "algorithmVersion": "1.1.0",
   "generatedFrom": "docs/data/scientific-session-catalog.json",
-  "sourceSnapshotDigest": "sha256:8b4448671c80ecc006cf779edb28cdf3f251df789b3b422b951a11bce900d95a",
+  "sourceSnapshotDigest": "sha256:9fa556b31651cbf00fe0747fade6b782fc0a447514a854dcdb1b59511abb76fc",
   "indexBuild": {
-    "indexBuildId": "IDX-8B4448671C80EC",
-    "algorithmVersion": "1.0.0",
-    "sourceSnapshotDigest": "sha256:8b4448671c80ecc006cf779edb28cdf3f251df789b3b422b951a11bce900d95a",
+    "indexBuildId": "IDX-9FA556B31651CB",
+    "algorithmVersion": "1.1.0",
+    "sourceSnapshotDigest": "sha256:9fa556b31651cbf00fe0747fade6b782fc0a447514a854dcdb1b59511abb76fc",
     "documentCount": 4,
     "failureCount": 0,
     "buildStatus": "COMPLETED",
-    "outputDigest": "sha256:0a564fa2d4c30de5c101b90225d8909b4c77535bfeda9a2727e026bcad686cd0"
+    "outputDigest": "sha256:88cf87f69d5cc7f5e12be1d08a57559b9535bdc72b905f44f0b25f4eefb7f03e"
   },
   "summary": {
     "sessionCount": 4,
@@ -20,15 +20,17 @@
   },
   "catalogItems": [
     {
-      "schemaVersion": "1.0",
+      "schemaVersion": "1.1",
       "catalogItemId": "CAT-SESSION-2026-07-14-2026-07-15",
       "entityType": "OBSERVATION_SESSION",
       "entityId": "2026-07-14_2026-07-15",
       "sourceSystem": "scientific-session-catalog.json",
-      "sourceVersion": "1.0",
-      "sourceDigest": "sha256:a328f8873aab68fba7123d5d638f5217a4c18a8a55a37b9a53322e8d0ab59688",
+      "sourceVersion": "1.1",
+      "sourceDigest": "sha256:0cd776e4e82658b28ef485ba551886951c892ce030bc3d4ca352e365f2d14764",
       "catalogState": "INDEXABLE",
       "qualityState": "DEGRADED",
+      "analyticsState": "ATTENTION_REQUIRED",
+      "metadataState": "UNREGISTERED",
       "recordVersion": 1,
       "indexedAtUtc": null,
       "lastReconciledAtUtc": null,
@@ -36,15 +38,17 @@
       "supersedesCatalogItemId": null
     },
     {
-      "schemaVersion": "1.0",
+      "schemaVersion": "1.1",
       "catalogItemId": "CAT-SESSION-2026-07-15-2026-07-16",
       "entityType": "OBSERVATION_SESSION",
       "entityId": "2026-07-15_2026-07-16",
       "sourceSystem": "scientific-session-catalog.json",
-      "sourceVersion": "1.0",
-      "sourceDigest": "sha256:e01212f992883f7849674d15cd4661563fb95a15cf10cee7f350395dd3887197",
+      "sourceVersion": "1.1",
+      "sourceDigest": "sha256:e0072d993b6e6fecdff35751102ace477c35abb657b641947321b57f3fc1cf3c",
       "catalogState": "INDEXABLE",
       "qualityState": "ACCEPTED",
+      "analyticsState": "VALIDATED_ANALYTICS",
+      "metadataState": "UNREGISTERED",
       "recordVersion": 1,
       "indexedAtUtc": null,
       "lastReconciledAtUtc": null,
@@ -52,15 +56,17 @@
       "supersedesCatalogItemId": null
     },
     {
-      "schemaVersion": "1.0",
+      "schemaVersion": "1.1",
       "catalogItemId": "CAT-SESSION-2026-07-16-2026-07-17",
       "entityType": "OBSERVATION_SESSION",
       "entityId": "2026-07-16_2026-07-17",
       "sourceSystem": "scientific-session-catalog.json",
-      "sourceVersion": "1.0",
-      "sourceDigest": "sha256:8d9849d01ef013c7190720f73407922f0dbb76795530b09d90dc1ed26959786d",
+      "sourceVersion": "1.1",
+      "sourceDigest": "sha256:3da1b85f79274d070d2b950b9053ea571e600ff265f024e839fc18f34c871a39",
       "catalogState": "INDEXABLE",
       "qualityState": "ACCEPTED",
+      "analyticsState": "VALIDATED_ANALYTICS",
+      "metadataState": "UNREGISTERED",
       "recordVersion": 1,
       "indexedAtUtc": null,
       "lastReconciledAtUtc": null,
@@ -68,15 +74,17 @@
       "supersedesCatalogItemId": null
     },
     {
-      "schemaVersion": "1.0",
+      "schemaVersion": "1.1",
       "catalogItemId": "CAT-SESSION-2026-08-10-2026-08-11",
       "entityType": "OBSERVATION_SESSION",
       "entityId": "2026-08-10_2026-08-11",
       "sourceSystem": "scientific-session-catalog.json",
-      "sourceVersion": "1.0",
-      "sourceDigest": "sha256:6fded3ab3bcefbb615058e5c32af008e3b271d339180fa4f121b0b4aa09c330a",
+      "sourceVersion": "1.1",
+      "sourceDigest": "sha256:e7c52b73299d47b62588e4e5252b60b9411919522b08304fb519ff11063cb67e",
       "catalogState": "INDEXABLE",
-      "qualityState": "ACCEPTED",
+      "qualityState": "INCOMPLETE",
+      "analyticsState": "VALIDATED_ANALYTICS",
+      "metadataState": "PARTIAL",
       "recordVersion": 1,
       "indexedAtUtc": null,
       "lastReconciledAtUtc": null,
@@ -86,14 +94,14 @@
   ],
   "searchDocuments": [
     {
-      "schemaVersion": "1.0",
+      "schemaVersion": "1.1",
       "searchDocumentId": "SRCH-CAT-SESSION-2026-07-14-2026-07-15-V1",
       "catalogItemId": "CAT-SESSION-2026-07-14-2026-07-15",
-      "indexBuildId": "IDX-8B4448671C80EC",
+      "indexBuildId": "IDX-9FA556B31651CB",
       "documentType": "SCIENTIFIC_SESSION",
       "title": "LDN 1320 · 2026-07-14",
       "summary": "Sessione 2026-07-14_2026-07-15 · filtro LPRO · telescopio Sky-Watcher Quattro 200P · camera ToupTek 294MC PRO · 8 h di integrazione",
-      "normalizedText": "ldn 1320 2026-07-14_2026-07-15 2026-07-14 quattro200_touptek294_bin1 sky-watcher quattro 200p touptek 294mc pro lpro 1x1 attention_required not_represented versioned source_metrics_available",
+      "normalizedText": "ldn 1320 2026-07-14_2026-07-15 2026-07-14 quattro200_touptek294_bin1 sky-watcher quattro 200p touptek 294mc pro lpro 1x1 attention_required attention_required unregistered not_represented versioned source_metrics_available",
       "keywords": [
         "ldn-1320",
         "sky-watcher-quattro-200p",
@@ -128,17 +136,17 @@
         "metadataCompleteness": 1,
         "integrationHours": 8
       },
-      "sourceDigest": "sha256:a328f8873aab68fba7123d5d638f5217a4c18a8a55a37b9a53322e8d0ab59688"
+      "sourceDigest": "sha256:0cd776e4e82658b28ef485ba551886951c892ce030bc3d4ca352e365f2d14764"
     },
     {
-      "schemaVersion": "1.0",
+      "schemaVersion": "1.1",
       "searchDocumentId": "SRCH-CAT-SESSION-2026-07-15-2026-07-16-V1",
       "catalogItemId": "CAT-SESSION-2026-07-15-2026-07-16",
-      "indexBuildId": "IDX-8B4448671C80EC",
+      "indexBuildId": "IDX-9FA556B31651CB",
       "documentType": "SCIENTIFIC_SESSION",
       "title": "LDN 1320 · 2026-07-15",
       "summary": "Sessione 2026-07-15_2026-07-16 · filtro LPRO · telescopio Sky-Watcher Quattro 200P · camera ToupTek 294MC PRO · 13.3333 h di integrazione",
-      "normalizedText": "ldn 1320 2026-07-15_2026-07-16 2026-07-15 quattro200_touptek294_bin1 sky-watcher quattro 200p touptek 294mc pro lpro 1x1 validated_analytics not_represented versioned source_metrics_available",
+      "normalizedText": "ldn 1320 2026-07-15_2026-07-16 2026-07-15 quattro200_touptek294_bin1 sky-watcher quattro 200p touptek 294mc pro lpro 1x1 validated_analytics validated_analytics unregistered not_represented versioned source_metrics_available",
       "keywords": [
         "ldn-1320",
         "sky-watcher-quattro-200p",
@@ -173,17 +181,17 @@
         "metadataCompleteness": 1,
         "integrationHours": 13.3333
       },
-      "sourceDigest": "sha256:e01212f992883f7849674d15cd4661563fb95a15cf10cee7f350395dd3887197"
+      "sourceDigest": "sha256:e0072d993b6e6fecdff35751102ace477c35abb657b641947321b57f3fc1cf3c"
     },
     {
-      "schemaVersion": "1.0",
+      "schemaVersion": "1.1",
       "searchDocumentId": "SRCH-CAT-SESSION-2026-07-16-2026-07-17-V1",
       "catalogItemId": "CAT-SESSION-2026-07-16-2026-07-17",
-      "indexBuildId": "IDX-8B4448671C80EC",
+      "indexBuildId": "IDX-9FA556B31651CB",
       "documentType": "SCIENTIFIC_SESSION",
       "title": "LDN 1320 · 2026-07-16",
       "summary": "Sessione 2026-07-16_2026-07-17 · filtro LPRO · telescopio Sky-Watcher Quattro 200P · camera ToupTek 294MC PRO · 10.5 h di integrazione",
-      "normalizedText": "ldn 1320 2026-07-16_2026-07-17 2026-07-16 quattro200_touptek294_bin1 sky-watcher quattro 200p touptek 294mc pro lpro 1x1 validated_analytics not_represented versioned source_metrics_available",
+      "normalizedText": "ldn 1320 2026-07-16_2026-07-17 2026-07-16 quattro200_touptek294_bin1 sky-watcher quattro 200p touptek 294mc pro lpro 1x1 validated_analytics validated_analytics unregistered not_represented versioned source_metrics_available",
       "keywords": [
         "ldn-1320",
         "sky-watcher-quattro-200p",
@@ -218,58 +226,52 @@
         "metadataCompleteness": 1,
         "integrationHours": 10.5
       },
-      "sourceDigest": "sha256:8d9849d01ef013c7190720f73407922f0dbb76795530b09d90dc1ed26959786d"
+      "sourceDigest": "sha256:3da1b85f79274d070d2b950b9053ea571e600ff265f024e839fc18f34c871a39"
     },
     {
-      "schemaVersion": "1.0",
+      "schemaVersion": "1.1",
       "searchDocumentId": "SRCH-CAT-SESSION-2026-08-10-2026-08-11-V1",
       "catalogItemId": "CAT-SESSION-2026-08-10-2026-08-11",
-      "indexBuildId": "IDX-8B4448671C80EC",
+      "indexBuildId": "IDX-9FA556B31651CB",
       "documentType": "SCIENTIFIC_SESSION",
-      "title": "UNKNOWN · 2026-08-10",
-      "summary": "Sessione 2026-08-10_2026-08-11 · filtro UNKNOWN · telescopio UNKNOWN · camera UNKNOWN · 0 h di integrazione",
-      "normalizedText": "unknown 2026-08-10_2026-08-11 2026-08-10 unknown unknown unknown unknown unknown validated_analytics not_represented versioned source_metrics_available",
+      "title": "M 27 · 2026-08-10",
+      "summary": "Sessione 2026-08-10_2026-08-11 · 0 h di integrazione · metadata scientifici incompleti",
+      "normalizedText": "m 27 2026-08-10_2026-08-11 2026-08-10 metadata_incomplete validated_analytics partial not_represented versioned source_metrics_available",
       "keywords": [
-        "unknown",
+        "m-27",
         "2026",
-        "accepted"
+        "incomplete"
       ],
       "facetValues": {
         "target": [
-          "UNKNOWN"
+          "M 27"
         ],
         "year": [
           "2026"
         ],
-        "telescope": [
-          "UNKNOWN"
-        ],
-        "camera": [
-          "UNKNOWN"
-        ],
-        "filter": [
-          "UNKNOWN"
-        ],
+        "telescope": [],
+        "camera": [],
+        "filter": [],
         "quality": [
-          "ACCEPTED"
+          "INCOMPLETE"
         ]
       },
       "sourceUrl": "scientific-session-detail/?sessionId=2026-08-10_2026-08-11",
       "rankingSignals": {
-        "qualityWeight": 1,
-        "metadataCompleteness": 1,
+        "qualityWeight": 0.4,
+        "metadataCompleteness": 0.42857142857142855,
         "integrationHours": 0
       },
-      "sourceDigest": "sha256:6fded3ab3bcefbb615058e5c32af008e3b271d339180fa4f121b0b4aa09c330a"
+      "sourceDigest": "sha256:e7c52b73299d47b62588e4e5252b60b9411919522b08304fb519ff11063cb67e"
     }
   ],
   "reconciliationRecords": [
     {
-      "reconciliationRecordId": "REC-IDX-8B4448671C80EC-001",
-      "indexBuildId": "IDX-8B4448671C80EC",
+      "reconciliationRecordId": "REC-IDX-9FA556B31651CB-001",
+      "indexBuildId": "IDX-9FA556B31651CB",
       "catalogItemId": "CAT-SESSION-2026-07-14-2026-07-15",
-      "sourceDigestExpected": "sha256:a328f8873aab68fba7123d5d638f5217a4c18a8a55a37b9a53322e8d0ab59688",
-      "sourceDigestObserved": "sha256:a328f8873aab68fba7123d5d638f5217a4c18a8a55a37b9a53322e8d0ab59688",
+      "sourceDigestExpected": "sha256:0cd776e4e82658b28ef485ba551886951c892ce030bc3d4ca352e365f2d14764",
+      "sourceDigestObserved": "sha256:0cd776e4e82658b28ef485ba551886951c892ce030bc3d4ca352e365f2d14764",
       "reconciliationState": "MATCHED",
       "differenceType": null,
       "detectedAtUtc": null,
@@ -277,11 +279,11 @@
       "resolutionReference": null
     },
     {
-      "reconciliationRecordId": "REC-IDX-8B4448671C80EC-002",
-      "indexBuildId": "IDX-8B4448671C80EC",
+      "reconciliationRecordId": "REC-IDX-9FA556B31651CB-002",
+      "indexBuildId": "IDX-9FA556B31651CB",
       "catalogItemId": "CAT-SESSION-2026-07-15-2026-07-16",
-      "sourceDigestExpected": "sha256:e01212f992883f7849674d15cd4661563fb95a15cf10cee7f350395dd3887197",
-      "sourceDigestObserved": "sha256:e01212f992883f7849674d15cd4661563fb95a15cf10cee7f350395dd3887197",
+      "sourceDigestExpected": "sha256:e0072d993b6e6fecdff35751102ace477c35abb657b641947321b57f3fc1cf3c",
+      "sourceDigestObserved": "sha256:e0072d993b6e6fecdff35751102ace477c35abb657b641947321b57f3fc1cf3c",
       "reconciliationState": "MATCHED",
       "differenceType": null,
       "detectedAtUtc": null,
@@ -289,11 +291,11 @@
       "resolutionReference": null
     },
     {
-      "reconciliationRecordId": "REC-IDX-8B4448671C80EC-003",
-      "indexBuildId": "IDX-8B4448671C80EC",
+      "reconciliationRecordId": "REC-IDX-9FA556B31651CB-003",
+      "indexBuildId": "IDX-9FA556B31651CB",
       "catalogItemId": "CAT-SESSION-2026-07-16-2026-07-17",
-      "sourceDigestExpected": "sha256:8d9849d01ef013c7190720f73407922f0dbb76795530b09d90dc1ed26959786d",
-      "sourceDigestObserved": "sha256:8d9849d01ef013c7190720f73407922f0dbb76795530b09d90dc1ed26959786d",
+      "sourceDigestExpected": "sha256:3da1b85f79274d070d2b950b9053ea571e600ff265f024e839fc18f34c871a39",
+      "sourceDigestObserved": "sha256:3da1b85f79274d070d2b950b9053ea571e600ff265f024e839fc18f34c871a39",
       "reconciliationState": "MATCHED",
       "differenceType": null,
       "detectedAtUtc": null,
@@ -301,11 +303,11 @@
       "resolutionReference": null
     },
     {
-      "reconciliationRecordId": "REC-IDX-8B4448671C80EC-004",
-      "indexBuildId": "IDX-8B4448671C80EC",
+      "reconciliationRecordId": "REC-IDX-9FA556B31651CB-004",
+      "indexBuildId": "IDX-9FA556B31651CB",
       "catalogItemId": "CAT-SESSION-2026-08-10-2026-08-11",
-      "sourceDigestExpected": "sha256:6fded3ab3bcefbb615058e5c32af008e3b271d339180fa4f121b0b4aa09c330a",
-      "sourceDigestObserved": "sha256:6fded3ab3bcefbb615058e5c32af008e3b271d339180fa4f121b0b4aa09c330a",
+      "sourceDigestExpected": "sha256:e7c52b73299d47b62588e4e5252b60b9411919522b08304fb519ff11063cb67e",
+      "sourceDigestObserved": "sha256:e7c52b73299d47b62588e4e5252b60b9411919522b08304fb519ff11063cb67e",
       "reconciliationState": "MATCHED",
       "differenceType": null,
       "detectedAtUtc": null,
