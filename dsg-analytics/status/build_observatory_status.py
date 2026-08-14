@@ -34,7 +34,8 @@ def esc(v):
 def badge(v):
     s=str(v or 'UNKNOWN').upper()
     if s in {'OK','SAFE','OPEN','CLOSED','TRACKING','PARKED','ONLINE','GREEN'}: return '🟢 '+s
-    if s in {'ERROR','UNSAFE','OFFLINE','RED','ALARM'}: return '🔴 '+s
+    if s in {'ERROR','UNSAFE','OFFLINE','RED','ORANGE','ALARM'}: return '🔴 '+s
+    if s in {'YELLOW','AMBER'}: return '🟡 '+s
     return '🟡 '+s
 
 def fmt_dt(v):
@@ -42,11 +43,11 @@ def fmt_dt(v):
     return x.strftime('%d/%m/%Y %H:%M') if x else '—'
 
 def weather_state(w):
-    if not w: return 'UNKNOWN','Nessun dato meteo disponibile'
+    if not w: return 'UNKNOWN','Nessun dato meteo realtime disponibile'
     reasons=[]
     def f(k):
         try: return float(str(w.get(k,'')).replace(',','.'))
-        except ValueError: return None
+        except (TypeError,ValueError): return None
     if (f('rain_rate_mm_h') or 0)>0: reasons.append('pioggia')
     if (f('humidity_pct') or 0)>=90: reasons.append('umidità elevata')
     if (f('wind_speed_kmh') or 0)>=35: reasons.append('vento forte')
@@ -54,7 +55,10 @@ def weather_state(w):
     explicit=str(w.get('safe','')).lower()
     if explicit in {'false','0','no'} or reasons: return 'UNSAFE', ', '.join(reasons) or 'sensore non sicuro'
     if explicit in {'true','1','yes','si','sì'}: return 'SAFE','Nessuna anomalia'
-    return 'UNKNOWN','Campo safe non valorizzato'
+    return 'UNKNOWN','Campo safe realtime non valorizzato'
+
+def metadata_for(metadata, sid):
+    return next((row for row in metadata if str(row.get('session_id','')).strip()==sid), {})
 
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--repo-root',type=Path,default=Path.cwd()); a=ap.parse_args()
@@ -63,22 +67,29 @@ def main():
     weather=latest(read_csv(r/'data/analytics/weather/weather-observations.csv'),'timestamp')
     sessions=read_csv(r/'data/analytics/history/sessions.csv')
     targets=read_csv(r/'data/analytics/history/targets.csv')
+    metadata=read_csv(r/'data/analytics/metadata/session-scientific-metadata.csv')
     session=latest(sessions,'session_end') or latest(sessions,'session_start')
     systems=live.get('systems',{}); dome=systems.get('dome',{}); mount=systems.get('mount',{}); camera=systems.get('camera',{}); network=systems.get('network',{}); power=systems.get('power',{})
     ws,wr=weather_state(weather)
     sid=session.get('session_id','') if session else ''
-    tnames=sorted({x.get('target_name','').strip() for x in targets if x.get('session_id','').strip()==sid and x.get('target_name','').strip()})
-    conf=' · '.join(x for x in [(session or {}).get('telescope','').strip(),(session or {}).get('camera','').strip()] if x) or esc((session or {}).get('configuration_id'))
+    governed=metadata_for(metadata,sid)
+    target_names=sorted({x.get('target_name','').strip() for x in targets if x.get('session_id','').strip()==sid and x.get('target_name','').strip()})
+    target=governed.get('target_name','').strip() or ', '.join(target_names)
+    telescope=governed.get('telescope','').strip() or (session or {}).get('telescope','').strip()
+    camera_name=governed.get('camera','').strip() or (session or {}).get('camera','').strip()
+    conf=' · '.join(x for x in [telescope,camera_name] if x) or governed.get('configuration_id','').strip() or esc((session or {}).get('configuration_id'))
     block=f'''{START}
 
+> **Separazione delle sorgenti.** I KPI sistemi e il meteo sottostanti rappresentano telemetria operativa realtime quando disponibile. La sezione **Ultima sessione scientifica** è invece una proiezione storica versionata e non descrive lo stato corrente dell'osservatorio.
+
 <div class="dsg-kpi-grid">
-<div class="dsg-kpi"><span class="dsg-kpi__label">Sicurezza meteo</span><span class="dsg-kpi__value">{badge(ws)}</span><span class="dsg-kpi__detail">{esc(wr)}</span></div>
-<div class="dsg-kpi"><span class="dsg-kpi__label">Cupola</span><span class="dsg-kpi__value">{badge(dome.get('state'))}</span><span class="dsg-kpi__detail">safe: {esc(dome.get('safe'))}</span></div>
-<div class="dsg-kpi"><span class="dsg-kpi__label">Montatura</span><span class="dsg-kpi__value">{badge(mount.get('state'))}</span><span class="dsg-kpi__detail">tracking: {esc(mount.get('tracking'))}</span></div>
-<div class="dsg-kpi"><span class="dsg-kpi__label">Rete</span><span class="dsg-kpi__value">{badge(network.get('state'))}</span><span class="dsg-kpi__detail">link: {esc(network.get('active_link'))}</span></div>
+<div class="dsg-kpi"><span class="dsg-kpi__label">Sicurezza meteo realtime</span><span class="dsg-kpi__value">{badge(ws)}</span><span class="dsg-kpi__detail">{esc(wr)}</span></div>
+<div class="dsg-kpi"><span class="dsg-kpi__label">Cupola realtime</span><span class="dsg-kpi__value">{badge(dome.get('state'))}</span><span class="dsg-kpi__detail">safe: {esc(dome.get('safe'))}</span></div>
+<div class="dsg-kpi"><span class="dsg-kpi__label">Montatura realtime</span><span class="dsg-kpi__value">{badge(mount.get('state'))}</span><span class="dsg-kpi__detail">tracking: {esc(mount.get('tracking'))}</span></div>
+<div class="dsg-kpi"><span class="dsg-kpi__label">Rete realtime</span><span class="dsg-kpi__value">{badge(network.get('state'))}</span><span class="dsg-kpi__detail">link: {esc(network.get('active_link'))}</span></div>
 </div>
 
-## Meteo
+## Meteo operativo realtime
 
 | Parametro | Valore |
 |---|---|
@@ -96,7 +107,7 @@ def main():
 | Temperatura cielo | {num((weather or {}).get('sky_temperature_c'),1,' °C')} |
 | Sicurezza | {badge(ws)} |
 
-## Stato sistemi
+## Stato sistemi realtime
 
 | Sistema | Stato | Dettaglio |
 |---|---|---|
@@ -106,13 +117,14 @@ def main():
 | Alimentazione | {badge(power.get('state'))} | UPS su batteria: {esc(power.get('ups_on_battery'))} |
 | Rete | {badge(network.get('state'))} | attivo: {esc(network.get('active_link'))}; VPN: {esc(network.get('vpn'))}; LTE: {esc(network.get('lte_failover'))} |
 
-## Ultima sessione
+## Ultima sessione scientifica
 
 | Campo | Valore |
 |---|---|
 | Sessione | `{esc(sid)}` |
 | Data | {fmt_dt((session or {}).get('session_start'))} → {fmt_dt((session or {}).get('session_end'))} |
-| Target | {esc(', '.join(tnames))} |
+| Target | {esc(target)} |
+| Metadata | {esc(governed.get('metadata_state'))} |
 | Configurazione | {esc(conf)} |
 | Integrazione | {num((session or {}).get('integration_hours'),2,' h')} |
 | Immagini completate | {esc((session or {}).get('light_completed'))} |
@@ -125,8 +137,7 @@ def main():
     if s<0 or e<s: raise RuntimeError('Marker non trovati in docs/status/index.md')
     page.write_text(text[:s]+block+text[e+len(END):],encoding='utf-8',newline='\n')
     print('Observatory Status aggiornato con successo.')
-    print('- Pagina:',page)
-    print('- Righe meteo:',1 if weather else 0)
-    print('- Sessioni:',len(sessions))
+    print('- Sorgente operativa: realtime live/weather')
+    print('- Ultima sessione scientifica:', sid or 'nessuna')
 
 if __name__=='__main__': main()
