@@ -4,7 +4,7 @@ import process from 'node:process';
 
 const SOURCE_PATH = 'docs/data/scientific-session-catalog.json';
 const OUTPUT_PATH = 'docs/data/scientific-observation-index.json';
-const ALGORITHM_VERSION = '1.0.0';
+const ALGORITHM_VERSION = '1.1.0';
 
 const stableJson = (value) => `${JSON.stringify(value, null, 2)}\n`;
 const digest = (value) => `sha256:${createHash('sha256').update(value).digest('hex')}`;
@@ -19,23 +19,39 @@ const assert = (condition, message) => {
   if (!condition) throw new Error(message);
 };
 
+const isKnown = (value) => {
+  const normalized = String(value ?? '').trim().toUpperCase();
+  return Boolean(normalized) && normalized !== 'UNKNOWN' && normalized !== 'N/A';
+};
+
 const normalizeQuality = (value) => {
   const normalized = String(value || 'UNKNOWN').toUpperCase();
   if (normalized === 'VALIDATED_ANALYTICS') return 'ACCEPTED';
   if (normalized === 'ATTENTION_REQUIRED') return 'DEGRADED';
+  if (normalized === 'METADATA_INCOMPLETE') return 'INCOMPLETE';
   return normalized;
 };
 
+const qualityWeight = (value) => {
+  const normalized = normalizeQuality(value);
+  if (normalized === 'ACCEPTED') return 1;
+  if (normalized === 'DEGRADED') return 0.6;
+  if (normalized === 'INCOMPLETE') return 0.4;
+  return 0.2;
+};
+
 const buildCatalogItem = (session, sourceDigest) => ({
-  schemaVersion: '1.0',
+  schemaVersion: '1.1',
   catalogItemId: `CAT-SESSION-${slug(session.sessionId)}`,
   entityType: 'OBSERVATION_SESSION',
   entityId: session.sessionId,
   sourceSystem: 'scientific-session-catalog.json',
-  sourceVersion: '1.0',
+  sourceVersion: '1.1',
   sourceDigest,
   catalogState: 'INDEXABLE',
   qualityState: normalizeQuality(session.qualityState),
+  analyticsState: session.analyticsState || null,
+  metadataState: session.metadataState || null,
   recordVersion: 1,
   indexedAtUtc: null,
   lastReconciledAtUtc: null,
@@ -44,7 +60,7 @@ const buildCatalogItem = (session, sourceDigest) => ({
 });
 
 const buildSearchDocument = (session, catalogItemId, indexBuildId, sourceDigest) => ({
-  schemaVersion: '1.0',
+  schemaVersion: '1.1',
   searchDocumentId: `SRCH-${catalogItemId}-V1`,
   catalogItemId,
   indexBuildId,
@@ -52,10 +68,11 @@ const buildSearchDocument = (session, catalogItemId, indexBuildId, sourceDigest)
   title: `${session.target} · ${session.observationDate}`,
   summary: [
     `Sessione ${session.sessionId}`,
-    session.filter ? `filtro ${session.filter}` : null,
-    session.telescope ? `telescopio ${session.telescope}` : null,
-    session.camera ? `camera ${session.camera}` : null,
-    Number.isFinite(session.integrationHours) ? `${session.integrationHours} h di integrazione` : null
+    isKnown(session.filter) ? `filtro ${session.filter}` : null,
+    isKnown(session.telescope) ? `telescopio ${session.telescope}` : null,
+    isKnown(session.camera) ? `camera ${session.camera}` : null,
+    Number.isFinite(session.integrationHours) ? `${session.integrationHours} h di integrazione` : null,
+    normalizeQuality(session.qualityState) === 'INCOMPLETE' ? 'metadata scientifici incompleti' : null
   ].filter(Boolean).join(' · '),
   normalizedText: [
     session.target,
@@ -67,29 +84,31 @@ const buildSearchDocument = (session, catalogItemId, indexBuildId, sourceDigest)
     session.filter,
     session.binning,
     session.qualityState,
+    session.analyticsState,
+    session.metadataState,
     session.transferState,
     session.manifestState,
     session.evidenceState
-  ].filter(Boolean).join(' ').toLowerCase(),
+  ].filter(isKnown).join(' ').toLowerCase(),
   keywords: [...new Set([
-    slug(session.target).toLowerCase(),
-    slug(session.telescope).toLowerCase(),
-    slug(session.camera).toLowerCase(),
-    slug(session.filter).toLowerCase(),
+    isKnown(session.target) ? slug(session.target).toLowerCase() : null,
+    isKnown(session.telescope) ? slug(session.telescope).toLowerCase() : null,
+    isKnown(session.camera) ? slug(session.camera).toLowerCase() : null,
+    isKnown(session.filter) ? slug(session.filter).toLowerCase() : null,
     String(session.observationDate || '').slice(0, 4),
     normalizeQuality(session.qualityState).toLowerCase()
   ].filter(Boolean))],
   facetValues: {
-    target: [session.target].filter(Boolean),
+    target: [session.target].filter(isKnown),
     year: [String(session.observationDate || '').slice(0, 4)].filter(Boolean),
-    telescope: [session.telescope].filter(Boolean),
-    camera: [session.camera].filter(Boolean),
-    filter: [session.filter].filter(Boolean),
+    telescope: [session.telescope].filter(isKnown),
+    camera: [session.camera].filter(isKnown),
+    filter: [session.filter].filter(isKnown),
     quality: [normalizeQuality(session.qualityState)]
   },
   sourceUrl: `scientific-session-detail/?sessionId=${encodeURIComponent(session.sessionId)}`,
   rankingSignals: {
-    qualityWeight: normalizeQuality(session.qualityState) === 'ACCEPTED' ? 1 : 0.6,
+    qualityWeight: qualityWeight(session.qualityState),
     metadataCompleteness: [
       session.target,
       session.observationDate,
@@ -98,14 +117,14 @@ const buildSearchDocument = (session, catalogItemId, indexBuildId, sourceDigest)
       session.camera,
       session.filter,
       session.qualityState
-    ].filter(Boolean).length / 7,
+    ].filter(isKnown).length / 7,
     integrationHours: Number(session.integrationHours || 0)
   },
   sourceDigest
 });
 
 const buildOutput = (sourceText, source) => {
-  assert(source?.schemaVersion === '1.0', 'Unsupported scientific session catalog schema');
+  assert(['1.0', '1.1'].includes(source?.schemaVersion), 'Unsupported scientific session catalog schema');
   assert(Array.isArray(source.sessions), 'sessions must be an array');
 
   const sourceDigest = digest(sourceText);
@@ -141,7 +160,7 @@ const buildOutput = (sourceText, source) => {
   }
 
   const projection = {
-    schemaVersion: '1.0',
+    schemaVersion: '1.1',
     algorithmVersion: ALGORITHM_VERSION,
     generatedFrom: SOURCE_PATH,
     sourceSnapshotDigest: sourceDigest,
