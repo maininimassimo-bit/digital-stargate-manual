@@ -46,8 +46,8 @@
 | Sessione | `2026-08-14_2026-08-15` |
 | Data | 14/08/2026 18:00 → 15/08/2026 07:00 |
 | Target | M 27 |
-| Metadata | — |
-| Configurazione | UNKNOWN |
+| Metadata | REGISTERED |
+| Configurazione | Celestron C8 XLT · QHY695A |
 | Integrazione | 6,17 h |
 | Immagini completate | 37 |
 | RMS totale | 0,250 arcsec |
