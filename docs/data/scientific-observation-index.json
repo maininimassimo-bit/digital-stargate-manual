@@ -2,21 +2,21 @@
   "schemaVersion": "1.1",
   "algorithmVersion": "1.1.0",
   "generatedFrom": "docs/data/scientific-session-catalog.json",
-  "sourceSnapshotDigest": "sha256:68731b9b4a126757292e582c915c1c2d272f915379b72815e588b5b8589b7af4",
+  "sourceSnapshotDigest": "sha256:b33c3eec873ba0da6437d71db23423086bf1575dfe09c3470f5aea6fa93fbebd",
   "indexBuild": {
-    "indexBuildId": "IDX-68731B9B4A1267",
+    "indexBuildId": "IDX-B33C3EEC873BA0",
     "algorithmVersion": "1.1.0",
-    "sourceSnapshotDigest": "sha256:68731b9b4a126757292e582c915c1c2d272f915379b72815e588b5b8589b7af4",
-    "documentCount": 4,
+    "sourceSnapshotDigest": "sha256:b33c3eec873ba0da6437d71db23423086bf1575dfe09c3470f5aea6fa93fbebd",
+    "documentCount": 5,
     "failureCount": 0,
     "buildStatus": "COMPLETED",
-    "outputDigest": "sha256:c3457b185f9e5d076fd69067415a0f159382aa07aadb4cf98754fea69550c56b"
+    "outputDigest": "sha256:81928bf5f714f0c4a46330bbfde3804b962f82ec3d694d1e070dc11e285afe14"
   },
   "summary": {
-    "sessionCount": 4,
-    "catalogItemCount": 4,
-    "searchDocumentCount": 4,
-    "reconciliationMatched": 4
+    "sessionCount": 5,
+    "catalogItemCount": 5,
+    "searchDocumentCount": 5,
+    "reconciliationMatched": 5
   },
   "catalogItems": [
     {
@@ -90,6 +90,24 @@
       "lastReconciledAtUtc": null,
       "reconciliationState": "MATCHED",
       "supersedesCatalogItemId": null
+    },
+    {
+      "schemaVersion": "1.1",
+      "catalogItemId": "CAT-SESSION-2026-08-14-2026-08-15",
+      "entityType": "OBSERVATION_SESSION",
+      "entityId": "2026-08-14_2026-08-15",
+      "sourceSystem": "scientific-session-catalog.json",
+      "sourceVersion": "1.4",
+      "sourceDigest": "sha256:94a2d19f3a2b579607374bff2d410ff9f8951cdbc26ffc9554e7344c9c83246d",
+      "catalogState": "INDEXABLE",
+      "qualityState": "INCOMPLETE",
+      "analyticsState": "VALIDATED_ANALYTICS",
+      "metadataState": "UNREGISTERED",
+      "recordVersion": 1,
+      "indexedAtUtc": null,
+      "lastReconciledAtUtc": null,
+      "reconciliationState": "MATCHED",
+      "supersedesCatalogItemId": null
     }
   ],
   "searchDocuments": [
@@ -97,7 +115,7 @@
       "schemaVersion": "1.1",
       "searchDocumentId": "SRCH-CAT-SESSION-2026-07-14-2026-07-15-V1",
       "catalogItemId": "CAT-SESSION-2026-07-14-2026-07-15",
-      "indexBuildId": "IDX-68731B9B4A1267",
+      "indexBuildId": "IDX-B33C3EEC873BA0",
       "documentType": "SCIENTIFIC_SESSION",
       "title": "LDN 1320 · 2026-07-14",
       "summary": "Sessione 2026-07-14_2026-07-15 · filtro LPRO · telescopio Sky-Watcher Quattro 200P · camera ToupTek 294MC PRO · 8 h di integrazione",
@@ -142,7 +160,7 @@
       "schemaVersion": "1.1",
       "searchDocumentId": "SRCH-CAT-SESSION-2026-07-15-2026-07-16-V1",
       "catalogItemId": "CAT-SESSION-2026-07-15-2026-07-16",
-      "indexBuildId": "IDX-68731B9B4A1267",
+      "indexBuildId": "IDX-B33C3EEC873BA0",
       "documentType": "SCIENTIFIC_SESSION",
       "title": "LDN 1320 · 2026-07-15",
       "summary": "Sessione 2026-07-15_2026-07-16 · filtro LPRO · telescopio Sky-Watcher Quattro 200P · camera ToupTek 294MC PRO · 13.3333 h di integrazione",
@@ -187,7 +205,7 @@
       "schemaVersion": "1.1",
       "searchDocumentId": "SRCH-CAT-SESSION-2026-07-16-2026-07-17-V1",
       "catalogItemId": "CAT-SESSION-2026-07-16-2026-07-17",
-      "indexBuildId": "IDX-68731B9B4A1267",
+      "indexBuildId": "IDX-B33C3EEC873BA0",
       "documentType": "SCIENTIFIC_SESSION",
       "title": "LDN 1320 · 2026-07-16",
       "summary": "Sessione 2026-07-16_2026-07-17 · filtro LPRO · telescopio Sky-Watcher Quattro 200P · camera ToupTek 294MC PRO · 10.5 h di integrazione",
@@ -232,7 +250,7 @@
       "schemaVersion": "1.1",
       "searchDocumentId": "SRCH-CAT-SESSION-2026-08-10-2026-08-11-V1",
       "catalogItemId": "CAT-SESSION-2026-08-10-2026-08-11",
-      "indexBuildId": "IDX-68731B9B4A1267",
+      "indexBuildId": "IDX-B33C3EEC873BA0",
       "documentType": "SCIENTIFIC_SESSION",
       "title": "M 27 · 2026-08-10",
       "summary": "Sessione 2026-08-10_2026-08-11 · 0 h di integrazione · metadata scientifici incompleti",
@@ -263,12 +281,54 @@
         "integrationHours": 0
       },
       "sourceDigest": "sha256:74661aaf59ed0fab160630deffe4c494646768b1341676118f043446e8bb55d4"
+    },
+    {
+      "schemaVersion": "1.1",
+      "searchDocumentId": "SRCH-CAT-SESSION-2026-08-14-2026-08-15-V1",
+      "catalogItemId": "CAT-SESSION-2026-08-14-2026-08-15",
+      "indexBuildId": "IDX-B33C3EEC873BA0",
+      "documentType": "SCIENTIFIC_SESSION",
+      "title": "M 27 · 2026-08-14",
+      "summary": "Sessione 2026-08-14_2026-08-15 · filtro L-Pro · telescopio Celestron C8 · 6.1667 h di integrazione · metadata scientifici incompleti",
+      "normalizedText": "m 27 2026-08-14_2026-08-15 2026-08-14 celestron c8 l-pro 1x1 metadata_incomplete validated_analytics unregistered not_represented versioned source_metrics_available clear calm",
+      "keywords": [
+        "m-27",
+        "celestron-c8",
+        "l-pro",
+        "2026",
+        "incomplete"
+      ],
+      "facetValues": {
+        "target": [
+          "M 27"
+        ],
+        "year": [
+          "2026"
+        ],
+        "telescope": [
+          "Celestron C8"
+        ],
+        "camera": [],
+        "filter": [
+          "L-Pro"
+        ],
+        "quality": [
+          "INCOMPLETE"
+        ]
+      },
+      "sourceUrl": "scientific-session-detail/?sessionId=2026-08-14_2026-08-15",
+      "rankingSignals": {
+        "qualityWeight": 0.4,
+        "metadataCompleteness": 0.7142857142857143,
+        "integrationHours": 6.1667
+      },
+      "sourceDigest": "sha256:94a2d19f3a2b579607374bff2d410ff9f8951cdbc26ffc9554e7344c9c83246d"
     }
   ],
   "reconciliationRecords": [
     {
-      "reconciliationRecordId": "REC-IDX-68731B9B4A1267-001",
-      "indexBuildId": "IDX-68731B9B4A1267",
+      "reconciliationRecordId": "REC-IDX-B33C3EEC873BA0-001",
+      "indexBuildId": "IDX-B33C3EEC873BA0",
       "catalogItemId": "CAT-SESSION-2026-07-14-2026-07-15",
       "sourceDigestExpected": "sha256:7757c26d32eba60d666886c929400e18eb3929d70bad835c4be1184b3c0f04cc",
       "sourceDigestObserved": "sha256:7757c26d32eba60d666886c929400e18eb3929d70bad835c4be1184b3c0f04cc",
@@ -279,8 +339,8 @@
       "resolutionReference": null
     },
     {
-      "reconciliationRecordId": "REC-IDX-68731B9B4A1267-002",
-      "indexBuildId": "IDX-68731B9B4A1267",
+      "reconciliationRecordId": "REC-IDX-B33C3EEC873BA0-002",
+      "indexBuildId": "IDX-B33C3EEC873BA0",
       "catalogItemId": "CAT-SESSION-2026-07-15-2026-07-16",
       "sourceDigestExpected": "sha256:78a20c160ac84ffa8c15affba9a43c12864c959b9341712ac8be3f691e26b10f",
       "sourceDigestObserved": "sha256:78a20c160ac84ffa8c15affba9a43c12864c959b9341712ac8be3f691e26b10f",
@@ -291,8 +351,8 @@
       "resolutionReference": null
     },
     {
-      "reconciliationRecordId": "REC-IDX-68731B9B4A1267-003",
-      "indexBuildId": "IDX-68731B9B4A1267",
+      "reconciliationRecordId": "REC-IDX-B33C3EEC873BA0-003",
+      "indexBuildId": "IDX-B33C3EEC873BA0",
       "catalogItemId": "CAT-SESSION-2026-07-16-2026-07-17",
       "sourceDigestExpected": "sha256:f7a04f3f4d4868db77fec2f266f79e93c2e2d26575e50b34249f07c237dc1166",
       "sourceDigestObserved": "sha256:f7a04f3f4d4868db77fec2f266f79e93c2e2d26575e50b34249f07c237dc1166",
@@ -303,11 +363,23 @@
       "resolutionReference": null
     },
     {
-      "reconciliationRecordId": "REC-IDX-68731B9B4A1267-004",
-      "indexBuildId": "IDX-68731B9B4A1267",
+      "reconciliationRecordId": "REC-IDX-B33C3EEC873BA0-004",
+      "indexBuildId": "IDX-B33C3EEC873BA0",
       "catalogItemId": "CAT-SESSION-2026-08-10-2026-08-11",
       "sourceDigestExpected": "sha256:74661aaf59ed0fab160630deffe4c494646768b1341676118f043446e8bb55d4",
       "sourceDigestObserved": "sha256:74661aaf59ed0fab160630deffe4c494646768b1341676118f043446e8bb55d4",
+      "reconciliationState": "MATCHED",
+      "differenceType": null,
+      "detectedAtUtc": null,
+      "resolvedAtUtc": null,
+      "resolutionReference": null
+    },
+    {
+      "reconciliationRecordId": "REC-IDX-B33C3EEC873BA0-005",
+      "indexBuildId": "IDX-B33C3EEC873BA0",
+      "catalogItemId": "CAT-SESSION-2026-08-14-2026-08-15",
+      "sourceDigestExpected": "sha256:94a2d19f3a2b579607374bff2d410ff9f8951cdbc26ffc9554e7344c9c83246d",
+      "sourceDigestObserved": "sha256:94a2d19f3a2b579607374bff2d410ff9f8951cdbc26ffc9554e7344c9c83246d",
       "reconciliationState": "MATCHED",
       "differenceType": null,
       "detectedAtUtc": null,

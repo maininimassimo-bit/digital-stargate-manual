@@ -43,14 +43,14 @@
 
 | Campo | Valore |
 |---|---|
-| Sessione | `2026-08-10_2026-08-11` |
-| Data | 10/08/2026 18:00 → 11/08/2026 07:00 |
+| Sessione | `2026-08-14_2026-08-15` |
+| Data | 14/08/2026 18:00 → 15/08/2026 07:00 |
 | Target | M 27 |
-| Metadata | PARTIAL |
+| Metadata | — |
 | Configurazione | UNKNOWN |
-| Integrazione | 0,00 h |
-| Immagini completate | 0 |
-| RMS totale | 0,226 arcsec |
+| Integrazione | 6,17 h |
+| Immagini completate | 37 |
+| RMS totale | 0,250 arcsec |
 | Stato sessione | 🟢 GREEN |
 
 <!-- DSG:AUTO-STATUS:END -->
