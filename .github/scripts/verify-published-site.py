@@ -26,14 +26,32 @@ class ReferenceParser(html.parser.HTMLParser):
             self.references.append((tag, values["src"] or ""))
 
 
-def resolve(site: Path, page: Path, reference: str) -> Path | None:
+def normalize_base_path(value: str) -> str:
+    if not value or value == "/":
+        return "/"
+    return f"/{value.strip('/')}/"
+
+
+def resolve(site: Path, page: Path, reference: str, base_path: str) -> Path | None:
     parsed = urllib.parse.urlsplit(reference)
     if parsed.scheme.lower() in SKIP_SCHEMES or parsed.netloc:
         return None
     raw = urllib.parse.unquote(parsed.path)
     if not raw:
         return None
-    target = site / raw.lstrip("/") if raw.startswith("/") else page.parent / raw
+
+    if raw.startswith("/"):
+        normalized_base = normalize_base_path(base_path)
+        if normalized_base != "/":
+            base_without_trailing = normalized_base.rstrip("/")
+            if raw == base_without_trailing or raw == normalized_base:
+                raw = "/"
+            elif raw.startswith(normalized_base):
+                raw = "/" + raw[len(normalized_base):]
+        target = site / raw.lstrip("/")
+    else:
+        target = page.parent / raw
+
     target = target.resolve()
     try:
         target.relative_to(site.resolve())
@@ -74,6 +92,11 @@ def validate_sitemap(site: Path) -> list[str]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--site", default="site")
+    parser.add_argument(
+        "--base-path",
+        default="/",
+        help="Published URL base path, for example /digital-stargate-manual/.",
+    )
     args = parser.parse_args()
     site = Path(args.site).resolve()
     failures: list[str] = []
@@ -81,7 +104,7 @@ def main() -> int:
         parser_html = ReferenceParser()
         parser_html.feed(page.read_text(encoding="utf-8", errors="replace"))
         for tag, reference in parser_html.references:
-            target = resolve(site, page, reference)
+            target = resolve(site, page, reference, args.base_path)
             if target is not None and not target.exists():
                 failures.append(f"{page.relative_to(site)}: <{tag}> {reference} -> missing {target}")
     failures.extend(validate_sitemap(site))
