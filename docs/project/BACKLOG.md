@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 1.2 |
+| Versione | 1.3 |
 | Stato | Active |
-| Data baseline | 14/08/2026 |
+| Data baseline | 15/08/2026 |
 
 ## 1. Scopo
 
@@ -49,7 +49,7 @@ Stati ammessi: `Planned`, `Ready`, `In Progress`, `Blocked`, `Done`, `Cancelled`
 | BKL-022 | P0 | Separare severity analytics da metadata completeness/catalog quality | Ready | BKL-020 | `GREEN` non implica automaticamente `VALIDATED_ANALYTICS`; introdotto stato tipo `METADATA_INCOMPLETE`/equivalente per record parziali | AP-014, scientific session catalog |
 | BKL-023 | P1 | Rigenerare e riallineare tutte le proiezioni AP-014 e viste portale | Planned | BKL-020–BKL-022 | `sessions.csv`, target projection, scientific-session-catalog, observation index, Mission Control, Enterprise Search e Session Detail semanticamente coerenti | AP-014 |
 | BKL-024 | P1 | Riallineare Observatory Status e Session Reports index alla sessione più recente | Planned | BKL-023 | Ultima sessione corretta, distinzione chiara tra stato operativo realtime e ultima sessione scientifica; indice report popolato e senza mojibake | AP-014, portal IA |
-| BKL-025 | P1 | Correggere broken links, asset mancanti e sitemap dell'artifact Pages | Planned | BKL-023 | Nessun riferimento interno rotto nei percorsi rilevati dall'assessment; asset Roadmap/intelligence risolti; sitemap popolata/coerente | MkDocs, Pages |
+| BKL-025 | P1 | Correggere broken links, asset mancanti e sitemap dell'artifact Pages | Done | BKL-023 | Nessun riferimento interno rotto nei percorsi rilevati dall'assessment; asset Roadmap/intelligence risolti; sitemap popolata/coerente. Acceptance verificata su `5068843608880466ba62e7ba18b8982209083645`: `deploy-pages.yml` run 381 PASS, published-site integrity PASS, deploy GitHub Pages PASS; `docs.yml` run 285 PASS; `gh-pages` commit `f1fcd04f93afe8909a80d5d916d73f42186bae8c` pubblica `5068843`. | MkDocs, Pages, PR #46, PR #47 |
 | BKL-026 | P0 | Rieseguire deep assessment ARB e chiudere OAT/AP-014 acceptance | Planned | BKL-019–BKL-025 completati; workflow verdi; Pages pubblicate | Re-crawl completo del portale, data lineage coerente, documentazione OAT aggiornata allo stato reale e decisione ARB finale | AP14-W07-EAGLE-M27-OAT-Result, AP-014-Operational-Acceptance |
 | BKL-014 | P2 | Preparare AP-015 Scientific Knowledge Platform | Planned | AP-014 e Knowledge Graph | Architecture Package CAP-40 | AMP-002 |
 | BKL-015 | P2 | Implementare repository Knowledge Graph machine-readable | Planned | Governance Foundation e schema relazioni | Relazioni AP/ADR/component/evidence interrogabili | TD-008, GP-003 |
@@ -74,7 +74,7 @@ Governance Foundation completion
   -> BKL-022 analytics severity vs metadata completeness separation
   -> BKL-023 regenerate AP-014 projections and portal views
   -> BKL-024 status/report index alignment
-  -> BKL-025 Pages link/sitemap remediation
+  -> BKL-025 Pages link/sitemap remediation [DONE]
   -> BKL-026 deep ARB reassessment + OAT/AP-014 acceptance
   -> AP-015 / Knowledge Graph
 ```
