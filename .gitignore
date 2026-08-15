@@ -64,3 +64,6 @@ SessionImporter/
 SessionTransfer/
 SessionTransfer-Launcher/
 *.log
+
+# Governed observation-session evidence is versioned even when source applications use .log
+!data/sessions/**/raw/nina/*.log
