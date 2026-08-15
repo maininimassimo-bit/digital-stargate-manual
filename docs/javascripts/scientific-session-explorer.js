@@ -25,7 +25,7 @@
     const quality = root.querySelector('[data-session-quality]');
     const reset = root.querySelector('[data-session-reset]');
 
-    const state = { sessions: [], filtered: [] };
+    const state = { sessions: [], filtered: [], latestObservation: null };
 
     const esc = (value) => String(value ?? '')
       .replace(/&/g, '&amp;')
@@ -34,6 +34,10 @@
       .replace(/"/g, '&quot;');
 
     const dec = (value, digits = 2) => Number(value || 0).toFixed(digits).replace('.', ',');
+    const coordinate = (value) => {
+      const number = Number(value);
+      return Number.isFinite(number) ? `${number.toFixed(4).replace('.', ',')}°` : 'Non disponibile';
+    };
     const formatDate = (value) => {
       const date = new Date(`${value}T00:00:00`);
       return Number.isNaN(date.getTime()) ? value : new Intl.DateTimeFormat('it-IT', { dateStyle: 'medium' }).format(date);
@@ -42,6 +46,29 @@
     const statusLabel = (session) => session.qualityState === 'VALIDATED_ANALYTICS'
       ? 'Validated analytics'
       : 'Attention required';
+
+    const loadLatestObservation = async () => {
+      try {
+        const response = await fetch(new URL('../data/realtime/latest-observation.json', document.baseURI), { cache: 'no-store' });
+        if (!response.ok) return null;
+        return response.json();
+      } catch (_) {
+        return null;
+      }
+    };
+
+    const governedCoordinates = (session) => {
+      const latest = state.latestObservation;
+      if (!latest || latest.session_id !== session.sessionId) return null;
+      const ra = Number(latest.target?.ra_deg);
+      const decValue = Number(latest.target?.dec_deg);
+      if (!Number.isFinite(ra) || !Number.isFinite(decValue)) return null;
+      return {
+        ra,
+        dec: decValue,
+        source: latest.target?.coordinate_source || 'governed-projection'
+      };
+    };
 
     const renderKpis = async () => {
       const values = await engine.getKPIs(source);
@@ -66,6 +93,13 @@
     const card = (session) => {
       const tone = session.qualityState === 'VALIDATED_ANALYTICS' ? 'is-green' : 'is-red';
       const detailUrl = `../scientific-session-detail/?sessionId=${encodeURIComponent(session.sessionId)}`;
+      const coords = governedCoordinates(session);
+      const coordinateMetrics = coords ? `
+            <div><span>RA (J2000)</span><strong>${esc(coordinate(coords.ra))}</strong></div>
+            <div><span>DEC (J2000)</span><strong>${esc(coordinate(coords.dec))}</strong></div>` : '';
+      const coordinateState = coords
+        ? `<span>Coordinate: ${esc(coords.source)}</span>`
+        : '';
       return `
         <article class="dsg-session-card ${tone}">
           <div class="dsg-session-card__topline">
@@ -82,12 +116,13 @@
             <div><span>Integrazione</span><strong>${dec(session.integrationHours)} h</strong></div>
             <div><span>Completamento</span><strong>${dec(session.completionPct)}%</strong></div>
             <div><span>RMS</span><strong>${dec(session.rmsTotalArcsec, 3)}″</strong></div>
-            <div><span>Light</span><strong>${esc(session.lightCompleted)} / ${esc(session.lightStarted)}</strong></div>
+            <div><span>Light</span><strong>${esc(session.lightCompleted)} / ${esc(session.lightStarted)}</strong></div>${coordinateMetrics}
           </div>
           <div class="dsg-session-card__states">
             <span>Evidence: ${esc(session.evidenceState)}</span>
             <span>Manifest: ${esc(session.manifestState)}</span>
             <span>Transfer: ${esc(session.transferState)}</span>
+            ${coordinateState}
           </div>
           <a href="${detailUrl}">Apri sessione →</a>
         </article>`;
@@ -123,13 +158,15 @@
     });
 
     try {
-      const [sessions] = await Promise.all([
+      const [sessions, latestObservation] = await Promise.all([
         engine.getSessions(source),
+        loadLatestObservation(),
         renderKpis(),
         populateFilters()
       ]);
 
       state.sessions = sessions;
+      state.latestObservation = latestObservation;
       render();
       root.classList.remove('is-loading', 'is-error');
       root.classList.add('is-ready');
