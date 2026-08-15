@@ -6,6 +6,38 @@
     return logo ? new URL(logo.href, document.baseURI) : new URL('./', document.baseURI);
   };
 
+  const ensureLatestObservationShowcase = () => {
+    const home = document.querySelector('.dsg-enterprise-home');
+    if (!home || home.querySelector('.dsg-showcase__media')) return;
+
+    const domainSection = home.querySelector('.dsg-domain-section');
+    const section = document.createElement('section');
+    section.className = 'dsg-showcase dsg-program-section';
+    section.setAttribute('aria-label', 'Ultima osservazione astronomica');
+    section.innerHTML = `
+      <div class="dsg-section-intro">
+        <span class="dsg-section-kicker">ULTIMA OSSERVAZIONE</span>
+        <h2>Vista astronomica governata</h2>
+      </div>
+      <div class="dsg-showcase__layout">
+        <div class="dsg-showcase__media" aria-label="Mappa dinamica dell'ultima osservazione astronomica"></div>
+        <div class="dsg-showcase__content">
+          <span class="dsg-section-kicker">SCIENTIFIC SNAPSHOT</span>
+          <h2>Ultima osservazione</h2>
+          <p>La mappa Aladin Lite è centrata sulle coordinate pubblicate dalla projection governata <code>latest-observation.json</code>.</p>
+          <div class="dsg-showcase__metrics">
+            <div><span>Integrazione</span><strong>—</strong></div>
+            <div><span>Light</span><strong>—</strong></div>
+            <div><span>RMS</span><strong>—</strong></div>
+          </div>
+          <a class="md-button" href="./scientific-session-catalog/">Apri Session Explorer</a>
+        </div>
+      </div>`;
+
+    if (domainSection) home.insertBefore(section, domainSection);
+    else home.appendChild(section);
+  };
+
   document.addEventListener('click', (event) => {
     const trigger = event.target.closest?.('[data-dsg-search]');
     if (!trigger) return;
@@ -18,6 +50,8 @@
   }, true);
 
   document.addEventListener('DOMContentLoaded', () => {
+    ensureLatestObservationShowcase();
+
     const counters = document.querySelectorAll('.dsg-counter');
 
     if (!counters.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
