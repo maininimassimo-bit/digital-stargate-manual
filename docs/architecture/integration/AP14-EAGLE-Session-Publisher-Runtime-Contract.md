@@ -2,8 +2,8 @@
 
 - **Identifier:** AP14-INT-EAGLE-PUBLISH-001
 - **Status:** Approved runtime contract; EAGLE conformance evidence pending
-- **Version:** 1.0
-- **Date:** 2026-08-13
+- **Version:** 1.1
+- **Date:** 2026-08-15
 - **Target release:** RC3
 - **Owner:** Digital StarGate Architecture Office
 
@@ -76,6 +76,14 @@ session/<YYYY-MM-DD_YYYY-MM-DD>
 
 The EAGLE does not push directly to `main`. GitHub owns promotion to `main`.
 
+### Manifest-driven evidence staging
+
+Before commit/push, the publisher must treat `manifest.json` as the authoritative evidence inventory. Every entry in `manifest.files` must be resolved below the selected session root and staged even when a repository-wide ignore rule matches its extension. In particular, governed N.I.N.A. `.log` evidence must never be omitted because of the global `*.log` runtime-ignore rule.
+
+The publication implementation must therefore be logically equivalent to force-adding the manifest-declared evidence paths (for example `git add -f -- <manifest-declared-path>`) and then staging the manifest and other governed package outputs. A `COMPLETE` package must not be pushed unless all declared files are present in the Git index with the size and SHA-256 recorded by the manifest.
+
+This rule is defense in depth with the repository `.gitignore` exception for `data/sessions/**/raw/nina/*.log`; publisher correctness must not depend only on ignore-file configuration.
+
 ## GitHub promotion contract
 
 The promotion workflow must remain fail-safe:
@@ -132,8 +140,8 @@ AP14-W07 runtime conformance remains pending until the installed EAGLE launcher 
 3. installed Reporting module version/path;
 4. effective Reporting configuration;
 5. Git synchronization behavior before session branch creation;
-6. real M 27 evidence inventory;
-7. complete M 27 package and pushed session branch;
+6. real session evidence inventory;
+7. complete package and pushed session branch including every manifest-declared evidence file;
 8. successful GitHub promotion, analytics/catalog pipeline and Pages deployment.
 
 ## Acceptance criteria
