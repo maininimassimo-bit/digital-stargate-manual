@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../styles/intelligence-centers.css">
+<link rel="stylesheet" href="../../styles/intelligence-centers.css">
 
 <div class="dsg-intelligence-center dsg-scientific-intelligence">
 
@@ -10,10 +10,10 @@
     I valori derivano dalla baseline versionata e non rappresentano telemetria live dell’EAGLE o del PC Principale.
   </p>
   <div class="dsg-intelligence-actions">
-    <a href="../scientific-platform/">Scientific Platform Center</a>
-    <a href="../architecture/packages/AP-013-Scientific-Image-Repository-Architecture/">AP-013</a>
-    <a href="../architecture/validation/AP-013-Session-Discovery-Execution-Evidence/">Discovery Evidence</a>
-    <a href="../architecture/validation/AP-013-Transfer-Readiness-Gate/">Readiness Gate</a>
+    <a href="../">Scientific Platform Center</a>
+    <a href="../../architecture/packages/AP-013-Scientific-Image-Repository-Architecture/">AP-013</a>
+    <a href="../../architecture/validation/AP-013-Session-Discovery-Execution-Evidence/">Discovery Evidence</a>
+    <a href="../../architecture/validation/AP-013-Transfer-Readiness-Gate/">Readiness Gate</a>
   </div>
 </section>
 
@@ -41,12 +41,12 @@
   <span>EVIDENCE CHAIN</span>
   <h2>Evidenze disponibili</h2>
   <div class="dsg-intelligence-assets">
-    <a href="../architecture/scientific-assets/AP13-W02-Current-State-Scientific-Asset-Inventory-Specification/"><strong>Asset Inventory</strong><span>Scope e stato corrente</span></a>
-    <a href="../architecture/scientific-assets/DSDM-001-Scientific-Data-Manager-Conceptual-Model/"><strong>DSDM-001</strong><span>Conceptual Model</span></a>
-    <a href="../architecture/scientific-assets/DSDM-002-Scientific-Data-Manager-Logical-Data-Model/"><strong>DSDM-002</strong><span>Logical Data Model</span></a>
-    <a href="../architecture/scientific-assets/DSDM-003-Contract-and-Manifest-Model/"><strong>DSDM-003</strong><span>Contract &amp; Manifest</span></a>
-    <a href="../architecture/scientific-assets/DSDM-004-Session-Importer-Architecture-and-Safe-Transfer-Design/"><strong>DSDM-004</strong><span>Importer &amp; Safe Transfer</span></a>
-    <a href="../architecture/validation/AP-013-Transfer-Readiness-Gate/"><strong>Readiness Gate</strong><span>Safety boundary del pilot</span></a>
+    <a href="../../architecture/scientific-assets/AP13-W02-Current-State-Scientific-Asset-Inventory-Specification/"><strong>Asset Inventory</strong><span>Scope e stato corrente</span></a>
+    <a href="../../architecture/scientific-assets/DSDM-001-Scientific-Data-Manager-Conceptual-Model/"><strong>DSDM-001</strong><span>Conceptual Model</span></a>
+    <a href="../../architecture/scientific-assets/DSDM-002-Scientific-Data-Manager-Logical-Data-Model/"><strong>DSDM-002</strong><span>Logical Data Model</span></a>
+    <a href="../../architecture/scientific-assets/DSDM-003-Contract-and-Manifest-Model/"><strong>DSDM-003</strong><span>Contract &amp; Manifest</span></a>
+    <a href="../../architecture/scientific-assets/DSDM-004-Session-Importer-Architecture-and-Safe-Transfer-Design/"><strong>DSDM-004</strong><span>Importer &amp; Safe Transfer</span></a>
+    <a href="../../architecture/validation/AP-013-Transfer-Readiness-Gate/"><strong>Readiness Gate</strong><span>Safety boundary del pilot</span></a>
   </div>
 </section>
 
