@@ -30,7 +30,7 @@ jobs:
         run: mkdocs build --strict --config-file mkdocs.pages.yml
 
       - name: Verifica integrità artifact
-        run: python .github/scripts/verify-published-site.py --site site
+        run: python .github/scripts/verify-published-site.py --site site --base-path /digital-stargate-manual/
 
       - name: Pubblica su GitHub Pages
         run: mkdocs gh-deploy --force --config-file mkdocs.pages.yml
