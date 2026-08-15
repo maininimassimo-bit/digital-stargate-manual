@@ -38,6 +38,12 @@
     else home.appendChild(section);
   };
 
+  // MkDocs loads homepage-effects.js before latest-observation.js. Mount the
+  // showcase immediately so the latest-observation component always finds its
+  // DOM target during component initialization; DOMContentLoaded remains as a
+  // defensive retry for alternate loading paths.
+  ensureLatestObservationShowcase();
+
   document.addEventListener('click', (event) => {
     const trigger = event.target.closest?.('[data-dsg-search]');
     if (!trigger) return;
