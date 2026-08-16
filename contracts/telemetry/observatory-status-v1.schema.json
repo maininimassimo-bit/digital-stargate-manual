@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/contracts/telemetry/observatory-status-v1.schema.json",
+  "title": "Digital StarGate Observatory Status Telemetry",
+  "description": "Read-only operational telemetry projection for Observatory Status. This contract is evidence, not safety or command authority.",
+  "type": "object",
+  "required": ["schema_version", "observatory", "observed_at_utc", "fresh_until_utc", "quality", "systems", "safety"],
+  "properties": {
+    "schema_version": {"const": "1.1"},
+    "observatory": {
+      "type": "object",
+      "required": ["name", "location"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "location": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "observed_at_utc": {"type": "string", "format": "date-time"},
+    "fresh_until_utc": {"type": "string", "format": "date-time"},
+    "source_component": {"type": ["string", "null"]},
+    "source_instance": {"type": ["string", "null"]},
+    "quality": {"enum": ["CURRENT", "DEGRADED", "STALE", "UNKNOWN"]},
+    "correlation_id": {"type": ["string", "null"]},
+    "systems": {
+      "type": "object",
+      "required": ["dome", "mount", "camera", "power", "network", "weather"],
+      "properties": {
+        "dome": {"$ref": "#/$defs/dome"},
+        "mount": {"$ref": "#/$defs/mount"},
+        "camera": {"$ref": "#/$defs/camera"},
+        "power": {"$ref": "#/$defs/power"},
+        "network": {"$ref": "#/$defs/network"},
+        "weather": {"$ref": "#/$defs/weather"}
+      },
+      "additionalProperties": false
+    },
+    "safety": {
+      "type": "object",
+      "required": ["observed_state", "authority", "reasons"],
+      "properties": {
+        "observed_state": {"enum": ["SAFE", "UNSAFE", "UNKNOWN"]},
+        "authority": {"const": "LOCAL_SAFETY_AUTHORITY"},
+        "reasons": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "baseSignal": {
+      "type": "object",
+      "required": ["state", "observed_at_utc", "fresh_until_utc", "quality"],
+      "properties": {
+        "state": {"type": "string", "minLength": 1},
+        "observed_at_utc": {"type": ["string", "null"], "format": "date-time"},
+        "fresh_until_utc": {"type": ["string", "null"], "format": "date-time"},
+        "quality": {"enum": ["CURRENT", "DEGRADED", "STALE", "UNKNOWN"]},
+        "source": {"type": ["string", "null"]}
+      }
+    },
+    "dome": {
+      "allOf": [{"$ref": "#/$defs/baseSignal"}, {"type": "object", "properties": {"state": {"enum": ["OPEN", "CLOSED", "MOVING", "FAULT", "UNKNOWN"]}, "open_sensor": {"type": ["boolean", "null"]}, "closed_sensor": {"type": ["boolean", "null"]}, "safe_signal": {"type": ["boolean", "null"]}}}]
+    },
+    "mount": {
+      "allOf": [{"$ref": "#/$defs/baseSignal"}, {"type": "object", "properties": {"state": {"enum": ["PARKED", "TRACKING", "SLEWING", "IDLE", "FAULT", "UNKNOWN"]}, "parked": {"type": ["boolean", "null"]}, "tracking": {"type": ["boolean", "null"]}}}]
+    },
+    "camera": {
+      "allOf": [{"$ref": "#/$defs/baseSignal"}, {"type": "object", "properties": {"state": {"enum": ["IDLE", "EXPOSING", "COOLING", "FAULT", "UNKNOWN"]}, "cooling": {"type": ["boolean", "null"]}, "temperature_c": {"type": ["number", "null"]}}}]
+    },
+    "power": {
+      "allOf": [{"$ref": "#/$defs/baseSignal"}, {"type": "object", "properties": {"state": {"enum": ["ONLINE", "ON_BATTERY", "FAULT", "UNKNOWN"]}, "ups_on_battery": {"type": ["boolean", "null"]}}}]
+    },
+    "network": {
+      "allOf": [{"$ref": "#/$defs/baseSignal"}, {"type": "object", "properties": {"state": {"enum": ["ONLINE", "DEGRADED", "OFFLINE", "UNKNOWN"]}, "active_link": {"type": ["string", "null"]}, "vpn": {"type": ["boolean", "null"]}, "lte_failover": {"type": ["boolean", "null"]}}}]
+    },
+    "weather": {
+      "allOf": [{"$ref": "#/$defs/baseSignal"}, {"type": "object", "properties": {"state": {"enum": ["SAFE", "UNSAFE", "UNKNOWN"]}, "temperature_c": {"type": ["number", "null"]}, "humidity_pct": {"type": ["number", "null"]}, "dew_point_c": {"type": ["number", "null"]}, "wind_speed_kmh": {"type": ["number", "null"]}, "wind_gust_kmh": {"type": ["number", "null"]}, "rain_rate_mm_h": {"type": ["number", "null"]}, "pressure_hpa": {"type": ["number", "null"]}, "sqm_mag_arcsec2": {"type": ["number", "null"]}, "sky_temperature_c": {"type": ["number", "null"]}}}]
+    }
+  }
+}
