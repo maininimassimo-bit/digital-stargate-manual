@@ -24,13 +24,11 @@ $logPath = Join-Path $RuntimeRoot 'producer.log'
 $startedAt = [datetime]::UtcNow
 $deadline = if ($DurationSeconds -gt 0) { $startedAt.AddSeconds($DurationSeconds) } else { [datetime]::MaxValue }
 $consecutiveFailures = 0
+$lastSuccessUtc = $null
+$lastError = $null
 
 function Write-ProducerHealth {
-    param(
-        [Parameter(Mandatory = $true)][string]$State,
-        [AllowNull()][string]$LastSuccessUtc,
-        [AllowNull()][string]$LastError
-    )
+    param([Parameter(Mandatory = $true)][string]$State)
 
     [ordered]@{
         schema_version = '1.0'
@@ -39,16 +37,16 @@ function Write-ProducerHealth {
         state = $State
         started_at_utc = $startedAt.ToString('o')
         updated_at_utc = [datetime]::UtcNow.ToString('o')
-        last_success_utc = $LastSuccessUtc
+        last_success_utc = $script:lastSuccessUtc
         consecutive_failures = $script:consecutiveFailures
-        last_error = $LastError
+        last_error = $script:lastError
         projection_path = $projectionPath
         poll_seconds = $PollSeconds
         freshness_seconds = $FreshnessSeconds
     } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $healthPath -Encoding UTF8
 }
 
-Write-ProducerHealth -State 'STARTING' -LastSuccessUtc $null -LastError $null
+Write-ProducerHealth -State 'STARTING'
 Add-Content -LiteralPath $logPath -Value ('{0} START computer={1} poll={2}s freshness={3}s' -f [datetime]::UtcNow.ToString('o'), $env:COMPUTERNAME, $PollSeconds, $FreshnessSeconds)
 
 while ([datetime]::UtcNow -lt $deadline) {
@@ -60,20 +58,21 @@ while ([datetime]::UtcNow -lt $deadline) {
 
         Move-Item -LiteralPath $tempPath -Destination $projectionPath -Force
         $consecutiveFailures = 0
-        $success = [datetime]::UtcNow.ToString('o')
-        Write-ProducerHealth -State 'RUNNING' -LastSuccessUtc $success -LastError $null
-        Add-Content -LiteralPath $logPath -Value ('{0} OK observed={1} weather={2}/{3}' -f $success, $candidate.observed_at_utc, $candidate.systems.weather.state, $candidate.systems.weather.quality)
+        $lastSuccessUtc = [datetime]::UtcNow.ToString('o')
+        $lastError = $null
+        Write-ProducerHealth -State 'RUNNING'
+        Add-Content -LiteralPath $logPath -Value ('{0} OK observed={1} weather={2}/{3}' -f $lastSuccessUtc, $candidate.observed_at_utc, $candidate.systems.weather.state, $candidate.systems.weather.quality)
     }
     catch {
         $consecutiveFailures++
-        $message = $_.Exception.Message
+        $lastError = $_.Exception.Message
         if (Test-Path -LiteralPath $tempPath) { Remove-Item -LiteralPath $tempPath -Force -ErrorAction SilentlyContinue }
-        Write-ProducerHealth -State 'DEGRADED' -LastSuccessUtc $null -LastError $message
-        Add-Content -LiteralPath $logPath -Value ('{0} ERROR failures={1} message={2}' -f [datetime]::UtcNow.ToString('o'), $consecutiveFailures, $message)
+        Write-ProducerHealth -State 'DEGRADED'
+        Add-Content -LiteralPath $logPath -Value ('{0} ERROR failures={1} message={2}' -f [datetime]::UtcNow.ToString('o'), $consecutiveFailures, $lastError)
     }
 
     Start-Sleep -Seconds $PollSeconds
 }
 
-Write-ProducerHealth -State 'STOPPED' -LastSuccessUtc $null -LastError $null
+Write-ProducerHealth -State 'STOPPED'
 Add-Content -LiteralPath $logPath -Value ('{0} STOP' -f [datetime]::UtcNow.ToString('o'))
