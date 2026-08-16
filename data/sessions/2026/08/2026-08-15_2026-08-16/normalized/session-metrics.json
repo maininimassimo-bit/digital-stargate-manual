@@ -1,0 +1,42 @@
+{
+  "schema_version": "0.1.1",
+  "session_id": "2026-08-15_2026-08-16",
+  "generated_at": "2026-08-16T11:09:54.733776+00:00",
+  "nina": {
+    "camera_exposures_total": 255,
+    "light_started": 71,
+    "light_completed": 69,
+    "light_failed_explicit": 0,
+    "light_interrupted_unmatched": 2,
+    "technical_exposures_estimated": 184,
+    "integration_seconds": 41400.0,
+    "autofocus_started": 18,
+    "autofocus_completed": 8,
+    "autofocus_failed_explicit": 2,
+    "autofocus_unmatched": 8,
+    "dither_requests": 139,
+    "nina_errors": 38,
+    "nina_warnings": 111
+  },
+  "phd2": {
+    "guide_segments": 11,
+    "guide_samples_valid": 15866,
+    "rms_ra_arcsec": 0.2,
+    "rms_dec_arcsec": 0.122,
+    "rms_total_arcsec": 0.234,
+    "lost_star_events": 0,
+    "pulse_guide_failures": 0
+  },
+  "weather": {
+    "weather_rows_total": 3960,
+    "weather_rows_unsafe_full_window": 803,
+    "weather_safe_transitions_full_window": 2,
+    "weather_unsafe_pct_full_window": 20.28,
+    "weather_scope_note": "Valori riferiti alla finestra CSV importata; non penalizzano la severita finche non sono correlati alla sequenza attiva/cupola aperta."
+  },
+  "severity": "YELLOW",
+  "severity_reasons": [
+    "Pose LIGHT da verificare: fallite=0, non abbinate=2",
+    "Autofocus falliti esplicitamente: 2"
+  ]
+}
