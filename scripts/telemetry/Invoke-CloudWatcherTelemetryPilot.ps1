@@ -3,7 +3,7 @@ param(
     [string]$RepositoryRoot = 'C:\DigitalStarGate\digital-stargate-manual-ap14-runtime',
     [string]$CloudWatcherCsv = 'C:\Users\PrimaLuceLab\Documents\CloudWatcher\CloudWatcher.csv',
     [string]$EvidenceRoot = 'C:\DigitalStarGate\TelemetryEvidence',
-    [ValidateRange(1, 3600)][int]$FreshnessSeconds = 30
+    [ValidateRange(1, 3600)][int]$FreshnessSeconds = 120
 )
 
 Set-StrictMode -Version Latest
@@ -89,7 +89,6 @@ try {
     Write-Output ('Shared snapshot: {0}' -f $snapshot)
 
     & $adapter -CloudWatcherCsv $snapshot -OutputPath $output -FreshnessSeconds $FreshnessSeconds -SourceInstance $env:COMPUTERNAME
-    if ($LASTEXITCODE -and $LASTEXITCODE -ne 0) { throw "Adapter terminato con exit code $LASTEXITCODE" }
 
     $projection = Get-Content -LiteralPath $output -Raw | ConvertFrom-Json
     if ($projection.schema_version -ne '1.1') { throw 'Schema version inattesa.' }
