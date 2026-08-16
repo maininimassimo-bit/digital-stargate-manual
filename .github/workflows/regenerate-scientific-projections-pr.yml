@@ -1,6 +1,9 @@
 name: Regenerate Scientific Projections PR
 
 on:
+  push:
+    branches:
+      - fix/regenerate-scientific-session-catalog
   workflow_dispatch:
 
 permissions:
@@ -8,6 +11,7 @@ permissions:
 
 jobs:
   regenerate:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
