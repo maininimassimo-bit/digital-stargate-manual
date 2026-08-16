@@ -28,11 +28,19 @@ function New-UnknownSignal {
 
 function Convert-CloudWatcherSafeStatus {
     param([AllowNull()][string]$Value)
-    switch (($Value | ForEach-Object { $_.Trim().ToUpperInvariant() })) {
+    if ([string]::IsNullOrWhiteSpace($Value)) { return 'UNKNOWN' }
+    switch ($Value.Trim().ToUpperInvariant()) {
         'SAFE' { return 'SAFE' }
         'UNSAFE' { return 'UNSAFE' }
         default { return 'UNKNOWN' }
     }
+}
+
+function Get-RomeTimeZone {
+    foreach ($id in @('W. Europe Standard Time', 'Europe/Rome')) {
+        try { return [TimeZoneInfo]::FindSystemTimeZoneById($id) } catch { }
+    }
+    throw 'Timezone Europe/Rome non disponibile sul runtime corrente.'
 }
 
 function Get-CloudWatcherTimestampUtc {
@@ -47,8 +55,7 @@ function Get-CloudWatcherTimestampUtc {
         [Globalization.CultureInfo]::InvariantCulture,
         [Globalization.DateTimeStyles]::Unspecified)
 
-    $zone = [TimeZoneInfo]::FindSystemTimeZoneById('W. Europe Standard Time')
-    return [TimeZoneInfo]::ConvertTimeToUtc($local, $zone)
+    return [TimeZoneInfo]::ConvertTimeToUtc($local, (Get-RomeTimeZone))
 }
 
 if (-not (Test-Path -LiteralPath $CloudWatcherCsv -PathType Leaf)) {
