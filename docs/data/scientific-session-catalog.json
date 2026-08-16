@@ -6272,14 +6272,14 @@
       "start": "2026-08-15T18:00:00",
       "end": "2026-08-16T07:00:00",
       "target": "M 27",
-      "raDeg": null,
-      "decDeg": null,
-      "coordinateSource": null,
-      "configurationId": "UNKNOWN",
-      "telescope": "Celestron C8",
-      "camera": "UNKNOWN",
-      "filter": "Red",
-      "binning": "1x1",
+      "raDeg": 299.9017,
+      "decDeg": 22.7211,
+      "coordinateSource": "governed-registry",
+      "configurationId": "C8_QHY695A_BIN1",
+      "telescope": "Celestron C8 XLT",
+      "camera": "QHY695A",
+      "filter": "L-Pro",
+      "binning": "1",
       "gain": 15,
       "offset": 132,
       "exposureSeconds": 600,
@@ -6291,7 +6291,7 @@
       "rmsTotalArcsec": 0.234,
       "severity": "YELLOW",
       "analyticsState": "ATTENTION_REQUIRED",
-      "metadataState": "UNREGISTERED",
+      "metadataState": "REGISTERED",
       "transferState": "NOT_REPRESENTED",
       "manifestState": "VERSIONED",
       "evidenceState": "SOURCE_METRICS_AVAILABLE",
@@ -7515,7 +7515,7 @@
           ]
         }
       },
-      "qualityState": "METADATA_INCOMPLETE"
+      "qualityState": "ATTENTION_REQUIRED"
     }
   ]
 }
