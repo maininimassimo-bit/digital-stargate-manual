@@ -14,6 +14,7 @@ on:
       - "global.json"
       - ".editorconfig"
       - "docs/**"
+      - "scripts/telemetry/**"
       - "mkdocs.yml"
       - "requirements.txt"
       - ".github/scripts/**"
@@ -48,6 +49,10 @@ jobs:
 
       - name: Verify formatting
         run: dotnet format DigitalStarGate.sln --verify-no-changes --no-restore
+
+      - name: Test CloudWatcher telemetry adapter
+        shell: pwsh
+        run: ./.github/scripts/test-cloudwatcher-telemetry-adapter.ps1
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
