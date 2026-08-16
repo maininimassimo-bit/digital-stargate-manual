@@ -1,6 +1,7 @@
 name: Regenerate Scientific Projections PR
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - fix/historical-session-coordinates
