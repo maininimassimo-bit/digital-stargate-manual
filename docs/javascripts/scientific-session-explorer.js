@@ -25,7 +25,7 @@
     const quality = root.querySelector('[data-session-quality]');
     const reset = root.querySelector('[data-session-reset]');
 
-    const state = { sessions: [], filtered: [], latestObservation: null };
+    const state = { sessions: [], filtered: [] };
 
     const esc = (value) => String(value ?? '')
       .replace(/&/g, '&amp;')
@@ -47,45 +47,21 @@
       ? 'Validated analytics'
       : 'Attention required';
 
-    const loadLatestObservation = async () => {
-      try {
-        const response = await fetch(new URL('../data/realtime/latest-observation.json', document.baseURI), { cache: 'no-store' });
-        if (!response.ok) return null;
-        return response.json();
-      } catch (_) {
-        return null;
-      }
-    };
-
     const governedCoordinates = (session) => {
-      const latest = state.latestObservation;
-      if (!latest || latest.session_id !== session.sessionId) return null;
-      const ra = Number(latest.target?.ra_deg);
-      const decValue = Number(latest.target?.dec_deg);
+      const ra = Number(session.raDeg ?? session.ra_deg);
+      const decValue = Number(session.decDeg ?? session.dec_deg);
       if (!Number.isFinite(ra) || !Number.isFinite(decValue)) return null;
-      return {
-        ra,
-        dec: decValue,
-        source: latest.target?.coordinate_source || 'governed-projection'
-      };
+      return { ra, dec: decValue, source: session.coordinateSource || 'governed-registry' };
     };
 
     const renderKpis = async () => {
       const values = await engine.getKPIs(source);
-      const display = [
-        String(values.sessionCount),
-        String(values.targetCount),
-        `${dec(values.integrationHours)} h`,
-        `${values.validatedCount}/${values.sessionCount}`
-      ];
+      const display = [String(values.sessionCount),String(values.targetCount),`${dec(values.integrationHours)} h`,`${values.validatedCount}/${values.sessionCount}`];
       [...kpis.querySelectorAll('strong')].forEach((node, index) => { node.textContent = display[index] || '—'; });
     };
 
     const populateFilters = async () => {
-      const [years, targets] = await Promise.all([
-        engine.getYears(source),
-        engine.getTargets(source)
-      ]);
+      const [years, targets] = await Promise.all([engine.getYears(source),engine.getTargets(source)]);
       years.forEach((value) => year.insertAdjacentHTML('beforeend', `<option value="${esc(value)}">${esc(value)}</option>`));
       targets.forEach((value) => target.insertAdjacentHTML('beforeend', `<option value="${esc(value)}">${esc(value)}</option>`));
     };
@@ -97,15 +73,10 @@
       const coordinateMetrics = coords ? `
             <div><span>RA (J2000)</span><strong>${esc(coordinate(coords.ra))}</strong></div>
             <div><span>DEC (J2000)</span><strong>${esc(coordinate(coords.dec))}</strong></div>` : '';
-      const coordinateState = coords
-        ? `<span>Coordinate: ${esc(coords.source)}</span>`
-        : '';
+      const coordinateState = coords ? `<span>Coordinate: ${esc(coords.source)}</span>` : '';
       return `
         <article class="dsg-session-card ${tone}">
-          <div class="dsg-session-card__topline">
-            <span>${esc(session.sessionId)}</span>
-            <span class="dsg-session-badge">${esc(statusLabel(session))}</span>
-          </div>
+          <div class="dsg-session-card__topline"><span>${esc(session.sessionId)}</span><span class="dsg-session-badge">${esc(statusLabel(session))}</span></div>
           <h2>${esc(session.target)}</h2>
           <p class="dsg-session-card__date">${esc(formatDate(session.observationDate))}</p>
           <div class="dsg-session-card__metrics">
@@ -119,62 +90,29 @@
             <div><span>Light</span><strong>${esc(session.lightCompleted)} / ${esc(session.lightStarted)}</strong></div>${coordinateMetrics}
           </div>
           <div class="dsg-session-card__states">
-            <span>Evidence: ${esc(session.evidenceState)}</span>
-            <span>Manifest: ${esc(session.manifestState)}</span>
-            <span>Transfer: ${esc(session.transferState)}</span>
-            ${coordinateState}
+            <span>Evidence: ${esc(session.evidenceState)}</span><span>Manifest: ${esc(session.manifestState)}</span><span>Transfer: ${esc(session.transferState)}</span>${coordinateState}
           </div>
           <a href="${detailUrl}">Apri sessione →</a>
         </article>`;
     };
 
     const render = () => {
-      state.filtered = engine.filterSessions(state.sessions, {
-        query: search.value,
-        year: year.value,
-        target: target.value,
-        quality: quality.value
-      });
-
+      state.filtered = engine.filterSessions(state.sessions, {query: search.value,year: year.value,target: target.value,quality: quality.value});
       count.textContent = `${state.filtered.length} sessioni visualizzate su ${state.sessions.length}`;
-      grid.innerHTML = state.filtered.length
-        ? state.filtered.map(card).join('')
-        : '<article class="dsg-session-empty">Nessuna sessione corrisponde ai filtri selezionati.</article>';
-
-      events?.emit('scientific-session-explorer-filtered', {
-        source,
-        visible: state.filtered.length,
-        total: state.sessions.length
-      });
+      grid.innerHTML = state.filtered.length ? state.filtered.map(card).join('') : '<article class="dsg-session-empty">Nessuna sessione corrisponde ai filtri selezionati.</article>';
+      events?.emit('scientific-session-explorer-filtered', {source,visible: state.filtered.length,total: state.sessions.length});
     };
 
     [search, year, target, quality].forEach((control) => control.addEventListener('input', render));
-    reset.addEventListener('click', () => {
-      search.value = '';
-      year.value = '';
-      target.value = '';
-      quality.value = '';
-      render();
-    });
+    reset.addEventListener('click', () => {search.value='';year.value='';target.value='';quality.value='';render();});
 
     try {
-      const [sessions, latestObservation] = await Promise.all([
-        engine.getSessions(source),
-        loadLatestObservation(),
-        renderKpis(),
-        populateFilters()
-      ]);
-
+      const [sessions] = await Promise.all([engine.getSessions(source),renderKpis(),populateFilters()]);
       state.sessions = sessions;
-      state.latestObservation = latestObservation;
       render();
       root.classList.remove('is-loading', 'is-error');
       root.classList.add('is-ready');
-      events?.emit('scientific-session-explorer-ready', {
-        source,
-        sessions: sessions.length,
-        metrics: engine.getMetrics?.() || null
-      });
+      events?.emit('scientific-session-explorer-ready', {source,sessions:sessions.length,metrics:engine.getMetrics?.() || null});
     } catch (error) {
       console.error(error);
       root.dataset.dsgSessionExplorerReady = 'error';
@@ -182,27 +120,12 @@
       root.classList.add('is-error');
       count.textContent = 'Catalogo non disponibile';
       grid.innerHTML = '<article class="dsg-session-empty is-error">Impossibile caricare il catalogo delle sessioni. Verificare il dataset versionato.</article>';
-      events?.emit('scientific-session-explorer-error', {
-        source,
-        message: error.message
-      });
+      events?.emit('scientific-session-explorer-error', {source,message:error.message});
     }
   };
 
-  if (window.DSG?.components) {
-    window.DSG.components.register({
-      name: 'scientific-session-explorer',
-      order: 65,
-      initialize
-    });
-    return;
-  }
-
+  if (window.DSG?.components) {window.DSG.components.register({name:'scientific-session-explorer',order:65,initialize});return;}
   const fallback = () => initialize();
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', fallback, { once: true });
-  } else {
-    fallback();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fallback, { once: true }); else fallback();
   if (window.document$?.subscribe) window.document$.subscribe(fallback);
 })();
