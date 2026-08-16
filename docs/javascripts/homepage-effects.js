@@ -12,25 +12,39 @@
 
     const domainSection = home.querySelector('.dsg-domain-section');
     const section = document.createElement('section');
-    section.className = 'dsg-showcase dsg-program-section';
+    section.className = 'dsg-showcase dsg-program-section dsg-latest-observation';
     section.setAttribute('aria-label', 'Ultima osservazione astronomica');
     section.innerHTML = `
-      <div class="dsg-section-intro">
-        <span class="dsg-section-kicker">ULTIMA OSSERVAZIONE</span>
-        <h2>Vista astronomica governata</h2>
+      <div class="dsg-latest-observation__header">
+        <div>
+          <span class="dsg-section-kicker">ULTIMA OSSERVAZIONE</span>
+          <h2>Vista astronomica governata</h2>
+          <p>La vista è centrata sulle coordinate pubblicate dalla projection governata <code>latest-observation.json</code>.</p>
+        </div>
+        <a class="md-button dsg-latest-observation__explorer" href="./scientific-session-catalog/">Apri Session Explorer →</a>
       </div>
       <div class="dsg-showcase__layout">
         <div class="dsg-showcase__media" aria-label="Mappa dinamica dell'ultima osservazione astronomica"></div>
-        <div class="dsg-showcase__content">
+        <aside class="dsg-showcase__content" aria-label="Coordinate dell'ultima osservazione">
           <span class="dsg-section-kicker">SCIENTIFIC SNAPSHOT</span>
           <h2>Ultima osservazione</h2>
-          <p>La mappa Aladin Lite è centrata sulle coordinate pubblicate dalla projection governata <code>latest-observation.json</code>.</p>
-          <div class="dsg-showcase__metrics">
-            <div><span>Integrazione</span><strong>—</strong></div>
-            <div><span>Light</span><strong>—</strong></div>
-            <div><span>RMS</span><strong>—</strong></div>
+          <div class="dsg-showcase__sky-panel dsg-showcase__coordinate-panel">
+            <div class="dsg-showcase__sky-meta">
+              <span>Survey</span><span data-sky-survey>—</span>
+              <span>FOV</span><span data-sky-fov>—</span>
+              <span>RA (J2000)</span><span data-sky-ra>—</span>
+              <span>DEC (J2000)</span><span data-sky-dec>—</span>
+              <span>Coordinate source</span><span data-sky-source>—</span>
+            </div>
           </div>
-          <a class="md-button" href="./scientific-session-catalog/">Apri Session Explorer</a>
+        </aside>
+      </div>
+      <div class="dsg-latest-observation__metrics-wrap">
+        <span class="dsg-section-kicker">SCIENTIFIC SNAPSHOT</span>
+        <div class="dsg-showcase__metrics">
+          <div><span>Integrazione</span><strong>—</strong></div>
+          <div><span>Light</span><strong>—</strong></div>
+          <div><span>RMS</span><strong>—</strong></div>
         </div>
       </div>`;
 
@@ -38,10 +52,6 @@
     else home.appendChild(section);
   };
 
-  // MkDocs loads homepage-effects.js before latest-observation.js. Mount the
-  // showcase immediately so the latest-observation component always finds its
-  // DOM target during component initialization; DOMContentLoaded remains as a
-  // defensive retry for alternate loading paths.
   ensureLatestObservationShowcase();
 
   document.addEventListener('click', (event) => {
