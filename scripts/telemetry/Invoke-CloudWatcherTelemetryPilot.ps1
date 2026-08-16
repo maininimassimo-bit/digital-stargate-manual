@@ -9,37 +9,27 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-function Get-SharedFileBytes {
+function Open-SharedReadStream {
     param([Parameter(Mandatory = $true)][string]$Path)
-
-    $stream = $null
-    try {
-        $stream = [System.IO.File]::Open($Path, [System.IO.FileMode]::Open, [System.IO.FileAccess]::Read, [System.IO.FileShare]::ReadWrite)
-        $buffer = New-Object byte[] $stream.Length
-        $read = 0
-        while ($read -lt $buffer.Length) {
-            $n = $stream.Read($buffer, $read, $buffer.Length - $read)
-            if ($n -le 0) { break }
-            $read += $n
-        }
-        if ($read -eq $buffer.Length) { return $buffer }
-        $trimmed = New-Object byte[] $read
-        [Array]::Copy($buffer, $trimmed, $read)
-        return $trimmed
-    }
-    finally {
-        if ($stream) { $stream.Dispose() }
-    }
+    return [System.IO.File]::Open(
+        $Path,
+        [System.IO.FileMode]::Open,
+        [System.IO.FileAccess]::Read,
+        [System.IO.FileShare]::ReadWrite)
 }
 
 function Get-SharedFileHash {
     param([Parameter(Mandatory = $true)][string]$Path)
+
+    $stream = $null
     $sha = [System.Security.Cryptography.SHA256]::Create()
     try {
-        $bytes = Get-SharedFileBytes -Path $Path
-        return ([BitConverter]::ToString($sha.ComputeHash($bytes))).Replace('-', '')
+        $stream = Open-SharedReadStream -Path $Path
+        $hash = $sha.ComputeHash($stream)
+        return ([BitConverter]::ToString($hash)).Replace('-', '')
     }
     finally {
+        if ($stream) { $stream.Dispose() }
         $sha.Dispose()
     }
 }
@@ -49,8 +39,27 @@ function New-SharedSnapshot {
         [Parameter(Mandatory = $true)][string]$SourcePath,
         [Parameter(Mandatory = $true)][string]$DestinationPath
     )
-    $bytes = Get-SharedFileBytes -Path $SourcePath
-    [System.IO.File]::WriteAllBytes($DestinationPath, $bytes)
+
+    $input = $null
+    $outputStream = $null
+    try {
+        $input = Open-SharedReadStream -Path $SourcePath
+        $outputStream = [System.IO.File]::Open(
+            $DestinationPath,
+            [System.IO.FileMode]::Create,
+            [System.IO.FileAccess]::Write,
+            [System.IO.FileShare]::None)
+
+        $buffer = New-Object byte[] (1024 * 1024)
+        while (($read = $input.Read($buffer, 0, $buffer.Length)) -gt 0) {
+            $outputStream.Write($buffer, 0, $read)
+        }
+        $outputStream.Flush()
+    }
+    finally {
+        if ($outputStream) { $outputStream.Dispose() }
+        if ($input) { $input.Dispose() }
+    }
 }
 
 $adapter = Join-Path $RepositoryRoot 'scripts\telemetry\Export-CloudWatcherObservatoryStatus.ps1'
