@@ -94,11 +94,18 @@ function Get-LatestCompleteCloudWatcherRow {
         [Parameter(Mandatory = $true)][string[]]$Lines
     )
 
+    $requiredValues = @('Date','Time','Cloud Condition','Rain Condition','Brightness Condition','Safe Status')
     for ($i = $Lines.Count - 1; $i -ge 0; $i--) {
         try {
             $row = @($Header, $Lines[$i]) | ConvertFrom-Csv | Select-Object -First 1
             if (-not $row) { continue }
-            if ([string]::IsNullOrWhiteSpace($row.Date) -or [string]::IsNullOrWhiteSpace($row.Time)) { continue }
+            $names = @($row.PSObject.Properties.Name)
+            if (($requiredValues | Where-Object { $names -notcontains $_ }).Count -gt 0) { continue }
+            $missingValue = $false
+            foreach ($name in $requiredValues) {
+                if ([string]::IsNullOrWhiteSpace([string]$row.$name)) { $missingValue = $true; break }
+            }
+            if ($missingValue) { continue }
             [void](Get-CloudWatcherTimestampUtc -Date $row.Date -Time $row.Time)
             return $row
         }
@@ -114,12 +121,6 @@ if (-not (Test-Path -LiteralPath $CloudWatcherCsv -PathType Leaf)) {
 $tail = Get-CloudWatcherHeaderAndTailLines -Path $CloudWatcherCsv -Bytes $TailBytes
 if ([string]::IsNullOrWhiteSpace($tail.Header)) { throw 'Header CloudWatcher assente.' }
 $row = Get-LatestCompleteCloudWatcherRow -Header $tail.Header -Lines $tail.Lines
-
-$requiredHeaders = @('Date', 'Time', 'Safe Status')
-$headers = @($row.PSObject.Properties.Name)
-foreach ($header in $requiredHeaders) {
-    if ($headers -notcontains $header) { throw "Header CloudWatcher richiesto non trovato: $header" }
-}
 
 $observedAt = Get-CloudWatcherTimestampUtc -Date $row.Date -Time $row.Time
 $freshUntil = $observedAt.AddSeconds($FreshnessSeconds)
