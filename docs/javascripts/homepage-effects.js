@@ -6,9 +6,19 @@
     return logo ? new URL(logo.href, document.baseURI) : new URL('./', document.baseURI);
   };
 
+  const ensureLatestObservationStyles = () => {
+    if (document.querySelector('link[data-dsg-latest-observation-layout]')) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = new URL('styles/latest-observation-home.css', resolveSiteRoot()).href;
+    link.dataset.dsgLatestObservationLayout = 'true';
+    document.head.appendChild(link);
+  };
+
   const ensureLatestObservationShowcase = () => {
     const home = document.querySelector('.dsg-enterprise-home');
     if (!home || home.querySelector('.dsg-showcase__media')) return;
+    ensureLatestObservationStyles();
 
     const domainSection = home.querySelector('.dsg-domain-section');
     const section = document.createElement('section');
@@ -57,64 +67,31 @@
   document.addEventListener('click', (event) => {
     const trigger = event.target.closest?.('[data-dsg-search]');
     if (!trigger) return;
-
     event.preventDefault();
     event.stopImmediatePropagation();
-
-    const destination = new URL('documentation/#enterprise-search-center', resolveSiteRoot());
-    window.location.assign(destination.href);
+    window.location.assign(new URL('documentation/#enterprise-search-center', resolveSiteRoot()).href);
   }, true);
 
   document.addEventListener('DOMContentLoaded', () => {
     ensureLatestObservationShowcase();
-
     const counters = document.querySelectorAll('.dsg-counter');
-
     if (!counters.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       counters.forEach((counter) => {
-        const value = Number(counter.dataset.value || 0);
-        const decimals = Number(counter.dataset.decimals || 0);
-        const suffix = counter.dataset.suffix || '';
-        counter.textContent = value.toLocaleString('it-IT', {
-          minimumFractionDigits: decimals,
-          maximumFractionDigits: decimals
-        }) + suffix;
+        const value = Number(counter.dataset.value || 0), decimals = Number(counter.dataset.decimals || 0), suffix = counter.dataset.suffix || '';
+        counter.textContent = value.toLocaleString('it-IT', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + suffix;
       });
       return;
     }
-
     const animate = (counter) => {
-      const target = Number(counter.dataset.value || 0);
-      const decimals = Number(counter.dataset.decimals || 0);
-      const suffix = counter.dataset.suffix || '';
-      const duration = 900;
-      const start = performance.now();
-
+      const target = Number(counter.dataset.value || 0), decimals = Number(counter.dataset.decimals || 0), suffix = counter.dataset.suffix || '', duration = 900, start = performance.now();
       const frame = (now) => {
-        const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const current = target * eased;
-
-        counter.textContent = current.toLocaleString('it-IT', {
-          minimumFractionDigits: decimals,
-          maximumFractionDigits: decimals
-        }) + suffix;
-
+        const progress = Math.min((now - start) / duration, 1), current = target * (1 - Math.pow(1 - progress, 3));
+        counter.textContent = current.toLocaleString('it-IT', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + suffix;
         if (progress < 1) requestAnimationFrame(frame);
       };
-
       requestAnimationFrame(frame);
     };
-
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animate(entry.target);
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.35 });
-
+    const observer = new IntersectionObserver((entries, obs) => entries.forEach((entry) => { if (entry.isIntersecting) { animate(entry.target); obs.unobserve(entry.target); } }), { threshold: 0.35 });
     counters.forEach((counter) => observer.observe(counter));
   });
 })();
