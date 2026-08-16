@@ -88,30 +88,30 @@ function Get-CloudWatcherHeaderAndTailLines {
     }
 }
 
+function Get-CsvFieldCount {
+    param([Parameter(Mandatory = $true)][string]$Line)
+    return ([regex]::Matches($Line, ',(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)').Count + 1)
+}
+
 function Get-LatestCompleteCloudWatcherRow {
     param(
         [Parameter(Mandatory = $true)][string]$Header,
         [Parameter(Mandatory = $true)][string[]]$Lines
     )
 
-    $requiredValues = @('Date','Time','Cloud Condition','Rain Condition','Brightness Condition','Safe Status')
+    $headerFieldCount = Get-CsvFieldCount -Line $Header
     for ($i = $Lines.Count - 1; $i -ge 0; $i--) {
         try {
+            if ((Get-CsvFieldCount -Line $Lines[$i]) -ne $headerFieldCount) { continue }
             $row = @($Header, $Lines[$i]) | ConvertFrom-Csv | Select-Object -First 1
             if (-not $row) { continue }
-            $names = @($row.PSObject.Properties.Name)
-            if (($requiredValues | Where-Object { $names -notcontains $_ }).Count -gt 0) { continue }
-            $missingValue = $false
-            foreach ($name in $requiredValues) {
-                if ([string]::IsNullOrWhiteSpace([string]$row.$name)) { $missingValue = $true; break }
-            }
-            if ($missingValue) { continue }
+            if ([string]::IsNullOrWhiteSpace([string]$row.Date) -or [string]::IsNullOrWhiteSpace([string]$row.Time)) { continue }
             [void](Get-CloudWatcherTimestampUtc -Date $row.Date -Time $row.Time)
             return $row
         }
         catch { continue }
     }
-    throw 'Nessuna riga CloudWatcher completa e parseabile trovata nella coda del file.'
+    throw 'Nessuna riga CloudWatcher strutturalmente completa e parseabile trovata nella coda del file.'
 }
 
 if (-not (Test-Path -LiteralPath $CloudWatcherCsv -PathType Leaf)) {
