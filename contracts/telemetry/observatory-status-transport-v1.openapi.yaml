@@ -1,0 +1,139 @@
+openapi: 3.0.3
+info:
+  title: Digital StarGate Observatory Status Telemetry Relay
+  version: 1.0.0
+  description: Read-only telemetry snapshot transport. This API is not a command or safety-authority interface.
+paths:
+  /v1/observatory-status:
+    post:
+      operationId: publishObservatoryStatus
+      summary: Publish the latest observatory status snapshot
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObservatoryStatus'
+      responses:
+        '202':
+          description: Snapshot accepted
+        '400':
+          description: Invalid request
+        '401':
+          description: Missing or invalid producer authentication
+        '403':
+          description: Producer not authorized for subject/source
+        '409':
+          description: Conflicting or replayed snapshot
+        '422':
+          description: Schema, timestamp, freshness or safety invariant rejected
+        '429':
+          description: Rate limited
+        '500':
+          description: Relay failure
+    get:
+      operationId: getObservatoryStatus
+      summary: Get the latest accepted sanitized observatory status snapshot
+      security: []
+      responses:
+        '200':
+          description: Latest snapshot; consumer must enforce fresh_until_utc
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservatoryStatus'
+        '404':
+          description: No accepted snapshot available
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    Signal:
+      type: object
+      required: [state, observed_at_utc, fresh_until_utc, quality, source]
+      properties:
+        state:
+          type: string
+        observed_at_utc:
+          type: string
+          format: date-time
+          nullable: true
+        fresh_until_utc:
+          type: string
+          format: date-time
+          nullable: true
+        quality:
+          type: string
+          enum: [CURRENT, STALE, UNKNOWN]
+        source:
+          type: string
+    ObservatoryStatus:
+      type: object
+      required: [schema_version, observatory, observed_at_utc, fresh_until_utc, source_component, source_instance, quality, correlation_id, systems, safety]
+      properties:
+        schema_version:
+          type: string
+          enum: ['1.1']
+        observatory:
+          type: object
+          required: [name, location]
+          properties:
+            name: { type: string }
+            location: { type: string }
+        observed_at_utc:
+          type: string
+          format: date-time
+        fresh_until_utc:
+          type: string
+          format: date-time
+        source_component:
+          type: string
+        source_instance:
+          type: string
+        quality:
+          type: string
+          enum: [DEGRADED, STALE, UNKNOWN]
+        correlation_id:
+          type: string
+          format: uuid
+        systems:
+          type: object
+          required: [dome, mount, camera, power, network, weather]
+          properties:
+            dome: { $ref: '#/components/schemas/Signal' }
+            mount: { $ref: '#/components/schemas/Signal' }
+            camera: { $ref: '#/components/schemas/Signal' }
+            power: { $ref: '#/components/schemas/Signal' }
+            network: { $ref: '#/components/schemas/Signal' }
+            weather: { $ref: '#/components/schemas/Signal' }
+        safety:
+          type: object
+          required: [observed_state, authority, reasons]
+          properties:
+            observed_state:
+              type: string
+              enum: [UNKNOWN]
+            authority:
+              type: string
+              enum: [LOCAL_SAFETY_AUTHORITY]
+            reasons:
+              type: array
+              items: { type: string }
+        diagnostics:
+          type: object
+          additionalProperties: true
