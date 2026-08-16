@@ -41,6 +41,9 @@ jobs:
           python-version: "3.12"
           cache: pip
 
+      - name: Refresh governed homepage projections
+        run: python dsg-analytics/homepage/refresh_homepage.py --repo-root .
+
       - name: Install documentation dependencies
         shell: bash
         run: |
