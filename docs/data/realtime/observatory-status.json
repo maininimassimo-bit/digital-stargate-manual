@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.1",
+  "observatory": {"name": "Digital StarGate", "location": "Manciano (GR)"},
+  "observed_at_utc": "2026-08-16T00:00:00Z",
+  "fresh_until_utc": "2026-08-16T00:00:00Z",
+  "source_component": null,
+  "source_instance": null,
+  "quality": "UNKNOWN",
+  "correlation_id": null,
+  "systems": {
+    "dome": {"state": "UNKNOWN", "observed_at_utc": null, "fresh_until_utc": null, "quality": "UNKNOWN", "source": null, "open_sensor": null, "closed_sensor": null, "safe_signal": null},
+    "mount": {"state": "UNKNOWN", "observed_at_utc": null, "fresh_until_utc": null, "quality": "UNKNOWN", "source": null, "parked": null, "tracking": null},
+    "camera": {"state": "UNKNOWN", "observed_at_utc": null, "fresh_until_utc": null, "quality": "UNKNOWN", "source": null, "cooling": null, "temperature_c": null},
+    "power": {"state": "UNKNOWN", "observed_at_utc": null, "fresh_until_utc": null, "quality": "UNKNOWN", "source": null, "ups_on_battery": null},
+    "network": {"state": "UNKNOWN", "observed_at_utc": null, "fresh_until_utc": null, "quality": "UNKNOWN", "source": null, "active_link": null, "vpn": null, "lte_failover": null},
+    "weather": {"state": "UNKNOWN", "observed_at_utc": null, "fresh_until_utc": null, "quality": "UNKNOWN", "source": null, "temperature_c": null, "humidity_pct": null, "dew_point_c": null, "wind_speed_kmh": null, "wind_gust_kmh": null, "rain_rate_mm_h": null, "pressure_hpa": null, "sqm_mag_arcsec2": null, "sky_temperature_c": null}
+  },
+  "safety": {"observed_state": "UNKNOWN", "authority": "LOCAL_SAFETY_AUTHORITY", "reasons": ["No certified realtime producer connected"]}
+}
