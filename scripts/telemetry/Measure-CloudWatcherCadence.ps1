@@ -14,7 +14,7 @@ function Open-SharedReadStream {
     return [System.IO.File]::Open($Path,[System.IO.FileMode]::Open,[System.IO.FileAccess]::Read,[System.IO.FileShare]::ReadWrite)
 }
 
-function Get-LastCsvLineShared {
+function Get-CloudWatcherHeaderAndLastLineShared {
     param([Parameter(Mandatory = $true)][string]$Path)
 
     $stream = $null
@@ -22,12 +22,13 @@ function Get-LastCsvLineShared {
     try {
         $stream = Open-SharedReadStream -Path $Path
         $reader = New-Object System.IO.StreamReader($stream)
+        $header = $reader.ReadLine()
         $last = $null
         while (-not $reader.EndOfStream) {
             $line = $reader.ReadLine()
             if (-not [string]::IsNullOrWhiteSpace($line)) { $last = $line }
         }
-        return $last
+        return [pscustomobject]@{ Header = $header; LastLine = $last }
     }
     finally {
         if ($reader) { $reader.Dispose() }
@@ -36,11 +37,19 @@ function Get-LastCsvLineShared {
 }
 
 function Parse-CloudWatcherTimestampUtc {
-    param([Parameter(Mandatory = $true)][string]$CsvLine)
+    param(
+        [Parameter(Mandatory = $true)][string]$HeaderLine,
+        [Parameter(Mandatory = $true)][string]$CsvLine
+    )
 
-    $parts = $CsvLine | ConvertFrom-Csv -Header @('Date','Time','Rest')
+    $row = @($HeaderLine, $CsvLine) | ConvertFrom-Csv | Select-Object -First 1
+    if (-not $row) { throw 'Impossibile interpretare la riga CloudWatcher.' }
+    if ([string]::IsNullOrWhiteSpace($row.Date) -or [string]::IsNullOrWhiteSpace($row.Time)) {
+        throw 'La riga CloudWatcher non contiene Date/Time validi.'
+    }
+
     $local = [datetime]::ParseExact(
-        ('{0} {1}' -f $parts.Date.Trim(), $parts.Time.Trim()),
+        ('{0} {1}' -f $row.Date.Trim(), $row.Time.Trim()),
         'yyyy-MM-dd HH:mm:ss',
         [System.Globalization.CultureInfo]::InvariantCulture)
 
@@ -78,8 +87,8 @@ try {
     while ([datetime]::UtcNow -lt $deadline) {
         $now = [datetime]::UtcNow
         $info = Get-Item -LiteralPath $CloudWatcherCsv
-        $line = Get-LastCsvLineShared -Path $CloudWatcherCsv
-        $observedUtc = if ($line) { Parse-CloudWatcherTimestampUtc -CsvLine $line } else { $null }
+        $tail = Get-CloudWatcherHeaderAndLastLineShared -Path $CloudWatcherCsv
+        $observedUtc = if ($tail.LastLine) { Parse-CloudWatcherTimestampUtc -HeaderLine $tail.Header -CsvLine $tail.LastLine } else { $null }
 
         $changed = ($info.Length -ne $lastFileLength) -or ($lastObservedUtc -and $observedUtc -and $observedUtc -ne $lastObservedUtc)
         if ($observedUtc -and (($null -eq $lastObservedUtc) -or ($observedUtc -ne $lastObservedUtc))) {
