@@ -52,8 +52,7 @@ function Get-CloudWatcherTimestampUtc {
     $local = [datetime]::ParseExact(
         ('{0} {1}' -f $Date.Trim(), $Time.Trim()),
         'yyyy-MM-dd HH:mm:ss',
-        [System.Globalization.CultureInfo]::InvariantCulture,
-        [System.Globalization.DateTimeStyles]::Unspecified)
+        [System.Globalization.CultureInfo]::InvariantCulture)
 
     return [TimeZoneInfo]::ConvertTimeToUtc($local, (Get-RomeTimeZone))
 }
