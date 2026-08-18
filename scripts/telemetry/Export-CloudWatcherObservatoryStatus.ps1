@@ -39,6 +39,18 @@ function Convert-CloudWatcherSafeStatus {
     }
 }
 
+function Convert-ToNullableDouble {
+    param([AllowNull()][object]$Value)
+    if ($null -eq $Value) { return $null }
+    $text = [string]$Value
+    if ([string]::IsNullOrWhiteSpace($text)) { return $null }
+    $number = 0.0
+    if ([double]::TryParse($text.Trim(), [System.Globalization.NumberStyles]::Float, [System.Globalization.CultureInfo]::InvariantCulture, [ref]$number)) {
+        return $number
+    }
+    return $null
+}
+
 function Get-RomeTimeZone {
     foreach ($id in @('W. Europe Standard Time', 'Europe/Rome')) {
         try { return [TimeZoneInfo]::FindSystemTimeZoneById($id) } catch { }
@@ -133,13 +145,13 @@ $weather.state = if ($weatherQuality -eq 'CURRENT') { $weatherState } else { 'UN
 $weather.observed_at_utc = $observedAt.ToString('o')
 $weather.fresh_until_utc = $freshUntil.ToString('o')
 $weather.quality = $weatherQuality
-$weather.temperature_c = $null
-$weather.humidity_pct = $null
-$weather.dew_point_c = $null
+$weather.temperature_c = Convert-ToNullableDouble -Value $row.'Ambient Temperature'
+$weather.humidity_pct = Convert-ToNullableDouble -Value $row.'Relative Humidity'
+$weather.dew_point_c = Convert-ToNullableDouble -Value $row.'Dew Point'
 $weather.wind_speed_kmh = $null
 $weather.wind_gust_kmh = $null
 $weather.rain_rate_mm_h = $null
-$weather.pressure_hpa = $null
+$weather.pressure_hpa = Convert-ToNullableDouble -Value $row.'Absolute Pressure'
 $weather.sqm_mag_arcsec2 = $null
 $weather.sky_temperature_c = $null
 
@@ -173,6 +185,11 @@ $payload = [ordered]@{
         rain_condition = $row.'Rain Condition'
         brightness_condition = $row.'Brightness Condition'
         wind_condition = $row.'Wind Condition'
+        wind_value_raw = Convert-ToNullableDouble -Value $row.'Wind Value'
+        rain_value_raw = Convert-ToNullableDouble -Value $row.'Rain Value'
+        brightness_value_raw = Convert-ToNullableDouble -Value $row.'Brightness Value'
+        raw_ir_temperature = Convert-ToNullableDouble -Value $row.'Raw IR Temperature'
+        relative_pressure_raw = Convert-ToNullableDouble -Value $row.'Relative Pressure'
         switch_status = $row.'Switch Status'
         cloudwatcher_safe_status = $row.'Safe Status'
     }
@@ -190,4 +207,5 @@ Move-Item -LiteralPath $tempPath -Destination $OutputPath -Force
 Write-Output ('CloudWatcher projection written: {0}' -f $OutputPath)
 Write-Output ('Observed UTC: {0}' -f $payload.observed_at_utc)
 Write-Output ('Weather: {0} / {1}' -f $weather.state, $weather.quality)
+Write-Output ('Weather metrics: temp={0}C humidity={1}% dew={2}C pressure={3}hPa' -f $weather.temperature_c, $weather.humidity_pct, $weather.dew_point_c, $weather.pressure_hpa)
 Write-Output ('Overall quality: {0}; overall safety: UNKNOWN' -f $payload.quality)
