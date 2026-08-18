@@ -59,24 +59,27 @@ $assemblies = @(Get-ChildItem -LiteralPath $installRoot -File -Recurse -ErrorAct
     Where-Object { $_.Extension -eq '.dll' -and $_.Name -match '(?i)nina|plugin|device|equipment|dome' } |
     Sort-Object FullName -Unique)
 if ($assemblies.Count -gt 0) {
-    foreach ($file in $assemblies) {
-        try {
-            $fv = $file.VersionInfo
-            [pscustomobject]@{
-                Name = $file.Name
-                FullName = $file.FullName
-                FileVersion = $fv.FileVersion
-                ProductVersion = $fv.ProductVersion
-            }
-        } catch {
-            [pscustomobject]@{
-                Name = $file.Name
-                FullName = $file.FullName
-                FileVersion = $null
-                ProductVersion = $null
+    $assemblyRows = @(
+        foreach ($file in $assemblies) {
+            try {
+                $fv = $file.VersionInfo
+                [pscustomobject]@{
+                    Name = $file.Name
+                    FullName = $file.FullName
+                    FileVersion = $fv.FileVersion
+                    ProductVersion = $fv.ProductVersion
+                }
+            } catch {
+                [pscustomobject]@{
+                    Name = $file.Name
+                    FullName = $file.FullName
+                    FileVersion = $null
+                    ProductVersion = $null
+                }
             }
         }
-    } | Format-Table -AutoSize | Out-String -Width 280 | Write-Output
+    )
+    $assemblyRows | Format-Table -AutoSize | Out-String -Width 280 | Write-Output
 } else {
     Write-Output '(no matching assemblies found)'
 }
