@@ -5,15 +5,20 @@ param(
     [string]$RuntimeRoot = 'C:\DigitalStarGate\TelemetryRuntime',
     [ValidateRange(5, 300)][int]$PollSeconds = 15,
     [ValidateRange(1, 3600)][int]$FreshnessSeconds = 60,
-    [ValidateRange(0, 86400)][int]$DurationSeconds = 0
+    [ValidateRange(0, 86400)][int]$DurationSeconds = 0,
+    [string]$PublishEndpoint = '',
+    [ValidateRange(1, 120)][int]$PublishTimeoutSeconds = 10,
+    [ValidateRange(0, 5)][int]$PublishMaxRetries = 2
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 $adapter = Join-Path $RepositoryRoot 'scripts\telemetry\Export-CloudWatcherObservatoryStatus.ps1'
+$publisher = Join-Path $RepositoryRoot 'scripts\telemetry\Publish-ObservatoryStatusTelemetry.ps1'
 if (-not (Test-Path -LiteralPath $adapter -PathType Leaf)) { throw "Adapter non trovato: $adapter" }
 if (-not (Test-Path -LiteralPath $CloudWatcherCsv -PathType Leaf)) { throw "CloudWatcher CSV non trovato: $CloudWatcherCsv" }
+if ($PublishEndpoint -and -not (Test-Path -LiteralPath $publisher -PathType Leaf)) { throw "Publisher non trovato: $publisher" }
 
 New-Item -ItemType Directory -Path $RuntimeRoot -Force | Out-Null
 $projectionPath = Join-Path $RuntimeRoot 'observatory-status.json'
@@ -26,12 +31,18 @@ $deadline = if ($DurationSeconds -gt 0) { $startedAt.AddSeconds($DurationSeconds
 $consecutiveFailures = 0
 $lastSuccessUtc = $null
 $lastError = $null
+$publishEnabled = -not [string]::IsNullOrWhiteSpace($PublishEndpoint)
+$publishConsecutiveFailures = 0
+$lastPublishAttemptUtc = $null
+$lastPublishSuccessUtc = $null
+$lastPublishError = $null
+$lastPublishedCorrelationId = $null
 
 function Write-ProducerHealth {
     param([Parameter(Mandatory = $true)][string]$State)
 
     [ordered]@{
-        schema_version = '1.0'
+        schema_version = '1.1'
         component = 'DSG.ObservatoryStatusTelemetryProducer'
         computer = $env:COMPUTERNAME
         state = $State
@@ -43,13 +54,23 @@ function Write-ProducerHealth {
         projection_path = $projectionPath
         poll_seconds = $PollSeconds
         freshness_seconds = $FreshnessSeconds
-    } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $healthPath -Encoding UTF8
+        transport = [ordered]@{
+            enabled = $script:publishEnabled
+            endpoint = if ($script:publishEnabled) { $PublishEndpoint } else { $null }
+            last_attempt_utc = $script:lastPublishAttemptUtc
+            last_success_utc = $script:lastPublishSuccessUtc
+            consecutive_failures = $script:publishConsecutiveFailures
+            last_error = $script:lastPublishError
+            last_correlation_id = $script:lastPublishedCorrelationId
+        }
+    } | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath $healthPath -Encoding UTF8
 }
 
 Write-ProducerHealth -State 'STARTING'
-Add-Content -LiteralPath $logPath -Value ('{0} START computer={1} poll={2}s freshness={3}s' -f [datetime]::UtcNow.ToString('o'), $env:COMPUTERNAME, $PollSeconds, $FreshnessSeconds)
+Add-Content -LiteralPath $logPath -Value ('{0} START computer={1} poll={2}s freshness={3}s publish={4}' -f [datetime]::UtcNow.ToString('o'), $env:COMPUTERNAME, $PollSeconds, $FreshnessSeconds, $publishEnabled)
 
 while ([datetime]::UtcNow -lt $deadline) {
+    $cycleState = 'RUNNING'
     try {
         & $adapter -CloudWatcherCsv $CloudWatcherCsv -OutputPath $tempPath -FreshnessSeconds $FreshnessSeconds -SourceInstance $env:COMPUTERNAME | Out-Null
         $candidate = Get-Content -LiteralPath $tempPath -Raw | ConvertFrom-Json
@@ -60,17 +81,35 @@ while ([datetime]::UtcNow -lt $deadline) {
         $consecutiveFailures = 0
         $lastSuccessUtc = [datetime]::UtcNow.ToString('o')
         $lastError = $null
-        Write-ProducerHealth -State 'RUNNING'
         Add-Content -LiteralPath $logPath -Value ('{0} OK observed={1} weather={2}/{3}' -f $lastSuccessUtc, $candidate.observed_at_utc, $candidate.systems.weather.state, $candidate.systems.weather.quality)
+
+        if ($publishEnabled) {
+            $lastPublishAttemptUtc = [datetime]::UtcNow.ToString('o')
+            try {
+                $publishOutput = & $publisher -ProjectionPath $projectionPath -Endpoint $PublishEndpoint -TimeoutSeconds $PublishTimeoutSeconds -MaxRetries $PublishMaxRetries
+                $publishConsecutiveFailures = 0
+                $lastPublishSuccessUtc = [datetime]::UtcNow.ToString('o')
+                $lastPublishError = $null
+                $lastPublishedCorrelationId = [string]$candidate.correlation_id
+                Add-Content -LiteralPath $logPath -Value ('{0} PUBLISH_OK correlation_id={1} result={2}' -f $lastPublishSuccessUtc, $lastPublishedCorrelationId, (($publishOutput -join ' ') -replace '[\r\n]+',' '))
+            }
+            catch {
+                $publishConsecutiveFailures++
+                $lastPublishError = $_.Exception.Message
+                $cycleState = 'DEGRADED'
+                Add-Content -LiteralPath $logPath -Value ('{0} PUBLISH_ERROR failures={1} message={2}' -f [datetime]::UtcNow.ToString('o'), $publishConsecutiveFailures, $lastPublishError)
+            }
+        }
     }
     catch {
         $consecutiveFailures++
         $lastError = $_.Exception.Message
+        $cycleState = 'DEGRADED'
         if (Test-Path -LiteralPath $tempPath) { Remove-Item -LiteralPath $tempPath -Force -ErrorAction SilentlyContinue }
-        Write-ProducerHealth -State 'DEGRADED'
         Add-Content -LiteralPath $logPath -Value ('{0} ERROR failures={1} message={2}' -f [datetime]::UtcNow.ToString('o'), $consecutiveFailures, $lastError)
     }
 
+    Write-ProducerHealth -State $cycleState
     Start-Sleep -Seconds $PollSeconds
 }
 
