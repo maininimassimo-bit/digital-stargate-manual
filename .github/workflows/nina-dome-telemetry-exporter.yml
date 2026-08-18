@@ -1,0 +1,53 @@
+name: NINA Dome Telemetry Exporter
+
+on:
+  push:
+    branches:
+      - feature/observatory-status-realtime-telemetry
+    paths:
+      - "integrations/nina/DigitalStarGate.DomeTelemetryExporter/**"
+      - ".github/workflows/nina-dome-telemetry-exporter.yml"
+  pull_request:
+    paths:
+      - "integrations/nina/DigitalStarGate.DomeTelemetryExporter/**"
+      - ".github/workflows/nina-dome-telemetry-exporter.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore
+        shell: pwsh
+        run: dotnet restore integrations/nina/DigitalStarGate.DomeTelemetryExporter/DigitalStarGate.DomeTelemetryExporter.csproj
+
+      - name: Build
+        shell: pwsh
+        run: dotnet build integrations/nina/DigitalStarGate.DomeTelemetryExporter/DigitalStarGate.DomeTelemetryExporter.csproj --configuration Release --no-restore
+
+      - name: Verify plugin binary
+        shell: pwsh
+        run: |
+          $dll = "integrations/nina/DigitalStarGate.DomeTelemetryExporter/bin/Release/net8.0-windows7.0/DigitalStarGate.Nina.DomeTelemetryExporter.dll"
+          if (-not (Test-Path $dll)) { throw "Plugin binary not found: $dll" }
+          Get-Item $dll | Select-Object FullName,Length,LastWriteTime
+          Get-FileHash $dll -Algorithm SHA256
+
+      - name: Upload commissioning artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: DigitalStarGate.Nina.DomeTelemetryExporter
+          path: integrations/nina/DigitalStarGate.DomeTelemetryExporter/bin/Release/net8.0-windows7.0/DigitalStarGate.Nina.DomeTelemetryExporter.dll
+          if-no-files-found: error
+          retention-days: 14
