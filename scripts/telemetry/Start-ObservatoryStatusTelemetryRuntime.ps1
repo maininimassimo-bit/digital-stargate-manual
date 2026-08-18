@@ -10,6 +10,8 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
+Add-Type -AssemblyName System.Security
+
 $producer = Join-Path $RepositoryRoot 'scripts\telemetry\Start-ObservatoryStatusTelemetryProducer.ps1'
 if (-not (Test-Path -LiteralPath $producer -PathType Leaf)) { throw "Producer non trovato: $producer" }
 if (-not (Test-Path -LiteralPath $SecretPath -PathType Leaf)) { throw "Secret DPAPI non trovato: $SecretPath" }
