@@ -3,24 +3,35 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | AP14-OPS-EAGLE-AUTO-001 |
-| Versione | 1.0 |
-| Stato | Ready for execution |
-| Data | 2026-08-13 |
+| Versione | 1.1 |
+| Stato | Deployed; NO_SESSION runtime validated |
+| Data | 2026-08-18 |
 | Host | EAGLE / PrimaLuceLab |
 
 ## Objective
 
-Deploy the governed automatic session producer on EAGLE so every future complete observing session is published through the AP-014 automatic portal pipeline.
+Operate and verify the governed automatic session producer on EAGLE so every future complete observing session is published through the AP-014 automatic portal pipeline, while no-observation nights terminate safely as `NO_SESSION`.
 
 This runbook changes the physical EAGLE runtime and must therefore be executed on EAGLE. Repository commits alone do not prove deployment.
 
-## Source baselines
+## Current production baseline
 
-Before execution verify:
+Before any runtime change verify:
 
-- `maininimassimo-bit/DigitalStarGate.Reporting` is at or after `e177d0b0d8c76d00ea7bfa6ede5bcaed3e1cc3f7`;
-- `maininimassimo-bit/digital-stargate-manual` is at or after `cb79a02ac27994812b2a3f917efd828e3c663cae`;
+- `maininimassimo-bit/DigitalStarGate.Reporting` is at or after `c902c51ddaae7493cbfecc019fef554ffc22ca7a`;
+- `DigitalStarGate.Reporting` runtime version is `1.0.6`;
+- `maininimassimo-bit/digital-stargate-manual` runtime clone is synchronized to current `main` before launcher execution;
+- runtime clone path is `C:\DigitalStarGate\digital-stargate-manual-ap14-runtime`;
+- runtime config is `C:\DigitalStarGate\Automation\reporting.config.psd1`;
 - EAGLE scientific repository clone is clean before any pull/install action.
+
+Current evidence sources:
+
+```text
+C:\Users\PrimaLuceLab\AppData\Local\NINA\Logs
+C:\Users\PrimaLuceLab\Documents\PHD2
+C:\Users\PrimaLuceLab\Documents\CloudWatcher\CloudWatcher.csv
+```
 
 ## 1. Capture current runtime before modification
 
@@ -42,98 +53,124 @@ Get-Module -ListAvailable DigitalStarGate.Reporting |
     Out-File (Join-Path $backupRoot 'reporting-modules.txt')
 ```
 
-If the existing task references an installed `Invoke-DSGAutomaticSession.ps1`, copy it and retain its hash before replacement:
-
-```powershell
-Copy-Item '<existing-launcher-path>' (Join-Path $backupRoot 'Invoke-DSGAutomaticSession.previous.ps1')
-Get-FileHash '<existing-launcher-path>' -Algorithm SHA256 |
-    Format-List * |
-    Out-File (Join-Path $backupRoot 'previous-launcher-sha256.txt')
-```
+If the existing task references installed preflight/launcher files, retain their content and hashes before replacement.
 
 ## 2. Synchronize source repositories
 
 Use fast-forward only. Stop on unrelated local changes.
 
+Runtime manual repository:
+
 ```powershell
-Set-Location 'C:\DigitalStarGate\digital-stargate-manual'
-git status --short
-git checkout main
+Set-Location 'C:\DigitalStarGate\digital-stargate-manual-ap14-runtime'
+git status --porcelain
+git switch main
+git fetch origin
 git pull --ff-only origin main
+git rev-list --left-right --count HEAD...origin/main
 ```
 
-Synchronize the local clone of `DigitalStarGate.Reporting` in the same way. If it does not exist, clone it into the governed installation source directory selected for EAGLE. Do not overwrite an unknown existing directory.
+Reporting source repository:
 
-Expected source files include:
-
-```text
-Invoke-DSGAutomaticSession.ps1
-Install-DSGAutomaticSessionTask.ps1
-Install-DSGReporting.ps1
-DigitalStarGate.Reporting\DigitalStarGate.Reporting.psd1
+```powershell
+Set-Location 'C:\DigitalStarGate\DigitalStarGate.Reporting-src'
+git status --porcelain
+git switch main
+git fetch origin
+git pull --ff-only origin main
+Get-Content .\VERSION
 ```
+
+Expected Reporting version is `1.0.6`.
 
 ## 3. Install/upgrade Reporting
 
-From the synchronized `DigitalStarGate.Reporting` source directory:
+From `C:\DigitalStarGate\DigitalStarGate.Reporting-src`:
 
 ```powershell
-.\Install-DSGReporting.ps1 -RepositoryRoot 'C:\DigitalStarGate\digital-stargate-manual'
+.\Install-DSGReporting.ps1 `
+  -RepositoryRoot 'C:\DigitalStarGate\digital-stargate-manual-ap14-runtime' `
+  -RuntimeConfigPath 'C:\DigitalStarGate\Automation\reporting.config.psd1'
 
 Get-Module -ListAvailable DigitalStarGate.Reporting |
     Sort-Object Version -Descending |
     Select-Object -First 1 Name,Version,ModuleBase
 ```
 
-The installer derives the destination version from the module manifest. A hard-coded `1.0.3` installation path is not acceptable.
+The installer derives the destination version from the module manifest and validates the exact module instance imported from the installed manifest. A hard-coded module version or verification based on an arbitrary already-loaded module instance is not acceptable.
 
 Verify the effective configuration:
 
 ```powershell
-$config = 'C:\DigitalStarGate\digital-stargate-manual\templates\reporting\reporting.config.psd1'
+$config = 'C:\DigitalStarGate\Automation\reporting.config.psd1'
 Test-Path $config
 Get-Content $config -Raw
 ```
 
-Expected evidence sources remain the certified EAGLE paths for PrimaLuceLab NINA logs, PHD2 logs and `C:\DigitalStarGate\Weather\CloudWatcher.csv`.
+## 4. Governed preflight and Scheduled Task
 
-## 4. Install the governed launcher and task
+Production chain:
 
-The launcher path supplied to the task must point to the synchronized/versioned `Invoke-DSGAutomaticSession.ps1`.
-
-First perform a WhatIf registration:
-
-```powershell
-.\Install-DSGAutomaticSessionTask.ps1 `
-  -LauncherPath '<full-versioned-launcher-path>' `
-  -TaskName 'Digital StarGate - Daily Session Upload' `
-  -DailyTime '06:30' `
-  -WhatIf
+```text
+Scheduled Task
+  -> C:\DigitalStarGate\Automation\Invoke-DSGSessionPreflight.ps1
+  -> C:\DigitalStarGate\Automation\Invoke-DSGAutomaticSession.ps1
+  -> DigitalStarGate.Reporting
 ```
 
-After inspection, register the task:
+The preflight must require:
 
-```powershell
-.\Install-DSGAutomaticSessionTask.ps1 `
-  -LauncherPath '<full-versioned-launcher-path>' `
-  -TaskName 'Digital StarGate - Daily Session Upload' `
-  -DailyTime '06:30'
-```
+- runtime clone exists and is a Git working tree;
+- clean working tree;
+- current branch exactly `main`;
+- successful `git fetch origin main`;
+- successful `git pull --ff-only origin main`;
+- local `HEAD` exactly equal to `origin/main`.
 
-Then verify action, principal, trigger and next run:
+Any failed invariant stops before session import/publication.
+
+Verify task:
 
 ```powershell
 Get-ScheduledTask -TaskName 'Digital StarGate - Daily Session Upload' | Format-List *
 Get-ScheduledTaskInfo -TaskName 'Digital StarGate - Daily Session Upload' | Format-List *
 ```
 
-## 5. M 27 controlled replay
+Production trigger is daily at `07:20` local.
 
-Do not use the daily wrapper blindly for the historical M 27 session. Determine the real session start/end from NINA/PHD2 evidence first, then use the certified Reporting commands with that explicit window.
+## 5. NO_SESSION acceptance behavior
+
+For a night with no NINA/PHD2 observing evidence in the exact candidate window, Reporting 1.0.6 must return before creating staging or parsing CloudWatcher.
+
+Expected log:
+
+```text
+MODULE version=1.0.6
+DISCOVERY ... status=NO_SESSION nina=0 phd2=0 weatherRows=0
+END outcome=NO_SESSION
+```
+
+Expected process/task result: `0`.
+
+Production evidence on 18 August 2026:
+
+- `LastRunTime = 2026-08-18 07:20:20` local;
+- `LastTaskResult = 0`;
+- candidate session `2026-08-17_2026-08-18` -> `NO_SESSION`;
+- NINA files `0`;
+- PHD2 files `0`;
+- weather rows `0`;
+- final outcome `NO_SESSION`.
+
+This path is accepted in production.
+
+## 6. M27 controlled replay
+
+Do not use the daily wrapper blindly for the historical M27 session. Determine the actual session start/end from NINA/PHD2 evidence first, then use the certified Reporting commands with that explicit window.
 
 ```powershell
 Import-Module DigitalStarGate.Reporting -Force
-$config = 'C:\DigitalStarGate\digital-stargate-manual\templates\reporting\reporting.config.psd1'
+$config = 'C:\DigitalStarGate\Automation\reporting.config.psd1'
 
 $preview = Import-DSGSession `
   -SessionStart '<actual-M27-start>' `
@@ -163,9 +200,9 @@ Publish-DSGSession `
   -Push
 ```
 
-## 6. GitHub automatic chain
+## 7. GitHub automatic chain
 
-After the EAGLE pushes `session/<session-id>` no manual catalog or page edit is permitted.
+After EAGLE pushes `session/<session-id>`, no manual catalog or page edit is permitted.
 
 Expected automatic chain:
 
@@ -178,15 +215,17 @@ Expected automatic chain:
 7. `deploy-pages.yml` is explicitly dispatched;
 8. Session Explorer, Session Detail, Mission Control and enterprise search reflect the shared updated projections.
 
-## 7. Acceptance evidence
+## 8. Acceptance evidence
 
 Retain:
 
 - deployment backup directory;
-- old/new launcher SHA-256;
+- old/new preflight and launcher hashes;
 - task XML and post-deployment task definition;
 - installed Reporting version/path;
-- actual M 27 time window;
+- runtime repository branch/HEAD/clean status;
+- automatic daily log and task result;
+- actual M27 time window;
 - preview/package status and evidence counts;
 - session branch/commit SHA;
 - promotion workflow run;
@@ -195,15 +234,15 @@ Retain:
 - resulting catalog/index commit;
 - portal verification.
 
-Record the result in `docs/architecture/validation/AP14-W07-EAGLE-M27-OAT-Result.md`. Only an Accepted result can unlock `AP-014-Operational-Acceptance.md`.
+Record results in `docs/architecture/validation/AP14-W07-EAGLE-M27-OAT-Result.md`. The runtime `NO_SESSION` sub-gate is already PASS; overall OAT acceptance still requires the remaining real-session and downstream gates.
 
-## 8. Rollback
+## 9. Rollback
 
-If the new scheduled runtime fails before acceptance:
+If the scheduled runtime fails before overall acceptance:
 
-1. disable `Digital StarGate - Daily Session Upload`;
+1. disable `Digital StarGate - Daily Session Upload` only when continued execution could create unsafe or corrupt state;
 2. restore the previous task XML from the deployment backup only after inspecting it;
-3. restore the previous launcher only from the captured backup/hash;
+3. restore previous preflight/launcher files only from captured backup/hash;
 4. do not delete any produced scientific/session evidence;
 5. do not force-push or rewrite Git history;
 6. record the failure and remediation evidence before retry.

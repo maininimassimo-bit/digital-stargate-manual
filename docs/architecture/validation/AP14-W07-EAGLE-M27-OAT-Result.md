@@ -4,8 +4,8 @@
 |---|---|
 | Documento | AP14-W07 EAGLE M27 OAT Result |
 | Identificativo | AP14-W07-EAGLE-M27-OAT-RESULT |
-| Versione | 1.3 |
-| Data | 2026-08-13 |
+| Versione | 1.4 |
+| Data | 2026-08-18 |
 | Stato | Pending |
 | Owner | Digital StarGate Architecture Office |
 
@@ -15,9 +15,11 @@ Record the runtime and end-to-end acceptance evidence for the M 27 observing ses
 
 `EAGLE evidence -> COMPLETE session package -> session branch -> governed promotion -> analytics -> AP-014 projections -> GitHub Pages`.
 
+This version also records the production validation of the unattended `NO_SESSION` path completed on 18 August 2026. That runtime sub-gate is accepted; the overall M 27 OAT remains `Pending` until the independent repository-copy, promotion, analytics, portal and idempotency gates are completed.
+
 ## 2. Runtime inspection and reconciliation evidence
 
-Runtime inspection was executed on physical host `EAGLE30154` using the governed read-only collector.
+Runtime inspection was executed on physical host `EAGLE30154` using the governed read-only collector and subsequent controlled runtime checks.
 
 ### Historical runtime
 
@@ -36,7 +38,7 @@ Runtime inspection was executed on physical host `EAGLE30154` using the governed
 
 Historical deviations from AP14-INT-EAGLE-PUBLISH-001 were confirmed:
 
-1. Reporting `1.0.3` instead of governed `1.0.4`;
+1. Reporting `1.0.3` instead of the governed baseline;
 2. `git pull --rebase` instead of fast-forward-only synchronization;
 3. direct publication to configured branch `main` instead of `session/<session-id>`;
 4. repository writes before proving `COMPLETE`;
@@ -53,52 +55,93 @@ Historical deviations from AP14-INT-EAGLE-PUBLISH-001 were confirmed:
 ### Clean AP-014 runtime repository
 
 - Runtime clone: `C:\DigitalStarGate\digital-stargate-manual-ap14-runtime`.
-- Branch: `main`.
-- Clone HEAD at creation/verification: `7e8a57884cf740ae1a3584e044144f7234c795b4`.
-- `HEAD...origin/main = 0 0` at creation.
-- Working tree was restored to clean after removing the obsolete untracked `templates/reporting/reporting.config.psd1` created by the pre-fix installer.
+- Required branch: `main`.
+- Runtime HEAD during the 17/18 August validation: `bbaef3fafbef749ccf32e07bc1c2fe61238e0669`.
+- Runtime preflight proved local `HEAD = origin/main` before launching the automatic session flow.
+- Working tree was clean during the accepted unattended run.
 
 ### Reporting runtime reconciliation
 
-- Reporting `1.0.4` installed successfully at `C:\Users\PrimaLuceLab\Documents\WindowsPowerShell\Modules\DigitalStarGate.Reporting\1.0.4`.
-- Reporting source repository advanced through:
-  - `fedb5564fc1009dd356f20d7c5739fc4ca4cc1e6` — actual EAGLE CloudWatcher source path;
-  - `0b7edd2f1d175b157d4ba52fb1cedbbdb52103ed` — runtime config kept outside Git working tree;
-  - `518a91bd17c9d4dbb055c7febc158edeac03ae27` — task default aligned to external runtime config.
-- Runtime config: `C:\DigitalStarGate\Automation\reporting.config.psd1`.
+- Reporting `1.0.6` installed at `C:\Users\PrimaLuceLab\Documents\WindowsPowerShell\Modules\DigitalStarGate.Reporting\1.0.6`.
+- Effective runtime configuration: `C:\DigitalStarGate\Automation\reporting.config.psd1`.
 - Effective RepositoryRoot: `C:\DigitalStarGate\digital-stargate-manual-ap14-runtime`.
 - NINA source: `C:\Users\PrimaLuceLab\AppData\Local\NINA\Logs`.
 - PHD2 source: `C:\Users\PrimaLuceLab\Documents\PHD2`.
 - CloudWatcher source: `C:\Users\PrimaLuceLab\Documents\CloudWatcher\CloudWatcher.csv`.
 - CloudWatcher source existence check: PASS.
-- Runtime repository remained clean after external-config installation: PASS.
+- Reporting source fix for exact-window `NO_SESSION` discovery: `2b64617db4e757c0e361300af7be7bc77086b1b2`.
+- Reporting post-OAT installer/Windows-checkout hardening: `c902c51ddaae7493cbfecc019fef554ffc22ca7a`.
+- Reporting source clone on EAGLE was realigned to `c902c51ddaae7493cbfecc019fef554ffc22ca7a`, `VERSION = 1.0.6`, clean working tree.
 
-### Scheduled Task cutover
+### NO_SESSION defect and remediation evidence
 
-Cutover completed successfully on the physical EAGLE.
+The scheduled run of 17 August 2026 exposed two independent conditions:
+
+1. the runtime repository was initially on a feature branch, correctly rejected by the fail-safe preflight;
+2. after restoring `main`, Reporting 1.0.5 could falsely discover a session because previous-night NINA/PHD2 logs inside the evidence collection boundary `+/-12h` were also used to decide whether a new session existed.
+
+The false-positive evidence came from the previous 15/16 August session and caused the import path to enter CloudWatcher processing despite there being no observing session on 16/17 August.
+
+Reporting 1.0.6 separates:
+
+- **session discovery:** exact candidate window using NINA/PHD2 `CreationTime` or `LastWriteTime`;
+- **evidence collection:** the wider `+/-12h` boundary, only after a real candidate session is established.
+
+When neither NINA nor PHD2 evidence exists in the exact candidate window, `Import-DSGSession` returns `NO_SESSION` before staging creation and before CloudWatcher parsing.
+
+### Controlled manual runtime replay — 17 August 2026
+
+After installing Reporting 1.0.6 and removing only the previously inspected false staging directory, the governed preflight was executed manually against candidate window `2026-08-16 19:00` -> `2026-08-17 06:00`.
+
+Observed evidence:
+
+```text
+DSG PRECHECK OK main-head=bbaef3fafbef749ccf32e07bc1c2fe61238e0669
+MODULE version=1.0.6
+DISCOVERY session=2026-08-16_2026-08-17 status=NO_SESSION nina=0 phd2=0 weatherRows=0
+END outcome=NO_SESSION
+```
+
+- Process exit code: `0`.
+- False staging path after replay: absent.
+- Result: PASS.
+
+### Scheduled unattended runtime execution — 18 August 2026
+
+The production Scheduled Task executed automatically at the configured daily trigger.
+
+Task evidence:
 
 - Task: `Digital StarGate - Daily Session Upload`.
-- State: `Ready`.
-- UserId: `PrimaLuceLab`.
-- LogonType: `S4U`.
-- RunLevel: `Highest`.
-- Execute: `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe`.
-- Arguments: `-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "C:\DigitalStarGate\Automation\Invoke-DSGAutomaticSession.ps1" -ConfigPath "C:\DigitalStarGate\Automation\reporting.config.psd1"`.
-- WorkingDirectory: `C:\DigitalStarGate\Automation`.
-- Trigger: daily `07:20` local; enabled.
-- Next run observed after final alignment: `2026-08-14 07:20:20` local.
-- `LastTaskResult = 1` remains the historical pre-cutover result and is not evidence of the new runtime behavior.
-- Runtime launcher SHA-256: `7CCA0699E880F5F416D535B24834B6EC8C413EE197EF3CFFAEE6EE60FAA4A110`.
-- Governed source launcher SHA-256: `7CCA0699E880F5F416D535B24834B6EC8C413EE197EF3CFFAEE6EE60FAA4A110`.
-- Source/runtime SHA-256 equality: PASS.
+- `LastRunTime = 2026-08-18 07:20:20` local.
+- `LastTaskResult = 0`.
+- `NextRunTime = 2026-08-19 07:20:20` local.
 
-### Runtime conformance assessment after cutover
+Automation log evidence for candidate window `2026-08-17 19:00` -> `2026-08-18 06:00`:
 
-**Installed runtime configuration: CONFORMANT BY INSPECTION with AP14-INT-EAGLE-PUBLISH-001; scheduled operational execution evidence remains pending.**
+```text
+[2026-08-18T07:20:10.7943233+02:00] START candidate-window=2026-08-17T19:00:00..2026-08-18T06:00:00 repository=C:\DigitalStarGate\digital-stargate-manual-ap14-runtime
+[2026-08-18T07:20:16.1832118+02:00] BASE main-head=bbaef3fafbef749ccf32e07bc1c2fe61238e0669
+[2026-08-18T07:20:16.8548706+02:00] MODULE version=1.0.6 path=C:\Users\PrimaLuceLab\Documents\WindowsPowerShell\Modules\DigitalStarGate.Reporting\1.0.6
+[2026-08-18T07:20:17.2454051+02:00] DISCOVERY session=2026-08-17_2026-08-18 status=NO_SESSION nina=0 phd2=0 weatherRows=0
+[2026-08-18T07:20:17.2610282+02:00] END outcome=NO_SESSION
+```
 
-Runtime evidence bundle from pre-cutover inspection:
+Acceptance result for unattended `NO_SESSION`: **PASS**.
+
+### Runtime conformance assessment after production validation
+
+**Installed runtime configuration and unattended `NO_SESSION` behavior: CONFORMANT / PASS for the validated path.**
+
+This acceptance does not prove `PARTIAL`, real-session publication, downstream promotion, analytics, Pages, or full idempotency behavior.
+
+Runtime evidence bundle from pre-cutover inspection remains:
 
 `C:\DigitalStarGate\SessionReports\runtime-evidence\EAGLE-runtime-evidence-20260813-132013`
+
+The 17/18 August automation evidence is retained in the daily automation logs under:
+
+`C:\DigitalStarGate\SessionReports\automation\`
 
 ## 3. M27 source evidence
 
@@ -180,9 +223,12 @@ No manual catalog or page edit is permitted for acceptance.
 - No force push/history rewrite: PASS.
 - Historical runtime rollback package retained: PASS.
 - Preview performed only in staging: PASS.
-- Runtime Git working tree clean before repository-copy gate: PASS.
-- Re-run behavior idempotent: PENDING.
-- PARTIAL/NO_SESSION protection verified in production: PENDING.
+- Runtime Git working tree clean before automatic execution: PASS.
+- Fail-safe preflight requires clean `main` aligned to `origin/main`: PASS in production execution.
+- `NO_SESSION` protection verified in production: **PASS**.
+- `NO_SESSION` creates no staging and bypasses weather processing: **PASS**.
+- `PARTIAL` protection verified in production: PENDING.
+- Re-run behavior idempotent for a real session package: PENDING.
 
 ## 9. CI/quality gates
 
@@ -190,14 +236,19 @@ No manual catalog or page edit is permitted for acceptance.
 - Reporting repository-root installer Quality Gate run `31696735200`: PASS on `f27330da5f4e8363fcfea9af2ccfa808592091b7`.
 - Reporting unattended-task semantics Quality Gate run `31697194103`: PASS on `5b82235bd1aab21bfac5f47a11c38538ee3f264b`.
 - Reporting actual CloudWatcher path Quality Gate run `31698320816`: PASS on `fedb5564fc1009dd356f20d7c5739fc4ca4cc1e6`.
-- Quality gates for external-runtime-config commits `0b7edd2f...` / `518a91bd...`: verification required before final OAT acceptance.
-- Post-OAT Developer Foundation: PENDING.
-- Post-OAT Pages: PENDING.
+- Reporting 1.0.6 NO_SESSION regression: PASS before merge of `2b64617db4e757c0e361300af7be7bc77086b1b2`.
+- Reporting 1.0.6 post-OAT runtime-hardening regression, Quality Gate and NO_SESSION regression: PASS before merge of `c902c51ddaae7493cbfecc019fef554ffc22ca7a`.
+- Post-OAT Developer Foundation: PENDING for this documentation update.
+- Post-OAT Pages: PENDING for this documentation update.
 
 ## 10. Decision
 
-**Stato: Pending**
+**Stato complessivo: Pending**
 
-The EAGLE runtime is structurally reconciled and the M27 staging preview is COMPLETE with real NINA, PHD2 and CloudWatcher evidence. The next gate is a controlled repository copy followed by manifest/content/hash verification before any branch publication.
+**Runtime sub-gate: PASS for unattended `NO_SESSION`.**
 
-This record may be changed to `Accepted` only when all mandatory repository-copy, promotion, analytics, portal, idempotency and scheduled-runtime evidence is recorded and verifiable.
+The EAGLE runtime is structurally reconciled, Reporting 1.0.6 is installed and the scheduled unattended execution of 18 August 2026 completed with `LastTaskResult = 0` and `END outcome=NO_SESSION`. The M27 staging preview remains COMPLETE with real NINA, PHD2 and CloudWatcher evidence.
+
+The next independent OAT gate remains the controlled M27 repository copy followed by manifest/content/hash verification, branch publication, governed promotion and downstream analytics/portal validation.
+
+This record may be changed to `Accepted` only when all mandatory repository-copy, promotion, analytics, portal, real-session idempotency and remaining required runtime evidence is recorded and verifiable.
