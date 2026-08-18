@@ -62,13 +62,13 @@ if ($unique.Count -gt 0) {
 }
 
 $pattern = '(?i)(Shutter(Open|Closed|Opening|Closing|Error)|ShutterStatus|OpenDomeShutter|CloseDomeShutter|Shelter Dome|ASCOM\.TS_Shelter\.Dome)'
-$matches = New-Object System.Collections.Generic.List[object]
+$stateMatches = New-Object System.Collections.Generic.List[object]
 foreach ($file in ($unique | Select-Object -First 100)) {
     if ($file.extension -notmatch '^\.(log|txt|json|xml|config|ini|csv|dat)$') { continue }
     try {
         $lines = @(Get-Content -LiteralPath $file.full_name -Tail 3000 -ErrorAction Stop)
         foreach ($m in ($lines | Select-String -Pattern $pattern)) {
-            $matches.Add([pscustomobject]@{
+            $stateMatches.Add([pscustomobject]@{
                 file = $file.full_name
                 file_last_write_utc = $file.last_write_time_utc
                 line = $m.Line
@@ -79,8 +79,8 @@ foreach ($file in ($unique | Select-Object -First 100)) {
 }
 
 Write-Output '=== STATE-TEXT MATCHES ==='
-if ($matches.Count -gt 0) {
-    $matches | Select-Object -Last 120 | ForEach-Object {
+if ($stateMatches.Count -gt 0) {
+    $stateMatches | Select-Object -Last 120 | ForEach-Object {
         Write-Output ('[{0:o}] {1}' -f $_.file_last_write_utc, $_.file)
         Write-Output $_.line
     }
@@ -96,7 +96,7 @@ $report = [ordered]@{
     mode = 'READ_ONLY_NO_DEVICE_CONNECTIONS'
     roots = @($roots)
     candidates = @($unique)
-    state_text_matches = @($matches)
+    state_text_matches = @($stateMatches)
     conclusions = [ordered]@{
         commands_sent = $false
         device_connections_opened = $false
