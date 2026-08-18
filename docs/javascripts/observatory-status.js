@@ -1,7 +1,8 @@
 (() => {
   'use strict';
 
-  const DATA_PATH = 'data/realtime/observatory-status.json';
+  const RUNTIME_ENDPOINT = 'https://dsg-observatory-status-relay-cfjug35c6q-ew.a.run.app/v1/observatory-status';
+  const FALLBACK_DATA_PATH = 'data/realtime/observatory-status.json';
   const REFRESH_MS = 15000;
 
   const parseTime = value => {
@@ -24,7 +25,7 @@
 
   const badge = state => {
     const value = String(state || 'UNKNOWN').toUpperCase();
-    if (['SAFE', 'OPEN', 'CLOSED', 'PARKED', 'TRACKING', 'ONLINE', 'IDLE'].includes(value)) return `🟢 ${value}`;
+    if (['SAFE', 'OPEN', 'CLOSED', 'PARKED', 'TRACKING', 'ONLINE', 'IDLE', 'CURRENT'].includes(value)) return `🟢 ${value}`;
     if (['UNSAFE', 'FAULT', 'OFFLINE', 'ALARM'].includes(value)) return `🔴 ${value}`;
     return `🟡 ${value}`;
   };
@@ -33,12 +34,13 @@
     document.querySelectorAll(`[data-observatory-status="${key}"]`).forEach(element => { element.textContent = value; });
   };
 
-  const render = payload => {
+  const render = (payload, transport = 'HOSTED') => {
     const systems = payload?.systems || {};
     const dome = normalize(systems.dome), mount = normalize(systems.mount), camera = normalize(systems.camera), power = normalize(systems.power), network = normalize(systems.network), weather = normalize(systems.weather);
     const payloadFresh = parseTime(payload?.fresh_until_utc)?.getTime() >= Date.now();
     const overallQuality = payloadFresh ? text(payload?.quality || 'UNKNOWN') : 'STALE';
 
+    set('transport', transport);
     set('quality', badge(overallQuality));
     set('observed-at', parseTime(payload?.observed_at_utc)?.toLocaleString('it-IT') || '—');
     set('source', text(payload?.source_component));
@@ -64,16 +66,28 @@
     set('weather-sky-temperature', number(weather.sky_temperature_c, 1, ' °C'));
   };
 
-  const renderUnavailable = () => render({ quality: 'UNKNOWN', systems: {} });
+  const renderUnavailable = () => render({ quality: 'UNKNOWN', systems: {} }, 'UNAVAILABLE');
+
+  const fetchJson = async url => {
+    const response = await fetch(url, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return response.json();
+  };
 
   let timer;
   const refresh = async () => {
     try {
-      const response = await fetch(new URL(DATA_PATH, document.baseURI), { cache: 'no-store' });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      render(await response.json());
-    } catch (error) {
-      console.warn('Digital StarGate: realtime observatory telemetry unavailable', error);
+      render(await fetchJson(RUNTIME_ENDPOINT), 'CLOUD RUN');
+      return;
+    } catch (runtimeError) {
+      console.warn('Digital StarGate: hosted observatory telemetry unavailable', runtimeError);
+    }
+
+    try {
+      const fallbackUrl = new URL(FALLBACK_DATA_PATH, document.baseURI);
+      render(await fetchJson(fallbackUrl), 'FALLBACK');
+    } catch (fallbackError) {
+      console.warn('Digital StarGate: fallback observatory telemetry unavailable', fallbackError);
       renderUnavailable();
     }
   };
