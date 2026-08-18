@@ -213,6 +213,231 @@ nav:
           - AMP-002 - Architecture Program Roadmap Realignment: architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md
           - ADR-004 - Operational Architecture: architecture/assessments/ADR-004-Operational-Architecture.md
 
+  - Enterprise DSG-MR-001:
+      - Indice enterprise: enterprise/index.md
+      - Master Roadmap: enterprise-roadmap/DSG-MR-001-master-roadmap.md
+      - Enterprise Program Portfolio: enterprise/program-portfolio.md
+      - Enterprise Planning Framework: enterprise/planning.md
+      - Enterprise Architecture Baseline:
+          - EAM-001 - Enterprise Architecture Meta Model: enterprise-architecture/DSG-EAM-001-enterprise-architecture-meta-model.md
+          - DSRA-000 - Vision Target Architecture: enterprise-architecture/DSRA-000-vision-target-architecture.md
+          - DSRA-001 - Reference Architecture: enterprise-architecture/DSRA-001-reference-architecture.md
+      - Enterprise Solution Blueprint:
+          - Overview: enterprise-solution-blueprint/index.md
+          - Astronomical Data Architecture: enterprise-solution-blueprint/data-architecture.md
+          - Component Registry: enterprise-solution-blueprint/component-registry.md
+          - Data Flow and Integrations: enterprise-solution-blueprint/data-flow-integrations.md
+          - Integration Catalog: enterprise-solution-blueprint/integration-catalog.md
+          - Logical Architecture: enterprise-solution-blueprint/logical-architecture.md
+          - NFR, Deployment and Roadmap: enterprise-solution-blueprint/nfr-deployment-roadmap.md
+          - Open Architectural Decisions: enterprise-solution-blueprint/open-decisions.md
+          - System Decomposition: enterprise-solution-blueprint/system-decomposition.md
+      - Enterprise Architecture: enterprise/enterprise-architecture.md
+      - DSRA: enterprise/DSRA-risk-assessment.md
+      - Architecture Decision Records:
+          - ADR Index: enterprise/adr/index.md
+          - ADR-004 - Enterprise documentation baseline: enterprise/adr/ADR-004-enterprise-documentation-baseline.md
+      - Registri e tracciabilità: enterprise/registries/index.md
+      - Handbook: enterprise/handbook.md
+      - SOP: enterprise/sop.md
+      - Assessment: enterprise/assessment.md
+      - Governance: enterprise/governance.md
+      - Release documentation: enterprise/release-documentation.md
+      - Project History: enterprise/project-history.md
+      - Knowledge Index: enterprise/knowledge-index.md
+      - Long-Term Vision: enterprise/vision.md
+      - Appendici: enterprise/appendices.md
+
+  - Enterprise Architecture:
+      - EA-000 - Enterprise Architecture Baseline: enterprise-architecture/EA-000-enterprise-architecture-baseline.md
+      - Application Architecture: enterprise-architecture/application-architecture.md
+      - ArchiMate Viewpoints: enterprise-architecture/archimate-viewpoints.md
+      - Architecture Decision Catalog: enterprise-architecture/architecture-decision-catalog.md
+      - Business Architecture: enterprise-architecture/business-architecture.md
+      - Data Architecture: enterprise-architecture/data-architecture.md
+      - Integration Architecture: enterprise-architecture/integration-architecture.md
+      - Observability Architecture: enterprise-architecture/observability-architecture.md
+      - Repository Map: enterprise-architecture/repository-map.md
+      - Security Architecture: enterprise-architecture/security-architecture.md
+      - Technology Architecture: enterprise-architecture/technology-architecture.md
+
+  - Knowledge Framework:
+      - Architecture Governance: knowledge/architecture-governance.md
+      - Capability Maturity Model: knowledge/capability-maturity-model.md
+      - Canonical Information Model: knowledge/canonical-information-model.md
+      - Domain Model: knowledge/domain-model.md
+      - Enterprise Glossary: knowledge/enterprise-glossary.md
+      - Knowledge Graph Model: knowledge/knowledge-graph-model.md
+      - Repository Quality Model: knowledge/repository-quality-model.md
+      - Repository Taxonomy: knowledge/repository-taxonomy.md
+      - Requirements Repository: knowledge/requirements-repository.md
+      - Traceability Matrix: knowledge/traceability-matrix.md
+
+  - Design System:
+      - DSG-DS-001 - Design System Baseline: design-system/DSG-DS-001-design-system-baseline.md
+      - Visual Identity: design-system/visual-identity.md
+      - Color System: design-system/color-system.md
+      - Typography: design-system/typography.md
+      - Layout System: design-system/layout-system.md
+      - Component Library: design-system/component-library.md
+      - Dashboard Patterns: design-system/dashboard-patterns.md
+      - Navigation Patterns: design-system/navigation-patterns.md
+      - Interaction Patterns: design-system/interaction-patterns.md
+      - Design Governance: design-system/design-governance.md
+      - Implementation Guidelines: design-system/implementation-guidelines.md
+
+  - Domains:
+      - DOM-001 - Core Observatory Domain: domains/DOM-001-core-observatory-domain.md
+
+  - Reviews:
+      - REV-001 - Core Observatory Readiness Review: reviews/REV-001-core-observatory-readiness-review.md
+
+  - Capability Documentation:
+      - Capability Registry: capabilities/CAP-000-capability-registry.md
+      - Observation Session Management:
+          - Overview: capabilities/observation-session-management/index.md
+          - Business Process: capabilities/observation-session-management/business-process.md
+          - Requirements: capabilities/observation-session-management/requirements.md
+          - Architecture Mapping: capabilities/observation-session-management/architecture-mapping.md
+          - Data Model: capabilities/observation-session-management/data-model.md
+          - ADR:
+              - OSM-ADR-001 - Session Governance Boundary: capabilities/observation-session-management/adr/OSM-ADR-001-session-governance-boundary.md
+              - OSM-ADR-002 - Session Manifest Evidence Binder: capabilities/observation-session-management/adr/OSM-ADR-002-session-manifest-evidence-binder.md
+          - SOP:
+              - Prepare Session: capabilities/observation-session-management/sop/prepare-session.md
+              - Execute Session: capabilities/observation-session-management/sop/execute-session.md
+              - Abort Session: capabilities/observation-session-management/sop/abort-session.md
+              - Recover Session: capabilities/observation-session-management/sop/recover-session.md
+              - Close Session: capabilities/observation-session-management/sop/close-session.md
+          - Runbooks:
+              - Scheduler Failure: capabilities/observation-session-management/runbooks/scheduler-failure.md
+              - Weather Unsafe: capabilities/observation-session-management/runbooks/weather-unsafe.md
+              - Roof Failure: capabilities/observation-session-management/runbooks/roof-failure.md
+              - Camera Failure: capabilities/observation-session-management/runbooks/camera-failure.md
+              - Mount Failure: capabilities/observation-session-management/runbooks/mount-failure.md
+              - N.I.N.A. Failure: capabilities/observation-session-management/runbooks/nina-failure.md
+              - ASCOM Failure: capabilities/observation-session-management/runbooks/ascom-failure.md
+              - Emergency Stop: capabilities/observation-session-management/runbooks/emergency-stop.md
+          - Technical Manual: capabilities/observation-session-management/technical-manual.md
+          - Test Plan: capabilities/observation-session-management/test-plan.md
+          - Acceptance Criteria: capabilities/observation-session-management/acceptance-criteria.md
+          - Traceability: capabilities/observation-session-management/traceability.md
+      - Observation Scheduling:
+          - Overview: capabilities/observation-scheduling/index.md
+          - Business Process: capabilities/observation-scheduling/business-process.md
+          - Requirements: capabilities/observation-scheduling/requirements.md
+          - Architecture Mapping: capabilities/observation-scheduling/architecture-mapping.md
+          - Data Model: capabilities/observation-scheduling/data-model.md
+          - ADR:
+              - OSD-ADR-001 - Scheduling Boundary: capabilities/observation-scheduling/adr/OSD-ADR-001-scheduling-boundary.md
+              - OSD-ADR-002 - Priority Resolution: capabilities/observation-scheduling/adr/OSD-ADR-002-priority-resolution.md
+          - SOP:
+              - Create Schedule: capabilities/observation-scheduling/sop/create-schedule.md
+              - Update Schedule: capabilities/observation-scheduling/sop/update-schedule.md
+              - Approve Schedule: capabilities/observation-scheduling/sop/approve-schedule.md
+              - Cancel Schedule: capabilities/observation-scheduling/sop/cancel-schedule.md
+          - Runbooks:
+              - Scheduling Conflict: capabilities/observation-scheduling/runbooks/scheduling-conflict.md
+              - Weather Window Lost: capabilities/observation-scheduling/runbooks/weather-window-lost.md
+              - Resource Unavailable: capabilities/observation-scheduling/runbooks/resource-unavailable.md
+              - Schedule Recovery: capabilities/observation-scheduling/runbooks/schedule-recovery.md
+          - Technical Manual: capabilities/observation-scheduling/technical-manual.md
+          - Test Plan: capabilities/observation-scheduling/test-plan.md
+          - Acceptance Criteria: capabilities/observation-scheduling/acceptance-criteria.md
+          - Traceability: capabilities/observation-scheduling/traceability.md
+      - Equipment Registry:
+          - Overview: capabilities/equipment-registry/index.md
+          - Business Process: capabilities/equipment-registry/business-process.md
+          - Requirements: capabilities/equipment-registry/requirements.md
+          - Architecture Mapping: capabilities/equipment-registry/architecture-mapping.md
+          - Data Model: capabilities/equipment-registry/data-model.md
+          - ADR:
+              - EQR-ADR-001 - Authoritative Registry: capabilities/equipment-registry/adr/EQR-ADR-001-authoritative-registry.md
+              - EQR-ADR-002 - Equipment State Model: capabilities/equipment-registry/adr/EQR-ADR-002-equipment-state-model.md
+          - SOP:
+              - Register Equipment: capabilities/equipment-registry/sop/register-equipment.md
+              - Update Equipment: capabilities/equipment-registry/sop/update-equipment.md
+              - Verify Equipment: capabilities/equipment-registry/sop/verify-equipment.md
+              - Retire Equipment: capabilities/equipment-registry/sop/retire-equipment.md
+          - Runbooks:
+              - Equipment Not Found: capabilities/equipment-registry/runbooks/equipment-not-found.md
+              - Configuration Mismatch: capabilities/equipment-registry/runbooks/configuration-mismatch.md
+              - Equipment Offline: capabilities/equipment-registry/runbooks/equipment-offline.md
+              - Registry Recovery: capabilities/equipment-registry/runbooks/registry-recovery.md
+          - Technical Manual: capabilities/equipment-registry/technical-manual.md
+          - Test Plan: capabilities/equipment-registry/test-plan.md
+          - Acceptance Criteria: capabilities/equipment-registry/acceptance-criteria.md
+          - Traceability: capabilities/equipment-registry/traceability.md
+      - Target Registry:
+          - Overview: capabilities/target-registry/index.md
+          - Business Process: capabilities/target-registry/business-process.md
+          - Requirements: capabilities/target-registry/requirements.md
+          - Architecture Mapping: capabilities/target-registry/architecture-mapping.md
+          - Data Model: capabilities/target-registry/data-model.md
+          - ADR:
+              - TGT-ADR-001 - Authoritative Target Model: capabilities/target-registry/adr/TGT-ADR-001-authoritative-target-model.md
+              - TGT-ADR-002 - Canonical Target Identity: capabilities/target-registry/adr/TGT-ADR-002-canonical-target-identity.md
+          - SOP:
+              - Register Target: capabilities/target-registry/sop/register-target.md
+              - Update Target: capabilities/target-registry/sop/update-target.md
+              - Validate Target: capabilities/target-registry/sop/validate-target.md
+              - Retire Target: capabilities/target-registry/sop/retire-target.md
+          - Runbooks:
+              - Duplicate Target: capabilities/target-registry/runbooks/duplicate-target.md
+              - Unresolved Identifier: capabilities/target-registry/runbooks/unresolved-identifier.md
+              - Invalid Coordinates: capabilities/target-registry/runbooks/invalid-coordinates.md
+              - Registry Recovery: capabilities/target-registry/runbooks/registry-recovery.md
+          - Technical Manual: capabilities/target-registry/technical-manual.md
+          - Test Plan: capabilities/target-registry/test-plan.md
+          - Acceptance Criteria: capabilities/target-registry/acceptance-criteria.md
+          - Traceability: capabilities/target-registry/traceability.md
+      - Observatory Safety:
+          - Overview: capabilities/observatory-safety/index.md
+          - Business Process: capabilities/observatory-safety/business-process.md
+          - Requirements: capabilities/observatory-safety/requirements.md
+          - Architecture Mapping: capabilities/observatory-safety/architecture-mapping.md
+          - Data Model: capabilities/observatory-safety/data-model.md
+          - ADR:
+              - SAF-ADR-001 - Safety Authority: capabilities/observatory-safety/adr/SAF-ADR-001-safety-authority.md
+              - SAF-ADR-002 - Fail-Safe Policy: capabilities/observatory-safety/adr/SAF-ADR-002-fail-safe-policy.md
+          - SOP:
+              - Evaluate Safety: capabilities/observatory-safety/sop/evaluate-safety.md
+              - Enter Safe Mode: capabilities/observatory-safety/sop/enter-safe-mode.md
+              - Resume Operations: capabilities/observatory-safety/sop/resume-operations.md
+              - Emergency Shutdown: capabilities/observatory-safety/sop/emergency-shutdown.md
+          - Runbooks:
+              - Emergency Stop: capabilities/observatory-safety/runbooks/emergency-stop.md
+              - Roof Unsafe: capabilities/observatory-safety/runbooks/roof-unsafe.md
+              - Communications Lost: capabilities/observatory-safety/runbooks/communications-lost.md
+              - Power Failure: capabilities/observatory-safety/runbooks/power-failure.md
+          - Technical Manual: capabilities/observatory-safety/technical-manual.md
+          - Test Plan: capabilities/observatory-safety/test-plan.md
+          - Acceptance Criteria: capabilities/observatory-safety/acceptance-criteria.md
+          - Traceability: capabilities/observatory-safety/traceability.md
+      - Weather Monitoring:
+          - Overview: capabilities/weather-monitoring/index.md
+          - Business Process: capabilities/weather-monitoring/business-process.md
+          - Requirements: capabilities/weather-monitoring/requirements.md
+          - Architecture Mapping: capabilities/weather-monitoring/architecture-mapping.md
+          - Data Model: capabilities/weather-monitoring/data-model.md
+          - ADR:
+              - WEA-ADR-001 - Authoritative Weather State: capabilities/weather-monitoring/adr/WEA-ADR-001-authoritative-weather-state.md
+              - WEA-ADR-002 - Operational Safety Thresholds: capabilities/weather-monitoring/adr/WEA-ADR-002-operational-safety-thresholds.md
+          - SOP:
+              - Monitor Weather: capabilities/weather-monitoring/sop/monitor-weather.md
+              - Validate Weather State: capabilities/weather-monitoring/sop/validate-weather-state.md
+              - Suspend Observation: capabilities/weather-monitoring/sop/suspend-observation.md
+              - Resume Observation: capabilities/weather-monitoring/sop/resume-observation.md
+          - Runbooks:
+              - Weather Station Offline: capabilities/weather-monitoring/runbooks/weather-station-offline.md
+              - Conflicting Weather Data: capabilities/weather-monitoring/runbooks/conflicting-weather-data.md
+              - Unsafe Weather State: capabilities/weather-monitoring/runbooks/unsafe-weather-state.md
+              - Weather Monitor Recovery: capabilities/weather-monitoring/runbooks/weather-monitor-recovery.md
+          - Technical Manual: capabilities/weather-monitoring/technical-manual.md
+          - Test Plan: capabilities/weather-monitoring/test-plan.md
+          - Acceptance Criteria: capabilities/weather-monitoring/acceptance-criteria.md
+          - Traceability: capabilities/weather-monitoring/traceability.md
+
   - Observatory:
       - Observatory Status: status/index.md
       - Session Reports: session-reports/index.md
@@ -302,6 +527,9 @@ nav:
 
   - UI / UX:
       - Design System: ui/design-system.md
+
+  - Release Management:
+      - REL-000 - Release Management Baseline: releases/REL-000-release-management-baseline.md
 
   - Release Notes:
       - Release 1.5 - Developer Edition: releases/release-1.5-developer-edition.md
