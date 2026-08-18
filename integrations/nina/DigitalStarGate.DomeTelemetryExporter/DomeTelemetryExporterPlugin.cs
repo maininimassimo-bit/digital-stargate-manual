@@ -8,8 +8,8 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 
 namespace DigitalStarGate.Nina.DomeTelemetryExporter {
     [Export(typeof(IPluginManifest))]
@@ -92,9 +92,7 @@ namespace DigitalStarGate.Nina.DomeTelemetryExporter {
                 { "reason", reason }
             };
 
-            var serializer = new JavaScriptSerializer();
-            var json = serializer.Serialize(payload);
-
+            var json = JsonSerializer.Serialize(payload);
             var directory = Path.GetDirectoryName(projectionPath);
             Directory.CreateDirectory(directory);
 
