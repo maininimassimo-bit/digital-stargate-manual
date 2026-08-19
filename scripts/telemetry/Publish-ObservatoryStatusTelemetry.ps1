@@ -15,8 +15,18 @@ function Test-Projection {
     param([Parameter(Mandatory = $true)]$Payload)
 
     if ([string]$Payload.schema_version -ne '1.1') { throw 'Projection schema_version must be 1.1.' }
-    if ([string]$Payload.safety.observed_state -ne 'UNKNOWN') { throw 'Pilot safety invariant violated: overall safety must remain UNKNOWN.' }
-    if ([string]$Payload.safety.authority -ne 'LOCAL_SAFETY_AUTHORITY') { throw 'Pilot safety authority invariant violated.' }
+
+    $safetyState = ([string]$Payload.safety.observed_state).Trim().ToUpperInvariant()
+    if ($safetyState -notin @('SAFE','UNSAFE','UNKNOWN')) {
+        throw 'safety.observed_state must be SAFE, UNSAFE, or UNKNOWN.'
+    }
+
+    $safetyAuthority = ([string]$Payload.safety.authority).Trim().ToUpperInvariant()
+    if ([string]::IsNullOrWhiteSpace($safetyAuthority)) { throw 'safety.authority is required.' }
+    if ($safetyAuthority -notin @('LOCAL_SAFETY_AUTHORITY','NINA_SAFETY_MONITOR_OBSERVATION')) {
+        throw 'Unsupported safety.authority.'
+    }
+
     if ([string]::IsNullOrWhiteSpace([string]$Payload.correlation_id)) { throw 'correlation_id is required.' }
 
     $observed = [datetime]::Parse([string]$Payload.observed_at_utc, [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::RoundtripKind).ToUniversalTime()
@@ -44,7 +54,7 @@ $payload = $raw | ConvertFrom-Json
 Test-Projection -Payload $payload
 
 if ($ValidateOnly) {
-    Write-Output ('VALIDATION RESULT: PASS schema={0} observed={1} fresh_until={2} correlation_id={3}' -f $payload.schema_version, $payload.observed_at_utc, $payload.fresh_until_utc, $payload.correlation_id)
+    Write-Output ('VALIDATION RESULT: PASS schema={0} safety={1}/{2} observed={3} fresh_until={4} correlation_id={5}' -f $payload.schema_version, $payload.safety.observed_state, $payload.safety.authority, $payload.observed_at_utc, $payload.fresh_until_utc, $payload.correlation_id)
     exit 0
 }
 
