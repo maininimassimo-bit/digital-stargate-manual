@@ -45,6 +45,17 @@ function Get-ServiceSignal {
     }
 }
 
+function Get-UnverifiedServiceSignal {
+    param([Parameter(Mandatory = $true)][string]$Source)
+    return [ordered]@{
+        state = 'UNKNOWN'
+        observed_at_utc = $null
+        fresh_until_utc = $null
+        quality = 'UNKNOWN'
+        source = $Source
+    }
+}
+
 if (-not (Test-Path -LiteralPath $NinaProjection -PathType Leaf)) {
     throw "Projection NINA non trovata: $NinaProjection"
 }
@@ -65,8 +76,8 @@ $source = 'NINA Observatory Telemetry Exporter'
 $dome = Get-ServiceSignal -Service $projection.services.dome -ObservedAt $observedAt -FreshUntil $freshUntil -Source $source
 $mount = Get-ServiceSignal -Service $projection.services.mount -ObservedAt $observedAt -FreshUntil $freshUntil -Source $source
 $camera = Get-ServiceSignal -Service $projection.services.camera -ObservedAt $observedAt -FreshUntil $freshUntil -Source $source
-$power = Get-ServiceSignal -Service $projection.services.power -ObservedAt $observedAt -FreshUntil $freshUntil -Source $source
-$network = Get-ServiceSignal -Service $projection.services.network -ObservedAt $observedAt -FreshUntil $freshUntil -Source $source
+$power = Get-UnverifiedServiceSignal -Source $source
+$network = Get-UnverifiedServiceSignal -Source $source
 $weatherSignal = Get-ServiceSignal -Service $projection.services.weather -ObservedAt $observedAt -FreshUntil $freshUntil -Source $source
 $safetySignal = Get-ServiceSignal -Service $projection.services.safety -ObservedAt $observedAt -FreshUntil $freshUntil -Source $source
 
@@ -145,4 +156,4 @@ Write-Output ('NINA Observatory Status projection written: {0}' -f $OutputPath)
 Write-Output ('Observed UTC: {0}' -f $payload.observed_at_utc)
 Write-Output ('Dome: {0}/{1}; Mount: {2}/{3}; Camera: {4}/{5}' -f $dome.state,$dome.quality,$mount.state,$mount.quality,$camera.state,$camera.quality)
 Write-Output ('Weather: {0}/{1}; Safety observed: {2}' -f $weather.state,$weather.quality,$payload.safety.observed_state)
-Write-Output ('Power: {0}; Network: {1}' -f $power.state,$network.state)
+Write-Output ('Power: {0}/{1}; Network: {2}/{3}' -f $power.state,$power.quality,$network.state,$network.quality)
