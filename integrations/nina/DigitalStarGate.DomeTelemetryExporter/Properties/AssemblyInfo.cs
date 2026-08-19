@@ -1,0 +1,22 @@
+using System.Reflection;
+using System.Runtime.InteropServices;
+
+[assembly: Guid("d1b4931c-0f31-44a4-a7f0-0b66a95e7f13")]
+[assembly: AssemblyVersion("0.2.0.0")]
+[assembly: AssemblyFileVersion("0.2.0.0")]
+[assembly: AssemblyTitle("Digital StarGate Observatory Telemetry Exporter")]
+[assembly: AssemblyDescription("Read-only N.I.N.A. observatory telemetry projection for Digital StarGate Observatory Status")]
+[assembly: AssemblyCompany("Digital StarGate")]
+[assembly: AssemblyProduct("Digital StarGate Observatory Telemetry Exporter")]
+[assembly: AssemblyCopyright("Copyright 2026 Massimo Mainini / Digital StarGate")]
+[assembly: AssemblyMetadata("Author", "Massimo Mainini")]
+[assembly: AssemblyMetadata("MinimumApplicationVersion", "3.2.0.9001")]
+[assembly: AssemblyMetadata("License", "MPL-2.0")]
+[assembly: AssemblyMetadata("LicenseURL", "https://www.mozilla.org/en-US/MPL/2.0/")]
+[assembly: AssemblyMetadata("Repository", "https://github.com/maininimassimo-bit/digital-stargate-manual")]
+[assembly: AssemblyMetadata("Tags", "DigitalStarGate,observatory,dome,mount,camera,weather,safety,telemetry,read-only")]
+[assembly: AssemblyMetadata("LongDescription", "Author: Massimo Mainini. Exports read-only N.I.N.A. snapshots for dome, mount, imaging camera, weather and safety monitor into a unified local Observatory Status projection. Power and network are contract placeholders until verified sources are integrated. The plugin never connects to equipment and never issues device commands.")]
+[assembly: ComVisible(false)]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
