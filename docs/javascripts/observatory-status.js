@@ -21,11 +21,12 @@
   };
 
   const text = value => value === undefined || value === null || value === '' ? '—' : String(value);
+  const bool = value => value === true ? 'Sì' : value === false ? 'No' : '—';
   const number = (value, digits, suffix) => Number.isFinite(Number(value)) ? `${Number(value).toLocaleString('it-IT', { minimumFractionDigits: digits, maximumFractionDigits: digits })}${suffix}` : '—';
 
   const badge = state => {
     const value = String(state || 'UNKNOWN').toUpperCase();
-    if (['SAFE', 'OPEN', 'CLOSED', 'PARKED', 'TRACKING', 'ONLINE', 'IDLE', 'CURRENT'].includes(value)) return `🟢 ${value}`;
+    if (['SAFE', 'OPEN', 'CLOSED', 'PARKED', 'TRACKING', 'ONLINE', 'IDLE', 'READY', 'CURRENT', 'AVAILABLE'].includes(value)) return `🟢 ${value}`;
     if (['UNSAFE', 'FAULT', 'OFFLINE', 'ALARM'].includes(value)) return `🔴 ${value}`;
     return `🟡 ${value}`;
   };
@@ -36,24 +37,36 @@
 
   const render = (payload, transport = 'HOSTED') => {
     const systems = payload?.systems || {};
+    const diagnostics = payload?.diagnostics || {};
+    const safety = payload?.safety || {};
     const dome = normalize(systems.dome), mount = normalize(systems.mount), camera = normalize(systems.camera), power = normalize(systems.power), network = normalize(systems.network), weather = normalize(systems.weather);
     const payloadFresh = parseTime(payload?.fresh_until_utc)?.getTime() >= Date.now();
     const overallQuality = payloadFresh ? text(payload?.quality || 'UNKNOWN') : 'STALE';
+    const safetyState = payloadFresh ? text(safety.observed_state || 'UNKNOWN') : 'UNKNOWN';
 
     set('transport', transport);
     set('quality', badge(overallQuality));
     set('observed-at', parseTime(payload?.observed_at_utc)?.toLocaleString('it-IT') || '—');
     set('source', text(payload?.source_component));
+
+    set('safety-state', badge(safetyState));
+    set('safety-detail', `Fonte: ${text(safety.authority)} · telemetria, non autorità di comando`);
+
     set('dome-state', badge(dome.state));
-    set('dome-detail', `OPEN: ${text(dome.open_sensor)} · CLOSED: ${text(dome.closed_sensor)} · SAFE: ${text(dome.safe_signal)}`);
+    set('dome-detail', `Shutter: ${text(diagnostics.dome_raw_shutter_status)} · qualità: ${text(dome.quality)}`);
+
     set('mount-state', badge(mount.state));
-    set('mount-detail', `parked: ${text(mount.parked)} · tracking: ${text(mount.tracking)}`);
+    set('mount-detail', `parked: ${bool(diagnostics.mount_at_park)} · home: ${bool(diagnostics.mount_at_home)} · tracking: ${bool(diagnostics.mount_tracking)} · pier: ${text(diagnostics.mount_side_of_pier)}`);
+
     set('camera-state', badge(camera.state));
-    set('camera-detail', `cooling: ${text(camera.cooling)} · ${number(camera.temperature_c, 1, ' °C')}`);
+    set('camera-detail', `cooler: ${bool(diagnostics.camera_cooler_on)} · power: ${number(diagnostics.camera_cooler_power_pct, 0, ' %')} · temperatura: ${number(diagnostics.camera_temperature_c, 1, ' °C')} · exposing: ${bool(diagnostics.camera_exposing)}`);
+
     set('power-state', badge(power.state));
-    set('power-detail', `UPS su batteria: ${text(power.ups_on_battery)}`);
+    set('power-detail', `Qualità: ${text(power.quality)} · sorgente verificata non ancora integrata`);
+
     set('network-state', badge(network.state));
-    set('network-detail', `link: ${text(network.active_link)} · VPN: ${text(network.vpn)} · LTE: ${text(network.lte_failover)}`);
+    set('network-detail', `Qualità: ${text(network.quality)} · sorgente verificata non ancora integrata`);
+
     set('weather-state', badge(weather.state));
     set('weather-temperature', number(weather.temperature_c, 1, ' °C'));
     set('weather-humidity', number(weather.humidity_pct, 1, ' %'));
@@ -62,11 +75,12 @@
     set('weather-gust', number(weather.wind_gust_kmh, 1, ' km/h'));
     set('weather-rain', number(weather.rain_rate_mm_h, 2, ' mm/h'));
     set('weather-pressure', number(weather.pressure_hpa, 1, ' hPa'));
+    set('weather-cloud-cover', number(weather.cloud_cover_pct, 0, ' %'));
     set('weather-sqm', number(weather.sqm_mag_arcsec2, 2, ' mag/arcsec²'));
     set('weather-sky-temperature', number(weather.sky_temperature_c, 1, ' °C'));
   };
 
-  const renderUnavailable = () => render({ quality: 'UNKNOWN', systems: {} }, 'UNAVAILABLE');
+  const renderUnavailable = () => render({ quality: 'UNKNOWN', systems: {}, safety: {} }, 'UNAVAILABLE');
 
   const fetchJson = async url => {
     const response = await fetch(url, { cache: 'no-store' });
