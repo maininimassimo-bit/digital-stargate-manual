@@ -43,20 +43,42 @@ State mapping:
 
 `safe` is deliberately not inferred by this plugin.
 
-## Build on the EAGLE
+## Build and commissioning artifact
 
-The project targets .NET Framework 4.8 and references the assemblies installed with N.I.N.A. directly. By default:
+The project targets `net8.0-windows7.0` and uses centrally managed NuGet references pinned to the installed N.I.N.A. 3.2.0.9001 API surface.
 
-```text
-C:\Program Files\N.I.N.A. - Nighttime Imaging 'N' Astronomy
-```
+Do **not** install Visual Studio, MSBuild, or a developer toolchain on the EAGLE. Builds are performed by the dedicated Windows GitHub Actions workflow:
 
-Override with MSBuild property `NinaInstallDir` if required.
+`NINA Dome Telemetry Exporter`
 
-From a Developer PowerShell/Command Prompt with MSBuild available:
+A successful workflow run must complete all of these gates:
 
-```powershell
-msbuild .\integrations\nina\DigitalStarGate.DomeTelemetryExporter\DigitalStarGate.DomeTelemetryExporter.csproj /p:Configuration=Release
-```
+1. restore;
+2. build Release;
+3. verify the plugin DLL;
+4. upload the commissioning artifact.
 
-Do not install the DLL into N.I.N.A. until the build has succeeded and the resulting references have been reviewed against the EAGLE's installed N.I.N.A. 3.2.0.9001 assemblies.
+The commissioning artifact is named:
+
+`DigitalStarGate.Nina.DomeTelemetryExporter`
+
+and contains:
+
+`DigitalStarGate.Nina.DomeTelemetryExporter.dll`
+
+Before installation, record the workflow run, branch/head SHA and SHA-256 of the DLL.
+
+## EAGLE commissioning guardrails
+
+Commissioning is controlled and reversible:
+
+- use only a DLL produced by a green CI run for the intended branch/head;
+- stop N.I.N.A. before copying or removing the plugin DLL;
+- back up any target plugin directory before modification;
+- install only the exporter DLL and no development dependencies;
+- restart N.I.N.A. and verify normal equipment operation before accepting telemetry;
+- the expected output is `%LOCALAPPDATA%\DigitalStarGate\telemetry\nina-dome.json`;
+- if the plugin does not load, N.I.N.A. behaves abnormally, or no valid projection is produced, remove the DLL and restart N.I.N.A.;
+- do not issue dome motion commands merely to test telemetry. Validate initially against the current naturally observed shutter state.
+
+No `systems.dome` integration is accepted until the local projection has been observed with valid timestamps/freshness under the normal operational N.I.N.A./TS Shelter workflow.
