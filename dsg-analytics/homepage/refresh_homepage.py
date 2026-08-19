@@ -6,6 +6,7 @@ import argparse
 import csv
 import json
 import re
+from datetime import datetime
 from pathlib import Path
 
 START_MARKER = "<!-- DSG:AUTO-HOMEPAGE:START -->"
@@ -42,6 +43,15 @@ def as_int(value: object) -> int:
     return int(round(as_float(value)))
 
 
+def as_dt(value: object):
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(str(value).strip().replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
 def esc(value: object) -> str:
     text = str(value or "").strip()
     return (
@@ -56,6 +66,46 @@ def esc(value: object) -> str:
 
 def decimal(value: float, digits: int = 2) -> str:
     return f"{value:.{digits}f}".replace(".", ",")
+
+
+def date(value: object) -> str:
+    parsed = as_dt(value)
+    return parsed.strftime("%d/%m/%Y %H:%M") if parsed else "—"
+
+
+def status(value: object) -> str:
+    severity = str(value or "").strip().upper()
+    return {
+        "GREEN": "🟢 GREEN",
+        "YELLOW": "🟡 YELLOW",
+        "RED": "🔴 RED",
+    }.get(severity, esc(severity))
+
+
+def format_ra_deg(value: object) -> str:
+    try:
+        degrees = float(str(value).strip().replace(",", ".")) % 360.0
+    except (TypeError, ValueError):
+        return "—"
+    total_seconds = round((degrees / 15.0) * 3600)
+    hours = (total_seconds // 3600) % 24
+    minutes = (total_seconds % 3600) // 60
+    seconds = total_seconds % 60
+    return f"{hours:02d}h {minutes:02d}m {seconds:02d}s"
+
+
+def format_dec_deg(value: object) -> str:
+    try:
+        degrees = float(str(value).strip().replace(",", "."))
+    except (TypeError, ValueError):
+        return "—"
+    sign = "+" if degrees >= 0 else "−"
+    absolute = abs(degrees)
+    total_seconds = round(absolute * 3600)
+    deg = total_seconds // 3600
+    minutes = (total_seconds % 3600) // 60
+    seconds = total_seconds % 60
+    return f"{sign}{deg:02d}° {minutes:02d}′ {seconds:02d}″"
 
 
 def roadmap_state(roadmap: dict) -> dict:
@@ -115,7 +165,11 @@ def build_program_section(state: dict) -> str:
 '''
 
 
-def build_operational_section(sessions: list[dict[str, str]], targets: list[dict[str, str]]) -> str:
+def build_operational_section(
+    sessions: list[dict[str, str]],
+    targets: list[dict[str, str]],
+    metadata: list[dict[str, str]],
+) -> str:
     session_count = len(sessions)
     total_integration = sum(as_float(row.get("integration_hours")) for row in sessions)
     completed_images = sum(as_int(row.get("light_completed")) for row in sessions)
@@ -124,6 +178,66 @@ def build_operational_section(sessions: list[dict[str, str]], targets: list[dict
         for row in targets
         if row.get("target_name", "").strip()
     }
+
+    latest = (
+        max(
+            sessions,
+            key=lambda row: as_dt(row.get("session_end"))
+            or as_dt(row.get("session_start"))
+            or datetime.min,
+        )
+        if sessions
+        else None
+    )
+
+    if latest:
+        sid = latest.get("session_id", "").strip()
+        latest_targets = sorted(
+            {
+                row.get("target_name", "").strip()
+                for row in targets
+                if row.get("session_id", "").strip() == sid
+                and row.get("target_name", "").strip()
+            }
+        )
+        metadata_row = next(
+            (
+                row
+                for row in metadata
+                if row.get("session_id", "").strip() == sid
+                and row.get("metadata_state", "").strip().upper() == "REGISTERED"
+            ),
+            None,
+        )
+        target_text = ", ".join(esc(item) for item in latest_targets) or esc(metadata_row.get("target_name")) if metadata_row else "—"
+        config = (
+            " · ".join(
+                esc(item)
+                for item in (latest.get("telescope", "").strip(), latest.get("camera", "").strip())
+                if item
+            )
+            or esc(metadata_row.get("configuration_id")) if metadata_row else esc(latest.get("configuration_id"))
+        )
+        if metadata_row:
+            ra = format_ra_deg(metadata_row.get("ra_deg"))
+            dec = format_dec_deg(metadata_row.get("dec_deg"))
+            coordinates = f"RA {ra} · Dec {dec} · J2000" if ra != "—" and dec != "—" else "Coordinate non registrate"
+        else:
+            coordinates = "Coordinate non registrate"
+        target_detail = f"{coordinates} · {config}" if config != "—" else coordinates
+        latest_rows = {
+            "session": esc(sid),
+            "date": f"{date(latest.get('session_start'))} → {date(latest.get('session_end'))}",
+            "target": target_text,
+            "target_detail": target_detail,
+            "integration": f"{decimal(as_float(latest.get('integration_hours')))} h",
+            "images": str(as_int(latest.get("light_completed"))),
+            "rms": f"{decimal(as_float(latest.get('rms_total_arcsec')), 3)} arcsec" if as_float(latest.get("rms_total_arcsec")) > 0 else "—",
+            "status": status(latest.get("severity")),
+        }
+    else:
+        latest_rows = {key: "—" for key in ("session", "date", "target", "target_detail", "integration", "images", "rms", "status")}
+
     return f'''{START_MARKER}
 <section class="dsg-program-section">
   <div class="dsg-section-intro">
@@ -153,10 +267,18 @@ def build_operational_section(sessions: list[dict[str, str]], targets: list[dict
       <span class="dsg-kpi__detail">oggetti distinti</span>
     </div>
   </div>
+
+  <div class="dsg-program-panel">
+    <article><span class="dsg-program-label">ULTIMA SESSIONE</span><span class="dsg-program-value">{latest_rows['session']}</span><span class="dsg-program-detail">{latest_rows['date']}</span></article>
+    <article><span class="dsg-program-label">TARGET</span><span class="dsg-program-value">{latest_rows['target']}</span><span class="dsg-program-detail">{latest_rows['target_detail']}</span></article>
+    <article><span class="dsg-program-label">ACQUISIZIONE</span><span class="dsg-program-value">{latest_rows['integration']}</span><span class="dsg-program-detail">{latest_rows['images']} immagini completate</span></article>
+    <article><span class="dsg-program-label">QUALITÀ</span><span class="dsg-program-value">{latest_rows['status']}</span><span class="dsg-program-detail">RMS totale {latest_rows['rms']}</span></article>
+  </div>
+
   <div class="dsg-enterprise-meta">
     <strong>PROJECTION GOVERNATA</strong>
     <span>{session_count} sessioni · {decimal(total_integration)} h · {completed_images} light · {len(distinct_targets)} target</span>
-    <span>Fonti: data/analytics/history/sessions.csv e targets.csv.</span>
+    <span>Fonti: sessions.csv, targets.csv e session-scientific-metadata.csv.</span>
   </div>
 </section>
 {END_MARKER}'''
@@ -172,11 +294,12 @@ def main() -> int:
     roadmap = read_json(root / "docs" / "data" / "roadmap.json")
     sessions = read_csv(root / "data" / "analytics" / "history" / "sessions.csv")
     targets = read_csv(root / "data" / "analytics" / "history" / "targets.csv")
+    metadata = read_csv(root / "data" / "analytics" / "metadata" / "session-scientific-metadata.csv")
 
     text = homepage.read_text(encoding="utf-8-sig")
     state = roadmap_state(roadmap)
     program_section = build_program_section(state)
-    operational_section = build_operational_section(sessions, targets)
+    operational_section = build_operational_section(sessions, targets, metadata)
 
     text, program_count = PROGRAM_PATTERN.subn(program_section, text, count=1)
     if program_count != 1:
