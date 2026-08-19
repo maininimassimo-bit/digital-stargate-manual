@@ -29,6 +29,14 @@ A writable `/data` volume is recommended for pilot continuity across process res
 
 There are no command endpoints.
 
+## Unified NINA telemetry
+
+The Observatory Status producer may publish read-only observations sourced from the Digital StarGate NINA Observatory Telemetry Exporter, including dome, mount, camera, weather and NINA SafetyMonitor observations. `safety.observed_state` may therefore be `SAFE`, `UNSAFE` or `UNKNOWN` and `safety.authority` may identify `NINA_SAFETY_MONITOR_OBSERVATION`.
+
+This does **not** transfer safety authority to NINA, the producer, relay, portal or cloud runtime. `NINA_SAFETY_MONITOR_OBSERVATION` means only that the displayed state was observed through NINA. Local physical interlocks and the Local Safety Authority remain authoritative for equipment protection and command decisions.
+
+Weather state `AVAILABLE` means that current weather telemetry is available; it must not be interpreted as weather-safe. Safety is represented separately by the `safety` projection.
+
 ## Local container verification
 
 ```bash
@@ -55,8 +63,9 @@ The selected host must provide evidence for all of the following before T3 can p
 8. negative auth test (`401`) and wrong-source test (`403`);
 9. stale snapshot rejection (`422`);
 10. EAGLE POST `202` and independent browser/client GET `200` with identical correlation id;
-11. relay outage does not affect local CloudWatcher, producer or Local Safety Authority;
-12. portal decays to UNKNOWN when the hosted snapshot becomes stale/unavailable.
+11. `SAFE`, `UNSAFE` and `UNKNOWN` observations are accepted without granting cloud command/safety authority;
+12. relay outage does not affect local CloudWatcher, producer or Local Safety Authority;
+13. portal decays to UNKNOWN when the hosted snapshot becomes stale/unavailable.
 
 ## Hosting selection criteria
 
@@ -64,4 +73,4 @@ The implementation is deliberately provider-neutral. Prefer a managed container/
 
 ## Safety boundary
 
-This relay is telemetry evidence transport only. It cannot command the EAGLE, dome, mount, camera, network or power systems. Overall observatory safety remains under `LOCAL_SAFETY_AUTHORITY`; loss of cloud/relay connectivity must not alter local physical safety behavior.
+This relay is telemetry evidence transport only. It cannot command the EAGLE, dome, mount, camera, network or power systems. Safety values received through NINA are observations only. Overall observatory safety authority remains local; loss of NINA, cloud or relay connectivity must not alter local physical safety behavior.
