@@ -3,7 +3,7 @@ param(
     [Parameter(Mandatory=$true)]
     [string]$ArtifactDll,
 
-    [string]$ExpectedSha256 = 'e1681be9ab43ffe1b5235c7256b7d3fea0dfd05c2b8b67f6a981ef9a0ddbad5d',
+    [string]$ExpectedSha256 = '6c59ab0decb975bd96ea03581ddb674cf1ea08abb9bf77597be5af2dc031bdee',
 
     [string]$NinaPluginVersionDirectory = '3.0.0'
 )
@@ -11,7 +11,7 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-Write-Output 'Digital StarGate NINA Dome Telemetry Exporter - PILOT INSTALLER'
+Write-Output 'Digital StarGate NINA Observatory Telemetry Exporter - PILOT INSTALLER'
 Write-Output ('Computer: {0}' -f $env:COMPUTERNAME)
 
 $nina = @(Get-Process -Name NINA -ErrorAction SilentlyContinue)
