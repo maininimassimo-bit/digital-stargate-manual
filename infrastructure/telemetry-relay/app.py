@@ -24,11 +24,13 @@ def validate(payload, idempotency_key):
         raise ValueError('schema_version must be 1.1')
     if payload.get('source_instance') != AUTHORIZED_SOURCE:
         raise PermissionError('source_instance not authorized')
+
     safety = payload.get('safety') or {}
-    if safety.get('observed_state') != 'UNKNOWN':
-        raise ValueError('overall safety must remain UNKNOWN in pilot')
-    if safety.get('authority') != 'LOCAL_SAFETY_AUTHORITY':
+    if safety.get('observed_state') not in {'SAFE', 'UNSAFE', 'UNKNOWN'}:
+        raise ValueError('safety observed_state must be SAFE, UNSAFE, or UNKNOWN')
+    if safety.get('authority') not in {'LOCAL_SAFETY_AUTHORITY', 'NINA_SAFETY_MONITOR_OBSERVATION'}:
         raise ValueError('safety authority mismatch')
+
     correlation_id = payload.get('correlation_id')
     if not correlation_id or idempotency_key != correlation_id:
         raise ValueError('Idempotency-Key must equal correlation_id')
