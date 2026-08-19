@@ -144,7 +144,7 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
 
     private static Dictionary<string, object> BuildDome(object info) {
         var connected = ReadBool(info, "Connected");
-        var raw = ReadString(info, "ShutterStatus");
+        var raw = connected == true ? ReadString(info, "ShutterStatus") : null;
         var state = connected == true ? MapDomeState(raw) : "UNKNOWN";
         return BuildService(connected, state, connected == true ? null : "DOME_DISCONNECTED", new Dictionary<string, object> {
             { "rawShutterStatus", raw }
@@ -153,9 +153,10 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
 
     private static Dictionary<string, object> BuildMount(object info) {
         var connected = ReadBool(info, "Connected");
-        var atPark = ReadBool(info, "AtPark");
-        var atHome = ReadBool(info, "AtHome");
-        var tracking = ReadBool(info, "TrackingEnabled", "Tracking");
+        var atPark = connected == true ? ReadBool(info, "AtPark") : null;
+        var atHome = connected == true ? ReadBool(info, "AtHome") : null;
+        var tracking = connected == true ? ReadBool(info, "TrackingEnabled", "Tracking") : null;
+        var sideOfPier = connected == true ? ReadString(info, "SideOfPier") : null;
 
         var state = "UNKNOWN";
         if (connected == true) {
@@ -166,19 +167,19 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
             { "atPark", atPark },
             { "atHome", atHome },
             { "tracking", tracking },
-            { "sideOfPier", ReadString(info, "SideOfPier") }
+            { "sideOfPier", sideOfPier }
         });
     }
 
     private static Dictionary<string, object> BuildCamera(object info) {
         var connected = ReadBool(info, "Connected");
-        var exposing = ReadBool(info, "IsExposing", "Exposing");
+        var exposing = connected == true ? ReadBool(info, "IsExposing", "Exposing") : null;
         var state = connected == true ? (exposing == true ? "EXPOSING" : "READY") : "UNKNOWN";
 
         return BuildService(connected, state, connected == true ? null : "CAMERA_DISCONNECTED", new Dictionary<string, object> {
-            { "temperatureC", ReadDouble(info, "Temperature", "CCDTemperature", "SensorTemperature") },
-            { "coolerOn", ReadBool(info, "CoolerOn") },
-            { "coolerPowerPct", ReadDouble(info, "CoolerPower") },
+            { "temperatureC", connected == true ? ReadDouble(info, "Temperature", "CCDTemperature", "SensorTemperature") : null },
+            { "coolerOn", connected == true ? ReadBool(info, "CoolerOn") : null },
+            { "coolerPowerPct", connected == true ? ReadDouble(info, "CoolerPower") : null },
             { "exposing", exposing }
         });
     }
@@ -188,21 +189,21 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
         var state = connected == true ? "AVAILABLE" : "UNKNOWN";
 
         return BuildService(connected, state, connected == true ? null : "WEATHER_DISCONNECTED", new Dictionary<string, object> {
-            { "temperatureC", ReadDouble(info, "Temperature") },
-            { "humidityPct", ReadDouble(info, "Humidity") },
-            { "dewPointC", ReadDouble(info, "DewPoint") },
-            { "windSpeed", ReadDouble(info, "WindSpeed") },
-            { "windGust", ReadDouble(info, "WindGust") },
-            { "pressure", ReadDouble(info, "Pressure") },
-            { "cloudCoverPct", ReadDouble(info, "CloudCover") },
-            { "rainRate", ReadDouble(info, "RainRate") },
-            { "skyTemperatureC", ReadDouble(info, "SkyTemperature") }
+            { "temperatureC", connected == true ? ReadDouble(info, "Temperature") : null },
+            { "humidityPct", connected == true ? ReadDouble(info, "Humidity") : null },
+            { "dewPointC", connected == true ? ReadDouble(info, "DewPoint") : null },
+            { "windSpeed", connected == true ? ReadDouble(info, "WindSpeed") : null },
+            { "windGust", connected == true ? ReadDouble(info, "WindGust") : null },
+            { "pressure", connected == true ? ReadDouble(info, "Pressure") : null },
+            { "cloudCoverPct", connected == true ? ReadDouble(info, "CloudCover") : null },
+            { "rainRate", connected == true ? ReadDouble(info, "RainRate") : null },
+            { "skyTemperatureC", connected == true ? ReadDouble(info, "SkyTemperature") : null }
         });
     }
 
     private static Dictionary<string, object> BuildSafety(object info) {
         var connected = ReadBool(info, "Connected");
-        var isSafe = ReadBool(info, "IsSafe");
+        var isSafe = connected == true ? ReadBool(info, "IsSafe") : null;
         var state = connected == true && isSafe.HasValue ? (isSafe.Value ? "SAFE" : "UNSAFE") : "UNKNOWN";
 
         return BuildService(connected, state, connected == true ? null : "SAFETY_MONITOR_DISCONNECTED", new Dictionary<string, object> {
