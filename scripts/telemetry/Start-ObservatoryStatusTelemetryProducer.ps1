@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
     [string]$RepositoryRoot = 'C:\DigitalStarGate\digital-stargate-manual-ap14-runtime',
+    [string]$NinaProjection = "$env:LOCALAPPDATA\DigitalStarGate\telemetry\nina-observatory-status.json",
     [string]$CloudWatcherCsv = 'C:\Users\PrimaLuceLab\Documents\CloudWatcher\CloudWatcher.csv',
     [string]$RuntimeRoot = 'C:\DigitalStarGate\TelemetryRuntime',
     [ValidateRange(5, 300)][int]$PollSeconds = 15,
@@ -14,10 +15,11 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-$adapter = Join-Path $RepositoryRoot 'scripts\telemetry\Export-CloudWatcherObservatoryStatus.ps1'
+$ninaAdapter = Join-Path $RepositoryRoot 'scripts\telemetry\Export-NinaObservatoryStatus.ps1'
+$fallbackAdapter = Join-Path $RepositoryRoot 'scripts\telemetry\Export-CloudWatcherObservatoryStatus.ps1'
 $publisher = Join-Path $RepositoryRoot 'scripts\telemetry\Publish-ObservatoryStatusTelemetry.ps1'
-if (-not (Test-Path -LiteralPath $adapter -PathType Leaf)) { throw "Adapter non trovato: $adapter" }
-if (-not (Test-Path -LiteralPath $CloudWatcherCsv -PathType Leaf)) { throw "CloudWatcher CSV non trovato: $CloudWatcherCsv" }
+if (-not (Test-Path -LiteralPath $ninaAdapter -PathType Leaf)) { throw "Adapter NINA non trovato: $ninaAdapter" }
+if (-not (Test-Path -LiteralPath $fallbackAdapter -PathType Leaf)) { throw "Adapter fallback CloudWatcher non trovato: $fallbackAdapter" }
 if ($PublishEndpoint -and -not (Test-Path -LiteralPath $publisher -PathType Leaf)) { throw "Publisher non trovato: $publisher" }
 
 New-Item -ItemType Directory -Path $RuntimeRoot -Force | Out-Null
@@ -31,6 +33,8 @@ $deadline = if ($DurationSeconds -gt 0) { $startedAt.AddSeconds($DurationSeconds
 $consecutiveFailures = 0
 $lastSuccessUtc = $null
 $lastError = $null
+$activeSource = $null
+$fallbackCount = 0
 $publishEnabled = -not [string]::IsNullOrWhiteSpace($PublishEndpoint)
 $publishConsecutiveFailures = 0
 $lastPublishAttemptUtc = $null
@@ -54,6 +58,12 @@ function Write-ProducerHealth {
         projection_path = $projectionPath
         poll_seconds = $PollSeconds
         freshness_seconds = $FreshnessSeconds
+        source = [ordered]@{
+            primary = 'NINA_OBSERVATORY_TELEMETRY'
+            fallback = 'CLOUDWATCHER_CSV'
+            active = $script:activeSource
+            fallback_count = $script:fallbackCount
+        }
         transport = [ordered]@{
             enabled = $script:publishEnabled
             endpoint = if ($script:publishEnabled) { $PublishEndpoint } else { $null }
@@ -67,21 +77,39 @@ function Write-ProducerHealth {
 }
 
 Write-ProducerHealth -State 'STARTING'
-Add-Content -LiteralPath $logPath -Value ('{0} START computer={1} poll={2}s freshness={3}s publish={4}' -f [datetime]::UtcNow.ToString('o'), $env:COMPUTERNAME, $PollSeconds, $FreshnessSeconds, $publishEnabled)
+Add-Content -LiteralPath $logPath -Value ('{0} START computer={1} poll={2}s freshness={3}s primary=NINA fallback=CLOUDWATCHER publish={4}' -f [datetime]::UtcNow.ToString('o'), $env:COMPUTERNAME, $PollSeconds, $FreshnessSeconds, $publishEnabled)
 
 while ([datetime]::UtcNow -lt $deadline) {
     $cycleState = 'RUNNING'
     try {
-        & $adapter -CloudWatcherCsv $CloudWatcherCsv -OutputPath $tempPath -FreshnessSeconds $FreshnessSeconds -SourceInstance $env:COMPUTERNAME | Out-Null
-        $candidate = Get-Content -LiteralPath $tempPath -Raw | ConvertFrom-Json
-        if ($candidate.schema_version -ne '1.1') { throw 'Projection schema inatteso.' }
-        if ($candidate.safety.observed_state -ne 'UNKNOWN') { throw 'Safety invariant violata.' }
+        $primaryError = $null
+        try {
+            & $ninaAdapter -NinaProjection $NinaProjection -OutputPath $tempPath -FreshnessSeconds $FreshnessSeconds -SourceInstance $env:COMPUTERNAME | Out-Null
+            $candidate = Get-Content -LiteralPath $tempPath -Raw | ConvertFrom-Json
+            if ($candidate.schema_version -ne '1.1') { throw 'Projection NINA schema inatteso.' }
+            if ($candidate.quality -ne 'CURRENT') { throw "Projection NINA non corrente: $($candidate.quality)" }
+            $activeSource = 'NINA_OBSERVATORY_TELEMETRY'
+        }
+        catch {
+            $primaryError = $_.Exception.Message
+            if (Test-Path -LiteralPath $tempPath) { Remove-Item -LiteralPath $tempPath -Force -ErrorAction SilentlyContinue }
+            if (-not (Test-Path -LiteralPath $CloudWatcherCsv -PathType Leaf)) {
+                throw "NINA primary failed: $primaryError; CloudWatcher fallback unavailable: $CloudWatcherCsv"
+            }
+            & $fallbackAdapter -CloudWatcherCsv $CloudWatcherCsv -OutputPath $tempPath -FreshnessSeconds $FreshnessSeconds -SourceInstance $env:COMPUTERNAME | Out-Null
+            $candidate = Get-Content -LiteralPath $tempPath -Raw | ConvertFrom-Json
+            if ($candidate.schema_version -ne '1.1') { throw 'Projection fallback schema inatteso.' }
+            $activeSource = 'CLOUDWATCHER_CSV'
+            $fallbackCount++
+            $cycleState = 'DEGRADED'
+            Add-Content -LiteralPath $logPath -Value ('{0} FALLBACK primary_error={1}' -f [datetime]::UtcNow.ToString('o'), $primaryError)
+        }
 
         Move-Item -LiteralPath $tempPath -Destination $projectionPath -Force
         $consecutiveFailures = 0
         $lastSuccessUtc = [datetime]::UtcNow.ToString('o')
-        $lastError = $null
-        Add-Content -LiteralPath $logPath -Value ('{0} OK observed={1} weather={2}/{3}' -f $lastSuccessUtc, $candidate.observed_at_utc, $candidate.systems.weather.state, $candidate.systems.weather.quality)
+        $lastError = $primaryError
+        Add-Content -LiteralPath $logPath -Value ('{0} OK source={1} observed={2} weather={3}/{4} safety={5}' -f $lastSuccessUtc, $activeSource, $candidate.observed_at_utc, $candidate.systems.weather.state, $candidate.systems.weather.quality, $candidate.safety.observed_state)
 
         if ($publishEnabled) {
             $lastPublishAttemptUtc = [datetime]::UtcNow.ToString('o')
