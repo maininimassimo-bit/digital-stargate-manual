@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Digital StarGate Observatory Status Telemetry Relay
-  version: 1.0.0
+  version: 1.1.0
   description: Read-only telemetry snapshot transport. This API is not a command or safety-authority interface.
 paths:
   /v1/observatory-status:
@@ -24,22 +24,14 @@ paths:
             schema:
               $ref: '#/components/schemas/ObservatoryStatus'
       responses:
-        '202':
-          description: Snapshot accepted
-        '400':
-          description: Invalid request
-        '401':
-          description: Missing or invalid producer authentication
-        '403':
-          description: Producer not authorized for subject/source
-        '409':
-          description: Conflicting or replayed snapshot
-        '422':
-          description: Schema, timestamp, freshness or safety invariant rejected
-        '429':
-          description: Rate limited
-        '500':
-          description: Relay failure
+        '202': { description: Snapshot accepted }
+        '400': { description: Invalid request }
+        '401': { description: Missing or invalid producer authentication }
+        '403': { description: Producer not authorized for subject/source }
+        '409': { description: Conflicting or replayed snapshot }
+        '422': { description: Schema, timestamp, freshness or telemetry invariant rejected }
+        '429': { description: Rate limited }
+        '500': { description: Relay failure }
     get:
       operationId: getObservatoryStatus
       summary: Get the latest accepted sanitized observatory status snapshot
@@ -49,14 +41,12 @@ paths:
           description: Latest snapshot; consumer must enforce fresh_until_utc
           headers:
             Cache-Control:
-              schema:
-                type: string
+              schema: { type: string }
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObservatoryStatus'
-        '404':
-          description: No accepted snapshot available
+        '404': { description: No accepted snapshot available }
 components:
   securitySchemes:
     bearerAuth:
@@ -67,21 +57,13 @@ components:
       type: object
       required: [state, observed_at_utc, fresh_until_utc, quality, source]
       properties:
-        state:
-          type: string
-        observed_at_utc:
-          type: string
-          format: date-time
-          nullable: true
-        fresh_until_utc:
-          type: string
-          format: date-time
-          nullable: true
+        state: { type: string }
+        observed_at_utc: { type: string, format: date-time, nullable: true }
+        fresh_until_utc: { type: string, format: date-time, nullable: true }
         quality:
           type: string
-          enum: [CURRENT, STALE, UNKNOWN]
-        source:
-          type: string
+          enum: [CURRENT, DEGRADED, STALE, UNKNOWN]
+        source: { type: string, nullable: true }
     ObservatoryStatus:
       type: object
       required: [schema_version, observatory, observed_at_utc, fresh_until_utc, source_component, source_instance, quality, correlation_id, systems, safety]
@@ -95,22 +77,14 @@ components:
           properties:
             name: { type: string }
             location: { type: string }
-        observed_at_utc:
-          type: string
-          format: date-time
-        fresh_until_utc:
-          type: string
-          format: date-time
-        source_component:
-          type: string
-        source_instance:
-          type: string
+        observed_at_utc: { type: string, format: date-time }
+        fresh_until_utc: { type: string, format: date-time }
+        source_component: { type: string }
+        source_instance: { type: string }
         quality:
           type: string
-          enum: [DEGRADED, STALE, UNKNOWN]
-        correlation_id:
-          type: string
-          format: uuid
+          enum: [CURRENT, DEGRADED, STALE, UNKNOWN]
+        correlation_id: { type: string, format: uuid }
         systems:
           type: object
           required: [dome, mount, camera, power, network, weather]
@@ -127,10 +101,10 @@ components:
           properties:
             observed_state:
               type: string
-              enum: [UNKNOWN]
+              enum: [SAFE, UNSAFE, UNKNOWN]
             authority:
               type: string
-              enum: [LOCAL_SAFETY_AUTHORITY]
+              enum: [LOCAL_SAFETY_AUTHORITY, NINA_SAFETY_MONITOR_OBSERVATION]
             reasons:
               type: array
               items: { type: string }
