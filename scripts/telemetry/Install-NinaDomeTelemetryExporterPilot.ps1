@@ -5,7 +5,7 @@ param(
 
     [string]$ExpectedSha256 = 'e1681be9ab43ffe1b5235c7256b7d3fea0dfd05c2b8b67f6a981ef9a0ddbad5d',
 
-    [string]$NinaPluginVersionDirectory = '3.2.0'
+    [string]$NinaPluginVersionDirectory = '3.0.0'
 )
 
 Set-StrictMode -Version Latest
