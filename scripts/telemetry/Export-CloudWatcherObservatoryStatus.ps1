@@ -12,7 +12,9 @@ param(
     [ValidateRange(4096, 1048576)]
     [int]$TailBytes = 262144,
 
-    [string]$SourceInstance = $env:COMPUTERNAME
+    [string]$SourceInstance = $env:COMPUTERNAME,
+
+    [string]$NinaDomeProjection = "$env:LOCALAPPDATA\DigitalStarGate\telemetry\nina-dome.json"
 )
 
 Set-StrictMode -Version Latest
@@ -126,6 +128,48 @@ function Get-LatestCompleteCloudWatcherRow {
     throw 'Nessuna riga CloudWatcher strutturalmente completa e parseabile trovata nella coda del file.'
 }
 
+function Get-NinaDomeSignal {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][int]$Freshness
+    )
+
+    $unknown = New-UnknownSignal -Source 'NINA dome exporter'
+    if ([string]::IsNullOrWhiteSpace($Path) -or -not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+        return $unknown
+    }
+
+    try {
+        $projection = Get-Content -LiteralPath $Path -Raw -ErrorAction Stop | ConvertFrom-Json
+        if ($projection.schemaVersion -ne 1) { return $unknown }
+        if ([string]$projection.source -ne 'nina-dome-exporter') { return $unknown }
+
+        $observedAt = [datetime]::Parse(
+            [string]$projection.observedAtUtc,
+            [System.Globalization.CultureInfo]::InvariantCulture,
+            [System.Globalization.DateTimeStyles]::RoundtripKind).ToUniversalTime()
+        $freshUntil = $observedAt.AddSeconds($Freshness)
+        $now = [datetime]::UtcNow
+
+        $state = ([string]$projection.state).Trim().ToUpperInvariant()
+        if ($state -notin @('OPEN','CLOSED','MOVING','FAULT','UNKNOWN')) { return $unknown }
+
+        $isConnected = [bool]$projection.connected
+        $quality = if ($isConnected -and $freshUntil -ge $now) { 'CURRENT' } else { if ($observedAt -le $now) { 'STALE' } else { 'UNKNOWN' } }
+
+        return [ordered]@{
+            state = if ($quality -eq 'CURRENT') { $state } else { 'UNKNOWN' }
+            observed_at_utc = $observedAt.ToString('o')
+            fresh_until_utc = $freshUntil.ToString('o')
+            quality = $quality
+            source = 'NINA dome exporter'
+        }
+    }
+    catch {
+        return $unknown
+    }
+}
+
 if (-not (Test-Path -LiteralPath $CloudWatcherCsv -PathType Leaf)) {
     throw "CloudWatcher CSV non trovato: $CloudWatcherCsv"
 }
@@ -155,6 +199,8 @@ $weather.pressure_hpa = Convert-ToNullableDouble -Value $row.'Absolute Pressure'
 $weather.sqm_mag_arcsec2 = $null
 $weather.sky_temperature_c = $null
 
+$dome = Get-NinaDomeSignal -Path $NinaDomeProjection -Freshness $FreshnessSeconds
+
 $payload = [ordered]@{
     schema_version = '1.1'
     observatory = [ordered]@{
@@ -168,7 +214,7 @@ $payload = [ordered]@{
     quality = if ($weatherQuality -eq 'CURRENT') { 'DEGRADED' } else { 'STALE' }
     correlation_id = [guid]::NewGuid().ToString('D')
     systems = [ordered]@{
-        dome = New-UnknownSignal -Source 'not-integrated'
+        dome = $dome
         mount = New-UnknownSignal -Source 'not-integrated'
         camera = New-UnknownSignal -Source 'not-integrated'
         power = New-UnknownSignal -Source 'not-integrated'
@@ -192,6 +238,7 @@ $payload = [ordered]@{
         relative_pressure_raw = Convert-ToNullableDouble -Value $row.'Relative Pressure'
         switch_status = $row.'Switch Status'
         cloudwatcher_safe_status = $row.'Safe Status'
+        nina_dome_projection = if (Test-Path -LiteralPath $NinaDomeProjection -PathType Leaf) { $NinaDomeProjection } else { $null }
     }
 }
 
@@ -206,6 +253,7 @@ Move-Item -LiteralPath $tempPath -Destination $OutputPath -Force
 
 Write-Output ('CloudWatcher projection written: {0}' -f $OutputPath)
 Write-Output ('Observed UTC: {0}' -f $payload.observed_at_utc)
+Write-Output ('Dome: {0} / {1}' -f $dome.state, $dome.quality)
 Write-Output ('Weather: {0} / {1}' -f $weather.state, $weather.quality)
 Write-Output ('Weather metrics: temp={0}C humidity={1}% dew={2}C pressure={3}hPa' -f $weather.temperature_c, $weather.humidity_pct, $weather.dew_point_c, $weather.pressure_hpa)
 Write-Output ('Overall quality: {0}; overall safety: UNKNOWN' -f $payload.quality)
