@@ -1,5 +1,5 @@
-using NINA.Core.Enum;
 using NINA.Equipment.Equipment.MyDome;
+using NINA.Equipment.Interfaces;
 using NINA.Equipment.Interfaces.Mediator;
 using NINA.Plugin;
 using NINA.Plugin.Interfaces;
