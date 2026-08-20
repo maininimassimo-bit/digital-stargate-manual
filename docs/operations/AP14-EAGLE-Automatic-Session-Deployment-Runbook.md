@@ -3,8 +3,8 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | AP14-OPS-EAGLE-AUTO-001 |
-| Versione | 1.2 |
-| Stato | Deployed; NO_SESSION runtime validated; BKL-019 logging gate pending execution |
+| Versione | 1.3 |
+| Stato | Deployed; NO_SESSION runtime validated; BKL-019 evidence reconciled |
 | Data | 2026-08-20 |
 | Host | EAGLE / PrimaLuceLab |
 
@@ -12,7 +12,7 @@
 
 Operate and verify the governed automatic session producer on EAGLE so every future complete observing session is published through the AP-014 automatic portal pipeline, while no-observation nights terminate safely as `NO_SESSION`.
 
-This runbook changes the physical EAGLE runtime and must therefore be executed on EAGLE. Repository commits alone do not prove deployment.
+This runbook changes the physical EAGLE runtime and must therefore be executed on EAGLE. Repository commits alone do not prove deployment. Conversely, already-versioned runtime evidence may satisfy a gate when it directly proves the required operational outcome; a redundant retrospective test must not be introduced solely to recreate evidence that already exists.
 
 ## Current production baseline
 
@@ -164,106 +164,53 @@ Production evidence on 18 August 2026:
 
 This path is accepted in production.
 
-## 6. BKL-019 — N.I.N.A. C8 informational logging gate
+## 6. BKL-019 — N.I.N.A. C8 informational logging evidence
 
-This is a physical-runtime gate. It must be executed on `EAGLE30154` with the actual C8 N.I.N.A. profile. Repository state, Observatory Status connectivity, old M27 logs, or successful Reporting CI do **not** prove this gate.
+BKL-019 is satisfied by direct, versioned runtime evidence already present in the repository. No additional controlled physical test is required solely to prove that N.I.N.A. can emit the informational telemetry required by the governed analytics pipeline.
 
-### 6.1 Preconditions and evidence preservation
+Authoritative source evidence:
 
-1. Do not change mount, dome, weather or local safety interlocks.
-2. Start from a safe operating state appropriate for a controlled N.I.N.A. test.
-3. Record the active N.I.N.A. profile name and N.I.N.A. version.
-4. Capture screenshots or an equivalent immutable record of the logging setting before and after the change.
-5. Preserve the pre-change log file and its SHA-256; never overwrite or delete historical N.I.N.A. evidence.
-6. If changing the logging level requires restarting N.I.N.A., close it normally and verify that no observing sequence is active before restart.
-
-Evidence directory:
-
-```powershell
-$stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-$evidence = "C:\DigitalStarGate\SessionReports\runtime-evidence\bkl019-nina-logging-$stamp"
-New-Item -ItemType Directory -Path $evidence -Force | Out-Null
-
-$ninaLogs = 'C:\Users\PrimaLuceLab\AppData\Local\NINA\Logs'
-Get-ChildItem $ninaLogs -File |
-  Sort-Object LastWriteTime -Descending |
-  Select-Object -First 10 Name,Length,CreationTime,LastWriteTime |
-  Format-Table -AutoSize |
-  Out-File (Join-Path $evidence 'nina-logs-before.txt')
+```text
+data/sessions/2026/08/2026-08-14_2026-08-15/raw/nina/20260814-201744-3.2.0.9001.3996-202608.log
 ```
 
-### 6.2 Required configuration
+The 14/15 August M 27 log directly records, at `INFO` level:
 
-In the active C8 N.I.N.A. profile, set the application logging level to **Information** or a more verbose level that includes informational lifecycle events. Do not select a quieter level such as Warning/Error for this gate.
+- N.I.N.A. version and normal informational logging output;
+- QHY695A camera discovery/connection;
+- filter wheel, focuser, CPWI mount, PHD2, CloudWatcher and dome connections;
+- Advanced Sequence start and sequence-container execution;
+- target-context evidence for M 27;
+- exposure lifecycle including `TakeExposure` start and completion;
+- 600 s LIGHT exposures, gain/offset and binning 1x1;
+- L-Pro filter switching;
+- successful XISF save paths containing M 27 / Celestron C8 acquisition context;
+- plate solving and target coordinates, including M 27 coordinates used by the meridian-flip workflow.
 
-The exact UI label and persisted setting must be recorded from the installed N.I.N.A. version; do not infer a configuration-file key from documentation or another machine.
+Related governed metadata/equipment evidence is maintained in:
 
-After applying the setting, restart N.I.N.A. if required by the installed version and confirm the same C8 profile is active.
-
-### 6.3 Controlled telemetry test
-
-Run a short, non-destructive controlled sequence using the normal C8 equipment/profile. The test must generate a **new** N.I.N.A. log after the configuration change.
-
-The captured log must contain enough direct evidence to reconstruct, without filename inference:
-
-- active target identity;
-- sequence start or equivalent execution context;
-- exposure lifecycle evidence, including at least one exposure start and completion/saved outcome;
-- exposure duration where emitted by N.I.N.A.;
-- filter identity where a filter is used and emitted by N.I.N.A.;
-- image/save path or equivalent artifact correlation where emitted;
-- timestamped events sufficient to correlate the exposure with PHD2/CloudWatcher evidence when those systems participate.
-
-Not every scientific metadata field is expected to originate from N.I.N.A. The gate proves that N.I.N.A. is no longer suppressing the informational lifecycle telemetry needed by the governed analytics pipeline. Metadata not emitted by N.I.N.A. must continue to come from a governed evidence/registry source and must not be guessed.
-
-### 6.4 Evidence capture
-
-After the controlled sequence:
-
-```powershell
-$latest = Get-ChildItem $ninaLogs -File |
-  Sort-Object LastWriteTime -Descending |
-  Select-Object -First 1
-
-$latest | Select-Object FullName,Length,CreationTime,LastWriteTime |
-  Format-List |
-  Out-File (Join-Path $evidence 'nina-log-after.txt')
-
-Get-FileHash $latest.FullName -Algorithm SHA256 |
-  Format-List |
-  Out-File (Join-Path $evidence 'nina-log-after.sha256.txt')
-
-Copy-Item $latest.FullName (Join-Path $evidence $latest.Name) -Force
+```text
+data/analytics/metadata/session-scientific-metadata.csv
+data/analytics/configurations/session-configuration-map.csv
+data/analytics/configurations/equipment-registry.csv
 ```
 
-Record separately:
+Relevant repository history includes:
 
-- active profile name;
-- N.I.N.A. version;
-- configured logging level;
-- test start/end local time;
-- target used;
-- exposure count/duration/filter used;
-- whether guiding was active;
-- resulting log filename and SHA-256;
-- representative line numbers or timestamps for target, sequence and exposure lifecycle evidence.
+- `480c3fe2a8d36cd315cb814e7af97f8d6aa3260b` — register C8/QHY695A for the 14/15 August M 27 session;
+- `5fd4b0ebae58bf558e1d4818bdfc8840f8ed7137` — register the 15/16 August M 27 scientific configuration.
 
-### 6.5 PASS / FAIL decision
+### 6.1 Acceptance interpretation
 
-**PASS** only when all of the following are true:
+BKL-019 proves the operational outcome “N.I.N.A. informational telemetry is available and usable for governed analytics”. It does **not** prove that the designated 10/11 August OAT session itself contained those informational records.
 
-1. active C8 profile is evidenced;
-2. logging level is evidenced as `Information` or more verbose;
-3. a new post-change log is generated by a controlled test;
-4. target/sequence context is present in the log;
-5. at least one exposure lifecycle is directly evidenced;
-6. emitted filter/duration/artifact-correlation metadata is retained when applicable;
-7. no scientific metadata is invented to fill fields absent from the log;
-8. evidence bundle path and SHA-256 are recorded in `AP14-W07-EAGLE-M27-OAT-Result.md`.
+Therefore:
 
-**FAIL / BLOCKED** if the installed N.I.N.A. build cannot expose the required informational events, if the wrong profile is active, if no new log is generated, or if the controlled test cannot be executed safely. In that case preserve evidence and open a remediation path; do not mark BKL-019 Done.
-
-BKL-019 may move to `Done` only after the physical evidence is committed/referenced and independently reviewable.
+- BKL-019 may be `Done` from the 14/15 August versioned N.I.N.A. evidence;
+- the 10/11 August session remains historically incomplete where its own source evidence does not attest fields;
+- later evidence must not be copied backward to claim an instrument configuration or coordinates for the 10/11 August session unless a separate governed source explicitly attests them;
+- no screenshot of a current profile setting is required to recreate a fact already proven by versioned runtime output;
+- future regressions in N.I.N.A. logging are operational defects and should be handled as new incidents/remediations, not by reopening historical BKL-019 without evidence of regression.
 
 ## 7. M27 controlled replay
 
@@ -326,8 +273,7 @@ Retain:
 - installed Reporting version/path;
 - runtime repository branch/HEAD/clean status;
 - automatic daily log and task result;
-- BKL-019 N.I.N.A. profile/logging screenshots or equivalent immutable evidence;
-- BKL-019 controlled-test log and SHA-256;
+- versioned N.I.N.A. source evidence and governed metadata references used for BKL-019/BKL-020;
 - actual M27 time window;
 - preview/package status and evidence counts;
 - session branch/commit SHA;
@@ -337,7 +283,7 @@ Retain:
 - resulting catalog/index commit;
 - portal verification.
 
-Record results in `docs/architecture/validation/AP14-W07-EAGLE-M27-OAT-Result.md`. The runtime `NO_SESSION` sub-gate is already PASS; BKL-019 and the overall OAT remain open until their physical/downstream evidence is complete.
+Record results in `docs/architecture/validation/AP14-W07-EAGLE-M27-OAT-Result.md`. The runtime `NO_SESSION` sub-gate and BKL-019/BKL-020 evidence reconciliation are complete; the overall OAT remains open until its downstream publication, promotion, analytics, portal, PARTIAL and idempotency evidence is complete.
 
 ## 10. Rollback
 
@@ -350,4 +296,4 @@ If the scheduled runtime fails before overall acceptance:
 5. do not force-push or rewrite Git history;
 6. record the failure and remediation evidence before retry.
 
-For BKL-019, if the logging change causes unacceptable operational impact, restore the captured previous logging setting only after the controlled test is stopped and preserve both pre/post evidence. A failed AP-014 automation or logging deployment must not affect AP-013B XISF transport/import.
+A failed AP-014 automation deployment must not affect AP-013B XISF transport/import.
