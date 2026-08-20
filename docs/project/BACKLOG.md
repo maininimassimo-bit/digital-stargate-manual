@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 1.4 |
+| Versione | 1.5 |
 | Stato | Active |
 | Data baseline | 20/08/2026 |
 
@@ -43,7 +43,7 @@ Stati ammessi: `Planned`, `Ready`, `In Progress`, `Blocked`, `Done`, `Cancelled`
 | BKL-012 | P1 | Validare primo unattended AP-013 COPY_ONLY run | In Progress | Scheduler, launcher protetto, evidence | Evidenza operativa prima di ampliare scope | AP-013 |
 | BKL-013 | P1 | Completare AP-014 Observation Catalog and Search | In Progress | AP14-W01-W06 implementati; W07 OAT aperto | Catalogo/search governati con acceptance operativa reale | AP-014, AP14-W07 |
 | BKL-018 | P0 | Eseguire EAGLE runtime inspection e M27 end-to-end OAT | In Progress | Accesso EAGLE; evidence NINA/PHD2/CloudWatcher M27; runtime contract | OAT M27 completata tecnicamente e remediation assessment chiuse prima dell'acceptance formale | AP-014, AP14-W07-EAGLE-OAT-001, AP14-INT-EAGLE-PUBLISH-001 |
-| BKL-019 | P0 | Correggere logging profile N.I.N.A. C8 e validare telemetria informativa | Ready | Accesso profilo N.I.N.A. C8 | Logging almeno `Information`; test controllato con target, sequence, exposure lifecycle e metadata utili all'analytics presenti nel log | AP-014, AP14-W07-EAGLE-OAT-001 |
+| BKL-019 | P0 | Correggere logging profile N.I.N.A. C8 e validare telemetria informativa | In Progress | Accesso profilo N.I.N.A. C8 | Gate operativo versionato; chiusura solo dopo evidence EAGLE che attesti logging `Information` o più verboso e log controllato con target, sequence, exposure lifecycle e metadata utili all'analytics | AP-014, AP14-W07-EAGLE-OAT-001, AP14-OPS-EAGLE-AUTO-001 v1.2 |
 | BKL-020 | P0 | Correggere data lineage scientifica M27 e future session | In Progress | BKL-019; registry metadata governato | Metadata sessione risolti da evidence/registry governato; nessuna inferenza non tracciabile; M27 identificata come M 27 con campi non attestati esplicitamente incompleti | AP-014, `session-scientific-metadata.csv` |
 | BKL-021 | P0 | Eliminare eredità target precedente da `latest-observation` | Done | BKL-020 | `latest-observation.json` usa solo metadata della sessione corrente; refresh strutturale idempotente ricostruisce la projection dai metadata governati durante il deploy Pages | AP-014, Mission Control, `46a528234b6c787fec592953b98c763b848baca8`, `cac81e264f8750cc9eea5455e9bed98c7fc85bda` |
 | BKL-022 | P0 | Separare severity analytics da metadata completeness/catalog quality | Done | BKL-020 | `GREEN` non implica automaticamente `VALIDATED_ANALYTICS`; `METADATA_INCOMPLETE`/equivalente è propagato separatamente nel catalogo e nell'observation index | AP-014, scientific session catalog, `ffae9b81a43b82a142b37b587096ea97b1b05ec9` |
@@ -65,6 +65,7 @@ La repository governance è stata riconciliata con la baseline `main` `cac81e264
 - I commit successivi relativi alla sessione M 27 del 15/16 agosto e alla realtime Observatory Status non sostituiscono l'OAT designata M 27 del 10/11 agosto.
 - BKL-026 resta bloccato finché i criteri mancanti dell'OAT designata e le remediation dipendenti non sono chiusi con evidence verificabile.
 - Power e Network in Observatory Status restano correttamente `UNKNOWN` finché non vengono identificate sorgenti read-only reali e verificabili; la relativa evoluzione non precede la chiusura governata di AP-014.
+- BKL-019 è ora `In Progress`: il gate operativo è definito, ma nessun merge documentale costituisce prova della configurazione reale del profilo N.I.N.A. C8.
 
 ## 4. Sequenza di esecuzione raccomandata
 
@@ -78,7 +79,7 @@ Governance Foundation completion
   -> AP-012/AP-013 evidence closure
   -> AP-014 implementation
   -> EAGLE runtime inspection + M27 OAT
-  -> BKL-019 N.I.N.A. C8 logging correction + controlled test
+  -> BKL-019 N.I.N.A. C8 logging correction + controlled test [IN PROGRESS]
   -> BKL-020 scientific metadata lineage correction
   -> BKL-021 latest-observation stale-target fix [DONE]
   -> BKL-022 analytics severity vs metadata completeness separation [DONE]

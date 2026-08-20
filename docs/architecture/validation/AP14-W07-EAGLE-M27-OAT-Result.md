@@ -4,8 +4,8 @@
 |---|---|
 | Documento | AP14-W07 EAGLE M27 OAT Result |
 | Identificativo | AP14-W07-EAGLE-M27-OAT-RESULT |
-| Versione | 1.4 |
-| Data | 2026-08-18 |
+| Versione | 1.5 |
+| Data | 2026-08-20 |
 | Stato | Pending |
 | Owner | Digital StarGate Architecture Office |
 
@@ -15,7 +15,7 @@ Record the runtime and end-to-end acceptance evidence for the M 27 observing ses
 
 `EAGLE evidence -> COMPLETE session package -> session branch -> governed promotion -> analytics -> AP-014 projections -> GitHub Pages`.
 
-This version also records the production validation of the unattended `NO_SESSION` path completed on 18 August 2026. That runtime sub-gate is accepted; the overall M 27 OAT remains `Pending` until the independent repository-copy, promotion, analytics, portal and idempotency gates are completed.
+This version also records the production validation of the unattended `NO_SESSION` path completed on 18 August 2026 and the governed execution criteria for BKL-019. The `NO_SESSION` runtime sub-gate is accepted; BKL-019 and the overall M 27 OAT remain `Pending` until their required physical/downstream evidence is completed.
 
 ## 2. Runtime inspection and reconciliation evidence
 
@@ -133,7 +133,7 @@ Acceptance result for unattended `NO_SESSION`: **PASS**.
 
 **Installed runtime configuration and unattended `NO_SESSION` behavior: CONFORMANT / PASS for the validated path.**
 
-This acceptance does not prove `PARTIAL`, real-session publication, downstream promotion, analytics, Pages, or full idempotency behavior.
+This acceptance does not prove `PARTIAL`, real-session publication, downstream promotion, analytics, Pages, full idempotency behavior, or BKL-019 N.I.N.A. informational logging.
 
 Runtime evidence bundle from pre-cutover inspection remains:
 
@@ -165,6 +165,23 @@ Controlled package window selected for replay:
 - SessionEnd: `2026-08-11 06:00:00` local.
 
 This window safely contains the real NINA/PHD2 observing activity while avoiding the non-scientific PHD2 application-open tail through 09:42.
+
+### BKL-019 N.I.N.A. C8 logging evidence
+
+Repository review on 20 August 2026 found no independent evidence that the active C8 N.I.N.A. profile has already been changed to `Information` logging. Later Observatory Status telemetry and later observing sessions do not substitute for this proof.
+
+Current state:
+
+- governed execution procedure: DEFINED in `AP14-OPS-EAGLE-AUTO-001` v1.2;
+- physical C8 profile inspection: PENDING;
+- pre-change setting evidence: PENDING;
+- post-change `Information` or more verbose setting evidence: PENDING;
+- new controlled-test N.I.N.A. log: PENDING;
+- log SHA-256: PENDING;
+- target/sequence/exposure lifecycle evidence: PENDING;
+- BKL-019 acceptance: **PENDING**.
+
+BKL-019 must not be closed from historical M27 evidence or repository documentation alone.
 
 ## 4. Session package result
 
@@ -227,6 +244,7 @@ No manual catalog or page edit is permitted for acceptance.
 - Fail-safe preflight requires clean `main` aligned to `origin/main`: PASS in production execution.
 - `NO_SESSION` protection verified in production: **PASS**.
 - `NO_SESSION` creates no staging and bypasses weather processing: **PASS**.
+- BKL-019 C8 `Information` logging controlled test: **PENDING**.
 - `PARTIAL` protection verified in production: PENDING.
 - Re-run behavior idempotent for a real session package: PENDING.
 
@@ -238,8 +256,8 @@ No manual catalog or page edit is permitted for acceptance.
 - Reporting actual CloudWatcher path Quality Gate run `31698320816`: PASS on `fedb5564fc1009dd356f20d7c5739fc4ca4cc1e6`.
 - Reporting 1.0.6 NO_SESSION regression: PASS before merge of `2b64617db4e757c0e361300af7be7bc77086b1b2`.
 - Reporting 1.0.6 post-OAT runtime-hardening regression, Quality Gate and NO_SESSION regression: PASS before merge of `c902c51ddaae7493cbfecc019fef554ffc22ca7a`.
-- Post-OAT Developer Foundation: PENDING for this documentation update.
-- Post-OAT Pages: PENDING for this documentation update.
+- BKL-019 documentation gate CI on PR #63 head `1f2a27bbe824d4e7f6f8ffb87cc30090e5ed77c8`: Developer Foundation #691 PASS; Genera manuale Word #572 PASS.
+- BKL-019 physical runtime gate: PENDING; cannot be replaced by CI.
 
 ## 10. Decision
 
@@ -247,8 +265,10 @@ No manual catalog or page edit is permitted for acceptance.
 
 **Runtime sub-gate: PASS for unattended `NO_SESSION`.**
 
+**BKL-019 N.I.N.A. C8 logging sub-gate: PENDING.**
+
 The EAGLE runtime is structurally reconciled, Reporting 1.0.6 is installed and the scheduled unattended execution of 18 August 2026 completed with `LastTaskResult = 0` and `END outcome=NO_SESSION`. The M27 staging preview remains COMPLETE with real NINA, PHD2 and CloudWatcher evidence.
 
-The next independent OAT gate remains the controlled M27 repository copy followed by manifest/content/hash verification, branch publication, governed promotion and downstream analytics/portal validation.
+The next dependency-ordered physical gate is BKL-019: inspect the active C8 profile, evidence the current logging setting, set `Information` or more verbose if required, execute a safe controlled sequence, and retain the new N.I.N.A. log plus SHA-256 and representative lifecycle evidence. Only then may BKL-019 be considered for `Done` and BKL-020 lineage closure proceed on that evidence.
 
-This record may be changed to `Accepted` only when all mandatory repository-copy, promotion, analytics, portal, real-session idempotency and remaining required runtime evidence is recorded and verifiable.
+The designated M27 OAT remains Pending. This record may be changed to `Accepted` only when all mandatory BKL-019-dependent lineage, repository-copy, promotion, analytics, portal, real-session idempotency and remaining required runtime evidence is recorded and verifiable.
