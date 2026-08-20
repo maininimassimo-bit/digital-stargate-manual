@@ -41,6 +41,9 @@ jobs:
           python-version: "3.12"
           cache: pip
 
+      - name: Refresh governed latest observation
+        run: python dsg-analytics/reporter/refresh_latest_observation.py --repo-root .
+
       - name: Refresh governed homepage projections
         run: python dsg-analytics/homepage/refresh_homepage.py --repo-root .
 
