@@ -4,7 +4,7 @@
 |---|---|
 | Documento | AP14-W07 EAGLE M27 OAT Result |
 | Identificativo | AP14-W07-EAGLE-M27-OAT-RESULT |
-| Versione | 1.5 |
+| Versione | 1.6 |
 | Data | 2026-08-20 |
 | Stato | Pending |
 | Owner | Digital StarGate Architecture Office |
@@ -15,7 +15,9 @@ Record the runtime and end-to-end acceptance evidence for the M 27 observing ses
 
 `EAGLE evidence -> COMPLETE session package -> session branch -> governed promotion -> analytics -> AP-014 projections -> GitHub Pages`.
 
-This version also records the production validation of the unattended `NO_SESSION` path completed on 18 August 2026 and the governed execution criteria for BKL-019. The `NO_SESSION` runtime sub-gate is accepted; BKL-019 and the overall M 27 OAT remain `Pending` until their required physical/downstream evidence is completed.
+This version records the production validation of the unattended `NO_SESSION` path, reconciles BKL-019/BKL-020 against already-versioned M 27 evidence, and preserves the remaining OAT gates without retroactively filling fields absent from the designated 10/11 August source evidence.
+
+The `NO_SESSION` runtime sub-gate is accepted. BKL-019 and BKL-020 are evidence-complete. The overall M 27 OAT remains `Pending` until repository-copy, promotion, analytics, portal, PARTIAL and real-session idempotency evidence is completed.
 
 ## 2. Runtime inspection and reconciliation evidence
 
@@ -133,7 +135,7 @@ Acceptance result for unattended `NO_SESSION`: **PASS**.
 
 **Installed runtime configuration and unattended `NO_SESSION` behavior: CONFORMANT / PASS for the validated path.**
 
-This acceptance does not prove `PARTIAL`, real-session publication, downstream promotion, analytics, Pages, full idempotency behavior, or BKL-019 N.I.N.A. informational logging.
+This acceptance does not prove `PARTIAL`, real-session publication, downstream promotion, analytics, Pages or full idempotency behavior.
 
 Runtime evidence bundle from pre-cutover inspection remains:
 
@@ -145,7 +147,7 @@ The 17/18 August automation evidence is retained in the daily automation logs un
 
 ## 3. M27 source evidence
 
-Evidence-derived observations for the M 27 session:
+Evidence-derived observations for the designated M 27 session:
 
 - NINA log found: `20260810-204106-3.2.0.9001.7156-202608.log`.
 - NINA log header timestamp: `2026-08-10T20:46:45`.
@@ -166,22 +168,32 @@ Controlled package window selected for replay:
 
 This window safely contains the real NINA/PHD2 observing activity while avoiding the non-scientific PHD2 application-open tail through 09:42.
 
-### BKL-019 N.I.N.A. C8 logging evidence
+### BKL-019 N.I.N.A. C8 informational logging reconciliation
 
-Repository review on 20 August 2026 found no independent evidence that the active C8 N.I.N.A. profile has already been changed to `Information` logging. Later Observatory Status telemetry and later observing sessions do not substitute for this proof.
+Repository reconciliation on 20 August 2026 identified direct versioned runtime evidence from the later M 27 session of 14/15 August:
 
-Current state:
+`data/sessions/2026/08/2026-08-14_2026-08-15/raw/nina/20260814-201744-3.2.0.9001.3996-202608.log`
 
-- governed execution procedure: DEFINED in `AP14-OPS-EAGLE-AUTO-001` v1.2;
-- physical C8 profile inspection: PENDING;
-- pre-change setting evidence: PENDING;
-- post-change `Information` or more verbose setting evidence: PENDING;
-- new controlled-test N.I.N.A. log: PENDING;
-- log SHA-256: PENDING;
-- target/sequence/exposure lifecycle evidence: PENDING;
-- BKL-019 acceptance: **PENDING**.
+That N.I.N.A. log contains `INFO`-level operational telemetry sufficient to establish the BKL-019 functional outcome, including QHY695A connection, Advanced Sequence/target context, exposure lifecycle, 600 s LIGHT exposure parameters, L-Pro, binning 1x1, image save paths and target-coordinate evidence.
 
-BKL-019 must not be closed from historical M27 evidence or repository documentation alone.
+BKL-019 decision: **PASS / DONE by existing versioned evidence**.
+
+A new controlled physical test is not required merely to reproduce this already-attested behavior. This decision does not rewrite the designated 10/11 August evidence: that session's N.I.N.A. log remains limited and must not be enriched from the later session by inference.
+
+### BKL-020 scientific lineage reconciliation
+
+Governed metadata preserves the evidence boundary:
+
+- `2026-08-10_2026-08-11` remains `PARTIAL` where instrument configuration and target coordinates are not directly attested by its designated source evidence;
+- `2026-08-14_2026-08-15` is `REGISTERED` with C8/QHY695A, L-Pro, binning 1 and governed source references;
+- `2026-08-15_2026-08-16` is `REGISTERED` with the governed C8/QHY695A configuration and M 27 target attestation.
+
+Relevant repository history:
+
+- `480c3fe2a8d36cd315cb814e7af97f8d6aa3260b`;
+- `5fd4b0ebae58bf558e1d4818bdfc8840f8ed7137`.
+
+BKL-020 decision: **PASS / DONE**. The lineage explicitly records incompleteness rather than inventing absent values.
 
 ## 4. Session package result
 
@@ -244,8 +256,10 @@ No manual catalog or page edit is permitted for acceptance.
 - Fail-safe preflight requires clean `main` aligned to `origin/main`: PASS in production execution.
 - `NO_SESSION` protection verified in production: **PASS**.
 - `NO_SESSION` creates no staging and bypasses weather processing: **PASS**.
-- BKL-019 C8 `Information` logging controlled test: **PENDING**.
-- `PARTIAL` protection verified in production: PENDING.
+- BKL-019 informational logging outcome: **PASS from versioned 14/15 August N.I.N.A. evidence**.
+- BKL-020 metadata lineage/non-invention rule: **PASS**.
+- `PARTIAL` semantic preservation for designated 10/11 August scientific metadata: **PASS at governed metadata level**.
+- `PARTIAL` protection through the production automatic publication path: PENDING.
 - Re-run behavior idempotent for a real session package: PENDING.
 
 ## 9. CI/quality gates
@@ -257,18 +271,22 @@ No manual catalog or page edit is permitted for acceptance.
 - Reporting 1.0.6 NO_SESSION regression: PASS before merge of `2b64617db4e757c0e361300af7be7bc77086b1b2`.
 - Reporting 1.0.6 post-OAT runtime-hardening regression, Quality Gate and NO_SESSION regression: PASS before merge of `c902c51ddaae7493cbfecc019fef554ffc22ca7a`.
 - BKL-019 documentation gate CI on PR #63 head `1f2a27bbe824d4e7f6f8ffb87cc30090e5ed77c8`: Developer Foundation #691 PASS; Genera manuale Word #572 PASS.
-- BKL-019 physical runtime gate: PENDING; cannot be replaced by CI.
+- PR #64 validation: pending after reconciliation commits.
 
 ## 10. Decision
 
 **Stato complessivo: Pending**
 
-**Runtime sub-gate: PASS for unattended `NO_SESSION`.**
+**Runtime `NO_SESSION` sub-gate: PASS.**
 
-**BKL-019 N.I.N.A. C8 logging sub-gate: PENDING.**
+**BKL-019 N.I.N.A. informational logging outcome: PASS / DONE.**
 
-The EAGLE runtime is structurally reconciled, Reporting 1.0.6 is installed and the scheduled unattended execution of 18 August 2026 completed with `LastTaskResult = 0` and `END outcome=NO_SESSION`. The M27 staging preview remains COMPLETE with real NINA, PHD2 and CloudWatcher evidence.
+**BKL-020 scientific lineage: PASS / DONE.**
 
-The next dependency-ordered physical gate is BKL-019: inspect the active C8 profile, evidence the current logging setting, set `Information` or more verbose if required, execute a safe controlled sequence, and retain the new N.I.N.A. log plus SHA-256 and representative lifecycle evidence. Only then may BKL-019 be considered for `Done` and BKL-020 lineage closure proceed on that evidence.
+The EAGLE runtime is structurally reconciled, Reporting 1.0.6 is installed and the scheduled unattended execution of 18 August 2026 completed with `LastTaskResult = 0` and `END outcome=NO_SESSION`. The designated M27 staging preview remains COMPLETE with real NINA, PHD2 and CloudWatcher evidence.
 
-The designated M27 OAT remains Pending. This record may be changed to `Accepted` only when all mandatory BKL-019-dependent lineage, repository-copy, promotion, analytics, portal, real-session idempotency and remaining required runtime evidence is recorded and verifiable.
+The 14/15 August M 27 N.I.N.A. evidence independently proves the informational telemetry required by BKL-019. Governed scientific metadata independently proves BKL-020's non-invention and provenance rules. Neither decision changes the historical content of the designated 10/11 August source evidence.
+
+The next dependency-ordered gate is the real-session governed chain for the designated package: `-CopyToRepository`, manifest/content verification, `session/<session-id>` publication, governed promotion, automatic analytics, portal deployment and real-session idempotency/PARTIAL-path verification.
+
+This record may be changed to `Accepted` only when those remaining mandatory end-to-end gates are recorded and verifiable.
