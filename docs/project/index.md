@@ -63,7 +63,21 @@ Ogni milestone che modifica baseline, standard, release state, debito, decisioni
 |---|---|
 | Governance Foundation documentale | Completata |
 | Bootstrap root | Creato |
-| Integrazione navigazione MkDocs | In corso |
-| Build `mkdocs build --strict` | Da verificare |
-| Verifica GitHub Pages | Da verificare |
-| Prossima milestone funzionale | RC1-HF01 Enterprise Theme Manager |
+| Integrazione navigazione MkDocs | Presente nella baseline corrente; verifica finale nel change set di governance |
+| Build `mkdocs build --strict` | Da rieseguire sul change set di governance |
+| Verifica GitHub Pages | Deployment operativo; da riverificare dopo il merge del change set di governance |
+| AP-014 Operational Acceptance | `Pending` — OAT M 27 designata 10/11 agosto non ancora chiusa |
+| Remediation AP-014 riconciliate | BKL-021 e BKL-022 `Done`; BKL-026 `Blocked` |
+| Observatory Status realtime | Vertical slice read-only integrata; Power/Network restano `UNKNOWN` finché prive di sorgenti verificate |
+| Prossima milestone governata | Completare evidence/remediation residue AP-014, quindi BKL-026 deep ARB reassessment |
+
+### Governance reconciliation — 20/08/2026
+
+La baseline è stata riconciliata con `main` `cac81e264f8750cc9eea5455e9bed98c7fc85bda`. I commit successivi all'ultimo aggiornamento OAT dimostrano remediation e capacità operative reali, ma non vengono usati per dichiarare `Accepted` l'OAT M 27 del 10/11 agosto senza le evidence richieste dal relativo record.
+
+La separazione è intenzionale:
+
+- lo stato operativo Observatory Status può avanzare indipendentemente dall'acceptance scientifica AP-014;
+- una sessione M 27 successiva non sostituisce la sessione OAT designata;
+- `UNKNOWN` resta il valore fail-safe per telemetry non verificata;
+- Power/Network non diventano il prossimo package governato prima della chiusura AP-014.
