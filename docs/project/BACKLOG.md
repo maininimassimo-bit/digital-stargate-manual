@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 1.6 |
+| Versione | 1.7 |
 | Stato | Active |
 | Data baseline | 20/08/2026 |
 
@@ -62,7 +62,8 @@ La repository governance è stata riconciliata con le evidence già presenti su 
 
 - BKL-019 è chiuso perché la sessione M 27 del 14/15 agosto contiene un log N.I.N.A. versionato a livello `INFO` con connessione QHY695A, Advanced Sequence, exposure lifecycle, filtro L-Pro, binning, target M 27, save path e coordinate target.
 - BKL-020 è chiuso perché la lineage usa registry/source reference governati e conserva esplicitamente `PARTIAL` per la sessione 10/11 agosto dove i campi non sono attestati; le sessioni successive sono `REGISTERED` solo dove l'evidence lo consente.
-- La chiusura BKL-019/BKL-020 non rende retroattivamente completa la sessione OAT 10/11 agosto e non sostituisce i gate repository-copy, promotion, analytics, portal e idempotency ancora Pending.
+- La chiusura BKL-019/BKL-020 non rende retroattivamente completa la sessione OAT 10/11 agosto. Il package designato è già stato copiato/versionato su `main` da `4266f4249cda7b2a8c47c21fd5b69c890d3ff6ed`; il workflow di promotion con ricalcolo SHA-256 è stato introdotto successivamente e quindi un run storico di quel contratto sulla pubblicazione del 13 agosto è `N/A`, non `Pending`.
+- Restano da riconciliare o validare i gate realmente applicabili: integrità indipendente del package/versioned evidence, percorso di promotion attuale su una sessione reale successiva, analytics/proiezioni, portale, PARTIAL-path production semantics e idempotenza real-session.
 - BKL-021 e BKL-022 restano chiusi rispettivamente per refresh strutturale di `latest-observation` e separazione metadata completeness/analytics state.
 - BKL-023 diventa `Ready` perché BKL-020–BKL-022 sono ora chiusi.
 - BKL-026 resta bloccato da BKL-023/BKL-024 e dall'OAT designata ancora `Pending`.
