@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 1.3 |
+| Versione | 1.4 |
 | Stato | Active |
-| Data baseline | 15/08/2026 |
+| Data baseline | 20/08/2026 |
 
 ## 1. Scopo
 
@@ -45,16 +45,26 @@ Stati ammessi: `Planned`, `Ready`, `In Progress`, `Blocked`, `Done`, `Cancelled`
 | BKL-018 | P0 | Eseguire EAGLE runtime inspection e M27 end-to-end OAT | In Progress | Accesso EAGLE; evidence NINA/PHD2/CloudWatcher M27; runtime contract | OAT M27 completata tecnicamente e remediation assessment chiuse prima dell'acceptance formale | AP-014, AP14-W07-EAGLE-OAT-001, AP14-INT-EAGLE-PUBLISH-001 |
 | BKL-019 | P0 | Correggere logging profile N.I.N.A. C8 e validare telemetria informativa | Ready | Accesso profilo N.I.N.A. C8 | Logging almeno `Information`; test controllato con target, sequence, exposure lifecycle e metadata utili all'analytics presenti nel log | AP-014, AP14-W07-EAGLE-OAT-001 |
 | BKL-020 | P0 | Correggere data lineage scientifica M27 e future session | In Progress | BKL-019; registry metadata governato | Metadata sessione risolti da evidence/registry governato; nessuna inferenza non tracciabile; M27 identificata come M 27 con campi non attestati esplicitamente incompleti | AP-014, `session-scientific-metadata.csv` |
-| BKL-021 | P0 | Eliminare eredità target precedente da `latest-observation` | Ready | BKL-020 | `latest-observation.json` usa solo metadata della sessione corrente; assenza dati => `null`/unavailable, mai valori della sessione precedente | AP-014, Mission Control |
-| BKL-022 | P0 | Separare severity analytics da metadata completeness/catalog quality | Ready | BKL-020 | `GREEN` non implica automaticamente `VALIDATED_ANALYTICS`; introdotto stato tipo `METADATA_INCOMPLETE`/equivalente per record parziali | AP-014, scientific session catalog |
+| BKL-021 | P0 | Eliminare eredità target precedente da `latest-observation` | Done | BKL-020 | `latest-observation.json` usa solo metadata della sessione corrente; refresh strutturale idempotente ricostruisce la projection dai metadata governati durante il deploy Pages | AP-014, Mission Control, `46a528234b6c787fec592953b98c763b848baca8`, `cac81e264f8750cc9eea5455e9bed98c7fc85bda` |
+| BKL-022 | P0 | Separare severity analytics da metadata completeness/catalog quality | Done | BKL-020 | `GREEN` non implica automaticamente `VALIDATED_ANALYTICS`; `METADATA_INCOMPLETE`/equivalente è propagato separatamente nel catalogo e nell'observation index | AP-014, scientific session catalog, `ffae9b81a43b82a142b37b587096ea97b1b05ec9` |
 | BKL-023 | P1 | Rigenerare e riallineare tutte le proiezioni AP-014 e viste portale | Planned | BKL-020–BKL-022 | `sessions.csv`, target projection, scientific-session-catalog, observation index, Mission Control, Enterprise Search e Session Detail semanticamente coerenti | AP-014 |
 | BKL-024 | P1 | Riallineare Observatory Status e Session Reports index alla sessione più recente | Planned | BKL-023 | Ultima sessione corretta, distinzione chiara tra stato operativo realtime e ultima sessione scientifica; indice report popolato e senza mojibake | AP-014, portal IA |
 | BKL-025 | P1 | Correggere broken links, asset mancanti e sitemap dell'artifact Pages | Done | BKL-023 | Nessun riferimento interno rotto nei percorsi rilevati dall'assessment; asset Roadmap/intelligence risolti; sitemap popolata/coerente. Acceptance verificata su `5068843608880466ba62e7ba18b8982209083645`: `deploy-pages.yml` run 381 PASS, published-site integrity PASS, deploy GitHub Pages PASS; `docs.yml` run 285 PASS; `gh-pages` commit `f1fcd04f93afe8909a80d5d916d73f42186bae8c` pubblica `5068843`. | MkDocs, Pages, PR #46, PR #47 |
-| BKL-026 | P0 | Rieseguire deep assessment ARB e chiudere OAT/AP-014 acceptance | Planned | BKL-019–BKL-025 completati; workflow verdi; Pages pubblicate | Re-crawl completo del portale, data lineage coerente, documentazione OAT aggiornata allo stato reale e decisione ARB finale | AP14-W07-EAGLE-M27-OAT-Result, AP-014-Operational-Acceptance |
+| BKL-026 | P0 | Rieseguire deep assessment ARB e chiudere OAT/AP-014 acceptance | Blocked | BKL-019, BKL-020, BKL-023 e BKL-024 non ancora chiusi; OAT M27 designata ancora `Pending` | Re-crawl completo del portale, data lineage coerente, documentazione OAT aggiornata allo stato reale e decisione ARB finale | AP14-W07-EAGLE-M27-OAT-Result, AP-014-Operational-Acceptance |
 | BKL-014 | P2 | Preparare AP-015 Scientific Knowledge Platform | Planned | AP-014 e Knowledge Graph | Architecture Package CAP-40 | AMP-002 |
 | BKL-015 | P2 | Implementare repository Knowledge Graph machine-readable | Planned | Governance Foundation e schema relazioni | Relazioni AP/ADR/component/evidence interrogabili | TD-008, GP-003 |
 | BKL-016 | P2 | Contestualizzare release e guide storiche in root | Planned | Inventario e supersession map | Lineage chiaro e baseline corrente distinguibile | TD-007 |
 | BKL-017 | P2 | Introdurre futura modalità tema `system` | Planned | RC1-HF01 stabilizzata | Preferenza OS gestita dal Theme Manager | RC1-HF01 |
+
+### Reconciliation note — 20/08/2026
+
+La repository governance è stata riconciliata con la baseline `main` `cac81e264f8750cc9eea5455e9bed98c7fc85bda` senza promuovere evidence indirette a acceptance AP-014.
+
+- BKL-021 è chiuso perché il refresh strutturale di `latest-observation` è idempotente e viene eseguito durante il deploy Pages.
+- BKL-022 è chiuso perché metadata completeness, analytics state e catalog quality sono separati nell'observation index.
+- I commit successivi relativi alla sessione M 27 del 15/16 agosto e alla realtime Observatory Status non sostituiscono l'OAT designata M 27 del 10/11 agosto.
+- BKL-026 resta bloccato finché i criteri mancanti dell'OAT designata e le remediation dipendenti non sono chiusi con evidence verificabile.
+- Power e Network in Observatory Status restano correttamente `UNKNOWN` finché non vengono identificate sorgenti read-only reali e verificabili; la relativa evoluzione non precede la chiusura governata di AP-014.
 
 ## 4. Sequenza di esecuzione raccomandata
 
@@ -70,12 +80,12 @@ Governance Foundation completion
   -> EAGLE runtime inspection + M27 OAT
   -> BKL-019 N.I.N.A. C8 logging correction + controlled test
   -> BKL-020 scientific metadata lineage correction
-  -> BKL-021 latest-observation stale-target fix
-  -> BKL-022 analytics severity vs metadata completeness separation
+  -> BKL-021 latest-observation stale-target fix [DONE]
+  -> BKL-022 analytics severity vs metadata completeness separation [DONE]
   -> BKL-023 regenerate AP-014 projections and portal views
   -> BKL-024 status/report index alignment
   -> BKL-025 Pages link/sitemap remediation [DONE]
-  -> BKL-026 deep ARB reassessment + OAT/AP-014 acceptance
+  -> BKL-026 deep ARB reassessment + OAT/AP-014 acceptance [BLOCKED]
   -> AP-015 / Knowledge Graph
 ```
 
