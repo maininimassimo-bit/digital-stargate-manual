@@ -256,7 +256,7 @@ No manual catalog or page edit is permitted for acceptance.
 - Reporting actual CloudWatcher path Quality Gate run `31698320816`: PASS on `fedb5564fc1009dd356f20d7c5739fc4ca4cc1e6`.
 - Reporting 1.0.6 NO_SESSION regression: PASS before merge of `2b64617db4e757c0e361300af7be7bc77086b1b2`.
 - Reporting 1.0.6 post-OAT runtime-hardening regression, Quality Gate and NO_SESSION regression: PASS before merge of `c902c51ddaae7493cbfecc019fef554ffc22ca7a`.
-- BKL-019 documentation gate CI: PENDING for this update.
+- BKL-019 documentation gate CI on PR #63 head `1f2a27bbe824d4e7f6f8ffb87cc30090e5ed77c8`: Developer Foundation #691 PASS; Genera manuale Word #572 PASS.
 - BKL-019 physical runtime gate: PENDING; cannot be replaced by CI.
 
 ## 10. Decision
