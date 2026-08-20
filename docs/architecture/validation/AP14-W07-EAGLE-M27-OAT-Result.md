@@ -4,7 +4,7 @@
 |---|---|
 | Documento | AP14-W07 EAGLE M27 OAT Result |
 | Identificativo | AP14-W07-EAGLE-M27-OAT-RESULT |
-| Versione | 1.6 |
+| Versione | 1.7 |
 | Data | 2026-08-20 |
 | Stato | Pending |
 | Owner | Digital StarGate Architecture Office |
@@ -15,9 +15,9 @@ Record the runtime and end-to-end acceptance evidence for the M 27 observing ses
 
 `EAGLE evidence -> COMPLETE session package -> session branch -> governed promotion -> analytics -> AP-014 projections -> GitHub Pages`.
 
-This version records the production validation of the unattended `NO_SESSION` path, reconciles BKL-019/BKL-020 against already-versioned M 27 evidence, and preserves the remaining OAT gates without retroactively filling fields absent from the designated 10/11 August source evidence.
+This version records the production validation of the unattended `NO_SESSION` path, reconciles BKL-019/BKL-020 against already-versioned M 27 evidence, reconciles the completed repository-copy outcome from the versioned M 27 package already present on `main`, and preserves the remaining OAT gates without retroactively filling fields absent from the designated 10/11 August source evidence.
 
-The `NO_SESSION` runtime sub-gate is accepted. BKL-019 and BKL-020 are evidence-complete. The overall M 27 OAT remains `Pending` until repository-copy, promotion, analytics, portal, PARTIAL and real-session idempotency evidence is completed.
+The `NO_SESSION` runtime sub-gate is accepted. BKL-019 and BKL-020 are evidence-complete. Repository copy/package presence is accepted from commit `4266f4249cda7b2a8c47c21fd5b69c890d3ff6ed`. The overall M 27 OAT remains `Pending` until governed promotion/hash-validation evidence, analytics, portal, production PARTIAL behavior and real-session idempotency evidence are completed.
 
 ## 2. Runtime inspection and reconciliation evidence
 
@@ -135,7 +135,7 @@ Acceptance result for unattended `NO_SESSION`: **PASS**.
 
 **Installed runtime configuration and unattended `NO_SESSION` behavior: CONFORMANT / PASS for the validated path.**
 
-This acceptance does not prove `PARTIAL`, real-session publication, downstream promotion, analytics, Pages or full idempotency behavior.
+This acceptance does not prove `PARTIAL`, governed real-session promotion, downstream analytics, Pages or full idempotency behavior.
 
 Runtime evidence bundle from pre-cutover inspection remains:
 
@@ -197,7 +197,7 @@ BKL-020 decision: **PASS / DONE**. The lineage explicitly records incompleteness
 
 ## 4. Session package result
 
-Controlled preview executed on the EAGLE without `-CopyToRepository`.
+Controlled preview executed on the EAGLE before repository publication.
 
 - Session ID: `2026-08-10_2026-08-11`.
 - Staging root: `C:\DigitalStarGate\SessionReports\incoming\2026\08\2026-08-10_2026-08-11`.
@@ -207,20 +207,22 @@ Controlled preview executed on the EAGLE without `-CopyToRepository`.
 - Weather file: `raw\weather\CloudWatcher_2026-08-10_2026-08-11.csv`.
 - Weather rows exported for the controlled 20:00-06:00 package window: `3600`.
 - Source weather coverage in the broader 20:00-06:59 inspection window: `3960` rows.
-- `Import-DSGSession -CopyToRepository` status: PENDING.
-- Manifest SHA-256 verification: PENDING.
-- Repository package content/hash verification against staging: PENDING.
+- Repository copy/package publication outcome: **PASS** — commit `4266f4249cda7b2a8c47c21fd5b69c890d3ff6ed` adds the designated M 27 package under `data/sessions/2026/08/2026-08-10_2026-08-11/`.
+- Repository package presence/content structure: **PASS** — `README.md`, `manifest.json`, `raw/nina`, `raw/phd2`, `raw/weather` and normalized content are present on `main`.
+- Manifest SHA-256 metadata presence: **PASS** — the committed manifest records size and SHA-256 for N.I.N.A., both PHD2 logs and CloudWatcher evidence.
+- Independent post-copy SHA-256 recomputation by an identified promotion run: **PENDING / not yet evidenced by a traceable run ID**.
 
-Acceptance gate `Status = COMPLETE` is satisfied for the staging preview.
+Acceptance gate `Status = COMPLETE` and repository-copy outcome are satisfied. The remaining integrity requirement is limited to traceable independent hash validation, not repetition of the copy operation.
 
 ## 5. Publication and promotion
 
-- Session branch: PENDING
-- Session commit SHA: PENDING
-- EAGLE push result: PENDING
-- `promote-session-package.yml` run: PENDING
-- Manifest/hash/scope validation: PENDING
-- Fast-forward promotion to `main`: PENDING
+- Published package commit: **PASS / `4266f4249cda7b2a8c47c21fd5b69c890d3ff6ed`**.
+- Designated `session/<session-id>` branch evidence: PENDING.
+- `promote-session-package.yml` run for the designated package: PENDING / no traceable run ID identified in current repository evidence.
+- Independent manifest/hash/scope validation by that governed promotion workflow: PENDING.
+- Governed fast-forward promotion through the current workflow contract: PENDING.
+
+The current `promote-session-package.yml` contract independently recalculates SHA-256 for every manifest entry and rejects missing files, size mismatches or SHA-256 mismatches before promotion. Presence of the historical package on `main` proves repository copy but does not, by itself, prove that this current governed promotion workflow executed for that historical commit.
 
 ## 6. Analytics and portal projections
 
@@ -283,10 +285,12 @@ No manual catalog or page edit is permitted for acceptance.
 
 **BKL-020 scientific lineage: PASS / DONE.**
 
-The EAGLE runtime is structurally reconciled, Reporting 1.0.6 is installed and the scheduled unattended execution of 18 August 2026 completed with `LastTaskResult = 0` and `END outcome=NO_SESSION`. The designated M27 staging preview remains COMPLETE with real NINA, PHD2 and CloudWatcher evidence.
+**M 27 repository copy/package presence: PASS / DONE.**
+
+The EAGLE runtime is structurally reconciled, Reporting 1.0.6 is installed and the scheduled unattended execution of 18 August 2026 completed with `LastTaskResult = 0` and `END outcome=NO_SESSION`. The designated M27 staging preview remains COMPLETE with real NINA, PHD2 and CloudWatcher evidence, and the resulting package is versioned on `main` by commit `4266f4249cda7b2a8c47c21fd5b69c890d3ff6ed`.
 
 The 14/15 August M 27 N.I.N.A. evidence independently proves the informational telemetry required by BKL-019. Governed scientific metadata independently proves BKL-020's non-invention and provenance rules. Neither decision changes the historical content of the designated 10/11 August source evidence.
 
-The next dependency-ordered gate is the real-session governed chain for the designated package: `-CopyToRepository`, manifest/content verification, `session/<session-id>` publication, governed promotion, automatic analytics, portal deployment and real-session idempotency/PARTIAL-path verification.
+The next dependency-ordered gate is no longer repository copy. It is to identify or execute traceable governed promotion/hash validation for the designated package, then reconcile the already-materialized downstream analytics/projections and portal evidence before testing the remaining production PARTIAL/idempotency semantics.
 
 This record may be changed to `Accepted` only when those remaining mandatory end-to-end gates are recorded and verifiable.
