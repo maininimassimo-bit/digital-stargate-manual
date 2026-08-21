@@ -13,7 +13,6 @@ governed_paths=(
   data/sessions
   data/analytics
   docs/session-reports
-  docs/status/index.md
   docs/analytics/history-validation.md
   docs/data/realtime/latest-observation.json
   docs/data/scientific-session-catalog.json
@@ -46,7 +45,6 @@ run_pipeline() {
   node .github/scripts/generate-scientific-session-catalog.mjs --write
   node .github/scripts/generate-scientific-catalog.mjs --write
   python dsg-analytics/reporter/build_session_reports_index.py --repo-root .
-  python dsg-analytics/status/build_observatory_status.py --repo-root .
   node .github/scripts/generate-scientific-session-catalog.mjs --check
   node .github/scripts/generate-scientific-catalog.mjs --check
 }
