@@ -67,7 +67,9 @@ try {
     Assert-Reject { & $validator -SessionId $sessionId -Root $p.Root -SkipAncestry -ChangedPaths @("data/sessions/2099/01/$sessionId/manifest.json", 'README.md') } 'Unexpected path' 'extraneous scope'
 
     $p = New-TestPackage; $packages += $p.Base
-    Push-Location $p.Base
+    $gitRoot = Join-Path $p.Base 'git-fixture'
+    New-Item -ItemType Directory -Path $gitRoot -Force | Out-Null
+    Push-Location $gitRoot
     try {
         git init -q
         git config user.email 'ci@digital-stargate.invalid'
