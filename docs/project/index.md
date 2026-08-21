@@ -61,28 +61,49 @@ Ogni milestone che modifica baseline, standard, release state, debito, decisioni
 
 | Elemento | Stato |
 |---|---|
-| Governance Foundation documentale | Completata |
-| Bootstrap root | Creato |
-| Integrazione navigazione MkDocs | Presente nella baseline corrente |
-| Build/quality gate documentale | PASS — Developer Foundation #725 |
-| Generazione manuale Word | PASS — run #606 |
-| Verifica GitHub Pages | Baseline BKL-025 PASS; deployment operativo |
+| Governance Foundation documentale | **Completata** — BKL-002–BKL-006 Done |
+| Bootstrap root | **Done** — BKL-003 |
+| Enterprise Theme Framework | **Completed / Accepted** — BKL-001; WP-03 |
+| Integrazione navigazione MkDocs | **Done** — Project Governance presente in `mkdocs.yml` |
+| Build/quality gate documentale | PASS — Developer Foundation #730 |
+| Generazione manuale Word | PASS — run #611 |
+| Verifica GitHub Pages | PASS — BKL-025 baseline |
+| AP-012 residual evidence | **In Progress** — BKL-011; ARB-012-C04 W06/W07 |
+| AP-013 / AP-013B COPY_ONLY | **Accepted / Limited Production** — BKL-012 Done |
 | AP-014 Operational Acceptance | **Accepted** — v1.4 |
 | AP14-W07 EAGLE M27 OAT | **Accepted** — v2.1 |
-| Remediation AP-014 | BKL-019–BKL-026 `Done` |
-| Observatory Status realtime | Vertical slice read-only integrata; Power/Network restano `UNKNOWN` finché prive di sorgenti verificate |
-| Prossima milestone governata | Riprendere la sequenza backlog/roadmap successiva ad AP-014; AP-015 resta pianificato dopo le dipendenze previste |
+| Observatory Status realtime | Vertical slice read-only integrata; **Power/Network ancora da completare** |
+| Observatory Status Power/Network discovery | **Ready — BKL-027** |
+| Observatory Status Power/Network integration | Planned — BKL-028 |
+| AP-015 / Knowledge Graph | Planned dopo le dipendenze P1 |
 
-### Governance reconciliation — 21/08/2026
+### Repository Governance Reconciliation post AP-014 — 21/08/2026
 
-La chiusura AP-014 è evidence-based:
+La repository truth ha consentito di chiudere senza ripetizioni operative BKL-001, BKL-002, BKL-003, BKL-004, BKL-005, BKL-006 e BKL-012.
 
-- la sessione M27 10/11 agosto conserva `PARTIAL` dove l'evidence originaria non attesta i metadata;
-- i workflow promotion/analytics introdotti dopo la pubblicazione storica sono `N/A historical baseline`, non evidence retroattive;
-- il promotion fail-safe contract è PASS in Developer Foundation #714;
-- la real-session semantic idempotency è PASS in Developer Foundation #723;
-- la riconciliazione finale dell'acceptance è validata sull'exact head `a52c678ba6f3b498bc711ec7b8d5fad7359c7709` da Developer Foundation #725 e Genera manuale Word #606;
-- AP-014 Operational Acceptance v1.4 e AP14-W07 EAGLE M27 OAT Result v2.1 sono `Accepted`;
-- BKL-013, BKL-018 e BKL-026 sono `Done`.
+Evidence principali:
 
-La separazione fra telemetria realtime e proiezioni scientifiche storiche resta intenzionale. `UNKNOWN` rimane il valore fail-safe per sorgenti realtime non verificate.
+- WP-03 Enterprise Theme Framework Completion Report: `Accepted`, Theme Service centralizzato e CI verde;
+- `mkdocs.yml`: sezione `Project Governance` presente;
+- `AI_BOOTSTRAP.md`: bootstrap canonico presente in root;
+- `docs/project/index.md`: Knowledge Map e registri canonici esposti;
+- Developer Foundation #730 e BKL-025: build/Pages governance già verificate;
+- AP-013B OneDrive Transport Operational Acceptance: `Passed — Limited Production`, scheduler Export/Import attive, `LastTaskResult = 0`, batch e retry idempotente;
+- AP-013 Formal Operational Acceptance: `Accepted` e formal closure authorized.
+
+Non sono stati chiusi per inferenza:
+
+- **BKL-011**, perché ARB-012-C04 documenta ancora provisioning/account/PRV/ENV reali non completati;
+- **BKL-007–BKL-010**, perché restano attività di hardening effettive.
+
+Power e Network di Observatory Status sono ora esplicitamente governati da BKL-027/BKL-028. Fino alla verifica delle sorgenti runtime, `UNKNOWN` resta il valore fail-safe corretto.
+
+## Prossima sequenza governata
+
+```text
+BKL-011 AP-012 residual evidence [IN PROGRESS]
+  -> BKL-027 Observatory Status Power/Network source discovery [READY]
+  -> BKL-028 Observatory Status Power/Network integration
+  -> BKL-007/008/009/010 governance hardening
+  -> AP-015 / Knowledge Graph
+```
