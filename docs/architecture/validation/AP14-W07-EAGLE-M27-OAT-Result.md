@@ -4,7 +4,7 @@
 |---|---|
 | Documento | AP14-W07 EAGLE M27 OAT Result |
 | Identificativo | AP14-W07-EAGLE-M27-OAT-RESULT |
-| Versione | 1.8 |
+| Versione | 1.9 |
 | Data | 2026-08-21 |
 | Stato | Pending |
 | Owner | Digital StarGate Architecture Office |
@@ -17,7 +17,7 @@ Target current-state flow:
 
 `EAGLE evidence -> COMPLETE session package -> session/<session-id> -> governed promotion -> analytics -> AP-014 projections -> GitHub Pages`.
 
-The designated package was published on 13 August 2026 before the current `session/<session-id>` + `promote-session-package.yml` contract was introduced. Therefore a historical execution of that later workflow is **N/A for the designated publication baseline**, not an outstanding historical run. Current-contract controls remain subject to separate validation.
+The designated package was published on 13 August 2026 before the current `session/<session-id>` + `promote-session-package.yml` contract was introduced. Therefore a historical execution of that later workflow is **N/A for the designated publication baseline**, not an outstanding historical run.
 
 Current summary:
 
@@ -27,7 +27,8 @@ Current summary:
 - M27 repository copy/package presence: **PASS / DONE**;
 - AP-014 projections and portal reconciliation (BKL-023/BKL-024): **PASS / DONE**;
 - historical `session/<session-id>` promotion run for the 10/11 package: **N/A**;
-- current-contract negative/fail-safe validation and real-session idempotency: **PENDING**;
+- current-contract negative/fail-safe validation: **PASS contract-level**;
+- real-session idempotency: **PENDING**;
 - overall OAT: **Pending**.
 
 ## 2. Runtime inspection and reconciliation evidence
@@ -151,20 +152,20 @@ Rationale: commit `4266f424...` predates introduction of the current governed pr
 
 ### Current contract
 
-The current `promote-session-package.yml` implements these controls:
+The current `promote-session-package.yml` delegates validation to `.github/scripts/validate-session-promotion.ps1`. The same validator is exercised by `.github/scripts/test-session-promotion.ps1` in Developer Foundation.
 
-- valid `session/<session-id>` branch identity;
-- manifest `session_id` equality;
-- `report_status = COMPLETE`;
-- required NINA/PHD2/weather evidence;
-- file-size validation;
-- SHA-256 recomputation and mismatch rejection;
-- fast-forward ancestry check against current `main`;
-- session/report-only scope validation;
-- fast-forward push to `main`;
-- downstream analytics dispatch.
+Developer Foundation #714 on exact head `ba3247aa891df3f11d43a0a808611956c0bb4ff5` completed **SUCCESS** and proved:
 
-Implementation is verified in repository code. **Negative-path acceptance evidence remains PENDING** for ancestry rejection, size/hash mismatch rejection, scope rejection and PARTIAL rejection.
+- nominal `COMPLETE` package: PASS;
+- `PARTIAL` rejection: PASS;
+- manifest size mismatch rejection: PASS;
+- SHA-256 mismatch rejection: PASS;
+- extraneous path/scope rejection: PASS;
+- non-descendant ancestry rejection: PASS.
+
+Decision: **current-contract negative/fail-safe validation PASS at contract level**.
+
+This evidence validates the promotion guard implementation without fabricating a retroactive M27 promotion run. Real-session idempotency remains a separate operational gate.
 
 ## 6. Analytics and AP-014 projections
 
@@ -202,23 +203,24 @@ No acceptance claim depends on manually editing a catalog to fabricate M27 visib
 | Clean `main` preflight | PASS | production preflight evidence |
 | `NO_SESSION` rejected from publication path | PASS | 18/08 unattended production run |
 | Historical M27 metadata incompleteness preserved | PASS | `PARTIAL` lineage in governed metadata/projections |
-| `PARTIAL` rejected by current automatic promotion path | PENDING | control intent exists; no traceable exercised negative run found |
-| Non-descendant branch rejected | CONTROL IMPLEMENTED / PENDING validation | `merge-base --is-ancestor` check present |
-| Manifest size/hash mismatch rejected | CONTROL IMPLEMENTED / PENDING validation | size + SHA-256 checks present |
-| Extraneous path rejected | CONTROL IMPLEMENTED / PENDING validation | session/report-only scope check present |
+| `PARTIAL` rejected by current automatic promotion path | PASS contract-level | Developer Foundation #714 |
+| Non-descendant branch rejected | PASS contract-level | Developer Foundation #714 |
+| Manifest size/hash mismatch rejected | PASS contract-level | Developer Foundation #714 |
+| Extraneous path rejected | PASS contract-level | Developer Foundation #714 |
 | Scientific metrics not synthesized from XISF filenames/transfer plan | PASS | BKL-020/BKL-022 governance |
 | Real-session rerun/idempotency | PENDING | no traceable real-session double-run evidence identified |
 
 ## 9. CI and quality evidence
 
-Historical Reporting quality gates remain PASS, including collector/weather, repository-root installer, unattended-task semantics and CloudWatcher-path validation.
+Exact-head CI used for fail-safe acceptance:
 
-PR #64 validations before this reconciliation were green through:
+- head `ba3247aa891df3f11d43a0a808611956c0bb4ff5`;
+- Developer Foundation #714: **SUCCESS**;
+- `Test session promotion fail-safe contract`: **SUCCESS**;
+- all Developer Foundation quality-gate steps: **SUCCESS**;
+- Genera manuale Word #595: **SUCCESS**.
 
-- Developer Foundation #706: **PASS**;
-- Genera manuale Word #587: **PASS**.
-
-A new CI cycle is required on the amended head before final ARB re-review.
+The fail-safe suite is therefore accepted as traceable CI evidence for the current promotion validator.
 
 ## 10. Decision
 
@@ -231,14 +233,14 @@ Accepted sub-gates:
 - BKL-020: DONE;
 - repository copy/package presence: PASS;
 - BKL-023 projections/portal consistency: DONE;
-- BKL-024 status/report alignment: DONE.
+- BKL-024 status/report alignment: DONE;
+- current promotion negative/fail-safe validation: PASS contract-level.
 
 Historical current-contract promotion requirements are explicitly **N/A** for the 13 August M27 publication and are no longer treated as impossible historical blockers.
 
-Remaining acceptance blockers are limited to current-contract evidence:
+Remaining acceptance blockers are now limited to:
 
-1. negative/fail-safe validation of PARTIAL, branch ancestry, manifest size/hash mismatch and extraneous scope;
-2. real-session idempotency;
-3. final disposition of the historical `analyze-session-automatic.yml` run criterion.
+1. real-session idempotency;
+2. final disposition of the historical `analyze-session-automatic.yml` run criterion.
 
-This record must remain `Pending` until those items are resolved with traceable evidence or an explicit, evidence-based N/A decision by the acceptance authority.
+This record remains `Pending` until those two items are resolved with traceable evidence or an explicit, evidence-based N/A decision by the acceptance authority.
