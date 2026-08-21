@@ -108,7 +108,7 @@ jobs:
 
       - name: Test real-session downstream idempotency
         shell: bash
-        run: ./.github/scripts/test-real-session-idempotency.sh 2026-08-15_2026-08-16
+        run: bash ./.github/scripts/test-real-session-idempotency.sh 2026-08-15_2026-08-16
 
       - name: Verify MkDocs
         run: mkdocs build --strict
