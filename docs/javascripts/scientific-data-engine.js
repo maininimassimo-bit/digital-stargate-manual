@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const VERSION = '2.1.0-rc2';
+  const VERSION = '2.1.1-rc2';
   const cache = new Map();
   const metrics = {
     requests: 0,
@@ -201,6 +201,11 @@
     return filterSessions(sessions, filters);
   };
 
+  const representedState = (value) => {
+    const normalized = String(value || '').trim().toUpperCase();
+    return Boolean(normalized) && !['UNKNOWN', 'N/A', 'NOT_REPRESENTED', 'MISSING'].includes(normalized);
+  };
+
   const getKnowledgeGraph = (session) => ({
     target: { type: 'TARGET', id: session.target, label: session.target },
     session: { type: 'SESSION', id: session.sessionId, label: session.sessionId },
@@ -210,20 +215,25 @@
       { type: 'FILTER', id: session.filter, label: session.filter }
     ],
     outputs: [
-      { type: 'METRICS', state: session.evidenceState, available: true },
-      { type: 'MANIFEST', state: session.manifestState, available: false },
-      { type: 'TRANSFER', state: session.transferState, available: false }
+      { type: 'METRICS', state: session.evidenceState, available: representedState(session.evidenceState) },
+      { type: 'MANIFEST', state: session.manifestState, available: representedState(session.manifestState) },
+      { type: 'TRANSFER', state: session.transferState, available: representedState(session.transferState) }
     ]
   });
 
-  const getLineage = (session) => [
-    { label: 'Observation session', state: 'represented', detail: session.sessionId },
-    { label: 'Acquisition metrics', state: 'represented', detail: `${session.lightCompleted} completed light frames` },
-    { label: 'Scientific assets', state: 'partial', detail: 'paths and binary inventory not exposed in this catalog' },
-    { label: 'Manifest', state: 'missing', detail: session.manifestState },
-    { label: 'Processing', state: 'missing', detail: 'not represented' },
-    { label: 'Publication', state: 'missing', detail: 'not represented' }
-  ];
+  const getLineage = (session) => {
+    const manifestAvailable = representedState(session.manifestState);
+    const transferAvailable = representedState(session.transferState);
+    return [
+      { label: 'Observation session', state: 'represented', detail: session.sessionId },
+      { label: 'Acquisition metrics', state: representedState(session.evidenceState) ? 'represented' : 'missing', detail: `${session.lightCompleted} completed light frames` },
+      { label: 'Scientific assets', state: 'partial', detail: 'paths and binary inventory not exposed in this catalog' },
+      { label: 'Manifest', state: manifestAvailable ? 'represented' : 'missing', detail: session.manifestState },
+      { label: 'Transfer', state: transferAvailable ? 'represented' : 'missing', detail: session.transferState },
+      { label: 'Processing', state: 'missing', detail: 'not represented' },
+      { label: 'Publication', state: 'missing', detail: 'not represented' }
+    ];
+  };
 
   const clearCache = (source) => {
     const hadEntries = source ? cache.has(source) : cache.size > 0;
