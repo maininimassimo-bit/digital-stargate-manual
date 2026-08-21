@@ -5,9 +5,9 @@
 | Documento | AP-014 Operational Acceptance |
 | Package | AP-014 |
 | Workstream | AP14-W07 Validation & Operational Acceptance |
-| Versione | 1.3 |
+| Versione | 1.4 |
 | Data | 2026-08-21 |
-| Stato | Pending final exact-head CI |
+| Stato | Accepted |
 | Owner | Digital StarGate Architecture Office |
 
 ## 1. Scopo
@@ -80,6 +80,7 @@ La finestra è stata determinata dalle evidence N.I.N.A./PHD2 e il controlled pa
 | `scientific-session-catalog.json` contiene M 27 | PASS | BKL-023 |
 | `scientific-observation-index.json` contiene M 27 | PASS | BKL-023; metadata completeness separata da analytics quality |
 | Quality gate tecnico applicabile | PASS | Developer Foundation #723 e Genera manuale Word #604 entrambi SUCCESS sull'exact head `88ea7b1f915177906e5d514ee8254ef91ff5e45d` |
+| Final exact-head governance CI | PASS | Developer Foundation #725 e Genera manuale Word #606 entrambi SUCCESS sull'exact head `a52c678ba6f3b498bc711ec7b8d5fad7359c7709` |
 | GitHub Pages deployment PASS | PASS baseline portal | BKL-025: deploy-pages run 381 PASS e published-site integrity PASS |
 | M 27 visibile nel portale AP-014 senza modifica manuale del catalogo | PASS | catalog/index/Search/Session Detail/Mission Control riconciliati in BKL-023 |
 
@@ -103,18 +104,20 @@ L'idempotenza accettata è **scientifica/semantica**: timestamp di generazione, 
 |---|---|
 | Runtime inspection checklist / evidence | PASS |
 | Runtime contract reconciliation | PASS |
-| `AP14-W07-EAGLE-M27-OAT-Result.md` | PASS come record reconciliato |
+| `AP14-W07-EAGLE-M27-OAT-Result.md` | PASS |
 | Package M 27 versionato | PASS — `4266f4249cda7b2a8c47c21fd5b69c890d3ff6ed` |
 | Analytics/catalog projection versionate | PASS |
 | Promotion fail-safe validation set | PASS — Developer Foundation #714 |
 | Real-session semantic idempotency | PASS — Developer Foundation #723 |
 | Pages workflow verificato | PASS baseline BKL-025 |
-| Final exact-head documentation CI | PENDING |
+| Final exact-head documentation/governance CI | PASS — Developer Foundation #725; Genera manuale Word #606 |
 
 ## 8. Decisione
 
-**Stato: Pending final exact-head CI**
+**Stato: Accepted**
 
-Tutti i gate tecnici e operativi applicabili risultano PASS oppure N/A con rationale storico esplicito. Non restano criteri tecnici `PENDING`.
+Tutti i gate tecnici e operativi applicabili risultano **PASS** oppure **N/A historical baseline** con rationale esplicito. Non restano criteri `PENDING`.
 
-La decisione proposta è **Accepted** subordinatamente esclusivamente al CI dell'exact head che contiene questa riconciliazione finale. Se Developer Foundation e Genera manuale Word risultano entrambi verdi e non viene introdotto nuovo scope, non è richiesto un ulteriore OAT tecnico; la chiusura può essere completata come riconciliazione documentale/governance.
+AP-014 Scientific Observation Catalog and Search è quindi **operativamente accettato** sulla baseline riconciliata. La chiusura non altera retroattivamente la sessione M27 10/11 agosto, che resta `PARTIAL` dove le sue evidence originarie sono incomplete, e non attribuisce a quella pubblicazione workflow introdotti successivamente.
+
+L'eventuale eliminazione futura del byte-level churn dovuto a timestamp, line ending o metadata PDF è hardening separato e non riapre l'acceptance AP-014.
