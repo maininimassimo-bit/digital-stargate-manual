@@ -4,9 +4,9 @@
 |---|---|
 | Documento | AP14-W07 EAGLE M27 OAT Result |
 | Identificativo | AP14-W07-EAGLE-M27-OAT-RESULT |
-| Versione | 2.0 |
+| Versione | 2.1 |
 | Data | 2026-08-21 |
-| Stato | Pending final exact-head CI |
+| Stato | Accepted |
 | Owner | Digital StarGate Architecture Office |
 
 ## 1. Scope
@@ -29,8 +29,8 @@ Current summary:
 - historical promotion and analytics workflow run for the 10/11 package: **N/A historical baseline**;
 - current-contract negative/fail-safe validation: **PASS**;
 - real-session semantic idempotency: **PASS**;
-- technical OAT gates: **PASS**;
-- overall OAT: **Pending final exact-head CI**.
+- final governance CI: **PASS**;
+- overall OAT: **Accepted**.
 
 ## 2. Runtime inspection and reconciliation evidence
 
@@ -171,7 +171,7 @@ Repository reconciliation establishes:
 - latest scientific observation projection: **PASS**;
 - Enterprise Search, Mission Control and Session Detail consume governed projections: **PASS**.
 
-The current real-session analytics/projection contract is additionally validated by Developer Foundation #723 on exact head `88ea7b1f915177906e5d514ee8254ef91ff5e45d`.
+The current real-session analytics/projection contract is validated by Developer Foundation #723 on exact head `88ea7b1f915177906e5d514ee8254ef91ff5e45d`.
 
 The gate executes the real downstream pipeline twice against the versioned `COMPLETE` session `2026-08-15_2026-08-16` and compares canonical governed scientific/projection state. Result: **semantic idempotency PASS**.
 
@@ -212,12 +212,16 @@ Technical acceptance evidence:
 - Genera manuale Word #604: **SUCCESS**;
 - exact technical head for #723/#604: `88ea7b1f915177906e5d514ee8254ef91ff5e45d`.
 
-Final documentation reconciliation requires one additional exact-head CI pass before the record is marked `Accepted`.
+Final governance reconciliation evidence:
+
+- exact head `a52c678ba6f3b498bc711ec7b8d5fad7359c7709`;
+- Developer Foundation #725: **SUCCESS**;
+- Genera manuale Word #606: **SUCCESS**.
 
 ## 10. Decision
 
-**Overall OAT state: Pending final exact-head CI**
+**Overall OAT state: Accepted**
 
-All technical/operational gates are now either **PASS** or explicitly **N/A historical baseline**. No technical acceptance blocker remains.
+All technical/operational gates are **PASS** or explicitly **N/A historical baseline**. No acceptance blocker remains.
 
-Proposed final decision: **Accepted**, conditional only on green Developer Foundation and Genera manuale Word runs for the exact head containing this final governance reconciliation. No further physical EAGLE test or technical OAT rerun is required if that documentation-only CI is green and no new technical scope is introduced.
+AP-014 OAT is formally accepted. No further physical EAGLE test or technical OAT rerun is required for this baseline. The historical M27 evidence remains immutable in meaning: fields unsupported by the original evidence remain `PARTIAL`, and later workflow contracts are not retroactively attributed to the 13 August publication.
