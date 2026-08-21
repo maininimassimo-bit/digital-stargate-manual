@@ -4,9 +4,9 @@
 |---|---|
 | Documento | AP14-W07 EAGLE M27 OAT Result |
 | Identificativo | AP14-W07-EAGLE-M27-OAT-RESULT |
-| Versione | 1.9 |
+| Versione | 2.0 |
 | Data | 2026-08-21 |
-| Stato | Pending |
+| Stato | Pending final exact-head CI |
 | Owner | Digital StarGate Architecture Office |
 
 ## 1. Scope
@@ -17,19 +17,20 @@ Target current-state flow:
 
 `EAGLE evidence -> COMPLETE session package -> session/<session-id> -> governed promotion -> analytics -> AP-014 projections -> GitHub Pages`.
 
-The designated package was published on 13 August 2026 before the current `session/<session-id>` + `promote-session-package.yml` contract was introduced. Therefore a historical execution of that later workflow is **N/A for the designated publication baseline**, not an outstanding historical run.
+The designated package was published on 13 August 2026 before the current `session/<session-id>` promotion contract and before the current analytics workflow baseline. Historical execution of those later workflow contracts is therefore **N/A for the designated publication baseline**.
 
 Current summary:
 
 - unattended `NO_SESSION`: **PASS**;
-- BKL-019 informational logging outcome: **PASS / DONE**;
+- BKL-019 informational logging: **PASS / DONE**;
 - BKL-020 scientific lineage: **PASS / DONE**;
-- M27 repository copy/package presence: **PASS / DONE**;
-- AP-014 projections and portal reconciliation (BKL-023/BKL-024): **PASS / DONE**;
-- historical `session/<session-id>` promotion run for the 10/11 package: **N/A**;
-- current-contract negative/fail-safe validation: **PASS contract-level**;
-- real-session idempotency: **PENDING**;
-- overall OAT: **Pending**.
+- M27 repository package: **PASS / DONE**;
+- AP-014 projections and portal reconciliation: **PASS / DONE**;
+- historical promotion and analytics workflow run for the 10/11 package: **N/A historical baseline**;
+- current-contract negative/fail-safe validation: **PASS**;
+- real-session semantic idempotency: **PASS**;
+- technical OAT gates: **PASS**;
+- overall OAT: **Pending final exact-head CI**.
 
 ## 2. Runtime inspection and reconciliation evidence
 
@@ -66,8 +67,6 @@ Runtime inspection was executed on physical host `EAGLE30154` using governed rea
 - Preflight enforces clean `main`, fetch/pull fast-forward-only and `HEAD = origin/main`.
 
 ### `NO_SESSION` production acceptance
-
-Reporting 1.0.6 separates exact-window session discovery from wider evidence collection. When neither NINA nor PHD2 evidence exists in the candidate window it returns before staging creation and before CloudWatcher parsing.
 
 Controlled replay on 17 August 2026:
 
@@ -121,8 +120,6 @@ Decision: **PASS / DONE**.
 - `2026-08-14_2026-08-15`: `REGISTERED` with governed C8/QHY695A metadata.
 - `2026-08-15_2026-08-16`: `REGISTERED` with governed C8/QHY695A metadata.
 
-Relevant history includes `480c3fe2a8d36cd315cb814e7af97f8d6aa3260b` and `5fd4b0ebae58bf558e1d4818bdfc8840f8ed7137`.
-
 Decision: **PASS / DONE**.
 
 ## 4. Session package result
@@ -134,63 +131,59 @@ Decision: **PASS / DONE**.
 - CloudWatcher weather package present.
 - Repository copy/package publication: **PASS**.
 - Published package commit: `4266f4249cda7b2a8c47c21fd5b69c890d3ff6ed`.
-- Package structure on `main`: **PASS** (`README.md`, `manifest.json`, `raw/nina`, `raw/phd2`, `raw/weather`, normalized content).
+- Package structure on `main`: **PASS**.
 - Manifest contains session identity, size and SHA-256 metadata: **PASS**.
 
 The copy operation is complete and must not be repeated solely to satisfy stale documentation.
 
-## 5. Historical publication vs current promotion contract
+## 5. Historical publication vs current contracts
 
 ### Designated 10/11 August publication
 
 - package present on `main`: **PASS**;
-- `session/<session-id>` branch under current contract: **N/A historical baseline**;
-- `promote-session-package.yml` for historical publication: **N/A historical baseline**;
-- current workflow-specific fast-forward/hash/scope run ID for that historical publication: **N/A historical baseline**.
+- current `session/<session-id>` promotion run: **N/A historical baseline**;
+- current `promote-session-package.yml` run: **N/A historical baseline**;
+- current `analyze-session-automatic.yml` run attributable to the original publication: **N/A historical baseline**.
 
-Rationale: commit `4266f424...` predates introduction of the current governed promotion workflow. A later workflow cannot be required retroactively as evidence of an earlier publication.
+Rationale: the package publication commit `4266f424...` predates the current governed promotion and analytics workflow baselines. Later workflows cannot be required retroactively as evidence of an earlier publication. Historical analytics/catalog outputs are nevertheless materialized and were reconciled by BKL-023/BKL-024.
 
-### Current contract
-
-The current `promote-session-package.yml` delegates validation to `.github/scripts/validate-session-promotion.ps1`. The same validator is exercised by `.github/scripts/test-session-promotion.ps1` in Developer Foundation.
+### Current promotion contract
 
 Developer Foundation #714 on exact head `ba3247aa891df3f11d43a0a808611956c0bb4ff5` completed **SUCCESS** and proved:
 
-- nominal `COMPLETE` package: PASS;
+- nominal `COMPLETE`: PASS;
 - `PARTIAL` rejection: PASS;
 - manifest size mismatch rejection: PASS;
 - SHA-256 mismatch rejection: PASS;
-- extraneous path/scope rejection: PASS;
+- extraneous scope rejection: PASS;
 - non-descendant ancestry rejection: PASS.
 
-Decision: **current-contract negative/fail-safe validation PASS at contract level**.
+Decision: **PASS contract-level**.
 
-This evidence validates the promotion guard implementation without fabricating a retroactive M27 promotion run. Real-session idempotency remains a separate operational gate.
-
-## 6. Analytics and AP-014 projections
+## 6. Analytics, projections and idempotency
 
 Repository reconciliation establishes:
 
 - `sessions.csv` contains M 27: **PASS**;
-- `target-exposures.csv` uses governed evidence/provenance: **PASS**;
+- `target-exposures.csv` uses governed provenance: **PASS**;
 - `targets.csv` reflects M 27: **PASS**;
-- `scientific-session-catalog.json` contains the sessions with governed metadata state: **PASS**;
-- `scientific-observation-index.json` contains M 27 and separates metadata completeness from analytics quality: **PASS**;
-- `latest-observation.json` identifies the current latest scientific session without inheriting stale target state: **PASS**;
-- Enterprise Search consumes the observation index: **PASS**;
-- Mission Control and Session Detail consume shared governed projections: **PASS**.
+- scientific session catalog and observation index: **PASS**;
+- latest scientific observation projection: **PASS**;
+- Enterprise Search, Mission Control and Session Detail consume governed projections: **PASS**.
 
-The historical `analyze-session-automatic.yml` run ID attributable specifically to the original 13 August M27 publication has not been identified. Its output state is materialized and reconciled, but the workflow-run criterion remains **PENDING** until either a traceable run is found or the acceptance authority explicitly classifies that historical run requirement as N/A based on workflow timeline.
+The current real-session analytics/projection contract is additionally validated by Developer Foundation #723 on exact head `88ea7b1f915177906e5d514ee8254ef91ff5e45d`.
+
+The gate executes the real downstream pipeline twice against the versioned `COMPLETE` session `2026-08-15_2026-08-16` and compares canonical governed scientific/projection state. Result: **semantic idempotency PASS**.
+
+Volatile generation timestamps, line endings and PDF binary metadata are not scientific state. Byte-for-byte no-op hardening, if desired, is separate technical debt and is not an AP-014 acceptance blocker.
 
 ## 7. Portal deployment and correlated pages
 
 - BKL-025 Pages integrity baseline: **PASS** (`deploy-pages` run 381 and published-site integrity PASS).
-- Session Explorer / Session Detail / Mission Control / Enterprise Search semantic reconciliation: **PASS** through BKL-023.
-- Observatory Status vs historical latest observation separation: **PASS** through BKL-024.
+- Session Explorer / Session Detail / Mission Control / Enterprise Search reconciliation: **PASS**.
+- Observatory Status vs historical latest observation separation: **PASS**.
 - Session Reports latest-session ordering: **PASS**.
 - Power and Network remain `UNKNOWN` without verified realtime sources: **PASS fail-safe behavior**.
-
-No acceptance claim depends on manually editing a catalog to fabricate M27 visibility.
 
 ## 8. Safety, fail-safe and idempotency matrix
 
@@ -202,45 +195,29 @@ No acceptance claim depends on manually editing a catalog to fabricate M27 visib
 | No force-push/history rewrite | PASS | governance evidence |
 | Clean `main` preflight | PASS | production preflight evidence |
 | `NO_SESSION` rejected from publication path | PASS | 18/08 unattended production run |
-| Historical M27 metadata incompleteness preserved | PASS | `PARTIAL` lineage in governed metadata/projections |
-| `PARTIAL` rejected by current automatic promotion path | PASS contract-level | Developer Foundation #714 |
-| Non-descendant branch rejected | PASS contract-level | Developer Foundation #714 |
-| Manifest size/hash mismatch rejected | PASS contract-level | Developer Foundation #714 |
-| Extraneous path rejected | PASS contract-level | Developer Foundation #714 |
-| Scientific metrics not synthesized from XISF filenames/transfer plan | PASS | BKL-020/BKL-022 governance |
-| Real-session rerun/idempotency | PENDING | no traceable real-session double-run evidence identified |
+| Historical M27 metadata incompleteness preserved | PASS | `PARTIAL` lineage |
+| `PARTIAL` rejected by current automatic promotion path | PASS | Developer Foundation #714 |
+| Non-descendant branch rejected | PASS | Developer Foundation #714 |
+| Manifest size/hash mismatch rejected | PASS | Developer Foundation #714 |
+| Extraneous path rejected | PASS | Developer Foundation #714 |
+| Scientific metrics not synthesized from XISF filenames/transfer plan | PASS | BKL-020/BKL-022 |
+| Real-session semantic rerun/idempotency | PASS | Developer Foundation #723, session `2026-08-15_2026-08-16` |
 
 ## 9. CI and quality evidence
 
-Exact-head CI used for fail-safe acceptance:
+Technical acceptance evidence:
 
-- head `ba3247aa891df3f11d43a0a808611956c0bb4ff5`;
-- Developer Foundation #714: **SUCCESS**;
-- `Test session promotion fail-safe contract`: **SUCCESS**;
-- all Developer Foundation quality-gate steps: **SUCCESS**;
-- Genera manuale Word #595: **SUCCESS**.
+- Developer Foundation #714: **SUCCESS** — promotion fail-safe contract;
+- Developer Foundation #723: **SUCCESS** — real-session semantic idempotency and full applicable quality gate;
+- Genera manuale Word #604: **SUCCESS**;
+- exact technical head for #723/#604: `88ea7b1f915177906e5d514ee8254ef91ff5e45d`.
 
-The fail-safe suite is therefore accepted as traceable CI evidence for the current promotion validator.
+Final documentation reconciliation requires one additional exact-head CI pass before the record is marked `Accepted`.
 
 ## 10. Decision
 
-**Overall OAT state: Pending**
+**Overall OAT state: Pending final exact-head CI**
 
-Accepted sub-gates:
+All technical/operational gates are now either **PASS** or explicitly **N/A historical baseline**. No technical acceptance blocker remains.
 
-- runtime `NO_SESSION`: PASS;
-- BKL-019: DONE;
-- BKL-020: DONE;
-- repository copy/package presence: PASS;
-- BKL-023 projections/portal consistency: DONE;
-- BKL-024 status/report alignment: DONE;
-- current promotion negative/fail-safe validation: PASS contract-level.
-
-Historical current-contract promotion requirements are explicitly **N/A** for the 13 August M27 publication and are no longer treated as impossible historical blockers.
-
-Remaining acceptance blockers are now limited to:
-
-1. real-session idempotency;
-2. final disposition of the historical `analyze-session-automatic.yml` run criterion.
-
-This record remains `Pending` until those two items are resolved with traceable evidence or an explicit, evidence-based N/A decision by the acceptance authority.
+Proposed final decision: **Accepted**, conditional only on green Developer Foundation and Genera manuale Word runs for the exact head containing this final governance reconciliation. No further physical EAGLE test or technical OAT rerun is required if that documentation-only CI is green and no new technical scope is introduced.
