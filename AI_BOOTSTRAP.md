@@ -87,16 +87,16 @@ Procedere una milestone alla volta:
 - variazione della roadmap architetturale: prima `AMP-002`, poi le proiezioni;
 - difetto operativo o software: issue/bug tracking.
 
-## 8. Stato di continuità alla baseline iniziale
+## 8. Stato di continuità corrente — 21/08/2026
 
-- Digital StarGate Enterprise Portal RC1 pubblicata;
-- Governance Foundation documentale quasi completata;
-- prossima hotfix funzionale: `RC1-HF01 Enterprise Theme Manager`;
-- `page-enhancements.js` deve restare Navigation Manager;
-- il nuovo `dsg-theme-manager.js` sarà l'unico responsabile del tema;
-- AP-012 conserva acceptance ed evidence residue;
-- AP-013 resta limitato a trasferimenti protetti `COPY_ONLY` fino a ulteriori evidence e review;
-- AP-014 e AP-015 sono evoluzioni pianificate.
+- Governance Foundation documentale completata e integrata nella navigazione MkDocs;
+- `AI_BOOTSTRAP.md` è il bootstrap canonico;
+- Enterprise Theme Framework completato e accettato; `dsg-theme-manager.js` è l'authority del tema e supporta `light`, `dark` e `system`;
+- AP-012 conserva evidence residue reali su `ARB-012-C04`: provisioning isolato, account non-production e PRV/ENV/W07 restano da completare;
+- AP-013 è formalmente `Accepted`; AP-013B OneDrive-mediated COPY_ONLY è `Passed — Limited Production` con scheduler/runtime evidence e vincoli no-delete/no-overwrite;
+- AP-014 è formalmente `Accepted` e integrato in `main`;
+- Observatory Status realtime è operativo per le source integrate; Power e Network restano `UNKNOWN` finché BKL-027 non identifica sorgenti read-only verificabili e BKL-028 non le integra;
+- AP-015 / Knowledge Graph resta pianificato dopo le dipendenze P1 correnti.
 
 Lo stato deve essere nuovamente verificato nel repository a ogni utilizzo di questo file.
 
