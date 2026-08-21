@@ -4,98 +4,71 @@
 |---|---|
 | Documento | AP14-W07 EAGLE M27 OAT Result |
 | Identificativo | AP14-W07-EAGLE-M27-OAT-RESULT |
-| Versione | 1.7 |
-| Data | 2026-08-20 |
+| Versione | 1.8 |
+| Data | 2026-08-21 |
 | Stato | Pending |
 | Owner | Digital StarGate Architecture Office |
 
 ## 1. Scope
 
-Record the runtime and end-to-end acceptance evidence for the M 27 observing session of 10/11 August 2026 and prove the permanent automatic flow:
+Record the runtime and end-to-end acceptance evidence for the designated M 27 observing session of 10/11 August 2026 and reconcile that historical publication with the current automatic-session contract without inventing retroactive evidence.
 
-`EAGLE evidence -> COMPLETE session package -> session branch -> governed promotion -> analytics -> AP-014 projections -> GitHub Pages`.
+Target current-state flow:
 
-This version records the production validation of the unattended `NO_SESSION` path, reconciles BKL-019/BKL-020 against already-versioned M 27 evidence, reconciles the completed repository-copy outcome from the versioned M 27 package already present on `main`, and preserves the remaining OAT gates without retroactively filling fields absent from the designated 10/11 August source evidence.
+`EAGLE evidence -> COMPLETE session package -> session/<session-id> -> governed promotion -> analytics -> AP-014 projections -> GitHub Pages`.
 
-The `NO_SESSION` runtime sub-gate is accepted. BKL-019 and BKL-020 are evidence-complete. Repository copy/package presence is accepted from commit `4266f4249cda7b2a8c47c21fd5b69c890d3ff6ed`. The overall M 27 OAT remains `Pending` until governed promotion/hash-validation evidence, analytics, portal, production PARTIAL behavior and real-session idempotency evidence are completed.
+The designated package was published on 13 August 2026 before the current `session/<session-id>` + `promote-session-package.yml` contract was introduced. Therefore a historical execution of that later workflow is **N/A for the designated publication baseline**, not an outstanding historical run. Current-contract controls remain subject to separate validation.
+
+Current summary:
+
+- unattended `NO_SESSION`: **PASS**;
+- BKL-019 informational logging outcome: **PASS / DONE**;
+- BKL-020 scientific lineage: **PASS / DONE**;
+- M27 repository copy/package presence: **PASS / DONE**;
+- AP-014 projections and portal reconciliation (BKL-023/BKL-024): **PASS / DONE**;
+- historical `session/<session-id>` promotion run for the 10/11 package: **N/A**;
+- current-contract negative/fail-safe validation and real-session idempotency: **PENDING**;
+- overall OAT: **Pending**.
 
 ## 2. Runtime inspection and reconciliation evidence
 
-Runtime inspection was executed on physical host `EAGLE30154` using the governed read-only collector and subsequent controlled runtime checks.
+Runtime inspection was executed on physical host `EAGLE30154` using governed read-only inspection and controlled runtime checks.
 
 ### Historical runtime
 
 - Scheduled Task `Digital StarGate - Daily Session Upload`: FOUND / Ready.
-- Historical task principal: `PrimaLuceLab`, `LogonType = S4U`, `RunLevel = Highest`.
-- Historical trigger: daily, `07:20` local.
-- Last historical run observed: `2026-08-13 12:22:22` local; `LastTaskResult = 1`.
+- Principal: `PrimaLuceLab`, `LogonType = S4U`, `RunLevel = Highest`.
+- Trigger: daily, `07:20` local.
+- Historical run observed on 13 August 2026: `LastTaskResult = 1`.
 - Historical launcher: `C:\DigitalStarGate\Automation\Invoke-DSGAutomaticSession.ps1`.
 - Historical launcher SHA-256: `9C2F6B6010EB5A9268786E61D1AEAB123D6B7B56C51755B9B62B86B134A25AD8`.
 - Historical automation configuration SHA-256: `BF1CDF0B8E313186E5B4283992ECE507B511DF8B6B66A5CFC241CC0C6DC11083`.
-- Historical Reporting versions installed: `1.0.3`, `1.0.0`.
-- Historical clean PowerShell resolution: `1.0.3`.
+- Historical Reporting versions: `1.0.3`, `1.0.0`.
 - Historical repository root: `C:\DigitalStarGate\digital-stargate-manual`.
-- Historical repository state at inspection: `main`, HEAD `0b00d1f23c825a2f753cef2a13fc41d2ea5e3b1a`, `0` ahead / `44` behind `origin/main`, with three README line-ending-only working-tree differences.
-- Historical automation log for `2026-08-13` stopped after `Sincronizzazione preventiva del repository`; this is consistent with the non-clean legacy working tree and the historical `git pull --rebase` behavior.
-
-Historical deviations from AP14-INT-EAGLE-PUBLISH-001 were confirmed:
-
-1. Reporting `1.0.3` instead of the governed baseline;
-2. `git pull --rebase` instead of fast-forward-only synchronization;
-3. direct publication to configured branch `main` instead of `session/<session-id>`;
-4. repository writes before proving `COMPLETE`;
-5. dependency on the legacy repository clone with line-ending/index drift.
+- Historical deviations included `git pull --rebase`, direct publication to `main`, repository writes before proving `COMPLETE`, and legacy working-tree drift.
 
 ### Preserved rollback evidence
 
 - Historical task exported before cutover.
-- Historical launcher/config copied to `C:\DigitalStarGate\SessionReports\deployment-backup\ap14-cutover-20260813-134642`.
-- Backup launcher SHA-256: `9C2F6B6010EB5A9268786E61D1AEAB123D6B7B56C51755B9B62B86B134A25AD8`.
-- Backup automation config SHA-256: `BF1CDF0B8E313186E5B4283992ECE507B511DF8B6B66A5CFC241CC0C6DC11083`.
-- Historical README state separately backed up and preserved in Git stash; no destructive reset/history rewrite was used.
+- Historical launcher/config preserved under `C:\DigitalStarGate\SessionReports\deployment-backup\ap14-cutover-20260813-134642`.
+- No destructive reset or history rewrite was used.
 
-### Clean AP-014 runtime repository
+### Reconciled runtime
 
-- Runtime clone: `C:\DigitalStarGate\digital-stargate-manual-ap14-runtime`.
+- Clean runtime clone: `C:\DigitalStarGate\digital-stargate-manual-ap14-runtime`.
 - Required branch: `main`.
-- Runtime HEAD during the 17/18 August validation: `bbaef3fafbef749ccf32e07bc1c2fe61238e0669`.
-- Runtime preflight proved local `HEAD = origin/main` before launching the automatic session flow.
-- Working tree was clean during the accepted unattended run.
-
-### Reporting runtime reconciliation
-
-- Reporting `1.0.6` installed at `C:\Users\PrimaLuceLab\Documents\WindowsPowerShell\Modules\DigitalStarGate.Reporting\1.0.6`.
-- Effective runtime configuration: `C:\DigitalStarGate\Automation\reporting.config.psd1`.
-- Effective RepositoryRoot: `C:\DigitalStarGate\digital-stargate-manual-ap14-runtime`.
+- Reporting `1.0.6` installed and verified.
+- Effective configuration: `C:\DigitalStarGate\Automation\reporting.config.psd1`.
 - NINA source: `C:\Users\PrimaLuceLab\AppData\Local\NINA\Logs`.
 - PHD2 source: `C:\Users\PrimaLuceLab\Documents\PHD2`.
 - CloudWatcher source: `C:\Users\PrimaLuceLab\Documents\CloudWatcher\CloudWatcher.csv`.
-- CloudWatcher source existence check: PASS.
-- Reporting source fix for exact-window `NO_SESSION` discovery: `2b64617db4e757c0e361300af7be7bc77086b1b2`.
-- Reporting post-OAT installer/Windows-checkout hardening: `c902c51ddaae7493cbfecc019fef554ffc22ca7a`.
-- Reporting source clone on EAGLE was realigned to `c902c51ddaae7493cbfecc019fef554ffc22ca7a`, `VERSION = 1.0.6`, clean working tree.
+- Preflight enforces clean `main`, fetch/pull fast-forward-only and `HEAD = origin/main`.
 
-### NO_SESSION defect and remediation evidence
+### `NO_SESSION` production acceptance
 
-The scheduled run of 17 August 2026 exposed two independent conditions:
+Reporting 1.0.6 separates exact-window session discovery from wider evidence collection. When neither NINA nor PHD2 evidence exists in the candidate window it returns before staging creation and before CloudWatcher parsing.
 
-1. the runtime repository was initially on a feature branch, correctly rejected by the fail-safe preflight;
-2. after restoring `main`, Reporting 1.0.5 could falsely discover a session because previous-night NINA/PHD2 logs inside the evidence collection boundary `+/-12h` were also used to decide whether a new session existed.
-
-The false-positive evidence came from the previous 15/16 August session and caused the import path to enter CloudWatcher processing despite there being no observing session on 16/17 August.
-
-Reporting 1.0.6 separates:
-
-- **session discovery:** exact candidate window using NINA/PHD2 `CreationTime` or `LastWriteTime`;
-- **evidence collection:** the wider `+/-12h` boundary, only after a real candidate session is established.
-
-When neither NINA nor PHD2 evidence exists in the exact candidate window, `Import-DSGSession` returns `NO_SESSION` before staging creation and before CloudWatcher parsing.
-
-### Controlled manual runtime replay — 17 August 2026
-
-After installing Reporting 1.0.6 and removing only the previously inspected false staging directory, the governed preflight was executed manually against candidate window `2026-08-16 19:00` -> `2026-08-17 06:00`.
-
-Observed evidence:
+Controlled replay on 17 August 2026:
 
 ```text
 DSG PRECHECK OK main-head=bbaef3fafbef749ccf32e07bc1c2fe61238e0669
@@ -104,193 +77,168 @@ DISCOVERY session=2026-08-16_2026-08-17 status=NO_SESSION nina=0 phd2=0 weatherR
 END outcome=NO_SESSION
 ```
 
-- Process exit code: `0`.
-- False staging path after replay: absent.
-- Result: PASS.
-
-### Scheduled unattended runtime execution — 18 August 2026
-
-The production Scheduled Task executed automatically at the configured daily trigger.
-
-Task evidence:
-
-- Task: `Digital StarGate - Daily Session Upload`.
-- `LastRunTime = 2026-08-18 07:20:20` local.
-- `LastTaskResult = 0`.
-- `NextRunTime = 2026-08-19 07:20:20` local.
-
-Automation log evidence for candidate window `2026-08-17 19:00` -> `2026-08-18 06:00`:
+Scheduled unattended execution on 18 August 2026:
 
 ```text
-[2026-08-18T07:20:10.7943233+02:00] START candidate-window=2026-08-17T19:00:00..2026-08-18T06:00:00 repository=C:\DigitalStarGate\digital-stargate-manual-ap14-runtime
-[2026-08-18T07:20:16.1832118+02:00] BASE main-head=bbaef3fafbef749ccf32e07bc1c2fe61238e0669
-[2026-08-18T07:20:16.8548706+02:00] MODULE version=1.0.6 path=C:\Users\PrimaLuceLab\Documents\WindowsPowerShell\Modules\DigitalStarGate.Reporting\1.0.6
-[2026-08-18T07:20:17.2454051+02:00] DISCOVERY session=2026-08-17_2026-08-18 status=NO_SESSION nina=0 phd2=0 weatherRows=0
-[2026-08-18T07:20:17.2610282+02:00] END outcome=NO_SESSION
+START candidate-window=2026-08-17T19:00:00..2026-08-18T06:00:00
+BASE main-head=bbaef3fafbef749ccf32e07bc1c2fe61238e0669
+MODULE version=1.0.6
+DISCOVERY session=2026-08-17_2026-08-18 status=NO_SESSION nina=0 phd2=0 weatherRows=0
+END outcome=NO_SESSION
 ```
 
-Acceptance result for unattended `NO_SESSION`: **PASS**.
+- `LastTaskResult = 0`.
+- No false staging directory remained.
+- `NO_SESSION` acceptance result: **PASS**.
 
-### Runtime conformance assessment after production validation
+## 3. Designated M27 source evidence
 
-**Installed runtime configuration and unattended `NO_SESSION` behavior: CONFORMANT / PASS for the validated path.**
+Evidence-derived observations for 10/11 August 2026:
 
-This acceptance does not prove `PARTIAL`, governed real-session promotion, downstream analytics, Pages or full idempotency behavior.
+- NINA log `20260810-204106-3.2.0.9001.7156-202608.log`.
+- NINA activity through at least `2026-08-11T05:09:32`.
+- PHD2 DebugLog and GuideLog present.
+- PHD2 guiding approximately `22:18:22` -> `05:00:14`.
+- CloudWatcher evidence present.
+- Controlled replay window: `2026-08-10 20:00:00` -> `2026-08-11 06:00:00` local.
 
-Runtime evidence bundle from pre-cutover inspection remains:
+The designated session remains `PARTIAL` where its own source evidence does not attest instrument configuration or target coordinates. Later sessions are not used to backfill historical facts.
 
-`C:\DigitalStarGate\SessionReports\runtime-evidence\EAGLE-runtime-evidence-20260813-132013`
+### BKL-019 informational logging reconciliation
 
-The 17/18 August automation evidence is retained in the daily automation logs under:
+Versioned N.I.N.A. evidence from M 27 on 14/15 August directly records `INFO` telemetry including QHY695A connection, Advanced Sequence, target/exposure lifecycle, 600 s LIGHT exposures, L-Pro, binning 1x1, image save paths and target-coordinate evidence.
 
-`C:\DigitalStarGate\SessionReports\automation\`
-
-## 3. M27 source evidence
-
-Evidence-derived observations for the designated M 27 session:
-
-- NINA log found: `20260810-204106-3.2.0.9001.7156-202608.log`.
-- NINA log header timestamp: `2026-08-10T20:46:45`.
-- NINA activity observed through at least `2026-08-11T05:09:32`.
-- PHD2 DebugLog and GuideLog found for the same night.
-- PHD2 guiding begins: `2026-08-10 22:18:22`.
-- PHD2 guiding ends: `2026-08-11 05:00:14`.
-- CloudWatcher source confirmed at `C:\Users\PrimaLuceLab\Documents\CloudWatcher\CloudWatcher.csv`.
-- CloudWatcher source is a long-running historical CSV containing Date/Time, cloud/rain/brightness conditions, ambient temperature, wind, humidity, dew point, pressure and Safe Status.
-- Broad M27 weather check found `3960` rows between `2026-08-10 20:00` and `2026-08-11 06:59`.
-- First inspected M27 weather row: `2026-08-10 20:00:05`.
-- Last inspected M27 weather row: `2026-08-11 06:59:56`.
-
-Controlled package window selected for replay:
-
-- SessionStart: `2026-08-10 20:00:00` local.
-- SessionEnd: `2026-08-11 06:00:00` local.
-
-This window safely contains the real NINA/PHD2 observing activity while avoiding the non-scientific PHD2 application-open tail through 09:42.
-
-### BKL-019 N.I.N.A. C8 informational logging reconciliation
-
-Repository reconciliation on 20 August 2026 identified direct versioned runtime evidence from the later M 27 session of 14/15 August:
+Authoritative source:
 
 `data/sessions/2026/08/2026-08-14_2026-08-15/raw/nina/20260814-201744-3.2.0.9001.3996-202608.log`
 
-That N.I.N.A. log contains `INFO`-level operational telemetry sufficient to establish the BKL-019 functional outcome, including QHY695A connection, Advanced Sequence/target context, exposure lifecycle, 600 s LIGHT exposure parameters, L-Pro, binning 1x1, image save paths and target-coordinate evidence.
+Decision: **PASS / DONE**.
 
-BKL-019 decision: **PASS / DONE by existing versioned evidence**.
+### BKL-020 lineage reconciliation
 
-A new controlled physical test is not required merely to reproduce this already-attested behavior. This decision does not rewrite the designated 10/11 August evidence: that session's N.I.N.A. log remains limited and must not be enriched from the later session by inference.
+- `2026-08-10_2026-08-11`: `PARTIAL` where evidence is insufficient.
+- `2026-08-14_2026-08-15`: `REGISTERED` with governed C8/QHY695A metadata.
+- `2026-08-15_2026-08-16`: `REGISTERED` with governed C8/QHY695A metadata.
 
-### BKL-020 scientific lineage reconciliation
+Relevant history includes `480c3fe2a8d36cd315cb814e7af97f8d6aa3260b` and `5fd4b0ebae58bf558e1d4818bdfc8840f8ed7137`.
 
-Governed metadata preserves the evidence boundary:
-
-- `2026-08-10_2026-08-11` remains `PARTIAL` where instrument configuration and target coordinates are not directly attested by its designated source evidence;
-- `2026-08-14_2026-08-15` is `REGISTERED` with C8/QHY695A, L-Pro, binning 1 and governed source references;
-- `2026-08-15_2026-08-16` is `REGISTERED` with the governed C8/QHY695A configuration and M 27 target attestation.
-
-Relevant repository history:
-
-- `480c3fe2a8d36cd315cb814e7af97f8d6aa3260b`;
-- `5fd4b0ebae58bf558e1d4818bdfc8840f8ed7137`.
-
-BKL-020 decision: **PASS / DONE**. The lineage explicitly records incompleteness rather than inventing absent values.
+Decision: **PASS / DONE**.
 
 ## 4. Session package result
 
-Controlled preview executed on the EAGLE before repository publication.
-
 - Session ID: `2026-08-10_2026-08-11`.
-- Staging root: `C:\DigitalStarGate\SessionReports\incoming\2026\08\2026-08-10_2026-08-11`.
-- `Import-DSGSession` preview status: **COMPLETE / PASS**.
+- Controlled `Import-DSGSession` preview: **COMPLETE / PASS**.
 - NINA files packaged: `1`.
 - PHD2 files packaged: `2`.
-- Weather file: `raw\weather\CloudWatcher_2026-08-10_2026-08-11.csv`.
-- Weather rows exported for the controlled 20:00-06:00 package window: `3600`.
-- Source weather coverage in the broader 20:00-06:59 inspection window: `3960` rows.
-- Repository copy/package publication outcome: **PASS** — commit `4266f4249cda7b2a8c47c21fd5b69c890d3ff6ed` adds the designated M 27 package under `data/sessions/2026/08/2026-08-10_2026-08-11/`.
-- Repository package presence/content structure: **PASS** — `README.md`, `manifest.json`, `raw/nina`, `raw/phd2`, `raw/weather` and normalized content are present on `main`.
-- Manifest SHA-256 metadata presence: **PASS** — the committed manifest records size and SHA-256 for N.I.N.A., both PHD2 logs and CloudWatcher evidence.
-- Independent post-copy SHA-256 recomputation by an identified promotion run: **PENDING / not yet evidenced by a traceable run ID**.
+- CloudWatcher weather package present.
+- Repository copy/package publication: **PASS**.
+- Published package commit: `4266f4249cda7b2a8c47c21fd5b69c890d3ff6ed`.
+- Package structure on `main`: **PASS** (`README.md`, `manifest.json`, `raw/nina`, `raw/phd2`, `raw/weather`, normalized content).
+- Manifest contains session identity, size and SHA-256 metadata: **PASS**.
 
-Acceptance gate `Status = COMPLETE` and repository-copy outcome are satisfied. The remaining integrity requirement is limited to traceable independent hash validation, not repetition of the copy operation.
+The copy operation is complete and must not be repeated solely to satisfy stale documentation.
 
-## 5. Publication and promotion
+## 5. Historical publication vs current promotion contract
 
-- Published package commit: **PASS / `4266f4249cda7b2a8c47c21fd5b69c890d3ff6ed`**.
-- Designated `session/<session-id>` branch evidence: PENDING.
-- `promote-session-package.yml` run for the designated package: PENDING / no traceable run ID identified in current repository evidence.
-- Independent manifest/hash/scope validation by that governed promotion workflow: PENDING.
-- Governed fast-forward promotion through the current workflow contract: PENDING.
+### Designated 10/11 August publication
 
-The current `promote-session-package.yml` contract independently recalculates SHA-256 for every manifest entry and rejects missing files, size mismatches or SHA-256 mismatches before promotion. Presence of the historical package on `main` proves repository copy but does not, by itself, prove that this current governed promotion workflow executed for that historical commit.
+- package present on `main`: **PASS**;
+- `session/<session-id>` branch under current contract: **N/A historical baseline**;
+- `promote-session-package.yml` for historical publication: **N/A historical baseline**;
+- current workflow-specific fast-forward/hash/scope run ID for that historical publication: **N/A historical baseline**.
 
-## 6. Analytics and portal projections
+Rationale: commit `4266f424...` predates introduction of the current governed promotion workflow. A later workflow cannot be required retroactively as evidence of an earlier publication.
 
-- `analyze-session-automatic.yml` run: PENDING
-- `sessions.csv` contains M 27: PENDING
-- `target-exposures.csv` contains derived M 27 metrics: PENDING
-- `targets.csv` contains M 27: PENDING
-- `scientific-session-catalog.json` contains M 27: PENDING
-- `scientific-observation-index.json` contains M 27: PENDING
-- `latest-observation.json` updated where applicable: PENDING
+### Current contract
 
-No quality/scientific metric may be inferred from XISF filenames or AP-013B transfer metadata.
+The current `promote-session-package.yml` implements these controls:
+
+- valid `session/<session-id>` branch identity;
+- manifest `session_id` equality;
+- `report_status = COMPLETE`;
+- required NINA/PHD2/weather evidence;
+- file-size validation;
+- SHA-256 recomputation and mismatch rejection;
+- fast-forward ancestry check against current `main`;
+- session/report-only scope validation;
+- fast-forward push to `main`;
+- downstream analytics dispatch.
+
+Implementation is verified in repository code. **Negative-path acceptance evidence remains PENDING** for ancestry rejection, size/hash mismatch rejection, scope rejection and PARTIAL rejection.
+
+## 6. Analytics and AP-014 projections
+
+Repository reconciliation establishes:
+
+- `sessions.csv` contains M 27: **PASS**;
+- `target-exposures.csv` uses governed evidence/provenance: **PASS**;
+- `targets.csv` reflects M 27: **PASS**;
+- `scientific-session-catalog.json` contains the sessions with governed metadata state: **PASS**;
+- `scientific-observation-index.json` contains M 27 and separates metadata completeness from analytics quality: **PASS**;
+- `latest-observation.json` identifies the current latest scientific session without inheriting stale target state: **PASS**;
+- Enterprise Search consumes the observation index: **PASS**;
+- Mission Control and Session Detail consume shared governed projections: **PASS**.
+
+The historical `analyze-session-automatic.yml` run ID attributable specifically to the original 13 August M27 publication has not been identified. Its output state is materialized and reconciled, but the workflow-run criterion remains **PENDING** until either a traceable run is found or the acceptance authority explicitly classifies that historical run requirement as N/A based on workflow timeline.
 
 ## 7. Portal deployment and correlated pages
 
-- `deploy-pages.yml` run: PENDING
-- Session Explorer reflects M 27: PENDING
-- Session Detail resolves M 27: PENDING
-- Mission Control reflects updated shared projections: PENDING
-- Enterprise Search returns M 27/target projection: PENDING
+- BKL-025 Pages integrity baseline: **PASS** (`deploy-pages` run 381 and published-site integrity PASS).
+- Session Explorer / Session Detail / Mission Control / Enterprise Search semantic reconciliation: **PASS** through BKL-023.
+- Observatory Status vs historical latest observation separation: **PASS** through BKL-024.
+- Session Reports latest-session ordering: **PASS**.
+- Power and Network remain `UNKNOWN` without verified realtime sources: **PASS fail-safe behavior**.
 
-No manual catalog or page edit is permitted for acceptance.
+No acceptance claim depends on manually editing a catalog to fabricate M27 visibility.
 
-## 8. Safety and idempotency checks
+## 8. Safety, fail-safe and idempotency matrix
 
-- Scientific XISF files unchanged through inspection/cutover/preview: PASS.
-- AP-013B transport/import unchanged: PASS.
-- No source NINA/PHD2/weather evidence deleted: PASS.
-- No force push/history rewrite: PASS.
-- Historical runtime rollback package retained: PASS.
-- Preview performed only in staging: PASS.
-- Runtime Git working tree clean before automatic execution: PASS.
-- Fail-safe preflight requires clean `main` aligned to `origin/main`: PASS in production execution.
-- `NO_SESSION` protection verified in production: **PASS**.
-- `NO_SESSION` creates no staging and bypasses weather processing: **PASS**.
-- BKL-019 informational logging outcome: **PASS from versioned 14/15 August N.I.N.A. evidence**.
-- BKL-020 metadata lineage/non-invention rule: **PASS**.
-- `PARTIAL` semantic preservation for designated 10/11 August scientific metadata: **PASS at governed metadata level**.
-- `PARTIAL` protection through the production automatic publication path: PENDING.
-- Re-run behavior idempotent for a real session package: PENDING.
+| Check | State | Evidence |
+|---|---|---|
+| Scientific XISF unchanged by AP-014 inspection/import | PASS | runtime/OAT evidence |
+| AP-013B path unaffected | PASS | separated architecture boundary |
+| Source NINA/PHD2/weather not deleted | PASS | runtime/OAT evidence |
+| No force-push/history rewrite | PASS | governance evidence |
+| Clean `main` preflight | PASS | production preflight evidence |
+| `NO_SESSION` rejected from publication path | PASS | 18/08 unattended production run |
+| Historical M27 metadata incompleteness preserved | PASS | `PARTIAL` lineage in governed metadata/projections |
+| `PARTIAL` rejected by current automatic promotion path | PENDING | control intent exists; no traceable exercised negative run found |
+| Non-descendant branch rejected | CONTROL IMPLEMENTED / PENDING validation | `merge-base --is-ancestor` check present |
+| Manifest size/hash mismatch rejected | CONTROL IMPLEMENTED / PENDING validation | size + SHA-256 checks present |
+| Extraneous path rejected | CONTROL IMPLEMENTED / PENDING validation | session/report-only scope check present |
+| Scientific metrics not synthesized from XISF filenames/transfer plan | PASS | BKL-020/BKL-022 governance |
+| Real-session rerun/idempotency | PENDING | no traceable real-session double-run evidence identified |
 
-## 9. CI/quality gates
+## 9. CI and quality evidence
 
-- Reporting collector/locked-weather Quality Gate run `31694911434`: PASS on `591984ae9cbb6e7b4d54ef3ab6a696fb2a98e700`.
-- Reporting repository-root installer Quality Gate run `31696735200`: PASS on `f27330da5f4e8363fcfea9af2ccfa808592091b7`.
-- Reporting unattended-task semantics Quality Gate run `31697194103`: PASS on `5b82235bd1aab21bfac5f47a11c38538ee3f264b`.
-- Reporting actual CloudWatcher path Quality Gate run `31698320816`: PASS on `fedb5564fc1009dd356f20d7c5739fc4ca4cc1e6`.
-- Reporting 1.0.6 NO_SESSION regression: PASS before merge of `2b64617db4e757c0e361300af7be7bc77086b1b2`.
-- Reporting 1.0.6 post-OAT runtime-hardening regression, Quality Gate and NO_SESSION regression: PASS before merge of `c902c51ddaae7493cbfecc019fef554ffc22ca7a`.
-- BKL-019 documentation gate CI on PR #63 head `1f2a27bbe824d4e7f6f8ffb87cc30090e5ed77c8`: Developer Foundation #691 PASS; Genera manuale Word #572 PASS.
-- PR #64 validation: pending after reconciliation commits.
+Historical Reporting quality gates remain PASS, including collector/weather, repository-root installer, unattended-task semantics and CloudWatcher-path validation.
+
+PR #64 validations before this reconciliation were green through:
+
+- Developer Foundation #706: **PASS**;
+- Genera manuale Word #587: **PASS**.
+
+A new CI cycle is required on the amended head before final ARB re-review.
 
 ## 10. Decision
 
-**Stato complessivo: Pending**
+**Overall OAT state: Pending**
 
-**Runtime `NO_SESSION` sub-gate: PASS.**
+Accepted sub-gates:
 
-**BKL-019 N.I.N.A. informational logging outcome: PASS / DONE.**
+- runtime `NO_SESSION`: PASS;
+- BKL-019: DONE;
+- BKL-020: DONE;
+- repository copy/package presence: PASS;
+- BKL-023 projections/portal consistency: DONE;
+- BKL-024 status/report alignment: DONE.
 
-**BKL-020 scientific lineage: PASS / DONE.**
+Historical current-contract promotion requirements are explicitly **N/A** for the 13 August M27 publication and are no longer treated as impossible historical blockers.
 
-**M 27 repository copy/package presence: PASS / DONE.**
+Remaining acceptance blockers are limited to current-contract evidence:
 
-The EAGLE runtime is structurally reconciled, Reporting 1.0.6 is installed and the scheduled unattended execution of 18 August 2026 completed with `LastTaskResult = 0` and `END outcome=NO_SESSION`. The designated M27 staging preview remains COMPLETE with real NINA, PHD2 and CloudWatcher evidence, and the resulting package is versioned on `main` by commit `4266f4249cda7b2a8c47c21fd5b69c890d3ff6ed`.
+1. negative/fail-safe validation of PARTIAL, branch ancestry, manifest size/hash mismatch and extraneous scope;
+2. real-session idempotency;
+3. final disposition of the historical `analyze-session-automatic.yml` run criterion.
 
-The 14/15 August M 27 N.I.N.A. evidence independently proves the informational telemetry required by BKL-019. Governed scientific metadata independently proves BKL-020's non-invention and provenance rules. Neither decision changes the historical content of the designated 10/11 August source evidence.
-
-The next dependency-ordered gate is no longer repository copy. It is to identify or execute traceable governed promotion/hash validation for the designated package, then reconcile the already-materialized downstream analytics/projections and portal evidence before testing the remaining production PARTIAL/idempotency semantics.
-
-This record may be changed to `Accepted` only when those remaining mandatory end-to-end gates are recorded and verifiable.
+This record must remain `Pending` until those items are resolved with traceable evidence or an explicit, evidence-based N/A decision by the acceptance authority.
