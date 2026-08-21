@@ -27,16 +27,24 @@ function New-TestPackage {
 
 function Assert-Pass {
     param([scriptblock]$Action, [string]$Name)
-    try { & $Action | Out-Null; Write-Host "PASS $Name" }
-    catch { throw "Expected PASS for $Name but got: $($_.Exception.Message)" }
+    try {
+        & $Action | Out-Null
+        $global:LASTEXITCODE = 0
+        Write-Host "PASS $Name"
+    } catch {
+        throw "Expected PASS for $Name but got: $($_.Exception.Message)"
+    }
 }
 
 function Assert-Reject {
     param([scriptblock]$Action, [string]$Pattern, [string]$Name)
-    try { & $Action | Out-Null; throw "Expected rejection for $Name" }
-    catch {
+    try {
+        & $Action | Out-Null
+        throw "Expected rejection for $Name"
+    } catch {
         if ($_.Exception.Message -like "Expected rejection*") { throw }
         if ($_.Exception.Message -notmatch $Pattern) { throw "Wrong rejection for $Name`: $($_.Exception.Message)" }
+        $global:LASTEXITCODE = 0
         Write-Host "PASS rejection $Name -> $($_.Exception.Message)"
     }
 }
@@ -83,9 +91,12 @@ try {
         git rm -rf -q .
         Set-Content unrelated.txt 'unrelated'; git add .; git commit -q -m unrelated
         Assert-Reject { & $validator -SessionId $sessionId -Root $p.Root -BaseRef main -SkipScope } 'not a fast-forward descendant' 'non-descendant ancestry'
-    } finally { Pop-Location }
+    } finally {
+        Pop-Location
+    }
 } finally {
     foreach ($path in $packages) { Remove-Item $path -Recurse -Force -ErrorAction SilentlyContinue }
 }
 
+$global:LASTEXITCODE = 0
 Write-Host 'Session promotion contract tests PASS.'
