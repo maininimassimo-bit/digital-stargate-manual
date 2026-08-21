@@ -52,4 +52,15 @@ La projection pubblicata non è una fonte primaria: il producer runtime è un ad
 
 ## Ultima sessione scientifica
 
-La telemetria realtime è deliberatamente separata dalla storia scientifica. Per sessioni, target, integrazione, guiding e report utilizzare **Session Reports** e **Scientific Platform**: quei dati sono proiezioni storiche versionate e non descrivono lo stato corrente dell'osservatorio.
+La telemetria realtime è deliberatamente separata dalla storia scientifica. La scheda seguente legge esclusivamente la projection storica versionata `latest-observation.json`: **non** descrive lo stato corrente dell'osservatorio e non partecipa alla safety.
+
+| Campo | Ultima osservazione versionata |
+|---|---|
+| Sessione | <span data-latest-scientific="session-id">—</span> |
+| Target | <span data-latest-scientific="target">—</span> |
+| Metadata | <span data-latest-scientific="metadata-state">—</span> |
+| Integrazione | <span data-latest-scientific="integration">—</span> |
+| Light completati | <span data-latest-scientific="frames">—</span> |
+| RMS totale | <span data-latest-scientific="rms">—</span> |
+
+Per la cronologia completa usare [Session Reports](../session-reports/) e [Scientific Platform](../scientific-platform/). Questi dati sono proiezioni storiche versionate e restano semanticamente separati dalla telemetria realtime mostrata sopra.
