@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 1.8 |
+| Versione | 1.9 |
 | Stato | Active |
 | Data baseline | 21/08/2026 |
 
@@ -48,9 +48,9 @@ Stati ammessi: `Planned`, `Ready`, `In Progress`, `Blocked`, `Done`, `Cancelled`
 | BKL-021 | P0 | Eliminare eredità target precedente da `latest-observation` | Done | BKL-020 | `latest-observation.json` usa solo metadata della sessione corrente; refresh strutturale idempotente ricostruisce la projection dai metadata governati durante il deploy Pages | AP-014, Mission Control, `46a528234b6c787fec592953b98c763b848baca8`, `cac81e264f8750cc9eea5455e9bed98c7fc85bda` |
 | BKL-022 | P0 | Separare severity analytics da metadata completeness/catalog quality | Done | BKL-020 | `GREEN` non implica automaticamente `VALIDATED_ANALYTICS`; `METADATA_INCOMPLETE`/equivalente è propagato separatamente nel catalogo e nell'observation index | AP-014, scientific session catalog, `ffae9b81a43b82a142b37b587096ea97b1b05ec9` |
 | BKL-023 | P1 | Rigenerare e riallineare tutte le proiezioni AP-014 e viste portale | Done | BKL-020–BKL-022 Done | `sessions.csv`, configuration map, scientific-session-catalog, observation index, Mission Control, Enterprise Search e Session Detail semanticamente coerenti; 10/11 agosto resta `PARTIAL`; 15/16 agosto risolve C8/QHY695A; Session Detail non forza più il manifest a missing | `da16be762b0bce2646121dc4a36d5680895a8794`, `2a18e8caaead9673a0fb89e9f20f7b33f55d1997`, `50c41df55b61e527761efe85bd50a42b24fe1d7d`, Developer Foundation #702, Genera manuale Word #583 |
-| BKL-024 | P1 | Riallineare Observatory Status e Session Reports index alla sessione più recente | Ready | BKL-023 Done | Ultima sessione corretta, distinzione chiara tra stato operativo realtime e ultima sessione scientifica; indice report popolato e senza mojibake | AP-014, portal IA |
+| BKL-024 | P1 | Riallineare Observatory Status e Session Reports index alla sessione più recente | Done | BKL-023 Done | Session Reports ordinato sulla cronologia scientifica; Observatory Status mostra separatamente l'ultima sessione scientifica versionata da `latest-observation.json` senza contaminarla con la telemetria realtime; Power/Network restano `UNKNOWN` | `fcb2183a51b4dff6e6b8051b95fed6ec0d5dcef7`, `1a7aec0eca766d2f11cf606d8d1790d0582b0852`, Developer Foundation #705, Genera manuale Word #586 |
 | BKL-025 | P1 | Correggere broken links, asset mancanti e sitemap dell'artifact Pages | Done | BKL-023 | Nessun riferimento interno rotto nei percorsi rilevati dall'assessment; asset Roadmap/intelligence risolti; sitemap popolata/coerente. Acceptance verificata su `5068843608880466ba62e7ba18b8982209083645`: `deploy-pages.yml` run 381 PASS, published-site integrity PASS, deploy GitHub Pages PASS; `docs.yml` run 285 PASS; `gh-pages` commit `f1fcd04f93afe8909a80d5d916d73f42186bae8c` pubblica `5068843`. | MkDocs, Pages, PR #46, PR #47 |
-| BKL-026 | P0 | Rieseguire deep assessment ARB e chiudere OAT/AP-014 acceptance | Blocked | BKL-024 non ancora chiuso; OAT M27 designata ancora `Pending` | Re-crawl completo del portale, documentazione OAT aggiornata allo stato reale e decisione ARB finale | AP14-W07-EAGLE-M27-OAT-Result, AP-014-Operational-Acceptance |
+| BKL-026 | P0 | Rieseguire deep assessment ARB e chiudere OAT/AP-014 acceptance | Ready | BKL-019–BKL-025 completati; OAT M27 designata ancora `Pending` da riesaminare | Re-crawl completo del portale, verifica evidence residue, documentazione OAT aggiornata allo stato reale e decisione ARB finale | AP14-W07-EAGLE-M27-OAT-Result, AP-014-Operational-Acceptance |
 | BKL-014 | P2 | Preparare AP-015 Scientific Knowledge Platform | Planned | AP-014 e Knowledge Graph | Architecture Package CAP-40 | AMP-002 |
 | BKL-015 | P2 | Implementare repository Knowledge Graph machine-readable | Planned | Governance Foundation e schema relazioni | Relazioni AP/ADR/component/evidence interrogabili | TD-008, GP-003 |
 | BKL-016 | P2 | Contestualizzare release e guide storiche in root | Planned | Inventario e supersession map | Lineage chiaro e baseline corrente distinguibile | TD-007 |
@@ -65,9 +65,9 @@ La repository governance è stata riconciliata con le evidence già presenti sul
 - Il package designato 10/11 agosto è già stato copiato/versionato su `main` da `4266f4249cda7b2a8c47c21fd5b69c890d3ff6ed`; il workflow di promotion con ricalcolo SHA-256 è stato introdotto successivamente e quindi un run storico di quel contratto sulla pubblicazione del 13 agosto è `N/A`, non `Pending`.
 - BKL-021 e BKL-022 restano chiusi rispettivamente per refresh strutturale di `latest-observation` e separazione metadata completeness/analytics state.
 - BKL-023 è chiuso: la configuration map include ora anche la sessione 15/16 agosto C8/QHY695A; `sessions.csv` è coerente; catalogo e observation index preservano `PARTIAL/INCOMPLETE` per 10/11 agosto e `REGISTERED` per le sessioni successive; Enterprise Search usa l'observation index; Mission Control e Session Detail consumano il catalogo condiviso; il Data Engine non forza più Manifest a missing quando `manifestState` è versionato. Developer Foundation #702 e Genera manuale Word #583 sono PASS sul commit `50c41df55b61e527761efe85bd50a42b24fe1d7d`.
-- BKL-024 diventa `Ready`; è ora il prossimo lavoro dependency-ordered.
-- BKL-026 resta bloccato da BKL-024 e dall'OAT designata ancora `Pending`.
+- BKL-024 è chiuso: Session Reports espone `2026-08-15_2026-08-16` come sessione più recente e l'Observatory Status legge `latest-observation.json` in una sezione storica separata dal polling realtime. La projection attuale identifica `2026-08-15_2026-08-16`, target M 27, metadata `REGISTERED`, 11,50 h, 69 light e RMS 0,234″. Developer Foundation #705 e Genera manuale Word #586 sono PASS sul commit `1a7aec0eca766d2f11cf606d8d1790d0582b0852`.
 - Power e Network in Observatory Status restano correttamente `UNKNOWN` finché non vengono identificate sorgenti read-only reali e verificabili.
+- Con BKL-019–BKL-025 completati, BKL-026 diventa `Ready`: il prossimo lavoro governato è il deep ARB reassessment e la riconciliazione finale dell'OAT/AP-014, senza assumere in anticipo l'esito `Accepted`.
 
 ## 4. Sequenza di esecuzione raccomandata
 
@@ -86,9 +86,9 @@ Governance Foundation completion
   -> BKL-021 latest-observation stale-target fix [DONE]
   -> BKL-022 analytics severity vs metadata completeness separation [DONE]
   -> BKL-023 AP-014 projections and portal views reconciliation [DONE]
-  -> BKL-024 status/report index alignment [READY]
+  -> BKL-024 status/report index alignment [DONE]
   -> BKL-025 Pages link/sitemap remediation [DONE]
-  -> BKL-026 deep ARB reassessment + OAT/AP-014 acceptance [BLOCKED]
+  -> BKL-026 deep ARB reassessment + OAT/AP-014 acceptance [READY]
   -> AP-015 / Knowledge Graph
 ```
 
