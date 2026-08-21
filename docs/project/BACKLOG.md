@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 1.5 |
+| Versione | 2.0 |
 | Stato | Active |
-| Data baseline | 20/08/2026 |
+| Data baseline | 21/08/2026 |
 
 ## 1. Scopo
 
@@ -13,17 +13,7 @@ Raccogliere il lavoro pianificato del progetto senza sostituire `AMP-002`, i sin
 
 ## 2. Regole
 
-Ogni voce deve includere:
-
-- identificativo;
-- titolo;
-- priorità;
-- stato;
-- dipendenze;
-- risultato atteso;
-- riferimenti a roadmap, technical debt, decision log o Architecture Package.
-
-Stati ammessi: `Planned`, `Ready`, `In Progress`, `Blocked`, `Done`, `Cancelled`.
+Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, risultato atteso e riferimenti. Stati ammessi: `Planned`, `Ready`, `In Progress`, `Blocked`, `Done`, `Cancelled`.
 
 ## 3. Backlog prioritario
 
@@ -41,31 +31,32 @@ Stati ammessi: `Planned`, `Ready`, `In Progress`, `Blocked`, `Done`, `Cancelled`
 | BKL-010 | P1 | Ridurre script inline nel portale | Planned | Inventario pagine con script inline | Moduli JS proprietari e Instant Navigation sicura | TD-002 |
 | BKL-011 | P1 | Completare evidence residue ARB-012-C04 | In Progress | W03/W06/W07 e controlli PRV/ENV | Acceptance formalmente riesaminabile | AP-012 |
 | BKL-012 | P1 | Validare primo unattended AP-013 COPY_ONLY run | In Progress | Scheduler, launcher protetto, evidence | Evidenza operativa prima di ampliare scope | AP-013 |
-| BKL-013 | P1 | Completare AP-014 Observation Catalog and Search | In Progress | AP14-W01-W06 implementati; W07 OAT aperto | Catalogo/search governati con acceptance operativa reale | AP-014, AP14-W07 |
-| BKL-018 | P0 | Eseguire EAGLE runtime inspection e M27 end-to-end OAT | In Progress | Accesso EAGLE; evidence NINA/PHD2/CloudWatcher M27; runtime contract | OAT M27 completata tecnicamente e remediation assessment chiuse prima dell'acceptance formale | AP-014, AP14-W07-EAGLE-OAT-001, AP14-INT-EAGLE-PUBLISH-001 |
-| BKL-019 | P0 | Correggere logging profile N.I.N.A. C8 e validare telemetria informativa | In Progress | Accesso profilo N.I.N.A. C8 | Gate operativo versionato; chiusura solo dopo evidence EAGLE che attesti logging `Information` o più verboso e log controllato con target, sequence, exposure lifecycle e metadata utili all'analytics | AP-014, AP14-W07-EAGLE-OAT-001, AP14-OPS-EAGLE-AUTO-001 v1.2 |
-| BKL-020 | P0 | Correggere data lineage scientifica M27 e future session | In Progress | BKL-019; registry metadata governato | Metadata sessione risolti da evidence/registry governato; nessuna inferenza non tracciabile; M27 identificata come M 27 con campi non attestati esplicitamente incompleti | AP-014, `session-scientific-metadata.csv` |
-| BKL-021 | P0 | Eliminare eredità target precedente da `latest-observation` | Done | BKL-020 | `latest-observation.json` usa solo metadata della sessione corrente; refresh strutturale idempotente ricostruisce la projection dai metadata governati durante il deploy Pages | AP-014, Mission Control, `46a528234b6c787fec592953b98c763b848baca8`, `cac81e264f8750cc9eea5455e9bed98c7fc85bda` |
-| BKL-022 | P0 | Separare severity analytics da metadata completeness/catalog quality | Done | BKL-020 | `GREEN` non implica automaticamente `VALIDATED_ANALYTICS`; `METADATA_INCOMPLETE`/equivalente è propagato separatamente nel catalogo e nell'observation index | AP-014, scientific session catalog, `ffae9b81a43b82a142b37b587096ea97b1b05ec9` |
-| BKL-023 | P1 | Rigenerare e riallineare tutte le proiezioni AP-014 e viste portale | Planned | BKL-020–BKL-022 | `sessions.csv`, target projection, scientific-session-catalog, observation index, Mission Control, Enterprise Search e Session Detail semanticamente coerenti | AP-014 |
-| BKL-024 | P1 | Riallineare Observatory Status e Session Reports index alla sessione più recente | Planned | BKL-023 | Ultima sessione corretta, distinzione chiara tra stato operativo realtime e ultima sessione scientifica; indice report popolato e senza mojibake | AP-014, portal IA |
-| BKL-025 | P1 | Correggere broken links, asset mancanti e sitemap dell'artifact Pages | Done | BKL-023 | Nessun riferimento interno rotto nei percorsi rilevati dall'assessment; asset Roadmap/intelligence risolti; sitemap popolata/coerente. Acceptance verificata su `5068843608880466ba62e7ba18b8982209083645`: `deploy-pages.yml` run 381 PASS, published-site integrity PASS, deploy GitHub Pages PASS; `docs.yml` run 285 PASS; `gh-pages` commit `f1fcd04f93afe8909a80d5d916d73f42186bae8c` pubblica `5068843`. | MkDocs, Pages, PR #46, PR #47 |
-| BKL-026 | P0 | Rieseguire deep assessment ARB e chiudere OAT/AP-014 acceptance | Blocked | BKL-019, BKL-020, BKL-023 e BKL-024 non ancora chiusi; OAT M27 designata ancora `Pending` | Re-crawl completo del portale, data lineage coerente, documentazione OAT aggiornata allo stato reale e decisione ARB finale | AP14-W07-EAGLE-M27-OAT-Result, AP-014-Operational-Acceptance |
+| BKL-013 | P1 | Completare AP-014 Observation Catalog and Search | Done | AP14-W01-W07 | Catalogo/search governati con acceptance operativa reale | AP-014, AP14-W07, BKL-026 |
+| BKL-018 | P0 | Eseguire EAGLE runtime inspection e M27 end-to-end OAT | Done | Accesso EAGLE; evidence NINA/PHD2/CloudWatcher M27; runtime contract | OAT M27 completata, riconciliata e formalmente Accepted | AP-014, AP14-W07-EAGLE-M27-OAT-Result |
+| BKL-019 | P0 | Correggere logging profile N.I.N.A. C8 e validare telemetria informativa | Done | Evidence N.I.N.A. C8 versionata | Logging `INFO` e telemetria informativa attestati dalla sessione M 27 del 14/15 agosto | `data/sessions/2026/08/2026-08-14_2026-08-15/raw/nina/20260814-201744-3.2.0.9001.3996-202608.log` |
+| BKL-020 | P0 | Correggere data lineage scientifica M27 e future session | Done | BKL-019; registry metadata governato | Lineage governata; 10/11 resta `PARTIAL`, sessioni successive `REGISTERED` solo con evidence | `session-scientific-metadata.csv`, `session-configuration-map.csv` |
+| BKL-021 | P0 | Eliminare eredità target precedente da `latest-observation` | Done | BKL-020 | Projection ricostruita dai metadata governati | AP-014, Mission Control |
+| BKL-022 | P0 | Separare severity analytics da metadata completeness/catalog quality | Done | BKL-020 | Analytics severity e metadata completeness separati | AP-014, scientific session catalog |
+| BKL-023 | P1 | Rigenerare e riallineare tutte le proiezioni AP-014 e viste portale | Done | BKL-020–BKL-022 Done | Proiezioni e viste semanticamente coerenti | Developer Foundation #702, Genera manuale Word #583 |
+| BKL-024 | P1 | Riallineare Observatory Status e Session Reports index alla sessione più recente | Done | BKL-023 Done | Realtime separato dallo storico; Power/Network `UNKNOWN` senza sorgenti verificate | Developer Foundation #705, Genera manuale Word #586 |
+| BKL-025 | P1 | Correggere broken links, asset mancanti e sitemap dell'artifact Pages | Done | BKL-023 | Pages integrity verificata | deploy-pages run 381, docs.yml run 285 |
+| BKL-026 | P0 | Rieseguire deep assessment ARB e chiudere OAT/AP-014 acceptance | Done | BKL-019–BKL-025 Done | ARB re-review completata; promotion fail-safe e real-session semantic idempotency PASS; historical workflow criteria N/A; OAT/AP-014 Accepted; final governance CI PASS | AP14-W07-EAGLE-M27-OAT-Result v2.1, AP-014-Operational-Acceptance v1.4, Developer Foundation #725, Genera manuale Word #606 |
 | BKL-014 | P2 | Preparare AP-015 Scientific Knowledge Platform | Planned | AP-014 e Knowledge Graph | Architecture Package CAP-40 | AMP-002 |
 | BKL-015 | P2 | Implementare repository Knowledge Graph machine-readable | Planned | Governance Foundation e schema relazioni | Relazioni AP/ADR/component/evidence interrogabili | TD-008, GP-003 |
 | BKL-016 | P2 | Contestualizzare release e guide storiche in root | Planned | Inventario e supersession map | Lineage chiaro e baseline corrente distinguibile | TD-007 |
 | BKL-017 | P2 | Introdurre futura modalità tema `system` | Planned | RC1-HF01 stabilizzata | Preferenza OS gestita dal Theme Manager | RC1-HF01 |
 
-### Reconciliation note — 20/08/2026
+### Reconciliation note — 21/08/2026
 
-La repository governance è stata riconciliata con la baseline `main` `cac81e264f8750cc9eea5455e9bed98c7fc85bda` senza promuovere evidence indirette a acceptance AP-014.
+La repository governance è stata riconciliata con le evidence reali senza richiedere test fisici ridondanti e senza promuovere evidence di sessioni successive a sostituto dell'OAT designata 10/11 agosto.
 
-- BKL-021 è chiuso perché il refresh strutturale di `latest-observation` è idempotente e viene eseguito durante il deploy Pages.
-- BKL-022 è chiuso perché metadata completeness, analytics state e catalog quality sono separati nell'observation index.
-- I commit successivi relativi alla sessione M 27 del 15/16 agosto e alla realtime Observatory Status non sostituiscono l'OAT designata M 27 del 10/11 agosto.
-- BKL-026 resta bloccato finché i criteri mancanti dell'OAT designata e le remediation dipendenti non sono chiusi con evidence verificabile.
-- Power e Network in Observatory Status restano correttamente `UNKNOWN` finché non vengono identificate sorgenti read-only reali e verificabili; la relativa evoluzione non precede la chiusura governata di AP-014.
-- BKL-019 è ora `In Progress`: il gate operativo è definito, ma nessun merge documentale costituisce prova della configurazione reale del profilo N.I.N.A. C8.
+- BKL-019–BKL-025 sono `Done` con le evidence già versionate e i quality gate registrati.
+- Il package designato 10/11 agosto è già versionato su `main` dal commit `4266f4249cda7b2a8c47c21fd5b69c890d3ff6ed`; promotion e analytics workflow correnti sono successivi e i relativi run storici sono quindi `N/A historical baseline`.
+- Il current promotion contract è validato da Developer Foundation #714, inclusi `PARTIAL`, ancestry, size/hash e scope fail-safe.
+- La pipeline reale è semanticamente idempotente sulla sessione `2026-08-15_2026-08-16`, validata da Developer Foundation #723.
+- La riconciliazione finale è stata validata sull'exact head `a52c678ba6f3b498bc711ec7b8d5fad7359c7709`: Developer Foundation #725 e Genera manuale Word #606 entrambi `SUCCESS`.
+- AP-014 Operational Acceptance v1.4 e AP14-W07 EAGLE M27 OAT Result v2.1 sono `Accepted`; BKL-013, BKL-018 e BKL-026 sono quindi `Done`.
+- Power e Network in Observatory Status restano correttamente `UNKNOWN` finché non vengono identificate sorgenti read-only reali e verificabili; questo non è un blocker AP-014.
 
 ## 4. Sequenza di esecuzione raccomandata
 
@@ -78,15 +69,15 @@ Governance Foundation completion
   -> RC1 consolidation
   -> AP-012/AP-013 evidence closure
   -> AP-014 implementation
-  -> EAGLE runtime inspection + M27 OAT
-  -> BKL-019 N.I.N.A. C8 logging correction + controlled test [IN PROGRESS]
-  -> BKL-020 scientific metadata lineage correction
+  -> EAGLE runtime inspection + M27 OAT [DONE]
+  -> BKL-019 N.I.N.A. C8 logging evidence reconciliation [DONE]
+  -> BKL-020 scientific metadata lineage reconciliation [DONE]
   -> BKL-021 latest-observation stale-target fix [DONE]
   -> BKL-022 analytics severity vs metadata completeness separation [DONE]
-  -> BKL-023 regenerate AP-014 projections and portal views
-  -> BKL-024 status/report index alignment
+  -> BKL-023 AP-014 projections and portal views reconciliation [DONE]
+  -> BKL-024 status/report index alignment [DONE]
   -> BKL-025 Pages link/sitemap remediation [DONE]
-  -> BKL-026 deep ARB reassessment + OAT/AP-014 acceptance [BLOCKED]
+  -> BKL-026 deep ARB reassessment + OAT/AP-014 acceptance [DONE]
   -> AP-015 / Knowledge Graph
 ```
 
@@ -99,24 +90,11 @@ Governance Foundation completion
 
 ## 6. Definition of Ready
 
-Una voce è `Ready` quando:
-
-- scope e outcome sono chiari;
-- dipendenze soddisfatte o esplicite;
-- fonti autorevoli identificate;
-- acceptance criteria definibili;
-- rischi principali noti.
+Una voce è `Ready` quando scope e outcome sono chiari, dipendenze soddisfatte o esplicite, fonti autorevoli identificate, acceptance criteria definibili e rischi principali noti.
 
 ## 7. Definition of Done
 
-Una voce è `Done` solo quando:
-
-- implementazione o documentazione completata;
-- test e validazioni applicabili registrati;
-- commit/push effettivi;
-- deployment verificato quando rilevante;
-- registri e context aggiornati;
-- nessun debito equivalente introdotto senza registrazione.
+Una voce è `Done` solo quando implementazione/documentazione, test applicabili, commit/push, deployment rilevante e registri sono coerenti e non viene introdotto debito equivalente senza registrazione.
 
 ## 8. Aggiornamento
 

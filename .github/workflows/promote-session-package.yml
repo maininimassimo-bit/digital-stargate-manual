@@ -39,85 +39,21 @@ jobs:
           year="${id:0:4}"
           month="${id:5:2}"
           root="data/sessions/$year/$month/$id"
-          manifest="$root/manifest.json"
-          test -f "$manifest" || { echo "Manifest missing: $manifest"; exit 1; }
+          test -f "$root/manifest.json" || { echo "Manifest missing: $root/manifest.json"; exit 1; }
           echo "id=$id" >> "$GITHUB_OUTPUT"
-          echo "year=$year" >> "$GITHUB_OUTPUT"
-          echo "month=$month" >> "$GITHUB_OUTPUT"
           echo "root=$root" >> "$GITHUB_OUTPUT"
 
-      - name: Validate package completeness and manifest hashes
+      - name: Fetch current main
+        shell: bash
+        run: git fetch origin main
+
+      - name: Validate promotion contract
         shell: pwsh
         run: |
-          $ErrorActionPreference = 'Stop'
-          $id = '${{ steps.session.outputs.id }}'
-          $root = '${{ steps.session.outputs.root }}'
-          $manifestPath = Join-Path $root 'manifest.json'
-          $manifest = Get-Content $manifestPath -Raw | ConvertFrom-Json
-
-          if ([string]$manifest.session_id -ne $id) {
-            throw "Manifest session ID mismatch: $($manifest.session_id)"
-          }
-          if ([string]$manifest.report_status -ne 'COMPLETE') {
-            throw "Session package is not COMPLETE: $id"
-          }
-
-          foreach ($required in @('raw/nina','raw/phd2','raw/weather')) {
-            $requiredPath = Join-Path $root $required
-            if (-not (Test-Path $requiredPath -PathType Container)) {
-              throw "Missing required evidence directory: $required"
-            }
-            if (-not (Get-ChildItem $requiredPath -File -Recurse | Select-Object -First 1)) {
-              throw "Missing evidence files: $required"
-            }
-          }
-
-          foreach ($entry in @($manifest.files)) {
-            $relative = ([string]$entry.path).Replace('\','/')
-            $path = Join-Path $root $relative
-            if (-not (Test-Path $path -PathType Leaf)) {
-              throw "Manifest file missing: $relative"
-            }
-            $actualSize = (Get-Item $path).Length
-            if ($null -ne $entry.size_bytes -and [int64]$entry.size_bytes -ne $actualSize) {
-              throw "Manifest size mismatch: $relative"
-            }
-            if (-not [string]::IsNullOrWhiteSpace([string]$entry.sha256)) {
-              $actualHash = (Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant()
-              if ($actualHash -ne ([string]$entry.sha256).ToLowerInvariant()) {
-                throw "Manifest SHA-256 mismatch: $relative"
-              }
-            }
-          }
-
-      - name: Enforce session-only change scope and fast-forward safety
-        shell: bash
-        run: |
-          set -euo pipefail
-          git fetch origin main
-          git merge-base --is-ancestor origin/main HEAD || {
-            echo 'Session branch is not a fast-forward descendant of current main.'
-            exit 1
-          }
-
-          id='${{ steps.session.outputs.id }}'
-          year='${{ steps.session.outputs.year }}'
-          month='${{ steps.session.outputs.month }}'
-          allowed_session="data/sessions/$year/$month/$id/"
-          allowed_report="docs/session-reports/$year/$month/$id/"
-
-          unexpected=0
-          while IFS= read -r path; do
-            [[ -z "$path" ]] && continue
-            case "$path" in
-              "$allowed_session"*|"$allowed_report"*) ;;
-              *)
-                echo "Unexpected path in session branch: $path"
-                unexpected=1
-                ;;
-            esac
-          done < <(git diff --name-only origin/main...HEAD)
-          test "$unexpected" -eq 0
+          ./.github/scripts/validate-session-promotion.ps1 `
+            -SessionId '${{ steps.session.outputs.id }}' `
+            -Root '${{ steps.session.outputs.root }}' `
+            -BaseRef 'origin/main'
 
       - name: Promote package by fast-forwarding main
         shell: bash

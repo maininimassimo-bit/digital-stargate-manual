@@ -2,13 +2,13 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-08-11",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "c65070e8eaa24a2b78af2bdd880074ac035d30f87691f8799bd27ccc28567085",
+  "sourceDigest": "d4a5c5d2e6f29986b27767de501851e938aa5fadd3fbe867919eca73052cc2d5",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "AP-014",
   "nextMilestone": "Complete AP14-W07 Validation & Operational Acceptance",
   "target": "AP-014 completion and RC3 readiness",
-  "summary": {"total":22,"completed":17,"active":4,"planned":1,"percentCompleted":77},
+  "summary": {"total":22,"completed":18,"active":3,"planned":1,"percentCompleted":82},
   "evidenceSummary": {"sources":8,"completionReports":6,"evidenceManifests":2},
   "waves": [
     {"id":"rc2-enterprise-portal","title":"RC2 Enterprise Portal","status":"active","items":[
@@ -34,7 +34,7 @@
       {"id":"AP-011","title":"Enterprise Analytics Platform Architecture","status":"completed","review":"ARB-011","note":"Approved with conditions, 97/100; analytics runtime is not certified."},
       {"id":"AP-012","title":"Enterprise Operations Center Architecture","status":"completed","review":"ARB-012","note":"Approved with conditions, 96/100; remaining PRV/ENV controls and formal acceptance remain open."},
       {"id":"AP-013","title":"Scientific Image Repository Architecture","evidencePath":".github/roadmap/evidence/AP-013.evidence.json","note":"Completed with conditions. AP-013B COPY_ONLY OneDrive ingestion accepted for limited production; preservation/provenance/migration scale claims remain bounded by ARB-013 conditions.","review":"ARB-013","status":"completed","evidenceStatus":"completed","evidence":{"manifest":".github/roadmap/evidence/AP-013.evidence.json","required":4,"present":4,"accepted":4,"missing":[],"rejected":[]}},
-      {"id":"AP-014","title":"Scientific Observation Catalog and Search","evidencePath":".github/roadmap/evidence/AP-014.evidence.json","note":"AP14-W01–W06 delivered, including PixInsight synchronization and operational hardening; AP14-W07 validation and operational acceptance remain open.","status":"active","evidenceStatus":"active","evidence":{"manifest":".github/roadmap/evidence/AP-014.evidence.json","required":10,"present":10,"accepted":8,"missing":[],"rejected":["eagle-runtime-inspection","operational-acceptance"]}},
+      {"id":"AP-014","title":"Scientific Observation Catalog and Search","evidencePath":".github/roadmap/evidence/AP-014.evidence.json","note":"AP14-W01–W06 delivered, including PixInsight synchronization and operational hardening; AP14-W07 validation and operational acceptance remain open.","status":"completed","evidenceStatus":"completed","evidence":{"manifest":".github/roadmap/evidence/AP-014.evidence.json","required":10,"present":10,"accepted":10,"missing":[],"rejected":[]}},
       {"id":"AP-015","title":"Scientific Knowledge Platform Architecture","status":"planned","note":"CAP-40 Scientific Knowledge Layer."}
     ]}
   ],
@@ -47,6 +47,6 @@
     {"id":"M-RC2-WP06","itemRef":"WP-06","title":"WP-06 Enterprise Plugin SDK","date":"2026-08-05","description":"Plugin SDK, provider contracts, tests, CI gate and developer documentation completed.","image":null,"status":"completed"},
     {"id":"M-RC2-BASELINE","itemRef":"RC2-BASELINE","title":"RC2 Baseline and Integrated Acceptance","date":"2026-08-05","description":"Baseline freeze, integrated compatibility review and final acceptance are in progress.","image":null,"status":"active"},
     {"id":"M-AP013","itemRef":"AP-013","title":"AP-013 Scientific Image Repository Architecture","date":"2026-08-11","description":"ARB-013 approved with conditions; OAT passed; formal operational acceptance accepted; AP-013B limited-production ingestion authorized.","image":null,"status":"completed"},
-    {"id":"M-AP014-W07","itemRef":"AP-014","title":"AP14-W07 Validation & Operational Acceptance","date":"2026-08-06","description":"PixInsight adapter and operational hardening delivered; validation matrix, ARB review and operational acceptance remain open.","image":null,"status":"active"}
+    {"id":"M-AP014-W07","itemRef":"AP-014","title":"AP14-W07 Validation & Operational Acceptance","date":"2026-08-06","description":"PixInsight adapter and operational hardening delivered; validation matrix, ARB review and operational acceptance remain open.","image":null,"status":"completed"}
   ]
 }

@@ -3,6 +3,7 @@
 
   const RUNTIME_ENDPOINT = 'https://dsg-observatory-status-relay-cfjug35c6q-ew.a.run.app/v1/observatory-status';
   const FALLBACK_DATA_PATH = 'data/realtime/observatory-status.json';
+  const LATEST_SCIENTIFIC_PATH = 'data/realtime/latest-observation.json';
   const REFRESH_MS = 15000;
 
   const parseTime = value => {
@@ -33,6 +34,10 @@
 
   const set = (key, value) => {
     document.querySelectorAll(`[data-observatory-status="${key}"]`).forEach(element => { element.textContent = value; });
+  };
+
+  const setLatestScientific = (key, value) => {
+    document.querySelectorAll(`[data-latest-scientific="${key}"]`).forEach(element => { element.textContent = value; });
   };
 
   const render = (payload, transport = 'HOSTED') => {
@@ -80,12 +85,32 @@
     set('weather-sky-temperature', number(weather.sky_temperature_c, 1, ' °C'));
   };
 
+  const renderLatestScientific = payload => {
+    const metrics = payload?.metrics || {};
+    setLatestScientific('session-id', text(payload?.session_id));
+    setLatestScientific('target', text(payload?.target?.name));
+    setLatestScientific('metadata-state', text(payload?.metadata_state));
+    setLatestScientific('integration', number(metrics.integration_hours, 2, ' h'));
+    setLatestScientific('frames', Number.isFinite(Number(metrics.completed_frames)) ? Number(metrics.completed_frames).toLocaleString('it-IT') : '—');
+    setLatestScientific('rms', number(metrics.rms_total_arcsec, 3, '″'));
+  };
+
   const renderUnavailable = () => render({ quality: 'UNKNOWN', systems: {}, safety: {} }, 'UNAVAILABLE');
 
   const fetchJson = async url => {
     const response = await fetch(url, { cache: 'no-store' });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return response.json();
+  };
+
+  const refreshLatestScientific = async () => {
+    try {
+      const url = new URL(LATEST_SCIENTIFIC_PATH, document.baseURI);
+      renderLatestScientific(await fetchJson(url));
+    } catch (error) {
+      console.warn('Digital StarGate: latest scientific observation unavailable', error);
+      renderLatestScientific({});
+    }
   };
 
   let timer;
@@ -109,6 +134,7 @@
   const initialize = () => {
     if (!document.querySelector('[data-observatory-status]')) return;
     clearInterval(timer);
+    refreshLatestScientific();
     refresh();
     timer = window.setInterval(refresh, REFRESH_MS);
   };

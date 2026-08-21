@@ -1,8 +1,8 @@
 # AP-014 EAGLE Session Package Producer Alignment
 
 - **Identifier:** AP14-W07-EAGLE-001
-- **Status:** Verified architecture alignment; unattended NO_SESSION runtime PASS; full M27 OAT pending
-- **Date:** 2026-08-18
+- **Status:** Verified architecture alignment; unattended NO_SESSION runtime PASS; M27 repository copy PASS; full OAT pending
+- **Date:** 2026-08-20
 
 ## Verified source-of-truth alignment
 
@@ -132,23 +132,25 @@ Therefore the automatic `NO_SESSION` producer path is **validated in production*
 
 ## AP-014 consequence
 
-The remaining automation work is not to collect NINA/PHD2/CloudWatcher on the PC Principale. It is to complete acceptance of the real-session EAGLE reporting path so that a `COMPLETE` package is copied, versioned, promoted and consumed automatically by AP-014.
+The remaining automation work is not to collect NINA/PHD2/CloudWatcher on the PC Principale. It is to complete acceptance of the real-session EAGLE reporting path so that a `COMPLETE` package is governed through promotion and consumed automatically by AP-014.
 
 Once `data/sessions/**/manifest.json` reaches `main`, the AP-014 analytics/catalog pipeline implemented in the repository is the downstream consumer.
 
 ## M 27 OAT
 
-For M 27 (`2026-08-10_2026-08-11`), source evidence and a controlled staging preview have already demonstrated `Status = COMPLETE`.
+For M 27 (`2026-08-10_2026-08-11`), source evidence and a controlled staging preview demonstrated `Status = COMPLETE`. Repository reconciliation on 20 August also confirmed that the designated package is already versioned on `main` by commit `4266f4249cda7b2a8c47c21fd5b69c890d3ff6ed`, including `manifest.json`, N.I.N.A., PHD2 and CloudWatcher raw evidence. The manifest records size and SHA-256 for each source evidence file.
+
+Therefore repository copy/package presence is **PASS / DONE** and must not be repeated merely to satisfy stale documentation.
+
+The current `promote-session-package.yml` contract independently recalculates SHA-256 for every manifest entry and rejects missing files, size mismatches and SHA-256 mismatches before promotion. Historical package presence does not by itself prove execution of that current governed promotion workflow.
 
 Remaining operational verification is:
 
-1. execute the controlled repository copy for the M27 package;
-2. verify manifest, file content and hashes against staging;
-3. publish through `session/<session-id>`;
-4. observe governed promotion to `main`;
-5. observe automatic analytics/catalog execution;
-6. verify M27 in `sessions.csv`, `target-exposures.csv`, `targets.csv`, `scientific-session-catalog.json` and `scientific-observation-index.json`;
-7. verify CI and Pages deployment;
-8. verify real-session re-run/idempotency behavior.
+1. identify or execute a traceable governed `session/<session-id>` promotion for the designated package;
+2. record the promotion run ID proving independent manifest/file-size/SHA-256 validation and change-scope validation;
+3. reconcile automatic analytics/catalog execution already materialized in repository projections where evidence exists;
+4. verify M27 in `sessions.csv`, `target-exposures.csv`, `targets.csv`, `scientific-session-catalog.json` and `scientific-observation-index.json`;
+5. reconcile CI and Pages deployment evidence;
+6. verify production `PARTIAL` protection and real-session re-run/idempotency behavior.
 
 No XISF file is moved, deleted or used to invent missing evidence during this OAT.

@@ -63,21 +63,26 @@ Ogni milestone che modifica baseline, standard, release state, debito, decisioni
 |---|---|
 | Governance Foundation documentale | Completata |
 | Bootstrap root | Creato |
-| Integrazione navigazione MkDocs | Presente nella baseline corrente; verifica finale nel change set di governance |
-| Build `mkdocs build --strict` | Da rieseguire sul change set di governance |
-| Verifica GitHub Pages | Deployment operativo; da riverificare dopo il merge del change set di governance |
-| AP-014 Operational Acceptance | `Pending` — OAT M 27 designata 10/11 agosto non ancora chiusa |
-| Remediation AP-014 riconciliate | BKL-021 e BKL-022 `Done`; BKL-026 `Blocked` |
+| Integrazione navigazione MkDocs | Presente nella baseline corrente |
+| Build/quality gate documentale | PASS — Developer Foundation #725 |
+| Generazione manuale Word | PASS — run #606 |
+| Verifica GitHub Pages | Baseline BKL-025 PASS; deployment operativo |
+| AP-014 Operational Acceptance | **Accepted** — v1.4 |
+| AP14-W07 EAGLE M27 OAT | **Accepted** — v2.1 |
+| Remediation AP-014 | BKL-019–BKL-026 `Done` |
 | Observatory Status realtime | Vertical slice read-only integrata; Power/Network restano `UNKNOWN` finché prive di sorgenti verificate |
-| Prossima milestone governata | Completare evidence/remediation residue AP-014, quindi BKL-026 deep ARB reassessment |
+| Prossima milestone governata | Riprendere la sequenza backlog/roadmap successiva ad AP-014; AP-015 resta pianificato dopo le dipendenze previste |
 
-### Governance reconciliation — 20/08/2026
+### Governance reconciliation — 21/08/2026
 
-La baseline è stata riconciliata con `main` `cac81e264f8750cc9eea5455e9bed98c7fc85bda`. I commit successivi all'ultimo aggiornamento OAT dimostrano remediation e capacità operative reali, ma non vengono usati per dichiarare `Accepted` l'OAT M 27 del 10/11 agosto senza le evidence richieste dal relativo record.
+La chiusura AP-014 è evidence-based:
 
-La separazione è intenzionale:
+- la sessione M27 10/11 agosto conserva `PARTIAL` dove l'evidence originaria non attesta i metadata;
+- i workflow promotion/analytics introdotti dopo la pubblicazione storica sono `N/A historical baseline`, non evidence retroattive;
+- il promotion fail-safe contract è PASS in Developer Foundation #714;
+- la real-session semantic idempotency è PASS in Developer Foundation #723;
+- la riconciliazione finale dell'acceptance è validata sull'exact head `a52c678ba6f3b498bc711ec7b8d5fad7359c7709` da Developer Foundation #725 e Genera manuale Word #606;
+- AP-014 Operational Acceptance v1.4 e AP14-W07 EAGLE M27 OAT Result v2.1 sono `Accepted`;
+- BKL-013, BKL-018 e BKL-026 sono `Done`.
 
-- lo stato operativo Observatory Status può avanzare indipendentemente dall'acceptance scientifica AP-014;
-- una sessione M 27 successiva non sostituisce la sessione OAT designata;
-- `UNKNOWN` resta il valore fail-safe per telemetry non verificata;
-- Power/Network non diventano il prossimo package governato prima della chiusura AP-014.
+La separazione fra telemetria realtime e proiezioni scientifiche storiche resta intenzionale. `UNKNOWN` rimane il valore fail-safe per sorgenti realtime non verificate.

@@ -88,7 +88,6 @@ jobs:
           node .github/scripts/generate-scientific-session-catalog.mjs --write
           node .github/scripts/generate-scientific-catalog.mjs --write
           python dsg-analytics/reporter/build_session_reports_index.py --repo-root .
-          python dsg-analytics/status/build_observatory_status.py --repo-root .
           node .github/scripts/generate-scientific-session-catalog.mjs --check
           node .github/scripts/generate-scientific-catalog.mjs --check
       - name: Commit versioned analytics and catalog projections
@@ -96,7 +95,7 @@ jobs:
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'; git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          governed_paths=(data/sessions data/analytics docs/session-reports docs/status/index.md docs/analytics/history-validation.md docs/data/realtime/latest-observation.json docs/data/scientific-session-catalog.json docs/data/scientific-observation-index.json)
+          governed_paths=(data/sessions data/analytics docs/session-reports docs/analytics/history-validation.md docs/data/realtime/latest-observation.json docs/data/scientific-session-catalog.json docs/data/scientific-observation-index.json)
           git add -- "${governed_paths[@]}"
           if git diff --cached --quiet; then echo 'No analytics or catalog changes to publish.'; exit 0; fi
           git commit -m "chore(analytics): refresh ${{ steps.resolve.outputs.id }} projections"
