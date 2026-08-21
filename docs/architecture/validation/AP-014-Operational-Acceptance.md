@@ -5,7 +5,7 @@
 | Documento | AP-014 Operational Acceptance |
 | Package | AP-014 |
 | Workstream | AP14-W07 Validation & Operational Acceptance |
-| Versione | 1.1 |
+| Versione | 1.2 |
 | Data | 2026-08-21 |
 | Stato | Pending |
 | Owner | Digital StarGate Architecture Office |
@@ -37,7 +37,7 @@ EAGLE NINA/PHD2/CloudWatcher
   -> GitHub Pages / AP-014 portal
 ```
 
-La sessione designata M 27 del 10/11 agosto 2026 fu però pubblicata il 13 agosto 2026 prima dell'introduzione del contratto corrente `session/<session-id>` + `promote-session-package.yml`. Per la baseline storica, l'assenza di quel workflow è quindi **N/A**, non un run mancante. Il contratto corrente resta soggetto a validazione separata su sessioni compatibili.
+La sessione designata M 27 del 10/11 agosto 2026 fu pubblicata il 13 agosto 2026 prima dell'introduzione del contratto corrente `session/<session-id>` + `promote-session-package.yml`. Per la baseline storica, l'assenza di quel workflow è quindi **N/A**, non un run mancante. Il contratto corrente resta soggetto a validazione separata su sessioni compatibili.
 
 AP-013B XISF transport verso `F:\Astrofotografia` resta un percorso separato e non costituisce fonte diretta delle metriche AP-014.
 
@@ -71,14 +71,14 @@ La finestra è stata determinata dalle evidence N.I.N.A./PHD2 e il controlled pa
 | Nessun XISF cancellato, spostato o modificato | PASS | OAT runtime/safety evidence |
 | `Publish-DSGSession` pubblica `session/<session-id>` per la sessione designata | N/A baseline storica | la M27 designata fu pubblicata prima dell'introduzione del contratto corrente; non va simulato retroattivamente |
 | GitHub promotion gate promuove la sessione designata esclusivamente fast-forward | N/A baseline storica | `promote-session-package.yml` fu introdotto dopo il commit storico `4266f4249cda7b2a8c47c21fd5b69c890d3ff6ed` |
-| Contratto corrente di promotion validato end-to-end su sessione compatibile | PENDING | workflow implementa COMPLETE/hash/ancestry/scope checks, ma non è stata trovata evidence tracciabile di un acceptance run che eserciti l'intero set |
+| Contratto corrente di promotion: validation/fail-safe | PASS contract-level | Developer Foundation #714 su `ba3247aa891df3f11d43a0a808611956c0bb4ff5`: nominal COMPLETE, PARTIAL rejection, size mismatch, SHA-256 mismatch, extraneous scope e non-descendant ancestry tutti PASS usando lo stesso validator del workflow |
 | `analyze-session-automatic.yml` completa con successo per la sessione designata | PENDING | proiezioni risultano materializzate, ma non è stato identificato un run ID tracciabile attribuibile alla pubblicazione storica |
 | `data/analytics/history/sessions.csv` contiene M 27 | PASS | sessioni M27 presenti; 10/11 preservata con incompletezza storica |
 | `target-exposures.csv` usa evidence versionate senza metriche inventate | PASS | BKL-020/BKL-023 reconciliation e source/provenance governati |
 | `targets.csv` riflette M 27 | PASS | BKL-023 projection reconciliation |
 | `scientific-session-catalog.json` contiene M 27 | PASS | BKL-023 |
 | `scientific-observation-index.json` contiene M 27 | PASS | BKL-023; metadata completeness separata da analytics quality |
-| Developer Foundation e quality gate applicabili PASS | PASS | PR #64 exact head precedente: Developer Foundation #706 e Word #587; nuova CI da rieseguire dopo questa modifica |
+| Developer Foundation e quality gate applicabili PASS | PASS | Developer Foundation #714 e Genera manuale Word #595 entrambi SUCCESS sull'exact head `ba3247aa891df3f11d43a0a808611956c0bb4ff5` |
 | GitHub Pages deployment PASS | PASS per baseline portal verificata | BKL-025: deploy-pages run 381 PASS e published-site integrity PASS |
 | M 27 visibile nel portale AP-014 senza modifica manuale del catalogo | PASS | catalog/index/Search/Session Detail/Mission Control riconciliati in BKL-023 |
 
@@ -87,10 +87,10 @@ La finestra è stata determinata dalle evidence N.I.N.A./PHD2 e il controlled pa
 | Controllo | Stato | Evidence / rationale |
 |---|---|---|
 | `NO_SESSION` non promosso | PASS production | unattended run 18/08/2026: `NO_SESSION`, exit/task result 0, nessuno staging |
-| `PARTIAL` non promosso nel percorso automatico corrente | PENDING | semantica `PARTIAL` preservata nei metadata/projection, ma non è stata trovata evidence di rejection esercitata dal promotion path |
-| Branch non discendente da `main` rifiutato | CONTROL IMPLEMENTED / PENDING validation | workflow usa `git merge-base --is-ancestor origin/main HEAD` e fallisce su false; manca acceptance run negativo tracciabile |
-| Manifest size/hash divergenti bloccano la promotion | CONTROL IMPLEMENTED / PENDING validation | workflow ricalcola size e SHA-256 e lancia errore su mismatch; manca acceptance run negativo tracciabile |
-| Modifiche estranee al package bloccano la promotion | CONTROL IMPLEMENTED / PENDING validation | workflow valida scope `data/sessions/<id>/` e `docs/session-reports/<id>/`; manca acceptance run negativo tracciabile |
+| `PARTIAL` non promosso nel percorso automatico corrente | PASS contract-level | Developer Foundation #714, `test-session-promotion.ps1` usa `validate-session-promotion.ps1` condiviso con il workflow |
+| Branch non discendente da `main` rifiutato | PASS contract-level | Developer Foundation #714: non-descendant ancestry rejection PASS |
+| Manifest size/hash divergenti bloccano la promotion | PASS contract-level | Developer Foundation #714: size mismatch e SHA-256 mismatch rejection PASS |
+| Modifiche estranee al package bloccano la promotion | PASS contract-level | Developer Foundation #714: extraneous scope rejection PASS |
 | Nessuna metrica scientifica/quality sintetizzata da filename XISF o transfer plan | PASS | BKL-020/BKL-022 e registry provenance |
 | Re-run real-session idempotente | PENDING | nessuna evidence tracciabile trovata di doppia esecuzione su package reale con risultato invariato |
 
@@ -103,20 +103,17 @@ La finestra è stata determinata dalle evidence N.I.N.A./PHD2 e il controlled pa
 | `AP14-W07-EAGLE-M27-OAT-Result.md` | PASS come record, stato complessivo ancora Pending |
 | Package M 27 versionato | PASS — `4266f4249cda7b2a8c47c21fd5b69c890d3ff6ed` |
 | Analytics/catalog projection versionate | PASS |
-| CI applicabile | PASS fino a head `678c5bd35ba8fe385447878c1c52bf9d088135de`; rieseguire dopo reconciliation |
+| CI applicabile | PASS — Developer Foundation #714; Genera manuale Word #595 |
 | Pages workflow verificato | PASS per baseline BKL-025 |
-| Current-contract negative/fail-safe validation set | PENDING |
+| Current-contract negative/fail-safe validation set | PASS contract-level — Developer Foundation #714 |
 | Real-session idempotency evidence | PENDING |
 
 ## 8. Decisione
 
 **Stato: Pending**
 
-La maggior parte della OAT storica M27 e delle proiezioni AP-014 è ora supportata da evidence e non deve essere rieseguita artificialmente. I requisiti `session/<session-id>` e promotion workflow sono **N/A per la pubblicazione storica** perché introdotti successivamente.
+La maggior parte della OAT storica M27, delle proiezioni AP-014 e dei fail-safe del contratto corrente è ora supportata da evidence. I requisiti `session/<session-id>` e promotion workflow sono **N/A per la pubblicazione storica** perché introdotti successivamente.
 
-AP-014 non è ancora `Accepted` perché restano due categorie di evidence obbligatorie sul contratto corrente:
+I fail-safe del promotion contract sono ora validati in CI contro lo stesso validator usato dal workflow: PARTIAL, ancestry, size/hash mismatch e scope estraneo risultano PASS su Developer Foundation #714.
 
-1. validation negativa/fail-safe del promotion path (`PARTIAL`, ancestry, size/hash mismatch, scope estraneo);
-2. idempotenza su una sessione reale.
-
-Il criterio `analyze-session-automatic.yml` storico resta inoltre `PENDING` finché non viene identificato un run tracciabile o riclassificato formalmente come N/A sulla base della timeline del workflow. La decisione finale richiede nuova CI e ARB re-review.
+AP-014 non è ancora `Accepted` perché resta da chiudere l'idempotenza su una sessione reale. Il criterio storico `analyze-session-automatic.yml` resta inoltre `PENDING` finché non viene identificato un run tracciabile o riclassificato formalmente come N/A sulla base della timeline del workflow. La decisione finale richiede ARB re-review dopo la chiusura o disposizione formale di questi ultimi due punti.
