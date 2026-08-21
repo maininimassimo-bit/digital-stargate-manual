@@ -54,6 +54,10 @@ jobs:
         shell: pwsh
         run: ./.github/scripts/test-cloudwatcher-telemetry-adapter.ps1
 
+      - name: Test session promotion fail-safe contract
+        shell: pwsh
+        run: ./.github/scripts/test-session-promotion.ps1
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
