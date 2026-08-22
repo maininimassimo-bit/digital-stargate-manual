@@ -5,6 +5,18 @@ on:
     branches:
       - main
       - release/1.5-developer-foundation
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "*.sln"
+      - "*.props"
+      - "global.json"
+      - ".editorconfig"
+      - "scripts/telemetry/**"
+      - "requirements.txt"
+      - ".github/scripts/**"
+      - ".github/roadmap/**"
+      - ".github/workflows/developer-foundation.yml"
   pull_request:
     paths:
       - "src/**"
@@ -13,13 +25,11 @@ on:
       - "*.props"
       - "global.json"
       - ".editorconfig"
-      - "docs/**"
       - "scripts/telemetry/**"
-      - "mkdocs.yml"
       - "requirements.txt"
       - ".github/scripts/**"
       - ".github/roadmap/**"
-      - ".github/workflows/**"
+      - ".github/workflows/developer-foundation.yml"
 
 permissions:
   contents: read
