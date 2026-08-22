@@ -8,7 +8,7 @@
 | Hyper-V VM | `DSG-ARB012-C04-VALIDATION` |
 | Target model | Two-Person Limited Operations Model |
 | Date | 2026-08-22 |
-| Status | In Progress — VM-R01…VM-R09 PASS; VM-R10 next |
+| Status | In Progress — VM-R01…VM-R10 PASS; VM-R11 next |
 | Runtime effect | Validation VM controls only; no observatory runtime effect |
 
 ## 1. Purpose
@@ -32,8 +32,8 @@ Unless the VM/application baseline changes, do **not** repeat the completed ENV-
 | VM-R07 | PRV-011 / ENV-009 | Prove deterministic reset/rebuild | versioned SQL + rebuild script; same logical schema/seed; audit reset to 0; evidence `E-ARB012-C04-VM-R07` | **PASS** |
 | VM-R08 | ENV-010 | Verify logs, correlation IDs and evidence export | request `1ea67173-c596-423e-b49d-d470abe88cb3` correlated across JSONL log, SQLite audit and JSON evidence; evidence SHA-256 `a394357f8d8ba960d6a5cdb78abea255f3934af1033e572d9f8edb210cba990f` | **PASS** |
 | VM-R09 | ENV-006 | Attempt same-identity C3 approval | deterministic `DENY`, `self-approval-prohibited`, audit correlation `d1d8a55d-1771-43a5-8a39-a0063d5eef93`, `execution_attempted=false`; evidence SHA-256 `bc5cfad39cc14269317dfbcd6604c88c972114fbf29cab60966e8e0c222f0476` | **PASS** |
-| VM-R10 | ENV-007 | Revoke/suspend an applicable validation role before execution | subsequent execution denied and audited | **NEXT** |
-| VM-R11 | ENV-012 | Attempt positive C4 and break-glass paths | both unavailable/denied by design and audited where applicable | Pending |
+| VM-R10 | ENV-007 | Revoke/suspend an applicable validation role before execution | baseline `ALLOW`; suspended principal subsequently `DENY`, `principal-suspended`, audit correlation `c1d35282-e64d-4b2d-a793-750c4b8c950d`, `execution_attempted=false`; evidence SHA-256 `cf7e2f52783b69cd96898ca032d9eb70c5d7262ab4d7333f475a1f37b7b319bb` | **PASS** |
+| VM-R11 | ENV-012 | Attempt positive C4 and break-glass paths | both unavailable/denied by design and audited where applicable | **NEXT** |
 | VM-R12 | ENV-012 | Verify physical-device/production fallback cannot be selected | configuration/runtime denial evidence; no physical command sent | Pending |
 
 ## 4. Completed evidence summary
@@ -47,10 +47,11 @@ Unless the VM/application baseline changes, do **not** repeat the completed ENV-
 - VM-R07 / PRV-011 / ENV-009: deterministic logical reset/rebuild from versioned repository assets PASS.
 - VM-R08 / ENV-010: correlation substrate PASS; one stable correlation ID and UTC timestamp traceable across application log, audit persistence and exported evidence at DSOC commit `8147c7a7a1263801f98baea4ffdefd43acee5891`.
 - VM-R09 / ENV-006: same-identity C3 approval deterministically denied by the Application authorization policy; denial audited and correlated; downstream execution not attempted at DSOC commit `948b49a66c740716e55eec69c2e63ad2b2ddf692`.
+- VM-R10 / ENV-007: validation principal baseline authorized, then suspended and deterministically denied with `principal-suspended`; denial audited and correlated; downstream execution not attempted at DSOC commit `2493eb1e1c26a5191895df50ebd8704fafe87dbf`.
 
 ## 5. Next execution group
 
-VM-R10 uses the proven authorization and audit substrate to demonstrate that revocation or suspension of an applicable validation role before execution causes the subsequent operation to be denied and audited.
+VM-R11 uses the proven authorization and audit substrate to demonstrate that positive C4 and break-glass paths remain unavailable or denied by design under the two-person limited operations model.
 
 No additional Linux sudo/group privileges are required for the two validation identities.
 
@@ -64,4 +65,4 @@ This checklist is complete when VM-R01 through VM-R12 have attributable `Passed`
 
 ## 8. Current disposition
 
-**IN PROGRESS — VM-R01 THROUGH VM-R09 PASS; VM-R10 NEXT.**
+**IN PROGRESS — VM-R01 THROUGH VM-R10 PASS; VM-R11 NEXT.**
