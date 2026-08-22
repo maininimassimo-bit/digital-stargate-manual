@@ -6,121 +6,78 @@
 | Work item | C04-W03 — Identity, Training and Access Review Evidence |
 | Target model | Two-Person Limited Operations Model |
 | Date | 2026-08-22 |
-| Status | Ready for reciprocal attestation |
+| Status | **Ready for reciprocal human attestation — technical account separation proven** |
 | Runtime effect | None |
 
 ## 1. Purpose
 
-Provide the attributable execution record for IDV-001 through IDV-005 under the approved two-person model. This file records only non-sensitive identity/account assurance evidence. It must never contain passwords, MFA seeds, recovery codes, private keys or identity-document images/numbers.
+Provide the attributable execution record for IDV-001 through IDV-005 under the approved two-person model. This file records only non-sensitive identity/account assurance evidence. It must never contain passwords, PATs, MFA seeds, recovery codes, private keys or identity-document images/numbers.
+
+This record separates technical account/session evidence already demonstrated on the isolated validation VM from natural-person ownership attestations that must be made by the other person.
 
 ## 2. Governed project identities
 
-The repository already establishes the following nominative governance mapping:
+| Project identity | Natural person | Validation account | Governed role group | Repository/technical basis |
+|---|---|---|---|---|
+| DSG-PERSON-001 | Massimo Mainini | `dsgmassimo` | Sponsor, Architecture, Operations, Service, Technical Owner, Operator, Maintainer | Sponsor decision + VM-R03 / ACC-001 PASS |
+| DSG-PERSON-002 | Leonardo Di Egidio | `dsgleonardo` | C3 Approver, Return-to-Service Approver, Safety Authority, Security Authority | Sponsor decision + VM-R04 / ACC-002 PASS |
 
-| Project identity | Natural person | Governed role group | Repository basis |
-|---|---|---|---|
-| DSG-PERSON-001 | Massimo Mainini | Sponsor, Architecture, Operations, Service, Technical Owner, Operator, Maintainer | `ARB-012-C04-Sponsor-Nomination-Decision.md` |
-| DSG-PERSON-002 | Leonardo Di Egidio | C3 Approver, Return-to-Service Approver, Safety Authority, Security Authority | `ARB-012-C04-Sponsor-Nomination-Decision.md` |
-
-These mappings are governance records, not identity-verification results. They support the subject names for IDV execution but do not make IDV-001/002 `Passed` by themselves.
+The VM evidence demonstrates distinct Unix identities and distinct authenticated validation sessions. Governance mapping and technical account existence do not by themselves prove natural-person ownership.
 
 ## 3. IDV execution matrix
 
-| Check | Subject | Required reciprocal verifier | Evidence required | Current result |
-|---|---|---|---|---|
-| IDV-001 | Massimo Mainini / `DSG-PERSON-001` | Leonardo Di Egidio | Leonardo confirms natural-person identity and project mapping using an authoritative project-context source; no sensitive document data committed | Pending attestation |
-| IDV-002 | Leonardo Di Egidio / `DSG-PERSON-002` | Massimo Mainini | Massimo confirms natural-person identity and project mapping using an authoritative project-context source; no sensitive document data committed | Pending attestation |
-| IDV-003 | Massimo validation authentication account | Leonardo Di Egidio | account identifier/username, non-shared ownership confirmation, authentication context | Pending account evidence |
-| IDV-004 | Leonardo validation authentication account | Massimo Mainini | account identifier/username, non-shared ownership confirmation, authentication context | Pending account evidence |
-| IDV-005 | Both validation accounts | Reciprocal confirmation | explicit statement that usernames, credentials, sessions and authentication factors are distinct; no secret values recorded | Pending account evidence |
+| Check | Subject | Reciprocal verifier | Evidence already proven | Human attestation still required | Current result |
+|---|---|---|---|---|---|
+| IDV-001 | Massimo / DSG-PERSON-001 | Leonardo | Sponsor/governance mapping exists | Leonardo confirms DSG-PERSON-001 maps to Massimo Mainini | **Pending human attestation** |
+| IDV-002 | Leonardo / DSG-PERSON-002 | Massimo | Sponsor/governance mapping exists | Massimo confirms DSG-PERSON-002 maps to Leonardo Di Egidio | **Pending human attestation** |
+| IDV-003 | Massimo / `dsgmassimo` | Leonardo | VM-R03 / ACC-001 proves distinct non-production account/session, UID 1001, no sudo | Leonardo confirms `dsgmassimo` is Massimo's assigned non-shared validation account | **Technical PASS / ownership pending** |
+| IDV-004 | Leonardo / `dsgleonardo` | Massimo | VM-R04 / ACC-002 proves distinct non-production account/session, UID 1002, no sudo | Massimo confirms `dsgleonardo` is Leonardo's assigned non-shared validation account | **Technical PASS / ownership pending** |
+| IDV-005 | Both | Reciprocal | VM-R03 + VM-R04 prove distinct usernames and sessions | Both confirm credentials/authentication factors are not shared | **Technical separation PASS / reciprocal attestation pending** |
 
-## 4. Reciprocal attestation templates
+## 4. Reciprocal attestations to execute
 
-### IDV-001 — Massimo identity
-
-```text
-Control: IDV-001
-Subject: Massimo Mainini / DSG-PERSON-001
-Verified-by: Leonardo Di Egidio
-Verification-source-class: <project register / known-person verification / approved account platform / other>
-Date-UTC: <timestamp>
-Result: Passed | Failed
-Statement: I confirm that Massimo Mainini is the natural person mapped to DSG-PERSON-001 for the Digital StarGate project.
-Notes: <non-sensitive notes>
-```
-
-### IDV-002 — Leonardo identity
+### 4.1 Massimo verifies Leonardo
 
 ```text
-Control: IDV-002
-Subject: Leonardo Di Egidio / DSG-PERSON-002
+Control set: IDV-002, IDV-004, reciprocal part of IDV-005
+Subject: Leonardo Di Egidio / DSG-PERSON-002 / dsgleonardo
 Verified-by: Massimo Mainini
-Verification-source-class: <project register / known-person verification / approved account platform / other>
-Date-UTC: <timestamp>
-Result: Passed | Failed
-Statement: I confirm that Leonardo Di Egidio is the natural person mapped to DSG-PERSON-002 for the Digital StarGate project.
-Notes: <non-sensitive notes>
+Verification-source-class: known-person verification + isolated validation account/session evidence
+Shared-account: No
+Distinct-credentials/factors from Massimo: Yes
+Decision: PASS | NOT PASS
+Date: YYYY-MM-DD
+Statement: I confirm that Leonardo Di Egidio is the natural person mapped to DSG-PERSON-002, that dsgleonardo is Leonardo's assigned non-shared non-production validation account, and that credentials/authentication factors are not shared with Massimo.
+Notes: <non-sensitive notes only>
 ```
 
-### IDV-003 — Massimo account ownership
+### 4.2 Leonardo verifies Massimo
 
 ```text
-Control: IDV-003
-Subject: DSG-PERSON-001
-Validation-account-id: <non-production username/account ID>
+Control set: IDV-001, IDV-003, reciprocal part of IDV-005
+Subject: Massimo Mainini / DSG-PERSON-001 / dsgmassimo
 Verified-by: Leonardo Di Egidio
+Verification-source-class: known-person verification + isolated validation account/session evidence
 Shared-account: No
-Ownership-verification-method: <interactive login witnessed / platform ownership record / other>
-Date-UTC: <timestamp>
-Result: Passed | Failed
-Notes: <no secrets>
+Distinct-credentials/factors from Leonardo: Yes
+Decision: PASS | NOT PASS
+Date: YYYY-MM-DD
+Statement: I confirm that Massimo Mainini is the natural person mapped to DSG-PERSON-001, that dsgmassimo is Massimo's assigned non-shared non-production validation account, and that credentials/authentication factors are not shared with Leonardo.
+Notes: <non-sensitive notes only>
 ```
 
-### IDV-004 — Leonardo account ownership
+## 5. Evidence handling rules
 
-```text
-Control: IDV-004
-Subject: DSG-PERSON-002
-Validation-account-id: <non-production username/account ID>
-Verified-by: Massimo Mainini
-Shared-account: No
-Ownership-verification-method: <interactive login witnessed / platform ownership record / other>
-Date-UTC: <timestamp>
-Result: Passed | Failed
-Notes: <no secrets>
-```
+Do not commit or paste identity-document scans/numbers, passwords, PATs/API tokens, MFA seeds, recovery codes, private keys or screenshots containing secret material.
 
-### IDV-005 — distinct credentials and factors
+The attributable attestation text, verifier, date and explicit result are sufficient for this bounded validation governance record.
 
-```text
-Control: IDV-005
-Massimo-account-id: <non-production username/account ID>
-Leonardo-account-id: <non-production username/account ID>
-Distinct-usernames: Yes | No
-Distinct-credentials: Yes | No
-Distinct-authentication-factors: Yes | No | Not Applicable with rationale
-Distinct-sessions-demonstrated: Yes | No
-Verified-by: Massimo Mainini + Leonardo Di Egidio (reciprocal attestation)
-Date-UTC: <timestamp>
-Result: Passed | Failed
-Notes: <never record secret values>
-```
+## 6. Acceptance rules
 
-## 5. Acceptance rules
+IDV-001 through IDV-005 may be marked `Passed` only after both reciprocal attestations are recorded with explicit `PASS` decisions and dates. Neither person may self-verify their own natural-person/account ownership mapping.
 
-IDV-001 through IDV-005 may be marked `Passed` only when:
+Technical account/session evidence remains valid independently and must not be downgraded while human ownership attestation is pending.
 
-- neither person self-verifies their own natural-person mapping;
-- account identifiers are non-production and unique;
-- shared accounts are prohibited;
-- distinct credentials/sessions are attested without exposing secrets;
-- failed checks remain preserved and are not overwritten;
-- every result has verifier and date attribution.
+## 7. Current disposition
 
-No third person is required under the approved Two-Person Limited Operations Model.
-
-## 6. Current disposition
-
-**READY FOR RECIPROCAL ATTESTATION.**
-
-The repository establishes the governed subject identities, but does not contain enough attributable human/account evidence to mark IDV-001 through IDV-005 as `Passed`. All five checks remain `Pending` until the reciprocal attestations above are completed.
+**READY — TECHNICAL ACCOUNT SEPARATION PROVEN; RECIPROCAL HUMAN ATTESTATIONS PENDING.**
