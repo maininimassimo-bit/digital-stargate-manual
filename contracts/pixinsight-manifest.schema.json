@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/contracts/pixinsight-manifest.schema.json",
+  "title": "Digital StarGate PixInsight Synchronization Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "manifestId", "exportedAt", "source", "observationContext", "processingRun"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "manifestId": {"type": "string", "pattern": "^PXM-[A-Za-z0-9._:-]{8,}$", "maxLength": 128},
+    "exportedAt": {"type": "string", "format": "date-time"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["product", "productVersion", "hostId", "workspaceId"],
+      "properties": {
+        "product": {"const": "PixInsight"},
+        "productVersion": {"type": "string", "minLength": 1, "maxLength": 64},
+        "hostId": {"type": "string", "minLength": 1, "maxLength": 128},
+        "workspaceId": {"type": "string", "minLength": 1, "maxLength": 128}
+      }
+    },
+    "observationContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sessionId", "target", "projectId", "campaignId"],
+      "properties": {
+        "sessionId": {"type": "string", "minLength": 1, "maxLength": 128},
+        "target": {"type": "string", "minLength": 1, "maxLength": 256},
+        "projectId": {"type": "string", "minLength": 1, "maxLength": 128},
+        "campaignId": {"type": "string", "minLength": 1, "maxLength": 128}
+      }
+    },
+    "processingRun": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["externalRunId", "startedAt", "completedAt", "processes", "inputs", "outputs", "parameters"],
+      "properties": {
+        "externalRunId": {"type": "string", "minLength": 1, "maxLength": 128},
+        "startedAt": {"type": ["string", "null"], "format": "date-time"},
+        "completedAt": {"type": ["string", "null"], "format": "date-time"},
+        "processes": {"type": "array", "maxItems": 512, "items": {"type": "string", "minLength": 1, "maxLength": 256}},
+        "inputs": {"type": "array", "maxItems": 4096, "items": {"type": "string", "minLength": 1, "maxLength": 1024}},
+        "outputs": {"type": "array", "maxItems": 4096, "items": {"type": "string", "minLength": 1, "maxLength": 1024}},
+        "parameters": {"type": "object", "maxProperties": 1024}
+      }
+    }
+  }
+}

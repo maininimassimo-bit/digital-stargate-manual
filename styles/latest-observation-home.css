@@ -1,0 +1,132 @@
+.dsg-latest-observation.dsg-showcase {
+  display: block;
+  min-height: 0;
+  margin: 2.4rem 0;
+  padding: 1.4rem;
+  overflow: hidden;
+  border: 1px solid rgba(120, 164, 255, 0.22);
+  border-radius: 1.15rem;
+  background: rgba(10, 24, 48, 0.84);
+}
+
+.dsg-latest-observation__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.dsg-latest-observation__header h2 {
+  margin: 0.3rem 0 0.45rem;
+  padding: 0;
+  border: 0;
+}
+
+.dsg-latest-observation__header p {
+  max-width: 48rem;
+  margin: 0;
+  opacity: 0.8;
+}
+
+.dsg-latest-observation__explorer {
+  flex: 0 0 auto;
+  margin: 0 0 0.15rem;
+}
+
+.dsg-latest-observation .dsg-showcase__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(17rem, 0.95fr);
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.dsg-latest-observation .dsg-showcase__media {
+  min-height: 22rem;
+  border: 1px solid rgba(120, 164, 255, 0.22);
+  border-radius: 0.85rem;
+}
+
+.dsg-latest-observation .dsg-showcase__content {
+  justify-content: flex-start;
+  min-width: 0;
+  padding: 1.5rem;
+  border: 1px solid rgba(120, 164, 255, 0.22);
+  border-radius: 0.85rem;
+  background: rgba(7, 22, 47, 0.72);
+}
+
+.dsg-latest-observation .dsg-showcase__content h2 {
+  margin: 0.55rem 0 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(120, 164, 255, 0.2);
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+}
+
+.dsg-showcase__coordinate-panel {
+  position: static;
+  width: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.dsg-showcase__coordinate-panel .dsg-showcase__sky-meta {
+  display: grid;
+  grid-template-columns: minmax(7rem, 0.9fr) minmax(0, 1.1fr);
+  gap: 0.9rem 1rem;
+  align-items: baseline;
+}
+
+.dsg-showcase__coordinate-panel .dsg-showcase__sky-meta span:nth-child(odd) {
+  color: #75d5ff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.dsg-latest-observation__metrics-wrap {
+  margin-top: 1.25rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(120, 164, 255, 0.18);
+}
+
+.dsg-latest-observation .dsg-showcase__metrics {
+  margin: 0.75rem 0 0;
+}
+
+.dsg-latest-observation .dsg-showcase__metrics div {
+  min-height: 4.6rem;
+  padding: 0.9rem 1rem;
+}
+
+@media screen and (max-width: 900px) {
+  .dsg-latest-observation__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dsg-latest-observation .dsg-showcase__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .dsg-latest-observation .dsg-showcase__media {
+    min-height: 19rem;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .dsg-latest-observation.dsg-showcase {
+    padding: 0.9rem;
+  }
+
+  .dsg-latest-observation .dsg-showcase__content {
+    padding: 1.1rem;
+  }
+
+  .dsg-showcase__coordinate-panel .dsg-showcase__sky-meta {
+    grid-template-columns: 1fr 1fr;
+  }
+}

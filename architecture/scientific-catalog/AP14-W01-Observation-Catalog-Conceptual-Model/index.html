@@ -1,0 +1,7688 @@
+
+<!doctype html>
+<html lang="it" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Manuale Tecnico dell'Osservatorio Remoto di Manciano">
+      
+      
+        <meta name="author" content="Massimo Mainini">
+      
+      
+        <link rel="canonical" href="https://maininimassimo-bit.github.io/digital-stargate-manual/architecture/scientific-catalog/AP14-W01-Observation-Catalog-Conceptual-Model/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/dsg-logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>AP14-W01 — Observation Catalog Conceptual Model - Digital StarGate</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../styles/extra.css">
+    
+      <link rel="stylesheet" href="../../../styles/analytics.css">
+    
+      <link rel="stylesheet" href="../../../styles/roadmap.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ap14-w01-observation-catalog-conceptual-model" class="md-skip">
+          Vai al contenuto
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+    <a href="../../.." title="Digital StarGate" class="md-header__button md-logo" aria-label="Digital StarGate" data-md-component="logo">
+      
+  <img src="../../../assets/images/dsg-logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Digital StarGate
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AP14-W01 — Observation Catalog Conceptual Model
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Passa alla modalità scura"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passa alla modalità scura" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Passa alla modalità chiara"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passa alla modalità chiara" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../roadmap/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Roadmap
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../project/" class="md-tabs__link">
+          
+  
+  
+  Project Governance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  Architettura
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../status/" class="md-tabs__link">
+          
+  
+  
+  Observatory
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/01-introduzione/" class="md-tabs__link">
+          
+  
+  
+  Generalità
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/03-struttura-cupola/" class="md-tabs__link">
+          
+  
+  
+  Infrastruttura
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/07-cgx-l/" class="md-tabs__link">
+          
+  
+  
+  Sistema astronomico
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/11-nina/" class="md-tabs__link">
+          
+  
+  
+  Software
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/15-automazione/" class="md-tabs__link">
+          
+  
+  
+  Automazione
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/18-emergenze-recovery/" class="md-tabs__link">
+          
+  
+  
+  Sicurezza e manutenzione
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/20-gestione-configurazioni-versioning/" class="md-tabs__link">
+          
+  
+  
+  Governance e continuità
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/25-chiusura-osservatorio/" class="md-tabs__link">
+          
+  
+  
+  Operations avanzate
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/30-metodologia-troubleshooting/" class="md-tabs__link">
+          
+  
+  
+  Affidabilità e governance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/35-schemi-elettrici-cablaggi/" class="md-tabs__link">
+          
+  
+  
+  Engineering e allegati tecnici
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/40-requisiti-tracciabilita/" class="md-tabs__link">
+          
+  
+  
+  Chiusura e validazione
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../appendices/dati-da-validare/" class="md-tabs__link">
+          
+  
+  
+  Appendici
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Digital StarGate" class="md-nav__button md-logo" aria-label="Digital StarGate" data-md-component="logo">
+      
+  <img src="../../../assets/images/dsg-logo.svg" alt="logo">
+
+    </a>
+    Digital StarGate
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Governance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project Governance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Governance Center
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/ENTERPRISE_ARCHITECTURE_CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Architecture Context
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/REPOSITORY_KNOWLEDGE_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repository Knowledge Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/DEVELOPMENT_WORKFLOW/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/CODING_STANDARDS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coding Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/RELEASE_PLAYBOOK/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Playbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/TECHNICAL_DEBT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Debt Register
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/DECISION_LOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decision Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/BACKLOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Backlog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architettura
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Panoramica della piattaforma
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisioni architetturali
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Decisioni architetturali
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADR-001-Session-Layer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-001 - Session Layer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADR-002-Analytics-Quality-Gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-002 - Analytics Quality Gates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADR-003-Warehouse-Engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-003 - Warehouse Engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADR-005-Weather-Safety-Interlock/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-005 - Weather Safety Interlock
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Governance e metamodel
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Governance e metamodel
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-metamodel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Metamodel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-governance-standard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Data Governance Standard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../traceability-register/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture Traceability Register
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-001-Enterprise-Metamodel-and-Repository-Information-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-001 - Enterprise Metamodel and Repository Information Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-002-Enterprise-Data-Governance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-002 - Enterprise Data Governance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-003-Observatory-Automation-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-003 - Observatory Automation Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-004-Enterprise-Telemetry-and-Observability-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-004 - Enterprise Telemetry and Observability Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-005-Identity-Access-and-Remote-Operations-Security-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-005 - Identity, Access and Remote Operations Security Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-006-Enterprise-Configuration-and-Asset-Management-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-006 - Enterprise Configuration and Asset Management Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-007-Enterprise-Operations-and-Service-Management-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-007 - Enterprise Operations and Service Management Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-008-Enterprise-Integration-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-008 - Enterprise Integration Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-009-Enterprise-Infrastructure-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-009 - Enterprise Infrastructure Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-010-Enterprise-Safety-Assurance-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-010 - Enterprise Safety Assurance Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-011-Enterprise-Analytics-Platform-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-011 - Enterprise Analytics Platform Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-012-Enterprise-Operations-Center-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-012 - Enterprise Operations Center Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-013-Scientific-Image-Repository-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-013 - Scientific Image Repository Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scientific Image Repository
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scientific Image Repository
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scientific-assets/AP13-W02-Current-State-Scientific-Asset-Inventory-Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Current-State Scientific Asset Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scientific-assets/DSDM-001-Scientific-Data-Manager-Conceptual-Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DSDM-001 - Conceptual Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scientific-assets/DSDM-002-Scientific-Data-Manager-Logical-Data-Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DSDM-002 - Logical Data Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scientific-assets/DSDM-003-Contract-and-Manifest-Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DSDM-003 - Contract and Manifest Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scientific-assets/DSDM-004-Session-Importer-Architecture-and-Safe-Transfer-Design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DSDM-004 - Session Importer and Safe Transfer Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scientific-assets/evidence/AP13-W02/E-AP13-W02-01-Source-Authorization-and-Scope-Record/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source Authorization and Scope Record
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation e Architecture Review
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validation e Architecture Review
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/ARB-012-Validation-Campaign/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-012 - Validation Campaign
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/ARB-012-Integrated-Non-Operational-Execution-Evidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-012 - Integrated Non-Operational Evidence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/ARB-012-C04-Closure-Plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-012-C04 - Closure Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/ARB-012-C04-W06-ENV011-Execution-Result/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-012-C04 - ENV-011 Execution Result
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/AP-013-Session-Discovery-Execution-Evidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-013 - Session Discovery Evidence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/AP-013-Transfer-Readiness-Gate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-013 - Transfer Readiness Gate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reviews/ARB-012-Final-Re-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-012 - Final Re-Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Operations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Enterprise Operations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-operations-and-service-management-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operations and Service Management Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Operations Center
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Enterprise Operations Center
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-operations-center-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operations Center Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operations-command-authorization-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Command Authorization Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../alarm-and-incident-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alarm & Incident Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operational-runbook-standard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operational Runbook Standard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operations-responsibility-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operations Responsibility Matrix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Integration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Enterprise Integration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-integration-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Integration Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integration-contract-catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Contract Catalog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Enterprise Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-infrastructure-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Infrastructure Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Safety Assurance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Enterprise Safety Assurance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-safety-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Safety Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../safety-hazard-and-state-catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Safety Hazard and State Catalog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Analytics Platform
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Enterprise Analytics Platform
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-analytics-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Analytics Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../analytics-data-pipeline-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analytics Data Pipeline Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../analytics-kpi-catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analytics KPI Catalog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../analytics-governance-standard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analytics Governance Standard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_12" id="__nav_4_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Digital Platforms
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Digital Platforms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-stargate-portal-vision/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Digital StarGate Portal Vision
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scientific-image-lifecycle-and-processing-provenance-vision/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scientific Image Lifecycle and Processing Provenance Vision
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scientific-knowledge-layer-vision/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scientific Knowledge Layer Vision
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_13" id="__nav_4_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observatory Automation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Observatory Automation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observatory-automation-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_14" id="__nav_4_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Telemetry and Observability
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Telemetry and Observability
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-observability-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Observability Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_15" id="__nav_4_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity and Remote Security
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Identity and Remote Security
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-identity-and-trust-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Identity and Trust Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_16" id="__nav_4_16_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration and Asset Management
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_16">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Configuration and Asset Management
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-configuration-and-asset-management-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Configuration and Asset Management Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_17" id="__nav_4_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura del Warehouse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architettura del Warehouse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../warehouse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Panoramica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../warehouse/data-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso dei dati
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../warehouse/datasets-and-schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dataset e schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../warehouse/validation-and-quality-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validazione e quality gate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../warehouse/build-and-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build e operatività
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_18" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_18" id="__nav_4_18_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assessment tecnici
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_18_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_18">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Assessment tecnici
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/EA-001-Environment-Repository-Assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EA-001 - Ambiente e repository
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/EA-002-Integrated-Repository-and-Warehouse-Assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EA-002 - Repository e Warehouse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/PAA-001-Project-Architecture-Assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PAA-001 - Project Architecture Assessment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/PAA-002-Platform-Capability-Gap-Assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PAA-002 - Platform Capability Gap Assessment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-002-PAA-002-Independent-Architecture-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-002 - Independent Review of PAA-002
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-003-AP-001-Independent-Architecture-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-003 - Independent Review of AP-001
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-004-AP-002-Independent-Architecture-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-004 - Independent Review of AP-002
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-005-AP-003-Independent-Architecture-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-005 - Independent Review of AP-003
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-006-AP-004-Independent-Architecture-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-006 - Independent Review of AP-004
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-007-AP-005-Identity-Access-and-Remote-Operations-Security-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-007 - Independent Review of AP-005
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-008-AP-006-Enterprise-Configuration-and-Asset-Management-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-008 - Independent Review of AP-006
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-009-AP-009-Independent-Architecture-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-009 - Independent Review of AP-009
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-010-AP-010-Independent-Architecture-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-010 - Independent Review of AP-010
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-011-AP-011-Independent-Architecture-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-011 - Independent Review of AP-011
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-012-AP-012-Independent-Architecture-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-012 - Independent Review of AP-012
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ABC-001-Architecture-Baseline-Certificate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ABC-001 - Architecture Baseline Certificate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ABC-001-Evidence-Annex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ABC-001 - Evidence Annex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/AMP-001-Architecture-Master-Plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AMP-001 - Architecture Master Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/AMP-002-Architecture-Program-Roadmap-Realignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AMP-002 - Architecture Program Roadmap Realignment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ADR-004-Operational-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-004 - Operational Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observatory
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Observatory
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../status/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observatory Status
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../session-reports/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Session Reports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generalità
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Generalità
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/01-introduzione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/02-architettura-generale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura generale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastruttura
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Infrastruttura
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/03-struttura-cupola/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Struttura della cupola
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/04-impianto-elettrico/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Impianto elettrico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/05-infrastruttura-rete/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastruttura di rete
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/06-eagle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Computer EAGLE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema astronomico
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sistema astronomico
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/07-cgx-l/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Montatura CGX-L
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/08-c8-xlt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Celestron C8 XLT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/09-quattro-200p/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sky-Watcher Quattro 200P
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/10-camere-treno-ottico/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Camere e treno ottico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Software
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/11-nina/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    N.I.N.A.
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/12-phd2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PHD2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/13-cpwi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CPWI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/14-ascom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASCOM Platform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automazione
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Automazione
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/15-automazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura dell'automazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/16-sop-avvio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Avvio dell'osservatorio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/17-acquisizione-automatica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Acquisizione automatica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sicurezza e manutenzione
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sicurezza e manutenzione
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/18-emergenze-recovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emergenze e recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/19-manutenzione-preventiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manutenzione preventiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Governance e continuità
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Governance e continuità
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/20-gestione-configurazioni-versioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestione configurazioni e versioning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/21-backup-disaster-recovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup e Disaster Recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/22-inventario-asset-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventario e Asset Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/23-collaudo-validazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Collaudo e validazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/24-sicurezza-informatica-accessi-remoti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sicurezza informatica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operations avanzate
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Operations avanzate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/25-chiusura-osservatorio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chiusura dell'osservatorio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/26-monitoraggio-meteo-sicurezza-ambientale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoraggio meteo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/27-sistema-allsky/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema AllSky
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/28-gestione-dati-archiviazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestione dati e archiviazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/29-reportistica-operativa-kpi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reportistica e KPI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Affidabilità e governance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Affidabilità e governance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/30-metodologia-troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metodologia troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/31-problem-management-post-mortem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Problem Management e post-mortem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/32-ricambi-obsolescenza/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ricambi e obsolescenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/33-roadmap-evolutiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap evolutiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/34-gestione-documentale-release/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestione documentale e release
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engineering e allegati tecnici
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Engineering e allegati tecnici
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/35-schemi-elettrici-cablaggi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schemi elettrici e cablaggi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/36-schemi-rete-indirizzamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schemi di rete e indirizzamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/37-configurazioni-software-parametri/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurazioni software e parametri
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/38-registri-checklist-modelli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registri, checklist e modelli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/39-glossario-acronimi-riferimenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossario, acronimi e riferimenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chiusura e validazione
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chiusura e validazione
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/40-requisiti-tracciabilita/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requisiti e tracciabilità
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/41-analisi-rischi-fmea/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analisi rischi e FMEA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/42-ruoli-formazione-handover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ruoli, formazione e handover
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/43-accettazione-release-v1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accettazione e release 1.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/44-allegati-piano-completamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Allegati e piano di completamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendici
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendici
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/dati-da-validare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dati da validare
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/registro-revisioni/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registro revisioni
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-scopo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Scopo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-obiettivi-del-modello" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Obiettivi del modello
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-boundary-di-autorita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Boundary di autorità
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-bounded-context-concettuali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Bounded context concettuali
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-modello-concettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Modello concettuale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-entita-canoniche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Entità canoniche
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Entità canoniche">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-scientificproject" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 ScientificProject
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-observationcampaign" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 ObservationCampaign
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-scientifictarget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 ScientificTarget
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-observation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Observation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-observationsession" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 ObservationSession
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66-instrumentconfiguration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6 InstrumentConfiguration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#67-acquisitionprofile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7 AcquisitionProfile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#68-acquisition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.8 Acquisition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#69-calibrationset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.9 CalibrationSet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#610-scientificassetreference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.10 ScientificAssetReference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#611-processingrunreference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.11 ProcessingRunReference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#612-derivedproductreference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.12 DerivedProductReference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#613-catalogitem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.13 CatalogItem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#614-searchdocument" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.14 SearchDocument
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#615-indexbuild" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.15 IndexBuild
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#616-reconciliationrecord" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.16 ReconciliationRecord
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-cardinalita-principali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Cardinalità principali
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-identificatori-stabili" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Identificatori stabili
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-vocabolari-controllati-baseline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Vocabolari controllati baseline
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Vocabolari controllati baseline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-qualitystate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 QualityState
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-sessionstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 SessionStatus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-observationmode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 ObservationMode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-imagetype" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 ImageType
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#95-processingstate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5 ProcessingState
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#96-reconciliationstate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.6 ReconciliationState
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-regole-di-integrita-concettuali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Regole di integrità concettuali
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-eventi-di-dominio-candidati" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Eventi di dominio candidati
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-query-abilitate-dal-modello" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Query abilitate dal modello
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-aspetti-non-ancora-definiti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Aspetti non ancora definiti
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-acceptance-criteria-ap14-w01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Acceptance criteria AP14-W01
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-decisione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Decisione
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ap14-w01-observation-catalog-conceptual-model">AP14-W01 — Observation Catalog Conceptual Model<a class="headerlink" href="#ap14-w01-observation-catalog-conceptual-model" title="Permanent link">&para;</a></h1>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Valore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Architecture Package</td>
+<td>AP-014 — Scientific Observation Catalog and Search</td>
+</tr>
+<tr>
+<td>Work Package</td>
+<td>AP14-W01 — Observation Catalog Conceptual Model</td>
+</tr>
+<tr>
+<td>Identificativo</td>
+<td>SOCS-CM-001</td>
+</tr>
+<tr>
+<td>Versione</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>05/08/2026</td>
+</tr>
+<tr>
+<td>Autorità</td>
+<td>Digital StarGate Chief Architect</td>
+</tr>
+<tr>
+<td>Sponsor</td>
+<td>Project Owner / Architecture Sponsor — Massimo Mainini</td>
+</tr>
+<tr>
+<td>Stato</td>
+<td>Conceptual baseline ready for review</td>
+</tr>
+<tr>
+<td>Dipendenze</td>
+<td>AP-014; AP-013; DSDM-001; DSDM-002; Scientific Data Engine 2.1</td>
+</tr>
+<tr>
+<td>Successivo</td>
+<td>AP14-W02 — Logical Data Model and Identifier Standard</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1-scopo">1. Scopo<a class="headerlink" href="#1-scopo" title="Permanent link">&para;</a></h2>
+<p>Questo documento definisce il modello concettuale del catalogo osservativo di Digital StarGate.</p>
+<p>Il modello organizza il patrimonio scientifico attorno al significato dell'osservazione — progetto, campagna, target, sessione, acquisizione, calibrazione, asset e processing — anziché attorno ai soli file o path fisici.</p>
+<p>Il catalogo è una proiezione read-only delle fonti autorevoli governate da AP-013. Non modifica asset, checksum, locator, provenance o stati di acceptance.</p>
+<h2 id="2-obiettivi-del-modello">2. Obiettivi del modello<a class="headerlink" href="#2-obiettivi-del-modello" title="Permanent link">&para;</a></h2>
+<p>Il catalogo deve permettere di rispondere in modo verificabile a domande come:</p>
+<ul>
+<li>quali osservazioni sono state eseguite per un determinato target;</li>
+<li>quali sessioni appartengono allo stesso progetto o alla stessa campagna;</li>
+<li>quali acquisizioni usano una determinata configurazione strumentale;</li>
+<li>quanta integrazione esiste per target, filtro, setup o periodo;</li>
+<li>quali sessioni dispongono di calibration set compatibili;</li>
+<li>quali asset sono associati a una sessione o acquisizione;</li>
+<li>quali prodotti derivati provengono da una determinata osservazione;</li>
+<li>quali record sono incompleti, non riconciliati o non accettati;</li>
+<li>quali risultati possono essere esposti nell'Enterprise Search Center.</li>
+</ul>
+<h2 id="3-boundary-di-autorita">3. Boundary di autorità<a class="headerlink" href="#3-boundary-di-autorita" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Dominio</th>
+<th>Autorità</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Asset scientifici, checksum, locator e integrità</td>
+<td>AP-013 / Scientific Asset Registry</td>
+</tr>
+<tr>
+<td>Processing run e provenance</td>
+<td>AP-013 / Processing Provenance</td>
+</tr>
+<tr>
+<td>Sessioni e metriche scientifiche correnti</td>
+<td>Scientific Data Engine</td>
+</tr>
+<tr>
+<td>Progetti, campagne, osservazioni e catalog item</td>
+<td>AP-014 / Observation Catalog</td>
+</tr>
+<tr>
+<td>Ricerca, ranking, facet e query</td>
+<td>AP-014 / Search Service</td>
+</tr>
+<tr>
+<td>Relazioni semantiche e knowledge graph</td>
+<td>AP-015</td>
+</tr>
+</tbody>
+</table>
+<p>Il catalogo conserva riferimenti alle entità autorevoli e non ne replica l'autorità.</p>
+<h2 id="4-bounded-context-concettuali">4. Bounded context concettuali<a class="headerlink" href="#4-bounded-context-concettuali" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Responsabilità</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scientific Planning</td>
+<td>progetto, campagna, obiettivo scientifico e priorità</td>
+</tr>
+<tr>
+<td>Target Registry</td>
+<td>nome canonico, alias, coordinate e riferimenti di catalogo</td>
+</tr>
+<tr>
+<td>Observation Management</td>
+<td>intento osservativo, stato e relazione con target e campagna</td>
+</tr>
+<tr>
+<td>Session Catalog</td>
+<td>sessioni, date, condizioni, configurazione e qualità</td>
+</tr>
+<tr>
+<td>Acquisition Catalog</td>
+<td>sequenze omogenee di frame, filtro, esposizione e integrazione</td>
+</tr>
+<tr>
+<td>Calibration Context</td>
+<td>calibration set, compatibilità e periodo di validità</td>
+</tr>
+<tr>
+<td>Scientific Asset Projection</td>
+<td>riferimenti read-only agli asset di AP-013</td>
+</tr>
+<tr>
+<td>Processing Projection</td>
+<td>riferimenti read-only a run, workflow e prodotti derivati</td>
+</tr>
+<tr>
+<td>Indexing and Reconciliation</td>
+<td>catalog item, search document, index build e reconciliation</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-modello-concettuale">5. Modello concettuale<a class="headerlink" href="#5-modello-concettuale" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>erDiagram
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    SCIENTIFIC_PROJECT ||--o{ OBSERVATION_CAMPAIGN : contains
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    OBSERVATION_CAMPAIGN ||--o{ OBSERVATION : coordinates
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    SCIENTIFIC_TARGET ||--o{ OBSERVATION : is_subject_of
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    OBSERVATION ||--o{ OBSERVATION_SESSION : realized_by
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    OBSERVATION_SESSION }o--|| INSTRUMENT_CONFIGURATION : uses
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    OBSERVATION_SESSION ||--o{ ACQUISITION : contains
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    ACQUISITION }o--|| ACQUISITION_PROFILE : follows
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    ACQUISITION }o--o{ CALIBRATION_SET : calibrated_by
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    ACQUISITION ||--o{ SCIENTIFIC_ASSET_REFERENCE : produces
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    SCIENTIFIC_ASSET_REFERENCE }o--o{ PROCESSING_RUN_REFERENCE : participates_in
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    PROCESSING_RUN_REFERENCE ||--o{ DERIVED_PRODUCT_REFERENCE : produces
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    SCIENTIFIC_PROJECT ||--o{ CATALOG_ITEM : represented_by
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    OBSERVATION_CAMPAIGN ||--o{ CATALOG_ITEM : represented_by
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    SCIENTIFIC_TARGET ||--o{ CATALOG_ITEM : represented_by
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    OBSERVATION ||--o{ CATALOG_ITEM : represented_by
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    OBSERVATION_SESSION ||--o{ CATALOG_ITEM : represented_by
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    ACQUISITION ||--o{ CATALOG_ITEM : represented_by
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    SCIENTIFIC_ASSET_REFERENCE ||--o{ CATALOG_ITEM : represented_by
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    PROCESSING_RUN_REFERENCE ||--o{ CATALOG_ITEM : represented_by
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    INDEX_BUILD ||--o{ SEARCH_DOCUMENT : produces
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    CATALOG_ITEM ||--o{ SEARCH_DOCUMENT : projected_as
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    INDEX_BUILD ||--o{ RECONCILIATION_RECORD : records
+</code></pre></div>
+<p>Il diagramma descrive relazioni di dominio. Non costituisce ancora uno schema fisico o relazionale definitivo.</p>
+<h2 id="6-entita-canoniche">6. Entità canoniche<a class="headerlink" href="#6-entita-canoniche" title="Permanent link">&para;</a></h2>
+<h3 id="61-scientificproject">6.1 ScientificProject<a class="headerlink" href="#61-scientificproject" title="Permanent link">&para;</a></h3>
+<p>Rappresenta un'iniziativa scientifica, fotografica o tecnica che raggruppa una o più campagne.</p>
+<p>Attributi candidati:</p>
+<ul>
+<li><code>projectId</code>;</li>
+<li><code>projectName</code>;</li>
+<li><code>objective</code>;</li>
+<li><code>projectType</code>;</li>
+<li><code>priority</code>;</li>
+<li><code>status</code>;</li>
+<li><code>ownerId</code>;</li>
+<li><code>startedAt</code>;</li>
+<li><code>targetCompletionDate</code>;</li>
+<li><code>completedAt</code>;</li>
+<li><code>notes</code>.</li>
+</ul>
+<p>Stati candidati:</p>
+<p><code>PLANNED</code>, <code>ACTIVE</code>, <code>ON_HOLD</code>, <code>READY_FOR_PROCESSING</code>, <code>PROCESSING</code>, <code>REVIEW</code>, <code>COMPLETED</code>, <code>ARCHIVED</code>.</p>
+<h3 id="62-observationcampaign">6.2 ObservationCampaign<a class="headerlink" href="#62-observationcampaign" title="Permanent link">&para;</a></h3>
+<p>Raggruppa osservazioni coordinate da un obiettivo comune, una finestra temporale o una strategia di acquisizione.</p>
+<p>Attributi candidati:</p>
+<ul>
+<li><code>campaignId</code>;</li>
+<li><code>projectId</code>;</li>
+<li><code>campaignName</code>;</li>
+<li><code>objective</code>;</li>
+<li><code>validFrom</code>;</li>
+<li><code>validTo</code>;</li>
+<li><code>status</code>;</li>
+<li><code>requiredTargets</code>;</li>
+<li><code>requiredFilters</code>;</li>
+<li><code>completionCriteria</code>;</li>
+<li><code>notes</code>.</li>
+</ul>
+<p>Una campagna appartiene a un solo progetto; un progetto può contenere zero o più campagne.</p>
+<h3 id="63-scientifictarget">6.3 ScientificTarget<a class="headerlink" href="#63-scientifictarget" title="Permanent link">&para;</a></h3>
+<p>Rappresenta l'oggetto, il campo o la regione astronomica osservata.</p>
+<p>Attributi candidati:</p>
+<ul>
+<li><code>targetId</code>;</li>
+<li><code>canonicalName</code>;</li>
+<li><code>alternativeNames</code>;</li>
+<li><code>targetType</code>;</li>
+<li><code>rightAscension</code>;</li>
+<li><code>declination</code>;</li>
+<li><code>constellation</code>;</li>
+<li><code>catalogReferences</code>;</li>
+<li><code>fieldCenter</code>;</li>
+<li><code>notes</code>.</li>
+</ul>
+<p>Regole:</p>
+<ul>
+<li>il nome canonico è unico nel relativo namespace;</li>
+<li>gli alias non possono identificare target differenti senza una regola di disambiguazione;</li>
+<li>coordinate non note restano <code>unknown</code>;</li>
+<li>nessun alias viene inferito automaticamente senza una fonte dichiarata.</li>
+</ul>
+<h3 id="64-observation">6.4 Observation<a class="headerlink" href="#64-observation" title="Permanent link">&para;</a></h3>
+<p>Rappresenta l'intento osservativo verso un target in un contesto di progetto o campagna.</p>
+<p>Attributi candidati:</p>
+<ul>
+<li><code>observationId</code>;</li>
+<li><code>campaignId</code>;</li>
+<li><code>targetId</code>;</li>
+<li><code>observationTitle</code>;</li>
+<li><code>scientificObjective</code>;</li>
+<li><code>observationMode</code>;</li>
+<li><code>priority</code>;</li>
+<li><code>status</code>;</li>
+<li><code>requiredIntegrationByFilter</code>;</li>
+<li><code>achievedIntegrationByFilter</code>;</li>
+<li><code>completionState</code>;</li>
+<li><code>notes</code>.</li>
+</ul>
+<p>Una Observation può essere realizzata da più sessioni; ogni sessione appartiene a una sola Observation primaria.</p>
+<h3 id="65-observationsession">6.5 ObservationSession<a class="headerlink" href="#65-observationsession" title="Permanent link">&para;</a></h3>
+<p>Rappresenta una finestra osservativa operativa, normalmente una notte o una parte di notte.</p>
+<p>Attributi candidati:</p>
+<ul>
+<li><code>sessionId</code>;</li>
+<li><code>observationId</code>;</li>
+<li><code>startedAtUtc</code>;</li>
+<li><code>completedAtUtc</code>;</li>
+<li><code>localObservingDate</code>;</li>
+<li><code>observatoryId</code>;</li>
+<li><code>instrumentConfigurationId</code>;</li>
+<li><code>operatorId</code>;</li>
+<li><code>sessionStatus</code>;</li>
+<li><code>qualityState</code>;</li>
+<li><code>weatherSummary</code>;</li>
+<li><code>moonContext</code>;</li>
+<li><code>sourceReference</code>;</li>
+<li><code>transferState</code>;</li>
+<li><code>notes</code>.</li>
+</ul>
+<p>Regole:</p>
+<ul>
+<li><code>sessionId</code> è stabile e indipendente dal path;</li>
+<li>una sessione che supera la mezzanotte mantiene un solo identificatore;</li>
+<li><code>startedAtUtc &lt;= completedAtUtc</code> quando entrambi sono noti;</li>
+<li>una sessione non può essere <code>ACCEPTED</code> se è priva di osservazione e configurazione strumentale.</li>
+</ul>
+<h3 id="66-instrumentconfiguration">6.6 InstrumentConfiguration<a class="headerlink" href="#66-instrumentconfiguration" title="Permanent link">&para;</a></h3>
+<p>Rappresenta la configurazione effettivamente usata da una sessione.</p>
+<p>Attributi candidati:</p>
+<ul>
+<li><code>instrumentConfigurationId</code>;</li>
+<li><code>observatoryId</code>;</li>
+<li><code>telescopeId</code>;</li>
+<li><code>cameraId</code>;</li>
+<li><code>mountId</code>;</li>
+<li><code>focuserId</code>;</li>
+<li><code>filterWheelId</code>;</li>
+<li><code>correctorOrReducer</code>;</li>
+<li><code>effectiveFocalLengthMm</code>;</li>
+<li><code>effectiveFocalRatio</code>;</li>
+<li><code>pixelScaleArcsec</code>;</li>
+<li><code>configurationVersion</code>;</li>
+<li><code>validFrom</code>;</li>
+<li><code>validTo</code>.</li>
+</ul>
+<p>Una variazione significativa di OTA, camera, riduttore/correttore, scala o catena ottica genera una nuova versione.</p>
+<h3 id="67-acquisitionprofile">6.7 AcquisitionProfile<a class="headerlink" href="#67-acquisitionprofile" title="Permanent link">&para;</a></h3>
+<p>Descrive una configurazione omogenea di acquisizione riutilizzabile.</p>
+<p>Attributi candidati:</p>
+<ul>
+<li><code>acquisitionProfileId</code>;</li>
+<li><code>imageType</code>;</li>
+<li><code>filterId</code>;</li>
+<li><code>exposureSeconds</code>;</li>
+<li><code>binning</code>;</li>
+<li><code>gain</code>;</li>
+<li><code>offset</code>;</li>
+<li><code>sensorTemperatureC</code>;</li>
+<li><code>frameCountPlanned</code>;</li>
+<li><code>ditherStrategy</code>;</li>
+<li><code>notes</code>.</li>
+</ul>
+<h3 id="68-acquisition">6.8 Acquisition<a class="headerlink" href="#68-acquisition" title="Permanent link">&para;</a></h3>
+<p>Rappresenta una sequenza omogenea di frame acquisiti nella stessa sessione con lo stesso profilo.</p>
+<p>Attributi candidati:</p>
+<ul>
+<li><code>acquisitionId</code>;</li>
+<li><code>sessionId</code>;</li>
+<li><code>acquisitionProfileId</code>;</li>
+<li><code>sequenceNumber</code>;</li>
+<li><code>startedAtUtc</code>;</li>
+<li><code>completedAtUtc</code>;</li>
+<li><code>frameCountPlanned</code>;</li>
+<li><code>frameCountCaptured</code>;</li>
+<li><code>frameCountAccepted</code>;</li>
+<li><code>frameCountRejected</code>;</li>
+<li><code>integrationSecondsCaptured</code>;</li>
+<li><code>integrationSecondsAccepted</code>;</li>
+<li><code>qualityState</code>;</li>
+<li><code>notes</code>.</li>
+</ul>
+<p>Regole:</p>
+<ul>
+<li><code>frameCountAccepted + frameCountRejected &lt;= frameCountCaptured</code>;</li>
+<li>l'integrazione accettata non può superare quella catturata;</li>
+<li>ogni Acquisition appartiene a una sola sessione;</li>
+<li>una sessione può contenere zero o più Acquisition.</li>
+</ul>
+<h3 id="69-calibrationset">6.9 CalibrationSet<a class="headerlink" href="#69-calibrationset" title="Permanent link">&para;</a></h3>
+<p>Rappresenta un insieme governato di calibrazioni compatibili con una o più Acquisition.</p>
+<p>Attributi candidati:</p>
+<ul>
+<li><code>calibrationSetId</code>;</li>
+<li><code>calibrationType</code>;</li>
+<li><code>instrumentConfigurationId</code>;</li>
+<li><code>cameraId</code>;</li>
+<li><code>filterId</code>;</li>
+<li><code>exposureSeconds</code>;</li>
+<li><code>gain</code>;</li>
+<li><code>offset</code>;</li>
+<li><code>sensorTemperatureC</code>;</li>
+<li><code>validFrom</code>;</li>
+<li><code>validTo</code>;</li>
+<li><code>qualityState</code>;</li>
+<li><code>assetReferences</code>;</li>
+<li><code>notes</code>.</li>
+</ul>
+<p>La compatibilità è una relazione dichiarata e verificabile; non viene inferita soltanto dal nome file.</p>
+<h3 id="610-scientificassetreference">6.10 ScientificAssetReference<a class="headerlink" href="#610-scientificassetreference" title="Permanent link">&para;</a></h3>
+<p>Riferimento read-only a un asset governato da AP-013.</p>
+<p>Attributi candidati:</p>
+<ul>
+<li><code>assetId</code>;</li>
+<li><code>assetClass</code>;</li>
+<li><code>authoritativeRegistry</code>;</li>
+<li><code>checksumReference</code>;</li>
+<li><code>locatorReference</code>;</li>
+<li><code>format</code>;</li>
+<li><code>sizeBytes</code>;</li>
+<li><code>integrityState</code>;</li>
+<li><code>qualityState</code>;</li>
+<li><code>sourceEntityType</code>;</li>
+<li><code>sourceEntityId</code>.</li>
+</ul>
+<p>Il catalogo non modifica questi attributi; li proietta dalla fonte autorevole.</p>
+<h3 id="611-processingrunreference">6.11 ProcessingRunReference<a class="headerlink" href="#611-processingrunreference" title="Permanent link">&para;</a></h3>
+<p>Riferimento read-only a un processing run governato da AP-013.</p>
+<p>Attributi candidati:</p>
+<ul>
+<li><code>processingRunId</code>;</li>
+<li><code>workflowDefinitionId</code>;</li>
+<li><code>processingEnvironmentId</code>;</li>
+<li><code>startedAtUtc</code>;</li>
+<li><code>completedAtUtc</code>;</li>
+<li><code>runStatus</code>;</li>
+<li><code>qualityState</code>;</li>
+<li><code>inputAssetIds</code>;</li>
+<li><code>outputAssetIds</code>;</li>
+<li><code>evidenceReference</code>.</li>
+</ul>
+<h3 id="612-derivedproductreference">6.12 DerivedProductReference<a class="headerlink" href="#612-derivedproductreference" title="Permanent link">&para;</a></h3>
+<p>Proiezione di un asset derivato con significato di prodotto.</p>
+<p>Attributi candidati:</p>
+<ul>
+<li><code>productId</code>;</li>
+<li><code>assetId</code>;</li>
+<li><code>productClass</code>;</li>
+<li><code>processingRunId</code>;</li>
+<li><code>version</code>;</li>
+<li><code>qualityState</code>;</li>
+<li><code>publicationState</code>;</li>
+<li><code>supersedesProductId</code>;</li>
+<li><code>notes</code>.</li>
+</ul>
+<h3 id="613-catalogitem">6.13 CatalogItem<a class="headerlink" href="#613-catalogitem" title="Permanent link">&para;</a></h3>
+<p>Rappresenta il record normalizzato che collega un'entità di dominio al catalogo.</p>
+<p>Attributi candidati:</p>
+<ul>
+<li><code>catalogItemId</code>;</li>
+<li><code>entityType</code>;</li>
+<li><code>entityId</code>;</li>
+<li><code>sourceSystem</code>;</li>
+<li><code>sourceVersion</code>;</li>
+<li><code>sourceDigest</code>;</li>
+<li><code>catalogState</code>;</li>
+<li><code>qualityState</code>;</li>
+<li><code>indexedAt</code>;</li>
+<li><code>lastReconciledAt</code>;</li>
+<li><code>reconciliationState</code>.</li>
+</ul>
+<p>Stati candidati di <code>catalogState</code>:</p>
+<p><code>DISCOVERED</code>, <code>NORMALIZED</code>, <code>INDEXABLE</code>, <code>INDEXED</code>, <code>SUPERSEDED</code>, <code>WITHDRAWN</code>.</p>
+<h3 id="614-searchdocument">6.14 SearchDocument<a class="headerlink" href="#614-searchdocument" title="Permanent link">&para;</a></h3>
+<p>Proiezione ottimizzata per ricerca e faceting.</p>
+<p>Attributi candidati:</p>
+<ul>
+<li><code>searchDocumentId</code>;</li>
+<li><code>catalogItemId</code>;</li>
+<li><code>documentType</code>;</li>
+<li><code>title</code>;</li>
+<li><code>summary</code>;</li>
+<li><code>normalizedText</code>;</li>
+<li><code>keywords</code>;</li>
+<li><code>targetId</code>;</li>
+<li><code>projectId</code>;</li>
+<li><code>campaignId</code>;</li>
+<li><code>sessionId</code>;</li>
+<li><code>instrumentConfigurationId</code>;</li>
+<li><code>observationDate</code>;</li>
+<li><code>qualityState</code>;</li>
+<li><code>processingState</code>;</li>
+<li><code>facetValues</code>;</li>
+<li><code>sourceUrl</code>;</li>
+<li><code>rankingSignals</code>.</li>
+</ul>
+<h3 id="615-indexbuild">6.15 IndexBuild<a class="headerlink" href="#615-indexbuild" title="Permanent link">&para;</a></h3>
+<p>Rappresenta un'esecuzione deterministica della pipeline di indicizzazione.</p>
+<p>Attributi candidati:</p>
+<ul>
+<li><code>indexBuildId</code>;</li>
+<li><code>algorithmVersion</code>;</li>
+<li><code>sourceSnapshotDigest</code>;</li>
+<li><code>startedAtUtc</code>;</li>
+<li><code>completedAtUtc</code>;</li>
+<li><code>documentCount</code>;</li>
+<li><code>failureCount</code>;</li>
+<li><code>outputDigest</code>;</li>
+<li><code>buildStatus</code>;</li>
+<li><code>evidenceReference</code>.</li>
+</ul>
+<h3 id="616-reconciliationrecord">6.16 ReconciliationRecord<a class="headerlink" href="#616-reconciliationrecord" title="Permanent link">&para;</a></h3>
+<p>Registra il confronto fra catalogo derivato e fonti autorevoli.</p>
+<p>Attributi candidati:</p>
+<ul>
+<li><code>reconciliationRecordId</code>;</li>
+<li><code>indexBuildId</code>;</li>
+<li><code>catalogItemId</code>;</li>
+<li><code>sourceDigestExpected</code>;</li>
+<li><code>sourceDigestObserved</code>;</li>
+<li><code>reconciliationState</code>;</li>
+<li><code>differenceType</code>;</li>
+<li><code>detectedAtUtc</code>;</li>
+<li><code>resolvedAtUtc</code>;</li>
+<li><code>resolutionReference</code>.</li>
+</ul>
+<p>Stati candidati:</p>
+<p><code>MATCHED</code>, <code>MISSING_SOURCE</code>, <code>MISSING_PROJECTION</code>, <code>STALE_PROJECTION</code>, <code>CONFLICT</code>, <code>RESOLVED</code>.</p>
+<h2 id="7-cardinalita-principali">7. Cardinalità principali<a class="headerlink" href="#7-cardinalita-principali" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Relazione</th>
+<th>Cardinalità</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ScientificProject → ObservationCampaign</td>
+<td>1 : 0..N</td>
+</tr>
+<tr>
+<td>ObservationCampaign → Observation</td>
+<td>1 : 0..N</td>
+</tr>
+<tr>
+<td>ScientificTarget → Observation</td>
+<td>1 : 0..N</td>
+</tr>
+<tr>
+<td>Observation → ObservationSession</td>
+<td>1 : 0..N</td>
+</tr>
+<tr>
+<td>ObservationSession → InstrumentConfiguration</td>
+<td>N : 1</td>
+</tr>
+<tr>
+<td>ObservationSession → Acquisition</td>
+<td>1 : 0..N</td>
+</tr>
+<tr>
+<td>Acquisition → AcquisitionProfile</td>
+<td>N : 1</td>
+</tr>
+<tr>
+<td>Acquisition ↔ CalibrationSet</td>
+<td>N : M</td>
+</tr>
+<tr>
+<td>Acquisition → ScientificAssetReference</td>
+<td>1 : 0..N</td>
+</tr>
+<tr>
+<td>ScientificAssetReference ↔ ProcessingRunReference</td>
+<td>N : M</td>
+</tr>
+<tr>
+<td>ProcessingRunReference → DerivedProductReference</td>
+<td>1 : 0..N</td>
+</tr>
+<tr>
+<td>Domain Entity → CatalogItem</td>
+<td>1 : 0..N versioni/proiezioni</td>
+</tr>
+<tr>
+<td>CatalogItem → SearchDocument</td>
+<td>1 : 0..N versioni indicizzate</td>
+</tr>
+<tr>
+<td>IndexBuild → SearchDocument</td>
+<td>1 : 0..N</td>
+</tr>
+<tr>
+<td>IndexBuild → ReconciliationRecord</td>
+<td>1 : 0..N</td>
+</tr>
+</tbody>
+</table>
+<h2 id="8-identificatori-stabili">8. Identificatori stabili<a class="headerlink" href="#8-identificatori-stabili" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Entità</th>
+<th>Formato candidato</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Project</td>
+<td><code>PRJ-YYYY-NNN</code></td>
+</tr>
+<tr>
+<td>Campaign</td>
+<td><code>CAM-YYYY-NNN</code></td>
+</tr>
+<tr>
+<td>Target</td>
+<td><code>TGT-&lt;namespace&gt;-&lt;canonical-key&gt;</code></td>
+</tr>
+<tr>
+<td>Observation</td>
+<td><code>OBS-YYYYMMDD-NNN</code></td>
+</tr>
+<tr>
+<td>Session</td>
+<td>identificatore stabile già governato dal Scientific Data Engine</td>
+</tr>
+<tr>
+<td>Acquisition Profile</td>
+<td><code>ACP-&lt;configuration-id&gt;-NNN</code></td>
+</tr>
+<tr>
+<td>Acquisition</td>
+<td><code>ACQ-&lt;session-id&gt;-NNN</code></td>
+</tr>
+<tr>
+<td>Calibration Set</td>
+<td><code>CAL-YYYYMM-NNN</code></td>
+</tr>
+<tr>
+<td>Catalog Item</td>
+<td><code>CAT-&lt;entity-type&gt;-&lt;stable-id&gt;</code></td>
+</tr>
+<tr>
+<td>Search Document</td>
+<td><code>SRCH-&lt;catalog-item-id&gt;-&lt;index-version&gt;</code></td>
+</tr>
+<tr>
+<td>Index Build</td>
+<td><code>IDX-YYYYMMDDTHHMMSSZ</code></td>
+</tr>
+<tr>
+<td>Reconciliation Record</td>
+<td><code>REC-&lt;index-build-id&gt;-NNN</code></td>
+</tr>
+</tbody>
+</table>
+<p>Regole generali:</p>
+<ul>
+<li>gli identificatori non dipendono da path, lettere di unità o nomi file;</li>
+<li>non vengono riutilizzati dopo withdrawal o supersession;</li>
+<li>eventuali correzioni generano una nuova versione o relazione di supersession;</li>
+<li>il formato finale sarà congelato in AP14-W02.</li>
+</ul>
+<h2 id="9-vocabolari-controllati-baseline">9. Vocabolari controllati baseline<a class="headerlink" href="#9-vocabolari-controllati-baseline" title="Permanent link">&para;</a></h2>
+<h3 id="91-qualitystate">9.1 QualityState<a class="headerlink" href="#91-qualitystate" title="Permanent link">&para;</a></h3>
+<p><code>UNKNOWN</code>, <code>PENDING</code>, <code>ACCEPTABLE</code>, <code>ACCEPTED</code>, <code>REJECTED</code>, <code>DEGRADED</code>, <code>SUPERSEDED</code>.</p>
+<h3 id="92-sessionstatus">9.2 SessionStatus<a class="headerlink" href="#92-sessionstatus" title="Permanent link">&para;</a></h3>
+<p><code>PLANNED</code>, <code>READY</code>, <code>RUNNING</code>, <code>COMPLETED</code>, <code>PARTIAL</code>, <code>FAILED</code>, <code>CANCELLED</code>, <code>ACCEPTED</code>, <code>ARCHIVED</code>.</p>
+<h3 id="93-observationmode">9.3 ObservationMode<a class="headerlink" href="#93-observationmode" title="Permanent link">&para;</a></h3>
+<p><code>BROADBAND</code>, <code>NARROWBAND</code>, <code>LUMINANCE</code>, <code>RGB</code>, <code>SHO</code>, <code>HOO</code>, <code>LRGB</code>, <code>SURVEY</code>, <code>CALIBRATION</code>, <code>ENGINEERING</code>, <code>OTHER</code>.</p>
+<h3 id="94-imagetype">9.4 ImageType<a class="headerlink" href="#94-imagetype" title="Permanent link">&para;</a></h3>
+<p><code>LIGHT</code>, <code>DARK</code>, <code>FLAT</code>, <code>BIAS</code>, <code>DARKFLAT</code>, <code>OTHER</code>.</p>
+<h3 id="95-processingstate">9.5 ProcessingState<a class="headerlink" href="#95-processingstate" title="Permanent link">&para;</a></h3>
+<p><code>NOT_STARTED</code>, <code>CALIBRATING</code>, <code>REGISTERING</code>, <code>INTEGRATING</code>, <code>PROCESSING</code>, <code>REVIEW</code>, <code>ACCEPTED</code>, <code>REJECTED</code>, <code>SUPERSEDED</code>.</p>
+<h3 id="96-reconciliationstate">9.6 ReconciliationState<a class="headerlink" href="#96-reconciliationstate" title="Permanent link">&para;</a></h3>
+<p><code>MATCHED</code>, <code>MISSING_SOURCE</code>, <code>MISSING_PROJECTION</code>, <code>STALE_PROJECTION</code>, <code>CONFLICT</code>, <code>RESOLVED</code>.</p>
+<h2 id="10-regole-di-integrita-concettuali">10. Regole di integrità concettuali<a class="headerlink" href="#10-regole-di-integrita-concettuali" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Ogni Observation deve riferirsi a un solo ScientificTarget primario.</li>
+<li>Ogni ObservationSession deve riferirsi a una sola Observation primaria.</li>
+<li>Ogni ObservationSession deve usare una sola InstrumentConfiguration versionata.</li>
+<li>Ogni Acquisition deve appartenere a una sola sessione e usare un solo AcquisitionProfile.</li>
+<li>Una Acquisition non può dichiarare più frame accettati di quelli catturati.</li>
+<li>L'integrazione accettata non può superare l'integrazione catturata.</li>
+<li>Una CalibrationSet può essere associata a una Acquisition solo tramite una regola di compatibilità esplicita.</li>
+<li>Un ScientificAssetReference deve puntare a un asset esistente nel registro autorevole di AP-013.</li>
+<li>Un ProcessingRunReference deve puntare a una processing run esistente e non inventata dal catalogo.</li>
+<li>Ogni CatalogItem deve conservare <code>sourceSystem</code>, <code>sourceVersion</code> e <code>sourceDigest</code>.</li>
+<li>Ogni SearchDocument deve essere riconducibile a un CatalogItem.</li>
+<li>Ogni IndexBuild deve dichiarare versione algoritmo, digest input e digest output.</li>
+<li>I record in conflitto non possono essere promossi a <code>INDEXED</code> senza una policy esplicita.</li>
+<li><code>unknown</code> è un valore valido; stringa vuota e valore inventato non lo sono.</li>
+<li>Nessuna operazione del catalogo può modificare checksum, locator o provenance autorevoli.</li>
+</ol>
+<h2 id="11-eventi-di-dominio-candidati">11. Eventi di dominio candidati<a class="headerlink" href="#11-eventi-di-dominio-candidati" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>project-created</code>;</li>
+<li><code>campaign-created</code>;</li>
+<li><code>observation-created</code>;</li>
+<li><code>session-linked</code>;</li>
+<li><code>acquisition-normalized</code>;</li>
+<li><code>calibration-associated</code>;</li>
+<li><code>asset-reference-resolved</code>;</li>
+<li><code>processing-reference-resolved</code>;</li>
+<li><code>catalog-item-created</code>;</li>
+<li><code>catalog-item-updated</code>;</li>
+<li><code>catalog-item-superseded</code>;</li>
+<li><code>index-build-started</code>;</li>
+<li><code>index-build-completed</code>;</li>
+<li><code>index-build-failed</code>;</li>
+<li><code>reconciliation-difference-detected</code>;</li>
+<li><code>reconciliation-resolved</code>.</li>
+</ul>
+<p>Gli eventi descrivono cambiamenti del catalogo; non sono comandi verso sistemi operativi o dispositivi fisici.</p>
+<h2 id="12-query-abilitate-dal-modello">12. Query abilitate dal modello<a class="headerlink" href="#12-query-abilitate-dal-modello" title="Permanent link">&para;</a></h2>
+<p>Il modello supporta query come:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>target:LDN1320 date:2026-07 filter:LPRO
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>project:PRJ-2026-001 status:ACTIVE
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>campaign:CAM-2026-001 telescope:"Quattro 200P"
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>session:2026-07-09 quality:ACCEPTED
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>missing:calibration processing:NOT_STARTED
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>assetClass:RAW_ORIGINAL integrity:VERIFIED
+</code></pre></div>
+<p>Le regole sintattiche e il ranking saranno definite in AP14-W04.</p>
+<h2 id="13-aspetti-non-ancora-definiti">13. Aspetti non ancora definiti<a class="headerlink" href="#13-aspetti-non-ancora-definiti" title="Permanent link">&para;</a></h2>
+<p>Questa baseline non stabilisce ancora:</p>
+<ul>
+<li>tecnologia database o motore indice;</li>
+<li>schema fisico;</li>
+<li>API REST o GraphQL;</li>
+<li>serializzazione definitiva JSON/Parquet;</li>
+<li>tassonomia astronomica completa;</li>
+<li>algoritmo definitivo di alias resolution;</li>
+<li>soglie di performance;</li>
+<li>regole finali di compatibilità delle calibrazioni;</li>
+<li>integrazione operativa con PixInsight;</li>
+<li>policy di pubblicazione esterna.</li>
+</ul>
+<p>Questi elementi appartengono ai work package successivi.</p>
+<h2 id="14-acceptance-criteria-ap14-w01">14. Acceptance criteria AP14-W01<a class="headerlink" href="#14-acceptance-criteria-ap14-w01" title="Permanent link">&para;</a></h2>
+<p>AP14-W01 può essere dichiarato completato quando:</p>
+<ul>
+<li>entità e bounded context sono documentati;</li>
+<li>cardinalità principali sono esplicite;</li>
+<li>identificatori candidati sono definiti;</li>
+<li>vocabolari baseline sono versionati;</li>
+<li>regole di integrità concettuali sono approvate;</li>
+<li>boundary con AP-013, Scientific Data Engine e AP-015 è chiaro;</li>
+<li>il modello è accettato come input di AP14-W02.</li>
+</ul>
+<h2 id="15-decisione">15. Decisione<a class="headerlink" href="#15-decisione" title="Permanent link">&para;</a></h2>
+<p>Il modello concettuale <code>SOCS-CM-001</code> è dichiarato <strong>ready for review</strong>.</p>
+<p>Il prossimo incremento è <code>AP14-W02 — Logical Data Model and Identifier Standard</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Torna su
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.footer", "content.code.copy", "search.highlight", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/dsg-enterprise-core.js"></script>
+      
+        <script src="../../../javascripts/nav-scroll.js"></script>
+      
+        <script src="../../../javascripts/homepage-effects.js"></script>
+      
+        <script src="../../../javascripts/page-enhancements.js"></script>
+      
+        <script src="../../../javascripts/dsg-theme-manager.js"></script>
+      
+        <script src="../../../javascripts/observatory-status.js"></script>
+      
+        <script src="../../../javascripts/latest-observation.js"></script>
+      
+        <script src="../../../javascripts/roadmap.js"></script>
+      
+    
+  </body>
+</html>

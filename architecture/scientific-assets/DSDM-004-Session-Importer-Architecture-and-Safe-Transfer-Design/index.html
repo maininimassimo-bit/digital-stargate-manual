@@ -1,0 +1,9054 @@
+
+<!doctype html>
+<html lang="it" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Manuale Tecnico dell'Osservatorio Remoto di Manciano">
+      
+      
+        <meta name="author" content="Massimo Mainini">
+      
+      
+        <link rel="canonical" href="https://maininimassimo-bit.github.io/digital-stargate-manual/architecture/scientific-assets/DSDM-004-Session-Importer-Architecture-and-Safe-Transfer-Design/">
+      
+      
+        <link rel="prev" href="../DSDM-003-Contract-and-Manifest-Model/">
+      
+      
+        <link rel="next" href="../evidence/AP13-W02/E-AP13-W02-01-Source-Authorization-and-Scope-Record/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/dsg-logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>DSDM-004 - Session Importer and Safe Transfer Design - Digital StarGate</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../styles/extra.css">
+    
+      <link rel="stylesheet" href="../../../styles/analytics.css">
+    
+      <link rel="stylesheet" href="../../../styles/roadmap.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dsdm-004-session-importer-architecture-and-safe-transfer-design" class="md-skip">
+          Vai al contenuto
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+    <a href="../../.." title="Digital StarGate" class="md-header__button md-logo" aria-label="Digital StarGate" data-md-component="logo">
+      
+  <img src="../../../assets/images/dsg-logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Digital StarGate
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DSDM-004 - Session Importer and Safe Transfer Design
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Passa alla modalità scura"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passa alla modalità scura" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Passa alla modalità chiara"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passa alla modalità chiara" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../roadmap/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Roadmap
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../project/" class="md-tabs__link">
+          
+  
+  
+  Project Governance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  Architettura
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../status/" class="md-tabs__link">
+          
+  
+  
+  Observatory
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/01-introduzione/" class="md-tabs__link">
+          
+  
+  
+  Generalità
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/03-struttura-cupola/" class="md-tabs__link">
+          
+  
+  
+  Infrastruttura
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/07-cgx-l/" class="md-tabs__link">
+          
+  
+  
+  Sistema astronomico
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/11-nina/" class="md-tabs__link">
+          
+  
+  
+  Software
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/15-automazione/" class="md-tabs__link">
+          
+  
+  
+  Automazione
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/18-emergenze-recovery/" class="md-tabs__link">
+          
+  
+  
+  Sicurezza e manutenzione
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/20-gestione-configurazioni-versioning/" class="md-tabs__link">
+          
+  
+  
+  Governance e continuità
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/25-chiusura-osservatorio/" class="md-tabs__link">
+          
+  
+  
+  Operations avanzate
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/30-metodologia-troubleshooting/" class="md-tabs__link">
+          
+  
+  
+  Affidabilità e governance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/35-schemi-elettrici-cablaggi/" class="md-tabs__link">
+          
+  
+  
+  Engineering e allegati tecnici
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../chapters/40-requisiti-tracciabilita/" class="md-tabs__link">
+          
+  
+  
+  Chiusura e validazione
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../appendices/dati-da-validare/" class="md-tabs__link">
+          
+  
+  
+  Appendici
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Digital StarGate" class="md-nav__button md-logo" aria-label="Digital StarGate" data-md-component="logo">
+      
+  <img src="../../../assets/images/dsg-logo.svg" alt="logo">
+
+    </a>
+    Digital StarGate
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Governance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project Governance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Governance Center
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/ENTERPRISE_ARCHITECTURE_CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Architecture Context
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/REPOSITORY_KNOWLEDGE_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repository Knowledge Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/DEVELOPMENT_WORKFLOW/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/CODING_STANDARDS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coding Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/RELEASE_PLAYBOOK/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Playbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/TECHNICAL_DEBT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Debt Register
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/DECISION_LOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decision Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/BACKLOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Backlog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architettura
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Panoramica della piattaforma
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisioni architetturali
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Decisioni architetturali
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADR-001-Session-Layer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-001 - Session Layer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADR-002-Analytics-Quality-Gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-002 - Analytics Quality Gates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADR-003-Warehouse-Engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-003 - Warehouse Engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADR-005-Weather-Safety-Interlock/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-005 - Weather Safety Interlock
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Governance e metamodel
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Governance e metamodel
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-metamodel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Metamodel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-governance-standard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Data Governance Standard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../traceability-register/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture Traceability Register
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-001-Enterprise-Metamodel-and-Repository-Information-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-001 - Enterprise Metamodel and Repository Information Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-002-Enterprise-Data-Governance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-002 - Enterprise Data Governance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-003-Observatory-Automation-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-003 - Observatory Automation Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-004-Enterprise-Telemetry-and-Observability-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-004 - Enterprise Telemetry and Observability Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-005-Identity-Access-and-Remote-Operations-Security-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-005 - Identity, Access and Remote Operations Security Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-006-Enterprise-Configuration-and-Asset-Management-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-006 - Enterprise Configuration and Asset Management Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-007-Enterprise-Operations-and-Service-Management-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-007 - Enterprise Operations and Service Management Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-008-Enterprise-Integration-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-008 - Enterprise Integration Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-009-Enterprise-Infrastructure-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-009 - Enterprise Infrastructure Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-010-Enterprise-Safety-Assurance-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-010 - Enterprise Safety Assurance Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-011-Enterprise-Analytics-Platform-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-011 - Enterprise Analytics Platform Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-012-Enterprise-Operations-Center-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-012 - Enterprise Operations Center Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packages/AP-013-Scientific-Image-Repository-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-013 - Scientific Image Repository Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scientific Image Repository
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scientific Image Repository
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AP13-W02-Current-State-Scientific-Asset-Inventory-Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Current-State Scientific Asset Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DSDM-001-Scientific-Data-Manager-Conceptual-Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DSDM-001 - Conceptual Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DSDM-002-Scientific-Data-Manager-Logical-Data-Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DSDM-002 - Logical Data Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DSDM-003-Contract-and-Manifest-Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DSDM-003 - Contract and Manifest Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DSDM-004 - Session Importer and Safe Transfer Design
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DSDM-004 - Session Importer and Safe Transfer Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-scopo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Scopo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-contesto-operativo-verificato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Contesto operativo verificato
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Contesto operativo verificato">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-sorgente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Sorgente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-nodo-di-importazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Nodo di importazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Storage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-decisione-architetturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Decisione architetturale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-componenti-logici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Componenti logici
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-moduli-previsti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Moduli previsti
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-flusso-operativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Flusso operativo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-finestra-temporale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Finestra temporale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-precheck-obbligatori" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Precheck obbligatori
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-verifica-che-nina-non-stia-acquisendo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Verifica che NINA non stia acquisendo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-stability-analyzer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Stability Analyzer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-parsing-filename-nina" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Parsing filename NINA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-raggruppamento-in-sessioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Raggruppamento in sessioni
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Raggruppamento in sessioni">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-chiave-candidata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Chiave candidata
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-regole" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Regole
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-struttura-destinazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Struttura destinazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Struttura destinazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#naming-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Naming directory
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-dry-run-e-whatif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Dry-run e WhatIf
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-transfer-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Transfer Plan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-staging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Staging
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-copy-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Copy Engine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-collision-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Collision policy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. Collision policy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caso-a-destinazione-assente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso A — destinazione assente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-b-stesso-nome-e-stessa-dimensione-hash-non-disponibile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso B — stesso nome e stessa dimensione, hash non disponibile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-c-stesso-nome-e-stesso-hash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso C — stesso nome e stesso hash
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-d-stesso-nome-ma-dimensionehash-differente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso D — stesso nome ma dimensione/hash differente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-e-stesso-hash-ma-nome-differente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso E — stesso hash ma nome differente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-verification-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Verification Engine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="19. Verification Engine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v1-count-and-bytes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V1 — Count and bytes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2-sample-hash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V2 — Sample hash
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v3-full-hash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V3 — Full hash
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-publish" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Publish
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-resume-e-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. Resume e recovery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-idempotenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. Idempotenza
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-locking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23. Locking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-manifest-e-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24. Manifest e output
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        25. Logging
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-sicurezza-smb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        26. Sicurezza SMB
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-stop-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        27. Stop conditions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#28-failure-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        28. Failure handling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#29-configurazione-candidata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        29. Configurazione candidata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30-interfaccia-powershell-candidata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        30. Interfaccia PowerShell candidata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-test-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        31. Test plan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="31. Test plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fase-t0-unit-test-parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase T0 — unit test parser
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-t1-filesystem-simulato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase T1 — filesystem simulato
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-t2-eagle-connectivity-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase T2 — EAGLE connectivity only
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-t3-dry-run-su-sessione-reale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase T3 — dry-run su sessione reale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-t4-copia-in-area-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase T4 — copia in area test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-t5-pilot-archivio-attivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase T5 — pilot archivio attivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-evidence-previste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        32. Evidence previste
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-validation-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33. Validation matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-acceptance-criteria-dsdm-004" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34. Acceptance criteria DSDM-004
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35-stato-corrente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        35. Stato corrente
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36-prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        36. Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../evidence/AP13-W02/E-AP13-W02-01-Source-Authorization-and-Scope-Record/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source Authorization and Scope Record
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation e Architecture Review
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validation e Architecture Review
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/ARB-012-Validation-Campaign/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-012 - Validation Campaign
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/ARB-012-Integrated-Non-Operational-Execution-Evidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-012 - Integrated Non-Operational Evidence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/ARB-012-C04-Closure-Plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-012-C04 - Closure Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/ARB-012-C04-W06-ENV011-Execution-Result/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-012-C04 - ENV-011 Execution Result
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/AP-013-Session-Discovery-Execution-Evidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-013 - Session Discovery Evidence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/AP-013-Transfer-Readiness-Gate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AP-013 - Transfer Readiness Gate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reviews/ARB-012-Final-Re-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-012 - Final Re-Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Operations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Enterprise Operations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-operations-and-service-management-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operations and Service Management Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Operations Center
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Enterprise Operations Center
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-operations-center-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operations Center Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operations-command-authorization-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Command Authorization Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../alarm-and-incident-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alarm & Incident Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operational-runbook-standard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operational Runbook Standard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operations-responsibility-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operations Responsibility Matrix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Integration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Enterprise Integration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-integration-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Integration Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integration-contract-catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Contract Catalog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Enterprise Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-infrastructure-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Infrastructure Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Safety Assurance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Enterprise Safety Assurance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-safety-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Safety Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../safety-hazard-and-state-catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Safety Hazard and State Catalog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Analytics Platform
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Enterprise Analytics Platform
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-analytics-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Analytics Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../analytics-data-pipeline-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analytics Data Pipeline Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../analytics-kpi-catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analytics KPI Catalog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../analytics-governance-standard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analytics Governance Standard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_12" id="__nav_4_12_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Digital Platforms
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Digital Platforms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-stargate-portal-vision/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Digital StarGate Portal Vision
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scientific-image-lifecycle-and-processing-provenance-vision/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scientific Image Lifecycle and Processing Provenance Vision
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scientific-knowledge-layer-vision/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scientific Knowledge Layer Vision
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_13" id="__nav_4_13_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observatory Automation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Observatory Automation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../observatory-automation-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_14" id="__nav_4_14_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Telemetry and Observability
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Telemetry and Observability
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-observability-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Observability Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_15" id="__nav_4_15_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity and Remote Security
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Identity and Remote Security
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-identity-and-trust-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Identity and Trust Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_16" id="__nav_4_16_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration and Asset Management
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_16">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Configuration and Asset Management
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enterprise-configuration-and-asset-management-reference-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Configuration and Asset Management Reference Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_17" id="__nav_4_17_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura del Warehouse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architettura del Warehouse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../warehouse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Panoramica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../warehouse/data-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso dei dati
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../warehouse/datasets-and-schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dataset e schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../warehouse/validation-and-quality-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validazione e quality gate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../warehouse/build-and-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build e operatività
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_18" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_18" id="__nav_4_18_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assessment tecnici
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_18_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_18">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Assessment tecnici
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/EA-001-Environment-Repository-Assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EA-001 - Ambiente e repository
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/EA-002-Integrated-Repository-and-Warehouse-Assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EA-002 - Repository e Warehouse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/PAA-001-Project-Architecture-Assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PAA-001 - Project Architecture Assessment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/PAA-002-Platform-Capability-Gap-Assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PAA-002 - Platform Capability Gap Assessment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-002-PAA-002-Independent-Architecture-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-002 - Independent Review of PAA-002
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-003-AP-001-Independent-Architecture-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-003 - Independent Review of AP-001
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-004-AP-002-Independent-Architecture-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-004 - Independent Review of AP-002
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-005-AP-003-Independent-Architecture-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-005 - Independent Review of AP-003
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-006-AP-004-Independent-Architecture-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-006 - Independent Review of AP-004
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-007-AP-005-Identity-Access-and-Remote-Operations-Security-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-007 - Independent Review of AP-005
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-008-AP-006-Enterprise-Configuration-and-Asset-Management-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-008 - Independent Review of AP-006
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-009-AP-009-Independent-Architecture-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-009 - Independent Review of AP-009
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-010-AP-010-Independent-Architecture-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-010 - Independent Review of AP-010
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-011-AP-011-Independent-Architecture-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-011 - Independent Review of AP-011
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ARB-012-AP-012-Independent-Architecture-Review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ARB-012 - Independent Review of AP-012
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ABC-001-Architecture-Baseline-Certificate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ABC-001 - Architecture Baseline Certificate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ABC-001-Evidence-Annex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ABC-001 - Evidence Annex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/AMP-001-Architecture-Master-Plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AMP-001 - Architecture Master Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/AMP-002-Architecture-Program-Roadmap-Realignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AMP-002 - Architecture Program Roadmap Realignment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessments/ADR-004-Operational-Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-004 - Operational Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observatory
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Observatory
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../status/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observatory Status
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../session-reports/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Session Reports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generalità
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Generalità
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/01-introduzione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/02-architettura-generale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura generale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastruttura
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Infrastruttura
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/03-struttura-cupola/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Struttura della cupola
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/04-impianto-elettrico/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Impianto elettrico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/05-infrastruttura-rete/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastruttura di rete
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/06-eagle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Computer EAGLE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema astronomico
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sistema astronomico
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/07-cgx-l/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Montatura CGX-L
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/08-c8-xlt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Celestron C8 XLT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/09-quattro-200p/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sky-Watcher Quattro 200P
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/10-camere-treno-ottico/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Camere e treno ottico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Software
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/11-nina/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    N.I.N.A.
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/12-phd2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PHD2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/13-cpwi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CPWI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/14-ascom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASCOM Platform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automazione
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Automazione
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/15-automazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura dell'automazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/16-sop-avvio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Avvio dell'osservatorio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/17-acquisizione-automatica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Acquisizione automatica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sicurezza e manutenzione
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sicurezza e manutenzione
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/18-emergenze-recovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emergenze e recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/19-manutenzione-preventiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manutenzione preventiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Governance e continuità
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Governance e continuità
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/20-gestione-configurazioni-versioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestione configurazioni e versioning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/21-backup-disaster-recovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup e Disaster Recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/22-inventario-asset-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventario e Asset Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/23-collaudo-validazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Collaudo e validazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/24-sicurezza-informatica-accessi-remoti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sicurezza informatica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operations avanzate
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Operations avanzate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/25-chiusura-osservatorio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chiusura dell'osservatorio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/26-monitoraggio-meteo-sicurezza-ambientale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoraggio meteo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/27-sistema-allsky/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema AllSky
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/28-gestione-dati-archiviazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestione dati e archiviazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/29-reportistica-operativa-kpi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reportistica e KPI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Affidabilità e governance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Affidabilità e governance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/30-metodologia-troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metodologia troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/31-problem-management-post-mortem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Problem Management e post-mortem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/32-ricambi-obsolescenza/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ricambi e obsolescenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/33-roadmap-evolutiva/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap evolutiva
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/34-gestione-documentale-release/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestione documentale e release
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engineering e allegati tecnici
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Engineering e allegati tecnici
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/35-schemi-elettrici-cablaggi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schemi elettrici e cablaggi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/36-schemi-rete-indirizzamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schemi di rete e indirizzamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/37-configurazioni-software-parametri/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurazioni software e parametri
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/38-registri-checklist-modelli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registri, checklist e modelli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/39-glossario-acronimi-riferimenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossario, acronimi e riferimenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chiusura e validazione
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chiusura e validazione
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/40-requisiti-tracciabilita/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requisiti e tracciabilità
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/41-analisi-rischi-fmea/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analisi rischi e FMEA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/42-ruoli-formazione-handover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ruoli, formazione e handover
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/43-accettazione-release-v1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accettazione e release 1.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../chapters/44-allegati-piano-completamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Allegati e piano di completamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendici
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendici
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/dati-da-validare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dati da validare
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/registro-revisioni/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registro revisioni
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-scopo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Scopo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-contesto-operativo-verificato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Contesto operativo verificato
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Contesto operativo verificato">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-sorgente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Sorgente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-nodo-di-importazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Nodo di importazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Storage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-decisione-architetturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Decisione architetturale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-componenti-logici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Componenti logici
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-moduli-previsti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Moduli previsti
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-flusso-operativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Flusso operativo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-finestra-temporale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Finestra temporale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-precheck-obbligatori" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Precheck obbligatori
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-verifica-che-nina-non-stia-acquisendo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Verifica che NINA non stia acquisendo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-stability-analyzer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Stability Analyzer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-parsing-filename-nina" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Parsing filename NINA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-raggruppamento-in-sessioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Raggruppamento in sessioni
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Raggruppamento in sessioni">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-chiave-candidata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Chiave candidata
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-regole" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Regole
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-struttura-destinazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Struttura destinazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Struttura destinazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#naming-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Naming directory
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-dry-run-e-whatif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Dry-run e WhatIf
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-transfer-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Transfer Plan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-staging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Staging
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-copy-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Copy Engine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-collision-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Collision policy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. Collision policy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caso-a-destinazione-assente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso A — destinazione assente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-b-stesso-nome-e-stessa-dimensione-hash-non-disponibile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso B — stesso nome e stessa dimensione, hash non disponibile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-c-stesso-nome-e-stesso-hash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso C — stesso nome e stesso hash
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-d-stesso-nome-ma-dimensionehash-differente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso D — stesso nome ma dimensione/hash differente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-e-stesso-hash-ma-nome-differente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso E — stesso hash ma nome differente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-verification-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Verification Engine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="19. Verification Engine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v1-count-and-bytes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V1 — Count and bytes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2-sample-hash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V2 — Sample hash
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v3-full-hash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V3 — Full hash
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-publish" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Publish
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-resume-e-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. Resume e recovery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-idempotenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. Idempotenza
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-locking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23. Locking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-manifest-e-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24. Manifest e output
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        25. Logging
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-sicurezza-smb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        26. Sicurezza SMB
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-stop-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        27. Stop conditions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#28-failure-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        28. Failure handling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#29-configurazione-candidata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        29. Configurazione candidata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30-interfaccia-powershell-candidata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        30. Interfaccia PowerShell candidata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-test-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        31. Test plan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="31. Test plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fase-t0-unit-test-parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase T0 — unit test parser
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-t1-filesystem-simulato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase T1 — filesystem simulato
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-t2-eagle-connectivity-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase T2 — EAGLE connectivity only
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-t3-dry-run-su-sessione-reale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase T3 — dry-run su sessione reale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-t4-copia-in-area-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase T4 — copia in area test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-t5-pilot-archivio-attivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase T5 — pilot archivio attivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-evidence-previste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        32. Evidence previste
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-validation-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33. Validation matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-acceptance-criteria-dsdm-004" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34. Acceptance criteria DSDM-004
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35-stato-corrente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        35. Stato corrente
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36-prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        36. Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dsdm-004-session-importer-architecture-and-safe-transfer-design">DSDM-004 — Session Importer Architecture and Safe Transfer Design<a class="headerlink" href="#dsdm-004-session-importer-architecture-and-safe-transfer-design" title="Permanent link">&para;</a></h1>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Valore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Architecture Package</td>
+<td>AP-013 — Scientific Image Repository Architecture</td>
+</tr>
+<tr>
+<td>Documento</td>
+<td>Session Importer Architecture and Safe Transfer Design</td>
+</tr>
+<tr>
+<td>Identificativo</td>
+<td>DSDM-004</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>04/08/2026</td>
+</tr>
+<tr>
+<td>Autorità</td>
+<td>Digital StarGate Chief Architect</td>
+</tr>
+<tr>
+<td>Sponsor</td>
+<td>Project Owner / Architecture Sponsor — Massimo Mainini</td>
+</tr>
+<tr>
+<td>Stato</td>
+<td>Architecture baseline — implementation not started</td>
+</tr>
+<tr>
+<td>Dipendenze</td>
+<td>DSDM-001; DSDM-002; DSDM-003; SIR-INV-001; E-AP13-W02-01</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1-scopo">1. Scopo<a class="headerlink" href="#1-scopo" title="Permanent link">&para;</a></h2>
+<p>DSDM-004 definisce l'architettura del componente incaricato di individuare, classificare e trasferire in sicurezza le sessioni NINA dall'EAGLE verso l'archivio attivo collegato al PC principale.</p>
+<p>Il design copre:</p>
+<ul>
+<li>connettività PC principale → EAGLE;</li>
+<li>discovery read-only della sorgente;</li>
+<li>verifica di stabilità dei file;</li>
+<li>parsing dei filename NINA;</li>
+<li>raggruppamento per target e sessione;</li>
+<li>preparazione della struttura di destinazione;</li>
+<li>dry-run e <code>-WhatIf</code>;</li>
+<li>staging;</li>
+<li>copia;</li>
+<li>verifica;</li>
+<li>gestione collisioni;</li>
+<li>recovery e resume;</li>
+<li>manifest, log ed evidence;</li>
+<li>stop conditions;</li>
+<li>progressione controllata dal pilot alla copia reale.</li>
+</ul>
+<p>Il documento non implementa ancora script, task schedulati, share SMB o trasferimenti reali.</p>
+<h2 id="2-contesto-operativo-verificato">2. Contesto operativo verificato<a class="headerlink" href="#2-contesto-operativo-verificato" title="Permanent link">&para;</a></h2>
+<h3 id="21-sorgente">2.1 Sorgente<a class="headerlink" href="#21-sorgente" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Valore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Host</td>
+<td><code>EAGLE30154</code></td>
+</tr>
+<tr>
+<td>Root NINA</td>
+<td><code>D:\Images NINA\Target</code></td>
+</tr>
+<tr>
+<td>Accesso previsto</td>
+<td>share SMB read-only dal PC principale</td>
+</tr>
+<tr>
+<td>Rete Ethernet candidata</td>
+<td><code>192.168.1.144/24</code></td>
+</tr>
+<tr>
+<td>Rete Wi-Fi alternativa</td>
+<td><code>192.168.1.184/24</code></td>
+</tr>
+<tr>
+<td>Finestra preferita</td>
+<td>07:30–08:30 ora locale</td>
+</tr>
+<tr>
+<td>Spegnimento normale EAGLE</td>
+<td>circa 08:30</td>
+</tr>
+<tr>
+<td>NINA attiva durante il trasferimento</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h3 id="22-nodo-di-importazione">2.2 Nodo di importazione<a class="headerlink" href="#22-nodo-di-importazione" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Valore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Host</td>
+<td><code>WIN-QOOF3903TQS</code></td>
+</tr>
+<tr>
+<td>Sistema operativo</td>
+<td>Windows 11 Pro</td>
+</tr>
+<tr>
+<td>Rete candidata verso EAGLE</td>
+<td><code>192.168.1.145/24</code></td>
+</tr>
+<tr>
+<td>Ruolo</td>
+<td>orchestrazione, staging, verifica e scrittura sugli storage locali</td>
+</tr>
+</tbody>
+</table>
+<h3 id="23-storage">2.3 Storage<a class="headerlink" href="#23-storage" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Volume logico</th>
+<th>Ruolo</th>
+<th>Regola iniziale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EAGLE <code>D:\Images NINA\Target</code></td>
+<td>Acquisition Source</td>
+<td>sola lettura</td>
+</tr>
+<tr>
+<td>PC <code>D:</code> WD Elements 2621</td>
+<td>Historical Archive</td>
+<td>nessuna modifica automatica</td>
+</tr>
+<tr>
+<td>PC <code>F:</code> WD Elements 2620</td>
+<td>Active Archive</td>
+<td>destinazione candidata; solo dry-run finché non autorizzata</td>
+</tr>
+<tr>
+<td>PC <code>E:</code></td>
+<td>Calibration Library</td>
+<td>nessuna riorganizzazione automatica iniziale</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-decisione-architetturale">3. Decisione architetturale<a class="headerlink" href="#3-decisione-architetturale" title="Permanent link">&para;</a></h2>
+<p>Il trasferimento sarà <strong>pull-based</strong>:</p>
+<ul>
+<li>il PC principale legge una share autorizzata sull'EAGLE;</li>
+<li>l'EAGLE non ottiene accesso di scrittura generale agli SSD del PC;</li>
+<li>il PC verifica destinazione, spazio, finestra e stabilità prima di iniziare;</li>
+<li>la sorgente resta autorevole fino al completamento della verifica;</li>
+<li>nessuna cancellazione automatica è consentita nel pilot.</li>
+</ul>
+<p>Questa scelta riduce l'esposizione delle credenziali e mantiene il controllo della destinazione sul nodo che ospita gli storage.</p>
+<h2 id="4-componenti-logici">4. Componenti logici<a class="headerlink" href="#4-componenti-logici" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>flowchart LR
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  SCH[Scheduler or Manual Trigger]
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  ORC[Session Import Orchestrator]
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  NET[Connectivity Precheck]
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  SRC[Read-only EAGLE Source Adapter]
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  PAR[NINA Filename Parser]
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  GRP[Session Grouper]
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  PLN[Transfer Planner]
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  STG[Staging Manager]
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  CPY[Copy Engine]
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  VER[Verification Engine]
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>  PUB[Destination Publisher]
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>  MAN[Manifest and Evidence Writer]
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>  SRCFS[(EAGLE Source)]
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>  DSTFS[(Active Archive F:)]
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>  SCH --&gt; ORC
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>  ORC --&gt; NET
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>  NET --&gt; SRC
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>  SRC --&gt; SRCFS
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>  SRC --&gt; PAR
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>  PAR --&gt; GRP
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>  GRP --&gt; PLN
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>  PLN --&gt; STG
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>  STG --&gt; CPY
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>  CPY --&gt; DSTFS
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>  CPY --&gt; VER
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>  VER --&gt; PUB
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>  ORC --&gt; MAN
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>  PAR --&gt; MAN
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>  PLN --&gt; MAN
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>  VER --&gt; MAN
+</code></pre></div>
+<h2 id="5-moduli-previsti">5. Moduli previsti<a class="headerlink" href="#5-moduli-previsti" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Modulo</th>
+<th>Responsabilità</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Trigger</td>
+<td>avvio manuale o schedulato</td>
+</tr>
+<tr>
+<td>Connectivity Precheck</td>
+<td>DNS, ping opzionale, TCP 445, share access</td>
+</tr>
+<tr>
+<td>Source Adapter</td>
+<td>enumerazione read-only dei file</td>
+</tr>
+<tr>
+<td>Stability Analyzer</td>
+<td>verifica file non più in scrittura</td>
+</tr>
+<tr>
+<td>Filename Parser</td>
+<td>estrazione metadata NINA</td>
+</tr>
+<tr>
+<td>Session Grouper</td>
+<td>raggruppamento per target/data/configurazione</td>
+</tr>
+<tr>
+<td>Transfer Planner</td>
+<td>calcolo destinazioni e azioni</td>
+</tr>
+<tr>
+<td>Collision Analyzer</td>
+<td>confronto con file già esistenti</td>
+</tr>
+<tr>
+<td>Staging Manager</td>
+<td>directory temporanea controllata</td>
+</tr>
+<tr>
+<td>Copy Engine</td>
+<td>copia con retry e progress</td>
+</tr>
+<tr>
+<td>Verification Engine</td>
+<td>count, byte e hash opzionali</td>
+</tr>
+<tr>
+<td>Publisher</td>
+<td>promozione atomica/logica da staging a destinazione</td>
+</tr>
+<tr>
+<td>Manifest Writer</td>
+<td>session, asset e transfer manifest</td>
+</tr>
+<tr>
+<td>Evidence Writer</td>
+<td>log, summary e checksum degli output</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-flusso-operativo">6. Flusso operativo<a class="headerlink" href="#6-flusso-operativo" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>TRIGGER
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>→ PRECHECK
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>→ DISCOVERY
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>→ STABILITY ANALYSIS
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>→ PARSING
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>→ GROUPING
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>→ PLAN
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>→ DRY-RUN REVIEW
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>→ STAGING
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>→ COPY
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>→ VERIFY
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>→ PUBLISH
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>→ RECORD COMPLETION
+</code></pre></div>
+<p>Nel pilot l'esecuzione si arresta dopo <code>DRY-RUN REVIEW</code>.</p>
+<h2 id="7-finestra-temporale">7. Finestra temporale<a class="headerlink" href="#7-finestra-temporale" title="Permanent link">&para;</a></h2>
+<p>Valori iniziali:</p>
+<table>
+<thead>
+<tr>
+<th>Parametro</th>
+<th>Valore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>notBeforeLocal</code></td>
+<td>07:35</td>
+</tr>
+<tr>
+<td><code>doNotStartAfterLocal</code></td>
+<td>08:10</td>
+</tr>
+<tr>
+<td><code>mustFinishBeforeLocal</code></td>
+<td>08:25</td>
+</tr>
+<tr>
+<td><code>expectedEagleShutdown</code></td>
+<td>08:30</td>
+</tr>
+<tr>
+<td><code>minimumFileStableMinutes</code></td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+<p>Regole:</p>
+<ul>
+<li>prima delle 07:35: nessun avvio;</li>
+<li>dopo le 08:10: nessun nuovo trasferimento;</li>
+<li>entro le 08:25: il processo deve terminare o fermarsi in stato sicuro;</li>
+<li>il tempo stimato di copia deve essere inferiore al tempo residuo con margine configurabile;</li>
+<li>il calcolo del tempo stimato usa throughput storico solo dopo misure reali.</li>
+</ul>
+<h2 id="8-precheck-obbligatori">8. Precheck obbligatori<a class="headerlink" href="#8-precheck-obbligatori" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Controllo</th>
+<th>Failure action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PRE-01</td>
+<td>hostname EAGLE risolvibile oppure IP autorizzato disponibile</td>
+<td>stop</td>
+</tr>
+<tr>
+<td>PRE-02</td>
+<td>TCP 445 raggiungibile</td>
+<td>stop</td>
+</tr>
+<tr>
+<td>PRE-03</td>
+<td>share configurata e accessibile</td>
+<td>stop</td>
+</tr>
+<tr>
+<td>PRE-04</td>
+<td>accesso sorgente read-only</td>
+<td>stop se scrittura necessaria</td>
+</tr>
+<tr>
+<td>PRE-05</td>
+<td>root attesa disponibile</td>
+<td>stop</td>
+</tr>
+<tr>
+<td>PRE-06</td>
+<td>destinazione presente</td>
+<td>stop</td>
+</tr>
+<tr>
+<td>PRE-07</td>
+<td>identità volume destinazione coerente</td>
+<td>stop</td>
+</tr>
+<tr>
+<td>PRE-08</td>
+<td>spazio libero sufficiente</td>
+<td>stop</td>
+</tr>
+<tr>
+<td>PRE-09</td>
+<td>finestra temporale valida</td>
+<td>stop</td>
+</tr>
+<tr>
+<td>PRE-10</td>
+<td>lock di esecuzione non già presente</td>
+<td>stop</td>
+</tr>
+<tr>
+<td>PRE-11</td>
+<td>nessuna acquisizione NINA in corso</td>
+<td>stop</td>
+</tr>
+<tr>
+<td>PRE-12</td>
+<td>output directory per log/manifest scrivibile</td>
+<td>stop</td>
+</tr>
+</tbody>
+</table>
+<p>L'uso del ping è diagnostico; la decisione operativa si basa sulla raggiungibilità del servizio richiesto.</p>
+<h2 id="9-verifica-che-nina-non-stia-acquisendo">9. Verifica che NINA non stia acquisendo<a class="headerlink" href="#9-verifica-che-nina-non-stia-acquisendo" title="Permanent link">&para;</a></h2>
+<p>Meccanismi candidati, in ordine di preferenza:</p>
+<ol>
+<li>marker di sessione completata prodotto da NINA o da uno script post-sequence;</li>
+<li>verifica API o stato applicativo, se disponibile e governato;</li>
+<li>controllo process + stabilità file;</li>
+<li>stabilità temporale dell'intera source;</li>
+<li>conferma manuale nel pilot.</li>
+</ol>
+<p>Nessun singolo controllo basato solo sul nome del processo è considerato sufficiente per la copia reale.</p>
+<h2 id="10-stability-analyzer">10. Stability Analyzer<a class="headerlink" href="#10-stability-analyzer" title="Permanent link">&para;</a></h2>
+<p>Un file è candidato stabile quando:</p>
+<ul>
+<li>la dimensione non cambia per almeno <code>minimumFileStableMinutes</code>;</li>
+<li><code>LastWriteTime</code> non cambia nello stesso intervallo;</li>
+<li>il file può essere aperto in lettura senza share violation;</li>
+<li>non è un file temporaneo o parziale noto;</li>
+<li>appartiene a un'estensione autorizzata;</li>
+<li>la sessione non presenta nuovi file durante la finestra di osservazione.</li>
+</ul>
+<p>Stati:</p>
+<p><code>NOT_CHECKED</code>, <code>GROWING</code>, <code>LOCKED</code>, <code>STABLE</code>, <code>EXCLUDED</code>, <code>ERROR</code>.</p>
+<h2 id="11-parsing-filename-nina">11. Parsing filename NINA<a class="headerlink" href="#11-parsing-filename-nina" title="Permanent link">&para;</a></h2>
+<p>Il parser segue DSDM-002 e DSDM-003.</p>
+<p>Pattern:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>IMAGETYPE_BINNING_EXPOSURETIMEs_GAIN_OFFSET_TARGETNAME_TELESCOPE__SENSORTEMPC_FILTER_FRAMENR_DATETIME_FWHM_FWHM_Fok_FOCUSERPOSITION
+</code></pre></div>
+<p>Strategia:</p>
+<ol>
+<li>estrazione da destra dei marker <code>_Fok_</code> e <code>_FWHM_</code>;</li>
+<li>estrazione datetime, frame number, filter e temperatura;</li>
+<li>estrazione da sinistra dei campi a cardinalità nota;</li>
+<li>risoluzione della porzione target/telescope tramite alias registry;</li>
+<li>stato <code>AMBIGUOUS</code> quando non esiste una separazione univoca;</li>
+<li>conservazione del filename originale e dei token osservati.</li>
+</ol>
+<p>Il parser deve essere versionato e testato con filename reali e casi patologici.</p>
+<h2 id="12-raggruppamento-in-sessioni">12. Raggruppamento in sessioni<a class="headerlink" href="#12-raggruppamento-in-sessioni" title="Permanent link">&para;</a></h2>
+<h3 id="121-chiave-candidata">12.1 Chiave candidata<a class="headerlink" href="#121-chiave-candidata" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>normalized target
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>+ observing date
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>+ instrument configuration candidate
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>+ image acquisition continuity window
+</code></pre></div>
+<h3 id="122-regole">12.2 Regole<a class="headerlink" href="#122-regole" title="Permanent link">&para;</a></h3>
+<ul>
+<li>sessioni che attraversano la mezzanotte possono appartenere alla stessa notte osservativa;</li>
+<li>sessioni su più notti restano separate ma collegate allo stesso progetto;</li>
+<li>target ambiguo produce gruppo <code>UNRESOLVED</code>;</li>
+<li>frame calibration possono essere associati alla sessione o alla library, ma non spostati automaticamente nel pilot;</li>
+<li>la regola definitiva della notte osservativa deve essere configurabile.</li>
+</ul>
+<h2 id="13-struttura-destinazione">13. Struttura destinazione<a class="headerlink" href="#13-struttura-destinazione" title="Permanent link">&para;</a></h2>
+<p>Baseline candidata:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&lt;ArchiveRoot&gt;\&lt;Target&gt;\
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├── Light\
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>│   └── YYYY-MM-DD\
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>├── Dark\
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>│   └── YYYY-MM-DD\
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>├── Flat\
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>│   └── YYYY-MM-DD\
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>├── Bias\
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>│   └── YYYY-MM-DD\
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>├── DarkFlat\
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>│   └── YYYY-MM-DD\
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>├── 12_Processing\
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>└── _Inventory\
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    └── &lt;SessionId&gt;\
+</code></pre></div>
+<p>La data può essere disabilitata per compatibilità con la struttura storica, ma nel pilot sarà mostrata nel piano prima di qualsiasi creazione.</p>
+<h3 id="naming-directory">Naming directory<a class="headerlink" href="#naming-directory" title="Permanent link">&para;</a></h3>
+<ul>
+<li>il nome target normalizzato non sostituisce l'alias originale nel manifest;</li>
+<li>caratteri non validi Windows vengono sanitizzati secondo regola versionata;</li>
+<li>nomi riservati Windows vengono rifiutati o trasformati in modo esplicito;</li>
+<li>collisioni tra target normalizzati richiedono review.</li>
+</ul>
+<h2 id="14-dry-run-e-whatif">14. Dry-run e WhatIf<a class="headerlink" href="#14-dry-run-e-whatif" title="Permanent link">&para;</a></h2>
+<p>Modalità obbligatoria iniziale:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">Invoke-DSGSessionImport</span> <span class="n">-Mode</span> <span class="n">DryRun</span>
+</code></pre></div>
+<p>o equivalente:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">Invoke-DSGSessionImport</span> <span class="n">-WhatIf</span>
+</code></pre></div>
+<p>Il dry-run può:</p>
+<ul>
+<li>leggere la sorgente;</li>
+<li>eseguire precheck;</li>
+<li>verificare stabilità;</li>
+<li>analizzare filename;</li>
+<li>generare session grouping;</li>
+<li>calcolare spazio richiesto;</li>
+<li>simulare directory e destinazioni;</li>
+<li>classificare collisioni;</li>
+<li>generare manifest e report.</li>
+</ul>
+<p>Non può:</p>
+<ul>
+<li>creare cartelle finali;</li>
+<li>copiare file scientifici;</li>
+<li>modificare timestamp;</li>
+<li>spostare o cancellare file;</li>
+<li>scrivere sulla sorgente;</li>
+<li>aggiornare un catalogo operativo.</li>
+</ul>
+<h2 id="15-transfer-plan">15. Transfer Plan<a class="headerlink" href="#15-transfer-plan" title="Permanent link">&para;</a></h2>
+<p>Ogni file produce un'azione pianificata:</p>
+<table>
+<thead>
+<tr>
+<th>Azione</th>
+<th>Significato</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>COPY_NEW</code></td>
+<td>destinazione assente</td>
+</tr>
+<tr>
+<td><code>SKIP_CONFIRMED_DUPLICATE</code></td>
+<td>contenuto identico verificato</td>
+</tr>
+<tr>
+<td><code>REVIEW_DUPLICATE_CANDIDATE</code></td>
+<td>nome/dimensione compatibili, hash assente</td>
+</tr>
+<tr>
+<td><code>BLOCK_CONFLICT</code></td>
+<td>stesso path, contenuto differente o non verificabile</td>
+</tr>
+<tr>
+<td><code>EXCLUDE</code></td>
+<td>regola di esclusione</td>
+</tr>
+<tr>
+<td><code>QUARANTINE</code></td>
+<td>parse o integrità problematica</td>
+</tr>
+<tr>
+<td><code>DEFER_UNSTABLE</code></td>
+<td>file non stabile</td>
+</tr>
+</tbody>
+</table>
+<p>Il piano include source, destination, size, parse result, session, action, reason e verification mode.</p>
+<h2 id="16-staging">16. Staging<a class="headerlink" href="#16-staging" title="Permanent link">&para;</a></h2>
+<p>Percorso logico candidato:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>&lt;ActiveArchiveRoot&gt;\_DSG_STAGING\&lt;TransferRunId&gt;\
+</code></pre></div>
+<p>Regole:</p>
+<ul>
+<li>staging sullo stesso volume della destinazione finale quando possibile;</li>
+<li>nessuna visibilità come sessione completata prima della verifica;</li>
+<li>directory nominata con transfer run ID;</li>
+<li>manifest e lock inclusi;</li>
+<li>cleanup staging solo dopo verifica o con comando esplicito;</li>
+<li>staging parziale conservato per resume e diagnosi.</li>
+</ul>
+<h2 id="17-copy-engine">17. Copy Engine<a class="headerlink" href="#17-copy-engine" title="Permanent link">&para;</a></h2>
+<p>Requisiti:</p>
+<ul>
+<li>copia binaria senza trasformazione;</li>
+<li>nessuna sovrascrittura silenziosa;</li>
+<li>buffer e parallelismo configurabili;</li>
+<li>default conservativo nel pilot;</li>
+<li>retry limitato per errori transitori;</li>
+<li>nessun retry infinito;</li>
+<li>progress registrato per file;</li>
+<li>source e destination size registrate;</li>
+<li>timestamp preservation policy esplicita;</li>
+<li>supporto resume tramite manifest, non tramite assunzioni sul path.</li>
+</ul>
+<h2 id="18-collision-policy">18. Collision policy<a class="headerlink" href="#18-collision-policy" title="Permanent link">&para;</a></h2>
+<h3 id="caso-a-destinazione-assente">Caso A — destinazione assente<a class="headerlink" href="#caso-a-destinazione-assente" title="Permanent link">&para;</a></h3>
+<p><code>COPY_NEW</code>.</p>
+<h3 id="caso-b-stesso-nome-e-stessa-dimensione-hash-non-disponibile">Caso B — stesso nome e stessa dimensione, hash non disponibile<a class="headerlink" href="#caso-b-stesso-nome-e-stessa-dimensione-hash-non-disponibile" title="Permanent link">&para;</a></h3>
+<p><code>REVIEW_DUPLICATE_CANDIDATE</code> oppure sample hash, se autorizzato.</p>
+<h3 id="caso-c-stesso-nome-e-stesso-hash">Caso C — stesso nome e stesso hash<a class="headerlink" href="#caso-c-stesso-nome-e-stesso-hash" title="Permanent link">&para;</a></h3>
+<p><code>SKIP_CONFIRMED_DUPLICATE</code>, registrando entrambi i locator.</p>
+<h3 id="caso-d-stesso-nome-ma-dimensionehash-differente">Caso D — stesso nome ma dimensione/hash differente<a class="headerlink" href="#caso-d-stesso-nome-ma-dimensionehash-differente" title="Permanent link">&para;</a></h3>
+<p><code>BLOCK_CONFLICT</code>. Nessuna rinomina automatica nel pilot.</p>
+<h3 id="caso-e-stesso-hash-ma-nome-differente">Caso E — stesso hash ma nome differente<a class="headerlink" href="#caso-e-stesso-hash-ma-nome-differente" title="Permanent link">&para;</a></h3>
+<p><code>DUPLICATE_CONTENT_CANDIDATE</code>, senza cancellazione.</p>
+<h2 id="19-verification-engine">19. Verification Engine<a class="headerlink" href="#19-verification-engine" title="Permanent link">&para;</a></h2>
+<p>Livelli:</p>
+<h3 id="v1-count-and-bytes">V1 — Count and bytes<a class="headerlink" href="#v1-count-and-bytes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>numero file sorgente pianificati = numero file copiati;</li>
+<li>somma byte sorgente = somma byte destinazione;</li>
+<li>ogni file ha size corrispondente.</li>
+</ul>
+<h3 id="v2-sample-hash">V2 — Sample hash<a class="headerlink" href="#v2-sample-hash" title="Permanent link">&para;</a></h3>
+<ul>
+<li>hash su campione configurato;</li>
+<li>campione e metodo registrati.</li>
+</ul>
+<h3 id="v3-full-hash">V3 — Full hash<a class="headerlink" href="#v3-full-hash" title="Permanent link">&para;</a></h3>
+<ul>
+<li>hash di tutti i file trasferiti;</li>
+<li>algoritmo approvato;</li>
+<li>source e destination hash match.</li>
+</ul>
+<p>Nel primo pilot reale, il livello minimo proposto è V1; V2 sarà usato per validare il motore. V3 richiede autorizzazione separata e valutazione delle prestazioni.</p>
+<p>Lo stato <code>VERIFIED</code> richiede almeno V1 positivo e nessun file in errore.</p>
+<h2 id="20-publish">20. Publish<a class="headerlink" href="#20-publish" title="Permanent link">&para;</a></h2>
+<p>Dopo verifica:</p>
+<ol>
+<li>lo staging viene marcato verificato;</li>
+<li>viene creato il manifest finale;</li>
+<li>la directory viene promossa alla destinazione;</li>
+<li>l'operazione viene registrata come <code>TRANSFER_VERIFIED</code>;</li>
+<li>la sorgente resta invariata;</li>
+<li>eventuale cleanup rimane manuale e separato.</li>
+</ol>
+<p>La promozione deve essere idempotente o rilevare uno stato già pubblicato.</p>
+<h2 id="21-resume-e-recovery">21. Resume e recovery<a class="headerlink" href="#21-resume-e-recovery" title="Permanent link">&para;</a></h2>
+<p>Ogni transfer run registra:</p>
+<ul>
+<li>file pianificati;</li>
+<li>file completati;</li>
+<li>file falliti;</li>
+<li>byte copiati;</li>
+<li>verification status;</li>
+<li>retry count;</li>
+<li>ultimo checkpoint.</li>
+</ul>
+<p>Alla ripresa:</p>
+<ul>
+<li>il manifest esistente viene validato;</li>
+<li>sorgente e destinazione vengono nuovamente verificate;</li>
+<li>file già completati non vengono ricopiati senza motivo;</li>
+<li>file cambiati in sorgente vengono marcati conflict;</li>
+<li>la run originale mantiene identità e audit history.</li>
+</ul>
+<h2 id="22-idempotenza">22. Idempotenza<a class="headerlink" href="#22-idempotenza" title="Permanent link">&para;</a></h2>
+<p>La stessa sessione importata due volte non deve produrre copie incontrollate.</p>
+<p>Chiavi candidate:</p>
+<ul>
+<li>session ID;</li>
+<li>asset ID;</li>
+<li>source locator;</li>
+<li>size + hash quando disponibile;</li>
+<li>transfer run manifest.</li>
+</ul>
+<p>Una seconda esecuzione deve produrre principalmente <code>SKIP_CONFIRMED_DUPLICATE</code>, <code>REVIEW_DUPLICATE_CANDIDATE</code> o <code>BLOCK_CONFLICT</code>.</p>
+<h2 id="23-locking">23. Locking<a class="headerlink" href="#23-locking" title="Permanent link">&para;</a></h2>
+<p>Lock previsti:</p>
+<ul>
+<li>global importer lock sul PC principale;</li>
+<li>source/session logical lock;</li>
+<li>destination transfer-run lock;</li>
+<li>manifest lock durante aggiornamenti atomici.</li>
+</ul>
+<p>Un lock stale non viene rimosso automaticamente senza verifiche su processo, timestamp e stato manifest.</p>
+<h2 id="24-manifest-e-output">24. Manifest e output<a class="headerlink" href="#24-manifest-e-output" title="Permanent link">&para;</a></h2>
+<p>Ogni dry-run o transfer run produce:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>&lt;RunEvidenceRoot&gt;\&lt;TransferRunId&gt;\
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>├── transfer-run.json
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>├── session-manifest.json
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>├── asset-manifests.ndjson
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>├── transfer-plan.csv
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>├── precheck-results.json
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>├── parse-findings.csv
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>├── collision-report.csv
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>├── verification-summary.json
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>├── run.log
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>└── evidence-checksums.txt
+</code></pre></div>
+<p>Nel dry-run, <code>verification-summary.json</code> indica <code>NOT_EXECUTED</code> per la copia.</p>
+<h2 id="25-logging">25. Logging<a class="headerlink" href="#25-logging" title="Permanent link">&para;</a></h2>
+<p>Ogni evento registra:</p>
+<ul>
+<li>UTC timestamp;</li>
+<li>severity;</li>
+<li>run ID;</li>
+<li>correlation ID;</li>
+<li>module;</li>
+<li>event code;</li>
+<li>asset/session reference;</li>
+<li>message;</li>
+<li>sanitized path;</li>
+<li>outcome;</li>
+<li>error code;</li>
+<li>retry count.</li>
+</ul>
+<p>Secret, password, credential e connection string non devono comparire nei log.</p>
+<h2 id="26-sicurezza-smb">26. Sicurezza SMB<a class="headerlink" href="#26-sicurezza-smb" title="Permanent link">&para;</a></h2>
+<p>Baseline:</p>
+<ul>
+<li>share dedicata, non l'intero disco D: dell'EAGLE;</li>
+<li>root limitata a <code>D:\Images NINA\Target</code>;</li>
+<li>account dedicato o identità Windows autorizzata;</li>
+<li>permessi share e NTFS in sola lettura;</li>
+<li>nessuna credenziale hard-coded nello script;</li>
+<li>Credential Manager o meccanismo governato, se necessario;</li>
+<li>TCP 445 limitato alla rete autorizzata;</li>
+<li>accesso verificato dal PC principale;</li>
+<li>audit degli accessi quando disponibile.</li>
+</ul>
+<p>La creazione della share richiede una procedura separata e una verifica dei permessi effettivi.</p>
+<h2 id="27-stop-conditions">27. Stop conditions<a class="headerlink" href="#27-stop-conditions" title="Permanent link">&para;</a></h2>
+<p>La run si arresta senza modifiche alla sorgente se:</p>
+<ul>
+<li>NINA è attiva o lo stato è incerto;</li>
+<li>file instabili o nuovi file continuano ad apparire;</li>
+<li>share non disponibile;</li>
+<li>destinazione errata o volume identity non verificata;</li>
+<li>spazio insufficiente;</li>
+<li>tempo residuo insufficiente;</li>
+<li>parser produce ambiguità oltre la soglia approvata;</li>
+<li>collisione bloccante;</li>
+<li>manifest non validabile;</li>
+<li>errori I/O non transitori;</li>
+<li>sospetto secret nei manifest;</li>
+<li>mismatch count/bytes/hash;</li>
+<li>orologio sistema non affidabile per audit;</li>
+<li>esiste una run concorrente.</li>
+</ul>
+<h2 id="28-failure-handling">28. Failure handling<a class="headerlink" href="#28-failure-handling" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>Stato</th>
+<th>Azione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rete persa prima della copia</td>
+<td><code>PRECHECK_FAILED</code></td>
+<td>stop</td>
+</tr>
+<tr>
+<td>rete persa durante copia</td>
+<td><code>PARTIAL</code></td>
+<td>preserva staging e manifest</td>
+</tr>
+<tr>
+<td>destinazione disconnessa</td>
+<td><code>FAILED/PARTIAL</code></td>
+<td>stop immediato</td>
+</tr>
+<tr>
+<td>file sorgente cambia</td>
+<td><code>CONFLICT</code></td>
+<td>non pubblicare</td>
+</tr>
+<tr>
+<td>spazio esaurito</td>
+<td><code>FAILED</code></td>
+<td>preserva evidence</td>
+</tr>
+<tr>
+<td>hash mismatch</td>
+<td><code>FAILED</code></td>
+<td>quarantena staging</td>
+</tr>
+<tr>
+<td>deadline raggiunta</td>
+<td><code>CANCELLED_SAFE</code></td>
+<td>stop dopo file corrente o checkpoint sicuro</td>
+</tr>
+<tr>
+<td>manifest corrotto</td>
+<td><code>QUARANTINED</code></td>
+<td>nessun resume automatico</td>
+</tr>
+</tbody>
+</table>
+<h2 id="29-configurazione-candidata">29. Configurazione candidata<a class="headerlink" href="#29-configurazione-candidata" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DRY_RUN"</span><span class="p">,</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EAGLE30154"</span><span class="p">,</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nt">"sharePath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TO-BE-CONFIGURED"</span><span class="p">,</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="nt">"sourceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SRC-EAGLE30154-NINA-001"</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">  </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">    </span><span class="nt">"storageVolumeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DSG-STORAGE-ACTIVE-F"</span><span class="p">,</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">    </span><span class="nt">"rootPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TO-BE-CONFIRMED"</span><span class="p">,</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="nt">"expectedVolumeLabel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elements"</span><span class="p">,</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">    </span><span class="nt">"expectedDeviceSerialReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PROTECTED-CONFIG"</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">  </span><span class="nt">"window"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">    </span><span class="nt">"notBeforeLocal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"07:35"</span><span class="p">,</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">    </span><span class="nt">"doNotStartAfterLocal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"08:10"</span><span class="p">,</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">    </span><span class="nt">"mustFinishBeforeLocal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"08:25"</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">  </span><span class="nt">"stability"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">    </span><span class="nt">"minimumStableMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">    </span><span class="nt">"observationPasses"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="w">  </span><span class="nt">"verification"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">    </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COUNT_AND_BYTES"</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="w">  </span><span class="nt">"sourceCleanup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="w">    </span><span class="nt">"authorized"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="p">}</span>
+</code></pre></div>
+<p>Il seriale non sarà pubblicato nei manifest sanitizzati.</p>
+<h2 id="30-interfaccia-powershell-candidata">30. Interfaccia PowerShell candidata<a class="headerlink" href="#30-interfaccia-powershell-candidata" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nb">Invoke-DSGSessionImport</span> <span class="p">`</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>  <span class="n">-ConfigurationPath</span> <span class="p">.\</span><span class="n">session-importer</span><span class="p">.</span><span class="n">json</span> <span class="p">`</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>  <span class="n">-Mode</span> <span class="n">DryRun</span>
+</code></pre></div>
+<p>Parametri candidati:</p>
+<ul>
+<li><code>-Mode DryRun|Transfer</code>;</li>
+<li><code>-ConfigurationPath</code>;</li>
+<li><code>-SourceOverride</code> solo per test;</li>
+<li><code>-DestinationOverride</code> solo per test;</li>
+<li><code>-SessionDate</code>;</li>
+<li><code>-TargetFilter</code>;</li>
+<li><code>-VerificationMode</code>;</li>
+<li><code>-ResumeTransferRunId</code>;</li>
+<li><code>-WhatIf</code>;</li>
+<li><code>-Verbose</code>.</li>
+</ul>
+<p><code>-Transfer</code> non sarà disponibile finché il pilot dry-run non sarà accettato.</p>
+<h2 id="31-test-plan">31. Test plan<a class="headerlink" href="#31-test-plan" title="Permanent link">&para;</a></h2>
+<h3 id="fase-t0-unit-test-parser">Fase T0 — unit test parser<a class="headerlink" href="#fase-t0-unit-test-parser" title="Permanent link">&para;</a></h3>
+<ul>
+<li>filename reale LDN 1320;</li>
+<li>target con spazi;</li>
+<li>telescope con spazi;</li>
+<li>temperatura negativa;</li>
+<li>esposizione decimale;</li>
+<li>filename malformato;</li>
+<li>target/telescope ambiguo;</li>
+<li>estensione inattesa.</li>
+</ul>
+<h3 id="fase-t1-filesystem-simulato">Fase T1 — filesystem simulato<a class="headerlink" href="#fase-t1-filesystem-simulato" title="Permanent link">&para;</a></h3>
+<ul>
+<li>source e destination temporanee;</li>
+<li>nessun accesso a EAGLE o SSD reali;</li>
+<li>directory creation plan;</li>
+<li>collisioni;</li>
+<li>resume;</li>
+<li>stop deadline;</li>
+<li>manifest validation.</li>
+</ul>
+<h3 id="fase-t2-eagle-connectivity-only">Fase T2 — EAGLE connectivity only<a class="headerlink" href="#fase-t2-eagle-connectivity-only" title="Permanent link">&para;</a></h3>
+<ul>
+<li>DNS;</li>
+<li>IP;</li>
+<li>TCP 445;</li>
+<li>share read-only;</li>
+<li>enumeration senza copia.</li>
+</ul>
+<h3 id="fase-t3-dry-run-su-sessione-reale">Fase T3 — dry-run su sessione reale<a class="headerlink" href="#fase-t3-dry-run-su-sessione-reale" title="Permanent link">&para;</a></h3>
+<ul>
+<li>una sessione campione;</li>
+<li>parsing completo;</li>
+<li>grouping;</li>
+<li>transfer plan;</li>
+<li>nessuna scrittura scientifica.</li>
+</ul>
+<h3 id="fase-t4-copia-in-area-test">Fase T4 — copia in area test<a class="headerlink" href="#fase-t4-copia-in-area-test" title="Permanent link">&para;</a></h3>
+<p>Destinazione:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>F:\_DSG_TEST\&lt;Target&gt;\
+</code></pre></div>
+<ul>
+<li>copia autorizzata di una sessione campione;</li>
+<li>V1 + sample hash;</li>
+<li>sorgente invariata;</li>
+<li>review manuale.</li>
+</ul>
+<h3 id="fase-t5-pilot-archivio-attivo">Fase T5 — pilot archivio attivo<a class="headerlink" href="#fase-t5-pilot-archivio-attivo" title="Permanent link">&para;</a></h3>
+<p>Solo dopo accettazione T4.</p>
+<h2 id="32-evidence-previste">32. Evidence previste<a class="headerlink" href="#32-evidence-previste" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Evidence ID</th>
+<th>Descrizione</th>
+<th>Stato</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>E-DSDM004-01</code></td>
+<td>PC → EAGLE connectivity and SMB test</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td><code>E-DSDM004-02</code></td>
+<td>share and NTFS read-only permission evidence</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td><code>E-DSDM004-03</code></td>
+<td>parser unit test report</td>
+<td>Not produced</td>
+</tr>
+<tr>
+<td><code>E-DSDM004-04</code></td>
+<td>simulated filesystem test report</td>
+<td>Not produced</td>
+</tr>
+<tr>
+<td><code>E-DSDM004-05</code></td>
+<td>real-session dry-run manifest</td>
+<td>Not produced</td>
+</tr>
+<tr>
+<td><code>E-DSDM004-06</code></td>
+<td>test-area copy and verification evidence</td>
+<td>Not produced</td>
+</tr>
+<tr>
+<td><code>E-DSDM004-07</code></td>
+<td>source unchanged verification</td>
+<td>Not produced</td>
+</tr>
+<tr>
+<td><code>E-DSDM004-08</code></td>
+<td>independent pilot review</td>
+<td>Not produced</td>
+</tr>
+</tbody>
+</table>
+<h2 id="33-validation-matrix">33. Validation matrix<a class="headerlink" href="#33-validation-matrix" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Verifica</th>
+<th>Stato</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IMP-01</td>
+<td>pull-based boundary definito</td>
+<td>Documentale</td>
+</tr>
+<tr>
+<td>IMP-02</td>
+<td>sorgente read-only</td>
+<td>Da verificare</td>
+</tr>
+<tr>
+<td>IMP-03</td>
+<td>precheck completi</td>
+<td>Da implementare</td>
+</tr>
+<tr>
+<td>IMP-04</td>
+<td>parser sample reale</td>
+<td>Da implementare/testare</td>
+</tr>
+<tr>
+<td>IMP-05</td>
+<td>dry-run senza scritture scientifiche</td>
+<td>Da implementare/testare</td>
+</tr>
+<tr>
+<td>IMP-06</td>
+<td>collisioni senza overwrite</td>
+<td>Da implementare/testare</td>
+</tr>
+<tr>
+<td>IMP-07</td>
+<td>staging e publish controllati</td>
+<td>Da implementare/testare</td>
+</tr>
+<tr>
+<td>IMP-08</td>
+<td>V1 count/bytes</td>
+<td>Da implementare/testare</td>
+</tr>
+<tr>
+<td>IMP-09</td>
+<td>sample hash</td>
+<td>Da implementare/testare</td>
+</tr>
+<tr>
+<td>IMP-10</td>
+<td>resume idempotente</td>
+<td>Da implementare/testare</td>
+</tr>
+<tr>
+<td>IMP-11</td>
+<td>deadline e safe stop</td>
+<td>Da implementare/testare</td>
+</tr>
+<tr>
+<td>IMP-12</td>
+<td>sorgente invariata</td>
+<td>Da dimostrare</td>
+</tr>
+</tbody>
+</table>
+<h2 id="34-acceptance-criteria-dsdm-004">34. Acceptance criteria DSDM-004<a class="headerlink" href="#34-acceptance-criteria-dsdm-004" title="Permanent link">&para;</a></h2>
+<p>La baseline architetturale è completa quando:</p>
+<ul>
+<li>boundary pull-based e read-only sono espliciti;</li>
+<li>precheck, staging, copy, verification e publish sono separati;</li>
+<li>dry-run è obbligatorio nel pilot;</li>
+<li>collision policy impedisce overwrite silenzioso;</li>
+<li>source cleanup è proibito;</li>
+<li>finestra 07:35–08:25 è incorporata;</li>
+<li>manifest e evidence sono definiti;</li>
+<li>recovery, resume e idempotenza sono coperti;</li>
+<li>test plan e stop conditions sono registrati;</li>
+<li>nessuna implementazione inesistente è dichiarata operativa.</li>
+</ul>
+<h2 id="35-stato-corrente">35. Stato corrente<a class="headerlink" href="#35-stato-corrente" title="Permanent link">&para;</a></h2>
+<p>La baseline architetturale del Session Importer è definita.</p>
+<p>Non sono ancora presenti:</p>
+<ul>
+<li>share SMB dedicata;</li>
+<li>test di connettività completato;</li>
+<li>configurazione definitiva della root su F:;</li>
+<li>script PowerShell;</li>
+<li>parser implementato;</li>
+<li>unit test;</li>
+<li>dry-run reale;</li>
+<li>copie in area test;</li>
+<li>task schedulato;</li>
+<li>cancellazione o spostamento della sorgente.</li>
+</ul>
+<h2 id="36-prossimo-passo">36. Prossimo passo<a class="headerlink" href="#36-prossimo-passo" title="Permanent link">&para;</a></h2>
+<p>Il prossimo passo operativo è produrre <strong>E-DSDM004-01 — PC to EAGLE Connectivity and SMB Test</strong>.</p>
+<p>Successivamente:</p>
+<ol>
+<li>definire e verificare la share read-only;</li>
+<li>completare la root definitiva dell'archivio attivo;</li>
+<li>implementare il parser e la modalità dry-run su filesystem simulato;</li>
+<li>eseguire il dry-run su una sessione reale;</li>
+<li>autorizzare separatamente una copia nella sola area <code>F:\_DSG_TEST</code>.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Torna su
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Piede" >
+        
+          
+          <a href="../DSDM-003-Contract-and-Manifest-Model/" class="md-footer__link md-footer__link--prev" aria-label="Precedente: DSDM-003 - Contract and Manifest Model">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Precedente
+              </span>
+              <div class="md-ellipsis">
+                DSDM-003 - Contract and Manifest Model
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../evidence/AP13-W02/E-AP13-W02-01-Source-Authorization-and-Scope-Record/" class="md-footer__link md-footer__link--next" aria-label="Successivo: Source Authorization and Scope Record">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Successivo
+              </span>
+              <div class="md-ellipsis">
+                Source Authorization and Scope Record
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.footer", "content.code.copy", "search.highlight", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/dsg-enterprise-core.js"></script>
+      
+        <script src="../../../javascripts/nav-scroll.js"></script>
+      
+        <script src="../../../javascripts/homepage-effects.js"></script>
+      
+        <script src="../../../javascripts/page-enhancements.js"></script>
+      
+        <script src="../../../javascripts/dsg-theme-manager.js"></script>
+      
+        <script src="../../../javascripts/observatory-status.js"></script>
+      
+        <script src="../../../javascripts/latest-observation.js"></script>
+      
+        <script src="../../../javascripts/roadmap.js"></script>
+      
+    
+  </body>
+</html>
