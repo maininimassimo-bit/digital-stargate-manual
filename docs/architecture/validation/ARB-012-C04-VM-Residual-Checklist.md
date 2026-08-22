@@ -8,7 +8,7 @@
 | Hyper-V VM | `DSG-ARB012-C04-VALIDATION` |
 | Target model | Two-Person Limited Operations Model |
 | Date | 2026-08-22 |
-| Status | In Progress — VM-R01…VM-R05 PASS; VM-R06 next |
+| Status | In Progress — VM-R01…VM-R07 PASS; VM-R08 next |
 | Runtime effect | Validation VM controls only; no observatory runtime effect |
 
 ## 1. Purpose
@@ -28,9 +28,9 @@ Unless the VM/application baseline changes, do **not** repeat the completed ENV-
 | VM-R03 | ACC-001 / ENV-004 | Massimo unique non-production validation account | `dsgmassimo`, UID 1001, distinct authenticated session, no sudo | **PASS** |
 | VM-R04 | ACC-002 / ENV-004 | Leonardo unique non-production validation account | `dsgleonardo`, UID 1002, distinct authenticated session, no sudo | **PASS** |
 | VM-R05 | ENV-005 | Apply/verify two-person least-privilege application policy | DSOC Application authorization slice; 10/10 tests PASS at `c8c09f1962222f064e653864de8eee4196ffbbfe`; self-approval/own RTS/self-access denied; C4/break-glass prohibited; deny-by-default | **PASS — technical policy** |
-| VM-R06 | PRV-007 / PRV-008 / ENV-008 | Define non-production test database and audit evidence store | engine/store identifiers, non-production designation, location, access/retention characteristics | Pending |
-| VM-R07 | PRV-011 / ENV-009 | Prove deterministic reset/rebuild | before-state identifier, reset/rebuild procedure, after-state checksum/test result | Pending |
-| VM-R08 | ENV-010 | Verify logs, correlation IDs and evidence export | one validation request correlated across log/audit/evidence export with timestamps | Pending |
+| VM-R06 | PRV-007 / PRV-008 / ENV-008 | Define non-production test database and audit evidence store | local SQLite `dsoc-validation.db` and `dsoc-audit.db`; explicit NONPROD marker; `0640`; no DB listener; evidence `E-ARB012-C04-VM-R06` | **PASS** |
+| VM-R07 | PRV-011 / ENV-009 | Prove deterministic reset/rebuild | versioned SQL + rebuild script; same logical schema/seed; audit reset to 0; evidence `E-ARB012-C04-VM-R07` | **PASS** |
+| VM-R08 | ENV-010 | Verify logs, correlation IDs and evidence export | one validation request correlated across log/audit/evidence export with timestamps | **NEXT** |
 | VM-R09 | ENV-006 | Attempt same-identity C3 approval | deterministic denial plus audit record; no execution | Pending |
 | VM-R10 | ENV-007 | Revoke/suspend an applicable validation role before execution | subsequent execution denied and audited | Pending |
 | VM-R11 | ENV-012 | Attempt positive C4 and break-glass paths | both unavailable/denied by design and audited where applicable | Pending |
@@ -43,10 +43,12 @@ Unless the VM/application baseline changes, do **not** repeat the completed ENV-
 - VM-R03 / ACC-001: `dsgmassimo` PASS.
 - VM-R04 / ACC-002: `dsgleonardo` PASS; ENV-004 two distinct validation identities PASS.
 - VM-R05 / ENV-005: Application authorization policy compiled and executed on validation VM. Domain regression suite 4/4 PASS and Application authorization suite 10/10 PASS. The initial missing-xUnit-import compile failure is retained in evidence history; corrected baseline is commit `c8c09f1962222f064e653864de8eee4196ffbbfe`.
+- VM-R06 / PRV-007 / PRV-008 / ENV-008: local non-production validation and audit SQLite stores PASS; no database listener exposed.
+- VM-R07 / PRV-011 / ENV-009: deterministic logical reset/rebuild from versioned repository assets PASS.
 
 ## 5. Next execution group
 
-VM-R06 through VM-R08 provide the non-production persistence, audit store, deterministic evidence and correlation substrate required before the runtime denial/revocation scenarios VM-R09 through VM-R11 can be considered complete.
+VM-R08 establishes the correlated logging/audit/evidence-export substrate required before the runtime denial/revocation scenarios VM-R09 through VM-R11 can be considered complete.
 
 No additional Linux sudo/group privileges are required for the two validation identities.
 
@@ -60,4 +62,4 @@ This checklist is complete when VM-R01 through VM-R12 have attributable `Passed`
 
 ## 8. Current disposition
 
-**IN PROGRESS — VM-R01 THROUGH VM-R05 PASS; VM-R06 NEXT.**
+**IN PROGRESS — VM-R01 THROUGH VM-R07 PASS; VM-R08 NEXT.**
