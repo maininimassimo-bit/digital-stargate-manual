@@ -4,7 +4,7 @@
 |---|---|
 | Condition | `ARB-012-C04` |
 | Scope | Role Assignment and Four-Eyes Enforcement |
-| Status | `Blocked — W03 ready for attributable execution; ENV-011 technical evidence complete; formal acceptance and remaining environment controls pending` |
+| Status | `Blocked — W03 execution package and independent-observer nomination record prepared; attributable nomination and execution pending` |
 | Updated | 2026-08-22 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch | `main` |
@@ -16,7 +16,7 @@
 |---|---|---|
 | C04-W01 | `ARB-012-C04-Closure-Plan.md` | Recorded |
 | C04-W02 | Sponsor decision and role assignment register | Recorded |
-| C04-W03 | `ARB-012-C04-Identity-Training-Access-Review.md`; `ARB-012-C04-W03-Execution-Package.md` | Evidence framework defined; executable IDV/TRN/access/revocation package ready; attributable execution pending |
+| C04-W03 | `ARB-012-C04-Identity-Training-Access-Review.md`; `ARB-012-C04-W03-Execution-Package.md`; `ARB-012-C04-Independent-Observer-Nomination-Record.md` | Execution framework complete; observer nomination record prepared; attributable nomination and IDV/TRN/AR/REV execution pending |
 | C04-W04 | `ARB-012-C04-Four-Eyes-Validation-Plan.md` | Approved plan; FE-01…FE-12 not executed |
 | C04-W05 | `ARB-012-C04-Validation-Environment-Baseline.md` | Baseline defined |
 | C04-W06 | Provisioning record, execution campaign, host procedure and execution result | ENV-011 technical evidence complete; formal acceptance pending; remaining PRV/ENV controls incomplete |
@@ -62,26 +62,32 @@
 | Independent AI technical re-review | Technical review completed; not a formal acceptance disposition |
 | ENV-011 | Technical evidence complete; not formally accepted |
 | `ARB-012-C04-W03-EXEC-001` | Execution package recorded; no IDV/TRN/AR/REV control marked Passed |
+| `E-ARB012-C04-07` | Independent observer/reviewer nomination record prepared; person, acceptance and approval pending |
 
 ## W03 executable gate
 
-W03 is no longer blocked by lack of an execution design. `ARB-012-C04-W03-Execution-Package.md` defines the evidence schema and dependency order for:
+W03 has an executable evidence design. `ARB-012-C04-W03-Execution-Package.md` defines the evidence schema and dependency order for IDV-001–005, TRN-001–008, AR-001–007 and REV-001–004.
 
-- IDV-001 through IDV-005;
-- TRN-001 through TRN-008;
-- AR-001 through AR-007;
-- REV-001 through REV-004;
-- independent observer/reviewer nomination.
+`ARB-012-C04-Independent-Observer-Nomination-Record.md` now defines the formal nomination contract and independence rules. Repository search did not identify an already accepted nomination; therefore no individual has been inferred or assigned.
 
-The immediate prerequisite is nomination of an attributable independent observer/reviewer. This role is required for conflicted access reviews, REV-002, W03 evidence sufficiency and `E-ENV011-06`. No repository evidence currently supports marking that nomination complete.
+The immediate prerequisite is completion of `E-ARB012-C04-07` with:
+
+- observer project identity and natural-person name;
+- non-sensitive identity verification reference;
+- independence statement;
+- authorized scope;
+- effective/review dates;
+- sponsor/governance approval;
+- observer acceptance.
+
+After activation, the observer may support conflicted W03 controls and the attributable `E-ENV011-06` review without receiving operational authority.
 
 ## Governance disposition
 
 - ENV-011 technical execution is complete and is not to be repeated solely for documentation reconciliation.
-- Four domain tests passed against the immutable application baseline both online and offline.
-- Simulator-only and physical-device prohibition are verified for the ENV-011 technical scope.
 - `E-ENV011-06` remains mandatory before formal ENV-011 acceptance.
-- W03 now has an executable evidence package, but IDV/TRN/access/revocation evidence remains pending.
+- W03 execution and observer-nomination artifacts are prepared, but human attributable evidence remains pending.
+- No repository evidence currently supports naming an independent observer/reviewer.
 - Distinct validation accounts, database, audit store, reset verification and remaining ENV controls remain incomplete.
 - FE-01 through FE-12 remain not executed.
 - DSOC runtime command enablement, production credentials, observatory routes, physical-device control, positive C4, break-glass, self-approval and local-interlock bypass remain prohibited.
