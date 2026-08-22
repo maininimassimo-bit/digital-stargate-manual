@@ -6,184 +6,127 @@
 | Package | AP-012 — Enterprise Operations Center Architecture |
 | Condition | ARB-012-C04 — Role Assignment and Four-Eyes Enforcement |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
-| Date | 30/07/2026 |
+| Updated | 2026-08-22 |
 | Authority | Digital StarGate Chief Architect |
-| Current status | Blocked |
+| Target model | **Two-Person Limited Operations Model** |
+| Current status | Blocked pending applicable evidence |
 | Runtime impact | No runtime enablement authorized |
 
 ## 1. Purpose
 
-This plan defines the controlled sequence required to close ARB-012-C04. It does not nominate people, grant privileges, enable command paths or reclassify the condition. Only the Project Owner / Architecture Sponsor may approve nominative assignments, and only independently verified evidence may change C04 from `Blocked` to `Passed`.
+Define the controlled sequence required to close ARB-012-C04 against the Sponsor-approved two-person target. The earlier closure assumption requiring a third permanent actor, independent substitutes, positive C4 and independent internal audit is superseded.
 
-## 2. Verified current state
+The revised target preserves fail-safe governance by denying unsupported capabilities rather than weakening segregation requirements.
 
-The current bootstrap organization assigns incompatible responsibilities to one identity. The repository therefore records:
+## 2. Target state
 
-- no independent requester and approver for C3/C4;
-- no independent return-to-service approver;
-- no independent Safety Authority;
-- no independent Security Authority;
-- no independent Auditor;
-- no approved substitutes for critical roles;
-- no operational privileged access or break-glass authority;
-- no runtime command authorization.
+C04 may close when repository evidence demonstrates:
 
-The mitigating controls remain prohibition and runtime disablement. Local physical interlocks remain independent and authoritative.
+1. Massimo and Leonardo are distinct natural persons using distinct validation accounts/sessions;
+2. Massimo requester/executor and Leonardo approver separation works for C3;
+3. self-approval and incompatible-role paths are denied;
+4. Maintainer/return-to-service separation works;
+5. Safety Authority is separated from Operations for supported decisions;
+6. Security self-access approval is denied;
+7. revocation/suspension invalidates affected authorization before execution;
+8. positive C4 is denied with the current two-person allocation;
+9. break-glass is denied;
+10. applicable environment controls and audit traceability pass;
+11. repository quality gates pass;
+12. final ARB re-review accepts the revised two-person target.
 
-## 3. Required target state
+## 3. N/A by governance design
 
-C04 may close only when the repository contains approved evidence for all of the following:
+The following are no longer closure prerequisites:
 
-1. distinct identities for incompatible roles;
-2. approved substitutes for critical roles;
-3. explicit validity periods and revocation authority;
-4. completed training records where required;
-5. completed access reviews;
-6. approved conflict mitigations;
-7. requester/approver separation for C3 and C4;
-8. Maintainer/return-to-service approver separation;
-9. independent Safety Authority and Security Authority;
-10. Auditor with read-only evidence access and no command execution;
-11. successful four-eyes validation scenarios;
-12. complete audit evidence for every validation decision.
+- third permanent actor;
+- independent substitutes for critical roles;
+- positive C4 execution or validation;
+- independent internal Auditor appointment;
+- independent internal audit closure;
+- third-party observer solely to validate the two-person model.
 
-## 4. Dependency-ordered work items
+No `N/A` item may be reported as `Passed`.
 
-### C04-W01 — Sponsor nomination decision
+## 4. Dependency-ordered work
 
-Owner: Project Owner / Architecture Sponsor.
+### C04-W01 — Sponsor target decision
 
-Output: `ARB-012-C04-Sponsor-Nomination-Decision.md` completed with actual identities, substitutes, validity, scope and approval.
+**Status: Complete.**
 
-Exit criteria:
+`ARB-012-C04-Sponsor-Nomination-Decision.md` records the Two-Person Limited Operations Model.
 
-- no `TBD` remains for mandatory critical roles;
-- incompatible roles are assigned to distinct identities;
-- the Sponsor signs or otherwise records an explicit repository decision;
-- no assignment grants runtime privileges by itself.
+### C04-W02 — Role/conflict register
 
-### C04-W02 — Role register and conflict update
+**Status: Complete for target definition.**
 
-Owner: Chief Architect with Sponsor-approved input.
+The role register defines supported C3 separation, denied C4/break-glass, no incompatible cross-substitution and degraded availability when either actor is absent.
 
-Affected artifact:
+### C04-W03 — Identity, training and access evidence
 
-- `ARB-012-C04-Role-Assignment-Register.md`.
-
-Exit criteria:
-
-- nominative register matches the Sponsor decision;
-- delegation records are time-bound and revocable;
-- conflict register is updated;
-- access matrix C1–C4 is explicit;
-- prohibited combinations remain technically and procedurally denied.
-
-### C04-W03 — Access review and training evidence
-
-Owner: Security Authority and Operations governance after valid independent appointment.
+**Status: In Progress.**
 
 Required evidence:
 
-- identity and role mapping;
-- least-privilege review;
-- privileged-access approval separation;
-- training completion or approved exception;
-- revocation and substitute activation procedure.
+- IDV-001–IDV-005;
+- TRN-001–TRN-008 or approved bounded exceptions;
+- least-privilege decisions applicable to Massimo/Leonardo;
+- distinct non-production accounts;
+- revocation/suspension evidence.
 
-Exit criteria: all required reviews are approved by actors independent from the beneficiary.
+A third observer is not required. Each person may review the other person's non-self controls where no conflict exists. Controls that would require independent internal audit are N/A; self-benefiting decisions remain denied.
 
 ### C04-W04 — Four-eyes validation plan
 
-Owner: Release and Quality Governor.
+**Status: Approved plan requiring reconciliation to the two-person target before execution.**
 
-Mandatory scenarios:
+Required outcomes include positive C3 and return-to-service separation plus denial tests for self-approval, conflicts, C4 and break-glass.
 
-1. C3 request and approval by distinct identities;
-2. self-approval rejection;
-3. C4 request with required independent approvals;
-4. approver revocation before execution;
-5. return-to-service approval by an actor distinct from the Maintainer;
-6. SEV-1 closure with independent safety verification;
-7. safety-relevant suppression rule with distinct author and approver;
-8. complete requester, approver, policy, timestamp and decision audit trail.
+### C04-W05/W06 — Environment and evidence
 
-All scenarios must remain non-operational unless a separate ARB authorization explicitly permits a broader scope.
+ENV-011 technical evidence is complete. Remaining applicable PRV/ENV controls, distinct accounts, test database/audit evidence and reset/repeatability must be completed. `E-ENV011-06` must be re-dispositioned under the revised target; absence of a third reviewer is not itself a blocker.
 
-### C04-W05 — Execution evidence and quality gate
+### C04-W07 — Scenario execution
 
-Owner: Release and Quality Governor.
+Execute the reconciled FE set in the isolated environment. Unsupported third-person/positive-C4 scenarios are replaced by explicit denial evidence.
 
-Outputs:
+### C04-W08 — Final ARB re-review
 
-- `ARB-012-C04-Execution-Evidence.md`;
-- updated `ARB-012-Validation-Campaign.md`;
-- successful repository quality gate.
+The final Architecture Review Board review evaluates architecture consistency, evidence sufficiency, fail-safe behavior and scope limitations. It must not claim independent organizational audit if none exists.
 
-Exit criteria:
+## 5. Quality gates
 
-- every scenario has an explicit result;
-- failed attempts and corrections are preserved;
-- CI restore, build, test, formatting and MkDocs checks pass;
-- scope limitations are explicit.
-
-### C04-W06 — Independent ARB re-review
-
-Owner: Architecture Review Board.
-
-Decision options:
-
-- `Passed`;
-- `Blocked`;
-- `Rework Required`.
-
-The Board must not infer organizational independence from simulated identities or documentation alone.
-
-### C04-W07 — Issue closure and campaign disposition
-
-Owner: Program governance.
-
-Issue #11 may close only after an ARB decision of `Passed` is merged. Runtime readiness remains a separate decision and is not implied by C04 closure.
-
-## 5. RACI for closure work
-
-| Activity | Sponsor | Chief Architect | Operations | Security Authority | Safety Authority | Release Governor | ARB |
-|---|---|---|---|---|---|---|---|
-| Approve nominations | A/R | C | C | C | C | I | I |
-| Update role register | A | R | C | C | C | I | I |
-| Access review | I | C | C | A/R | I | I | I |
-| Safety independence verification | I | C | C | I | A/R | I | I |
-| Design validation campaign | I | C | C | C | C | A/R | I |
-| Execute and record tests | I | C | R | C | C | A/R | I |
-| Final C04 decision | I | I | I | I | I | C | A/R |
-
-## 6. Quality gates
-
-| Gate | Required status |
+| Gate | Required disposition |
 |---|---|
-| Sponsor nomination decision | Passed |
-| Distinct critical identities | Passed |
-| Substitute coverage | Passed |
-| Access review | Passed |
-| Conflict mitigation | Passed |
-| Four-eyes scenarios | Passed |
-| Audit evidence | Passed |
+| Sponsor two-person target decision | Passed |
+| Role/conflict target definition | Passed |
+| Third person / substitute coverage | N/A by governance design |
+| W03 identity/training/access | Passed for applicable scope |
+| Distinct validation accounts | Passed |
+| Applicable ENV controls | Passed |
+| C3 four-eyes scenarios | Passed |
+| Self-approval/conflict denial | Passed |
+| Positive C4 | Denied by design and validated as denied |
+| Break-glass | Denied by design and validated as denied |
+| Independent internal audit closure | N/A by governance design |
 | Repository CI | Passed |
-| Independent ARB review | Passed |
-| Runtime enablement | Not Applicable to C04 closure |
+| Final ARB architecture/evidence re-review | Passed |
+| Runtime enablement | Separate decision; not implied by C04 |
 
-## 7. Risks and controls
+## 6. Risks and controls
 
 | Risk | Severity | Control |
 |---|---|---|
-| Same person represented by multiple logical identities | Critical | Reject as organizational evidence |
-| Self-approval or privilege self-grant | Critical | Deny and preserve C04 as Blocked |
-| Safety Authority dependent on Operations | Critical | Independent appointment required |
-| Premature issue closure | High | Require merged ARB `Passed` decision |
-| C04 closure interpreted as runtime approval | Critical | Separate runtime proposal and ARB decision required |
-| Physical interlock bypass | Critical | Prohibited; local interlocks remain independent |
+| Self-approval | Critical | Deterministic denial and evidence |
+| Loss of one actor | High availability impact | Suspend operations requiring both; no incompatible cross-substitution |
+| Attempt to use C4 with two actors | Critical | Deny positive C4 |
+| Break-glass bypass | Critical | Deny break-glass |
+| Leonardo reviews own access/control | High | Self-review denied; no independent audit claim |
+| C04 closure interpreted as runtime authorization | Critical | Runtime remains a separate gate |
+| Physical interlock bypass | Critical | Prohibited; local interlocks remain authoritative |
 
-## 8. Current disposition
+## 7. Current disposition
 
-**ARB-012-C04 remains BLOCKED.**
+**ARB-012-C04 remains BLOCKED pending evidence applicable to the approved two-person target.**
 
-The closure process is prepared, but nominative Sponsor decisions and independent identities are not yet present in repository evidence. C3/C4 runtime, break-glass runtime, self-approval and local-interlock bypass remain prohibited.
+The organizational-design blocker requiring a third person is removed. Remaining work is IDV/TRN/access/revocation, applicable environment evidence, reconciled FE execution, CI and final ARB re-review.
