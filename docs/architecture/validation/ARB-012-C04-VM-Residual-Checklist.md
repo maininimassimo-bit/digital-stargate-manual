@@ -8,7 +8,7 @@
 | Hyper-V VM | `DSG-ARB012-C04-VALIDATION` |
 | Target model | Two-Person Limited Operations Model |
 | Date | 2026-08-22 |
-| Status | In Progress — VM-R01…VM-R11 PASS; VM-R12 next |
+| Status | **Completed — VM-R01…VM-R12 PASS** |
 | Runtime effect | Validation VM controls only; no observatory runtime effect |
 
 ## 1. Purpose
@@ -34,7 +34,7 @@ Unless the VM/application baseline changes, do **not** repeat the completed ENV-
 | VM-R09 | ENV-006 | Attempt same-identity C3 approval | deterministic `DENY`, `self-approval-prohibited`, audit correlation `d1d8a55d-1771-43a5-8a39-a0063d5eef93`, `execution_attempted=false`; evidence SHA-256 `bc5cfad39cc14269317dfbcd6604c88c972114fbf29cab60966e8e0c222f0476` | **PASS** |
 | VM-R10 | ENV-007 | Revoke/suspend an applicable validation role before execution | baseline `ALLOW`; suspended principal subsequently `DENY`, `principal-suspended`, audit correlation `c1d35282-e64d-4b2d-a793-750c4b8c950d`, `execution_attempted=false`; evidence SHA-256 `cf7e2f52783b69cd96898ca032d9eb70c5d7262ab4d7333f475a1f37b7b319bb` | **PASS** |
 | VM-R11 | ENV-012 | Attempt positive C4 and break-glass paths | C4 and BreakGlass both `DENY`, `capability-prohibited-in-validation`; separate audit correlations grouped by run `9d4711c3-b867-4b0c-aed5-78dc5eb42b54`; `execution_attempted=false`; evidence SHA-256 `01ffae2ee01bd9db2551b145dca1d5ecb0371a2ec4c8f14fed01471a6896f5eb` | **PASS** |
-| VM-R12 | ENV-012 | Verify physical-device/production fallback cannot be selected | configuration/runtime denial evidence; no physical command sent | **NEXT** |
+| VM-R12 | ENV-012 | Verify physical-device/production fallback cannot be selected | `simulator-only`; `physicalDeviceAccess=false`; production fallback not selectable; no physical command sent; manifest SHA-256 `ff3e98f9740c8c9cad586230d6cb9918bea75e1bf6a7a9b9c5e5d76d62b3008b`; run `b6796670-96db-43c6-9f30-a074c39ab26c`; evidence `E-ARB012-C04-VM-R12` | **PASS** |
 
 ## 4. Completed evidence summary
 
@@ -49,21 +49,22 @@ Unless the VM/application baseline changes, do **not** repeat the completed ENV-
 - VM-R09 / ENV-006: same-identity C3 approval deterministically denied by the Application authorization policy; denial audited and correlated; downstream execution not attempted at DSOC commit `948b49a66c740716e55eec69c2e63ad2b2ddf692`.
 - VM-R10 / ENV-007: validation principal baseline authorized, then suspended and deterministically denied with `principal-suspended`; denial audited and correlated; downstream execution not attempted at DSOC commit `2493eb1e1c26a5191895df50ebd8704fafe87dbf`.
 - VM-R11 / ENV-012: positive C4 and break-glass paths both denied by design with `capability-prohibited-in-validation`; separate correlated audit records are grouped under run correlation `9d4711c3-b867-4b0c-aed5-78dc5eb42b54`; downstream execution not attempted at DSOC commit `fdb9114524314ec7ebacad243b7eb3d722c9e36d`.
+- VM-R12 / ENV-012: simulator-only selection guard PASS at DSOC commit `3f855b5124d747f00efe5f727383fd46ad613980`; physical-device access disabled, production fallback not selectable, no physical command sent; run correlation `b6796670-96db-43c6-9f30-a074c39ab26c`.
 
 ## 5. Next execution group
 
-VM-R12 is the final residual VM control. It must demonstrate that no physical-device or production fallback can be selected from the validation configuration/runtime and that no physical command is sent.
+No residual VM execution remains in C04-W06. Proceed to W06/W07 evidence reconciliation and formal ARB-012-C04 acceptance/closure activities.
 
 No additional Linux sudo/group privileges are required for the two validation identities.
 
 ## 6. Safety stop conditions
 
-Stop immediately if any residual test reveals an observatory route/VPN path, production credential/profile, physical-device endpoint, self-approval, ineffective revocation, positive C4/break-glass availability or inability to preserve evidence.
+Stop immediately if any future regression or baseline change reveals an observatory route/VPN path, production credential/profile, physical-device endpoint, self-approval, ineffective revocation, positive C4/break-glass availability or inability to preserve evidence.
 
 ## 7. Completion criteria
 
-This checklist is complete when VM-R01 through VM-R12 have attributable `Passed` evidence, except for controls explicitly reclassified N/A by an approved governance decision.
+**Met.** VM-R01 through VM-R12 have attributable `PASS` evidence.
 
 ## 8. Current disposition
 
-**IN PROGRESS — VM-R01 THROUGH VM-R11 PASS; VM-R12 NEXT.**
+**COMPLETED — VM-R01 THROUGH VM-R12 PASS.**
