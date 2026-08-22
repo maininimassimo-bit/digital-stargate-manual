@@ -8,7 +8,7 @@
 | Hyper-V VM | `DSG-ARB012-C04-VALIDATION` |
 | Target model | Two-Person Limited Operations Model |
 | Date | 2026-08-22 |
-| Status | In Progress — VM-R01…VM-R07 PASS; VM-R08 next |
+| Status | In Progress — VM-R01…VM-R08 PASS; VM-R09 next |
 | Runtime effect | Validation VM controls only; no observatory runtime effect |
 
 ## 1. Purpose
@@ -30,8 +30,8 @@ Unless the VM/application baseline changes, do **not** repeat the completed ENV-
 | VM-R05 | ENV-005 | Apply/verify two-person least-privilege application policy | DSOC Application authorization slice; 10/10 tests PASS at `c8c09f1962222f064e653864de8eee4196ffbbfe`; self-approval/own RTS/self-access denied; C4/break-glass prohibited; deny-by-default | **PASS — technical policy** |
 | VM-R06 | PRV-007 / PRV-008 / ENV-008 | Define non-production test database and audit evidence store | local SQLite `dsoc-validation.db` and `dsoc-audit.db`; explicit NONPROD marker; `0640`; no DB listener; evidence `E-ARB012-C04-VM-R06` | **PASS** |
 | VM-R07 | PRV-011 / ENV-009 | Prove deterministic reset/rebuild | versioned SQL + rebuild script; same logical schema/seed; audit reset to 0; evidence `E-ARB012-C04-VM-R07` | **PASS** |
-| VM-R08 | ENV-010 | Verify logs, correlation IDs and evidence export | one validation request correlated across log/audit/evidence export with timestamps | **NEXT** |
-| VM-R09 | ENV-006 | Attempt same-identity C3 approval | deterministic denial plus audit record; no execution | Pending |
+| VM-R08 | ENV-010 | Verify logs, correlation IDs and evidence export | request `1ea67173-c596-423e-b49d-d470abe88cb3` correlated across JSONL log, SQLite audit and JSON evidence; evidence SHA-256 `a394357f8d8ba960d6a5cdb78abea255f3934af1033e572d9f8edb210cba990f` | **PASS** |
+| VM-R09 | ENV-006 | Attempt same-identity C3 approval | deterministic denial plus audit record; no execution | **NEXT** |
 | VM-R10 | ENV-007 | Revoke/suspend an applicable validation role before execution | subsequent execution denied and audited | Pending |
 | VM-R11 | ENV-012 | Attempt positive C4 and break-glass paths | both unavailable/denied by design and audited where applicable | Pending |
 | VM-R12 | ENV-012 | Verify physical-device/production fallback cannot be selected | configuration/runtime denial evidence; no physical command sent | Pending |
@@ -45,10 +45,11 @@ Unless the VM/application baseline changes, do **not** repeat the completed ENV-
 - VM-R05 / ENV-005: Application authorization policy compiled and executed on validation VM. Domain regression suite 4/4 PASS and Application authorization suite 10/10 PASS. The initial missing-xUnit-import compile failure is retained in evidence history; corrected baseline is commit `c8c09f1962222f064e653864de8eee4196ffbbfe`.
 - VM-R06 / PRV-007 / PRV-008 / ENV-008: local non-production validation and audit SQLite stores PASS; no database listener exposed.
 - VM-R07 / PRV-011 / ENV-009: deterministic logical reset/rebuild from versioned repository assets PASS.
+- VM-R08 / ENV-010: correlation substrate PASS; one stable correlation ID and UTC timestamp traceable across application log, audit persistence and exported evidence at DSOC commit `8147c7a7a1263801f98baea4ffdefd43acee5891`.
 
 ## 5. Next execution group
 
-VM-R08 establishes the correlated logging/audit/evidence-export substrate required before the runtime denial/revocation scenarios VM-R09 through VM-R11 can be considered complete.
+VM-R09 uses the now-proven correlation/audit substrate to demonstrate deterministic denial of same-identity C3 approval with attributable audit evidence and no execution.
 
 No additional Linux sudo/group privileges are required for the two validation identities.
 
@@ -62,4 +63,4 @@ This checklist is complete when VM-R01 through VM-R12 have attributable `Passed`
 
 ## 8. Current disposition
 
-**IN PROGRESS — VM-R01 THROUGH VM-R07 PASS; VM-R08 NEXT.**
+**IN PROGRESS — VM-R01 THROUGH VM-R08 PASS; VM-R09 NEXT.**
