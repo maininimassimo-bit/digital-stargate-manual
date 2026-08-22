@@ -6,142 +6,118 @@
 | Work item | C04-W03 — Identity, Training and Access Review Evidence |
 | Package | AP-012 — Enterprise Operations Center Architecture |
 | Condition | ARB-012-C04 — Role Assignment and Four-Eyes Enforcement |
-| Date | 2026-07-31 |
-| Scope | Organizational and non-operational preparation only |
-| Status | Evidence framework established; verification pending |
+| Updated | 2026-08-22 |
+| Target model | Two-Person Limited Operations Model |
+| Status | In Progress — IDV reciprocal execution record prepared |
 | Runtime effect | None |
 
 ## 1. Purpose
 
-This register defines the evidence required before the current two-person role allocation can be used for any positive non-operational four-eyes validation. It records identity assurance, role-specific training, least-privilege review, approval separation, revocation and substitute activation.
-
-This document does not assert that any identity, training course, account, privilege or control has already been verified. Every item remains `Pending` until supported by repository evidence and an identifiable reviewer.
+This register governs identity assurance, role-specific training, least-privilege review and revocation evidence for the approved two-person model. It does not grant runtime privileges.
 
 ## 2. Current nominated identities
 
-| Identity | Current role group | Operational authority | Current evidence status |
+| Project identity | Natural person | Role group | Current evidence status |
 |---|---|---|---|
-| Massimo Mainini | Sponsor, architecture, operations, service, technical ownership, Operator, Incident Coordinator, Maintainer, Documentation Governor | None granted by this register | Pending verification |
-| Leonardo Di Egidio | C3 Approver, C4 Second Approver, Return-to-Service Approver, Safety Authority, Security Authority, provisional Auditor | None granted by this register | Pending verification |
+| DSG-PERSON-001 | Massimo Mainini | Sponsor, architecture, operations, service, technical ownership, Operator, Incident Coordinator, Maintainer, Documentation Governor | Governance mapping established; IDV attestation pending |
+| DSG-PERSON-002 | Leonardo Di Egidio | C3 Approver, Return-to-Service Approver, Safety Authority, Security Authority | Governance mapping established; IDV attestation pending |
 
 ## 3. Identity assurance register
 
-Identity verification must use an authoritative source suitable for the project context. Sensitive identity-document data must not be committed to the repository; the repository should retain only the verification result, reviewer, date and evidence reference.
+Execution artifact: `ARB-012-C04-IDV-Execution-Record.md`.
 
-| Check ID | Identity | Verification requirement | Evidence reference | Verified by | Date | Result |
-|---|---|---|---|---|---|---|
-| IDV-001 | Massimo Mainini | Natural-person identity confirmed and mapped to a unique project identity | Pending | Pending | Pending | Pending |
-| IDV-002 | Leonardo Di Egidio | Natural-person identity confirmed and mapped to a unique project identity | Pending | Pending | Pending | Pending |
-| IDV-003 | Massimo Mainini | Authentication account ownership verified; shared accounts prohibited | Pending | Pending | Pending | Pending |
-| IDV-004 | Leonardo Di Egidio | Authentication account ownership verified; shared accounts prohibited | Pending | Pending | Pending | Pending |
-| IDV-005 | Both | Distinct credentials and distinct authentication factors confirmed | Pending | Pending | Pending | Pending |
+| Check ID | Identity | Verification requirement | Evidence reference | Verified by | Result |
+|---|---|---|---|---|---|
+| IDV-001 | Massimo / DSG-PERSON-001 | Natural-person identity mapped to unique project identity | E-ARB012-C04-IDV-001 / IDV-001 | Leonardo | Pending attestation |
+| IDV-002 | Leonardo / DSG-PERSON-002 | Natural-person identity mapped to unique project identity | E-ARB012-C04-IDV-001 / IDV-002 | Massimo | Pending attestation |
+| IDV-003 | Massimo | Non-production authentication account ownership; non-shared | E-ARB012-C04-IDV-001 / IDV-003 | Leonardo | Pending account evidence |
+| IDV-004 | Leonardo | Non-production authentication account ownership; non-shared | E-ARB012-C04-IDV-001 / IDV-004 | Massimo | Pending account evidence |
+| IDV-005 | Both | Distinct usernames, credentials, factors and sessions | E-ARB012-C04-IDV-001 / IDV-005 | Reciprocal | Pending account evidence |
+
+No third-party observer is required for IDV under the approved target. No IDV item is marked Passed merely from role nomination.
 
 ## 4. Role-specific training matrix
 
-Training may be completed through a documented briefing, walkthrough, tabletop exercise or formal course, provided the subject, trainer, date and outcome are recorded.
-
-| Training ID | Identity | Required subject | Completion evidence | Assessed by | Date | Result |
-|---|---|---|---|---|---|---|
-| TRN-001 | Massimo Mainini | C0–C4 classification, request boundaries and self-approval prohibition | Pending | Pending | Pending | Pending |
-| TRN-002 | Massimo Mainini | Maintenance safety, rollback, safe-state preservation and return-to-service handoff | Pending | Pending | Pending | Pending |
-| TRN-003 | Massimo Mainini | Incident recording, audit trail and evidence preservation | Pending | Pending | Pending | Pending |
-| TRN-004 | Leonardo Di Egidio | Independent C3 approval criteria and conflict rejection | Pending | Pending | Pending | Pending |
-| TRN-005 | Leonardo Di Egidio | Safety permit, deny, stop and safe-state verification | Pending | Pending | Pending | Pending |
-| TRN-006 | Leonardo Di Egidio | Privileged-access approval, least privilege and revocation | Pending | Pending | Pending | Pending |
-| TRN-007 | Leonardo Di Egidio | Return-to-service approval independent from Maintainer | Pending | Pending | Pending | Pending |
-| TRN-008 | Both | Four-eyes workflow, approver revocation and audit completeness | Pending | Pending | Pending | Pending |
+| Training ID | Identity | Required subject | Result |
+|---|---|---|---|
+| TRN-001 | Massimo | C0–C4 classification, request boundaries and self-approval prohibition | Pending |
+| TRN-002 | Massimo | Maintenance safety, rollback, safe-state preservation and return-to-service handoff | Pending |
+| TRN-003 | Massimo | Incident recording, audit trail and evidence preservation | Pending |
+| TRN-004 | Leonardo | Independent C3 approval criteria and conflict rejection | Pending |
+| TRN-005 | Leonardo | Safety permit, deny, stop and safe-state verification | Pending |
+| TRN-006 | Leonardo | Privileged-access approval, least privilege and revocation | Pending |
+| TRN-007 | Leonardo | Return-to-service approval independent from Maintainer | Pending |
+| TRN-008 | Both | Four-eyes workflow, approver revocation and audit completeness | Pending |
 
 ## 5. Least-privilege access review
 
-The baseline is deny-by-default. Role nomination does not imply account creation or privilege assignment.
-
-| Review ID | Identity | Requested capability | Maximum permitted scope before C04 closure | Independent reviewer | Evidence | Decision |
-|---|---|---|---|---|---|---|
-| AR-001 | Massimo Mainini | C0–C2 request/execution in test context | Simulated or isolated non-operational environment only | Leonardo Di Egidio as Security Authority, subject to conflict check | Pending | Pending |
-| AR-002 | Massimo Mainini | Submit C3 request | Request creation only; no approval; no runtime execution | Leonardo Di Egidio | Pending | Pending |
-| AR-003 | Massimo Mainini | Maintenance activity | Documentation and isolated test activity only; no operational return-to-service | Leonardo Di Egidio | Pending | Pending |
-| AR-004 | Leonardo Di Egidio | C3 approval | Approval in non-operational validation only; no execution as requester | Massimo Mainini as Sponsor, with self-benefit exclusion | Pending | Pending |
-| AR-005 | Leonardo Di Egidio | Safety Authority decisions | Documented validation decisions only; no physical-device or runtime authority | Massimo Mainini as Sponsor; independent ARB verification required | Pending | Pending |
-| AR-006 | Leonardo Di Egidio | Security approval | Approve access for Massimo only; may not approve own access | Massimo Mainini as Sponsor; independent ARB verification required | Pending | Pending |
-| AR-007 | Leonardo Di Egidio | Audit evidence access | Read-only repository evidence; no command execution | Pending independent reviewer | Pending | Blocked pending independent reviewer |
-| AR-008 | Both | C4 workflow | No positive C4 execution or validation chain | Not applicable | Current two-person limitation | Denied |
-| AR-009 | Both | Break-glass | No authority | Not applicable | Governance prohibition | Denied |
+| Review ID | Subject | Maximum target scope | Reviewer | Decision |
+|---|---|---|---|---|
+| AR-001 | Massimo C0–C2 validation | isolated simulator context only | Leonardo | Pending |
+| AR-002 | Massimo C3 request | submit/request only under validated workflow | Leonardo | Pending |
+| AR-003 | Massimo maintenance | isolated maintenance; no own return-to-service | Leonardo | Pending |
+| AR-004 | Leonardo C3 approval | approve Massimo request; cannot request same action | Massimo as Sponsor/governance reviewer | Pending |
+| AR-005 | Leonardo Safety Authority | bounded validation decisions; no local-interlock bypass | Massimo as Sponsor/governance reviewer | Pending |
+| AR-006 | Leonardo Security Authority | approve Massimo scope; own-access approval prohibited | Massimo as Sponsor/governance reviewer | Pending |
+| AR-007 | Independent internal audit access | Not part of target model | N/A | N/A by governance design |
+| AR-008 | Positive C4 | Unsupported | Policy enforcement | DENIED by governance design |
+| AR-009 | Break-glass | Unsupported | Policy enforcement | DENIED by governance design |
 
 ## 6. Required separation checks
 
-| Separation ID | Requirement | Current allocation | Status |
+| Separation ID | Requirement | Target allocation | Status |
 |---|---|---|---|
-| SEP-001 | C3 requester distinct from approver | Massimo requests; Leonardo approves | Structurally satisfied; evidence pending |
-| SEP-002 | Maintainer distinct from Return-to-Service Approver | Massimo maintains; Leonardo approves return to service | Structurally satisfied; evidence pending |
-| SEP-003 | Safety Authority distinct from Operations | Leonardo / Massimo | Structurally satisfied; evidence pending |
-| SEP-004 | Security Authority distinct from operational beneficiary | Leonardo / Massimo | Structurally satisfied; evidence pending |
-| SEP-005 | Auditor independent from approval and control functions | Leonardo holds both control and provisional audit roles | Not satisfied |
-| SEP-006 | Positive C4 chain has sufficient independent actors | Only two natural persons available | Not satisfied |
-| SEP-007 | Critical roles have independent substitutes | No independent substitutes nominated | Not satisfied |
+| SEP-001 | C3 requester distinct from approver | Massimo / Leonardo | Structurally satisfied; execution evidence pending |
+| SEP-002 | Maintainer distinct from Return-to-Service Approver | Massimo / Leonardo | Structurally satisfied; execution evidence pending |
+| SEP-003 | Safety Authority distinct from Operations | Leonardo / Massimo | Structurally satisfied; execution evidence pending |
+| SEP-004 | Security Authority distinct from operational beneficiary | Leonardo / Massimo | Structurally satisfied; execution evidence pending |
+| SEP-005 | Independent internal Auditor | Outside target | N/A by governance design |
+| SEP-006 | Positive C4 chain | Outside target | DENIED by governance design |
+| SEP-007 | Independent substitutes | Outside target | N/A; absence suspends two-person-dependent capability |
 
-## 7. Revocation and suspension procedure
+## 7. Revocation and suspension
 
-Any role or access may be suspended immediately when identity assurance, training, conflict status or control effectiveness is uncertain.
+Required non-operational tests remain:
 
-Minimum procedure:
+| Test | Actors | Result |
+|---|---|---|
+| REV-001 — revoke Massimo Operator eligibility | Leonardo revokes Massimo eligibility | Not executed |
+| REV-002 — suspend Leonardo approval eligibility | Massimo Sponsor action against Leonardo validation eligibility | Not executed |
+| REV-003 — invalidate pending approval after suspension | Validation workflow | Not executed |
+| REV-004 — verify deterministic denied access after revocation | Validation workflow | Not executed |
 
-1. record the identity, role, reason and timestamp;
-2. suspend the affected logical access or mark it unavailable;
-3. invalidate pending approvals from that identity;
-4. prevent execution of any request relying on the revoked approval;
-5. preserve audit evidence;
-6. require a new independent review before reinstatement.
+No third observer is a target prerequisite. Technical audit evidence must demonstrate the state transition and denial.
 
-| Revocation test | Owner | Evidence | Result |
-|---|---|---|---|
-| Revoke Massimo's Operator eligibility before execution | Leonardo Di Egidio | Pending | Not executed |
-| Revoke Leonardo's C3 approval eligibility before execution | Massimo Mainini / independent validation observer | Pending | Not executed |
-| Invalidate a pending approval after role suspension | Validation campaign | Pending | Not executed |
-| Confirm denied access after revocation | Validation campaign | Pending | Not executed |
+## 8. Availability model
 
-## 8. Substitute activation
+There are no incompatible-role substitutes in the target model. This is an accepted degraded-availability characteristic, not a closure blocker:
 
-No independent substitutes are currently nominated. Therefore:
-
-- absence of Massimo suspends operational and maintenance-side validation activities;
-- absence of Leonardo suspends approval, safety, security and return-to-service validation activities;
-- one person may not activate the other person's incompatible roles as a substitute;
-- C3 validation requires both identities;
-- C4 remains denied regardless of availability.
-
-Substitute coverage status: **Blocked**.
+- absence of Massimo suspends requester/operator/maintenance-side capabilities;
+- absence of Leonardo suspends C3 approval, safety, security and return-to-service capabilities;
+- cross-substitution remains prohibited;
+- positive C4 remains denied regardless of availability.
 
 ## 9. Evidence acceptance rules
 
-Evidence is acceptable only when it includes:
+Evidence must contain a stable ID, date, subject, verifier/actor, explicit result and repository reference. Secrets, passwords, private keys, MFA seeds, recovery codes and identity-document images/numbers must not be stored.
 
-- stable evidence identifier;
-- date and scope;
-- identity or role assessed;
-- assessor identity;
-- explicit result: `Passed`, `Failed`, `Pending` or `Not Applicable`;
-- links or references to supporting repository artifacts;
-- preserved failure and remediation history;
-- no secrets, passwords, private keys or identity-document images.
-
-A person must not approve their own privileged access, training assessment or identity verification when that approval creates a material conflict.
+Reciprocal verification is valid only across distinct subjects: Massimo does not verify IDV-001/003 for himself; Leonardo does not verify IDV-002/004 for himself. IDV-005 requires reciprocal confirmation.
 
 ## 10. Work-item exit criteria
 
-C04-W03 may be marked complete only when:
+C04-W03 may complete when:
 
-- IDV-001 through IDV-005 are `Passed`;
-- all role-relevant training items are `Passed` or have an approved, time-bound exception;
-- AR-001 through AR-007 have explicit decisions and supporting evidence;
-- revocation procedures have been exercised in the non-operational validation environment;
-- prohibited capabilities remain denied;
-- all conflicts are recorded;
-- an independent reviewer confirms that the evidence is sufficient for C04-W04.
+- IDV-001–IDV-005 are Passed;
+- TRN-001–TRN-008 are Passed or have bounded approved exceptions;
+- AR-001–AR-006 have attributable decisions;
+- AR-007 is recorded N/A by governance design;
+- AR-008 and AR-009 remain denied;
+- ACC-001/ACC-002 prove distinct non-production sessions;
+- REV-001–REV-004 pass in the isolated environment;
+- conflicts and limitations remain explicit.
 
 ## 11. Current disposition
 
-**C04-W03: IN PROGRESS — evidence framework created, verification not yet performed.**
+**C04-W03: IN PROGRESS — IDV EXECUTION RECORD READY; HUMAN/ACCOUNT ATTESTATION PENDING.**
 
-The two-person allocation is structurally suitable for limited non-operational C3 and return-to-service validation after the listed identity, training and access reviews are completed. It is not sufficient for positive C4 validation, independent audit or substitute resilience.
-
-ARB-012-C04 remains `Blocked`. Runtime, break-glass, physical-device control, self-approval and local-interlock bypass remain prohibited.
+The next executable action is reciprocal completion of IDV-001 through IDV-005 using `ARB-012-C04-IDV-Execution-Record.md`. Runtime, physical-device control, self-approval, positive C4, break-glass and local-interlock bypass remain prohibited.
