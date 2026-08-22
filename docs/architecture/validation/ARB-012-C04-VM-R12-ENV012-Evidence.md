@@ -40,7 +40,13 @@ OCCURRED_AT_UTC=2026-08-22T16:18:58.3950873+00:00
 EVIDENCE_PATH=/var/lib/digitalstargate-validation/evidence/ENV-012-VM-R12-b6796670-96db-43c6-9f30-a074c39ab26c.json
 ```
 
-No `FAILURE=` records were emitted.
+Exported evidence JSON SHA-256:
+
+```text
+c870659ffc3956315dd47de19bfc94931c6568937b4fb111f67be4641d7d78a9
+```
+
+The exported JSON recorded `result=PASS`, `failures=[]`, `selected_mode=simulator-only`, `physical_device_access=false`, `production_fallback_selectable=false`, and `physical_command_sent=false`.
 
 ## 4. Safety interpretation
 
