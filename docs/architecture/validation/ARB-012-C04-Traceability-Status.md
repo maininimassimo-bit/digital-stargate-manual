@@ -4,11 +4,11 @@
 |---|---|
 | Condition | `ARB-012-C04` |
 | Scope | Role Assignment and Four-Eyes Enforcement |
-| Status | `Blocked — ENV-011 technical evidence complete; formal acceptance and remaining environment controls pending` |
-| Updated | 2026-08-04 |
+| Status | `Blocked — W03 ready for attributable execution; ENV-011 technical evidence complete; formal acceptance and remaining environment controls pending` |
+| Updated | 2026-08-22 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
-| Branch | `validation/arb-012-c04-env011-technical-evidence-complete` |
-| Pull request | Pending |
+| Branch | `main` |
+| Pull request | Not applicable — reconciliation committed directly to main |
 
 ## Work-item traceability
 
@@ -16,11 +16,11 @@
 |---|---|---|
 | C04-W01 | `ARB-012-C04-Closure-Plan.md` | Recorded |
 | C04-W02 | Sponsor decision and role assignment register | Recorded |
-| C04-W03 | `ARB-012-C04-Identity-Training-Access-Review.md` | Defined; evidence incomplete |
-| C04-W04 | `ARB-012-C04-Four-Eyes-Validation-Plan.md` | Defined; FE-01…FE-12 not executed |
+| C04-W03 | `ARB-012-C04-Identity-Training-Access-Review.md`; `ARB-012-C04-W03-Execution-Package.md` | Evidence framework defined; executable IDV/TRN/access/revocation package ready; attributable execution pending |
+| C04-W04 | `ARB-012-C04-Four-Eyes-Validation-Plan.md` | Approved plan; FE-01…FE-12 not executed |
 | C04-W05 | `ARB-012-C04-Validation-Environment-Baseline.md` | Baseline defined |
 | C04-W06 | Provisioning record, execution campaign, host procedure and execution result | ENV-011 technical evidence complete; formal acceptance pending; remaining PRV/ENV controls incomplete |
-| C04-W07 | Four-eyes scenario execution and evidence | Blocked by W03 and W06 formal acceptance |
+| C04-W07 | Four-eyes scenario execution and evidence | Blocked by W03 completion and W06 formal acceptance |
 | C04-W08 | Validation report and independent ARB re-review | Not started |
 
 ## Immutable DSOC baseline
@@ -61,33 +61,43 @@
 | `E-ENV011-06` | Review form prepared; attributable independent-review disposition pending |
 | Independent AI technical re-review | Technical review completed; not a formal acceptance disposition |
 | ENV-011 | Technical evidence complete; not formally accepted |
+| `ARB-012-C04-W03-EXEC-001` | Execution package recorded; no IDV/TRN/AR/REV control marked Passed |
+
+## W03 executable gate
+
+W03 is no longer blocked by lack of an execution design. `ARB-012-C04-W03-Execution-Package.md` defines the evidence schema and dependency order for:
+
+- IDV-001 through IDV-005;
+- TRN-001 through TRN-008;
+- AR-001 through AR-007;
+- REV-001 through REV-004;
+- independent observer/reviewer nomination.
+
+The immediate prerequisite is nomination of an attributable independent observer/reviewer. This role is required for conflicted access reviews, REV-002, W03 evidence sufficiency and `E-ENV011-06`. No repository evidence currently supports marking that nomination complete.
 
 ## Governance disposition
 
+- ENV-011 technical execution is complete and is not to be repeated solely for documentation reconciliation.
 - Four domain tests passed against the immutable application baseline both online and offline.
-- The raw offline transcript records `eth0` down, no global IPv4 address and no default route.
-- Ping and GitHub HTTPS/DNS access failed while disconnected, as expected.
-- The effective simulator configuration is uniquely identified and reproducibly checksummed.
-- The simulator-only manifest prohibits ASCOM, Alpaca, NINA, CPWI, production MQTT brokers, physical relay controllers and production weather stations.
-- The active time-synchronization provider is Chrony and the system clock was synchronized.
-- No persistent Git credential helper or plaintext credential file was identified.
-- `E-ENV011-06` remains mandatory before formal acceptance.
-- Distinct validation accounts, database, audit store, reset verification and the remaining `ENV-001` through `ENV-012` controls remain incomplete.
-- W03 evidence remains incomplete and FE-01 through FE-12 remain not executed.
+- Simulator-only and physical-device prohibition are verified for the ENV-011 technical scope.
+- `E-ENV011-06` remains mandatory before formal ENV-011 acceptance.
+- W03 now has an executable evidence package, but IDV/TRN/access/revocation evidence remains pending.
+- Distinct validation accounts, database, audit store, reset verification and remaining ENV controls remain incomplete.
+- FE-01 through FE-12 remain not executed.
 - DSOC runtime command enablement, production credentials, observatory routes, physical-device control, positive C4, break-glass, self-approval and local-interlock bypass remain prohibited.
 
 ## Published-roadmap projection
 
-`docs/data/roadmap.json` must record ENV-011 as having complete technical evidence while retaining formal acceptance, remaining PRV/ENV controls, W03, W07 and ARB re-review as pending.
+`docs/data/roadmap.json` must continue to represent ARB-012-C04 as blocked until attributable W03 evidence, W06 acceptance, W07 execution and W08 re-review are complete.
 
 ## Exit criteria
 
 ARB-012-C04 may move from `Blocked` only after:
 
-1. W03 evidence is complete and accepted;
-2. W06 completes all required provisioning records and distinct accounts;
-3. `E-ENV011-06` is completed with an attributable `Passed` disposition;
-4. the isolated environment passes the complete `ENV-001` through `ENV-012` set;
+1. W03 evidence is complete and independently accepted;
+2. W06 completes required provisioning records and distinct accounts;
+3. `E-ENV011-06` has an attributable `Passed` disposition;
+4. the isolated environment passes the complete applicable ENV set;
 5. FE-01 through FE-12 are executed with complete evidence;
 6. incompatible-role and self-approval denial tests pass;
 7. independent audit and ARB re-review are completed.
