@@ -6,7 +6,7 @@
 | Work item | C04-W03 — Identity, Training and Access Review Evidence |
 | Target model | Two-Person Limited Operations Model |
 | Date | 2026-08-22 |
-| Status | **Ready for reciprocal human attestation — technical account separation proven** |
+| Status | **Partial PASS — Massimo attestation recorded; Leonardo attestation pending** |
 | Runtime effect | None |
 
 ## 1. Purpose
@@ -26,17 +26,17 @@ The VM evidence demonstrates distinct Unix identities and distinct authenticated
 
 ## 3. IDV execution matrix
 
-| Check | Subject | Reciprocal verifier | Evidence already proven | Human attestation still required | Current result |
+| Check | Subject | Reciprocal verifier | Evidence already proven | Human attestation | Current result |
 |---|---|---|---|---|---|
-| IDV-001 | Massimo / DSG-PERSON-001 | Leonardo | Sponsor/governance mapping exists | Leonardo confirms DSG-PERSON-001 maps to Massimo Mainini | **Pending human attestation** |
-| IDV-002 | Leonardo / DSG-PERSON-002 | Massimo | Sponsor/governance mapping exists | Massimo confirms DSG-PERSON-002 maps to Leonardo Di Egidio | **Pending human attestation** |
-| IDV-003 | Massimo / `dsgmassimo` | Leonardo | VM-R03 / ACC-001 proves distinct non-production account/session, UID 1001, no sudo | Leonardo confirms `dsgmassimo` is Massimo's assigned non-shared validation account | **Technical PASS / ownership pending** |
-| IDV-004 | Leonardo / `dsgleonardo` | Massimo | VM-R04 / ACC-002 proves distinct non-production account/session, UID 1002, no sudo | Massimo confirms `dsgleonardo` is Leonardo's assigned non-shared validation account | **Technical PASS / ownership pending** |
-| IDV-005 | Both | Reciprocal | VM-R03 + VM-R04 prove distinct usernames and sessions | Both confirm credentials/authentication factors are not shared | **Technical separation PASS / reciprocal attestation pending** |
+| IDV-001 | Massimo / DSG-PERSON-001 | Leonardo | Sponsor/governance mapping exists | Leonardo confirmation required | **Pending Leonardo attestation** |
+| IDV-002 | Leonardo / DSG-PERSON-002 | Massimo | Sponsor/governance mapping exists | Massimo attested PASS on 2026-08-22 | **PASS** |
+| IDV-003 | Massimo / `dsgmassimo` | Leonardo | VM-R03 / ACC-001 proves distinct non-production account/session, UID 1001, no sudo | Leonardo ownership confirmation required | **Technical PASS / Leonardo ownership pending** |
+| IDV-004 | Leonardo / `dsgleonardo` | Massimo | VM-R04 / ACC-002 proves distinct non-production account/session, UID 1002, no sudo | Massimo attested PASS on 2026-08-22 | **PASS** |
+| IDV-005 | Both | Reciprocal | VM-R03 + VM-R04 prove distinct usernames and sessions | Massimo half PASS; Leonardo half pending | **Partial PASS** |
 
-## 4. Reciprocal attestations to execute
+## 4. Recorded reciprocal attestations
 
-### 4.1 Massimo verifies Leonardo
+### 4.1 Massimo verifies Leonardo — RECORDED
 
 ```text
 Control set: IDV-002, IDV-004, reciprocal part of IDV-005
@@ -45,13 +45,15 @@ Verified-by: Massimo Mainini
 Verification-source-class: known-person verification + isolated validation account/session evidence
 Shared-account: No
 Distinct-credentials/factors from Massimo: Yes
-Decision: PASS | NOT PASS
-Date: YYYY-MM-DD
-Statement: I confirm that Leonardo Di Egidio is the natural person mapped to DSG-PERSON-002, that dsgleonardo is Leonardo's assigned non-shared non-production validation account, and that credentials/authentication factors are not shared with Massimo.
-Notes: <non-sensitive notes only>
+Decision: PASS
+Date: 2026-08-22
+Statement: Massimo Mainini confirms that Leonardo Di Egidio is the natural person mapped to DSG-PERSON-002, that dsgleonardo is Leonardo's assigned non-shared non-production validation account, and that credentials/authentication factors are not shared with Massimo.
+Source of attestation: direct project-owner confirmation recorded in the governed ARB-012-C04 workflow.
 ```
 
-### 4.2 Leonardo verifies Massimo
+This attestation satisfies IDV-002 and IDV-004 and the Massimo reciprocal half of IDV-005.
+
+### 4.2 Leonardo verifies Massimo — PENDING
 
 ```text
 Control set: IDV-001, IDV-003, reciprocal part of IDV-005
@@ -74,10 +76,10 @@ The attributable attestation text, verifier, date and explicit result are suffic
 
 ## 6. Acceptance rules
 
-IDV-001 through IDV-005 may be marked `Passed` only after both reciprocal attestations are recorded with explicit `PASS` decisions and dates. Neither person may self-verify their own natural-person/account ownership mapping.
+IDV-001 through IDV-005 may be marked fully `Passed` only after both reciprocal attestations are recorded with explicit `PASS` decisions and dates. Neither person may self-verify their own natural-person/account ownership mapping.
 
-Technical account/session evidence remains valid independently and must not be downgraded while human ownership attestation is pending.
+Technical account/session evidence remains valid independently and must not be downgraded while the Leonardo attestation is pending.
 
 ## 7. Current disposition
 
-**READY — TECHNICAL ACCOUNT SEPARATION PROVEN; RECIPROCAL HUMAN ATTESTATIONS PENDING.**
+**PARTIAL PASS — IDV-002 AND IDV-004 PASS; MASSIMO HALF OF IDV-005 PASS. IDV-001, IDV-003 AND LEONARDO HALF OF IDV-005 REMAIN PENDING.**
