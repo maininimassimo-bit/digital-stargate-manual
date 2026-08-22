@@ -5,123 +5,105 @@
 | Evidence ID | E-ARB012-C04-01 |
 | Condizione | ARB-012-C04 — Role Assignment and Four-Eyes Enforcement |
 | Package | AP-012 — Enterprise Operations Center Architecture |
-| Autorità del modello | OPSC-RACI-001 |
-| Data | 31/07/2026 |
+| Data | 22/08/2026 |
 | Autorità di nomina | Massimo Mainini — Project Owner / Architecture Sponsor |
-| Configurazione | Two-person segregated bootstrap |
-| Stato | Primary roles redistributed; substitutes, access reviews and independent audit pending |
-| Gate status | Blocked |
+| Configurazione | **Two-Person Limited Operations Model** |
+| Stato | Target model approved; attributable validation evidence pending |
+| Gate status | Blocked pending applicable evidence |
 
-## 1. Scopo
+## 1. Modello target
 
-Il registro governa assegnazioni nominative, deleghe, conflitti e separazione delle responsabilità necessarie per ARB-012-C04. La registrazione non concede privilegi applicativi, infrastrutturali o fisici e non abilita command path runtime.
+Il modello target usa esclusivamente due persone naturali. Massimo Mainini detiene le responsabilità operative/tecniche e Leonardo Di Egidio le responsabilità approvative, safety e security entro lo scope supportato.
 
-La configurazione corrente distribuisce le funzioni operative e tecniche a Massimo Mainini e le funzioni approvative e di controllo a Leonardo Di Egidio. La configurazione riduce i conflitti diretti, ma resta transitoria perché non sono disponibili sostituti indipendenti, l'Auditor appartiene ancora allo stesso pool delle autorità di controllo e non esistono ancora evidenze di formazione, access review o test four-eyes.
+L'assenza di una terza persona non è più un blocker organizzativo. Le capability che richiederebbero una terza identità non vengono simulate o indebolite: sono negate o classificate N/A.
 
-## 2. Nominative role register
+## 2. Registro ruoli
 
-| Ruolo | Titolare | Sostituto | Autorità di nomina | Validità | Formazione verificata | Access review | Stato |
-|---|---|---|---|---|---|---|---|
-| Project Owner / Architecture Sponsor | Massimo Mainini | Non nominato | Project governance | Dal 31/07/2026 fino a revoca | N/A per gate operativo | N/A | Established |
-| Chief Architect | Massimo Mainini | Non nominato | Sponsor | Dal 31/07/2026 fino a revoca | Da verificare | N/A | Bootstrap assignment |
-| Architecture Review Board | Independent ARB function | Non nominato | Sponsor / governance | Per review | Da verificare | Read-only | Function established; membership pending |
-| Operations Lead | Massimo Mainini | Non nominato | Sponsor | Dal 31/07/2026 fino a revoca | Da verificare | Da eseguire | Assigned — non operational |
-| Service Owner | Massimo Mainini | Non nominato | Sponsor | Dal 31/07/2026 fino a revoca | Da verificare | Da eseguire | Assigned — non operational |
-| Technical Owner | Massimo Mainini | Non nominato | Sponsor | Dal 31/07/2026 fino a revoca | Da verificare | Da eseguire | Assigned — non operational |
-| Operator | Massimo Mainini | Non nominato | Operations Lead | Dal 31/07/2026 fino a revoca | Da verificare | Da eseguire | Assigned — C0–C2 only if separately authorized |
-| Senior Operator / C3 Approver | Leonardo Di Egidio | Non nominato | Sponsor | Dal 31/07/2026 fino a revoca | Da verificare | Da eseguire | Independent from Operator; non operational |
-| C4 Second Approver | Leonardo Di Egidio | Non nominato | Sponsor | Dal 31/07/2026 fino a revoca | Da verificare | Da eseguire | Recorded; third independent actor still required for positive C4 validation |
-| Incident Coordinator | Massimo Mainini | Non nominato | Operations Lead | Dal 31/07/2026 fino a revoca | Da verificare | Da eseguire | Assigned — non operational |
-| Maintainer | Massimo Mainini | Non nominato | Technical Owner | Dal 31/07/2026 fino a revoca | Da verificare | Da eseguire | Assigned — no self return-to-service |
-| Return-to-Service Approver | Leonardo Di Egidio | Non nominato | Sponsor / Safety governance | Dal 31/07/2026 fino a revoca | Da verificare | Da eseguire | Independent from Maintainer; non operational |
-| Safety Authority | Leonardo Di Egidio | Non nominato | Project Owner / local safety governance | Dal 31/07/2026 fino a revoca | Da verificare | Indipendenza organizzativa parziale | Independent from Operations; runtime authority unavailable |
-| Security Authority | Leonardo Di Egidio | Non nominato | Project Owner | Dal 31/07/2026 fino a revoca | Da verificare | Da eseguire | Independent from operational beneficiary; non operational |
-| Documentation Governor | Massimo Mainini | Non nominato | Chief Architect | Dal 31/07/2026 fino a revoca | Da verificare | N/A | Assigned |
-| Auditor | Leonardo Di Egidio | Non nominato | Sponsor | Dal 31/07/2026 fino a revoca | Da verificare | Read-only da implementare | Provisional; not independent from approval authorities |
+| Ruolo | Titolare | Sostituto | Stato target |
+|---|---|---|---|
+| Project Owner / Architecture Sponsor | Massimo Mainini | Nessuno | Established |
+| Chief Architect / Technical Owner | Massimo Mainini | Nessuno | Established |
+| Operations Lead / Service Owner | Massimo Mainini | Nessuno | Established |
+| Operator / Requester | Massimo Mainini | Nessuno | C0–C3 entro autorizzazione separata; no self-approval |
+| Incident Coordinator | Massimo Mainini | Nessuno | Established |
+| Maintainer | Massimo Mainini | Nessuno | Non può approvare il proprio return-to-service |
+| C3 Approver | Leonardo Di Egidio | Nessuno | Approver distinto per richieste Massimo |
+| Return-to-Service Approver | Leonardo Di Egidio | Nessuno | Distinto dal Maintainer |
+| Safety Authority | Leonardo Di Egidio | Nessuno | Permit/deny/stop governance; interlock locali autorevoli |
+| Security Authority | Leonardo Di Egidio | Nessuno | Può governare accesso Massimo; self-access approval negata |
+| C4 Second Approver | N/A | N/A | Positive C4 denied by governance design |
+| Independent internal Auditor | N/A | N/A | Independent audit closure not claimed |
 
-## 3. Access matrix baseline
+L'assenza di sostituti implica **degraded availability**: se una delle due persone non è disponibile, le operazioni che richiedono entrambe restano sospese. Non è ammessa cross-substitution incompatibile.
 
-Legenda:
+## 3. Access matrix target
 
-- `R`: richiesta consentita entro scope;
-- `A`: approvazione richiesta;
-- `E`: esecuzione consentita dopo autorizzazione;
-- `D`: negato;
-- `TBD`: non assegnabile finché identità, policy e controlli non sono implementati.
+Legenda: `R` request, `A` approve, `E` execute, `D` denied, `N/A` fuori dal modello.
 
-| Identità / ruolo | C1 | C2 | C3 | C4 | Safety permit/deny | Break-glass |
+| Identità / ruolo | C1 | C2 | C3 | C4 | Safety | Break-glass |
 |---|---|---|---|---|---|---|
-| Massimo Mainini — Operator | TBD | TBD | R/E dopo approvazione distinta | R/E solo dopo catena approvativa completa | D | D |
-| Massimo Mainini — Operations Lead | TBD | TBD | R; nessuna auto-approvazione | R; nessuna auto-approvazione | D | D |
-| Massimo Mainini — Technical Owner / Maintainer | TBD | TBD | R/E entro maintenance window e approvazione distinta | R/E solo dopo catena approvativa completa | D | D |
-| Leonardo Di Egidio — C3 Approver | D | D | A per richieste di Massimo | A primaria; non sufficiente da solo per C4 | D | D |
-| Leonardo Di Egidio — C4 Second Approver | D | D | D salvo ruolo C3 esplicito | A secondaria solo con altro approvatore indipendente | D | D |
-| Leonardo Di Egidio — Return-to-Service Approver | D | D | A limitata al return-to-service | A limitata al return-to-service | C per verifica safety | D |
-| Leonardo Di Egidio — Safety Authority | D | D | permit/deny safety | permit/deny/stop | A/R | D |
-| Leonardo Di Egidio — Security Authority | D | D | access approval only | access approval only | D | A solo dopo policy e review indipendente |
-| Leonardo Di Egidio — Auditor provvisorio | D | D | D | D | D | D |
-
-La matrice è una baseline documentale. Nessun privilegio è implementato o verificato. C3 può essere validato soltanto in ambiente non operativo con Massimo requester/executor e Leonardo approver. C4 resta bloccato perché una sola identità ricopre entrambe le funzioni approvative e manca un terzo attore indipendente.
+| Massimo — Operator/Requester | R/E secondo policy | R/E secondo policy | R/E solo dopo approvazione Leonardo | D | D | D |
+| Massimo — Maintainer | R/E secondo maintenance policy | R/E secondo maintenance policy | R/E solo dopo approvazione distinta | D | D | D |
+| Leonardo — C3 Approver | D | D | A per richieste Massimo | D | D | D |
+| Leonardo — Return-to-Service | D | D | A limitata al return-to-service | D | verifica safety | D |
+| Leonardo — Safety Authority | D | D | permit/deny/stop | D | A/R | D |
+| Leonardo — Security Authority | access governance only | access governance only | access governance only | D | D | D |
 
 ## 4. Mandatory segregation rules
 
-1. requester e approver devono essere distinti per C3 e C4;
-2. per C4 l'esecutore, l'approvatore primario e il secondo approvatore devono essere organizzativamente indipendenti secondo la policy applicabile;
-3. Maintainer e return-to-service approver devono essere distinti;
-4. Security Authority non può approvare il proprio accesso;
-5. Auditor deve avere accesso read-only e non ricoprire ruoli approvativi sullo stesso evidence set;
-6. Safety Authority deve essere indipendente dal DSOC per permit, deny, stop e safe state;
-7. policy author e policy approver devono essere distinti;
-8. la chiusura SEV-1 richiede four-eyes e verifica del safe state.
+1. Massimo non può approvare una propria richiesta C3.
+2. Leonardo non può essere requester e approver della stessa azione.
+3. Massimo Maintainer non può approvare il proprio return-to-service.
+4. Leonardo Security Authority non può approvare il proprio accesso.
+5. Positive C4 è sempre negato nel modello a due persone.
+6. Break-glass è sempre negato.
+7. Nessuna cross-substitution può aggirare la separazione.
+8. Gli interlock fisici locali non possono essere bypassati e restano autorevoli.
+9. L'assenza di independent internal audit non può essere rappresentata come audit indipendente completato.
 
-La configurazione corrente soddisfa parzialmente i punti 1, 3 e 6. Non soddisfa ancora i punti 2 e 5 e non dispone di evidenza tecnica per gli altri controlli.
+## 5. Conflict register
 
-## 5. Delegation record
-
-| Delegation ID | Delegante | Delegato | Ruolo/scope | Classi comando | Inizio | Scadenza | Approvatore | Revoca | Stato |
-|---|---|---|---|---|---|---|---|---|---|
-| DEL-C04-001 | Massimo Mainini — Sponsor | Massimo Mainini | Operations, service, technical ownership, operator, incident, maintenance and documentation governance | Nessuna autorizzazione runtime implicita | 31/07/2026 | Fino a revoca | Massimo Mainini — Sponsor | Immediata | Active with restrictions |
-| DEL-C04-002 | Massimo Mainini — Sponsor | Leonardo Di Egidio | C3 approval, C4 second approval, return-to-service, safety, security and provisional audit | Nessuna autorizzazione runtime implicita | 31/07/2026 | Fino a revoca | Massimo Mainini — Sponsor | Immediata | Active with restrictions |
-
-Le deleghe non autorizzano C3/C4 runtime, break-glass o accesso privilegiato. L'attivazione contemporanea di ruoli incompatibili resta vietata.
-
-## 6. Conflict register
-
-| Conflict ID | Persona/ruolo | Conflitto | Rischio | Mitigazione | Approvazione | Stato |
-|---|---|---|---|---|---|---|
-| CR-001 | Massimo Mainini — Sponsor / Operations / Technical / Maintainer | concentrazione delle funzioni operative e tecniche | High | Leonardo approva C3 e return-to-service; auto-approvazione negata | Sponsor | Mitigated for non-operational C3 testing only |
-| CR-002 | Leonardo Di Egidio — C3 Approver / C4 Second Approver | stessa identità copre due livelli approvativi C4 | Critical | C4 bloccato; nominare terzo attore indipendente | Sponsor | Open blocker |
-| CR-003 | Leonardo Di Egidio — Safety / Security / Auditor | controllo, sicurezza e audit concentrati nella stessa identità | High | audit considerato provvisorio; nominare Auditor indipendente | Sponsor | Open blocker |
-| CR-004 | Entrambe le identità | assenza di sostituti per ruoli critici | High | nessuna attivazione runtime; nominare sostituti distinti e time-bound | Sponsor | Open blocker |
-| CR-005 | Entrambe le identità | formazione, identity verification e access review non documentate | High | completare C04-W03 prima di qualsiasi test positivo | Sponsor / future Security Authority | Open blocker |
-
-## 7. Four-eyes validation scenarios
-
-| Scenario | Requester / executor | Approver / verifier | Stato di eseguibilità |
+| Conflict ID | Conflitto | Mitigazione target | Stato |
 |---|---|---|---|
-| C3 request and approval | Massimo Mainini | Leonardo Di Egidio | Preparabile in ambiente non operativo |
-| Self-approval rejection | Massimo Mainini | Policy enforcement | Preparabile; controllo tecnico non ancora implementato |
-| C4 request with two approvals | Massimo Mainini | Leonardo Di Egidio + terzo attore indipendente | Bloccato |
-| Approver revocation before execution | Massimo Mainini | Leonardo Di Egidio / Security Authority | Preparabile dopo identity and access implementation |
-| Return-to-service | Massimo Mainini — Maintainer | Leonardo Di Egidio | Preparabile in ambiente non operativo |
-| SEV-1 closure | Massimo Mainini | Leonardo Di Egidio + independent audit/safety evidence | Bloccato per indipendenza insufficiente |
-| Safety suppression rule | Massimo Mainini — author | Leonardo Di Egidio — approver | Preparabile in ambiente non operativo |
-| Independent audit | N/A | Auditor indipendente | Bloccato |
+| CR-001 | concentrazione operativa/tecnica in Massimo | C3 e return-to-service richiedono Leonardo; self-approval negata | Accepted with controls |
+| CR-002 | impossibilità di una catena C4 a tre attori | positive C4 permanentemente negato | Resolved by prohibition |
+| CR-003 | Leonardo concentra approval/safety/security | self-access e self-audit negati; independent audit closure fuori scope | Accepted with scope limitation |
+| CR-004 | nessun sostituto | capability two-person sospese in assenza di uno dei titolari | Accepted degraded availability |
+| CR-005 | evidence IDV/TRN/access/revocation non completa | completare W03 prima di validazione positiva | Open evidence blocker |
 
-## 8. Closure criteria and current gaps
+## 6. Four-eyes scenarios target
 
-C04 può diventare `Passed` solo quando:
+| Scenario | Attori | Target |
+|---|---|---|
+| C3 request and approval | Massimo -> Leonardo | Required positive validation |
+| Self-approval rejection | Massimo / policy | Required denial validation |
+| Approver conflict rejection | Leonardo / policy | Required denial validation |
+| Approver/operator revocation | Massimo + Leonardo secondo ruolo | Required validation senza terza persona; conflitti devono produrre deny/suspend |
+| Return-to-service | Massimo Maintainer -> Leonardo approver | Required positive validation |
+| Safety decision | Massimo Operations -> Leonardo Safety | Required validation |
+| Security self-access | Leonardo | Required denial validation |
+| C4 positive path | Massimo + Leonardo | Required **denial** validation |
+| Break-glass | entrambi | Required **denial** validation |
+| Independent internal audit | N/A | Not claimed; repository traceability remains required |
 
-- i ruoli critici dispongono di sostituti approvati;
-- C4 dispone di una catena realmente indipendente;
-- l'Auditor è separato dalle autorità approvative;
-- formazione, identity verification e access review sono documentate;
-- revoca e substitute activation sono verificate;
-- gli scenari four-eyes sono eseguiti con audit trail completo;
-- l'ARB emette una decisione indipendente `Passed`.
+## 7. Closure criteria
 
-## 9. Decisione corrente
+C04 può diventare `Passed` nel modello a due persone quando:
 
-**ARB-012-C04: BLOCKED — two-person segregation recorded.**
+- identity/account separation è verificata;
+- training e least-privilege review applicabili sono documentati;
+- due account non-production distinti sono disponibili per validation;
+- revocation e conflict denial sono verificati;
+- gli ENV controls applicabili passano;
+- i FE scenarios applicabili al modello a due persone sono eseguiti con audit trail completo;
+- C4 e break-glass risultano tecnicamente/proceduralmente negati;
+- repository CI è verde;
+- l'ARB re-review conferma coerenza del **Two-Person Limited Operations Model**.
 
-La redistribuzione consente la preparazione di prove non operative C3, return-to-service e safety author/approver con due identità distinte. Non consente C4, break-glass, audit indipendente o runtime enablement. Gli interlock fisici locali rimangono indipendenti e autorevoli.
+Non sono exit criteria: terza persona, sostituti indipendenti, positive C4, independent internal audit closure.
+
+## 8. Decisione corrente
+
+**ARB-012-C04: BLOCKED ONLY FOR APPLICABLE TWO-PERSON EVIDENCE.**
+
+Il modello organizzativo target è approvato. Il blocker residuo è evidence-based, non staffing-based. Nessuna autorizzazione runtime è implicata.
