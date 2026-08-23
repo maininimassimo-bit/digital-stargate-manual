@@ -8,7 +8,7 @@
 | Condition | ARB-012-C04 — Role Assignment and Four-Eyes Enforcement |
 | Updated | 2026-08-23 |
 | Target model | Two-Person Limited Operations Model |
-| Status | **In Progress — IDV partial PASS; TRN-001..007 PASS; TRN-008 and access/revocation reconciliation pending** |
+| Status | **In Progress — IDV partial PASS; TRN-001..007 PASS; TRN-008 partial PASS; access/revocation reconciliation pending** |
 | Runtime effect | None |
 
 ## 1. Purpose
@@ -49,7 +49,7 @@ Execution artifact: `ARB-012-C04-Training-Execution-Record.md`.
 | TRN-005 | Leonardo | Safety permit, deny, stop and safe-state verification | **PASS — Massimo assessment, 2026-08-23** |
 | TRN-006 | Leonardo | Privileged-access approval, least privilege and revocation | **PASS — Massimo assessment, 2026-08-23** |
 | TRN-007 | Leonardo | Return-to-service approval independent from Maintainer | **PASS — Massimo assessment, 2026-08-23** |
-| TRN-008 | Both | Four-eyes workflow, approver revocation and audit completeness | **Pending reciprocal cross-attestation** |
+| TRN-008 | Both | Four-eyes workflow, approver revocation and audit completeness | **Partial PASS — Massimo assessment of Leonardo PASS; Leonardo assessment of Massimo pending** |
 
 ## 5. Least-privilege access review
 
@@ -122,8 +122,8 @@ C04-W03 may complete when:
 
 **C04-W03: IN PROGRESS.**
 
-Completed: TRN-001 through TRN-007, IDV-002, IDV-004, Massimo half of IDV-005, distinct technical accounts/sessions, AR-008/AR-009 denial evidence and technical suspension enforcement substrate.
+Completed: TRN-001 through TRN-007, Massimo half of TRN-008, IDV-002, IDV-004, Massimo half of IDV-005, distinct technical accounts/sessions, AR-008/AR-009 denial evidence and technical suspension enforcement substrate.
 
-Remaining: Leonardo attestation for IDV-001/IDV-003/IDV-005, reciprocal TRN-008, AR-001 through AR-006 decisions, and REV-001 through REV-004 reconciliation/execution as applicable.
+Remaining: Leonardo attestation for IDV-001/IDV-003/IDV-005, Leonardo half of reciprocal TRN-008, AR-001 through AR-006 decisions, and REV-001 through REV-004 reconciliation/execution as applicable.
 
 Runtime, physical-device control, self-approval, positive C4, break-glass and local-interlock bypass remain prohibited.
