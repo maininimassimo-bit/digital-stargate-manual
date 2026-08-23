@@ -7,7 +7,7 @@
 | Package | AP-012 — Enterprise Operations Center Architecture |
 | Target model | Two-Person Limited Operations Model |
 | Prepared | 2026-08-23 |
-| Status | **Partial PASS — TRN-001..007 complete; reciprocal TRN-008 pending** |
+| Status | **Partial PASS — TRN-001..007 complete; Massimo half of reciprocal TRN-008 PASS; Leonardo half pending** |
 | Runtime effect | None |
 
 ## 1. Purpose
@@ -37,7 +37,7 @@ Primary governed material:
 | TRN-005 | Leonardo Di Egidio | Massimo Mainini | Safety Authority permit/deny/stop, safe-state verification and no interlock bypass | **PASS — 2026-08-23** |
 | TRN-006 | Leonardo Di Egidio | Massimo Mainini | Privileged-access approval, least privilege and revocation/suspension | **PASS — 2026-08-23** |
 | TRN-007 | Leonardo Di Egidio | Massimo Mainini | Return-to-service approval independent from Maintainer | **PASS — 2026-08-23** |
-| TRN-008 | Both | Reciprocal | Four-eyes workflow, revocation, C4/break-glass denial and audit completeness | **Pending reciprocal cross-attestation** |
+| TRN-008 | Both | Reciprocal | Four-eyes workflow, revocation, C4/break-glass denial and audit completeness | **Partial PASS — Massimo assessment of Leonardo PASS; Leonardo assessment of Massimo pending** |
 
 ## 4. Required learning outcomes
 
@@ -125,19 +125,22 @@ Source of attestation: direct assessor confirmation recorded in the governed ARB
 
 This closes TRN-001, TRN-002 and TRN-003 as PASS.
 
-### 5.3 Reciprocal TRN-008 — PENDING
+### 5.3 Reciprocal TRN-008 — PARTIAL PASS
 
 ```text
 Participants: Massimo Mainini + Leonardo Di Egidio
 Control: TRN-008
 Method: reciprocal governed-document briefing and confirmation
 Material: OPSC-CMD-001, W03 package, Sponsor Decision, VM-R08 through VM-R12 evidence
-Date: YYYY-MM-DD
-Massimo decision on Leonardo: PASS | NOT PASS
-Leonardo decision on Massimo: PASS | NOT PASS
-Result: PASS only if both reciprocal decisions are PASS
-Statement: Both participants confirm understanding of the two-person four-eyes model, denial-by-design limitations, revocation behavior, audit/evidence obligations and the separation between validation closure and runtime authorization.
+Date: 2026-08-23
+Massimo decision on Leonardo: PASS
+Leonardo decision on Massimo: PENDING
+Result: PARTIAL PASS
+Statement: Massimo Mainini confirms that Leonardo Di Egidio demonstrated understanding of the two-person/four-eyes model, capability suspension and revocation, denial-by-design of C4 and break-glass, audit/evidence obligations, and the fact that validation closure does not constitute runtime authorization.
+Source of Massimo attestation: direct assessor confirmation recorded in the governed ARB-012-C04 workflow.
 ```
+
+TRN-008 becomes fully PASS only after Leonardo provides the reciprocal PASS assessment for Massimo.
 
 ## 6. Acceptance rules
 
@@ -150,4 +153,4 @@ Statement: Both participants confirm understanding of the two-person four-eyes m
 
 ## 7. Current disposition
 
-**PARTIAL PASS — TRN-001 THROUGH TRN-007 PASS. RECIPROCAL TRN-008 REMAINS PENDING.**
+**PARTIAL PASS — TRN-001 THROUGH TRN-007 PASS. MASSIMO HALF OF TRN-008 PASS; LEONARDO HALF OF TRN-008 REMAINS PENDING.**
