@@ -8,7 +8,7 @@
 | Condition | ARB-012-C04 — Role Assignment and Four-Eyes Enforcement |
 | Updated | 2026-08-23 |
 | Target model | Two-Person Limited Operations Model |
-| Status | **In Progress — IDV partial PASS; training 8/8 PASS; access/revocation reconciliation pending** |
+| Status | **In Progress — identity 5/5 PASS; training 8/8 PASS; access/revocation reconciliation pending** |
 | Runtime effect | None |
 
 ## 1. Purpose
@@ -19,8 +19,8 @@ This register governs identity assurance, role-specific training, least-privileg
 
 | Project identity | Natural person | Role group | Current evidence status |
 |---|---|---|---|
-| DSG-PERSON-001 | Massimo Mainini | Sponsor, architecture, operations, service, technical ownership, Operator, Incident Coordinator, Maintainer, Documentation Governor | Governance mapping + VM-R03 technical account evidence; Leonardo human identity attestation pending |
-| DSG-PERSON-002 | Leonardo Di Egidio | C3 Approver, Return-to-Service Approver, Safety Authority, Security Authority | Governance mapping + VM-R04 technical account evidence + Massimo reciprocal human attestation PASS |
+| DSG-PERSON-001 | Massimo Mainini | Sponsor, architecture, operations, service, technical ownership, Operator, Incident Coordinator, Maintainer, Documentation Governor | **PASS — governance mapping + VM-R03 + Leonardo reciprocal attestation** |
+| DSG-PERSON-002 | Leonardo Di Egidio | C3 Approver, Return-to-Service Approver, Safety Authority, Security Authority | **PASS — governance mapping + VM-R04 + Massimo reciprocal attestation** |
 
 ## 3. Identity assurance register
 
@@ -28,13 +28,13 @@ Execution artifact: `ARB-012-C04-IDV-Execution-Record.md`.
 
 | Check ID | Identity | Verification requirement | Evidence reference | Verified by | Result |
 |---|---|---|---|---|---|
-| IDV-001 | Massimo / DSG-PERSON-001 | Natural-person identity mapped to unique project identity | E-ARB012-C04-IDV-001 / IDV-001 | Leonardo | **Pending Leonardo attestation** |
+| IDV-001 | Massimo / DSG-PERSON-001 | Natural-person identity mapped to unique project identity | E-ARB012-C04-IDV-001 / IDV-001 | Leonardo | **PASS — 2026-08-23** |
 | IDV-002 | Leonardo / DSG-PERSON-002 | Natural-person identity mapped to unique project identity | E-ARB012-C04-IDV-001 / IDV-002 | Massimo | **PASS — 2026-08-22** |
-| IDV-003 | Massimo | Non-production authentication account ownership; non-shared | VM-R03 / ACC-001 + IDV record | Leonardo | **Technical PASS / Leonardo ownership attestation pending** |
+| IDV-003 | Massimo | Non-production authentication account ownership; non-shared | VM-R03 / ACC-001 + IDV record | Leonardo | **PASS — 2026-08-23** |
 | IDV-004 | Leonardo | Non-production authentication account ownership; non-shared | VM-R04 / ACC-002 + IDV record | Massimo | **PASS — 2026-08-22** |
-| IDV-005 | Both | Distinct usernames, credentials, factors and sessions | VM-R03 + VM-R04 + reciprocal IDV record | Reciprocal | **Partial PASS — Massimo half complete; Leonardo half pending** |
+| IDV-005 | Both | Distinct usernames, credentials, factors and sessions | VM-R03 + VM-R04 + reciprocal IDV record | Reciprocal | **PASS — 2026-08-23** |
 
-No third-party observer is required for IDV under the approved target. Technical account/session evidence is not treated as a substitute for the remaining human attestation.
+**Identity disposition: 5/5 PASS.** No third-party observer is required under the approved target. No sensitive credential material is stored.
 
 ## 4. Role-specific training matrix
 
@@ -105,7 +105,7 @@ There are no incompatible-role substitutes in the target model. This is an accep
 
 Evidence must contain a stable ID, date, subject, verifier/actor, explicit result and repository reference. Secrets, passwords, private keys, MFA seeds, recovery codes and identity-document images/numbers must not be stored.
 
-Reciprocal verification is valid only across distinct subjects: Massimo does not verify IDV-001/003 for himself; Leonardo does not verify IDV-002/004 for himself. IDV-005 requires reciprocal confirmation. TRN-008 reciprocal confirmation is complete.
+Reciprocal identity and training verification is complete. Neither person self-verified their own identity/account mapping.
 
 ## 10. Work-item exit criteria
 
@@ -124,8 +124,8 @@ C04-W03 may complete when:
 
 **C04-W03: IN PROGRESS.**
 
-Completed: training TRN-001 through TRN-008 (8/8 PASS), IDV-002, IDV-004, Massimo half of IDV-005, distinct technical accounts/sessions, AR-008/AR-009 denial evidence and technical suspension enforcement substrate.
+Completed: identity IDV-001 through IDV-005 (5/5 PASS), training TRN-001 through TRN-008 (8/8 PASS), distinct technical accounts/sessions, AR-008/AR-009 denial evidence and technical suspension enforcement substrate.
 
-Remaining: Leonardo attestation for IDV-001/IDV-003/IDV-005, AR-001 through AR-006 decisions, and REV-001 through REV-004 reconciliation/execution as applicable.
+Remaining: AR-001 through AR-006 attributable access-review decisions, and REV-001 through REV-004 reconciliation/execution as applicable.
 
 Runtime, physical-device control, self-approval, positive C4, break-glass and local-interlock bypass remain prohibited.
