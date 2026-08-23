@@ -7,7 +7,7 @@
 | Package | AP-012 — Enterprise Operations Center Architecture |
 | Target model | Two-Person Limited Operations Model |
 | Prepared | 2026-08-23 |
-| Status | **Partial PASS — Leonardo TRN-004..007 cross-attested; Massimo training and TRN-008 pending** |
+| Status | **Partial PASS — TRN-001..007 complete; reciprocal TRN-008 pending** |
 | Runtime effect | None |
 
 ## 1. Purpose
@@ -30,9 +30,9 @@ Primary governed material:
 
 | Training ID | Participant | Assessor | Subject | Current result |
 |---|---|---|---|---|
-| TRN-001 | Massimo Mainini | Leonardo Di Egidio | C0-C4 classification, request boundaries, self-approval prohibition | **Pending Leonardo assessment** |
-| TRN-002 | Massimo Mainini | Leonardo Di Egidio | Maintenance safety, rollback, safe-state preservation, return-to-service handoff | **Pending Leonardo assessment** |
-| TRN-003 | Massimo Mainini | Leonardo Di Egidio | Incident recording, audit trail, correlation and evidence preservation | **Pending Leonardo assessment** |
+| TRN-001 | Massimo Mainini | Leonardo Di Egidio | C0-C4 classification, request boundaries, self-approval prohibition | **PASS — 2026-08-23** |
+| TRN-002 | Massimo Mainini | Leonardo Di Egidio | Maintenance safety, rollback, safe-state preservation, return-to-service handoff | **PASS — 2026-08-23** |
+| TRN-003 | Massimo Mainini | Leonardo Di Egidio | Incident recording, audit trail, correlation and evidence preservation | **PASS — 2026-08-23** |
 | TRN-004 | Leonardo Di Egidio | Massimo Mainini | Independent C3 approval criteria and conflict/self-approval rejection | **PASS — 2026-08-23** |
 | TRN-005 | Leonardo Di Egidio | Massimo Mainini | Safety Authority permit/deny/stop, safe-state verification and no interlock bypass | **PASS — 2026-08-23** |
 | TRN-006 | Leonardo Di Egidio | Massimo Mainini | Privileged-access approval, least privilege and revocation/suspension | **PASS — 2026-08-23** |
@@ -109,18 +109,21 @@ Source of attestation: direct assessor confirmation recorded in the governed ARB
 
 This closes TRN-004, TRN-005, TRN-006 and TRN-007 as PASS.
 
-### 5.2 Leonardo assesses Massimo — PENDING
+### 5.2 Leonardo assesses Massimo — RECORDED PASS
 
 ```text
 Participant: Massimo Mainini
 Assessor: Leonardo Di Egidio
 Controls: TRN-001, TRN-002, TRN-003
-Method: governed-document briefing + question/answer confirmation
+Method: governed-document briefing + confirmation of required learning outcomes
 Material: OPSC-CMD-001, Operational Runbook Standard, Responsibility Matrix, Sponsor Decision, applicable VM evidence
-Date: YYYY-MM-DD
-Decision: PASS | NOT PASS
-Statement: I confirm that Massimo reviewed the governed material and demonstrated understanding of the required learning outcomes for TRN-001, TRN-002 and TRN-003.
+Date: 2026-08-23
+Decision: PASS
+Statement: Leonardo Di Egidio confirms that the governed material was reviewed with Massimo Mainini and that Massimo demonstrated understanding of the C0-C4 classification and self-approval prohibition, maintenance/rollback/return-to-service safety, and audit/correlation/evidence preservation requirements for TRN-001, TRN-002 and TRN-003.
+Source of attestation: direct assessor confirmation recorded in the governed ARB-012-C04 workflow.
 ```
+
+This closes TRN-001, TRN-002 and TRN-003 as PASS.
 
 ### 5.3 Reciprocal TRN-008 — PENDING
 
@@ -147,4 +150,4 @@ Statement: Both participants confirm understanding of the two-person four-eyes m
 
 ## 7. Current disposition
 
-**PARTIAL PASS — TRN-004, TRN-005, TRN-006 AND TRN-007 PASS. TRN-001, TRN-002, TRN-003 AND RECIPROCAL TRN-008 REMAIN PENDING.**
+**PARTIAL PASS — TRN-001 THROUGH TRN-007 PASS. RECIPROCAL TRN-008 REMAINS PENDING.**
