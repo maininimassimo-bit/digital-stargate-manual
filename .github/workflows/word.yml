@@ -19,34 +19,21 @@ jobs:
       - name: Recupera repository
         uses: actions/checkout@v4
 
-      - name: Verifica Pandoc e fallback Chocolatey
+      - name: Installa Pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+        with:
+          pandoc-version: '3.8.3'
+
+      - name: Verifica Pandoc
         shell: powershell
         run: |
           $ErrorActionPreference = 'Stop'
-
-          if (Get-Command pandoc -ErrorAction SilentlyContinue) {
-            Write-Host 'Pandoc gia disponibile sul runner.'
-            pandoc --version
-            exit 0
+          $pandoc = Get-Command pandoc -ErrorAction Stop
+          Write-Host "Pandoc disponibile: $($pandoc.Source)"
+          pandoc --version
+          if ($LASTEXITCODE -ne 0) {
+            throw 'La verifica di Pandoc non e riuscita.'
           }
-
-          Write-Warning 'Pandoc non presente sul runner; uso Chocolatey come fallback.'
-          $maxAttempts = 3
-          for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
-            Write-Host "Tentativo $attempt di $maxAttempts per installare Pandoc..."
-            choco install pandoc -y --no-progress
-
-            if ($LASTEXITCODE -eq 0 -and (Get-Command pandoc -ErrorAction SilentlyContinue)) {
-              pandoc --version
-              exit 0
-            }
-
-            if ($attempt -lt $maxAttempts) {
-              Start-Sleep -Seconds (15 * $attempt)
-            }
-          }
-
-          throw 'Pandoc non disponibile sul runner e fallback Chocolatey non riuscito.'
 
       - name: Genera documento Word
         shell: powershell
