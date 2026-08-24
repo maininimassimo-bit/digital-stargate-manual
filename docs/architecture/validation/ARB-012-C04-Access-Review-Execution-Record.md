@@ -8,7 +8,7 @@
 | Target model | Two-Person Limited Operations Model |
 | Prepared | 2026-08-23 |
 | Updated | 2026-08-24 |
-| Status | **Partial PASS — AR-004..AR-006 complete; AR-001..AR-003 pending Leonardo decision** |
+| Status | **PASS — AR-001..AR-006 complete** |
 | Runtime effect | None |
 
 ## 1. Purpose
@@ -30,9 +30,9 @@ Technical evidence already proves distinct validation accounts, self-approval de
 
 | Review | Subject | Maximum target scope | Reviewer | Required least-privilege decision | Current result |
 |---|---|---|---|---|---|
-| AR-001 | Massimo | C0-C2 validation | Leonardo | Isolated simulator context only; no production/physical-device access | Pending Leonardo decision |
-| AR-002 | Massimo | C3 request | Leonardo | Submit/request only under validated four-eyes workflow; no self-approval | Pending Leonardo decision |
-| AR-003 | Massimo | Maintenance | Leonardo | Isolated maintenance only; cannot approve own return-to-service | Pending Leonardo decision |
+| AR-001 | Massimo | C0-C2 validation | Leonardo | Isolated simulator context only; no production/physical-device access | **PASS — 2026-08-24** |
+| AR-002 | Massimo | C3 request | Leonardo | Submit/request only under validated four-eyes workflow; no self-approval | **PASS — 2026-08-24** |
+| AR-003 | Massimo | Maintenance | Leonardo | Isolated maintenance only; cannot approve own return-to-service | **PASS — 2026-08-24** |
 | AR-004 | Leonardo | C3 approval | Massimo | May approve Massimo C3 request; cannot request/approve same action | **PASS — 2026-08-24** |
 | AR-005 | Leonardo | Safety Authority | Massimo | Bounded permit/deny/stop validation decisions; no local-interlock bypass | **PASS — 2026-08-24** |
 | AR-006 | Leonardo | Security Authority | Massimo | May approve Massimo scope; own-access approval prohibited | **PASS — 2026-08-24** |
@@ -52,23 +52,16 @@ Statement: Massimo Mainini confirms that Leonardo Di Egidio's least-privilege sc
 Source of attestation: direct reviewer confirmation recorded in the governed ARB-012-C04 workflow.
 ```
 
-This closes AR-004, AR-005 and AR-006 as PASS.
-
-## 5. Leonardo reviews Massimo — AR-001, AR-002, AR-003
+## 5. Leonardo reviews Massimo — RECORDED PASS
 
 ```text
 Reviewer: Leonardo Di Egidio
 Subject: Massimo Mainini
 Controls: AR-001, AR-002, AR-003
-Date: YYYY-MM-DD
-Decision: PASS | NOT PASS
-
-I confirm that the maximum least-privilege scope for Massimo is limited to:
-- AR-001: C0-C2 validation in the isolated simulator context only, with no production or physical-device access;
-- AR-002: C3 submit/request capability only under the validated four-eyes workflow; self-approval remains prohibited;
-- AR-003: isolated maintenance activity only; Massimo cannot approve his own return-to-service.
-
-I confirm that no broader runtime, production, physical-device, positive-C4 or break-glass privilege is authorized by this review.
+Date: 2026-08-24
+Decision: PASS
+Statement: Leonardo Di Egidio confirms that Massimo Mainini's least-privilege scope is limited to C0-C2 validation exclusively in the isolated simulator context, with no production or physical-device access; C3 submit/request capability only under the validated four-eyes workflow with self-approval prohibited; and isolated maintenance activities without the ability to approve his own return-to-service. This review does not authorize runtime, production, physical-device-control, positive-C4 or break-glass privileges.
+Source of attestation: direct reviewer confirmation recorded in the governed ARB-012-C04 workflow.
 ```
 
 ## 6. Acceptance rules
@@ -81,4 +74,4 @@ I confirm that no broader runtime, production, physical-device, positive-C4 or b
 
 ## 7. Current disposition
 
-**PARTIAL PASS — AR-004 THROUGH AR-006 COMPLETE; AR-001 THROUGH AR-003 REQUIRE LEONARDO'S ATTRIBUTABLE DECISION.**
+**PASS — AR-001 THROUGH AR-006 COMPLETE. LEAST-PRIVILEGE ACCESS REVIEW BLOCK 6/6 PASS.**
