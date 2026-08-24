@@ -7,85 +7,75 @@
 | Package | AP-012 — Enterprise Operations Center Architecture |
 | Target model | Two-Person Limited Operations Model |
 | Prepared | 2026-08-24 |
-| Status | **In Progress — REV-001 and REV-004 PASS; REV-002 governance PASS / technical residual pending; REV-003 pending** |
+| Status | **PASS — REV-001..REV-004 complete** |
 | Runtime effect | None |
 
 ## 1. Purpose
 
-Reconcile REV-001 through REV-004 against existing repository and VM evidence, avoiding duplicate execution while preserving actor attribution and explicit stale-approval invalidation requirements.
+Reconcile REV-001 through REV-004 against governance and isolated-VM technical evidence while preserving actor attribution and stale-approval invalidation requirements.
 
-## 2. Existing technical evidence
+## 2. Accepted evidence
 
-VM-R10 / ENV-007 (`E-ARB012-C04-VM-R10`) proves the following Application-policy behavior against validation principal `dsgmassimo`:
+VM-R10 / ENV-007 established the generic suspension enforcement substrate against `dsgmassimo`: `ALLOW -> suspended -> DENY`, reason `principal-suspended`, with `execution_attempted=false`.
 
-```text
-BASELINE_DECISION=ALLOW
-SUSPENDED=true
-DECISION=DENY
-REASON=principal-suspended
-EXECUTION_ATTEMPTED=false
-CORRELATION_ID=c1d35282-e64d-4b2d-a793-750c4b8c950d
-```
-
-The result is independently correlated across JSONL log, SQLite audit persistence and exported evidence. Evidence SHA-256:
+The dedicated revocation harness at DigitalStarGate.Control commit `9c69fe1d1d5cea5c777293a1ddac2eeb31aa2fe3` subsequently executed the complete REV-001..REV-004 scenario on `dsg-arb012-c04-val` and returned:
 
 ```text
-cf7e2f52783b69cd96898ca032d9eb70c5d7262ab4d7333f475a1f37b7b319bb
+REV_RESULT=PASS
+REV001_RESULT=PASS
+REV002_RESULT=PASS
+REV003_RESULT=PASS
+REV004_RESULT=PASS
+REV001_DECISION=DENY
+REV002_STALE_APPROVAL_VALID=false
+REV003_INVALIDATED=true
+REV004_DETERMINISTIC=true
+PHYSICAL_COMMAND_SENT=false
+PRODUCTION_ACCESS_USED=false
+RUN_CORRELATION_ID=c3e9b339-f341-4723-b96b-8e0f507297f6
+OCCURRED_AT_UTC=2026-08-24T12:06:41.2709906+00:00
 ```
 
-This proves deterministic denial after suspension and no downstream execution. It does not, by itself, prove a Leonardo-specific suspension scenario or invalidation of an already-pending approval object.
+Detailed technical record: `ARB-012-C04-REV001-004-Evidence.md`.
 
 ## 3. REV reconciliation matrix
 
-| Control | Required scenario | Existing evidence | Reconciliation result | Residual requirement |
-|---|---|---|---|---|
-| REV-001 | Leonardo revokes Massimo Operator/requester eligibility | VM-R10 + attributable Leonardo governance attestation | **PASS — 2026-08-24** | None |
-| REV-002 | Massimo Sponsor suspends Leonardo approval eligibility | VM-R10 generic suspension substrate + attributable Massimo governance attestation | **Partial PASS — governance complete** | Leonardo-specific validation-policy DENY after suspension with `execution_attempted=false` |
-| REV-003 | Pending approval becomes unusable after relevant principal suspension/revocation | No accepted evidence currently proves a pre-existing pending approval becoming invalid | **Pending** | Explicit test showing pending/stale approval invalidation and no execution |
-| REV-004 | Deterministic denied access after revocation/suspension | VM-R10 / ENV-007 | **PASS — technical evidence accepted** | None, provided baseline does not regress |
+| Control | Required scenario | Accepted evidence | Result |
+|---|---|---|---|
+| REV-001 | Leonardo revokes Massimo Operator/requester eligibility | Leonardo governance attestation + VM-R10 + dedicated REV harness | **PASS — 2026-08-24** |
+| REV-002 | Massimo Sponsor suspends Leonardo approval eligibility | Massimo governance attestation + dedicated REV harness | **PASS — 2026-08-24** |
+| REV-003 | Pending approval becomes unusable after relevant suspension/revocation | Dedicated REV harness: `REV002_STALE_APPROVAL_VALID=false`, `REV003_INVALIDATED=true` | **PASS — 2026-08-24** |
+| REV-004 | Deterministic denied access after revocation/suspension | VM-R10 + dedicated REV harness: `REV004_DETERMINISTIC=true` | **PASS — 2026-08-24** |
 
 ## 4. REV-001 governance attestation — RECORDED PASS
 
-```text
-Actor: Leonardo Di Egidio
-Subject: Massimo Mainini / DSG-PERSON-001 / dsgmassimo
-Control: REV-001
-Date: 2026-08-24
-Decision: PASS
-Statement: Leonardo Di Egidio confirms that, for the bounded ARB-012-C04 validation model, he can revoke/suspend Massimo Mainini's Operator/requester eligibility and that while such suspension is active Massimo must not be eligible for the affected validation capability. Leonardo accepts VM-R10/ENV-007 as the technical evidence of ALLOW -> suspended -> DENY enforcement with no downstream execution. This attestation applies only to the validation model and does not revoke production accounts or authorize runtime/physical-device control.
-Source of attestation: direct governance confirmation recorded in the governed ARB-012-C04 workflow.
-```
+Leonardo Di Egidio confirmed that, within the bounded ARB-012-C04 validation model, he can revoke/suspend Massimo Mainini's Operator/requester eligibility and that the affected capability must be denied while suspension is active. The attestation does not affect production accounts or authorize runtime/physical-device control.
 
-REV-001 is closed as PASS by the combination of governance attribution and accepted technical enforcement evidence.
+## 5. REV-002 governance attestation — RECORDED PASS
 
-## 5. REV-002 governance attestation — RECORDED PASS; technical residual pending
+Massimo Mainini, as Project Owner / Architecture Sponsor, confirmed that within the bounded ARB-012-C04 validation model he can suspend Leonardo Di Egidio's C3-approval, return-to-service, Safety Authority and Security Authority validation eligibility and that affected capabilities must be denied while suspension is active. The attestation does not affect production accounts or authorize runtime/physical-device control.
+
+## 6. REV-003 stale-approval invalidation
+
+The dedicated harness demonstrates that a previously usable approval becomes unusable after the relevant suspension:
 
 ```text
-Actor: Massimo Mainini — Project Owner / Architecture Sponsor
-Subject: Leonardo Di Egidio / DSG-PERSON-002 / dsgleonardo
-Control: REV-002
-Date: 2026-08-24
-Decision: PASS
-Statement: Massimo Mainini confirms that, for the bounded ARB-012-C04 validation model, he can suspend Leonardo Di Egidio's C3-approval, return-to-service, Safety Authority and Security Authority validation eligibility and that while such suspension is active Leonardo must not be eligible for the affected validation capabilities. This attestation applies only to the validation model and does not revoke production accounts or authorize runtime/physical-device control.
-Source of attestation: direct Sponsor confirmation recorded in the governed ARB-012-C04 workflow.
+REV002_STALE_APPROVAL_VALID=false
+REV003_INVALIDATED=true
 ```
 
-The governance component of REV-002 is complete. REV-002 remains open until a Leonardo-specific non-production policy test demonstrates deterministic DENY after suspension and `execution_attempted=false`.
+The scenario completed without production access or physical commands.
 
-## 6. REV-003 technical residual — pending approval invalidation
+## 7. REV-004 deterministic denial
 
-REV-003 requires evidence stronger than a generic new authorization denial. The validation harness must demonstrate all of the following in one correlated scenario:
+The dedicated harness confirms deterministic denial after revocation/suspension:
 
-1. create or represent a pending approval while relevant principals are eligible;
-2. suspend/revoke the applicable requester or approver eligibility;
-3. attempt to use the already-pending approval;
-4. receive deterministic DENY because the approval is stale/invalid after suspension;
-5. record `execution_attempted=false`;
-6. persist correlated log, audit and exported JSON evidence.
+```text
+REV004_DETERMINISTIC=true
+REV_RESULT=PASS
+```
 
-The exact denial reason should use the existing canonical Application-policy reason if one exists; do not invent production behavior solely for the validation record.
-
-## 7. Safety and scope constraints
+## 8. Safety and scope constraints
 
 - validation environment only;
 - simulator-only baseline remains mandatory;
@@ -94,6 +84,8 @@ The exact denial reason should use the existing canonical Application-policy rea
 - no local-interlock bypass;
 - no runtime privilege is granted by completion of these controls.
 
-## 8. Current disposition
+## 9. Current disposition
 
-**REV-001 = PASS. REV-004 = PASS from VM-R10. REV-002 governance = PASS, with Leonardo-specific technical denial still required. REV-003 requires explicit pending-approval invalidation evidence.**
+**PASS — REV-001 THROUGH REV-004 COMPLETE (4/4).**
+
+The revocation/suspension residual for C04-W03 is closed. Runtime authorization remains a separate gate.
