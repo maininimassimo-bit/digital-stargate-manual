@@ -5,8 +5,8 @@
 | Condition | `ARB-012-C04` |
 | Scope | Role Assignment and Four-Eyes Enforcement |
 | Target model | **Two-Person Limited Operations Model** |
-| Status | `Blocked — organizational target approved; applicable W03/W06/W07 evidence pending` |
-| Updated | 2026-08-22 |
+| Status | `Pending final ARB re-review — W03/W06/W07 complete` |
+| Updated | 2026-08-24 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch | `main` |
 
@@ -15,36 +15,37 @@
 | Work item | Verified status |
 |---|---|
 | C04-W01 | Complete — Sponsor two-person target decision recorded |
-| C04-W02 | Complete for target definition — role/conflict register reconciled |
-| C04-W03 | In Progress — two-person execution package ready; IDV/TRN/AR/REV evidence pending |
-| C04-W04 | Approved/reconciled plan; FE-01…FE-12 not executed |
-| C04-W05/W06 | ENV-011 technical evidence complete; remaining applicable PRV/ENV/account controls pending |
-| C04-W07 | Blocked by W03/W06 completion; reconciled FE plan ready |
-| C04-W08 | Final ARB re-review not started |
+| C04-W02 | Complete — role/conflict register reconciled |
+| C04-W03 | Complete — attributable two-person governance evidence recorded |
+| C04-W04 | Complete — approved/reconciled FE-01…FE-12 plan |
+| C04-W05/W06 | Complete — ENV-011 baseline plus VM-R01…VM-R12 residual controls PASS |
+| C04-W07 | **Complete — FE-01…FE-12 = 12/12 PASS** |
+| C04-W08 | **Ready — final ARB architecture/evidence re-review pending** |
 
-## Immutable DSOC baseline
+## Validated DSOC baselines
 
 - implementation repository: `maininimassimo-bit/DigitalStarGate.Control`;
-- immutable application commit: `37bbd581f37b62243f012cb7a72057207ab10ca6`;
+- original immutable ENV-011 application commit: `37bbd581f37b62243f012cb7a72057207ab10ca6`;
+- W07 four-eyes harness validated commit: `7881408279921f83556ebc48f27c29477f27d9cd`;
 - validation host: `dsg-arb012-c04-val` on Microsoft Hyper-V;
 - guest OS: Ubuntu 26.04 LTS;
 - simulator-only configuration: `DSOC-ENV011-SIM-CONFIG-001`;
 - fixture SHA-256: `d4071db1a4b534d8cfb0e8dee9f931665d28307a26b000e7c3ec61811f091c94`;
-- technical-evidence completion merge: `8883c596849907cd63a76c33347ff01386bdd34c`;
-- DSOC Bootstrap CI #8: success.
+- ENV-011 technical-evidence completion merge: `8883c596849907cd63a76c33347ff01386bdd34c`;
+- W07 run correlation: `9141ad57-6c11-48ab-a272-192c9a3d7890`.
 
 ENV-011 technical execution remains complete and must not be rerun solely because governance has been reconciled.
 
 ## Two-person governance disposition
 
-The Sponsor-approved target explicitly supports:
+The Sponsor-approved target supports:
 
 - Massimo requester/executor + Leonardo C3 approver;
 - Massimo Maintainer + Leonardo Return-to-Service Approver;
 - Massimo Operations + Leonardo Safety Authority;
 - Leonardo Security Authority for Massimo access decisions.
 
-The target explicitly denies or excludes:
+The target denies or excludes:
 
 - self-approval;
 - Leonardo self-access approval;
@@ -53,42 +54,50 @@ The target explicitly denies or excludes:
 - incompatible cross-substitution;
 - independent internal audit closure.
 
-A third person, independent substitute or independent internal Auditor is no longer a C04 closure prerequisite.
+A third person, independent substitute or independent internal Auditor is not a C04 closure prerequisite.
 
 ## Superseded third-person evidence
 
-`E-ARB012-C04-07` is retained as historical evidence but is now **Superseded — N/A by governance design**. No person was nominated through it and no historical control is retroactively marked Passed.
+`E-ARB012-C04-07` is retained as historical evidence but is **Superseded — N/A by governance design**. No person was nominated through it and no historical control is retroactively marked Passed.
 
-## Remaining W03 gate
+## W03 gate
 
-Execute attributable evidence for:
+**COMPLETE.** Applicable IDV/TRN/AR/ACC/REV governance evidence has been reconciled against the approved two-person target, including explicit denial/exclusion of positive C4 and break-glass.
 
-- IDV-001–IDV-005;
-- TRN-001–TRN-008 or approved bounded exceptions;
-- AR-001–AR-006;
-- AR-007 = N/A by governance design;
-- AR-008 positive C4 = DENIED;
-- AR-009 break-glass = DENIED;
-- ACC-001/ACC-002 distinct non-production sessions;
-- REV-001–REV-004.
+## W06/ENV gate
 
-## Remaining W06/ENV gate
+**COMPLETE.** ENV-011 technical evidence remains valid and VM-R01…VM-R12 residual validation controls have attributable PASS evidence, including distinct non-production identities, least privilege, isolated data/audit stores, reset/repeatability, correlated evidence, self-approval denial, revocation, C4/break-glass denial and simulator-only fallback prevention.
 
-Complete the still-applicable provisioning/environment controls: distinct accounts, non-production database/audit evidence as required by the validation implementation, reset/repeatability and applicable ENV acceptance. Reconcile `E-ENV011-06` so it evaluates technical evidence against the revised two-person target rather than requiring a third-person nomination.
+## W07 gate
 
-## Remaining W07 gate
+**COMPLETE — 12/12 PASS.** `E-ARB012-C04-W07-001` records FE-01…FE-12 execution at DSOC commit `7881408279921f83556ebc48f27c29477f27d9cd`.
 
-Execute FE-01…FE-12 according to the reconciled plan. FE-10 and FE-11 pass only by demonstrating deterministic denial of positive C4 and break-glass. FE-09 demonstrates technical/repository traceability completeness and is not an independent organizational audit claim.
+Key safety/negative results:
 
-## Exit criteria
+- `FE04_STALE_APPROVAL_VALID=false`;
+- `FE07_SAFETY_DECISION=DENY`;
+- `LOCAL_INTERLOCK_TOUCHED=false`;
+- `FE12_TAMPER_DETECTED=true`;
+- `PHYSICAL_COMMAND_SENT=false`;
+- `PRODUCTION_ACCESS_USED=false`.
 
-ARB-012-C04 may move from `Blocked` after:
+FE-10 and FE-11 passed by deterministic denial of positive C4 and break-glass. FE-09 is technical/repository traceability completeness and is not an independent organizational audit claim.
 
-1. applicable W03 evidence passes;
-2. applicable W06/ENV/account controls pass;
-3. FE-01…FE-12 produce the expected two-person results;
-4. self-approval, C4 and break-glass denial tests pass;
-5. repository CI passes;
-6. final ARB architecture/evidence re-review accepts the revised target and its explicit limitations.
+## Remaining gate — C04-W08
+
+Only the final ARB architecture/evidence re-review remains before a closure recommendation can be issued.
+
+The re-review must confirm:
+
+1. W01–W07 evidence is mutually consistent and attributable;
+2. the two-person limited-operations target is represented consistently across governance, architecture and validation evidence;
+3. explicit limitations remain visible: no positive C4, no break-glass, no self-approval, no independent internal-audit claim;
+4. W07 evidence remains isolated, simulator-only and non-production;
+5. repository quality/CI is acceptable for the final evidence baseline;
+6. closure of C04 does not imply runtime enablement.
+
+## Current disposition
+
+**ARB-012-C04 is READY FOR C04-W08 FINAL ARB RE-REVIEW.**
 
 Runtime enablement remains a separate decision and is not implied by C04 closure.
