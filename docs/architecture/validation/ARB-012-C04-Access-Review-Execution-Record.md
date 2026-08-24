@@ -7,7 +7,8 @@
 | Package | AP-012 — Enterprise Operations Center Architecture |
 | Target model | Two-Person Limited Operations Model |
 | Prepared | 2026-08-23 |
-| Status | **Ready for reciprocal access-review decisions** |
+| Updated | 2026-08-24 |
+| Status | **Partial PASS — AR-004..AR-006 complete; AR-001..AR-003 pending Leonardo decision** |
 | Runtime effect | None |
 
 ## 1. Purpose
@@ -32,29 +33,26 @@ Technical evidence already proves distinct validation accounts, self-approval de
 | AR-001 | Massimo | C0-C2 validation | Leonardo | Isolated simulator context only; no production/physical-device access | Pending Leonardo decision |
 | AR-002 | Massimo | C3 request | Leonardo | Submit/request only under validated four-eyes workflow; no self-approval | Pending Leonardo decision |
 | AR-003 | Massimo | Maintenance | Leonardo | Isolated maintenance only; cannot approve own return-to-service | Pending Leonardo decision |
-| AR-004 | Leonardo | C3 approval | Massimo | May approve Massimo C3 request; cannot request/approve same action | Pending Massimo decision |
-| AR-005 | Leonardo | Safety Authority | Massimo | Bounded permit/deny/stop validation decisions; no local-interlock bypass | Pending Massimo decision |
-| AR-006 | Leonardo | Security Authority | Massimo | May approve Massimo scope; own-access approval prohibited | Pending Massimo decision |
+| AR-004 | Leonardo | C3 approval | Massimo | May approve Massimo C3 request; cannot request/approve same action | **PASS — 2026-08-24** |
+| AR-005 | Leonardo | Safety Authority | Massimo | Bounded permit/deny/stop validation decisions; no local-interlock bypass | **PASS — 2026-08-24** |
+| AR-006 | Leonardo | Security Authority | Massimo | May approve Massimo scope; own-access approval prohibited | **PASS — 2026-08-24** |
 | AR-007 | Independent internal audit | N/A | N/A | Outside approved target | **N/A by governance design** |
 | AR-008 | Positive C4 | Unsupported | Policy enforcement | Must remain unavailable | **DENIED — VM-R11 PASS** |
 | AR-009 | Break-glass | Unsupported | Policy enforcement | Must remain unavailable | **DENIED — VM-R11 PASS** |
 
-## 4. Massimo reviews Leonardo — AR-004, AR-005, AR-006
+## 4. Massimo reviews Leonardo — RECORDED PASS
 
 ```text
 Reviewer: Massimo Mainini — Project Owner / Architecture Sponsor
 Subject: Leonardo Di Egidio
 Controls: AR-004, AR-005, AR-006
-Date: YYYY-MM-DD
-Decision: PASS | NOT PASS
-
-I confirm that the maximum least-privilege scope for Leonardo is limited to:
-- AR-004: independent approval of Massimo C3 requests; Leonardo cannot be requester and approver for the same action;
-- AR-005: bounded Safety Authority permit/deny/stop decisions in validation; local physical interlocks remain authoritative and cannot be bypassed;
-- AR-006: Security Authority decisions for Massimo's bounded scope; Leonardo cannot approve his own access.
-
-I confirm that no broader runtime, production, physical-device, positive-C4 or break-glass privilege is authorized by this review.
+Date: 2026-08-24
+Decision: PASS
+Statement: Massimo Mainini confirms that Leonardo Di Egidio's least-privilege scope is limited to independent approval of Massimo C3 requests without being requester and approver for the same action; bounded Safety Authority permit/deny/stop decisions without bypassing local interlocks; and Security Authority decisions on Massimo's scope without approving Leonardo's own access. This review does not authorize runtime, production, physical-device-control, positive-C4 or break-glass privileges.
+Source of attestation: direct reviewer confirmation recorded in the governed ARB-012-C04 workflow.
 ```
+
+This closes AR-004, AR-005 and AR-006 as PASS.
 
 ## 5. Leonardo reviews Massimo — AR-001, AR-002, AR-003
 
@@ -83,4 +81,4 @@ I confirm that no broader runtime, production, physical-device, positive-C4 or b
 
 ## 7. Current disposition
 
-**READY — AR-001 THROUGH AR-006 PENDING ATTRIBUTABLE RECIPROCAL REVIEW DECISIONS.**
+**PARTIAL PASS — AR-004 THROUGH AR-006 COMPLETE; AR-001 THROUGH AR-003 REQUIRE LEONARDO'S ATTRIBUTABLE DECISION.**
