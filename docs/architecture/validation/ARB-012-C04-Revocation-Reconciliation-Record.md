@@ -7,7 +7,7 @@
 | Package | AP-012 — Enterprise Operations Center Architecture |
 | Target model | Two-Person Limited Operations Model |
 | Prepared | 2026-08-24 |
-| Status | **In Progress — REV-001 and REV-004 PASS; REV-002..REV-003 residual evidence pending** |
+| Status | **In Progress — REV-001 and REV-004 PASS; REV-002 governance PASS / technical residual pending; REV-003 pending** |
 | Runtime effect | None |
 
 ## 1. Purpose
@@ -40,7 +40,7 @@ This proves deterministic denial after suspension and no downstream execution. I
 | Control | Required scenario | Existing evidence | Reconciliation result | Residual requirement |
 |---|---|---|---|---|
 | REV-001 | Leonardo revokes Massimo Operator/requester eligibility | VM-R10 + attributable Leonardo governance attestation | **PASS — 2026-08-24** | None |
-| REV-002 | Massimo Sponsor suspends Leonardo approval eligibility | Generic suspension substrate demonstrated by VM-R10 | **Partial — mechanism proven, subject-specific evidence absent** | Attributable Massimo suspension decision plus Leonardo-specific validation-policy denial evidence |
+| REV-002 | Massimo Sponsor suspends Leonardo approval eligibility | VM-R10 generic suspension substrate + attributable Massimo governance attestation | **Partial PASS — governance complete** | Leonardo-specific validation-policy DENY after suspension with `execution_attempted=false` |
 | REV-003 | Pending approval becomes unusable after relevant principal suspension/revocation | No accepted evidence currently proves a pre-existing pending approval becoming invalid | **Pending** | Explicit test showing pending/stale approval invalidation and no execution |
 | REV-004 | Deterministic denied access after revocation/suspension | VM-R10 / ENV-007 | **PASS — technical evidence accepted** | None, provided baseline does not regress |
 
@@ -58,21 +58,19 @@ Source of attestation: direct governance confirmation recorded in the governed A
 
 REV-001 is closed as PASS by the combination of governance attribution and accepted technical enforcement evidence.
 
-## 5. REV-002 governance attestation and technical residual — Massimo suspends Leonardo
+## 5. REV-002 governance attestation — RECORDED PASS; technical residual pending
 
 ```text
 Actor: Massimo Mainini — Project Owner / Architecture Sponsor
 Subject: Leonardo Di Egidio / DSG-PERSON-002 / dsgleonardo
 Control: REV-002
-Date: YYYY-MM-DD
-Decision: PASS | NOT PASS
-
-I confirm that, for the bounded ARB-012-C04 validation model, I can suspend Leonardo's C3-approval/return-to-service/safety/security validation eligibility and that while such suspension is active Leonardo must not be eligible for the affected validation capability.
-
-This attestation does not revoke any production account and does not authorize runtime or physical-device control.
+Date: 2026-08-24
+Decision: PASS
+Statement: Massimo Mainini confirms that, for the bounded ARB-012-C04 validation model, he can suspend Leonardo Di Egidio's C3-approval, return-to-service, Safety Authority and Security Authority validation eligibility and that while such suspension is active Leonardo must not be eligible for the affected validation capabilities. This attestation applies only to the validation model and does not revoke production accounts or authorize runtime/physical-device control.
+Source of attestation: direct Sponsor confirmation recorded in the governed ARB-012-C04 workflow.
 ```
 
-Governance attestation alone is insufficient to close REV-002: a Leonardo-specific non-production policy test must also demonstrate deterministic DENY after suspension and `execution_attempted=false`.
+The governance component of REV-002 is complete. REV-002 remains open until a Leonardo-specific non-production policy test demonstrates deterministic DENY after suspension and `execution_attempted=false`.
 
 ## 6. REV-003 technical residual — pending approval invalidation
 
@@ -98,4 +96,4 @@ The exact denial reason should use the existing canonical Application-policy rea
 
 ## 8. Current disposition
 
-**REV-001 = PASS. REV-004 = PASS from VM-R10. REV-002 requires Massimo governance attestation plus Leonardo-specific technical denial evidence. REV-003 requires explicit pending-approval invalidation evidence.**
+**REV-001 = PASS. REV-004 = PASS from VM-R10. REV-002 governance = PASS, with Leonardo-specific technical denial still required. REV-003 requires explicit pending-approval invalidation evidence.**
