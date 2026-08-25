@@ -1,6 +1,16 @@
 name: Validate documentation
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/**"
+      - "mkdocs.yml"
+      - "mkdocs.pages.yml"
+      - "requirements*.txt"
+      - ".github/scripts/verify-published-site.py"
+      - ".github/workflows/docs.yml"
   pull_request:
     branches:
       - main
@@ -41,5 +51,5 @@ jobs:
       - name: Verifica documentazione
         run: mkdocs build --strict --config-file mkdocs.pages.yml
 
-      - name: Verifica integrità artifact
+      - name: Verifica integrita artifact
         run: python .github/scripts/verify-published-site.py --site site --base-path /digital-stargate-manual/
