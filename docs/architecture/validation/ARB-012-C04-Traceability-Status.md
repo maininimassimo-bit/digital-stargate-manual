@@ -5,8 +5,8 @@
 | Condition | `ARB-012-C04` |
 | Scope | Role Assignment and Four-Eyes Enforcement |
 | Target model | **Two-Person Limited Operations Model** |
-| Status | `Pending final ARB re-review — W03/W06/W07 complete` |
-| Updated | 2026-08-24 |
+| Status | `Approved with Conditions — C04-W08-C01 final CI pending` |
+| Updated | 2026-08-25 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch | `main` |
 
@@ -20,7 +20,7 @@
 | C04-W04 | Complete — approved/reconciled FE-01…FE-12 plan |
 | C04-W05/W06 | Complete — ENV-011 baseline plus VM-R01…VM-R12 residual controls PASS |
 | C04-W07 | **Complete — FE-01…FE-12 = 12/12 PASS** |
-| C04-W08 | **Ready — final ARB architecture/evidence re-review pending** |
+| C04-W08 | **Complete — ARB Approved with Conditions** |
 
 ## Validated DSOC baselines
 
@@ -38,66 +38,33 @@ ENV-011 technical execution remains complete and must not be rerun solely becaus
 
 ## Two-person governance disposition
 
-The Sponsor-approved target supports:
+The Sponsor-approved target supports Massimo requester/executor with Leonardo C3 approver, Massimo Maintainer with Leonardo Return-to-Service Approver, Massimo Operations with Leonardo Safety Authority, and Leonardo Security Authority for Massimo access decisions.
 
-- Massimo requester/executor + Leonardo C3 approver;
-- Massimo Maintainer + Leonardo Return-to-Service Approver;
-- Massimo Operations + Leonardo Safety Authority;
-- Leonardo Security Authority for Massimo access decisions.
+The target denies or excludes self-approval, Leonardo self-access approval, positive C4, break-glass, incompatible cross-substitution and independent internal audit closure. A third person, independent substitute or independent internal Auditor is not a C04 closure prerequisite.
 
-The target denies or excludes:
+## Completed gates
 
-- self-approval;
-- Leonardo self-access approval;
-- positive C4;
-- break-glass;
-- incompatible cross-substitution;
-- independent internal audit closure.
+**W03 COMPLETE.** Applicable IDV/TRN/AR/ACC/REV governance evidence is reconciled against the approved two-person target.
 
-A third person, independent substitute or independent internal Auditor is not a C04 closure prerequisite.
+**W06/ENV COMPLETE.** ENV-011 and VM-R01…VM-R12 have attributable PASS evidence covering distinct identities, least privilege, isolation, reset/repeatability, correlation, denial controls, revocation and simulator-only fallback prevention.
 
-## Superseded third-person evidence
+**W07 COMPLETE — 12/12 PASS.** `E-ARB012-C04-W07-001` records FE-01…FE-12 at DSOC commit `7881408279921f83556ebc48f27c29477f27d9cd`, including `FE04_STALE_APPROVAL_VALID=false`, `LOCAL_INTERLOCK_TOUCHED=false`, `FE12_TAMPER_DETECTED=true`, `PHYSICAL_COMMAND_SENT=false` and `PRODUCTION_ACCESS_USED=false`.
 
-`E-ARB012-C04-07` is retained as historical evidence but is **Superseded — N/A by governance design**. No person was nominated through it and no historical control is retroactively marked Passed.
+**W08 COMPLETE — APPROVED WITH CONDITIONS.** `ARB-012-C04-W08-Final-ARB-ReReview.md` records the independent architecture/evidence re-review. No technical validation blocker remains.
 
-## W03 gate
+## Remaining closure condition
 
-**COMPLETE.** Applicable IDV/TRN/AR/ACC/REV governance evidence has been reconciled against the approved two-person target, including explicit denial/exclusion of positive C4 and break-glass.
+`C04-W08-C01` requires an attributable successful repository CI/quality-gate run on the final reconciled governance baseline.
 
-## W06/ENV gate
+Until C04-W08-C01 is verified:
 
-**COMPLETE.** ENV-011 technical evidence remains valid and VM-R01…VM-R12 residual validation controls have attributable PASS evidence, including distinct non-production identities, least privilege, isolated data/audit stores, reset/repeatability, correlated evidence, self-approval denial, revocation, C4/break-glass denial and simulator-only fallback prevention.
-
-## W07 gate
-
-**COMPLETE — 12/12 PASS.** `E-ARB012-C04-W07-001` records FE-01…FE-12 execution at DSOC commit `7881408279921f83556ebc48f27c29477f27d9cd`.
-
-Key safety/negative results:
-
-- `FE04_STALE_APPROVAL_VALID=false`;
-- `FE07_SAFETY_DECISION=DENY`;
-- `LOCAL_INTERLOCK_TOUCHED=false`;
-- `FE12_TAMPER_DETECTED=true`;
-- `PHYSICAL_COMMAND_SENT=false`;
-- `PRODUCTION_ACCESS_USED=false`.
-
-FE-10 and FE-11 passed by deterministic denial of positive C4 and break-glass. FE-09 is technical/repository traceability completeness and is not an independent organizational audit claim.
-
-## Remaining gate — C04-W08
-
-Only the final ARB architecture/evidence re-review remains before a closure recommendation can be issued.
-
-The re-review must confirm:
-
-1. W01–W07 evidence is mutually consistent and attributable;
-2. the two-person limited-operations target is represented consistently across governance, architecture and validation evidence;
-3. explicit limitations remain visible: no positive C4, no break-glass, no self-approval, no independent internal-audit claim;
-4. W07 evidence remains isolated, simulator-only and non-production;
-5. repository quality/CI is acceptable for the final evidence baseline;
-6. closure of C04 does not imply runtime enablement.
+- ARB-012-C04 remains `Approved with Conditions`, not `Closed`;
+- BKL-011 remains `In Progress`;
+- no additional VM validation is required solely for closure;
+- runtime enablement remains separate and unauthorized.
 
 ## Current disposition
 
-**ARB-012-C04 is READY FOR C04-W08 FINAL ARB RE-REVIEW.**
+**ARB-012-C04: APPROVED WITH CONDITIONS — FINAL CI ONLY.**
 
-Runtime enablement remains a separate decision and is not implied by C04 closure.
+Completion or closure does not authorize production access, physical-device control, positive C4, break-glass or runtime enablement.
