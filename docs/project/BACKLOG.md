@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 2.1 |
+| Versione | 2.2 |
 | Stato | Active |
-| Data baseline | 21/08/2026 |
+| Data baseline | 25/08/2026 |
 
 ## 1. Scopo
 
@@ -29,7 +29,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-008 | P1 | Riallineare README root alla piattaforma enterprise | Planned | Governance Foundation completata | Entry point repository aggiornato | TD-003 |
 | BKL-009 | P1 | Aggiungere consistency checks tra AMP-002 e roadmap JSON | Planned | Definizione schema projection | Riduzione rischio proiezioni stale | TD-005, AP-002 |
 | BKL-010 | P1 | Ridurre script inline nel portale | Planned | Inventario pagine con script inline | Moduli JS proprietari e Instant Navigation sicura | TD-002 |
-| BKL-011 | P1 | Completare evidence residue ARB-012-C04 | In Progress | W03/W06/W07 e controlli PRV/ENV | Acceptance formalmente riesaminabile | AP-012, ARB-012-C04 |
+| BKL-011 | P1 | Completare evidence residue ARB-012-C04 | **In Progress** | **Solo C04-W08-C01: final repository CI** | C04 chiusa dopo quality gate finale; nessun blocker tecnico residuo | AP-012, ARB-012-C04, `ARB-012-C04-W08-Final-ARB-ReReview.md` |
 | BKL-012 | P1 | Validare primo unattended AP-013 COPY_ONLY run | Done | Scheduler, launcher protetto, evidence | Scheduler COPY_ONLY validato con runtime evidence, `LastTaskResult = 0`, batch operativi e retry idempotenti | AP-013B OneDrive Transport OAT, AP-013 Operational Acceptance |
 | BKL-013 | P1 | Completare AP-014 Observation Catalog and Search | Done | AP14-W01-W07 | Catalogo/search governati con acceptance operativa reale | AP-014, AP14-W07, BKL-026 |
 | BKL-018 | P0 | Eseguire EAGLE runtime inspection e M27 end-to-end OAT | Done | Accesso EAGLE; evidence NINA/PHD2/CloudWatcher M27; runtime contract | OAT M27 completata, riconciliata e formalmente Accepted | AP-014, AP14-W07-EAGLE-M27-OAT-Result |
@@ -48,17 +48,16 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-016 | P2 | Contestualizzare release e guide storiche in root | Planned | Inventario e supersession map | Lineage chiaro e baseline corrente distinguibile | TD-007 |
 | BKL-017 | P2 | Introdurre futura modalità tema `system` | Planned | RC1-HF01 stabilizzata | Preferenza OS gestita dal Theme Manager | RC1-HF01 |
 
-### Reconciliation note — 21/08/2026
+### Reconciliation note — 25/08/2026
 
 La repository governance è stata riconciliata con le evidence reali senza ripetere attività già accettate.
 
-- BKL-001 è `Done`: WP-03 Enterprise Theme Framework è `Completed / Accepted`, con `dsg-theme-manager.js`, persistenza, Instant Navigation, separazione da `page-enhancements.js` e supporto `light/dark/system`.
-- BKL-002–BKL-004 sono `Done`: Project Governance è presente in `mkdocs.yml`, `AI_BOOTSTRAP.md` esiste in root e `docs/project/index.md` espone Knowledge Map, documenti canonici e stato package.
-- BKL-005–BKL-006 sono `Done`: il quality gate documentale è verde e la Pages integrity è già stata verificata attraverso BKL-025; non serve ripetere una pubblicazione solo per chiudere item stale.
-- BKL-012 è `Done`: AP-013B OneDrive-mediated COPY_ONLY è `Passed — Limited Production`; scheduler Export/Import attive con `LastTaskResult = 0`, batch operativi e retry idempotente; AP-013 Operational Acceptance è `Accepted`.
-- BKL-011 resta realmente `In Progress`: ARB-012-C04 W06 richiede ancora provisioning isolato, account non-production e completion PRV/ENV; W07 resta bloccato finché quei gate non sono eseguiti.
+- BKL-001–BKL-006 restano `Done` sulla governance foundation e quality baseline già accettata.
+- BKL-012 è `Done`: AP-013B OneDrive-mediated COPY_ONLY e AP-013 Operational Acceptance restano accettati.
+- BKL-013 e BKL-018–BKL-026 restano `Done`: AP-014/OAT e relative remediation sono completate.
+- **BKL-011 resta `In Progress` esclusivamente per C04-W08-C01.** W03 è Complete; W06/ENV è Complete; W07 è Complete con FE-01…FE-12 = 12/12 PASS; W08 ARB è `Approved with Conditions`. Non rimane alcun blocker tecnico e non è richiesto un nuovo run VM solo per la closure. Il passaggio a `Done` richiede un final repository CI/quality gate attribuibile sulla baseline governance riconciliata.
 - BKL-007–BKL-010 restano lavori reali e non vengono chiusi per inferenza.
-- BKL-027/BKL-028 registrano esplicitamente il completamento ancora mancante di Observatory Status per Power e Network; finché BKL-027 non identifica source verificabili, i due sistemi restano correttamente `UNKNOWN`.
+- BKL-027/BKL-028 registrano il completamento ancora mancante di Observatory Status per Power e Network; finché BKL-027 non identifica source verificabili, i due sistemi restano correttamente `UNKNOWN`.
 
 ## 4. Sequenza di esecuzione raccomandata
 
@@ -70,7 +69,7 @@ Governance Foundation [DONE]
   -> Enterprise Theme Manager [DONE]
   -> AP-013 unattended COPY_ONLY evidence [DONE]
   -> AP-014 acceptance [DONE]
-  -> BKL-011 AP-012 residual evidence [IN PROGRESS]
+  -> BKL-011 / C04-W08-C01 final repository CI [IN PROGRESS]
   -> BKL-027 Observatory Status Power/Network source discovery [READY]
   -> BKL-028 Observatory Status Power/Network integration [PLANNED]
   -> BKL-007/008/009/010 governance hardening
