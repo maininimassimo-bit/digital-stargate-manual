@@ -4,7 +4,7 @@
 |---|---|
 | Identificativo | BKL-027 |
 | Target | Observatory Status — `systems.power` / `systems.network` |
-| Stato | **In Progress — RUT955 model verified; EAGLE Manager passive-source discovery active** |
+| Stato | **In Progress — RUT955 model verified; passive Power source unavailable** |
 | Data | 2026-08-26 |
 | Autorità | Digital StarGate Infrastructure Architect |
 | Dipendenze | DSG-OBS-RT-001; AP-004; AP-009; AP-012 |
@@ -110,13 +110,13 @@ Vincoli:
 
 Il nodo EAGLE è la prima source candidate perché governa alimentazione delle periferiche e il software EAGLE Manager è già presente sul nodo di controllo.
 
-La runtime inspection del 2026-08-26 conferma **EAGLE Manager X 3.1.0** installato, publisher `PrimaLuceLab`, sul nodo `EAGLE30154`. Non è ancora provata una interfaccia read-only stabile e governabile che esponga input power, current consumption o stato delle porte senza passare da UI/control path.
+La runtime inspection del 2026-08-26 conferma **EAGLE Manager X 3.1.0** installato, publisher `PrimaLuceLab`, sul nodo `EAGLE30154`. È presente anche il servizio automatico `PLLService`, ma l'ispezione passiva del servizio, delle socket e dei log correnti e storici non ha identificato una telemetria Power osservabile e semanticamente utilizzabile senza introdurre un command path.
 
-Per questo non viene selezionato ancora un adapter operativo.
+Disposizione: **nessuna source Power passiva affidabile verificata**. `systems.power` deve quindi restare `UNKNOWN` fino a futura capability esplicitamente approvata.
 
 ### 5.2 UPS / external power telemetry
 
-Una eventuale UPS/PDU o altra source elettrica può diventare preferibile se sul nodo EAGLE esiste una interfaccia read-only verificabile (service, USB HID, SNMP, log strutturato o file locale). La presenza effettiva di tale source deve essere rilevata in runtime inspection.
+Una eventuale UPS/PDU o altra source elettrica può diventare preferibile se sul nodo EAGLE esiste una interfaccia read-only verificabile (service, USB HID, SNMP, log strutturato o file locale). La runtime inspection corrente non ha identificato tale source.
 
 ### 5.3 Candidate adapter boundary
 
@@ -326,7 +326,7 @@ Conclusione governata:
 
 Nessun valore `network.state`, `active_link`, `vpn` o `lte_failover` viene ancora derivato da queste sole evidence.
 
-### 7.10 EAGLE Manager passive inventory
+### 7.10 EAGLE Manager / PLLService passive inventory
 
 Runtime inspection locale su `EAGLE30154`:
 
@@ -336,19 +336,70 @@ DisplayVersion : 3.1.0
 Publisher      : PrimaLuceLab
 ```
 
-Il software è installato. La directory `C:\Program Files\PrimaLuceLab` è presente. Sono presenti anche directory applicative `C:\Users\PrimaLuceLab\AppData\Local\play` e `C:\Users\PrimaLuceLab\AppData\Roaming\PLAY`; il loro ruolo rispetto a EAGLE Manager non è ancora verificato.
+Il software è installato. La directory `C:\Program Files\PrimaLuceLab` contiene anche `PLLService\pllWorkingService.exe`.
 
-Al momento dell'inventory non risultano processi con naming `EAGLE|PrimaLuce|PLAY|ECCO` in esecuzione e quindi non sono state osservate socket TCP attribuibili a tali processi.
+Il servizio Windows è verificato come:
 
-La ricerca servizi con lo stesso pattern ha restituito servizi Windows (`DisplayEnhancementService`, `PlugPlay`, `WMPNetworkSvc`) per corrispondenze testuali accidentali; questi risultati sono **falsi positivi** e non costituiscono servizi PrimaLuceLab/EAGLE.
+```text
+Name        : PLLService
+DisplayName : PLL Service
+State       : Running
+StartMode   : Auto
+ProcessId   : 8144
+PathName    : C:\Program Files\PrimaLuceLab\PLLService\pllWorkingService.exe
+```
 
-Disposizione:
+Version information:
 
-- EAGLE Manager X 3.1.0 installato: **VERIFIED**;
-- servizio background EAGLE: **NOT OBSERVED**;
-- processo EAGLE/PLAY attivo: **NOT OBSERVED**;
-- local TCP listener attribuibile: **NOT OBSERVED**;
-- passive file/config/log source: **OPEN — targeted filesystem inspection required**.
+```text
+ProductVersion : 1.0.0+cb5d21a46bfaf907ef82e595dab5b9ca2e51a718
+FileVersion    : 1.0.1.0
+```
+
+`appsettings.json` e `appsettings.Development.json` espongono solo una root key `Logging`. `Nlog.config` scrive su:
+
+```text
+C:\Primalucelab\pllWorkingService\log\log_${shortdate}.txt
+```
+
+con minlevel `Trace`.
+
+Al momento dell'ispezione non sono state osservate socket TCP o UDP attribuibili al PID del servizio.
+
+### 7.11 PLLService log forensics and Power disposition
+
+L'inventory dei log mostra file storici di dimensione elevata nel 2024-2025, mentre nel 2026 i file sono generalmente minimi. L'ultimo log disponibile (`log_2026-08-20.txt`) contiene soltanto:
+
+```text
+pllWorkingService STARTED
+```
+
+La ricerca read-only nei log per indicatori quali `power`, `voltage`, `current`, `12v`, `port`, `sensor`, `state` non ha prodotto evidence Power utilizzabile. Il file non ha modificato `LastWriteTime` durante una finestra di osservazione di 15 secondi, quindi non è stata osservata una produzione periodica di telemetry mentre EAGLE Manager era chiuso.
+
+È stato quindi analizzato un log storico ad alta cardinalità:
+
+```text
+C:\Primalucelab\pllWorkingService\log\log_2025-11-12.txt
+Lines: 17280
+```
+
+Il contenuto è uniforme lungo l'intera giornata e mostra esclusivamente:
+
+```text
+Call Site: pllWorkingService.ipcPipeServer+IPCServer.IPCServerConnectionManagerThread
+IPC processing end req:BYE
+```
+
+con ricorrenza approssimativa ogni 10 secondi. La ricerca di termini Power/device/serial/USB/COM non ha prodotto match e l'unico call-site rilevato è `IPCServerConnectionManagerThread`.
+
+Conclusione governata:
+
+- `PLLService` è un servizio locale reale e residente;
+- il servizio dimostra un meccanismo IPC locale, ma i log ispezionati non espongono semantica Power;
+- nessuna tensione, corrente, wattaggio, stato porta, relay, batteria o altra misura Power è stata verificata;
+- l'uso del protocollo IPC proprietario non viene tentato perché potrebbe introdurre un command path non governato;
+- **PLLService passive Power source = NOT AVAILABLE con le evidence correnti**;
+- `systems.power` resta `UNKNOWN`.
 
 ## 8. Runtime inspection residua
 
@@ -363,9 +414,15 @@ Disposizione:
 
 ### Power
 
-1. ispezionare in sola lettura file, configurazioni e log sotto `C:\Program Files\PrimaLuceLab` e directory applicative correlate;
-2. cercare una source **passiva** e read-only, senza avviare EAGLE Manager e senza interrogare API di switching;
-3. se non esiste, registrare formalmente `Power source unavailable` e mantenere `systems.power = UNKNOWN` in BKL-028 fino a futura capability.
+La discovery passiva corrente è conclusa senza una source affidabile. Nessun ulteriore probing IPC o switching EAGLE viene autorizzato in BKL-027. Una futura capability Power richiede una source esplicitamente read-only documentata dal vendor o una sorgente esterna governata (es. UPS/PDU telemetry).
+
+Fino ad allora:
+
+```text
+systems.power.state = UNKNOWN
+systems.power.ups_on_battery = null
+systems.power.quality = UNKNOWN
+```
 
 ## 9. Safety and security invariants
 
@@ -396,4 +453,4 @@ BKL-027 può passare a `Done` quando esistono evidence attribuibili per:
 
 Network: `192.168.1.254` è verificato come **Teltonika RUT955**. Il firmware e la management telemetry source read-only restano aperti. La status surface anonima restituisce `403 Forbidden`; nessuna autenticazione è stata tentata. La reachability TCP/161 negativa non è usata per inferire lo stato SNMP/UDP. `192.168.1.145` resta un host distinto, non candidato RUT955.
 
-Power: **EAGLE Manager X 3.1.0** è verificato come installato su `EAGLE30154`; nessun servizio/processo/listener attribuibile è stato osservato durante l'inventory. Passive filesystem source discovery ancora aperta.
+Power: **passive source discovery completed with no reliable source**. EAGLE Manager X 3.1.0 e PLLService sono verificati; PLLService è Running/Auto e usa IPC locale, ma i log correnti e storici non espongono telemetria Power. Per decisione fail-safe, `systems.power` resta `UNKNOWN` e nessun probing IPC proprietario viene introdotto.
