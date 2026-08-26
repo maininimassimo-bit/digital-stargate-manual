@@ -8,7 +8,7 @@
 | Plugin | Digital StarGate Observatory Telemetry Exporter |
 | Plugin API directory actually loaded | `NINA\Plugins\3.0.0` |
 | Data | 2026-08-26 |
-| Stato | **RUNTIME + CANONICAL PUBLISH PASS — stale/failure-mode consumer validation pending** |
+| Stato | **END-TO-END NETWORK VISIBILITY PASS — stale/failure-mode validation pending** |
 
 ## 1. CI artifact
 
@@ -207,11 +207,39 @@ N.I.N.A. plugin
   -> Cloud Run relay HTTP 202 accepted
 ```
 
-Direct independent GET verification of the public relay/page from the architecture-agent execution environment was not available because that environment could not resolve the Cloud Run hostname. This does not invalidate the EAGLE-side publish evidence, but final browser-consumer visibility remains a separate acceptance check.
+## 7. Public Observatory Status visibility — PASS
 
-## 7. Observatory Status mapping
+Browser verification on the Digital StarGate Observatory Status page showed the Network row populated from live telemetry:
 
-Repository integration now maps `projection.services.network` into the canonical Observatory Status `systems.network` signal with freshness semantics.
+```text
+Rete | ONLINE
+Interfaccia: Ethernet 2
+Gateway: 192.168.1.254 (Sì, 1 ms)
+Internet: Sì (23 ms)
+DNS: Sì (1 ms)
+Qualità: CURRENT
+Active link: —
+VPN: —
+LTE failover: —
+```
+
+This closes the hosted/public consumer visibility gate. The visible values are consistent with the canonical projection semantics: live passive Network evidence is rendered, while management-only semantics remain unresolved.
+
+The end-to-end path is therefore verified:
+
+```text
+EAGLE30154
+  -> N.I.N.A. plugin
+  -> local unified projection
+  -> canonical Observatory Status adapter
+  -> persistent producer
+  -> Cloud Run ingest/relay
+  -> Observatory Status browser UI
+```
+
+## 8. Observatory Status mapping
+
+Repository integration maps `projection.services.network` into the canonical Observatory Status `systems.network` signal with freshness semantics.
 
 The portal renderer exposes:
 
@@ -224,7 +252,7 @@ The portal renderer exposes:
 
 The browser continues to force stale signals to `UNKNOWN/STALE` after `fresh_until_utc` expires.
 
-## 8. Safety disposition
+## 9. Safety disposition
 
 The commissioning was observational only:
 
@@ -237,18 +265,17 @@ The commissioning was observational only:
 - no SNMP service enabled;
 - local observatory safety chain remains independent and authoritative.
 
-## 9. Remaining acceptance work
+## 10. Remaining acceptance work
 
-Before the Network branch of BKL-027 can be considered fully closed:
+Before the Network branch of BKL-027 can be fully closed:
 
-1. verify the hosted/public consumer returns and renders the newly published Network signal;
-2. validate stale/source-loss behavior when N.I.N.A. stops producing, without altering the physical network;
-3. confirm Observatory Status maps expired projection to `UNKNOWN/STALE` rather than retaining `ONLINE` indefinitely;
-4. retain the current 60-second freshness unless longer cadence evidence requires a governed adjustment;
-5. keep `activeLink`, `vpn`, and `lteFailover` null/unknown unless a separately approved source becomes available.
+1. validate stale/source-loss behavior when N.I.N.A. stops producing, without altering the physical network;
+2. confirm Observatory Status maps expired projection to `UNKNOWN/STALE` rather than retaining `ONLINE` indefinitely;
+3. retain the current 60-second freshness unless longer cadence evidence requires a governed adjustment;
+4. keep `activeLink`, `vpn`, and `lteFailover` null/unknown unless a separately approved source becomes available.
 
-## 10. Current decision
+## 11. Current decision
 
-**Passive Network source through the N.I.N.A. plugin is runtime-verified and successfully propagated into the canonical Observatory Status projection and accepted by the hosted Cloud Run ingest path.**
+**Passive Network telemetry is verified end-to-end from the N.I.N.A. plugin on EAGLE30154 through the canonical producer and Cloud Run relay to the public Observatory Status page.**
 
-BKL-027 Network remains open only for hosted/public consumer visibility and non-invasive stale/failure-mode validation. Power remains `UNKNOWN` by design.
+BKL-027 Network remains open only for non-invasive stale/source-loss validation. Power remains `UNKNOWN` by design.
