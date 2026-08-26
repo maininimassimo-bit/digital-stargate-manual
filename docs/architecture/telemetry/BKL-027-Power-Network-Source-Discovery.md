@@ -183,13 +183,43 @@ Nessuna UPS/battery/PnP source è stata identificata dal primo inventory. Non è
 
 L'inventory è stato eseguito in modalità read-only. Non sono stati richiesti cambi router, switching power, connessioni a dispositivi o command path.
 
+### 7.4 Management reachability evidence — 2026-08-26 16:53 UTC
+
+Test eseguiti da `EAGLE30154` (`192.168.1.144`, interfaccia `Ethernet 2`) senza login e senza modifica di configurazione.
+
+`192.168.1.254`:
+
+```text
+HTTP  : 200 OK
+HTTPS : 200 OK
+TCP/22: True
+HTTP Content-Length: 407
+HTTP/HTTPS Last-Modified: Tue, 09 May 2023 03:57:12 GMT
+```
+
+`192.168.1.145`:
+
+```text
+TCP/80 : True
+TCP/443: False
+TCP/22 : False
+Ping   : True
+```
+
+Disposizione aggiornata:
+
+- `192.168.1.254` espone una management surface attiva su HTTP, HTTPS e SSH ed è coerente con il ruolo di gateway osservato;
+- questa evidence rafforza `192.168.1.254` come candidato management endpoint Teltonika, ma **non prova ancora modello o firmware**;
+- `192.168.1.145` è un host distinto, raggiungibile e con servizio HTTP, ma non presenta HTTPS/SSH nei test eseguiti;
+- nessun valore `network.state`, `active_link`, `vpn` o `lte_failover` viene ancora derivato da queste sole reachability evidence.
+
 ## 8. Runtime inspection residua
 
 ### Network
 
-1. determinare l'indirizzo LAN effettivo del RUT955 usando ARP/neighbour evidence e le informazioni di rete presenti sull'EAGLE;
-2. verificare reachability della management interface senza autenticazione e senza modifica configurazione;
-3. acquisire firmware/model identity;
+1. fingerprint read-only delle response HTTP/HTTPS di `192.168.1.254` per acquisire vendor/model hints senza autenticazione;
+2. fingerprint read-only HTTP di `192.168.1.145` per identificarne il ruolo e separarlo definitivamente dal management endpoint candidato;
+3. acquisire firmware/model identity solo da superfici passive o autenticazione successivamente autorizzata;
 4. verificare se SNMP è già attivo e se esiste un accesso read-only autorizzabile;
 5. solo dopo, acquisire stato WAN/backup/mobile/VPN e misurare cadence.
 
@@ -226,6 +256,6 @@ BKL-027 può passare a `Done` quando esistono evidence attribuibili per:
 
 **BKL-027 IN PROGRESS.**
 
-Network: primo inventory PASS; gateway operativo osservato `192.168.1.254`; identità e management source RUT955 ancora da verificare.
+Network: primo inventory PASS; `192.168.1.254` è gateway operativo e management endpoint candidato con HTTP/HTTPS/SSH raggiungibili. Modello, firmware e source management read-only restano da verificare. `192.168.1.145` è un host separato con HTTP raggiungibile ma HTTPS/SSH non esposti nei test correnti.
 
 Power: nessuna Win32_Battery o PnP power source trovata; EAGLE3/manager passive-source discovery ancora aperta.
