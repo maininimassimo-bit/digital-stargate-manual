@@ -4,7 +4,7 @@
 |---|---|
 | Identificativo | BKL-027 |
 | Target | Observatory Status — `systems.power` / `systems.network` |
-| Stato | **In Progress — RUT955 model verified; passive Power source unavailable** |
+| Stato | **In Progress — passive source discovery complete; Network commissioning decision required** |
 | Data | 2026-08-26 |
 | Autorità | Digital StarGate Infrastructure Architect |
 | Dipendenze | DSG-OBS-RT-001; AP-004; AP-009; AP-012 |
@@ -61,26 +61,38 @@ Non è necessario estendere il contratto prima della source discovery.
 
 ### 4.1 Candidate primary: Teltonika RUT955 management plane
 
-La documentazione vendor del RUT955 espone capability adatte a una integrazione osservativa:
-
-- stato WAN e backup WAN/failover;
-- stato mobile e registrazione rete;
-- signal level e connection type;
-- SNMP con access mode `Read-Only` e supporto SNMPv3;
-- JSON-RPC per amministrazione/monitoring;
-- OPC UA opzionale con variabili dichiarate read-only.
-
 La runtime evidence del 2026-08-26 identifica `192.168.1.254` come **Teltonika RUT955** tramite evidence combinate: ruolo di default gateway, MAC OUI Teltonika, management UI LuCI/OpenWrt-like e titolo HTML esplicito `Teltonika-RUT955.com - Web UI`.
 
-Il firmware resta da verificare.
+La WebUI autenticata verifica inoltre il firmware:
+
+```text
+RUT9XX_R_00.06.09.5
+```
+
+con legacy WebUI.
+
+La discovery autenticata read-only dei servizi installati/configurati mostra che non esiste oggi una management telemetry source già attiva e riutilizzabile senza change:
+
+- SNMP: voce non presente nella WebUI;
+- MQTT Broker: presente ma Disabled;
+- MQTT Publisher: presente ma Disabled;
+- MQTT Bridge: non configurato / Disabled;
+- Modbus TCP Master: presente, nessuno slave TCP configurato;
+- Modbus TCP Slave: presente ma Disabled;
+- Modbus TCP Slave remote access: Disabled;
+- Modbus custom register block: Disabled.
+
+MQTT Gateway è presente come capability di menu, ma il suo stato runtime non viene inferito dalla sola presenza della pagina e non viene scelto come source perché può introdurre un path bidirezionale/non chiaramente read-only.
 
 ### 4.2 Preferred adapter boundary
 
-Candidate name:
+Candidate name riservato:
 
 ```text
 DSG.Rut955NetworkTelemetryAdapter
 ```
+
+L'adapter non viene implementato finché non viene deliberata una source Network read-only.
 
 Vincoli:
 
@@ -88,19 +100,21 @@ Vincoli:
 2. nessuna modifica WAN/failover/VPN;
 3. nessuna apertura di porte WAN richiesta per il pilot;
 4. accesso solo dalla LAN/management path già autorizzata;
-5. preferire SNMPv3 read-only se disponibile e validato sul firmware reale;
-6. JSON-RPC è fallback candidato solo se l'endpoint e il modello auth vengono verificati senza ampliare privilegi;
-7. nessun parsing HTML/WebUI come source operativa;
-8. secret fuori da repository, log ed evidence pubblicabile.
+5. preferire un protocollo con authorization boundary read-only verificabile;
+6. SNMPv3 read-only resta la candidate commissioning option preferita se supportata/installabile sul firmware reale;
+7. Modbus può essere considerato solo con enforcement tecnico delle sole operazioni di lettura e senza remote/WAN exposure;
+8. MQTT/Modbus Gateway non è accettato come source finché non viene dimostrato un percorso osservativo unidirezionale/read-only;
+9. nessun parsing HTML/WebUI come source operativa;
+10. secret fuori da repository, log ed evidence pubblicabile.
 
 ### 4.3 Candidate mapping
 
 | Observatory Status | Candidate RUT955 evidence | Stato |
 |---|---|---|
-| `network.state` | active WAN + reachability result | Da validare |
-| `network.active_link` | WAN interface in use: wired/mobile/Wi-Fi | Da validare |
-| `network.vpn` | OpenVPN service/tunnel state | Da validare |
-| `network.lte_failover` | mobile interface active while primary WAN unavailable/backup role | Da validare |
+| `network.state` | active WAN + reachability result | Da validare dopo commissioning source |
+| `network.active_link` | WAN interface in use: wired/mobile/Wi-Fi | Da validare dopo commissioning source |
+| `network.vpn` | OpenVPN service/tunnel state | Da validare dopo commissioning source |
+| `network.lte_failover` | mobile interface active while primary WAN unavailable/backup role | Da validare dopo commissioning source |
 
 `ONLINE` non deve derivare dalla sola presenza del link. AP-009 richiede un health check indipendente dalla sola link connectivity.
 
@@ -130,7 +144,7 @@ Non deve usare API che permettono anche switching senza un profilo realmente rea
 
 ## 6. Freshness policy
 
-Nessun valore definitivo è deliberato in BKL-027 finché non viene misurata la cadence reale.
+Nessun valore definitivo è deliberato in BKL-027 finché non viene misurata la cadence reale di una source Network commissionata.
 
 Regola iniziale:
 
@@ -177,7 +191,7 @@ Power PNP candidates: none found
 
 I servizi rilevanti includono il servizio Windows `Power`, ma questo è il servizio di gestione alimentazione del sistema operativo e **non costituisce una source Observatory Status Power**.
 
-Nessuna UPS/battery/PnP source è stata identificata dal primo inventory. Non è quindi ancora possibile mappare `ONLINE`, `ON_BATTERY` o `FAULT` senza inferenza.
+Nessuna UPS/battery/PnP source è stata identificata dal primo inventory. Non è quindi possibile mappare `ONLINE`, `ON_BATTERY` o `FAULT` senza inferenza.
 
 ### 7.3 Safety / side effects
 
@@ -274,14 +288,19 @@ ha restituito:
 HTTP/1.1 403 Forbidden
 ```
 
-con header security/no-cache coerenti con una superficie amministrativa protetta. Il body anonimo continua a mostrare elementi generici della WebUI ma non espone una versione firmware verificabile.
+La WebUI autenticata ha successivamente verificato:
+
+```text
+Firmware: RUT9XX_R_00.06.09.5
+Uptime evidence: 1d 8h 15m 47s since 2026-08-25 11:24:07
+```
 
 Disposizione:
 
 - model identity: **VERIFIED — RUT955**;
-- firmware version: **UNKNOWN — protected status surface**;
-- nessuna autenticazione è stata tentata;
-- nessuna credenziale è stata acquisita o registrata.
+- firmware version: **VERIFIED — RUT9XX_R_00.06.09.5**;
+- legacy WebUI: **VERIFIED**;
+- nessuna credenziale è stata acquisita o registrata nel repository.
 
 ### 7.8 SNMP/tooling discovery
 
@@ -304,7 +323,7 @@ psping
 telnet
 ```
 
-Non è stato installato alcun software e non è stata provata alcuna community string o credenziale SNMP.
+Nella legacy WebUI autenticata la voce SNMP **non è presente**. Non è stato installato alcun software e non è stata provata alcuna community string o credenziale SNMP.
 
 ### 7.9 Device identification disposition
 
@@ -315,16 +334,50 @@ Fatti verificati:
 - `192.168.1.254` espone LuCI;
 - il suo MAC appartiene a Teltonika;
 - la WebUI identifica esplicitamente il modello RUT955;
+- firmware `RUT9XX_R_00.06.09.5` verificato;
 - `192.168.1.145` è un host distinto e il suo IAB MAC non appartiene a Teltonika.
 
 Conclusione governata:
 
 - `192.168.1.254` è il **Teltonika RUT955** dell'osservatorio con confidence alta;
-- il firmware resta non verificato perché la status surface richiede autenticazione;
-- la management telemetry interface read-only resta da verificare;
+- firmware e legacy WebUI sono verificati;
+- non esiste attualmente una management telemetry source già attiva e accettabile senza change;
 - `192.168.1.145` è escluso come candidato RUT955 sulla base dell'evidence corrente, ma il suo ruolo funzionale non è ancora identificato.
 
 Nessun valore `network.state`, `active_link`, `vpn` o `lte_failover` viene ancora derivato da queste sole evidence.
+
+### 7.9.1 Authenticated legacy service inventory
+
+Ispezione manuale autenticata della WebUI, senza Save/Apply e senza modifica della configurazione:
+
+```text
+SNMP                         not present in WebUI
+MQTT Broker                  Disabled
+MQTT Broker local port       1883
+MQTT remote access           Disabled
+MQTT TLS/SSL                 Disabled
+MQTT Publisher               Present / Disabled
+MQTT Bridge                  Not configured / Disabled
+Modbus TCP Master            Present
+Configured Modbus TCP slaves 0
+Modbus TCP Slave             Disabled
+Modbus TCP Slave port        502
+Modbus TCP Slave Device ID   1
+Modbus remote access         Disabled
+Persistent connection        Disabled
+Connection timeout           0
+Custom register block        Disabled
+```
+
+Il menu espone inoltre `Modbus Serial Master`, `Modbus Data to Server` e `MQTT gateway`, ma la sola presenza di una pagina non viene trattata come evidence di servizio attivo.
+
+Disposizione:
+
+- MQTT Broker/Publisher/Bridge: **not active**;
+- Modbus TCP Master: **no configured TCP slaves**;
+- Modbus TCP Slave: **not active**;
+- SNMP: **not present in current legacy WebUI**;
+- nessuna source Network già attiva soddisfa il requisito read-only/no-change.
 
 ### 7.10 EAGLE Manager / PLLService passive inventory
 
@@ -405,12 +458,15 @@ Conclusione governata:
 
 ### Network
 
-1. verificare una management source read-only autorizzabile sul RUT955 reale;
-2. preferire SNMPv3 read-only se già disponibile o approvabile senza impatto sulla configurazione operativa;
-3. se SNMP non è disponibile, valutare una API management read-only supportata dal firmware reale;
-4. acquisire firmware/versione solo tramite superficie autenticata successivamente autorizzata o altra evidence passiva affidabile;
-5. solo dopo, acquisire stato WAN/backup/mobile/VPN e misurare cadence;
-6. identificare il ruolo di `192.168.1.145` solo se necessario alla topologia, senza inferirlo dal solo vendor IAB.
+La passive/current-state discovery è completata. Nessuna source Network già attiva soddisfa i requisiti di BKL-027.
+
+Il prossimo passo richiede una **commissioning decision separata e autorizzata**, non un ulteriore probing:
+
+1. opzione preferita: valutare installazione/configurazione di SNMPv3 read-only sulla sola LAN, senza remote/WAN access;
+2. opzione alternativa: Modbus TCP Slave solo se è possibile applicare enforcement tecnico delle sole function read e impedire write path;
+3. MQTT/MQTT Gateway non viene scelto finché non esiste un boundary dimostrabilmente read-only;
+4. dopo commissioning: acquisire WAN/backup/mobile/VPN state, misurare cadence e deliberare freshness;
+5. eseguire failure-mode test non invasivi e validare fallback `UNKNOWN/STALE`.
 
 ### Power
 
@@ -428,7 +484,7 @@ systems.power.quality = UNKNOWN
 
 - local interlocks remain authoritative;
 - no relay/power-port switching;
-- no router configuration change;
+- no router configuration change senza change/commissioning esplicitamente approvato;
 - no WAN exposure added;
 - no production secret committed;
 - telemetry failure does not alter local operation;
@@ -442,15 +498,15 @@ BKL-027 può passare a `Done` quando esistono evidence attribuibili per:
 1. almeno una source Network read-only verificata sul RUT955 reale o source alternativa;
 2. almeno una source Power read-only verificata, oppure decisione governata che Power resta `UNKNOWN` per assenza di source affidabile;
 3. mapping semantico verso il contratto Observatory Status;
-4. cadence misurata e freshness deliberata;
+4. cadence misurata e freshness deliberata per la source Network;
 5. failure-mode test non invasivi;
 6. adapter boundary approvato;
 7. nessun command path introdotto.
 
 ## 11. Current disposition
 
-**BKL-027 IN PROGRESS.**
+**BKL-027 IN PROGRESS — COMMISSIONING DECISION REQUIRED FOR NETWORK.**
 
-Network: `192.168.1.254` è verificato come **Teltonika RUT955**. Il firmware e la management telemetry source read-only restano aperti. La status surface anonima restituisce `403 Forbidden`; nessuna autenticazione è stata tentata. La reachability TCP/161 negativa non è usata per inferire lo stato SNMP/UDP. `192.168.1.145` resta un host distinto, non candidato RUT955.
+Network: `192.168.1.254` è verificato come **Teltonika RUT955**, firmware **RUT9XX_R_00.06.09.5** legacy. La discovery autenticata, eseguita senza modifiche, non ha trovato una source Network già attiva e accettabile: SNMP non è presente nella WebUI, MQTT Broker/Publisher/Bridge sono inattivi, Modbus TCP Master non ha slave configurati e Modbus TCP Slave è Disabled. Nessun valore `systems.network` viene ancora derivato.
 
 Power: **passive source discovery completed with no reliable source**. EAGLE Manager X 3.1.0 e PLLService sono verificati; PLLService è Running/Auto e usa IPC locale, ma i log correnti e storici non espongono telemetria Power. Per decisione fail-safe, `systems.power` resta `UNKNOWN` e nessun probing IPC proprietario viene introdotto.
