@@ -10,21 +10,37 @@ using System.Threading.Tasks;
 namespace DigitalStarGate.Nina.DomeTelemetryExporter;
 
 internal sealed class NetworkTelemetryAdapter {
-    private const string InternetAddress = "1.1.1.1";
-    private const int InternetPort = 443;
-    private const string DnsName = "github.com";
-    private static readonly TimeSpan ProbeTimeout = TimeSpan.FromSeconds(3);
+    private readonly string internetAddress;
+    private readonly int internetPort;
+    private readonly string dnsName;
+    private readonly TimeSpan probeTimeout;
+
+    public NetworkTelemetryAdapter(
+        string internetAddress = "1.1.1.1",
+        int internetPort = 443,
+        string dnsName = "github.com") {
+
+        this.internetAddress = internetAddress;
+        this.internetPort = internetPort;
+        this.dnsName = dnsName;
+        probeTimeout = TimeSpan.FromSeconds(3);
+    }
 
     public Dictionary<string, object> Observe() {
         try {
             var route = GetLocalRouteEvidence();
-            var gatewayReachable = !string.IsNullOrWhiteSpace(route.Gateway) && TestTcp(route.Gateway, 443, out var gatewayLatencyMs);
-            if (!gatewayReachable && !string.IsNullOrWhiteSpace(route.Gateway)) {
-                gatewayReachable = TestTcp(route.Gateway, 80, out gatewayLatencyMs);
+
+            int? gatewayLatencyMs = null;
+            var gatewayReachable = false;
+            if (!string.IsNullOrWhiteSpace(route.Gateway)) {
+                gatewayReachable = TestTcp(route.Gateway, 443, out gatewayLatencyMs);
+                if (!gatewayReachable) {
+                    gatewayReachable = TestTcp(route.Gateway, 80, out gatewayLatencyMs);
+                }
             }
 
-            var internetReachable = TestTcp(InternetAddress, InternetPort, out var internetLatencyMs);
-            var dnsResolved = TestDns(DnsName, out var dnsLatencyMs, out var dnsAddressCount);
+            var internetReachable = TestTcp(internetAddress, internetPort, out var internetLatencyMs);
+            var dnsResolved = TestDns(dnsName, out var dnsLatencyMs, out var dnsAddressCount);
 
             var state = MapState(route.HasUsableInterface, gatewayReachable, internetReachable, dnsResolved);
             var connected = state == "ONLINE" ? true : state == "OFFLINE" ? false : (bool?)null;
@@ -40,10 +56,10 @@ internal sealed class NetworkTelemetryAdapter {
                 { "gateway", route.Gateway },
                 { "gatewayReachable", gatewayReachable },
                 { "gatewayLatencyMs", gatewayLatencyMs },
-                { "internetTarget", $"{InternetAddress}:{InternetPort}" },
+                { "internetTarget", $"{internetAddress}:{internetPort}" },
                 { "internetReachable", internetReachable },
                 { "internetLatencyMs", internetLatencyMs },
-                { "dnsName", DnsName },
+                { "dnsName", dnsName },
                 { "dnsResolved", dnsResolved },
                 { "dnsLatencyMs", dnsLatencyMs },
                 { "dnsAddressCount", dnsAddressCount },
@@ -89,13 +105,13 @@ internal sealed class NetworkTelemetryAdapter {
         }
     }
 
-    private static bool TestTcp(string address, int port, out int? latencyMs) {
+    private bool TestTcp(string address, int port, out int? latencyMs) {
         latencyMs = null;
         var stopwatch = Stopwatch.StartNew();
         using var client = new TcpClient();
         try {
             var task = client.ConnectAsync(address, port);
-            if (!task.Wait(ProbeTimeout)) {
+            if (!task.Wait(probeTimeout)) {
                 return false;
             }
             stopwatch.Stop();
@@ -106,13 +122,13 @@ internal sealed class NetworkTelemetryAdapter {
         }
     }
 
-    private static bool TestDns(string name, out int? latencyMs, out int addressCount) {
+    private bool TestDns(string name, out int? latencyMs, out int addressCount) {
         latencyMs = null;
         addressCount = 0;
         var stopwatch = Stopwatch.StartNew();
         try {
             Task<IPAddress[]> task = Dns.GetHostAddressesAsync(name);
-            if (!task.Wait(ProbeTimeout)) {
+            if (!task.Wait(probeTimeout)) {
                 return false;
             }
             stopwatch.Stop();
