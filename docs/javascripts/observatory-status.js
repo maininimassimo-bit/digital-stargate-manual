@@ -67,10 +67,11 @@
     set('camera-detail', `cooler: ${bool(diagnostics.camera_cooler_on)} · power: ${number(diagnostics.camera_cooler_power_pct, 0, ' %')} · temperatura: ${number(diagnostics.camera_temperature_c, 1, ' °C')} · exposing: ${bool(diagnostics.camera_exposing)}`);
 
     set('power-state', badge(power.state));
-    set('power-detail', `Qualità: ${text(power.quality)} · sorgente verificata non ancora integrata`);
+    set('power-detail', `Qualità: ${text(power.quality)} · sorgente Power verificata non ancora disponibile`);
 
     set('network-state', badge(network.state));
-    set('network-detail', `Qualità: ${text(network.quality)} · sorgente verificata non ancora integrata`);
+    set('network-detail', `Interfaccia: ${text(diagnostics.network_interface)} · gateway: ${text(diagnostics.network_gateway)} (${bool(diagnostics.network_gateway_reachable)}, ${number(diagnostics.network_gateway_latency_ms, 0, ' ms')}) · Internet: ${bool(diagnostics.network_internet_reachable)} (${number(diagnostics.network_internet_latency_ms, 0, ' ms')}) · DNS: ${bool(diagnostics.network_dns_resolved)} (${number(diagnostics.network_dns_latency_ms, 0, ' ms')}) · qualità: ${text(network.quality)}`);
+    set('network-link-detail', `Active link: ${text(network.active_link)} · VPN: ${bool(network.vpn)} · LTE failover: ${bool(network.lte_failover)}`);
 
     set('weather-state', badge(weather.state));
     set('weather-temperature', number(weather.temperature_c, 1, ' °C'));
