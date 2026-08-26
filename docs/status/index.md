@@ -37,8 +37,10 @@
 | Cupola | <span data-observatory-status="dome-state">🟡 UNKNOWN</span> | <span data-observatory-status="dome-detail">Shutter: —</span> |
 | Montatura | <span data-observatory-status="mount-state">🟡 UNKNOWN</span> | <span data-observatory-status="mount-detail">parked: — · tracking: —</span> |
 | Camera | <span data-observatory-status="camera-state">🟡 UNKNOWN</span> | <span data-observatory-status="camera-detail">cooler: — · temperatura: —</span> |
-| Alimentazione | <span data-observatory-status="power-state">🟡 UNKNOWN</span> | <span data-observatory-status="power-detail">Sorgente verificata non ancora integrata</span> |
-| Rete | <span data-observatory-status="network-state">🟡 UNKNOWN</span> | <span data-observatory-status="network-detail">Sorgente verificata non ancora integrata</span> |
+| Alimentazione | <span data-observatory-status="power-state">🟡 UNKNOWN</span> | <span data-observatory-status="power-detail">Sorgente Power verificata non ancora disponibile</span> |
+| Rete | <span data-observatory-status="network-state">🟡 UNKNOWN</span> | <span data-observatory-status="network-detail">Telemetria Network N.I.N.A. non ancora disponibile</span><br><span data-observatory-status="network-link-detail">Active link: — · VPN: — · LTE failover: —</span> |
+
+La riga **Rete** usa la telemetria passiva prodotta dal plug-in N.I.N.A. Digital StarGate. Lo stato `ONLINE` richiede evidence di route/gateway, raggiungibilità Internet e DNS; non deriva dalla sola presenza del link. `active_link`, `vpn` e `lte_failover` restano non valorizzati finché non esiste una sorgente management read-only separatamente approvata.
 
 ## Contratto e freshness
 
