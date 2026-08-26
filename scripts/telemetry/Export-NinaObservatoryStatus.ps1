@@ -14,17 +14,6 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-function New-UnknownSignal {
-    param([Parameter(Mandatory = $true)][string]$Source)
-    return [ordered]@{
-        state = 'UNKNOWN'
-        observed_at_utc = $null
-        fresh_until_utc = $null
-        quality = 'UNKNOWN'
-        source = $Source
-    }
-}
-
 function Get-ServiceSignal {
     param(
         [Parameter(Mandatory = $true)][object]$Service,
@@ -72,14 +61,20 @@ $observedAt = [datetime]::Parse(
 $freshUntil = $observedAt.AddSeconds($FreshnessSeconds)
 $overallQuality = if ($freshUntil -ge [datetime]::UtcNow) { 'CURRENT' } else { 'STALE' }
 $source = 'NINA Observatory Telemetry Exporter'
+$networkSource = 'NINA Observatory Telemetry Exporter / Passive Network Adapter'
 
 $dome = Get-ServiceSignal -Service $projection.services.dome -ObservedAt $observedAt -FreshUntil $freshUntil -Source $source
 $mount = Get-ServiceSignal -Service $projection.services.mount -ObservedAt $observedAt -FreshUntil $freshUntil -Source $source
 $camera = Get-ServiceSignal -Service $projection.services.camera -ObservedAt $observedAt -FreshUntil $freshUntil -Source $source
 $power = Get-UnverifiedServiceSignal -Source $source
-$network = Get-UnverifiedServiceSignal -Source $source
+$network = Get-ServiceSignal -Service $projection.services.network -ObservedAt $observedAt -FreshUntil $freshUntil -Source $networkSource
 $weatherSignal = Get-ServiceSignal -Service $projection.services.weather -ObservedAt $observedAt -FreshUntil $freshUntil -Source $source
 $safetySignal = Get-ServiceSignal -Service $projection.services.safety -ObservedAt $observedAt -FreshUntil $freshUntil -Source $source
+
+# Management-only semantics stay unresolved unless an approved direct source exists.
+$network.active_link = $projection.services.network.details.activeLink
+$network.vpn = $projection.services.network.details.vpn
+$network.lte_failover = $projection.services.network.details.lteFailover
 
 $weather = $weatherSignal
 $weather.temperature_c = $projection.services.weather.details.temperatureC
@@ -140,6 +135,17 @@ $payload = [ordered]@{
         camera_cooler_power_pct = $projection.services.camera.details.coolerPowerPct
         camera_exposing = $projection.services.camera.details.exposing
         safety_monitor_is_safe = $projection.services.safety.details.isSafe
+        network_interface = $projection.services.network.details.interface
+        network_gateway = $projection.services.network.details.gateway
+        network_gateway_reachable = $projection.services.network.details.gatewayReachable
+        network_gateway_latency_ms = $projection.services.network.details.gatewayLatencyMs
+        network_internet_target = $projection.services.network.details.internetTarget
+        network_internet_reachable = $projection.services.network.details.internetReachable
+        network_internet_latency_ms = $projection.services.network.details.internetLatencyMs
+        network_dns_name = $projection.services.network.details.dnsName
+        network_dns_resolved = $projection.services.network.details.dnsResolved
+        network_dns_latency_ms = $projection.services.network.details.dnsLatencyMs
+        network_dns_address_count = $projection.services.network.details.dnsAddressCount
     }
 }
 
