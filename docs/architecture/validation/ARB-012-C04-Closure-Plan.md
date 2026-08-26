@@ -6,21 +6,21 @@
 | Package | AP-012 — Enterprise Operations Center Architecture |
 | Condition | ARB-012-C04 — Role Assignment and Four-Eyes Enforcement |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
-| Updated | 2026-08-25 |
+| Updated | 2026-08-26 |
 | Authority | Digital StarGate Chief Architect |
 | Target model | **Two-Person Limited Operations Model** |
-| Current status | **Approved with Conditions — final repository CI pending** |
+| Current status | **Closed — Approved** |
 | Runtime impact | No runtime enablement authorized |
 
 ## 1. Purpose
 
-Define and record the controlled closure of ARB-012-C04 against the Sponsor-approved two-person target. The earlier closure assumption requiring a third permanent actor, independent substitutes, positive C4 and independent internal audit is superseded.
+Record the controlled closure of ARB-012-C04 against the Sponsor-approved two-person target. The earlier closure assumption requiring a third permanent actor, independent substitutes, positive C4 and independent internal audit is superseded.
 
 The target preserves fail-safe governance by denying unsupported capabilities rather than weakening segregation requirements.
 
-## 2. Target state
+## 2. Target state and completion
 
-C04 closure requires repository evidence demonstrating:
+C04 closure required repository evidence demonstrating:
 
 1. Massimo and Leonardo are distinct natural persons using distinct validation accounts/sessions;
 2. Massimo requester/executor and Leonardo approver separation works for C3;
@@ -35,7 +35,7 @@ C04 closure requires repository evidence demonstrating:
 11. repository quality gates pass;
 12. final ARB re-review accepts the revised two-person target.
 
-Items 1–10 and 12 are complete. Item 11 remains the sole closure condition after final governance reconciliation.
+**Items 1–12 are complete.** Item 11 is satisfied by GitHub Actions run `32871808946`, whose `validate` job completed successfully, including `Verifica documentazione` and `Verifica integrita artifact`.
 
 ## 3. N/A by governance design
 
@@ -62,7 +62,7 @@ No `N/A` item is reported as `Passed`.
 
 ### C04-W03 — Identity, training and access evidence
 
-**Status: Complete.** Applicable identity verification, training, least-privilege access review and revocation/suspension governance evidence has been completed against the two-person target. Independent internal audit remains N/A by governance design and no self-benefiting review is accepted.
+**Status: Complete.** Applicable identity verification, training, least-privilege access review and revocation/suspension governance evidence has been completed against the two-person target.
 
 ### C04-W04 — Four-eyes validation plan
 
@@ -78,11 +78,11 @@ No `N/A` item is reported as `Passed`.
 
 ### C04-W08 — Final ARB re-review
 
-**Status: Complete — APPROVED WITH CONDITIONS.** `ARB-012-C04-W08-Final-ARB-ReReview.md` records the independent review. There are no remaining technical validation blockers. The sole remaining closure condition is an attributable successful repository CI/quality-gate run on the final reconciled governance baseline.
+**Status: Complete — APPROVED.** The independent re-review found no technical blocker. Closure condition `C04-W08-C01` is satisfied by GitHub Actions run `32871808946` with `validate = success`.
 
 ## 5. Quality gates
 
-| Gate | Current disposition |
+| Gate | Final disposition |
 |---|---|
 | Sponsor two-person target decision | Passed |
 | Role/conflict target definition | Passed |
@@ -95,8 +95,8 @@ No `N/A` item is reported as `Passed`.
 | Positive C4 | Denied by design and validated as denied |
 | Break-glass | Denied by design and validated as denied |
 | Independent internal audit closure | N/A by governance design |
-| Repository CI | **Pending final reconciled baseline run** |
-| Final ARB architecture/evidence re-review | **Approved with Conditions** |
+| Repository CI | **Passed — Actions run 32871808946** |
+| Final ARB architecture/evidence re-review | **Approved** |
 | Runtime enablement | Separate decision; not implied by C04 |
 
 ## 6. Risks and controls
@@ -111,12 +111,10 @@ No `N/A` item is reported as `Passed`.
 | C04 closure interpreted as runtime authorization | Critical | Runtime remains a separate gate |
 | Physical interlock bypass | Critical | Prohibited; local interlocks remain authoritative |
 
-## 7. Current disposition
+## 7. Final disposition
 
-**ARB-012-C04 is APPROVED WITH CONDITIONS.**
+**ARB-012-C04 is CLOSED — APPROVED.**
 
-W01–W08 are complete from architecture/governance and technical-validation perspectives. The only remaining closure condition is `C04-W08-C01`: successful repository CI/quality-gate evidence on the final reconciled governance baseline.
+W01–W08 and all applicable quality gates are complete. There is no remaining C04 closure condition and no additional validation-VM run is required for this condition.
 
-Until that evidence is verified, C04 must not be marked `Closed` and BKL-011 remains `In Progress`.
-
-Even after closure, runtime enablement, production access, physical-device control, positive C4 and break-glass are not authorized by C04.
+Closure does not authorize runtime enablement, production access, physical-device control, positive C4 or break-glass. Runtime authorization remains a separate governed decision.
