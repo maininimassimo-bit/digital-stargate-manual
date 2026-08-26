@@ -3,7 +3,7 @@ param(
     [Parameter(Mandatory=$true)]
     [string]$ArtifactDll,
 
-    [string]$ExpectedSha256 = '5075a7c02827b66b077295c31db3380e3e61b0c33d859868d55dfbf5687a363b',
+    [string]$ExpectedSha256 = 'e384539ea2062984e5250ca6ac3fe91bde05a4b18066c964d0ec33f7e77c55bf',
 
     [string]$NinaPluginVersionDirectory = '3.0.0'
 )
