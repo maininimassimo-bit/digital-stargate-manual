@@ -3,6 +3,7 @@ name: NINA Dome Telemetry Exporter
 on:
   push:
     branches:
+      - main
       - feature/observatory-status-realtime-telemetry
     paths:
       - "integrations/nina/DigitalStarGate.DomeTelemetryExporter/**"
