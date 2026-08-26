@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 2.3 |
+| Versione | 2.4 |
 | Stato | Active |
 | Data baseline | 26/08/2026 |
 
@@ -41,7 +41,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-024 | P1 | Riallineare Observatory Status e Session Reports index alla sessione più recente | Done | BKL-023 Done | Realtime separato dallo storico; Power/Network restano `UNKNOWN` senza sorgenti verificate | Developer Foundation #705, Genera manuale Word #586 |
 | BKL-025 | P1 | Correggere broken links, asset mancanti e sitemap dell'artifact Pages | Done | BKL-023 | Pages integrity verificata | deploy-pages run 381, docs.yml run 285 |
 | BKL-026 | P0 | Rieseguire deep assessment ARB e chiudere OAT/AP-014 acceptance | Done | BKL-019–BKL-025 Done | ARB re-review completata; promotion fail-safe e real-session semantic idempotency PASS; historical workflow criteria N/A; OAT/AP-014 Accepted; final governance CI PASS | AP14-W07-EAGLE-M27-OAT-Result v2.1, AP-014-Operational-Acceptance v1.4, Developer Foundation #730, Genera manuale Word #611 |
-| BKL-027 | P1 | Observatory Status — runtime source discovery Power/Network | Ready | DSG-OBS-RT-001 pilot; accesso EAGLE/RUT955 | Sorgenti read-only reali e verificabili per Power e Network, freshness/quality e adapter boundary definiti | DSG-OBS-RT-001, AP-004, AP-012 |
+| BKL-027 | P1 | Observatory Status — runtime source discovery Power/Network | **In Progress** | DSG-OBS-RT-001 pilot; accesso EAGLE/RUT955 | Sorgenti read-only reali e verificabili per Power e Network, freshness/quality e adapter boundary definiti | DSG-OBS-RT-001, `BKL-027-Power-Network-Source-Discovery.md`, `Inspect-PowerNetworkTelemetrySources.ps1`, AP-004, AP-009, AP-012 |
 | BKL-028 | P1 | Observatory Status — integrare Power/Network telemetry | Planned | BKL-027 Done | `systems.power` e `systems.network` alimentati da source verificate, fail-safe `UNKNOWN/STALE`, portale e relay aggiornati | DSG-OBS-RT-001, Observatory Status |
 | BKL-014 | P2 | Preparare AP-015 Scientific Knowledge Platform | Planned | AP-014 e Knowledge Graph | Architecture Package CAP-40 | AMP-002 |
 | BKL-015 | P2 | Implementare repository Knowledge Graph machine-readable | Planned | Governance Foundation e schema relazioni | Relazioni AP/ADR/component/evidence interrogabili | TD-008, GP-003 |
@@ -57,7 +57,8 @@ La repository governance è riconciliata con le evidence reali senza ripetere at
 - BKL-012 è `Done`: AP-013B OneDrive-mediated COPY_ONLY e AP-013 Operational Acceptance restano accettati.
 - BKL-013 e BKL-018–BKL-026 restano `Done`: AP-014/OAT e relative remediation sono completate.
 - BKL-007–BKL-010 restano lavori reali e non vengono chiusi per inferenza.
-- BKL-027/BKL-028 registrano il completamento ancora mancante di Observatory Status per Power e Network; finché BKL-027 non identifica source verificabili, i due sistemi restano correttamente `UNKNOWN`.
+- BKL-027 è **In Progress**: source discovery avviata; RUT955 management plane è il candidato Network primario, mentre la source Power richiede inventory runtime EAGLE/UPS. Entrambi i segnali restano `UNKNOWN` fino a evidence verificata.
+- BKL-028 resta `Planned` e non parte finché BKL-027 non soddisfa i propri acceptance criteria.
 
 ## 4. Sequenza di esecuzione raccomandata
 
@@ -70,7 +71,7 @@ Governance Foundation [DONE]
   -> AP-013 unattended COPY_ONLY evidence [DONE]
   -> AP-014 acceptance [DONE]
   -> BKL-011 / ARB-012-C04 [DONE]
-  -> BKL-027 Observatory Status Power/Network source discovery [READY]
+  -> BKL-027 Observatory Status Power/Network source discovery [IN PROGRESS]
   -> BKL-028 Observatory Status Power/Network integration [PLANNED]
   -> BKL-007/008/009/010 governance hardening
   -> AP-015 / Knowledge Graph
