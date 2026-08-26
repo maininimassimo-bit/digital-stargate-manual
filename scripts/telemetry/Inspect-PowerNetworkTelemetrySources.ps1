@@ -23,12 +23,27 @@ $networkAdapters = @(Get-NetAdapter -ErrorAction SilentlyContinue |
     Select-Object Name, InterfaceDescription, Status, LinkSpeed, MacAddress, ifIndex)
 
 $ipConfig = @(Get-NetIPConfiguration -ErrorAction SilentlyContinue | ForEach-Object {
+    $ipv4Addresses = @()
+    if ($null -ne $_.IPv4Address) {
+        $ipv4Addresses = @($_.IPv4Address | Where-Object { $null -ne $_ } | ForEach-Object { $_.IPAddress })
+    }
+
+    $ipv4Gateways = @()
+    if ($null -ne $_.IPv4DefaultGateway) {
+        $ipv4Gateways = @($_.IPv4DefaultGateway | Where-Object { $null -ne $_ } | ForEach-Object { $_.NextHop })
+    }
+
+    $dnsServers = @()
+    if ($null -ne $_.DNSServer -and $null -ne $_.DNSServer.ServerAddresses) {
+        $dnsServers = @($_.DNSServer.ServerAddresses | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) })
+    }
+
     [pscustomobject]@{
         interface_alias = $_.InterfaceAlias
         interface_index = $_.InterfaceIndex
-        ipv4_address = @($_.IPv4Address | ForEach-Object IPAddress)
-        ipv4_gateway = @($_.IPv4DefaultGateway | ForEach-Object NextHop)
-        dns_server = @($_.DNSServer.ServerAddresses)
+        ipv4_address = $ipv4Addresses
+        ipv4_gateway = $ipv4Gateways
+        dns_server = $dnsServers
     }
 })
 
