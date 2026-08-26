@@ -2,8 +2,8 @@
   'use strict';
 
   const RUNTIME_ENDPOINT = 'https://dsg-observatory-status-relay-cfjug35c6q-ew.a.run.app/v1/observatory-status';
-  const FALLBACK_DATA_PATH = 'data/realtime/observatory-status.json';
-  const LATEST_SCIENTIFIC_PATH = 'data/realtime/latest-observation.json';
+  const FALLBACK_DATA_PATH = '../data/realtime/observatory-status.json';
+  const LATEST_SCIENTIFIC_PATH = '../data/realtime/latest-observation.json';
   const REFRESH_MS = 15000;
 
   const parseTime = value => {
