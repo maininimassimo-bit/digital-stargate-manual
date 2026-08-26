@@ -8,7 +8,7 @@
 | Plugin | Digital StarGate Observatory Telemetry Exporter |
 | Plugin API directory actually loaded | `NINA\Plugins\3.0.0` |
 | Data | 2026-08-26 |
-| Stato | **RUNTIME SMOKE TEST PASS — cadence/failure-mode validation pending** |
+| Stato | **RUNTIME + CANONICAL PUBLISH PASS — stale/failure-mode consumer validation pending** |
 
 ## 1. CI artifact
 
@@ -66,7 +66,7 @@ C:\Users\PrimaLuceLab\AppData\Local\DigitalStarGate\telemetry\nina-observatory-s
 
 The plugin generated `schemaVersion = 2` and `source = nina-observatory-telemetry-exporter`.
 
-During the smoke test all astronomy devices remained disconnected. Their states correctly degraded to `UNKNOWN`; no connection or equipment command was issued.
+During the initial smoke test all astronomy devices remained disconnected. Their states correctly degraded to `UNKNOWN`; no connection or equipment command was issued.
 
 Power remained fail-safe:
 
@@ -78,7 +78,7 @@ reason    = NO_VERIFIED_POWER_SOURCE
 
 ## 4. Network runtime evidence
 
-Observed network service:
+Initial observed network service:
 
 ```text
 connected            = true
@@ -100,6 +100,32 @@ vpn                  = null
 lteFailover          = null
 ```
 
+A subsequent canonical producer cycle on 2026-08-26 verified:
+
+```text
+systems.network.state           = ONLINE
+systems.network.quality         = CURRENT
+systems.network.source          = NINA Observatory Telemetry Exporter / Passive Network Adapter
+systems.network.observed_at_utc = 2026-08-26T20:13:31.4381218Z
+systems.network.fresh_until_utc = 2026-08-26T20:14:31.4381218Z
+
+network_interface           = Ethernet 2
+network_gateway             = 192.168.1.254
+network_gateway_reachable   = true
+network_gateway_latency_ms  = 1
+network_internet_target     = 1.1.1.1:443
+network_internet_reachable  = true
+network_internet_latency_ms = 36
+network_dns_name            = github.com
+network_dns_resolved        = true
+network_dns_latency_ms      = 33
+network_dns_address_count   = 1
+
+active_link  = null
+vpn          = null
+lte_failover = null
+```
+
 This validates the intended passive semantics:
 
 - `ONLINE` is supported by local route/gateway evidence plus independent Internet TCP and DNS checks;
@@ -107,7 +133,7 @@ This validates the intended passive semantics:
 - no router configuration is changed;
 - `activeLink`, `vpn`, and `lteFailover` remain unresolved because passive host evidence cannot prove those management semantics.
 
-## 5. Projection update evidence
+## 5. Projection cadence evidence
 
 A 10-second observation window showed:
 
@@ -117,9 +143,88 @@ Updated = True
 
 The file timestamp changed between the beginning and end of the window, consistent with the plugin's configured 5-second projection timer.
 
-This is a smoke-test indication only; it is not yet the formal cadence/freshness acceptance evidence.
+The persistent canonical producer is configured and observed with:
 
-## 6. Safety disposition
+```text
+poll_seconds      = 15
+freshness_seconds = 60
+state             = RUNNING
+consecutive_failures = 0
+```
+
+## 6. Canonical producer and hosted transport evidence
+
+The scheduled runtime task was observed before and after a controlled restart as:
+
+```text
+DigitalStarGate-ObservatoryStatusTelemetry = Running
+```
+
+Producer health after restart:
+
+```text
+component            = DSG.ObservatoryStatusTelemetryProducer
+computer             = EAGLE30154
+state                = RUNNING
+source.primary       = NINA_OBSERVATORY_TELEMETRY
+source.active        = NINA_OBSERVATORY_TELEMETRY
+source.fallback      = CLOUDWATCHER_CSV
+source.fallback_count = 0
+consecutive_failures = 0
+last_error           = null
+```
+
+Hosted transport evidence:
+
+```text
+transport.enabled              = true
+transport.endpoint             = https://dsg-observatory-status-relay-cfjug35c6q-ew.a.run.app/v1/observatory-status
+transport.consecutive_failures = 0
+transport.last_error           = null
+transport.last_success_utc     = 2026-08-26T20:13:32.3826277Z
+```
+
+Producer log repeatedly reported:
+
+```text
+PUBLISH RESULT: PASS status=202 attempt=1
+```
+
+including correlation ID:
+
+```text
+1ae21944-4ce7-45b2-bf1f-05012e6518f6
+```
+
+Therefore the following runtime path is verified from EAGLE evidence:
+
+```text
+N.I.N.A. plugin
+  -> nina-observatory-status.json
+  -> DSG.NinaObservatoryTelemetryAdapter
+  -> C:\DigitalStarGate\TelemetryRuntime\observatory-status.json
+  -> authenticated hosted publish
+  -> Cloud Run relay HTTP 202 accepted
+```
+
+Direct independent GET verification of the public relay/page from the architecture-agent execution environment was not available because that environment could not resolve the Cloud Run hostname. This does not invalidate the EAGLE-side publish evidence, but final browser-consumer visibility remains a separate acceptance check.
+
+## 7. Observatory Status mapping
+
+Repository integration now maps `projection.services.network` into the canonical Observatory Status `systems.network` signal with freshness semantics.
+
+The portal renderer exposes:
+
+- network state and quality;
+- local interface;
+- gateway reachability and latency;
+- Internet reachability and latency;
+- DNS reachability and latency;
+- unresolved `active_link`, `vpn`, and `lte_failover` as unknown/null.
+
+The browser continues to force stale signals to `UNKNOWN/STALE` after `fresh_until_utc` expires.
+
+## 8. Safety disposition
 
 The commissioning was observational only:
 
@@ -132,18 +237,18 @@ The commissioning was observational only:
 - no SNMP service enabled;
 - local observatory safety chain remains independent and authoritative.
 
-## 7. Remaining acceptance work
+## 9. Remaining acceptance work
 
-Before the Network branch of BKL-027 can be considered complete:
+Before the Network branch of BKL-027 can be considered fully closed:
 
-1. measure projection cadence across a longer representative window;
-2. validate stale/source-loss behavior when the plugin/N.I.N.A. producer stops, without altering the network;
-3. confirm downstream Observatory Status freshness handling maps stopped/stale projection to `UNKNOWN/STALE` rather than retaining `ONLINE` indefinitely;
-4. document final freshness threshold;
+1. verify the hosted/public consumer returns and renders the newly published Network signal;
+2. validate stale/source-loss behavior when N.I.N.A. stops producing, without altering the physical network;
+3. confirm Observatory Status maps expired projection to `UNKNOWN/STALE` rather than retaining `ONLINE` indefinitely;
+4. retain the current 60-second freshness unless longer cadence evidence requires a governed adjustment;
 5. keep `activeLink`, `vpn`, and `lteFailover` null/unknown unless a separately approved source becomes available.
 
-## 8. Current decision
+## 10. Current decision
 
-**Passive Network source through the N.I.N.A. plugin is runtime-verified for `network.state = ONLINE` under healthy conditions.**
+**Passive Network source through the N.I.N.A. plugin is runtime-verified and successfully propagated into the canonical Observatory Status projection and accepted by the hosted Cloud Run ingest path.**
 
-BKL-027 remains open only for cadence/freshness and non-invasive failure-mode validation. Power remains `UNKNOWN` by design.
+BKL-027 Network remains open only for hosted/public consumer visibility and non-invasive stale/failure-mode validation. Power remains `UNKNOWN` by design.
