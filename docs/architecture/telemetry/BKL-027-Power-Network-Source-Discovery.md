@@ -4,7 +4,7 @@
 |---|---|
 | Identificativo | BKL-027 |
 | Target | Observatory Status — `systems.power` / `systems.network` |
-| Stato | **In Progress — RUT955 model verified; firmware/source verification pending** |
+| Stato | **In Progress — RUT955 model verified; EAGLE Manager passive-source discovery active** |
 | Data | 2026-08-26 |
 | Autorità | Digital StarGate Infrastructure Architect |
 | Dipendenze | DSG-OBS-RT-001; AP-004; AP-009; AP-012 |
@@ -110,7 +110,7 @@ Vincoli:
 
 Il nodo EAGLE è la prima source candidate perché governa alimentazione delle periferiche e il software EAGLE Manager è già presente sul nodo di controllo.
 
-La documentazione vendor conferma per la famiglia EAGLE/EAGLE3 la gestione delle porte di alimentazione e la compatibilità EAGLE3 con le porte regolabili usate anche da ECCO2. Tuttavia, nel repository e nella documentazione pubblica esaminata **non è ancora provata una interfaccia EAGLE3 read-only stabile e governabile** che esponga input power, current consumption o stato delle porte senza passare da UI/control path.
+La runtime inspection del 2026-08-26 conferma **EAGLE Manager X 3.1.0** installato, publisher `PrimaLuceLab`, sul nodo `EAGLE30154`. Non è ancora provata una interfaccia read-only stabile e governabile che esponga input power, current consumption o stato delle porte senza passare da UI/control path.
 
 Per questo non viene selezionato ancora un adapter operativo.
 
@@ -326,6 +326,30 @@ Conclusione governata:
 
 Nessun valore `network.state`, `active_link`, `vpn` o `lte_failover` viene ancora derivato da queste sole evidence.
 
+### 7.10 EAGLE Manager passive inventory
+
+Runtime inspection locale su `EAGLE30154`:
+
+```text
+DisplayName    : EAGLE Manager X
+DisplayVersion : 3.1.0
+Publisher      : PrimaLuceLab
+```
+
+Il software è installato. La directory `C:\Program Files\PrimaLuceLab` è presente. Sono presenti anche directory applicative `C:\Users\PrimaLuceLab\AppData\Local\play` e `C:\Users\PrimaLuceLab\AppData\Roaming\PLAY`; il loro ruolo rispetto a EAGLE Manager non è ancora verificato.
+
+Al momento dell'inventory non risultano processi con naming `EAGLE|PrimaLuce|PLAY|ECCO` in esecuzione e quindi non sono state osservate socket TCP attribuibili a tali processi.
+
+La ricerca servizi con lo stesso pattern ha restituito servizi Windows (`DisplayEnhancementService`, `PlugPlay`, `WMPNetworkSvc`) per corrispondenze testuali accidentali; questi risultati sono **falsi positivi** e non costituiscono servizi PrimaLuceLab/EAGLE.
+
+Disposizione:
+
+- EAGLE Manager X 3.1.0 installato: **VERIFIED**;
+- servizio background EAGLE: **NOT OBSERVED**;
+- processo EAGLE/PLAY attivo: **NOT OBSERVED**;
+- local TCP listener attribuibile: **NOT OBSERVED**;
+- passive file/config/log source: **OPEN — targeted filesystem inspection required**.
+
 ## 8. Runtime inspection residua
 
 ### Network
@@ -339,8 +363,8 @@ Nessun valore `network.state`, `active_link`, `vpn` o `lte_failover` viene ancor
 
 ### Power
 
-1. identificare installazione/versione EAGLE Manager e relativi file/log locali;
-2. cercare una source **passiva** e read-only, senza interrogare API di switching;
+1. ispezionare in sola lettura file, configurazioni e log sotto `C:\Program Files\PrimaLuceLab` e directory applicative correlate;
+2. cercare una source **passiva** e read-only, senza avviare EAGLE Manager e senza interrogare API di switching;
 3. se non esiste, registrare formalmente `Power source unavailable` e mantenere `systems.power = UNKNOWN` in BKL-028 fino a futura capability.
 
 ## 9. Safety and security invariants
@@ -372,4 +396,4 @@ BKL-027 può passare a `Done` quando esistono evidence attribuibili per:
 
 Network: `192.168.1.254` è verificato come **Teltonika RUT955**. Il firmware e la management telemetry source read-only restano aperti. La status surface anonima restituisce `403 Forbidden`; nessuna autenticazione è stata tentata. La reachability TCP/161 negativa non è usata per inferire lo stato SNMP/UDP. `192.168.1.145` resta un host distinto, non candidato RUT955.
 
-Power: nessuna Win32_Battery o PnP power source trovata; EAGLE3/manager passive-source discovery ancora aperta.
+Power: **EAGLE Manager X 3.1.0** è verificato come installato su `EAGLE30154`; nessun servizio/processo/listener attribuibile è stato osservato durante l'inventory. Passive filesystem source discovery ancora aperta.
