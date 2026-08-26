@@ -20,17 +20,9 @@ namespace DigitalStarGate.Nina.DomeTelemetryExporter;
  * Digital StarGate Observatory Telemetry Exporter
  * Author: Massimo Mainini
  *
- * Read-only services monitored for Observatory Status:
- * - Dome / roll-off roof: connection and shutter state through IDomeMediator.
- * - Mount: connection, park/home/tracking state through ITelescopeMediator.
- * - Imaging camera: connection and available runtime temperature/exposure state through ICameraMediator.
- * - Weather: connection and available observing-condition metrics through IWeatherDataMediator.
- * - Safety Monitor: connection and observed IsSafe state through ISafetyMonitorMediator.
- * - Power: reserved in the unified contract; remains UNKNOWN until a verified power source is approved.
- * - Network: reserved in the unified contract; remains UNKNOWN until a verified network source is approved.
- *
- * The exporter never connects or disconnects equipment, never sends device commands and never acts as
- * a safety authority. It only reads snapshots already owned by N.I.N.A. and writes a local JSON projection.
+ * Read-only local telemetry boundary for Observatory Status.
+ * N.I.N.A. equipment snapshots and approved passive host adapters are consolidated into one projection.
+ * Power remains UNKNOWN until a verified passive/read-only source is approved.
  */
 [Export(typeof(IPluginManifest))]
 public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
@@ -41,6 +33,7 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
     private readonly ICameraMediator cameraMediator;
     private readonly IWeatherDataMediator weatherDataMediator;
     private readonly ISafetyMonitorMediator safetyMonitorMediator;
+    private readonly NetworkTelemetryAdapter networkTelemetryAdapter = new();
     private readonly string projectionPath;
     private readonly object writeLock = new();
     private readonly Timer projectionTimer;
@@ -79,31 +72,18 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
     }
 
     public void Dispose() {
-        if (disposed) {
-            return;
-        }
-
+        if (disposed) return;
         disposed = true;
         projectionTimer.Dispose();
-
-        try {
-            domeMediator.RemoveConsumer(this);
-        } catch {
-            // Teardown is best-effort and must never interfere with N.I.N.A. shutdown.
-        }
+        try { domeMediator.RemoveConsumer(this); } catch { }
     }
 
     private void TryWriteProjection() {
-        if (disposed) {
-            return;
-        }
-
+        if (disposed) return;
         try {
-            lock (writeLock) {
-                WriteProjection();
-            }
+            lock (writeLock) { WriteProjection(); }
         } catch {
-            // Telemetry is non-authoritative. A write/read failure ages naturally to stale/UNKNOWN outside N.I.N.A.
+            // Non-authoritative telemetry failure must never interfere with N.I.N.A.
         }
     }
 
@@ -114,6 +94,7 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
         var cameraInfo = SafeGetInfo(cameraMediator);
         var weatherInfo = SafeGetInfo(weatherDataMediator);
         var safetyInfo = SafeGetInfo(safetyMonitorMediator);
+        var networkInfo = networkTelemetryAdapter.Observe();
 
         var payload = new Dictionary<string, object> {
             { "schemaVersion", 2 },
@@ -127,7 +108,7 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
                 { "weather", BuildWeather(weatherInfo) },
                 { "safety", BuildSafety(safetyInfo) },
                 { "power", BuildUnavailable("NO_VERIFIED_POWER_SOURCE") },
-                { "network", BuildUnavailable("NO_VERIFIED_NETWORK_SOURCE") }
+                { "network", networkInfo }
             }}
         };
 
@@ -135,20 +116,15 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
     }
 
     private static object SafeGetInfo(object mediator) {
-        try {
-            return mediator.GetType().GetMethod("GetInfo", BindingFlags.Instance | BindingFlags.Public)?.Invoke(mediator, null);
-        } catch {
-            return null;
-        }
+        try { return mediator.GetType().GetMethod("GetInfo", BindingFlags.Instance | BindingFlags.Public)?.Invoke(mediator, null); }
+        catch { return null; }
     }
 
     private static Dictionary<string, object> BuildDome(object info) {
         var connected = ReadBool(info, "Connected");
         var raw = connected == true ? ReadString(info, "ShutterStatus") : null;
         var state = connected == true ? MapDomeState(raw) : "UNKNOWN";
-        return BuildService(connected, state, connected == true ? null : "DOME_DISCONNECTED", new Dictionary<string, object> {
-            { "rawShutterStatus", raw }
-        });
+        return BuildService(connected, state, connected == true ? null : "DOME_DISCONNECTED", new Dictionary<string, object> { { "rawShutterStatus", raw } });
     }
 
     private static Dictionary<string, object> BuildMount(object info) {
@@ -157,17 +133,10 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
         var atHome = connected == true ? ReadBool(info, "AtHome") : null;
         var tracking = connected == true ? ReadBool(info, "TrackingEnabled", "Tracking") : null;
         var sideOfPier = connected == true ? ReadString(info, "SideOfPier") : null;
-
         var state = "UNKNOWN";
-        if (connected == true) {
-            state = atPark == true ? "PARKED" : atHome == true ? "HOME" : tracking == true ? "TRACKING" : "IDLE";
-        }
-
+        if (connected == true) state = atPark == true ? "PARKED" : atHome == true ? "HOME" : tracking == true ? "TRACKING" : "IDLE";
         return BuildService(connected, state, connected == true ? null : "MOUNT_DISCONNECTED", new Dictionary<string, object> {
-            { "atPark", atPark },
-            { "atHome", atHome },
-            { "tracking", tracking },
-            { "sideOfPier", sideOfPier }
+            { "atPark", atPark }, { "atHome", atHome }, { "tracking", tracking }, { "sideOfPier", sideOfPier }
         });
     }
 
@@ -175,7 +144,6 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
         var connected = ReadBool(info, "Connected");
         var exposing = connected == true ? ReadBool(info, "IsExposing", "Exposing") : null;
         var state = connected == true ? (exposing == true ? "EXPOSING" : "READY") : "UNKNOWN";
-
         return BuildService(connected, state, connected == true ? null : "CAMERA_DISCONNECTED", new Dictionary<string, object> {
             { "temperatureC", connected == true ? ReadDouble(info, "Temperature", "CCDTemperature", "SensorTemperature") : null },
             { "coolerOn", connected == true ? ReadBool(info, "CoolerOn") : null },
@@ -187,7 +155,6 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
     private static Dictionary<string, object> BuildWeather(object info) {
         var connected = ReadBool(info, "Connected");
         var state = connected == true ? "AVAILABLE" : "UNKNOWN";
-
         return BuildService(connected, state, connected == true ? null : "WEATHER_DISCONNECTED", new Dictionary<string, object> {
             { "temperatureC", connected == true ? ReadDouble(info, "Temperature") : null },
             { "humidityPct", connected == true ? ReadDouble(info, "Humidity") : null },
@@ -205,113 +172,65 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
         var connected = ReadBool(info, "Connected");
         var isSafe = connected == true ? ReadBool(info, "IsSafe") : null;
         var state = connected == true && isSafe.HasValue ? (isSafe.Value ? "SAFE" : "UNSAFE") : "UNKNOWN";
-
-        return BuildService(connected, state, connected == true ? null : "SAFETY_MONITOR_DISCONNECTED", new Dictionary<string, object> {
-            { "isSafe", isSafe }
-        });
+        return BuildService(connected, state, connected == true ? null : "SAFETY_MONITOR_DISCONNECTED", new Dictionary<string, object> { { "isSafe", isSafe } });
     }
 
-    private static Dictionary<string, object> BuildUnavailable(string reason) {
-        return BuildService(null, "UNKNOWN", reason, new Dictionary<string, object>());
-    }
+    private static Dictionary<string, object> BuildUnavailable(string reason) => BuildService(null, "UNKNOWN", reason, new Dictionary<string, object>());
 
-    private static Dictionary<string, object> BuildService(bool? connected, string state, string reason, Dictionary<string, object> details) {
-        return new Dictionary<string, object> {
-            { "connected", connected },
-            { "state", state },
-            { "reason", reason },
-            { "details", details }
-        };
-    }
+    private static Dictionary<string, object> BuildService(bool? connected, string state, string reason, Dictionary<string, object> details) => new() {
+        { "connected", connected }, { "state", state }, { "reason", reason }, { "details", details }
+    };
 
-    private static string MapDomeState(string raw) {
-        return raw switch {
-            "ShutterOpen" => "OPEN",
-            "ShutterClosed" => "CLOSED",
-            "ShutterOpening" => "MOVING",
-            "ShutterClosing" => "MOVING",
-            "ShutterError" => "FAULT",
-            _ => "UNKNOWN"
-        };
-    }
+    private static string MapDomeState(string raw) => raw switch {
+        "ShutterOpen" => "OPEN", "ShutterClosed" => "CLOSED", "ShutterOpening" => "MOVING", "ShutterClosing" => "MOVING", "ShutterError" => "FAULT", _ => "UNKNOWN"
+    };
 
     private static object ReadProperty(object source, params string[] names) {
-        if (source == null) {
-            return null;
-        }
-
+        if (source == null) return null;
         foreach (var name in names) {
             try {
                 var property = source.GetType().GetProperty(name, BindingFlags.Instance | BindingFlags.Public);
-                if (property != null) {
-                    return property.GetValue(source);
-                }
-            } catch {
-            }
+                if (property != null) return property.GetValue(source);
+            } catch { }
         }
-
         return null;
     }
 
     private static bool? ReadBool(object source, params string[] names) {
         var value = ReadProperty(source, names);
-        if (value == null) {
-            return null;
-        }
-
-        try {
-            return Convert.ToBoolean(value, CultureInfo.InvariantCulture);
-        } catch {
-            return null;
-        }
+        if (value == null) return null;
+        try { return Convert.ToBoolean(value, CultureInfo.InvariantCulture); } catch { return null; }
     }
 
     private static double? ReadDouble(object source, params string[] names) {
         var value = ReadProperty(source, names);
-        if (value == null) {
-            return null;
-        }
-
+        if (value == null) return null;
         try {
             var number = Convert.ToDouble(value, CultureInfo.InvariantCulture);
             return double.IsNaN(number) || double.IsInfinity(number) ? null : number;
-        } catch {
-            return null;
-        }
+        } catch { return null; }
     }
 
-    private static string ReadString(object source, params string[] names) {
-        var value = ReadProperty(source, names);
-        return value?.ToString();
-    }
+    private static string ReadString(object source, params string[] names) => ReadProperty(source, names)?.ToString();
 
     private static void WriteJsonAtomically(string path, string json) {
         var directory = Path.GetDirectoryName(path);
         Directory.CreateDirectory(directory);
-
         var tempPath = path + ".tmp";
         File.WriteAllText(tempPath, json, new UTF8Encoding(false));
-
         if (File.Exists(path)) {
             var backupPath = path + ".bak";
             try {
                 File.Replace(tempPath, path, backupPath, true);
                 TryDelete(backupPath);
                 return;
-            } catch (PlatformNotSupportedException) {
-            }
+            } catch (PlatformNotSupportedException) { }
         }
-
         TryDelete(path);
         File.Move(tempPath, path);
     }
 
     private static void TryDelete(string path) {
-        try {
-            if (File.Exists(path)) {
-                File.Delete(path);
-            }
-        } catch {
-        }
+        try { if (File.Exists(path)) File.Delete(path); } catch { }
     }
 }
