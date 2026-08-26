@@ -16,6 +16,7 @@ on:
       - "requirements.txt"
       - ".github/scripts/**"
       - ".github/roadmap/**"
+      - "docs/data/roadmap.json"
       - ".github/workflows/developer-foundation.yml"
   pull_request:
     paths:
@@ -29,6 +30,7 @@ on:
       - "requirements.txt"
       - ".github/scripts/**"
       - ".github/roadmap/**"
+      - "docs/data/roadmap.json"
       - ".github/workflows/developer-foundation.yml"
 
 permissions:
