@@ -6,7 +6,9 @@
 | Device | Teltonika RUT955 — `192.168.1.254` |
 | Current firmware | `RUT9XX_R_00.06.09.5` |
 | Candidate target | `RUT9_R_00.07.06.21` |
-| Stato | **Assessment — NO-GO pending hardware/product-code verification** |
+| Product code | `RUT955H7VXXX` |
+| Hardware revision | `1105` |
+| Stato | **NO-GO — hardware/product-code excluded from RUT9_R_00.07.x** |
 | Data | 2026-08-26 |
 | Runtime effect | None |
 
@@ -22,6 +24,8 @@ Runtime evidence già acquisita:
 
 ```text
 Device              : Teltonika RUT955
+Product code        : RUT955H7VXXX
+Hardware revision   : 1105
 Current firmware    : RUT9XX_R_00.06.09.5
 SNMP package        : installed
 SNMP service        : disabled
@@ -55,29 +59,34 @@ La documentazione moderna RUT955 SNMP espone controlli che non sono documentati 
 - community/source restrictions;
 - default `Access Mode = Read-Only`.
 
-Questa capability soddisfa in principio il requisito architetturale di BKL-027 molto meglio della configurazione legacy attuale.
+Questa capability soddisferebbe in principio il requisito architetturale di BKL-027 meglio della configurazione legacy attuale.
 
-Tuttavia il GO dipende dalla compatibilità hardware e dalla regressione funzionale del salto 6.x -> 7.x.
-
-## 5. Hard compatibility gate — product code
+## 5. Hard compatibility gate — CLOSED
 
 Teltonika dichiara esplicitamente che firmware `RUT9_R_00.07.00` e successivi **non sono supportati sui RUT955 legacy-design con product code che corrisponde al pattern `*7V***`**.
 
-Quindi:
+Runtime evidence:
 
 ```text
-Product code unknown -> UPGRADE NO-GO
-Product code *7V***   -> UPGRADE NO-GO
-Other supported code -> proceed to functional assessment
+Product code      : RUT955H7VXXX
+Hardware revision : 1105
 ```
 
-Il product code è visibile nella legacy WebUI sotto `Status -> Device` insieme a hardware revision.
+`RUT955H7VXXX` contiene il segmento `7V` e rientra quindi nel pattern hardware escluso.
 
-Non è necessario registrare serial number, IMEI, IMSI o MAC per questo gate.
+Decisione:
+
+```text
+RUT9_R_00.07.x eligibility = NO-GO
+```
+
+Non è autorizzato alcun tentativo di upgrade alla linea 7.x su questo apparato.
 
 ## 6. Functional regression assessment
 
-Teltonika documenta funzioni rimosse a partire da `RUT9_R_00.07.00`, tra cui:
+Poiché il compatibility gate hardware è già NO-GO, non è necessario proseguire con un assessment operativo finalizzato all'esecuzione del salto 6.x -> 7.x.
+
+Restano comunque documentate, a titolo di rischio noto, le funzioni rimosse/modificate dalla 7.x:
 
 - Mobile PPP connection type;
 - Mobile Data on Demand;
@@ -87,53 +96,42 @@ Teltonika documenta funzioni rimosse a partire da `RUT9_R_00.07.00`, tra cui:
 - Input/Output Custom Labels;
 - System Restore Point.
 
-Per Digital StarGate sono materialmente rilevanti almeno:
+Queste differenze rafforzano ulteriormente la decisione di non tentare una migrazione non supportata sul router dell'osservatorio.
 
-1. **Load Balancing / failover semantics** — deve essere verificato che l'attuale schema Starlink -> SIM1 -> SIM2 sia migrabile senza perdita di comportamento;
-2. **Static ARP** — verificare che non sia usato per nodi dell'osservatorio;
-3. **I/O behavior** — dalla 7.x cambiano parametri e controlli I/O rispetto alla 6.x legacy;
-4. **Restore Point** — non più disponibile, quindi il rollback deve basarsi su backup/config export e firmware image, non sul restore point locale.
+## 7. Current decision
 
-## 7. Settings migration risk
+**FINAL NO-GO per firmware 7.x sul RUT955 installato.**
 
-La legacy WebUI supporta `Keep all settings = yes` durante firmware upgrade. La documentazione moderna del Package Manager specifica inoltre che, per preservare package installati, occorre usare `Keep settings` e `Package Restore` quando applicabile.
+Motivo primario: product code `RUT955H7VXXX` appartenente alla variante legacy-design esclusa da `RUT9_R_00.07.00` e successivi.
 
-Questo non viene interpretato come garanzia di migrazione semantica 6.x -> 7.x. Le funzioni rimosse o cambiate devono essere validate manualmente.
+Motivo secondario: il salto 6.x -> 7.x introduce differenze funzionali significative e non offre un percorso supportato su questo hardware.
 
-## 8. Rollback assessment
+## 8. Implicazioni per BKL-027
 
-Rollback prerequisiti prima di qualsiasi upgrade futuro:
+La strada `firmware upgrade -> modern SNMPv3 Read-Only` è chiusa per l'hardware attuale.
 
-1. backup configurazione già acquisito e verificato disponibile;
-2. conservare firmware legacy `RUT9XX_R_00.06.09.5_WEBUI.bin` con checksum vendor;
-3. documentare WAN, SIM1/SIM2, failover, LAN, DHCP/static assignments e eventuali VPN;
-4. predisporre accesso locale fisico o out-of-band prima del change;
-5. non eseguire upgrade durante imaging unattended o finestra operativa critica;
-6. definire test immediati post-upgrade e criterio di rollback.
-
-Un downgrade 7.x -> 6.x non viene dato per garantito in questo assessment finché non esiste evidence vendor specifica; il rollback deve quindi essere considerato **non provato**.
-
-## 9. Current decision
-
-**NO-GO temporaneo per firmware upgrade.**
-
-Motivo: manca il product code/hardware eligibility gate.
-
-La versione target `RUT9_R_00.07.06.21` è tecnicamente interessante perché documenta `Access Mode = Read-Only` per SNMP, ma non può essere proposta sul dispositivo reale finché non è verificato che il RUT955 installato non appartenga alla variante legacy-design esclusa dalla 7.x.
-
-## 10. Next read-only verification
-
-Dalla legacy WebUI leggere soltanto:
+Lo stato governato resta:
 
 ```text
-Status -> Device
-Product code:
-Hardware revision:
+SNMP package       = Installed
+SNMP service       = Disabled
+Remote Access      = Disabled
+SNMP traps         = None
+systems.network    = UNKNOWN
 ```
 
-Non registrare serial number, IMEI, IMSI o altre informazioni identificative non necessarie.
+BKL-027 deve ora scegliere una delle sole alternative compatibili con i vincoli fail-safe:
 
-Dopo questa verifica:
+1. ottenere dal vendor una modalità read-only verificabile per il package SNMP legacy 5.8 sul firmware `RUT9XX_R_00.06.09.5`;
+2. usare una sorgente esterna/passiva di network telemetry che non richieda un protocollo management write-capable;
+3. mantenere `systems.network = UNKNOWN` sull'hardware attuale;
+4. valutare in futuro la sostituzione hardware del router con piattaforma supportata, come change infrastrutturale separato.
 
-- se product code `*7V***` -> chiudere opzione firmware 7.x come NO-GO;
-- se compatibile -> procedere con assessment dettagliato delle funzioni WAN/failover e rollback prima di qualsiasi change.
+## 9. Safety and security disposition
+
+- nessun firmware upgrade eseguito;
+- nessun servizio SNMP abilitato;
+- nessuna esposizione WAN introdotta;
+- nessuna modifica a Starlink/SIM/failover/VPN;
+- nessun test SNMP `SET` eseguito;
+- la telemetria Network resta fail-safe `UNKNOWN`.
