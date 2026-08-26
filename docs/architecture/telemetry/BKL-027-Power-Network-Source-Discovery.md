@@ -4,7 +4,7 @@
 |---|---|
 | Identificativo | BKL-027 |
 | Target | Observatory Status — `systems.power` / `systems.network` |
-| Stato | **In Progress — Teltonika management endpoint identified; model/source verification pending** |
+| Stato | **In Progress — RUT955 model verified; firmware/source verification pending** |
 | Data | 2026-08-26 |
 | Autorità | Digital StarGate Infrastructure Architect |
 | Dipendenze | DSG-OBS-RT-001; AP-004; AP-009; AP-012 |
@@ -59,7 +59,7 @@ Non è necessario estendere il contratto prima della source discovery.
 
 ## 4. Network — candidate source decision
 
-### 4.1 Candidate primary: Teltonika management plane
+### 4.1 Candidate primary: Teltonika RUT955 management plane
 
 La documentazione vendor del RUT955 espone capability adatte a una integrazione osservativa:
 
@@ -70,7 +70,9 @@ La documentazione vendor del RUT955 espone capability adatte a una integrazione 
 - JSON-RPC per amministrazione/monitoring;
 - OPC UA opzionale con variabili dichiarate read-only.
 
-La runtime evidence del 2026-08-26 identifica `192.168.1.254` come apparato **Teltonika** tramite MAC OUI `00:1E:42` e management UI LuCI/OpenWrt-like. Il modello specifico RUT955 e il firmware restano da verificare.
+La runtime evidence del 2026-08-26 identifica `192.168.1.254` come **Teltonika RUT955** tramite evidence combinate: ruolo di default gateway, MAC OUI Teltonika, management UI LuCI/OpenWrt-like e titolo HTML esplicito `Teltonika-RUT955.com - Web UI`.
+
+Il firmware resta da verificare.
 
 ### 4.2 Preferred adapter boundary
 
@@ -79,8 +81,6 @@ Candidate name:
 ```text
 DSG.Rut955NetworkTelemetryAdapter
 ```
-
-Il nome resta provvisorio finché il modello reale non viene verificato.
 
 Vincoli:
 
@@ -95,7 +95,7 @@ Vincoli:
 
 ### 4.3 Candidate mapping
 
-| Observatory Status | Candidate Teltonika evidence | Stato |
+| Observatory Status | Candidate RUT955 evidence | Stato |
 |---|---|---|
 | `network.state` | active WAN + reachability result | Da validare |
 | `network.active_link` | WAN interface in use: wired/mobile/Wi-Fi | Da validare |
@@ -244,7 +244,69 @@ Questa UI e l'IAB MAC la distinguono dal management endpoint Teltonika.
 
 Il tentativo di estrarre subject/issuer TLS tramite `curl.exe -k -v` su Windows Schannel non ha prodotto metadata certificato utili; l'unica riga filtrata osservata è stata relativa al client certificate automatico disabilitato.
 
-### 7.6 Device identification disposition
+### 7.6 Explicit RUT955 model evidence
+
+Una richiesta read-only a:
+
+```text
+http://192.168.1.254/cgi-bin/luci/
+```
+
+ha restituito il titolo:
+
+```html
+<title>Teltonika-RUT955.com - Web UI</title>
+```
+
+Questo costituisce evidence diretta sufficiente per identificare il modello runtime come **Teltonika RUT955**.
+
+### 7.7 Authentication boundary and firmware discovery
+
+Una richiesta senza credenziali a:
+
+```text
+http://192.168.1.254/cgi-bin/luci/admin/status/overview
+```
+
+ha restituito:
+
+```text
+HTTP/1.1 403 Forbidden
+```
+
+con header security/no-cache coerenti con una superficie amministrativa protetta. Il body anonimo continua a mostrare elementi generici della WebUI ma non espone una versione firmware verificabile.
+
+Disposizione:
+
+- model identity: **VERIFIED — RUT955**;
+- firmware version: **UNKNOWN — protected status surface**;
+- nessuna autenticazione è stata tentata;
+- nessuna credenziale è stata acquisita o registrata.
+
+### 7.8 SNMP/tooling discovery
+
+Il test:
+
+```text
+Test-NetConnection 192.168.1.254 -Port 161
+```
+
+ha restituito `TcpTestSucceeded = False`. Questo è **non conclusivo** per SNMP, che normalmente usa UDP/161.
+
+Su `EAGLE30154` non risultano comandi installati/risolvibili per:
+
+```text
+snmpget
+snmpwalk
+nmap
+portqry
+psping
+telnet
+```
+
+Non è stato installato alcun software e non è stata provata alcuna community string o credenziale SNMP.
+
+### 7.9 Device identification disposition
 
 Fatti verificati:
 
@@ -252,14 +314,15 @@ Fatti verificati:
 - `192.168.1.254` espone HTTP, HTTPS e SSH;
 - `192.168.1.254` espone LuCI;
 - il suo MAC appartiene a Teltonika;
+- la WebUI identifica esplicitamente il modello RUT955;
 - `192.168.1.145` è un host distinto e il suo IAB MAC non appartiene a Teltonika.
 
 Conclusione governata:
 
-- `192.168.1.254` è identificato come **Teltonika management endpoint** con confidence alta;
-- il modello specifico **RUT955 non è ancora verificato**;
-- firmware e management telemetry interface read-only restano da verificare;
-- `192.168.1.145` è escluso come candidato Teltonika RUT955 sulla base dell'evidence corrente, ma il suo ruolo funzionale non è ancora identificato.
+- `192.168.1.254` è il **Teltonika RUT955** dell'osservatorio con confidence alta;
+- il firmware resta non verificato perché la status surface richiede autenticazione;
+- la management telemetry interface read-only resta da verificare;
+- `192.168.1.145` è escluso come candidato RUT955 sulla base dell'evidence corrente, ma il suo ruolo funzionale non è ancora identificato.
 
 Nessun valore `network.state`, `active_link`, `vpn` o `lte_failover` viene ancora derivato da queste sole evidence.
 
@@ -267,11 +330,12 @@ Nessun valore `network.state`, `active_link`, `vpn` o `lte_failover` viene ancor
 
 ### Network
 
-1. acquisire model/firmware identity di `192.168.1.254` da una superficie passiva o da autenticazione successivamente autorizzata;
-2. verificare se SNMP è già attivo e se esiste un accesso read-only autorizzabile, senza modificare configurazione;
+1. verificare una management source read-only autorizzabile sul RUT955 reale;
+2. preferire SNMPv3 read-only se già disponibile o approvabile senza impatto sulla configurazione operativa;
 3. se SNMP non è disponibile, valutare una API management read-only supportata dal firmware reale;
-4. solo dopo, acquisire stato WAN/backup/mobile/VPN e misurare cadence;
-5. identificare il ruolo di `192.168.1.145` solo se necessario alla topologia, senza inferirlo dal solo vendor IAB.
+4. acquisire firmware/versione solo tramite superficie autenticata successivamente autorizzata o altra evidence passiva affidabile;
+5. solo dopo, acquisire stato WAN/backup/mobile/VPN e misurare cadence;
+6. identificare il ruolo di `192.168.1.145` solo se necessario alla topologia, senza inferirlo dal solo vendor IAB.
 
 ### Power
 
@@ -294,7 +358,7 @@ Nessun valore `network.state`, `active_link`, `vpn` o `lte_failover` viene ancor
 
 BKL-027 può passare a `Done` quando esistono evidence attribuibili per:
 
-1. almeno una source Network read-only verificata sul Teltonika reale o source alternativa;
+1. almeno una source Network read-only verificata sul RUT955 reale o source alternativa;
 2. almeno una source Power read-only verificata, oppure decisione governata che Power resta `UNKNOWN` per assenza di source affidabile;
 3. mapping semantico verso il contratto Observatory Status;
 4. cadence misurata e freshness deliberata;
@@ -306,6 +370,6 @@ BKL-027 può passare a `Done` quando esistono evidence attribuibili per:
 
 **BKL-027 IN PROGRESS.**
 
-Network: `192.168.1.254` è ora identificato come management endpoint **Teltonika** sulla base combinata di ruolo gateway, LuCI, HTTP/HTTPS/SSH e MAC OUI Teltonika. Il modello RUT955, il firmware e la source management read-only restano da verificare. `192.168.1.145` è un host distinto e non Teltonika secondo il blocco MAC osservato; il suo ruolo resta aperto ma non è più candidato RUT955.
+Network: `192.168.1.254` è verificato come **Teltonika RUT955**. Il firmware e la management telemetry source read-only restano aperti. La status surface anonima restituisce `403 Forbidden`; nessuna autenticazione è stata tentata. La reachability TCP/161 negativa non è usata per inferire lo stato SNMP/UDP. `192.168.1.145` resta un host distinto, non candidato RUT955.
 
 Power: nessuna Win32_Battery o PnP power source trovata; EAGLE3/manager passive-source discovery ancora aperta.
