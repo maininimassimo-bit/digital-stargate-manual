@@ -4,7 +4,7 @@
 |---|---|
 | Identificativo | BKL-027 |
 | Target | Observatory Status — `systems.power` / `systems.network` |
-| Stato | **In Progress — candidate sources identified; runtime inspection pending** |
+| Stato | **In Progress — first runtime inventory PASS; management-source verification pending** |
 | Data | 2026-08-26 |
 | Autorità | Digital StarGate Infrastructure Architect |
 | Dipendenze | DSG-OBS-RT-001; AP-004; AP-009; AP-012 |
@@ -138,33 +138,68 @@ freshness >= 2 x worst observed normal update interval
 
 con un margine aggiuntivo solo dopo OAT. La perdita della source o il superamento freshness produce `STALE/UNKNOWN`, mai `ONLINE` o `SAFE` per inferenza.
 
-## 7. Runtime inspection richiesta
+## 7. Runtime inspection evidence — 2026-08-26
+
+Esecuzione su `EAGLE30154` con commit inspector `bf67c6be5e27cb119ae8ddb920a2cd13ece70ac6`:
+
+```text
+Evidence bundle: C:\DigitalStarGate\TelemetryEvidence\power-network-source-inventory-20260826-152634
+POWER/NETWORK SOURCE INVENTORY RESULT: PASS (inventory only)
+```
+
+### 7.1 Network facts verified
+
+Default route osservata:
+
+```text
+InterfaceAlias = Ethernet
+NextHop        = 192.168.1.254
+RouteMetric    = 0
+State          = Alive
+```
+
+Disposizione:
+
+- `192.168.1.254` è il gateway operativo osservato dall'EAGLE nella run;
+- non viene identificato automaticamente come RUT955;
+- l'indirizzo RUT955 resta da verificare separatamente;
+- nessun adapter VPN è stato rilevato con naming `vpn/openvpn/wireguard/tap/tun` nell'inventory Windows;
+- l'assenza di un adapter VPN nominato non prova assenza del tunnel o del servizio sul router.
+
+### 7.2 Power facts verified
+
+Inventory Windows:
+
+```text
+Win32_Battery: none found
+Power PNP candidates: none found
+```
+
+I servizi rilevanti includono il servizio Windows `Power`, ma questo è il servizio di gestione alimentazione del sistema operativo e **non costituisce una source Observatory Status Power**.
+
+Nessuna UPS/battery/PnP source è stata identificata dal primo inventory. Non è quindi ancora possibile mappare `ONLINE`, `ON_BATTERY` o `FAULT` senza inferenza.
+
+### 7.3 Safety / side effects
+
+L'inventory è stato eseguito in modalità read-only. Non sono stati richiesti cambi router, switching power, connessioni a dispositivi o command path.
+
+## 8. Runtime inspection residua
 
 ### Network
 
-Sul nodo `EAGLE30154`:
-
-1. identificare default gateway e route correnti;
-2. identificare indirizzo LAN effettivo del RUT955 senza affidarsi a documentazione stale;
-3. verificare reachability management LAN senza modificare firewall/router;
-4. registrare firmware RUT955;
-5. verificare se SNMP è installato e, se sì, se è disponibile un profilo read-only locale;
-6. verificare se JSON-RPC è disponibile ma senza attivarlo o cambiare configurazione;
-7. acquisire un campione di stato WAN/backup/mobile/VPN;
-8. misurare cadence e stabilità della source.
+1. determinare l'indirizzo LAN effettivo del RUT955 usando ARP/neighbour evidence e le informazioni di rete presenti sull'EAGLE;
+2. verificare reachability della management interface senza autenticazione e senza modifica configurazione;
+3. acquisire firmware/model identity;
+4. verificare se SNMP è già attivo e se esiste un accesso read-only autorizzabile;
+5. solo dopo, acquisire stato WAN/backup/mobile/VPN e misurare cadence.
 
 ### Power
 
-Sul nodo `EAGLE30154`:
+1. identificare installazione/versione EAGLE Manager e relativi file/log locali;
+2. cercare una source **passiva** e read-only, senza interrogare API di switching;
+3. se non esiste, registrare formalmente `Power source unavailable` e mantenere `systems.power = UNKNOWN` in BKL-028 fino a futura capability.
 
-1. inventariare processi e servizi EAGLE/UPS/power senza device commands;
-2. identificare versioni EAGLE Manager;
-3. cercare solo metadata di file/log/config candidati, senza pubblicare secret;
-4. verificare presenza di UPS/HID/power-management device Windows;
-5. verificare se esiste una source locale read-only che cambia nel tempo;
-6. misurare cadence e semantica prima di mappare `ONLINE`, `ON_BATTERY` o `FAULT`.
-
-## 8. Safety and security invariants
+## 9. Safety and security invariants
 
 - local interlocks remain authoritative;
 - no relay/power-port switching;
@@ -175,7 +210,7 @@ Sul nodo `EAGLE30154`:
 - `UNKNOWN` is preserved until source semantics are proven;
 - source discovery is not runtime authorization.
 
-## 9. Acceptance criteria BKL-027
+## 10. Acceptance criteria BKL-027
 
 BKL-027 può passare a `Done` quando esistono evidence attribuibili per:
 
@@ -187,10 +222,10 @@ BKL-027 può passare a `Done` quando esistono evidence attribuibili per:
 6. adapter boundary approvato;
 7. nessun command path introdotto.
 
-## 10. Current disposition
+## 11. Current disposition
 
 **BKL-027 IN PROGRESS.**
 
-Network: RUT955 management plane è il candidato primario, con SNMPv3 read-only preferito se disponibile sul firmware reale.
+Network: primo inventory PASS; gateway operativo osservato `192.168.1.254`; identità e management source RUT955 ancora da verificare.
 
-Power: source non ancora selezionata; EAGLE3/UPS inventory runtime è obbligatoria prima di qualsiasi integrazione.
+Power: nessuna Win32_Battery o PnP power source trovata; EAGLE3/manager passive-source discovery ancora aperta.
