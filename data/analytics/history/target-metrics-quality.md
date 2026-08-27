@@ -1,6 +1,6 @@
 # Digital StarGate Analytics Quality Report
 
-Generated at: `2026-08-16T11:09:56`
+Generated at: `2026-08-27T06:09:51`
 
 ## Overall status: PASS
 
@@ -8,14 +8,14 @@ Generated at: `2026-08-16T11:09:56`
 
 | Metric | Value |
 |---|---:|
-| NINA logs scanned | 10 |
-| Saved-image events | 483 |
+| NINA logs scanned | 14 |
+| Saved-image events | 491 |
 | Accepted exposures | 151 |
 | Outside-session rejections | 226 |
 | Invalid timestamp rejections | 0 |
-| Invalid filename rejections | 106 |
+| Invalid filename rejections | 114 |
 | Duplicates removed | 0 |
-| Acceptance ratio | 31.26% |
+| Acceptance ratio | 30.75% |
 
 ## Quality checks
 
