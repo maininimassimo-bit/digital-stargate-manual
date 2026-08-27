@@ -9,6 +9,7 @@ using System.ComponentModel.Composition;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
@@ -24,6 +25,7 @@ namespace DigitalStarGate.Nina.DomeTelemetryExporter;
  * N.I.N.A. equipment snapshots and approved passive host adapters are consolidated into one projection.
  * Power is observed read-only through TS Shelter SafetyMonitor/J6 using the commissioned power fault mask 0x01.
  */
+[SupportedOSPlatform("windows")]
 [Export(typeof(IPluginManifest))]
 public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
     private const int ProjectionIntervalSeconds = 5;
