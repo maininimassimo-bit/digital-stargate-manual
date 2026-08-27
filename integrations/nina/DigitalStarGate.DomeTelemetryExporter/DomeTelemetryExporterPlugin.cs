@@ -22,7 +22,7 @@ namespace DigitalStarGate.Nina.DomeTelemetryExporter;
  *
  * Read-only local telemetry boundary for Observatory Status.
  * N.I.N.A. equipment snapshots and approved passive host adapters are consolidated into one projection.
- * Power remains UNKNOWN until a verified passive/read-only source is approved.
+ * Power is observed read-only through TS Shelter SafetyMonitor/J6 using the commissioned power fault mask 0x01.
  */
 [Export(typeof(IPluginManifest))]
 public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
@@ -34,6 +34,7 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
     private readonly IWeatherDataMediator weatherDataMediator;
     private readonly ISafetyMonitorMediator safetyMonitorMediator;
     private readonly NetworkTelemetryAdapter networkTelemetryAdapter = new();
+    private readonly PowerTelemetryAdapter powerTelemetryAdapter = new();
     private readonly string projectionPath;
     private readonly object writeLock = new();
     private readonly Timer projectionTimer;
@@ -61,9 +62,7 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
     }
 
     public void UpdateDeviceInfo(DomeInfo deviceInfo) {
-        if (!disposed) {
-            TryWriteProjection();
-        }
+        if (!disposed) TryWriteProjection();
     }
 
     public override Task Teardown() {
@@ -75,16 +74,14 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
         if (disposed) return;
         disposed = true;
         projectionTimer.Dispose();
+        powerTelemetryAdapter.Dispose();
         try { domeMediator.RemoveConsumer(this); } catch { }
     }
 
     private void TryWriteProjection() {
         if (disposed) return;
-        try {
-            lock (writeLock) { WriteProjection(); }
-        } catch {
-            // Non-authoritative telemetry failure must never interfere with N.I.N.A.
-        }
+        try { lock (writeLock) { WriteProjection(); } }
+        catch { }
     }
 
     private void WriteProjection() {
@@ -95,6 +92,7 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
         var weatherInfo = SafeGetInfo(weatherDataMediator);
         var safetyInfo = SafeGetInfo(safetyMonitorMediator);
         var networkInfo = networkTelemetryAdapter.Observe();
+        var powerInfo = powerTelemetryAdapter.Observe();
 
         var payload = new Dictionary<string, object> {
             { "schemaVersion", 2 },
@@ -107,11 +105,10 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
                 { "camera", BuildCamera(cameraInfo) },
                 { "weather", BuildWeather(weatherInfo) },
                 { "safety", BuildSafety(safetyInfo) },
-                { "power", BuildUnavailable("NO_VERIFIED_POWER_SOURCE") },
+                { "power", powerInfo },
                 { "network", networkInfo }
             }}
         };
-
         WriteJsonAtomically(projectionPath, JsonSerializer.Serialize(payload));
     }
 
@@ -174,8 +171,6 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
         var state = connected == true && isSafe.HasValue ? (isSafe.Value ? "SAFE" : "UNSAFE") : "UNKNOWN";
         return BuildService(connected, state, connected == true ? null : "SAFETY_MONITOR_DISCONNECTED", new Dictionary<string, object> { { "isSafe", isSafe } });
     }
-
-    private static Dictionary<string, object> BuildUnavailable(string reason) => BuildService(null, "UNKNOWN", reason, new Dictionary<string, object>());
 
     private static Dictionary<string, object> BuildService(bool? connected, string state, string reason, Dictionary<string, object> details) => new() {
         { "connected", connected }, { "state", state }, { "reason", reason }, { "details", details }
