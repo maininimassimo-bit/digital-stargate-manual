@@ -27,8 +27,8 @@
 
   const badge = state => {
     const value = String(state || 'UNKNOWN').toUpperCase();
-    if (['SAFE', 'OPEN', 'CLOSED', 'PARKED', 'TRACKING', 'ONLINE', 'IDLE', 'READY', 'CURRENT', 'AVAILABLE'].includes(value)) return `🟢 ${value}`;
-    if (['UNSAFE', 'FAULT', 'OFFLINE', 'ALARM'].includes(value)) return `🔴 ${value}`;
+    if (['SAFE', 'OPEN', 'CLOSED', 'PARKED', 'TRACKING', 'ONLINE', 'IDLE', 'READY', 'CURRENT', 'AVAILABLE', 'MAINS_PRESENT'].includes(value)) return `🟢 ${value}`;
+    if (['UNSAFE', 'FAULT', 'OFFLINE', 'ALARM', 'MAINS_LOST'].includes(value)) return `🔴 ${value}`;
     return `🟡 ${value}`;
   };
 
@@ -67,7 +67,7 @@
     set('camera-detail', `cooler: ${bool(diagnostics.camera_cooler_on)} · power: ${number(diagnostics.camera_cooler_power_pct, 0, ' %')} · temperatura: ${number(diagnostics.camera_temperature_c, 1, ' °C')} · exposing: ${bool(diagnostics.camera_exposing)}`);
 
     set('power-state', badge(power.state));
-    set('power-detail', `Qualità: ${text(power.quality)} · sorgente Power verificata non ancora disponibile`);
+    set('power-detail', `Rete 12 V J6: ${bool(power.mains_present)} · fault: ${bool(power.power_fault)} · safeties: ${text(power.safeties_raw)} · mask: ${text(power.power_fault_mask)} · TS Shelter safe: ${bool(power.safety_is_safe ?? diagnostics.power_safety_is_safe)} · qualità: ${text(power.quality)}`);
 
     set('network-state', badge(network.state));
     set('network-detail', `Interfaccia: ${text(diagnostics.network_interface)} · gateway: ${text(diagnostics.network_gateway)} (${bool(diagnostics.network_gateway_reachable)}, ${number(diagnostics.network_gateway_latency_ms, 0, ' ms')}) · Internet: ${bool(diagnostics.network_internet_reachable)} (${number(diagnostics.network_internet_latency_ms, 0, ' ms')}) · DNS: ${bool(diagnostics.network_dns_resolved)} (${number(diagnostics.network_dns_latency_ms, 0, ' ms')}) · qualità: ${text(network.quality)}`);
