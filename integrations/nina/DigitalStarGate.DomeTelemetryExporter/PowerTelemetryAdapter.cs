@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Threading;
 
 namespace DigitalStarGate.Nina.DomeTelemetryExporter;
 
+[SupportedOSPlatform("windows")]
 internal sealed class PowerTelemetryAdapter : IDisposable {
     private const string ProgId = "ASCOM.TS_Shelter.SafetyMonitor";
     private const string SafetiesCommand = "safeties";
