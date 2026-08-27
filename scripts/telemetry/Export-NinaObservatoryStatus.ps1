@@ -44,6 +44,7 @@ $power.mains_present = $projection.services.power.details.mainsPresent
 $power.power_fault = $projection.services.power.details.powerFault
 $power.safeties_raw = $projection.services.power.details.safetiesRaw
 $power.power_fault_mask = $projection.services.power.details.powerFaultMask
+$power.safety_is_safe = $projection.services.power.details.safetyIsSafe
 
 $weather.temperature_c = $projection.services.weather.details.temperatureC
 $weather.humidity_pct = $projection.services.weather.details.humidityPct
@@ -78,7 +79,7 @@ $payload = [ordered]@{
         mount_at_park = $projection.services.mount.details.atPark; mount_at_home = $projection.services.mount.details.atHome; mount_tracking = $projection.services.mount.details.tracking; mount_side_of_pier = $projection.services.mount.details.sideOfPier
         camera_temperature_c = $projection.services.camera.details.temperatureC; camera_cooler_on = $projection.services.camera.details.coolerOn; camera_cooler_power_pct = $projection.services.camera.details.coolerPowerPct; camera_exposing = $projection.services.camera.details.exposing
         safety_monitor_is_safe = $projection.services.safety.details.isSafe
-        power_source = $projection.services.power.details.source; power_prog_id = $projection.services.power.details.progId; power_safeties_raw = $projection.services.power.details.safetiesRaw; power_fault_mask = $projection.services.power.details.powerFaultMask; power_fault = $projection.services.power.details.powerFault; power_mains_present = $projection.services.power.details.mainsPresent
+        power_source = $projection.services.power.details.source; power_prog_id = $projection.services.power.details.progId; power_safeties_raw = $projection.services.power.details.safetiesRaw; power_fault_mask = $projection.services.power.details.powerFaultMask; power_fault = $projection.services.power.details.powerFault; power_mains_present = $projection.services.power.details.mainsPresent; power_safety_is_safe = $projection.services.power.details.safetyIsSafe
         network_interface = $projection.services.network.details.interface; network_gateway = $projection.services.network.details.gateway; network_gateway_reachable = $projection.services.network.details.gatewayReachable; network_gateway_latency_ms = $projection.services.network.details.gatewayLatencyMs; network_internet_target = $projection.services.network.details.internetTarget; network_internet_reachable = $projection.services.network.details.internetReachable; network_internet_latency_ms = $projection.services.network.details.internetLatencyMs; network_dns_name = $projection.services.network.details.dnsName; network_dns_resolved = $projection.services.network.details.dnsResolved; network_dns_latency_ms = $projection.services.network.details.dnsLatencyMs; network_dns_address_count = $projection.services.network.details.dnsAddressCount
     }
 }
