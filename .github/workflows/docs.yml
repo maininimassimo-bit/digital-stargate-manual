@@ -1,4 +1,4 @@
-name: Validate documentation
+name: Validate documentation (no deploy)
 
 on:
   push:
@@ -23,11 +23,15 @@ on:
       - ".github/workflows/docs.yml"
   workflow_dispatch:
 
+# Validation-only workflow. It intentionally has no Pages write permission and
+# must never publish. GitHub Pages deployment ownership belongs exclusively to
+# .github/workflows/deploy-pages.yml.
 permissions:
   contents: read
 
 jobs:
   validate:
+    name: Validate MkDocs artifact
     runs-on: ubuntu-latest
 
     steps:
