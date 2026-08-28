@@ -17,6 +17,8 @@ on:
       - ".github/scripts/**"
       - ".github/roadmap/**"
       - "docs/data/roadmap.json"
+      - "docs/project/BACKLOG.md"
+      - "docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md"
       - ".github/workflows/developer-foundation.yml"
   pull_request:
     paths:
@@ -31,6 +33,8 @@ on:
       - ".github/scripts/**"
       - ".github/roadmap/**"
       - "docs/data/roadmap.json"
+      - "docs/project/BACKLOG.md"
+      - "docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md"
       - ".github/workflows/developer-foundation.yml"
 
 permissions:
@@ -81,6 +85,9 @@ jobs:
           node .github/scripts/generate-roadmap.mjs --print | jq --sort-keys . > /tmp/roadmap-generated.json
           jq --sort-keys . docs/data/roadmap.json > /tmp/roadmap-committed.json
           diff --unified /tmp/roadmap-committed.json /tmp/roadmap-generated.json
+
+      - name: Verify AMP-002 / roadmap / backlog consistency
+        run: node .github/scripts/verify-roadmap-consistency.mjs
 
       - name: Verify scientific observation index
         run: node .github/scripts/generate-scientific-catalog.mjs --check
