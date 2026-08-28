@@ -6,6 +6,8 @@ on:
       - main
   workflow_dispatch:
 
+# Authoritative GitHub Pages owner for this repository.
+# Other documentation workflows may validate/build artifacts but must not deploy.
 permissions:
   contents: read
   pages: write
@@ -17,7 +19,7 @@ concurrency:
 
 jobs:
   build:
-    name: Build MkDocs site
+    name: Build authoritative Pages artifact
     runs-on: ubuntu-latest
 
     steps:
@@ -74,7 +76,7 @@ jobs:
           path: site
 
   deploy:
-    name: Deploy GitHub Pages artifact
+    name: Deploy authoritative GitHub Pages artifact
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
