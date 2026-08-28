@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 2.4 |
+| Versione | 2.5 |
 | Stato | Active |
-| Data baseline | 26/08/2026 |
+| Data baseline | 28/08/2026 |
 
 ## 1. Scopo
 
@@ -27,7 +27,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-006 | P1 | Verificare GitHub Pages dopo pubblicazione governance | Done | BKL-005 | Governance Center pubblicato e navigabile | BKL-025 Pages integrity baseline |
 | BKL-007 | P1 | Razionalizzare workflow documentali e Pages | Planned | Inventario workflow | Un solo owner per build/deploy; duplicati ritirati | TD-004 |
 | BKL-008 | P1 | Riallineare README root alla piattaforma enterprise | Planned | Governance Foundation completata | Entry point repository aggiornato | TD-003 |
-| BKL-009 | P1 | Aggiungere consistency checks tra AMP-002 e roadmap JSON | Planned | Definizione schema projection | Riduzione rischio proiezioni stale | TD-005, AP-002 |
+| BKL-009 | P1 | Aggiungere consistency checks tra AMP-002 e roadmap JSON | In Progress | Definizione schema projection | Riduzione rischio proiezioni stale | TD-005, AP-002, `.github/scripts/verify-roadmap-consistency.mjs`, Developer Foundation |
 | BKL-010 | P1 | Ridurre script inline nel portale | Planned | Inventario pagine con script inline | Moduli JS proprietari e Instant Navigation sicura | TD-002 |
 | BKL-011 | P1 | Completare evidence residue ARB-012-C04 | **Done** | C04-W01–W08 e final repository CI completati | **ARB-012-C04 Closed — Approved; quality gate finale PASS** | AP-012, ARB-012-C04, W07 evidence, W08 re-review, Actions run `32871808946` |
 | BKL-012 | P1 | Validare primo unattended AP-013 COPY_ONLY run | Done | Scheduler, launcher protetto, evidence | Scheduler COPY_ONLY validato con runtime evidence, `LastTaskResult = 0`, batch operativi e retry idempotenti | AP-013B OneDrive Transport OAT, AP-013 Operational Acceptance |
@@ -41,24 +41,24 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-024 | P1 | Riallineare Observatory Status e Session Reports index alla sessione più recente | Done | BKL-023 Done | Realtime separato dallo storico; Power/Network restano `UNKNOWN` senza sorgenti verificate | Developer Foundation #705, Genera manuale Word #586 |
 | BKL-025 | P1 | Correggere broken links, asset mancanti e sitemap dell'artifact Pages | Done | BKL-023 | Pages integrity verificata | deploy-pages run 381, docs.yml run 285 |
 | BKL-026 | P0 | Rieseguire deep assessment ARB e chiudere OAT/AP-014 acceptance | Done | BKL-019–BKL-025 Done | ARB re-review completata; promotion fail-safe e real-session semantic idempotency PASS; historical workflow criteria N/A; OAT/AP-014 Accepted; final governance CI PASS | AP14-W07-EAGLE-M27-OAT-Result v2.1, AP-014-Operational-Acceptance v1.4, Developer Foundation #730, Genera manuale Word #611 |
-| BKL-027 | P1 | Observatory Status — runtime source discovery Power/Network | **In Progress** | DSG-OBS-RT-001 pilot; accesso EAGLE/RUT955 | Sorgenti read-only reali e verificabili per Power e Network, freshness/quality e adapter boundary definiti | DSG-OBS-RT-001, `BKL-027-Power-Network-Source-Discovery.md`, `Inspect-PowerNetworkTelemetrySources.ps1`, AP-004, AP-009, AP-012 |
-| BKL-028 | P1 | Observatory Status — integrare Power/Network telemetry | Planned | BKL-027 Done | `systems.power` e `systems.network` alimentati da source verificate, fail-safe `UNKNOWN/STALE`, portale e relay aggiornati | DSG-OBS-RT-001, Observatory Status |
+| BKL-027 | P1 | Observatory Status — runtime source discovery Power/Network | **Done** | DSG-OBS-RT-001 pilot; accesso EAGLE/RUT955 | Sorgenti read-only reali e verificabili per Power e Network, freshness/quality e adapter boundary definiti | N.I.N.A. NetworkTelemetryAdapter; TS Shelter SafetyMonitor J6 `safeties` mask `0x00000001`; AP-004, AP-009, AP-012 |
+| BKL-028 | P1 | Observatory Status — integrare Power/Network telemetry | **Done** | BKL-027 Done | `systems.power` e `systems.network` alimentati da source verificate, fail-safe `UNKNOWN/STALE`, portale e relay aggiornati | N.I.N.A. telemetry exporter; canonical adapter; relay; Observatory Status; commits `91d78a2`, `06e6484` |
 | BKL-014 | P2 | Preparare AP-015 Scientific Knowledge Platform | Planned | AP-014 e Knowledge Graph | Architecture Package CAP-40 | AMP-002 |
 | BKL-015 | P2 | Implementare repository Knowledge Graph machine-readable | Planned | Governance Foundation e schema relazioni | Relazioni AP/ADR/component/evidence interrogabili | TD-008, GP-003 |
 | BKL-016 | P2 | Contestualizzare release e guide storiche in root | Planned | Inventario e supersession map | Lineage chiaro e baseline corrente distinguibile | TD-007 |
 | BKL-017 | P2 | Introdurre futura modalità tema `system` | Planned | RC1-HF01 stabilizzata | Preferenza OS gestita dal Theme Manager | RC1-HF01 |
 
-### Reconciliation note — 26/08/2026
+### Reconciliation note — 28/08/2026
 
 La repository governance è riconciliata con le evidence reali senza ripetere attività già accettate.
 
 - BKL-001–BKL-006 restano `Done` sulla governance foundation e quality baseline già accettata.
-- BKL-011 è **Done**: ARB-012-C04 è `Closed — Approved`; W03, W06/ENV e W07 sono completi; W08 è Approved; `C04-W08-C01` è PASS tramite GitHub Actions run `32871808946` (`validate = success`). La closure non costituisce runtime authorization.
-- BKL-012 è `Done`: AP-013B OneDrive-mediated COPY_ONLY e AP-013 Operational Acceptance restano accettati.
-- BKL-013 e BKL-018–BKL-026 restano `Done`: AP-014/OAT e relative remediation sono completate.
-- BKL-007–BKL-010 restano lavori reali e non vengono chiusi per inferenza.
-- BKL-027 è **In Progress**: source discovery avviata; RUT955 management plane è il candidato Network primario, mentre la source Power richiede inventory runtime EAGLE/UPS. Entrambi i segnali restano `UNKNOWN` fino a evidence verificata.
-- BKL-028 resta `Planned` e non parte finché BKL-027 non soddisfa i propri acceptance criteria.
+- BKL-011 è **Done**: ARB-012-C04 è `Closed — Approved`; la closure non costituisce runtime authorization.
+- BKL-012, BKL-013 e BKL-018–BKL-026 restano `Done` sulle acceptance già registrate.
+- BKL-027 è **Done**: Network è osservato dal boundary N.I.N.A.; Power è osservato direttamente dal TS Shelter SafetyMonitor tramite `CommandString("safeties", false)` con J6 power-fault mask `0x00000001`. `IsSafe` resta solo diagnostico e non è la source dello stato Power.
+- BKL-028 è **Done**: Power/Network sono proiettati nel canonical Observatory Status e resi dal portale; la perdita della source decade fail-safe a `UNKNOWN/STALE`. La Safety Authority fisica resta indipendente e autorevole.
+- BKL-009 è **In Progress**: il consistency gate AMP-002/roadmap/backlog è implementato nel Developer Foundation e resta da chiudere solo dopo quality-gate PASS sulla baseline riconciliata.
+- BKL-007, BKL-008 e BKL-010 restano lavori reali e non vengono chiusi per inferenza.
 
 ## 4. Sequenza di esecuzione raccomandata
 
@@ -71,9 +71,10 @@ Governance Foundation [DONE]
   -> AP-013 unattended COPY_ONLY evidence [DONE]
   -> AP-014 acceptance [DONE]
   -> BKL-011 / ARB-012-C04 [DONE]
-  -> BKL-027 Observatory Status Power/Network source discovery [IN PROGRESS]
-  -> BKL-028 Observatory Status Power/Network integration [PLANNED]
-  -> BKL-007/008/009/010 governance hardening
+  -> BKL-027 Power/Network source discovery [DONE]
+  -> BKL-028 Power/Network integration [DONE]
+  -> BKL-009 consistency gate [IN PROGRESS]
+  -> BKL-007/008/010 governance hardening
   -> AP-015 / Knowledge Graph
 ```
 
