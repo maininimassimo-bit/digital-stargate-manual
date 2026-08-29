@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 2.7 |
+| Versione | 2.8 |
 | Stato | Active |
-| Data baseline | 28/08/2026 |
+| Data baseline | 29/08/2026 |
 
 ## 1. Scopo
 
@@ -26,7 +26,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-005 | P1 | Eseguire `mkdocs build --strict` sul Governance Package | Done | BKL-002–BKL-004 | Build documentale verificata | Developer Foundation #730 |
 | BKL-006 | P1 | Verificare GitHub Pages dopo pubblicazione governance | Done | BKL-005 | Governance Center pubblicato e navigabile | BKL-025 Pages integrity baseline |
 | BKL-007 | P1 | Razionalizzare workflow documentali e Pages | **Done** | Inventario workflow | Un solo owner per build/deploy; duplicati ritirati | TD-004; `deploy-pages.yml` authoritative owner; `docs.yml` validation-only; legacy `docs.yml.disabled` retired |
-| BKL-008 | P1 | Riallineare README root alla piattaforma enterprise | Planned | Governance Foundation completata | Entry point repository aggiornato | TD-003 |
+| BKL-008 | P1 | Riallineare README root alla piattaforma enterprise | **Done** | Governance Foundation completata | Entry point repository aggiornato e coerente con la piattaforma Digital StarGate senza duplicare lo stato dinamico | TD-003; `README.md`; commit `9da5ec55bd7f995ad602bbcd3db92058176c3a4c` |
 | BKL-009 | P1 | Aggiungere consistency checks tra AMP-002 e roadmap JSON | **Done** | Definizione schema projection | Riduzione rischio proiezioni stale | TD-005, AP-002, `.github/scripts/verify-roadmap-consistency.mjs`, Developer Foundation #778 |
 | BKL-010 | P1 | Ridurre script inline nel portale | Planned | Inventario pagine con script inline | Moduli JS proprietari e Instant Navigation sicura | TD-002 |
 | BKL-011 | P1 | Completare evidence residue ARB-012-C04 | **Done** | C04-W01–W08 e final repository CI completati | **ARB-012-C04 Closed — Approved; quality gate finale PASS** | AP-012, ARB-012-C04, W07 evidence, W08 re-review, Actions run `32871808946` |
@@ -48,18 +48,19 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-016 | P2 | Contestualizzare release e guide storiche in root | Planned | Inventario e supersession map | Lineage chiaro e baseline corrente distinguibile | TD-007 |
 | BKL-017 | P2 | Introdurre futura modalità tema `system` | Planned | RC1-HF01 stabilizzata | Preferenza OS gestita dal Theme Manager | RC1-HF01 |
 
-### Reconciliation note — 28/08/2026
+### Reconciliation note — 29/08/2026
 
 La repository governance è riconciliata con le evidence reali senza ripetere attività già accettate.
 
 - BKL-001–BKL-006 restano `Done` sulla governance foundation e quality baseline già accettata.
 - BKL-007 è **Done**: `deploy-pages.yml` è l'unico owner della pubblicazione GitHub Pages; `docs.yml` è validation-only senza Pages write permission; il legacy `docs.yml.disabled` è stato rimosso. TD-004 è `Resolved`.
+- BKL-008 è **Done**: il README root rappresenta ora Digital StarGate come piattaforma composta da manuale, Enterprise Architecture Repository, Enterprise Portal e Developer Foundation, indirizza alle fonti canoniche e non replica intenzionalmente lo stato dinamico del programma. TD-003 è `Resolved`.
+- BKL-009 è **Done**: il consistency gate AMP-002/roadmap/backlog è attivo nel Developer Foundation; la baseline riconciliata ha superato `Verify generated roadmap` e `Verify AMP-002 / roadmap / backlog consistency` nel run #778.
 - BKL-011 è **Done**: ARB-012-C04 è `Closed — Approved`; la closure non costituisce runtime authorization.
 - BKL-012, BKL-013 e BKL-018–BKL-026 restano `Done` sulle acceptance già registrate.
 - BKL-027 è **Done**: Network è osservato dal boundary N.I.N.A.; Power è osservato direttamente dal TS Shelter SafetyMonitor tramite `CommandString("safeties", false)` con J6 power-fault mask `0x00000001`. `IsSafe` resta solo diagnostico e non è la source dello stato Power.
 - BKL-028 è **Done**: Power/Network sono proiettati nel canonical Observatory Status e resi dal portale; la perdita della source decade fail-safe a `UNKNOWN/STALE`. La Safety Authority fisica resta indipendente e autorevole.
-- BKL-009 è **Done**: il consistency gate AMP-002/roadmap/backlog è attivo nel Developer Foundation; la baseline riconciliata ha superato `Verify generated roadmap` e `Verify AMP-002 / roadmap / backlog consistency` nel run #778.
-- BKL-008 e BKL-010 restano lavori reali e non vengono chiusi per inferenza.
+- BKL-010 resta il solo hardening P1 aperto di questo gruppo e non viene chiuso per inferenza.
 
 ## 4. Sequenza di esecuzione raccomandata
 
@@ -76,7 +77,8 @@ Governance Foundation [DONE]
   -> BKL-028 Power/Network integration [DONE]
   -> BKL-009 consistency gate [DONE]
   -> BKL-007 workflow rationalization [DONE]
-  -> BKL-008/010 governance hardening
+  -> BKL-008 repository entry point [DONE]
+  -> BKL-010 portal inline-script hardening
   -> AP-015 / Knowledge Graph
 ```
 
