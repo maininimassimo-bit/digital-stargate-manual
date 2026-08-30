@@ -6,7 +6,7 @@ Runtime evidence collected from `EAGLE30154` to determine whether the installed 
 
 This evidence is read-only and does not authorize any change to CloudWatcher, ASCOM, SafetyMonitor, firmware, serial configuration or observatory safety logic.
 
-## Observed data file
+## Observed ASCOM data file
 
 ASCOM driver configuration points to:
 
@@ -28,16 +28,23 @@ Observed content includes:
   "dateLocalTime": "2026/07/19 12:00:03",
   "cwinfo": "Serial: 2264, FW: 5.86",
   "clouds": 9.1,
+  "cloudsSafe": "Unsafe",
   "temp": 35.0,
   "wind": 10.0,
+  "windSafe": "Safe",
   "gust": 16.4,
   "rain": 3200,
+  "rainSafe": "Safe",
   "light": 2,
+  "lightSafe": "Unsafe",
+  "switch": 1,
   "safe": 0,
   "hum": 55.804,
+  "humSafe": "Safe",
   "dewp": 24.878,
   "abspress": 996.688,
   "relpress": 1007.789,
+  "pressureSafe": "Safe",
   "rawir": 24.363
 }
 ```
@@ -87,7 +94,37 @@ SensorDescription(SkyQuality): unavailable/empty
 TimeSinceLastUpdate(SkyQuality): unavailable/empty
 ```
 
-The value `0` is rejected as an SQM measurement. The configured `DataFile` is also stale relative to the 2026-08-30 observation date, with last update on 2026-07-19.
+The value `0` is rejected as an SQM measurement. The configured `DataFile` is stale relative to the 2026-08-30 observation date, with last update on 2026-07-19.
+
+## Active-output discovery
+
+A passive filesystem inventory executed on `EAGLE30154` on 2026-08-30 identified the following relevant outputs, sorted by most recent write time:
+
+```text
+C:\Users\PrimaLuceLab\Documents\CloudWatcher\AAG_CWNetData.dat
+  Length: 620 bytes
+  LastWriteTime: 2026-08-30 21:47:55 local
+
+C:\Users\PrimaLuceLab\Documents\CloudWatcher\CloudWatcher.csv
+  Length: 241067238 bytes
+  LastWriteTime: 2026-08-30 21:29:25 local
+
+C:\Users\PrimaLuceLab\Documents\ASCOM\Logs 2026-08-27\ASCOM.CloudWatcher-SM.2141.287230.txt
+  Length: 5928857 bytes
+  LastWriteTime: 2026-08-30 21:29:03 local
+```
+
+The stale ASCOM-configured file remains:
+
+```text
+C:\Users\PrimaLuceLab\Documents\aag_json.dat
+  Length: 581 bytes
+  LastWriteTime: 2026-07-19 12:00:03 local
+```
+
+This is direct evidence that `aag_json.dat` is not the currently active CloudWatcher output path. `AAG_CWNetData.dat` is the strongest current candidate because it is small, CloudWatcher-specific and was updated at the time of inspection.
+
+No ASCOM `DataFile` setting has been changed. The existence of a more recent output does not by itself prove that the ASCOM driver accepts that file format.
 
 ## Architecture disposition
 
@@ -96,8 +133,10 @@ Current disposition:
 ```text
 ASCOM PROPERTY: reachable
 ASCOM DATA SOURCE: configured but stale
+DEVICE SERIAL: 2264
 DEVICE FIRMWARE: 5.86
 SQM FIELD IN CONFIGURED DATA FILE: absent
+ACTIVE CLOUDWATCHER OUTPUT: AAG_CWNetData.dat candidate
 VALID SQM SAMPLE: not verified
 BKL-029 G1: blocked on valid instrumental source/value
 weather.sqm_mag_arcsec2: must remain null
@@ -109,13 +148,15 @@ No firmware update is authorized by BKL-029 source discovery. A firmware change 
 
 ## Next governed step
 
-Locate the CloudWatcher output that is being updated **currently** on EAGLE30154 and determine whether the ASCOM `DataFile` setting points to an obsolete file.
+Inspect `C:\Users\PrimaLuceLab\Documents\CloudWatcher\AAG_CWNetData.dat` read-only and compare its field semantics with the stale `aag_json.dat` source.
 
-The next inspection must remain passive and must:
+The next inspection must:
 
-1. enumerate likely AAG/CloudWatcher JSON/DAT/CSV output files under the current user's Documents/AppData and configured CloudWatcher locations;
-2. report path, size and UTC/local last-write timestamps;
-3. identify files updated recently without modifying them;
-4. inspect only small text files for `cwinfo`, `sqm`, `sky quality`, `mpsas` and related field names;
-5. never infer SQM from `light`, LDR, cloud or sky-temperature fields;
-6. never change the ASCOM `DataFile` setting automatically.
+1. read the current `AAG_CWNetData.dat` without modification;
+2. capture its file timestamp together with the content read;
+3. identify device identity/firmware if present;
+4. identify any explicit `sqm`, `sky quality`, `mpsas` or equivalent instrumental field;
+5. distinguish any legacy `light`/LDR value from SQM;
+6. not change the ASCOM `DataFile` setting;
+7. not access the serial port or SafetyMonitor;
+8. keep `weather.sqm_mag_arcsec2 = null` unless a valid instrumental SQM value is actually verified.
