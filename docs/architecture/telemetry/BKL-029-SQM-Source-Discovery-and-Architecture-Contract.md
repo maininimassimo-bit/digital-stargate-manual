@@ -4,127 +4,143 @@
 |---|---|
 | Identificativo | BKL-029 |
 | Capability | SQM Sky Quality Telemetry & Scientific History |
-| Stato | **Blocked — ASCOM SkyQuality property reachable but returned implausible zero; valid runtime SQM still unverified** |
+| Stato | **In progress — primary source candidate verified via CloudWatcher SOLO HTTP; shadow adapter/OAT pending** |
 | Data | 2026-08-30 |
 | Autorità | Digital StarGate Architecture Office |
 | Dipendenze | AP-004; AP-013; AP-014; Observatory Status; scientific session catalog |
-| Runtime effect | None — discovery/documentation only; no device configuration changes |
+| Runtime effect | Shadow/read-only only until OAT acceptance |
 
 ## 1. Scopo
 
-Definire la discovery governata della source SQM e il contratto architetturale per valorizzare realmente `weather.sqm_mag_arcsec2` e storicizzare la qualità del cielo nelle sessioni scientifiche.
+Definire la source SQM e il contratto architetturale per valorizzare realmente `weather.sqm_mag_arcsec2` e storicizzare la qualità del cielo nelle sessioni scientifiche.
 
-BKL-029 non introduce alcun comando verso cupola, montatura, power, router o Safety Authority. SQM è una metrica scientifica di qualità della notte e **non è mai un Safety signal**.
+SQM resta una metrica scientifica di qualità della notte e **non è mai un Safety signal**. Nessun adapter BKL-029 può comandare cupola, montatura, power, router o Safety Authority.
 
 ## 2. Repository truth ed evidence runtime
 
-La baseline iniziale mostrava `weather.sqm_mag_arcsec2 = $null`, nessuna evidence sufficiente di SQM calibrato dal CloudWatcher, nessuna istanza ASCOM `ObservingConditions` verificata e nessun SQM dedicato.
+La discovery iniziale sul CloudWatcher locale `EAGLE30154` ha verificato che:
 
-La discovery del 2026-08-30 ha progressivamente identificato una superficie ASCOM reale, ma la prima lettura runtime non ha prodotto un valore scientificamente valido.
+- il CloudWatcher locale identifica `Serial: 2264, FW: 5.86`;
+- il CSV live locale non contiene alcun campo SQM/mpsas/sky-quality;
+- il driver `ASCOM.CloudWatcher.ObservingConditions` è raggiungibile ma ha restituito `SkyQuality = 0`, valore DSG invalidato;
+- `aag_json.dat` configurato nel driver ASCOM locale è stale e non contiene SQM;
+- `Brightness Value`/LDR restano proxy vietati;
+- nessun accesso seriale diretto è stato necessario o autorizzato.
 
-Il primo inventory runtime su `EAGLE30154`, bundle `C:\DigitalStarGate\TelemetryEvidence\sqm-source-inventory-20260830-181223\`, aveva rilevato:
+Questa linea locale resta non idonea a BKL-029.
 
-- nessuna istanza ASCOM `ObservingConditions` tra i ProgID allora ricercati;
-- nessun campo SQM candidato nel CSV CloudWatcher osservato;
-- nessun device SQM candidato via PnP/serial;
-- disposition `NO_VERIFIED_SOURCE_FOUND`.
+Successivamente è stata verificata una seconda source esistente, **AAG CloudWatcher SOLO**, raggiungibile via HTTP e fisicamente installata nello stesso sito di Manciano, sufficientemente vicina al Digital StarGate per rappresentarne la qualità del cielo secondo conferma operativa del proprietario del sistema.
 
-Quella conclusione ASCOM era incompleta: la discovery successiva ha identificato il ProgID reale `ASCOM.CloudWatcher.ObservingConditions`, non incluso nei candidati iniziali.
-
-Gli inventory passivi successivi hanno verificato:
-
-- `AAG CloudWatcher v.9.5.0` e `AAG_WeatherCenter v2.30` installati;
-- ProgID legacy `AAG_CloudWatcher.CloudWatcher` registrato;
-- nessun metadata locale sufficiente a verificare firmware/revisione hardware/SQM;
-- nessuna porta enumerata tramite `Win32_SerialPort` nel preflight seriale;
-- `AAG_CloudWatcher.exe` e `ASCOM.CloudWatcher.Server.exe` in esecuzione;
-- nessuna porta seriale aperta dai probe DSG.
-
-L'inventory ASCOM passivo, bundle `C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-ascom-surface-20260830-192856\`, ha identificato:
-
-- ProgID `ASCOM.CloudWatcher.ObservingConditions` registrato;
-- CLSID `{efef952b-d34c-4d25-bdbf-0a0a58a2414e}`;
-- server multi-interface `ASCOM.CloudWatcher.Server.exe` registrato e in esecuzione;
-- ProgID `ASCOM.CloudWatcher.SafetyMonitor` distinto;
-- interfacce ASCOM `IObservingConditions` / `IObservingConditionsV2` presenti nella registrazione;
-- OCH/ASCOM mapping che include `SkyQuality` per la source CloudWatcher.
-
-Il preflight dedicato SkyQuality, bundle `C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-ascom-skyquality-20260830-193734\`, ha confermato:
-
-- driver `Lunatico CloudWatcher Observing Conditions`;
-- `DataFile = C:\Users\PrimaLuceLab\Documents\aag_json.dat`;
-- `MaxSecsDiff = 60`;
-- nessuna istanziazione ASCOM o connessione durante il preflight.
-
-Il probe runtime controllato, bundle `C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-ascom-skyquality-20260830-194200\`, ha poi verificato tecnicamente il driver:
-
-- oggetto ASCOM creato con successo;
-- `Connected` inizialmente `False`, impostato a `True` dal probe e ripristinato a `False` al termine;
-- `Name = CloudWatcher ObsCond`;
-- `Description = ASCOM ObservingConditions Driver for CloudWatcher.`;
-- `DriverInfo = CloudWatcher specific driver. Version: 1.1`;
-- `DriverVersion = 1.1`;
-- `InterfaceVersion = 1`;
-- property `SkyQuality` leggibile senza eccezioni;
-- valore restituito `SkyQuality = 0`;
-- `SensorDescription('SkyQuality')` non ha prodotto metadata;
-- `TimeSinceLastUpdate('SkyQuality')` non ha prodotto un valore utilizzabile;
-- nessun accesso seriale diretto, nessun SafetyMonitor interaction, nessuna modifica di configurazione.
-
-Il valore `0` non è accettato come misura SQM reale. Per il contratto DSG è trattato come **non valido/unknown**, non come cielo reale a 0 mag/arcsec².
-
-Conclusione corrente: la superficie ASCOM e la property `SkyQuality` sono raggiungibili, ma una source SQM scientificamente valida non è ancora verificata. `weather.sqm_mag_arcsec2` resta `null`.
-
-## 3. Candidate source discovery
-
-### 3.1 ASCOM ObservingConditions
-
-Candidate corrente: `TECHNICALLY REACHABLE / SCIENTIFIC VALUE INVALID`.
-
-Source:
+Endpoint verificato:
 
 ```text
-ProgID: ASCOM.CloudWatcher.ObservingConditions
-Driver: Lunatico CloudWatcher Observing Conditions
-DriverVersion: 1.1
-DataFile: C:\Users\PrimaLuceLab\Documents\aag_json.dat
-MaxSecsDiff: 60
+http://meteo.deeplab.space:8080/cgi-bin/cgiLastData
 ```
 
-La property standard `SkyQuality` è implementata e leggibile, ma il primo runtime sample è `0`, privo di sensor description e freshness evidence. Questo non soddisfa il gate di validità scientifica.
+Evidence osservata:
 
-Prima di qualunque integrazione production occorre determinare se `0` significa sensore non disponibile/non supportato nel file sorgente, valore non popolato dal software CloudWatcher, stale/default sentinel, oppure altra condizione documentata.
+```text
+dataGMTTime=2026/08/30 20:31:42
+cwinfo=Serial: 2382, FW: 5.88
+clouds=-1.520000
+cloudsSafe=1
+temp=24.500000
+wind=6
+windSafe=1
+gust=7
+rain=3200
+rainSafe=1
+lightmpsas=18.74
+lightSafe=1
+switch=1
+safe=1
+hum=62
+humSafe=1
+dewp=16.750000
+rawir=9.880000
+abspress=993.175000
+relpress=1010.426464
+pressureSafe=1
+```
 
-### 3.2 Lunatico CloudWatcher native protocol
+Questa evidence è determinante perché `lightmpsas` è un campo esplicito in magnitudini per arcsec² e non una trasformazione DSG di brightness/LDR. La source espone inoltre timestamp UTC e identity (`Serial 2382`, `FW 5.88`).
 
-Il protocollo seriale diretto resta una fallback diagnostic path. Non viene aperto mentre `AAG_CloudWatcher.exe`/server ASCOM stanno gestendo il device, salvo finestra controllata esplicitamente governata.
+## 3. Source selection
 
-La documentazione Lunatico pubblica indica che:
+### 3.1 CloudWatcher SOLO HTTP — PRIMARY CANDIDATE
 
-- i CloudWatcher recenti includono un sensore sky-quality e misurano in mpsas;
-- il protocollo seriale v1.4 documenta il blocco `!8` come raw frequency del nuovo light sensor;
-- `!4` è LDR/backward compatibility e non è una source SQM valida.
+Disposizione corrente: `VERIFIED SOURCE CANDIDATE / SHADOW OAT PENDING`.
 
-### 3.3 SQM dedicato
+Caratteristiche:
 
-Nessun device SQM dedicato è stato rilevato. Candidate corrente: `NOT AVAILABLE`.
+```text
+Transport: HTTP read-only
+Endpoint: /cgi-bin/cgiLastData
+Field: lightmpsas
+Timestamp: dataGMTTime
+Identity: cwinfo
+Observed device: Serial 2382 / FW 5.88
+Site: Manciano, physically close enough to Digital StarGate for scientific night-quality telemetry
+```
 
-### 3.4 Proxy vietati
+Vantaggi:
 
-Non è consentito produrre `sqm_mag_arcsec2` da brightness/LDR non calibrato come SQM, cloud cover, sky temperature, Moon altitude/phase, trasparenza stimata o background fotografico.
+- nessun nuovo hardware necessario;
+- nessuna seriale/USB sull'EAGLE;
+- nessuna modifica firmware del CloudWatcher locale;
+- campo SQM esplicito in mpsas;
+- timestamp sorgente disponibile;
+- identity/provenance disponibile;
+- integrazione HTTP leggera e read-only;
+- indipendenza funzionale dal Safety Authority locale.
+
+Rischi da validare in OAT:
+
+- disponibilità/reachability HTTP;
+- comportamento in caso di timeout o endpoint non raggiungibile;
+- cadenza reale di aggiornamento `dataGMTTime`;
+- eventuale jitter/staleness;
+- stabilità del valore `lightmpsas` durante una finestra osservativa;
+- continuità della rappresentatività spaziale del sensore rispetto alla cupola.
+
+### 3.2 CloudWatcher locale ASCOM/CSV
+
+Disposizione: `REJECTED FOR SQM / RETAINED FOR EXISTING WEATHER FUNCTIONS`.
+
+Il locale `Serial 2264 / FW 5.86` non espone un SQM valido nella pipeline osservata. `SkyQuality=0` resta invalidato.
+
+### 3.3 CloudWatcher native serial
+
+Disposizione: `FALLBACK DIAGNOSTIC ONLY`.
+
+Non necessario finché SOLO HTTP soddisfa il contratto.
+
+### 3.4 Dedicated SQM / Unihedron
+
+Disposizione: `FALLBACK ARCHITECTURE`.
+
+Il contratto transport-neutral e il parser Unihedron sviluppati restano utili come fallback futuro, ma non sono più il percorso primario per BKL-029.
 
 ## 4. Source selection gate
 
-Una source passa a `VERIFIED` per uso realtime solo con evidence runtime riproducibile di identity/versione, interfaccia, unità mpsas, campioni reali plausibili UTC, freshness, error behavior e provenance.
+Una source è promossa a production solo con evidence runtime riproducibile di:
+
+1. identity/versione;
+2. campo mpsas esplicito;
+3. timestamp sorgente;
+4. campioni plausibili e non sintetici;
+5. freshness/cadence verificata;
+6. error/timeout behavior fail-safe;
+7. provenance preservata;
+8. assenza di command path verso Safety o apparati.
 
 Disposizione corrente:
 
-- ASCOM CloudWatcher ObservingConditions: `REACHABLE / SKYQUALITY=0 INVALID`;
-- CloudWatcher CSV SQM field: `NOT AVAILABLE` nel canale osservato;
-- CloudWatcher legacy COM: `REGISTERED / PASSIVE SURFACE NON-DESCRIPTIVE`;
-- CloudWatcher direct serial protocol: `FALLBACK / NOT PROBED`;
-- SQM dedicato: `NOT AVAILABLE`;
-- source SQM complessiva: `NO VALID RUNTIME VALUE VERIFIED`.
+- SOLO HTTP: `PRIMARY / G1 SATISFIED FOR SOURCE IDENTITY AND VALID VALUE; OAT PENDING`;
+- locale ASCOM: `REACHABLE / INVALID SQM VALUE`;
+- locale CSV: `NO SQM FIELD`;
+- serial native: `FALLBACK`;
+- dedicated SQM: `FALLBACK`.
 
 ## 5. Contratto realtime
 
@@ -134,7 +150,7 @@ Il valore canonico resta:
 weather.sqm_mag_arcsec2: number | null
 ```
 
-Il target richiede provenance field-level:
+Provenance field-level target:
 
 ```text
 sqm_mag_arcsec2
@@ -146,18 +162,20 @@ sqm_source
 
 Regole:
 
-1. valore numerico solo da misura strumentale verificata e plausibile;
-2. `0` dal driver corrente non viene pubblicato come SQM reale;
-3. source assente/non valida -> `null`, quality `UNKNOWN`;
-4. campione oltre freshness -> `STALE`;
-5. `MaxSecsDiff=60` è evidence di configurazione, non automaticamente freshness canonica DSG;
-6. freshness DSG richiede evidence runtime affidabile;
-7. il portale visualizza assenza/staleness senza inventare valori;
-8. SQM non modifica Safety Authority o interlock.
+1. per SOLO il valore arriva esclusivamente da `lightmpsas`;
+2. `dataGMTTime` è il timestamp sorgente canonico;
+3. `cwinfo` fornisce identity/version provenance;
+4. valore mancante/non numerico/non positivo -> `null / UNKNOWN`;
+5. campione oltre freshness -> `null / STALE` nella projection production;
+6. timeout/rete indisponibile -> mai ultimo valore promosso come CURRENT;
+7. nessun fallback automatico a brightness/LDR;
+8. nessun effetto su Safety Authority o interlock.
+
+La freshness esatta viene fissata dopo misura della cadence reale in OAT.
 
 ## 6. Contratto storico scientifico
 
-Per sessioni con campioni SQM validi il catalogo deve poter rappresentare almeno:
+Per sessioni con campioni validi:
 
 ```text
 sqm.start
@@ -172,114 +190,76 @@ sqm.source
 sqm.quality
 ```
 
-Il campione `SkyQuality = 0` del 2026-08-30 **non entra** nelle statistiche scientifiche.
+Solo campioni `CURRENT` da `lightmpsas` contribuiscono alle statistiche. Una sessione senza SQM resta scientificamente valida.
 
 ## 7. Boundary e responsabilità
 
-### EAGLE
+### EAGLE / collector
 
-Consentito: discovery read-only, lettura ASCOM `ObservingConditions.SkyQuality`, campionamento leggero, normalizzazione minima/timestamp e spool locale resiliente se necessario.
+Consentito:
 
-Vietato: analytics pesanti, inferenza SQM da proxy, modifica configurazione weather come effetto collaterale, uso SQM per Safety o command path.
+- HTTP GET read-only verso SOLO;
+- parsing di `dataGMTTime`, `cwinfo`, `lightmpsas`;
+- timestamp/freshness evaluation;
+- evidence/spool leggero;
+- shadow projection.
+
+Vietato:
+
+- configurazione del SOLO;
+- comandi Safety/relay;
+- uso di `safe`/`lightSafe` come source SQM;
+- analytics pesanti;
+- proxy brightness/LDR.
 
 ### Safety boundary
 
-`ASCOM.CloudWatcher.SafetyMonitor` è un'interfaccia separata e non viene usata da BKL-029.
+Il fatto che lo stesso payload contenga campi `safe`, `lightSafe`, `rainSafe` ecc. **non autorizza BKL-029 a interpretarli o usarli**. L'adapter SQM deve leggere solo i campi necessari al dominio scientifico e non diventa una Safety Authority.
 
-### Repository / Scientific Data Engine
+### Scientific Data Engine
 
-Responsabile di schema/provenance versionati, associazione campioni-sessione, statistiche storiche, projection portale/catalogo e validazioni anti-drift/fail-safe.
+Responsabile di history, aggregazione per sessione, qualità temporale e correlazione con scientific session catalog.
 
 ## 8. Acceptance gates BKL-029
 
-- **G1 Source discovery:** `BLOCKED ON VALID VALUE` — driver/property identificati e raggiungibili, ma il campione `0` non è accettabile come misura SQM;
-- **G2 Realtime contract:** `BLOCKED` — nessun valore runtime valido;
-- **G3 Historical contract:** `BLOCKED` — nessun campione SQM valido;
-- **G4 Regression:** non eseguito per runtime production SQM;
-- **G5 CI/docs:** da verificare sui commit; nessun successo assunto senza evidence GitHub reale;
-- **G6 Runtime OAT:** `BLOCKED ON VALID VALUE`.
+- **G1 Source discovery:** `SATISFIED` — source HTTP reale, identity, timestamp e `lightmpsas=18.74` verificati; prossimità fisica al sito confermata;
+- **G2 Realtime contract:** `IN PROGRESS` — parser disponibile; client HTTP/shadow projection da completare;
+- **G3 Historical contract:** `BLOCKED ON SAMPLE HISTORY` — contratto definito, history runtime non ancora acquisita;
+- **G4 Regression:** `PENDING` — test parser presenti, CI da verificare sull'HEAD corrente;
+- **G5 CI/docs:** `PENDING` — nessun GREEN assunto sui commit recenti senza evidence Actions;
+- **G6 Runtime OAT:** `PENDING` — richiede polling shadow e verifica cadence/freshness/timeout.
 
-## 9. Evidence runtime 2026-08-30
+## 9. Architecture direction
 
-### 9.1 Inventory generale SQM
+Target immediato:
 
-```text
-Evidence: C:\DigitalStarGate\TelemetryEvidence\sqm-source-inventory-20260830-181223\
-Disposition at time: NO_VERIFIED_SOURCE_FOUND
-```
+```mermaid
+flowchart LR
+    SOLO[CloudWatcher SOLO HTTP\nSerial 2382] -->|GET cgiLastData| Adapter[DSG Solo SQM Adapter]
+    Adapter --> RT[Observatory Status SQM projection]
+    Adapter --> History[SQM sample history]
+    History --> Session[Scientific session aggregation]
 
-### 9.2 CloudWatcher passive capability inventory
+    LocalCW[Local CloudWatcher\nSerial 2264] --> Weather[Existing weather telemetry]
+    LocalSafety[Local Safety Authority] --> Interlock[Physical safety/interlocks]
 
-```text
-Evidence: C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-sqm-capability-20260830-182202\
-Disposition: NO_PASSIVE_SQM_OR_FIRMWARE_METADATA_FOUND
-```
-
-### 9.3 Legacy COM passive surface
-
-```text
-Evidence: C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-legacy-com-surface-20260830-183012\
-Disposition: LEGACY_COM_REGISTERED_NO_SQM_TERM_FOUND_IN_PASSIVE_METADATA
-```
-
-### 9.4 Hardware / firmware local metadata inventory
-
-```text
-Evidence: C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-hardware-firmware-inventory-20260830-183508\
-Disposition: NO_LOCAL_HARDWARE_FIRMWARE_OR_SQM_METADATA_FOUND
-```
-
-### 9.5 Serial protocol preflight
-
-```text
-Evidence: C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-sqm-protocol-probe-20260830-190848\
-Disposition: PREFLIGHT_ONLY_NO_SERIAL_ACCESS
-```
-
-### 9.6 ASCOM surface inventory
-
-```text
-Evidence: C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-ascom-surface-20260830-192856\
-ASCOM.CloudWatcher.ObservingConditions registered
-ASCOM.CloudWatcher.SafetyMonitor separately registered
-```
-
-### 9.7 ASCOM SkyQuality preflight
-
-```text
-Evidence: C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-ascom-skyquality-20260830-193734\
-Disposition: PREFLIGHT_ONLY_NO_ASCOM_ACTIVATION
-```
-
-### 9.8 ASCOM SkyQuality runtime probe
-
-```text
-Evidence: C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-ascom-skyquality-20260830-194200\
-Name: CloudWatcher ObsCond
-DriverVersion: 1.1
-InterfaceVersion: 1
-Connected before: False
-Connected after connect: True
-Connection restored after probe: True
-SkyQuality read: True
-SkyQuality: 0
-SensorDescription(SkyQuality): unavailable/empty
-TimeSinceLastUpdate(SkyQuality): unavailable/empty
-Disposition: ASCOM_SKYQUALITY_READ_SUCCEEDED_REQUIRES_PLAUSIBILITY_AND_FRESHNESS_REVIEW
-DSG disposition: INVALID_SQM_SAMPLE_ZERO
+    Adapter -. no authority .-> LocalSafety
 ```
 
 ## 10. Prossimo passo governato
 
-Non implementare ancora l'adapter realtime e non avviare BKL-030.
+Implementare in **shadow mode** il client HTTP read-only per `cgiLastData` usando il contratto `ISqmInstrumentReader` già introdotto.
 
-Il prossimo passo deve essere **passivo sul data path ASCOM**: ispezionare `C:\Users\PrimaLuceLab\Documents\aag_json.dat` e la configurazione/metadata del driver CloudWatcher per determinare se il file contiene un campo sky-quality/SQM/mpsas e quale semantica abbia il valore `0` restituito dal driver.
+Requisiti minimi:
 
-Regole:
+1. `HttpClient` con endpoint configurabile;
+2. solo metodo GET;
+3. timeout corto/configurabile;
+4. parser `SoloCloudWatcherSqmPayloadParser`;
+5. freshness configurabile e non hard-coded come acceptance finale;
+6. nessun retry aggressivo sull'EAGLE;
+7. failure -> `UNKNOWN` senza synthetic fallback;
+8. nessuna projection production finché G6 non è completato;
+9. evidence OAT con almeno cadence, timeout/disconnect e sequenza campioni.
 
-1. nessuna modifica del file `aag_json.dat`;
-2. nessun cambio di configurazione CloudWatcher/ASCOM;
-3. nessun accesso seriale diretto;
-4. nessun utilizzo di `0` come valore scientifico;
-5. se il data file contiene un valore SQM reale e plausibile, correlare esattamente campo -> driver -> property ASCOM;
-6. se il campo non esiste o è sempre zero/default, la source ASCOM non passa G1 e si valuta la fallback protocol path o una source SQM dedicata.
+Dopo G2/G6 si potrà abilitare `weather.sqm_mag_arcsec2` nella projection realtime e avviare la raccolta storica per G3.
