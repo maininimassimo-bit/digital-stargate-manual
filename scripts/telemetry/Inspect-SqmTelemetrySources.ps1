@@ -111,7 +111,6 @@ function Get-CloudWatcherSnapshot {
             catch { }
         }
 
-        $fields = @($header | ConvertFrom-Csv -Header (@(1..$headerCount | ForEach-Object { "f$_" })) | Select-Object -First 1)
         $fieldNames = @()
         if ($row) { $fieldNames = @($row.PSObject.Properties | ForEach-Object { $_.Name }) }
         elseif ($header) {
@@ -251,7 +250,10 @@ $installedSoftware = @(
 ) | ForEach-Object {
     Get-ItemProperty -Path $_ -ErrorAction SilentlyContinue
 } | Where-Object {
-    $_.DisplayName -and $_.DisplayName -match '(?i)ASCOM|CloudWatcher|Lunatico|Unihedron|Sky Quality|SQM'
+    $displayNameProperty = $_.PSObject.Properties['DisplayName']
+    if ($null -eq $displayNameProperty) { return $false }
+    $displayName = [string]$displayNameProperty.Value
+    -not [string]::IsNullOrWhiteSpace($displayName) -and $displayName -match '(?i)ASCOM|CloudWatcher|Lunatico|Unihedron|Sky Quality|SQM'
 } | Select-Object DisplayName, DisplayVersion, Publisher, InstallLocation, PSPath
 
 $relevantProcesses = @(Get-Process -ErrorAction SilentlyContinue |
