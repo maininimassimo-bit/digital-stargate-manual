@@ -4,7 +4,7 @@
 |---|---|
 | Identificativo | BKL-029 |
 | Capability | SQM Sky Quality Telemetry & Scientific History |
-| Stato | **In progress — verified ASCOM ObservingConditions source candidate; runtime SkyQuality read pending** |
+| Stato | **Blocked — ASCOM SkyQuality property reachable but returned implausible zero; valid runtime SQM still unverified** |
 | Data | 2026-08-30 |
 | Autorità | Digital StarGate Architecture Office |
 | Dipendenze | AP-004; AP-013; AP-014; Observatory Status; scientific session catalog |
@@ -20,6 +20,8 @@ BKL-029 non introduce alcun comando verso cupola, montatura, power, router o Saf
 
 La baseline iniziale mostrava `weather.sqm_mag_arcsec2 = $null`, nessuna evidence sufficiente di SQM calibrato dal CloudWatcher, nessuna istanza ASCOM `ObservingConditions` verificata e nessun SQM dedicato.
 
+La discovery del 2026-08-30 ha progressivamente identificato una superficie ASCOM reale, ma la prima lettura runtime non ha prodotto un valore scientificamente valido.
+
 Il primo inventory runtime su `EAGLE30154`, bundle `C:\DigitalStarGate\TelemetryEvidence\sqm-source-inventory-20260830-181223\`, aveva rilevato:
 
 - nessuna istanza ASCOM `ObservingConditions` tra i ProgID allora ricercati;
@@ -29,101 +31,83 @@ Il primo inventory runtime su `EAGLE30154`, bundle `C:\DigitalStarGate\Telemetry
 
 Quella conclusione ASCOM era incompleta: la discovery successiva ha identificato il ProgID reale `ASCOM.CloudWatcher.ObservingConditions`, non incluso nei candidati iniziali.
 
-Il secondo inventory passivo, bundle `C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-sqm-capability-20260830-182202\`, ha rilevato:
+Gli inventory passivi successivi hanno verificato:
 
-- `AAG CloudWatcher v.9.5.0`, versione `9.5.0`, publisher Lunático Astronomía, install location `C:\Program Files (x86)\AAG_CloudWatcher\`;
-- `AAG_WeatherCenter v2.30` installato;
+- `AAG CloudWatcher v.9.5.0` e `AAG_WeatherCenter v2.30` installati;
 - ProgID legacy `AAG_CloudWatcher.CloudWatcher` registrato;
-- `ASCOM.AAGCloudWatcher.ObservingConditions` non registrato;
-- `ASCOM.Lunatico.ObservingConditions` non registrato;
-- nessun file passivamente rilevato con metadata SQM;
-- nessun file passivamente rilevato con metadata firmware;
-- disposition `NO_PASSIVE_SQM_OR_FIRMWARE_METADATA_FOUND`.
+- nessun metadata locale sufficiente a verificare firmware/revisione hardware/SQM;
+- nessuna porta enumerata tramite `Win32_SerialPort` nel preflight seriale;
+- `AAG_CloudWatcher.exe` e `ASCOM.CloudWatcher.Server.exe` in esecuzione;
+- nessuna porta seriale aperta dai probe DSG.
 
-Il terzo inventory passivo, bundle `C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-legacy-com-surface-20260830-183012\`, ha caratterizzato il ProgID legacy senza attivarlo:
-
-- ProgID `AAG_CloudWatcher.CloudWatcher` registrato;
-- CLSID `{F8D7A9ED-D0E2-45F8-BAC6-88DBB322475B}`;
-- nessun `InprocServer32` o `LocalServer32` risolto dalla registrazione osservata;
-- nessuna TypeLib associata a quel percorso di registrazione legacy;
-- nessun termine SQM/sky-quality/mpsas nella metadata surface passivamente visibile;
-- disposition `LEGACY_COM_REGISTERED_NO_SQM_TERM_FOUND_IN_PASSIVE_METADATA`.
-
-Il quarto inventory passivo, bundle `C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-hardware-firmware-inventory-20260830-183508\`, ha rilevato:
-
-- `AAG_CloudWatcher.exe` file/product version `9.05`;
-- altri componenti Lunatico/AAG locali, incluso `AAG_ACPWeatherFeed.exe` 7.20 e `AAG_HASFileLoader.exe` 2.22;
-- nessun metadata locale di modello, seriale, revisione hardware o firmware dispositivo;
-- nessun metadata locale SQM/mpsas;
-- disposition `NO_LOCAL_HARDWARE_FIRMWARE_OR_SQM_METADATA_FOUND`.
-
-Il preflight protocollo, bundle `C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-sqm-protocol-probe-20260830-190848\`, ha rilevato:
-
-- nessuna porta enumerata tramite `Win32_SerialPort`;
-- `AAG_CloudWatcher.exe` in esecuzione;
-- `ASCOM.CloudWatcher.Server.exe` in esecuzione;
-- nessuna porta seriale aperta dal probe;
-- disposition `PREFLIGHT_ONLY_NO_SERIAL_ACCESS`.
-
-Questa evidence ha spostato la discovery verso la superficie ASCOM già attiva, evitando contesa seriale.
-
-L'inventory ASCOM passivo, bundle `C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-ascom-surface-20260830-192856\`, ha identificato la source candidata determinante:
+L'inventory ASCOM passivo, bundle `C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-ascom-surface-20260830-192856\`, ha identificato:
 
 - ProgID `ASCOM.CloudWatcher.ObservingConditions` registrato;
 - CLSID `{efef952b-d34c-4d25-bdbf-0a0a58a2414e}`;
 - server multi-interface `ASCOM.CloudWatcher.Server.exe` registrato e in esecuzione;
-- ProgID `ASCOM.CloudWatcher.SafetyMonitor` distinto, quindi il boundary Safety resta separato;
+- ProgID `ASCOM.CloudWatcher.SafetyMonitor` distinto;
 - interfacce ASCOM `IObservingConditions` / `IObservingConditionsV2` presenti nella registrazione;
-- OCH/ASCOM mapping include `SkyQuality` per la source CloudWatcher;
-- nessuna attivazione ASCOM eseguita durante l'inventory.
+- OCH/ASCOM mapping che include `SkyQuality` per la source CloudWatcher.
 
 Il preflight dedicato SkyQuality, bundle `C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-ascom-skyquality-20260830-193734\`, ha confermato:
 
-- `ASCOM.CloudWatcher.ObservingConditions` registrato in HKCR;
-- driver registrato come `Lunatico CloudWatcher Observing Conditions`;
+- driver `Lunatico CloudWatcher Observing Conditions`;
 - `DataFile = C:\Users\PrimaLuceLab\Documents\aag_json.dat`;
 - `MaxSecsDiff = 60`;
-- `AAG_CloudWatcher.exe` e `ASCOM.CloudWatcher.Server.exe` attivi;
-- nessuna istanziazione ASCOM, nessuna connessione, nessun accesso seriale diretto;
-- disposition `PREFLIGHT_ONLY_NO_ASCOM_ACTIVATION`.
+- nessuna istanziazione ASCOM o connessione durante il preflight.
 
-Conclusione corrente: esiste una source ASCOM ObservingConditions reale e configurata, ma `SkyQuality` non è ancora stato letto a runtime. `weather.sqm_mag_arcsec2` resta quindi `null` fino alla singola lettura controllata e alla validazione di plausibilità/freshness.
+Il probe runtime controllato, bundle `C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-ascom-skyquality-20260830-194200\`, ha poi verificato tecnicamente il driver:
+
+- oggetto ASCOM creato con successo;
+- `Connected` inizialmente `False`, impostato a `True` dal probe e ripristinato a `False` al termine;
+- `Name = CloudWatcher ObsCond`;
+- `Description = ASCOM ObservingConditions Driver for CloudWatcher.`;
+- `DriverInfo = CloudWatcher specific driver. Version: 1.1`;
+- `DriverVersion = 1.1`;
+- `InterfaceVersion = 1`;
+- property `SkyQuality` leggibile senza eccezioni;
+- valore restituito `SkyQuality = 0`;
+- `SensorDescription('SkyQuality')` non ha prodotto metadata;
+- `TimeSinceLastUpdate('SkyQuality')` non ha prodotto un valore utilizzabile;
+- nessun accesso seriale diretto, nessun SafetyMonitor interaction, nessuna modifica di configurazione.
+
+Il valore `0` non è accettato come misura SQM reale. Per il contratto DSG è trattato come **non valido/unknown**, non come cielo reale a 0 mag/arcsec².
+
+Conclusione corrente: la superficie ASCOM e la property `SkyQuality` sono raggiungibili, ma una source SQM scientificamente valida non è ancora verificata. `weather.sqm_mag_arcsec2` resta `null`.
 
 ## 3. Candidate source discovery
 
 ### 3.1 ASCOM ObservingConditions
 
-Candidate corrente: `VERIFIED REGISTRATION / RUNTIME VALUE PENDING`.
+Candidate corrente: `TECHNICALLY REACHABLE / SCIENTIFIC VALUE INVALID`.
 
-La source selezionata per il prossimo gate è:
+Source:
 
 ```text
 ProgID: ASCOM.CloudWatcher.ObservingConditions
 Driver: Lunatico CloudWatcher Observing Conditions
+DriverVersion: 1.1
 DataFile: C:\Users\PrimaLuceLab\Documents\aag_json.dat
 MaxSecsDiff: 60
 ```
 
-ASCOM `ObservingConditions.SkyQuality` è semanticamente adatto a una misura in magnitudini per arcsec². Il server è già attivo e consente di evitare accesso seriale diretto concorrente.
+La property standard `SkyQuality` è implementata e leggibile, ma il primo runtime sample è `0`, privo di sensor description e freshness evidence. Questo non soddisfa il gate di validità scientifica.
 
-Il prossimo probe deve leggere solo metadata ASCOM e `SkyQuality`, senza chiamare SafetyMonitor e senza accesso seriale diretto.
+Prima di qualunque integrazione production occorre determinare se `0` significa sensore non disponibile/non supportato nel file sorgente, valore non popolato dal software CloudWatcher, stale/default sentinel, oppure altra condizione documentata.
 
 ### 3.2 Lunatico CloudWatcher native protocol
 
-Il protocollo seriale diretto resta una fallback diagnostic path e non è più il percorso preferito finché la source ASCOM è disponibile.
+Il protocollo seriale diretto resta una fallback diagnostic path. Non viene aperto mentre `AAG_CloudWatcher.exe`/server ASCOM stanno gestendo il device, salvo finestra controllata esplicitamente governata.
 
 La documentazione Lunatico pubblica indica che:
 
 - i CloudWatcher recenti includono un sensore sky-quality e misurano in mpsas;
-- per unità aggiornate con sensore sky-quality grade è disponibile firmware 5.8.9 con sky-quality readings;
-- il protocollo seriale v1.4 documenta il blocco `!8` come raw frequency del nuovo light sensor, da convertire in MPSAS dal software Windows/SOLO;
-- il blocco `!4` rimane un LDR voltage stimato per backward compatibility e non è una source SQM valida.
-
-Il direct serial probe non viene eseguito mentre il percorso ASCOM può soddisfare G1 senza contesa sulla porta.
+- il protocollo seriale v1.4 documenta il blocco `!8` come raw frequency del nuovo light sensor;
+- `!4` è LDR/backward compatibility e non è una source SQM valida.
 
 ### 3.3 SQM dedicato
 
-L'inventory PnP/seriale non ha rilevato un device identificabile come SQM/Unihedron/sky-quality. Candidate corrente: `NOT AVAILABLE`.
+Nessun device SQM dedicato è stato rilevato. Candidate corrente: `NOT AVAILABLE`.
 
 ### 3.4 Proxy vietati
 
@@ -131,16 +115,16 @@ Non è consentito produrre `sqm_mag_arcsec2` da brightness/LDR non calibrato com
 
 ## 4. Source selection gate
 
-Una source passa a `VERIFIED` per uso realtime solo con evidence runtime riproducibile di identity/versione, interfaccia, unità mpsas, campioni reali UTC, freshness, error behavior e provenance.
+Una source passa a `VERIFIED` per uso realtime solo con evidence runtime riproducibile di identity/versione, interfaccia, unità mpsas, campioni reali plausibili UTC, freshness, error behavior e provenance.
 
 Disposizione corrente:
 
-- ASCOM CloudWatcher ObservingConditions: `REGISTERED / CONFIGURED / SKYQUALITY READ PENDING`;
-- CloudWatcher CSV SQM field: `NOT AVAILABLE` nel canale CSV osservato;
+- ASCOM CloudWatcher ObservingConditions: `REACHABLE / SKYQUALITY=0 INVALID`;
+- CloudWatcher CSV SQM field: `NOT AVAILABLE` nel canale osservato;
 - CloudWatcher legacy COM: `REGISTERED / PASSIVE SURFACE NON-DESCRIPTIVE`;
 - CloudWatcher direct serial protocol: `FALLBACK / NOT PROBED`;
 - SQM dedicato: `NOT AVAILABLE`;
-- source SQM complessiva: `CANDIDATE SOURCE VERIFIED; VALUE NOT YET VERIFIED`.
+- source SQM complessiva: `NO VALID RUNTIME VALUE VERIFIED`.
 
 ## 5. Contratto realtime
 
@@ -162,16 +146,14 @@ sqm_source
 
 Regole:
 
-1. valore numerico solo da misura strumentale verificata;
-2. source assente/non implementata -> `null`, quality `UNKNOWN`;
-3. campione oltre freshness -> `STALE`;
-4. per il driver corrente `MaxSecsDiff=60` è evidence di configurazione, non ancora automaticamente la freshness canonica DSG;
-5. freshness DSG viene fissata dopo verifica di `TimeSinceLastUpdate('SkyQuality')` e cadence reale;
-6. timestamp projection generale non sostituisce timestamp SQM;
+1. valore numerico solo da misura strumentale verificata e plausibile;
+2. `0` dal driver corrente non viene pubblicato come SQM reale;
+3. source assente/non valida -> `null`, quality `UNKNOWN`;
+4. campione oltre freshness -> `STALE`;
+5. `MaxSecsDiff=60` è evidence di configurazione, non automaticamente freshness canonica DSG;
+6. freshness DSG richiede evidence runtime affidabile;
 7. il portale visualizza assenza/staleness senza inventare valori;
 8. SQM non modifica Safety Authority o interlock.
-
-Nel runtime corrente `sqm_mag_arcsec2` resta `null` fino al probe SkyQuality.
 
 ## 6. Contratto storico scientifico
 
@@ -190,7 +172,7 @@ sqm.source
 sqm.quality
 ```
 
-Le statistiche usano solo campioni validi e temporalmente attribuibili; la provenance deve essere preservata. Una sessione priva di SQM resta valida e non riceve valori sintetici.
+Il campione `SkyQuality = 0` del 2026-08-30 **non entra** nelle statistiche scientifiche.
 
 ## 7. Boundary e responsabilità
 
@@ -202,7 +184,7 @@ Vietato: analytics pesanti, inferenza SQM da proxy, modifica configurazione weat
 
 ### Safety boundary
 
-`ASCOM.CloudWatcher.SafetyMonitor` è un'interfaccia separata e non viene usata da BKL-029. Nessun test SQM deve invocarla o alterarne comportamento/stato.
+`ASCOM.CloudWatcher.SafetyMonitor` è un'interfaccia separata e non viene usata da BKL-029.
 
 ### Repository / Scientific Data Engine
 
@@ -210,105 +192,94 @@ Responsabile di schema/provenance versionati, associazione campioni-sessione, st
 
 ## 8. Acceptance gates BKL-029
 
-- **G1 Source discovery:** `NEAR COMPLETE` — source ASCOM reale identificata/configurata; manca una lettura SkyQuality runtime riuscita;
-- **G2 Realtime contract:** `BLOCKED ON RUNTIME SAMPLE` — schema definito, source candidate disponibile;
-- **G3 Historical contract:** `BLOCKED` — nessun campione SQM reale ancora acquisito;
-- **G4 Regression:** non eseguito per runtime SQM perché l'adapter production non è ancora implementato;
+- **G1 Source discovery:** `BLOCKED ON VALID VALUE` — driver/property identificati e raggiungibili, ma il campione `0` non è accettabile come misura SQM;
+- **G2 Realtime contract:** `BLOCKED` — nessun valore runtime valido;
+- **G3 Historical contract:** `BLOCKED` — nessun campione SQM valido;
+- **G4 Regression:** non eseguito per runtime production SQM;
 - **G5 CI/docs:** da verificare sui commit; nessun successo assunto senza evidence GitHub reale;
-- **G6 Runtime OAT:** `BLOCKED ON RUNTIME SAMPLE`.
+- **G6 Runtime OAT:** `BLOCKED ON VALID VALUE`.
 
 ## 9. Evidence runtime 2026-08-30
 
 ### 9.1 Inventory generale SQM
 
 ```text
-Computer: EAGLE30154
-ASCOM OBSERVING CONDITIONS CANDIDATES: none found among the initial candidate ProgIDs
-CLOUDWATCHER SQM CANDIDATE FIELDS: none found
-PNP / SERIAL CANDIDATES: no named SQM candidates found via PnP
-SOURCE DISPOSITION: NO_VERIFIED_SOURCE_FOUND (superseded for ASCOM discovery by later evidence)
 Evidence: C:\DigitalStarGate\TelemetryEvidence\sqm-source-inventory-20260830-181223\
+Disposition at time: NO_VERIFIED_SOURCE_FOUND
 ```
 
 ### 9.2 CloudWatcher passive capability inventory
 
 ```text
-AAG CloudWatcher v.9.5.0 / 9.5.0 / Lunático Astronomía
-AAG_WeatherCenter v2.30
-DISPOSITION: NO_PASSIVE_SQM_OR_FIRMWARE_METADATA_FOUND
 Evidence: C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-sqm-capability-20260830-182202\
+Disposition: NO_PASSIVE_SQM_OR_FIRMWARE_METADATA_FOUND
 ```
 
 ### 9.3 Legacy COM passive surface
 
 ```text
-ProgID: AAG_CloudWatcher.CloudWatcher
-CLSID: {F8D7A9ED-D0E2-45F8-BAC6-88DBB322475B}
-DISPOSITION: LEGACY_COM_REGISTERED_NO_SQM_TERM_FOUND_IN_PASSIVE_METADATA
 Evidence: C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-legacy-com-surface-20260830-183012\
+Disposition: LEGACY_COM_REGISTERED_NO_SQM_TERM_FOUND_IN_PASSIVE_METADATA
 ```
 
 ### 9.4 Hardware / firmware local metadata inventory
 
 ```text
-AAG_CloudWatcher.exe: file_version=9.05 product_version=9.05
-HARDWARE / FIRMWARE METADATA entries: 0
-SQM METADATA entries: 0
-DISPOSITION: NO_LOCAL_HARDWARE_FIRMWARE_OR_SQM_METADATA_FOUND
 Evidence: C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-hardware-firmware-inventory-20260830-183508\
+Disposition: NO_LOCAL_HARDWARE_FIRMWARE_OR_SQM_METADATA_FOUND
 ```
 
 ### 9.5 Serial protocol preflight
 
 ```text
-Win32_SerialPort candidates: none enumerated
-AAG_CloudWatcher.exe: running
-ASCOM.CloudWatcher.Server.exe: running
-Port opened: False
-DISPOSITION: PREFLIGHT_ONLY_NO_SERIAL_ACCESS
 Evidence: C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-sqm-protocol-probe-20260830-190848\
+Disposition: PREFLIGHT_ONLY_NO_SERIAL_ACCESS
 ```
 
 ### 9.6 ASCOM surface inventory
 
 ```text
-ASCOM.CloudWatcher.ObservingConditions: registered
-CLSID: {efef952b-d34c-4d25-bdbf-0a0a58a2414e}
-ASCOM.CloudWatcher.SafetyMonitor: separately registered
-ASCOM.CloudWatcher.Server.exe: running
-IObservingConditions / IObservingConditionsV2: registered interfaces
 Evidence: C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-ascom-surface-20260830-192856\
+ASCOM.CloudWatcher.ObservingConditions registered
+ASCOM.CloudWatcher.SafetyMonitor separately registered
 ```
 
 ### 9.7 ASCOM SkyQuality preflight
 
 ```text
-ProgID: ASCOM.CloudWatcher.ObservingConditions
-Driver: Lunatico CloudWatcher Observing Conditions
-DataFile: C:\Users\PrimaLuceLab\Documents\aag_json.dat
-MaxSecsDiff: 60
-AAG_CloudWatcher.exe: running
-ASCOM.CloudWatcher.Server.exe: running
-ASCOM object created: False
-Serial access: False
-DISPOSITION: PREFLIGHT_ONLY_NO_ASCOM_ACTIVATION
 Evidence: C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-ascom-skyquality-20260830-193734\
+Disposition: PREFLIGHT_ONLY_NO_ASCOM_ACTIVATION
+```
+
+### 9.8 ASCOM SkyQuality runtime probe
+
+```text
+Evidence: C:\DigitalStarGate\TelemetryEvidence\cloudwatcher-ascom-skyquality-20260830-194200\
+Name: CloudWatcher ObsCond
+DriverVersion: 1.1
+InterfaceVersion: 1
+Connected before: False
+Connected after connect: True
+Connection restored after probe: True
+SkyQuality read: True
+SkyQuality: 0
+SensorDescription(SkyQuality): unavailable/empty
+TimeSinceLastUpdate(SkyQuality): unavailable/empty
+Disposition: ASCOM_SKYQUALITY_READ_SUCCEEDED_REQUIRES_PLAUSIBILITY_AND_FRESHNESS_REVIEW
+DSG disposition: INVALID_SQM_SAMPLE_ZERO
 ```
 
 ## 10. Prossimo passo governato
 
-È autorizzato un singolo probe read-only via `ASCOM.CloudWatcher.ObservingConditions` usando `scripts/telemetry/Invoke-CloudWatcherAscomSkyQualityProbe.ps1 -ExecuteProbe`.
+Non implementare ancora l'adapter realtime e non avviare BKL-030.
 
-Il probe deve:
+Il prossimo passo deve essere **passivo sul data path ASCOM**: ispezionare `C:\Users\PrimaLuceLab\Documents\aag_json.dat` e la configurazione/metadata del driver CloudWatcher per determinare se il file contiene un campo sky-quality/SQM/mpsas e quale semantica abbia il valore `0` restituito dal driver.
 
-1. istanziare esclusivamente il ProgID ObservingConditions;
-2. non istanziare `ASCOM.CloudWatcher.SafetyMonitor`;
-3. usare la property standard `Connected` solo per la durata necessaria, ripristinando lo stato se aperto dal probe;
-4. leggere `SkyQuality` una sola volta;
-5. leggere, se implementati, `SensorDescription('SkyQuality')` e `TimeSinceLastUpdate('SkyQuality')`;
-6. non aprire direttamente porte seriali;
-7. non cambiare configurazione, soglie, relay, firmware o Safety state;
-8. salvare evidence JSON/TXT;
-9. non promuovere automaticamente il valore in produzione: prima devono essere validate plausibilità, provenance e freshness.
+Regole:
 
-Se il probe restituisce un valore numerico plausibile e freshness coerente, G1 può essere chiuso e si può procedere a G2/G6. Se `SkyQuality` non è implementato o risulta stale/non plausibile, la source resta non accettata e si rivaluta la fallback native protocol path.
+1. nessuna modifica del file `aag_json.dat`;
+2. nessun cambio di configurazione CloudWatcher/ASCOM;
+3. nessun accesso seriale diretto;
+4. nessun utilizzo di `0` come valore scientifico;
+5. se il data file contiene un valore SQM reale e plausibile, correlare esattamente campo -> driver -> property ASCOM;
+6. se il campo non esiste o è sempre zero/default, la source ASCOM non passa G1 e si valuta la fallback protocol path o una source SQM dedicata.
