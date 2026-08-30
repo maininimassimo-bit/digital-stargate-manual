@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="../styles/roadmap.css">
 
-<div class="dsg-roadmap-app" data-roadmap-source="../data/roadmap.json?v=20260826-c04-closure">
+<div class="dsg-roadmap-app" data-roadmap-source="../data/roadmap.json?v=20260830-global-summary">
   <header class="dsg-roadmap-hero dsg-roadmap-center-hero">
     <div>
       <span class="dsg-roadmap-kicker">DIGITAL STARGATE · ROADMAP CENTER</span>
@@ -33,7 +33,7 @@
     <div class="dsg-roadmap-section-heading">
       <span class="dsg-roadmap-kicker">AVANZAMENTO COMPLESSIVO</span>
       <h2 id="roadmap-overview-title">Completato e ancora da realizzare</h2>
-      <p>Riepilogo calcolato automaticamente dagli Architecture Package presenti nel registro dinamico.</p>
+      <p>Riepilogo globale derivato dalla projection governata della roadmap, includendo tutti gli elementi versionati.</p>
     </div>
     <div class="dsg-roadmap-overview__content" data-roadmap-overview>
       <p>Calcolo dell’avanzamento in corso…</p>
