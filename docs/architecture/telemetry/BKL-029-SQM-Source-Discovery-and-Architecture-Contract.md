@@ -4,11 +4,11 @@
 |---|---|
 | Identificativo | BKL-029 |
 | Capability | SQM Sky Quality Telemetry & Scientific History |
-| Stato | **In Progress — architecture contract established; runtime source verification pending** |
+| Stato | **Blocked — G1 source discovery completed; no verified runtime SQM source found on EAGLE30154** |
 | Data | 2026-08-30 |
 | Autorità | Digital StarGate Architecture Office |
 | Dipendenze | AP-004; AP-013; AP-014; Observatory Status; scientific session catalog |
-| Runtime effect | None — documentation/architecture only |
+| Runtime effect | None — discovery/documentation only; no device configuration changes |
 
 ## 1. Scopo
 
@@ -22,11 +22,19 @@ Alla baseline `main` verificata all'avvio di BKL-029:
 
 - `scripts/telemetry/Export-NinaObservatoryStatus.ps1` espone già `weather.sqm_mag_arcsec2`, ma lo imposta esplicitamente a `$null`;
 - il repository contiene evidence e session manifest relativi a CloudWatcher, ma non contiene evidence sufficiente a dimostrare che l'unità fisica installata esponga una misura SQM calibrata;
-- non è presente nel repository evidence di una istanza ASCOM `ObservingConditions` configurata che implementi `SkyQuality`;
-- non è presente evidence di un SQM dedicato installato e leggibile dall'EAGLE;
+- non era presente nel repository evidence di una istanza ASCOM `ObservingConditions` configurata che implementasse `SkyQuality`;
+- non era presente evidence di un SQM dedicato installato e leggibile dall'EAGLE;
 - `SkyQuality`, `brightness`, cloud cover, sky temperature e altri proxy non devono essere confusi tra loro.
 
-Conclusione: **nessuna source SQM runtime è ancora VERIFIED**. Fino alla verifica, il valore operativo deve restare `null` e la semantica SQM deve degradare a `UNKNOWN`/`STALE` secondo il contratto sotto.
+Il runtime inventory eseguito su `EAGLE30154` il 2026-08-30 ha poi confermato:
+
+- nessuna istanza ASCOM `ObservingConditions` rilevata;
+- nessun campo SQM candidato rilevato nell'header/dati CloudWatcher osservati;
+- nessun device SQM candidato rilevato via PnP/serial inventory;
+- disposizione finale dello script: `NO_VERIFIED_SOURCE_FOUND`;
+- bundle evidence runtime: `C:\DigitalStarGate\TelemetryEvidence\sqm-source-inventory-20260830-181223\`.
+
+Conclusione corrente: **nessuna source SQM runtime è VERIFIED**. Il valore operativo deve restare `null`; non è ammessa alcuna stima sostitutiva. BKL-029 è bloccato prima di G2 finché non viene resa disponibile una sorgente strumentale reale o installata una nuova sorgente governata.
 
 ## 3. Candidate source discovery
 
@@ -34,7 +42,9 @@ Conclusione: **nessuna source SQM runtime è ancora VERIFIED**. Fino alla verifi
 
 ASCOM definisce la proprietà read-only `ObservingConditions.SkyQuality` come sky quality misurata in magnitudini per arcsec². Questa interfaccia è semanticamente aderente al campo canonico Digital StarGate e consente un collector leggero sull'EAGLE.
 
-La sola esistenza dello standard non prova che il driver installato a Manciano implementi la proprietà. Prima dell'uso devono essere verificati almeno:
+L'inventory del 2026-08-30 non ha trovato istanze `ObservingConditions` registrate sull'EAGLE. Pertanto questa candidate è attualmente `NOT AVAILABLE` nel runtime osservato.
+
+Se in futuro viene installato/configurato un driver, prima dell'uso devono essere verificati almeno:
 
 1. ProgID/driver effettivamente configurato sull'EAGLE;
 2. connessione read-only riuscita;
@@ -49,11 +59,13 @@ Riferimento esterno di capability, non evidence runtime: <https://ascom-standard
 
 La documentazione Lunatico corrente descrive CloudWatcher con sensore sky-quality grade e misura in mpsas; la documentazione firmware specifica inoltre che unità aggiornate con il sensore sky-quality possono produrre letture di sky quality.
 
-Questa capability **non autorizza alcuna inferenza** sull'unità installata. Sono richieste evidence locali di modello/revisione, firmware, canale dati e campo SQM effettivamente prodotto.
+L'inventory runtime del 2026-08-30 non ha trovato nell'output CloudWatcher osservato alcun campo identificabile come SQM/sky quality/mpsas. Questa evidence non dimostra l'assenza fisica del sensore nell'hardware, ma dimostra che **l'attuale canale CSV osservato non espone una misura SQM utilizzabile**.
 
-Ordine di preferenza, se CloudWatcher risulta compatibile:
+Questa capability esterna non autorizza alcuna inferenza sull'unità installata. Per riaprire la candidate sono richieste evidence locali di modello/revisione, firmware, canale dati e campo SQM effettivamente prodotto.
 
-1. ASCOM ObservingConditions `SkyQuality` già configurato e verificato;
+Ordine di preferenza, se CloudWatcher risulta compatibile in futuro:
+
+1. ASCOM ObservingConditions `SkyQuality` verificato;
 2. interfaccia nativa Lunatico read-only/documentata, se necessaria e verificata;
 3. nessun parsing di brightness legacy come sostituto SQM.
 
@@ -65,7 +77,7 @@ Riferimenti esterni di capability, non evidence runtime:
 
 ### 3.3 SQM dedicato — candidate alternativa
 
-Un misuratore SQM dedicato può essere adottato se fisicamente presente e dotato di interfaccia read-only verificabile. Il repository corrente non documenta una simile unità installata; pertanto questa opzione resta `NOT VERIFIED`.
+Un misuratore SQM dedicato può essere adottato se fisicamente presente e dotato di interfaccia read-only verificabile. L'inventory PnP/seriale del 2026-08-30 non ha rilevato un device nominato o identificabile come SQM/Unihedron/sky-quality. Questa candidate è quindi attualmente `NOT AVAILABLE` nel runtime osservato.
 
 ### 3.4 Proxy esplicitamente vietati
 
@@ -92,7 +104,14 @@ Una source può passare a `VERIFIED` solo con evidence runtime riproducibile che
 - assenza di command path operativo;
 - disposizione finale `VERIFIED`, `REJECTED` o `NOT AVAILABLE`.
 
-La preferenza architetturale è riusare una source standard read-only già installata; non si introduce una nuova dipendenza hardware o software solo per evitare la discovery.
+Per il runtime inventory del 2026-08-30 la disposizione governata è:
+
+- ASCOM ObservingConditions: `NOT AVAILABLE`;
+- CloudWatcher CSV SQM field: `NOT AVAILABLE` nel canale osservato;
+- SQM dedicato: `NOT AVAILABLE` nell'inventory osservato;
+- source SQM complessiva: `NO_VERIFIED_SOURCE_FOUND`.
+
+La preferenza architetturale resta riusare una source standard read-only già installata; una nuova dipendenza hardware/software richiede decisione esplicita e nuovo evidence cycle.
 
 ## 5. Contratto realtime
 
@@ -121,6 +140,8 @@ Regole:
 5. timestamp della projection generale non sostituisce il timestamp del campione SQM quando le source differiscono;
 6. il portale deve visualizzare assenza/staleness senza inventare un valore;
 7. SQM non modifica `safety.observed_state`, interlock o decisioni della Safety Authority.
+
+Nel runtime corrente, non essendo disponibile una source verificata, l'unico comportamento conforme è mantenere `sqm_mag_arcsec2 = null` e non avviare G2.
 
 ## 6. Contratto storico scientifico
 
@@ -179,22 +200,50 @@ Responsabile di:
 
 BKL-029 non può essere marcato `Done` finché non esistono evidence reali per tutti i gate applicabili:
 
-- **G1 Source discovery:** almeno una source SQM `VERIFIED` oppure decisione esplicita di blocco se nessuna source esiste;
-- **G2 Realtime contract:** `weather.sqm_mag_arcsec2` e provenance/freshness valorizzati da source reale, con test UNKNOWN/STALE;
-- **G3 Historical contract:** statistiche start/end/min/max/mean/median, valid samples, temporal coverage, source e quality prodotte da campioni reali;
-- **G4 Regression:** telemetry, session promotion/catalog e safety boundary senza regressioni;
-- **G5 CI/docs:** gate applicabili e documentazione verdi con evidence GitHub reale;
-- **G6 Runtime OAT:** evidence su EAGLE per cadence, freshness, disconnect/stale e almeno una sessione/campione scientifico correlabile.
+- **G1 Source discovery:** **COMPLETED WITH BLOCK** — inventory read-only eseguito su `EAGLE30154`; nessuna source SQM verificata trovata; disposition `NO_VERIFIED_SOURCE_FOUND`;
+- **G2 Realtime contract:** `BLOCKED` — nessuna source reale da collegare a `weather.sqm_mag_arcsec2`;
+- **G3 Historical contract:** `BLOCKED` — nessun campione SQM reale disponibile;
+- **G4 Regression:** non eseguito per implementazione runtime SQM, perché nessuna implementazione è stata autorizzata dopo G1;
+- **G5 CI/docs:** da verificare sul commit che registra questa evidence; nessun successo viene assunto senza GitHub evidence reale;
+- **G6 Runtime OAT:** `BLOCKED` — richiede una source strumentale reale.
 
-## 9. Prossimo passo operativo governato
+## 9. Evidenza runtime 2026-08-30
 
-Eseguire su EAGLE una **SQM source inventory read-only** che:
+Comando eseguito sull'EAGLE:
 
-1. enumera le istanze ASCOM ObservingConditions configurate senza modificarle;
-2. verifica se la property `SkyQuality` è implementata e leggibile;
-3. identifica versione/model/firmware CloudWatcher e l'eventuale campo SQM nativo senza cambiare configurazione;
-4. rileva eventuali device SQM dedicati già presenti;
-5. cattura campioni/timestamp/cadence solo dalla prima source reale verificabile;
-6. produce un evidence bundle senza secret.
+```powershell
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass `
+  -File .\scripts\telemetry\Inspect-SqmTelemetrySources.ps1
+```
 
-Solo dopo G1 si implementa l'adapter realtime. BKL-030 resta fuori scope e non deve iniziare prima della chiusura BKL-029.
+Esito osservato:
+
+```text
+Computer: EAGLE30154
+ASCOM probe requested: False
+ASCOM OBSERVING CONDITIONS CANDIDATES: none found
+CLOUDWATCHER SQM CANDIDATE FIELDS: none found
+PNP / SERIAL CANDIDATES: no named SQM candidates found via PnP
+SOURCE DISPOSITION: NO_VERIFIED_SOURCE_FOUND
+Evidence JSON: C:\DigitalStarGate\TelemetryEvidence\sqm-source-inventory-20260830-181223\sqm-source-inventory.json
+Evidence TXT : C:\DigitalStarGate\TelemetryEvidence\sqm-source-inventory-20260830-181223\sqm-source-inventory.txt
+SQM SOURCE INVENTORY RESULT: PASS (inventory/probe status recorded; not BKL-029 acceptance)
+```
+
+Lo script è stato eseguito senza `-ProbeAscomSkyQuality`; pertanto non è stata aperta alcuna connessione device ASCOM durante questo inventory.
+
+## 10. Prossimo passo governato
+
+BKL-029 resta bloccato fino a una decisione esplicita su una delle seguenti opzioni:
+
+1. verificare modello/revisione/firmware del CloudWatcher installato per stabilire se possiede realmente il sensore sky-quality ma non lo espone nel CSV corrente;
+2. verificare se esiste un'interfaccia Lunatico nativa read-only che espone SQM sull'unità installata;
+3. installare/configurare una source ASCOM ObservingConditions che fornisca `SkyQuality`, se supportata dal dispositivo reale;
+4. introdurre un SQM dedicato con interfaccia read-only governata.
+
+Fino a quella decisione:
+
+- `weather.sqm_mag_arcsec2` resta `null`;
+- nessun proxy viene introdotto;
+- nessun adapter realtime SQM viene implementato;
+- BKL-030 non viene avviato per aggirare questo gate.
