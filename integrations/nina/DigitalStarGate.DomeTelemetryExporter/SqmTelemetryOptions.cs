@@ -5,6 +5,10 @@ using System.Text.Json;
 namespace DigitalStarGate.Nina.DomeTelemetryExporter;
 
 internal sealed class SqmTelemetryOptions {
+    private static readonly JsonSerializerOptions SerializerOptions = new() {
+        PropertyNameCaseInsensitive = true
+    };
+
     public const string DefaultEndpoint = "http://meteo.deeplab.space:8080/cgi-bin/cgiLastData";
     public const int DefaultPollSeconds = 30;
     public const int DefaultFreshnessSeconds = 120;
@@ -22,9 +26,7 @@ internal sealed class SqmTelemetryOptions {
 
         try {
             var json = File.ReadAllText(path);
-            var configured = JsonSerializer.Deserialize<SqmTelemetryOptions>(json, new JsonSerializerOptions {
-                PropertyNameCaseInsensitive = true
-            });
+            var configured = JsonSerializer.Deserialize<SqmTelemetryOptions>(json, SerializerOptions);
             if (configured == null) return InvalidConfiguration("CONFIG_EMPTY");
             if (!Uri.TryCreate(configured.Endpoint, UriKind.Absolute, out var endpoint) ||
                 (endpoint.Scheme != Uri.UriSchemeHttp && endpoint.Scheme != Uri.UriSchemeHttps)) {
