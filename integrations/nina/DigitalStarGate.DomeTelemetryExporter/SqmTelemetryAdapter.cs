@@ -8,22 +8,21 @@ using System.Threading;
 namespace DigitalStarGate.Nina.DomeTelemetryExporter;
 
 internal sealed class SqmTelemetryAdapter : IDisposable {
-    private const string DefaultEndpoint = "http://meteo.deeplab.space:8080/cgi-bin/cgiLastData";
-    private const int PollMilliseconds = 30000;
-    private const int FreshnessSeconds = 120;
-    private const int HttpTimeoutSeconds = 5;
-
     private readonly object stateLock = new();
     private readonly ManualResetEvent stopEvent = new(false);
     private readonly Thread worker;
     private readonly HttpClient httpClient;
     private readonly Uri endpoint;
+    private readonly SqmTelemetryOptions options;
     private Dictionary<string, object> latest;
     private bool disposed;
 
-    public SqmTelemetryAdapter(string endpointUrl = DefaultEndpoint) {
-        endpoint = new Uri(endpointUrl, UriKind.Absolute);
-        httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(HttpTimeoutSeconds) };
+    public SqmTelemetryAdapter() : this(SqmTelemetryOptions.Load()) { }
+
+    internal SqmTelemetryAdapter(SqmTelemetryOptions configuredOptions) {
+        options = configuredOptions ?? new SqmTelemetryOptions();
+        endpoint = new Uri(options.Endpoint, UriKind.Absolute);
+        httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(options.HttpTimeoutSeconds) };
         latest = BuildUnknown("SQM_SOURCE_INITIALIZING", null, null, null, null);
         worker = new Thread(PollLoop) {
             IsBackground = true,
@@ -42,7 +41,7 @@ internal sealed class SqmTelemetryAdapter : IDisposable {
         if (disposed) return;
         disposed = true;
         stopEvent.Set();
-        try { worker.Join(TimeSpan.FromSeconds(HttpTimeoutSeconds + 1)); } catch { }
+        try { worker.Join(TimeSpan.FromSeconds(options.HttpTimeoutSeconds + 1)); } catch { }
         httpClient.Dispose();
         stopEvent.Dispose();
     }
@@ -55,7 +54,7 @@ internal sealed class SqmTelemetryAdapter : IDisposable {
             } catch {
                 SetLatest(BuildUnknown("SQM_HTTP_READ_FAILED", null, null, null, null));
             }
-            stopEvent.WaitOne(PollMilliseconds);
+            stopEvent.WaitOne(TimeSpan.FromSeconds(options.PollSeconds));
         }
     }
 
@@ -86,11 +85,12 @@ internal sealed class SqmTelemetryAdapter : IDisposable {
 
         var serial = ParseCwInfoPart(cwinfo, "Serial:");
         var firmware = ParseCwInfoPart(cwinfo, "FW:");
-        var freshUntilUtc = observedAtUtc.AddSeconds(FreshnessSeconds);
+        var freshUntilUtc = observedAtUtc.AddSeconds(options.FreshnessSeconds);
         if (receivedAtUtc > freshUntilUtc) {
             return BuildService(true, "STALE", "SQM_SOURCE_STALE", new Dictionary<string, object> {
                 { "source", "AAG CloudWatcher SOLO HTTP / lightmpsas" },
                 { "endpoint", endpoint.ToString() },
+                { "configurationSource", options.ConfigurationSource },
                 { "sqmMagArcsec2", null },
                 { "observedAtUtc", observedAtUtc.ToString("o") },
                 { "freshUntilUtc", freshUntilUtc.ToString("o") },
@@ -103,6 +103,7 @@ internal sealed class SqmTelemetryAdapter : IDisposable {
         return BuildService(true, "AVAILABLE", null, new Dictionary<string, object> {
             { "source", "AAG CloudWatcher SOLO HTTP / lightmpsas" },
             { "endpoint", endpoint.ToString() },
+            { "configurationSource", options.ConfigurationSource },
             { "sqmMagArcsec2", mpsas },
             { "observedAtUtc", observedAtUtc.ToString("o") },
             { "freshUntilUtc", freshUntilUtc.ToString("o") },
@@ -118,6 +119,7 @@ internal sealed class SqmTelemetryAdapter : IDisposable {
         return BuildService(null, "UNKNOWN", reason, new Dictionary<string, object> {
             { "source", "AAG CloudWatcher SOLO HTTP / lightmpsas" },
             { "endpoint", endpoint.ToString() },
+            { "configurationSource", options.ConfigurationSource },
             { "sqmMagArcsec2", null },
             { "observedAtUtc", observedAtUtc?.ToString("o") },
             { "freshUntilUtc", null },
