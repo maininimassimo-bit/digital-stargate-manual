@@ -4,15 +4,17 @@
 |---|---|
 | Stato | Approved for planning |
 | Scope | Digital StarGate future capabilities before BKL-015 implementation |
-| Decision | Tutte le capability elencate sono approvate per inserimento nella roadmap; l'ordine di implementazione resta governato dal backlog |
+| Decision | Tutte le capability BKL-029–BKL-046 sono approvate per inserimento nella roadmap; l'ordine di implementazione resta governato dal backlog |
 
 ## 1. Principi architetturali
 
 - Il portale, l'AI e gli analytics sono read-only rispetto agli apparati salvo futura introduzione di un command broker governato.
 - La Safety Authority resta fisica/locale e non viene sostituita da score, AI o dashboard.
-- Telemetria realtime, storico scientifico e knowledge graph devono restare semanticamente distinti ma correlabili.
+- Telemetria realtime, storico scientifico, processing provenance e knowledge graph devono restare semanticamente distinti ma correlabili.
 - Ogni assessment AI deve essere spiegabile, indicare evidence e confidence e distinguere osservazione, inferenza e raccomandazione.
 - I collector sull'EAGLE devono essere leggeri; reasoning, analytics storici e AI non devono gravare sul computer operativo.
+- La post-produzione PixInsight deve produrre provenance riproducibile senza rendere obbligatorio il trasferimento delle immagini verso servizi AI esterni.
+- L'AI di post-processing parte in modalità advisory: propone workflow e parametri ma non modifica automaticamente l'immagine senza approvazione esplicita dell'utente.
 
 ## 2. BKL-029 — SQM Sky Quality Telemetry & Scientific History
 
@@ -101,11 +103,11 @@ Rappresentazione visuale e navigabile di asset, dipendenze, stato realtime, sour
 
 ## 7. BKL-034 — Scientific Image Gallery evoluta
 
-Immagini finali collegate a sessioni sorgenti, target, OTA, camera, filtri, integrazione, seeing/FWHM, SQM, condizioni meteo, processing e report.
+Immagini finali collegate a sessioni sorgenti, target, OTA, camera, filtri, integrazione, seeing/FWHM, SQM, condizioni meteo, processing, PixInsight workflow provenance e report.
 
 ## 8. BKL-035 — Target Knowledge Base
 
-Scheda per ogni oggetto con tutte le osservazioni Digital StarGate, configurazioni, risultati, SQM, qualità, immagini, sessioni, problemi e benchmark storici.
+Scheda per ogni oggetto con tutte le osservazioni Digital StarGate, configurazioni, risultati, SQM, qualità, immagini, sessioni, processing workflow, problemi e benchmark storici.
 
 ## 9. BKL-036 — Observatory Health Score
 
@@ -113,7 +115,7 @@ Indicatore operativo spiegabile basato su freshness e qualità di telemetria, EA
 
 ## 10. BKL-037 — Session Comparison & Benchmarking
 
-Confronto fra sessioni per FWHM, guiding RMS, SQM, background, integrazione, frame validi/scartati, temperatura, meteo, errori e qualità finale.
+Confronto fra sessioni per FWHM, guiding RMS, SQM, background, integrazione, frame validi/scartati, temperatura, meteo, errori, workflow di post-produzione e qualità finale.
 
 ## 11. BKL-038 — Anomaly & Trend Center
 
@@ -129,7 +131,7 @@ Timeline sincronizzata N.I.N.A., PHD2, CloudWatcher, SQM, Power, Network, Safety
 
 ## 14. BKL-041 — Scientific Data Quality Score
 
-Indicatore separato dalla Safety per completezza metadata, lineage, frame, rejection, guiding, FWHM, background, SQM coverage e qualità scientifica della sessione.
+Indicatore separato dalla Safety per completezza metadata, lineage, frame, rejection, guiding, FWHM, background, SQM coverage, processing provenance e qualità scientifica della sessione.
 
 ## 15. BKL-042 — AI Observatory Assistant
 
@@ -169,9 +171,94 @@ SLI/SLO e metriche: availability della telemetria, session completion rate, faul
 
 ## 17. BKL-044 — Knowledge Graph / AI Evidence Contract
 
-Estensione della foundation BKL-015 per garantire che AP, ADR, componenti, asset, sessioni, target, incident, evidence, telemetria e recommendation AI siano collegabili con provenance e identificativi stabili.
+Estensione della foundation BKL-015 per garantire che AP, ADR, componenti, asset, sessioni, target, incident, evidence, telemetria, workflow PixInsight e recommendation AI siano collegabili con provenance e identificativi stabili.
 
-## 18. Ordine proposto
+## 18. BKL-045 — PixInsight Workflow Provenance Plugin
+
+**Priorità proposta: P2, architettura da definire fin dalla foundation Knowledge Graph.**
+
+### Obiettivo
+
+Realizzare un'integrazione nativa per PixInsight che registri e storicizzi il workflow di post-produzione usato per trasformare i dati scientifici acquisiti nell'immagine finale, collegandolo alla sessione Digital StarGate di origine.
+
+### Assessment architetturale iniziale
+
+La fase di design deve scegliere il meccanismo di estensione PixInsight più appropriato e supportabile — modulo/plugin nativo o package script governato — senza assumere a priori una tecnologia specifica. La scelta deve privilegiare stabilità, compatibilità con gli aggiornamenti PixInsight e possibilità di catturare provenance in modo affidabile.
+
+### Provenance minima da acquisire
+
+- `processing_workflow_id` e versione schema;
+- sessione/i scientifiche e file/input lineage;
+- versione PixInsight e, quando disponibili, versioni di moduli/script coinvolti;
+- processo/strumento utilizzato e ordine di esecuzione;
+- parametri significativi del processo;
+- timestamp e durata;
+- immagini/input/output logici e loro identificativi/hash quando sostenibile;
+- maschere, preview o reference image usate quando rilevanti e tecnicamente osservabili;
+- trasformazioni lineari/non lineari e milestone del workflow;
+- processi/plugin terzi dichiarati nel workflow;
+- note manuali dell'astrofotografo per operazioni non catturabili automaticamente;
+- metriche immagine pre/post processo quando disponibili e non invasive.
+
+### Modello di persistenza
+
+La provenance deve essere salvata in un formato machine-readable versionato, preferibilmente come sidecar governato e collegabile al Knowledge Graph. Quando tecnicamente sicuro e compatibile, potrà essere duplicata una reference minima nei metadata dell'immagine, ma il file immagine non deve diventare l'unica source of truth.
+
+Il modello deve consentire:
+
+```text
+Scientific Session
+   -> calibrated/integrated data
+   -> Processing Workflow
+       -> Processing Step 1
+       -> Processing Step 2
+       -> ...
+   -> Final Image
+```
+
+### Requisiti
+
+- nessun lock-in su una singola versione PixInsight;
+- possibilità di registrare workflow parzialmente manuali;
+- distinzione fra processo realmente osservato, processo dichiarato manualmente e processo suggerito dall'AI;
+- correlazione con SQM, setup, session quality e target;
+- possibilità di confrontare workflow diversi applicati allo stesso target/dataset;
+- export/import di un workflow quando tecnicamente riproducibile;
+- privacy/local-first per immagini e dati voluminosi.
+
+## 19. BKL-046 — AI Post-Processing Assistant for PixInsight
+
+**Dipendenze: BKL-015, BKL-044 e BKL-045.**
+
+### Obiettivo
+
+Integrare un assistente AI specializzato nella post-produzione che utilizzi la provenance PixInsight, le caratteristiche dell'immagine, il target, il setup, SQM/condizioni della notte e lo storico Digital StarGate per ottimizzare il workflow di elaborazione.
+
+### Modalità iniziale
+
+`ADVISORY ONLY`: l'assistente propone il prossimo processo, spiega perché, suggerisce intervalli di parametri e mostra evidence/comparazioni storiche. L'applicazione di un processo resta sotto controllo dell'utente.
+
+### Use case
+
+- analizzare lo stato corrente dell'immagine e suggerire il prossimo step;
+- proporre workflow diversi per broadband, LRGB, SHO e OSC;
+- confrontare il workflow corrente con elaborazioni storiche dello stesso target/setup;
+- identificare step ridondanti o potenzialmente distruttivi;
+- suggerire parameter range con motivazione, senza presentare il suggerimento come valore certo;
+- correlare problemi di processing con qualità dei dati sorgenti, SQM, guiding e background;
+- individuare quando un difetto non è correggibile in post-produzione perché deriva dall'acquisizione;
+- generare una processing checklist riproducibile;
+- documentare automaticamente decisioni, varianti e risultato finale;
+- confrontare versioni A/B della stessa immagine;
+- aiutare a ricostruire un workflow precedente;
+- proporre ottimizzazioni sulla base dei risultati storici Digital StarGate;
+- fornire un `confidence` e le evidence usate per ogni raccomandazione.
+
+### Boundary AI
+
+Nel primo rilascio l'AI non deve applicare autonomamente trasformazioni irreversibili. Un'eventuale modalità futura `ASSISTED APPLY` richiederà conferma umana per ogni gruppo di operazioni, rollback/checkpoint e registrazione completa della provenance.
+
+## 20. Ordine proposto
 
 ```text
 BKL-029 SQM integration
@@ -184,6 +271,8 @@ BKL-029 SQM integration
   -> BKL-038 Anomaly & Trend Center
   -> BKL-039 Equipment Performance Registry
   -> BKL-041 Scientific Data Quality Score
+  -> BKL-045 PixInsight Workflow Provenance Plugin
+  -> BKL-046 AI Post-Processing Assistant
   -> BKL-031 Observation Planner
   -> BKL-032 Session Readiness
   -> BKL-036 Observatory Health Score
@@ -194,4 +283,4 @@ BKL-029 SQM integration
   -> BKL-014 / AP-015 Scientific Knowledge Platform
 ```
 
-L'ordine potrà essere raffinato durante architecture review, ma BKL-029 è deliberatamente posto prima del Knowledge Graph perché SQM è già un gap reale della telemetria e diventerà un attributo fondamentale del modello scientifico futuro.
+L'ordine potrà essere raffinato durante architecture review. BKL-029 è deliberatamente posto prima del Knowledge Graph perché SQM è già un gap reale della telemetria e diventerà un attributo fondamentale del modello scientifico futuro. BKL-045 e BKL-046 sono invece modellati già dalla foundation per evitare che processing provenance e AI post-processing vengano aggiunti come silos separati in una fase successiva.
