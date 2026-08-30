@@ -26,11 +26,18 @@ function Get-SafePropertyValue {
 }
 
 function Find-RelevantFiles {
-    param([Parameter(Mandatory = $true)][string[]]$Roots)
+    param([Parameter(Mandatory = $true)][object[]]$Roots)
 
     $results = New-Object System.Collections.Generic.List[object]
-    foreach ($root in $Roots) {
-        if ([string]::IsNullOrWhiteSpace($root) -or -not (Test-Path -LiteralPath $root)) { continue }
+    $normalizedRoots = @($Roots | ForEach-Object {
+        if ($null -eq $_) { return }
+        $value = [string]$_
+        if ([string]::IsNullOrWhiteSpace($value)) { return }
+        $value
+    } | Sort-Object -Unique)
+
+    foreach ($root in $normalizedRoots) {
+        if (-not (Test-Path -LiteralPath $root)) { continue }
         try {
             Get-ChildItem -LiteralPath $root -File -Recurse -ErrorAction SilentlyContinue |
                 Where-Object {
@@ -49,12 +56,12 @@ function Find-RelevantFiles {
                         size_bytes = $_.Length
                         last_write_time_utc = $_.LastWriteTimeUtc.ToString('o')
                         file_version = $version
-                    })
+                    }) | Out-Null
                 }
         }
         catch { }
     }
-    return @($results)
+    return @($results.ToArray())
 }
 
 function Inspect-StructuredFile {
@@ -140,11 +147,17 @@ $searchRoots = @(
     (Join-Path $env:LOCALAPPDATA 'AAG_CloudWatcher')
 )
 
-$files = @(Find-RelevantFiles -Roots $searchRoots)
-$structuredCandidates = @($files | Where-Object { $_.extension -match '(?i)^\.(json|dat|txt|csv|ini|cfg|config|xml)$' })
+$files = @(Find-RelevantFiles -Roots @($searchRoots))
+$structuredCandidates = @($files | Where-Object {
+    $extensionProperty = $_.PSObject.Properties['extension']
+    $extensionProperty -and ([string]$extensionProperty.Value -match '(?i)^\.(json|dat|txt|csv|ini|cfg|config|xml)$')
+})
 $structuredEvidence = @()
 foreach ($candidate in $structuredCandidates) {
-    $structuredEvidence += Inspect-StructuredFile -Path $candidate.path
+    $pathProperty = $candidate.PSObject.Properties['path']
+    if ($pathProperty -and -not [string]::IsNullOrWhiteSpace([string]$pathProperty.Value)) {
+        $structuredEvidence += Inspect-StructuredFile -Path ([string]$pathProperty.Value)
+    }
 }
 
 $comRegistration = @()
@@ -158,8 +171,14 @@ foreach ($progId in @('AAG_CloudWatcher.CloudWatcher','ASCOM.AAGCloudWatcher.Obs
     }
 }
 
-$sqmFiles = @($structuredEvidence | Where-Object { @($_.sqm_candidate_fields).Count -gt 0 })
-$firmwareFiles = @($structuredEvidence | Where-Object { @($_.firmware_candidate_fields).Count -gt 0 })
+$sqmFiles = @($structuredEvidence | Where-Object {
+    $property = $_.PSObject.Properties['sqm_candidate_fields']
+    $property -and @($property.Value).Count -gt 0
+})
+$firmwareFiles = @($structuredEvidence | Where-Object {
+    $property = $_.PSObject.Properties['firmware_candidate_fields']
+    $property -and @($property.Value).Count -gt 0
+})
 
 $report = [ordered]@{
     schema_version = '1.0'
