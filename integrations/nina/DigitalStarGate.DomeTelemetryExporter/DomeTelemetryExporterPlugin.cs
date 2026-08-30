@@ -24,6 +24,7 @@ namespace DigitalStarGate.Nina.DomeTelemetryExporter;
  * Read-only local telemetry boundary for Observatory Status.
  * N.I.N.A. equipment snapshots and approved passive host adapters are consolidated into one projection.
  * Power is observed read-only through TS Shelter SafetyMonitor/J6 using the commissioned power fault mask 0x01.
+ * SQM is observed read-only from the Manciano AAG CloudWatcher SOLO HTTP lightmpsas field.
  */
 [SupportedOSPlatform("windows")]
 [Export(typeof(IPluginManifest))]
@@ -37,6 +38,7 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
     private readonly ISafetyMonitorMediator safetyMonitorMediator;
     private readonly NetworkTelemetryAdapter networkTelemetryAdapter = new();
     private readonly PowerTelemetryAdapter powerTelemetryAdapter = new();
+    private readonly SqmTelemetryAdapter sqmTelemetryAdapter = new();
     private readonly string projectionPath;
     private readonly object writeLock = new();
     private readonly Timer projectionTimer;
@@ -76,6 +78,7 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
         if (disposed) return;
         disposed = true;
         projectionTimer.Dispose();
+        sqmTelemetryAdapter.Dispose();
         powerTelemetryAdapter.Dispose();
         try { domeMediator.RemoveConsumer(this); } catch { }
     }
@@ -95,6 +98,7 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
         var safetyInfo = SafeGetInfo(safetyMonitorMediator);
         var networkInfo = networkTelemetryAdapter.Observe();
         var powerInfo = powerTelemetryAdapter.Observe();
+        var sqmInfo = sqmTelemetryAdapter.Observe();
 
         var payload = new Dictionary<string, object> {
             { "schemaVersion", 2 },
@@ -108,7 +112,8 @@ public sealed class DomeTelemetryExporterPlugin : PluginBase, IDomeConsumer {
                 { "weather", BuildWeather(weatherInfo) },
                 { "safety", BuildSafety(safetyInfo) },
                 { "power", powerInfo },
-                { "network", networkInfo }
+                { "network", networkInfo },
+                { "sqm", sqmInfo }
             }}
         };
         WriteJsonAtomically(projectionPath, JsonSerializer.Serialize(payload));
