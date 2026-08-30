@@ -98,33 +98,78 @@ The value `0` is rejected as an SQM measurement. The configured `DataFile` is st
 
 ## Active-output discovery
 
-A passive filesystem inventory executed on `EAGLE30154` on 2026-08-30 identified the following relevant outputs, sorted by most recent write time:
+A passive filesystem inventory executed on `EAGLE30154` on 2026-08-30 identified the following relevant outputs:
 
 ```text
 C:\Users\PrimaLuceLab\Documents\CloudWatcher\AAG_CWNetData.dat
-  Length: 620 bytes
-  LastWriteTime: 2026-08-30 21:47:55 local
+  LastWriteTime observed: 2026-08-30 21:51:15 local
+  Format: binary/proprietary; not suitable for semantic inspection using Get-Content text parsing
 
 C:\Users\PrimaLuceLab\Documents\CloudWatcher\CloudWatcher.csv
-  Length: 241067238 bytes
-  LastWriteTime: 2026-08-30 21:29:25 local
+  Length observed: 241092326 bytes
+  LastWriteTime observed: 2026-08-30 21:53:15 local
 
-C:\Users\PrimaLuceLab\Documents\ASCOM\Logs 2026-08-27\ASCOM.CloudWatcher-SM.2141.287230.txt
-  Length: 5928857 bytes
-  LastWriteTime: 2026-08-30 21:29:03 local
-```
-
-The stale ASCOM-configured file remains:
-
-```text
 C:\Users\PrimaLuceLab\Documents\aag_json.dat
-  Length: 581 bytes
   LastWriteTime: 2026-07-19 12:00:03 local
 ```
 
-This is direct evidence that `aag_json.dat` is not the currently active CloudWatcher output path. `AAG_CWNetData.dat` is the strongest current candidate because it is small, CloudWatcher-specific and was updated at the time of inspection.
+This is direct evidence that `aag_json.dat` is not the currently active CloudWatcher output path. No ASCOM `DataFile` setting has been changed.
 
-No ASCOM `DataFile` setting has been changed. The existence of a more recent output does not by itself prove that the ASCOM driver accepts that file format.
+## Live CSV schema evidence
+
+The active `CloudWatcher.csv` header observed on 2026-08-30 is:
+
+```text
+Date
+Time
+Cloud Condition
+Rain Condition
+Brightness Condition
+Cloud Value
+Cloud Sensor Temperature
+Rain Value
+Brightness Value
+Ambient Temperature
+Rain Heating Percentage
+Rain Sensor Temperature
+Heating Status
+Switch Status
+Read Cycle
+Timeout Errors
+Safe Status
+Wind Condition
+Wind Value
+Relative Humidity
+Dew Point
+Raw IR Temperature
+Absolute Pressure
+Relative Pressure
+```
+
+No column named or semantically equivalent to `SQM`, `Sky Quality`, `mpsas`, `mag/arcsec2` or another explicit instrumental sky-quality measurement is present.
+
+Observed complete live samples around 2026-08-30 21:52-21:53 include:
+
+```text
+Cloud Condition: Clear
+Rain Condition: Dry
+Brightness Condition: Dark
+Cloud Value: 0.6-0.7
+Brightness Value: 57232
+Ambient Temperature: 25.7 C
+Safe Status: Safe
+Wind Condition: Calm
+Wind Value: approximately 6.2-6.9
+Relative Humidity: 60
+Dew Point: approximately 17.2-17.3 C
+Raw IR Temperature: approximately 11.0-11.1 C
+Absolute Pressure: approximately 997.1-997.4 hPa
+Relative Pressure: approximately 1008.6-1008.8 hPa
+```
+
+The final `Get-Content -Tail 5` row was observed partially written while the live CSV was being appended. Only complete rows are evidence.
+
+`Brightness Condition` and `Brightness Value` are explicitly **not** accepted as SQM. They remain legacy brightness/light measurements and are prohibited as proxies by the BKL-029 architecture contract.
 
 ## Architecture disposition
 
@@ -135,28 +180,31 @@ ASCOM PROPERTY: reachable
 ASCOM DATA SOURCE: configured but stale
 DEVICE SERIAL: 2264
 DEVICE FIRMWARE: 5.86
-SQM FIELD IN CONFIGURED DATA FILE: absent
-ACTIVE CLOUDWATCHER OUTPUT: AAG_CWNetData.dat candidate
+SQM FIELD IN STALE ASCOM DATA FILE: absent
+SQM FIELD IN LIVE CSV: absent
+LIVE BINARY OUTPUT: present but proprietary/not semantically decoded
 VALID SQM SAMPLE: not verified
-BKL-029 G1: blocked on valid instrumental source/value
+BKL-029 G1: BLOCKED — CURRENT CLOUDWATCHER PIPELINE DOES NOT EXPOSE VALID SQM
 weather.sqm_mag_arcsec2: must remain null
 ```
 
-Firmware 5.86 is earlier than the vendor-documented 5.89 protocol support for the new sky-quality sensor. This evidence does **not** by itself prove the physical unit lacks the upgrade sensor, but it proves that the currently observed firmware/data path does not expose a valid SQM measurement.
+Firmware 5.86 is earlier than the vendor-documented 5.89 protocol support for the new sky-quality sensor. This evidence does **not** by itself prove the physical unit lacks the upgrade sensor, but it proves that the currently observed firmware/data pipeline does not expose a valid SQM measurement.
 
 No firmware update is authorized by BKL-029 source discovery. A firmware change would be a separate controlled maintenance decision with compatibility, rollback and safety review.
 
-## Next governed step
+## Governed decision point
 
-Inspect `C:\Users\PrimaLuceLab\Documents\CloudWatcher\AAG_CWNetData.dat` read-only and compare its field semantics with the stale `aag_json.dat` source.
+Passive discovery is complete for the current runtime pipeline. The repository now has sufficient evidence to state that BKL-029 cannot proceed to realtime integration G2 using the current CloudWatcher outputs.
 
-The next inspection must:
+The next architecture decision must choose between:
 
-1. read the current `AAG_CWNetData.dat` without modification;
-2. capture its file timestamp together with the content read;
-3. identify device identity/firmware if present;
-4. identify any explicit `sqm`, `sky quality`, `mpsas` or equivalent instrumental field;
-5. distinguish any legacy `light`/LDR value from SQM;
-6. not change the ASCOM `DataFile` setting;
-7. not access the serial port or SafetyMonitor;
-8. keep `weather.sqm_mag_arcsec2 = null` unless a valid instrumental SQM value is actually verified.
+1. **CloudWatcher upgrade path** — establish whether physical unit serial 2264 supports the Lunatico sky-quality sensor upgrade and firmware 5.89/5.8.9 path; requires maintenance assessment, compatibility check, rollback plan and post-upgrade OAT before any firmware change;
+2. **Dedicated SQM path** — introduce a dedicated read-only SQM instrument with a stable interface and explicit provenance, independent from Safety Authority.
+
+Until one path is approved and produces a real instrumental sample:
+
+- `weather.sqm_mag_arcsec2` remains `null`;
+- SQM quality remains `UNKNOWN`;
+- no historical SQM statistics are generated;
+- no brightness/LDR proxy is permitted;
+- BKL-030 does not start as a workaround for this blocked dependency.
