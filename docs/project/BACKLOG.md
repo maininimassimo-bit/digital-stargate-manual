@@ -21,7 +21,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 |---|---|---|---|---|---|---|
 | BKL-001 | P0 | RC1-HF01 Enterprise Theme Manager | Done | Governance Framework baseline | Theme Service centralizzato, persistenza, Instant Navigation e separazione da `page-enhancements.js` | TD-001, WP-03 Completion Report |
 | BKL-002 | P0 | Integrare Project Governance Center nella nav MkDocs | Done | Documenti governance completi | Sezione Project Governance navigabile | TD-006 |
-| BKL-003 | P0 | Creare AI_BOOTSTRAP.md in root | Done | Context e registri | Bootstrap universale | `AI_BOOTSTRAP.md` |
+| BKL-003 | P0 | Creare AI_BOOTSTRAP.md in root | Done | BKL-002/BKL-003 | Bootstrap universale | `AI_BOOTSTRAP.md` |
 | BKL-004 | P1 | Aggiornare Governance Center | Done | BKL-002/BKL-003 | Documenti canonici e stato package | `docs/project/index.md` |
 | BKL-005 | P1 | Governance strict build | Done | BKL-002–004 | Build verificata | Developer Foundation #730 |
 | BKL-006 | P1 | Verificare Pages governance | Done | BKL-005 | Governance pubblicata | BKL-025 |
@@ -47,7 +47,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-026 | P0 | Deep assessment ARB/AP-014 acceptance | Done | BKL-019–025 | AP-014 Accepted | AP-014 |
 | BKL-027 | P1 | Power/Network source discovery | Done | EAGLE | Source verificate | AP-004/AP-009 |
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
-| BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Ready | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | Functional Roadmap Expansion; Observatory Status |
+| BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | In Progress | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | Functional Roadmap Expansion; Observatory Status; `docs/architecture/telemetry/BKL-029-SQM-Source-Discovery-and-Architecture-Contract.md` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Planned | BKL-029; Windows read-only collectors | Health EAGLE spiegabile: disk/RAM/CPU/event log/processi/time sync/USB/pending reboot/drift/capacity | Functional Roadmap Expansion |
 | BKL-031 | P2 | Observation Planner intelligente | Planned | BKL-015, BKL-035, meteo/SQM | Ranking target per setup e condizioni | Functional Roadmap Expansion |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
@@ -68,7 +68,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 
 ### Reconciliation note — 30/08/2026
 
-BKL-001–BKL-028 mantengono le closure già accettate. BKL-010/TD-002 sono chiusi. La functional roadmap review del 30/08/2026 ha approvato BKL-029–BKL-046. BKL-029 è `Ready` perché risolve un gap reale già presente nel contratto Observatory Status: il campo SQM esiste in UI ma la source canonica non è ancora valorizzata. BKL-030 prepara l'health observability dell'EAGLE. BKL-015 resta la foundation Knowledge Graph, ma deve incorporare fin dal design le entità e relazioni necessarie alle capability approvate. BKL-045 introduce processing provenance PixInsight; BKL-046 viene solo dopo il plugin/provenance layer ed è inizialmente advisory-only. AI, health score e readiness non sostituiscono mai la Safety Authority locale.
+BKL-001–BKL-028 mantengono le closure già accettate. BKL-010/TD-002 sono chiusi. La functional roadmap review del 30/08/2026 ha approvato BKL-029–BKL-046. BKL-029 è ora `In Progress`: il contratto architetturale e i gate di source discovery sono definiti, mentre la source SQM runtime deve ancora essere verificata sull'EAGLE. BKL-030 prepara l'health observability dell'EAGLE e resta `Planned` fino alla chiusura di BKL-029. BKL-015 resta la foundation Knowledge Graph, ma deve incorporare fin dal design le entità e relazioni necessarie alle capability approvate. BKL-045 introduce processing provenance PixInsight; BKL-046 viene solo dopo il plugin/provenance layer ed è inizialmente advisory-only. AI, health score e readiness non sostituiscono mai la Safety Authority locale.
 
 ## 4. Sequenza di esecuzione raccomandata
 
