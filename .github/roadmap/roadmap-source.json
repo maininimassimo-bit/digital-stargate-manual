@@ -4,54 +4,77 @@
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "AP-007",
-  "nextMilestone": "BKL-015 Implementare repository Knowledge Graph machine-readable",
-  "target": "Complete AP-007/AP-008 independent reviews and establish machine-readable knowledge traceability before AP-015",
+  "nextMilestone": "BKL-029 SQM Sky Quality Telemetry & Scientific History",
+  "target": "Integrate SQM and EAGLE health, then establish the Knowledge Graph foundation for the approved observatory intelligence and PixInsight AI roadmap",
   "streams": [
     {
-      "id": "rc2-enterprise-portal",
-      "title": "RC2 Enterprise Portal",
-      "items": [
-        {"id":"WP-01","title":"Enterprise Foundation Framework","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-01-Enterprise-Foundation-Framework-Completion-Report.md","note":"Component Registry, lifecycle comune, Event Bus e bootstrap centralizzato."},
-        {"id":"WP-02","title":"Scientific Platform 2.0","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-02-Scientific-Platform-2.0-Completion-Report.md","note":"Scientific Data Engine 2.1, cache, eventi, metriche e Session Store indicizzato."},
-        {"id":"WP-03","title":"Enterprise Theme Framework","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-03-Enterprise-Theme-Framework-Completion-Report.md","note":"Governed theme capability delivered."},
-        {"id":"WP-04","title":"Enterprise Search Center","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-04-Enterprise-Search-Center-Completion-Report.md","note":"Federated search capability delivered."},
-        {"id":"WP-05","title":"Operations Dashboard","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-05-Operations-Dashboard-Completion-Report.md","note":"Operations observability dashboard completed and accepted."},
-        {"id":"WP-06","title":"Enterprise Plugin SDK","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-06-Enterprise-Plugin-SDK-Completion-Report.md","note":"Plugin SDK, provider contracts, tests, CI gate and developer documentation completed."},
-        {"id":"RC2-BASELINE","title":"RC2 Baseline and Integrated Acceptance","status":"active","note":"Congelamento della baseline RC2, verifica Pages, compatibility review e acceptance integrata."}
+      "id":"rc2-enterprise-portal","title":"RC2 Enterprise Portal","items":[
+        {"id":"WP-01","title":"Enterprise Foundation Framework","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-01-Enterprise-Foundation-Framework-Completion-Report.md"},
+        {"id":"WP-02","title":"Scientific Platform 2.0","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-02-Scientific-Platform-2.0-Completion-Report.md"},
+        {"id":"WP-03","title":"Enterprise Theme Framework","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-03-Enterprise-Theme-Framework-Completion-Report.md"},
+        {"id":"WP-04","title":"Enterprise Search Center","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-04-Enterprise-Search-Center-Completion-Report.md"},
+        {"id":"WP-05","title":"Operations Dashboard","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-05-Operations-Dashboard-Completion-Report.md"},
+        {"id":"WP-06","title":"Enterprise Plugin SDK","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-06-Enterprise-Plugin-SDK-Completion-Report.md"},
+        {"id":"RC2-BASELINE","title":"RC2 Baseline and Integrated Acceptance","status":"active"}
       ]
     },
     {
-      "id": "architecture-program",
-      "title": "Architecture Program AP-001–AP-015",
-      "items": [
-        {"id":"AP-001","title":"Enterprise Metamodel and Repository Information Architecture","status":"completed","review":"ARB-003","note":"Approved with conditions."},
-        {"id":"AP-002","title":"Enterprise Data Governance","status":"completed","review":"ARB-004","note":"Approved with conditions."},
-        {"id":"AP-003","title":"Observatory Automation Architecture","status":"completed","review":"ARB-005","note":"Approved with conditions."},
-        {"id":"AP-004","title":"Enterprise Telemetry and Observability Architecture","status":"completed","review":"ARB-006","note":"Approved with conditions."},
-        {"id":"AP-005","title":"Identity, Access and Remote Operations Security","status":"completed","review":"ARB-007","note":"Approved with conditions."},
-        {"id":"AP-006","title":"Enterprise Configuration and Asset Management","status":"completed","review":"ARB-008","note":"Approved with conditions."},
-        {"id":"AP-007","title":"Enterprise Operations and Service Management Architecture","status":"active","note":"Package and reference architecture produced; independent ARB review remains unrecorded."},
-        {"id":"AP-008","title":"Enterprise Integration Architecture","status":"active","note":"Package, reference architecture and initial contract catalog produced; independent ARB review remains unrecorded."},
-        {"id":"AP-009","title":"Enterprise Infrastructure Architecture","status":"completed","review":"ARB-009","note":"Approved with conditions, 94/100; runtime resilience is not certified."},
-        {"id":"AP-010","title":"Enterprise Safety Assurance Architecture","status":"completed","review":"ARB-010","note":"Approved with conditions, 97/100; runtime safety is not certified."},
-        {"id":"AP-011","title":"Enterprise Analytics Platform Architecture","status":"completed","review":"ARB-011","note":"Approved with conditions, 97/100; analytics runtime is not certified."},
-        {"id":"AP-012","title":"Enterprise Operations Center Architecture","status":"completed","review":"ARB-012","note":"ARB-012-C04 Closed / Approved on 2026-08-26 after W03, W06, W07 12/12 four-eyes validation and final repository CI PASS; runtime enablement remains separate and unauthorized."},
-        {"id":"AP-013","title":"Scientific Image Repository Architecture","statusSource":"evidence-manifest","evidencePath":".github/roadmap/evidence/AP-013.evidence.json","review":"ARB-013","note":"Completed with conditions. AP-013B COPY_ONLY OneDrive ingestion accepted for limited production; preservation/provenance/migration scale claims remain bounded by ARB-013 conditions."},
-        {"id":"AP-014","title":"Scientific Observation Catalog and Search","statusSource":"evidence-manifest","evidencePath":".github/roadmap/evidence/AP-014.evidence.json","note":"Completed and operationally accepted after AP14-W07 M27 OAT, deep ARB reassessment and final governance CI; historical limitations remain explicitly governed."},
-        {"id":"AP-015","title":"Scientific Knowledge Platform Architecture","status":"planned","note":"CAP-40 Scientific Knowledge Layer; planned after current higher-priority operational and architecture-review work."}
+      "id":"architecture-program","title":"Architecture Program AP-001–AP-015","items":[
+        {"id":"AP-001","title":"Enterprise Metamodel and Repository Information Architecture","status":"completed","review":"ARB-003"},
+        {"id":"AP-002","title":"Enterprise Data Governance","status":"completed","review":"ARB-004"},
+        {"id":"AP-003","title":"Observatory Automation Architecture","status":"completed","review":"ARB-005"},
+        {"id":"AP-004","title":"Enterprise Telemetry and Observability Architecture","status":"completed","review":"ARB-006"},
+        {"id":"AP-005","title":"Identity, Access and Remote Operations Security","status":"completed","review":"ARB-007"},
+        {"id":"AP-006","title":"Enterprise Configuration and Asset Management","status":"completed","review":"ARB-008"},
+        {"id":"AP-007","title":"Enterprise Operations and Service Management Architecture","status":"active","note":"Independent ARB review remains unrecorded."},
+        {"id":"AP-008","title":"Enterprise Integration Architecture","status":"active","note":"Independent ARB review remains unrecorded."},
+        {"id":"AP-009","title":"Enterprise Infrastructure Architecture","status":"completed","review":"ARB-009"},
+        {"id":"AP-010","title":"Enterprise Safety Assurance Architecture","status":"completed","review":"ARB-010"},
+        {"id":"AP-011","title":"Enterprise Analytics Platform Architecture","status":"completed","review":"ARB-011"},
+        {"id":"AP-012","title":"Enterprise Operations Center Architecture","status":"completed","review":"ARB-012"},
+        {"id":"AP-013","title":"Scientific Image Repository Architecture","statusSource":"evidence-manifest","evidencePath":".github/roadmap/evidence/AP-013.evidence.json","review":"ARB-013"},
+        {"id":"AP-014","title":"Scientific Observation Catalog and Search","statusSource":"evidence-manifest","evidencePath":".github/roadmap/evidence/AP-014.evidence.json"},
+        {"id":"AP-015","title":"Scientific Knowledge Platform Architecture","status":"planned","note":"CAP-40 after approved intelligence foundations."}
+      ]
+    },
+    {
+      "id":"observatory-intelligence","title":"Observatory Intelligence & Scientific Processing Roadmap","items":[
+        {"id":"BKL-029","title":"SQM Sky Quality Telemetry & Scientific History","status":"planned","note":"Realtime SQM plus session statistics and provenance."},
+        {"id":"BKL-030","title":"EAGLE Health & Reliability Telemetry","status":"planned"},
+        {"id":"BKL-015","title":"Knowledge Graph machine-readable foundation","status":"planned"},
+        {"id":"BKL-044","title":"Knowledge Graph / AI Evidence Contract","status":"planned"},
+        {"id":"BKL-035","title":"Target Knowledge Base","status":"planned"},
+        {"id":"BKL-040","title":"Night Timeline / Observatory Replay","status":"planned"},
+        {"id":"BKL-037","title":"Session Comparison & Benchmarking","status":"planned"},
+        {"id":"BKL-038","title":"Anomaly & Trend Center","status":"planned"},
+        {"id":"BKL-039","title":"Equipment Performance Registry","status":"planned"},
+        {"id":"BKL-041","title":"Scientific Data Quality Score","status":"planned"},
+        {"id":"BKL-045","title":"PixInsight Workflow Provenance Plugin","status":"planned","note":"Governed PixInsight extension for reproducible post-processing provenance."},
+        {"id":"BKL-046","title":"AI Post-Processing Assistant for PixInsight","status":"planned","note":"Advisory AI over processing provenance; human approval retained."},
+        {"id":"BKL-031","title":"Observation Planner intelligente","status":"planned"},
+        {"id":"BKL-032","title":"Session Readiness / Go-No-Go Decision Support","status":"planned"},
+        {"id":"BKL-036","title":"Observatory Health Score","status":"planned"},
+        {"id":"BKL-033","title":"Observatory Digital Twin","status":"planned"},
+        {"id":"BKL-034","title":"Scientific Image Gallery evoluta","status":"planned"},
+        {"id":"BKL-042","title":"AI Observatory Assistant","status":"planned"},
+        {"id":"BKL-043","title":"Observatory Reliability Engineering","status":"planned"},
+        {"id":"BKL-014","title":"Prepare AP-015 Scientific Knowledge Platform","status":"planned"}
       ]
     }
   ],
-  "milestones": [
-    {"id":"M-RC2-WP01","itemRef":"WP-01","title":"WP-01 Enterprise Foundation","date":"2026-08-05","description":"Lifecycle, Component Registry and Event Bus delivered.","image":null},
-    {"id":"M-RC2-WP02","itemRef":"WP-02","title":"WP-02 Scientific Platform 2.0","date":"2026-08-05","description":"Scientific Data Engine and indexed scientific services delivered.","image":null},
-    {"id":"M-RC2-WP03","itemRef":"WP-03","title":"WP-03 Enterprise Theme Framework","date":"2026-08-05","description":"Governed theme capability delivered.","image":null},
-    {"id":"M-RC2-WP04","itemRef":"WP-04","title":"WP-04 Enterprise Search Center","date":"2026-08-05","description":"Federated search capability delivered.","image":null},
-    {"id":"M-RC2-WP05","itemRef":"WP-05","title":"WP-05 Operations Dashboard","date":"2026-08-05","description":"Operations observability dashboard completed and accepted.","image":null},
-    {"id":"M-RC2-WP06","itemRef":"WP-06","title":"WP-06 Enterprise Plugin SDK","date":"2026-08-05","description":"Plugin SDK, provider contracts, tests, CI gate and developer documentation completed.","image":null},
-    {"id":"M-RC2-BASELINE","itemRef":"RC2-BASELINE","title":"RC2 Baseline and Integrated Acceptance","date":"2026-08-05","description":"Baseline freeze, integrated compatibility review and final acceptance are in progress.","image":null},
-    {"id":"M-AP012-C04","itemRef":"AP-012","title":"ARB-012-C04 Role Assignment and Four-Eyes Enforcement","date":"2026-08-26","description":"C04 Closed / Approved: identity, training, least privilege, revocation, ENV/VM residual controls, FE-01..FE-12 and final repository CI completed; runtime authorization remains separate.","image":null,"status":"completed"},
-    {"id":"M-AP013","itemRef":"AP-013","title":"AP-013 Scientific Image Repository Architecture","date":"2026-08-11","description":"ARB-013 approved with conditions; OAT passed; formal operational acceptance accepted; AP-013B limited-production ingestion authorized.","image":null,"status":"completed"},
-    {"id":"M-AP014-W07","itemRef":"AP-014","title":"AP14-W07 Validation & Operational Acceptance","date":"2026-08-15","description":"M27 end-to-end OAT completed; deep ARB reassessment and operational acceptance accepted with final governance CI PASS.","image":null,"status":"completed"}
+  "milestones":[
+    {"id":"M-RC2-WP01","itemRef":"WP-01","title":"WP-01 Enterprise Foundation","date":"2026-08-05","description":"Foundation delivered.","image":null},
+    {"id":"M-RC2-WP02","itemRef":"WP-02","title":"WP-02 Scientific Platform 2.0","date":"2026-08-05","description":"Scientific platform delivered.","image":null},
+    {"id":"M-RC2-WP03","itemRef":"WP-03","title":"WP-03 Enterprise Theme Framework","date":"2026-08-05","description":"Theme delivered.","image":null},
+    {"id":"M-RC2-WP04","itemRef":"WP-04","title":"WP-04 Enterprise Search Center","date":"2026-08-05","description":"Search delivered.","image":null},
+    {"id":"M-RC2-WP05","itemRef":"WP-05","title":"WP-05 Operations Dashboard","date":"2026-08-05","description":"Dashboard delivered.","image":null},
+    {"id":"M-RC2-WP06","itemRef":"WP-06","title":"WP-06 Enterprise Plugin SDK","date":"2026-08-05","description":"SDK delivered.","image":null},
+    {"id":"M-RC2-BASELINE","itemRef":"RC2-BASELINE","title":"RC2 Baseline and Integrated Acceptance","date":"2026-08-05","description":"Integrated acceptance in progress.","image":null},
+    {"id":"M-AP012-C04","itemRef":"AP-012","title":"ARB-012-C04","date":"2026-08-26","description":"Closed / Approved.","image":null},
+    {"id":"M-AP013","itemRef":"AP-013","title":"AP-013 Scientific Image Repository","date":"2026-08-11","description":"Accepted with conditions.","image":null},
+    {"id":"M-AP014-W07","itemRef":"AP-014","title":"AP14-W07 Operational Acceptance","date":"2026-08-15","description":"Accepted.","image":null},
+    {"id":"M-SQM","itemRef":"BKL-029","title":"SQM realtime and scientific history","date":"2026-08-30","description":"Approved next operational capability.","image":null},
+    {"id":"M-PIXINSIGHT","itemRef":"BKL-045","title":"PixInsight Workflow Provenance","date":"2026-08-30","description":"Approved future processing provenance capability.","image":null},
+    {"id":"M-PIXINSIGHT-AI","itemRef":"BKL-046","title":"AI-assisted PixInsight Processing","date":"2026-08-30","description":"Approved advisory AI capability after provenance foundation.","image":null}
   ]
 }
