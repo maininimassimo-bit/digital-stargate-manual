@@ -79,7 +79,11 @@ Lo stato deve essere nuovamente verificato nel repository a ogni utilizzo di que
 
 ## 8. Quality-gate handover
 
-Il run Developer Foundation #791 ha fallito esclusivamente su `Verify generated roadmap` perché la projection versionata era precedente all'espansione; build/test/format e i test eseguiti prima del gate erano PASS. Pages della stessa baseline ha generato e pubblicato correttamente la nuova projection. La projection è stata quindi riallineata nel repository. **Una nuova chat deve verificare i workflow generati dagli ultimi commit e non assumere PASS finché Developer Foundation, documentazione/Pages e gli altri workflow applicabili non risultano completati con successo.**
+La precedente failure Developer Foundation #791, limitata a `Verify generated roadmap`, è stata risolta con il riallineamento della projection. Sul commit `755fdc630e820105e90a13be4a83402755f38d17`, **Developer Foundation #792 è completed/success** e l'intero `quality-gate` è PASS, inclusi generated-roadmap e AMP-002/roadmap/backlog consistency, build/test/format, telemetry/session tests, scientific gates, Enterprise SDK/Search, contratti PixInsight, idempotency e MkDocs.
+
+Sul commit handover `6d45ed491e14ab2d63657636610c2e0450b2d909` sono verificati **completed/success** anche Validate documentation #392, Deploy Pages #571 e Genera manuale Word #772. La baseline documentata è quindi **GREEN al 30/08/2026**.
+
+Questa baseline non è una deroga alla repository truth: una nuova chat deve sempre verificare HEAD e workflow successivi. Se esistono commit posteriori, il loro stato prevale sulla fotografia riportata qui.
 
 ## 9. Output richiesto a ogni intervento
 
@@ -91,4 +95,4 @@ Non inventare branch/file/commit/test/workflow/stati; non marcare approved senza
 
 ## 11. Punto di partenza operativo
 
-Aprire `docs/project/HANDOVER_2026-08-30.md`, verificare HEAD e workflow correnti, poi eseguire la prima voce `Ready` compatibile con le dipendenze. Se la baseline è verde, partire da **BKL-029 SQM source discovery e architecture**.
+Aprire `docs/project/HANDOVER_2026-08-30.md`, verificare HEAD e workflow correnti, poi eseguire la prima voce `Ready` compatibile con le dipendenze. Se la baseline resta verde, partire da **BKL-029 SQM source discovery e architecture**.
