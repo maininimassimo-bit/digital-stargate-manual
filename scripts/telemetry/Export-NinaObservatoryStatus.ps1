@@ -27,6 +27,7 @@ $overallQuality = if ($freshUntil -ge [datetime]::UtcNow) { 'CURRENT' } else { '
 $source = 'NINA Observatory Telemetry Exporter'
 $networkSource = 'NINA Observatory Telemetry Exporter / Passive Network Adapter'
 $powerSource = 'NINA Observatory Telemetry Exporter / TS Shelter J6 Power Adapter'
+$sqmSource = 'NINA Observatory Telemetry Exporter / CloudWatcher SOLO SQM Adapter'
 
 $dome = Get-ServiceSignal -Service $projection.services.dome -ObservedAt $observedAt -FreshUntil $freshUntil -Source $source
 $mount = Get-ServiceSignal -Service $projection.services.mount -ObservedAt $observedAt -FreshUntil $freshUntil -Source $source
@@ -57,7 +58,24 @@ $weather.rain_rate_mm_h = $projection.services.weather.details.rainRate
 $weather.pressure_hpa = $projection.services.weather.details.pressure
 $weather.cloud_cover_pct = $projection.services.weather.details.cloudCoverPct
 $weather.sky_temperature_c = $projection.services.weather.details.skyTemperatureC
-$weather.sqm_mag_arcsec2 = $null
+
+$sqmQuality = 'UNKNOWN'
+$sqmValue = $null
+$sqmObservedAt = $null
+$sqmFreshUntil = $null
+if ($projection.services.PSObject.Properties.Name -contains 'sqm' -and $projection.services.sqm -and $projection.services.sqm.details) {
+    $sqmQuality = ([string]$projection.services.sqm.details.quality).Trim().ToUpperInvariant()
+    if ($sqmQuality -eq 'CURRENT' -and $overallQuality -eq 'CURRENT') {
+        $sqmValue = $projection.services.sqm.details.sqmMagArcsec2
+    }
+    $sqmObservedAt = $projection.services.sqm.details.observedAtUtc
+    $sqmFreshUntil = $projection.services.sqm.details.freshUntilUtc
+}
+$weather.sqm_mag_arcsec2 = $sqmValue
+$weather.sqm_quality = if ($overallQuality -eq 'CURRENT') { $sqmQuality } else { 'STALE' }
+$weather.sqm_observed_at_utc = $sqmObservedAt
+$weather.sqm_fresh_until_utc = $sqmFreshUntil
+$weather.sqm_source = $sqmSource
 
 $observedSafety = if ($overallQuality -eq 'CURRENT') { $safetySignal.state } else { 'UNKNOWN' }
 $reason = if ($observedSafety -eq 'UNKNOWN') { 'NINA SafetyMonitor state unavailable or stale; local physical interlocks remain authoritative' } else { 'Observed through NINA SafetyMonitor; local physical interlocks remain authoritative' }
@@ -81,6 +99,7 @@ $payload = [ordered]@{
         safety_monitor_is_safe = $projection.services.safety.details.isSafe
         power_source = $projection.services.power.details.source; power_prog_id = $projection.services.power.details.progId; power_safeties_raw = $projection.services.power.details.safetiesRaw; power_fault_mask = $projection.services.power.details.powerFaultMask; power_fault = $projection.services.power.details.powerFault; power_mains_present = $projection.services.power.details.mainsPresent; power_safety_is_safe = $projection.services.power.details.safetyIsSafe
         network_interface = $projection.services.network.details.interface; network_gateway = $projection.services.network.details.gateway; network_gateway_reachable = $projection.services.network.details.gatewayReachable; network_gateway_latency_ms = $projection.services.network.details.gatewayLatencyMs; network_internet_target = $projection.services.network.details.internetTarget; network_internet_reachable = $projection.services.network.details.internetReachable; network_internet_latency_ms = $projection.services.network.details.internetLatencyMs; network_dns_name = $projection.services.network.details.dnsName; network_dns_resolved = $projection.services.network.details.dnsResolved; network_dns_latency_ms = $projection.services.network.details.dnsLatencyMs; network_dns_address_count = $projection.services.network.details.dnsAddressCount
+        sqm_source = if ($projection.services.PSObject.Properties.Name -contains 'sqm') { $projection.services.sqm.details.source } else { $null }; sqm_endpoint = if ($projection.services.PSObject.Properties.Name -contains 'sqm') { $projection.services.sqm.details.endpoint } else { $null }; sqm_serial = if ($projection.services.PSObject.Properties.Name -contains 'sqm') { $projection.services.sqm.details.serial } else { $null }; sqm_firmware = if ($projection.services.PSObject.Properties.Name -contains 'sqm') { $projection.services.sqm.details.firmware } else { $null }; sqm_quality = $weather.sqm_quality
     }
 }
 
@@ -92,5 +111,5 @@ Move-Item -LiteralPath $tempPath -Destination $OutputPath -Force
 Write-Output ('NINA Observatory Status projection written: {0}' -f $OutputPath)
 Write-Output ('Observed UTC: {0}' -f $payload.observed_at_utc)
 Write-Output ('Dome: {0}/{1}; Mount: {2}/{3}; Camera: {4}/{5}' -f $dome.state,$dome.quality,$mount.state,$mount.quality,$camera.state,$camera.quality)
-Write-Output ('Weather: {0}/{1}; Safety observed: {2}' -f $weather.state,$weather.quality,$payload.safety.observed_state)
+Write-Output ('Weather: {0}/{1}; SQM: {2}/{3}; Safety observed: {4}' -f $weather.state,$weather.quality,$weather.sqm_mag_arcsec2,$weather.sqm_quality,$payload.safety.observed_state)
 Write-Output ('Power: {0}/{1}; Network: {2}/{3}' -f $power.state,$power.quality,$network.state,$network.quality)
