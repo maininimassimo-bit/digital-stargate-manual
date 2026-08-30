@@ -12,10 +12,7 @@ public static partial class SoloCloudWatcherSqmPayloadParser
         TimeSpan freshnessWindow)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(payload);
-        if (freshnessWindow <= TimeSpan.Zero)
-        {
-            throw new ArgumentOutOfRangeException(nameof(freshnessWindow));
-        }
+        ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(freshnessWindow, TimeSpan.Zero);
 
         var fields = ParseFields(payload);
         var identity = ParseIdentity(fields);
@@ -91,7 +88,7 @@ public static partial class SoloCloudWatcherSqmPayloadParser
         return result;
     }
 
-    private static SqmSourceIdentity ParseIdentity(IReadOnlyDictionary<string, string> fields)
+    private static SqmSourceIdentity ParseIdentity(Dictionary<string, string> fields)
     {
         string? serial = null;
         string model = "CloudWatcher SOLO HTTP feed";
