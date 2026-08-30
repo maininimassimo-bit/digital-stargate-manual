@@ -82,10 +82,12 @@
 
     const render = data => {
       const items = data.waves.flatMap(wave => wave.items);
-      const completed = items.filter(item => item.status === 'completed').length;
-      const active = items.filter(item => item.status === 'active').length;
-      const planned = items.filter(item => item.status === 'planned').length;
-      const percent = items.length ? Math.round((completed / items.length) * 100) : 0;
+      const architectureWave = data.waves.find(wave => wave.id === 'architecture-program');
+      const progressItems = architectureWave?.items || items.filter(item => /^AP-\d{3}$/.test(item.id));
+      const completed = progressItems.filter(item => item.status === 'completed').length;
+      const active = progressItems.filter(item => item.status === 'active').length;
+      const planned = progressItems.filter(item => item.status === 'planned').length;
+      const percent = progressItems.length ? Math.round((completed / progressItems.length) * 100) : 0;
 
       summaryEl.innerHTML = `
         <div><span>Stato progetto</span><strong>${escapeHtml(data.projectStatus)}</strong></div>
@@ -94,12 +96,12 @@
         <div><span>Target</span><strong>${escapeHtml(data.target)}</strong></div>`;
 
       renderCurrent(currentEl, data, items);
-      renderOverview(overviewEl, { completed, active, planned, total: items.length, percent });
+      renderOverview(overviewEl, { completed, active, planned, total: progressItems.length, percent });
       renderNext(nextEl, data, items);
 
       progressEl.style.width = `${percent}%`;
       progressEl.setAttribute('aria-valuenow', String(percent));
-      progressEl.title = `${completed} completati, ${active} in corso, ${planned} pianificati`;
+      progressEl.title = `${completed} Architecture Package completati, ${active} in corso, ${planned} pianificati`;
 
       wavesEl.innerHTML = data.waves.map(wave => `
         <section class="dsg-roadmap-wave is-${escapeHtml(wave.status)}">
