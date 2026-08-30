@@ -10,6 +10,7 @@ on:
       - "mkdocs.pages.yml"
       - "requirements*.txt"
       - ".github/scripts/verify-published-site.py"
+      - ".github/scripts/verify-no-inline-portal-js.mjs"
       - ".github/workflows/docs.yml"
   pull_request:
     branches:
@@ -20,6 +21,7 @@ on:
       - "mkdocs.pages.yml"
       - "requirements*.txt"
       - ".github/scripts/verify-published-site.py"
+      - ".github/scripts/verify-no-inline-portal-js.mjs"
       - ".github/workflows/docs.yml"
   workflow_dispatch:
 
@@ -37,6 +39,14 @@ jobs:
     steps:
       - name: Recupera repository
         uses: actions/checkout@v4
+
+      - name: Configura Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Verifica assenza JavaScript inline nel portale
+        run: node .github/scripts/verify-no-inline-portal-js.mjs
 
       - name: Configura Python
         uses: actions/setup-python@v5
