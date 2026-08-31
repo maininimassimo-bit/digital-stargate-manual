@@ -16,7 +16,7 @@ public sealed class UnihedronSqmProtocolParserTests
         new(2026, 8, 30, 20, 0, 0, TimeSpan.Zero);
 
     [Fact]
-    public void ParseReading_FreshInstrumentReading_ReturnsCurrentSample()
+    public void ParseReadingFreshInstrumentReadingReturnsCurrentSample()
     {
         var sample = UnihedronSqmProtocolParser.ParseReading(
             "r, 20.01m,000000591Hz,0000049234c,0000000.081s, 039.4C,F",
@@ -30,7 +30,7 @@ public sealed class UnihedronSqmProtocolParserTests
     }
 
     [Fact]
-    public void ParseReading_StaleInstrumentReading_DoesNotPromoteMagnitude()
+    public void ParseReadingStaleInstrumentReadingDoesNotPromoteMagnitude()
     {
         var sample = UnihedronSqmProtocolParser.ParseReading(
             "r, 20.01m,000000591Hz,0000049234c,0000000.081s, 039.4C,S",
@@ -43,7 +43,7 @@ public sealed class UnihedronSqmProtocolParserTests
     }
 
     [Fact]
-    public void ParseReading_SaturatedReading_ReturnsUnknown()
+    public void ParseReadingSaturatedReadingReturnsUnknown()
     {
         var sample = UnihedronSqmProtocolParser.ParseReading(
             "r, 00.00m,000000000Hz,0000000000c,0000000.000s, 039.4C,F",
@@ -56,7 +56,7 @@ public sealed class UnihedronSqmProtocolParserTests
     }
 
     [Fact]
-    public void ParseReading_MalformedResponse_ReturnsUnknown()
+    public void ParseReadingMalformedResponseReturnsUnknown()
     {
         var sample = UnihedronSqmProtocolParser.ParseReading(
             "not-an-sqm-response",
