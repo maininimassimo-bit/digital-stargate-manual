@@ -30,7 +30,7 @@ public sealed class SoloCloudWatcherSqmPayloadParserTests
         """;
 
     [Fact]
-    public void Parse_ObservedSoloPayload_ReturnsCurrentInstrumentalSqm()
+    public void ParseObservedSoloPayloadReturnsCurrentInstrumentalSqm()
     {
         var receivedAt = new DateTimeOffset(2026, 8, 30, 20, 32, 0, TimeSpan.Zero);
 
@@ -48,7 +48,7 @@ public sealed class SoloCloudWatcherSqmPayloadParserTests
     }
 
     [Fact]
-    public void Parse_OldSoloPayload_DoesNotPromoteStaleValue()
+    public void ParseOldSoloPayloadDoesNotPromoteStaleValue()
     {
         var receivedAt = new DateTimeOffset(2026, 8, 30, 20, 40, 0, TimeSpan.Zero);
 
@@ -63,7 +63,7 @@ public sealed class SoloCloudWatcherSqmPayloadParserTests
     }
 
     [Fact]
-    public void Parse_MissingLightMpsas_ReturnsUnknown()
+    public void ParseMissingLightMpsasReturnsUnknown()
     {
         var payload = ObservedPayload.Replace("lightmpsas=18.74", "brightness=18.74", StringComparison.Ordinal);
         var receivedAt = new DateTimeOffset(2026, 8, 30, 20, 32, 0, TimeSpan.Zero);
