@@ -7,10 +7,14 @@ on:
       - feature/observatory-status-realtime-telemetry
     paths:
       - "integrations/nina/DigitalStarGate.DomeTelemetryExporter/**"
+      - "scripts/reporting/Export-SqmSessionHistory.ps1"
+      - ".github/scripts/test-sqm-session-history.ps1"
       - ".github/workflows/nina-dome-telemetry-exporter.yml"
   pull_request:
     paths:
       - "integrations/nina/DigitalStarGate.DomeTelemetryExporter/**"
+      - "scripts/reporting/Export-SqmSessionHistory.ps1"
+      - ".github/scripts/test-sqm-session-history.ps1"
       - ".github/workflows/nina-dome-telemetry-exporter.yml"
   workflow_dispatch:
 
@@ -42,6 +46,10 @@ jobs:
       - name: Build
         shell: pwsh
         run: dotnet build integrations/nina/DigitalStarGate.DomeTelemetryExporter/DigitalStarGate.DomeTelemetryExporter.csproj --configuration Release --no-restore
+
+      - name: SQM session history regression
+        shell: pwsh
+        run: ./.github/scripts/test-sqm-session-history.ps1
 
       - name: Verify plugin binary
         shell: pwsh
