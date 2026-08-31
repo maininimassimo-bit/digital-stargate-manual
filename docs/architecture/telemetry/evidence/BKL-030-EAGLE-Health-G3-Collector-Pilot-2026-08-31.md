@@ -2,11 +2,11 @@
 
 ## Status
 
-**PASS — non-commissioned multi-cadence collector pilot executed on EAGLE30154.**
+**PASS — nominal and controlled failure/recovery non-commissioned collector pilots completed on EAGLE30154.**
 
 This is runtime implementation evidence for the G3 pilot only. It does not commission the collector, activate health policy, change BKL-030 from Planned, or constitute BKL-030 acceptance.
 
-## Execution
+## Nominal execution
 
 - Host: `EAGLE30154`
 - Branch: `feature/bkl-030-eagle-health-discovery`
@@ -55,7 +55,7 @@ Process presence is evidence only; absence/presence is not yet a governed health
 
 ### Storage
 
-Final sample:
+Final nominal sample:
 
 - C: `4,229,361,664` bytes free / `223,397,015,552` bytes, free ratio `0.018932` (~1.8932%).
 - D: `356,942,249,984` bytes free / `735,304,478,720` bytes, free ratio `0.485435` (~48.5435%).
@@ -78,7 +78,7 @@ Observed existing sources:
 - `C:\DigitalStarGate\TelemetryRuntime\producer.log`;
 - NINA observatory-status projection.
 
-All were present and had recent last-write timestamps during the pilot.
+All were present and had recent last-write timestamps during the nominal pilot.
 
 ## Slow signals
 
@@ -130,11 +130,47 @@ Service state alone is not classified as a time fault.
 
 No baseline is approved. Projection remains `status = UNKNOWN` with null baseline identifiers and empty drift evidence.
 
+## Controlled failure/recovery pilot
+
+A second non-commissioned pilot exercised the collector's error-isolation path without stopping, reconfiguring or mutating any real source.
+
+Configuration:
+
+- duration: 180 s;
+- fast cadence: 15 s;
+- medium cadence: 60 s;
+- slow cadence: 120 s;
+- injected group: `FAST`;
+- injection start cycle: 3;
+- injection cycle count: 2;
+- cycles completed: 12;
+- stop disposition: normal.
+
+Observed behavior:
+
+1. cycles 1-2: all 13 signals available;
+2. cycles 3-4: only the FAST group was projected `UNAVAILABLE/UNKNOWN`:
+   - `cpu`;
+   - `memory`;
+   - `uptime`;
+   - `processes`;
+   - `plugin_heartbeat`;
+3. medium and slow signals remained present and were not marked unavailable;
+4. cycle 5 automatically recovered the FAST group without operator action;
+5. cycles 5-12 completed with all 13 signals available;
+6. `summary` remained `UNKNOWN` for every cycle;
+7. final projection returned all 13 signals to `OBSERVED/CURRENT`;
+8. diagnostics preserved the test parameters and retained `policy_enabled = false` and `safety_authority = OUTSIDE_SCOPE_LOCAL_PHYSICAL_INTERLOCKS`.
+
+This validates group-level failure isolation and automatic recovery for the injected FAST-source failure path.
+
+The test does not yet prove every possible real-source failure mode, nor a commissioned stale-file scenario after collector termination. Those remain later OAT concerns.
+
 ## Failure and safety disposition
 
-This pilot proves successful nominal execution and projection behavior. It does **not** yet prove controlled source failure/staleness behavior for each cadence group.
+Nominal runtime, injected failure isolation and automatic recovery are now verified for the pilot implementation.
 
-No dome, roof, mount, camera, power, relay, network, Windows service, Scheduled Task, registry or update state was changed. Local physical Safety Authority remains independent.
+No dome, roof, mount, camera, power, relay, network, Windows service, Scheduled Task, registry or update state was changed. The injected fault existed only inside the pilot collector's test path. Local physical Safety Authority remained independent.
 
 ## Gate disposition
 
@@ -143,7 +179,7 @@ No dome, roof, mount, camera, power, relay, network, Windows service, Scheduled 
 - G2 projection contract: DEFINED
 - D3 overhead pilot: PASS
 - G3 collector implementation — nominal non-commissioned runtime pilot: **PASS**
-- G3 controlled failure/staleness test: **NOT EXECUTED**
+- G3 controlled failure/recovery pilot: **PASS**
 - G3 commissioned producer: **BLOCKED until BKL-029 closure**
 - G4 CI: NOT EXECUTED for this collector increment
 - G5 commissioned runtime OAT: NOT EXECUTED
