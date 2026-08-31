@@ -45,8 +45,8 @@ if ($missing.Count -gt 0) { Fail ('missing signals: ' + ($missing -join ',')) }
 foreach ($name in $required) {
   $s = $p.signals.$name
   if ($null -eq $s) { Fail "signal is null: $name" }
-  if ($s.state -notin @('OBSERVED','UNAVAILABLE','NOT_SUPPORTED','UNKNOWN')) { Fail "invalid state for $name: $($s.state)" }
-  if ($s.quality -notin @('CURRENT','STALE','UNKNOWN')) { Fail "invalid quality for $name: $($s.quality)" }
+  if ($s.state -notin @('OBSERVED','UNAVAILABLE','NOT_SUPPORTED','UNKNOWN')) { Fail "invalid state for ${name}: $($s.state)" }
+  if ($s.quality -notin @('CURRENT','STALE','UNKNOWN')) { Fail "invalid quality for ${name}: $($s.quality)" }
 }
 
 $observed = [DateTimeOffset]::Parse([string]$p.observed_at_utc)
