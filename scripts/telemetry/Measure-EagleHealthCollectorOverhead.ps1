@@ -102,12 +102,22 @@ $startCpuSeconds = [double]$pilotProcess.CPU
 $startWorkingSet = [int64]$pilotProcess.WorkingSet64
 $startedAtUtc = [DateTime]::UtcNow
 $deadline = $startedAtUtc.AddSeconds($DurationSeconds)
+$nextSampleAtUtc = $startedAtUtc
 
 $samples = [System.Collections.Generic.List[object]]::new()
 $iteration = 0
 
-while ([DateTime]::UtcNow -lt $deadline) {
+while ($nextSampleAtUtc -lt $deadline) {
+  $now = [DateTime]::UtcNow
+  if ($now -lt $nextSampleAtUtc) {
+    $waitMs = [int][math]::Round(($nextSampleAtUtc - $now).TotalMilliseconds)
+    if ($waitMs -gt 0) { Start-Sleep -Milliseconds $waitMs }
+  }
+
+  if ([DateTime]::UtcNow -ge $deadline) { break }
+
   $iteration++
+  $scheduledAtUtc = $nextSampleAtUtc
   $sampleStarted = [DateTime]::UtcNow
   $hostBefore = Get-HostSnapshot
 
@@ -124,7 +134,9 @@ while ([DateTime]::UtcNow -lt $deadline) {
   $sample = [ordered]@{
     schema_version = '1.0'
     iteration = $iteration
+    scheduled_at_utc = $scheduledAtUtc.ToString('o')
     observed_at_utc = [DateTime]::UtcNow.ToString('o')
+    schedule_lag_ms = [math]::Round(($sampleStarted - $scheduledAtUtc).TotalMilliseconds, 1)
     wall_elapsed_ms = [math]::Round(([DateTime]::UtcNow - $sampleStarted).TotalMilliseconds, 1)
     probe_elapsed_ms = $probe.elapsed_ms
     probe_error_count = $probe.error_count
@@ -144,18 +156,21 @@ while ([DateTime]::UtcNow -lt $deadline) {
   $samples.Add($obj)
   ($obj | ConvertTo-Json -Depth 8 -Compress) | Add-Content -LiteralPath $samplePath -Encoding UTF8
 
-  Write-Host ('Sample {0}: probe={1}ms cpu_delta={2}s ws={3}MB host_cpu={4}% errors={5}' -f `
+  Write-Host ('Sample {0}: probe={1}ms cpu_delta={2}s ws={3}MB host_cpu={4}% lag={5}ms errors={6}' -f `
     $iteration,
     $probe.elapsed_ms,
     $cpuDelta,
     [math]::Round(([double]$procAfter.WorkingSet64 / 1MB), 1),
     $hostAfter.cpu_load_pct,
+    $sample.schedule_lag_ms,
     $probe.error_count)
 
-  $remaining = $PollSeconds - ([DateTime]::UtcNow - $sampleStarted).TotalSeconds
-  if ($remaining -gt 0 -and [DateTime]::UtcNow.AddSeconds($remaining) -lt $deadline) {
-    Start-Sleep -Milliseconds ([int][math]::Round($remaining * 1000.0))
-  }
+  $nextSampleAtUtc = $nextSampleAtUtc.AddSeconds($PollSeconds)
+}
+
+$remainingToDeadlineMs = [int][math]::Round(($deadline - [DateTime]::UtcNow).TotalMilliseconds)
+if ($remainingToDeadlineMs -gt 0) {
+  Start-Sleep -Milliseconds $remainingToDeadlineMs
 }
 
 $endedAtUtc = [DateTime]::UtcNow
@@ -168,6 +183,7 @@ $wallTimes = @($samples | ForEach-Object { [double]$_.wall_elapsed_ms })
 $cpuDeltas = @($samples | ForEach-Object { [double]$_.collector_cpu_seconds_delta })
 $wsAfter = @($samples | ForEach-Object { [double]$_.collector_working_set_after_bytes })
 $hostCpu = @($samples | ForEach-Object { if ($null -ne $_.host_cpu_load_after_pct) { [double]$_.host_cpu_load_after_pct } })
+$scheduleLag = @($samples | ForEach-Object { [double]$_.schedule_lag_ms })
 
 function Get-Average([double[]]$Values) {
   if ($null -eq $Values -or $Values.Count -eq 0) { return $null }
@@ -179,8 +195,8 @@ function Get-Maximum([double[]]$Values) {
   return [math]::Round((($Values | Measure-Object -Maximum).Maximum), 3)
 }
 
-$summary = [ordered]@{
-  schema_version = '1.0'
+$summary = [pscustomobject][ordered]@{
+  schema_version = '1.1'
   component = 'DSG.EagleHealthOverheadPilot'
   computer = $env:COMPUTERNAME
   started_at_utc = $startedAtUtc.ToString('o')
@@ -188,6 +204,7 @@ $summary = [ordered]@{
   requested_duration_seconds = $DurationSeconds
   actual_duration_seconds = $totalWallSeconds
   poll_seconds = $PollSeconds
+  expected_sample_count = [int][math]::Ceiling($DurationSeconds / [double]$PollSeconds)
   sample_count = $samples.Count
   total_collector_cpu_seconds = $totalCpuSeconds
   collector_cpu_pct_of_one_logical_cpu = if ($totalWallSeconds -gt 0) { [math]::Round(($totalCpuSeconds / $totalWallSeconds) * 100.0, 4) } else { $null }
@@ -199,6 +216,8 @@ $summary = [ordered]@{
   probe_elapsed_ms_max = Get-Maximum $probeTimes
   wall_elapsed_ms_avg = Get-Average $wallTimes
   wall_elapsed_ms_max = Get-Maximum $wallTimes
+  schedule_lag_ms_avg = Get-Average $scheduleLag
+  schedule_lag_ms_max = Get-Maximum $scheduleLag
   sample_cpu_seconds_delta_avg = Get-Average $cpuDeltas
   sample_cpu_seconds_delta_max = Get-Maximum $cpuDeltas
   host_cpu_load_after_pct_avg = Get-Average $hostCpu
@@ -213,7 +232,7 @@ $summary | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $summaryPath -Enco
 $lines = @(
   'Digital StarGate EAGLE Health D3 Overhead Pilot',
   ('Computer: {0}' -f $summary.computer),
-  ('Samples: {0}' -f $summary.sample_count),
+  ('Samples: {0}/{1}' -f $summary.sample_count,$summary.expected_sample_count),
   ('Actual duration seconds: {0}' -f $summary.actual_duration_seconds),
   ('Total collector CPU seconds: {0}' -f $summary.total_collector_cpu_seconds),
   ('Collector CPU pct of one logical CPU: {0}' -f $summary.collector_cpu_pct_of_one_logical_cpu),
@@ -221,6 +240,8 @@ $lines = @(
   ('Collector WS max MB: {0}' -f [math]::Round(([double]$summary.collector_working_set_max_bytes / 1MB), 2)),
   ('Probe avg ms: {0}' -f $summary.probe_elapsed_ms_avg),
   ('Probe max ms: {0}' -f $summary.probe_elapsed_ms_max),
+  ('Schedule lag avg ms: {0}' -f $summary.schedule_lag_ms_avg),
+  ('Schedule lag max ms: {0}' -f $summary.schedule_lag_ms_max),
   ('Host CPU avg pct after probe: {0}' -f $summary.host_cpu_load_after_pct_avg),
   ('Host CPU max pct after probe: {0}' -f $summary.host_cpu_load_after_pct_max),
   ('Probe errors total: {0}' -f $summary.probe_error_count_total),
@@ -231,7 +252,7 @@ $lines | Set-Content -LiteralPath $txtPath -Encoding UTF8
 
 Write-Host ''
 Write-Host '=== D3 OVERHEAD SUMMARY ==='
-$summary | Select-Object sample_count,actual_duration_seconds,total_collector_cpu_seconds,collector_cpu_pct_of_one_logical_cpu,collector_working_set_avg_bytes,collector_working_set_max_bytes,probe_elapsed_ms_avg,probe_elapsed_ms_max,host_cpu_load_after_pct_avg,host_cpu_load_after_pct_max,probe_error_count_total,nina_observed_running | Format-List
+$summary | Select-Object sample_count,expected_sample_count,actual_duration_seconds,total_collector_cpu_seconds,collector_cpu_pct_of_one_logical_cpu,collector_working_set_avg_bytes,collector_working_set_max_bytes,probe_elapsed_ms_avg,probe_elapsed_ms_max,schedule_lag_ms_avg,schedule_lag_ms_max,host_cpu_load_after_pct_avg,host_cpu_load_after_pct_max,probe_error_count_total,nina_observed_running | Format-List
 Write-Host ('Samples NDJSON: {0}' -f $samplePath)
 Write-Host ('Summary JSON : {0}' -f $summaryPath)
 Write-Host ('Summary TXT  : {0}' -f $txtPath)
