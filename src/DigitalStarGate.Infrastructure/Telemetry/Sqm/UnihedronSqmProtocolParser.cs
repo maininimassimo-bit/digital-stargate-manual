@@ -95,7 +95,7 @@ public static partial class UnihedronSqmProtocolParser
       diagnostic);
 
   [GeneratedRegex(
-    @"^r,(?<magnitude>[+-]?(?:\d+(?:\.\d*)?|\.\d+))m,(?<frequency>[+-]?(?:\d+(?:\.\d*)?|\.\d+))Hz,(?<period>\d+)c,(?<ticks>\d+)s,(?<temperature>[+-]?(?:\d+(?:\.\d*)?|\.\d+))C,(?<freshness>[FPS])$",
+    @"^r,\s*(?<magnitude>[+-]?(?:\d+(?:\.\d*)?|\.\d+))m,\s*(?<frequency>[+-]?(?:\d+(?:\.\d*)?|\.\d+))Hz,\s*(?<period>\d+)c,\s*(?<ticks>\d+)s,\s*(?<temperature>[+-]?(?:\d+(?:\.\d*)?|\.\d+))C,\s*(?<freshness>[FPS])$",
     RegexOptions.CultureInvariant)]
   private static partial Regex ReadingRegex();
 }
