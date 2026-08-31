@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "component": "DSG.EagleHostHealthCollector",
+  "commissioning": {
+    "enabled": false,
+    "state": "BLOCKED_BY_BKL_029",
+    "dependency": "BKL-029",
+    "required_dependency_state": "Closed",
+    "install_mode": "NONE",
+    "scheduled_task_name": null,
+    "windows_service_name": null
+  },
+  "projection": {
+    "pilot_path": "%LOCALAPPDATA%\\DigitalStarGate\\telemetry\\eagle-health-pilot.json",
+    "commissioned_path": "%LOCALAPPDATA%\\DigitalStarGate\\telemetry\\eagle-health.json",
+    "freshness_seconds": 120
+  },
+  "cadence_seconds": {
+    "fast": 30,
+    "medium": 120,
+    "slow": 600
+  },
+  "policy": {
+    "enabled": false,
+    "summary_state_when_disabled": "UNKNOWN",
+    "summary_reason_when_disabled": "POLICY_NOT_ACTIVATED",
+    "severity_thresholds": null,
+    "automatic_remediation": false
+  },
+  "safety": {
+    "authority": "OUTSIDE_SCOPE_LOCAL_PHYSICAL_INTERLOCKS",
+    "may_authorize_equipment_actions": false,
+    "may_authorize_safety_actions": false
+  },
+  "oat": {
+    "required_signals": [
+      "cpu",
+      "memory",
+      "uptime",
+      "processes",
+      "plugin_heartbeat",
+      "storage",
+      "scheduled_tasks",
+      "log_sources",
+      "event_log",
+      "usb_com",
+      "pending_reboot",
+      "time_sync",
+      "configuration_drift"
+    ],
+    "require_atomic_projection": true,
+    "require_policy_disabled_precommissioning": true,
+    "require_safety_boundary": true
+  }
+}
