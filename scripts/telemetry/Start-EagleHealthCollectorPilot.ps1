@@ -6,18 +6,26 @@ param(
   [ValidateRange(60,3600)][int]$SlowSeconds = 600,
   [ValidateRange(15,3600)][int]$ProjectionFreshnessSeconds = 120,
   [string]$OutputPath = "$env:LOCALAPPDATA\DigitalStarGate\telemetry\eagle-health-pilot.json",
-  [string]$NinaProjection = "$env:LOCALAPPDATA\DigitalStarGate\telemetry\nina-observatory-status.json"
+  [string]$NinaProjection = "$env:LOCALAPPDATA\DigitalStarGate\telemetry\nina-observatory-status.json",
+  [ValidateSet('NONE','FAST','MEDIUM','SLOW')][string]$FailureInjectionGroup = 'NONE',
+  [ValidateRange(0,1000)][int]$FailureInjectionStartCycle = 0,
+  [ValidateRange(0,1000)][int]$FailureInjectionCycleCount = 0
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 if ($MediumSeconds -lt $FastSeconds) { throw 'MediumSeconds must be >= FastSeconds.' }
 if ($SlowSeconds -lt $MediumSeconds) { throw 'SlowSeconds must be >= MediumSeconds.' }
+if ($FailureInjectionGroup -ne 'NONE') {
+  if ($FailureInjectionStartCycle -lt 1 -or $FailureInjectionCycleCount -lt 1) { throw 'Failure injection requires StartCycle >= 1 and CycleCount >= 1.' }
+  if ([System.IO.Path]::GetFileName($OutputPath) -notmatch '(?i)pilot') { throw 'Failure injection is allowed only with a pilot output path.' }
+}
 $parent = Split-Path -Parent $OutputPath
 if ($parent -and -not (Test-Path -LiteralPath $parent)) { New-Item -ItemType Directory -Path $parent -Force | Out-Null }
 Write-Host 'Digital StarGate EAGLE Health Collector - NON-COMMISSIONED PILOT'
 Write-Host ('Computer: {0}' -f $env:COMPUTERNAME)
 Write-Host ('Duration: {0}s; fast={1}s medium={2}s slow={3}s' -f $DurationSeconds,$FastSeconds,$MediumSeconds,$SlowSeconds)
 Write-Host ('Projection: {0}' -f $OutputPath)
+Write-Host ('Failure injection: group={0} start_cycle={1} cycle_count={2}' -f $FailureInjectionGroup,$FailureInjectionStartCycle,$FailureInjectionCycleCount)
 Write-Host 'Mode: read-only pilot; no task/service install; no remediation; no device commands; summary policy disabled'
 
 function New-SignalEnvelope {
@@ -32,6 +40,13 @@ function Invoke-SafeSignal {
 }
 function Get-ProcessStartUtc { param([System.Diagnostics.Process]$Process) try { $Process.StartTime.ToUniversalTime().ToString('o') } catch { $null } }
 function Get-ProcessExecutablePath { param([System.Diagnostics.Process]$Process) try { $Process.Path } catch { $null } }
+function Test-InjectedFailure {
+  param([string]$Group,[int]$Cycle)
+  if ($FailureInjectionGroup -eq 'NONE') { return $false }
+  if ($FailureInjectionGroup -ne $Group.ToUpperInvariant()) { return $false }
+  $end = $FailureInjectionStartCycle + $FailureInjectionCycleCount - 1
+  return ($Cycle -ge $FailureInjectionStartCycle -and $Cycle -le $end)
+}
 
 function Get-FastSignals {
   $os=Get-CimInstance Win32_OperatingSystem
@@ -81,17 +96,28 @@ function Get-SlowSignals {
     configuration_drift=[ordered]@{baseline_id=$null;baseline_version=$null;observed_items=@();drift_items=@();status='UNKNOWN'}
   }
 }
+
+$groupSignals=[ordered]@{
+  fast=@('cpu','memory','uptime','processes','plugin_heartbeat')
+  medium=@('storage','scheduled_tasks','log_sources')
+  slow=@('event_log','usb_com','pending_reboot','time_sync','configuration_drift')
+}
 $cache=[ordered]@{fast=$null;medium=$null;slow=$null};$last=[ordered]@{fast=[datetime]::MinValue;medium=[datetime]::MinValue;slow=[datetime]::MinValue};$deadline=[datetime]::UtcNow.AddSeconds($DurationSeconds);$cycle=0
 while([datetime]::UtcNow -lt $deadline){
   $cycle++;$start=[datetime]::UtcNow
-  if(($start-$last.fast).TotalSeconds-ge$FastSeconds){$cache.fast=Invoke-SafeSignal 'Windows host fast sources' ($FastSeconds*3) {Get-FastSignals};$last.fast=$start}
-  if(($start-$last.medium).TotalSeconds-ge$MediumSeconds){$cache.medium=Invoke-SafeSignal 'Windows host medium sources' ($MediumSeconds*3) {Get-MediumSignals};$last.medium=$start}
-  if(($start-$last.slow).TotalSeconds-ge$SlowSeconds){$cache.slow=Invoke-SafeSignal 'Windows host slow sources' ($SlowSeconds*3) {Get-SlowSignals};$last.slow=$start}
+  if(($start-$last.fast).TotalSeconds-ge$FastSeconds){$cache.fast=Invoke-SafeSignal 'Windows host fast sources' ($FastSeconds*3) {if(Test-InjectedFailure 'fast' $cycle){throw 'TEST_INJECTED_FAST_SOURCE_FAILURE'};Get-FastSignals};$last.fast=$start}
+  if(($start-$last.medium).TotalSeconds-ge$MediumSeconds){$cache.medium=Invoke-SafeSignal 'Windows host medium sources' ($MediumSeconds*3) {if(Test-InjectedFailure 'medium' $cycle){throw 'TEST_INJECTED_MEDIUM_SOURCE_FAILURE'};Get-MediumSignals};$last.medium=$start}
+  if(($start-$last.slow).TotalSeconds-ge$SlowSeconds){$cache.slow=Invoke-SafeSignal 'Windows host slow sources' ($SlowSeconds*3) {if(Test-InjectedFailure 'slow' $cycle){throw 'TEST_INJECTED_SLOW_SOURCE_FAILURE'};Get-SlowSignals};$last.slow=$start}
   $now=[datetime]::UtcNow;$signals=[ordered]@{}
-  foreach($g in @('fast','medium','slow')){$x=$cache[$g];if($x -and $x.data){foreach($p in $x.data.GetEnumerator()){$signals[$p.Key]=[ordered]@{state=$x.state;quality=$x.quality;observed_at_utc=$x.observed_at_utc;fresh_until_utc=$x.fresh_until_utc;source=$x.source;reason=$x.reason;data=$p.Value}}}}
-  $payload=[ordered]@{schema_version='1.0';component='DSG.EagleHostHealthCollector';computer=$env:COMPUTERNAME;observed_at_utc=$now.ToString('o');fresh_until_utc=$now.AddSeconds($ProjectionFreshnessSeconds).ToString('o');quality='CURRENT';correlation_id=[guid]::NewGuid().ToString('D');summary=[ordered]@{state='UNKNOWN';reasons=@([ordered]@{code='POLICY_NOT_ACTIVATED';signal=$null;severity=$null;evidence=$null})};signals=$signals;diagnostics=[ordered]@{mode='NON_COMMISSIONED_PILOT';cycle=$cycle;cadence_seconds=[ordered]@{fast=$FastSeconds;medium=$MediumSeconds;slow=$SlowSeconds};policy_enabled=$false;safety_authority='OUTSIDE_SCOPE_LOCAL_PHYSICAL_INTERLOCKS'}}
+  foreach($g in @('fast','medium','slow')){
+    $x=$cache[$g];if(-not $x){continue}
+    if($x.data){foreach($p in $x.data.GetEnumerator()){$signals[$p.Key]=[ordered]@{state=$x.state;quality=$x.quality;observed_at_utc=$x.observed_at_utc;fresh_until_utc=$x.fresh_until_utc;source=$x.source;reason=$x.reason;data=$p.Value}}}
+    else{foreach($name in $groupSignals[$g]){$signals[$name]=[ordered]@{state=$x.state;quality=$x.quality;observed_at_utc=$x.observed_at_utc;fresh_until_utc=$x.fresh_until_utc;source=$x.source;reason=$x.reason;data=$null}}}
+  }
+  $payload=[ordered]@{schema_version='1.0';component='DSG.EagleHostHealthCollector';computer=$env:COMPUTERNAME;observed_at_utc=$now.ToString('o');fresh_until_utc=$now.AddSeconds($ProjectionFreshnessSeconds).ToString('o');quality='CURRENT';correlation_id=[guid]::NewGuid().ToString('D');summary=[ordered]@{state='UNKNOWN';reasons=@([ordered]@{code='POLICY_NOT_ACTIVATED';signal=$null;severity=$null;evidence=$null})};signals=$signals;diagnostics=[ordered]@{mode='NON_COMMISSIONED_PILOT';cycle=$cycle;cadence_seconds=[ordered]@{fast=$FastSeconds;medium=$MediumSeconds;slow=$SlowSeconds};policy_enabled=$false;safety_authority='OUTSIDE_SCOPE_LOCAL_PHYSICAL_INTERLOCKS';failure_injection=[ordered]@{group=$FailureInjectionGroup;start_cycle=$FailureInjectionStartCycle;cycle_count=$FailureInjectionCycleCount}}}
   $tmp="$OutputPath.tmp";$payload|ConvertTo-Json -Depth 14|Set-Content -LiteralPath $tmp -Encoding UTF8;Move-Item -LiteralPath $tmp -Destination $OutputPath -Force
-  Write-Host ('Cycle {0}: signals={1} summary=UNKNOWN' -f $cycle,$signals.Count)
+  $unavailable=@($signals.GetEnumerator()|Where-Object{$_.Value.state -eq 'UNAVAILABLE'}|ForEach-Object{$_.Key})
+  Write-Host ('Cycle {0}: signals={1} unavailable={2} summary=UNKNOWN' -f $cycle,$signals.Count,($(if($unavailable.Count){$unavailable -join ','}else{'none'})))
   $sleep=$FastSeconds-([datetime]::UtcNow-$start).TotalSeconds;if($sleep-gt 0 -and [datetime]::UtcNow.AddSeconds($sleep)-lt$deadline){Start-Sleep -Milliseconds ([int][math]::Round($sleep*1000))}else{break}
 }
 Write-Host ('EAGLE HEALTH COLLECTOR PILOT RESULT: STOPPED normally; projection={0}; not BKL-030 acceptance' -f $OutputPath)
