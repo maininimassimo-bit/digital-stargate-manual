@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
   [string]$ProjectionPath = "$env:LOCALAPPDATA\DigitalStarGate\telemetry\eagle-health-pilot.json",
-  [string]$ConfigPath = (Join-Path $PSScriptRoot 'eagle-health-commissioning.config.json'),
+  [string]$ConfigPath,
   [switch]$AllowCommissionedProjection
 )
 
@@ -9,6 +9,10 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 function Fail([string]$Message) { throw "BKL-030 OAT FAIL: $Message" }
+
+if ([string]::IsNullOrWhiteSpace($ConfigPath)) {
+  $ConfigPath = Join-Path $PSScriptRoot 'eagle-health-commissioning.config.json'
+}
 
 if (-not (Test-Path -LiteralPath $ConfigPath -PathType Leaf)) { Fail "config not found: $ConfigPath" }
 $config = Get-Content -LiteralPath $ConfigPath -Raw | ConvertFrom-Json
