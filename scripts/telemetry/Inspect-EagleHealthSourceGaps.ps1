@@ -24,7 +24,7 @@ function Invoke-SafeProbe {
   $started = [DateTime]::UtcNow
   try {
     $data = & $Action
-    [ordered]@{
+    [pscustomobject][ordered]@{
       name = $Name
       status = 'AVAILABLE'
       error = $null
@@ -32,7 +32,7 @@ function Invoke-SafeProbe {
       data = @($data)
     }
   } catch {
-    [ordered]@{
+    [pscustomobject][ordered]@{
       name = $Name
       status = 'UNAVAILABLE'
       error = $_.Exception.Message
