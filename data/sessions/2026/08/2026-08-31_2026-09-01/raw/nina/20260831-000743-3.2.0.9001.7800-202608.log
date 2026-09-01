@@ -1,0 +1,859 @@
+----------------------------------------------------------------------
+--------------N.I.N.A. - Nighttime Imaging 'N' Astronomy--------------
+--------------------------Version 3.2.0.9001--------------------------
+-------------------------2026-08-31T00:07:48--------------------------
+----------------------------------------------------------------------
+---------------------Microsoft Windows 10.0.17763---------------------
+-------------------------OS Architecture X64--------------------------
+-----------------------Process Architecture X64-----------------------
+-----------------------------.NET 8.0.21------------------------------
+----------------------------------------------------------------------
+--------------------------Processor Count 2---------------------------
+--------------------Total Physical Memory 11.68 GB--------------------
+----------------------------------------------------------------------
+DATE|LEVEL|SOURCE|MEMBER|LINE|MESSAGE
+2026-08-31T00:07:48.8129|INFO|CameraChooserVM.cs|GetEquipment|69|Found 0 ASI Cameras
+2026-08-31T00:07:49.2674|INFO|CameraChooserVM.cs|GetEquipment|84|Found 0 Altair Cameras
+2026-08-31T00:07:49.3120|INFO|CameraChooserVM.cs|GetEquipment|96|Found 0 Atik Cameras
+2026-08-31T00:07:49.3193|INFO|CameraChooserVM.cs|GetEquipment|110|Found 0 FLI Cameras
+2026-08-31T00:07:50.4053|INFO|CameraChooserVM.cs|GetEquipment|130|Found 0 QHYCCD Cameras
+2026-08-31T00:07:50.7980|INFO|CameraChooserVM.cs|GetEquipment|158|Found 0 ToupTek Cameras
+2026-08-31T00:07:50.8101|INFO|CameraChooserVM.cs|GetEquipment|173|Found 0 Ogma Cameras
+2026-08-31T00:07:50.8357|INFO|CameraChooserVM.cs|GetEquipment|188|Found 0 Omegon Cameras
+2026-08-31T00:07:51.1021|INFO|CameraChooserVM.cs|GetEquipment|203|Found 0 RisingCam Cameras
+2026-08-31T00:07:51.1284|INFO|CameraChooserVM.cs|GetEquipment|218|Found 0 MallinCam Cameras
+2026-08-31T00:07:51.1367|INFO|CameraChooserVM.cs|GetEquipment|243|Found 0 SVBony Cameras
+2026-08-31T00:07:51.1403|INFO|CameraChooserVM.cs|GetEquipment|259|Found 0 SBIG Cameras
+2026-08-31T00:07:52.1576|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin Connector version 2.1.0.2 by Stefan Berg @isbeorn
+2026-08-31T00:07:52.5780|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin Digital StarGate Observatory Telemetry Exporter version 0.3.1.0 by Digital StarGate
+2026-08-31T00:07:52.8494|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin Hocus Focus version 3.0.0.25 by George Hilios (jokogeo)
+2026-08-31T00:07:52.8782|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin Remote Copy version 3.0.1.0 by Tom Palmer @tcpalmer
+2026-08-31T00:07:53.2860|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin RTSP Client version 3.1.0.6 by Stefan Berg @isbeorn
+2026-08-31T00:07:53.3440|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin Three Point Polar Alignment version 2.2.4.3 by Stefan Berg @isbeorn
+2026-08-31T00:07:53.3728|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin WandererAstro Tools version 3.0.0.0 by WandererAstro
+2026-08-31T00:07:53.4680|INFO|CameraChooserVM.cs|GetEquipment|279|Found 0 SVBony Cameras
+2026-08-31T00:07:53.4707|INFO|CameraChooserVM.cs|GetEquipment|279|Found 0 PlayerOne Cameras
+2026-08-31T00:07:53.4747|INFO|CameraChooserVM.cs|GetEquipment|279|Found 0 ASTPAN Cameras
+2026-08-31T00:07:53.4776|INFO|CameraChooserVM.cs|GetEquipment|293|Found 13 ASCOM Cameras
+2026-08-31T00:07:54.0586|INFO|PluginFetcher.cs|RequestAll|43|Fetching plugin manifests from https://nighttime-imaging.eu/wp-json/nina/v1/plugins/manifests
+2026-08-31T00:07:55.8811|INFO|PluginFetcher.cs|RequestAll|57|Found 93 valid plugins at https://nighttime-imaging.eu/wp-json/nina/v1/plugins/manifests
+2026-08-31T00:07:56.0316|INFO|SwitchChooserVM.cs|GetEquipment|71|Found 0 Alpaca Switch Hubs
+2026-08-31T00:07:56.1260|INFO|FocuserChooserVM.cs|GetEquipment|84|Found 0 Alpaca Focusers
+2026-08-31T00:07:56.1497|INFO|TelescopeChooserVM.cs|GetEquipment|69|Found 0 Alpaca Telescopes
+2026-08-31T00:07:56.2697|INFO|CameraChooserVM.cs|GetEquipment|305|Found 0 Alpaca Cameras
+2026-08-31T00:07:56.2749|INFO|CameraChooserVM.cs|GetEquipment|318|Found 0 Canon Cameras
+2026-08-31T00:07:56.3027|INFO|FilterWheelChooserVM.cs|GetEquipment|193|Found 0 Alpaca Filter Wheels
+2026-08-31T00:07:56.3784|INFO|WeatherDataChooserVM.cs|GetEquipment|69|Found 0 Alpaca Observing Conditions
+2026-08-31T00:07:56.3919|INFO|SafetyMonitorChooserVM.cs|GetEquipment|71|Found 0 Alpaca Safety Monitors
+2026-08-31T00:07:56.4108|INFO|FlatDeviceChooserVM.cs|GetEquipment|67|Found 0 Alpaca Cover Calibrators
+2026-08-31T00:07:56.4207|INFO|RotatorChooserVM.cs|GetEquipment|68|Found 0 Alpaca Rotators
+2026-08-31T00:07:56.4744|INFO|DomeChooserVM.cs|GetEquipment|67|Found 0 Alpaca Domes
+2026-08-31T00:07:57.7785|INFO|ApplicationVM.cs|CheckASCOMPlatformVersion|81|ASCOM Platform 7.1.3.4851 installed
+2026-08-31T00:07:57.7847|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive C:\: 4.38 GB
+2026-08-31T00:07:57.7850|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive D:\: 332.43 GB
+2026-08-31T00:08:01.3464|INFO|WeatherDataVM.cs|Disconnect|305|Disconnected Weather Device
+2026-08-31T00:08:02.7156|INFO|AscomDevice.cs|GetProperty|527|Property ObservingConditions.SkyBrightness GET is not implemented in this driver (CloudWatcher ObsCond)
+2026-08-31T00:08:02.7281|INFO|AscomDevice.cs|GetProperty|527|Property ObservingConditions.SkyQuality GET is not implemented in this driver (CloudWatcher ObsCond)
+2026-08-31T00:08:02.7441|INFO|AscomDevice.cs|GetProperty|527|Property ObservingConditions.StarFWHM GET is not implemented in this driver (CloudWatcher ObsCond)
+2026-08-31T00:08:02.7592|INFO|AscomDevice.cs|GetProperty|527|Property ObservingConditions.WindDirection GET is not implemented in this driver (CloudWatcher ObsCond)
+2026-08-31T00:08:02.7754|INFO|WeatherDataVM.cs|ChooseWeatherData|150|Successfully connected Weather Device. Id: ASCOM.CloudWatcher.ObservingConditions Name: CloudWatcher ObsCond DisplayName: CloudWatcher ObsCond (ASCOM) Driver Version: 1.1
+2026-08-31T00:08:05.3382|INFO|DomeVM.cs|Disconnect|355|Disconnected Dome Device
+2026-08-31T00:08:05.4144|INFO|AscomDevice.cs|GetProperty|527|Property Dome.AtPark GET is not implemented in this driver (Shelter Dome)
+2026-08-31T00:08:05.4249|INFO|AscomDevice.cs|GetProperty|527|Property Dome.AtHome GET is not implemented in this driver (Shelter Dome)
+2026-08-31T00:08:05.4400|INFO|AscomDevice.cs|GetProperty|527|Property Dome.Azimuth GET is not implemented in this driver (Shelter Dome)
+2026-08-31T00:08:05.6346|INFO|DomeVM.cs|ChooseDome|198|Successfully connected Dome. Id: ASCOM.TS_Shelter.Dome Name: Shelter Dome DisplayName: Shelter Dome (ASCOM) Driver Version: 6.6
+2026-08-31T00:08:07.5322|INFO|SafetyMonitorVM.cs|Disconnect|221|Disconnected Safety Monitor
+2026-08-31T00:08:07.6599|INFO|AscomDevice.cs|GetProperty|527|Property Dome.Altitude GET is not implemented in this driver (Shelter Dome)
+2026-08-31T00:08:08.4000|INFO|SafetyMonitorVM.cs|Connect|175|Successfully connected Safety Monitor. Id: ASCOM.Hub.SafetyMonitor Name: Short driver name - please customise DisplayName: Short driver name - please customise (ASCOM) Driver Version: 6.4
+2026-08-31T00:31:20.8257|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 3.18s > 2s; Poll: 00:00:00.0027082; Update: 00:00:03.1821833)
+2026-08-31T02:01:40.8120|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 3.18s > 2s; Poll: 00:00:00.0026535; Update: 00:00:03.1726717)
+2026-08-31T02:42:28.3999|INFO|SafetyMonitorVM.cs|UpdateMonitorValues|95|SafetyMonitorInfo state changed to Unsafe
+2026-08-31T03:26:35.7962|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 2.16s > 2s; Poll: 00:00:00.0026958; Update: 00:00:02.1590850)
+2026-08-31T03:37:20.8151|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 3.18s > 2s; Poll: 00:00:00.0028456; Update: 00:00:03.1763145)
+2026-08-31T04:43:00.8422|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 3.20s > 2s; Poll: 00:00:00.0028058; Update: 00:00:03.2007208)
+2026-08-31T04:56:32.4006|INFO|SafetyMonitorVM.cs|UpdateMonitorValues|95|SafetyMonitorInfo state changed to Safe
+2026-08-31T06:00:02.4002|INFO|SafetyMonitorVM.cs|UpdateMonitorValues|95|SafetyMonitorInfo state changed to Unsafe
+2026-08-31T09:26:44.7469|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 3.11s > 2s; Poll: 00:00:00.0026961; Update: 00:00:03.1059377)
+2026-08-31T09:59:24.7452|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 3.11s > 2s; Poll: 00:00:00.0029528; Update: 00:00:03.1046254)
+2026-08-31T10:23:02.7597|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 3.12s > 2s; Poll: 00:00:00.0033498; Update: 00:00:03.1178901)
+2026-08-31T11:32:44.7474|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 3.11s > 2s; Poll: 00:00:00.0026272; Update: 00:00:03.1080511)
+2026-08-31T12:00:10.8863|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 4.53s > 2s; Poll: 00:00:00.0027743; Update: 00:00:04.5245068)
+2026-08-31T12:06:34.7574|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 3.11s > 2s; Poll: 00:00:00.0031946; Update: 00:00:03.1113884)
+2026-08-31T12:37:25.8036|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 2.17s > 2s; Poll: 00:00:00.0028439; Update: 00:00:02.1644988)
+2026-08-31T13:27:25.8147|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 2.18s > 2s; Poll: 00:00:00.0025940; Update: 00:00:02.1761651)
+2026-08-31T16:14:02.7432|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 3.11s > 2s; Poll: 00:00:00.0032191; Update: 00:00:03.1050584)
+2026-08-31T17:36:11.8178|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 24.17s > 2s; Poll: 00:00:00.0027567; Update: 00:00:24.1705018)
+2026-08-31T17:55:46.7531|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 3.12s > 2s; Poll: 00:00:00.0034746; Update: 00:00:03.1154872)
+2026-08-31T19:31:59.2495|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_0424&PID_2807\5&144E4AB&0&4, PnpDeviceId: USB\VID_0424&PID_2807\5&144E4AB&0&4, Description: Hub USB generico, Name: Hub USB generico, Manufacturer: (HUB USB standard), Service: USBHUB3, Status: OK
+2026-08-31T19:31:59.2497|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_0424&PID_5807\5&144E4AB&0&13, PnpDeviceId: USB\VID_0424&PID_5807\5&144E4AB&0&13, Description: Hub USB SuperSpeed generico, Name: Hub USB SuperSpeed generico, Manufacturer: (HUB USB standard), Service: USBHUB3, Status: OK
+2026-08-31T19:31:59.9591|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_0403&PID_6015\UCH4OV5CO, PnpDeviceId: USB\VID_0403&PID_6015\UCH4OV5CO, Description: USB Serial Converter, Name: USB Serial Converter, Manufacturer: FTDI, Service: FTDIBUS, Status: OK
+2026-08-31T19:32:00.2834|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_2109&PID_0813\5&144E4AB&0&12, PnpDeviceId: USB\VID_2109&PID_0813\5&144E4AB&0&12, Description: Hub USB SuperSpeed generico, Name: Hub USB SuperSpeed generico, Manufacturer: (HUB USB standard), Service: USBHUB3, Status: OK
+2026-08-31T19:32:01.5001|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_2109&PID_2813\5&144E4AB&0&3, PnpDeviceId: USB\VID_2109&PID_2813\5&144E4AB&0&3, Description: Hub USB generico, Name: Hub USB generico, Manufacturer: (HUB USB standard), Service: USBHUB3, Status: OK
+2026-08-31T19:32:01.9157|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_0403&PID_6015\PPBA671NR5, PnpDeviceId: USB\VID_0403&PID_6015\PPBA671NR5, Description: USB Serial Converter, Name: USB Serial Converter, Manufacturer: FTDI, Service: FTDIBUS, Status: OK
+2026-08-31T19:32:01.9158|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_03C3&PID_120C\6&2EF655E5&0&4, PnpDeviceId: USB\VID_03C3&PID_120C\6&2EF655E5&0&4, Description: ZWO ASI120MM Mini Camera, Name: ZWO ASI120MM Mini Camera, Manufacturer: ZWO, Service: ASICAMUSB3, Status: OK
+2026-08-31T19:32:04.7046|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_1A86&PID_7523\6&2CA8C582&0&4, PnpDeviceId: USB\VID_1A86&PID_7523\6&2CA8C582&0&4, Description: USB-SERIAL CH340, Name: USB-SERIAL CH340 (COM34), Manufacturer: wch.cn, Service: CH341SER_A64, Status: OK
+2026-08-31T19:32:05.8208|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_0403&PID_6015\PA47RVMY, PnpDeviceId: USB\VID_0403&PID_6015\PA47RVMY, Description: USB Serial Converter, Name: USB Serial Converter, Manufacturer: FTDI, Service: FTDIBUS, Status: OK
+2026-08-31T19:32:05.8210|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_0424&PID_2412\6&2EF655E5&0&2, PnpDeviceId: USB\VID_0424&PID_2412\6&2EF655E5&0&2, Description: Hub USB generico, Name: Hub USB generico, Manufacturer: (HUB USB standard), Service: USBHUB3, Status: OK
+2026-08-31T19:32:06.8494|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_1A40&PID_0101\6&2EF655E5&0&3, PnpDeviceId: USB\VID_1A40&PID_0101\6&2EF655E5&0&3, Description: Hub USB generico, Name: Hub USB generico, Manufacturer: (HUB USB standard), Service: USBHUB3, Status: OK
+2026-08-31T19:32:06.8496|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_0547&PID_1433\6&1727222E&0&3, PnpDeviceId: USB\VID_0547&PID_1433\6&1727222E&0&3, Description: Dispositivo WinUSB, Name: USB3.0 Camera, Manufacturer: Dispositivo WinUSB, Service: WINUSB, Status: OK
+2026-08-31T19:32:06.8496|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_1A40&PID_0201\6&2CA8C582&0&2, PnpDeviceId: USB\VID_1A40&PID_0201\6&2CA8C582&0&2, Description: Hub USB generico, Name: Hub USB generico, Manufacturer: (HUB USB standard), Service: USBHUB3, Status: OK
+2026-08-31T19:32:07.8900|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_0547&PID_BF10\7&7EF1AA&0&3, PnpDeviceId: USB\VID_0547&PID_BF10\7&7EF1AA&0&3, Description: Dispositivo WinUSB, Name: FILTERWHEEL  , Manufacturer: Dispositivo WinUSB, Service: WINUSB, Status: OK
+2026-08-31T19:32:07.8901|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_1A86&PID_7523\7&38C2A16F&0&2, PnpDeviceId: USB\VID_1A86&PID_7523\7&38C2A16F&0&2, Description: USB-SERIAL CH340, Name: USB-SERIAL CH340 (COM44), Manufacturer: wch.cn, Service: CH341SER_A64, Status: OK
+2026-08-31T19:32:07.8901|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_1618&PID_6952\7&7EA6B39&0&4, PnpDeviceId: USB\VID_1618&PID_6952\7&7EA6B39&0&4, Description: QHY695A, Name: QHY695A, Manufacturer: QHY CCD, Service: QHY695A_FW, Status: Unknown
+2026-08-31T19:32:07.8902|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_0403&PID_6010\7&7EA6B39&0&3, PnpDeviceId: USB\VID_0403&PID_6010\7&7EA6B39&0&3, Description: Dispositivo USB composito, Name: Dispositivo USB composito, Manufacturer: (Controller host USB standard), Service: usbccgp, Status: OK
+2026-08-31T19:32:07.8903|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_0403&PID_6010&MI_01\8&367DB49&0&0001, PnpDeviceId: USB\VID_0403&PID_6010&MI_01\8&367DB49&0&0001, Description: USB Serial Converter B, Name: USB Serial Converter B, Manufacturer: FTDI, Service: FTDIBUS, Status: OK
+2026-08-31T19:32:07.8903|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_0403&PID_6010&MI_00\8&367DB49&0&0000, PnpDeviceId: USB\VID_0403&PID_6010&MI_00\8&367DB49&0&0000, Description: USB Serial Converter A, Name: USB Serial Converter A, Manufacturer: FTDI, Service: FTDIBUS, Status: OK
+2026-08-31T19:32:07.8904|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_10C4&PID_EA60\28EAB5B658A6E9118D4DD6A44458CD37, PnpDeviceId: USB\VID_10C4&PID_EA60\28EAB5B658A6E9118D4DD6A44458CD37, Description: Silicon Labs CP210x USB to UART Bridge, Name: Silicon Labs CP210x USB to UART Bridge (COM16), Manufacturer: Silicon Labs, Service: silabser, Status: OK
+2026-08-31T19:32:08.4283|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_1618&PID_0921\7&7EA6B39&0&1, PnpDeviceId: USB\VID_1618&PID_0921\7&7EA6B39&0&1, Description: QHY5II, Name: QHY5II, Manufacturer: QHY CCD, Service: QHY5II_IO, Status: OK
+2026-08-31T19:32:09.9013|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 2.00s > 2s; Poll: 00:00:00.0033659; Update: 00:00:01.9997840)
+2026-08-31T19:32:10.1795|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_1618&PID_6953\7&7EA6B39&0&4, PnpDeviceId: USB\VID_1618&PID_6953\7&7EA6B39&0&4, Description: QHY695A, Name: QHY695A, Manufacturer: QHY CCD, Service: QHY695A_IO, Status: OK
+2026-08-31T19:32:58.2803|INFO|ApplicationDeviceConnectionVM.cs|UsbDeviceWatcher_DeviceInserted|232|New USB device detected DeviceId: USB\VID_15A2&PID_A50F\_CGX_V1, PnpDeviceId: USB\VID_15A2&PID_A50F\_CGX_V1, Description: Dispositivo seriale USB, Name: USB Serial Device (COM15), Manufacturer: Microsoft, Service: usbser, Status: OK
+2026-08-31T19:35:28.1591|INFO|CameraVM.cs|Disconnect|650|Disconnected Camera
+2026-08-31T19:35:28.1639|INFO|CameraChooserVM.cs|GetEquipment|69|Found 1 ASI Cameras
+2026-08-31T19:35:28.2333|INFO|CameraChooserVM.cs|GetEquipment|84|Found 1 Altair Cameras
+2026-08-31T19:35:28.3619|INFO|CameraChooserVM.cs|GetEquipment|96|Found 0 Atik Cameras
+2026-08-31T19:35:28.3630|INFO|CameraChooserVM.cs|GetEquipment|110|Found 0 FLI Cameras
+2026-08-31T19:35:28.3632|INFO|CameraChooserVM.cs|GetEquipment|130|Found 2 QHYCCD Cameras
+2026-08-31T19:35:28.6578|INFO|CameraChooserVM.cs|GetEquipment|158|Found 2 ToupTek Cameras
+2026-08-31T19:35:28.6701|INFO|CameraChooserVM.cs|GetEquipment|173|Found 1 Ogma Cameras
+2026-08-31T19:35:28.6945|INFO|CameraChooserVM.cs|GetEquipment|188|Found 2 Omegon Cameras
+2026-08-31T19:35:28.9507|INFO|CameraChooserVM.cs|GetEquipment|203|Found 2 RisingCam Cameras
+2026-08-31T19:35:28.9786|INFO|CameraChooserVM.cs|GetEquipment|218|Found 1 MallinCam Cameras
+2026-08-31T19:35:28.9841|INFO|CameraChooserVM.cs|GetEquipment|243|Found 1 SVBony Cameras
+2026-08-31T19:35:28.9873|INFO|CameraChooserVM.cs|GetEquipment|259|Found 0 SBIG Cameras
+2026-08-31T19:35:28.9885|INFO|CameraChooserVM.cs|GetEquipment|279|Found 0 SVBony Cameras
+2026-08-31T19:35:28.9888|INFO|CameraChooserVM.cs|GetEquipment|279|Found 0 PlayerOne Cameras
+2026-08-31T19:35:28.9937|INFO|CameraChooserVM.cs|GetEquipment|279|Found 0 ASTPAN Cameras
+2026-08-31T19:35:28.9954|INFO|CameraChooserVM.cs|GetEquipment|293|Found 13 ASCOM Cameras
+2026-08-31T19:35:30.9964|INFO|CameraChooserVM.cs|GetEquipment|305|Found 0 Alpaca Cameras
+2026-08-31T19:35:30.9974|INFO|CameraChooserVM.cs|GetEquipment|318|Found 0 Canon Cameras
+2026-08-31T19:35:31.0041|INFO|QHYCamera.cs|ConnectSync|766|QHYCCD: Connecting to 695A-M-0037ec709603ca4e3
+2026-08-31T19:35:38.1174|INFO|FilterWheelChooserVM.cs|GetEquipment|193|Found 0 Alpaca Filter Wheels
+2026-08-31T19:35:39.7794|INFO|FilterWheelVM.cs|Disconnect|333|Disconnected Filter Wheel
+2026-08-31T19:35:40.0357|INFO|FilterWheelVM.cs|ChooseFW|279|Successfully connected Filter Wheel. Id: 695A-M-0037ec709603ca4e3 Name: 695A-M 8-Slot Filter Wheel DisplayName: 695A-M 8-Slot Filter Wheel Driver Version: 1.0
+2026-08-31T19:35:43.1820|INFO|FocuserVM.cs|Disconnect|441|Disconnected Focuser
+2026-08-31T19:35:43.9670|ERROR|AscomDevice.cs|Connected|147|Pegasus Astro Focus Controller should be connected but reports to be disconnected. Trying to reconnect...
+2026-08-31T19:35:44.0831|INFO|AscomDevice.cs|TryReconnect|132|Pegasus Astro Focus Controller reconnection successful
+2026-08-31T19:35:44.2577|INFO|FocuserVM.cs|ChooseFocuser|333|Successfully connected Focuser. Id: ASCOM.PegasusAstro.Focuser Name: Pegasus Astro Focus Controller DisplayName: Pegasus Astro Focus Controller (ASCOM) Driver Version: 2.20
+2026-08-31T19:35:47.3932|INFO|TelescopeVM.cs|Disconnect|740|Disconnected mount
+2026-08-31T19:35:47.5902|INFO|AscomTelescope.cs|CheckMountTime|845|Mount UTC Time: 2026-08-31 17:35:47Z / System UTC Time: 2026-08-31 17:35:47Z; Difference: 0.004 seconds
+2026-08-31T19:35:47.6421|INFO|AscomTelescope.cs|CheckMountTime|865|Mount driver does not allow the mount's time to be set.
+2026-08-31T19:35:47.7671|INFO|AscomDevice.cs|GetProperty|527|Property Telescope.SiteElevation GET is not implemented in this driver (CPWI_ASCOM_Telescope)
+2026-08-31T19:35:48.6287|INFO|TelescopeVM.cs|ChooseTelescope|535|Successfully connected mount. Id: ASCOM.Optec ASCOM.Telescope Name: CPWI_ASCOM_Telescope DisplayName: CPWI_ASCOM_Telescope (ASCOM) Driver Version: 2.5.9.99  with DLL Assembly Date: July_1_2020
+2026-08-31T19:35:52.3557|INFO|PHD2Guider.cs|Connect|205|Connecting to PHD2 server at 127.0.0.1:4400
+2026-08-31T19:35:57.1716|INFO|FlatDeviceVM.cs|Disconnect|289|Disconnected Flat Device
+2026-08-31T19:36:04.5702|INFO|FlatDeviceVM.cs|Connect|241|Successfully connected flat device. Id: ASCOM.WandererCover1.CoverCalibrator Name: WandererEmpire Cover 1 DisplayName: WandererEmpire Cover 1 (ASCOM) Driver Version: 2.0
+2026-08-31T19:37:02.7991|INFO|QHYCamera.cs|ConnectSync|1020|QHYCCD: SDK version: 25-4-23-15
+2026-08-31T19:37:02.7993|INFO|QHYCamera.cs|ConnectSync|1021|QHYCCD: USB driver version: 
+2026-08-31T19:37:02.7994|INFO|QHYCamera.cs|ConnectSync|1022|QHYCCD: Camera firmware version: 18-10-24
+2026-08-31T19:37:02.7995|INFO|QHYCamera.cs|ConnectSync|1023|QHYCCD: Camera FPGA versions: N/A
+2026-08-31T19:37:02.8682|INFO|CameraVM.cs|ChooseCamera|455|Successfully connected Camera. Id: 695A-M-0037ec709603ca4e3 Name: 695A-M DisplayName: 695A-M (603ca4e3)Driver Version: 
+2026-08-31T19:39:47.7045|INFO|Sequence2VM.cs|LockSequence|139|Sequencer unlocked
+2026-08-31T19:39:52.3580|INFO|DockManagerVM.cs|InitializeAvalonDockLayout|366|Initializing imaging tab layout from C:\Users\PrimaLuceLab\AppData\Local\NINA\Profiles\21c45d14-58c2-4ca1-9053-4e23fb6d7dc4.dock.config
+2026-08-31T20:08:38.7526|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 3.11s > 2s; Poll: 00:00:00.0029556; Update: 00:00:03.1117904)
+2026-08-31T20:32:10.4023|INFO|SafetyMonitorVM.cs|UpdateMonitorValues|95|SafetyMonitorInfo state changed to Safe
+2026-08-31T21:13:28.7654|WARNING|DeviceUpdateTimer.cs|Run|115|Mount value update cycle took longer than the device poll interval (Total: 2.01s > 2s; Poll: 00:00:02.0114909; Update: 00:00:00.0001029)
+2026-08-31T21:13:33.0159|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 4.25s > 2s; Poll: 00:00:00.2942931; Update: 00:00:03.9557710)
+2026-08-31T21:13:55.0530|INFO|DomeVM.cs|OpenShutter|448|Opening dome shutter. Shutter state before opening ShutterClosed
+2026-08-31T21:13:55.0557|INFO|AscomDome.cs|OpenShutter|206|Sending an OpenShutter request, since it is currently ShutterClosed
+2026-08-31T21:14:41.8307|INFO|DomeVM.cs|OpenShutter|454|Opened dome shutter. Shutter state after opening ShutterOpen
+2026-08-31T21:30:36.7576|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 3.12s > 2s; Poll: 00:00:00.0026885; Update: 00:00:03.1191563)
+2026-08-31T21:32:53.6646|INFO|Sequence2VM.cs|StartSequence|543|Advanced Sequence starting
+2026-08-31T21:32:53.6976|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequenceRootContainer, Strategy: SequentialStrategy, Items[CREATED]: 3, Triggers: Trigger: MeridianFlipTriggerTrigger: RestoreGuidingTrigger: AutofocusAfterHFRIncreaseTrigger, Amount: 5Trigger: AutofocusAfterFilterChange
+2026-08-31T21:32:53.7111|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:53.9890|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.StartAreaContainer, Strategy: SequentialStrategy, Items[CREATED]: 2
+2026-08-31T21:32:53.9895|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:53.9899|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: VERSION: 1
+2026-08-31T21:32:53.9904|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: VERSION: 1
+2026-08-31T21:32:53.9945|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:53.9948|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 4
+2026-08-31T21:32:53.9950|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:53.9951|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: VERSION: 1
+2026-08-31T21:32:53.9953|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: VERSION: 1
+2026-08-31T21:32:53.9955|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:53.9956|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 4
+2026-08-31T21:32:53.9956|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:53.9958|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: This Startup Sequence ensures an ASCOM Safety Monitor will function in a sequence as expected.
+2026-08-31T21:32:53.9958|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: This Startup Sequence ensures an ASCOM Safety Monitor will function in a sequence as expected.
+2026-08-31T21:32:53.9958|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:53.9959|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: The CONNECTOR Plugin is used in this Sequence.
+2026-08-31T21:32:53.9959|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: The CONNECTOR Plugin is used in this Sequence.
+2026-08-31T21:32:53.9960|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:53.9960|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: A Switch is also used within this Startup Sequence.
+2026-08-31T21:32:53.9961|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: A Switch is also used within this Startup Sequence.
+2026-08-31T21:32:53.9961|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:53.9962|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: The sequence uses Nautical Dusk and Nautical Dawn along with a number of time offsets. Adjust this as desired.
+2026-08-31T21:32:53.9962|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: The sequence uses Nautical Dusk and Nautical Dawn along with a number of time offsets. Adjust this as desired.
+2026-08-31T21:32:53.9989|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 4
+2026-08-31T21:32:53.9991|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:53.9992|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 11
+2026-08-31T21:32:53.9993|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:53.9998|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: WaitForTime, Time: 21:0:6h, Offset: -30
+2026-08-31T21:32:54.0025|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: WaitForTime, Time: 21:0:6h, Offset: -30
+2026-08-31T21:32:54.0300|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:54.0310|INFO|SequenceItem.cs|Run|208|Starting Category: Connetti, Item: ConnectEquipment, Selected device: Weather, Selected device id: ASCOM.CloudWatcher.ObservingConditions
+2026-08-31T21:32:54.0330|INFO|ConnectEquipment.cs|Execute|186|Weather is already connected
+2026-08-31T21:32:54.0331|INFO|SequenceItem.cs|Run|254|Finishing Category: Connetti, Item: ConnectEquipment, Selected device: Weather, Selected device id: ASCOM.CloudWatcher.ObservingConditions
+2026-08-31T21:32:54.0332|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:54.0333|INFO|SequenceItem.cs|Run|208|Starting Category: Connetti, Item: ConnectEquipment, Selected device: Safety Monitor, Selected device id: ASCOM.Hub.SafetyMonitor
+2026-08-31T21:32:54.0334|INFO|ConnectEquipment.cs|Execute|186|Safety Monitor is already connected
+2026-08-31T21:32:54.0334|INFO|SequenceItem.cs|Run|254|Finishing Category: Connetti, Item: ConnectEquipment, Selected device: Safety Monitor, Selected device id: ASCOM.Hub.SafetyMonitor
+2026-08-31T21:32:54.0335|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:54.0339|INFO|SequenceItem.cs|Run|208|Starting Category: Monitor Di Sicurezza, Item: WaitUntilSafe
+2026-08-31T21:32:54.0351|INFO|SequenceItem.cs|Run|254|Finishing Category: Monitor Di Sicurezza, Item: WaitUntilSafe
+2026-08-31T21:32:54.0352|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:54.0353|INFO|SequenceItem.cs|Run|208|Starting Category: Connetti, Item: ConnectEquipment, Selected device: Camera, Selected device id: 695A-M-0037ec709603ca4e3
+2026-08-31T21:32:54.0353|INFO|ConnectEquipment.cs|Execute|186|Camera is already connected
+2026-08-31T21:32:54.0354|INFO|SequenceItem.cs|Run|254|Finishing Category: Connetti, Item: ConnectEquipment, Selected device: Camera, Selected device id: 695A-M-0037ec709603ca4e3
+2026-08-31T21:32:54.0354|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:54.0355|INFO|SequenceItem.cs|Run|208|Starting Category: Connetti, Item: ConnectEquipment, Selected device: Focuser, Selected device id: ASCOM.PegasusAstro.Focuser
+2026-08-31T21:32:54.0356|INFO|ConnectEquipment.cs|Execute|186|Focuser is already connected
+2026-08-31T21:32:54.0359|INFO|SequenceItem.cs|Run|254|Finishing Category: Connetti, Item: ConnectEquipment, Selected device: Focuser, Selected device id: ASCOM.PegasusAstro.Focuser
+2026-08-31T21:32:54.0360|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:54.0360|INFO|SequenceItem.cs|Run|208|Starting Category: Connetti, Item: ConnectEquipment, Selected device: Filter Wheel, Selected device id: 695A-M-0037ec709603ca4e3
+2026-08-31T21:32:54.0361|INFO|ConnectEquipment.cs|Execute|186|Filter Wheel is already connected
+2026-08-31T21:32:54.0361|INFO|SequenceItem.cs|Run|254|Finishing Category: Connetti, Item: ConnectEquipment, Selected device: Filter Wheel, Selected device id: 695A-M-0037ec709603ca4e3
+2026-08-31T21:32:54.0362|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:54.0362|INFO|SequenceItem.cs|Run|208|Starting Category: Connetti, Item: ConnectEquipment, Selected device: Mount, Selected device id: ASCOM.Optec ASCOM.Telescope
+2026-08-31T21:32:54.0363|INFO|ConnectEquipment.cs|Execute|186|Mount is already connected
+2026-08-31T21:32:54.0363|INFO|SequenceItem.cs|Run|254|Finishing Category: Connetti, Item: ConnectEquipment, Selected device: Mount, Selected device id: ASCOM.Optec ASCOM.Telescope
+2026-08-31T21:32:54.0364|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:54.0364|INFO|SequenceItem.cs|Run|208|Starting Category: Connetti, Item: ConnectEquipment, Selected device: Dome, Selected device id: ASCOM.TS_Shelter.Dome
+2026-08-31T21:32:54.0365|INFO|ConnectEquipment.cs|Execute|186|Dome is already connected
+2026-08-31T21:32:54.0365|INFO|SequenceItem.cs|Run|254|Finishing Category: Connetti, Item: ConnectEquipment, Selected device: Dome, Selected device id: ASCOM.TS_Shelter.Dome
+2026-08-31T21:32:54.0366|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:54.0366|INFO|SequenceItem.cs|Run|208|Starting Category: Connetti, Item: ConnectEquipment, Selected device: Guider, Selected device id: PHD2_Single
+2026-08-31T21:32:54.0367|INFO|ConnectEquipment.cs|Execute|186|Guider is already connected
+2026-08-31T21:32:54.0367|INFO|SequenceItem.cs|Run|254|Finishing Category: Connetti, Item: ConnectEquipment, Selected device: Guider, Selected device id: PHD2_Single
+2026-08-31T21:32:54.0368|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:54.0368|INFO|SequenceItem.cs|Run|208|Starting Category: Connetti, Item: ConnectEquipment, Selected device: Flat Panel, Selected device id: ASCOM.WandererCover1.CoverCalibrator
+2026-08-31T21:32:54.0369|INFO|ConnectEquipment.cs|Execute|186|Flat Panel is already connected
+2026-08-31T21:32:54.0369|INFO|SequenceItem.cs|Run|254|Finishing Category: Connetti, Item: ConnectEquipment, Selected device: Flat Panel, Selected device id: ASCOM.WandererCover1.CoverCalibrator
+2026-08-31T21:32:54.0371|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 11
+2026-08-31T21:32:54.0372|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:54.0373|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 12
+2026-08-31T21:32:54.0375|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:32:54.0381|INFO|SequenceItem.cs|Run|208|Starting Category: Fotocamera, Item: CoolCamera, Temperature: -10, Duration: 5
+2026-08-31T21:32:54.0411|INFO|CameraVM.cs|CoolCamera|138|Cooling Camera. Target: -10 Duration: 00:05:00
+2026-08-31T21:37:55.5995|INFO|SequenceItem.cs|Run|254|Finishing Category: Fotocamera, Item: CoolCamera, Temperature: -10, Duration: 5
+2026-08-31T21:37:55.6011|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:37:55.6015|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: WaitForTime, Time: 21:20:6h, Offset: -10
+2026-08-31T21:37:55.6016|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: WaitForTime, Time: 21:20:6h, Offset: -10
+2026-08-31T21:37:55.6017|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:37:55.6017|INFO|SequenceItem.cs|Run|208|Starting Category: Monitor Di Sicurezza, Item: WaitUntilSafe
+2026-08-31T21:37:55.6019|INFO|SequenceItem.cs|Run|254|Finishing Category: Monitor Di Sicurezza, Item: WaitUntilSafe
+2026-08-31T21:37:55.6019|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:37:55.6024|INFO|SequenceItem.cs|Run|208|Starting Category: Osservatorio, Item: OpenDomeShutter
+2026-08-31T21:37:55.6045|INFO|SequenceItem.cs|Run|254|Finishing Category: Osservatorio, Item: OpenDomeShutter
+2026-08-31T21:37:55.6046|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:37:55.6051|INFO|SequenceItem.cs|Run|208|Starting Category: Telescopio, Item: UnparkScope
+2026-08-31T21:37:55.6077|INFO|TelescopeVM.cs|UnparkTelescope|232|Mount ordered to unpark
+2026-08-31T21:37:55.7397|INFO|TelescopeVM.cs|UnparkTelescope|277|Mount is already unparked
+2026-08-31T21:37:55.7402|INFO|TelescopeVM.cs|UnparkTelescope|282|Mount has unparked
+2026-08-31T21:37:55.7404|INFO|SequenceItem.cs|Run|254|Finishing Category: Telescopio, Item: UnparkScope
+2026-08-31T21:37:55.7406|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:37:55.7410|INFO|SequenceItem.cs|Run|208|Starting Category: Apparato per i Flat, Item: OpenCover
+2026-08-31T21:37:55.7498|INFO|FlatDeviceVM.cs|OpenCover|312|Opening Flat Device Cover
+2026-08-31T21:38:21.2641|INFO|SequenceItem.cs|Run|254|Finishing Category: Apparato per i Flat, Item: OpenCover
+2026-08-31T21:38:21.2643|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:38:21.2662|INFO|SequenceItem.cs|Run|208|Starting Category: Telescopio, Item: SetTracking, TrackingMode: Sidereal
+2026-08-31T21:38:21.2985|INFO|SequenceItem.cs|Run|254|Finishing Category: Telescopio, Item: SetTracking, TrackingMode: Sidereal
+2026-08-31T21:38:21.3010|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-08-31T21:38:21.3018|INFO|SequenceItem.cs|Run|208|Starting Category: Ruota porta filtri, Item: SwitchFilter, Filter: Blu
+2026-08-31T21:38:21.4187|INFO|FilterWheelVM.cs|ChangeFilter|112|Moving to Filter Blu at Position 4
+2026-08-31T21:38:33.2995|INFO|SequenceItem.cs|Run|254|Finishing Category: Ruota porta filtri, Item: SwitchFilter, Filter: Blu
+2026-08-31T21:38:33.3031|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 02:36:22.2742271, next instruction time 0, next instruction Category: Telescopio, Item: SlewScopeToAltAz, Coordinates: NINA.Astrometry.InputTopocentricCoordinates
+2026-08-31T21:38:33.3035|INFO|SequenceItem.cs|Run|208|Starting Category: Telescopio, Item: SlewScopeToAltAz, Coordinates: NINA.Astrometry.InputTopocentricCoordinates
+2026-08-31T21:38:33.3461|INFO|PHD2Guider.cs|StopGuiding|704|Phd2 - Stop Guiding skipped, as the app is already in state Stopped
+2026-08-31T21:38:33.3931|INFO|TelescopeVM.cs|SlewAsyncInternal|910|Slewing from RA: 21:43:09; Dec: 88° 59' 56"; Epoch: JNOW to RA: 20:49:52; Dec: 39° 23' 27"; Epoch: JNOW - Alt: 70° 00' 00"; Az: 90° 00' 00"
+2026-08-31T21:38:36.2016|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 2.09s > 2s; Poll: 00:00:00.0035916; Update: 00:00:02.0861178)
+2026-08-31T21:39:06.7752|INFO|SequenceItem.cs|Run|254|Finishing Category: Telescopio, Item: SlewScopeToAltAz, Coordinates: NINA.Astrometry.InputTopocentricCoordinates
+2026-08-31T21:39:06.7760|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:42:31.4526785, next instruction time 60, next instruction Category: Utilità, Item: WaitForTimeSpan, Time: 60s
+2026-08-31T21:39:06.7763|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: WaitForTimeSpan, Time: 60s
+2026-08-31T21:39:11.1684|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:42:27.4256142, next instruction time 300, next instruction Category: Focheggiatore, Item: RunAutofocus
+2026-08-31T21:39:11.1686|INFO|SequenceItem.cs|Run|208|Starting Category: Focheggiatore, Item: RunAutofocus
+2026-08-31T21:39:11.3882|INFO|FocuserMediator.cs|BroadcastAutoFocusRunStarting|92|Autofocus starting notification received
+2026-08-31T21:39:11.4698|INFO|PHD2Guider.cs|StopGuiding|704|Phd2 - Stop Guiding skipped, as the app is already in state Stopped
+2026-08-31T21:39:11.4918|INFO|AutoFocusEngine.cs|RunAutoFocus|929|Starting AutoFocus with initial position 40800
+2026-08-31T21:39:11.6462|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:39:23.0674|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|769|Waiting on initial HFR analysis
+2026-08-31T21:39:23.1138|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 41600
+2026-08-31T21:39:26.5058|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 3.4116577046293606, HFR MAD: 0.17240888942043586, Detected Stars 86, Region: 0
+2026-08-31T21:39:32.4477|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:39:43.7902|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 41400
+2026-08-31T21:39:44.4338|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 5.175329839523038, HFR MAD: 0.18310841074273032, Detected Stars 54, Region: 0
+2026-08-31T21:39:49.1885|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:40:00.4944|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 41200
+2026-08-31T21:40:01.0660|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 5.175744234605243, HFR MAD: 0.15370137997012812, Detected Stars 48, Region: 0
+2026-08-31T21:40:06.4904|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:40:17.8720|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 41000
+2026-08-31T21:40:18.5112|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 5.016224282241788, HFR MAD: 0.19558043577605755, Detected Stars 48, Region: 0
+2026-08-31T21:40:24.4573|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:40:35.7657|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|797|Waiting on initial focuser move analyses
+2026-08-31T21:40:36.2917|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 4.700257962850321, HFR MAD: 0.16248151764736019, Detected Stars 64, Region: 0
+2026-08-31T21:40:36.4149|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 40800
+2026-08-31T21:40:42.4741|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:40:53.8146|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T21:40:54.4692|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 4.277498340882305, HFR MAD: 0.16508552561719014, Detected Stars 77, Region: 0
+2026-08-31T21:40:54.5188|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 40600
+2026-08-31T21:41:00.4501|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:41:11.7727|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T21:41:12.3311|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 3.7409123885665068, HFR MAD: 0.1913645259418728, Detected Stars 91, Region: 0
+2026-08-31T21:41:12.3600|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 40400
+2026-08-31T21:41:18.4422|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:41:29.7894|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T21:41:30.4655|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 3.2202192422998492, HFR MAD: 0.20103411997488463, Detected Stars 108, Region: 0
+2026-08-31T21:41:30.4842|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 40200
+2026-08-31T21:41:36.4475|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:41:47.7640|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T21:41:48.3680|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 2.8536545744853736, HFR MAD: 0.1847581449338982, Detected Stars 128, Region: 0
+2026-08-31T21:41:48.4009|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 40000
+2026-08-31T21:41:54.4496|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:42:05.7800|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T21:42:06.3308|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 2.4080688392079166, HFR MAD: 0.18636485440027784, Detected Stars 145, Region: 0
+2026-08-31T21:42:06.3988|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 39800
+2026-08-31T21:42:12.5183|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:42:23.8563|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T21:42:24.4108|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 2.071973947210518, HFR MAD: 0.15521524328162117, Detected Stars 155, Region: 0
+2026-08-31T21:42:24.4629|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 39600
+2026-08-31T21:42:30.4572|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:42:41.7788|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T21:42:42.4831|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.860655071463267, HFR MAD: 0.13887120598088076, Detected Stars 150, Region: 0
+2026-08-31T21:42:42.5355|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 39400
+2026-08-31T21:42:48.4531|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:42:59.7710|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T21:43:00.4357|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.7326686010766397, HFR MAD: 0.1148914120430704, Detected Stars 139, Region: 0
+2026-08-31T21:43:00.5204|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 39200
+2026-08-31T21:43:06.4849|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:43:17.8096|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T21:43:18.6252|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.6592363659340903, HFR MAD: 0.073486843395703, Detected Stars 101, Region: 0
+2026-08-31T21:43:18.8128|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 39000
+2026-08-31T21:43:24.5030|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:43:35.9069|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T21:43:36.5002|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.6132361229737218, HFR MAD: 0.05871916649275555, Detected Stars 73, Region: 0
+2026-08-31T21:43:36.8261|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 38800
+2026-08-31T21:43:42.4833|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:43:53.8367|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T21:43:54.3937|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.7202090097471407, HFR MAD: 0.10709796882847655, Detected Stars 110, Region: 0
+2026-08-31T21:43:54.4662|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|841|Enough right trend points (11) with an established minimum (39000) to queue remaining left focus points down to 38200
+2026-08-31T21:43:54.4668|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 38600
+2026-08-31T21:44:00.4716|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:44:11.8177|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 38400
+2026-08-31T21:44:12.4775|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.7496680494815695, HFR MAD: 0.12957699778774723, Detected Stars 111, Region: 0
+2026-08-31T21:44:18.5697|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:44:29.9069|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 38200
+2026-08-31T21:44:30.5481|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.9964743728740195, HFR MAD: 0.17689516740249056, Detected Stars 138, Region: 0
+2026-08-31T21:44:35.2601|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:44:46.5675|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|896|Waiting on remaining AutoFocus analysis tasks
+2026-08-31T21:44:47.1338|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 2.3092962820487797, HFR MAD: 0.19532138818651967, Detected Stars 131, Region: 0
+2026-08-31T21:44:47.2664|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 39157
+2026-08-31T21:44:56.4518|INFO|AutoFocusEngine.cs|ValidateCalculatedFocusPosition|1141|Validating HFR at final focus position 39157
+2026-08-31T21:44:56.5757|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T21:45:08.5486|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.8014205770560952, HFR MAD: 0.12664946275927602, Detected Stars 106, Region: 0
+2026-08-31T21:45:08.5619|INFO|HocusFocusVM.cs|AutoFocusEngine_Completed|473|AutoFocus completed with focuser starting at 40800 and ending at 39157
+2026-08-31T21:45:08.6710|INFO|FocuserMediator.cs|BroadcastSuccessfulAutoFocusRun|46|Autofocus notification received - Temperature 25.5
+2026-08-31T21:45:08.7852|INFO|AutoFocusEngine.cs|PerformPostAutoFocusActions|1022|Re-enabling temperature compensation after AutoFocus
+2026-08-31T21:45:08.8661|INFO|SequenceItem.cs|Run|254|Finishing Category: Focheggiatore, Item: RunAutofocus
+2026-08-31T21:45:08.8665|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:36:29.9591929, next instruction time 0, next instruction Category: Telescopio, Item: SolveAndSync
+2026-08-31T21:45:08.8668|INFO|SequenceItem.cs|Run|208|Starting Category: Telescopio, Item: SolveAndSync
+2026-08-31T21:45:09.1628|INFO|FilterWheelVM.cs|ChangeFilter|112|Moving to Filter L-Pro at Position 0
+2026-08-31T21:45:21.1053|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 15s; Filter: L-Pro; Gain: 15; Offset 132; Binning: 1x1;
+2026-08-31T21:45:40.3248|WARNING|DeviceUpdateTimer.cs|Run|115|Camera value update cycle took longer than the device poll interval (Total: 3.46s > 2s; Poll: 00:00:03.4570205; Update: 00:00:00.0001981)
+2026-08-31T21:45:41.0517|INFO|FilterWheelVM.cs|ChangeFilter|112|Moving to Filter Blu at Position 4
+2026-08-31T21:45:41.3431|INFO|ImageSolver.cs|Solve|41|Platesolving with parameters: FocalLength: 1260 PixelSize: 4.54 SearchRadius: 30 BlindFailoverEnabled: True Regions: 5000 DownSampleFactor: 2 MaxObjects: 500 Reference Coordinates RA: 20:48:50 Dec: 39° 17' 19" Epoch: J2000
+2026-08-31T21:45:41.9808|INFO|BaseImageData.cs|SaveToDisk|346|Saved image to C:\Users\PrimaLuceLab\AppData\Local\NINA\PlateSolver\n0swrtdz.unb.fits
+2026-08-31T21:45:43.8358|INFO|ImageSolver.cs|Solve|54|Platesolve successful: Coordinates: RA: 20:52:12; Dec: 39° 08' 41"; Epoch: J2000 - Position Angle: 268.6816016535656
+2026-08-31T21:45:53.2287|INFO|TelescopeVM.cs|Sync|777|Syncing scope from RA: 20:49:51; Dec: 39° 23' 26"; Epoch: JNOW to RA: 20:53:14; Dec: 39° 14' 53"; Epoch: JNOW
+2026-08-31T21:45:58.2293|INFO|SequenceItem.cs|Run|254|Finishing Category: Telescopio, Item: SolveAndSync
+2026-08-31T21:45:58.2299|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 11, Items[SKIPPED]: 1
+2026-08-31T21:45:58.2300|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 4
+2026-08-31T21:45:58.2301|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.StartAreaContainer, Strategy: SequentialStrategy, Items[FINISHED]: 2
+2026-08-31T21:45:58.2302|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:39:02.9442587, next instruction time 0, next instruction Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.TargetAreaContainer, Strategy: SequentialStrategy, Items[CREATED]: 2
+2026-08-31T21:45:58.2305|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.TargetAreaContainer, Strategy: SequentialStrategy, Items[CREATED]: 2
+2026-08-31T21:45:58.2309|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:39:02.9442587, next instruction time 0, next instruction Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 10
+2026-08-31T21:45:58.2309|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 10
+2026-08-31T21:45:58.2310|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:39:02.9442587, next instruction time 0, next instruction Category: Utilità, Item: Annotation, Text: This is a Startup Sequence which can be pre-loaded at NINA Start-up.
+2026-08-31T21:45:58.2310|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: This is a Startup Sequence which can be pre-loaded at NINA Start-up.
+2026-08-31T21:45:58.2311|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: This is a Startup Sequence which can be pre-loaded at NINA Start-up.
+2026-08-31T21:45:58.2312|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:39:02.9442587, next instruction time 0, next instruction Category: Utilità, Item: Annotation, Text: If you edit this Startup Sequence, you need to save the Entire Sequence using the Save Complete Sequence button at the bottom of the Advanced Sequencer page below.
+2026-08-31T21:45:58.2313|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: If you edit this Startup Sequence, you need to save the Entire Sequence using the Save Complete Sequence button at the bottom of the Advanced Sequencer page below.
+2026-08-31T21:45:58.2313|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: If you edit this Startup Sequence, you need to save the Entire Sequence using the Save Complete Sequence button at the bottom of the Advanced Sequencer page below.
+2026-08-31T21:45:58.2314|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:39:02.9442587, next instruction time 0, next instruction Category: Utilità, Item: Annotation, Text: Go to: OPTIONS > IMAGING > SEQUENCE and select this DOME_SAFETY_STARTUP_PA.json file as the STARTUP SEQUENCE TEMPLATE
+2026-08-31T21:45:58.2314|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: Go to: OPTIONS > IMAGING > SEQUENCE and select this DOME_SAFETY_STARTUP_PA.json file as the STARTUP SEQUENCE TEMPLATE
+2026-08-31T21:45:58.2315|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: Go to: OPTIONS > IMAGING > SEQUENCE and select this DOME_SAFETY_STARTUP_PA.json file as the STARTUP SEQUENCE TEMPLATE
+2026-08-31T21:45:58.2315|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:39:02.9442587, next instruction time 0, next instruction Category: Utilità, Item: Annotation, Text:      I also find setting COLLAPSE SEQUENCE TEMPLATES BY DEFAULT to ON is quite helpful.  (On the same options page)
+2026-08-31T21:45:58.2315|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text:      I also find setting COLLAPSE SEQUENCE TEMPLATES BY DEFAULT to ON is quite helpful.  (On the same options page)
+2026-08-31T21:45:58.2316|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text:      I also find setting COLLAPSE SEQUENCE TEMPLATES BY DEFAULT to ON is quite helpful.  (On the same options page)
+2026-08-31T21:45:58.2316|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:39:02.9442587, next instruction time 0, next instruction Category: Utilità, Item: Annotation, Text: Any modification of this sequence as a Foundational Startup Template will need to be saved using the buttons at the bottom of this Advanced Sequencer Page below.
+2026-08-31T21:45:58.2317|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: Any modification of this sequence as a Foundational Startup Template will need to be saved using the buttons at the bottom of this Advanced Sequencer Page below.
+2026-08-31T21:45:58.2317|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: Any modification of this sequence as a Foundational Startup Template will need to be saved using the buttons at the bottom of this Advanced Sequencer Page below.
+2026-08-31T21:45:58.2318|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:39:02.9442587, next instruction time 0, next instruction Category: Utilità, Item: Annotation, Text: The LOOP_ALL_NIGHT Sequence is a simple Loop until Nautical Dawn. Adjust as desired. This is an outer loop.
+2026-08-31T21:45:58.2318|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: The LOOP_ALL_NIGHT Sequence is a simple Loop until Nautical Dawn. Adjust as desired. This is an outer loop.
+2026-08-31T21:45:58.2318|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: The LOOP_ALL_NIGHT Sequence is a simple Loop until Nautical Dawn. Adjust as desired. This is an outer loop.
+2026-08-31T21:45:58.2319|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:39:02.9442587, next instruction time 0, next instruction Category: Utilità, Item: Annotation, Text: The SAFE_LOOP Sequence runs while the System is Safe.
+2026-08-31T21:45:58.2320|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: The SAFE_LOOP Sequence runs while the System is Safe.
+2026-08-31T21:45:58.2320|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: The SAFE_LOOP Sequence runs while the System is Safe.
+2026-08-31T21:45:58.2320|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:39:02.9442587, next instruction time 0, next instruction Category: Utilità, Item: Annotation, Text: The UNSAFE Sequence runs when the System is Unsafe and only proceeds back to SAFE_LOOP when it is once again deemed Safe.
+2026-08-31T21:45:58.2321|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: The UNSAFE Sequence runs when the System is Unsafe and only proceeds back to SAFE_LOOP when it is once again deemed Safe.
+2026-08-31T21:45:58.2324|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: The UNSAFE Sequence runs when the System is Unsafe and only proceeds back to SAFE_LOOP when it is once again deemed Safe.
+2026-08-31T21:45:58.2325|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:39:02.9442587, next instruction time 0, next instruction Category: Utilità, Item: Annotation, Text: ..... ALL TARGETS should be placed within individual LOOP_ALL_NIGHT > SAFE_LOOP > TARGETS_CONTAINER > TARGET # containers below.....
+2026-08-31T21:45:58.2325|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: ..... ALL TARGETS should be placed within individual LOOP_ALL_NIGHT > SAFE_LOOP > TARGETS_CONTAINER > TARGET # containers below.....
+2026-08-31T21:45:58.2326|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: ..... ALL TARGETS should be placed within individual LOOP_ALL_NIGHT > SAFE_LOOP > TARGETS_CONTAINER > TARGET # containers below.....
+2026-08-31T21:45:58.2326|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:39:02.9442587, next instruction time 0, next instruction Category: Utilità, Item: Annotation, Text: Each TARGET # Container should have a looping condition that is identical to the included target sequence.
+2026-08-31T21:45:58.2326|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: Each TARGET # Container should have a looping condition that is identical to the included target sequence.
+2026-08-31T21:45:58.2327|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: Each TARGET # Container should have a looping condition that is identical to the included target sequence.
+2026-08-31T21:45:58.2328|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 10
+2026-08-31T21:45:58.2333|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:39:02.9442587, next instruction time 0, next instruction Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 2, Conditions: Condition: TimeCondition, Time: 5:35:9h, 
+2026-08-31T21:45:58.2333|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 2, Conditions: Condition: TimeCondition, Time: 5:35:9h, 
+2026-08-31T21:45:58.2364|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:39:02.9442587, next instruction time 0, next instruction Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 5, Conditions: Condition: SafetyMonitorCondition, 
+2026-08-31T21:45:58.2366|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 5, Conditions: Condition: SafetyMonitorCondition, 
+2026-08-31T21:45:58.2412|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:39:02.9442587, next instruction time 0, next instruction Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 7
+2026-08-31T21:45:58.2415|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 7
+2026-08-31T21:45:58.2417|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:39:02.9442587, next instruction time 0, next instruction Category: Utilità, Item: Annotation, Text: This brief sequence of instructions is required after returning to a Safe condifition from an Unsafe one. It will not negatively affect anything on its initial execution.
+2026-08-31T21:45:58.2418|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: This brief sequence of instructions is required after returning to a Safe condifition from an Unsafe one. It will not negatively affect anything on its initial execution.
+2026-08-31T21:45:58.2418|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: This brief sequence of instructions is required after returning to a Safe condifition from an Unsafe one. It will not negatively affect anything on its initial execution.
+2026-08-31T21:45:58.2419|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:39:02.9442587, next instruction time 0, next instruction Category: Utilità, Item: Annotation, Text: The 5 minute wait here can be adjusted as desired. It is here to show 5 minutes of Safety prior to resetting the equipment.
+2026-08-31T21:45:58.2419|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: The 5 minute wait here can be adjusted as desired. It is here to show 5 minutes of Safety prior to resetting the equipment.
+2026-08-31T21:45:58.2420|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: The 5 minute wait here can be adjusted as desired. It is here to show 5 minutes of Safety prior to resetting the equipment.
+2026-08-31T21:45:58.2421|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:39:02.9442587, next instruction time 300, next instruction Category: Utilità, Item: WaitForTimeSpan, Time: 300s
+2026-08-31T21:45:58.2422|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: WaitForTimeSpan, Time: 300s
+2026-08-31T21:46:16.9845|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:38:42.8659097, next instruction time 0, next instruction Category: Osservatorio, Item: OpenDomeShutter
+2026-08-31T21:46:16.9846|INFO|SequenceItem.cs|Run|208|Starting Category: Osservatorio, Item: OpenDomeShutter
+2026-08-31T21:46:16.9848|INFO|SequenceItem.cs|Run|254|Finishing Category: Osservatorio, Item: OpenDomeShutter
+2026-08-31T21:46:16.9849|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:38:42.8659097, next instruction time 0, next instruction Category: Telescopio, Item: UnparkScope
+2026-08-31T21:46:16.9850|INFO|SequenceItem.cs|Run|208|Starting Category: Telescopio, Item: UnparkScope
+2026-08-31T21:46:16.9851|INFO|TelescopeVM.cs|UnparkTelescope|232|Mount ordered to unpark
+2026-08-31T21:46:16.9904|INFO|TelescopeVM.cs|UnparkTelescope|277|Mount is already unparked
+2026-08-31T21:46:16.9905|INFO|TelescopeVM.cs|UnparkTelescope|282|Mount has unparked
+2026-08-31T21:46:16.9905|INFO|SequenceItem.cs|Run|254|Finishing Category: Telescopio, Item: UnparkScope
+2026-08-31T21:46:16.9908|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:38:42.8659097, next instruction time 0, next instruction Category: Apparato per i Flat, Item: OpenCover
+2026-08-31T21:46:16.9908|INFO|SequenceItem.cs|Run|208|Starting Category: Apparato per i Flat, Item: OpenCover
+2026-08-31T21:46:16.9980|INFO|SequenceItem.cs|Run|254|Finishing Category: Apparato per i Flat, Item: OpenCover
+2026-08-31T21:46:16.9983|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:38:42.8659097, next instruction time 0, next instruction Category: Telescopio, Item: SetTracking, TrackingMode: Sidereal
+2026-08-31T21:46:16.9984|INFO|SequenceItem.cs|Run|208|Starting Category: Telescopio, Item: SetTracking, TrackingMode: Sidereal
+2026-08-31T21:46:17.0152|INFO|SequenceItem.cs|Run|254|Finishing Category: Telescopio, Item: SetTracking, TrackingMode: Sidereal
+2026-08-31T21:46:17.0197|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 6, Items[SKIPPED]: 1
+2026-08-31T21:46:17.0199|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:38:42.8659097, next instruction time 0, next instruction Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 2
+2026-08-31T21:46:17.0200|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 2
+2026-08-31T21:46:17.0201|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:38:42.8659097, next instruction time 0, next instruction Category: Utilità, Item: Annotation, Text: BE SURE TO MATCH EACH TARGET CONTAINER LOOP CONDITION TO THE NESTED TARGET SEQUENCE LOOP CONDITION
+2026-08-31T21:46:17.0201|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: BE SURE TO MATCH EACH TARGET CONTAINER LOOP CONDITION TO THE NESTED TARGET SEQUENCE LOOP CONDITION
+2026-08-31T21:46:17.0202|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: BE SURE TO MATCH EACH TARGET CONTAINER LOOP CONDITION TO THE NESTED TARGET SEQUENCE LOOP CONDITION
+2026-08-31T21:46:17.0204|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:38:42.8659097, next instruction time 0, next instruction Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 3, Conditions: Condition: TimeCondition, Time: 5:35:9h, 
+2026-08-31T21:46:17.0204|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 3, Conditions: Condition: TimeCondition, Time: 5:35:9h, 
+2026-08-31T21:46:17.0207|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:38:42.8659097, next instruction time 0, next instruction Category: Utilità, Item: Annotation, Text: PLACE YOUR ...FIRST... TARGET SEQUENCE OF THE NIGHT ...BELOW... THIS LINE
+2026-08-31T21:46:17.0207|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: PLACE YOUR ...FIRST... TARGET SEQUENCE OF THE NIGHT ...BELOW... THIS LINE
+2026-08-31T21:46:17.0208|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: PLACE YOUR ...FIRST... TARGET SEQUENCE OF THE NIGHT ...BELOW... THIS LINE
+2026-08-31T21:46:17.0209|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:38:42.8659097, next instruction time 0, next instruction Category: Utilità, Item: Annotation, Text: PLACE YOUR ...FIRST... TARGET SEQUENCE OF THE NIGHT ...ABOVE... THIS LINE
+2026-08-31T21:46:17.0209|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: PLACE YOUR ...FIRST... TARGET SEQUENCE OF THE NIGHT ...ABOVE... THIS LINE
+2026-08-31T21:46:17.0209|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: PLACE YOUR ...FIRST... TARGET SEQUENCE OF THE NIGHT ...ABOVE... THIS LINE
+2026-08-31T21:46:17.0241|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:38:42.8659097, next instruction time 0, next instruction Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.DeepSkyObjectContainer, Strategy: SequentialStrategy, Items[CREATED]: 6, Triggers: Trigger: CenterAfterDriftTrigger, DistanceArcMinutes: 3, Target: M 27 RA: 19:59:36; Dec: 22° 43' 16"; Epoch: J2000 0
+2026-08-31T21:46:17.0246|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.DeepSkyObjectContainer, Strategy: SequentialStrategy, Items[CREATED]: 6, Triggers: Trigger: CenterAfterDriftTrigger, DistanceArcMinutes: 3, Target: M 27 RA: 19:59:36; Dec: 22° 43' 16"; Epoch: J2000 0
+2026-08-31T21:46:17.0279|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 01:38:42.8659097, next instruction time 0, next instruction Category: Telescopio, Item: Center, Coordinates RA: 19:59:36; Dec: 22° 43' 16"; Epoch: J2000
+2026-08-31T21:46:17.0284|INFO|SequenceItem.cs|Run|208|Starting Category: Telescopio, Item: Center, Coordinates RA: 19:59:36; Dec: 22° 43' 16"; Epoch: J2000
+2026-08-31T21:46:17.3078|INFO|PHD2Guider.cs|StopGuiding|704|Phd2 - Stop Guiding skipped, as the app is already in state Stopped
+2026-08-31T21:46:17.3657|INFO|TelescopeVM.cs|SlewAsyncInternal|910|Slewing from RA: 20:53:15; Dec: 39° 14' 53"; Epoch: JNOW to RA: 20:00:47; Dec: 22° 47' 50"; Epoch: JNOW - Alt: 67° 54' 23"; Az: 149° 12' 05"
+2026-08-31T21:46:36.8690|INFO|FilterWheelVM.cs|ChangeFilter|112|Moving to Filter L-Pro at Position 0
+2026-08-31T21:46:48.8517|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 15s; Filter: L-Pro; Gain: 15; Offset 132; Binning: 1x1;
+2026-08-31T21:47:08.9900|INFO|ImageSolver.cs|Solve|41|Platesolving with parameters: FocalLength: 1260 PixelSize: 4.54 SearchRadius: 30 BlindFailoverEnabled: True Regions: 5000 DownSampleFactor: 2 MaxObjects: 500 Reference Coordinates RA: 19:59:36 Dec: 22° 43' 16" Epoch: J2000
+2026-08-31T21:47:09.4782|INFO|BaseImageData.cs|SaveToDisk|346|Saved image to C:\Users\PrimaLuceLab\AppData\Local\NINA\PlateSolver\kua1quyb.5b5.fits
+2026-08-31T21:47:11.0026|INFO|ImageSolver.cs|Solve|54|Platesolve successful: Coordinates: RA: 20:02:44; Dec: 22° 38' 03"; Epoch: J2000 - Position Angle: 268.80849305822323
+2026-08-31T21:47:11.0099|INFO|CenteringSolver.cs|Center|99|Centering Solver - Scope Position: RA: 20:00:47; Dec: 22° 47' 50"; Epoch: JNOW; Offset: RA: 00:00:00; Dec: 00° 00' 00"; Distance: 00° 00' 00"; Bearing: 00° 00' 00"; Centering Coordinates: RA: 20:00:47; Dec: 22° 47' 50"; Epoch: JNOW; Solved: RA: 20:03:55; Dec: 22° 42' 43"; Epoch: JNOW; Separation RA: -00:03:08; Dec: 00° 05' 07"; Distance: 00° 43' 36"; Bearing: -96° 35' 18"; Threshold: 1
+2026-08-31T21:47:11.2026|INFO|TelescopeVM.cs|Sync|777|Syncing scope from RA: 20:00:47; Dec: 22° 47' 50"; Epoch: JNOW to RA: 20:03:55; Dec: 22° 42' 43"; Epoch: JNOW
+2026-08-31T21:47:16.2078|INFO|CenteringSolver.cs|Center|132|Slewing to target after sync. Current Position: RA: 20:03:55; Dec: 22° 42' 43"; Epoch: JNOW; Target coordinates: RA: 20:00:47; Dec: 22° 47' 50"; Epoch: JNOW; Offset RA: 00:00:00; Dec: 00° 00' 00"; Distance: 00° 00' 00"; Bearing: 00° 00' 00"
+2026-08-31T21:47:16.2158|INFO|TelescopeVM.cs|SlewAsyncInternal|910|Slewing from RA: 20:03:55; Dec: 22° 42' 43"; Epoch: JNOW to RA: 20:00:47; Dec: 22° 47' 50"; Epoch: JNOW - Alt: 67° 59' 55"; Az: 149° 45' 13"
+2026-08-31T21:47:30.5802|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 15s; Filter: L-Pro; Gain: 15; Offset 132; Binning: 1x1;
+2026-08-31T21:47:50.7876|INFO|ImageSolver.cs|Solve|41|Platesolving with parameters: FocalLength: 1260 PixelSize: 4.54 SearchRadius: 30 BlindFailoverEnabled: True Regions: 5000 DownSampleFactor: 2 MaxObjects: 500 Reference Coordinates RA: 19:59:36 Dec: 22° 43' 16" Epoch: J2000
+2026-08-31T21:47:51.1316|INFO|BaseImageData.cs|SaveToDisk|346|Saved image to C:\Users\PrimaLuceLab\AppData\Local\NINA\PlateSolver\1ywlnapx.rf1.fits
+2026-08-31T21:47:52.8135|INFO|ImageSolver.cs|Solve|54|Platesolve successful: Coordinates: RA: 19:59:35; Dec: 22° 43' 26"; Epoch: J2000 - Position Angle: 268.81596608529645
+2026-08-31T21:47:52.8143|INFO|CenteringSolver.cs|Center|99|Centering Solver - Scope Position: RA: 20:00:47; Dec: 22° 47' 50"; Epoch: JNOW; Offset: RA: 00:00:00; Dec: 00° 00' 00"; Distance: 00° 00' 00"; Bearing: 00° 00' 00"; Centering Coordinates: RA: 20:00:47; Dec: 22° 47' 50"; Epoch: JNOW; Solved: RA: 20:00:46; Dec: 22° 47' 59"; Epoch: JNOW; Separation RA: 00:00:01; Dec: -00° 00' 09"; Distance: 00° 00' 17"; Bearing: 56° 05' 02"; Threshold: 1
+2026-08-31T21:47:52.8150|INFO|CenteringSolver.cs|Center|165|Restoring filter to Blu after centering
+2026-08-31T21:47:52.9259|INFO|FilterWheelVM.cs|ChangeFilter|112|Moving to Filter Blu at Position 4
+2026-08-31T21:48:04.8138|INFO|SequenceItem.cs|Run|254|Finishing Category: Telescopio, Item: Center, Coordinates RA: 19:59:36; Dec: 22° 43' 16"; Epoch: J2000
+2026-08-31T21:48:04.8146|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 00:44:27.0400057, next instruction time 0, next instruction Category: Guida, Item: StartGuiding
+2026-08-31T21:48:04.8149|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: StartGuiding
+2026-08-31T21:48:04.8834|INFO|PHD2Guider.cs|TryStartGuideCommand|641|Phd2 - Requesting to start guiding. Recalibrate: False
+2026-08-31T21:48:31.0479|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: StartGuiding
+2026-08-31T21:48:31.0483|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 00:44:00.6585313, next instruction time 300, next instruction Category: Utilità, Item: WaitForTimeSpan, Time: 300s
+2026-08-31T21:48:31.0484|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: WaitForTimeSpan, Time: 300s
+2026-08-31T21:53:34.0786|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: WaitForTimeSpan, Time: 300s
+2026-08-31T21:53:34.0889|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 00:38:57.9523410, next instruction time 600, next instruction Category: Fotocamera, Container: NINA.Sequencer.SequenceItem.Imaging.SmartExposure, Strategy: SequentialStrategy, Items[CREATED]: 2, Conditions: Condition: LoopCondition, Iterations: 0/5, , Triggers: Trigger: DitherAfterExposures, After Exposures: 1
+2026-08-31T21:53:34.0938|INFO|SequenceItem.cs|Run|208|Starting Category: Fotocamera, Container: NINA.Sequencer.SequenceItem.Imaging.SmartExposure, Strategy: SequentialStrategy, Items[CREATED]: 2, Conditions: Condition: LoopCondition, Iterations: 0/5, , Triggers: Trigger: DitherAfterExposures, After Exposures: 1
+2026-08-31T21:53:34.0961|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 00:38:57.9523410, next instruction time 0, next instruction Category: Ruota porta filtri, Item: SwitchFilter, Filter: Blu
+2026-08-31T21:53:34.0962|INFO|SequenceItem.cs|Run|208|Starting Category: Ruota porta filtri, Item: SwitchFilter, Filter: Blu
+2026-08-31T21:53:34.2447|INFO|SequenceItem.cs|Run|254|Finishing Category: Ruota porta filtri, Item: SwitchFilter, Filter: Blu
+2026-08-31T21:53:34.2460|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 00:38:57.9523410, next instruction time 600, next instruction Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T21:53:34.2486|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: RestoreGuiding
+2026-08-31T21:53:34.2511|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T21:53:34.2515|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: StartGuiding
+2026-08-31T21:53:34.3369|INFO|PHD2Guider.cs|StartGuidingPrivate|504|Phd2 - App is already guiding. Skipping start guiding
+2026-08-31T21:53:34.3395|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: StartGuiding
+2026-08-31T21:53:34.3398|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T21:53:34.3660|INFO|SequenceItem.cs|Run|208|Starting Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T21:53:34.3732|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 600s; Filter: ; Gain: 15; Offset 132; Binning: 1x1;
+2026-08-31T22:03:35.0040|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 2.79s > 2s; Poll: 00:00:00.0033322; Update: 00:00:02.7825030)
+2026-08-31T22:03:39.1731|WARNING|DeviceUpdateTimer.cs|Run|115|Mount value update cycle took longer than the device poll interval (Total: 2.03s > 2s; Poll: 00:00:02.0258345; Update: 00:00:00.0005369)
+2026-08-31T22:03:40.5984|INFO|SequenceItem.cs|Run|254|Finishing Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T22:03:40.5994|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 00:28:50.2996954, next instruction time 0, next instruction Category: Ruota porta filtri, Item: SwitchFilter, Filter: Blu
+2026-08-31T22:03:40.5994|INFO|SequenceItem.cs|Run|208|Starting Category: Ruota porta filtri, Item: SwitchFilter, Filter: Blu
+2026-08-31T22:03:40.6084|WARNING|DeviceUpdateTimer.cs|Run|115|Camera value update cycle took longer than the device poll interval (Total: 11.74s > 2s; Poll: 00:00:11.6866840; Update: 00:00:00.0520845)
+2026-08-31T22:03:40.7154|INFO|SequenceItem.cs|Run|254|Finishing Category: Ruota porta filtri, Item: SwitchFilter, Filter: Blu
+2026-08-31T22:03:40.7279|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: DitherAfterExposures, After Exposures: 1
+2026-08-31T22:03:40.7292|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T22:03:40.7297|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: Dither
+2026-08-31T22:03:43.5870|INFO|BaseImageData.cs|SaveToDisk|346|Saved image to D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-9.96C_Blu_0002_2026-08-31_21-53-34_FWHM_NaN_Fok_39157.xisf
+2026-08-31T22:03:43.5873|INFO|ImageSaveController.cs|DoWork|97|Successfully saved file at D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-9.96C_Blu_0002_2026-08-31_21-53-34_FWHM_NaN_Fok_39157.xisf. Duration Total: 00:00:02.4146975; BeforeSave: 00:00:00.0038340; BeforeFinalizeImageSaved: 00:00:01.7190662; FinalizeSaveTime: 00:00:00.6917966
+2026-08-31T22:04:01.5017|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: Dither
+2026-08-31T22:04:01.5019|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T22:04:01.5021|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 00:28:27.1251003, next instruction time 600, next instruction Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T22:04:01.5044|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: RestoreGuiding
+2026-08-31T22:04:01.5046|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T22:04:01.5046|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: StartGuiding
+2026-08-31T22:04:01.5636|INFO|PHD2Guider.cs|StartGuidingPrivate|504|Phd2 - App is already guiding. Skipping start guiding
+2026-08-31T22:04:01.5652|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: StartGuiding
+2026-08-31T22:04:01.5676|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T22:04:01.5682|INFO|SequenceItem.cs|Run|208|Starting Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T22:04:01.5687|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 600s; Filter: ; Gain: 15; Offset 132; Binning: 1x1;
+2026-08-31T22:14:07.7971|WARNING|DeviceUpdateTimer.cs|Run|115|Camera value update cycle took longer than the device poll interval (Total: 10.67s > 2s; Poll: 00:00:10.6495784; Update: 00:00:00.0186037)
+2026-08-31T22:14:07.8033|INFO|SequenceItem.cs|Run|254|Finishing Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T22:14:07.8037|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 00:18:19.4992672, next instruction time 0, next instruction Category: Ruota porta filtri, Item: SwitchFilter, Filter: Blu
+2026-08-31T22:14:07.8038|INFO|SequenceItem.cs|Run|208|Starting Category: Ruota porta filtri, Item: SwitchFilter, Filter: Blu
+2026-08-31T22:14:08.0605|INFO|SequenceItem.cs|Run|254|Finishing Category: Ruota porta filtri, Item: SwitchFilter, Filter: Blu
+2026-08-31T22:14:08.0610|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: DitherAfterExposures, After Exposures: 1
+2026-08-31T22:14:08.0611|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T22:14:08.0612|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: Dither
+2026-08-31T22:14:10.3696|INFO|BaseImageData.cs|SaveToDisk|346|Saved image to D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-9.96C_Blu_0003_2026-08-31_22-04-01_FWHM_NaN_Fok_39157.xisf
+2026-08-31T22:14:10.3697|INFO|ImageSaveController.cs|DoWork|97|Successfully saved file at D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-9.96C_Blu_0003_2026-08-31_22-04-01_FWHM_NaN_Fok_39157.xisf. Duration Total: 00:00:02.1053753; BeforeSave: 00:00:00.0001125; BeforeFinalizeImageSaved: 00:00:01.9918605; FinalizeSaveTime: 00:00:00.1134013
+2026-08-31T22:14:41.5040|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: Dither
+2026-08-31T22:14:41.5043|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T22:14:41.5044|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 00:17:44.9622106, next instruction time 600, next instruction Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T22:14:41.5044|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: RestoreGuiding
+2026-08-31T22:14:41.5045|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T22:14:41.5046|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: StartGuiding
+2026-08-31T22:14:41.5364|INFO|PHD2Guider.cs|StartGuidingPrivate|504|Phd2 - App is already guiding. Skipping start guiding
+2026-08-31T22:14:41.5425|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: StartGuiding
+2026-08-31T22:14:41.5426|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T22:14:41.5518|INFO|SequenceItem.cs|Run|208|Starting Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T22:14:41.5523|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 600s; Filter: ; Gain: 15; Offset 132; Binning: 1x1;
+2026-08-31T22:24:47.7935|WARNING|DeviceUpdateTimer.cs|Run|115|Camera value update cycle took longer than the device poll interval (Total: 10.66s > 2s; Poll: 00:00:10.6639530; Update: 00:00:00.0006061)
+2026-08-31T22:24:47.7980|INFO|SequenceItem.cs|Run|254|Finishing Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T22:24:47.7987|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 00:07:37.3405909, next instruction time 0, next instruction Category: Ruota porta filtri, Item: SwitchFilter, Filter: Blu
+2026-08-31T22:24:47.7988|INFO|SequenceItem.cs|Run|208|Starting Category: Ruota porta filtri, Item: SwitchFilter, Filter: Blu
+2026-08-31T22:24:48.0308|INFO|SequenceItem.cs|Run|254|Finishing Category: Ruota porta filtri, Item: SwitchFilter, Filter: Blu
+2026-08-31T22:24:48.0311|WARNING|DitherAfterExposures.cs|ShouldTrigger|118|Dither should be triggered, however the meridian flip is too close to be executed
+2026-08-31T22:24:48.0312|INFO|MeridianFlipTrigger.cs|ShouldTrigger|290|Meridian Flip - (Side of Pier usage is disabled) No more remaining time available before flip. Max remaining time 00:07:37.3405909, next instruction time 600, next instruction Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1. Flip should happen now
+2026-08-31T22:24:48.0312|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: MeridianFlipTrigger
+2026-08-31T22:24:48.0425|INFO|MeridianFlipVM.cs|DoMeridianFlip|160|Meridian Flip - Initializing Meridian Flip. 
+Current target coordinates RA: 19:59:36 Dec: 22° 43' 16" Epoch: J2000
+Remaining wait time: 00:14:37.3405909
+Pause Time Before Meridian: 2
+Minutes After Meridian: 5
+Max Minutes After Meridian: 6
+AutoFocus After Flip: True
+Recenter: True
+Use SideOfPier: False
+Settle Time: 30
+2026-08-31T22:24:48.0485|INFO|MeridianFlipVM.cs|StopAutoguider|348|Meridian Flip - Stopping Autoguider
+2026-08-31T22:24:50.1356|INFO|BaseImageData.cs|SaveToDisk|346|Saved image to D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-9.96C_Blu_0004_2026-08-31_22-14-41_FWHM_NaN_Fok_39157.xisf
+2026-08-31T22:24:50.1357|INFO|ImageSaveController.cs|DoWork|97|Successfully saved file at D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-9.96C_Blu_0004_2026-08-31_22-14-41_FWHM_NaN_Fok_39157.xisf. Duration Total: 00:00:01.7956400; BeforeSave: 00:00:00.0000792; BeforeFinalizeImageSaved: 00:00:01.7277943; FinalizeSaveTime: 00:00:00.0677657
+2026-08-31T22:24:51.0117|INFO|MeridianFlipVM.cs|PassMeridian|257|Meridian Flip - Stopping tracking to pass meridian
+2026-08-31T22:39:28.5312|INFO|MeridianFlipVM.cs|PassMeridian|269|Meridian Flip - Resuming tracking after passing meridian
+2026-08-31T22:39:28.5445|INFO|MeridianFlipVM.cs|DoFlip|124|Meridian Flip - Scope will flip to coordinates RA: 19:59:36 Dec: 22° 43' 16" Epoch: J2000
+2026-08-31T22:39:28.5800|INFO|AscomTelescope.cs|MeridianFlip|351|Current side of pier is pierWest, which should be a counter weight down position already. Setting side of pier will be done after the first slew attempt if the mount did not flip the pier side by then.
+2026-08-31T22:39:28.5801|INFO|AscomTelescope.cs|MeridianFlip|365|Slewing to coordinates RA: 20:00:47; Dec: 22° 47' 50"; Epoch: JNOW. Attempt 1 / 20
+2026-08-31T22:39:35.4669|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 3.12s > 2s; Poll: 00:00:00.0027964; Update: 00:00:03.1189168)
+2026-08-31T22:40:35.7320|INFO|AscomTelescope.cs|MeridianFlip|380|Finished slewing to coordinates. Slew was successful. Setting pier side was successful
+2026-08-31T22:40:38.6508|INFO|MeridianFlipVM.cs|Settle|335|Meridian Flip - Settling scope for 30
+2026-08-31T22:41:07.7376|INFO|MeridianFlipVM.cs|AutoFocus|231|Meridian Flip - Running Autofocus
+2026-08-31T22:41:07.9761|INFO|FocuserMediator.cs|BroadcastAutoFocusRunStarting|92|Autofocus starting notification received
+2026-08-31T22:41:07.9994|INFO|PHD2Guider.cs|StopGuiding|704|Phd2 - Stop Guiding skipped, as the app is already in state Stopped
+2026-08-31T22:41:07.9996|INFO|AutoFocusEngine.cs|RunAutoFocus|929|Starting AutoFocus with initial position 39157
+2026-08-31T22:41:08.2715|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T22:41:19.5877|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|769|Waiting on initial HFR analysis
+2026-08-31T22:41:19.5881|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 39957
+2026-08-31T22:41:20.2485|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.732369618450246, HFR MAD: 0.0780990873377394, Detected Stars 78, Region: 0
+2026-08-31T22:41:28.5483|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T22:41:39.8761|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 39757
+2026-08-31T22:41:40.4829|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.8428427929148934, HFR MAD: 0.11623350892241624, Detected Stars 94, Region: 0
+2026-08-31T22:41:45.4651|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T22:41:56.7740|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 39557
+2026-08-31T22:41:57.3499|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.8402036977900285, HFR MAD: 0.12703232606728587, Detected Stars 89, Region: 0
+2026-08-31T22:42:02.4687|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T22:42:13.7906|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 39357
+2026-08-31T22:42:14.3776|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.6955508525798662, HFR MAD: 0.100652816846039, Detected Stars 82, Region: 0
+2026-08-31T22:42:20.4690|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T22:42:31.8087|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|797|Waiting on initial focuser move analyses
+2026-08-31T22:42:32.3861|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.6283678679027775, HFR MAD: 0.061188733244916804, Detected Stars 51, Region: 0
+2026-08-31T22:42:32.4675|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 39157
+2026-08-31T22:42:38.4576|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T22:42:49.7719|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T22:42:50.4639|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.5940758251123608, HFR MAD: 0.0631972193379231, Detected Stars 48, Region: 0
+2026-08-31T22:42:50.5707|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 38957
+2026-08-31T22:42:56.4592|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T22:43:07.7895|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T22:43:08.4514|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.603405325334815, HFR MAD: 0.06483285429003782, Detected Stars 60, Region: 0
+2026-08-31T22:43:08.4918|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 38757
+2026-08-31T22:43:14.4434|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T22:43:25.7502|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T22:43:26.4206|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.649244724406895, HFR MAD: 0.0847532260240691, Detected Stars 68, Region: 0
+2026-08-31T22:43:26.5113|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 38557
+2026-08-31T22:43:32.4378|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T22:43:43.7549|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T22:43:44.3658|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.8155803879362968, HFR MAD: 0.11589362522967162, Detected Stars 83, Region: 0
+2026-08-31T22:43:44.4152|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 38357
+2026-08-31T22:43:50.4566|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T22:44:01.8077|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T22:44:02.4752|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.9861097915263835, HFR MAD: 0.14217094013962828, Detected Stars 77, Region: 0
+2026-08-31T22:44:02.6430|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 38157
+2026-08-31T22:44:08.4767|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T22:44:19.8855|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T22:44:20.4915|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 2.1818160029938793, HFR MAD: 0.22939758939096477, Detected Stars 83, Region: 0
+2026-08-31T22:44:20.6264|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 37957
+2026-08-31T22:44:26.4446|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T22:44:37.7873|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T22:44:38.4475|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 2.364402869892171, HFR MAD: 0.3090835594595269, Detected Stars 78, Region: 0
+2026-08-31T22:44:38.6359|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|823|Enough left trend points (4) with an established minimum (39157) to queue remaining right focus points up to 39957
+2026-08-31T22:44:38.6360|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|896|Waiting on remaining AutoFocus analysis tasks
+2026-08-31T22:44:38.6364|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 38999
+2026-08-31T22:44:48.8327|INFO|AutoFocusEngine.cs|ValidateCalculatedFocusPosition|1141|Validating HFR at final focus position 38999
+2026-08-31T22:44:48.9503|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Blu; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T22:45:04.0593|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.8120581599661143, HFR MAD: 0.10198493212879134, Detected Stars 73, Region: 0
+2026-08-31T22:45:04.0598|INFO|HocusFocusVM.cs|AutoFocusEngine_Completed|473|AutoFocus completed with focuser starting at 39157 and ending at 38999
+2026-08-31T22:45:04.0616|INFO|FocuserMediator.cs|BroadcastSuccessfulAutoFocusRun|46|Autofocus notification received - Temperature 25
+2026-08-31T22:45:04.1732|INFO|AutoFocusEngine.cs|PerformPostAutoFocusActions|1022|Re-enabling temperature compensation after AutoFocus
+2026-08-31T22:45:06.9899|INFO|MeridianFlipVM.cs|Recenter|278|Meridian Flip - Recenter after meridian flip
+2026-08-31T22:45:07.1262|INFO|FilterWheelVM.cs|ChangeFilter|112|Moving to Filter L-Pro at Position 0
+2026-08-31T22:45:07.7523|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 10.03s > 2s; Poll: 00:00:00.0033778; Update: 00:00:10.0250551)
+2026-08-31T22:45:19.2534|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 15s; Filter: L-Pro; Gain: 15; Offset 132; Binning: 1x1;
+2026-08-31T22:45:38.4654|WARNING|DeviceUpdateTimer.cs|Run|115|Camera value update cycle took longer than the device poll interval (Total: 3.23s > 2s; Poll: 00:00:03.2324074; Update: 00:00:00.0001519)
+2026-08-31T22:45:39.1290|INFO|ImageSolver.cs|Solve|41|Platesolving with parameters: FocalLength: 1260 PixelSize: 4.54 SearchRadius: 30 BlindFailoverEnabled: True Regions: 5000 DownSampleFactor: 2 MaxObjects: 500 Reference Coordinates RA: 19:59:36 Dec: 22° 43' 16" Epoch: J2000
+2026-08-31T22:45:39.4521|INFO|BaseImageData.cs|SaveToDisk|346|Saved image to C:\Users\PrimaLuceLab\AppData\Local\NINA\PlateSolver\k5hobimn.2q3.fits
+2026-08-31T22:46:10.5139|INFO|ImageSolver.cs|Solve|54|Platesolve successful: Coordinates: RA: 19:55:50; Dec: -01° 12' 00"; Epoch: J2000 - Position Angle: 89.41219595479714
+2026-08-31T22:46:10.5165|INFO|CenteringSolver.cs|Center|99|Centering Solver - Scope Position: RA: 20:00:48; Dec: 22° 47' 43"; Epoch: JNOW; Offset: RA: 00:00:00; Dec: 00° 00' 00"; Distance: 00° 00' 00"; Bearing: 00° 00' 00"; Centering Coordinates: RA: 20:00:47; Dec: 22° 47' 50"; Epoch: JNOW; Solved: RA: 19:57:14; Dec: -01° 07' 38"; Epoch: JNOW; Separation RA: 00:03:33; Dec: 23° 55' 28"; Distance: 23° 56' 25"; Bearing: 177° 48' 44"; Threshold: 1
+2026-08-31T22:46:10.6061|INFO|TelescopeVM.cs|Sync|777|Syncing scope from RA: 20:00:48; Dec: 22° 47' 43"; Epoch: JNOW to RA: 19:57:14; Dec: -01° 07' 38"; Epoch: JNOW
+2026-08-31T22:46:15.6092|INFO|CenteringSolver.cs|Center|132|Slewing to target after sync. Current Position: RA: 19:57:14; Dec: -01° 07' 38"; Epoch: JNOW; Target coordinates: RA: 20:00:47; Dec: 22° 47' 50"; Epoch: JNOW; Offset RA: 00:00:00; Dec: 00° 00' 00"; Distance: 00° 00' 00"; Bearing: 00° 00' 00"
+2026-08-31T22:46:15.6395|INFO|TelescopeVM.cs|SlewAsyncInternal|910|Slewing from RA: 19:57:14; Dec: -01° 07' 38"; Epoch: JNOW to RA: 20:00:47; Dec: 22° 47' 50"; Epoch: JNOW - Alt: 70° 09' 42"; Az: 188° 06' 27"
+2026-08-31T22:46:37.0680|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 15s; Filter: L-Pro; Gain: 15; Offset 132; Binning: 1x1;
+2026-08-31T22:46:56.9224|INFO|ImageSolver.cs|Solve|41|Platesolving with parameters: FocalLength: 1260 PixelSize: 4.54 SearchRadius: 30 BlindFailoverEnabled: True Regions: 5000 DownSampleFactor: 2 MaxObjects: 500 Reference Coordinates RA: 19:59:36 Dec: 22° 43' 16" Epoch: J2000
+2026-08-31T22:46:57.2090|INFO|BaseImageData.cs|SaveToDisk|346|Saved image to C:\Users\PrimaLuceLab\AppData\Local\NINA\PlateSolver\xan1zpzn.ja4.fits
+2026-08-31T22:46:58.8543|INFO|ImageSolver.cs|Solve|54|Platesolve successful: Coordinates: RA: 19:59:35; Dec: 22° 43' 28"; Epoch: J2000 - Position Angle: 89.46911156450005
+2026-08-31T22:46:58.8562|INFO|CenteringSolver.cs|Center|99|Centering Solver - Scope Position: RA: 20:02:00; Dec: 46° 38' 58"; Epoch: JNOW; Offset: RA: 00:00:00; Dec: 00° 00' 00"; Distance: 00° 00' 00"; Bearing: 00° 00' 00"; Centering Coordinates: RA: 20:00:47; Dec: 22° 47' 50"; Epoch: JNOW; Solved: RA: 20:00:46; Dec: 22° 48' 01"; Epoch: JNOW; Separation RA: 00:00:01; Dec: -00° 00' 12"; Distance: 00° 00' 21"; Bearing: 56° 04' 08"; Threshold: 1
+2026-08-31T22:46:58.8563|INFO|CenteringSolver.cs|Center|165|Restoring filter to Blu after centering
+2026-08-31T22:46:58.9676|INFO|FilterWheelVM.cs|ChangeFilter|112|Moving to Filter Blu at Position 4
+2026-08-31T22:47:10.8740|INFO|MeridianFlipVM.cs|SelectNewGuideStar|329|Meridian Flip - Selecting new guide star
+2026-08-31T22:47:26.6024|INFO|MeridianFlipVM.cs|ResumeAutoguider|321|Meridian Flip - Resuming Autoguider
+2026-08-31T22:47:26.6803|INFO|PHD2Guider.cs|TryStartGuideCommand|641|Phd2 - Requesting to start guiding. Recalibrate: False
+2026-08-31T22:47:44.0184|INFO|MeridianFlipVM.cs|Settle|335|Meridian Flip - Settling scope for 30
+2026-08-31T22:48:13.3415|INFO|MeridianFlipVM.cs|DoMeridianFlip|221|Meridian Flip - Exiting meridian flip
+2026-08-31T22:48:13.4417|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: RestoreGuiding
+2026-08-31T22:48:13.4419|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T22:48:13.4420|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: StartGuiding
+2026-08-31T22:48:13.5596|INFO|PHD2Guider.cs|StartGuidingPrivate|504|Phd2 - App is already guiding. Skipping start guiding
+2026-08-31T22:48:13.5597|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: StartGuiding
+2026-08-31T22:48:13.5602|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T22:48:13.5604|INFO|SequenceItem.cs|Run|208|Starting Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T22:48:13.8500|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 600s; Filter: ; Gain: 15; Offset 132; Binning: 1x1;
+2026-08-31T22:49:29.7742|INFO|Thumbnail.cs|LoadOriginalImage|40|Reloading image from D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-9.96C_Blu_0004_2026-08-31_22-14-41_FWHM_NaN_Fok_39157.xisf
+2026-08-31T22:51:19.4202|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 2.12s > 2s; Poll: 00:00:00.0875446; Update: 00:00:02.0331561)
+2026-08-31T22:51:20.0580|WARNING|DeviceUpdateTimer.cs|Run|115|Mount value update cycle took longer than the device poll interval (Total: 2.69s > 2s; Poll: 00:00:02.6932858; Update: 00:00:00.0016248)
+2026-08-31T22:51:27.4114|WARNING|DeviceUpdateTimer.cs|Run|115|WeatherData value update cycle took longer than the device poll interval (Total: 2.14s > 2s; Poll: 00:00:02.1355316; Update: 00:00:00.0001730)
+2026-08-31T22:58:12.5590|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 3.32s > 2s; Poll: 00:00:00.0051621; Update: 00:00:03.3188281)
+2026-08-31T22:58:20.2333|INFO|SequenceItem.cs|Run|254|Finishing Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T22:58:20.2341|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 11:35:15.5384048, next instruction time 0, next instruction Category: Ruota porta filtri, Item: SwitchFilter, Filter: Blu
+2026-08-31T22:58:20.2341|INFO|SequenceItem.cs|Run|208|Starting Category: Ruota porta filtri, Item: SwitchFilter, Filter: Blu
+2026-08-31T22:58:20.2353|WARNING|DeviceUpdateTimer.cs|Run|115|Camera value update cycle took longer than the device poll interval (Total: 11.00s > 2s; Poll: 00:00:11.0002165; Update: 00:00:00.0002854)
+2026-08-31T22:58:20.3535|INFO|SequenceItem.cs|Run|254|Finishing Category: Ruota porta filtri, Item: SwitchFilter, Filter: Blu
+2026-08-31T22:58:20.3538|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: DitherAfterExposures, After Exposures: 1
+2026-08-31T22:58:20.3538|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T22:58:20.3539|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: Dither
+2026-08-31T22:58:22.6691|INFO|BaseImageData.cs|SaveToDisk|346|Saved image to D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-10.00C_Blu_0005_2026-08-31_22-48-14_FWHM_NaN_Fok_38999.xisf
+2026-08-31T22:58:22.6692|INFO|ImageSaveController.cs|DoWork|97|Successfully saved file at D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-10.00C_Blu_0005_2026-08-31_22-48-14_FWHM_NaN_Fok_38999.xisf. Duration Total: 00:00:02.1824755; BeforeSave: 00:00:00.0001159; BeforeFinalizeImageSaved: 00:00:02.1333331; FinalizeSaveTime: 00:00:00.0490257
+2026-08-31T22:58:22.7163|WARNING|DeviceUpdateTimer.cs|Run|115|Mount value update cycle took longer than the device poll interval (Total: 3.42s > 2s; Poll: 00:00:03.4164518; Update: 00:00:00.0001200)
+2026-08-31T22:58:35.1775|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: Dither
+2026-08-31T22:58:35.1779|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T22:58:35.1785|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 11:35:00.1084337, next instruction time 600, next instruction Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T22:58:35.1785|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: RestoreGuiding
+2026-08-31T22:58:35.1786|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T22:58:35.1787|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: StartGuiding
+2026-08-31T22:58:35.2181|INFO|PHD2Guider.cs|StartGuidingPrivate|504|Phd2 - App is already guiding. Skipping start guiding
+2026-08-31T22:58:35.2182|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: StartGuiding
+2026-08-31T22:58:35.2185|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T22:58:35.2186|INFO|SequenceItem.cs|Run|208|Starting Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T22:58:35.2190|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 600s; Filter: ; Gain: 15; Offset 132; Binning: 1x1;
+2026-08-31T23:08:41.5406|WARNING|DeviceUpdateTimer.cs|Run|115|Camera value update cycle took longer than the device poll interval (Total: 10.30s > 2s; Poll: 00:00:10.2991600; Update: 00:00:00.0001359)
+2026-08-31T23:08:41.5745|INFO|SequenceItem.cs|Run|254|Finishing Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T23:08:41.5746|INFO|LoopCondition.cs|Check|75|LoopCondition finished. Iterations: 5 / 5
+2026-08-31T23:08:41.5752|INFO|SequenceItem.cs|Run|254|Finishing Category: Fotocamera, Container: NINA.Sequencer.SequenceItem.Imaging.SmartExposure, Strategy: SequentialStrategy, Items[FINISHED]: 2, Conditions: Condition: LoopCondition, Iterations: 5/5, , Triggers: Trigger: DitherAfterExposures, After Exposures: 1
+2026-08-31T23:08:41.5758|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 11:24:52.5511980, next instruction time 600, next instruction Category: Fotocamera, Container: NINA.Sequencer.SequenceItem.Imaging.SmartExposure, Strategy: SequentialStrategy, Items[CREATED]: 2, Conditions: Condition: LoopCondition, Iterations: 0/5, , Triggers: Trigger: DitherAfterExposures, After Exposures: 1
+2026-08-31T23:08:41.5759|INFO|SequenceItem.cs|Run|208|Starting Category: Fotocamera, Container: NINA.Sequencer.SequenceItem.Imaging.SmartExposure, Strategy: SequentialStrategy, Items[CREATED]: 2, Conditions: Condition: LoopCondition, Iterations: 0/5, , Triggers: Trigger: DitherAfterExposures, After Exposures: 1
+2026-08-31T23:08:41.5765|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 11:24:52.5511980, next instruction time 0, next instruction Category: Ruota porta filtri, Item: SwitchFilter, Filter: Red
+2026-08-31T23:08:41.5766|INFO|SequenceItem.cs|Run|208|Starting Category: Ruota porta filtri, Item: SwitchFilter, Filter: Red
+2026-08-31T23:08:41.7226|INFO|FilterWheelVM.cs|ChangeFilter|112|Moving to Filter Red at Position 2
+2026-08-31T23:08:41.9072|INFO|ImageSolver.cs|Solve|41|Platesolving with parameters: FocalLength: 1260 PixelSize: 4.54 SearchRadius: 30 BlindFailoverEnabled: True Regions: 5000 DownSampleFactor: 2 MaxObjects: 500 Reference Coordinates RA: 20:01:09 Dec: 46° 34' 22" Epoch: J2000
+2026-08-31T23:08:42.4112|INFO|BaseImageData.cs|SaveToDisk|346|Saved image to C:\Users\PrimaLuceLab\AppData\Local\NINA\PlateSolver\dv4shxor.pgv.fits
+2026-08-31T23:08:44.5875|INFO|BaseImageData.cs|SaveToDisk|346|Saved image to D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-9.96C_Blu_0006_2026-08-31_22-58-35_FWHM_NaN_Fok_38999.xisf
+2026-08-31T23:08:44.5876|INFO|ImageSaveController.cs|DoWork|97|Successfully saved file at D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-9.96C_Blu_0006_2026-08-31_22-58-35_FWHM_NaN_Fok_38999.xisf. Duration Total: 00:00:02.6832879; BeforeSave: 00:00:00.0000826; BeforeFinalizeImageSaved: 00:00:02.4209362; FinalizeSaveTime: 00:00:00.2622684
+2026-08-31T23:08:59.6587|INFO|SequenceItem.cs|Run|254|Finishing Category: Ruota porta filtri, Item: SwitchFilter, Filter: Red
+2026-08-31T23:08:59.6590|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: DitherAfterExposures, After Exposures: 1
+2026-08-31T23:08:59.6591|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T23:08:59.6591|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: Dither
+2026-08-31T23:09:33.6680|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: Dither
+2026-08-31T23:09:33.6682|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T23:09:33.6688|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 11:23:59.5557528, next instruction time 600, next instruction Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T23:09:33.6688|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: RestoreGuiding
+2026-08-31T23:09:33.6688|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T23:09:33.6689|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: StartGuiding
+2026-08-31T23:09:33.7007|INFO|PHD2Guider.cs|StartGuidingPrivate|504|Phd2 - App is already guiding. Skipping start guiding
+2026-08-31T23:09:33.7010|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: StartGuiding
+2026-08-31T23:09:33.7012|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T23:09:33.7014|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: AutofocusAfterFilterChange
+2026-08-31T23:09:33.7025|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T23:09:33.7027|INFO|SequenceItem.cs|Run|208|Starting Category: Focheggiatore, Item: RunAutofocus
+2026-08-31T23:09:33.9225|INFO|FocuserMediator.cs|BroadcastAutoFocusRunStarting|92|Autofocus starting notification received
+2026-08-31T23:09:35.1263|INFO|AutoFocusEngine.cs|RunAutoFocus|929|Starting AutoFocus with initial position 38999
+2026-08-31T23:09:35.4069|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Red; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T23:09:46.7282|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|769|Waiting on initial HFR analysis
+2026-08-31T23:09:46.7286|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 39799
+2026-08-31T23:09:47.4541|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.6324333032643161, HFR MAD: 0.07867013319985894, Detected Stars 85, Region: 0
+2026-08-31T23:09:51.7048|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 4.19s > 2s; Poll: 00:00:00.0720224; Update: 00:00:04.1213656)
+2026-08-31T23:09:55.5066|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Red; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T23:10:06.9548|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 39599
+2026-08-31T23:10:07.7313|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.7744659654742836, HFR MAD: 0.16811714511761888, Detected Stars 171, Region: 0
+2026-08-31T23:10:10.2493|INFO|ImageSolver.cs|Solve|54|Platesolve successful: Coordinates: RA: 19:59:37; Dec: 22° 43' 29"; Epoch: J2000 - Position Angle: 89.45533001779472
+2026-08-31T23:10:10.2502|INFO|CenterAfterDriftTrigger.cs|PlatesolvingImageFollower_PropertyChanged|189|Drift: 0.28701859366682286 / 3 arc minutes
+2026-08-31T23:10:13.5071|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Red; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T23:10:24.8116|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 39399
+2026-08-31T23:10:25.5770|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.780398484647584, HFR MAD: 0.14107622530834352, Detected Stars 199, Region: 0
+2026-08-31T23:10:30.1503|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Red; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T23:10:41.4808|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 39199
+2026-08-31T23:10:43.0522|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.7222871082530662, HFR MAD: 0.13881767095753283, Detected Stars 158, Region: 0
+2026-08-31T23:10:47.4126|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Red; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T23:10:58.7191|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|797|Waiting on initial focuser move analyses
+2026-08-31T23:10:59.2413|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.642105262582713, HFR MAD: 0.09922911287852476, Detected Stars 101, Region: 0
+2026-08-31T23:10:59.3173|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 38999
+2026-08-31T23:11:05.4363|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Red; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T23:11:16.7441|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T23:11:17.4373|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.6207406253499834, HFR MAD: 0.077287607909865, Detected Stars 74, Region: 0
+2026-08-31T23:11:17.4664|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 38799
+2026-08-31T23:11:23.4626|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Red; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T23:11:34.7661|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T23:11:35.3138|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.6061420172353373, HFR MAD: 0.06782656459369818, Detected Stars 79, Region: 0
+2026-08-31T23:11:35.5504|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 38599
+2026-08-31T23:11:41.4914|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Red; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T23:11:52.7966|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T23:11:53.4207|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.622824064133616, HFR MAD: 0.07063529479679764, Detected Stars 128, Region: 0
+2026-08-31T23:11:53.4407|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 38399
+2026-08-31T23:11:59.4349|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Red; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T23:12:10.7403|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T23:12:11.2978|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.725352264521216, HFR MAD: 0.1132952720186462, Detected Stars 182, Region: 0
+2026-08-31T23:12:11.3253|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 38199
+2026-08-31T23:12:17.4460|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Red; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T23:12:28.7556|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T23:12:29.5289|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.9689252558465964, HFR MAD: 0.15549913999169185, Detected Stars 190, Region: 0
+2026-08-31T23:12:29.6342|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 37999
+2026-08-31T23:12:35.4601|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Red; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T23:12:46.7660|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T23:12:47.3869|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 2.184871752975607, HFR MAD: 0.21505685185796986, Detected Stars 209, Region: 0
+2026-08-31T23:12:47.4959|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 37799
+2026-08-31T23:12:53.4322|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Red; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T23:13:04.7429|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|870|Waiting on next left movement analysis
+2026-08-31T23:13:05.3077|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 2.4565147113232952, HFR MAD: 0.2391429911613221, Detected Stars 197, Region: 0
+2026-08-31T23:13:05.4521|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|823|Enough left trend points (4) with an established minimum (38799) to queue remaining right focus points up to 39599
+2026-08-31T23:13:05.4522|INFO|AutoFocusEngine.cs|StartBlindFocusPoints|896|Waiting on remaining AutoFocus analysis tasks
+2026-08-31T23:13:05.4526|INFO|FocuserVM.cs|MoveFocuserInternal|216|Moving Focuser to position 38689
+2026-08-31T23:13:15.3121|INFO|AutoFocusEngine.cs|ValidateCalculatedFocusPosition|1141|Validating HFR at final focus position 38689
+2026-08-31T23:13:15.4469|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 10s; Filter: Red; Gain: 15; Offset 132; Binning: 2x2;
+2026-08-31T23:13:27.3223|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 1.808838002410513, HFR MAD: 0.13750056028814073, Detected Stars 191, Region: 0
+2026-08-31T23:13:27.3227|INFO|HocusFocusVM.cs|AutoFocusEngine_Completed|473|AutoFocus completed with focuser starting at 38999 and ending at 38689
+2026-08-31T23:13:27.3252|INFO|FocuserMediator.cs|BroadcastSuccessfulAutoFocusRun|46|Autofocus notification received - Temperature 24.25
+2026-08-31T23:13:27.4901|INFO|AutoFocusEngine.cs|PerformPostAutoFocusActions|1022|Re-enabling temperature compensation after AutoFocus
+2026-08-31T23:13:27.5227|INFO|PHD2Guider.cs|TryStartGuideCommand|641|Phd2 - Requesting to start guiding. Recalibrate: False
+2026-08-31T23:13:51.6504|INFO|SequenceItem.cs|Run|254|Finishing Category: Focheggiatore, Item: RunAutofocus
+2026-08-31T23:13:51.6508|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T23:13:51.6511|INFO|SequenceItem.cs|Run|208|Starting Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T23:13:51.6518|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 600s; Filter: ; Gain: 15; Offset 132; Binning: 1x1;
+2026-08-31T23:23:57.8370|WARNING|DeviceUpdateTimer.cs|Run|115|Camera value update cycle took longer than the device poll interval (Total: 10.60s > 2s; Poll: 00:00:10.5988503; Update: 00:00:00.0001873)
+2026-08-31T23:23:57.8386|INFO|SequenceItem.cs|Run|254|Finishing Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T23:23:57.8394|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 11:09:31.3668664, next instruction time 0, next instruction Category: Ruota porta filtri, Item: SwitchFilter, Filter: Red
+2026-08-31T23:23:57.8394|INFO|SequenceItem.cs|Run|208|Starting Category: Ruota porta filtri, Item: SwitchFilter, Filter: Red
+2026-08-31T23:23:58.0387|INFO|SequenceItem.cs|Run|254|Finishing Category: Ruota porta filtri, Item: SwitchFilter, Filter: Red
+2026-08-31T23:23:58.0390|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: DitherAfterExposures, After Exposures: 1
+2026-08-31T23:23:58.0391|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T23:23:58.0391|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: Dither
+2026-08-31T23:24:00.1609|INFO|BaseImageData.cs|SaveToDisk|346|Saved image to D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-9.96C_Red_0018_2026-08-31_23-13-51_FWHM_NaN_Fok_38689.xisf
+2026-08-31T23:24:00.1611|INFO|ImageSaveController.cs|DoWork|97|Successfully saved file at D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-9.96C_Red_0018_2026-08-31_23-13-51_FWHM_NaN_Fok_38689.xisf. Duration Total: 00:00:01.9087385; BeforeSave: 00:00:00.0000681; BeforeFinalizeImageSaved: 00:00:01.8187978; FinalizeSaveTime: 00:00:00.0898718
+2026-08-31T23:24:22.3088|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: Dither
+2026-08-31T23:24:22.3090|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T23:24:22.3096|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 11:09:07.9042506, next instruction time 600, next instruction Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T23:24:22.3096|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: RestoreGuiding
+2026-08-31T23:24:22.3098|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T23:24:22.3099|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: StartGuiding
+2026-08-31T23:24:22.3472|INFO|PHD2Guider.cs|StartGuidingPrivate|504|Phd2 - App is already guiding. Skipping start guiding
+2026-08-31T23:24:22.3473|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: StartGuiding
+2026-08-31T23:24:22.3475|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T23:24:22.3476|INFO|SequenceItem.cs|Run|208|Starting Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T23:24:22.3520|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 600s; Filter: ; Gain: 15; Offset 132; Binning: 1x1;
+2026-08-31T23:34:28.6153|WARNING|DeviceUpdateTimer.cs|Run|115|Camera value update cycle took longer than the device poll interval (Total: 11.38s > 2s; Poll: 00:00:11.3782606; Update: 00:00:00.0001980)
+2026-08-31T23:34:28.7079|INFO|SequenceItem.cs|Run|254|Finishing Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T23:34:28.7087|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 10:59:00.4971293, next instruction time 0, next instruction Category: Ruota porta filtri, Item: SwitchFilter, Filter: Red
+2026-08-31T23:34:28.7087|INFO|SequenceItem.cs|Run|208|Starting Category: Ruota porta filtri, Item: SwitchFilter, Filter: Red
+2026-08-31T23:34:28.8745|INFO|SequenceItem.cs|Run|254|Finishing Category: Ruota porta filtri, Item: SwitchFilter, Filter: Red
+2026-08-31T23:34:28.8750|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: DitherAfterExposures, After Exposures: 1
+2026-08-31T23:34:28.8752|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T23:34:28.8752|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: Dither
+2026-08-31T23:34:30.5604|INFO|BaseImageData.cs|SaveToDisk|346|Saved image to D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-9.96C_Red_0019_2026-08-31_23-24-22_FWHM_NaN_Fok_38689.xisf
+2026-08-31T23:34:30.5605|INFO|ImageSaveController.cs|DoWork|97|Successfully saved file at D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-9.96C_Red_0019_2026-08-31_23-24-22_FWHM_NaN_Fok_38689.xisf. Duration Total: 00:00:01.5752013; BeforeSave: 00:00:00.0001119; BeforeFinalizeImageSaved: 00:00:01.5428509; FinalizeSaveTime: 00:00:00.0322378
+2026-08-31T23:35:00.3565|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: Dither
+2026-08-31T23:35:00.3568|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T23:35:00.3574|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 10:58:27.5359447, next instruction time 600, next instruction Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T23:35:00.3574|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: RestoreGuiding
+2026-08-31T23:35:00.3575|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T23:35:00.3575|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: StartGuiding
+2026-08-31T23:35:00.4066|INFO|PHD2Guider.cs|StartGuidingPrivate|504|Phd2 - App is already guiding. Skipping start guiding
+2026-08-31T23:35:00.4092|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: StartGuiding
+2026-08-31T23:35:00.4121|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T23:35:00.4128|INFO|SequenceItem.cs|Run|208|Starting Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T23:35:00.4142|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 600s; Filter: ; Gain: 15; Offset 132; Binning: 1x1;
+2026-08-31T23:45:06.5940|INFO|SequenceItem.cs|Run|254|Finishing Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T23:45:06.5944|WARNING|DeviceUpdateTimer.cs|Run|115|Camera value update cycle took longer than the device poll interval (Total: 10.03s > 2s; Poll: 00:00:10.0317171; Update: 00:00:00.0000597)
+2026-08-31T23:45:06.5949|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 10:48:19.8310820, next instruction time 0, next instruction Category: Ruota porta filtri, Item: SwitchFilter, Filter: Red
+2026-08-31T23:45:06.5950|INFO|SequenceItem.cs|Run|208|Starting Category: Ruota porta filtri, Item: SwitchFilter, Filter: Red
+2026-08-31T23:45:06.7661|INFO|SequenceItem.cs|Run|254|Finishing Category: Ruota porta filtri, Item: SwitchFilter, Filter: Red
+2026-08-31T23:45:06.7664|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: DitherAfterExposures, After Exposures: 1
+2026-08-31T23:45:06.7666|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T23:45:06.7666|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: Dither
+2026-08-31T23:45:08.4511|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 3.851194824040055, HFR MAD: 0.4910091832710921, Detected Stars 9, Region: 0
+2026-08-31T23:45:09.0585|INFO|BaseImageData.cs|SaveToDisk|346|Saved image to D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-9.96C_Red_0020_2026-08-31_23-35-00_FWHM_NaN_Fok_38689.xisf
+2026-08-31T23:45:09.0586|INFO|ImageSaveController.cs|DoWork|97|Successfully saved file at D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-9.96C_Red_0020_2026-08-31_23-35-00_FWHM_NaN_Fok_38689.xisf. Duration Total: 00:00:02.2177696; BeforeSave: 00:00:00.0000771; BeforeFinalizeImageSaved: 00:00:02.1173697; FinalizeSaveTime: 00:00:00.1003223
+2026-08-31T23:45:24.1735|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: Dither
+2026-08-31T23:45:24.1737|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T23:45:24.1743|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 10:48:02.2811151, next instruction time 600, next instruction Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T23:45:24.1743|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: RestoreGuiding
+2026-08-31T23:45:24.1744|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T23:45:24.1745|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: StartGuiding
+2026-08-31T23:45:24.2116|INFO|PHD2Guider.cs|StartGuidingPrivate|504|Phd2 - App is already guiding. Skipping start guiding
+2026-08-31T23:45:24.2139|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: StartGuiding
+2026-08-31T23:45:24.2153|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T23:45:24.2166|INFO|SequenceItem.cs|Run|208|Starting Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T23:45:24.2428|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 600s; Filter: ; Gain: 15; Offset 132; Binning: 1x1;
+2026-08-31T23:55:30.4143|WARNING|DeviceUpdateTimer.cs|Run|115|Camera value update cycle took longer than the device poll interval (Total: 11.18s > 2s; Poll: 00:00:11.1661557; Update: 00:00:00.0107170)
+2026-08-31T23:55:30.4481|INFO|SequenceItem.cs|Run|254|Finishing Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T23:55:30.4488|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 10:37:54.9966000, next instruction time 0, next instruction Category: Ruota porta filtri, Item: SwitchFilter, Filter: Red
+2026-08-31T23:55:30.4488|INFO|SequenceItem.cs|Run|208|Starting Category: Ruota porta filtri, Item: SwitchFilter, Filter: Red
+2026-08-31T23:55:30.6329|INFO|SequenceItem.cs|Run|254|Finishing Category: Ruota porta filtri, Item: SwitchFilter, Filter: Red
+2026-08-31T23:55:30.6333|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: DitherAfterExposures, After Exposures: 1
+2026-08-31T23:55:30.6334|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T23:55:30.6335|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: Dither
+2026-08-31T23:55:31.9781|INFO|HocusFocusStarDetection.cs|Detect|413|Average HFR: 5.106208175851549, HFR MAD: 0.09899647577899096, Detected Stars 12, Region: 0
+2026-08-31T23:55:32.3498|INFO|BaseImageData.cs|SaveToDisk|346|Saved image to D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-10.00C_Red_0021_2026-08-31_23-45-24_FWHM_6.45_Fok_38689.xisf
+2026-08-31T23:55:32.3499|INFO|ImageSaveController.cs|DoWork|97|Successfully saved file at D:\Images NINA\Target\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-10.00C_Red_0021_2026-08-31_23-45-24_FWHM_6.45_Fok_38689.xisf. Duration Total: 00:00:01.5399227; BeforeSave: 00:00:00.0000780; BeforeFinalizeImageSaved: 00:00:01.4644977; FinalizeSaveTime: 00:00:00.0753462
+2026-08-31T23:55:55.0818|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: Dither
+2026-08-31T23:55:55.0843|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T23:55:55.0870|INFO|MeridianFlipTrigger.cs|ShouldTrigger|296|Meridian Flip - (Side of Pier usage is disabled) There is still time remaining. Max remaining time 10:37:30.6658945, next instruction time 600, next instruction Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T23:55:55.0873|INFO|SequenceTrigger.cs|Run|114|Starting Trigger: RestoreGuiding
+2026-08-31T23:55:55.0874|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 1
+2026-08-31T23:55:55.0874|INFO|SequenceItem.cs|Run|208|Starting Category: Guida, Item: StartGuiding
+2026-08-31T23:55:55.1303|INFO|PHD2Guider.cs|StartGuidingPrivate|504|Phd2 - App is already guiding. Skipping start guiding
+2026-08-31T23:55:55.1323|INFO|SequenceItem.cs|Run|254|Finishing Category: Guida, Item: StartGuiding
+2026-08-31T23:55:55.1626|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1
+2026-08-31T23:55:55.1632|INFO|SequenceItem.cs|Run|208|Starting Category: Fotocamera, Item: TakeExposure, ExposureTime 600, Gain 15, Offset 132, ImageType LIGHT, Binning 1x1
+2026-08-31T23:55:55.1639|INFO|CameraVM.cs|Capture|742|Starting Exposure - Exposure Time: 600s; Filter: ; Gain: 15; Offset 132; Binning: 1x1;
