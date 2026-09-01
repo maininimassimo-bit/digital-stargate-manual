@@ -22,7 +22,28 @@ $sqmDest = Join-Path $sessionRoot 'raw\sqm'
 $reportDest = Join-Path $sessionRoot 'report'
 @($ninaDest, $phd2Dest, $weatherDest, $sqmDest, $reportDest) | ForEach-Object { Ensure-Directory $_ }
 
-$nina = Copy-FilesInWindow -SourceDirectory $config.NinaLogDirectory -DestinationDirectory $ninaDest -SessionStart $SessionStart -SessionEnd $SessionEnd -Extensions @('.log')
+$nina = @(Copy-FilesInWindow -SourceDirectory $config.NinaLogDirectory -DestinationDirectory $ninaDest -SessionStart $SessionStart -SessionEnd $SessionEnd -Extensions @('.log'))
+$ninaKept = @()
+foreach ($file in $nina) {
+    $match = [regex]::Match($file.Name, '^(?<stamp>\d{8}-\d{6})-')
+    if ($match.Success) {
+        $startedAt = [datetime]::MinValue
+        $parsed = [datetime]::TryParseExact(
+            $match.Groups['stamp'].Value,
+            'yyyyMMdd-HHmmss',
+            [Globalization.CultureInfo]::InvariantCulture,
+            [Globalization.DateTimeStyles]::None,
+            [ref]$startedAt)
+        if ($parsed -and $startedAt -gt $SessionEnd) {
+            Remove-Item -LiteralPath $file.FullName -Force
+            Write-Warning "Escluso log N.I.N.A. avviato dopo SessionEnd: $($file.Name) start=$($startedAt.ToString('o'))"
+            continue
+        }
+    }
+    $ninaKept += $file
+}
+$nina = @($ninaKept)
+
 $phd2 = Copy-FilesInWindow -SourceDirectory $config.Phd2LogDirectory -DestinationDirectory $phd2Dest -SessionStart $SessionStart -SessionEnd $SessionEnd -Extensions @('.txt', '.log')
 
 $weatherOutput = Join-Path $weatherDest ("CloudWatcher_{0}.csv" -f $sessionId)
