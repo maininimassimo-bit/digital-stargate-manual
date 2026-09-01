@@ -40,7 +40,7 @@ public sealed class RunbookRecoveryValidationTests
 
     Assert.Equal(ExecutionState.ReconciliationRequired, execution.State);
     Assert.False(execution.CanRetry);
-    Assert.Contains(execution.Evidence, item => item.Reason == "timeout-outcome-uncertain");
+    Assert.Contains(execution.Evidence, item => item.Reason == "timeout-outcome-uncertain:step-001");
   }
 
   [Fact]
