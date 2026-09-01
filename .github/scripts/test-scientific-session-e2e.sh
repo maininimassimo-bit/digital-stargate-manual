@@ -49,7 +49,8 @@ assert session['configurationId']=='C8_QHY695A_BIN1'
 assert math.isclose(float(session['sqm']['medianMagArcsec2']),18.66,abs_tol=1e-6)
 
 index=json.loads(Path('docs/data/scientific-observation-index.json').read_text(encoding='utf-8'))
-doc=next(d for d in index['searchDocuments'] if sid in d['searchDocumentId'])
+item=next(i for i in index['catalogItems'] if i['entityId']==sid)
+doc=next(d for d in index['searchDocuments'] if d['catalogItemId']==item['catalogItemId'])
 assert doc['facetValues']['camera']==['QHY695A']
 assert doc['facetValues']['sqmState']==['AVAILABLE']
 assert math.isclose(float(doc['rankingSignals']['sqmMedianMagArcsec2']),18.66,abs_tol=1e-6)
