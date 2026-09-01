@@ -4,11 +4,11 @@
 |---|---|
 | Identificativo | BKL-029 |
 | Capability | SQM Sky Quality Telemetry & Scientific History |
-| Stato | **In progress — realtime source and G6 runtime OAT verified; historical aggregation and final quality gates pending** |
-| Data | 2026-08-30 |
+| Stato | **In progress — realtime/G6 verified; G3 implementation complete on PR #68, final CI/ARB acceptance pending** |
+| Data | 2026-09-01 |
 | Autorità | Digital StarGate Architecture Office |
 | Dipendenze | AP-004; AP-013; AP-014; Observatory Status; BKL-027/BKL-028 telemetry boundary; scientific session catalog |
-| Runtime effect | Updated SQM-capable N.I.N.A. plugin commissioned on EAGLE30154; historical aggregation not yet accepted |
+| Runtime effect | SQM-capable N.I.N.A. plugin commissioned on EAGLE30154; historical aggregation implemented from canonical session evidence, pending final PR quality gates |
 
 ## 1. Decision summary
 
@@ -167,7 +167,7 @@ without changing CloudWatcher, router/network configuration, equipment state or 
 
 ## 7. Scientific history contract
 
-Valid `CURRENT` samples may feed session history only after the downstream aggregation path is implemented and validated:
+Valid SQM session evidence is normalized once and projected downstream with the governed fields:
 
 ```text
 sqm.start
@@ -182,11 +182,13 @@ sqm.source
 sqm.quality
 ```
 
-Historical aggregation remains downstream of the N.I.N.A. source adapter. The plugin is not responsible for session statistics.
+Historical aggregation remains downstream of the N.I.N.A. source adapter. The plugin is not responsible for session statistics. PR #68 implements this contract through canonical `session-metrics.json`, history schema 2.1.0, the post-consolidation enrichment adapter and scientific catalog/search projections. No downstream component reparses N.I.N.A. raw evidence for these fields.
+
+The real-session regression fixture `2026-08-31_2026-09-01` provides sample-history evidence from `raw/sqm/sqm-summary.json`: start `2026-08-31T17:00:06Z`, end `2026-09-01T03:59:49Z`, source `AAG CloudWatcher SOLO HTTP / lightmpsas`, quality `AVAILABLE`, median `18.66`, 1301 valid samples and temporal coverage `0.9849`.
 
 ## 8. CI and implementation status
 
-The operative implementation is the N.I.N.A. plugin adapter; no second production collector path is authorized.
+The operative realtime implementation remains the N.I.N.A. plugin adapter; no second production collector path is authorized.
 
 The configurable SQM adapter build at commit `0dd2dd9ae47625566cc36ccd14bc58d684dcd361` passed the N.I.N.A. plugin workflow and produced the commissioned artifact. The artifact DLL was installed on EAGLE30154 with SHA256:
 
@@ -196,25 +198,15 @@ CF185813F4A6E063F36642478251860E7590EE43B1996B607ADA8E4C186EDB8C
 
 The installer reported `PILOT INSTALL RESULT: PASS` and explicitly reported no N.I.N.A. process start, equipment connection or device command.
 
-Files involved include:
-
-```text
-integrations/nina/DigitalStarGate.DomeTelemetryExporter/SqmTelemetryAdapter.cs
-integrations/nina/DigitalStarGate.DomeTelemetryExporter/SqmTelemetryOptions.cs
-integrations/nina/DigitalStarGate.DomeTelemetryExporter/DomeTelemetryExporterPlugin.cs
-scripts/telemetry/Set-NinaSqmSourceConfiguration.ps1
-scripts/telemetry/Export-NinaObservatoryStatus.ps1
-```
-
-Historical aggregation and its quality evidence remain pending. Earlier generic/standalone parser quality evidence must still be reconciled with the final operative path before G4/G5 closure.
+Historical implementation on PR #68 includes analyzer normalization, history schema/update/enrichment, scientific catalog/search projection, latest-observation projection and a real-session E2E gate. At the time of this document update, the complete G3 provenance extension is committed but its resulting GitHub Actions runs have not yet been accepted; therefore G3/G4/G5 are not declared satisfied here.
 
 ## 9. Acceptance gates
 
 - **G1 Source discovery:** `SATISFIED` — real `lightmpsas`, timestamp, identity and site proximity verified;
 - **G2 Realtime contract:** `SATISFIED` — N.I.N.A. adapter and canonical mapping commissioned and observed on EAGLE30154;
-- **G3 Historical contract:** `BLOCKED ON IMPLEMENTATION / SAMPLE HISTORY`;
-- **G4 Regression:** `PENDING FINAL QUALITY RECONCILIATION`;
-- **G5 CI/docs:** `PENDING FINAL QUALITY RECONCILIATION`;
+- **G3 Historical contract:** `IMPLEMENTED / FINAL CI+ARB PENDING` — complete governed field set now implemented and covered by real-session E2E assertions;
+- **G4 Regression:** `FINAL CI+ARB PENDING` — regression gates exist; acceptance waits for the new HEAD executions;
+- **G5 CI/docs:** `FINAL CI+ARB PENDING` — architecture contract aligned; acceptance waits for the new HEAD executions;
 - **G6 Runtime OAT:** `SATISFIED` — nominal cadence plus controlled failure/recovery verified on EAGLE30154.
 
 ## 10. Runtime OAT evidence
@@ -256,4 +248,4 @@ The existing physical/local safety chain remains authoritative.
 
 ## 12. Next governed step
 
-Implement and validate G3 historical session aggregation from valid `CURRENT` SQM observations, including start/end/min/max/mean/median/valid sample count/temporal coverage/source/quality. Then reconcile final regression and CI/docs evidence for G4/G5 before declaring BKL-029 accepted or starting BKL-030 without an explicit governance exception.
+Run and accept the PR #68 quality gates on the complete G3 provenance implementation. If Developer Foundation, Validate Digital StarGate History and the real-session E2E remain green, perform an independent ARB re-review. Only after that review may G3/G4/G5 be declared satisfied and PR #68 become merge-ready.
