@@ -27,8 +27,22 @@ function Ensure-Directory {
 }
 
 function Get-RelativePathSafe {
-    param([string]$BasePath, [string]$TargetPath)
-    return [System.IO.Path]::GetRelativePath($BasePath, $TargetPath)
+    param(
+        [Parameter(Mandatory)][string]$BasePath,
+        [Parameter(Mandatory)][string]$TargetPath
+    )
+
+    $baseFull = [System.IO.Path]::GetFullPath($BasePath).TrimEnd([char[]]@('\', '/'))
+    $targetFull = [System.IO.Path]::GetFullPath($TargetPath)
+    $basePrefix = $baseFull + [System.IO.Path]::DirectorySeparatorChar
+
+    if ($targetFull.StartsWith($basePrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+        return $targetFull.Substring($basePrefix.Length)
+    }
+
+    $baseUri = New-Object System.Uri(($basePrefix -replace '\', '/'))
+    $targetUri = New-Object System.Uri(($targetFull -replace '\', '/'))
+    return [System.Uri]::UnescapeDataString($baseUri.MakeRelativeUri($targetUri).ToString()).Replace('/', [System.IO.Path]::DirectorySeparatorChar)
 }
 
 function Get-Sha256 {
