@@ -93,8 +93,12 @@ function Write-SessionManifest {
         [int]$DiagnosticLevel = 1
     )
     $manifestPath = Join-Path $SessionRoot 'manifest.json'
+    $readmePath = Join-Path $SessionRoot 'README.md'
     $files = Get-ChildItem -LiteralPath $SessionRoot -File -Recurse |
-        Where-Object { -not [string]::Equals($_.FullName, $manifestPath, [System.StringComparison]::OrdinalIgnoreCase) } |
+        Where-Object {
+            -not [string]::Equals($_.FullName, $manifestPath, [System.StringComparison]::OrdinalIgnoreCase) -and
+            -not [string]::Equals($_.FullName, $readmePath, [System.StringComparison]::OrdinalIgnoreCase)
+        } |
         ForEach-Object {
             [ordered]@{
                 path = Get-RelativePathSafe -BasePath $SessionRoot -TargetPath $_.FullName
@@ -139,7 +143,7 @@ function Update-SessionReadme {
 - `raw/phd2`: PHD2 GuideLog
 - `raw/weather`: estratto meteo CloudWatcher
 - `report`: report PDF e, quando disponibile, Markdown
-- `manifest.json`: inventario e hash SHA-256 delle evidence del package
+- `manifest.json`: inventario e hash SHA-256 delle evidence del package; i metadata editoriali non sono inclusi nell'inventario byte-governed
 
 ## Note operative
 
