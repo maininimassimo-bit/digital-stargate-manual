@@ -2,18 +2,27 @@ name: Validate Digital StarGate History
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'data/sessions/**/normalized/session-metrics.json'
+      - 'dsg-analytics/analyzer/**'
+      - 'dsg-analytics/history/**'
+      - 'dsg-analytics/tests/**'
+      - '.github/workflows/validate-history.yml'
   push:
     branches: [main]
     paths:
       - 'data/sessions/**/normalized/session-metrics.json'
+      - 'dsg-analytics/analyzer/**'
       - 'dsg-analytics/history/**'
+      - 'dsg-analytics/tests/**'
       - '.github/workflows/validate-history.yml'
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  consolidate-history:
+  validate-history:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -24,22 +33,35 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.12'
+          python-version: '3.13'
 
-      - name: Consolidate and validate history
+      - name: Test canonical scientific session evidence
+        run: python dsg-analytics/tests/test_scientific_session_evidence.py
+
+      - name: Consolidate history
         run: python dsg-analytics/history/consolidate_history.py --mode update
 
-      - name: Commit consolidated history
+      - name: Restore canonical scientific history fields
+        run: python dsg-analytics/history/enrich_scientific_history.py
+
+      - name: Verify history schema and canonical columns
         shell: bash
         run: |
-          if git diff --quiet; then
-            echo "No history changes to publish."
-            exit 0
-          fi
-          git config user.name "digital-stargate-bot"
-          git config user.email "digital-stargate-bot@users.noreply.github.com"
-          git add data/analytics/history/sessions.csv \
-                  data/analytics/history/validation-report.json \
-                  docs/analytics/history-validation.md
-          git commit -m "analytics: consolidate and validate session history"
-          git push
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+          schema = json.loads(Path('dsg-analytics/history/history_schema.json').read_text(encoding='utf-8'))
+          with Path('data/analytics/history/sessions.csv').open(encoding='utf-8-sig', newline='') as handle:
+              reader = csv.DictReader(handle)
+              actual = reader.fieldnames or []
+          missing = [field for field in schema['canonical_columns'] if field not in actual]
+          if missing:
+              raise SystemExit(f'Missing canonical history columns: {missing}')
+          print(f"History schema {schema['schema_version']} columns verified.")
+          PY
+
+      - name: Verify validation artifacts are generated
+        shell: bash
+        run: |
+          test -f data/analytics/history/validation-report.json
+          test -f docs/analytics/history-validation.md
