@@ -19,6 +19,9 @@ python - <<'PY'
 import csv, json, math
 from pathlib import Path
 sid='2026-08-31_2026-09-01'
+expected_start='2026-08-31T17:00:06.0000000Z'
+expected_end='2026-09-01T03:59:49.0000000Z'
+expected_source='AAG CloudWatcher SOLO HTTP / lightmpsas'
 metrics=json.loads(Path(f'data/sessions/2026/08/{sid}/normalized/session-metrics.json').read_text(encoding='utf-8'))
 science=metrics['scientific']; sqm=metrics['sqm']
 assert metrics['schema_version']=='0.2.0'
@@ -30,6 +33,10 @@ assert science['telescope']=='Celestron C8 XLT'
 assert int(science['binning'])==1
 assert science['configuration_id']=='C8_QHY695A_BIN1'
 assert sqm['state']=='AVAILABLE'
+assert sqm['quality']=='AVAILABLE'
+assert sqm['start']==expected_start
+assert sqm['end']==expected_end
+assert sqm['source']==expected_source
 assert math.isclose(float(sqm['median_mag_arcsec2']),18.66,abs_tol=1e-6)
 
 with Path('data/analytics/history/sessions.csv').open(encoding='utf-8-sig',newline='') as handle:
@@ -37,6 +44,11 @@ with Path('data/analytics/history/sessions.csv').open(encoding='utf-8-sig',newli
 assert row['target_name']=='M 27'
 assert row['camera']=='QHY695A'
 assert row['configuration_id']=='C8_QHY695A_BIN1'
+assert row['sqm_state']=='AVAILABLE'
+assert row['sqm_quality']=='AVAILABLE'
+assert row['sqm_start']==expected_start
+assert row['sqm_end']==expected_end
+assert row['sqm_source']==expected_source
 assert math.isclose(float(row['sqm_median_mag_arcsec2']),18.66,abs_tol=1e-6)
 
 catalog=json.loads(Path('docs/data/scientific-session-catalog.json').read_text(encoding='utf-8'))
