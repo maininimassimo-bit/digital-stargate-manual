@@ -43,9 +43,11 @@
       return Number.isNaN(date.getTime()) ? value : new Intl.DateTimeFormat('it-IT', { dateStyle: 'medium' }).format(date);
     };
 
-    const statusLabel = (session) => session.qualityState === 'VALIDATED_ANALYTICS'
-      ? 'Validated analytics'
-      : 'Attention required';
+    const statusLabel = (session) => {
+      if (session.qualityState === 'VALIDATED_ANALYTICS') return 'Validated analytics';
+      if (session.qualityState === 'METADATA_INCOMPLETE') return 'Metadata incomplete';
+      return 'Attention required';
+    };
 
     const governedCoordinates = (session) => {
       const ra = Number(session.raDeg ?? session.ra_deg);
@@ -70,10 +72,15 @@
       const tone = session.qualityState === 'VALIDATED_ANALYTICS' ? 'is-green' : 'is-red';
       const detailUrl = `../scientific-session-detail/?sessionId=${encodeURIComponent(session.sessionId)}`;
       const coords = governedCoordinates(session);
+      const sqmMedian = Number(session.sqm?.medianMagArcsec2);
+      const sqmMetric = Number.isFinite(sqmMedian) ? `
+            <div><span>SQM mediano</span><strong>${esc(dec(sqmMedian, 2))} mag/arcsec²</strong></div>` : '';
       const coordinateMetrics = coords ? `
             <div><span>RA (J2000)</span><strong>${esc(coordinate(coords.ra))}</strong></div>
             <div><span>DEC (J2000)</span><strong>${esc(coordinate(coords.dec))}</strong></div>` : '';
       const coordinateState = coords ? `<span>Coordinate: ${esc(coords.source)}</span>` : '';
+      const analyticsState = session.severity ? `<span>Analytics: ${esc(session.severity)}</span>` : '';
+      const sqmState = session.sqm?.state ? `<span>SQM: ${esc(session.sqm.state)}</span>` : '';
       return `
         <article class="dsg-session-card ${tone}">
           <div class="dsg-session-card__topline"><span>${esc(session.sessionId)}</span><span class="dsg-session-badge">${esc(statusLabel(session))}</span></div>
@@ -87,10 +94,10 @@
             <div><span>Integrazione</span><strong>${dec(session.integrationHours)} h</strong></div>
             <div><span>Completamento</span><strong>${dec(session.completionPct)}%</strong></div>
             <div><span>RMS</span><strong>${dec(session.rmsTotalArcsec, 3)}″</strong></div>
-            <div><span>Light</span><strong>${esc(session.lightCompleted)} / ${esc(session.lightStarted)}</strong></div>${coordinateMetrics}
+            <div><span>Light</span><strong>${esc(session.lightCompleted)} / ${esc(session.lightStarted)}</strong></div>${sqmMetric}${coordinateMetrics}
           </div>
           <div class="dsg-session-card__states">
-            <span>Evidence: ${esc(session.evidenceState)}</span><span>Manifest: ${esc(session.manifestState)}</span><span>Transfer: ${esc(session.transferState)}</span>${coordinateState}
+            <span>Evidence: ${esc(session.evidenceState)}</span><span>Manifest: ${esc(session.manifestState)}</span><span>Transfer: ${esc(session.transferState)}</span>${analyticsState}${sqmState}${coordinateState}
           </div>
           <a href="${detailUrl}">Apri sessione →</a>
         </article>`;
