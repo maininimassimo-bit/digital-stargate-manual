@@ -4,11 +4,12 @@
 |---|---|
 | Identificativo | BKL-029 |
 | Capability | SQM Sky Quality Telemetry & Scientific History |
-| Stato | **In progress — realtime/G6 verified; G3 implementation complete on PR #68, final CI/ARB acceptance pending** |
+| Stato | **Done — all G1–G6 acceptance gates satisfied** |
 | Data | 2026-09-01 |
 | Autorità | Digital StarGate Architecture Office |
 | Dipendenze | AP-004; AP-013; AP-014; Observatory Status; BKL-027/BKL-028 telemetry boundary; scientific session catalog |
-| Runtime effect | SQM-capable N.I.N.A. plugin commissioned on EAGLE30154; historical aggregation implemented from canonical session evidence, pending final PR quality gates |
+| Runtime effect | SQM-capable N.I.N.A. plugin commissioned on EAGLE30154; canonical realtime and scientific-history aggregation accepted and merged in `main` |
+| Closure evidence | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441`; final ARB approved; post-merge workflows without failures |
 
 ## 1. Decision summary
 
@@ -198,15 +199,15 @@ CF185813F4A6E063F36642478251860E7590EE43B1996B607ADA8E4C186EDB8C
 
 The installer reported `PILOT INSTALL RESULT: PASS` and explicitly reported no N.I.N.A. process start, equipment connection or device command.
 
-Historical implementation on PR #68 includes analyzer normalization, history schema/update/enrichment, scientific catalog/search projection, latest-observation projection and a real-session E2E gate. At the time of this document update, the complete G3 provenance extension is committed but its resulting GitHub Actions runs have not yet been accepted; therefore G3/G4/G5 are not declared satisfied here.
+PR #68 completed the historical implementation: canonical analyzer normalization, history schema/update/enrichment, scientific catalog/search projection, latest-observation projection and real-session E2E regression gate. The final ARB re-review reported no Blocker, Major or Minor finding. PR #68 was merged to `main` as `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441`; post-merge workflow inspection reported no failed workflow on that merge SHA.
 
 ## 9. Acceptance gates
 
 - **G1 Source discovery:** `SATISFIED` — real `lightmpsas`, timestamp, identity and site proximity verified;
 - **G2 Realtime contract:** `SATISFIED` — N.I.N.A. adapter and canonical mapping commissioned and observed on EAGLE30154;
-- **G3 Historical contract:** `IMPLEMENTED / FINAL CI+ARB PENDING` — complete governed field set now implemented and covered by real-session E2E assertions;
-- **G4 Regression:** `FINAL CI+ARB PENDING` — regression gates exist; acceptance waits for the new HEAD executions;
-- **G5 CI/docs:** `FINAL CI+ARB PENDING` — architecture contract aligned; acceptance waits for the new HEAD executions;
+- **G3 Historical contract:** `SATISFIED` — complete governed field set implemented, persisted and covered by real-session E2E assertions;
+- **G4 Regression:** `SATISFIED` — canonical scientific evidence, real-session M27 E2E and downstream idempotency gates passed before merge;
+- **G5 CI/docs:** `SATISFIED` — Developer Foundation, History, documentation and manual gates passed on the accepted PR baseline; post-merge inspection found no failed workflow on the merge SHA;
 - **G6 Runtime OAT:** `SATISFIED` — nominal cadence plus controlled failure/recovery verified on EAGLE30154.
 
 ## 10. Runtime OAT evidence
@@ -246,6 +247,6 @@ No BKL-029 component may:
 
 The existing physical/local safety chain remains authoritative.
 
-## 12. Next governed step
+## 12. Closure and next governed step
 
-Run and accept the PR #68 quality gates on the complete G3 provenance implementation. If Developer Foundation, Validate Digital StarGate History and the real-session E2E remain green, perform an independent ARB re-review. Only after that review may G3/G4/G5 be declared satisfied and PR #68 become merge-ready.
+BKL-029 is closed as `Done`. The next dependency-ordered capability is **BKL-030 — EAGLE Health & Reliability Telemetry**. BKL-030 may now begin its governed D1/D2 source discovery on EAGLE30154, subject to its read-only, low-overhead and Safety-separation constraints.
