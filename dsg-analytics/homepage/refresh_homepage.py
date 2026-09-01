@@ -6,7 +6,7 @@ import argparse
 import csv
 import json
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 START_MARKER = "<!-- DSG:AUTO-HOMEPAGE:START -->"
@@ -47,9 +47,12 @@ def as_dt(value: object):
     if not value:
         return None
     try:
-        return datetime.fromisoformat(str(value).strip().replace("Z", "+00:00"))
+        parsed = datetime.fromisoformat(str(value).strip().replace("Z", "+00:00"))
     except ValueError:
         return None
+    if parsed.tzinfo is None:
+        return parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc)
 
 
 def esc(value: object) -> str:
@@ -184,7 +187,7 @@ def build_operational_section(
             sessions,
             key=lambda row: as_dt(row.get("session_end"))
             or as_dt(row.get("session_start"))
-            or datetime.min,
+            or datetime.min.replace(tzinfo=timezone.utc),
         )
         if sessions
         else None
