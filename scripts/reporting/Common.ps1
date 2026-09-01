@@ -92,14 +92,17 @@ function Write-SessionManifest {
         [string]$Severity = 'UNASSESSED',
         [int]$DiagnosticLevel = 1
     )
-    $files = Get-ChildItem -LiteralPath $SessionRoot -File -Recurse | ForEach-Object {
-        [ordered]@{
-            path = Get-RelativePathSafe -BasePath $SessionRoot -TargetPath $_.FullName
-            size_bytes = $_.Length
-            sha256 = Get-Sha256 -Path $_.FullName
-            modified_local = $_.LastWriteTime.ToString('o')
+    $manifestPath = Join-Path $SessionRoot 'manifest.json'
+    $files = Get-ChildItem -LiteralPath $SessionRoot -File -Recurse |
+        Where-Object { -not [string]::Equals($_.FullName, $manifestPath, [System.StringComparison]::OrdinalIgnoreCase) } |
+        ForEach-Object {
+            [ordered]@{
+                path = Get-RelativePathSafe -BasePath $SessionRoot -TargetPath $_.FullName
+                size_bytes = $_.Length
+                sha256 = Get-Sha256 -Path $_.FullName
+                modified_local = $_.LastWriteTime.ToString('o')
+            }
         }
-    }
     $manifest = [ordered]@{
         schema_version = '1.0'
         session_id = $SessionId
@@ -113,7 +116,7 @@ function Write-SessionManifest {
         generated_at_local = (Get-Date).ToString('o')
         files = @($files)
     }
-    $manifest | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $SessionRoot 'manifest.json') -Encoding UTF8
+    $manifest | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $manifestPath -Encoding UTF8
 }
 
 function Update-SessionReadme {
@@ -136,7 +139,7 @@ function Update-SessionReadme {
 - `raw/phd2`: PHD2 GuideLog
 - `raw/weather`: estratto meteo CloudWatcher
 - `report`: report PDF e, quando disponibile, Markdown
-- `manifest.json`: inventario e hash SHA-256
+- `manifest.json`: inventario e hash SHA-256 delle evidence del package
 
 ## Note operative
 
