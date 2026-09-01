@@ -1,62 +1,22 @@
 {
-  "schema_version": "1.0",
-  "session_id": "2026-08-31_2026-09-01",
-  "observatory": "Digital StarGate - Manciano",
-  "start_local": "2026-08-31T19:00:00.0000000",
-  "end_local": "2026-09-01T06:00:00.0000000",
-  "timezone_id": "Europe/Rome",
-  "report_status": "COMPLETE",
-  "severity": "UNASSESSED",
-  "diagnostic_level": 1,
-  "generated_at_local": "2026-09-01T16:03:14.4707261+02:00",
-  "files": [
-    {
-      "path": "normalized\\session-metrics.json",
-      "size_bytes": 1243,
-      "sha256": "4b0b8fb10c6994ef2773a391a1b376d75cb42ee19960fc7f44697d38a4aa3646",
-      "modified_local": "2026-09-01T15:54:33.1976609+02:00"
-    },
-    {
-      "path": "raw\\nina\\20260831-000743-3.2.0.9001.7800-202608.log",
-      "size_bytes": 143183,
-      "sha256": "c5d3fedcc38971d1e57ee9a2ad106c6f42ae1f6b9cae57e855a60da6e53ba264",
-      "modified_local": "2026-08-31T23:55:55.1630509+02:00"
-    },
-    {
-      "path": "raw\\nina\\20260831-000743-3.2.0.9001.7800-202609.log",
-      "size_bytes": 216654,
-      "sha256": "70fc92a7d6a9309632319070626a00f3af0b7a09588e1daa24ef1be2c98f8931",
-      "modified_local": "2026-09-01T08:13:09.5537738+02:00"
-    },
-    {
-      "path": "raw\\phd2\\PHD2_DebugLog_2026-08-31_193403.txt",
-      "size_bytes": 28618284,
-      "sha256": "bc34b94fcae08038eec52887ccaa432a51181eea396ce8d07a79f9a7a57a0369",
-      "modified_local": "2026-09-01T08:13:26.7740760+02:00"
-    },
-    {
-      "path": "raw\\phd2\\PHD2_GuideLog_2026-08-31_193403.txt",
-      "size_bytes": 804421,
-      "sha256": "886ae550226b881cd33cedc1140a1bb68e19d556f1401a09d6570fe96416eb44",
-      "modified_local": "2026-09-01T08:13:26.7740760+02:00"
-    },
-    {
-      "path": "raw\\sqm\\sqm-history.ndjson",
-      "size_bytes": 253433,
-      "sha256": "ae5d0e81fb4ab3c135140323cbc0b88483380ecf1061cb8365e83a8a1b77a564",
-      "modified_local": "2026-09-01T16:03:13.7566781+02:00"
-    },
-    {
-      "path": "raw\\sqm\\sqm-summary.json",
-      "size_bytes": 457,
-      "sha256": "a3bfcbfa2fe39d0f585118e672a363c6bad68544a63ee869f313fde4a4b24f7f",
-      "modified_local": "2026-09-01T16:03:14.0313098+02:00"
-    },
-    {
-      "path": "raw\\weather\\CloudWatcher_2026-08-31_2026-09-01.csv",
-      "size_bytes": 702482,
-      "sha256": "6dd6491da8285a613111941528ca4e6bded1d081492138aa00dd0c6a4a289681",
-      "modified_local": "2026-09-01T16:03:11.0603202+02:00"
-    }
+  "schema_version":"1.0",
+  "session_id":"2026-08-31_2026-09-01",
+  "observatory":"Digital StarGate - Manciano",
+  "start_local":"2026-08-31T19:00:00.0000000",
+  "end_local":"2026-09-01T06:00:00.0000000",
+  "timezone_id":"Europe/Rome",
+  "report_status":"COMPLETE",
+  "severity":"UNASSESSED",
+  "diagnostic_level":1,
+  "generated_at_local":"2026-09-01T16:03:14.4707261+02:00",
+  "files":[
+    {"path":"normalized\\session-metrics.json","size_bytes":1243,"sha256":"4b0b8fb10c6994ef2773a391a1b376d75cb42ee19960fc7f44697d38a4aa3646","modified_local":"2026-09-01T15:54:33.1976609+02:00"},
+    {"path":"raw\\nina\\20260831-000743-3.2.0.9001.7800-202608.log","size_bytes":143183,"sha256":"c5d3fedcc38971d1e57ee9a2ad106c6f42ae1f6b9cae57e855a60da6e53ba264","modified_local":"2026-08-31T23:55:55.1630509+02:00"},
+    {"path":"raw\\nina\\20260831-000743-3.2.0.9001.7800-202609.log","size_bytes":216654,"sha256":"70fc92a7d6a9309632319070626a00f3af0b7a09588e1daa24ef1be2c98f8931","modified_local":"2026-09-01T08:13:09.5537738+02:00"},
+    {"path":"raw\\phd2\\PHD2_DebugLog_2026-08-31_193403.txt","size_bytes":28618284,"sha256":"bc34b94fcae08038eec52887ccaa432a51181eea396ce8d07a79f9a7a57a0369","modified_local":"2026-09-01T08:13:26.7740760+02:00"},
+    {"path":"raw\\phd2\\PHD2_GuideLog_2026-08-31_193403.txt","size_bytes":804421,"sha256":"886ae550226b881cd33cedc1140a1bb68e19d556f1401a09d6570fe96416eb44","modified_local":"2026-09-01T08:13:26.7740760+02:00"},
+    {"path":"raw\\sqm\\sqm-history.ndjson","size_bytes":253433,"sha256":"ae5d0e81fb4ab3c135140323cbc0b88483380ecf1061cb8365e83a8a1b77a564","modified_local":"2026-09-01T16:03:13.7566781+02:00"},
+    {"path":"raw\\sqm\\sqm-summary.json","size_bytes":457,"sha256":"a3bfcbfa2fe39d0f585118e672a363c6bad68544a63ee869f313fde4a4b24f7f","modified_local":"2026-09-01T16:03:14.0313098+02:00"},
+    {"path":"raw\\weather\\CloudWatcher_2026-08-31_2026-09-01.csv","size_bytes":702482,"sha256":"6dd6491da8285a613111941528ca4e6bded1d081492138aa00dd0c6a4a289681","modified_local":"2026-09-01T16:03:11.0603202+02:00"}
   ]
 }
