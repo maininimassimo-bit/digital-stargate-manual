@@ -10,21 +10,22 @@ Il repository GitHub è l'unica fonte autorevole. Non assumere che memoria della
 
 1. `AI_BOOTSTRAP.md`
 2. `docs/project/HANDOVER_2026-09-01.md` — handover corrente
-3. `docs/project/HANDOVER_2026-08-30.md` — record storico, non usare per determinare la prossima capability
-4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
-5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
-6. `docs/project/BACKLOG.md`
-7. `docs/project/FUNCTIONAL_ROADMAP_EXPANSION_2026-08-30.md`
-8. `.github/roadmap/roadmap-source.json`
-9. `docs/project/TECHNICAL_DEBT.md`
-10. `docs/project/DECISION_LOG.md`
-11. `docs/project/DEVELOPMENT_WORKFLOW.md`
-12. `docs/project/CODING_STANDARDS.md`
-13. `docs/project/RELEASE_PLAYBOOK.md`
-14. `docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md`
-15. Architecture Package, ADR, review, evidence e componenti direttamente coinvolti nell'attività.
+3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-01.md` — delta tecnico corrente
+4. `docs/project/HANDOVER_2026-08-30.md` — record storico, non usare per determinare la prossima capability
+5. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
+6. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
+7. `docs/project/BACKLOG.md`
+8. `docs/project/FUNCTIONAL_ROADMAP_EXPANSION_2026-08-30.md`
+9. `.github/roadmap/roadmap-source.json`
+10. `docs/project/TECHNICAL_DEBT.md`
+11. `docs/project/DECISION_LOG.md`
+12. `docs/project/DEVELOPMENT_WORKFLOW.md`
+13. `docs/project/CODING_STANDARDS.md`
+14. `docs/project/RELEASE_PLAYBOOK.md`
+15. `docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md`
+16. Architecture Package, ADR, review, evidence e componenti direttamente coinvolti nell'attività.
 
-I documenti di contesto datati possono contenere fotografie storiche. Per lo stato operativo corrente applicare sempre repository truth, evidence e handover più recente; non reinterpretare una vecchia sezione “planned/next” come stato corrente.
+I documenti di contesto datati possono contenere fotografie storiche. Per lo stato operativo corrente applicare sempre repository truth, evidence, handover e technical baseline più recenti; non reinterpretare una vecchia sezione “planned/next” come stato corrente.
 
 ## 3. Verifica iniziale
 
@@ -36,7 +37,7 @@ Prima di modificare il repository: identificare branch e HEAD; verificare file/S
 2. assessment ARB, validation record, execution evidence e gate;
 3. roadmap autorevole e `.github/roadmap/roadmap-source.json` per la projection operativa;
 4. backlog e documenti di planning approvati;
-5. handover corrente per la continuità operativa;
+5. handover corrente e current technical baseline per la continuità operativa;
 6. release note e commit pubblicati;
 7. contratti machine-readable versionati;
 8. dataset JSON/dashboard come proiezioni;
@@ -90,7 +91,7 @@ Lo stato deve essere nuovamente verificato nel repository a ogni utilizzo di que
 
 ## 8. Quality-gate handover
 
-La baseline corrente di continuità è descritta in `docs/project/HANDOVER_2026-09-01.md`.
+La baseline corrente di continuità è descritta in `docs/project/HANDOVER_2026-09-01.md`; il delta tecnico corrente è `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-01.md`.
 
 Per BKL-029, PR #68 è stata mergiata come `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` dopo i gate applicabili.
 
@@ -108,4 +109,4 @@ Non inventare branch/file/commit/test/workflow/stati; non marcare approved senza
 
 ## 11. Punto di partenza operativo
 
-Aprire `docs/project/HANDOVER_2026-09-01.md`, verificare HEAD e workflow correnti, poi eseguire la prima voce `Ready` compatibile con le dipendenze. Con BKL-029 chiuso e le relative projection riallineate, il punto di partenza è **BKL-030 D1/D2 EAGLE Health source discovery**, mantenendo il collector discovery-only/read-only fino alla classificazione delle source e alla conferma del boundary.
+Aprire `docs/project/HANDOVER_2026-09-01.md` e `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-01.md`, verificare HEAD e workflow correnti, poi eseguire la prima voce `Ready` compatibile con le dipendenze. Con BKL-029 chiuso e le relative projection riallineate, il punto di partenza è **BKL-030 D1/D2 EAGLE Health source discovery**, mantenendo il collector discovery-only/read-only fino alla classificazione delle source e alla conferma del boundary.
