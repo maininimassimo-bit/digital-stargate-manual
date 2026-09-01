@@ -8,6 +8,9 @@ on:
     paths:
       - "src/**"
       - "tests/**"
+      - "dsg-analytics/**"
+      - "data/analytics/**"
+      - "data/sessions/**/normalized/session-metrics.json"
       - "*.sln"
       - "*.props"
       - "global.json"
@@ -17,6 +20,8 @@ on:
       - ".github/scripts/**"
       - ".github/roadmap/**"
       - "docs/data/roadmap.json"
+      - "docs/data/scientific-session-catalog.json"
+      - "docs/data/scientific-observation-index.json"
       - "docs/project/BACKLOG.md"
       - "docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md"
       - ".github/workflows/developer-foundation.yml"
@@ -24,6 +29,9 @@ on:
     paths:
       - "src/**"
       - "tests/**"
+      - "dsg-analytics/**"
+      - "data/analytics/**"
+      - "data/sessions/**/normalized/session-metrics.json"
       - "*.sln"
       - "*.props"
       - "global.json"
@@ -33,6 +41,8 @@ on:
       - ".github/scripts/**"
       - ".github/roadmap/**"
       - "docs/data/roadmap.json"
+      - "docs/data/scientific-session-catalog.json"
+      - "docs/data/scientific-observation-index.json"
       - "docs/project/BACKLOG.md"
       - "docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md"
       - ".github/workflows/developer-foundation.yml"
@@ -126,6 +136,9 @@ jobs:
         run: |
           python -m pip install --requirement requirements.txt
           python -m pip install --disable-pip-version-check reportlab
+
+      - name: Test canonical scientific session evidence
+        run: python dsg-analytics/tests/test_scientific_session_evidence.py
 
       - name: Test real-session downstream idempotency
         shell: bash
