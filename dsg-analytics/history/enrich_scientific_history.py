@@ -8,12 +8,12 @@ are copied from their canonical normalized source without re-parsing raw logs.
 import argparse,csv,json
 from datetime import datetime,timezone
 from pathlib import Path
-FIELDS=['target_name','ra_deg','dec_deg','coordinate_epoch','configuration_id','telescope','camera','binning','sqm_state','sqm_min_mag_arcsec2','sqm_max_mag_arcsec2','sqm_mean_mag_arcsec2','sqm_median_mag_arcsec2','sqm_valid_samples','sqm_temporal_coverage']
+FIELDS=['target_name','ra_deg','dec_deg','coordinate_epoch','configuration_id','telescope','camera','binning','sqm_state','sqm_start','sqm_end','sqm_min_mag_arcsec2','sqm_max_mag_arcsec2','sqm_mean_mag_arcsec2','sqm_median_mag_arcsec2','sqm_valid_samples','sqm_temporal_coverage','sqm_source','sqm_quality']
 def val(m,k):
     v=m.get(k); return '' if v is None else v
 def projection(metrics):
     s=metrics.get('scientific',{}); q=metrics.get('sqm',{})
-    return {'target_name':val(s,'target_name'),'ra_deg':val(s,'ra_deg'),'dec_deg':val(s,'dec_deg'),'coordinate_epoch':val(s,'epoch'),'configuration_id':val(s,'configuration_id'),'telescope':val(s,'telescope'),'camera':val(s,'camera'),'binning':val(s,'binning'),'sqm_state':val(q,'state'),'sqm_min_mag_arcsec2':val(q,'min_mag_arcsec2'),'sqm_max_mag_arcsec2':val(q,'max_mag_arcsec2'),'sqm_mean_mag_arcsec2':val(q,'mean_mag_arcsec2'),'sqm_median_mag_arcsec2':val(q,'median_mag_arcsec2'),'sqm_valid_samples':val(q,'valid_samples'),'sqm_temporal_coverage':val(q,'temporal_coverage')}
+    return {'target_name':val(s,'target_name'),'ra_deg':val(s,'ra_deg'),'dec_deg':val(s,'dec_deg'),'coordinate_epoch':val(s,'epoch'),'configuration_id':val(s,'configuration_id'),'telescope':val(s,'telescope'),'camera':val(s,'camera'),'binning':val(s,'binning'),'sqm_state':val(q,'state'),'sqm_start':val(q,'start'),'sqm_end':val(q,'end'),'sqm_min_mag_arcsec2':val(q,'min_mag_arcsec2'),'sqm_max_mag_arcsec2':val(q,'max_mag_arcsec2'),'sqm_mean_mag_arcsec2':val(q,'mean_mag_arcsec2'),'sqm_median_mag_arcsec2':val(q,'median_mag_arcsec2'),'sqm_valid_samples':val(q,'valid_samples'),'sqm_temporal_coverage':val(q,'temporal_coverage'),'sqm_source':val(q,'source'),'sqm_quality':val(q,'quality')}
 def main():
     p=argparse.ArgumentParser(); p.add_argument('--history',default='data/analytics/history/sessions.csv'); p.add_argument('--repo-root',default='.'); a=p.parse_args(); root=Path(a.repo_root); hp=root/a.history
     with hp.open('r',encoding='utf-8-sig',newline='') as h: reader=csv.DictReader(h); rows=list(reader); base=list(reader.fieldnames or [])
