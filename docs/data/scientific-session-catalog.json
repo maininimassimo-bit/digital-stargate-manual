@@ -8088,17 +8088,17 @@
     {
       "sessionId": "2026-08-31_2026-09-01",
       "observationDate": "2026-08-31",
-      "start": "2026-08-31T18:00:00",
-      "end": "2026-09-01T07:00:00",
+      "start": "2026-08-31T17:00:06.0000000Z",
+      "end": "2026-09-01T03:59:49.0000000Z",
       "target": "M 27",
-      "raDeg": null,
-      "decDeg": null,
-      "coordinateSource": null,
-      "configurationId": "UNKNOWN",
-      "telescope": "Celestron C8",
-      "camera": "UNKNOWN",
+      "raDeg": 299.9,
+      "decDeg": 22.72111111,
+      "coordinateSource": "canonical-session-metrics",
+      "configurationId": "C8_QHY695A_BIN1",
+      "telescope": "Celestron C8 XLT",
+      "camera": "QHY695A",
       "filter": "Blu",
-      "binning": "1x1",
+      "binning": "1",
       "gain": 15,
       "offset": 132,
       "exposureSeconds": 600,
@@ -8110,7 +8110,7 @@
       "rmsTotalArcsec": 0.505,
       "severity": "YELLOW",
       "analyticsState": "ATTENTION_REQUIRED",
-      "metadataState": "UNREGISTERED",
+      "metadataState": "CANONICAL_EVIDENCE",
       "transferState": "NOT_REPRESENTED",
       "manifestState": "VERSIONED",
       "evidenceState": "SOURCE_METRICS_AVAILABLE",
@@ -9334,7 +9334,16 @@
           ]
         }
       },
-      "qualityState": "METADATA_INCOMPLETE"
+      "sqm": {
+        "state": "AVAILABLE",
+        "minMagArcsec2": 8.91,
+        "maxMagArcsec2": 20.42,
+        "meanMagArcsec2": 17.5395,
+        "medianMagArcsec2": 18.66,
+        "validSamples": 1301,
+        "temporalCoverage": 0.9849
+      },
+      "qualityState": "ATTENTION_REQUIRED"
     }
   ]
 }

@@ -1,11 +1,11 @@
 # Validazione storico Digital StarGate
 
-- Schema: `2.0B.1`
+- Schema: `2.1.0`
 - Stato: **WARNING**
 - Sessioni: **8**
 - Errori: **0**
-- Avvisi: **3**
-- Generato: `2026-09-01T15:18:25+00:00`
+- Avvisi: **2**
+- Generato: `2026-09-01T19:51:29+00:00`
 
 ## Errori
 
@@ -17,4 +17,3 @@ Nessuno.
 |---:|---|---|---|
 | 5 | `2026-08-10_2026-08-11` | `configuration_id` | Configurazione non identificata |
 | 8 | `2026-08-26_2026-08-27` | `configuration_id` | Configurazione non identificata |
-| 9 | `2026-08-31_2026-09-01` | `configuration_id` | Configurazione non identificata |

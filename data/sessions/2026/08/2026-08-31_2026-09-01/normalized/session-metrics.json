@@ -1,7 +1,18 @@
 {
-  "schema_version": "0.1.1",
+  "schema_version": "0.2.0",
   "session_id": "2026-08-31_2026-09-01",
-  "generated_at": "2026-09-01T15:18:24.685957+00:00",
+  "generated_at": "2026-09-01T19:51:28.639313+00:00",
+  "scientific": {
+    "target_name": "M 27",
+    "ra_deg": 299.9,
+    "dec_deg": 22.72111111,
+    "epoch": "J2000",
+    "telescope": "Celestron C8 XLT",
+    "camera": "QHY695A",
+    "binning": 1,
+    "source": "nina-log",
+    "configuration_id": "C8_QHY695A_BIN1"
+  },
   "nina": {
     "camera_exposures_total": 186,
     "light_started": 32,
@@ -33,6 +44,22 @@
     "weather_safe_transitions_full_window": 2,
     "weather_unsafe_pct_full_window": 14.9,
     "weather_scope_note": "Valori riferiti alla finestra CSV importata; non penalizzano la severita finche non sono correlati alla sequenza attiva/cupola aperta."
+  },
+  "sqm": {
+    "state": "AVAILABLE",
+    "quality": "AVAILABLE",
+    "start": "2026-08-31T17:00:06.0000000Z",
+    "end": "2026-09-01T03:59:49.0000000Z",
+    "min_mag_arcsec2": 8.91,
+    "max_mag_arcsec2": 20.42,
+    "mean_mag_arcsec2": 17.5395,
+    "median_mag_arcsec2": 18.66,
+    "valid_samples": 1301,
+    "temporal_coverage": 0.9849,
+    "source_path": "data/sessions/2026/08/2026-08-31_2026-09-01/raw/sqm/sqm-summary.json",
+    "source": "AAG CloudWatcher SOLO HTTP / lightmpsas",
+    "serial": "2382",
+    "firmware": "5.88"
   },
   "severity": "YELLOW",
   "severity_reasons": [

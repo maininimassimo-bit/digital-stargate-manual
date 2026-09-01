@@ -1,11 +1,18 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "session_id": "2026-08-31_2026-09-01",
   "target": {
     "name": "M 27",
-    "ra_deg": 1.0,
-    "dec_deg": 20.0,
+    "ra_deg": 299.9,
+    "dec_deg": 22.72111111,
+    "epoch": "J2000",
     "coordinate_source": "nina-log"
+  },
+  "equipment": {
+    "configuration_id": "C8_QHY695A_BIN1",
+    "telescope": "Celestron C8 XLT",
+    "camera": "QHY695A",
+    "binning": 1
   },
   "metadata_state": "RESOLVED",
   "sky_view": {
@@ -16,9 +23,11 @@
   "metrics": {
     "integration_hours": 5.33,
     "completed_frames": 32,
-    "rms_total_arcsec": 0.505
+    "rms_total_arcsec": 0.505,
+    "sqm_median_mag_arcsec2": 18.66,
+    "sqm_mean_mag_arcsec2": 17.5395
   },
   "report_url": "./session-reports/2026/08/2026-08-31_2026-09-01/report-sessione/",
   "fallback_image": "./assets/images/osservatorio-hero.jpg",
-  "generated_at": "2026-09-01T15:18:25+00:00"
+  "generated_at": "2026-09-01T19:51:29+00:00"
 }
