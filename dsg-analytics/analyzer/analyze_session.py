@@ -5,7 +5,7 @@ from datetime import datetime
 from pathlib import Path
 SESSION_RE=re.compile(r'^\d{4}-\d{2}-\d{2}_\d{4}-\d{2}-\d{2}$'); PHD_BEGIN=re.compile(r'^Guiding Begins at '); PHD_DATA=re.compile(r'^\d+,\s*[\d.]+,"[^"]+",')
 TARGET_COORD_RE=re.compile(r'Target:\s*(?P<target>.+?)\s+RA:\s*(?P<rah>\d{1,2}):(?P<ram>\d{1,2}):(?P<ras>\d+(?:\.\d+)?)\s*;\s*Dec:\s*(?P<sign>[+-]?)(?P<decd>\d{1,2})[^\d]+(?P<decm>\d{1,2})[^\d]+(?P<decs>\d+(?:\.\d+)?)',re.I)
-SAVED_IMAGE_RE=re.compile(r'LIGHT_(?P<bin>\d+)x(?P=bin)_[^\\/]*?_(?P<target>[^_\\/]+)_(?P<telescope>[^_\\/]+)_',re.I); QHY_CAMERA_RE=re.compile(r'(?:QHYCCD:\s*Closing camera\s+|Description:\s*)(?P<camera>(?:QHY)?695A(?:-M)?[^,|\\/]*)',re.I)
+LIGHT_BIN_RE=re.compile(r'LIGHT_(?P<bin>\d+)x(?P=bin)_',re.I); QHY_CAMERA_RE=re.compile(r'(?:QHYCCD:\s*Closing camera\s+|Description:\s*)(?P<camera>(?:QHY)?695A(?:-M)?[^,|\\/]*)',re.I)
 def files(folder):
     if not folder.exists(): return
     for p in sorted(folder.rglob('*')):
@@ -22,6 +22,10 @@ def canonical_telescope(value):
     if re.fullmatch(r'Celestron C8(?: XLT)?',value,re.I): return 'Celestron C8 XLT'
     if re.search(r'Quattro\s*200P',value,re.I): return 'Sky-Watcher Quattro 200P'
     return value or None
+def telescope_from_line(line):
+    if re.search(r'(?<![A-Za-z0-9])Celestron C8(?: XLT)?(?=_|\s|$)',line,re.I): return 'Celestron C8 XLT'
+    if re.search(r'(?<![A-Za-z0-9])(?:Sky-Watcher\s+)?Quattro\s*200P(?=_|\s|$)',line,re.I): return 'Sky-Watcher Quattro 200P'
+    return None
 def parse_nina(folder):
     m={'camera_exposures_total':0,'light_started':0,'light_completed':0,'light_failed_explicit':0,'light_interrupted_unmatched':0,'technical_exposures_estimated':0,'integration_seconds':0.0,'autofocus_started':0,'autofocus_completed':0,'autofocus_failed_explicit':0,'autofocus_unmatched':0,'dither_requests':0,'nina_errors':0,'nina_warnings':0}; scientific={'target_name':None,'ra_deg':None,'dec_deg':None,'epoch':None,'telescope':None,'camera':None,'binning':None,'source':'nina-log'}; pending_light=pending_af=0; durations=[]; dur_re=re.compile(r'(?:ExposureTime|Duration|Exposure)\D{0,20}(?P<sec>\d+(?:\.\d+)?)\s*(?:s|sec|seconds?)',re.I)
     for _,text in files(folder):
@@ -29,8 +33,10 @@ def parse_nina(folder):
             low=line.lower(); coord=TARGET_COORD_RE.search(line)
             if coord and scientific['ra_deg'] is None:
                 h=float(coord.group('rah')); mi=float(coord.group('ram')); sec=float(coord.group('ras')); dd=float(coord.group('decd')); dm=float(coord.group('decm')); ds=float(coord.group('decs')); scientific['target_name']=coord.group('target').strip(); scientific['ra_deg']=round((h+mi/60+sec/3600)*15,8); scientific['dec_deg']=round((-1 if coord.group('sign')=='-' else 1)*(dd+dm/60+ds/3600),8); scientific['epoch']='J2000' if 'J2000' in line else None
-            image=SAVED_IMAGE_RE.search(line)
-            if image: scientific['target_name']=scientific['target_name'] or image.group('target').strip(); scientific['telescope']=scientific['telescope'] or canonical_telescope(image.group('telescope')); scientific['binning']=scientific['binning'] or int(image.group('bin'))
+            image=LIGHT_BIN_RE.search(line)
+            if image: scientific['binning']=scientific['binning'] or int(image.group('bin'))
+            telescope=telescope_from_line(line)
+            if telescope: scientific['telescope']=scientific['telescope'] or telescope
             camera=QHY_CAMERA_RE.search(line)
             if camera: scientific['camera']=scientific['camera'] or canonical_camera(camera.group('camera'))
             if 'touptek' in low and '294' in low: scientific['camera']=scientific['camera'] or 'ToupTek 294MC PRO'
