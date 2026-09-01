@@ -203,6 +203,9 @@ def build_operational_section(
                 and row.get("target_name", "").strip()
             }
         )
+        canonical_target = latest.get("target_name", "").strip()
+        if canonical_target and canonical_target not in latest_targets:
+            latest_targets.append(canonical_target)
         metadata_row = next(
             (
                 row
@@ -212,21 +215,36 @@ def build_operational_section(
             ),
             None,
         )
-        target_text = ", ".join(esc(item) for item in latest_targets) or esc(metadata_row.get("target_name")) if metadata_row else "—"
-        config = (
-            " · ".join(
-                esc(item)
-                for item in (latest.get("telescope", "").strip(), latest.get("camera", "").strip())
-                if item
-            )
-            or esc(metadata_row.get("configuration_id")) if metadata_row else esc(latest.get("configuration_id"))
-        )
-        if metadata_row:
-            ra = format_ra_deg(metadata_row.get("ra_deg"))
-            dec = format_dec_deg(metadata_row.get("dec_deg"))
-            coordinates = f"RA {ra} · Dec {dec} · J2000" if ra != "—" and dec != "—" else "Coordinate non registrate"
+
+        if latest_targets:
+            target_text = ", ".join(esc(item) for item in sorted(latest_targets))
+        elif metadata_row:
+            target_text = esc(metadata_row.get("target_name"))
         else:
-            coordinates = "Coordinate non registrate"
+            target_text = "—"
+
+        config_parts = [
+            item
+            for item in (
+                latest.get("telescope", "").strip(),
+                latest.get("camera", "").strip(),
+            )
+            if item
+        ]
+        if config_parts:
+            config = " · ".join(esc(item) for item in config_parts)
+        elif metadata_row:
+            config = esc(metadata_row.get("configuration_id"))
+        else:
+            config = esc(latest.get("configuration_id"))
+
+        coordinate_source = latest
+        if not latest.get("ra_deg") or not latest.get("dec_deg"):
+            coordinate_source = metadata_row or {}
+        ra = format_ra_deg(coordinate_source.get("ra_deg"))
+        dec = format_dec_deg(coordinate_source.get("dec_deg"))
+        coordinates = f"RA {ra} · Dec {dec} · J2000" if ra != "—" and dec != "—" else "Coordinate non registrate"
+
         target_detail = f"{coordinates} · {config}" if config != "—" else coordinates
         latest_rows = {
             "session": esc(sid),
