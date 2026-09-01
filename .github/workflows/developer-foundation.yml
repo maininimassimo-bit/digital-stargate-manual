@@ -140,6 +140,10 @@ jobs:
       - name: Test canonical scientific session evidence
         run: python dsg-analytics/tests/test_scientific_session_evidence.py
 
+      - name: Test real-session scientific E2E projections
+        shell: bash
+        run: bash ./.github/scripts/test-scientific-session-e2e.sh
+
       - name: Test real-session downstream idempotency
         shell: bash
         run: bash ./.github/scripts/test-real-session-idempotency.sh 2026-08-15_2026-08-16
