@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression coverage for homepage mixed timezone session timestamps."""
+"""Regression coverage for homepage latest-session projections."""
 from __future__ import annotations
 
 import importlib.util
@@ -70,7 +70,41 @@ def test_build_operational_section_accepts_mixed_naive_and_aware_sessions() -> N
     assert "Dec +22° 43′ 16″" in rendered
 
 
+def test_latest_target_does_not_depend_on_metadata_registry() -> None:
+    sessions = [
+        {
+            "session_id": "2026-08-31_2026-09-01",
+            "session_start": "2026-08-31T17:00:06+00:00",
+            "session_end": "2026-09-01T03:59:49+00:00",
+            "target_name": "M 27",
+            "integration_hours": "5.3334",
+            "light_completed": "32",
+            "telescope": "Celestron C8 XLT",
+            "camera": "QHY695A",
+            "configuration_id": "C8_QHY695A_BIN1",
+            "ra_deg": "299.9",
+            "dec_deg": "22.721111",
+            "rms_total_arcsec": "0.505",
+            "severity": "YELLOW",
+        }
+    ]
+    targets = [
+        {"session_id": "2026-08-31_2026-09-01", "target_name": "M 27"},
+        {"session_id": "2026-08-31_2026-09-01", "target_name": "M 27"},
+    ]
+
+    rendered = homepage.build_operational_section(sessions, targets, metadata=[])
+
+    assert "M 27" in rendered
+    assert "Celestron C8 XLT" in rendered
+    assert "QHY695A" in rendered
+    assert "RA 19h 59m 36s" in rendered
+    assert "Dec +22° 43′ 16″" in rendered
+    assert "🟡 YELLOW" in rendered
+
+
 if __name__ == "__main__":
     test_as_dt_normalizes_naive_and_aware_values_to_utc()
     test_build_operational_section_accepts_mixed_naive_and_aware_sessions()
-    print("Homepage datetime normalization regression tests PASS")
+    test_latest_target_does_not_depend_on_metadata_registry()
+    print("Homepage latest-session regression tests PASS")
