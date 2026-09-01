@@ -90,15 +90,15 @@ def parse_weather(folder):
     return {'weather_rows_total':total,'weather_rows_unsafe_full_window':unsafe,'weather_safe_transitions_full_window':trans,'weather_unsafe_pct_full_window':round(unsafe/total*100,2) if total else None,'weather_scope_note':'Valori riferiti alla finestra CSV importata; non penalizzano la severita finche non sono correlati alla sequenza attiva/cupola aperta.'}
 def parse_sqm(folder):
     summary=folder/'sqm-summary.json'
-    if not summary.exists(): return {'state':'NOT_AVAILABLE','source_path':None}
+    if not summary.exists(): return {'state':'NOT_AVAILABLE','quality':'NOT_AVAILABLE','source_path':None}
     try: data=json.loads(summary.read_text(encoding='utf-8-sig'))
-    except (OSError,json.JSONDecodeError): return {'state':'INVALID','source_path':str(summary)}
-    stats=data.get('statistics') if isinstance(data.get('statistics'),dict) else data; quality=data.get('quality'); state=(quality.get('state') if isinstance(quality,dict) else quality) or data.get('state') or 'AVAILABLE'
+    except (OSError,json.JSONDecodeError): return {'state':'INVALID','quality':'INVALID','source_path':str(summary)}
+    stats=data.get('statistics') if isinstance(data.get('statistics'),dict) else data; quality=data.get('quality'); state=(quality.get('state') if isinstance(quality,dict) else quality) or data.get('state') or 'AVAILABLE'; quality_value=(quality.get('quality') if isinstance(quality,dict) else quality) or state
     def pick(*keys):
         for key in keys:
             if key in stats and stats[key] is not None: return stats[key]
         return None
-    return {'state':str(state).upper(),'min_mag_arcsec2':pick('min','minimum','min_mag_arcsec2'),'max_mag_arcsec2':pick('max','maximum','max_mag_arcsec2'),'mean_mag_arcsec2':pick('mean','average','mean_mag_arcsec2'),'median_mag_arcsec2':pick('median','median_mag_arcsec2'),'valid_samples':pick('valid_samples','samples_valid','count'),'temporal_coverage':pick('temporal_coverage','coverage'),'source_path':str(summary),'source':data.get('source'),'serial':data.get('serial'),'firmware':data.get('firmware')}
+    return {'state':str(state).upper(),'quality':str(quality_value).upper(),'start':data.get('start') or stats.get('start'),'end':data.get('end') or stats.get('end'),'min_mag_arcsec2':pick('min','minimum','min_mag_arcsec2'),'max_mag_arcsec2':pick('max','maximum','max_mag_arcsec2'),'mean_mag_arcsec2':pick('mean','average','mean_mag_arcsec2'),'median_mag_arcsec2':pick('median','median_mag_arcsec2'),'valid_samples':pick('valid_samples','samples_valid','count'),'temporal_coverage':pick('temporal_coverage','coverage'),'source_path':str(summary),'source':data.get('source'),'serial':data.get('serial'),'firmware':data.get('firmware')}
 def resolve_configuration(repo_root,scientific):
     registry=repo_root/'data'/'analytics'/'configurations'/'equipment-registry.csv'
     if not registry.exists(): return None
