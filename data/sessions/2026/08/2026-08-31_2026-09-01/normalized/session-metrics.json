@@ -1,0 +1,41 @@
+{
+  "schema_version": "0.1.1",
+  "session_id": "2026-08-31_2026-09-01",
+  "generated_at": "2026-09-01T07:56:33.066042+00:00",
+  "nina": {
+    "camera_exposures_total": 186,
+    "light_started": 32,
+    "light_completed": 32,
+    "light_failed_explicit": 0,
+    "light_interrupted_unmatched": 0,
+    "technical_exposures_estimated": 154,
+    "integration_seconds": 19200.0,
+    "autofocus_started": 22,
+    "autofocus_completed": 9,
+    "autofocus_failed_explicit": 6,
+    "autofocus_unmatched": 7,
+    "dither_requests": 68,
+    "nina_errors": 36,
+    "nina_warnings": 94
+  },
+  "phd2": {
+    "guide_segments": 22,
+    "guide_samples_valid": 8119,
+    "rms_ra_arcsec": 0.388,
+    "rms_dec_arcsec": 0.324,
+    "rms_total_arcsec": 0.505,
+    "lost_star_events": 0,
+    "pulse_guide_failures": 0
+  },
+  "weather": {
+    "weather_rows_total": 3960,
+    "weather_rows_unsafe_full_window": 590,
+    "weather_safe_transitions_full_window": 2,
+    "weather_unsafe_pct_full_window": 14.9,
+    "weather_scope_note": "Valori riferiti alla finestra CSV importata; non penalizzano la severita finche non sono correlati alla sequenza attiva/cupola aperta."
+  },
+  "severity": "YELLOW",
+  "severity_reasons": [
+    "Autofocus falliti esplicitamente: 6"
+  ]
+}

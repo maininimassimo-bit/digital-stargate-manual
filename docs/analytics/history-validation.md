@@ -2,10 +2,10 @@
 
 - Schema: `2.0B.1`
 - Stato: **WARNING**
-- Sessioni: **7**
+- Sessioni: **8**
 - Errori: **0**
-- Avvisi: **2**
-- Generato: `2026-08-27T08:11:14+00:00`
+- Avvisi: **3**
+- Generato: `2026-09-01T07:56:33+00:00`
 
 ## Errori
 
@@ -17,3 +17,4 @@ Nessuno.
 |---:|---|---|---|
 | 5 | `2026-08-10_2026-08-11` | `configuration_id` | Configurazione non identificata |
 | 8 | `2026-08-26_2026-08-27` | `configuration_id` | Configurazione non identificata |
+| 9 | `2026-08-31_2026-09-01` | `configuration_id` | Configurazione non identificata |
