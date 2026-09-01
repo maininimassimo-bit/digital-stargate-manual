@@ -3,15 +3,15 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-030 |
-| Stato | **Planning only — implementation blocked until BKL-029 closure** |
-| Data | 2026-08-31 |
+| Stato | **Ready — BKL-029 closed; D1/D2 source discovery authorized** |
+| Data | 2026-09-01 |
 | Priorità | P1 |
 | Target | EAGLE30154 / Digital StarGate Observatory Status |
-| Dipendenza bloccante | BKL-029 |
+| Dipendenza bloccante | Nessuna — BKL-029 closed as `Done` |
 
 ## 1. Scopo
 
-Preparare il contratto architetturale e il source-discovery plan per la capability **EAGLE Health & Reliability Telemetry**, senza anticiparne l'implementazione prima della chiusura formale di BKL-029.
+Preparare e avviare il contratto architetturale e il source-discovery plan per la capability **EAGLE Health & Reliability Telemetry** dopo la chiusura formale di BKL-029.
 
 La capability deve produrre health observability spiegabile del computer operativo EAGLE, mantenendo separati:
 
@@ -28,10 +28,10 @@ BKL-030 non autorizza alcun comando verso cupola, montatura, power, router o alt
 Il backlog canonico mantiene:
 
 ```text
-BKL-029 -> BKL-030 -> BKL-015 -> BKL-044
+BKL-029 Done -> BKL-030 Ready -> BKL-015 -> BKL-044
 ```
 
-BKL-030 resta `Planned` finché BKL-029 non è formalmente chiuso. Questo documento è quindi un package di planning/discovery e non modifica lo stato della milestone.
+BKL-029 è stato chiuso con PR #68 e merge commit `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441`. BKL-030 è quindi sbloccato per il source discovery D1/D2. Lo stato `Ready` non equivale a implementazione o acceptance: il passaggio a `In Progress` richiede evidence reale del discovery su EAGLE30154 e la conferma del boundary definitivo.
 
 ## 3. Decisione di boundary proposta
 
@@ -192,7 +192,7 @@ Source non disponibile -> `UNKNOWN`; collector fermo -> projection stale; access
 
 ## 10. Acceptance plan BKL-030
 
-Da attivare solo dopo chiusura BKL-029:
+Il piano è ora attivo come sequenza governata; nessun gate è dichiarato soddisfatto senza evidence:
 
 - **G1 Source inventory:** source classificate `VERIFIED / UNAVAILABLE / REJECTED`;
 - **G2 Contract:** projection e field provenance definiti;
@@ -241,4 +241,4 @@ C:\DigitalStarGate\TelemetryEvidence\eagle-health-source-discovery-YYYYMMDD-HHMM
   eagle-health-source-discovery.txt
 ```
 
-L'esecuzione dello script prima della chiusura BKL-029 è ammessa esclusivamente come source discovery e **non costituisce BKL-030 acceptance né cambio stato a In Progress**.
+Dopo la closure BKL-029, l'esecuzione dello script è autorizzata come primo passo operativo D1/D2. Essa resta discovery-only e non costituisce da sola acceptance G1, implementazione del collector o autorizzazione a modificare il sistema.

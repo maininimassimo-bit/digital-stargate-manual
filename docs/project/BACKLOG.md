@@ -5,7 +5,7 @@
 | Identificativo | DSG-GOV-BKL-001 |
 | Versione | 3.0 |
 | Stato | Active |
-| Data baseline | 30/08/2026 |
+| Data baseline | 01/09/2026 |
 
 ## 1. Scopo
 
@@ -47,8 +47,8 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-026 | P0 | Deep assessment ARB/AP-014 acceptance | Done | BKL-019–025 | AP-014 Accepted | AP-014 |
 | BKL-027 | P1 | Power/Network source discovery | Done | EAGLE | Source verificate | AP-004/AP-009 |
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
-| BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | In Progress | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | Functional Roadmap Expansion; Observatory Status; `docs/architecture/telemetry/BKL-029-SQM-Source-Discovery-and-Architecture-Contract.md` |
-| BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Planned | BKL-029; Windows read-only collectors | Health EAGLE spiegabile: disk/RAM/CPU/event log/processi/time sync/USB/pending reboot/drift/capacity | Functional Roadmap Expansion |
+| BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441`; `docs/architecture/telemetry/BKL-029-SQM-Source-Discovery-and-Architecture-Contract.md` |
+| BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Ready | BKL-029; Windows read-only collectors | Health EAGLE spiegabile: disk/RAM/CPU/event log/processi/time sync/USB/pending reboot/drift/capacity | `docs/architecture/telemetry/BKL-030-EAGLE-Health-Reliability-Architecture-Assessment.md` |
 | BKL-031 | P2 | Observation Planner intelligente | Planned | BKL-015, BKL-035, meteo/SQM | Ranking target per setup e condizioni | Functional Roadmap Expansion |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
@@ -68,13 +68,12 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 
 ### Reconciliation note — 01/09/2026
 
-BKL-001–BKL-028 mantengono le closure già accettate. BKL-010/TD-002 sono chiusi. La functional roadmap review del 30/08/2026 ha approvato BKL-029–BKL-046. BKL-029 resta `In Progress` fino alla closure formale della PR #68: source SQM CloudWatcher SOLO, adapter runtime N.I.N.A., canonical realtime projection e G6 OAT sono verificati; il contratto storico G3 completo è implementato e ha superato Developer Foundation #867, Validate Digital StarGate History #24, il real-session scientific E2E M27, la validazione documentale e la re-review ARB, con solo la presente reconciliation di traceability residua prima della closure. BKL-030 prepara l'health observability dell'EAGLE e resta `Planned` fino alla chiusura di BKL-029. BKL-015 resta la foundation Knowledge Graph, ma deve incorporare fin dal design le entità e relazioni necessarie alle capability approvate. BKL-045 introduce processing provenance PixInsight; BKL-046 viene solo dopo il plugin/provenance layer ed è inizialmente advisory-only. AI, health score e readiness non sostituiscono mai la Safety Authority locale.
+BKL-001–BKL-029 mantengono le closure già accettate. BKL-029 è formalmente `Done`: PR #68 è stata mergiata in `main` con merge commit `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441`; source SQM CloudWatcher SOLO, adapter runtime N.I.N.A., canonical realtime projection, G6 OAT, historical contract G3 completo, regression E2E M27, CI e ARB finale risultano accettati. I workflow post-merge sul merge SHA non riportano failure. BKL-030 è quindi sbloccato e passa a `Ready`: il prossimo passo governato è source discovery D1/D2 su EAGLE30154, mantenendo collector read-only e Safety Authority separata. BKL-015 resta la foundation Knowledge Graph e segue BKL-030. BKL-045 introduce processing provenance PixInsight; BKL-046 viene solo dopo il plugin/provenance layer ed è inizialmente advisory-only. AI, health score e readiness non sostituiscono mai la Safety Authority locale.
 
 ## 4. Sequenza di esecuzione raccomandata
 
 ```text
-Completed baseline through BKL-028
-  -> BKL-029 SQM integration
+Completed baseline through BKL-029
   -> BKL-030 EAGLE Health & Reliability
   -> BKL-015 Knowledge Graph foundation
   -> BKL-044 Knowledge/AI Evidence Contract
