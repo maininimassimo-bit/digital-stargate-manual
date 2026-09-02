@@ -3,23 +3,23 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | AP14-OPS-EAGLE-AUTO-001 |
-| Versione | 1.3 |
-| Stato | Deployed; NO_SESSION runtime validated; BKL-019 evidence reconciled |
-| Data | 2026-08-20 |
+| Versione | 1.4 |
+| Stato | Deployed; Reporting 1.0.7 runtime validated; historical AP-014 OAT preserved |
+| Data | 2026-09-02 |
 | Host | EAGLE / PrimaLuceLab |
 
 ## Objective
 
 Operate and verify the governed automatic session producer on EAGLE so every future complete observing session is published through the AP-014 automatic portal pipeline, while no-observation nights terminate safely as `NO_SESSION`.
 
-This runbook changes the physical EAGLE runtime and must therefore be executed on EAGLE. Repository commits alone do not prove deployment. Conversely, already-versioned runtime evidence may satisfy a gate when it directly proves the required operational outcome; a redundant retrospective test must not be introduced solely to recreate evidence that already exists.
+This runbook changes the physical EAGLE runtime and must therefore be executed on EAGLE. Repository commits alone do not prove deployment. Historical AP-014 validation records remain authoritative for the OAT they actually executed; this runbook records the later operational runtime baseline without rewriting historical evidence.
 
 ## Current production baseline
 
 Before any runtime change verify:
 
-- `maininimassimo-bit/DigitalStarGate.Reporting` is at or after `c902c51ddaae7493cbfecc019fef554ffc22ca7a`;
-- `DigitalStarGate.Reporting` runtime version is `1.0.6`;
+- `maininimassimo-bit/DigitalStarGate.Reporting` is at or after merge `c5f1bd617eb7b256372f0257a3cf22b60d503d3b`;
+- `DigitalStarGate.Reporting` runtime version is `1.0.7`;
 - `maininimassimo-bit/digital-stargate-manual` runtime clone is synchronized to current `main` before launcher execution;
 - runtime clone path is `C:\DigitalStarGate\digital-stargate-manual-ap14-runtime`;
 - runtime config is `C:\DigitalStarGate\Automation\reporting.config.psd1`;
@@ -31,7 +31,10 @@ Current evidence sources:
 C:\Users\PrimaLuceLab\AppData\Local\NINA\Logs
 C:\Users\PrimaLuceLab\Documents\PHD2
 C:\Users\PrimaLuceLab\Documents\CloudWatcher\CloudWatcher.csv
+C:\Users\PrimaLuceLab\AppData\Local\DigitalStarGate\telemetry\sqm-history.ndjson
 ```
+
+The SQM history source is scientific evidence only and is never Safety Authority.
 
 ## 1. Capture current runtime before modification
 
@@ -65,10 +68,14 @@ Runtime manual repository:
 Set-Location 'C:\DigitalStarGate\digital-stargate-manual-ap14-runtime'
 git status --porcelain
 git switch main
-git fetch origin
+git fetch origin main
 git pull --ff-only origin main
+git branch --show-current
 git rev-list --left-right --count HEAD...origin/main
+git status --short
 ```
+
+Expected steady state: branch `main`, divergence `0 0`, empty short status.
 
 Reporting source repository:
 
@@ -81,23 +88,26 @@ git pull --ff-only origin main
 Get-Content .\VERSION
 ```
 
-Expected Reporting version is `1.0.6`.
+Expected Reporting version is `1.0.7` or a later explicitly governed release.
 
 ## 3. Install/upgrade Reporting
 
 From `C:\DigitalStarGate\DigitalStarGate.Reporting-src`:
 
 ```powershell
-.\Install-DSGReporting.ps1 `
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass `
+  -File .\Install-DSGReporting.ps1 `
   -RepositoryRoot 'C:\DigitalStarGate\digital-stargate-manual-ap14-runtime' `
   -RuntimeConfigPath 'C:\DigitalStarGate\Automation\reporting.config.psd1'
-
-Get-Module -ListAvailable DigitalStarGate.Reporting |
-    Sort-Object Version -Descending |
-    Select-Object -First 1 Name,Version,ModuleBase
 ```
 
-The installer derives the destination version from the module manifest and validates the exact module instance imported from the installed manifest. A hard-coded module version or verification based on an arbitrary already-loaded module instance is not acceptable.
+Verify the installed production baseline in a fresh Bypass process:
+
+```powershell
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "& { Import-Module DigitalStarGate.Reporting -RequiredVersion 1.0.7 -Force; Get-Module DigitalStarGate.Reporting | Select-Object Name,Version,ModuleBase; Get-Command Import-DSGSession,Publish-DSGSession | Select-Object Name,Source,Version }"
+```
+
+The expected version for this runbook revision is `1.0.7`. Older installed module directories do not by themselves indicate an error; verify the actual loaded module in the production-like Bypass context.
 
 Verify the effective configuration:
 
@@ -106,6 +116,8 @@ $config = 'C:\DigitalStarGate\Automation\reporting.config.psd1'
 Test-Path $config
 Get-Content $config -Raw
 ```
+
+The installer derives the destination version from the module manifest. Do not hard-code an installation destination or infer the active runtime merely from the highest directory name.
 
 ## 4. Governed preflight and Scheduled Task
 
@@ -127,32 +139,20 @@ The preflight must require:
 - successful `git pull --ff-only origin main`;
 - local `HEAD` exactly equal to `origin/main`.
 
-Any failed invariant stops before session import/publication.
+Any failed invariant stops before session import/publication. A preflight stop caused by a stale session branch or divergence is a fail-safe integrity response and must be diagnosed rather than bypassed with force/reset operations.
 
 Verify task:
 
 ```powershell
 Get-ScheduledTask -TaskName 'Digital StarGate - Daily Session Upload' | Format-List *
-Get-ScheduledTaskInfo -TaskName 'Digital StarGate - Daily Session Upload' | Format-List *
+Get-ScheduledTaskInfo -TaskName 'Digital StarGate - Daily Session Upload' | Format-List LastRunTime,LastTaskResult,NextRunTime,NumberOfMissedRuns
 ```
 
 Production trigger is daily at `07:20` local.
 
-## 5. NO_SESSION acceptance behavior
+## 5. NO_SESSION behavior
 
-For a night with no NINA/PHD2 observing evidence in the exact candidate window, Reporting 1.0.6 must return before creating staging or parsing CloudWatcher.
-
-Expected log:
-
-```text
-MODULE version=1.0.6
-DISCOVERY ... status=NO_SESSION nina=0 phd2=0 weatherRows=0
-END outcome=NO_SESSION
-```
-
-Expected process/task result: `0`.
-
-Production evidence on 18 August 2026:
+For a night with no NINA/PHD2 observing evidence in the candidate window, `NO_SESSION` is a valid non-error outcome. Historical production acceptance of this path was recorded with Reporting 1.0.6 on 18 August 2026:
 
 - `LastRunTime = 2026-08-18 07:20:20` local;
 - `LastTaskResult = 0`;
@@ -162,95 +162,52 @@ Production evidence on 18 August 2026:
 - weather rows `0`;
 - final outcome `NO_SESSION`.
 
-This path is accepted in production.
+That evidence remains historical and valid. Current operations use Reporting 1.0.7; do not rewrite the historical log as if it had executed on 1.0.7.
 
-## 6. BKL-019 — N.I.N.A. C8 informational logging evidence
+## 6. Reporting 1.0.7 SQM packaging
 
-BKL-019 is satisfied by direct, versioned runtime evidence already present in the repository. No additional controlled physical test is required solely to prove that N.I.N.A. can emit the informational telemetry required by the governed analytics pipeline.
-
-Authoritative source evidence:
+For a real session, Reporting 1.0.7 exports the session-bounded SQM evidence before manifest generation. Unless overridden by governed configuration, the source is:
 
 ```text
-data/sessions/2026/08/2026-08-14_2026-08-15/raw/nina/20260814-201744-3.2.0.9001.3996-202608.log
+%LOCALAPPDATA%\DigitalStarGate\telemetry\sqm-history.ndjson
 ```
 
-The 14/15 August M 27 log directly records, at `INFO` level:
-
-- N.I.N.A. version and normal informational logging output;
-- QHY695A camera discovery/connection;
-- filter wheel, focuser, CPWI mount, PHD2, CloudWatcher and dome connections;
-- Advanced Sequence start and sequence-container execution;
-- target-context evidence for M 27;
-- exposure lifecycle including `TakeExposure` start and completion;
-- 600 s LIGHT exposures, gain/offset and binning 1x1;
-- L-Pro filter switching;
-- successful XISF save paths containing M 27 / Celestron C8 acquisition context;
-- plate solving and target coordinates, including M 27 coordinates used by the meridian-flip workflow.
-
-Related governed metadata/equipment evidence is maintained in:
+Expected package paths:
 
 ```text
-data/analytics/metadata/session-scientific-metadata.csv
-data/analytics/configurations/session-configuration-map.csv
-data/analytics/configurations/equipment-registry.csv
+raw\sqm\sqm-history.ndjson
+raw\sqm\sqm-summary.json
 ```
 
-Relevant repository history includes:
+A non-destructive runtime test on EAGLE30154 for `2026-09-01_2026-09-02` verified `1306` valid samples, quality `AVAILABLE`, temporal coverage `0.9886`, min `8.91`, mean `17.738`, max `20.92` and median `18.755` mag/arcsec².
 
-- `480c3fe2a8d36cd315cb814e7af97f8d6aa3260b` — register C8/QHY695A for the 14/15 August M 27 session;
-- `5fd4b0ebae58bf558e1d4818bdfc8840f8ed7137` — register the 15/16 August M 27 scientific configuration.
+Do not infer safety from SQM. It remains scientific telemetry/history.
 
-### 6.1 Acceptance interpretation
+## 7. Reporting 1.0.7 publish contract
 
-BKL-019 proves the operational outcome “N.I.N.A. informational telemetry is available and usable for governed analytics”. It does **not** prove that the designated 10/11 August OAT session itself contained those informational records.
+`Publish-DSGSession` must emit one structured result object rather than native Git stdout plus the result object. Runtime validation on EAGLE30154 verified, without `-CreateBranch` or `-Push`:
 
-Therefore:
-
-- BKL-019 may be `Done` from the 14/15 August versioned N.I.N.A. evidence;
-- the 10/11 August session remains historically incomplete where its own source evidence does not attest fields;
-- later evidence must not be copied backward to claim an instrument configuration or coordinates for the 10/11 August session unless a separate governed source explicitly attests them;
-- no screenshot of a current profile setting is required to recreate a fact already proven by versioned runtime output;
-- future regressions in N.I.N.A. logging are operational defects and should be handled as new incidents/remediations, not by reopening historical BKL-019 without evidence of regression.
-
-## 7. M27 controlled replay
-
-Do not use the daily wrapper blindly for the historical M27 session. Determine the actual session start/end from NINA/PHD2 evidence first, then use the certified Reporting commands with that explicit window.
-
-```powershell
-Import-Module DigitalStarGate.Reporting -Force
-$config = 'C:\DigitalStarGate\Automation\reporting.config.psd1'
-
-$preview = Import-DSGSession `
-  -SessionStart '<actual-M27-start>' `
-  -SessionEnd '<actual-M27-end>' `
-  -ConfigPath $config
-
-$preview | Format-List *
+```text
+System.Management.Automation.PSCustomObject
+COUNT = 1
+SessionId = 2026-09-01_2026-09-02
+Committed = False
+Pushed = False
 ```
 
-Proceed only if `Status = COMPLETE`.
+This is the runtime regression check for the 02/09 `$publish.Committed` incident.
 
-Then:
+## 8. Controlled replay / manual diagnostic
 
-```powershell
-$package = Import-DSGSession `
-  -SessionStart '<actual-M27-start>' `
-  -SessionEnd '<actual-M27-end>' `
-  -ConfigPath $config `
-  -CopyToRepository
+Do not use the daily wrapper blindly for a historical session. Determine the actual session start/end from source evidence first. For diagnostics that do not need repository publication, omit `-CopyToRepository` and do not call `Publish-DSGSession`.
 
-Get-DSGSessionStatus -SessionId $package.SessionId -ConfigPath $config
+If testing PowerShell code containing multiple variables/continuations from an interactive shell, prefer a temporary `.ps1` invoked with `powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File ...` rather than a deeply nested multiline `-Command` string. This avoids false parameter prompts caused by quoting/backtick parsing.
 
-Publish-DSGSession `
-  -SessionId $package.SessionId `
-  -ConfigPath $config `
-  -CreateBranch `
-  -Push
-```
+Proceed to `-CopyToRepository`, `-CreateBranch` or `-Push` only when the session is intentionally being governed/published.
 
-## 8. GitHub automatic chain
+## 9. GitHub automatic chain
 
-After EAGLE pushes `session/<session-id>`, no manual catalog or page edit is permitted.
+After EAGLE intentionally pushes `session/<session-id>`, no manual catalog or page edit is permitted.
 
 Expected automatic chain:
 
@@ -263,37 +220,44 @@ Expected automatic chain:
 7. `deploy-pages.yml` is explicitly dispatched;
 8. Session Explorer, Session Detail, Mission Control and enterprise search reflect the shared updated projections.
 
-## 9. Acceptance evidence
+## 10. Acceptance and runtime evidence
 
-Retain:
+Retain as applicable:
 
 - deployment backup directory;
-- old/new preflight and launcher hashes;
 - task XML and post-deployment task definition;
 - installed Reporting version/path;
 - runtime repository branch/HEAD/clean status;
 - automatic daily log and task result;
-- versioned N.I.N.A. source evidence and governed metadata references used for BKL-019/BKL-020;
-- actual M27 time window;
-- preview/package status and evidence counts;
-- session branch/commit SHA;
-- promotion workflow run;
-- analytics workflow run;
-- Pages workflow run;
+- NINA/PHD2/weather/SQM source evidence;
+- session time window;
+- package status/evidence counts;
+- session branch/commit SHA when publication occurs;
+- promotion/analytics/Pages workflow runs;
 - resulting catalog/index commit;
 - portal verification.
 
-Record results in `docs/architecture/validation/AP14-W07-EAGLE-M27-OAT-Result.md`. The runtime `NO_SESSION` sub-gate and BKL-019/BKL-020 evidence reconciliation are complete; the overall OAT remains open until its downstream publication, promotion, analytics, portal, PARTIAL and idempotency evidence is complete.
+Historical AP-014 OAT evidence remains in the existing validation records. Reporting 1.0.7 runtime remediation evidence is recorded separately in the 02/09/2026 handover and runtime validation record.
 
-## 10. Rollback
+## 11. Rollback and recovery
 
-If the scheduled runtime fails before overall acceptance:
+If the scheduled runtime fails:
 
-1. disable `Digital StarGate - Daily Session Upload` only when continued execution could create unsafe or corrupt state;
-2. restore the previous task XML from the deployment backup only after inspecting it;
-3. restore previous preflight/launcher files only from captured backup/hash;
-4. do not delete any produced scientific/session evidence;
-5. do not force-push or rewrite Git history;
-6. record the failure and remediation evidence before retry.
+1. preserve produced scientific/session evidence;
+2. inspect runtime branch, clean state and divergence before changing anything;
+3. return to `main` and use fast-forward synchronization when the working tree is clean and the failure is understood;
+4. do not use force-push or history rewrite as normal recovery;
+5. disable the Scheduled Task only when continued execution could create corrupt state or when diagnosis requires it;
+6. restore task/preflight/launcher only from captured backup/hash after inspection;
+7. record failure and remediation evidence before retry.
 
-A failed AP-014 automation deployment must not affect AP-013B XISF transport/import.
+A failed AP-014 automation deployment must not affect AP-013B XISF transport/import or the independent local Safety Authority.
+
+## 12. Known hardening debt
+
+The current 1.0.7 runtime validation does not close two separate hardening items:
+
+- guarantee restore-to-main in the launcher even if an exception occurs before normal cleanup;
+- restore the historical Reporting quality-gate checks that were reduced in the 1.0.7 PR while retaining the new SQM/publish regression tests.
+
+Track these as runtime/quality hardening; do not reinterpret them as evidence that the validated 1.0.7 SQM exporter or publish output contract failed.
