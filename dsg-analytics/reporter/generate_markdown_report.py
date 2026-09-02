@@ -3,7 +3,7 @@ import argparse,json
 from pathlib import Path
 
 def fmt(v,s=''): return 'n/d' if v is None else f'{v}{s}'
-def fmt_sqm(v): return 'n/d' if v is None else f'{v:.2f} mag/arcsec²'
+def fmt_sqm(v): return 'n/d' if v is None else f'{v:.4f} mag/arcsec²'
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--metrics',required=True); ap.add_argument('--output',required=True); a=ap.parse_args()
     m=json.loads(Path(a.metrics).read_text(encoding='utf-8')); n=m['nina']; p=m['phd2']; w=m['weather']; sqm=m.get('sqm') or {}; h=n['integration_seconds']/3600.0
