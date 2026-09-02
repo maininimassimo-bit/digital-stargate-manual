@@ -1,7 +1,7 @@
 {
   "schema_version": "0.2.0",
   "session_id": "2026-09-01_2026-09-02",
-  "generated_at": "2026-09-02T16:22:55.677384+00:00",
+  "generated_at": "2026-09-02T16:41:44.561009+00:00",
   "scientific": {
     "target_name": "M 27",
     "ra_deg": 299.9,
@@ -46,9 +46,20 @@
     "weather_scope_note": "Valori riferiti alla finestra CSV importata; non penalizzano la severita finche non sono correlati alla sequenza attiva/cupola aperta."
   },
   "sqm": {
-    "state": "NOT_AVAILABLE",
-    "quality": "NOT_AVAILABLE",
-    "source_path": null
+    "state": "AVAILABLE",
+    "quality": "AVAILABLE",
+    "start": "2026-09-01T17:00:27.0000000Z",
+    "end": "2026-09-02T03:59:49.0000000Z",
+    "min_mag_arcsec2": 8.91,
+    "max_mag_arcsec2": 20.92,
+    "mean_mag_arcsec2": 17.738,
+    "median_mag_arcsec2": 18.755,
+    "valid_samples": 1306,
+    "temporal_coverage": 0.9886,
+    "source_path": "data/sessions/2026/09/2026-09-01_2026-09-02/raw/sqm/sqm-summary.json",
+    "source": "AAG CloudWatcher SOLO HTTP / lightmpsas",
+    "serial": "2382",
+    "firmware": "5.88"
   },
   "severity": "YELLOW",
   "severity_reasons": [

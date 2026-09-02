@@ -24,9 +24,9 @@
 | RMS totale | 0.534 arcsec |
 | Lost Star | 0 |
 | PulseGuide failures | 0 |
-| SQM minimo | n/d |
-| SQM medio | n/d |
-| SQM massimo | n/d |
+| SQM minimo | 8.9100 mag/arcsec² |
+| SQM medio | 17.7380 mag/arcsec² |
+| SQM massimo | 20.9200 mag/arcsec² |
 | Righe meteo (finestra completa) | 3960 |
 | Righe meteo Unsafe (finestra completa) | 535 |
 
