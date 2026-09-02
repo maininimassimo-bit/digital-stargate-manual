@@ -7,7 +7,7 @@ from reportlab.lib.styles import getSampleStyleSheet,ParagraphStyle
 from reportlab.lib.enums import TA_CENTER
 from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer,Table,TableStyle
 
-def fmt_sqm(v): return 'n/d' if v is None else f'{v:.2f} mag/arcsec2'
+def fmt_sqm(v): return 'n/d' if v is None else f'{v:.4f} mag/arcsec2'
 def main():
  p=argparse.ArgumentParser();p.add_argument('--metrics',required=True);p.add_argument('--output',required=True);a=p.parse_args()
  m=json.loads(Path(a.metrics).read_text(encoding='utf-8'));n,pd,w=m['nina'],m['phd2'],m['weather'];sqm=m.get('sqm') or {};out=Path(a.output);out.parent.mkdir(parents=True,exist_ok=True)
