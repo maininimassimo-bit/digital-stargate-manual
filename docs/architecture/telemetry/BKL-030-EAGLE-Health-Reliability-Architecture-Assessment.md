@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-030 |
-| Stato | **In Progress — D1/D2 complete; D3/D4 and G1–G8 pending** |
+| Stato | **In Progress — D1/D2/D3 complete; D4 and G1–G8 pending** |
 | Data | 2026-09-03 |
 | Priorità | P1 |
 | Target | EAGLE30154 / Digital StarGate Observatory Status |
@@ -23,12 +23,14 @@ Sequenza canonica:
 BKL-029 Done -> BKL-030 In Progress -> BKL-015 -> BKL-044
 ```
 
-BKL-029 è chiuso. D1 Host Baseline Inventory e D2 Privilege Assessment sono completati con evidence reale su `EAGLE30154` il 03/09/2026. D3 Overhead Pilot, D4 Failure Model e G1–G8 restano soggetti alla propria evidence e acceptance.
+D1 Host Baseline Inventory, D2 Privilege Assessment e D3 Overhead Pilot sono completati con evidence reale su `EAGLE30154` il 03/09/2026. D4 Failure Model e G1–G8 restano soggetti alla propria evidence e acceptance.
 
 Evidence primaria:
 
 - `docs/architecture/telemetry/evidence/BKL-030-EAGLE-Health-Source-Discovery-2026-09-03.md`
 - `docs/architecture/telemetry/BKL-030-D1-D2-Progress-2026-09-03.md`
+- `docs/architecture/telemetry/evidence/BKL-030-D3A-Overhead-Pilot-2026-09-03.md`
+- `docs/architecture/telemetry/evidence/BKL-030-D3B-Overhead-Pilot-2026-09-03.md`
 
 ## 3. Boundary confermato
 
@@ -61,7 +63,7 @@ Non integrare l'intero BKL-030 nel plugin N.I.N.A.: Event Log, filesystem/storag
 | Detailed SMART/reliability | `Get-StorageReliabilityCounter` | UNAVAILABLE_NON_ELEVATED | Nested CIM access error; non elevare automaticamente il collector |
 | Time sync | `w32tm` | VERIFIED_SOURCE / SERVICE_INACTIVE | Service not started `0x80070426`; source/offset non inferibili |
 | Scheduled Tasks | Task Scheduler read API | VERIFIED | DSG Daily Session Upload e OneDrive Export visibili |
-| Process inventory | process table | VERIFIED_SOURCE | AAG CloudWatcher e ASCOM TS Shelter osservati; presenza time-dependent |
+| Process inventory | process table | VERIFIED_SOURCE | presenza processi time-dependent |
 | Event Log | System/Application Event Log | VERIFIED | Critical/Error leggibili; recurrent EagleManager failures osservabili |
 | USB/COM | PnP inventory | VERIFIED | COM1, COM9, COM14, COM47 osservati; PnP prevale su `Win32_SerialPort` per presence |
 | `Win32_SerialPort` | CIM | INSUFFICIENT_AS_SOLE_SOURCE | Probe eseguibile ma zero righe nel discovery |
@@ -75,7 +77,7 @@ Il 03/09/2026 C: aveva `1500758016` byte liberi su `223397015552` (~0.67%); D: `
 
 ### Reliability evidence
 
-Application Event Log espone crash ricorrenti `EagleManager.exe`, inclusi eventi `.NET Runtime` 1026 e `Application Error` 1000. Sono stati osservati `System.Threading.SemaphoreFullException` e `System.InvalidOperationException`. Questa evidence valida Event Log come source reliability ma non autorizza a classificare ogni Windows Error come osservatorio-critical: serve una allowlist/provider/event policy governata.
+Application Event Log espone crash ricorrenti `EagleManager.exe`, inclusi eventi `.NET Runtime` 1026 e `Application Error` 1000. Questa evidence valida Event Log come source reliability ma non autorizza a classificare ogni Windows Error come observatory-critical: serve una allowlist/provider/event policy governata.
 
 ## 5. Contratto di projection locale proposto
 
@@ -100,39 +102,26 @@ Schema di principio:
     "reasons": []
   },
   "signals": {
-    "storage": {},
-    "memory": {},
-    "cpu": {},
-    "uptime": {},
-    "time_sync": {},
-    "event_log": {},
-    "processes": {},
-    "scheduled_tasks": {},
-    "log_sources": {},
-    "usb_com": {},
-    "pending_reboot": {},
-    "configuration_drift": {}
+    "storage": {}, "memory": {}, "cpu": {}, "uptime": {}, "time_sync": {},
+    "event_log": {}, "processes": {}, "scheduled_tasks": {}, "log_sources": {},
+    "usb_com": {}, "pending_reboot": {}, "configuration_drift": {}
   }
 }
 ```
 
-Il dettaglio finale e la field provenance saranno consolidati in G2 sulla base del discovery D1/D2.
+Il dettaglio finale e la field provenance saranno consolidati in G2.
 
 ## 6. Health state governance
 
-`HEALTHY / DEGRADED / CRITICAL / UNKNOWN` deve essere spiegabile:
+`HEALTHY / DEGRADED / CRITICAL / UNKNOWN` deve essere spiegabile: nessun unico numero opaco; ogni stato non-HEALTHY deve indicare evidence/reasons; `UNKNOWN` quando una source obbligatoria non è osservabile o stale; nessuna soglia hardware inventata; valori raw separati dalla classificazione; BKL-036 potrà costruire un Observatory Health Score downstream; nessuno stato health può autorizzare operazioni Safety.
 
-1. nessun unico numero opaco come source of truth;
-2. ogni stato non-HEALTHY deve indicare evidence/reasons;
-3. `UNKNOWN` quando una source obbligatoria non è osservabile o è stale;
-4. nessuna soglia hardware inventata;
-5. valori quantitativi raw separati dalla classificazione;
-6. BKL-036 potrà costruire un Observatory Health Score downstream;
-7. nessuno stato health può autorizzare operazioni Safety.
+## 7. Collection cadence e D3 — COMPLETE
 
-## 7. Collection cadence e D3
+D3-A ha misurato il discovery completo senza N.I.N.A./PHD2: 3/3 successi, elapsed medio 9502.1 ms, massimo 11308.9 ms, CPU media disponibile 5.859 s, peak working set massimo 232718336 B, stderr zero.
 
-La cadence non è ancora acceptance. D3 dovrà misurare CPU, working set, I/O, latency e failures/timeouts durante N.I.N.A. attivo. Segnali economici potranno avere polling nell'ordine di decine di secondi/minuti; Event Log, Scheduled Tasks, update/reboot/drift e SMART scansioni meno frequenti. Analytics e trend restano downstream.
+D3-B ha ripetuto il pilot durante una normale sessione con N.I.N.A. e PHD2 attivi: 3/3 successi, elapsed medio 16769.9 ms, massimo 23204.4 ms, CPU media disponibile 7.086 s, peak working set massimo 206995456 B, stderr zero.
+
+Decisione: il discovery monolitico non sarà il polling frequente del collector. G2/G3 dovranno separare sorgenti **fast / medium / slow-on-change** in base a costo e volatilità. D3 non introduce intervalli numerici né soglie health; imaging workload mantiene priorità.
 
 ## 8. Safety e security boundary
 
@@ -144,13 +133,13 @@ Vietato: kill/restart automatico di N.I.N.A./PHD2/ASCOM; reset USB/COM; riavvio 
 
 - **D1 — Host baseline inventory: COMPLETE.** Evidence runtime 03/09/2026.
 - **D2 — Privilege assessment: COMPLETE.** Low-privilege boundary confermato; detailed SMART unavailable non-elevated.
-- **D3 — Overhead pilot: NOT STARTED.**
-- **D4 — Failure model: NOT STARTED.** Source unavailable -> `UNKNOWN`; collector stopped -> stale; access denied degrada il singolo signal; malformed source non deve causare crash loop.
+- **D3 — Overhead pilot: COMPLETE.** D3-A e D3-B eseguiti; full discovery escluso come fast polling design.
+- **D4 — Failure model: NEXT.** Deve formalizzare source unavailable, stale/collector stopped, access denied, malformed source, timeout/hung probe, partial projection, disk/write failure e recovery senza crash loop o remediation automatica.
 
 ## 10. Acceptance plan BKL-030
 
 - **G1 Source inventory:** D1/D2 evidence disponibile; classification/policy finale ancora da formalizzare prima della closure G1.
-- **G2 Contract:** projection e field provenance da consolidare.
+- **G2 Contract:** projection, field provenance, cadence class e failure semantics da consolidare.
 - **G3 Collector:** non implementato.
 - **G4 CI:** non dichiarato.
 - **G5 Runtime OAT:** non eseguito.
@@ -158,7 +147,7 @@ Vietato: kill/restart automatico di N.I.N.A./PHD2/ASCOM; reset USB/COM; riavvio 
 - **G7 Portal:** non implementato.
 - **G8 Safety review:** boundary definito; acceptance finale non ancora eseguita.
 
-## 11. Open questions dopo D1/D2
+## 11. Open questions dopo D3
 
 1. Detailed SMART/reliability counters: optional/UNKNOWN o adapter separato? Nessuna elevation automatica.
 2. Esiste una temperatura CPU/hardware verificabile senza driver invasivi?
@@ -168,18 +157,10 @@ Vietato: kill/restart automatico di N.I.N.A./PHD2/ASCOM; reset USB/COM; riavvio 
 6. Quale mapping per Scheduled Task `LastTaskResult`?
 7. Quale policy deterministica per pending reboot?
 8. Quali soglie/trend policy per storage capacity?
-9. Quale retention/cadence per raw health samples?
+9. Quale retention e intervalli concreti per le cadence class?
 
 ## 12. Read-only discovery implementation
 
 Il discovery D1/D2 è implementato da `scripts/telemetry/Inspect-EagleHealthSources.ps1` e resta discovery-only: non è un producer, non genera `eagle-health.json`, non modifica registry/task/servizi/Windows Update, non apre connessioni agli apparati, non esegue reset/restart e non effettua benchmark aggressivi.
 
-Evidence locale 03/09/2026:
-
-```text
-C:\DigitalStarGate\TelemetryEvidence\eagle-health-source-discovery-20260903-075732\
-  eagle-health-source-discovery.json
-  eagle-health-source-discovery.txt
-```
-
-**Disposition corrente: BKL-030 `In Progress`; D1/D2 complete; D3/D4 e G1–G8 pending.**
+**Disposition corrente: BKL-030 `In Progress`; D1/D2/D3 complete; D4 e G1–G8 pending.**
