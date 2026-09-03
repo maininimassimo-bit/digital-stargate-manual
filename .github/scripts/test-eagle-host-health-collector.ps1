@@ -3,7 +3,7 @@ $script=Join-Path $PSScriptRoot '..\..\scripts\telemetry\Export-EagleHostHealth.
 if(-not (Test-Path $script)){ throw 'Exporter missing' }
 $text=Get-Content -Raw $script
 
-$required=@('DSG.EagleHostHealthCollector','eagle-health.json','POLICY_NOT_ACTIVATED','free_bytes','free_pct','health_status','operational_status','automatic_remediation=$false','PROBE_TIMEOUT','SLOW_ON_CHANGE','System.Threading.Mutex','Assert-Projection','[IO.File]::Replace','NoMatchingEventsFound')
+$required=@('DSG.EagleHostHealthCollector','eagle-health.json','POLICY_NOT_ACTIVATED','free_bytes','free_pct','health_status','operational_status','automatic_remediation=$false','PROBE_TIMEOUT','SLOW_ON_CHANGE','System.Threading.Mutex','Assert-Projection','[IO.File]::Replace','NoMatchingEventsFound','BenignErrorIds')
 foreach($token in $required){ if(-not $text.Contains($token)){ throw "Missing contract token: $token" } }
 $forbidden=@('Restart-Computer','Stop-Process','Restart-Service','Start-Service','Set-Service','Disable-PnpDevice','Enable-PnpDevice','Set-ItemProperty','Remove-ItemProperty','Register-ScheduledTask','Set-NetAdapter','shutdown.exe')
 foreach($token in $forbidden){ if($text -match [regex]::Escape($token)){ throw "Forbidden remediation/control command found: $token" } }
@@ -33,6 +33,18 @@ try {
   if($s.signals.event_log.state -ne 'OBSERVED' -or $s.signals.event_log.quality -ne 'CURRENT'){throw 'Empty Event Log window must be OBSERVED/CURRENT'}
   if(@($s.signals.event_log.data.events).Count -ne 0){throw 'Empty Event Log window must publish events=[]'}
   if($null -ne $s.signals.event_log.reason){throw 'Empty Event Log window must not publish an error reason'}
+
+  # Generic override errors remain failures: benign filtering is granted only by the production event_log call site.
+  $errorOut=Join-Path $root 'real-error.json'
+  $errorOverrides=@{
+    scheduled_tasks={[ordered]@{items=@()}}
+    pending_reboot={[ordered]@{cbs_reboot_pending=$false;windows_update_reboot_required=$false;pending_file_rename_present=$false;pending_file_rename_count=$null;reboot_required=$null}}
+    windows_update={[ordered]@{service_name='wuauserv';service_state='Stopped';start_type=$null;pending_update_count=$null;last_scan_at_utc=$null}}
+    event_log={Write-Error 'SIMULATED_REAL_EVENTLOG_FAILURE' -ErrorAction Continue;[ordered]@{window_start_utc='2026-09-03T20:00:00.000Z';window_end_utc='2026-09-03T21:00:00.000Z';events=@()}}
+  }
+  & $script -OutputPath $errorOut -CadenceClass slow -FreshnessSeconds 30 -ProbeTimeoutSeconds 1 -LockName ('DSG.CI.'+[guid]::NewGuid()) -ProbeOverrides $errorOverrides|Out-Null
+  $r=Get-Content -Raw $errorOut|ConvertFrom-Json
+  if($r.signals.event_log.state -ne 'UNAVAILABLE' -or $r.signals.event_log.quality -ne 'UNKNOWN'){throw 'Unhandled Event Log error must remain UNAVAILABLE/UNKNOWN'}
 
   $sentinel='{"sentinel":"previous-valid-projection"}';[IO.File]::WriteAllText($out,$sentinel,(New-Object Text.UTF8Encoding($false)));$badPath=Join-Path $out 'child.json';$failed=$false
   try{& $script -OutputPath $badPath -CadenceClass fast -ProbeTimeoutSeconds 1 -LockName ('DSG.CI.'+[guid]::NewGuid()) -ProbeOverrides $overrides|Out-Null}catch{$failed=$true}
