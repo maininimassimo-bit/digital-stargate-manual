@@ -17,7 +17,7 @@ function Convert-ToUtcIso([datetime]$Value) { $Value.ToUniversalTime().ToString(
 function Get-GovernedCadence([string]$Cadence) {
     switch ($Cadence) { 'fast' {'FAST'} 'medium' {'MEDIUM'} 'slow' {'SLOW_ON_CHANGE'} default {'MIXED'} }
 }
-function New-Envelope([string]$Source,[string]$SignalCadence,[object]$Data,[string]$State='OBSERVED',[string]$Quality='CURRENT',[string]$Reason=$null) {
+function New-Envelope([string]$Source,[string]$SignalCadence,[object]$Data,[string]$State='OBSERVED',[string]$Quality='CURRENT',[object]$Reason=$null) {
     $now=[datetime]::UtcNow
     [ordered]@{ state=$State; quality=$Quality; observed_at_utc=Convert-ToUtcIso $now; fresh_until_utc=Convert-ToUtcIso $now.AddSeconds($FreshnessSeconds); source=$Source; cadence_class=$SignalCadence; reason=$Reason; data=$Data }
 }
