@@ -67,10 +67,15 @@ for ($i = 1; $i -le $Iterations; $i++) {
         } catch { }
         Start-Sleep -Milliseconds 200
     }
+
+    # PowerShell 5.1 can expose a blank/unstable ExitCode on a redirected child process
+    # until WaitForExit() has completed. Call it explicitly before reading process metrics.
+    $p.WaitForExit()
     $p.Refresh()
     if ($p.WorkingSet64 -gt $peakWorkingSet) { $peakWorkingSet = $p.WorkingSet64 }
 
     $ended = [DateTime]::UtcNow
+    $exitCode = [int]$p.ExitCode
     $cpuSeconds = $null
     try { $cpuSeconds = [math]::Round($p.TotalProcessorTime.TotalSeconds,3) } catch { }
     $stderrLength = if (Test-Path -LiteralPath $stderr) { (Get-Item -LiteralPath $stderr).Length } else { 0 }
@@ -80,7 +85,7 @@ for ($i = 1; $i -le $Iterations; $i++) {
         started_at_utc = $started.ToString('o')
         ended_at_utc = $ended.ToString('o')
         elapsed_ms = [math]::Round(($ended-$started).TotalMilliseconds,1)
-        exit_code = $p.ExitCode
+        exit_code = $exitCode
         cpu_seconds = $cpuSeconds
         peak_working_set_bytes = $peakWorkingSet
         monitor_samples = $samples
@@ -89,7 +94,7 @@ for ($i = 1; $i -le $Iterations; $i++) {
         stderr_path = $stderr
     })
 
-    Write-Host ('elapsed_ms={0} exit_code={1} cpu_seconds={2} peak_working_set_bytes={3} stderr_bytes={4}' -f $runs[$runs.Count-1].elapsed_ms,$p.ExitCode,$cpuSeconds,$peakWorkingSet,$stderrLength)
+    Write-Host ('elapsed_ms={0} exit_code={1} cpu_seconds={2} peak_working_set_bytes={3} stderr_bytes={4}' -f $runs[$runs.Count-1].elapsed_ms,$exitCode,$cpuSeconds,$peakWorkingSet,$stderrLength)
     if ($i -lt $Iterations -and $IntervalSeconds -gt 0) { Start-Sleep -Seconds $IntervalSeconds }
 }
 
@@ -100,7 +105,7 @@ if ($null -eq $childBytes) { $childBytes = 0 }
 $elapsedValues = @($runs | ForEach-Object { [double]$_.elapsed_ms })
 $cpuValues = @($runs | Where-Object { $null -ne $_.cpu_seconds } | ForEach-Object { [double]$_.cpu_seconds })
 $wsValues = @($runs | ForEach-Object { [double]$_.peak_working_set_bytes })
-$failedRuns = @($runs | Where-Object { $_.exit_code -ne 0 -or $_.stderr_bytes -gt 0 })
+$failedRuns = @($runs | Where-Object { [int]$_.exit_code -ne 0 -or [int64]$_.stderr_bytes -gt 0 })
 
 $summary = [pscustomobject]@{
     iterations = $Iterations
