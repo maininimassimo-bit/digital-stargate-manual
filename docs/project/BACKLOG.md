@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 3.1 |
+| Versione | 3.2 |
 | Stato | Active |
-| Data baseline | 03/09/2026 |
+| Data baseline | 04/09/2026 |
 
 ## 1. Scopo
 
@@ -48,7 +48,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-027 | P1 | Power/Network source discovery | Done | EAGLE | Source verificate | AP-004/AP-009 |
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441`; `docs/architecture/telemetry/BKL-029-SQM-Source-Discovery-and-Architecture-Contract.md` |
-| BKL-030 | P1 | EAGLE Health & Reliability Telemetry | In Progress | BKL-029; Windows read-only collectors | Health EAGLE spiegabile: disk/RAM/CPU/event log/processi/time sync/USB/pending reboot/drift/capacity | `docs/architecture/telemetry/BKL-030-EAGLE-Health-Reliability-Architecture-Assessment.md`; `docs/architecture/telemetry/evidence/BKL-030-EAGLE-Health-Source-Discovery-2026-09-03.md` |
+| BKL-030 | P1 | EAGLE Health & Reliability Telemetry | In Progress | BKL-029; Windows read-only collectors | Health EAGLE spiegabile: disk/RAM/CPU/event log/processi/time sync/USB/pending reboot/drift/capacity | G1-G5 complete; `docs/architecture/telemetry/evidence/BKL-030-G5-Runtime-OAT-2026-09-03.md`; next G6 history |
 | BKL-031 | P2 | Observation Planner intelligente | Planned | BKL-015, BKL-035, meteo/SQM | Ranking target per setup e condizioni | Functional Roadmap Expansion |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
@@ -66,15 +66,15 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-045 | P2 | PixInsight Workflow Provenance Plugin | Planned | BKL-015/BKL-044 | Estensione PixInsight governata per catturare e storicizzare workflow, step, parametri, input/output e lineage | Functional Roadmap Expansion |
 | BKL-046 | P2 | AI Post-Processing Assistant for PixInsight | Planned | BKL-015/BKL-044/BKL-045 | Assistente advisory per ottimizzare workflow PixInsight con evidence, confidence e provenance | Functional Roadmap Expansion |
 
-### Reconciliation note — 03/09/2026
+### Reconciliation note — 04/09/2026
 
-BKL-001–BKL-029 mantengono le closure già accettate. BKL-030 passa da `Ready` a `In Progress` sulla base della seconda execution reale D1/D2 su EAGLE30154 del 03/09/2026. D1 Host Baseline Inventory e D2 Privilege Assessment sono `COMPLETE`; il boundary low-privilege/read-only è confermato. SMART dettagliato resta `UNAVAILABLE_NON_ELEVATED`; Windows Time source è visibile ma il servizio è inattivo; Event Log e PnP/COM sono source verificate; C: resta un risk candidate di capacità senza severity inventata. D3, D4 e G1–G8 non sono dichiarati completati. BKL-015 resta la foundation Knowledge Graph e segue BKL-030. AI, health score e readiness non sostituiscono mai la Safety Authority locale.
+BKL-030 resta `In Progress`, ma G1-G5 sono ora completati. G5 Runtime OAT su EAGLE30154 ha verificato FAST, MEDIUM e SLOW_ON_CHANGE con collector read-only, bounded probes, non-overlap e projection atomica. Il finding Event Log empty-window è stato corretto tramite PR #83/#84 e il rerun finale ha prodotto `OBSERVED/CURRENT`, `reason=null`, `events=[]`. C: è stato osservato con 672,124,928 byte liberi (0.301%): è un operational capacity risk candidate, senza severity inventata. Windows Time era `Stopped`; `PendingFileRenameOperations` presente; SMART dettagliato resta non verificato non-elevated; configuration drift resta `BASELINE_NOT_APPROVED`. Nessun Scheduled Task/service permanente, cadence numerica, health threshold, remediation automatica o Safety Authority è approvato. Il prossimo gate è G6 history/persistence.
 
 ## 4. Sequenza di esecuzione raccomandata
 
 ```text
 Completed baseline through BKL-029
-  -> BKL-030 EAGLE Health & Reliability (In Progress: D1/D2 complete)
+  -> BKL-030 EAGLE Health & Reliability (In Progress: G1-G5 complete; next G6 history)
   -> BKL-015 Knowledge Graph foundation
   -> BKL-044 Knowledge/AI Evidence Contract
   -> BKL-035 Target Knowledge Base
