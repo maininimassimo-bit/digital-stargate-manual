@@ -71,13 +71,14 @@ try {
         $signals.pending_reboot=Invoke-BoundedProbe 'pending_reboot' 'bounded registry evidence' 'SLOW_ON_CHANGE' { $cbs=Test-Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending';$wu=Test-Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired';$pfr=$null -ne (Get-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager' -Name PendingFileRenameOperations -ErrorAction SilentlyContinue);[ordered]@{cbs_reboot_pending=$cbs;windows_update_reboot_required=$wu;pending_file_rename_present=$pfr;pending_file_rename_count=$null;reboot_required=$null} }
         $signals.windows_update=Invoke-BoundedProbe 'windows_update' 'wuauserv service state' 'SLOW_ON_CHANGE' { $s=Get-Service wuauserv -ErrorAction SilentlyContinue;[ordered]@{service_name='wuauserv';service_state=if($s){[string]$s.Status}else{'UNKNOWN'};start_type=$null;pending_update_count=$null;last_scan_at_utc=$null} }
         $signals.event_log=Invoke-BoundedProbe 'event_log' 'Windows Event Log bounded query' 'SLOW_ON_CHANGE' {
-            $end=[datetime]::Now; $start=$end.AddHours(-1); $events=@()
-            try {
-                $events=@(Get-WinEvent -FilterHashtable @{LogName=@('System','Application');StartTime=$start;Level=@(1,2)} -ErrorAction Stop|Select-Object -First 50|ForEach-Object{[ordered]@{log_name=$_.LogName;time_created_utc=$_.TimeCreated.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ');event_id=[int]$_.Id;level=$_.LevelDisplayName;provider=$_.ProviderName}})
-            } catch {
-                if($_.FullyQualifiedErrorId -notlike 'NoMatchingEventsFound*'){ throw }
-                $events=@()
-            }
+            $end=[datetime]::Now; $start=$end.AddHours(-1); $events=@(); $eventErrors=@()
+            $events=@(
+                Get-WinEvent -FilterHashtable @{LogName=@('System','Application');StartTime=$start;Level=@(1,2)} -ErrorAction SilentlyContinue -ErrorVariable +eventErrors 2>$null |
+                    Select-Object -First 50 |
+                    ForEach-Object { [ordered]@{log_name=$_.LogName;time_created_utc=$_.TimeCreated.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ');event_id=[int]$_.Id;level=$_.LevelDisplayName;provider=$_.ProviderName} }
+            )
+            $realErrors=@($eventErrors | Where-Object { $_.FullyQualifiedErrorId -notlike 'NoMatchingEventsFound*' })
+            if($realErrors.Count -gt 0){ throw (($realErrors | ForEach-Object { $_.Exception.Message }) -join '; ') }
             [ordered]@{window_start_utc=$start.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ');window_end_utc=$end.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ');events=@($events)}
         }
         $signals.configuration_drift=New-Envelope 'governed baseline manifest' 'SLOW_ON_CHANGE' ([ordered]@{baseline_id=$null;baseline_version=$null;observed_items=@();drift_items=@();status='UNKNOWN'}) 'UNKNOWN' 'UNKNOWN' 'BASELINE_NOT_APPROVED'
