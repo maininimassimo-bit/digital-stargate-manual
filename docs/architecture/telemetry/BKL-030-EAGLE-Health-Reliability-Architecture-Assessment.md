@@ -3,60 +3,36 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-030 |
-| Stato | **Ready — BKL-029 closed; D1/D2 source discovery authorized** |
-| Data | 2026-09-01 |
+| Stato | **In Progress — D1/D2 complete; D3/D4 and G1–G8 pending** |
+| Data | 2026-09-03 |
 | Priorità | P1 |
 | Target | EAGLE30154 / Digital StarGate Observatory Status |
 | Dipendenza bloccante | Nessuna — BKL-029 closed as `Done` |
 
 ## 1. Scopo
 
-Preparare e avviare il contratto architetturale e il source-discovery plan per la capability **EAGLE Health & Reliability Telemetry** dopo la chiusura formale di BKL-029.
+Definire e governare la capability **EAGLE Health & Reliability Telemetry** mediante un collector host-side leggero, read-only e separato da N.I.N.A.
 
-La capability deve produrre health observability spiegabile del computer operativo EAGLE, mantenendo separati:
+La capability produce observability spiegabile del computer operativo EAGLE mantenendo separati health del computer, stato degli apparati astronomici, Safety Authority locale, futuro Observatory Health Score BKL-036 e analytics/AI downstream. BKL-030 non autorizza alcun comando verso cupola, montatura, power, router o altri apparati.
 
-- health del computer;
-- stato degli apparati astronomici;
-- Safety Authority locale;
-- Observatory Health Score futuro (BKL-036);
-- analytics/AI futuri.
+## 2. Repository truth e stato
 
-BKL-030 non autorizza alcun comando verso cupola, montatura, power, router o altri apparati.
-
-## 2. Repository truth e vincolo di sequenza
-
-Il backlog canonico mantiene:
+Sequenza canonica:
 
 ```text
-BKL-029 Done -> BKL-030 Ready -> BKL-015 -> BKL-044
+BKL-029 Done -> BKL-030 In Progress -> BKL-015 -> BKL-044
 ```
 
-BKL-029 è stato chiuso con PR #68 e merge commit `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441`. BKL-030 è quindi sbloccato per il source discovery D1/D2. Lo stato `Ready` non equivale a implementazione o acceptance: il passaggio a `In Progress` richiede evidence reale del discovery su EAGLE30154 e la conferma del boundary definitivo.
+BKL-029 è chiuso. D1 Host Baseline Inventory e D2 Privilege Assessment sono completati con evidence reale su `EAGLE30154` il 03/09/2026. D3 Overhead Pilot, D4 Failure Model e G1–G8 restano soggetti alla propria evidence e acceptance.
 
-## 3. Decisione di boundary proposta
+Evidence primaria:
 
-### 3.1 Non integrare l'intero BKL-030 nel plugin N.I.N.A.
+- `docs/architecture/telemetry/evidence/BKL-030-EAGLE-Health-Source-Discovery-2026-09-03.md`
+- `docs/architecture/telemetry/BKL-030-D1-D2-Progress-2026-09-03.md`
 
-Il plugin Digital StarGate N.I.N.A. resta il boundary appropriato per telemetry vicina al runtime N.I.N.A. e agli adapter già commissionati (dome/mount/camera/weather, Power, Network, SQM, Safety observation).
+## 3. Boundary confermato
 
-BKL-030 richiede invece accesso a sorgenti host-level come:
-
-- Windows Event Log;
-- filesystem e storage;
-- process inventory;
-- Windows Scheduled Tasks;
-- registry/update state;
-- time service / clock synchronization;
-- SMART/storage health;
-- USB/COM error evidence;
-- configuration drift;
-- pending reboot/update state.
-
-Caricare queste responsabilità nel processo N.I.N.A. aumenterebbe failure surface, privilegi, latenza potenziale e blast radius del software di acquisizione.
-
-### 3.2 Target boundary
-
-La direzione proposta è un **lightweight EAGLE Host Health Collector**, separato da N.I.N.A., read-only e fail-safe.
+Il target resta un **lightweight EAGLE Host Health Collector**, separato dal processo N.I.N.A., read-only e fail-safe. La discovery D2 conferma che il boundary low-privilege è praticabile con `EAGLE30154\PrimaLuceLab` non elevato per la maggior parte delle source richieste.
 
 ```mermaid
 flowchart LR
@@ -71,36 +47,39 @@ flowchart LR
     HC -. no authority / no command .-> SAFETY
 ```
 
-Il collector deve limitarsi a raccogliere evidence host-side e produrre una projection locale machine-readable. Trend analysis, prediction, Health Score, anomaly detection e AI restano downstream e fuori dall'EAGLE quando possibile.
+Non integrare l'intero BKL-030 nel plugin N.I.N.A.: Event Log, filesystem/storage, process inventory, Scheduled Tasks, registry/update state, time service, SMART, USB/COM, drift e pending reboot sono responsabilità host-level e aumenterebbero failure surface e blast radius del software di acquisizione.
 
-## 4. Source inventory previsto
+## 4. D1/D2 source inventory verificato
 
-| Area | Source candidate | Modalità | Note |
+| Area | Source verificata | Disposition | Note |
 |---|---|---|---|
-| Disk free/capacity | CIM `Win32_LogicalDisk` / filesystem | read-only | Source primaria prevista |
-| Disk trend | history downstream dei campioni | derived | Non calcolare trend pesanti sull'EAGLE |
-| RAM | CIM / performance counters | read-only | Available/commit/pressure evidence |
-| CPU | performance counters / CIM | read-only | Media/picchi con finestra leggera |
-| Uptime | OS boot time | read-only | Baseline per reboot detection |
-| Hardware temperature | WMI/vendor source se realmente disponibile | read-only | `UNKNOWN` se non verificabile |
-| SMART | `Get-PhysicalDisk`, storage reliability counters o vendor source | read-only | Nessun test distruttivo |
-| I/O | small bounded write/read/delete probe in DSG working dir | non-destructive | Mai usare volumi immagine come benchmark aggressivo |
-| Time sync | `w32tm /query /status` / Windows Time | read-only | State, source, offset se disponibile |
-| System/Application Event Log | Windows Event Log | read-only | Aggregazione bounded Critical/Error |
-| N.I.N.A. process | process table + plugin projection freshness | read-only | Nessun restart automatico |
-| PHD2 process | process table/log freshness | read-only | Nessun restart automatico |
-| ASCOM LocalServer | process/service inventory | read-only | Solo processi verificati |
-| DSG components | producer files/process/task state | read-only | Heartbeat/freshness |
-| Scheduled Tasks | Task Scheduler read API | read-only | Stato/LastTaskResult/NextRun |
-| N.I.N.A./PHD2/CloudWatcher logs | filesystem metadata | read-only | Existence + last write time |
-| USB/COM errors | Event Log + device inventory | read-only | Pattern evidence, niente reset device |
-| Pending reboot | registry keys documented/verified | read-only | `UNKNOWN` se source non deterministica |
-| Windows Update | Windows Update state/API if accessible read-only | read-only | Nessun update trigger |
-| Configuration drift | governed baseline manifest vs observed versions/hashes | read-only | Drift evidence, non auto-remediation |
+| OS / uptime | CIM `Win32_OperatingSystem` | VERIFIED | Windows 10 Enterprise LTSC 10.0.17763 x64; boot time leggibile |
+| RAM / system | CIM | VERIFIED | Total/free memory leggibili non-elevated |
+| CPU | CIM `Win32_Processor` | VERIFIED | J4005 2C/2T; raw load disponibile |
+| Disk capacity | `Win32_LogicalDisk` | VERIFIED | C:/D: size/free disponibili |
+| Physical disk | `Get-PhysicalDisk` | VERIFIED | KINGSTON SA400S37960G SSD/SATA `Healthy / OK` |
+| Detailed SMART/reliability | `Get-StorageReliabilityCounter` | UNAVAILABLE_NON_ELEVATED | Nested CIM access error; non elevare automaticamente il collector |
+| Time sync | `w32tm` | VERIFIED_SOURCE / SERVICE_INACTIVE | Service not started `0x80070426`; source/offset non inferibili |
+| Scheduled Tasks | Task Scheduler read API | VERIFIED | DSG Daily Session Upload e OneDrive Export visibili |
+| Process inventory | process table | VERIFIED_SOURCE | AAG CloudWatcher e ASCOM TS Shelter osservati; presenza time-dependent |
+| Event Log | System/Application Event Log | VERIFIED | Critical/Error leggibili; recurrent EagleManager failures osservabili |
+| USB/COM | PnP inventory | VERIFIED | COM1, COM9, COM14, COM47 osservati; PnP prevale su `Win32_SerialPort` per presence |
+| `Win32_SerialPort` | CIM | INSUFFICIENT_AS_SOLE_SOURCE | Probe eseguibile ma zero righe nel discovery |
+| Pending reboot | registry evidence | VERIFIED_RAW_EVIDENCE | CBS/WU reboot keys assenti; PendingFileRenameOperations presente |
+| Windows Update | service state | VERIFIED | Read-only; nessun trigger/update autorizzato |
+| DSG paths/logs | filesystem metadata | VERIFIED | Source disponibili non-elevated |
+
+### Capacity evidence
+
+Il 03/09/2026 C: aveva `1500758016` byte liberi su `223397015552` (~0.67%); D: `355645206528` su `735304478720` (~48.37%). C: è una **risk candidate prioritaria**, ma nessuno stato `DEGRADED/CRITICAL` viene dichiarato finché non esiste una policy/soglia governata.
+
+### Reliability evidence
+
+Application Event Log espone crash ricorrenti `EagleManager.exe`, inclusi eventi `.NET Runtime` 1026 e `Application Error` 1000. Sono stati osservati `System.Threading.SemaphoreFullException` e `System.InvalidOperationException`. Questa evidence valida Event Log come source reliability ma non autorizza a classificare ogni Windows Error come osservatorio-critical: serve una allowlist/provider/event policy governata.
 
 ## 5. Contratto di projection locale proposto
 
-File target indicativo:
+Target indicativo:
 
 ```text
 %LOCALAPPDATA%\DigitalStarGate\telemetry\eagle-health.json
@@ -137,11 +116,11 @@ Schema di principio:
 }
 ```
 
-Il dettaglio finale dello schema deve essere definito solo dopo source discovery reale su `EAGLE30154`.
+Il dettaglio finale e la field provenance saranno consolidati in G2 sulla base del discovery D1/D2.
 
-## 6. Health state: regole di governance
+## 6. Health state governance
 
-`HEALTHY / DEGRADED / CRITICAL / UNKNOWN` deve essere **spiegabile**.
+`HEALTHY / DEGRADED / CRITICAL / UNKNOWN` deve essere spiegabile:
 
 1. nessun unico numero opaco come source of truth;
 2. ogni stato non-HEALTHY deve indicare evidence/reasons;
@@ -151,94 +130,56 @@ Il dettaglio finale dello schema deve essere definito solo dopo source discovery
 6. BKL-036 potrà costruire un Observatory Health Score downstream;
 7. nessuno stato health può autorizzare operazioni Safety.
 
-## 7. Collection cadence proposta
+## 7. Collection cadence e D3
 
-La cadence non viene ancora fissata come acceptance. Segnali economici potranno avere polling nell'ordine di decine di secondi/minuti; Event Log, Scheduled Tasks, update/reboot/drift e SMART avranno scansioni meno frequenti; analytics e trend restano downstream. La cadence finale dovrà essere misurata in pilot durante N.I.N.A. attivo.
+La cadence non è ancora acceptance. D3 dovrà misurare CPU, working set, I/O, latency e failures/timeouts durante N.I.N.A. attivo. Segnali economici potranno avere polling nell'ordine di decine di secondi/minuti; Event Log, Scheduled Tasks, update/reboot/drift e SMART scansioni meno frequenti. Analytics e trend restano downstream.
 
 ## 8. Safety e security boundary
 
-Il collector è strettamente read-only salvo un futuro bounded I/O self-test sulla sola working directory Digital StarGate.
+Il collector è strettamente read-only salvo un futuro bounded I/O self-test sulla sola working directory Digital StarGate, che richiederà specifica autorizzazione/evidence.
 
-Vietato:
+Vietato: kill/restart automatico di N.I.N.A./PHD2/ASCOM; reset USB/COM; riavvio Windows; installazione Windows Update; modifica Scheduled Tasks; modifica registry/config; cambio power/network; uso health state come Safety Authority. Credenziali o segreti non devono essere copiati nella projection.
 
-- kill/restart automatico di N.I.N.A./PHD2/ASCOM;
-- reset USB/COM;
-- riavvio Windows;
-- installazione Windows Update;
-- modifica Scheduled Tasks;
-- modifica registry/config;
-- cambio power/network;
-- uso health state come Safety Authority.
+## 9. Discovery gates
 
-Credenziali o segreti non devono essere copiati nella projection.
-
-## 9. Source-discovery gates
-
-### D1 — Host baseline inventory
-
-Verificare realmente su EAGLE30154 Windows/build, storage, memory/CPU, SMART, Windows Time, Scheduled Tasks, processi N.I.N.A./PHD2/ASCOM/DSG, Event Log, directory/log, pending reboot/update e USB/COM.
-
-### D2 — Privilege assessment
-
-Per ogni source verificare se è leggibile come utente operativo `PrimaLuceLab` senza elevazione. La baseline preferisce funzionamento non elevato.
-
-### D3 — Overhead pilot
-
-Misurare CPU, working set, I/O, latency e failures/timeouts durante N.I.N.A. attivo.
-
-### D4 — Failure model
-
-Source non disponibile -> `UNKNOWN`; collector fermo -> projection stale; access denied deve degradare il singolo signal; SMART non disponibile non va inventato; malformed source non deve causare crash loop.
+- **D1 — Host baseline inventory: COMPLETE.** Evidence runtime 03/09/2026.
+- **D2 — Privilege assessment: COMPLETE.** Low-privilege boundary confermato; detailed SMART unavailable non-elevated.
+- **D3 — Overhead pilot: NOT STARTED.**
+- **D4 — Failure model: NOT STARTED.** Source unavailable -> `UNKNOWN`; collector stopped -> stale; access denied degrada il singolo signal; malformed source non deve causare crash loop.
 
 ## 10. Acceptance plan BKL-030
 
-Il piano è ora attivo come sequenza governata; nessun gate è dichiarato soddisfatto senza evidence:
+- **G1 Source inventory:** D1/D2 evidence disponibile; classification/policy finale ancora da formalizzare prima della closure G1.
+- **G2 Contract:** projection e field provenance da consolidare.
+- **G3 Collector:** non implementato.
+- **G4 CI:** non dichiarato.
+- **G5 Runtime OAT:** non eseguito.
+- **G6 History:** non implementato.
+- **G7 Portal:** non implementato.
+- **G8 Safety review:** boundary definito; acceptance finale non ancora eseguita.
 
-- **G1 Source inventory:** source classificate `VERIFIED / UNAVAILABLE / REJECTED`;
-- **G2 Contract:** projection e field provenance definiti;
-- **G3 Collector:** lightweight collector implementato;
-- **G4 CI:** lint/build/test applicabili GREEN;
-- **G5 Runtime OAT:** EAGLE30154 nominal/failure/recovery;
-- **G6 History:** campioni conservati downstream;
-- **G7 Portal:** Observatory Status mostra EAGLE health e reasons;
-- **G8 Safety review:** nessun command path e separazione Safety verificata.
+## 11. Open questions dopo D1/D2
 
-## 11. Open questions da risolvere nel discovery
-
-1. SMART/reliability counters sono esposti in modo utile sull'EAGLE3?
-2. Esiste una temperatura CPU/hardware verificabile senza software/vendor driver invasivo?
-3. Quale Windows Time source è attivo e quale offset è esposto realmente?
-4. Quali Event Log provider identificano crash N.I.N.A., PHD2 e ASCOM?
+1. Detailed SMART/reliability counters: optional/UNKNOWN o adapter separato? Nessuna elevation automatica.
+2. Esiste una temperatura CPU/hardware verificabile senza driver invasivi?
+3. Quale clock synchronization evidence usare con Windows Time inattivo?
+4. Quale provider/event allowlist e severity mapping per Event Log?
 5. Quale baseline governata usare per configuration drift?
-6. Quali Scheduled Tasks DSG sono realmente presenti?
-7. Pending reboot/update state è leggibile senza elevation?
-8. Quale retention dei raw health samples è sostenibile?
+6. Quale mapping per Scheduled Task `LastTaskResult`?
+7. Quale policy deterministica per pending reboot?
+8. Quali soglie/trend policy per storage capacity?
+9. Quale retention/cadence per raw health samples?
 
 ## 12. Read-only discovery implementation
 
-Il discovery D1/D2 è implementato come:
+Il discovery D1/D2 è implementato da `scripts/telemetry/Inspect-EagleHealthSources.ps1` e resta discovery-only: non è un producer, non genera `eagle-health.json`, non modifica registry/task/servizi/Windows Update, non apre connessioni agli apparati, non esegue reset/restart e non effettua benchmark aggressivi.
+
+Evidence locale 03/09/2026:
 
 ```text
-scripts/telemetry/Inspect-EagleHealthSources.ps1
-```
-
-Lo script è deliberatamente **discovery-only**:
-
-- non è un producer;
-- non genera `eagle-health.json`;
-- non modifica registry, task, servizi o Windows Update;
-- non apre connessioni agli apparati;
-- non esegue reset/restart;
-- non effettua ancora I/O benchmark;
-- raccoglie metadata e capability availability in un evidence bundle locale;
-- registra se la sessione PowerShell è elevata, per distinguere source disponibili come utente operativo da source che potrebbero richiedere privilegi.
-
-Evidence target:
-
-```text
-C:\DigitalStarGate\TelemetryEvidence\eagle-health-source-discovery-YYYYMMDD-HHMMSS\
+C:\DigitalStarGate\TelemetryEvidence\eagle-health-source-discovery-20260903-075732\
   eagle-health-source-discovery.json
   eagle-health-source-discovery.txt
 ```
 
-Dopo la closure BKL-029, l'esecuzione dello script è autorizzata come primo passo operativo D1/D2. Essa resta discovery-only e non costituisce da sola acceptance G1, implementazione del collector o autorizzazione a modificare il sistema.
+**Disposition corrente: BKL-030 `In Progress`; D1/D2 complete; D3/D4 e G1–G8 pending.**
