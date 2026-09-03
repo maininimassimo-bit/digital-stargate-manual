@@ -48,13 +48,38 @@ try {
   if(-not $failed){ throw 'Expected invalid projection path failure' }
   if((Get-Content -Raw $out) -ne $sentinel){ throw 'Previous projection was not preserved after publication failure' }
 
+  # Non-overlap must be tested from a second process. A named Mutex is re-entrant
+  # for its owning thread, so invoking the collector in this same PowerShell
+  # process would not represent two concurrent collector instances.
   $mutexName='DSG.CI.Overlap.'+[guid]::NewGuid()
   $m=New-Object System.Threading.Mutex($false,$mutexName)
   $held=$m.WaitOne(0,$false)
+  if(-not $held){ throw 'Unable to acquire parent mutex for non-overlap test' }
   try {
-    $skip=& $script -OutputPath (Join-Path $root 'overlap.json') -CadenceClass fast -ProbeTimeoutSeconds 1 -LockName $mutexName -ProbeOverrides $overrides
-    if(($skip | Select-Object -Last 1) -ne 'SKIPPED_NON_OVERLAP'){ throw 'Non-overlap invocation was not skipped' }
-  } finally { if($held){$m.ReleaseMutex()};$m.Dispose() }
+    $overlapOut=Join-Path $root 'overlap.json'
+    $childScript=Join-Path $root 'invoke-overlap.ps1'
+    $childStdout=Join-Path $root 'overlap.stdout.txt'
+    $childStderr=Join-Path $root 'overlap.stderr.txt'
+    $escapedScript=$script.Replace("'","''")
+    $escapedOut=$overlapOut.Replace("'","''")
+    $escapedMutex=$mutexName.Replace("'","''")
+    @"
+`$ErrorActionPreference='Stop'
+& '$escapedScript' -OutputPath '$escapedOut' -CadenceClass fast -ProbeTimeoutSeconds 1 -LockName '$escapedMutex'
+"@ | Set-Content -LiteralPath $childScript -Encoding UTF8
+
+    $pwshPath=(Get-Process -Id $PID).Path
+    $p=Start-Process -FilePath $pwshPath -ArgumentList @('-NoLogo','-NoProfile','-File',$childScript) -PassThru -RedirectStandardOutput $childStdout -RedirectStandardError $childStderr
+    $p.WaitForExit()
+    if($p.ExitCode -ne 0){ throw ('Non-overlap child process failed: '+(Get-Content -Raw $childStderr -ErrorAction SilentlyContinue)) }
+    $skip=(Get-Content -Raw $childStdout).Trim()
+    if($skip -ne 'SKIPPED_NON_OVERLAP'){ throw "Non-overlap invocation was not skipped; output=$skip" }
+    if(Test-Path $overlapOut){ throw 'Skipped overlapping invocation unexpectedly wrote a projection' }
+  }
+  finally {
+    $m.ReleaseMutex()
+    $m.Dispose()
+  }
 
   Write-Host 'EAGLE host health collector executable failure tests: PASS'
 }
