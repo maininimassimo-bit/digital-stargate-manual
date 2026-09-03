@@ -9,7 +9,9 @@ $required=@(
   'automatic_remediation=$false','PROBE_TIMEOUT','SLOW_ON_CHANGE',
   'System.Threading.Mutex','Assert-Projection','[IO.File]::Replace'
 )
-foreach($token in $required){ if($text -notlike ('*'+$token+'*')){ throw "Missing contract token: $token" } }
+foreach($token in $required){
+  if(-not $text.Contains($token)){ throw "Missing contract token: $token" }
+}
 
 $forbidden=@('Restart-Computer','Stop-Process','Restart-Service','Start-Service','Set-Service','Disable-PnpDevice','Enable-PnpDevice','Set-ItemProperty','Remove-ItemProperty','Register-ScheduledTask','Set-NetAdapter','shutdown.exe')
 foreach($token in $forbidden){ if($text -match [regex]::Escape($token)){ throw "Forbidden remediation/control command found: $token" } }
