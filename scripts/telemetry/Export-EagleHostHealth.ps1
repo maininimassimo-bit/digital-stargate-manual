@@ -21,7 +21,7 @@ function New-Envelope([string]$Source,[string]$SignalCadence,[object]$Data,[stri
     $now=[datetime]::UtcNow
     [ordered]@{ state=$State; quality=$Quality; observed_at_utc=Convert-ToUtcIso $now; fresh_until_utc=Convert-ToUtcIso $now.AddSeconds($FreshnessSeconds); source=$Source; cadence_class=$SignalCadence; reason=$Reason; data=$Data }
 }
-function Invoke-BoundedProbe([string]$Name,[string]$Source,[string]$SignalCadence,[scriptblock]$Body) {
+function Invoke-BoundedProbe([string]$Name,[string]$Source,[string]$SignalCadence,[scriptblock]$Body,[string[]]$BenignErrorIds=@()) {
     if($null -ne $ProbeOverrides -and $ProbeOverrides.ContainsKey($Name)){ $Body=[scriptblock]$ProbeOverrides[$Name]; $Source='TEST_OVERRIDE' }
     $ps=[powershell]::Create(); $async=$null
     try {
@@ -29,7 +29,11 @@ function Invoke-BoundedProbe([string]$Name,[string]$Source,[string]$SignalCadenc
         if(-not $async.AsyncWaitHandle.WaitOne([timespan]::FromSeconds($ProbeTimeoutSeconds))){ try{$ps.Stop()}catch{}; return New-Envelope $Source $SignalCadence $null 'UNAVAILABLE' 'UNKNOWN' 'PROBE_TIMEOUT' }
         try {
             $result=@($ps.EndInvoke($async))
-            if($ps.HadErrors){ $message=(($ps.Streams.Error|ForEach-Object{$_.Exception.Message}) -join '; '); if([string]::IsNullOrWhiteSpace($message)){$message='PROBE_ERROR'}; return New-Envelope $Source $SignalCadence $null 'UNAVAILABLE' 'UNKNOWN' (($message -replace '[\r\n]+',' ').Trim()) }
+            $unhandledErrors=@($ps.Streams.Error | Where-Object {
+                $errorRecord=$_
+                -not (@($BenignErrorIds | Where-Object { $errorRecord.FullyQualifiedErrorId -like $_ }).Count -gt 0)
+            })
+            if($unhandledErrors.Count -gt 0){ $message=(($unhandledErrors|ForEach-Object{$_.Exception.Message}) -join '; '); if([string]::IsNullOrWhiteSpace($message)){$message='PROBE_ERROR'}; return New-Envelope $Source $SignalCadence $null 'UNAVAILABLE' 'UNKNOWN' (($message -replace '[\r\n]+',' ').Trim()) }
             $data=if($result.Count -eq 1){$result[0]}else{@($result)}
             return New-Envelope $Source $SignalCadence $data
         } catch { return New-Envelope $Source $SignalCadence $null 'UNAVAILABLE' 'UNKNOWN' (($_.Exception.Message -replace '[\r\n]+',' ').Trim()) }
@@ -71,16 +75,14 @@ try {
         $signals.pending_reboot=Invoke-BoundedProbe 'pending_reboot' 'bounded registry evidence' 'SLOW_ON_CHANGE' { $cbs=Test-Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending';$wu=Test-Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired';$pfr=$null -ne (Get-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager' -Name PendingFileRenameOperations -ErrorAction SilentlyContinue);[ordered]@{cbs_reboot_pending=$cbs;windows_update_reboot_required=$wu;pending_file_rename_present=$pfr;pending_file_rename_count=$null;reboot_required=$null} }
         $signals.windows_update=Invoke-BoundedProbe 'windows_update' 'wuauserv service state' 'SLOW_ON_CHANGE' { $s=Get-Service wuauserv -ErrorAction SilentlyContinue;[ordered]@{service_name='wuauserv';service_state=if($s){[string]$s.Status}else{'UNKNOWN'};start_type=$null;pending_update_count=$null;last_scan_at_utc=$null} }
         $signals.event_log=Invoke-BoundedProbe 'event_log' 'Windows Event Log bounded query' 'SLOW_ON_CHANGE' {
-            $end=[datetime]::Now; $start=$end.AddHours(-1); $events=@(); $eventErrors=@()
+            $end=[datetime]::Now; $start=$end.AddHours(-1)
             $events=@(
-                Get-WinEvent -FilterHashtable @{LogName=@('System','Application');StartTime=$start;Level=@(1,2)} -ErrorAction SilentlyContinue -ErrorVariable +eventErrors 2>$null |
+                Get-WinEvent -FilterHashtable @{LogName=@('System','Application');StartTime=$start;Level=@(1,2)} -ErrorAction Continue |
                     Select-Object -First 50 |
                     ForEach-Object { [ordered]@{log_name=$_.LogName;time_created_utc=$_.TimeCreated.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ');event_id=[int]$_.Id;level=$_.LevelDisplayName;provider=$_.ProviderName} }
             )
-            $realErrors=@($eventErrors | Where-Object { $_.FullyQualifiedErrorId -notlike 'NoMatchingEventsFound*' })
-            if($realErrors.Count -gt 0){ throw (($realErrors | ForEach-Object { $_.Exception.Message }) -join '; ') }
             [ordered]@{window_start_utc=$start.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ');window_end_utc=$end.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ');events=@($events)}
-        }
+        } @('NoMatchingEventsFound*')
         $signals.configuration_drift=New-Envelope 'governed baseline manifest' 'SLOW_ON_CHANGE' ([ordered]@{baseline_id=$null;baseline_version=$null;observed_items=@();drift_items=@();status='UNKNOWN'}) 'UNKNOWN' 'UNKNOWN' 'BASELINE_NOT_APPROVED'
     }
 
