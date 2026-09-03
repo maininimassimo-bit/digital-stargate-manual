@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEBT-001 |
-| Versione | 1.5 |
+| Versione | 1.6 |
 | Stato | Active |
-| Data review | 30/08/2026 |
+| Data review | 03/09/2026 |
 
 ## 1. Scopo
 
@@ -31,7 +31,9 @@ Priorità: `P0` critica, `P1` alta, `P2` media, `P3` bassa.
 | TD-006 | Documentation IA | Project Governance Center non integrato nella nav MkDocs | Documenti canonici difficili da scoprire | P1 | Resolved | `mkdocs.yml` contiene la sezione `Project Governance`; Governance Center e registri canonici sono navigabili; BKL-002 Done |
 | TD-007 | Release History | Guide e release storiche in root non sempre contestualizzate | Possibile confusione con baseline corrente | P2 | Accepted | Creare indice storico e dichiarare stato/supersession — BKL-016 |
 | TD-008 | Knowledge Traceability | Collegamenti AP/ADR/componenti/evidence non ancora machine-readable | Analisi manuale e rischio di gap | P2 | Accepted | GP-003 Knowledge Graph e schema di relazione versionato — BKL-015 |
-| TD-009 | EAGLE Reporting Automation | Launcher EAGLE inizialmente non governato dalla source of truth | Rischio di configuration drift e regressioni non tracciate | P1 | Mitigated | Runtime inspection, SHA/task definition e AP-014 OAT completati; mantenere la baseline governata e il change control. Non riaprire AP-014 salvo drift o modifica runtime. |
+| TD-009 | EAGLE Reporting Automation | Launcher EAGLE inizialmente non governato dalla source of truth | Rischio di configuration drift e regressioni non tracciate | P1 | Mitigated | Runtime inspection, SHA/task definition e AP-014 OAT completati; Reporting 1.0.8 ha corretto Git stderr PS5.1 e drift evidence window; mantenere baseline governata e change control. |
+| TD-010 | EAGLE Session Launcher | Un'eccezione dopo la creazione del session branch può lasciare il runtime clone fuori da `main` | Il preflight del run successivo fallisce chiuso e richiede recovery manuale; rischio di interruzione della pipeline automatica | P1 | Accepted | Evidence reale 03/09/2026: failure dopo `git checkout -b` ha lasciato `session/2026-09-02_2026-09-03`; introdurre restore-to-main governato in `finally` o equivalente preservando package/evidence e senza reset distruttivi; regression test obbligatorio. |
+| TD-011 | Reporting CI | Copertura quality gate 1.0.7/1.0.8 non ancora riconciliata formalmente con tutti i check storici pre-remediation | Possibile perdita silenziosa di controlli installer/launcher/task/runtime pur con regression test incident-specific verdi | P2 | Accepted | Confrontare gate storico e corrente; ripristinare i check applicabili mantenendo test SQM, exact evidence selection e PS5.1 publish; chiudere solo con workflow evidence. |
 
 ## 4. Criteri di rimozione
 
@@ -43,15 +45,14 @@ Una voce può essere chiusa solo quando:
 - documentazione, backlog e decision log sono aggiornati;
 - esiste un commit o una evidence verificabile.
 
-## 5. Review 30/08/2026
+## 5. Review 03/09/2026
 
-La review ha riconciliato il registro con la repository truth:
+La review riconcilia il registro con l'incidente e la recovery della sessione `2026-09-02_2026-09-03`:
 
-- TD-001 e TD-006 restano `Resolved`;
-- TD-002 è `Resolved`: la baseline del portale non contiene JavaScript eseguibile inline e il controllo anti-regressione è obbligatorio sia nella validation documentale sia nel workflow Pages;
-- TD-003 è `Resolved`: il README root rappresenta ora il repository come piattaforma Digital StarGate e indirizza alle fonti canoniche senza duplicare lo stato dinamico del programma;
-- TD-004 è `Resolved`: `deploy-pages.yml` è l'unico workflow autorizzato a pubblicare GitHub Pages, mentre `docs.yml` è esplicitamente validation-only; il workflow legacy disabilitato è stato ritirato;
-- TD-005 è `Resolved`: il consistency gate AMP-002/roadmap/backlog è attivo e BKL-009 è Done;
-- TD-009 resta `Mitigated` dalle runtime inspection e acceptance AP-014, pur restando soggetto a change control;
-- TD-007/008 restano debito reale e sono mappati ai rispettivi backlog item;
-- BKL-027/BKL-028 Power/Network sono Done e non costituiscono debito tecnico aperto.
+- TD-001–TD-006 restano `Resolved`;
+- TD-007/TD-008 restano `Accepted` e mappati ai rispettivi backlog item;
+- TD-009 resta `Mitigated`: Reporting 1.0.8 ha corretto il normale stderr Git sotto Windows PowerShell 5.1 e il drift discovery/copy ±12 ore; la recovery reale ha prodotto commit/push e promotion corretti;
+- TD-010 è registrato come `Accepted`: il launcher non garantisce ancora il ritorno a `main` su ogni eccezione e l'incidente del 03/09 ne costituisce evidence reale;
+- TD-011 è registrato come `Accepted`: i regression test 1.0.8 sono verdi ma la parità con tutta la copertura quality-gate storica deve essere verificata separatamente;
+- il runtime EAGLE è stato riportato a `main`, clean e `HEAD...origin/main = 0 0` dopo la recovery;
+- BKL-030 può partire solo mantenendo separati questi hardening item dalla capability Health & Reliability e senza alterare i boundary Safety Authority.
