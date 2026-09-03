@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | AP14-OPS-EAGLE-AUTO-001 |
-| Versione | 1.4 |
-| Stato | Deployed; Reporting 1.0.7 runtime validated; historical AP-014 OAT preserved |
-| Data | 2026-09-02 |
+| Versione | 1.5 |
+| Stato | Deployed; Reporting 1.0.8 runtime validated; historical AP-014 OAT preserved |
+| Data | 2026-09-03 |
 | Host | EAGLE / PrimaLuceLab |
 
 ## Objective
@@ -18,8 +18,8 @@ This runbook changes the physical EAGLE runtime and must therefore be executed o
 
 Before any runtime change verify:
 
-- `maininimassimo-bit/DigitalStarGate.Reporting` is at or after merge `c5f1bd617eb7b256372f0257a3cf22b60d503d3b`;
-- `DigitalStarGate.Reporting` runtime version is `1.0.7`;
+- `maininimassimo-bit/DigitalStarGate.Reporting` is at or after merge `0f9bffb5a9e6192dbf0302b563b10ec7e451bd8b`;
+- `DigitalStarGate.Reporting` runtime version is `1.0.8`;
 - `maininimassimo-bit/digital-stargate-manual` runtime clone is synchronized to current `main` before launcher execution;
 - runtime clone path is `C:\DigitalStarGate\digital-stargate-manual-ap14-runtime`;
 - runtime config is `C:\DigitalStarGate\Automation\reporting.config.psd1`;
@@ -56,8 +56,6 @@ Get-Module -ListAvailable DigitalStarGate.Reporting |
     Out-File (Join-Path $backupRoot 'reporting-modules.txt')
 ```
 
-If the existing task references installed preflight/launcher files, retain their content and hashes before replacement.
-
 ## 2. Synchronize source repositories
 
 Use fast-forward only. Stop on unrelated local changes.
@@ -88,7 +86,7 @@ git pull --ff-only origin main
 Get-Content .\VERSION
 ```
 
-Expected Reporting version is `1.0.7` or a later explicitly governed release.
+Expected Reporting version is `1.0.8` or a later explicitly governed release.
 
 ## 3. Install/upgrade Reporting
 
@@ -101,23 +99,13 @@ powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass `
   -RuntimeConfigPath 'C:\DigitalStarGate\Automation\reporting.config.psd1'
 ```
 
-Verify the installed production baseline in a fresh Bypass process:
+Verify the installed production baseline in a fresh process:
 
 ```powershell
-powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "& { Import-Module DigitalStarGate.Reporting -RequiredVersion 1.0.7 -Force; Get-Module DigitalStarGate.Reporting | Select-Object Name,Version,ModuleBase; Get-Command Import-DSGSession,Publish-DSGSession | Select-Object Name,Source,Version }"
+powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "& { Import-Module DigitalStarGate.Reporting -RequiredVersion 1.0.8 -Force; Get-Module DigitalStarGate.Reporting | Select-Object Name,Version,ModuleBase; Get-Command Import-DSGSession,Publish-DSGSession | Select-Object Name,Source,Version }"
 ```
 
-The expected version for this runbook revision is `1.0.7`. Older installed module directories do not by themselves indicate an error; verify the actual loaded module in the production-like Bypass context.
-
-Verify the effective configuration:
-
-```powershell
-$config = 'C:\DigitalStarGate\Automation\reporting.config.psd1'
-Test-Path $config
-Get-Content $config -Raw
-```
-
-The installer derives the destination version from the module manifest. Do not hard-code an installation destination or infer the active runtime merely from the highest directory name.
+The expected version for this runbook revision is `1.0.8`. Older installed module directories do not by themselves indicate an error; verify the actually loaded module.
 
 ## 4. Governed preflight and Scheduled Task
 
@@ -130,21 +118,13 @@ Scheduled Task
   -> DigitalStarGate.Reporting
 ```
 
-The preflight must require:
+The preflight must require runtime clone valid, clean, branch exactly `main`, successful `git fetch origin main`, successful fast-forward pull and local `HEAD == origin/main`.
 
-- runtime clone exists and is a Git working tree;
-- clean working tree;
-- current branch exactly `main`;
-- successful `git fetch origin main`;
-- successful `git pull --ff-only origin main`;
-- local `HEAD` exactly equal to `origin/main`.
-
-Any failed invariant stops before session import/publication. A preflight stop caused by a stale session branch or divergence is a fail-safe integrity response and must be diagnosed rather than bypassed with force/reset operations.
+Any failed invariant stops before session import/publication. Diagnose rather than bypass with force/reset operations.
 
 Verify task:
 
 ```powershell
-Get-ScheduledTask -TaskName 'Digital StarGate - Daily Session Upload' | Format-List *
 Get-ScheduledTaskInfo -TaskName 'Digital StarGate - Daily Session Upload' | Format-List LastRunTime,LastTaskResult,NextRunTime,NumberOfMissedRuns
 ```
 
@@ -152,21 +132,11 @@ Production trigger is daily at `07:20` local.
 
 ## 5. NO_SESSION behavior
 
-For a night with no NINA/PHD2 observing evidence in the candidate window, `NO_SESSION` is a valid non-error outcome. Historical production acceptance of this path was recorded with Reporting 1.0.6 on 18 August 2026:
+`NO_SESSION` remains a valid non-error outcome when no observing evidence exists. Historical production acceptance with Reporting 1.0.6 on 18/08/2026 remains valid and must not be rewritten as 1.0.8 evidence.
 
-- `LastRunTime = 2026-08-18 07:20:20` local;
-- `LastTaskResult = 0`;
-- candidate session `2026-08-17_2026-08-18` -> `NO_SESSION`;
-- NINA files `0`;
-- PHD2 files `0`;
-- weather rows `0`;
-- final outcome `NO_SESSION`.
+## 6. SQM packaging
 
-That evidence remains historical and valid. Current operations use Reporting 1.0.7; do not rewrite the historical log as if it had executed on 1.0.7.
-
-## 6. Reporting 1.0.7 SQM packaging
-
-For a real session, Reporting 1.0.7 exports the session-bounded SQM evidence before manifest generation. Unless overridden by governed configuration, the source is:
+Reporting 1.0.8 retains session-bounded SQM packaging before manifest generation. Default source:
 
 ```text
 %LOCALAPPDATA%\DigitalStarGate\telemetry\sqm-history.ndjson
@@ -179,85 +149,82 @@ raw\sqm\sqm-history.ndjson
 raw\sqm\sqm-summary.json
 ```
 
-A non-destructive runtime test on EAGLE30154 for `2026-09-01_2026-09-02` verified `1306` valid samples, quality `AVAILABLE`, temporal coverage `0.9886`, min `8.91`, mean `17.738`, max `20.92` and median `18.755` mag/arcsec².
+Real recovery evidence for `2026-09-02_2026-09-03`: 1295 valid samples, quality `AVAILABLE`, coverage `0.9803`, min `8.91`, mean `18.1931`, max `20.84`, median `19.14` mag/arcsec².
 
-Do not infer safety from SQM. It remains scientific telemetry/history.
+Do not infer safety from SQM.
 
-## 7. Reporting 1.0.7 publish contract
+## 7. Exact NINA/PHD2 evidence selection
 
-`Publish-DSGSession` must emit one structured result object rather than native Git stdout plus the result object. Runtime validation on EAGLE30154 verified, without `-CreateBranch` or `-Push`:
+Reporting 1.0.8 packages the NINA/PHD2 files selected by discovery rather than re-scanning with the legacy ±12 hour copy window.
+
+Operational consequence:
+
+- a previous-session PHD2 file whose activity ended outside the session window must not be included merely because it falls in an adjacent tolerance window;
+- a long-lived NINA log may legitimately be included when it contains/writes current-session events inside the discovery window.
+
+Do not remove a file solely from its filename/date. Inspect actual timestamps/content when diagnosing boundary cases.
+
+## 8. Windows PowerShell 5.1 publish contract
+
+`Publish-DSGSession` must emit one structured result and must judge native Git success from its exit code even when Git writes normal informational text to stderr.
+
+The 03/09 recovery on EAGLE30154 with Reporting 1.0.8 verified:
 
 ```text
-System.Management.Automation.PSCustomObject
+SessionId = 2026-09-02_2026-09-03
+Committed = True
+Pushed = True
 COUNT = 1
-SessionId = 2026-09-01_2026-09-02
-Committed = False
-Pushed = False
 ```
 
-This is the runtime regression check for the 02/09 `$publish.Committed` incident.
+This is the runtime evidence for the PowerShell 5.1 stderr hardening.
 
-## 8. Controlled replay / manual diagnostic
+## 9. Controlled recovery of a materialized package
 
-Do not use the daily wrapper blindly for a historical session. Determine the actual session start/end from source evidence first. For diagnostics that do not need repository publication, omit `-CopyToRepository` and do not call `Publish-DSGSession`.
+When discovery/package generation has already completed and failure occurred only during publication:
 
-If testing PowerShell code containing multiple variables/continuations from an interactive shell, prefer a temporary `.ps1` invoked with `powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File ...` rather than a deeply nested multiline `-Command` string. This avoids false parameter prompts caused by quoting/backtick parsing.
+1. preserve the package and inspect branch/working tree;
+2. verify package evidence and manifest before modifying anything;
+3. do not rerun discovery merely to repair a publication failure;
+4. after installing the governed Reporting fix, call `Publish-DSGSession` on the existing session branch without `-CreateBranch` and with `-Push` only when the branch/package have been verified;
+5. verify the single structured result, commit SHA and remote branch;
+6. verify GitHub promotion/analytics before returning runtime to `main`;
+7. switch to `main`, fetch/pull fast-forward and require clean `0 0` steady state.
 
-Proceed to `-CopyToRepository`, `-CreateBranch` or `-Push` only when the session is intentionally being governed/published.
+Do not use force reset/push as routine recovery.
 
-## 9. GitHub automatic chain
+## 10. GitHub automatic chain
 
 After EAGLE intentionally pushes `session/<session-id>`, no manual catalog or page edit is permitted.
 
-Expected automatic chain:
+Expected chain: promote session package -> main -> automatic analysis -> analytics/history/target projections -> scientific catalog/index -> Pages.
 
-1. `promote-session-package.yml` validates COMPLETE evidence, manifest hashes, scope and fast-forward ancestry;
-2. package is promoted to `main`;
-3. `analyze-session-automatic.yml` is explicitly dispatched;
-4. analytics/history/target projections are regenerated;
-5. `scientific-session-catalog.json` is regenerated;
-6. `scientific-observation-index.json` is regenerated;
-7. `deploy-pages.yml` is explicitly dispatched;
-8. Session Explorer, Session Detail, Mission Control and enterprise search reflect the shared updated projections.
+For `2026-09-02_2026-09-03`, session commit `0023553bf300a1536663a6ee01f7d6a5c3745514` was promoted successfully and analytics reached `d4feb68e89e39977d7b34b15acce69a0065dedb0`.
 
-## 10. Acceptance and runtime evidence
+## 11. Acceptance and runtime evidence
 
-Retain as applicable:
+Retain as applicable: deployment backup, task definition, installed Reporting version/path, runtime branch/HEAD/clean state, automatic log/task result, source evidence, session window, package evidence counts, session branch/commit, promotion/analytics/Pages runs and resulting catalog/index commit.
 
-- deployment backup directory;
-- task XML and post-deployment task definition;
-- installed Reporting version/path;
-- runtime repository branch/HEAD/clean status;
-- automatic daily log and task result;
-- NINA/PHD2/weather/SQM source evidence;
-- session time window;
-- package status/evidence counts;
-- session branch/commit SHA when publication occurs;
-- promotion/analytics/Pages workflow runs;
-- resulting catalog/index commit;
-- portal verification.
+Historical AP-014 OAT remains in existing validation records. Reporting 1.0.7 remediation is recorded in the 02/09 handover; Reporting 1.0.8 incident/recovery is recorded in the 03/09 handover.
 
-Historical AP-014 OAT evidence remains in the existing validation records. Reporting 1.0.7 runtime remediation evidence is recorded separately in the 02/09/2026 handover and runtime validation record.
+## 12. Rollback and recovery
 
-## 11. Rollback and recovery
+If scheduled runtime fails:
 
-If the scheduled runtime fails:
+1. preserve produced evidence;
+2. inspect branch, clean state and divergence;
+3. diagnose the failure before switching/resetting;
+4. use fast-forward synchronization only when working tree state is understood;
+5. never use force-push/history rewrite as normal recovery;
+6. record failure/remediation evidence before retry.
 
-1. preserve produced scientific/session evidence;
-2. inspect runtime branch, clean state and divergence before changing anything;
-3. return to `main` and use fast-forward synchronization when the working tree is clean and the failure is understood;
-4. do not use force-push or history rewrite as normal recovery;
-5. disable the Scheduled Task only when continued execution could create corrupt state or when diagnosis requires it;
-6. restore task/preflight/launcher only from captured backup/hash after inspection;
-7. record failure and remediation evidence before retry.
+The independent local Safety Authority is unaffected by this reporting recovery process.
 
-A failed AP-014 automation deployment must not affect AP-013B XISF transport/import or the independent local Safety Authority.
+## 13. Known hardening debt
 
-## 12. Known hardening debt
+Reporting 1.0.8 closes the observed Git stderr PowerShell 5.1 bug and exact evidence-selection drift. It does **not** close:
 
-The current 1.0.7 runtime validation does not close two separate hardening items:
+- guaranteed restore-to-main in the launcher if an exception occurs after session branch creation; track as `TD-010`;
+- formal reconciliation/restoration of all historical Reporting quality-gate checks while retaining current regression tests; track as `TD-011`.
 
-- guarantee restore-to-main in the launcher even if an exception occurs before normal cleanup;
-- restore the historical Reporting quality-gate checks that were reduced in the 1.0.7 PR while retaining the new SQM/publish regression tests.
-
-Track these as runtime/quality hardening; do not reinterpret them as evidence that the validated 1.0.7 SQM exporter or publish output contract failed.
+Do not reinterpret these open hardening items as failure of the validated 1.0.8 recovery.
