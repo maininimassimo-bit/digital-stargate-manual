@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-030-D3 |
-| Stato | Pilot prepared — runtime evidence required |
+| Stato | D3-A complete — D3-B required during normal imaging context |
 | Target | EAGLE30154 |
 | Baseline | `main` at `136fe59f1bd0f642bf81173645b7029a58070ba3` |
 | Account target | `EAGLE30154\PrimaLuceLab` non-elevated |
@@ -42,13 +42,30 @@ Measured evidence:
 
 ## Execution phases
 
-### D3-A — idle/actual-current-context pilot
+### D3-A — idle/actual-current-context pilot — COMPLETE
 
-Run once on EAGLE30154 in the current operational context. Do not start N.I.N.A. or PHD2 solely for this test.
+Executed on EAGLE30154 on 2026-09-03 in the actual current context. Corrected pilot evidence recorded in:
 
-### D3-B — imaging-context pilot
+`evidence/BKL-030-D3A-Overhead-Pilot-2026-09-03.md`
 
-If D3-A reports N.I.N.A. not running, repeat the same bounded pilot during a future normal N.I.N.A. session. Do not connect equipment or start an imaging sequence solely to satisfy D3.
+Observed corrected summary:
+
+- 3 iterations;
+- 0 failures;
+- average elapsed time 9502.1 ms;
+- maximum elapsed time 11308.9 ms;
+- average available CPU sample 5.859 seconds;
+- maximum CPU sample 5.984 seconds;
+- maximum peak working set 232718336 bytes;
+- 0 stderr bytes on every run;
+- N.I.N.A. not running at start;
+- PHD2 not running at start.
+
+These values are descriptive upper-bound evidence, not acceptance thresholds.
+
+### D3-B — imaging-context pilot — REQUIRED
+
+Because D3-A reported N.I.N.A. not running, repeat the same bounded pilot during a future normal N.I.N.A. session. Do not connect equipment or start an imaging sequence solely to satisfy D3.
 
 D3 is complete only when evidence is sufficient to choose initial cadence classes without introducing unacceptable host contention. No numeric acceptance threshold is pre-declared because repository evidence does not yet establish one.
 
@@ -66,7 +83,7 @@ Rollback is deletion of the generated evidence bundle only if explicitly desired
 
 ## Runtime command
 
-After the branch content is available on EAGLE, execute from the repository root:
+During a future normal N.I.N.A. session, execute from the repository root:
 
 ```powershell
 powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass `
