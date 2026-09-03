@@ -3,38 +3,28 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-030-G2 |
-| Stato | **Planning contract — implementation blocked until BKL-029 closure** |
-| Data | 2026-08-31 |
+| Stato | **ARCHITECTURE READY — contract and provenance governed; implementation pending G3** |
+| Data | 2026-09-03 |
 | Target projection | `%LOCALAPPDATA%\DigitalStarGate\telemetry\eagle-health.json` |
 | Producer target | `DSG.EagleHostHealthCollector` |
 | Safety authority | **Outside scope — local physical interlocks remain authoritative** |
 
 ## 1. Purpose
 
-Define the machine-readable contract for host-level EAGLE health telemetry using only sources already demonstrated or explicitly classified during D1/D2 discovery on `EAGLE30154`.
-
-This contract is intentionally separate from:
-
-- N.I.N.A. equipment telemetry;
-- the canonical Observatory Status projection;
-- the future Observatory Health Score (BKL-036);
-- Safety Authority;
-- AI/anomaly analytics.
-
-No producer implementation or acceptance is declared by this document.
+Define the machine-readable contract for host-level EAGLE health telemetry using the governed G1 source inventory, D3 overhead evidence and D4 failure model. G2 defines data/provenance/freshness semantics; it does not claim a running collector.
 
 ## 2. Design rules
 
-1. Preserve raw observed evidence separately from derived classification.
-2. Every signal carries its own `quality`, `observed_at_utc`, `fresh_until_utc`, `source` and optional `reason`.
-3. `CURRENT`, `STALE` and `UNKNOWN` describe evidence freshness/availability only.
-4. `HEALTHY`, `DEGRADED`, `CRITICAL`, `UNKNOWN` are summary classifications and must always include explicit reasons.
-5. No classification threshold is implicit in this schema.
-6. A source access failure degrades only the affected signal unless a future policy marks that signal mandatory.
-7. Missing values are `null`; no synthetic substitute is allowed.
-8. The projection must never contain credentials, tokens, secrets or full sensitive configuration payloads.
-9. The collector is observational/read-only. No state in this projection may authorize equipment or safety actions.
-10. Heavy trend/forecast/AI analysis remains downstream.
+1. Raw observed evidence is separate from derived classification.
+2. Every signal carries `state`, `quality`, `observed_at_utc`, `fresh_until_utc`, `source`, `cadence_class`, optional `reason`, and `data`.
+3. `CURRENT`, `STALE`, `UNKNOWN` describe evidence freshness/availability, not severity.
+4. `HEALTHY`, `DEGRADED`, `CRITICAL`, `UNKNOWN` require a separately governed classification policy and explicit reasons.
+5. No health threshold is implicit in this schema.
+6. Missing values are `null`; no synthetic substitute is allowed.
+7. Source failure is isolated to the affected signal where possible.
+8. The collector remains non-elevated/read-only and cannot remediate host/equipment state.
+9. No projection field authorizes equipment or Safety actions.
+10. Full monolithic D1 discovery is not a fast polling design.
 
 ## 3. Top-level contract
 
@@ -43,40 +33,27 @@ No producer implementation or acceptance is declared by this document.
   "schema_version": "1.0",
   "component": "DSG.EagleHostHealthCollector",
   "computer": "EAGLE30154",
-  "observed_at_utc": "2026-08-31T00:00:00Z",
-  "fresh_until_utc": "2026-08-31T00:02:00Z",
+  "observed_at_utc": "...",
+  "fresh_until_utc": "...",
   "quality": "CURRENT",
-  "correlation_id": "00000000-0000-0000-0000-000000000000",
+  "correlation_id": "...",
   "summary": {
     "state": "UNKNOWN",
-    "reasons": []
+    "reasons": [
+      {"code":"POLICY_NOT_ACTIVATED","signal":null,"severity":null,"evidence":null}
+    ]
   },
   "signals": {},
-  "diagnostics": {}
+  "diagnostics": {
+    "cycle_overrun": false,
+    "failed_probe_count": 0
+  }
 }
 ```
 
-### Top-level field semantics
+Top-level `observed_at_utc` is the publication cycle observation time. `fresh_until_utc` must be derived by implementation from a governed cadence/freshness policy; G2 deliberately does not invent numeric durations. A current collector may publish raw CURRENT signals while `summary.state` remains `UNKNOWN` until severity policy is activated.
 
-| Field | Required | Semantics |
-|---|---|---|
-| `schema_version` | yes | Versioned projection contract |
-| `component` | yes | Fixed producer identity `DSG.EagleHostHealthCollector` |
-| `computer` | yes | Observed Windows host |
-| `observed_at_utc` | yes | Collector sample timestamp |
-| `fresh_until_utc` | yes | Projection freshness boundary |
-| `quality` | yes | `CURRENT / STALE / UNKNOWN` for the projection as a whole |
-| `correlation_id` | yes | Sample/run correlation identifier |
-| `summary.state` | yes | `HEALTHY / DEGRADED / CRITICAL / UNKNOWN` only when governed classification exists |
-| `summary.reasons` | yes | Machine-readable reason list supporting the summary state |
-| `signals` | yes | Per-domain observed evidence |
-| `diagnostics` | yes | Collector/source diagnostics, never Safety authority |
-
-Until threshold/severity policy is approved, a prototype collector may emit `summary.state = UNKNOWN` while still publishing `CURRENT` raw signals.
-
-## 4. Common signal envelope
-
-Every signal must implement the following envelope:
+## 4. Common signal envelope and provenance
 
 ```json
 {
@@ -84,53 +61,76 @@ Every signal must implement the following envelope:
   "quality": "CURRENT",
   "observed_at_utc": "...",
   "fresh_until_utc": "...",
-  "source": "...",
+  "source": "Win32_LogicalDisk",
+  "cadence_class": "MEDIUM",
   "reason": null,
   "data": {}
 }
 ```
 
-Allowed evidence states for baseline use:
+Allowed `state`: `OBSERVED`, `UNAVAILABLE`, `NOT_SUPPORTED`, `UNKNOWN`.
 
-- `OBSERVED` — source read succeeded and raw data is available;
-- `UNAVAILABLE` — source exists but cannot currently provide data;
-- `NOT_SUPPORTED` — source capability is not exposed on this host;
-- `UNKNOWN` — result cannot be determined safely.
+Allowed `quality`: `CURRENT`, `STALE`, `UNKNOWN`.
 
-`state` is not a severity classification.
+Allowed `cadence_class`: `FAST`, `MEDIUM`, `SLOW_ON_CHANGE`.
 
-## 5. Signal contracts
+`source` names the actual source/adapter used for the signal. Composite signals must preserve enough provenance to distinguish their constituent sources.
 
-### 5.1 `storage`
+## 5. Governed signal map
 
-Source basis: `Win32_LogicalDisk`, `Get-PhysicalDisk`, optional reliability counters.
+| Signal | Source/provenance | Cadence class | Contract status |
+|---|---|---|---|
+| `cpu` | `Win32_Processor` | FAST | verified raw topology/load |
+| `memory` | `Win32_OperatingSystem` / CIM | FAST | verified raw capacity/free |
+| `processes` | Windows process table | FAST | verified contextual presence |
+| `plugin_heartbeat` | N.I.N.A. telemetry projection | FAST | correlation only |
+| `storage.capacity` | `Win32_LogicalDisk` | MEDIUM | verified size/free/ratio |
+| `uptime` | OS boot time + collector arithmetic | MEDIUM | verified |
+| `time_sync` | `w32tm` + Windows Time service | MEDIUM | verified source; service may be inactive |
+| `log_sources` | filesystem metadata | MEDIUM | verified |
+| `usb_com` | PnP + supplemental `Win32_SerialPort` | MEDIUM | governed composite |
+| `storage.physical` | `Get-PhysicalDisk` | SLOW_ON_CHANGE | verified aggregate physical health |
+| `storage.reliability` | `Get-StorageReliabilityCounter` | SLOW_ON_CHANGE | optional/unavailable non-elevated |
+| `event_log` | System/Application Event Log | SLOW_ON_CHANGE | verified; provider policy pending |
+| `scheduled_tasks` | Task Scheduler read API | SLOW_ON_CHANGE | verified raw state/result |
+| `pending_reboot` | bounded registry evidence | SLOW_ON_CHANGE | verified raw evidence |
+| `windows_update` | service state | SLOW_ON_CHANGE | verified read-only |
+| `configuration_drift` | future baseline manifest | SLOW_ON_CHANGE | UNKNOWN until baseline approved |
+
+No numeric cadence is accepted by G2. G3 must make cadence configurable and non-overlapping, then G5 OAT must demonstrate non-interference during imaging.
+
+## 6. Storage contract — capacity and physical health are separate
 
 ```json
 {
-  "logical_disks": [
-    {
-      "device_id": "C:",
-      "volume_name": "EAGLE3",
-      "filesystem": "NTFS",
-      "size_bytes": 223397015552,
-      "free_bytes": 4335616000,
-      "free_ratio": 0.0194
-    }
-  ],
-  "physical_disks": [
-    {
-      "friendly_name": "KINGSTON SA400S37960G",
-      "media_type": "SSD",
-      "bus_type": "SATA",
-      "health_status": "Healthy",
-      "operational_status": ["OK"],
-      "size_bytes": 960197124096
-    }
-  ],
+  "capacity": {
+    "logical_disks": [
+      {
+        "device_id": "C:",
+        "volume_name": null,
+        "filesystem": "NTFS",
+        "size_bytes": 223397015552,
+        "free_bytes": 1500758016,
+        "free_ratio": 0.0067,
+        "free_pct": 0.67
+      }
+    ]
+  },
+  "physical": {
+    "disks": [
+      {
+        "friendly_name": "KINGSTON SA400S37960G",
+        "media_type": "SSD",
+        "bus_type": "SATA",
+        "health_status": "Healthy",
+        "operational_status": ["OK"],
+        "size_bytes": 960197124096
+      }
+    ]
+  },
   "reliability": {
     "available": false,
     "temperature_c": null,
-    "temperature_max_c": null,
     "wear_pct": null,
     "read_errors_total": null,
     "write_errors_total": null,
@@ -140,369 +140,89 @@ Source basis: `Win32_LogicalDisk`, `Get-PhysicalDisk`, optional reliability coun
 }
 ```
 
-Rules:
+`free_bytes`, `free_ratio` and `free_pct` are mandatory descriptive capacity fields for each observed logical disk. Capacity pressure is not inferred from physical `HealthStatus`. Conversely `Healthy/OK` physical evidence must not hide low logical free space. No storage severity threshold is defined by G2.
 
-- `free_ratio` is descriptive, not a severity threshold.
-- Aggregate `HealthStatus` from Windows may be preserved as raw evidence but does not replace detailed SMART evidence.
-- Detailed reliability values remain `null` when unavailable.
+## 7. Remaining domain data contracts
 
-### 5.2 `memory`
+### CPU
+`model`, `physical_cores`, `logical_processors`, `max_clock_mhz`, `load_pct`; optional window metrics remain null until implemented. `temperature_c` remains null until a verified source exists.
 
-Source basis: `Win32_OperatingSystem` / bounded performance counters.
+### Memory
+`total_physical_bytes`, `available_physical_bytes`, `available_ratio`; commit/pressure fields remain optional/null until governed.
 
-```json
-{
-  "total_physical_bytes": 12543135744,
-  "available_physical_bytes": 0,
-  "available_ratio": null,
-  "commit_used_bytes": null,
-  "commit_limit_bytes": null,
-  "memory_pressure": null
-}
+### Uptime
+`last_boot_at_utc`, `uptime_seconds`, `unexpected_reboot_observed`. Unexpected reboot cannot be inferred from uptime alone.
+
+### Time sync
+`service_state`, `time_source`, `stratum`, `last_successful_sync_utc`, `offset_ms`, `command_available`. No fabricated offset when service/query cannot provide it.
+
+### Event Log
+Bounded normalized events: `log_name`, UTC time, `event_id`, `level`, `provider`, optional application/fingerprint. Full unbounded event messages are excluded. Raw Windows Error counts are not host severity.
+
+### Processes
+Per candidate: name, running, pid, start UTC, working set, total CPU, optional verified executable path. `running=false` is contextual evidence only.
+
+### Scheduled Tasks
+Task name/path/state, last/next run UTC and raw `last_task_result`; `result_classification` remains null until task-specific mapping is governed.
+
+### Log sources
+Source id/path, exists, length, last-write UTC. Metadata only unless another contract explicitly governs content parsing.
+
+### USB/COM
+PnP devices plus supplemental serial-port rows and reconciliation/provenance. Zero `Win32_SerialPort` rows cannot override observed PnP COM presence.
+
+### Pending reboot
+Raw CBS/WU/PendingFileRename indicators plus nullable `reboot_required`. No automatic reboot action.
+
+### Windows Update
+Service state/start type and only passive available metadata. Collector must not trigger scan/install/service start.
+
+### Configuration drift
+`baseline_id`, `baseline_version`, observed/drift items and `status`. Remains UNKNOWN until baseline manifest exists; no auto-remediation.
+
+### Plugin heartbeat
+Projection path/existence and the projection's observed/freshness/quality fields; plugin version only from verified metadata.
+
+## 8. Freshness and failure semantics
+
+Per D4:
+
+```text
+valid sample before fresh_until_utc -> CURRENT
+valid sample after fresh_until_utc  -> STALE
+no valid/readable sample            -> UNKNOWN
 ```
 
-`memory_pressure` remains `null` until a governed calculation/policy is defined.
+A single probe failure yields `UNAVAILABLE/UNKNOWN` for that signal with a bounded reason while other probes continue. The last valid canonical projection is retained on serialization/write failure and ages naturally toward STALE. G3 must use atomic publication and prevent overlapping cycles.
 
-### 5.3 `cpu`
+Required reason-code vocabulary for implementation baseline includes at least: `SOURCE_UNAVAILABLE`, `UNAVAILABLE_NON_ELEVATED`, `MALFORMED_SOURCE`, `TIMEOUT`, `SOURCE_QUERY_FAILED`, `POLICY_NOT_ACTIVATED`, `BASELINE_NOT_DEFINED`. G3/G4 may extend this only with documented stable codes.
 
-Source basis: `Win32_Processor` and future lightweight counters.
+## 9. Summary classification
 
-```json
-{
-  "model": "Intel(R) Celeron(R) J4005 CPU @ 2.00GHz",
-  "physical_cores": 2,
-  "logical_processors": 2,
-  "max_clock_mhz": 2001,
-  "load_pct": 21.0,
-  "window_avg_pct": null,
-  "window_peak_pct": null,
-  "temperature_c": null
-}
-```
-
-No temperature field may be populated until a verified host source is identified.
-
-### 5.4 `uptime`
+Until a governed severity/threshold policy exists:
 
 ```json
-{
-  "last_boot_at_utc": "...",
-  "uptime_seconds": 0,
-  "unexpected_reboot_observed": null
-}
+{"state":"UNKNOWN","reasons":[{"code":"POLICY_NOT_ACTIVATED","signal":null,"severity":null,"evidence":null}]}
 ```
 
-`unexpected_reboot_observed` requires historical comparison or event evidence and must not be inferred from uptime alone.
+Raw telemetry may still be CURRENT. `UNKNOWN` is not `CRITICAL`; `STALE` is not `HEALTHY`; physical disk `Healthy` is source evidence, not overall host health.
 
-### 5.5 `time_sync`
+## 10. Security and safety
 
-Discovery evidence showed `w32tm` available while Windows Time service was stopped.
+Do not serialize credentials/tokens/API keys, wholesale environment/registry exports, arbitrary file contents, network secrets or unbounded Event Log messages. Collector failure or host-health state cannot command N.I.N.A., PHD2, ASCOM, dome, mount, power, router, Windows Update, reboot or Safety Authority.
 
-```json
-{
-  "service_state": "STOPPED",
-  "time_source": null,
-  "stratum": null,
-  "last_successful_sync_utc": null,
-  "offset_ms": null,
-  "command_available": true
-}
-```
+`eagle-health.json` is a source projection, not the canonical Observatory Status source of truth. Any later `systems.eagle` adapter must preserve the independent `safety` boundary.
 
-Rules:
+## 11. G2 acceptance
 
-- Never infer clock accuracy from wall-clock continuity.
-- When service/query cannot provide a valid offset, `offset_ms = null`.
+G2 architecture acceptance criteria are satisfied by this contract because:
 
-### 5.6 `event_log`
+1. every baseline field/domain maps to G1 verified/composite/optional/open-gap provenance;
+2. storage capacity and physical disk health are explicitly independent;
+3. cadence classes are defined without unsupported numeric intervals;
+4. freshness and failure semantics align with D4;
+5. no actuator command or privilege elevation is required;
+6. summary severity remains disabled until separately governed;
+7. implementation obligations for isolation, non-overlap and atomic publication are explicit.
 
-Source basis: Windows `System` and `Application` logs.
-
-```json
-{
-  "window_start_utc": "...",
-  "window_end_utc": "...",
-  "critical_count": 0,
-  "error_count": 0,
-  "events": [
-    {
-      "log_name": "Application",
-      "time_created_utc": "...",
-      "event_id": 1000,
-      "level": "Error",
-      "provider": "Application Error",
-      "application": "EagleManager.exe",
-      "fingerprint": null
-    }
-  ]
-}
-```
-
-The projection should not copy entire verbose Windows event messages by default. Preserve normalized fields and optionally a bounded/sanitized summary or fingerprint. Provider/event policy must distinguish observatory-relevant failures from unrelated Windows noise such as TPM/system-restore events.
-
-### 5.7 `processes`
-
-```json
-{
-  "items": [
-    {
-      "name": "NINA",
-      "running": true,
-      "pid": 7800,
-      "started_at_utc": "...",
-      "working_set_bytes": 403259392,
-      "cpu_total_seconds": 1689.09,
-      "executable_path": "C:\\Program Files\\N.I.N.A. - Nighttime Imaging 'N' Astronomy\\NINA.exe"
-    }
-  ]
-}
-```
-
-Baseline candidates include N.I.N.A., PHD2, AAG CloudWatcher, ASCOM CloudWatcher Server, TS Shelter and verified Digital StarGate processes. `running = false` is evidence only; it does not automatically mean failure because process expectation depends on operational context.
-
-### 5.8 `scheduled_tasks`
-
-```json
-{
-  "items": [
-    {
-      "task_name": "Digital StarGate - Daily Session Upload",
-      "task_path": "\\",
-      "state": "Ready",
-      "last_run_at_utc": "...",
-      "last_task_result": 1,
-      "next_run_at_utc": "...",
-      "result_classification": null
-    }
-  ]
-}
-```
-
-`result_classification` remains `null` until Task Scheduler result-code semantics are explicitly governed per task.
-
-### 5.9 `log_sources`
-
-```json
-{
-  "items": [
-    {
-      "source_id": "cloudwatcher-csv",
-      "path": "C:\\Users\\PrimaLuceLab\\Documents\\CloudWatcher\\CloudWatcher.csv",
-      "exists": true,
-      "length_bytes": 241741030,
-      "last_write_at_utc": "..."
-    }
-  ]
-}
-```
-
-Known source candidates include CloudWatcher, ASCOM, N.I.N.A., PHD2 and Digital StarGate runtime logs. Absence/freshness policy is source-specific and must be explicit.
-
-### 5.10 `usb_com`
-
-```json
-{
-  "usb_devices": [
-    {
-      "name": "USB Serial Converter",
-      "status": "OK",
-      "manufacturer": "FTDI",
-      "device_id": "USB\\VID_0403&PID_6001\\..."
-    }
-  ],
-  "serial_ports": [],
-  "source_reconciliation": "REQUIRED"
-}
-```
-
-D1/D2 observed COM-related PnP devices while `Win32_SerialPort` returned no rows. Until reconciled, serial-port completeness must not be asserted.
-
-### 5.11 `pending_reboot`
-
-```json
-{
-  "cbs_reboot_pending": false,
-  "windows_update_reboot_required": false,
-  "pending_file_rename_present": true,
-  "pending_file_rename_count": null,
-  "reboot_required": null
-}
-```
-
-`reboot_required` remains `null` until deterministic policy exists; `PendingFileRenameOperations` alone is raw evidence, not an automatic mandatory reboot decision.
-
-### 5.12 `windows_update`
-
-```json
-{
-  "service_name": "wuauserv",
-  "service_state": "Stopped",
-  "start_type": "Manual",
-  "pending_update_count": null,
-  "last_scan_at_utc": null
-}
-```
-
-The collector must never start the service or trigger update scans/installations solely to populate telemetry.
-
-### 5.13 `configuration_drift`
-
-```json
-{
-  "baseline_id": null,
-  "baseline_version": null,
-  "observed_items": [],
-  "drift_items": [],
-  "status": "UNKNOWN"
-}
-```
-
-This signal remains `UNKNOWN` until a governed baseline manifest is approved. No auto-remediation is allowed.
-
-### 5.14 `plugin_heartbeat`
-
-This signal correlates host health with the already-existing N.I.N.A. telemetry projection without moving host collection into the plugin.
-
-```json
-{
-  "projection_path": "%LOCALAPPDATA%\\DigitalStarGate\\telemetry\\nina-observatory-status.json",
-  "exists": true,
-  "observed_at_utc": "...",
-  "fresh_until_utc": "...",
-  "quality": "CURRENT",
-  "plugin_version": null
-}
-```
-
-Plugin version may be populated only from a verified DLL/file metadata source or projection field.
-
-## 6. Projection freshness model
-
-The producer must assign freshness explicitly. Initial implementation should use per-signal cadences rather than one universal cadence.
-
-Recommended classes for pilot design only:
-
-- fast: CPU/memory/process/plugin heartbeat;
-- medium: storage/log-source/task state;
-- slow: Event Log summaries, pending reboot/update, drift, SMART.
-
-Actual intervals are not fixed by this contract and must be measured in D3 overhead pilot.
-
-Top-level `quality` rules:
-
-- `CURRENT`: collector sample itself is fresh;
-- `STALE`: collector output exists but exceeded freshness;
-- `UNKNOWN`: collector cannot produce a valid projection.
-
-Top-level quality must not collapse every child source failure into `UNKNOWN` if the collector itself is functioning.
-
-## 7. Summary classification contract
-
-The summary object is deliberately evidence-driven:
-
-```json
-{
-  "state": "UNKNOWN",
-  "reasons": [
-    {
-      "code": "POLICY_NOT_ACTIVATED",
-      "signal": null,
-      "severity": null,
-      "evidence": null
-    }
-  ]
-}
-```
-
-Future reason object:
-
-| Field | Purpose |
-|---|---|
-| `code` | Stable machine-readable reason |
-| `signal` | Signal responsible for classification |
-| `severity` | Governed classification severity |
-| `evidence` | Bounded observed value(s) supporting the reason |
-
-Until policy thresholds are approved, the collector must not label the host `HEALTHY`, `DEGRADED` or `CRITICAL` solely from developer assumptions.
-
-## 8. Canonical Observatory Status integration
-
-`eagle-health.json` is a **source projection**, not the portal source of truth. A future canonical adapter may map it into Observatory Status as a dedicated `systems.eagle` (or equivalent repository-approved name) while preserving the current structure and keeping `safety` separate.
-
-Target shape, subject to integration review:
-
-```json
-{
-  "systems": {
-    "eagle": {
-      "state": "UNKNOWN",
-      "observed_at_utc": "...",
-      "fresh_until_utc": "...",
-      "quality": "CURRENT",
-      "source": "DSG.EagleHostHealthCollector",
-      "reasons": []
-    }
-  },
-  "safety": {
-    "observed_state": "...",
-    "authority": "NINA_SAFETY_MONITOR_OBSERVATION"
-  }
-}
-```
-
-Health and Safety must remain independent.
-
-## 9. Failure behavior
-
-| Failure | Required behavior |
-|---|---|
-| Collector cannot read one source | affected signal `UNAVAILABLE/UNKNOWN`; other signals continue |
-| SMART/reliability denied | reliability values `null`, reason retained |
-| Windows Time stopped | source state preserved; no fabricated NTP offset |
-| Event Log query fails | event_log signal `UNKNOWN`; collector continues |
-| Scheduled Task query fails | scheduled_tasks signal `UNKNOWN`; no task mutation |
-| Plugin projection missing | plugin_heartbeat `UNKNOWN`; host collector continues |
-| Collector stops | `eagle-health.json` becomes `STALE` downstream |
-| Malformed source value | affected field/signal `UNKNOWN`; diagnostic reason; no crash loop |
-
-## 10. Security and privacy
-
-Do not serialize:
-
-- passwords, tokens, API keys;
-- full registry exports;
-- environment variables wholesale;
-- complete event-log messages when they may expose user/application data;
-- network secrets;
-- file contents unrelated to bounded diagnostics.
-
-Paths and executable names may be recorded where needed for provenance and diagnostics.
-
-## 11. Validation gates for G2
-
-G2 is architecture-ready when:
-
-1. every contract field maps to a verified source, explicitly optional source, or documented open source gap;
-2. no field requires an actuator command;
-3. failure semantics are explicit;
-4. Safety boundary is explicit;
-5. no undeclared threshold exists;
-6. source-specific privilege requirements are documented;
-7. canonical integration does not overwrite N.I.N.A. equipment telemetry.
-
-Runtime implementation remains blocked until BKL-029 closure.
-
-## 12. Traceability
-
-Related artifacts:
-
-- `docs/architecture/telemetry/BKL-030-EAGLE-Health-Reliability-Architecture-Assessment.md`
-- `docs/architecture/telemetry/evidence/BKL-030-EAGLE-Health-Source-Discovery-2026-08-31.md`
-- `scripts/telemetry/Inspect-EagleHealthSources.ps1`
-- `scripts/telemetry/Export-NinaObservatoryStatus.ps1`
-- `docs/project/BACKLOG.md`
-- `docs/project/FUNCTIONAL_ROADMAP_EXPANSION_2026-08-30.md`
-
-## 13. Current disposition
-
-**G2 contract defined for planning/review. BKL-030 remains `Planned` and producer implementation remains blocked by BKL-029.**
+**Disposition: G2 ARCHITECTURE READY. Proceed to G3 collector implementation; runtime acceptance remains pending G4/G5.**
