@@ -119,14 +119,23 @@ function Test-DSGCleanupEvidence {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)][string]$ReadyManifestPath,
-        [Parameter(Mandatory)][string]$AckPath
+        [Parameter(Mandatory)][string]$AckPath,
+        [string]$TransportPath
     )
+
+    if ([string]::IsNullOrWhiteSpace($TransportPath)) {
+        $TransportPath = $ReadyManifestPath.Substring(0, $ReadyManifestPath.Length - '.ready.json'.Length)
+    }
 
     $result = [ordered]@{
         FileName = $null
         State = 'BLOCKED'
+        TechnicalCandidate = $false
         CleanupEligible = $false
+        CleanupAuthorized = $false
         ReasonCode = 'UNKNOWN'
+        PolicyReasonCode = 'RETENTION_NOT_APPROVED'
+        TransportPath = $TransportPath
         ReadyManifestPath = $ReadyManifestPath
         AckPath = $AckPath
         Deleted = 0
@@ -144,6 +153,11 @@ function Test-DSGCleanupEvidence {
         $result.ReasonCode = 'READY_INVALID'; return [pscustomobject]$result
     }
     $result.FileName = [string]$ready.FileName
+
+    if (-not (Test-Path -LiteralPath $TransportPath -PathType Leaf)) {
+        $result.ReasonCode = 'TRANSPORT_PAYLOAD_MISSING'
+        return [pscustomobject]$result
+    }
 
     if (-not (Test-Path -LiteralPath $AckPath -PathType Leaf)) {
         $result.ReasonCode = 'ACK_MISSING'
@@ -171,9 +185,11 @@ function Test-DSGCleanupEvidence {
         $result.ReasonCode = 'ACK_READY_HASH_MISMATCH'; return [pscustomobject]$result
     }
 
-    $result.State = 'CLEANUP_ELIGIBLE_DRY_RUN'
-    $result.CleanupEligible = $true
-    $result.ReasonCode = 'ELIGIBLE_DRY_RUN'
+    $result.State = 'TECHNICAL_CANDIDATE_DRY_RUN'
+    $result.TechnicalCandidate = $true
+    $result.CleanupEligible = $false
+    $result.CleanupAuthorized = $false
+    $result.ReasonCode = 'TECHNICAL_CANDIDATE_POLICY_BLOCKED'
     return [pscustomobject]$result
 }
 
