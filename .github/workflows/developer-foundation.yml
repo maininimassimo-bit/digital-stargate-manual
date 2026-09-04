@@ -88,6 +88,10 @@ jobs:
         shell: pwsh
         run: ./.github/scripts/test-session-promotion.ps1
 
+      - name: Test EAGLE health collector contract
+        shell: pwsh
+        run: ./.github/scripts/test-eagle-health-collector-contract.ps1
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
