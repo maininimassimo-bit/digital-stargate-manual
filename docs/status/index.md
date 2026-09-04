@@ -15,6 +15,25 @@
 <div class="dsg-kpi"><span class="dsg-kpi__label">Rete osservata</span><span class="dsg-kpi__value" data-observatory-status="network-state">🟡 UNKNOWN</span><span class="dsg-kpi__detail" data-observatory-status="network-detail">Telemetria Network N.I.N.A. non ancora disponibile</span></div>
 </div>
 
+## EAGLE Health
+
+> **Evidence host read-only.** Questa sezione mostra evidence del computer `EAGLE30154`; non applica soglie di salute e non esegue remediation. Finché la policy non è governata, lo stato complessivo resta `UNKNOWN / POLICY_NOT_ACTIVATED`.
+
+| Evidenza | Valore |
+|---|---|
+| Qualità | <span data-eagle-health="quality">🟡 UNKNOWN</span> |
+| Policy complessiva | <span data-eagle-health="summary">UNKNOWN / POLICY_NOT_ACTIVATED</span> |
+| Rilevazione | <span data-eagle-health="observed-at">—</span> |
+| Provenienza | <span data-eagle-health="source">—</span> |
+| CPU | <span data-eagle-health="cpu">—</span> |
+| Memoria | <span data-eagle-health="memory">—</span> |
+| Capacità storage | <span data-eagle-health="storage-capacity">—</span> |
+| Salute fisica storage | <span data-eagle-health="storage-health">—</span> |
+| Uptime | <span data-eagle-health="uptime">—</span> |
+| Windows Time | <span data-eagle-health="time-sync">—</span> |
+
+Capacità logica e salute fisica dei dischi sono evidence indipendenti: il portale non deriva uno stato fisico dalla percentuale di spazio libero e non applica soglie numeriche non governate.
+
 ## Meteo operativo
 
 | Parametro | Valore |
@@ -47,6 +66,8 @@ La riga **Rete** usa la telemetria passiva prodotta dal plug-in N.I.N.A. Digital
 ## Contratto e freshness
 
 Il browser aggiorna la projection read-only ogni 15 secondi. Ogni segnale contiene `observed_at_utc`, `fresh_until_utc` e `quality`. Se `fresh_until_utc` è superato, la UI forza lo stato a `UNKNOWN`/`STALE` invece di mostrare l'ultimo valore come corrente.
+
+Anche EAGLE Health applica la stessa regola fail-closed: una projection assente, malformata o scaduta non viene interpretata come stato sano. `UNKNOWN`, `STALE` e `POLICY_NOT_ACTIVATED` restano evidence esplicite.
 
 `weather.state` descrive la disponibilità della telemetria meteo (`AVAILABLE` quando corrente); non deve essere interpretato come verdetto di sicurezza. L'osservazione Safety è esposta separatamente tramite `safety.observed_state` e `safety.authority`. Anche tale osservazione resta informativa: gli interlock fisici locali mantengono l'autorità.
 
