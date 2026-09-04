@@ -11,11 +11,50 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 Import-Module (Join-Path $PSScriptRoot 'DSG.OneDriveTransport.psm1') -Force
+Import-Module (Join-Path $PSScriptRoot 'DSG.VerifiedTransportCleanup.psm1') -Force
 
 if (-not (Test-Path -LiteralPath $TransferPlanPath -PathType Leaf)) { throw "Transfer plan not found: $TransferPlanPath" }
 if (-not (Test-Path -LiteralPath $TransportRoot -PathType Container)) { throw "Transport root not found: $TransportRoot" }
 if (-not (Test-Path -LiteralPath $DestinationRoot -PathType Container)) { throw "Destination root not found: $DestinationRoot" }
 if ($MaxFilesPerRun -lt 1) { throw 'MaxFilesPerRun must be greater than zero.' }
+
+function Write-DSGVerifiedImportAck {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)][string]$ManifestPath,
+        [Parameter(Mandatory = $true)][string]$DestinationPath,
+        [Parameter(Mandatory = $true)][string]$CorrelationId
+    )
+
+    $manifest = Get-Content -LiteralPath $ManifestPath -Raw | ConvertFrom-Json
+    $transportPath = Join-Path (Split-Path -Parent $ManifestPath) ([string]$manifest.FileName)
+    $ackPath = $transportPath + '.imported.json'
+
+    try {
+        $ackResult = New-DSGDestinationVerificationAck `
+            -ReadyManifestPath $ManifestPath `
+            -DestinationPath $DestinationPath `
+            -AckPath $ackPath `
+            -CorrelationId $CorrelationId
+
+        return [pscustomobject][ordered]@{
+            Status = [string]$ackResult.Status
+            ManifestPath = $ManifestPath
+            DestinationPath = $DestinationPath
+            AckPath = $ackPath
+            Error = $null
+        }
+    }
+    catch {
+        return [pscustomobject][ordered]@{
+            Status = 'ACK_FAILED'
+            ManifestPath = $ManifestPath
+            DestinationPath = $DestinationPath
+            AckPath = $ackPath
+            Error = $_.Exception.Message
+        }
+    }
+}
 
 $plan = Import-Csv -LiteralPath $TransferPlanPath
 $planByName = @{}
@@ -36,6 +75,7 @@ $runDir = Join-Path $EvidenceRoot $runId
 New-Item -ItemType Directory -Path $runDir -Force | Out-Null
 
 $results = @()
+$ackResults = @()
 $alreadyImportedSkipped = 0
 $deferredNoPlan = 0
 $deferredPlanAction = 0
@@ -109,6 +149,10 @@ foreach ($manifestFile in $manifestFiles) {
                 $destinationHash = Get-DSGTransportSha256 -LiteralPath $destinationPath
                 if ($destinationHash -eq ([string]$manifest.Sha256).ToLowerInvariant()) {
                     $alreadyImportedSkipped++
+                    $ackResults += Write-DSGVerifiedImportAck `
+                        -ManifestPath $manifestFile.FullName `
+                        -DestinationPath $destinationPath `
+                        -CorrelationId $runId
                     continue
                 }
             }
@@ -145,6 +189,13 @@ foreach ($manifestFile in $manifests) {
             -DestinationPath $destinationPath
 
         $results += $result
+
+        if ($result.Status -in @('COPIED_VERIFIED', 'SKIP_IDENTICAL')) {
+            $ackResults += Write-DSGVerifiedImportAck `
+                -ManifestPath $manifestFile.FullName `
+                -DestinationPath $destinationPath `
+                -CorrelationId $runId
+        }
     }
     catch {
         $results += [pscustomobject][ordered]@{
@@ -161,12 +212,14 @@ foreach ($manifestFile in $manifests) {
 }
 
 $resultsPath = Join-Path $runDir 'import-results.csv'
+$ackResultsPath = Join-Path $runDir 'ack-results.csv'
 $results | Export-Csv -LiteralPath $resultsPath -NoTypeInformation -Encoding UTF8
+$ackResults | Export-Csv -LiteralPath $ackResultsPath -NoTypeInformation -Encoding UTF8
 
 $summary = [pscustomobject][ordered]@{
-    SchemaVersion = '1.1'
+    SchemaVersion = '1.2'
     RunId = $runId
-    Mode = 'COPY_ONLY_ONEDRIVE_IMPORT'
+    Mode = 'COPY_ONLY_ONEDRIVE_IMPORT_WITH_VERIFICATION_ACK'
     TransferPlanPath = $TransferPlanPath
     TransportRoot = $TransportRoot
     DestinationRoot = $DestinationRoot
@@ -179,6 +232,9 @@ $summary = [pscustomobject][ordered]@{
     CopiedVerified = @($results | Where-Object { $_.Status -eq 'COPIED_VERIFIED' }).Count
     SkippedIdentical = @($results | Where-Object { $_.Status -eq 'SKIP_IDENTICAL' }).Count
     Failed = @($results | Where-Object { $_.Status -eq 'FAILED' }).Count
+    AckCreated = @($ackResults | Where-Object { $_.Status -eq 'ACK_CREATED' }).Count
+    AckExistingVerified = @($ackResults | Where-Object { $_.Status -eq 'ACK_EXISTS_VERIFIED' }).Count
+    AckFailed = @($ackResults | Where-Object { $_.Status -eq 'ACK_FAILED' }).Count
     SourceFilesDeleted = 0
     TransportFilesDeleted = 0
     OverwritesPerformed = 0
