@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "component": "DSG.EagleHealthPortalProjection",
+  "host": "EAGLE30154",
+  "observed_at_utc": null,
+  "fresh_until_utc": null,
+  "quality": "UNKNOWN",
+  "source_component": "DSG.EagleHostHealthCollector",
+  "source_schema_version": "1.0",
+  "source_correlation_id": null,
+  "summary": {
+    "state": "UNKNOWN",
+    "reason": "POLICY_NOT_ACTIVATED"
+  },
+  "signals": {},
+  "diagnostics": {
+    "projection_mode": "READ_ONLY_PUBLIC",
+    "safety_authority": "OUTSIDE_SCOPE",
+    "automatic_remediation": false,
+    "signals_seen": 0,
+    "signals_published": 0,
+    "signals_rejected": 0
+  }
+}
