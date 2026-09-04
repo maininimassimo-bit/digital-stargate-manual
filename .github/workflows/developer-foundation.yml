@@ -3,9 +3,9 @@ name: Developer Foundation
 on:
   push:
     branches: [main, release/1.5-developer-foundation]
-    paths: ["src/**","tests/**","dsg-analytics/**","data/analytics/**","data/sessions/**/normalized/session-metrics.json","*.sln","*.props","global.json",".editorconfig","scripts/telemetry/**","requirements.txt",".github/scripts/**",".github/roadmap/**","docs/data/roadmap.json","docs/data/scientific-session-catalog.json","docs/data/scientific-observation-index.json","docs/project/BACKLOG.md","docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md",".github/workflows/developer-foundation.yml"]
+    paths: ["src/**","tests/**","dsg-analytics/**","data/analytics/**","data/sessions/**/normalized/session-metrics.json","*.sln","*.props","global.json",".editorconfig","scripts/telemetry/**","requirements.txt","schemas/**",".github/scripts/**",".github/roadmap/**","docs/data/roadmap.json","docs/data/knowledge-graph.json","docs/data/scientific-session-catalog.json","docs/data/scientific-observation-index.json","docs/project/BACKLOG.md","docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md",".github/workflows/developer-foundation.yml"]
   pull_request:
-    paths: ["src/**","tests/**","dsg-analytics/**","data/analytics/**","data/sessions/**/normalized/session-metrics.json","*.sln","*.props","global.json",".editorconfig","scripts/telemetry/**","requirements.txt",".github/scripts/**",".github/roadmap/**","docs/data/roadmap.json","docs/data/scientific-session-catalog.json","docs/data/scientific-observation-index.json","docs/project/BACKLOG.md","docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md",".github/workflows/developer-foundation.yml"]
+    paths: ["src/**","tests/**","dsg-analytics/**","data/analytics/**","data/sessions/**/normalized/session-metrics.json","*.sln","*.props","global.json",".editorconfig","scripts/telemetry/**","requirements.txt","schemas/**",".github/scripts/**",".github/roadmap/**","docs/data/roadmap.json","docs/data/knowledge-graph.json","docs/data/scientific-session-catalog.json","docs/data/scientific-observation-index.json","docs/project/BACKLOG.md","docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md",".github/workflows/developer-foundation.yml"]
 permissions: { contents: read }
 jobs:
   quality-gate:
@@ -31,6 +31,7 @@ jobs:
         uses: actions/setup-node@v4
         with: { node-version: "22" }
       - { name: Test EAGLE health portal browser failure injection, run: node --test .github/scripts/test-eagle-health-portal-failure-injection.mjs }
+      - { name: Verify repository knowledge graph, run: node .github/scripts/verify-knowledge-graph.mjs }
       - name: Verify generated roadmap
         shell: bash
         run: |

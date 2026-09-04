@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 3.6 |
+| Versione | 3.7 |
 | Stato | Active |
 | Data baseline | 04/09/2026 |
 
@@ -33,7 +33,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-012 | P1 | Validare unattended AP-013 COPY_ONLY | Done | Scheduler/evidence | Runtime OAT | AP-013 |
 | BKL-013 | P1 | Completare AP-014 | Done | AP14-W01-W07 | Catalogo/search accettati | AP-014 |
 | BKL-014 | P2 | Preparare AP-015 Scientific Knowledge Platform | Planned | AP-014, BKL-015 e capability foundation | Architecture Package CAP-40 | AMP-002 |
-| BKL-015 | P2 | Implementare repository Knowledge Graph machine-readable | Planned | BKL-029/BKL-030 architecture requirements; Governance Foundation | Relazioni AP/ADR/component/evidence e future entità scientifiche interrogabili | TD-008, GP-003, BKL-044 |
+| BKL-015 | P2 | Implementare repository Knowledge Graph machine-readable | In Progress | BKL-029/BKL-030 architecture requirements; Governance Foundation | Relazioni AP/ADR/component/evidence e future entità scientifiche interrogabili | TD-008, `BKL-015-F1`, BKL-044 |
 | BKL-016 | P2 | Contestualizzare release e guide storiche | Planned | Inventario | Lineage baseline | TD-007 |
 | BKL-017 | P2 | Tema system | Planned | RC1-HF01 | Preferenza OS | RC1-HF01 |
 | BKL-018 | P0 | EAGLE runtime inspection e M27 OAT | Done | Evidence runtime | OAT accettata | AP-014 |
@@ -74,6 +74,8 @@ BKL-030 è `Done` per il perimetro approvato read-only telemetry/history/portal.
 I rischi host osservati (capacità C:, Windows Time, pending reboot evidence, SMART dettagliato non-elevated e configuration drift baseline) restano input operativi e non vengono trasformati in severity o azioni automatiche.
 
 BKL-047/AP-013C resta `Done` per il solo incremento `DRY_RUN/NO_DELETE`; qualunque C8 productive cleanup resta escluso e richiede nuova governance/autorizzazione.
+
+BKL-015 è `In Progress` con F1 limitato alla foundation machine-readable repository-centric: identità stabili, relazioni tipizzate/versionate, source locator, projection non-authoritative e CI integrity gate. BKL-044 resta un successore separato per scientific/AI evidence semantics.
 
 ## 4. Sequenza di esecuzione raccomandata
 

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/schemas/knowledge-graph-foundation.schema.json",
+  "title": "Digital StarGate Knowledge Graph Foundation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "component", "authority", "generated_at_utc", "entities", "relations"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "component": { "const": "DSG.RepositoryKnowledgeGraph" },
+    "authority": { "const": "projection" },
+    "generated_at_utc": { "type": "string", "format": "date-time" },
+    "entities": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/entity" }
+    },
+    "relations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/relation" }
+    }
+  },
+  "$defs": {
+    "sourceLocator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$)).+"
+        },
+        "anchor": { "type": "string", "minLength": 1 },
+        "line_hint": { "type": "string", "minLength": 1 }
+      }
+    },
+    "entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "title", "status", "authority", "source_locator"],
+      "properties": {
+        "id": { "type": "string", "minLength": 2, "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$" },
+        "type": {
+          "enum": ["architecture_package", "adr", "component", "evidence", "backlog_item", "technical_debt", "capability"]
+        },
+        "title": { "type": "string", "minLength": 1 },
+        "status": { "type": "string", "minLength": 1 },
+        "authority": { "enum": ["repository_authority", "evidence_authority", "projection"] },
+        "source_locator": { "$ref": "#/$defs/sourceLocator" }
+      }
+    },
+    "relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "from", "to", "version", "source_locator"],
+      "properties": {
+        "id": { "type": "string", "minLength": 2, "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$" },
+        "type": {
+          "enum": ["depends_on", "implements", "governs", "addresses", "evidenced_by", "documents", "supersedes", "relates_to"]
+        },
+        "from": { "type": "string", "minLength": 2 },
+        "to": { "type": "string", "minLength": 2 },
+        "version": { "const": "1.0" },
+        "source_locator": { "$ref": "#/$defs/sourceLocator" }
+      }
+    }
+  }
+}
