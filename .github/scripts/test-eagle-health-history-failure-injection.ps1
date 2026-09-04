@@ -58,12 +58,23 @@ try {
     if(-not $failed){throw 'Write failure injection did not fail.'}
     if([IO.File]::ReadAllText($segment) -ne $baseline){throw 'Write failure changed unrelated valid history.'}
 
-    # Non-overlap: hold the named mutex and verify second cycle is skipped.
+    # Non-overlap: hold the named mutex in this process and run a second writer in a separate PowerShell process.
     $lockName='G6C.NonOverlap.'+[guid]::NewGuid().ToString('N')
     $mutex=New-Object System.Threading.Mutex($false,$lockName)
     $held=$mutex.WaitOne(0,$false)
     if(-not $held){throw 'Could not acquire test mutex.'}
-    try{$skip=@(& $writer -InputPath $input -HistoryRoot (Join-Path $root 'overlap') -EvidenceRoot (Join-Path $root 'overlap\evidence') -LockName $lockName)}finally{$mutex.ReleaseMutex();$mutex.Dispose()}
+    try {
+        $overlapRoot=Join-Path $root 'overlap'
+        $job=Start-Job -ScriptBlock {
+            param($writerPath,$inputPath,$historyRoot,$evidenceRoot,$name)
+            & $writerPath -InputPath $inputPath -HistoryRoot $historyRoot -EvidenceRoot $evidenceRoot -LockName $name
+        } -ArgumentList $writer,$input,$overlapRoot,(Join-Path $overlapRoot 'evidence'),$lockName
+        $null=Wait-Job -Job $job -Timeout 15
+        if($job.State -ne 'Completed'){Stop-Job -Job $job -ErrorAction SilentlyContinue;throw 'Concurrent writer test job did not complete.'}
+        $skip=@(Receive-Job -Job $job)
+        Remove-Job -Job $job -Force -ErrorAction SilentlyContinue
+    }
+    finally { $mutex.ReleaseMutex();$mutex.Dispose() }
     if(($skip -join '') -ne 'SKIPPED_NON_OVERLAP'){throw 'Concurrent writer was not skipped.'}
 
     # No test may authorize deletion.
