@@ -92,6 +92,10 @@ jobs:
         shell: pwsh
         run: ./.github/scripts/test-eagle-health-history-writer.ps1
 
+      - name: Test EAGLE health history failure injection
+        shell: pwsh
+        run: ./.github/scripts/test-eagle-health-history-failure-injection.ps1
+
       - name: Test session promotion fail-safe contract
         shell: pwsh
         run: ./.github/scripts/test-session-promotion.ps1
