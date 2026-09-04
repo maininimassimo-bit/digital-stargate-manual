@@ -84,6 +84,10 @@ jobs:
         shell: pwsh
         run: ./.github/scripts/test-eagle-host-health-collector.ps1
 
+      - name: Test EAGLE health history serializer
+        shell: pwsh
+        run: ./.github/scripts/test-eagle-health-history-serializer.ps1
+
       - name: Test session promotion fail-safe contract
         shell: pwsh
         run: ./.github/scripts/test-session-promotion.ps1
