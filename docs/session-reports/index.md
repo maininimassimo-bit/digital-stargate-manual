@@ -4,6 +4,7 @@ Indice della cronologia scientifica versionata. Questo elenco non rappresenta te
 
 | Sessione | Fine osservazione | Stato analytics | Markdown | PDF |
 |---|---|---|---|---|
+| `2026-09-03_2026-09-04` | 2026-09-04T03:59:54.0000000Z | YELLOW | [Apri](2026/09/2026-09-03_2026-09-04/report-sessione.md) | [PDF](2026/09/2026-09-03_2026-09-04/Report_Sessione_2026-09-03_2026-09-04.pdf) |
 | `2026-09-02_2026-09-03` | 2026-09-03T03:59:59.0000000Z | YELLOW | [Apri](2026/09/2026-09-02_2026-09-03/report-sessione.md) | [PDF](2026/09/2026-09-02_2026-09-03/Report_Sessione_2026-09-02_2026-09-03.pdf) |
 | `2026-09-01_2026-09-02` | 2026-09-02T03:59:49.0000000Z | YELLOW | [Apri](2026/09/2026-09-01_2026-09-02/report-sessione.md) | [PDF](2026/09/2026-09-01_2026-09-02/Report_Sessione_2026-09-01_2026-09-02.pdf) |
 | `2026-08-31_2026-09-01` | 2026-09-01T03:59:49.0000000Z | YELLOW | [Apri](2026/08/2026-08-31_2026-09-01/report-sessione.md) | [PDF](2026/08/2026-08-31_2026-09-01/Report_Sessione_2026-08-31_2026-09-01.pdf) |
