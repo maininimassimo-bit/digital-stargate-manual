@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 3.5 |
+| Versione | 3.6 |
 | Stato | Active |
 | Data baseline | 04/09/2026 |
 
@@ -48,7 +48,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-027 | P1 | Power/Network source discovery | Done | EAGLE | Source verificate | AP-004/AP-009 |
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441`; `docs/architecture/telemetry/BKL-029-SQM-Source-Discovery-and-Architecture-Contract.md` |
-| BKL-030 | P1 | EAGLE Health & Reliability Telemetry | In Progress | BKL-029; Windows read-only collectors | Health EAGLE spiegabile: disk/RAM/CPU/event log/processi/time sync/USB/pending reboot/drift/capacity | G1-G5 complete; `docs/architecture/telemetry/evidence/BKL-030-G5-Runtime-OAT-2026-09-03.md`; G6 history/persistence resumes after BKL-047 closure |
+| BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport; no Safety Authority/remediation | G1-G8 complete; G5 runtime OAT; G6 closure; PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78`; `ARB-BKL-030-G8-2026-09-04` |
 | BKL-031 | P2 | Observation Planner intelligente | Planned | BKL-015, BKL-035, meteo/SQM | Ranking target per setup e condizioni | Functional Roadmap Expansion |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
@@ -69,18 +69,16 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 
 ### Reconciliation note — 04/09/2026
 
-BKL-030 resta `In Progress`, con G1-G5 completati. G5 Runtime OAT su EAGLE30154 ha verificato FAST, MEDIUM e SLOW_ON_CHANGE con collector read-only, bounded probes, non-overlap e projection atomica. Il finding Event Log empty-window è stato corretto tramite PR #83/#84 e il rerun finale ha prodotto `OBSERVED/CURRENT`, `reason=null`, `events=[]`. C: è stato osservato con 672,124,928 byte liberi (0.301%): è un operational capacity risk candidate, senza severity inventata. Windows Time era `Stopped`; `PendingFileRenameOperations` presente; SMART dettagliato resta non verificato non-elevated; configuration drift resta `BASELINE_NOT_APPROVED`. Nessun Scheduled Task/service permanente, cadence numerica, health threshold, remediation automatica o Safety Authority è approvato. Il checkpoint AP-013C è ora chiuso per il perimetro no-delete e G6 history/persistence può riprendere secondo roadmap.
+BKL-030 è `Done` per il perimetro approvato read-only telemetry/history/portal. G1-G5 hanno chiuso discovery, contract, collector, CI e runtime OAT; G6 history/persistence è stato accettato; G7 portal/Cloud Run è stato validato in canary e production e integrato con PR #89; G8 Safety Review è `APPROVED WITH CONDITIONS` senza Blocker/Major. Restano invarianti: `summary=UNKNOWN/POLICY_NOT_ACTIVATED`, nessuna automatic remediation e `Safety Authority=OUTSIDE_SCOPE`. Le future severity policy, health score o remediation richiedono change-set separati.
 
-Il 04/09 l'incidente raw transport ha evidenziato un gap di convergenza OneDrive: EAGLE 445 XISF/445 READY contro PC 426/426, successivamente recuperato a 445/445 senza perdita osservata; tutti i 19 frame M 27 `0123–0141` sono stati verificati anche in `F:\Astrofotografia`. AP-013B resta `COPY_ONLY`.
+I rischi host osservati (capacità C:, Windows Time, pending reboot evidence, SMART dettagliato non-elevated e configuration drift baseline) restano input operativi e non vengono trasformati in severity o azioni automatiche.
 
-BKL-047/AP-013C è `Done` per il solo incremento `DRY_RUN/NO_DELETE`: real OAT `E-AP013C-OAT-2026-09-04` completata, ACK PC riconvergenti su EAGLE, evaluator live fail-closed, ARB re-review `ARB-013C-R1` favorevole e CI finale del precedente documentation head verificata verde. `CleanupEligible=0`, `CleanupAuthorized=0` e `Deleted=0` restano invarianti. Qualunque C8 productive cleanup è escluso da questa closure e richiede un nuovo change-set governato, retention/grace policy, crash-safe delete semantics, test, ARB/release-quality e autorizzazione esplicita.
+BKL-047/AP-013C resta `Done` per il solo incremento `DRY_RUN/NO_DELETE`; qualunque C8 productive cleanup resta escluso e richiede nuova governance/autorizzazione.
 
 ## 4. Sequenza di esecuzione raccomandata
 
 ```text
-Completed baseline through BKL-029
-  -> BKL-047 / AP-013C DRY_RUN/NO_DELETE (Done; C8 productive cleanup excluded)
-  -> BKL-030 EAGLE Health & Reliability (In Progress: resume G6 history/persistence)
+Completed baseline through BKL-030
   -> BKL-015 Knowledge Graph foundation
   -> BKL-044 Knowledge/AI Evidence Contract
   -> BKL-035 Target Knowledge Base

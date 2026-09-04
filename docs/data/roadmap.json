@@ -2,13 +2,13 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-04",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "995dc3e264546c07c24a7e885bfecacb04c012ccb1049dba787a4a605c81576e",
+  "sourceDigest": "de1b217986d6a46e05fa1e6bcfaf74d1f8771c54d737826889b33b9981c66b4a",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
-  "currentPackage": "BKL-030",
-  "nextMilestone": "BKL-030 G6 EAGLE health history and persistence",
-  "target": "Resume BKL-030 G6 history/persistence after accepted AP-013C DRY_RUN/NO_DELETE checkpoint, then proceed toward the Knowledge Graph foundation",
-  "summary": {"total":42,"completed":21,"active":4,"planned":17,"percentCompleted":50},
+  "currentPackage": "BKL-015",
+  "nextMilestone": "BKL-015 Knowledge Graph foundation",
+  "target": "Start the machine-readable Knowledge Graph foundation after accepted BKL-030 EAGLE Health & Reliability closure, then establish the BKL-044 Knowledge/AI Evidence Contract",
+  "summary": {"total":43,"completed":22,"active":3,"planned":18,"percentCompleted":51},
   "evidenceSummary": {"sources":8,"completionReports":6,"evidenceManifests":2},
   "waves": [
     {"id":"rc2-enterprise-portal","title":"RC2 Enterprise Portal","status":"active","items":[
@@ -27,17 +27,18 @@
       {"id":"AP-014","title":"Scientific Observation Catalog and Search","evidencePath":".github/roadmap/evidence/AP-014.evidence.json","status":"completed","evidenceStatus":"completed","evidence":{"manifest":".github/roadmap/evidence/AP-014.evidence.json","required":10,"present":10,"accepted":10,"missing":[],"rejected":[]}},
       {"id":"AP-015","title":"Scientific Knowledge Platform Architecture","status":"planned","note":"CAP-40 after approved intelligence foundations."}
     ]},
-    {"id":"observatory-intelligence","title":"Observatory Intelligence & Scientific Processing Roadmap","status":"active","items":[
+    {"id":"observatory-intelligence","title":"Observatory Intelligence & Scientific Processing Roadmap","status":"planned","items":[
       {"id":"BKL-029","title":"SQM Sky Quality Telemetry & Scientific History","status":"completed","note":"Closed via PR #68; merge 0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441."},
-      {"id":"BKL-030","title":"EAGLE Health & Reliability Telemetry","status":"active","note":"G1-G5 complete; G6 history/persistence resumes after accepted AP-013C no-delete checkpoint."},
+      {"id":"BKL-030","title":"EAGLE Health & Reliability Telemetry","status":"completed","note":"G1-G8 complete. G7 merged via PR #89 as a15d85b27ebfbe8a6488330920d10dda8db79a78; G8 safety review approved with conditions. No severity policy, remediation or Safety Authority coupling authorized."},
       {"id":"BKL-047","title":"AP-013C Verified Transport Cleanup & Convergence Monitoring","status":"completed","note":"DRY_RUN/NO_DELETE accepted with real PC/EAGLE/OneDrive OAT and ARB-013C-R1; productive cleanup C8 not authorized."},
+      {"id":"BKL-015","title":"Knowledge Graph machine-readable foundation","status":"planned","note":"Next dependency-ordered package after BKL-030 closure."},
       {"id":"BKL-044","title":"Knowledge Graph / AI Evidence Contract","status":"planned"},{"id":"BKL-035","title":"Target Knowledge Base","status":"planned"},{"id":"BKL-040","title":"Night Timeline / Observatory Replay","status":"planned"},{"id":"BKL-037","title":"Session Comparison & Benchmarking","status":"planned"},{"id":"BKL-038","title":"Anomaly & Trend Center","status":"planned"},{"id":"BKL-039","title":"Equipment Performance Registry","status":"planned"},{"id":"BKL-041","title":"Scientific Data Quality Score","status":"planned"},{"id":"BKL-045","title":"PixInsight Workflow Provenance Plugin","status":"planned","note":"Governed PixInsight extension for reproducible post-processing provenance."},{"id":"BKL-046","title":"AI Post-Processing Assistant for PixInsight","status":"planned","note":"Advisory AI over processing provenance; human approval retained."},{"id":"BKL-031","title":"Observation Planner intelligente","status":"planned"},{"id":"BKL-032","title":"Session Readiness / Go-No-Go Decision Support","status":"planned"},{"id":"BKL-036","title":"Observatory Health Score","status":"planned"},{"id":"BKL-033","title":"Observatory Digital Twin","status":"planned"},{"id":"BKL-034","title":"Scientific Image Gallery evoluta","status":"planned"},{"id":"BKL-042","title":"AI Observatory Assistant","status":"planned"},{"id":"BKL-043","title":"Observatory Reliability Engineering","status":"planned"}
     ]}
   ],
   "milestones": [
     {"id":"M-RC2-WP01","itemRef":"WP-01","title":"WP-01 Enterprise Foundation","date":"2026-08-05","description":"Foundation delivered.","image":null,"status":"completed"},{"id":"M-RC2-WP02","itemRef":"WP-02","title":"WP-02 Scientific Platform 2.0","date":"2026-08-05","description":"Scientific platform delivered.","image":null,"status":"completed"},{"id":"M-RC2-WP03","itemRef":"WP-03","title":"WP-03 Enterprise Theme Framework","date":"2026-08-05","description":"Theme delivered.","image":null,"status":"completed"},{"id":"M-RC2-WP04","itemRef":"WP-04","title":"WP-04 Enterprise Search Center","date":"2026-08-05","description":"Search delivered.","image":null,"status":"completed"},{"id":"M-RC2-WP05","itemRef":"WP-05","title":"WP-05 Operations Dashboard","date":"2026-08-05","description":"Dashboard delivered.","image":null,"status":"completed"},{"id":"M-RC2-WP06","itemRef":"WP-06","title":"WP-06 Enterprise Plugin SDK","date":"2026-08-05","description":"SDK delivered.","image":null,"status":"completed"},{"id":"M-RC2-BASELINE","itemRef":"RC2-BASELINE","title":"RC2 Baseline and Integrated Acceptance","date":"2026-08-05","description":"Integrated acceptance in progress.","image":null,"status":"active"},{"id":"M-AP012-C04","itemRef":"AP-012","title":"ARB-012-C04","date":"2026-08-26","description":"Closed / Approved.","image":null,"status":"completed"},{"id":"M-AP013","itemRef":"AP-013","title":"AP-013 Scientific Image Repository","date":"2026-08-11","description":"Accepted with conditions.","image":null,"status":"completed"},{"id":"M-AP014-W07","itemRef":"AP-014","title":"AP14-W07 Operational Acceptance","date":"2026-08-15","description":"Accepted.","image":null,"status":"completed"},
     {"id":"M-SQM","itemRef":"BKL-029","title":"SQM realtime and scientific history","date":"2026-09-01","description":"Closed after accepted realtime, historical provenance, CI/ARB and runtime OAT; PR #68 merged.","image":null,"status":"completed"},
-    {"id":"M-EAGLE-HEALTH","itemRef":"BKL-030","title":"EAGLE Health & Reliability G1-G5","date":"2026-09-03","description":"G1-G5 complete; G6 resumes after AP-013C checkpoint.","image":null,"status":"active"},
+    {"id":"M-EAGLE-HEALTH","itemRef":"BKL-030","title":"EAGLE Health & Reliability G1-G8","date":"2026-09-04","description":"Capability closed after collector/runtime OAT, history persistence, hosted portal production OAT, PR #89 merge and independent G8 safety acceptance.","image":null,"status":"completed"},
     {"id":"M-AP013C","itemRef":"BKL-047","title":"AP-013C Verified Transport Cleanup dry-run","date":"2026-09-04","description":"DRY_RUN/NO_DELETE accepted after real PC/EAGLE/OneDrive OAT and ARB re-review; C8 productive cleanup remains NO-GO.","image":null,"status":"completed"},
     {"id":"M-PIXINSIGHT","itemRef":"BKL-045","title":"PixInsight Workflow Provenance","date":"2026-08-30","description":"Approved future processing provenance capability.","image":null,"status":"planned"},{"id":"M-PIXINSIGHT-AI","itemRef":"BKL-046","title":"AI-assisted PixInsight Processing","date":"2026-08-30","description":"Approved advisory AI capability after provenance foundation.","image":null,"status":"planned"}
   ]
