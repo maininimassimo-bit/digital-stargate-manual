@@ -7,7 +7,7 @@
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch | `main` |
 | Stato | Active baseline — conditions open |
-| Data | 30/07/2026 |
+| Data | 04/09/2026 |
 | Roadmap autorevole | AMP-002 per i package successivi ad AP-006 |
 
 ## 1. Regole
@@ -39,7 +39,7 @@
 | CAP-34 Enterprise Analytics Platform | Approved with conditions | AP-011 / ANA-REF-001 / ANA-PIPE-001 / ANA-KPI-001 / ANA-GOV-001 | package e reference artifacts | ARB-011, 97/100 | Gate documentale chiuso; C01…C07 aperte |
 | CAP-35 Enterprise Operations Center | Approved with conditions | AP-012 / OPSC-REF-001 / OPSC-CMD-001 / OPSC-ALM-001 / OPSC-RUN-001 / OPSC-RACI-001 | package, reference architecture, authorization, alarm/incident, runbook e responsibility governance | ARB-012, 96/100 | Gate documentale chiuso; C01…C08 aperte; runtime non autorizzato |
 | CAP-36 Digital StarGate Portal | Planned | DSGP-VIS-001 / AP-011 / AP-012 | semantic serving e operator-console boundary | ARB-011 / ARB-012 | Non Safety Authority |
-| CAP-37 Scientific Image Repository | Planned | SIR-VIS-001 / AP-009 | storage boundary | ARB-009 | Storage technology aperta |
+| CAP-37 Scientific Image Repository | In Progress | AP-013 / AP-013C | AP-013B COPY_ONLY; DSDM-005; verified transport cleanup dry-run | ARB-013C, Approved with Conditions | AP-013C DRY_RUN/NO_DELETE; real OAT C03 pending; productive cleanup not authorized |
 | CAP-38 Scientific Observation Catalog and Search | Planned | SIR-VIS-001 / AP-008 / AP-011 | catalog e semantic boundary | ARB-011; nessuna review AP-014 | Manifest richiesti |
 | CAP-39 Scientific Processing Provenance | Planned | SIR-VIS-001 / AP-011 | lineage e reproducibility rules | ARB-011; nessuna review AP-013/AP-014 | Run immutabili |
 | CAP-40 Scientific Knowledge Layer | Planned | SKL-VIS-001 / AP-010 / AP-011 | AI governance boundary | ARB-010 / ARB-011 | Claim e citation governati |
@@ -60,7 +60,8 @@
 | AP-010 | Enterprise Safety Assurance | AP-010, SAF-REF-001, SAF-CAT-001 | ARB-010 | Approved with conditions, 97/100 |
 | AP-011 | Analytics Platform | AP-011, ANA-REF-001, ANA-PIPE-001, ANA-KPI-001, ANA-GOV-001 | ARB-011 | Approved with conditions, 97/100 |
 | AP-012 | Operations Center | AP-012, OPSC-REF-001, OPSC-CMD-001, OPSC-ALM-001, OPSC-RUN-001, OPSC-RACI-001 | ARB-012 | Approved with conditions, 96/100; runtime not authorized |
-| AP-013 | Scientific Image Repository | SIR-VIS-001 | Nessuna | Planned |
+| AP-013 | Scientific Image Repository | AP-013, DSDM-001…DSDM-004 | AP-013 acceptance evidence | Implemented baseline; AP-013B COPY_ONLY operational |
+| AP-013C | Verified Transport Cleanup and Convergence Monitoring | AP-013C v0.2, DSDM-005 v0.2, dry-run acceptance plan | ARB-013C | Approved with Conditions — DRY_RUN/NO_DELETE only; C03 real OAT open |
 | AP-014 | Scientific Catalog and Search | SIR-VIS-001 | Nessuna | Planned |
 | AP-015 | Scientific Knowledge Platform | SKL-VIS-001 | Nessuna | Planned |
 
@@ -87,6 +88,8 @@
 | OPSC-RUN-001 | Operational Runbook Standard | AP-012 | Approved with conditions via ARB-012 | drill non eseguiti |
 | OPSC-RACI-001 | Operations Responsibility Matrix | AP-012 | Approved with conditions via ARB-012 | nomine, deleghe e four-eyes aperti |
 | ARB-012 | Independent Review of AP-012 | AP-012 | Completed | 96/100; C01…C08 open |
+| DSDM-005 | Verified Transport Cleanup Solution Design | AP-013C | Proposed/implemented dry-run design v0.2 | ACK schema 1.0 frozen; `TechnicalCandidate` separated from `CleanupAuthorized` |
+| ARB-013C | Verified Transport Cleanup Independent Review | AP-013C | Completed — Approved with Conditions | C01/C02/C06 remediated; C03 real OAT open; C04/C05 governance closure in progress |
 
 ## 5. Data Product Candidate Register
 
@@ -118,6 +121,8 @@
 | AP-010 / SAF-REF-001 / SAF-CAT-001 / ARB-010 | Safety assurance | Approved with conditions; C01…C05 open |
 | AP-011 / ANA-REF-001 / ANA-PIPE-001 / ANA-KPI-001 / ANA-GOV-001 / ARB-011 | Enterprise Analytics Platform | Approved with conditions; C01…C07 open |
 | AP-012 / OPSC-REF-001 / OPSC-CMD-001 / OPSC-ALM-001 / OPSC-RUN-001 / OPSC-RACI-001 / ARB-012 | Enterprise Operations Center | Approved with conditions, 96/100; C01…C08 open; runtime non autorizzato |
+| AP-013 / AP-013B | Scientific image repository baseline and COPY_ONLY transport | Operational baseline | AP-013C builds on this baseline without changing source-cleanup policy |
+| AP-013C / DSDM-005 / ARB-013C | Verified transport cleanup and convergence monitoring | Approved with Conditions — DRY_RUN/NO_DELETE | C03 controlled real OAT remains the blocking runtime condition; productive delete not authorized |
 
 ## 7. Open traceability gaps and conditions
 
@@ -148,7 +153,8 @@
 | ARB-010-C01…C05 | safety evidence aperta | runtime safety non certificata | remediation AP-010 |
 | ARB-011-C01…C07 | analytics evidence aperta | runtime analytics non certificato | remediation AP-011 |
 | ARB-012-C01…C08 | DSOC validation evidence aperta | runtime operations non autorizzate | validation campaign AP-012 |
+| ARB-013C-C03 | controlled real PC/EAGLE/OneDrive OAT non ancora eseguito | cleanup promotion non autorizzabile | eseguire OAT reale non distruttivo con `Deleted=0`, preservare evidence e sottoporre a re-review ARB |
 
 ## 8. Validazione del registro
 
-Il registro verifica la presenza repository degli artefatti AP-012 Sprint 1 e Sprint 2 e della review ARB-012. AP-012 è `Approved with conditions` a livello documentale, 96/100. Non sono certificati command authorization, alarm handling, safety enforcement, idempotency, role assignment, degraded mode, recovery, security, audit integrity o disponibilità runtime. Le condizioni ARB-012-C01…C08 restano obbligatorie prima di qualsiasi abilitazione operativa.
+Il registro include ora AP-013C, DSDM-005 e ARB-013C come artefatti verificati sul branch di lavoro della PR #86. La baseline AP-013B `COPY_ONLY` resta il rollback operativo. I test sintetici e i workflow CI provano il contratto dry-run, ma non sostituiscono il controlled real OAT C03. `CleanupAuthorized=false` e `Deleted=0` restano obbligatori; la cancellazione produttiva non è autorizzata.
