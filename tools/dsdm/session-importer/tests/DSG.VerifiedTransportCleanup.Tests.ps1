@@ -22,15 +22,18 @@ Describe 'AP-013C destination verification ACK' {
         $ack = $transport + '.imported.json'
     }
 
-    It 'creates a destination verified ACK and never deletes scientific files' {
+    It 'creates a destination verified ACK but keeps cleanup authorization blocked' {
         $result = New-DSGDestinationVerificationAck -ReadyManifestPath $ready -DestinationPath $destination -AckPath $ack -VerifiedByHost 'TEST-PC'
         $result.Status | Should -Be 'ACK_CREATED'
         Test-Path -LiteralPath $transport | Should -BeTrue
         Test-Path -LiteralPath $destination | Should -BeTrue
         Test-Path -LiteralPath $ack | Should -BeTrue
-        $evidence = Test-DSGCleanupEvidence -ReadyManifestPath $ready -AckPath $ack
-        $evidence.CleanupEligible | Should -BeTrue
-        $evidence.ReasonCode | Should -Be 'ELIGIBLE_DRY_RUN'
+        $evidence = Test-DSGCleanupEvidence -ReadyManifestPath $ready -AckPath $ack -TransportPath $transport
+        $evidence.TechnicalCandidate | Should -BeTrue
+        $evidence.CleanupEligible | Should -BeFalse
+        $evidence.CleanupAuthorized | Should -BeFalse
+        $evidence.ReasonCode | Should -Be 'TECHNICAL_CANDIDATE_POLICY_BLOCKED'
+        $evidence.PolicyReasonCode | Should -Be 'RETENTION_NOT_APPROVED'
         $evidence.Deleted | Should -Be 0
     }
 
@@ -41,9 +44,19 @@ Describe 'AP-013C destination verification ACK' {
     }
 
     It 'blocks when ACK has not converged' {
-        $evidence = Test-DSGCleanupEvidence -ReadyManifestPath $ready -AckPath $ack
-        $evidence.CleanupEligible | Should -BeFalse
+        $evidence = Test-DSGCleanupEvidence -ReadyManifestPath $ready -AckPath $ack -TransportPath $transport
+        $evidence.TechnicalCandidate | Should -BeFalse
+        $evidence.CleanupAuthorized | Should -BeFalse
         $evidence.ReasonCode | Should -Be 'ACK_MISSING'
+        $evidence.Deleted | Should -Be 0
+    }
+
+    It 'blocks when READY exists but transport payload is missing' {
+        Remove-Item -LiteralPath $transport -Force
+        $evidence = Test-DSGCleanupEvidence -ReadyManifestPath $ready -AckPath $ack -TransportPath $transport
+        $evidence.TechnicalCandidate | Should -BeFalse
+        $evidence.CleanupAuthorized | Should -BeFalse
+        $evidence.ReasonCode | Should -Be 'TRANSPORT_PAYLOAD_MISSING'
         $evidence.Deleted | Should -Be 0
     }
 
@@ -58,8 +71,8 @@ Describe 'AP-013C destination verification ACK' {
         $manifest = Get-Content -LiteralPath $ready -Raw | ConvertFrom-Json
         $manifest.CreatedAtUtc = (Get-Date).AddMinutes(1).ToUniversalTime().ToString('o')
         $manifest | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $ready -Encoding UTF8
-        $evidence = Test-DSGCleanupEvidence -ReadyManifestPath $ready -AckPath $ack
-        $evidence.CleanupEligible | Should -BeFalse
+        $evidence = Test-DSGCleanupEvidence -ReadyManifestPath $ready -AckPath $ack -TransportPath $transport
+        $evidence.TechnicalCandidate | Should -BeFalse
         $evidence.ReasonCode | Should -Be 'ACK_READY_HASH_MISMATCH'
         $evidence.Deleted | Should -Be 0
     }
@@ -69,8 +82,8 @@ Describe 'AP-013C destination verification ACK' {
         $ackObject = Get-Content -LiteralPath $ack -Raw | ConvertFrom-Json
         $ackObject.DestinationSha256 = ('0' * 64)
         $ackObject | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath $ack -Encoding UTF8
-        $evidence = Test-DSGCleanupEvidence -ReadyManifestPath $ready -AckPath $ack
-        $evidence.CleanupEligible | Should -BeFalse
+        $evidence = Test-DSGCleanupEvidence -ReadyManifestPath $ready -AckPath $ack -TransportPath $transport
+        $evidence.TechnicalCandidate | Should -BeFalse
         $evidence.ReasonCode | Should -Be 'DESTINATION_HASH_MISMATCH'
         $evidence.Deleted | Should -Be 0
     }
