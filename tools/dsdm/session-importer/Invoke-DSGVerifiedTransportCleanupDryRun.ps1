@@ -18,20 +18,48 @@ $startedAt = (Get-Date).ToUniversalTime()
 $runRoot = Join-Path $EvidenceRoot ($startedAt.ToString('yyyyMMddTHHmmssZ') + '-' + $runId)
 New-Item -ItemType Directory -Path $runRoot -Force | Out-Null
 
-$results = @()
-$readyFiles = @(Get-ChildItem -LiteralPath $TransportRoot -Filter '*.ready.json' -File -Recurse -ErrorAction Stop)
+# Metadata-only discovery: enumerate names/paths, never read or hash bulk XISF payloads.
+$allFiles = @(Get-ChildItem -LiteralPath $TransportRoot -File -Recurse -ErrorAction Stop)
+$transportFiles = @($allFiles | Where-Object { $_.Name -like '*.xisf' -and $_.Name -notlike '*.dsg-partial*' })
+$readyFiles = @($allFiles | Where-Object { $_.Name -like '*.xisf.ready.json' })
+$ackFiles = @($allFiles | Where-Object { $_.Name -like '*.xisf.imported.json' })
 
-foreach ($readyFile in $readyFiles) {
-    $transportPath = $readyFile.FullName.Substring(0, $readyFile.FullName.Length - '.ready.json'.Length)
+$assetPaths = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+foreach ($file in $transportFiles) { [void]$assetPaths.Add($file.FullName) }
+foreach ($file in $readyFiles) { [void]$assetPaths.Add($file.FullName.Substring(0, $file.FullName.Length - '.ready.json'.Length)) }
+foreach ($file in $ackFiles) { [void]$assetPaths.Add($file.FullName.Substring(0, $file.FullName.Length - '.imported.json'.Length)) }
+
+$results = @()
+foreach ($transportPath in @($assetPaths | Sort-Object)) {
+    $readyPath = $transportPath + '.ready.json'
     $ackPath = $transportPath + '.imported.json'
-    $results += Test-DSGCleanupEvidence -ReadyManifestPath $readyFile.FullName -AckPath $ackPath
+
+    if (-not (Test-Path -LiteralPath $readyPath -PathType Leaf)) {
+        $results += [pscustomobject][ordered]@{
+            FileName = [System.IO.Path]::GetFileName($transportPath)
+            State = 'BLOCKED'
+            TechnicalCandidate = $false
+            CleanupEligible = $false
+            CleanupAuthorized = $false
+            ReasonCode = $(if (Test-Path -LiteralPath $ackPath -PathType Leaf) { 'ORPHAN_ACK_READY_MISSING' } else { 'READY_MISSING' })
+            PolicyReasonCode = 'RETENTION_NOT_APPROVED'
+            TransportPath = $transportPath
+            ReadyManifestPath = $readyPath
+            AckPath = $ackPath
+            Deleted = 0
+        }
+        continue
+    }
+
+    $results += Test-DSGCleanupEvidence -ReadyManifestPath $readyPath -AckPath $ackPath -TransportPath $transportPath
 }
 
-$eligible = @($results | Where-Object { $_.CleanupEligible }).Count
-$blocked = @($results | Where-Object { -not $_.CleanupEligible }).Count
+$technicalCandidates = @($results | Where-Object { $_.TechnicalCandidate }).Count
+$authorized = @($results | Where-Object { $_.CleanupAuthorized }).Count
+$blocked = @($results | Where-Object { -not $_.TechnicalCandidate }).Count
 
 $summary = [pscustomobject][ordered]@{
-    SchemaVersion = '1.0'
+    SchemaVersion = '1.1'
     Component = 'DSG.VerifiedTransportCleanupDryRun'
     Mode = 'DRY_RUN_NO_DELETE'
     RunId = $runId
@@ -39,8 +67,13 @@ $summary = [pscustomobject][ordered]@{
     CompletedAtUtc = (Get-Date).ToUniversalTime().ToString('o')
     Computer = $env:COMPUTERNAME
     TransportRoot = $TransportRoot
+    AssetsObserved = $assetPaths.Count
+    XisfObserved = $transportFiles.Count
     ReadyObserved = $readyFiles.Count
-    CleanupEligible = $eligible
+    AckObserved = $ackFiles.Count
+    TechnicalCandidates = $technicalCandidates
+    CleanupAuthorized = $authorized
+    CleanupEligible = 0
     Blocked = $blocked
     Deleted = 0
 }
