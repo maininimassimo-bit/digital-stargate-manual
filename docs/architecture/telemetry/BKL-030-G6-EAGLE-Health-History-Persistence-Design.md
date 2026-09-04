@@ -4,18 +4,19 @@
 |---|---|
 | Identificativo | `BKL-030-G6` |
 | Capability | BKL-030 — EAGLE Health & Reliability Telemetry |
-| Stato | **Proposed for implementation** |
+| Stato | **Implemented and runtime-validated; independent review pending** |
 | Data | 2026-09-04 |
 | Target host | `EAGLE30154` |
 | Upstream contract | `BKL-030-EAGLE-Health-Projection-Contract.md` |
-| Runtime baseline | G1–G5 accepted |
+| Runtime baseline | G1–G5 accepted; G6-A through G6-D verified |
+| Runtime evidence | `evidence/BKL-030-G6-Runtime-OAT-2026-09-04.md` |
 | Safety Authority | **No** |
 
 ## 1. Objective
 
-G6 adds durable historical persistence downstream of the accepted read-only `DSG.EagleHostHealthCollector` projection. It must preserve host-health evidence over time without changing collector authority, cadence semantics, severity policy or observatory safety behavior.
+G6 adds durable historical persistence downstream of the accepted read-only `DSG.EagleHostHealthCollector` projection. It preserves host-health evidence over time without changing collector authority, cadence semantics, severity policy or observatory safety behavior.
 
-The canonical flow is:
+Canonical flow:
 
 ```text
 DSG.EagleHostHealthCollector
@@ -29,168 +30,127 @@ DSG.EagleHostHealthCollector
 DSG.EagleHealthHistoryWriter
         |
         +--> append-only historical records
-        +--> bounded index / checkpoint metadata
-        +--> evidence for analytics and future reliability views
+        +--> checkpoint metadata
+        +--> cycle evidence
 ```
 
 The history writer is downstream. A failure to persist history must never block or mutate the current realtime projection.
 
 ## 2. Governing invariants
 
-G6 SHALL preserve these rules:
+G6 preserves these rules:
 
-- the collector remains non-elevated and read-only;
-- no remediation, restart, process control, Windows Update action, USB reset or configuration write is introduced;
+- collector remains non-elevated and read-only;
+- no remediation, restart, process control, Windows Update action, USB reset or configuration write;
 - local physical interlocks and Safety Authority remain independent;
-- persisted history must preserve the original signal evidence state, freshness quality, timestamps, source provenance, cadence class, reason and raw value;
-- historical persistence must not manufacture `HEALTHY`, `DEGRADED` or `CRITICAL` when the current contract remains `UNKNOWN/POLICY_NOT_ACTIVATED`;
-- no historical aggregation may replace raw evidence;
-- malformed or partial input is fail-closed and must not overwrite previously persisted valid history;
-- persistence must not increase process priority over N.I.N.A./PHD2 or create overlapping write cycles.
+- persisted history preserves signal evidence state, freshness quality, timestamps, source provenance, cadence class, reason and raw value;
+- history does not manufacture `HEALTHY`, `DEGRADED` or `CRITICAL` while the current summary contract remains `UNKNOWN/POLICY_NOT_ACTIVATED`;
+- historical aggregation does not replace raw evidence;
+- malformed/unavailable input is fail-closed and cannot overwrite previously accepted valid history;
+- writer is non-overlapping;
+- no destructive retention is enabled.
 
-## 3. Source contract
+## 3. Implemented source contract
 
-The only authoritative G6 input is a successfully parsed current projection conforming to the accepted `eagle-health.json` contract.
+The only authoritative G6 input is a successfully parsed projection conforming to `eagle-health.json` schema `1.0` and component `DSG.EagleHostHealthCollector` in `READ_ONLY` mode.
 
-Minimum record provenance:
+The serializer persists per-signal provenance including:
 
 ```text
-schema_version
-observed_at_utc
+history_schema_version
+record_id
 host
-collector/component identity
-projection correlation/run identity when present
-signal id
-cadence_class
-source/provenance
+component
+projection_schema_version
+projection_correlation_id
+projection_observed_at_utc
+signal_id
+signal_state
 quality
+observed_at_utc
+fresh_until_utc
+source
+cadence_class
 reason
-value/raw payload
+data
+retention_deletion_enabled
+historical_records_deleted
 ```
 
-G6 SHALL NOT scrape independent operating-system sources in parallel with the collector. Source discovery and measurement stay in G1–G5.
+G6 does not scrape operating-system sources independently.
 
-## 4. Persistence model
+## 4. Implemented persistence model
 
-### 4.1 Canonical record granularity
+### 4.1 Signal-sample granularity
 
-Persistence is **signal-sample based** rather than whole-file snapshot based. Each accepted current projection is normalized into independent historical signal records.
-
-Logical key:
+Persistence is signal-sample based. Logical identity is derived deterministically from:
 
 ```text
 host + signal_id + observed_at_utc + source identity
 ```
 
-This makes history queryable without requiring the portal or analytics layer to reinterpret old projection files.
+`record_id` is a deterministic SHA-256 identity. Duplicate replay is skipped rather than appended.
 
-### 4.2 Append-only semantics
+### 4.2 Local storage
 
-Historical records are append-only. Existing accepted records are not rewritten because a later sample changes state.
-
-Duplicate ingestion of the same logical sample must be idempotent: it may be recognized and skipped, but it must not create conflicting duplicate facts.
-
-### 4.3 Storage format
-
-Initial implementation SHOULD use a local, line-oriented machine-readable history format under a dedicated Digital StarGate application-data history root. The exact physical format and file rotation implementation may be selected during implementation, provided it satisfies:
-
-- append-only behavior;
-- atomic publication/rotation;
-- bounded recovery after interruption;
-- schema/version field on every persisted record or segment;
-- simple PowerShell 5.1-compatible read/write path;
-- deterministic export to future analytics/warehouse stages;
-- no dependency on network availability for local capture.
-
-G6 does not approve a database engine, external cloud store or network share as a runtime dependency.
-
-## 5. History root and separation
-
-The implementation SHALL use an application-data history location separate from the current projection.
-
-Logical layout:
+Implemented root:
 
 ```text
 %LOCALAPPDATA%\DigitalStarGate\telemetry\history\eagle-health\
     YYYY\
       MM\
-        <history-segment>
-        <history-segment>
+        eagle-health-YYYY-MM.ndjson
     checkpoints\
+      latest.json
     evidence\
+      <cycle-evidence>.json
 ```
 
-The exact segment filename convention is an implementation detail, but it must be deterministic and UTC-based.
+The writer validates NDJSON and uses temporary-file plus replace/move publication for a batch update. Existing malformed history is rejected rather than silently rewritten.
 
-The current projection remains:
+The current projection remains separate at:
 
 ```text
 %LOCALAPPDATA%\DigitalStarGate\telemetry\eagle-health.json
 ```
 
-G6 must never rotate, move or delete that realtime projection.
+## 5. Freshness semantics
 
-## 6. Freshness and historical semantics
+Historical quality is persisted as emitted by the collector at observation time. Historical records are not retroactively rewritten from `CURRENT` to `STALE` merely because time passes.
 
-Historical quality records the quality observed at ingestion time. Later passage of time does not retroactively rewrite an old `CURRENT` historical sample to `STALE`.
+## 6. Retention
 
-Consumers may calculate age relative to query time, but the persisted record must preserve both:
-
-- source/observation timestamp;
-- quality as emitted by the collector at that observation.
-
-This keeps historical truth distinct from current-state freshness.
-
-## 7. Retention
-
-No destructive retention policy is approved in this G6 baseline.
-
-Therefore initial G6 behavior is:
+No destructive retention policy is approved:
 
 ```text
 RetentionDeletionEnabled = False
 HistoricalRecordsDeleted = 0
 ```
 
-Storage growth must be measured during pilot/OAT. A later governed retention policy may define compaction or deletion only after measured capacity evidence and explicit approval.
+The EAGLE pilot verified these values at runtime. AP-013C cleanup authority is not reused.
 
-This is separate from AP-013C transport cleanup and must not reuse AP-013C deletion authority.
+## 7. Failure and recovery model
 
-## 8. Failure model
+Verified behavior includes:
 
-### Input unavailable
+- missing input: fail closed;
+- unsupported schema: fail closed;
+- partial valid signal set: persist only present signals, no synthesis;
+- malformed existing history: reject and preserve it for diagnosis;
+- write failure: do not alter unrelated valid history;
+- duplicate sample: deterministic idempotent skip;
+- concurrent execution: `SKIPPED_NON_OVERLAP` using a named mutex;
+- checkpoint: operational resume metadata only, never a source from which health facts are inferred.
 
-If `eagle-health.json` does not exist, cannot be read, or is invalid, the history writer records operational evidence/logging where possible but appends no synthetic health sample.
+## 8. Workload protection
 
-### Partial/malformed projection
+The writer is bounded and non-overlapping. G6 introduces no process-priority increase and no requirement for N.I.N.A., PHD2 or ASCOM to pause.
 
-Reject the malformed ingestion unit. Preserve previously persisted valid history.
+No permanent Scheduled Task or service was activated by the G6-D OAT. Permanent orchestration remains outside the accepted pilot evidence until separately governed.
 
-### Duplicate sample
+## 9. Observability
 
-Treat as idempotent skip; do not create a second conflicting fact.
-
-### Write failure
-
-Do not truncate or corrupt the active history segment. Use temp/validate/atomic-replace semantics where a replace is required; append paths must have explicit recovery handling.
-
-### Disk pressure
-
-G6 may report persistence failure or capacity evidence but must not invent thresholds or auto-delete history. Automatic cleanup is prohibited in this baseline.
-
-### Restart/crash
-
-After host or process restart, ingestion resumes from persisted checkpoint/history evidence. No historical fact may be inferred solely because a checkpoint advanced.
-
-## 9. Non-overlap and workload protection
-
-The history writer must be bounded and non-overlapping. If a prior history cycle is still active, a new cycle must skip/coalesce rather than accumulate parallel processes.
-
-It must remain lower priority than the imaging workload and must not require N.I.N.A., PHD2 or ASCOM to pause.
-
-## 10. Observability
-
-Each history cycle must expose machine-readable evidence including at least:
+Cycle evidence includes:
 
 ```text
 run_id
@@ -198,101 +158,101 @@ started_at_utc
 completed_at_utc
 host
 input_projection_observed_at_utc
+segment_path
 records_seen
 records_appended
 records_duplicate_skipped
 records_rejected
 write_failures
-historical_records_deleted = 0
+historical_records_deleted
+retention_deletion_enabled
 result
 last_error
 ```
 
-No overall host health severity is inferred from writer success/failure.
+Writer success/failure does not infer overall host-health severity.
 
-## 11. Security and privacy
+## 10. Runtime validation
 
-Persist only evidence already approved in the BKL-030 projection contract. Do not add usernames, secrets, tokens, command lines containing credentials or arbitrary file contents to history unless separately governed.
+Real EAGLE30154 pilot evidence is recorded in `evidence/BKL-030-G6-Runtime-OAT-2026-09-04.md`.
 
-History files inherit local host access controls. G6 introduces no remote write API.
+Verified first write:
 
-## 12. Delivery slices
+```text
+records_seen = 14
+records_appended = 14
+records_duplicate_skipped = 0
+write_failures = 0
+historical_records_deleted = 0
+result = PASS
+```
 
-### G6-A — History contract and serializer
+Measured first segment:
 
-- define versioned historical record schema;
-- normalize current projection to signal records;
-- implement deterministic identity/idempotency;
-- unit tests for schema and malformed input.
+```text
+14 records
+13945 bytes
+```
 
-### G6-B — Local append-only persistence
+Verified identical replay:
 
-- create bounded local history writer;
-- atomic/validated write behavior;
-- checkpoint/recovery semantics;
-- no deletion/retention automation.
+```text
+records_seen = 14
+records_appended = 0
+records_duplicate_skipped = 14
+write_failures = 0
+historical_records_deleted = 0
+result = PASS
+```
 
-### G6-C — CI and failure injection
+Segment remained 14 records / 13,945 bytes.
 
-Validate at minimum:
+## 11. CI validation
 
-- nominal append;
-- duplicate replay;
-- missing input;
-- malformed input;
-- partial signal set;
-- write denied/failure;
-- interrupted write/recovery;
-- non-overlap;
-- schema upgrade rejection/compatibility behavior.
+PR #87 has verified green gates on the G6-C corrected baseline:
 
-### G6-D — EAGLE runtime pilot
+- Genera manuale Word — success;
+- Validate documentation (no deploy) — success;
+- Developer Foundation — success.
 
-On `EAGLE30154` verify:
+CI covers serializer, writer, malformed/missing input, schema rejection, partial signals, corrupted history, write failure, duplicate replay and distinct-execution-context non-overlap.
 
-- history creation from real G5 projection;
-- repeated samples remain idempotent where identical identity is replayed;
-- storage growth is measured;
-- collector realtime projection remains unaffected;
-- no process overlap;
-- N.I.N.A./PHD2 non-interference during an imaging-capable window when practical;
-- `HistoricalRecordsDeleted=0`.
+## 12. Security and safety
 
-### G6-E — Acceptance and handoff
+G6 persists only approved BKL-030 projection evidence and introduces no remote write API, Safety Authority function or remediation path.
 
-Preserve evidence, update backlog/roadmap only from verified runtime outcome, then request independent ARB/release-quality review before declaring G6 complete.
+The runtime pilot kept the production scientific-session import clone on `main` and used an isolated feature worktree.
 
-## 13. Acceptance criteria
+## 13. Acceptance criteria status
 
-G6 is ready for acceptance only when all are true:
+| # | Criterion | Status |
+|---|---|---|
+| 1 | Versioned historical schema traceable to current projection | PASS |
+| 2 | Append-only and duplicate-safe | PASS |
+| 3 | Malformed/unavailable input fails closed | PASS |
+| 4 | Interrupted/corrupt prior history cannot silently replace accepted history | PASS |
+| 5 | History persistence cannot mutate realtime projection | PASS |
+| 6 | Runtime storage overhead measured on EAGLE30154 | PASS — initial pilot baseline |
+| 7 | Non-overlap demonstrated | PASS |
+| 8 | No automated remediation/deletion | PASS |
+| 9 | `HistoricalRecordsDeleted=0` in CI/runtime | PASS |
+| 10 | CI/documentation gates green | PASS |
+| 11 | Independent review before final closure | PENDING |
 
-1. historical schema is versioned and traceable to BKL-030 current projection;
-2. persistence is append-only and duplicate-safe;
-3. malformed/unavailable input fails closed;
-4. interruption cannot corrupt previously accepted history;
-5. history persistence failure cannot block or mutate realtime telemetry;
-6. runtime storage overhead is measured on EAGLE30154;
-7. non-overlap is demonstrated;
-8. no automated remediation or deletion exists;
-9. `HistoricalRecordsDeleted=0` is demonstrated in CI and runtime evidence;
-10. CI and documentation gates are green;
-11. independent review is completed before final closure.
+## 14. Out of scope / deferred
 
-## 14. Out of scope
-
-G6 does not include:
-
-- portal charts or UX (G7);
-- overall health scoring or severity thresholds;
-- anomaly/trend detection (future BKL-038/BKL-036);
-- MTBF/MTTR/SLO calculations (BKL-043);
+- portal charts/UX — G7;
+- host-health severity thresholds;
+- anomaly/trend detection — future BKL-038/BKL-036;
+- MTBF/MTTR/SLO — BKL-043;
 - configuration-drift baseline approval;
 - automatic retention deletion;
 - Safety Authority integration;
-- remote remediation.
+- remote remediation;
+- permanent writer scheduling/service activation.
 
 ## 15. Disposition
 
-**G6 architecture is ready to enter implementation through slices G6-A to G6-E.**
+**G6-A through G6-D are implemented and verified. G6-E is active.**
 
-The next implementation step is G6-A: versioned historical record schema and serializer derived only from the accepted `eagle-health.json` projection contract.
+The package is ready for independent Architecture Review Board and release-quality review. BKL-030 G6 must not be declared complete until those independent reviews are recorded and any blocking findings are resolved.
