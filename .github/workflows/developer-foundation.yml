@@ -56,116 +56,89 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
         with:
           global-json-file: global.json
           cache: true
           cache-dependency-path: Directory.Packages.props
-
       - name: Restore
         run: dotnet restore DigitalStarGate.sln
-
       - name: Build
         run: dotnet build DigitalStarGate.sln --configuration Release --no-restore
-
       - name: Test
         run: dotnet test DigitalStarGate.sln --configuration Release --no-build
-
       - name: Verify formatting
         run: dotnet format DigitalStarGate.sln --verify-no-changes --no-restore
-
       - name: Test CloudWatcher telemetry adapter
         shell: pwsh
         run: ./.github/scripts/test-cloudwatcher-telemetry-adapter.ps1
-
       - name: Test EAGLE host health collector contract
         shell: pwsh
         run: ./.github/scripts/test-eagle-host-health-collector.ps1
-
       - name: Test EAGLE health history serializer
         shell: pwsh
         run: ./.github/scripts/test-eagle-health-history-serializer.ps1
-
       - name: Test EAGLE health history writer
         shell: pwsh
         run: ./.github/scripts/test-eagle-health-history-writer.ps1
-
       - name: Test EAGLE health history failure injection
         shell: pwsh
         run: ./.github/scripts/test-eagle-health-history-failure-injection.ps1
-
+      - name: Test EAGLE health portal projection
+        shell: pwsh
+        run: ./.github/scripts/test-eagle-health-portal-projection.ps1
       - name: Test session promotion fail-safe contract
         shell: pwsh
         run: ./.github/scripts/test-session-promotion.ps1
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-
       - name: Verify generated roadmap
         shell: bash
         run: |
           node .github/scripts/generate-roadmap.mjs --print | jq --sort-keys . > /tmp/roadmap-generated.json
           jq --sort-keys . docs/data/roadmap.json > /tmp/roadmap-committed.json
           diff --unified /tmp/roadmap-committed.json /tmp/roadmap-generated.json
-
       - name: Verify AMP-002 / roadmap / backlog consistency
         run: node .github/scripts/verify-roadmap-consistency.mjs
-
       - name: Verify scientific observation index
         run: node .github/scripts/generate-scientific-catalog.mjs --check
-
       - name: Test scientific PHD2 guiding parser
         run: node --test .github/scripts/test-phd2-guiding.mjs
-
       - name: Verify scientific session catalog
         run: node .github/scripts/generate-scientific-session-catalog.mjs --check
-
       - name: Test Enterprise Plugin SDK
         run: node --test .github/scripts/test-plugin-sdk.mjs
-
       - name: Test Enterprise Search Center
         run: node --test .github/scripts/test-search-center.mjs
-
       - name: Test PixInsight Manifest Contract
         run: node --test .github/scripts/test-pixinsight-manifest.mjs
-
       - name: Test PixInsight Synchronization Ledger
         run: node --test .github/scripts/test-pixinsight-ledger.mjs
-
       - name: Test PixInsight Read-Only Reconciliation
         run: node --test .github/scripts/test-pixinsight-reconciliation.mjs
-
       - name: Test PixInsight Processing Projection
         run: node --test .github/scripts/test-pixinsight-processing-projection.mjs
-
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.13"
           cache: pip
-
       - name: Install documentation and report dependencies
         run: |
           python -m pip install --requirement requirements.txt
           python -m pip install --disable-pip-version-check reportlab
-
       - name: Test canonical scientific session evidence
         run: python dsg-analytics/tests/test_scientific_session_evidence.py
-
       - name: Test homepage datetime normalization
         run: python dsg-analytics/tests/test_homepage_datetime_normalization.py
-
       - name: Test real-session scientific E2E projections
         shell: bash
         run: bash ./.github/scripts/test-scientific-session-e2e.sh
-
       - name: Test real-session downstream idempotency
         shell: bash
         run: bash ./.github/scripts/test-real-session-idempotency.sh 2026-08-15_2026-08-16
-
       - name: Verify MkDocs
         run: mkdocs build --strict
