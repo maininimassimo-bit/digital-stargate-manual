@@ -3,9 +3,9 @@
   "updatedAt":"2026-09-04",
   "authority":"DSG-RGM-001",
   "projectStatus":"Attivo",
-  "currentPackage":"AP-013C",
-  "nextMilestone":"BKL-047 AP-013C real dry-run OAT and ARB condition closure",
-  "target":"Complete AP-013C verified transport cleanup in DRY_RUN/NO_DELETE mode, then resume BKL-030 G6 history/persistence before the Knowledge Graph foundation",
+  "currentPackage":"BKL-030",
+  "nextMilestone":"BKL-030 G6 EAGLE health history and persistence",
+  "target":"Resume BKL-030 G6 history/persistence after accepted AP-013C DRY_RUN/NO_DELETE checkpoint, then proceed toward the Knowledge Graph foundation",
   "streams":[
     {"id":"rc2-enterprise-portal","title":"RC2 Enterprise Portal","items":[
       {"id":"WP-01","title":"Enterprise Foundation Framework","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-01-Enterprise-Foundation-Framework-Completion-Report.md"},
@@ -30,14 +30,14 @@
       {"id":"AP-011","title":"Enterprise Analytics Platform Architecture","status":"completed"},
       {"id":"AP-012","title":"Enterprise Operations Center Architecture","status":"completed"},
       {"id":"AP-013","title":"Scientific Image Repository Architecture","statusSource":"evidence-manifest","evidencePath":".github/roadmap/evidence/AP-013.evidence.json"},
-      {"id":"AP-013C","title":"Verified Transport Cleanup and Convergence Monitoring","status":"active","note":"DRY_RUN/NO_DELETE only; ARB-013C approved with conditions; real OAT remains open."},
+      {"id":"AP-013C","title":"Verified Transport Cleanup and Convergence Monitoring","status":"completed","note":"DRY_RUN/NO_DELETE increment accepted; real OAT and ARB-013C-R1 complete; C8 productive cleanup excluded and not authorized."},
       {"id":"AP-014","title":"Scientific Observation Catalog and Search","statusSource":"evidence-manifest","evidencePath":".github/roadmap/evidence/AP-014.evidence.json"},
       {"id":"AP-015","title":"Scientific Knowledge Platform Architecture","status":"planned","note":"CAP-40 after approved intelligence foundations."}
     ]},
     {"id":"observatory-intelligence","title":"Observatory Intelligence & Scientific Processing Roadmap","items":[
       {"id":"BKL-029","title":"SQM Sky Quality Telemetry & Scientific History","status":"completed","note":"Closed via PR #68; merge 0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441."},
-      {"id":"BKL-030","title":"EAGLE Health & Reliability Telemetry","status":"active","note":"G1-G5 complete; G6 history/persistence resumes after AP-013C governed checkpoint."},
-      {"id":"BKL-047","title":"AP-013C Verified Transport Cleanup & Convergence Monitoring","status":"active","note":"Architecture, ACK integration and synthetic failure injection implemented; ARB remediation in progress; productive delete not authorized."},
+      {"id":"BKL-030","title":"EAGLE Health & Reliability Telemetry","status":"active","note":"G1-G5 complete; G6 history/persistence resumes after accepted AP-013C no-delete checkpoint."},
+      {"id":"BKL-047","title":"AP-013C Verified Transport Cleanup & Convergence Monitoring","status":"completed","note":"DRY_RUN/NO_DELETE accepted with real PC/EAGLE/OneDrive OAT and ARB-013C-R1; productive cleanup C8 not authorized."},
       {"id":"BKL-044","title":"Knowledge Graph / AI Evidence Contract","status":"planned"},
       {"id":"BKL-035","title":"Target Knowledge Base","status":"planned"},
       {"id":"BKL-040","title":"Night Timeline / Observatory Replay","status":"planned"},
@@ -68,8 +68,8 @@
     {"id":"M-AP013","itemRef":"AP-013","title":"AP-013 Scientific Image Repository","date":"2026-08-11","description":"Accepted with conditions.","image":null},
     {"id":"M-AP014-W07","itemRef":"AP-014","title":"AP14-W07 Operational Acceptance","date":"2026-08-15","description":"Accepted.","image":null},
     {"id":"M-SQM","itemRef":"BKL-029","title":"SQM realtime and scientific history","date":"2026-09-01","description":"Closed after accepted realtime, historical provenance, CI/ARB and runtime OAT; PR #68 merged.","image":null},
-    {"id":"M-EAGLE-HEALTH","itemRef":"BKL-030","title":"EAGLE Health & Reliability G1-G5","date":"2026-09-03","description":"G1-G5 complete; G6 deferred until AP-013C checkpoint.","image":null},
-    {"id":"M-AP013C","itemRef":"BKL-047","title":"AP-013C Verified Transport Cleanup dry-run","date":"2026-09-04","description":"Active DRY_RUN/NO_DELETE package; ARB conditions under remediation; real OAT next.","image":null},
+    {"id":"M-EAGLE-HEALTH","itemRef":"BKL-030","title":"EAGLE Health & Reliability G1-G5","date":"2026-09-03","description":"G1-G5 complete; G6 resumes after AP-013C checkpoint.","image":null},
+    {"id":"M-AP013C","itemRef":"BKL-047","title":"AP-013C Verified Transport Cleanup dry-run","date":"2026-09-04","description":"DRY_RUN/NO_DELETE accepted after real PC/EAGLE/OneDrive OAT and ARB re-review; C8 productive cleanup remains NO-GO.","image":null},
     {"id":"M-PIXINSIGHT","itemRef":"BKL-045","title":"PixInsight Workflow Provenance","date":"2026-08-30","description":"Approved future processing provenance capability.","image":null},
     {"id":"M-PIXINSIGHT-AI","itemRef":"BKL-046","title":"AI-assisted PixInsight Processing","date":"2026-08-30","description":"Approved advisory AI capability after provenance foundation.","image":null}
   ]
