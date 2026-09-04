@@ -30,6 +30,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with: { node-version: "22" }
+      - { name: Test EAGLE health portal browser failure injection, run: node --test .github/scripts/test-eagle-health-portal-failure-injection.mjs }
       - name: Verify generated roadmap
         shell: bash
         run: |
