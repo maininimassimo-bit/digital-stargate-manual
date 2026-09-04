@@ -2,107 +2,132 @@
 
 | Campo | Valore |
 |---|---|
-| Stato | Active technical delta baseline |
-| Scope | Reporting 1.0.8, BKL-030 G1–G5, raw transport AP-013B recovery, AP-013C preparation |
-| Supersedes | `CURRENT_TECHNICAL_BASELINE_2026-09-03.md` per lo stato operativo corrente |
-| Does not supersede | Principi, boundary, ADR, Architecture Package, OAT storiche o decisioni approvate |
+| Stato | Active technical baseline after BKL-030 closure |
+| Scope | Reporting 1.0.8, AP-013 transport baseline, BKL-030 G1-G8, Cloud Run EAGLE Health, operational EAGLE publisher |
+| BKL-030 closure merge | `eeba3372d8d788322f52553091f8d63cef5f9e68` |
+| Next governed capability | BKL-015 Knowledge Graph machine-readable foundation |
+| Does not supersede | ADR, Architecture Package, OAT storiche o decisioni approvate |
 
 ## 1. Finalità
 
-Questa baseline registra lo stato tecnico verificato al 04/09/2026. Le baseline precedenti restano fotografie storiche valide.
+Questa baseline registra lo stato tecnico verificato al termine di BKL-030 e costituisce il punto di partenza per BKL-015. Le baseline precedenti restano fotografie storiche valide.
 
-## 2. Reporting e scientific session producer
+## 2. Runtime scientifico EAGLE
 
-`DigitalStarGate.Reporting 1.0.8` resta la baseline runtime EAGLE. Restano validi il contratto PowerShell 5.1, exact evidence selection NINA/PHD2 e SQM packaging descritti nella baseline del 03/09.
+`DigitalStarGate.Reporting 1.0.8` resta la baseline runtime scientifica EAGLE.
 
-La sessione `2026-09-03_2026-09-04` è stata promossa e le analytics sono state aggiornate su `main`; HEAD verificato prima del package: `ffc2e2cc719336ea6e4134884017a94f811ce08f`.
+Runtime repository operativo:
 
-Il launcher restore-to-main su eccezione resta un hardening separato già tracciato; non è modificato da questo package.
+`C:\DigitalStarGate\digital-stargate-manual-ap14-runtime`
 
-## 3. BKL-030 current state
+Il runtime deve rimanere sul branch `main`, con working tree pulito. Prima di session import o modifiche operative verificare `HEAD == origin/main`. Worktree feature/OAT devono restare separati.
 
-BKL-030 EAGLE Health & Reliability è `In Progress`, G1–G5 complete. Il G5 Runtime OAT ha verificato collector read-only e projection per FAST, MEDIUM e SLOW_ON_CHANGE. Event Log empty-window è stato corretto e verificato `OBSERVED/CURRENT` con array eventi vuoto.
+Questo vincolo è operativo: spostare il runtime principale su un branch feature può compromettere l'importazione automatica della sessione successiva.
 
-Evidence operativa rilevante:
+## 3. BKL-030 final state
 
-- C: osservato a 672,124,928 byte liberi / 0.301% durante G5;
-- nessuna severity numerica derivata perché non esiste threshold approvato;
-- Windows Time osservato `Stopped`;
-- `PendingFileRenameOperations` presente;
-- configuration drift `UNKNOWN/BASELINE_NOT_APPROVED`;
-- SMART dettagliato non verificato nel contesto non-elevated.
+BKL-030 EAGLE Health & Reliability Telemetry è **CLOSED / ACCEPTED**, G1-G8 completati.
 
-Next BKL-030 gate: G6 history/persistence.
+Baseline funzionale finale:
 
-## 4. Raw image transport baseline
+- collector host read-only;
+- projection corrente atomica;
+- history G6 append-only, duplicate-safe, senza retention distruttiva;
+- public projection G7 filtrata;
+- relay Cloud Run con canale separato `/v1/eagle-health`;
+- portal `Observatory Status` consumer read-only;
+- publisher EAGLE schedulato ogni minuto;
+- G8 Safety Review approvata con boundary invariati.
 
-La baseline raw transport resta AP-013B in modalità `COPY_ONLY`:
+Non esiste health severity policy approvata: `summary.state=UNKNOWN`, `summary.reason=POLICY_NOT_ACTIVATED`.
+
+## 4. Scheduled Task EAGLE Health
+
+Task operativo:
+
+`DigitalStarGate-EagleHealthTelemetry`
+
+Configurazione verificata:
+
+- account `PrimaLuceLab`;
+- S4U / Highest;
+- ripetizione 1 minuto;
+- `MultipleInstances=IgnoreNew`;
+- execution wrapper `scripts/telemetry/Invoke-EagleHealthTelemetryPublish.ps1`;
+- runtime repository `C:\DigitalStarGate\digital-stargate-manual-ap14-runtime`;
+- DPAPI LocalMachine secret `C:\DigitalStarGate\TelemetryRuntime\secrets\ingest-token.dpapi`.
+
+La projection pubblicata è stata osservata `CURRENT`, host `EAGLE30154`, `signals_published=5`, `automatic_remediation=false`, `safety_authority=OUTSIDE_SCOPE`.
+
+## 5. Cloud Run / portal baseline
+
+Service: `dsg-observatory-status-relay`, region `europe-west1`, project `digital-stargate-telemetry`.
+
+Production revision verificata: `dsg-observatory-status-relay-00005-rof`.
+
+Canali:
+
+- `/v1/observatory-status` — contratto esistente;
+- `/v1/eagle-health` — EAGLE Health.
+
+Il browser non contiene ingest credential. L'outage cloud deve produrre evidence unavailable/stale senza influenzare N.I.N.A., Safety Authority o apparati.
+
+## 6. Raw image transport baseline
+
+AP-013B resta la baseline rollback `COPY_ONLY`:
 
 `EAGLE raw -> OneDrive transport XISF + READY -> PC OneDrive -> DSG OneDrive Import -> F:\Astrofotografia`
 
-Nella baseline corrente non è autorizzata la cancellazione automatica di source EAGLE o transport artifacts come effetto dell'import. AP-013B resta il rollback comportamentale durante l'evoluzione successiva.
+AP-013C ha introdotto il percorso governato DRY_RUN/NO_DELETE e convergence/eligibility evidence senza autorizzare cancellazione produttiva.
 
-## 5. OneDrive incident/recovery 04/09
+Restano invarianti:
 
-È stato osservato un disallineamento del transport dopo gestione Files On-Demand sul lato EAGLE:
+- source cleanup produttivo non autorizzato;
+- transport cleanup produttivo non autorizzato salvo decisione separata;
+- evidence incompleta/UNKNOWN => no-delete;
+- `F:\Astrofotografia` non è cleanup target;
+- ACK prova import verificato ma non autorizza da solo la cancellazione source.
 
-- EAGLE: 445 XISF / 445 READY;
-- PC inizialmente: 426 XISF / 426 READY;
-- gap: 19 coppie, M 27 `0123–0141`.
+## 7. Evidence EAGLE Health
 
-L'importer PC non aveva failure: i manifest non ancora convergenti non erano visibili al consumer. Restart semplice del client EAGLE non ha risolto. Dopo reset controllato dello stato OneDrive e verifica dell'account `Business1`, il PC ha raggiunto 445/445 e il probe di sincronizzazione è diventato visibile.
+I segnali CPU, memory, storage, uptime e time sync sono evidence. Non devono essere trasformati in severity senza policy approvata.
 
-La verifica finale su `F:\Astrofotografia` ha confermato tutti i 19 XISF `0123–0141`. L'evidence importer successiva ha osservato 445 READY, tutti già importati, con zero failure e zero cancellazioni.
+Storage C: ha mostrato capacità libera molto bassa durante le prove; il dato è operativo ma non equivale a CRITICAL nella baseline corrente.
 
-## 6. Conseguenza architetturale
+Windows Time è stato osservato `Stopped`; nessuna remediation automatica è autorizzata.
 
-La recovery dimostra che `file prodotto su EAGLE`, `file presente nel transport locale`, `file convergente nel cloud/PC` e `file verificato nella destinazione finale` sono stati distinti nella pratica e non devono essere collassati in un singolo stato.
+## 8. Safety / security
 
-Per questo AP-013C deve introdurre un lifecycle/evidence contract end-to-end prima di autorizzare cleanup automatico.
+- Safety Authority fisica/locale indipendente;
+- health e portal non sono Safety Authority;
+- nessun command endpoint;
+- nessuna automatic remediation;
+- token ingest solo server-side/publisher e protetto DPAPI sul runtime EAGLE;
+- browser senza token;
+- stale/missing/malformed evidence fail-closed;
+- Cloud Run non entra nel path di controllo fisico.
 
-## 7. AP-013C design baseline
+## 9. Repository / governance baseline
 
-AP-013C è approvato per progettazione, non ancora per cancellazione produttiva.
+BKL-030 G7 merge: `a15d85b27ebfbe8a6488330920d10dda8db79a78`.
 
-Obiettivi:
+BKL-030 G8/closure merge: `eeba3372d8d788322f52553091f8d63cef5f9e68`.
 
-- ridurre crescita del disco C: EAGLE;
-- preservare data integrity e recoverability;
-- rendere osservabile la convergenza end-to-end;
-- rendere la cancellazione fail-closed, idempotente e auditabile.
+La roadmap governance dopo la closure indica BKL-015 come package successivo. Prima dell'avvio BKL-015 devono essere verdi i workflow dell'aggiornamento handover corrente.
 
-Stati logici minimi da modellare nella progettazione:
+## 10. Continuity
 
-`PRODUCED -> TRANSPORT_READY -> CONVERGED/OBSERVED -> DESTINATION_VERIFIED -> CLEANUP_ELIGIBLE -> CLEANED`
+Documenti da leggere all'avvio di una nuova sessione:
 
-I nomi finali e la macchina a stati devono essere formalizzati nell'Architecture Package; non sono ancora un contratto implementativo approvato.
+1. `AI_BOOTSTRAP.md`;
+2. `docs/project/HANDOVER_2026-09-04.md`;
+3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-04.md`;
+4. `docs/project/BACKLOG.md`;
+5. `.github/roadmap/roadmap-source.json`;
+6. review/evidence del package direttamente interessato.
 
-## 8. Cleanup guardrails
+## 11. Next gate — BKL-015
 
-Un file non può essere cancellato dalla source EAGLE per il solo fatto di essere stato esportato nel transport. L'eleggibilità richiede evidence verificabile della destinazione prevista e coerenza con il relativo READY/provenance.
+Il prossimo package governato è **BKL-015 Knowledge Graph machine-readable foundation**.
 
-Retention interval, timeout, retry, hash policy, manifest retention, cleanup del transport OneDrive e ordine source-vs-transport sono decisioni ancora aperte da formalizzare in AP-013C.
-
-## 9. Files On-Demand
-
-Files On-Demand resta una funzione di gestione storage del client OneDrive e non costituisce il lifecycle applicativo Digital StarGate. Non usare indiscriminatamente `Always keep on this device` sul transport EAGLE: il capacity risk osservato richiede che la soluzione riduca, non aumenti, la pressione sul disco C:.
-
-## 10. Safety boundary
-
-Invariati:
-
-- local physical Safety Authority indipendente;
-- transport, cleanup, telemetry, health e AI non sono Safety Authority;
-- nessun cleanup deve interferire con NINA/acquisizione attiva o con file ancora in produzione;
-- in caso di evidence incompleta/UNKNOWN il comportamento di cleanup è no-delete.
-
-## 11. Continuity
-
-Documenti correnti:
-
-- `docs/project/HANDOVER_2026-09-04.md`;
-- `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-04.md`;
-- `docs/project/BACKLOG.md`;
-- AP-013B e relativa evidence storica per il contratto COPY_ONLY.
-
-Prossimo lavoro: formalizzazione AP-013C prima dell'implementazione della cancellazione; BKL-030 G6 resta il successivo gate della capability Health & Reliability.
+Il design dovrà partire da repository truth e preservare i boundary esistenti: Knowledge Graph e AI sono consumer/derivazioni di evidence governata, non Safety Authority e non command/remediation path. Observation, inference e recommendation devono restare distinguibili e tracciabili.
