@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "component": "DSG.RepositoryKnowledgeGraph",
+  "authority": "projection",
+  "generated_at_utc": "2026-09-04T00:00:00Z",
+  "entities": [
+    {
+      "id": "BKL-015",
+      "type": "backlog_item",
+      "title": "Implementare repository Knowledge Graph machine-readable",
+      "status": "In Progress",
+      "authority": "repository_authority",
+      "source_locator": { "path": "docs/project/BACKLOG.md" }
+    },
+    {
+      "id": "BKL-044",
+      "type": "backlog_item",
+      "title": "Knowledge Graph / AI Evidence Contract",
+      "status": "Planned",
+      "authority": "repository_authority",
+      "source_locator": { "path": "docs/project/BACKLOG.md" }
+    },
+    {
+      "id": "TD-008",
+      "type": "technical_debt",
+      "title": "Knowledge Traceability",
+      "status": "Accepted",
+      "authority": "repository_authority",
+      "source_locator": { "path": "docs/project/TECHNICAL_DEBT.md" }
+    },
+    {
+      "id": "CAP-40",
+      "type": "capability",
+      "title": "Scientific Knowledge Layer",
+      "status": "Planned",
+      "authority": "repository_authority",
+      "source_locator": { "path": "docs/architecture/scientific-knowledge-layer-vision.md" }
+    },
+    {
+      "id": "AP-015",
+      "type": "architecture_package",
+      "title": "Scientific Knowledge Platform Architecture",
+      "status": "Planned",
+      "authority": "repository_authority",
+      "source_locator": { "path": "docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md" }
+    },
+    {
+      "id": "BKL-015-F1",
+      "type": "component",
+      "title": "Knowledge Graph Machine-Readable Foundation Contract",
+      "status": "Proposed",
+      "authority": "repository_authority",
+      "source_locator": { "path": "docs/architecture/knowledge/BKL-015-Knowledge-Graph-Machine-Readable-Foundation.md" }
+    }
+  ],
+  "relations": [
+    {
+      "id": "rel:BKL-015:addresses:TD-008",
+      "type": "addresses",
+      "from": "BKL-015",
+      "to": "TD-008",
+      "version": "1.0",
+      "source_locator": { "path": "docs/project/BACKLOG.md" }
+    },
+    {
+      "id": "rel:BKL-044:depends_on:BKL-015",
+      "type": "depends_on",
+      "from": "BKL-044",
+      "to": "BKL-015",
+      "version": "1.0",
+      "source_locator": { "path": "docs/project/BACKLOG.md" }
+    },
+    {
+      "id": "rel:BKL-015:implements:BKL-015-F1",
+      "type": "implements",
+      "from": "BKL-015",
+      "to": "BKL-015-F1",
+      "version": "1.0",
+      "source_locator": { "path": "docs/architecture/knowledge/BKL-015-Knowledge-Graph-Machine-Readable-Foundation.md" }
+    },
+    {
+      "id": "rel:AP-015:implements:CAP-40",
+      "type": "implements",
+      "from": "AP-015",
+      "to": "CAP-40",
+      "version": "1.0",
+      "source_locator": { "path": "docs/architecture/scientific-knowledge-layer-vision.md" }
+    },
+    {
+      "id": "rel:AP-015:depends_on:BKL-015",
+      "type": "depends_on",
+      "from": "AP-015",
+      "to": "BKL-015",
+      "version": "1.0",
+      "source_locator": { "path": "docs/project/BACKLOG.md" }
+    }
+  ]
+}
