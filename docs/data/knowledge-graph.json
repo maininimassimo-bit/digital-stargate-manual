@@ -2,97 +2,45 @@
   "schema_version": "1.0",
   "component": "DSG.RepositoryKnowledgeGraph",
   "authority": "projection",
-  "generated_at_utc": "2026-09-04T00:00:00Z",
+  "generated_at_utc": "2026-09-05T00:00:00Z",
   "entities": [
-    {
-      "id": "BKL-015",
-      "type": "backlog_item",
-      "title": "Implementare repository Knowledge Graph machine-readable",
-      "status": "In Progress",
-      "authority": "repository_authority",
-      "source_locator": { "path": "docs/project/BACKLOG.md" }
-    },
-    {
-      "id": "BKL-044",
-      "type": "backlog_item",
-      "title": "Knowledge Graph / AI Evidence Contract",
-      "status": "Planned",
-      "authority": "repository_authority",
-      "source_locator": { "path": "docs/project/BACKLOG.md" }
-    },
-    {
-      "id": "TD-008",
-      "type": "technical_debt",
-      "title": "Knowledge Traceability",
-      "status": "Accepted",
-      "authority": "repository_authority",
-      "source_locator": { "path": "docs/project/TECHNICAL_DEBT.md" }
-    },
-    {
-      "id": "CAP-40",
-      "type": "capability",
-      "title": "Scientific Knowledge Layer",
-      "status": "Planned",
-      "authority": "repository_authority",
-      "source_locator": { "path": "docs/architecture/scientific-knowledge-layer-vision.md" }
-    },
-    {
-      "id": "AP-015",
-      "type": "architecture_package",
-      "title": "Scientific Knowledge Platform Architecture",
-      "status": "Planned",
-      "authority": "repository_authority",
-      "source_locator": { "path": "docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md" }
-    },
-    {
-      "id": "BKL-015-F1",
-      "type": "component",
-      "title": "Knowledge Graph Machine-Readable Foundation Contract",
-      "status": "Proposed",
-      "authority": "repository_authority",
-      "source_locator": { "path": "docs/architecture/knowledge/BKL-015-Knowledge-Graph-Machine-Readable-Foundation.md" }
-    }
+    {"id":"AP-001","type":"architecture_package","title":"Enterprise Metamodel and Repository Information Architecture","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
+    {"id":"AP-002","type":"architecture_package","title":"Enterprise Data Governance","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
+    {"id":"AP-003","type":"architecture_package","title":"Observatory Automation Architecture","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
+    {"id":"AP-004","type":"architecture_package","title":"Enterprise Telemetry and Observability Architecture","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
+    {"id":"AP-005","type":"architecture_package","title":"Identity, Access and Remote Operations Security","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
+    {"id":"AP-006","type":"architecture_package","title":"Enterprise Configuration and Asset Management","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
+    {"id":"AP-007","type":"architecture_package","title":"Enterprise Operations and Service Management Architecture","status":"active","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
+    {"id":"AP-008","type":"architecture_package","title":"Enterprise Integration Architecture","status":"active","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
+    {"id":"AP-009","type":"architecture_package","title":"Enterprise Infrastructure Architecture","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
+    {"id":"AP-010","type":"architecture_package","title":"Enterprise Safety Assurance Architecture","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
+    {"id":"AP-011","type":"architecture_package","title":"Enterprise Analytics Platform Architecture","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
+    {"id":"AP-012","type":"architecture_package","title":"Enterprise Operations Center Architecture","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
+    {"id":"AP-013","type":"architecture_package","title":"Scientific Image Repository Architecture","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
+    {"id":"AP-014","type":"architecture_package","title":"Scientific Observation Catalog and Search","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
+    {"id":"AP-015","type":"architecture_package","title":"Scientific Knowledge Platform Architecture","status":"planned","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
+    {"id":"ADR-001","type":"adr","title":"Session Layer","status":"Accepted","authority":"repository_authority","source_locator":{"path":"docs/architecture/ADR-001-Session-Layer.md"}},
+    {"id":"ADR-002","type":"adr","title":"Analytics Quality Gates","status":"Accepted","authority":"repository_authority","source_locator":{"path":"docs/architecture/ADR-002-Analytics-Quality-Gates.md"}},
+    {"id":"ADR-003","type":"adr","title":"Warehouse Engine","status":"Accepted","authority":"repository_authority","source_locator":{"path":"docs/architecture/ADR-003-Warehouse-Engine.md"}},
+    {"id":"ADR-004","type":"adr","title":"Operational Architecture","status":"Accepted","authority":"repository_authority","source_locator":{"path":"docs/architecture/assessments/ADR-004-Operational-Architecture.md"}},
+    {"id":"ADR-005","type":"adr","title":"Weather Safety Interlock fail-safe","status":"Proposed","authority":"repository_authority","source_locator":{"path":"docs/architecture/ADR-005-Weather-Safety-Interlock.md"}},
+    {"id":"ADR-006","type":"adr","title":"Enterprise Plugin SDK","status":"Accepted","authority":"repository_authority","source_locator":{"path":"docs/architecture/ADR-006-Enterprise-Plugin-SDK.md"}},
+    {"id":"ADR-007","type":"adr","title":"SQM Instrument Source Strategy","status":"Proposed","authority":"repository_authority","source_locator":{"path":"docs/architecture/ADR-007-SQM-Instrument-Source-Strategy.md"}},
+    {"id":"BKL-015","type":"backlog_item","title":"Implementare repository Knowledge Graph machine-readable","status":"In Progress","authority":"repository_authority","source_locator":{"path":"docs/project/BACKLOG.md"}},
+    {"id":"BKL-044","type":"backlog_item","title":"Knowledge Graph / AI Evidence Contract","status":"Planned","authority":"repository_authority","source_locator":{"path":"docs/project/BACKLOG.md"}},
+    {"id":"TD-008","type":"technical_debt","title":"Knowledge Traceability","status":"Accepted","authority":"repository_authority","source_locator":{"path":"docs/project/TECHNICAL_DEBT.md"}},
+    {"id":"CAP-40","type":"capability","title":"Scientific Knowledge Layer","status":"Planned","authority":"repository_authority","source_locator":{"path":"docs/architecture/scientific-knowledge-layer-vision.md"}},
+    {"id":"BKL-015-F1","type":"component","title":"Knowledge Graph Machine-Readable Foundation Contract","status":"Accepted","authority":"repository_authority","source_locator":{"path":"docs/architecture/knowledge/BKL-015-Knowledge-Graph-Machine-Readable-Foundation.md"}},
+    {"id":"BKL-015-F1-ARB","type":"evidence","title":"BKL-015 F1 Independent Architecture Review","status":"Approved with Conditions","authority":"evidence_authority","source_locator":{"path":"docs/architecture/reviews/ARB-BKL-015-F1-Independent-Review-2026-09-04.md"}},
+    {"id":"BKL-015-F1-RQ","type":"evidence","title":"BKL-015 F1 Release Quality Review","status":"Conditionally Ready","authority":"evidence_authority","source_locator":{"path":"docs/architecture/reviews/RQ-BKL-015-F1-Release-Quality-Review-2026-09-04.md"}}
   ],
   "relations": [
-    {
-      "id": "rel:BKL-015:addresses:TD-008",
-      "type": "addresses",
-      "from": "BKL-015",
-      "to": "TD-008",
-      "version": "1.0",
-      "source_locator": { "path": "docs/project/BACKLOG.md" }
-    },
-    {
-      "id": "rel:BKL-044:depends_on:BKL-015",
-      "type": "depends_on",
-      "from": "BKL-044",
-      "to": "BKL-015",
-      "version": "1.0",
-      "source_locator": { "path": "docs/project/BACKLOG.md" }
-    },
-    {
-      "id": "rel:BKL-015:implements:BKL-015-F1",
-      "type": "implements",
-      "from": "BKL-015",
-      "to": "BKL-015-F1",
-      "version": "1.0",
-      "source_locator": { "path": "docs/architecture/knowledge/BKL-015-Knowledge-Graph-Machine-Readable-Foundation.md" }
-    },
-    {
-      "id": "rel:AP-015:implements:CAP-40",
-      "type": "implements",
-      "from": "AP-015",
-      "to": "CAP-40",
-      "version": "1.0",
-      "source_locator": { "path": "docs/architecture/scientific-knowledge-layer-vision.md" }
-    },
-    {
-      "id": "rel:AP-015:depends_on:BKL-015",
-      "type": "depends_on",
-      "from": "AP-015",
-      "to": "BKL-015",
-      "version": "1.0",
-      "source_locator": { "path": "docs/project/BACKLOG.md" }
-    }
+    {"id":"rel:BKL-015:addresses:TD-008","type":"addresses","from":"BKL-015","to":"TD-008","version":"1.0","source_locator":{"path":"docs/project/BACKLOG.md"}},
+    {"id":"rel:BKL-044:depends_on:BKL-015","type":"depends_on","from":"BKL-044","to":"BKL-015","version":"1.0","source_locator":{"path":"docs/project/BACKLOG.md"}},
+    {"id":"rel:BKL-015:implements:BKL-015-F1","type":"implements","from":"BKL-015","to":"BKL-015-F1","version":"1.0","source_locator":{"path":"docs/architecture/knowledge/BKL-015-Knowledge-Graph-Machine-Readable-Foundation.md"}},
+    {"id":"rel:AP-015:implements:CAP-40","type":"implements","from":"AP-015","to":"CAP-40","version":"1.0","source_locator":{"path":"docs/architecture/scientific-knowledge-layer-vision.md"}},
+    {"id":"rel:AP-015:depends_on:BKL-015","type":"depends_on","from":"AP-015","to":"BKL-015","version":"1.0","source_locator":{"path":"docs/project/BACKLOG.md"}},
+    {"id":"rel:BKL-015-F1:evidenced_by:BKL-015-F1-ARB","type":"evidenced_by","from":"BKL-015-F1","to":"BKL-015-F1-ARB","version":"1.0","source_locator":{"path":"docs/architecture/reviews/ARB-BKL-015-F1-Independent-Review-2026-09-04.md"}},
+    {"id":"rel:BKL-015-F1:evidenced_by:BKL-015-F1-RQ","type":"evidenced_by","from":"BKL-015-F1","to":"BKL-015-F1-RQ","version":"1.0","source_locator":{"path":"docs/architecture/reviews/RQ-BKL-015-F1-Release-Quality-Review-2026-09-04.md"}}
   ]
 }
