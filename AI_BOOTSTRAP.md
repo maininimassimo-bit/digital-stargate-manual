@@ -9,8 +9,8 @@ Il repository GitHub è l'unica fonte autorevole. Non assumere che memoria della
 ## 2. Sequenza obbligatoria di lettura
 
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-09-04.md` — handover corrente
-3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-04.md` — baseline tecnica corrente
+2. `docs/project/HANDOVER_2026-09-06.md` — handover corrente
+3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-06.md` — baseline tecnica corrente
 4. `docs/project/BACKLOG.md`
 5. `.github/roadmap/roadmap-source.json`
 6. `docs/data/roadmap.json` — projection generata, non authority
@@ -65,6 +65,7 @@ Prima di modificare il repository o il runtime:
 - AI spiegabile con evidence, confidence e distinzione observation/inference/recommendation;
 - post-processing provenance machine-readable e local-first;
 - AI PixInsight inizialmente `ADVISORY ONLY`;
+- Knowledge Graph repository-centric come projection, non authority;
 - nessuna affermazione di build, test, commit, deploy o acceptance senza verifica reale.
 
 ## 6. Processo di sviluppo
@@ -73,34 +74,31 @@ Procedere una milestone alla volta: repository truth -> architettura -> implemen
 
 Ogni modifica che cambia comportamento osservabile del portale, pipeline scientifica o stato di una capability deve includere un controllo esplicito di allineamento documentale e handover prima della closure.
 
-## 7. Stato di continuità corrente — 04/09/2026
+## 7. Stato di continuità corrente — 06/09/2026
 
-- `BKL-030 EAGLE Health & Reliability Telemetry` è **CLOSED / ACCEPTED** dopo G1-G8.
-- G7 è stato integrato via PR #89, merge `a15d85b27ebfbe8a6488330920d10dda8db79a78`.
-- G8 Safety Review è stato chiuso via PR #90, merge `eeba3372d8d788322f52553091f8d63cef5f9e68`.
-- La pagina `Observatory Status` mostra correttamente la telemetria EAGLE hosted da Cloud Run; la projection resta read-only, fail-closed, `UNKNOWN / POLICY_NOT_ACTIVATED` a livello complessivo, senza remediation e senza Safety Authority.
-- Il relay Cloud Run production usa la revisione `dsg-observatory-status-relay-00005-rof`; il trasporto N.I.N.A. e EAGLE Health è stato verificato end-to-end con `rejected=0` durante l'OAT.
-- Su `EAGLE30154` è operativo il task `DigitalStarGate-EagleHealthTelemetry`, account `PrimaLuceLab`, logon S4U, cadenza 1 minuto, `MultipleInstances=IgnoreNew`, runtime `main`, secret DPAPI LocalMachine.
-- Il runtime EAGLE autorevole resta `C:\DigitalStarGate\digital-stargate-manual-ap14-runtime` e deve rimanere sul branch `main` per preservare sia la telemetria sia l'importazione automatica delle sessioni.
-- Prima di ogni session import verificare: branch `main`, working tree pulito, `git fetch origin`, `HEAD == origin/main`. Worktree feature/OAT non devono sostituire il runtime operativo.
-- `DigitalStarGate.Reporting 1.0.8` resta la baseline runtime scientifica EAGLE per il producer sessione.
-- AP-013C ha completato il proprio incremento DRY_RUN/NO_DELETE e resta separato da qualsiasi futura autorizzazione di cleanup produttivo.
-- Nessuna severity numerica di EAGLE Health è approvata; capacità storage e salute fisica restano evidence separate.
-- `Windows Time` può essere osservato come evidence ma nessuna remediation automatica è autorizzata.
+- `BKL-030 EAGLE Health & Reliability Telemetry` resta **CLOSED / ACCEPTED**.
+- `BKL-015 Knowledge Graph machine-readable` è **DONE / ACCEPTED** dopo F1-F3.
+- F3 è stato integrato via PR #96, merge `c1a9f96b34a23407c5804e7fd6facfbad226f8fc`.
+- I workflow post-merge F3 Developer Foundation #963, Validate documentation #572, Pages #685 e Word #997 sono `SUCCESS`.
+- `TD-008 Knowledge Traceability` è **RESOLVED** per AP/ADR/component/evidence machine-readable traceability.
+- Il Knowledge Graph resta una projection repository-centric con source locator e gate fail-closed; non è un graph DB né una fonte autorevole.
+- `BKL-044 Knowledge Graph / AI Evidence Contract` è il prossimo package governato.
+- BKL-044 deve mantenere separati observation/evidence/inference/recommendation/confidence e non autorizza automaticamente RAG, vector DB, graph DB o AI authority.
+- Il runtime EAGLE resta invariato e deve rimanere sul branch `main` per preservare telemetria e importazione automatica delle sessioni.
+- `DigitalStarGate.Reporting 1.0.8` resta la baseline runtime scientifica EAGLE nota.
+- AP-013C resta chiuso per DRY_RUN/NO_DELETE; nessun cleanup produttivo C8/source è autorizzato.
 
 ### Sequenza governata corrente
 
-`BKL-030 CLOSED -> BKL-015 Knowledge Graph machine-readable foundation -> BKL-044 Knowledge Graph / AI Evidence Contract -> BKL-035 -> BKL-040 -> BKL-037 -> BKL-038 -> BKL-039 -> BKL-041 -> BKL-045 -> BKL-046 -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`BKL-030 CLOSED -> BKL-015 CLOSED -> BKL-044 Knowledge Graph / AI Evidence Contract -> BKL-035 -> BKL-040 -> BKL-037 -> BKL-038 -> BKL-039 -> BKL-041 -> BKL-045 -> BKL-046 -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 Lo stato deve essere nuovamente verificato nel repository a ogni utilizzo di questo file.
 
 ## 8. Quality-gate handover
 
-La baseline corrente di continuità è `docs/project/HANDOVER_2026-09-04.md`; il delta tecnico corrente è `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-04.md`.
+La baseline corrente di continuità è `docs/project/HANDOVER_2026-09-06.md`; il delta tecnico corrente è `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-06.md`.
 
-BKL-030 non può essere riaperto implicitamente da nuove feature. Qualunque health policy, health score, remediation, command path o Safety Authority coupling richiede un nuovo package/decisione governata.
-
-Lo Scheduled Task EAGLE Health è un publisher read-only: non autorizza soglie, remediation o modifiche hardware.
+BKL-030 e BKL-015 non possono essere riaperti implicitamente da nuove feature. Qualunque health policy, remediation, command path, Safety Authority coupling, graph infrastructure persistente o AI authority richiede un package/decisione governata separata.
 
 ## 9. Output richiesto a ogni intervento
 
@@ -108,8 +106,8 @@ Riportare file modificati, commit SHA, validazioni eseguite/non eseguite, rischi
 
 ## 10. Divieti
 
-Non inventare branch/file/commit/test/workflow/stati; non marcare approved senza evidence; non promuovere una projection a source primaria; non aggirare interlock/safe state/four-eyes/controller locale; non introdurre debito tecnico senza registrarlo; non inferire SQM, mains, safety o health da proxy non governati; non cancellare raw scientifici sulla base della sola export completion; non usare un worktree feature come runtime EAGLE operativo.
+Non inventare branch/file/commit/test/workflow/stati; non marcare approved senza evidence; non promuovere una projection a source primaria; non aggirare interlock/safe state/four-eyes/controller locale; non introdurre debito tecnico senza registrarlo; non inferire SQM, mains, safety o health da proxy non governati; non cancellare raw scientifici sulla base della sola export completion; non usare un worktree feature come runtime EAGLE operativo; non introdurre inferenze AI nel Knowledge Graph come repository truth senza provenance e contratto approvato.
 
 ## 11. Punto di partenza operativo
 
-Aprire `docs/project/HANDOVER_2026-09-04.md` e `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-04.md`, verificare HEAD/workflow correnti e riconfermare lo stato runtime EAGLE. Il prossimo package governato è **BKL-015 Knowledge Graph machine-readable foundation**. Prima di avviarlo devono risultare verdi i workflow del package handover corrente e il runtime EAGLE deve restare sul branch `main`.
+Aprire `docs/project/HANDOVER_2026-09-06.md` e `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-06.md`, verificare HEAD/workflow correnti e riconfermare lo stato runtime EAGLE solo se il lavoro richiede il runtime. Il prossimo package governato è **BKL-044 Knowledge Graph / AI Evidence Contract**.
