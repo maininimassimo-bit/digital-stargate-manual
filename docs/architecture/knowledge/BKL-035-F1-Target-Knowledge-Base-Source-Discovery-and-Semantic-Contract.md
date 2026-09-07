@@ -32,12 +32,12 @@ F1 source discovery is an ordered, bounded repository contract. A later validato
 
 | Order | Canonical repository path / record | Role for BKL-035 | Authority classification | F1 disposition |
 |---:|---|---|---|---|
-| 1 | `docs/data/scientific-session-catalog.json` — session record keyed by canonical `session_id` | session-level scientific facts, target label, coordinates where present, setup/configuration and source-metrics linkage | governed scientific projection | **primary factual source for session-bound target evidence** |
+| 1 | `docs/data/scientific-session-catalog.json` — session record keyed by canonical `sessions[].sessionId` | session-level scientific facts, target label, coordinates where present, setup/configuration and source-metrics linkage | governed scientific projection | **primary factual source for session-bound target evidence** |
 | 2 | `docs/data/scientific-observation-index.json` — `catalogItems[].entityId` / matching `searchDocuments[].catalogItemId` | searchable target/session representation generated from source 1 | projection | discovery/read optimization only; never wins a conflict against source 1 |
 | 3 | `docs/architecture/scientific-assets/DSDM-001-Scientific-Data-Manager-Conceptual-Model.md` | `SCIENTIFIC_TARGET -> SCIENTIFIC_PROJECT -> OBSERVATION_SESSION` conceptual lineage | repository architecture authority | semantic authority for target/project/session relation meaning |
 | 4 | `docs/architecture/packages/AP-013-Scientific-Image-Repository-Architecture.md` and `docs/architecture/scientific-assets/DSDM-003-Contract-and-Manifest-Model.md` | scientific asset identity, repository/storage lineage and manifest semantics | repository architecture authority | semantic authority for `TARGET_HAS_ASSET`; does not supply target identity by itself |
 | 5 | `docs/architecture/packages/AP-014-Scientific-Observation-Catalog-and-Search.md` | observation catalog identity, search, reconciliation and index boundaries | repository architecture authority | semantic authority for observation/catalog indexing behavior |
-| 6 | `data/sessions/<YYYY>/<MM>/<session_id>/normalized/session-metrics.json` — `scientific.target_name`, scientific/setup fields and `sqm.*` | canonical per-session normalized scientific and SQM evidence | governed scientific projection | primary per-session environmental/setup evidence; exact file is resolved from source-1 `session_id` / source metrics path |
+| 6 | `data/sessions/<YYYY>/<MM>/<session_id>/normalized/session-metrics.json` — `scientific.target_name`, scientific/setup fields and `sqm.*` | canonical per-session normalized scientific and SQM evidence | governed scientific projection | primary per-session environmental/setup evidence; exact file is resolved from source-1 `sessions[].sessionId` and `sourceMetricsPath` |
 | 7 | `data/analytics/history/sessions.csv` — row keyed by `session_id`, including `target_name`, setup and `sqm_*` columns | historical aggregate/read model over source 6 | analytics projection | read optimization / aggregate evidence only; cannot override source 6 |
 | 8 | `docs/architecture/telemetry/BKL-029-SQM-Source-Discovery-and-Architecture-Contract.md` | SQM source/quality semantics and provenance rules | repository architecture authority | semantic authority for interpretation of SQM evidence |
 | 9 | `docs/architecture/integration/AP14-W06-PixInsight-Synchronization-Adapter.md` | processing manifest/import/reconciliation boundary | repository architecture authority | semantic authority for processing synchronization and candidate-vs-reconciled state |
@@ -132,7 +132,7 @@ The original source spelling remains preserved as evidence even when a normalize
 For a non-conflicted equivalence class, `canonical_name` is selected deterministically:
 
 1. name attached to the highest-precedence exact governed object identifier, if such an identifier is present and the name is available in the same governed record;
-2. otherwise the target name in the earliest source-1 session record in deterministic ascending `session_id` order;
+2. otherwise the target name in the earliest source-1 session record in deterministic ascending `sessions[].sessionId` order;
 3. downstream names that differ only by allowed normalization become aliases; materially different names remain unresolved/conflicted until separately governed.
 
 This rule selects a projection label only; it does not change the underlying scientific source.
@@ -268,6 +268,7 @@ These decisions are intentionally deferred and are not required to accept F1.
 | O-01 — Confidence semantics | Section 7 clarifies Confidence is optional but, when represented, must use the versioned BKL-044 contract. |
 | O-02 — SQM scope | Section 6 fixes SQM evidence to session scope; target-wide statistics remain later derived facts. |
 | O-03 — asset/processing reconciliation | Section 6 requires acceptable governed reconciliation before asset/processing relations are emitted. |
+| R-01 — session catalog key mismatch | Section 3 and canonical-name selection now use the repository-exact `sessions[].sessionId` and `sourceMetricsPath`; downstream CSV `session_id` remains unchanged because it is the actual CSV field. |
 
 ## 17. Decision
 
