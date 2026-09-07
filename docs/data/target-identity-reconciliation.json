@@ -1,0 +1,21 @@
+{
+  "schema_version":"1.0","component":"DSG.TargetIdentityReconciliation","authority":"projection","baseline_commit":"2d30962b1c51325361ffa448064930a79c915023",
+  "source_contract":{"path":"data/analytics/metadata/session-scientific-metadata.csv","authority":"analytics_projection","key":"session_id","accepted_states":["REGISTERED"],"eligibility_rule":"ALL_REGISTERED_ROWS_FOR_SESSION_CATALOG_EXACT_CANONICAL_TARGET"},
+  "bounds":{"max_matches":5,"max_conflicts":5},
+  "matches":[
+    {"target_key":"dsg-target:ldn-1320","target_id":"TGT-LDN-1320","canonical_name":"LDN 1320","aliases":[],"session_ids":["2026-07-14_2026-07-15","2026-07-15_2026-07-16","2026-07-16_2026-07-17"],"identity_state":"validated","source_authority":"analytics_projection","source_refs":["analytics-metadata:2026-07-14_2026-07-15","analytics-metadata:2026-07-15_2026-07-16","analytics-metadata:2026-07-16_2026-07-17"],"citation_refs":["CIT-TIR-2026-07-14@1.0","CIT-TIR-2026-07-15@1.0","CIT-TIR-2026-07-16@1.0"],"provenance_refs":["PRV-TIR-LDN1320@1.0"],"method_id":"BKL035-F3-EXACT-ID-RECONCILIATION-1"},
+    {"target_key":"dsg-target:m-27","target_id":"TGT-MESSIER-M27","canonical_name":"M 27","aliases":[],"session_ids":["2026-08-14_2026-08-15","2026-08-15_2026-08-16"],"identity_state":"validated","source_authority":"analytics_projection","source_refs":["analytics-metadata:2026-08-14_2026-08-15","analytics-metadata:2026-08-15_2026-08-16"],"citation_refs":["CIT-TIR-2026-08-14@1.0","CIT-TIR-2026-08-15@1.0"],"provenance_refs":["PRV-TIR-M27@1.0"],"method_id":"BKL035-F3-EXACT-ID-RECONCILIATION-1"}
+  ],
+  "conflicts":[],
+  "citations":[
+    {"id":"CIT-TIR-2026-07-14","version":"1.0","source_authority":"analytics_projection","locator":{"path":"data/analytics/metadata/session-scientific-metadata.csv","record_key":"session_id","record_value":"2026-07-14_2026-07-15"}},
+    {"id":"CIT-TIR-2026-07-15","version":"1.0","source_authority":"analytics_projection","locator":{"path":"data/analytics/metadata/session-scientific-metadata.csv","record_key":"session_id","record_value":"2026-07-15_2026-07-16"}},
+    {"id":"CIT-TIR-2026-07-16","version":"1.0","source_authority":"analytics_projection","locator":{"path":"data/analytics/metadata/session-scientific-metadata.csv","record_key":"session_id","record_value":"2026-07-16_2026-07-17"}},
+    {"id":"CIT-TIR-2026-08-14","version":"1.0","source_authority":"analytics_projection","locator":{"path":"data/analytics/metadata/session-scientific-metadata.csv","record_key":"session_id","record_value":"2026-08-14_2026-08-15"}},
+    {"id":"CIT-TIR-2026-08-15","version":"1.0","source_authority":"analytics_projection","locator":{"path":"data/analytics/metadata/session-scientific-metadata.csv","record_key":"session_id","record_value":"2026-08-15_2026-08-16"}}
+  ],
+  "provenance_records":[
+    {"id":"PRV-TIR-LDN1320","version":"1.0","method_id":"BKL035-F3-EXACT-ID-RECONCILIATION-1","input_refs":["analytics-metadata:2026-07-14_2026-07-15","analytics-metadata:2026-07-15_2026-07-16","analytics-metadata:2026-07-16_2026-07-17"],"output_ref":"target-id-map:dsg-target:ldn-1320=TGT-LDN-1320","citation_refs":["CIT-TIR-2026-07-14@1.0","CIT-TIR-2026-07-15@1.0","CIT-TIR-2026-07-16@1.0"]},
+    {"id":"PRV-TIR-M27","version":"1.0","method_id":"BKL035-F3-EXACT-ID-RECONCILIATION-1","input_refs":["analytics-metadata:2026-08-14_2026-08-15","analytics-metadata:2026-08-15_2026-08-16"],"output_ref":"target-id-map:dsg-target:m-27=TGT-MESSIER-M27","citation_refs":["CIT-TIR-2026-08-14@1.0","CIT-TIR-2026-08-15@1.0"]}
+  ]
+}
