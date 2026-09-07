@@ -10,9 +10,44 @@
       "locator": { "kind": "repository_path", "value": "docs/architecture/knowledge/BKL-044-Knowledge-Graph-AI-Evidence-Contract.md" },
       "producer": "DSG.RepositoryGovernance",
       "produced_at_utc": "2026-09-07T12:30:00Z"
+    },
+    {
+      "id": "CIT-BKL044-F2-CLOSURE",
+      "version": "1.0",
+      "source_authority": "repository_authority",
+      "locator": { "kind": "repository_path", "value": "docs/project/BKL-044-F2-CLOSURE-2026-09-07.md" },
+      "producer": "DSG.RepositoryGovernance",
+      "produced_at_utc": "2026-09-07T13:20:00Z"
+    },
+    {
+      "id": "CIT-BKL044-CURRENT-BASELINE",
+      "version": "1.0",
+      "source_authority": "repository_authority",
+      "locator": { "kind": "repository_path", "value": "docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-07.md" },
+      "producer": "DSG.RepositoryGovernance",
+      "produced_at_utc": "2026-09-07T13:20:00Z"
+    },
+    {
+      "id": "CIT-BKL044-BACKLOG",
+      "version": "1.0",
+      "source_authority": "repository_authority",
+      "locator": { "kind": "repository_path", "value": "docs/project/BACKLOG.md" },
+      "producer": "DSG.RepositoryGovernance",
+      "produced_at_utc": "2026-09-07T13:20:00Z"
     }
   ],
-  "provenance_records": [],
+  "provenance_records": [
+    {
+      "id": "PRV-BKL044-F3-NEXT-INCREMENT",
+      "version": "1.0",
+      "producer": "DSG.RepositoryGovernance",
+      "produced_at_utc": "2026-09-07T13:20:00Z",
+      "method_id": "METHOD-REPOSITORY-RECONCILIATION-1",
+      "input_refs": ["EVD-BKL044-F3-BACKLOG"],
+      "output_ref": "CLM-BKL044-F3-NEXT-INCREMENT",
+      "citation_refs": ["CIT-BKL044-BACKLOG@1.0"]
+    }
+  ],
   "confidence_contracts": [
     {
       "id": "CONF-DETERMINISTIC",
@@ -54,6 +89,51 @@
       "ai_derived": true,
       "method_id": "METHOD-ADVISORY-EXAMPLE",
       "confidence": { "contract_ref": "CONF-DETERMINISTIC@1.0", "value": 0.5 }
+    },
+    {
+      "id": "EVD-BKL044-F3-F2-CLOSURE",
+      "semantic_type": "evidence",
+      "producer": "DSG.RepositoryGovernance",
+      "produced_at_utc": "2026-09-07T13:20:00Z",
+      "source_authority": "repository_authority",
+      "lifecycle_state": "validated",
+      "ai_derived": false,
+      "citation_refs": ["CIT-BKL044-F2-CLOSURE@1.0"]
+    },
+    {
+      "id": "OBS-BKL044-F3-CURRENT-STATE",
+      "semantic_type": "observation",
+      "producer": "DSG.RepositoryGovernance",
+      "produced_at_utc": "2026-09-07T13:20:00Z",
+      "observed_at_utc": "2026-09-07T13:20:00Z",
+      "source_authority": "repository_authority",
+      "lifecycle_state": "validated",
+      "ai_derived": false,
+      "citation_refs": ["CIT-BKL044-CURRENT-BASELINE@1.0"]
+    },
+    {
+      "id": "EVD-BKL044-F3-BACKLOG",
+      "semantic_type": "evidence",
+      "producer": "DSG.RepositoryGovernance",
+      "produced_at_utc": "2026-09-07T13:20:00Z",
+      "source_authority": "repository_authority",
+      "lifecycle_state": "validated",
+      "ai_derived": false,
+      "citation_refs": ["CIT-BKL044-BACKLOG@1.0"]
+    },
+    {
+      "id": "CLM-BKL044-F3-NEXT-INCREMENT",
+      "semantic_type": "claim",
+      "producer": "DSG.RepositoryGovernance",
+      "produced_at_utc": "2026-09-07T13:20:00Z",
+      "source_authority": "repository_authority",
+      "lifecycle_state": "validated",
+      "ai_derived": false,
+      "method_id": "METHOD-REPOSITORY-RECONCILIATION-1",
+      "evidence_refs": ["EVD-BKL044-F3-BACKLOG"],
+      "citation_refs": ["CIT-BKL044-BACKLOG@1.0"],
+      "provenance_refs": ["PRV-BKL044-F3-NEXT-INCREMENT@1.0"],
+      "confidence": { "contract_ref": "CONF-DETERMINISTIC@1.0", "value": 1.0 }
     }
   ]
 }
