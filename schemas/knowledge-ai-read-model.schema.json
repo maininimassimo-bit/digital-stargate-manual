@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/schemas/knowledge-ai-read-model.schema.json",
+  "title": "Digital StarGate Knowledge / AI Consumer Read Model",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "component", "authority", "source_contract", "items"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "component": { "const": "DSG.KnowledgeConsumerReadModel" },
+    "authority": { "const": "projection" },
+    "source_contract": { "const": "docs/data/knowledge-ai-evidence-contract.json" },
+    "items": { "type": "array", "items": { "$ref": "#/$defs/item" } }
+  },
+  "$defs": {
+    "reference": { "type": "string", "minLength": 2 },
+    "locator": {
+      "type": "object", "additionalProperties": false, "required": ["kind", "value"],
+      "properties": {
+        "kind": { "enum": ["repository_path", "uri", "catalog_id", "external_asset_id"] },
+        "value": { "type": "string", "minLength": 1 },
+        "anchor": { "type": "string", "minLength": 1 }
+      }
+    },
+    "citation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["ref", "source_authority", "locator"],
+      "properties": {
+        "ref": { "$ref": "#/$defs/reference" },
+        "source_authority": { "type": "string", "minLength": 1 },
+        "locator": { "$ref": "#/$defs/locator" }
+      }
+    },
+    "provenance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["ref", "method_id", "input_refs", "output_ref", "citation_refs"],
+      "properties": {
+        "ref": { "$ref": "#/$defs/reference" },
+        "method_id": { "type": "string", "minLength": 1 },
+        "input_refs": { "type": "array", "items": { "$ref": "#/$defs/reference" } },
+        "output_ref": { "$ref": "#/$defs/reference" },
+        "citation_refs": { "type": "array", "items": { "$ref": "#/$defs/reference" } }
+      }
+    },
+    "confidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["contract_ref", "value"],
+      "properties": {
+        "contract_ref": { "$ref": "#/$defs/reference" },
+        "value": { "type": ["number", "string"] }
+      }
+    },
+    "item": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "source_item_ref", "semantic_type", "lifecycle_state", "source_authority", "ai_derived", "producer", "citations", "provenance"],
+      "properties": {
+        "id": { "$ref": "#/$defs/reference" },
+        "source_item_ref": { "$ref": "#/$defs/reference" },
+        "semantic_type": { "enum": ["observation", "evidence", "claim", "inference", "recommendation", "conflict", "unknown"] },
+        "lifecycle_state": { "enum": ["incomplete", "unknown", "draft", "validated", "superseded", "rejected"] },
+        "source_authority": { "enum": ["repository_authority", "scientific_catalog", "analytics_product", "telemetry_projection", "session_projection", "external_scientific_storage", "projection", "unknown"] },
+        "ai_derived": { "type": "boolean" },
+        "producer": { "type": "string", "minLength": 1 },
+        "producer_version": { "type": "string", "minLength": 1 },
+        "citations": { "type": "array", "items": { "$ref": "#/$defs/citation" } },
+        "provenance": { "type": "array", "items": { "$ref": "#/$defs/provenance" } },
+        "confidence": { "$ref": "#/$defs/confidence" }
+      }
+    }
+  }
+}
