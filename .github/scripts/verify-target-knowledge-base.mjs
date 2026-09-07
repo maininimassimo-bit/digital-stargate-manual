@@ -7,11 +7,17 @@ const nonEmptyStrings = a => Array.isArray(a) && a.every(x => typeof x === 'stri
 const exactKeys = (obj, allowed, label, fail) => { if (!isObject(obj)) { fail(`${label}: must be an object`); return; } for (const k of Object.keys(obj)) if (!allowed.includes(k)) fail(`${label}: unexpected property ${k}`); };
 const required = (obj, keys, label, fail) => { for (const k of keys) if (!(k in (obj ?? {}))) fail(`${label}: required property ${k} missing`); };
 
+export function deriveTargetKey(canonicalName) {
+  if (typeof canonicalName !== 'string') return null;
+  const normalized = canonicalName.normalize('NFKC').trim().replace(/\s+/g, ' ').toLowerCase();
+  if (!/^[a-z0-9]+(?: [a-z0-9]+)*$/.test(normalized)) return null;
+  return `dsg-target:${normalized.replace(/ /g, '-')}`;
+}
+
 export function validateTargetKnowledgeBase(kb, catalog) {
   const errors = []; const fail = m => errors.push(m);
   if (!isObject(kb)) return ['target knowledge base must be an object'];
 
-  // Normative executable structural validation for schemas/target-knowledge-base.schema.json.
   const rootKeys = ['schema_version','component','authority','baseline_commit','bounds','identities','relations','citations','provenance_records'];
   exactKeys(kb, rootKeys, 'root', fail); required(kb, rootKeys, 'root', fail);
   if (kb.schema_version !== '1.0') fail('schema_version must be 1.0');
@@ -59,7 +65,7 @@ export function validateTargetKnowledgeBase(kb, catalog) {
   const sessions = new Map((catalog?.sessions ?? []).map(x => [x.sessionId, x]));
   const citations = new Map((kb.citations ?? []).map(x => [ref(x.id, x.version), x]));
   const provenance = new Map((kb.provenance_records ?? []).map(x => [ref(x.id, x.version), x]));
-  const identities = new Map(); const relationIds = new Set();
+  const identities = new Map(); const relationIds = new Set(); const derivedKeys = new Map();
 
   for (const citation of kb.citations ?? []) {
     if (citation.source_authority !== 'governed_scientific_projection') fail(`${citation.id}: fixture citation authority must remain governed_scientific_projection`);
@@ -69,6 +75,11 @@ export function validateTargetKnowledgeBase(kb, catalog) {
 
   for (const identity of kb.identities ?? []) {
     if (!/^dsg-target:[a-z0-9]+(?:-[a-z0-9]+)*$/.test(identity.target_key ?? '')) fail(`${identity.target_key ?? '<unknown>'}: invalid target_key`);
+    const expectedKey = deriveTargetKey(identity.canonical_name);
+    if (!expectedKey) fail(`${identity.target_key ?? '<unknown>'}: canonical_name unsupported by BKL035-F2-TARGET-KEY-1`);
+    else if (identity.target_key !== expectedKey) fail(`${identity.target_key}: target_key must equal deterministic key ${expectedKey}`);
+    if (expectedKey && derivedKeys.has(expectedKey) && derivedKeys.get(expectedKey) !== identity.canonical_name) fail(`${identity.target_key}: deterministic target-key collision; automatic merge prohibited`);
+    else if (expectedKey) derivedKeys.set(expectedKey, identity.canonical_name);
     if (identities.has(identity.target_key)) fail(`${identity.target_key}: duplicate target_key`); else identities.set(identity.target_key, identity);
     if (!['validated','conflicted','incomplete','unknown'].includes(identity.identity_state)) fail(`${identity.target_key}: invalid identity_state`);
     if (identity.identity_state === 'validated' && (!Array.isArray(identity.citation_refs) || identity.citation_refs.length === 0)) fail(`${identity.target_key}: validated identity requires Citation`);
