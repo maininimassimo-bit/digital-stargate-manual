@@ -2,6 +2,17 @@
   "schema_version": "1.0",
   "component": "DSG.KnowledgeAIEvidenceContract",
   "authority": "projection",
+  "citations": [
+    {
+      "id": "CIT-BKL044-F2-CONTRACT",
+      "version": "1.0",
+      "source_authority": "repository_authority",
+      "locator": { "kind": "repository_path", "value": "docs/architecture/knowledge/BKL-044-Knowledge-Graph-AI-Evidence-Contract.md" },
+      "producer": "DSG.RepositoryGovernance",
+      "produced_at_utc": "2026-09-07T12:30:00Z"
+    }
+  ],
+  "provenance_records": [],
   "confidence_contracts": [
     {
       "id": "CONF-DETERMINISTIC",
@@ -21,6 +32,16 @@
       "source_authority": "repository_authority",
       "lifecycle_state": "validated",
       "ai_derived": false
+    },
+    {
+      "id": "EVD-BKL044-F2-CONTRACT",
+      "semantic_type": "evidence",
+      "producer": "DSG.RepositoryGovernance",
+      "produced_at_utc": "2026-09-07T12:30:00Z",
+      "source_authority": "repository_authority",
+      "lifecycle_state": "validated",
+      "ai_derived": false,
+      "citation_refs": ["CIT-BKL044-F2-CONTRACT@1.0"]
     },
     {
       "id": "INF-BKL044-F2-INCOMPLETE",
