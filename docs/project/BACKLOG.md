@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 3.9 |
+| Versione | 4.0 |
 | Stato | Active |
 | Data baseline | 07/09/2026 |
 
@@ -62,7 +62,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-041 | P2 | Scientific Data Quality Score | Planned | BKL-029, BKL-037, BKL-045 | Quality score scientifico spiegabile | Functional Roadmap Expansion |
 | BKL-042 | P2 | AI Observatory Assistant | Planned | BKL-015/BKL-044 e intelligence services | Copilot read-only per diagnosis/RCA/planning/science | Functional Roadmap Expansion |
 | BKL-043 | P2 | Observatory Reliability Engineering | Planned | BKL-030/BKL-038/BKL-042 | SLI/SLO, MTBF, MTTR, session completion e failure budget | Functional Roadmap Expansion |
-| BKL-044 | P1 | Knowledge Graph / AI Evidence Contract | In Progress | BKL-015 | Provenance stabile per AP/ADR/assets/session/target/incident/telemetry/processing/AI | F1 merged via PR #98 / `6b9db9b342144645da62381d6833ff1ebff3c22c`; F2 next |
+| BKL-044 | P1 | Knowledge Graph / AI Evidence Contract | In Progress | BKL-015 | Provenance stabile per AP/ADR/assets/session/target/incident/telemetry/processing/AI | F1 PR #98 merge `6b9db9b342144645da62381d6833ff1ebff3c22c`; F2 PR #100 merge `ea36179882f05ce53581b80e5d5e8e70c560dcd9` CLOSED/ACCEPTED; F3 next |
 | BKL-045 | P2 | PixInsight Workflow Provenance Plugin | Planned | BKL-015/BKL-044 | Estensione PixInsight governata per catturare e storicizzare workflow, step, parametri, input/output e lineage | Functional Roadmap Expansion |
 | BKL-046 | P2 | AI Post-Processing Assistant for PixInsight | Planned | BKL-015/BKL-044/BKL-045 | Assistente advisory per ottimizzare workflow PixInsight con evidence, confidence e provenance | Functional Roadmap Expansion |
 | BKL-047 | P1 | AP-013C Verified Transport Cleanup & Convergence Monitoring | Done | AP-013B COPY_ONLY OAT; OneDrive incident/recovery 04/09; PC destination verification | DRY_RUN/NO_DELETE lifecycle evidence, ACK convergence e fail-closed classification accepted; productive cleanup excluded | AP-013C v0.3; DSDM-005 v0.2; `E-AP013C-OAT-2026-09-04`; `ARB-013C-R1`; PR #86; C8 NO-GO |
@@ -75,13 +75,13 @@ BKL-047/AP-013C resta `Done` per il solo incremento `DRY_RUN/NO_DELETE`; qualunq
 
 BKL-015 è `Done / Accepted` e TD-008 resta `Resolved` per il perimetro AP/ADR/component/evidence machine-readable traceability.
 
-BKL-044 è `In Progress`: F1 semantic contract è stato mergiato tramite PR #98 (`6b9db9b342144645da62381d6833ff1ebff3c22c`). Il prossimo incremento è F2 machine-readable schema/fail-closed validation. BKL-044 non riapre TD-008 e non autorizza graph DB, vector DB, RAG, inference runtime, AI authority o modifica della Safety Authority.
+BKL-044 è `In Progress`: F1 è merged; F2 machine-readable schema/fail-closed validation è CLOSED/ACCEPTED tramite PR #100 e merge `ea36179882f05ce53581b80e5d5e8e70c560dcd9`, con ARB APPROVED, Release Quality READY e post-merge CI verde. Il prossimo incremento è F3 Governed Seed Projection & Reconciliation. BKL-044 non riapre TD-008 e non autorizza graph DB, vector DB, RAG, inference runtime, AI authority o modifica della Safety Authority.
 
 ## 4. Sequenza di esecuzione raccomandata
 
 ```text
 Completed baseline through BKL-030 and BKL-015
-  -> BKL-044 Knowledge/AI Evidence Contract [IN PROGRESS — F1 MERGED]
+  -> BKL-044 Knowledge/AI Evidence Contract [IN PROGRESS — F1/F2 ACCEPTED; F3 NEXT]
   -> BKL-035 Target Knowledge Base
   -> BKL-040 Night Timeline / Replay
   -> BKL-037 Session Comparison
