@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 3.7 |
+| Versione | 3.8 |
 | Stato | Active |
-| Data baseline | 04/09/2026 |
+| Data baseline | 06/09/2026 |
 
 ## 1. Scopo
 
@@ -33,7 +33,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-012 | P1 | Validare unattended AP-013 COPY_ONLY | Done | Scheduler/evidence | Runtime OAT | AP-013 |
 | BKL-013 | P1 | Completare AP-014 | Done | AP14-W01-W07 | Catalogo/search accettati | AP-014 |
 | BKL-014 | P2 | Preparare AP-015 Scientific Knowledge Platform | Planned | AP-014, BKL-015 e capability foundation | Architecture Package CAP-40 | AMP-002 |
-| BKL-015 | P2 | Implementare repository Knowledge Graph machine-readable | In Progress | BKL-029/BKL-030 architecture requirements; Governance Foundation | Relazioni AP/ADR/component/evidence e future entità scientifiche interrogabili | TD-008, `BKL-015-F1`, BKL-044 |
+| BKL-015 | P2 | Implementare repository Knowledge Graph machine-readable | Done | BKL-029/BKL-030 architecture requirements; Governance Foundation | Relazioni AP/ADR/component/evidence interrogabili con source locator e gate CI | TD-008 Resolved; F1-F3; PR #96; merge `c1a9f96b34a23407c5804e7fd6facfbad226f8fc` |
 | BKL-016 | P2 | Contestualizzare release e guide storiche | Planned | Inventario | Lineage baseline | TD-007 |
 | BKL-017 | P2 | Tema system | Planned | RC1-HF01 | Preferenza OS | RC1-HF01 |
 | BKL-018 | P0 | EAGLE runtime inspection e M27 OAT | Done | Evidence runtime | OAT accettata | AP-014 |
@@ -62,26 +62,25 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-041 | P2 | Scientific Data Quality Score | Planned | BKL-029, BKL-037, BKL-045 | Quality score scientifico spiegabile | Functional Roadmap Expansion |
 | BKL-042 | P2 | AI Observatory Assistant | Planned | BKL-015/BKL-044 e intelligence services | Copilot read-only per diagnosis/RCA/planning/science | Functional Roadmap Expansion |
 | BKL-043 | P2 | Observatory Reliability Engineering | Planned | BKL-030/BKL-038/BKL-042 | SLI/SLO, MTBF, MTTR, session completion e failure budget | Functional Roadmap Expansion |
-| BKL-044 | P1 | Knowledge Graph / AI Evidence Contract | Planned | BKL-015 | Provenance stabile per AP/ADR/assets/session/target/incident/telemetry/processing/AI | Functional Roadmap Expansion |
+| BKL-044 | P1 | Knowledge Graph / AI Evidence Contract | Ready | BKL-015 | Provenance stabile per AP/ADR/assets/session/target/incident/telemetry/processing/AI | Next governed capability after BKL-015 closure |
 | BKL-045 | P2 | PixInsight Workflow Provenance Plugin | Planned | BKL-015/BKL-044 | Estensione PixInsight governata per catturare e storicizzare workflow, step, parametri, input/output e lineage | Functional Roadmap Expansion |
 | BKL-046 | P2 | AI Post-Processing Assistant for PixInsight | Planned | BKL-015/BKL-044/BKL-045 | Assistente advisory per ottimizzare workflow PixInsight con evidence, confidence e provenance | Functional Roadmap Expansion |
 | BKL-047 | P1 | AP-013C Verified Transport Cleanup & Convergence Monitoring | Done | AP-013B COPY_ONLY OAT; OneDrive incident/recovery 04/09; PC destination verification | DRY_RUN/NO_DELETE lifecycle evidence, ACK convergence e fail-closed classification accepted; productive cleanup excluded | AP-013C v0.3; DSDM-005 v0.2; `E-AP013C-OAT-2026-09-04`; `ARB-013C-R1`; PR #86; C8 NO-GO |
 
-### Reconciliation note — 04/09/2026
+### Reconciliation note — 06/09/2026
 
-BKL-030 è `Done` per il perimetro approvato read-only telemetry/history/portal. G1-G5 hanno chiuso discovery, contract, collector, CI e runtime OAT; G6 history/persistence è stato accettato; G7 portal/Cloud Run è stato validato in canary e production e integrato con PR #89; G8 Safety Review è `APPROVED WITH CONDITIONS` senza Blocker/Major. Restano invarianti: `summary=UNKNOWN/POLICY_NOT_ACTIVATED`, nessuna automatic remediation e `Safety Authority=OUTSIDE_SCOPE`. Le future severity policy, health score o remediation richiedono change-set separati.
-
-I rischi host osservati (capacità C:, Windows Time, pending reboot evidence, SMART dettagliato non-elevated e configuration drift baseline) restano input operativi e non vengono trasformati in severity o azioni automatiche.
+BKL-030 resta `Done` per il perimetro approvato read-only telemetry/history/portal. Restano invarianti `summary=UNKNOWN/POLICY_NOT_ACTIVATED`, nessuna automatic remediation e `Safety Authority=OUTSIDE_SCOPE`.
 
 BKL-047/AP-013C resta `Done` per il solo incremento `DRY_RUN/NO_DELETE`; qualunque C8 productive cleanup resta escluso e richiede nuova governance/autorizzazione.
 
-BKL-015 è `In Progress` con F1 limitato alla foundation machine-readable repository-centric: identità stabili, relazioni tipizzate/versionate, source locator, projection non-authoritative e CI integrity gate. BKL-044 resta un successore separato per scientific/AI evidence semantics.
+BKL-015 è `Done / Accepted`: F1 ha stabilito il contratto repository-centric, F2 ha portato AP/ADR identity coverage al 100%, F3 ha portato component/evidence identity e material-relation coverage al 100% sull'Architecture Artifact Register governato. I workflow post-merge F3 Developer Foundation #963, Validate documentation #572, Pages #685 e Word #997 sono verdi. TD-008 è quindi risolto per il perimetro AP/ADR/component/evidence.
+
+BKL-044 diventa `Ready` come successore separato per scientific/AI evidence semantics; non riapre implicitamente TD-008 e non autorizza graph DB, vector DB, RAG, inference runtime o AI authority.
 
 ## 4. Sequenza di esecuzione raccomandata
 
 ```text
-Completed baseline through BKL-030
-  -> BKL-015 Knowledge Graph foundation
+Completed baseline through BKL-030 and BKL-015
   -> BKL-044 Knowledge/AI Evidence Contract
   -> BKL-035 Target Knowledge Base
   -> BKL-040 Night Timeline / Replay
