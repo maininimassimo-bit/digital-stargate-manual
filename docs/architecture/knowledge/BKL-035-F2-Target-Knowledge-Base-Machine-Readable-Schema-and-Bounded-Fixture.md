@@ -4,7 +4,7 @@
 |---|---|
 | Identifier | BKL-035-F2 |
 | Status | In Progress |
-| Version | 0.2 |
+| Version | 0.3 |
 | Date | 2026-09-07 |
 | Parent | BKL-035 — Target Knowledge Base |
 | Baseline | `79be46cde68c446ceb412491e600c439735622d6` |
@@ -29,9 +29,18 @@ The published JSON Schema and executable validator describe the same F2 structur
 
 ## 3. Target key encoding
 
-F2 resolves the F1 open decision for the bounded projection key. `target_key` uses `dsg-target:<slug>` where the slug is a lowercase deterministic projection token derived from the accepted canonical target label. It is repository-local and never replaces a governed astronomical/catalog identifier.
+F2 resolves the F1 open decision for the bounded projection key. `target_key` is repository-local and never replaces a governed astronomical/catalog identifier.
 
-The current fixture uses `dsg-target:ldn-1320` and `dsg-target:m-27`. The key is only a projection identity. F3 remains responsible for deterministic reconciliation and collision/conflict validation across a wider accepted source set.
+The normative method identifier is `BKL035-F2-TARGET-KEY-1`. Given the accepted `canonical_name`, it performs exactly these steps:
+
+1. Unicode normalize with NFKC;
+2. trim leading/trailing whitespace;
+3. collapse each internal whitespace run to one ASCII space;
+4. lowercase;
+5. require the normalized label to match `^[a-z0-9]+(?: [a-z0-9]+)*$`;
+6. replace ASCII spaces with `-` and prefix `dsg-target:`.
+
+Unsupported punctuation or characters are rejected rather than transliterated, guessed or fuzzily normalized. Therefore `LDN 1320` deterministically becomes `dsg-target:ldn-1320`, and `M 27` becomes `dsg-target:m-27`. The validator computes this expected key and fails if the stored key differs, even when the stored value is syntactically valid. A duplicate deterministic key for different canonical labels is fail-closed; broader collision/alias reconciliation remains F3 scope.
 
 ## 4. Bounded fixture
 
@@ -62,16 +71,17 @@ The normative validator rejects at minimum:
 1. structural divergence from the published schema, including unexpected/missing properties and duplicate refs;
 2. authority escalation away from `projection`;
 3. fixture expansion beyond 5 identities / 10 relations;
-4. validated identity without Citation;
-5. unresolved source session;
-6. canonical-name mutation relative to primary governed session evidence;
-7. relation target/session or `object_ref` mismatch;
-8. non-canonical or session-misattributed Citation;
-9. ungoverned derivation method;
-10. unresolved or semantically misbound Citation/Provenance;
-11. identity/relation Provenance output/input/Citation-set mismatch;
-12. conflicting governed coordinate evidence within one projected identity;
-13. premature materialization of non-session relation types in the F2 fixture.
+4. a target key that does not equal the deterministic `BKL035-F2-TARGET-KEY-1` result or uses an unsupported canonical label;
+5. validated identity without Citation;
+6. unresolved source session;
+7. canonical-name mutation relative to primary governed session evidence;
+8. relation target/session or `object_ref` mismatch;
+9. non-canonical or session-misattributed Citation;
+10. ungoverned derivation method;
+11. unresolved or semantically misbound Citation/Provenance;
+12. identity/relation Provenance output/input/Citation-set mismatch;
+13. conflicting governed coordinate evidence within one projected identity;
+14. premature materialization of non-session relation types in the F2 fixture.
 
 ## 8. Migration and rollback
 
@@ -88,6 +98,10 @@ Independent ARB review of head `5c621da7e464fbe03010bbdae4fc8e06dcb85afe` return
 - **M-01** — published JSON Schema was not executable in the quality gate. Remediation: the semantic verifier is now the explicit normative structural+semantic CI path and implements the F2 schema constraints without adding an ungoverned dependency; negative structural tests cover closed properties, required properties and uniqueness.
 - **M-02** — Citation/Provenance existence did not prove semantic binding. Remediation: exact session/object/Citation and identity/relation Provenance input/output/Citation-set binding are now fail-closed, with mismatched-but-existing regression cases.
 
+ARB re-review of head `0a5190521b3a224e5a0d6d1d25320e7e58e40ea2` returned **REWORK REQUIRED — 98/100** with one Minor finding:
+
+- **R-01** — deterministic target-key derivation was documented but not executable. Remediation: `BKL035-F2-TARGET-KEY-1` is now explicitly defined and implemented; the validator computes the expected key, rejects unsupported labels and fails on deterministic collisions. Regression tests cover a syntactically valid but semantically wrong key.
+
 No runtime, EAGLE or Safety Authority remediation is involved.
 
 ## 11. Acceptance criteria
@@ -97,10 +111,10 @@ F2 is acceptable when:
 - schema and fixture remain bounded and versioned;
 - the published structural contract has an executable normative CI path;
 - all fixture facts resolve to accepted governed sources;
-- target keys remain projection-only;
+- target keys are deterministic projection-only values governed by `BKL035-F2-TARGET-KEY-1`;
 - Citation/Provenance semantics are explicit and bound to the exact identity/relation/session evidenced;
 - no Confidence is invented;
-- fail-closed tests cover structure, authority, bounds, source drift, identity mismatch, traceability misbinding and premature relation promotion;
+- fail-closed tests cover structure, authority, bounds, target-key derivation, source drift, identity mismatch, traceability misbinding and premature relation promotion;
 - Developer Foundation, documentation and Word gates are green on the exact reviewed head;
 - independent ARB re-review approves the package before merge.
 
