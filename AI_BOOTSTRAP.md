@@ -21,87 +21,56 @@ Il repository GitHub è l'unica fonte autorevole. Non assumere che memoria della
 11. `docs/project/RELEASE_PLAYBOOK.md`
 12. `docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md`
 13. Architecture Package, ADR, review, evidence e componenti direttamente coinvolti nell'attività.
-14. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md` e `docs/project/REPOSITORY_KNOWLEDGE_MAP.md` solo come mappe storico/strutturali quando utili, verificandone sempre data e baseline.
-
-I documenti datati precedenti restano record storici. Per lo stato operativo corrente applicare repository truth, evidence, handover e technical baseline più recenti.
 
 ## 3. Verifica iniziale obbligatoria
 
-Prima di modificare il repository o il runtime: identificare branch e HEAD; verificare file/SHA interessati; cercare documenti e identificativi sovrapposti; distinguere source primaria e projection; controllare backlog, roadmap, technical debt e decisioni; verificare workflow e Pages; segnalare divergenze prima di scrivere. Per interventi sull'EAGLE verificare sempre che `C:\DigitalStarGate\digital-stargate-manual-ap14-runtime` sia su `main`, working tree pulito e `HEAD == origin/main`, salvo worktree OAT esplicitamente isolato.
+Prima di modificare repository o runtime: identificare branch e HEAD, verificare file/SHA interessati, distinguere authority e projection, controllare backlog/roadmap/debito/decisioni e verificare workflow reali. Per EAGLE verificare che `C:\DigitalStarGate\digital-stargate-manual-ap14-runtime` resti su `main`, pulito e allineato a `origin/main`, salvo worktree OAT isolato.
 
-## 4. Gerarchia delle fonti
-
-1. Architecture Package, ADR, capability e standard approvati;
-2. assessment ARB, validation record, execution evidence e gate;
-3. `.github/roadmap/roadmap-source.json` come roadmap authority;
-4. backlog e planning approvati;
-5. handover corrente e current technical baseline;
-6. release note e commit pubblicati;
-7. contratti machine-readable versionati;
-8. dataset JSON/dashboard come proiezioni;
-9. documenti di contesto storici;
-10. conversazioni e prompt.
-
-## 5. Principi non negoziabili
+## 4. Principi non negoziabili
 
 - repository as source of truth;
-- componenti modulari e responsabilità singola;
-- Scientific Data Engine come access layer condiviso per i dati scientifici;
-- dataset JSON come proiezioni, mai come fonte primaria;
-- Safety Authority fisica/locale indipendente e autorevole;
-- telemetria, SQM scientifico, Health Score e AI non sono Safety Authority;
+- dataset e read model sono projection, mai authority implicita;
+- Safety Authority fisica/locale indipendente;
 - nessun comando diretto dal portale o dall'AI agli apparati nella baseline corrente;
-- collector EAGLE leggeri e read-only; analytics/AI fuori dal computer operativo quando possibile;
-- AI spiegabile con evidence, confidence e distinzione observation/evidence/claim/inference/recommendation;
-- post-processing provenance machine-readable e local-first;
-- AI PixInsight inizialmente `ADVISORY ONLY`;
-- Knowledge Graph repository-centric come projection, non authority;
-- nessuna affermazione di build, test, commit, deploy o acceptance senza verifica reale.
+- AI spiegabile con evidence, confidence, Citation, Provenance e distinzione Observation/Evidence/Claim/Inference/Recommendation;
+- Knowledge Graph repository-centric come projection;
+- nessuna affermazione di build/test/commit/deploy/acceptance senza verifica reale.
 
-## 6. Processo di sviluppo
+## 5. Processo di sviluppo
 
-Procedere una milestone alla volta: repository truth -> architettura -> implementazione -> test -> commit/push -> workflow -> Pages -> registri/governance -> handover/baseline. Non iniziare una milestone successiva se la baseline precedente presenta drift o quality gate rosso non spiegato e registrato.
+Procedere una milestone alla volta: repository truth -> architettura -> implementazione -> test -> commit/push -> workflow -> Pages -> governance -> handover/baseline. Non iniziare una milestone successiva se la baseline precedente presenta drift o quality gate rosso non spiegato.
 
-Ogni modifica che cambia comportamento osservabile del portale, pipeline scientifica o stato di una capability deve includere un controllo esplicito di allineamento documentale e handover prima della closure.
+## 6. Stato di continuità corrente — 07/09/2026
 
-## 7. Stato di continuità corrente — 07/09/2026
-
-- `BKL-030 EAGLE Health & Reliability Telemetry` resta **CLOSED / ACCEPTED**.
-- `BKL-015 Knowledge Graph machine-readable` resta **DONE / ACCEPTED**.
-- `TD-008 Knowledge Traceability` resta **RESOLVED**.
-- `BKL-044 Knowledge Graph / AI Evidence Contract` resta **IN PROGRESS**.
-- BKL-044 F1 è integrato via PR #98, merge `6b9db9b342144645da62381d6833ff1ebff3c22c`.
-- BKL-044 F2 è **CLOSED / ACCEPTED** via PR #100, merge `ea36179882f05ce53581b80e5d5e8e70c560dcd9`.
-- F2 ha introdotto schema machine-readable, Citation/Provenance first-class, confidence contract versionato, validator deterministico e test fail-closed.
-- ARB F2 re-review è **APPROVED** e Release Quality F2 è **READY**.
-- Post-merge F2: Developer Foundation #982, docs #591, Word #1016 e Pages #693 sono SUCCESS.
-- Il prossimo incremento governato è **BKL-044 F3 — Governed Seed Projection & Reconciliation**.
-- F3 deve essere bounded e riconciliare esempi governati contro fonti autorevoli; broad ingestion non è autorizzata.
-- Il Knowledge Graph BKL-015 resta una projection repository-centric; BKL-044 non autorizza graph DB, vector DB, RAG, inference runtime o AI authority.
-- Il runtime EAGLE resta invariato e deve rimanere sul branch `main` per telemetria e importazione automatica delle sessioni.
-- `DigitalStarGate.Reporting 1.0.8` resta la baseline runtime scientifica EAGLE nota.
-- AP-013C resta chiuso per DRY_RUN/NO_DELETE; nessun cleanup produttivo C8/source è autorizzato.
+- BKL-030 resta CLOSED / ACCEPTED.
+- BKL-015 resta DONE / ACCEPTED.
+- TD-008 resta RESOLVED.
+- BKL-044 resta IN PROGRESS.
+- F1 è CLOSED / ACCEPTED via PR #98.
+- F2 è CLOSED / ACCEPTED via PR #100.
+- F3 è CLOSED / ACCEPTED via PR #102, merge `8d9f47922de1536b424cdd29ca00fc61c5c9fa49`.
+- ARB F3 re-review: APPROVED 99/100.
+- Release Quality F3: READY.
+- Post-merge F3: Developer Foundation #992, docs #601, Word #1026 e Pages #695 — SUCCESS.
+- Il prossimo incremento governato è **BKL-044 F4 — Consumer / Read-Model Contract**.
+- F4 deve preservare semantic type, lifecycle, source authority, Citation, Provenance e Confidence nei consumer senza semantic flattening o authority escalation.
+- graph DB, vector DB, RAG, inference runtime/provider e AI authority restano non autorizzati/indecisi.
+- runtime EAGLE e Safety Authority restano invariati.
 
 ### Sequenza governata corrente
 
-`BKL-030 CLOSED -> BKL-015 CLOSED -> BKL-044 IN PROGRESS (F1/F2 ACCEPTED; F3 NEXT) -> BKL-035 -> BKL-040 -> BKL-037 -> BKL-038 -> BKL-039 -> BKL-041 -> BKL-045 -> BKL-046 -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`BKL-030 CLOSED -> BKL-015 CLOSED -> BKL-044 IN PROGRESS (F1/F2/F3 ACCEPTED; F4 CURRENT) -> BKL-035 -> BKL-040 -> BKL-037 -> BKL-038 -> BKL-039 -> BKL-041 -> BKL-045 -> BKL-046 -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
-Lo stato deve essere nuovamente verificato nel repository a ogni utilizzo di questo file.
+## 7. Quality-gate handover
 
-## 8. Quality-gate handover
+La baseline di continuità è `docs/project/HANDOVER_2026-09-07.md`; il delta tecnico è `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-07.md`; la closure F3 è `docs/project/BKL-044-F3-CLOSURE-2026-09-07.md`.
 
-La baseline corrente di continuità è `docs/project/HANDOVER_2026-09-07.md`; il delta tecnico corrente è `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-07.md`; la closure F2 è `docs/project/BKL-044-F2-CLOSURE-2026-09-07.md`.
+BKL-030 e BKL-015 non possono essere riaperti implicitamente. Health policy, remediation, command path, Safety Authority coupling, graph infrastructure persistente o AI authority richiedono governance separata.
 
-BKL-030 e BKL-015 non possono essere riaperti implicitamente. Qualunque health policy, remediation, command path, Safety Authority coupling, graph infrastructure persistente o AI authority richiede un package/decisione governata separata.
+## 8. Divieti
 
-## 9. Output richiesto a ogni intervento
+Non inventare branch/file/commit/test/workflow/stati; non marcare approved senza evidence; non promuovere una projection a source primaria; non aggirare interlock/safe state; non introdurre inferenze AI come repository truth; non appiattire semantic type/lifecycle/authority/Citation/Provenance nei consumer F4.
 
-Riportare file modificati, commit SHA, validazioni eseguite/non eseguite, rischi residui e prossimo passo in ordine di dipendenza. Se l'intervento cambia capability, pipeline o comportamento pubblicato, riportare anche l'esito del controllo di sincronizzazione handover/documentazione.
+## 9. Punto di partenza operativo
 
-## 10. Divieti
-
-Non inventare branch/file/commit/test/workflow/stati; non marcare approved senza evidence; non promuovere una projection a source primaria; non aggirare interlock/safe state/four-eyes/controller locale; non introdurre debito tecnico senza registrarlo; non inferire SQM, mains, safety o health da proxy non governati; non cancellare raw scientifici sulla base della sola export completion; non usare un worktree feature come runtime EAGLE operativo; non introdurre inferenze AI nel Knowledge Graph come repository truth senza provenance e contratto approvato.
-
-## 11. Punto di partenza operativo
-
-Aprire `docs/project/HANDOVER_2026-09-07.md`, `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-07.md` e la closure F2; verificare HEAD/workflow correnti. Il package governato corrente è **BKL-044**, con **F3 Governed Seed Projection & Reconciliation** come prossimo incremento.
+Aprire handover, current technical baseline, closure F3 e contratto BKL-044 v0.6; verificare HEAD/workflow correnti. Il package governato corrente è **BKL-044**, con **F4 Consumer / Read-Model Contract** come incremento corrente.
