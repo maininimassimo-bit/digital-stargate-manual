@@ -4,9 +4,9 @@
 |---|---|
 | Stato | Current |
 | Repository authority | GitHub `main` |
-| Baseline di partenza verificata | `6b9db9b342144645da62381d6833ff1ebff3c22c` |
+| Baseline verificata | `ea36179882f05ce53581b80e5d5e8e70c560dcd9` |
 | Current governed package | BKL-044 Knowledge Graph / AI Evidence Contract |
-| BKL-044 state | In Progress — F1 merged |
+| BKL-044 state | In Progress — F1/F2 accepted; F3 next |
 | BKL-015 | Done / Accepted |
 | TD-008 | Resolved |
 | Runtime EAGLE | unchanged |
@@ -14,18 +14,19 @@
 
 ## 1. Current package
 
-BKL-044 è il package corrente. F1 è integrato in `main` tramite PR #98 e merge `6b9db9b342144645da62381d6833ff1ebff3c22c`.
+BKL-044 è il package corrente. F1 è integrato tramite PR #98. F2 è integrato tramite PR #100 e merge `ea36179882f05ce53581b80e5d5e8e70c560dcd9`.
 
 Contratto:
 
 `docs/architecture/knowledge/BKL-044-Knowledge-Graph-AI-Evidence-Contract.md`
 
-Review:
+F2 governance:
 
-- `docs/architecture/reviews/ARB-BKL-044-F1-Independent-Review-2026-09-07.md`;
-- `docs/architecture/reviews/RQ-BKL-044-F1-Release-Quality-Review-2026-09-07.md`.
+- `docs/architecture/reviews/ARB-BKL-044-F2-ReReview-2026-09-07.md` — APPROVED;
+- `docs/architecture/reviews/RQ-BKL-044-F2-Release-Quality-Review-2026-09-07.md` — READY;
+- `docs/project/BKL-044-F2-CLOSURE-2026-09-07.md` — closure record.
 
-F1 stabilisce il modello semantico e i boundary. F2 deve trasformare il contratto in schema machine-readable e validation fail-closed senza introdurre runtime AI o storage technology.
+Post-merge sul commit F2: Developer Foundation #982, documentation #591, Word #1016 e Pages #693 risultano SUCCESS.
 
 ## 2. Repository Knowledge Graph foundation
 
@@ -35,21 +36,23 @@ Projection:
 
 `docs/data/knowledge-graph.json`
 
-Schema:
+Schema foundation:
 
 `schemas/knowledge-graph-foundation.schema.json`
 
-Validation:
-
-- `.github/scripts/verify-knowledge-graph.mjs`;
-- `.github/scripts/verify-knowledge-graph-coverage.mjs`;
-- `.github/scripts/verify-knowledge-graph-material-relations.mjs`.
-
 Il Knowledge Graph resta una projection non autorevole e ricostruibile dalle fonti repository.
 
-## 3. BKL-044 F1 semantic boundary
+## 3. BKL-044 machine-readable evidence baseline
 
-Le classi introdotte dal contratto sono semanticamente distinte:
+F2 aggiunge:
+
+- `schemas/knowledge-ai-evidence-contract.schema.json`;
+- `docs/data/knowledge-ai-evidence-contract.json`;
+- `.github/scripts/verify-knowledge-ai-evidence-contract.mjs`;
+- `.github/scripts/test-knowledge-ai-evidence-contract.mjs`;
+- Developer Foundation gate.
+
+Le classi restano semanticamente distinte:
 
 `Observation -> Evidence -> Claim -> Inference -> Recommendation`
 
@@ -57,87 +60,49 @@ con Confidence, Citation, Provenance, Conflict e Unknown come concetti trasversa
 
 Regole permanenti:
 
-- una Observation non è automaticamente una Evidence;
-- una Evidence non è automaticamente una Claim;
-- una Inference non è un fatto autorevole;
-- una Recommendation resta advisory;
-- confidence non sostituisce evidence/provenance;
+- una Observation non è automaticamente Evidence;
+- Evidence validata deve avere Citation/locator governato;
+- Claim/Inference/Recommendation validati richiedono evidence, citation, provenance e method;
+- AI-derived validato richiede inoltre producer version;
+- confidence non sostituisce evidence/provenance e deve risolvere un contratto versionato;
 - missing/conflicting provenance non viene auto-risolta;
 - nessun contenuto AI acquisisce authority per il solo fatto di essere nel graph.
 
 ## 4. Roadmap state
 
-Authority:
+Authority: `.github/roadmap/roadmap-source.json`.
 
-`.github/roadmap/roadmap-source.json`
+Projection: `docs/data/roadmap.json`.
 
-Projection:
-
-`docs/data/roadmap.json`
-
-BKL-044 è il current package/active package. BKL-015 è completato. TD-008 resta risolto.
+BKL-044 resta current/active e `In Progress`; F2 è chiuso ma BKL-044 non è Done. F3 è il prossimo incremento. BKL-015 resta completato e TD-008 resta risolto.
 
 ## 5. Observatory runtime
 
-Nessuna modifica BKL-044 F1 interessa:
-
-- EAGLE runtime;
-- N.I.N.A.;
-- PHD2;
-- CPWI;
-- ASCOM;
-- roof/safety interlock;
-- telemetry producer;
-- OneDrive scientific transport;
-- cleanup policy.
-
-Il repository operativo EAGLE deve restare su `main` per la session automation.
+Nessuna modifica BKL-044 F1/F2 interessa EAGLE runtime, N.I.N.A., PHD2, CPWI, ASCOM, roof/safety interlock, telemetry producer, OneDrive scientific transport o cleanup policy. Il repository operativo EAGLE deve restare su `main` per la session automation.
 
 ## 6. Scientific transport invariants
 
-Restano validi:
-
-- final authoritative storage `F:\Astrofotografia`;
-- transfer mode `COPY_ONLY`;
-- SHA-256 verification;
-- ACK come prova di import verificato;
-- cleanup produttivo C8 non autorizzato;
-- `F:\Astrofotografia` non è cleanup target.
+Restano validi final authoritative storage `F:\Astrofotografia`, transfer mode `COPY_ONLY`, SHA-256 verification, ACK come prova di import verificato, cleanup produttivo C8 non autorizzato e `F:\Astrofotografia` escluso dai cleanup target.
 
 ## 7. EAGLE Health invariants
 
-BKL-030 resta Done/Accepted nel perimetro read-only telemetry/history/portal:
-
-- nessuna remediation automatica;
-- nessun command endpoint;
-- severity policy non attivata implicitamente;
-- Safety Authority fuori scope;
-- cloud outage non sostituisce gli interlock locali.
+BKL-030 resta Done/Accepted nel perimetro read-only telemetry/history/portal: nessuna remediation automatica, nessun command endpoint, severity policy non attivata implicitamente, Safety Authority fuori scope e cloud outage non sostituisce gli interlock locali.
 
 ## 8. Documentation authority
 
-Per la continuità corrente usare:
-
-1. `AI_BOOTSTRAP.md`;
-2. `docs/project/HANDOVER_2026-09-07.md`;
-3. questo documento;
-4. `docs/project/BACKLOG.md`;
-5. roadmap authority;
-6. technical debt e decision log;
-7. package/review/evidence direttamente applicabili.
-
-`ENTERPRISE_ARCHITECTURE_CONTEXT.md` e `REPOSITORY_KNOWLEDGE_MAP.md` conservano valore storico/strutturale ma la loro baseline 04/08/2026 non deve prevalere sullo stato corrente.
+Per la continuità corrente usare `AI_BOOTSTRAP.md`, handover 07/09/2026, questo documento, backlog, roadmap authority, technical debt/decision log e package/review/evidence direttamente applicabili. I documenti storici non prevalgono sul repository truth corrente.
 
 ## 9. Next governed increment
 
-**BKL-044 F2 — Machine-readable schema and fail-closed validation.**
+**BKL-044 F3 — Governed Seed Projection & Reconciliation.**
 
 Acceptance minima attesa:
 
-- schema versionato;
-- identità stabile per gli oggetti semantici;
-- required provenance/citation/evidence dove previsto;
-- validation fail-closed per incompletezza materiale;
-- confidence contract stabile/versionato;
-- nessun graph/vector/RAG/runtime AI introdotto implicitamente;
+- seed bounded e governati, non broad ingestion;
+- riconciliazione deterministica con fonti repository autorevoli selezionate;
+- ogni seed conserva semantic type, lifecycle e source authority;
+- Citation e Provenance F2 usate con riferimenti risolvibili;
+- Confidence solo attraverso contract identity stabile/versionata;
+- incomplete/conflicting source material resta esplicito e fail-closed;
+- nessuna selezione graph/vector/RAG/runtime AI;
 - nessun impatto Safety Authority o runtime EAGLE.
