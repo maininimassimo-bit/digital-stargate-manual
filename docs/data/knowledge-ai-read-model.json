@@ -1,73 +1,9 @@
 {
-  "schema_version": "1.0",
-  "component": "DSG.KnowledgeConsumerReadModel",
-  "authority": "projection",
-  "source_contract": "docs/data/knowledge-ai-evidence-contract.json",
+  "schema_version": "1.0", "component": "DSG.KnowledgeConsumerReadModel", "authority": "projection", "source_contract": "docs/data/knowledge-ai-evidence-contract.json",
   "items": [
-    {
-      "id": "RM-EVD-BKL044-F3-F2-CLOSURE",
-      "source_item_ref": "EVD-BKL044-F3-F2-CLOSURE",
-      "semantic_type": "evidence",
-      "lifecycle_state": "validated",
-      "source_authority": "repository_authority",
-      "ai_derived": false,
-      "producer": "DSG.RepositoryGovernance",
-      "citations": [{
-        "ref": "CIT-BKL044-F2-CLOSURE@1.0",
-        "source_authority": "repository_authority",
-        "locator": { "kind": "repository_path", "value": "docs/project/BKL-044-F2-CLOSURE-2026-09-07.md" }
-      }],
-      "provenance": []
-    },
-    {
-      "id": "RM-OBS-BKL044-F3-CURRENT-STATE",
-      "source_item_ref": "OBS-BKL044-F3-CURRENT-STATE",
-      "semantic_type": "observation",
-      "lifecycle_state": "validated",
-      "source_authority": "repository_authority",
-      "ai_derived": false,
-      "producer": "DSG.RepositoryGovernance",
-      "citations": [{
-        "ref": "CIT-BKL044-CURRENT-BASELINE@1.0",
-        "source_authority": "repository_authority",
-        "locator": { "kind": "repository_path", "value": "docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-07.md" }
-      }],
-      "provenance": []
-    },
-    {
-      "id": "RM-CLM-BKL044-F3-NEXT-INCREMENT",
-      "source_item_ref": "CLM-BKL044-F3-NEXT-INCREMENT",
-      "semantic_type": "claim",
-      "lifecycle_state": "validated",
-      "source_authority": "repository_authority",
-      "ai_derived": false,
-      "producer": "DSG.RepositoryGovernance",
-      "citations": [{
-        "ref": "CIT-BKL044-BACKLOG@1.0",
-        "source_authority": "repository_authority",
-        "locator": { "kind": "repository_path", "value": "docs/project/BACKLOG.md" }
-      }],
-      "provenance": [{
-        "ref": "PRV-BKL044-F3-NEXT-INCREMENT@1.0",
-        "method_id": "METHOD-REPOSITORY-RECONCILIATION-1",
-        "input_refs": ["EVD-BKL044-F3-BACKLOG"],
-        "output_ref": "CLM-BKL044-F3-NEXT-INCREMENT",
-        "citation_refs": ["CIT-BKL044-BACKLOG@1.0"]
-      }],
-      "confidence": { "contract_ref": "CONF-DETERMINISTIC@1.0", "value": 1.0 }
-    },
-    {
-      "id": "RM-INF-BKL044-F2-INCOMPLETE",
-      "source_item_ref": "INF-BKL044-F2-INCOMPLETE",
-      "semantic_type": "inference",
-      "lifecycle_state": "incomplete",
-      "source_authority": "projection",
-      "ai_derived": true,
-      "producer": "DSG.AdvisoryAI",
-      "producer_version": "contract-test-1",
-      "citations": [],
-      "provenance": [],
-      "confidence": { "contract_ref": "CONF-DETERMINISTIC@1.0", "value": 0.5 }
-    }
+    { "id": "RM-EVD-BKL044-F3-F2-CLOSURE", "source_item_ref": "EVD-BKL044-F3-F2-CLOSURE", "semantic_type": "evidence", "lifecycle_state": "validated", "source_authority": "repository_authority", "ai_derived": false, "producer": "DSG.RepositoryGovernance", "produced_at_utc": "2026-09-07T13:20:00Z", "citations": [{ "ref": "CIT-BKL044-F2-CLOSURE@1.0", "source_authority": "repository_authority", "locator": { "kind": "repository_path", "value": "docs/project/BKL-044-F2-CLOSURE-2026-09-07.md" } }], "provenance": [] },
+    { "id": "RM-OBS-BKL044-F3-CURRENT-STATE", "source_item_ref": "OBS-BKL044-F3-CURRENT-STATE", "semantic_type": "observation", "lifecycle_state": "validated", "source_authority": "repository_authority", "ai_derived": false, "producer": "DSG.RepositoryGovernance", "produced_at_utc": "2026-09-07T13:20:00Z", "observed_at_utc": "2026-09-07T13:20:00Z", "citations": [{ "ref": "CIT-BKL044-CURRENT-BASELINE@1.0", "source_authority": "repository_authority", "locator": { "kind": "repository_path", "value": "docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-07.md" } }], "provenance": [] },
+    { "id": "RM-CLM-BKL044-F3-NEXT-INCREMENT", "source_item_ref": "CLM-BKL044-F3-NEXT-INCREMENT", "semantic_type": "claim", "lifecycle_state": "validated", "source_authority": "repository_authority", "ai_derived": false, "producer": "DSG.RepositoryGovernance", "produced_at_utc": "2026-09-07T13:20:00Z", "method_id": "METHOD-REPOSITORY-RECONCILIATION-1", "evidence_refs": ["EVD-BKL044-F3-BACKLOG"], "citations": [{ "ref": "CIT-BKL044-BACKLOG@1.0", "source_authority": "repository_authority", "locator": { "kind": "repository_path", "value": "docs/project/BACKLOG.md" } }], "provenance": [{ "ref": "PRV-BKL044-F3-NEXT-INCREMENT@1.0", "method_id": "METHOD-REPOSITORY-RECONCILIATION-1", "input_refs": ["EVD-BKL044-F3-BACKLOG"], "output_ref": "CLM-BKL044-F3-NEXT-INCREMENT", "citation_refs": ["CIT-BKL044-BACKLOG@1.0"] }], "confidence": { "contract_ref": "CONF-DETERMINISTIC@1.0", "value": 1.0 } },
+    { "id": "RM-INF-BKL044-F2-INCOMPLETE", "source_item_ref": "INF-BKL044-F2-INCOMPLETE", "semantic_type": "inference", "lifecycle_state": "incomplete", "source_authority": "projection", "ai_derived": true, "producer": "DSG.AdvisoryAI", "producer_version": "contract-test-1", "produced_at_utc": "2026-09-07T12:31:00Z", "method_id": "METHOD-ADVISORY-EXAMPLE", "citations": [], "provenance": [], "confidence": { "contract_ref": "CONF-DETERMINISTIC@1.0", "value": 0.5 } }
   ]
 }
