@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "component": "DSG.TargetIdentityReconciliation",
+  "authority": "projection",
+  "baseline_commit": "2d30962b1c51325361ffa448064930a79c915023",
+  "source_contract": {
+    "path": "data/analytics/metadata/session-scientific-metadata.csv",
+    "authority": "analytics_projection",
+    "key": "session_id",
+    "accepted_states": ["REGISTERED"]
+  },
+  "bounds": {"max_matches":5,"max_conflicts":5},
+  "matches": [
+    {
+      "target_key":"dsg-target:ldn-1320",
+      "target_id":"TGT-LDN-1320",
+      "canonical_name":"LDN 1320",
+      "aliases":[],
+      "session_ids":["2026-07-14_2026-07-15","2026-07-15_2026-07-16"],
+      "identity_state":"validated",
+      "source_authority":"analytics_projection",
+      "source_refs":["analytics-metadata:2026-07-14_2026-07-15","analytics-metadata:2026-07-15_2026-07-16"],
+      "method_id":"BKL035-F3-EXACT-ID-RECONCILIATION-1"
+    },
+    {
+      "target_key":"dsg-target:m-27",
+      "target_id":"TGT-MESSIER-M27",
+      "canonical_name":"M 27",
+      "aliases":[],
+      "session_ids":["2026-08-14_2026-08-15","2026-08-15_2026-08-16"],
+      "identity_state":"validated",
+      "source_authority":"analytics_projection",
+      "source_refs":["analytics-metadata:2026-08-14_2026-08-15","analytics-metadata:2026-08-15_2026-08-16"],
+      "method_id":"BKL035-F3-EXACT-ID-RECONCILIATION-1"
+    }
+  ],
+  "conflicts": []
+}
