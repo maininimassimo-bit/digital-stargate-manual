@@ -1,0 +1,29 @@
+{
+  "schema_version":"1.0",
+  "component":"DSG.TargetKnowledgeConsumerReadModel",
+  "authority":"projection",
+  "source_contracts":["docs/data/target-knowledge-base.json","docs/data/target-identity-reconciliation.json"],
+  "bounds":{"max_targets":5},
+  "targets":[
+    {
+      "target_key":"dsg-target:ldn-1320","canonical_name":"LDN 1320","aliases":[],"identity_state":"validated","target_id":"TGT-LDN-1320","target_id_state":"validated",
+      "scientific_sessions":["2026-07-14_2026-07-15","2026-07-15_2026-07-16"],
+      "scientific_session_citation_refs":["CIT-TKB-SESSION-2026-07-14@1.0","CIT-TKB-SESSION-2026-07-15@1.0"],
+      "scientific_session_provenance_refs":["PRV-TKB-LDN1320-S1@1.0","PRV-TKB-LDN1320-S2@1.0"],
+      "reconciliation_evidence_sessions":["2026-07-14_2026-07-15","2026-07-15_2026-07-16","2026-07-16_2026-07-17"],
+      "source_authorities":["governed_scientific_projection","analytics_projection"],
+      "citation_refs":["CIT-TKB-SESSION-2026-07-14@1.0","CIT-TKB-SESSION-2026-07-15@1.0","CIT-TIR-2026-07-14@1.0","CIT-TIR-2026-07-15@1.0","CIT-TIR-2026-07-16@1.0"],
+      "provenance_refs":["PRV-TKB-LDN1320-KEY@1.0","PRV-TIR-LDN1320@1.0"],"conflict_refs":[]
+    },
+    {
+      "target_key":"dsg-target:m-27","canonical_name":"M 27","aliases":[],"identity_state":"validated","target_id":"TGT-MESSIER-M27","target_id_state":"validated",
+      "scientific_sessions":["2026-08-14_2026-08-15","2026-08-15_2026-08-16"],
+      "scientific_session_citation_refs":["CIT-TKB-SESSION-2026-08-14@1.0","CIT-TKB-SESSION-2026-08-15@1.0"],
+      "scientific_session_provenance_refs":["PRV-TKB-M27-S1@1.0","PRV-TKB-M27-S2@1.0"],
+      "reconciliation_evidence_sessions":["2026-08-14_2026-08-15","2026-08-15_2026-08-16"],
+      "source_authorities":["governed_scientific_projection","analytics_projection"],
+      "citation_refs":["CIT-TKB-SESSION-2026-08-14@1.0","CIT-TKB-SESSION-2026-08-15@1.0","CIT-TIR-2026-08-14@1.0","CIT-TIR-2026-08-15@1.0"],
+      "provenance_refs":["PRV-TKB-M27-KEY@1.0","PRV-TIR-M27@1.0"],"conflict_refs":[]
+    }
+  ]
+}
