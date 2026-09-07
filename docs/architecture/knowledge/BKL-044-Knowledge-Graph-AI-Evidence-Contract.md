@@ -4,7 +4,7 @@
 |---|---|
 | Identifier | BKL-044 |
 | Status | In Progress |
-| Version | 0.3 |
+| Version | 0.4 |
 | Date | 2026-09-07 |
 | Predecessor | BKL-015 — Done / Accepted |
 | Related capability | CAP-40 — Scientific Knowledge Layer |
@@ -18,6 +18,8 @@ BKL-044 defines the semantic and machine-readable contract required to represent
 ## 2. Verified baseline
 
 BKL-015 provides stable repository entity identities, typed/versioned relations, source locators, a non-authoritative Knowledge Graph projection and deterministic integrity/coverage gates. BKL-044 extends that baseline without reopening TD-008.
+
+F1 is merged via PR #98. F2 is CLOSED / ACCEPTED via PR #100 and merge `ea36179882f05ce53581b80e5d5e8e70c560dcd9`, after independent ARB approval, Release Quality readiness and successful post-merge CI.
 
 ## 3. Authority model
 
@@ -40,7 +42,7 @@ Authoritative sources remain authoritative for their own facts. Knowledge/AI dat
 
 ## 5. F2 machine-readable contract
 
-F2 introduces:
+F2 introduced:
 
 - `schemas/knowledge-ai-evidence-contract.schema.json` — JSON Schema 2020-12, version `1.0`;
 - `docs/data/knowledge-ai-evidence-contract.json` — bounded contract fixture/projection, not repository authority;
@@ -56,23 +58,19 @@ Lifecycle states are `incomplete`, `unknown`, `draft`, `validated`, `superseded`
 
 A `claim`, `inference`, or `recommendation` may exist without complete evidence only while non-validated. Promotion to `validated` requires resolvable evidence, citation and provenance references plus derivation method. Validated `evidence` requires at least one resolvable governed Citation containing source authority and locator. A validated AI-derived item additionally requires producer version metadata.
 
-Missing mandatory evidence, citation, provenance or producer identity therefore fails closed and cannot be represented as validated knowledge. This disposes F1 M-01/RQ-01 and the F2 ARB findings M-01/M-02.
+Missing mandatory evidence, citation, provenance or producer identity fails closed and cannot be represented as validated knowledge.
 
 ## 7. Citation contract
 
-A Citation is a first-class versioned record with stable ID, version, source authority, governed locator, producer and production timestamp. Locator kinds are technology-neutral (`repository_path`, `uri`, `catalog_id`, `external_asset_id`). Citation references use `<citation-id>@<version>` and must resolve deterministically.
-
-Citation is evidence location metadata, not a grant of authority or access. Protected source access remains governed by the source system.
+A Citation is a first-class versioned record with stable ID, version, source authority, governed locator, producer and production timestamp. Locator kinds are technology-neutral (`repository_path`, `uri`, `catalog_id`, `external_asset_id`). Citation references use `<citation-id>@<version>` and must resolve deterministically. Citation is evidence location metadata, not a grant of authority or access.
 
 ## 8. Provenance contract
 
 A Provenance record is a first-class versioned transformation record with producer, timestamp, method, one or more input item references, one output item reference and one or more governed Citation references. All referenced items and citations must resolve in the bounded contract dataset.
 
-This creates an inspectable chain without selecting a graph database, vector database, RAG framework or inference runtime.
-
 ## 9. Confidence contract
 
-Confidence is valid only through a stable versioned reference using `<contract-id>@<version>`. Each referenced confidence contract defines at minimum scale, method and producer, with calibration version, population/window and timestamp available when applicable. The validator rejects unresolved confidence contract references. A bare value such as `0.92` has no compliant meaning. This disposes F1 M-02/RQ-02.
+Confidence is valid only through a stable versioned reference using `<contract-id>@<version>`. Each referenced confidence contract defines at minimum scale, method and producer, with calibration version, population/window and timestamp available when applicable. The validator rejects unresolved confidence contract references. A bare value has no compliant meaning.
 
 ## 10. Observation vs inference boundary
 
@@ -88,54 +86,51 @@ AI-produced content is explicitly marked `ai_derived`, remains distinguishable f
 
 ## 12. Safety and security boundary
 
-F2 introduces no observatory command path, cleanup action, remediation, interlock override, weather-safety decision or Safety Authority coupling. Knowledge projections contain no credentials and graph presence does not grant access to protected sources.
+BKL-044 introduces no observatory command path, cleanup action, remediation, interlock override, weather-safety decision or Safety Authority coupling. Knowledge projections contain no credentials and graph presence does not grant access to protected sources.
 
-## 13. Validation behavior
+## 13. F2 acceptance evidence
 
-The CI validator checks at minimum:
+Independent governance:
 
-- contract version/component/authority;
-- unique versioned Citation, Provenance and confidence-contract identities;
-- semantic, lifecycle and source-authority vocabulary parity;
-- governed Citation locator and source authority;
-- Provenance input/output/citation reference resolution;
-- observation timestamp requirement;
-- derivation method for claim/inference/recommendation;
-- resolvable evidence/citation/provenance for validated derived items;
-- resolvable Citation for validated Evidence;
-- evidence/citation/provenance and producer version for validated AI items;
-- stable/versioned confidence-contract resolution;
-- explicit conflict references.
+- `docs/architecture/reviews/ARB-BKL-044-F2-ReReview-2026-09-07.md` — APPROVED;
+- `docs/architecture/reviews/RQ-BKL-044-F2-Release-Quality-Review-2026-09-07.md` — READY.
 
-Negative tests cover evidence-less validated AI output, validated Evidence without locator/citation, unresolved Citation, unresolved Provenance, invalid source authority and unresolved confidence contract. Positive tests prove incomplete AI inference remains representable and fully governed validated derivation passes.
+Post-merge on `ea36179882f05ce53581b80e5d5e8e70c560dcd9`:
+
+- Developer Foundation #982 — SUCCESS;
+- Validate documentation #591 — SUCCESS;
+- Genera manuale Word #1016 — SUCCESS;
+- Deploy MkDocs artifact to GitHub Pages #693 — SUCCESS.
+
+Closure record: `docs/project/BKL-044-F2-CLOSURE-2026-09-07.md`.
 
 ## 14. Transition increments
 
-- **F1 — Semantic contract:** merged via PR #98.
-- **F2 — Machine-readable schema and validation:** current increment; ARB remediation incorporated, re-review pending exact-head CI.
-- **F3 — Governed seed projection and reconciliation:** next after F2 acceptance.
+- **F1 — Semantic contract:** merged via PR #98; accepted baseline.
+- **F2 — Machine-readable schema and validation:** CLOSED / ACCEPTED via PR #100; merge `ea36179882f05ce53581b80e5d5e8e70c560dcd9`.
+- **F3 — Governed seed projection and reconciliation:** next governed increment.
 - **F4 — Consumer/read-model contract:** after F3.
 
-## 15. F2 acceptance criteria
+## 15. F3 scope guardrails
 
-F2 is acceptable when:
+F3 must seed only a bounded set of governed examples needed to prove the F2 contract against real authoritative source material. It must not become a broad ingestion initiative.
 
-- the machine-readable schema is versioned and technology-neutral;
-- canonical semantic classes remain distinguishable;
-- Citation and Provenance are first-class versioned records;
-- lifecycle state and source authority are explicit and validator/schema vocabularies agree;
-- validated Evidence cannot omit a resolvable governed Citation/locator;
-- validated derived knowledge cannot omit resolvable evidence/citation/provenance/method;
-- validated AI-derived knowledge cannot omit evidence/citation/provenance/producer version;
-- confidence values resolve to stable/versioned confidence contracts;
-- deterministic positive/negative tests are integrated into Developer Foundation;
-- MkDocs/documentation gates pass;
-- independent ARB re-review and Release Quality review approve continuation;
-- no runtime or Safety Authority capability is introduced.
+F3 must:
+
+- select explicit authoritative repository source material;
+- create only the minimum Observation/Evidence/Claim/Inference/Recommendation examples necessary for reconciliation coverage;
+- use resolvable Citation and Provenance records;
+- preserve source authority, lifecycle and semantic type;
+- use confidence only through stable/versioned confidence contracts;
+- expose incomplete, unknown or conflicting material explicitly;
+- provide deterministic reconciliation/validation evidence;
+- keep all projection content non-authoritative.
+
+F3 must not select persistent graph/vector storage, RAG, model provider or inference runtime and must not introduce runtime EAGLE or Safety Authority behavior.
 
 ## 16. Migration and rollback
 
-F2 is additive repository contract/CI work. No scientific source data or runtime configuration is migrated. Rollback is a repository revert of the F2 change set.
+F2 is additive repository contract/CI work. No scientific source data or runtime configuration was migrated. F3 remains repository-only unless a separately governed decision changes that boundary. Rollback remains a repository revert of the applicable change set.
 
 ## 17. Risks and open decisions
 
@@ -143,4 +138,4 @@ Uncontrolled vocabulary growth, source conflicts, historical incomplete provenan
 
 ## 18. Decision
 
-BKL-044 F2 encodes the accepted F1 semantics as a fail-closed machine-readable contract while preserving repository authority, explicit unknown/conflict states, technology neutrality and advisory/read-only AI boundaries. F3 seed/reconciliation work must not begin until F2 exact-head CI, independent ARB re-review, Release Quality review and merge acceptance are complete.
+F2 is accepted and closed as the machine-readable fail-closed contract baseline. BKL-044 remains In Progress. F3 may begin only from a verified post-F2 baseline and must remain bounded, source-reconciled, technology-neutral, advisory/read-only and outside Safety Authority.
