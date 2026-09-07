@@ -1,0 +1,68 @@
+{
+  "schema_version": "0.2.0",
+  "session_id": "2026-09-06_2026-09-07",
+  "generated_at": "2026-09-07T06:28:27.470671+00:00",
+  "scientific": {
+    "target_name": "M 27",
+    "ra_deg": 299.9,
+    "dec_deg": 22.72111111,
+    "epoch": "J2000",
+    "telescope": "Celestron C8 XLT",
+    "camera": "QHY695A",
+    "binning": 1,
+    "source": "nina-log",
+    "configuration_id": "C8_QHY695A_BIN1"
+  },
+  "nina": {
+    "camera_exposures_total": 203,
+    "light_started": 37,
+    "light_completed": 37,
+    "light_failed_explicit": 0,
+    "light_interrupted_unmatched": 0,
+    "technical_exposures_estimated": 166,
+    "integration_seconds": 22200.0,
+    "autofocus_started": 22,
+    "autofocus_completed": 9,
+    "autofocus_failed_explicit": 6,
+    "autofocus_unmatched": 7,
+    "dither_requests": 72,
+    "nina_errors": 68,
+    "nina_warnings": 92
+  },
+  "phd2": {
+    "guide_segments": 22,
+    "guide_samples_valid": 172,
+    "rms_ra_arcsec": 1.757,
+    "rms_dec_arcsec": 0.519,
+    "rms_total_arcsec": 1.832,
+    "lost_star_events": 0,
+    "pulse_guide_failures": 0
+  },
+  "weather": {
+    "weather_rows_total": 3960,
+    "weather_rows_unsafe_full_window": 479,
+    "weather_safe_transitions_full_window": 1,
+    "weather_unsafe_pct_full_window": 12.1,
+    "weather_scope_note": "Valori riferiti alla finestra CSV importata; non penalizzano la severita finche non sono correlati alla sequenza attiva/cupola aperta."
+  },
+  "sqm": {
+    "state": "AVAILABLE",
+    "quality": "AVAILABLE",
+    "start": "2026-09-06T18:40:56.0000000Z",
+    "end": "2026-09-07T03:59:33.0000000Z",
+    "min_mag_arcsec2": 16.31,
+    "max_mag_arcsec2": 21.06,
+    "mean_mag_arcsec2": 20.7599,
+    "median_mag_arcsec2": 20.96,
+    "valid_samples": 1096,
+    "temporal_coverage": 0.8297,
+    "source_path": "data/sessions/2026/09/2026-09-06_2026-09-07/raw/sqm/sqm-summary.json",
+    "source": "AAG CloudWatcher SOLO HTTP / lightmpsas",
+    "serial": "2382",
+    "firmware": "5.88"
+  },
+  "severity": "YELLOW",
+  "severity_reasons": [
+    "Autofocus falliti esplicitamente: 6"
+  ]
+}
