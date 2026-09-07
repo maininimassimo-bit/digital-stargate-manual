@@ -14,58 +14,30 @@
   },
   "$defs": {
     "reference": { "type": "string", "minLength": 2 },
-    "locator": {
-      "type": "object", "additionalProperties": false, "required": ["kind", "value"],
-      "properties": {
-        "kind": { "enum": ["repository_path", "uri", "catalog_id", "external_asset_id"] },
-        "value": { "type": "string", "minLength": 1 },
-        "anchor": { "type": "string", "minLength": 1 }
-      }
-    },
-    "citation": {
-      "type": "object", "additionalProperties": false,
-      "required": ["ref", "source_authority", "locator"],
-      "properties": {
-        "ref": { "$ref": "#/$defs/reference" },
-        "source_authority": { "type": "string", "minLength": 1 },
-        "locator": { "$ref": "#/$defs/locator" }
-      }
-    },
-    "provenance": {
-      "type": "object", "additionalProperties": false,
-      "required": ["ref", "method_id", "input_refs", "output_ref", "citation_refs"],
-      "properties": {
-        "ref": { "$ref": "#/$defs/reference" },
-        "method_id": { "type": "string", "minLength": 1 },
-        "input_refs": { "type": "array", "items": { "$ref": "#/$defs/reference" } },
-        "output_ref": { "$ref": "#/$defs/reference" },
-        "citation_refs": { "type": "array", "items": { "$ref": "#/$defs/reference" } }
-      }
-    },
-    "confidence": {
-      "type": "object", "additionalProperties": false,
-      "required": ["contract_ref", "value"],
-      "properties": {
-        "contract_ref": { "$ref": "#/$defs/reference" },
-        "value": { "type": ["number", "string"] }
-      }
-    },
+    "locator": { "type": "object", "additionalProperties": false, "required": ["kind", "value"], "properties": { "kind": { "enum": ["repository_path", "uri", "catalog_id", "external_asset_id"] }, "value": { "type": "string", "minLength": 1 }, "anchor": { "type": "string", "minLength": 1 } } },
+    "citation": { "type": "object", "additionalProperties": false, "required": ["ref", "source_authority", "locator"], "properties": { "ref": { "$ref": "#/$defs/reference" }, "source_authority": { "type": "string", "minLength": 1 }, "locator": { "$ref": "#/$defs/locator" } } },
+    "provenance": { "type": "object", "additionalProperties": false, "required": ["ref", "method_id", "input_refs", "output_ref", "citation_refs"], "properties": { "ref": { "$ref": "#/$defs/reference" }, "method_id": { "type": "string", "minLength": 1 }, "input_refs": { "type": "array", "items": { "$ref": "#/$defs/reference" } }, "output_ref": { "$ref": "#/$defs/reference" }, "citation_refs": { "type": "array", "items": { "$ref": "#/$defs/reference" } } } },
+    "confidence": { "type": "object", "additionalProperties": false, "required": ["contract_ref", "value"], "properties": { "contract_ref": { "$ref": "#/$defs/reference" }, "value": { "type": ["number", "string"] } } },
     "item": {
       "type": "object", "additionalProperties": false,
-      "required": ["id", "source_item_ref", "semantic_type", "lifecycle_state", "source_authority", "ai_derived", "producer", "citations", "provenance"],
+      "required": ["id", "source_item_ref", "semantic_type", "lifecycle_state", "source_authority", "ai_derived", "producer", "produced_at_utc", "citations", "provenance"],
       "properties": {
-        "id": { "$ref": "#/$defs/reference" },
-        "source_item_ref": { "$ref": "#/$defs/reference" },
+        "id": { "$ref": "#/$defs/reference" }, "source_item_ref": { "$ref": "#/$defs/reference" },
         "semantic_type": { "enum": ["observation", "evidence", "claim", "inference", "recommendation", "conflict", "unknown"] },
         "lifecycle_state": { "enum": ["incomplete", "unknown", "draft", "validated", "superseded", "rejected"] },
         "source_authority": { "enum": ["repository_authority", "scientific_catalog", "analytics_product", "telemetry_projection", "session_projection", "external_scientific_storage", "projection", "unknown"] },
-        "ai_derived": { "type": "boolean" },
-        "producer": { "type": "string", "minLength": 1 },
-        "producer_version": { "type": "string", "minLength": 1 },
-        "citations": { "type": "array", "items": { "$ref": "#/$defs/citation" } },
-        "provenance": { "type": "array", "items": { "$ref": "#/$defs/provenance" } },
-        "confidence": { "$ref": "#/$defs/confidence" }
-      }
+        "ai_derived": { "type": "boolean" }, "producer": { "type": "string", "minLength": 1 }, "producer_version": { "type": "string", "minLength": 1 },
+        "produced_at_utc": { "type": "string", "format": "date-time" }, "observed_at_utc": { "type": "string", "format": "date-time" },
+        "method_id": { "type": "string", "minLength": 1 },
+        "evidence_refs": { "type": "array", "items": { "$ref": "#/$defs/reference" } },
+        "conflict_refs": { "type": "array", "items": { "$ref": "#/$defs/reference" } },
+        "citations": { "type": "array", "items": { "$ref": "#/$defs/citation" } }, "provenance": { "type": "array", "items": { "$ref": "#/$defs/provenance" } }, "confidence": { "$ref": "#/$defs/confidence" }
+      },
+      "allOf": [
+        { "if": { "properties": { "semantic_type": { "const": "observation" } }, "required": ["semantic_type"] }, "then": { "required": ["observed_at_utc"] } },
+        { "if": { "properties": { "semantic_type": { "enum": ["claim", "inference", "recommendation"] } }, "required": ["semantic_type"] }, "then": { "required": ["method_id"] } },
+        { "if": { "properties": { "semantic_type": { "const": "conflict" } }, "required": ["semantic_type"] }, "then": { "required": ["conflict_refs"] } }
+      ]
     }
   }
 }
