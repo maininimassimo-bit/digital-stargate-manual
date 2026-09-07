@@ -4,12 +4,14 @@
   "title": "Digital StarGate Knowledge / AI Evidence Contract",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "component", "authority", "items", "confidence_contracts"],
+  "required": ["schema_version", "component", "authority", "items", "citations", "provenance_records", "confidence_contracts"],
   "properties": {
     "schema_version": { "const": "1.0" },
     "component": { "const": "DSG.KnowledgeAIEvidenceContract" },
     "authority": { "const": "projection" },
     "items": { "type": "array", "items": { "$ref": "#/$defs/item" } },
+    "citations": { "type": "array", "items": { "$ref": "#/$defs/citation" } },
+    "provenance_records": { "type": "array", "items": { "$ref": "#/$defs/provenance" } },
     "confidence_contracts": { "type": "array", "items": { "$ref": "#/$defs/confidenceContract" } }
   },
   "$defs": {
@@ -17,6 +19,36 @@
     "reference": { "type": "string", "minLength": 2 },
     "sourceAuthority": { "enum": ["repository_authority", "scientific_catalog", "analytics_product", "telemetry_projection", "session_projection", "external_scientific_storage", "projection", "unknown"] },
     "lifecycle": { "enum": ["incomplete", "unknown", "draft", "validated", "superseded", "rejected"] },
+    "locator": {
+      "type": "object", "additionalProperties": false, "required": ["kind", "value"],
+      "properties": {
+        "kind": { "enum": ["repository_path", "uri", "catalog_id", "external_asset_id"] },
+        "value": { "type": "string", "minLength": 1 },
+        "anchor": { "type": "string", "minLength": 1 }
+      }
+    },
+    "citation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "version", "source_authority", "locator", "producer", "produced_at_utc"],
+      "properties": {
+        "id": { "$ref": "#/$defs/stableId" }, "version": { "type": "string", "minLength": 1 },
+        "source_authority": { "$ref": "#/$defs/sourceAuthority" }, "locator": { "$ref": "#/$defs/locator" },
+        "producer": { "type": "string", "minLength": 1 }, "produced_at_utc": { "type": "string", "format": "date-time" }
+      }
+    },
+    "provenance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "version", "producer", "produced_at_utc", "method_id", "input_refs", "output_ref", "citation_refs"],
+      "properties": {
+        "id": { "$ref": "#/$defs/stableId" }, "version": { "type": "string", "minLength": 1 },
+        "producer": { "type": "string", "minLength": 1 }, "produced_at_utc": { "type": "string", "format": "date-time" },
+        "method_id": { "type": "string", "minLength": 1 },
+        "input_refs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/reference" } },
+        "output_ref": { "$ref": "#/$defs/reference" },
+        "citation_refs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/reference" } },
+        "correlation_id": { "type": "string", "minLength": 1 }
+      }
+    },
     "confidenceContract": {
       "type": "object", "additionalProperties": false,
       "required": ["id", "version", "scale", "method", "producer"],
@@ -43,14 +75,16 @@
         "producer_version": { "type": "string", "minLength": 1 }, "method_id": { "type": "string", "minLength": 1 },
         "evidence_refs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/reference" } },
         "citation_refs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/reference" } },
+        "provenance_refs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/reference" } },
         "correlation_id": { "type": "string", "minLength": 1 }, "confidence": { "$ref": "#/$defs/confidence" },
         "conflict_refs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/reference" } }
       },
       "allOf": [
         { "if": { "properties": { "semantic_type": { "const": "observation" } }, "required": ["semantic_type"] }, "then": { "required": ["observed_at_utc"] } },
         { "if": { "properties": { "semantic_type": { "enum": ["claim", "inference", "recommendation"] } }, "required": ["semantic_type"] }, "then": { "required": ["method_id"] } },
-        { "if": { "properties": { "semantic_type": { "enum": ["claim", "inference", "recommendation"] }, "lifecycle_state": { "const": "validated" } }, "required": ["semantic_type", "lifecycle_state"] }, "then": { "required": ["evidence_refs", "citation_refs", "method_id"] } },
-        { "if": { "properties": { "ai_derived": { "const": true }, "lifecycle_state": { "const": "validated" } }, "required": ["ai_derived", "lifecycle_state"] }, "then": { "required": ["evidence_refs", "citation_refs", "producer_version"] } },
+        { "if": { "properties": { "semantic_type": { "enum": ["claim", "inference", "recommendation"] }, "lifecycle_state": { "const": "validated" } }, "required": ["semantic_type", "lifecycle_state"] }, "then": { "required": ["evidence_refs", "citation_refs", "provenance_refs", "method_id"] } },
+        { "if": { "properties": { "semantic_type": { "const": "evidence" }, "lifecycle_state": { "const": "validated" } }, "required": ["semantic_type", "lifecycle_state"] }, "then": { "required": ["citation_refs"] } },
+        { "if": { "properties": { "ai_derived": { "const": true }, "lifecycle_state": { "const": "validated" } }, "required": ["ai_derived", "lifecycle_state"] }, "then": { "required": ["evidence_refs", "citation_refs", "provenance_refs", "producer_version"] } },
         { "if": { "required": ["confidence"] }, "then": { "properties": { "confidence": { "$ref": "#/$defs/confidence" } } } },
         { "if": { "properties": { "semantic_type": { "const": "conflict" } }, "required": ["semantic_type"] }, "then": { "required": ["conflict_refs"] } }
       ]
