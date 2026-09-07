@@ -4,9 +4,9 @@
 |---|---|
 | Stato | Current |
 | Repository authority | GitHub `main` |
-| Baseline verificata | `ea36179882f05ce53581b80e5d5e8e70c560dcd9` |
+| Baseline verificata | `8d9f47922de1536b424cdd29ca00fc61c5c9fa49` |
 | Current governed package | BKL-044 Knowledge Graph / AI Evidence Contract |
-| BKL-044 state | In Progress — F1/F2 accepted; F3 next |
+| BKL-044 state | In Progress — F1/F2/F3 accepted; F4 next |
 | BKL-015 | Done / Accepted |
 | TD-008 | Resolved |
 | Runtime EAGLE | unchanged |
@@ -14,95 +14,63 @@
 
 ## 1. Current package
 
-BKL-044 è il package corrente. F1 è integrato tramite PR #98. F2 è integrato tramite PR #100 e merge `ea36179882f05ce53581b80e5d5e8e70c560dcd9`.
+BKL-044 è il package corrente. F3 è integrato tramite PR #102 e merge `8d9f47922de1536b424cdd29ca00fc61c5c9fa49`.
 
-Contratto:
+Governance F3:
 
-`docs/architecture/knowledge/BKL-044-Knowledge-Graph-AI-Evidence-Contract.md`
+- `docs/architecture/reviews/ARB-BKL-044-F3-ReReview-2026-09-07.md` — APPROVED;
+- `docs/architecture/reviews/RQ-BKL-044-F3-Release-Quality-Review-2026-09-07.md` — READY;
+- `docs/project/BKL-044-F3-CLOSURE-2026-09-07.md` — closure record.
 
-F2 governance:
+Post-merge: Developer Foundation #992, documentation #601, Word #1026 e Pages #695 — SUCCESS.
 
-- `docs/architecture/reviews/ARB-BKL-044-F2-ReReview-2026-09-07.md` — APPROVED;
-- `docs/architecture/reviews/RQ-BKL-044-F2-Release-Quality-Review-2026-09-07.md` — READY;
-- `docs/project/BKL-044-F2-CLOSURE-2026-09-07.md` — closure record.
+## 2. Machine-readable evidence baseline
 
-Post-merge sul commit F2: Developer Foundation #982, documentation #591, Word #1016 e Pages #693 risultano SUCCESS.
+F2 remains the accepted evidence contract: `schemas/knowledge-ai-evidence-contract.schema.json` and `docs/data/knowledge-ai-evidence-contract.json`, with deterministic validator/tests in Developer Foundation.
 
-## 2. Repository Knowledge Graph foundation
+Semantic classes remain distinct: Observation, Evidence, Claim, Inference, Recommendation, with Confidence, Citation, Provenance, Conflict and Unknown governed explicitly.
 
-BKL-015 rimane la foundation repository-centric accettata.
+## 3. F3 reconciliation baseline
 
-Projection:
+F3 adds `docs/data/knowledge-ai-seed-reconciliation.json`, `.github/scripts/verify-knowledge-ai-seed-reconciliation.mjs` and `.github/scripts/test-knowledge-ai-seed-reconciliation.mjs`.
 
-`docs/data/knowledge-graph.json`
+Accepted properties:
 
-Schema foundation:
+- bounded seed/source set: 3/3, governed maximum 5/5;
+- exact approved-baseline anchoring;
+- repository-authority source reconciliation;
+- fail-closed source-fragment drift detection;
+- seed-to-Citation repository locator identity;
+- item-to-Citation identity;
+- derived Provenance/Citation/output identity;
+- negative tests for drift, unresolved references, semantic flattening, authority downgrade, bounds, source/Citation mismatch, Provenance/Citation mismatch and baseline mismatch.
 
-`schemas/knowledge-graph-foundation.schema.json`
+F3 approval is not broad-ingestion authorization.
 
-Il Knowledge Graph resta una projection non autorevole e ricostruibile dalle fonti repository.
+## 4. BKL-015 foundation
 
-## 3. BKL-044 machine-readable evidence baseline
+BKL-015 remains Done/Accepted. The repository Knowledge Graph remains a rebuildable projection and does not become authoritative merely by containing an item or relation.
 
-F2 aggiunge:
+## 5. Next governed increment — F4
 
-- `schemas/knowledge-ai-evidence-contract.schema.json`;
-- `docs/data/knowledge-ai-evidence-contract.json`;
-- `.github/scripts/verify-knowledge-ai-evidence-contract.mjs`;
-- `.github/scripts/test-knowledge-ai-evidence-contract.mjs`;
-- Developer Foundation gate.
+**BKL-044 F4 — Consumer / Read-Model Contract.**
 
-Le classi restano semanticamente distinte:
+F4 must define machine-readable consumer/read-model behavior preserving:
 
-`Observation -> Evidence -> Claim -> Inference -> Recommendation`
+- semantic type;
+- lifecycle state;
+- source authority;
+- Citation identity/version/locator;
+- Provenance identity and applicable chain;
+- Confidence contract identity/value where present;
+- explicit unknown/conflict/incomplete states.
 
-con Confidence, Citation, Provenance, Conflict e Unknown come concetti trasversali governati.
+Consumers must not silently flatten Evidence into Claim, Claim into fact, Inference into Observation, or AI output into repository authority.
 
-Regole permanenti:
+## 6. Runtime, security and safety invariants
 
-- una Observation non è automaticamente Evidence;
-- Evidence validata deve avere Citation/locator governato;
-- Claim/Inference/Recommendation validati richiedono evidence, citation, provenance e method;
-- AI-derived validato richiede inoltre producer version;
-- confidence non sostituisce evidence/provenance e deve risolvere un contratto versionato;
-- missing/conflicting provenance non viene auto-risolta;
-- nessun contenuto AI acquisisce authority per il solo fatto di essere nel graph.
+No BKL-044 F1-F3 change affects EAGLE runtime or local safety. F4 is expected to remain repository-only unless separately governed. No command endpoint, remediation, graph/vector persistence, RAG runtime, AI provider, inference engine or Safety Authority coupling is authorized by the current baseline.
 
-## 4. Roadmap state
+## 7. Scientific/runtime invariants
 
-Authority: `.github/roadmap/roadmap-source.json`.
-
-Projection: `docs/data/roadmap.json`.
-
-BKL-044 resta current/active e `In Progress`; F2 è chiuso ma BKL-044 non è Done. F3 è il prossimo incremento. BKL-015 resta completato e TD-008 resta risolto.
-
-## 5. Observatory runtime
-
-Nessuna modifica BKL-044 F1/F2 interessa EAGLE runtime, N.I.N.A., PHD2, CPWI, ASCOM, roof/safety interlock, telemetry producer, OneDrive scientific transport o cleanup policy. Il repository operativo EAGLE deve restare su `main` per la session automation.
-
-## 6. Scientific transport invariants
-
-Restano validi final authoritative storage `F:\Astrofotografia`, transfer mode `COPY_ONLY`, SHA-256 verification, ACK come prova di import verificato, cleanup produttivo C8 non autorizzato e `F:\Astrofotografia` escluso dai cleanup target.
-
-## 7. EAGLE Health invariants
-
-BKL-030 resta Done/Accepted nel perimetro read-only telemetry/history/portal: nessuna remediation automatica, nessun command endpoint, severity policy non attivata implicitamente, Safety Authority fuori scope e cloud outage non sostituisce gli interlock locali.
-
-## 8. Documentation authority
-
-Per la continuità corrente usare `AI_BOOTSTRAP.md`, handover 07/09/2026, questo documento, backlog, roadmap authority, technical debt/decision log e package/review/evidence direttamente applicabili. I documenti storici non prevalgono sul repository truth corrente.
-
-## 9. Next governed increment
-
-**BKL-044 F3 — Governed Seed Projection & Reconciliation.**
-
-Acceptance minima attesa:
-
-- seed bounded e governati, non broad ingestion;
-- riconciliazione deterministica con fonti repository autorevoli selezionate;
-- ogni seed conserva semantic type, lifecycle e source authority;
-- Citation e Provenance F2 usate con riferimenti risolvibili;
-- Confidence solo attraverso contract identity stabile/versionata;
-- incomplete/conflicting source material resta esplicito e fail-closed;
-- nessuna selezione graph/vector/RAG/runtime AI;
-- nessun impatto Safety Authority o runtime EAGLE.
+Existing scientific transport, AP-013C cleanup exclusions, EAGLE Health read-only rules and session automation branch discipline remain unchanged. Runtime EAGLE must operate from `main`, not a feature/governance worktree.
