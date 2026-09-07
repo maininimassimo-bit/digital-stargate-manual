@@ -1,11 +1,11 @@
 {
   "schemaVersion":"2.2",
-  "updatedAt":"2026-09-04",
+  "updatedAt":"2026-09-06",
   "authority":"DSG-RGM-001",
   "projectStatus":"Attivo",
-  "currentPackage":"BKL-015",
-  "nextMilestone":"BKL-015 Knowledge Graph foundation",
-  "target":"Start the machine-readable Knowledge Graph foundation after accepted BKL-030 EAGLE Health & Reliability closure, then establish the BKL-044 Knowledge/AI Evidence Contract",
+  "currentPackage":"BKL-044",
+  "nextMilestone":"BKL-044 Knowledge Graph / AI Evidence Contract",
+  "target":"Establish the BKL-044 Knowledge Graph / AI Evidence Contract on the accepted BKL-015 machine-readable foundation, preserving repository authority and Safety boundaries",
   "streams":[
     {"id":"rc2-enterprise-portal","title":"RC2 Enterprise Portal","items":[
       {"id":"WP-01","title":"Enterprise Foundation Framework","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-01-Enterprise-Foundation-Framework-Completion-Report.md"},
@@ -38,8 +38,8 @@
       {"id":"BKL-029","title":"SQM Sky Quality Telemetry & Scientific History","status":"completed","note":"Closed via PR #68; merge 0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441."},
       {"id":"BKL-030","title":"EAGLE Health & Reliability Telemetry","status":"completed","note":"G1-G8 complete. G7 merged via PR #89 as a15d85b27ebfbe8a6488330920d10dda8db79a78; G8 safety review approved with conditions. No severity policy, remediation or Safety Authority coupling authorized."},
       {"id":"BKL-047","title":"AP-013C Verified Transport Cleanup & Convergence Monitoring","status":"completed","note":"DRY_RUN/NO_DELETE accepted with real PC/EAGLE/OneDrive OAT and ARB-013C-R1; productive cleanup C8 not authorized."},
-      {"id":"BKL-015","title":"Knowledge Graph machine-readable foundation","status":"planned","note":"Next dependency-ordered package after BKL-030 closure."},
-      {"id":"BKL-044","title":"Knowledge Graph / AI Evidence Contract","status":"planned"},
+      {"id":"BKL-015","title":"Knowledge Graph machine-readable foundation","status":"completed","note":"F1-F3 accepted; repository AP/ADR/component/evidence traceability is machine-readable and TD-008 closure approved."},
+      {"id":"BKL-044","title":"Knowledge Graph / AI Evidence Contract","status":"active","note":"Current package after BKL-015 closure; scientific/AI evidence semantics remain separate from repository traceability foundation."},
       {"id":"BKL-035","title":"Target Knowledge Base","status":"planned"},
       {"id":"BKL-040","title":"Night Timeline / Observatory Replay","status":"planned"},
       {"id":"BKL-037","title":"Session Comparison & Benchmarking","status":"planned"},
@@ -71,6 +71,7 @@
     {"id":"M-SQM","itemRef":"BKL-029","title":"SQM realtime and scientific history","date":"2026-09-01","description":"Closed after accepted realtime, historical provenance, CI/ARB and runtime OAT; PR #68 merged.","image":null},
     {"id":"M-EAGLE-HEALTH","itemRef":"BKL-030","title":"EAGLE Health & Reliability G1-G8","date":"2026-09-04","description":"Capability closed after collector/runtime OAT, history persistence, hosted portal production OAT, PR #89 merge and independent G8 safety acceptance.","image":null},
     {"id":"M-AP013C","itemRef":"BKL-047","title":"AP-013C Verified Transport Cleanup dry-run","date":"2026-09-04","description":"DRY_RUN/NO_DELETE accepted after real PC/EAGLE/OneDrive OAT and ARB re-review; C8 productive cleanup remains NO-GO.","image":null},
+    {"id":"M-BKL015","itemRef":"BKL-015","title":"BKL-015 Knowledge Graph machine-readable foundation","date":"2026-09-06","description":"F1-F3 accepted; TD-008 Knowledge Traceability closure approved.","image":null},
     {"id":"M-PIXINSIGHT","itemRef":"BKL-045","title":"PixInsight Workflow Provenance","date":"2026-08-30","description":"Approved future processing provenance capability.","image":null},
     {"id":"M-PIXINSIGHT-AI","itemRef":"BKL-046","title":"AI-assisted PixInsight Processing","date":"2026-08-30","description":"Approved advisory AI capability after provenance foundation.","image":null}
   ]
