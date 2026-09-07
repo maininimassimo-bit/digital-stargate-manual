@@ -1,0 +1,12 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {validateTargetKnowledgeReadModel as validate} from './verify-target-knowledge-read-model.mjs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8')),rm=read('docs/data/target-knowledge-read-model.json'),tkb=read('docs/data/target-knowledge-base.json'),rec=read('docs/data/target-identity-reconciliation.json'),clone=x=>structuredClone(x),errs=(r=rm,t=tkb,c=rec)=>validate(r,t,c);
+test('accepted F4 fixture validates',()=>assert.deepEqual(errs(),[]));
+test('consumer cannot promote authority',()=>{const x=clone(rm);x.authority='authoritative';assert.ok(errs(x).some(e=>e.includes('authority')));});
+test('consumer cannot rename canonical target',()=>{const x=clone(rm);x.targets[0].canonical_name='LDN1320';assert.ok(errs(x).some(e=>e.includes('canonical_name')));});
+test('consumer cannot invent alias',()=>{const x=clone(rm);x.targets[0].aliases=['LDN-1320'];assert.ok(errs(x).some(e=>e.includes('aliases')));});
+test('analytics reconciliation evidence cannot become scientific relation',()=>{const x=clone(rm);x.targets[0].scientific_sessions.push('2026-07-16_2026-07-17');assert.ok(errs(x).some(e=>e.includes('scientific sessions')));});
+test('consumer cannot omit reconciliation evidence',()=>{const x=clone(rm);x.targets[0].reconciliation_evidence_sessions.pop();assert.ok(errs(x).some(e=>e.includes('reconciliation evidence')));});
+test('consumer cannot lose Citation lineage',()=>{const x=clone(rm);x.targets[0].citation_refs.pop();assert.ok(errs(x).some(e=>e.includes('Citations')));});
+test('consumer cannot substitute Provenance lineage',()=>{const x=clone(rm);x.targets[0].provenance_refs[1]=x.targets[1].provenance_refs[1];assert.ok(errs(x).some(e=>e.includes('Provenance')));});
+test('consumer cannot omit an eligible reconciled target',()=>{const x=clone(rm);x.targets.pop();assert.ok(errs(x).some(e=>e.includes('omitted')));});
+test('consumer must surface source conflict and cannot flatten state',()=>{const c=clone(rec);c.conflicts.push({conflict_id:'CONFLICT-TKB-LDN1320-ID',target_key:'dsg-target:ldn-1320',reason:'TARGET_ID_DISAGREEMENT',candidate_target_ids:['TGT-LDN-1320','TGT-LDN-1320-X'],session_ids:['2026-07-14_2026-07-15'],identity_state:'conflicted',citation_refs:['CIT-TIR-2026-07-14@1.0'],provenance_refs:['PRV-TIR-LDN1320@1.0'],method_id:'BKL035-F3-EXACT-ID-RECONCILIATION-1'});assert.ok(errs(rm,tkb,c).some(e=>e.includes('conflicts')));});
