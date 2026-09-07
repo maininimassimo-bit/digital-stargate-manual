@@ -3,9 +3,9 @@
   "updatedAt":"2026-09-07",
   "authority":"DSG-RGM-001",
   "projectStatus":"Attivo",
-  "currentPackage":"BKL-035",
-  "nextMilestone":"BKL-035 Target Knowledge Base",
-  "target":"Establish the governed Target Knowledge Base on the accepted BKL-015 and BKL-044 knowledge foundations, linking targets to sessions, SQM, setup, images and processing provenance without changing repository authority or Safety boundaries",
+  "currentPackage":"BKL-040",
+  "nextMilestone":"BKL-040 Night Timeline / Observatory Replay",
+  "target":"Establish the governed Night Timeline / Observatory Replay over accepted historical telemetry and knowledge foundations, preserving source authority, temporal lineage and Safety boundaries without introducing command or remediation authority",
   "streams":[
     {"id":"rc2-enterprise-portal","title":"RC2 Enterprise Portal","items":[
       {"id":"WP-01","title":"Enterprise Foundation Framework","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-01-Enterprise-Foundation-Framework-Completion-Report.md"},
@@ -40,8 +40,8 @@
       {"id":"BKL-047","title":"AP-013C Verified Transport Cleanup & Convergence Monitoring","status":"completed","note":"DRY_RUN/NO_DELETE accepted with real PC/EAGLE/OneDrive OAT and ARB-013C-R1; productive cleanup C8 not authorized."},
       {"id":"BKL-015","title":"Knowledge Graph machine-readable foundation","status":"completed","note":"F1-F3 accepted; repository AP/ADR/component/evidence traceability is machine-readable and TD-008 closure approved."},
       {"id":"BKL-044","title":"Knowledge Graph / AI Evidence Contract","status":"completed","note":"F1-F4 closed/accepted. Machine-readable semantics, bounded reconciliation and consumer preservation contract accepted; no graph/vector/RAG/runtime AI or Safety Authority change authorized."},
-      {"id":"BKL-035","title":"Target Knowledge Base","status":"active","note":"Current package after BKL-044 closure; target-centric knowledge view over accepted repository and evidence contracts."},
-      {"id":"BKL-040","title":"Night Timeline / Observatory Replay","status":"planned"},
+      {"id":"BKL-035","title":"Target Knowledge Base","status":"completed","note":"F1-F4 closed/accepted via PR #112; final consumer read model, Citation/Provenance lineage and conflict preservation accepted."},
+      {"id":"BKL-040","title":"Night Timeline / Observatory Replay","status":"active","note":"Current governed package after BKL-035 closure; bounded Night Timeline / Observatory Replay over historical telemetry."},
       {"id":"BKL-037","title":"Session Comparison & Benchmarking","status":"planned"},
       {"id":"BKL-038","title":"Anomaly & Trend Center","status":"planned"},
       {"id":"BKL-039","title":"Equipment Performance Registry","status":"planned"},
@@ -73,7 +73,8 @@
     {"id":"M-AP013C","itemRef":"BKL-047","title":"AP-013C Verified Transport Cleanup dry-run","date":"2026-09-04","description":"DRY_RUN/NO_DELETE accepted after real PC/EAGLE/OneDrive OAT and ARB re-review; C8 productive cleanup remains NO-GO.","image":null},
     {"id":"M-BKL015","itemRef":"BKL-015","title":"BKL-015 Knowledge Graph machine-readable foundation","date":"2026-09-06","description":"F1-F3 accepted; TD-008 Knowledge Traceability closure approved.","image":null},
     {"id":"M-BKL044","itemRef":"BKL-044","title":"BKL-044 Knowledge Graph / AI Evidence Contract","date":"2026-09-07","description":"F1-F4 closed/accepted after machine-readable evidence, bounded reconciliation, consumer preservation, ARB/RQ and post-merge CI.","image":null},
-    {"id":"M-BKL035","itemRef":"BKL-035","title":"BKL-035 Target Knowledge Base","date":"2026-09-07","description":"Current governed package after BKL-044 closure.","image":null},
+    {"id":"M-BKL035","itemRef":"BKL-035","title":"BKL-035 Target Knowledge Base","date":"2026-09-07","description":"F1-F4 closed/accepted after target identity, deterministic reconciliation, consumer read model, ARB/RQ and post-merge CI.","image":null},
+    {"id":"M-BKL040","itemRef":"BKL-040","title":"BKL-040 Night Timeline / Observatory Replay","date":"2026-09-07","description":"Current governed package after BKL-035 closure.","image":null},
     {"id":"M-PIXINSIGHT","itemRef":"BKL-045","title":"PixInsight Workflow Provenance","date":"2026-08-30","description":"Approved future processing provenance capability.","image":null},
     {"id":"M-PIXINSIGHT-AI","itemRef":"BKL-046","title":"AI-assisted PixInsight Processing","date":"2026-08-30","description":"Approved advisory AI capability after provenance foundation.","image":null}
   ]
