@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 4.0 |
+| Versione | 4.1 |
 | Stato | Active |
 | Data baseline | 07/09/2026 |
 
@@ -47,13 +47,13 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-026 | P0 | Deep assessment ARB/AP-014 acceptance | Done | BKL-019–025 | AP-014 Accepted | AP-014 |
 | BKL-027 | P1 | Power/Network source discovery | Done | EAGLE | Source verificate | AP-004/AP-009 |
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
-| BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441`; `docs/architecture/telemetry/BKL-029-SQM-Source-Discovery-and-Architecture-Contract.md` |
-| BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport; no Safety Authority/remediation | G1-G8 complete; G5 runtime OAT; G6 closure; PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78`; `ARB-BKL-030-G8-2026-09-04` |
+| BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
+| BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
 | BKL-031 | P2 | Observation Planner intelligente | Planned | BKL-015, BKL-035, meteo/SQM | Ranking target per setup e condizioni | Functional Roadmap Expansion |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
-| BKL-035 | P2 | Target Knowledge Base | Planned | BKL-015/BKL-044 | Vista target con sessioni, SQM, setup, immagini e workflow | Functional Roadmap Expansion |
+| BKL-035 | P2 | Target Knowledge Base | In Progress | BKL-015/BKL-044 | Vista target con sessioni, SQM, setup, immagini e workflow | Current governed package after BKL-044 closure |
 | BKL-036 | P2 | Observatory Health Score | Planned | BKL-030, telemetry history | Score operativo spiegabile distinto da Safety | Functional Roadmap Expansion |
 | BKL-037 | P2 | Session Comparison & Benchmarking | Planned | BKL-029, BKL-035, BKL-045 | Confronto qualità/acquisizione/processing | Functional Roadmap Expansion |
 | BKL-038 | P2 | Anomaly & Trend Center | Planned | BKL-030, BKL-040 | Trend e pattern di degrado | Functional Roadmap Expansion |
@@ -62,27 +62,24 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-041 | P2 | Scientific Data Quality Score | Planned | BKL-029, BKL-037, BKL-045 | Quality score scientifico spiegabile | Functional Roadmap Expansion |
 | BKL-042 | P2 | AI Observatory Assistant | Planned | BKL-015/BKL-044 e intelligence services | Copilot read-only per diagnosis/RCA/planning/science | Functional Roadmap Expansion |
 | BKL-043 | P2 | Observatory Reliability Engineering | Planned | BKL-030/BKL-038/BKL-042 | SLI/SLO, MTBF, MTTR, session completion e failure budget | Functional Roadmap Expansion |
-| BKL-044 | P1 | Knowledge Graph / AI Evidence Contract | In Progress | BKL-015 | Provenance stabile per AP/ADR/assets/session/target/incident/telemetry/processing/AI | F1 PR #98 merge `6b9db9b342144645da62381d6833ff1ebff3c22c`; F2 PR #100 merge `ea36179882f05ce53581b80e5d5e8e70c560dcd9` CLOSED/ACCEPTED; F3 next |
-| BKL-045 | P2 | PixInsight Workflow Provenance Plugin | Planned | BKL-015/BKL-044 | Estensione PixInsight governata per catturare e storicizzare workflow, step, parametri, input/output e lineage | Functional Roadmap Expansion |
-| BKL-046 | P2 | AI Post-Processing Assistant for PixInsight | Planned | BKL-015/BKL-044/BKL-045 | Assistente advisory per ottimizzare workflow PixInsight con evidence, confidence e provenance | Functional Roadmap Expansion |
-| BKL-047 | P1 | AP-013C Verified Transport Cleanup & Convergence Monitoring | Done | AP-013B COPY_ONLY OAT; OneDrive incident/recovery 04/09; PC destination verification | DRY_RUN/NO_DELETE lifecycle evidence, ACK convergence e fail-closed classification accepted; productive cleanup excluded | AP-013C v0.3; DSDM-005 v0.2; `E-AP013C-OAT-2026-09-04`; `ARB-013C-R1`; PR #86; C8 NO-GO |
+| BKL-044 | P1 | Knowledge Graph / AI Evidence Contract | Done | BKL-015 | Provenance stabile per AP/ADR/assets/session/target/incident/telemetry/processing/AI | F1-F4 CLOSED/ACCEPTED; PR #104 merge `b7c01ba7221818e1971403ab3befe38c8e40cc54`; closure `docs/project/BKL-044-CLOSURE-2026-09-07.md` |
+| BKL-045 | P2 | PixInsight Workflow Provenance Plugin | Planned | BKL-015/BKL-044 | Estensione PixInsight governata per catturare workflow, parametri e lineage | Functional Roadmap Expansion |
+| BKL-046 | P2 | AI Post-Processing Assistant for PixInsight | Planned | BKL-015/BKL-044/BKL-045 | Assistente advisory per ottimizzare workflow PixInsight | Functional Roadmap Expansion |
+| BKL-047 | P1 | AP-013C Verified Transport Cleanup & Convergence Monitoring | Done | AP-013B COPY_ONLY OAT | DRY_RUN/NO_DELETE lifecycle evidence, ACK convergence e fail-closed classification accepted | AP-013C; C8 productive cleanup excluded |
 
 ### Reconciliation note — 07/09/2026
 
-BKL-030 resta `Done` per il perimetro approvato read-only telemetry/history/portal. Restano invarianti `summary=UNKNOWN/POLICY_NOT_ACTIVATED`, nessuna automatic remediation e `Safety Authority=OUTSIDE_SCOPE`.
+BKL-015 è `Done / Accepted` e TD-008 resta `Resolved`.
 
-BKL-047/AP-013C resta `Done` per il solo incremento `DRY_RUN/NO_DELETE`; qualunque C8 productive cleanup resta escluso e richiede nuova governance/autorizzazione.
+BKL-044 è `Done / Accepted`: F1-F4 sono completati. F4 è stato integrato via PR #104 con merge `b7c01ba7221818e1971403ab3befe38c8e40cc54`; post-merge Developer Foundation #1004, Docs #613, Word #1038 e Pages #697 sono `SUCCESS`. BKL-044 non autorizza graph DB, vector DB, RAG, inference runtime, AI authority o modifica della Safety Authority.
 
-BKL-015 è `Done / Accepted` e TD-008 resta `Resolved` per il perimetro AP/ADR/component/evidence machine-readable traceability.
-
-BKL-044 è `In Progress`: F1 è merged; F2 machine-readable schema/fail-closed validation è CLOSED/ACCEPTED tramite PR #100 e merge `ea36179882f05ce53581b80e5d5e8e70c560dcd9`, con ARB APPROVED, Release Quality READY e post-merge CI verde. Il prossimo incremento è F3 Governed Seed Projection & Reconciliation. BKL-044 non riapre TD-008 e non autorizza graph DB, vector DB, RAG, inference runtime, AI authority o modifica della Safety Authority.
+BKL-035 è il nuovo package governato `In Progress` e deve costruire una Target Knowledge Base sopra le foundation BKL-015/BKL-044 senza creare una seconda authority.
 
 ## 4. Sequenza di esecuzione raccomandata
 
 ```text
-Completed baseline through BKL-030 and BKL-015
-  -> BKL-044 Knowledge/AI Evidence Contract [IN PROGRESS — F1/F2 ACCEPTED; F3 NEXT]
-  -> BKL-035 Target Knowledge Base
+Completed baseline through BKL-030, BKL-015 and BKL-044
+  -> BKL-035 Target Knowledge Base [CURRENT]
   -> BKL-040 Night Timeline / Replay
   -> BKL-037 Session Comparison
   -> BKL-038 Anomaly & Trend Center
