@@ -1,65 +1,24 @@
 import fs from 'node:fs';
-
-const readJson = p => JSON.parse(fs.readFileSync(p, 'utf8'));
-const parseCsv = text => {
-  const rows=[]; let row=[], cell='', quoted=false;
-  for (let i=0;i<text.length;i++) { const c=text[i], n=text[i+1]; if (c==='"') { if (quoted && n==='"') { cell+='"'; i++; } else quoted=!quoted; } else if (c===',' && !quoted) { row.push(cell); cell=''; } else if ((c==='\n'||c==='\r') && !quoted) { if (c==='\r'&&n==='\n') i++; row.push(cell); if (row.some(x=>x!=='')) rows.push(row); row=[]; cell=''; } else cell+=c; }
-  if (cell || row.length) { row.push(cell); rows.push(row); }
-  const [head,...data]=rows; return data.map(r=>Object.fromEntries(head.map((h,i)=>[h,r[i]??''])));
-};
-const uniq = xs => new Set(xs).size===xs.length;
-const exactKeys=(o,keys)=>Object.keys(o).length===keys.length&&keys.every(k=>Object.hasOwn(o,k));
-
-export function validateTargetIdentityReconciliation(doc, tkb, metadataRows) {
-  const e=[];
-  const root=['schema_version','component','authority','baseline_commit','source_contract','bounds','matches','conflicts'];
-  if (!exactKeys(doc,root)) e.push('root structure must match F3 contract');
-  if (doc.schema_version!=='1.0'||doc.component!=='DSG.TargetIdentityReconciliation') e.push('invalid F3 contract identity');
-  if (doc.authority!=='projection') e.push('authority must remain projection');
-  if (!/^[0-9a-f]{40}$/.test(doc.baseline_commit??'')) e.push('baseline_commit must be full SHA');
-  const sc=doc.source_contract??{};
-  if (sc.path!=='data/analytics/metadata/session-scientific-metadata.csv'||sc.authority!=='analytics_projection'||sc.key!=='session_id'||JSON.stringify(sc.accepted_states)!=='["REGISTERED"]') e.push('source contract must remain bounded analytics projection / REGISTERED only');
-  if (doc.bounds?.max_matches!==5||doc.bounds?.max_conflicts!==5) e.push('F3 bounds must remain 5/5');
-  if (!Array.isArray(doc.matches)||doc.matches.length>5) e.push('match bound exceeded');
-  if (!Array.isArray(doc.conflicts)||doc.conflicts.length>5) e.push('conflict bound exceeded');
-  const identities=new Map((tkb.identities??[]).map(x=>[x.target_key,x]));
-  const registered=metadataRows.filter(r=>r.metadata_state==='REGISTERED');
-  const bySession=new Map(registered.map(r=>[r.session_id,r]));
-  const seenIds=new Map();
-  for (const m of doc.matches??[]) {
-    const keys=['target_key','target_id','canonical_name','aliases','session_ids','identity_state','source_authority','source_refs','method_id'];
-    if (!exactKeys(m,keys)) { e.push(`match ${m.target_key??'?'} structure invalid`); continue; }
-    const identity=identities.get(m.target_key);
-    if (!identity) { e.push(`match ${m.target_key} has no F2 identity`); continue; }
-    if (m.canonical_name!==identity.canonical_name) e.push(`match ${m.target_key} canonical name must preserve F2 identity`);
-    if (m.identity_state!=='validated'||m.source_authority!=='analytics_projection'||m.method_id!=='BKL035-F3-EXACT-ID-RECONCILIATION-1') e.push(`match ${m.target_key} governance fields invalid`);
-    if (!Array.isArray(m.aliases)||m.aliases.length!==0) e.push(`match ${m.target_key} aliases require explicit governed alias evidence`);
-    if (!Array.isArray(m.session_ids)||!m.session_ids.length||!uniq(m.session_ids)) e.push(`match ${m.target_key} session_ids invalid`);
-    const expectedRefs=(m.session_ids??[]).map(s=>`analytics-metadata:${s}`);
-    if (JSON.stringify(m.source_refs)!==JSON.stringify(expectedRefs)) e.push(`match ${m.target_key} source_refs must bind exactly to metadata sessions`);
-    const rows=(m.session_ids??[]).map(s=>bySession.get(s));
-    if (rows.some(x=>!x)) e.push(`match ${m.target_key} references missing/non-REGISTERED metadata session`);
-    else {
-      if (rows.some(r=>r.target_name!==m.canonical_name)) e.push(`match ${m.target_key} target_name disagreement must fail closed`);
-      if (rows.some(r=>r.target_id!==m.target_id)) e.push(`match ${m.target_key} target_id disagreement must fail closed`);
-      if (!/^TGT-[A-Z0-9-]+$/.test(m.target_id)) e.push(`match ${m.target_key} target_id format invalid`);
-    }
-    if (seenIds.has(m.target_id)&&seenIds.get(m.target_id)!==m.target_key) e.push(`target_id ${m.target_id} maps to multiple target keys`); else seenIds.set(m.target_id,m.target_key);
-  }
-  for (const c of doc.conflicts??[]) {
-    if (c.identity_state!=='conflicted'||c.method_id!=='BKL035-F3-EXACT-ID-RECONCILIATION-1') e.push(`conflict ${c.conflict_id??'?'} governance invalid`);
-    if (!['TARGET_ID_DISAGREEMENT','CANONICAL_NAME_DISAGREEMENT','ALIAS_COLLISION'].includes(c.reason)) e.push(`conflict ${c.conflict_id??'?'} reason invalid`);
-  }
-  return e;
+const readJson=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const parseCsv=text=>{const rows=[];let row=[],cell='',quoted=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c==='"'){if(quoted&&n==='"'){cell+='"';i++;}else quoted=!quoted;}else if(c===','&&!quoted){row.push(cell);cell='';}else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&n==='\n')i++;row.push(cell);if(row.some(x=>x!==''))rows.push(row);row=[];cell='';}else cell+=c;}if(cell||row.length){row.push(cell);rows.push(row);}const[head,...data]=rows;return data.map(r=>Object.fromEntries(head.map((h,i)=>[h,r[i]??''])));};
+const uniq=xs=>Array.isArray(xs)&&new Set(xs).size===xs.length;
+const exact=(o,ks)=>o&&typeof o==='object'&&!Array.isArray(o)&&Object.keys(o).length===ks.length&&ks.every(k=>Object.hasOwn(o,k));
+const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const ref=(x)=>`${x.id}@${x.version}`;
+export function validateTargetIdentityReconciliation(doc,tkb,metadataRows){
+ const e=[], root=['schema_version','component','authority','baseline_commit','source_contract','bounds','matches','conflicts','citations','provenance_records'];
+ if(!exact(doc,root))e.push('root structure must match F3 contract');
+ if(doc.schema_version!=='1.0'||doc.component!=='DSG.TargetIdentityReconciliation')e.push('invalid F3 contract identity'); if(doc.authority!=='projection')e.push('authority must remain projection'); if(!/^[0-9a-f]{40}$/.test(doc.baseline_commit??''))e.push('baseline_commit must be full SHA');
+ const sc=doc.source_contract??{},sck=['path','authority','key','accepted_states','eligibility_rule']; if(!exact(sc,sck)||sc.path!=='data/analytics/metadata/session-scientific-metadata.csv'||sc.authority!=='analytics_projection'||sc.key!=='session_id'||!same(sc.accepted_states,['REGISTERED'])||sc.eligibility_rule!=='ALL_REGISTERED_ROWS_FOR_SESSION_CATALOG_EXACT_CANONICAL_TARGET')e.push('source contract must remain exact bounded F3 source contract');
+ if(!exact(doc.bounds??{},['max_matches','max_conflicts'])||doc.bounds?.max_matches!==5||doc.bounds?.max_conflicts!==5)e.push('F3 bounds must remain exact 5/5'); if(!Array.isArray(doc.matches)||doc.matches.length>5)e.push('match bound exceeded'); if(!Array.isArray(doc.conflicts)||doc.conflicts.length>5)e.push('conflict bound exceeded'); if(!Array.isArray(doc.citations)||!Array.isArray(doc.provenance_records))e.push('Citation/Provenance collections required');
+ const identities=new Map((tkb.identities??[]).map(x=>[x.target_key,x])), registered=metadataRows.filter(r=>r.metadata_state==='REGISTERED'), seenIds=new Map();
+ const citations=new Map(); for(const c of doc.citations??[]){const ks=['id','version','source_authority','locator']; if(!exact(c,ks)||c.version!=='1.0'||c.source_authority!=='analytics_projection'||!exact(c.locator??{},['path','record_key','record_value'])||c.locator?.path!==sc.path||c.locator?.record_key!=='session_id'||!c.locator?.record_value)e.push(`Citation ${c.id??'?'} structure/locator invalid`); const rr=ref(c);if(citations.has(rr))e.push(`duplicate Citation ${rr}`);citations.set(rr,c);}
+ const prov=new Map(); for(const p of doc.provenance_records??[]){const ks=['id','version','method_id','input_refs','output_ref','citation_refs'];if(!exact(p,ks)||p.version!=='1.0'||p.method_id!=='BKL035-F3-EXACT-ID-RECONCILIATION-1'||!uniq(p.input_refs)||!p.input_refs?.length||!uniq(p.citation_refs)||!p.citation_refs?.length||!p.output_ref)e.push(`Provenance ${p.id??'?'} structure invalid`);const rr=ref(p);if(prov.has(rr))e.push(`duplicate Provenance ${rr}`);prov.set(rr,p);}
+ for(const m of doc.matches??[]){const ks=['target_key','target_id','canonical_name','aliases','session_ids','identity_state','source_authority','source_refs','citation_refs','provenance_refs','method_id'];if(!exact(m,ks)){e.push(`match ${m.target_key??'?'} structure invalid`);continue;}const id=identities.get(m.target_key);if(!id){e.push(`match ${m.target_key} has no F2 identity`);continue;}if(m.canonical_name!==id.canonical_name)e.push(`match ${m.target_key} canonical name must preserve F2 identity`);if(m.identity_state!=='validated'||m.source_authority!=='analytics_projection'||m.method_id!=='BKL035-F3-EXACT-ID-RECONCILIATION-1')e.push(`match ${m.target_key} governance fields invalid`);if(!Array.isArray(m.aliases)||m.aliases.length)e.push(`match ${m.target_key} aliases require explicit governed alias evidence`);if(!uniq(m.session_ids)||!m.session_ids.length)e.push(`match ${m.target_key} session_ids invalid`);
+  const eligible=registered.filter(r=>r.target_name===m.canonical_name).sort((a,b)=>a.session_id.localeCompare(b.session_id)), expectedSessions=eligible.map(r=>r.session_id), sessions=[...(m.session_ids??[])].sort();if(!same(sessions,expectedSessions))e.push(`match ${m.target_key} must include complete eligible REGISTERED evidence set`);const expectedRefs=expectedSessions.map(s=>`analytics-metadata:${s}`);if(!same(m.source_refs,expectedRefs))e.push(`match ${m.target_key} source_refs must bind exactly to complete eligible metadata sessions`);if(eligible.some(r=>r.target_id!==m.target_id))e.push(`match ${m.target_key} target_id disagreement must fail closed`);if(!/^TGT-[A-Z0-9-]+$/.test(m.target_id))e.push(`match ${m.target_key} target_id format invalid`);
+  const expectedCitations=expectedSessions.map(s=>{const x=[...citations].find(([,c])=>c.locator?.record_value===s);return x?.[0];});if(expectedCitations.some(x=>!x)||!same(m.citation_refs,expectedCitations))e.push(`match ${m.target_key} Citation refs must bind exactly to complete eligible evidence`);if(!uniq(m.provenance_refs)||m.provenance_refs.length!==1||!prov.has(m.provenance_refs[0]))e.push(`match ${m.target_key} requires one resolved Provenance`);else{const p=prov.get(m.provenance_refs[0]);if(!same(p.input_refs,expectedRefs))e.push(`match ${m.target_key} Provenance inputs must equal complete eligible evidence`);if(p.output_ref!==`target-id-map:${m.target_key}=${m.target_id}`)e.push(`match ${m.target_key} Provenance output misbound`);if(!same(p.citation_refs,expectedCitations))e.push(`match ${m.target_key} Provenance Citations misbound`);}if(seenIds.has(m.target_id)&&seenIds.get(m.target_id)!==m.target_key)e.push(`target_id ${m.target_id} maps to multiple target keys`);else seenIds.set(m.target_id,m.target_key);
+ }
+ for(const c of doc.conflicts??[]){const ks=['conflict_id','target_key','reason','candidate_target_ids','session_ids','identity_state','citation_refs','provenance_refs','method_id'];if(!exact(c,ks)){e.push(`conflict ${c.conflict_id??'?'} structure invalid`);continue;}if(!/^CONFLICT-TKB-[A-Z0-9-]+$/.test(c.conflict_id)||!/^dsg-target:[a-z0-9]+(?:-[a-z0-9]+)*$/.test(c.target_key)||!identities.has(c.target_key))e.push(`conflict ${c.conflict_id} identity invalid`);if(!['TARGET_ID_DISAGREEMENT','CANONICAL_NAME_DISAGREEMENT','ALIAS_COLLISION'].includes(c.reason)||c.identity_state!=='conflicted'||c.method_id!=='BKL035-F3-EXACT-ID-RECONCILIATION-1')e.push(`conflict ${c.conflict_id} governance invalid`);if(!uniq(c.candidate_target_ids)||c.candidate_target_ids.length<2||c.candidate_target_ids.some(x=>!/^TGT-[A-Z0-9-]+$/.test(x)))e.push(`conflict ${c.conflict_id} candidate_target_ids invalid`);if(!uniq(c.session_ids)||!c.session_ids.length)e.push(`conflict ${c.conflict_id} session_ids invalid`);if(!uniq(c.citation_refs)||!c.citation_refs.length||c.citation_refs.some(x=>!citations.has(x)))e.push(`conflict ${c.conflict_id} Citation refs invalid`);if(!uniq(c.provenance_refs)||c.provenance_refs.length!==1||!prov.has(c.provenance_refs[0]))e.push(`conflict ${c.conflict_id} Provenance refs invalid`);}
+ return e;
 }
-
-if (import.meta.url===`file://${process.argv[1]}`) {
-  const doc=readJson('docs/data/target-identity-reconciliation.json');
-  const tkb=readJson('docs/data/target-knowledge-base.json');
-  const rows=parseCsv(fs.readFileSync('data/analytics/metadata/session-scientific-metadata.csv','utf8'));
-  const errors=validateTargetIdentityReconciliation(doc,tkb,rows);
-  if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
-  console.log(`Target Identity Reconciliation F3 OK: ${doc.matches.length} matches / ${doc.conflicts.length} conflicts`);
-}
-
-export { parseCsv };
+if(import.meta.url===`file://${process.argv[1]}`){const doc=readJson('docs/data/target-identity-reconciliation.json'),tkb=readJson('docs/data/target-knowledge-base.json'),rows=parseCsv(fs.readFileSync('data/analytics/metadata/session-scientific-metadata.csv','utf8')),errors=validateTargetIdentityReconciliation(doc,tkb,rows);if(errors.length){console.error(errors.join('\n'));process.exit(1);}console.log(`Target Identity Reconciliation F3 OK: ${doc.matches.length} matches / ${doc.conflicts.length} conflicts`);}export{parseCsv};
