@@ -1,0 +1,36 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { deriveTargetKey, validateTargetKnowledgeBase } from './verify-target-knowledge-base.mjs';
+
+const fixture = JSON.parse(fs.readFileSync('docs/data/target-knowledge-base.json', 'utf8'));
+const catalog = JSON.parse(fs.readFileSync('docs/data/scientific-session-catalog.json', 'utf8'));
+const clone = x => structuredClone(x);
+const rejects = (mutate, pattern) => { const x = clone(fixture); mutate(x); assert.match(validateTargetKnowledgeBase(x, catalog).join('\n'), pattern); };
+
+test('accepted bounded fixture validates', () => assert.deepEqual(validateTargetKnowledgeBase(fixture, catalog), []));
+test('BKL035-F2-TARGET-KEY-1 derives bounded deterministic keys', () => { assert.equal(deriveTargetKey(' LDN   1320 '), 'dsg-target:ldn-1320'); assert.equal(deriveTargetKey('M 27'), 'dsg-target:m-27'); assert.equal(deriveTargetKey('M_27'), null); });
+test('rejects syntactically valid but semantically wrong target key', () => rejects(x => { x.identities[0].target_key = 'dsg-target:wrong-key'; x.relations.filter(r => r.target_key === 'dsg-target:ldn-1320').forEach(r => r.target_key = 'dsg-target:wrong-key'); x.provenance_records.find(p => p.id === 'PRV-TKB-LDN1320-KEY').output_ref = 'dsg-target:wrong-key'; }, /target_key must equal deterministic key dsg-target:ldn-1320/));
+test('rejects canonical label unsupported by bounded key method', () => rejects(x => x.identities[0].canonical_name = 'LDN_1320', /unsupported by BKL035-F2-TARGET-KEY-1/));
+test('rejects structural extra property', () => rejects(x => x.identities[0].invented = true, /unexpected property invented/));
+test('rejects structural missing required property', () => rejects(x => delete x.relations[0].object_ref, /required property object_ref missing/));
+test('rejects structural duplicate refs', () => rejects(x => x.identities[0].source_refs.push(x.identities[0].source_refs[0]), /source_refs must be unique/));
+test('rejects authority escalation', () => rejects(x => x.authority = 'authoritative', /authority must remain projection/));
+test('rejects identity bound expansion', () => rejects(x => x.identities = [...x.identities, ...x.identities, ...x.identities], /identity bound exceeded/));
+test('rejects relation bound expansion', () => rejects(x => x.relations = [...x.relations, ...x.relations, ...x.relations], /relation bound exceeded/));
+test('rejects validated identity without Citation', () => rejects(x => x.identities[0].citation_refs = [], /validated identity requires Citation/));
+test('rejects unresolved source session', () => rejects(x => x.identities[0].source_refs[0] = 'session:2099-01-01_2099-01-02', /unresolved source session/));
+test('rejects downstream canonical-name mutation', () => rejects(x => x.identities[0].canonical_name = 'Fuzzy LDN', /canonical_name must preserve primary governed target name/));
+test('rejects relation target mismatch', () => rejects(x => x.relations[0].target_key = 'dsg-target:m-27', /relation target conflicts with governed session target/));
+test('rejects relation object_ref mismatch', () => rejects(x => x.relations[0].object_ref = 'session:2026-07-15_2026-07-16', /object_ref must equal session:<session_id>/));
+test('rejects existing but wrong relation Citation', () => rejects(x => x.relations[0].citation_refs = ['CIT-TKB-SESSION-2026-07-15@1.0'], /Citation must bind to relation session_id/));
+test('rejects relation Provenance output mismatch', () => rejects(x => x.provenance_records.find(p => p.id === 'PRV-TKB-LDN1320-S1').output_ref = 'REL-TKB-LDN1320-S2', /Provenance output_ref must bind to relation id/));
+test('rejects relation Provenance input mismatch', () => rejects(x => x.provenance_records.find(p => p.id === 'PRV-TKB-LDN1320-S1').input_refs = ['session:2026-07-15_2026-07-16'], /Provenance input_refs must bind exactly to relation session/));
+test('rejects identity Provenance output mismatch', () => rejects(x => x.provenance_records.find(p => p.id === 'PRV-TKB-LDN1320-KEY').output_ref = 'dsg-target:m-27', /Provenance output_ref must bind to identity/));
+test('rejects identity Provenance source mismatch', () => rejects(x => x.provenance_records.find(p => p.id === 'PRV-TKB-LDN1320-KEY').input_refs = ['session:2026-07-14_2026-07-15'], /Provenance input_refs must bind exactly to identity source_refs/));
+test('rejects existing but wrong identity Citation', () => rejects(x => x.identities[0].citation_refs[0] = 'CIT-TKB-SESSION-2026-08-14@1.0', /Citation must bind to an identity source session/));
+test('rejects non-canonical citation locator', () => rejects(x => x.citations[0].locator.record_key = 'session_id', /canonical Session Catalog locator/));
+test('rejects ungoverned derivation method', () => rejects(x => x.provenance_records[0].method_id = 'AI-FUZZY-MATCH', /ungoverned derivation method/));
+test('rejects unresolved Citation', () => rejects(x => x.relations[0].citation_refs[0] = 'CIT-MISSING@1.0', /unresolved Citation/));
+test('rejects unresolved Provenance', () => rejects(x => x.identities[0].provenance_refs[0] = 'PRV-MISSING@1.0', /unresolved Provenance/));
+test('rejects premature SQM materialization without governed F3 reconciliation', () => rejects(x => x.relations[0].relation_type = 'TARGET_HAS_SQM_EVIDENCE', /bounded F2 fixture may materialize TARGET_HAS_SESSION only/));

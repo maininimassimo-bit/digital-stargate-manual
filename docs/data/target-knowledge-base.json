@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "component": "DSG.TargetKnowledgeBaseProjection",
+  "authority": "projection",
+  "baseline_commit": "79be46cde68c446ceb412491e600c439735622d6",
+  "bounds": { "max_identities": 5, "max_relations": 10 },
+  "identities": [
+    {
+      "target_key": "dsg-target:ldn-1320",
+      "canonical_name": "LDN 1320",
+      "aliases": [],
+      "identity_state": "validated",
+      "source_refs": ["session:2026-07-14_2026-07-15", "session:2026-07-15_2026-07-16"],
+      "citation_refs": ["CIT-TKB-SESSION-2026-07-14@1.0", "CIT-TKB-SESSION-2026-07-15@1.0"],
+      "provenance_refs": ["PRV-TKB-LDN1320-KEY@1.0"]
+    },
+    {
+      "target_key": "dsg-target:m-27",
+      "canonical_name": "M 27",
+      "aliases": [],
+      "identity_state": "validated",
+      "source_refs": ["session:2026-08-14_2026-08-15", "session:2026-08-15_2026-08-16"],
+      "citation_refs": ["CIT-TKB-SESSION-2026-08-14@1.0", "CIT-TKB-SESSION-2026-08-15@1.0"],
+      "provenance_refs": ["PRV-TKB-M27-KEY@1.0"]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL-TKB-LDN1320-S1",
+      "relation_type": "TARGET_HAS_SESSION",
+      "target_key": "dsg-target:ldn-1320",
+      "session_id": "2026-07-14_2026-07-15",
+      "object_ref": "session:2026-07-14_2026-07-15",
+      "source_refs": ["session:2026-07-14_2026-07-15"],
+      "citation_refs": ["CIT-TKB-SESSION-2026-07-14@1.0"],
+      "provenance_refs": ["PRV-TKB-LDN1320-S1@1.0"]
+    },
+    {
+      "id": "REL-TKB-LDN1320-S2",
+      "relation_type": "TARGET_HAS_SESSION",
+      "target_key": "dsg-target:ldn-1320",
+      "session_id": "2026-07-15_2026-07-16",
+      "object_ref": "session:2026-07-15_2026-07-16",
+      "source_refs": ["session:2026-07-15_2026-07-16"],
+      "citation_refs": ["CIT-TKB-SESSION-2026-07-15@1.0"],
+      "provenance_refs": ["PRV-TKB-LDN1320-S2@1.0"]
+    },
+    {
+      "id": "REL-TKB-M27-S1",
+      "relation_type": "TARGET_HAS_SESSION",
+      "target_key": "dsg-target:m-27",
+      "session_id": "2026-08-14_2026-08-15",
+      "object_ref": "session:2026-08-14_2026-08-15",
+      "source_refs": ["session:2026-08-14_2026-08-15"],
+      "citation_refs": ["CIT-TKB-SESSION-2026-08-14@1.0"],
+      "provenance_refs": ["PRV-TKB-M27-S1@1.0"]
+    },
+    {
+      "id": "REL-TKB-M27-S2",
+      "relation_type": "TARGET_HAS_SESSION",
+      "target_key": "dsg-target:m-27",
+      "session_id": "2026-08-15_2026-08-16",
+      "object_ref": "session:2026-08-15_2026-08-16",
+      "source_refs": ["session:2026-08-15_2026-08-16"],
+      "citation_refs": ["CIT-TKB-SESSION-2026-08-15@1.0"],
+      "provenance_refs": ["PRV-TKB-M27-S2@1.0"]
+    }
+  ],
+  "citations": [
+    {"id":"CIT-TKB-SESSION-2026-07-14","version":"1.0","source_authority":"governed_scientific_projection","locator":{"path":"docs/data/scientific-session-catalog.json","record_key":"sessions[].sessionId","record_value":"2026-07-14_2026-07-15"}},
+    {"id":"CIT-TKB-SESSION-2026-07-15","version":"1.0","source_authority":"governed_scientific_projection","locator":{"path":"docs/data/scientific-session-catalog.json","record_key":"sessions[].sessionId","record_value":"2026-07-15_2026-07-16"}},
+    {"id":"CIT-TKB-SESSION-2026-08-14","version":"1.0","source_authority":"governed_scientific_projection","locator":{"path":"docs/data/scientific-session-catalog.json","record_key":"sessions[].sessionId","record_value":"2026-08-14_2026-08-15"}},
+    {"id":"CIT-TKB-SESSION-2026-08-15","version":"1.0","source_authority":"governed_scientific_projection","locator":{"path":"docs/data/scientific-session-catalog.json","record_key":"sessions[].sessionId","record_value":"2026-08-15_2026-08-16"}}
+  ],
+  "provenance_records": [
+    {"id":"PRV-TKB-LDN1320-KEY","version":"1.0","method_id":"BKL035-F2-TARGET-KEY-1","input_refs":["session:2026-07-14_2026-07-15","session:2026-07-15_2026-07-16"],"output_ref":"dsg-target:ldn-1320","citation_refs":["CIT-TKB-SESSION-2026-07-14@1.0","CIT-TKB-SESSION-2026-07-15@1.0"]},
+    {"id":"PRV-TKB-M27-KEY","version":"1.0","method_id":"BKL035-F2-TARGET-KEY-1","input_refs":["session:2026-08-14_2026-08-15","session:2026-08-15_2026-08-16"],"output_ref":"dsg-target:m-27","citation_refs":["CIT-TKB-SESSION-2026-08-14@1.0","CIT-TKB-SESSION-2026-08-15@1.0"]},
+    {"id":"PRV-TKB-LDN1320-S1","version":"1.0","method_id":"BKL035-F2-SOURCE-LINK-1","input_refs":["session:2026-07-14_2026-07-15"],"output_ref":"REL-TKB-LDN1320-S1","citation_refs":["CIT-TKB-SESSION-2026-07-14@1.0"]},
+    {"id":"PRV-TKB-LDN1320-S2","version":"1.0","method_id":"BKL035-F2-SOURCE-LINK-1","input_refs":["session:2026-07-15_2026-07-16"],"output_ref":"REL-TKB-LDN1320-S2","citation_refs":["CIT-TKB-SESSION-2026-07-15@1.0"]},
+    {"id":"PRV-TKB-M27-S1","version":"1.0","method_id":"BKL035-F2-SOURCE-LINK-1","input_refs":["session:2026-08-14_2026-08-15"],"output_ref":"REL-TKB-M27-S1","citation_refs":["CIT-TKB-SESSION-2026-08-14@1.0"]},
+    {"id":"PRV-TKB-M27-S2","version":"1.0","method_id":"BKL035-F2-SOURCE-LINK-1","input_refs":["session:2026-08-15_2026-08-16"],"output_ref":"REL-TKB-M27-S2","citation_refs":["CIT-TKB-SESSION-2026-08-15@1.0"]}
+  ]
+}
