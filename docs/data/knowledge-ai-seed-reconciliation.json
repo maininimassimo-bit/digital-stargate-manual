@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "component": "DSG.KnowledgeSeedReconciliation",
+  "authority": "projection",
+  "baseline_commit": "40f7854f7e662e5a9f0ddc577f3f6f0f30f98993",
+  "bounds": { "max_sources": 5, "max_seeds": 5 },
+  "sources": [
+    { "id": "SRC-BKL044-F2-CLOSURE", "path": "docs/project/BKL-044-F2-CLOSURE-2026-09-07.md", "source_authority": "repository_authority" },
+    { "id": "SRC-BKL044-BACKLOG", "path": "docs/project/BACKLOG.md", "source_authority": "repository_authority" },
+    { "id": "SRC-BKL044-BASELINE", "path": "docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-07.md", "source_authority": "repository_authority" }
+  ],
+  "seeds": [
+    {
+      "id": "SEED-BKL044-F2-CLOSED",
+      "knowledge_item_ref": "EVD-BKL044-F3-F2-CLOSURE",
+      "citation_ref": "CIT-BKL044-F2-CLOSURE@1.0",
+      "semantic_type": "evidence", "lifecycle_state": "validated", "source_authority": "repository_authority",
+      "source_ref": "SRC-BKL044-F2-CLOSURE",
+      "required_fragments": ["| Status | CLOSED / ACCEPTED |", "| Next increment | F3 — Governed Seed Projection & Reconciliation |"]
+    },
+    {
+      "id": "SEED-BKL044-IN-PROGRESS",
+      "knowledge_item_ref": "OBS-BKL044-F3-CURRENT-STATE",
+      "citation_ref": "CIT-BKL044-CURRENT-BASELINE@1.0",
+      "semantic_type": "observation", "lifecycle_state": "validated", "source_authority": "repository_authority",
+      "source_ref": "SRC-BKL044-BASELINE",
+      "required_fragments": ["| BKL-044 state | In Progress — F1/F2 accepted; F3 next |"]
+    },
+    {
+      "id": "SEED-BKL044-F3-NEXT",
+      "knowledge_item_ref": "CLM-BKL044-F3-NEXT-INCREMENT",
+      "citation_ref": "CIT-BKL044-BACKLOG@1.0",
+      "semantic_type": "claim", "lifecycle_state": "validated", "source_authority": "repository_authority",
+      "source_ref": "SRC-BKL044-BACKLOG",
+      "required_fragments": ["F2 PR #100 merge `ea36179882f05ce53581b80e5d5e8e70c560dcd9` CLOSED/ACCEPTED; F3 next"]
+    }
+  ]
+}
