@@ -4,6 +4,12 @@ import fs from 'node:fs';
 import {parseCsv,validateTargetIdentityReconciliation} from './verify-target-identity-reconciliation.mjs';
 const fixture=JSON.parse(fs.readFileSync('docs/data/target-identity-reconciliation.json','utf8')),tkb=JSON.parse(fs.readFileSync('docs/data/target-knowledge-base.json','utf8')),rows=parseCsv(fs.readFileSync('data/analytics/metadata/session-scientific-metadata.csv','utf8')),clone=x=>structuredClone(x);
 const rejects=(mutate,pattern,mutateRows)=>{const x=clone(fixture),r=clone(rows);mutate(x);if(mutateRows)mutateRows(r);assert.match(validateTargetIdentityReconciliation(x,tkb,r).join('\n'),pattern);};
+const addConflictEvidence=(x,{wrongCitation=false,wrongProvenance=false,wrongOutput=false}={})=>{
+ const sessions=['2026-07-14_2026-07-15','2026-07-15_2026-07-16'];
+ const citations=['CIT-TIR-2026-07-14@1.0','CIT-TIR-2026-07-15@1.0'];
+ x.provenance_records.push({id:'PRV-TIR-CONFLICT-X',version:'1.0',method_id:'BKL035-F3-EXACT-ID-RECONCILIATION-1',input_refs:sessions.map(s=>`analytics-metadata:${s}`),output_ref:wrongOutput?'target-id-map:dsg-target:ldn-1320=TGT-LDN-1320':'conflict:CONFLICT-TKB-X',citation_refs:citations});
+ x.conflicts=[{conflict_id:'CONFLICT-TKB-X',target_key:'dsg-target:ldn-1320',reason:'TARGET_ID_DISAGREEMENT',candidate_target_ids:['TGT-LDN-1320','TGT-OTHER'],session_ids:sessions,identity_state:'conflicted',citation_refs:wrongCitation?['CIT-TIR-2026-08-14@1.0','CIT-TIR-2026-08-15@1.0']:citations,provenance_refs:wrongProvenance?['PRV-TIR-LDN1320@1.0']:['PRV-TIR-CONFLICT-X@1.0'],method_id:'BKL035-F3-EXACT-ID-RECONCILIATION-1'}];
+};
 test('accepted bounded F3 reconciliation validates',()=>assert.deepEqual(validateTargetIdentityReconciliation(fixture,tkb,rows),[]));
 test('rejects authority escalation',()=>rejects(x=>x.authority='authoritative',/authority must remain projection/));
 test('rejects source contract structural widening',()=>rejects(x=>x.source_contract.extra=true,/exact bounded F3 source contract/));
@@ -22,3 +28,7 @@ test('rejects F2 canonical identity mutation',()=>rejects(x=>x.matches[0].canoni
 test('rejects match bound expansion',()=>rejects(x=>x.matches=[...x.matches,...x.matches,...x.matches],/match bound exceeded/));
 test('rejects malformed conflict missing required fields',()=>rejects(x=>x.conflicts=[{conflict_id:'CONFLICT-TKB-X',target_key:'dsg-target:ldn-1320',reason:'TARGET_ID_DISAGREEMENT',identity_state:'conflicted',method_id:'BKL035-F3-EXACT-ID-RECONCILIATION-1'}],/structure invalid/));
 test('rejects malformed conflict candidate cardinality',()=>rejects(x=>x.conflicts=[{conflict_id:'CONFLICT-TKB-X',target_key:'dsg-target:ldn-1320',reason:'TARGET_ID_DISAGREEMENT',candidate_target_ids:['TGT-X'],session_ids:['2026-07-14_2026-07-15'],identity_state:'conflicted',citation_refs:['CIT-TIR-2026-07-14@1.0'],provenance_refs:['PRV-TIR-LDN1320@1.0'],method_id:'BKL035-F3-EXACT-ID-RECONCILIATION-1'}],/candidate_target_ids invalid/));
+test('accepts semantically bound synthetic conflict evidence',()=>{const x=clone(fixture);addConflictEvidence(x);assert.deepEqual(validateTargetIdentityReconciliation(x,tkb,rows),[]);});
+test('rejects existing but wrong conflict Citations',()=>rejects(x=>addConflictEvidence(x,{wrongCitation:true}),/Citation refs must bind exactly to conflict sessions/));
+test('rejects existing but wrong conflict Provenance',()=>rejects(x=>addConflictEvidence(x,{wrongProvenance:true}),/Provenance inputs must equal conflict evidence/));
+test('rejects conflict Provenance output not bound to conflict id',()=>rejects(x=>addConflictEvidence(x,{wrongOutput:true}),/Provenance output misbound/));
