@@ -4,7 +4,7 @@
 |---|---|
 | Identifier | BKL-044 |
 | Status | In Progress |
-| Version | 0.6 |
+| Version | 0.7 |
 | Date | 2026-09-07 |
 | Predecessor | BKL-015 — Done / Accepted |
 | Related capability | CAP-40 — Scientific Knowledge Layer |
@@ -17,15 +17,13 @@ BKL-044 defines the semantic and machine-readable contract required to represent
 
 ## 2. Accepted baseline
 
-F1 established knowledge semantics. F2 established the machine-readable fail-closed evidence contract. F3 — Governed Seed Projection & Reconciliation — is CLOSED / ACCEPTED via PR #102 and merge `8d9f47922de1536b424cdd29ca00fc61c5c9fa49`.
+F1 established knowledge semantics. F2 established the machine-readable fail-closed evidence contract. F3 — Governed Seed Projection & Reconciliation — is CLOSED / ACCEPTED. The continuity closure was merged via PR #103 at `6ebe07c7316204fae04938587b10a1d0ff14583e`.
 
-F3 governance is recorded by the independent ARB re-review (APPROVED 99/100), Release Quality review (READY), and `docs/project/BKL-044-F3-CLOSURE-2026-09-07.md`.
-
-Post-merge validation on the F3 merge commit is green: Developer Foundation #992, Validate documentation #601, Word #1026 and Pages #695.
+Post-merge closure validation is green: Developer Foundation #995, Validate documentation #604, Word #1029 and Pages #696.
 
 ## 3. Authority model
 
-Authoritative sources remain authoritative for their own facts. Knowledge/AI datasets, reconciliation manifests and future consumer/read models are projections. Source disagreement remains explicit. AI remains advisory/read-only and outside Safety Authority.
+Authoritative sources remain authoritative for their own facts. Knowledge/AI datasets, reconciliation manifests and consumer/read models are projections. Source disagreement remains explicit. AI remains advisory/read-only and outside Safety Authority.
 
 ## 4. Canonical semantic classes
 
@@ -48,9 +46,7 @@ F2 provides `schemas/knowledge-ai-evidence-contract.schema.json`, `docs/data/kno
 
 F3 provides `docs/data/knowledge-ai-seed-reconciliation.json`, `.github/scripts/verify-knowledge-ai-seed-reconciliation.mjs` and `.github/scripts/test-knowledge-ai-seed-reconciliation.mjs`.
 
-The accepted F3 set is bounded to 3 seeds / 3 repository-authoritative sources with governed maxima 5 / 5. F3 enforces approved-baseline identity, source drift detection, semantic/lifecycle/authority parity, seed-to-Citation locator identity, item-to-Citation identity and derived Provenance/Citation/output identity.
-
-F3 approval does not authorize broad ingestion.
+The accepted F3 set remains bounded to 3 seeds / 3 repository-authoritative sources with governed maxima 5 / 5. F3 approval does not authorize broad ingestion.
 
 ## 6. Lifecycle and fail-closed rules
 
@@ -58,38 +54,47 @@ Lifecycle states remain `incomplete`, `unknown`, `draft`, `validated`, `supersed
 
 ## 7. F4 — Consumer / Read-Model Contract
 
-F4 is the current increment. Its purpose is to define and validate a consumer-facing projection contract that preserves F1-F3 semantics when knowledge items are exposed to API, UI, portal or other read-only consumers.
+F4 is the current implementation increment. It introduces a separate downstream projection rather than altering the accepted F2 source contract:
 
-F4 must preserve at minimum:
+- `schemas/knowledge-ai-read-model.schema.json` — versioned consumer projection shape;
+- `docs/data/knowledge-ai-read-model.json` — bounded governed fixture;
+- `.github/scripts/verify-knowledge-ai-read-model.mjs` — deterministic semantic/traceability preservation validator;
+- `.github/scripts/test-knowledge-ai-read-model.mjs` — fail-closed regression tests;
+- Developer Foundation integration.
 
-- item identity;
-- semantic type;
-- lifecycle state;
-- source authority;
-- AI-derived marker and producer identity/version when applicable;
-- Citation identity/version and governed locator;
-- Provenance identity/version and applicable chain;
-- Confidence contract identity/value when present;
-- explicit unknown/conflict/incomplete states.
+The read model has component `DSG.KnowledgeConsumerReadModel` and authority `projection`. Its `source_contract` is the governed F2/F3 evidence dataset.
 
 ## 8. Consumer invariants
 
-A consumer/read model must not:
+For every projected source item F4 preserves exactly:
 
-- flatten Observation, Evidence, Claim, Inference and Recommendation into an undifferentiated fact;
-- promote Claim or Inference to Observation;
-- promote AI-derived material to repository authority;
-- omit lifecycle state in a way that makes incomplete/unknown material appear validated;
-- replace Citation identity with display text only;
-- replace Provenance with an untraceable summary;
-- expose Confidence without its interpretation contract identity;
-- resolve Conflict or Unknown by presentation convention alone.
+- source item identity through `source_item_ref`;
+- semantic type;
+- lifecycle state;
+- source authority;
+- AI-derived marker;
+- producer and producer version where present;
+- ordered Citation identities plus governed source authority and locator;
+- ordered Provenance identities, method, inputs, output and Citation references;
+- Confidence contract identity and value where present.
 
-## 9. F4 expected validation
+A consumer cannot invent Confidence when absent, drop Confidence when present, mutate Citation locators, mutate Provenance chains, remove the AI marker, escalate source authority, promote lifecycle, or flatten semantic type.
 
-F4 should introduce a versioned machine-readable read-model schema/fixture plus deterministic validator/tests. Tests must include positive preservation and negative cases for semantic flattening, authority escalation, lifecycle loss, Citation loss, Provenance loss and Confidence-contract loss.
+## 9. F4 validation matrix
 
-The implementation remains repository-only unless a later explicitly governed increment introduces runtime consumers.
+Positive validation proves the governed fixture preserves source semantics and traceability. Negative tests fail closed for:
+
+1. semantic flattening;
+2. authority escalation;
+3. lifecycle promotion/loss;
+4. Citation identity loss;
+5. Citation locator mutation;
+6. Provenance identity loss;
+7. Provenance chain mutation;
+8. Confidence contract loss;
+9. AI-derived marker loss.
+
+Developer Foundation executes both the deterministic validator and negative test suite.
 
 ## 10. Observation vs inference boundary
 
@@ -105,14 +110,14 @@ AI-produced content remains explicitly marked and cannot mutate authoritative so
 
 ## 12. Safety and security boundary
 
-BKL-044 remains repository/read-only governance. It introduces no observatory command path, cleanup action, remediation, interlock override, weather-safety decision, EAGLE runtime change or Safety Authority coupling. Citation presence is not access authorization.
+BKL-044 F4 remains repository/read-only governance. It introduces no observatory command path, cleanup action, remediation, interlock override, weather-safety decision, EAGLE runtime change or Safety Authority coupling. Citation presence is not access authorization.
 
 ## 13. Transition increments
 
 - **F1 — Semantic contract:** CLOSED / ACCEPTED.
 - **F2 — Machine-readable schema and validation:** CLOSED / ACCEPTED.
 - **F3 — Governed seed projection and reconciliation:** CLOSED / ACCEPTED.
-- **F4 — Consumer / Read-Model Contract:** CURRENT.
+- **F4 — Consumer / Read-Model Contract:** IMPLEMENTED / PENDING INDEPENDENT REVIEW.
 
 ## 14. Acceptance criteria for F4
 
@@ -124,7 +129,7 @@ F4 is acceptable only if:
 4. Citation identity/version/locator remain traceable;
 5. Provenance identity and chain remain traceable for derived items;
 6. Confidence remains tied to its versioned contract;
-7. unknown/conflict/incomplete states remain explicit;
+7. unknown/conflict/incomplete states remain explicit when projected;
 8. negative tests fail closed on semantic flattening, authority escalation and traceability loss;
 9. Developer Foundation, documentation and manual gates are green on exact PR head;
 10. independent ARB and Release Quality gates approve before merge;
@@ -132,12 +137,14 @@ F4 is acceptable only if:
 
 ## 15. Migration and rollback
 
-F4 is expected to be additive repository contract/projection/CI work. No runtime or scientific source data migration is authorized. Rollback is a repository revert of the F4 change set.
+F4 is additive repository contract/projection/CI work. No runtime or scientific source data migration is authorized. Rollback is a repository revert of the F4 change set.
 
 ## 16. Risks and open decisions
 
-Persistent graph/vector storage, RAG, inference technology and runtime UI/API implementation remain undecided. Broad ingestion remains prohibited. Historical incomplete provenance remains explicit rather than synthesized. F4 must not accidentally create a second authority model through presentation or serialization shortcuts.
+Persistent graph/vector storage, RAG, inference technology and runtime UI/API implementation remain undecided. Broad ingestion remains prohibited. Historical incomplete provenance remains explicit rather than synthesized. F4 does not create a second authority model.
+
+The current fixture intentionally exercises evidence, observation, claim and an incomplete AI inference. It does not manufacture conflict/unknown/recommendation records merely to increase fixture coverage; those semantic classes remain governed by the source contract and must be preserved exactly when future governed source items of those types are projected.
 
 ## 17. Decision
 
-F3 is accepted. F4 is now the current BKL-044 increment. BKL-044 remains `In Progress` until the governed increment sequence is completed.
+F3 is accepted. F4 implementation is ready for exact-head CI and independent ARB review. BKL-044 remains `In Progress`.
