@@ -43,34 +43,31 @@ Procedere una milestone alla volta: repository truth -> architettura -> implemen
 ## 6. Stato di continuità corrente — 07/09/2026
 
 - BKL-030 resta CLOSED / ACCEPTED.
-- BKL-015 resta DONE / ACCEPTED.
-- TD-008 resta RESOLVED.
-- BKL-044 resta IN PROGRESS.
-- F1 è CLOSED / ACCEPTED via PR #98.
-- F2 è CLOSED / ACCEPTED via PR #100.
-- F3 è CLOSED / ACCEPTED via PR #102, merge `8d9f47922de1536b424cdd29ca00fc61c5c9fa49`.
-- ARB F3 re-review: APPROVED 99/100.
-- Release Quality F3: READY.
-- Post-merge F3: Developer Foundation #992, docs #601, Word #1026 e Pages #695 — SUCCESS.
-- Il prossimo incremento governato è **BKL-044 F4 — Consumer / Read-Model Contract**.
-- F4 deve preservare semantic type, lifecycle, source authority, Citation, Provenance e Confidence nei consumer senza semantic flattening o authority escalation.
-- graph DB, vector DB, RAG, inference runtime/provider e AI authority restano non autorizzati/indecisi.
+- BKL-015 resta DONE / ACCEPTED; TD-008 resta RESOLVED.
+- BKL-044 è CLOSED / ACCEPTED con F1-F4 completati.
+- F4 Consumer / Read-Model Contract è stato integrato via PR #104, merge `b7c01ba7221818e1971403ab3befe38c8e40cc54`.
+- Post-merge F4: Developer Foundation #1004, Docs #613, Word #1038 e Pages #697 — SUCCESS.
+- Closure: `docs/project/BKL-044-CLOSURE-2026-09-07.md`.
+- Il package governato corrente è **BKL-035 — Target Knowledge Base**.
+- BKL-035 deve costruire una vista target-centrica collegando sessioni, SQM, setup, immagini e processing provenance sopra le foundation accettate BKL-015/BKL-044.
+- repository authority e source authority devono restare preservate; la Target Knowledge Base è una projection/read model, non una nuova authority.
+- graph DB, vector DB, RAG, inference runtime/provider e AI authority restano non autorizzati/indecisi salvo governance successiva.
 - runtime EAGLE e Safety Authority restano invariati.
 
 ### Sequenza governata corrente
 
-`BKL-030 CLOSED -> BKL-015 CLOSED -> BKL-044 IN PROGRESS (F1/F2/F3 ACCEPTED; F4 CURRENT) -> BKL-035 -> BKL-040 -> BKL-037 -> BKL-038 -> BKL-039 -> BKL-041 -> BKL-045 -> BKL-046 -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`BKL-030 CLOSED -> BKL-015 CLOSED -> BKL-044 CLOSED -> BKL-035 CURRENT -> BKL-040 -> BKL-037 -> BKL-038 -> BKL-039 -> BKL-041 -> BKL-045 -> BKL-046 -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Quality-gate handover
 
-La baseline di continuità è `docs/project/HANDOVER_2026-09-07.md`; il delta tecnico è `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-07.md`; la closure F3 è `docs/project/BKL-044-F3-CLOSURE-2026-09-07.md`.
+La baseline di continuità è `docs/project/HANDOVER_2026-09-07.md`; il delta tecnico è `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-07.md`; la closure BKL-044 è `docs/project/BKL-044-CLOSURE-2026-09-07.md`.
 
-BKL-030 e BKL-015 non possono essere riaperti implicitamente. Health policy, remediation, command path, Safety Authority coupling, graph infrastructure persistente o AI authority richiedono governance separata.
+BKL-030, BKL-015 e BKL-044 non possono essere riaperti implicitamente. Health policy, remediation, command path, Safety Authority coupling, graph infrastructure persistente o AI authority richiedono governance separata.
 
 ## 8. Divieti
 
-Non inventare branch/file/commit/test/workflow/stati; non marcare approved senza evidence; non promuovere una projection a source primaria; non aggirare interlock/safe state; non introdurre inferenze AI come repository truth; non appiattire semantic type/lifecycle/authority/Citation/Provenance nei consumer F4.
+Non inventare branch/file/commit/test/workflow/stati; non marcare approved senza evidence; non promuovere una projection a source primaria; non aggirare interlock/safe state; non introdurre inferenze AI come repository truth; non perdere semantic type/lifecycle/authority/Citation/Provenance nei consumer successivi.
 
 ## 9. Punto di partenza operativo
 
-Aprire handover, current technical baseline, closure F3 e contratto BKL-044 v0.6; verificare HEAD/workflow correnti. Il package governato corrente è **BKL-044**, con **F4 Consumer / Read-Model Contract** come incremento corrente.
+Aprire handover, current technical baseline, closure BKL-044 e le foundation BKL-015/BKL-044; verificare HEAD/workflow correnti. Il package governato corrente è **BKL-035 Target Knowledge Base**. Il primo incremento BKL-035 deve essere definito a partire dalle fonti target/session/SQM/setup/image/processing realmente governate nel repository, senza broad ingestion implicita.

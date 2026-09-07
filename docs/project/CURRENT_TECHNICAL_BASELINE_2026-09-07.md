@@ -4,72 +4,53 @@
 |---|---|
 | Stato | Current |
 | Repository authority | GitHub `main` |
-| Baseline verificata | `8d9f47922de1536b424cdd29ca00fc61c5c9fa49` |
-| Current governed package | BKL-044 Knowledge Graph / AI Evidence Contract |
-| BKL-044 state | In Progress — F1/F2/F3 accepted; F4 next |
+| Baseline verificata | `b7c01ba7221818e1971403ab3befe38c8e40cc54` |
+| Current governed package | BKL-035 Target Knowledge Base |
+| BKL-044 | Done / Accepted — F1-F4 |
 | BKL-015 | Done / Accepted |
 | TD-008 | Resolved |
 | Runtime EAGLE | unchanged |
 | Safety Authority | local / outside Knowledge Graph and AI scope |
 
-## 1. Current package
+## 1. Accepted knowledge foundation
 
-BKL-044 è il package corrente. F3 è integrato tramite PR #102 e merge `8d9f47922de1536b424cdd29ca00fc61c5c9fa49`.
+BKL-015 remains Done/Accepted and supplies repository-centric machine-readable traceability. BKL-044 is Done/Accepted and supplies the scientific/AI evidence semantic contract, deterministic validation, bounded reconciliation and consumer/read-model preservation rules.
 
-Governance F3:
-
-- `docs/architecture/reviews/ARB-BKL-044-F3-ReReview-2026-09-07.md` — APPROVED;
-- `docs/architecture/reviews/RQ-BKL-044-F3-Release-Quality-Review-2026-09-07.md` — READY;
-- `docs/project/BKL-044-F3-CLOSURE-2026-09-07.md` — closure record.
-
-Post-merge: Developer Foundation #992, documentation #601, Word #1026 e Pages #695 — SUCCESS.
+F4 was merged via PR #104 as `b7c01ba7221818e1971403ab3befe38c8e40cc54`. Post-merge Developer Foundation #1004, Docs #613, Word #1038 and Pages #697 are SUCCESS.
 
 ## 2. Machine-readable evidence baseline
 
-F2 remains the accepted evidence contract: `schemas/knowledge-ai-evidence-contract.schema.json` and `docs/data/knowledge-ai-evidence-contract.json`, with deterministic validator/tests in Developer Foundation.
+The accepted evidence contract remains `schemas/knowledge-ai-evidence-contract.schema.json` with governed dataset `docs/data/knowledge-ai-evidence-contract.json`. Semantic classes remain distinct: Observation, Evidence, Claim, Inference, Recommendation, Confidence, Citation, Provenance, Conflict and Unknown.
 
-Semantic classes remain distinct: Observation, Evidence, Claim, Inference, Recommendation, with Confidence, Citation, Provenance, Conflict and Unknown governed explicitly.
+## 3. Reconciliation and consumer baseline
 
-## 3. F3 reconciliation baseline
+F3 bounded reconciliation remains limited to the governed seed/source set and is not broad-ingestion authorization. F4 adds `schemas/knowledge-ai-read-model.schema.json`, `docs/data/knowledge-ai-read-model.json` and deterministic validator/tests preserving semantic type, lifecycle, source authority, Citation, Provenance, Confidence and AI-derived markers.
 
-F3 adds `docs/data/knowledge-ai-seed-reconciliation.json`, `.github/scripts/verify-knowledge-ai-seed-reconciliation.mjs` and `.github/scripts/test-knowledge-ai-seed-reconciliation.mjs`.
+## 4. Current package — BKL-035
 
-Accepted properties:
+**BKL-035 Target Knowledge Base** is the current governed package.
 
-- bounded seed/source set: 3/3, governed maximum 5/5;
-- exact approved-baseline anchoring;
-- repository-authority source reconciliation;
-- fail-closed source-fragment drift detection;
-- seed-to-Citation repository locator identity;
-- item-to-Citation identity;
-- derived Provenance/Citation/output identity;
-- negative tests for drift, unresolved references, semantic flattening, authority downgrade, bounds, source/Citation mismatch, Provenance/Citation mismatch and baseline mismatch.
+Target state: a target-centric projection/read model linking governed astronomical target identity to available session, SQM, setup, image and processing provenance, while preserving the authority of each source.
 
-F3 approval is not broad-ingestion authorization.
+BKL-035 must not manufacture missing lineage, infer certainty from unknown data, promote derived content to repository authority, or authorize broad ingestion merely because a source is technically accessible.
 
-## 4. BKL-015 foundation
+## 5. First increment
 
-BKL-015 remains Done/Accepted. The repository Knowledge Graph remains a rebuildable projection and does not become authoritative merely by containing an item or relation.
+The next dependency-ordered increment is **BKL-035 F1 — Target Knowledge Base Source Discovery & Semantic Contract**.
 
-## 5. Next governed increment — F4
+F1 must:
 
-**BKL-044 F4 — Consumer / Read-Model Contract.**
-
-F4 must define machine-readable consumer/read-model behavior preserving:
-
-- semantic type;
-- lifecycle state;
-- source authority;
-- Citation identity/version/locator;
-- Provenance identity and applicable chain;
-- Confidence contract identity/value where present;
-- explicit unknown/conflict/incomplete states.
-
-Consumers must not silently flatten Evidence into Claim, Claim into fact, Inference into Observation, or AI output into repository authority.
+- inventory existing governed target/session/SQM/setup/image/processing sources;
+- define canonical target identity and alias rules without duplicating source authority;
+- define relation semantics and observation/derived boundaries;
+- define provenance and citation requirements;
+- define bounded seed and fail-closed acceptance criteria;
+- identify unknowns/conflicts explicitly;
+- remain repository-only unless a later package separately governs runtime impact.
 
 ## 6. Runtime, security and safety invariants
 
-No BKL-044 F1-F3 change affects EAGLE runtime or local safety. F4 is expected to remain repository-only unless separately governed. No command endpoint, remediation, graph/vector persistence, RAG runtime, AI provider, inference engine or Safety Authority coupling is authorized by the current baseline.
+No BKL-035 F1 runtime change is authorized. No command endpoint, remediation, graph/vector persistence, RAG runtime, AI provider, inference engine or Safety Authority coupling is authorized by this baseline. Existing EAGLE/session automation and local interlocks remain unchanged.
 
 ## 7. Scientific/runtime invariants
 
