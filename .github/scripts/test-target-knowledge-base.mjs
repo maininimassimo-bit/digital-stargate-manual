@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { validateTargetKnowledgeBase } from './verify-target-knowledge-base.mjs';
+import { deriveTargetKey, validateTargetKnowledgeBase } from './verify-target-knowledge-base.mjs';
 
 const fixture = JSON.parse(fs.readFileSync('docs/data/target-knowledge-base.json', 'utf8'));
 const catalog = JSON.parse(fs.readFileSync('docs/data/scientific-session-catalog.json', 'utf8'));
@@ -9,6 +9,9 @@ const clone = x => structuredClone(x);
 const rejects = (mutate, pattern) => { const x = clone(fixture); mutate(x); assert.match(validateTargetKnowledgeBase(x, catalog).join('\n'), pattern); };
 
 test('accepted bounded fixture validates', () => assert.deepEqual(validateTargetKnowledgeBase(fixture, catalog), []));
+test('BKL035-F2-TARGET-KEY-1 derives bounded deterministic keys', () => { assert.equal(deriveTargetKey(' LDN   1320 '), 'dsg-target:ldn-1320'); assert.equal(deriveTargetKey('M 27'), 'dsg-target:m-27'); assert.equal(deriveTargetKey('M_27'), null); });
+test('rejects syntactically valid but semantically wrong target key', () => rejects(x => { x.identities[0].target_key = 'dsg-target:wrong-key'; x.relations.filter(r => r.target_key === 'dsg-target:ldn-1320').forEach(r => r.target_key = 'dsg-target:wrong-key'); x.provenance_records.find(p => p.id === 'PRV-TKB-LDN1320-KEY').output_ref = 'dsg-target:wrong-key'; }, /target_key must equal deterministic key dsg-target:ldn-1320/));
+test('rejects canonical label unsupported by bounded key method', () => rejects(x => x.identities[0].canonical_name = 'LDN_1320', /unsupported by BKL035-F2-TARGET-KEY-1/));
 test('rejects structural extra property', () => rejects(x => x.identities[0].invented = true, /unexpected property invented/));
 test('rejects structural missing required property', () => rejects(x => delete x.relations[0].object_ref, /required property object_ref missing/));
 test('rejects structural duplicate refs', () => rejects(x => x.identities[0].source_refs.push(x.identities[0].source_refs[0]), /source_refs must be unique/));
