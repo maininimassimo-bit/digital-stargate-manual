@@ -3,9 +3,9 @@ name: Developer Foundation
 on:
   push:
     branches: [main, release/1.5-developer-foundation]
-    paths: ["src/**","tests/**","dsg-analytics/**","data/analytics/**","data/sessions/**/normalized/session-metrics.json","*.sln","*.props","global.json",".editorconfig","scripts/telemetry/**","requirements.txt","schemas/**",".github/scripts/**",".github/roadmap/**","docs/data/roadmap.json","docs/data/knowledge-graph.json","docs/data/scientific-session-catalog.json","docs/data/scientific-observation-index.json","docs/project/BACKLOG.md","docs/architecture/knowledge/**","docs/architecture/traceability-register.md","docs/architecture/ADR-*.md","docs/architecture/assessments/ADR-*.md","docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md",".github/workflows/developer-foundation.yml"]
+    paths: ["src/**","tests/**","dsg-analytics/**","data/analytics/**","data/sessions/**/normalized/session-metrics.json","*.sln","*.props","global.json",".editorconfig","scripts/telemetry/**","requirements.txt","schemas/**",".github/scripts/**",".github/roadmap/**","docs/data/roadmap.json","docs/data/knowledge-graph.json","docs/data/knowledge-ai-evidence-contract.json","docs/data/scientific-session-catalog.json","docs/data/scientific-observation-index.json","docs/project/BACKLOG.md","docs/architecture/knowledge/**","docs/architecture/traceability-register.md","docs/architecture/ADR-*.md","docs/architecture/assessments/ADR-*.md","docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md",".github/workflows/developer-foundation.yml"]
   pull_request:
-    paths: ["src/**","tests/**","dsg-analytics/**","data/analytics/**","data/sessions/**/normalized/session-metrics.json","*.sln","*.props","global.json",".editorconfig","scripts/telemetry/**","requirements.txt","schemas/**",".github/scripts/**",".github/roadmap/**","docs/data/roadmap.json","docs/data/knowledge-graph.json","docs/data/scientific-session-catalog.json","docs/data/scientific-observation-index.json","docs/project/BACKLOG.md","docs/architecture/knowledge/**","docs/architecture/traceability-register.md","docs/architecture/ADR-*.md","docs/architecture/assessments/ADR-*.md","docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md",".github/workflows/developer-foundation.yml"]
+    paths: ["src/**","tests/**","dsg-analytics/**","data/analytics/**","data/sessions/**/normalized/session-metrics.json","*.sln","*.props","global.json",".editorconfig","scripts/telemetry/**","requirements.txt","schemas/**",".github/scripts/**",".github/roadmap/**","docs/data/roadmap.json","docs/data/knowledge-graph.json","docs/data/knowledge-ai-evidence-contract.json","docs/data/scientific-session-catalog.json","docs/data/scientific-observation-index.json","docs/project/BACKLOG.md","docs/architecture/knowledge/**","docs/architecture/traceability-register.md","docs/architecture/ADR-*.md","docs/architecture/assessments/ADR-*.md","docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md",".github/workflows/developer-foundation.yml"]
 permissions: { contents: read }
 jobs:
   quality-gate:
@@ -34,6 +34,8 @@ jobs:
       - { name: Verify repository knowledge graph, run: node .github/scripts/verify-knowledge-graph.mjs }
       - { name: Verify repository knowledge graph coverage, run: node .github/scripts/verify-knowledge-graph-coverage.mjs }
       - { name: Verify knowledge graph material relations, run: node .github/scripts/verify-knowledge-graph-material-relations.mjs }
+      - { name: Verify Knowledge / AI evidence contract, run: node .github/scripts/verify-knowledge-ai-evidence-contract.mjs }
+      - { name: Test Knowledge / AI evidence fail-closed rules, run: node --test .github/scripts/test-knowledge-ai-evidence-contract.mjs }
       - name: Verify generated roadmap
         shell: bash
         run: |

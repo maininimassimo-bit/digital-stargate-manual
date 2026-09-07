@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "component": "DSG.KnowledgeAIEvidenceContract",
+  "authority": "projection",
+  "citations": [
+    {
+      "id": "CIT-BKL044-F2-CONTRACT",
+      "version": "1.0",
+      "source_authority": "repository_authority",
+      "locator": { "kind": "repository_path", "value": "docs/architecture/knowledge/BKL-044-Knowledge-Graph-AI-Evidence-Contract.md" },
+      "producer": "DSG.RepositoryGovernance",
+      "produced_at_utc": "2026-09-07T12:30:00Z"
+    }
+  ],
+  "provenance_records": [],
+  "confidence_contracts": [
+    {
+      "id": "CONF-DETERMINISTIC",
+      "version": "1.0",
+      "scale": "0..1",
+      "method": "deterministic quality assertion",
+      "producer": "DSG.KnowledgeContractValidator"
+    }
+  ],
+  "items": [
+    {
+      "id": "OBS-BKL044-F2-SEED",
+      "semantic_type": "observation",
+      "producer": "DSG.RepositoryGovernance",
+      "produced_at_utc": "2026-09-07T12:30:00Z",
+      "observed_at_utc": "2026-09-07T12:30:00Z",
+      "source_authority": "repository_authority",
+      "lifecycle_state": "validated",
+      "ai_derived": false
+    },
+    {
+      "id": "EVD-BKL044-F2-CONTRACT",
+      "semantic_type": "evidence",
+      "producer": "DSG.RepositoryGovernance",
+      "produced_at_utc": "2026-09-07T12:30:00Z",
+      "source_authority": "repository_authority",
+      "lifecycle_state": "validated",
+      "ai_derived": false,
+      "citation_refs": ["CIT-BKL044-F2-CONTRACT@1.0"]
+    },
+    {
+      "id": "INF-BKL044-F2-INCOMPLETE",
+      "semantic_type": "inference",
+      "producer": "DSG.AdvisoryAI",
+      "producer_version": "contract-test-1",
+      "produced_at_utc": "2026-09-07T12:31:00Z",
+      "source_authority": "projection",
+      "lifecycle_state": "incomplete",
+      "ai_derived": true,
+      "method_id": "METHOD-ADVISORY-EXAMPLE",
+      "confidence": { "contract_ref": "CONF-DETERMINISTIC@1.0", "value": 0.5 }
+    }
+  ]
+}
