@@ -1,0 +1,249 @@
+# BKL-044 — Knowledge Graph / AI Evidence Contract
+
+| Field | Value |
+|---|---|
+| Identifier | BKL-044 |
+| Status | In Progress |
+| Version | 0.1 |
+| Date | 2026-09-07 |
+| Predecessor | BKL-015 — Done / Accepted |
+| Related capability | CAP-40 — Scientific Knowledge Layer |
+| Authority | Repository governance contract |
+| Runtime impact | None |
+
+## 1. Purpose
+
+BKL-044 defines the semantic contract required to represent scientific and AI-derived knowledge on top of the accepted BKL-015 machine-readable repository foundation.
+
+The contract must make it possible to distinguish what was observed, what evidence supports it, what was derived from that evidence, how confident that derivation is, who or what produced it, and how a consumer can trace it back to an authoritative source.
+
+BKL-044 does **not** make AI output authoritative. It establishes provenance and evidence semantics so future search, analytics and advisory AI can remain explainable and reviewable.
+
+## 2. Verified baseline
+
+BKL-015 provides:
+
+- stable machine-readable entity identities;
+- typed/versioned relations;
+- repository source locators;
+- a non-authoritative Knowledge Graph projection;
+- deterministic integrity and coverage gates;
+- 100% governed AP/ADR/component/evidence coverage for the accepted repository-traceability scope.
+
+BKL-044 extends that baseline without reopening TD-008.
+
+## 3. Drivers
+
+The contract is required to support future capabilities that need evidence-aware knowledge, including:
+
+- Target Knowledge Base;
+- Night Timeline / Observatory Replay;
+- Session Comparison & Benchmarking;
+- Scientific Data Quality Score;
+- PixInsight Workflow Provenance;
+- AI Post-Processing Assistant;
+- Observation Planner;
+- Session Readiness Decision Support;
+- AI Observatory Assistant;
+- AP-015 Scientific Knowledge Platform.
+
+## 4. Authority model
+
+The Knowledge Graph and all AI-facing projections remain derived views.
+
+Authoritative sources remain authoritative for their own facts, including:
+
+- GitHub for governed architecture, ADRs, documentation and accepted reports;
+- Scientific Catalog for asset identifiers, URI/checksum/manifest and processing provenance when applicable;
+- analytics/warehouse data products for governed curated analytical facts;
+- telemetry/session projections for their explicitly governed measurements and timestamps;
+- external scientific storage for binary scientific assets.
+
+If sources disagree, BKL-044 records the conflict. It does not silently select a winner.
+
+## 5. Canonical semantic classes
+
+BKL-044 introduces the following conceptual classes. Machine-readable schema details may be defined in a later increment, but their semantics are fixed by this contract.
+
+| Class | Meaning | Authority rule |
+|---|---|---|
+| Observation | A directly recorded or governed measurement/event | Must identify source and observation time |
+| Evidence | A source artifact or governed fact used to support a claim | Must be locatable and attributable |
+| Claim | A statement asserted from one or more evidence items | Must declare producer, method and provenance |
+| Inference | A derived interpretation not directly observed | Never promoted silently to fact |
+| Recommendation | An advisory proposed action or choice | Must remain non-authoritative unless separately approved |
+| Confidence | A bounded statement about certainty/quality of a claim or inference | Must identify scale/method; no implicit universal meaning |
+| Citation | A resolvable locator to the supporting authoritative source | Must be stable enough for later verification |
+| Provenance | The chain linking source, transformation, producer and resulting knowledge artifact | Must be inspectable end-to-end |
+| Conflict | Explicit representation of incompatible or unresolved source assertions | Must remain visible until governed resolution |
+| Unknown | Explicit absence of sufficient evidence | Must not be converted into inferred certainty |
+
+## 6. Minimum provenance envelope
+
+Every claim, inference or recommendation MUST carry at least:
+
+- stable identifier;
+- semantic type;
+- producer identity or component;
+- produced-at timestamp;
+- one or more evidence/citation references;
+- method or transformation identifier when derived;
+- confidence representation when confidence is asserted;
+- source authority classification;
+- lifecycle state;
+- correlation/trace identifier when part of an automated processing chain.
+
+Missing mandatory provenance makes the item incomplete rather than authoritative.
+
+## 7. Observation vs inference boundary
+
+The following distinction is mandatory:
+
+```text
+observation/evidence -> derivation method -> claim/inference -> optional recommendation
+```
+
+A consumer must be able to determine whether a displayed value or statement is:
+
+1. directly observed;
+2. copied from an authoritative source;
+3. computed deterministically;
+4. inferred statistically or heuristically;
+5. generated by an AI component;
+6. proposed as a recommendation.
+
+UI or API projections must not flatten these categories into a generic `fact` representation.
+
+## 8. Confidence contract
+
+Confidence is contextual, not universal.
+
+A confidence value is valid only when accompanied by its interpretation contract, including as applicable:
+
+- scale or enum definition;
+- calculation or model method;
+- calibration/version identifier;
+- evidence population/window;
+- timestamp;
+- producer.
+
+A numeric value such as `0.92` without a declared confidence contract is non-compliant.
+
+## 9. AI-specific governance
+
+AI-produced content MUST:
+
+- be marked as AI-derived;
+- preserve evidence/citation references used to produce the output where available;
+- preserve model/component/version metadata appropriate to the system boundary;
+- remain distinguishable from observations and authoritative repository facts;
+- expose uncertainty or insufficient-evidence conditions;
+- avoid autonomous mutation of authoritative sources;
+- remain advisory for operational recommendations unless a separately governed capability explicitly authorizes otherwise.
+
+BKL-044 does not authorize an AI component to become Safety Authority.
+
+## 10. Safety boundary
+
+BKL-044 is read-only with respect to observatory control.
+
+It does not authorize:
+
+- dome/mount/camera/power/network commands;
+- cleanup or deletion actions;
+- automatic remediation;
+- override of local physical interlocks;
+- weather safety decisions;
+- Safety Authority coupling.
+
+Local physical safety mechanisms remain independent from knowledge/AI projections.
+
+## 11. Security and privacy
+
+The semantic contract must support source classification and least-privilege consumption.
+
+Knowledge projections MUST NOT require embedding credentials, secrets or unrestricted source payloads. Citations may reference protected sources without making their protected contents public.
+
+Future AI retrieval must respect source-level access controls rather than treating graph presence as universal authorization.
+
+## 12. Technology neutrality
+
+BKL-044 defines semantics, not storage technology.
+
+The following remain explicitly undecided:
+
+- graph database;
+- document database;
+- vector database;
+- embedding model;
+- RAG framework;
+- inference runtime;
+- hosted AI provider.
+
+Any such choice requires separate evidence, non-functional requirements and architecture review.
+
+## 13. Transition increments
+
+### F1 — Semantic contract
+
+Define canonical evidence/claim/inference/recommendation/confidence/provenance semantics and authority boundaries.
+
+### F2 — Machine-readable schema and validation
+
+Encode the accepted semantic contract in repository schemas/vocabularies and add fail-closed CI validation.
+
+### F3 — Governed seed projection and reconciliation
+
+Represent a bounded set of existing scientific/session/processing evidence using the new contract and prove source reconciliation.
+
+### F4 — Consumer/read-model contract
+
+Define safe read-only consumption boundaries for portal, analytics and future AI retrieval without selecting a persistent graph/vector technology by default.
+
+## 14. Acceptance criteria for F1
+
+F1 is acceptable when:
+
+- observation, evidence, claim, inference, recommendation, confidence, citation, provenance, conflict and unknown semantics are explicit;
+- authoritative source boundaries remain explicit;
+- AI-derived content cannot be confused with observed or authoritative facts;
+- confidence cannot be expressed without an interpretation contract;
+- missing/conflicting evidence remains visible;
+- no graph DB, vector DB, RAG or model/provider technology is selected;
+- no runtime or Safety Authority capability is introduced;
+- successor F2 machine-readable work is clearly bounded;
+- independent ARB and Release Quality reviews are required before merge.
+
+## 15. Quality gates
+
+F1 requires:
+
+- repository consistency review against BKL-015 and SKL-VIS-001;
+- MkDocs strict validation;
+- documentation validation;
+- independent Architecture Review Board review;
+- Release Quality review;
+- post-merge validation on `main`.
+
+Runtime OAT is not applicable to F1 because no runtime behavior is introduced.
+
+## 16. Migration and rollback
+
+F1 is documentation/contract-only and additive. Rollback consists of reverting the package document. No source scientific data or runtime configuration is mutated.
+
+## 17. Risks and open decisions
+
+- uncontrolled vocabulary growth;
+- evidence duplication across source systems;
+- source conflicts without clear ownership;
+- confidence values interpreted outside their method context;
+- AI-generated inference presented as fact by downstream UI;
+- premature graph/vector technology selection;
+- historical data with incomplete provenance;
+- access-control leakage through future retrieval layers.
+
+These risks must be carried into F2/F3 rather than hidden by implementation convenience.
+
+## 18. Decision
+
+BKL-044 proceeds first as a semantic evidence contract. Machine-readable schema, seed data, retrieval and AI runtime concerns remain separate governed increments. The Knowledge Graph remains a non-authoritative projection and AI remains advisory/read-only within this package.
