@@ -24,6 +24,7 @@ function validate(v,r,loc='$'){
 validate(doc,schema);
 if(doc.baseline_commit!=='0a91e280d86cbcb7272d88c1c68f282d00272823')fail('fixture must bind accepted BKL-038 F1 merge');
 const replayEvents=new Map(replay.events.map(e=>[`replay-event:${e.replay_event_id}`,e]));
+const replayCorrelations=new Map(replay.correlations.map(c=>[`${c.left_event_ref}|${c.right_event_ref}`,c]));
 const citations=new Set(replay.citations.map(x=>`${x.id}@${x.version}`));
 const provenance=new Set(replay.provenance_records.map(x=>`${x.id}@${x.version}`));
 const ids=new Set();
@@ -47,7 +48,11 @@ for(const r of doc.records){
   if(r.action_authority!=='NONE'||r.authority!=='projection')fail(`${r.derived_record_id}: authority boundary violated`);
 }
 const trend=doc.records.find(r=>r.derived_record_id==='AT-F2-TREND-CW-TO-NINA-DELTA');
-const a=replayEvents.get(trend.source_record_refs[0]);const b=replayEvents.get(trend.source_record_refs[1]);
-const exact=new Date(b.event_time_utc).getTime()-new Date(a.event_time_utc).getTime();
-if(Math.abs(exact-trend.measurement.value)>0.001)fail('exact delta does not match source evidence');
-console.log(`BKL-038 F2 validation PASS: records=${doc.records.length}; authority=projection; action=NONE`);
+if(!trend)fail('required exact-delta trend record missing');
+const acceptedCorrelation=replayCorrelations.get(`${trend.source_record_refs[0]}|${trend.source_record_refs[1]}`);
+if(!acceptedCorrelation)fail('accepted BKL-040 correlation evidence for exact delta is missing');
+if(acceptedCorrelation.classification_method_id!=='BKL040-F3-EXACT-DELTA-1')fail('unexpected upstream exact-delta method');
+if(acceptedCorrelation.classification_state!=='NOT_ASSESSED')fail('upstream correlation classification must remain NOT_ASSESSED');
+if(trend.measurement.unit!=='ms')fail('exact-delta trend unit must be ms');
+if(Math.abs(acceptedCorrelation.delta_ms-trend.measurement.value)>0.000001)fail('exact delta does not match accepted BKL-040 correlation evidence');
+console.log(`BKL-038 F2 validation PASS: records=${doc.records.length}; authority=projection; action=NONE; exact_delta_ms=${acceptedCorrelation.delta_ms}`);
