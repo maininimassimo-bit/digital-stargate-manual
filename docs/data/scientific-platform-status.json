@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "1.0",
+  "updatedAt": "2026-09-08",
+  "generatedFrom": {
+    "roadmap": "docs/data/roadmap.json",
+    "discovery": "docs/architecture/validation/AP-013-Session-Discovery-Execution-Evidence.md",
+    "operationalAcceptance": "docs/architecture/validation/AP-013-Operational-Acceptance.md",
+    "schedulerEvidence": "docs/architecture/validation/AP-013-Morning-Transfer-Scheduler-Evidence.md"
+  },
+  "authorityBoundary": {
+    "roadmapAuthority": "DSG-RGM-001",
+    "projectionOnly": true,
+    "runtimeTelemetry": false,
+    "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
+  },
+  "current": {
+    "package": {
+      "id": "BKL-038",
+      "title": "Anomaly & Trend Center",
+      "status": "active"
+    },
+    "nextMilestone": "BKL-038 Anomaly & Trend Center",
+    "target": "Establish the governed Anomaly & Trend Center over accepted EAGLE health history and BKL-040 historical timeline foundations, preserving explainability, source lineage and Safety boundaries without introducing automatic remediation authority"
+  },
+  "architecture": {
+    "ap013": {"id":"AP-013","title":"Scientific Image Repository Architecture","status":"completed"},
+    "ap013c": {"id":"AP-013C","title":"Verified Transport Cleanup and Convergence Monitoring","status":"completed"},
+    "ap014": {"id":"AP-014","title":"Scientific Observation Catalog and Search","status":"completed"},
+    "ap015": {"id":"AP-015","title":"Scientific Knowledge Platform Architecture","status":"planned"}
+  },
+  "intelligence": {
+    "knowledgeAiEvidenceContract": {"id":"BKL-044","title":"Knowledge Graph / AI Evidence Contract","status":"completed"},
+    "targetKnowledgeBase": {"id":"BKL-035","title":"Target Knowledge Base","status":"completed"},
+    "nightTimelineReplay": {"id":"BKL-040","title":"Night Timeline / Observatory Replay","status":"completed"},
+    "anomalyTrendCenter": {"id":"BKL-038","title":"Anomaly & Trend Center","status":"active"},
+    "pixInsightProvenance": {"id":"BKL-045","title":"PixInsight Workflow Provenance Plugin","status":"planned"}
+  },
+  "historicalDiscovery": {
+    "evidenceId": "E-AP013-SD-001",
+    "asOf": "2026-08-04",
+    "files": 203,
+    "sessions": 11,
+    "parsed": 203,
+    "ambiguous": 0,
+    "failed": 0
+  },
+  "transfer": {
+    "status": "Limited Production",
+    "mode": "COPY_ONLY",
+    "maxFilesPerRun": 30,
+    "hashAlgorithm": "SHA-256",
+    "overwriteExisting": false,
+    "sourceCleanupAuthorized": false,
+    "transportRole": "STAGING_ONLY"
+  },
+  "scheduler": {
+    "state": "Ready",
+    "timeLocal": "07:30"
+  },
+  "safety": {
+    "commandAuthority": false,
+    "automaticRemediationAuthority": false,
+    "presentTimeSafetyInferenceFromHistoricalEvidence": false
+  }
+}
