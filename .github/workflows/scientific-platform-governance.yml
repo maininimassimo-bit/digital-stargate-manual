@@ -1,0 +1,44 @@
+name: Scientific Platform Governance
+
+on:
+  pull_request:
+    paths:
+      - 'docs/scientific-platform/**'
+      - 'docs/data/scientific-platform-status.json'
+      - 'docs/data/roadmap.json'
+      - 'docs/architecture/validation/AP-013-Session-Discovery-Execution-Evidence.md'
+      - 'docs/architecture/validation/AP-013-Operational-Acceptance.md'
+      - 'docs/architecture/validation/AP-013-Morning-Transfer-Scheduler-Evidence.md'
+      - '.github/roadmap/**'
+      - '.github/scripts/generate-scientific-platform-status.mjs'
+      - '.github/workflows/scientific-platform-governance.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/scientific-platform/**'
+      - 'docs/data/scientific-platform-status.json'
+      - 'docs/data/roadmap.json'
+      - 'docs/architecture/validation/AP-013-Session-Discovery-Execution-Evidence.md'
+      - 'docs/architecture/validation/AP-013-Operational-Acceptance.md'
+      - 'docs/architecture/validation/AP-013-Morning-Transfer-Scheduler-Evidence.md'
+      - '.github/roadmap/**'
+      - '.github/scripts/generate-scientific-platform-status.mjs'
+      - '.github/workflows/scientific-platform-governance.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  governance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify roadmap projection
+        run: node .github/scripts/generate-roadmap.mjs --check
+      - name: Verify Scientific Platform governed projection
+        run: node .github/scripts/generate-scientific-platform-status.mjs --check
