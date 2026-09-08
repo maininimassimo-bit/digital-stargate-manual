@@ -1,13 +1,13 @@
 <link rel="stylesheet" href="../styles/roadmap.css">
 
-<div class="dsg-roadmap-app" data-roadmap-source="../data/roadmap.json?v=20260830-global-summary">
+<div class="dsg-roadmap-app" data-roadmap-source="../data/roadmap.json?v=20260908-bkl040-closure">
   <header class="dsg-roadmap-hero dsg-roadmap-center-hero">
     <div>
       <span class="dsg-roadmap-kicker">DIGITAL STARGATE · ROADMAP CENTER</span>
       <h1>Programma architetturale e percorso evolutivo</h1>
       <p>
         Stato corrente, milestone, Architecture Package e prossime decisioni,
-        derivati dal registro versionato e dalla roadmap autorevole AMP-002.
+        derivati dalla projection generata della canonical roadmap source e contestualizzati dalla planning authority AMP-002.
       </p>
       <div class="dsg-roadmap-center-actions">
         <a href="../architecture/">Architecture Center</a>
@@ -57,11 +57,12 @@
 
   <section class="dsg-roadmap-next">
     <div class="dsg-roadmap-section-heading">
-      <span class="dsg-roadmap-kicker">NEXT DECISIONS</span>
-      <h2>Prossime attività governate</h2>
+      <span class="dsg-roadmap-kicker">OPEN ROADMAP ITEMS</span>
+      <h2>Elementi roadmap non completati</h2>
+      <p>Vista sintetica dei primi elementi non completati nel registro; non rappresenta da sola una coda dependency-ordered. Il package corrente e la prossima milestone governata sono indicati esplicitamente nelle card dedicate.</p>
     </div>
     <div class="dsg-roadmap-next__grid" data-roadmap-next>
-      <p>Calcolo delle prossime attività…</p>
+      <p>Calcolo degli elementi aperti…</p>
     </div>
   </section>
 
@@ -75,9 +76,10 @@
   </section>
 
   <aside class="dsg-roadmap-source">
-    <strong>Fonte autorevole:</strong>
-    <a href="../architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment/">AMP-002 — Architecture Program Roadmap Realignment</a>.
-    La pagina è una projection del registro versionato e non modifica lo stato architetturale.
+    <strong>Authority e projection:</strong>
+    lo stato corrente è derivato dalla canonical source <code>.github/roadmap/roadmap-source.json</code> e pubblicato tramite la generated projection <code>docs/data/roadmap.json</code>.
+    <a href="../architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment/">AMP-002 — Architecture Program Roadmap Realignment</a>
+    resta la planning authority dell'architecture program e non sostituisce il live backlog/roadmap status.
   </aside>
 </div>
 
