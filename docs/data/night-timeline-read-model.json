@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "component": "DSG.NightTimelineReadModel",
+  "authority": "projection",
+  "baseline_commit": "7dc867c50ee588d46f4e23e2880d10373f3fbbc5",
+  "upstream_component": "DSG.NightTimelineReplay.F3",
+  "session_id": "2026-08-15_2026-08-16",
+  "timezone_id": "Europe/Rome",
+  "interaction_mode": "READ_ONLY",
+  "playback_mode": "VISUAL_ONLY",
+  "safety_authority": "UNCHANGED_LOCAL_AUTHORITY",
+  "command_actions": [],
+  "bounds": { "max_events": 6, "max_correlations": 6 },
+  "timeline": [
+    {"replay_event_id":"RPL-20260815-CLOUDWATCHER-FIRST","event_time_utc":"2026-08-15T17:00:09Z","source_timestamp_raw":"2026-08-15 19:00:09","source_type":"CLOUDWATCHER","source_order":30,"source_authority":"CloudWatcher CSV historical evidence","event_kind":"WEATHER_SAMPLE","summary":"CloudWatcher Clear/Dry safety=Unsafe","quality_state":"CURRENT","citation_refs":["CIT-RPL-F3-CW-FIRST@1.0"],"provenance_refs":["PRV-RPL-F3-CW-FIRST@1.0"]},
+    {"replay_event_id":"RPL-20260815-NINA-DOME-OPEN","event_time_utc":"2026-08-15T18:42:52.8776Z","source_timestamp_raw":"2026-08-15T20:42:52.8776","source_type":"NINA","source_order":10,"source_authority":"N.I.N.A. raw log evidence","event_kind":"DOME_OPEN_REQUEST","summary":"N.I.N.A. recorded opening dome shutter request","quality_state":"CURRENT","citation_refs":["CIT-RPL-F3-NINA-DOME-OPEN@1.0"],"provenance_refs":["PRV-RPL-F3-NINA-DOME-OPEN@1.0"]},
+    {"replay_event_id":"RPL-20260815-PHD2-GUIDING-BEGIN","event_time_utc":"2026-08-15T20:11:13Z","source_timestamp_raw":"2026-08-15 22:11:13","source_type":"PHD2","source_order":20,"source_authority":"PHD2 GuideLog historical evidence","event_kind":"GUIDING_BEGIN","summary":"PHD2 guiding section begins","quality_state":"CURRENT","citation_refs":["CIT-RPL-F3-PHD2-GUIDING-BEGIN@1.0"],"provenance_refs":["PRV-RPL-F3-PHD2-GUIDING-BEGIN@1.0"]}
+  ],
+  "unplaced_events": [],
+  "correlations": [
+    {"correlation_id":"CORR-F3-CW-NINA","left_event_ref":"replay-event:RPL-20260815-CLOUDWATCHER-FIRST","right_event_ref":"replay-event:RPL-20260815-NINA-DOME-OPEN","relationship_type":"SEQUENTIAL","delta_ms":6163877.6,"classification_method_id":"BKL040-F3-EXACT-DELTA-1","classification_state":"NOT_ASSESSED","citation_refs":["CIT-RPL-F3-CW-FIRST@1.0","CIT-RPL-F3-NINA-DOME-OPEN@1.0"],"provenance_refs":["PRV-RPL-F3-CW-FIRST@1.0","PRV-RPL-F3-NINA-DOME-OPEN@1.0"],"conflict_refs":[]},
+    {"correlation_id":"CORR-F3-NINA-PHD2","left_event_ref":"replay-event:RPL-20260815-NINA-DOME-OPEN","right_event_ref":"replay-event:RPL-20260815-PHD2-GUIDING-BEGIN","relationship_type":"SEQUENTIAL","delta_ms":5300122.4,"classification_method_id":"BKL040-F3-EXACT-DELTA-1","classification_state":"NOT_ASSESSED","citation_refs":["CIT-RPL-F3-NINA-DOME-OPEN@1.0","CIT-RPL-F3-PHD2-GUIDING-BEGIN@1.0"],"provenance_refs":["PRV-RPL-F3-NINA-DOME-OPEN@1.0","PRV-RPL-F3-PHD2-GUIDING-BEGIN@1.0"],"conflict_refs":[]}
+  ],
+  "conflicts": []
+}
