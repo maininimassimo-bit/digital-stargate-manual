@@ -1,0 +1,17 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {validateNightTimelineReadModel as validate} from './verify-night-timeline-read-model.mjs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8')),rm=read('docs/data/night-timeline-read-model.json'),f3=read('docs/data/night-timeline-replay-f3.json'),clone=x=>structuredClone(x),errs=(r=rm,s=f3)=>validate(r,s);
+test('accepted F4 fixture validates',()=>assert.deepEqual(errs(),[]));
+test('consumer cannot promote authority',()=>{const x=clone(rm);x.authority='authoritative';assert.ok(errs(x).some(e=>e.includes('authority')));});
+test('consumer cannot change session identity',()=>{const x=clone(rm);x.session_id='other';assert.ok(errs(x).some(e=>e.includes('session_id')));});
+test('consumer cannot change timezone',()=>{const x=clone(rm);x.timezone_id='UTC';assert.ok(errs(x).some(e=>e.includes('timezone_id')));});
+test('consumer cannot reorder timeline',()=>{const x=clone(rm);[x.timeline[0],x.timeline[1]]=[x.timeline[1],x.timeline[0]];assert.ok(errs(x).some(e=>e.includes('does not preserve F3')));});
+test('consumer cannot rewrite event time',()=>{const x=clone(rm);x.timeline[0].event_time_utc='2026-08-15T17:00:10Z';assert.ok(errs(x).some(e=>e.includes('event_time_utc')));});
+test('consumer cannot rewrite source authority',()=>{const x=clone(rm);x.timeline[0].source_authority='consumer';assert.ok(errs(x).some(e=>e.includes('source_authority')));});
+test('consumer cannot drop citation lineage',()=>{const x=clone(rm);x.timeline[0].citation_refs=[];assert.ok(errs(x).some(e=>e.includes('citation_refs')));});
+test('consumer cannot drop provenance lineage',()=>{const x=clone(rm);x.timeline[0].provenance_refs=[];assert.ok(errs(x).some(e=>e.includes('provenance_refs')));});
+test('consumer cannot rewrite exact correlation delta',()=>{const x=clone(rm);x.correlations[0].delta_ms=0;assert.ok(errs(x).some(e=>e.includes('delta_ms')));});
+test('consumer cannot promote NOT_ASSESSED skew',()=>{const x=clone(rm);x.correlations[0].classification_state='SYNCHRONIZED';assert.ok(errs(x).some(e=>e.includes('classification_state')||e.includes('promoted')));});
+test('consumer cannot enable operational playback',()=>{const x=clone(rm);x.playback_mode='DEVICE_REPLAY';assert.ok(errs(x).some(e=>e.includes('playback_mode')));});
+test('consumer cannot expose command actions',()=>{const x=clone(rm);x.command_actions=['OPEN_ROOF'];assert.ok(errs(x).some(e=>e.includes('command_actions')));});
+test('consumer must keep explicit unplaced container',()=>{const x=clone(rm);delete x.unplaced_events;assert.ok(errs(x).some(e=>e.includes('unplaced_events')));});
+test('consumer must keep explicit conflict container',()=>{const x=clone(rm);delete x.conflicts;assert.ok(errs(x).some(e=>e.includes('conflicts')));});
