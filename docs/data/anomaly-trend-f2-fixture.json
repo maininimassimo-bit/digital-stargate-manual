@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "component": "DSG.AnomalyTrendCenter.F2",
+  "authority": "projection",
+  "action_authority": "NONE",
+  "baseline_commit": "0a91e280d86cbcb7272d88c1c68f282d00272823",
+  "records": [
+    {
+      "derived_record_id": "AT-F2-OBS-CW-FIRST",
+      "semantic_type": "OBSERVATION",
+      "method_id": "BKL038-F2-SOURCE-REFERENCE-1",
+      "method_version": "1.0",
+      "source_record_refs": ["replay-event:RPL-20260815-CLOUDWATCHER-FIRST"],
+      "citation_refs": ["CIT-RPL-F3-CW-FIRST@1.0"],
+      "provenance_refs": ["PRV-RPL-F3-CW-FIRST@1.0"],
+      "analysis_window": {"start_utc":"2026-08-15T17:00:09Z","end_utc":"2026-08-15T17:00:09Z"},
+      "measurement": null,
+      "candidate_state": null,
+      "rule_id": null,
+      "quality_state": "CURRENT_AT_OBSERVATION",
+      "explanation_codes": ["SOURCE_OBSERVATION_PRESERVED"],
+      "authority": "projection",
+      "action_authority": "NONE"
+    },
+    {
+      "derived_record_id": "AT-F2-TREND-CW-TO-NINA-DELTA",
+      "semantic_type": "TREND_MEASUREMENT",
+      "method_id": "BKL038-F2-EXACT-EVENT-DELTA-1",
+      "method_version": "1.0",
+      "source_record_refs": ["replay-event:RPL-20260815-CLOUDWATCHER-FIRST","replay-event:RPL-20260815-NINA-DOME-OPEN"],
+      "citation_refs": ["CIT-RPL-F3-CW-FIRST@1.0","CIT-RPL-F3-NINA-DOME-OPEN@1.0"],
+      "provenance_refs": ["PRV-RPL-F3-CW-FIRST@1.0","PRV-RPL-F3-NINA-DOME-OPEN@1.0"],
+      "analysis_window": {"start_utc":"2026-08-15T17:00:09Z","end_utc":"2026-08-15T18:42:52.8776Z"},
+      "measurement": {"value":6163877.6,"unit":"ms","descriptive_only":true},
+      "candidate_state": null,
+      "rule_id": null,
+      "quality_state": "CURRENT_AT_OBSERVATION",
+      "explanation_codes": ["EXACT_TEMPORAL_DELTA","DESCRIPTIVE_ONLY_NO_ANOMALY_RULE"],
+      "authority": "projection",
+      "action_authority": "NONE"
+    },
+    {
+      "derived_record_id": "AT-F2-CORR-NINA-PHD2",
+      "semantic_type": "CORRELATION_CANDIDATE",
+      "method_id": "BKL038-F2-SEQUENTIAL-CORRELATION-1",
+      "method_version": "1.0",
+      "source_record_refs": ["replay-event:RPL-20260815-NINA-DOME-OPEN","replay-event:RPL-20260815-PHD2-GUIDING-BEGIN"],
+      "citation_refs": ["CIT-RPL-F3-NINA-DOME-OPEN@1.0","CIT-RPL-F3-PHD2-GUIDING-BEGIN@1.0"],
+      "provenance_refs": ["PRV-RPL-F3-NINA-DOME-OPEN@1.0","PRV-RPL-F3-PHD2-GUIDING-BEGIN@1.0"],
+      "analysis_window": {"start_utc":"2026-08-15T18:42:52.8776Z","end_utc":"2026-08-15T20:11:13Z"},
+      "measurement": {"value":5300122.4,"unit":"ms","descriptive_only":true},
+      "candidate_state": "NOT_ASSESSED",
+      "rule_id": null,
+      "quality_state": "CURRENT_AT_OBSERVATION",
+      "explanation_codes": ["SEQUENTIAL_RELATIONSHIP_ONLY","CAUSATION_NOT_INFERRED"],
+      "authority": "projection",
+      "action_authority": "NONE"
+    }
+  ]
+}
