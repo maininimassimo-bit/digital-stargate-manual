@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/schemas/night-timeline-replay.schema.json",
+  "title": "Digital StarGate Night Timeline Replay Projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","component","authority","baseline_commit","source_order_method_id","bounds","sessions","citations","provenance_records"],
+  "properties": {
+    "schema_version": {"const":"1.0"},
+    "component": {"const":"DSG.NightTimelineReplay"},
+    "authority": {"const":"projection"},
+    "baseline_commit": {"type":"string","pattern":"^[0-9a-f]{40}$"},
+    "source_order_method_id": {"const":"BKL040-F1-SOURCE-ORDER-1"},
+    "bounds": {"type":"object","additionalProperties":false,"required":["max_sessions","max_events"],"properties":{"max_sessions":{"const":2},"max_events":{"const":20}}},
+    "sessions": {"type":"array","maxItems":2,"items":{"$ref":"#/$defs/session"}},
+    "citations": {"type":"array","maxItems":40,"items":{"$ref":"#/$defs/citation"}},
+    "provenance_records": {"type":"array","maxItems":40,"items":{"$ref":"#/$defs/provenance"}}
+  },
+  "$defs": {
+    "session": {
+      "type":"object","additionalProperties":false,
+      "required":["session_id","source_ref","events"],
+      "properties": {
+        "session_id":{"type":"string","pattern":"^20[0-9]{2}-[0-9]{2}-[0-9]{2}_20[0-9]{2}-[0-9]{2}-[0-9]{2}$"},
+        "source_ref":{"type":"string","minLength":1},
+        "events":{"type":"array","maxItems":20,"items":{"$ref":"#/$defs/event"}}
+      }
+    },
+    "event": {
+      "type":"object","additionalProperties":false,
+      "required":["replay_event_id","temporal_state","event_time_utc","source_timestamp_raw","source_type","source_order","source_authority","event_kind","summary","source_ref","citation_refs","provenance_refs","quality_state"],
+      "properties": {
+        "replay_event_id":{"type":"string","pattern":"^RPL-[A-Z0-9-]+$"},
+        "temporal_state":{"enum":["PLACED","UNPLACED"]},
+        "event_time_utc":{"type":["string","null"]},
+        "source_timestamp_raw":{"type":["string","null"]},
+        "source_type":{"enum":["NINA","PHD2","CLOUDWATCHER","SQM","EAGLE_HEALTH","SESSION_PROJECTION"]},
+        "source_order":{"enum":[10,20,30,40,50,90]},
+        "source_authority":{"type":"string","minLength":1},
+        "event_kind":{"type":"string","minLength":1},
+        "summary":{"type":"string","minLength":1},
+        "source_ref":{"type":"string","minLength":1},
+        "citation_refs":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string"}},
+        "provenance_refs":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string"}},
+        "quality_state":{"enum":["CURRENT","DEGRADED","UNKNOWN"]}
+      }
+    },
+    "citation": {
+      "type":"object","additionalProperties":false,
+      "required":["id","version","source_authority","locator"],
+      "properties":{"id":{"type":"string","minLength":1},"version":{"const":"1.0"},"source_authority":{"type":"string","minLength":1},"locator":{"type":"object","additionalProperties":false,"required":["path","json_pointer"],"properties":{"path":{"type":"string","minLength":1},"json_pointer":{"type":"string","pattern":"^/"}}}}
+    },
+    "provenance": {
+      "type":"object","additionalProperties":false,
+      "required":["id","version","method_id","input_refs","output_ref","citation_refs"],
+      "properties":{"id":{"type":"string","minLength":1},"version":{"const":"1.0"},"method_id":{"type":"string","minLength":1},"input_refs":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string"}},"output_ref":{"type":"string","minLength":1},"citation_refs":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string"}}}
+    }
+  }
+}
