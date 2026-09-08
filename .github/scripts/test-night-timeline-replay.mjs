@@ -6,12 +6,14 @@ import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 const root = path.resolve(import.meta.dirname, '../..');
 const fixture = JSON.parse(fs.readFileSync(path.join(root,'docs/data/night-timeline-replay.json'),'utf8'));
-function run(mutator) {
+function run(mutator, options={}) {
   const d=structuredClone(fixture); mutator(d);
-  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'dsg-rpl-')); const f=path.join(dir,'fixture.json'); fs.writeFileSync(f,JSON.stringify(d));
+  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'dsg-rpl-')); const f=path.join(dir,'fixture.json');
+  const json=JSON.stringify(d); fs.writeFileSync(f,options.bom ? `\uFEFF${json}` : json);
   return spawnSync(process.execPath,[path.join(root,'.github/scripts/verify-night-timeline-replay.mjs')],{cwd:root,env:{...process.env,DSG_NIGHT_TIMELINE_REPLAY:f},encoding:'utf8'});
 }
 test('accepted bounded fixture passes',()=>assert.equal(run(()=>{}).status,0));
+test('UTF-8 BOM fixture passes',()=>assert.equal(run(()=>{},{bom:true}).status,0));
 test('authority promotion rejected',()=>assert.notEqual(run(d=>d.authority='authority').status,0));
 test('invented UTC instant rejected',()=>assert.notEqual(run(d=>d.sessions[0].events[0].event_time_utc='2026-08-15T17:01:00Z').status,0));
 test('source timestamp substitution rejected',()=>assert.notEqual(run(d=>d.sessions[0].events[0].source_timestamp_raw='2026-08-15T19:01:00+02:00').status,0));
