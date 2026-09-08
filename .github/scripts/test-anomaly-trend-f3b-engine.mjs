@@ -41,6 +41,19 @@ test('unplaced event fails closed instead of inventing temporal placement', () =
   assert.throws(() => projectAnomalyTrend(x), /is not PLACED/);
 });
 
+test('source-declared stale quality remains stale at observation', () => {
+  const x = clone(replay); x.events[0].quality_state = 'STALE';
+  const projection = projectAnomalyTrend(x);
+  assert.equal(projection.records[0].quality_state, 'STALE_AT_OBSERVATION');
+  const dependentTrend = projection.records.find(r => r.semantic_type === 'TREND_MEASUREMENT' && r.source_record_refs.includes(`replay-event:${x.events[0].replay_event_id}`));
+  assert.equal(dependentTrend.quality_state, 'STALE_AT_OBSERVATION');
+});
+
+test('unsupported source quality fails closed instead of collapsing to unknown', () => {
+  const x = clone(replay); x.events[0].quality_state = 'HEALTHY';
+  assert.throws(() => projectAnomalyTrend(x), /unsupported quality_state/);
+});
+
 test('unsupported correlation method fails closed', () => {
   const x = clone(replay); x.correlations[0].classification_method_id = 'INVENTED-THRESHOLD';
   assert.throws(() => projectAnomalyTrend(x), /unsupported method/);
@@ -54,6 +67,20 @@ test('analytically classified upstream correlation fails closed', () => {
 test('unresolved source reference fails closed', () => {
   const x = clone(replay); x.correlations[0].left_event_ref = 'replay-event:DOES-NOT-EXIST';
   assert.throws(() => projectAnomalyTrend(x), /unresolved source refs/);
+});
+
+test('empty Citation or Provenance refs fail closed', () => {
+  const citation = clone(replay); citation.events[0].citation_refs = [];
+  assert.throws(() => projectAnomalyTrend(citation), /citation_refs must not be empty/);
+  const provenance = clone(replay); provenance.correlations[0].provenance_refs = [];
+  assert.throws(() => projectAnomalyTrend(provenance), /provenance_refs must not be empty/);
+});
+
+test('unresolved Citation or Provenance refs fail closed', () => {
+  const citation = clone(replay); citation.events[0].citation_refs = ['DOES-NOT-EXIST@1.0'];
+  assert.throws(() => projectAnomalyTrend(citation), /citation_refs contains unresolved reference/);
+  const provenance = clone(replay); provenance.correlations[0].provenance_refs = ['DOES-NOT-EXIST@1.0'];
+  assert.throws(() => projectAnomalyTrend(provenance), /provenance_refs contains unresolved reference/);
 });
 
 test('negative or non-numeric delta fails closed', () => {
