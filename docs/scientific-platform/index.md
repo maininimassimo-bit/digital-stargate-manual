@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="../styles/scientific-platform-center.css">
+<script src="../javascripts/scientific-platform-status.js" defer></script>
 
 <div class="dsg-scientific-center">
 
@@ -31,49 +32,20 @@
   <span>PLATFORM CAPABILITIES</span>
   <h2>Componenti della piattaforma scientifica</h2>
   <div class="dsg-scientific-grid">
-    <article class="dsg-scientific-card">
-      <strong>Scientific Binary Storage</strong>
-      <p>Conservazione esterna dei RAW, calibration frame, intermedi e prodotti finali. GitHub non è lo storage primario dei binari voluminosi.</p>
-      <a href="../architecture/packages/AP-013-Scientific-Image-Repository-Architecture/">Apri AP-013 →</a>
-    </article>
-    <article class="dsg-scientific-card">
-      <strong>Scientific Asset Registry</strong>
-      <p>Identificatori stabili, classificazione, checksum, dimensione, locator e stato di integrità.</p>
-      <a href="../architecture/scientific-assets/DSDM-002-Scientific-Data-Manager-Logical-Data-Model/">Logical Data Model →</a>
-    </article>
-    <article class="dsg-scientific-card">
-      <strong>Observation Catalog</strong>
-      <p>Indicizzazione e ricerca read-only delle osservazioni scientifiche, mantenendo AP-013 autorevole per asset, checksum e provenance.</p>
-      <a href="../scientific-session-catalog/">Apri Catalogo →</a>
-    </article>
-    <article class="dsg-scientific-card">
-      <strong>Processing Provenance</strong>
-      <p>Workflow, processing run, input, output, ambiente e relazioni di derivazione, con estensioni future governate.</p>
-      <a href="../architecture/scientific-assets/DSDM-003-Contract-and-Manifest-Model/">Contract &amp; Manifest →</a>
-    </article>
-    <article class="dsg-scientific-card">
-      <strong>Session Importer</strong>
-      <p>Discovery, parsing deterministico, trasferimento COPY_ONLY, staging verificato e protezione della sorgente.</p>
-      <a href="../architecture/scientific-assets/DSDM-004-Session-Importer-Architecture-and-Safe-Transfer-Design/">Importer Architecture →</a>
-    </article>
-    <article class="dsg-scientific-card">
-      <strong>Scientific Intelligence</strong>
-      <p>Knowledge/evidence, Target Knowledge Base e Night Timeline accettati come fondazioni read-only; Anomaly &amp; Trend Center è il package corrente.</p>
-      <a href="../scientific-platform-intelligence/">Scientific Intelligence →</a>
-    </article>
+    <article class="dsg-scientific-card"><strong>Scientific Binary Storage</strong><p>Conservazione esterna dei RAW, calibration frame, intermedi e prodotti finali. GitHub non è lo storage primario dei binari voluminosi.</p><a href="../architecture/packages/AP-013-Scientific-Image-Repository-Architecture/">Apri AP-013 →</a></article>
+    <article class="dsg-scientific-card"><strong>Scientific Asset Registry</strong><p>Identificatori stabili, classificazione, checksum, dimensione, locator e stato di integrità.</p><a href="../architecture/scientific-assets/DSDM-002-Scientific-Data-Manager-Logical-Data-Model/">Logical Data Model →</a></article>
+    <article class="dsg-scientific-card"><strong>Observation Catalog</strong><p>Indicizzazione e ricerca read-only delle osservazioni scientifiche, mantenendo AP-013 autorevole per asset, checksum e provenance.</p><a href="../scientific-session-catalog/">Apri Catalogo →</a></article>
+    <article class="dsg-scientific-card"><strong>Processing Provenance</strong><p>Workflow, processing run, input, output, ambiente e relazioni di derivazione, con estensioni future governate.</p><a href="../architecture/scientific-assets/DSDM-003-Contract-and-Manifest-Model/">Contract &amp; Manifest →</a></article>
+    <article class="dsg-scientific-card"><strong>Session Importer</strong><p>Discovery, parsing deterministico, trasferimento COPY_ONLY, staging verificato e protezione della sorgente.</p><a href="../architecture/scientific-assets/DSDM-004-Session-Importer-Architecture-and-Safe-Transfer-Design/">Importer Architecture →</a></article>
+    <article class="dsg-scientific-card"><strong>Scientific Intelligence</strong><p>Knowledge/evidence, Target Knowledge Base e Night Timeline accettati come fondazioni read-only; Anomaly &amp; Trend Center è il package corrente.</p><a href="../scientific-platform-intelligence/">Scientific Intelligence →</a></article>
   </div>
 </section>
 
 <section class="dsg-scientific-section">
   <span>DATA LIFECYCLE</span>
   <h2>Lifecycle governato degli asset</h2>
-  <div class="dsg-scientific-flow">
-    identified → ingested → integrity-verified → classified → linked → preserved → processed → derived → quality-reviewed → published | retained
-  </div>
-  <p>
-    La cancellazione non è uno stato ordinario. Ogni modifica di stato richiede attore,
-    precondizioni, timestamp, asset interessato, evidence reference e comportamento in errore.
-  </p>
+  <div class="dsg-scientific-flow">identified → ingested → integrity-verified → classified → linked → preserved → processed → derived → quality-reviewed → published | retained</div>
+  <p>La cancellazione non è uno stato ordinario. Ogni modifica di stato richiede attore, precondizioni, timestamp, asset interessato, evidence reference e comportamento in errore.</p>
 </section>
 
 <section class="dsg-scientific-section">
@@ -94,14 +66,8 @@
 <section class="dsg-scientific-section">
   <span>GOVERNANCE BOUNDARY</span>
   <h2>Authority e proiezioni</h2>
-  <p>
-    AP-013 resta autorevole per scientific asset identity, integrity/checksum semantics,
-    storage locator, lifecycle e processing provenance. Catalogo, knowledge, timeline e analytics
-    consumano proiezioni read-only e non possono alterare retroattivamente tali evidenze.
-  </p>
-  <div class="dsg-scientific-warning">
-    <strong>Safety:</strong> nessuna capability di questa pagina possiede autorità di comando o di remediation sui dispositivi fisici dell’osservatorio. La Safety Authority e gli interlock fisici locali restano indipendenti.
-  </div>
+  <p>AP-013 resta autorevole per scientific asset identity, integrity/checksum semantics, storage locator, lifecycle e processing provenance. Catalogo, knowledge, timeline e analytics consumano proiezioni read-only e non possono alterare retroattivamente tali evidenze.</p>
+  <div class="dsg-scientific-warning"><strong>Safety:</strong> nessuna capability di questa pagina possiede autorità di comando o di remediation sui dispositivi fisici dell’osservatorio. La Safety Authority e gli interlock fisici locali restano indipendenti.</div>
 </section>
 
 </div>
