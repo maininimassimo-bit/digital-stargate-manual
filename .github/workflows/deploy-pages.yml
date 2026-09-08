@@ -34,6 +34,12 @@ jobs:
       - name: Verify no inline portal JavaScript
         run: node .github/scripts/verify-no-inline-portal-js.mjs
 
+      - name: Verify committed roadmap projection
+        run: node .github/scripts/generate-roadmap.mjs --check
+
+      - name: Verify roadmap governance consistency
+        run: node .github/scripts/verify-roadmap-consistency.mjs
+
       - name: Generate governed roadmap
         run: node .github/scripts/generate-roadmap.mjs --write
 
