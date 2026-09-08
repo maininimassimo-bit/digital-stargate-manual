@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 4.1 |
+| Versione | 4.2 |
 | Stato | Active |
 | Data baseline | 07/09/2026 |
 
@@ -53,12 +53,12 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
-| BKL-035 | P2 | Target Knowledge Base | In Progress | BKL-015/BKL-044 | Vista target con sessioni, SQM, setup, immagini e workflow | Current governed package after BKL-044 closure |
+| BKL-035 | P2 | Target Knowledge Base | Done | BKL-015/BKL-044 | Vista target con sessioni, SQM, setup, immagini e workflow | F1-F4 CLOSED/ACCEPTED; PR #112 merge `1eef3e6747d975e40d592933ece655014b808f05`; closure `docs/project/BKL-035-CLOSURE-2026-09-07.md` |
 | BKL-036 | P2 | Observatory Health Score | Planned | BKL-030, telemetry history | Score operativo spiegabile distinto da Safety | Functional Roadmap Expansion |
 | BKL-037 | P2 | Session Comparison & Benchmarking | Planned | BKL-029, BKL-035, BKL-045 | Confronto qualità/acquisizione/processing | Functional Roadmap Expansion |
 | BKL-038 | P2 | Anomaly & Trend Center | Planned | BKL-030, BKL-040 | Trend e pattern di degrado | Functional Roadmap Expansion |
 | BKL-039 | P2 | Equipment Performance Registry | Planned | BKL-015, session history | Prestazioni storiche setup/componenti | Functional Roadmap Expansion |
-| BKL-040 | P2 | Night Timeline / Observatory Replay | Planned | BKL-015/BKL-044, historical telemetry | Replay sincronizzato della notte | Functional Roadmap Expansion |
+| BKL-040 | P2 | Night Timeline / Observatory Replay | In Progress | BKL-015/BKL-044, historical telemetry | Replay sincronizzato della notte | Current governed package after BKL-035 closure |
 | BKL-041 | P2 | Scientific Data Quality Score | Planned | BKL-029, BKL-037, BKL-045 | Quality score scientifico spiegabile | Functional Roadmap Expansion |
 | BKL-042 | P2 | AI Observatory Assistant | Planned | BKL-015/BKL-044 e intelligence services | Copilot read-only per diagnosis/RCA/planning/science | Functional Roadmap Expansion |
 | BKL-043 | P2 | Observatory Reliability Engineering | Planned | BKL-030/BKL-038/BKL-042 | SLI/SLO, MTBF, MTTR, session completion e failure budget | Functional Roadmap Expansion |
@@ -73,14 +73,15 @@ BKL-015 è `Done / Accepted` e TD-008 resta `Resolved`.
 
 BKL-044 è `Done / Accepted`: F1-F4 sono completati. F4 è stato integrato via PR #104 con merge `b7c01ba7221818e1971403ab3befe38c8e40cc54`; post-merge Developer Foundation #1004, Docs #613, Word #1038 e Pages #697 sono `SUCCESS`. BKL-044 non autorizza graph DB, vector DB, RAG, inference runtime, AI authority o modifica della Safety Authority.
 
-BKL-035 è il nuovo package governato `In Progress` e deve costruire una Target Knowledge Base sopra le foundation BKL-015/BKL-044 senza creare una seconda authority.
+BKL-035 è `Done / Accepted`: F1-F4 sono completati. F4 è stato integrato via PR #112 con merge `1eef3e6747d975e40d592933ece655014b808f05`; post-merge Developer Foundation #1035, Docs #650, Word #1075 e Pages #705 sono `SUCCESS`. BKL-035 resta projection-only e non autorizza broad ingestion, fuzzy identity merge, runtime AI o modifica della Safety Authority.
+
+BKL-040 è il nuovo package governato `In Progress` secondo la sequenza dependency-ordered corrente.
 
 ## 4. Sequenza di esecuzione raccomandata
 
 ```text
-Completed baseline through BKL-030, BKL-015 and BKL-044
-  -> BKL-035 Target Knowledge Base [CURRENT]
-  -> BKL-040 Night Timeline / Replay
+Completed baseline through BKL-030, BKL-015, BKL-044 and BKL-035
+  -> BKL-040 Night Timeline / Replay [CURRENT]
   -> BKL-037 Session Comparison
   -> BKL-038 Anomaly & Trend Center
   -> BKL-039 Equipment Performance Registry
