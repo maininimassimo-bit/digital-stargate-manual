@@ -3,17 +3,17 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEV-001 |
-| Versione | 2.0 |
+| Versione | 2.1 |
 | Stato | Active |
-| Data efficacia | 05/08/2026 |
+| Data efficacia | 08/09/2026 |
 
 ## 1. Scopo
 
-Definire il flusso obbligatorio per ogni modifica al Digital StarGate Enterprise Portal e stabilire il modello di esecuzione autonoma delle milestone concordate.
+Definire il flusso obbligatorio per ogni modifica al Digital StarGate e stabilire il modello di esecuzione autonoma delle milestone concordate.
 
 ## 2. Principio operativo
 
-Quando una milestone è presente nella roadmap approvata e non richiede deviazioni architetturali, il Chief Architect procede autonomamente fino alla sua conclusione.
+Quando una milestone è presente nella roadmap approvata, le dipendenze sono soddisfatte e non richiede deviazioni architetturali, il Chief Architect procede autonomamente fino alla sua conclusione.
 
 Il ciclo comprende, senza ulteriori richieste di approvazione intermedie:
 
@@ -22,11 +22,11 @@ Il ciclo comprende, senza ulteriori richieste di approvazione intermedie:
 3. implementazione;
 4. aggiornamento documentale e di governance;
 5. commit e push;
-6. controllo GitHub Actions;
+6. controllo GitHub Actions sull'exact HEAD;
 7. verifica GitHub Pages o artifact applicabile;
 8. correzione degli errori coerenti con lo scope;
-9. acceptance tecnica;
-10. chiusura formale della milestone.
+9. review/acceptance tecnica applicabile;
+10. chiusura formale della milestone e post-merge verification.
 
 L'utente riceve aggiornamenti di avanzamento e il rapporto conclusivo, ma non deve approvare ogni passaggio previsto.
 
@@ -49,28 +49,54 @@ Le correzioni tecniche necessarie a completare una milestone già approvata non 
 
 ## 4. Workflow della milestone
 
-### 4.1 Avvio
+### 4.1 Bootstrap e avvio
 
-- leggere `AI_BOOTSTRAP.md`;
-- verificare branch, HEAD e workflow;
-- leggere Context, Knowledge Map, Backlog, Technical Debt e Decision Log;
-- identificare fonti autorevoli, file, componenti e acceptance criteria;
-- marcare la milestone `In Progress` nei registri applicabili.
+La sequenza normativa è posseduta da `AI_BOOTSTRAP.md`. Non duplicarla come authority autonoma in questo workflow.
+
+Alla baseline 08/09/2026 l'avvio richiede, nell'ordine:
+
+1. `AI_BOOTSTRAP.md`;
+2. current handover indicato dal bootstrap;
+3. current technical baseline indicata dal bootstrap;
+4. Enterprise Architecture Context;
+5. Repository Knowledge Map;
+6. Backlog;
+7. canonical roadmap source;
+8. generated roadmap projection come projection, non authority;
+9. Technical Debt;
+10. Decision Log;
+11. questo Development Workflow;
+12. Coding Standards;
+13. Release Playbook;
+14. AMP-002;
+15. Architecture Package, ADR, review, evidence e componenti direttamente coinvolti.
+
+Dopo la lettura:
+
+- verificare PR/branch, exact HEAD, diff e workflow reali;
+- identificare authority e projection coinvolte;
+- verificare dependency readiness;
+- identificare acceptance criteria, rollback e validation matrix;
+- marcare la milestone `In Progress` solo nella source governata applicabile e solo quando le entry condition sono soddisfatte.
+
+I documenti handover/baseline precedenti restano snapshot storici e non devono prevalere sui successori correnti.
 
 ### 4.2 Design
 
 - descrivere current state e target state;
-- confermare responsabilità e boundary;
+- confermare responsabilità, source authority e projection boundary;
 - individuare dipendenze, rischi, rollback e test;
-- evitare duplicazioni e soluzioni temporanee non registrate.
+- evitare duplicazioni e soluzioni temporanee non registrate;
+- non introdurre threshold, authority o policy operative per inferenza.
 
 ### 4.3 Implementazione
 
 - procedere in commit coerenti e incrementali;
 - usare GitHub direttamente;
-- per file grandi preferire Git Database API: blob, tree, commit e ref;
+- per file grandi preferire Git Database API quando disponibile;
 - aggiornare codice, configurazione e documentazione nello stesso package quando necessario;
-- non distribuire una responsabilità in più moduli.
+- non distribuire una responsabilità in più moduli;
+- preservare semantic type, lifecycle, source authority, Citation e Provenance nei consumer governati.
 
 ### 4.4 Validazione
 
@@ -84,16 +110,11 @@ dotnet format DigitalStarGate.sln --verify-no-changes --no-restore
 mkdocs build --strict
 ```
 
-Per modifiche al portale verificare inoltre:
+Verificare inoltre i workflow repository applicabili sull'exact HEAD. Un SUCCESS su un commit precedente non prova il commit corrente.
 
-- rendering Home e pagine interne;
-- light/dark e persistenza;
-- refresh diretto;
-- Instant Navigation;
-- desktop e tablet;
-- tastiera e focus;
-- console e caricamento asset;
-- artifact GitHub Pages.
+Per modifiche al portale verificare inoltre rendering, light/dark, refresh diretto, Instant Navigation, desktop/tablet, tastiera/focus, console e caricamento asset.
+
+Per generated projection verificare sempre la source canonica e il generator/check applicabile; non correggere manualmente una projection quando deve essere rigenerata.
 
 ### 4.5 Correzione autonoma
 
@@ -101,44 +122,65 @@ Se CI, Pages o acceptance rilevano errori entro lo scope approvato:
 
 - diagnosticare il primo errore reale;
 - applicare il fix minimo coerente;
-- ripetere build, deploy e verifica;
+- ripetere build/deploy/verifica sull'exact HEAD aggiornato;
 - documentare regressioni, rollback e debito tecnico;
 - continuare fino a esito positivo o fino all'emersione di una condizione che richiede approvazione.
 
-### 4.6 Chiusura
+### 4.6 Governance review
+
+Quando richiesta dal package:
+
+1. completare remediation e quality gate exact-head;
+2. eseguire Architecture Review Board indipendente senza correggere silenziosamente il package durante la review;
+3. se ARB non approva, tornare alla remediation;
+4. solo dopo ARB APPROVED eseguire Release Quality;
+5. dichiarare READY FOR MERGE solo con evidence reale sull'exact HEAD.
+
+### 4.7 Merge e post-merge
+
+- usare expected-head protection quando possibile;
+- registrare il merge SHA reale;
+- verificare i workflow applicabili sul merge SHA in `main`;
+- non dichiarare repository-integrated finché i post-merge gate richiesti non sono verificati;
+- aggiornare continuity authority quando il package cambia lo stato corrente.
+
+### 4.8 Chiusura
 
 Una milestone è chiusa solo quando:
 
 - acceptance criteria soddisfatti;
-- CI applicabile verde;
-- deployment verificato;
-- test manuale richiesto completato;
-- Context, Backlog, Technical Debt, Decision Log e baseline aggiornati;
-- commit finali e stato residuo comunicati.
+- CI applicabile verde sull'exact HEAD/merge SHA richiesto;
+- deployment verificato quando applicabile;
+- review indipendenti richieste completate;
+- Context, Knowledge Map, Backlog, Technical Debt, Decision Log e baseline verificati/aggiornati secondo ownership;
+- commit/merge finali e stato residuo comunicati.
 
-## 5. Comunicazione
+## 5. Safety boundary
+
+Per l'osservatorio, safety prevale sulla continuità. Portale, telemetry, replay, analytics e AI non sono Safety Authority salvo governance esplicita futura.
+
+Nessun workflow di sviluppo autorizza implicitamente command path, bypass di interlock, automatic remediation o modifica della Safety Authority locale.
+
+## 6. Comunicazione
 
 Durante l'esecuzione vengono comunicati soltanto:
 
 - avanzamenti significativi;
+- exact HEAD e commit/merge SHA reali;
+- workflow/run number e SUCCESS/FAILURE reali;
 - errori o regressioni rilevanti;
 - blocchi che richiedono decisione;
+- necessità o non necessità di comandi PC/EAGLE;
 - conclusione della milestone.
 
-Non vengono richieste approvazioni per attività già previste dalla roadmap.
+Non vengono richieste approvazioni per attività già previste dalla roadmap e comprese nei boundary approvati.
 
-## 6. Gestione GitHub
+## 7. Gestione GitHub
 
 Il repository è gestito direttamente tramite il connettore GitHub.
 
-Per modifiche semplici si usano le Contents API. Per file grandi o change set controllati si usano:
+Le modifiche devono essere applicate al branch previsto dopo verifica dell'HEAD e del blob SHA del file. `force=true`, force push o update non fast-forward richiedono sempre approvazione esplicita.
 
-```text
-create_blob -> create_tree -> create_commit -> update_ref
-```
+## 8. Definition of Done
 
-`update_ref` deve essere fast-forward. `force=true` richiede sempre approvazione esplicita.
-
-## 7. Definition of Done
-
-La milestone è completata quando implementazione, validazione, pubblicazione, governance e comunicazione finale sono tutte concluse. Un singolo commit o una build positiva non costituiscono da soli la chiusura.
+La milestone è completata quando implementazione, validazione, review applicabili, merge/post-merge, pubblicazione, governance e comunicazione finale sono tutte concluse. Un singolo commit o una build positiva non costituiscono da soli la chiusura.
