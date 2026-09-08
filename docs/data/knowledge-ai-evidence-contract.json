@@ -34,18 +34,26 @@
       "locator": { "kind": "repository_path", "value": "docs/project/BACKLOG.md" },
       "producer": "DSG.RepositoryGovernance",
       "produced_at_utc": "2026-09-07T13:20:00Z"
+    },
+    {
+      "id": "CIT-BKL044-TRANSITION-BASELINE",
+      "version": "1.0",
+      "source_authority": "repository_authority",
+      "locator": { "kind": "repository_path", "value": "docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-07.md" },
+      "producer": "DSG.RepositoryGovernance",
+      "produced_at_utc": "2026-09-08T13:40:00Z"
     }
   ],
   "provenance_records": [
     {
       "id": "PRV-BKL044-F3-NEXT-INCREMENT",
-      "version": "1.0",
+      "version": "1.1",
       "producer": "DSG.RepositoryGovernance",
-      "produced_at_utc": "2026-09-07T13:20:00Z",
+      "produced_at_utc": "2026-09-08T13:40:00Z",
       "method_id": "METHOD-REPOSITORY-RECONCILIATION-1",
-      "input_refs": ["EVD-BKL044-F3-BACKLOG"],
+      "input_refs": ["EVD-BKL044-F3-TRANSITION-BASELINE"],
       "output_ref": "CLM-BKL044-F3-NEXT-INCREMENT",
-      "citation_refs": ["CIT-BKL044-BACKLOG@1.0"]
+      "citation_refs": ["CIT-BKL044-TRANSITION-BASELINE@1.0"]
     }
   ],
   "confidence_contracts": [
@@ -122,17 +130,27 @@
       "citation_refs": ["CIT-BKL044-BACKLOG@1.0"]
     },
     {
+      "id": "EVD-BKL044-F3-TRANSITION-BASELINE",
+      "semantic_type": "evidence",
+      "producer": "DSG.RepositoryGovernance",
+      "produced_at_utc": "2026-09-08T13:40:00Z",
+      "source_authority": "repository_authority",
+      "lifecycle_state": "validated",
+      "ai_derived": false,
+      "citation_refs": ["CIT-BKL044-TRANSITION-BASELINE@1.0"]
+    },
+    {
       "id": "CLM-BKL044-F3-NEXT-INCREMENT",
       "semantic_type": "claim",
       "producer": "DSG.RepositoryGovernance",
-      "produced_at_utc": "2026-09-07T13:20:00Z",
+      "produced_at_utc": "2026-09-08T13:40:00Z",
       "source_authority": "repository_authority",
       "lifecycle_state": "validated",
       "ai_derived": false,
       "method_id": "METHOD-REPOSITORY-RECONCILIATION-1",
-      "evidence_refs": ["EVD-BKL044-F3-BACKLOG"],
-      "citation_refs": ["CIT-BKL044-BACKLOG@1.0"],
-      "provenance_refs": ["PRV-BKL044-F3-NEXT-INCREMENT@1.0"],
+      "evidence_refs": ["EVD-BKL044-F3-TRANSITION-BASELINE"],
+      "citation_refs": ["CIT-BKL044-TRANSITION-BASELINE@1.0"],
+      "provenance_refs": ["PRV-BKL044-F3-NEXT-INCREMENT@1.1"],
       "confidence": { "contract_ref": "CONF-DETERMINISTIC@1.0", "value": 1.0 }
     }
   ]
