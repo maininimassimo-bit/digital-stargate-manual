@@ -18,8 +18,11 @@ export function validateNightTimelineReadModel(rm,f3){
  if(!Array.isArray(rm.timeline)||rm.timeline.length!==f3.events.length)e.push('timeline event count mismatch');
  const fields=['replay_event_id','event_time_utc','source_timestamp_raw','source_type','source_order','source_authority','event_kind','summary','quality_state','citation_refs','provenance_refs'];
  for(let i=0;i<f3.events.length;i++){const a=rm.timeline?.[i],b=f3.events[i];if(!a)continue;for(const f of fields)if(key(a[f])!==key(b[f]))e.push(`timeline[${i}].${f} does not preserve F3`);}
+ const upstreamUnplaced=f3.events.filter(x=>x.temporal_state==='UNPLACED');
  if(!Array.isArray(rm.unplaced_events))e.push('unplaced_events must be explicit array');
+ else if(upstreamUnplaced.length===0&&rm.unplaced_events.length!==0)e.push('unplaced_events cannot invent evidence absent from accepted F3');
  if(!Array.isArray(rm.conflicts))e.push('conflicts must be explicit array');
+ else {const upstreamConflictRefs=[...new Set((f3.correlations??[]).flatMap(x=>x.conflict_refs??[]))];if(upstreamConflictRefs.length===0&&rm.conflicts.length!==0)e.push('conflicts cannot invent evidence absent from accepted F3');}
  if(!Array.isArray(rm.correlations)||rm.correlations.length!==f3.correlations.length)e.push('correlation count mismatch');
  const cf=['correlation_id','left_event_ref','right_event_ref','relationship_type','delta_ms','classification_method_id','classification_state','citation_refs','provenance_refs','conflict_refs'];
  for(let i=0;i<f3.correlations.length;i++){const a=rm.correlations?.[i],b=f3.correlations[i];if(!a)continue;for(const f of cf)if(key(a[f])!==key(b[f]))e.push(`correlations[${i}].${f} does not preserve F3`);if(a.classification_state!=='NOT_ASSESSED')e.push(`correlations[${i}] skew classification promoted`);}
