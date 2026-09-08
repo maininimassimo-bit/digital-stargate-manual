@@ -1,7 +1,7 @@
 # Capitolo 44 — Allegati tecnici e piano di completamento
 
 **Codice documento:** DSG-TM-001-44  
-**Revisione:** 1.0 Draft
+**Revisione:** 1.1 Draft
 
 ## 44.1 Scopo
 
@@ -14,7 +14,7 @@ Il capitolo definisce l'elenco degli allegati tecnici necessari per trasformare 
 | DSG-ATT-001 | Inventario hardware completo | Da completare |
 | DSG-ATT-002 | Schema elettrico as-built | Da produrre |
 | DSG-ATT-003 | Schema di rete as-built | Bozza disponibile |
-| DSG-ATT-004 | Mappa porte USB e alimentazioni EAGLE | Da rilevare |
+| DSG-ATT-004 | Mappa porte USB e alimentazioni EAGLE | **Disponibile — mapping 2026-09-08; riconciliazioni residue esplicitate nel Cap. 6** |
 | DSG-ATT-005 | Configurazione RUT955 esportata | Da archiviare in area protetta |
 | DSG-ATT-006 | Profili N.I.N.A. | Da esportare |
 | DSG-ATT-007 | Profili PHD2 | Da esportare |
@@ -25,6 +25,8 @@ Il capitolo definisce l'elenco degli allegati tecnici necessari per trasformare 
 | DSG-ATT-012 | Log incidenti significativi | Da selezionare |
 | DSG-ATT-013 | Piano manutenzione firmato | Da approvare |
 | DSG-ATT-014 | Matrice requisiti/test | Da completare |
+
+`DSG-ATT-004` è documentato da `EVD-EAGLE-PORT-MAP-20260908` (`docs/architecture/telemetry/evidence/EAGLE-Port-Mapping-Inventory-2026-09-08.md`) e dalle sezioni 6.6–6.7 del Capitolo 6. Lo stato “Disponibile” certifica la disponibilità della mappa configurata osservata; non implica che l’intero `DSG-ATT-001` sia completo né chiude i dati nominali ancora da rilevare.
 
 ## 44.3 Struttura delle cartelle
 
@@ -75,7 +77,7 @@ Screenshot minimi:
 - grafico guida e calibrazione;
 - CPWI Park e limiti;
 - Device Manager Windows;
-- EAGLE Manager;
+- EAGLE Manager — **mapping configurazione acquisito 2026-09-08**;
 - RUT955 failover e VPN;
 - AllSky configuration.
 
@@ -93,9 +95,9 @@ Oscurare sempre:
 | Area | Dato |
 |---|---|
 | Cupola | tempi apertura/chiusura, motore, finecorsa |
-| Elettrico | tensioni, assorbimenti, protezioni, UPS |
+| Elettrico | tensioni nominali, assorbimenti nominali/picco, protezioni, UPS |
 | Rete | IP, subnet, gateway, DHCP, failover |
-| EAGLE | modello, seriale, porte, SSD, Windows |
+| EAGLE | modello, seriale, SSD, Windows; mapping porte disponibile nel Cap. 6 |
 | CGX-L | firmware, Park, limiti, PEC |
 | C8 | seriale, riduttore, backfocus, collimazione |
 | Quattro | correttore, focale reale, backfocus, tilt |
@@ -157,6 +159,7 @@ Oscurare sempre:
 - [ ] Le procedure critiche sono validate.
 - [ ] I campi “DA VALIDARE” sono riesaminati.
 - [ ] Gli allegati sono versionati.
+- [x] La mappa configurata USB/alimentazioni EAGLE è documentata (`DSG-ATT-004`, evidence 2026-09-08).
 
 ## 44.10 Chiusura della fase editoriale
 
