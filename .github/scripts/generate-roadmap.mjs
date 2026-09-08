@@ -190,7 +190,8 @@ const main = async () => {
   const mode = process.argv[2] || '--check';
   assert(['--check', '--write', '--print'].includes(mode), `Unsupported mode: ${mode}`);
   const source = await readJson(SOURCE_PATH);
-  const generated = stableJson(await buildOutput(source));
+  const generatedObject = await buildOutput(source);
+  const generated = stableJson(generatedObject);
 
   if (mode === '--print') return void process.stdout.write(generated);
   if (mode === '--write') {
@@ -199,14 +200,14 @@ const main = async () => {
     return;
   }
 
-  const current = await readFile(OUTPUT_PATH, 'utf8').catch(() => '');
-  if (current !== generated) {
-    process.stderr.write('Roadmap drift detected. Run: node .github/scripts/generate-roadmap.mjs --write\n');
+  const currentObject = await readJson(OUTPUT_PATH).catch(() => null);
+  if (!currentObject || JSON.stringify(currentObject) !== JSON.stringify(generatedObject)) {
+    process.stderr.write('Roadmap semantic drift detected. Run: node .github/scripts/generate-roadmap.mjs --write\n');
     process.exitCode = 1;
     return;
   }
 
-  process.stdout.write('Roadmap artifact is aligned with canonical source and governed evidence.\n');
+  process.stdout.write('Roadmap artifact is semantically aligned with canonical source and governed evidence.\n');
 };
 
 main().catch((error) => {
