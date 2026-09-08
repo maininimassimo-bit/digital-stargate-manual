@@ -9,6 +9,11 @@ const requiredArray = (value, field) => {
   if (!Array.isArray(value)) fail(`${field} must be an array`);
   return value;
 };
+const requiredNonEmptyArray = (value, field) => {
+  const result = requiredArray(value, field);
+  if (result.length === 0) fail(`${field} must not be empty`);
+  return result;
+};
 const requiredString = (value, field) => {
   if (typeof value !== 'string' || value.length === 0) fail(`${field} is required`);
   return value;
@@ -18,21 +23,52 @@ function refs(event) {
   return [`replay-event:${requiredString(event.replay_event_id, 'event.replay_event_id')}`];
 }
 
-function observation(event) {
+function qualityState(sourceQuality, field) {
+  switch (sourceQuality) {
+    case 'CURRENT': return 'CURRENT_AT_OBSERVATION';
+    case 'STALE': return 'STALE_AT_OBSERVATION';
+    case 'UNKNOWN': return 'UNKNOWN';
+    default: fail(`${field} has unsupported quality_state ${String(sourceQuality)}`);
+  }
+}
+
+function combinedQuality(leftQuality, rightQuality) {
+  const left = qualityState(leftQuality, 'left event');
+  const right = qualityState(rightQuality, 'right event');
+  if (left === 'STALE_AT_OBSERVATION' || right === 'STALE_AT_OBSERVATION') return 'STALE_AT_OBSERVATION';
+  if (left === 'UNKNOWN' || right === 'UNKNOWN') return 'UNKNOWN';
+  return 'CURRENT_AT_OBSERVATION';
+}
+
+function buildEvidenceSets(replay) {
+  const citations = requiredArray(replay.citations, 'citations');
+  const provenance = requiredArray(replay.provenance_records, 'provenance_records');
+  const citationSet = new Set(citations.map((item, index) => `${requiredString(item?.id, `citations[${index}].id`)}@${requiredString(item?.version, `citations[${index}].version`)}`));
+  const provenanceSet = new Set(provenance.map((item, index) => `${requiredString(item?.id, `provenance_records[${index}].id`)}@${requiredString(item?.version, `provenance_records[${index}].version`)}`));
+  return { citationSet, provenanceSet };
+}
+
+function resolvedRefs(value, field, acceptedRefs) {
+  const refs = requiredNonEmptyArray(value, field).map((item, index) => requiredString(item, `${field}[${index}]`));
+  for (const ref of refs) if (!acceptedRefs.has(ref)) fail(`${field} contains unresolved reference ${ref}`);
+  return refs;
+}
+
+function observation(event, evidence) {
   if (event.temporal_state !== 'PLACED') fail(`event ${event.replay_event_id ?? '<unknown>'} is not PLACED`);
   const time = requiredString(event.event_time_utc, 'event.event_time_utc');
   const record = {
     semantic_type: 'OBSERVATION', method_id: OBSERVATION_METHOD, method_version: ENGINE_METHOD_VERSION,
-    source_record_refs: refs(event), citation_refs: requiredArray(event.citation_refs, 'event.citation_refs'),
-    provenance_refs: requiredArray(event.provenance_refs, 'event.provenance_refs'),
+    source_record_refs: refs(event), citation_refs: resolvedRefs(event.citation_refs, 'event.citation_refs', evidence.citationSet),
+    provenance_refs: resolvedRefs(event.provenance_refs, 'event.provenance_refs', evidence.provenanceSet),
     analysis_window: { start_utc: time, end_utc: time }, measurement: null, candidate_state: null, rule_id: null,
-    quality_state: event.quality_state === 'CURRENT' ? 'CURRENT_AT_OBSERVATION' : 'UNKNOWN',
+    quality_state: qualityState(event.quality_state, `event ${event.replay_event_id}`),
     explanation_codes: ['SOURCE_OBSERVATION_PRESERVED'], authority: 'projection', action_authority: 'NONE'
   };
   return { derived_record_id: deriveRecordId(record), ...record };
 }
 
-function trend(correlation, byRef) {
+function trend(correlation, byRef, evidence) {
   if (correlation.relationship_type !== 'SEQUENTIAL') fail(`correlation ${correlation.correlation_id ?? '<unknown>'} is not SEQUENTIAL`);
   if (correlation.classification_method_id !== 'BKL040-F3-EXACT-DELTA-1') fail(`correlation ${correlation.correlation_id} has unsupported method`);
   if (correlation.classification_state !== 'NOT_ASSESSED') fail(`correlation ${correlation.correlation_id} attempts analytical classification`);
@@ -43,11 +79,11 @@ function trend(correlation, byRef) {
   const source_record_refs = [correlation.left_event_ref, correlation.right_event_ref];
   const record = {
     semantic_type: 'TREND_MEASUREMENT', method_id: TREND_METHOD, method_version: ENGINE_METHOD_VERSION,
-    source_record_refs, citation_refs: requiredArray(correlation.citation_refs, 'correlation.citation_refs'),
-    provenance_refs: requiredArray(correlation.provenance_refs, 'correlation.provenance_refs'),
+    source_record_refs, citation_refs: resolvedRefs(correlation.citation_refs, 'correlation.citation_refs', evidence.citationSet),
+    provenance_refs: resolvedRefs(correlation.provenance_refs, 'correlation.provenance_refs', evidence.provenanceSet),
     analysis_window: { start_utc: left.event_time_utc, end_utc: right.event_time_utc },
     measurement: { value: correlation.delta_ms, unit: 'ms', descriptive_only: true }, candidate_state: null, rule_id: null,
-    quality_state: left.quality_state === 'CURRENT' && right.quality_state === 'CURRENT' ? 'CURRENT_AT_OBSERVATION' : 'UNKNOWN',
+    quality_state: combinedQuality(left.quality_state, right.quality_state),
     explanation_codes: ['EXACT_TEMPORAL_DELTA', 'DESCRIPTIVE_ONLY_NO_ANOMALY_RULE', 'CAUSATION_NOT_INFERRED'],
     authority: 'projection', action_authority: 'NONE'
   };
@@ -59,9 +95,10 @@ export function projectAnomalyTrend(replay) {
   if (replay.authority !== 'projection') fail('input authority must be projection');
   const events = requiredArray(replay.events, 'events');
   const correlations = requiredArray(replay.correlations, 'correlations');
+  const evidence = buildEvidenceSets(replay);
   const byRef = new Map(events.map(event => [`replay-event:${event.replay_event_id}`, event]));
   if (byRef.size !== events.length) fail('duplicate replay_event_id');
-  const records = [...events.map(observation), ...correlations.map(item => trend(item, byRef))];
+  const records = [...events.map(event => observation(event, evidence)), ...correlations.map(item => trend(item, byRef, evidence))];
   if (new Set(records.map(record => record.derived_record_id)).size !== records.length) fail('duplicate derived_record_id');
   return {
     schema_version: '1.0', component: 'DSG.AnomalyTrendCenter.F3B', authority: 'projection', action_authority: 'NONE',
