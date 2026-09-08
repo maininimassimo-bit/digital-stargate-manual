@@ -1,0 +1,22 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://digital-stargate.local/schemas/night-timeline-replay-f3.schema.json",
+  "title":"Digital StarGate Night Timeline Replay F3 Synchronization Projection",
+  "type":"object","additionalProperties":false,
+  "required":["schema_version","component","authority","baseline_commit","session_id","timezone_id","source_order_method_id","bounds","events","citations","provenance_records","correlations"],
+  "properties":{
+    "schema_version":{"const":"1.0"},"component":{"const":"DSG.NightTimelineReplay.F3"},"authority":{"const":"projection"},
+    "baseline_commit":{"const":"ba17df5584a82c4396bd7dccf6bf593c518d8429"},"session_id":{"const":"2026-08-15_2026-08-16"},"timezone_id":{"const":"Europe/Rome"},"source_order_method_id":{"const":"BKL040-F1-SOURCE-ORDER-1"},
+    "bounds":{"type":"object","additionalProperties":false,"required":["max_events","max_correlations"],"properties":{"max_events":{"const":6},"max_correlations":{"const":6}}},
+    "events":{"type":"array","minItems":3,"maxItems":6,"items":{"$ref":"#/$defs/event"}},
+    "citations":{"type":"array","minItems":3,"maxItems":12,"items":{"$ref":"#/$defs/citation"}},
+    "provenance_records":{"type":"array","minItems":3,"maxItems":12,"items":{"$ref":"#/$defs/provenance"}},
+    "correlations":{"type":"array","minItems":2,"maxItems":6,"items":{"$ref":"#/$defs/correlation"}}
+  },
+  "$defs":{
+    "event":{"type":"object","additionalProperties":false,"required":["replay_event_id","temporal_state","event_time_utc","source_timestamp_raw","source_type","source_order","source_authority","event_kind","summary","source_ref","citation_refs","provenance_refs","quality_state"],"properties":{"replay_event_id":{"type":"string","pattern":"^RPL-[A-Z0-9-]+$"},"temporal_state":{"const":"PLACED"},"event_time_utc":{"type":"string","pattern":"^20[0-9]{2}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"},"source_timestamp_raw":{"type":"string","minLength":1},"source_type":{"enum":["NINA","PHD2","CLOUDWATCHER"]},"source_order":{"enum":[10,20,30]},"source_authority":{"type":"string","minLength":1},"event_kind":{"type":"string","minLength":1},"summary":{"type":"string","minLength":1},"source_ref":{"type":"string","minLength":1},"citation_refs":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string"}},"provenance_refs":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string"}},"quality_state":{"enum":["CURRENT","DEGRADED","UNKNOWN"]}}},
+    "citation":{"type":"object","additionalProperties":false,"required":["id","version","source_authority","locator"],"properties":{"id":{"type":"string","minLength":1},"version":{"const":"1.0"},"source_authority":{"type":"string","minLength":1},"locator":{"type":"object","additionalProperties":false,"required":["path","json_pointer"],"properties":{"path":{"type":"string","minLength":1},"json_pointer":{"type":"string","pattern":"^/"}}}}},
+    "provenance":{"type":"object","additionalProperties":false,"required":["id","version","method_id","input_refs","output_ref","citation_refs"],"properties":{"id":{"type":"string","minLength":1},"version":{"const":"1.0"},"method_id":{"enum":["BKL040-F3-NINA-LOCAL-TO-UTC-1","BKL040-F3-PHD2-GUIDE-ANCHOR-1","BKL040-F3-CLOUDWATCHER-LOCAL-TO-UTC-1"]},"input_refs":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string"}},"output_ref":{"type":"string","pattern":"^replay-event:RPL-"},"citation_refs":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string"}}}},
+    "correlation":{"type":"object","additionalProperties":false,"required":["correlation_id","session_id","left_event_ref","right_event_ref","relationship_type","delta_ms","classification_method_id","classification_state","citation_refs","provenance_refs","conflict_refs"],"properties":{"correlation_id":{"type":"string","pattern":"^CORR-F3-"},"session_id":{"const":"2026-08-15_2026-08-16"},"left_event_ref":{"type":"string","pattern":"^replay-event:RPL-"},"right_event_ref":{"type":"string","pattern":"^replay-event:RPL-"},"relationship_type":{"const":"SEQUENTIAL"},"delta_ms":{"type":"number"},"classification_method_id":{"const":"BKL040-F3-EXACT-DELTA-1"},"classification_state":{"const":"NOT_ASSESSED"},"citation_refs":{"type":"array","minItems":2,"uniqueItems":true,"items":{"type":"string"}},"provenance_refs":{"type":"array","minItems":2,"uniqueItems":true,"items":{"type":"string"}},"conflict_refs":{"type":"array","maxItems":0}}}
+  }
+}

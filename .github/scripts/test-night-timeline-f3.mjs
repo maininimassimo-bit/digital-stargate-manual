@@ -1,0 +1,24 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+const root=path.resolve(import.meta.dirname,'../..');
+const fixture=JSON.parse(fs.readFileSync(path.join(root,'docs/data/night-timeline-replay-f3.json'),'utf8'));
+function run(mutator){const d=structuredClone(fixture);mutator(d);const dir=fs.mkdtempSync(path.join(os.tmpdir(),'dsg-f3-'));const f=path.join(dir,'f3.json');fs.writeFileSync(f,JSON.stringify(d));return spawnSync(process.execPath,[path.join(root,'.github/scripts/verify-night-timeline-f3.mjs')],{cwd:root,env:{...process.env,DSG_NIGHT_TIMELINE_F3:f},encoding:'utf8'});}
+const passes=m=>assert.equal(run(m).status,0);const rejects=m=>assert.notEqual(run(m).status,0);
+test('accepted bounded F3 fixture passes',()=>passes(()=>{}));
+test('authority promotion rejected',()=>rejects(d=>d.authority='authority'));
+test('unexpected structural property rejected',()=>rejects(d=>d.events[0].unexpected=true));
+test('candidate source family rejected',()=>rejects(d=>d.events[0].source_type='SQM'));
+test('source order promotion rejected',()=>rejects(d=>d.events[0].source_order=10));
+test('reverse event order rejected',()=>rejects(d=>d.events.reverse()));
+test('invented event time rejected through correlation delta',()=>rejects(d=>d.events[1].event_time_utc='2026-08-15T18:42:53.8776Z'));
+test('correlation delta rewriting rejected',()=>rejects(d=>d.correlations[0].delta_ms+=1));
+test('coincidence classification rejected without governed window',()=>rejects(d=>d.correlations[0].relationship_type='COINCIDENT'));
+test('skew assessment rejected without governed method window',()=>rejects(d=>d.correlations[0].classification_state='WITHIN_METHOD_WINDOW'));
+test('lineage citation loss rejected',()=>rejects(d=>d.correlations[0].citation_refs=[d.correlations[0].citation_refs[0]]));
+test('lineage provenance loss rejected',()=>rejects(d=>d.correlations[0].provenance_refs=[d.correlations[0].provenance_refs[0]]));
+test('conflict flattening channel rejected in bounded fixture',()=>rejects(d=>d.correlations[0].conflict_refs=['CONFLICT-1']));
+test('fallback source timestamp omission rejected',()=>rejects(d=>delete d.events[0].source_timestamp_raw));
