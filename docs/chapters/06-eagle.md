@@ -1,7 +1,7 @@
 # Capitolo 6 – Computer di controllo PrimaLuceLab EAGLE
 
 **Codice documento:** DSG-TM-001-06  
-**Revisione:** 0.3 Draft consolidato  
+**Revisione:** 0.4 Inventario porte aggiornato  
 **Sistema:** Controllo centrale dell’osservatorio  
 **Responsabile:** Massimo Mainini
 
@@ -63,7 +63,7 @@ L’EAGLE non deve essere considerato un semplice personal computer, ma un sotto
 | DSG-PC-007 | Desktop remoto | RDP o strumento approvato | Alta |
 | DSG-PC-008 | Archiviazione locale | SSD interno | Alta |
 
-> **DA VALIDARE:** modello esatto dell’EAGLE, numero di serie, CPU, RAM, capacità SSD, versione BIOS e versione di Windows.
+Il nodo documentato è `EAGLE30154`; l’evidenza del 2026-09-08 mostra EAGLE Manager X versione `3.1`. Restano da validare modello/generazione hardware esatta, numero di serie, CPU, RAM, capacità SSD, versione BIOS e versione di Windows.
 
 ## 6.5 Configurazione del sistema operativo
 
@@ -94,19 +94,31 @@ Devono essere disabilitate le funzioni che possono interrompere periferiche o co
 - spegnimento del disco durante la sessione;
 - risparmio energetico della scheda di rete, se causa disconnessioni.
 
-## 6.6 Mappatura USB
+## 6.6 Mappatura USB e porte controllate
 
 La stabilità delle porte è essenziale. Ogni periferica deve essere collegata sempre alla stessa porta fisica, salvo interventi documentati.
 
-| Porta logica | Dispositivo previsto | Interfaccia | Alimentazione | Stato |
-|---|---|---|---|---|
-| USB-01 | Camera principale | USB 3 | Separata/EAGLE | DA VALIDARE |
-| USB-02 | Camera guida | USB 2/3 | USB | DA VALIDARE |
-| USB-03 | Montatura CGX-L/CPWI | USB | Separata | DA VALIDARE |
-| USB-04 | Pegasus FocusCube | USB | 12 V | DA VALIDARE |
-| USB-05 | ESATTO 2" | USB | 12 V | DA VALIDARE |
-| USB-06 | Wanderer Cover V4 | USB | 12 V | DA VALIDARE |
-| USB-07 | Ruota portafiltri | USB | USB/12 V | DA VALIDARE |
+La mappatura seguente deriva dall’evidenza `EVD-EAGLE-PORT-MAP-20260908`, acquisita da EAGLE Manager X sul nodo `EAGLE30154`.
+
+### 6.6.1 Porte controllate superiori
+
+| Porta EAGLE | Etichetta configurata | Stato nell’evidenza | Stato inventario |
+|---|---|---|---|
+| `D` | `Mount` | `ON` | VERIFICATO |
+| `C` | `Shelter` | `ON` | VERIFICATO |
+| `B` | `USBST4` | `ON` | VERIFICATO |
+| `A` | `Free` | `ON` | VERIFICATO |
+
+### 6.6.2 Connessioni USB esplicitamente etichettate
+
+| Posizione UI | Etichetta configurata | Indicazione | Stato inventario |
+|---|---|---|---|
+| USB inferiore sinistra 1 | `USB Control Hub` | `USB` | VERIFICATO |
+| USB inferiore sinistra 2 | `Pegasus PPBAdvance` | `USB` | VERIFICATO |
+| USB superiore sinistra 1 | Etichetta dispositivo non visibile | `USB` | DA RICONCILIARE |
+| USB superiore sinistra 2 | Etichetta dispositivo non visibile | `USB` | DA RICONCILIARE |
+
+Non vengono assegnati dispositivi alle due connessioni superiori prive di etichetta: l’inventario resta fail-closed invece di dedurre associazioni dalla sola posizione grafica.
 
 ### Regole operative
 
@@ -118,16 +130,25 @@ La stabilità delle porte è essenziale. Ogni periferica deve essere collegata s
 
 ## 6.7 Distribuzione delle alimentazioni
 
-Per ogni uscita devono essere censiti tensione nominale, corrente massima, dispositivo associato e comportamento allo spegnimento.
+La mappatura delle uscite è ora documentata sulla base dell’evidenza EAGLE Manager del 2026-09-08. I valori di corrente/tensione riportati sono **osservazioni istantanee dello screenshot**, non rating nominali, massimi o soglie operative.
 
-| Uscita | Dispositivo | Tensione | Assorbimento nominale | Assorbimento di picco | Sequenza |
-|---|---|---:|---:|---:|---|
-| PWR-01 | Camera principale | 12 V | DA VALIDARE | DA VALIDARE | Prima di N.I.N.A. |
-| PWR-02 | Montatura | 12 V | DA VALIDARE | DA VALIDARE | Prima di CPWI |
-| PWR-03 | Fuocheggiatore | 12 V | DA VALIDARE | DA VALIDARE | Prima di N.I.N.A. |
-| PWR-04 | Flat panel | 12 V | DA VALIDARE | DA VALIDARE | Su richiesta |
+| Uscita EAGLE | Etichetta configurata | Corrente osservata | Tensione osservata | Stato inventario |
+|---:|---|---:|---:|---|
+| `1` | `Free` | `--` | — | VERIFICATO — libera |
+| `2` | `PPBX` | `0.3 A` | — | VERIFICATO |
+| `3` | `PPBA` | `0.3 A` | — | VERIFICATO |
+| `4` | `UCH` | `0.1 A` | — | VERIFICATO |
+| `5` | `Evoguide` | `0.6 A` | `11.5 V` | VERIFICATO |
+| `6` | `F4 Primario` | `0.1 A` | `11.5 V` | VERIFICATO |
+| `7` | `F4 Secondario` | `1.1 A` | `11.5 V` | VERIFICATO |
+
+Nella stessa evidenza EAGLE Manager sono visibili `12.9 V` sul rail superiore e un consumo totale istantaneo di `40.1 W`. Questi valori sono registrati come osservazioni puntuali e non vengono convertiti in tensioni nominali per le uscite 1–4 né in soglie di monitoraggio.
+
+Restano da censire i rating nominali/massimi dei dispositivi e, ove necessario, la riconciliazione delle abbreviazioni configurate `UCH`, `PPBA` e `PPBX` con gli asset fisici dell’inventario completo.
 
 Non superare i limiti dichiarati dal costruttore dell’EAGLE e degli alimentatori.
+
+> **Boundary:** la mappatura documentale non autorizza controllo software delle uscite. L’autorità Safety e gli interlock fisici locali restano indipendenti.
 
 ## 6.8 Software e dipendenze
 
@@ -283,10 +304,19 @@ Non aggiornare Windows, ASCOM, CPWI, N.I.N.A. o i driver immediatamente prima di
 
 ## 6.17 Dati da validare
 
-- modello e generazione esatta dell’EAGLE;
+- modello e generazione hardware esatta dell’EAGLE;
+- numero di serie;
 - specifiche CPU, RAM e SSD;
 - versione Windows;
 - configurazione BIOS/auto power-on;
-- mappatura reale USB e alimentazioni;
+- identità delle due connessioni USB superiori prive di etichetta nell’evidenza 2026-09-08;
+- rating nominali/massimi dei dispositivi alimentati;
+- riconciliazione asset delle abbreviazioni `UCH`, `PPBA` e `PPBX` ove necessaria;
 - soglie di temperatura e spazio disco;
 - metodo di backup e percorso di destinazione.
+
+La precedente voce generica “mappatura reale USB e alimentazioni” è sostituita dall’inventario verificato nelle sezioni 6.6 e 6.7; restano aperti solo i punti esplicitamente indicati sopra.
+
+### Evidenza di riferimento
+
+- `docs/architecture/telemetry/evidence/EAGLE-Port-Mapping-Inventory-2026-09-08.md` — `EVD-EAGLE-PORT-MAP-20260908`.
