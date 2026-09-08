@@ -5,7 +5,7 @@
 | Package | BKL-040 — Night Timeline / Observatory Replay |
 | Increment | F3 — Multi-Source Synchronization, Conflict & Skew Classification |
 | Status | Proposed |
-| Version | 0.1 |
+| Version | 0.2 |
 | Date | 2026-09-08 |
 | Baseline | `ba17df5584a82c4396bd7dccf6bf593c518d8429` |
 | Upstream | BKL-040 F1 + F2 |
@@ -23,15 +23,49 @@ F3 is a synchronization and classification layer only. It does not implement a r
 
 The accepted F2 baseline provides a bounded replay projection for session `2026-08-15_2026-08-16` with executable schema validation, Citation/Provenance binding, `PLACED | UNPLACED` temporal semantics and deterministic ordering.
 
-Repository truth also confirms historically stored session evidence families for N.I.N.A., PHD2 and weather/CloudWatcher, plus previously governed SQM and EAGLE health history contracts. However F3 must not assume that every stored source family already has an accepted event parser or timestamp locator.
+The governed session manifest declares `timezone_id = Europe/Rome` and explicit local session boundaries with `+02:00` offset. Its `files[].modified_local` values remain file metadata only and are prohibited as replay event time.
 
-Therefore source participation is split into:
+### 2.1 Verified source eligibility inventory
 
-- **eligible** — an exact source field or record timestamp is governed and can be normalized without invention;
-- **candidate** — historical bytes/records exist, but an exact event-time extraction contract is not yet governed;
-- **excluded** — no durable historical source has been proven.
+| Source family | Historical evidence | Native event-time evidence | F3 state | Governed normalization method |
+|---|---|---|---|---|
+| N.I.N.A. | `raw/nina/20260815-204018-3.2.0.9001.6188-202608.log` | `DATE` column, e.g. `2026-08-15T20:40:29.7413` | **eligible** | `BKL040-F3-NINA-LOCAL-TO-UTC-1` |
+| PHD2 GuideLog | `raw/phd2/PHD2_GuideLog_2026-08-15_203750.txt` | absolute anchor `Guiding Begins at 2026-08-15 22:11:13` plus frame `Time` seconds | **eligible** | `BKL040-F3-PHD2-GUIDE-ANCHOR-1` |
+| CloudWatcher | `raw/weather/CloudWatcher_2026-08-15_2026-08-16.csv` | per-row `Date` + `Time`, e.g. `2026-08-15` + `19:00:09` | **eligible** | `BKL040-F3-CLOUDWATCHER-LOCAL-TO-UTC-1` |
+| SQM | governed historical capability exists, but no session-scoped F3 locator is bound in this increment | deferred | candidate | none in F3 v0.2 |
+| EAGLE health | governed historical capability exists, but no session-scoped F3 locator is bound in this increment | deferred | candidate | none in F3 v0.2 |
+| Power / Network / local Safety | no exact durable session-scoped source contract proven for this increment | none | excluded | none |
 
-Candidate or excluded sources do not enter the synchronized sequence.
+### 2.2 N.I.N.A. timestamp contract
+
+- Eligible records are normal log rows after the `DATE|LEVEL|SOURCE|MEMBER|LINE|MESSAGE` header.
+- `DATE` is a local wall-clock timestamp without an embedded offset.
+- For this bounded session, timezone interpretation comes only from the session manifest `timezone_id = Europe/Rome`.
+- UTC normalization must use the timezone rules for the actual record date; no fixed offset may be hard-coded as a general parser rule.
+- A row whose `DATE` cannot be parsed under this contract becomes `UNPLACED`; file name or file modification time must not be substituted.
+
+The inspected N.I.N.A. log also independently records `Mount UTC Time` and `System UTC Time` with a reported difference of `0.004 seconds`. This is evidence that may later support a clock assessment method, but F3 v0.2 does **not** turn it into a general skew threshold or timestamp correction.
+
+### 2.3 PHD2 GuideLog timestamp contract
+
+- Each guiding section begins with an explicit absolute local anchor, for example `Guiding Begins at 2026-08-15 22:11:13`.
+- The subsequent CSV-like frame rows expose `Time` as elapsed seconds from that guiding-section anchor.
+- A frame event time is therefore derived only as `anchor_local + Time seconds`, interpreted in the manifest timezone `Europe/Rome`, then normalized to UTC.
+- `Log enabled at ...` is metadata for the log lifecycle and must not replace a missing guiding-section anchor.
+- Historical calibration timestamps such as `Timestamp = 17/02/2026 22:49:09` are calibration metadata and are not frame event time.
+- If a frame occurs without a valid enclosing absolute guiding anchor, it is `UNPLACED`.
+
+### 2.4 CloudWatcher timestamp contract
+
+- Each CSV data row carries explicit `Date` and `Time` fields.
+- The combined local timestamp is interpreted using the session manifest `timezone_id = Europe/Rome`, then normalized to UTC.
+- The first inspected row is `2026-08-15 19:00:09`, demonstrating record-level temporal evidence independent of file metadata.
+- The CSV may contain UTF-8 BOM and quoted fields; parser normalization may remove BOM/quoting syntax but must not alter evidence values.
+- A row with malformed/missing `Date` or `Time` becomes `UNPLACED`; `modified_local` must not be used as fallback.
+
+### 2.5 Eligibility consequence
+
+The first executable F3 synchronization fixture may therefore onboard **N.I.N.A., PHD2 GuideLog and CloudWatcher** only. SQM/EAGLE remain candidate until exact session-scoped locators are bound; Power/Network/Safety remain excluded in this increment.
 
 ## 3. Synchronization model
 
@@ -70,6 +104,8 @@ Initial bounded relationship vocabulary:
 - `UNPLACED_RELATED` — at least one event is `UNPLACED`; evidence may be associated by governed non-temporal identity only, never by invented time;
 - `CONFLICTING` — two source records make materially incompatible claims that must remain simultaneously visible;
 - `UNRELATED` — no governed correlation can be asserted.
+
+`COINCIDENT` remains unavailable until a versioned coincidence window is separately governed. In the initial executable F3 path, cross-source placed events can be classified `SEQUENTIAL` with exact `delta_ms` and `classification_state = NOT_ASSESSED`.
 
 No relationship type changes the source-authority class of either event.
 
@@ -115,18 +151,18 @@ This rule applies independently to N.I.N.A., PHD2, CloudWatcher, SQM, EAGLE heal
 
 ## 9. Bounded F3 implementation path
 
-The first executable F3 increment should remain bounded to one governed session and a small number of source families whose event-time contracts can be proven directly from repository evidence.
+The first executable F3 increment remains bounded to session `2026-08-15_2026-08-16` and the three eligible source families above.
 
-Recommended implementation sequence:
+Implementation sequence:
 
-1. inventory exact event-time locators for N.I.N.A., PHD2 and weather evidence in the accepted session;
-2. onboard only sources with deterministic parsers;
-3. extend the replay fixture with those events while preserving F2 schema semantics;
-4. add a separate correlation/conflict artifact;
-5. validate deltas, total ordering, Citation/Provenance and conflict visibility;
-6. keep skew classification at `NOT_ASSESSED` until an explicit method window is approved.
+1. implement deterministic parsers for N.I.N.A., PHD2 GuideLog and CloudWatcher using the three versioned timestamp methods;
+2. select a small, auditable event subset from each source rather than bulk-importing all records;
+3. extend the replay projection without changing F2 `PLACED | UNPLACED`, ordering or lineage semantics;
+4. add a separate bounded correlation/conflict artifact;
+5. validate exact `delta_ms`, total ordering, Citation/Provenance and conflict visibility;
+6. keep cross-source skew state at `NOT_ASSESSED` until an explicit method window is approved.
 
-If no exact parser can be proven for a source, it remains `candidate`; F3 must not infer timestamps from file metadata.
+No parser may infer event time from filename, file creation/modification, ingestion, Git commit, session boundary or persistence time.
 
 ## 10. Safety and security boundaries
 
@@ -153,13 +189,15 @@ Rollback is repository revert of F3 artifacts and validators; no runtime or hard
 
 F3 architecture is ready for executable implementation when:
 
-- source eligibility criteria are explicit;
+- N.I.N.A., PHD2 GuideLog and CloudWatcher timestamp contracts are explicit and versioned;
+- timezone interpretation is bound to the governed session timezone and not guessed from the execution host;
+- malformed timestamps become `UNPLACED` rather than receiving fallback times;
 - no source timestamp can be inferred from file/ingestion/commit metadata;
 - correlation records preserve both participating event references and full lineage;
 - timestamp deltas are descriptive and do not rewrite event time;
-- no skew threshold exists without a versioned governed method;
+- no skew/coincidence threshold exists without a versioned governed method;
 - conflict preservation is fail-closed and non-flattening;
 - Safety and command boundaries remain unchanged;
-- implementation scope is bounded to repository-proven source contracts.
+- implementation scope remains bounded to repository-proven source contracts.
 
 Before merge of any executable F3 package: Developer Foundation, documentation, Word, independent ARB and Release Quality must all pass on the exact head.
