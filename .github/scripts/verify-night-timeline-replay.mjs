@@ -4,7 +4,8 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const projectionPath = process.env.DSG_NIGHT_TIMELINE_REPLAY || path.join(root, 'docs/data/night-timeline-replay.json');
-const doc = JSON.parse(fs.readFileSync(projectionPath, 'utf8'));
+const parseJsonFile = p => JSON.parse(fs.readFileSync(p, 'utf8').replace(/^\uFEFF/, ''));
+const doc = parseJsonFile(projectionPath);
 const fail = m => { throw new Error(`Night Timeline Replay validation FAILED: ${m}`); };
 const order = {NINA:10,PHD2:20,CLOUDWATCHER:30,SQM:40,EAGLE_HEALTH:50,SESSION_PROJECTION:90};
 if (doc.authority !== 'projection') fail('authority must remain projection');
@@ -32,7 +33,7 @@ for (const s of doc.sessions) {
     }
     if (e.source_type === 'SESSION_PROJECTION') {
       const [file, fragment] = e.source_ref.split('#');
-      const src = JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
+      const src = parseJsonFile(path.join(root, file));
       const field = fragment === 'start_local' ? 'start_local' : fragment === 'end_local' ? 'end_local' : null;
       if (!field) fail(`${e.replay_event_id}: unsupported session projection locator`);
       if (src[field] !== e.source_timestamp_raw) fail(`${e.replay_event_id}: timestamp not exact source evidence`);
