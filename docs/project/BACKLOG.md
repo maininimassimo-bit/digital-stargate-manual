@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 4.2 |
+| Versione | 4.3 |
 | Stato | Active |
-| Data baseline | 07/09/2026 |
+| Data baseline | 08/09/2026 |
 
 ## 1. Scopo
 
@@ -55,10 +55,10 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
 | BKL-035 | P2 | Target Knowledge Base | Done | BKL-015/BKL-044 | Vista target con sessioni, SQM, setup, immagini e workflow | F1-F4 CLOSED/ACCEPTED; PR #112 merge `1eef3e6747d975e40d592933ece655014b808f05`; closure `docs/project/BKL-035-CLOSURE-2026-09-07.md` |
 | BKL-036 | P2 | Observatory Health Score | Planned | BKL-030, telemetry history | Score operativo spiegabile distinto da Safety | Functional Roadmap Expansion |
-| BKL-037 | P2 | Session Comparison & Benchmarking | Planned | BKL-029, BKL-035, BKL-045 | Confronto qualità/acquisizione/processing | Functional Roadmap Expansion |
-| BKL-038 | P2 | Anomaly & Trend Center | Planned | BKL-030, BKL-040 | Trend e pattern di degrado | Functional Roadmap Expansion |
+| BKL-037 | P2 | Session Comparison & Benchmarking | Planned | BKL-029, BKL-035, BKL-045 | Confronto qualità/acquisizione/processing | Pending BKL-045; Functional Roadmap Expansion |
+| BKL-038 | P2 | Anomaly & Trend Center | In Progress | BKL-030, BKL-040 | Trend e pattern di degrado | Current dependency-ready package after BKL-040 closure |
 | BKL-039 | P2 | Equipment Performance Registry | Planned | BKL-015, session history | Prestazioni storiche setup/componenti | Functional Roadmap Expansion |
-| BKL-040 | P2 | Night Timeline / Observatory Replay | In Progress | BKL-015/BKL-044, historical telemetry | Replay sincronizzato della notte | Current governed package after BKL-035 closure |
+| BKL-040 | P2 | Night Timeline / Observatory Replay | Done | BKL-015/BKL-044, historical telemetry | Replay sincronizzato della notte | F1-F4 CLOSED/ACCEPTED; PR #117 merge `80d22a255540ac582733c60dfe9bbf7807bcdf9b`; closure `docs/project/BKL-040-CLOSURE-2026-09-08.md` |
 | BKL-041 | P2 | Scientific Data Quality Score | Planned | BKL-029, BKL-037, BKL-045 | Quality score scientifico spiegabile | Functional Roadmap Expansion |
 | BKL-042 | P2 | AI Observatory Assistant | Planned | BKL-015/BKL-044 e intelligence services | Copilot read-only per diagnosis/RCA/planning/science | Functional Roadmap Expansion |
 | BKL-043 | P2 | Observatory Reliability Engineering | Planned | BKL-030/BKL-038/BKL-042 | SLI/SLO, MTBF, MTTR, session completion e failure budget | Functional Roadmap Expansion |
@@ -67,7 +67,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-046 | P2 | AI Post-Processing Assistant for PixInsight | Planned | BKL-015/BKL-044/BKL-045 | Assistente advisory per ottimizzare workflow PixInsight | Functional Roadmap Expansion |
 | BKL-047 | P1 | AP-013C Verified Transport Cleanup & Convergence Monitoring | Done | AP-013B COPY_ONLY OAT | DRY_RUN/NO_DELETE lifecycle evidence, ACK convergence e fail-closed classification accepted | AP-013C; C8 productive cleanup excluded |
 
-### Reconciliation note — 07/09/2026
+### Reconciliation note — 08/09/2026
 
 BKL-015 è `Done / Accepted` e TD-008 resta `Resolved`.
 
@@ -75,18 +75,19 @@ BKL-044 è `Done / Accepted`: F1-F4 sono completati. F4 è stato integrato via P
 
 BKL-035 è `Done / Accepted`: F1-F4 sono completati. F4 è stato integrato via PR #112 con merge `1eef3e6747d975e40d592933ece655014b808f05`; post-merge Developer Foundation #1035, Docs #650, Word #1075 e Pages #705 sono `SUCCESS`. BKL-035 resta projection-only e non autorizza broad ingestion, fuzzy identity merge, runtime AI o modifica della Safety Authority.
 
-BKL-040 è il nuovo package governato `In Progress` secondo la sequenza dependency-ordered corrente.
+BKL-040 è `Done / Accepted`: F1-F4 sono completati. F4 è stato integrato via PR #117 con merge `80d22a255540ac582733c60dfe9bbf7807bcdf9b`; post-merge Developer Foundation #1053, Docs #671, Word #1096 e Pages #712 sono `SUCCESS`. BKL-040 resta historical/read-only e non autorizza replay verso hardware, remediation automatica o modifica della Safety Authority.
+
+La precedente sequenza collocava BKL-037 subito dopo BKL-040, ma BKL-037 dichiara BKL-045 come dipendenza e BKL-045 è ancora `Planned`. BKL-037 resta quindi `Planned`. BKL-038, dipendente da BKL-030 e BKL-040 entrambi accettati, è il nuovo package governato `In Progress`.
 
 ## 4. Sequenza di esecuzione raccomandata
 
 ```text
-Completed baseline through BKL-030, BKL-015, BKL-044 and BKL-035
-  -> BKL-040 Night Timeline / Replay [CURRENT]
-  -> BKL-037 Session Comparison
-  -> BKL-038 Anomaly & Trend Center
+Completed baseline through BKL-030, BKL-015, BKL-044, BKL-035 and BKL-040
+  -> BKL-038 Anomaly & Trend Center [CURRENT]
   -> BKL-039 Equipment Performance Registry
-  -> BKL-041 Scientific Data Quality Score
   -> BKL-045 PixInsight Workflow Provenance Plugin
+  -> BKL-037 Session Comparison & Benchmarking
+  -> BKL-041 Scientific Data Quality Score
   -> BKL-046 AI Post-Processing Assistant
   -> BKL-031 Observation Planner
   -> BKL-032 Session Readiness
