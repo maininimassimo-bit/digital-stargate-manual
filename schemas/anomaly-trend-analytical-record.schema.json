@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/schemas/anomaly-trend-analytical-record.schema.json",
+  "title": "Digital StarGate BKL-038 Analytical Record",
+  "type": "object",
+  "required": ["schema_version","component","authority","action_authority","baseline_commit","records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "component": {"const": "DSG.AnomalyTrendCenter.F2"},
+    "authority": {"const": "projection"},
+    "action_authority": {"const": "NONE"},
+    "baseline_commit": {"type":"string","minLength":40},
+    "records": {
+      "type":"array",
+      "minItems":1,
+      "items": {"$ref":"#/$defs/record"}
+    }
+  },
+  "$defs": {
+    "record": {
+      "type":"object",
+      "required":["derived_record_id","semantic_type","method_id","method_version","source_record_refs","citation_refs","provenance_refs","analysis_window","quality_state","explanation_codes","authority","action_authority"],
+      "additionalProperties":false,
+      "properties": {
+        "derived_record_id":{"type":"string","minLength":1},
+        "semantic_type":{"enum":["OBSERVATION","TREND_MEASUREMENT","ANOMALY_CANDIDATE","CORRELATION_CANDIDATE"]},
+        "method_id":{"type":"string","minLength":1},
+        "method_version":{"type":"string","minLength":1},
+        "source_record_refs":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","minLength":1}},
+        "citation_refs":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","minLength":1}},
+        "provenance_refs":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","minLength":1}},
+        "analysis_window":{
+          "type":"object",
+          "required":["start_utc","end_utc"],
+          "additionalProperties":false,
+          "properties":{"start_utc":{"type":["string","null"]},"end_utc":{"type":["string","null"]}}
+        },
+        "measurement":{
+          "type":["object","null"],
+          "additionalProperties":false,
+          "properties":{"value":{"type":["number","string","null"]},"unit":{"type":["string","null"]},"descriptive_only":{"type":"boolean"}}
+        },
+        "candidate_state":{"enum":["OBSERVED_RULE_MATCH","DATA_QUALITY_EXCEPTION","NOT_ASSESSED","UNSUPPORTED",null]},
+        "rule_id":{"type":["string","null"]},
+        "quality_state":{"enum":["CURRENT_AT_OBSERVATION","STALE_AT_OBSERVATION","UNKNOWN","INCOMPLETE","CONFLICTED","UNSUPPORTED"]},
+        "explanation_codes":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","minLength":1}},
+        "authority":{"const":"projection"},
+        "action_authority":{"const":"NONE"}
+      }
+    }
+  }
+}
