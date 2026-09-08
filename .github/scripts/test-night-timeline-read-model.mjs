@@ -14,4 +14,6 @@ test('consumer cannot promote NOT_ASSESSED skew',()=>{const x=clone(rm);x.correl
 test('consumer cannot enable operational playback',()=>{const x=clone(rm);x.playback_mode='DEVICE_REPLAY';assert.ok(errs(x).some(e=>e.includes('playback_mode')));});
 test('consumer cannot expose command actions',()=>{const x=clone(rm);x.command_actions=['OPEN_ROOF'];assert.ok(errs(x).some(e=>e.includes('command_actions')));});
 test('consumer must keep explicit unplaced container',()=>{const x=clone(rm);delete x.unplaced_events;assert.ok(errs(x).some(e=>e.includes('unplaced_events')));});
+test('consumer cannot invent unplaced evidence absent from F3',()=>{const x=clone(rm);x.unplaced_events=[{replay_event_id:'SYNTHETIC'}];assert.ok(errs(x).some(e=>e.includes('cannot invent evidence')));});
 test('consumer must keep explicit conflict container',()=>{const x=clone(rm);delete x.conflicts;assert.ok(errs(x).some(e=>e.includes('conflicts')));});
+test('consumer cannot invent conflict evidence absent from F3',()=>{const x=clone(rm);x.conflicts=[{conflict_id:'SYNTHETIC'}];assert.ok(errs(x).some(e=>e.includes('cannot invent evidence')));});
