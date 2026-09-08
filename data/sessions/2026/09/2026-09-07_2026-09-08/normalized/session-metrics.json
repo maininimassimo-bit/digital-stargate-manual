@@ -1,0 +1,69 @@
+{
+  "schema_version": "0.2.0",
+  "session_id": "2026-09-07_2026-09-08",
+  "generated_at": "2026-09-08T06:15:23.378381+00:00",
+  "scientific": {
+    "target_name": "M 27",
+    "ra_deg": 299.9,
+    "dec_deg": 22.72111111,
+    "epoch": "J2000",
+    "telescope": "Celestron C8 XLT",
+    "camera": "QHY695A",
+    "binning": 1,
+    "source": "nina-log",
+    "configuration_id": "C8_QHY695A_BIN1"
+  },
+  "nina": {
+    "camera_exposures_total": 178,
+    "light_started": 6,
+    "light_completed": 4,
+    "light_failed_explicit": 0,
+    "light_interrupted_unmatched": 2,
+    "technical_exposures_estimated": 172,
+    "integration_seconds": 2400.0,
+    "autofocus_started": 10,
+    "autofocus_completed": 3,
+    "autofocus_failed_explicit": 2,
+    "autofocus_unmatched": 5,
+    "dither_requests": 11,
+    "nina_errors": 73,
+    "nina_warnings": 75
+  },
+  "phd2": {
+    "guide_segments": 8,
+    "guide_samples_valid": 0,
+    "rms_ra_arcsec": null,
+    "rms_dec_arcsec": null,
+    "rms_total_arcsec": null,
+    "lost_star_events": 0,
+    "pulse_guide_failures": 0
+  },
+  "weather": {
+    "weather_rows_total": 3960,
+    "weather_rows_unsafe_full_window": 474,
+    "weather_safe_transitions_full_window": 1,
+    "weather_unsafe_pct_full_window": 11.97,
+    "weather_scope_note": "Valori riferiti alla finestra CSV importata; non penalizzano la severita finche non sono correlati alla sequenza attiva/cupola aperta."
+  },
+  "sqm": {
+    "state": "AVAILABLE",
+    "quality": "AVAILABLE",
+    "start": "2026-09-07T17:00:22.0000000Z",
+    "end": "2026-09-08T03:59:40.0000000Z",
+    "min_mag_arcsec2": 8.91,
+    "max_mag_arcsec2": 21.05,
+    "mean_mag_arcsec2": 19.4066,
+    "median_mag_arcsec2": 20.89,
+    "valid_samples": 1283,
+    "temporal_coverage": 0.9712,
+    "source_path": "data/sessions/2026/09/2026-09-07_2026-09-08/raw/sqm/sqm-summary.json",
+    "source": "AAG CloudWatcher SOLO HTTP / lightmpsas",
+    "serial": "2382",
+    "firmware": "5.88"
+  },
+  "severity": "YELLOW",
+  "severity_reasons": [
+    "Pose LIGHT da verificare: fallite=0, non abbinate=2",
+    "Autofocus falliti esplicitamente: 2"
+  ]
+}
