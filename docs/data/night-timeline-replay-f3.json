@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "component": "DSG.NightTimelineReplay.F3",
+  "authority": "projection",
+  "baseline_commit": "ba17df5584a82c4396bd7dccf6bf593c518d8429",
+  "session_id": "2026-08-15_2026-08-16",
+  "timezone_id": "Europe/Rome",
+  "source_order_method_id": "BKL040-F1-SOURCE-ORDER-1",
+  "bounds": { "max_events": 6, "max_correlations": 6 },
+  "events": [
+    {
+      "replay_event_id": "RPL-20260815-CLOUDWATCHER-FIRST",
+      "temporal_state": "PLACED",
+      "event_time_utc": "2026-08-15T17:00:09Z",
+      "source_timestamp_raw": "2026-08-15 19:00:09",
+      "source_type": "CLOUDWATCHER",
+      "source_order": 30,
+      "source_authority": "CloudWatcher CSV historical evidence",
+      "event_kind": "WEATHER_SAMPLE",
+      "summary": "CloudWatcher Clear/Dry safety=Unsafe",
+      "source_ref": "data/sessions/2026/08/2026-08-15_2026-08-16/raw/weather/CloudWatcher_2026-08-15_2026-08-16.csv#row=2",
+      "citation_refs": ["CIT-RPL-F3-CW-FIRST@1.0"],
+      "provenance_refs": ["PRV-RPL-F3-CW-FIRST@1.0"],
+      "quality_state": "CURRENT"
+    },
+    {
+      "replay_event_id": "RPL-20260815-NINA-DOME-OPEN",
+      "temporal_state": "PLACED",
+      "event_time_utc": "2026-08-15T18:42:52.8776Z",
+      "source_timestamp_raw": "2026-08-15T20:42:52.8776",
+      "source_type": "NINA",
+      "source_order": 10,
+      "source_authority": "N.I.N.A. raw log evidence",
+      "event_kind": "DOME_OPEN_REQUEST",
+      "summary": "N.I.N.A. recorded opening dome shutter request",
+      "source_ref": "data/sessions/2026/08/2026-08-15_2026-08-16/raw/nina/20260815-204018-3.2.0.9001.6188-202608.log#contains=Opening%20dome%20shutter",
+      "citation_refs": ["CIT-RPL-F3-NINA-DOME-OPEN@1.0"],
+      "provenance_refs": ["PRV-RPL-F3-NINA-DOME-OPEN@1.0"],
+      "quality_state": "CURRENT"
+    },
+    {
+      "replay_event_id": "RPL-20260815-PHD2-GUIDING-BEGIN",
+      "temporal_state": "PLACED",
+      "event_time_utc": "2026-08-15T20:11:13Z",
+      "source_timestamp_raw": "2026-08-15 22:11:13",
+      "source_type": "PHD2",
+      "source_order": 20,
+      "source_authority": "PHD2 GuideLog historical evidence",
+      "event_kind": "GUIDING_BEGIN",
+      "summary": "PHD2 guiding section begins",
+      "source_ref": "data/sessions/2026/08/2026-08-15_2026-08-16/raw/phd2/PHD2_GuideLog_2026-08-15_203750.txt#contains=Guiding%20Begins%20at",
+      "citation_refs": ["CIT-RPL-F3-PHD2-GUIDING-BEGIN@1.0"],
+      "provenance_refs": ["PRV-RPL-F3-PHD2-GUIDING-BEGIN@1.0"],
+      "quality_state": "CURRENT"
+    }
+  ],
+  "citations": [
+    {"id":"CIT-RPL-F3-CW-FIRST","version":"1.0","source_authority":"CloudWatcher CSV historical evidence","locator":{"path":"data/sessions/2026/08/2026-08-15_2026-08-16/raw/weather/CloudWatcher_2026-08-15_2026-08-16.csv","json_pointer":"/row/2"}},
+    {"id":"CIT-RPL-F3-NINA-DOME-OPEN","version":"1.0","source_authority":"N.I.N.A. raw log evidence","locator":{"path":"data/sessions/2026/08/2026-08-15_2026-08-16/raw/nina/20260815-204018-3.2.0.9001.6188-202608.log","json_pointer":"/line/contains:Opening dome shutter"}},
+    {"id":"CIT-RPL-F3-PHD2-GUIDING-BEGIN","version":"1.0","source_authority":"PHD2 GuideLog historical evidence","locator":{"path":"data/sessions/2026/08/2026-08-15_2026-08-16/raw/phd2/PHD2_GuideLog_2026-08-15_203750.txt","json_pointer":"/line/contains:Guiding Begins at"}}
+  ],
+  "provenance_records": [
+    {"id":"PRV-RPL-F3-CW-FIRST","version":"1.0","method_id":"BKL040-F3-CLOUDWATCHER-LOCAL-TO-UTC-1","input_refs":["data/sessions/2026/08/2026-08-15_2026-08-16/raw/weather/CloudWatcher_2026-08-15_2026-08-16.csv#/row/2"],"output_ref":"replay-event:RPL-20260815-CLOUDWATCHER-FIRST","citation_refs":["CIT-RPL-F3-CW-FIRST@1.0"]},
+    {"id":"PRV-RPL-F3-NINA-DOME-OPEN","version":"1.0","method_id":"BKL040-F3-NINA-LOCAL-TO-UTC-1","input_refs":["data/sessions/2026/08/2026-08-15_2026-08-16/raw/nina/20260815-204018-3.2.0.9001.6188-202608.log#/line/contains:Opening dome shutter"],"output_ref":"replay-event:RPL-20260815-NINA-DOME-OPEN","citation_refs":["CIT-RPL-F3-NINA-DOME-OPEN@1.0"]},
+    {"id":"PRV-RPL-F3-PHD2-GUIDING-BEGIN","version":"1.0","method_id":"BKL040-F3-PHD2-GUIDE-ANCHOR-1","input_refs":["data/sessions/2026/08/2026-08-15_2026-08-16/raw/phd2/PHD2_GuideLog_2026-08-15_203750.txt#/line/contains:Guiding Begins at"],"output_ref":"replay-event:RPL-20260815-PHD2-GUIDING-BEGIN","citation_refs":["CIT-RPL-F3-PHD2-GUIDING-BEGIN@1.0"]}
+  ],
+  "correlations": [
+    {"correlation_id":"CORR-F3-CW-NINA","session_id":"2026-08-15_2026-08-16","left_event_ref":"replay-event:RPL-20260815-CLOUDWATCHER-FIRST","right_event_ref":"replay-event:RPL-20260815-NINA-DOME-OPEN","relationship_type":"SEQUENTIAL","delta_ms":6163877.6,"classification_method_id":"BKL040-F3-EXACT-DELTA-1","classification_state":"NOT_ASSESSED","citation_refs":["CIT-RPL-F3-CW-FIRST@1.0","CIT-RPL-F3-NINA-DOME-OPEN@1.0"],"provenance_refs":["PRV-RPL-F3-CW-FIRST@1.0","PRV-RPL-F3-NINA-DOME-OPEN@1.0"],"conflict_refs":[]},
+    {"correlation_id":"CORR-F3-NINA-PHD2","session_id":"2026-08-15_2026-08-16","left_event_ref":"replay-event:RPL-20260815-NINA-DOME-OPEN","right_event_ref":"replay-event:RPL-20260815-PHD2-GUIDING-BEGIN","relationship_type":"SEQUENTIAL","delta_ms":5300122.4,"classification_method_id":"BKL040-F3-EXACT-DELTA-1","classification_state":"NOT_ASSESSED","citation_refs":["CIT-RPL-F3-NINA-DOME-OPEN@1.0","CIT-RPL-F3-PHD2-GUIDING-BEGIN@1.0"],"provenance_refs":["PRV-RPL-F3-NINA-DOME-OPEN@1.0","PRV-RPL-F3-PHD2-GUIDING-BEGIN@1.0"],"conflict_refs":[]}
+  ]
+}
