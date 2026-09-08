@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "component": "DSG.NightTimelineReplay",
+  "authority": "projection",
+  "source_order_method_id": "BKL040-F1-SOURCE-ORDER-1",
+  "bounds": {"max_sessions": 2, "max_events": 20},
+  "sessions": [
+    {
+      "session_id": "2026-08-15_2026-08-16",
+      "source_ref": "data/sessions/2026/08/2026-08-15_2026-08-16/manifest.json",
+      "events": [
+        {
+          "replay_event_id": "RPL-20260815-SESSION-START",
+          "temporal_state": "PLACED",
+          "event_time_utc": "2026-08-15T17:00:00.000Z",
+          "source_timestamp_raw": "2026-08-15T19:00:00.0000000+02:00",
+          "source_type": "SESSION_PROJECTION",
+          "source_order": 90,
+          "source_authority": "repository_projection",
+          "event_kind": "SESSION_START",
+          "summary": "Governed session boundary start",
+          "source_ref": "data/sessions/2026/08/2026-08-15_2026-08-16/manifest.json#start_local",
+          "citation_refs": ["CIT-RPL-M27-START@1.0"],
+          "provenance_refs": ["PRV-RPL-M27-START@1.0"],
+          "quality_state": "CURRENT"
+        },
+        {
+          "replay_event_id": "RPL-20260816-SESSION-END",
+          "temporal_state": "PLACED",
+          "event_time_utc": "2026-08-16T04:00:00.000Z",
+          "source_timestamp_raw": "2026-08-16T06:00:00.0000000+02:00",
+          "source_type": "SESSION_PROJECTION",
+          "source_order": 90,
+          "source_authority": "repository_projection",
+          "event_kind": "SESSION_END",
+          "summary": "Governed session boundary end",
+          "source_ref": "data/sessions/2026/08/2026-08-15_2026-08-16/manifest.json#end_local",
+          "citation_refs": ["CIT-RPL-M27-END@1.0"],
+          "provenance_refs": ["PRV-RPL-M27-END@1.0"],
+          "quality_state": "CURRENT"
+        }
+      ]
+    }
+  ],
+  "citations": [
+    {"id":"CIT-RPL-M27-START","version":"1.0","source_authority":"repository_authority","locator":{"path":"data/sessions/2026/08/2026-08-15_2026-08-16/manifest.json","json_pointer":"/start_local"}},
+    {"id":"CIT-RPL-M27-END","version":"1.0","source_authority":"repository_authority","locator":{"path":"data/sessions/2026/08/2026-08-15_2026-08-16/manifest.json","json_pointer":"/end_local"}}
+  ],
+  "provenance_records": [
+    {"id":"PRV-RPL-M27-START","version":"1.0","method_id":"BKL040-F2-SESSION-BOUNDARY-NORMALIZATION-1","input_refs":["data/sessions/2026/08/2026-08-15_2026-08-16/manifest.json#/start_local"],"output_ref":"replay-event:RPL-20260815-SESSION-START","citation_refs":["CIT-RPL-M27-START@1.0"]},
+    {"id":"PRV-RPL-M27-END","version":"1.0","method_id":"BKL040-F2-SESSION-BOUNDARY-NORMALIZATION-1","input_refs":["data/sessions/2026/08/2026-08-15_2026-08-16/manifest.json#/end_local"],"output_ref":"replay-event:RPL-20260816-SESSION-END","citation_refs":["CIT-RPL-M27-END@1.0"]}
+  ]
+}
