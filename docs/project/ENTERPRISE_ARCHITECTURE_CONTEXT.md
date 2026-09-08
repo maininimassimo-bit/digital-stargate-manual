@@ -3,297 +3,185 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 1.0 |
+| Versione | 2.0 |
 | Stato | Active context baseline |
-| Data baseline | 04/08/2026 |
+| Data baseline | 08/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch autorevole | `main` |
-| Baseline iniziale | `bcf8947049506eba08bd2b14f18fa99e06cded1d` |
-| Release portale | Digital StarGate Enterprise Portal RC1 |
+| Root bootstrap | `AI_BOOTSTRAP.md` |
+| Continuity handover | `docs/project/HANDOVER_2026-09-08.md` |
+| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-08.md` |
+| Current governed package | BKL-038 — Anomaly & Trend Center |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo
 
-Questo documento è il punto di ingresso versionato per riprendere lo sviluppo di Digital StarGate in una nuova sessione di lavoro o in una nuova chat.
+Questo documento fornisce il contesto architetturale enterprise corrente del Digital StarGate. Non è il root bootstrap e non sostituisce Architecture Package, ADR, assessment, evidence, backlog, roadmap o release record.
 
-Riassume visione, principi, componenti, convenzioni, milestone e backlog. Non sostituisce Architecture Package, ADR, assessment, evidence, roadmap o release note: orienta il lavoro e indica quali fonti verificare prima di proporre modifiche.
+Il punto di ingresso unico è `AI_BOOTSTRAP.md`. La sequenza corrente parte dal bootstrap, prosegue con handover e technical baseline 08/09/2026, quindi con questo Context, Repository Knowledge Map e le ulteriori authority dichiarate dal bootstrap.
 
-### Regola di bootstrap
+I documenti handover/baseline datati 07/09/2026 o precedenti restano snapshot storici e non devono essere riscritti per rappresentare lo stato corrente.
 
-All'inizio di ogni nuova attività:
+## 2. Gerarchia e source authority
 
-1. leggere questo documento;
-2. verificare branch `main` e commit corrente;
-3. confrontare il contesto con roadmap, Architecture Package, ADR, release note ed evidence più recenti;
-4. segnalare eventuali divergenze prima di modificare il repository;
-5. aggiornare questa baseline quando cambia una milestone, una regola stabile o un componente del portale.
+Principi di prevalenza:
 
-## 2. Gerarchia delle fonti
+1. il repository GitHub e i suoi artefatti versionati costituiscono la source of truth;
+2. Architecture Package, ADR, capability, standard e registri governati mantengono la propria authority di dominio;
+3. review ARB, Release Quality, validation record, workflow ed evidence provano esclusivamente ciò che hanno realmente verificato;
+4. `docs/project/BACKLOG.md` e `.github/roadmap/roadmap-source.json` rappresentano lo stato governato corrente delle attività e della roadmap funzionale;
+5. `docs/data/roadmap.json` e gli altri dataset sotto `docs/data` sono projection generate e non authority autonome;
+6. AMP-002 resta l'architecture-program planning authority per numerazione e wave AP-007–AP-015, ma non va usato come live status register quando backlog/roadmap/evidence più recenti governano lo stato corrente;
+7. conversazioni, prompt e snapshot storici non prevalgono sul repository corrente.
 
-Ordine di prevalenza:
+Nessuna projection può promuovere la propria authority o sostituire la fonte da cui deriva.
 
-1. Architecture Package, ADR, capability e standard approvati;
-2. assessment ARB, validation record, evidence e gate;
-3. `AMP-002 — Architecture Program Roadmap Realignment`;
-4. release note e commit effettivamente pubblicati;
-5. dataset JSON come proiezioni;
-6. questo documento di contesto;
-7. contenuto delle conversazioni.
+## 3. Visione e boundary permanenti
 
-Il repository GitHub è l'unica fonte autorevole. I dataset JSON devono essere ricostruibili e non possono modificare lo stato architetturale.
+Digital StarGate governa documentazione operativa, architettura enterprise, portale, telemetry, scientific data, session reporting, knowledge/evidence lineage e foundation software dell'osservatorio remoto di Manciano.
 
-## 3. Visione del progetto
+Boundary permanenti:
 
-Digital StarGate è una piattaforma enterprise per documentare, governare ed evolvere l'osservatorio astronomico remoto di Manciano.
+- il portale è un Presentation boundary;
+- Domain, Application e Infrastructure restano separati secondo Clean Architecture;
+- i dataset e read model sono projection ricostruibili;
+- source identity, source authority, semantic type, lifecycle, Citation e Provenance devono essere preservati nei consumer;
+- `unknown`, `stale`, `degraded` e assenza dati non possono essere convertiti in valori validi inventati;
+- i consumer AI restano advisory/read-only salvo governance futura esplicita.
 
-Il progetto è evoluto da manuale tecnico MkDocs a Enterprise Documentation Portal con centri tematici, componenti dinamici, intelligence di repository e piattaforma scientifica integrata.
+## 4. Safety Authority
 
-Obiettivi permanenti:
+La Safety Authority fisica/locale resta indipendente e autorevole.
 
-- documentazione come codice;
-- architettura modulare, tracciabile e revisionabile;
-- separazione tra Presentation, Application, Domain e Infrastructure;
-- safety, security e observability by design;
-- lineage e provenance dei dati scientifici;
-- evoluzione incrementale senza regressioni;
-- futuro supporto multi-osservatorio senza duplicare logica di dominio.
+Portale, telemetry, Knowledge Graph, replay, anomaly/trend analysis e AI:
 
-Il portale è un presentation boundary. Non sostituisce gli interblocchi locali, non possiede autorità safety e non deve accedere direttamente agli apparati fisici.
+- non sono Safety Authority;
+- non possono bypassare interlock locali;
+- non possono trasformare historical evidence in command authorization corrente;
+- non introducono automatic remediation authority;
+- non possono comandare direttamente roof, mount, camera, power, network o altri apparati nella baseline corrente.
 
-## 4. Principi architetturali
+Qualunque futura modifica a command path, remediation o Safety Authority richiede governance architetturale separata.
 
-1. **Repository as source of truth**.
-2. **Modularità e responsabilità singola**.
-3. **Nessuna duplicazione di logica, dati o stili**.
-4. **JavaScript e CSS separati per responsabilità o componente**.
-5. **Dataset JSON come projection, mai come fonte primaria**.
-6. **Scientific Data Engine come layer dati condiviso**.
-7. **Consegna incrementale: architettura, mockup, implementazione, test, commit, push, verifica Pages**.
-8. **No regressions** su navigazione, responsive layout, tema e Instant Navigation.
-9. **Safety first**: nessun bypass di interlock o safe state.
-10. **Traceability** tra roadmap, release, decisioni, evidence e commit.
-11. **Idempotenza** dei componenti caricati con Instant Navigation.
-12. **Progressive enhancement** per contenuti e navigazione.
+## 5. Foundation accettate al 08/09/2026
 
-## 5. Architettura del portale
+Le foundation di intelligence e knowledge attualmente accettate includono:
 
-### Presentation layer
+- **BKL-015 — Knowledge Graph machine-readable foundation**: traceability repository-centric machine-readable;
+- **BKL-044 — Knowledge Graph / AI Evidence Contract**: Citation, Provenance, semantic type, lifecycle, evidence/claim/inference boundaries e consumer preservation;
+- **BKL-035 — Target Knowledge Base**: target-centric read model governato, projection-only;
+- **BKL-040 — Night Timeline / Observatory Replay**: historical timeline/replay bounded, deterministico, `READ_ONLY` / `VISUAL_ONLY`.
 
-Responsabilità:
+BKL-030 — EAGLE Health & Reliability Telemetry resta una foundation accettata per health history e per i package successivi, distinta dalla Safety Authority.
 
-- rendering, navigazione e interazione;
-- accessibilità e responsive design;
-- freshness, provenance, stato di caricamento, errore e degraded mode;
-- composizione dei centri enterprise.
+## 6. BKL-040 — bounded accepted baseline
 
-Non contiene logica safety o device-specific.
+BKL-040 F1-F4 è CLOSED / ACCEPTED. La foundation conserva canonical UTC event time, `PLACED | UNPLACED`, deterministic ordering, Citation/Provenance e source authority.
 
-### Scientific Data Engine
+La materializzazione eseguibile accettata è bounded:
 
-Lo Scientific Data Engine è il layer dati condiviso della piattaforma scientifica.
+- N.I.N.A.;
+- PHD2;
+- CloudWatcher;
+- session projection dove definita.
 
-API pubbliche:
+SQM ed EAGLE health sono foundation governate candidabili a incrementi successivi, ma non sono stati silenziosamente materializzati come channel F3/F4. Power, Network e Safety non devono essere dichiarati come channel storici BKL-040 implementati senza un contratto storico governato specifico.
 
-```javascript
-loadCatalog()
-getSessions()
-getSession()
-getTargets()
-getYears()
-getKPIs()
-filterSessions()
-getKnowledgeGraph()
-getLineage()
-```
+Il debito `TD-012 — Night Timeline F1/F2 Contract Compatibility` è `Accepted`: F2 non riproduce integralmente l'envelope minimo F1 e usa `replay_event_id` come tie-break mentre F1 definiva `source_event_id`. La baseline F2 accettata non va retrofittata silenziosamente; una normalizzazione futura richiede un incremento compatibile, migration contract, test fail-closed e review ARB.
 
-Regole:
+## 7. Knowledge / AI evidence architecture
 
-- tutti i componenti scientifici devono usare queste API;
-- nessun componente deve replicare caricamento o parsing del catalogo;
-- caching, normalizzazione ed error handling appartengono allo Scientific Data Engine;
-- il catalogo JSON resta una proiezione ricostruibile.
+La knowledge architecture corrente è repository-centric e projection-oriented.
 
-### Navigation Manager
+BKL-044 e BKL-035 impongono che ogni consumer preservi:
 
-`docs/javascripts/page-enhancements.js` gestisce Enterprise Navigation, menu, ricerca e drawer documentale.
+- source locator e source authority;
+- Citation;
+- Provenance;
+- semantic type;
+- lifecycle state;
+- confidence/derivation semantics quando applicabili;
+- conflitti e unknown senza silent resolution.
 
-La gestione del tema non appartiene a questo componente. RC1-HF01 introdurrà un Theme Manager indipendente.
+La remediation BKL-044 di PR #118 lega le transition seed storiche a evidence immutabile invece che a frammenti di un backlog live mutabile.
 
-## 6. Componenti sviluppati nella RC1
+Graph DB, vector DB, RAG provider/runtime e AI operational authority non sono autorizzati dalla baseline corrente.
 
-| Componente | Responsabilità |
-|---|---|
-| Home Enterprise | ingresso principale del portale |
-| Enterprise Navigation | navigazione globale, mega-menu, ricerca e drawer |
-| Documentation Center | catalogo visuale del patrimonio documentale |
-| Roadmap Center | proiezione dinamica di roadmap e milestone |
-| Architecture Center | accesso ad AP, ADR, assessment e validation |
-| Scientific Platform | accesso al patrimonio scientifico e ad AP-013 |
-| Scientific Session Catalog | ricerca e filtro delle sessioni |
-| Scientific Session Detail | dettaglio della singola sessione |
-| Scientific Data Engine | accesso condiviso ai dati scientifici |
-| Mission Control | dashboard enterprise di sintesi |
-| Repository Intelligence | lettura strutturata del repository |
-| Scientific Intelligence | knowledge graph, lineage e relazioni scientifiche |
+## 8. Roadmap e sequencing corrente
 
-Componenti JavaScript verificati nella baseline RC1:
+La source canonica `.github/roadmap/roadmap-source.json` e il live `BACKLOG.md` identificano:
 
-- `homepage-effects.js`;
-- `latest-observation.js`;
-- `mission-control.js`;
-- `nav-scroll.js`;
-- `page-enhancements.js`;
-- `roadmap.js`;
-- `scientific-data-engine.js`;
-- `scientific-session-detail.js`;
-- `scientific-session-explorer.js`.
+- BKL-040: completed / accepted;
+- BKL-038: current dependency-ready package;
+- BKL-037: Planned, perché dipende anche da BKL-045;
+- BKL-045: Planned.
 
-## 7. Convenzioni UI/UX
-
-- design enterprise coerente tra tutti i centri;
-- gerarchia tipografica chiara;
-- pattern riusabili per hero, KPI, card, sezioni e call-to-action;
-- stati active, loading, empty, error e degraded espliciti;
-- HTML semantico, focus visibile e navigazione da tastiera;
-- nessuna informazione affidata esclusivamente al colore;
-- light e dark mode verificate per ogni nuova vista;
-- desktop e tablet supportati; mobile governato come evoluzione dedicata;
-- testo dei controlli coerente con l'azione disponibile.
-
-## 8. Standard JavaScript
-
-1. Un file per responsabilità o componente.
-2. Nessuna nuova logica tema in `page-enhancements.js`.
-3. Nessun accesso diretto ai dataset scientifici fuori dallo Scientific Data Engine.
-4. Stato locale incapsulato e funzioni con nomi espliciti.
-5. Nessuna variabile globale salvo API intenzionali e documentate.
-6. Inizializzazione idempotente su `DOMContentLoaded` e `document$.subscribe(...)`.
-7. Event delegation quando riduce duplicazioni e coupling.
-8. Selettori basati su contratti `data-dsg-*`, non sulla posizione accidentale nel DOM.
-9. Errori, assenza dati e caricamenti falliti gestiti esplicitamente.
-10. Eventi custom `dsg:*` ammessi per comunicazione disaccoppiata.
-11. Evitare nuova logica inline nelle pagine.
-12. Compatibilità con Material for MkDocs e Instant Navigation obbligatoria.
-
-## 9. Standard CSS
-
-1. CSS condiviso in `docs/styles`.
-2. Un file per componente complesso o dominio visuale.
-3. Classi con prefisso `dsg-`.
-4. Nessuna dipendenza da selettori fragili interni a Material.
-5. Variabili CSS e design token preferiti a valori duplicati.
-6. Responsive rules nel componente responsabile.
-7. Light e dark mode senza duplicazioni incontrollate.
-8. Nessuna regola generica che alteri componenti non correlati.
-9. Stati `is-active`, `is-open`, `is-loading`, `is-empty`, `is-error`, `is-degraded` usati coerentemente.
-10. Nuovi pattern condivisi consolidati prima di essere replicati.
-
-## 10. Roadmap sintetica
-
-La roadmap autorevole è `AMP-002`. Il Roadmap Center e `docs/data/roadmap.json` ne sono proiezioni.
-
-| Wave | Stato sintetico al 04/08/2026 |
-|---|---|
-| AP-001–AP-006 Foundation | completata con condizioni ARB aperte |
-| AP-007 Operations | package prodotto; review indipendente non registrata |
-| AP-008 Integration | package prodotto; review indipendente non registrata |
-| AP-009 Infrastructure | completato con condizioni; runtime non certificato |
-| AP-010 Safety | completato con condizioni; safety runtime non certificata |
-| AP-011 Analytics Platform | completato con condizioni |
-| AP-012 Operations Center | completato con condizioni; acceptance residue aperte; comandi runtime proibiti |
-| AP-013 Scientific Image Repository | attivo; COPY_ONLY limitato validato |
-| AP-014 Observation Catalog and Search | pianificato |
-| AP-015 Scientific Knowledge Platform | pianificato |
-
-## 11. Stato milestone del portale
-
-| Milestone | Stato |
-|---|---|
-| Enterprise Portal RC1 | pubblicata con commit `22d8e92f79e326585da12a5852a680766094c590` |
-| GitHub Pages RC1 deployment | configurato con commit `bcf8947049506eba08bd2b14f18fa99e06cded1d` |
-| RC1 Release Acceptance Review | completata con difetto tema aperto |
-| RC1-HF01 Theme Manager | pianificata; implementazione non ancora eseguita |
-
-## 12. Backlog prioritario
-
-### P0 — RC1-HF01 Enterprise Theme Manager
-
-Creare:
+Sequenza governata corrente:
 
 ```text
-docs/javascripts/dsg-theme-manager.js
+Completed baseline through BKL-030, BKL-015, BKL-044, BKL-035 and BKL-040
+  -> BKL-038 Anomaly & Trend Center [CURRENT]
+  -> BKL-039 Equipment Performance Registry
+  -> BKL-045 PixInsight Workflow Provenance Plugin
+  -> BKL-037 Session Comparison & Benchmarking
+  -> BKL-041 Scientific Data Quality Score
+  -> BKL-046 AI Post-Processing Assistant
+  -> BKL-031 Observation Planner
+  -> BKL-032 Session Readiness
+  -> BKL-036 Observatory Health Score
+  -> BKL-033 Digital Twin
+  -> BKL-034 Scientific Image Gallery
+  -> BKL-042 AI Observatory Assistant
+  -> BKL-043 Reliability Engineering
+  -> BKL-014 / AP-015 Scientific Knowledge Platform
 ```
 
-Requisiti:
+BKL-038 può iniziare solo dopo la closure PR #118, review indipendente, Release Quality, merge e post-merge verification.
 
-- unico responsabile del tema;
-- Light/Dark con persistenza;
-- compatibilità Material for MkDocs;
-- compatibilità Instant Navigation;
-- aggiornamento automatico del pulsante;
-- estendibilità alla modalità System;
-- rimozione della logica tema da `page-enhancements.js`.
+## 9. AMP-002 e roadmap live
 
-### P1 — Consolidamento RC1
+`AMP-002 — Architecture Program Roadmap Realignment` resta la planning authority approvata per l'architecture program successivo ad AP-006 e per la numerazione AP-007–AP-015.
 
-- `mkdocs build --strict` dopo ogni modifica;
-- test light/dark, refresh diretto e Instant Navigation;
-- verifica desktop, tablet e breakpoint principali;
-- controllo link, pagine orfane e duplicazioni;
-- checklist riusabile di Release Acceptance Review.
+Non deve essere riscritto come registro di stato live. Lo stato corrente delle attività viene riconciliato attraverso backlog, canonical roadmap source, generated roadmap projection, package closure, evidence e workflow.
 
-### P2 — Evoluzione piattaforma
-
-- evidence dell'esecuzione unattended COPY_ONLY per AP-013;
-- completamento acceptance residue AP-012;
-- preparazione AP-014;
-- consolidamento knowledge graph e lineage verso AP-015;
-- futura modalità tema `system`;
-- riduzione progressiva di script inline e dipendenze dal DOM interno di Material.
-
-## 13. Processo di sviluppo
+## 10. Delivery e validation
 
 Per ogni milestone:
 
-1. verificare repository, branch, commit e portale pubblicato;
-2. individuare fonti e componenti coinvolti;
-3. proporre l'architettura;
-4. preparare il mockup quando necessario;
-5. implementare con impatto minimo;
-6. eseguire build e test applicabili;
-7. verificare assenza di regressioni;
-8. commit e push;
-9. verificare workflow GitHub Pages e sito pubblicato;
-10. aggiornare roadmap, release note, backlog e questo contesto quando necessario.
+1. applicare la mandatory reading sequence di `AI_BOOTSTRAP.md`;
+2. verificare branch, exact HEAD, diff e workflow reali;
+3. identificare authority, projection e dependency boundary;
+4. progettare e implementare soltanto lo scope approvato;
+5. aggiornare documentazione/registri proprietari;
+6. eseguire quality gate sull'exact HEAD;
+7. eseguire review ARB indipendente quando richiesta;
+8. eseguire Release Quality solo dopo ARB approval;
+9. effettuare merge con expected-head protection quando possibile;
+10. verificare i workflow sul merge SHA reale.
 
-## 14. Definition of Done
+Nessuna acceptance o readiness può essere dedotta da un commit o da workflow eseguiti su un HEAD precedente.
 
-Una modifica è completata solo quando:
+## 11. Runtime impact della closure corrente
 
-- lo stato reale del repository è stato verificato;
-- architettura e responsabilità restano coerenti;
-- non è stata introdotta duplicazione;
-- JavaScript e CSS rispettano gli standard;
-- build e test applicabili sono documentati;
-- Instant Navigation e due temi sono stati considerati;
-- collegamenti e navigazione sono coerenti;
-- commit e push sono effettivi;
-- GitHub Pages è stato verificato;
-- contesto e backlog sono aggiornati se lo stato è cambiato.
+La closure BKL-040 / PR #118 è repository-only. Non richiede comandi su PC principale o EAGLE e non modifica collector, scheduler, Safety Authority o apparati fisici.
 
-## 15. Riferimenti
+## 12. Riferimenti correnti
 
-- [Roadmap Center](../roadmap/index.md)
-- [AMP-002](../architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md)
-- [Digital StarGate Portal Vision](../architecture/digital-stargate-portal-vision.md)
-- [Architecture Center](../architecture/index.md)
-- [Documentation Center](../documentation/index.md)
-- [Scientific Platform](../scientific-platform/index.md)
-- [Platform Contracts](../developer/platform-contracts.md)
-- [Portal Publication Guidelines](../developer/portal-publication-guidelines.md)
+- `AI_BOOTSTRAP.md`
+- `docs/project/HANDOVER_2026-09-08.md`
+- `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-08.md`
+- `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
+- `docs/project/BACKLOG.md`
+- `.github/roadmap/roadmap-source.json`
+- `docs/data/roadmap.json`
+- `docs/project/TECHNICAL_DEBT.md`
+- `docs/project/DECISION_LOG.md`
+- `docs/project/BKL-040-CLOSURE-2026-09-08.md`
+- `docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md`
 
-## 16. Registro revisioni
+## 13. Registro revisioni
 
 | Versione | Data | Descrizione |
 |---|---|---|
-| 1.0 | 04/08/2026 | Prima baseline enterprise allineata alla RC1 e al backlog RC1-HF01 |
+| 1.0 | 04/08/2026 | Prima baseline enterprise allineata alla RC1 |
+| 2.0 | 08/09/2026 | Riallineamento alla continuity hierarchy corrente, foundation BKL-044/BKL-035/BKL-040, BKL-038 current, authority/projection e Safety boundaries |
