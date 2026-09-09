@@ -1,0 +1,39 @@
+name: BKL-039 F3 Governance
+
+on:
+  push:
+    branches: [main, architecture/bkl-039-f3-descriptive-performance]
+    paths:
+      - "schemas/equipment-performance-registry-f3.schema.json"
+      - "docs/data/equipment-performance-registry-f3.json"
+      - "docs/data/equipment-performance-registry-f2-fixture.json"
+      - "data/analytics/history/target-exposures.csv"
+      - "data/analytics/history/target-summary.csv"
+      - ".github/scripts/generate-equipment-performance-registry-f3.mjs"
+      - ".github/scripts/verify-equipment-performance-registry-f3.mjs"
+      - ".github/scripts/test-equipment-performance-registry-f3.mjs"
+      - "docs/architecture/telemetry/BKL-039-F3-Descriptive-Performance-Measurement-and-Aggregation-Contract.md"
+      - ".github/workflows/bkl-039-f3-governance.yml"
+  pull_request:
+    paths:
+      - "schemas/equipment-performance-registry-f3.schema.json"
+      - "docs/data/equipment-performance-registry-f3.json"
+      - "docs/data/equipment-performance-registry-f2-fixture.json"
+      - "data/analytics/history/target-exposures.csv"
+      - "data/analytics/history/target-summary.csv"
+      - ".github/scripts/generate-equipment-performance-registry-f3.mjs"
+      - ".github/scripts/verify-equipment-performance-registry-f3.mjs"
+      - ".github/scripts/test-equipment-performance-registry-f3.mjs"
+      - "docs/architecture/telemetry/BKL-039-F3-Descriptive-Performance-Measurement-and-Aggregation-Contract.md"
+      - ".github/workflows/bkl-039-f3-governance.yml"
+permissions: { contents: read }
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - { name: Checkout, uses: actions/checkout@v5 }
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with: { node-version: "22" }
+      - { name: Verify BKL-039 F3 descriptive projection, run: node .github/scripts/verify-equipment-performance-registry-f3.mjs }
+      - { name: Test BKL-039 F3 fail-closed rules, run: node --test .github/scripts/test-equipment-performance-registry-f3.mjs }
