@@ -5,7 +5,7 @@
 | Identifier | `BKL-039-F2` |
 | Capability | BKL-039 — Equipment Performance Registry |
 | Status | In Progress — F2-A |
-| Version | 0.1 |
+| Version | 0.2 |
 | Date | 2026-09-09 |
 | Accepted upstream | BKL-039 F1 merge `a5f2b6bffd2590fc6c0958fe266515ff84cc5c20` |
 | Authority | Projection only |
@@ -38,7 +38,7 @@ F2-A uses only repository-resolvable accepted source records:
 
 The initial fixture selects exactly two REGISTERED sessions, one for each currently ACTIVE operational configuration:
 
-- `2026-07-15_2026-07-16` -> `QUATTRO200_TOUPTEK294_BIN1`;
+- `2026-07-14_2026-07-15` -> `QUATTRO200_TOUPTEK294_BIN1`;
 - `2026-08-14_2026-08-15` -> `C8_QHY695A_BIN1`.
 
 The PARTIAL session `2026-08-10_2026-08-11` is deliberately excluded because its instrument metadata is unresolved by design.
@@ -61,6 +61,8 @@ Projection of an existing operational configuration row. Required semantics:
 - `authority=projection`;
 - `action_authority=NONE`.
 
+The two identity-distinction fields above are mandatory machine-readable fields in schema and fixture and must fail closed if missing or changed. They prevent the operational `configuration_id` from being silently promoted to a separately proven DSDM entity.
+
 ### 4.2 `EQUIPMENT_USAGE_OBSERVATION`
 
 Historical source-backed binding between one REGISTERED session and one existing configuration. Required semantics:
@@ -79,7 +81,7 @@ F2-A does not materialize `PERFORMANCE_MEASUREMENT`, `DESCRIPTIVE_PERFORMANCE_ST
 
 ## 5. Identity and binding invariants
 
-A future validator must fail closed when:
+The validator must fail closed when:
 
 - a usage observation references a `configuration_id` absent from the equipment registry;
 - the configuration is not present in the selected source registry row;
@@ -87,9 +89,11 @@ A future validator must fail closed when:
 - session/configuration/telescope/camera/binning differs from the source metadata row;
 - a source evidence reference is missing;
 - an identity is silently rewritten into a synthetic DSDM identifier;
+- `identity_namespace` or `dsdm_materialization_state` is missing or changed;
 - Citation or Provenance is empty/unresolvable;
 - authority differs from `projection`;
-- action authority differs from `NONE`.
+- action authority differs from `NONE`;
+- any property outside the published bounded schema is introduced.
 
 No inference from display label alone is permitted.
 
@@ -126,15 +130,16 @@ Local physical interlocks remain independent and authoritative. Historical equip
 
 ## 10. Deliverables and validation plan
 
-The bounded F2-A implementation is expected to include:
+The bounded F2-A implementation includes:
 
 - strict machine-readable schema for the two authorized record types;
 - bounded fixture containing the two source equipment identities and two source-backed usage observations;
 - positive validator resolving source registry rows, session bindings, source evidence references, Citation/Provenance and authority fields;
-- negative regression suite covering unresolved configuration, PARTIAL-session promotion, source mismatch, synthetic identity substitution, missing lineage and authority mutation;
-- Developer Foundation integration for positive and negative checks.
+- schema-derived structural enforcement for required, allowed, constant, enum, string, integer and bounded-array semantics used by this F2-A schema;
+- negative regression suite covering unresolved configuration, PARTIAL-session promotion, source mismatch, synthetic identity substitution, missing lineage, identity-distinction mutation, arbitrary unknown property and authority mutation;
+- dedicated BKL-039 F2 Governance plus Developer Foundation execution of the same positive and negative checks.
 
-The schema/fixture/validator/tests may be implemented in the same F2-A PR, but independent ARB approval is mandatory before F3.
+Independent ARB approval remains mandatory before F3.
 
 ## 11. Migration and rollback
 
@@ -150,12 +155,14 @@ F2-A is review-ready when:
 - every usage observation resolves to a REGISTERED session metadata row using the same configuration;
 - source evidence references remain repository-resolvable;
 - no synthetic DSDM identity is created;
+- `identity_namespace=DSG_ANALYTICS_CONFIGURATION_ID` and `dsdm_materialization_state=NOT_SEPARATELY_PROVEN` are machine-readable and fail closed;
 - the operational namespace and DSDM logical semantic distinction is explicit;
 - PARTIAL/unresolved sessions fail closed;
 - Citation/Provenance and authority boundaries fail closed;
+- unknown properties outside the bounded schema fail closed;
 - no performance rating/threshold/health/prediction/remediation semantics are introduced;
 - no EAGLE/runtime/Safety Authority change occurs;
-- positive and negative validation is integrated into CI;
+- positive and negative validation is integrated into dedicated CI and Developer Foundation;
 - exact-head CI is green;
 - independent ARB approves before F3 begins.
 
