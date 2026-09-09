@@ -23,11 +23,12 @@ test('repository discovery is genuinely multi-session and preserves accepted LDN
   assert.equal(ldn.statistics.find(s=>s.statistic_type==='SAMPLE_STDDEV')?.value,0.5771);
 });
 
-test('currently source-qualified M 27 populations are discovered without hard-coded counts',()=>{
+test('currently source-qualified M 27 populations are discovered and unresolved registered M 27 evidence stays excluded',()=>{
   const r=discoverRepository();
   const m27=r.eligible_populations.filter(p=>p.target_name==='M 27'&&p.configuration_id==='C8_QHY695A_BIN1');
   assert.ok(m27.length>0,'no eligible M 27 population discovered');
-  assert.ok(m27.some(p=>p.session_id==='2026-08-14_2026-08-15'),'registered 2026-08-14 M 27 population not discovered');
+  assert.ok(m27.some(p=>p.session_id==='2026-08-15_2026-08-16'),'eligible 2026-08-15 M 27 population not discovered');
+  assert.ok(r.exclusions.some(e=>e.session_id==='2026-08-14_2026-08-15'&&e.target_name==='M 27'&&e.filter_name==='L-Pro'&&e.reason==='FWHM_SOURCE_VALUE_UNRESOLVED'),'registered M 27 population with unresolved FWHM must remain excluded');
   for(const p of m27){assert.ok(p.measurement_count>0);assert.equal(p.unit_semantics,'SOURCE_NATIVE_UNCALIBRATED');assert.equal(p.angular_calibration_state,'NOT_PROVEN');assert.equal(p.action_authority,'NONE');}
 });
 
@@ -56,7 +57,7 @@ test('summary count mismatch excludes the affected population without suppressin
 
 test('missing FWHM source token excludes only the affected population',()=>{
   const f=fixture();
-  f.exposureText=f.exposureText.replace('_FWHM_8.45_','_NOFWHM_8.45_');
+  f.exposureText=f.exposureText.replaceAll('_FWHM_8.45_','_NOFWHM_8.45_');
   const r=discoverFromTexts(f);
   assert.ok(r.exclusions.some(e=>e.session_id==='2026-07-14_2026-07-15'&&e.reason==='FWHM_SOURCE_VALUE_UNRESOLVED'));
   assert.ok(r.eligible_populations.some(p=>p.target_name==='M 27'));
