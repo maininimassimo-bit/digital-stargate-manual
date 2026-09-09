@@ -19,7 +19,8 @@ on:
       - '.github/workflows/bkl-039-f5-governance.yml'
   pull_request:
     paths: *f5paths
-permissions: { contents: read }
+permissions:
+  contents: write
 jobs:
   f5:
     runs-on: ubuntu-latest
@@ -56,3 +57,17 @@ jobs:
             docs/data/equipment-performance-registry-f3-multisession.json
             docs/data/equipment-performance-registry-f5-collection.json
           if-no-files-found: error
+      - name: Materialize generated projections on feature branch
+        if: github.event_name == 'push' && github.ref_name == 'architecture/bkl-039-f5-dynamic-multisession-registry'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/data/equipment-performance-registry-f3-multisession.json docs/data/equipment-performance-registry-f5-collection.json
+          if git diff --cached --quiet; then
+            echo 'Generated F5 projections already materialized.'
+            exit 0
+          fi
+          git commit -m 'chore(bkl-039): materialize F5 generated projections'
+          git push origin HEAD:architecture/bkl-039-f5-dynamic-multisession-registry
