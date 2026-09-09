@@ -1,0 +1,34 @@
+name: BKL-045 F3 Governance
+
+on:
+  pull_request:
+    paths:
+      - 'docs/contracts/pixinsight-workflow-provenance.schema.json'
+      - '.github/scripts/pixinsight-workflow-provenance.mjs'
+      - '.github/scripts/test-pixinsight-workflow-provenance.mjs'
+      - '.github/workflows/bkl-045-f3-governance.yml'
+      - 'docs/architecture/scientific-assets/BKL-045-F3*'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/contracts/pixinsight-workflow-provenance.schema.json'
+      - '.github/scripts/pixinsight-workflow-provenance.mjs'
+      - '.github/scripts/test-pixinsight-workflow-provenance.mjs'
+      - '.github/workflows/bkl-045-f3-governance.yml'
+      - 'docs/architecture/scientific-assets/BKL-045-F3*'
+
+permissions:
+  contents: read
+
+jobs:
+  provenance-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate sidecar schema JSON
+        run: node -e "JSON.parse(require('fs').readFileSync('docs/contracts/pixinsight-workflow-provenance.schema.json','utf8')); console.log('schema JSON OK')"
+      - name: Test PixInsight workflow provenance contract
+        run: node --test .github/scripts/test-pixinsight-workflow-provenance.mjs

@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/contracts/pixinsight-workflow-provenance.schema.json",
+  "title": "Digital StarGate PixInsight Workflow Provenance Sidecar",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "sidecarId", "exportedAt", "authority", "actionAuthority", "source", "observationContext", "workflow", "capture"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "sidecarId": {"type": "string", "pattern": "^PXP-[A-Za-z0-9._:-]{8,}$", "maxLength": 128},
+    "exportedAt": {"type": "string", "format": "date-time"},
+    "authority": {"const": "processing_evidence"},
+    "actionAuthority": {"const": "NONE"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["product", "productVersion", "hostId", "workspaceId", "captureMethod"],
+      "properties": {
+        "product": {"const": "PixInsight"},
+        "productVersion": {"type": "string", "minLength": 1, "maxLength": 64},
+        "hostId": {"type": "string", "minLength": 1, "maxLength": 128},
+        "workspaceId": {"type": "string", "minLength": 1, "maxLength": 128},
+        "captureMethod": {"enum": ["PROJECT_HISTORY_EXPORT", "PROCESS_HISTORY_EXPORT", "GOVERNED_PJSR_EXPORT", "HYBRID"]},
+        "sourceLocators": {"type": "array", "maxItems": 64, "items": {"type": "string", "minLength": 1, "maxLength": 2048}}
+      }
+    },
+    "observationContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sessionId", "target"],
+      "properties": {
+        "sessionId": {"type": "string", "minLength": 1, "maxLength": 128},
+        "target": {"type": "string", "minLength": 1, "maxLength": 256},
+        "projectId": {"type": ["string", "null"], "maxLength": 128},
+        "campaignId": {"type": ["string", "null"], "maxLength": 128}
+      }
+    },
+    "workflow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["workflowId", "runId", "steps", "inputs", "outputs"],
+      "properties": {
+        "workflowId": {"type": "string", "minLength": 1, "maxLength": 128},
+        "runId": {"type": "string", "minLength": 1, "maxLength": 128},
+        "startedAt": {"type": ["string", "null"], "format": "date-time"},
+        "completedAt": {"type": ["string", "null"], "format": "date-time"},
+        "environment": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "pixInsightVersion": {"type": "string", "maxLength": 64},
+            "platform": {"type": "string", "maxLength": 128},
+            "modules": {"type": "array", "maxItems": 256, "items": {"type": "string", "maxLength": 256}}
+          }
+        },
+        "steps": {"type": "array", "maxItems": 2048, "items": {"$ref": "#/$defs/step"}},
+        "inputs": {"type": "array", "maxItems": 4096, "items": {"$ref": "#/$defs/assetRef"}},
+        "outputs": {"type": "array", "maxItems": 4096, "items": {"$ref": "#/$defs/assetRef"}}
+      }
+    },
+    "capture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["completeness", "limitations"],
+      "properties": {
+        "completeness": {"enum": ["COMPLETE", "PARTIAL", "UNAVAILABLE"]},
+        "limitations": {"type": "array", "maxItems": 256, "items": {"type": "string", "minLength": 1, "maxLength": 1024}},
+        "observedStepCount": {"type": "integer", "minimum": 0},
+        "declaredStepCount": {"type": "integer", "minimum": 0}
+      }
+    }
+  },
+  "$defs": {
+    "assetRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reference", "resolutionState"],
+      "properties": {
+        "reference": {"type": "string", "minLength": 1, "maxLength": 2048},
+        "resolutionState": {"enum": ["RESOLVED", "UNRESOLVED"]},
+        "assetId": {"type": ["string", "null"], "maxLength": 128}
+      }
+    },
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stepId", "ordinal", "processId", "evidenceClass", "parameters", "sourceLocators"],
+      "properties": {
+        "stepId": {"type": "string", "minLength": 1, "maxLength": 128},
+        "ordinal": {"type": "integer", "minimum": 1},
+        "processId": {"type": "string", "minLength": 1, "maxLength": 256},
+        "displayName": {"type": ["string", "null"], "maxLength": 256},
+        "processVersion": {"type": ["string", "null"], "maxLength": 128},
+        "evidenceClass": {"enum": ["OBSERVED", "DECLARED"]},
+        "capturedAt": {"type": ["string", "null"], "format": "date-time"},
+        "parameters": {"type": "object", "maxProperties": 2048},
+        "sourceLocators": {"type": "array", "maxItems": 64, "items": {"type": "string", "minLength": 1, "maxLength": 2048}},
+        "notes": {"type": ["string", "null"], "maxLength": 4096},
+        "declaredBy": {"type": ["string", "null"], "maxLength": 256},
+        "declaredAt": {"type": ["string", "null"], "format": "date-time"},
+        "inputRefs": {"type": "array", "maxItems": 512, "items": {"type": "string", "maxLength": 2048}},
+        "outputRefs": {"type": "array", "maxItems": 512, "items": {"type": "string", "maxLength": 2048}},
+        "maskRefs": {"type": "array", "maxItems": 128, "items": {"type": "string", "maxLength": 2048}}
+      }
+    }
+  }
+}
