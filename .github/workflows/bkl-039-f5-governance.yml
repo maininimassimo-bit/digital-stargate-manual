@@ -48,3 +48,11 @@ jobs:
           grep -q 'generate-equipment-performance-f5-collection.mjs --write' .github/workflows/analyze-session-automatic.yml
           grep -q 'docs/data/equipment-performance-registry-f3-multisession.json' .github/workflows/analyze-session-automatic.yml
           grep -q 'docs/data/equipment-performance-registry-f5-collection.json' .github/workflows/analyze-session-automatic.yml
+      - name: Publish generated projection evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: bkl-039-f5-generated-projections
+          path: |
+            docs/data/equipment-performance-registry-f3-multisession.json
+            docs/data/equipment-performance-registry-f5-collection.json
+          if-no-files-found: error
