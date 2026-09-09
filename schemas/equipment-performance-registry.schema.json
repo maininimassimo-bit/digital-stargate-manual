@@ -54,7 +54,7 @@
         {
           "type": "object",
           "additionalProperties": false,
-          "required": ["record_id", "semantic_type", "configuration_id", "configuration_name", "telescope", "camera", "mount", "source_record_refs", "citation_refs", "provenance_refs", "quality", "authority", "action_authority", "explanation_codes"],
+          "required": ["record_id", "semantic_type", "configuration_id", "configuration_name", "telescope", "camera", "mount", "identity_namespace", "dsdm_materialization_state", "source_record_refs", "citation_refs", "provenance_refs", "quality", "authority", "action_authority", "explanation_codes"],
           "properties": {
             "record_id": true,
             "semantic_type": { "const": "EQUIPMENT_IDENTITY" },
@@ -63,6 +63,8 @@
             "telescope": { "type": "string", "minLength": 1 },
             "camera": { "type": "string", "minLength": 1 },
             "mount": { "type": "string", "minLength": 1 },
+            "identity_namespace": { "const": "DSG_ANALYTICS_CONFIGURATION_ID" },
+            "dsdm_materialization_state": { "const": "NOT_SEPARATELY_PROVEN" },
             "source_record_refs": true,
             "citation_refs": true,
             "provenance_refs": true,
