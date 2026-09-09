@@ -1,0 +1,1135 @@
+{
+  "schema_version": "1.0",
+  "component": "DSG.EquipmentPerformanceRegistry.F5.CollectionReadModel",
+  "authority": "projection",
+  "action_authority": "NONE",
+  "source_contract": {
+    "f3_projection": "docs/data/equipment-performance-registry-f3-multisession.json",
+    "f5_contract": "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md"
+  },
+  "population_count": 5,
+  "views": [
+    {
+      "population_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ",
+      "configuration_id": "QUATTRO200_TOUPTEK294_BIN1",
+      "session_id": "2026-07-14_2026-07-15",
+      "target_name": "LDN 1320",
+      "filter_name": "LPRO",
+      "frame_type": "LIGHT",
+      "metric_name": "FWHM",
+      "measurement_count": 19,
+      "coverage": "COMPLETE_FOR_DECLARED_POPULATION",
+      "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+      "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+      "angular_calibration_state": "NOT_PROVEN",
+      "measurement_method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+      "authority": "projection",
+      "action_authority": "NONE",
+      "source_record_refs": [
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=1762",
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=1837",
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=1862",
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=1883",
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=1992",
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2060",
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2124",
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2189",
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2259",
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2324",
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2389",
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2458",
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2534",
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2586",
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2656",
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2720",
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2784",
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2853",
+        "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2935"
+      ],
+      "citation_refs": [
+        "data/analytics/history/target-exposures.csv",
+        "data/analytics/history/target-summary.csv",
+        "data/analytics/metadata/session-scientific-metadata.csv"
+      ],
+      "provenance_refs": [
+        "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+        "data/sessions/2026/07/2026-07-14_2026-07-15/raw/nina/20260713-154938-3.2.0.9001.4940-202607.log"
+      ],
+      "measurements": [
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0000",
+          "sequence_number": "0000",
+          "timestamp": "2026-07-15T00:22:34.244900+02:00",
+          "value": 8.45,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=1762"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0001",
+          "sequence_number": "0001",
+          "timestamp": "2026-07-15T00:35:16.296100+02:00",
+          "value": 7.7,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=1837"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0002",
+          "sequence_number": "0002",
+          "timestamp": "2026-07-15T00:45:38.274900+02:00",
+          "value": 7.77,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=1862"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0003",
+          "sequence_number": "0003",
+          "timestamp": "2026-07-15T00:55:54.053200+02:00",
+          "value": 8.21,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=1883"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0004",
+          "sequence_number": "0004",
+          "timestamp": "2026-07-15T01:12:31.221100+02:00",
+          "value": 7.29,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=1992"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0005",
+          "sequence_number": "0005",
+          "timestamp": "2026-07-15T01:25:50.617800+02:00",
+          "value": 7.52,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2060"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0006",
+          "sequence_number": "0006",
+          "timestamp": "2026-07-15T01:39:07.929100+02:00",
+          "value": 7.79,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2124"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0007",
+          "sequence_number": "0007",
+          "timestamp": "2026-07-15T01:52:35.844200+02:00",
+          "value": 7.85,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2189"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0008",
+          "sequence_number": "0008",
+          "timestamp": "2026-07-15T02:06:17.121600+02:00",
+          "value": 9.05,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2259"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0009",
+          "sequence_number": "0009",
+          "timestamp": "2026-07-15T02:20:05.070200+02:00",
+          "value": 8.22,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2324"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0010",
+          "sequence_number": "0010",
+          "timestamp": "2026-07-15T02:33:52.010100+02:00",
+          "value": 7.24,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2389"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0011",
+          "sequence_number": "0011",
+          "timestamp": "2026-07-15T02:47:26.773800+02:00",
+          "value": 6.96,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2458"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0012",
+          "sequence_number": "0012",
+          "timestamp": "2026-07-15T03:00:56.810500+02:00",
+          "value": 7.45,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2534"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0013",
+          "sequence_number": "0013",
+          "timestamp": "2026-07-15T03:14:08.856100+02:00",
+          "value": 7.63,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2586"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0014",
+          "sequence_number": "0014",
+          "timestamp": "2026-07-15T03:27:35.869500+02:00",
+          "value": 7.21,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2656"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0015",
+          "sequence_number": "0015",
+          "timestamp": "2026-07-15T03:40:57.397200+02:00",
+          "value": 7.15,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2720"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0016",
+          "sequence_number": "0016",
+          "timestamp": "2026-07-15T03:54:12.578800+02:00",
+          "value": 7.04,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2784"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0017",
+          "sequence_number": "0017",
+          "timestamp": "2026-07-15T04:07:44.822500+02:00",
+          "value": 6.78,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2853"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0018",
+          "sequence_number": "0018",
+          "timestamp": "2026-07-15T04:22:47.633400+02:00",
+          "value": 7.08,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-14_2026-07-15:line=2935"
+        }
+      ],
+      "statistics": [
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-S-MEAN",
+          "statistic_type": "MEAN",
+          "value": 7.5995,
+          "method_id": "BKL039-F3-FWHM-MEAN-V1",
+          "sample_count": 19
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-S-MINIMUM",
+          "statistic_type": "MINIMUM",
+          "value": 6.78,
+          "method_id": "BKL039-F3-FWHM-MIN-V1",
+          "sample_count": 19
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-S-MAXIMUM",
+          "statistic_type": "MAXIMUM",
+          "value": 9.05,
+          "method_id": "BKL039-F3-FWHM-MAX-V1",
+          "sample_count": 19
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ-S-SAMPLE_STDDEV",
+          "statistic_type": "SAMPLE_STDDEV",
+          "value": 0.5771,
+          "method_id": "BKL039-F3-FWHM-SAMPLE-STDDEV-V1",
+          "sample_count": 19
+        }
+      ],
+      "limitations": [
+        "SOURCE_NATIVE_FWHM_UNIT_IS_NOT_PHYSICALLY_CALIBRATED",
+        "NO_EQUIPMENT_HEALTH_RANKING_THRESHOLD_OR_RECOMMENDATION",
+        "HISTORICAL_READ_ONLY_PROJECTION_NOT_SAFETY_AUTHORITY"
+      ]
+    },
+    {
+      "population_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ",
+      "configuration_id": "QUATTRO200_TOUPTEK294_BIN1",
+      "session_id": "2026-07-15_2026-07-16",
+      "target_name": "LDN 1320",
+      "filter_name": "LPRO",
+      "frame_type": "LIGHT",
+      "metric_name": "FWHM",
+      "measurement_count": 32,
+      "coverage": "COMPLETE_FOR_DECLARED_POPULATION",
+      "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+      "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+      "angular_calibration_state": "NOT_PROVEN",
+      "measurement_method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+      "authority": "projection",
+      "action_authority": "NONE",
+      "source_record_refs": [
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=422",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=443",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=468",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=489",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=510",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=579",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=600",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=621",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=646",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=667",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=688",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=713",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=734",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=769",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=795",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=816",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=837",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=862",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=900",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=921",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=946",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=967",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=988",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=1013",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=1034",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=1064",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=1114",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=1139",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=1160",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=1181",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=1206",
+        "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=1279"
+      ],
+      "citation_refs": [
+        "data/analytics/history/target-exposures.csv",
+        "data/analytics/history/target-summary.csv",
+        "data/analytics/metadata/session-scientific-metadata.csv"
+      ],
+      "provenance_refs": [
+        "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+        "data/sessions/2026/07/2026-07-15_2026-07-16/raw/nina/20260715-154048-3.2.0.9001.6864-202607.log"
+      ],
+      "measurements": [
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0101",
+          "sequence_number": "0101",
+          "timestamp": "2026-07-15T22:57:10.508600+02:00",
+          "value": 6.21,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=422"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0102",
+          "sequence_number": "0102",
+          "timestamp": "2026-07-15T23:07:43.780700+02:00",
+          "value": 6.24,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=443"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0103",
+          "sequence_number": "0103",
+          "timestamp": "2026-07-15T23:18:12.385200+02:00",
+          "value": 6.39,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=468"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0104",
+          "sequence_number": "0104",
+          "timestamp": "2026-07-15T23:28:28.619100+02:00",
+          "value": 6.49,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=489"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0105",
+          "sequence_number": "0105",
+          "timestamp": "2026-07-15T23:38:52.322800+02:00",
+          "value": 6.48,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=510"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0106",
+          "sequence_number": "0106",
+          "timestamp": "2026-07-15T23:52:17.837100+02:00",
+          "value": 7.85,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=579"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0107",
+          "sequence_number": "0107",
+          "timestamp": "2026-07-16T00:02:43.145100+02:00",
+          "value": 7.51,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=600"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0108",
+          "sequence_number": "0108",
+          "timestamp": "2026-07-16T00:13:06.571300+02:00",
+          "value": 6.73,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=621"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0109",
+          "sequence_number": "0109",
+          "timestamp": "2026-07-16T00:23:28.943400+02:00",
+          "value": 6.74,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=646"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0110",
+          "sequence_number": "0110",
+          "timestamp": "2026-07-16T00:33:56.201600+02:00",
+          "value": 6.34,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=667"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0111",
+          "sequence_number": "0111",
+          "timestamp": "2026-07-16T00:44:22.996700+02:00",
+          "value": 6.27,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=688"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0112",
+          "sequence_number": "0112",
+          "timestamp": "2026-07-16T00:55:00.302200+02:00",
+          "value": 6.52,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=713"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0113",
+          "sequence_number": "0113",
+          "timestamp": "2026-07-16T01:05:26.539500+02:00",
+          "value": 6.58,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=734"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0114",
+          "sequence_number": "0114",
+          "timestamp": "2026-07-16T01:16:07.079900+02:00",
+          "value": 7.82,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=769"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0115",
+          "sequence_number": "0115",
+          "timestamp": "2026-07-16T01:26:40.169100+02:00",
+          "value": 7.03,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=795"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0116",
+          "sequence_number": "0116",
+          "timestamp": "2026-07-16T01:36:56.846600+02:00",
+          "value": 6.76,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=816"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0117",
+          "sequence_number": "0117",
+          "timestamp": "2026-07-16T01:47:26.428700+02:00",
+          "value": 6.55,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=837"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0118",
+          "sequence_number": "0118",
+          "timestamp": "2026-07-16T01:57:44.611000+02:00",
+          "value": 6.64,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=862"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0119",
+          "sequence_number": "0119",
+          "timestamp": "2026-07-16T02:09:47.046000+02:00",
+          "value": 7.13,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=900"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0120",
+          "sequence_number": "0120",
+          "timestamp": "2026-07-16T02:20:15.548700+02:00",
+          "value": 7,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=921"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0121",
+          "sequence_number": "0121",
+          "timestamp": "2026-07-16T02:30:34.192000+02:00",
+          "value": 6.49,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=946"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0122",
+          "sequence_number": "0122",
+          "timestamp": "2026-07-16T02:41:08.595800+02:00",
+          "value": 6.71,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=967"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0123",
+          "sequence_number": "0123",
+          "timestamp": "2026-07-16T02:51:47.306100+02:00",
+          "value": 6.05,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=988"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0124",
+          "sequence_number": "0124",
+          "timestamp": "2026-07-16T03:02:06.561200+02:00",
+          "value": 6.18,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=1013"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0125",
+          "sequence_number": "0125",
+          "timestamp": "2026-07-16T03:12:22.075400+02:00",
+          "value": 6.31,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=1034"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0126",
+          "sequence_number": "0126",
+          "timestamp": "2026-07-16T03:22:51.371300+02:00",
+          "value": 6.56,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=1064"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0127",
+          "sequence_number": "0127",
+          "timestamp": "2026-07-16T03:39:49.534700+02:00",
+          "value": 5.97,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=1114"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0128",
+          "sequence_number": "0128",
+          "timestamp": "2026-07-16T03:50:33.180600+02:00",
+          "value": 5.91,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=1139"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0129",
+          "sequence_number": "0129",
+          "timestamp": "2026-07-16T04:00:49.882800+02:00",
+          "value": 5.86,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=1160"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0130",
+          "sequence_number": "0130",
+          "timestamp": "2026-07-16T04:11:11.742200+02:00",
+          "value": 5.88,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=1181"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0131",
+          "sequence_number": "0131",
+          "timestamp": "2026-07-16T04:21:39.055800+02:00",
+          "value": 6.08,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=1206"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0132",
+          "sequence_number": "0132",
+          "timestamp": "2026-07-16T04:31:55.759800+02:00",
+          "value": 6.02,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-15_2026-07-16:line=1279"
+        }
+      ],
+      "statistics": [
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-S-MEAN",
+          "statistic_type": "MEAN",
+          "value": 6.5406,
+          "method_id": "BKL039-F3-FWHM-MEAN-V1",
+          "sample_count": 32
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-S-MINIMUM",
+          "statistic_type": "MINIMUM",
+          "value": 5.86,
+          "method_id": "BKL039-F3-FWHM-MIN-V1",
+          "sample_count": 32
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-S-MAXIMUM",
+          "statistic_type": "MAXIMUM",
+          "value": 7.85,
+          "method_id": "BKL039-F3-FWHM-MAX-V1",
+          "sample_count": 32
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNV8yMDI2LTA3LTE2fExETiAxMzIwfExQUk98TElHSFR8RldITQ-S-SAMPLE_STDDEV",
+          "statistic_type": "SAMPLE_STDDEV",
+          "value": 0.5121,
+          "method_id": "BKL039-F3-FWHM-SAMPLE-STDDEV-V1",
+          "sample_count": 32
+        }
+      ],
+      "limitations": [
+        "SOURCE_NATIVE_FWHM_UNIT_IS_NOT_PHYSICALLY_CALIBRATED",
+        "NO_EQUIPMENT_HEALTH_RANKING_THRESHOLD_OR_RECOMMENDATION",
+        "HISTORICAL_READ_ONLY_PROJECTION_NOT_SAFETY_AUTHORITY"
+      ]
+    },
+    {
+      "population_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ",
+      "configuration_id": "QUATTRO200_TOUPTEK294_BIN1",
+      "session_id": "2026-07-16_2026-07-17",
+      "target_name": "LDN 1320",
+      "filter_name": "LPRO",
+      "frame_type": "LIGHT",
+      "metric_name": "FWHM",
+      "measurement_count": 31,
+      "coverage": "COMPLETE_FOR_DECLARED_POPULATION",
+      "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+      "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+      "angular_calibration_state": "NOT_PROVEN",
+      "measurement_method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+      "authority": "projection",
+      "action_authority": "NONE",
+      "source_record_refs": [
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=779",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=802",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=828",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=849",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=870",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=895",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=916",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=937",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=962",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=983",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1004",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1029",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1050",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1082",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1096",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1134",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1155",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1180",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1201",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1222",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1292",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1313",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1334",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1359",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1380",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1401",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1426",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1447",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1468",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1493",
+        "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1571"
+      ],
+      "citation_refs": [
+        "data/analytics/history/target-exposures.csv",
+        "data/analytics/history/target-summary.csv",
+        "data/analytics/metadata/session-scientific-metadata.csv"
+      ],
+      "provenance_refs": [
+        "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+        "data/sessions/2026/07/2026-07-16_2026-07-17/raw/nina/20260716-164709-3.2.0.9001.8236-202607.log"
+      ],
+      "measurements": [
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0133",
+          "sequence_number": "0133",
+          "timestamp": "2026-07-16T23:07:09.755100+02:00",
+          "value": 6.37,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=779"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0134",
+          "sequence_number": "0134",
+          "timestamp": "2026-07-16T23:17:53.423100+02:00",
+          "value": 6.37,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=802"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0135",
+          "sequence_number": "0135",
+          "timestamp": "2026-07-16T23:28:26.570600+02:00",
+          "value": 6.32,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=828"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0136",
+          "sequence_number": "0136",
+          "timestamp": "2026-07-16T23:38:43.240300+02:00",
+          "value": 6.12,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=849"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0137",
+          "sequence_number": "0137",
+          "timestamp": "2026-07-16T23:49:09.029500+02:00",
+          "value": 6.51,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=870"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0138",
+          "sequence_number": "0138",
+          "timestamp": "2026-07-16T23:59:45.616800+02:00",
+          "value": 6.37,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=895"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0139",
+          "sequence_number": "0139",
+          "timestamp": "2026-07-17T00:10:10.584900+02:00",
+          "value": 6.15,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=916"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0140",
+          "sequence_number": "0140",
+          "timestamp": "2026-07-17T00:20:33.770300+02:00",
+          "value": 6.43,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=937"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0141",
+          "sequence_number": "0141",
+          "timestamp": "2026-07-17T00:30:57.663900+02:00",
+          "value": 6.9,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=962"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0142",
+          "sequence_number": "0142",
+          "timestamp": "2026-07-17T00:41:29.275700+02:00",
+          "value": 6.53,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=983"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0143",
+          "sequence_number": "0143",
+          "timestamp": "2026-07-17T00:52:05.684500+02:00",
+          "value": 6.31,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1004"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0144",
+          "sequence_number": "0144",
+          "timestamp": "2026-07-17T01:02:41.902500+02:00",
+          "value": 6.75,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1029"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0145",
+          "sequence_number": "0145",
+          "timestamp": "2026-07-17T01:13:13.972300+02:00",
+          "value": 6.4,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1050"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0146",
+          "sequence_number": "0146",
+          "timestamp": "2026-07-17T01:23:54.661500+02:00",
+          "value": 6.41,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1082"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0147",
+          "sequence_number": "0147",
+          "timestamp": "2026-07-17T01:34:08.826500+02:00",
+          "value": 6.28,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1096"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0148",
+          "sequence_number": "0148",
+          "timestamp": "2026-07-17T01:45:53.011200+02:00",
+          "value": 6.85,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1134"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0149",
+          "sequence_number": "0149",
+          "timestamp": "2026-07-17T01:56:24.944100+02:00",
+          "value": 6.6,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1155"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0150",
+          "sequence_number": "0150",
+          "timestamp": "2026-07-17T02:06:41.456900+02:00",
+          "value": 6.35,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1180"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0151",
+          "sequence_number": "0151",
+          "timestamp": "2026-07-17T02:17:21.059500+02:00",
+          "value": 6.64,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1201"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0152",
+          "sequence_number": "0152",
+          "timestamp": "2026-07-17T02:27:50.676100+02:00",
+          "value": 6.92,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1222"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0153",
+          "sequence_number": "0153",
+          "timestamp": "2026-07-17T02:41:16.672700+02:00",
+          "value": 6.44,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1292"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0154",
+          "sequence_number": "0154",
+          "timestamp": "2026-07-17T02:51:48.339700+02:00",
+          "value": 6.25,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1313"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0155",
+          "sequence_number": "0155",
+          "timestamp": "2026-07-17T03:02:27.248900+02:00",
+          "value": 6.26,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1334"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0156",
+          "sequence_number": "0156",
+          "timestamp": "2026-07-17T03:12:46.791200+02:00",
+          "value": 6.31,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1359"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0157",
+          "sequence_number": "0157",
+          "timestamp": "2026-07-17T03:23:03.794100+02:00",
+          "value": 6.1,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1380"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0158",
+          "sequence_number": "0158",
+          "timestamp": "2026-07-17T03:33:36.705700+02:00",
+          "value": 5.89,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1401"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0159",
+          "sequence_number": "0159",
+          "timestamp": "2026-07-17T03:44:10.663200+02:00",
+          "value": 5.98,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1426"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0160",
+          "sequence_number": "0160",
+          "timestamp": "2026-07-17T03:54:53.849100+02:00",
+          "value": 5.79,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1447"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0161",
+          "sequence_number": "0161",
+          "timestamp": "2026-07-17T04:05:11.393900+02:00",
+          "value": 6.14,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1468"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0162",
+          "sequence_number": "0162",
+          "timestamp": "2026-07-17T04:15:54.354600+02:00",
+          "value": 6.03,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1493"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-M-0163",
+          "sequence_number": "0163",
+          "timestamp": "2026-07-17T04:26:24.109600+02:00",
+          "value": 5.77,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-07-16_2026-07-17:line=1571"
+        }
+      ],
+      "statistics": [
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-S-MEAN",
+          "statistic_type": "MEAN",
+          "value": 6.34,
+          "method_id": "BKL039-F3-FWHM-MEAN-V1",
+          "sample_count": 31
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-S-MINIMUM",
+          "statistic_type": "MINIMUM",
+          "value": 5.77,
+          "method_id": "BKL039-F3-FWHM-MIN-V1",
+          "sample_count": 31
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-S-MAXIMUM",
+          "statistic_type": "MAXIMUM",
+          "value": 6.92,
+          "method_id": "BKL039-F3-FWHM-MAX-V1",
+          "sample_count": 31
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNl8yMDI2LTA3LTE3fExETiAxMzIwfExQUk98TElHSFR8RldITQ-S-SAMPLE_STDDEV",
+          "statistic_type": "SAMPLE_STDDEV",
+          "value": 0.2937,
+          "method_id": "BKL039-F3-FWHM-SAMPLE-STDDEV-V1",
+          "sample_count": 31
+        }
+      ],
+      "limitations": [
+        "SOURCE_NATIVE_FWHM_UNIT_IS_NOT_PHYSICALLY_CALIBRATED",
+        "NO_EQUIPMENT_HEALTH_RANKING_THRESHOLD_OR_RECOMMENDATION",
+        "HISTORICAL_READ_ONLY_PROJECTION_NOT_SAFETY_AUTHORITY"
+      ]
+    },
+    {
+      "population_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEJsdXxMSUdIVHxGV0hN",
+      "configuration_id": "C8_QHY695A_BIN1",
+      "session_id": "2026-08-15_2026-08-16",
+      "target_name": "M 27",
+      "filter_name": "Blu",
+      "frame_type": "LIGHT",
+      "metric_name": "FWHM",
+      "measurement_count": 2,
+      "coverage": "COMPLETE_FOR_DECLARED_POPULATION",
+      "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+      "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+      "angular_calibration_state": "NOT_PROVEN",
+      "measurement_method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+      "authority": "projection",
+      "action_authority": "NONE",
+      "source_record_refs": [
+        "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=2084",
+        "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=2160"
+      ],
+      "citation_refs": [
+        "data/analytics/history/target-exposures.csv",
+        "data/analytics/history/target-summary.csv",
+        "data/analytics/metadata/session-scientific-metadata.csv"
+      ],
+      "provenance_refs": [
+        "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+        "data/sessions/2026/08/2026-08-15_2026-08-16/raw/nina/20260815-204018-3.2.0.9001.6188-202608.log"
+      ],
+      "measurements": [
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEJsdXxMSUdIVHxGV0hN-M-0000",
+          "sequence_number": "0000",
+          "timestamp": "2026-08-16T05:02:04.223800+02:00",
+          "value": 5.14,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=2084"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEJsdXxMSUdIVHxGV0hN-M-0001",
+          "sequence_number": "0001",
+          "timestamp": "2026-08-16T05:12:29.360800+02:00",
+          "value": 5.23,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=2160"
+        }
+      ],
+      "statistics": [
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEJsdXxMSUdIVHxGV0hN-S-MEAN",
+          "statistic_type": "MEAN",
+          "value": 5.185,
+          "method_id": "BKL039-F3-FWHM-MEAN-V1",
+          "sample_count": 2
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEJsdXxMSUdIVHxGV0hN-S-MINIMUM",
+          "statistic_type": "MINIMUM",
+          "value": 5.14,
+          "method_id": "BKL039-F3-FWHM-MIN-V1",
+          "sample_count": 2
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEJsdXxMSUdIVHxGV0hN-S-MAXIMUM",
+          "statistic_type": "MAXIMUM",
+          "value": 5.23,
+          "method_id": "BKL039-F3-FWHM-MAX-V1",
+          "sample_count": 2
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEJsdXxMSUdIVHxGV0hN-S-SAMPLE_STDDEV",
+          "statistic_type": "SAMPLE_STDDEV",
+          "value": 0.0636,
+          "method_id": "BKL039-F3-FWHM-SAMPLE-STDDEV-V1",
+          "sample_count": 2
+        }
+      ],
+      "limitations": [
+        "SOURCE_NATIVE_FWHM_UNIT_IS_NOT_PHYSICALLY_CALIBRATED",
+        "NO_EQUIPMENT_HEALTH_RANKING_THRESHOLD_OR_RECOMMENDATION",
+        "HISTORICAL_READ_ONLY_PROJECTION_NOT_SAFETY_AUTHORITY"
+      ]
+    },
+    {
+      "population_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEdyZWVufExJR0hUfEZXSE0",
+      "configuration_id": "C8_QHY695A_BIN1",
+      "session_id": "2026-08-15_2026-08-16",
+      "target_name": "M 27",
+      "filter_name": "Green",
+      "frame_type": "LIGHT",
+      "metric_name": "FWHM",
+      "measurement_count": 12,
+      "coverage": "COMPLETE_FOR_DECLARED_POPULATION",
+      "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+      "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+      "angular_calibration_state": "NOT_PROVEN",
+      "measurement_method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+      "authority": "projection",
+      "action_authority": "NONE",
+      "source_record_refs": [
+        "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=1802",
+        "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=1824",
+        "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=1850",
+        "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=1873",
+        "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=1895",
+        "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=1917",
+        "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=1939",
+        "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=1966",
+        "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=1988",
+        "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=2010",
+        "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=2032",
+        "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=2059"
+      ],
+      "citation_refs": [
+        "data/analytics/history/target-exposures.csv",
+        "data/analytics/history/target-summary.csv",
+        "data/analytics/metadata/session-scientific-metadata.csv"
+      ],
+      "provenance_refs": [
+        "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+        "data/sessions/2026/08/2026-08-15_2026-08-16/raw/nina/20260815-204018-3.2.0.9001.6188-202608.log"
+      ],
+      "measurements": [
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0000",
+          "sequence_number": "0000",
+          "timestamp": "2026-08-16T02:56:14.870400+02:00",
+          "value": 3.62,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=1802"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0001",
+          "sequence_number": "0001",
+          "timestamp": "2026-08-16T03:06:42.074600+02:00",
+          "value": 3.67,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=1824"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0002",
+          "sequence_number": "0002",
+          "timestamp": "2026-08-16T03:17:10.871800+02:00",
+          "value": 3.87,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=1850"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0003",
+          "sequence_number": "0003",
+          "timestamp": "2026-08-16T03:27:38.804800+02:00",
+          "value": 3.93,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=1873"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0004",
+          "sequence_number": "0004",
+          "timestamp": "2026-08-16T03:38:00.901600+02:00",
+          "value": 3.8,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=1895"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0005",
+          "sequence_number": "0005",
+          "timestamp": "2026-08-16T03:48:27.247200+02:00",
+          "value": 3.79,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=1917"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0006",
+          "sequence_number": "0006",
+          "timestamp": "2026-08-16T03:58:51.460200+02:00",
+          "value": 3.75,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=1939"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0007",
+          "sequence_number": "0007",
+          "timestamp": "2026-08-16T04:09:20.278500+02:00",
+          "value": 3.81,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=1966"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0008",
+          "sequence_number": "0008",
+          "timestamp": "2026-08-16T04:19:51.967700+02:00",
+          "value": 4.12,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=1988"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0009",
+          "sequence_number": "0009",
+          "timestamp": "2026-08-16T04:30:26.149900+02:00",
+          "value": 4.02,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=2010"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0010",
+          "sequence_number": "0010",
+          "timestamp": "2026-08-16T04:40:58.484500+02:00",
+          "value": 4.22,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=2032"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0011",
+          "sequence_number": "0011",
+          "timestamp": "2026-08-16T04:51:34.247300+02:00",
+          "value": 4.28,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-08-15_2026-08-16:line=2059"
+        }
+      ],
+      "statistics": [
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEdyZWVufExJR0hUfEZXSE0-S-MEAN",
+          "statistic_type": "MEAN",
+          "value": 3.9067,
+          "method_id": "BKL039-F3-FWHM-MEAN-V1",
+          "sample_count": 12
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEdyZWVufExJR0hUfEZXSE0-S-MINIMUM",
+          "statistic_type": "MINIMUM",
+          "value": 3.62,
+          "method_id": "BKL039-F3-FWHM-MIN-V1",
+          "sample_count": 12
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEdyZWVufExJR0hUfEZXSE0-S-MAXIMUM",
+          "statistic_type": "MAXIMUM",
+          "value": 4.28,
+          "method_id": "BKL039-F3-FWHM-MAX-V1",
+          "sample_count": 12
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDgtMTVfMjAyNi0wOC0xNnxNIDI3fEdyZWVufExJR0hUfEZXSE0-S-SAMPLE_STDDEV",
+          "statistic_type": "SAMPLE_STDDEV",
+          "value": 0.2121,
+          "method_id": "BKL039-F3-FWHM-SAMPLE-STDDEV-V1",
+          "sample_count": 12
+        }
+      ],
+      "limitations": [
+        "SOURCE_NATIVE_FWHM_UNIT_IS_NOT_PHYSICALLY_CALIBRATED",
+        "NO_EQUIPMENT_HEALTH_RANKING_THRESHOLD_OR_RECOMMENDATION",
+        "HISTORICAL_READ_ONLY_PROJECTION_NOT_SAFETY_AUTHORITY"
+      ]
+    }
+  ],
+  "exclusions": [
+    {
+      "scope": "POPULATION",
+      "session_id": "2026-08-14_2026-08-15",
+      "target_name": "M 27",
+      "configuration_id": "C8_QHY695A_BIN1",
+      "filter_name": "L-Pro",
+      "frame_type": "LIGHT",
+      "reason": "FWHM_SOURCE_VALUE_UNRESOLVED",
+      "source_log_line": 414
+    },
+    {
+      "scope": "POPULATION",
+      "session_id": "2026-08-15_2026-08-16",
+      "target_name": "M 27",
+      "configuration_id": "C8_QHY695A_BIN1",
+      "filter_name": "Red",
+      "frame_type": "LIGHT",
+      "reason": "FWHM_SOURCE_VALUE_UNRESOLVED",
+      "source_log_line": 568
+    },
+    {
+      "scope": "SESSION",
+      "session_id": "2026-08-10_2026-08-11",
+      "target_name": "M 27",
+      "reason": "METADATA_NOT_REGISTERED",
+      "metadata_state": "PARTIAL"
+    }
+  ]
+}
