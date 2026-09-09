@@ -49,6 +49,13 @@ const stats=[
 ].map(([type,value,method])=>({record_id:`EPR-F3-FWHM-${SESSION}-${type}`,semantic_type:'DESCRIPTIVE_PERFORMANCE_STATISTIC',...common,statistic_type:type,value:round(value),method_id:method,sample_count:values.length,population_selector:POPULATION,coverage:'COMPLETE_FOR_DECLARED_POPULATION',source_record_refs:sourceRefs,quality:'COMPLETE_FOR_DECLARED_POPULATION',explanation_codes:['DESCRIPTIVE_STATISTIC_ONLY','NO_HEALTH_OR_RANKING_SEMANTICS','ANGULAR_CALIBRATION_NOT_PROVEN']}));
 const projection={schema_version:'1.1',component:'DSG.EquipmentPerformanceRegistry.F3',authority:'projection',action_authority:'NONE',source_contract:{f2_fixture:f2Path,target_exposures:exposurePath,target_summary:summaryPath,configuration_id:CONFIG,session_id:SESSION,target_name:TARGET,filter_name:FILTER,frame_type:'LIGHT',unit:UNIT,unit_semantics:'SOURCE_NATIVE_UNCALIBRATED',angular_calibration_state:'NOT_PROVEN'},records:[...records,...stats]};
 const rendered=JSON.stringify(projection,null,2)+'\n';
-if(process.argv.includes('--write')){ fs.writeFileSync(path.join(root,outputPath),rendered); console.log(`Wrote ${outputPath}`); }
-else if(process.argv.includes('--check')){ if(!fs.existsSync(path.join(root,outputPath))||read(outputPath)!==rendered) fail('generated projection is stale; run with --write'); console.log('BKL-039 F3 generated projection check OK'); }
-else process.stdout.write(rendered);
+if(process.argv.includes('--write')){
+  fs.writeFileSync(path.join(root,outputPath),rendered);
+  console.log(`Wrote ${outputPath}`);
+}else if(process.argv.includes('--check')){
+  if(!fs.existsSync(path.join(root,outputPath))) fail('generated projection is missing; run with --write');
+  let existing;
+  try { existing=JSON.parse(read(outputPath)); } catch(error) { fail(`generated projection is not valid JSON: ${error.message}`); }
+  if(JSON.stringify(existing)!==JSON.stringify(projection)) fail('generated projection is stale; run with --write');
+  console.log('BKL-039 F3 generated projection check OK');
+}else process.stdout.write(rendered);
