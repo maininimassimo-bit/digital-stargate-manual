@@ -1,0 +1,37 @@
+name: BKL-039 F2 Governance
+
+on:
+  push:
+    branches: [main, architecture/bkl-039-f2-machine-readable-registry]
+    paths:
+      - "schemas/equipment-performance-registry.schema.json"
+      - "docs/data/equipment-performance-registry-f2-fixture.json"
+      - "data/analytics/configurations/equipment-registry.csv"
+      - "data/analytics/metadata/session-scientific-metadata.csv"
+      - ".github/scripts/verify-equipment-performance-registry-f2.mjs"
+      - ".github/scripts/test-equipment-performance-registry-f2.mjs"
+      - "docs/architecture/telemetry/BKL-039-F2-Machine-Readable-Registry-Contract-and-Bounded-Fixture.md"
+      - ".github/workflows/bkl-039-f2-governance.yml"
+  pull_request:
+    paths:
+      - "schemas/equipment-performance-registry.schema.json"
+      - "docs/data/equipment-performance-registry-f2-fixture.json"
+      - "data/analytics/configurations/equipment-registry.csv"
+      - "data/analytics/metadata/session-scientific-metadata.csv"
+      - ".github/scripts/verify-equipment-performance-registry-f2.mjs"
+      - ".github/scripts/test-equipment-performance-registry-f2.mjs"
+      - "docs/architecture/telemetry/BKL-039-F2-Machine-Readable-Registry-Contract-and-Bounded-Fixture.md"
+      - ".github/workflows/bkl-039-f2-governance.yml"
+
+permissions: { contents: read }
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - { name: Checkout, uses: actions/checkout@v5 }
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with: { node-version: "22" }
+      - { name: Verify BKL-039 F2 bounded registry fixture, run: node .github/scripts/verify-equipment-performance-registry-f2.mjs }
+      - { name: Test BKL-039 F2 fail-closed rules, run: node --test .github/scripts/test-equipment-performance-registry-f2.mjs }

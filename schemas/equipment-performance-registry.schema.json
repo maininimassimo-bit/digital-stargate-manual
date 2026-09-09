@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/schemas/equipment-performance-registry.schema.json",
+  "title": "Digital StarGate Equipment Performance Registry F2-A",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "component", "authority", "action_authority", "source_contract", "records"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "component": { "const": "DSG.EquipmentPerformanceRegistry.F2" },
+    "authority": { "const": "projection" },
+    "action_authority": { "const": "NONE" },
+    "source_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["equipment_registry", "session_metadata", "identity_namespace"],
+      "properties": {
+        "equipment_registry": { "const": "data/analytics/configurations/equipment-registry.csv" },
+        "session_metadata": { "const": "data/analytics/metadata/session-scientific-metadata.csv" },
+        "identity_namespace": { "const": "configuration_id" }
+      }
+    },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          { "$ref": "#/$defs/equipmentIdentity" },
+          { "$ref": "#/$defs/equipmentUsageObservation" }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "base": {
+      "type": "object",
+      "required": ["record_id", "semantic_type", "configuration_id", "source_record_refs", "citation_refs", "provenance_refs", "quality", "authority", "action_authority", "explanation_codes"],
+      "properties": {
+        "record_id": { "type": "string", "minLength": 1 },
+        "semantic_type": { "enum": ["EQUIPMENT_IDENTITY", "EQUIPMENT_USAGE_OBSERVATION"] },
+        "configuration_id": { "type": "string", "minLength": 1 },
+        "source_record_refs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "citation_refs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "provenance_refs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "quality": { "enum": ["REGISTERED", "UNKNOWN", "PARTIAL"] },
+        "authority": { "const": "projection" },
+        "action_authority": { "const": "NONE" },
+        "explanation_codes": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "equipmentIdentity": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["record_id", "semantic_type", "configuration_id", "configuration_name", "telescope", "camera", "mount", "identity_namespace", "dsdm_materialization_state", "source_record_refs", "citation_refs", "provenance_refs", "quality", "authority", "action_authority", "explanation_codes"],
+          "properties": {
+            "record_id": true,
+            "semantic_type": { "const": "EQUIPMENT_IDENTITY" },
+            "configuration_id": true,
+            "configuration_name": { "type": "string", "minLength": 1 },
+            "telescope": { "type": "string", "minLength": 1 },
+            "camera": { "type": "string", "minLength": 1 },
+            "mount": { "type": "string", "minLength": 1 },
+            "identity_namespace": { "const": "DSG_ANALYTICS_CONFIGURATION_ID" },
+            "dsdm_materialization_state": { "const": "NOT_SEPARATELY_PROVEN" },
+            "source_record_refs": true,
+            "citation_refs": true,
+            "provenance_refs": true,
+            "quality": { "const": "REGISTERED" },
+            "authority": true,
+            "action_authority": true,
+            "explanation_codes": true
+          }
+        }
+      ]
+    },
+    "equipmentUsageObservation": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["record_id", "semantic_type", "configuration_id", "session_id", "target_name", "telescope", "camera", "binning", "source_reference", "source_record_refs", "citation_refs", "provenance_refs", "quality", "authority", "action_authority", "explanation_codes"],
+          "properties": {
+            "record_id": true,
+            "semantic_type": { "const": "EQUIPMENT_USAGE_OBSERVATION" },
+            "configuration_id": true,
+            "session_id": { "type": "string", "minLength": 1 },
+            "target_name": { "type": "string", "minLength": 1 },
+            "telescope": { "type": "string", "minLength": 1 },
+            "camera": { "type": "string", "minLength": 1 },
+            "binning": { "type": "integer", "minimum": 1 },
+            "source_reference": { "type": "string", "minLength": 1 },
+            "source_record_refs": true,
+            "citation_refs": true,
+            "provenance_refs": true,
+            "quality": { "const": "REGISTERED" },
+            "authority": true,
+            "action_authority": true,
+            "explanation_codes": true
+          }
+        }
+      ]
+    }
+  }
+}
