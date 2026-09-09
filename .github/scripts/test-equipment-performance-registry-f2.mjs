@@ -23,6 +23,11 @@ test('rejects synthetic configuration identity',()=>assert.equal(rejected(f=>{f.
 test('rejects unresolved session',()=>assert.equal(rejected(f=>{f.records[1].session_id='2099-01-01_2099-01-02';}),true));
 test('rejects PARTIAL session',()=>assert.equal(rejected(f=>{f.records[1].session_id='2026-08-10_2026-08-11';}),true));
 test('rejects equipment mismatch',()=>assert.equal(rejected(f=>{f.records[2].camera='Invented Camera';}),true));
-test('rejects performance rating field',()=>assert.equal(rejected(f=>{f.records[0].performance_rating='GOOD';}),true));
+test('rejects performance rating field as unexpected schema property',()=>assert.equal(rejected(f=>{f.records[0].performance_rating='GOOD';}),true));
+test('rejects arbitrary unexpected property',()=>assert.equal(rejected(f=>{f.records[1].unexpected_property='NOT_ALLOWED';}),true));
+test('rejects missing identity namespace',()=>assert.equal(rejected(f=>{delete f.records[0].identity_namespace;}),true));
+test('rejects changed identity namespace',()=>assert.equal(rejected(f=>{f.records[0].identity_namespace='instrumentConfigurationId';}),true));
+test('rejects missing DSDM materialization state',()=>assert.equal(rejected(f=>{delete f.records[0].dsdm_materialization_state;}),true));
+test('rejects DSDM materialization overclaim',()=>assert.equal(rejected(f=>{f.records[0].dsdm_materialization_state='MATERIALIZED';}),true));
 test('rejects unresolved provenance',()=>assert.equal(rejected(f=>{f.records[0].provenance_refs=['does/not/exist'];}),true));
 test('rejects duplicate record identity',()=>assert.equal(rejected(f=>{f.records[1].record_id=f.records[0].record_id;}),true));
