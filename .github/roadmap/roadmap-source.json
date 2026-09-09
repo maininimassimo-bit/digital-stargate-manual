@@ -3,9 +3,9 @@
   "updatedAt":"2026-09-09",
   "authority":"DSG-RGM-001",
   "projectStatus":"Attivo",
-  "currentPackage":"BKL-039",
-  "nextMilestone":"BKL-039 Equipment Performance Registry",
-  "target":"Establish the governed Equipment Performance Registry over accepted knowledge and session-history foundations, preserving evidence lineage, explainability and Safety boundaries without introducing automatic remediation authority",
+  "currentPackage":"BKL-045",
+  "nextMilestone":"BKL-045 PixInsight Workflow Provenance Plugin",
+  "target":"Establish governed PixInsight workflow provenance capture over accepted Knowledge Graph and AI Evidence foundations, preserving reproducibility, parameters and lineage without introducing autonomous processing or AI authority",
   "streams":[
     {"id":"rc2-enterprise-portal","title":"RC2 Enterprise Portal","items":[
       {"id":"WP-01","title":"Enterprise Foundation Framework","statusSource":"completion-report","evidencePath":"docs/architecture/validation/WP-01-Enterprise-Foundation-Framework-Completion-Report.md"},
@@ -44,9 +44,9 @@
       {"id":"BKL-040","title":"Night Timeline / Observatory Replay","status":"completed","note":"F1-F4 CLOSED/ACCEPTED via PR #117; final merge 80d22a255540ac582733c60dfe9bbf7807bcdf9b; post-merge Developer Foundation #1053, Docs #671, Word #1096 and Pages #712 SUCCESS."},
       {"id":"BKL-037","title":"Session Comparison & Benchmarking","status":"planned","note":"Remains planned until declared dependency BKL-045 is accepted."},
       {"id":"BKL-038","title":"Anomaly & Trend Center","status":"completed","note":"F1/F2-A/F3-A/F3-B/F4-A accepted; PR #125 merge d8249984d63455690b957156060f858eb3cc2713; closure candidate docs/project/BKL-038-CLOSURE-2026-09-09.md."},
-      {"id":"BKL-039","title":"Equipment Performance Registry","status":"active","note":"Current dependency-ready package after BKL-038 closure reconciliation."},
+      {"id":"BKL-039","title":"Equipment Performance Registry","status":"completed","note":"F4-A/F4-B/F5-A/F5-B/F5-C/F5-D accepted; PR #132 merge 651fc340fbb5e58ca36409d574bdd09c3ae55790; final closure docs/project/BKL-039-CLOSURE-2026-09-09.md."},
       {"id":"BKL-041","title":"Scientific Data Quality Score","status":"planned"},
-      {"id":"BKL-045","title":"PixInsight Workflow Provenance Plugin","status":"planned","note":"Governed PixInsight extension for reproducible post-processing provenance."},
+      {"id":"BKL-045","title":"PixInsight Workflow Provenance Plugin","status":"active","note":"Current dependency-ready package after BKL-039 closure; governed PixInsight extension for reproducible post-processing provenance."},
       {"id":"BKL-046","title":"AI Post-Processing Assistant for PixInsight","status":"planned","note":"Advisory AI over processing provenance; human approval retained."},
       {"id":"BKL-031","title":"Observation Planner intelligente","status":"planned"},
       {"id":"BKL-032","title":"Session Readiness / Go-No-Go Decision Support","status":"planned"},
@@ -76,6 +76,7 @@
     {"id":"M-BKL035","itemRef":"BKL-035","title":"BKL-035 Target Knowledge Base","date":"2026-09-07","description":"F1-F4 closed/accepted after target identity, deterministic reconciliation, consumer read model, ARB/RQ and post-merge CI.","image":null},
     {"id":"M-BKL040","itemRef":"BKL-040","title":"BKL-040 Night Timeline / Observatory Replay","date":"2026-09-08","description":"F1-F4 CLOSED/ACCEPTED after bounded historical timeline, deterministic multi-source synchronization, consumer preservation, ARB/RQ and post-merge CI.","image":null},
     {"id":"M-BKL038","itemRef":"BKL-038","title":"BKL-038 Anomaly & Trend Center","date":"2026-09-09","description":"F1/F2-A/F3-A/F3-B/F4-A accepted; final F4-A merge d8249984d63455690b957156060f858eb3cc2713 with exact-SHA post-merge governance green.","image":null},
+    {"id":"M-BKL039","itemRef":"BKL-039","title":"BKL-039 Equipment Performance Registry","date":"2026-09-09","description":"F4-A/F4-B/F5-A/F5-B/F5-C/F5-D CLOSED/ACCEPTED after dynamic multi-session registry, persisted read models, exact-head CI, protected merge and post-merge verification.","image":null},
     {"id":"M-PIXINSIGHT","itemRef":"BKL-045","title":"PixInsight Workflow Provenance","date":"2026-08-30","description":"Approved future processing provenance capability.","image":null},
     {"id":"M-PIXINSIGHT-AI","itemRef":"BKL-046","title":"AI-assisted PixInsight Processing","date":"2026-08-30","description":"Approved advisory AI capability after provenance foundation.","image":null}
   ]
