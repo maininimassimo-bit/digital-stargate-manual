@@ -1,0 +1,32 @@
+name: BKL-045 F5 Governance
+
+on:
+  pull_request:
+    paths:
+      - '.github/scripts/pixinsight-provenance-read-model.mjs'
+      - '.github/scripts/test-pixinsight-provenance-read-model.mjs'
+      - '.github/workflows/bkl-045-f5-governance.yml'
+      - 'docs/architecture/scientific-assets/BKL-045-F5*'
+      - 'docs/architecture/scientific-assets/evidence/BKL-045-F3B-PXP-*.json'
+  push:
+    branches: [main]
+    paths:
+      - '.github/scripts/pixinsight-provenance-read-model.mjs'
+      - '.github/scripts/test-pixinsight-provenance-read-model.mjs'
+      - '.github/workflows/bkl-045-f5-governance.yml'
+      - 'docs/architecture/scientific-assets/BKL-045-F5*'
+      - 'docs/architecture/scientific-assets/evidence/BKL-045-F3B-PXP-*.json'
+
+permissions:
+  contents: read
+
+jobs:
+  provenance-consumer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test read-only PixInsight provenance consumer
+        run: node --test .github/scripts/test-pixinsight-provenance-read-model.mjs
