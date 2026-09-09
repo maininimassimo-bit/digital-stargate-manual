@@ -76,6 +76,7 @@ jobs:
       - { name: Test PixInsight Synchronization Ledger, run: node --test .github/scripts/test-pixinsight-ledger.mjs }
       - { name: Test PixInsight Read-Only Reconciliation, run: node --test .github/scripts/test-pixinsight-reconciliation.mjs }
       - { name: Test PixInsight Processing Projection, run: node --test .github/scripts/test-pixinsight-processing-projection.mjs }
+      - { name: Test PixInsight Provenance Sidecar Adapter, run: node --test .github/scripts/test-pixinsight-provenance-to-manifest.mjs }
       - name: Setup Python
         uses: actions/setup-python@v6
         with: { python-version: "3.13", cache: pip }
