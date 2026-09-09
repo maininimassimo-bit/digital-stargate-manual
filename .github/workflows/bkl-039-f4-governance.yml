@@ -46,14 +46,14 @@ jobs:
         run: node .github/scripts/verify-equipment-performance-registry-f4-read-model.mjs
       - name: Run F4 negative regression suite
         run: node .github/scripts/test-equipment-performance-registry-f4-read-model.mjs
-      - name: Guard F4-B browser authority and semantic boundary
+      - name: Guard browser authority and semantic boundary
         run: |
-          grep -F "data.component !== 'DSG.EquipmentPerformanceRegistry.F4.ReadModel'" docs/javascripts/equipment-performance.js
-          grep -F "data.authority !== 'projection'" docs/javascripts/equipment-performance.js
-          grep -F "data.action_authority !== 'NONE'" docs/javascripts/equipment-performance.js
-          grep -F "v.unit !== 'NINA_FILENAME_FWHM_SOURCE_UNIT'" docs/javascripts/equipment-performance.js
-          grep -F "v.unit_semantics !== 'SOURCE_NATIVE_UNCALIBRATED'" docs/javascripts/equipment-performance.js
-          grep -F "v.angular_calibration_state !== 'NOT_PROVEN'" docs/javascripts/equipment-performance.js
-          grep -F "v.measurements.length !== v.measurement_count" docs/javascripts/equipment-performance.js
+          grep -F "DSG.EquipmentPerformanceRegistry.F5.CollectionReadModel" docs/javascripts/equipment-performance.js
+          grep -F "data.authority!=='projection'" docs/javascripts/equipment-performance.js
+          grep -F "data.action_authority!=='NONE'" docs/javascripts/equipment-performance.js
+          grep -F "v.unit==='NINA_FILENAME_FWHM_SOURCE_UNIT'" docs/javascripts/equipment-performance.js
+          grep -F "v.unit_semantics==='SOURCE_NATIVE_UNCALIBRATED'" docs/javascripts/equipment-performance.js
+          grep -F "v.angular_calibration_state==='NOT_PROVEN'" docs/javascripts/equipment-performance.js
+          grep -F "v.measurements.length===v.measurement_count" docs/javascripts/equipment-performance.js
           grep -F "NO_EQUIPMENT_HEALTH_RANKING_THRESHOLD_OR_RECOMMENDATION" docs/javascripts/equipment-performance.js
           grep -F "HISTORICAL_READ_ONLY_PROJECTION_NOT_SAFETY_AUTHORITY" docs/javascripts/equipment-performance.js
