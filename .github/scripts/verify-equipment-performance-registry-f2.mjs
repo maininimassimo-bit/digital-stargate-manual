@@ -3,6 +3,7 @@ import path from 'node:path';
 
 const root = process.cwd();
 const fixturePath = process.env.BKL039_F2_FIXTURE || 'docs/data/equipment-performance-registry-f2-fixture.json';
+const schemaPath = 'schemas/equipment-performance-registry.schema.json';
 const equipmentPath = 'data/analytics/configurations/equipment-registry.csv';
 const sessionPath = 'data/analytics/metadata/session-scientific-metadata.csv';
 
@@ -27,12 +28,36 @@ function existsRef(ref) {
   const rel=ref.split('#')[0];
   return rel && fs.existsSync(path.join(root, rel));
 }
+function assertObjectShape(value, definition, label) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) fail(`${label} must be an object`);
+  const required=new Set(definition.required || []);
+  const properties=definition.properties || {};
+  for (const key of required) if (!(key in value)) fail(`${label} missing required field ${key}`);
+  if (definition.additionalProperties === false) {
+    for (const key of Object.keys(value)) if (!(key in properties)) fail(`${label} has unexpected field ${key}`);
+  }
+  for (const [key, rule] of Object.entries(properties)) {
+    if (!(key in value) || rule === true) continue;
+    const item=value[key];
+    if ('const' in rule && item !== rule.const) fail(`${label}.${key} violates const`);
+    if (rule.enum && !rule.enum.includes(item)) fail(`${label}.${key} violates enum`);
+    if (rule.type === 'string' && (typeof item !== 'string' || (rule.minLength && item.length < rule.minLength))) fail(`${label}.${key} invalid string`);
+    if (rule.type === 'integer' && (!Number.isInteger(item) || ('minimum' in rule && item < rule.minimum))) fail(`${label}.${key} invalid integer`);
+    if (rule.type === 'array') {
+      if (!Array.isArray(item) || (rule.minItems && item.length < rule.minItems)) fail(`${label}.${key} invalid array`);
+      if (rule.items?.type === 'string' && item.some(v=>typeof v !== 'string' || (rule.items.minLength && v.length < rule.items.minLength))) fail(`${label}.${key} invalid array item`);
+    }
+  }
+}
 
 const fixture=JSON.parse(read(fixturePath));
+const schema=JSON.parse(read(schemaPath));
+assertObjectShape(fixture, schema, 'fixture');
+assertObjectShape(fixture.source_contract, schema.properties.source_contract, 'source_contract');
 if (fixture.schema_version !== '1.0') fail('unsupported schema_version');
 if (fixture.component !== 'DSG.EquipmentPerformanceRegistry.F2') fail('unexpected component');
 if (fixture.authority !== 'projection' || fixture.action_authority !== 'NONE') fail('authority boundary changed');
-if (fixture.source_contract?.equipment_registry !== equipmentPath || fixture.source_contract?.session_metadata !== sessionPath || fixture.source_contract?.identity_namespace !== 'configuration_id') fail('source contract changed');
+if (fixture.source_contract.equipment_registry !== equipmentPath || fixture.source_contract.session_metadata !== sessionPath || fixture.source_contract.identity_namespace !== 'configuration_id') fail('source contract changed');
 if (!Array.isArray(fixture.records) || fixture.records.length !== 4) fail('bounded fixture must contain exactly four records');
 
 const equipment=csv(read(equipmentPath));
@@ -41,20 +66,23 @@ const active=new Map(equipment.filter(r=>r.status==='ACTIVE').map(r=>[r.configur
 const registered=new Map(sessions.filter(r=>r.metadata_state==='REGISTERED').map(r=>[r.session_id,r]));
 const ids=new Set();
 const allowed=new Set(['EQUIPMENT_IDENTITY','EQUIPMENT_USAGE_OBSERVATION']);
-const forbiddenKeys=new Set(['performance_rating','score','severity','health_state','threshold','ranking','prediction','causation','recommendation','remediation','command']);
 
 for (const record of fixture.records) {
+  const defName=record.semantic_type === 'EQUIPMENT_IDENTITY' ? 'equipmentIdentity' : record.semantic_type === 'EQUIPMENT_USAGE_OBSERVATION' ? 'equipmentUsageObservation' : null;
+  if (!defName || !allowed.has(record.semantic_type)) fail(`unsupported semantic_type ${record.semantic_type}`);
+  const specific=schema.$defs[defName].allOf[1];
+  assertObjectShape(record, specific, `record ${record.record_id || '<missing>'}`);
   if (!record.record_id || ids.has(record.record_id)) fail('missing or duplicate record_id'); ids.add(record.record_id);
-  if (!allowed.has(record.semantic_type)) fail(`unsupported semantic_type ${record.semantic_type}`);
   if (record.authority !== 'projection' || record.action_authority !== 'NONE') fail(`record ${record.record_id} changed authority`);
   if (record.quality !== 'REGISTERED') fail(`record ${record.record_id} is not REGISTERED`);
-  for (const key of Object.keys(record)) if (forbiddenKeys.has(key)) fail(`forbidden field ${key}`);
   for (const group of ['source_record_refs','citation_refs','provenance_refs']) {
     if (!Array.isArray(record[group]) || record[group].length===0 || record[group].some(ref=>!existsRef(ref))) fail(`${record.record_id} has unresolved ${group}`);
   }
   const eq=active.get(record.configuration_id);
   if (!eq) fail(`${record.record_id} references non-active/unknown configuration`);
   if (record.semantic_type==='EQUIPMENT_IDENTITY') {
+    if (record.identity_namespace !== 'DSG_ANALYTICS_CONFIGURATION_ID') fail(`${record.record_id} identity namespace changed`);
+    if (record.dsdm_materialization_state !== 'NOT_SEPARATELY_PROVEN') fail(`${record.record_id} overclaims DSDM materialization`);
     for (const field of ['configuration_name','telescope','camera','mount']) if (record[field] !== eq[field]) fail(`${record.record_id} equipment ${field} mismatch`);
   } else {
     const session=registered.get(record.session_id);
