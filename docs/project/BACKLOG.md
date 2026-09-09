@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 4.4 |
+| Versione | 4.5 |
 | Stato | Active |
 | Data baseline | 09/09/2026 |
 
@@ -56,33 +56,30 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-035 | P2 | Target Knowledge Base | Done | BKL-015/BKL-044 | Vista target con sessioni, SQM, setup, immagini e workflow | F1-F4 CLOSED/ACCEPTED; PR #112 merge `1eef3e6747d975e40d592933ece655014b808f05`; closure `docs/project/BKL-035-CLOSURE-2026-09-07.md` |
 | BKL-036 | P2 | Observatory Health Score | Planned | BKL-030, telemetry history | Score operativo spiegabile distinto da Safety | Functional Roadmap Expansion |
 | BKL-037 | P2 | Session Comparison & Benchmarking | Planned | BKL-029, BKL-035, BKL-045 | Confronto qualità/acquisizione/processing | Pending BKL-045; Functional Roadmap Expansion |
-| BKL-038 | P2 | Anomaly & Trend Center | Done | BKL-030, BKL-040 | Trend e pattern di degrado | F1/F2-A/F3-A/F3-B/F4-A accepted; PR #125 merge `d8249984d63455690b957156060f858eb3cc2713`; closure candidate `docs/project/BKL-038-CLOSURE-2026-09-09.md` |
-| BKL-039 | P2 | Equipment Performance Registry | In Progress | BKL-015, session history | Prestazioni storiche setup/componenti | Current dependency-ready package after BKL-038 closure reconciliation |
+| BKL-038 | P2 | Anomaly & Trend Center | Done | BKL-030, BKL-040 | Trend e pattern di degrado | F1/F2-A/F3-A/F3-B/F4-A accepted; PR #125 merge `d8249984d63455690b957156060f858eb3cc2713`; closure `docs/project/BKL-038-CLOSURE-2026-09-09.md` |
+| BKL-039 | P2 | Equipment Performance Registry | Done | BKL-015, session history | Prestazioni storiche setup/componenti | F4-A/F4-B/F5-A/F5-B/F5-C/F5-D CLOSED/ACCEPTED; PR #132 merge `651fc340fbb5e58ca36409d574bdd09c3ae55790`; closure `docs/project/BKL-039-CLOSURE-2026-09-09.md` |
 | BKL-040 | P2 | Night Timeline / Observatory Replay | Done | BKL-015/BKL-044, historical telemetry | Replay sincronizzato della notte | F1-F4 CLOSED/ACCEPTED; PR #117 merge `80d22a255540ac582733c60dfe9bbf7807bcdf9b`; closure `docs/project/BKL-040-CLOSURE-2026-09-08.md` |
 | BKL-041 | P2 | Scientific Data Quality Score | Planned | BKL-029, BKL-037, BKL-045 | Quality score scientifico spiegabile | Functional Roadmap Expansion |
 | BKL-042 | P2 | AI Observatory Assistant | Planned | BKL-015/BKL-044 e intelligence services | Copilot read-only per diagnosis/RCA/planning/science | Functional Roadmap Expansion |
 | BKL-043 | P2 | Observatory Reliability Engineering | Planned | BKL-030/BKL-038/BKL-042 | SLI/SLO, MTBF, MTTR, session completion e failure budget | Functional Roadmap Expansion |
 | BKL-044 | P1 | Knowledge Graph / AI Evidence Contract | Done | BKL-015 | Provenance stabile per AP/ADR/assets/session/target/incident/telemetry/processing/AI | F1-F4 CLOSED/ACCEPTED; PR #104 merge `b7c01ba7221818e1971403ab3befe38c8e40cc54`; closure `docs/project/BKL-044-CLOSURE-2026-09-07.md` |
-| BKL-045 | P2 | PixInsight Workflow Provenance Plugin | Planned | BKL-015/BKL-044 | Estensione PixInsight governata per catturare workflow, parametri e lineage | Functional Roadmap Expansion |
+| BKL-045 | P2 | PixInsight Workflow Provenance Plugin | In Progress | BKL-015/BKL-044 | Estensione PixInsight governata per catturare workflow, parametri e lineage | Current dependency-ready package after BKL-039 closure reconciliation |
 | BKL-046 | P2 | AI Post-Processing Assistant for PixInsight | Planned | BKL-015/BKL-044/BKL-045 | Assistente advisory per ottimizzare workflow PixInsight | Functional Roadmap Expansion |
 | BKL-047 | P1 | AP-013C Verified Transport Cleanup & Convergence Monitoring | Done | AP-013B COPY_ONLY OAT | DRY_RUN/NO_DELETE lifecycle evidence, ACK convergence e fail-closed classification accepted | AP-013C; C8 productive cleanup excluded |
 
 ### Reconciliation note — 09/09/2026
 
-BKL-015, BKL-044, BKL-035 e BKL-040 restano `Done / Accepted` secondo le rispettive baseline e closure già integrate.
+BKL-015, BKL-044, BKL-035, BKL-040, BKL-038 e BKL-039 restano `Done / Accepted` secondo le rispettive baseline e closure integrate.
 
-BKL-038 ha completato la catena F1, F2-A, F3-A, F3-B e F4-A. L'ultimo incremento F4-A è stato integrato via PR #125 con merge `d8249984d63455690b957156060f858eb3cc2713`; sul merge SHA Developer Foundation #1110, Docs #729, Word #1154, Pages #720 e BKL-038 F4 Governance #4 risultano `SUCCESS`. La closure formale resta governata dalla closure candidate `docs/project/BKL-038-CLOSURE-2026-09-09.md` e dalla relativa PR di closure; nessun runtime OAT è richiesto.
+BKL-039 ha completato la catena F4-A/F4-B/F5-A/F5-B/F5-C/F5-D. La PR #132 è stata integrata con merge `651fc340fbb5e58ca36409d574bdd09c3ae55790`; la closure formale è `docs/project/BKL-039-CLOSURE-2026-09-09.md`. La capability resta read-only/projection-only, senza health ranking, remediation automatica o modifica della Safety Authority.
 
-La capability BKL-038 resta bounded: il consumer materializza 3 observations e 2 descriptive trend measurements, senza anomaly candidate o recommendation. L'onboarding analitico di history EAGLE/BKL-030 resta differito finché non esiste evidence repository-resolvable; non viene quindi dichiarata copertura universale di tutte le source family.
-
-BKL-039 è il successore dependency-ready e viene promosso come package governato corrente nella stessa riconciliazione di closure. BKL-037 resta `Planned` finché BKL-045 non è accepted.
+BKL-045 è il successore dependency-ready e viene promosso come package governato corrente nella stessa riconciliazione di closure. BKL-037 resta `Planned` finché BKL-045 non è accepted.
 
 ## 4. Sequenza di esecuzione raccomandata
 
 ```text
-Completed baseline through BKL-030, BKL-015, BKL-044, BKL-035, BKL-040 and BKL-038
-  -> BKL-039 Equipment Performance Registry [CURRENT]
-  -> BKL-045 PixInsight Workflow Provenance Plugin
+Completed baseline through BKL-030, BKL-015, BKL-044, BKL-035, BKL-040, BKL-038 and BKL-039
+  -> BKL-045 PixInsight Workflow Provenance Plugin [CURRENT]
   -> BKL-037 Session Comparison & Benchmarking
   -> BKL-041 Scientific Data Quality Score
   -> BKL-046 AI Post-Processing Assistant
