@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0",
+  "sidecarId": "PXP-20260909T212858612Z-OAT",
+  "exportedAt": "2026-09-09T21:28:58.612Z",
+  "authority": "processing_evidence",
+  "actionAuthority": "NONE",
+  "source": {
+    "product": "PixInsight",
+    "productVersion": "1.9.4 build 1695",
+    "hostId": "WIN-QOOF3903TQS",
+    "workspaceId": "PIXINSIGHT-OAT-20260909-231843",
+    "captureMethod": "GOVERNED_PJSR_EXPORT",
+    "sourceLocators": [
+      "pjsr:CoreApplication.version",
+      "pjsr:ImageWindow.activeWindow.mainView.id=M64"
+    ]
+  },
+  "observationContext": {
+    "sessionId": "OAT-BKL045-F3B-20260909-231843",
+    "target": "BKL-045-F3B-OAT",
+    "projectId": null,
+    "campaignId": null
+  },
+  "workflow": {
+    "workflowId": "WF-BKL045-F3B-20260909-231843",
+    "runId": "RUN-BKL045-F3B-20260909-231843",
+    "startedAt": null,
+    "completedAt": null,
+    "environment": {
+      "pixInsightVersion": "1.9.4 build 1695",
+      "platform": "PJSR",
+      "modules": []
+    },
+    "steps": [],
+    "inputs": [],
+    "outputs": []
+  },
+  "capture": {
+    "completeness": "UNAVAILABLE",
+    "limitations": [
+      "PJSR_PILOT_DOES_NOT_CLAIM_ACCESS_TO_COMPLETE_PIXINSIGHT_PROCESS_HISTORY",
+      "NO_OBSERVED_PROCESSING_STEP_IS_EMITTED_BY_THIS_PROBE",
+      "ACTIVE_WINDOW_ID_ONLY_IS_AUTOMATICALLY_OBSERVED"
+    ],
+    "observedStepCount": 0,
+    "declaredStepCount": 0
+  }
+}
