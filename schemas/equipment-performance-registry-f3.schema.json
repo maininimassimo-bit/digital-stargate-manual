@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/schemas/equipment-performance-registry-f3.schema.json",
+  "title": "Digital StarGate Equipment Performance Registry F3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "component", "authority", "action_authority", "source_contract", "records"],
+  "properties": {
+    "schema_version": { "const": "1.1" },
+    "component": { "const": "DSG.EquipmentPerformanceRegistry.F3" },
+    "authority": { "const": "projection" },
+    "action_authority": { "const": "NONE" },
+    "source_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["f2_fixture", "target_exposures", "target_summary", "configuration_id", "session_id", "target_name", "filter_name", "frame_type", "unit", "unit_semantics", "angular_calibration_state"],
+      "properties": {
+        "f2_fixture": { "const": "docs/data/equipment-performance-registry-f2-fixture.json" },
+        "target_exposures": { "const": "data/analytics/history/target-exposures.csv" },
+        "target_summary": { "const": "data/analytics/history/target-summary.csv" },
+        "configuration_id": { "const": "QUATTRO200_TOUPTEK294_BIN1" },
+        "session_id": { "const": "2026-07-14_2026-07-15" },
+        "target_name": { "const": "LDN 1320" },
+        "filter_name": { "const": "LPRO" },
+        "frame_type": { "const": "LIGHT" },
+        "unit": { "const": "NINA_FILENAME_FWHM_SOURCE_UNIT" },
+        "unit_semantics": { "const": "SOURCE_NATIVE_UNCALIBRATED" },
+        "angular_calibration_state": { "const": "NOT_PROVEN" }
+      }
+    },
+    "records": {
+      "type": "array",
+      "minItems": 23,
+      "maxItems": 23,
+      "items": {
+        "oneOf": [
+          { "$ref": "#/$defs/performanceMeasurement" },
+          { "$ref": "#/$defs/descriptiveStatistic" }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "lineage": {
+      "type": "object",
+      "required": ["record_id", "semantic_type", "configuration_id", "session_id", "target_name", "filter_name", "metric_name", "value", "unit", "unit_semantics", "angular_calibration_state", "method_id", "source_record_refs", "citation_refs", "provenance_refs", "quality", "authority", "action_authority", "explanation_codes"],
+      "properties": {
+        "record_id": { "type": "string", "minLength": 1 },
+        "semantic_type": { "enum": ["PERFORMANCE_MEASUREMENT", "DESCRIPTIVE_PERFORMANCE_STATISTIC"] },
+        "configuration_id": { "const": "QUATTRO200_TOUPTEK294_BIN1" },
+        "session_id": { "const": "2026-07-14_2026-07-15" },
+        "target_name": { "const": "LDN 1320" },
+        "filter_name": { "const": "LPRO" },
+        "metric_name": { "const": "FWHM" },
+        "value": { "type": "number", "exclusiveMinimum": 0 },
+        "unit": { "const": "NINA_FILENAME_FWHM_SOURCE_UNIT" },
+        "unit_semantics": { "const": "SOURCE_NATIVE_UNCALIBRATED" },
+        "angular_calibration_state": { "const": "NOT_PROVEN" },
+        "method_id": { "type": "string", "minLength": 1 },
+        "source_record_refs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "citation_refs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "provenance_refs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "quality": { "enum": ["SOURCE_RESOLVED", "COMPLETE_FOR_DECLARED_POPULATION"] },
+        "authority": { "const": "projection" },
+        "action_authority": { "const": "NONE" },
+        "explanation_codes": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "performanceMeasurement": {
+      "allOf": [
+        { "$ref": "#/$defs/lineage" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["record_id", "semantic_type", "configuration_id", "session_id", "target_name", "filter_name", "metric_name", "value", "unit", "unit_semantics", "angular_calibration_state", "method_id", "timestamp", "source_log_line", "sequence_number", "source_record_refs", "citation_refs", "provenance_refs", "quality", "authority", "action_authority", "explanation_codes"],
+          "properties": {
+            "record_id": true,
+            "semantic_type": { "const": "PERFORMANCE_MEASUREMENT" },
+            "configuration_id": true,
+            "session_id": true,
+            "target_name": true,
+            "filter_name": true,
+            "metric_name": true,
+            "value": true,
+            "unit": true,
+            "unit_semantics": true,
+            "angular_calibration_state": true,
+            "method_id": { "const": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1" },
+            "timestamp": { "type": "string", "minLength": 1 },
+            "source_log_line": { "type": "integer", "minimum": 1 },
+            "sequence_number": { "type": "string", "pattern": "^[0-9]{4}$" },
+            "source_record_refs": true,
+            "citation_refs": true,
+            "provenance_refs": true,
+            "quality": { "const": "SOURCE_RESOLVED" },
+            "authority": true,
+            "action_authority": true,
+            "explanation_codes": true
+          }
+        }
+      ]
+    },
+    "descriptiveStatistic": {
+      "allOf": [
+        { "$ref": "#/$defs/lineage" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["record_id", "semantic_type", "configuration_id", "session_id", "target_name", "filter_name", "metric_name", "statistic_type", "value", "unit", "unit_semantics", "angular_calibration_state", "method_id", "sample_count", "population_selector", "coverage", "source_record_refs", "citation_refs", "provenance_refs", "quality", "authority", "action_authority", "explanation_codes"],
+          "properties": {
+            "record_id": true,
+            "semantic_type": { "const": "DESCRIPTIVE_PERFORMANCE_STATISTIC" },
+            "configuration_id": true,
+            "session_id": true,
+            "target_name": true,
+            "filter_name": true,
+            "metric_name": true,
+            "statistic_type": { "enum": ["MEAN", "MINIMUM", "MAXIMUM", "SAMPLE_STDDEV"] },
+            "value": true,
+            "unit": true,
+            "unit_semantics": true,
+            "angular_calibration_state": true,
+            "method_id": { "enum": ["BKL039-F3-FWHM-MEAN-V1", "BKL039-F3-FWHM-MIN-V1", "BKL039-F3-FWHM-MAX-V1", "BKL039-F3-FWHM-SAMPLE-STDDEV-V1"] },
+            "sample_count": { "const": 19 },
+            "population_selector": { "const": "session=2026-07-14_2026-07-15;target=LDN 1320;filter=LPRO;frame_type=LIGHT" },
+            "coverage": { "const": "COMPLETE_FOR_DECLARED_POPULATION" },
+            "source_record_refs": true,
+            "citation_refs": true,
+            "provenance_refs": true,
+            "quality": { "const": "COMPLETE_FOR_DECLARED_POPULATION" },
+            "authority": true,
+            "action_authority": true,
+            "explanation_codes": true
+          }
+        }
+      ]
+    }
+  }
+}
