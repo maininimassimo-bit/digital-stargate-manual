@@ -5,23 +5,31 @@ on:
     paths:
       - '.github/scripts/discover-equipment-performance-populations-f5.mjs'
       - '.github/scripts/test-equipment-performance-populations-f5.mjs'
+      - '.github/scripts/generate-equipment-performance-f5-collection.mjs'
+      - '.github/scripts/test-equipment-performance-f5-collection.mjs'
       - 'data/analytics/history/target-exposures.csv'
       - 'data/analytics/history/target-summary.csv'
       - 'data/analytics/metadata/session-scientific-metadata.csv'
+      - 'docs/data/equipment-performance-registry-f5-collection.json'
+      - 'docs/javascripts/equipment-performance.js'
       - 'docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md'
       - '.github/workflows/bkl-039-f5-governance.yml'
   pull_request:
     paths:
       - '.github/scripts/discover-equipment-performance-populations-f5.mjs'
       - '.github/scripts/test-equipment-performance-populations-f5.mjs'
+      - '.github/scripts/generate-equipment-performance-f5-collection.mjs'
+      - '.github/scripts/test-equipment-performance-f5-collection.mjs'
       - 'data/analytics/history/target-exposures.csv'
       - 'data/analytics/history/target-summary.csv'
       - 'data/analytics/metadata/session-scientific-metadata.csv'
+      - 'docs/data/equipment-performance-registry-f5-collection.json'
+      - 'docs/javascripts/equipment-performance.js'
       - 'docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md'
       - '.github/workflows/bkl-039-f5-governance.yml'
 permissions: { contents: read }
 jobs:
-  f5-a:
+  f5:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -31,3 +39,12 @@ jobs:
         run: node .github/scripts/discover-equipment-performance-populations-f5.mjs
       - name: Test multi-session discovery and fail-closed rules
         run: node --test .github/scripts/test-equipment-performance-populations-f5.mjs
+      - name: Verify generated F5 collection
+        run: node .github/scripts/generate-equipment-performance-f5-collection.mjs
+      - name: Test F5 collection contract
+        run: node --test .github/scripts/test-equipment-performance-f5-collection.mjs
+      - name: Guard browser as read-only renderer
+        run: |
+          grep -q 'DSG.EquipmentPerformanceRegistry.F5.CollectionReadModel' docs/javascripts/equipment-performance.js
+          grep -q 'SOURCE_NATIVE_UNCALIBRATED' docs/javascripts/equipment-performance.js
+          grep -q 'NO_EQUIPMENT_HEALTH_RANKING_THRESHOLD_OR_RECOMMENDATION' docs/javascripts/equipment-performance.js
