@@ -23,12 +23,10 @@ function csv(text){
     values.push(value); return Object.fromEntries(headers.map((h,i)=>[h,values[i]??''])); });
 }
 function extractFwhm(filename){ const m=filename.match(/_FWHM_([0-9]+(?:\.[0-9]+)?)(?:_|\.)/); if(!m) fail(`missing FWHM token in ${filename}`); const v=Number(m[1]); if(!Number.isFinite(v)||v<=0) fail(`invalid FWHM token in ${filename}`); return v; }
-function round(value){ return Number(value.toFixed(12)); }
+function round4(value){ return Number(value.toFixed(4)); }
 function canonicalize(value){
   if(Array.isArray(value)) return value.map(canonicalize);
-  if(value && typeof value==='object'){
-    return Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonicalize(value[key])]));
-  }
+  if(value && typeof value==='object') return Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonicalize(value[key])]));
   return value;
 }
 
@@ -47,13 +45,13 @@ const mean=values.reduce((a,b)=>a+b,0)/values.length;
 const variance=values.reduce((a,b)=>a+(b-mean)**2,0)/(values.length-1);
 const sourceRefs=exposures.map(r=>`${exposurePath}#${SESSION}:line=${r.line_number}`);
 const common={configuration_id:CONFIG,session_id:SESSION,target_name:TARGET,filter_name:FILTER,metric_name:'FWHM',unit:UNIT,unit_semantics:'SOURCE_NATIVE_UNCALIBRATED',angular_calibration_state:'NOT_PROVEN',citation_refs:[exposurePath,summaryPath],provenance_refs:[contractPath,f2Path],authority:'projection',action_authority:'NONE'};
-const records=exposures.map((r,i)=>({record_id:`EPR-F3-FWHM-${SESSION}-${r.sequence_number}`,semantic_type:'PERFORMANCE_MEASUREMENT',...common,value:values[i],method_id:'DSG-F3-FWHM-NINA-FILENAME-EXTRACT-V1',timestamp:r.timestamp,source_log_line:Number(r.line_number),sequence_number:r.sequence_number,source_record_refs:[sourceRefs[i]],quality:'SOURCE_RESOLVED',explanation_codes:['FWHM_TOKEN_EXTRACTED_FROM_REPOSITORY_EXPOSURE_FILENAME','ANGULAR_CALIBRATION_NOT_PROVEN']}));
+const records=exposures.map((r,i)=>({record_id:`EPR-F3-FWHM-${SESSION}-${r.sequence_number}`,semantic_type:'PERFORMANCE_MEASUREMENT',...common,value:values[i],method_id:'BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1',timestamp:r.timestamp,source_log_line:Number(r.line_number),sequence_number:r.sequence_number,source_record_refs:[sourceRefs[i]],quality:'SOURCE_RESOLVED',explanation_codes:['FWHM_TOKEN_EXTRACTED_FROM_REPOSITORY_EXPOSURE_FILENAME','ANGULAR_CALIBRATION_NOT_PROVEN']}));
 const stats=[
-  ['MEAN',mean,'DSG-F3-FWHM-MEAN-V1'],
-  ['MINIMUM',Math.min(...values),'DSG-F3-FWHM-MIN-V1'],
-  ['MAXIMUM',Math.max(...values),'DSG-F3-FWHM-MAX-V1'],
-  ['SAMPLE_STDDEV',Math.sqrt(variance),'DSG-F3-FWHM-SAMPLE-STDDEV-V1']
-].map(([type,value,method])=>({record_id:`EPR-F3-FWHM-${SESSION}-${type}`,semantic_type:'DESCRIPTIVE_PERFORMANCE_STATISTIC',...common,statistic_type:type,value:round(value),method_id:method,sample_count:values.length,population_selector:POPULATION,coverage:'COMPLETE_FOR_DECLARED_POPULATION',source_record_refs:sourceRefs,quality:'COMPLETE_FOR_DECLARED_POPULATION',explanation_codes:['DESCRIPTIVE_STATISTIC_ONLY','NO_HEALTH_OR_RANKING_SEMANTICS','ANGULAR_CALIBRATION_NOT_PROVEN']}));
+  ['MEAN',mean,'BKL039-F3-FWHM-MEAN-V1'],
+  ['MINIMUM',Math.min(...values),'BKL039-F3-FWHM-MIN-V1'],
+  ['MAXIMUM',Math.max(...values),'BKL039-F3-FWHM-MAX-V1'],
+  ['SAMPLE_STDDEV',Math.sqrt(variance),'BKL039-F3-FWHM-SAMPLE-STDDEV-V1']
+].map(([type,value,method])=>({record_id:`EPR-F3-FWHM-${SESSION}-${type}`,semantic_type:'DESCRIPTIVE_PERFORMANCE_STATISTIC',...common,statistic_type:type,value:round4(value),method_id:method,sample_count:values.length,population_selector:POPULATION,coverage:'COMPLETE_FOR_DECLARED_POPULATION',source_record_refs:sourceRefs,quality:'COMPLETE_FOR_DECLARED_POPULATION',explanation_codes:['DESCRIPTIVE_STATISTIC_ONLY','NO_HEALTH_OR_RANKING_SEMANTICS','ANGULAR_CALIBRATION_NOT_PROVEN']}));
 const projection={schema_version:'1.1',component:'DSG.EquipmentPerformanceRegistry.F3',authority:'projection',action_authority:'NONE',source_contract:{f2_fixture:f2Path,target_exposures:exposurePath,target_summary:summaryPath,configuration_id:CONFIG,session_id:SESSION,target_name:TARGET,filter_name:FILTER,frame_type:'LIGHT',unit:UNIT,unit_semantics:'SOURCE_NATIVE_UNCALIBRATED',angular_calibration_state:'NOT_PROVEN'},records:[...records,...stats]};
 const rendered=JSON.stringify(projection,null,2)+'\n';
 if(process.argv.includes('--write')){
