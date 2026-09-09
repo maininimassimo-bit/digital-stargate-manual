@@ -2,49 +2,61 @@
 
 | Campo | Valore |
 |---|---|
-| Stato | Current technical continuity baseline candidate |
+| Stato | Current technical continuity baseline — reconciled through BKL-039 F5-A |
 | Data | 09/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
-| Baseline implementation merge | `d8249984d63455690b957156060f858eb3cc2713` |
-| Current governed package after closure reconciliation | BKL-039 — Equipment Performance Registry |
-| Previous completed package | BKL-038 — Anomaly & Trend Center |
+| Main HEAD before F5 | `e4ccecb3bc52af4a5baaa27cbc8df7178fd239ea` |
+| Current governed package | BKL-039 — Equipment Performance Registry |
+| Current PR | #132 |
+| Current branch | `architecture/bkl-039-f5-dynamic-multisession-registry` |
 
-## 1. Accepted BKL-038 implementation baseline
+## 1. Accepted BKL-039 baseline
 
-BKL-038 completed the accepted F1, F2-A, F3-A, F3-B and F4-A chain. The final F4-A implementation was merged through PR #125 as `d8249984d63455690b957156060f858eb3cc2713`.
+BKL-039 F4-A machine-readable read-only consumer was merged through PR #130 as `c9ccf2bdfd849a4ae7305a4a7d134572353aa45e`. F4-B portal projection was merged through PR #131 as `e4ccecb3bc52af4a5baaa27cbc8df7178fd239ea`.
 
-The accepted bounded consumer contains 3 source-backed observations and 2 descriptive exact-delta trend measurements. It contains 0 anomaly candidates and 0 recommendations. This is a bounded analytical foundation and is not evidence that the historical session was healthy or safe.
+The accepted F4 population was bounded to session `2026-07-14_2026-07-15`, target `LDN 1320`, configuration `QUATTRO200_TOUPTEK294_BIN1`, filter `LPRO`, frame `LIGHT`, with 19 source-backed FWHM measurements. Accepted descriptive statistics were MEAN 7.5995, MINIMUM 6.78, MAXIMUM 9.05 and SAMPLE_STDDEV 0.5771.
 
-## 2. Analytical authority baseline
+## 2. Measurement semantics and authority
 
-BKL-038 remains projection-only, read-only and descriptive-only. Accepted semantics preserve source identity, temporal lineage, observation-time quality, Citation/Provenance and deterministic derived identity.
+FWHM source values are not physically calibrated. Required semantics remain:
 
-No anomaly threshold, severity policy, causal inference, predictive maintenance policy or remediation authority is introduced by BKL-038.
+- `unit=NINA_FILENAME_FWHM_SOURCE_UNIT`;
+- `unit_semantics=SOURCE_NATIVE_UNCALIBRATED`;
+- `angular_calibration_state=NOT_PROVEN`;
+- `authority=projection`;
+- `action_authority=NONE`.
 
-## 3. EAGLE evidence boundary
+They must not be reinterpreted automatically as arcsec, pixel, seeing, focus quality or equipment health. No GOOD/BAD, RAG, ranking, threshold, percentile, score, anomaly diagnosis, predictive maintenance, recommendation, remediation or command/control semantics are authorized.
 
-BKL-030 remains an accepted upstream foundation, but BKL-038 does not fabricate EAGLE analytical history and does not read the live EAGLE filesystem. Analytical onboarding of EAGLE history remains deferred until bounded repository-resolvable evidence is governed and accepted.
+## 3. F5 target state
 
-## 4. Final implementation quality evidence
+F5 evolves the bounded F4 projection into a dynamic multi-session registry. A future COMPLETE scientific session containing eligible source-backed data must become visible in Equipment Performance through the existing AP-014 publication/analytics chain without per-session manual edits.
 
-On final F4-A merge `d8249984d63455690b957156060f858eb3cc2713`:
+The architecture contract is `docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md`.
 
-- BKL-038 F4 Governance #4 — SUCCESS;
-- Developer Foundation #1110 — SUCCESS;
-- Validate documentation #729 — SUCCESS;
-- Deploy MkDocs artifact to GitHub Pages #720 — SUCCESS;
-- Genera manuale Word #1154 — SUCCESS.
+## 4. F5-A implementation baseline
 
-## 5. Closure reconciliation
+PR #132 is open on `architecture/bkl-039-f5-dynamic-multisession-registry`.
 
-The closure candidate is `docs/project/BKL-038-CLOSURE-2026-09-09.md`.
+F5-A provides governed discovery, tests and workflow. Repository discovery currently yields five eligible populations: three LDN 1320 / LPRO populations on 14–15, 15–16 and 16–17 July with counts 19, 32 and 31; M27 / Blu on 15–16 August with count 2; M27 / Green on 15–16 August with count 12.
 
-The closure reconciliation promotes BKL-038 to completed/Done and BKL-039 to current/In Progress only as a single governed closure change. Until the closure PR itself passes exact-head CI, independent ARB, Release Quality, merge and post-merge verification, this document is a continuity baseline candidate rather than evidence of repository-integrated closure.
+Fail-closed exclusions are M27 14–15 August / L-Pro and M27 15–16 August / Red as `FWHM_SOURCE_VALUE_UNRESOLVED`, plus PARTIAL M27 10–11 August as `METADATA_NOT_REGISTERED`. These exclusions must not be overridden by invented evidence.
 
-## 6. Safety and runtime boundaries
+At exact HEAD `b123d6a28fd7cdc70483ce7a6f7004769f26bcfb`, all four applicable F5-A workflows are SUCCESS:
 
-No EAGLE/PC runtime change is required. No command path, automatic remediation or Safety Authority coupling is authorized. Local physical interlocks and local Safety Authority remain authoritative and independent from analytical, portal and AI projections.
+- BKL-039 F5 Governance #4;
+- Developer Foundation #1174;
+- Validate documentation #793;
+- Genera manuale Word #1218.
 
-## 7. Next package entry condition
+## 5. F5-B entry condition
 
-BKL-039 may begin only after the BKL-038 closure PR is accepted, merged and verified post-merge. Its initial architecture must be grounded in repository-proven equipment/session evidence and must not invent performance thresholds, ratings, health policy or remediation semantics.
+F5-A is green and F5-B is authorized. F5-B must generate a deterministic collection read model from the eligible populations and update the Equipment Performance portal to select/render populations dynamically. Each view preserves population/configuration/session/target/filter/frame identity, measurement count and values, descriptive statistics, measurement semantics, source record references, Citation, Provenance, limitations and projection-only authority. The browser must not recompute authoritative metrics.
+
+## 6. F5-C automation requirement
+
+After F5-B, integrate discovery and F3/F4 regeneration into `.github/workflows/analyze-session-automatic.yml` after target/history rebuild and also inside retry `regenerate()` paths following `git reset --hard origin/main`. Governed generated paths must be committed with the existing scientific projections so regeneration remains deterministic and idempotent.
+
+## 7. Safety/runtime boundary
+
+No EAGLE/PC command or runtime change is required for F5. AP-014 remains the ingestion/publication path. No device control, remediation or Safety Authority coupling is introduced; local physical interlocks and local Safety Authority remain independent and authoritative.
