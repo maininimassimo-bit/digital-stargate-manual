@@ -1,0 +1,45 @@
+name: BKL-038 F4 Governance
+
+on:
+  pull_request:
+    paths:
+      - '.github/scripts/anomaly-trend-*.mjs'
+      - '.github/workflows/bkl-038-f4-governance.yml'
+      - 'docs/data/anomaly-trend-read-model.json'
+      - 'docs/anomaly-trend-center/**'
+      - 'docs/javascripts/anomaly-trend-center.js'
+      - 'docs/styles/anomaly-trend-center.css'
+      - 'docs/architecture/telemetry/BKL-038-F4A-*.md'
+  push:
+    branches: [main]
+    paths:
+      - '.github/scripts/anomaly-trend-*.mjs'
+      - '.github/workflows/bkl-038-f4-governance.yml'
+      - 'docs/data/anomaly-trend-read-model.json'
+      - 'docs/anomaly-trend-center/**'
+      - 'docs/javascripts/anomaly-trend-center.js'
+      - 'docs/styles/anomaly-trend-center.css'
+      - 'docs/architecture/telemetry/BKL-038-F4A-*.md'
+
+permissions: { contents: read }
+
+jobs:
+  f4-governance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: Test accepted F3-B engine regression
+        run: node --test .github/scripts/test-anomaly-trend-f3b-engine.mjs
+      - name: Verify F4 generated read model
+        run: node .github/scripts/generate-anomaly-trend-read-model.mjs --check
+      - name: Test F4 read-only consumer contract
+        run: node --test .github/scripts/test-anomaly-trend-f4-read-model.mjs
+      - name: Guard browser authority boundary
+        run: |
+          grep -F "data.authority !== 'projection'" docs/javascripts/anomaly-trend-center.js
+          grep -F "data.action_authority !== 'NONE'" docs/javascripts/anomaly-trend-center.js
+          grep -F "data.interaction_mode !== 'READ_ONLY'" docs/javascripts/anomaly-trend-center.js
+          grep -F "data.advisory_mode !== 'DESCRIPTIVE_ONLY'" docs/javascripts/anomaly-trend-center.js
+          grep -F "data.command_actions.length" docs/javascripts/anomaly-trend-center.js
