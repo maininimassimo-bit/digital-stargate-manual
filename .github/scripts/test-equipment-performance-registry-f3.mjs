@@ -8,11 +8,15 @@ test('rejects calibrated-state overclaim',()=>assert.equal(rejected(p=>{p.record
 test('rejects authority escalation',()=>assert.equal(rejected(p=>{p.records[0].action_authority='COMMAND';}),true));
 test('rejects health semantics',()=>assert.equal(rejected(p=>{p.records[0].health_state='GOOD';}),true));
 test('rejects ranking semantics',()=>assert.equal(rejected(p=>{p.records[19].ranking=1;}),true));
+test('rejects arbitrary unknown measurement property',()=>assert.equal(rejected(p=>{p.records[0].unexpected_property='must-fail-closed';}),true));
+test('rejects arbitrary unknown statistic property',()=>assert.equal(rejected(p=>{p.records[19].unexpected_property='must-fail-closed';}),true));
 test('rejects changed source value',()=>assert.equal(rejected(p=>{p.records[0].value=1;}),true));
 test('rejects wrong sample count',()=>assert.equal(rejected(p=>{p.records[19].sample_count=18;}),true));
 test('rejects wrong statistic',()=>assert.equal(rejected(p=>{p.records[19].value=99;}),true));
 test('rejects changed method',()=>assert.equal(rejected(p=>{p.records[19].method_id='UNVERSIONED';}),true));
 test('rejects incomplete coverage claim',()=>assert.equal(rejected(p=>{p.records[19].coverage='PARTIAL_FOR_DECLARED_POPULATION';}),true));
+test('rejects COMPLETE statistic missing one source row',()=>assert.equal(rejected(p=>{p.records[19].source_record_refs=p.records[19].source_record_refs.slice(0,-1);}),true));
+test('rejects COMPLETE statistic with duplicated source row',()=>assert.equal(rejected(p=>{p.records[19].source_record_refs[18]=p.records[19].source_record_refs[17];}),true));
 test('rejects unresolved provenance',()=>assert.equal(rejected(p=>{p.records[0].provenance_refs=['does/not/exist'];}),true));
 test('rejects duplicate record id',()=>assert.equal(rejected(p=>{p.records[1].record_id=p.records[0].record_id;}),true));
 test('rejects extra record',()=>assert.equal(rejected(p=>{p.records.push(structuredClone(p.records[0]));}),true));
