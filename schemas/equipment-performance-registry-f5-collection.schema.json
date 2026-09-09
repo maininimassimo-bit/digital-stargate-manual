@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/schemas/equipment-performance-registry-f5-collection.schema.json",
+  "title": "Digital StarGate BKL-039 F5 Equipment Performance Collection Read Model",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "component", "authority", "action_authority", "source_contract", "population_count", "views", "exclusions"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "component": { "const": "DSG.EquipmentPerformanceRegistry.F5.CollectionReadModel" },
+    "authority": { "const": "projection" },
+    "action_authority": { "const": "NONE" },
+    "source_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["f3_projection", "f5_contract"],
+      "properties": {
+        "f3_projection": { "const": "docs/data/equipment-performance-registry-f3-multisession.json" },
+        "f5_contract": { "const": "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md" }
+      }
+    },
+    "population_count": { "type": "integer", "minimum": 2 },
+    "views": {
+      "type": "array",
+      "minItems": 2,
+      "items": { "$ref": "#/$defs/view" }
+    },
+    "exclusions": { "type": "array", "items": { "type": "object" } }
+  },
+  "$defs": {
+    "view": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["population_id", "configuration_id", "session_id", "target_name", "filter_name", "frame_type", "metric_name", "measurement_count", "coverage", "unit", "unit_semantics", "angular_calibration_state", "measurement_method_id", "authority", "action_authority", "source_record_refs", "citation_refs", "provenance_refs", "measurements", "statistics", "limitations"],
+      "properties": {
+        "population_id": { "type": "string", "minLength": 1 },
+        "configuration_id": { "type": "string", "minLength": 1 },
+        "session_id": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "target_name": { "type": "string", "minLength": 1 },
+        "filter_name": { "type": "string", "minLength": 1 },
+        "frame_type": { "const": "LIGHT" },
+        "metric_name": { "const": "FWHM" },
+        "measurement_count": { "type": "integer", "minimum": 1 },
+        "coverage": { "const": "COMPLETE_FOR_DECLARED_POPULATION" },
+        "unit": { "const": "NINA_FILENAME_FWHM_SOURCE_UNIT" },
+        "unit_semantics": { "const": "SOURCE_NATIVE_UNCALIBRATED" },
+        "angular_calibration_state": { "const": "NOT_PROVEN" },
+        "measurement_method_id": { "const": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1" },
+        "authority": { "const": "projection" },
+        "action_authority": { "const": "NONE" },
+        "source_record_refs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "citation_refs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "provenance_refs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "measurements": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/measurement" } },
+        "statistics": { "type": "array", "minItems": 3, "maxItems": 4, "items": { "$ref": "#/$defs/statistic" } },
+        "limitations": {
+          "type": "array",
+          "minItems": 3,
+          "items": { "type": "string" },
+          "allOf": [
+            { "contains": { "const": "SOURCE_NATIVE_FWHM_UNIT_IS_NOT_PHYSICALLY_CALIBRATED" } },
+            { "contains": { "const": "NO_EQUIPMENT_HEALTH_RANKING_THRESHOLD_OR_RECOMMENDATION" } },
+            { "contains": { "const": "HISTORICAL_READ_ONLY_PROJECTION_NOT_SAFETY_AUTHORITY" } }
+          ]
+        }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["record_id", "sequence_number", "timestamp", "value", "source_record_ref"],
+      "properties": {
+        "record_id": { "type": "string", "minLength": 1 },
+        "sequence_number": { "type": "string" },
+        "timestamp": { "type": "string", "minLength": 1 },
+        "value": { "type": "number", "exclusiveMinimum": 0 },
+        "source_record_ref": { "type": "string", "minLength": 1 }
+      }
+    },
+    "statistic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["record_id", "statistic_type", "value", "method_id", "sample_count"],
+      "properties": {
+        "record_id": { "type": "string", "minLength": 1 },
+        "statistic_type": { "enum": ["MEAN", "MINIMUM", "MAXIMUM", "SAMPLE_STDDEV"] },
+        "value": { "type": "number", "minimum": 0 },
+        "method_id": { "type": "string", "minLength": 1 },
+        "sample_count": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}

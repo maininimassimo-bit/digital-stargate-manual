@@ -1,5 +1,4 @@
 name: Analyze Observatory Session Automatically
-
 on:
   workflow_dispatch:
     inputs:
@@ -8,89 +7,55 @@ on:
         required: true
         type: string
   push:
-    branches:
-      - main
-      - 'session/**'
-    paths:
-      - 'data/sessions/**/manifest.json'
-
-permissions:
-  contents: write
-  actions: write
-
-concurrency:
-  group: scientific-analytics-projection-main
-  cancel-in-progress: false
-
+    branches: [main, 'session/**']
+    paths: ['data/sessions/**/manifest.json']
+permissions: { contents: write, actions: write }
+concurrency: { group: scientific-analytics-projection-main, cancel-in-progress: false }
 jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-      - name: Setup Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: '3.13'
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-python@v6
+        with: { python-version: '3.13' }
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
       - name: Install report dependencies
         run: python -m pip install --disable-pip-version-check reportlab
       - name: Resolve session
         id: resolve
         shell: bash
-        env:
-          MANUAL_ID: ${{ github.event.inputs.session_id }}
+        env: { MANUAL_ID: "${{ github.event.inputs.session_id }}" }
         run: |
           set -euo pipefail
           id="$(printf '%s' "${MANUAL_ID:-}" | xargs)"
           if [[ -z "$id" ]]; then
             ref_name="${GITHUB_REF_NAME:-}"
-            if [[ "$ref_name" =~ ^session/([0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{4}-[0-9]{2}-[0-9]{2})$ ]]; then
-              id="${BASH_REMATCH[1]}"
-            else
+            if [[ "$ref_name" =~ ^session/([0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{4}-[0-9]{2}-[0-9]{2})$ ]]; then id="${BASH_REMATCH[1]}"; else
               manifest="$(git diff-tree -m --no-commit-id --name-only -r "$GITHUB_SHA" | grep -E '^data/sessions/[0-9]{4}/[0-9]{2}/[^/]+/manifest\.json$' | head -n1 || true)"
-              if [[ -z "$manifest" ]]; then
-                echo "No session manifest identified for ref '$ref_name' at '$GITHUB_SHA'; safe no-op."
-                echo "skip=true" >> "$GITHUB_OUTPUT"
-                exit 0
-              fi
+              if [[ -z "$manifest" ]]; then echo "No session manifest identified; safe no-op."; echo "skip=true" >> "$GITHUB_OUTPUT"; exit 0; fi
               id="$(basename "$(dirname "$manifest")")"
             fi
           fi
           [[ "$id" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || { echo "Invalid session ID: $id"; exit 1; }
-          echo "skip=false" >> "$GITHUB_OUTPUT"
-          echo "id=$id" >> "$GITHUB_OUTPUT"
-          echo "year=${id:0:4}" >> "$GITHUB_OUTPUT"
-          echo "month=${id:5:2}" >> "$GITHUB_OUTPUT"
+          echo "skip=false" >> "$GITHUB_OUTPUT"; echo "id=$id" >> "$GITHUB_OUTPUT"; echo "year=${id:0:4}" >> "$GITHUB_OUTPUT"; echo "month=${id:5:2}" >> "$GITHUB_OUTPUT"
       - name: Validate selected session package
         if: steps.resolve.outputs.skip != 'true'
         shell: pwsh
         run: |
-          $ErrorActionPreference = 'Stop'
-          $id = '${{ steps.resolve.outputs.id }}'; $year = '${{ steps.resolve.outputs.year }}'; $month = '${{ steps.resolve.outputs.month }}'
-          $root = Join-Path 'data/sessions' (Join-Path $year (Join-Path $month $id)); $manifestPath = Join-Path $root 'manifest.json'
-          if (-not (Test-Path $manifestPath -PathType Leaf)) { throw "Manifest missing: $manifestPath" }
-          $manifest = Get-Content $manifestPath -Raw | ConvertFrom-Json
-          if ([string]$manifest.session_id -ne $id) { throw "Manifest session ID mismatch: $($manifest.session_id)" }
-          if ([string]$manifest.report_status -ne 'COMPLETE') { throw "Session package is not COMPLETE: $id" }
-          foreach ($required in @('raw/nina','raw/phd2','raw/weather')) { $requiredPath = Join-Path $root $required; if (-not (Test-Path $requiredPath -PathType Container)) { throw "Missing evidence directory: $required" }; if (-not (Get-ChildItem $requiredPath -File -Recurse | Select-Object -First 1)) { throw "Missing evidence files: $required" } }
+          $ErrorActionPreference='Stop'; $id='${{ steps.resolve.outputs.id }}'; $year='${{ steps.resolve.outputs.year }}'; $month='${{ steps.resolve.outputs.month }}'
+          $root=Join-Path 'data/sessions' (Join-Path $year (Join-Path $month $id)); $manifestPath=Join-Path $root 'manifest.json'
+          if(-not(Test-Path $manifestPath -PathType Leaf)){throw "Manifest missing: $manifestPath"}; $manifest=Get-Content $manifestPath -Raw|ConvertFrom-Json
+          if([string]$manifest.session_id -ne $id){throw "Manifest session ID mismatch"}; if([string]$manifest.report_status -ne 'COMPLETE'){throw "Session package is not COMPLETE: $id"}
+          foreach($required in @('raw/nina','raw/phd2','raw/weather')){$p=Join-Path $root $required;if(-not(Test-Path $p -PathType Container)){throw "Missing evidence directory: $required"};if(-not(Get-ChildItem $p -File -Recurse|Select-Object -First 1)){throw "Missing evidence files: $required"}}
       - name: Analyze selected session and update history
         if: steps.resolve.outputs.skip != 'true'
         shell: bash
         run: |
-          set -euo pipefail
-          id='${{ steps.resolve.outputs.id }}'; year='${{ steps.resolve.outputs.year }}'; month='${{ steps.resolve.outputs.month }}'; session="data/sessions/$year/$month/$id"; metrics="$session/normalized/session-metrics.json"; report_dir="docs/session-reports/$year/$month/$id"; latest_observation='docs/data/realtime/latest-observation.json'
-          python dsg-analytics/analyzer/analyze_session.py --session "$session"
-          mkdir -p "$report_dir"
-          python dsg-analytics/reporter/generate_markdown_report.py --metrics "$metrics" --output "$report_dir/report-sessione.md"
-          python dsg-analytics/reporter/generate_pdf_report.py --metrics "$metrics" --output "$report_dir/Report_Sessione_$id.pdf"
-          python dsg-analytics/history/update_history.py --metrics "$metrics" --history 'data/analytics/history/sessions.csv'
-          python dsg-analytics/reporter/update_latest_observation.py --session "$session" --output "$latest_observation"
+          set -euo pipefail; id='${{ steps.resolve.outputs.id }}'; year='${{ steps.resolve.outputs.year }}'; month='${{ steps.resolve.outputs.month }}'; session="data/sessions/$year/$month/$id"; metrics="$session/normalized/session-metrics.json"; report_dir="docs/session-reports/$year/$month/$id"; latest='docs/data/realtime/latest-observation.json'
+          python dsg-analytics/analyzer/analyze_session.py --session "$session"; mkdir -p "$report_dir"; python dsg-analytics/reporter/generate_markdown_report.py --metrics "$metrics" --output "$report_dir/report-sessione.md"; python dsg-analytics/reporter/generate_pdf_report.py --metrics "$metrics" --output "$report_dir/Report_Sessione_$id.pdf"; python dsg-analytics/history/update_history.py --metrics "$metrics" --history data/analytics/history/sessions.csv; python dsg-analytics/reporter/update_latest_observation.py --session "$session" --output "$latest"
       - name: Consolidate analytics history
         if: steps.resolve.outputs.skip != 'true'
         run: |
@@ -101,6 +66,15 @@ jobs:
         run: |
           python dsg-analytics/target/extract_target_metrics.py --repo-root .
           python dsg-analytics/target/build_targets.py --repo-root .
+      - name: Rebuild BKL-039 Equipment Performance projections
+        if: steps.resolve.outputs.skip != 'true'
+        run: |
+          node .github/scripts/discover-equipment-performance-populations-f5.mjs
+          node .github/scripts/generate-equipment-performance-registry-f3-multisession.mjs --write
+          node .github/scripts/generate-equipment-performance-registry-f3-multisession.mjs
+          node .github/scripts/generate-equipment-performance-f5-collection.mjs --write
+          node .github/scripts/generate-equipment-performance-f5-collection.mjs
+          node --test .github/scripts/test-equipment-performance-f5-collection.mjs
       - name: Rebuild scientific and portal projections
         if: steps.resolve.outputs.skip != 'true'
         run: |
@@ -113,41 +87,13 @@ jobs:
         if: steps.resolve.outputs.skip != 'true'
         shell: bash
         run: |
-          set -euo pipefail
-          git config user.name 'github-actions[bot]'; git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          id='${{ steps.resolve.outputs.id }}'; year='${{ steps.resolve.outputs.year }}'; month='${{ steps.resolve.outputs.month }}'
-          governed_paths=(data/sessions data/analytics docs/session-reports docs/analytics/history-validation.md docs/data/realtime/latest-observation.json docs/data/scientific-session-catalog.json docs/data/scientific-observation-index.json)
-          regenerate() {
-            session="data/sessions/$year/$month/$id"; metrics="$session/normalized/session-metrics.json"; report_dir="docs/session-reports/$year/$month/$id"; latest_observation='docs/data/realtime/latest-observation.json'
-            python dsg-analytics/analyzer/analyze_session.py --session "$session"
-            mkdir -p "$report_dir"
-            python dsg-analytics/reporter/generate_markdown_report.py --metrics "$metrics" --output "$report_dir/report-sessione.md"
-            python dsg-analytics/reporter/generate_pdf_report.py --metrics "$metrics" --output "$report_dir/Report_Sessione_$id.pdf"
-            python dsg-analytics/history/update_history.py --metrics "$metrics" --history 'data/analytics/history/sessions.csv'
-            python dsg-analytics/reporter/update_latest_observation.py --session "$session" --output "$latest_observation"
-            python dsg-analytics/history/consolidate_history.py
-            python dsg-analytics/history/enrich_scientific_history.py --repo-root .
-            python dsg-analytics/target/extract_target_metrics.py --repo-root .
-            python dsg-analytics/target/build_targets.py --repo-root .
-            node .github/scripts/generate-scientific-session-catalog.mjs --write
-            node .github/scripts/generate-scientific-catalog.mjs --write
-            python dsg-analytics/reporter/build_session_reports_index.py --repo-root .
-            node .github/scripts/generate-scientific-session-catalog.mjs --check
-            node .github/scripts/generate-scientific-catalog.mjs --check
-          }
-          pushed=0
-          for attempt in 1 2 3 4 5; do
-            echo "Publish attempt $attempt"; git fetch origin main; git reset --hard origin/main; git clean -fd; regenerate; git add -- "${governed_paths[@]}"
-            if git diff --cached --quiet; then echo 'No analytics or catalog changes to publish.'; pushed=1; break; fi
-            git commit -m "chore(analytics): refresh $id projections"
-            if git push origin HEAD:main; then pushed=1; break; fi
-            sleep 20
-          done
-          test "$pushed" -eq 1 || { echo 'Push results failed.'; exit 1; }
+          set -euo pipefail; git config user.name 'github-actions[bot]'; git config user.email '41898282+github-actions[bot]@users.noreply.github.com'; id='${{ steps.resolve.outputs.id }}'; year='${{ steps.resolve.outputs.year }}'; month='${{ steps.resolve.outputs.month }}'
+          governed_paths=(data/sessions data/analytics docs/session-reports docs/analytics/history-validation.md docs/data/realtime/latest-observation.json docs/data/scientific-session-catalog.json docs/data/scientific-observation-index.json docs/data/equipment-performance-registry-f3-multisession.json docs/data/equipment-performance-registry-f5-collection.json)
+          regenerate(){ session="data/sessions/$year/$month/$id"; metrics="$session/normalized/session-metrics.json"; report_dir="docs/session-reports/$year/$month/$id"; latest='docs/data/realtime/latest-observation.json'; python dsg-analytics/analyzer/analyze_session.py --session "$session"; mkdir -p "$report_dir"; python dsg-analytics/reporter/generate_markdown_report.py --metrics "$metrics" --output "$report_dir/report-sessione.md"; python dsg-analytics/reporter/generate_pdf_report.py --metrics "$metrics" --output "$report_dir/Report_Sessione_$id.pdf"; python dsg-analytics/history/update_history.py --metrics "$metrics" --history data/analytics/history/sessions.csv; python dsg-analytics/reporter/update_latest_observation.py --session "$session" --output "$latest"; python dsg-analytics/history/consolidate_history.py; python dsg-analytics/history/enrich_scientific_history.py --repo-root .; python dsg-analytics/target/extract_target_metrics.py --repo-root .; python dsg-analytics/target/build_targets.py --repo-root .; node .github/scripts/discover-equipment-performance-populations-f5.mjs; node .github/scripts/generate-equipment-performance-registry-f3-multisession.mjs --write; node .github/scripts/generate-equipment-performance-registry-f3-multisession.mjs; node .github/scripts/generate-equipment-performance-f5-collection.mjs --write; node .github/scripts/generate-equipment-performance-f5-collection.mjs; node --test .github/scripts/test-equipment-performance-f5-collection.mjs; node .github/scripts/generate-scientific-session-catalog.mjs --write; node .github/scripts/generate-scientific-catalog.mjs --write; python dsg-analytics/reporter/build_session_reports_index.py --repo-root .; node .github/scripts/generate-scientific-session-catalog.mjs --check; node .github/scripts/generate-scientific-catalog.mjs --check; }
+          pushed=0; for attempt in 1 2 3 4 5; do echo "Publish attempt $attempt"; git fetch origin main; git reset --hard origin/main; git clean -fd; regenerate; git add -- "${governed_paths[@]}"; if git diff --cached --quiet; then echo 'No analytics or catalog changes to publish.'; pushed=1; break; fi; git commit -m "chore(analytics): refresh $id projections"; if git push origin HEAD:main; then pushed=1; break; fi; sleep 20; done; test "$pushed" -eq 1 || { echo 'Push results failed.'; exit 1; }
       - name: Deploy refreshed portal
         if: steps.resolve.outputs.skip != 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
+        env: { GH_TOKEN: "${{ github.token }}" }
         shell: bash
         run: |
           set -euo pipefail

@@ -1,0 +1,62 @@
+name: BKL-039 F5 Governance
+on:
+  push:
+    branches: [main, architecture/bkl-039-f5-dynamic-multisession-registry]
+    paths: &f5paths
+      - '.github/scripts/discover-equipment-performance-populations-f5.mjs'
+      - '.github/scripts/test-equipment-performance-populations-f5.mjs'
+      - '.github/scripts/generate-equipment-performance-registry-f3-multisession.mjs'
+      - '.github/scripts/generate-equipment-performance-f5-collection.mjs'
+      - '.github/scripts/validate-equipment-performance-f5-collection.mjs'
+      - '.github/scripts/test-equipment-performance-f5-collection.mjs'
+      - '.github/workflows/analyze-session-automatic.yml'
+      - 'data/analytics/history/target-exposures.csv'
+      - 'data/analytics/history/target-summary.csv'
+      - 'data/analytics/metadata/session-scientific-metadata.csv'
+      - 'docs/data/equipment-performance-registry-f3-multisession.json'
+      - 'docs/data/equipment-performance-registry-f5-collection.json'
+      - 'schemas/equipment-performance-registry-f5-collection.schema.json'
+      - 'docs/javascripts/equipment-performance.js'
+      - 'docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md'
+      - '.github/workflows/bkl-039-f5-governance.yml'
+  pull_request:
+    paths: *f5paths
+permissions:
+  contents: read
+jobs:
+  f5:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: Discover current eligible populations
+        run: node .github/scripts/discover-equipment-performance-populations-f5.mjs
+      - name: Test multi-session discovery and fail-closed rules
+        run: node --test .github/scripts/test-equipment-performance-populations-f5.mjs
+      - name: Verify persisted F3 multi-session projection is current
+        run: node .github/scripts/generate-equipment-performance-registry-f3-multisession.mjs
+      - name: Verify persisted F5 collection projection is current
+        run: node .github/scripts/generate-equipment-performance-f5-collection.mjs
+      - name: Validate F5 fail-closed semantic contract
+        run: node .github/scripts/validate-equipment-performance-f5-collection.mjs
+      - name: Test F5 collection contract
+        run: node --test .github/scripts/test-equipment-performance-f5-collection.mjs
+      - name: Guard browser and automatic integration
+        run: |
+          grep -q 'DSG.EquipmentPerformanceRegistry.F5.CollectionReadModel' docs/javascripts/equipment-performance.js
+          grep -q 'SOURCE_NATIVE_UNCALIBRATED' docs/javascripts/equipment-performance.js
+          grep -q 'NO_EQUIPMENT_HEALTH_RANKING_THRESHOLD_OR_RECOMMENDATION' docs/javascripts/equipment-performance.js
+          grep -q 'generate-equipment-performance-registry-f3-multisession.mjs --write' .github/workflows/analyze-session-automatic.yml
+          grep -q 'generate-equipment-performance-f5-collection.mjs --write' .github/workflows/analyze-session-automatic.yml
+          grep -q 'docs/data/equipment-performance-registry-f3-multisession.json' .github/workflows/analyze-session-automatic.yml
+          grep -q 'docs/data/equipment-performance-registry-f5-collection.json' .github/workflows/analyze-session-automatic.yml
+      - name: Publish persisted projection evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: bkl-039-f5-generated-projections
+          path: |
+            docs/data/equipment-performance-registry-f3-multisession.json
+            docs/data/equipment-performance-registry-f5-collection.json
+            schemas/equipment-performance-registry-f5-collection.schema.json
+          if-no-files-found: error
