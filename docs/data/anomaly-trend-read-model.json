@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "component": "DSG.AnomalyTrendCenter.F4ReadModel",
+  "authority": "projection",
+  "action_authority": "NONE",
+  "baseline_commit": "615d46726c3998421bf04f9d6cc8cd8234023b62",
+  "upstream_component": "DSG.AnomalyTrendCenter.F3B",
+  "upstream_method_version": "1.0",
+  "source_component": "DSG.NightTimelineReplay.F3",
+  "source_baseline_commit": "ba17df5584a82c4396bd7dccf6bf593c518d8429",
+  "session_id": "2026-08-15_2026-08-16",
+  "interaction_mode": "READ_ONLY",
+  "advisory_mode": "DESCRIPTIVE_ONLY",
+  "safety_authority": "UNCHANGED_LOCAL_AUTHORITY",
+  "command_actions": [],
+  "summary": {"total_records":5,"observations":3,"trend_measurements":2,"anomaly_candidates":0,"correlation_candidates":0,"recommendations":0},
+  "source_drilldown": {"enabled":true,"fields":["source_record_refs","citation_refs","provenance_refs"]},
+  "records": [
+    {"derived_record_id":"AT-SHA256-121a9a7dbe3da345927c4e6771adc32ce2a0922b2fbeb05ffbffbb49873a784a","semantic_type":"OBSERVATION","method_id":"BKL038-F3B-SOURCE-OBSERVATION-1","method_version":"1.0","source_record_refs":["replay-event:RPL-20260815-CLOUDWATCHER-FIRST"],"citation_refs":["CIT-RPL-F3-CW-FIRST@1.0"],"provenance_refs":["PRV-RPL-F3-CW-FIRST@1.0"],"analysis_window":{"start_utc":"2026-08-15T17:00:09Z","end_utc":"2026-08-15T17:00:09Z"},"measurement":null,"candidate_state":null,"rule_id":null,"quality_state":"CURRENT_AT_OBSERVATION","explanation_codes":["SOURCE_OBSERVATION_PRESERVED"],"authority":"projection","action_authority":"NONE"},
+    {"derived_record_id":"AT-SHA256-53faeb7bf2f490d7aa19807326f008ffa9c7de0d02bb04e8f583f21671840d0a","semantic_type":"OBSERVATION","method_id":"BKL038-F3B-SOURCE-OBSERVATION-1","method_version":"1.0","source_record_refs":["replay-event:RPL-20260815-NINA-DOME-OPEN"],"citation_refs":["CIT-RPL-F3-NINA-DOME-OPEN@1.0"],"provenance_refs":["PRV-RPL-F3-NINA-DOME-OPEN@1.0"],"analysis_window":{"start_utc":"2026-08-15T18:42:52.8776Z","end_utc":"2026-08-15T18:42:52.8776Z"},"measurement":null,"candidate_state":null,"rule_id":null,"quality_state":"CURRENT_AT_OBSERVATION","explanation_codes":["SOURCE_OBSERVATION_PRESERVED"],"authority":"projection","action_authority":"NONE"},
+    {"derived_record_id":"AT-SHA256-49ba5ed38f94628e0e6bcd3cdc065e3a0075655881fde4934e75e480e3d1c752","semantic_type":"OBSERVATION","method_id":"BKL038-F3B-SOURCE-OBSERVATION-1","method_version":"1.0","source_record_refs":["replay-event:RPL-20260815-PHD2-GUIDING-BEGIN"],"citation_refs":["CIT-RPL-F3-PHD2-GUIDING-BEGIN@1.0"],"provenance_refs":["PRV-RPL-F3-PHD2-GUIDING-BEGIN@1.0"],"analysis_window":{"start_utc":"2026-08-15T20:11:13Z","end_utc":"2026-08-15T20:11:13Z"},"measurement":null,"candidate_state":null,"rule_id":null,"quality_state":"CURRENT_AT_OBSERVATION","explanation_codes":["SOURCE_OBSERVATION_PRESERVED"],"authority":"projection","action_authority":"NONE"},
+    {"derived_record_id":"AT-SHA256-6963401289521af98fc2605dcc00628c38b7d25b7a0ac477dc509c9850b3a60f","semantic_type":"TREND_MEASUREMENT","method_id":"BKL038-F3B-EXACT-DELTA-PROJECTION-1","method_version":"1.0","source_record_refs":["replay-event:RPL-20260815-CLOUDWATCHER-FIRST","replay-event:RPL-20260815-NINA-DOME-OPEN"],"citation_refs":["CIT-RPL-F3-CW-FIRST@1.0","CIT-RPL-F3-NINA-DOME-OPEN@1.0"],"provenance_refs":["PRV-RPL-F3-CW-FIRST@1.0","PRV-RPL-F3-NINA-DOME-OPEN@1.0"],"analysis_window":{"start_utc":"2026-08-15T17:00:09Z","end_utc":"2026-08-15T18:42:52.8776Z"},"measurement":{"value":6163877.6,"unit":"ms","descriptive_only":true},"candidate_state":null,"rule_id":null,"quality_state":"CURRENT_AT_OBSERVATION","explanation_codes":["EXACT_TEMPORAL_DELTA","DESCRIPTIVE_ONLY_NO_ANOMALY_RULE","CAUSATION_NOT_INFERRED"],"authority":"projection","action_authority":"NONE"},
+    {"derived_record_id":"AT-SHA256-bf2e27ec398f08dc3d78c273580feb910cc79a4b8907f34ce5eaefaf1bad2526","semantic_type":"TREND_MEASUREMENT","method_id":"BKL038-F3B-EXACT-DELTA-PROJECTION-1","method_version":"1.0","source_record_refs":["replay-event:RPL-20260815-NINA-DOME-OPEN","replay-event:RPL-20260815-PHD2-GUIDING-BEGIN"],"citation_refs":["CIT-RPL-F3-NINA-DOME-OPEN@1.0","CIT-RPL-F3-PHD2-GUIDING-BEGIN@1.0"],"provenance_refs":["PRV-RPL-F3-NINA-DOME-OPEN@1.0","PRV-RPL-F3-PHD2-GUIDING-BEGIN@1.0"],"analysis_window":{"start_utc":"2026-08-15T18:42:52.8776Z","end_utc":"2026-08-15T20:11:13Z"},"measurement":{"value":5300122.4,"unit":"ms","descriptive_only":true},"candidate_state":null,"rule_id":null,"quality_state":"CURRENT_AT_OBSERVATION","explanation_codes":["EXACT_TEMPORAL_DELTA","DESCRIPTIVE_ONLY_NO_ANOMALY_RULE","CAUSATION_NOT_INFERRED"],"authority":"projection","action_authority":"NONE"}
+  ],
+  "limitations": ["HISTORICAL_PROJECTION_NOT_CURRENT_SAFETY_STATE","NO_ANOMALY_THRESHOLD_AUTHORIZED","CORRELATION_DOES_NOT_IMPLY_CAUSATION","NO_COMMAND_OR_REMEDIATION_AUTHORITY","BKL030_EAGLE_HISTORY_NOT_ONBOARDED"]
+}
