@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 2.2 |
+| Versione | 2.3 |
 | Baseline | 09/09/2026 |
-| Stato | Current root bootstrap — closure candidate |
+| Stato | Current root bootstrap — BKL-039 closure candidate |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -57,25 +57,25 @@ Procedere una milestone alla volta: repository truth -> architettura -> implemen
 - BKL-044 CLOSED / ACCEPTED.
 - BKL-035 CLOSED / ACCEPTED.
 - BKL-040 CLOSED / ACCEPTED.
-- BKL-038 ha completato F1, F2-A, F3-A, F3-B e F4-A; PR #125 merge `d8249984d63455690b957156060f858eb3cc2713`.
-- Post-merge BKL-038 F4-A sul merge SHA: BKL-038 F4 Governance #4, Developer Foundation #1110, Docs #729, Pages #720 e Word #1154 — SUCCESS.
-- La closure formale BKL-038 è governata da `docs/project/BKL-038-CLOSURE-2026-09-09.md`; finché la closure PR non è merged/post-merge green, lo stato 09/09 è una continuity candidate.
-- Il package successore dependency-ready è **BKL-039 — Equipment Performance Registry**.
-- **BKL-037 non è corrente**: resta Planned finché BKL-045 non è accepted.
-- BKL-038 resta bounded/read-only/descriptive-only: nessun threshold, severity policy, causal promotion, predictive maintenance, remediation o Safety Authority coupling è autorizzato.
-- BKL-030 EAGLE history non è stata fabbricata/onboarded analiticamente: richiede futura evidence repository-resolvable governata.
+- BKL-038 CLOSED / ACCEPTED; final implementation PR #125 merge `d8249984d63455690b957156060f858eb3cc2713`, closure governata da `docs/project/BKL-038-CLOSURE-2026-09-09.md`.
+- BKL-039 ha completato F4-A/F4-B/F5-A/F5-B/F5-C/F5-D; PR #132 merge `651fc340fbb5e58ca36409d574bdd09c3ae55790`.
+- Post-merge BKL-039 sul merge SHA: BKL-039 F5 Governance #32, BKL-039 F4 Governance #29, Developer Foundation #1194, Docs #813, Word #1238 e Pages #727 — SUCCESS.
+- La closure formale BKL-039 è governata da `docs/project/BKL-039-CLOSURE-2026-09-09.md`; finché la closure PR non è merged/post-merge green, lo stato è una continuity candidate.
+- Il package successore dependency-ready è **BKL-045 — PixInsight Workflow Provenance Plugin**.
+- **BKL-037 non è ancora corrente**: resta Planned finché BKL-045 non è accepted.
+- BKL-039 resta historical/read-only/descriptive-only: nessun rating, threshold, health policy, recommendation, remediation o Safety Authority coupling è autorizzato.
 - graph DB, vector DB, RAG, inference runtime/provider, automatic remediation e AI/Safety authority restano non autorizzati salvo governance successiva.
 - runtime EAGLE e Safety Authority restano invariati.
 
 ### Sequenza governata corrente
 
-`BKL-030 CLOSED -> BKL-015 CLOSED -> BKL-044 CLOSED -> BKL-035 CLOSED -> BKL-040 CLOSED -> BKL-038 CLOSURE -> BKL-039 CURRENT -> BKL-045 -> BKL-037 -> BKL-041 -> BKL-046 -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`BKL-030 CLOSED -> BKL-015 CLOSED -> BKL-044 CLOSED -> BKL-035 CLOSED -> BKL-040 CLOSED -> BKL-038 CLOSED -> BKL-039 CLOSURE -> BKL-045 NEXT -> BKL-037 -> BKL-041 -> BKL-046 -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Quality-gate handover
 
-La continuity authority candidate è `docs/project/HANDOVER_2026-09-09.md`; il delta tecnico candidate è `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-09.md`; la closure candidate BKL-038 è `docs/project/BKL-038-CLOSURE-2026-09-09.md`.
+La continuity authority candidate è `docs/project/HANDOVER_2026-09-09.md`; il delta tecnico candidate è `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-09.md`; la closure BKL-039 candidate è `docs/project/BKL-039-CLOSURE-2026-09-09.md`.
 
-BKL-030, BKL-015, BKL-044, BKL-035, BKL-040 e gli incrementi BKL-038 accettati non possono essere riaperti implicitamente. Performance thresholds, health policy, anomaly severity policy, remediation, command path, Safety Authority coupling, graph infrastructure persistente o AI authority richiedono governance separata.
+I package già accepted non possono essere riaperti implicitamente. Performance thresholds, health policy, anomaly severity policy, remediation, command path, Safety Authority coupling, graph infrastructure persistente o AI authority richiedono governance separata.
 
 ## 8. Divieti
 
@@ -83,4 +83,4 @@ Non inventare branch/file/commit/test/workflow/stati; non marcare approved senza
 
 ## 9. Punto di partenza operativo
 
-Completare prima la closure BKL-038: exact-head CI, ARB indipendente, Release Quality, merge expected-head e post-merge verification. Solo dopo la closure integrata iniziare BKL-039 da repository-proven equipment/session evidence, senza inventare rating, threshold, health policy o remediation semantics.
+Completare la closure documentale BKL-039 con exact-head CI, merge expected-head e post-merge verification. Solo dopo la closure integrata promuovere BKL-045 come package governato corrente e avviare source discovery/contract del PixInsight Workflow Provenance Plugin. Non iniziare BKL-037 prima dell'acceptance di BKL-045.
