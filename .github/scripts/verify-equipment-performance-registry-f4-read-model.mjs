@@ -7,11 +7,19 @@ const root=path.resolve(here,'../..');
 const schemaPath=path.join(root,'schemas/equipment-performance-registry-f4-read-model.schema.json');
 const dataPath=path.join(root,'docs/data/equipment-performance-registry-f4-read-model.json');
 const f3Path=path.join(root,'docs/data/equipment-performance-registry-f3.json');
-const forbidden=/(performance_rating|health_score|health_state|threshold|ranking|percentile|recommendation|remediation|command_authority|safety_authority)/i;
+const forbiddenKeys=new Set(['performance_rating','health_score','health_state','threshold','ranking','percentile','recommendation','remediation','command_authority','safety_authority']);
 const fail=(m)=>{throw new Error(`BKL-039 F4 validation failed: ${m}`);};
 const read=(p)=>JSON.parse(fs.readFileSync(p,'utf8'));
 const exactKeys=(o,keys,label)=>{const got=Object.keys(o).sort();const exp=[...keys].sort();if(JSON.stringify(got)!==JSON.stringify(exp))fail(`${label} fields changed: ${got.join(',')}`);};
 const unique=(a)=>new Set(a).size===a.length;
+const assertNoForbiddenKeys=(value,pathLabel='root')=>{
+  if(Array.isArray(value)){for(let i=0;i<value.length;i++)assertNoForbiddenKeys(value[i],`${pathLabel}[${i}]`);return;}
+  if(!value||typeof value!=='object')return;
+  for(const [key,child] of Object.entries(value)){
+    if(forbiddenKeys.has(key.toLowerCase()))fail(`forbidden semantic field ${pathLabel}.${key}`);
+    assertNoForbiddenKeys(child,`${pathLabel}.${key}`);
+  }
+};
 
 export function validate(doc,{f3=read(f3Path),schema=read(schemaPath)}={}){
   exactKeys(doc,['schema_version','component','authority','action_authority','source_contract','view'],'root');
@@ -41,7 +49,7 @@ export function validate(doc,{f3=read(f3Path),schema=read(schemaPath)}={}){
     if(!src||!statMethods[s.statistic_type]||s.method_id!==statMethods[s.statistic_type]||s.record_id!==src.record_id||s.value!==src.value||s.sample_count!==src.sample_count)fail(`statistic ${s.statistic_type} not exact F3 projection`);
   }
   if(new Set(v.statistics.map(s=>s.statistic_type)).size!==4)fail('duplicate/missing statistic type');
-  if(forbidden.test(JSON.stringify(doc)))fail('forbidden assessment/remediation semantics present');
+  assertNoForbiddenKeys(doc);
   if(schema?.additionalProperties!==false||schema?.properties?.view?.additionalProperties!==false)fail('governing schema is not fail-closed');
   return true;
 }
