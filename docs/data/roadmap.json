@@ -1,73 +1,168 @@
 {
   "schemaVersion": "2.2",
-  "updatedAt": "2026-09-08",
+  "updatedAt": "2026-09-09",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "9b0a6d711ba2cd8811541525660a62101744a732ddfbe03928276d269d47639d",
+  "sourceDigest": "eef27eb9e13292461673f348073ba01c9bc131525a1169a99944632f536526f6",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
-  "currentPackage": "BKL-038",
-  "nextMilestone": "BKL-038 Anomaly & Trend Center",
-  "target": "Establish the governed Anomaly & Trend Center over accepted EAGLE health history and BKL-040 historical timeline foundations, preserving explainability, source lineage and Safety boundaries without introducing automatic remediation authority",
-  "summary": {"total":43,"completed":26,"active":4,"planned":13,"percentCompleted":60},
-  "evidenceSummary": {"sources":8,"completionReports":6,"evidenceManifests":2},
+  "currentPackage": "BKL-039",
+  "nextMilestone": "BKL-039 Equipment Performance Registry",
+  "target": "Establish the governed Equipment Performance Registry over accepted knowledge and session-history foundations, preserving evidence lineage, explainability and Safety boundaries without introducing automatic remediation authority",
+  "summary": {
+    "total": 43,
+    "completed": 27,
+    "active": 4,
+    "planned": 12,
+    "percentCompleted": 63
+  },
+  "evidenceSummary": {
+    "sources": 8,
+    "completionReports": 6,
+    "evidenceManifests": 2
+  },
   "waves": [
-    {"id":"rc2-enterprise-portal","title":"RC2 Enterprise Portal","status":"active","items":[
-      {"id":"WP-01","title":"Enterprise Foundation Framework","evidencePath":"docs/architecture/validation/WP-01-Enterprise-Foundation-Framework-Completion-Report.md","status":"completed","evidenceStatus":"Accepted","evidence":{"present":1,"accepted":1,"required":1}},
-      {"id":"WP-02","title":"Scientific Platform 2.0","evidencePath":"docs/architecture/validation/WP-02-Scientific-Platform-2.0-Completion-Report.md","status":"completed","evidenceStatus":"Accepted","evidence":{"present":1,"accepted":1,"required":1}},
-      {"id":"WP-03","title":"Enterprise Theme Framework","evidencePath":"docs/architecture/validation/WP-03-Enterprise-Theme-Framework-Completion-Report.md","status":"completed","evidenceStatus":"Accepted","evidence":{"present":1,"accepted":1,"required":1}},
-      {"id":"WP-04","title":"Enterprise Search Center","evidencePath":"docs/architecture/validation/WP-04-Enterprise-Search-Center-Completion-Report.md","status":"completed","evidenceStatus":"Accepted","evidence":{"present":1,"accepted":1,"required":1}},
-      {"id":"WP-05","title":"Operations Dashboard","evidencePath":"docs/architecture/validation/WP-05-Operations-Dashboard-Completion-Report.md","status":"completed","evidenceStatus":"Accepted","evidence":{"present":1,"accepted":1,"required":1}},
-      {"id":"WP-06","title":"Enterprise Plugin SDK","evidencePath":"docs/architecture/validation/WP-06-Enterprise-Plugin-SDK-Completion-Report.md","status":"completed","evidenceStatus":"Accepted","evidence":{"present":1,"accepted":1,"required":1}},
-      {"id":"RC2-BASELINE","title":"RC2 Baseline and Integrated Acceptance","status":"active"}
-    ]},
-    {"id":"architecture-program","title":"Architecture Program AP-001–AP-015","status":"active","items":[
-      {"id":"AP-001","title":"Enterprise Metamodel and Repository Information Architecture","status":"completed"},
-      {"id":"AP-002","title":"Enterprise Data Governance","status":"completed"},
-      {"id":"AP-003","title":"Observatory Automation Architecture","status":"completed"},
-      {"id":"AP-004","title":"Enterprise Telemetry and Observability Architecture","status":"completed"},
-      {"id":"AP-005","title":"Identity, Access and Remote Operations Security","status":"completed"},
-      {"id":"AP-006","title":"Enterprise Configuration and Asset Management","status":"completed"},
-      {"id":"AP-007","title":"Enterprise Operations and Service Management Architecture","status":"active"},
-      {"id":"AP-008","title":"Enterprise Integration Architecture","status":"active"},
-      {"id":"AP-009","title":"Enterprise Infrastructure Architecture","status":"completed"},
-      {"id":"AP-010","title":"Enterprise Safety Assurance Architecture","status":"completed"},
-      {"id":"AP-011","title":"Enterprise Analytics Platform Architecture","status":"completed"},
-      {"id":"AP-012","title":"Enterprise Operations Center Architecture","status":"completed"},
-      {"id":"AP-013","title":"Scientific Image Repository Architecture","evidencePath":".github/roadmap/evidence/AP-013.evidence.json","status":"completed","evidenceStatus":"completed","evidence":{"manifest":".github/roadmap/evidence/AP-013.evidence.json","required":4,"present":4,"accepted":4,"missing":[],"rejected":[]}},
-      {"id":"AP-013C","title":"Verified Transport Cleanup and Convergence Monitoring","status":"completed","note":"DRY_RUN/NO_DELETE increment accepted; real OAT and ARB-013C-R1 complete; C8 productive cleanup excluded and not authorized."},
-      {"id":"AP-014","title":"Scientific Observation Catalog and Search","evidencePath":".github/roadmap/evidence/AP-014.evidence.json","status":"completed","evidenceStatus":"completed","evidence":{"manifest":".github/roadmap/evidence/AP-014.evidence.json","required":10,"present":10,"accepted":10,"missing":[],"rejected":[]}},
-      {"id":"AP-015","title":"Scientific Knowledge Platform Architecture","status":"planned","note":"CAP-40 after approved intelligence foundations."}
-    ]},
-    {"id":"observatory-intelligence","title":"Observatory Intelligence & Scientific Processing Roadmap","status":"active","items":[
-      {"id":"BKL-029","title":"SQM Sky Quality Telemetry & Scientific History","status":"completed","note":"Closed via PR #68; merge 0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441."},
-      {"id":"BKL-030","title":"EAGLE Health & Reliability Telemetry","status":"completed","note":"G1-G8 complete. G7 merged via PR #89 as a15d85b27ebfbe8a6488330920d10dda8db79a78; G8 safety review approved with conditions. No severity policy, remediation or Safety Authority coupling authorized."},
-      {"id":"BKL-047","title":"AP-013C Verified Transport Cleanup & Convergence Monitoring","status":"completed","note":"DRY_RUN/NO_DELETE accepted with real PC/EAGLE/OneDrive OAT and ARB-013C-R1; productive cleanup C8 not authorized."},
-      {"id":"BKL-015","title":"Knowledge Graph machine-readable foundation","status":"completed","note":"F1-F3 accepted; repository AP/ADR/component/evidence traceability is machine-readable and TD-008 closure approved."},
-      {"id":"BKL-044","title":"Knowledge Graph / AI Evidence Contract","status":"completed","note":"F1-F4 closed/accepted. Machine-readable semantics, bounded reconciliation and consumer preservation contract accepted; no graph/vector/RAG/runtime AI or Safety Authority change authorized."},
-      {"id":"BKL-035","title":"Target Knowledge Base","status":"completed","note":"F1-F4 closed/accepted via PR #112; final consumer read model, Citation/Provenance lineage and conflict preservation accepted."},
-      {"id":"BKL-040","title":"Night Timeline / Observatory Replay","status":"completed","note":"F1-F4 CLOSED/ACCEPTED via PR #117; final merge 80d22a255540ac582733c60dfe9bbf7807bcdf9b; post-merge Developer Foundation #1053, Docs #671, Word #1096 and Pages #712 SUCCESS."},
-      {"id":"BKL-037","title":"Session Comparison & Benchmarking","status":"planned","note":"Remains planned until declared dependency BKL-045 is accepted."},
-      {"id":"BKL-038","title":"Anomaly & Trend Center","status":"active","note":"Current dependency-ready package after BKL-040 closure; depends on accepted BKL-030 and BKL-040."},
-      {"id":"BKL-039","title":"Equipment Performance Registry","status":"planned"},
-      {"id":"BKL-041","title":"Scientific Data Quality Score","status":"planned"},
-      {"id":"BKL-045","title":"PixInsight Workflow Provenance Plugin","status":"planned","note":"Governed PixInsight extension for reproducible post-processing provenance."},
-      {"id":"BKL-046","title":"AI Post-Processing Assistant for PixInsight","status":"planned","note":"Advisory AI over processing provenance; human approval retained."},
-      {"id":"BKL-031","title":"Observation Planner intelligente","status":"planned"},
-      {"id":"BKL-032","title":"Session Readiness / Go-No-Go Decision Support","status":"planned"},
-      {"id":"BKL-036","title":"Observatory Health Score","status":"planned"},
-      {"id":"BKL-033","title":"Observatory Digital Twin","status":"planned"},
-      {"id":"BKL-034","title":"Scientific Image Gallery evoluta","status":"planned"},
-      {"id":"BKL-042","title":"AI Observatory Assistant","status":"planned"},
-      {"id":"BKL-043","title":"Observatory Reliability Engineering","status":"planned"}
-    ]}
+    {
+      "id": "rc2-enterprise-portal",
+      "title": "RC2 Enterprise Portal",
+      "status": "active",
+      "items": [
+        {
+          "id": "WP-01",
+          "title": "Enterprise Foundation Framework",
+          "evidencePath": "docs/architecture/validation/WP-01-Enterprise-Foundation-Framework-Completion-Report.md",
+          "status": "completed",
+          "evidenceStatus": "Accepted",
+          "evidence": {
+            "present": 1,
+            "accepted": 1,
+            "required": 1
+          }
+        },
+        {
+          "id": "WP-02",
+          "title": "Scientific Platform 2.0",
+          "evidencePath": "docs/architecture/validation/WP-02-Scientific-Platform-2.0-Completion-Report.md",
+          "status": "completed",
+          "evidenceStatus": "Accepted",
+          "evidence": {
+            "present": 1,
+            "accepted": 1,
+            "required": 1
+          }
+        },
+        {
+          "id": "WP-03",
+          "title": "Enterprise Theme Framework",
+          "evidencePath": "docs/architecture/validation/WP-03-Enterprise-Theme-Framework-Completion-Report.md",
+          "status": "completed",
+          "evidenceStatus": "Accepted",
+          "evidence": {
+            "present": 1,
+            "accepted": 1,
+            "required": 1
+          }
+        },
+        {
+          "id": "WP-04",
+          "title": "Enterprise Search Center",
+          "evidencePath": "docs/architecture/validation/WP-04-Enterprise-Search-Center-Completion-Report.md",
+          "status": "completed",
+          "evidenceStatus": "Accepted",
+          "evidence": {
+            "present": 1,
+            "accepted": 1,
+            "required": 1
+          }
+        },
+        {
+          "id": "WP-05",
+          "title": "Operations Dashboard",
+          "evidencePath": "docs/architecture/validation/WP-05-Operations-Dashboard-Completion-Report.md",
+          "status": "completed",
+          "evidenceStatus": "Accepted",
+          "evidence": {
+            "present": 1,
+            "accepted": 1,
+            "required": 1
+          }
+        },
+        {
+          "id": "WP-06",
+          "title": "Enterprise Plugin SDK",
+          "evidencePath": "docs/architecture/validation/WP-06-Enterprise-Plugin-SDK-Completion-Report.md",
+          "status": "completed",
+          "evidenceStatus": "Accepted",
+          "evidence": {
+            "present": 1,
+            "accepted": 1,
+            "required": 1
+          }
+        },
+        {
+          "id": "RC2-BASELINE",
+          "title": "RC2 Baseline and Integrated Acceptance",
+          "status": "active"
+        }
+      ]
+    },
+    {
+      "id": "architecture-program",
+      "title": "Architecture Program AP-001–AP-015",
+      "status": "active",
+      "items": [
+        {"id":"AP-001","title":"Enterprise Metamodel and Repository Information Architecture","status":"completed"},
+        {"id":"AP-002","title":"Enterprise Data Governance","status":"completed"},
+        {"id":"AP-003","title":"Observatory Automation Architecture","status":"completed"},
+        {"id":"AP-004","title":"Enterprise Telemetry and Observability Architecture","status":"completed"},
+        {"id":"AP-005","title":"Identity, Access and Remote Operations Security","status":"completed"},
+        {"id":"AP-006","title":"Enterprise Configuration and Asset Management","status":"completed"},
+        {"id":"AP-007","title":"Enterprise Operations and Service Management Architecture","status":"active"},
+        {"id":"AP-008","title":"Enterprise Integration Architecture","status":"active"},
+        {"id":"AP-009","title":"Enterprise Infrastructure Architecture","status":"completed"},
+        {"id":"AP-010","title":"Enterprise Safety Assurance Architecture","status":"completed"},
+        {"id":"AP-011","title":"Enterprise Analytics Platform Architecture","status":"completed"},
+        {"id":"AP-012","title":"Enterprise Operations Center Architecture","status":"completed"},
+        {"id":"AP-013","title":"Scientific Image Repository Architecture","evidencePath":".github/roadmap/evidence/AP-013.evidence.json","status":"completed","evidenceStatus":"completed","evidence":{"manifest":".github/roadmap/evidence/AP-013.evidence.json","required":4,"present":4,"accepted":4,"missing":[],"rejected":[]}},
+        {"id":"AP-013C","title":"Verified Transport Cleanup and Convergence Monitoring","status":"completed","note":"DRY_RUN/NO_DELETE increment accepted; real OAT and ARB-013C-R1 complete; C8 productive cleanup excluded and not authorized."},
+        {"id":"AP-014","title":"Scientific Observation Catalog and Search","evidencePath":".github/roadmap/evidence/AP-014.evidence.json","status":"completed","evidenceStatus":"completed","evidence":{"manifest":".github/roadmap/evidence/AP-014.evidence.json","required":10,"present":10,"accepted":10,"missing":[],"rejected":[]}},
+        {"id":"AP-015","title":"Scientific Knowledge Platform Architecture","status":"planned","note":"CAP-40 after approved intelligence foundations."}
+      ]
+    },
+    {
+      "id": "observatory-intelligence",
+      "title": "Observatory Intelligence & Scientific Processing Roadmap",
+      "status": "active",
+      "items": [
+        {"id":"BKL-029","title":"SQM Sky Quality Telemetry & Scientific History","status":"completed","note":"Closed via PR #68; merge 0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441."},
+        {"id":"BKL-030","title":"EAGLE Health & Reliability Telemetry","status":"completed","note":"G1-G8 complete. G7 merged via PR #89 as a15d85b27ebfbe8a6488330920d10dda8db79a78; G8 safety review approved with conditions. No severity policy, remediation or Safety Authority coupling authorized."},
+        {"id":"BKL-047","title":"AP-013C Verified Transport Cleanup & Convergence Monitoring","status":"completed","note":"DRY_RUN/NO_DELETE accepted with real PC/EAGLE/OneDrive OAT and ARB-013C-R1; productive cleanup C8 not authorized."},
+        {"id":"BKL-015","title":"Knowledge Graph machine-readable foundation","status":"completed","note":"F1-F3 accepted; repository AP/ADR/component/evidence traceability is machine-readable and TD-008 closure approved."},
+        {"id":"BKL-044","title":"Knowledge Graph / AI Evidence Contract","status":"completed","note":"F1-F4 closed/accepted. Machine-readable semantics, bounded reconciliation and consumer preservation contract accepted; no graph/vector/RAG/runtime AI or Safety Authority change authorized."},
+        {"id":"BKL-035","title":"Target Knowledge Base","status":"completed","note":"F1-F4 closed/accepted via PR #112; final consumer read model, Citation/Provenance lineage and conflict preservation accepted."},
+        {"id":"BKL-040","title":"Night Timeline / Observatory Replay","status":"completed","note":"F1-F4 CLOSED/ACCEPTED via PR #117; final merge 80d22a255540ac582733c60dfe9bbf7807bcdf9b; post-merge Developer Foundation #1053, Docs #671, Word #1096 and Pages #712 SUCCESS."},
+        {"id":"BKL-037","title":"Session Comparison & Benchmarking","status":"planned","note":"Remains planned until declared dependency BKL-045 is accepted."},
+        {"id":"BKL-038","title":"Anomaly & Trend Center","status":"completed","note":"F1/F2-A/F3-A/F3-B/F4-A accepted; PR #125 merge d8249984d63455690b957156060f858eb3cc2713; closure candidate docs/project/BKL-038-CLOSURE-2026-09-09.md."},
+        {"id":"BKL-039","title":"Equipment Performance Registry","status":"active","note":"Current dependency-ready package after BKL-038 closure reconciliation."},
+        {"id":"BKL-041","title":"Scientific Data Quality Score","status":"planned"},
+        {"id":"BKL-045","title":"PixInsight Workflow Provenance Plugin","status":"planned","note":"Governed PixInsight extension for reproducible post-processing provenance."},
+        {"id":"BKL-046","title":"AI Post-Processing Assistant for PixInsight","status":"planned","note":"Advisory AI over processing provenance; human approval retained."},
+        {"id":"BKL-031","title":"Observation Planner intelligente","status":"planned"},
+        {"id":"BKL-032","title":"Session Readiness / Go-No-Go Decision Support","status":"planned"},
+        {"id":"BKL-036","title":"Observatory Health Score","status":"planned"},
+        {"id":"BKL-033","title":"Observatory Digital Twin","status":"planned"},
+        {"id":"BKL-034","title":"Scientific Image Gallery evoluta","status":"planned"},
+        {"id":"BKL-042","title":"AI Observatory Assistant","status":"planned"},
+        {"id":"BKL-043","title":"Observatory Reliability Engineering","status":"planned"}
+      ]
+    }
   ],
   "milestones": [
     {"id":"M-RC2-WP01","itemRef":"WP-01","title":"WP-01 Enterprise Foundation","date":"2026-08-05","description":"Foundation delivered.","image":null,"status":"completed"},
     {"id":"M-RC2-WP02","itemRef":"WP-02","title":"WP-02 Scientific Platform 2.0","date":"2026-08-05","description":"Scientific platform delivered.","image":null,"status":"completed"},
     {"id":"M-RC2-WP03","itemRef":"WP-03","title":"WP-03 Enterprise Theme Framework","date":"2026-08-05","description":"Theme delivered.","image":null,"status":"completed"},
     {"id":"M-RC2-WP04","itemRef":"WP-04","title":"WP-04 Enterprise Search Center","date":"2026-08-05","description":"Search delivered.","image":null,"status":"completed"},
-    {"id":"M-RC2-WP05","itemRef":"WP-05","title":"WP-05 Operations Dashboard","date":"2026-08-05","description":"Dashboard delivered.","image":null,"status":"completed"},
-    {"id":"M-RC2-WP06","itemRef":"WP-06","title":"WP-06 Enterprise Plugin SDK","date":"2026-08-05","description":"SDK delivered.","image":null,"status":"completed"},
+    {"id":"M-RC2-WP05","itemRef":"WP-05","title":"WP-05 Operations Dashboard","date":"2026-08-05","description":"Operations dashboard delivered.","image":null,"status":"completed"},
+    {"id":"M-RC2-WP06","itemRef":"WP-06","title":"WP-06 Enterprise Plugin SDK","date":"2026-08-05","description":"Plugin SDK delivered.","image":null,"status":"completed"},
     {"id":"M-RC2-BASELINE","itemRef":"RC2-BASELINE","title":"RC2 Baseline and Integrated Acceptance","date":"2026-08-05","description":"Integrated acceptance in progress.","image":null,"status":"active"},
     {"id":"M-AP012-C04","itemRef":"AP-012","title":"ARB-012-C04","date":"2026-08-26","description":"Closed / Approved.","image":null,"status":"completed"},
     {"id":"M-AP013","itemRef":"AP-013","title":"AP-013 Scientific Image Repository","date":"2026-08-11","description":"Accepted with conditions.","image":null,"status":"completed"},
@@ -79,7 +174,7 @@
     {"id":"M-BKL044","itemRef":"BKL-044","title":"BKL-044 Knowledge Graph / AI Evidence Contract","date":"2026-09-07","description":"F1-F4 closed/accepted after machine-readable evidence, bounded reconciliation, consumer preservation, ARB/RQ and post-merge CI.","image":null,"status":"completed"},
     {"id":"M-BKL035","itemRef":"BKL-035","title":"BKL-035 Target Knowledge Base","date":"2026-09-07","description":"F1-F4 closed/accepted after target identity, deterministic reconciliation, consumer read model, ARB/RQ and post-merge CI.","image":null,"status":"completed"},
     {"id":"M-BKL040","itemRef":"BKL-040","title":"BKL-040 Night Timeline / Observatory Replay","date":"2026-09-08","description":"F1-F4 CLOSED/ACCEPTED after bounded historical timeline, deterministic multi-source synchronization, consumer preservation, ARB/RQ and post-merge CI.","image":null,"status":"completed"},
-    {"id":"M-BKL038","itemRef":"BKL-038","title":"BKL-038 Anomaly & Trend Center","date":"2026-09-08","description":"Next dependency-ready governed package after BKL-040 closure.","image":null,"status":"active"},
+    {"id":"M-BKL038","itemRef":"BKL-038","title":"BKL-038 Anomaly & Trend Center","date":"2026-09-09","description":"F1/F2-A/F3-A/F3-B/F4-A accepted; final F4-A merge d8249984d63455690b957156060f858eb3cc2713 with exact-SHA post-merge governance green.","image":null,"status":"completed"},
     {"id":"M-PIXINSIGHT","itemRef":"BKL-045","title":"PixInsight Workflow Provenance","date":"2026-08-30","description":"Approved future processing provenance capability.","image":null,"status":"planned"},
     {"id":"M-PIXINSIGHT-AI","itemRef":"BKL-046","title":"AI-assisted PixInsight Processing","date":"2026-08-30","description":"Approved advisory AI capability after provenance foundation.","image":null,"status":"planned"}
   ]
