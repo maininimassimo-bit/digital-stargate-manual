@@ -8,6 +8,7 @@ on:
       - '.github/scripts/test-pixinsight-workflow-provenance.mjs'
       - '.github/workflows/bkl-045-f3-governance.yml'
       - 'docs/architecture/scientific-assets/BKL-045-F3*'
+      - 'tools/pixinsight/**'
   push:
     branches: [main]
     paths:
@@ -16,6 +17,7 @@ on:
       - '.github/scripts/test-pixinsight-workflow-provenance.mjs'
       - '.github/workflows/bkl-045-f3-governance.yml'
       - 'docs/architecture/scientific-assets/BKL-045-F3*'
+      - 'tools/pixinsight/**'
 
 permissions:
   contents: read
@@ -32,3 +34,17 @@ jobs:
         run: node -e "JSON.parse(require('fs').readFileSync('docs/contracts/pixinsight-workflow-provenance.schema.json','utf8')); console.log('schema JSON OK')"
       - name: Test PixInsight workflow provenance contract
         run: node --test .github/scripts/test-pixinsight-workflow-provenance.mjs
+      - name: Verify F3-B probe authority boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          probe='tools/pixinsight/DigitalStarGateProvenanceProbe.js'
+          test -f "$probe"
+          grep -q 'actionAuthority: "NONE"' "$probe"
+          grep -q 'NO_OBSERVED_PROCESSING_STEP_IS_EMITTED_BY_THIS_PROBE' "$probe"
+          grep -q 'completeness: steps.length > 0 ? "PARTIAL" : "UNAVAILABLE"' "$probe"
+          if grep -Eq 'evidenceClass:[[:space:]]*"OBSERVED"' "$probe"; then
+            echo 'F3-B bounded probe must not emit OBSERVED processing steps.' >&2
+            exit 1
+          fi
+          echo 'F3-B bounded probe authority boundary OK'
