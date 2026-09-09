@@ -24,6 +24,13 @@ function csv(text){
 }
 function extractFwhm(filename){ const m=filename.match(/_FWHM_([0-9]+(?:\.[0-9]+)?)(?:_|\.)/); if(!m) fail(`missing FWHM token in ${filename}`); const v=Number(m[1]); if(!Number.isFinite(v)||v<=0) fail(`invalid FWHM token in ${filename}`); return v; }
 function round(value){ return Number(value.toFixed(12)); }
+function canonicalize(value){
+  if(Array.isArray(value)) return value.map(canonicalize);
+  if(value && typeof value==='object'){
+    return Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonicalize(value[key])]));
+  }
+  return value;
+}
 
 const f2=JSON.parse(read(f2Path));
 const usage=f2.records.find(r=>r.semantic_type==='EQUIPMENT_USAGE_OBSERVATION'&&r.session_id===SESSION&&r.configuration_id===CONFIG);
@@ -56,6 +63,6 @@ if(process.argv.includes('--write')){
   if(!fs.existsSync(path.join(root,outputPath))) fail('generated projection is missing; run with --write');
   let existing;
   try { existing=JSON.parse(read(outputPath)); } catch(error) { fail(`generated projection is not valid JSON: ${error.message}`); }
-  if(JSON.stringify(existing)!==JSON.stringify(projection)) fail('generated projection is stale; run with --write');
+  if(JSON.stringify(canonicalize(existing))!==JSON.stringify(canonicalize(projection))) fail('generated projection is stale; run with --write');
   console.log('BKL-039 F3 generated projection check OK');
 }else process.stdout.write(rendered);
