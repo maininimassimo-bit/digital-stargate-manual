@@ -1,0 +1,40 @@
+name: BKL-039 F4 Governance
+
+on:
+  pull_request:
+    paths:
+      - 'docs/architecture/telemetry/BKL-039-F4-Equipment-Performance-Read-Only-Consumer-Contract.md'
+      - 'docs/data/equipment-performance-registry-f4-read-model.json'
+      - 'schemas/equipment-performance-registry-f4-read-model.schema.json'
+      - '.github/scripts/generate-equipment-performance-registry-f4-read-model.mjs'
+      - '.github/scripts/verify-equipment-performance-registry-f4-read-model.mjs'
+      - '.github/scripts/test-equipment-performance-registry-f4-read-model.mjs'
+      - '.github/workflows/bkl-039-f4-governance.yml'
+  push:
+    branches: [ main ]
+    paths:
+      - 'docs/architecture/telemetry/BKL-039-F4-Equipment-Performance-Read-Only-Consumer-Contract.md'
+      - 'docs/data/equipment-performance-registry-f4-read-model.json'
+      - 'schemas/equipment-performance-registry-f4-read-model.schema.json'
+      - '.github/scripts/generate-equipment-performance-registry-f4-read-model.mjs'
+      - '.github/scripts/verify-equipment-performance-registry-f4-read-model.mjs'
+      - '.github/scripts/test-equipment-performance-registry-f4-read-model.mjs'
+      - '.github/workflows/bkl-039-f4-governance.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  f4-governance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Verify deterministic F4 read model
+        run: node .github/scripts/generate-equipment-performance-registry-f4-read-model.mjs
+      - name: Validate F4 fail-closed contract
+        run: node .github/scripts/verify-equipment-performance-registry-f4-read-model.mjs
+      - name: Run F4 negative regression suite
+        run: node .github/scripts/test-equipment-performance-registry-f4-read-model.mjs
