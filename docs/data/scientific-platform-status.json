@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "updatedAt": "2026-09-09",
+  "updatedAt": "2026-09-10",
   "generatedFrom": {
     "roadmap": "docs/data/roadmap.json",
     "discovery": "docs/architecture/validation/AP-013-Session-Discovery-Execution-Evidence.md",
@@ -15,12 +15,12 @@
   },
   "current": {
     "package": {
-      "id": "BKL-045",
-      "title": "PixInsight Workflow Provenance Plugin",
+      "id": "BKL-037",
+      "title": "Session Comparison & Benchmarking",
       "status": "active"
     },
-    "nextMilestone": "BKL-045 PixInsight Workflow Provenance Plugin",
-    "target": "Establish governed PixInsight workflow provenance capture over accepted Knowledge Graph and AI Evidence foundations, preserving reproducibility, parameters and lineage without introducing autonomous processing or AI authority"
+    "nextMilestone": "BKL-037 Session Comparison & Benchmarking",
+    "target": "Establish governed read-only comparison and benchmarking across accepted scientific sessions, combining acquisition quality and processing provenance without inferring unavailable PixInsight history or introducing scoring authority beyond the declared analytical contract"
   },
   "architecture": {
     "ap013": {
@@ -68,7 +68,7 @@
     "pixInsightProvenance": {
       "id": "BKL-045",
       "title": "PixInsight Workflow Provenance Plugin",
-      "status": "active"
+      "status": "completed"
     }
   },
   "historicalDiscovery": {

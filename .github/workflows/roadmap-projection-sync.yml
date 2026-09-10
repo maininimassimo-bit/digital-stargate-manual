@@ -1,0 +1,91 @@
+name: Governed Projection Sync
+
+on:
+  push:
+    paths:
+      - '.github/roadmap/roadmap-source.json'
+      - '.github/scripts/generate-roadmap.mjs'
+      - '.github/scripts/generate-scientific-platform-status.mjs'
+      - 'docs/architecture/validation/AP-013-Session-Discovery-Execution-Evidence.md'
+      - 'docs/architecture/validation/AP-013-Operational-Acceptance.md'
+      - 'docs/architecture/validation/AP-013-Morning-Transfer-Scheduler-Evidence.md'
+      - '.github/workflows/roadmap-projection-sync.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+  pull-requests: read
+
+concurrency:
+  group: governed-projection-sync-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout triggering branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Generate governed roadmap projection
+        run: node .github/scripts/generate-roadmap.mjs --write
+
+      - name: Generate governed Scientific Platform projection
+        run: node .github/scripts/generate-scientific-platform-status.mjs --write
+
+      - name: Verify generated roadmap projection
+        run: node .github/scripts/generate-roadmap.mjs --check
+
+      - name: Verify generated Scientific Platform projection
+        run: node .github/scripts/generate-scientific-platform-status.mjs --check
+
+      - name: Verify roadmap governance consistency
+        run: node .github/scripts/verify-roadmap-consistency.mjs
+
+      - name: Commit governed projections when changed
+        id: commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- docs/data/roadmap.json docs/data/scientific-platform-status.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Governed projections already aligned."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/roadmap.json docs/data/scientific-platform-status.json
+          git commit -m "chore(gov): synchronize generated projections"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Re-run PR checks blocked by bot-generated synchronize event
+        if: steps.commit.outputs.changed == 'true' && github.ref_name != 'main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          head_sha="$(git rev-parse HEAD)"
+          for attempt in 1 2 3 4; do
+            ids="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs?head_sha=${head_sha}&event=pull_request&per_page=100" --jq '.workflow_runs[] | select(.conclusion == "action_required") | .id' || true)"
+            if [ -n "$ids" ]; then
+              for id in $ids; do
+                echo "Re-running action_required workflow run ${id} on ${head_sha}"
+                gh api --method POST "repos/${GITHUB_REPOSITORY}/actions/runs/${id}/rerun"
+              done
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "No action_required PR workflow runs found for ${head_sha}."
