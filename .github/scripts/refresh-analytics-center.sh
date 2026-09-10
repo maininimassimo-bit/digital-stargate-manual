@@ -3,7 +3,9 @@ set -euo pipefail
 
 python dsg-analytics/history/enrich_scientific_history.py --repo-root .
 python .github/scripts/verify-analytics-configuration-propagation.py
+python .github/scripts/verify-analytics-weather-propagation.py
 python dsg-analytics/configuration/build_configuration_summary.py --repo-root .
 python dsg-analytics/dashboard/build_dashboard_v31.py --repo-root .
+python .github/scripts/finalize-dashboard-severity.py
 python .github/scripts/normalize-dashboard-generated-at.py
 python .github/scripts/verify-analytics-center-consistency.py

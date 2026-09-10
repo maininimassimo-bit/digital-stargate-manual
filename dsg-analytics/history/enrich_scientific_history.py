@@ -5,6 +5,8 @@ This migration adapter is intentionally downstream of consolidate_history.py:
 legacy normalization remains compatible while schema 2.1 scientific/SQM fields
 are copied from canonical normalized metrics. Missing configuration metadata is
 then resolved fail-closed from governed repository metadata without guessing.
+Weather SAFE percentage is a derived analytics-only full-window projection; it
+has no Safety Authority and is never used to command or classify observatory state.
 """
 from __future__ import annotations
 
@@ -16,6 +18,7 @@ from pathlib import Path
 FIELDS = [
     'target_name', 'ra_deg', 'dec_deg', 'coordinate_epoch',
     'configuration_id', 'telescope', 'camera', 'binning',
+    'weather_safe_pct',
     'sqm_state', 'sqm_start', 'sqm_end', 'sqm_min_mag_arcsec2',
     'sqm_max_mag_arcsec2', 'sqm_mean_mag_arcsec2',
     'sqm_median_mag_arcsec2', 'sqm_valid_samples',
@@ -26,6 +29,25 @@ FIELDS = [
 def val(mapping, key):
     value = mapping.get(key)
     return '' if value is None else value
+
+
+def weather_safe_pct(metrics):
+    """Return observed SAFE percentage for the imported weather CSV full window.
+
+    This is strictly a descriptive analytics projection: 100 - unsafe percentage.
+    Missing or invalid evidence remains unavailable; values are never inferred.
+    """
+    weather = metrics.get('weather', {})
+    unsafe = weather.get('weather_unsafe_pct_full_window')
+    if unsafe is None or unsafe == '':
+        return ''
+    try:
+        unsafe_value = float(unsafe)
+    except (TypeError, ValueError):
+        return ''
+    if unsafe_value < 0.0 or unsafe_value > 100.0:
+        return ''
+    return round(100.0 - unsafe_value, 2)
 
 
 def projection(metrics):
@@ -40,6 +62,7 @@ def projection(metrics):
         'telescope': val(scientific, 'telescope'),
         'camera': val(scientific, 'camera'),
         'binning': val(scientific, 'binning'),
+        'weather_safe_pct': weather_safe_pct(metrics),
         'sqm_state': val(sqm, 'state'),
         'sqm_start': val(sqm, 'start'),
         'sqm_end': val(sqm, 'end'),
@@ -69,27 +92,20 @@ def governed_configuration(root: Path, session_id: str):
     metadata = read_index(root / 'data/analytics/metadata/session-scientific-metadata.csv').get(session_id, {})
     mapping = read_index(root / 'data/analytics/configurations/session-configuration-map.csv').get(session_id, {})
 
-    # REGISTERED scientific metadata is the strongest repository attestation.
     if str(metadata.get('metadata_state') or '').strip() == 'REGISTERED' and str(metadata.get('configuration_id') or '').strip():
         return metadata
-
-    # The governed session map may attest a configuration independently.
     if str(mapping.get('configuration_id') or '').strip():
         return mapping
-
     return {}
 
 
 def apply_governed_configuration(row, root: Path):
-    # Never overwrite configuration evidence already projected from canonical metrics.
     if str(row.get('configuration_id') or '').strip():
         return
-
     governed = governed_configuration(root, str(row.get('session_id') or '').strip())
     configuration_id = str(governed.get('configuration_id') or '').strip()
     if not configuration_id:
         return
-
     row['configuration_id'] = configuration_id
     for field in ('telescope', 'camera', 'binning'):
         if not str(row.get(field) or '').strip() and str(governed.get(field) or '').strip():
@@ -126,9 +142,6 @@ def main():
 
         apply_governed_configuration(row, root)
         row['schema_version'] = '2.1.0'
-
-        # Keep the projection idempotent. The timestamp records the source evidence
-        # generation time rather than the wall-clock time of this enrichment run.
         source_generated_at = str((metrics or {}).get('generated_at') or '').strip()
         if source_generated_at:
             row['updated_at_utc'] = source_generated_at
