@@ -34,6 +34,9 @@ jobs:
       - name: Verify no inline portal JavaScript
         run: node .github/scripts/verify-no-inline-portal-js.mjs
 
+      - name: Verify portal search integration
+        run: node .github/scripts/verify-portal-search.mjs
+
       - name: Verify committed roadmap projection
         run: node .github/scripts/generate-roadmap.mjs --check
 
