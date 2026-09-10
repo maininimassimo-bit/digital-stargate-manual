@@ -1,0 +1,44 @@
+name: Validate Analytics Center Consistency
+
+on:
+  pull_request:
+    paths:
+      - 'data/analytics/**'
+      - 'docs/analytics/**'
+      - 'docs/data/session-comparison-projection.json'
+      - 'dsg-analytics/**'
+      - '.github/scripts/verify-analytics-center-consistency.py'
+      - '.github/workflows/analyze-session-automatic.yml'
+      - '.github/workflows/validate-analytics-center-consistency.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'data/analytics/**'
+      - 'docs/analytics/**'
+      - 'docs/data/session-comparison-projection.json'
+      - 'dsg-analytics/**'
+      - '.github/scripts/verify-analytics-center-consistency.py'
+      - '.github/workflows/analyze-session-automatic.yml'
+      - '.github/workflows/validate-analytics-center-consistency.yml'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Regenerate dynamic Analytics Center views
+        run: |
+          python dsg-analytics/configuration/build_configuration_summary.py --repo-root .
+          python dsg-analytics/dashboard/build_dashboard_v31.py --repo-root .
+      - name: Verify cross-view session consistency
+        run: python .github/scripts/verify-analytics-center-consistency.py
+      - name: Verify generated views are committed
+        run: |
+          git diff --exit-code -- \
+            data/analytics/history/configuration-summary.csv \
+            docs/analytics/configuration-summary.md \
+            docs/analytics/dashboard.md
