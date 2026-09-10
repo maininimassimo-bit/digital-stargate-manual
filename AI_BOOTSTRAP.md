@@ -2,7 +2,7 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 2.6 |
+| Versione | 2.7 |
 | Baseline | 10/09/2026 |
 | Stato | Current root bootstrap — BKL-041 Scientific Data Quality Score |
 
@@ -55,7 +55,7 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 
 BKL-037 resta read-only/descriptive-only e non autorizza ranking, score, threshold, recommendation, remediation, command path o Safety Authority.
 
-BKL-041 deve iniziare con F1 source discovery e semantic contract. La promozione a current non autorizza ancora un algoritmo, pesi, soglie, classi GOOD/BAD, acceptance authority o decisioni Safety.
+BKL-041 F1 è Accepted tramite PR #159, merge `6d48318c460bad040fd0754b0300fbcd76a2d312`. F2 è l'incremento corrente per rendere machine-readable evidence, profilo e dimension assessment; non autorizza ancora algoritmo, pesi, soglie, classi GOOD/BAD, acceptance authority o decisioni Safety.
 
 ## 6. Sequenza governata
 
@@ -71,4 +71,4 @@ Nessun portale, comparison layer, quality score o AI è Safety Authority. Nessun
 
 ## 9. Punto di partenza operativo
 
-Avviare **BKL-041 F1 — Scientific Data Quality Score source discovery and semantic contract**. Prima di costruire uno score, identificare evidence eleggibile, unità, normalizzazione, missing-data semantics, weighting, confidence, explainability, provenance, bias e authority boundary. Non introdurre threshold o ranking per inferenza.
+Completare **BKL-041 F2 — Machine-readable Quality Evidence and Profile Contract**. Validare schema, identity SHA-256, fixture bounded, unità, missing evidence, versioni e authority fail-closed. Non introdurre score aggregato, pesi numerici, normalizzazione, confidence numerica, threshold o ranking: tali elementi appartengono a F3 dopo acceptance F2.
