@@ -2,21 +2,22 @@
 
 Benvenuto nel portale Analytics del progetto **Digital StarGate**.
 
-Questa sezione raccoglie gli strumenti di analisi, i report e le projection governate generate dalla pipeline di elaborazione delle sessioni osservative.
+Questa sezione raccoglie gli strumenti di analisi, i report e le projection governate generate automaticamente dalla pipeline delle sessioni osservative.
 
 ---
 
 ## Accesso rapido
 
-- [Dashboard Analytics](dashboard.html)
+- [Dashboard Analytics](dashboard/)
 - [Session Comparison](../session-comparison/)
 - [Equipment Performance](../equipment-performance/)
 - [Validazione dello storico](history-validation.md)
 - [Riepilogo configurazioni](configuration-summary.md)
 
-[Apri Session Comparison](../session-comparison/){ .md-button .md-button--primary }
+[Apri la Dashboard](dashboard/){ .md-button .md-button--primary }
+[Apri Session Comparison](../session-comparison/){ .md-button }
 
-La vista **Session Comparison** confronta in modalità read-only tutte le sessioni che dispongono di evidence comparabile per la dimensione pubblicata. Le sessioni non comparabili restano esplicitamente visibili come exclusions; il portale non crea ranking, score, soglie o decisioni di acceptance.
+La **Dashboard Analytics** viene rigenerata dallo storico consolidato dopo ogni sessione importata. **Session Comparison** confronta in modalità read-only tutte le sessioni che dispongono di evidence comparabile per la dimensione pubblicata. Le sessioni non comparabili restano esplicitamente visibili come exclusions; il portale non crea ranking, score, soglie o decisioni di acceptance.
 
 ---
 
@@ -32,12 +33,6 @@ La dashboard e le projection consentono di analizzare:
 - configurazioni strumentali;
 - statistiche operative;
 - confronto descrittivo multi-sessione con provenance e completeness.
-
----
-
-## Dashboard
-
-[Apri la Dashboard](dashboard.html){ .md-button .md-button--primary }
 
 ---
 
@@ -57,23 +52,24 @@ Mostra il riepilogo delle configurazioni rilevate durante le sessioni.
 
 ---
 
-## Pipeline Analytics
+## Aggiornamento automatico
 
-La pipeline viene eseguita con:
+Dopo l'import automatico di una sessione completa, il workflow governato:
+
+1. analizza la sessione e aggiorna lo storico;
+2. consolida e valida lo storico;
+3. rigenera target e riepilogo configurazioni;
+4. rigenera la Dashboard Analytics nativa MkDocs;
+5. rigenera Equipment Performance, cataloghi scientifici e Session Comparison;
+6. verifica la coerenza tra le viste;
+7. committa soltanto gli output versionati modificati;
+8. ridistribuisce il portale GitHub Pages.
+
+La pipeline completa può essere eseguita anche localmente con:
 
 ```powershell
 python .\dsg-analytics\build_all.py
 ```
-
-Le principali elaborazioni comprendono:
-
-1. Consolidamento dello storico
-2. Analisi delle configurazioni
-3. Estrazione delle metriche dei target
-4. Aggregazione dei risultati
-5. Generazione della dashboard e delle projection scientifiche
-
-La pipeline automatica delle sessioni rigenera inoltre la projection BKL-037 dopo il catalogo scientifico, mantenendo la comparazione allineata alle nuove sessioni senza aggiornamenti manuali del JSON.
 
 ---
 
@@ -83,6 +79,7 @@ La pipeline automatica delle sessioni rigenera inoltre la projection BKL-037 dop
 - Portale Analytics integrato nel manuale MkDocs
 - Navigazione centralizzata
 - Accesso ai report
+- Rigenerazione automatica delle viste Analytics dalle sessioni importate
 
 ### Versione 3.2
 - Validazione avanzata dei target
