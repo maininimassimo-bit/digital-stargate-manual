@@ -2,18 +2,18 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-10",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "b84b489d35097b92bede891c4ddfd70bc2ca448f8d5d214da54ac98d84054731",
+  "sourceDigest": "0016d8dc8edb6ff6a07c7b4a2ec565a93f24e1980f09a3274700fafe5b06ff95",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
-  "currentPackage": "BKL-037",
-  "nextMilestone": "BKL-037 Session Comparison & Benchmarking",
-  "target": "Establish governed read-only comparison and benchmarking across accepted scientific sessions, combining acquisition quality and processing provenance without inferring unavailable PixInsight history or introducing scoring authority beyond the declared analytical contract",
+  "currentPackage": "BKL-041",
+  "nextMilestone": "BKL-041 F1 — Scientific Data Quality Score source discovery and semantic contract",
+  "target": "Define an explainable, evidence-governed Scientific Data Quality Score contract over accepted BKL-037 comparison evidence, with explicit dimensions, units, confidence, missing-data behavior and provenance, without Safety Authority, device command, remediation or automatic acceptance authority",
   "summary": {
     "total": 43,
-    "completed": 29,
+    "completed": 30,
     "active": 4,
-    "planned": 10,
-    "percentCompleted": 67
+    "planned": 9,
+    "percentCompleted": 70
   },
   "evidenceSummary": {
     "sources": 8,
@@ -264,8 +264,8 @@
         {
           "id": "BKL-037",
           "title": "Session Comparison & Benchmarking",
-          "status": "active",
-          "note": "Current dependency-ready package after BKL-045 closure; dependencies BKL-029, BKL-035 and BKL-045 are accepted. Comparison must preserve provenance completeness and must not infer unavailable PixInsight process history."
+          "status": "completed",
+          "note": "F1-F5 plus dynamic full-catalog SQM comparison CLOSED/ACCEPTED. Read-only/descriptive-only; 15-session catalog coverage at closure (8 comparable, 7 explicit exclusions); no ranking, score, threshold, recommendation, remediation or Safety Authority."
         },
         {
           "id": "BKL-038",
@@ -282,7 +282,8 @@
         {
           "id": "BKL-041",
           "title": "Scientific Data Quality Score",
-          "status": "planned"
+          "status": "active",
+          "note": "Current package after governed BKL-037 closure. F1 must define explainable score semantics, evidence eligibility, weighting, confidence, missing-data behavior and authority boundaries before executable scoring."
         },
         {
           "id": "BKL-045",
@@ -523,6 +524,14 @@
       "description": "Approved advisory AI capability after provenance foundation.",
       "image": null,
       "status": "planned"
+    },
+    {
+      "id": "M-BKL037",
+      "itemRef": "BKL-037",
+      "title": "BKL-037 Session Comparison & Benchmarking closure",
+      "date": "2026-09-10",
+      "description": "F1-F5 and dynamic catalog-driven comparison closed/accepted with fail-closed exclusions, read-only descriptive statistics and preserved provenance.",
+      "status": "completed"
     }
   ]
 }

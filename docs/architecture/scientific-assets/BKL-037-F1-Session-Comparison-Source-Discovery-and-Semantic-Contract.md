@@ -3,7 +3,8 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-037-F1 |
-| Stato | Proposed |
+| Stato | Accepted |
+| Accepted merge | `4050b232c079170e0270dbc7d733d821f70f8c52` |
 | Data | 10/09/2026 |
 | Package | BKL-037 — Session Comparison & Benchmarking |
 | Baseline | `f3aa1a5b547281206b6d892670af9816c882e5e4` |
