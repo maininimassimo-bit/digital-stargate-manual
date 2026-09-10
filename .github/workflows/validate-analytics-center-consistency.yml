@@ -7,6 +7,8 @@ on:
       - 'docs/analytics/**'
       - 'docs/data/session-comparison-projection.json'
       - 'dsg-analytics/**'
+      - '.github/scripts/refresh-analytics-center.sh'
+      - '.github/scripts/normalize-dashboard-generated-at.py'
       - '.github/scripts/verify-analytics-center-consistency.py'
       - '.github/workflows/analyze-session-automatic.yml'
       - '.github/workflows/validate-analytics-center-consistency.yml'
@@ -17,6 +19,8 @@ on:
       - 'docs/analytics/**'
       - 'docs/data/session-comparison-projection.json'
       - 'dsg-analytics/**'
+      - '.github/scripts/refresh-analytics-center.sh'
+      - '.github/scripts/normalize-dashboard-generated-at.py'
       - '.github/scripts/verify-analytics-center-consistency.py'
       - '.github/workflows/analyze-session-automatic.yml'
       - '.github/workflows/validate-analytics-center-consistency.yml'
@@ -31,11 +35,7 @@ jobs:
         with:
           python-version: '3.13'
       - name: Regenerate dynamic Analytics Center views
-        run: |
-          python dsg-analytics/configuration/build_configuration_summary.py --repo-root .
-          python dsg-analytics/dashboard/build_dashboard_v31.py --repo-root .
-      - name: Verify cross-view session consistency
-        run: python .github/scripts/verify-analytics-center-consistency.py
+        run: bash .github/scripts/refresh-analytics-center.sh
       - name: Upload generated views diagnostic artifact
         uses: actions/upload-artifact@v4
         with:
