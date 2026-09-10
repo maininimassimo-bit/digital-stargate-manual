@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""Regression coverage for homepage latest-session projections."""
+"""Regression coverage for the homepage runtime-projection shell contract."""
 from __future__ import annotations
 
 import importlib.util
-from datetime import timezone
 from pathlib import Path
 
 MODULE_PATH = Path(__file__).resolve().parents[1] / "homepage" / "refresh_homepage.py"
@@ -13,98 +12,57 @@ homepage = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(homepage)
 
 
-def test_as_dt_normalizes_naive_and_aware_values_to_utc() -> None:
-    naive = homepage.as_dt("2026-08-31T23:55:55")
-    aware = homepage.as_dt("2026-09-01T00:10:00+02:00")
-    zulu = homepage.as_dt("2026-08-31T22:30:00Z")
-
-    assert naive is not None and naive.tzinfo == timezone.utc
-    assert aware is not None and aware.tzinfo == timezone.utc
-    assert zulu is not None and zulu.tzinfo == timezone.utc
-    assert aware.isoformat() == "2026-08-31T22:10:00+00:00"
-
-
-def test_build_operational_section_accepts_mixed_naive_and_aware_sessions() -> None:
-    sessions = [
-        {
-            "session_id": "older-naive",
-            "session_start": "2026-08-31T20:00:00",
-            "session_end": "2026-08-31T23:00:00",
-            "integration_hours": "1.0",
-            "light_completed": "10",
-            "telescope": "Legacy scope",
-            "camera": "Legacy camera",
-            "configuration_id": "LEGACY",
-            "severity": "GREEN",
-        },
-        {
-            "session_id": "latest-aware",
-            "session_start": "2026-09-01T00:30:00+00:00",
-            "session_end": "2026-09-01T01:30:00+00:00",
-            "integration_hours": "2.0",
-            "light_completed": "20",
-            "telescope": "Celestron C8 XLT",
-            "camera": "QHY695A",
-            "configuration_id": "C8_QHY695A_BIN1",
-            "severity": "GREEN",
-        },
-    ]
-    targets = [{"session_id": "latest-aware", "target_name": "M 27"}]
-    metadata = [
-        {
-            "session_id": "latest-aware",
-            "metadata_state": "REGISTERED",
-            "target_name": "M 27",
-            "ra_deg": "299.9",
-            "dec_deg": "22.721111",
-            "configuration_id": "C8_QHY695A_BIN1",
-        }
-    ]
-
-    rendered = homepage.build_operational_section(sessions, targets, metadata)
-
-    assert "latest-aware" in rendered
-    assert "M 27" in rendered
-    assert "QHY695A" in rendered
-    assert "RA 19h 59m 36s" in rendered
-    assert "Dec +22° 43′ 16″" in rendered
+def sample_block(detail: str = "Projection scientifica non ancora disponibile") -> str:
+    return f'''{homepage.START_MARKER}
+<section data-dsg-home-snapshot>
+  <span data-home-freshness>Caricamento projection…</span>
+  <strong data-home-current-package>—</strong>
+  <p data-home-current-detail>Stato roadmap non ancora disponibile</p>
+  <strong data-home-latest-session>—</strong>
+  <p data-home-latest-detail>{detail}</p>
+  <a data-home-latest-link href="./scientific-session-catalog/">Dettaglio</a>
+  <strong data-home-session-count>—</strong>
+  <p data-home-session-totals>Conteggi non ancora disponibili</p>
+</section>
+{homepage.END_MARKER}'''
 
 
-def test_latest_target_does_not_depend_on_metadata_registry() -> None:
-    sessions = [
-        {
-            "session_id": "2026-08-31_2026-09-01",
-            "session_start": "2026-08-31T17:00:06+00:00",
-            "session_end": "2026-09-01T03:59:49+00:00",
-            "target_name": "M 27",
-            "integration_hours": "5.3334",
-            "light_completed": "32",
-            "telescope": "Celestron C8 XLT",
-            "camera": "QHY695A",
-            "configuration_id": "C8_QHY695A_BIN1",
-            "ra_deg": "299.9",
-            "dec_deg": "22.721111",
-            "rms_total_arcsec": "0.505",
-            "severity": "YELLOW",
-        }
-    ]
-    targets = [
-        {"session_id": "2026-08-31_2026-09-01", "target_name": "M 27"},
-        {"session_id": "2026-08-31_2026-09-01", "target_name": "M 27"},
-    ]
+def test_dynamic_shell_accepts_complete_fail_closed_contract() -> None:
+    homepage.validate_dynamic_shell(sample_block())
 
-    rendered = homepage.build_operational_section(sessions, targets, metadata=[])
 
-    assert "M 27" in rendered
-    assert "Celestron C8 XLT" in rendered
-    assert "QHY695A" in rendered
-    assert "RA 19h 59m 36s" in rendered
-    assert "Dec +22° 43′ 16″" in rendered
-    assert "🟡 YELLOW" in rendered
+def test_dynamic_shell_rejects_missing_binding() -> None:
+    content = sample_block().replace("data-home-session-count", "data-missing-session-count")
+    try:
+        homepage.validate_dynamic_shell(content)
+    except RuntimeError as error:
+        assert "data-home-session-count" in str(error)
+    else:
+        raise AssertionError("Missing homepage binding was accepted")
+
+
+def test_dynamic_shell_rejects_known_stale_fallback() -> None:
+    try:
+        homepage.validate_dynamic_shell(sample_block("AP-013 in corso · 31,83 h"))
+    except RuntimeError as error:
+        assert "stale fallback" in str(error)
+    else:
+        raise AssertionError("Stale homepage fallback was accepted")
+
+
+def test_repository_homepage_matches_contract() -> None:
+    repo_root = Path(__file__).resolve().parents[2]
+    homepage.validate_dynamic_shell((repo_root / "docs" / "index.md").read_text(encoding="utf-8"))
+    consumer = (repo_root / "docs" / "javascripts" / "homepage-effects.js").read_text(encoding="utf-8")
+    assert "data/roadmap.json" in consumer
+    assert "data/scientific-session-catalog.json" in consumer
+    assert "data/realtime/latest-observation.json" in consumer
+    assert "cache: 'no-store'" in consumer
 
 
 if __name__ == "__main__":
-    test_as_dt_normalizes_naive_and_aware_values_to_utc()
-    test_build_operational_section_accepts_mixed_naive_and_aware_sessions()
-    test_latest_target_does_not_depend_on_metadata_registry()
-    print("Homepage latest-session regression tests PASS")
+    test_dynamic_shell_accepts_complete_fail_closed_contract()
+    test_dynamic_shell_rejects_missing_binding()
+    test_dynamic_shell_rejects_known_stale_fallback()
+    test_repository_homepage_matches_contract()
+    print("Homepage runtime-projection shell regression tests PASS")

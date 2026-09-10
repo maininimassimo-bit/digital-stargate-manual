@@ -52,7 +52,7 @@ L'audit del 10/09/2026 ha rilevato:
 - 15 gruppi di navigazione top-level nel menu Material, con forte frammentazione del modello mentale;
 - una seconda navigazione desktop custom con molte voci, menu densi e link ancorati ad AP-013;
 - homepage con stato statico AP-013, 3 sessioni e 31,83 h, divergente dalle fonti correnti;
-- refresh_homepage.py presente ma non incluso nel publish set dell'import automatico;
+- refresh_homepage.py ereditato come generatore statico e incompatibile con il nuovo shell runtime;
 - hub moderni esistenti ma fuori dalla navigazione primaria;
 - viste Repository Intelligence/Analytics e Scientific Intelligence con contatori o milestone statici;
 - Design System e Publication Guidelines ancora Draft dal 26/07/2026.
@@ -106,6 +106,8 @@ Dopo ogni sessione COMPLETE promossa:
 5. loading e failure state non espongono valori storici plausibili.
 
 Questa soluzione non richiede nuovi permessi, push o deploy nei workflow privilegiati esistenti. Il file homepage resta strutturale; sono le projection versionate già governate a cambiare dopo l'import.
+
+Il passo Pages `refresh_homepage.py` è mantenuto per compatibilità con il workflow, ma opera come validator non mutante: verifica binding obbligatori e rifiuta fallback stale invece di reiniettare dati statici.
 
 | Superficie | Artefatto | Trigger sessione |
 |---|---|---|
@@ -175,6 +177,7 @@ Il rollback consiste nel revert del package UI 7.0; dataset, import scientifico 
 | Freshness audit | docs/ui/content-freshness-audit-2026-09-10.md |
 | Session pipeline | .github/workflows/analyze-session-automatic.yml |
 | Homepage consumer | docs/javascripts/homepage-effects.js |
+| Homepage build validator | dsg-analytics/homepage/refresh_homepage.py |
 | Release | docs/releases/ui-7.0.md |
 | Navigation | mkdocs.yml |
 
