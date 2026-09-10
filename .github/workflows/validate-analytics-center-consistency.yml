@@ -10,6 +10,7 @@ on:
       - '.github/scripts/refresh-analytics-center.sh'
       - '.github/scripts/normalize-dashboard-generated-at.py'
       - '.github/scripts/verify-analytics-center-consistency.py'
+      - '.github/scripts/verify-analytics-configuration-propagation.py'
       - '.github/workflows/analyze-session-automatic.yml'
       - '.github/workflows/validate-analytics-center-consistency.yml'
   push:
@@ -22,6 +23,7 @@ on:
       - '.github/scripts/refresh-analytics-center.sh'
       - '.github/scripts/normalize-dashboard-generated-at.py'
       - '.github/scripts/verify-analytics-center-consistency.py'
+      - '.github/scripts/verify-analytics-configuration-propagation.py'
       - '.github/workflows/analyze-session-automatic.yml'
       - '.github/workflows/validate-analytics-center-consistency.yml'
   workflow_dispatch:
@@ -41,6 +43,7 @@ jobs:
         with:
           name: analytics-center-generated-views
           path: |
+            data/analytics/history/sessions.csv
             data/analytics/history/configuration-summary.csv
             docs/analytics/configuration-summary.md
             docs/analytics/dashboard.md
@@ -49,6 +52,7 @@ jobs:
       - name: Verify generated views are committed
         run: |
           git diff --exit-code -- \
+            data/analytics/history/sessions.csv \
             data/analytics/history/configuration-summary.csv \
             docs/analytics/configuration-summary.md \
             docs/analytics/dashboard.md
