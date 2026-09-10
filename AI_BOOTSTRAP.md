@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 2.4 |
-| Baseline | 09/09/2026 |
-| Stato | Current root bootstrap — BKL-045 PixInsight Workflow Provenance Plugin |
+| Versione | 2.5 |
+| Baseline | 10/09/2026 |
+| Stato | Current root bootstrap — BKL-037 Session Comparison & Benchmarking |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -15,8 +15,8 @@ Il repository GitHub è l'unica fonte autorevole. Non assumere che memoria della
 ## 2. Sequenza obbligatoria di lettura
 
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-09-09.md`
-3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-09.md`
+2. `docs/project/HANDOVER_2026-09-10.md`
+3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-10.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
 6. `docs/project/BACKLOG.md`
@@ -30,7 +30,7 @@ Il repository GitHub è l'unica fonte autorevole. Non assumere che memoria della
 14. `docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md`
 15. Architecture Package, ADR, review, evidence e componenti direttamente coinvolti nell'attività.
 
-I documenti handover/baseline con data precedente sono snapshot storici: conservarli per lineage, ma non usarli come stato corrente quando esiste un successore datato più recente.
+Handover e baseline datati precedenti sono snapshot storici: conservarli per lineage e non usarli come stato corrente quando esiste un successore più recente.
 
 ## 3. Verifica iniziale obbligatoria
 
@@ -43,47 +43,38 @@ Prima di modificare repository o runtime: identificare branch e HEAD, verificare
 - Safety Authority fisica/locale indipendente;
 - nessun comando diretto dal portale o dall'AI agli apparati nella baseline corrente;
 - AI spiegabile con evidence, confidence, Citation, Provenance e distinzione Observation/Evidence/Claim/Inference/Recommendation;
-- Knowledge Graph repository-centric come projection;
-- processing provenance distingue sempre fatto `OBSERVED`, dichiarazione manuale `DECLARED` e proposta `SUGGESTED`;
-- nessuna affermazione di build/test/commit/deploy/acceptance senza verifica reale.
+- processing provenance distingue sempre `OBSERVED`, `DECLARED` e `SUGGESTED`;
+- nessuna affermazione di build/test/commit/deploy/acceptance senza verifica reale;
+- missing/unavailable evidence non può essere inventata o promossa a fatto osservato.
 
 ## 5. Processo di sviluppo
 
 Procedere una milestone alla volta: repository truth -> architettura -> implementazione -> test -> commit/push -> workflow -> Pages -> governance -> handover/baseline. Non iniziare una milestone successiva se la baseline precedente presenta drift o quality gate rosso non spiegato.
 
-## 6. Stato di continuità corrente — 09/09/2026
+## 6. Stato di continuità corrente — 10/09/2026
 
-- BKL-030 CLOSED / ACCEPTED.
-- BKL-015 DONE / ACCEPTED; TD-008 RESOLVED.
-- BKL-044 CLOSED / ACCEPTED.
-- BKL-035 CLOSED / ACCEPTED.
-- BKL-040 CLOSED / ACCEPTED.
-- BKL-038 CLOSED / ACCEPTED; final implementation PR #125 merge `d8249984d63455690b957156060f858eb3cc2713`, closure governata da `docs/project/BKL-038-CLOSURE-2026-09-09.md`.
-- BKL-039 CLOSED / ACCEPTED. Implementazione PR #132 merge `651fc340fbb5e58ca36409d574bdd09c3ae55790`; closure PR #133 merge `8ea3d0a412dc5f24470e8e5d3729f80621c0d678`.
-- Post-merge closure BKL-039 sul merge SHA `8ea3d0a412dc5f24470e8e5d3729f80621c0d678`: Scientific Platform Governance #13, Developer Foundation #1200, Validate documentation #819, Word #1244 e Pages #728 — SUCCESS.
-- Il package governato corrente è **BKL-045 — PixInsight Workflow Provenance Plugin**.
-- BKL-045 F1 avvia source discovery e semantic contract riusando il boundary PixInsight già esistente di AP14-W06; non deve duplicare manifest, reconciliation o projection esistenti.
-- **BKL-037 non è ancora corrente**: resta Planned finché BKL-045 non è accepted.
-- BKL-039 resta historical/read-only/descriptive-only: nessun rating, threshold, health policy, recommendation, remediation o Safety Authority coupling è autorizzato.
-- graph DB, vector DB, RAG, inference runtime/provider, automatic remediation e AI/Safety authority restano non autorizzati salvo governance successiva.
+- BKL-030, BKL-015, BKL-044, BKL-035, BKL-040, BKL-038 e BKL-039 sono CLOSED/DONE e ACCEPTED secondo i rispettivi record.
+- BKL-045 — PixInsight Workflow Provenance Plugin è CLOSED / ACCEPTED; closure `docs/project/BKL-045-CLOSURE-2026-09-10.md`, PR #140 merge `a08aed981e5ffa4af6b68fea521ada25a4b2b338`.
+- BKL-037 — Session Comparison & Benchmarking è il package governato CURRENT / In Progress nella canonical roadmap e nel backlog.
+- BKL-041 — Scientific Data Quality Score è il successore pianificato e dipende da BKL-037.
+- BKL-037 resta read-only/descriptive-only: nessun ranking, acceptance threshold, quality score, recommendation, remediation, command path o Safety Authority coupling.
+- La provenance PixInsight mantiene la limitazione accettata `completeness=UNAVAILABLE` per la storia di processing non automaticamente osservabile.
 - runtime EAGLE e Safety Authority restano invariati.
 
 ### Sequenza governata corrente
 
-`BKL-030 CLOSED -> BKL-015 CLOSED -> BKL-044 CLOSED -> BKL-035 CLOSED -> BKL-040 CLOSED -> BKL-038 CLOSED -> BKL-039 CLOSED -> BKL-045 [CURRENT] -> BKL-037 -> BKL-041 -> BKL-046 -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-045 CLOSED -> BKL-037 [CURRENT] -> BKL-041 -> BKL-046 -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
-## 7. Quality-gate handover
+## 7. Authority e continuity
 
-La closure authority BKL-039 è `docs/project/BKL-039-CLOSURE-2026-09-09.md` integrata da PR #133. La continuity corrente deve essere letta insieme a roadmap/backlog e al package BKL-045 attivo.
+La canonical roadmap source è `.github/roadmap/roadmap-source.json`; `docs/data/roadmap.json` è una projection generata. Il live `BACKLOG.md` governa stato, priorità e dipendenze. Closure, review, evidence e workflow supportano le acceptance claim sui rispettivi exact SHA.
 
-I package già accepted non possono essere riaperti implicitamente. Performance thresholds, health policy, anomaly severity policy, remediation, command path, Safety Authority coupling, graph infrastructure persistente o AI authority richiedono governance separata.
-
-Per BKL-045, AP-013 resta autorevole per asset identity/checksum/lifecycle; AP-014 resta il boundary di sincronizzazione/catalogo; PixInsight fornisce candidate processing evidence. Provenance storica mancante non può essere inventata o promossa a `OBSERVED`.
+I package già accepted non possono essere riaperti implicitamente. Scoring scientifico autonomo appartiene a BKL-041 e non deve essere anticipato in BKL-037.
 
 ## 8. Divieti
 
-Non inventare branch/file/commit/test/workflow/stati; non marcare approved senza evidence; non promuovere una projection a source primaria; non aggirare interlock/safe state; non introdurre inferenze AI come repository truth; non perdere semantic type/lifecycle/authority/Citation/Provenance nei consumer successivi; non confondere un workflow `SUGGESTED` con un workflow realmente eseguito.
+Non inventare branch/file/commit/test/workflow/stati; non marcare approved senza evidence; non promuovere una projection a source primaria; non aggirare interlock/safe state; non introdurre inferenze AI come repository truth; non perdere semantic type/lifecycle/authority/Citation/Provenance nei consumer successivi.
 
 ## 9. Punto di partenza operativo
 
-Eseguire **BKL-045 F1 — PixInsight Workflow Provenance Source Discovery and Semantic Contract**. Verificare e riusare `AP14-W06`, `docs/contracts/pixinsight-manifest.schema.json`, i validator/ledger/reconciliation/projection PixInsight esistenti e i modelli DSDM AP-013. Il meccanismo di estensione PixInsight (native module, governed script/package o approccio ibrido) resta una decisione F2 da prendere solo dopo evidence tecnica e ADR. Non iniziare BKL-037 prima dell'acceptance di BKL-045.
+Continuare **BKL-037 — Session Comparison & Benchmarking** verificando prima lo stato live di `main`, backlog, canonical roadmap, package/closure BKL-037 e workflow. La capability deve confrontare esclusivamente dimensioni realmente comparabili e con unità/provenance compatibili; esclusioni e incompletezza restano visibili. Non iniziare BKL-041 finché BKL-037 non è formalmente chiuso/accettato e la transizione canonica non è integrata.
