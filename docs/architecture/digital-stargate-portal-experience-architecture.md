@@ -4,12 +4,13 @@
 |---|---|
 | Identificativo | DSGP-SOL-001 |
 | Versione | 1.0 |
-| Stato | Proposed |
+| Stato | Accepted |
 | Data | 10/09/2026 |
 | Ambito | GitHub Pages, MkDocs Material, presentation boundary |
 | Governing vision | DSGP-VIS-001 |
 | Design system | DSG-UI-001 v2.0 |
 | Release | UI 7.0 |
+| Architecture review | ARB-UI-7 — APPROVED |
 
 ## 1. Purpose
 

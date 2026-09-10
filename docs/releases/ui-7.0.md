@@ -4,11 +4,12 @@
 |---|---|
 | Identificativo | DSG-REL-UI-7.0 |
 | Versione | 1.0 |
-| Stato | Proposed |
+| Stato | Approved / Ready for Release Quality |
 | Data | 10/09/2026 |
 | Ambito | Portale GitHub Pages |
 | Architecture | DSGP-SOL-001 |
 | Design System | DSG-UI-001 v2.0 |
+| Architecture review | ARB-UI-7 — APPROVED |
 
 ## Outcome
 

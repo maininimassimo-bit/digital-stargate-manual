@@ -4,7 +4,7 @@
 |---|---|
 | Identificativo | DSG-DEV-001 |
 | Versione | 2.0 |
-| Stato | Proposed |
+| Stato | Active |
 | Data | 10/09/2026 |
 | Release | UI 7.0 |
 
@@ -94,4 +94,4 @@ Il rollback ripristina file UI, navigation e generatori del commit precedente. N
 | Versione | Data | Stato | Descrizione |
 |---|---|---|---|
 | 1.0 | 26/07/2026 | Superseded | Workflow editoriale UI 6.1 |
-| 2.0 | 10/09/2026 | Proposed | Governance dinamica e quality gate UI 7.0 |
+| 2.0 | 10/09/2026 | Active | Governance dinamica e quality gate UI 7.0; ARB-UI-7 APPROVED |

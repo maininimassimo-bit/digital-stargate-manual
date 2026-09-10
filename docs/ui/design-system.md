@@ -4,7 +4,7 @@
 |---|---|
 | Identificativo | DSG-UI-001 |
 | Versione | 2.0 |
-| Stato | Proposed |
+| Stato | Accepted |
 | Data | 10/09/2026 |
 | Ambito | GitHub Pages, MkDocs, dashboard e hub |
 | Release | UI 7.0 |
@@ -199,4 +199,4 @@ Una modifica significativa richiede aggiornamento coordinato di Design System, s
 | Versione | Data | Stato | Descrizione |
 |---|---|---|---|
 | 1.0 | 26/07/2026 | Superseded | Prima emissione UI 6.1 |
-| 2.0 | 10/09/2026 | Proposed | Redesign UI 7.0, nuova IA e dynamic content contract |
+| 2.0 | 10/09/2026 | Accepted | Redesign UI 7.0, nuova IA e dynamic content contract; ARB-UI-7 APPROVED |
