@@ -20,8 +20,51 @@
     document.head.appendChild(link);
   };
 
+  let searchReturnFocus = null;
+
+  const searchToggle = () => document.querySelector('#__search');
+
+  const syncSearchState = () => {
+    const toggle = searchToggle();
+    const open = Boolean(toggle?.checked);
+    document.body.classList.toggle('dsg-search-open', open);
+    document.querySelector('[data-dsg-search]')?.setAttribute('aria-expanded', String(open));
+
+    if (!open && searchReturnFocus instanceof HTMLElement) {
+      searchReturnFocus.focus();
+      searchReturnFocus = null;
+    }
+  };
+
+  const ensureSearchBindings = () => {
+    const toggle = searchToggle();
+    if (toggle && !toggle.dataset.dsgSearchBound) {
+      toggle.dataset.dsgSearchBound = 'true';
+      toggle.addEventListener('change', syncSearchState);
+    }
+
+    if (!document.body.dataset.dsgSearchEscapeBound) {
+      document.body.dataset.dsgSearchEscapeBound = 'true';
+      document.addEventListener('keydown', (event) => {
+        const currentToggle = searchToggle();
+        if (event.key !== 'Escape' || !currentToggle?.checked) return;
+        currentToggle.checked = false;
+        currentToggle.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    }
+
+    syncSearchState();
+  };
+
   const openSearch = (query = '') => {
-    document.querySelector('label[for="__search"]')?.click();
+    ensureSearchBindings();
+    const toggle = searchToggle();
+    if (!toggle) return;
+
+    searchReturnFocus = document.activeElement;
+    toggle.checked = true;
+    toggle.dispatchEvent(new Event('change', { bubbles: true }));
+
     window.setTimeout(() => {
       const input = document.querySelector('.md-search__input');
       if (!input) return;
@@ -122,7 +165,7 @@
         </div>
         <div class="dsg-enterprise-nav__utilities">
           <span class="dsg-enterprise-nav__current" data-dsg-current-package aria-label="Package corrente">…</span>
-          <button class="dsg-enterprise-nav__action" type="button" data-dsg-search aria-label="Cerca"><span>Cerca</span> ⌕</button>
+          <button class="dsg-enterprise-nav__action" type="button" data-dsg-search aria-label="Cerca" aria-expanded="false"><span>Cerca</span> ⌕</button>
           <button class="dsg-enterprise-nav__action" type="button" data-dsg-theme aria-label="Cambia tema"><span>Tema</span> ◐</button>
           <button class="dsg-enterprise-nav__action" type="button" data-dsg-docs aria-expanded="false"><span>Esplora</span> ☰</button>
         </div>`;
@@ -167,6 +210,7 @@
       refreshCurrentPackage(navigation);
     }
 
+    ensureSearchBindings();
     updateActiveLinks(navigation);
   };
 
@@ -236,4 +280,3 @@
   }
   if (window.document$?.subscribe) window.document$.subscribe(initialize);
 })();
-
