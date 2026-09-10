@@ -1,0 +1,41 @@
+name: BKL-041 F2 Governance
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/scripts/scientific-data-quality-contract.mjs"
+      - ".github/scripts/verify-scientific-data-quality-contract.mjs"
+      - ".github/scripts/test-scientific-data-quality-contract.mjs"
+      - ".github/workflows/bkl-041-f2-governance.yml"
+      - "docs/contracts/scientific-data-quality-f2.schema.json"
+      - "docs/data/scientific-data-quality-f2-fixture.json"
+      - "docs/architecture/scientific-assets/BKL-041-F2-*.md"
+  pull_request:
+    paths:
+      - ".github/scripts/scientific-data-quality-contract.mjs"
+      - ".github/scripts/verify-scientific-data-quality-contract.mjs"
+      - ".github/scripts/test-scientific-data-quality-contract.mjs"
+      - ".github/workflows/bkl-041-f2-governance.yml"
+      - "docs/contracts/scientific-data-quality-f2.schema.json"
+      - "docs/data/scientific-data-quality-f2-fixture.json"
+      - "docs/architecture/scientific-assets/BKL-041-F2-*.md"
+
+permissions:
+  contents: read
+
+jobs:
+  contract-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify schema and bounded fixture
+        run: node .github/scripts/verify-scientific-data-quality-contract.mjs
+      - name: Test fail-closed contract rules
+        run: node --test .github/scripts/test-scientific-data-quality-contract.mjs
+
