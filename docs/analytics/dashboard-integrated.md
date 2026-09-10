@@ -1,11 +1,11 @@
 # Executive Observatory Dashboard
 
-La dashboard raccoglie i principali indicatori delle sessioni osservative, dei target acquisiti, delle configurazioni strumentali e dell’affidabilità dei processi automatici.
+La dashboard executive utilizza la vista Analytics v3.1 generata automaticamente dallo storico consolidato delle sessioni scientifiche. I KPI vengono rigenerati dal workflow governato dell'Analytics Center dopo l'importazione delle nuove sessioni.
 
 <div class="dsg-analytics-links">
-  <a class="dsg-analytics-link-card" href="#dashboard-operativa">
-    <strong>Executive overview</strong>
-    <span>KPI aggregati, andamento mensile e stato operativo delle sessioni.</span>
+  <a class="dsg-analytics-link-card" href="../dashboard/">
+    <strong>Executive Dashboard</strong>
+    <span>KPI aggregati, andamento mensile, target e configurazioni sul dataset consolidato.</span>
   </a>
   <a class="dsg-analytics-link-card" href="../history-validation/">
     <strong>Validazione storico</strong>
@@ -13,25 +13,15 @@ La dashboard raccoglie i principali indicatori delle sessioni osservative, dei t
   </a>
   <a class="dsg-analytics-link-card" href="../configuration-summary/">
     <strong>Configurazioni</strong>
-    <span>Prestazioni e utilizzo dei profili strumentali dell’osservatorio.</span>
+    <span>Prestazioni e utilizzo dei profili strumentali dell'osservatorio.</span>
   </a>
 </div>
 
 ## Dashboard operativa
 
-<div class="dsg-dashboard-shell">
-  <div class="dsg-dashboard-toolbar">
-    <span class="dsg-dashboard-status">Digital StarGate Analytics v3.1 — integrazione Material</span>
-    <a class="md-button" href="../dashboard.html" target="_blank" rel="noopener">Apri a schermo intero</a>
-  </div>
-  <iframe
-    id="dsg-analytics-frame"
-    class="dsg-analytics-frame"
-    src="../dashboard.html"
-    title="Digital StarGate Analytics Dashboard"
-    loading="eager">
-  </iframe>
-</div>
+La vista operativa autorevole è la **Dashboard Analytics dinamica**. Questa pagina resta disponibile come alias di compatibilità per i collegamenti storici, ma non incorpora più il precedente `dashboard.html` statico.
 
-!!! info "Fase di transizione Analytics 3.1"
-    La dashboard mantiene temporaneamente il motore HTML v3.0 all’interno del layout MkDocs Material. Il passaggio successivo estrarrà il contenuto generato in componenti nativi, senza modificare i calcoli dei KPI.
+[Apri Executive Dashboard](../dashboard/){ .md-button .md-button--primary }
+
+!!! info "Aggiornamento automatico"
+    La dashboard viene rigenerata a partire da `data/analytics/history/sessions.csv` insieme al riepilogo configurazioni e viene verificata dal gate di consistenza dell'Analytics Center. I dati mancanti o non risolti restano espliciti e non vengono inferiti.
