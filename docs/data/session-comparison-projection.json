@@ -2,38 +2,38 @@
   "schemaVersion": "1.0",
   "projectionType": "SESSION_COMPARISON_PROJECTION",
   "consumerMode": "READ_ONLY",
-  "projectionId": "BKL037-SQM-20260905-20260908",
-  "generatedAt": "2026-09-10T13:53:00Z",
-  "comparisonSetId": "BKL037-SQM-REAL-001",
+  "projectionId": "BKL037-SQM-DYNAMIC-V1",
+  "generatedAt": "2026-09-10T14:30:00Z",
+  "comparisonSetId": "BKL037-SQM-CATALOG-V1",
   "dimension": "SQM_MEDIAN",
   "unit": "mag/arcsec2",
   "comparisonState": "COMPARABLE",
   "includedSessions": [
-    {
-      "sessionId": "2026-09-05_2026-09-06",
-      "value": 20.57,
-      "unit": "mag/arcsec2",
-      "provenanceRef": "data/sessions/2026/09/2026-09-05_2026-09-06/normalized/session-metrics.json#sqm",
-      "quality": "AVAILABLE",
-      "completeness": "COMPLETE"
-    },
-    {
-      "sessionId": "2026-09-07_2026-09-08",
-      "value": 20.89,
-      "unit": "mag/arcsec2",
-      "provenanceRef": "data/sessions/2026/09/2026-09-07_2026-09-08/normalized/session-metrics.json#sqm",
-      "quality": "AVAILABLE",
-      "completeness": "COMPLETE"
-    }
+    {"sessionId":"2026-08-31_2026-09-01","value":18.66,"unit":"mag/arcsec2","provenanceRef":"data/sessions/2026/08/2026-08-31_2026-09-01/normalized/session-metrics.json#sqm","quality":"AVAILABLE","completeness":"COMPLETE"},
+    {"sessionId":"2026-09-01_2026-09-02","value":18.755,"unit":"mag/arcsec2","provenanceRef":"data/sessions/2026/09/2026-09-01_2026-09-02/normalized/session-metrics.json#sqm","quality":"AVAILABLE","completeness":"COMPLETE"},
+    {"sessionId":"2026-09-02_2026-09-03","value":19.14,"unit":"mag/arcsec2","provenanceRef":"data/sessions/2026/09/2026-09-02_2026-09-03/normalized/session-metrics.json#sqm","quality":"AVAILABLE","completeness":"COMPLETE"},
+    {"sessionId":"2026-09-03_2026-09-04","value":19.56,"unit":"mag/arcsec2","provenanceRef":"data/sessions/2026/09/2026-09-03_2026-09-04/normalized/session-metrics.json#sqm","quality":"AVAILABLE","completeness":"COMPLETE"},
+    {"sessionId":"2026-09-04_2026-09-05","value":20.07,"unit":"mag/arcsec2","provenanceRef":"data/sessions/2026/09/2026-09-04_2026-09-05/normalized/session-metrics.json#sqm","quality":"AVAILABLE","completeness":"COMPLETE"},
+    {"sessionId":"2026-09-05_2026-09-06","value":20.57,"unit":"mag/arcsec2","provenanceRef":"data/sessions/2026/09/2026-09-05_2026-09-06/normalized/session-metrics.json#sqm","quality":"AVAILABLE","completeness":"COMPLETE"},
+    {"sessionId":"2026-09-06_2026-09-07","value":20.96,"unit":"mag/arcsec2","provenanceRef":"data/sessions/2026/09/2026-09-06_2026-09-07/normalized/session-metrics.json#sqm","quality":"AVAILABLE","completeness":"COMPLETE"},
+    {"sessionId":"2026-09-07_2026-09-08","value":20.89,"unit":"mag/arcsec2","provenanceRef":"data/sessions/2026/09/2026-09-07_2026-09-08/normalized/session-metrics.json#sqm","quality":"AVAILABLE","completeness":"COMPLETE"}
   ],
-  "exclusions": [],
+  "exclusions": [
+    {"sessionId":"2026-07-14_2026-07-15","reason":"VALUE_UNAVAILABLE","comparabilityClass":"UNAVAILABLE"},
+    {"sessionId":"2026-07-15_2026-07-16","reason":"VALUE_UNAVAILABLE","comparabilityClass":"UNAVAILABLE"},
+    {"sessionId":"2026-07-16_2026-07-17","reason":"VALUE_UNAVAILABLE","comparabilityClass":"UNAVAILABLE"},
+    {"sessionId":"2026-08-10_2026-08-11","reason":"VALUE_UNAVAILABLE","comparabilityClass":"UNAVAILABLE"},
+    {"sessionId":"2026-08-14_2026-08-15","reason":"VALUE_UNAVAILABLE","comparabilityClass":"UNAVAILABLE"},
+    {"sessionId":"2026-08-15_2026-08-16","reason":"VALUE_UNAVAILABLE","comparabilityClass":"UNAVAILABLE"},
+    {"sessionId":"2026-08-26_2026-08-27","reason":"VALUE_UNAVAILABLE","comparabilityClass":"UNAVAILABLE"}
+  ],
   "descriptiveSummary": {
-    "sampleSize": 2,
-    "minimum": 20.57,
-    "maximum": 20.89,
-    "mean": 20.73,
-    "median": 20.73,
-    "range": 0.32
+    "sampleSize": 8,
+    "minimum": 18.66,
+    "maximum": 20.96,
+    "mean": 19.825625000000002,
+    "median": 19.814999999999998,
+    "range": 2.3000000000000007
   },
   "limitations": [
     "DESCRIPTIVE_ONLY_NOT_ACCEPTANCE_THRESHOLD",
@@ -41,14 +41,31 @@
     "NO_SAFETY_OR_ACTION_AUTHORITY"
   ],
   "lineage": {
-    "comparisonSetId": "BKL037-SQM-REAL-001",
+    "comparisonSetId": "BKL037-SQM-CATALOG-V1",
     "sourceRefs": [
+      "docs/data/scientific-session-catalog.json",
+      "data/sessions/2026/07/2026-07-14_2026-07-15/normalized/session-metrics.json",
+      "data/sessions/2026/07/2026-07-15_2026-07-16/normalized/session-metrics.json",
+      "data/sessions/2026/07/2026-07-16_2026-07-17/normalized/session-metrics.json",
+      "data/sessions/2026/08/2026-08-10_2026-08-11/normalized/session-metrics.json",
+      "data/sessions/2026/08/2026-08-14_2026-08-15/normalized/session-metrics.json",
+      "data/sessions/2026/08/2026-08-15_2026-08-16/normalized/session-metrics.json",
+      "data/sessions/2026/08/2026-08-26_2026-08-27/normalized/session-metrics.json",
+      "data/sessions/2026/08/2026-08-31_2026-09-01/normalized/session-metrics.json",
+      "data/sessions/2026/09/2026-09-01_2026-09-02/normalized/session-metrics.json",
+      "data/sessions/2026/09/2026-09-02_2026-09-03/normalized/session-metrics.json",
+      "data/sessions/2026/09/2026-09-03_2026-09-04/normalized/session-metrics.json",
+      "data/sessions/2026/09/2026-09-04_2026-09-05/normalized/session-metrics.json",
       "data/sessions/2026/09/2026-09-05_2026-09-06/normalized/session-metrics.json",
+      "data/sessions/2026/09/2026-09-06_2026-09-07/normalized/session-metrics.json",
       "data/sessions/2026/09/2026-09-07_2026-09-08/normalized/session-metrics.json"
     ]
   },
-  "authority": {
-    "acceptanceAuthority": false,
-    "actionAuthority": "NONE"
+  "authority": {"acceptanceAuthority":false,"actionAuthority":"NONE"},
+  "catalogCoverage": {
+    "totalSessions": 15,
+    "includedSessions": 8,
+    "excludedSessions": 7,
+    "sourceCatalog": "docs/data/scientific-session-catalog.json"
   }
 }
