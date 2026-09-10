@@ -114,7 +114,7 @@
           ['Repository Intelligence', 'repository-intelligence/'],
           ['Repository Analytics', 'repository-analytics/'],
           ['Analytics Center', 'analytics/'],
-          ['Dashboard integrate', 'analytics/dashboard-integrated/'],
+          ['Executive Dashboard', 'analytics/dashboard/'],
           ['Qualità e storico', 'analytics/history-validation/'],
           ['Developer Guide', 'developer/development-guide/']
         ], href)}
