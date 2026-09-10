@@ -3,185 +3,94 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 2.0 |
+| Versione | 2.1 |
 | Stato | Active context baseline |
-| Data baseline | 08/09/2026 |
+| Data baseline | 10/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch autorevole | `main` |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Continuity handover | `docs/project/HANDOVER_2026-09-08.md` |
-| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-08.md` |
-| Current governed package | BKL-038 — Anomaly & Trend Center |
+| Continuity handover | `docs/project/HANDOVER_2026-09-10.md` |
+| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-10.md` |
+| Current governed package | BKL-041 — Scientific Data Quality Score |
 | Owner | Massimo Mainini |
 
-## 1. Scopo
+## 1. Scopo e gerarchia
 
-Questo documento fornisce il contesto architetturale enterprise corrente del Digital StarGate. Non è il root bootstrap e non sostituisce Architecture Package, ADR, assessment, evidence, backlog, roadmap o release record.
+Questo documento fornisce il contesto enterprise corrente. Il repository GitHub è source of truth; bootstrap, current handover, current baseline, Knowledge Map, backlog e canonical roadmap prevalgono sugli snapshot storici.
 
-Il punto di ingresso unico è `AI_BOOTSTRAP.md`. La sequenza corrente parte dal bootstrap, prosegue con handover e technical baseline 08/09/2026, quindi con questo Context, Repository Knowledge Map e le ulteriori authority dichiarate dal bootstrap.
+## 2. Authority e projection
 
-I documenti handover/baseline datati 07/09/2026 o precedenti restano snapshot storici e non devono essere riscritti per rappresentare lo stato corrente.
+- `BACKLOG.md`: stato, priorità e dipendenze;
+- `.github/roadmap/roadmap-source.json`: roadmap funzionale canonica;
+- `docs/data/roadmap.json`: projection generata;
+- Architecture Package/ADR: decisioni e boundary;
+- closure/review/workflow/evidence: supporto delle acceptance claim;
+- portal dataset/read model: projection ricostruibili.
 
-## 2. Gerarchia e source authority
+Nessuna projection può promuoversi a authority.
 
-Principi di prevalenza:
+## 3. Boundary enterprise
 
-1. il repository GitHub e i suoi artefatti versionati costituiscono la source of truth;
-2. Architecture Package, ADR, capability, standard e registri governati mantengono la propria authority di dominio;
-3. review ARB, Release Quality, validation record, workflow ed evidence provano esclusivamente ciò che hanno realmente verificato;
-4. `docs/project/BACKLOG.md` e `.github/roadmap/roadmap-source.json` rappresentano lo stato governato corrente delle attività e della roadmap funzionale;
-5. `docs/data/roadmap.json` e gli altri dataset sotto `docs/data` sono projection generate e non authority autonome;
-6. AMP-002 resta l'architecture-program planning authority per numerazione e wave AP-007–AP-015, ma non va usato come live status register quando backlog/roadmap/evidence più recenti governano lo stato corrente;
-7. conversazioni, prompt e snapshot storici non prevalgono sul repository corrente.
-
-Nessuna projection può promuovere la propria authority o sostituire la fonte da cui deriva.
-
-## 3. Visione e boundary permanenti
-
-Digital StarGate governa documentazione operativa, architettura enterprise, portale, telemetry, scientific data, session reporting, knowledge/evidence lineage e foundation software dell'osservatorio remoto di Manciano.
-
-Boundary permanenti:
-
-- il portale è un Presentation boundary;
-- Domain, Application e Infrastructure restano separati secondo Clean Architecture;
-- i dataset e read model sono projection ricostruibili;
-- source identity, source authority, semantic type, lifecycle, Citation e Provenance devono essere preservati nei consumer;
-- `unknown`, `stale`, `degraded` e assenza dati non possono essere convertiti in valori validi inventati;
-- i consumer AI restano advisory/read-only salvo governance futura esplicita.
+Presentation, Application, Domain, Infrastructure, Persistence, Messaging ed External Systems restano distinti. Domain non dipende da framework, persistence o infrastructure. Citation, Provenance, source authority, semantic type, lifecycle e confidence devono attraversare i consumer governati.
 
 ## 4. Safety Authority
 
-La Safety Authority fisica/locale resta indipendente e autorevole.
+La Safety Authority fisica/locale e gli interlock restano indipendenti. Portale, telemetry, replay, analytics, comparison, quality score e AI non possono comandare apparati, autorizzare remediation o inferire uno stato Safety corrente da evidence storica.
 
-Portale, telemetry, Knowledge Graph, replay, anomaly/trend analysis e AI:
+## 5. Accepted intelligence and scientific foundation
 
-- non sono Safety Authority;
-- non possono bypassare interlock locali;
-- non possono trasformare historical evidence in command authorization corrente;
-- non introducono automatic remediation authority;
-- non possono comandare direttamente roof, mount, camera, power, network o altri apparati nella baseline corrente.
+Sono accettati, fra gli altri:
 
-Qualunque futura modifica a command path, remediation o Safety Authority richiede governance architetturale separata.
+- BKL-015 — Knowledge Graph machine-readable foundation;
+- BKL-044 — Knowledge Graph / AI Evidence Contract;
+- BKL-035 — Target Knowledge Base;
+- BKL-040 — Night Timeline / Observatory Replay;
+- BKL-038 — Anomaly & Trend Center;
+- BKL-039 — Equipment Performance Registry;
+- BKL-045 — PixInsight Workflow Provenance Plugin;
+- BKL-037 — Session Comparison & Benchmarking.
 
-## 5. Foundation accettate al 08/09/2026
+BKL-037 rimane read-only/descriptive-only; unità non dimostrate, missing evidence e processing history PixInsight incompleta restano fail-closed.
 
-Le foundation di intelligence e knowledge attualmente accettate includono:
+## 6. Current package — BKL-041
 
-- **BKL-015 — Knowledge Graph machine-readable foundation**: traceability repository-centric machine-readable;
-- **BKL-044 — Knowledge Graph / AI Evidence Contract**: Citation, Provenance, semantic type, lifecycle, evidence/claim/inference boundaries e consumer preservation;
-- **BKL-035 — Target Knowledge Base**: target-centric read model governato, projection-only;
-- **BKL-040 — Night Timeline / Observatory Replay**: historical timeline/replay bounded, deterministico, `READ_ONLY` / `VISUAL_ONLY`.
+BKL-041 — Scientific Data Quality Score è il package corrente. Consuma evidence governata senza sostituirne l'authority.
 
-BKL-030 — EAGLE Health & Reliability Telemetry resta una foundation accettata per health history e per i package successivi, distinta dalla Safety Authority.
+F1 deve stabilire:
 
-## 6. BKL-040 — bounded accepted baseline
+- dimensioni eleggibili e loro semantic ownership;
+- unità e normalizzazione;
+- peso e aggregazione;
+- confidence e completeness;
+- missing/stale/unknown behavior;
+- explainability e provenance;
+- bias e limiti di comparabilità;
+- authority boundary e divieti Safety.
 
-BKL-040 F1-F4 è CLOSED / ACCEPTED. La foundation conserva canonical UTC event time, `PLACED | UNPLACED`, deterministic ordering, Citation/Provenance e source authority.
+La promozione a current non approva ancora alcun algoritmo o threshold.
 
-La materializzazione eseguibile accettata è bounded:
+## 7. Roadmap
 
-- N.I.N.A.;
-- PHD2;
-- CloudWatcher;
-- session projection dove definita.
+`... -> BKL-037 CLOSED -> BKL-041 [CURRENT] -> BKL-046 -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
-SQM ed EAGLE health sono foundation governate candidabili a incrementi successivi, ma non sono stati silenziosamente materializzati come channel F3/F4. Power, Network e Safety non devono essere dichiarati come channel storici BKL-040 implementati senza un contratto storico governato specifico.
+AMP-002 resta planning authority per AP-007–AP-015, non live status register.
 
-Il debito `TD-012 — Night Timeline F1/F2 Contract Compatibility` è `Accepted`: F2 non riproduce integralmente l'envelope minimo F1 e usa `replay_event_id` come tie-break mentre F1 definiva `source_event_id`. La baseline F2 accettata non va retrofittata silenziosamente; una normalizzazione futura richiede un incremento compatibile, migration contract, test fail-closed e review ARB.
+## 8. Technical debt and decisions
 
-## 7. Knowledge / AI evidence architecture
+TD-012 resta Accepted e non viene retrofittato. Nessun nuovo debito o ADR è introdotto dalla transizione BKL-037 -> BKL-041.
 
-La knowledge architecture corrente è repository-centric e projection-oriented.
+## 9. Delivery
 
-BKL-044 e BKL-035 impongono che ogni consumer preservi:
+Ogni incremento richiede exact-head CI, review applicabili, merge protetto e post-merge verification. Nessuna acceptance deriva dalla sola presenza di documentazione.
 
-- source locator e source authority;
-- Citation;
-- Provenance;
-- semantic type;
-- lifecycle state;
-- confidence/derivation semantics quando applicabili;
-- conflitti e unknown senza silent resolution.
+## 10. Runtime impact
 
-La remediation BKL-044 di PR #118 lega le transition seed storiche a evidence immutabile invece che a frammenti di un backlog live mutabile.
+La closure BKL-037 e la promozione BKL-041 sono repository-only. Nessuna azione PC/EAGLE è richiesta.
 
-Graph DB, vector DB, RAG provider/runtime e AI operational authority non sono autorizzati dalla baseline corrente.
-
-## 8. Roadmap e sequencing corrente
-
-La source canonica `.github/roadmap/roadmap-source.json` e il live `BACKLOG.md` identificano:
-
-- BKL-040: completed / accepted;
-- BKL-038: current dependency-ready package;
-- BKL-037: Planned, perché dipende anche da BKL-045;
-- BKL-045: Planned.
-
-Sequenza governata corrente:
-
-```text
-Completed baseline through BKL-030, BKL-015, BKL-044, BKL-035 and BKL-040
-  -> BKL-038 Anomaly & Trend Center [CURRENT]
-  -> BKL-039 Equipment Performance Registry
-  -> BKL-045 PixInsight Workflow Provenance Plugin
-  -> BKL-037 Session Comparison & Benchmarking
-  -> BKL-041 Scientific Data Quality Score
-  -> BKL-046 AI Post-Processing Assistant
-  -> BKL-031 Observation Planner
-  -> BKL-032 Session Readiness
-  -> BKL-036 Observatory Health Score
-  -> BKL-033 Digital Twin
-  -> BKL-034 Scientific Image Gallery
-  -> BKL-042 AI Observatory Assistant
-  -> BKL-043 Reliability Engineering
-  -> BKL-014 / AP-015 Scientific Knowledge Platform
-```
-
-BKL-038 può iniziare solo dopo la closure PR #118, review indipendente, Release Quality, merge e post-merge verification.
-
-## 9. AMP-002 e roadmap live
-
-`AMP-002 — Architecture Program Roadmap Realignment` resta la planning authority approvata per l'architecture program successivo ad AP-006 e per la numerazione AP-007–AP-015.
-
-Non deve essere riscritto come registro di stato live. Lo stato corrente delle attività viene riconciliato attraverso backlog, canonical roadmap source, generated roadmap projection, package closure, evidence e workflow.
-
-## 10. Delivery e validation
-
-Per ogni milestone:
-
-1. applicare la mandatory reading sequence di `AI_BOOTSTRAP.md`;
-2. verificare branch, exact HEAD, diff e workflow reali;
-3. identificare authority, projection e dependency boundary;
-4. progettare e implementare soltanto lo scope approvato;
-5. aggiornare documentazione/registri proprietari;
-6. eseguire quality gate sull'exact HEAD;
-7. eseguire review ARB indipendente quando richiesta;
-8. eseguire Release Quality solo dopo ARB approval;
-9. effettuare merge con expected-head protection quando possibile;
-10. verificare i workflow sul merge SHA reale.
-
-Nessuna acceptance o readiness può essere dedotta da un commit o da workflow eseguiti su un HEAD precedente.
-
-## 11. Runtime impact della closure corrente
-
-La closure BKL-040 / PR #118 è repository-only. Non richiede comandi su PC principale o EAGLE e non modifica collector, scheduler, Safety Authority o apparati fisici.
-
-## 12. Riferimenti correnti
-
-- `AI_BOOTSTRAP.md`
-- `docs/project/HANDOVER_2026-09-08.md`
-- `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-08.md`
-- `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
-- `docs/project/BACKLOG.md`
-- `.github/roadmap/roadmap-source.json`
-- `docs/data/roadmap.json`
-- `docs/project/TECHNICAL_DEBT.md`
-- `docs/project/DECISION_LOG.md`
-- `docs/project/BKL-040-CLOSURE-2026-09-08.md`
-- `docs/architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md`
-
-## 13. Registro revisioni
+## 11. Registro revisioni
 
 | Versione | Data | Descrizione |
 |---|---|---|
-| 1.0 | 04/08/2026 | Prima baseline enterprise allineata alla RC1 |
-| 2.0 | 08/09/2026 | Riallineamento alla continuity hierarchy corrente, foundation BKL-044/BKL-035/BKL-040, BKL-038 current, authority/projection e Safety boundaries |
+| 1.0 | 04/08/2026 | Prima baseline enterprise |
+| 2.0 | 08/09/2026 | Foundation BKL-040 e BKL-038 current |
+| 2.1 | 10/09/2026 | Riallineamento a BKL-037 CLOSED/ACCEPTED e BKL-041 current |

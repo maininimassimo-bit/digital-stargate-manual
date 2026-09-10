@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 4.6 |
+| Versione | 4.7 |
 | Stato | Active |
 | Data baseline | 10/09/2026 |
 
@@ -55,11 +55,11 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
 | BKL-035 | P2 | Target Knowledge Base | Done | BKL-015/BKL-044 | Vista target con sessioni, SQM, setup, immagini e workflow | F1-F4 CLOSED/ACCEPTED; PR #112 merge `1eef3e6747d975e40d592933ece655014b808f05`; closure `docs/project/BKL-035-CLOSURE-2026-09-07.md` |
 | BKL-036 | P2 | Observatory Health Score | Planned | BKL-030, telemetry history | Score operativo spiegabile distinto da Safety | Functional Roadmap Expansion |
-| BKL-037 | P2 | Session Comparison & Benchmarking | In Progress | BKL-029, BKL-035, BKL-045 | Confronto qualità/acquisizione/processing | Current dependency-ready package; BKL-029/BKL-035/BKL-045 accepted; Functional Roadmap Expansion |
+| BKL-037 | P2 | Session Comparison & Benchmarking | Done | BKL-029, BKL-035, BKL-045 | Confronto qualità/acquisizione/processing | F1-F5 e dynamic full-catalog comparison CLOSED/ACCEPTED; closure `docs/project/BKL-037-CLOSURE-2026-09-10.md`; transition package BKL-037 -> BKL-041 |
 | BKL-038 | P2 | Anomaly & Trend Center | Done | BKL-030, BKL-040 | Trend e pattern di degrado | F1/F2-A/F3-A/F3-B/F4-A accepted; PR #125 merge `d8249984d63455690b957156060f858eb3cc2713`; closure `docs/project/BKL-038-CLOSURE-2026-09-09.md` |
 | BKL-039 | P2 | Equipment Performance Registry | Done | BKL-015, session history | Prestazioni storiche setup/componenti | F4-A/F4-B/F5-A/F5-B/F5-C/F5-D CLOSED/ACCEPTED; PR #132 merge `651fc340fbb5e58ca36409d574bdd09c3ae55790`; closure `docs/project/BKL-039-CLOSURE-2026-09-09.md` |
 | BKL-040 | P2 | Night Timeline / Observatory Replay | Done | BKL-015/BKL-044, historical telemetry | Replay sincronizzato della notte | F1-F4 CLOSED/ACCEPTED; PR #117 merge `80d22a255540ac582733c60dfe9bbf7807bcdf9b`; closure `docs/project/BKL-040-CLOSURE-2026-09-08.md` |
-| BKL-041 | P2 | Scientific Data Quality Score | Planned | BKL-029, BKL-037, BKL-045 | Quality score scientifico spiegabile | Functional Roadmap Expansion |
+| BKL-041 | P2 | Scientific Data Quality Score | In Progress | BKL-029, BKL-037, BKL-045 | Quality score scientifico spiegabile | Current package after governed BKL-037 closure; F1 must define evidence, weighting, confidence, explainability and non-Safety authority before implementation |
 | BKL-042 | P2 | AI Observatory Assistant | Planned | BKL-015/BKL-044 e intelligence services | Copilot read-only per diagnosis/RCA/planning/science | Functional Roadmap Expansion |
 | BKL-043 | P2 | Observatory Reliability Engineering | Planned | BKL-030/BKL-038/BKL-042 | SLI/SLO, MTBF, MTTR, session completion e failure budget | Functional Roadmap Expansion |
 | BKL-044 | P1 | Knowledge Graph / AI Evidence Contract | Done | BKL-015 | Provenance stabile per AP/ADR/assets/session/target/incident/telemetry/processing/AI | F1-F4 CLOSED/ACCEPTED; PR #104 merge `b7c01ba7221818e1971403ab3befe38c8e40cc54`; closure `docs/project/BKL-044-CLOSURE-2026-09-07.md` |
@@ -75,12 +75,15 @@ BKL-037 ha ora tutte le dipendenze dichiarate soddisfatte (`BKL-029`, `BKL-035`,
 
 La canonical roadmap source resta `.github/roadmap/roadmap-source.json`; `docs/data/roadmap.json` è una generated projection e deve essere sincronizzata esclusivamente tramite il generator governato.
 
+### Transition note — 10/09/2026
+
+BKL-037 è chiuso come capability read-only/descriptive-only dopo F1-F5, PR #147 e la riconciliazione di closure. BKL-041 è promosso a package corrente esclusivamente per avviare source discovery e semantic contract dello Scientific Data Quality Score: la promozione non autorizza scoring operativo, soglie implicite, ranking, raccomandazioni, remediation, device command o Safety Authority.
+
 ## 4. Sequenza di esecuzione raccomandata
 
 ```text
-Completed baseline through BKL-045
-  -> BKL-037 Session Comparison & Benchmarking [CURRENT]
-  -> BKL-041 Scientific Data Quality Score
+Completed baseline through BKL-037
+  -> BKL-041 Scientific Data Quality Score [CURRENT]
   -> BKL-046 AI Post-Processing Assistant
   -> BKL-031 Observation Planner
   -> BKL-032 Session Readiness

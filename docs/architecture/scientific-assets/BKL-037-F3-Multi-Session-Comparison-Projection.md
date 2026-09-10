@@ -3,7 +3,8 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-037-F3 |
-| Stato | Proposed |
+| Stato | Accepted |
+| Accepted merge | `6c51f66ad74f3bcbc773c09b6e12f0b6a301ebc9` |
 | Data | 10/09/2026 |
 | Baseline | `973c2e7c8f3a9220a758bd6c8afa5ed0ac316fcc` |
 | Dipendenza | BKL-037 F2 ACCEPTED |

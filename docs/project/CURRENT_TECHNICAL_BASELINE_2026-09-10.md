@@ -5,47 +5,41 @@
 | Stato | Current technical continuity baseline |
 | Data | 10/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
-| Main baseline di partenza | `42fe320f2c1e6b54edd2808b15d12bf2d3e94ae4` |
-| Current governed package | BKL-037 — Session Comparison & Benchmarking |
-| Next governed package | BKL-041 — Scientific Data Quality Score |
+| Transition baseline | `438863afdcfd3ee1fefc8b44b6b10808751b773a` |
+| Current governed package | BKL-041 — Scientific Data Quality Score |
+| Accepted predecessor | BKL-037 — Session Comparison & Benchmarking |
 
-## 1. Accepted foundation
+## 1. Accepted comparison foundation
 
-BKL-029, BKL-035 e BKL-045, dipendenze dichiarate di BKL-037, risultano accepted nel backlog/canonical roadmap. BKL-038 e BKL-039 sono anch'essi chiusi/accettati. BKL-045 closure è `docs/project/BKL-045-CLOSURE-2026-09-10.md`, PR #140 merge `a08aed981e5ffa4af6b68fea521ada25a4b2b338`.
+BKL-037 F1-F5 e la projection dynamic full-catalog sono accettati. Il comparison layer mantiene:
 
-## 2. BKL-037 comparison contract
+- unità e provenance compatibili;
+- completeness e exclusions visibili;
+- statistiche esclusivamente descrittive;
+- `READ_ONLY`, `acceptanceAuthority=false`, `actionAuthority=NONE`;
+- nessun quality score, ranking, threshold, recommendation o Safety Authority.
 
-BKL-037 è una capability di confronto read-only. I candidate comparison devono conservare dimensione, valore, unità, source, tempo/interval, quality, completeness, provenance e comparability classification. Il default deve restare fail-closed quando la comparabilità non è dimostrata.
+## 2. Current BKL-041 entry condition
 
-Statistiche/benchmark sono descrittivi e non costituiscono acceptance threshold, ranking, quality score, SLA/SLO, raccomandazione o Safety Authority.
+Le dipendenze BKL-029, BKL-037 e BKL-045 sono soddisfatte. BKL-041 può iniziare da F1, ma nessuna semantica di scoring è approvata prima del relativo contratto e delle review.
 
-FWHM storico source-native non può essere reinterpretato automaticamente come arcsec senza provenance dell'unità/calibrazione. Missing evidence resta missing; provenance PixInsight `UNAVAILABLE`/`PARTIAL` non equivale ad assenza di processing.
+## 3. Data and provenance constraints
 
-## 3. Analytics baseline
+- AP-013 resta authority per asset identity/checksum/lifecycle;
+- AP-014 resta catalog/synchronization boundary;
+- BKL-045 governa PixInsight provenance;
+- missing evidence resta missing;
+- `OBSERVED`, `DECLARED` e `SUGGESTED` non sono intercambiabili;
+- FWHM source-native non calibrato non può essere promosso ad arcsec.
 
-La baseline include le correzioni integrate fino alla PR #151:
+## 4. Analytics boundary
 
-- Analytics Center dinamico e session-driven;
-- configuration metadata propagation governata e fail-closed;
-- Executive Dashboard coerente con history consolidata;
-- weather full-window analytics dove disponibile;
-- severity GREEN/YELLOW/RED governata per la vista analytics;
-- consistency/idempotency gates.
-
-Le dashboard sono projection/read model e non possono comandare apparati o assumere Safety Authority.
-
-## 4. Authority / projection
-
-- repository GitHub: source of truth;
-- `docs/project/BACKLOG.md`: stato/priorità/dipendenze live;
-- `.github/roadmap/roadmap-source.json`: canonical roadmap source;
-- `docs/data/roadmap.json`: generated projection;
-- closure/review/evidence/workflow: supporto delle acceptance claim sui rispettivi exact SHA.
+Analytics Center e Session Comparison sono projection/read model. Weather analytics resta full-window evidence con `NO_SAFETY_AUTHORITY`.
 
 ## 5. Runtime e safety
 
-Nessuna modifica EAGLE è richiesta per BKL-037. AP-013 resta authority per scientific asset identity/checksum/lifecycle; AP-014 resta boundary di catalogo/sincronizzazione dove applicabile. Local physical interlocks e Safety Authority restano indipendenti.
+Nessuna modifica a EAGLE, servizi, scheduler, collector o apparati. Gli interlock fisici e la Safety Authority locale restano indipendenti.
 
-## 6. Entry condition per BKL-041
+## 6. Next validation
 
-BKL-041 non deve diventare current finché BKL-037 non è formalmente CLOSED / ACCEPTED, con canonical backlog/roadmap transition integrata e quality gates/post-merge verification verificati sul repository.
+BKL-041 F1 deve definire un contratto verificabile e fail-closed prima di qualsiasi algoritmo, peso, soglia, score o consumer.

@@ -3,7 +3,8 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-037-F5 |
-| Stato | Proposed |
+| Stato | Accepted |
+| Accepted merge | `97ced8a3c42a1480a2d588ec5573253614c88edd` |
 | Data | 10/09/2026 |
 | Baseline | `2e58d440b78e2c5c6d2f2c5978ccdf738c8674c3` |
 | Dipendenza | BKL-037 F4 ACCEPTED |
@@ -18,7 +19,7 @@ Chiudere BKL-037 con una projection persistita basata su evidenza reale, prova r
 - F2 — canonical comparison read model: ACCEPTED;
 - F3 — deterministic multi-session projection: ACCEPTED;
 - F4 — fail-closed read-only portal consumer: ACCEPTED;
-- F5 — real-session persisted projection + acceptance evidence: candidate for final acceptance.
+- F5 — real-session persisted projection + acceptance evidence: ACCEPTED.
 
 ## Evidenza reale
 
@@ -52,4 +53,4 @@ La chiusura è consentita solo se restano vere tutte le seguenti condizioni:
 
 ## Closure decision
 
-Lo stato rimane **Proposed** finché ARB, Release Quality, exact-head CI, merge e post-merge verification non sono completati.
+F5 è **ACCEPTED** sulla baseline di merge indicata. La closure complessiva BKL-037 e la promozione BKL-041 restano subordinate al transition package, alla sua review ARB, alla Release Quality, all’exact-head CI, al merge protetto e alla post-merge verification.

@@ -3,108 +3,65 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 2.1 |
+| Versione | 2.2 |
 | Stato | Active |
 | Data | 10/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | BKL-037 — Session Comparison & Benchmarking |
+| Current governed package | BKL-041 — Scientific Data Quality Score |
 
 ## 1. Scopo
 
-Questa mappa orienta tra domini, authority, projection e percorsi di conoscenza del repository. Non sostituisce i documenti canonici sottostanti. La mandatory reading sequence è definita esclusivamente da `AI_BOOTSTRAP.md`.
+Mappa domini, authority, projection e percorsi di conoscenza. Non sostituisce le fonti canoniche.
 
 ## 2. Continuity hierarchy
 
 1. `AI_BOOTSTRAP.md`;
-2. `docs/project/HANDOVER_2026-09-10.md`;
-3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-10.md`;
-4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`;
-5. questo Knowledge Map;
-6. `docs/project/BACKLOG.md`;
-7. `.github/roadmap/roadmap-source.json`;
-8. `docs/data/roadmap.json` come generated projection;
-9. Technical Debt, Decision Log, Development Workflow, Coding Standards e Release Playbook;
-10. AMP-002 e package/ADR/review/evidence direttamente coinvolti.
+2. current handover e technical baseline 10/09/2026;
+3. Enterprise Architecture Context;
+4. questo Knowledge Map;
+5. `BACKLOG.md`;
+6. canonical roadmap source;
+7. generated roadmap projection;
+8. Technical Debt, Decision Log, Development Workflow, Coding Standards e Release Playbook;
+9. AMP-002 e package/review/evidence coinvolti.
 
-Snapshot datati precedenti restano materiale storico e non stato live.
+## 3. Authority / projection map
 
-## 3. Authority e projection map
+Authority: repository, Architecture Package/ADR, backlog, canonical roadmap, registri, closure/review/workflow/evidence.
 
-### Authority / governance
+Projection: roadmap JSON, cataloghi/read model scientifici, Observatory Status, Timeline/Replay, Equipment Performance, Session Comparison e Analytics Center.
 
-- repository GitHub versionato;
-- Architecture Package e ADR approvati;
-- `BACKLOG.md` per stato/priorità/dipendenze correnti;
-- `.github/roadmap/roadmap-source.json` per roadmap funzionale canonica;
-- Technical Debt e Decision Log per i rispettivi registri;
-- closure, review, evidence e workflow per acceptance/quality claim.
+Ogni consumer preserva source locator, semantic type, lifecycle, Citation, Provenance, quality e completeness dove previsti.
 
-### Projection
+## 4. Accepted foundation
 
-- `docs/data/roadmap.json`;
-- knowledge/read models;
-- scientific catalog e portal datasets;
-- Observatory Status, Timeline/Replay, Equipment Performance, Session Comparison e Analytics Center.
+BKL-015, BKL-044, BKL-035, BKL-040, BKL-038, BKL-039, BKL-045 e BKL-037 sono accepted. AP-013 resta authority degli asset; AP-014 resta catalog/synchronization boundary.
 
-Una projection non promuove la propria authority e deve preservare source locator, semantic type, lifecycle, Citation e Provenance dove previsti.
+## 5. BKL-037 closed baseline
 
-## 4. Accepted intelligence/scientific foundation
+Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimensioni/unità/provenance compatibili, conserva exclusions e non crea ranking, score, threshold, recommendation o authority.
 
-- BKL-015 — Knowledge Graph machine-readable foundation: accepted, repository-centric, nessun graph DB runtime implicito.
-- BKL-044 — Knowledge Graph / AI Evidence Contract: accepted; Observation/Evidence/Claim/Inference/Recommendation, Citation, Provenance, lifecycle/conflict preservation.
-- BKL-035 — Target Knowledge Base: accepted, projection-only.
-- BKL-040 — Night Timeline / Observatory Replay: accepted, bounded/read-only.
-- BKL-038 — Anomaly & Trend Center: accepted.
-- BKL-039 — Equipment Performance Registry: accepted, descriptive-only.
-- BKL-045 — PixInsight Workflow Provenance Plugin: accepted; `OBSERVED`, `DECLARED`, `SUGGESTED` restano distinti e la completezza della storia PixInsight non osservabile resta `UNAVAILABLE`.
+## 6. BKL-041 current
 
-## 5. Current package — BKL-037
+Scientific Data Quality Score è current. F1 deve definire il semantic contract prima di qualsiasi implementazione. Uno score futuro deve essere explainable, evidence-backed, confidence-aware e fail-closed; non è Safety Authority né acceptance automatica.
 
-BKL-037 — Session Comparison & Benchmarking è il package corrente secondo backlog e canonical roadmap. Le dipendenze BKL-029, BKL-035 e BKL-045 sono accepted.
+## 7. Roadmap sequence
 
-Il comparison layer è read-only/descriptive-only e deve preservare unità, source, provenance, quality, completeness e exclusion reason. Comparabilità non dimostrata resta fail-closed. Nessun quality score, ranking, threshold, recommendation, remediation o Safety Authority coupling è autorizzato.
+`... -> BKL-037 CLOSED -> BKL-041 [CURRENT] -> BKL-046 -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
-BKL-041 — Scientific Data Quality Score è il successore pianificato e possiede la futura semantica di scoring; non deve essere anticipato in BKL-037.
+## 8. CI/CD e publishing
 
-## 6. Scientific data and processing knowledge
+Workflow e deployment sono evidence solo per l’exact SHA verificato. Generated projection non è authority.
 
-AP-013 resta authority per scientific asset identity/checksum/lifecycle; AP-014 resta boundary di catalogo/sincronizzazione. GitHub conserva metadata, manifest, contratti ed evidence governata, non bulk RAW storage.
+## 9. Safety boundary
 
-PixInsight fornisce candidate processing evidence entro il contratto BKL-045. Provenance storica mancante non può essere inventata o promossa a `OBSERVED`.
+Nessun consumer analytics, comparison, scoring o AI può comandare apparati, autorizzare remediation o sostituire gli interlock fisici.
 
-## 7. Analytics Center
-
-Le correzioni integrate fino alla PR #151 rendono le viste analytics session-driven e coerenti con history/configuration/weather evidence governata. Weather/severity analytics e GREEN/YELLOW/RED sono presentation/analytical semantics e non Safety Authority.
-
-## 8. Roadmap functional sequence
-
-```text
-Completed baseline through BKL-045
-  -> BKL-037 Session Comparison & Benchmarking [CURRENT]
-  -> BKL-041 Scientific Data Quality Score
-  -> BKL-046 AI Post-Processing Assistant
-  -> BKL-031 Observation Planner
-  -> BKL-032 Session Readiness
-  -> BKL-036 Observatory Health Score
-  -> BKL-033 Digital Twin
-  -> BKL-034 Scientific Image Gallery
-  -> BKL-042 AI Observatory Assistant
-  -> BKL-043 Reliability Engineering
-  -> BKL-014 / AP-015 Scientific Knowledge Platform
-```
-
-## 9. CI/CD e publishing
-
-Commit o file presenti non provano build, acceptance o deployment. Le dichiarazioni devono essere legate all'exact HEAD/merge SHA e ai workflow realmente verificati.
-
-## 10. Safety boundary
-
-Portale, telemetry, analytics, replay, comparison e AI non sono Safety Authority. Gli interlock fisici e la Safety Authority locale restano indipendenti e autorevoli; nessun consumer read-only può comandare apparati o autorizzare remediation.
-
-## 11. Registro revisioni
+## 10. Registro revisioni
 
 | Versione | Data | Descrizione |
 |---|---|---|
 | 1.0 | 04/08/2026 | Prima repository knowledge map |
-| 2.0 | 08/09/2026 | Continuity hierarchy e knowledge/AI foundation |
-| 2.1 | 10/09/2026 | Reconciliation a BKL-045 accepted, BKL-037 current, BKL-041 next e Analytics Center fino a PR #151 |
+| 2.0 | 08/09/2026 | Continuity e knowledge foundation |
+| 2.1 | 10/09/2026 | BKL-037 current |
+| 2.2 | 10/09/2026 | BKL-037 closed/accepted e BKL-041 current |
