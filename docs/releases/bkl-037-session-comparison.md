@@ -4,9 +4,12 @@
 |---|---|
 | Identificativo | DSG-REL-BKL-037 |
 | Data | 10/09/2026 |
-| Stato | Release candidate — pending transition merge |
+| Stato | Released / Accepted |
 | Capability | BKL-037 — Session Comparison & Benchmarking |
 | Successor | BKL-041 — Scientific Data Quality Score |
+| Release PR | #153 |
+| Merge | `9375697fd979f826b331104fa7b86da58bb9b670` |
+| Post-merge | Verified — all applicable workflows successful |
 
 ## Outcome
 
