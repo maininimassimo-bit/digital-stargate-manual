@@ -1,12 +1,13 @@
 .dsg-latest-observation.dsg-showcase {
   display: block;
   min-height: 0;
-  margin: 2.4rem 0;
-  padding: 1.4rem;
+  margin: clamp(2.8rem, 7vw, 6.5rem) 0;
+  padding: clamp(1.1rem, 3vw, 2rem);
   overflow: hidden;
-  border: 1px solid rgba(120, 164, 255, 0.22);
-  border-radius: 1.15rem;
-  background: rgba(10, 24, 48, 0.84);
+  border: 1px solid var(--dsg-line);
+  border-radius: var(--dsg-radius-lg);
+  color: #eef7ff;
+  background: #0b1c30;
 }
 
 .dsg-latest-observation__header {
@@ -26,7 +27,8 @@
 .dsg-latest-observation__header p {
   max-width: 48rem;
   margin: 0;
-  opacity: 0.8;
+  color: #a8b8ca;
+  font-size: 0.88rem;
 }
 
 .dsg-latest-observation__explorer {
@@ -43,17 +45,17 @@
 
 .dsg-latest-observation .dsg-showcase__media {
   min-height: 22rem;
-  border: 1px solid rgba(120, 164, 255, 0.22);
-  border-radius: 0.85rem;
+  border: 1px solid rgba(180, 220, 255, 0.16);
+  border-radius: var(--dsg-radius-md);
 }
 
 .dsg-latest-observation .dsg-showcase__content {
   justify-content: flex-start;
   min-width: 0;
   padding: 1.5rem;
-  border: 1px solid rgba(120, 164, 255, 0.22);
-  border-radius: 0.85rem;
-  background: rgba(7, 22, 47, 0.72);
+  border: 1px solid rgba(180, 220, 255, 0.16);
+  border-radius: var(--dsg-radius-md);
+  background: rgba(255, 255, 255, 0.035);
 }
 
 .dsg-latest-observation .dsg-showcase__content h2 {
@@ -81,7 +83,7 @@
 
 .dsg-showcase__coordinate-panel .dsg-showcase__sky-meta span:nth-child(odd) {
   color: #75d5ff;
-  font-size: 0.68rem;
+  font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: 0.02em;
   text-transform: uppercase;

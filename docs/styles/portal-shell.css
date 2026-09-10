@@ -1,0 +1,245 @@
+/* Digital StarGate UI 7.0 — shared portal shell */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--dsg-paper);
+  color: var(--dsg-text);
+}
+
+.md-grid {
+  max-width: var(--dsg-content-max);
+}
+
+.md-main__inner {
+  margin-top: 0;
+}
+
+.md-content__inner {
+  margin: 0 auto;
+  padding-top: clamp(1.1rem, 3vw, 2rem);
+  padding-bottom: 3rem;
+}
+
+.md-content__inner > :first-child {
+  margin-top: 0;
+}
+
+.md-typeset {
+  color: var(--dsg-text);
+  font-size: 0.82rem;
+  line-height: 1.72;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  color: var(--dsg-text);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.md-typeset h1 {
+  margin-bottom: 1.25rem;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+}
+
+.md-typeset h2 {
+  margin-top: 2.5rem;
+  font-size: clamp(1.45rem, 2.5vw, 2rem);
+}
+
+.md-typeset h3 {
+  font-size: 1.1rem;
+}
+
+.md-typeset a {
+  color: var(--dsg-blue);
+}
+
+.md-typeset .md-button {
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 720;
+}
+
+.md-typeset table:not([class]) {
+  overflow: hidden;
+  border: 1px solid var(--dsg-line);
+  border-radius: var(--dsg-radius-sm);
+  background: var(--dsg-surface);
+  box-shadow: var(--dsg-shadow-sm);
+}
+
+.md-typeset table:not([class]) th {
+  color: var(--dsg-text);
+  background: var(--dsg-surface-muted);
+  font-size: 0.74rem;
+}
+
+.md-typeset table:not([class]) td {
+  border-color: var(--dsg-line);
+  font-size: 0.76rem;
+}
+
+.md-typeset code {
+  border-radius: 0.3rem;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  border: 1px solid var(--dsg-line);
+  border-radius: var(--dsg-radius-sm);
+  box-shadow: var(--dsg-shadow-sm);
+}
+
+.md-sidebar {
+  padding-top: 1rem;
+}
+
+.md-nav__link {
+  border-radius: 0.4rem;
+  color: var(--dsg-text-muted);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.md-nav__link:hover,
+.md-nav__link--active {
+  color: var(--dsg-blue);
+}
+
+.md-nav__link--active {
+  font-weight: 700;
+}
+
+.md-footer {
+  border-top: 1px solid var(--dsg-line);
+  background: var(--dsg-ink-950);
+}
+
+/* Normalize the legacy center surfaces without changing their contracts. */
+:where(
+  .dsg-mission-control,
+  .dsg-scientific-platform,
+  .dsg-session-explorer,
+  .dsg-session-detail,
+  .dsg-documentation-center,
+  .dsg-architecture-center,
+  .dsg-operations-center,
+  .dsg-intelligence-center,
+  .dsg-repository-intelligence,
+  .dsg-roadmap-app,
+  .dsg-at-center,
+  .dsg-sc-center,
+  .dsg-equipment-performance
+) {
+  color: var(--dsg-text);
+  font-size: 1rem;
+}
+
+:where(
+  .dsg-mission-control,
+  .dsg-scientific-platform,
+  .dsg-session-explorer,
+  .dsg-session-detail,
+  .dsg-documentation-center,
+  .dsg-architecture-center,
+  .dsg-operations-center,
+  .dsg-intelligence-center,
+  .dsg-repository-intelligence,
+  .dsg-at-center,
+  .dsg-sc-center,
+  .dsg-equipment-performance
+) :is(p, li) {
+  line-height: 1.65;
+}
+
+:where(
+  .dsg-mission-control,
+  .dsg-scientific-platform,
+  .dsg-session-explorer,
+  .dsg-session-detail,
+  .dsg-documentation-center,
+  .dsg-architecture-center,
+  .dsg-operations-center,
+  .dsg-intelligence-center,
+  .dsg-repository-intelligence,
+  .dsg-at-center,
+  .dsg-sc-center,
+  .dsg-equipment-performance
+) :is(button, input, select, a) {
+  min-height: 2.4rem;
+}
+
+.dsg-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 1rem;
+  color: var(--dsg-text-muted);
+  font-size: 0.72rem;
+}
+
+.dsg-breadcrumb a {
+  color: var(--dsg-text-muted);
+  text-decoration: none;
+}
+
+.dsg-breadcrumb a:hover {
+  color: var(--dsg-blue);
+}
+
+.dsg-page-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 3.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--dsg-line);
+}
+
+.dsg-page-nav a {
+  min-height: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  border: 1px solid var(--dsg-line);
+  border-radius: var(--dsg-radius-sm);
+  background: var(--dsg-surface);
+  text-decoration: none;
+}
+
+.dsg-page-nav a:last-child {
+  text-align: right;
+}
+
+.dsg-page-nav__label {
+  color: var(--dsg-text-muted);
+  font-size: 0.7rem;
+}
+
+.dsg-page-nav__title {
+  margin-top: 0.3rem;
+  color: var(--dsg-text);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+@media (max-width: 48rem) {
+  .md-typeset {
+    font-size: 0.8rem;
+  }
+
+  .md-content__inner {
+    padding-top: 1rem;
+  }
+
+  .dsg-page-nav {
+    grid-template-columns: 1fr;
+  }
+}
+

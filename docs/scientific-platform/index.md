@@ -37,7 +37,7 @@
     <article class="dsg-scientific-card"><strong>Observation Catalog</strong><p>Indicizzazione e ricerca read-only delle osservazioni scientifiche, mantenendo AP-013 autorevole per asset, checksum e provenance.</p><a href="../scientific-session-catalog/">Apri Catalogo →</a></article>
     <article class="dsg-scientific-card"><strong>Processing Provenance</strong><p>Workflow, processing run, input, output, ambiente e relazioni di derivazione, con estensioni future governate.</p><a href="../architecture/scientific-assets/DSDM-003-Contract-and-Manifest-Model/">Contract &amp; Manifest →</a></article>
     <article class="dsg-scientific-card"><strong>Session Importer</strong><p>Discovery, parsing deterministico, trasferimento COPY_ONLY, staging verificato e protezione della sorgente.</p><a href="../architecture/scientific-assets/DSDM-004-Session-Importer-Architecture-and-Safe-Transfer-Design/">Importer Architecture →</a></article>
-    <article class="dsg-scientific-card"><strong>Scientific Intelligence</strong><p>Knowledge/evidence, Target Knowledge Base e Night Timeline accettati come fondazioni read-only; Anomaly &amp; Trend Center è il package corrente.</p><a href="../scientific-platform-intelligence/">Scientific Intelligence →</a></article>
+    <article class="dsg-scientific-card"><strong>Scientific Intelligence</strong><p>Knowledge/evidence, Target Knowledge Base, Night Timeline, Anomaly &amp; Trend e provenance come fondazioni read-only governate.</p><a href="../scientific-platform-intelligence/">Scientific Intelligence →</a></article>
   </div>
 </section>
 

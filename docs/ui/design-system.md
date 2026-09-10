@@ -2,400 +2,201 @@
 
 | Campo | Valore |
 |---|---|
-| Documento | Digital StarGate Design System |
 | Identificativo | DSG-UI-001 |
-| Release di introduzione | 4.0 M1 |
-| Versione documento | 1.0 |
-| Stato | Draft |
-| Ambito | Portale web, documentazione MkDocs e dashboard |
+| Versione | 2.0 |
+| Stato | Accepted |
+| Data | 10/09/2026 |
+| Ambito | GitHub Pages, MkDocs, dashboard e hub |
+| Release | UI 7.0 |
 | Responsabile | Massimo Mainini |
 
----
+## 1. Design thesis
 
-## 1. Scopo
+Digital StarGate deve sembrare un osservatorio scientifico contemporaneo, non un insieme di pagine tecniche scollegate. L'esperienza unisce una base editoriale leggibile a superfici operative compatte: molto spazio per orientarsi, dati densi solo dove servono, colore usato per significato e provenance sempre visibile.
 
-Il Digital StarGate Design System definisce le regole visive, strutturali e comportamentali da applicare a tutte le pagine del portale Digital StarGate.
+## 2. Principi
 
-Il documento garantisce coerenza grafica, riconoscibilità del portale, riutilizzo dei componenti, compatibilità tra modalità chiara e scura, comportamento responsive e continuità tra documentazione, osservatorio e analytics.
+1. **Task first** — la prima schermata porta subito a stato, sessioni o fonti.
+2. **One source, many views** — i valori dinamici provengono da projection governate.
+3. **Realtime is not history** — freshness e tipo di fonte sono espliciti.
+4. **Read-only first** — nessun affordance suggerisce comandi non autorizzati.
+5. **Progressive disclosure** — hub semplici, dettaglio tecnico raggiungibile.
+6. **Accessible by default** — tastiera, contrasto, zoom e reduced motion.
+7. **Stable URLs** — il redesign non rompe deep link o ricerca.
 
-Ogni nuova pagina deve apparire come parte nativa del portale esistente e non come un modulo grafico indipendente.
+## 3. Information architecture
 
-## 2. Principi di progettazione
+I percorsi principali sono:
 
-### 2.1 Continuità
+- Home;
+- Osservatorio;
+- Scienza e Analytics;
+- Operations;
+- Architettura;
+- Governance e documentazione;
+- Manuale tecnico.
 
-Le nuove funzionalità devono estendere il linguaggio visivo esistente senza sostituirlo.
+La navigazione desktop privilegia gli hub. Il drawer e la navigazione Material mobile espongono il catalogo completo.
 
-### 2.2 Chiarezza
+## 4. Foundations
 
-Ogni pagina deve rendere immediatamente riconoscibili titolo, scopo, posizione nella navigazione, informazioni principali, azioni disponibili e stato operativo.
+### 4.1 Color
 
-### 2.3 Gerarchia
+| Token | Light | Dark | Uso |
+|---|---|---|---|
+| dsg-paper | #f6f9fc | #07111f | pagina |
+| dsg-surface | #ffffff | #0d1a2b | card e pannelli |
+| dsg-text | #102035 | #edf5ff | testo principale |
+| dsg-text-muted | #53657a | #a8b8ca | testo secondario |
+| dsg-blue | #1769e0 | #69a7ff | azioni e link |
+| dsg-cyan | #16b8d4 | #53d7eb | dati e freshness |
+| dsg-green | #168a67 | #57d4aa | stato valido |
+| dsg-amber | #bd6b00 | #f1b45b | attenzione |
+| dsg-red | #c33d4b | #ff7c89 | errore o rischio |
 
-Le informazioni devono seguire una struttura prevedibile:
+Il colore non è mai l'unico portatore di informazione.
 
-1. contesto della pagina;
-2. titolo;
-3. sintesi;
-4. contenuto principale;
-5. approfondimenti;
-6. azioni e collegamenti;
-7. note operative.
+### 4.2 Typography
 
-### 2.4 Modularità
+- corpo pagina: equivalente ad almeno 16 px;
+- label operative: almeno 14 px nel contesto Material;
+- metadati secondari: mai sotto 12 px;
+- line-height corpo: 1.6–1.75;
+- heading compatti, peso 700, tracking leggermente negativo;
+- percorsi, ID, unità e file in monospaziato quando utile.
 
-Le pagine devono utilizzare componenti riutilizzabili: hero, card, KPI, badge di stato, tabelle, callout, pannelli informativi, griglie, pulsanti e breadcrumb.
+Non vengono caricati font esterni.
 
-### 2.5 Accessibilità
+### 4.3 Layout
 
-Il design deve mantenere contrasto leggibile, testi alternativi per le immagini, titoli in ordine gerarchico, link descrittivi, elementi comprensibili anche senza colore e compatibilità con tastiera e dispositivi mobili.
+- contenuto massimo: 88 rem;
+- pagina documentale: colonna leggibile con side navigation;
+- hub: griglia responsive a 12 colonne;
+- spaziatura verticale di sezione: 2,8–6,5 rem;
+- card: raggio medio, bordo sottile, ombra contenuta;
+- tabelle: superficie separata e scroll controllato su mobile.
 
-### 2.6 Responsive design
+## 5. Components
 
-Ogni pagina deve essere verificata su desktop, notebook, tablet e smartphone.
+### Portal shell
 
-## 3. Fondamenti visivi
+Gestisce pagina, tipografia, link, tabelle, admonition, breadcrumb e navigazione precedente/successiva.
 
-### 3.1 Palette primaria
+### Primary navigation
 
-| Token | Valore | Utilizzo |
-|---|---:|---|
-| `--dsg-navy` | `#07152f` | Sfondo principale scuro |
-| `--dsg-navy-2` | `#0b2453` | Superfici e gradienti secondari |
-| `--dsg-indigo` | `#4658d9` | Elementi primari e accenti |
-| `--dsg-blue` | `#3078ff` | Collegamenti, azioni e indicatori |
-| `--dsg-cyan` | `#55d9ff` | Evidenziazioni e dettagli luminosi |
-| `--dsg-border` | `#dce4f3` | Bordi in modalità chiara |
-| `--dsg-text-soft` | `#68738a` | Testi secondari |
-| `--dsg-surface` | `rgba(255, 255, 255, 0.9)` | Superfici chiare |
-| `--dsg-surface-dark` | `rgba(14, 24, 48, 0.92)` | Superfici scure |
+Contiene brand, sei hub, package corrente derivato dalla roadmap, ricerca, tema e drawer completo. Deve essere idempotente con Instant Navigation.
 
-Le variabili esistenti devono essere preferite ai valori colore inseriti direttamente nei nuovi componenti.
+### Hero
 
-### 3.2 Colori di stato
+Usato soltanto negli hub principali. Titolo, sintesi e massimo due azioni. Non deve impedire l'accesso al contenuto primario.
 
-| Stato | Significato |
+### Governed snapshot
+
+Mostra:
+
+- nome della fonte;
+- data o freshness;
+- stato o valore;
+- collegamento al dettaglio;
+- fallback loading/error non ambiguo.
+
+### Cards
+
+Una card risponde a un'unica domanda e contiene una sola azione. Titolo e azione restano descrittivi; vietati link come “clicca qui”.
+
+### Status
+
+Ogni stato include testo, non solo colore. UNKNOWN, STALE, PARTIAL, UNAVAILABLE e NOT REPRESENTED restano distinti.
+
+### Drawer
+
+Requisiti:
+
+- aria-hidden coerente;
+- inert quando chiuso;
+- chiusura con Escape e backdrop;
+- focus spostato alla chiusura e poi restituito al trigger;
+- gruppi basati sul modello mentale, non sui nomi delle cartelle.
+
+## 6. Dynamic content
+
+1. I consumer usano projection versionate.
+2. I fetch di stato corrente usano cache no-store.
+3. Le proprietà additive sconosciute sono tollerate.
+4. Il dato mancante non diventa zero.
+5. I fallback non contengono valori storici plausibili.
+6. La homepage legge con no-store le projection pubblicate dopo ogni sessione importata.
+7. Lo stato roadmap è aggiornato dalla pipeline di proiezione governata.
+8. Nessun consumer scientifico aggira Scientific Data Engine quando il catalogo è coinvolto.
+
+## 7. Responsive behavior
+
+| Viewport | Regola |
 |---|---|
-| Verde | Operativo, completato o conforme |
-| Giallo | Attenzione, verifica richiesta o condizione parziale |
-| Rosso | Errore, indisponibilità o condizione critica |
-| Blu | Informazione o attività in corso |
-| Grigio | Stato non disponibile, inattivo o non applicabile |
-
-Il colore non deve essere l’unico elemento distintivo: ogni badge deve contenere anche un testo esplicito.
-
-### 3.3 Gradienti
-
-I gradienti devono usare prevalentemente combinazioni di navy, indigo, blu e ciano. Sono ammessi per header, hero, pulsanti primari, card in evidenza e indicatori selezionati.
-
-### 3.4 Ombre
-
-```css
---dsg-shadow: 0 14px 36px rgba(12, 29, 70, 0.14);
---dsg-shadow-soft: 0 7px 22px rgba(12, 29, 70, 0.09);
-```
-
-### 3.5 Bordi e raggi
-
-| Componente | Raggio indicativo |
-|---|---:|
-| Pulsante | `0.45rem` |
-| Badge | `0.35rem` o forma pill |
-| Card | `0.75rem` |
-| Pannello principale | `0.9rem` |
-| Hero | `1rem` |
-
-## 4. Tipografia
-
-Il portale utilizza la tipografia fornita dal tema Material for MkDocs. Non devono essere aggiunti font esterni senza una decisione architetturale specifica.
-
-Una pagina deve contenere un solo H1 e rispettare l’ordine H1, H2, H3, H4.
-
-Percorsi, comandi, nomi file, variabili e identificativi devono essere formattati in monospaziato.
-
-## 5. Struttura delle pagine
-
-Ogni nuova pagina deve adottare, quando applicabile, questa struttura:
-
-```text
-Breadcrumb
-Titolo o hero
-Descrizione sintetica
-Indicatori principali
-Contenuto
-Approfondimenti
-Azioni o collegamenti
-Note operative
-```
-
-Il titolo deve essere unico, coerente con `mkdocs.yml` e accompagnato da una breve introduzione.
-
-## 6. Hero
-
-Il componente hero è destinato a home page, portali di sezione, dashboard principali e pagine di presentazione.
-
-Classi esistenti:
-
-```text
-.dsg-hero
-.dsg-hero__overlay
-.dsg-hero__content
-.dsg-hero__eyebrow
-.dsg-hero__tagline
-.dsg-hero__subtitle
-.dsg-hero__actions
-.dsg-hero__facts
-.dsg-hero__fact
-```
-
-Le nuove varianti devono estendere queste classi.
-
-## 7. Card
-
-Le card devono avere uno scopo unico, evitare testi troppo lunghi, mantenere altezze coerenti nelle griglie e non contenere più di un’azione primaria.
-
-Griglia desktop consigliata:
-
-```css
-grid-template-columns: repeat(3, minmax(0, 1fr));
-```
-
-Su schermi piccoli la griglia deve diventare a colonna singola.
-
-## 8. KPI e indicatori
-
-I KPI devono presentare nome, valore, unità di misura, periodo di riferimento e stato o confronto, quando disponibile.
-
-Quando un dato non è disponibile utilizzare `N/D` e non `0`, salvo che zero sia realmente il valore misurato.
-
-## 9. Tabelle
-
-Ogni tabella deve avere intestazioni chiare, unità di misura, ordine logico delle colonne, allineamento coerente e comportamento responsive.
-
-- testo: sinistra;
-- numeri: destra;
-- stati brevi: centro;
-- codici: monospaziato quando opportuno.
-
-## 10. Pulsanti e azioni
-
-Una pagina deve avere normalmente una sola azione primaria visivamente dominante.
-
-Le etichette devono descrivere l’azione. Evitare espressioni generiche come `Clicca qui`, `Vai` o `Altro`.
-
-## 11. Admonition e callout
-
-Tipologie raccomandate:
-
-```text
-note
-info
-tip
-warning
-danger
-success
-example
-```
-
-## 12. Icone
-
-Le icone devono provenire prioritariamente dal set Material già disponibile nel tema e non devono sostituire completamente il testo.
-
-## 13. Immagini e diagrammi
-
-Le immagini devono essere archiviate sotto:
-
-```text
-docs/assets/images
-```
-
-Utilizzare nomi minuscoli, descrittivi, separati da trattini e privi di spazi.
-
-Preferire SVG per diagrammi, WebP o JPEG per fotografie e PNG per schermate o trasparenze.
-
-## 14. Dashboard Analytics
-
-Struttura consigliata:
-
-```text
-Titolo dashboard
-Periodo
-Stato aggiornamento
-KPI principali
-Grafici
-Tabelle di dettaglio
-Note sulla qualità dei dati
-```
-
-Ogni grafico deve avere titolo, unità di misura, intervallo temporale, legenda quando necessaria e messaggio in assenza di dati.
-
-## 15. Modalità chiara e scura
-
-Ogni nuovo componente deve essere verificato in entrambe le modalità, controllando contrasto, bordi, ombre, icone, tabelle, stati e immagini.
-
-## 16. Responsive design
-
-Su desktop sono ammesse griglie a più colonne. Su tablet il numero di colonne deve ridursi. Su smartphone occorre usare prevalentemente una colonna e permettere lo scorrimento controllato delle tabelle.
-
-## 17. Convenzioni HTML
-
-L’HTML personalizzato deve essere usato solo quando Markdown e i componenti MkDocs non sono sufficienti.
-
-Regole:
-
-- usare elementi semantici;
-- evitare stili inline;
-- usare classi con prefisso `dsg-`;
-- evitare JavaScript incorporato nella pagina;
-- non duplicare componenti già presenti.
-
-## 18. Convenzioni CSS
-
-Le nuove classi devono usare il prefisso `dsg-`.
-
-I valori ricorrenti devono essere definiti come custom properties.
-
-Evitare `!important`, selettori eccessivamente specifici, stili inline, colori duplicati e dimensioni fisse non responsive.
-
-## 19. Convenzioni JavaScript
-
-Il JavaScript deve migliorare progressivamente la pagina, non impedire la fruizione del contenuto statico, evitare errori in console e separare dati, logica e rendering.
-
-Gli script condivisi devono essere archiviati sotto:
-
-```text
-docs/javascripts
-```
-
-## 20. Navigazione
-
-Ogni pagina pubblicata deve essere registrata in `mkdocs.yml` oppure esclusa esplicitamente dalla navigazione quando previsto.
-
-## 21. Breadcrumb
-
-Le pagine interne devono utilizzare breadcrumb coerenti con la navigazione.
-
-Esempio:
-
-```text
-Home / Architettura / Assessment tecnici / PAA-001
-```
-
-## 22. Stati delle pagine
-
-| Stato | Significato |
-|---|---|
-| Draft | Documento in preparazione |
-| In review | Documento sottoposto a verifica |
-| Approved | Documento approvato |
-| Active | Documento operativo |
-| Superseded | Documento sostituito |
-| Archived | Documento storico |
-
-## 23. Template minimo di pagina
-
-```markdown
-# Titolo della pagina
-
-Breve descrizione dello scopo della pagina.
-
-## Panoramica
-
-## Contenuto principale
-
-## Verifica
-
-## Riferimenti
-```
-
-## 24. Template pagina tecnica
-
-```markdown
-# Titolo tecnico
-
-| Campo | Valore |
-|---|---|
-| Identificativo | DSG-XXX-000 |
-| Versione | 1.0 |
-| Stato | Draft |
-| Responsabile | Massimo Mainini |
-
-## Scopo
-
-## Ambito
-
-## Prerequisiti
-
-## Architettura o procedura
-
-## Validazione
-
-## Rischi e limitazioni
-
-## Riferimenti
-```
-
-## 25. Checklist di conformità
-
-### Contenuto
-
-- [ ] Il titolo è chiaro e unico.
-- [ ] La pagina ha uno scopo esplicito.
-- [ ] I termini tecnici sono coerenti.
-- [ ] I collegamenti funzionano.
-- [ ] Le immagini hanno testo alternativo.
-- [ ] I comandi sono completi e verificabili.
-
-### Design
-
-- [ ] La pagina utilizza la palette Digital StarGate.
-- [ ] I componenti esistenti sono stati riutilizzati.
-- [ ] La pagina funziona in modalità chiara e scura.
-- [ ] La pagina è leggibile su smartphone.
-
-### Navigazione
-
-- [ ] La pagina è inserita in `mkdocs.yml`.
-- [ ] La posizione nella navigazione è corretta.
-- [ ] Il breadcrumb è coerente.
-
-### Qualità tecnica
-
-- [ ] `mkdocs build --strict` termina correttamente.
-- [ ] Non sono presenti errori JavaScript nella console.
-- [ ] Non sono presenti risorse mancanti.
-- [ ] Non sono presenti file locali o temporanei.
-- [ ] `git status` contiene solo le modifiche previste.
-
-## 26. Governance del Design System
-
-Ogni modifica significativa deve includere aggiornamento del documento, aggiornamento dei fogli di stile, verifica delle pagine esistenti, build MkDocs e registrazione nelle note di release.
-
-## 27. Criteri di accettazione
-
-Una nuova pagina è conforme quando mantiene l’identità visiva esistente, usa componenti documentati, supera la build MkDocs strict, funziona in modalità chiara e scura, è responsive e non introduce regressioni.
-
-## 28. Riferimenti tecnici
-
-```text
-mkdocs.yml
-docs/styles/extra.css
-docs/styles/analytics.css
-docs/javascripts/page-enhancements.js
-docs/javascripts/nav-scroll.js
-docs/javascripts/homepage-effects.js
-```
-
-Documenti correlati:
-
-```text
-docs/developer/portal-publication-guidelines.md
-docs/architecture/assessments/PAA-001-Project-Architecture-Assessment.md
-docs/releases/ui-6.1.md
-```
-
-## 29. Registro revisioni
-
-| Versione | Data | Descrizione |
-|---|---|---|
-| 1.0 | 26/07/2026 | Prima emissione per Release 4.0 M1 |
+| Desktop | custom navigation, griglie multi-colonna, side navigation |
+| Notebook/tablet | brand compatto, griglie a due colonne |
+| Mobile | navigazione Material nativa, singola colonna, controlli full-width |
+| Zoom 200% | nessuna sovrapposizione o perdita di azioni |
+
+## 8. Accessibility
+
+- focus visibile con spessore 3 px;
+- ordine heading coerente;
+- landmark semantici;
+- alt text per immagini informative, alt vuoto per logo duplicato;
+- controlli raggiungibili da tastiera;
+- stato comunicato testualmente;
+- prefers-reduced-motion rispettato;
+- target touch con altezza indicativa minima 44 px;
+- contenuto statico utile senza JavaScript.
+
+## 9. Motion
+
+Animazioni limitate a feedback brevi, reveal non essenziali e transizioni di drawer. Nessun contenuto critico dipende dal movimento. Le animazioni vengono ridotte quando richiesto dal sistema.
+
+## 10. Content design
+
+- italiano chiaro per navigazione e istruzioni;
+- termini tecnici inglesi mantenuti quando canonici;
+- nessuna promessa generica di innovazione;
+- distinzione costante tra current, historical, planned e superseded;
+- date e source vicino ai dati che qualificano;
+- niente contatori manuali quando esiste un generatore.
+
+## 11. CSS and JavaScript rules
+
+- prefisso dsg-;
+- token centralizzati in theme-tokens.css;
+- shell condivisa in portal-shell.css;
+- CSS di componente separato;
+- niente nuovi stili inline;
+- JavaScript incapsulato, idempotente e compatibile con document$;
+- loading, empty, error e degraded state;
+- nessuna dipendenza aggiuntiva per il solo styling.
+
+## 12. Validation checklist
+
+- [ ] un solo H1;
+- [ ] percorso primario riconoscibile;
+- [ ] light e dark mode;
+- [ ] desktop, tablet e mobile;
+- [ ] tastiera, Escape e focus;
+- [ ] zoom testo 200%;
+- [ ] fallback senza dati stale;
+- [ ] JavaScript syntax check;
+- [ ] regression test dei generatori;
+- [ ] mkdocs build --strict;
+- [ ] link e nav coerenti;
+- [ ] CI su exact head;
+- [ ] Pages post-merge.
+
+## 13. Governance
+
+Una modifica significativa richiede aggiornamento coordinato di Design System, solution architecture, audit freshness quando applicabile, release note, navigation e validation evidence.
+
+## 14. Revision history
+
+| Versione | Data | Stato | Descrizione |
+|---|---|---|---|
+| 1.0 | 26/07/2026 | Superseded | Prima emissione UI 6.1 |
+| 2.0 | 10/09/2026 | Accepted | Redesign UI 7.0, nuova IA e dynamic content contract; ARB-UI-7 APPROVED |

@@ -4,8 +4,9 @@
 |---|---|
 | Documento | Digital StarGate Portal Vision |
 | Identificativo | DSGP-VIS-001 |
-| Stato | Planned architecture vision |
+| Stato | Active reference — incremental implementation |
 | Data | 30/07/2026 |
+| Ultima revisione | 10/09/2026 |
 | Sponsor | Massimo Mainini |
 | Roadmap | AMP-002 |
 | Package correlati | AP-007, AP-008, AP-009, AP-010, AP-011, AP-012 |
@@ -18,6 +19,8 @@ Digital StarGate Portal (DSGP) è il punto di accesso unificato all'ecosistema D
 - **Digital StarGate Operations Center (DSOC)** per stato live, health, eventi, allarmi, incidenti e operazioni autorizzate.
 
 Il portale è un presentation boundary. Non è la fonte autorevole del dominio, non accede direttamente agli apparati e non sostituisce gli interblocchi locali.
+
+UI 7.0 realizza il Portal shell e la information architecture sul canale corrente GitHub Pages/MkDocs. Le evoluzioni applicative future rimangono governate separatamente.
 
 ## 2. Obiettivi
 
@@ -211,12 +214,12 @@ DSGP, DSAP e DSOC devono produrre:
 - nessun accesso diretto UI-to-device;
 - nessuna pipeline Analytics parallela dai log grezzi;
 - authorization, audit e safety precondition sono testabili;
-- desktop e tablet sono supportati; mobile è evoluzione pianificata;
+- desktop, tablet e mobile sono supportati dal presentation layer corrente;
 - multi-observatory tenancy non è implementata implicitamente ma il modello non la impedisce.
 
 ## 13. Open issues
 
-- scelta dello stack frontend e del Backend for Frontend;
+- scelta dello stack frontend e del Backend for Frontend per le future capability applicative oltre GitHub Pages/MkDocs;
 - protocollo live e modello subscription;
 - time-series/event storage;
 - SLI/SLO e budget di cardinalità;

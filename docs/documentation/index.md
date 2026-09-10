@@ -27,10 +27,10 @@ description: Catalogo visuale e Search Center della documentazione Digital StarG
 </section>
 
 <div class="dsg-documentation-kpis">
-  <div class="dsg-documentation-kpi"><span>DOMINI</span><strong>8</strong><small>Accessi principali del portale</small></div>
-  <div class="dsg-documentation-kpi"><span>ARCHITECTURE PACKAGE</span><strong data-doc-kpi-ap-count>15</strong><small data-doc-kpi-ap-range>AP-001 → AP-015</small></div>
-  <div class="dsg-documentation-kpi"><span>AP ATTIVI</span><strong data-doc-kpi-active-ap>3</strong><small>Stato derivato dalla roadmap governata</small></div>
-  <div class="dsg-documentation-kpi"><span>PACKAGE CORRENTE</span><strong data-doc-kpi-current-package>RC2-BASELINE</strong><small data-doc-kpi-current-note>RC2 Baseline and Integrated Acceptance</small></div>
+  <div class="dsg-documentation-kpi"><span>PERCORSI PRINCIPALI</span><strong>6</strong><small>Information architecture UI 7.0</small></div>
+  <div class="dsg-documentation-kpi"><span>ARCHITECTURE PACKAGE</span><strong data-doc-kpi-ap-count>—</strong><small data-doc-kpi-ap-range>Caricamento roadmap…</small></div>
+  <div class="dsg-documentation-kpi"><span>PACKAGE ATTIVI</span><strong data-doc-kpi-active-ap>—</strong><small>Stato derivato dalla roadmap governata</small></div>
+  <div class="dsg-documentation-kpi"><span>PACKAGE CORRENTE</span><strong data-doc-kpi-current-package>—</strong><small data-doc-kpi-current-note>Caricamento projection…</small></div>
 </div>
 
 <section class="dsg-documentation-section" id="enterprise-search-center">
@@ -103,7 +103,7 @@ description: Catalogo visuale e Search Center della documentazione Digital StarG
       <span>ARCHITETTURA</span><strong>Architecture Center</strong><p>AP, ADR, capability, assessment, validation e governance.</p><em>Apri →</em>
     </a>
     <a class="dsg-documentation-card is-featured" href="../scientific-platform/">
-      <span>SCIENTIFIC PLATFORM · ATTIVO</span><strong>AP-013 Scientific Repository</strong><p>Scientific Data Manager, importer, manifest, provenance e readiness.</p><em>Apri →</em>
+      <span>PIATTAFORMA SCIENTIFICA</span><strong>Dati, sessioni e provenance</strong><p>Catalogo osservazioni, importer, manifest, analytics e readiness governati.</p><em>Apri →</em>
     </a>
     <a class="dsg-documentation-card" href="../status/">
       <span>OBSERVATORY</span><strong>Stato e sessioni</strong><p>Stato osservatorio, report di sessione e indicatori operativi.</p><em>Apri →</em>
