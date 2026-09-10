@@ -5,13 +5,13 @@
 | Stato | Current technical continuity baseline |
 | Data | 10/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
-| Transition baseline | `438863afdcfd3ee1fefc8b44b6b10808751b773a` |
+| Accepted main baseline | `9375697fd979f826b331104fa7b86da58bb9b670` |
 | Current governed package | BKL-041 — Scientific Data Quality Score |
 | Accepted predecessor | BKL-037 — Session Comparison & Benchmarking |
 
 ## 1. Accepted comparison foundation
 
-BKL-037 F1-F5 e la projection dynamic full-catalog sono accettati. Il comparison layer mantiene:
+BKL-037 F1-F5 e la projection dynamic full-catalog sono CLOSED / ACCEPTED / POST-MERGE VERIFIED tramite PR #153, merge `9375697fd979f826b331104fa7b86da58bb9b670`. Il comparison layer mantiene:
 
 - unità e provenance compatibili;
 - completeness e exclusions visibili;
