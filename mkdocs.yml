@@ -64,9 +64,11 @@ markdown_extensions:
       custom_checkbox: true
 
 extra_css:
+  - styles/theme-tokens.css
   - styles/extra.css
   - styles/analytics.css
   - styles/roadmap.css
+  - styles/portal-shell.css
 
 extra_javascript:
   - javascripts/dsg-enterprise-core.js
@@ -83,23 +85,30 @@ not_in_nav: |
 
 nav:
   - Home: index.md
-  - Roadmap: roadmap/index.md
 
-  - Project Governance:
-      - Governance Center: project/index.md
-      - Enterprise Architecture Context: project/ENTERPRISE_ARCHITECTURE_CONTEXT.md
-      - Repository Knowledge Map: project/REPOSITORY_KNOWLEDGE_MAP.md
-      - Development Workflow: project/DEVELOPMENT_WORKFLOW.md
-      - Coding Standards: project/CODING_STANDARDS.md
-      - Release Playbook: project/RELEASE_PLAYBOOK.md
-      - Technical Debt Register: project/TECHNICAL_DEBT.md
-      - Decision Log: project/DECISION_LOG.md
-      - Project Backlog: project/BACKLOG.md
-      - BKL-037 Closure: project/BKL-037-CLOSURE-2026-09-10.md
-      - BKL-037 Release Note: releases/bkl-037-session-comparison.md
+  - Osservatorio:
+      - Mission Control: mission-control/index.md
+      - Stato osservatorio: status/index.md
+      - Catalogo sessioni: scientific-session-catalog/index.md
+      - Dettaglio sessione: scientific-session-detail/index.md
+      - Report delle sessioni: session-reports/index.md
+
+  - Scienza e Analytics:
+      - Scientific Platform: scientific-platform/index.md
+      - Analytics Center: analytics/index.md
+      - Session Comparison: session-comparison/index.md
+      - Anomaly & Trend Center: anomaly-trend-center/index.md
+      - Equipment Performance: equipment-performance/index.md
+      - Scientific Intelligence: scientific-platform-intelligence/index.md
+
+  - Operations:
+      - Operations Center: operations/index.md
+      - AP-013 COPY_ONLY Runbook: operations/AP-013-Operational-COPY-ONLY-Runbook.md
+      - AP-014 Session Deployment Runbook: operations/AP14-EAGLE-Automatic-Session-Deployment-Runbook.md
 
   - Architettura:
-      - Panoramica della piattaforma: architecture/index.md
+      - Architecture Center: architecture/index.md
+      - Portal Experience Architecture: architecture/digital-stargate-portal-experience-architecture.md
 
       - Decisioni architetturali:
           - ADR-001 - Session Layer: architecture/ADR-001-Session-Layer.md
@@ -227,80 +236,93 @@ nav:
           - AMP-002 - Architecture Program Roadmap Realignment: architecture/assessments/AMP-002-Architecture-Program-Roadmap-Realignment.md
           - ADR-004 - Operational Architecture: architecture/assessments/ADR-004-Operational-Architecture.md
 
-  - Observatory:
-      - Observatory Status: status/index.md
-      - Session Reports: session-reports/index.md
 
-  - Analytics:
-      - Analytics Center: analytics/index.md
-      - Equipment Performance: equipment-performance/index.md
+  - Governance e documentazione:
+      - Documentation Center: documentation/index.md
+      - Governance Center: project/index.md
+      - Roadmap: roadmap/index.md
+      - Enterprise Architecture Context: project/ENTERPRISE_ARCHITECTURE_CONTEXT.md
+      - Repository Knowledge Map: project/REPOSITORY_KNOWLEDGE_MAP.md
+      - Development Workflow: project/DEVELOPMENT_WORKFLOW.md
+      - Coding Standards: project/CODING_STANDARDS.md
+      - Release Playbook: project/RELEASE_PLAYBOOK.md
+      - Technical Debt Register: project/TECHNICAL_DEBT.md
+      - Decision Log: project/DECISION_LOG.md
+      - Project Backlog: project/BACKLOG.md
+      - Design System: ui/design-system.md
+      - Portal Publication Guidelines: developer/portal-publication-guidelines.md
+      - Content Freshness Audit: ui/content-freshness-audit-2026-09-10.md
+      - UI 7.0 Release Notes: releases/ui-7.0.md
+      - BKL-037 Closure: project/BKL-037-CLOSURE-2026-09-10.md
+      - BKL-037 Release Note: releases/bkl-037-session-comparison.md
 
-  - Generalità:
-      - Introduzione: chapters/01-introduzione.md
-      - Architettura generale: chapters/02-architettura-generale.md
-
-  - Infrastruttura:
-      - Struttura della cupola: chapters/03-struttura-cupola.md
-      - Impianto elettrico: chapters/04-impianto-elettrico.md
-      - Infrastruttura di rete: chapters/05-infrastruttura-rete.md
-      - Computer EAGLE: chapters/06-eagle.md
-
-  - Sistema astronomico:
-      - Montatura CGX-L: chapters/07-cgx-l.md
-      - Celestron C8 XLT: chapters/08-c8-xlt.md
-      - Sky-Watcher Quattro 200P: chapters/09-quattro-200p.md
-      - Camere e treno ottico: chapters/10-camere-treno-ottico.md
-
-  - Software:
-      - N.I.N.A.: chapters/11-nina.md
-      - PHD2: chapters/12-phd2.md
-      - CPWI: chapters/13-cpwi.md
-      - ASCOM Platform: chapters/14-ascom.md
-
-  - Automazione:
-      - Architettura dell'automazione: chapters/15-automazione.md
-      - Avvio dell'osservatorio: chapters/16-sop-avvio.md
-      - Acquisizione automatica: chapters/17-acquisizione-automatica.md
-
-  - Sicurezza e manutenzione:
-      - Emergenze e recovery: chapters/18-emergenze-recovery.md
-      - Manutenzione preventiva: chapters/19-manutenzione-preventiva.md
-
-  - Governance e continuità:
-      - Gestione configurazioni e versioning: chapters/20-gestione-configurazioni-versioning.md
-      - Backup e Disaster Recovery: chapters/21-backup-disaster-recovery.md
-      - Inventario e Asset Management: chapters/22-inventario-asset-management.md
-      - Collaudo e validazione: chapters/23-collaudo-validazione.md
-      - Sicurezza informatica: chapters/24-sicurezza-informatica-accessi-remoti.md
-
-  - Operations avanzate:
-      - Chiusura dell'osservatorio: chapters/25-chiusura-osservatorio.md
-      - Monitoraggio meteo: chapters/26-monitoraggio-meteo-sicurezza-ambientale.md
-      - Sistema AllSky: chapters/27-sistema-allsky.md
-      - Gestione dati e archiviazione: chapters/28-gestione-dati-archiviazione.md
-      - Reportistica e KPI: chapters/29-reportistica-operativa-kpi.md
-
-  - Affidabilità e governance:
-      - Metodologia troubleshooting: chapters/30-metodologia-troubleshooting.md
-      - Problem Management e post-mortem: chapters/31-problem-management-post-mortem.md
-      - Ricambi e obsolescenza: chapters/32-ricambi-obsolescenza.md
-      - Roadmap evolutiva: chapters/33-roadmap-evolutiva.md
-      - Gestione documentale e release: chapters/34-gestione-documentale-release.md
-
-  - Engineering e allegati tecnici:
-      - Schemi elettrici e cablaggi: chapters/35-schemi-elettrici-cablaggi.md
-      - Schemi di rete e indirizzamento: chapters/36-schemi-rete-indirizzamento.md
-      - Configurazioni software e parametri: chapters/37-configurazioni-software-parametri.md
-      - Registri, checklist e modelli: chapters/38-registri-checklist-modelli.md
-      - Glossario, acronimi e riferimenti: chapters/39-glossario-acronimi-riferimenti.md
-
-  - Chiusura e validazione:
-      - Requisiti e tracciabilità: chapters/40-requisiti-tracciabilita.md
-      - Analisi rischi e FMEA: chapters/41-analisi-rischi-fmea.md
-      - Ruoli, formazione e handover: chapters/42-ruoli-formazione-handover.md
-      - Accettazione e release 1.0: chapters/43-accettazione-release-v1.md
-      - Allegati e piano di completamento: chapters/44-allegati-piano-completamento.md
-
-  - Appendici:
-      - Dati da validare: appendices/dati-da-validare.md
-      - Registro revisioni: appendices/registro-revisioni.md
+  - Manuale tecnico:
+    - Generalità:
+        - Introduzione: chapters/01-introduzione.md
+        - Architettura generale: chapters/02-architettura-generale.md
+  
+    - Infrastruttura:
+        - Struttura della cupola: chapters/03-struttura-cupola.md
+        - Impianto elettrico: chapters/04-impianto-elettrico.md
+        - Infrastruttura di rete: chapters/05-infrastruttura-rete.md
+        - Computer EAGLE: chapters/06-eagle.md
+  
+    - Sistema astronomico:
+        - Montatura CGX-L: chapters/07-cgx-l.md
+        - Celestron C8 XLT: chapters/08-c8-xlt.md
+        - Sky-Watcher Quattro 200P: chapters/09-quattro-200p.md
+        - Camere e treno ottico: chapters/10-camere-treno-ottico.md
+  
+    - Software:
+        - N.I.N.A.: chapters/11-nina.md
+        - PHD2: chapters/12-phd2.md
+        - CPWI: chapters/13-cpwi.md
+        - ASCOM Platform: chapters/14-ascom.md
+  
+    - Automazione:
+        - Architettura dell'automazione: chapters/15-automazione.md
+        - Avvio dell'osservatorio: chapters/16-sop-avvio.md
+        - Acquisizione automatica: chapters/17-acquisizione-automatica.md
+  
+    - Sicurezza e manutenzione:
+        - Emergenze e recovery: chapters/18-emergenze-recovery.md
+        - Manutenzione preventiva: chapters/19-manutenzione-preventiva.md
+  
+    - Governance e continuità:
+        - Gestione configurazioni e versioning: chapters/20-gestione-configurazioni-versioning.md
+        - Backup e Disaster Recovery: chapters/21-backup-disaster-recovery.md
+        - Inventario e Asset Management: chapters/22-inventario-asset-management.md
+        - Collaudo e validazione: chapters/23-collaudo-validazione.md
+        - Sicurezza informatica: chapters/24-sicurezza-informatica-accessi-remoti.md
+  
+    - Operations avanzate:
+        - Chiusura dell'osservatorio: chapters/25-chiusura-osservatorio.md
+        - Monitoraggio meteo: chapters/26-monitoraggio-meteo-sicurezza-ambientale.md
+        - Sistema AllSky: chapters/27-sistema-allsky.md
+        - Gestione dati e archiviazione: chapters/28-gestione-dati-archiviazione.md
+        - Reportistica e KPI: chapters/29-reportistica-operativa-kpi.md
+  
+    - Affidabilità e governance:
+        - Metodologia troubleshooting: chapters/30-metodologia-troubleshooting.md
+        - Problem Management e post-mortem: chapters/31-problem-management-post-mortem.md
+        - Ricambi e obsolescenza: chapters/32-ricambi-obsolescenza.md
+        - Roadmap evolutiva: chapters/33-roadmap-evolutiva.md
+        - Gestione documentale e release: chapters/34-gestione-documentale-release.md
+  
+    - Engineering e allegati tecnici:
+        - Schemi elettrici e cablaggi: chapters/35-schemi-elettrici-cablaggi.md
+        - Schemi di rete e indirizzamento: chapters/36-schemi-rete-indirizzamento.md
+        - Configurazioni software e parametri: chapters/37-configurazioni-software-parametri.md
+        - Registri, checklist e modelli: chapters/38-registri-checklist-modelli.md
+        - Glossario, acronimi e riferimenti: chapters/39-glossario-acronimi-riferimenti.md
+  
+    - Chiusura e validazione:
+        - Requisiti e tracciabilità: chapters/40-requisiti-tracciabilita.md
+        - Analisi rischi e FMEA: chapters/41-analisi-rischi-fmea.md
+        - Ruoli, formazione e handover: chapters/42-ruoli-formazione-handover.md
+        - Accettazione e release 1.0: chapters/43-accettazione-release-v1.md
+        - Allegati e piano di completamento: chapters/44-allegati-piano-completamento.md
+  
+    - Appendici:
+        - Dati da validare: appendices/dati-da-validare.md
+        - Registro revisioni: appendices/registro-revisioni.md

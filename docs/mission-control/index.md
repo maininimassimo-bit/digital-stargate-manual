@@ -6,7 +6,7 @@
   <span class="dsg-mission-kicker">DIGITAL STARGATE · MISSION CONTROL</span>
   <h1>Centro di controllo della piattaforma scientifica</h1>
   <p>
-    Vista unificata sul patrimonio osservativo, sullo stato pubblicato della pipeline AP-013
+    Vista unificata sul patrimonio osservativo, sulle proiezioni scientifiche pubblicate
     e sui principali servizi documentali. I dati derivano dalle fonti versionate del repository
     e non rappresentano telemetria live dell’osservatorio.
   </p>
@@ -14,7 +14,7 @@
     <a href="../scientific-session-catalog/">Session Explorer</a>
     <a href="../scientific-platform-intelligence/">Scientific Intelligence</a>
     <a href="../operations/">Operations Center</a>
-    <a href="../repository-intelligence/">Repository Intelligence</a>
+    <a href="../documentation/">Documentation Center</a>
   </div>
 </section>
 

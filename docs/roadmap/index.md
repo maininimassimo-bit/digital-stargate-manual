@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="../styles/roadmap.css">
 
-<div class="dsg-roadmap-app" data-roadmap-source="../data/roadmap.json?v=20260908-bkl040-closure">
+<div class="dsg-roadmap-app" data-roadmap-source="../data/roadmap.json">
   <header class="dsg-roadmap-hero dsg-roadmap-center-hero">
     <div>
       <span class="dsg-roadmap-kicker">DIGITAL STARGATE · ROADMAP CENTER</span>

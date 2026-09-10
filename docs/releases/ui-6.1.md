@@ -7,13 +7,16 @@
 | Progetto | Digital StarGate |
 | Release | 4.0 M1 Foundation |
 | Versione documento | 1.0 |
-| Stato | Draft |
+| Stato | Superseded by UI 7.0 |
 | Responsabile | Massimo Mainini |
 | Data | 26/07/2026 |
 
 ---
 
 ## 1. Panoramica
+
+!!! info "Release storica"
+    Questa pagina conserva la baseline UI 6.1 del 26/07/2026. La release corrente del portale è UI 7.0; valori, attività successive e stato riportati sotto sono storici.
 
 La release UI 6.1 consolida l’identità visiva e le regole di pubblicazione del portale Digital StarGate.
 
