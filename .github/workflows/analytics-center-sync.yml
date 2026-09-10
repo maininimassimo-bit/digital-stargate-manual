@@ -1,0 +1,54 @@
+name: Analytics Center Sync
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/scripts/refresh-analytics-center.sh'
+      - '.github/scripts/verify-analytics-center-consistency.py'
+      - '.github/workflows/analytics-center-sync.yml'
+      - '.github/workflows/analyze-session-automatic.yml'
+      - 'dsg-analytics/configuration/build_configuration_summary.py'
+      - 'dsg-analytics/dashboard/build_dashboard_v31.py'
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: analytics-center-sync-main
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Refresh Analytics Center from governed history
+        run: bash .github/scripts/refresh-analytics-center.sh
+      - name: Publish refreshed views
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- \
+            data/analytics/history/configuration-summary.csv \
+            docs/analytics/configuration-summary.md \
+            docs/analytics/dashboard.md
+          if git diff --cached --quiet; then
+            echo 'Analytics Center already aligned.'
+            exit 0
+          fi
+          git commit -m 'chore(analytics): synchronize dynamic center views'
+          git push origin HEAD:main
+      - name: Deploy refreshed portal
+        env:
+          GH_TOKEN: "${{ github.token }}"
+        run: gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main

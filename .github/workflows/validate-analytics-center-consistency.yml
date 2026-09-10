@@ -1,0 +1,54 @@
+name: Validate Analytics Center Consistency
+
+on:
+  pull_request:
+    paths:
+      - 'data/analytics/**'
+      - 'docs/analytics/**'
+      - 'docs/data/session-comparison-projection.json'
+      - 'dsg-analytics/**'
+      - '.github/scripts/refresh-analytics-center.sh'
+      - '.github/scripts/normalize-dashboard-generated-at.py'
+      - '.github/scripts/verify-analytics-center-consistency.py'
+      - '.github/workflows/analyze-session-automatic.yml'
+      - '.github/workflows/validate-analytics-center-consistency.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'data/analytics/**'
+      - 'docs/analytics/**'
+      - 'docs/data/session-comparison-projection.json'
+      - 'dsg-analytics/**'
+      - '.github/scripts/refresh-analytics-center.sh'
+      - '.github/scripts/normalize-dashboard-generated-at.py'
+      - '.github/scripts/verify-analytics-center-consistency.py'
+      - '.github/workflows/analyze-session-automatic.yml'
+      - '.github/workflows/validate-analytics-center-consistency.yml'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Regenerate dynamic Analytics Center views
+        run: bash .github/scripts/refresh-analytics-center.sh
+      - name: Upload generated views diagnostic artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: analytics-center-generated-views
+          path: |
+            data/analytics/history/configuration-summary.csv
+            docs/analytics/configuration-summary.md
+            docs/analytics/dashboard.md
+          if-no-files-found: error
+          retention-days: 1
+      - name: Verify generated views are committed
+        run: |
+          git diff --exit-code -- \
+            data/analytics/history/configuration-summary.csv \
+            docs/analytics/configuration-summary.md \
+            docs/analytics/dashboard.md
