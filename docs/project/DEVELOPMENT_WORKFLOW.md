@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEV-001 |
-| Versione | 2.2 |
+| Versione | 2.3 |
 | Stato | Active |
 | Data efficacia | 10/09/2026 |
 
@@ -116,27 +116,30 @@ Per modifiche al portale verificare inoltre rendering, light/dark, refresh diret
 
 Per generated projection verificare sempre la source canonica e il generator/check applicabile; non correggere manualmente una projection quando deve essere rigenerata.
 
-#### 4.4.1 Roadmap Projection Sync
+#### 4.4.1 Governed Projection Sync
 
-La roadmap applica il seguente authority boundary:
+Le projection governate applicano il seguente authority boundary:
 
-- `.github/roadmap/roadmap-source.json` è la canonical source governata;
+- `.github/roadmap/roadmap-source.json` è la canonical roadmap source governata;
 - `docs/data/roadmap.json` è una generated projection e non è authority autonoma;
-- `.github/scripts/generate-roadmap.mjs` è l'unico generatore governato della projection;
-- `.github/workflows/roadmap-projection-sync.yml` sincronizza automaticamente la projection quando cambia la canonical source.
+- `.github/scripts/generate-roadmap.mjs` è l'unico generatore governato della roadmap projection;
+- `docs/data/scientific-platform-status.json` è una generated projection e non è authority autonoma;
+- `.github/scripts/generate-scientific-platform-status.mjs` è l'unico generatore governato dello Scientific Platform status;
+- lo Scientific Platform status deriva dalla roadmap projection e dalle evidence AP-013 dichiarate dal proprio generator;
+- `.github/workflows/roadmap-projection-sync.yml` sincronizza automaticamente entrambe le projection quando cambia una loro source o generator governato.
 
 Il workflow di sync deve:
 
-1. attivarsi sulle modifiche della canonical roadmap source e poter essere eseguito manualmente per recovery;
-2. eseguire il generator in modalità `--write`;
-3. eseguire il controllo `--check` e la consistency governance prima del commit;
-4. committare esclusivamente `docs/data/roadmap.json` quando il contenuto derivato cambia;
+1. attivarsi sulle modifiche delle source e dei generator governati e poter essere eseguito manualmente per recovery;
+2. eseguire entrambi i generator in modalità `--write` nell'ordine roadmap, quindi Scientific Platform status;
+3. eseguire entrambi i controlli `--check` e la consistency governance prima del commit;
+4. committare esclusivamente `docs/data/roadmap.json` e/o `docs/data/scientific-platform-status.json` quando il contenuto derivato cambia;
 5. non modificare backlog, closure, ADR, architecture package o altre authority;
-6. evitare loop: il commit della sola projection non modifica la canonical source e non riattiva il sync;
+6. evitare loop: il commit delle sole projection non modifica le source governate e non riattiva il sync;
 7. preservare i gate indipendenti Developer Foundation, Scientific Platform Governance e Pages;
 8. in una PR, rilanciare i check PR che GitHub marca `action_required` dopo un commit generato dal bot, senza trasformare tale rilancio in acceptance automatica.
 
-La sincronizzazione automatica non promuove package, non decide priorità e non modifica authority: materializza soltanto la projection deterministica della source già modificata e governata.
+La sincronizzazione automatica non promuove package, non decide priorità e non modifica authority: materializza soltanto projection deterministiche delle source già modificate e governate.
 
 ### 4.5 Correzione autonoma
 
