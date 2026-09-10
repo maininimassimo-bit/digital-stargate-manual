@@ -41,3 +41,7 @@ Il deploy Pages post-merge deve completarsi con SUCCESS. Solo dopo tale evidenza
 ## 5. Decision
 
 **READY FOR MERGE.** La correzione risolve la causa osservata senza espandere il blast radius.
+
+## 6. Post-merge closure
+
+Gate chiuso sul merge `4061c3a42ac5c91c079f9198f07f9acdf096caa3`: Pages run 34537069805 `SUCCESS`, inclusi build strict, published-site integrity, upload e deploy. Anche Developer Foundation, Documentation, History, Analytics Consistency e Word risultano `SUCCESS` sulla stessa baseline.
