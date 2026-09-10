@@ -175,7 +175,7 @@ export function validateQualityContractFixture(fixture) {
   assert(fixture.identityMethod === IDENTITY_METHOD, `Unsupported identityMethod ${fixture.identityMethod}.`);
   assert(nonEmpty(fixture.fixtureId), 'fixtureId is required.');
   assert(nonEmpty(fixture.sessionId), 'sessionId is required.');
-  assert(fixture.fixtureMode === 'BOUNDED_CONTRACT_FIXTURE', 'fixtureMode must be BOUNDED_CONTRACT_FIXTURE.');
+  assert(fixture.fixtureMode === 'BOUNDED_SYNTHETIC_FIXTURE', 'fixtureMode must be BOUNDED_SYNTHETIC_FIXTURE.');
   assert(fixture.authority?.consumerMode === 'READ_ONLY', 'consumerMode must be READ_ONLY.');
   assert(fixture.authority?.acceptanceAuthority === false, 'acceptanceAuthority must be false.');
   assert(fixture.authority?.actionAuthority === 'NONE', 'actionAuthority must be NONE.');
@@ -203,4 +203,3 @@ export function validateQualityContractFixture(fixture) {
   assertDigest(fixture, 'artifactDigest', 'fixture');
   return true;
 }
-
