@@ -4,7 +4,7 @@
 |---|---|
 | Identificativo | DSG-REL-UI-7.0 |
 | Versione | 1.0 |
-| Stato | Approved / Ready for Merge |
+| Stato | Merged / Pages remediation in progress |
 | Data | 10/09/2026 |
 | Ambito | Portale GitHub Pages |
 | Architecture | DSGP-SOL-001 |
@@ -33,7 +33,12 @@ La homepage entra nel ciclo automatico di import senza modificare i workflow pri
 - legge roadmap, catalogo e latest observation con cache no-store;
 - mostra loading/UNKNOWN quando una projection non è disponibile;
 - usa i dataset che analyze-session-automatic.yml già rigenera e pubblica;
+- valida al build i binding del consumer e rifiuta fallback stale senza riscrivere la pagina;
 - il deploy Pages continua ad avvenire dopo il commit delle projection.
+
+## Corrective note C1
+
+Il primo deploy sul merge `7bcc1d75590c2c6e8d102e63146e011fe4fb5d9c` ha identificato l'incompatibilità del precedente generatore statico con il nuovo shell. La correzione C1 conserva il passo workflow ma lo converte in validator non mutante; non cambia permessi, trigger, dataset o runtime.
 
 Le altre superfici session-driven mantengono i generatori esistenti: latest observation, catalogo, report, Analytics, Equipment Performance e Session Comparison.
 

@@ -25,7 +25,7 @@ Sono stati confrontati:
 |---|---|---|---|
 | FR-01 | Homepage: AP-013 in corso, 3 sessioni, 31,83 h | Stale critico | Rimosso; placeholder fail-closed e hydration da projection |
 | FR-02 | Storico corrente: 15 sessioni e 101,50 h | Fonte governata | Proiettato nella homepage |
-| FR-03 | refresh_homepage.py non invocato dal refresh Analytics | Debito legacy | Non promosso: homepage convertita in consumer delle projection già pubblicate |
+| FR-03 | refresh_homepage.py mutava markup con valori statici durante il build Pages | Debito legacy | Riproposto come validator non mutante del contratto fail-closed |
 | FR-04 | docs/index.md assente dai governed_paths | Vincolo di publish | Nessuna modifica privilegiata: il file resta strutturale e i dati arrivano via JSON no-store |
 | FR-05 | 15 gruppi top-level MkDocs | Debito UX | Consolidati in 6 percorsi principali più Home |
 | FR-06 | Custom navigation con link statici AP-013 | Stale | Sostituita con hub stabili e package dinamico |
@@ -63,6 +63,7 @@ Sono stati confrontati:
 ## 5. Debito residuo
 
 - Gli artefatti tecnici legacy non pubblicati restano nel repository perché la loro cancellazione è fuori ambito.
+- Il nome legacy refresh_homepage.py è conservato perché referenziato dal workflow Pages; la sua semantica corrente è di validazione.
 - La verifica visuale cross-browser automatizzata non è parte della pipeline corrente.
 - Il contenuto storico può citare stati precedenti purché data e natura di snapshot siano esplicite.
 

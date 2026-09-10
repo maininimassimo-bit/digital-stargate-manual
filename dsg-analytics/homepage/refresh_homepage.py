@@ -1,345 +1,61 @@
 #!/usr/bin/env python3
-"""Refresh the homepage status sections from governed roadmap and analytics data."""
+"""Validate the fail-closed homepage shell used by runtime projection consumers."""
 from __future__ import annotations
 
 import argparse
-import csv
-import json
-import re
-from datetime import datetime, timezone
 from pathlib import Path
 
 START_MARKER = "<!-- DSG:AUTO-HOMEPAGE:START -->"
 END_MARKER = "<!-- DSG:AUTO-HOMEPAGE:END -->"
-PROGRAM_PATTERN = re.compile(
-    r'<section class="dsg-program-section">\s*'
-    r'<div class="dsg-section-intro">\s*'
-    r'<span class="dsg-section-kicker">STATO DEL PROGRAMMA</span>.*?'
-    r'</section>\s*(?=' + re.escape(START_MARKER) + r')',
-    re.DOTALL,
+
+REQUIRED_CONTRACT_TOKENS = (
+    "data-dsg-home-snapshot",
+    "data-home-freshness",
+    "data-home-current-package",
+    "data-home-current-detail",
+    "data-home-latest-session",
+    "data-home-latest-detail",
+    "data-home-latest-link",
+    "data-home-session-count",
+    "data-home-session-totals",
+)
+
+FORBIDDEN_STALE_TOKENS = (
+    "AP-013 in corso",
+    "31,83 h",
+    ">3 sessioni<",
 )
 
 
-def read_csv(path: Path) -> list[dict[str, str]]:
-    if not path.exists():
-        return []
-    with path.open("r", encoding="utf-8-sig", newline="") as handle:
-        return list(csv.DictReader(handle))
+def generated_block(text: str) -> str:
+    """Return the single governed homepage block or fail on an ambiguous shell."""
+    if text.count(START_MARKER) != 1 or text.count(END_MARKER) != 1:
+        raise RuntimeError("Homepage automatic block markers missing or ambiguous")
+    start = text.index(START_MARKER)
+    end = text.index(END_MARKER, start) + len(END_MARKER)
+    return text[start:end]
 
 
-def read_json(path: Path) -> dict:
-    with path.open("r", encoding="utf-8-sig") as handle:
-        return json.load(handle)
-
-
-def as_float(value: object) -> float:
-    try:
-        return float(str(value or "0").strip().replace(",", "."))
-    except ValueError:
-        return 0.0
-
-
-def as_int(value: object) -> int:
-    return int(round(as_float(value)))
-
-
-def as_dt(value: object):
-    if not value:
-        return None
-    try:
-        parsed = datetime.fromisoformat(str(value).strip().replace("Z", "+00:00"))
-    except ValueError:
-        return None
-    if parsed.tzinfo is None:
-        return parsed.replace(tzinfo=timezone.utc)
-    return parsed.astimezone(timezone.utc)
-
-
-def esc(value: object) -> str:
-    text = str(value or "").strip()
-    return (
-        text.replace("&", "&amp;")
-        .replace("<", "&lt;")
-        .replace(">", "&gt;")
-        .replace('"', "&quot;")
-        if text
-        else "—"
-    )
-
-
-def decimal(value: float, digits: int = 2) -> str:
-    return f"{value:.{digits}f}".replace(".", ",")
-
-
-def date(value: object) -> str:
-    parsed = as_dt(value)
-    return parsed.strftime("%d/%m/%Y %H:%M") if parsed else "—"
-
-
-def status(value: object) -> str:
-    severity = str(value or "").strip().upper()
-    return {
-        "GREEN": "🟢 GREEN",
-        "YELLOW": "🟡 YELLOW",
-        "RED": "🔴 RED",
-    }.get(severity, esc(severity))
-
-
-def format_ra_deg(value: object) -> str:
-    try:
-        degrees = float(str(value).strip().replace(",", ".")) % 360.0
-    except (TypeError, ValueError):
-        return "—"
-    total_seconds = round((degrees / 15.0) * 3600)
-    hours = (total_seconds // 3600) % 24
-    minutes = (total_seconds % 3600) // 60
-    seconds = total_seconds % 60
-    return f"{hours:02d}h {minutes:02d}m {seconds:02d}s"
-
-
-def format_dec_deg(value: object) -> str:
-    try:
-        degrees = float(str(value).strip().replace(",", "."))
-    except (TypeError, ValueError):
-        return "—"
-    sign = "+" if degrees >= 0 else "−"
-    absolute = abs(degrees)
-    total_seconds = round(absolute * 3600)
-    deg = total_seconds // 3600
-    minutes = (total_seconds % 3600) // 60
-    seconds = total_seconds % 60
-    return f"{sign}{deg:02d}° {minutes:02d}′ {seconds:02d}″"
-
-
-def roadmap_state(roadmap: dict) -> dict:
-    items = [item for wave in roadmap.get("waves", []) for item in wave.get("items", [])]
-    current_id = str(roadmap.get("currentPackage") or "—")
-    current = next((item for item in items if item.get("id") == current_id), {})
-    summary = roadmap.get("summary", {})
-    return {
-        "current_id": current_id,
-        "current_title": str(current.get("title") or "Architecture Package corrente"),
-        "project_status": str(roadmap.get("projectStatus") or "—"),
-        "next_milestone": str(roadmap.get("nextMilestone") or "—"),
-        "target": str(roadmap.get("target") or "—"),
-        "completed": as_int(summary.get("completed")),
-        "active": as_int(summary.get("active")),
-        "planned": as_int(summary.get("planned")),
-        "total": as_int(summary.get("total")),
-        "percent": max(0, min(100, as_int(summary.get("percentCompleted")))),
-    }
-
-
-def build_program_section(state: dict) -> str:
-    return f'''<section class="dsg-program-section">
-  <div class="dsg-section-intro">
-    <span class="dsg-section-kicker">STATO DEL PROGRAMMA</span>
-    <h2>Architettura e avanzamento corrente</h2>
-  </div>
-
-  <div class="dsg-program-panel">
-    <article>
-      <span class="dsg-program-label">ARCHITECTURE PACKAGE</span>
-      <span class="dsg-program-value">{esc(state['current_id'])} <span class="dsg-status-pill">{esc(state['project_status']).upper()}</span></span>
-      <span class="dsg-program-detail">{esc(state['current_title'])}</span>
-      <div class="dsg-progress" aria-label="Avanzamento programma: {state['percent']} percento"><span style="width: {state['percent']}%"></span></div>
-    </article>
-
-    <article>
-      <span class="dsg-program-label">PROSSIMA MILESTONE</span>
-      <span class="dsg-program-value">{esc(state['next_milestone'])}</span>
-      <span class="dsg-program-detail">Milestone derivata dalla roadmap governata.</span>
-    </article>
-
-    <article>
-      <span class="dsg-program-label">AVANZAMENTO PROGRAMMA</span>
-      <span class="dsg-program-value">{state['percent']}%</span>
-      <span class="dsg-program-detail">{state['completed']} completati · {state['active']} attivi · {state['planned']} pianificati su {state['total']} elementi.</span>
-    </article>
-
-    <article>
-      <span class="dsg-program-label">TARGET PROGRAMMA</span>
-      <span class="dsg-program-value">{esc(state['target'])}</span>
-      <span class="dsg-program-detail">Fonte: docs/data/roadmap.json, projection governata.</span>
-    </article>
-  </div>
-</section>
-
-'''
-
-
-def build_operational_section(
-    sessions: list[dict[str, str]],
-    targets: list[dict[str, str]],
-    metadata: list[dict[str, str]],
-) -> str:
-    session_count = len(sessions)
-    total_integration = sum(as_float(row.get("integration_hours")) for row in sessions)
-    completed_images = sum(as_int(row.get("light_completed")) for row in sessions)
-    distinct_targets = {
-        row.get("target_name", "").strip()
-        for row in targets
-        if row.get("target_name", "").strip()
-    }
-
-    latest = (
-        max(
-            sessions,
-            key=lambda row: as_dt(row.get("session_end"))
-            or as_dt(row.get("session_start"))
-            or datetime.min.replace(tzinfo=timezone.utc),
-        )
-        if sessions
-        else None
-    )
-
-    if latest:
-        sid = latest.get("session_id", "").strip()
-        latest_targets = sorted(
-            {
-                row.get("target_name", "").strip()
-                for row in targets
-                if row.get("session_id", "").strip() == sid
-                and row.get("target_name", "").strip()
-            }
-        )
-        canonical_target = latest.get("target_name", "").strip()
-        if canonical_target and canonical_target not in latest_targets:
-            latest_targets.append(canonical_target)
-        metadata_row = next(
-            (
-                row
-                for row in metadata
-                if row.get("session_id", "").strip() == sid
-                and row.get("metadata_state", "").strip().upper() == "REGISTERED"
-            ),
-            None,
-        )
-
-        if latest_targets:
-            target_text = ", ".join(esc(item) for item in sorted(latest_targets))
-        elif metadata_row:
-            target_text = esc(metadata_row.get("target_name"))
-        else:
-            target_text = "—"
-
-        config_parts = [
-            item
-            for item in (
-                latest.get("telescope", "").strip(),
-                latest.get("camera", "").strip(),
-            )
-            if item
-        ]
-        if config_parts:
-            config = " · ".join(esc(item) for item in config_parts)
-        elif metadata_row:
-            config = esc(metadata_row.get("configuration_id"))
-        else:
-            config = esc(latest.get("configuration_id"))
-
-        coordinate_source = latest
-        if not latest.get("ra_deg") or not latest.get("dec_deg"):
-            coordinate_source = metadata_row or {}
-        ra = format_ra_deg(coordinate_source.get("ra_deg"))
-        dec = format_dec_deg(coordinate_source.get("dec_deg"))
-        coordinates = f"RA {ra} · Dec {dec} · J2000" if ra != "—" and dec != "—" else "Coordinate non registrate"
-
-        target_detail = f"{coordinates} · {config}" if config != "—" else coordinates
-        latest_rows = {
-            "session": esc(sid),
-            "date": f"{date(latest.get('session_start'))} → {date(latest.get('session_end'))}",
-            "target": target_text,
-            "target_detail": target_detail,
-            "integration": f"{decimal(as_float(latest.get('integration_hours')))} h",
-            "images": str(as_int(latest.get("light_completed"))),
-            "rms": f"{decimal(as_float(latest.get('rms_total_arcsec')), 3)} arcsec" if as_float(latest.get("rms_total_arcsec")) > 0 else "—",
-            "status": status(latest.get("severity")),
-        }
-    else:
-        latest_rows = {key: "—" for key in ("session", "date", "target", "target_detail", "integration", "images", "rms", "status")}
-
-    return f'''{START_MARKER}
-<section class="dsg-program-section">
-  <div class="dsg-section-intro">
-    <span class="dsg-section-kicker">OSSERVATORIO E DATI</span>
-    <h2>Indicatori operativi</h2>
-  </div>
-
-  <div class="dsg-kpi-grid">
-    <div class="dsg-kpi">
-      <span class="dsg-kpi__label">Sessioni</span>
-      <span class="dsg-kpi__value dsg-counter" data-value="{session_count}">0</span>
-      <span class="dsg-kpi__detail">storico disponibile</span>
-    </div>
-    <div class="dsg-kpi">
-      <span class="dsg-kpi__label">Integrazione</span>
-      <span class="dsg-kpi__value dsg-counter" data-value="{total_integration:.2f}" data-decimals="2" data-suffix=" h">0</span>
-      <span class="dsg-kpi__detail">totale acquisito</span>
-    </div>
-    <div class="dsg-kpi">
-      <span class="dsg-kpi__label">Immagini</span>
-      <span class="dsg-kpi__value dsg-counter" data-value="{completed_images}">0</span>
-      <span class="dsg-kpi__detail">light completati</span>
-    </div>
-    <div class="dsg-kpi">
-      <span class="dsg-kpi__label">Target</span>
-      <span class="dsg-kpi__value dsg-counter" data-value="{len(distinct_targets)}">0</span>
-      <span class="dsg-kpi__detail">oggetti distinti</span>
-    </div>
-  </div>
-
-  <div class="dsg-program-panel">
-    <article><span class="dsg-program-label">ULTIMA SESSIONE</span><span class="dsg-program-value">{latest_rows['session']}</span><span class="dsg-program-detail">{latest_rows['date']}</span></article>
-    <article><span class="dsg-program-label">TARGET</span><span class="dsg-program-value">{latest_rows['target']}</span><span class="dsg-program-detail">{latest_rows['target_detail']}</span></article>
-    <article><span class="dsg-program-label">ACQUISIZIONE</span><span class="dsg-program-value">{latest_rows['integration']}</span><span class="dsg-program-detail">{latest_rows['images']} immagini completate</span></article>
-    <article><span class="dsg-program-label">QUALITÀ</span><span class="dsg-program-value">{latest_rows['status']}</span><span class="dsg-program-detail">RMS totale {latest_rows['rms']}</span></article>
-  </div>
-
-  <div class="dsg-enterprise-meta">
-    <strong>PROJECTION GOVERNATA</strong>
-    <span>{session_count} sessioni · {decimal(total_integration)} h · {completed_images} light · {len(distinct_targets)} target</span>
-    <span>Fonti: sessions.csv, targets.csv e session-scientific-metadata.csv.</span>
-  </div>
-</section>
-{END_MARKER}'''
+def validate_dynamic_shell(text: str) -> None:
+    """Enforce runtime-binding hooks and reject known plausible stale fallback values."""
+    block = generated_block(text)
+    missing = [token for token in REQUIRED_CONTRACT_TOKENS if token not in block]
+    if missing:
+        raise RuntimeError(f"Homepage dynamic shell missing contract tokens: {', '.join(missing)}")
+    stale = [token for token in FORBIDDEN_STALE_TOKENS if token.casefold() in block.casefold()]
+    if stale:
+        raise RuntimeError(f"Homepage dynamic shell contains stale fallback values: {', '.join(stale)}")
+    if "cache: 'no-store'" in block or "fetch(" in block:
+        raise RuntimeError("Homepage dynamic logic must remain in the external JavaScript consumer")
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo-root", type=Path, default=Path.cwd())
     args = parser.parse_args()
-    root = args.repo_root.resolve()
-
-    homepage = root / "docs" / "index.md"
-    roadmap = read_json(root / "docs" / "data" / "roadmap.json")
-    sessions = read_csv(root / "data" / "analytics" / "history" / "sessions.csv")
-    targets = read_csv(root / "data" / "analytics" / "history" / "targets.csv")
-    metadata = read_csv(root / "data" / "analytics" / "metadata" / "session-scientific-metadata.csv")
-
-    text = homepage.read_text(encoding="utf-8-sig")
-    state = roadmap_state(roadmap)
-    program_section = build_program_section(state)
-    operational_section = build_operational_section(sessions, targets, metadata)
-
-    text, program_count = PROGRAM_PATTERN.subn(program_section, text, count=1)
-    if program_count != 1:
-        raise RuntimeError("Homepage program status section not found or ambiguous")
-
-    start = text.find(START_MARKER)
-    end = text.find(END_MARKER)
-    if start < 0 or end < start:
-        raise RuntimeError("Homepage automatic block markers missing or invalid")
-    end += len(END_MARKER)
-    text = text[:start] + operational_section + text[end:]
-
-    homepage.write_text(text, encoding="utf-8", newline="\n")
-    print(
-        "Homepage refreshed: "
-        f"package={state['current_id']} progress={state['percent']}% "
-        f"sessions={len(sessions)} integration={decimal(sum(as_float(row.get('integration_hours')) for row in sessions))}h "
-        f"images={sum(as_int(row.get('light_completed')) for row in sessions)} targets={len({row.get('target_name', '').strip() for row in targets if row.get('target_name', '').strip()})}"
-    )
+    homepage = args.repo_root.resolve() / "docs" / "index.md"
+    validate_dynamic_shell(homepage.read_text(encoding="utf-8-sig"))
+    print("Homepage dynamic projection shell validated: fail-closed runtime consumer contract PASS")
     return 0
 
 
