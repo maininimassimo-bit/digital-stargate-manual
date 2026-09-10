@@ -10,7 +10,7 @@
     "contractType": {"const": "SCIENTIFIC_DATA_QUALITY_F2_FIXTURE"},
     "identityMethod": {"const": "BKL041-F2-CANONICAL-JSON-SHA256-1"},
     "fixtureId": {"type": "string", "minLength": 1, "maxLength": 128},
-    "fixtureMode": {"const": "BOUNDED_CONTRACT_FIXTURE"},
+    "fixtureMode": {"const": "BOUNDED_SYNTHETIC_FIXTURE"},
     "sessionId": {"type": "string", "minLength": 1, "maxLength": 128},
     "assessmentProfile": {"$ref": "#/$defs/assessmentProfile"},
     "qualityEvidence": {"type": "array", "maxItems": 128, "items": {"$ref": "#/$defs/qualityEvidence"}},
