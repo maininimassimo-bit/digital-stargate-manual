@@ -36,6 +36,16 @@ jobs:
           python dsg-analytics/dashboard/build_dashboard_v31.py --repo-root .
       - name: Verify cross-view session consistency
         run: python .github/scripts/verify-analytics-center-consistency.py
+      - name: Upload generated views diagnostic artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: analytics-center-generated-views
+          path: |
+            data/analytics/history/configuration-summary.csv
+            docs/analytics/configuration-summary.md
+            docs/analytics/dashboard.md
+          if-no-files-found: error
+          retention-days: 1
       - name: Verify generated views are committed
         run: |
           git diff --exit-code -- \
