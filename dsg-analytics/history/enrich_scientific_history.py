@@ -11,7 +11,6 @@ from __future__ import annotations
 import argparse
 import csv
 import json
-from datetime import datetime, timezone
 from pathlib import Path
 
 FIELDS = [
@@ -115,9 +114,9 @@ def main():
         if name not in fields:
             fields.append(name)
 
-    updated_at = datetime.now(timezone.utc).isoformat(timespec='seconds')
     for row in rows:
         source = str(row.get('source_metrics_path') or '').strip()
+        metrics = None
         if source:
             metrics_path = Path(source)
             metrics_path = metrics_path if metrics_path.is_absolute() else root / metrics_path
@@ -127,7 +126,12 @@ def main():
 
         apply_governed_configuration(row, root)
         row['schema_version'] = '2.1.0'
-        row['updated_at_utc'] = updated_at
+
+        # Keep the projection idempotent. The timestamp records the source evidence
+        # generation time rather than the wall-clock time of this enrichment run.
+        source_generated_at = str((metrics or {}).get('generated_at') or '').strip()
+        if source_generated_at:
+            row['updated_at_utc'] = source_generated_at
 
     with history_path.open('w', encoding='utf-8', newline='') as handle:
         writer = csv.DictWriter(handle, fieldnames=fields, extrasaction='ignore')
