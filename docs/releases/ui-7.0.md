@@ -4,13 +4,15 @@
 |---|---|
 | Identificativo | DSG-REL-UI-7.0 |
 | Versione | 1.0 |
-| Stato | Merged / Pages remediation in progress |
+| Stato | Released / Post-merge verified |
 | Data | 10/09/2026 |
 | Ambito | Portale GitHub Pages |
 | Architecture | DSGP-SOL-001 |
 | Design System | DSG-UI-001 v2.0 |
 | Architecture review | ARB-UI-7 — APPROVED |
 | Release Quality | RQ-UI-7 — READY FOR MERGE |
+| Merge UI 7.0 | `7bcc1d75590c2c6e8d102e63146e011fe4fb5d9c` |
+| Merge correttivo C1 | `4061c3a42ac5c91c079f9198f07f9acdf096caa3` |
 
 ## Outcome
 
@@ -39,6 +41,19 @@ La homepage entra nel ciclo automatico di import senza modificare i workflow pri
 ## Corrective note C1
 
 Il primo deploy sul merge `7bcc1d75590c2c6e8d102e63146e011fe4fb5d9c` ha identificato l'incompatibilità del precedente generatore statico con il nuovo shell. La correzione C1 conserva il passo workflow ma lo converte in validator non mutante; non cambia permessi, trigger, dataset o runtime.
+
+## Post-merge verification
+
+| Workflow sul merge C1 | Run | Esito |
+|---|---:|---|
+| Deploy MkDocs artifact to GitHub Pages | 34537069805 | SUCCESS |
+| Validate documentation (no deploy) | 34537069836 | SUCCESS |
+| Developer Foundation | 34537069844 | SUCCESS |
+| Validate Digital StarGate History | 34537069821 | SUCCESS |
+| Validate Analytics Center Consistency | 34537069763 | SUCCESS |
+| Genera manuale Word | 34537069780 | SUCCESS |
+
+Il job Pages ha completato validator homepage, build strict, published-site integrity check, upload artifact e deployment. Il gate post-merge è chiuso.
 
 Le altre superfici session-driven mantengono i generatori esistenti: latest observation, catalogo, report, Analytics, Equipment Performance e Session Comparison.
 
