@@ -1,6 +1,6 @@
 # ADR-008 — PixInsight Provenance Capture Strategy
 
-**Status:** Proposed  
+**Status:** Accepted — applied by BKL-045 F3/F4 and closure  
 **Date:** 09/09/2026  
 **Decision owner:** Digital StarGate Architecture  
 **Related package:** BKL-045 F2  

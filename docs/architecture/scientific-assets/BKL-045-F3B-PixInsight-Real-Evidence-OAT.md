@@ -1,10 +1,11 @@
 # BKL-045 F3-B — PixInsight Real-Evidence OAT
 
-- **Status:** Proposed / OAT pending
+- **Status:** Accepted / OAT `PASS WITH LIMITATION`
 - **Version:** 1.0
 - **Target:** BKL-045 F3
 - **Decision:** ADR-008
 - **Baseline:** F3-A accepted on `main` at `90122fd6ee55213abbbd6de98a22297c26fbef85`
+- **Evidence:** [BKL-045 F3-B OAT Evidence Report](BKL-045-F3B-OAT-Evidence-Report.md)
 
 ## Purpose
 

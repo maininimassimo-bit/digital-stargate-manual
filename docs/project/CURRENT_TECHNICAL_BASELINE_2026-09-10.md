@@ -5,9 +5,9 @@
 | Stato | Current technical continuity baseline |
 | Data | 11/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
-| Accepted main baseline | `e4ccd216b0a0ca4033277ece513f051b052d2b83` |
+| Accepted main baseline | `249a90265b9cd2323df6e1dfb0ab09c5c64f5f1b` |
 | Current governed package | BKL-046 — AI Post-Processing Assistant for PixInsight |
-| Current increment | Architecture package definition — no implementation accepted |
+| Current increment | BKL-046 F1 — Source Discovery and Advisory Semantic Contract |
 | Accepted predecessor | BKL-041 capability closure; BKL-045; BKL-044; BKL-015 |
 
 ## 1. Accepted comparison foundation
@@ -61,4 +61,4 @@ Nessuna modifica a EAGLE, servizi, scheduler, collector o apparati. Gli interloc
 
 ## 7. Current entry condition
 
-BKL-046 è corrente soltanto per la definizione del package architetturale. Deve preservare human approval, provenance e ruolo advisory; non può trattare BKL-041 come ground truth o autorizzazione produttiva e non introduce automaticamente remediation, device command o Safety Authority.
+BKL-046 F1 è corrente per source discovery e semantic contract. Deve separare recommendation, human decision ed execution evidence, preservare provenance/missingness e ruolo advisory; non può trattare BKL-041 come ground truth o autorizzazione produttiva. F1 non seleziona model/provider, non implementa un apply path e non introduce remediation, device command o Safety Authority.

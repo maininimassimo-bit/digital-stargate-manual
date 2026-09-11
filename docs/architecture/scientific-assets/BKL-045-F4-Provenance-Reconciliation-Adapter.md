@@ -1,6 +1,6 @@
 # BKL-045 F4 — Provenance Reconciliation Adapter
 
-**Status:** In development  
+**Status:** Accepted — BKL-045 closure  
 **Package:** BKL-045 — PixInsight Workflow Provenance Plugin  
 **Authority boundary:** AP-013 / AP-014 remain authoritative; PixInsight is processing evidence only.
 

@@ -1,6 +1,6 @@
 # BKL-045 F3-A — Provenance Sidecar Contract and Validation
 
-**Status:** Proposed  
+**Status:** Accepted — BKL-045 closure  
 **Version:** 1.0  
 **Release:** RC3  
 **Baseline:** `03615533d2edbe2bd4f22ea7963b617f070ab1ea`

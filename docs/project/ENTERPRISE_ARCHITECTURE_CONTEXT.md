@@ -56,7 +56,7 @@ BKL-037 rimane read-only/descriptive-only; unità non dimostrate, missing eviden
 
 BKL-041 — Scientific Data Quality Score è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability sperimentale read-only tramite PR #163, merge `e4ccd216b0a0ca4033277ece513f051b052d2b83`. Production readiness resta `NOT_READY_FOR_PRODUCTION`.
 
-BKL-046 è il package corrente per definire:
+BKL-046 F1 è l'incremento corrente per definire:
 
 - use case advisory e confini di approvazione umana;
 - input di provenance PixInsight accettati e loro semantic ownership;
@@ -66,7 +66,7 @@ BKL-046 è il package corrente per definire:
 - authority boundary: nessuna automatic acceptance, remediation non presidiata, device command o Safety Authority;
 - divieto di usare lo score sperimentale BKL-041 come ground truth o segnale produttivo.
 
-La promozione a current non approva alcuna implementazione, modello o automazione.
+La promozione a current non approva alcuna implementazione, modello/provider o automazione. F1 deve riusare BKL-044/BKL-045 e separare Recommendation, decisione umana ed execution evidence.
 
 ## 7. Roadmap
 
