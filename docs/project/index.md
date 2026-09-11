@@ -17,6 +17,8 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [Repository Knowledge Map](REPOSITORY_KNOWLEDGE_MAP.md) | Mappa authority/projection |
 | [BKL-037 Closure](BKL-037-CLOSURE-2026-09-10.md) | Closure del predecessore accettato |
 | [BKL-041 Closure](BKL-041-CLOSURE-2026-09-11.md) | Closure della capability accettata più recente |
+| [BKL-046 Program Assessment](../architecture/assessments/BKL-046-Architecture-Program-Assessment-and-F1-Handoff-2026-09-11.md) | Decisione di sequenziamento e handoff F1 |
+| [BKL-046 F1 Semantic Contract](../architecture/scientific-assets/BKL-046-F1-AI-Post-Processing-Assistant-Source-Discovery-and-Advisory-Semantic-Contract.md) | Contratto architetturale corrente dell'assistente advisory |
 
 ## Registri e standard canonici
 
@@ -26,7 +28,7 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 
 - BKL-037 — Session Comparison & Benchmarking: CLOSED / ACCEPTED;
 - BKL-041 — Scientific Data Quality Score: CLOSED / ACCEPTED / POST-MERGE VERIFIED;
-- BKL-046 — AI Post-Processing Assistant: CURRENT / Architecture package definition.
+- BKL-046 — AI Post-Processing Assistant: CURRENT / F1 Source Discovery and Advisory Semantic Contract.
 
 ## Sequenza governata
 

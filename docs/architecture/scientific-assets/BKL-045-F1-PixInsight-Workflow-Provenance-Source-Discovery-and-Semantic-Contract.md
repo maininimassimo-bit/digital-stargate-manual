@@ -1,7 +1,7 @@
 # BKL-045 F1 — PixInsight Workflow Provenance Source Discovery and Semantic Contract
 
 **Identifier:** BKL-045-F1  
-**Status:** Proposed  
+**Status:** Accepted — BKL-045 closure  
 **Version:** 1.0  
 **Release:** RC3  
 

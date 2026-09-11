@@ -2,7 +2,7 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 3.1 |
+| Versione | 3.2 |
 | Baseline | 11/09/2026 |
 | Stato | Current root bootstrap — BKL-046 AI Post-Processing Assistant |
 
@@ -51,7 +51,7 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - foundation completata e accettata attraverso BKL-045;
 - BKL-037 — Session Comparison & Benchmarking: CLOSED / ACCEPTED;
 - BKL-041 — Scientific Data Quality Score: CLOSED / ACCEPTED / POST-MERGE VERIFIED;
-- BKL-046 — AI Post-Processing Assistant: CURRENT / Architecture package definition.
+- BKL-046 — AI Post-Processing Assistant: CURRENT / F1 Source Discovery and Advisory Semantic Contract.
 
 BKL-037 resta read-only/descriptive-only e non autorizza ranking, score, threshold, recommendation, remediation, command path o Safety Authority.
 
@@ -71,4 +71,4 @@ Nessun portale, comparison layer, quality score o AI è Safety Authority. Nessun
 
 ## 9. Punto di partenza operativo
 
-Definire il package architetturale di **BKL-046 — AI Post-Processing Assistant for PixInsight** a partire dalle baseline accettate BKL-015/BKL-044/BKL-045. La promozione a current non implica implementazione: preservare ruolo advisory, approvazione umana, provenance verificabile e assenza di automatic acceptance, remediation non presidiata, device command o Safety Authority. Lo score sperimentale BKL-041 non è ground truth né segnale produttivo.
+Completare **BKL-046 F1 — Source Discovery and Advisory Semantic Contract** a partire dalle baseline accettate BKL-015/BKL-044/BKL-045. Separare Recommendation, human decision ed execution evidence; preservare provenance/missingness, ruolo advisory e approvazione umana. F1 non seleziona model/provider, non applica processi PixInsight e non autorizza automatic acceptance, remediation non presidiata, device command o Safety Authority. Lo score sperimentale BKL-041 non è ground truth né segnale produttivo.

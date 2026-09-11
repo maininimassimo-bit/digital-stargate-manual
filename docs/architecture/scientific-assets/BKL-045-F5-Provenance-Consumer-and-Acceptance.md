@@ -1,7 +1,7 @@
 # BKL-045 F5 — PixInsight Provenance Consumer and Acceptance
 
 **Identifier:** BKL-045-F5  
-**Status:** Proposed  
+**Status:** Accepted — BKL-045 closure  
 **Release:** RC3
 
 ## 1. Objective

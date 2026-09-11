@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 2.2 |
+| Versione | 2.3 |
 | Stato | Active |
-| Data | 10/09/2026 |
+| Data | 11/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | BKL-041 — Scientific Data Quality Score |
+| Current governed package | BKL-046 — AI Post-Processing Assistant for PixInsight |
 
 ## 1. Scopo
 
@@ -41,13 +41,13 @@ BKL-015, BKL-044, BKL-035, BKL-040, BKL-038, BKL-039, BKL-045 e BKL-037 sono acc
 
 Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimensioni/unità/provenance compatibili, conserva exclusions e non crea ranking, score, threshold, recommendation o authority.
 
-## 6. BKL-041 current
+## 6. BKL-041 closed and BKL-046 current
 
-Scientific Data Quality Score è current. F1 deve definire il semantic contract prima di qualsiasi implementazione. Uno score futuro deve essere explainable, evidence-backed, confidence-aware e fail-closed; non è Safety Authority né acceptance automatica.
+BKL-041 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability sperimentale read-only; production readiness resta `NOT_READY_FOR_PRODUCTION`. BKL-046 F1 è current per source discovery e advisory semantic contract. Riusa BKL-044/BKL-045, mantiene Recommendation distinta da decisione umana ed execution evidence e non seleziona ancora model/provider o apply path.
 
 ## 7. Roadmap sequence
 
-`... -> BKL-037 CLOSED -> BKL-041 [CURRENT] -> BKL-046 -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 [CURRENT] -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 8. CI/CD e publishing
 
@@ -65,3 +65,4 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 2.0 | 08/09/2026 | Continuity e knowledge foundation |
 | 2.1 | 10/09/2026 | BKL-037 current |
 | 2.2 | 10/09/2026 | BKL-037 closed/accepted e BKL-041 current |
+| 2.3 | 11/09/2026 | BKL-041 closed/accepted e BKL-046 F1 current |
