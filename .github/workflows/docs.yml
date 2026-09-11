@@ -48,6 +48,9 @@ jobs:
       - name: Verifica assenza JavaScript inline nel portale
         run: node .github/scripts/verify-no-inline-portal-js.mjs
 
+      - name: Verifica routing dettaglio sessione
+        run: node --test .github/scripts/test-scientific-session-detail-routing.mjs
+
       - name: Configura Python
         uses: actions/setup-python@v5
         with:

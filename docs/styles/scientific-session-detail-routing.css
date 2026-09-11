@@ -1,0 +1,50 @@
+.dsg-session-detail__actions {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.dsg-session-detail__selector {
+  display: grid;
+  gap: 0.4rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--sd-border);
+  border-radius: 0.8rem;
+  background: var(--sd-panel);
+}
+
+.dsg-session-detail__selector span {
+  color: #9faaff;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dsg-session-detail__selector select {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 750;
+}
+
+.dsg-session-detail__selector option {
+  color: #17234a;
+}
+
+[data-md-color-scheme="default"] .dsg-session-detail__selector select {
+  color: #17234a;
+}
+
+@media (max-width: 72rem) {
+  .dsg-session-detail__actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 42rem) {
+  .dsg-session-detail__actions {
+    grid-template-columns: 1fr;
+  }
+}

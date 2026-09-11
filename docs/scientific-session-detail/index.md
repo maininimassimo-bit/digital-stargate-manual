@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="../styles/scientific-session-detail.css">
+<link rel="stylesheet" href="../styles/scientific-session-detail-routing.css">
 
 <div class="dsg-session-detail" data-session-detail data-session-catalog="../data/scientific-session-catalog.json">
   <section class="dsg-session-detail__hero">
@@ -6,6 +7,10 @@
     <h1 data-detail-title>Caricamento sessione…</h1>
     <p data-detail-subtitle>Recupero dei metadati dal catalogo versionato.</p>
     <div class="dsg-session-detail__actions">
+      <label class="dsg-session-detail__selector">
+        <span>Sessione</span>
+        <select data-detail-session-selector aria-label="Seleziona sessione"></select>
+      </label>
       <a href="../scientific-session-catalog/">← Torna al Catalogo</a>
       <a href="../scientific-platform/">Scientific Platform</a>
       <a href="../scientific-platform-intelligence/">Scientific Intelligence</a>
@@ -43,5 +48,6 @@
 </div>
 
 <script src="../javascripts/scientific-data-engine.js"></script>
+<script src="../javascripts/scientific-session-detail-routing.js"></script>
 <script src="../javascripts/scientific-session-detail.js"></script>
 <script src="../javascripts/session-coordinate-overlay.js"></script>
