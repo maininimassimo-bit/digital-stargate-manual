@@ -2,7 +2,7 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-11",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "4acc24fef3080160bd0fb0817d3e3cf16f41b336d0b2ac5ca9a7fc3ff8483d64",
+  "sourceDigest": "a8e7cb7f21fda0f5d08010d7b449a432d5975bc0669b574826299e60c571b0b7",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-046",
@@ -10,10 +10,10 @@
   "target": "Define the governed architecture package for an advisory, human-approved AI Post-Processing Assistant over accepted PixInsight provenance, without automatic acceptance, unattended remediation, device command, production use of the BKL-041 experimental score, or Safety Authority",
   "summary": {
     "total": 43,
-    "completed": 29,
+    "completed": 31,
     "active": 4,
-    "planned": 10,
-    "percentCompleted": 67
+    "planned": 8,
+    "percentCompleted": 72
   },
   "evidenceSummary": {
     "sources": 8,
@@ -174,19 +174,14 @@
           "id": "AP-013",
           "title": "Scientific Image Repository Architecture",
           "evidencePath": ".github/roadmap/evidence/AP-013.evidence.json",
-          "status": "planned",
-          "evidenceStatus": "planned",
+          "status": "completed",
+          "evidenceStatus": "completed",
           "evidence": {
             "manifest": ".github/roadmap/evidence/AP-013.evidence.json",
             "required": 4,
-            "present": 0,
-            "accepted": 0,
-            "missing": [
-              "architecture-package",
-              "architecture-review",
-              "operational-acceptance-test",
-              "operational-acceptance"
-            ],
+            "present": 4,
+            "accepted": 4,
+            "missing": [],
             "rejected": []
           }
         },
@@ -200,25 +195,14 @@
           "id": "AP-014",
           "title": "Scientific Observation Catalog and Search",
           "evidencePath": ".github/roadmap/evidence/AP-014.evidence.json",
-          "status": "planned",
-          "evidenceStatus": "planned",
+          "status": "completed",
+          "evidenceStatus": "completed",
           "evidence": {
             "manifest": ".github/roadmap/evidence/AP-014.evidence.json",
             "required": 10,
-            "present": 0,
-            "accepted": 0,
-            "missing": [
-              "architecture-package",
-              "catalog-index",
-              "projection-generator",
-              "search-service",
-              "enterprise-search-integration",
-              "enterprise-search-tests",
-              "pixinsight-synchronization-adapter",
-              "eagle-runtime-contract",
-              "eagle-runtime-inspection",
-              "operational-acceptance"
-            ],
+            "present": 10,
+            "accepted": 10,
+            "missing": [],
             "rejected": []
           }
         },
@@ -431,7 +415,7 @@
       "date": "2026-08-11",
       "description": "Accepted with conditions.",
       "image": null,
-      "status": "planned"
+      "status": "completed"
     },
     {
       "id": "M-AP014-W07",
@@ -440,7 +424,7 @@
       "date": "2026-08-15",
       "description": "Accepted.",
       "image": null,
-      "status": "planned"
+      "status": "completed"
     },
     {
       "id": "M-SQM",
