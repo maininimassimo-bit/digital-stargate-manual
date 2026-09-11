@@ -2,7 +2,7 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 3.3 |
+| Versione | 3.4 |
 | Baseline | 11/09/2026 |
 | Stato | Current root bootstrap — BKL-046 AI Post-Processing Assistant |
 
@@ -51,7 +51,7 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - foundation completata e accettata attraverso BKL-045;
 - BKL-037 — Session Comparison & Benchmarking: CLOSED / ACCEPTED;
 - BKL-041 — Scientific Data Quality Score: CLOSED / ACCEPTED / POST-MERGE VERIFIED;
-- BKL-046 — AI Post-Processing Assistant: CURRENT / F2 Machine-Readable Recommendation and Human Decision Contracts; F1 ACCEPTED.
+- BKL-046 — AI Post-Processing Assistant: CURRENT / F3 Deterministic Advisory Demonstrator; F1/F2 ACCEPTED.
 
 BKL-037 resta read-only/descriptive-only e non autorizza ranking, score, threshold, recommendation, remediation, command path o Safety Authority.
 
@@ -71,4 +71,4 @@ Nessun portale, comparison layer, quality score o AI è Safety Authority. Nessun
 
 ## 9. Punto di partenza operativo
 
-Completare **BKL-046 F2 — Machine-Readable Recommendation and Human Decision Contracts** sulla baseline F1 accettata tramite PR #165, merge `3f2e3edae93b009f5800a58a4ac5afc4f04e9bb7`. Definire schema chiuso, fixture bounded, validator e negative tests per Recommendation e Human Decision Receipt separati. Non selezionare model/provider e non introdurre PixInsight apply, automatic acceptance, remediation non presidiata, device command o Safety Authority.
+Completare **BKL-046 F3 — Deterministic Advisory Demonstrator** sulla baseline F2 accettata tramite PR #167, merge `b8a9025fdfc9b5254b9c79a5c37a775b4f8fd083`. Il demonstrator deve essere deterministico, read-only, limitato alle fixture bounded F2 e produrre Recommendation conformi senza selezionare model/provider, ingerire sessioni reali o introdurre PixInsight apply, automatic acceptance, remediation, device command o Safety Authority.
