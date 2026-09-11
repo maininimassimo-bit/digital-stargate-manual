@@ -1,0 +1,40 @@
+name: BKL-046 F2 Governance
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/scripts/ai-post-processing-advisory-contract.mjs"
+      - ".github/scripts/verify-ai-post-processing-advisory-contract.mjs"
+      - ".github/scripts/test-ai-post-processing-advisory-contract.mjs"
+      - ".github/workflows/bkl-046-f2-governance.yml"
+      - "docs/contracts/ai-post-processing-assistant-f2.schema.json"
+      - "docs/data/ai-post-processing-assistant-f2-fixture.json"
+      - "docs/architecture/scientific-assets/BKL-046-F2-*.md"
+  pull_request:
+    paths:
+      - ".github/scripts/ai-post-processing-advisory-contract.mjs"
+      - ".github/scripts/verify-ai-post-processing-advisory-contract.mjs"
+      - ".github/scripts/test-ai-post-processing-advisory-contract.mjs"
+      - ".github/workflows/bkl-046-f2-governance.yml"
+      - "docs/contracts/ai-post-processing-assistant-f2.schema.json"
+      - "docs/data/ai-post-processing-assistant-f2-fixture.json"
+      - "docs/architecture/scientific-assets/BKL-046-F2-*.md"
+
+permissions:
+  contents: read
+
+jobs:
+  contract-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify schema and bounded fixture
+        run: node .github/scripts/verify-ai-post-processing-advisory-contract.mjs
+      - name: Test fail-closed advisory contract rules
+        run: node --test .github/scripts/test-ai-post-processing-advisory-contract.mjs
