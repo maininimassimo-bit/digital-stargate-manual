@@ -1,12 +1,16 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import test from 'node:test';
 import {
   assertAllowedProvenancePath,
+  buildAdvisoryProjection,
   buildAdvisorySourceProjection,
   canonicalJson,
   contentDigest,
+  validateAdvisoryProjection,
   validateAdvisorySourceProjection
 } from './ai-post-processing-advisory-projection.mjs';
+import { verifyWorkflowIntegration } from './verify-ai-post-processing-advisory-projection.mjs';
 
 const pathFor = (stamp, suffix = 'OAT') => `docs/architecture/scientific-assets/evidence/BKL-045-F3B-PXP-${stamp}-${suffix}.json`;
 const catalog = () => ({
@@ -162,4 +166,116 @@ test('builder output is deeply immutable and validates against its closed invari
   assert.equal(Object.isFrozen(result), true);
   assert.equal(Object.isFrozen(result.records[0]), true);
   assert.equal(validateAdvisorySourceProjection(result), true);
+});
+
+const buildFinal = (provenanceSources = [], generatedAt = '2026-09-11T12:10:00Z') => buildAdvisoryProjection({
+  catalog: catalog(),
+  provenanceSources,
+  generatedAt
+});
+
+function rule(record, ruleId) {
+  return record.ruleEvaluations.find((item) => item.ruleId === ruleId);
+}
+
+test('F4-B generates two F2-valid F3 recommendations per catalog session', () => {
+  const result = buildFinal();
+  assert.equal(result.schemaVersion, '1.1');
+  assert.equal(result.records.length, 2);
+  assert(result.records.every((record) => record.recommendations.length === 2));
+  assert(result.records.every((record) => record.decisionState === 'NOT_PRESENT_PRE_DECISION'));
+  assert.equal(validateAdvisoryProjection(result), true);
+});
+
+test('resolved catalog authority passes while absent processing evidence fails closed', () => {
+  const result = buildFinal();
+  const record = result.records[0];
+  assert.equal(rule(record, 'GOVERNANCE_READINESS').decision, 'PASS');
+  assert.equal(rule(record, 'PROCESSING_HISTORY_AVAILABILITY').decision, 'FAIL_CLOSED');
+  assert.deepEqual(rule(record, 'PROCESSING_HISTORY_AVAILABILITY').reasonCodes, ['REQUIRED_SOURCE_AUTHORITY_MISSING']);
+  assert.equal(result.summary.governancePass, 2);
+  assert.equal(result.summary.processingHistoryFailClosed, 2);
+});
+
+test('matched incomplete evidence preserves F3 missingness reason codes', () => {
+  const result = buildFinal([{ path: pathFor('20260911T120000000Z'), payload: sidecar() }]);
+  const record = result.records.find((item) => item.sessionId === 'SESSION-A');
+  const evaluation = rule(record, 'PROCESSING_HISTORY_AVAILABILITY');
+  assert.equal(evaluation.decision, 'FAIL_CLOSED');
+  assert.deepEqual(evaluation.reasonCodes, ['SOURCE_COMPLETENESS_UNAVAILABLE', 'SOURCE_QUALITY_UNKNOWN']);
+  const recommendation = record.recommendations.find((item) => item.recommendationId === evaluation.recommendationId);
+  assert.equal(recommendation.category, 'STOP_AND_REVIEW');
+  assert.equal(recommendation.parameterAdvice[0].mode, 'UNKNOWN_NOT_RECOMMENDED');
+});
+
+test('matched complete evidence passes both accepted F3 rules without parameter invention', () => {
+  const result = buildFinal([{ path: pathFor('20260911T120000000Z'), payload: sidecar({ completeness: 'COMPLETE' }) }]);
+  const record = result.records.find((item) => item.sessionId === 'SESSION-A');
+  assert(record.ruleEvaluations.every((item) => item.decision === 'PASS'));
+  assert(record.recommendations.every((item) => item.parameterAdvice.length === 0));
+  assert(record.recommendations.every((item) => item.aiDerived === false));
+});
+
+test('ambiguous correlation causes both F3 rules to fail closed', () => {
+  const result = buildFinal([
+    { path: pathFor('20260911T120000000Z', 'A'), payload: sidecar({ id: 'PXP-A' }) },
+    { path: pathFor('20260911T120001000Z', 'B'), payload: sidecar({ id: 'PXP-B' }) }
+  ]);
+  const record = result.records.find((item) => item.sessionId === 'SESSION-A');
+  assert.equal(record.subject.correlationState, 'PARTIAL');
+  assert(record.ruleEvaluations.every((item) => item.decision === 'FAIL_CLOSED'));
+  assert(record.ruleEvaluations.every((item) => item.reasonCodes.includes('SUBJECT_CORRELATION_PARTIAL')));
+});
+
+test('final projection is deterministic for equivalent source ordering', () => {
+  const sources = [
+    { path: pathFor('20260911T120001000Z', 'B'), payload: sidecar({ id: 'PXP-B', sessionId: 'UNRELATED-B' }) },
+    { path: pathFor('20260911T120000000Z', 'A'), payload: sidecar({ id: 'PXP-A', sessionId: 'UNRELATED-A' }) }
+  ];
+  assert.deepEqual(buildFinal(sources), buildFinal([...sources].reverse()));
+});
+
+test('a newly imported catalog session is added automatically without changing existing record identities', () => {
+  const before = buildFinal();
+  const expandedCatalog = catalog();
+  expandedCatalog.sessions.push({ sessionId: 'SESSION-C', target: 'M42' });
+  const after = buildAdvisoryProjection({
+    catalog: expandedCatalog,
+    provenanceSources: [],
+    generatedAt: '2026-09-11T12:10:00Z'
+  });
+  assert.equal(after.records.length, 3);
+  assert.notEqual(after.projectionId, before.projectionId);
+  assert.equal(after.records.find((item) => item.sessionId === 'SESSION-A').recordId, before.records.find((item) => item.sessionId === 'SESSION-A').recordId);
+  const imported = after.records.find((item) => item.sessionId === 'SESSION-C');
+  assert.equal(imported.correlationState, 'PROVENANCE_UNAVAILABLE');
+  assert.equal(rule(imported, 'PROCESSING_HISTORY_AVAILABILITY').decision, 'FAIL_CLOSED');
+});
+
+test('final projection sanitizes private raw fields and preserves closed authority', () => {
+  const result = buildFinal([{ path: pathFor('20260911T120000000Z'), payload: sidecar() }]);
+  const serialized = canonicalJson(result);
+  assert.equal(serialized.includes('PRIVATE-HOST'), false);
+  assert.equal(serialized.includes('PRIVATE-WORKSPACE'), false);
+  assert.equal(result.authority.actionAuthority, 'NONE');
+  assert.equal(result.authority.executionAuthority, 'NONE');
+  assert.equal(result.authority.safetyAuthority, 'LOCAL_PHYSICAL_INTERLOCKS');
+});
+
+test('final projection rule, record and authority tampering is rejected', () => {
+  const ruleTamper = structuredClone(buildFinal());
+  ruleTamper.records[0].ruleEvaluations[0].decision = 'FAIL_CLOSED';
+  assert.throws(() => validateAdvisoryProjection(ruleTamper), /rule evaluations drift|Record digest mismatch/);
+  const authorityTamper = structuredClone(buildFinal());
+  authorityTamper.authority.automaticAcceptanceAuthorized = true;
+  delete authorityTamper.projectionDigest;
+  authorityTamper.projectionDigest = contentDigest(authorityTamper);
+  assert.throws(() => validateAdvisoryProjection(authorityTamper), /auto-accept escalation is forbidden/);
+});
+
+test('automatic import workflow contains first path, retry path and atomic governed output', () => {
+  const workflow = fs.readFileSync('.github/workflows/analyze-session-automatic.yml', 'utf8');
+  assert.equal(verifyWorkflowIntegration(workflow), true);
+  assert.throws(() => verifyWorkflowIntegration(workflow.replace('node .github/scripts/generate-ai-post-processing-advisory-projection.mjs --write', 'node .github/scripts/generate-ai-post-processing-advisory-projection.mjs')), /--write must exist in first and retry/);
+  assert.throws(() => verifyWorkflowIntegration(workflow.replaceAll('docs/data/ai-post-processing-advisory-projection.json', 'docs/data/removed.json')), /included in governed_paths/);
 });

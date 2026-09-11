@@ -3,12 +3,13 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-046-F4 |
-| Stato | In delivery — F4-A implemented; F4-B/F4-C pending |
-| Versione | 1.1 |
+| Stato | In delivery — F4-A/F4-B implemented; F4-C pending |
+| Versione | 1.2 |
 | Data | 11/09/2026 |
 | Package | BKL-046 — AI Post-Processing Assistant for PixInsight |
 | Baseline F3 | PR #169, merge `8339aecf0b6b7fa19396561b20253c0411fd7ee7` — Accepted |
-| Baseline repository | `594f57c3c25d5571e0ebccdea67a70b536952dc8` |
+| Baseline F4-A | PR #173, merge `439bd0d53e38a18286e6baa1e330482f280e278f` |
+| Baseline repository | `439bd0d53e38a18286e6baa1e330482f280e278f` |
 | Authority | Session/provenance-driven, deterministic, read-only, human-only and non-Safety |
 
 ## 1. Purpose
@@ -60,7 +61,8 @@ Restano esclusi:
 - `.github/workflows/analyze-session-automatic.yml` rigenera i derivati dopo un nuovo `data/sessions/**/manifest.json` e ripete l'intera generazione dopo ogni riallineamento a `main`.
 - BKL-045 espone sidecar reali e `buildPixInsightProvenanceReadModel`, preservando evidence class e completeness senza inferenza.
 - l'evidence reale BKL-045 accettata ha processing history `UNAVAILABLE` e zero step osservati o dichiarati.
-- non esistono ancora schema, projection persistita o pagina consumer BKL-046 F4.
+- F4-A ha introdotto schema source-mapped, allowlist eseguibile, correlation adapter, negative tests e gate dedicato tramite PR #173.
+- prima di F4-B non esistevano projection persistita, generator atomico o pagina consumer BKL-046 F4.
 
 ## 5. Target state and solution model
 
@@ -162,6 +164,22 @@ L'allowlist eseguibile ammette esclusivamente path repository-relative nella dir
 Per la privacy è adottata la strategia **raw validation at build time + sanitized public snapshot**. Il raw sidecar può contenere campi operativi necessari alla source evidence, ma la projection espone soltanto path repository-relative, digest, identità sidecar/session/workflow, timestamp, target, completeness e limitation. `hostId`, `workspaceId`, path locali, payload immagine e secret non entrano nel contratto pubblico. In F4-C il browser verificherà catalog digest, source-set digest e projection digest senza scaricare i raw sidecar.
 
 F4-A non genera Recommendation: ogni record dichiara `recommendationState=NOT_GENERATED_F4A`; missingness, ambiguità e mismatch producono `FAIL_CLOSED`. Questo evita di attribuire al runtime F3 sintetico una capability reale non ancora implementata e mantiene F4-B come gate esplicito prima della pubblicazione dinamica.
+
+### 7.2 F4-B implementation
+
+F4-B completa la projection persistita senza introdurre un secondo rule set. Il modulo F3 espone ora `buildDeterministicAdvisoryRecords`, utilizzato sia dal demonstrator sintetico accettato sia dal builder session-driven. Il known answer F3 rimane byte-semantically invariato e la relativa suite di regressione resta obbligatoria.
+
+Artefatti F4-B:
+
+- projection finale schema `1.1`, stato `PRE_DECISION_READ_ONLY` e method `BKL046-F3-CLOSED-RULES-1`;
+- generator `.github/scripts/generate-ai-post-processing-advisory-projection.mjs` con `--write`, `--check` e `--print`;
+- verifier `.github/scripts/verify-ai-post-processing-advisory-projection.mjs` per persisted drift, first path, retry path e `governed_paths`;
+- projection versionata `docs/data/ai-post-processing-advisory-projection.json`;
+- integrazione nello stesso orchestration/commit delle altre projection scientifiche.
+
+La baseline reale al momento dell'implementazione contiene 15 sessioni nel catalogo e un sidecar BKL-045 non correlabile esattamente: la projection misura quindi 15 record, zero provenance match, una source non correlata e 15 gate `PROCESSING_HISTORY_AVAILABILITY=FAIL_CLOSED`. Questo è un risultato valido e atteso, non un errore di popolamento: nessuna sessione viene soppressa e nessuna provenance viene associata tramite target, data o similarità.
+
+In modalità `--write`, il generator non riscrive il file quando cambia soltanto il clock. In modalità `--check`, riusa `generatedAt` persistito e richiede uguaglianza completa. Il workflow invoca `--write`, `--check` e il verifier sia nel primo percorso sia dentro `regenerate()` dopo `git reset --hard origin/main`; la projection è inclusa in `governed_paths` e viene quindi pubblicata atomicamente con il catalogo aggiornato.
 
 ## 8. Deterministic mapping to F3
 
@@ -269,8 +287,8 @@ Il rollback rimuove artefatti F4 e le chiamate aggiunte al workflow. Catalogo AP
 
 | Slice | Output | Exit gate |
 |---|---|---|
-| F4-A — source and projection contract | schema, discovery/correlation adapter, builder e negative tests | source authority e missingness fail-closed verificate |
-| F4-B — automatic atomic publication | generator persistito, workflow first/retry path e governed path | import simulation, idempotenza e drift gate verdi |
+| F4-A — source and projection contract | schema, discovery/correlation adapter, builder e negative tests | Implemented — PR #173 |
+| F4-B — automatic atomic publication | generator persistito, workflow first/retry path e governed path | Implemented in delivery — exact-head CI required |
 | F4-C — portal consumer and readiness | core browser validator, pagina, accessibility tests e governance workflow | freshness/tamper tests, MkDocs, ARB/RQ ed exact-head CI |
 
 Le slice sono incrementi interni di delivery e non cambiano la dipendenza di programma: F5 può iniziare soltanto dopo acceptance completa di F4.
