@@ -1,0 +1,50 @@
+name: BKL-046 F3 Governance
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/scripts/ai-post-processing-advisory-contract.mjs"
+      - ".github/scripts/ai-post-processing-advisory-demonstrator.mjs"
+      - ".github/scripts/verify-ai-post-processing-advisory-demonstrator.mjs"
+      - ".github/scripts/test-ai-post-processing-advisory-demonstrator.mjs"
+      - ".github/workflows/bkl-046-f3-governance.yml"
+      - "docs/contracts/ai-post-processing-assistant-f2.schema.json"
+      - "docs/contracts/ai-post-processing-assistant-f3.schema.json"
+      - "docs/data/ai-post-processing-assistant-f2-fixture.json"
+      - "docs/data/ai-post-processing-assistant-f3-output.json"
+      - "docs/architecture/scientific-assets/BKL-046-F3-*.md"
+      - "docs/architecture/reviews/ARB-BKL-046-F3-*.md"
+      - "docs/architecture/reviews/RQ-BKL-046-F3-*.md"
+  pull_request:
+    paths:
+      - ".github/scripts/ai-post-processing-advisory-contract.mjs"
+      - ".github/scripts/ai-post-processing-advisory-demonstrator.mjs"
+      - ".github/scripts/verify-ai-post-processing-advisory-demonstrator.mjs"
+      - ".github/scripts/test-ai-post-processing-advisory-demonstrator.mjs"
+      - ".github/workflows/bkl-046-f3-governance.yml"
+      - "docs/contracts/ai-post-processing-assistant-f2.schema.json"
+      - "docs/contracts/ai-post-processing-assistant-f3.schema.json"
+      - "docs/data/ai-post-processing-assistant-f2-fixture.json"
+      - "docs/data/ai-post-processing-assistant-f3-output.json"
+      - "docs/architecture/scientific-assets/BKL-046-F3-*.md"
+      - "docs/architecture/reviews/ARB-BKL-046-F3-*.md"
+      - "docs/architecture/reviews/RQ-BKL-046-F3-*.md"
+
+permissions:
+  contents: read
+
+jobs:
+  demonstrator-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify F2 reuse and deterministic known answer
+        run: node .github/scripts/verify-ai-post-processing-advisory-demonstrator.mjs
+      - name: Test determinism, fail-closed behavior and authority boundaries
+        run: node --test .github/scripts/test-ai-post-processing-advisory-demonstrator.mjs
