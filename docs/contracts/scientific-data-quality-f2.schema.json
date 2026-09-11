@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maininimassimo-bit.github.io/digital-stargate-manual/contracts/scientific-data-quality-f2.schema.json",
+  "title": "Digital StarGate BKL-041 F2 Scientific Data Quality Contract Fixture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "contractType", "identityMethod", "fixtureId", "fixtureMode", "sessionId", "assessmentProfile", "qualityEvidence", "dimensionAssessments", "authority", "limitations", "artifactDigest"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "contractType": {"const": "SCIENTIFIC_DATA_QUALITY_F2_FIXTURE"},
+    "identityMethod": {"const": "BKL041-F2-CANONICAL-JSON-SHA256-1"},
+    "fixtureId": {"type": "string", "minLength": 1, "maxLength": 128},
+    "fixtureMode": {"const": "BOUNDED_SYNTHETIC_FIXTURE"},
+    "sessionId": {"type": "string", "minLength": 1, "maxLength": 128},
+    "assessmentProfile": {"$ref": "#/$defs/assessmentProfile"},
+    "qualityEvidence": {"type": "array", "maxItems": 128, "items": {"$ref": "#/$defs/qualityEvidence"}},
+    "dimensionAssessments": {"type": "array", "minItems": 1, "maxItems": 32, "items": {"$ref": "#/$defs/dimensionAssessment"}},
+    "authority": {"$ref": "#/$defs/authority"},
+    "limitations": {"$ref": "#/$defs/stringArray"},
+    "artifactDigest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "stringArray": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 1024}},
+    "dimension": {
+      "enum": [
+        "METADATA_LINEAGE_INTEGRITY",
+        "ACQUISITION_COMPLETION",
+        "GUIDING_STABILITY",
+        "SKY_QUALITY_COVERAGE",
+        "WEATHER_CONTEXT",
+        "OPTICAL_IMAGE_QUALITY",
+        "PROCESSING_PROVENANCE_COMPLETENESS",
+        "ERROR_EVIDENCE",
+        "FINAL_SCIENTIFIC_OUTCOME"
+      ]
+    },
+    "assessmentProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profileId", "profileVersion", "profileState", "intendedUse", "eligibleCohort", "requiredDimensions", "optionalDimensions", "contextDimensions", "excludedDimensions", "minimumEvidenceRules", "weightSetState", "scoreState", "confidenceMethodState", "limitations", "profileDigest"],
+      "properties": {
+        "profileId": {"type": "string", "minLength": 1, "maxLength": 128},
+        "profileVersion": {"type": "string", "minLength": 1, "maxLength": 32},
+        "profileState": {"const": "DRAFT_F2"},
+        "intendedUse": {"type": "string", "minLength": 1, "maxLength": 1024},
+        "eligibleCohort": {"type": "string", "minLength": 1, "maxLength": 1024},
+        "requiredDimensions": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/dimension"}},
+        "optionalDimensions": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/dimension"}},
+        "contextDimensions": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/dimension"}},
+        "excludedDimensions": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/dimension"}},
+        "minimumEvidenceRules": {"allOf": [{"$ref": "#/$defs/stringArray"}, {"minItems": 1}]},
+        "weightSetState": {"const": "NOT_ASSIGNED_F2"},
+        "scoreState": {"const": "NOT_IMPLEMENTED_F2"},
+        "confidenceMethodState": {"const": "NOT_ASSIGNED_F2"},
+        "limitations": {"allOf": [{"$ref": "#/$defs/stringArray"}, {"minItems": 1}]},
+        "profileDigest": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "qualityEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidenceId", "sessionId", "dimension", "value", "unit", "unitSemantics", "sourceRef", "observedAt", "interval", "methodId", "methodVersion", "evidenceClass", "quality", "completeness", "coverage", "comparabilityClass", "calibrationState", "limitations", "evidenceDigest"],
+      "properties": {
+        "evidenceId": {"type": "string", "minLength": 1, "maxLength": 128},
+        "sessionId": {"type": "string", "minLength": 1, "maxLength": 128},
+        "dimension": {"$ref": "#/$defs/dimension"},
+        "value": {"type": ["number", "string", "boolean", "null"]},
+        "unit": {"type": ["string", "null"], "maxLength": 64},
+        "unitSemantics": {"enum": ["EXACT", "RATIO", "CATEGORICAL", "ANGULAR_CALIBRATED", "SOURCE_NATIVE_UNCALIBRATED", "NOT_APPLICABLE", "UNKNOWN"]},
+        "sourceRef": {"type": "string", "minLength": 1, "maxLength": 2048},
+        "observedAt": {"type": ["string", "null"], "format": "date-time"},
+        "interval": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["start", "end"],
+              "properties": {"start": {"type": "string", "format": "date-time"}, "end": {"type": "string", "format": "date-time"}}
+            }
+          ]
+        },
+        "methodId": {"type": "string", "minLength": 1, "maxLength": 128},
+        "methodVersion": {"type": "string", "minLength": 1, "maxLength": 32},
+        "evidenceClass": {"enum": ["OBSERVED", "DECLARED", "SUGGESTED"]},
+        "quality": {"enum": ["VALID", "STALE", "UNKNOWN", "INVALID"]},
+        "completeness": {"enum": ["COMPLETE", "PARTIAL", "UNAVAILABLE"]},
+        "coverage": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "comparabilityClass": {"enum": ["COMPARABLE", "CONTEXT_ONLY", "PARTIAL", "UNAVAILABLE", "INCOMPATIBLE", "UNKNOWN"]},
+        "calibrationState": {"enum": ["PROVEN", "NOT_PROVEN", "NOT_APPLICABLE", "UNKNOWN"]},
+        "limitations": {"$ref": "#/$defs/stringArray"},
+        "evidenceDigest": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "dimensionAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dimension", "assessmentState", "eligibility", "evidenceRefs", "normalizationState", "weightState", "contributionState", "exclusionReasons", "limitations", "assessmentDigest"],
+      "properties": {
+        "dimension": {"$ref": "#/$defs/dimension"},
+        "assessmentState": {"enum": ["AVAILABLE", "PARTIAL", "UNAVAILABLE", "NOT_APPLICABLE", "INVALID"]},
+        "eligibility": {"enum": ["ELIGIBLE_FOR_FUTURE_NORMALIZATION", "CONDITIONAL", "CONTEXT_ONLY", "UNAVAILABLE", "INVALID"]},
+        "evidenceRefs": {"$ref": "#/$defs/stringArray"},
+        "normalizationState": {"const": "NOT_IMPLEMENTED_F2"},
+        "weightState": {"const": "NOT_ASSIGNED_F2"},
+        "contributionState": {"const": "NOT_COMPUTED_F2"},
+        "exclusionReasons": {"$ref": "#/$defs/stringArray"},
+        "limitations": {"$ref": "#/$defs/stringArray"},
+        "assessmentDigest": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["consumerMode", "acceptanceAuthority", "actionAuthority", "safetyAuthority"],
+      "properties": {
+        "consumerMode": {"const": "READ_ONLY"},
+        "acceptanceAuthority": {"const": false},
+        "actionAuthority": {"const": "NONE"},
+        "safetyAuthority": {"const": "LOCAL_PHYSICAL_INTERLOCKS"}
+      }
+    }
+  }
+}
