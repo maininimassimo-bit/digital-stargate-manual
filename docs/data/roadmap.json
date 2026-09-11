@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-11",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "fb59fad5444a993a30871422e37aaaf38be4c4065e6f926bf0f37754b5bbd8d1",
+  "sourceDigest": "e57b8a3cf5e9c7b90c1b718ed51e7c4e8891e820dfb71ec4b3275f456807be64",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-046",
-  "nextMilestone": "BKL-046 F1 — Source Discovery and Advisory Semantic Contract",
-  "target": "Define repository-backed source eligibility, recommendation semantics, human-decision and execution boundaries for an advisory AI Post-Processing Assistant, preserving BKL-044/BKL-045 provenance and missingness without selecting a model/provider, applying PixInsight processes, or granting automatic acceptance, device command or Safety Authority",
+  "nextMilestone": "BKL-046 F2 — Machine-Readable Recommendation and Human Decision Contracts",
+  "target": "Implement closed versioned schemas, bounded fixtures, validators and negative tests for advisory recommendations and separate human-decision receipts, preserving accepted F1 authority, provenance and missingness rules without selecting a model/provider or authorizing PixInsight apply, automatic acceptance, device command or Safety Authority",
   "summary": {
     "total": 43,
     "completed": 31,
@@ -295,7 +295,7 @@
           "id": "BKL-046",
           "title": "AI Post-Processing Assistant for PixInsight",
           "status": "active",
-          "note": "Current package. F1 is current for source discovery and an advisory semantic contract over accepted BKL-044/BKL-045 evidence. Human approval is retained; no model/provider, implementation, apply path, production authority or Safety Authority is implied."
+          "note": "Current package. F1 CLOSED/ACCEPTED via PR #165, merge 3f2e3edae93b009f5800a58a4ac5afc4f04e9bb7, ARB 99/100, Release Quality READY FOR MERGE and live Pages/search verification. F2 is current for machine-readable Recommendation and Human Decision Receipt contracts. No model/provider, apply path, production authority or Safety Authority is implied."
         },
         {
           "id": "BKL-031",
