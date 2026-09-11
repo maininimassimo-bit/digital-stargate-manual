@@ -19,8 +19,8 @@
       "title": "Scientific Data Quality Score",
       "status": "active"
     },
-    "nextMilestone": "BKL-041 F3 — Deterministic Scoring and Confidence Engine",
-    "target": "Implement a deterministic, versioned and explainable normalization, scoring and evidence-support confidence engine with synthetic known answers, explicit decomposition, sensitivity tests and fail-closed boundaries; keep production calibration, portal consumers, thresholds, ranking, operational authority and Safety Authority out of scope, while retaining automatic post-import refresh as mandatory F4 scope"
+    "nextMilestone": "BKL-041 F4 — Session-Driven Projection and Portal Consumer",
+    "target": "Publish a deterministic full-catalog scientific data quality projection in the same atomic commit as every completed session import, verify catalog/projection freshness with canonical SHA-256 in the read-only portal, and fail closed on stale or invalid data; retain the synthetic profile and EXPERIMENTAL_NOT_ACCEPTED lifecycle, with real-evidence calibration and closure reserved for F5"
   },
   "architecture": {
     "ap013": {
