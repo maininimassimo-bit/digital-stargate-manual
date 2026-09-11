@@ -65,3 +65,26 @@ export async function validateProjectionFreshness(projection, catalog) {
   assert(await sha256(projectionPreimage) === projection.projectionDigest, 'PROJECTION_DIGEST_MISMATCH');
   return true;
 }
+
+export async function validateRealEvidenceFreshness(validation, projection, catalog) {
+  assert(validation?.schemaVersion === '1.0', 'F5 validation schema non supportato');
+  assert(validation?.validationType === 'SCIENTIFIC_DATA_QUALITY_REAL_EVIDENCE_VALIDATION', 'F5 validation type non valido');
+  assert(validation?.validationState === 'COMPLETE', 'F5 validation incompleta');
+  assert(validation?.decision?.capabilityAcceptance === 'ACCEPTED_AS_READ_ONLY_EXPERIMENTAL_WITH_RETAINED_LIMITATIONS', 'capability acceptance non autorizzata');
+  assert(validation?.decision?.productionReadiness === 'NOT_READY_FOR_PRODUCTION', 'production readiness non supportata dalla evidence corrente');
+  assert(validation?.decision?.productionProfileAuthorized === false, 'production profile authority drift');
+  assert(validation?.decision?.productionUseAuthorized === false, 'production use authority drift');
+  assert(validation?.authority?.consumerMode === 'READ_ONLY', 'F5 consumer mode non read-only');
+  assert(validation?.authority?.acceptanceAuthority === false, 'F5 acceptance authority drift');
+  assert(validation?.authority?.actionAuthority === 'NONE', 'F5 action authority drift');
+  assert(validation?.authority?.safetyAuthority === 'LOCAL_PHYSICAL_INTERLOCKS', 'F5 Safety Authority drift');
+  assert(validation?.acceptancePolicy?.purpose === 'PRODUCTION_CALIBRATION_READINESS_NOT_SCIENTIFIC_QUALITY_THRESHOLD', 'readiness policy semantic drift');
+  assert(Array.isArray(validation.results) && validation.results.length > 0, 'F5 readiness results mancanti');
+  assert(validation.sourceCatalog?.digest === await sha256(catalog), 'STALE_F5_CATALOG_DIGEST_MISMATCH');
+  assert(validation.sourceProjection?.digest === projection.projectionDigest, 'STALE_F5_PROJECTION_DIGEST_MISMATCH');
+  assert(JSON.stringify(validation.sourceCatalog.sessionIds) === JSON.stringify(projection.sourceCatalog.sessionIds), 'STALE_F5_SESSION_SET_MISMATCH');
+  const preimage = structuredClone(validation);
+  delete preimage.validationDigest;
+  assert(await sha256(preimage) === validation.validationDigest, 'F5_VALIDATION_DIGEST_MISMATCH');
+  return true;
+}

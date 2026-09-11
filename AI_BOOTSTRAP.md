@@ -2,7 +2,7 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 2.9 |
+| Versione | 3.0 |
 | Baseline | 11/09/2026 |
 | Stato | Current root bootstrap — BKL-041 Scientific Data Quality Score |
 
@@ -55,7 +55,7 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 
 BKL-037 resta read-only/descriptive-only e non autorizza ranking, score, threshold, recommendation, remediation, command path o Safety Authority.
 
-BKL-041 F1 è Accepted tramite PR #159, merge `6d48318c460bad040fd0754b0300fbcd76a2d312`. F2 è Accepted tramite PR #160, merge `4ca5135043c508288fa2ba41b744f29b3b9032ed`. F3 è Accepted tramite PR #161, merge `89d8979fa4e5b151d85ef889efe03ad468efcad1`. F4 è l'incremento corrente: projection full-catalog e consumer portale devono rigenerarsi automaticamente dopo ogni sessione importata e fallire chiuso quando stale. Il profilo resta esclusivamente sintetico e ogni output è `EXPERIMENTAL_NOT_ACCEPTED`.
+BKL-041 F1–F3 sono Accepted. F4 è Accepted tramite PR #162, merge `ed9ffcc92e1a5252b0d8c37634bc652397f3cde1`, con projection full-catalog, consumer e refresh automatico freshness-verified. F5 è l'incremento corrente per validation sulla cohort reale completa e closure. L'evidence corrente non autorizza un profilo produttivo: capability sperimentale read-only accettabile con limitation, production readiness `NOT_READY_FOR_PRODUCTION`.
 
 ## 6. Sequenza governata
 
@@ -71,4 +71,4 @@ Nessun portale, comparison layer, quality score o AI è Safety Authority. Nessun
 
 ## 9. Punto di partenza operativo
 
-Completare **BKL-041 F4 — Session-Driven Projection and Portal Consumer**. Validare mapping catalog-driven, rigenerazione atomica post-import, identity/freshness SHA-256, stale behavior fail-closed e presentazione congiunta di score, confidence, coverage, decomposition ed exclusions. Non introdurre calibrazione produttiva, threshold, classi GOOD/BAD, ranking, acceptance o automazioni operative; F5 resta responsabile della validazione su evidence reale e della closure.
+Completare **BKL-041 F5 — Real-Evidence Validation and Capability Closure**. Validare la cohort senza outcome filtering, rendere machine-readable readiness, bias e limitation, mantenere automatic refresh/freshness, completare ARB/RQ e chiudere il package soltanto su evidence verificata. Non promuovere il profilo sintetico né autorizzare production use, ranking, automatic acceptance o Safety Authority.

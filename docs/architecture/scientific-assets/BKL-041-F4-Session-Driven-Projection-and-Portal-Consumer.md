@@ -3,11 +3,12 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-041-F4 |
-| Stato | Proposed |
+| Stato | Accepted |
 | Versione | 1.0 |
 | Data | 11/09/2026 |
 | Package | BKL-041 — Scientific Data Quality Score |
 | Baseline F3 | `89d8979fa4e5b151d85ef889efe03ad468efcad1` — Accepted via PR #161 |
+| Acceptance F4 | PR #162, merge `ed9ffcc92e1a5252b0d8c37634bc652397f3cde1` |
 | Authority | Projection analitica read-only; uso produttivo, acceptance, action e Safety Authority non autorizzati |
 
 ## 1. Decisione
@@ -103,3 +104,7 @@ I failure sono osservabili nel workflow e nel consumer. Il rollback consiste nel
 - nessun ranking, threshold, acceptance, action o Safety Authority è introdotto;
 - test F4, regressione F3, CI exact-head, ARB e Release Quality sono completati prima del merge;
 - F5 conserva ownership esclusiva della calibrazione su evidence reale e della closure del package.
+
+## 10. Acceptance record
+
+F4 è Accepted tramite PR #162 e merge `ed9ffcc92e1a5252b0d8c37634bc652397f3cde1`. ARB ha espresso `APPROVED` 98/100 e Release Quality `READY FOR MERGE` senza waiver. I gate post-merge applicabili sono risultati verdi, inclusi BKL-041 F4 Governance #4, Developer Foundation #1295, Validate documentation #928 e Pages #761.

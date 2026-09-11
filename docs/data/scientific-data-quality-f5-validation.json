@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "validationType": "SCIENTIFIC_DATA_QUALITY_REAL_EVIDENCE_VALIDATION",
+  "validationId": "BKL041-F5-REAL-EVIDENCE-V1",
+  "validationState": "COMPLETE",
+  "generatedAt": "2026-09-11T10:04:24.827Z",
+  "sourceCatalog": {
+    "path": "docs/data/scientific-session-catalog.json",
+    "digest": "186d40129ff0af7fba698f168b0677c3282ea4213b5049c5337306fe80da80fa",
+    "sessionCount": 15,
+    "sessionIds": [
+      "2026-07-14_2026-07-15",
+      "2026-07-15_2026-07-16",
+      "2026-07-16_2026-07-17",
+      "2026-08-10_2026-08-11",
+      "2026-08-14_2026-08-15",
+      "2026-08-15_2026-08-16",
+      "2026-08-26_2026-08-27",
+      "2026-08-31_2026-09-01",
+      "2026-09-01_2026-09-02",
+      "2026-09-02_2026-09-03",
+      "2026-09-03_2026-09-04",
+      "2026-09-04_2026-09-05",
+      "2026-09-05_2026-09-06",
+      "2026-09-06_2026-09-07",
+      "2026-09-07_2026-09-08"
+    ]
+  },
+  "sourceProjection": {
+    "path": "docs/data/scientific-data-quality-projection.json",
+    "digest": "addc1ce42e0caafb830e28a3c894d35cd8863793d5b9d072c0469d29a1750bb3",
+    "projectionId": "BKL041-F4-CATALOG-V1",
+    "profileId": "DSG-SCIENTIFIC-QUALITY-SYNTHETIC-DEMONSTRATOR",
+    "profileVersion": "1.0.0-f3"
+  },
+  "cohort": {
+    "cohortId": "ALL-CANONICAL-IMPORTED-SESSIONS-F5",
+    "selectionRule": "ALL_SESSIONS_IN_CANONICAL_CATALOG_NO_OUTCOME_FILTERING",
+    "sessionCount": 15,
+    "observedFrom": "2026-07-14T18:00:00",
+    "observedThrough": "2026-09-08T03:59:40.0000000Z",
+    "knownTargets": [
+      "LDN 1320",
+      "M 27"
+    ],
+    "targetDistribution": {
+      "LDN 1320": 3,
+      "M 27": 11,
+      "UNKNOWN": 1
+    },
+    "evidenceAvailability": {
+      "sourceMetrics": 15,
+      "metadataLineage": 13,
+      "acquisitionCompletion": 13,
+      "guidingRms": 13,
+      "guidingTemporalCoverage": 0,
+      "sqm": 8
+    },
+    "assessmentStates": {
+      "available": 5,
+      "unavailable": 3,
+      "invalid": 7
+    }
+  },
+  "acceptancePolicy": {
+    "policyId": "DSG-SCIENTIFIC-QUALITY-PRODUCTION-READINESS-1",
+    "policyVersion": "1.0.0",
+    "purpose": "PRODUCTION_CALIBRATION_READINESS_NOT_SCIENTIFIC_QUALITY_THRESHOLD",
+    "requirements": {
+      "minimumImportedSessions": 30,
+      "minimumKnownTargets": 3,
+      "minimumAvailableAssessmentRatio": 0.8,
+      "maximumInvalidAssessmentCount": 0,
+      "minimumSqmEvidenceRatio": 0.8,
+      "requiredGuidingTemporalCoverageState": "GOVERNED_NON_ZERO",
+      "requiredGroundTruthState": "AVAILABLE",
+      "requiredProfileState": "CALIBRATED_ON_REAL_EVIDENCE"
+    }
+  },
+  "results": [
+    {
+      "criterionId": "MINIMUM_IMPORTED_SESSIONS",
+      "status": "FAIL",
+      "observed": 15,
+      "required": 30,
+      "reason": "A production calibration cohort requires broader repeated evidence."
+    },
+    {
+      "criterionId": "MINIMUM_KNOWN_TARGET_DIVERSITY",
+      "status": "FAIL",
+      "observed": 2,
+      "required": 3,
+      "reason": "Target diversity limits generalization and must exclude UNKNOWN."
+    },
+    {
+      "criterionId": "AVAILABLE_ASSESSMENT_RATIO",
+      "status": "FAIL",
+      "observed": 0.333333,
+      "required": 0.8,
+      "reason": "Unavailable or invalid records cannot silently enter calibration."
+    },
+    {
+      "criterionId": "INVALID_ASSESSMENT_COUNT",
+      "status": "FAIL",
+      "observed": 7,
+      "required": 0,
+      "reason": "Out-of-profile observations require a newly calibrated profile, not clamping."
+    },
+    {
+      "criterionId": "SQM_EVIDENCE_RATIO",
+      "status": "FAIL",
+      "observed": 0.533333,
+      "required": 0.8,
+      "reason": "Sky-quality evidence must cover most of the declared cohort."
+    },
+    {
+      "criterionId": "GUIDING_TEMPORAL_COVERAGE",
+      "status": "FAIL",
+      "observed": "UNAVAILABLE",
+      "required": "GOVERNED_NON_ZERO",
+      "reason": "Sample count without a governed temporal denominator is insufficient."
+    },
+    {
+      "criterionId": "REFERENCE_GROUND_TRUTH",
+      "status": "FAIL",
+      "observed": "UNAVAILABLE",
+      "required": "AVAILABLE",
+      "reason": "The repository contains no accepted final scientific quality ground truth."
+    },
+    {
+      "criterionId": "PROFILE_CALIBRATION_STATE",
+      "status": "FAIL",
+      "observed": "SYNTHETIC_DEMONSTRATOR_F3",
+      "required": "CALIBRATED_ON_REAL_EVIDENCE",
+      "reason": "The F3 profile is a synthetic demonstrator and cannot be promoted implicitly."
+    }
+  ],
+  "summary": {
+    "passedCriteria": 0,
+    "failedCriteria": 8,
+    "totalCriteria": 8
+  },
+  "decision": {
+    "capabilityAcceptance": "ACCEPTED_AS_READ_ONLY_EXPERIMENTAL_WITH_RETAINED_LIMITATIONS",
+    "productionReadiness": "NOT_READY_FOR_PRODUCTION",
+    "productionProfileAuthorized": false,
+    "productionUseAuthorized": false,
+    "reasonCodes": [
+      "MINIMUM_IMPORTED_SESSIONS",
+      "MINIMUM_KNOWN_TARGET_DIVERSITY",
+      "AVAILABLE_ASSESSMENT_RATIO",
+      "INVALID_ASSESSMENT_COUNT",
+      "SQM_EVIDENCE_RATIO",
+      "GUIDING_TEMPORAL_COVERAGE",
+      "REFERENCE_GROUND_TRUTH",
+      "PROFILE_CALIBRATION_STATE"
+    ]
+  },
+  "biasDisclosure": [
+    "AVAILABLE_ASSESSMENTS_ARE_ONLY_FOR_M27_IN_THE_CURRENT_COHORT",
+    "TARGET_DISTRIBUTION_IS_STRONGLY_IMBALANCED",
+    "SYNTHETIC_GUIDING_BOUNDS_REJECT_REAL_LOW_RMS_VALUES",
+    "NO_ACCEPTED_FINAL_SCIENTIFIC_OUTCOME_LABEL_EXISTS",
+    "MISSING_EVIDENCE_IS_NOT_MISSING_AT_RANDOM"
+  ],
+  "limitations": [
+    "F5_ACCEPTS_THE_EXPERIMENTAL_READ_ONLY_CAPABILITY_NOT_A_PRODUCTION_PROFILE",
+    "READINESS_CRITERIA_ARE_GOVERNANCE_GATES_NOT_IMAGE_QUALITY_THRESHOLDS",
+    "NO_RANKING_RECOMMENDATION_AUTOMATIC_ACCEPTANCE_OR_SAFETY_AUTHORITY"
+  ],
+  "authority": {
+    "consumerMode": "READ_ONLY",
+    "productionUseAuthorized": false,
+    "acceptanceAuthority": false,
+    "actionAuthority": "NONE",
+    "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
+  },
+  "validationDigest": "f7520475db681e6d43ca5993c84e7737bbb251a35c41e4bae4fd0f1262891311"
+}

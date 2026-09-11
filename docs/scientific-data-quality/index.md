@@ -12,8 +12,8 @@
 </section>
 
 <section class="dsg-dq-notice" aria-label="Stato sperimentale">
-  <strong>Profilo sperimentale, non calibrato per l’uso produttivo.</strong>
-  <p>I valori disponibili dimostrano il funzionamento deterministico di F4; non sono ranking, soglie, giudizi sull’immagine o decisioni di accettazione.</p>
+  <strong>Capability sperimentale validata; profilo non pronto per l’uso produttivo.</strong>
+  <p>F5 valuta automaticamente l’intera cohort reale e pubblica i gap di readiness. I valori disponibili non sono ranking, soglie di qualità, giudizi sull’immagine o decisioni di accettazione.</p>
 </section>
 
 <div data-scientific-data-quality>
