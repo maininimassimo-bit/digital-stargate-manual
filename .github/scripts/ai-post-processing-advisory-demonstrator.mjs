@@ -11,6 +11,10 @@ export const F3_MODE = 'BOUNDED_SYNTHETIC_READ_ONLY';
 export const F3_PRODUCER = 'DSG.DeterministicAdvisoryDemonstrator';
 export const F3_PRODUCER_VERSION = '1.0.0-f3';
 export const F3_METHOD_ID = 'BKL046-F3-CLOSED-RULES-1';
+export const F3_CONTEXTS = Object.freeze({
+  BOUNDED_SYNTHETIC: 'BOUNDED_SYNTHETIC',
+  SESSION_PROVENANCE_READ_ONLY: 'SESSION_PROVENANCE_READ_ONLY'
+});
 
 const OUTPUT_KEYS = new Set(['schemaVersion', 'contractType', 'demonstratorMode', 'producer', 'producerVersion', 'methodId', 'inputFixtureId', 'inputArtifactDigest', 'generatedAt', 'subject', 'sourceBindings', 'recommendations', 'ruleEvaluations', 'decisionState', 'authority', 'limitations', 'artifactDigest']);
 const EVALUATION_KEYS = new Set(['ruleId', 'recommendationId', 'decision', 'reasonCodes']);
@@ -66,17 +70,17 @@ function eligibilityReasonCodes(subject, sources) {
   return [...new Set(reasons)].sort();
 }
 
-function makeRecommendation({ fixture, rule, sources, reasonCodes }) {
+function makeRecommendation({ inputArtifactDigest, generatedAt, subject, sourceBindings, contextMode, rule, sources, reasonCodes }) {
   const sourceBindingRefs = sources.length > 0
     ? sources.map((source) => source.bindingId).sort()
-    : fixture.sourceBindings.map((source) => source.bindingId).sort();
-  const citationRefs = [...new Set((sources.length > 0 ? sources : fixture.sourceBindings).flatMap((source) => source.citationRefs))].sort();
+    : sourceBindings.map((source) => source.bindingId).sort();
+  const citationRefs = [...new Set((sources.length > 0 ? sources : sourceBindings).flatMap((source) => source.citationRefs))].sort();
   const seed = {
-    inputArtifactDigest: fixture.artifactDigest,
+    inputArtifactDigest,
     methodId: F3_METHOD_ID,
     ruleId: rule.ruleId,
     sourceBindingRefs,
-    subjectRef: fixture.subject.subjectId
+    subjectRef: subject.subjectId
   };
   const suffix = contentDigest(seed).slice(0, 24).toUpperCase();
   const eligible = reasonCodes.length === 0;
@@ -88,9 +92,9 @@ function makeRecommendation({ fixture, rule, sources, reasonCodes }) {
     producer: F3_PRODUCER,
     producerVersion: F3_PRODUCER_VERSION,
     methodId: F3_METHOD_ID,
-    generatedAt: fixture.generatedAt,
+    generatedAt,
     correlationId: `CORR-BKL046-F3-${suffix}`,
-    subjectRef: fixture.subject.subjectId,
+    subjectRef: subject.subjectId,
     category: eligible ? 'QUALITY_CHECK' : 'STOP_AND_REVIEW',
     lifecycleState: eligible ? 'validated' : 'incomplete',
     proposedAction: eligible
@@ -102,8 +106,12 @@ function makeRecommendation({ fixture, rule, sources, reasonCodes }) {
         : 'Stop subject-specific parameter recommendation and review the PixInsight workflow evidence manually.'),
     rationale: eligible
       ? (governanceRule
-        ? 'The repository authority source is validated, complete and correlated to the bounded synthetic subject.'
-        : 'The processing evidence source is validated, complete and correlated to the bounded synthetic subject.')
+        ? (contextMode === F3_CONTEXTS.BOUNDED_SYNTHETIC
+          ? 'The repository authority source is validated, complete and correlated to the bounded synthetic subject.'
+          : 'The repository authority source is validated, complete and correlated to the governed session subject.')
+        : (contextMode === F3_CONTEXTS.BOUNDED_SYNTHETIC
+          ? 'The processing evidence source is validated, complete and correlated to the bounded synthetic subject.'
+          : 'The processing evidence source is validated, complete and correlated to the governed session subject.'))
       : `The closed F3 eligibility gate failed: ${reasonCodes.join(', ')}.`,
     sourceBindingRefs,
     citationRefs,
@@ -129,7 +137,9 @@ function makeRecommendation({ fixture, rule, sources, reasonCodes }) {
     },
     limitations: [
       eligible
-        ? 'Validated means contract-valid deterministic guidance over a bounded synthetic fixture; it is not scientific acceptance, human approval or execution.'
+        ? (contextMode === F3_CONTEXTS.BOUNDED_SYNTHETIC
+          ? 'Validated means contract-valid deterministic guidance over a bounded synthetic fixture; it is not scientific acceptance, human approval or execution.'
+          : 'Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution.')
         : 'This recommendation is fail-closed and cannot be promoted while any reason code remains.'
     ],
     recommendationDigest: ''
@@ -139,17 +149,26 @@ function makeRecommendation({ fixture, rule, sources, reasonCodes }) {
   return recommendation;
 }
 
-export function buildDeterministicAdvisoryDemonstration(fixture) {
-  validateAdvisoryContractFixture(fixture);
-  const sourceBindings = structuredClone(fixture.sourceBindings).sort((a, b) => a.bindingId.localeCompare(b.bindingId));
+export function buildDeterministicAdvisoryRecords({
+  inputArtifactDigest,
+  generatedAt,
+  subject,
+  sourceBindings: inputSourceBindings,
+  contextMode = F3_CONTEXTS.SESSION_PROVENANCE_READ_ONLY
+}) {
+  assert(/^[a-f0-9]{64}$/.test(inputArtifactDigest ?? ''), 'inputArtifactDigest must be a SHA-256 digest.');
+  assert(Number.isFinite(Date.parse(generatedAt)), 'generatedAt must be an ISO date-time.');
+  assert(Object.values(F3_CONTEXTS).includes(contextMode), 'Unsupported F3 rule context.');
+  assert(Array.isArray(inputSourceBindings) && inputSourceBindings.length >= 1 && inputSourceBindings.length <= 32, 'sourceBindings must contain 1..32 records.');
+  const sourceBindings = structuredClone(inputSourceBindings).sort((a, b) => a.bindingId.localeCompare(b.bindingId));
   const recommendations = [];
   const ruleEvaluations = [];
 
   for (const rule of RULES) {
     const sources = sourceBindings.filter((source) => source.sourceAuthority === rule.sourceAuthority);
-    const reasonCodes = eligibilityReasonCodes(fixture.subject, sources);
-    const recommendation = makeRecommendation({ fixture, rule, sources, reasonCodes });
-    validateRecommendationRecord(recommendation, fixture.subject, sourceBindings);
+    const reasonCodes = eligibilityReasonCodes(subject, sources);
+    const recommendation = makeRecommendation({ inputArtifactDigest, generatedAt, subject, sourceBindings, contextMode, rule, sources, reasonCodes });
+    validateRecommendationRecord(recommendation, subject, sourceBindings);
     recommendations.push(recommendation);
     ruleEvaluations.push({
       ruleId: rule.ruleId,
@@ -161,6 +180,18 @@ export function buildDeterministicAdvisoryDemonstration(fixture) {
 
   recommendations.sort((a, b) => a.recommendationId.localeCompare(b.recommendationId));
   ruleEvaluations.sort((a, b) => a.ruleId.localeCompare(b.ruleId));
+  return deepFreeze({ sourceBindings, recommendations, ruleEvaluations });
+}
+
+export function buildDeterministicAdvisoryDemonstration(fixture) {
+  validateAdvisoryContractFixture(fixture);
+  const { sourceBindings, recommendations, ruleEvaluations } = buildDeterministicAdvisoryRecords({
+    inputArtifactDigest: fixture.artifactDigest,
+    generatedAt: fixture.generatedAt,
+    subject: fixture.subject,
+    sourceBindings: fixture.sourceBindings,
+    contextMode: F3_CONTEXTS.BOUNDED_SYNTHETIC
+  });
   const output = {
     schemaVersion: F3_SCHEMA_VERSION,
     contractType: F3_CONTRACT_TYPE,
