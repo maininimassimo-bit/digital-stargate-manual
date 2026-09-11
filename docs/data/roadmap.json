@@ -2,7 +2,7 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-11",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "eb8e8f31fabe3312dcd649a45835049f058ae5fde104f2c671e1bdd2611e9c3a",
+  "sourceDigest": "e7beb4c5bbe1e83424f2276c7f45c00e1a5607e9b5a07a1ce7c1cf8573228ce7",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-046",
@@ -10,10 +10,10 @@
   "target": "Implement a deterministic read-only demonstrator over accepted F2 bounded fixtures, emitting contract-valid recommendations without model/provider selection, real-session ingestion, automatic acceptance, PixInsight apply, device command or Safety Authority",
   "summary": {
     "total": 43,
-    "completed": 29,
-    "active": 5,
-    "planned": 9,
-    "percentCompleted": 67
+    "completed": 31,
+    "active": 4,
+    "planned": 8,
+    "percentCompleted": 72
   },
   "evidenceSummary": {
     "sources": 8,
@@ -174,18 +174,14 @@
           "id": "AP-013",
           "title": "Scientific Image Repository Architecture",
           "evidencePath": ".github/roadmap/evidence/AP-013.evidence.json",
-          "status": "active",
-          "evidenceStatus": "active",
+          "status": "completed",
+          "evidenceStatus": "completed",
           "evidence": {
             "manifest": ".github/roadmap/evidence/AP-013.evidence.json",
             "required": 4,
-            "present": 1,
-            "accepted": 1,
-            "missing": [
-              "architecture-package",
-              "architecture-review",
-              "operational-acceptance-test"
-            ],
+            "present": 4,
+            "accepted": 4,
+            "missing": [],
             "rejected": []
           }
         },
@@ -199,25 +195,14 @@
           "id": "AP-014",
           "title": "Scientific Observation Catalog and Search",
           "evidencePath": ".github/roadmap/evidence/AP-014.evidence.json",
-          "status": "planned",
-          "evidenceStatus": "planned",
+          "status": "completed",
+          "evidenceStatus": "completed",
           "evidence": {
             "manifest": ".github/roadmap/evidence/AP-014.evidence.json",
             "required": 10,
-            "present": 0,
-            "accepted": 0,
-            "missing": [
-              "architecture-package",
-              "catalog-index",
-              "projection-generator",
-              "search-service",
-              "enterprise-search-integration",
-              "enterprise-search-tests",
-              "pixinsight-synchronization-adapter",
-              "eagle-runtime-contract",
-              "eagle-runtime-inspection",
-              "operational-acceptance"
-            ],
+            "present": 10,
+            "accepted": 10,
+            "missing": [],
             "rejected": []
           }
         },
@@ -430,7 +415,7 @@
       "date": "2026-08-11",
       "description": "Accepted with conditions.",
       "image": null,
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-AP014-W07",
@@ -439,7 +424,7 @@
       "date": "2026-08-15",
       "description": "Accepted.",
       "image": null,
-      "status": "planned"
+      "status": "completed"
     },
     {
       "id": "M-SQM",
