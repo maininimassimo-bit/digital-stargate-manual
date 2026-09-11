@@ -105,6 +105,28 @@ test('improved higher-is-better acquisition increases the score predictably', ()
   assert.equal(build(fixture).score.value, 85.36);
 });
 
+test('all required dimensions preserve their declared monotonic direction', () => {
+  const scenarios = [
+    ['METADATA_LINEAGE_INTEGRITY', 0.5, 67.86],
+    ['ACQUISITION_COMPLETION', 0.5, 70.36],
+    ['GUIDING_STABILITY', 2.25, 67.86],
+    ['SKY_QUALITY_COVERAGE', 19.8, 72.86]
+  ];
+  for (const [dimension, value, expected] of scenarios) {
+    const fixture = clone();
+    fixture.dimensions.find((item) => item.dimension === dimension).value = value;
+    assert.equal(build(fixture).score.value, expected, dimension);
+  }
+});
+
+test('evidence support changes confidence without changing scientific score', () => {
+  const fixture = clone();
+  fixture.dimensions.forEach((item) => { item.evidenceClass = 'OBSERVED'; });
+  const result = build(fixture);
+  assert.equal(result.score.value, source.expected.scoreValue);
+  assert.equal(result.confidence.value, 92.5);
+});
+
 test('SUGGESTED required evidence makes the assessment unavailable', () => {
   const fixture = clone();
   fixture.dimensions[0].evidenceClass = 'SUGGESTED';
@@ -131,6 +153,13 @@ test('tampered profile identity fails closed', () => {
   const fixture = clone();
   fixture.profile.limitations[0] = 'Tampered but structurally valid limitation.';
   assert.throws(() => build(fixture), /profileDigest does not match canonical content/);
+});
+
+test('alternate profile identity is rejected even when correctly resealed', () => {
+  const fixture = clone();
+  fixture.profile.profileId = 'UNREVIEWED-PRODUCTION-PROFILE';
+  resealProfile(fixture.profile);
+  assert.throws(() => build(fixture), /Only the DSG-SCIENTIFIC-QUALITY-SYNTHETIC-DEMONSTRATOR profile is authorized/);
 });
 
 test('unknown properties are rejected fail-closed', () => {

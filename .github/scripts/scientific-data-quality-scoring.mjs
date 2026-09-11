@@ -65,6 +65,8 @@ function assertFactorMap(map, expected, label) {
 export function validateScoringProfile(profile) {
   exactKeys(profile, PROFILE_KEYS, 'profile');
   for (const field of ['profileId', 'profileVersion', 'algorithmId', 'algorithmVersion']) assert(nonEmpty(profile[field]), `profile.${field} is required.`);
+  assert(profile.profileId === 'DSG-SCIENTIFIC-QUALITY-SYNTHETIC-DEMONSTRATOR', 'Only the DSG-SCIENTIFIC-QUALITY-SYNTHETIC-DEMONSTRATOR profile is authorized in F3.');
+  assert(profile.profileVersion === '1.0.0-f3', 'Unsupported F3 profile version.');
   assert(profile.profileState === 'SYNTHETIC_DEMONSTRATOR_F3', 'Only SYNTHETIC_DEMONSTRATOR_F3 profiles are authorized in F3.');
   assert(profile.algorithmId === F3_ALGORITHM_ID && profile.algorithmVersion === F3_ALGORITHM_VERSION, 'Unsupported scoring algorithm.');
   exactKeys(profile.scoreScale, SCALE_KEYS, 'profile.scoreScale');
