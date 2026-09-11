@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0",
+  "contractType": "AI_POST_PROCESSING_ASSISTANT_F3_DEMONSTRATOR_OUTPUT",
+  "demonstratorMode": "BOUNDED_SYNTHETIC_READ_ONLY",
+  "producer": "DSG.DeterministicAdvisoryDemonstrator",
+  "producerVersion": "1.0.0-f3",
+  "methodId": "BKL046-F3-CLOSED-RULES-1",
+  "inputFixtureId": "BKL-046-F2-SYNTHETIC-001",
+  "inputArtifactDigest": "6fff9f8ed92034ca8967cf6e5048e80befdadc3a887c3fbefb62806b41f9dfe3",
+  "generatedAt": "2026-09-11T18:10:00Z",
+  "subject": {
+    "subjectId": "SUBJECT-SYNTHETIC-PIXINSIGHT-001",
+    "subjectType": "PIXINSIGHT_WORKFLOW",
+    "assetRef": "ASSET-SYNTHETIC-001",
+    "sessionRef": "SESSION-SYNTHETIC-001",
+    "workflowRef": "WORKFLOW-SYNTHETIC-001",
+    "stepRef": null,
+    "correlationState": "RESOLVED"
+  },
+  "sourceBindings": [
+    {
+      "bindingId": "SRC-BKL045-HISTORY-UNAVAILABLE",
+      "semanticType": "evidence",
+      "evidenceClass": "OBSERVED",
+      "sourceAuthority": "processing_evidence",
+      "sourceRef": "docs/project/BKL-045-CLOSURE-2026-09-10.md",
+      "lifecycleState": "validated",
+      "quality": "UNKNOWN",
+      "completeness": "UNAVAILABLE",
+      "citationRefs": ["docs/architecture/scientific-assets/BKL-045-F1-PixInsight-Workflow-Provenance-Source-Discovery-and-Semantic-Contract.md"],
+      "limitations": ["Complete PixInsight process history is unavailable and must not be reconstructed."],
+      "bindingDigest": "206d7a34e6a29691f681534769767a34316a5ad250c74a22c00514e11fc5e4d5"
+    },
+    {
+      "bindingId": "SRC-BKL046-F1-ACCEPTED",
+      "semanticType": "evidence",
+      "evidenceClass": "OBSERVED",
+      "sourceAuthority": "repository_authority",
+      "sourceRef": "docs/project/BKL-046-F1-ACCEPTANCE-2026-09-11.md",
+      "lifecycleState": "validated",
+      "quality": "VALID",
+      "completeness": "COMPLETE",
+      "citationRefs": ["docs/architecture/scientific-assets/BKL-046-F1-AI-Post-Processing-Assistant-Source-Discovery-and-Advisory-Semantic-Contract.md"],
+      "limitations": ["Repository governance evidence supports the advisory boundary, not subject-specific processing quality."],
+      "bindingDigest": "ddc111226c958321e5775bab2eece5b77d80b99d4ed884754d77b42b4514c4af"
+    }
+  ],
+  "recommendations": [
+    {
+      "recommendationId": "REC-BKL046-F3-0670E55F22ED025014B84B43",
+      "semanticType": "recommendation",
+      "aiDerived": false,
+      "producer": "DSG.DeterministicAdvisoryDemonstrator",
+      "producerVersion": "1.0.0-f3",
+      "methodId": "BKL046-F3-CLOSED-RULES-1",
+      "generatedAt": "2026-09-11T18:10:00Z",
+      "correlationId": "CORR-BKL046-F3-0670E55F22ED025014B84B43",
+      "subjectRef": "SUBJECT-SYNTHETIC-PIXINSIGHT-001",
+      "category": "QUALITY_CHECK",
+      "lifecycleState": "validated",
+      "proposedAction": "Confirm the governed advisory boundary before requesting subject-specific PixInsight guidance.",
+      "rationale": "The repository authority source is validated, complete and correlated to the bounded synthetic subject.",
+      "sourceBindingRefs": ["SRC-BKL046-F1-ACCEPTED"],
+      "citationRefs": ["docs/architecture/scientific-assets/BKL-046-F1-AI-Post-Processing-Assistant-Source-Discovery-and-Advisory-Semantic-Contract.md"],
+      "provenanceRefs": ["PRV-BKL046-F3-GOVERNANCE_READINESS-0670E55F22ED025014B84B43"],
+      "parameterAdvice": [],
+      "conflicts": [],
+      "unknowns": [],
+      "confidence": {"state": "UNAVAILABLE_F2", "contractRef": null, "value": null, "limitations": ["F3 does not introduce a calibrated recommendation-confidence method."]},
+      "limitations": ["Validated means contract-valid deterministic guidance over a bounded synthetic fixture; it is not scientific acceptance, human approval or execution."],
+      "recommendationDigest": "ce77d99b7183b65148e725679176ff5b99821dc99f40b6f4153274d21f0a3020"
+    },
+    {
+      "recommendationId": "REC-BKL046-F3-49FCE9F4D98D55420B3F36DA",
+      "semanticType": "recommendation",
+      "aiDerived": false,
+      "producer": "DSG.DeterministicAdvisoryDemonstrator",
+      "producerVersion": "1.0.0-f3",
+      "methodId": "BKL046-F3-CLOSED-RULES-1",
+      "generatedAt": "2026-09-11T18:10:00Z",
+      "correlationId": "CORR-BKL046-F3-49FCE9F4D98D55420B3F36DA",
+      "subjectRef": "SUBJECT-SYNTHETIC-PIXINSIGHT-001",
+      "category": "STOP_AND_REVIEW",
+      "lifecycleState": "incomplete",
+      "proposedAction": "Stop subject-specific parameter recommendation and review the PixInsight workflow evidence manually.",
+      "rationale": "The closed F3 eligibility gate failed: SOURCE_COMPLETENESS_UNAVAILABLE, SOURCE_QUALITY_UNKNOWN.",
+      "sourceBindingRefs": ["SRC-BKL045-HISTORY-UNAVAILABLE"],
+      "citationRefs": ["docs/architecture/scientific-assets/BKL-045-F1-PixInsight-Workflow-Provenance-Source-Discovery-and-Semantic-Contract.md"],
+      "provenanceRefs": ["PRV-BKL046-F3-PROCESSING_HISTORY_AVAILABILITY-49FCE9F4D98D55420B3F36DA"],
+      "parameterAdvice": [{
+        "parameterId": null,
+        "mode": "UNKNOWN_NOT_RECOMMENDED",
+        "unit": null,
+        "categoricalValue": null,
+        "lowerBound": null,
+        "upperBound": null,
+        "applicability": "Subject-specific PixInsight parameters while the deterministic evidence gate is not satisfied.",
+        "evidenceRefs": ["SRC-BKL045-HISTORY-UNAVAILABLE"],
+        "limitations": ["No parameter or value may be inferred from incomplete, stale, invalid, suggested or uncorrelated evidence."]
+      }],
+      "conflicts": [],
+      "unknowns": ["SOURCE_COMPLETENESS_UNAVAILABLE", "SOURCE_QUALITY_UNKNOWN"],
+      "confidence": {"state": "UNAVAILABLE_F2", "contractRef": null, "value": null, "limitations": ["F3 does not introduce a calibrated recommendation-confidence method."]},
+      "limitations": ["This recommendation is fail-closed and cannot be promoted while any reason code remains."],
+      "recommendationDigest": "de496c95a78aab573d32b8e7385b5bff0f1ab13db61e79cde2c7334dc835d63f"
+    }
+  ],
+  "ruleEvaluations": [
+    {"ruleId": "GOVERNANCE_READINESS", "recommendationId": "REC-BKL046-F3-0670E55F22ED025014B84B43", "decision": "PASS", "reasonCodes": []},
+    {"ruleId": "PROCESSING_HISTORY_AVAILABILITY", "recommendationId": "REC-BKL046-F3-49FCE9F4D98D55420B3F36DA", "decision": "FAIL_CLOSED", "reasonCodes": ["SOURCE_COMPLETENESS_UNAVAILABLE", "SOURCE_QUALITY_UNKNOWN"]}
+  ],
+  "decisionState": "NOT_PRESENT_PRE_DECISION",
+  "authority": {
+    "consumerMode": "READ_ONLY",
+    "advisoryOnly": true,
+    "acceptanceAuthority": "HUMAN_ONLY",
+    "actionAuthority": "NONE",
+    "executionAuthority": "NONE",
+    "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS",
+    "pixInsightApplyAuthorized": false,
+    "automaticAcceptanceAuthorized": false
+  },
+  "limitations": [
+    "Deterministic read-only demonstration over a bounded synthetic F2 fixture; not a production assistant or model output.",
+    "No human decision, PixInsight execution, automatic acceptance, device command or Safety Authority is represented."
+  ],
+  "artifactDigest": "a97f7ff5a394b6f714efc8a55b1b1ab6cd6c6865c9a58ea6b9ec5120e98a4070"
+}

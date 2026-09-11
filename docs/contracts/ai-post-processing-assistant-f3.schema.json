@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maininimassimo-bit.github.io/digital-stargate-manual/contracts/ai-post-processing-assistant-f3.schema.json",
+  "title": "Digital StarGate BKL-046 F3 Deterministic Advisory Demonstrator Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "contractType", "demonstratorMode", "producer", "producerVersion", "methodId", "inputFixtureId", "inputArtifactDigest", "generatedAt", "subject", "sourceBindings", "recommendations", "ruleEvaluations", "decisionState", "authority", "limitations", "artifactDigest"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "contractType": {"const": "AI_POST_PROCESSING_ASSISTANT_F3_DEMONSTRATOR_OUTPUT"},
+    "demonstratorMode": {"const": "BOUNDED_SYNTHETIC_READ_ONLY"},
+    "producer": {"const": "DSG.DeterministicAdvisoryDemonstrator"},
+    "producerVersion": {"const": "1.0.0-f3"},
+    "methodId": {"const": "BKL046-F3-CLOSED-RULES-1"},
+    "inputFixtureId": {"type": "string", "minLength": 1},
+    "inputArtifactDigest": {"$ref": "ai-post-processing-assistant-f2.schema.json#/$defs/digest"},
+    "generatedAt": {"type": "string", "format": "date-time"},
+    "subject": {"$ref": "ai-post-processing-assistant-f2.schema.json#/$defs/subject"},
+    "sourceBindings": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "items": {"$ref": "ai-post-processing-assistant-f2.schema.json#/$defs/sourceBinding"}
+    },
+    "recommendations": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {"$ref": "ai-post-processing-assistant-f2.schema.json#/$defs/recommendation"}
+    },
+    "ruleEvaluations": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {"$ref": "#/$defs/ruleEvaluation"}
+    },
+    "decisionState": {"const": "NOT_PRESENT_PRE_DECISION"},
+    "authority": {"$ref": "ai-post-processing-assistant-f2.schema.json#/$defs/authority"},
+    "limitations": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "artifactDigest": {"$ref": "ai-post-processing-assistant-f2.schema.json#/$defs/digest"}
+  },
+  "$defs": {
+    "ruleEvaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ruleId", "recommendationId", "decision", "reasonCodes"],
+      "properties": {
+        "ruleId": {"enum": ["GOVERNANCE_READINESS", "PROCESSING_HISTORY_AVAILABILITY"]},
+        "recommendationId": {"type": "string", "minLength": 1},
+        "decision": {"enum": ["PASS", "FAIL_CLOSED"]},
+        "reasonCodes": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    }
+  }
+}

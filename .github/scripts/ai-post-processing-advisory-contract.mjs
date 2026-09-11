@@ -184,6 +184,19 @@ function validateRecommendation(recommendation, subject, sourceById) {
   assertDigest(recommendation, 'recommendationDigest', label);
 }
 
+export function validateRecommendationRecord(recommendation, subject, sourceBindings) {
+  validateSubject(subject);
+  assert(Array.isArray(sourceBindings) && sourceBindings.length >= 1 && sourceBindings.length <= 32, 'sourceBindings must contain 1..32 records.');
+  const sourceById = new Map();
+  for (const source of sourceBindings) {
+    validateSourceBinding(source);
+    assert(!sourceById.has(source.bindingId), `Duplicate source binding ${source.bindingId}.`);
+    sourceById.set(source.bindingId, source);
+  }
+  validateRecommendation(recommendation, subject, sourceById);
+  return true;
+}
+
 function validateReceipt(receipt, recommendationById) {
   const label = `humanDecisionReceipt.${receipt?.receiptId ?? 'unknown'}`;
   assertExactKeys(receipt, RECEIPT_KEYS, label);
