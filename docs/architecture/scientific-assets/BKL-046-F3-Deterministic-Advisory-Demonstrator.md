@@ -194,7 +194,7 @@ node .github/scripts/verify-ai-post-processing-advisory-demonstrator.mjs
 node --test .github/scripts/test-ai-post-processing-advisory-demonstrator.mjs
 ```
 
-La validazione locale del proposal comprende 16/16 test F2 e 21/21 test F3. L'evidence CI exact-head, la review ARB indipendente e il gate Release Quality restano requisiti di acceptance.
+La validazione locale del proposal comprende 16/16 test F2 e 21/21 test F3. L'evidence CI exact-head, la review ARB AI-assistita autorizzata dal repository owner e il gate Release Quality restano requisiti di acceptance.
 
 ## 14. Risks and trade-offs
 
