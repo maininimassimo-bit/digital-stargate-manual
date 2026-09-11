@@ -101,10 +101,16 @@ test('numeric scores and weights are forbidden in F2', () => {
   }
 });
 
+test('unknown properties are rejected fail-closed', () => {
+  const fixture = clone();
+  fixture.qualityEvidence[0].legacyQuality = 'GOOD';
+  resealFixture(fixture, { evidence: [0] });
+  assert.throws(() => validateQualityContractFixture(fixture), /legacyQuality is not allowed/);
+});
+
 test('tampered evidence identity fails closed', () => {
   const fixture = clone();
   fixture.qualityEvidence[0].value = 'TAMPERED';
   resealFixture(fixture);
   assert.throws(() => validateQualityContractFixture(fixture), /digest does not match canonical content/);
 });
-
