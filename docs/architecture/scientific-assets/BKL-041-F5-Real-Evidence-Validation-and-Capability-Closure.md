@@ -42,20 +42,19 @@ Tutti i 5 assessment disponibili appartengono a M 27. Il risultato non è genera
 
 ## 3. Readiness policy
 
-`DSG-SCIENTIFIC-QUALITY-PRODUCTION-READINESS-1` è una policy di governance per decidere se esistono input sufficienti a una futura calibrazione. Non è una soglia di qualità scientifica e non classifica immagini o sessioni.
+`DSG-SCIENTIFIC-QUALITY-PRODUCTION-READINESS-1` verifica esclusivamente stati dimostrabili dal repository. Non contiene soglie numeriche, non è una soglia di qualità scientifica e non classifica immagini o sessioni. Conteggi e distribuzioni restano evidence descrittiva, mai criteri impliciti.
 
-| Criterio | Richiesto | Osservato | Esito |
-|---|---:|---:|---|
-| sessioni importate | ≥30 | 15 | FAIL |
-| target noti | ≥3 | 2 | FAIL |
-| assessment available | ≥80% | 33,3% | FAIL |
-| record invalid | 0 | 7 | FAIL |
-| evidence SQM | ≥80% | 53,3% | FAIL |
-| guiding temporal coverage | governata/non-zero per la cohort | assente | FAIL |
-| ground truth scientifica finale | disponibile | assente | FAIL |
-| profile state | calibrated on real evidence | synthetic demonstrator | FAIL |
+| Criterio | Stato richiesto | Stato osservato | Evidence descrittiva | Esito |
+|---|---|---|---|---|
+| cohort representativeness | demonstrated by accepted method | not demonstrated | 15 sessioni; 2 target noti; 1 unknown | FAIL |
+| assessment coverage adequacy | demonstrated by accepted method | not demonstrated | 5 available; 3 unavailable; 7 invalid | FAIL |
+| SQM coverage adequacy | demonstrated by accepted method | not demonstrated | 8 available; 7 missing | FAIL |
+| guiding temporal coverage | governed non-zero for cohort | unavailable | 0/15 con coverage governata | FAIL |
+| ground truth scientifica finale | available | unavailable | nessuna source accettata | FAIL |
+| profile calibration | calibrated on real evidence | synthetic demonstrator | profilo `1.0.0-f3` | FAIL |
+| bound calibration | calibrated on real evidence | synthetic bounds reject real observations | 7 invalid | FAIL |
 
-Le soglie di numerosità/copertura sono guardrail conservativi versionati, non claim statistici universali. Una loro modifica richiede nuova versione della policy e review indipendente.
+Anche se in futuro tutti gli input diventassero eleggibili per una review di calibrazione, F5 manterrebbe `productionReadiness=NOT_READY_FOR_PRODUCTION` e le authority a `false`. Un nuovo profilo produttivo richiede un contratto/versione e un'approvazione separati.
 
 ## 4. Componenti e aggiornamento dinamico
 
@@ -114,7 +113,7 @@ Una futura iniziativa di produzione dovrà riaprire esplicitamente la capability
 - cohort completa e selection rule machine-readable;
 - readiness policy distinta da soglie di qualità;
 - risultati reali riproducibili e failure esplicite;
-- production readiness resta `NOT_READY_FOR_PRODUCTION` finché un gate fallisce;
+- production readiness resta sempre `NOT_READY_FOR_PRODUCTION` in F5; un eventuale completamento degli input abilita solo una review separata;
 - production profile/use restano non autorizzati;
 - validation rigenerata automaticamente dopo ogni import e pubblicata atomicamente;
 - consumer verifica freshness fino al report F5;

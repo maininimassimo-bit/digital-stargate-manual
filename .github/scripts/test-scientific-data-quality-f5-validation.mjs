@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { buildRealEvidenceValidation } from './scientific-data-quality-real-evidence-validation.mjs';
+import { buildF5Decision, buildRealEvidenceValidation } from './scientific-data-quality-real-evidence-validation.mjs';
 import { validateRealEvidenceFreshness } from '../../docs/javascripts/scientific-data-quality-core.mjs';
 
 const catalog = JSON.parse(fs.readFileSync('docs/data/scientific-session-catalog.json', 'utf8'));
@@ -35,9 +35,22 @@ test('bias and evidence gaps remain explicit', () => {
 test('readiness criteria are governance gates and never quality thresholds', () => {
   const result = buildRealEvidenceValidation(catalog, projection);
   assert.equal(result.acceptancePolicy.purpose, 'PRODUCTION_CALIBRATION_READINESS_NOT_SCIENTIFIC_QUALITY_THRESHOLD');
+  assert.ok(result.acceptancePolicy.requirements.every(item => Object.keys(item).sort().join(',') === 'criterionId,requiredState'));
+  assert.doesNotMatch(
+    JSON.stringify(result.acceptancePolicy),
+    /minimumImportedSessions|minimumKnownTargets|minimumAvailableAssessmentRatio|maximumInvalidAssessmentCount|minimumSqmEvidenceRatio/
+  );
   assert.equal(result.authority.acceptanceAuthority, false);
   assert.equal(result.authority.actionAuthority, 'NONE');
   assert.equal(result.authority.productionUseAuthorized, false);
+});
+
+test('even complete calibration inputs never grant production readiness automatically', () => {
+  const decision = buildF5Decision([{ criterionId: 'SYNTHETIC_FUTURE_INPUT', status: 'PASS' }]);
+  assert.equal(decision.calibrationInputReadiness, 'ELIGIBLE_FOR_CALIBRATION_REVIEW');
+  assert.equal(decision.productionReadiness, 'NOT_READY_FOR_PRODUCTION');
+  assert.equal(decision.productionProfileAuthorized, false);
+  assert.equal(decision.productionUseAuthorized, false);
 });
 
 test('stale projection fails closed', () => {
@@ -74,4 +87,10 @@ test('browser contract rejects a tampered production decision', async () => {
   const validation = JSON.parse(fs.readFileSync('docs/data/scientific-data-quality-f5-validation.json', 'utf8'));
   validation.decision.productionUseAuthorized = true;
   await assert.rejects(validateRealEvidenceFreshness(validation, projection, catalog), /production use authority drift/);
+});
+
+test('browser contract rejects unknown nested properties', async () => {
+  const validation = JSON.parse(fs.readFileSync('docs/data/scientific-data-quality-f5-validation.json', 'utf8'));
+  validation.cohort.legacyThreshold = 0.8;
+  await assert.rejects(validateRealEvidenceFreshness(validation, projection, catalog), /proprietà mancanti o sconosciute/);
 });

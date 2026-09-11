@@ -66,94 +66,180 @@
     "policyId": "DSG-SCIENTIFIC-QUALITY-PRODUCTION-READINESS-1",
     "policyVersion": "1.0.0",
     "purpose": "PRODUCTION_CALIBRATION_READINESS_NOT_SCIENTIFIC_QUALITY_THRESHOLD",
-    "requirements": {
-      "minimumImportedSessions": 30,
-      "minimumKnownTargets": 3,
-      "minimumAvailableAssessmentRatio": 0.8,
-      "maximumInvalidAssessmentCount": 0,
-      "minimumSqmEvidenceRatio": 0.8,
-      "requiredGuidingTemporalCoverageState": "GOVERNED_NON_ZERO",
-      "requiredGroundTruthState": "AVAILABLE",
-      "requiredProfileState": "CALIBRATED_ON_REAL_EVIDENCE"
-    }
+    "requirements": [
+      {
+        "criterionId": "COHORT_REPRESENTATIVENESS",
+        "requiredState": "DEMONSTRATED_BY_ACCEPTED_METHOD"
+      },
+      {
+        "criterionId": "ASSESSMENT_COVERAGE_ADEQUACY",
+        "requiredState": "DEMONSTRATED_BY_ACCEPTED_METHOD"
+      },
+      {
+        "criterionId": "SQM_COVERAGE_ADEQUACY",
+        "requiredState": "DEMONSTRATED_BY_ACCEPTED_METHOD"
+      },
+      {
+        "criterionId": "GUIDING_TEMPORAL_COVERAGE",
+        "requiredState": "GOVERNED_NON_ZERO_FOR_COHORT"
+      },
+      {
+        "criterionId": "REFERENCE_GROUND_TRUTH",
+        "requiredState": "AVAILABLE"
+      },
+      {
+        "criterionId": "PROFILE_CALIBRATION_STATE",
+        "requiredState": "CALIBRATED_ON_REAL_EVIDENCE"
+      },
+      {
+        "criterionId": "BOUND_CALIBRATION_STATE",
+        "requiredState": "CALIBRATED_ON_REAL_EVIDENCE"
+      }
+    ]
   },
   "results": [
     {
-      "criterionId": "MINIMUM_IMPORTED_SESSIONS",
+      "criterionId": "COHORT_REPRESENTATIVENESS",
       "status": "FAIL",
-      "observed": 15,
-      "required": 30,
-      "reason": "A production calibration cohort requires broader repeated evidence."
+      "observedState": "NOT_DEMONSTRATED",
+      "requiredState": "DEMONSTRATED_BY_ACCEPTED_METHOD",
+      "evidence": [
+        {
+          "name": "sessions",
+          "value": 15,
+          "unit": "count"
+        },
+        {
+          "name": "knownTargets",
+          "value": 2,
+          "unit": "count"
+        },
+        {
+          "name": "unknownTargets",
+          "value": 1,
+          "unit": "count"
+        }
+      ],
+      "reason": "No accepted method demonstrates that the current target distribution is representative."
     },
     {
-      "criterionId": "MINIMUM_KNOWN_TARGET_DIVERSITY",
+      "criterionId": "ASSESSMENT_COVERAGE_ADEQUACY",
       "status": "FAIL",
-      "observed": 2,
-      "required": 3,
-      "reason": "Target diversity limits generalization and must exclude UNKNOWN."
+      "observedState": "NOT_DEMONSTRATED",
+      "requiredState": "DEMONSTRATED_BY_ACCEPTED_METHOD",
+      "evidence": [
+        {
+          "name": "available",
+          "value": 5,
+          "unit": "count"
+        },
+        {
+          "name": "unavailable",
+          "value": 3,
+          "unit": "count"
+        },
+        {
+          "name": "invalid",
+          "value": 7,
+          "unit": "count"
+        }
+      ],
+      "reason": "No accepted method defines or demonstrates adequate assessment coverage for calibration."
     },
     {
-      "criterionId": "AVAILABLE_ASSESSMENT_RATIO",
+      "criterionId": "SQM_COVERAGE_ADEQUACY",
       "status": "FAIL",
-      "observed": 0.333333,
-      "required": 0.8,
-      "reason": "Unavailable or invalid records cannot silently enter calibration."
-    },
-    {
-      "criterionId": "INVALID_ASSESSMENT_COUNT",
-      "status": "FAIL",
-      "observed": 7,
-      "required": 0,
-      "reason": "Out-of-profile observations require a newly calibrated profile, not clamping."
-    },
-    {
-      "criterionId": "SQM_EVIDENCE_RATIO",
-      "status": "FAIL",
-      "observed": 0.533333,
-      "required": 0.8,
-      "reason": "Sky-quality evidence must cover most of the declared cohort."
+      "observedState": "NOT_DEMONSTRATED",
+      "requiredState": "DEMONSTRATED_BY_ACCEPTED_METHOD",
+      "evidence": [
+        {
+          "name": "available",
+          "value": 8,
+          "unit": "count"
+        },
+        {
+          "name": "missing",
+          "value": 7,
+          "unit": "count"
+        }
+      ],
+      "reason": "No accepted method demonstrates adequate SQM coverage for the cohort."
     },
     {
       "criterionId": "GUIDING_TEMPORAL_COVERAGE",
       "status": "FAIL",
-      "observed": "UNAVAILABLE",
-      "required": "GOVERNED_NON_ZERO",
+      "observedState": "UNAVAILABLE",
+      "requiredState": "GOVERNED_NON_ZERO_FOR_COHORT",
+      "evidence": [
+        {
+          "name": "governedNonZero",
+          "value": 0,
+          "unit": "count"
+        },
+        {
+          "name": "sessions",
+          "value": 15,
+          "unit": "count"
+        }
+      ],
       "reason": "Sample count without a governed temporal denominator is insufficient."
     },
     {
       "criterionId": "REFERENCE_GROUND_TRUTH",
       "status": "FAIL",
-      "observed": "UNAVAILABLE",
-      "required": "AVAILABLE",
+      "observedState": "UNAVAILABLE",
+      "requiredState": "AVAILABLE",
+      "evidence": [],
       "reason": "The repository contains no accepted final scientific quality ground truth."
     },
     {
       "criterionId": "PROFILE_CALIBRATION_STATE",
       "status": "FAIL",
-      "observed": "SYNTHETIC_DEMONSTRATOR_F3",
-      "required": "CALIBRATED_ON_REAL_EVIDENCE",
+      "observedState": "SYNTHETIC_DEMONSTRATOR_F3",
+      "requiredState": "CALIBRATED_ON_REAL_EVIDENCE",
+      "evidence": [
+        {
+          "name": "profileVersion",
+          "value": "1.0.0-f3",
+          "unit": "identifier"
+        }
+      ],
       "reason": "The F3 profile is a synthetic demonstrator and cannot be promoted implicitly."
+    },
+    {
+      "criterionId": "BOUND_CALIBRATION_STATE",
+      "status": "FAIL",
+      "observedState": "SYNTHETIC_BOUNDS_REJECT_REAL_OBSERVATIONS",
+      "requiredState": "CALIBRATED_ON_REAL_EVIDENCE",
+      "evidence": [
+        {
+          "name": "invalidAssessments",
+          "value": 7,
+          "unit": "count"
+        }
+      ],
+      "reason": "Real out-of-profile observations require calibrated bounds, not clamping or inferred limits."
     }
   ],
   "summary": {
     "passedCriteria": 0,
-    "failedCriteria": 8,
-    "totalCriteria": 8
+    "failedCriteria": 7,
+    "totalCriteria": 7
   },
   "decision": {
     "capabilityAcceptance": "ACCEPTED_AS_READ_ONLY_EXPERIMENTAL_WITH_RETAINED_LIMITATIONS",
+    "calibrationInputReadiness": "NOT_ELIGIBLE_FOR_CALIBRATION_REVIEW",
     "productionReadiness": "NOT_READY_FOR_PRODUCTION",
     "productionProfileAuthorized": false,
     "productionUseAuthorized": false,
     "reasonCodes": [
-      "MINIMUM_IMPORTED_SESSIONS",
-      "MINIMUM_KNOWN_TARGET_DIVERSITY",
-      "AVAILABLE_ASSESSMENT_RATIO",
-      "INVALID_ASSESSMENT_COUNT",
-      "SQM_EVIDENCE_RATIO",
+      "COHORT_REPRESENTATIVENESS",
+      "ASSESSMENT_COVERAGE_ADEQUACY",
+      "SQM_COVERAGE_ADEQUACY",
       "GUIDING_TEMPORAL_COVERAGE",
       "REFERENCE_GROUND_TRUTH",
-      "PROFILE_CALIBRATION_STATE"
+      "PROFILE_CALIBRATION_STATE",
+      "BOUND_CALIBRATION_STATE"
     ]
   },
   "biasDisclosure": [
@@ -175,5 +261,5 @@
     "actionAuthority": "NONE",
     "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
   },
-  "validationDigest": "f7520475db681e6d43ca5993c84e7737bbb251a35c41e4bae4fd0f1262891311"
+  "validationDigest": "16a37e15591a898f3e161a70014d971ac5873ecce4ba7786359466e60f22cab9"
 }

@@ -5,7 +5,6 @@ export const F5_VALIDATION_ID = 'BKL041-F5-REAL-EVIDENCE-V1';
 
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
 const finite = value => typeof value === 'number' && Number.isFinite(value);
-const ratio = (value, total) => total ? Number((value / total).toFixed(6)) : 0;
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
     Object.freeze(value);
@@ -18,20 +17,43 @@ export const F5_READINESS_POLICY = Object.freeze({
   policyId: 'DSG-SCIENTIFIC-QUALITY-PRODUCTION-READINESS-1',
   policyVersion: '1.0.0',
   purpose: 'PRODUCTION_CALIBRATION_READINESS_NOT_SCIENTIFIC_QUALITY_THRESHOLD',
-  requirements: Object.freeze({
-    minimumImportedSessions: 30,
-    minimumKnownTargets: 3,
-    minimumAvailableAssessmentRatio: 0.8,
-    maximumInvalidAssessmentCount: 0,
-    minimumSqmEvidenceRatio: 0.8,
-    requiredGuidingTemporalCoverageState: 'GOVERNED_NON_ZERO',
-    requiredGroundTruthState: 'AVAILABLE',
-    requiredProfileState: 'CALIBRATED_ON_REAL_EVIDENCE'
-  })
+  requirements: Object.freeze([
+    Object.freeze({ criterionId: 'COHORT_REPRESENTATIVENESS', requiredState: 'DEMONSTRATED_BY_ACCEPTED_METHOD' }),
+    Object.freeze({ criterionId: 'ASSESSMENT_COVERAGE_ADEQUACY', requiredState: 'DEMONSTRATED_BY_ACCEPTED_METHOD' }),
+    Object.freeze({ criterionId: 'SQM_COVERAGE_ADEQUACY', requiredState: 'DEMONSTRATED_BY_ACCEPTED_METHOD' }),
+    Object.freeze({ criterionId: 'GUIDING_TEMPORAL_COVERAGE', requiredState: 'GOVERNED_NON_ZERO_FOR_COHORT' }),
+    Object.freeze({ criterionId: 'REFERENCE_GROUND_TRUTH', requiredState: 'AVAILABLE' }),
+    Object.freeze({ criterionId: 'PROFILE_CALIBRATION_STATE', requiredState: 'CALIBRATED_ON_REAL_EVIDENCE' }),
+    Object.freeze({ criterionId: 'BOUND_CALIBRATION_STATE', requiredState: 'CALIBRATED_ON_REAL_EVIDENCE' })
+  ])
 });
 
-function result(id, observed, required, pass, reason) {
-  return { criterionId: id, status: pass ? 'PASS' : 'FAIL', observed, required, reason };
+function result(id, observedState, evidence, reason) {
+  const requirement = F5_READINESS_POLICY.requirements.find(item => item.criterionId === id);
+  assert(requirement, `Unknown readiness criterion: ${id}`);
+  return {
+    criterionId: id,
+    status: observedState === requirement.requiredState ? 'PASS' : 'FAIL',
+    observedState,
+    requiredState: requirement.requiredState,
+    evidence,
+    reason
+  };
+}
+
+const metric = (name, value, unit = 'count') => ({ name, value, unit });
+
+export function buildF5Decision(results) {
+  assert(Array.isArray(results) && results.length > 0, 'Readiness results are required.');
+  const failed = results.filter(item => item.status !== 'PASS');
+  return freeze({
+    capabilityAcceptance: 'ACCEPTED_AS_READ_ONLY_EXPERIMENTAL_WITH_RETAINED_LIMITATIONS',
+    calibrationInputReadiness: failed.length ? 'NOT_ELIGIBLE_FOR_CALIBRATION_REVIEW' : 'ELIGIBLE_FOR_CALIBRATION_REVIEW',
+    productionReadiness: 'NOT_READY_FOR_PRODUCTION',
+    productionProfileAuthorized: false,
+    productionUseAuthorized: false,
+    reasonCodes: failed.map(item => item.criterionId)
+  });
 }
 
 export function buildRealEvidenceValidation(catalog, projection) {
@@ -53,17 +75,14 @@ export function buildRealEvidenceValidation(catalog, projection) {
   const invalid = assessments.filter(x => x.projectionRecordState === 'INVALID').length;
   const count = predicate => sessions.filter(predicate).length;
   const guidingWithNonZeroCoverage = assessments.filter(item => item.inputEvidence?.some(e => e.dimension === 'GUIDING_STABILITY' && finite(e.coverage) && e.coverage > 0)).length;
-  const r = F5_READINESS_POLICY.requirements;
-
   const results = [
-    result('MINIMUM_IMPORTED_SESSIONS', sessions.length, r.minimumImportedSessions, sessions.length >= r.minimumImportedSessions, 'A production calibration cohort requires broader repeated evidence.'),
-    result('MINIMUM_KNOWN_TARGET_DIVERSITY', knownTargets.length, r.minimumKnownTargets, knownTargets.length >= r.minimumKnownTargets, 'Target diversity limits generalization and must exclude UNKNOWN.'),
-    result('AVAILABLE_ASSESSMENT_RATIO', ratio(available, sessions.length), r.minimumAvailableAssessmentRatio, ratio(available, sessions.length) >= r.minimumAvailableAssessmentRatio, 'Unavailable or invalid records cannot silently enter calibration.'),
-    result('INVALID_ASSESSMENT_COUNT', invalid, r.maximumInvalidAssessmentCount, invalid <= r.maximumInvalidAssessmentCount, 'Out-of-profile observations require a newly calibrated profile, not clamping.'),
-    result('SQM_EVIDENCE_RATIO', ratio(count(x => x.sqm?.state === 'AVAILABLE'), sessions.length), r.minimumSqmEvidenceRatio, ratio(count(x => x.sqm?.state === 'AVAILABLE'), sessions.length) >= r.minimumSqmEvidenceRatio, 'Sky-quality evidence must cover most of the declared cohort.'),
-    result('GUIDING_TEMPORAL_COVERAGE', guidingWithNonZeroCoverage ? 'GOVERNED_NON_ZERO' : 'UNAVAILABLE', r.requiredGuidingTemporalCoverageState, guidingWithNonZeroCoverage === sessions.length, 'Sample count without a governed temporal denominator is insufficient.'),
-    result('REFERENCE_GROUND_TRUTH', 'UNAVAILABLE', r.requiredGroundTruthState, false, 'The repository contains no accepted final scientific quality ground truth.'),
-    result('PROFILE_CALIBRATION_STATE', projection.profile.profileState, r.requiredProfileState, projection.profile.profileState === r.requiredProfileState, 'The F3 profile is a synthetic demonstrator and cannot be promoted implicitly.')
+    result('COHORT_REPRESENTATIVENESS', 'NOT_DEMONSTRATED', [metric('sessions', sessions.length), metric('knownTargets', knownTargets.length), metric('unknownTargets', targetDistribution.UNKNOWN ?? 0)], 'No accepted method demonstrates that the current target distribution is representative.'),
+    result('ASSESSMENT_COVERAGE_ADEQUACY', 'NOT_DEMONSTRATED', [metric('available', available), metric('unavailable', unavailable), metric('invalid', invalid)], 'No accepted method defines or demonstrates adequate assessment coverage for calibration.'),
+    result('SQM_COVERAGE_ADEQUACY', 'NOT_DEMONSTRATED', [metric('available', count(x => x.sqm?.state === 'AVAILABLE')), metric('missing', sessions.length - count(x => x.sqm?.state === 'AVAILABLE'))], 'No accepted method demonstrates adequate SQM coverage for the cohort.'),
+    result('GUIDING_TEMPORAL_COVERAGE', guidingWithNonZeroCoverage === sessions.length ? 'GOVERNED_NON_ZERO_FOR_COHORT' : 'UNAVAILABLE', [metric('governedNonZero', guidingWithNonZeroCoverage), metric('sessions', sessions.length)], 'Sample count without a governed temporal denominator is insufficient.'),
+    result('REFERENCE_GROUND_TRUTH', 'UNAVAILABLE', [], 'The repository contains no accepted final scientific quality ground truth.'),
+    result('PROFILE_CALIBRATION_STATE', projection.profile.profileState, [metric('profileVersion', projection.profile.profileVersion, 'identifier')], 'The F3 profile is a synthetic demonstrator and cannot be promoted implicitly.'),
+    result('BOUND_CALIBRATION_STATE', 'SYNTHETIC_BOUNDS_REJECT_REAL_OBSERVATIONS', [metric('invalidAssessments', invalid)], 'Real out-of-profile observations require calibrated bounds, not clamping or inferred limits.')
   ];
   const failed = results.filter(x => x.status === 'FAIL');
 
@@ -107,13 +126,7 @@ export function buildRealEvidenceValidation(catalog, projection) {
     acceptancePolicy: F5_READINESS_POLICY,
     results,
     summary: { passedCriteria: results.length - failed.length, failedCriteria: failed.length, totalCriteria: results.length },
-    decision: {
-      capabilityAcceptance: 'ACCEPTED_AS_READ_ONLY_EXPERIMENTAL_WITH_RETAINED_LIMITATIONS',
-      productionReadiness: failed.length ? 'NOT_READY_FOR_PRODUCTION' : 'READY_FOR_PRODUCTION_REVIEW',
-      productionProfileAuthorized: false,
-      productionUseAuthorized: false,
-      reasonCodes: failed.map(x => x.criterionId)
-    },
+    decision: buildF5Decision(results),
     biasDisclosure: [
       'AVAILABLE_ASSESSMENTS_ARE_ONLY_FOR_M27_IN_THE_CURRENT_COHORT',
       'TARGET_DISTRIBUTION_IS_STRONGLY_IMBALANCED',

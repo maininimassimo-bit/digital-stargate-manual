@@ -55,7 +55,7 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 
 BKL-037 resta read-only/descriptive-only e non autorizza ranking, score, threshold, recommendation, remediation, command path o Safety Authority.
 
-BKL-041 F1–F3 sono Accepted. F4 è Accepted tramite PR #162, merge `ed9ffcc92e1a5252b0d8c37634bc652397f3cde1`, con projection full-catalog, consumer e refresh automatico freshness-verified. F5 è l'incremento corrente per validation sulla cohort reale completa e closure. L'evidence corrente non autorizza un profilo produttivo: capability sperimentale read-only accettabile con limitation, production readiness `NOT_READY_FOR_PRODUCTION`.
+BKL-041 F1–F3 sono Accepted. F4 è Accepted tramite PR #162, merge `ed9ffcc92e1a5252b0d8c37634bc652397f3cde1`, con projection full-catalog, consumer e refresh automatico freshness-verified. F5 è l'incremento corrente per validation sulla cohort reale completa e closure. L'evidence corrente non autorizza un profilo produttivo: capability sperimentale read-only accettabile con limitation, production readiness `NOT_READY_FOR_PRODUCTION`. Conteggi e coverage sono evidence descrittiva, non threshold di accettazione.
 
 ## 6. Sequenza governata
 

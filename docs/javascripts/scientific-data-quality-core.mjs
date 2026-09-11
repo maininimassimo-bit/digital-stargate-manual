@@ -7,6 +7,12 @@ const requiredLimitations = [
 
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
 const nonEmpty = value => typeof value === 'string' && value.trim().length > 0;
+const exactKeys = (value, expected, label) => {
+  assert(value && typeof value === 'object' && !Array.isArray(value), `${label} non valido`);
+  const actual = Object.keys(value).sort();
+  const allowed = [...expected].sort();
+  assert(JSON.stringify(actual) === JSON.stringify(allowed), `${label} contiene proprietà mancanti o sconosciute`);
+};
 
 export function canonicalJson(value) {
   if (Array.isArray(value)) return `[${value.map(canonicalJson).join(',')}]`;
@@ -67,11 +73,22 @@ export async function validateProjectionFreshness(projection, catalog) {
 }
 
 export async function validateRealEvidenceFreshness(validation, projection, catalog) {
+  exactKeys(validation, ['schemaVersion', 'validationType', 'validationId', 'validationState', 'generatedAt', 'sourceCatalog', 'sourceProjection', 'cohort', 'acceptancePolicy', 'results', 'summary', 'decision', 'biasDisclosure', 'limitations', 'authority', 'validationDigest'], 'F5 validation');
+  exactKeys(validation.sourceCatalog, ['path', 'digest', 'sessionCount', 'sessionIds'], 'F5 sourceCatalog');
+  exactKeys(validation.sourceProjection, ['path', 'digest', 'projectionId', 'profileId', 'profileVersion'], 'F5 sourceProjection');
+  exactKeys(validation.cohort, ['cohortId', 'selectionRule', 'sessionCount', 'observedFrom', 'observedThrough', 'knownTargets', 'targetDistribution', 'evidenceAvailability', 'assessmentStates'], 'F5 cohort');
+  exactKeys(validation.cohort.evidenceAvailability, ['sourceMetrics', 'metadataLineage', 'acquisitionCompletion', 'guidingRms', 'guidingTemporalCoverage', 'sqm'], 'F5 evidenceAvailability');
+  exactKeys(validation.cohort.assessmentStates, ['available', 'unavailable', 'invalid'], 'F5 assessmentStates');
+  exactKeys(validation.acceptancePolicy, ['policyId', 'policyVersion', 'purpose', 'requirements'], 'F5 acceptancePolicy');
+  exactKeys(validation.summary, ['passedCriteria', 'failedCriteria', 'totalCriteria'], 'F5 summary');
+  exactKeys(validation.decision, ['capabilityAcceptance', 'calibrationInputReadiness', 'productionReadiness', 'productionProfileAuthorized', 'productionUseAuthorized', 'reasonCodes'], 'F5 decision');
+  exactKeys(validation.authority, ['consumerMode', 'productionUseAuthorized', 'acceptanceAuthority', 'actionAuthority', 'safetyAuthority'], 'F5 authority');
   assert(validation?.schemaVersion === '1.0', 'F5 validation schema non supportato');
   assert(validation?.validationType === 'SCIENTIFIC_DATA_QUALITY_REAL_EVIDENCE_VALIDATION', 'F5 validation type non valido');
   assert(validation?.validationState === 'COMPLETE', 'F5 validation incompleta');
   assert(validation?.decision?.capabilityAcceptance === 'ACCEPTED_AS_READ_ONLY_EXPERIMENTAL_WITH_RETAINED_LIMITATIONS', 'capability acceptance non autorizzata');
   assert(validation?.decision?.productionReadiness === 'NOT_READY_FOR_PRODUCTION', 'production readiness non supportata dalla evidence corrente');
+  assert(['NOT_ELIGIBLE_FOR_CALIBRATION_REVIEW', 'ELIGIBLE_FOR_CALIBRATION_REVIEW'].includes(validation?.decision?.calibrationInputReadiness), 'calibration input readiness non valida');
   assert(validation?.decision?.productionProfileAuthorized === false, 'production profile authority drift');
   assert(validation?.decision?.productionUseAuthorized === false, 'production use authority drift');
   assert(validation?.authority?.consumerMode === 'READ_ONLY', 'F5 consumer mode non read-only');
@@ -80,6 +97,19 @@ export async function validateRealEvidenceFreshness(validation, projection, cata
   assert(validation?.authority?.safetyAuthority === 'LOCAL_PHYSICAL_INTERLOCKS', 'F5 Safety Authority drift');
   assert(validation?.acceptancePolicy?.purpose === 'PRODUCTION_CALIBRATION_READINESS_NOT_SCIENTIFIC_QUALITY_THRESHOLD', 'readiness policy semantic drift');
   assert(Array.isArray(validation.results) && validation.results.length > 0, 'F5 readiness results mancanti');
+  assert(Array.isArray(validation.acceptancePolicy.requirements) && validation.acceptancePolicy.requirements.length === 7, 'F5 requirements incompleti');
+  const requirementIds = validation.acceptancePolicy.requirements.map(item => {
+    exactKeys(item, ['criterionId', 'requiredState'], 'F5 requirement');
+    return item.criterionId;
+  });
+  const resultIds = validation.results.map(item => {
+    exactKeys(item, ['criterionId', 'status', 'observedState', 'requiredState', 'evidence', 'reason'], 'F5 result');
+    assert(Array.isArray(item.evidence), 'F5 result evidence non valida');
+    item.evidence.forEach(metric => exactKeys(metric, ['name', 'value', 'unit'], 'F5 evidence metric'));
+    return item.criterionId;
+  });
+  assert(new Set(requirementIds).size === 7 && new Set(resultIds).size === 7, 'F5 criterion IDs duplicati');
+  assert(JSON.stringify([...requirementIds].sort()) === JSON.stringify([...resultIds].sort()), 'F5 requirement/result mismatch');
   assert(validation.sourceCatalog?.digest === await sha256(catalog), 'STALE_F5_CATALOG_DIGEST_MISMATCH');
   assert(validation.sourceProjection?.digest === projection.projectionDigest, 'STALE_F5_PROJECTION_DIGEST_MISMATCH');
   assert(JSON.stringify(validation.sourceCatalog.sessionIds) === JSON.stringify(projection.sourceCatalog.sessionIds), 'STALE_F5_SESSION_SET_MISMATCH');

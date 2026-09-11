@@ -15,7 +15,7 @@
     "sourceProjection": { "$ref": "#/$defs/sourceProjection" },
     "cohort": { "$ref": "#/$defs/cohort" },
     "acceptancePolicy": { "$ref": "#/$defs/policy" },
-    "results": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/result" } },
+    "results": { "type": "array", "minItems": 7, "maxItems": 7, "items": { "$ref": "#/$defs/result" } },
     "summary": { "$ref": "#/$defs/summary" },
     "decision": { "$ref": "#/$defs/decision" },
     "biasDisclosure": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
@@ -25,13 +25,134 @@
   },
   "$defs": {
     "digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
-    "sourceCatalog": { "type": "object", "additionalProperties": false, "required": ["path", "digest", "sessionCount", "sessionIds"], "properties": { "path": { "const": "docs/data/scientific-session-catalog.json" }, "digest": { "$ref": "#/$defs/digest" }, "sessionCount": { "type": "integer", "minimum": 0 }, "sessionIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } } } },
-    "sourceProjection": { "type": "object", "additionalProperties": false, "required": ["path", "digest", "projectionId", "profileId", "profileVersion"], "properties": { "path": { "const": "docs/data/scientific-data-quality-projection.json" }, "digest": { "$ref": "#/$defs/digest" }, "projectionId": { "type": "string" }, "profileId": { "type": "string" }, "profileVersion": { "type": "string" } } },
-    "cohort": { "type": "object", "additionalProperties": true, "required": ["cohortId", "selectionRule", "sessionCount", "knownTargets", "targetDistribution", "evidenceAvailability", "assessmentStates"], "properties": { "cohortId": { "const": "ALL-CANONICAL-IMPORTED-SESSIONS-F5" }, "selectionRule": { "const": "ALL_SESSIONS_IN_CANONICAL_CATALOG_NO_OUTCOME_FILTERING" }, "sessionCount": { "type": "integer", "minimum": 0 }, "knownTargets": { "type": "array", "items": { "type": "string" } }, "targetDistribution": { "type": "object" }, "evidenceAvailability": { "type": "object" }, "assessmentStates": { "type": "object" } } },
-    "policy": { "type": "object", "additionalProperties": false, "required": ["policyId", "policyVersion", "purpose", "requirements"], "properties": { "policyId": { "const": "DSG-SCIENTIFIC-QUALITY-PRODUCTION-READINESS-1" }, "policyVersion": { "const": "1.0.0" }, "purpose": { "const": "PRODUCTION_CALIBRATION_READINESS_NOT_SCIENTIFIC_QUALITY_THRESHOLD" }, "requirements": { "type": "object" } } },
-    "result": { "type": "object", "additionalProperties": false, "required": ["criterionId", "status", "observed", "required", "reason"], "properties": { "criterionId": { "type": "string", "minLength": 1 }, "status": { "enum": ["PASS", "FAIL"] }, "observed": {}, "required": {}, "reason": { "type": "string", "minLength": 1 } } },
-    "summary": { "type": "object", "additionalProperties": false, "required": ["passedCriteria", "failedCriteria", "totalCriteria"], "properties": { "passedCriteria": { "type": "integer", "minimum": 0 }, "failedCriteria": { "type": "integer", "minimum": 0 }, "totalCriteria": { "type": "integer", "minimum": 1 } } },
-    "decision": { "type": "object", "additionalProperties": false, "required": ["capabilityAcceptance", "productionReadiness", "productionProfileAuthorized", "productionUseAuthorized", "reasonCodes"], "properties": { "capabilityAcceptance": { "const": "ACCEPTED_AS_READ_ONLY_EXPERIMENTAL_WITH_RETAINED_LIMITATIONS" }, "productionReadiness": { "const": "NOT_READY_FOR_PRODUCTION" }, "productionProfileAuthorized": { "const": false }, "productionUseAuthorized": { "const": false }, "reasonCodes": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string" } } } },
-    "authority": { "type": "object", "additionalProperties": false, "required": ["consumerMode", "productionUseAuthorized", "acceptanceAuthority", "actionAuthority", "safetyAuthority"], "properties": { "consumerMode": { "const": "READ_ONLY" }, "productionUseAuthorized": { "const": false }, "acceptanceAuthority": { "const": false }, "actionAuthority": { "const": "NONE" }, "safetyAuthority": { "const": "LOCAL_PHYSICAL_INTERLOCKS" } } }
+    "sourceCatalog": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "digest", "sessionCount", "sessionIds"],
+      "properties": {
+        "path": { "const": "docs/data/scientific-session-catalog.json" },
+        "digest": { "$ref": "#/$defs/digest" },
+        "sessionCount": { "type": "integer", "minimum": 0 },
+        "sessionIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "sourceProjection": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "digest", "projectionId", "profileId", "profileVersion"],
+      "properties": {
+        "path": { "const": "docs/data/scientific-data-quality-projection.json" },
+        "digest": { "$ref": "#/$defs/digest" },
+        "projectionId": { "type": "string", "minLength": 1 },
+        "profileId": { "type": "string", "minLength": 1 },
+        "profileVersion": { "type": "string", "minLength": 1 }
+      }
+    },
+    "countMap": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+    "evidenceAvailability": {
+      "type": "object", "additionalProperties": false,
+      "required": ["sourceMetrics", "metadataLineage", "acquisitionCompletion", "guidingRms", "guidingTemporalCoverage", "sqm"],
+      "properties": {
+        "sourceMetrics": { "type": "integer", "minimum": 0 },
+        "metadataLineage": { "type": "integer", "minimum": 0 },
+        "acquisitionCompletion": { "type": "integer", "minimum": 0 },
+        "guidingRms": { "type": "integer", "minimum": 0 },
+        "guidingTemporalCoverage": { "type": "integer", "minimum": 0 },
+        "sqm": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "assessmentStates": {
+      "type": "object", "additionalProperties": false,
+      "required": ["available", "unavailable", "invalid"],
+      "properties": {
+        "available": { "type": "integer", "minimum": 0 },
+        "unavailable": { "type": "integer", "minimum": 0 },
+        "invalid": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "cohort": {
+      "type": "object", "additionalProperties": false,
+      "required": ["cohortId", "selectionRule", "sessionCount", "observedFrom", "observedThrough", "knownTargets", "targetDistribution", "evidenceAvailability", "assessmentStates"],
+      "properties": {
+        "cohortId": { "const": "ALL-CANONICAL-IMPORTED-SESSIONS-F5" },
+        "selectionRule": { "const": "ALL_SESSIONS_IN_CANONICAL_CATALOG_NO_OUTCOME_FILTERING" },
+        "sessionCount": { "type": "integer", "minimum": 0 },
+        "observedFrom": { "type": ["string", "null"] },
+        "observedThrough": { "type": ["string", "null"] },
+        "knownTargets": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "targetDistribution": { "$ref": "#/$defs/countMap" },
+        "evidenceAvailability": { "$ref": "#/$defs/evidenceAvailability" },
+        "assessmentStates": { "$ref": "#/$defs/assessmentStates" }
+      }
+    },
+    "requirement": {
+      "type": "object", "additionalProperties": false,
+      "required": ["criterionId", "requiredState"],
+      "properties": {
+        "criterionId": { "enum": ["COHORT_REPRESENTATIVENESS", "ASSESSMENT_COVERAGE_ADEQUACY", "SQM_COVERAGE_ADEQUACY", "GUIDING_TEMPORAL_COVERAGE", "REFERENCE_GROUND_TRUTH", "PROFILE_CALIBRATION_STATE", "BOUND_CALIBRATION_STATE"] },
+        "requiredState": { "type": "string", "minLength": 1 }
+      }
+    },
+    "policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["policyId", "policyVersion", "purpose", "requirements"],
+      "properties": {
+        "policyId": { "const": "DSG-SCIENTIFIC-QUALITY-PRODUCTION-READINESS-1" },
+        "policyVersion": { "const": "1.0.0" },
+        "purpose": { "const": "PRODUCTION_CALIBRATION_READINESS_NOT_SCIENTIFIC_QUALITY_THRESHOLD" },
+        "requirements": { "type": "array", "minItems": 7, "maxItems": 7, "items": { "$ref": "#/$defs/requirement" } }
+      }
+    },
+    "metric": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "value", "unit"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "value": { "type": ["number", "string"] },
+        "unit": { "enum": ["count", "identifier"] }
+      }
+    },
+    "result": {
+      "type": "object", "additionalProperties": false,
+      "required": ["criterionId", "status", "observedState", "requiredState", "evidence", "reason"],
+      "properties": {
+        "criterionId": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["PASS", "FAIL"] },
+        "observedState": { "type": "string", "minLength": 1 },
+        "requiredState": { "type": "string", "minLength": 1 },
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/metric" } },
+        "reason": { "type": "string", "minLength": 1 }
+      }
+    },
+    "summary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["passedCriteria", "failedCriteria", "totalCriteria"],
+      "properties": {
+        "passedCriteria": { "type": "integer", "minimum": 0 },
+        "failedCriteria": { "type": "integer", "minimum": 0 },
+        "totalCriteria": { "const": 7 }
+      }
+    },
+    "decision": {
+      "type": "object", "additionalProperties": false,
+      "required": ["capabilityAcceptance", "calibrationInputReadiness", "productionReadiness", "productionProfileAuthorized", "productionUseAuthorized", "reasonCodes"],
+      "properties": {
+        "capabilityAcceptance": { "const": "ACCEPTED_AS_READ_ONLY_EXPERIMENTAL_WITH_RETAINED_LIMITATIONS" },
+        "calibrationInputReadiness": { "enum": ["NOT_ELIGIBLE_FOR_CALIBRATION_REVIEW", "ELIGIBLE_FOR_CALIBRATION_REVIEW"] },
+        "productionReadiness": { "const": "NOT_READY_FOR_PRODUCTION" },
+        "productionProfileAuthorized": { "const": false },
+        "productionUseAuthorized": { "const": false },
+        "reasonCodes": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "authority": {
+      "type": "object", "additionalProperties": false,
+      "required": ["consumerMode", "productionUseAuthorized", "acceptanceAuthority", "actionAuthority", "safetyAuthority"],
+      "properties": {
+        "consumerMode": { "const": "READ_ONLY" },
+        "productionUseAuthorized": { "const": false },
+        "acceptanceAuthority": { "const": false },
+        "actionAuthority": { "const": "NONE" },
+        "safetyAuthority": { "const": "LOCAL_PHYSICAL_INTERLOCKS" }
+      }
+    }
   }
 }

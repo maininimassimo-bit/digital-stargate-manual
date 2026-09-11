@@ -81,7 +81,7 @@ BKL-037 è chiuso come capability read-only/descriptive-only dopo F1-F5, PR #147
 
 ### BKL-041 increment note — 11/09/2026
 
-BKL-041 F1–F3 sono Accepted. F4 è Accepted tramite PR #162, merge `ed9ffcc92e1a5252b0d8c37634bc652397f3cde1`, ARB 98/100, Release Quality `READY FOR MERGE` e Pages #761 verde. F5 è corrente: valuta tutte le 15 sessioni reali senza outcome filtering e propone closure della capability sperimentale read-only con limitation. Gli 8 gate di readiness produttiva non sono soddisfatti; nessun profilo o uso produttivo è autorizzato.
+BKL-041 F1–F3 sono Accepted. F4 è Accepted tramite PR #162, merge `ed9ffcc92e1a5252b0d8c37634bc652397f3cde1`, ARB 98/100, Release Quality `READY FOR MERGE` e Pages #761 verde. F5 è corrente: valuta tutte le 15 sessioni reali senza outcome filtering e propone closure della capability sperimentale read-only con limitation. I 7 stati richiesti per una futura calibration review non sono dimostrati; nessun threshold quantitativo, profilo o uso produttivo è autorizzato.
 
 ## 4. Sequenza di esecuzione raccomandata
 
