@@ -14,6 +14,8 @@ on:
       - "docs/data/ai-post-processing-assistant-f2-fixture.json"
       - "docs/data/ai-post-processing-assistant-f3-output.json"
       - "docs/architecture/scientific-assets/BKL-046-F3-*.md"
+      - "docs/architecture/reviews/ARB-BKL-046-F3-*.md"
+      - "docs/architecture/reviews/RQ-BKL-046-F3-*.md"
   pull_request:
     paths:
       - ".github/scripts/ai-post-processing-advisory-contract.mjs"
@@ -26,6 +28,8 @@ on:
       - "docs/data/ai-post-processing-assistant-f2-fixture.json"
       - "docs/data/ai-post-processing-assistant-f3-output.json"
       - "docs/architecture/scientific-assets/BKL-046-F3-*.md"
+      - "docs/architecture/reviews/ARB-BKL-046-F3-*.md"
+      - "docs/architecture/reviews/RQ-BKL-046-F3-*.md"
 
 permissions:
   contents: read
