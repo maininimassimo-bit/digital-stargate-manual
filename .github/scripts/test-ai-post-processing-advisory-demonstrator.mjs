@@ -86,6 +86,16 @@ test('complete valid processing evidence passes without inventing parameters', (
   assert.deepEqual(recommendation.parameterAdvice, []);
 });
 
+test('missing required source authority produces an explicit fail-closed result', () => {
+  const fixture = clone();
+  fixture.sourceBindings[1].sourceAuthority = 'projection';
+  resealFixture(fixture, { sources: [1] });
+  const result = buildDeterministicAdvisoryDemonstration(fixture);
+  const gate = evaluation(result, 'PROCESSING_HISTORY_AVAILABILITY');
+  assert.equal(gate.decision, 'FAIL_CLOSED');
+  assert.deepEqual(gate.reasonCodes, ['REQUIRED_SOURCE_AUTHORITY_MISSING']);
+});
+
 test('stale governance evidence fails closed', () => {
   const fixture = clone();
   fixture.sourceBindings[0].quality = 'STALE';

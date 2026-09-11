@@ -224,7 +224,11 @@ export function validateDeterministicAdvisoryOutput(output) {
     const recommendation = recommendationById.get(evaluation.recommendationId);
     const rule = RULES.find((item) => item.ruleId === evaluation.ruleId);
     const actualAuthorities = new Set(recommendation.sourceBindingRefs.map((ref) => sourceById.get(ref)?.sourceAuthority));
-    assert(actualAuthorities.size === 1 && actualAuthorities.has(rule.sourceAuthority), `Rule ${evaluation.ruleId} references the wrong source authority.`);
+    if (evaluation.reasonCodes.includes('REQUIRED_SOURCE_AUTHORITY_MISSING')) {
+      assert(!actualAuthorities.has(rule.sourceAuthority), `Rule ${evaluation.ruleId} reports a missing authority that is present.`);
+    } else {
+      assert(actualAuthorities.size === 1 && actualAuthorities.has(rule.sourceAuthority), `Rule ${evaluation.ruleId} references the wrong source authority.`);
+    }
     if (evaluation.decision === 'PASS') {
       assert(recommendation.lifecycleState === 'validated' && recommendation.category === 'QUALITY_CHECK', `Rule ${evaluation.ruleId} PASS must reference a validated QUALITY_CHECK.`);
       assert(recommendation.unknowns.length === 0, `Rule ${evaluation.ruleId} PASS cannot carry unknowns.`);
