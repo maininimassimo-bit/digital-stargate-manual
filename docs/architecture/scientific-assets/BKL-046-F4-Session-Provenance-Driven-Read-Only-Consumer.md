@@ -177,7 +177,7 @@ Artefatti F4-B:
 - projection versionata `docs/data/ai-post-processing-advisory-projection.json`;
 - integrazione nello stesso orchestration/commit delle altre projection scientifiche.
 
-La baseline reale al momento dell'implementazione contiene 15 sessioni nel catalogo e un sidecar BKL-045 non correlabile esattamente: la projection misura quindi 15 record, zero provenance match, una source non correlata e 15 gate `PROCESSING_HISTORY_AVAILABILITY=FAIL_CLOSED`. Questo è un risultato valido e atteso, non un errore di popolamento: nessuna sessione viene soppressa e nessuna provenance viene associata tramite target, data o similarità.
+La baseline reale al momento dell'implementazione contiene 15 sessioni nel catalogo e due sidecar BKL-045 non correlabili esattamente: la projection misura quindi 15 record, zero provenance match, due source non correlate e 15 gate `PROCESSING_HISTORY_AVAILABILITY=FAIL_CLOSED`. Questo è un risultato valido e atteso, non un errore di popolamento: nessuna sessione viene soppressa e nessuna provenance viene associata tramite target, data o similarità.
 
 In modalità `--write`, il generator non riscrive il file quando cambia soltanto il clock. In modalità `--check`, riusa `generatedAt` persistito e richiede uguaglianza completa. Il workflow invoca `--write`, `--check` e il verifier sia nel primo percorso sia dentro `regenerate()` dopo `git reset --hard origin/main`; la projection è inclusa in `governed_paths` e viene quindi pubblicata atomicamente con il catalogo aggiornato.
 
