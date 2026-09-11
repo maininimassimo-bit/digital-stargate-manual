@@ -3,12 +3,12 @@
 | Campo | Valore |
 |---|---|
 | Stato | Current technical continuity baseline |
-| Data | 10/09/2026 |
+| Data | 11/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
-| Accepted main baseline | `6d48318c460bad040fd0754b0300fbcd76a2d312` |
+| Accepted main baseline | `4ca5135043c508288fa2ba41b744f29b3b9032ed` |
 | Current governed package | BKL-041 — Scientific Data Quality Score |
-| Current increment | F2 — Machine-readable Quality Evidence and Profile Contract |
-| Accepted predecessor | BKL-041 F1; BKL-037 capability closure |
+| Current increment | F3 — Deterministic Scoring and Confidence Engine |
+| Accepted predecessor | BKL-041 F2; BKL-041 F1; BKL-037 capability closure |
 
 ## 1. Accepted comparison foundation
 
@@ -24,18 +24,18 @@ BKL-037 F1-F5 e la projection dynamic full-catalog sono CLOSED / ACCEPTED / POST
 
 F1 source discovery e semantic contract è Accepted tramite PR #159, merge `6d48318c460bad040fd0754b0300fbcd76a2d312`. Ha definito dimensioni candidate, normalization/weighting governance, confidence, explainability, missing-data behavior, provenance, bias e authority senza implementare uno score.
 
-## 3. Current BKL-041 F2
+## 3. Accepted BKL-041 F2 and current F3
 
-F2 deve rendere eseguibili soltanto `QualityEvidence`, `AssessmentProfile` e `DimensionAssessment` mediante:
+F2 è Accepted tramite PR #160, merge `4ca5135043c508288fa2ba41b744f29b3b9032ed`. Ha reso eseguibili `QualityEvidence`, `AssessmentProfile` e `DimensionAssessment` mediante:
 
 - JSON Schema versionato;
 - identity deterministica e known-answer digest;
 - fixture bounded positive;
 - casi negativi per missing evidence, unità, FWHM calibration, PixInsight completeness, evidence class e authority;
 - validator fail-closed;
-- divieto eseguibile di score, peso, normalizzazione, contribution e confidence numerica.
+- divieto eseguibile F2 di score, peso, normalizzazione, contribution e confidence numerica.
 
-F3 resta il primo incremento autorizzabile per normalizzazioni, weight set e scoring engine, dopo acceptance F2 e nuova review.
+F3 è ora l'incremento governato per normalizzazioni, weight set, scoring engine, confidence e decomposition. Il profilo è esclusivamente un dimostratore sintetico versionato: non rappresenta una calibrazione scientifica produttiva e non autorizza threshold, ranking, consumer o acceptance.
 
 ## 4. Data and provenance constraints
 
@@ -45,11 +45,11 @@ F3 resta il primo incremento autorizzabile per normalizzazioni, weight set e sco
 - missing evidence resta missing;
 - `OBSERVED`, `DECLARED` e `SUGGESTED` non sono intercambiabili;
 - FWHM source-native non calibrato non può essere promosso ad arcsec;
-- schema e fixture F2 non sono projection di produzione.
+- schema e fixture F2/F3 non sono projection di produzione.
 
 ## 5. Dynamic update boundary
 
-F2 non modifica il flusso di import. Il requisito vincolante per F4 resta: la futura projection e il consumer BKL-041 devono rigenerarsi automaticamente dopo ogni nuova sessione scientifica importata tramite la pipeline governata, senza manutenzione manuale dei dati derivati.
+F3 non modifica il flusso di import. Il requisito vincolante per F4 resta: la futura projection e il consumer BKL-041 devono rigenerarsi automaticamente dopo ogni nuova sessione scientifica importata tramite la pipeline governata, senza manutenzione manuale dei dati derivati e con freshness verificabile.
 
 ## 6. Runtime e safety
 
@@ -57,5 +57,4 @@ Nessuna modifica a EAGLE, servizi, scheduler, collector o apparati. Gli interloc
 
 ## 7. Next validation
 
-F2 richiede test locali e CI exact-head, ARB senza blocker/major e Release Quality recommendation. Nessuna acceptance F2 implica autorizzazione automatica per F3/F4.
-
+F3 richiede test locali e CI exact-head, ARB senza blocker/major e Release Quality recommendation. Nessuna acceptance F3 implica autorizzazione automatica per F4 o per un profilo produttivo.

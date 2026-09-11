@@ -2,8 +2,8 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 2.7 |
-| Baseline | 10/09/2026 |
+| Versione | 2.8 |
+| Baseline | 11/09/2026 |
 | Stato | Current root bootstrap — BKL-041 Scientific Data Quality Score |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
@@ -55,7 +55,7 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 
 BKL-037 resta read-only/descriptive-only e non autorizza ranking, score, threshold, recommendation, remediation, command path o Safety Authority.
 
-BKL-041 F1 è Accepted tramite PR #159, merge `6d48318c460bad040fd0754b0300fbcd76a2d312`. F2 è l'incremento corrente per rendere machine-readable evidence, profilo e dimension assessment; non autorizza ancora algoritmo, pesi, soglie, classi GOOD/BAD, acceptance authority o decisioni Safety.
+BKL-041 F1 è Accepted tramite PR #159, merge `6d48318c460bad040fd0754b0300fbcd76a2d312`. F2 è Accepted tramite PR #160, merge `4ca5135043c508288fa2ba41b744f29b3b9032ed`. F3 è l'incremento corrente per il motore deterministico di normalizzazione, scoring e confidence con profilo esclusivamente sintetico; consumer, threshold, ranking, acceptance authority, decisioni Safety e aggiornamento dinamico restano esclusi.
 
 ## 6. Sequenza governata
 
@@ -71,4 +71,4 @@ Nessun portale, comparison layer, quality score o AI è Safety Authority. Nessun
 
 ## 9. Punto di partenza operativo
 
-Completare **BKL-041 F2 — Machine-readable Quality Evidence and Profile Contract**. Validare schema, identity SHA-256, fixture bounded, unità, missing evidence, versioni e authority fail-closed. Non introdurre score aggregato, pesi numerici, normalizzazione, confidence numerica, threshold o ranking: tali elementi appartengono a F3 dopo acceptance F2.
+Completare **BKL-041 F3 — Deterministic Scoring and Confidence Engine**. Validare profilo e algoritmo versionati, identity SHA-256, known answer sintetico, decomposition, sensitivity, missing-data behavior e authority fail-closed. Non introdurre consumer portale, dati produttivi, threshold, classi GOOD/BAD, ranking o automazioni operative; l'aggiornamento automatico dopo ogni nuova sessione importata resta requisito obbligatorio di F4.

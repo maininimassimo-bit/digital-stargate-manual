@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 4.8 |
+| Versione | 4.9 |
 | Stato | Active |
-| Data baseline | 10/09/2026 |
+| Data baseline | 11/09/2026 |
 
 ## 1. Scopo
 
@@ -59,7 +59,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-038 | P2 | Anomaly & Trend Center | Done | BKL-030, BKL-040 | Trend e pattern di degrado | F1/F2-A/F3-A/F3-B/F4-A accepted; PR #125 merge `d8249984d63455690b957156060f858eb3cc2713`; closure `docs/project/BKL-038-CLOSURE-2026-09-09.md` |
 | BKL-039 | P2 | Equipment Performance Registry | Done | BKL-015, session history | Prestazioni storiche setup/componenti | F4-A/F4-B/F5-A/F5-B/F5-C/F5-D CLOSED/ACCEPTED; PR #132 merge `651fc340fbb5e58ca36409d574bdd09c3ae55790`; closure `docs/project/BKL-039-CLOSURE-2026-09-09.md` |
 | BKL-040 | P2 | Night Timeline / Observatory Replay | Done | BKL-015/BKL-044, historical telemetry | Replay sincronizzato della notte | F1-F4 CLOSED/ACCEPTED; PR #117 merge `80d22a255540ac582733c60dfe9bbf7807bcdf9b`; closure `docs/project/BKL-040-CLOSURE-2026-09-08.md` |
-| BKL-041 | P2 | Scientific Data Quality Score | In Progress | BKL-029, BKL-037, BKL-045 | Quality score scientifico spiegabile | F1 Accepted via PR #159, merge `6d48318c460bad040fd0754b0300fbcd76a2d312`; F2 current for machine-readable evidence/profile/dimension contract, deterministic identity, bounded fixture and fail-closed validation; no score or numeric weights authorized |
+| BKL-041 | P2 | Scientific Data Quality Score | In Progress | BKL-029, BKL-037, BKL-045 | Quality score scientifico spiegabile | F1 Accepted via PR #159; F2 Accepted via PR #160, merge `4ca5135043c508288fa2ba41b744f29b3b9032ed`; F3 current for deterministic scoring/confidence with versioned synthetic demonstrator profile; portal consumer and automatic session refresh remain F4 |
 | BKL-042 | P2 | AI Observatory Assistant | Planned | BKL-015/BKL-044 e intelligence services | Copilot read-only per diagnosis/RCA/planning/science | Functional Roadmap Expansion |
 | BKL-043 | P2 | Observatory Reliability Engineering | Planned | BKL-030/BKL-038/BKL-042 | SLI/SLO, MTBF, MTTR, session completion e failure budget | Functional Roadmap Expansion |
 | BKL-044 | P1 | Knowledge Graph / AI Evidence Contract | Done | BKL-015 | Provenance stabile per AP/ADR/assets/session/target/incident/telemetry/processing/AI | F1-F4 CLOSED/ACCEPTED; PR #104 merge `b7c01ba7221818e1971403ab3befe38c8e40cc54`; closure `docs/project/BKL-044-CLOSURE-2026-09-07.md` |
@@ -79,9 +79,9 @@ La canonical roadmap source resta `.github/roadmap/roadmap-source.json`; `docs/d
 
 BKL-037 è chiuso come capability read-only/descriptive-only dopo F1-F5, PR #147 e la riconciliazione di closure. BKL-041 è promosso a package corrente esclusivamente per avviare source discovery e semantic contract dello Scientific Data Quality Score: la promozione non autorizza scoring operativo, soglie implicite, ranking, raccomandazioni, remediation, device command o Safety Authority.
 
-### BKL-041 increment note — 10/09/2026
+### BKL-041 increment note — 11/09/2026
 
-BKL-041 F1 è Accepted tramite PR #159, merge `6d48318c460bad040fd0754b0300fbcd76a2d312`, ARB 98/100 e Release Quality `READY FOR MERGE`. F2 è l'incremento corrente: introduce esclusivamente il contratto machine-readable per `QualityEvidence`, `AssessmentProfile` e `DimensionAssessment`, con identity deterministica, fixture bounded e validator fail-closed. Formula, pesi numerici, confidence numerica, score, threshold, ranking e consumer restano fuori scope.
+BKL-041 F1 è Accepted tramite PR #159. F2 è Accepted tramite PR #160, merge `4ca5135043c508288fa2ba41b744f29b3b9032ed`, ARB 98/100 e Release Quality `READY FOR MERGE`. F3 è l'incremento corrente: introduce algoritmo, scale, bounds, pesi e confidence versionati tramite un profilo dimostrativo esclusivamente sintetico, con known answer, decomposition, sensitivity e failure behavior. Dati e calibrazione produttivi, threshold, ranking, consumer, acceptance authority e Safety Authority restano fuori scope; il refresh automatico dopo ogni sessione importata rimane obbligatorio per F4.
 
 ## 4. Sequenza di esecuzione raccomandata
 
