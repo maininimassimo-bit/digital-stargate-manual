@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maininimassimo-bit.github.io/digital-stargate-manual/contracts/ai-post-processing-assistant-f4.schema.json",
+  "title": "BKL-046 F4-A source-mapped pre-advisory projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "projectionType", "projectionState", "identityMethod",
+    "projectionId", "generatedAt", "producer", "producerVersion", "methodId",
+    "downstreamRuleMethodId", "sourceCatalog", "sourceSet", "records", "summary",
+    "authority", "limitations", "projectionDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "projectionType": { "const": "AI_POST_PROCESSING_ASSISTANT_F4_SOURCE_PROJECTION" },
+    "projectionState": { "const": "SOURCE_MAPPED_PRE_ADVISORY" },
+    "identityMethod": { "const": "BKL046-F4-CANONICAL-JSON-SHA256-1" },
+    "projectionId": { "type": "string", "pattern": "^BKL046-F4A-[A-F0-9]{24}$" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "producer": { "const": "DSG.AiPostProcessingAdvisorySourceProjection" },
+    "producerVersion": { "const": "1.0.0-f4a" },
+    "methodId": { "const": "BKL046-F4A-EXACT-CORRELATION-1" },
+    "downstreamRuleMethodId": { "const": "BKL046-F3-CLOSED-RULES-1" },
+    "sourceCatalog": { "$ref": "#/$defs/sourceCatalog" },
+    "sourceSet": { "$ref": "#/$defs/sourceSet" },
+    "records": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/record" }
+    },
+    "summary": { "$ref": "#/$defs/summary" },
+    "authority": { "$ref": "#/$defs/authority" },
+    "limitations": { "$ref": "#/$defs/limitations" },
+    "projectionDigest": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "nonEmpty": { "type": "string", "minLength": 1 },
+    "nullableNonEmpty": { "type": ["string", "null"], "minLength": 1 },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/nonEmpty" }
+    },
+    "repositoryPath": {
+      "type": "string",
+      "pattern": "^docs/architecture/scientific-assets/evidence/BKL-045-F3B-PXP-[0-9]{8}T[0-9]{9}Z-[A-Z0-9][A-Z0-9_-]{0,31}\\.json$"
+    },
+    "sourceCatalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "digest", "sessionCount", "sessionIds"],
+      "properties": {
+        "path": { "const": "docs/data/scientific-session-catalog.json" },
+        "digest": { "$ref": "#/$defs/digest" },
+        "sessionCount": { "type": "integer", "minimum": 0 },
+        "sessionIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/nonEmpty" }
+        }
+      }
+    },
+    "sourceSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["validationMode", "digest", "entries"],
+      "properties": {
+        "validationMode": { "const": "RAW_BUILD_TIME_SANITIZED_PUBLIC_SNAPSHOT" },
+        "digest": { "$ref": "#/$defs/digest" },
+        "entries": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/sourceEntry" }
+        }
+      }
+    },
+    "sourceEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "digest", "sidecarId", "exportedAt", "sessionId", "target", "workflowId", "completeness", "limitations"],
+      "properties": {
+        "path": { "$ref": "#/$defs/repositoryPath" },
+        "digest": { "$ref": "#/$defs/digest" },
+        "sidecarId": { "type": "string", "pattern": "^PXP-" },
+        "exportedAt": { "type": "string", "format": "date-time" },
+        "sessionId": { "$ref": "#/$defs/nonEmpty" },
+        "target": { "$ref": "#/$defs/nullableNonEmpty" },
+        "workflowId": { "$ref": "#/$defs/nonEmpty" },
+        "completeness": { "enum": ["COMPLETE", "PARTIAL", "UNAVAILABLE"] },
+        "limitations": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/nonEmpty" }
+        }
+      }
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subjectId", "subjectType", "sessionRef", "workflowRef", "correlationState"],
+      "properties": {
+        "subjectId": { "type": "string", "pattern": "^SESSION-[A-F0-9]{24}$" },
+        "subjectType": { "const": "PIXINSIGHT_WORKFLOW" },
+        "sessionRef": { "$ref": "#/$defs/nonEmpty" },
+        "workflowRef": { "$ref": "#/$defs/nullableNonEmpty" },
+        "correlationState": { "enum": ["RESOLVED", "PARTIAL"] }
+      }
+    },
+    "authorityBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceAuthority", "sourceRef", "lifecycleState", "quality", "completeness"],
+      "properties": {
+        "sourceAuthority": { "enum": ["repository_authority", "processing_evidence"] },
+        "sourceRef": { "$ref": "#/$defs/nonEmpty" },
+        "lifecycleState": { "const": "validated" },
+        "quality": { "enum": ["VALID", "UNKNOWN"] },
+        "completeness": { "enum": ["COMPLETE", "PARTIAL", "UNAVAILABLE"] }
+      }
+    },
+    "advisoryInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subject", "repositoryAuthority", "processingEvidence"],
+      "properties": {
+        "subject": { "$ref": "#/$defs/subject" },
+        "repositoryAuthority": { "$ref": "#/$defs/authorityBinding" },
+        "processingEvidence": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/authorityBinding" }
+          ]
+        }
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recordId", "sessionId", "target", "correlationState", "sourceRefs", "advisoryInput", "gateState", "reasonCodes", "recommendationState", "recordDigest"],
+      "properties": {
+        "recordId": { "type": "string", "pattern": "^F4A-[A-F0-9]{24}$" },
+        "sessionId": { "$ref": "#/$defs/nonEmpty" },
+        "target": { "$ref": "#/$defs/nullableNonEmpty" },
+        "correlationState": { "enum": ["PROVENANCE_MATCHED", "PROVENANCE_UNAVAILABLE", "CORRELATION_AMBIGUOUS", "CORRELATION_INVALID"] },
+        "sourceRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/repositoryPath" }
+        },
+        "advisoryInput": { "$ref": "#/$defs/advisoryInput" },
+        "gateState": { "enum": ["SOURCE_READY", "FAIL_CLOSED"] },
+        "reasonCodes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/nonEmpty" }
+        },
+        "recommendationState": { "const": "NOT_GENERATED_F4A" },
+        "recordDigest": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["totalSessions", "provenanceMatched", "provenanceUnavailable", "correlationAmbiguous", "correlationInvalid", "sourceReady", "failClosed", "uncorrelatedSources"],
+      "properties": {
+        "totalSessions": { "type": "integer", "minimum": 0 },
+        "provenanceMatched": { "type": "integer", "minimum": 0 },
+        "provenanceUnavailable": { "type": "integer", "minimum": 0 },
+        "correlationAmbiguous": { "type": "integer", "minimum": 0 },
+        "correlationInvalid": { "type": "integer", "minimum": 0 },
+        "sourceReady": { "type": "integer", "minimum": 0 },
+        "failClosed": { "type": "integer", "minimum": 0 },
+        "uncorrelatedSources": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["consumerMode", "advisoryOnly", "acceptanceAuthority", "actionAuthority", "executionAuthority", "safetyAuthority", "pixInsightApplyAuthorized", "automaticAcceptanceAuthorized"],
+      "properties": {
+        "consumerMode": { "const": "READ_ONLY" },
+        "advisoryOnly": { "const": true },
+        "acceptanceAuthority": { "const": "HUMAN_ONLY" },
+        "actionAuthority": { "const": "NONE" },
+        "executionAuthority": { "const": "NONE" },
+        "safetyAuthority": { "const": "LOCAL_PHYSICAL_INTERLOCKS" },
+        "pixInsightApplyAuthorized": { "const": false },
+        "automaticAcceptanceAuthorized": { "const": false }
+      }
+    }
+  }
+}

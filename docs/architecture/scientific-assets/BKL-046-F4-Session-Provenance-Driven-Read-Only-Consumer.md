@@ -3,12 +3,12 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-046-F4 |
-| Stato | Proposed |
-| Versione | 1.0 |
+| Stato | In delivery — F4-A implemented; F4-B/F4-C pending |
+| Versione | 1.1 |
 | Data | 11/09/2026 |
 | Package | BKL-046 — AI Post-Processing Assistant for PixInsight |
 | Baseline F3 | PR #169, merge `8339aecf0b6b7fa19396561b20253c0411fd7ee7` — Accepted |
-| Baseline repository | `ec4eb991bd9e20bcd34b00e111400a5ac07fd750` |
+| Baseline repository | `594f57c3c25d5571e0ebccdea67a70b536952dc8` |
 | Authority | Session/provenance-driven, deterministic, read-only, human-only and non-Safety |
 
 ## 1. Purpose
@@ -145,6 +145,23 @@ L'envelope deve contenere almeno:
 - authority chiusa e `projectionDigest` SHA-256 canonico.
 
 `generatedAt` è metadata di pubblicazione e non può influenzare regole, Recommendation ID o classificazione. In modalità `--check` viene riusato il timestamp persistito; una scrittura non avviene quando l'unica differenza sarebbe il clock.
+
+### 7.1 F4-A implementation decision
+
+F4-A implementa il contratto intermedio `SOURCE_MAPPED_PRE_ADVISORY`, non persistito dal workflow di import e non consumato dal browser. Questa separazione è intenzionale: il demonstrator F3 accettato è bounded e sintetico, quindi non viene presentato come motore già autorizzato per input operativi reali. F4-B completerà l'adapter delle regole, la projection finale persistita e l'integrazione atomica post-import.
+
+Artefatti F4-A implementati:
+
+- schema chiuso `docs/contracts/ai-post-processing-assistant-f4.schema.json`;
+- allowlist e validator build-time in `.github/scripts/ai-post-processing-advisory-projection.mjs`;
+- correlation/source-mapping builder deterministico con record digest e projection digest;
+- test negativi e gate `.github/workflows/bkl-046-f4-governance.yml`.
+
+L'allowlist eseguibile ammette esclusivamente path repository-relative nella directory evidence BKL-045, con filename `BKL-045-F3B-PXP-<UTC timestamp>-<bounded suffix>.json`. Path assoluti, backslash, traversal, file estranei, duplicati di path e duplicati di `sidecarId` vengono rifiutati. Il catalogo determina comunque l'intera popolazione; sidecar non correlati non creano sessioni F4.
+
+Per la privacy è adottata la strategia **raw validation at build time + sanitized public snapshot**. Il raw sidecar può contenere campi operativi necessari alla source evidence, ma la projection espone soltanto path repository-relative, digest, identità sidecar/session/workflow, timestamp, target, completeness e limitation. `hostId`, `workspaceId`, path locali, payload immagine e secret non entrano nel contratto pubblico. In F4-C il browser verificherà catalog digest, source-set digest e projection digest senza scaricare i raw sidecar.
+
+F4-A non genera Recommendation: ogni record dichiara `recommendationState=NOT_GENERATED_F4A`; missingness, ambiguità e mismatch producono `FAIL_CLOSED`. Questo evita di attribuire al runtime F3 sintetico una capability reale non ancora implementata e mantiene F4-B come gate esplicito prima della pubblicazione dinamica.
 
 ## 8. Deterministic mapping to F3
 

@@ -1,0 +1,66 @@
+name: BKL-046 F4 governance
+
+on:
+  pull_request:
+    paths:
+      - '.github/scripts/ai-post-processing-advisory-*.mjs'
+      - '.github/scripts/test-ai-post-processing-advisory-*.mjs'
+      - '.github/workflows/bkl-046-f4-governance.yml'
+      - 'docs/contracts/ai-post-processing-assistant-f4.schema.json'
+      - 'docs/architecture/scientific-assets/BKL-046-F4-Session-Provenance-Driven-Read-Only-Consumer.md'
+      - 'docs/architecture/scientific-assets/evidence/BKL-045-F3B-PXP-*.json'
+      - 'docs/data/scientific-session-catalog.json'
+  push:
+    branches: [main]
+    paths:
+      - '.github/scripts/ai-post-processing-advisory-*.mjs'
+      - '.github/scripts/test-ai-post-processing-advisory-*.mjs'
+      - '.github/workflows/bkl-046-f4-governance.yml'
+      - 'docs/contracts/ai-post-processing-assistant-f4.schema.json'
+      - 'docs/architecture/scientific-assets/BKL-046-F4-Session-Provenance-Driven-Read-Only-Consumer.md'
+      - 'docs/architecture/scientific-assets/evidence/BKL-045-F3B-PXP-*.json'
+      - 'docs/data/scientific-session-catalog.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bkl-046-f4-governance-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  f4-contract:
+    name: F4 source/projection contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Parse F4 JSON Schema
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/contracts/ai-post-processing-assistant-f4.schema.json', 'utf8'))"
+      - name: Test F4 source discovery and projection mapping
+        run: node --test .github/scripts/test-ai-post-processing-advisory-projection.mjs
+      - name: Validate current governed catalog and BKL-045 sources
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import {
+            buildAdvisorySourceProjection,
+            discoverProvenanceSources
+          } from './.github/scripts/ai-post-processing-advisory-projection.mjs';
+          const catalog = JSON.parse(fs.readFileSync('docs/data/scientific-session-catalog.json', 'utf8'));
+          const provenanceSources = await discoverProvenanceSources('.');
+          const projection = buildAdvisorySourceProjection({
+            catalog,
+            provenanceSources,
+            generatedAt: new Date(0).toISOString()
+          });
+          console.log(JSON.stringify(projection.summary));
+          NODE
+      - name: Regress F2 semantic contract
+        run: node --test .github/scripts/test-ai-post-processing-advisory-contract.mjs
+      - name: Regress F3 deterministic demonstrator
+        run: node --test .github/scripts/test-ai-post-processing-advisory-demonstrator.mjs
