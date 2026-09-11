@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0",
+  "fixtureType": "SCIENTIFIC_DATA_QUALITY_F3_KNOWN_ANSWER",
+  "fixtureMode": "BOUNDED_SYNTHETIC_FIXTURE",
+  "sessionId": "SYNTHETIC-F3-SESSION",
+  "profile": {
+    "profileId": "DSG-SCIENTIFIC-QUALITY-SYNTHETIC-DEMONSTRATOR",
+    "profileVersion": "1.0.0-f3",
+    "profileState": "SYNTHETIC_DEMONSTRATOR_F3",
+    "algorithmId": "DSG-WEIGHTED-LINEAR-SCORE",
+    "algorithmVersion": "1.0.0",
+    "scoreScale": {"min": 0, "max": 100, "roundingDigits": 2},
+    "confidenceMethod": {
+      "methodId": "DSG-EVIDENCE-SUPPORT-PRODUCT",
+      "methodVersion": "1.0.0",
+      "semantic": "EVIDENCE_SUPPORT_NOT_PROBABILITY",
+      "evidenceClassFactors": {"OBSERVED": 1, "DECLARED": 0.8, "SUGGESTED": 0},
+      "qualityFactors": {"VALID": 1, "STALE": 0, "UNKNOWN": 0, "INVALID": 0},
+      "completenessFactors": {"COMPLETE": 1, "PARTIAL": 0.5, "UNAVAILABLE": 0},
+      "calibrationFactors": {"PROVEN": 1, "NOT_PROVEN": 0, "NOT_APPLICABLE": 1, "UNKNOWN": 0}
+    },
+    "dimensions": [
+      {"dimension": "METADATA_LINEAGE_INTEGRITY", "requirement": "REQUIRED", "weight": 0.2, "unit": "ratio", "normalization": {"type": "LINEAR", "min": 0, "max": 1, "direction": "HIGHER_IS_BETTER", "outOfRangePolicy": "REJECT"}},
+      {"dimension": "ACQUISITION_COMPLETION", "requirement": "REQUIRED", "weight": 0.3, "unit": "ratio", "normalization": {"type": "LINEAR", "min": 0, "max": 1, "direction": "HIGHER_IS_BETTER", "outOfRangePolicy": "REJECT"}},
+      {"dimension": "GUIDING_STABILITY", "requirement": "REQUIRED", "weight": 0.25, "unit": "arcsec", "normalization": {"type": "LINEAR", "min": 0.5, "max": 3, "direction": "LOWER_IS_BETTER", "outOfRangePolicy": "REJECT"}},
+      {"dimension": "SKY_QUALITY_COVERAGE", "requirement": "REQUIRED", "weight": 0.25, "unit": "mag/arcsec2", "normalization": {"type": "LINEAR", "min": 18, "max": 21.5, "direction": "HIGHER_IS_BETTER", "outOfRangePolicy": "REJECT"}},
+      {"dimension": "OPTICAL_IMAGE_QUALITY", "requirement": "OPTIONAL", "weight": 0, "unit": "arcsec", "normalization": {"type": "LINEAR", "min": 0.5, "max": 5, "direction": "LOWER_IS_BETTER", "outOfRangePolicy": "REJECT"}},
+      {"dimension": "WEATHER_CONTEXT", "requirement": "CONTEXT_ONLY", "weight": 0, "unit": "ratio", "normalization": {"type": "LINEAR", "min": 0, "max": 1, "direction": "HIGHER_IS_BETTER", "outOfRangePolicy": "REJECT"}}
+    ],
+    "limitations": ["All bounds and weights are synthetic F3 demonstrator parameters and are not calibrated for production sessions, targets, filters or setups."],
+    "profileDigest": "7bf87e894d26054e51c97b10e9519fb5861926d0770de968b3f9d74a7b97f157"
+  },
+  "dimensions": [
+    {"dimension": "METADATA_LINEAGE_INTEGRITY", "value": 1, "unit": "ratio", "evidenceClass": "DECLARED", "quality": "VALID", "completeness": "COMPLETE", "coverage": 1, "calibrationState": "NOT_APPLICABLE", "eligibility": "ELIGIBLE_FOR_FUTURE_NORMALIZATION", "evidenceRefs": ["SYN-EV-METADATA"]},
+    {"dimension": "ACQUISITION_COMPLETION", "value": 0.75, "unit": "ratio", "evidenceClass": "DECLARED", "quality": "VALID", "completeness": "COMPLETE", "coverage": 1, "calibrationState": "NOT_APPLICABLE", "eligibility": "ELIGIBLE_FOR_FUTURE_NORMALIZATION", "evidenceRefs": ["SYN-EV-ACQUISITION"]},
+    {"dimension": "GUIDING_STABILITY", "value": 1.25, "unit": "arcsec", "evidenceClass": "DECLARED", "quality": "VALID", "completeness": "COMPLETE", "coverage": 0.8, "calibrationState": "NOT_APPLICABLE", "eligibility": "ELIGIBLE_FOR_FUTURE_NORMALIZATION", "evidenceRefs": ["SYN-EV-GUIDING"]},
+    {"dimension": "SKY_QUALITY_COVERAGE", "value": 20.5, "unit": "mag/arcsec2", "evidenceClass": "DECLARED", "quality": "VALID", "completeness": "COMPLETE", "coverage": 0.9, "calibrationState": "NOT_APPLICABLE", "eligibility": "ELIGIBLE_FOR_FUTURE_NORMALIZATION", "evidenceRefs": ["SYN-EV-SQM"]}
+  ],
+  "authority": {"consumerMode": "READ_ONLY", "acceptanceAuthority": false, "actionAuthority": "NONE", "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"},
+  "expected": {"assessmentState": "AVAILABLE", "scoreValue": 77.86, "confidenceValue": 74, "evidenceCoverage": 0.925, "assessmentDigest": "ff60a5e8d828d8e4d9cf38337072fdbcb5cbd20d2e4ab15573fadf318a16f57d"},
+  "limitations": ["Synthetic known-answer only; no production session, benchmark, ranking or acceptance decision."],
+  "fixtureDigest": "76cd598af546a146411af8a294b287098029f71c9b190a20e9d5eb3305328181"
+}

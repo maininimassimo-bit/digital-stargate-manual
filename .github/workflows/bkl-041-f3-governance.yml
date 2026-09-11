@@ -1,0 +1,42 @@
+name: BKL-041 F3 Governance
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/scripts/scientific-data-quality-contract.mjs"
+      - ".github/scripts/scientific-data-quality-scoring.mjs"
+      - ".github/scripts/verify-scientific-data-quality-scoring.mjs"
+      - ".github/scripts/test-scientific-data-quality-scoring.mjs"
+      - ".github/workflows/bkl-041-f3-governance.yml"
+      - "docs/contracts/scientific-data-quality-f3.schema.json"
+      - "docs/data/scientific-data-quality-f3-fixture.json"
+      - "docs/architecture/scientific-assets/BKL-041-F3-*.md"
+  pull_request:
+    paths:
+      - ".github/scripts/scientific-data-quality-contract.mjs"
+      - ".github/scripts/scientific-data-quality-scoring.mjs"
+      - ".github/scripts/verify-scientific-data-quality-scoring.mjs"
+      - ".github/scripts/test-scientific-data-quality-scoring.mjs"
+      - ".github/workflows/bkl-041-f3-governance.yml"
+      - "docs/contracts/scientific-data-quality-f3.schema.json"
+      - "docs/data/scientific-data-quality-f3-fixture.json"
+      - "docs/architecture/scientific-assets/BKL-041-F3-*.md"
+
+permissions:
+  contents: read
+
+jobs:
+  scoring-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify schema and synthetic known answer
+        run: node .github/scripts/verify-scientific-data-quality-scoring.mjs
+      - name: Test determinism, sensitivity and fail-closed boundaries
+        run: node --test .github/scripts/test-scientific-data-quality-scoring.mjs

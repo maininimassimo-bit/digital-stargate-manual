@@ -3,11 +3,12 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-041-F2 |
-| Stato | Proposed |
+| Stato | Accepted |
 | Versione | 1.0 |
 | Data | 10/09/2026 |
 | Package | BKL-041 — Scientific Data Quality Score |
 | Baseline F1 | `6d48318c460bad040fd0754b0300fbcd76a2d312` — Accepted |
+| Acceptance | PR #160, merge `4ca5135043c508288fa2ba41b744f29b3b9032ed` |
 | Authority | Repository-governed analytical contract; read-only and non-Safety |
 
 ## 1. Scopo
