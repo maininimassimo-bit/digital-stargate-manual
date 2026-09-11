@@ -2,7 +2,7 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 2.8 |
+| Versione | 2.9 |
 | Baseline | 11/09/2026 |
 | Stato | Current root bootstrap — BKL-041 Scientific Data Quality Score |
 
@@ -55,7 +55,7 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 
 BKL-037 resta read-only/descriptive-only e non autorizza ranking, score, threshold, recommendation, remediation, command path o Safety Authority.
 
-BKL-041 F1 è Accepted tramite PR #159, merge `6d48318c460bad040fd0754b0300fbcd76a2d312`. F2 è Accepted tramite PR #160, merge `4ca5135043c508288fa2ba41b744f29b3b9032ed`. F3 è l'incremento corrente per il motore deterministico di normalizzazione, scoring e confidence con profilo esclusivamente sintetico; consumer, threshold, ranking, acceptance authority, decisioni Safety e aggiornamento dinamico restano esclusi.
+BKL-041 F1 è Accepted tramite PR #159, merge `6d48318c460bad040fd0754b0300fbcd76a2d312`. F2 è Accepted tramite PR #160, merge `4ca5135043c508288fa2ba41b744f29b3b9032ed`. F3 è Accepted tramite PR #161, merge `89d8979fa4e5b151d85ef889efe03ad468efcad1`. F4 è l'incremento corrente: projection full-catalog e consumer portale devono rigenerarsi automaticamente dopo ogni sessione importata e fallire chiuso quando stale. Il profilo resta esclusivamente sintetico e ogni output è `EXPERIMENTAL_NOT_ACCEPTED`.
 
 ## 6. Sequenza governata
 
@@ -71,4 +71,4 @@ Nessun portale, comparison layer, quality score o AI è Safety Authority. Nessun
 
 ## 9. Punto di partenza operativo
 
-Completare **BKL-041 F3 — Deterministic Scoring and Confidence Engine**. Validare profilo e algoritmo versionati, identity SHA-256, known answer sintetico, decomposition, sensitivity, missing-data behavior e authority fail-closed. Non introdurre consumer portale, dati produttivi, threshold, classi GOOD/BAD, ranking o automazioni operative; l'aggiornamento automatico dopo ogni nuova sessione importata resta requisito obbligatorio di F4.
+Completare **BKL-041 F4 — Session-Driven Projection and Portal Consumer**. Validare mapping catalog-driven, rigenerazione atomica post-import, identity/freshness SHA-256, stale behavior fail-closed e presentazione congiunta di score, confidence, coverage, decomposition ed exclusions. Non introdurre calibrazione produttiva, threshold, classi GOOD/BAD, ranking, acceptance o automazioni operative; F5 resta responsabile della validazione su evidence reale e della closure.

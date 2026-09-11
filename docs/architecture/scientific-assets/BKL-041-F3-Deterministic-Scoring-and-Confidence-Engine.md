@@ -3,11 +3,12 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-041-F3 |
-| Stato | Proposed |
+| Stato | Accepted |
 | Versione | 1.0 |
 | Data | 11/09/2026 |
 | Package | BKL-041 — Scientific Data Quality Score |
 | Baseline F2 | `4ca5135043c508288fa2ba41b744f29b3b9032ed` — Accepted via PR #160 |
+| Acceptance F3 | PR #161, merge `89d8979fa4e5b151d85ef889efe03ad468efcad1` |
 | Authority | Repository-governed analytical engine; read-only, non-operational and non-Safety |
 
 ## 1. Decisione
@@ -181,3 +182,7 @@ F4 dovrà definire trigger, source-of-truth, ricalcolo per profile version, comp
 - authority read-only/non-Safety è fail-closed;
 - CI exact-head, ARB e Release Quality sono completati prima del merge;
 - F4 dynamic update requirement resta esplicito e tracciato.
+
+## 14. Acceptance record
+
+F3 è Accepted tramite PR #161 e merge `89d8979fa4e5b151d85ef889efe03ad468efcad1`. La review indipendente ARB ha espresso `APPROVED` con punteggio 98/100; Release Quality ha espresso `READY FOR MERGE` senza waiver. I gate exact-head applicabili sul commit `33c7360152c961bfcedec38cf0d10f26f77e9733` sono risultati `SUCCESS`.

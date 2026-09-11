@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maininimassimo-bit.github.io/digital-stargate-manual/contracts/scientific-data-quality-f4.schema.json",
+  "title": "BKL-041 F4 session-driven scientific data quality projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "projectionType", "projectionId", "projectionState", "generatedAt", "sourceCatalog", "profile", "summary", "assessments", "limitations", "publication", "authority", "projectionDigest"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "projectionType": {"const": "SCIENTIFIC_DATA_QUALITY_PROJECTION"},
+    "projectionId": {"const": "BKL041-F4-CATALOG-V1"},
+    "projectionState": {"const": "EXPERIMENTAL_NOT_ACCEPTED"},
+    "generatedAt": {"type": "string", "format": "date-time"},
+    "sourceCatalog": {"$ref": "#/$defs/sourceCatalog"},
+    "profile": {"$ref": "#/$defs/profile"},
+    "summary": {"$ref": "#/$defs/summary"},
+    "assessments": {"type": "array", "items": {"$ref": "#/$defs/record"}},
+    "limitations": {"type": "array", "minItems": 5, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "publication": {"$ref": "#/$defs/publication"},
+    "authority": {"$ref": "#/$defs/authority"},
+    "projectionDigest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "sourceCatalog": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "schemaVersion", "catalogStatus", "digest", "sessionCount", "sessionIds"],
+      "properties": {
+        "path": {"const": "docs/data/scientific-session-catalog.json"},
+        "schemaVersion": {"type": "string", "minLength": 1},
+        "catalogStatus": {"const": "VERSIONED_ANALYTICS_PROJECTION"},
+        "digest": {"$ref": "#/$defs/digest"},
+        "sessionCount": {"type": "integer", "minimum": 0},
+        "sessionIds": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "profile": {
+      "type": "object", "additionalProperties": false,
+      "required": ["profileId", "profileVersion", "profileState", "profileDigest", "algorithmId", "algorithmVersion"],
+      "properties": {
+        "profileId": {"const": "DSG-SCIENTIFIC-QUALITY-SYNTHETIC-DEMONSTRATOR"},
+        "profileVersion": {"const": "1.0.0-f3"},
+        "profileState": {"const": "SYNTHETIC_DEMONSTRATOR_F3"},
+        "profileDigest": {"$ref": "#/$defs/digest"},
+        "algorithmId": {"const": "DSG-WEIGHTED-LINEAR-SCORE"},
+        "algorithmVersion": {"const": "1.0.0"}
+      }
+    },
+    "summary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["totalSessions", "availableAssessments", "unavailableAssessments", "invalidAssessments"],
+      "properties": {
+        "totalSessions": {"type": "integer", "minimum": 0},
+        "availableAssessments": {"type": "integer", "minimum": 0},
+        "unavailableAssessments": {"type": "integer", "minimum": 0},
+        "invalidAssessments": {"type": "integer", "minimum": 0}
+      }
+    },
+    "inputEvidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["dimension", "value", "unit", "evidenceClass", "quality", "completeness", "coverage", "calibrationState", "eligibility", "evidenceRefs"],
+      "properties": {
+        "dimension": {"type": "string", "minLength": 1},
+        "value": {"type": "number"},
+        "unit": {"type": "string", "minLength": 1},
+        "evidenceClass": {"const": "DECLARED"},
+        "quality": {"const": "VALID"},
+        "completeness": {"const": "COMPLETE"},
+        "coverage": {"type": "number", "minimum": 0, "maximum": 1},
+        "calibrationState": {"const": "NOT_APPLICABLE"},
+        "eligibility": {"const": "ELIGIBLE_FOR_FUTURE_NORMALIZATION"},
+        "evidenceRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "generationError": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "object", "additionalProperties": false, "required": ["code", "message"], "properties": {"code": {"enum": ["PROFILE_VALUE_OUT_OF_RANGE", "ASSESSMENT_REJECTED_FAIL_CLOSED"]}, "message": {"type": "string", "minLength": 1}}}
+      ]
+    },
+    "record": {
+      "type": "object", "additionalProperties": false,
+      "required": ["sessionId", "target", "observedAt", "sourceMetricsPath", "inputEvidence", "projectionRecordState", "assessment", "generationError"],
+      "properties": {
+        "sessionId": {"type": "string", "minLength": 1},
+        "target": {"type": "string", "minLength": 1},
+        "observedAt": {"type": ["string", "null"]},
+        "sourceMetricsPath": {"type": ["string", "null"]},
+        "inputEvidence": {"type": "array", "items": {"$ref": "#/$defs/inputEvidence"}},
+        "projectionRecordState": {"enum": ["AVAILABLE", "UNAVAILABLE", "INVALID"]},
+        "assessment": {"type": ["object", "null"]},
+        "generationError": {"$ref": "#/$defs/generationError"}
+      }
+    },
+    "publication": {
+      "type": "object", "additionalProperties": false,
+      "required": ["trigger", "atomicCommitPath", "freshnessMethod"],
+      "properties": {
+        "trigger": {"const": "ANALYZE_SESSION_AUTOMATIC_AFTER_COMPLETE_IMPORT"},
+        "atomicCommitPath": {"const": "docs/data/scientific-session-catalog.json"},
+        "freshnessMethod": {"const": "CANONICAL_SOURCE_CATALOG_SHA256_MATCH"}
+      }
+    },
+    "authority": {
+      "type": "object", "additionalProperties": false,
+      "required": ["consumerMode", "productionUseAuthorized", "acceptanceAuthority", "actionAuthority", "safetyAuthority"],
+      "properties": {
+        "consumerMode": {"const": "READ_ONLY"},
+        "productionUseAuthorized": {"const": false},
+        "acceptanceAuthority": {"const": false},
+        "actionAuthority": {"const": "NONE"},
+        "safetyAuthority": {"const": "LOCAL_PHYSICAL_INTERLOCKS"}
+      }
+    }
+  }
+}

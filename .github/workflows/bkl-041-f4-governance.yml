@@ -1,0 +1,60 @@
+name: BKL-041 F4 Governance
+
+on:
+  pull_request:
+    paths:
+      - '.github/scripts/generate-scientific-data-quality-projection.mjs'
+      - '.github/scripts/scientific-data-quality-projection.mjs'
+      - '.github/scripts/test-scientific-data-quality-projection.mjs'
+      - '.github/scripts/test-scientific-data-quality-consumer.mjs'
+      - '.github/scripts/verify-scientific-data-quality-projection.mjs'
+      - '.github/workflows/analyze-session-automatic.yml'
+      - '.github/workflows/bkl-041-f4-governance.yml'
+      - 'mkdocs.yml'
+      - 'docs/architecture/scientific-assets/BKL-041-F4-*.md'
+      - 'docs/contracts/scientific-data-quality-f4.schema.json'
+      - 'docs/data/scientific-data-quality-projection.json'
+      - 'docs/javascripts/scientific-data-quality*.js'
+      - 'docs/javascripts/scientific-data-quality*.mjs'
+      - 'docs/javascripts/page-enhancements.js'
+      - 'docs/scientific-data-quality/**'
+      - 'docs/styles/scientific-data-quality.css'
+  push:
+    branches: [main]
+    paths:
+      - '.github/scripts/generate-scientific-data-quality-projection.mjs'
+      - '.github/scripts/scientific-data-quality-projection.mjs'
+      - '.github/scripts/test-scientific-data-quality-projection.mjs'
+      - '.github/scripts/test-scientific-data-quality-consumer.mjs'
+      - '.github/scripts/verify-scientific-data-quality-projection.mjs'
+      - '.github/workflows/analyze-session-automatic.yml'
+      - '.github/workflows/bkl-041-f4-governance.yml'
+      - 'mkdocs.yml'
+      - 'docs/architecture/scientific-assets/BKL-041-F4-*.md'
+      - 'docs/contracts/scientific-data-quality-f4.schema.json'
+      - 'docs/data/scientific-data-quality-projection.json'
+      - 'docs/javascripts/scientific-data-quality*.js'
+      - 'docs/javascripts/scientific-data-quality*.mjs'
+      - 'docs/javascripts/page-enhancements.js'
+      - 'docs/scientific-data-quality/**'
+      - 'docs/styles/scientific-data-quality.css'
+
+permissions: { contents: read }
+
+jobs:
+  projection-and-consumer-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: Verify persisted projection, freshness and automatic pipeline contract
+        run: node .github/scripts/verify-scientific-data-quality-projection.mjs
+      - name: Verify generator idempotency
+        run: node .github/scripts/generate-scientific-data-quality-projection.mjs --check
+      - name: Test projection and stale/failure behavior
+        run: node --test .github/scripts/test-scientific-data-quality-projection.mjs .github/scripts/test-scientific-data-quality-consumer.mjs
+      - name: Test F3 scoring regression
+        run: node --test .github/scripts/test-scientific-data-quality-scoring.mjs
+      - name: Check browser modules
+        run: node --check docs/javascripts/scientific-data-quality-core.mjs && node --check docs/javascripts/scientific-data-quality.js

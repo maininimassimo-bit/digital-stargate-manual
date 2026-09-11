@@ -98,6 +98,7 @@
         ['Scientific Platform', 'scientific-platform/'],
         ['Analytics Center', 'analytics/'],
         ['Session Comparison', 'session-comparison/'],
+        ['Scientific Data Quality', 'scientific-data-quality/'],
         ['Anomaly & Trend', 'anomaly-trend-center/'],
         ['Equipment Performance', 'equipment-performance/']
       ])}
