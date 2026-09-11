@@ -3,12 +3,13 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-046-F2 |
-| Stato | Proposed |
+| Stato | Accepted |
 | Versione | 1.0 |
 | Data | 11/09/2026 |
 | Package | BKL-046 — AI Post-Processing Assistant for PixInsight |
 | Baseline F1 | `3f2e3edae93b009f5800a58a4ac5afc4f04e9bb7` — Accepted |
 | Baseline di sviluppo | `fc4c82fdaa0cd1a3c438c9b6a0ad58ec1e54925d` |
+| Acceptance | PR #167, merge `b8a9025fdfc9b5254b9c79a5c37a775b4f8fd083` |
 | Authority | Repository-governed advisory contract; read-only, non-executing and non-Safety |
 
 ## 1. Purpose

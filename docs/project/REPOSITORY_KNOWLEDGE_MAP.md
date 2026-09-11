@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 2.4 |
+| Versione | 2.5 |
 | Stato | Active |
 | Data | 11/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
@@ -43,7 +43,7 @@ Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimen
 
 ## 6. BKL-041 closed and BKL-046 current
 
-BKL-041 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability sperimentale read-only; production readiness resta `NOT_READY_FOR_PRODUCTION`. BKL-046 F1 è CLOSED / ACCEPTED tramite PR #165, merge `3f2e3edae93b009f5800a58a4ac5afc4f04e9bb7`. F2 è current per Recommendation e Human Decision Receipt machine-readable, mantenendo separata execution evidence e senza selezionare model/provider o apply path.
+BKL-041 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability sperimentale read-only; production readiness resta `NOT_READY_FOR_PRODUCTION`. BKL-046 F1 e F2 sono CLOSED / ACCEPTED; F2 è stato integrato tramite PR #167, merge `b8a9025fdfc9b5254b9c79a5c37a775b4f8fd083`. F3 è current per un demonstrator deterministico read-only sulle fixture bounded F2, mantenendo separata execution evidence e senza selezionare model/provider, real-session ingestion o apply path.
 
 ## 7. Roadmap sequence
 
@@ -67,3 +67,4 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 2.2 | 10/09/2026 | BKL-037 closed/accepted e BKL-041 current |
 | 2.3 | 11/09/2026 | BKL-041 closed/accepted e BKL-046 F1 current |
 | 2.4 | 11/09/2026 | BKL-046 F1 accepted e F2 current |
+| 2.5 | 11/09/2026 | BKL-046 F2 accepted e F3 current |

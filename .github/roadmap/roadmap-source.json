@@ -4,8 +4,8 @@
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-046",
-  "nextMilestone": "BKL-046 F2 — Machine-Readable Recommendation and Human Decision Contracts",
-  "target": "Implement closed versioned schemas, bounded fixtures, validators and negative tests for advisory recommendations and separate human-decision receipts, preserving accepted F1 authority, provenance and missingness rules without selecting a model/provider or authorizing PixInsight apply, automatic acceptance, device command or Safety Authority",
+  "nextMilestone": "BKL-046 F3 — Deterministic Advisory Demonstrator",
+  "target": "Implement a deterministic read-only demonstrator over accepted F2 bounded fixtures, emitting contract-valid recommendations without model/provider selection, real-session ingestion, automatic acceptance, PixInsight apply, device command or Safety Authority",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -224,7 +224,7 @@
           "id": "BKL-046",
           "title": "AI Post-Processing Assistant for PixInsight",
           "status": "active",
-          "note": "Current package. F1 CLOSED/ACCEPTED via PR #165, merge 3f2e3edae93b009f5800a58a4ac5afc4f04e9bb7, ARB 99/100, Release Quality READY FOR MERGE and live Pages/search verification. F2 is current for machine-readable Recommendation and Human Decision Receipt contracts. No model/provider, apply path, production authority or Safety Authority is implied."
+          "note": "Current package. F1 and F2 are CLOSED/ACCEPTED. F2 was integrated via PR #167, merge b8a9025fdfc9b5254b9c79a5c37a775b4f8fd083, ARB 98/100, Release Quality READY FOR MERGE and 6/6 successful post-merge workflows including Pages 34634735881. F3 is current for a deterministic read-only demonstrator over bounded fixtures. No model/provider, real-session ingestion, apply path, production authority or Safety Authority is implied."
         },
         {
           "id": "BKL-031",

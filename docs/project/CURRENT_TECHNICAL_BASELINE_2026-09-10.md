@@ -5,10 +5,10 @@
 | Stato | Current technical continuity baseline |
 | Data | 11/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
-| Accepted main baseline | `3f2e3edae93b009f5800a58a4ac5afc4f04e9bb7` |
+| Accepted main baseline | `b8a9025fdfc9b5254b9c79a5c37a775b4f8fd083` |
 | Current governed package | BKL-046 — AI Post-Processing Assistant for PixInsight |
-| Current increment | BKL-046 F2 — Machine-Readable Recommendation and Human Decision Contracts |
-| Accepted predecessor | BKL-046 F1; BKL-041 capability closure; BKL-045; BKL-044; BKL-015 |
+| Current increment | BKL-046 F3 — Deterministic Advisory Demonstrator |
+| Accepted predecessor | BKL-046 F2; BKL-046 F1; BKL-041 capability closure; BKL-045; BKL-044; BKL-015 |
 
 ## 1. Accepted comparison foundation
 
@@ -61,4 +61,4 @@ Nessuna modifica a EAGLE, servizi, scheduler, collector o apparati. Gli interloc
 
 ## 7. Current entry condition
 
-BKL-046 F1 è CLOSED / ACCEPTED tramite PR #165, merge `3f2e3edae93b009f5800a58a4ac5afc4f04e9bb7`, ARB 99/100, Release Quality `READY FOR MERGE` e verifica live Pages/search. F2 è corrente per definire Recommendation e Human Decision Receipt come contratti machine-readable separati, con fixture e validazione fail-closed. F2 non seleziona model/provider, non implementa un apply path e non introduce remediation, device command o Safety Authority.
+BKL-046 F1 e F2 sono CLOSED / ACCEPTED. F2 è stato integrato tramite PR #167, merge `b8a9025fdfc9b5254b9c79a5c37a775b4f8fd083`, con ARB 98/100, Release Quality `READY FOR MERGE`, 5/5 exact-head CI e 6/6 workflow post-merge inclusa Pages `34634735881`. F3 è corrente per un demonstrator deterministico read-only sulle sole fixture bounded F2. Non seleziona model/provider, non ingerisce sessioni reali, non implementa un apply path e non introduce remediation, device command o Safety Authority.
