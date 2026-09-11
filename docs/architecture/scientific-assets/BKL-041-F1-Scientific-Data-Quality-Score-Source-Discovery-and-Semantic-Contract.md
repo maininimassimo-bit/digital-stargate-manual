@@ -3,11 +3,12 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-041-F1 |
-| Stato | Proposed |
+| Stato | Accepted |
 | Versione | 1.0 |
 | Data | 10/09/2026 |
 | Package | BKL-041 — Scientific Data Quality Score |
 | Baseline | `97dc8250fcd2ccc90cf17657c7e637f599c1c175` |
+| Accepted merge | `6d48318c460bad040fd0754b0300fbcd76a2d312` (PR #159) |
 | Dipendenze | BKL-029, BKL-037, BKL-045 — Accepted |
 | Authority | Repository-governed analytical contract; read-only and non-Safety |
 
@@ -336,7 +337,7 @@ BKL-041:
 
 ## 17. Migrazione e incrementi successivi
 
-### F1 — current
+### F1 — accepted
 
 - source inventory e gap analysis;
 - semantic contract per dimensioni, normalization, weighting, confidence ed explanation;
