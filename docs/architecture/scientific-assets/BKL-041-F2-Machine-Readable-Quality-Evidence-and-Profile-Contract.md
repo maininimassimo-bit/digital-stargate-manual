@@ -186,9 +186,9 @@ node .github/scripts/verify-scientific-data-quality-contract.mjs
 node --test .github/scripts/test-scientific-data-quality-contract.mjs
 ```
 
-La suite copre known-answer identity, fixture positiva, required evidence mancante, unità SQM incompatibile, optical calibration, PixInsight partial, evidence `SUGGESTED`, authority escalation, campi score/peso vietati e tampering del digest.
+La suite copre known-answer identity, fixture positiva, required evidence mancante, unità SQM incompatibile, optical calibration, PixInsight partial, evidence `SUGGESTED`, authority escalation, proprietà sconosciute, campi score/peso vietati e tampering del digest.
 
-La validazione locale sul proposal ha prodotto 11 test passed. L'evidence CI exact-head resta requisito di acceptance del PR.
+La validazione locale sul proposal ha prodotto 12 test passed. L'evidence CI exact-head resta requisito di acceptance del PR.
 
 ## 13. Compatibility, migration e rollback
 
