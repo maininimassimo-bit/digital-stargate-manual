@@ -1,4 +1,4 @@
-import { validateProjectionFreshness } from './scientific-data-quality-core.mjs';
+import { validateProjectionFreshness, validateRealEvidenceFreshness } from './scientific-data-quality-core.mjs';
 
 const host = document.querySelector('[data-scientific-data-quality]');
 
@@ -36,7 +36,7 @@ if (host) {
     </article>`;
   };
 
-  const render = projection => {
+  const render = (projection, validation) => {
     const items = [...projection.assessments].reverse();
     host.innerHTML = `<section class="dsg-dq-kpis" aria-label="Riepilogo quality projection">
       <article><span>SESSIONI</span><strong>${projection.summary.totalSessions}</strong></article>
@@ -44,6 +44,7 @@ if (host) {
       <article><span>UNAVAILABLE</span><strong>${projection.summary.unavailableAssessments}</strong></article>
       <article><span>FUORI PROFILO</span><strong>${projection.summary.invalidAssessments}</strong></article>
     </section>
+    <section class="dsg-dq-panel dsg-dq-validation"><div><span>F5 · REAL-EVIDENCE VALIDATION</span><h2>Capability sperimentale accettata · uso produttivo non pronto</h2><p>La cohort include tutte le ${validation.cohort.sessionCount} sessioni canoniche senza outcome filtering. ${validation.summary.failedCriteria}/${validation.summary.totalCriteria} gate di readiness produttiva non sono soddisfatti: nessun profilo produttivo è autorizzato.</p></div><span class="dsg-dq-state is-unavailable">${esc(validation.decision.productionReadiness)}</span></section>
     <section class="dsg-dq-panel dsg-dq-fresh"><div><span>FRESHNESS VERIFIED</span><h2>Projection allineata al catalogo</h2><p>Generata ${esc(date(projection.generatedAt))} · profilo <code>${esc(projection.profile.profileVersion)}</code> · digest <code>${esc(projection.projectionDigest.slice(0, 12))}…</code></p></div><span class="dsg-dq-fresh__badge">SHA-256 ✓</span></section>
     <section class="dsg-dq-panel"><div class="dsg-dq-toolbar"><div><label for="dq-search">Cerca sessione o target</label><input id="dq-search" type="search" placeholder="es. M 27 o 2026-09"></div><div><label for="dq-filter">Stato</label><select id="dq-filter"><option value="ALL">Tutti</option><option value="AVAILABLE">Disponibile</option><option value="UNAVAILABLE">Non disponibile</option><option value="INVALID">Fuori profilo</option></select></div></div><p class="dsg-dq-result" data-dq-result></p><div class="dsg-dq-records">${items.map(record).join('')}</div></section>`;
 
@@ -67,11 +68,13 @@ if (host) {
 
   Promise.all([
     fetch('../data/scientific-data-quality-projection.json', { cache: 'no-store' }),
-    fetch('../data/scientific-session-catalog.json', { cache: 'no-store' })
-  ]).then(async ([projectionResponse, catalogResponse]) => {
-    if (!projectionResponse.ok || !catalogResponse.ok) throw new Error('Projection o catalogo repository assente.');
-    const [projection, catalog] = await Promise.all([projectionResponse.json(), catalogResponse.json()]);
+    fetch('../data/scientific-session-catalog.json', { cache: 'no-store' }),
+    fetch('../data/scientific-data-quality-f5-validation.json', { cache: 'no-store' })
+  ]).then(async ([projectionResponse, catalogResponse, validationResponse]) => {
+    if (!projectionResponse.ok || !catalogResponse.ok || !validationResponse.ok) throw new Error('Projection, catalogo o validation report repository assente.');
+    const [projection, catalog, validation] = await Promise.all([projectionResponse.json(), catalogResponse.json(), validationResponse.json()]);
     await validateProjectionFreshness(projection, catalog);
-    render(projection);
+    await validateRealEvidenceFreshness(validation, projection, catalog);
+    render(projection, validation);
   }).catch(error => fail(error.message));
 }

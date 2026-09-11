@@ -5,10 +5,10 @@
 | Stato | Current technical continuity baseline |
 | Data | 11/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
-| Accepted main baseline | `89d8979fa4e5b151d85ef889efe03ad468efcad1` |
+| Accepted main baseline | `ed9ffcc92e1a5252b0d8c37634bc652397f3cde1` |
 | Current governed package | BKL-041 — Scientific Data Quality Score |
-| Current increment | F4 — Session-Driven Projection and Portal Consumer |
-| Accepted predecessor | BKL-041 F3; BKL-041 F2; BKL-041 F1; BKL-037 capability closure |
+| Current increment | F5 — Real-Evidence Validation and Capability Closure |
+| Accepted predecessor | BKL-041 F4; BKL-041 F3; BKL-041 F2; BKL-041 F1; BKL-037 capability closure |
 
 ## 1. Accepted comparison foundation
 
@@ -24,7 +24,7 @@ BKL-037 F1-F5 e la projection dynamic full-catalog sono CLOSED / ACCEPTED / POST
 
 F1 source discovery e semantic contract è Accepted tramite PR #159, merge `6d48318c460bad040fd0754b0300fbcd76a2d312`. Ha definito dimensioni candidate, normalization/weighting governance, confidence, explainability, missing-data behavior, provenance, bias e authority senza implementare uno score.
 
-## 3. Accepted BKL-041 F2/F3 and current F4
+## 3. Accepted BKL-041 F2–F4 and current F5
 
 F2 è Accepted tramite PR #160, merge `4ca5135043c508288fa2ba41b744f29b3b9032ed`. Ha reso eseguibili `QualityEvidence`, `AssessmentProfile` e `DimensionAssessment` mediante:
 
@@ -37,7 +37,9 @@ F2 è Accepted tramite PR #160, merge `4ca5135043c508288fa2ba41b744f29b3b9032ed`
 
 F3 è Accepted tramite PR #161, merge `89d8979fa4e5b151d85ef889efe03ad468efcad1`, con ARB 98/100 e Release Quality `READY FOR MERGE`. Ha introdotto normalizzazioni, weight set, scoring engine, confidence e decomposition con un profilo esclusivamente sintetico.
 
-F4 è ora l'incremento governato per projection full-catalog, integrazione nella pipeline automatica e consumer portale con verifica freshness fail-closed. Non autorizza calibrazione produttiva, threshold, ranking o acceptance.
+F4 è Accepted tramite PR #162, merge `ed9ffcc92e1a5252b0d8c37634bc652397f3cde1`, con ARB 98/100, Release Quality `READY FOR MERGE` e Pages #761 verde. Ha introdotto projection full-catalog, integrazione nella pipeline automatica e consumer con freshness fail-closed.
+
+F5 è l'incremento governato per validation sulla cohort reale completa e closure. La baseline corrente contiene 15 sessioni, 2 target noti, 5 assessment available, 3 unavailable e 7 invalid: l'uso produttivo resta non autorizzato.
 
 ## 4. Data and provenance constraints
 
@@ -59,4 +61,4 @@ Nessuna modifica a EAGLE, servizi, scheduler, collector o apparati. Gli interloc
 
 ## 7. Next validation
 
-F4 richiede test locali e CI exact-head, ARB senza blocker/major e Release Quality recommendation. Nessuna acceptance F4 implica autorizzazione automatica per un profilo produttivo o per F5.
+F5 richiede test locali e CI exact-head, ARB senza blocker/major, Release Quality recommendation, merge protetto e verifica post-merge. La closure può accettare la capability sperimentale read-only senza promuovere un profilo produttivo.

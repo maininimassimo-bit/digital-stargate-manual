@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.0 |
+| Versione | 5.1 |
 | Stato | Active |
 | Data baseline | 11/09/2026 |
 
@@ -59,7 +59,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-038 | P2 | Anomaly & Trend Center | Done | BKL-030, BKL-040 | Trend e pattern di degrado | F1/F2-A/F3-A/F3-B/F4-A accepted; PR #125 merge `d8249984d63455690b957156060f858eb3cc2713`; closure `docs/project/BKL-038-CLOSURE-2026-09-09.md` |
 | BKL-039 | P2 | Equipment Performance Registry | Done | BKL-015, session history | Prestazioni storiche setup/componenti | F4-A/F4-B/F5-A/F5-B/F5-C/F5-D CLOSED/ACCEPTED; PR #132 merge `651fc340fbb5e58ca36409d574bdd09c3ae55790`; closure `docs/project/BKL-039-CLOSURE-2026-09-09.md` |
 | BKL-040 | P2 | Night Timeline / Observatory Replay | Done | BKL-015/BKL-044, historical telemetry | Replay sincronizzato della notte | F1-F4 CLOSED/ACCEPTED; PR #117 merge `80d22a255540ac582733c60dfe9bbf7807bcdf9b`; closure `docs/project/BKL-040-CLOSURE-2026-09-08.md` |
-| BKL-041 | P2 | Scientific Data Quality Score | In Progress | BKL-029, BKL-037, BKL-045 | Quality score scientifico spiegabile | F1/F2 Accepted; F3 Accepted via PR #161, merge `89d8979fa4e5b151d85ef889efe03ad468efcad1`; F4 current for automatic full-catalog projection, verified freshness and read-only portal consumer; real-evidence calibration/closure remain F5 |
+| BKL-041 | P2 | Scientific Data Quality Score | In Progress | BKL-029, BKL-037, BKL-045 | Quality score scientifico spiegabile | F1–F3 Accepted; F4 Accepted via PR #162, merge `ed9ffcc92e1a5252b0d8c37634bc652397f3cde1`; F5 current for full-cohort real-evidence validation and experimental capability closure; production readiness remains NOT_READY |
 | BKL-042 | P2 | AI Observatory Assistant | Planned | BKL-015/BKL-044 e intelligence services | Copilot read-only per diagnosis/RCA/planning/science | Functional Roadmap Expansion |
 | BKL-043 | P2 | Observatory Reliability Engineering | Planned | BKL-030/BKL-038/BKL-042 | SLI/SLO, MTBF, MTTR, session completion e failure budget | Functional Roadmap Expansion |
 | BKL-044 | P1 | Knowledge Graph / AI Evidence Contract | Done | BKL-015 | Provenance stabile per AP/ADR/assets/session/target/incident/telemetry/processing/AI | F1-F4 CLOSED/ACCEPTED; PR #104 merge `b7c01ba7221818e1971403ab3befe38c8e40cc54`; closure `docs/project/BKL-044-CLOSURE-2026-09-07.md` |
@@ -81,7 +81,7 @@ BKL-037 è chiuso come capability read-only/descriptive-only dopo F1-F5, PR #147
 
 ### BKL-041 increment note — 11/09/2026
 
-BKL-041 F1/F2 sono Accepted. F3 è Accepted tramite PR #161, merge `89d8979fa4e5b151d85ef889efe03ad468efcad1`, ARB 98/100 e Release Quality `READY FOR MERGE`. F4 è l'incremento corrente: projection full-catalog rigenerata atomicamente dalla pipeline dopo ogni import, consumer read-only con verifica freshness SHA-256 e failure stale fail-closed. Il profilo e gli output restano sperimentali/non accettati per produzione; calibrazione reale, threshold, ranking, acceptance e closure restano F5 o fuori scope secondo review.
+BKL-041 F1–F3 sono Accepted. F4 è Accepted tramite PR #162, merge `ed9ffcc92e1a5252b0d8c37634bc652397f3cde1`, ARB 98/100, Release Quality `READY FOR MERGE` e Pages #761 verde. F5 è corrente: valuta tutte le 15 sessioni reali senza outcome filtering e propone closure della capability sperimentale read-only con limitation. I 7 stati richiesti per una futura calibration review non sono dimostrati; nessun threshold quantitativo, profilo o uso produttivo è autorizzato.
 
 ## 4. Sequenza di esecuzione raccomandata
 

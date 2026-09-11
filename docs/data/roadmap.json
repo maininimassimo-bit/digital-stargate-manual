@@ -1,13 +1,13 @@
 {
   "schemaVersion": "2.2",
-  "updatedAt": "2026-09-10",
+  "updatedAt": "2026-09-11",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "0f485a522324ca2ffd5a9926efea01738dde50fbfcc423080890e1c708cac9d5",
+  "sourceDigest": "b1b76c5947a27335aa8aea39108438be08802961d4868cc8d13b15dcaebcd31d",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-041",
-  "nextMilestone": "BKL-041 F4 — Session-Driven Projection and Portal Consumer",
-  "target": "Publish a deterministic full-catalog scientific data quality projection in the same atomic commit as every completed session import, verify catalog/projection freshness with canonical SHA-256 in the read-only portal, and fail closed on stale or invalid data; retain the synthetic profile and EXPERIMENTAL_NOT_ACCEPTED lifecycle, with real-evidence calibration and closure reserved for F5",
+  "nextMilestone": "BKL-041 F5 — Real-Evidence Validation and Capability Closure",
+  "target": "Validate the complete unfiltered real-session cohort, publish deterministic production-readiness evidence after every import, accept the capability only as read-only experimental with retained limitations, keep production use unauthorized, and complete independent review plus protected closure before transition to BKL-046",
   "summary": {
     "total": 43,
     "completed": 30,
@@ -283,7 +283,7 @@
           "id": "BKL-041",
           "title": "Scientific Data Quality Score",
           "status": "active",
-          "note": "Current package. F1/F2 Accepted; F3 Accepted via PR #161, merge 89d8979fa4e5b151d85ef889efe03ad468efcad1. F4 is current for automatic full-catalog projection, canonical SHA-256 freshness, stale fail-closed behavior and a read-only portal consumer; the profile remains synthetic and EXPERIMENTAL_NOT_ACCEPTED, while real-evidence calibration and closure remain F5."
+          "note": "Current package. F1-F3 Accepted; F4 Accepted via PR #162, merge ed9ffcc92e1a5252b0d8c37634bc652397f3cde1. F5 is current for complete-cohort real-evidence validation and closure. Current evidence supports only an experimental read-only capability; production readiness is NOT_READY and no production profile, threshold, ranking, acceptance or Safety Authority is authorized."
         },
         {
           "id": "BKL-045",
