@@ -21,6 +21,7 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [BKL-046 F1 Semantic Contract](../architecture/scientific-assets/BKL-046-F1-AI-Post-Processing-Assistant-Source-Discovery-and-Advisory-Semantic-Contract.md) | Baseline semantica accepted dell'assistente advisory |
 | [BKL-046 F1 Acceptance](BKL-046-F1-ACCEPTANCE-2026-09-11.md) | Acceptance, merge e verifica pubblicazione F1 |
 | [BKL-046 F2 Acceptance](BKL-046-F2-ACCEPTANCE-2026-09-11.md) | Acceptance, merge e verifica pubblicazione F2 |
+| [BKL-046 F3 Acceptance](BKL-046-F3-ACCEPTANCE-2026-09-11.md) | Acceptance, review AI-assistite owner-authorized, merge e verifica pubblicazione F3 |
 
 ## Registri e standard canonici
 
@@ -30,7 +31,7 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 
 - BKL-037 — Session Comparison & Benchmarking: CLOSED / ACCEPTED;
 - BKL-041 — Scientific Data Quality Score: CLOSED / ACCEPTED / POST-MERGE VERIFIED;
-- BKL-046 — AI Post-Processing Assistant: CURRENT / F3 Deterministic Advisory Demonstrator; F1/F2 ACCEPTED.
+- BKL-046 — AI Post-Processing Assistant: CURRENT / F4 Session/Provenance-Driven Read-Only Consumer; F1-F3 ACCEPTED.
 
 ## Sequenza governata
 

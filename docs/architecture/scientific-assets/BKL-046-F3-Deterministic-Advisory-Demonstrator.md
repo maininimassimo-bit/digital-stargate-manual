@@ -3,12 +3,13 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-046-F3 |
-| Stato | Proposed |
+| Stato | Accepted |
 | Versione | 1.0 |
 | Data | 11/09/2026 |
 | Package | BKL-046 — AI Post-Processing Assistant for PixInsight |
 | Baseline F2 | `b8a9025fdfc9b5254b9c79a5c37a775b4f8fd083` — Accepted |
 | Baseline di sviluppo | `2d2f876cfa9deead5cc8fee556edb10ac666ecc1` |
+| Acceptance | PR #169, merge `8339aecf0b6b7fa19396561b20253c0411fd7ee7` |
 | Authority | Deterministic, bounded, synthetic, read-only, human-only and non-Safety |
 
 ## 1. Purpose
@@ -194,7 +195,7 @@ node .github/scripts/verify-ai-post-processing-advisory-demonstrator.mjs
 node --test .github/scripts/test-ai-post-processing-advisory-demonstrator.mjs
 ```
 
-La validazione locale del proposal comprende 16/16 test F2 e 21/21 test F3. L'evidence CI exact-head, la review ARB AI-assistita autorizzata dal repository owner e il gate Release Quality restano requisiti di acceptance.
+La validazione comprende 16/16 test F2 e 21/21 test F3. L'exact-head finale `036b59ec39c2b43f4ee3cbe676189d1ce7b82c04` e il merge `8339aecf0b6b7fa19396561b20253c0411fd7ee7` hanno soddisfatto i gate CI; le review ARB e Release Quality sono AI-assistite, autorizzate dal repository owner e non costituiscono approvazioni umane indipendenti.
 
 ## 14. Risks and trade-offs
 

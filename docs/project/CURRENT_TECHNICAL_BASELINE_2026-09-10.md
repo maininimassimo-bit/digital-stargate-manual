@@ -5,10 +5,10 @@
 | Stato | Current technical continuity baseline |
 | Data | 11/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
-| Accepted main baseline | `b8a9025fdfc9b5254b9c79a5c37a775b4f8fd083` |
+| Accepted main baseline | `8339aecf0b6b7fa19396561b20253c0411fd7ee7` |
 | Current governed package | BKL-046 — AI Post-Processing Assistant for PixInsight |
-| Current increment | BKL-046 F3 — Deterministic Advisory Demonstrator |
-| Accepted predecessor | BKL-046 F2; BKL-046 F1; BKL-041 capability closure; BKL-045; BKL-044; BKL-015 |
+| Current increment | BKL-046 F4 — Session/Provenance-Driven Read-Only Consumer |
+| Accepted predecessor | BKL-046 F3; BKL-046 F2; BKL-046 F1; BKL-041 capability closure; BKL-045; BKL-044; BKL-015 |
 
 ## 1. Accepted comparison foundation
 
@@ -61,4 +61,4 @@ Nessuna modifica a EAGLE, servizi, scheduler, collector o apparati. Gli interloc
 
 ## 7. Current entry condition
 
-BKL-046 F1 e F2 sono CLOSED / ACCEPTED. F2 è stato integrato tramite PR #167, merge `b8a9025fdfc9b5254b9c79a5c37a775b4f8fd083`, con ARB 98/100, Release Quality `READY FOR MERGE`, 5/5 exact-head CI e 6/6 workflow post-merge inclusa Pages `34634735881`. F3 è corrente per un demonstrator deterministico read-only sulle sole fixture bounded F2. Non seleziona model/provider, non ingerisce sessioni reali, non implementa un apply path e non introduce remediation, device command o Safety Authority.
+BKL-046 F1-F3 sono CLOSED / ACCEPTED. F3 è stato integrato tramite PR #169, merge `8339aecf0b6b7fa19396561b20253c0411fd7ee7`, con review ARB/RQ AI-assistite autorizzate dal repository owner e dichiarate non equivalenti ad approvazioni umane indipendenti, 21/21 test F3 e 7/7 workflow post-merge inclusa Pages `34643716214`. F4 è corrente per un consumer session/provenance-driven read-only: deve rigenerare e pubblicare atomicamente la projection dopo ogni import scientifico e fallire chiuso su freshness o digest non validi. Non autorizza model/provider, automatic acceptance, apply path, remediation, device command o Safety Authority.

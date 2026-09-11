@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 2.4 |
+| Versione | 2.5 |
 | Stato | Active context baseline |
 | Data baseline | 10/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
@@ -56,17 +56,18 @@ BKL-037 rimane read-only/descriptive-only; unità non dimostrate, missing eviden
 
 BKL-041 — Scientific Data Quality Score è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability sperimentale read-only tramite PR #163, merge `e4ccd216b0a0ca4033277ece513f051b052d2b83`. Production readiness resta `NOT_READY_FOR_PRODUCTION`.
 
-BKL-046 F1 e F2 sono accepted; F3 è l'incremento corrente per dimostrare in modo deterministico e read-only:
+BKL-046 F1-F3 sono accepted; F4 è l'incremento corrente per introdurre in modo governato:
 
-- use case advisory e confini di approvazione umana definiti in F1 e resi machine-readable in F2;
-- input di provenance PixInsight accettati e loro semantic ownership;
+- un consumer read-only alimentato esclusivamente da sessioni e provenance canoniche autorizzate;
+- una projection deterministica rigenerata e pubblicata automaticamente e atomicamente dopo ogni import scientifico;
+- gate di freshness e digest che falliscono chiuso senza presentare dati stale come correnti;
 - comportamento su evidence missing/stale/unknown;
 - explainability, citation e audit trail;
 - bias, limiti di comparabilità e gestione delle raccomandazioni;
 - authority boundary: nessuna automatic acceptance, remediation non presidiata, device command o Safety Authority;
 - divieto di usare lo score sperimentale BKL-041 come ground truth o segnale produttivo.
 
-F2 è stato integrato tramite PR #167, merge `b8a9025fdfc9b5254b9c79a5c37a775b4f8fd083`, con ARB 98/100, Release Quality `READY FOR MERGE` e Pages `34634735881`. La promozione F3 non approva un modello/provider, dati reali o automazione: il demonstrator deve limitarsi alle fixture bounded F2 e preservare la separazione fra Recommendation, decisione umana ed execution evidence.
+F3 è stato integrato tramite PR #169, merge `8339aecf0b6b7fa19396561b20253c0411fd7ee7`, dopo review ARB/RQ AI-assistite autorizzate dal repository owner e non equivalenti ad approvazioni umane indipendenti, 21/21 test F3 e 7/7 workflow post-merge inclusa Pages `34643716214`. La promozione F4 non approva model/provider o automazione esecutiva: il consumer deve restare read-only e preservare la separazione fra Recommendation, decisione umana ed execution evidence.
 
 ## 7. Roadmap
 
@@ -96,3 +97,4 @@ La closure BKL-041 e la promozione BKL-046 sono repository-only. Nessuna azione 
 | 2.2 | 11/09/2026 | Riallineamento a BKL-041 CLOSED/ACCEPTED e BKL-046 current |
 | 2.3 | 11/09/2026 | BKL-046 F1 accepted e F2 current |
 | 2.4 | 11/09/2026 | BKL-046 F2 accepted e F3 current |
+| 2.5 | 11/09/2026 | BKL-046 F3 accepted e F4 current |
