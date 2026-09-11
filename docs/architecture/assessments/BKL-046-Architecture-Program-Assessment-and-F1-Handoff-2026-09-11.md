@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Package | BKL-046 — AI Post-Processing Assistant for PixInsight |
-| Stato | Proposed |
+| Stato | Accepted — F1 handoff completed |
 | Data | 11/09/2026 |
 | Baseline verificata | `main` @ `249a90265b9cd2323df6e1dfb0ab09c5c64f5f1b` |
 | Predecessore | BKL-041 — CLOSED / ACCEPTED / POST-MERGE VERIFIED |
@@ -116,4 +116,4 @@ Required F1 outputs:
 
 ## 9. Completion status
 
-Program assessment: complete for the reviewed baseline. BKL-046 F1 remains Proposed until independent review, Release Quality, protected merge and post-merge verification.
+Program assessment and F1 handoff: accepted. BKL-046 F1 was integrated via PR #165, merge `3f2e3edae93b009f5800a58a4ac5afc4f04e9bb7`, after ARB 99/100, Release Quality `READY FOR MERGE` and exact-head CI 7/7; live Pages and search were verified after merge. F2 is the next dependency-ordered increment.

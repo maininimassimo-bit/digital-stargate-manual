@@ -1,7 +1,7 @@
 # BKL-046 F1 — AI Post-Processing Assistant Source Discovery and Advisory Semantic Contract
 
 **Identifier:** BKL-046-F1  
-**Status:** Proposed  
+**Status:** Accepted  
 **Version:** 1.0  
 **Release:** Unassigned  
 

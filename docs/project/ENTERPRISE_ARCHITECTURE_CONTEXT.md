@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 2.1 |
+| Versione | 2.3 |
 | Stato | Active context baseline |
 | Data baseline | 10/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
@@ -56,9 +56,9 @@ BKL-037 rimane read-only/descriptive-only; unità non dimostrate, missing eviden
 
 BKL-041 — Scientific Data Quality Score è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability sperimentale read-only tramite PR #163, merge `e4ccd216b0a0ca4033277ece513f051b052d2b83`. Production readiness resta `NOT_READY_FOR_PRODUCTION`.
 
-BKL-046 F1 è l'incremento corrente per definire:
+BKL-046 F1 è accepted; F2 è l'incremento corrente per rendere machine-readable:
 
-- use case advisory e confini di approvazione umana;
+- use case advisory e confini di approvazione umana già definiti in F1;
 - input di provenance PixInsight accettati e loro semantic ownership;
 - comportamento su evidence missing/stale/unknown;
 - explainability, citation e audit trail;
@@ -66,7 +66,7 @@ BKL-046 F1 è l'incremento corrente per definire:
 - authority boundary: nessuna automatic acceptance, remediation non presidiata, device command o Safety Authority;
 - divieto di usare lo score sperimentale BKL-041 come ground truth o segnale produttivo.
 
-La promozione a current non approva alcuna implementazione, modello/provider o automazione. F1 deve riusare BKL-044/BKL-045 e separare Recommendation, decisione umana ed execution evidence.
+La promozione a current non approva alcuna implementazione, modello/provider o automazione. F2 deve riusare BKL-044/BKL-045 e rendere eseguibile la separazione già accettata fra Recommendation, decisione umana ed execution evidence.
 
 ## 7. Roadmap
 
@@ -94,3 +94,4 @@ La closure BKL-041 e la promozione BKL-046 sono repository-only. Nessuna azione 
 | 2.0 | 08/09/2026 | Foundation BKL-040 e BKL-038 current |
 | 2.1 | 10/09/2026 | Riallineamento a BKL-037 CLOSED/ACCEPTED e BKL-041 current |
 | 2.2 | 11/09/2026 | Riallineamento a BKL-041 CLOSED/ACCEPTED e BKL-046 current |
+| 2.3 | 11/09/2026 | BKL-046 F1 accepted e F2 current |
