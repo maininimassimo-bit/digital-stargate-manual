@@ -3,9 +3,9 @@
   "updatedAt": "2026-09-11",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
-  "currentPackage": "BKL-041",
-  "nextMilestone": "BKL-041 F5 — Real-Evidence Validation and Capability Closure",
-  "target": "Validate the complete unfiltered real-session cohort, publish deterministic production-readiness evidence after every import, accept the capability only as read-only experimental with retained limitations, keep production use unauthorized, and complete independent review plus protected closure before transition to BKL-046",
+  "currentPackage": "BKL-046",
+  "nextMilestone": "BKL-046 — Architecture package definition",
+  "target": "Define the governed architecture package for an advisory, human-approved AI Post-Processing Assistant over accepted PixInsight provenance, without automatic acceptance, unattended remediation, device command, production use of the BKL-041 experimental score, or Safety Authority",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -211,8 +211,8 @@
         {
           "id": "BKL-041",
           "title": "Scientific Data Quality Score",
-          "status": "active",
-          "note": "Current package. F1-F3 Accepted; F4 Accepted via PR #162, merge ed9ffcc92e1a5252b0d8c37634bc652397f3cde1. F5 is current for complete-cohort real-evidence validation and closure. Current evidence supports only an experimental read-only capability; production readiness is NOT_READY and no production profile, threshold, ranking, acceptance or Safety Authority is authorized."
+          "status": "completed",
+          "note": "F1-F5 CLOSED/ACCEPTED as an experimental read-only capability via PR #163, merge e4ccd216b0a0ca4033277ece513f051b052d2b83, ARB 98/100, Release Quality READY FOR MERGE and successful post-merge workflows/Pages. Production readiness remains NOT_READY; no production profile, threshold, ranking, acceptance or Safety Authority is authorized."
         },
         {
           "id": "BKL-045",
@@ -223,8 +223,8 @@
         {
           "id": "BKL-046",
           "title": "AI Post-Processing Assistant for PixInsight",
-          "status": "planned",
-          "note": "Advisory AI over processing provenance; human approval retained."
+          "status": "active",
+          "note": "Current package for governed architecture definition. Advisory AI over accepted processing provenance; human approval retained. No implementation or production authority is implied by promotion to active."
         },
         {
           "id": "BKL-031",

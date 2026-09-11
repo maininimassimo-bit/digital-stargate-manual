@@ -11,7 +11,7 @@
 | Root bootstrap | `AI_BOOTSTRAP.md` |
 | Continuity handover | `docs/project/HANDOVER_2026-09-10.md` |
 | Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-10.md` |
-| Current governed package | BKL-041 — Scientific Data Quality Score |
+| Current governed package | BKL-046 — AI Post-Processing Assistant for PixInsight |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo e gerarchia
@@ -52,32 +52,31 @@ Sono accettati, fra gli altri:
 
 BKL-037 rimane read-only/descriptive-only; unità non dimostrate, missing evidence e processing history PixInsight incompleta restano fail-closed.
 
-## 6. Current package — BKL-041
+## 6. Current package — BKL-046
 
-BKL-041 — Scientific Data Quality Score è il package corrente. Consuma evidence governata senza sostituirne l'authority.
+BKL-041 — Scientific Data Quality Score è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability sperimentale read-only tramite PR #163, merge `e4ccd216b0a0ca4033277ece513f051b052d2b83`. Production readiness resta `NOT_READY_FOR_PRODUCTION`.
 
-F1 deve stabilire:
+BKL-046 è il package corrente per definire:
 
-- dimensioni eleggibili e loro semantic ownership;
-- unità e normalizzazione;
-- peso e aggregazione;
-- confidence e completeness;
-- missing/stale/unknown behavior;
-- explainability e provenance;
-- bias e limiti di comparabilità;
-- authority boundary e divieti Safety.
+- use case advisory e confini di approvazione umana;
+- input di provenance PixInsight accettati e loro semantic ownership;
+- comportamento su evidence missing/stale/unknown;
+- explainability, citation e audit trail;
+- bias, limiti di comparabilità e gestione delle raccomandazioni;
+- authority boundary: nessuna automatic acceptance, remediation non presidiata, device command o Safety Authority;
+- divieto di usare lo score sperimentale BKL-041 come ground truth o segnale produttivo.
 
-La promozione a current non approva ancora alcun algoritmo o threshold.
+La promozione a current non approva alcuna implementazione, modello o automazione.
 
 ## 7. Roadmap
 
-`... -> BKL-037 CLOSED -> BKL-041 [CURRENT] -> BKL-046 -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 [CURRENT] -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 AMP-002 resta planning authority per AP-007–AP-015, non live status register.
 
 ## 8. Technical debt and decisions
 
-TD-012 resta Accepted e non viene retrofittato. Nessun nuovo debito o ADR è introdotto dalla transizione BKL-037 -> BKL-041.
+TD-012 resta Accepted e non viene retrofittato. Nessun nuovo debito o ADR è introdotto dalla transizione BKL-041 -> BKL-046.
 
 ## 9. Delivery
 
@@ -85,7 +84,7 @@ Ogni incremento richiede exact-head CI, review applicabili, merge protetto e pos
 
 ## 10. Runtime impact
 
-La closure BKL-037 e la promozione BKL-041 sono repository-only. Nessuna azione PC/EAGLE è richiesta.
+La closure BKL-041 e la promozione BKL-046 sono repository-only. Nessuna azione PC/EAGLE è richiesta.
 
 ## 11. Registro revisioni
 
@@ -94,3 +93,4 @@ La closure BKL-037 e la promozione BKL-041 sono repository-only. Nessuna azione 
 | 1.0 | 04/08/2026 | Prima baseline enterprise |
 | 2.0 | 08/09/2026 | Foundation BKL-040 e BKL-038 current |
 | 2.1 | 10/09/2026 | Riallineamento a BKL-037 CLOSED/ACCEPTED e BKL-041 current |
+| 2.2 | 11/09/2026 | Riallineamento a BKL-041 CLOSED/ACCEPTED e BKL-046 current |

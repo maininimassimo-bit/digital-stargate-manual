@@ -3,18 +3,18 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-041-F5 |
-| Stato | Proposed |
+| Stato | Accepted |
 | Versione | 1.0 |
 | Data | 11/09/2026 |
 | Package | BKL-041 — Scientific Data Quality Score |
 | Baseline F4 | `ed9ffcc92e1a5252b0d8c37634bc652397f3cde1` — Accepted via PR #162 |
-| Decisione proposta | accettare/chiudere la capability read-only sperimentale; non autorizzare profilo o uso produttivi |
+| Decisione | capability read-only sperimentale CLOSED/ACCEPTED tramite PR #163, merge `e4ccd216b0a0ca4033277ece513f051b052d2b83`; profilo e uso produttivi non autorizzati |
 
 ## 1. Decisione
 
 F5 valuta l'intera cohort reale disponibile senza filtrare gli esiti. La evidence verificata non consente una calibrazione produttiva: il profilo resta sintetico, manca una ground truth finale, la coverage è incompleta e la distribuzione dei target è sbilanciata.
 
-La decisione proposta separa quindi due concetti:
+La decisione accettata separa quindi due concetti:
 
 - **capability acceptance:** `ACCEPTED_AS_READ_ONLY_EXPERIMENTAL_WITH_RETAINED_LIMITATIONS`;
 - **production readiness:** `NOT_READY_FOR_PRODUCTION`.
