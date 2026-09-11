@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-10",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "0016d8dc8edb6ff6a07c7b4a2ec565a93f24e1980f09a3274700fafe5b06ff95",
+  "sourceDigest": "a224c4d3f1848e6050a701bce7645daa03e7a2e1cb0b0d9d28ba6b9fb746d1e0",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-041",
-  "nextMilestone": "BKL-041 F1 — Scientific Data Quality Score source discovery and semantic contract",
-  "target": "Define an explainable, evidence-governed Scientific Data Quality Score contract over accepted BKL-037 comparison evidence, with explicit dimensions, units, confidence, missing-data behavior and provenance, without Safety Authority, device command, remediation or automatic acceptance authority",
+  "nextMilestone": "BKL-041 F2 — Machine-readable Quality Evidence and Profile Contract",
+  "target": "Make QualityEvidence, AssessmentProfile and DimensionAssessment machine-readable with deterministic identity, bounded synthetic fixtures and fail-closed validation; keep score, numeric weights, thresholds, ranking, device command, remediation, automatic acceptance and Safety Authority out of scope",
   "summary": {
     "total": 43,
     "completed": 30,
@@ -283,7 +283,7 @@
           "id": "BKL-041",
           "title": "Scientific Data Quality Score",
           "status": "active",
-          "note": "Current package after governed BKL-037 closure. F1 must define explainable score semantics, evidence eligibility, weighting, confidence, missing-data behavior and authority boundaries before executable scoring."
+          "note": "Current package. F1 Accepted via PR #159, merge 6d48318c460bad040fd0754b0300fbcd76a2d312. F2 is current for machine-readable evidence/profile/dimension contracts, deterministic identity, bounded synthetic fixtures and fail-closed validation; no score or numeric weights authorized."
         },
         {
           "id": "BKL-045",
