@@ -16,6 +16,7 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [Enterprise Architecture Context](ENTERPRISE_ARCHITECTURE_CONTEXT.md) | Contesto enterprise |
 | [Repository Knowledge Map](REPOSITORY_KNOWLEDGE_MAP.md) | Mappa authority/projection |
 | [BKL-037 Closure](BKL-037-CLOSURE-2026-09-10.md) | Closure del predecessore accettato |
+| [BKL-041 Closure](BKL-041-CLOSURE-2026-09-11.md) | Closure della capability accettata più recente |
 
 ## Registri e standard canonici
 
@@ -24,12 +25,12 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 ## Stato corrente
 
 - BKL-037 — Session Comparison & Benchmarking: CLOSED / ACCEPTED;
-- BKL-041 — Scientific Data Quality Score: CURRENT / In Progress;
-- BKL-046 — AI Post-Processing Assistant: NEXT / Planned.
+- BKL-041 — Scientific Data Quality Score: CLOSED / ACCEPTED / POST-MERGE VERIFIED;
+- BKL-046 — AI Post-Processing Assistant: CURRENT / Architecture package definition.
 
 ## Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 [CURRENT] -> BKL-046 -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 [CURRENT] -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## Authority / projection
 

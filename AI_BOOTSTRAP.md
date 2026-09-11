@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 3.0 |
+| Versione | 3.1 |
 | Baseline | 11/09/2026 |
-| Stato | Current root bootstrap — BKL-041 Scientific Data Quality Score |
+| Stato | Current root bootstrap — BKL-046 AI Post-Processing Assistant |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -50,16 +50,16 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 
 - foundation completata e accettata attraverso BKL-045;
 - BKL-037 — Session Comparison & Benchmarking: CLOSED / ACCEPTED;
-- BKL-041 — Scientific Data Quality Score: CURRENT / In Progress;
-- BKL-046 — AI Post-Processing Assistant: NEXT / Planned.
+- BKL-041 — Scientific Data Quality Score: CLOSED / ACCEPTED / POST-MERGE VERIFIED;
+- BKL-046 — AI Post-Processing Assistant: CURRENT / Architecture package definition.
 
 BKL-037 resta read-only/descriptive-only e non autorizza ranking, score, threshold, recommendation, remediation, command path o Safety Authority.
 
-BKL-041 F1–F3 sono Accepted. F4 è Accepted tramite PR #162, merge `ed9ffcc92e1a5252b0d8c37634bc652397f3cde1`, con projection full-catalog, consumer e refresh automatico freshness-verified. F5 è l'incremento corrente per validation sulla cohort reale completa e closure. L'evidence corrente non autorizza un profilo produttivo: capability sperimentale read-only accettabile con limitation, production readiness `NOT_READY_FOR_PRODUCTION`. Conteggi e coverage sono evidence descrittiva, non threshold di accettazione.
+BKL-041 F1–F5 sono CLOSED / ACCEPTED tramite PR #163, merge `e4ccd216b0a0ca4033277ece513f051b052d2b83`, ARB R1 98/100, Release Quality `READY FOR MERGE` e Pages `34602219671` verde. L'outcome accetta esclusivamente la capability sperimentale read-only con limitation: production readiness resta `NOT_READY_FOR_PRODUCTION`; conteggi e coverage sono evidence descrittiva, non threshold di accettazione.
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 [CURRENT] -> BKL-046 -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 [CURRENT] -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -71,4 +71,4 @@ Nessun portale, comparison layer, quality score o AI è Safety Authority. Nessun
 
 ## 9. Punto di partenza operativo
 
-Completare **BKL-041 F5 — Real-Evidence Validation and Capability Closure**. Validare la cohort senza outcome filtering, rendere machine-readable readiness, bias e limitation, mantenere automatic refresh/freshness, completare ARB/RQ e chiudere il package soltanto su evidence verificata. Non promuovere il profilo sintetico né autorizzare production use, ranking, automatic acceptance o Safety Authority.
+Definire il package architetturale di **BKL-046 — AI Post-Processing Assistant for PixInsight** a partire dalle baseline accettate BKL-015/BKL-044/BKL-045. La promozione a current non implica implementazione: preservare ruolo advisory, approvazione umana, provenance verificabile e assenza di automatic acceptance, remediation non presidiata, device command o Safety Authority. Lo score sperimentale BKL-041 non è ground truth né segnale produttivo.

@@ -5,10 +5,10 @@
 | Stato | Current technical continuity baseline |
 | Data | 11/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
-| Accepted main baseline | `ed9ffcc92e1a5252b0d8c37634bc652397f3cde1` |
-| Current governed package | BKL-041 — Scientific Data Quality Score |
-| Current increment | F5 — Real-Evidence Validation and Capability Closure |
-| Accepted predecessor | BKL-041 F4; BKL-041 F3; BKL-041 F2; BKL-041 F1; BKL-037 capability closure |
+| Accepted main baseline | `e4ccd216b0a0ca4033277ece513f051b052d2b83` |
+| Current governed package | BKL-046 — AI Post-Processing Assistant for PixInsight |
+| Current increment | Architecture package definition — no implementation accepted |
+| Accepted predecessor | BKL-041 capability closure; BKL-045; BKL-044; BKL-015 |
 
 ## 1. Accepted comparison foundation
 
@@ -24,7 +24,7 @@ BKL-037 F1-F5 e la projection dynamic full-catalog sono CLOSED / ACCEPTED / POST
 
 F1 source discovery e semantic contract è Accepted tramite PR #159, merge `6d48318c460bad040fd0754b0300fbcd76a2d312`. Ha definito dimensioni candidate, normalization/weighting governance, confidence, explainability, missing-data behavior, provenance, bias e authority senza implementare uno score.
 
-## 3. Accepted BKL-041 F2–F4 and current F5
+## 3. Accepted BKL-041 F2–F5 and capability closure
 
 F2 è Accepted tramite PR #160, merge `4ca5135043c508288fa2ba41b744f29b3b9032ed`. Ha reso eseguibili `QualityEvidence`, `AssessmentProfile` e `DimensionAssessment` mediante:
 
@@ -39,7 +39,7 @@ F3 è Accepted tramite PR #161, merge `89d8979fa4e5b151d85ef889efe03ad468efcad1`
 
 F4 è Accepted tramite PR #162, merge `ed9ffcc92e1a5252b0d8c37634bc652397f3cde1`, con ARB 98/100, Release Quality `READY FOR MERGE` e Pages #761 verde. Ha introdotto projection full-catalog, integrazione nella pipeline automatica e consumer con freshness fail-closed.
 
-F5 è l'incremento governato per validation sulla cohort reale completa e closure. La baseline corrente contiene 15 sessioni, 2 target noti, 5 assessment available, 3 unavailable e 7 invalid: l'uso produttivo resta non autorizzato.
+F5 e la capability BKL-041 sono CLOSED / ACCEPTED / POST-MERGE VERIFIED tramite PR #163, merge `e4ccd216b0a0ca4033277ece513f051b052d2b83`, ARB R1 98/100, Release Quality `READY FOR MERGE` e Pages `34602219671` verde. La baseline contiene 15 sessioni, 2 target noti, 5 assessment available, 3 unavailable e 7 invalid: l'uso produttivo resta non autorizzato.
 
 ## 4. Data and provenance constraints
 
@@ -53,12 +53,12 @@ F5 è l'incremento governato per validation sulla cohort reale completa e closur
 
 ## 5. Dynamic update boundary
 
-F4 estende `analyze-session-automatic.yml`: la projection BKL-041 viene rigenerata automaticamente dopo ogni nuova sessione scientifica importata ed entra nello stesso commit governato del catalogo. Il consumer ricalcola SHA-256 di catalogo e projection e non rende dati stale come correnti.
+F4/F5 estendono `analyze-session-automatic.yml`: projection e validation BKL-041 vengono rigenerate automaticamente dopo ogni nuova sessione scientifica importata ed entrano nello stesso commit governato del catalogo. Il consumer ricalcola SHA-256 di catalogo, projection e validation e non rende dati stale come correnti.
 
 ## 6. Runtime e safety
 
 Nessuna modifica a EAGLE, servizi, scheduler, collector o apparati. Gli interlock fisici e la Safety Authority locale restano indipendenti.
 
-## 7. Next validation
+## 7. Current entry condition
 
-F5 richiede test locali e CI exact-head, ARB senza blocker/major, Release Quality recommendation, merge protetto e verifica post-merge. La closure può accettare la capability sperimentale read-only senza promuovere un profilo produttivo.
+BKL-046 è corrente soltanto per la definizione del package architetturale. Deve preservare human approval, provenance e ruolo advisory; non può trattare BKL-041 come ground truth o autorizzazione produttiva e non introduce automaticamente remediation, device command o Safety Authority.
