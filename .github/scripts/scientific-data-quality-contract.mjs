@@ -22,7 +22,15 @@ const EVIDENCE_CLASSES = new Set(['OBSERVED', 'DECLARED', 'SUGGESTED']);
 const QUALITY = new Set(['VALID', 'STALE', 'UNKNOWN', 'INVALID']);
 const COMPLETENESS = new Set(['COMPLETE', 'PARTIAL', 'UNAVAILABLE']);
 const CALIBRATION = new Set(['PROVEN', 'NOT_PROVEN', 'NOT_APPLICABLE', 'UNKNOWN']);
+const UNIT_SEMANTICS = new Set(['EXACT', 'RATIO', 'CATEGORICAL', 'ANGULAR_CALIBRATED', 'SOURCE_NATIVE_UNCALIBRATED', 'NOT_APPLICABLE', 'UNKNOWN']);
+const COMPARABILITY = new Set(['COMPARABLE', 'CONTEXT_ONLY', 'PARTIAL', 'UNAVAILABLE', 'INCOMPATIBLE', 'UNKNOWN']);
 const FORBIDDEN_KEYS = new Set(['score', 'scoreValue', 'scoreScale', 'weight', 'weights', 'normalizedValue', 'contribution', 'confidence']);
+const ROOT_KEYS = new Set(['schemaVersion', 'contractType', 'identityMethod', 'fixtureId', 'fixtureMode', 'sessionId', 'assessmentProfile', 'qualityEvidence', 'dimensionAssessments', 'authority', 'limitations', 'artifactDigest']);
+const PROFILE_KEYS = new Set(['profileId', 'profileVersion', 'profileState', 'intendedUse', 'eligibleCohort', 'requiredDimensions', 'optionalDimensions', 'contextDimensions', 'excludedDimensions', 'minimumEvidenceRules', 'weightSetState', 'scoreState', 'confidenceMethodState', 'limitations', 'profileDigest']);
+const EVIDENCE_KEYS = new Set(['evidenceId', 'sessionId', 'dimension', 'value', 'unit', 'unitSemantics', 'sourceRef', 'observedAt', 'interval', 'methodId', 'methodVersion', 'evidenceClass', 'quality', 'completeness', 'coverage', 'comparabilityClass', 'calibrationState', 'limitations', 'evidenceDigest']);
+const ASSESSMENT_KEYS = new Set(['dimension', 'assessmentState', 'eligibility', 'evidenceRefs', 'normalizationState', 'weightState', 'contributionState', 'exclusionReasons', 'limitations', 'assessmentDigest']);
+const AUTHORITY_KEYS = new Set(['consumerMode', 'acceptanceAuthority', 'actionAuthority', 'safetyAuthority']);
+const INTERVAL_KEYS = new Set(['start', 'end']);
 
 const present = (value) => value !== null && value !== undefined;
 const nonEmpty = (value) => typeof value === 'string' && value.trim().length > 0;
@@ -56,6 +64,16 @@ function assertStringArray(value, field, { min = 0 } = {}) {
   assert(new Set(value).size === value.length, `${field} must not contain duplicates.`);
 }
 
+function assertExactKeys(value, allowed, label) {
+  assert(value && typeof value === 'object' && !Array.isArray(value), `${label} must be an object.`);
+  for (const key of Object.keys(value)) assert(allowed.has(key), `${label}.${key} is not allowed by schemaVersion ${SCHEMA_VERSION}.`);
+  for (const key of allowed) assert(Object.hasOwn(value, key), `${label}.${key} is required.`);
+}
+
+function assertDateTime(value, label) {
+  assert(nonEmpty(value) && Number.isFinite(Date.parse(value)), `${label} must be an ISO date-time.`);
+}
+
 function assertNoForbiddenFields(value, path = '$') {
   if (!value || typeof value !== 'object') return;
   if (Array.isArray(value)) {
@@ -83,7 +101,7 @@ function assertDigest(record, digestField, label) {
 }
 
 function validateProfile(profile) {
-  assert(profile && typeof profile === 'object', 'assessmentProfile is required.');
+  assertExactKeys(profile, PROFILE_KEYS, 'assessmentProfile');
   for (const field of ['profileId', 'profileVersion', 'intendedUse', 'eligibleCohort']) {
     assert(nonEmpty(profile[field]), `assessmentProfile.${field} is required.`);
   }
@@ -103,6 +121,7 @@ function validateProfile(profile) {
 }
 
 function validateEvidence(evidence, sessionId) {
+  assertExactKeys(evidence, EVIDENCE_KEYS, `qualityEvidence.${evidence?.evidenceId ?? 'unknown'}`);
   for (const field of ['evidenceId', 'sessionId', 'dimension', 'methodId', 'methodVersion']) {
     assert(nonEmpty(evidence[field]), `qualityEvidence.${field} is required.`);
   }
@@ -112,11 +131,20 @@ function validateEvidence(evidence, sessionId) {
   assert(QUALITY.has(evidence.quality), `Evidence ${evidence.evidenceId} has an invalid quality.`);
   assert(COMPLETENESS.has(evidence.completeness), `Evidence ${evidence.evidenceId} has invalid completeness.`);
   assert(CALIBRATION.has(evidence.calibrationState), `Evidence ${evidence.evidenceId} has invalid calibrationState.`);
+  assert(UNIT_SEMANTICS.has(evidence.unitSemantics), `Evidence ${evidence.evidenceId} has invalid unitSemantics.`);
+  assert(COMPARABILITY.has(evidence.comparabilityClass), `Evidence ${evidence.evidenceId} has invalid comparabilityClass.`);
   assertRepositoryRelative(evidence.sourceRef);
   assert(evidence.value === null || ['number', 'string', 'boolean'].includes(typeof evidence.value), `Evidence ${evidence.evidenceId} has an unsupported value.`);
   assert(evidence.unit === null || nonEmpty(evidence.unit), `Evidence ${evidence.evidenceId} has an invalid unit.`);
   assert(evidence.coverage === null || (typeof evidence.coverage === 'number' && evidence.coverage >= 0 && evidence.coverage <= 1), `Evidence ${evidence.evidenceId} coverage must be null or within [0,1].`);
   assertStringArray(evidence.limitations, `qualityEvidence.${evidence.evidenceId}.limitations`);
+  if (evidence.observedAt !== null) assertDateTime(evidence.observedAt, `Evidence ${evidence.evidenceId} observedAt`);
+  if (evidence.interval !== null) {
+    assertExactKeys(evidence.interval, INTERVAL_KEYS, `qualityEvidence.${evidence.evidenceId}.interval`);
+    assertDateTime(evidence.interval.start, `Evidence ${evidence.evidenceId} interval.start`);
+    assertDateTime(evidence.interval.end, `Evidence ${evidence.evidenceId} interval.end`);
+    assert(Date.parse(evidence.interval.start) <= Date.parse(evidence.interval.end), `Evidence ${evidence.evidenceId} interval must not be inverted.`);
+  }
 
   if (evidence.dimension === 'GUIDING_STABILITY' && present(evidence.value)) {
     assert(evidence.unit === 'arcsec', 'GUIDING_STABILITY requires unit arcsec.');
@@ -128,6 +156,7 @@ function validateEvidence(evidence, sessionId) {
 }
 
 function validateDimensionAssessment(assessment, evidenceById, profile) {
+  assertExactKeys(assessment, ASSESSMENT_KEYS, `dimensionAssessment.${assessment?.dimension ?? 'unknown'}`);
   assert(nonEmpty(assessment.dimension) && DIMENSIONS.includes(assessment.dimension), 'DimensionAssessment.dimension is invalid.');
   assert(ASSESSMENT_STATES.has(assessment.assessmentState), `Dimension ${assessment.dimension} has invalid assessmentState.`);
   assert(ELIGIBILITY.has(assessment.eligibility), `Dimension ${assessment.dimension} has invalid eligibility.`);
@@ -169,6 +198,7 @@ function validateDimensionAssessment(assessment, evidenceById, profile) {
 
 export function validateQualityContractFixture(fixture) {
   assert(fixture && typeof fixture === 'object' && !Array.isArray(fixture), 'Contract fixture must be an object.');
+  assertExactKeys(fixture, ROOT_KEYS, 'fixture');
   assertNoForbiddenFields(fixture);
   assert(fixture.schemaVersion === SCHEMA_VERSION, `Unsupported schemaVersion ${fixture.schemaVersion}.`);
   assert(fixture.contractType === CONTRACT_TYPE, `Unsupported contractType ${fixture.contractType}.`);
@@ -180,6 +210,8 @@ export function validateQualityContractFixture(fixture) {
   assert(fixture.authority?.acceptanceAuthority === false, 'acceptanceAuthority must be false.');
   assert(fixture.authority?.actionAuthority === 'NONE', 'actionAuthority must be NONE.');
   assert(fixture.authority?.safetyAuthority === 'LOCAL_PHYSICAL_INTERLOCKS', 'safetyAuthority must remain LOCAL_PHYSICAL_INTERLOCKS.');
+  assertExactKeys(fixture.authority, AUTHORITY_KEYS, 'authority');
+  assertStringArray(fixture.limitations, 'limitations', { min: 1 });
   validateProfile(fixture.assessmentProfile);
 
   assert(Array.isArray(fixture.qualityEvidence), 'qualityEvidence must be an array.');
