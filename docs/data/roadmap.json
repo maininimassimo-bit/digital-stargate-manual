@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-11",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "e7beb4c5bbe1e83424f2276c7f45c00e1a5607e9b5a07a1ce7c1cf8573228ce7",
+  "sourceDigest": "3a9f7bc7dff3b34be3079b1ef40831de32e76f977b454d2cf676085adeb97107",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-046",
-  "nextMilestone": "BKL-046 F3 — Deterministic Advisory Demonstrator",
-  "target": "Implement a deterministic read-only demonstrator over accepted F2 bounded fixtures, emitting contract-valid recommendations without model/provider selection, real-session ingestion, automatic acceptance, PixInsight apply, device command or Safety Authority",
+  "nextMilestone": "BKL-046 F4 — Session/Provenance-Driven Read-Only Consumer",
+  "target": "Design and implement a read-only consumer and freshness-verified projection over canonically authorized session and PixInsight provenance inputs, regenerated and published automatically and atomically after each scientific-session import, without model/provider selection, automatic acceptance, PixInsight apply, device command or Safety Authority",
   "summary": {
     "total": 43,
     "completed": 31,
@@ -295,7 +295,7 @@
           "id": "BKL-046",
           "title": "AI Post-Processing Assistant for PixInsight",
           "status": "active",
-          "note": "Current package. F1 and F2 are CLOSED/ACCEPTED. F2 was integrated via PR #167, merge b8a9025fdfc9b5254b9c79a5c37a775b4f8fd083, ARB 98/100, Release Quality READY FOR MERGE and 6/6 successful post-merge workflows including Pages 34634735881. F3 is current for a deterministic read-only demonstrator over bounded fixtures. No model/provider, real-session ingestion, apply path, production authority or Safety Authority is implied."
+          "note": "Current package. F1-F3 are CLOSED/ACCEPTED. F3 was integrated via PR #169, merge 8339aecf0b6b7fa19396561b20253c0411fd7ee7, after owner-authorized AI-assisted ARB/RQ reviews (not independent human approvals), 21/21 F3 tests and 7/7 successful post-merge workflows including Pages 34643716214. F4 is current for a session/provenance-driven read-only consumer with automatic post-import regeneration, atomic publication and freshness/digest fail-closed gates. No model/provider, automatic acceptance, apply path, production authority or Safety Authority is implied."
         },
         {
           "id": "BKL-031",

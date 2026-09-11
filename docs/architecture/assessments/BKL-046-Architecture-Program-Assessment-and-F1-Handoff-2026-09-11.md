@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Package | BKL-046 — AI Post-Processing Assistant for PixInsight |
-| Stato | Accepted — F1/F2 handoff completed |
+| Stato | Accepted — F1/F2/F3 handoff completed |
 | Data | 11/09/2026 |
 | Baseline verificata | `main` @ `249a90265b9cd2323df6e1dfb0ab09c5c64f5f1b` |
 | Predecessore | BKL-041 — CLOSED / ACCEPTED / POST-MERGE VERIFIED |
@@ -116,4 +116,4 @@ Required F1 outputs:
 
 ## 9. Completion status
 
-Program assessment, F1 handoff and F2 contract increment: accepted. F2 was integrated via PR #167, merge `b8a9025fdfc9b5254b9c79a5c37a775b4f8fd083`, after ARB 98/100, Release Quality `READY FOR MERGE`, exact-head CI 5/5 and 6/6 successful post-merge workflows including Pages `34634735881`. F3 is the next dependency-ordered increment for a deterministic read-only demonstrator over bounded F2 fixtures.
+Program assessment and F1-F3 increments: accepted. F3 was integrated via PR #169, merge `8339aecf0b6b7fa19396561b20253c0411fd7ee7`, after owner-authorized AI-assisted ARB/RQ reviews explicitly recorded as non-independent human approvals, 21/21 F3 tests and 7/7 successful post-merge workflows including Pages `34643716214`. F4 is the next dependency-ordered increment for a session/provenance-driven read-only consumer with automatic post-import regeneration, atomic publication and freshness/digest fail-closed gates.
