@@ -3,15 +3,15 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-046-F5-EVP-001 |
-| Stato | Proposed / not executed |
-| Versione | 0.1 |
+| Stato | F5-A remediation exact-head CI green; re-review pending; F5-B/F5-C not executed |
+| Versione | 0.3 |
 | Data | 12/09/2026 |
 | Architecture | `docs/architecture/scientific-assets/BKL-046-F5-Real-Evidence-Evaluation-and-Capability-Closure.md` |
-| Baseline | `bc86264a4a689492087182e121820aa6cce06025` |
+| Baseline | F5 architecture merge `16e0f101fda50e375bff6d5e9c8ec90d2083bc12` |
 
 ## 1. Purpose
 
-Definire evidence, test e stop conditions per F5. Questo documento è un piano: nessun test F5, report, closure o outcome qui descritto è dichiarato eseguito.
+Definire evidence, test e stop conditions per F5. La slice F5-A ha ora evidence locale riproducibile; exact-head CI, ARB/RQ di implementazione, F5-B dynamic update/consumer e F5-C closure restano non eseguiti finché non esiste evidence repository-backed specifica.
 
 ## 2. Governed inputs
 
@@ -70,7 +70,15 @@ Il known answer deve produrre scientific effectiveness `NOT_EVALUABLE_CURRENT_EV
 | future exact match senza ground truth | accepted with limitations | not evaluable | nessuna effectiveness claim |
 | future exact match con metodo approvato | separatamente valutabile | evaluation required | nuova review, mai auto-promozione |
 
-## 6. Validation commands proposed
+### 5.1 F5-A execution evidence
+
+La suite F5-A implementata contiene 25 test e ha prodotto 25 PASS / 0 FAIL sul remediation head. Copre schema-shaped closed contract, popolazione completa, known answer, empty cohort, allowlist/traversal, determinism, tamper e catalog drift, authority, receipt orfane/duplicate, execution correlation/ordering, source BKL-045 esatta, registry/reason-code rejection, public-report tamper, closure escalation, directory assenti, unknown/non-file entries, full F2 receipt bounds, source-set metadata pinning e canonical F4 validation. La regressione F2 contiene 17 test con 17 PASS / 0 FAIL.
+
+Il report persistito `BKL046-F5A-F4FEB5E207DD3F7D3E4F6C87` ha digest `174f8d75a27160b476c65d2670c50e4089811834dd1e5867418c77dfbac41f70` e conserva il known answer: 15 sessioni, 0 provenance eligible, 0 Human Decision Receipt, 0 execution evidence, 2 source processing non correlate. Gli esiti restano `READY_FOR_F5_EVALUATION`, `NOT_EVALUABLE_CURRENT_EVIDENCE`, `NOT_READY_FOR_PRODUCTION`, `KEEP_OPEN` e `aiModelImplemented=false`.
+
+Questa evidence non copre `F5-EVAL-011`–`F5-EVAL-014` relativi a workflow first/retry, atomicità, browser freshness e accessibility: sono gate F5-B e restano `NOT_EXECUTED`. Il record corrente è `BKL-046-F5A-Validation-Remediation-Evidence-2026-09-12.md`; il precedente implementation evidence resta lo snapshot pre-review.
+
+## 6. Validation commands
 
 ```text
 node .github/scripts/generate-ai-post-processing-advisory-f5-evaluation.mjs --check
@@ -83,7 +91,7 @@ node --test .github/scripts/test-ai-post-processing-assistant-consumer.mjs
 mkdocs build --strict
 ```
 
-I primi tre comandi sono pianificati e non esistono finché F5-A non li implementa. Gli altri sono regressioni esistenti da mantenere.
+I primi tre comandi e tutte le regressioni sono stati confermati dall'exact-head CI del remediation head `df1fd85ea2bf2e058bcbca17ca5ace704acbab8a`; `mkdocs build --strict` è coperto da Validate documentation e Developer Foundation. La nuova ARB/RQ non è ancora eseguita.
 
 ## 7. CI and review gates
 

@@ -3,6 +3,16 @@ import { createHash } from 'node:crypto';
 export const SCHEMA_VERSION = '1.0';
 export const CONTRACT_TYPE = 'AI_POST_PROCESSING_ASSISTANT_F2_FIXTURE';
 export const IDENTITY_METHOD = 'BKL046-F2-CANONICAL-JSON-SHA256-1';
+export const F2_CONTRACT_LIMITS = Object.freeze({
+  stableIdMinLength: 2,
+  stableIdMaxLength: 128,
+  stableIdPattern: '^[A-Za-z0-9][A-Za-z0-9._:-]*$',
+  decisionEditsMaxItems: 32,
+  decisionEditParameterIdMaxLength: 256,
+  decisionEditUnitMaxLength: 64,
+  decisionEditReasonMaxLength: 2048,
+  decisionRationaleMaxLength: 4096
+});
 
 const ROOT_KEYS = new Set(['schemaVersion', 'contractType', 'identityMethod', 'fixtureId', 'fixtureMode', 'generatedAt', 'subject', 'sourceBindings', 'recommendations', 'humanDecisionReceipts', 'authority', 'limitations', 'artifactDigest']);
 const SUBJECT_KEYS = new Set(['subjectId', 'subjectType', 'assetRef', 'sessionRef', 'workflowRef', 'stepRef', 'correlationState']);
@@ -29,6 +39,7 @@ const FORBIDDEN_KEYS = new Set(['command', 'script', 'applyPath', 'execute', 'au
 
 const present = (value) => value !== null && value !== undefined;
 const nonEmpty = (value) => typeof value === 'string' && value.trim().length > 0;
+const stableIdExpression = new RegExp(F2_CONTRACT_LIMITS.stableIdPattern);
 
 export function canonicalJson(value) {
   if (Array.isArray(value)) return `[${value.map(canonicalJson).join(',')}]`;
@@ -57,6 +68,14 @@ function assertStringArray(value, label, { min = 0 } = {}) {
   assert(value.length >= min, `${label} must contain at least ${min} item(s).`);
   assert(value.every(nonEmpty), `${label} must contain non-empty strings.`);
   assert(new Set(value).size === value.length, `${label} must not contain duplicates.`);
+}
+
+export function validateStableId(value, label = 'stableId') {
+  assert(typeof value === 'string', `${label} must be a string.`);
+  assert(value.length >= F2_CONTRACT_LIMITS.stableIdMinLength, `${label} is shorter than the F2 minimum.`);
+  assert(value.length <= F2_CONTRACT_LIMITS.stableIdMaxLength, `${label} exceeds the F2 maximum.`);
+  assert(stableIdExpression.test(value), `${label} does not match the F2 stableId pattern.`);
+  return true;
 }
 
 function assertDateTime(value, label) {
@@ -200,7 +219,7 @@ export function validateRecommendationRecord(recommendation, subject, sourceBind
 function validateReceipt(receipt, recommendationById) {
   const label = `humanDecisionReceipt.${receipt?.receiptId ?? 'unknown'}`;
   assertExactKeys(receipt, RECEIPT_KEYS, label);
-  for (const field of ['receiptId', 'recommendationId', 'actorRef', 'correlationId']) assert(nonEmpty(receipt[field]), `${label}.${field} is required.`);
+  for (const field of ['receiptId', 'recommendationId', 'actorRef', 'correlationId']) validateStableId(receipt[field], `${label}.${field}`);
   assertDateTime(receipt.presentedAt, `${label}.presentedAt`);
   assertDateTime(receipt.decidedAt, `${label}.decidedAt`);
   assert(Date.parse(receipt.presentedAt) <= Date.parse(receipt.decidedAt), `${label} decision cannot precede presentation.`);
@@ -209,18 +228,31 @@ function validateReceipt(receipt, recommendationById) {
   const recommendation = recommendationById.get(receipt.recommendationId);
   assert(receipt.correlationId === recommendation.correlationId, `${label} correlationId does not match recommendation.`);
   assert(Array.isArray(receipt.decisionEdits), `${label}.decisionEdits must be an array.`);
+  assert(receipt.decisionEdits.length <= F2_CONTRACT_LIMITS.decisionEditsMaxItems, `${label}.decisionEdits exceeds the F2 maximum.`);
   receipt.decisionEdits.forEach((edit, index) => {
-    assertExactKeys(edit, EDIT_KEYS, `${label}.decisionEdits[${index}]`);
-    assert(nonEmpty(edit.parameterId) && present(edit.selectedValue) && nonEmpty(edit.reason), `${label}.decisionEdits[${index}] is incomplete.`);
-    assert(edit.unit === null || nonEmpty(edit.unit), `${label}.decisionEdits[${index}].unit is invalid.`);
+    const editLabel = `${label}.decisionEdits[${index}]`;
+    assertExactKeys(edit, EDIT_KEYS, editLabel);
+    assert(nonEmpty(edit.parameterId) && edit.parameterId.length <= F2_CONTRACT_LIMITS.decisionEditParameterIdMaxLength, `${editLabel}.parameterId is invalid.`);
+    assert(['number', 'string', 'boolean'].includes(typeof edit.selectedValue), `${editLabel}.selectedValue is invalid.`);
+    if (typeof edit.selectedValue === 'number') assert(Number.isFinite(edit.selectedValue), `${editLabel}.selectedValue must be finite.`);
+    assert(edit.unit === null || (typeof edit.unit === 'string' && edit.unit.length <= F2_CONTRACT_LIMITS.decisionEditUnitMaxLength), `${editLabel}.unit is invalid.`);
+    assert(nonEmpty(edit.reason) && edit.reason.length <= F2_CONTRACT_LIMITS.decisionEditReasonMaxLength, `${editLabel}.reason is invalid.`);
   });
   if (receipt.disposition === 'EDITED_FOR_MANUAL_APPLICATION') assert(receipt.decisionEdits.length > 0, `${label} edited disposition requires decision edits.`);
   if (receipt.disposition !== 'EDITED_FOR_MANUAL_APPLICATION') assert(receipt.decisionEdits.length === 0, `${label} decision edits require edited disposition.`);
-  assert(receipt.decisionRationale === null || nonEmpty(receipt.decisionRationale), `${label}.decisionRationale is invalid.`);
+  assert(receipt.decisionRationale === null || (typeof receipt.decisionRationale === 'string' && receipt.decisionRationale.length <= F2_CONTRACT_LIMITS.decisionRationaleMaxLength), `${label}.decisionRationale is invalid.`);
   assert(receipt.executionState === 'NOT_OBSERVED', `${label} must not claim execution.`);
   assert(Array.isArray(receipt.executionEvidenceRefs) && receipt.executionEvidenceRefs.length === 0, `${label} execution evidence belongs to BKL-045, not the decision receipt.`);
   assert(receipt.actionAuthority === 'NONE', `${label} actionAuthority must be NONE.`);
   assertDigest(receipt, 'receiptDigest', label);
+}
+
+export function validateHumanDecisionReceipt(receipt, recommendation) {
+  assert(recommendation && typeof recommendation === 'object' && !Array.isArray(recommendation), 'recommendation context is required.');
+  validateStableId(recommendation.recommendationId, 'recommendation.recommendationId');
+  validateStableId(recommendation.correlationId, 'recommendation.correlationId');
+  validateReceipt(receipt, new Map([[recommendation.recommendationId, recommendation]]));
+  return true;
 }
 
 export function validateAdvisoryContractFixture(fixture) {
