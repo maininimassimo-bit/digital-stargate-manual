@@ -44,6 +44,36 @@ const AUTHORITY_KEYS = [
   'consumerMode', 'advisoryOnly', 'acceptanceAuthority', 'actionAuthority', 'executionAuthority',
   'safetyAuthority', 'pixInsightApplyAuthorized', 'automaticAcceptanceAuthorized'
 ];
+const SUBJECT_KEYS = ['subjectId', 'subjectType', 'assetRef', 'sessionRef', 'workflowRef', 'stepRef', 'correlationState'];
+const BINDING_KEYS = [
+  'bindingId', 'semanticType', 'evidenceClass', 'sourceAuthority', 'sourceRef', 'lifecycleState',
+  'quality', 'completeness', 'citationRefs', 'limitations', 'bindingDigest'
+];
+const RECOMMENDATION_KEYS = [
+  'recommendationId', 'semanticType', 'aiDerived', 'producer', 'producerVersion', 'methodId',
+  'generatedAt', 'correlationId', 'subjectRef', 'category', 'lifecycleState', 'proposedAction',
+  'rationale', 'sourceBindingRefs', 'citationRefs', 'provenanceRefs', 'parameterAdvice', 'conflicts',
+  'unknowns', 'confidence', 'limitations', 'recommendationDigest'
+];
+const CONFIDENCE_KEYS = ['state', 'contractRef', 'value', 'limitations'];
+const PARAMETER_ADVICE_KEYS = [
+  'parameterId', 'mode', 'unit', 'categoricalValue', 'lowerBound', 'upperBound', 'applicability',
+  'evidenceRefs', 'limitations'
+];
+const SUBJECT_TYPES = new Set(['SCIENTIFIC_ASSET', 'PIXINSIGHT_WORKFLOW', 'PIXINSIGHT_PROCESS_STEP']);
+const SUBJECT_CORRELATION_STATES = new Set(['RESOLVED', 'PARTIAL', 'UNRESOLVED']);
+const SEMANTIC_TYPES = new Set(['observation', 'evidence', 'claim', 'recommendation']);
+const EVIDENCE_CLASSES = new Set(['OBSERVED', 'DECLARED', 'SUGGESTED']);
+const SOURCE_AUTHORITIES = new Set([
+  'repository_authority', 'scientific_catalog', 'analytics_product', 'session_projection',
+  'processing_evidence', 'projection', 'unknown'
+]);
+const LIFECYCLE_STATES = new Set(['incomplete', 'unknown', 'draft', 'validated', 'superseded', 'rejected']);
+const QUALITY_STATES = new Set(['VALID', 'STALE', 'UNKNOWN', 'INVALID']);
+const RECOMMENDATION_CATEGORIES = new Set([
+  'PROCESS_ORDER', 'PARAMETER_RANGE', 'QUALITY_CHECK', 'WORKFLOW_ALTERNATIVE', 'STOP_AND_REVIEW'
+]);
+const PARAMETER_MODES = new Set(['CATEGORICAL', 'BOUNDED_INTERVAL', 'UNKNOWN_NOT_RECOMMENDED']);
 
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
 const nonEmpty = value => typeof value === 'string' && value.trim().length > 0;
@@ -53,6 +83,11 @@ const same = (left, right) => canonicalJson(left) === canonicalJson(right);
 function exactKeys(value, expected, label) {
   assert(value && typeof value === 'object' && !Array.isArray(value), `${label} non valido`);
   assert(same(sorted(Object.keys(value)), sorted(expected)), `${label} contiene proprietà mancanti o sconosciute`);
+}
+
+function validateStringArray(value, label, { minItems = 0 } = {}) {
+  assert(Array.isArray(value) && value.length >= minItems, `${label} non valido`);
+  assert(value.every(nonEmpty) && new Set(value).size === value.length, `${label} contiene valori vuoti o duplicati`);
 }
 
 function assertNoForbiddenPublicFields(value, location = '$') {
@@ -92,20 +127,72 @@ function validateSourceEntry(entry, index) {
   assert(Array.isArray(entry.limitations), `limitations source non valide: ${entry.path}`);
 }
 
+function validateSubject(subject, sessionId) {
+  exactKeys(subject, SUBJECT_KEYS, `subject.${sessionId}`);
+  assert(nonEmpty(subject.subjectId), `subjectId mancante: ${sessionId}`);
+  assert(SUBJECT_TYPES.has(subject.subjectType), `subjectType non valido: ${sessionId}`);
+  for (const key of ['assetRef', 'sessionRef', 'workflowRef', 'stepRef']) {
+    assert(subject[key] === null || typeof subject[key] === 'string', `${key} non valido: ${sessionId}`);
+  }
+  assert(SUBJECT_CORRELATION_STATES.has(subject.correlationState), `subject correlation non valida: ${sessionId}`);
+}
+
+function validateSourceBinding(binding, sessionId) {
+  exactKeys(binding, BINDING_KEYS, `sourceBinding.${sessionId}`);
+  assert(nonEmpty(binding.bindingId), `bindingId mancante: ${sessionId}`);
+  assert(SEMANTIC_TYPES.has(binding.semanticType), `binding semanticType non valido: ${sessionId}`);
+  assert(EVIDENCE_CLASSES.has(binding.evidenceClass), `evidenceClass non valida: ${sessionId}`);
+  assert(SOURCE_AUTHORITIES.has(binding.sourceAuthority), `sourceAuthority non valida: ${sessionId}`);
+  assert(nonEmpty(binding.sourceRef), `sourceRef mancante: ${sessionId}`);
+  assert(LIFECYCLE_STATES.has(binding.lifecycleState), `binding lifecycle non valido: ${sessionId}`);
+  assert(QUALITY_STATES.has(binding.quality), `binding quality non valida: ${sessionId}`);
+  assert(COMPLETENESS.has(binding.completeness), `binding completeness non valida: ${sessionId}`);
+  validateStringArray(binding.citationRefs, `binding citationRefs.${sessionId}`, { minItems: 1 });
+  validateStringArray(binding.limitations, `binding limitations.${sessionId}`);
+  assert(DIGEST.test(binding.bindingDigest ?? ''), `binding digest non valido: ${sessionId}`);
+}
+
+function validateParameterAdvice(item, sessionId) {
+  exactKeys(item, PARAMETER_ADVICE_KEYS, `parameterAdvice.${sessionId}`);
+  assert(item.parameterId === null || typeof item.parameterId === 'string', `parameterId non valido: ${sessionId}`);
+  assert(PARAMETER_MODES.has(item.mode), `parameter mode non valido: ${sessionId}`);
+  assert(item.unit === null || typeof item.unit === 'string', `parameter unit non valida: ${sessionId}`);
+  assert(item.categoricalValue === null || typeof item.categoricalValue === 'string', `categorical value non valido: ${sessionId}`);
+  assert(item.lowerBound === null || Number.isFinite(item.lowerBound), `lower bound non valido: ${sessionId}`);
+  assert(item.upperBound === null || Number.isFinite(item.upperBound), `upper bound non valido: ${sessionId}`);
+  assert(nonEmpty(item.applicability), `parameter applicability mancante: ${sessionId}`);
+  validateStringArray(item.evidenceRefs, `parameter evidenceRefs.${sessionId}`);
+  validateStringArray(item.limitations, `parameter limitations.${sessionId}`, { minItems: 1 });
+  if (item.mode === 'UNKNOWN_NOT_RECOMMENDED') {
+    assert(item.parameterId === null && item.unit === null && item.categoricalValue === null && item.lowerBound === null && item.upperBound === null, `unknown parameter advice contiene valori: ${sessionId}`);
+  }
+}
+
 function validateRecommendation(recommendation, record, bindingIds) {
+  exactKeys(recommendation, RECOMMENDATION_KEYS, `recommendation.${record.sessionId}`);
   assert(recommendation?.semanticType === 'recommendation', `semanticType recommendation non valido: ${record.sessionId}`);
   assert(recommendation.aiDerived === false, `AI-derived state non autorizzato: ${record.sessionId}`);
   assert(recommendation.producer === 'DSG.DeterministicAdvisoryDemonstrator', `producer recommendation non autorizzato: ${record.sessionId}`);
   assert(recommendation.methodId === METHOD_ID, `method recommendation non autorizzato: ${record.sessionId}`);
   assert(recommendation.generatedAt === record.generatedAt, `timestamp recommendation non allineato: ${record.sessionId}`);
   assert(recommendation.subjectRef === record.subject.subjectId, `subject recommendation non allineato: ${record.sessionId}`);
-  assert(['validated', 'incomplete'].includes(recommendation.lifecycleState), `lifecycle recommendation non valido: ${record.sessionId}`);
+  assert(LIFECYCLE_STATES.has(recommendation.lifecycleState), `lifecycle recommendation non valido: ${record.sessionId}`);
+  assert(RECOMMENDATION_CATEGORIES.has(recommendation.category), `category recommendation non valida: ${record.sessionId}`);
   assert(nonEmpty(recommendation.proposedAction) && nonEmpty(recommendation.rationale), `recommendation incompleta: ${record.sessionId}`);
-  assert(Array.isArray(recommendation.sourceBindingRefs), `source binding refs non valide: ${record.sessionId}`);
+  validateStringArray(recommendation.sourceBindingRefs, `recommendation sourceBindingRefs.${record.sessionId}`, { minItems: 1 });
   assert(recommendation.sourceBindingRefs.every(ref => bindingIds.has(ref)), `source binding sconosciuto: ${record.sessionId}`);
+  validateStringArray(recommendation.citationRefs, `recommendation citationRefs.${record.sessionId}`, { minItems: 1 });
+  validateStringArray(recommendation.provenanceRefs, `recommendation provenanceRefs.${record.sessionId}`, { minItems: 1 });
+  validateStringArray(recommendation.conflicts, `recommendation conflicts.${record.sessionId}`);
+  validateStringArray(recommendation.unknowns, `recommendation unknowns.${record.sessionId}`);
+  validateStringArray(recommendation.limitations, `recommendation limitations.${record.sessionId}`, { minItems: 1 });
+  exactKeys(recommendation.confidence, CONFIDENCE_KEYS, `confidence.${record.sessionId}`);
   assert(recommendation.confidence?.state === 'UNAVAILABLE_F2', `confidence state non autorizzato: ${record.sessionId}`);
+  assert(recommendation.confidence?.contractRef === null, `confidence contract non autorizzato: ${record.sessionId}`);
   assert(recommendation.confidence?.value === null, `confidence numerica non autorizzata: ${record.sessionId}`);
+  validateStringArray(recommendation.confidence.limitations, `confidence limitations.${record.sessionId}`, { minItems: 1 });
   assert(Array.isArray(recommendation.parameterAdvice), `parameter advice non valido: ${record.sessionId}`);
+  recommendation.parameterAdvice.forEach(item => validateParameterAdvice(item, record.sessionId));
   assert(DIGEST.test(recommendation.recommendationDigest ?? ''), `recommendation digest non valido: ${record.sessionId}`);
 }
 
@@ -169,7 +256,9 @@ export function validateAdvisoryProjectionContract(projection) {
     assert(record.sourceRefs.every(ref => sourcePathSet.has(ref)), `source ref sconosciuto: ${record.sessionId}`);
     assert(DIGEST.test(record.inputArtifactDigest ?? '') && DIGEST.test(record.recordDigest ?? ''), `record digest non valido: ${record.sessionId}`);
     assert(record.decisionState === 'NOT_PRESENT_PRE_DECISION', `human decision implicita: ${record.sessionId}`);
+    validateSubject(record.subject, record.sessionId);
     assert(Array.isArray(record.sourceBindings) && record.sourceBindings.length > 0, `source bindings mancanti: ${record.sessionId}`);
+    record.sourceBindings.forEach(binding => validateSourceBinding(binding, record.sessionId));
     const bindingIds = new Set(record.sourceBindings.map(binding => binding?.bindingId));
     assert(bindingIds.size === record.sourceBindings.length && [...bindingIds].every(nonEmpty), `source binding identity non valida: ${record.sessionId}`);
     assert(Array.isArray(record.recommendations) && record.recommendations.length === 2, `recommendations non bounded: ${record.sessionId}`);

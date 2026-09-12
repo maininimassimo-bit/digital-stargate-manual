@@ -220,6 +220,13 @@ test('unknown contract properties are rejected', async () => {
   assert.throws(() => validateAdvisoryProjectionContract(changed), /proprietà mancanti o sconosciute/);
 });
 
+test('unknown nested F2 properties are rejected even with digest-shaped values', async () => {
+  const { projection } = await buildFixture();
+  const changed = structuredClone(projection);
+  changed.records[0].recommendations[0].automaticApply = false;
+  assert.throws(() => validateAdvisoryProjectionContract(changed), /proprietà mancanti o sconosciute/);
+});
+
 test('missing Web Crypto has no permissive fallback', async () => {
   const { catalog, projection } = await buildFixture();
   await assert.rejects(validateAdvisoryProjectionFreshness(projection, catalog, null), /WEB_CRYPTO_SHA256_UNAVAILABLE/);
