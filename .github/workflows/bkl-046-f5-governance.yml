@@ -1,0 +1,89 @@
+name: BKL-046 F5 governance
+
+on:
+  pull_request:
+    paths:
+      - '.github/scripts/ai-post-processing-advisory-*.mjs'
+      - '.github/scripts/test-ai-post-processing-advisory-*.mjs'
+      - '.github/scripts/test-ai-post-processing-assistant-consumer.mjs'
+      - '.github/workflows/bkl-046-f5-governance.yml'
+      - '.github/workflows/analyze-session-automatic.yml'
+      - 'docs/contracts/ai-post-processing-assistant-f2.schema.json'
+      - 'docs/contracts/ai-post-processing-assistant-f4.schema.json'
+      - 'docs/contracts/ai-post-processing-assistant-f5-evaluation.schema.json'
+      - 'docs/data/scientific-session-catalog.json'
+      - 'docs/data/ai-post-processing-advisory-projection.json'
+      - 'docs/data/ai-post-processing-advisory-f5-evaluation.json'
+      - 'docs/data/ai-post-processing-human-decisions/**'
+      - 'docs/data/ai-post-processing-execution-evidence/**'
+      - 'docs/architecture/scientific-assets/evidence/BKL-045-F3B-PXP-*.json'
+      - 'docs/architecture/scientific-assets/BKL-046-F5-Real-Evidence-Evaluation-and-Capability-Closure.md'
+      - 'docs/architecture/validation/BKL-046-F5-Real-Evidence-Evaluation-Plan.md'
+      - 'docs/architecture/validation/BKL-046-F5A-Evaluation-Foundation-Evidence-2026-09-12.md'
+      - 'docs/javascripts/ai-post-processing-assistant-core.mjs'
+      - 'docs/javascripts/ai-post-processing-assistant.js'
+      - 'docs/styles/ai-post-processing-assistant.css'
+      - 'docs/ai-post-processing-assistant/index.md'
+      - 'mkdocs.yml'
+  push:
+    branches: [main]
+    paths:
+      - '.github/scripts/ai-post-processing-advisory-*.mjs'
+      - '.github/scripts/test-ai-post-processing-advisory-*.mjs'
+      - '.github/scripts/test-ai-post-processing-assistant-consumer.mjs'
+      - '.github/workflows/bkl-046-f5-governance.yml'
+      - '.github/workflows/analyze-session-automatic.yml'
+      - 'docs/contracts/ai-post-processing-assistant-f2.schema.json'
+      - 'docs/contracts/ai-post-processing-assistant-f4.schema.json'
+      - 'docs/contracts/ai-post-processing-assistant-f5-evaluation.schema.json'
+      - 'docs/data/scientific-session-catalog.json'
+      - 'docs/data/ai-post-processing-advisory-projection.json'
+      - 'docs/data/ai-post-processing-advisory-f5-evaluation.json'
+      - 'docs/data/ai-post-processing-human-decisions/**'
+      - 'docs/data/ai-post-processing-execution-evidence/**'
+      - 'docs/architecture/scientific-assets/evidence/BKL-045-F3B-PXP-*.json'
+      - 'docs/architecture/scientific-assets/BKL-046-F5-Real-Evidence-Evaluation-and-Capability-Closure.md'
+      - 'docs/architecture/validation/BKL-046-F5-Real-Evidence-Evaluation-Plan.md'
+      - 'docs/architecture/validation/BKL-046-F5A-Evaluation-Foundation-Evidence-2026-09-12.md'
+      - 'docs/javascripts/ai-post-processing-assistant-core.mjs'
+      - 'docs/javascripts/ai-post-processing-assistant.js'
+      - 'docs/styles/ai-post-processing-assistant.css'
+      - 'docs/ai-post-processing-assistant/index.md'
+      - 'mkdocs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bkl-046-f5-governance-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  f5-evaluation-foundation:
+    name: F5 evaluation foundation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Parse F5 JSON Schema
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/contracts/ai-post-processing-assistant-f5-evaluation.schema.json', 'utf8'))"
+      - name: Test F5-A closed contracts, cohorts and known answer
+        run: node --test .github/scripts/test-ai-post-processing-advisory-f5-evaluation.mjs
+      - name: Verify persisted F5-A evaluation is current
+        run: node .github/scripts/generate-ai-post-processing-advisory-f5-evaluation.mjs --check
+      - name: Verify F5-A registry, source contracts and deterministic reconstruction
+        run: node .github/scripts/verify-ai-post-processing-advisory-f5-evaluation.mjs
+      - name: Regress F2 semantic contract
+        run: node --test .github/scripts/test-ai-post-processing-advisory-contract.mjs
+      - name: Regress F3 deterministic demonstrator
+        run: node --test .github/scripts/test-ai-post-processing-advisory-demonstrator.mjs
+      - name: Regress F4 source discovery and projection mapping
+        run: node --test .github/scripts/test-ai-post-processing-advisory-projection.mjs
+      - name: Regress persisted F4 projection and atomic integration
+        run: node .github/scripts/generate-ai-post-processing-advisory-projection.mjs --check && node .github/scripts/verify-ai-post-processing-advisory-projection.mjs
+      - name: Regress F4 portal consumer freshness and accessibility
+        run: node --test .github/scripts/test-ai-post-processing-assistant-consumer.mjs

@@ -53,7 +53,8 @@ La pubblicazione di un documento in questa sezione **non equivale ad autorizzazi
 
 ## BKL-046 — AI Post-Processing Assistant
 
-- [F5 Real-Evidence Evaluation Plan](BKL-046-F5-Real-Evidence-Evaluation-Plan.md) — proposed / not executed
+- [F5 Real-Evidence Evaluation Plan](BKL-046-F5-Real-Evidence-Evaluation-Plan.md) — F5-A local execution; exact-head CI/review pending; F5-B/F5-C not executed
+- [F5-A Evaluation Foundation Evidence](BKL-046-F5A-Evaluation-Foundation-Evidence-2026-09-12.md) — 22/22 local tests; known answer persisted; closure remains open
 
 ## Stato di pubblicazione
 

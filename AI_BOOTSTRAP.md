@@ -2,7 +2,7 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 3.7 |
+| Versione | 3.8 |
 | Baseline | 12/09/2026 |
 | Stato | Current root bootstrap — BKL-046 AI Post-Processing Assistant |
 
@@ -51,7 +51,7 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - foundation completata e accettata attraverso BKL-045;
 - BKL-037 — Session Comparison & Benchmarking: CLOSED / ACCEPTED;
 - BKL-041 — Scientific Data Quality Score: CLOSED / ACCEPTED / POST-MERGE VERIFIED;
-- BKL-046 — AI Post-Processing Assistant: CURRENT / F5 Architecture Package proposed; F1-F4 ACCEPTED / POST-MERGE VERIFIED; F5 implementation not started.
+- BKL-046 — AI Post-Processing Assistant: CURRENT; F1-F4 ACCEPTED / POST-MERGE VERIFIED; F5 architecture integrated tramite PR #177; F5-A implementation candidate in review, F5-B/F5-C not started.
 
 BKL-037 resta read-only/descriptive-only e non autorizza ranking, score, threshold, recommendation, remediation, command path o Safety Authority.
 
@@ -71,4 +71,4 @@ Nessun portale, comparison layer, quality score o AI è Safety Authority. Nessun
 
 ## 9. Punto di partenza operativo
 
-Sottoporre a review **BKL-046 F5 — Real-Evidence Evaluation and Capability Closure** tramite `docs/architecture/scientific-assets/BKL-046-F5-Real-Evidence-Evaluation-and-Capability-Closure.md` e il relativo validation plan. La baseline corrente contiene 15 sessioni, 0 provenance matched, 15 provenance unavailable, 0 decision receipt e 15 processing-history fail-closed: l'efficacia scientifica è quindi `NOT_EVALUABLE_CURRENT_EVIDENCE`. F5-A può iniziare solo dopo acceptance del package. Non sono autorizzati model/provider, confidence scientifica, automatic acceptance, PixInsight apply, remediation, device command o Safety Authority.
+Sottoporre a review **BKL-046 F5-A — Evaluation Foundation**: contratto chiuso, evaluator/generator/verifier deterministici, report persistito e CI dedicata. Il known answer corrente contiene 15 sessioni, 0 provenance matched, 0 decision receipt e 0 execution evidence; l'efficacia scientifica resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, la production readiness resta `NOT_READY_FOR_PRODUCTION` e la closure recommendation resta `KEEP_OPEN`. F5-B non può iniziare prima dell'acceptance governata di F5-A. Non sono autorizzati model/provider, confidence scientifica, automatic acceptance, PixInsight apply, remediation, device command o Safety Authority.

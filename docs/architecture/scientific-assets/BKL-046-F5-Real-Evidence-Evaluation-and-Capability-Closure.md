@@ -3,13 +3,14 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-046-F5 |
-| Stato | Proposed |
-| Versione | 0.1 |
+| Stato | Architecture integrated; F5-A implementation candidate; F5-B/F5-C not started |
+| Versione | 0.2 |
 | Data | 12/09/2026 |
 | Package | BKL-046 — AI Post-Processing Assistant for PixInsight |
 | Baseline F4 | PR #175, merge `af48cc2441cf956d88c13c81845fc2a2f7c599f2` — Accepted |
-| Repository baseline | `bc86264a4a689492087182e121820aa6cce06025` |
-| Release impact | Architecture/design only; no semantic release assigned |
+| Baseline F5 architecture | PR #177, merge `16e0f101fda50e375bff6d5e9c8ec90d2083bc12` — integrated |
+| Repository baseline | `16e0f101fda50e375bff6d5e9c8ec90d2083bc12` |
+| Release impact | F5-A additive evaluation foundation; no consumer/runtime behavior or semantic release assigned |
 | Authority | Deterministic, read-only, human-only, non-production and non-Safety |
 
 ## 1. Purpose
@@ -130,9 +131,9 @@ Un Human Decision Receipt può descrivere la disposizione dell'utente, ma non pr
 
 Il nome BKL-046 non autorizza una claim di AI runtime: se F5 chiude la baseline corrente, l'outcome deve dichiarare `aiModelImplemented=false`.
 
-## 10. Proposed machine-readable contract
+## 10. Machine-readable contract — F5-A candidate
 
-Il report F5 dovrà contenere almeno:
+Il report F5-A contiene:
 
 - `schemaVersion`, `evaluationType`, `evaluationState`, `evaluationId`, `generatedAt`;
 - snapshot di catalogo e projection F4 con path, identity e digest;
@@ -145,20 +146,20 @@ Il report F5 dovrà contenere almeno:
 
 Stati o proprietà sconosciuti, digest non validi, snapshot stale e authority drift devono essere rifiutati.
 
-## 11. Proposed components and layers
+## 11. Components and layers
 
-| Layer | Artefatto proposto | Responsabilità |
-|---|---|---|
-| Contract | `docs/contracts/ai-post-processing-assistant-f5-evaluation.schema.json` | envelope F5 chiuso |
-| Domain policy | `.github/scripts/ai-post-processing-advisory-real-evidence-evaluation.mjs` | cohort e decision table pure |
-| Application | `.github/scripts/generate-ai-post-processing-advisory-f5-evaluation.mjs` | `--write`, `--check`, `--print` |
-| Projection | `docs/data/ai-post-processing-advisory-f5-evaluation.json` | report persistito digest-protected |
-| Verification | `.github/scripts/verify-ai-post-processing-advisory-f5-evaluation.mjs` | drift e workflow integration |
-| Test | `.github/scripts/test-ai-post-processing-advisory-f5-evaluation.mjs` | positive/negative/known-answer/regression |
-| Presentation | consumer F4 esteso | stato F5 e limitation; nessuna azione mutativa |
-| CI | `.github/workflows/bkl-046-f5-governance.yml` | F5 e regressioni F2-F4 |
+| Layer | Artefatto | Stato F5-A | Responsabilità |
+|---|---|---|---|
+| Contract | `docs/contracts/ai-post-processing-assistant-f5-evaluation.schema.json` | Implemented candidate | envelope F5 chiuso e registry enumerata |
+| Domain policy | `.github/scripts/ai-post-processing-advisory-real-evidence-evaluation.mjs` | Implemented candidate | cohort, allowlist, exact correlation e decision table pure |
+| Application | `.github/scripts/generate-ai-post-processing-advisory-f5-evaluation.mjs` | Implemented candidate | `--write`, `--check`, `--print` |
+| Projection | `docs/data/ai-post-processing-advisory-f5-evaluation.json` | Implemented candidate | report persistito digest-protected |
+| Verification | `.github/scripts/verify-ai-post-processing-advisory-f5-evaluation.mjs` | Implemented candidate | registry/schema drift, source contract e deterministic reconstruction |
+| Test | `.github/scripts/test-ai-post-processing-advisory-f5-evaluation.mjs` | Implemented candidate | positive, negative, known-answer e failure semantics |
+| Presentation | consumer F4 esteso | Not started — F5-B | stato F5 e limitation; nessuna azione mutativa |
+| CI | `.github/workflows/bkl-046-f5-governance.yml` | Implemented candidate | F5-A e regressioni F2-F4 |
 
-## 12. Dynamic update and atomicity
+## 12. Dynamic update and atomicity — F5-B target, not executed
 
 Il generator F5 deve essere eseguito dopo catalogo e projection F4 nel first path e nella funzione `regenerate()` di `analyze-session-automatic.yml`. Il report entra in `governed_paths` e viene committato atomicamente. Modifiche a catalogo, provenance o projection F4 devono includere il report riallineato oppure fallire il gate `--check`.
 
@@ -179,7 +180,7 @@ F5 è additivo. L'implementazione procede F5-A contratto/evaluator/report, F5-B 
 
 ## 15. Quality and validation impact
 
-Il piano `BKL-046-F5-Real-Evidence-Evaluation-Plan.md` governa test di cohort completeness, empty-cohort semantics, determinism, anti-tampering, no-self-evidence, authority, dynamic update, accessibility e regressioni F2-F4. Nessuna evidence pianificata è rappresentata come già eseguita.
+Il piano `BKL-046-F5-Real-Evidence-Evaluation-Plan.md` governa test di cohort completeness, empty-cohort semantics, determinism, anti-tampering, no-self-evidence, authority, dynamic update, accessibility e regressioni F2-F4. L'evidence F5-A è registrata in `BKL-046-F5A-Evaluation-Foundation-Evidence-2026-09-12.md`; dynamic update, consumer, accessibility e closure restano F5-B/F5-C non eseguiti.
 
 ## 16. Risks and trade-offs
 
@@ -206,6 +207,8 @@ Il piano `BKL-046-F5-Real-Evidence-Evaluation-Plan.md` governa test di cohort co
 | forbidden experimental ground truth | BKL-041 closure |
 | program handoff | `docs/architecture/assessments/BKL-046-F5-Architecture-Program-Handoff-2026-09-12.md` |
 | validation plan | `docs/architecture/validation/BKL-046-F5-Real-Evidence-Evaluation-Plan.md` |
+| F5 architecture review | `docs/architecture/reviews/ARB-BKL-046-F5-AI-Assisted-Architecture-Review-2026-09-12.md` |
+| F5-A implementation evidence | `docs/architecture/validation/BKL-046-F5A-Evaluation-Foundation-Evidence-2026-09-12.md` |
 
 ## 18. Acceptance criteria
 
