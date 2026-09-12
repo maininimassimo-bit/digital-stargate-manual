@@ -9,6 +9,12 @@ on:
       - '.github/workflows/analyze-session-automatic.yml'
       - 'docs/contracts/ai-post-processing-assistant-f4.schema.json'
       - 'docs/architecture/scientific-assets/BKL-046-F4-Session-Provenance-Driven-Read-Only-Consumer.md'
+      - '.github/scripts/test-ai-post-processing-assistant-consumer.mjs'
+      - 'docs/javascripts/ai-post-processing-assistant-core.mjs'
+      - 'docs/javascripts/ai-post-processing-assistant.js'
+      - 'docs/styles/ai-post-processing-assistant.css'
+      - 'docs/ai-post-processing-assistant/index.md'
+      - 'mkdocs.yml'
       - 'docs/architecture/scientific-assets/evidence/BKL-045-F3B-PXP-*.json'
       - 'docs/data/scientific-session-catalog.json'
       - 'docs/data/ai-post-processing-advisory-projection.json'
@@ -21,6 +27,12 @@ on:
       - '.github/workflows/analyze-session-automatic.yml'
       - 'docs/contracts/ai-post-processing-assistant-f4.schema.json'
       - 'docs/architecture/scientific-assets/BKL-046-F4-Session-Provenance-Driven-Read-Only-Consumer.md'
+      - '.github/scripts/test-ai-post-processing-assistant-consumer.mjs'
+      - 'docs/javascripts/ai-post-processing-assistant-core.mjs'
+      - 'docs/javascripts/ai-post-processing-assistant.js'
+      - 'docs/styles/ai-post-processing-assistant.css'
+      - 'docs/ai-post-processing-assistant/index.md'
+      - 'mkdocs.yml'
       - 'docs/architecture/scientific-assets/evidence/BKL-045-F3B-PXP-*.json'
       - 'docs/data/scientific-session-catalog.json'
       - 'docs/data/ai-post-processing-advisory-projection.json'
@@ -51,6 +63,8 @@ jobs:
         run: node .github/scripts/generate-ai-post-processing-advisory-projection.mjs --check
       - name: Verify atomic first and retry workflow integration
         run: node .github/scripts/verify-ai-post-processing-advisory-projection.mjs
+      - name: Test F4 portal consumer freshness and accessibility
+        run: node --test .github/scripts/test-ai-post-processing-assistant-consumer.mjs
       - name: Regress F2 semantic contract
         run: node --test .github/scripts/test-ai-post-processing-advisory-contract.mjs
       - name: Regress F3 deterministic demonstrator
