@@ -24,6 +24,9 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [BKL-046 F3 Acceptance](BKL-046-F3-ACCEPTANCE-2026-09-11.md) | Acceptance, review AI-assistite owner-authorized, merge e verifica pubblicazione F3 |
 | [BKL-046 F4 Architecture](../architecture/scientific-assets/BKL-046-F4-Session-Provenance-Driven-Read-Only-Consumer.md) | F4 accettata e verificata post-merge |
 | [BKL-046 F4 Acceptance](BKL-046-F4-ACCEPTANCE-2026-09-12.md) | Acceptance, review AI-assistite, deroga consumata, merge e verifica live |
+| [BKL-046 F5 Program Handoff](../architecture/assessments/BKL-046-F5-Architecture-Program-Handoff-2026-09-12.md) | Baseline, maturity, gap e sequenza F5 |
+| [BKL-046 F5 Architecture](../architecture/scientific-assets/BKL-046-F5-Real-Evidence-Evaluation-and-Capability-Closure.md) | Package proposto; implementation not started |
+| [BKL-046 F5 Validation Plan](../architecture/validation/BKL-046-F5-Real-Evidence-Evaluation-Plan.md) | Cohort, test, stop condition e closure gate proposti |
 
 ## Registri e standard canonici
 
@@ -33,7 +36,7 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 
 - BKL-037 — Session Comparison & Benchmarking: CLOSED / ACCEPTED;
 - BKL-041 — Scientific Data Quality Score: CLOSED / ACCEPTED / POST-MERGE VERIFIED;
-- BKL-046 — AI Post-Processing Assistant: CURRENT / F5 evaluation-and-closure design; F1-F4 ACCEPTED / POST-MERGE VERIFIED.
+- BKL-046 — AI Post-Processing Assistant: CURRENT / F5 Architecture Package proposed; F1-F4 ACCEPTED / POST-MERGE VERIFIED; F5 implementation not started.
 
 ## Sequenza governata
 

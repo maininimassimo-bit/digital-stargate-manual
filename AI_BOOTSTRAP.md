@@ -2,7 +2,7 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 3.6 |
+| Versione | 3.7 |
 | Baseline | 12/09/2026 |
 | Stato | Current root bootstrap — BKL-046 AI Post-Processing Assistant |
 
@@ -51,7 +51,7 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - foundation completata e accettata attraverso BKL-045;
 - BKL-037 — Session Comparison & Benchmarking: CLOSED / ACCEPTED;
 - BKL-041 — Scientific Data Quality Score: CLOSED / ACCEPTED / POST-MERGE VERIFIED;
-- BKL-046 — AI Post-Processing Assistant: CURRENT / F5 Real-Evidence Evaluation and Capability Closure design; F1-F4 ACCEPTED / POST-MERGE VERIFIED.
+- BKL-046 — AI Post-Processing Assistant: CURRENT / F5 Architecture Package proposed; F1-F4 ACCEPTED / POST-MERGE VERIFIED; F5 implementation not started.
 
 BKL-037 resta read-only/descriptive-only e non autorizza ranking, score, threshold, recommendation, remediation, command path o Safety Authority.
 
@@ -71,4 +71,4 @@ Nessun portale, comparison layer, quality score o AI è Safety Authority. Nessun
 
 ## 9. Punto di partenza operativo
 
-Avviare **BKL-046 F5 — Real-Evidence Evaluation and Capability Closure** come incremento di architettura/design sulla baseline F4 accettata tramite PR #175, merge `af48cc2441cf956d88c13c81845fc2a2f7c599f2`. F5 deve definire cohort, sufficienza delle evidenze, criteri di valutazione e limitation trattenute per decidere una possibile closure della capability read-only. Non sono autorizzati model/provider, confidence scientifica, automatic acceptance, PixInsight apply, remediation, device command o Safety Authority.
+Sottoporre a review **BKL-046 F5 — Real-Evidence Evaluation and Capability Closure** tramite `docs/architecture/scientific-assets/BKL-046-F5-Real-Evidence-Evaluation-and-Capability-Closure.md` e il relativo validation plan. La baseline corrente contiene 15 sessioni, 0 provenance matched, 15 provenance unavailable, 0 decision receipt e 15 processing-history fail-closed: l'efficacia scientifica è quindi `NOT_EVALUABLE_CURRENT_EVIDENCE`. F5-A può iniziare solo dopo acceptance del package. Non sono autorizzati model/provider, confidence scientifica, automatic acceptance, PixInsight apply, remediation, device command o Safety Authority.

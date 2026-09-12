@@ -51,6 +51,10 @@ La pubblicazione di un documento in questa sezione **non equivale ad autorizzazi
 - [Transfer Readiness Gate](AP-013-Transfer-Readiness-Gate.md)
 - [AP-013B — OneDrive Transport Operational Acceptance](AP-013B-OneDrive-Transport-Operational-Acceptance.md)
 
+## BKL-046 — AI Post-Processing Assistant
+
+- [F5 Real-Evidence Evaluation Plan](BKL-046-F5-Real-Evidence-Evaluation-Plan.md) — proposed / not executed
+
 ## Stato di pubblicazione
 
 La pagina espone soltanto documenti curati e versionati. Restano esclusi dal portale:
