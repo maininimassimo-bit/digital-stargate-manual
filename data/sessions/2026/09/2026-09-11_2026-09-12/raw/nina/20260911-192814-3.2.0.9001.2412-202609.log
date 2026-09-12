@@ -1,0 +1,407 @@
+----------------------------------------------------------------------
+--------------N.I.N.A. - Nighttime Imaging 'N' Astronomy--------------
+--------------------------Version 3.2.0.9001--------------------------
+-------------------------2026-09-11T19:28:25--------------------------
+----------------------------------------------------------------------
+---------------------Microsoft Windows 10.0.17763---------------------
+-------------------------OS Architecture X64--------------------------
+-----------------------Process Architecture X64-----------------------
+-----------------------------.NET 8.0.21------------------------------
+----------------------------------------------------------------------
+--------------------------Processor Count 2---------------------------
+--------------------Total Physical Memory 11.68 GB--------------------
+----------------------------------------------------------------------
+DATE|LEVEL|SOURCE|MEMBER|LINE|MESSAGE
+2026-09-11T19:28:25.1109|INFO|CameraChooserVM.cs|GetEquipment|69|Found 1 ASI Cameras
+2026-09-11T19:28:25.6732|INFO|CameraChooserVM.cs|GetEquipment|84|Found 1 Altair Cameras
+2026-09-11T19:28:26.1379|INFO|CameraChooserVM.cs|GetEquipment|96|Found 0 Atik Cameras
+2026-09-11T19:28:26.2497|INFO|CameraChooserVM.cs|GetEquipment|110|Found 0 FLI Cameras
+2026-09-11T19:28:27.7187|INFO|CameraChooserVM.cs|GetEquipment|130|Found 2 QHYCCD Cameras
+2026-09-11T19:28:30.3800|INFO|CameraChooserVM.cs|GetEquipment|158|Found 2 ToupTek Cameras
+2026-09-11T19:28:30.8176|INFO|CameraChooserVM.cs|GetEquipment|173|Found 1 Ogma Cameras
+2026-09-11T19:28:31.2918|INFO|CameraChooserVM.cs|GetEquipment|188|Found 2 Omegon Cameras
+2026-09-11T19:28:32.2212|INFO|CameraChooserVM.cs|GetEquipment|203|Found 2 RisingCam Cameras
+2026-09-11T19:28:32.5718|INFO|CameraChooserVM.cs|GetEquipment|218|Found 1 MallinCam Cameras
+2026-09-11T19:28:32.7673|INFO|CameraChooserVM.cs|GetEquipment|243|Found 1 SVBony Cameras
+2026-09-11T19:28:32.7709|INFO|CameraChooserVM.cs|GetEquipment|259|Found 0 SBIG Cameras
+2026-09-11T19:28:33.2628|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin Connector version 2.1.0.2 by Stefan Berg @isbeorn
+2026-09-11T19:28:34.0328|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin Digital StarGate Observatory Telemetry Exporter version 0.3.1.0 by Digital StarGate
+2026-09-11T19:28:41.9881|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin Hocus Focus version 3.0.0.25 by George Hilios (jokogeo)
+2026-09-11T19:28:43.1281|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin Remote Copy version 3.0.1.0 by Tom Palmer @tcpalmer
+2026-09-11T19:29:15.7997|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin RTSP Client version 3.1.0.6 by Stefan Berg @isbeorn
+2026-09-11T19:29:16.1122|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin Three Point Polar Alignment version 2.2.4.3 by Stefan Berg @isbeorn
+2026-09-11T19:29:16.3420|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin WandererAstro Tools version 3.0.0.0 by WandererAstro
+2026-09-11T19:29:19.6011|INFO|PluginFetcher.cs|RequestAll|43|Fetching plugin manifests from https://nighttime-imaging.eu/wp-json/nina/v1/plugins/manifests
+2026-09-11T19:29:21.0253|INFO|CameraChooserVM.cs|GetEquipment|279|Found 0 SVBony Cameras
+2026-09-11T19:29:21.2148|INFO|CameraChooserVM.cs|GetEquipment|279|Found 0 PlayerOne Cameras
+2026-09-11T19:29:21.3119|INFO|CameraChooserVM.cs|GetEquipment|279|Found 0 ASTPAN Cameras
+2026-09-11T19:29:21.3146|INFO|CameraChooserVM.cs|GetEquipment|293|Found 13 ASCOM Cameras
+2026-09-11T19:29:22.2679|INFO|ApplicationVM.cs|CheckASCOMPlatformVersion|81|ASCOM Platform 7.1.3.4851 installed
+2026-09-11T19:29:23.4631|INFO|SwitchChooserVM.cs|GetEquipment|71|Found 0 Alpaca Switch Hubs
+2026-09-11T19:29:23.4645|INFO|CameraChooserVM.cs|GetEquipment|305|Found 0 Alpaca Cameras
+2026-09-11T19:29:23.4680|INFO|CameraChooserVM.cs|GetEquipment|318|Found 0 Canon Cameras
+2026-09-11T19:29:23.6248|INFO|WeatherDataChooserVM.cs|GetEquipment|69|Found 0 Alpaca Observing Conditions
+2026-09-11T19:29:23.6597|INFO|SafetyMonitorChooserVM.cs|GetEquipment|71|Found 0 Alpaca Safety Monitors
+2026-09-11T19:29:23.6718|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive C:\: 3.26 GB
+2026-09-11T19:29:23.6721|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive D:\: 329.61 GB
+2026-09-11T19:29:24.0691|INFO|TelescopeChooserVM.cs|GetEquipment|69|Found 0 Alpaca Telescopes
+2026-09-11T19:29:25.0760|INFO|FlatDeviceChooserVM.cs|GetEquipment|67|Found 0 Alpaca Cover Calibrators
+2026-09-11T19:29:25.0845|INFO|FocuserChooserVM.cs|GetEquipment|84|Found 0 Alpaca Focusers
+2026-09-11T19:29:25.0904|INFO|RotatorChooserVM.cs|GetEquipment|68|Found 0 Alpaca Rotators
+2026-09-11T19:29:25.0978|INFO|FilterWheelChooserVM.cs|GetEquipment|193|Found 0 Alpaca Filter Wheels
+2026-09-11T19:29:25.1041|INFO|DomeChooserVM.cs|GetEquipment|67|Found 0 Alpaca Domes
+2026-09-11T19:29:25.6360|INFO|PluginFetcher.cs|RequestAll|57|Found 95 valid plugins at https://nighttime-imaging.eu/wp-json/nina/v1/plugins/manifests
+2026-09-11T19:29:29.2626|INFO|CameraVM.cs|Disconnect|650|Disconnected Camera
+2026-09-11T19:29:29.2695|INFO|QHYCamera.cs|ConnectSync|766|QHYCCD: Connecting to 695A-M-0037ec709603ca4e3
+2026-09-11T19:29:32.2149|INFO|FilterWheelVM.cs|Disconnect|333|Disconnected Filter Wheel
+2026-09-11T19:29:32.4937|INFO|FilterWheelVM.cs|ChooseFW|279|Successfully connected Filter Wheel. Id: 695A-M-0037ec709603ca4e3 Name: 695A-M 8-Slot Filter Wheel DisplayName: 695A-M 8-Slot Filter Wheel Driver Version: 1.0
+2026-09-11T19:29:34.7078|INFO|FocuserVM.cs|Disconnect|441|Disconnected Focuser
+2026-09-11T19:29:37.0282|INFO|FocuserVM.cs|ChooseFocuser|333|Successfully connected Focuser. Id: ASCOM.PegasusAstro.Focuser Name: Pegasus Astro Focus Controller DisplayName: Pegasus Astro Focus Controller (ASCOM) Driver Version: 2.20
+2026-09-11T19:29:37.4934|INFO|TelescopeVM.cs|Disconnect|740|Disconnected mount
+2026-09-11T19:29:37.6584|INFO|AscomTelescope.cs|CheckMountTime|845|Mount UTC Time: 2026-09-11 17:29:37Z / System UTC Time: 2026-09-11 17:29:37Z; Difference: 0.005 seconds
+2026-09-11T19:29:37.7307|INFO|AscomTelescope.cs|CheckMountTime|865|Mount driver does not allow the mount's time to be set.
+2026-09-11T19:29:37.7652|INFO|AscomDevice.cs|GetProperty|527|Property Telescope.SiteElevation GET is not implemented in this driver (CPWI_ASCOM_Telescope)
+2026-09-11T19:29:38.3546|INFO|TelescopeVM.cs|ChooseTelescope|535|Successfully connected mount. Id: ASCOM.Optec ASCOM.Telescope Name: CPWI_ASCOM_Telescope DisplayName: CPWI_ASCOM_Telescope (ASCOM) Driver Version: 2.5.9.99  with DLL Assembly Date: July_1_2020
+2026-09-11T19:29:40.7691|INFO|PHD2Guider.cs|Connect|205|Connecting to PHD2 server at 127.0.0.1:4400
+2026-09-11T19:29:44.5706|INFO|FlatDeviceVM.cs|Disconnect|289|Disconnected Flat Device
+2026-09-11T19:30:45.0110|INFO|FlatDeviceVM.cs|Connect|241|Successfully connected flat device. Id: ASCOM.WandererCover1.CoverCalibrator Name: WandererEmpire Cover 1 DisplayName: WandererEmpire Cover 1 (ASCOM) Driver Version: 2.0
+2026-09-11T19:30:49.3993|INFO|QHYCamera.cs|ConnectSync|1020|QHYCCD: SDK version: 25-4-23-15
+2026-09-11T19:30:49.3995|INFO|QHYCamera.cs|ConnectSync|1021|QHYCCD: USB driver version: 
+2026-09-11T19:30:49.3996|INFO|QHYCamera.cs|ConnectSync|1022|QHYCCD: Camera firmware version: 18-10-24
+2026-09-11T19:30:49.3997|INFO|QHYCamera.cs|ConnectSync|1023|QHYCCD: Camera FPGA versions: N/A
+2026-09-11T19:30:49.4655|INFO|CameraVM.cs|ChooseCamera|455|Successfully connected Camera. Id: 695A-M-0037ec709603ca4e3 Name: 695A-M DisplayName: 695A-M (603ca4e3)Driver Version: 
+2026-09-11T19:30:52.6474|INFO|WeatherDataVM.cs|Disconnect|305|Disconnected Weather Device
+2026-09-11T19:30:54.6937|INFO|AscomDevice.cs|GetProperty|527|Property ObservingConditions.SkyBrightness GET is not implemented in this driver (CloudWatcher ObsCond)
+2026-09-11T19:30:54.7038|INFO|AscomDevice.cs|GetProperty|527|Property ObservingConditions.SkyQuality GET is not implemented in this driver (CloudWatcher ObsCond)
+2026-09-11T19:30:54.7185|INFO|AscomDevice.cs|GetProperty|527|Property ObservingConditions.StarFWHM GET is not implemented in this driver (CloudWatcher ObsCond)
+2026-09-11T19:30:54.7314|INFO|AscomDevice.cs|GetProperty|527|Property ObservingConditions.WindDirection GET is not implemented in this driver (CloudWatcher ObsCond)
+2026-09-11T19:30:54.7439|INFO|WeatherDataVM.cs|ChooseWeatherData|150|Successfully connected Weather Device. Id: ASCOM.CloudWatcher.ObservingConditions Name: CloudWatcher ObsCond DisplayName: CloudWatcher ObsCond (ASCOM) Driver Version: 1.1
+2026-09-11T19:30:56.5795|INFO|DomeVM.cs|Disconnect|355|Disconnected Dome Device
+2026-09-11T19:30:56.7341|INFO|AscomDevice.cs|GetProperty|527|Property Dome.AtPark GET is not implemented in this driver (Shelter Dome)
+2026-09-11T19:30:56.7422|INFO|AscomDevice.cs|GetProperty|527|Property Dome.AtHome GET is not implemented in this driver (Shelter Dome)
+2026-09-11T19:30:56.7815|INFO|AscomDevice.cs|GetProperty|527|Property Dome.Azimuth GET is not implemented in this driver (Shelter Dome)
+2026-09-11T19:30:57.0525|INFO|DomeVM.cs|ChooseDome|198|Successfully connected Dome. Id: ASCOM.TS_Shelter.Dome Name: Shelter Dome DisplayName: Shelter Dome (ASCOM) Driver Version: 6.6
+2026-09-11T19:30:59.0771|INFO|AscomDevice.cs|GetProperty|527|Property Dome.Altitude GET is not implemented in this driver (Shelter Dome)
+2026-09-11T19:31:00.0059|INFO|SafetyMonitorVM.cs|Disconnect|221|Disconnected Safety Monitor
+2026-09-11T19:31:00.9774|INFO|SafetyMonitorVM.cs|Connect|175|Successfully connected Safety Monitor. Id: ASCOM.Hub.SafetyMonitor Name: Short driver name - please customise DisplayName: Short driver name - please customise (ASCOM) Driver Version: 6.4
+2026-09-11T19:31:04.5830|INFO|CameraVM.cs|CoolCamera|138|Cooling Camera. Target: -10 Duration: 00:05:00
+2026-09-11T19:38:10.1988|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 3.14s > 2s; Poll: 00:00:00.0027766; Update: 00:00:03.1397875)
+2026-09-11T19:42:44.1581|INFO|DockManagerVM.cs|InitializeAvalonDockLayout|366|Initializing imaging tab layout from C:\Users\PrimaLuceLab\AppData\Local\NINA\Profiles\21c45d14-58c2-4ca1-9053-4e23fb6d7dc4.dock.config
+2026-09-11T19:42:57.8343|INFO|Sequence2VM.cs|LockSequence|139|Sequencer unlocked
+2026-09-11T20:13:18.9801|INFO|SafetyMonitorVM.cs|UpdateMonitorValues|95|SafetyMonitorInfo state changed to Safe
+2026-09-11T20:17:03.1983|WARNING|DeviceUpdateTimer.cs|Run|115|Mount value update cycle took longer than the device poll interval (Total: 3.65s > 2s; Poll: 00:00:03.1711917; Update: 00:00:00.4744834)
+2026-09-11T20:17:06.2233|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 6.78s > 2s; Poll: 00:00:00.2798679; Update: 00:00:06.5044499)
+2026-09-11T20:22:21.6546|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 2.36s > 2s; Poll: 00:00:00.0257662; Update: 00:00:02.3319480)
+2026-09-11T20:29:49.3953|ERROR|AscomDevice.cs|GetProperty|546|An unexpected exception occurred during GET of Telescope.GuideRateDeclination: 
+ASCOM.DriverException: Riferimento a un oggetto non impostato su un'istanza di oggetto.
+ ---> System.NullReferenceException: Riferimento a un oggetto non impostato su un'istanza di oggetto.
+   --- End of inner exception stack trace ---
+   at ASCOM.Com.DriverAccess.DynamicAccess.CheckDotNetExceptions(String memberName, Exception e) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 278
+   at ASCOM.Com.DriverAccess.DynamicAccess.TryGetMember(GetMemberBinder binder, Object& result) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 150
+   at CallSite.Target(Closure, CallSite, Object)
+   at ASCOM.Com.DriverAccess.Telescope.get_GuideRateDeclination() in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\Telescope.cs:line 294
+   at InvokeStub_Telescope.get_GuideRateDeclination(Object, Object, IntPtr*)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+2026-09-11T20:29:50.0834|INFO|AscomDevice.cs|GetProperty|485|Retrying to GET Telescope.GuideRateDeclination - Attempt 2 / 3
+2026-09-11T20:29:50.7187|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 7.28s > 2s; Poll: 00:00:00.4011104; Update: 00:00:06.8797704)
+2026-09-11T20:29:51.1604|WARNING|DeviceUpdateTimer.cs|Run|115|Camera value update cycle took longer than the device poll interval (Total: 3.16s > 2s; Poll: 00:00:01.6962631; Update: 00:00:01.4679568)
+2026-09-11T20:29:51.2669|WARNING|DeviceUpdateTimer.cs|Run|115|Focuser value update cycle took longer than the device poll interval (Total: 3.27s > 2s; Poll: 00:00:02.1589485; Update: 00:00:01.1124393)
+2026-09-11T20:29:51.7873|WARNING|DeviceUpdateTimer.cs|Run|115|Mount value update cycle took longer than the device poll interval (Total: 8.22s > 2s; Poll: 00:00:08.2190051; Update: 00:00:00.0001072)
+2026-09-11T20:46:59.8747|INFO|Sequence2VM.cs|StartSequence|543|Advanced Sequence starting
+2026-09-11T20:46:59.9046|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequenceRootContainer, Strategy: SequentialStrategy, Items[CREATED]: 3, Triggers: Trigger: MeridianFlipTriggerTrigger: RestoreGuidingTrigger: AutofocusAfterHFRIncreaseTrigger, Amount: 5Trigger: AutofocusAfterFilterChange
+2026-09-11T20:46:59.9181|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9223|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.StartAreaContainer, Strategy: SequentialStrategy, Items[CREATED]: 2
+2026-09-11T20:46:59.9230|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9234|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: VERSION: 1
+2026-09-11T20:46:59.9239|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: VERSION: 1
+2026-09-11T20:46:59.9279|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9281|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 4
+2026-09-11T20:46:59.9283|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9284|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: VERSION: 1
+2026-09-11T20:46:59.9285|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: VERSION: 1
+2026-09-11T20:46:59.9288|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9289|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 4
+2026-09-11T20:46:59.9290|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9290|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: This Startup Sequence ensures an ASCOM Safety Monitor will function in a sequence as expected.
+2026-09-11T20:46:59.9291|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: This Startup Sequence ensures an ASCOM Safety Monitor will function in a sequence as expected.
+2026-09-11T20:46:59.9291|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9291|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: The CONNECTOR Plugin is used in this Sequence.
+2026-09-11T20:46:59.9292|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: The CONNECTOR Plugin is used in this Sequence.
+2026-09-11T20:46:59.9294|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9294|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: A Switch is also used within this Startup Sequence.
+2026-09-11T20:46:59.9294|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: A Switch is also used within this Startup Sequence.
+2026-09-11T20:46:59.9295|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9295|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: Annotation, Text: The sequence uses Nautical Dusk and Nautical Dawn along with a number of time offsets. Adjust this as desired.
+2026-09-11T20:46:59.9296|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: Annotation, Text: The sequence uses Nautical Dusk and Nautical Dawn along with a number of time offsets. Adjust this as desired.
+2026-09-11T20:46:59.9324|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 4
+2026-09-11T20:46:59.9327|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9328|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 11
+2026-09-11T20:46:59.9329|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9334|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: WaitForTime, Time: 20:37:32h, Offset: -30
+2026-09-11T20:46:59.9349|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: WaitForTime, Time: 20:37:32h, Offset: -30
+2026-09-11T20:46:59.9350|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9354|INFO|SequenceItem.cs|Run|208|Starting Category: Connetti, Item: ConnectEquipment, Selected device: Weather, Selected device id: ASCOM.CloudWatcher.ObservingConditions
+2026-09-11T20:46:59.9382|INFO|ConnectEquipment.cs|Execute|186|Weather is already connected
+2026-09-11T20:46:59.9384|INFO|SequenceItem.cs|Run|254|Finishing Category: Connetti, Item: ConnectEquipment, Selected device: Weather, Selected device id: ASCOM.CloudWatcher.ObservingConditions
+2026-09-11T20:46:59.9385|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9386|INFO|SequenceItem.cs|Run|208|Starting Category: Connetti, Item: ConnectEquipment, Selected device: Safety Monitor, Selected device id: ASCOM.Hub.SafetyMonitor
+2026-09-11T20:46:59.9388|INFO|ConnectEquipment.cs|Execute|186|Safety Monitor is already connected
+2026-09-11T20:46:59.9388|INFO|SequenceItem.cs|Run|254|Finishing Category: Connetti, Item: ConnectEquipment, Selected device: Safety Monitor, Selected device id: ASCOM.Hub.SafetyMonitor
+2026-09-11T20:46:59.9389|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9393|INFO|SequenceItem.cs|Run|208|Starting Category: Monitor Di Sicurezza, Item: WaitUntilSafe
+2026-09-11T20:46:59.9406|INFO|SequenceItem.cs|Run|254|Finishing Category: Monitor Di Sicurezza, Item: WaitUntilSafe
+2026-09-11T20:46:59.9408|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9408|INFO|SequenceItem.cs|Run|208|Starting Category: Connetti, Item: ConnectEquipment, Selected device: Camera, Selected device id: 695A-M-0037ec709603ca4e3
+2026-09-11T20:46:59.9409|INFO|ConnectEquipment.cs|Execute|186|Camera is already connected
+2026-09-11T20:46:59.9409|INFO|SequenceItem.cs|Run|254|Finishing Category: Connetti, Item: ConnectEquipment, Selected device: Camera, Selected device id: 695A-M-0037ec709603ca4e3
+2026-09-11T20:46:59.9410|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9410|INFO|SequenceItem.cs|Run|208|Starting Category: Connetti, Item: ConnectEquipment, Selected device: Focuser, Selected device id: ASCOM.PegasusAstro.Focuser
+2026-09-11T20:46:59.9411|INFO|ConnectEquipment.cs|Execute|186|Focuser is already connected
+2026-09-11T20:46:59.9411|INFO|SequenceItem.cs|Run|254|Finishing Category: Connetti, Item: ConnectEquipment, Selected device: Focuser, Selected device id: ASCOM.PegasusAstro.Focuser
+2026-09-11T20:46:59.9412|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9412|INFO|SequenceItem.cs|Run|208|Starting Category: Connetti, Item: ConnectEquipment, Selected device: Filter Wheel, Selected device id: 695A-M-0037ec709603ca4e3
+2026-09-11T20:46:59.9413|INFO|ConnectEquipment.cs|Execute|186|Filter Wheel is already connected
+2026-09-11T20:46:59.9413|INFO|SequenceItem.cs|Run|254|Finishing Category: Connetti, Item: ConnectEquipment, Selected device: Filter Wheel, Selected device id: 695A-M-0037ec709603ca4e3
+2026-09-11T20:46:59.9414|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9414|INFO|SequenceItem.cs|Run|208|Starting Category: Connetti, Item: ConnectEquipment, Selected device: Mount, Selected device id: ASCOM.Optec ASCOM.Telescope
+2026-09-11T20:46:59.9415|INFO|ConnectEquipment.cs|Execute|186|Mount is already connected
+2026-09-11T20:46:59.9415|INFO|SequenceItem.cs|Run|254|Finishing Category: Connetti, Item: ConnectEquipment, Selected device: Mount, Selected device id: ASCOM.Optec ASCOM.Telescope
+2026-09-11T20:46:59.9415|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9416|INFO|SequenceItem.cs|Run|208|Starting Category: Connetti, Item: ConnectEquipment, Selected device: Dome, Selected device id: ASCOM.TS_Shelter.Dome
+2026-09-11T20:46:59.9416|INFO|ConnectEquipment.cs|Execute|186|Dome is already connected
+2026-09-11T20:46:59.9417|INFO|SequenceItem.cs|Run|254|Finishing Category: Connetti, Item: ConnectEquipment, Selected device: Dome, Selected device id: ASCOM.TS_Shelter.Dome
+2026-09-11T20:46:59.9417|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9418|INFO|SequenceItem.cs|Run|208|Starting Category: Connetti, Item: ConnectEquipment, Selected device: Guider, Selected device id: PHD2_Single
+2026-09-11T20:46:59.9419|INFO|ConnectEquipment.cs|Execute|186|Guider is already connected
+2026-09-11T20:46:59.9419|INFO|SequenceItem.cs|Run|254|Finishing Category: Connetti, Item: ConnectEquipment, Selected device: Guider, Selected device id: PHD2_Single
+2026-09-11T20:46:59.9420|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9420|INFO|SequenceItem.cs|Run|208|Starting Category: Connetti, Item: ConnectEquipment, Selected device: Flat Panel, Selected device id: ASCOM.WandererCover1.CoverCalibrator
+2026-09-11T20:46:59.9421|INFO|ConnectEquipment.cs|Execute|186|Flat Panel is already connected
+2026-09-11T20:46:59.9421|INFO|SequenceItem.cs|Run|254|Finishing Category: Connetti, Item: ConnectEquipment, Selected device: Flat Panel, Selected device id: ASCOM.WandererCover1.CoverCalibrator
+2026-09-11T20:46:59.9423|INFO|SequenceItem.cs|Run|254|Finishing Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 11
+2026-09-11T20:46:59.9424|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9476|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[CREATED]: 12
+2026-09-11T20:46:59.9480|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9487|INFO|SequenceItem.cs|Run|208|Starting Category: Fotocamera, Item: CoolCamera, Temperature: -10, Duration: 5
+2026-09-11T20:46:59.9502|INFO|CameraVM.cs|CoolCamera|138|Cooling Camera. Target: -10 Duration: 00:05:00
+2026-09-11T20:46:59.9607|INFO|SequenceItem.cs|Run|254|Finishing Category: Fotocamera, Item: CoolCamera, Temperature: -10, Duration: 5
+2026-09-11T20:46:59.9609|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T20:46:59.9612|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: WaitForTime, Time: 20:57:32h, Offset: -10
+2026-09-11T20:56:28.9944|INFO|Sequencer.cs|Start|85|Sequence run was cancelled
+2026-09-11T20:56:29.0358|INFO|Sequence2VM.cs|StartSequence|548|Advanced Sequence finished
+2026-09-11T21:02:12.6083|WARNING|DeviceUpdateTimer.cs|Run|115|Focuser value update cycle took longer than the device poll interval (Total: 3.19s > 2s; Poll: 00:00:02.1954720; Update: 00:00:00.9977473)
+2026-09-11T21:02:14.0191|WARNING|DeviceUpdateTimer.cs|Run|115|Mount value update cycle took longer than the device poll interval (Total: 4.21s > 2s; Poll: 00:00:04.2098388; Update: 00:00:00.0001806)
+2026-09-11T21:02:19.4077|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 10.09s > 2s; Poll: 00:00:01.5389573; Update: 00:00:08.5520335)
+2026-09-11T21:07:46.1050|ERROR|AscomDevice.cs|GetProperty|546|An unexpected exception occurred during GET of Telescope.Tracking: 
+ASCOM.DriverException: Spazio su disco insufficiente.
+
+ ---> System.Exception: Spazio su disco insufficiente.
+
+   --- End of inner exception stack trace ---
+   at ASCOM.Com.DriverAccess.DynamicAccess.CheckDotNetExceptions(String memberName, Exception e) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 278
+   at ASCOM.Com.DriverAccess.DynamicAccess.TryGetMember(GetMemberBinder binder, Object& result) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 150
+   at CallSite.Target(Closure, CallSite, Object)
+   at ASCOM.Com.DriverAccess.Telescope.get_Tracking() in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\Telescope.cs:line 425
+   at InvokeStub_Telescope.get_Tracking(Object, Object, IntPtr*)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+2026-09-11T21:07:46.3100|INFO|AscomDevice.cs|GetProperty|485|Retrying to GET Telescope.Tracking - Attempt 2 / 3
+2026-09-11T21:07:46.3164|ERROR|AscomDevice.cs|GetProperty|546|An unexpected exception occurred during GET of Telescope.Tracking: 
+ASCOM.DriverException: Spazio su disco insufficiente.
+
+ ---> System.Exception: Spazio su disco insufficiente.
+
+   --- End of inner exception stack trace ---
+   at ASCOM.Com.DriverAccess.DynamicAccess.CheckDotNetExceptions(String memberName, Exception e) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 278
+   at ASCOM.Com.DriverAccess.DynamicAccess.TryGetMember(GetMemberBinder binder, Object& result) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 150
+   at CallSite.Target(Closure, CallSite, Object)
+   at ASCOM.Com.DriverAccess.Telescope.get_Tracking() in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\Telescope.cs:line 425
+   at InvokeStub_Telescope.get_Tracking(Object, Object, IntPtr*)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+2026-09-11T21:07:46.5220|INFO|AscomDevice.cs|GetProperty|485|Retrying to GET Telescope.Tracking - Attempt 3 / 3
+2026-09-11T21:07:46.5409|ERROR|AscomDevice.cs|GetProperty|546|An unexpected exception occurred during GET of Telescope.Tracking: 
+ASCOM.DriverException: Spazio su disco insufficiente.
+
+ ---> System.Exception: Spazio su disco insufficiente.
+
+   --- End of inner exception stack trace ---
+   at ASCOM.Com.DriverAccess.DynamicAccess.CheckDotNetExceptions(String memberName, Exception e) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 278
+   at ASCOM.Com.DriverAccess.DynamicAccess.TryGetMember(GetMemberBinder binder, Object& result) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 150
+   at CallSite.Target(Closure, CallSite, Object)
+   at ASCOM.Com.DriverAccess.Telescope.get_Tracking() in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\Telescope.cs:line 425
+   at InvokeStub_Telescope.get_Tracking(Object, Object, IntPtr*)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+2026-09-11T21:07:46.5418|INFO|AscomDevice.cs|GetProperty|556|GET Telescope.Tracking failed - Returning last known value False
+2026-09-11T21:07:46.5480|ERROR|AscomDevice.cs|GetProperty|546|An unexpected exception occurred during GET of Telescope.Tracking: 
+ASCOM.DriverException: Spazio su disco insufficiente.
+
+ ---> System.Exception: Spazio su disco insufficiente.
+
+   --- End of inner exception stack trace ---
+   at ASCOM.Com.DriverAccess.DynamicAccess.CheckDotNetExceptions(String memberName, Exception e) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 278
+   at ASCOM.Com.DriverAccess.DynamicAccess.TryGetMember(GetMemberBinder binder, Object& result) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 150
+   at CallSite.Target(Closure, CallSite, Object)
+   at ASCOM.Com.DriverAccess.Telescope.get_Tracking() in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\Telescope.cs:line 425
+   at InvokeStub_Telescope.get_Tracking(Object, Object, IntPtr*)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+2026-09-11T21:07:46.7515|INFO|AscomDevice.cs|GetProperty|485|Retrying to GET Telescope.Tracking - Attempt 2 / 3
+2026-09-11T21:07:46.7565|ERROR|AscomDevice.cs|GetProperty|546|An unexpected exception occurred during GET of Telescope.Tracking: 
+ASCOM.DriverException: Spazio su disco insufficiente.
+
+ ---> System.Exception: Spazio su disco insufficiente.
+
+   --- End of inner exception stack trace ---
+   at ASCOM.Com.DriverAccess.DynamicAccess.CheckDotNetExceptions(String memberName, Exception e) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 278
+   at ASCOM.Com.DriverAccess.DynamicAccess.TryGetMember(GetMemberBinder binder, Object& result) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 150
+   at CallSite.Target(Closure, CallSite, Object)
+   at ASCOM.Com.DriverAccess.Telescope.get_Tracking() in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\Telescope.cs:line 425
+   at InvokeStub_Telescope.get_Tracking(Object, Object, IntPtr*)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+2026-09-11T21:07:46.9613|INFO|AscomDevice.cs|GetProperty|485|Retrying to GET Telescope.Tracking - Attempt 3 / 3
+2026-09-11T21:07:46.9693|ERROR|AscomDevice.cs|GetProperty|546|An unexpected exception occurred during GET of Telescope.Tracking: 
+ASCOM.DriverException: Spazio su disco insufficiente.
+
+ ---> System.Exception: Spazio su disco insufficiente.
+
+   --- End of inner exception stack trace ---
+   at ASCOM.Com.DriverAccess.DynamicAccess.CheckDotNetExceptions(String memberName, Exception e) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 278
+   at ASCOM.Com.DriverAccess.DynamicAccess.TryGetMember(GetMemberBinder binder, Object& result) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 150
+   at CallSite.Target(Closure, CallSite, Object)
+   at ASCOM.Com.DriverAccess.Telescope.get_Tracking() in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\Telescope.cs:line 425
+   at InvokeStub_Telescope.get_Tracking(Object, Object, IntPtr*)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+2026-09-11T21:07:46.9707|INFO|AscomDevice.cs|GetProperty|556|GET Telescope.Tracking failed - Returning last known value False
+2026-09-11T21:07:46.9771|ERROR|AscomDevice.cs|GetProperty|546|An unexpected exception occurred during GET of Telescope.Altitude: 
+ASCOM.DriverException: Spazio su disco insufficiente.
+
+ ---> System.Exception: Spazio su disco insufficiente.
+
+   --- End of inner exception stack trace ---
+   at ASCOM.Com.DriverAccess.DynamicAccess.CheckDotNetExceptions(String memberName, Exception e) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 278
+   at ASCOM.Com.DriverAccess.DynamicAccess.TryGetMember(GetMemberBinder binder, Object& result) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 150
+   at CallSite.Target(Closure, CallSite, Object)
+   at ASCOM.Com.DriverAccess.Telescope.get_Altitude() in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\Telescope.cs:line 95
+   at InvokeStub_Telescope.get_Altitude(Object, Object, IntPtr*)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+2026-09-11T21:07:47.1815|INFO|AscomDevice.cs|GetProperty|485|Retrying to GET Telescope.Altitude - Attempt 2 / 3
+2026-09-11T21:07:47.1879|ERROR|AscomDevice.cs|GetProperty|546|An unexpected exception occurred during GET of Telescope.Altitude: 
+ASCOM.DriverException: Spazio su disco insufficiente.
+
+ ---> System.Exception: Spazio su disco insufficiente.
+
+   --- End of inner exception stack trace ---
+   at ASCOM.Com.DriverAccess.DynamicAccess.CheckDotNetExceptions(String memberName, Exception e) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 278
+   at ASCOM.Com.DriverAccess.DynamicAccess.TryGetMember(GetMemberBinder binder, Object& result) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 150
+   at CallSite.Target(Closure, CallSite, Object)
+   at ASCOM.Com.DriverAccess.Telescope.get_Altitude() in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\Telescope.cs:line 95
+   at InvokeStub_Telescope.get_Altitude(Object, Object, IntPtr*)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+2026-09-11T21:07:47.4208|INFO|AscomDevice.cs|GetProperty|485|Retrying to GET Telescope.Altitude - Attempt 3 / 3
+2026-09-11T21:07:47.4268|ERROR|AscomDevice.cs|GetProperty|546|An unexpected exception occurred during GET of Telescope.Altitude: 
+ASCOM.DriverException: Spazio su disco insufficiente.
+
+ ---> System.Exception: Spazio su disco insufficiente.
+
+   --- End of inner exception stack trace ---
+   at ASCOM.Com.DriverAccess.DynamicAccess.CheckDotNetExceptions(String memberName, Exception e) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 278
+   at ASCOM.Com.DriverAccess.DynamicAccess.TryGetMember(GetMemberBinder binder, Object& result) in J:\ASCOMLibrary\ASCOM.Com\ASCOM.Com.DriverAccess\BaseClass\DynamicAccess.cs:line 150
+   at CallSite.Target(Closure, CallSite, Object)
+   at ASCOM.C2026-09-11T21:07:55.7348|INFO|AscomDevice.cs|GetProperty|485|Retrying to GET Telescope.GuideRateRightAscension - Attempt 3 / 3
+2026-09-11T21:07:55.8066|WARNING|DeviceUpdateTimer.cs|Run|115|Mount value update cycle took longer than the device poll interval (Total: 9.78s > 2s; Poll: 00:00:09.7786745; Update: 00:00:00.0007390)
+2026-09-11T21:08:44.9561|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 2.86s > 2s; Poll: 00:00:00.1086724; Update: 00:00:02.7544438)
+2026-09-11T21:15:48.2445|WARNING|DeviceUpdateTimer.cs|Run|115|Dome value update cycle took longer than the device poll interval (Total: 2.03s > 2s; Poll: 00:00:00.0173369; Update: 00:00:02.0127965)
+2026-09-11T21:15:52.7091|WARNING|DeviceUpdateTimer.cs|Run|115|Mount value update cycle took longer than the device poll interval (Total: 2.34s > 2s; Poll: 00:00:02.3428352; Update: 00:00:00.0018929)
+2026-09-11T21:17:50.0860|INFO|Sequence2VM.cs|UnlockSequence|144|Sequencer locked
+2026-09-11T21:18:02.6231|INFO|Sequence2VM.cs|LockSequence|139|Sequencer unlocked
+2026-09-11T21:18:09.8634|INFO|Sequence2VM.cs|StartSequence|543|Advanced Sequence starting
+2026-09-11T21:18:09.8665|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequenceRootContainer, Strategy: SequentialStrategy, Items[CREATED]: 3, Triggers: Trigger: MeridianFlipTriggerTrigger: RestoreGuidingTrigger: AutofocusAfterHFRIncreaseTrigger, Amount: 5Trigger: AutofocusAfterFilterChange
+2026-09-11T21:18:09.8670|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T21:18:09.8671|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.StartAreaContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1, Items[CREATED]: 1
+2026-09-11T21:18:09.8673|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T21:18:09.8674|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 3, Items[CREATED]: 1
+2026-09-11T21:18:09.8675|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T21:18:09.8675|INFO|SequenceItem.cs|Run|208|Starting Category: * Set di Istruzioni *, Container: NINA.Sequencer.Container.SequentialContainer, Strategy: SequentialStrategy, Items[FINISHED]: 1, Items[CREATED]: 11
+2026-09-11T21:18:09.8676|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T21:18:09.8677|INFO|SequenceItem.cs|Run|208|Starting Category: Utilità, Item: WaitForTime, Time: 20:57:32h, Offset: -10
+2026-09-11T21:18:09.8678|INFO|SequenceItem.cs|Run|254|Finishing Category: Utilità, Item: WaitForTime, Time: 20:57:32h, Offset: -10
+2026-09-11T21:18:09.8678|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T21:18:09.8679|INFO|SequenceItem.cs|Run|208|Starting Category: Monitor Di Sicurezza, Item: WaitUntilSafe
+2026-09-11T21:18:09.8681|INFO|SequenceItem.cs|Run|254|Finishing Category: Monitor Di Sicurezza, Item: WaitUntilSafe
+2026-09-11T21:18:09.8681|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T21:18:09.8686|INFO|SequenceItem.cs|Run|208|Starting Category: Osservatorio, Item: OpenDomeShutter
+2026-09-11T21:18:09.8808|INFO|DomeVM.cs|OpenShutter|448|Opening dome shutter. Shutter state before opening ShutterClosed
+2026-09-11T21:18:09.8859|INFO|AscomDome.cs|OpenShutter|206|Sending an OpenShutter request, since it is currently ShutterClosed
+2026-09-11T21:18:56.2748|INFO|DomeVM.cs|OpenShutter|454|Opened dome shutter. Shutter state after opening ShutterOpen
+2026-09-11T21:18:56.2765|INFO|SequenceItem.cs|Run|254|Finishing Category: Osservatorio, Item: OpenDomeShutter
+2026-09-11T21:18:56.2768|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T21:18:56.2775|INFO|SequenceItem.cs|Run|208|Starting Category: Telescopio, Item: UnparkScope
+2026-09-11T21:18:56.2807|INFO|TelescopeVM.cs|UnparkTelescope|232|Mount ordered to unpark
+2026-09-11T21:18:56.2858|INFO|TelescopeVM.cs|UnparkTelescope|277|Mount is already unparked
+2026-09-11T21:18:56.2867|INFO|TelescopeVM.cs|UnparkTelescope|282|Mount has unparked
+2026-09-11T21:18:56.2869|INFO|SequenceItem.cs|Run|254|Finishing Category: Telescopio, Item: UnparkScope
+2026-09-11T21:18:56.2872|INFO|MeridianFlipTrigger.cs|ShouldTrigger|204|Meridian Flip - Telescope is not tracking. Skip flip evaluation
+2026-09-11T21:18:56.2877|INFO|SequenceItem.cs|Run|208|Starting Category: Apparato per i Flat, Item: OpenCover
+2026-09-11T21:18:56.3012|INFO|FlatDeviceVM.cs|OpenCover|312|Opening Flat Device Cover
+2026-09-11T21:21:04.4226|ERROR|FlatDeviceVM.cs|OpenCover|325
+System.OperationCanceledException: The operation was canceled.
+   at System.Threading.CancellationToken.ThrowOperationCanceledException()
+   at System.Threading.CancellationToken.ThrowIfCancellationRequested()
+   at ASCOM.Common.ClientExtensions.CheckOutcome(Task processTask, ILogger logger, String callingMethodName, CancellationToken cancellationToken) in J:\ASCOMLibrary\ASCOM.Common\ClientExtensions.cs:line 1165
+   at ASCOM.Common.ClientExtensions.OpenCoverAsync(ICoverCalibratorV1 device, CancellationToken cancellationToken, Int32 pollInterval, ILogger logger) in J:\ASCOMLibrary\ASCOM.Common\ClientExtensions.cs:line 354
+   at NINA.Equipment.Equipment.MyFlatDevice.AscomCoverCalibrator.Open(CancellationToken ct, Int32 delay) in /_/NINA.Equipment/Equipment/MyFlatDevice/AscomCoverCalibrator.cs:line 141
+   at NINA.WPF.Base.ViewModel.Equipment.FlatDevice.FlatDeviceVM.OpenCover(IProgress`1 progress, CancellationToken token) in /_/NINA.WPF.Base/ViewModel/Equipment/FlatDevice/FlatDeviceVM.cs:line 314
+2026-09-11T21:21:04.4705|ERROR|SequenceItem.cs|Run|263|Category: Apparato per i Flat, Item: OpenCover - 
+NINA.Core.Model.SequenceEntityFailedException: Failed to open cover. Current cover state: Closed
+   at NINA.Sequencer.SequenceItem.FlatDevice.OpenCover.Execute(IProgress`1 progress, CancellationToken token) in /_/NINA.Sequencer/SequenceItem/FlatDevice/OpenCover.cs:line 65
+   at NINA.Sequencer.SequenceItem.SequenceItem.Run(IProgress`1 progress, CancellationToken token) in /_/NINA.Sequencer/SequenceItem/SequenceItem.cs:line 249
+2026-09-11T21:21:04.4923|ERROR|SequenceItem.cs|RunErrorBehavior|195|Instruction Chiudi copertura del pannello per Flats failed after 1 attempt. Error behavior is set to ContinueOnError. Continuing.
+2026-09-11T21:21:04.5113|INFO|Sequencer.cs|Start|85|Sequence run was cancelled
+2026-09-11T21:21:04.5408|INFO|Sequence2VM.cs|StartSequence|548|Advanced Sequence finished
+2026-09-11T21:22:19.2409|INFO|FlatDeviceVM.cs|OpenCover|312|Opening Flat Device Cover
+2026-09-11T21:23:18.4839|INFO|AscomDevice.cs|Disconnect|378|Disconnecting from ASCOM.WandererCover1.CoverCalibrator WandererEmpire Cover 1
+2026-09-11T21:23:18.5331|INFO|FlatDeviceVM.cs|Disconnect|289|Disconnected Flat Device
+2026-09-11T21:23:19.3604|ERROR|FlatDeviceVM.cs|OpenCover|325
+System.Runtime.InteropServices.InvalidComObjectException: COM object that has been separated from its underlying RCW cannot be used.
+   at ASCOM.Common.ClientExtensions.CheckOutcome(Task processTask, ILogger logger, String callingMethodName, CancellationToken cancellationToken) in J:\ASCOMLibrary\ASCOM.Common\ClientExtensions.cs:line 1155
+   at ASCOM.Common.ClientExtensions.OpenCoverAsync(ICoverCalibratorV1 device, CancellationToken cancellationToken, Int32 pollInterval, ILogger logger) in J:\ASCOMLibrary\ASCOM.Common\ClientExtensions.cs:line 354
+   at NINA.Equipment.Equipment.MyFlatDevice.AscomCoverCalibrator.Open(CancellationToken ct, Int32 delay) in /_/NINA.Equipment/Equipment/MyFlatDevice/AscomCoverCalibrator.cs:line 141
+   at NINA.WPF.Base.ViewModel.Equipment.FlatDevice.FlatDeviceVM.OpenCover(IProgress`1 progress, CancellationToken token) in /_/NINA.WPF.Base/ViewModel/Equipment/FlatDevice/FlatDeviceVM.cs:line 314
+2026-09-11T21:23:21.1599|INFO|FlatDeviceVM.cs|Disconnect|289|Disconnected Flat Device
+2026-09-11T21:23:22.2402|INFO|FlatDeviceVM.cs|Connect|241|Successfully connected flat device. Id: ASCOM.WandererCover1.CoverCalibrator Name: WandererEmpire Cover 1 DisplayName: WandererEmpire Cover 1 (ASCOM) Driver Version: 2.0
+2026-09-11T21:23:32.3284|INFO|FlatDeviceVM.cs|OpenCover|312|Opening Flat Device Cover
+2026-09-11T21:23:57.9875|INFO|AscomDevice.cs|Disconnect|378|Disconnecting from ASCOM.WandererCover1.CoverCalibrator WandererEmpire Cover 1
+2026-09-11T21:23:58.0231|INFO|FlatDeviceVM.cs|Disconnect|289|Disconnected Flat Device
+2026-09-11T21:23:58.3644|ERROR|FlatDeviceVM.cs|OpenCover|325
+System.Runtime.InteropServices.InvalidComObjectException: COM object that has been separated from its underlying RCW cannot be used.
+   at ASCOM.Common.ClientExtensions.CheckOutcome(Task processTask, ILogger logger, String callingMethodName, CancellationToken cancellationToken) in J:\ASCOMLibrary\ASCOM.Common\ClientExtensions.cs:line 1155
+   at ASCOM.Common.ClientExtensions.OpenCoverAsync(ICoverCalibratorV1 device, CancellationToken cancellationToken, Int32 pollInterval, ILogger logger) in J:\ASCOMLibrary\ASCOM.Common\ClientExtensions.cs:line 354
+   at NINA.Equipment.Equipment.MyFlatDevice.AscomCoverCalibrator.Open(CancellationToken ct, Int32 delay) in /_/NINA.Equipment/Equipment/MyFlatDevice/AscomCoverCalibrator.cs:line 141
+   at NINA.WPF.Base.ViewModel.Equipment.FlatDevice.FlatDeviceVM.OpenCover(IProgress`1 progress, CancellationToken token) in /_/NINA.WPF.Base/ViewModel/Equipment/FlatDevice/FlatDeviceVM.cs:line 314
+2026-09-11T21:24:08.7894|INFO|DomeVM.cs|CloseShutter|544|Closing dome shutter. Shutter state before closing ShutterOpen
+2026-09-11T21:24:08.7937|INFO|AscomDome.cs|CloseShutter|245|Sending a CloseShutter request, since it is currently ShutterOpen
+2026-09-11T21:24:56.2775|INFO|DomeVM.cs|CloseShutter|550|Closed dome shutter. Shutter state after closing ShutterClosed
+2026-09-11T21:25:03.7009|INFO|QHYCamera.cs|Disconnect|1057|QHYCCD: Closing camera 695A-M-0037ec709603ca4e3
+2026-09-11T21:25:03.7181|INFO|CameraVM.cs|Disconnect|650|Disconnected Camera
+2026-09-11T21:25:06.9423|INFO|FilterWheelVM.cs|Disconnect|333|Disconnected Filter Wheel
+2026-09-11T21:25:09.4880|INFO|AscomDevice.cs|Disconnect|378|Disconnecting from ASCOM.PegasusAstro.Focuser Pegasus Astro Focus Controller
+2026-09-11T21:25:09.6413|INFO|FocuserVM.cs|Disconnect|441|Disconnected Focuser
+2026-09-11T21:25:13.1977|INFO|AscomDevice.cs|Disconnect|378|Disconnecting from ASCOM.Optec ASCOM.Telescope CPWI_ASCOM_Telescope
+2026-09-11T21:25:13.3077|INFO|TelescopeVM.cs|Disconnect|740|Disconnected mount
+2026-09-11T21:25:20.6826|INFO|AscomDevice.cs|Disconnect|378|Disconnecting from ASCOM.CloudWatcher.ObservingConditions CloudWatcher ObsCond
+2026-09-11T21:25:20.7596|INFO|WeatherDataVM.cs|Disconnect|305|Disconnected Weather Device
+2026-09-11T21:25:24.6452|INFO|AscomDevice.cs|Disconnect|378|Disconnecting from ASCOM.TS_Shelter.Dome Shelter Dome
+2026-09-11T21:25:25.0124|INFO|DomeVM.cs|Disconnect|355|Disconnected Dome Device
+2026-09-11T21:25:28.0122|INFO|SafetyMonitorVM.cs|UpdateMonitorValues|95|SafetyMonitorInfo state changed to Unsafe
+2026-09-11T21:25:28.0124|INFO|AscomDevice.cs|Disconnect|378|Disconnecting from ASCOM.Hub.SafetyMonitor Short driver name - please customise
+2026-09-11T21:25:28.1222|INFO|SafetyMonitorVM.cs|Disconnect|221|Disconnected Safety Monitor
+2026-09-11T21:25:55.2616|INFO|ApplicationVM.cs|Exit|244|Shutting down application - requested by user
+2026-09-11T21:25:55.3162|INFO|ApplicationVM.cs|Closing|289|Application shutting down
+2026-09-11T21:25:55.4933|INFO|DomeVM.cs|Disconnect|355|Disconnected Dome Device
+2026-09-11T21:25:55.4947|INFO|FlatDeviceVM.cs|Disconnect|289|Disconnected Flat Device
+2026-09-11T21:25:55.5058|INFO|CameraVM.cs|Disconnect|650|Disconnected Camera
+2026-09-11T21:25:55.5064|INFO|TelescopeVM.cs|Disconnect|740|Disconnected mount
+2026-09-11T21:25:55.5080|INFO|FilterWheelVM.cs|Disconnect|333|Disconnected Filter Wheel
+2026-09-11T21:25:55.5085|INFO|FocuserVM.cs|Disconnect|441|Disconnected Focuser
+2026-09-11T21:25:55.5131|INFO|RotatorVM.cs|Disconnect|447|Disconnected Rotator
+2026-09-11T21:25:55.5171|INFO|SwitchVM.cs|Disconnect|309|Disconnected Switch
+2026-09-11T21:25:55.5211|INFO|WeatherDataVM.cs|Disconnect|305|Disconnected Weather Device
+2026-09-11T21:25:55.5224|INFO|SafetyMonitorVM.cs|Disconnect|221|Disconnected Safety Monitor
