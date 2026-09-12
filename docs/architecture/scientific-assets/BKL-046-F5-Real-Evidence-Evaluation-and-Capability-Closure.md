@@ -3,8 +3,8 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-046-F5 |
-| Stato | Architecture integrated; F5-A implementation candidate; F5-B/F5-C not started |
-| Versione | 0.2 |
+| Stato | Architecture integrated; F5-A remediation candidate / re-review pending; F5-B/F5-C not started |
+| Versione | 0.3 |
 | Data | 12/09/2026 |
 | Package | BKL-046 — AI Post-Processing Assistant for PixInsight |
 | Baseline F4 | PR #175, merge `af48cc2441cf956d88c13c81845fc2a2f7c599f2` — Accepted |
@@ -209,6 +209,7 @@ Il piano `BKL-046-F5-Real-Evidence-Evaluation-Plan.md` governa test di cohort co
 | validation plan | `docs/architecture/validation/BKL-046-F5-Real-Evidence-Evaluation-Plan.md` |
 | F5 architecture review | `docs/architecture/reviews/ARB-BKL-046-F5-AI-Assisted-Architecture-Review-2026-09-12.md` |
 | F5-A implementation evidence | `docs/architecture/validation/BKL-046-F5A-Evaluation-Foundation-Evidence-2026-09-12.md` |
+| F5-A remediation evidence | `docs/architecture/validation/BKL-046-F5A-Validation-Remediation-Evidence-2026-09-12.md` |
 
 ## 18. Acceptance criteria
 
