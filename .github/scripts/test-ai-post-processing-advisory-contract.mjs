@@ -136,3 +136,21 @@ test('model/provider and executable channels are forbidden in F2', () => {
   resealFixture(fixture, { recommendations: [0] });
   assert.throws(() => validateAdvisoryContractFixture(fixture), /provider is forbidden in BKL-046 F2/);
 });
+
+test('human decision receipt enforces F2 stable IDs and schema bounds', () => {
+  const invalidId = clone();
+  invalidId.humanDecisionReceipts[0].receiptId = 'INVALID RECEIPT ID';
+  resealFixture(invalidId, { receipts: [0] });
+  assert.throws(() => validateAdvisoryContractFixture(invalidId), /stableId pattern/);
+
+  const excessiveRationale = clone();
+  excessiveRationale.humanDecisionReceipts[0].decisionRationale = 'X'.repeat(4097);
+  resealFixture(excessiveRationale, { receipts: [0] });
+  assert.throws(() => validateAdvisoryContractFixture(excessiveRationale), /decisionRationale is invalid/);
+
+  const invalidEdit = clone();
+  invalidEdit.humanDecisionReceipts[0].disposition = 'EDITED_FOR_MANUAL_APPLICATION';
+  invalidEdit.humanDecisionReceipts[0].decisionEdits = [{ arbitrary: 'not-an-F2-decision-edit' }];
+  resealFixture(invalidEdit, { receipts: [0] });
+  assert.throws(() => validateAdvisoryContractFixture(invalidEdit), /is not allowed/);
+});

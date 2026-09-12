@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
+import { buildAdvisoryProjection } from './ai-post-processing-advisory-projection.mjs';
 import {
   assertAllowedExecutionEvidencePath,
   assertAllowedHumanDecisionPath,
@@ -68,18 +69,32 @@ function decisionSource(projection = baselineProjection, overrides = {}) {
   return seal(payload, 'artifactDigest');
 }
 
+function resealDecision(payload) {
+  seal(payload.receipt, 'receiptDigest');
+  return seal(payload, 'artifactDigest');
+}
+
 function matchedProjection() {
-  const projection = structuredClone(baselineProjection);
-  const record = projection.records[0];
-  const source = projection.sourceSet.entries[0];
-  source.sessionId = record.sessionId;
-  record.correlationState = 'PROVENANCE_MATCHED';
-  record.sourceRefs = [source.path];
-  projection.sourceSet.digest = contentDigest(projection.sourceSet.entries);
-  projection.summary.provenanceMatched = 1;
-  projection.summary.provenanceUnavailable -= 1;
-  projection.summary.uncorrelatedSources -= 1;
-  return seal(projection, 'projectionDigest');
+  const record = baselineProjection.records[0];
+  const source = baselineProjection.sourceSet.entries[0];
+  return buildAdvisoryProjection({
+    catalog,
+    provenanceSources: [{
+      path: source.path,
+      payload: {
+        schemaVersion: '1.0',
+        sidecarId: 'PXP-F5A-EXACT-CORRELATION-TEST',
+        exportedAt: '2026-09-12T06:55:00.000Z',
+        authority: 'processing_evidence',
+        actionAuthority: 'NONE',
+        source: { product: 'PixInsight', hostId: 'PRIVATE-TEST-HOST', workspaceId: 'PRIVATE-TEST-WORKSPACE' },
+        observationContext: { sessionId: record.sessionId, target: record.target },
+        workflow: { workflowId: 'WF-F5A-EXACT-CORRELATION-TEST', steps: [] },
+        capture: { completeness: 'COMPLETE', limitations: ['Synthetic test source; not production evidence.'] }
+      }
+    }],
+    generatedAt: baselineProjection.generatedAt
+  });
 }
 
 function executionSource(projection, humanPayload, overrides = {}) {
@@ -177,7 +192,7 @@ test('F5A-UT-006 identity and digest are deterministic across timestamps', () =>
 test('F5A-UT-007 tampered F4 projection fails closed', () => {
   const tampered = structuredClone(baselineProjection);
   tampered.summary.provenanceMatched = 99;
-  assert.throws(() => build({ f4Projection: tampered }), /projectionDigest mismatch/);
+  assert.throws(() => build({ f4Projection: tampered }), /projection digest mismatch/i);
 });
 
 test('F5A-UT-008 catalog/F4 population drift fails closed', () => {
@@ -196,7 +211,7 @@ test('F5A-UT-009 Human Decision source rejects authority and execution claims', 
   executionClaim.receipt.executionState = 'OBSERVED';
   seal(executionClaim.receipt, 'receiptDigest');
   seal(executionClaim, 'artifactDigest');
-  assert.throws(() => validateRawHumanDecisionSource(DECISION_PATH, executionClaim), /cannot claim execution/);
+  assert.throws(() => validateRawHumanDecisionSource(DECISION_PATH, executionClaim), /must not claim execution/);
 });
 
 test('F5A-UT-010 orphan Human Decision recommendation fails exact correlation', () => {
@@ -353,4 +368,53 @@ test('F5A-UT-022 governed source directories reject nested or non-file entries',
   } finally {
     await rm(root, { recursive: true, force: true });
   }
+});
+
+test('F5A-UT-023 recomputed internal F4 drift is rejected by the canonical validator', () => {
+  const tampered = structuredClone(baselineProjection);
+  tampered.records[0].decisionState = 'PRESENT';
+  seal(tampered.records[0], 'recordDigest');
+  seal(tampered, 'projectionDigest');
+  assert.throws(() => build({ f4Projection: tampered }), /pre-decision/);
+});
+
+test('F5A-UT-024 raw Human Decision admission enforces F2 stable IDs and bounds', () => {
+  const invalidReceiptId = decisionSource();
+  invalidReceiptId.receipt.receiptId = 'INVALID RECEIPT ID';
+  assert.throws(() => validateRawHumanDecisionSource(DECISION_PATH, resealDecision(invalidReceiptId)), /stableId pattern/);
+
+  const invalidActor = decisionSource();
+  invalidActor.receipt.actorRef = 'X';
+  assert.throws(() => validateRawHumanDecisionSource(DECISION_PATH, resealDecision(invalidActor)), /shorter than the F2 minimum/);
+
+  const invalidEdit = decisionSource();
+  invalidEdit.receipt.disposition = 'EDITED_FOR_MANUAL_APPLICATION';
+  invalidEdit.receipt.decisionEdits = [{ arbitrary: 'not-an-F2-decision-edit' }];
+  assert.throws(() => validateRawHumanDecisionSource(DECISION_PATH, resealDecision(invalidEdit)), /is not allowed/);
+
+  const excessiveEdits = decisionSource();
+  excessiveEdits.receipt.disposition = 'EDITED_FOR_MANUAL_APPLICATION';
+  excessiveEdits.receipt.decisionEdits = Array.from({ length: 33 }, (_, index) => ({
+    parameterId: `PARAM-${index}`,
+    selectedValue: index,
+    unit: null,
+    reason: 'Test'
+  }));
+  assert.throws(() => validateRawHumanDecisionSource(DECISION_PATH, resealDecision(excessiveEdits)), /exceeds the F2 maximum/);
+
+  const excessiveRationale = decisionSource();
+  excessiveRationale.receipt.decisionRationale = 'X'.repeat(4097);
+  assert.throws(() => validateRawHumanDecisionSource(DECISION_PATH, resealDecision(excessiveRationale)), /decisionRationale is invalid/);
+});
+
+test('F5A-UT-025 source-set metadata is pinned after digest recomputation', () => {
+  const wrongDirectory = structuredClone(build());
+  wrongDirectory.sourceSnapshots.humanDecisionSourceSet.directory = 'wrong-directory';
+  seal(wrongDirectory, 'evaluationDigest');
+  assert.throws(() => validateRealEvidenceEvaluation(wrongDirectory), /directory is outside the closed contract/);
+
+  const wrongPattern = structuredClone(build());
+  wrongPattern.sourceSnapshots.executionEvidenceSourceSet.pathPattern = '.*';
+  seal(wrongPattern, 'evaluationDigest');
+  assert.throws(() => validateRealEvidenceEvaluation(wrongPattern), /pathPattern is outside the closed contract/);
 });

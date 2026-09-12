@@ -1,6 +1,13 @@
 import { createHash } from 'node:crypto';
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
+import {
+  validateHumanDecisionReceipt,
+  validateStableId
+} from './ai-post-processing-advisory-contract.mjs';
+import {
+  validateAdvisoryProjection as validateCanonicalF4Projection
+} from './ai-post-processing-advisory-projection.mjs';
 
 export const F5_SCHEMA_VERSION = '1.0';
 export const F5_EVALUATION_TYPE = 'BKL046_F5_REAL_EVIDENCE_EVALUATION';
@@ -245,10 +252,15 @@ export function validateRawHumanDecisionSource(repositoryPath, payload) {
   assert(payload.schemaVersion === '1.0', `${repositoryPath} has an unsupported schemaVersion.`);
   assert(payload.sourceType === 'BKL046_HUMAN_DECISION_RECEIPT', `${repositoryPath} has an unsupported sourceType.`);
   assert(payload.authority === 'human_decision', `${repositoryPath} has unsupported authority.`);
-  assert(nonEmpty(payload.sessionId) && nonEmpty(payload.recommendationId), `${repositoryPath} requires exact session and recommendation IDs.`);
+  assert(nonEmpty(payload.sessionId), `${repositoryPath} requires an exact session ID.`);
+  validateStableId(payload.recommendationId, `${repositoryPath}.recommendationId`);
   assertExactKeys(payload.receipt, RAW_RECEIPT_KEYS, `${repositoryPath}.receipt`);
   const receipt = payload.receipt;
-  assert(nonEmpty(receipt.receiptId) && receipt.recommendationId === payload.recommendationId, `${repositoryPath} receipt identity mismatch.`);
+  validateHumanDecisionReceipt(receipt, {
+    recommendationId: payload.recommendationId,
+    correlationId: receipt.correlationId
+  });
+  assert(receipt.recommendationId === payload.recommendationId, `${repositoryPath} receipt identity mismatch.`);
   assert(validDateTime(receipt.presentedAt) && validDateTime(receipt.decidedAt), `${repositoryPath} has invalid receipt timestamps.`);
   assert(Date.parse(receipt.decidedAt) >= Date.parse(receipt.presentedAt), `${repositoryPath} decidedAt precedes presentedAt.`);
   assert(nonEmpty(receipt.actorRef) && nonEmpty(receipt.correlationId), `${repositoryPath} requires actorRef and correlationId.`);
@@ -269,9 +281,8 @@ export function validateRawExecutionEvidenceSource(repositoryPath, payload) {
   assert(payload.schemaVersion === '1.0', `${repositoryPath} has an unsupported schemaVersion.`);
   assert(payload.sourceType === 'BKL046_RECOMMENDATION_EXECUTION_EVIDENCE', `${repositoryPath} has an unsupported sourceType.`);
   assert(payload.authority === 'processing_execution_evidence', `${repositoryPath} has unsupported authority.`);
-  for (const key of ['evidenceId', 'sessionId', 'recommendationId', 'decisionReceiptId']) {
-    assert(nonEmpty(payload[key]), `${repositoryPath} requires ${key}.`);
-  }
+  assert(nonEmpty(payload.sessionId), `${repositoryPath} requires sessionId.`);
+  for (const key of ['evidenceId', 'recommendationId', 'decisionReceiptId']) validateStableId(payload[key], `${repositoryPath}.${key}`);
   assert(PROCESSING_EVIDENCE_PATH.test(payload.processingEvidenceRef ?? ''), `${repositoryPath} processingEvidenceRef is outside the BKL-045 allowlist.`);
   assert(validDateTime(payload.observedAt), `${repositoryPath} has invalid observedAt.`);
   assert(payload.executionState === 'OBSERVED_MANUAL_EXECUTION', `${repositoryPath} has unsupported executionState.`);
@@ -321,6 +332,7 @@ function validateCatalog(catalog) {
 }
 
 function validateF4Projection(catalog, projection) {
+  validateCanonicalF4Projection(projection);
   assert(projection?.schemaVersion === '1.1', 'Unsupported F4 projection schemaVersion.');
   assert(projection.projectionType === 'AI_POST_PROCESSING_ADVISORY_PROJECTION', 'Unsupported F4 projection type.');
   assert(projection.projectionState === 'PRE_DECISION_READ_ONLY', 'Unsupported F4 projection state.');
@@ -638,9 +650,10 @@ export function buildRealEvidenceEvaluation({
   return deepFreeze(report);
 }
 
-function validateSourceSet(value, entryKeys, pathValidator, label) {
+function validateSourceSet(value, entryKeys, pathValidator, expectedDirectory, expectedPattern, label) {
   assertExactKeys(value, SOURCE_SET_KEYS, label);
-  assert(nonEmpty(value.directory) && nonEmpty(value.pathPattern), `${label} directory and pattern are required.`);
+  assert(value.directory === expectedDirectory, `${label} directory is outside the closed contract.`);
+  assert(value.pathPattern === expectedPattern.source, `${label} pathPattern is outside the closed contract.`);
   assert(value.validationMode === 'RAW_BUILD_TIME_SANITIZED_PUBLIC_SNAPSHOT', `${label} validationMode is unsupported.`);
   assert(Array.isArray(value.entries), `${label}.entries must be an array.`);
   const paths = value.entries.map((entry) => entry.path);
@@ -670,8 +683,22 @@ export function validateRealEvidenceEvaluation(report) {
   assert(report.sourceSnapshots.f4Projection.path === F4_PROJECTION_PATH, 'F5 F4 projection path is invalid.');
   assert(validDigest(report.sourceSnapshots.f4Projection.digest) && validDigest(report.sourceSnapshots.f4Projection.sourceSetDigest), 'F5 F4 projection digests are invalid.');
   assert(validDateTime(report.sourceSnapshots.f4Projection.generatedAt), 'F5 F4 generatedAt is invalid.');
-  validateSourceSet(report.sourceSnapshots.humanDecisionSourceSet, DECISION_ENTRY_KEYS, assertAllowedHumanDecisionPath, 'humanDecisionSourceSet');
-  validateSourceSet(report.sourceSnapshots.executionEvidenceSourceSet, EXECUTION_ENTRY_KEYS, assertAllowedExecutionEvidencePath, 'executionEvidenceSourceSet');
+  validateSourceSet(
+    report.sourceSnapshots.humanDecisionSourceSet,
+    DECISION_ENTRY_KEYS,
+    assertAllowedHumanDecisionPath,
+    HUMAN_DECISION_DIRECTORY,
+    HUMAN_DECISION_PATH,
+    'humanDecisionSourceSet'
+  );
+  validateSourceSet(
+    report.sourceSnapshots.executionEvidenceSourceSet,
+    EXECUTION_ENTRY_KEYS,
+    assertAllowedExecutionEvidencePath,
+    EXECUTION_EVIDENCE_DIRECTORY,
+    EXECUTION_EVIDENCE_PATH,
+    'executionEvidenceSourceSet'
+  );
 
   assert(canonicalJson(report.methodRegistry) === canonicalJson(F5_METHOD_REGISTRY), 'F5 method registry drift.');
   assert(Array.isArray(report.cohorts) && report.cohorts.length === F5_METHOD_REGISTRY.cohortIds.length, 'F5 cohorts are incomplete.');

@@ -69,8 +69,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Parse F5 JSON Schema
-        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/contracts/ai-post-processing-assistant-f5-evaluation.schema.json', 'utf8'))"
+      - name: Parse F2 and F5 JSON Schemas
+        run: node -e "for (const path of ['docs/contracts/ai-post-processing-assistant-f2.schema.json', 'docs/contracts/ai-post-processing-assistant-f5-evaluation.schema.json']) JSON.parse(require('node:fs').readFileSync(path, 'utf8'))"
       - name: Test F5-A closed contracts, cohorts and known answer
         run: node --test .github/scripts/test-ai-post-processing-advisory-f5-evaluation.mjs
       - name: Verify persisted F5-A evaluation is current
