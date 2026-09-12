@@ -19,7 +19,7 @@
 .dsg-ai-toolbar{display:grid;grid-template-columns:2fr 1fr;gap:.8rem;margin-bottom:.7rem}
 .dsg-ai-toolbar label{display:block;margin-bottom:.3rem;font-size:.72rem;font-weight:800;color:var(--dsg-text-soft)}
 .dsg-ai-toolbar input,.dsg-ai-toolbar select{width:100%;min-height:2.7rem;border:1px solid var(--dsg-border);border-radius:.65rem;padding:.55rem .7rem;background:var(--dsg-surface);color:var(--dsg-text)}
-.dsg-ai-toolbar input:focus-visible,.dsg-ai-toolbar select:focus-visible,.dsg-ai-record a:focus-visible,.dsg-ai-record summary:focus-visible{outline:3px solid color-mix(in srgb,var(--dsg-blue) 72%,#fff);outline-offset:3px}
+.dsg-ai-toolbar input:focus-visible,.dsg-ai-toolbar select:focus-visible,.dsg-ai-record a:focus-visible,.dsg-ai-record summary:focus-visible,.dsg-ai-evaluation summary:focus-visible{outline:3px solid color-mix(in srgb,var(--dsg-blue) 72%,#fff);outline-offset:3px}
 .dsg-ai-result{font-size:.75rem;color:var(--dsg-text-soft)}
 .dsg-ai-records{display:grid;gap:.8rem}
 .dsg-ai-record{border:1px solid var(--dsg-border);border-radius:.85rem;padding:1rem;background:color-mix(in srgb,var(--dsg-surface) 95%,var(--dsg-blue))}
@@ -49,9 +49,22 @@
 .dsg-ai-citations{margin-top:.8rem;padding:.75rem;border-radius:.65rem;background:color-mix(in srgb,var(--dsg-blue) 6%,var(--dsg-surface))}
 .dsg-ai-citations ul{margin:.4rem 0 0}
 .dsg-ai-muted{color:var(--dsg-text-soft);font-size:.72rem;overflow-wrap:anywhere}
+.dsg-ai-evaluation{border-left:4px solid #d99b19}
+.dsg-ai-evaluation__header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
+.dsg-ai-evaluation__header h2{margin:.25rem 0}
+.dsg-ai-evaluation__header p{margin:0;overflow-wrap:anywhere}
+.dsg-ai-state.is-evaluation-open{background:color-mix(in srgb,#d99b19 16%,var(--dsg-surface));color:#946200}
+.dsg-ai-evaluation__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7rem;margin-top:1rem}
+.dsg-ai-evaluation__outcome{border:1px solid var(--dsg-border);border-radius:.7rem;padding:.8rem;background:var(--dsg-surface)}
+.dsg-ai-evaluation__outcome span{display:block;font-size:.66rem;font-weight:800;color:var(--dsg-text-soft)}
+.dsg-ai-evaluation__outcome strong{display:block;margin:.25rem 0;overflow-wrap:anywhere;font-size:.78rem}
+.dsg-ai-evaluation__outcome p{margin:0;color:var(--dsg-text-soft);font-size:.68rem;overflow-wrap:anywhere}
+.dsg-ai-evaluation__facts{display:flex;flex-wrap:wrap;gap:.55rem;margin:1rem 0}
+.dsg-ai-evaluation__facts span{padding:.45rem .6rem;border-radius:.55rem;background:color-mix(in srgb,var(--dsg-blue) 7%,var(--dsg-surface));font-size:.75rem}
+.dsg-ai-evaluation__boundary{padding:.7rem;border-radius:.65rem;background:color-mix(in srgb,#d99b19 9%,var(--dsg-surface))}
 .dsg-ai-failure{border-style:dashed;border-color:#d94747;border-left:4px solid #d94747}
 .dsg-ai-failure>span{color:#b42318}
 .dsg-ai-boundary{border-left:4px solid var(--dsg-blue)}
-@media(max-width:800px){.dsg-ai-kpis,.dsg-ai-rules,.dsg-ai-recommendations{grid-template-columns:repeat(2,minmax(0,1fr))}.dsg-ai-toolbar{grid-template-columns:1fr}.dsg-ai-hero__mark{display:none}.dsg-ai-verified{align-items:flex-start;flex-direction:column}}
-@media(max-width:560px){.dsg-ai-kpis,.dsg-ai-rules,.dsg-ai-recommendations{grid-template-columns:1fr}.dsg-ai-record>header,.dsg-ai-recommendation>header,.dsg-ai-record__meta{align-items:flex-start;flex-direction:column}}
+@media(max-width:800px){.dsg-ai-kpis,.dsg-ai-rules,.dsg-ai-recommendations,.dsg-ai-evaluation__grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dsg-ai-toolbar{grid-template-columns:1fr}.dsg-ai-hero__mark{display:none}.dsg-ai-verified,.dsg-ai-evaluation__header{align-items:flex-start;flex-direction:column}}
+@media(max-width:560px){.dsg-ai-kpis,.dsg-ai-rules,.dsg-ai-recommendations,.dsg-ai-evaluation__grid{grid-template-columns:1fr}.dsg-ai-record>header,.dsg-ai-recommendation>header,.dsg-ai-record__meta{align-items:flex-start;flex-direction:column}}
 @media(prefers-reduced-motion:reduce){.dsg-ai-center *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}

@@ -16,6 +16,7 @@ import {
   validateRawHumanDecisionSource,
   validateRealEvidenceEvaluation
 } from './ai-post-processing-advisory-real-evidence-evaluation.mjs';
+import { verifyAtomicWorkflowIntegration } from './verify-ai-post-processing-advisory-f5-evaluation.mjs';
 
 const GENERATED_AT = '2026-09-12T07:30:00.000Z';
 const DECISION_PATH = 'docs/data/ai-post-processing-human-decisions/BKL-046-F2-HDR-20260912T070000Z-TEST.json';
@@ -417,4 +418,24 @@ test('F5A-UT-025 source-set metadata is pinned after digest recomputation', () =
   wrongPattern.sourceSnapshots.executionEvidenceSourceSet.pathPattern = '.*';
   seal(wrongPattern, 'evaluationDigest');
   assert.throws(() => validateRealEvidenceEvaluation(wrongPattern), /pathPattern is outside the closed contract/);
+});
+
+test('F5-EVAL-011 first and retry paths regenerate and verify F5 after F4', async () => {
+  const workflow = await readFile('.github/workflows/analyze-session-automatic.yml', 'utf8');
+  assert.equal(verifyAtomicWorkflowIntegration(workflow), true);
+});
+
+test('F5-EVAL-012 atomic path validation rejects an omitted F5 report', async () => {
+  const workflow = await readFile('.github/workflows/analyze-session-automatic.yml', 'utf8');
+  const changed = workflow.replace('docs/data/ai-post-processing-advisory-f5-evaluation.json ', '');
+  assert.throws(() => verifyAtomicWorkflowIntegration(changed), /atomic governed path set/);
+});
+
+test('F5-EVAL-012 retry validation rejects F5 generation before F4', async () => {
+  const workflow = await readFile('.github/workflows/analyze-session-automatic.yml', 'utf8');
+  const f4 = 'node .github/scripts/generate-ai-post-processing-advisory-projection.mjs --write;';
+  const f5 = 'node .github/scripts/generate-ai-post-processing-advisory-f5-evaluation.mjs --write;';
+  const retryStart = workflow.indexOf('regenerate(){');
+  const changed = `${workflow.slice(0, retryStart)}${workflow.slice(retryStart).replace(`${f4} ${f5}`, `${f5} ${f4}`)}`;
+  assert.throws(() => verifyAtomicWorkflowIntegration(changed), /generated after its F4 projection/);
 });

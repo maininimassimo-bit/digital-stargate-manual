@@ -1,4 +1,7 @@
-import { validateAdvisoryProjectionFreshness } from './ai-post-processing-assistant-core.mjs';
+import {
+  validateAdvisoryProjectionFreshness,
+  validateRealEvidenceEvaluationFreshness
+} from './ai-post-processing-assistant-core.mjs';
 
 const CORRELATION_LABELS = {
   PROVENANCE_MATCHED: 'Provenance correlata',
@@ -10,6 +13,13 @@ const CORRELATION_LABELS = {
 const RULE_LABELS = {
   GOVERNANCE_READINESS: 'Governance readiness',
   PROCESSING_HISTORY_AVAILABILITY: 'Processing history'
+};
+
+const OUTCOME_LABELS = {
+  technical: 'Esito tecnico',
+  scientific: 'Efficacia scientifica',
+  humanDecision: 'Decisioni umane',
+  production: 'Produzione'
 };
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({
@@ -59,10 +69,39 @@ function failureMessage(error) {
 function renderFailure(host, error) {
   const message = failureMessage(error);
   host.innerHTML = `<section class="dsg-ai-panel dsg-ai-failure" role="alert" aria-live="assertive">
-    <span>VERIFICA FALLITA · FAIL-CLOSED</span>
+    <span>EVALUATION UNAVAILABLE · FAIL-CLOSED</span>
     <h2>${esc(message.title)}</h2>
     <p>${esc(message.detail)}</p>
     <details><summary>Dettaglio diagnostico</summary><code>${esc(error?.message || 'Errore non classificato')}</code></details>
+  </section>`;
+}
+
+const outcomeMarkup = (axis, outcome) => `<article class="dsg-ai-evaluation__outcome">
+  <span>${esc(OUTCOME_LABELS[axis])}</span>
+  <strong>${esc(outcome.state)}</strong>
+  <p>${esc(outcome.reasonCodes.join(' · ') || 'Nessun reason code')}</p>
+</article>`;
+
+function evaluationMarkup(evaluation) {
+  const axes = ['technical', 'scientific', 'humanDecision', 'production'];
+  const pendingGates = evaluation.technicalGates.filter(gate => gate.state !== 'PASS');
+  return `<section class="dsg-ai-panel dsg-ai-evaluation" aria-labelledby="dsg-ai-evaluation-title">
+    <div class="dsg-ai-evaluation__header">
+      <div><span>F5 REAL-EVIDENCE EVALUATION</span><h2 id="dsg-ai-evaluation-title">Valutazione corrente verificata</h2><p>Generata ${esc(formatDate(evaluation.generatedAt))} · <code>${esc(evaluation.evaluationId)}</code></p></div>
+      <span class="dsg-ai-state is-evaluation-open">Closure: ${esc(evaluation.outcomes.closureRecommendation)}</span>
+    </div>
+    <div class="dsg-ai-evaluation__grid">${axes.map(axis => outcomeMarkup(axis, evaluation.outcomes[axis])).join('')}</div>
+    <div class="dsg-ai-evaluation__facts" role="list" aria-label="Copertura evidence">
+      <span role="listitem"><strong>${evaluation.summary.canonicalSessions}</strong> sessioni canoniche</span>
+      <span role="listitem"><strong>${evaluation.summary.provenanceEligible}</strong> con provenance esatta</span>
+      <span role="listitem"><strong>${evaluation.summary.humanDecisionReceipts}</strong> decision receipt</span>
+      <span role="listitem"><strong>${evaluation.summary.executionEvidence}</strong> execution evidence</span>
+    </div>
+    <p class="dsg-ai-evaluation__boundary"><strong>Modello AI implementato: NO.</strong> Questa valutazione non dimostra efficacia scientifica, readiness produttiva, accettazione automatica o autorità di esecuzione.</p>
+    <details><summary>Gate non PASS e limitazioni</summary>
+      <ul>${pendingGates.map(gate => `<li><strong>${esc(gate.gateId)}</strong>: ${esc(gate.state)} · ${esc(gate.reasonCodes.join(' · '))}</li>`).join('') || '<li>Nessun gate non PASS.</li>'}</ul>
+      <ul>${evaluation.limitations.map(item => `<li>${esc(item)}</li>`).join('')}</ul>
+    </details>
   </section>`;
 }
 
@@ -106,7 +145,7 @@ function recordMarkup(record) {
   </article>`;
 }
 
-function renderProjection(host, projection) {
+function renderProjection(host, projection, evaluation) {
   host.innerHTML = `<section class="dsg-ai-kpis" aria-label="Riepilogo advisory projection">
     <article><span>SESSIONI</span><strong>${projection.summary.totalSessions}</strong></article>
     <article><span>PROVENANCE MATCHED</span><strong>${projection.summary.provenanceMatched}</strong></article>
@@ -114,9 +153,10 @@ function renderProjection(host, projection) {
     <article><span>HISTORY FAIL-CLOSED</span><strong>${projection.summary.processingHistoryFailClosed}</strong></article>
   </section>
   <section class="dsg-ai-panel dsg-ai-verified" aria-live="polite">
-    <div><span>FRESHNESS VERIFIED</span><h2>Projection allineata al catalogo</h2><p>Generata ${esc(formatDate(projection.generatedAt))} · metodo <code>${esc(projection.methodId)}</code></p></div>
-    <span class="dsg-ai-verified__badge">SHA-256 verificato</span>
+    <div><span>FRESHNESS CHAIN VERIFIED</span><h2>Catalogo, projection F4 e valutazione F5 allineati</h2><p>Projection generata ${esc(formatDate(projection.generatedAt))} · metodo <code>${esc(projection.methodId)}</code></p></div>
+    <span class="dsg-ai-verified__badge">3 snapshot verificati</span>
   </section>
+  ${evaluationMarkup(evaluation)}
   <section class="dsg-ai-panel dsg-ai-source-state">
     <span>SOURCE STATE</span>
     <h2>Evidence reale preservata senza inferenze</h2>
@@ -161,14 +201,16 @@ export async function initializeAiPostProcessingAssistant(root = document) {
   if (!host || host.dataset.initialized === 'true') return;
   host.dataset.initialized = 'true';
   try {
-    const [projectionResponse, catalogResponse] = await Promise.all([
+    const [projectionResponse, catalogResponse, evaluationResponse] = await Promise.all([
       fetch('../data/ai-post-processing-advisory-projection.json', { cache: 'no-store' }),
-      fetch('../data/scientific-session-catalog.json', { cache: 'no-store' })
+      fetch('../data/scientific-session-catalog.json', { cache: 'no-store' }),
+      fetch('../data/ai-post-processing-advisory-f5-evaluation.json', { cache: 'no-store' })
     ]);
-    if (!projectionResponse.ok || !catalogResponse.ok) throw new Error('SOURCE_FETCH_FAILED');
-    const [projection, catalog] = await Promise.all([projectionResponse.json(), catalogResponse.json()]);
+    if (!projectionResponse.ok || !catalogResponse.ok || !evaluationResponse.ok) throw new Error('SOURCE_FETCH_FAILED');
+    const [projection, catalog, evaluation] = await Promise.all([projectionResponse.json(), catalogResponse.json(), evaluationResponse.json()]);
     await validateAdvisoryProjectionFreshness(projection, catalog);
-    renderProjection(host, projection);
+    await validateRealEvidenceEvaluationFreshness(evaluation, projection, catalog);
+    renderProjection(host, projection, evaluation);
   } catch (error) {
     renderFailure(host, error);
   }

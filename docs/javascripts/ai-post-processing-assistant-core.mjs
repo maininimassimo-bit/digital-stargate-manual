@@ -18,7 +18,8 @@ const RULE_IDS = new Set(['GOVERNANCE_READINESS', 'PROCESSING_HISTORY_AVAILABILI
 const DECISIONS = new Set(['PASS', 'FAIL_CLOSED']);
 const COMPLETENESS = new Set(['COMPLETE', 'PARTIAL', 'UNAVAILABLE']);
 const FORBIDDEN_PUBLIC_KEYS = new Set([
-  'hostId', 'workspaceId', 'absolutePath', 'localPath', 'imageData', 'imageUri', 'credential', 'secret'
+  'actorRef', 'decisionRationale', 'decisionEdits', 'hostId', 'workspaceId', 'absolutePath',
+  'localPath', 'imageData', 'imageUri', 'credential', 'secret'
 ]);
 const PROJECTION_KEYS = [
   'schemaVersion', 'projectionType', 'projectionState', 'identityMethod', 'projectionId', 'generatedAt',
@@ -74,6 +75,49 @@ const RECOMMENDATION_CATEGORIES = new Set([
   'PROCESS_ORDER', 'PARAMETER_RANGE', 'QUALITY_CHECK', 'WORKFLOW_ALTERNATIVE', 'STOP_AND_REVIEW'
 ]);
 const PARAMETER_MODES = new Set(['CATEGORICAL', 'BOUNDED_INTERVAL', 'UNKNOWN_NOT_RECOMMENDED']);
+
+const F5_SCHEMA_VERSION = '1.0';
+const F5_EVALUATION_TYPE = 'BKL046_F5_REAL_EVIDENCE_EVALUATION';
+const F5_EVALUATION_STATE = 'F5A_FOUNDATION_EVALUATED';
+const F5_IDENTITY_METHOD = 'BKL046-F5-CANONICAL-JSON-SHA256-1';
+const F5_PRODUCER = 'DSG.AiPostProcessingRealEvidenceEvaluator';
+const F5_PRODUCER_VERSION = '1.0.0-f5a';
+const F5_METHOD_ID = 'BKL046-F5A-CLOSED-EVALUATION-1';
+const F5_PROJECTION_PATH = 'docs/data/ai-post-processing-advisory-projection.json';
+const F5_HUMAN_DIRECTORY = 'docs/data/ai-post-processing-human-decisions';
+const F5_EXECUTION_DIRECTORY = 'docs/data/ai-post-processing-execution-evidence';
+const F5_HUMAN_PATTERN = '^docs\\/data\\/ai-post-processing-human-decisions\\/BKL-046-F2-HDR-\\d{8}T\\d{6}Z-[A-Z0-9][A-Z0-9_-]{0,31}\\.json$';
+const F5_EXECUTION_PATTERN = '^docs\\/data\\/ai-post-processing-execution-evidence\\/BKL-046-F5-EXE-\\d{8}T\\d{6}Z-[A-Z0-9][A-Z0-9_-]{0,31}\\.json$';
+const F5_HUMAN_PATH = new RegExp(F5_HUMAN_PATTERN);
+const F5_EXECUTION_PATH = new RegExp(F5_EXECUTION_PATTERN);
+const F5_METHOD_REGISTRY = Object.freeze({
+  registryId: 'BKL046-F5A-CLOSED-REGISTRY-1',
+  cohortIds: ['ALL-CANONICAL-SESSIONS-F5', 'EXACT-PROVENANCE-MATCHED-F5', 'HUMAN-DECISION-RECEIPTS-F5', 'EXECUTION-EVIDENCE-F5'],
+  selectionRuleIds: ['ALL-CANONICAL-SESSIONS-EXACT-SET-1', 'F4-PROVENANCE-MATCHED-EXACT-1', 'F2-HUMAN-DECISION-EXACT-CORRELATION-1', 'F5-EXECUTION-EVIDENCE-EXACT-CORRELATION-1'],
+  technicalGateIds: ['CATALOG_SNAPSHOT_INTEGRITY', 'F4_PROJECTION_INTEGRITY', 'FULL_POPULATION_COVERAGE', 'HUMAN_DECISION_SOURCE_CONTRACT', 'EXECUTION_EVIDENCE_SOURCE_CONTRACT', 'CLOSED_METHOD_REGISTRY', 'F5A_REPORT_DETERMINISM', 'F5B_DYNAMIC_UPDATE', 'F5B_CONSUMER'],
+  technicalStates: ['READY_FOR_F5_EVALUATION', 'NOT_ACCEPTED', 'REJECTED', 'ACCEPTED_READ_ONLY_WITH_LIMITATIONS'],
+  scientificStates: ['NOT_EVALUABLE_CURRENT_EVIDENCE', 'EVALUATION_REQUIRED', 'INVALID'],
+  humanDecisionStates: ['NOT_AVAILABLE', 'AVAILABLE'],
+  productionStates: ['NOT_READY_FOR_PRODUCTION', 'REJECTED_FOR_PRODUCTION'],
+  capabilityOutcomes: ['F5A_EVALUATION_FOUNDATION_READY', 'NOT_ACCEPTED', 'REJECTED', 'ACCEPTED_READ_ONLY_WITH_LIMITATIONS'],
+  closureRecommendations: ['KEEP_OPEN', 'DO_NOT_CLOSE', 'CLOSE_DETERMINISTIC_CAPABILITY'],
+  gateStates: ['PASS', 'FAIL_CLOSED', 'NOT_EXECUTED'],
+  evidenceStates: ['AVAILABLE', 'NOT_AVAILABLE', 'NOT_EVALUABLE'],
+  reasonCodes: ['FULL_CANONICAL_POPULATION', 'NO_EXACT_PROVENANCE_MATCHES', 'EXACT_PROVENANCE_AVAILABLE', 'NO_HUMAN_DECISION_RECEIPTS', 'HUMAN_DECISION_RECEIPTS_AVAILABLE', 'NO_EXECUTION_EVIDENCE', 'EXECUTION_EVIDENCE_AVAILABLE', 'NO_APPROVED_GROUND_TRUTH_METHOD', 'F5A_FOUNDATION_IMPLEMENTED', 'F5B_DYNAMIC_UPDATE_NOT_EXECUTED', 'F5B_CONSUMER_NOT_EXECUTED', 'PRODUCTION_AUTHORITY_NOT_GRANTED', 'SCIENTIFIC_EFFECTIVENESS_NOT_ESTABLISHED']
+});
+const F5_TOP_LEVEL_KEYS = ['schemaVersion', 'evaluationType', 'evaluationState', 'identityMethod', 'evaluationId', 'generatedAt', 'producer', 'producerVersion', 'methodId', 'sourceSnapshots', 'methodRegistry', 'cohorts', 'technicalGates', 'outcomes', 'summary', 'authority', 'limitations', 'evaluationDigest'];
+const F5_SOURCE_SNAPSHOT_KEYS = ['catalog', 'f4Projection', 'humanDecisionSourceSet', 'executionEvidenceSourceSet'];
+const F5_CATALOG_SNAPSHOT_KEYS = ['path', 'digest', 'sessionCount', 'sessionIds'];
+const F5_F4_SNAPSHOT_KEYS = ['path', 'digest', 'projectionId', 'generatedAt', 'sourceSetDigest', 'recordCount'];
+const F5_SOURCE_SET_KEYS = ['directory', 'pathPattern', 'validationMode', 'digest', 'entries'];
+const F5_DECISION_ENTRY_KEYS = ['path', 'digest', 'receiptId', 'recommendationId', 'sessionId', 'presentedAt', 'decidedAt', 'disposition', 'correlationId', 'executionState', 'actionAuthority'];
+const F5_EXECUTION_ENTRY_KEYS = ['path', 'digest', 'evidenceId', 'sessionId', 'recommendationId', 'decisionReceiptId', 'processingEvidenceRef', 'observedAt', 'executionState', 'actionAuthority'];
+const F5_COHORT_KEYS = ['cohortId', 'selectionRuleId', 'populationCount', 'eligibleCount', 'memberRefs', 'evidenceState', 'reasonCodes', 'limitations'];
+const F5_GATE_KEYS = ['gateId', 'state', 'reasonCodes'];
+const F5_OUTCOMES_KEYS = ['technical', 'scientific', 'humanDecision', 'production', 'capabilityOutcome', 'closureRecommendation', 'aiModelImplemented'];
+const F5_OUTCOME_KEYS = ['state', 'reasonCodes'];
+const F5_SUMMARY_KEYS = ['canonicalSessions', 'provenanceEligible', 'humanDecisionReceipts', 'executionEvidence', 'uncorrelatedProcessingSources', 'targetDistribution'];
+const F5_TARGET_COUNT_KEYS = ['target', 'count'];
 
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
 const nonEmpty = value => typeof value === 'string' && value.trim().length > 0;
@@ -194,6 +238,134 @@ function validateRecommendation(recommendation, record, bindingIds) {
   assert(Array.isArray(recommendation.parameterAdvice), `parameter advice non valido: ${record.sessionId}`);
   recommendation.parameterAdvice.forEach(item => validateParameterAdvice(item, record.sessionId));
   assert(DIGEST.test(recommendation.recommendationDigest ?? ''), `recommendation digest non valido: ${record.sessionId}`);
+}
+
+function validateF5ReasonCodes(value, label) {
+  assert(Array.isArray(value), `${label} non valido`);
+  assert(value.every(code => F5_METHOD_REGISTRY.reasonCodes.includes(code)), `${label} contiene reason code sconosciuti`);
+  assert(new Set(value).size === value.length, `${label} contiene duplicati`);
+}
+
+function validateF5SourceSet(value, { directory, pathPattern, pathExpression, entryKeys, type }) {
+  exactKeys(value, F5_SOURCE_SET_KEYS, `sourceSnapshots.${type}`);
+  assert(value.directory === directory, `${type} directory non autorizzata`);
+  assert(value.pathPattern === pathPattern, `${type} pathPattern non autorizzato`);
+  assert(value.validationMode === 'RAW_BUILD_TIME_SANITIZED_PUBLIC_SNAPSHOT', `${type} validationMode non supportato`);
+  assert(DIGEST.test(value.digest ?? ''), `${type} digest non valido`);
+  assert(Array.isArray(value.entries), `${type} entries non valide`);
+  const paths = value.entries.map(entry => entry?.path);
+  assert(paths.every(nonEmpty) && same(paths, sorted(paths)) && new Set(paths).size === paths.length, `${type} paths non canonici`);
+  value.entries.forEach((entry, index) => {
+    exactKeys(entry, entryKeys, `${type}.entries[${index}]`);
+    assert(pathExpression.test(entry.path), `${type} path non autorizzato`);
+    assert(DIGEST.test(entry.digest ?? ''), `${type} entry digest non valido`);
+    assert(nonEmpty(entry.sessionId) && nonEmpty(entry.recommendationId), `${type} correlazione incompleta`);
+    assert(entry.actionAuthority === 'NONE', `${type} action authority drift`);
+    if (type === 'humanDecisionSourceSet') {
+      assert(nonEmpty(entry.receiptId) && nonEmpty(entry.correlationId), `${type} identity incompleta`);
+      assert(Number.isFinite(Date.parse(entry.presentedAt)) && Number.isFinite(Date.parse(entry.decidedAt)), `${type} timestamp non valido`);
+      assert(Date.parse(entry.decidedAt) >= Date.parse(entry.presentedAt), `${type} sequenza temporale non valida`);
+      assert(['ACCEPTED_FOR_MANUAL_APPLICATION', 'EDITED_FOR_MANUAL_APPLICATION', 'REJECTED', 'DEFERRED'].includes(entry.disposition), `${type} disposition non valida`);
+      assert(entry.executionState === 'NOT_OBSERVED', `${type} execution state non autorizzato`);
+    } else {
+      assert(nonEmpty(entry.evidenceId) && nonEmpty(entry.decisionReceiptId), `${type} identity incompleta`);
+      assert(PROVENANCE_PATH.test(entry.processingEvidenceRef ?? ''), `${type} processing evidence non autorizzata`);
+      assert(Number.isFinite(Date.parse(entry.observedAt)), `${type} observedAt non valido`);
+      assert(entry.executionState === 'OBSERVED_MANUAL_EXECUTION', `${type} execution state non autorizzato`);
+    }
+  });
+}
+
+export function validateRealEvidenceEvaluationContract(evaluation) {
+  exactKeys(evaluation, F5_TOP_LEVEL_KEYS, 'evaluation');
+  assert(evaluation.schemaVersion === F5_SCHEMA_VERSION, 'F5_SCHEMA_VERSION_UNSUPPORTED');
+  assert(evaluation.evaluationType === F5_EVALUATION_TYPE, 'F5_EVALUATION_TYPE_UNSUPPORTED');
+  assert(evaluation.evaluationState === F5_EVALUATION_STATE, 'F5_EVALUATION_STATE_UNSUPPORTED');
+  assert(evaluation.identityMethod === F5_IDENTITY_METHOD, 'F5_IDENTITY_METHOD_UNSUPPORTED');
+  assert(evaluation.producer === F5_PRODUCER && evaluation.producerVersion === F5_PRODUCER_VERSION, 'F5_PRODUCER_UNSUPPORTED');
+  assert(evaluation.methodId === F5_METHOD_ID, 'F5_METHOD_UNSUPPORTED');
+  assert(/^BKL046-F5A-[A-F0-9]{24}$/.test(evaluation.evaluationId ?? ''), 'F5_EVALUATION_ID_INVALID');
+  assert(Number.isFinite(Date.parse(evaluation.generatedAt)), 'F5_GENERATED_AT_INVALID');
+  assert(DIGEST.test(evaluation.evaluationDigest ?? ''), 'F5_EVALUATION_DIGEST_INVALID');
+
+  exactKeys(evaluation.sourceSnapshots, F5_SOURCE_SNAPSHOT_KEYS, 'sourceSnapshots');
+  exactKeys(evaluation.sourceSnapshots.catalog, F5_CATALOG_SNAPSHOT_KEYS, 'sourceSnapshots.catalog');
+  assert(evaluation.sourceSnapshots.catalog.path === CATALOG_PATH, 'F5_CATALOG_PATH_UNSUPPORTED');
+  assert(DIGEST.test(evaluation.sourceSnapshots.catalog.digest ?? ''), 'F5_CATALOG_DIGEST_INVALID');
+  validateStringArray(evaluation.sourceSnapshots.catalog.sessionIds, 'F5 catalog sessionIds');
+  assert(same(evaluation.sourceSnapshots.catalog.sessionIds, sorted(evaluation.sourceSnapshots.catalog.sessionIds)), 'F5_CATALOG_SESSION_ORDER_INVALID');
+  assert(evaluation.sourceSnapshots.catalog.sessionCount === evaluation.sourceSnapshots.catalog.sessionIds.length, 'F5_CATALOG_COUNT_INVALID');
+
+  exactKeys(evaluation.sourceSnapshots.f4Projection, F5_F4_SNAPSHOT_KEYS, 'sourceSnapshots.f4Projection');
+  const f4 = evaluation.sourceSnapshots.f4Projection;
+  assert(f4.path === F5_PROJECTION_PATH, 'F5_F4_PATH_UNSUPPORTED');
+  assert(DIGEST.test(f4.digest ?? '') && DIGEST.test(f4.sourceSetDigest ?? ''), 'F5_F4_DIGEST_INVALID');
+  assert(/^BKL046-F4-[A-F0-9]{24}$/.test(f4.projectionId ?? ''), 'F5_F4_ID_INVALID');
+  assert(Number.isFinite(Date.parse(f4.generatedAt)), 'F5_F4_GENERATED_AT_INVALID');
+  assert(Number.isInteger(f4.recordCount) && f4.recordCount >= 0, 'F5_F4_RECORD_COUNT_INVALID');
+
+  validateF5SourceSet(evaluation.sourceSnapshots.humanDecisionSourceSet, {
+    directory: F5_HUMAN_DIRECTORY, pathPattern: F5_HUMAN_PATTERN, pathExpression: F5_HUMAN_PATH,
+    entryKeys: F5_DECISION_ENTRY_KEYS, type: 'humanDecisionSourceSet'
+  });
+  validateF5SourceSet(evaluation.sourceSnapshots.executionEvidenceSourceSet, {
+    directory: F5_EXECUTION_DIRECTORY, pathPattern: F5_EXECUTION_PATTERN, pathExpression: F5_EXECUTION_PATH,
+    entryKeys: F5_EXECUTION_ENTRY_KEYS, type: 'executionEvidenceSourceSet'
+  });
+
+  assert(same(evaluation.methodRegistry, F5_METHOD_REGISTRY), 'F5_METHOD_REGISTRY_DRIFT');
+  assert(Array.isArray(evaluation.cohorts) && evaluation.cohorts.length === F5_METHOD_REGISTRY.cohortIds.length, 'F5_COHORTS_INCOMPLETE');
+  evaluation.cohorts.forEach((cohort, index) => {
+    exactKeys(cohort, F5_COHORT_KEYS, `cohorts[${index}]`);
+    assert(cohort.cohortId === F5_METHOD_REGISTRY.cohortIds[index], `F5_COHORT_ID_MISMATCH:${index}`);
+    assert(cohort.selectionRuleId === F5_METHOD_REGISTRY.selectionRuleIds[index], `F5_SELECTION_RULE_MISMATCH:${index}`);
+    assert(Number.isInteger(cohort.populationCount) && cohort.populationCount >= 0, `F5_COHORT_POPULATION_INVALID:${index}`);
+    assert(Number.isInteger(cohort.eligibleCount) && cohort.eligibleCount >= 0, `F5_COHORT_ELIGIBLE_INVALID:${index}`);
+    validateStringArray(cohort.memberRefs, `cohorts[${index}].memberRefs`);
+    assert(same(cohort.memberRefs, sorted(cohort.memberRefs)), `F5_COHORT_ORDER_INVALID:${index}`);
+    assert(cohort.eligibleCount === cohort.memberRefs.length && cohort.eligibleCount <= cohort.populationCount, `F5_COHORT_COUNT_MISMATCH:${index}`);
+    assert(F5_METHOD_REGISTRY.evidenceStates.includes(cohort.evidenceState), `F5_EVIDENCE_STATE_UNKNOWN:${index}`);
+    if (cohort.eligibleCount === 0) assert(cohort.evidenceState !== 'AVAILABLE', `F5_EMPTY_COHORT_AVAILABLE:${index}`);
+    validateF5ReasonCodes(cohort.reasonCodes, `cohorts[${index}].reasonCodes`);
+    validateStringArray(cohort.limitations, `cohorts[${index}].limitations`, { minItems: 1 });
+  });
+
+  assert(Array.isArray(evaluation.technicalGates) && evaluation.technicalGates.length === F5_METHOD_REGISTRY.technicalGateIds.length, 'F5_TECHNICAL_GATES_INCOMPLETE');
+  evaluation.technicalGates.forEach((gate, index) => {
+    exactKeys(gate, F5_GATE_KEYS, `technicalGates[${index}]`);
+    assert(gate.gateId === F5_METHOD_REGISTRY.technicalGateIds[index], `F5_GATE_ID_MISMATCH:${index}`);
+    assert(F5_METHOD_REGISTRY.gateStates.includes(gate.state), `F5_GATE_STATE_UNKNOWN:${index}`);
+    validateF5ReasonCodes(gate.reasonCodes, `technicalGates[${index}].reasonCodes`);
+  });
+
+  exactKeys(evaluation.outcomes, F5_OUTCOMES_KEYS, 'outcomes');
+  for (const axis of ['technical', 'scientific', 'humanDecision', 'production']) {
+    exactKeys(evaluation.outcomes[axis], F5_OUTCOME_KEYS, `outcomes.${axis}`);
+    validateF5ReasonCodes(evaluation.outcomes[axis].reasonCodes, `outcomes.${axis}.reasonCodes`);
+  }
+  assert(F5_METHOD_REGISTRY.technicalStates.includes(evaluation.outcomes.technical.state), 'F5_TECHNICAL_STATE_UNKNOWN');
+  assert(F5_METHOD_REGISTRY.scientificStates.includes(evaluation.outcomes.scientific.state), 'F5_SCIENTIFIC_STATE_UNKNOWN');
+  assert(F5_METHOD_REGISTRY.humanDecisionStates.includes(evaluation.outcomes.humanDecision.state), 'F5_HUMAN_STATE_UNKNOWN');
+  assert(F5_METHOD_REGISTRY.productionStates.includes(evaluation.outcomes.production.state), 'F5_PRODUCTION_STATE_UNKNOWN');
+  assert(F5_METHOD_REGISTRY.capabilityOutcomes.includes(evaluation.outcomes.capabilityOutcome), 'F5_CAPABILITY_OUTCOME_UNKNOWN');
+  assert(F5_METHOD_REGISTRY.closureRecommendations.includes(evaluation.outcomes.closureRecommendation), 'F5_CLOSURE_UNKNOWN');
+  assert(evaluation.outcomes.aiModelImplemented === false, 'F5_AI_MODEL_CLAIM_FORBIDDEN');
+  assert(evaluation.outcomes.technical.state === 'READY_FOR_F5_EVALUATION', 'F5_TECHNICAL_ACCEPTANCE_FORBIDDEN');
+  assert(evaluation.outcomes.scientific.state === 'NOT_EVALUABLE_CURRENT_EVIDENCE', 'F5_SCIENTIFIC_EFFECTIVENESS_CLAIM_FORBIDDEN');
+  assert(evaluation.outcomes.production.state === 'NOT_READY_FOR_PRODUCTION', 'F5_PRODUCTION_READINESS_CLAIM_FORBIDDEN');
+  assert(evaluation.outcomes.closureRecommendation === 'KEEP_OPEN', 'F5_CAPABILITY_CLOSURE_FORBIDDEN');
+
+  exactKeys(evaluation.summary, F5_SUMMARY_KEYS, 'F5 summary');
+  for (const key of F5_SUMMARY_KEYS.slice(0, 5)) assert(Number.isInteger(evaluation.summary[key]) && evaluation.summary[key] >= 0, `F5_SUMMARY_INVALID:${key}`);
+  assert(Array.isArray(evaluation.summary.targetDistribution), 'F5_TARGET_DISTRIBUTION_INVALID');
+  evaluation.summary.targetDistribution.forEach((item, index) => {
+    exactKeys(item, F5_TARGET_COUNT_KEYS, `targetDistribution[${index}]`);
+    assert(nonEmpty(item.target) && Number.isInteger(item.count) && item.count > 0, `F5_TARGET_COUNT_INVALID:${index}`);
+  });
+  validateAuthority(evaluation.authority);
+  validateStringArray(evaluation.limitations, 'F5 limitations', { minItems: 1 });
+  assertNoForbiddenPublicFields(evaluation);
+  return true;
 }
 
 export function canonicalJson(value) {
@@ -341,5 +513,123 @@ export async function validateAdvisoryProjectionFreshness(projection, catalog, c
   const projectionPreimage = structuredClone(projection);
   delete projectionPreimage.projectionDigest;
   assert(await sha256(projectionPreimage, cryptoProvider) === projection.projectionDigest, 'PROJECTION_DIGEST_MISMATCH');
+  return true;
+}
+
+export async function validateRealEvidenceEvaluationFreshness(evaluation, projection, catalog, cryptoProvider = globalThis.crypto) {
+  validateRealEvidenceEvaluationContract(evaluation);
+  await validateAdvisoryProjectionFreshness(projection, catalog, cryptoProvider);
+
+  const snapshots = evaluation.sourceSnapshots;
+  const catalogIds = sorted(catalog.sessions.map(session => session.sessionId));
+  assert(await sha256(catalog, cryptoProvider) === snapshots.catalog.digest, 'STALE_F5_CATALOG_DIGEST_MISMATCH');
+  assert(same(catalogIds, snapshots.catalog.sessionIds), 'STALE_F5_CATALOG_SESSION_SET_MISMATCH');
+  assert(catalogIds.length === snapshots.catalog.sessionCount, 'STALE_F5_CATALOG_SESSION_COUNT_MISMATCH');
+
+  assert(snapshots.f4Projection.digest === projection.projectionDigest, 'STALE_F5_PROJECTION_DIGEST_MISMATCH');
+  assert(snapshots.f4Projection.projectionId === projection.projectionId, 'STALE_F5_PROJECTION_ID_MISMATCH');
+  assert(snapshots.f4Projection.generatedAt === projection.generatedAt, 'STALE_F5_PROJECTION_TIMESTAMP_MISMATCH');
+  assert(snapshots.f4Projection.sourceSetDigest === projection.sourceSet.digest, 'STALE_F5_PROJECTION_SOURCE_SET_MISMATCH');
+  assert(snapshots.f4Projection.recordCount === projection.records.length, 'STALE_F5_PROJECTION_RECORD_COUNT_MISMATCH');
+
+  const humanSet = snapshots.humanDecisionSourceSet;
+  const executionSet = snapshots.executionEvidenceSourceSet;
+  assert(await sha256(humanSet.entries, cryptoProvider) === humanSet.digest, 'F5_HUMAN_SOURCE_SET_DIGEST_MISMATCH');
+  assert(await sha256(executionSet.entries, cryptoProvider) === executionSet.digest, 'F5_EXECUTION_SOURCE_SET_DIGEST_MISMATCH');
+
+  const expectedEvaluationId = `BKL046-F5A-${(await sha256({
+    catalogDigest: snapshots.catalog.digest,
+    executionEvidenceDigest: executionSet.digest,
+    f4ProjectionDigest: snapshots.f4Projection.digest,
+    humanDecisionDigest: humanSet.digest,
+    methodId: evaluation.methodId
+  }, cryptoProvider)).slice(0, 24).toUpperCase()}`;
+  assert(evaluation.evaluationId === expectedEvaluationId, 'F5_EVALUATION_ID_MISMATCH');
+
+  const recommendationMap = new Map();
+  for (const record of projection.records) {
+    for (const recommendation of record.recommendations) {
+      assert(!recommendationMap.has(recommendation.recommendationId), `F5_DUPLICATE_RECOMMENDATION:${recommendation.recommendationId}`);
+      recommendationMap.set(recommendation.recommendationId, { sessionId: record.sessionId, correlationId: recommendation.correlationId });
+    }
+  }
+  const receiptMap = new Map();
+  const decisionRecommendationIds = new Set();
+  for (const entry of humanSet.entries) {
+    const recommendation = recommendationMap.get(entry.recommendationId);
+    assert(recommendation, `F5_HUMAN_UNKNOWN_RECOMMENDATION:${entry.receiptId}`);
+    assert(recommendation.sessionId === entry.sessionId && recommendation.correlationId === entry.correlationId, `F5_HUMAN_CORRELATION_MISMATCH:${entry.receiptId}`);
+    assert(!receiptMap.has(entry.receiptId), `F5_DUPLICATE_RECEIPT:${entry.receiptId}`);
+    assert(!decisionRecommendationIds.has(entry.recommendationId), `F5_DUPLICATE_RECOMMENDATION_DECISION:${entry.recommendationId}`);
+    receiptMap.set(entry.receiptId, entry);
+    decisionRecommendationIds.add(entry.recommendationId);
+  }
+  const processingMap = new Map(projection.sourceSet.entries.map(entry => [entry.path, entry]));
+  const executionIds = new Set();
+  for (const entry of executionSet.entries) {
+    assert(!executionIds.has(entry.evidenceId), `F5_DUPLICATE_EXECUTION_EVIDENCE:${entry.evidenceId}`);
+    executionIds.add(entry.evidenceId);
+    const receipt = receiptMap.get(entry.decisionReceiptId);
+    assert(receipt && receipt.recommendationId === entry.recommendationId && receipt.sessionId === entry.sessionId, `F5_EXECUTION_DECISION_MISMATCH:${entry.evidenceId}`);
+    const processing = processingMap.get(entry.processingEvidenceRef);
+    assert(processing?.sessionId === entry.sessionId, `F5_EXECUTION_PROCESSING_MISMATCH:${entry.evidenceId}`);
+    assert(Date.parse(entry.observedAt) >= Date.parse(receipt.decidedAt), `F5_EXECUTION_TIME_MISMATCH:${entry.evidenceId}`);
+  }
+
+  const provenanceMembers = projection.records.filter(record => record.correlationState === 'PROVENANCE_MATCHED').map(record => record.sessionId).sort();
+  const expectedCohortMembers = [
+    catalogIds,
+    provenanceMembers,
+    humanSet.entries.map(entry => entry.receiptId).sort(),
+    executionSet.entries.map(entry => entry.evidenceId).sort()
+  ];
+  const expectedPopulations = [catalogIds.length, catalogIds.length, recommendationMap.size, humanSet.entries.length];
+  evaluation.cohorts.forEach((cohort, index) => {
+    assert(same(cohort.memberRefs, expectedCohortMembers[index]), `F5_COHORT_MEMBERSHIP_MISMATCH:${index}`);
+    assert(cohort.populationCount === expectedPopulations[index], `F5_COHORT_POPULATION_MISMATCH:${index}`);
+  });
+
+  const expectedGates = [
+    ['CATALOG_SNAPSHOT_INTEGRITY', 'PASS', []],
+    ['F4_PROJECTION_INTEGRITY', 'PASS', []],
+    ['FULL_POPULATION_COVERAGE', 'PASS', []],
+    ['HUMAN_DECISION_SOURCE_CONTRACT', 'PASS', []],
+    ['EXECUTION_EVIDENCE_SOURCE_CONTRACT', 'PASS', []],
+    ['CLOSED_METHOD_REGISTRY', 'PASS', []],
+    ['F5A_REPORT_DETERMINISM', 'PASS', []],
+    ['F5B_DYNAMIC_UPDATE', 'NOT_EXECUTED', ['F5B_DYNAMIC_UPDATE_NOT_EXECUTED']],
+    ['F5B_CONSUMER', 'NOT_EXECUTED', ['F5B_CONSUMER_NOT_EXECUTED']]
+  ].map(([gateId, state, reasonCodes]) => ({ gateId, state, reasonCodes }));
+  assert(same(evaluation.technicalGates, expectedGates), 'F5_TECHNICAL_GATES_STATE_MISMATCH');
+  const expectedOutcomes = {
+    technical: { state: 'READY_FOR_F5_EVALUATION', reasonCodes: ['F5A_FOUNDATION_IMPLEMENTED', 'F5B_CONSUMER_NOT_EXECUTED', 'F5B_DYNAMIC_UPDATE_NOT_EXECUTED'] },
+    scientific: { state: 'NOT_EVALUABLE_CURRENT_EVIDENCE', reasonCodes: ['NO_APPROVED_GROUND_TRUTH_METHOD', ...(provenanceMembers.length ? [] : ['NO_EXACT_PROVENANCE_MATCHES'])].sort() },
+    humanDecision: { state: humanSet.entries.length ? 'AVAILABLE' : 'NOT_AVAILABLE', reasonCodes: [humanSet.entries.length ? 'HUMAN_DECISION_RECEIPTS_AVAILABLE' : 'NO_HUMAN_DECISION_RECEIPTS'] },
+    production: { state: 'NOT_READY_FOR_PRODUCTION', reasonCodes: ['PRODUCTION_AUTHORITY_NOT_GRANTED', 'SCIENTIFIC_EFFECTIVENESS_NOT_ESTABLISHED'] },
+    capabilityOutcome: 'F5A_EVALUATION_FOUNDATION_READY',
+    closureRecommendation: 'KEEP_OPEN',
+    aiModelImplemented: false
+  };
+  assert(same(evaluation.outcomes, expectedOutcomes), 'F5_OUTCOMES_STATE_MISMATCH');
+
+  const targetCounts = new Map();
+  for (const session of catalog.sessions) {
+    const target = nonEmpty(session.target) ? session.target : 'UNKNOWN';
+    targetCounts.set(target, (targetCounts.get(target) ?? 0) + 1);
+  }
+  const targetDistribution = [...targetCounts.entries()].sort(([left], [right]) => left.localeCompare(right)).map(([target, count]) => ({ target, count }));
+  const expectedSummary = {
+    canonicalSessions: catalogIds.length,
+    provenanceEligible: provenanceMembers.length,
+    humanDecisionReceipts: humanSet.entries.length,
+    executionEvidence: executionSet.entries.length,
+    uncorrelatedProcessingSources: projection.summary.uncorrelatedSources,
+    targetDistribution
+  };
+  assert(same(evaluation.summary, expectedSummary), 'F5_SUMMARY_MISMATCH');
+
+  const evaluationPreimage = structuredClone(evaluation);
+  delete evaluationPreimage.evaluationDigest;
+  assert(await sha256(evaluationPreimage, cryptoProvider) === evaluation.evaluationDigest, 'F5_EVALUATION_DIGEST_MISMATCH');
   return true;
 }

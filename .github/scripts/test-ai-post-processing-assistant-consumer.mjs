@@ -4,11 +4,14 @@ import test from 'node:test';
 import {
   sha256,
   validateAdvisoryProjectionContract,
-  validateAdvisoryProjectionFreshness
+  validateAdvisoryProjectionFreshness,
+  validateRealEvidenceEvaluationContract,
+  validateRealEvidenceEvaluationFreshness
 } from '../../docs/javascripts/ai-post-processing-assistant-core.mjs';
 
 const catalogPath = 'docs/data/scientific-session-catalog.json';
 const projectionPath = 'docs/data/ai-post-processing-advisory-projection.json';
+const evaluationPath = 'docs/data/ai-post-processing-advisory-f5-evaluation.json';
 const uiPath = 'docs/javascripts/ai-post-processing-assistant.js';
 const pagePath = 'docs/ai-post-processing-assistant/index.md';
 const cssPath = 'docs/styles/ai-post-processing-assistant.css';
@@ -160,12 +163,55 @@ async function buildFixture() {
   return { catalog, projection };
 }
 
-const repositoryDataAvailable = fs.existsSync(catalogPath) && fs.existsSync(projectionPath);
+const repositoryDataAvailable = fs.existsSync(catalogPath) && fs.existsSync(projectionPath) && fs.existsSync(evaluationPath);
+
+function readPersistedChain() {
+  return {
+    catalog: JSON.parse(fs.readFileSync(catalogPath, 'utf8')),
+    projection: JSON.parse(fs.readFileSync(projectionPath, 'utf8')),
+    evaluation: JSON.parse(fs.readFileSync(evaluationPath, 'utf8'))
+  };
+}
 
 test('current persisted projection passes the browser freshness chain', { skip: !repositoryDataAvailable }, async () => {
   const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
   const projection = JSON.parse(fs.readFileSync(projectionPath, 'utf8'));
   assert.equal(await validateAdvisoryProjectionFreshness(projection, catalog), true);
+});
+
+test('F5-EVAL-013 current persisted evaluation passes the complete browser freshness chain', { skip: !repositoryDataAvailable }, async () => {
+  const { catalog, projection, evaluation } = readPersistedChain();
+  assert.equal(validateRealEvidenceEvaluationContract(evaluation), true);
+  assert.equal(await validateRealEvidenceEvaluationFreshness(evaluation, projection, catalog), true);
+});
+
+test('F5-EVAL-013 stale F4 snapshot makes the evaluation unavailable', { skip: !repositoryDataAvailable }, async () => {
+  const { catalog, projection, evaluation } = readPersistedChain();
+  const changed = structuredClone(evaluation);
+  changed.sourceSnapshots.f4Projection.digest = 'a'.repeat(64);
+  await assert.rejects(validateRealEvidenceEvaluationFreshness(changed, projection, catalog), /STALE_F5_PROJECTION_DIGEST_MISMATCH/);
+});
+
+test('F5-EVAL-013 evaluation payload tampering fails the digest check', { skip: !repositoryDataAvailable }, async () => {
+  const { catalog, projection, evaluation } = readPersistedChain();
+  const changed = structuredClone(evaluation);
+  changed.limitations[0] = 'Altered after publication.';
+  await assert.rejects(validateRealEvidenceEvaluationFreshness(changed, projection, catalog), /F5_EVALUATION_DIGEST_MISMATCH/);
+});
+
+test('F5-EVAL-013 F5 authority and scientific claims cannot be escalated', { skip: !repositoryDataAvailable }, () => {
+  const { evaluation } = readPersistedChain();
+  const authority = structuredClone(evaluation);
+  authority.authority.automaticAcceptanceAuthorized = true;
+  assert.throws(() => validateRealEvidenceEvaluationContract(authority), /automatic acceptance authority drift/);
+  const scientific = structuredClone(evaluation);
+  scientific.outcomes.scientific.state = 'INVALID';
+  assert.throws(() => validateRealEvidenceEvaluationContract(scientific), /F5_SCIENTIFIC_EFFECTIVENESS_CLAIM_FORBIDDEN/);
+});
+
+test('F5-EVAL-013 missing Web Crypto keeps the F5 chain fail-closed', { skip: !repositoryDataAvailable }, async () => {
+  const { catalog, projection, evaluation } = readPersistedChain();
+  await assert.rejects(validateRealEvidenceEvaluationFreshness(evaluation, projection, catalog, null), /WEB_CRYPTO_SHA256_UNAVAILABLE/);
 });
 
 test('aligned projection and catalog are accepted', async () => {
@@ -232,11 +278,14 @@ test('missing Web Crypto has no permissive fallback', async () => {
   await assert.rejects(validateAdvisoryProjectionFreshness(projection, catalog, null), /WEB_CRYPTO_SHA256_UNAVAILABLE/);
 });
 
-test('portal files preserve no-store, accessibility and non-mutative controls', () => {
+test('F5-EVAL-014 portal preserves no-store, accessibility and non-mutative controls', () => {
   const ui = fs.readFileSync(uiPath, 'utf8');
   const page = fs.readFileSync(pagePath, 'utf8');
   const css = fs.readFileSync(cssPath, 'utf8');
-  assert.equal((ui.match(/cache: 'no-store'/g) || []).length, 2);
+  assert.equal((ui.match(/cache: 'no-store'/g) || []).length, 3);
+  assert.match(ui, /ai-post-processing-advisory-f5-evaluation\.json/);
+  assert.match(ui, /EVALUATION UNAVAILABLE · FAIL-CLOSED/);
+  assert.match(ui, /F5 REAL-EVIDENCE EVALUATION/);
   assert.match(ui, /document\$\?\.subscribe/);
   assert.match(page, /aria-live="polite"/);
   assert.match(page, /AUTHORITY BOUNDARY/);
