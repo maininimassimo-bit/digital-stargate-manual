@@ -58,6 +58,8 @@ La pubblicazione di un documento in questa sezione **non equivale ad autorizzazi
 - [F5-A Validation Remediation Evidence](BKL-046-F5A-Validation-Remediation-Evidence-2026-09-12.md) — M01/M02/C01 remediated; 25/25 F5-A, 17/17 F2 and 8/8 workflows green; re-review pending
 - [F5-A AI-Assisted Implementation ARB](../reviews/ARB-BKL-046-F5A-AI-Assisted-Implementation-Review-2026-09-12.md) — rework required; not an independent human review
 - [F5-A AI-Assisted Release Quality Review](../reviews/RQ-BKL-046-F5A-AI-Assisted-Release-Quality-Review-2026-09-12.md) — not ready for merge; not an independent human approval
+- [F5-A AI-Assisted Implementation ARB Re-Review](../reviews/ARB-BKL-046-F5A-AI-Assisted-Implementation-ReReview-2026-09-12.md) — approved with conditions; not an independent human review
+- [F5-A AI-Assisted Release Quality Re-Review](../reviews/RQ-BKL-046-F5A-AI-Assisted-Release-Quality-ReReview-2026-09-12.md) — conditionally ready for merge; not an independent human approval
 
 ## Stato di pubblicazione
 
