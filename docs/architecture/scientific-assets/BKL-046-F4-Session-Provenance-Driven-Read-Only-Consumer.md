@@ -4,7 +4,7 @@
 |---|---|
 | Identificativo | BKL-046-F4 |
 | Stato | CLOSED / ACCEPTED / POST-MERGE VERIFIED |
-| Versione | 1.5 |
+| Versione | 1.6 |
 | Data | 12/09/2026 |
 | Package | BKL-046 — AI Post-Processing Assistant for PixInsight |
 | Baseline F3 | PR #169, merge `8339aecf0b6b7fa19396561b20253c0411fd7ee7` — Accepted |
@@ -361,6 +361,7 @@ Non è richiesta una nuova ADR: F4 applica ADR-008, i contratti F2/F3 e il patte
 | F4-C AI-assisted Release Quality | `docs/architecture/reviews/RQ-BKL-046-F4C-AI-Assisted-Release-Quality-Review-2026-09-12.md` |
 | one-time branch protection waiver | `W-BKL046-F4-001`, owner-authorized 12/09/2026, PR #175 only; consumed and expired |
 | F4 acceptance | `docs/project/BKL-046-F4-ACCEPTANCE-2026-09-12.md` |
+| F5 architecture | `docs/architecture/scientific-assets/BKL-046-F5-Real-Evidence-Evaluation-and-Capability-Closure.md` |
 
 ## 19. Acceptance criteria
 
@@ -392,7 +393,7 @@ F4 è accettabile soltanto quando:
 
 ## 21. Future evolution
 
-F5 è promosso come prossimo incremento di architettura/design per definire la valutazione degli output F4 su evidence reale e i criteri di una possibile closure come capability read-only con limitation. Qualsiasi model/provider, confidence scientifica, image transfer o modalità Assisted Apply resta separata, richiede nuovi driver, evidence, security/privacy assessment e decisione architetturale dedicata.
+F5 è promosso come prossimo incremento di architettura/design; il package proposto è `docs/architecture/scientific-assets/BKL-046-F5-Real-Evidence-Evaluation-and-Capability-Closure.md` e separa closure tecnica, scientific effectiveness, human evidence e production readiness. Qualsiasi model/provider, confidence scientifica, image transfer o modalità Assisted Apply resta separata, richiede nuovi driver, evidence, security/privacy assessment e decisione architetturale dedicata.
 
 ## 22. Accepted outcome
 
