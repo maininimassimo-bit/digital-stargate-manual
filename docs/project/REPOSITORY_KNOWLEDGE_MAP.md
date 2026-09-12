@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 2.6 |
+| Versione | 2.7 |
 | Stato | Active |
-| Data | 11/09/2026 |
+| Data | 12/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
 | Current governed package | BKL-046 — AI Post-Processing Assistant for PixInsight |
 
@@ -16,7 +16,7 @@ Mappa domini, authority, projection e percorsi di conoscenza. Non sostituisce le
 ## 2. Continuity hierarchy
 
 1. `AI_BOOTSTRAP.md`;
-2. current handover e technical baseline 10/09/2026;
+2. current handover e technical baseline 12/09/2026;
 3. Enterprise Architecture Context;
 4. questo Knowledge Map;
 5. `BACKLOG.md`;
@@ -43,7 +43,7 @@ Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimen
 
 ## 6. BKL-041 closed and BKL-046 current
 
-BKL-041 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability sperimentale read-only; production readiness resta `NOT_READY_FOR_PRODUCTION`. BKL-046 F1-F3 sono CLOSED / ACCEPTED; F3 è stato integrato tramite PR #169, merge `8339aecf0b6b7fa19396561b20253c0411fd7ee7`, con review ARB/RQ AI-assistite owner-authorized e non indipendenti. F4 è current per un consumer session/provenance-driven read-only, collegato automaticamente al post-import con projection atomica e gate freshness/digest fail-closed, mantenendo execution evidence separata e senza selezionare model/provider o apply path.
+BKL-041 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability sperimentale read-only; production readiness resta `NOT_READY_FOR_PRODUCTION`. BKL-046 F1-F4 sono CLOSED / ACCEPTED. F4 è stata integrata tramite PR #175, merge `af48cc2441cf956d88c13c81845fc2a2f7c599f2`, con review AI-assistite owner-authorized e non indipendenti, 6/6 workflow post-merge e Pages live verificate. F5 è current soltanto come real-evidence evaluation e capability-closure design; execution evidence resta separata e nessun model/provider, scientific confidence o apply path è autorizzato.
 
 ## 7. Roadmap sequence
 
@@ -69,3 +69,4 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 2.4 | 11/09/2026 | BKL-046 F1 accepted e F2 current |
 | 2.5 | 11/09/2026 | BKL-046 F2 accepted e F3 current |
 | 2.6 | 11/09/2026 | BKL-046 F3 accepted e F4 current |
+| 2.7 | 12/09/2026 | BKL-046 F4 accepted/post-merge verified e F5 design current |

@@ -11,8 +11,8 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | Documento | Ruolo |
 |---|---|
 | `AI_BOOTSTRAP.md` | Root bootstrap |
-| [Handover 10/09/2026](HANDOVER_2026-09-10.md) | Handover corrente |
-| [Current Technical Baseline 10/09/2026](CURRENT_TECHNICAL_BASELINE_2026-09-10.md) | Baseline tecnica corrente |
+| [Handover 12/09/2026](HANDOVER_2026-09-12.md) | Handover corrente |
+| [Current Technical Baseline 12/09/2026](CURRENT_TECHNICAL_BASELINE_2026-09-12.md) | Baseline tecnica corrente |
 | [Enterprise Architecture Context](ENTERPRISE_ARCHITECTURE_CONTEXT.md) | Contesto enterprise |
 | [Repository Knowledge Map](REPOSITORY_KNOWLEDGE_MAP.md) | Mappa authority/projection |
 | [BKL-037 Closure](BKL-037-CLOSURE-2026-09-10.md) | Closure del predecessore accettato |
@@ -22,7 +22,8 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [BKL-046 F1 Acceptance](BKL-046-F1-ACCEPTANCE-2026-09-11.md) | Acceptance, merge e verifica pubblicazione F1 |
 | [BKL-046 F2 Acceptance](BKL-046-F2-ACCEPTANCE-2026-09-11.md) | Acceptance, merge e verifica pubblicazione F2 |
 | [BKL-046 F3 Acceptance](BKL-046-F3-ACCEPTANCE-2026-09-11.md) | Acceptance, review AI-assistite owner-authorized, merge e verifica pubblicazione F3 |
-| [BKL-046 F4 Architecture](../architecture/scientific-assets/BKL-046-F4-Session-Provenance-Driven-Read-Only-Consumer.md) | F4-C ARB/RQ AI-assistite owner-authorized; merge/post-merge acceptance pending con waiver PR #175 |
+| [BKL-046 F4 Architecture](../architecture/scientific-assets/BKL-046-F4-Session-Provenance-Driven-Read-Only-Consumer.md) | F4 accettata e verificata post-merge |
+| [BKL-046 F4 Acceptance](BKL-046-F4-ACCEPTANCE-2026-09-12.md) | Acceptance, review AI-assistite, deroga consumata, merge e verifica live |
 
 ## Registri e standard canonici
 
@@ -32,7 +33,7 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 
 - BKL-037 — Session Comparison & Benchmarking: CLOSED / ACCEPTED;
 - BKL-041 — Scientific Data Quality Score: CLOSED / ACCEPTED / POST-MERGE VERIFIED;
-- BKL-046 — AI Post-Processing Assistant: CURRENT / F4-C review-approved; F1-F3 ACCEPTED; F4 merge/post-merge acceptance pending.
+- BKL-046 — AI Post-Processing Assistant: CURRENT / F5 evaluation-and-closure design; F1-F4 ACCEPTED / POST-MERGE VERIFIED.
 
 ## Sequenza governata
 

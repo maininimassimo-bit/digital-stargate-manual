@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.2 |
+| Versione | 5.3 |
 | Stato | Active |
-| Data baseline | 11/09/2026 |
+| Data baseline | 12/09/2026 |
 
 ## 1. Scopo
 
@@ -64,7 +64,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-043 | P2 | Observatory Reliability Engineering | Planned | BKL-030/BKL-038/BKL-042 | SLI/SLO, MTBF, MTTR, session completion e failure budget | Functional Roadmap Expansion |
 | BKL-044 | P1 | Knowledge Graph / AI Evidence Contract | Done | BKL-015 | Provenance stabile per AP/ADR/assets/session/target/incident/telemetry/processing/AI | F1-F4 CLOSED/ACCEPTED; PR #104 merge `b7c01ba7221818e1971403ab3befe38c8e40cc54`; closure `docs/project/BKL-044-CLOSURE-2026-09-07.md` |
 | BKL-045 | P2 | PixInsight Workflow Provenance Plugin | Done | BKL-015/BKL-044 | Estensione PixInsight governata per catturare workflow, parametri e lineage | F1-F5 CLOSED/ACCEPTED; closure `docs/project/BKL-045-CLOSURE-2026-09-10.md`; PR #140 merge `a08aed981e5ffa4af6b68fea521ada25a4b2b338`; retained PixInsight history completeness limitation |
-| BKL-046 | P2 | AI Post-Processing Assistant for PixInsight | In Progress | BKL-015/BKL-044/BKL-045 | Assistente advisory per ottimizzare workflow PixInsight | F1-F3 CLOSED/ACCEPTED; F3 via PR #169, merge `8339aecf0b6b7fa19396561b20253c0411fd7ee7`; F4 current for a session/provenance-driven read-only consumer with automatic post-import regeneration and freshness/digest gates; no model/provider, automatic acceptance or apply authority |
+| BKL-046 | P2 | AI Post-Processing Assistant for PixInsight | In Progress | BKL-015/BKL-044/BKL-045 | Assistente advisory per ottimizzare workflow PixInsight | F1-F4 CLOSED/ACCEPTED; F4 via PR #175, merge `af48cc2441cf956d88c13c81845fc2a2f7c599f2`, 6/6 workflow post-merge e Pages verificate; F5 current esclusivamente per real-evidence evaluation e capability-closure design; no model/provider, scientific confidence, automatic acceptance or apply authority |
 | BKL-047 | P1 | AP-013C Verified Transport Cleanup & Convergence Monitoring | Done | AP-013B COPY_ONLY OAT | DRY_RUN/NO_DELETE lifecycle evidence, ACK convergence e fail-closed classification accepted | AP-013C; C8 productive cleanup excluded |
 
 ### Reconciliation note — 10/09/2026
@@ -95,6 +95,11 @@ F2 è CLOSED / ACCEPTED tramite PR #167, merge `b8a9025fdfc9b5254b9c79a5c37a775b
 
 F3 è CLOSED / ACCEPTED tramite PR #169, merge `8339aecf0b6b7fa19396561b20253c0411fd7ee7`, con 21/21 test F3, review ARB/RQ AI-assistite autorizzate dal repository owner e dichiarate non equivalenti ad approvazioni umane indipendenti, e 7/7 workflow post-merge inclusa Pages `34643716214`. Il demonstrator resta deterministico, sintetico, bounded e read-only; il known-answer digest è `a97f7ff5a394b6f714efc8a55b1b1ab6cd6c6865c9a58ea6b9ec5120e98a4070`. F4 è corrente esclusivamente per un consumer session/provenance-driven read-only, collegato automaticamente alla pipeline post-import con pubblicazione atomica e freshness/digest fail-closed. Nessun model/provider, automatic acceptance, PixInsight apply, remediation, device command o Safety Authority è autorizzato.
 
+### BKL-046 F4 acceptance and F5 transition — 12/09/2026
+
+F4 è CLOSED / ACCEPTED / POST-MERGE VERIFIED tramite PR #175, technical head `b2f8543d0a7fd3e354c40d9acb0206ef7e6edea4`, review-publication head `ae1b8f2ae04fc9c4891e794bc930ec0e09fcf640` e merge `af48cc2441cf956d88c13c81845fc2a2f7c599f2`. Le review ARB/RQ sono AI-assistite, owner-authorized e non equivalenti ad approvazioni umane indipendenti. La deroga `W-BKL046-F4-001` era limitata alla branch protection della sola PR #175 ed è scaduta al merge. Sono verdi 6/6 workflow post-merge; la Pages live conferma 15 sessioni, 0 provenance matched, 15 provenance unavailable e 15 processing-history fail-closed.
+
+F5 è promosso soltanto come incremento di architettura/design per definire la valutazione su evidence reale e i criteri di una possibile closure read-only con limitation. Nessun model/provider, confidence scientifica, automatic acceptance, PixInsight apply, remediation, device command o Safety Authority è autorizzato.
 ## 4. Sequenza di esecuzione raccomandata
 
 ```text

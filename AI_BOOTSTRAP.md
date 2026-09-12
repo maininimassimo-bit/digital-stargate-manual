@@ -2,8 +2,8 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 3.5 |
-| Baseline | 11/09/2026 |
+| Versione | 3.6 |
+| Baseline | 12/09/2026 |
 | Stato | Current root bootstrap — BKL-046 AI Post-Processing Assistant |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
@@ -15,8 +15,8 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni, roadma
 ## 2. Sequenza obbligatoria di lettura
 
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-09-10.md`
-3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-10.md`
+2. `docs/project/HANDOVER_2026-09-12.md`
+3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-12.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
 6. `docs/project/BACKLOG.md`
@@ -51,7 +51,7 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - foundation completata e accettata attraverso BKL-045;
 - BKL-037 — Session Comparison & Benchmarking: CLOSED / ACCEPTED;
 - BKL-041 — Scientific Data Quality Score: CLOSED / ACCEPTED / POST-MERGE VERIFIED;
-- BKL-046 — AI Post-Processing Assistant: CURRENT / F4 Session/Provenance-Driven Read-Only Consumer; F1-F3 ACCEPTED.
+- BKL-046 — AI Post-Processing Assistant: CURRENT / F5 Real-Evidence Evaluation and Capability Closure design; F1-F4 ACCEPTED / POST-MERGE VERIFIED.
 
 BKL-037 resta read-only/descriptive-only e non autorizza ranking, score, threshold, recommendation, remediation, command path o Safety Authority.
 
@@ -71,4 +71,4 @@ Nessun portale, comparison layer, quality score o AI è Safety Authority. Nessun
 
 ## 9. Punto di partenza operativo
 
-Avviare **BKL-046 F4 — Session/Provenance-Driven Read-Only Consumer** sulla baseline F3 accettata tramite PR #169, merge `8339aecf0b6b7fa19396561b20253c0411fd7ee7`. F4 deve consumare soltanto input canonici reali autorizzati, produrre una projection deterministica read-only e garantirne rigenerazione e pubblicazione automatica e atomica dopo ogni nuova sessione scientifica importata, con gate di freshness/digest fail-closed. Non sono autorizzati model/provider, automatic acceptance, PixInsight apply, remediation, device command o Safety Authority.
+Avviare **BKL-046 F5 — Real-Evidence Evaluation and Capability Closure** come incremento di architettura/design sulla baseline F4 accettata tramite PR #175, merge `af48cc2441cf956d88c13c81845fc2a2f7c599f2`. F5 deve definire cohort, sufficienza delle evidenze, criteri di valutazione e limitation trattenute per decidere una possibile closure della capability read-only. Non sono autorizzati model/provider, confidence scientifica, automatic acceptance, PixInsight apply, remediation, device command o Safety Authority.
