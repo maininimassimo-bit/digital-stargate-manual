@@ -16,7 +16,26 @@ import { OUTPUT_PATH } from './generate-ai-post-processing-advisory-f5-evaluatio
 
 const SCHEMA_PATH = 'docs/contracts/ai-post-processing-assistant-f5-evaluation.schema.json';
 const F2_SCHEMA_PATH = 'docs/contracts/ai-post-processing-assistant-f2.schema.json';
+const AUTOMATIC_WORKFLOW_PATH = '.github/workflows/analyze-session-automatic.yml';
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
+
+export function verifyAtomicWorkflowIntegration(workflow) {
+  const f4Write = 'node .github/scripts/generate-ai-post-processing-advisory-projection.mjs --write';
+  const f5Write = 'node .github/scripts/generate-ai-post-processing-advisory-f5-evaluation.mjs --write';
+  const f5Check = 'node .github/scripts/generate-ai-post-processing-advisory-f5-evaluation.mjs --check';
+  const f5Verify = 'node .github/scripts/verify-ai-post-processing-advisory-f5-evaluation.mjs';
+  const occurrences = (value) => (workflow.match(new RegExp(value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
+  assert(occurrences(f4Write) >= 2, 'F4 generation must run in initial and retry paths.');
+  assert(occurrences(f5Write) >= 2, 'F5 evaluation generation must run in initial and retry paths.');
+  assert(occurrences(f5Check) >= 2, 'F5 evaluation drift check must run in initial and retry paths.');
+  assert(occurrences(f5Verify) >= 2, 'F5 evaluation verifier must run in initial and retry paths.');
+  assert(workflow.includes('docs/data/ai-post-processing-advisory-f5-evaluation.json'), 'F5 evaluation is missing from the atomic governed path set.');
+  const f4Indexes = [...workflow.matchAll(new RegExp(f4Write.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'))].map(match => match.index);
+  const f5Indexes = [...workflow.matchAll(new RegExp(f5Write.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'))].map(match => match.index);
+  assert(f5Indexes.every((index, position) => index > f4Indexes[position]), 'F5 evaluation must be generated after its F4 projection in every path.');
+  assert(workflow.includes('git reset --hard origin/main') && workflow.includes('regenerate; git add -- "${governed_paths[@]}"'), 'Retry path must regenerate the complete governed set from origin/main.');
+  return true;
+}
 
 function verifySchemaRegistry(schema) {
   assert(schema?.properties?.schemaVersion?.const === '1.0', 'F5 schemaVersion registry mismatch.');
@@ -62,12 +81,13 @@ function verifyF2ReceiptSchemaBinding(schema, f2Schema) {
 }
 
 async function main() {
-  const [catalog, f4Projection, report, schema, f2Schema, humanDecisionSources, executionEvidenceSources] = await Promise.all([
+  const [catalog, f4Projection, report, schema, f2Schema, workflow, humanDecisionSources, executionEvidenceSources] = await Promise.all([
     readFile(CATALOG_PATH, 'utf8').then(JSON.parse),
     readFile(F4_PROJECTION_PATH, 'utf8').then(JSON.parse),
     readFile(OUTPUT_PATH, 'utf8').then(JSON.parse),
     readFile(SCHEMA_PATH, 'utf8').then(JSON.parse),
     readFile(F2_SCHEMA_PATH, 'utf8').then(JSON.parse),
+    readFile(AUTOMATIC_WORKFLOW_PATH, 'utf8'),
     discoverHumanDecisionSources('.'),
     discoverExecutionEvidenceSources('.')
   ]);
@@ -75,6 +95,7 @@ async function main() {
   validateRealEvidenceEvaluation(report);
   verifySchemaRegistry(schema);
   verifyF2ReceiptSchemaBinding(schema, f2Schema);
+  verifyAtomicWorkflowIntegration(workflow);
   const expected = buildRealEvidenceEvaluation({
     catalog,
     f4Projection,

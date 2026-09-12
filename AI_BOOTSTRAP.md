@@ -2,7 +2,7 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 3.8 |
+| Versione | 3.9 |
 | Baseline | 12/09/2026 |
 | Stato | Current root bootstrap — BKL-046 AI Post-Processing Assistant |
 
@@ -51,7 +51,7 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - foundation completata e accettata attraverso BKL-045;
 - BKL-037 — Session Comparison & Benchmarking: CLOSED / ACCEPTED;
 - BKL-041 — Scientific Data Quality Score: CLOSED / ACCEPTED / POST-MERGE VERIFIED;
-- BKL-046 — AI Post-Processing Assistant: CURRENT; F1-F4 ACCEPTED / POST-MERGE VERIFIED; F5 architecture integrated tramite PR #177; F5-A remediation candidate con exact-head CI verde e re-review pending, F5-B/F5-C not started.
+- BKL-046 — AI Post-Processing Assistant: CURRENT; F1-F4 ACCEPTED / POST-MERGE VERIFIED; F5 architecture integrated tramite PR #177; F5-A CLOSED / ACCEPTED / POST-MERGE VERIFIED tramite PR #178; F5-B implementation candidate su PR #179 con technical exact-head CI 10/10, F5-C not started.
 
 BKL-037 resta read-only/descriptive-only e non autorizza ranking, score, threshold, recommendation, remediation, command path o Safety Authority.
 
@@ -71,4 +71,4 @@ Nessun portale, comparison layer, quality score o AI è Safety Authority. Nessun
 
 ## 9. Punto di partenza operativo
 
-Sottoporre a re-review **BKL-046 F5-A — Evaluation Foundation** sul remediation head `df1fd85ea2bf2e058bcbca17ca5ace704acbab8a`. I finding `ARB-F5A-M01`, `ARB-F5A-M02` e `ARB-F5A-C01` sono risolti nel candidato con 8/8 workflow verdi, 25/25 test F5-A e 17/17 test F2; l'acceptance resta pending fino ad ARB/RQ favorevoli. Il known answer contiene 15 sessioni, 0 provenance matched, 0 decision receipt e 0 execution evidence; scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION` e closure `KEEP_OPEN`. F5-B non può iniziare prima dell'acceptance governata di F5-A. Non sono autorizzati model/provider, confidence scientifica, automatic acceptance, PixInsight apply, remediation automatica, device command o Safety Authority.
+Sottoporre a review **BKL-046 F5-B — Atomic Update and Consumer** sulla PR #179. Il technical head `f6555e80760f9c5d179df3dc0ee4e02c7e265a21` ha 10/10 workflow verdi e implementa aggiornamento first/retry atomico e consumer fail-closed sull'intera catena catalogo/F4/F5; il publication head va verificato dopo l'evidence commit. F5-A è CLOSED / ACCEPTED tramite PR #178 e merge `46b956f0a6ceb04442ffd80447f810ef6463b5a8`; le review F5-A sono AI-assistite e non equivalenti ad approvazioni umane indipendenti, e la deroga `W-BKL046-F5A-MERGE-001` è consumata/scaduta. Il known answer resta 15 sessioni, 0 provenance matched, 0 decision receipt e 0 execution evidence; scientific effectiveness `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION` e closure `KEEP_OPEN`. Non sono autorizzati model/provider, confidence scientifica, automatic acceptance, PixInsight apply, remediation automatica, device command o Safety Authority.

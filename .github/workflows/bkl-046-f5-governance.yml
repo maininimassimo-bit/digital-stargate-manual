@@ -20,6 +20,7 @@ on:
       - 'docs/architecture/scientific-assets/BKL-046-F5-Real-Evidence-Evaluation-and-Capability-Closure.md'
       - 'docs/architecture/validation/BKL-046-F5-Real-Evidence-Evaluation-Plan.md'
       - 'docs/architecture/validation/BKL-046-F5A-Evaluation-Foundation-Evidence-2026-09-12.md'
+      - 'docs/architecture/validation/BKL-046-F5B-Atomic-Update-and-Consumer-Evidence-2026-09-12.md'
       - 'docs/javascripts/ai-post-processing-assistant-core.mjs'
       - 'docs/javascripts/ai-post-processing-assistant.js'
       - 'docs/styles/ai-post-processing-assistant.css'
@@ -45,6 +46,7 @@ on:
       - 'docs/architecture/scientific-assets/BKL-046-F5-Real-Evidence-Evaluation-and-Capability-Closure.md'
       - 'docs/architecture/validation/BKL-046-F5-Real-Evidence-Evaluation-Plan.md'
       - 'docs/architecture/validation/BKL-046-F5A-Evaluation-Foundation-Evidence-2026-09-12.md'
+      - 'docs/architecture/validation/BKL-046-F5B-Atomic-Update-and-Consumer-Evidence-2026-09-12.md'
       - 'docs/javascripts/ai-post-processing-assistant-core.mjs'
       - 'docs/javascripts/ai-post-processing-assistant.js'
       - 'docs/styles/ai-post-processing-assistant.css'
@@ -61,7 +63,7 @@ concurrency:
 
 jobs:
   f5-evaluation-foundation:
-    name: F5 evaluation foundation
+    name: F5 evaluation and consumer
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -71,11 +73,11 @@ jobs:
           node-version: '22'
       - name: Parse F2 and F5 JSON Schemas
         run: node -e "for (const path of ['docs/contracts/ai-post-processing-assistant-f2.schema.json', 'docs/contracts/ai-post-processing-assistant-f5-evaluation.schema.json']) JSON.parse(require('node:fs').readFileSync(path, 'utf8'))"
-      - name: Test F5-A closed contracts, cohorts and known answer
+      - name: Test F5-A contracts and F5-B atomic integration
         run: node --test .github/scripts/test-ai-post-processing-advisory-f5-evaluation.mjs
-      - name: Verify persisted F5-A evaluation is current
+      - name: Verify persisted F5 evaluation is current
         run: node .github/scripts/generate-ai-post-processing-advisory-f5-evaluation.mjs --check
-      - name: Verify F5-A registry, source contracts and deterministic reconstruction
+      - name: Verify F5 registry, workflow integration and deterministic reconstruction
         run: node .github/scripts/verify-ai-post-processing-advisory-f5-evaluation.mjs
       - name: Regress F2 semantic contract
         run: node --test .github/scripts/test-ai-post-processing-advisory-contract.mjs
@@ -85,5 +87,5 @@ jobs:
         run: node --test .github/scripts/test-ai-post-processing-advisory-projection.mjs
       - name: Regress persisted F4 projection and atomic integration
         run: node .github/scripts/generate-ai-post-processing-advisory-projection.mjs --check && node .github/scripts/verify-ai-post-processing-advisory-projection.mjs
-      - name: Regress F4 portal consumer freshness and accessibility
+      - name: Verify F4/F5 browser freshness and accessibility
         run: node --test .github/scripts/test-ai-post-processing-assistant-consumer.mjs

@@ -18,8 +18,8 @@
 
 <div data-ai-post-processing-assistant>
   <section class="dsg-ai-panel" aria-live="polite">
-    <h2>Verifica della advisory projection…</h2>
-    <p>Il portale sta verificando schema, authority, session set e digest SHA-256 rispetto al catalogo corrente.</p>
+    <h2>Verifica della catena F4/F5…</h2>
+    <p>Il portale sta verificando schema, authority e digest SHA-256 del catalogo, della advisory projection e della real-evidence evaluation corrente.</p>
   </section>
 </div>
 
