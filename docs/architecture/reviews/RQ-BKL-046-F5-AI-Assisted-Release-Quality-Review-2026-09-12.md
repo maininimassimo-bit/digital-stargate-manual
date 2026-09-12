@@ -74,7 +74,8 @@ Nessuna release note o version bump applicativo è richiesto per questa proposta
 | RQ-F5-R03 | unknown state or reason code becomes permissive | Open condition | close ARB-F5-C02 in F5-A |
 | RQ-F5-R04 | design publication mistaken for implementation | Controlled | status Proposed; implementation gates Not Executed |
 | RQ-F5-R05 | target imbalance or empty cohort hidden | Controlled | absolute counts and mandatory bias disclosure |
-| RQ-F5-R06 | branch protection absent or bypassed | Open governance gate | no waiver granted; decide explicitly before merge |
+| RQ-F5-R06 | branch protection absent | Owner-authorized one-time disposition | `W-BKL046-F5-ARCH-MERGE-001`; PR #177 only |
+| W-BKL046-F5-ARCH-MERGE-001 | merge without server-side branch protection | Authorized; pending consumption at merge | expected-head guard, exact-head CI and post-merge verification mandatory |
 | W-BKL046-F5-ARCH-REVIEW-001 | independent-human-review requirement replaced once by disclosed AI-assisted ARB/RQ publication | Authorized; consumed by first publication of these reviews | PR #177 and proposal head only; not reusable; compensating controls below |
 
 ### 4.1 One-time review-independence waiver
@@ -104,6 +105,32 @@ Explicit exclusions:
 - no model/provider, image transfer, automatic acceptance, apply, remediation, command or Safety authority.
 
 The previous F4 waivers remain consumed/expired and are not reused.
+
+### 4.2 One-time branch-protection waiver
+
+`W-BKL046-F5-ARCH-MERGE-001` was explicitly authorized by the repository owner on 12/09/2026 after repository verification showed `main.protected=false`, protection disabled and no repository rulesets.
+
+Scope:
+
+- permits one expected-head merge of PR #177 despite the absence of server-side branch protection;
+- applies to base `bc86264a4a689492087182e121820aa6cce06025`, proposal head `5758c9193ff0160e8ece54e56470e2d5ed5ecdd1`, review-publication head `a817e1f451ac54c2d43af5c349f59b90439f5b06` and the single non-material commit that records this waiver;
+- is consumed and permanently expired when PR #177 is merged; it cannot be reused by any later PR.
+
+Compensating controls:
+
+- remote content and PR scope verified before the waiver record;
+- 5/5 successful workflows on the reviewed proposal head and 5/5 on the review-publication head;
+- no material proposal change after ARB/RQ review;
+- final CI must be green on the exact waiver-publication head;
+- merge must use GitHub's expected-head guard;
+- post-merge workflows and Pages must be verified before integration is reported complete.
+
+Explicit exclusions:
+
+- no force push or direct push to `main`;
+- no waiver of failed, missing or stale CI;
+- no implementation acceptance, F5 closure, scientific-effectiveness or production-readiness claim;
+- no model/provider, image transfer, automatic acceptance, apply, remediation, command or Safety authority.
 
 ## 5. Validation commands and evidence
 
@@ -141,7 +168,7 @@ Conditions:
 1. exact-head CI on the review-publication commit completes successfully;
 2. the proposal is not materially changed after the reviewed head, otherwise ARB/RQ must be repeated;
 3. the repository owner gives separate merge authorization for the expected head;
-4. branch protection is satisfied or separately dispositioned; this review grants no bypass;
+4. the owner-authorized waiver `W-BKL046-F5-ARCH-MERGE-001` is consumed only by an expected-head merge after exact-head CI;
 5. post-merge workflows and Pages are verified before the architecture package is treated as integrated.
 
 This recommendation authorizes neither implementation nor closure. F5 remains Proposed, scientific effectiveness remains `NOT_EVALUABLE_CURRENT_EVIDENCE`, and production readiness remains `NOT_READY_FOR_PRODUCTION`.
