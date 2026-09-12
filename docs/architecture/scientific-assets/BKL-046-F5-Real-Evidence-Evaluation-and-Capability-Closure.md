@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-046-F5 |
-| Stato | F5-A accepted/post-merge verified; F5-B implementation candidate; F5-C not started |
+| Stato | F5-B implementation candidate; F5-A predecessor integrated/post-merge verified; F5-C not started |
 | Versione | 0.4 |
 | Data | 12/09/2026 |
 | Package | BKL-046 — AI Post-Processing Assistant for PixInsight |
