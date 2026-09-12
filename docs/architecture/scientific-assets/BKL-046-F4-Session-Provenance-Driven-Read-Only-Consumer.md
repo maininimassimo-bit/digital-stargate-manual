@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-046-F4 |
-| Stato | In delivery — F4-A/F4-B integrated; F4-C implemented on delivery branch; acceptance pending |
-| Versione | 1.3 |
-| Data | 11/09/2026 |
+| Stato | F4-C AI-assisted review approved; merge and post-merge acceptance pending under owner-authorized one-time waiver |
+| Versione | 1.4 |
+| Data | 12/09/2026 |
 | Package | BKL-046 — AI Post-Processing Assistant for PixInsight |
 | Baseline F3 | PR #169, merge `8339aecf0b6b7fa19396561b20253c0411fd7ee7` — Accepted |
 | Baseline F4-A | PR #173, merge `439bd0d53e38a18286e6baa1e330482f280e278f` |
@@ -64,7 +64,7 @@ Restano esclusi:
 - l'evidence reale BKL-045 accettata ha processing history `UNAVAILABLE` e zero step osservati o dichiarati.
 - F4-A ha introdotto schema source-mapped, allowlist eseguibile, correlation adapter, negative tests e gate dedicato tramite PR #173.
 - F4-B ha integrato projection persistita, generator atomico e aggiornamento automatico post-import tramite PR #174;
-- F4-C implementa sul delivery branch il validator browser, la pagina read-only, gli stati fail-closed e i test accessibility/freshness; exact-head CI, review e merge restano evidence gate.
+- F4-C implementa sul delivery branch il validator browser, la pagina read-only, gli stati fail-closed e i test accessibility/freshness; ARB/RQ AI-assistite sono owner-authorized e approvano il merge con una deroga una tantum limitata alla branch protection della PR #175; publication-head CI, merge e post-merge evidence restano gate obbligatori.
 
 ## 5. Target state and solution model
 
@@ -305,7 +305,7 @@ Il rollback rimuove artefatti F4 e le chiamate aggiunte al workflow. Catalogo AP
 |---|---|---|
 | F4-A — source and projection contract | schema, discovery/correlation adapter, builder e negative tests | Implemented — PR #173 |
 | F4-B — automatic atomic publication | generator persistito, workflow first/retry path e governed path | Integrated — PR #174; exact-head e post-merge CI successful |
-| F4-C — portal consumer and readiness | core browser validator, pagina, accessibility tests e governance workflow | Implemented on delivery branch — exact-head CI, ARB/RQ e merge pending |
+| F4-C — portal consumer and readiness | core browser validator, pagina, accessibility tests e governance workflow | AI-assisted ARB/RQ approved; publication-head CI, merge and post-merge acceptance pending |
 
 Le slice sono incrementi interni di delivery e non cambiano la dipendenza di programma: F5 può iniziare soltanto dopo acceptance completa di F4.
 
@@ -324,7 +324,7 @@ Le slice sono incrementi interni di delivery e non cambiano la dipendenza di pro
 | Regression | suite F2 e F3 integralmente verdi |
 | Documentation | MkDocs strict, link/navigation e Mermaid verificati |
 | Security/safety | path/secret/image rejection; authority e interlock invariati |
-| Release | ARB/RQ, exact-head CI, protected merge, post-merge workflows e Pages |
+| Release | ARB/RQ, exact-head CI, protected merge oppure owner-authorized one-time waiver con expected-head control, post-merge workflows e Pages |
 
 ## 17. Risks and trade-offs
 
@@ -337,6 +337,7 @@ Le slice sono incrementi interni di delivery e non cambiano la dipendenza di pro
 | F4-R05 | merge provenance senza projection aggiornata | gate `--check` fail-closed sulla stessa PR |
 | F4-R06 | consumer mostra cache stale | `no-store`, digest chain e hard failure |
 | F4-R07 | crescita lineare delle source | discovery e ordinamento O(n); nessun database introdotto prima di evidence di scala |
+| F4-R08 | merge senza branch protection server-side | waiver `W-BKL046-F4-001` limitata alla PR #175; exact-head CI, expected-head merge e post-merge verification |
 
 Non è richiesta una nuova ADR: F4 applica ADR-008, i contratti F2/F3 e il pattern di projection atomica già accettato in BKL-041 F4. Una ADR diventa necessaria solo se l'implementazione richiede un nuovo store, un servizio runtime, una correlation strategy non esatta o una modifica al capture mechanism PixInsight.
 
@@ -353,6 +354,9 @@ Non è richiesta una nuova ADR: F4 applica ADR-008, i contratti F2/F3 e il patte
 | automatic import boundary | `.github/workflows/analyze-session-automatic.yml` |
 | atomic projection reference pattern | `docs/architecture/scientific-assets/BKL-041-F4-Session-Driven-Projection-and-Portal-Consumer.md` |
 | roadmap authority | `.github/roadmap/roadmap-source.json` |
+| F4-C AI-assisted ARB | `docs/architecture/reviews/ARB-BKL-046-F4C-AI-Assisted-Implementation-Review-2026-09-12.md` |
+| F4-C AI-assisted Release Quality | `docs/architecture/reviews/RQ-BKL-046-F4C-AI-Assisted-Release-Quality-Review-2026-09-12.md` |
+| one-time branch protection waiver | `W-BKL046-F4-001`, owner-authorized 12/09/2026, PR #175 only |
 
 ## 19. Acceptance criteria
 
@@ -374,7 +378,7 @@ F4 è accettabile soltanto quando:
 14. Safety Authority e runtime osservativo restano invariati;
 15. test F2/F3/F4, MkDocs e exact-head CI sono verdi;
 16. ARB e Release Quality documentano review scope e modalità senza claim non verificati;
-17. merge protetto, workflow post-merge e Pages risultano verificati.
+17. merge protetto oppure deroga una tantum owner-authorized con CI exact-head ed `expected_head_sha`; workflow post-merge e Pages risultano verificati.
 
 ## 20. Open issues
 
