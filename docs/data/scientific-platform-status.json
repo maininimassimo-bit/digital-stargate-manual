@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "updatedAt": "2026-09-11",
+  "updatedAt": "2026-09-12",
   "generatedFrom": {
     "roadmap": "docs/data/roadmap.json",
     "discovery": "docs/architecture/validation/AP-013-Session-Discovery-Execution-Evidence.md",
@@ -19,8 +19,8 @@
       "title": "AI Post-Processing Assistant for PixInsight",
       "status": "active"
     },
-    "nextMilestone": "BKL-046 F4 — Session/Provenance-Driven Read-Only Consumer",
-    "target": "Design and implement a read-only consumer and freshness-verified projection over canonically authorized session and PixInsight provenance inputs, regenerated and published automatically and atomically after each scientific-session import, without model/provider selection, automatic acceptance, PixInsight apply, device command or Safety Authority"
+    "nextMilestone": "BKL-046 F5 — Real-Evidence Evaluation and Capability Closure",
+    "target": "Design a bounded read-only evaluation and closure package for the accepted F4 outputs on real repository evidence, defining cohort, evidence sufficiency, acceptance criteria and retained limitations, without introducing model/provider, scientific confidence, automatic acceptance, PixInsight apply, device command or Safety Authority"
   },
   "architecture": {
     "ap013": {

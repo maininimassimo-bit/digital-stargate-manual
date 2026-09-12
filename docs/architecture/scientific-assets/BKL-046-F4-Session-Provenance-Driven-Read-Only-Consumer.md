@@ -3,14 +3,17 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-046-F4 |
-| Stato | F4-C AI-assisted review approved; merge and post-merge acceptance pending under owner-authorized one-time waiver |
-| Versione | 1.4 |
+| Stato | CLOSED / ACCEPTED / POST-MERGE VERIFIED |
+| Versione | 1.5 |
 | Data | 12/09/2026 |
 | Package | BKL-046 — AI Post-Processing Assistant for PixInsight |
 | Baseline F3 | PR #169, merge `8339aecf0b6b7fa19396561b20253c0411fd7ee7` — Accepted |
 | Baseline F4-A | PR #173, merge `439bd0d53e38a18286e6baa1e330482f280e278f` |
 | Baseline F4-B | PR #174, merge `a7db5c95f413282109174d7d8662a57c4ed9590c` |
-| Baseline repository | `a7db5c95f413282109174d7d8662a57c4ed9590c` |
+| Technical implementation head | `b2f8543d0a7fd3e354c40d9acb0206ef7e6edea4` |
+| Review publication head | `ae1b8f2ae04fc9c4891e794bc930ec0e09fcf640` |
+| Accepted merge / repository baseline | `af48cc2441cf956d88c13c81845fc2a2f7c599f2` |
+| Acceptance record | `docs/project/BKL-046-F4-ACCEPTANCE-2026-09-12.md` |
 | Authority | Session/provenance-driven, deterministic, read-only, human-only and non-Safety |
 
 ## 1. Purpose
@@ -64,7 +67,7 @@ Restano esclusi:
 - l'evidence reale BKL-045 accettata ha processing history `UNAVAILABLE` e zero step osservati o dichiarati.
 - F4-A ha introdotto schema source-mapped, allowlist eseguibile, correlation adapter, negative tests e gate dedicato tramite PR #173.
 - F4-B ha integrato projection persistita, generator atomico e aggiornamento automatico post-import tramite PR #174;
-- F4-C implementa sul delivery branch il validator browser, la pagina read-only, gli stati fail-closed e i test accessibility/freshness; ARB/RQ AI-assistite sono owner-authorized e approvano il merge con una deroga una tantum limitata alla branch protection della PR #175; publication-head CI, merge e post-merge evidence restano gate obbligatori.
+- F4-C è integrata tramite PR #175 e merge `af48cc2441cf956d88c13c81845fc2a2f7c599f2`; validator browser, pagina read-only, stati fail-closed e test accessibility/freshness sono verificati. Le review ARB/RQ sono AI-assistite, owner-authorized e non equivalenti ad approvazioni umane indipendenti. La deroga una tantum `W-BKL046-F4-001`, limitata alla branch protection della PR #175, è consumata e scaduta.
 
 ## 5. Target state and solution model
 
@@ -305,9 +308,9 @@ Il rollback rimuove artefatti F4 e le chiamate aggiunte al workflow. Catalogo AP
 |---|---|---|
 | F4-A — source and projection contract | schema, discovery/correlation adapter, builder e negative tests | Implemented — PR #173 |
 | F4-B — automatic atomic publication | generator persistito, workflow first/retry path e governed path | Integrated — PR #174; exact-head e post-merge CI successful |
-| F4-C — portal consumer and readiness | core browser validator, pagina, accessibility tests e governance workflow | AI-assisted ARB/RQ approved; publication-head CI, merge and post-merge acceptance pending |
+| F4-C — portal consumer and readiness | core browser validator, pagina, accessibility tests e governance workflow | Accepted — PR #175; merge e post-merge/Pages verified |
 
-Le slice sono incrementi interni di delivery e non cambiano la dipendenza di programma: F5 può iniziare soltanto dopo acceptance completa di F4.
+Le slice sono incrementi interni di delivery. Con l'acceptance completa di F4, F5 può iniziare esclusivamente come real-evidence evaluation e capability-closure design.
 
 ## 16. Quality and validation plan
 
@@ -337,7 +340,7 @@ Le slice sono incrementi interni di delivery e non cambiano la dipendenza di pro
 | F4-R05 | merge provenance senza projection aggiornata | gate `--check` fail-closed sulla stessa PR |
 | F4-R06 | consumer mostra cache stale | `no-store`, digest chain e hard failure |
 | F4-R07 | crescita lineare delle source | discovery e ordinamento O(n); nessun database introdotto prima di evidence di scala |
-| F4-R08 | merge senza branch protection server-side | waiver `W-BKL046-F4-001` limitata alla PR #175; exact-head CI, expected-head merge e post-merge verification |
+| F4-R08 | merge senza branch protection server-side | waiver `W-BKL046-F4-001` applicata soltanto alla PR #175 con exact-head CI ed expected-head merge; consumata e scaduta al merge |
 
 Non è richiesta una nuova ADR: F4 applica ADR-008, i contratti F2/F3 e il pattern di projection atomica già accettato in BKL-041 F4. Una ADR diventa necessaria solo se l'implementazione richiede un nuovo store, un servizio runtime, una correlation strategy non esatta o una modifica al capture mechanism PixInsight.
 
@@ -356,7 +359,8 @@ Non è richiesta una nuova ADR: F4 applica ADR-008, i contratti F2/F3 e il patte
 | roadmap authority | `.github/roadmap/roadmap-source.json` |
 | F4-C AI-assisted ARB | `docs/architecture/reviews/ARB-BKL-046-F4C-AI-Assisted-Implementation-Review-2026-09-12.md` |
 | F4-C AI-assisted Release Quality | `docs/architecture/reviews/RQ-BKL-046-F4C-AI-Assisted-Release-Quality-Review-2026-09-12.md` |
-| one-time branch protection waiver | `W-BKL046-F4-001`, owner-authorized 12/09/2026, PR #175 only |
+| one-time branch protection waiver | `W-BKL046-F4-001`, owner-authorized 12/09/2026, PR #175 only; consumed and expired |
+| F4 acceptance | `docs/project/BKL-046-F4-ACCEPTANCE-2026-09-12.md` |
 
 ## 19. Acceptance criteria
 
@@ -384,8 +388,14 @@ F4 è accettabile soltanto quando:
 
 1. La baseline reale contiene 15 sessioni e zero sidecar BKL-045 correlabili esattamente; il consumer espone il risultato come `PROVENANCE_UNAVAILABLE` senza inferire collegamenti.
 2. La completezza della processing history resta limitata da ADR-008 e dall'OAT BKL-045; F4 non può migliorarla semanticamente.
-3. F5 dovrà definire cohort, evaluation criteria e retained limitations per la validazione su evidence reale; F4 non anticipa tale decisione.
+3. F5 deve ancora definire cohort, evaluation criteria e retained limitations per la valutazione su evidence reale; l'acceptance F4 non prova sufficienza scientifica né capability closure.
 
 ## 21. Future evolution
 
-F5 potrà valutare gli output F4 su evidence reale e decidere la closure come capability read-only con limitation. Qualsiasi model/provider, confidence scientifica, image transfer o modalità Assisted Apply resta separata, richiede nuovi driver, evidence, security/privacy assessment e decisione architetturale dedicata.
+F5 è promosso come prossimo incremento di architettura/design per definire la valutazione degli output F4 su evidence reale e i criteri di una possibile closure come capability read-only con limitation. Qualsiasi model/provider, confidence scientifica, image transfer o modalità Assisted Apply resta separata, richiede nuovi driver, evidence, security/privacy assessment e decisione architetturale dedicata.
+
+## 22. Accepted outcome
+
+F4 è CLOSED / ACCEPTED / POST-MERGE VERIFIED tramite PR #175 e merge `af48cc2441cf956d88c13c81845fc2a2f7c599f2`. Sul technical head sono passati 24/24 test projection, 11/11 test consumer, 16/16 regressioni F2 e 21/21 regressioni F3. Sul merge accettato sono risultati `SUCCESS` Deploy Pages #776 (`34664520952`), BKL-041 F4 Governance #39 (`34664520962`), BKL-046 F4 governance #9 (`34664520958`), Validate documentation #969 (`34664520964`), Genera manuale Word #1394 (`34664520981`) e Developer Foundation #1333 (`34664520999`).
+
+La Pages live verifica 15 sessioni, 0 provenance matched, 15 provenance unavailable e 15 processing-history fail-closed; ricerca, filtri e navigazione al dettaglio sessione risultano operativi senza errori applicativi o overflow orizzontale. Questo outcome accetta il consumer deterministico read-only e le limitation osservate: non autorizza quality/confidence scientifica, model/provider, decisione automatica, execution o apply authority.

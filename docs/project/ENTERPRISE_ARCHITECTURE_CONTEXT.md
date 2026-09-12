@@ -3,14 +3,14 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 2.5 |
+| Versione | 2.6 |
 | Stato | Active context baseline |
-| Data baseline | 10/09/2026 |
+| Data baseline | 12/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch autorevole | `main` |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Continuity handover | `docs/project/HANDOVER_2026-09-10.md` |
-| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-10.md` |
+| Continuity handover | `docs/project/HANDOVER_2026-09-12.md` |
+| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-12.md` |
 | Current governed package | BKL-046 — AI Post-Processing Assistant for PixInsight |
 | Owner | Massimo Mainini |
 
@@ -54,20 +54,11 @@ BKL-037 rimane read-only/descriptive-only; unità non dimostrate, missing eviden
 
 ## 6. Current package — BKL-046
 
-BKL-041 — Scientific Data Quality Score è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability sperimentale read-only tramite PR #163, merge `e4ccd216b0a0ca4033277ece513f051b052d2b83`. Production readiness resta `NOT_READY_FOR_PRODUCTION`.
+BKL-041 — Scientific Data Quality Score è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability sperimentale read-only; production readiness resta `NOT_READY_FOR_PRODUCTION`.
 
-BKL-046 F1-F3 sono accepted; F4 è l'incremento corrente per introdurre in modo governato:
+BKL-046 F1-F4 sono CLOSED / ACCEPTED. F4 è stata integrata tramite PR #175 e merge `af48cc2441cf956d88c13c81845fc2a2f7c599f2`, con review ARB/RQ AI-assistite owner-authorized e non equivalenti ad approvazioni umane indipendenti, suite F2/F3/F4 verdi, 6/6 workflow post-merge e Pages live verificate. La deroga `W-BKL046-F4-001` era limitata alla branch protection della PR #175 ed è consumata/scaduta.
 
-- un consumer read-only alimentato esclusivamente da sessioni e provenance canoniche autorizzate;
-- una projection deterministica rigenerata e pubblicata automaticamente e atomicamente dopo ogni import scientifico;
-- gate di freshness e digest che falliscono chiuso senza presentare dati stale come correnti;
-- comportamento su evidence missing/stale/unknown;
-- explainability, citation e audit trail;
-- bias, limiti di comparabilità e gestione delle raccomandazioni;
-- authority boundary: nessuna automatic acceptance, remediation non presidiata, device command o Safety Authority;
-- divieto di usare lo score sperimentale BKL-041 come ground truth o segnale produttivo.
-
-F3 è stato integrato tramite PR #169, merge `8339aecf0b6b7fa19396561b20253c0411fd7ee7`, dopo review ARB/RQ AI-assistite autorizzate dal repository owner e non equivalenti ad approvazioni umane indipendenti, 21/21 test F3 e 7/7 workflow post-merge inclusa Pages `34643716214`. La promozione F4 non approva model/provider o automazione esecutiva: il consumer deve restare read-only e preservare la separazione fra Recommendation, decisione umana ed execution evidence.
+F5 è il prossimo incremento soltanto di architettura/design per definire cohort, sufficienza delle evidenze, criteri di valutazione e limitation di una possibile closure read-only. Non introduce model/provider, confidence scientifica, automatic acceptance, PixInsight apply, remediation, device command o Safety Authority.
 
 ## 7. Roadmap
 
@@ -98,3 +89,4 @@ La closure BKL-041 e la promozione BKL-046 sono repository-only. Nessuna azione 
 | 2.3 | 11/09/2026 | BKL-046 F1 accepted e F2 current |
 | 2.4 | 11/09/2026 | BKL-046 F2 accepted e F3 current |
 | 2.5 | 11/09/2026 | BKL-046 F3 accepted e F4 current |
+| 2.6 | 12/09/2026 | BKL-046 F4 accepted/post-merge verified e F5 design current |
