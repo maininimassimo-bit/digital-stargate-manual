@@ -3,13 +3,14 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-046-F4 |
-| Stato | In delivery — F4-A/F4-B implemented; F4-C pending |
-| Versione | 1.2 |
+| Stato | In delivery — F4-A/F4-B integrated; F4-C implemented on delivery branch; acceptance pending |
+| Versione | 1.3 |
 | Data | 11/09/2026 |
 | Package | BKL-046 — AI Post-Processing Assistant for PixInsight |
 | Baseline F3 | PR #169, merge `8339aecf0b6b7fa19396561b20253c0411fd7ee7` — Accepted |
 | Baseline F4-A | PR #173, merge `439bd0d53e38a18286e6baa1e330482f280e278f` |
-| Baseline repository | `439bd0d53e38a18286e6baa1e330482f280e278f` |
+| Baseline F4-B | PR #174, merge `a7db5c95f413282109174d7d8662a57c4ed9590c` |
+| Baseline repository | `a7db5c95f413282109174d7d8662a57c4ed9590c` |
 | Authority | Session/provenance-driven, deterministic, read-only, human-only and non-Safety |
 
 ## 1. Purpose
@@ -62,7 +63,8 @@ Restano esclusi:
 - BKL-045 espone sidecar reali e `buildPixInsightProvenanceReadModel`, preservando evidence class e completeness senza inferenza.
 - l'evidence reale BKL-045 accettata ha processing history `UNAVAILABLE` e zero step osservati o dichiarati.
 - F4-A ha introdotto schema source-mapped, allowlist eseguibile, correlation adapter, negative tests e gate dedicato tramite PR #173.
-- prima di F4-B non esistevano projection persistita, generator atomico o pagina consumer BKL-046 F4.
+- F4-B ha integrato projection persistita, generator atomico e aggiornamento automatico post-import tramite PR #174;
+- F4-C implementa sul delivery branch il validator browser, la pagina read-only, gli stati fail-closed e i test accessibility/freshness; exact-head CI, review e merge restano evidence gate.
 
 ## 5. Target state and solution model
 
@@ -181,6 +183,20 @@ La baseline reale al momento dell'implementazione contiene 15 sessioni nel catal
 
 In modalità `--write`, il generator non riscrive il file quando cambia soltanto il clock. In modalità `--check`, riusa `generatedAt` persistito e richiede uguaglianza completa. Il workflow invoca `--write`, `--check` e il verifier sia nel primo percorso sia dentro `regenerate()` dopo `git reset --hard origin/main`; la projection è inclusa in `governed_paths` e viene quindi pubblicata atomicamente con il catalogo aggiornato.
 
+### 7.3 F4-C implementation
+
+F4-C completa il consumer portale senza modificare il contratto persistito F4-B. La delivery introduce:
+
+- `docs/javascripts/ai-post-processing-assistant-core.mjs`, validator browser indipendente dalla UI;
+- `docs/javascripts/ai-post-processing-assistant.js`, rendering idempotente compatibile con Instant Navigation;
+- `docs/styles/ai-post-processing-assistant.css`, layout responsive, focus visibile, stati non affidati al solo colore e reduced-motion;
+- `docs/ai-post-processing-assistant/index.md`, pagina read-only con summary, ricerca, filtri, rationale, reason code, citation e limitation;
+- `.github/scripts/test-ai-post-processing-assistant-consumer.mjs`, test su persisted projection reale, freshness, tampering, authority, Web Crypto e accessibilità statica.
+
+Il browser scarica catalogo e projection con `cache: no-store`; valida contratto chiuso, authority, catalog digest, insieme delle sessioni, source-set digest, projection identity, binding/recommendation/record digest, summary e projection digest. I raw sidecar BKL-045 non vengono scaricati: la verifica client-side resta limitata allo snapshot pubblico sanitizzato e digest-protected scelto per ARB-F4-C02.
+
+Qualunque errore produce uno stato `VERIFICA FALLITA · FAIL-CLOSED` senza riuso permissivo di dati precedenti. Il consumer non contiene controlli Apply, Execute o automatic acceptance e non introduce endpoint, token, upload, image data, runtime AI o device command.
+
 ## 8. Deterministic mapping to F3
 
 Per ogni sessione, l'adapter costruisce un input pre-decisione con:
@@ -232,7 +248,7 @@ Prima del rendering, il browser scarica catalogo e projection con `cache: no-sto
 
 ## 11. Portal UX and accessibility
 
-La pagina F4 deve distinguere chiaramente:
+La pagina F4 distingue chiaramente:
 
 - **Projection verified**: digest e session set coerenti;
 - **Recommendation validated**: sola validità contrattuale, non qualità scientifica;
@@ -240,7 +256,7 @@ La pagina F4 deve distinguere chiaramente:
 - **Human decision not present**: nessuna decisione implicita;
 - **Execution not evidenced**: Recommendation e decisione non provano una lavorazione PixInsight.
 
-Il consumer prevede summary descrittiva, ricerca per sessione/target, filtri per source/correlation state, elenco ordinabile senza ranking predefinito e dettaglio con rationale, reason code, citation, provenance e limitation. Stati e azioni non dipendono dal solo colore; focus, tastiera, live region e reduced motion rispettano il design system. Non sono presenti pulsanti Apply, Accept automatically, Execute o comandi verso PixInsight.
+Il consumer implementa summary descrittiva, ricerca per sessione/target, filtri per source/correlation state, elenco ordinabile senza ranking predefinito e dettaglio con rationale, reason code, citation, provenance e limitation. Stati e azioni non dipendono dal solo colore; focus, tastiera, live region e reduced motion rispettano il design system. Non sono presenti pulsanti Apply, Accept automatically, Execute o comandi verso PixInsight.
 
 ## 12. Security, privacy and safety
 
@@ -288,8 +304,8 @@ Il rollback rimuove artefatti F4 e le chiamate aggiunte al workflow. Catalogo AP
 | Slice | Output | Exit gate |
 |---|---|---|
 | F4-A — source and projection contract | schema, discovery/correlation adapter, builder e negative tests | Implemented — PR #173 |
-| F4-B — automatic atomic publication | generator persistito, workflow first/retry path e governed path | Implemented in delivery — exact-head CI required |
-| F4-C — portal consumer and readiness | core browser validator, pagina, accessibility tests e governance workflow | freshness/tamper tests, MkDocs, ARB/RQ ed exact-head CI |
+| F4-B — automatic atomic publication | generator persistito, workflow first/retry path e governed path | Integrated — PR #174; exact-head e post-merge CI successful |
+| F4-C — portal consumer and readiness | core browser validator, pagina, accessibility tests e governance workflow | Implemented on delivery branch — exact-head CI, ARB/RQ e merge pending |
 
 Le slice sono incrementi interni di delivery e non cambiano la dipendenza di programma: F5 può iniziare soltanto dopo acceptance completa di F4.
 
@@ -362,7 +378,7 @@ F4 è accettabile soltanto quando:
 
 ## 20. Open issues
 
-1. La baseline reale corrente potrebbe non contenere alcun sidecar BKL-045 correlabile esattamente alle 15 sessioni del catalogo; l'implementazione deve misurarlo, non presumerlo.
+1. La baseline reale contiene 15 sessioni e zero sidecar BKL-045 correlabili esattamente; il consumer espone il risultato come `PROVENANCE_UNAVAILABLE` senza inferire collegamenti.
 2. La completezza della processing history resta limitata da ADR-008 e dall'OAT BKL-045; F4 non può migliorarla semanticamente.
 3. F5 dovrà definire cohort, evaluation criteria e retained limitations per la validazione su evidence reale; F4 non anticipa tale decisione.
 
