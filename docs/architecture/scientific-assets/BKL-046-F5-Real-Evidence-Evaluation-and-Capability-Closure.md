@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-046-F5 |
-| Stato | F5-B accepted/post-merge verified; F5-C deterministic closure candidate |
+| Stato | F5-B integrated/post-merge verified; F5-C deterministic closure candidate |
 | Versione | 0.5 |
 | Data | 13/09/2026 |
 | Package | BKL-046 — AI Post-Processing Assistant for PixInsight |
