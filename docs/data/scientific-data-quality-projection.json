@@ -3,13 +3,13 @@
   "projectionType": "SCIENTIFIC_DATA_QUALITY_PROJECTION",
   "projectionId": "BKL041-F4-CATALOG-V1",
   "projectionState": "EXPERIMENTAL_NOT_ACCEPTED",
-  "generatedAt": "2026-09-11T10:04:24.827Z",
+  "generatedAt": "2026-09-13T15:45:45.591Z",
   "sourceCatalog": {
     "path": "docs/data/scientific-session-catalog.json",
     "schemaVersion": "1.5",
     "catalogStatus": "VERSIONED_ANALYTICS_PROJECTION",
-    "digest": "186d40129ff0af7fba698f168b0677c3282ea4213b5049c5337306fe80da80fa",
-    "sessionCount": 15,
+    "digest": "24970ea2e6fecbd8508652e8884d495f7dc7b4c8687a7e756c8287a46533951a",
+    "sessionCount": 16,
     "sessionIds": [
       "2026-07-14_2026-07-15",
       "2026-07-15_2026-07-16",
@@ -25,7 +25,8 @@
       "2026-09-04_2026-09-05",
       "2026-09-05_2026-09-06",
       "2026-09-06_2026-09-07",
-      "2026-09-07_2026-09-08"
+      "2026-09-07_2026-09-08",
+      "2026-09-12_2026-09-13"
     ]
   },
   "profile": {
@@ -37,10 +38,10 @@
     "algorithmVersion": "1.0.0"
   },
   "summary": {
-    "totalSessions": 15,
+    "totalSessions": 16,
     "availableAssessments": 5,
     "unavailableAssessments": 3,
-    "invalidAssessments": 7
+    "invalidAssessments": 8
   },
   "assessments": [
     {
@@ -1707,6 +1708,76 @@
         "assessmentDigest": "4d69301d7d20bbec1a73e5ea06ad99f2338c37265dd38043f70613077f346984"
       },
       "generationError": null
+    },
+    {
+      "sessionId": "2026-09-12_2026-09-13",
+      "target": "M 27",
+      "observedAt": "2026-09-13T03:59:52.0000000Z",
+      "sourceMetricsPath": "data/sessions/2026/09/2026-09-12_2026-09-13/normalized/session-metrics.json",
+      "inputEvidence": [
+        {
+          "dimension": "METADATA_LINEAGE_INTEGRITY",
+          "value": 1,
+          "unit": "ratio",
+          "evidenceClass": "DECLARED",
+          "quality": "VALID",
+          "completeness": "COMPLETE",
+          "coverage": 1,
+          "calibrationState": "NOT_APPLICABLE",
+          "eligibility": "ELIGIBLE_FOR_FUTURE_NORMALIZATION",
+          "evidenceRefs": [
+            "data/sessions/2026/09/2026-09-12_2026-09-13/normalized/session-metrics.json#scientific"
+          ]
+        },
+        {
+          "dimension": "ACQUISITION_COMPLETION",
+          "value": 0.9655,
+          "unit": "ratio",
+          "evidenceClass": "DECLARED",
+          "quality": "VALID",
+          "completeness": "COMPLETE",
+          "coverage": 1,
+          "calibrationState": "NOT_APPLICABLE",
+          "eligibility": "ELIGIBLE_FOR_FUTURE_NORMALIZATION",
+          "evidenceRefs": [
+            "data/sessions/2026/09/2026-09-12_2026-09-13/normalized/session-metrics.json#nina"
+          ]
+        },
+        {
+          "dimension": "GUIDING_STABILITY",
+          "value": 0.39,
+          "unit": "arcsec",
+          "evidenceClass": "DECLARED",
+          "quality": "VALID",
+          "completeness": "COMPLETE",
+          "coverage": 0,
+          "calibrationState": "NOT_APPLICABLE",
+          "eligibility": "ELIGIBLE_FOR_FUTURE_NORMALIZATION",
+          "evidenceRefs": [
+            "data/sessions/2026/09/2026-09-12_2026-09-13/normalized/session-metrics.json#phd2"
+          ]
+        },
+        {
+          "dimension": "SKY_QUALITY_COVERAGE",
+          "value": 20.93,
+          "unit": "mag/arcsec2",
+          "evidenceClass": "DECLARED",
+          "quality": "VALID",
+          "completeness": "COMPLETE",
+          "coverage": 0.9803,
+          "calibrationState": "NOT_APPLICABLE",
+          "eligibility": "ELIGIBLE_FOR_FUTURE_NORMALIZATION",
+          "evidenceRefs": [
+            "data/sessions/2026/09/2026-09-12_2026-09-13/normalized/session-metrics.json#sqm"
+          ]
+        }
+      ],
+      "projectionRecordState": "INVALID",
+      "assessment": null,
+      "generationError": {
+        "code": "PROFILE_VALUE_OUT_OF_RANGE",
+        "message": "GUIDING_STABILITY value 0.39 is outside [0.5,3] and policy is REJECT."
+      }
     }
   ],
   "limitations": [
@@ -1728,5 +1799,5 @@
     "actionAuthority": "NONE",
     "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
   },
-  "projectionDigest": "addc1ce42e0caafb830e28a3c894d35cd8863793d5b9d072c0469d29a1750bb3"
+  "projectionDigest": "8a1093cc9c7b968346da95d929d41540562fb6b38ed40c42305126020c86e51d"
 }

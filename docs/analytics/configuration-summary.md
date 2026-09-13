@@ -7,14 +7,14 @@ Report generato dallo storico delle sessioni Digital StarGate.
 - ID: `C8_QHY695A_BIN1`
 - Telescopio: Celestron C8 XLT
 - Camera: QHY695A
-- Sessioni: **10**
-- Durata complessiva: **112.2541 h**
-- Integrazione complessiva: **69.6667 h**
-- Efficienza di integrazione: **62.06%**
-- Completamento medio: **94.38%**
-- RMS totale medio: **0.8152″**
-- Frame: 418 completati, 12 falliti, 430 avviati
-- Periodo: `2026-08-14T18:00:00` – `2026-09-08T03:59:40.0000000Z`
+- Sessioni: **11**
+- Durata complessiva: **123.246 h**
+- Integrazione complessiva: **74.3334 h**
+- Efficienza di integrazione: **60.31%**
+- Completamento medio: **94.5773%**
+- RMS totale medio: **0.7727″**
+- Frame: 446 completati, 13 falliti, 459 avviati
+- Periodo: `2026-08-14T18:00:00` – `2026-09-13T03:59:52.0000000Z`
 
 ## Quattro 200P + ToupTek 294MC PRO BIN1
 
