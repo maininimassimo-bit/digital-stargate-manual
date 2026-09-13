@@ -83,3 +83,11 @@ F1 può passare a review soltanto quando tutte le source candidate sono classifi
 
 Dopo la pubblicazione del package F1: fermarsi prima della review. ARB, Release Quality, eventuali modalità AI-assistite e ogni deroga richiedono autorizzazioni proprie.
 
+## 8. F1 publication candidate
+
+The Solution Architecture package is published on a branch derived from `main` at `c1440172a0565a99647ed5d6df0cb1a8adb1c8b1`:
+
+- `docs/architecture/scientific-assets/BKL-031-F1-Observation-Planner-Source-Discovery-and-Semantic-Boundary.md`;
+- `docs/architecture/validation/BKL-031-F1-Source-and-Semantic-Validation-Plan.md`.
+
+Repository discovery classifies target/session/historical setup/weather/SQM evidence as available within its accepted scope. Governed current site, active-setup validity, ephemeris/lunar and forecast sources remain unavailable. The package is a review candidate only: implementation, provider selection, ARB/Release Quality execution and merge remain unauthorized.
