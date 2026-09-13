@@ -1,19 +1,19 @@
 {
   "schemaVersion": "2.2",
-  "updatedAt": "2026-09-12",
+  "updatedAt": "2026-09-13",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "527fc3ce03a905608fbb498fda35b030dd068e8eb047f5ed81d5cb97cdf61b62",
+  "sourceDigest": "9f527b9fdf60f8b509cb3b9bffd14f5700a76a9390016ffd919c635fdc68d07f",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
-  "currentPackage": "BKL-046",
-  "nextMilestone": "BKL-046 F5 — Real-Evidence Evaluation and Capability Closure",
-  "target": "Design a bounded read-only evaluation and closure package for the accepted F4 outputs on real repository evidence, defining cohort, evidence sufficiency, acceptance criteria and retained limitations, without introducing model/provider, scientific confidence, automatic acceptance, PixInsight apply, device command or Safety Authority",
+  "currentPackage": "BKL-031",
+  "nextMilestone": "BKL-031 F1 — Source Discovery and Semantic Boundary",
+  "target": "Define a verified source inventory and semantic boundary for a future explainable, read-only target planner using target knowledge, setup, celestial and lunar context, weather/SQM and scientific history, without implementing ranking, score, thresholds, automatic scheduling, go/no-go, device command, heavy EAGLE workload or Safety Authority",
   "summary": {
     "total": 43,
-    "completed": 31,
+    "completed": 32,
     "active": 4,
-    "planned": 8,
-    "percentCompleted": 72
+    "planned": 7,
+    "percentCompleted": 74
   },
   "evidenceSummary": {
     "sources": 8,
@@ -294,13 +294,14 @@
         {
           "id": "BKL-046",
           "title": "AI Post-Processing Assistant for PixInsight",
-          "status": "active",
-          "note": "Current package. F1-F4 are CLOSED/ACCEPTED. F4 was integrated via PR #175, technical head b2f8543d0a7fd3e354c40d9acb0206ef7e6edea4, review-publication head ae1b8f2ae04fc9c4891e794bc930ec0e09fcf640 and merge af48cc2441cf956d88c13c81845fc2a2f7c599f2, after owner-authorized AI-assisted ARB/RQ reviews (not independent human approvals), one-time waiver W-BKL046-F4-001 limited to PR #175 and now expired, and 6/6 successful post-merge workflows with live Pages verification. F5 is current only for real-evidence evaluation and capability-closure design. No model/provider, scientific confidence, automatic acceptance, apply path, production authority or Safety Authority is implied."
+          "status": "completed",
+          "note": "F1-F5 CLOSED/ACCEPTED as a deterministic advisory read-only capability via PR #181 and merge 3d680dd3a05c70b2a4654c4187c293e36b0af4a7. AI-assisted ARB/RQ were owner-authorized and not equivalent to independent human approvals; one-time review and merge waivers are expired. Seven post-merge workflows and live Pages freshness were verified. Scientific effectiveness remains NOT_EVALUABLE_CURRENT_EVIDENCE, production NOT_READY_FOR_PRODUCTION and aiModelImplemented=false; no automatic acceptance, PixInsight apply, device command or Safety Authority is authorized."
         },
         {
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
-          "status": "planned"
+          "status": "active",
+          "note": "Current package only for F1 source discovery and semantic boundary. Ranking, score, thresholds, automatic scheduling, go/no-go, device command, heavy EAGLE workload and Safety Authority are not implemented or authorized."
         },
         {
           "id": "BKL-032",
@@ -520,8 +521,17 @@
       "id": "M-PIXINSIGHT-AI",
       "itemRef": "BKL-046",
       "title": "BKL-046 AI Post-Processing Assistant",
-      "date": "2026-09-12",
-      "description": "F1-F4 closed/accepted and F4 post-merge verified; F5 promoted only for real-evidence evaluation and read-only capability-closure design.",
+      "date": "2026-09-13",
+      "description": "F1-F5 CLOSED/ACCEPTED as a deterministic advisory read-only capability with retained scientific and production limitations; PR #181 merged and post-merge verified.",
+      "image": null,
+      "status": "completed"
+    },
+    {
+      "id": "M-BKL031-F1",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 Observation Planner F1",
+      "date": "2026-09-13",
+      "description": "Source discovery and semantic boundary promoted; ranking implementation, scheduling, go/no-go and Safety Authority remain excluded.",
       "image": null,
       "status": "active"
     },

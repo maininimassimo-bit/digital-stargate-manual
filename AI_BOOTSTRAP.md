@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 4.0 |
+| Versione | 4.1 |
 | Baseline | 13/09/2026 |
-| Stato | Current root bootstrap — BKL-046 F5-C closure candidate |
+| Stato | Current root bootstrap — BKL-046 closed; BKL-031 F1 current |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -48,18 +48,16 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 
 ## 5. Stato corrente
 
-- foundation completata e accettata attraverso BKL-045;
 - BKL-037 — Session Comparison & Benchmarking: CLOSED / ACCEPTED;
 - BKL-041 — Scientific Data Quality Score: CLOSED / ACCEPTED / POST-MERGE VERIFIED;
-- BKL-046 — AI Post-Processing Assistant: CURRENT; F1-F5-B integrated; F5-B post-merge import/Pages evidence verified; F5-C deterministic closure candidate, exact-head CI and review pending.
+- BKL-046 — AI Post-Processing Assistant: CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only con limitation;
+- BKL-031 — Observation Planner intelligente: CURRENT esclusivamente per F1 source discovery e semantic boundary.
 
-BKL-037 resta read-only/descriptive-only e non autorizza ranking, score, threshold, recommendation, remediation, command path o Safety Authority.
-
-BKL-041 F1–F5 sono CLOSED / ACCEPTED tramite PR #163, merge `e4ccd216b0a0ca4033277ece513f051b052d2b83`, ARB R1 98/100, Release Quality `READY FOR MERGE` e Pages `34602219671` verde. L'outcome accetta esclusivamente la capability sperimentale read-only con limitation: production readiness resta `NOT_READY_FOR_PRODUCTION`; conteggi e coverage sono evidence descrittiva, non threshold di accettazione.
+La closure BKL-046 non dichiara efficacia scientifica né produzione: `NOT_EVALUABLE_CURRENT_EVIDENCE`, `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`. Nessun modello/provider, automatic acceptance o PixInsight apply è autorizzato.
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 [CURRENT] -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [CURRENT/F1] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -67,8 +65,9 @@ BKL-041 F1–F5 sono CLOSED / ACCEPTED tramite PR #163, merge `e4ccd216b0a0ca403
 
 ## 8. Safety boundary
 
-Nessun portale, comparison layer, quality score o AI è Safety Authority. Nessun device command, automatic remediation o bypass degli interlock è autorizzato.
+Nessun portale, planner, comparison layer, quality score o AI è Safety Authority. Nessun device command, automatic remediation, go/no-go operativo o bypass degli interlock è autorizzato.
 
 ## 9. Punto di partenza operativo
 
-Validare **BKL-046 F5-C — Deterministic Capability Closure** sul branch dedicato, basato su `main` @ `8ed6085d15f6af9e466a90167f19e970e8c526a7`. L'evidence reale chiude `ARB-F5B-O01`: analysis run `34766534178`, Pages `34766571069`, catalogo/F4/F5 a 16 sessioni e consumer live con freshness chain verificata. Il candidato propone esclusivamente `ACCEPTED_READ_ONLY_WITH_LIMITATIONS` e `CLOSE_DETERMINISTIC_CAPABILITY`; scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION` e `aiModelImplemented=false`. Exact-head CI, ARB/RQ, merge e post-merge verification F5-C restano pending. Le review AI-assistite richiedono nuova autorizzazione owner e non possono essere presentate come approvazioni umane indipendenti.
+Avviare **BKL-031 F1 — Source Discovery and Semantic Boundary** dal program handoff corrente. Inventariare soltanto source verificabili per target, setup, geometria celeste/Luna, meteo/SQM e storico scientifico; definire authority, freshness, missingness, identity e semantica di ranking spiegabile. F1 non implementa ranking, soglie, scheduler, go/no-go, device command o Safety Authority e deve fermarsi prima di implementazione e review.
+
