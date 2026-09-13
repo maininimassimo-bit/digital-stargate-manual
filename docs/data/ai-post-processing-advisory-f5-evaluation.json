@@ -1,13 +1,13 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "evaluationType": "BKL046_F5_REAL_EVIDENCE_EVALUATION",
-  "evaluationState": "F5A_FOUNDATION_EVALUATED",
+  "evaluationState": "F5C_CLOSURE_EVALUATED",
   "identityMethod": "BKL046-F5-CANONICAL-JSON-SHA256-1",
-  "evaluationId": "BKL046-F5A-FA4618E2908235317336FB80",
-  "generatedAt": "2026-09-13T15:45:45.995Z",
+  "evaluationId": "BKL046-F5C-4EC171591C20E469B6302B7E",
+  "generatedAt": "2026-09-13T16:50:32.944Z",
   "producer": "DSG.AiPostProcessingRealEvidenceEvaluator",
-  "producerVersion": "1.0.0-f5a",
-  "methodId": "BKL046-F5A-CLOSED-EVALUATION-1",
+  "producerVersion": "2.0.0-f5c",
+  "methodId": "BKL046-F5C-CLOSED-EVALUATION-1",
   "sourceSnapshots": {
     "catalog": {
       "path": "docs/data/scientific-session-catalog.json",
@@ -56,7 +56,7 @@
     }
   },
   "methodRegistry": {
-    "registryId": "BKL046-F5A-CLOSED-REGISTRY-1",
+    "registryId": "BKL046-F5C-CLOSED-REGISTRY-1",
     "cohortIds": [
       "ALL-CANONICAL-SESSIONS-F5",
       "EXACT-PROVENANCE-MATCHED-F5",
@@ -130,8 +130,8 @@
       "EXECUTION_EVIDENCE_AVAILABLE",
       "NO_APPROVED_GROUND_TRUTH_METHOD",
       "F5A_FOUNDATION_IMPLEMENTED",
-      "F5B_DYNAMIC_UPDATE_NOT_EXECUTED",
-      "F5B_CONSUMER_NOT_EXECUTED",
+      "F5B_DYNAMIC_UPDATE_VERIFIED",
+      "F5B_CONSUMER_VERIFIED",
       "PRODUCTION_AUTHORITY_NOT_GRANTED",
       "SCIENTIFIC_EFFECTIVENESS_NOT_ESTABLISHED"
     ]
@@ -249,26 +249,22 @@
     },
     {
       "gateId": "F5B_DYNAMIC_UPDATE",
-      "state": "NOT_EXECUTED",
-      "reasonCodes": [
-        "F5B_DYNAMIC_UPDATE_NOT_EXECUTED"
-      ]
+      "state": "PASS",
+      "reasonCodes": []
     },
     {
       "gateId": "F5B_CONSUMER",
-      "state": "NOT_EXECUTED",
-      "reasonCodes": [
-        "F5B_CONSUMER_NOT_EXECUTED"
-      ]
+      "state": "PASS",
+      "reasonCodes": []
     }
   ],
   "outcomes": {
     "technical": {
-      "state": "READY_FOR_F5_EVALUATION",
+      "state": "ACCEPTED_READ_ONLY_WITH_LIMITATIONS",
       "reasonCodes": [
         "F5A_FOUNDATION_IMPLEMENTED",
-        "F5B_CONSUMER_NOT_EXECUTED",
-        "F5B_DYNAMIC_UPDATE_NOT_EXECUTED"
+        "F5B_CONSUMER_VERIFIED",
+        "F5B_DYNAMIC_UPDATE_VERIFIED"
       ]
     },
     "scientific": {
@@ -291,8 +287,8 @@
         "SCIENTIFIC_EFFECTIVENESS_NOT_ESTABLISHED"
       ]
     },
-    "capabilityOutcome": "F5A_EVALUATION_FOUNDATION_READY",
-    "closureRecommendation": "KEEP_OPEN",
+    "capabilityOutcome": "ACCEPTED_READ_ONLY_WITH_LIMITATIONS",
+    "closureRecommendation": "CLOSE_DETERMINISTIC_CAPABILITY",
     "aiModelImplemented": false
   },
   "summary": {
@@ -327,10 +323,10 @@
     "automaticAcceptanceAuthorized": false
   },
   "limitations": [
-    "F5-A implements deterministic evaluation foundations only; dynamic workflow integration and consumer delivery remain not executed.",
+    "F5-A evaluation foundations and F5-B dynamic update/consumer delivery are accepted only as a deterministic read-only capability with retained limitations.",
     "Scientific effectiveness is not evaluable without exact eligible evidence and an independently governed ground-truth method.",
     "Human decisions and execution evidence are separate from scientific outcome quality.",
     "No AI model, provider, confidence score, automatic acceptance, PixInsight apply, device command, production authority or Safety Authority is implemented."
   ],
-  "evaluationDigest": "e4cb6a8face9de4d0b03eefab45c1f45fefc871cd04ff1617fe37b1d12372156"
+  "evaluationDigest": "670bf7664e79de4a67ad0bdefd3144d03842e8ff5676654a3957206af9bdfb29"
 }

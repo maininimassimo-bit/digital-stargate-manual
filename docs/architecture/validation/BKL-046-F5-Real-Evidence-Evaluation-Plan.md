@@ -3,15 +3,15 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-046-F5-EVP-001 |
-| Stato | F5-A accepted/post-merge verified; F5-B implementation candidate; F5-C not executed |
-| Versione | 0.4 |
-| Data | 12/09/2026 |
+| Stato | F5-B accepted/post-merge verified; F5-C closure candidate |
+| Versione | 0.5 |
+| Data | 13/09/2026 |
 | Architecture | `docs/architecture/scientific-assets/BKL-046-F5-Real-Evidence-Evaluation-and-Capability-Closure.md` |
-| Baseline | F5-A merge `46b956f0a6ceb04442ffd80447f810ef6463b5a8` |
+| Baseline | `main` @ `8ed6085d15f6af9e466a90167f19e970e8c526a7` |
 
 ## 1. Purpose
 
-Definire evidence, test e stop conditions per F5. La slice F5-A è accepted e post-merge verified. F5-B implementa come candidato dynamic update, atomicity, browser freshness e accessibility; exact-head CI e ARB/RQ F5-B restano obbligatori prima dell'acceptance. F5-C closure non è eseguita.
+Definire evidence, test e stop conditions per F5. F5-A e F5-B sono integrate; una sessione reale ha verificato dynamic update, atomicity e browser freshness. F5-C propone la closure deterministica read-only, mantenendo separati scientific effectiveness, Human Decision, execution evidence e production readiness.
 
 ## 2. Governed inputs
 
@@ -27,14 +27,14 @@ Definire evidence, test e stop conditions per F5. La slice F5-A è accepted e po
 
 | Misura descrittiva | Expected |
 |---|---:|
-| catalog sessions / F4 records | 15 / 15 |
-| provenance matched / unavailable | 0 / 15 |
+| catalog sessions / F4 records | 16 / 16 |
+| provenance matched / unavailable | 0 / 16 |
 | uncorrelated sources | 2 |
-| governance PASS | 15 |
-| processing-history FAIL_CLOSED | 15 |
-| validated / incomplete Recommendation | 15 / 15 |
+| governance PASS | 16 |
+| processing-history FAIL_CLOSED | 16 |
+| validated / incomplete Recommendation | 16 / 16 |
 | decision receipts | 0 |
-| LDN 1320 / M 27 / UNKNOWN | 3 / 11 / 1 |
+| LDN 1320 / M 27 / UNKNOWN | 3 / 12 / 1 |
 
 Il known answer deve produrre scientific effectiveness `NOT_EVALUABLE_CURRENT_EVIDENCE`, non `PASS`, `ZERO_DEFECTS` o una percentuale di successo.
 
@@ -78,9 +78,13 @@ Il report persistito `BKL046-F5A-F4FEB5E207DD3F7D3E4F6C87` ha digest `174f8d75a2
 
 F5-A è stata accettata tramite PR #178, authorized head `74603bedad088dcf9f2cb33b9769658f4a9e639a` e merge `46b956f0a6ceb04442ffd80447f810ef6463b5a8`, con ARB R2 98/100, Release Quality `CONDITIONALLY READY FOR MERGE` e 9/9 workflow post-merge verdi. Le review sono AI-assistite e non equivalenti ad approvazioni umane indipendenti; la deroga `W-BKL046-F5A-MERGE-001` è consumata/scaduta.
 
-### 5.2 F5-B candidate evidence
+### 5.2 F5-B accepted evidence
 
-Il candidato copre `F5-EVAL-011`–`014`: generator/check/verifier F5 nei path first e retry dopo F4; report F5 nel medesimo `governed_paths`; browser con fetch `no-store` dei tre snapshot e verifica catalog/F4/F5; stato `EVALUATION UNAVAILABLE · FAIL-CLOSED`; outcome e limitation non basati solo sul colore; focus, live region e responsive layout. La verifica locale conta 28/28 test evaluator/workflow e 16/16 test consumer; sul technical head `f6555e80760f9c5d179df3dc0ee4e02c7e265a21` sono verdi 10/10 workflow. Il record è `BKL-046-F5B-Atomic-Update-and-Consumer-Evidence-2026-09-12.md`; publication-head CI e review F5-B sono pending.
+F5-B copre `F5-EVAL-011`–`014`: generator/check/verifier F5 nei path first e retry dopo F4; report F5 nel medesimo `governed_paths`; browser con fetch `no-store` dei tre snapshot e verifica catalog/F4/F5; stato `EVALUATION UNAVAILABLE · FAIL-CLOSED`; outcome e limitation non basati solo sul colore; focus, live region e responsive layout. È integrata tramite PR #179 e merge `eb1827e2cc6e957080c6d1e928a7b13652261851`.
+
+### 5.3 F5-C closure candidate evidence
+
+La sessione reale `2026-09-12_2026-09-13` ha prodotto analysis run `34766534178`, commit `8ed6085d15f6af9e466a90167f19e970e8c526a7` e Pages `34766571069`. Catalogo, F4 e F5 sono allineati su 16 sessioni; il consumer live mostra `FRESHNESS CHAIN VERIFIED`, filtra la sessione esatta e mantiene processing history `FAIL_CLOSED`. Il candidato locale F5-C ha generator/verifier PASS e 85/85 regressioni F2-F5 PASS. Il record è `BKL-046-F5C-Closure-Evidence-2026-09-13.md`; exact-head CI, ARB/RQ, merge e post-merge verification restano pending.
 
 ## 6. Validation commands
 
@@ -95,7 +99,7 @@ node --test .github/scripts/test-ai-post-processing-assistant-consumer.mjs
 mkdocs build --strict
 ```
 
-I comandi F5 e consumer sono verdi localmente sul candidato F5-B. La validazione completa, l'exact-head CI e la nuova ARB/RQ saranno registrate nel record F5-B; nessuna review o acceptance F5-B è ancora eseguita.
+I comandi F5 e consumer sono verdi localmente sul candidato F5-C. La validazione repository-wide e l'exact-head CI devono essere eseguite da GitHub Actions; ARB/RQ e acceptance F5-C non sono ancora autorizzate né eseguite.
 
 ## 7. CI and review gates
 

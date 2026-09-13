@@ -9,7 +9,9 @@ import {
   discoverExecutionEvidenceSources,
   discoverHumanDecisionSources,
   F4_PROJECTION_PATH,
+  F5_EVALUATION_STATE,
   F5_METHOD_REGISTRY,
+  F5_SCHEMA_VERSION,
   validateRealEvidenceEvaluation
 } from './ai-post-processing-advisory-real-evidence-evaluation.mjs';
 import { OUTPUT_PATH } from './generate-ai-post-processing-advisory-f5-evaluation.mjs';
@@ -38,9 +40,9 @@ export function verifyAtomicWorkflowIntegration(workflow) {
 }
 
 function verifySchemaRegistry(schema) {
-  assert(schema?.properties?.schemaVersion?.const === '1.0', 'F5 schemaVersion registry mismatch.');
+  assert(schema?.properties?.schemaVersion?.const === F5_SCHEMA_VERSION, 'F5 schemaVersion registry mismatch.');
   assert(schema.properties.evaluationType.const === 'BKL046_F5_REAL_EVIDENCE_EVALUATION', 'F5 evaluationType registry mismatch.');
-  assert(schema.properties.evaluationState.const === 'F5A_FOUNDATION_EVALUATED', 'F5 evaluationState registry mismatch.');
+  assert(schema.properties.evaluationState.const === F5_EVALUATION_STATE, 'F5 evaluationState registry mismatch.');
   const registryDefinitions = {
     cohortIds: 'cohortId',
     selectionRuleIds: 'selectionRuleId',
@@ -104,10 +106,10 @@ async function main() {
     generatedAt: report.generatedAt
   });
   assert(canonicalJson(report) === canonicalJson(expected), 'Persisted F5 evaluation does not match governed inputs.');
-  assert(report.outcomes.closureRecommendation === 'KEEP_OPEN', 'F5-A cannot close BKL-046.');
-  assert(report.outcomes.aiModelImplemented === false, 'F5-A cannot claim an implemented AI model.');
-  assert(report.outcomes.production.state === 'NOT_READY_FOR_PRODUCTION', 'F5-A cannot claim production readiness.');
-  process.stdout.write('BKL-046 F5-A report, closed registry, source contracts and known-answer evaluation verified.\n');
+  assert(report.outcomes.closureRecommendation === 'CLOSE_DETERMINISTIC_CAPABILITY', 'F5-C must close only the deterministic capability.');
+  assert(report.outcomes.aiModelImplemented === false, 'F5-C cannot claim an implemented AI model.');
+  assert(report.outcomes.production.state === 'NOT_READY_FOR_PRODUCTION', 'F5-C cannot claim production readiness.');
+  process.stdout.write('BKL-046 F5-C report, closed registry, source contracts and bounded closure evaluation verified.\n');
 }
 
 export { verifyF2ReceiptSchemaBinding, verifySchemaRegistry };

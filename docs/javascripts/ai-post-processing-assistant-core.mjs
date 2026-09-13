@@ -76,13 +76,13 @@ const RECOMMENDATION_CATEGORIES = new Set([
 ]);
 const PARAMETER_MODES = new Set(['CATEGORICAL', 'BOUNDED_INTERVAL', 'UNKNOWN_NOT_RECOMMENDED']);
 
-const F5_SCHEMA_VERSION = '1.0';
+const F5_SCHEMA_VERSION = '2.0';
 const F5_EVALUATION_TYPE = 'BKL046_F5_REAL_EVIDENCE_EVALUATION';
-const F5_EVALUATION_STATE = 'F5A_FOUNDATION_EVALUATED';
+const F5_EVALUATION_STATE = 'F5C_CLOSURE_EVALUATED';
 const F5_IDENTITY_METHOD = 'BKL046-F5-CANONICAL-JSON-SHA256-1';
 const F5_PRODUCER = 'DSG.AiPostProcessingRealEvidenceEvaluator';
-const F5_PRODUCER_VERSION = '1.0.0-f5a';
-const F5_METHOD_ID = 'BKL046-F5A-CLOSED-EVALUATION-1';
+const F5_PRODUCER_VERSION = '2.0.0-f5c';
+const F5_METHOD_ID = 'BKL046-F5C-CLOSED-EVALUATION-1';
 const F5_PROJECTION_PATH = 'docs/data/ai-post-processing-advisory-projection.json';
 const F5_HUMAN_DIRECTORY = 'docs/data/ai-post-processing-human-decisions';
 const F5_EXECUTION_DIRECTORY = 'docs/data/ai-post-processing-execution-evidence';
@@ -91,7 +91,7 @@ const F5_EXECUTION_PATTERN = '^docs\\/data\\/ai-post-processing-execution-eviden
 const F5_HUMAN_PATH = new RegExp(F5_HUMAN_PATTERN);
 const F5_EXECUTION_PATH = new RegExp(F5_EXECUTION_PATTERN);
 const F5_METHOD_REGISTRY = Object.freeze({
-  registryId: 'BKL046-F5A-CLOSED-REGISTRY-1',
+  registryId: 'BKL046-F5C-CLOSED-REGISTRY-1',
   cohortIds: ['ALL-CANONICAL-SESSIONS-F5', 'EXACT-PROVENANCE-MATCHED-F5', 'HUMAN-DECISION-RECEIPTS-F5', 'EXECUTION-EVIDENCE-F5'],
   selectionRuleIds: ['ALL-CANONICAL-SESSIONS-EXACT-SET-1', 'F4-PROVENANCE-MATCHED-EXACT-1', 'F2-HUMAN-DECISION-EXACT-CORRELATION-1', 'F5-EXECUTION-EVIDENCE-EXACT-CORRELATION-1'],
   technicalGateIds: ['CATALOG_SNAPSHOT_INTEGRITY', 'F4_PROJECTION_INTEGRITY', 'FULL_POPULATION_COVERAGE', 'HUMAN_DECISION_SOURCE_CONTRACT', 'EXECUTION_EVIDENCE_SOURCE_CONTRACT', 'CLOSED_METHOD_REGISTRY', 'F5A_REPORT_DETERMINISM', 'F5B_DYNAMIC_UPDATE', 'F5B_CONSUMER'],
@@ -103,7 +103,7 @@ const F5_METHOD_REGISTRY = Object.freeze({
   closureRecommendations: ['KEEP_OPEN', 'DO_NOT_CLOSE', 'CLOSE_DETERMINISTIC_CAPABILITY'],
   gateStates: ['PASS', 'FAIL_CLOSED', 'NOT_EXECUTED'],
   evidenceStates: ['AVAILABLE', 'NOT_AVAILABLE', 'NOT_EVALUABLE'],
-  reasonCodes: ['FULL_CANONICAL_POPULATION', 'NO_EXACT_PROVENANCE_MATCHES', 'EXACT_PROVENANCE_AVAILABLE', 'NO_HUMAN_DECISION_RECEIPTS', 'HUMAN_DECISION_RECEIPTS_AVAILABLE', 'NO_EXECUTION_EVIDENCE', 'EXECUTION_EVIDENCE_AVAILABLE', 'NO_APPROVED_GROUND_TRUTH_METHOD', 'F5A_FOUNDATION_IMPLEMENTED', 'F5B_DYNAMIC_UPDATE_NOT_EXECUTED', 'F5B_CONSUMER_NOT_EXECUTED', 'PRODUCTION_AUTHORITY_NOT_GRANTED', 'SCIENTIFIC_EFFECTIVENESS_NOT_ESTABLISHED']
+  reasonCodes: ['FULL_CANONICAL_POPULATION', 'NO_EXACT_PROVENANCE_MATCHES', 'EXACT_PROVENANCE_AVAILABLE', 'NO_HUMAN_DECISION_RECEIPTS', 'HUMAN_DECISION_RECEIPTS_AVAILABLE', 'NO_EXECUTION_EVIDENCE', 'EXECUTION_EVIDENCE_AVAILABLE', 'NO_APPROVED_GROUND_TRUTH_METHOD', 'F5A_FOUNDATION_IMPLEMENTED', 'F5B_DYNAMIC_UPDATE_VERIFIED', 'F5B_CONSUMER_VERIFIED', 'PRODUCTION_AUTHORITY_NOT_GRANTED', 'SCIENTIFIC_EFFECTIVENESS_NOT_ESTABLISHED']
 });
 const F5_TOP_LEVEL_KEYS = ['schemaVersion', 'evaluationType', 'evaluationState', 'identityMethod', 'evaluationId', 'generatedAt', 'producer', 'producerVersion', 'methodId', 'sourceSnapshots', 'methodRegistry', 'cohorts', 'technicalGates', 'outcomes', 'summary', 'authority', 'limitations', 'evaluationDigest'];
 const F5_SOURCE_SNAPSHOT_KEYS = ['catalog', 'f4Projection', 'humanDecisionSourceSet', 'executionEvidenceSourceSet'];
@@ -284,7 +284,7 @@ export function validateRealEvidenceEvaluationContract(evaluation) {
   assert(evaluation.identityMethod === F5_IDENTITY_METHOD, 'F5_IDENTITY_METHOD_UNSUPPORTED');
   assert(evaluation.producer === F5_PRODUCER && evaluation.producerVersion === F5_PRODUCER_VERSION, 'F5_PRODUCER_UNSUPPORTED');
   assert(evaluation.methodId === F5_METHOD_ID, 'F5_METHOD_UNSUPPORTED');
-  assert(/^BKL046-F5A-[A-F0-9]{24}$/.test(evaluation.evaluationId ?? ''), 'F5_EVALUATION_ID_INVALID');
+  assert(/^BKL046-F5C-[A-F0-9]{24}$/.test(evaluation.evaluationId ?? ''), 'F5_EVALUATION_ID_INVALID');
   assert(Number.isFinite(Date.parse(evaluation.generatedAt)), 'F5_GENERATED_AT_INVALID');
   assert(DIGEST.test(evaluation.evaluationDigest ?? ''), 'F5_EVALUATION_DIGEST_INVALID');
 
@@ -350,10 +350,12 @@ export function validateRealEvidenceEvaluationContract(evaluation) {
   assert(F5_METHOD_REGISTRY.capabilityOutcomes.includes(evaluation.outcomes.capabilityOutcome), 'F5_CAPABILITY_OUTCOME_UNKNOWN');
   assert(F5_METHOD_REGISTRY.closureRecommendations.includes(evaluation.outcomes.closureRecommendation), 'F5_CLOSURE_UNKNOWN');
   assert(evaluation.outcomes.aiModelImplemented === false, 'F5_AI_MODEL_CLAIM_FORBIDDEN');
-  assert(evaluation.outcomes.technical.state === 'READY_FOR_F5_EVALUATION', 'F5_TECHNICAL_ACCEPTANCE_FORBIDDEN');
+  assert(evaluation.technicalGates.every(gate => gate.state === 'PASS' && gate.reasonCodes.length === 0), 'F5_TECHNICAL_GATES_NOT_ACCEPTED');
+  assert(evaluation.outcomes.technical.state === 'ACCEPTED_READ_ONLY_WITH_LIMITATIONS', 'F5_TECHNICAL_ACCEPTANCE_INVALID');
   assert(evaluation.outcomes.scientific.state === 'NOT_EVALUABLE_CURRENT_EVIDENCE', 'F5_SCIENTIFIC_EFFECTIVENESS_CLAIM_FORBIDDEN');
   assert(evaluation.outcomes.production.state === 'NOT_READY_FOR_PRODUCTION', 'F5_PRODUCTION_READINESS_CLAIM_FORBIDDEN');
-  assert(evaluation.outcomes.closureRecommendation === 'KEEP_OPEN', 'F5_CAPABILITY_CLOSURE_FORBIDDEN');
+  assert(evaluation.outcomes.capabilityOutcome === 'ACCEPTED_READ_ONLY_WITH_LIMITATIONS', 'F5_CAPABILITY_OUTCOME_INVALID');
+  assert(evaluation.outcomes.closureRecommendation === 'CLOSE_DETERMINISTIC_CAPABILITY', 'F5_CAPABILITY_CLOSURE_INVALID');
 
   exactKeys(evaluation.summary, F5_SUMMARY_KEYS, 'F5 summary');
   for (const key of F5_SUMMARY_KEYS.slice(0, 5)) assert(Number.isInteger(evaluation.summary[key]) && evaluation.summary[key] >= 0, `F5_SUMMARY_INVALID:${key}`);
@@ -537,7 +539,7 @@ export async function validateRealEvidenceEvaluationFreshness(evaluation, projec
   assert(await sha256(humanSet.entries, cryptoProvider) === humanSet.digest, 'F5_HUMAN_SOURCE_SET_DIGEST_MISMATCH');
   assert(await sha256(executionSet.entries, cryptoProvider) === executionSet.digest, 'F5_EXECUTION_SOURCE_SET_DIGEST_MISMATCH');
 
-  const expectedEvaluationId = `BKL046-F5A-${(await sha256({
+  const expectedEvaluationId = `BKL046-F5C-${(await sha256({
     catalogDigest: snapshots.catalog.digest,
     executionEvidenceDigest: executionSet.digest,
     f4ProjectionDigest: snapshots.f4Projection.digest,
@@ -597,17 +599,17 @@ export async function validateRealEvidenceEvaluationFreshness(evaluation, projec
     ['EXECUTION_EVIDENCE_SOURCE_CONTRACT', 'PASS', []],
     ['CLOSED_METHOD_REGISTRY', 'PASS', []],
     ['F5A_REPORT_DETERMINISM', 'PASS', []],
-    ['F5B_DYNAMIC_UPDATE', 'NOT_EXECUTED', ['F5B_DYNAMIC_UPDATE_NOT_EXECUTED']],
-    ['F5B_CONSUMER', 'NOT_EXECUTED', ['F5B_CONSUMER_NOT_EXECUTED']]
+    ['F5B_DYNAMIC_UPDATE', 'PASS', []],
+    ['F5B_CONSUMER', 'PASS', []]
   ].map(([gateId, state, reasonCodes]) => ({ gateId, state, reasonCodes }));
   assert(same(evaluation.technicalGates, expectedGates), 'F5_TECHNICAL_GATES_STATE_MISMATCH');
   const expectedOutcomes = {
-    technical: { state: 'READY_FOR_F5_EVALUATION', reasonCodes: ['F5A_FOUNDATION_IMPLEMENTED', 'F5B_CONSUMER_NOT_EXECUTED', 'F5B_DYNAMIC_UPDATE_NOT_EXECUTED'] },
+    technical: { state: 'ACCEPTED_READ_ONLY_WITH_LIMITATIONS', reasonCodes: ['F5A_FOUNDATION_IMPLEMENTED', 'F5B_CONSUMER_VERIFIED', 'F5B_DYNAMIC_UPDATE_VERIFIED'] },
     scientific: { state: 'NOT_EVALUABLE_CURRENT_EVIDENCE', reasonCodes: ['NO_APPROVED_GROUND_TRUTH_METHOD', ...(provenanceMembers.length ? [] : ['NO_EXACT_PROVENANCE_MATCHES'])].sort() },
     humanDecision: { state: humanSet.entries.length ? 'AVAILABLE' : 'NOT_AVAILABLE', reasonCodes: [humanSet.entries.length ? 'HUMAN_DECISION_RECEIPTS_AVAILABLE' : 'NO_HUMAN_DECISION_RECEIPTS'] },
     production: { state: 'NOT_READY_FOR_PRODUCTION', reasonCodes: ['PRODUCTION_AUTHORITY_NOT_GRANTED', 'SCIENTIFIC_EFFECTIVENESS_NOT_ESTABLISHED'] },
-    capabilityOutcome: 'F5A_EVALUATION_FOUNDATION_READY',
-    closureRecommendation: 'KEEP_OPEN',
+    capabilityOutcome: 'ACCEPTED_READ_ONLY_WITH_LIMITATIONS',
+    closureRecommendation: 'CLOSE_DETERMINISTIC_CAPABILITY',
     aiModelImplemented: false
   };
   assert(same(evaluation.outcomes, expectedOutcomes), 'F5_OUTCOMES_STATE_MISMATCH');

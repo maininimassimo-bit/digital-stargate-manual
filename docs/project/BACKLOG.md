@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.7 |
+| Versione | 5.8 |
 | Stato | Active |
-| Data baseline | 12/09/2026 |
+| Data baseline | 13/09/2026 |
 
 ## 1. Scopo
 
@@ -64,7 +64,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-043 | P2 | Observatory Reliability Engineering | Planned | BKL-030/BKL-038/BKL-042 | SLI/SLO, MTBF, MTTR, session completion e failure budget | Functional Roadmap Expansion |
 | BKL-044 | P1 | Knowledge Graph / AI Evidence Contract | Done | BKL-015 | Provenance stabile per AP/ADR/assets/session/target/incident/telemetry/processing/AI | F1-F4 CLOSED/ACCEPTED; PR #104 merge `b7c01ba7221818e1971403ab3befe38c8e40cc54`; closure `docs/project/BKL-044-CLOSURE-2026-09-07.md` |
 | BKL-045 | P2 | PixInsight Workflow Provenance Plugin | Done | BKL-015/BKL-044 | Estensione PixInsight governata per catturare workflow, parametri e lineage | F1-F5 CLOSED/ACCEPTED; closure `docs/project/BKL-045-CLOSURE-2026-09-10.md`; PR #140 merge `a08aed981e5ffa4af6b68fea521ada25a4b2b338`; retained PixInsight history completeness limitation |
-| BKL-046 | P2 | AI Post-Processing Assistant for PixInsight | In Progress | BKL-015/BKL-044/BKL-045 | Assistente advisory per ottimizzare workflow PixInsight | F1-F4 CLOSED/ACCEPTED; F5 architecture integrated via PR #177; F5-A CLOSED/ACCEPTED/POST-MERGE VERIFIED via PR #178, merge `46b956f0a6ceb04442ffd80447f810ef6463b5a8`; F5-B PR #179 technical head 10/10 green, review pending; F5-C not started; closure `KEEP_OPEN`; no model/provider, scientific confidence, automatic acceptance or apply authority |
+| BKL-046 | P2 | AI Post-Processing Assistant for PixInsight | In Progress | BKL-015/BKL-044/BKL-045 | Assistente advisory per ottimizzare workflow PixInsight | F1-F5-B integrated; PR #179 merge `eb1827e2cc6e957080c6d1e928a7b13652261851`; real post-import/Pages evidence on analytics commit `8ed6085d15f6af9e466a90167f19e970e8c526a7`; F5-C closure candidate with exact-head CI/review pending; no model/provider, scientific confidence, automatic acceptance or apply authority |
 | BKL-047 | P1 | AP-013C Verified Transport Cleanup & Convergence Monitoring | Done | AP-013B COPY_ONLY OAT | DRY_RUN/NO_DELETE lifecycle evidence, ACK convergence e fail-closed classification accepted | AP-013C; C8 productive cleanup excluded |
 
 ### Reconciliation note — 10/09/2026
@@ -110,6 +110,12 @@ Il package F5 proposto separa technical capability acceptance, scientific effect
 Il design F5 è integrato tramite PR #177 e merge `16e0f101fda50e375bff6d5e9c8ec90d2083bc12`; le relative deroghe sono consumate. F5-A è CLOSED / ACCEPTED / POST-MERGE VERIFIED tramite PR #178, authorized head `74603bedad088dcf9f2cb33b9769658f4a9e639a` e merge `46b956f0a6ceb04442ffd80447f810ef6463b5a8`. La re-review ARB R2 ha assegnato 98/100 e Release Quality ha emesso `CONDITIONALLY READY FOR MERGE`; entrambe sono review AI-assistite, owner-authorized e non equivalenti ad approvazioni umane indipendenti. La deroga una tantum per assenza di branch protection `W-BKL046-F5A-MERGE-001` è consumata/scaduta. I nove workflow post-merge sono verdi.
 
 F5-B è promosso come incremento corrente sulla PR #179. Il technical head `f6555e80760f9c5d179df3dc0ee4e02c7e265a21` integra il generator F5 nei path automatici first/retry, include il report nel commit atomico e rende il consumer fail-closed sulla catena catalogo/F4/F5; i 10 workflow exact-head sono verdi, mentre ARB/RQ e acceptance restano pending. F5-C resta non iniziato. L'acceptance F5-A non modifica l'outcome dati: scientific effectiveness `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false` e closure `KEEP_OPEN`.
+
+### BKL-046 F5-B post-merge evidence and F5-C transition — 13/09/2026
+
+F5-B è integrata tramite PR #179 e merge `eb1827e2cc6e957080c6d1e928a7b13652261851`. Il growth-safety hotfix PR #180, merge `2edb44d1d26b36f9381a3796483efe9c105a679d`, ha consentito la fresh analysis run `34766534178`; il commit analytics `8ed6085d15f6af9e466a90167f19e970e8c526a7` e Pages `34766571069` sono verdi. Catalogo, F4 e F5 risultano allineati su 16 sessioni e il consumer live mostra `FRESHNESS CHAIN VERIFIED`, chiudendo l'observation `ARB-F5B-O01`.
+
+F5-C è promosso come candidato di closure deterministica read-only. La proposta è `ACCEPTED_READ_ONLY_WITH_LIMITATIONS` / `CLOSE_DETERMINISTIC_CAPABILITY`; restano obbligatori `NOT_EVALUABLE_CURRENT_EVIDENCE`, `NOT_READY_FOR_PRODUCTION` e `aiModelImplemented=false`. BKL-046 rimane `In Progress` fino a exact-head CI, review specifiche F5-C, merge autorizzato e post-merge verification.
 ## 4. Sequenza di esecuzione raccomandata
 
 ```text

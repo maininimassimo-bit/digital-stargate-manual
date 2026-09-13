@@ -81,12 +81,12 @@ async function main() {
       process.exitCode = 1;
       return;
     }
-    process.stdout.write(`BKL-046 F5-A evaluation aligned: ${expected.summary.canonicalSessions} canonical sessions; ${expected.summary.provenanceEligible} provenance eligible; scientific state ${expected.outcomes.scientific.state}.\n`);
+    process.stdout.write(`BKL-046 F5-C evaluation aligned: ${expected.summary.canonicalSessions} canonical sessions; ${expected.summary.provenanceEligible} provenance eligible; scientific state ${expected.outcomes.scientific.state}.\n`);
     return;
   }
 
   if (current && canonicalJson(semanticSnapshot(current)) === canonicalJson(semanticSnapshot(expected))) {
-    process.stdout.write('BKL-046 F5-A evaluation already aligned; no write required.\n');
+    process.stdout.write('BKL-046 F5-C evaluation already aligned; no write required.\n');
     return;
   }
 
@@ -104,4 +104,3 @@ async function main() {
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((error) => { console.error(error.message); process.exitCode = 1; });
 }
-

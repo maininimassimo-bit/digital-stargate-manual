@@ -9,13 +9,13 @@ import {
   validateAdvisoryProjection as validateCanonicalF4Projection
 } from './ai-post-processing-advisory-projection.mjs';
 
-export const F5_SCHEMA_VERSION = '1.0';
+export const F5_SCHEMA_VERSION = '2.0';
 export const F5_EVALUATION_TYPE = 'BKL046_F5_REAL_EVIDENCE_EVALUATION';
-export const F5_EVALUATION_STATE = 'F5A_FOUNDATION_EVALUATED';
+export const F5_EVALUATION_STATE = 'F5C_CLOSURE_EVALUATED';
 export const F5_IDENTITY_METHOD = 'BKL046-F5-CANONICAL-JSON-SHA256-1';
 export const F5_PRODUCER = 'DSG.AiPostProcessingRealEvidenceEvaluator';
-export const F5_PRODUCER_VERSION = '1.0.0-f5a';
-export const F5_METHOD_ID = 'BKL046-F5A-CLOSED-EVALUATION-1';
+export const F5_PRODUCER_VERSION = '2.0.0-f5c';
+export const F5_METHOD_ID = 'BKL046-F5C-CLOSED-EVALUATION-1';
 
 export const CATALOG_PATH = 'docs/data/scientific-session-catalog.json';
 export const F4_PROJECTION_PATH = 'docs/data/ai-post-processing-advisory-projection.json';
@@ -45,7 +45,7 @@ const AUTHORITY = Object.freeze({
 });
 
 export const F5_METHOD_REGISTRY = Object.freeze({
-  registryId: 'BKL046-F5A-CLOSED-REGISTRY-1',
+  registryId: 'BKL046-F5C-CLOSED-REGISTRY-1',
   cohortIds: [
     'ALL-CANONICAL-SESSIONS-F5',
     'EXACT-PROVENANCE-MATCHED-F5',
@@ -119,8 +119,8 @@ export const F5_METHOD_REGISTRY = Object.freeze({
     'EXECUTION_EVIDENCE_AVAILABLE',
     'NO_APPROVED_GROUND_TRUTH_METHOD',
     'F5A_FOUNDATION_IMPLEMENTED',
-    'F5B_DYNAMIC_UPDATE_NOT_EXECUTED',
-    'F5B_CONSUMER_NOT_EXECUTED',
+    'F5B_DYNAMIC_UPDATE_VERIFIED',
+    'F5B_CONSUMER_VERIFIED',
     'PRODUCTION_AUTHORITY_NOT_GRANTED',
     'SCIENTIFIC_EFFECTIVENESS_NOT_ESTABLISHED'
   ]
@@ -573,8 +573,8 @@ export function buildRealEvidenceEvaluation({
     ['EXECUTION_EVIDENCE_SOURCE_CONTRACT', 'PASS', []],
     ['CLOSED_METHOD_REGISTRY', 'PASS', []],
     ['F5A_REPORT_DETERMINISM', 'PASS', []],
-    ['F5B_DYNAMIC_UPDATE', 'NOT_EXECUTED', ['F5B_DYNAMIC_UPDATE_NOT_EXECUTED']],
-    ['F5B_CONSUMER', 'NOT_EXECUTED', ['F5B_CONSUMER_NOT_EXECUTED']]
+    ['F5B_DYNAMIC_UPDATE', 'PASS', []],
+    ['F5B_CONSUMER', 'PASS', []]
   ].map(([gateId, state, reasonCodes]) => ({ gateId, state, reasonCodes }));
 
   const targetCounts = new Map();
@@ -591,7 +591,7 @@ export function buildRealEvidenceEvaluation({
     evaluationType: F5_EVALUATION_TYPE,
     evaluationState: F5_EVALUATION_STATE,
     identityMethod: F5_IDENTITY_METHOD,
-    evaluationId: `BKL046-F5A-${contentDigest({
+    evaluationId: `BKL046-F5C-${contentDigest({
       catalogDigest,
       executionEvidenceDigest: executionSourceSet.digest,
       f4ProjectionDigest: f4Projection.projectionDigest,
@@ -607,10 +607,10 @@ export function buildRealEvidenceEvaluation({
     cohorts,
     technicalGates,
     outcomes: {
-      technical: outcome('READY_FOR_F5_EVALUATION', [
+      technical: outcome('ACCEPTED_READ_ONLY_WITH_LIMITATIONS', [
         'F5A_FOUNDATION_IMPLEMENTED',
-        'F5B_DYNAMIC_UPDATE_NOT_EXECUTED',
-        'F5B_CONSUMER_NOT_EXECUTED'
+        'F5B_DYNAMIC_UPDATE_VERIFIED',
+        'F5B_CONSUMER_VERIFIED'
       ]),
       scientific: outcome('NOT_EVALUABLE_CURRENT_EVIDENCE', [
         'NO_APPROVED_GROUND_TRUTH_METHOD',
@@ -623,8 +623,8 @@ export function buildRealEvidenceEvaluation({
         'PRODUCTION_AUTHORITY_NOT_GRANTED',
         'SCIENTIFIC_EFFECTIVENESS_NOT_ESTABLISHED'
       ]),
-      capabilityOutcome: 'F5A_EVALUATION_FOUNDATION_READY',
-      closureRecommendation: 'KEEP_OPEN',
+      capabilityOutcome: 'ACCEPTED_READ_ONLY_WITH_LIMITATIONS',
+      closureRecommendation: 'CLOSE_DETERMINISTIC_CAPABILITY',
       aiModelImplemented: false
     },
     summary: {
@@ -637,7 +637,7 @@ export function buildRealEvidenceEvaluation({
     },
     authority: structuredClone(AUTHORITY),
     limitations: [
-      'F5-A implements deterministic evaluation foundations only; dynamic workflow integration and consumer delivery remain not executed.',
+      'F5-A evaluation foundations and F5-B dynamic update/consumer delivery are accepted only as a deterministic read-only capability with retained limitations.',
       'Scientific effectiveness is not evaluable without exact eligible evidence and an independently governed ground-truth method.',
       'Human decisions and execution evidence are separate from scientific outcome quality.',
       'No AI model, provider, confidence score, automatic acceptance, PixInsight apply, device command, production authority or Safety Authority is implemented.'
@@ -735,11 +735,13 @@ export function validateRealEvidenceEvaluation(report) {
   }
   assert(F5_METHOD_REGISTRY.capabilityOutcomes.includes(report.outcomes.capabilityOutcome), 'Unknown capability outcome.');
   assert(F5_METHOD_REGISTRY.closureRecommendations.includes(report.outcomes.closureRecommendation), 'Unknown closure recommendation.');
-  assert(report.outcomes.aiModelImplemented === false, 'F5-A cannot claim an implemented AI model.');
-  assert(report.outcomes.technical.state === 'READY_FOR_F5_EVALUATION', 'F5-A technical outcome must remain evaluation-ready, not accepted.');
-  assert(report.outcomes.scientific.state === 'NOT_EVALUABLE_CURRENT_EVIDENCE', 'F5-A cannot claim scientific effectiveness.');
-  assert(report.outcomes.production.state === 'NOT_READY_FOR_PRODUCTION', 'F5-A cannot claim production readiness.');
-  assert(report.outcomes.closureRecommendation === 'KEEP_OPEN', 'F5-A cannot close the capability.');
+  assert(report.outcomes.aiModelImplemented === false, 'F5-C cannot claim an implemented AI model.');
+  assert(report.technicalGates.every((gate) => gate.state === 'PASS' && gate.reasonCodes.length === 0), 'F5-C technical gates must all pass.');
+  assert(report.outcomes.technical.state === 'ACCEPTED_READ_ONLY_WITH_LIMITATIONS', 'F5-C technical outcome must remain bounded and read-only.');
+  assert(report.outcomes.scientific.state === 'NOT_EVALUABLE_CURRENT_EVIDENCE', 'F5-C cannot claim scientific effectiveness.');
+  assert(report.outcomes.production.state === 'NOT_READY_FOR_PRODUCTION', 'F5-C cannot claim production readiness.');
+  assert(report.outcomes.capabilityOutcome === 'ACCEPTED_READ_ONLY_WITH_LIMITATIONS', 'F5-C capability outcome must remain bounded and read-only.');
+  assert(report.outcomes.closureRecommendation === 'CLOSE_DETERMINISTIC_CAPABILITY', 'F5-C may close only the deterministic capability.');
 
   assertExactKeys(report.summary, SUMMARY_KEYS, 'summary');
   for (const key of ['canonicalSessions', 'provenanceEligible', 'humanDecisionReceipts', 'executionEvidence', 'uncorrelatedProcessingSources']) {
@@ -759,7 +761,7 @@ export function validateRealEvidenceEvaluation(report) {
   assert(canonicalJson(report.authority) === canonicalJson(AUTHORITY), 'F5 authority drift.');
   assert(Array.isArray(report.limitations) && report.limitations.length > 0, 'F5 limitations are required.');
   assertNoForbiddenPublicFields(report);
-  assert(/^BKL046-F5A-[A-F0-9]{24}$/.test(report.evaluationId), 'F5 evaluationId is invalid.');
+  assert(/^BKL046-F5C-[A-F0-9]{24}$/.test(report.evaluationId), 'F5 evaluationId is invalid.');
   const identity = contentDigest({
     catalogDigest: report.sourceSnapshots.catalog.digest,
     executionEvidenceDigest: report.sourceSnapshots.executionEvidenceSourceSet.digest,
@@ -767,7 +769,7 @@ export function validateRealEvidenceEvaluation(report) {
     humanDecisionDigest: report.sourceSnapshots.humanDecisionSourceSet.digest,
     methodId: report.methodId
   }).slice(0, 24).toUpperCase();
-  assert(report.evaluationId === `BKL046-F5A-${identity}`, 'F5 evaluation identity mismatch.');
+  assert(report.evaluationId === `BKL046-F5C-${identity}`, 'F5 evaluation identity mismatch.');
   validateDigestProtected(report, 'evaluationDigest', 'F5 evaluation');
   return true;
 }
