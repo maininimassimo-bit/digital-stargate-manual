@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://maininimassimo-bit.github.io/digital-stargate-manual/contracts/ai-post-processing-assistant-f5-evaluation.schema.json",
-  "title": "BKL-046 F5-A deterministic real-evidence evaluation report",
+  "title": "BKL-046 F5-C deterministic capability closure evaluation report",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -11,15 +11,15 @@
     "outcomes", "summary", "authority", "limitations", "evaluationDigest"
   ],
   "properties": {
-    "schemaVersion": { "const": "1.0" },
+    "schemaVersion": { "const": "2.0" },
     "evaluationType": { "const": "BKL046_F5_REAL_EVIDENCE_EVALUATION" },
-    "evaluationState": { "const": "F5A_FOUNDATION_EVALUATED" },
+    "evaluationState": { "const": "F5C_CLOSURE_EVALUATED" },
     "identityMethod": { "const": "BKL046-F5-CANONICAL-JSON-SHA256-1" },
-    "evaluationId": { "type": "string", "pattern": "^BKL046-F5A-[A-F0-9]{24}$" },
+    "evaluationId": { "type": "string", "pattern": "^BKL046-F5C-[A-F0-9]{24}$" },
     "generatedAt": { "type": "string", "format": "date-time" },
     "producer": { "const": "DSG.AiPostProcessingRealEvidenceEvaluator" },
-    "producerVersion": { "const": "1.0.0-f5a" },
-    "methodId": { "const": "BKL046-F5A-CLOSED-EVALUATION-1" },
+    "producerVersion": { "const": "2.0.0-f5c" },
+    "methodId": { "const": "BKL046-F5C-CLOSED-EVALUATION-1" },
     "sourceSnapshots": { "$ref": "#/$defs/sourceSnapshots" },
     "methodRegistry": { "$ref": "#/$defs/methodRegistry" },
     "cohorts": {
@@ -65,8 +65,8 @@
         "EXECUTION_EVIDENCE_AVAILABLE",
         "NO_APPROVED_GROUND_TRUTH_METHOD",
         "F5A_FOUNDATION_IMPLEMENTED",
-        "F5B_DYNAMIC_UPDATE_NOT_EXECUTED",
-        "F5B_CONSUMER_NOT_EXECUTED",
+        "F5B_DYNAMIC_UPDATE_VERIFIED",
+        "F5B_CONSUMER_VERIFIED",
         "PRODUCTION_AUTHORITY_NOT_GRANTED",
         "SCIENTIFIC_EFFECTIVENESS_NOT_ESTABLISHED"
       ]
@@ -216,7 +216,7 @@
         "gateStates", "evidenceStates", "reasonCodes"
       ],
       "properties": {
-        "registryId": { "const": "BKL046-F5A-CLOSED-REGISTRY-1" },
+        "registryId": { "const": "BKL046-F5C-CLOSED-REGISTRY-1" },
         "cohortIds": {
           "type": "array", "minItems": 4, "maxItems": 4, "uniqueItems": true,
           "items": { "$ref": "#/$defs/cohortId" }
@@ -492,4 +492,3 @@
     }
   }
 }
-

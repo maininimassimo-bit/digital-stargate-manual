@@ -21,6 +21,8 @@ on:
       - 'docs/architecture/validation/BKL-046-F5-Real-Evidence-Evaluation-Plan.md'
       - 'docs/architecture/validation/BKL-046-F5A-Evaluation-Foundation-Evidence-2026-09-12.md'
       - 'docs/architecture/validation/BKL-046-F5B-Atomic-Update-and-Consumer-Evidence-2026-09-12.md'
+      - 'docs/architecture/validation/BKL-046-F5C-Closure-Evidence-2026-09-13.md'
+      - 'docs/project/BKL-046-CLOSURE-2026-09-13.md'
       - 'docs/javascripts/ai-post-processing-assistant-core.mjs'
       - 'docs/javascripts/ai-post-processing-assistant.js'
       - 'docs/styles/ai-post-processing-assistant.css'
@@ -47,6 +49,8 @@ on:
       - 'docs/architecture/validation/BKL-046-F5-Real-Evidence-Evaluation-Plan.md'
       - 'docs/architecture/validation/BKL-046-F5A-Evaluation-Foundation-Evidence-2026-09-12.md'
       - 'docs/architecture/validation/BKL-046-F5B-Atomic-Update-and-Consumer-Evidence-2026-09-12.md'
+      - 'docs/architecture/validation/BKL-046-F5C-Closure-Evidence-2026-09-13.md'
+      - 'docs/project/BKL-046-CLOSURE-2026-09-13.md'
       - 'docs/javascripts/ai-post-processing-assistant-core.mjs'
       - 'docs/javascripts/ai-post-processing-assistant.js'
       - 'docs/styles/ai-post-processing-assistant.css'
@@ -62,8 +66,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  f5-evaluation-foundation:
-    name: F5 evaluation and consumer
+  f5-closure-evaluation:
+    name: F5 closure evaluation and consumer
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -73,7 +77,7 @@ jobs:
           node-version: '22'
       - name: Parse F2 and F5 JSON Schemas
         run: node -e "for (const path of ['docs/contracts/ai-post-processing-assistant-f2.schema.json', 'docs/contracts/ai-post-processing-assistant-f5-evaluation.schema.json']) JSON.parse(require('node:fs').readFileSync(path, 'utf8'))"
-      - name: Test F5-A contracts and F5-B atomic integration
+      - name: Test F5-A/F5-B regressions and F5-C closure transition
         run: node --test .github/scripts/test-ai-post-processing-advisory-f5-evaluation.mjs
       - name: Verify persisted F5 evaluation is current
         run: node .github/scripts/generate-ai-post-processing-advisory-f5-evaluation.mjs --check

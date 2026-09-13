@@ -140,11 +140,18 @@ function targetDistribution(sessions) {
     .map(([target, count]) => ({ target, count }));
 }
 
-test('F5A-UT-001 baseline report validates with a closed schema-shaped contract', () => {
+test('F5C-UT-001 closure report validates with a closed schema-shaped contract', () => {
   const report = build();
   assert.equal(validateRealEvidenceEvaluation(report), true);
-  assert.equal(report.schemaVersion, '1.0');
-  assert.equal(report.evaluationState, 'F5A_FOUNDATION_EVALUATED');
+  assert.equal(report.schemaVersion, '2.0');
+  assert.equal(report.evaluationState, 'F5C_CLOSURE_EVALUATED');
+  assert.equal(report.outcomes.technical.state, 'ACCEPTED_READ_ONLY_WITH_LIMITATIONS');
+  assert.equal(report.outcomes.capabilityOutcome, 'ACCEPTED_READ_ONLY_WITH_LIMITATIONS');
+  assert.equal(report.outcomes.closureRecommendation, 'CLOSE_DETERMINISTIC_CAPABILITY');
+  assert.equal(report.outcomes.scientific.state, 'NOT_EVALUABLE_CURRENT_EVIDENCE');
+  assert.equal(report.outcomes.production.state, 'NOT_READY_FOR_PRODUCTION');
+  assert.equal(report.outcomes.aiModelImplemented, false);
+  assert.equal(report.technicalGates.every(({ state }) => state === 'PASS'), true);
 });
 
 test('F5A-UT-002 full population equals the canonical catalog session set', () => {
@@ -305,7 +312,7 @@ test('F5A-UT-015 exact receipt and execution sources populate separate cohorts',
   assert.equal(report.summary.executionEvidence, 1);
   assert.equal(report.outcomes.humanDecision.state, 'AVAILABLE');
   assert.equal(report.outcomes.scientific.state, 'NOT_EVALUABLE_CURRENT_EVIDENCE');
-  assert.equal(report.outcomes.closureRecommendation, 'KEEP_OPEN');
+  assert.equal(report.outcomes.closureRecommendation, 'CLOSE_DETERMINISTIC_CAPABILITY');
 });
 
 test('F5A-UT-016 unknown outcome states and reason codes are rejected', () => {
@@ -328,14 +335,14 @@ test('F5A-UT-017 report tampering and additional properties are rejected', () =>
   assert.throws(() => validateRealEvidenceEvaluation(extra), /is not allowed/);
 });
 
-test('F5A-UT-018 authority and closure escalation are rejected', () => {
+test('F5C-UT-018 authority escalation and closure downgrade are rejected', () => {
   const authority = structuredClone(build());
   authority.authority.pixInsightApplyAuthorized = true;
   assert.throws(() => validateRealEvidenceEvaluation(authority), /authority drift/);
 
   const closure = structuredClone(build());
-  closure.outcomes.closureRecommendation = 'CLOSE_DETERMINISTIC_CAPABILITY';
-  assert.throws(() => validateRealEvidenceEvaluation(closure), /cannot close/);
+  closure.outcomes.closureRecommendation = 'KEEP_OPEN';
+  assert.throws(() => validateRealEvidenceEvaluation(closure), /may close only/);
 });
 
 test('F5A-UT-019 missing governed source directories are valid empty sets', async () => {

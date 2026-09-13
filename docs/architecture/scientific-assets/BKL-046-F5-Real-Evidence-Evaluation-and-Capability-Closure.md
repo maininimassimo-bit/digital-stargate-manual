@@ -3,14 +3,14 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-046-F5 |
-| Stato | F5-B implementation candidate; F5-A predecessor integrated/post-merge verified; F5-C not started |
-| Versione | 0.4 |
-| Data | 12/09/2026 |
+| Stato | F5-B accepted/post-merge verified; F5-C deterministic closure candidate |
+| Versione | 0.5 |
+| Data | 13/09/2026 |
 | Package | BKL-046 — AI Post-Processing Assistant for PixInsight |
 | Baseline F4 | PR #175, merge `af48cc2441cf956d88c13c81845fc2a2f7c599f2` — Accepted |
 | Baseline F5 architecture | PR #177, merge `16e0f101fda50e375bff6d5e9c8ec90d2083bc12` — integrated |
-| Repository baseline | `46b956f0a6ceb04442ffd80447f810ef6463b5a8` |
-| Release impact | F5-B additive automatic integration and read-only presentation; no semantic release assigned |
+| Repository baseline | `8ed6085d15f6af9e466a90167f19e970e8c526a7` |
+| Release impact | F5-C contract 2.0 and bounded deterministic closure candidate |
 | Authority | Deterministic, read-only, human-only, non-production and non-Safety |
 
 ## 1. Purpose
@@ -46,7 +46,7 @@ Restano esclusi:
 |---|---|
 | F4 tecnicamente accettata | F5 riusa projection, validator e rule set; non li ridefinisce |
 | 0 provenance matched | scientific-effectiveness cohort esplicitamente vuota e `NOT_EVALUABLE_CURRENT_EVIDENCE` |
-| 15 history fail-closed | missingness è un risultato da preservare, non un difetto da imputare |
+| 16 history fail-closed | missingness è un risultato da preservare, non un difetto da imputare |
 | nessuna decisione umana | Recommendation quality non può essere dedotta da acceptance o execution |
 | nessuna ground truth | nessuna accuracy, uplift, precision, recall o confidence |
 | aggiornamento dinamico | evaluation report nello stesso percorso atomico first/retry di F4 |
@@ -58,13 +58,13 @@ La baseline reale verificata è:
 
 | Evidenza | Valore |
 |---|---:|
-| sessioni canoniche | 15 |
-| LDN 1320 / M 27 / UNKNOWN | 3 / 11 / 1 |
-| provenance matched / unavailable | 0 / 15 |
+| sessioni canoniche | 16 |
+| LDN 1320 / M 27 / UNKNOWN | 3 / 12 / 1 |
+| provenance matched / unavailable | 0 / 16 |
 | source BKL-045 non correlate | 2 |
-| governance PASS / FAIL_CLOSED | 15 / 0 |
-| processing history PASS / FAIL_CLOSED | 0 / 15 |
-| Recommendation validated / incomplete | 15 / 15 |
+| governance PASS / FAIL_CLOSED | 16 / 0 |
+| processing history PASS / FAIL_CLOSED | 0 / 16 |
+| Recommendation validated / incomplete | 16 / 16 |
 | record con Human Decision Receipt | 0 |
 
 Questi conteggi sono evidence descrittiva. Non dimostrano rappresentatività, correttezza scientifica, qualità delle immagini o beneficio delle Recommendation.
@@ -75,7 +75,7 @@ F5 produrrà un report versionato che espone quattro esiti indipendenti:
 
 | Asse | Stato corrente atteso | Significato |
 |---|---|---|
-| Technical capability | `READY_FOR_F5_EVALUATION` | F1-F4 forniscono contratti e consumer valutabili |
+| Technical capability | `ACCEPTED_READ_ONLY_WITH_LIMITATIONS` | F1-F5-B e la real post-import evidence soddisfano i gate tecnici |
 | Scientific effectiveness | `NOT_EVALUABLE_CURRENT_EVIDENCE` | cohort correlata e ground truth assenti |
 | Human-decision evidence | `NOT_AVAILABLE` | nessun receipt pre-decisione |
 | Production readiness | `NOT_READY_FOR_PRODUCTION` | nessuna autorizzazione o validazione produttiva |
@@ -99,7 +99,7 @@ Il Domain policy dell'evaluator contiene soltanto selection rule e decision tabl
 
 | Cohort ID | Selection rule | Baseline osservata | Uso |
 |---|---|---:|---|
-| `ALL-CANONICAL-SESSIONS-F5` | tutti gli ID del catalogo, senza esclusioni | 15 | contract, population, missingness e freshness |
+| `ALL-CANONICAL-SESSIONS-F5` | tutti gli ID del catalogo, senza esclusioni | 16 | contract, population, missingness e freshness |
 | `EXACT-PROVENANCE-MATCHED-F5` | solo `PROVENANCE_MATCHED` con source valida | 0 | prerequisito per valutazioni processing-specific |
 | `HUMAN-DECISION-RECEIPTS-F5` | receipt F2 validi e correlati a Recommendation | 0 | human disposition; mai execution proof |
 | `EXECUTION-EVIDENCE-F5` | evidence BKL-045 valida e correlata dopo decisione | 0 | verifica separata di execution, non outcome quality |
@@ -154,18 +154,18 @@ Stati o proprietà sconosciuti, digest non validi, snapshot stale e authority dr
 | Domain policy | `.github/scripts/ai-post-processing-advisory-real-evidence-evaluation.mjs` | F5-A accepted | cohort, allowlist, exact correlation e decision table pure |
 | Application | `.github/scripts/generate-ai-post-processing-advisory-f5-evaluation.mjs` | F5-A accepted; F5-B integration candidate | `--write`, `--check`, `--print` e invocazione automatica |
 | Projection | `docs/data/ai-post-processing-advisory-f5-evaluation.json` | F5-A accepted; atomicity candidate | report persistito digest-protected nel governed path set |
-| Verification | `.github/scripts/verify-ai-post-processing-advisory-f5-evaluation.mjs` | F5-B candidate | registry/schema/source e verifica strutturale first/retry/atomicity |
-| Test | `.github/scripts/test-ai-post-processing-advisory-f5-evaluation.mjs` | F5-B candidate | F5-A regression più `F5-EVAL-011/012` |
-| Presentation | `docs/javascripts/ai-post-processing-assistant*.{js,mjs}` | F5-B candidate | catena catalogo/F4/F5, stato F5 e limitation; nessuna azione mutativa |
-| CI | `.github/workflows/bkl-046-f5-governance.yml` | F5-B candidate | F5-A/F5-B e regressioni F2-F4 |
+| Verification | `.github/scripts/verify-ai-post-processing-advisory-f5-evaluation.mjs` | F5-C candidate | registry/schema/source e bounded closure verification |
+| Test | `.github/scripts/test-ai-post-processing-advisory-f5-evaluation.mjs` | F5-C candidate | F5-A/F5-B regression e closure constraints |
+| Presentation | `docs/javascripts/ai-post-processing-assistant*.{js,mjs}` | F5-C candidate | catena catalogo/F4/F5 e closure status; nessuna azione mutativa |
+| CI | `.github/workflows/bkl-046-f5-governance.yml` | F5-C candidate | F5-A/F5-B/F5-C e regressioni F2-F4 |
 
-## 12. Dynamic update and atomicity — F5-B implementation candidate
+## 12. Dynamic update and atomicity — F5-B accepted baseline
 
 Il generator F5 deve essere eseguito dopo catalogo e projection F4 nel first path e nella funzione `regenerate()` di `analyze-session-automatic.yml`. Il report entra in `governed_paths` e viene committato atomicamente. Modifiche a catalogo, provenance o projection F4 devono includere il report riallineato oppure fallire il gate `--check`.
 
 Il browser verifica catalog digest, F4 projection digest ed evaluation digest prima di presentare F5 come corrente. In caso di failure mostra `EVALUATION UNAVAILABLE · FAIL-CLOSED` e non riusa uno stato precedente come corrente.
 
-Il candidato F5-B implementa questi requisiti in `.github/workflows/analyze-session-automatic.yml`, nel verifier F5 e nel consumer browser. I gate persistiti `F5B_DYNAMIC_UPDATE` e `F5B_CONSUMER` restano `NOT_EXECUTED` fino a review/acceptance governata: il candidato non si auto-attesta modificando l'outcome F5-A.
+F5-B implementa questi requisiti in `.github/workflows/analyze-session-automatic.yml`, nel verifier F5 e nel consumer browser. La sessione reale `2026-09-12_2026-09-13`, analysis run `34766534178`, commit `8ed6085d15f6af9e466a90167f19e970e8c526a7` e Pages `34766571069` dimostrano aggiornamento dinamico e consumer live. F5-C propone quindi `F5B_DYNAMIC_UPDATE` e `F5B_CONSUMER` a `PASS`; la closure resta candidata fino ai gate F5-C.
 
 ## 13. Security, privacy, safety and operations
 
@@ -182,7 +182,7 @@ F5 è additivo. L'implementazione procede F5-A contratto/evaluator/report, F5-B 
 
 ## 15. Quality and validation impact
 
-Il piano `BKL-046-F5-Real-Evidence-Evaluation-Plan.md` governa test di cohort completeness, empty-cohort semantics, determinism, anti-tampering, no-self-evidence, authority, dynamic update, accessibility e regressioni F2-F4. F5-A è accettata e post-merge verificata; il candidato F5-B registra `F5-EVAL-011`–`014` in `BKL-046-F5B-Atomic-Update-and-Consumer-Evidence-2026-09-12.md`. Review, acceptance e post-merge F5-B, oltre a F5-C closure, restano non eseguiti.
+Il piano `BKL-046-F5-Real-Evidence-Evaluation-Plan.md` governa test di cohort completeness, empty-cohort semantics, determinism, anti-tampering, no-self-evidence, authority, dynamic update, accessibility e regressioni F2-F4. F5-A e F5-B sono integrate; la real import/Pages evidence è registrata in `BKL-046-F5C-Closure-Evidence-2026-09-13.md`. Exact-head CI, review, merge e post-merge verification F5-C restano non eseguiti.
 
 ## 16. Risks and trade-offs
 
