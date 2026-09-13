@@ -7,11 +7,20 @@ import { validateRealEvidenceFreshness } from '../../docs/javascripts/scientific
 const catalog = JSON.parse(fs.readFileSync('docs/data/scientific-session-catalog.json', 'utf8'));
 const projection = JSON.parse(fs.readFileSync('docs/data/scientific-data-quality-projection.json', 'utf8'));
 
+function projectionStateCounts(assessments) {
+  return Object.fromEntries(
+    ['AVAILABLE', 'UNAVAILABLE', 'INVALID'].map(state => [
+      state.toLowerCase(),
+      assessments.filter(item => item.projectionRecordState === state).length
+    ])
+  );
+}
+
 test('real full catalog produces a deterministic non-production decision', () => {
   const a = buildRealEvidenceValidation(catalog, projection);
   const b = buildRealEvidenceValidation(structuredClone(catalog), structuredClone(projection));
   assert.deepEqual(a, b);
-  assert.equal(a.cohort.sessionCount, 15);
+  assert.equal(a.cohort.sessionCount, catalog.sessions.length);
   assert.equal(a.decision.productionReadiness, 'NOT_READY_FOR_PRODUCTION');
   assert.equal(a.decision.capabilityAcceptance, 'ACCEPTED_AS_READ_ONLY_EXPERIMENTAL_WITH_RETAINED_LIMITATIONS');
 });
@@ -19,9 +28,11 @@ test('real full catalog produces a deterministic non-production decision', () =>
 test('cohort includes every catalog session without outcome filtering', () => {
   const result = buildRealEvidenceValidation(catalog, projection);
   assert.deepEqual(result.sourceCatalog.sessionIds, catalog.sessions.map(x => x.sessionId).sort());
-  assert.equal(result.cohort.assessmentStates.available, 5);
-  assert.equal(result.cohort.assessmentStates.unavailable, 3);
-  assert.equal(result.cohort.assessmentStates.invalid, 7);
+  assert.deepEqual(result.cohort.assessmentStates, projectionStateCounts(projection.assessments));
+  assert.equal(
+    Object.values(result.cohort.assessmentStates).reduce((sum, count) => sum + count, 0),
+    catalog.sessions.length
+  );
 });
 
 test('bias and evidence gaps remain explicit', () => {
