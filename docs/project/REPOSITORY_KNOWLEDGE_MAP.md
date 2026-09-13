@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 2.7 |
+| Versione | 2.8 |
 | Stato | Active |
-| Data | 12/09/2026 |
+| Data | 13/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | BKL-046 — AI Post-Processing Assistant for PixInsight |
+| Current governed package | BKL-031 — Observation Planner intelligente, F1 only |
 
 ## 1. Scopo
 
@@ -16,7 +16,7 @@ Mappa domini, authority, projection e percorsi di conoscenza. Non sostituisce le
 ## 2. Continuity hierarchy
 
 1. `AI_BOOTSTRAP.md`;
-2. current handover e technical baseline 12/09/2026;
+2. current handover e technical baseline 13/09/2026;
 3. Enterprise Architecture Context;
 4. questo Knowledge Map;
 5. `BACKLOG.md`;
@@ -35,19 +35,21 @@ Ogni consumer preserva source locator, semantic type, lifecycle, Citation, Prove
 
 ## 4. Accepted foundation
 
-BKL-015, BKL-044, BKL-035, BKL-040, BKL-038, BKL-039, BKL-045 e BKL-037 sono accepted. AP-013 resta authority degli asset; AP-014 resta catalog/synchronization boundary.
+BKL-015, BKL-044, BKL-035, BKL-040, BKL-038, BKL-039, BKL-045, BKL-037, BKL-041 e BKL-046 sono accepted. AP-013 resta authority degli asset; AP-014 resta catalog/synchronization boundary.
 
 ## 5. BKL-037 closed baseline
 
 Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimensioni/unità/provenance compatibili, conserva exclusions e non crea ranking, score, threshold, recommendation o authority.
 
-## 6. BKL-041 closed and BKL-046 current
+## 6. BKL-046 closed and BKL-031 current
 
-BKL-041 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability sperimentale read-only; production readiness resta `NOT_READY_FOR_PRODUCTION`. BKL-046 F1-F4 sono CLOSED / ACCEPTED. F4 è stata integrata tramite PR #175, merge `af48cc2441cf956d88c13c81845fc2a2f7c599f2`, con review AI-assistite owner-authorized e non indipendenti, 6/6 workflow post-merge e Pages live verificate. F5 è current soltanto come real-evidence evaluation e capability-closure design; execution evidence resta separata e nessun model/provider, scientific confidence o apply path è autorizzato.
+BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`; nessun apply path o Safety Authority è autorizzato.
+
+BKL-031 è current soltanto per F1 source discovery e semantic boundary. Il program handoff richiede source authority, identity, freshness, missingness, explanation e separazione da BKL-032/Safety prima di ogni implementazione.
 
 ## 7. Roadmap sequence
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 [CURRENT] -> BKL-031 -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [CURRENT/F1] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 8. CI/CD e publishing
 
@@ -70,3 +72,4 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 2.5 | 11/09/2026 | BKL-046 F2 accepted e F3 current |
 | 2.6 | 11/09/2026 | BKL-046 F3 accepted e F4 current |
 | 2.7 | 12/09/2026 | BKL-046 F4 accepted/post-merge verified e F5 design current |
+| 2.8 | 13/09/2026 | BKL-046 closed/accepted/post-merge verified e BKL-031 F1 current |

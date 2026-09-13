@@ -53,11 +53,11 @@ La pubblicazione di un documento in questa sezione **non equivale ad autorizzazi
 
 ## BKL-046 — AI Post-Processing Assistant
 
-- [F5 Real-Evidence Evaluation Plan](BKL-046-F5-Real-Evidence-Evaluation-Plan.md) — F5-B post-merge verified; F5-C closure candidate
+- [F5 Real-Evidence Evaluation Plan](BKL-046-F5-Real-Evidence-Evaluation-Plan.md) — F5-C accepted and post-merge verified
 - [F5-A Evaluation Foundation Evidence](BKL-046-F5A-Evaluation-Foundation-Evidence-2026-09-12.md) — 22/22 local tests; known answer persisted; closure remains open
 - [F5-A Validation Remediation Evidence](BKL-046-F5A-Validation-Remediation-Evidence-2026-09-12.md) — M01/M02/C01 remediated; accepted via PR #178 and post-merge verified
 - [F5-B Atomic Update and Consumer Evidence](BKL-046-F5B-Atomic-Update-and-Consumer-Evidence-2026-09-12.md) — accepted implementation baseline via PR #179
-- [F5-C Closure Evidence](BKL-046-F5C-Closure-Evidence-2026-09-13.md) — real import, atomic update and live Pages evidence; exact-head CI/review pending
+- [F5-C Closure Evidence](BKL-046-F5C-Closure-Evidence-2026-09-13.md) — accepted; exact-head review, merge, post-merge and live Pages verified
 - [F5-C AI-Assisted Closure ARB](../reviews/ARB-BKL-046-F5C-AI-Assisted-Closure-Review-2026-09-13.md) — approved with conditions; not an independent human review
 - [F5-C AI-Assisted Release Quality Review](../reviews/RQ-BKL-046-F5C-AI-Assisted-Release-Quality-Review-2026-09-13.md) — conditionally ready for merge; not an independent human approval
 - [F5-B AI-Assisted Implementation ARB](../reviews/ARB-BKL-046-F5B-AI-Assisted-Implementation-Review-2026-09-12.md) — approved with conditions; not an independent human review

@@ -5,61 +5,54 @@
 | Stato | Current technical continuity baseline |
 | Data | 13/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
-| Current main baseline | `8ed6085d15f6af9e466a90167f19e970e8c526a7` |
-| Current governed package | BKL-046 — AI Post-Processing Assistant for PixInsight |
-| Current increment | BKL-046 F5-C — deterministic closure candidate |
-| Accepted predecessor | F5-B, PR #179; runtime/Pages evidence completed after PR #180 |
+| Current main baseline | `3d680dd3a05c70b2a4654c4187c293e36b0af4a7` |
+| Current governed package | BKL-031 — Observation Planner intelligente |
+| Current increment | F1 — Source Discovery and Semantic Boundary |
+| Accepted predecessor | BKL-046, PR #181; post-merge and Pages verified |
 
-## 1. Current verified state
+## 1. BKL-046 accepted baseline
 
 | Elemento | Valore |
 |---|---|
-| Canonical sessions | 16 |
-| F4 records | 16 |
-| F5 catalog snapshot | 16 |
-| Evidence session | `2026-09-12_2026-09-13` |
-| Analysis run | `34766534178` — SUCCESS |
-| Analytics commit | `8ed6085d15f6af9e466a90167f19e970e8c526a7` |
-| Pages run | `34766571069` — SUCCESS |
-| Live freshness | `FRESHNESS CHAIN VERIFIED` |
+| Canonical sessions / F4 records / F5 snapshot | 16 / 16 / 16 |
+| Evaluation ID | `BKL046-F5C-4EC171591C20E469B6302B7E` |
+| Schema / state | `2.0` / `F5C_CLOSURE_EVALUATED` |
+| Technical outcome | `ACCEPTED_READ_ONLY_WITH_LIMITATIONS` |
+| Closure recommendation | `CLOSE_DETERMINISTIC_CAPABILITY` |
+| Scientific state | `NOT_EVALUABLE_CURRENT_EVIDENCE` |
+| Production state | `NOT_READY_FOR_PRODUCTION` |
+| AI model implemented | `false` |
+| Main / merge SHA | `3d680dd3a05c70b2a4654c4187c293e36b0af4a7` |
+| Post-merge | 7/7 workflow SUCCESS; Pages freshness verified |
 
-## 2. F5-C contract candidate
+La closure formale è `docs/project/BKL-046-CLOSURE-2026-09-13.md`. Le review ARB/RQ erano AI-assistite, owner-authorized e non equivalenti ad approvazioni umane indipendenti.
 
-- schema version `2.0`;
-- evaluation state `F5C_CLOSURE_EVALUATED`;
-- producer version `2.0.0-f5c`;
-- method `BKL046-F5C-CLOSED-EVALUATION-1`;
-- registry `BKL046-F5C-CLOSED-REGISTRY-1`;
-- evaluation ID prefix `BKL046-F5C-`;
-- `F5B_DYNAMIC_UPDATE = PASS`;
-- `F5B_CONSUMER = PASS`;
-- technical/capability outcome `ACCEPTED_READ_ONLY_WITH_LIMITATIONS`;
-- closure recommendation `CLOSE_DETERMINISTIC_CAPABILITY`.
-
-## 3. Retained data outcomes
+## 2. Retained BKL-046 limitations
 
 - provenance eligible: 0;
 - Human Decision Receipt: 0;
 - execution evidence: 0;
-- uncorrelated processing sources: 2;
-- target distribution: LDN 1320 = 3, M 27 = 12, UNKNOWN = 1;
-- scientific state: `NOT_EVALUABLE_CURRENT_EVIDENCE`;
-- human decision state: `NOT_AVAILABLE`;
-- production state: `NOT_READY_FOR_PRODUCTION`;
-- `aiModelImplemented=false`.
+- source processing non correlate: 2;
+- nessun model/provider, confidence scientifica, automatic acceptance o PixInsight apply;
+- nessuna production authority o Safety Authority.
 
-## 4. Validation state
+## 3. BKL-031 current baseline
 
-Local candidate validation: generator/check PASS, deterministic verifier PASS, 85/85 test aggregati F2-F5 PASS, inclusi 44/44 test della slice F5 evaluator + consumer; la generazione in memoria contro il catalogo pubblicato a 16 sessioni supera la validazione di freshness. GitHub exact-head CI, ARB/RQ, merge and post-merge verification non sono ancora eseguiti per F5-C.
+Dipendenze dichiarate disponibili: BKL-015 machine-readable knowledge foundation, BKL-035 Target Knowledge Base, BKL-029 meteo/SQM e storico sessioni. Restano da verificare le authority e i contratti concreti per geometria celeste, transito, Luna, forecast e identità setup.
 
-## 5. Compatibility and rollback
+L'incremento corrente produce soltanto inventario source e semantic boundary. Nessun motore di ranking o scheduling è implementato o autorizzato.
 
-Il contratto `2.0` è una major semantica perché sostituisce identity e stato F5-A con la closure F5-C. Il report, evaluator e consumer devono essere pubblicati atomicamente. Rollback: revert del commit F5-C e nuova pubblicazione Pages; F1-F5-B, catalogo e dati sessione restano intatti.
+## 4. Quality and governance state
 
-## 6. Operational limitation
+La closure BKL-046 ha superato 85/85 test reviewer, exact-head CI, ARB/RQ AI-assistite autorizzate, merge owner-authorized e sette workflow post-merge. La branch protection non è configurata; la deroga `W-BKL046-F5C-MERGE-001` era una tantum ed è scaduta al merge.
 
-Il rerun manuale duplicato della stessa finestra EAGLE termina correttamente ma come `DEFERRED/PARTIAL`, non come `NOOP/ALREADY_PUBLISHED`. Non è un blocker F5-C, ma richiede un incremento operativo separato.
+BKL-031 deve ottenere evidence e gate propri; non eredita review, acceptance o deroghe da BKL-046.
 
-## 7. Next gate
+## 5. Operational limitation
 
-Exact-head CI sul branch F5-C. Nessuna review AI-assistita o closure acceptance può essere pubblicata senza nuova autorizzazione esplicita.
+Il rerun manuale duplicato della stessa finestra EAGLE termina con `DEFERRED/PARTIAL` invece di `NOOP/ALREADY_PUBLISHED`. È un miglioramento operativo separato e non autorizza modifiche runtime in BKL-031.
+
+## 6. Next gate
+
+BKL-031 F1 architecture package: source authority inventory, semantic contract, missingness/freshness, explainability, security/privacy/safety boundary e validation plan. Fermarsi prima di implementazione e review.
+

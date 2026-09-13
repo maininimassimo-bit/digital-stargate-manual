@@ -3,14 +3,14 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-046-F5 |
-| Stato | F5-B integrated/post-merge verified; F5-C deterministic closure candidate |
-| Versione | 0.5 |
+| Stato | CLOSED / ACCEPTED / POST-MERGE VERIFIED |
+| Versione | 0.6 |
 | Data | 13/09/2026 |
 | Package | BKL-046 — AI Post-Processing Assistant for PixInsight |
 | Baseline F4 | PR #175, merge `af48cc2441cf956d88c13c81845fc2a2f7c599f2` — Accepted |
 | Baseline F5 architecture | PR #177, merge `16e0f101fda50e375bff6d5e9c8ec90d2083bc12` — integrated |
-| Repository baseline | `8ed6085d15f6af9e466a90167f19e970e8c526a7` |
-| Release impact | F5-C contract 2.0 and bounded deterministic closure candidate |
+| Repository baseline | `3d680dd3a05c70b2a4654c4187c293e36b0af4a7` |
+| Release impact | F5-C contract 2.0 accepted as bounded deterministic closure |
 | Authority | Deterministic, read-only, human-only, non-production and non-Safety |
 
 ## 1. Purpose
@@ -29,7 +29,7 @@ F5 comprende:
 - stato separato per technical capability, scientific effectiveness, human-decision evidence e production readiness;
 - bias/representativeness disclosure senza soglie implicite;
 - report persistito, riproducibile e pubblicato atomicamente;
-- consumer status fail-closed, test, CI, ARB/RQ e closure record proposto.
+- consumer status fail-closed, test, CI, ARB/RQ e closure record accettato.
 
 Restano esclusi:
 
@@ -152,12 +152,12 @@ Stati o proprietà sconosciuti, digest non validi, snapshot stale e authority dr
 |---|---|---|---|
 | Contract | `docs/contracts/ai-post-processing-assistant-f5-evaluation.schema.json` | F5-A accepted | envelope F5 chiuso e registry enumerata |
 | Domain policy | `.github/scripts/ai-post-processing-advisory-real-evidence-evaluation.mjs` | F5-A accepted | cohort, allowlist, exact correlation e decision table pure |
-| Application | `.github/scripts/generate-ai-post-processing-advisory-f5-evaluation.mjs` | F5-A accepted; F5-B integration candidate | `--write`, `--check`, `--print` e invocazione automatica |
-| Projection | `docs/data/ai-post-processing-advisory-f5-evaluation.json` | F5-A accepted; atomicity candidate | report persistito digest-protected nel governed path set |
-| Verification | `.github/scripts/verify-ai-post-processing-advisory-f5-evaluation.mjs` | F5-C candidate | registry/schema/source e bounded closure verification |
-| Test | `.github/scripts/test-ai-post-processing-advisory-f5-evaluation.mjs` | F5-C candidate | F5-A/F5-B regression e closure constraints |
-| Presentation | `docs/javascripts/ai-post-processing-assistant*.{js,mjs}` | F5-C candidate | catena catalogo/F4/F5 e closure status; nessuna azione mutativa |
-| CI | `.github/workflows/bkl-046-f5-governance.yml` | F5-C candidate | F5-A/F5-B/F5-C e regressioni F2-F4 |
+| Application | `.github/scripts/generate-ai-post-processing-advisory-f5-evaluation.mjs` | Accepted | `--write`, `--check`, `--print` e invocazione automatica |
+| Projection | `docs/data/ai-post-processing-advisory-f5-evaluation.json` | Accepted | report persistito digest-protected nel governed path set |
+| Verification | `.github/scripts/verify-ai-post-processing-advisory-f5-evaluation.mjs` | Accepted | registry/schema/source e bounded closure verification |
+| Test | `.github/scripts/test-ai-post-processing-advisory-f5-evaluation.mjs` | Accepted | F5-A/F5-B regression e closure constraints |
+| Presentation | `docs/javascripts/ai-post-processing-assistant*.{js,mjs}` | Accepted | catena catalogo/F4/F5 e closure status; nessuna azione mutativa |
+| CI | `.github/workflows/bkl-046-f5-governance.yml` | Accepted | F5-A/F5-B/F5-C e regressioni F2-F4 |
 
 ## 12. Dynamic update and atomicity — F5-B accepted baseline
 
@@ -165,7 +165,7 @@ Il generator F5 deve essere eseguito dopo catalogo e projection F4 nel first pat
 
 Il browser verifica catalog digest, F4 projection digest ed evaluation digest prima di presentare F5 come corrente. In caso di failure mostra `EVALUATION UNAVAILABLE · FAIL-CLOSED` e non riusa uno stato precedente come corrente.
 
-F5-B implementa questi requisiti in `.github/workflows/analyze-session-automatic.yml`, nel verifier F5 e nel consumer browser. La sessione reale `2026-09-12_2026-09-13`, analysis run `34766534178`, commit `8ed6085d15f6af9e466a90167f19e970e8c526a7` e Pages `34766571069` dimostrano aggiornamento dinamico e consumer live. F5-C propone quindi `F5B_DYNAMIC_UPDATE` e `F5B_CONSUMER` a `PASS`; la closure resta candidata fino ai gate F5-C.
+F5-B implementa questi requisiti in `.github/workflows/analyze-session-automatic.yml`, nel verifier F5 e nel consumer browser. La sessione reale `2026-09-12_2026-09-13`, analysis run `34766534178`, commit `8ed6085d15f6af9e466a90167f19e970e8c526a7` e Pages `34766571069` dimostrano aggiornamento dinamico e consumer live. F5-C ha accettato `F5B_DYNAMIC_UPDATE` e `F5B_CONSUMER` a `PASS`.
 
 ## 13. Security, privacy, safety and operations
 
@@ -182,7 +182,7 @@ F5 è additivo. L'implementazione procede F5-A contratto/evaluator/report, F5-B 
 
 ## 15. Quality and validation impact
 
-Il piano `BKL-046-F5-Real-Evidence-Evaluation-Plan.md` governa test di cohort completeness, empty-cohort semantics, determinism, anti-tampering, no-self-evidence, authority, dynamic update, accessibility e regressioni F2-F4. F5-A e F5-B sono integrate; la real import/Pages evidence è registrata in `BKL-046-F5C-Closure-Evidence-2026-09-13.md`. Exact-head CI, review, merge e post-merge verification F5-C restano non eseguiti.
+Il piano `BKL-046-F5-Real-Evidence-Evaluation-Plan.md` governa test di cohort completeness, empty-cohort semantics, determinism, anti-tampering, no-self-evidence, authority, dynamic update, accessibility e regressioni F2-F4. F5-A/F5-B/F5-C sono integrate. La closure evidence registra 85/85 test, review ARB/RQ AI-assistite autorizzate, merge PR #181 e 7/7 workflow post-merge con Pages live verificata.
 
 ## 16. Risks and trade-offs
 
@@ -213,6 +213,9 @@ Il piano `BKL-046-F5-Real-Evidence-Evaluation-Plan.md` governa test di cohort co
 | F5-A implementation evidence | `docs/architecture/validation/BKL-046-F5A-Evaluation-Foundation-Evidence-2026-09-12.md` |
 | F5-A remediation evidence | `docs/architecture/validation/BKL-046-F5A-Validation-Remediation-Evidence-2026-09-12.md` |
 | F5-B implementation evidence | `docs/architecture/validation/BKL-046-F5B-Atomic-Update-and-Consumer-Evidence-2026-09-12.md` |
+| F5-C closure evidence | `docs/architecture/validation/BKL-046-F5C-Closure-Evidence-2026-09-13.md` |
+| F5-C reviews | `docs/architecture/reviews/ARB-BKL-046-F5C-AI-Assisted-Closure-Review-2026-09-13.md`; `docs/architecture/reviews/RQ-BKL-046-F5C-AI-Assisted-Release-Quality-Review-2026-09-13.md` |
+| formal closure | `docs/project/BKL-046-CLOSURE-2026-09-13.md`; PR #181; merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7` |
 
 ## 18. Acceptance criteria
 
