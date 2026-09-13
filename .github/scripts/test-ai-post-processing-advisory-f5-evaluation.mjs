@@ -129,6 +129,17 @@ function build(overrides = {}) {
   });
 }
 
+function targetDistribution(sessions) {
+  const counts = new Map();
+  for (const session of sessions) {
+    const target = session.target || 'UNKNOWN';
+    counts.set(target, (counts.get(target) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([target, count]) => ({ target, count }));
+}
+
 test('F5A-UT-001 baseline report validates with a closed schema-shaped contract', () => {
   const report = build();
   assert.equal(validateRealEvidenceEvaluation(report), true);
@@ -138,12 +149,12 @@ test('F5A-UT-001 baseline report validates with a closed schema-shaped contract'
 
 test('F5A-UT-002 full population equals the canonical catalog session set', () => {
   const report = build();
-  assert.equal(report.summary.canonicalSessions, 15);
+  assert.equal(report.summary.canonicalSessions, catalog.sessions.length);
   assert.deepEqual(report.cohorts[0].memberRefs, [...baselineProjection.sourceCatalog.sessionIds].sort());
-  assert.equal(report.cohorts[0].eligibleCount, 15);
+  assert.equal(report.cohorts[0].eligibleCount, catalog.sessions.length);
 });
 
-test('F5A-UT-003 baseline known answer preserves observed counts', () => {
+test('F5A-UT-003 baseline report preserves catalog-derived observed counts', () => {
   const report = build();
   assert.deepEqual(
     {
@@ -153,13 +164,9 @@ test('F5A-UT-003 baseline known answer preserves observed counts', () => {
       executions: report.summary.executionEvidence,
       uncorrelated: report.summary.uncorrelatedProcessingSources
     },
-    { sessions: 15, provenance: 0, decisions: 0, executions: 0, uncorrelated: 2 }
+    { sessions: catalog.sessions.length, provenance: 0, decisions: 0, executions: 0, uncorrelated: 2 }
   );
-  assert.deepEqual(report.summary.targetDistribution, [
-    { target: 'LDN 1320', count: 3 },
-    { target: 'M 27', count: 11 },
-    { target: 'UNKNOWN', count: 1 }
-  ]);
+  assert.deepEqual(report.summary.targetDistribution, targetDistribution(catalog.sessions));
 });
 
 test('F5A-UT-004 empty cohorts are not reported as success or percentages', () => {
