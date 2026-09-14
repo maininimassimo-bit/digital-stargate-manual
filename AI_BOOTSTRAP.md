@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 4.4 |
+| Versione | 4.5 |
 | Baseline | 14/09/2026 |
-| Stato | Current root bootstrap — BKL-031 F1/F2 accepted; F3 current handoff only |
+| Stato | Current root bootstrap — BKL-031 F1/F2 accepted; F3 Solution Architecture review candidate |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -52,13 +52,14 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - BKL-041 — Scientific Data Quality Score: CLOSED / ACCEPTED / POST-MERGE VERIFIED;
 - BKL-046 — AI Post-Processing Assistant: CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only con limitation;
 - BKL-031 F1 — Source Discovery and Semantic Boundary: ACCEPTED / POST-MERGE VERIFIED;
-- BKL-031 F2 — Machine-Readable Context/Source Contract and Bounded Fixtures: ACCEPTED / POST-MERGE VERIFIED via PR #188 and merge `7f861f7399079858c9744e69b6c773664b6b5b54`.
+- BKL-031 F2 — Machine-Readable Context/Source Contract and Bounded Fixtures: ACCEPTED / POST-MERGE VERIFIED via PR #188 and merge `7f861f7399079858c9744e69b6c773664b6b5b54`;
+- BKL-031 F3 handoff: integrated/post-merge verified via PR #190 and merge `2ffc77917bcd3fc25a3c5657e8f12e62c9284303`; Solution Architecture and validation plan are current review candidates only.
 
 La closure BKL-046 non dichiara efficacia scientifica né produzione: `NOT_EVALUABLE_CURRENT_EVIDENCE`, `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`. Nessun modello/provider, automatic acceptance o PixInsight apply è autorizzato.
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 CURRENT HANDOFF] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA REVIEW CANDIDATE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -70,5 +71,5 @@ Nessun portale, planner, comparison layer, quality score o AI è Safety Authorit
 
 ## 9. Punto di partenza operativo
 
-BKL-031 F2 è ACCEPTED / POST-MERGE VERIFIED. F3 è promosso soltanto come handoff per governare sito/setup e sorgente ephemeris/lunare. Non sono autorizzati design dettagliato, scelta provider, schema/fixture/adapter, implementazione, forecast, pesi, score, ranking, readiness, scheduler, device command, workload pesante EAGLE o Safety Authority.
+BKL-031 F2 è ACCEPTED / POST-MERGE VERIFIED e l'handoff F3 è integrato/post-merge verified tramite PR #190. Il Solution Architecture Package F3 e il validation plan sono review candidate: non sono accettati né implementati. Restano non autorizzati ARB/Release Quality, merge del package, ADR/provider selection, record reali sito/setup, schema/fixture/validator/adapter, forecast, ranking, readiness, runtime, device command, workload EAGLE e Safety Authority.
 

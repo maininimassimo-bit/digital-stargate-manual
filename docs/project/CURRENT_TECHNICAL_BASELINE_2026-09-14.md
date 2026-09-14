@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Stato | Active |
-| Repository baseline verificata | `4d5526c2fa2af10aeddace4f26c33fc95b7eaa57` |
-| Current governed package | BKL-031 F3 — current handoff only |
-| Accepted increments | BKL-031 F1 and F2 |
+| Repository baseline verificata | `2ffc77917bcd3fc25a3c5657e8f12e62c9284303` |
+| Current governed package | BKL-031 F3 — Solution Architecture review candidate |
+| Accepted increments | BKL-031 F1 and F2; F3 handoff integrated/post-merge verified |
 | Runtime impact | None |
 | PC Principale / EAGLE | Nessuna azione richiesta |
 
@@ -44,4 +44,6 @@ Le review ARB/RQ sono AI-assisted, owner-authorized e non equivalenti ad approva
 
 ## 5. Current F3 gate
 
-F3 è promosso soltanto come handoff per source discovery e decisioni su sito/setup ed ephemeris/lunare. F3 deve preservare S07 e S11 come unavailable, mantenere forecast a F4 e ranking/consumer a F5. Design dettagliato, provider selection, schema, fixture, adapter, implementazione, runtime e ogni attività PC/EAGLE richiedono autorizzazioni separate.
+L'handoff F3 è integrato/post-merge verified tramite PR #190 e merge `2ffc77917bcd3fc25a3c5657e8f12e62c9284303`, con 9/9 workflow post-merge; `W-BKL031-F3-HANDOFF-MERGE-001` è consumata/scaduta.
+
+Il Solution Architecture Package F3 e il validation plan sono current review candidate soltanto. Definiscono registri sito/setup, port/adapter source-neutral, evidenza ephemeris/lunare, privacy, fail-closed behavior, migrazione e validation N21–N66. Non selezionano provider, non approvano ADR e non implementano record, schema, fixture, validator, adapter o runtime. S07 e S11 restano unavailable; F4 forecast, F5 ranking/consumer, BKL-032 readiness e Safety restano separati. ARB, Release Quality e merge richiedono nuova autorizzazione.

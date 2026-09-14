@@ -4,8 +4,8 @@
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3 — Governed Site/Setup and Ephemeris/Lunar Source Integration",
-  "target": "Prepare the governed F3 architecture handoff for authoritative site identity/timezone, current setup assignment/validity and ephemeris/lunar source integration; design, provider selection, implementation, forecast, ranking, readiness, runtime, device command, heavy EAGLE workload and Safety Authority remain unauthorized",
+  "nextMilestone": "BKL-031 F3 — Solution Architecture Review Candidate",
+  "target": "Review the source-neutral F3 solution architecture for governed site identity/timezone, current setup assignment/validity and ephemeris/lunar evidence; provider/library selection, ADR acceptance, authority records, schema/fixture/validator/adapter implementation, forecast, ranking, readiness, runtime, device command, heavy EAGLE workload and Safety Authority remain unauthorized",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F1/F2 ACCEPTED / POST-MERGE VERIFIED; F2 closure PR #189 merge 4d5526c2fa2af10aeddace4f26c33fc95b7eaa57 with 9/9 post-merge workflows. F3 is promoted as CURRENT HANDOFF ONLY for governed site/setup and ephemeris/lunar source integration. Design, source/provider selection, implementation, forecast, ranking, readiness, runtime, device command, heavy EAGLE workload and Safety Authority remain unauthorized."
+          "note": "F1/F2 ACCEPTED / POST-MERGE VERIFIED. F3 handoff PR #190 merged as 2ffc77917bcd3fc25a3c5657e8f12e62c9284303 with 9/9 post-merge workflows. The F3 source-neutral Solution Architecture and validation plan are CURRENT REVIEW CANDIDATES only. Provider/library selection, ADR acceptance, real authority records, schema/fixture/validator/adapter implementation, forecast, ranking, readiness, runtime, device command, heavy EAGLE workload and Safety Authority remain unauthorized."
         },
         {
           "id": "BKL-032",
@@ -460,7 +460,15 @@
       "itemRef": "BKL-031",
       "title": "BKL-031 Observation Planner F2",
       "date": "2026-09-14",
-      "description": "Machine-readable context/source contract and bounded fixtures promoted as the next governed increment; implementation is not authorized."
+      "description": "Machine-readable context/source contract and bounded fixtures accepted/post-merge verified via PR #188; closure reconciled by PR #189."
+    },
+    {
+      "id": "M-BKL031-F3",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 Observation Planner F3",
+      "date": "2026-09-14",
+      "description": "Source-neutral Solution Architecture review candidate for governed site/setup and ephemeris/lunar integration; provider selection and implementation are not authorized.",
+      "status": "active"
     }
   ]
 }
