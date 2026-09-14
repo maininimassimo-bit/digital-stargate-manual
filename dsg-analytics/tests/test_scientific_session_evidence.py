@@ -7,6 +7,7 @@ ROOT=Path(__file__).resolve().parents[2]
 SPEC=importlib.util.spec_from_file_location('analyze_session',ROOT/'dsg-analytics'/'analyzer'/'analyze_session.py'); MOD=importlib.util.module_from_spec(SPEC); SPEC.loader.exec_module(MOD)
 
 PHD2_HEADER='Frame,Time,mount,dx,dy,RARawDistance,DECRawDistance,RAGuideDistance,DECGuideDistance,RADuration,RADirection,DECDuration,DECDirection,XStep,YStep,StarMass,SNR,ErrorCode'
+PHD2_REORDERED_HEADER='Frame,Time,mount,dx,dy,RAGuideDistance,DECGuideDistance,RARawDistance,DECRawDistance,RADuration,RADirection,DECDuration,DECDirection,XStep,YStep,StarMass,SNR,ErrorCode'
 
 def assert_close(actual,expected,tolerance=1e-6):
     assert actual is not None and abs(actual-expected)<=tolerance,(actual,expected)
@@ -44,16 +45,16 @@ def test_phd2_profile_aware_rms(root):
         'Guiding Begins at 2026-09-13 21:04:39',
         'Equipment Profile = C8_QHY695A',
         'Pixel scale = 0.61 arc-sec/px, Binning = 1, Focal length = 1260 mm',
-        PHD2_HEADER,
+        PHD2_REORDERED_HEADER,
         '1,3.0,"DROP",,,,,,,,,,,,,0,0.00,4,"Star lost - low HFD"',
         'Guiding Ends at 2026-09-13 21:04:48',
         'INFO: SETTLING STATE CHANGE, Settling failed',
         'Guiding Begins at 2026-09-13 21:04:58',
         'Equipment Profile = C8_QHY695A',
         'Pixel scale = 0.61 arc-sec/px, Binning = 1, Focal length = 1260 mm',
-        PHD2_HEADER,
-        '1,3.0,"Mount",0,0,0.5,-0.25,9,9,0,,0,,,,100,20,1',
-        '2,6.0,"Mount",0,0,-1,0.75,8,8,0,,0,,,,100,20,0',
+        PHD2_REORDERED_HEADER,
+        '1,3.0,"Mount",0,0,9,9,0.5,-0.25,0,,0,,,,100,20,1',
+        '2,6.0,"Mount",0,0,8,8,-1,0.75,0,,0,,,,100,20,0',
         'Guiding Ends at 2026-09-13 21:10:00',
     ]),encoding='utf-8')
     parsed=MOD.parse_phd2(c8)
