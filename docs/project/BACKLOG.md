@@ -49,7 +49,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
-| BKL-031 | P2 | Observation Planner intelligente | In Progress | BKL-015, BKL-035, meteo/SQM | Ranking target per setup e condizioni | F1 ACCEPTED / POST-MERGE VERIFIED via PR #183, merge `b14d9cdd991b5eef74dd9b972958e74c5903a32d`; F2 current handoff only, implementation not authorized; `docs/architecture/assessments/BKL-031-F2-Machine-Readable-Context-Contract-Handoff-2026-09-14.md` |
+| BKL-031 | P2 | Observation Planner intelligente | In Progress | BKL-015, BKL-035, meteo/SQM | Ranking target per setup e condizioni | F1 ACCEPTED / POST-MERGE VERIFIED via PR #183, merge `b14d9cdd991b5eef74dd9b972958e74c5903a32d`; F2 owner-authorized and implemented as a review candidate: machine-readable context/source contract, bounded fixture, fail-closed validator and N01-N20 tests; ARB, Release Quality, merge, providers, ranking and runtime not authorized; `docs/architecture/scientific-assets/BKL-031-F2-Observation-Planner-Machine-Readable-Context-and-Bounded-Fixture.md` |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
@@ -128,6 +128,10 @@ BKL-031 è promosso esclusivamente a F1 source discovery e semantic boundary. La
 F1 è ACCEPTED / POST-MERGE VERIFIED tramite PR #183, technical head `55b502fb4e47ef92975767ceb444078cae36caf8`, publication head `7a4d020b59186c4b05b9741bb12689050e2b7e8d` e merge `b14d9cdd991b5eef74dd9b972958e74c5903a32d`. Le review ARB/RQ sono AI-assistite, owner-authorized e non equivalenti ad approvazioni umane indipendenti. I sei workflow post-merge sono verdi.
 
 F2 è promosso esclusivamente come handoff per un futuro machine-readable context/source contract e bounded fixtures. Schema, fixture, validator, provider, ranking e runtime restano non autorizzati. Le condizioni F1, inclusi S07–S11 unavailable/unknown e i 20 casi negativi, sono trasferite.
+
+### BKL-031 F2 implementation candidate — 14/09/2026
+
+Il repository owner ha autorizzato il solo incremento F2. Il candidate package materializza schema, fixture bounded, validator fail-closed, test N01–N20 e quality gate senza provider, pesi, score, ranking, readiness, scheduling, comandi, carichi EAGLE o Safety Authority. ARB, Release Quality e merge restano separatamente non autorizzati.
 
 ## 4. Sequenza di esecuzione raccomandata
 

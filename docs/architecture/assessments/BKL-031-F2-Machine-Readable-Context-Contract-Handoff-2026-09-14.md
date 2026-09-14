@@ -3,19 +3,19 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F2-HANDOFF-001 |
-| Stato | **CURRENT HANDOFF — IMPLEMENTATION NOT AUTHORIZED** |
+| Stato | **OWNER-AUTHORIZED — IMPLEMENTATION CANDIDATE IN PROGRESS** |
 | Data | 14/09/2026 |
 | Capability | BKL-031 — Observation Planner intelligente |
 | Predecessore accettato | BKL-031 F1 |
 | Acceptance record | `docs/project/BKL-031-F1-ACCEPTANCE-2026-09-14.md` |
 | Accepted merge | `b14d9cdd991b5eef74dd9b972958e74c5903a32d` |
-| Repository baseline per l'handoff | `e674cdb601fd15582a2d5ce0c39dc8f009e5b9cc` |
+| Repository baseline per l'implementazione | `f6c4b253a56406c930f009af0658b46a12bc088a` |
 | Specialist role raccomandato | Solution Architect |
 | Runtime impact autorizzato | None |
 
 ## 1. Obiettivo del prossimo incremento
 
-Quando separatamente autorizzato, F2 dovrà definire un contratto machine-readable, bounded e fail-closed per rappresentare sorgenti e contesto del futuro Observation Planner. Il contratto dovrà codificare, senza calcolo di ranking:
+Il repository owner ha autorizzato l'implementazione del solo F2. F2 definisce un contratto machine-readable, bounded e fail-closed per rappresentare sorgenti e contesto del futuro Observation Planner. Il contratto codifica, senza calcolo di ranking:
 
 - `TargetCandidate`;
 - `PlanningContext`;
@@ -23,7 +23,7 @@ Quando separatamente autorizzato, F2 dovrà definire un contratto machine-readab
 - `RankingFactor`;
 - `RankingExplanation`.
 
-Questo documento promuove F2 nella sequenza governata ma non crea il contratto, le fixture o il validator.
+L'autorizzazione copre schema, fixture, validator, test, documentazione e quality gate su PR draft. Non copre ARB, Release Quality, merge, provider, ranking, consumer o runtime.
 
 ## 2. Input obbligatori
 
@@ -47,7 +47,7 @@ Questo documento promuove F2 nella sequenza governata ma non crea il contratto, 
 7. Nessun carico pesante o chiamata esterna viene collocato su EAGLE.
 8. Nessun output può diventare comando, scheduler, go/no-go o Safety Authority.
 
-## 4. Output futuri attesi, non autorizzati da questo handoff
+## 4. Output autorizzati dell'incremento
 
 - schema versionato per sorgenti e contesto;
 - fixture sintetiche bounded;
@@ -71,4 +71,4 @@ F2 potrà essere proposto per review solo quando:
 
 ## 6. Stop di governance
 
-La presente autorizzazione termina con pubblicazione di questo handoff e riconciliazione documentale. Prima di produrre schema, fixture, validator, codice, provider selection o consumer F2 è necessaria una nuova autorizzazione esplicita del repository owner.
+La presente autorizzazione termina con la pubblicazione della PR draft F2 e la verifica dei quality gate applicabili. ARB, Release Quality, merge, provider selection, ranking, consumer, F3 e qualsiasi runtime richiedono una nuova autorizzazione esplicita del repository owner.

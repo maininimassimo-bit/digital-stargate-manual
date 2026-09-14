@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0",
+  "component": "DSG.ObservationPlannerContextContract",
+  "authority": "projection",
+  "action_authority": "NONE",
+  "safety_authority": "NONE",
+  "execution_zone": "PORTAL_CI",
+  "baseline_commit": "f6c4b253a56406c930f009af0658b46a12bc088a",
+  "bounds": {
+    "max_sources": 11,
+    "max_candidates": 2,
+    "max_contexts": 1,
+    "max_dimensions_per_candidate": 7,
+    "max_factor_definitions": 7,
+    "max_explanations": 2
+  },
+  "sources": [
+    {"source_id":"BKL031-S01","availability_state":"AVAILABLE_BOUNDED","authority":"BKL035_PROJECTION_CHAIN","exact_locator":"docs/data/target-knowledge-read-model.json#targets[].target_key","temporal_scope":"STATIC","public_projection_eligible":true,"reason_codes":[]},
+    {"source_id":"BKL031-S02","availability_state":"AVAILABLE_HISTORICAL","authority":"AP014_METADATA_PROJECTION","exact_locator":"data/analytics/metadata/session-scientific-metadata.csv#session_id","temporal_scope":"HISTORICAL","public_projection_eligible":false,"reason_codes":["RAW_EVIDENCE_LOCATORS_REQUIRE_REDACTION"]},
+    {"source_id":"BKL031-S03","availability_state":"AVAILABLE_HISTORICAL","authority":"AP014_SCIENTIFIC_PROJECTION","exact_locator":"docs/data/scientific-session-catalog.json#sessions[].sessionId","temporal_scope":"HISTORICAL","public_projection_eligible":true,"reason_codes":[]},
+    {"source_id":"BKL031-S04","availability_state":"AVAILABLE_HISTORICAL","authority":"GOVERNED_SESSION_PROJECTION","exact_locator":"data/sessions/<YYYY>/<MM>/<session_id>/normalized/session-metrics.json","temporal_scope":"HISTORICAL","public_projection_eligible":false,"reason_codes":["RESOLVE_ONLY_THROUGH_BKL031_S03"]},
+    {"source_id":"BKL031-S05","availability_state":"AVAILABLE_DERIVED","authority":"ANALYTICS_PROJECTION","exact_locator":"data/analytics/history/sessions.csv;data/analytics/history/configuration-summary.csv","temporal_scope":"HISTORICAL","public_projection_eligible":true,"reason_codes":["DESCRIPTIVE_ONLY"]},
+    {"source_id":"BKL031-S06","availability_state":"AVAILABLE","authority":"BKL029_SEMANTIC_AUTHORITY","exact_locator":"docs/architecture/telemetry/BKL-029-SQM-Source-Discovery-and-Architecture-Contract.md","temporal_scope":"STATIC","public_projection_eligible":true,"reason_codes":["SQM_IS_NOT_SAFETY_EVIDENCE"]},
+    {"source_id":"BKL031-S07","availability_state":"UNAVAILABLE_CURRENT_BASELINE","authority":"OBSERVATORY_STATUS_PROJECTION","exact_locator":"docs/data/realtime/observatory-status.json","temporal_scope":"CURRENT","public_projection_eligible":false,"reason_codes":["PLACEHOLDER_UNKNOWN","NO_CURRENT_EVIDENCE"]},
+    {"source_id":"BKL031-S08","availability_state":"UNAVAILABLE","authority":"NOT_ESTABLISHED","exact_locator":null,"temporal_scope":"NOT_ESTABLISHED","public_projection_eligible":false,"reason_codes":["GOVERNED_SITE_RECORD_NOT_MATERIALIZED"]},
+    {"source_id":"BKL031-S09","availability_state":"UNAVAILABLE_CURRENT","authority":"NOT_ESTABLISHED","exact_locator":null,"temporal_scope":"NOT_ESTABLISHED","public_projection_eligible":false,"reason_codes":["ACTIVE_SETUP_ASSIGNMENT_NOT_MATERIALIZED"]},
+    {"source_id":"BKL031-S10","availability_state":"UNAVAILABLE","authority":"NOT_ESTABLISHED","exact_locator":null,"temporal_scope":"NOT_ESTABLISHED","public_projection_eligible":false,"reason_codes":["EPHEMERIS_LUNAR_SOURCE_NOT_GOVERNED"]},
+    {"source_id":"BKL031-S11","availability_state":"UNAVAILABLE","authority":"NOT_ESTABLISHED","exact_locator":null,"temporal_scope":"NOT_ESTABLISHED","public_projection_eligible":false,"reason_codes":["FORECAST_SOURCE_NOT_GOVERNED"]}
+  ],
+  "target_candidates": [
+    {
+      "candidate_id": "candidate:dsg-target:m-27",
+      "target_key": "dsg-target:m-27",
+      "target_id": "TGT-MESSIER-M27",
+      "canonical_name": "M 27",
+      "aliases": [],
+      "identity_state": "validated",
+      "source_refs": ["BKL031-S01"],
+      "citation_refs": ["CIT-OP-M27-IDENTITY@1.0"],
+      "provenance_refs": ["PRV-OP-M27-CANDIDATE@1.0"],
+      "conflict_refs": [],
+      "evidence_dimension_refs": [
+        "DIM-M27-TARGET-IDENTITY", "DIM-M27-SETUP", "DIM-M27-CELESTIAL",
+        "DIM-M27-LUNAR", "DIM-M27-FORECAST", "DIM-M27-WEATHER-SQM",
+        "DIM-M27-SCIENTIFIC-HISTORY"
+      ]
+    }
+  ],
+  "planning_contexts": [
+    {
+      "context_id": "CTX-BKL031-F2-BOUNDED-001",
+      "generated_at_utc": "2026-09-14T00:00:00Z",
+      "evaluation_instant_utc": "2026-09-14T00:00:00Z",
+      "requested_interval": {
+        "start_utc": "2026-09-15T18:00:00Z",
+        "end_utc": "2026-09-16T04:00:00Z"
+      },
+      "display_timezone_ref": null,
+      "site_ref": null,
+      "active_setup_ref": null,
+      "candidate_refs": ["candidate:dsg-target:m-27"],
+      "evidence_snapshot_refs": [
+        "DIM-M27-TARGET-IDENTITY", "DIM-M27-SETUP", "DIM-M27-CELESTIAL",
+        "DIM-M27-LUNAR", "DIM-M27-FORECAST", "DIM-M27-WEATHER-SQM",
+        "DIM-M27-SCIENTIFIC-HISTORY"
+      ],
+      "unavailable_dimension_refs": [
+        "DIM-M27-SETUP", "DIM-M27-CELESTIAL", "DIM-M27-LUNAR",
+        "DIM-M27-FORECAST"
+      ],
+      "stale_dimension_refs": [],
+      "conflicted_dimension_refs": []
+    }
+  ],
+  "evidence_dimensions": [
+    {
+      "dimension_id":"DIM-M27-TARGET-IDENTITY","candidate_ref":"candidate:dsg-target:m-27","dimension_type":"TARGET_IDENTITY","availability_state":"AVAILABLE","semantic_type":"GOVERNED_TARGET_IDENTITY","unit":null,"source_refs":["BKL031-S01"],"citation_refs":["CIT-OP-M27-IDENTITY@1.0"],"provenance_refs":["PRV-OP-M27-IDENTITY-DIM@1.0"],"evidence_kind":"DECLARED","reason_codes":[],
+      "facts":[{"fact_id":"FACT-M27-TARGET-KEY","semantic_type":"TARGET_KEY","value":"dsg-target:m-27","unit":null,"temporal_scope":"STATIC","observed_at_utc":null,"issue_at_utc":null,"valid_interval":null,"spatial_scope_ref":null,"method_ref":null,"source_ref":"BKL031-S01","citation_refs":["CIT-OP-M27-IDENTITY@1.0"],"provenance_refs":["PRV-OP-M27-IDENTITY-DIM@1.0"],"evidence_kind":"DECLARED"}]
+    },
+    {
+      "dimension_id":"DIM-M27-SETUP","candidate_ref":"candidate:dsg-target:m-27","dimension_type":"SETUP_COMPATIBILITY","availability_state":"UNAVAILABLE","semantic_type":"CURRENT_SETUP_COMPATIBILITY","unit":null,"source_refs":["BKL031-S09"],"citation_refs":[],"provenance_refs":[],"evidence_kind":null,"reason_codes":["ACTIVE_SETUP_ASSIGNMENT_NOT_MATERIALIZED"],"facts":[]
+    },
+    {
+      "dimension_id":"DIM-M27-CELESTIAL","candidate_ref":"candidate:dsg-target:m-27","dimension_type":"CELESTIAL_GEOMETRY","availability_state":"UNAVAILABLE","semantic_type":"TOPOCENTRIC_GEOMETRY","unit":null,"source_refs":["BKL031-S08","BKL031-S10"],"citation_refs":[],"provenance_refs":[],"evidence_kind":null,"reason_codes":["GOVERNED_SITE_RECORD_NOT_MATERIALIZED","EPHEMERIS_SOURCE_NOT_GOVERNED"],"facts":[]
+    },
+    {
+      "dimension_id":"DIM-M27-LUNAR","candidate_ref":"candidate:dsg-target:m-27","dimension_type":"LUNAR_CONTEXT","availability_state":"UNAVAILABLE","semantic_type":"TOPOCENTRIC_LUNAR_CONTEXT","unit":null,"source_refs":["BKL031-S08","BKL031-S10"],"citation_refs":[],"provenance_refs":[],"evidence_kind":null,"reason_codes":["GOVERNED_SITE_RECORD_NOT_MATERIALIZED","LUNAR_SOURCE_NOT_GOVERNED"],"facts":[]
+    },
+    {
+      "dimension_id":"DIM-M27-FORECAST","candidate_ref":"candidate:dsg-target:m-27","dimension_type":"FORECAST","availability_state":"UNAVAILABLE","semantic_type":"WEATHER_FORECAST","unit":null,"source_refs":["BKL031-S11"],"citation_refs":[],"provenance_refs":[],"evidence_kind":null,"reason_codes":["FORECAST_SOURCE_NOT_GOVERNED"],"facts":[]
+    },
+    {
+      "dimension_id":"DIM-M27-WEATHER-SQM","candidate_ref":"candidate:dsg-target:m-27","dimension_type":"OBSERVED_WEATHER_SQM","availability_state":"PARTIAL","semantic_type":"HISTORICAL_SQM_SESSION_EVIDENCE","unit":"MAG_PER_ARCSEC2","source_refs":["BKL031-S05","BKL031-S06"],"citation_refs":["CIT-OP-M27-SQM-20260913@1.0"],"provenance_refs":["PRV-OP-M27-SQM-DIM@1.0"],"evidence_kind":"OBSERVED","reason_codes":["HISTORICAL_ONLY","NOT_CURRENT_OR_FORECAST"],
+      "facts":[{"fact_id":"FACT-M27-SQM-MEDIAN-20260913","semantic_type":"SQM_SESSION_MEDIAN","value":20.84,"unit":"MAG_PER_ARCSEC2","temporal_scope":"HISTORICAL","observed_at_utc":"2026-09-13T17:00:27Z","issue_at_utc":null,"valid_interval":{"start_utc":"2026-09-13T17:00:27Z","end_utc":"2026-09-14T03:59:58Z"},"spatial_scope_ref":null,"method_ref":"BKL029-SQM-SESSION-SEMANTICS","source_ref":"BKL031-S05","citation_refs":["CIT-OP-M27-SQM-20260913@1.0"],"provenance_refs":["PRV-OP-M27-SQM-DIM@1.0"],"evidence_kind":"OBSERVED"}]
+    },
+    {
+      "dimension_id":"DIM-M27-SCIENTIFIC-HISTORY","candidate_ref":"candidate:dsg-target:m-27","dimension_type":"SCIENTIFIC_HISTORY","availability_state":"AVAILABLE","semantic_type":"HISTORICAL_SESSION_REFERENCE","unit":null,"source_refs":["BKL031-S03"],"citation_refs":["CIT-OP-M27-SESSION-20260814@1.0","CIT-OP-M27-SESSION-20260815@1.0"],"provenance_refs":["PRV-OP-M27-HISTORY-DIM@1.0"],"evidence_kind":"OBSERVED","reason_codes":["HISTORICAL_ONLY"],
+      "facts":[
+        {"fact_id":"FACT-M27-SESSION-20260814","semantic_type":"SCIENTIFIC_SESSION_REF","value":"session:2026-08-14_2026-08-15","unit":null,"temporal_scope":"HISTORICAL","observed_at_utc":null,"issue_at_utc":null,"valid_interval":null,"spatial_scope_ref":null,"method_ref":null,"source_ref":"BKL031-S03","citation_refs":["CIT-OP-M27-SESSION-20260814@1.0"],"provenance_refs":["PRV-OP-M27-HISTORY-DIM@1.0"],"evidence_kind":"OBSERVED"},
+        {"fact_id":"FACT-M27-SESSION-20260815","semantic_type":"SCIENTIFIC_SESSION_REF","value":"session:2026-08-15_2026-08-16","unit":null,"temporal_scope":"HISTORICAL","observed_at_utc":null,"issue_at_utc":null,"valid_interval":null,"spatial_scope_ref":null,"method_ref":null,"source_ref":"BKL031-S03","citation_refs":["CIT-OP-M27-SESSION-20260815@1.0"],"provenance_refs":["PRV-OP-M27-HISTORY-DIM@1.0"],"evidence_kind":"OBSERVED"}
+      ]
+    }
+  ],
+  "ranking_factors": [
+    {"factor_id":"FACTOR-TARGET-IDENTITY","name":"Target identity validity","input_dimension_type":"TARGET_IDENTITY","expected_semantic_type":"GOVERNED_TARGET_IDENTITY","expected_unit":null,"interpretation_direction":"NONE","missing_behavior":"EXCLUDE_AND_EXPLAIN","conflict_behavior":"EXCLUDE_AND_EXPLAIN"},
+    {"factor_id":"FACTOR-SETUP-COMPATIBILITY","name":"Setup compatibility evidence","input_dimension_type":"SETUP_COMPATIBILITY","expected_semantic_type":"CURRENT_SETUP_COMPATIBILITY","expected_unit":null,"interpretation_direction":"CONTEXTUAL","missing_behavior":"EXCLUDE_AND_EXPLAIN","conflict_behavior":"EXCLUDE_AND_EXPLAIN"},
+    {"factor_id":"FACTOR-CELESTIAL-GEOMETRY","name":"Celestial geometry evidence","input_dimension_type":"CELESTIAL_GEOMETRY","expected_semantic_type":"TOPOCENTRIC_GEOMETRY","expected_unit":null,"interpretation_direction":"CONTEXTUAL","missing_behavior":"EXCLUDE_AND_EXPLAIN","conflict_behavior":"EXCLUDE_AND_EXPLAIN"},
+    {"factor_id":"FACTOR-LUNAR-CONTEXT","name":"Lunar context evidence","input_dimension_type":"LUNAR_CONTEXT","expected_semantic_type":"TOPOCENTRIC_LUNAR_CONTEXT","expected_unit":null,"interpretation_direction":"CONTEXTUAL","missing_behavior":"EXCLUDE_AND_EXPLAIN","conflict_behavior":"EXCLUDE_AND_EXPLAIN"},
+    {"factor_id":"FACTOR-FORECAST","name":"Forecast evidence","input_dimension_type":"FORECAST","expected_semantic_type":"WEATHER_FORECAST","expected_unit":null,"interpretation_direction":"CONTEXTUAL","missing_behavior":"EXCLUDE_AND_EXPLAIN","conflict_behavior":"EXCLUDE_AND_EXPLAIN"},
+    {"factor_id":"FACTOR-OBSERVED-WEATHER-SQM","name":"Historical observed weather and SQM evidence","input_dimension_type":"OBSERVED_WEATHER_SQM","expected_semantic_type":"HISTORICAL_SQM_SESSION_EVIDENCE","expected_unit":"MAG_PER_ARCSEC2","interpretation_direction":"CONTEXTUAL","missing_behavior":"EXCLUDE_AND_EXPLAIN","conflict_behavior":"EXCLUDE_AND_EXPLAIN"},
+    {"factor_id":"FACTOR-SCIENTIFIC-HISTORY","name":"Scientific history evidence","input_dimension_type":"SCIENTIFIC_HISTORY","expected_semantic_type":"HISTORICAL_SESSION_REFERENCE","expected_unit":null,"interpretation_direction":"CONTEXTUAL","missing_behavior":"EXCLUDE_AND_EXPLAIN","conflict_behavior":"EXCLUDE_AND_EXPLAIN"}
+  ],
+  "ranking_explanations": [
+    {
+      "explanation_id":"EXPL-M27-NOT-EVALUATED","candidate_ref":"candidate:dsg-target:m-27","context_ref":"CTX-BKL031-F2-BOUNDED-001","method_id":"BKL031-F2-NO-RANKING-1","evaluation_state":"NOT_EVALUATED",
+      "factor_refs":["FACTOR-TARGET-IDENTITY","FACTOR-SETUP-COMPATIBILITY","FACTOR-CELESTIAL-GEOMETRY","FACTOR-LUNAR-CONTEXT","FACTOR-FORECAST","FACTOR-OBSERVED-WEATHER-SQM","FACTOR-SCIENTIFIC-HISTORY"],
+      "evidence_refs":["DIM-M27-TARGET-IDENTITY","DIM-M27-SETUP","DIM-M27-CELESTIAL","DIM-M27-LUNAR","DIM-M27-FORECAST","DIM-M27-WEATHER-SQM","DIM-M27-SCIENTIFIC-HISTORY"],
+      "citation_refs":["CIT-OP-M27-IDENTITY@1.0","CIT-OP-M27-SQM-20260913@1.0","CIT-OP-M27-SESSION-20260814@1.0","CIT-OP-M27-SESSION-20260815@1.0"],
+      "provenance_refs":["PRV-OP-M27-EXPLANATION@1.0"],
+      "excluded_dimension_refs":["DIM-M27-SETUP","DIM-M27-CELESTIAL","DIM-M27-LUNAR","DIM-M27-FORECAST"],
+      "stale_dimension_refs":[],"conflicted_dimension_refs":[],
+      "missing_reason_codes":["ACTIVE_SETUP_ASSIGNMENT_NOT_MATERIALIZED","GOVERNED_SITE_RECORD_NOT_MATERIALIZED","EPHEMERIS_SOURCE_NOT_GOVERNED","LUNAR_SOURCE_NOT_GOVERNED","FORECAST_SOURCE_NOT_GOVERNED","HISTORICAL_ONLY","NOT_CURRENT_OR_FORECAST"],
+      "message":"No advisory evaluation was produced because current setup, governed site, ephemeris, lunar and forecast evidence are unavailable."
+    }
+  ],
+  "citations": [
+    {"id":"CIT-OP-M27-IDENTITY","version":"1.0","source_ref":"BKL031-S01","locator":{"path":"docs/data/target-knowledge-read-model.json","record_key":"targets[].target_key","record_value":"dsg-target:m-27"},"public_safe":true},
+    {"id":"CIT-OP-M27-SQM-20260913","version":"1.0","source_ref":"BKL031-S05","locator":{"path":"data/analytics/history/sessions.csv","record_key":"session_id","record_value":"2026-09-13_2026-09-14"},"public_safe":true},
+    {"id":"CIT-OP-M27-SESSION-20260814","version":"1.0","source_ref":"BKL031-S03","locator":{"path":"docs/data/scientific-session-catalog.json","record_key":"sessions[].sessionId","record_value":"2026-08-14_2026-08-15"},"public_safe":true},
+    {"id":"CIT-OP-M27-SESSION-20260815","version":"1.0","source_ref":"BKL031-S03","locator":{"path":"docs/data/scientific-session-catalog.json","record_key":"sessions[].sessionId","record_value":"2026-08-15_2026-08-16"},"public_safe":true}
+  ],
+  "provenance_records": [
+    {"id":"PRV-OP-M27-CANDIDATE","version":"1.0","method_id":"BKL031-F2-CANDIDATE-BINDING-1","input_refs":["BKL031-S01","CIT-OP-M27-IDENTITY@1.0"],"output_ref":"candidate:dsg-target:m-27","citation_refs":["CIT-OP-M27-IDENTITY@1.0"],"evidence_kind":"DECLARED"},
+    {"id":"PRV-OP-M27-IDENTITY-DIM","version":"1.0","method_id":"BKL031-F2-EVIDENCE-BINDING-1","input_refs":["candidate:dsg-target:m-27","BKL031-S01"],"output_ref":"DIM-M27-TARGET-IDENTITY","citation_refs":["CIT-OP-M27-IDENTITY@1.0"],"evidence_kind":"DECLARED"},
+    {"id":"PRV-OP-M27-SQM-DIM","version":"1.0","method_id":"BKL031-F2-EVIDENCE-BINDING-1","input_refs":["session:2026-09-13_2026-09-14","BKL031-S05","BKL031-S06"],"output_ref":"DIM-M27-WEATHER-SQM","citation_refs":["CIT-OP-M27-SQM-20260913@1.0"],"evidence_kind":"OBSERVED"},
+    {"id":"PRV-OP-M27-HISTORY-DIM","version":"1.0","method_id":"BKL031-F2-EVIDENCE-BINDING-1","input_refs":["session:2026-08-14_2026-08-15","session:2026-08-15_2026-08-16","BKL031-S03"],"output_ref":"DIM-M27-SCIENTIFIC-HISTORY","citation_refs":["CIT-OP-M27-SESSION-20260814@1.0","CIT-OP-M27-SESSION-20260815@1.0"],"evidence_kind":"OBSERVED"},
+    {"id":"PRV-OP-M27-EXPLANATION","version":"1.0","method_id":"BKL031-F2-NO-RANKING-1","input_refs":["CTX-BKL031-F2-BOUNDED-001","candidate:dsg-target:m-27","DIM-M27-TARGET-IDENTITY","DIM-M27-SETUP","DIM-M27-CELESTIAL","DIM-M27-LUNAR","DIM-M27-FORECAST","DIM-M27-WEATHER-SQM","DIM-M27-SCIENTIFIC-HISTORY"],"output_ref":"EXPL-M27-NOT-EVALUATED","citation_refs":["CIT-OP-M27-IDENTITY@1.0","CIT-OP-M27-SQM-20260913@1.0","CIT-OP-M27-SESSION-20260814@1.0","CIT-OP-M27-SESSION-20260815@1.0"],"evidence_kind":"SUGGESTED"}
+  ]
+}
