@@ -45,7 +45,7 @@ def test_phd2_profile_aware_rms(root):
         'Equipment Profile = C8_QHY695A',
         'Pixel scale = 0.61 arc-sec/px, Binning = 1, Focal length = 1260 mm',
         PHD2_HEADER,
-        '1,3.0,"Mount",0,0,50,50,50,50,0,,0,,,,100,20,1',
+        '1,3.0,"DROP",,,,,,,,,,,,,0,0.00,4,"Star lost - low HFD"',
         'Guiding Ends at 2026-09-13 21:04:48',
         'INFO: SETTLING STATE CHANGE, Settling failed',
         'Guiding Begins at 2026-09-13 21:04:58',
@@ -61,7 +61,9 @@ def test_phd2_profile_aware_rms(root):
     assert parsed['guide_samples_total']==3
     assert parsed['guide_samples_valid']==2
     assert parsed['guide_samples_saturated']==1
+    assert parsed['guide_samples_rejected']==2
     assert parsed['guide_samples_settling_excluded']==1
+    assert parsed['lost_star_events']==2
     assert parsed['settling_failures']==1
     assert parsed['equipment_profiles']==['C8_QHY695A']
     assert_close(parsed['rms_ra_arcsec'],0.482)
