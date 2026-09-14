@@ -33,6 +33,8 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [BKL-031 F1 Validation Plan](../architecture/validation/BKL-031-F1-Source-and-Semantic-Validation-Plan.md) | Gate e casi negativi per la review F1 |
 | [BKL-031 F1 AI-Assisted ARB](../architecture/reviews/ARB-BKL-031-F1-AI-Assisted-Architecture-Review-2026-09-14.md) | Approved with Conditions; non equivalente a review umana indipendente |
 | [BKL-031 F1 AI-Assisted Release Quality](../architecture/reviews/RQ-BKL-031-F1-AI-Assisted-Release-Quality-Review-2026-09-14.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
+| [PR #184 PHD2 RMS AI-Assisted ARB](../architecture/reviews/ARB-PR184-PHD2-RMS-AI-Assisted-Architecture-Review-2026-09-14.md) | Approved with Conditions; hotfix RMS profile-aware; non equivalente a review umana indipendente |
+| [PR #184 PHD2 RMS AI-Assisted Release Quality](../architecture/reviews/RQ-PR184-PHD2-RMS-AI-Assisted-Release-Quality-Review-2026-09-14.md) | Conditionally Ready for Merge; rielaborazione post-merge richiesta |
 
 ## Registri e standard canonici
 

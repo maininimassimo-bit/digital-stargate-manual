@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse,csv,json,math,re
 from datetime import datetime
 from pathlib import Path
-SESSION_RE=re.compile(r'^\d{4}-\d{2}-\d{2}_\d{4}-\d{2}-\d{2}$'); PHD_BEGIN=re.compile(r'^Guiding Begins at '); PHD_DATA=re.compile(r'^\d+,\s*[\d.]+,"[^"]+",')
+SESSION_RE=re.compile(r'^\d{4}-\d{2}-\d{2}_\d{4}-\d{2}-\d{2}$'); PHD_BEGIN=re.compile(r'^Guiding Begins at ')
 TARGET_COORD_RE=re.compile(r'Target:\s*(?P<target>.+?)\s+RA:\s*(?P<rah>\d{1,2}):(?P<ram>\d{1,2}):(?P<ras>\d+(?:\.\d+)?)\s*;\s*Dec:\s*(?P<sign>[+-]?)(?P<decd>\d{1,2})[^\d]+(?P<decm>\d{1,2})[^\d]+(?P<decs>\d+(?:\.\d+)?)',re.I)
 LIGHT_BIN_RE=re.compile(r'LIGHT_(?P<bin>\d+)x(?P=bin)_',re.I); QHY_CAMERA_RE=re.compile(r'(?:QHYCCD:\s*Closing camera\s+|Description:\s*)(?P<camera>(?:QHY)?695A(?:-M)?[^,|\\/]*)',re.I)
 def files(folder):
@@ -57,22 +57,82 @@ def parse_nina(folder):
             if 'dither' in low and any(x in low for x in ('start','request','execute','dithering')): m['dither_requests']+=1
     m['light_interrupted_unmatched']=max(0,m['light_started']-m['light_completed']-m['light_failed_explicit']); m['autofocus_unmatched']=max(0,m['autofocus_started']-m['autofocus_completed']-m['autofocus_failed_explicit']); m['technical_exposures_estimated']=max(0,m['camera_exposures_total']-m['light_started']); m['integration_seconds']=sum(durations[:m['light_completed']]) if durations else (m['light_completed']*600.0 if m['light_completed']>0 else 0.0); m['scientific']=scientific; return m
 def parse_phd2(folder):
-    ra=[]; dec=[]; segments=lost=pulse=0; settling=False
+    ra=[]; dec=[]; segments=lost=pulse=settling_failures=0
+    samples_total=saturated=rejected=settling_excluded=unscaled=0
+    profiles=set()
+    scale_re=re.compile(r'Pixel scale\s*=\s*(?P<scale>\d+(?:\.\d+)?)\s*arc-sec/px',re.I)
     for _,text in files(folder):
+        settling=False; active_segment=False; header=None; pixel_scale=None
         for line in text.splitlines():
-            if PHD_BEGIN.match(line): segments+=1; settling=False; continue
             low=line.lower()
-            if 'settling started' in low: settling=True; continue
-            if 'settling complete' in low: settling=False; continue
-            if 'lost star' in low: lost+=1
+            if low.startswith('equipment profile ='):
+                profile=line.split('=',1)[1].strip()
+                if profile: profiles.add(profile)
+            scale_match=scale_re.search(line)
+            if scale_match: pixel_scale=float(scale_match.group('scale'))
+            if PHD_BEGIN.match(line):
+                segments+=1; active_segment=True; header=None; pixel_scale=None
+                continue
+            if line.lower().startswith('frame,time,'):
+                try: header={name.strip().lower():index for index,name in enumerate(next(csv.reader([line])))}
+                except (csv.Error,StopIteration): header=None
+                continue
+            if line.startswith('Guiding Ends at '):
+                active_segment=False; header=None
+                continue
+            if 'settling started' in low:
+                settling=True
+                continue
+            if 'settling complete' in low or 'settling failed' in low:
+                if 'settling failed' in low: settling_failures+=1
+                settling=False
+                continue
             if 'pulseguide failed' in low or 'pulse guide failed' in low: pulse+=1
-            if settling or not PHD_DATA.match(line): continue
+            if not active_segment or header is None or not re.match(r'^\d+,',line): continue
             try:
-                row=next(csv.reader([line])); err=int(row[17]) if len(row)>17 and row[17] else 0
-                if err==0: ra.append(float(row[7])); dec.append(float(row[8]))
-            except Exception: pass
+                row=next(csv.reader([line]))
+                def field(name):
+                    index=header.get(name.lower())
+                    return row[index].strip() if index is not None and index<len(row) else ''
+                error_text=field('ErrorCode')
+                error_code=int(error_text) if error_text else 0
+                samples_total+=1
+                mount=field('mount').upper()
+                invalid_sample=mount=='DROP' or error_code not in {0,1}
+                if invalid_sample:
+                    rejected+=1; lost+=1
+                if settling:
+                    settling_excluded+=1
+                    continue
+                if invalid_sample: continue
+                if pixel_scale is None:
+                    unscaled+=1
+                    continue
+                ra_raw=float(field('RARawDistance'))
+                dec_raw=float(field('DECRawDistance'))
+                if error_code==1: saturated+=1
+                ra.append(ra_raw*pixel_scale); dec.append(dec_raw*pixel_scale)
+            except (ValueError,csv.Error,StopIteration): continue
     def rms(v): return math.sqrt(sum(x*x for x in v)/len(v)) if v else None
-    rr,dd=rms(ra),rms(dec); tt=math.sqrt(rr*rr+dd*dd) if rr is not None and dd is not None else None; return {'guide_segments':segments,'guide_samples_valid':min(len(ra),len(dec)),'rms_ra_arcsec':round(rr,3) if rr is not None else None,'rms_dec_arcsec':round(dd,3) if dd is not None else None,'rms_total_arcsec':round(tt,3) if tt is not None else None,'lost_star_events':lost,'pulse_guide_failures':pulse}
+    rr,dd=rms(ra),rms(dec)
+    tt=math.sqrt(rr*rr+dd*dd) if rr is not None and dd is not None else None
+    return {
+        'guide_segments':segments,
+        'guide_samples_total':samples_total,
+        'guide_samples_valid':min(len(ra),len(dec)),
+        'guide_samples_saturated':saturated,
+        'guide_samples_rejected':rejected,
+        'guide_samples_settling_excluded':settling_excluded,
+        'guide_samples_unscaled':unscaled,
+        'settling_failures':settling_failures,
+        'equipment_profiles':sorted(profiles),
+        'rms_method':'PHD2 RARawDistance/DECRawDistance multiplied by the active segment pixel scale; ErrorCode 0 and STAR_SATURATED (1) included; settling excluded.',
+        'rms_ra_arcsec':round(rr,3) if rr is not None else None,
+        'rms_dec_arcsec':round(dd,3) if dd is not None else None,
+        'rms_total_arcsec':round(tt,3) if tt is not None else None,
+        'lost_star_events':lost,
+        'pulse_guide_failures':pulse
+    }
 def to_bool(v):
     v=v.strip().lower(); return True if v in {'true','1','yes','safe','ok'} else False if v in {'false','0','no','unsafe','not safe'} else None
 def parse_weather(folder):
