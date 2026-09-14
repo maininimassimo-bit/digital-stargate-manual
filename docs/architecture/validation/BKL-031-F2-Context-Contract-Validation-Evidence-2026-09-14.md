@@ -3,13 +3,15 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F2-VAL-001 |
-| Status | **M-R1 REMEDIATION CANDIDATE — RE-REVIEW NOT AUTHORIZED** |
+| Status | **ACCEPTED / POST-MERGE VERIFIED** |
 | Date | 2026-09-14 |
 | Baseline | `f6c4b253a56406c930f009af0658b46a12bc088a` |
 | Pre-remediation review-publication head | `86021de468b91f14c38db41bac47551e08b04e53` |
 | First remediation exact head | `d21d57905b2669ccd572563449a523c1795bdcc2` |
 | First remediation review-publication head | `9eb0af3b14c257163f2094ae334a5c1514b3a2de` |
-| M-R1 remediation exact head | Established by the PR after atomic publication |
+| M-R1 remediation exact head | `8e46ae3eccdaca5763aee7103063e020f97e2946` |
+| Final review-publication head | `09b6e2272f40688c7ead0eba964b8eb6f64a0920` |
+| Merge commit | `7f861f7399079858c9744e69b6c773664b6b5b54` |
 | Contract | `schemas/observation-planner-context-f2.schema.json` |
 | Fixture | `docs/data/observation-planner-context-f2-fixture.json` |
 | Normative validator | `.github/scripts/verify-observation-planner-context-f2.mjs` |
@@ -62,7 +64,7 @@ The suite contains one positive bounded-fixture test, the twenty negative cases 
 | M-04 | S02 coordinate authority, complete RA/Dec/epoch triplet, ranges, governed-value reconciliation and conflict-state enforcement | PASS |
 | M-R1 | S04 removed from coordinate fact sources; direct S04 locator rejected; current S04 non-attestation regression | PASS |
 
-The review documents remain immutable evidence of their reviewed heads. The AI-assisted re-review on `d21d57905b2669ccd572563449a523c1795bdcc2` found M-R1 and remained `REWORK REQUIRED`; this correction does not change that decision and does not constitute another re-review.
+The review documents remain immutable evidence of their reviewed heads. The final owner-authorized AI-assisted re-review on `8e46ae3eccdaca5763aee7103063e020f97e2946` closed M-01–M-04 and M-R1 and returned `APPROVED — 99/100`; Release Quality returned `CONDITIONALLY READY`. These reviews are not equivalent to independent human approvals.
 
 ## 4. Source reconciliation evidence
 
@@ -91,8 +93,8 @@ The pre-remediation implementation head `de5215ac7b63f442fc3e591467f8a6402942ce8
 - BKL-046 F4 governance #60 — SUCCESS;
 - BKL-046 F5 governance #45 — SUCCESS.
 
-The first remediation head `d21d57905b2669ccd572563449a523c1795bdcc2` and its review-publication head `9eb0af3b14c257163f2094ae334a5c1514b3a2de` each produced 7/7 successful workflows. The authorized re-review remained `REWORK REQUIRED` because of M-R1. The M-R1 remediation exact head and workflow results must be recorded in PR #188 after atomic publication; another re-review requires separate authorization.
+The first remediation head `d21d57905b2669ccd572563449a523c1795bdcc2` and its review-publication head `9eb0af3b14c257163f2094ae334a5c1514b3a2de` each produced 7/7 successful workflows. The final M-R1 head `8e46ae3eccdaca5763aee7103063e020f97e2946` and review-publication head `09b6e2272f40688c7ead0eba964b8eb6f64a0920` also produced 7/7 successful workflows. Merge `7f861f7399079858c9744e69b6c773664b6b5b54` produced 9/9 successful post-merge workflows: Developer Foundation #1391, Validate documentation #1028, Genera manuale Word #1454, Scientific Platform Governance #91, Governed Projection Sync #33, Pages #794, BKL-041 F4 #93, BKL-046 F4 #67 and BKL-046 F5 #52.
 
-## 6. Governance stop
+## 6. Acceptance boundary
 
-This evidence supports publication of an implementation PR candidate only. It does not constitute ARB approval, Release Quality approval, acceptance, merge authorization, branch-protection waiver or authorization for F3 providers/ranking/runtime work.
+F2 is accepted only as a bounded repository contract and validation baseline. It provides no provider, ranking, readiness, scheduler, device-command, runtime or Safety Authority capability. `W-BKL031-F2-MERGE-001` is consumed/expired and creates no precedent. F3 and every successor increment require new owner authorization.

@@ -3,13 +3,14 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F2 |
-| Status | **IMPLEMENTED — CANDIDATE FOR REVIEW** |
+| Status | **ACCEPTED / POST-MERGE VERIFIED** |
 | Version | 1.0 |
 | Date | 2026-09-14 |
 | Parent backlog item | BKL-031 — Observation Planner intelligente |
 | Baseline | `f6c4b253a56406c930f009af0658b46a12bc088a` |
 | Predecessor | BKL-031 F1 — ACCEPTED / POST-MERGE VERIFIED |
 | Authority | Projection contract |
+| Merge | `7f861f7399079858c9744e69b6c773664b6b5b54` |
 | Runtime impact | None |
 | Safety impact | None |
 
@@ -143,7 +144,7 @@ Local validation on the implementation candidate reports:
 - ARB remediation regressions: 16/16 PASS, including rejection of coordinate claims against the current S04 artifact;
 - malformed-JSON exploratory matrix: 250/250 returned deterministic non-empty error arrays, with zero throws.
 
-GitHub Actions on the exact PR head remains the authoritative publication evidence. F2 is not accepted or closed by this document. The AI-assisted remediation re-review on `d21d57905b2669ccd572563449a523c1795bdcc2` remained `REWORK REQUIRED` because S04 could attest absent coordinate fields. This correction removes that path, but the review decision remains in force until another separately authorized exact-head re-review. Further ARB review, Release Quality repeat, merge, any branch-protection waiver and F3 implementation each require separate owner authorization.
+F2 is ACCEPTED / POST-MERGE VERIFIED through PR #188. The final technical head `8e46ae3eccdaca5763aee7103063e020f97e2946` received AI-assisted ARB `APPROVED — 99/100` and Release Quality `CONDITIONALLY READY`; the review-publication head `09b6e2272f40688c7ead0eba964b8eb6f64a0920` completed 7/7 workflows. Merge `7f861f7399079858c9744e69b6c773664b6b5b54` completed 9/9 post-merge workflows, including Pages and Developer Foundation. The reviews remain explicitly non-equivalent to independent human approvals. Waiver `W-BKL031-F2-MERGE-001` was single-use and is consumed/expired. No F3 or successor increment is promoted.
 
 ## 12. Deferred decisions
 

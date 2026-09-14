@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.10 |
+| Versione | 5.11 |
 | Stato | Active |
 | Data baseline | 14/09/2026 |
 
@@ -49,7 +49,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
-| BKL-031 | P2 | Observation Planner intelligente | In Progress | BKL-015, BKL-035, meteo/SQM | Ranking target per setup e condizioni | F1 ACCEPTED / POST-MERGE VERIFIED via PR #183, merge `b14d9cdd991b5eef74dd9b972958e74c5903a32d`; F2 owner-authorized and implemented as a review candidate: machine-readable context/source contract, bounded fixture, fail-closed validator and N01-N20 tests; ARB, Release Quality, merge, providers, ranking and runtime not authorized; `docs/architecture/scientific-assets/BKL-031-F2-Observation-Planner-Machine-Readable-Context-and-Bounded-Fixture.md` |
+| BKL-031 | P2 | Observation Planner intelligente | In Progress | BKL-015, BKL-035, meteo/SQM | Ranking target per setup e condizioni | F1/F2 ACCEPTED / POST-MERGE VERIFIED; F2 PR #188, merge `7f861f7399079858c9744e69b6c773664b6b5b54`, ARB 99/100, RQ `CONDITIONALLY READY`, 9/9 post-merge workflows; waiver `W-BKL031-F2-MERGE-001` consumed/expired; successor decision pending, F3/providers/ranking/readiness/runtime not authorized; `docs/project/BKL-031-F2-ACCEPTANCE-2026-09-14.md` |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
@@ -167,3 +167,7 @@ Implementazione/documentazione, test applicabili, commit/push, deployment rileva
 ## 8. Aggiornamento
 
 Il backlog va riesaminato dopo ogni milestone, release, hotfix, ARB o variazione di AMP-002/roadmap funzionale. Quando cambia la canonical roadmap source, la generated projection deve essere sincronizzata dal workflow governato `Roadmap Projection Sync`; la projection non è una seconda authority e non deve essere mantenuta manualmente.
+
+### BKL-031 F2 acceptance — 14/09/2026
+
+BKL-031 F2 è ACCEPTED / POST-MERGE VERIFIED tramite PR #188 e merge `7f861f7399079858c9744e69b6c773664b6b5b54`. Il technical head `8e46ae3eccdaca5763aee7103063e020f97e2946` ha ottenuto ARB AI-assisted 99/100 e Release Quality `CONDITIONALLY READY`; il review-publication head `09b6e2272f40688c7ead0eba964b8eb6f64a0920` è 7/7 verde e il merge è 9/9 verde. La deroga `W-BKL031-F2-MERGE-001` è consumata/scaduta. BKL-031 resta In Progress, ma nessun F3 o altro successore è promosso; provider, pesi, score, ranking, readiness, runtime, device command e Safety Authority restano non autorizzati.
