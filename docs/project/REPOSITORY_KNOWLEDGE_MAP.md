@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 3.1 |
+| Versione | 3.3 |
 | Stato | Active |
 | Data | 14/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | BKL-031 F3 — current handoff only; implementation not authorized |
+| Current governed package | BKL-031 F3 — AI-assisted reviews complete; merge decision pending |
 
 ## 1. Scopo
 
@@ -45,11 +45,11 @@ Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimen
 
 BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`; nessun apply path o Safety Authority è autorizzato.
 
-BKL-031 F1/F2 sono ACCEPTED / POST-MERGE VERIFIED; la closure F2 è integrata tramite PR #189 e merge `4d5526c2fa2af10aeddace4f26c33fc95b7eaa57`. F3 è current handoff only per sito/setup ed ephemeris/lunare. S07 e S11 restano unavailable; forecast, ranking, BKL-032 readiness e Safety restano separati.
+BKL-031 F1/F2 sono ACCEPTED / POST-MERGE VERIFIED. L'handoff F3 è integrato/post-merge verified tramite PR #190 e merge `2ffc77917bcd3fc25a3c5657e8f12e62c9284303`. Il Solution Architecture Package F3 sulla PR #191 technical head `43a46ac28c30badc40e4cb180ed98924ebcf74a1` ha ricevuto ARB AI-assisted `APPROVED WITH CONDITIONS` 98/100 e Release Quality `CONDITIONALLY READY`; le review non sono approvazioni umane indipendenti. Merge/ruleset, provider/ADR e implementazione restano separati e non autorizzati. S07/S11, F4 forecast, F5 ranking/consumer, BKL-032 readiness e Safety restano separati.
 
 ## 7. Roadmap sequence
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 CURRENT HANDOFF] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA REVIEWED — MERGE PENDING] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 8. CI/CD e publishing
 
@@ -78,3 +78,8 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 3.0 | 14/09/2026 | BKL-031 F2 accepted/post-merge verified; successor decision pending |
 
 | 3.1 | 14/09/2026 | BKL-031 F3 promoted as current handoff only |
+
+| 3.2 | 14/09/2026 | BKL-031 F3 Solution Architecture review candidate |
+
+
+| 3.3 | 14/09/2026 | BKL-031 F3 Solution Architecture AI-assisted ARB/RQ complete; merge decision pending |

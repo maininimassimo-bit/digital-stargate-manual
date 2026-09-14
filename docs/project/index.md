@@ -37,6 +37,10 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [BKL-031 F2 Handoff](../architecture/assessments/BKL-031-F2-Machine-Readable-Context-Contract-Handoff-2026-09-14.md) | Fulfilled handoff; F2 accepted/post-merge verified |
 | [BKL-031 F2 Acceptance](BKL-031-F2-ACCEPTANCE-2026-09-14.md) | F2 acceptance, merge-control decision and post-merge evidence |
 | [BKL-031 F3 Handoff](../architecture/assessments/BKL-031-F3-Governed-Site-Setup-Ephemeris-Lunar-Handoff-2026-09-14.md) | Current handoff only; design and implementation not authorized |
+| [BKL-031 F3 Solution Architecture](../architecture/scientific-assets/BKL-031-F3-Governed-Site-Setup-and-Ephemeris-Lunar-Solution-Architecture.md) | Current review candidate; source-neutral and not implemented |
+| [BKL-031 F3 Validation Plan](../architecture/validation/BKL-031-F3-Governed-Site-Setup-and-Ephemeris-Lunar-Validation-Plan.md) | P01–P10/N21–N66, scientific/privacy/rollback gates; plan not executed |
+| [PR #191 BKL-031 F3 Solution Architecture AI-Assisted ARB](../architecture/reviews/ARB-PR191-BKL-031-F3-Solution-Architecture-AI-Assisted-Review-2026-09-14.md) | Approved with Conditions — 98/100; non equivalente ad approvazione umana indipendente |
+| [PR #191 BKL-031 F3 Solution Architecture AI-Assisted Release Quality](../architecture/reviews/RQ-PR191-BKL-031-F3-Solution-Architecture-AI-Assisted-Review-2026-09-14.md) | Conditionally Ready; non equivalente ad approvazione umana indipendente |
 | [PR #190 BKL-031 F3 Handoff AI-Assisted ARB](../architecture/reviews/ARB-PR190-BKL-031-F3-Handoff-AI-Assisted-Architecture-Review-2026-09-14.md) | Approved with Conditions — 99/100; non equivalente ad approvazione umana indipendente |
 | [PR #190 BKL-031 F3 Handoff AI-Assisted Release Quality](../architecture/reviews/RQ-PR190-BKL-031-F3-Handoff-AI-Assisted-Release-Quality-Review-2026-09-14.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
 | [PR #185 BKL-031 F1 Acceptance/F2 Handoff AI-Assisted ARB](../architecture/reviews/ARB-PR185-BKL-031-F1-Acceptance-F2-Handoff-AI-Assisted-Architecture-Review-2026-09-14.md) | Approved with Conditions — 99/100; non equivalente ad approvazione umana indipendente |
@@ -55,11 +59,11 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-046 — AI Post-Processing Assistant: CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica read-only con limitation;
 - BKL-031 F1: ACCEPTED / POST-MERGE VERIFIED;
 - BKL-031 F2: ACCEPTED / POST-MERGE VERIFIED;
-- BKL-031 F3: CURRENT HANDOFF ONLY; design/implementation not authorized.
+- BKL-031 F3: AI-assisted ARB `APPROVED WITH CONDITIONS` 98/100 and Release Quality `CONDITIONALLY READY`; publication CI and merge/ruleset decision pending; provider selection and implementation not authorized.
 
 ## Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 CURRENT HANDOFF] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA REVIEWED — MERGE PENDING] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## Authority / projection
 

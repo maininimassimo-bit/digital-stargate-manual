@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.12 |
+| Versione | 5.13 |
 | Stato | Active |
 | Data baseline | 14/09/2026 |
 
@@ -49,7 +49,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
-| BKL-031 | P2 | Observation Planner intelligente | In Progress | BKL-015, BKL-035, meteo/SQM | Ranking target per setup e condizioni | F1/F2 ACCEPTED / POST-MERGE VERIFIED; F2 closure PR #189 merge `4d5526c2fa2af10aeddace4f26c33fc95b7eaa57`; F3 CURRENT HANDOFF ONLY for governed site/setup and ephemeris/lunar source integration; design/provider selection/implementation/forecast/ranking/readiness/runtime not authorized; `docs/architecture/assessments/BKL-031-F3-Governed-Site-Setup-Ephemeris-Lunar-Handoff-2026-09-14.md` |
+| BKL-031 | P2 | Observation Planner intelligente | In Progress | BKL-015, BKL-035, meteo/SQM | Ranking target per setup e condizioni | F1/F2 ACCEPTED / POST-MERGE VERIFIED; F3 handoff PR #190 merge `2ffc77917bcd3fc25a3c5657e8f12e62c9284303`; F3 Solution Architecture and validation plan CURRENT REVIEW CANDIDATE only; provider/ADR/authority records/schema/fixture/validator/adapter/implementation/forecast/ranking/readiness/runtime not authorized |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
@@ -139,7 +139,7 @@ Il repository owner ha autorizzato il solo incremento F2. Il candidate package m
 Completed baseline through BKL-037
   -> BKL-041 Scientific Data Quality Score [CLOSED]
   -> BKL-046 AI Post-Processing Assistant [CLOSED]
-  -> BKL-031 Observation Planner [F1 ACCEPTED / F2 CURRENT HANDOFF]
+  -> BKL-031 Observation Planner [F1/F2 ACCEPTED / F3 SA REVIEWED — MERGE PENDING]
   -> BKL-032 Session Readiness
   -> BKL-036 Observatory Health Score
   -> BKL-033 Digital Twin
@@ -175,3 +175,9 @@ BKL-031 F2 è ACCEPTED / POST-MERGE VERIFIED tramite PR #188 e merge `7f861f7399
 ### BKL-031 F3 handoff promotion — 14/09/2026
 
 Dopo la closure F2, F3 è promosso come handoff governato per source discovery e decisioni su sito, setup corrente ed ephemeris/lunare. La sequenza F1 resta F3 → F4 forecast → F5 ranking/consumer read-only → F6 closure. La promozione non autorizza design dettagliato, selezione provider, implementazione, schema, fixture, adapter, credenziali, chiamate esterne, forecast, ranking, readiness, runtime, device command o Safety Authority.
+
+### BKL-031 F3 Solution Architecture AI-assisted reviews — 14/09/2026
+
+L'handoff F3 è integrato/post-merge verified tramite PR #190, technical head `5706924c07c3a9fb9d04897c0aaaec4257d514d0`, review-publication head `979523f6c65c86450f7dac8335452aac370ea834` e merge `2ffc77917bcd3fc25a3c5657e8f12e62c9284303`, con ARB 99/100, Release Quality `CONDITIONALLY READY` e 9/9 workflow post-merge. La deroga `W-BKL031-F3-HANDOFF-MERGE-001` è consumata/scaduta.
+
+Il Solution Architecture Package F3 e il validation plan sono stati valutati sulla PR #191 technical head `43a46ac28c30badc40e4cb180ed98924ebcf74a1`. ARB AI-assisted: `APPROVED WITH CONDITIONS`, 98/100; Release Quality AI-assisted: `CONDITIONALLY READY`. Le review non equivalgono ad approvazioni umane indipendenti e registrano due condizioni Minor: separazione tra digest interno del record sito e riferimento pubblico, e semantica half-open degli intervalli di validità. Restano pendenti la CI dell'head di pubblicazione e una separata autorizzazione owner per merge/ruleset. ADR/provider selection, record reali, schema/fixture/validator/adapter e implementazione restano non autorizzati.

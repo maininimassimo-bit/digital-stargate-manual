@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-APA-F3-001 |
-| Stato | **CURRENT HANDOFF ONLY — DESIGN/IMPLEMENTATION NOT AUTHORIZED** |
+| Stato | **FULFILLED BY SOLUTION ARCHITECTURE REVIEW CANDIDATE — NOT ACCEPTED / NOT IMPLEMENTED** |
 | Data | 14/09/2026 |
 | Baseline | `main` @ `4d5526c2fa2af10aeddace4f26c33fc95b7eaa57` |
 | Capability | BKL-031 — Observation Planner intelligente |
@@ -170,3 +170,12 @@ This handoff does not authorize:
 ## 11. Governance stop
 
 After publishing this handoff as a draft PR and obtaining exact-head CI, stop. The F3 architecture package, any specialist implementation, AI-assisted review mode, merge, waiver and all runtime activity require separate repository-owner authorization.
+
+## 12. Fulfilment record
+
+The handoff was integrated through PR #190 and merge `2ffc77917bcd3fc25a3c5657e8f12e62c9284303` with 9/9 post-merge workflows. After separate owner authorization, it is fulfilled by:
+
+- `docs/architecture/scientific-assets/BKL-031-F3-Governed-Site-Setup-and-Ephemeris-Lunar-Solution-Architecture.md`;
+- `docs/architecture/validation/BKL-031-F3-Governed-Site-Setup-and-Ephemeris-Lunar-Validation-Plan.md`.
+
+Both artifacts are review candidates only. They select no provider/library, approve no ADR, materialize no real site/setup authority, and implement no schema, fixture, validator, adapter, runtime or portal consumer. ARB, Release Quality, merge and implementation require separate authorizations.
