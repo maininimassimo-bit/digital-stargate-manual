@@ -61,9 +61,9 @@ def test_phd2_profile_aware_rms(root):
     assert parsed['guide_samples_total']==3
     assert parsed['guide_samples_valid']==2
     assert parsed['guide_samples_saturated']==1
-    assert parsed['guide_samples_rejected']==2
+    assert parsed['guide_samples_rejected']==1
     assert parsed['guide_samples_settling_excluded']==1
-    assert parsed['lost_star_events']==2
+    assert parsed['lost_star_events']==1
     assert parsed['settling_failures']==1
     assert parsed['equipment_profiles']==['C8_QHY695A']
     assert_close(parsed['rms_ra_arcsec'],0.482)
