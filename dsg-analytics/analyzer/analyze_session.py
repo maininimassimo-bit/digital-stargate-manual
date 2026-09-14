@@ -71,7 +71,7 @@ def parse_phd2(folder):
             scale_match=scale_re.search(line)
             if scale_match: pixel_scale=float(scale_match.group('scale'))
             if PHD_BEGIN.match(line):
-                segments+=1; settling=False; active_segment=True; header=None
+                segments+=1; active_segment=True; header=None; pixel_scale=None
                 continue
             if line.lower().startswith('frame,time,'):
                 try: header={name.strip().lower():index for index,name in enumerate(next(csv.reader([line])))}
