@@ -5,7 +5,7 @@
 <section class="dsg-ep-hero">
   <span>BKL-039 · EQUIPMENT PERFORMANCE</span>
   <h1>Historical equipment performance</h1>
-  <p>Vista read-only delle misure e statistiche descrittive accettate. I valori FWHM restano nella loro unità sorgente non calibrata e non costituiscono una valutazione dello stato dell'attrezzatura.</p>
+  <p>Vista read-only delle misure e statistiche descrittive accettate. Le sessioni canoniche vengono contabilizzate come popolazioni idonee oppure come esclusioni fail-closed esplicite. I valori FWHM restano nella loro unità sorgente non calibrata e non costituiscono una valutazione dello stato dell'attrezzatura.</p>
 </section>
 
 <div data-equipment-performance>

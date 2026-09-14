@@ -7,7 +7,7 @@
     "f3_projection": "docs/data/equipment-performance-registry-f3-multisession.json",
     "f5_contract": "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md"
   },
-  "population_count": 5,
+  "population_count": 6,
   "views": [
     {
       "population_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ",
@@ -1101,6 +1101,151 @@
         "NO_EQUIPMENT_HEALTH_RANKING_THRESHOLD_OR_RECOMMENDATION",
         "HISTORICAL_READ_ONLY_PROJECTION_NOT_SAFETY_AUTHORITY"
       ]
+    },
+    {
+      "population_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDktMDFfMjAyNi0wOS0wMnxNIDI3fEdyZWVufExJR0hUfEZXSE0",
+      "configuration_id": "C8_QHY695A_BIN1",
+      "session_id": "2026-09-01_2026-09-02",
+      "target_name": "M 27",
+      "filter_name": "Green",
+      "frame_type": "LIGHT",
+      "metric_name": "FWHM",
+      "measurement_count": 10,
+      "coverage": "COMPLETE_FOR_DECLARED_POPULATION",
+      "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+      "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+      "angular_calibration_state": "NOT_PROVEN",
+      "measurement_method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+      "authority": "projection",
+      "action_authority": "NONE",
+      "source_record_refs": [
+        "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1041",
+        "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1064",
+        "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1086",
+        "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1109",
+        "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1140",
+        "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1665",
+        "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1687",
+        "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1709",
+        "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1734",
+        "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1767"
+      ],
+      "citation_refs": [
+        "data/analytics/history/target-exposures.csv",
+        "data/analytics/history/target-summary.csv",
+        "data/analytics/history/sessions.csv"
+      ],
+      "provenance_refs": [
+        "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+        "data/sessions/2026/09/2026-09-01_2026-09-02/normalized/session-metrics.json"
+      ],
+      "measurements": [
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDktMDFfMjAyNi0wOS0wMnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0022",
+          "sequence_number": "0022",
+          "timestamp": "2026-09-02T00:13:50.671500+02:00",
+          "value": 6.31,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1041"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDktMDFfMjAyNi0wOS0wMnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0023",
+          "sequence_number": "0023",
+          "timestamp": "2026-09-02T00:24:16.387100+02:00",
+          "value": 5.63,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1064"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDktMDFfMjAyNi0wOS0wMnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0024",
+          "sequence_number": "0024",
+          "timestamp": "2026-09-02T00:34:39.722100+02:00",
+          "value": 5.41,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1086"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDktMDFfMjAyNi0wOS0wMnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0025",
+          "sequence_number": "0025",
+          "timestamp": "2026-09-02T00:45:04.682700+02:00",
+          "value": 5.16,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1109"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDktMDFfMjAyNi0wOS0wMnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0026",
+          "sequence_number": "0026",
+          "timestamp": "2026-09-02T00:55:29.437500+02:00",
+          "value": 4.91,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1140"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDktMDFfMjAyNi0wOS0wMnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0027",
+          "sequence_number": "0027",
+          "timestamp": "2026-09-02T03:13:58.708400+02:00",
+          "value": 7.17,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1665"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDktMDFfMjAyNi0wOS0wMnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0028",
+          "sequence_number": "0028",
+          "timestamp": "2026-09-02T03:24:36.220100+02:00",
+          "value": 5.8,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1687"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDktMDFfMjAyNi0wOS0wMnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0029",
+          "sequence_number": "0029",
+          "timestamp": "2026-09-02T03:35:02.415200+02:00",
+          "value": 5.18,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1709"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDktMDFfMjAyNi0wOS0wMnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0030",
+          "sequence_number": "0030",
+          "timestamp": "2026-09-02T03:45:42.567500+02:00",
+          "value": 5.33,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1734"
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDktMDFfMjAyNi0wOS0wMnxNIDI3fEdyZWVufExJR0hUfEZXSE0-M-0031",
+          "sequence_number": "0031",
+          "timestamp": "2026-09-02T03:56:05.216600+02:00",
+          "value": 5.28,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-09-01_2026-09-02:line=1767"
+        }
+      ],
+      "statistics": [
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDktMDFfMjAyNi0wOS0wMnxNIDI3fEdyZWVufExJR0hUfEZXSE0-S-MEAN",
+          "statistic_type": "MEAN",
+          "value": 5.618,
+          "method_id": "BKL039-F3-FWHM-MEAN-V1",
+          "sample_count": 10
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDktMDFfMjAyNi0wOS0wMnxNIDI3fEdyZWVufExJR0hUfEZXSE0-S-MINIMUM",
+          "statistic_type": "MINIMUM",
+          "value": 4.91,
+          "method_id": "BKL039-F3-FWHM-MIN-V1",
+          "sample_count": 10
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDktMDFfMjAyNi0wOS0wMnxNIDI3fEdyZWVufExJR0hUfEZXSE0-S-MAXIMUM",
+          "statistic_type": "MAXIMUM",
+          "value": 7.17,
+          "method_id": "BKL039-F3-FWHM-MAX-V1",
+          "sample_count": 10
+        },
+        {
+          "record_id": "EPR-F5-QzhfUUhZNjk1QV9CSU4xfDIwMjYtMDktMDFfMjAyNi0wOS0wMnxNIDI3fEdyZWVufExJR0hUfEZXSE0-S-SAMPLE_STDDEV",
+          "statistic_type": "SAMPLE_STDDEV",
+          "value": 0.672,
+          "method_id": "BKL039-F3-FWHM-SAMPLE-STDDEV-V1",
+          "sample_count": 10
+        }
+      ],
+      "limitations": [
+        "SOURCE_NATIVE_FWHM_UNIT_IS_NOT_PHYSICALLY_CALIBRATED",
+        "NO_EQUIPMENT_HEALTH_RANKING_THRESHOLD_OR_RECOMMENDATION",
+        "HISTORICAL_READ_ONLY_PROJECTION_NOT_SAFETY_AUTHORITY"
+      ]
     }
   ],
   "exclusions": [
@@ -1125,11 +1270,148 @@
       "source_log_line": 568
     },
     {
+      "scope": "POPULATION",
+      "session_id": "2026-08-31_2026-09-01",
+      "target_name": "M 27",
+      "configuration_id": "C8_QHY695A_BIN1",
+      "filter_name": "Blu",
+      "frame_type": "LIGHT",
+      "reason": "FWHM_SOURCE_VALUE_UNRESOLVED",
+      "source_log_line": 503
+    },
+    {
+      "scope": "POPULATION",
+      "session_id": "2026-08-31_2026-09-01",
+      "target_name": "M 27",
+      "configuration_id": "C8_QHY695A_BIN1",
+      "filter_name": "Green",
+      "frame_type": "LIGHT",
+      "reason": "FWHM_SOURCE_VALUE_UNRESOLVED",
+      "source_log_line": 125
+    },
+    {
+      "scope": "POPULATION",
+      "session_id": "2026-08-31_2026-09-01",
+      "target_name": "M 27",
+      "configuration_id": "C8_QHY695A_BIN1",
+      "filter_name": "Red",
+      "frame_type": "LIGHT",
+      "reason": "FWHM_SOURCE_VALUE_UNRESOLVED",
+      "source_log_line": 782
+    },
+    {
+      "scope": "POPULATION",
+      "session_id": "2026-09-01_2026-09-02",
+      "target_name": "M 27",
+      "configuration_id": "C8_QHY695A_BIN1",
+      "filter_name": "Blu",
+      "frame_type": "LIGHT",
+      "reason": "FWHM_SOURCE_VALUE_UNRESOLVED",
+      "source_log_line": 470
+    },
+    {
+      "scope": "POPULATION",
+      "session_id": "2026-09-01_2026-09-02",
+      "target_name": "M 27",
+      "configuration_id": "C8_QHY695A_BIN1",
+      "filter_name": "Red",
+      "frame_type": "LIGHT",
+      "reason": "FWHM_SOURCE_VALUE_UNRESOLVED",
+      "source_log_line": 749
+    },
+    {
+      "scope": "POPULATION",
+      "session_id": "2026-09-02_2026-09-03",
+      "target_name": "M 27",
+      "configuration_id": "C8_QHY695A_BIN1",
+      "filter_name": "L-Pro",
+      "frame_type": "LIGHT",
+      "reason": "FWHM_SOURCE_VALUE_UNRESOLVED",
+      "source_log_line": 416
+    },
+    {
+      "scope": "POPULATION",
+      "session_id": "2026-09-03_2026-09-04",
+      "target_name": "M 27",
+      "configuration_id": "C8_QHY695A_BIN1",
+      "filter_name": "L-Pro",
+      "frame_type": "LIGHT",
+      "reason": "FWHM_SOURCE_VALUE_UNRESOLVED",
+      "source_log_line": 425
+    },
+    {
+      "scope": "POPULATION",
+      "session_id": "2026-09-04_2026-09-05",
+      "target_name": "M 27",
+      "configuration_id": "C8_QHY695A_BIN1",
+      "filter_name": "L-Pro",
+      "frame_type": "LIGHT",
+      "reason": "FWHM_SOURCE_VALUE_UNRESOLVED",
+      "source_log_line": 428
+    },
+    {
+      "scope": "POPULATION",
+      "session_id": "2026-09-05_2026-09-06",
+      "target_name": "M 27",
+      "configuration_id": "C8_QHY695A_BIN1",
+      "filter_name": "L-Pro",
+      "frame_type": "LIGHT",
+      "reason": "FWHM_SOURCE_VALUE_UNRESOLVED",
+      "source_log_line": 432
+    },
+    {
+      "scope": "POPULATION",
+      "session_id": "2026-09-06_2026-09-07",
+      "target_name": "M 27",
+      "configuration_id": "C8_QHY695A_BIN1",
+      "filter_name": "L-Pro",
+      "frame_type": "LIGHT",
+      "reason": "FWHM_SOURCE_VALUE_UNRESOLVED",
+      "source_log_line": 1747
+    },
+    {
+      "scope": "POPULATION",
+      "session_id": "2026-09-07_2026-09-08",
+      "target_name": "M 27",
+      "configuration_id": "C8_QHY695A_BIN1",
+      "filter_name": "L-Pro",
+      "frame_type": "LIGHT",
+      "reason": "FWHM_SOURCE_VALUE_UNRESOLVED",
+      "source_log_line": 1304
+    },
+    {
+      "scope": "POPULATION",
+      "session_id": "2026-09-12_2026-09-13",
+      "target_name": "M 27",
+      "configuration_id": "C8_QHY695A_BIN1",
+      "filter_name": "L-Pro",
+      "frame_type": "LIGHT",
+      "reason": "FWHM_SOURCE_VALUE_UNRESOLVED",
+      "source_log_line": 435
+    },
+    {
+      "scope": "POPULATION",
+      "session_id": "2026-09-13_2026-09-14",
+      "target_name": "M 27",
+      "configuration_id": "C8_QHY695A_BIN1",
+      "filter_name": "L-Pro",
+      "frame_type": "LIGHT",
+      "reason": "FWHM_SOURCE_VALUE_UNRESOLVED",
+      "source_log_line": 464
+    },
+    {
       "scope": "SESSION",
       "session_id": "2026-08-10_2026-08-11",
       "target_name": "M 27",
       "reason": "METADATA_NOT_REGISTERED",
       "metadata_state": "PARTIAL"
+    },
+    {
+      "scope": "SESSION",
+      "session_id": "2026-08-26_2026-08-27",
+      "target_name": "",
+      "reason": "METADATA_NOT_REGISTERED",
+      "metadata_state": "UNREGISTERED"
     }
   ]
 }

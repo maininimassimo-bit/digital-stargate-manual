@@ -3,13 +3,13 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { discoverFromTexts, discoverRepository, INPUTS } from './discover-equipment-performance-populations-f5.mjs';
+import { discoverFromTexts, discoverRepository, INPUTS, parseCsv } from './discover-equipment-performance-populations-f5.mjs';
 
 const here=path.dirname(fileURLToPath(import.meta.url));
 const root=path.resolve(here,'../..');
 const read=rel=>fs.readFileSync(path.join(root,rel),'utf8');
 
-function fixture(){return {metadataText:read(INPUTS.metadata),exposureText:read(INPUTS.exposures),summaryText:read(INPUTS.summary)};}
+function fixture(){return {metadataText:read(INPUTS.metadata),sessionText:read(INPUTS.sessions),exposureText:read(INPUTS.exposures),summaryText:read(INPUTS.summary)};}
 
 test('repository discovery is genuinely multi-session and preserves accepted LDN 1320 population',()=>{
   const r=discoverRepository();
@@ -30,6 +30,24 @@ test('currently source-qualified M 27 populations are discovered and unresolved 
   assert.ok(m27.some(p=>p.session_id==='2026-08-15_2026-08-16'),'eligible 2026-08-15 M 27 population not discovered');
   assert.ok(r.exclusions.some(e=>e.session_id==='2026-08-14_2026-08-15'&&e.target_name==='M 27'&&e.filter_name==='L-Pro'&&e.reason==='FWHM_SOURCE_VALUE_UNRESOLVED'),'registered M 27 population with unresolved FWHM must remain excluded');
   for(const p of m27){assert.ok(p.measurement_count>0);assert.equal(p.unit_semantics,'SOURCE_NATIVE_UNCALIBRATED');assert.equal(p.angular_calibration_state,'NOT_PROVEN');assert.equal(p.action_authority,'NONE');}
+});
+
+test('canonical session history onboards complete source-qualified populations and preserves provenance',()=>{
+  const r=discoverRepository();
+  const green=r.eligible_populations.find(p=>p.session_id==='2026-09-01_2026-09-02'&&p.target_name==='M 27'&&p.configuration_id==='C8_QHY695A_BIN1'&&p.filter_name==='Green');
+  assert.ok(green,'canonical-history Green population missing');
+  assert.equal(green.measurement_count,10);
+  assert.equal(green.source_metadata_ref,'data/sessions/2026/09/2026-09-01_2026-09-02/normalized/session-metrics.json');
+  assert.ok(green.citation_refs.includes(INPUTS.sessions));
+  assert.ok(r.exclusions.some(e=>e.session_id==='2026-09-13_2026-09-14'&&e.filter_name==='L-Pro'&&e.reason==='FWHM_SOURCE_VALUE_UNRESOLVED'),'latest incomplete FWHM population must be explicit');
+});
+
+test('every canonical history session is represented by an eligible population or explicit exclusion',()=>{
+  const r=discoverRepository();
+  const sourceIds=parseCsv(read(INPUTS.sessions)).map(row=>String(row.session_id).trim()).filter(Boolean).sort();
+  const accounted=[...new Set([...r.eligible_populations,...r.exclusions].map(row=>String(row.session_id||'').trim()).filter(Boolean))].sort();
+  assert.deepEqual(accounted,sourceIds);
+  assert.equal(r.accounted_session_count,r.source_session_count);
 });
 
 test('PARTIAL M 27 session is excluded fail-closed',()=>{
