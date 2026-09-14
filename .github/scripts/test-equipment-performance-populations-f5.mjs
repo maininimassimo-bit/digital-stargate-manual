@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { discoverFromTexts, discoverRepository, INPUTS } from './discover-equipment-performance-populations-f5.mjs';
+import { discoverFromTexts, discoverRepository, INPUTS, parseCsv } from './discover-equipment-performance-populations-f5.mjs';
 
 const here=path.dirname(fileURLToPath(import.meta.url));
 const root=path.resolve(here,'../..');
