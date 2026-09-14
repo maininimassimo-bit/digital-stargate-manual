@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Stato | Active |
-| Repository baseline osservata | `e674cdb601fd15582a2d5ce0c39dc8f009e5b9cc` |
-| Current governed package | BKL-031 F2 — handoff only |
-| Accepted predecessor | BKL-031 F1 |
-| F2 implementation | **NOT AUTHORIZED** |
+| Repository baseline verificata | `7f861f7399079858c9744e69b6c773664b6b5b54` |
+| Current governed package | BKL-031 — F1/F2 accepted; successor decision pending |
+| Accepted increments | BKL-031 F1 and F2 |
 | Runtime impact | None |
+| PC Principale / EAGLE | Nessuna azione richiesta |
 
 ## 1. Accepted foundation
 
@@ -15,29 +15,33 @@ BKL-015, BKL-044, BKL-035, BKL-040, BKL-038, BKL-039, BKL-045, BKL-037, BKL-041 
 
 BKL-031 F1 è ACCEPTED / POST-MERGE VERIFIED tramite PR #183 e merge `b14d9cdd991b5eef74dd9b972958e74c5903a32d`.
 
-## 2. Current BKL-031 boundary
+BKL-031 F2 è ACCEPTED / POST-MERGE VERIFIED tramite PR #188 e merge `7f861f7399079858c9744e69b6c773664b6b5b54`.
 
-F2 è promosso come prossimo incremento governato per un futuro contratto machine-readable source/context con fixture bounded e validazione fail-closed. Lo stato current non autorizza l'implementazione.
+## 2. Accepted F2 boundary
 
-S07–S11 restano unavailable/unknown sulla baseline corrente. Nessuna source storica o projection può essere presentata come sito corrente, setup attivo, ephemeris/lunar, forecast o stato realtime.
+La baseline F2 comprende JSON Schema, fixture bounded M 27, validator normativo fail-closed, 37 test e integrazione Developer Foundation. S07–S11 restano unavailable/unknown; S02 è la sola authority F2 per RA/Dec/epoch e S04 non può attestare coordinate.
 
-## 3. Preserved invariants
+Le review ARB/RQ sono AI-assisted, owner-authorized e non equivalenti ad approvazioni umane indipendenti. Tutti i finding M-01–M-04 e M-R1 sono chiusi.
 
-- repository e contratti governati restano authority;
+## 3. Verified evidence
+
+- technical head: `8e46ae3eccdaca5763aee7103063e020f97e2946`;
+- review-publication head: `09b6e2272f40688c7ead0eba964b8eb6f64a0920`;
+- merge: `7f861f7399079858c9744e69b6c773664b6b5b54`;
+- exact-head CI: 7/7 SUCCESS;
+- post-merge CI: 9/9 SUCCESS, incluso Pages;
+- test suite: 37/37 PASS;
+- malformed JSON probe: 250/250 fail-closed, 0 throws;
+- waiver `W-BKL031-F2-MERGE-001`: consumed/expired.
+
+## 4. Preserved invariants
+
 - projection non diventa authority;
-- Citation, Provenance, identity, freshness, missingness e conflict sono preservati;
+- Citation, Provenance, identity, freshness, missingness e conflict restano espliciti;
 - BKL-031 advisory resta separato da BKL-032 readiness;
-- local physical interlocks restano l'unica Safety Authority;
+- interlock fisici/locali restano Safety Authority;
 - workload pesante e chiamate esterne restano fuori da EAGLE.
 
-## 4. Explicit exclusions
+## 5. Successor gate
 
-Nessun schema, fixture, validator, algoritmo, peso, score, soglia, ranking, scheduler, go/no-go, provider, device command o runtime change F2 è autorizzato da questa baseline.
-
-## 5. Operational baseline
-
-La sessione `2026-09-13_2026-09-14` è presente e rielaborata con RMS PHD2 canonico totale `1.414 arcsec` nel commit analytics `e674cdb601fd15582a2d5ce0c39dc8f009e5b9cc`. L'evidenza operativa resta separata dalla transizione documentale BKL-031.
-
-## 6. Next gate
-
-Nuova autorizzazione owner per preparare F2. La futura delivery dovrà fermarsi prima di review e merge, che restano gate separati.
+Nessun F3 o altro successore è promosso. Provider site/setup/ephemeris/lunar/forecast, pesi, score, ranking, portal consumer, readiness, scheduler, device command e Safety Authority richiedono una nuova decisione owner e un nuovo package governato.

@@ -34,7 +34,8 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [BKL-031 F1 AI-Assisted ARB](../architecture/reviews/ARB-BKL-031-F1-AI-Assisted-Architecture-Review-2026-09-14.md) | Approved with Conditions; non equivalente a review umana indipendente |
 | [BKL-031 F1 AI-Assisted Release Quality](../architecture/reviews/RQ-BKL-031-F1-AI-Assisted-Release-Quality-Review-2026-09-14.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
 | [BKL-031 F1 Acceptance](BKL-031-F1-ACCEPTANCE-2026-09-14.md) | F1 accepted/post-merge verified; condizioni trasferite |
-| [BKL-031 F2 Handoff](../architecture/assessments/BKL-031-F2-Machine-Readable-Context-Contract-Handoff-2026-09-14.md) | F2 current handoff; implementation not authorized |
+| [BKL-031 F2 Handoff](../architecture/assessments/BKL-031-F2-Machine-Readable-Context-Contract-Handoff-2026-09-14.md) | Fulfilled handoff; F2 accepted/post-merge verified |
+| [BKL-031 F2 Acceptance](BKL-031-F2-ACCEPTANCE-2026-09-14.md) | F2 acceptance, merge-control decision and post-merge evidence |
 | [PR #185 BKL-031 F1 Acceptance/F2 Handoff AI-Assisted ARB](../architecture/reviews/ARB-PR185-BKL-031-F1-Acceptance-F2-Handoff-AI-Assisted-Architecture-Review-2026-09-14.md) | Approved with Conditions — 99/100; non equivalente ad approvazione umana indipendente |
 | [PR #185 BKL-031 F1 Acceptance/F2 Handoff AI-Assisted Release Quality](../architecture/reviews/RQ-PR185-BKL-031-F1-Acceptance-F2-Handoff-AI-Assisted-Release-Quality-Review-2026-09-14.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
 | [PR #184 PHD2 RMS AI-Assisted ARB](../architecture/reviews/ARB-PR184-PHD2-RMS-AI-Assisted-Architecture-Review-2026-09-14.md) | Approved with Conditions; hotfix RMS profile-aware; non equivalente a review umana indipendente |
@@ -50,11 +51,11 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-041 — Scientific Data Quality Score: CLOSED / ACCEPTED / POST-MERGE VERIFIED;
 - BKL-046 — AI Post-Processing Assistant: CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica read-only con limitation;
 - BKL-031 F1: ACCEPTED / POST-MERGE VERIFIED;
-- BKL-031 F2: CURRENT HANDOFF ONLY; implementation not authorized.
+- BKL-031 F2: ACCEPTED / POST-MERGE VERIFIED; successor decision pending.
 
 ## Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1 ACCEPTED / F2 CURRENT HANDOFF] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / SUCCESSOR DECISION PENDING] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## Authority / projection
 

@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F2-HANDOFF-001 |
-| Stato | **OWNER-AUTHORIZED — IMPLEMENTATION CANDIDATE IN PROGRESS** |
+| Stato | **FULFILLED — F2 ACCEPTED / POST-MERGE VERIFIED** |
 | Data | 14/09/2026 |
 | Capability | BKL-031 — Observation Planner intelligente |
 | Predecessore accettato | BKL-031 F1 |
@@ -72,3 +72,7 @@ F2 potrà essere proposto per review solo quando:
 ## 6. Stop di governance
 
 La presente autorizzazione termina con la pubblicazione della PR draft F2 e la verifica dei quality gate applicabili. ARB, Release Quality, merge, provider selection, ranking, consumer, F3 e qualsiasi runtime richiedono una nuova autorizzazione esplicita del repository owner.
+
+## Fulfilment record
+
+L'handoff è stato soddisfatto tramite PR #188 e merge `7f861f7399079858c9744e69b6c773664b6b5b54`. L'acceptance canonica è `docs/project/BKL-031-F2-ACCEPTANCE-2026-09-14.md`. Nessun F3 o successore è promosso da questa chiusura.
