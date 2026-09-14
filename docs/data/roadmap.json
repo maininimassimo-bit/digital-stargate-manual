@@ -2,18 +2,18 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-14",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "f133d918d262ecc719b1fd6b800d23941fd5e547a8d42f3f307e8fb3ca61f6fa",
+  "sourceDigest": "64c92c8d10758b755f54228a41de28e5dc02ae56a34ecf65fc57dfd08a8d996a",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-031",
   "nextMilestone": "BKL-031 F2 — Machine-Readable Context/Source Contract and Bounded Fixtures",
   "target": "Promote BKL-031 F2 as a governed handoff for a future bounded, fail-closed machine-readable source/context contract preserving F1 identity, authority, freshness, missingness, Citation and Provenance; implementation, providers, weights, scores, ranking, readiness, scheduling, device command, heavy EAGLE workload and Safety Authority remain unauthorized",
   "summary": {
-    "total": 43,
+    "total": 44,
     "completed": 32,
     "active": 4,
-    "planned": 7,
-    "percentCompleted": 74
+    "planned": 8,
+    "percentCompleted": 73
   },
   "evidenceSummary": {
     "sources": 8,
@@ -290,6 +290,12 @@
           "title": "PixInsight Workflow Provenance Plugin",
           "status": "completed",
           "note": "F1-F5 CLOSED/ACCEPTED; formal closure PR #140 merged as a08aed981e5ffa4af6b68fea521ada25a4b2b338. Real PixInsight OAT accepted with retained completeness=UNAVAILABLE limitation for automatic process history."
+        },
+        {
+          "id": "BKL-049",
+          "title": "PixInsight Native Workflow Capture Module",
+          "status": "planned",
+          "note": "Planned end-to-end native PCL capability for automatic supported-process observation, ordered parameters and lineage capture, durable local journal, deterministic PXP sidecar delivery through AP14-W06, and a sanitized read-only portal workflow archive. BKL-045 OBSERVED/DECLARED/SUGGESTED semantics and fail-closed completeness remain mandatory. Planning only; implementation, direct catalog authority, image mutation, autonomous processing, AI apply and Safety Authority are not authorized."
         },
         {
           "id": "BKL-046",
