@@ -66,7 +66,7 @@ These are contract examples, not calculated planner outputs:
 
 Required on the exact PR head:
 
-1. Developer Foundation success;
+1. Developer Foundation success when the changed paths match its governed trigger; otherwise record `NOT_TRIGGERED / NOT_APPLICABLE` for documentation-only F1;
 2. documentation validation / `mkdocs build --strict` success;
 3. Word/manual workflow success when triggered;
 4. changed-file review confirms documentation/navigation scope only;
