@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Date | 2026-09-14 |
 | Parent backlog item | BKL-031 — Observation Planner intelligente |
-| Baseline | \`f6c4b253a56406c930f009af0658b46a12bc088a\` |
+| Baseline | `f6c4b253a56406c930f009af0658b46a12bc088a` |
 | Predecessor | BKL-031 F1 — ACCEPTED / POST-MERGE VERIFIED |
 | Authority | Projection contract |
 | Runtime impact | None |
@@ -15,7 +15,7 @@
 
 ## 1. Decision
 
-F2 materializes the accepted F1 semantics as a versioned, bounded and fail-closed repository contract. It encodes \`TargetCandidate\`, \`PlanningContext\`, \`EvidenceDimension\`, \`RankingFactor\` and \`RankingExplanation\` without calculating a score, ordering targets or deciding readiness.
+F2 materializes the accepted F1 semantics as a versioned, bounded and fail-closed repository contract. It encodes `TargetCandidate`, `PlanningContext`, `EvidenceDimension`, `RankingFactor` and `RankingExplanation` without calculating a score, ordering targets or deciding readiness.
 
 The fixture is source-backed where accepted evidence exists and explicit about missing current evidence. BKL031-S07–S11 remain unavailable on this baseline. F2 does not select providers, call external services, expose a portal consumer or introduce runtime behavior.
 
@@ -23,12 +23,12 @@ The fixture is source-backed where accepted evidence exists and explicit about m
 
 | Artifact | Responsibility |
 |---|---|
-| \`schemas/observation-planner-context-f2.schema.json\` | published JSON Schema 2020-12 structural contract |
-| \`docs/data/observation-planner-context-f2-fixture.json\` | bounded source-backed fixture with one candidate and one context |
-| \`.github/scripts/verify-observation-planner-context-f2.mjs\` | normative structural, semantic and source-reconciliation validator |
-| \`.github/scripts/test-observation-planner-context-f2.mjs\` | deterministic positive test plus the 20 mandatory F1 negative cases |
-| \`.github/workflows/developer-foundation.yml\` | exact-head CI quality gate |
-| \`docs/architecture/validation/BKL-031-F2-Context-Contract-Validation-Evidence-2026-09-14.md\` | traceability and validation evidence |
+| `schemas/observation-planner-context-f2.schema.json` | published JSON Schema 2020-12 structural contract |
+| `docs/data/observation-planner-context-f2-fixture.json` | bounded source-backed fixture with one candidate and one context |
+| `.github/scripts/verify-observation-planner-context-f2.mjs` | normative structural, semantic and source-reconciliation validator |
+| `.github/scripts/test-observation-planner-context-f2.mjs` | deterministic positive test plus the 20 mandatory F1 negative cases |
+| `.github/workflows/developer-foundation.yml` | exact-head CI quality gate |
+| `docs/architecture/validation/BKL-031-F2-Context-Contract-Validation-Evidence-2026-09-14.md` | traceability and validation evidence |
 
 The executable validator is normative for CI because the repository has no governed JSON Schema runtime dependency. It enforces the published schema's closed property sets, required fields, constants, enums, types, bounds and references, plus semantic/source rules that JSON Schema alone cannot express. A future divergence between schema and validator is a contract defect.
 
@@ -37,11 +37,11 @@ The executable validator is normative for CI because the repository has no gover
 The fixture contains:
 
 - exactly the eleven accepted source inventory entries BKL031-S01–S11;
-- one exact BKL-035 candidate, \`dsg-target:m-27\`;
+- one exact BKL-035 candidate, `dsg-target:m-27`;
 - one immutable UTC planning context;
 - exactly seven evidence dimensions for that candidate;
 - seven factor definitions, one per evidence dimension;
-- one \`NOT_EVALUATED\` explanation using \`BKL031-F2-NO-RANKING-1\`;
+- one `NOT_EVALUATED` explanation using `BKL031-F2-NO-RANKING-1`;
 - four public-safe Citations and five bounded Provenance records.
 
 The declared maxima are two candidates, one context, seven dimensions per candidate, seven factor definitions and two explanations. Expanding those bounds requires a later governed change.
@@ -52,17 +52,17 @@ No incomplete or conflicted source record is manufactured for coverage. Negative
 
 | Sources | F2 state | Permitted meaning |
 |---|---|---|
-| S01 | \`AVAILABLE_BOUNDED\` | exact target identity and lineage only |
-| S02–S04 | \`AVAILABLE_HISTORICAL\` | session-scoped historical evidence only |
-| S05 | \`AVAILABLE_DERIVED\` | descriptive history; never authority override |
-| S06 | \`AVAILABLE\` | SQM semantics and historical session evidence; never Safety evidence |
-| S07 | \`UNAVAILABLE_CURRENT_BASELINE\` | placeholder cannot become current evidence |
-| S08 | \`UNAVAILABLE\` | no governed materialized site record |
-| S09 | \`UNAVAILABLE_CURRENT\` | no active setup assignment or validity interval |
-| S10 | \`UNAVAILABLE\` | no governed ephemeris/lunar source |
-| S11 | \`UNAVAILABLE\` | no governed forecast source |
+| S01 | `AVAILABLE_BOUNDED` | exact target identity and lineage only |
+| S02–S04 | `AVAILABLE_HISTORICAL` | session-scoped historical evidence only |
+| S05 | `AVAILABLE_DERIVED` | descriptive history; never authority override |
+| S06 | `AVAILABLE` | SQM semantics and historical session evidence; never Safety evidence |
+| S07 | `UNAVAILABLE_CURRENT_BASELINE` | placeholder cannot become current evidence |
+| S08 | `UNAVAILABLE` | no governed materialized site record |
+| S09 | `UNAVAILABLE_CURRENT` | no active setup assignment or validity interval |
+| S10 | `UNAVAILABLE` | no governed ephemeris/lunar source |
+| S11 | `UNAVAILABLE` | no governed forecast source |
 
-The M 27 fixture preserves target identity from S01, two historical session references from S03 and one historical SQM median from S05 under S06 semantics. Setup, celestial, lunar and forecast dimensions contain no values and remain \`UNAVAILABLE\`.
+The M 27 fixture preserves target identity from S01, two historical session references from S03 and one historical SQM median from S05 under S06 semantics. Setup, celestial, lunar and forecast dimensions contain no values and remain `UNAVAILABLE`.
 
 ## 5. Semantic object contract
 
@@ -76,30 +76,30 @@ The context is an immutable envelope with explicit UTC generation/evaluation ins
 
 ### 5.3 EvidenceDimension
 
-Every candidate has exactly one dimension of each accepted type. A usable \`AVAILABLE\` or \`PARTIAL\` dimension requires facts, evidence kind, Citation and Provenance. An \`UNAVAILABLE\`, \`UNKNOWN\`, \`STALE\` or \`CONFLICTED\` dimension exposes no value and requires reason codes.
+Every candidate has exactly one dimension of each accepted type. A usable `AVAILABLE` or `PARTIAL` dimension requires facts, evidence kind, Citation and Provenance. An `UNAVAILABLE`, `UNKNOWN`, `STALE` or `CONFLICTED` dimension exposes no value and requires reason codes.
 
 Facts carry source, semantic type, unit, temporal scope, observation/issue time, validity, spatial scope and method where applicable. Current, forecast, celestial and lunar facts have additional fail-closed source and completeness rules.
 
 ### 5.4 RankingFactor
 
-F2 represents definitions only. Every factor declares its consumed dimension, expected semantics/unit, interpretation direction and mandatory \`EXCLUDE_AND_EXPLAIN\` missing/conflict behavior. The validator rejects numeric weights, scores, contributions, thresholds, normalization, priority and ordering.
+F2 represents definitions only. Every factor declares its consumed dimension, expected semantics/unit, interpretation direction and mandatory `EXCLUDE_AND_EXPLAIN` missing/conflict behavior. The validator rejects numeric weights, scores, contributions, thresholds, normalization, priority and ordering.
 
 ### 5.5 RankingExplanation
 
-F2 publishes only a \`NOT_EVALUATED\` explanation. It enumerates all factor and evidence references and every partial, unavailable, stale or conflicted reason. Operational conclusion vocabulary and any readiness, command or authorization semantics are rejected.
+F2 publishes only a `NOT_EVALUATED` explanation. It enumerates all factor and evidence references and every partial, unavailable, stale or conflicted reason. Operational conclusion vocabulary and any readiness, command or authorization semantics are rejected.
 
 ## 6. Component and authority boundary
 
-\`\`\`mermaid
+```mermaid
 flowchart TD
     A["Governed S01-S06 evidence"] --> V["F2 validator"]
     M["Explicit S07-S11 missingness"] --> V
     V --> C["Bounded context fixture"]
     C --> R["Future read-only consumer"]
     S["BKL-032 / local Safety Authority"] -. "separate authority" .-> R
-\`\`\`
+```
 
-F2 has \`authority=projection\`, \`action_authority=NONE\`, \`safety_authority=NONE\` and \`execution_zone=PORTAL_CI\`. It cannot edit N.I.N.A. sequences or command mount, dome, camera, power, network or interlocks. It does not run computation or external calls on EAGLE.
+F2 has `authority=projection`, `action_authority=NONE`, `safety_authority=NONE` and `execution_zone=PORTAL_CI`. It cannot edit N.I.N.A. sequences or command mount, dome, camera, power, network or interlocks. It does not run computation or external calls on EAGLE.
 
 ## 7. Ports and future adapters
 

@@ -3,23 +3,24 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F2-VAL-001 |
-| Status | **IMPLEMENTATION EVIDENCE — PR CI PENDING** |
+| Status | **IMPLEMENTATION HEAD VERIFIED — REVIEW NOT AUTHORIZED** |
 | Date | 2026-09-14 |
-| Baseline | \`f6c4b253a56406c930f009af0658b46a12bc088a\` |
-| Contract | \`schemas/observation-planner-context-f2.schema.json\` |
-| Fixture | \`docs/data/observation-planner-context-f2-fixture.json\` |
-| Normative validator | \`.github/scripts/verify-observation-planner-context-f2.mjs\` |
-| Negative suite | \`.github/scripts/test-observation-planner-context-f2.mjs\` |
+| Baseline | `f6c4b253a56406c930f009af0658b46a12bc088a` |
+| Verified implementation head | `de5215ac7b63f442fc3e591467f8a6402942ce85` |
+| Contract | `schemas/observation-planner-context-f2.schema.json` |
+| Fixture | `docs/data/observation-planner-context-f2-fixture.json` |
+| Normative validator | `.github/scripts/verify-observation-planner-context-f2.mjs` |
+| Negative suite | `.github/scripts/test-observation-planner-context-f2.mjs` |
 | Runtime / EAGLE impact | None |
 
 ## 1. Local deterministic evidence
 
-\`\`\`text
+```text
 BKL-031 F2 context contract OK: 11 sources / 1 candidate / 7 dimensions / no ranking
 tests 21
 pass 21
 fail 0
-\`\`\`
+```
 
 The suite contains one positive bounded-fixture test and the twenty negative cases transferred unchanged from the accepted F1 validation plan.
 
@@ -50,24 +51,33 @@ The suite contains one positive bounded-fixture test and the twenty negative cas
 
 ## 3. Source reconciliation evidence
 
-- Candidate \`dsg-target:m-27\` resolves exactly in \`docs/data/target-knowledge-read-model.json\`.
-- Historical sessions \`2026-08-14_2026-08-15\` and \`2026-08-15_2026-08-16\` resolve in the scientific session catalog.
-- SQM evidence resolves to session \`2026-09-13_2026-09-14\` in the historical analytics projection and remains explicitly historical.
+- Candidate `dsg-target:m-27` resolves exactly in `docs/data/target-knowledge-read-model.json`.
+- Historical sessions `2026-08-14_2026-08-15` and `2026-08-15_2026-08-16` resolve in the scientific session catalog.
+- SQM evidence resolves to session `2026-09-13_2026-09-14` in the historical analytics projection and remains explicitly historical.
 - S07–S11 match the accepted unavailable/current-unknown states and expose no fixture fact values.
 - Public Citations are limited to three normalized repository paths; no raw operational locator is published.
 
-## 4. Exact-head CI gate
+## 4. Exact-head CI evidence
 
-Developer Foundation must execute both:
+Developer Foundation executed both:
 
-\`\`\`text
+```text
 node .github/scripts/verify-observation-planner-context-f2.mjs
 node --test .github/scripts/test-observation-planner-context-f2.mjs
-\`\`\`
+```
 
-Documentation validation and all other applicable workflows must be green on the final publication head. Until those runs complete, this evidence remains \`PR CI PENDING\`.
+The exact implementation head `de5215ac7b63f442fc3e591467f8a6402942ce85` produced 7/7 successful workflows:
+
+- Developer Foundation #1384 — SUCCESS, including both BKL-031 F2 steps;
+- Validate documentation #1021 — SUCCESS;
+- Genera manuale Word #1447 — SUCCESS;
+- Scientific Platform Governance #84 — SUCCESS;
+- BKL-041 F4 Governance #86 — SUCCESS;
+- BKL-046 F4 governance #60 — SUCCESS;
+- BKL-046 F5 governance #45 — SUCCESS.
+
+The governed projection commit is included in the verified head. This record documents evidence only; publishing it creates a later documentation-only head whose applicable workflows must also pass before any review request.
 
 ## 5. Governance stop
 
 This evidence supports publication of an implementation PR candidate only. It does not constitute ARB approval, Release Quality approval, acceptance, merge authorization, branch-protection waiver or authorization for F3 providers/ranking/runtime work.
-
