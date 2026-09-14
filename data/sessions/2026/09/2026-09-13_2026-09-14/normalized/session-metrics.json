@@ -1,0 +1,68 @@
+{
+  "schema_version": "0.2.0",
+  "session_id": "2026-09-13_2026-09-14",
+  "generated_at": "2026-09-14T09:01:15.711096+00:00",
+  "scientific": {
+    "target_name": "M 27",
+    "ra_deg": 299.9,
+    "dec_deg": 22.72111111,
+    "epoch": "J2000",
+    "telescope": "Celestron C8 XLT",
+    "camera": "QHY695A",
+    "binning": 1,
+    "source": "nina-log",
+    "configuration_id": "C8_QHY695A_BIN1"
+  },
+  "nina": {
+    "camera_exposures_total": 91,
+    "light_started": 27,
+    "light_completed": 27,
+    "light_failed_explicit": 0,
+    "light_interrupted_unmatched": 0,
+    "technical_exposures_estimated": 64,
+    "integration_seconds": 16200.0,
+    "autofocus_started": 8,
+    "autofocus_completed": 4,
+    "autofocus_failed_explicit": 0,
+    "autofocus_unmatched": 4,
+    "dither_requests": 52,
+    "nina_errors": 37,
+    "nina_warnings": 65
+  },
+  "phd2": {
+    "guide_segments": 7,
+    "guide_samples_valid": 0,
+    "rms_ra_arcsec": null,
+    "rms_dec_arcsec": null,
+    "rms_total_arcsec": null,
+    "lost_star_events": 0,
+    "pulse_guide_failures": 0
+  },
+  "weather": {
+    "weather_rows_total": 3960,
+    "weather_rows_unsafe_full_window": 414,
+    "weather_safe_transitions_full_window": 1,
+    "weather_unsafe_pct_full_window": 10.45,
+    "weather_scope_note": "Valori riferiti alla finestra CSV importata; non penalizzano la severita finche non sono correlati alla sequenza attiva/cupola aperta."
+  },
+  "sqm": {
+    "state": "AVAILABLE",
+    "quality": "AVAILABLE",
+    "start": "2026-09-13T17:00:27.0000000Z",
+    "end": "2026-09-14T03:59:58.0000000Z",
+    "min_mag_arcsec2": 8.9,
+    "max_mag_arcsec2": 21.03,
+    "mean_mag_arcsec2": 19.5977,
+    "median_mag_arcsec2": 20.84,
+    "valid_samples": 1300,
+    "temporal_coverage": 0.9841,
+    "source_path": "data/sessions/2026/09/2026-09-13_2026-09-14/raw/sqm/sqm-summary.json",
+    "source": "AAG CloudWatcher SOLO HTTP / lightmpsas",
+    "serial": "2382",
+    "firmware": "5.88"
+  },
+  "severity": "GREEN",
+  "severity_reasons": [
+    "Nessuna anomalia grave rilevata dai criteri v0.2.0."
+  ]
+}

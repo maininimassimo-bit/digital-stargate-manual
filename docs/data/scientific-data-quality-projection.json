@@ -3,13 +3,13 @@
   "projectionType": "SCIENTIFIC_DATA_QUALITY_PROJECTION",
   "projectionId": "BKL041-F4-CATALOG-V1",
   "projectionState": "EXPERIMENTAL_NOT_ACCEPTED",
-  "generatedAt": "2026-09-13T15:45:45.591Z",
+  "generatedAt": "2026-09-14T09:01:18.264Z",
   "sourceCatalog": {
     "path": "docs/data/scientific-session-catalog.json",
     "schemaVersion": "1.5",
     "catalogStatus": "VERSIONED_ANALYTICS_PROJECTION",
-    "digest": "24970ea2e6fecbd8508652e8884d495f7dc7b4c8687a7e756c8287a46533951a",
-    "sessionCount": 16,
+    "digest": "38505f9135cb15c7b0c8002133dfeb2c9cd6eb3658f9441df9d2b782f5194915",
+    "sessionCount": 17,
     "sessionIds": [
       "2026-07-14_2026-07-15",
       "2026-07-15_2026-07-16",
@@ -26,7 +26,8 @@
       "2026-09-05_2026-09-06",
       "2026-09-06_2026-09-07",
       "2026-09-07_2026-09-08",
-      "2026-09-12_2026-09-13"
+      "2026-09-12_2026-09-13",
+      "2026-09-13_2026-09-14"
     ]
   },
   "profile": {
@@ -38,9 +39,9 @@
     "algorithmVersion": "1.0.0"
   },
   "summary": {
-    "totalSessions": 16,
+    "totalSessions": 17,
     "availableAssessments": 5,
-    "unavailableAssessments": 3,
+    "unavailableAssessments": 4,
     "invalidAssessments": 8
   },
   "assessments": [
@@ -1778,6 +1779,155 @@
         "code": "PROFILE_VALUE_OUT_OF_RANGE",
         "message": "GUIDING_STABILITY value 0.39 is outside [0.5,3] and policy is REJECT."
       }
+    },
+    {
+      "sessionId": "2026-09-13_2026-09-14",
+      "target": "M 27",
+      "observedAt": "2026-09-14T03:59:58.0000000Z",
+      "sourceMetricsPath": "data/sessions/2026/09/2026-09-13_2026-09-14/normalized/session-metrics.json",
+      "inputEvidence": [
+        {
+          "dimension": "METADATA_LINEAGE_INTEGRITY",
+          "value": 1,
+          "unit": "ratio",
+          "evidenceClass": "DECLARED",
+          "quality": "VALID",
+          "completeness": "COMPLETE",
+          "coverage": 1,
+          "calibrationState": "NOT_APPLICABLE",
+          "eligibility": "ELIGIBLE_FOR_FUTURE_NORMALIZATION",
+          "evidenceRefs": [
+            "data/sessions/2026/09/2026-09-13_2026-09-14/normalized/session-metrics.json#scientific"
+          ]
+        },
+        {
+          "dimension": "ACQUISITION_COMPLETION",
+          "value": 1,
+          "unit": "ratio",
+          "evidenceClass": "DECLARED",
+          "quality": "VALID",
+          "completeness": "COMPLETE",
+          "coverage": 1,
+          "calibrationState": "NOT_APPLICABLE",
+          "eligibility": "ELIGIBLE_FOR_FUTURE_NORMALIZATION",
+          "evidenceRefs": [
+            "data/sessions/2026/09/2026-09-13_2026-09-14/normalized/session-metrics.json#nina"
+          ]
+        },
+        {
+          "dimension": "SKY_QUALITY_COVERAGE",
+          "value": 20.84,
+          "unit": "mag/arcsec2",
+          "evidenceClass": "DECLARED",
+          "quality": "VALID",
+          "completeness": "COMPLETE",
+          "coverage": 0.9841,
+          "calibrationState": "NOT_APPLICABLE",
+          "eligibility": "ELIGIBLE_FOR_FUTURE_NORMALIZATION",
+          "evidenceRefs": [
+            "data/sessions/2026/09/2026-09-13_2026-09-14/normalized/session-metrics.json#sqm"
+          ]
+        }
+      ],
+      "projectionRecordState": "UNAVAILABLE",
+      "assessment": {
+        "schemaVersion": "1.0",
+        "assessmentType": "SCIENTIFIC_DATA_QUALITY_ASSESSMENT",
+        "assessmentId": "BKL041-F3-026c2727ee264f9fba0d4c84",
+        "sessionId": "2026-09-13_2026-09-14",
+        "profileId": "DSG-SCIENTIFIC-QUALITY-SYNTHETIC-DEMONSTRATOR",
+        "profileVersion": "1.0.0-f3",
+        "profileDigest": "7bf87e894d26054e51c97b10e9519fb5861926d0770de968b3f9d74a7b97f157",
+        "algorithmId": "DSG-WEIGHTED-LINEAR-SCORE",
+        "algorithmVersion": "1.0.0",
+        "evidenceSnapshotDigest": "86a03fa90ccd095be38c29e85605a373f2806d89970b10372a78489d3343e7a4",
+        "assessmentState": "UNAVAILABLE",
+        "score": null,
+        "confidence": null,
+        "evidenceCoverage": 0.746025,
+        "decomposition": [
+          {
+            "dimension": "METADATA_LINEAGE_INTEGRITY",
+            "state": "AVAILABLE",
+            "rawValue": 1,
+            "unit": "ratio",
+            "normalizedValue": 1,
+            "weight": 0.2,
+            "contribution": 0.2,
+            "confidenceFactor": 0.8,
+            "evidenceRefs": [
+              "data/sessions/2026/09/2026-09-13_2026-09-14/normalized/session-metrics.json#scientific"
+            ],
+            "exclusionReason": null
+          },
+          {
+            "dimension": "ACQUISITION_COMPLETION",
+            "state": "AVAILABLE",
+            "rawValue": 1,
+            "unit": "ratio",
+            "normalizedValue": 1,
+            "weight": 0.3,
+            "contribution": 0.3,
+            "confidenceFactor": 0.8,
+            "evidenceRefs": [
+              "data/sessions/2026/09/2026-09-13_2026-09-14/normalized/session-metrics.json#nina"
+            ],
+            "exclusionReason": null
+          },
+          {
+            "dimension": "GUIDING_STABILITY",
+            "state": "UNAVAILABLE",
+            "rawValue": null,
+            "unit": "arcsec",
+            "normalizedValue": null,
+            "weight": 0.25,
+            "contribution": null,
+            "confidenceFactor": null,
+            "evidenceRefs": [],
+            "exclusionReason": "REQUIRED_EVIDENCE_MISSING"
+          },
+          {
+            "dimension": "SKY_QUALITY_COVERAGE",
+            "state": "AVAILABLE",
+            "rawValue": 20.84,
+            "unit": "mag/arcsec2",
+            "normalizedValue": 0.81142857,
+            "weight": 0.25,
+            "contribution": 0.20285714,
+            "confidenceFactor": 0.78728,
+            "evidenceRefs": [
+              "data/sessions/2026/09/2026-09-13_2026-09-14/normalized/session-metrics.json#sqm"
+            ],
+            "exclusionReason": null
+          }
+        ],
+        "exclusions": [
+          {
+            "dimension": "OPTICAL_IMAGE_QUALITY",
+            "requirement": "OPTIONAL",
+            "weight": 0,
+            "reason": "OPTIONAL_EVIDENCE_MISSING"
+          },
+          {
+            "dimension": "WEATHER_CONTEXT",
+            "requirement": "CONTEXT_ONLY",
+            "weight": 0,
+            "reason": "CONTEXT_EVIDENCE_MISSING"
+          }
+        ],
+        "limitations": [
+          "All bounds and weights are synthetic F3 demonstrator parameters and are not calibrated for production sessions, targets, filters or setups.",
+          "Synthetic demonstrator profile; not production scientific calibration or acceptance authority."
+        ],
+        "authority": {
+          "consumerMode": "READ_ONLY",
+          "acceptanceAuthority": false,
+          "actionAuthority": "NONE",
+          "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
+        },
+        "assessmentDigest": "866891f9233885f962e79a27435fa3f3b95730b60ea496ed6b658302ef712185"
+      },
+      "generationError": null
     }
   ],
   "limitations": [
@@ -1799,5 +1949,5 @@
     "actionAuthority": "NONE",
     "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
   },
-  "projectionDigest": "8a1093cc9c7b968346da95d929d41540562fb6b38ed40c42305126020c86e51d"
+  "projectionDigest": "ff52f1fb7821a9857d146dcb9185246967c26fe3016d95629ed3a95b372a6b0b"
 }
