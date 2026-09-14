@@ -219,9 +219,9 @@ For future implementation:
 | security/privacy runtime test | NOT EXECUTED |
 | PC Principale/EAGLE OAT | NOT APPLICABLE to design; NOT AUTHORIZED for implementation |
 
-## 12. Acceptance rule
+## 12. Architecture acceptance evidence and current implementation rule
 
-The architecture package can be recommended for merge only after separately authorized ARB and Release Quality reviews and successful review-publication exact-head CI.
+The architecture-package gate was satisfied through separately authorized ARB/Release Quality reviews, successful review-publication CI, PR #191 merge and 9/9 post-merge workflows.
 
 F3 implementation cannot be recommended until:
 
@@ -243,9 +243,9 @@ This plan is not evidence that:
 - the capability is production-ready;
 - the planner can rank, recommend, schedule or declare readiness/safety.
 
-## 14. Governance stop
+## 14. Current governance stop after plan acceptance
 
-On publication of the architecture package and this plan, execute only repository documentation/CI validation. Stop before ARB, Release Quality, ADR acceptance, merge and every F3 implementation/runtime activity unless separately authorized.
+The architecture and this validation plan are accepted with conditions; their reviews and PR #191 merge are complete. Stop before remediation of implementation conditions, ADR/provider selection, authority records, schema/fixture/validator/adapter work, P01–P10/N21–N66 execution, scientific validation and every runtime activity unless separately authorized.
 
 
 ## 15. Acceptance and execution boundary

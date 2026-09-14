@@ -36,12 +36,13 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [BKL-031 F1 Acceptance](BKL-031-F1-ACCEPTANCE-2026-09-14.md) | F1 accepted/post-merge verified; condizioni trasferite |
 | [BKL-031 F2 Handoff](../architecture/assessments/BKL-031-F2-Machine-Readable-Context-Contract-Handoff-2026-09-14.md) | Fulfilled handoff; F2 accepted/post-merge verified |
 | [BKL-031 F2 Acceptance](BKL-031-F2-ACCEPTANCE-2026-09-14.md) | F2 acceptance, merge-control decision and post-merge evidence |
-| [BKL-031 F3 Handoff](../architecture/assessments/BKL-031-F3-Governed-Site-Setup-Ephemeris-Lunar-Handoff-2026-09-14.md) | Current handoff only; design and implementation not authorized |
-| [BKL-031 F3 Solution Architecture](../architecture/scientific-assets/BKL-031-F3-Governed-Site-Setup-and-Ephemeris-Lunar-Solution-Architecture.md) | Current review candidate; source-neutral and not implemented |
+| [BKL-031 F3 Handoff](../architecture/assessments/BKL-031-F3-Governed-Site-Setup-Ephemeris-Lunar-Handoff-2026-09-14.md) | Fulfilled; Solution Architecture accepted with conditions, implementation not authorized |
+| [BKL-031 F3 Solution Architecture](../architecture/scientific-assets/BKL-031-F3-Governed-Site-Setup-and-Ephemeris-Lunar-Solution-Architecture.md) | Accepted with conditions/post-merge verified; not implemented |
 | [BKL-031 F3 Validation Plan](../architecture/validation/BKL-031-F3-Governed-Site-Setup-and-Ephemeris-Lunar-Validation-Plan.md) | Accepted validation plan; P01–P10/N21–N66 not executed |
 | [BKL-031 F3 Solution Architecture Acceptance](BKL-031-F3-SOLUTION-ARCHITECTURE-ACCEPTANCE-2026-09-14.md) | Acceptance reconciliation candidate; ARB rework required |
 | [PR #192 BKL-031 F3 Acceptance AI-Assisted ARB](../architecture/reviews/ARB-PR192-BKL-031-F3-Acceptance-AI-Assisted-Review-2026-09-14.md) | Rework Required — 94/100; non equivalente ad approvazione umana indipendente |
 | [PR #192 BKL-031 F3 Acceptance AI-Assisted Release Quality](../architecture/reviews/RQ-PR192-BKL-031-F3-Acceptance-AI-Assisted-Review-2026-09-14.md) | Not Ready; non equivalente ad approvazione umana indipendente |
+| [BKL-031 F3 Acceptance M01 Remediation Evidence](../architecture/validation/BKL-031-F3-Acceptance-Governance-Consistency-Remediation-Evidence-2026-09-14.md) | ARB-192-M01 remediation applied; re-review pending |
 | [PR #191 BKL-031 F3 Solution Architecture AI-Assisted ARB](../architecture/reviews/ARB-PR191-BKL-031-F3-Solution-Architecture-AI-Assisted-Review-2026-09-14.md) | Approved with Conditions — 98/100; non equivalente ad approvazione umana indipendente |
 | [PR #191 BKL-031 F3 Solution Architecture AI-Assisted Release Quality](../architecture/reviews/RQ-PR191-BKL-031-F3-Solution-Architecture-AI-Assisted-Review-2026-09-14.md) | Conditionally Ready; non equivalente ad approvazione umana indipendente |
 | [PR #190 BKL-031 F3 Handoff AI-Assisted ARB](../architecture/reviews/ARB-PR190-BKL-031-F3-Handoff-AI-Assisted-Architecture-Review-2026-09-14.md) | Approved with Conditions — 99/100; non equivalente ad approvazione umana indipendente |

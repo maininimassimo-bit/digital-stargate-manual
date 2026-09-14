@@ -136,6 +136,6 @@ Il primo candidato dependency-ordered è F3-A1 — Site Authority Contract. Una 
 
 Questa acceptance non autorizza F3-A1 né F3-A2/A3/B/C, provider/ADR, record reali, schema/fixture/validator/adapter, dipendenze, chiamate esterne, forecast, ranking, readiness, runtime, device command, PC/EAGLE o Safety Authority.
 
-## 11. Governance stop
+## 11. Current governance stop after ARB-192-M01 remediation
 
-Pubblicare questo acceptance package come PR draft e verificare l'exact-head CI. Fermarsi prima di ARB/Release Quality della closure, merge, ruleset waiver e qualsiasi implementazione F3.
+La prima review della closure ha rilevato `ARB-192-M01`. Dopo la remediation e la CI sull'exact head, fermarsi prima delle ARB/Release Quality re-review, del merge, di qualsiasi decisione ruleset/waiver e di ogni implementazione F3. La presente remediation non chiude `ARB-191-MI01` o `ARB-191-MI02` e non promuove F3-A1/A2/A3/B/C.

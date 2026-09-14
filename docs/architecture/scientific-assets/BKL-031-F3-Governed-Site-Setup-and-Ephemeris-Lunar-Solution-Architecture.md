@@ -438,9 +438,9 @@ This package is review-ready when:
 10. continuity, roadmap and MkDocs are reconciled;
 11. exact-head CI is successful.
 
-## 20. Explicit exclusions
+## 20. Current explicit exclusions after architecture acceptance
 
-Not authorized or delivered:
+Not authorized or delivered by the accepted architecture baseline:
 
 - accepted provider/library/kernel or ADR;
 - real site/setup authority record;
@@ -450,12 +450,11 @@ Not authorized or delivered:
 - weights, scores, thresholds, ranking, target ordering or portal consumer/F5;
 - readiness, scheduling or go/no-go/BKL-032;
 - device command, remediation or Safety Authority;
-- PC Principale/EAGLE/runtime activity;
-- ARB, Release Quality, merge or acceptance.
+- PC Principale/EAGLE/runtime activity.
 
-## 21. Governance stop
+## 21. Current governance stop after architecture acceptance
 
-Publish this package as a draft PR and verify applicable exact-head CI. Then stop. AI-assisted ARB/Release Quality reviews, merge-control decisions, merge and every implementation slice require separate repository-owner authorization.
+The architecture review, merge-control decision and PR #191 merge are complete and post-merge verified. Stop before F3-A1/A2/A3/B/C, provider/ADR selection, authority records, schema/fixture/validator/adapter work, external calls or runtime activity. Each requires a new repository-owner authorization; ARB-191-MI01 and ARB-191-MI02 remain binding.
 
 
 ## 22. Acceptance record
