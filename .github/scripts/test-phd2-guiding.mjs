@@ -51,7 +51,7 @@ test('parseGuideLog includes C8 saturated samples and closes failed settling', (
     'Equipment Profile = C8_QHY695A',
     'Pixel scale = 0.61 arc-sec/px, Binning = 1, Focal length = 1260 mm',
     header,
-    '1,3.0,"Mount",0,0,50,50,50,50,0,,0,,,,100,20,1',
+    '1,3.0,"DROP",,,,,,,,,,,,,0,0.00,4,"Star lost - low HFD"',
     'Guiding Ends at 2026-09-13 21:04:48',
     'INFO: SETTLING STATE CHANGE, Settling failed',
     'Guiding Begins at 2026-09-13 21:04:58',
@@ -70,7 +70,7 @@ test('parseGuideLog includes C8 saturated samples and closes failed settling', (
   assert.equal(result.sampleCountTotal, 4);
   assert.equal(result.sampleCount, 2);
   assert.equal(result.saturatedSampleCount, 1);
-  assert.equal(result.rejectedSampleCount, 1);
+  assert.equal(result.rejectedSampleCount, 2);
   assert.equal(result.settlingExcludedSampleCount, 1);
   assert.equal(result.settlingFailureCount, 1);
   assert.deepEqual(result.equipmentProfiles, ['C8_QHY695A']);
