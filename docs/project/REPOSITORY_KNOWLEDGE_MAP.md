@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 3.0 |
+| Versione | 3.1 |
 | Stato | Active |
 | Data | 14/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | BKL-031 — F1/F2 accepted; successor decision pending |
+| Current governed package | BKL-031 F3 — current handoff only; implementation not authorized |
 
 ## 1. Scopo
 
@@ -45,11 +45,11 @@ Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimen
 
 BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`; nessun apply path o Safety Authority è autorizzato.
 
-BKL-031 F1 e F2 sono ACCEPTED / POST-MERGE VERIFIED. F2 è integrato tramite PR #188 e merge `7f861f7399079858c9744e69b6c773664b6b5b54` con contratto source/context, fixture bounded e validator fail-closed. S07–S11 restano unavailable/unknown; la separazione da BKL-032/Safety è invariata. Nessun successore è promosso.
+BKL-031 F1/F2 sono ACCEPTED / POST-MERGE VERIFIED; la closure F2 è integrata tramite PR #189 e merge `4d5526c2fa2af10aeddace4f26c33fc95b7eaa57`. F3 è current handoff only per sito/setup ed ephemeris/lunare. S07 e S11 restano unavailable; forecast, ranking, BKL-032 readiness e Safety restano separati.
 
 ## 7. Roadmap sequence
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / SUCCESSOR DECISION PENDING] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 CURRENT HANDOFF] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 8. CI/CD e publishing
 
@@ -76,3 +76,5 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 2.9 | 14/09/2026 | BKL-031 F1 accepted/post-merge verified; F2 current handoff only |
 
 | 3.0 | 14/09/2026 | BKL-031 F2 accepted/post-merge verified; successor decision pending |
+
+| 3.1 | 14/09/2026 | BKL-031 F3 promoted as current handoff only |
