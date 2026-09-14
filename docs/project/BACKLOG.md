@@ -139,7 +139,7 @@ Il repository owner ha autorizzato il solo incremento F2. Il candidate package m
 Completed baseline through BKL-037
   -> BKL-041 Scientific Data Quality Score [CLOSED]
   -> BKL-046 AI Post-Processing Assistant [CLOSED]
-  -> BKL-031 Observation Planner [F1/F2 ACCEPTED / F3 SA REVIEW CANDIDATE]
+  -> BKL-031 Observation Planner [F1/F2 ACCEPTED / F3 SA REVIEWED — MERGE PENDING]
   -> BKL-032 Session Readiness
   -> BKL-036 Observatory Health Score
   -> BKL-033 Digital Twin
@@ -176,8 +176,8 @@ BKL-031 F2 è ACCEPTED / POST-MERGE VERIFIED tramite PR #188 e merge `7f861f7399
 
 Dopo la closure F2, F3 è promosso come handoff governato per source discovery e decisioni su sito, setup corrente ed ephemeris/lunare. La sequenza F1 resta F3 → F4 forecast → F5 ranking/consumer read-only → F6 closure. La promozione non autorizza design dettagliato, selezione provider, implementazione, schema, fixture, adapter, credenziali, chiamate esterne, forecast, ranking, readiness, runtime, device command o Safety Authority.
 
-### BKL-031 F3 Solution Architecture review candidate — 14/09/2026
+### BKL-031 F3 Solution Architecture AI-assisted reviews — 14/09/2026
 
 L'handoff F3 è integrato/post-merge verified tramite PR #190, technical head `5706924c07c3a9fb9d04897c0aaaec4257d514d0`, review-publication head `979523f6c65c86450f7dac8335452aac370ea834` e merge `2ffc77917bcd3fc25a3c5657e8f12e62c9284303`, con ARB 99/100, Release Quality `CONDITIONALLY READY` e 9/9 workflow post-merge. La deroga `W-BKL031-F3-HANDOFF-MERGE-001` è consumata/scaduta.
 
-Il Solution Architecture Package F3 e il validation plan sono pubblicati come review candidate source-neutral. Confrontano Astropy/JPL, Skyfield/JPL e JPL Horizons senza selezionare un provider; definiscono authority record, port/adapter boundary, semantiche UTC/IANA/frame/epoch, privacy, cache, failure behavior, migrazione e casi N21–N66. ARB, Release Quality, merge, ADR/provider selection, record reali, schema/fixture/validator/adapter e implementazione restano non autorizzati.
+Il Solution Architecture Package F3 e il validation plan sono stati valutati sulla PR #191 technical head `43a46ac28c30badc40e4cb180ed98924ebcf74a1`. ARB AI-assisted: `APPROVED WITH CONDITIONS`, 98/100; Release Quality AI-assisted: `CONDITIONALLY READY`. Le review non equivalgono ad approvazioni umane indipendenti e registrano due condizioni Minor: separazione tra digest interno del record sito e riferimento pubblico, e semantica half-open degli intervalli di validità. Restano pendenti la CI dell'head di pubblicazione e una separata autorizzazione owner per merge/ruleset. ADR/provider selection, record reali, schema/fixture/validator/adapter e implementazione restano non autorizzati.

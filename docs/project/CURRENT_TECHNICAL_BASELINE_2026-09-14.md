@@ -4,7 +4,7 @@
 |---|---|
 | Stato | Active |
 | Repository baseline verificata | `2ffc77917bcd3fc25a3c5657e8f12e62c9284303` |
-| Current governed package | BKL-031 F3 — Solution Architecture review candidate |
+| Current governed package | BKL-031 F3 — AI-assisted reviews published; merge decision pending |
 | Accepted increments | BKL-031 F1 and F2; F3 handoff integrated/post-merge verified |
 | Runtime impact | None |
 | PC Principale / EAGLE | Nessuna azione richiesta |
@@ -46,4 +46,4 @@ Le review ARB/RQ sono AI-assisted, owner-authorized e non equivalenti ad approva
 
 L'handoff F3 è integrato/post-merge verified tramite PR #190 e merge `2ffc77917bcd3fc25a3c5657e8f12e62c9284303`, con 9/9 workflow post-merge; `W-BKL031-F3-HANDOFF-MERGE-001` è consumata/scaduta.
 
-Il Solution Architecture Package F3 e il validation plan sono current review candidate soltanto. Definiscono registri sito/setup, port/adapter source-neutral, evidenza ephemeris/lunare, privacy, fail-closed behavior, migrazione e validation N21–N66. Non selezionano provider, non approvano ADR e non implementano record, schema, fixture, validator, adapter o runtime. S07 e S11 restano unavailable; F4 forecast, F5 ranking/consumer, BKL-032 readiness e Safety restano separati. ARB, Release Quality e merge richiedono nuova autorizzazione.
+Il Solution Architecture Package F3 e il validation plan sono stati valutati sulla PR #191 technical head `43a46ac28c30badc40e4cb180ed98924ebcf74a1`. ARB AI-assisted: `APPROVED WITH CONDITIONS`, 98/100; Release Quality AI-assisted: `CONDITIONALLY READY`. Le review non equivalgono ad approvazioni umane indipendenti. Le condizioni `ARB-191-MI01` e `ARB-191-MI02` devono essere trasferite a ogni futura implementazione; non modificano il package valutato. La CI dell'head di pubblicazione e una separata decisione owner su merge/ruleset restano pendenti. Provider/ADR, record reali, schema/fixture/validator/adapter, runtime, F4/F5, BKL-032 e Safety restano non autorizzati.

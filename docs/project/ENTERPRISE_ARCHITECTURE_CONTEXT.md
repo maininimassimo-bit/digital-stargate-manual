@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 3.1 |
+| Versione | 3.2 |
 | Stato | Active context baseline |
 | Data baseline | 14/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
@@ -11,7 +11,7 @@
 | Root bootstrap | `AI_BOOTSTRAP.md` |
 | Continuity handover | `docs/project/HANDOVER_2026-09-14.md` |
 | Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-14.md` |
-| Current governed package | BKL-031 F3 — Solution Architecture review candidate; not accepted/implemented |
+| Current governed package | BKL-031 F3 — AI-assisted reviews complete; merge decision pending |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo e gerarchia
@@ -60,11 +60,11 @@ BKL-041 — Scientific Data Quality Score è CLOSED / ACCEPTED / POST-MERGE VERI
 
 BKL-046 F1-F5 sono CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION` e `aiModelImplemented=false`.
 
-BKL-031 F1 e F2 sono ACCEPTED / POST-MERGE VERIFIED. L'handoff F3 è integrato/post-merge verified tramite PR #190 e merge `2ffc77917bcd3fc25a3c5657e8f12e62c9284303`. Il Solution Architecture Package F3 e il validation plan sono current review candidate source-neutral: provider/ADR, record reali, schema/fixture/validator/adapter, implementazione, forecast, ranking, readiness, runtime, device command, workload EAGLE e Safety Authority restano non autorizzati.
+BKL-031 F1 e F2 sono ACCEPTED / POST-MERGE VERIFIED. L'handoff F3 è integrato/post-merge verified tramite PR #190 e merge `2ffc77917bcd3fc25a3c5657e8f12e62c9284303`. Il Solution Architecture Package F3 sulla PR #191 technical head `43a46ac28c30badc40e4cb180ed98924ebcf74a1` ha ricevuto ARB AI-assisted `APPROVED WITH CONDITIONS` 98/100 e Release Quality `CONDITIONALLY READY`. Le review non sono approvazioni umane indipendenti; CI dell'head di pubblicazione e decisione merge/ruleset restano pendenti. Provider/ADR, record reali, schema/fixture/validator/adapter, implementazione, forecast, ranking, readiness, runtime, device command, workload EAGLE e Safety Authority restano non autorizzati.
 
 ## 7. Roadmap
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA REVIEW CANDIDATE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA REVIEWED — MERGE PENDING] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 AMP-002 resta planning authority per AP-007–AP-015, non live status register.
 
@@ -100,3 +100,6 @@ Le acceptance BKL-031 F1/F2 e l'integrazione dell'handoff F3 sono repository-onl
 | 3.0 | 14/09/2026 | BKL-031 F3 promoted as current handoff only |
 
 | 3.1 | 14/09/2026 | BKL-031 F3 Solution Architecture review candidate |
+
+
+| 3.2 | 14/09/2026 | BKL-031 F3 Solution Architecture AI-assisted ARB/RQ complete; merge decision pending |
