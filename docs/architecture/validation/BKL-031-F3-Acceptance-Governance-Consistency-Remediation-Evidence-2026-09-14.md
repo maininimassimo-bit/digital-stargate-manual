@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-SA-ACCEPTANCE-M01-REMEDIATION-001 |
-| Status | **SECOND REMEDIATION APPLIED — RE-REVIEW PENDING** |
+| Status | **SECOND RE-REVIEW COMPLETE — REWORK REQUIRED / ARB-192-M01 OPEN** |
 | Date | 2026-09-14 |
 | Pull request | [#192](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/192) |
 | Finding | `ARB-192-M01` |
@@ -11,6 +11,7 @@
 | Initial review-publication head | `d89c2478a293e98a74b1cf89499dbaffb53f2eda` |
 | First remediation head | `dca2639b5a039dbb7f1c73b730d65fee0275f248` |
 | First re-review publication head | `3b2cced9ac1105c7d19898e962a73367073e6f28` |
+| Second remediation head | `cb519f8e7a36fea3919f7e6cc1f417d5fad09147` |
 | Scope | Documentation/governance consistency only |
 | Runtime impact | None |
 | PC Principale / EAGLE | No activity |
@@ -92,3 +93,17 @@ The residual section 11 row now states `ACCEPTED WITH CONDITIONS / POST-MERGE VE
 This correction changes no architecture contract, provider decision, F3 slice, S08/S09/S10 availability or `ARB-191-MI01`/`ARB-191-MI02` disposition.
 
 After successful exact-head CI, stop before another ARB/Release Quality re-review, merge/ruleset treatment and every implementation/runtime activity. Each requires separate repository-owner authorization.
+
+
+## 8. Second re-review outcome
+
+The owner-authorized AI-assisted ARB/Release Quality second re-review of exact head `cb519f8e7a36fea3919f7e6cc1f417d5fad09147` verified that the Validation Plan residual was corrected and preserved all implementation boundaries.
+
+Outcome:
+
+- ARB: `REWORK REQUIRED` — 96/100;
+- Release Quality: `NOT READY`;
+- `ARB-192-M01`: remains open;
+- remaining inconsistency: the authoritative BKL-031 row in `docs/project/BACKLOG.md` still states `F3 Solution Architecture and validation plan CURRENT REVIEW CANDIDATE only`.
+
+No backlog correction, merge, ruleset decision or implementation is authorized by the re-review. Further remediation and another re-review require separate repository-owner authorization.
