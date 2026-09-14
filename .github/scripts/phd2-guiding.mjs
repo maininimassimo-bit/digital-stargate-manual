@@ -123,16 +123,14 @@ export const parseGuideLog = (text, sourcePath = '', maxPoints = 96) => {
     if (elapsedSeconds === null || !Number.isInteger(errorCode)) continue;
 
     sampleCountTotal += 1;
+    const mount = field(row, header, 'mount').toUpperCase();
+    const invalidSample = mount === 'DROP' || ![0, 1].includes(errorCode);
+    if (invalidSample) rejectedSampleCount += 1;
     if (settling) {
       settlingExcludedSampleCount += 1;
       continue;
     }
-
-    const mount = field(row, header, 'mount').toUpperCase();
-    if (mount === 'DROP' || ![0, 1].includes(errorCode)) {
-      rejectedSampleCount += 1;
-      continue;
-    }
+    if (invalidSample) continue;
     if (pixelScale === null || !Number.isFinite(pixelScale)) {
       unscaledSampleCount += 1;
       continue;
