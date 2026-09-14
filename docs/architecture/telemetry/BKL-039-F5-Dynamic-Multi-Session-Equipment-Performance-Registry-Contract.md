@@ -5,7 +5,7 @@
 | Identifier | `BKL-039-F5` |
 | Capability | BKL-039 — Equipment Performance Registry |
 | Status | Proposed |
-| Version | 0.1 |
+| Version | 0.2 |
 | Date | 2026-09-09 |
 | Base | F4-B accepted merge `e4ccecb3bc52af4a5baaa27cbc8df7178fd239ea` |
 | Runtime impact | Repository/GitHub automation only; no observatory command path |
@@ -30,7 +30,7 @@ F5 attaches Equipment Performance generation to that existing GitHub-side analyt
 A session is eligible for the registry only when all semantics required for the performance population are repository-resolvable. At minimum the generator must resolve:
 
 - a scientific session identity;
-- `metadata_state=REGISTERED`;
+- metadata risolti tramite record esplicito `metadata_state=REGISTERED` oppure tramite storia canonica con stato `CANONICAL_EVIDENCE`;
 - a non-empty governed `configuration_id`;
 - target identity/name;
 - filter and frame population identity;
@@ -39,7 +39,7 @@ A session is eligible for the registry only when all semantics required for the 
 - a matching target-summary population and count;
 - Citation and Provenance locators.
 
-`PARTIAL` sessions are never promoted to performance populations. Missing configuration identity, unresolved lineage, missing/invalid FWHM source values, missing summary rows or population/count disagreement must not be filled with defaults.
+Explicit metadata registry rows take precedence over canonical-history fallback for the same session. Canonical-history fallback is eligible only when target identity, `configuration_id` and exact `source_metrics_path` are all resolved; its Citation must reference `data/analytics/history/sessions.csv` and its Provenance the normalized session metrics. `PARTIAL` and `UNREGISTERED` sessions are never promoted to performance populations. Missing configuration identity, unresolved lineage, missing/invalid FWHM source values, missing summary rows or population/count disagreement must not be filled with defaults.
 
 Fail-closed is population-scoped: an ineligible population is omitted with an explicit machine-readable exclusion reason in generation diagnostics; it must not corrupt or suppress already-valid historical populations. A structurally inconsistent population that claims complete coverage must fail validation.
 
@@ -84,7 +84,7 @@ Required logical sequence:
 COMPLETE scientific session promoted to main
   -> analyze-session-automatic
   -> normalized session analytics/history
-  -> target-exposures + target-summary + scientific metadata
+  -> target-exposures + target-summary + canonical sessions history + explicit scientific metadata
   -> discover eligible performance populations
   -> generate F3 multi-session registry
   -> validate F3
@@ -159,3 +159,19 @@ The portal, registry, analytics and automation remain non-authoritative for phys
 ## 12. Acceptance
 
 F5 is accepted only when repository evidence proves both historical multi-session coverage and automatic future-session onboarding through the existing AP-014 publication chain, with exact-head CI, independent ARB, Release Quality and post-merge verification.
+
+
+## 13. Corrective reconciliation — 2026-09-14
+
+A production population audit found that target exposure and summary history reached session `2026-09-13_2026-09-14`, while the explicit scientific metadata registry ended at `2026-08-15_2026-08-16`. The prior discovery loop iterated only explicit metadata rows, so later canonical sessions were neither evaluated nor emitted as exclusions.
+
+Version 0.2 therefore:
+
+- retains explicit metadata rows as the higher-precedence governed attestation;
+- adds `data/analytics/history/sessions.csv` as the canonical-history fallback for sessions with resolved target, configuration and normalized source locator;
+- requires every canonical history session to be represented by at least one eligible population or an explicit fail-closed exclusion;
+- keeps population eligibility strict: every declared exposure still requires a valid source-backed FWHM token and matching summary count;
+- adds this coverage invariant to the automatic session workflow and unit tests;
+- exposes the count of explicit exclusions in the read-only portal.
+
+This amendment does not calibrate FWHM to angular units, classify equipment health, introduce thresholds/ranking/recommendations, infer Safety or add any PC Principale/EAGLE workload.
