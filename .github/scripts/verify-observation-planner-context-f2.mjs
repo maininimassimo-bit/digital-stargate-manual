@@ -38,9 +38,9 @@ const FACT_CONTRACTS = {
   },
   SETUP_COMPATIBILITY: {},
   CELESTIAL_GEOMETRY: {
-    TARGET_RA_DEG: {unit:'DEG', sources:['BKL031-S02','BKL031-S04'], temporal:'HISTORICAL', kind:'DECLARED'},
-    TARGET_DEC_DEG: {unit:'DEG', sources:['BKL031-S02','BKL031-S04'], temporal:'HISTORICAL', kind:'DECLARED'},
-    COORDINATE_EPOCH: {unit:null, sources:['BKL031-S02','BKL031-S04'], temporal:'HISTORICAL', kind:'DECLARED'}
+    TARGET_RA_DEG: {unit:'DEG', sources:['BKL031-S02'], temporal:'HISTORICAL', kind:'DECLARED'},
+    TARGET_DEC_DEG: {unit:'DEG', sources:['BKL031-S02'], temporal:'HISTORICAL', kind:'DECLARED'},
+    COORDINATE_EPOCH: {unit:null, sources:['BKL031-S02'], temporal:'HISTORICAL', kind:'DECLARED'}
   },
   LUNAR_CONTEXT: {},
   FORECAST: {},
@@ -199,8 +199,6 @@ function citationChecks(doc, sources, repositorySources, fail) {
     } else if (path === 'data/analytics/metadata/session-scientific-metadata.csv' && key === 'session_id') {
       if (citation.source_ref !== 'BKL031-S02') fail(citationRef + ': metadata locator requires BKL031-S02');
       if (!metadataRows.some(row => row.session_id === value)) fail(citationRef + ': unresolved scientific metadata Citation');
-    } else if (key === 'session_id' && asArray(catalog?.sessions).some(session => session.sessionId === value && session.sourceMetricsPath === path)) {
-      if (citation.source_ref !== 'BKL031-S04') fail(citationRef + ': normalized session locator requires BKL031-S04');
     } else fail(citationRef + ': locator is outside the bounded F2 allowlist');
   }
   return citations;
@@ -601,8 +599,8 @@ function semanticBindingChecks(doc, citations, provenance, candidates, dimension
             const citation = citations.get(citationRef);
             const sessionId = citation?.locator?.record_value;
             const row = governedRows.find(item => item.session_id === sessionId);
-            if (!row || !['BKL031-S02','BKL031-S04'].includes(citation?.source_ref)) {
-              fail(label + ': coordinate Citation must resolve to eligible S02/S04 evidence for candidate');
+            if (!row || citation?.source_ref !== 'BKL031-S02') {
+              fail(label + ': coordinate Citation must resolve to eligible S02 evidence for candidate');
             }
           }
         }

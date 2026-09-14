@@ -3,11 +3,13 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F2-VAL-001 |
-| Status | **ARB REMEDIATION CANDIDATE — RE-REVIEW NOT AUTHORIZED** |
+| Status | **M-R1 REMEDIATION CANDIDATE — RE-REVIEW NOT AUTHORIZED** |
 | Date | 2026-09-14 |
 | Baseline | `f6c4b253a56406c930f009af0658b46a12bc088a` |
 | Pre-remediation review-publication head | `86021de468b91f14c38db41bac47551e08b04e53` |
-| Remediation exact head | Established by the PR after atomic publication |
+| First remediation exact head | `d21d57905b2669ccd572563449a523c1795bdcc2` |
+| First remediation review-publication head | `9eb0af3b14c257163f2094ae334a5c1514b3a2de` |
+| M-R1 remediation exact head | Established by the PR after atomic publication |
 | Contract | `schemas/observation-planner-context-f2.schema.json` |
 | Fixture | `docs/data/observation-planner-context-f2-fixture.json` |
 | Normative validator | `.github/scripts/verify-observation-planner-context-f2.mjs` |
@@ -18,12 +20,12 @@
 
 ```text
 BKL-031 F2 context contract OK: 11 sources / 1 candidate / 7 dimensions / no ranking
-tests 36
-pass 36
+tests 37
+pass 37
 fail 0
 ```
 
-The suite contains one positive bounded-fixture test, the twenty negative cases transferred unchanged from the accepted F1 validation plan, and fifteen regressions for ARB findings M-01–M-04. An additional exploratory matrix exercised 250 malformed JSON variants: every call returned a deterministic, non-empty error array and none threw.
+The suite contains one positive bounded-fixture test, the twenty negative cases transferred unchanged from the accepted F1 validation plan, and sixteen regressions for ARB findings M-01–M-04 and M-R1. An additional exploratory matrix exercised 250 malformed JSON variants: every call returned a deterministic, non-empty error array and none threw.
 
 ## 2. Mandatory negative-case traceability
 
@@ -57,9 +59,10 @@ The suite contains one positive bounded-fixture test, the twenty negative cases 
 | M-01 | type-safe traversal, per-stage fail-closed guards, malformed root/container/missing/null regressions | PASS |
 | M-02 | exact fact-to-source-field comparison and exact candidate/dimension/fact/explanation Provenance binding | PASS |
 | M-03 | closed fact vocabulary per dimension plus prohibited readiness/safety/authorization/scoring semantics in keys and values | PASS |
-| M-04 | S02/S04 coordinate-source restriction, complete RA/Dec/epoch triplet, ranges, governed-value reconciliation and conflict-state enforcement | PASS |
+| M-04 | S02 coordinate authority, complete RA/Dec/epoch triplet, ranges, governed-value reconciliation and conflict-state enforcement | PASS |
+| M-R1 | S04 removed from coordinate fact sources; direct S04 locator rejected; current S04 non-attestation regression | PASS |
 
-The review documents remain immutable evidence of the decision made on their reviewed head. This remediation does not change that decision and does not constitute a re-review.
+The review documents remain immutable evidence of their reviewed heads. The AI-assisted re-review on `d21d57905b2669ccd572563449a523c1795bdcc2` found M-R1 and remained `REWORK REQUIRED`; this correction does not change that decision and does not constitute another re-review.
 
 ## 4. Source reconciliation evidence
 
@@ -67,7 +70,7 @@ The review documents remain immutable evidence of the decision made on their rev
 - Historical sessions `2026-08-14_2026-08-15` and `2026-08-15_2026-08-16` resolve in the scientific session catalog.
 - SQM evidence resolves to session `2026-09-13_2026-09-14` in the historical analytics projection and remains explicitly historical.
 - S07–S11 match the accepted unavailable/current-unknown states and expose no fixture fact values.
-- Public fixture Citations remain limited to three normalized repository paths; S02/S04 coordinate reconciliation is validator-only and does not publish raw evidence detail.
+- Public fixture Citations remain limited to three normalized repository paths. S02 is the only permitted F2 coordinate fact source; direct S04 coordinate Citations are rejected because current S04 metrics contain no RA/Dec/epoch fields and require S03 resolution.
 
 ## 5. Exact-head CI evidence
 
@@ -88,7 +91,7 @@ The pre-remediation implementation head `de5215ac7b63f442fc3e591467f8a6402942ce8
 - BKL-046 F4 governance #60 — SUCCESS;
 - BKL-046 F5 governance #45 — SUCCESS.
 
-The pre-remediation review-publication head `86021de468b91f14c38db41bac47551e08b04e53` also produced 7/7 successful workflows, but the ARB decision remained `REWORK REQUIRED`. The remediation exact head and its workflow results must be recorded in PR #188 after atomic publication. Re-review remains a separate authorization.
+The first remediation head `d21d57905b2669ccd572563449a523c1795bdcc2` and its review-publication head `9eb0af3b14c257163f2094ae334a5c1514b3a2de` each produced 7/7 successful workflows. The authorized re-review remained `REWORK REQUIRED` because of M-R1. The M-R1 remediation exact head and workflow results must be recorded in PR #188 after atomic publication; another re-review requires separate authorization.
 
 ## 6. Governance stop
 

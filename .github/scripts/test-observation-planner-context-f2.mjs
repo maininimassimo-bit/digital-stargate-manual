@@ -193,6 +193,19 @@ rejects('M04 conflicting governed coordinate evidence cannot be published as ava
   );
 });
 
+
+rejects('M-R1 current S04 artifact cannot substantiate coordinate facts', doc => {
+  addCoordinateEvidence(doc);
+  const item = dimension(doc, 'CELESTIAL_GEOMETRY');
+  item.source_refs = ['BKL031-S04'];
+  item.facts.forEach(value => { value.source_ref = 'BKL031-S04'; });
+  const citation = doc.citations.find(value => value.id === 'CIT-OP-M27-COORD-20260814');
+  citation.source_ref = 'BKL031-S04';
+  citation.locator.path = 'data/sessions/2026/08/2026-08-14_2026-08-15/normalized/session-metrics.json';
+  const provenance = doc.provenance_records.find(value => value.id === 'PRV-OP-M27-COORD-DIM');
+  provenance.input_refs = ['session:2026-08-14_2026-08-15','BKL031-S04'];
+}, /source class is not authorized|locator is outside the bounded F2 allowlist|eligible S02 evidence/);
+
 function addCoordinateEvidence(doc) {
   const citationRef = 'CIT-OP-M27-COORD-20260814@1.0';
   const provenanceRef = 'PRV-OP-M27-COORD-DIM@1.0';

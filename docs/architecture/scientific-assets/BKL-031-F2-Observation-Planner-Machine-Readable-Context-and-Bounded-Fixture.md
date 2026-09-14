@@ -26,7 +26,7 @@ The fixture is source-backed where accepted evidence exists and explicit about m
 | `schemas/observation-planner-context-f2.schema.json` | published JSON Schema 2020-12 structural contract |
 | `docs/data/observation-planner-context-f2-fixture.json` | bounded source-backed fixture with one candidate and one context |
 | `.github/scripts/verify-observation-planner-context-f2.mjs` | normative structural, semantic and source-reconciliation validator |
-| `.github/scripts/test-observation-planner-context-f2.mjs` | deterministic positive test, the 20 mandatory F1 negative cases and 15 ARB-remediation regressions |
+| `.github/scripts/test-observation-planner-context-f2.mjs` | deterministic positive test, the 20 mandatory F1 negative cases and 16 ARB-remediation regressions |
 | `.github/workflows/developer-foundation.yml` | exact-head CI quality gate |
 | `docs/architecture/validation/BKL-031-F2-Context-Contract-Validation-Evidence-2026-09-14.md` | traceability and validation evidence |
 
@@ -53,7 +53,9 @@ No incomplete or conflicted source record is manufactured for coverage. Negative
 | Sources | F2 state | Permitted meaning |
 |---|---|---|
 | S01 | `AVAILABLE_BOUNDED` | exact target identity and lineage only |
-| S02–S04 | `AVAILABLE_HISTORICAL` | session-scoped historical evidence only |
+| S02 | `AVAILABLE_HISTORICAL` | session-scoped historical metadata; sole F2 authority for RA/Dec/epoch facts |
+| S03 | `AVAILABLE_HISTORICAL` | public-safe scientific-session catalog and S04 resolution boundary |
+| S04 | `AVAILABLE_HISTORICAL` | normalized session metrics resolved only through S03; no F2 coordinate-fact authority |
 | S05 | `AVAILABLE_DERIVED` | descriptive history; never authority override |
 | S06 | `AVAILABLE` | SQM semantics and historical session evidence; never Safety evidence |
 | S07 | `UNAVAILABLE_CURRENT_BASELINE` | placeholder cannot become current evidence |
@@ -78,7 +80,7 @@ The context is an immutable envelope with explicit UTC generation/evaluation ins
 
 Every candidate has exactly one dimension of each accepted type. A usable `AVAILABLE` or `PARTIAL` dimension requires facts, evidence kind, Citation and Provenance. An `UNAVAILABLE`, `UNKNOWN`, `STALE` or `CONFLICTED` dimension exposes no value and requires reason codes.
 
-Facts carry source, semantic type, unit, temporal scope, observation/issue time, validity, spatial scope and method where applicable. Their vocabulary is closed per dimension. Every value and unit must equal the exact field selected by its bounded Citation, while Provenance must bind the exact input set, output and Citation set. Current, forecast, celestial and lunar facts have additional fail-closed source and completeness rules.
+Facts carry source, semantic type, unit, temporal scope, observation/issue time, validity, spatial scope and method where applicable. Their vocabulary is closed per dimension. Every value and unit must equal the exact field selected by its bounded Citation, while Provenance must bind the exact input set, output and Citation set. On the F2 baseline, coordinate facts are restricted to S02; S04 has no RA/Dec/epoch fields and cannot substantiate them. Current, forecast, celestial and lunar facts have additional fail-closed source and completeness rules.
 
 ### 5.4 RankingFactor
 
@@ -136,12 +138,12 @@ Migration is limited to adding the schema, fixture, validator, tests, CI steps a
 Local validation on the implementation candidate reports:
 
 - normative fixture verification: PASS;
-- Node test suite: 36/36 PASS;
+- Node test suite: 37/37 PASS;
 - mandatory F1 negative cases N01–N20: 20/20 PASS;
-- ARB remediation regressions: 15/15 PASS;
+- ARB remediation regressions: 16/16 PASS, including rejection of coordinate claims against the current S04 artifact;
 - malformed-JSON exploratory matrix: 250/250 returned deterministic non-empty error arrays, with zero throws.
 
-GitHub Actions on the exact PR head remains the authoritative publication evidence. F2 is not accepted or closed by this document. The previous AI-assisted ARB decision remains `REWORK REQUIRED` until a separately authorized re-review evaluates the published remediation exact head. ARB re-review, Release Quality repeat, merge, any branch-protection waiver and F3 implementation each require separate owner authorization.
+GitHub Actions on the exact PR head remains the authoritative publication evidence. F2 is not accepted or closed by this document. The AI-assisted remediation re-review on `d21d57905b2669ccd572563449a523c1795bdcc2` remained `REWORK REQUIRED` because S04 could attest absent coordinate fields. This correction removes that path, but the review decision remains in force until another separately authorized exact-head re-review. Further ARB review, Release Quality repeat, merge, any branch-protection waiver and F3 implementation each require separate owner authorization.
 
 ## 12. Deferred decisions
 
