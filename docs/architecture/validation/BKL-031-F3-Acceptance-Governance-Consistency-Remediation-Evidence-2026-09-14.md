@@ -3,12 +3,14 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-SA-ACCEPTANCE-M01-REMEDIATION-001 |
-| Status | **REMEDIATION APPLIED — RE-REVIEW PENDING** |
+| Status | **SECOND REMEDIATION APPLIED — RE-REVIEW PENDING** |
 | Date | 2026-09-14 |
 | Pull request | [#192](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/192) |
 | Finding | `ARB-192-M01` |
 | Reviewed head | `3bf9d96ac19d71dad5daa20762fc38612bef28e0` |
-| Review-publication head | `d89c2478a293e98a74b1cf89499dbaffb53f2eda` |
+| Initial review-publication head | `d89c2478a293e98a74b1cf89499dbaffb53f2eda` |
+| First remediation head | `dca2639b5a039dbb7f1c73b730d65fee0275f248` |
+| First re-review publication head | `3b2cced9ac1105c7d19898e962a73367073e6f28` |
 | Scope | Documentation/governance consistency only |
 | Runtime impact | None |
 | PC Principale / EAGLE | No activity |
@@ -70,3 +72,23 @@ Required on the remediation exact head:
 - confirmation that canonical roadmap/projections are unchanged and aligned.
 
 After successful exact-head CI, stop. ARB/Release Quality re-review, merge/ruleset treatment and implementation require separate owner authorization.
+
+
+## 6. First re-review outcome
+
+The owner-authorized AI-assisted re-review of exact head `dca2639b5a039dbb7f1c73b730d65fee0275f248` concluded:
+
+- ARB: `REWORK REQUIRED` — 97/100;
+- Release Quality: `NOT READY`;
+- `ARB-192-M01`: partially remediated/open;
+- residual issue: Validation Plan section 11 still classified the current F3 architecture document as a `PROPOSED review candidate`.
+
+The re-review is not equivalent to an independent human approval and did not authorize remediation, merge, ruleset treatment or implementation.
+
+## 7. Second remediation
+
+The residual section 11 row now states `ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED — NOT IMPLEMENTED`. No other evidence classification changes: site/setup authority remains not materialized; provider ADR, scientific campaign and runtime security tests remain not executed; schema/fixture/validator remains not implemented; PC/EAGLE OAT remains not authorized.
+
+This correction changes no architecture contract, provider decision, F3 slice, S08/S09/S10 availability or `ARB-191-MI01`/`ARB-191-MI02` disposition.
+
+After successful exact-head CI, stop before another ARB/Release Quality re-review, merge/ruleset treatment and every implementation/runtime activity. Each requires separate repository-owner authorization.
