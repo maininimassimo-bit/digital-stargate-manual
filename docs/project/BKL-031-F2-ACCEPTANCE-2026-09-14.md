@@ -11,7 +11,7 @@
 | Technical head reviewed | `8e46ae3eccdaca5763aee7103063e020f97e2946` |
 | Review-publication head | `09b6e2272f40688c7ead0eba964b8eb6f64a0920` |
 | Merge commit | `7f861f7399079858c9744e69b6c773664b6b5b54` |
-| Successore | Decisione owner pending; F3 non promosso |
+| Successore | BKL-031 F3 — CURRENT HANDOFF ONLY; design/implementation not authorized |
 | Runtime impact | None |
 | PC Principale / EAGLE | Nessuna azione richiesta |
 
@@ -94,4 +94,4 @@ Restano fuori scope provider site/setup/ephemeris/lunar/forecast, pesi, score, n
 
 ## 8. Next governed action
 
-Decidere separatamente il successore di BKL-031. Nessuna attività F3 è autorizzata dalla presente acceptance.
+Il successore governato è BKL-031 F3 per sito/setup ed ephemeris/lunare. È autorizzato soltanto l'handoff di programma; design dettagliato, provider selection, implementazione e runtime richiedono nuove autorizzazioni.

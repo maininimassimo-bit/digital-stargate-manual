@@ -3,8 +3,8 @@
 | Campo | Valore |
 |---|---|
 | Stato | Active |
-| Repository baseline verificata | `7f861f7399079858c9744e69b6c773664b6b5b54` |
-| Current governed package | BKL-031 — F1/F2 accepted; successor decision pending |
+| Repository baseline verificata | `4d5526c2fa2af10aeddace4f26c33fc95b7eaa57` |
+| Current governed package | BKL-031 F3 — current handoff only |
 | Accepted increments | BKL-031 F1 and F2 |
 | Runtime impact | None |
 | PC Principale / EAGLE | Nessuna azione richiesta |
@@ -42,6 +42,6 @@ Le review ARB/RQ sono AI-assisted, owner-authorized e non equivalenti ad approva
 - interlock fisici/locali restano Safety Authority;
 - workload pesante e chiamate esterne restano fuori da EAGLE.
 
-## 5. Successor gate
+## 5. Current F3 gate
 
-Nessun F3 o altro successore è promosso. Provider site/setup/ephemeris/lunar/forecast, pesi, score, ranking, portal consumer, readiness, scheduler, device command e Safety Authority richiedono una nuova decisione owner e un nuovo package governato.
+F3 è promosso soltanto come handoff per source discovery e decisioni su sito/setup ed ephemeris/lunare. F3 deve preservare S07 e S11 come unavailable, mantenere forecast a F4 e ranking/consumer a F5. Design dettagliato, provider selection, schema, fixture, adapter, implementazione, runtime e ogni attività PC/EAGLE richiedono autorizzazioni separate.

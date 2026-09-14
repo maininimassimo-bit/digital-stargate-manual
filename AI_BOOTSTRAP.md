@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 4.3 |
+| Versione | 4.4 |
 | Baseline | 14/09/2026 |
-| Stato | Current root bootstrap — BKL-031 F1/F2 accepted; successor decision pending |
+| Stato | Current root bootstrap — BKL-031 F1/F2 accepted; F3 current handoff only |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -58,7 +58,7 @@ La closure BKL-046 non dichiara efficacia scientifica né produzione: `NOT_EVALU
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / SUCCESSOR DECISION PENDING] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 CURRENT HANDOFF] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -70,5 +70,5 @@ Nessun portale, planner, comparison layer, quality score o AI è Safety Authorit
 
 ## 9. Punto di partenza operativo
 
-BKL-031 F2 è ACCEPTED / POST-MERGE VERIFIED. La baseline comprende contratto machine-readable, fixture bounded, validator fail-closed e 37 test; S07–S11 restano unavailable/unknown. Nessun successore è promosso: F3, provider selection, pesi, score, ranking, readiness, scheduler, device command, workload pesante EAGLE e Safety Authority richiedono una nuova autorizzazione owner esplicita.
+BKL-031 F2 è ACCEPTED / POST-MERGE VERIFIED. F3 è promosso soltanto come handoff per governare sito/setup e sorgente ephemeris/lunare. Non sono autorizzati design dettagliato, scelta provider, schema/fixture/adapter, implementazione, forecast, pesi, score, ranking, readiness, scheduler, device command, workload pesante EAGLE o Safety Authority.
 
