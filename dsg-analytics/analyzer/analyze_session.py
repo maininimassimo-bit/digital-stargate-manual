@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse,csv,json,math,re
 from datetime import datetime
 from pathlib import Path
-SESSION_RE=re.compile(r'^\d{4}-\d{2}-\d{2}_\d{4}-\d{2}-\d{2}$'); PHD_BEGIN=re.compile(r'^Guiding Begins at '); PHD_DATA=re.compile(r'^\d+,\s*[\d.]+,"[^"]+",')
+SESSION_RE=re.compile(r'^\d{4}-\d{2}-\d{2}_\d{4}-\d{2}-\d{2}$'); PHD_BEGIN=re.compile(r'^Guiding Begins at ')
 TARGET_COORD_RE=re.compile(r'Target:\s*(?P<target>.+?)\s+RA:\s*(?P<rah>\d{1,2}):(?P<ram>\d{1,2}):(?P<ras>\d+(?:\.\d+)?)\s*;\s*Dec:\s*(?P<sign>[+-]?)(?P<decd>\d{1,2})[^\d]+(?P<decm>\d{1,2})[^\d]+(?P<decs>\d+(?:\.\d+)?)',re.I)
 LIGHT_BIN_RE=re.compile(r'LIGHT_(?P<bin>\d+)x(?P=bin)_',re.I); QHY_CAMERA_RE=re.compile(r'(?:QHYCCD:\s*Closing camera\s+|Description:\s*)(?P<camera>(?:QHY)?695A(?:-M)?[^,|\\/]*)',re.I)
 def files(folder):
@@ -88,7 +88,7 @@ def parse_phd2(folder):
                 settling=False
                 continue
             if 'pulseguide failed' in low or 'pulse guide failed' in low: pulse+=1
-            if not active_segment or header is None or not PHD_DATA.match(line): continue
+            if not active_segment or header is None or not re.match(r'^\d+,',line): continue
             try:
                 row=next(csv.reader([line]))
                 def field(name):
