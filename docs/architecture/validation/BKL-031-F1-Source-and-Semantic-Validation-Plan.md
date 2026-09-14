@@ -3,8 +3,8 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F1-VAL-001 |
-| Status | Proposed — validation plan only |
-| Version | 0.1 |
+| Status | **ACCEPTED / TRANSFERRED TO F2** — validation plan only |
+| Version | 1.0 |
 | Date | 2026-09-13 |
 | Contract under validation | `docs/architecture/scientific-assets/BKL-031-F1-Observation-Planner-Source-Discovery-and-Semantic-Boundary.md` |
 | Runtime impact | None |
@@ -87,3 +87,9 @@ Absence of this evidence is intentional because F1 is architecture-only; it must
 ## 7. Review gate
 
 After publication and exact-head CI, stop. Independent ARB and Release Quality review are separate actions. AI-assisted review mode or any exception to normal review/merge controls requires explicit owner authorization scoped to the then-current exact head.
+
+## 8. Acceptance outcome
+
+The validation plan is accepted as part of BKL-031 F1 via PR #183 and merge `b14d9cdd991b5eef74dd9b972958e74c5903a32d`. The 20 mandatory negative cases are transferred unchanged to F2 and later validators.
+
+This acceptance does not claim execution of an F2 validator and does not authorize schema, fixtures, code, providers, ranking or runtime changes.

@@ -3,8 +3,8 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F1 |
-| Status | Proposed — ready for review; implementation not authorized |
-| Version | 0.1 |
+| Status | **ACCEPTED / POST-MERGE VERIFIED** — implementation not authorized |
+| Version | 1.0 |
 | Date | 2026-09-13 |
 | Parent backlog item | BKL-031 — Observation Planner intelligente |
 | Baseline | `c1440172a0565a99647ed5d6df0cb1a8adb1c8b1` |
@@ -211,18 +211,17 @@ After publication, stop before ARB and Release Quality review. Review execution,
 - decide bounded fixture size and target coverage for F2;
 - define ranking factors, weights and validation only in a later expressly authorized slice.
 
-## 13. Validation status
+## 13. Validation and acceptance status
 
-Executed for F1 drafting:
+F1 is ACCEPTED / POST-MERGE VERIFIED:
 
-- inspected repository `main` at `c1440172a0565a99647ed5d6df0cb1a8adb1c8b1`;
-- verified the current BKL-031 program handoff and governing boundaries;
-- inspected BKL-035 target projections, AP-014 session/metadata projections, historical setup summaries, BKL-029 SQM contract and repository realtime placeholder;
-- searched the repository for governed site, ephemeris/lunar and forecast sources; none were located.
+- technical head reviewed: `55b502fb4e47ef92975767ceb444078cae36caf8`;
+- review-publication head: `7a4d020b59186c4b05b9741bb12689050e2b7e8d`;
+- PR #183 merge: `b14d9cdd991b5eef74dd9b972958e74c5903a32d`;
+- ARB: APPROVED WITH CONDITIONS — 99/100, AI-assisted;
+- Release Quality: CONDITIONALLY READY FOR MERGE, AI-assisted;
+- publication-head workflows: 5/5 applicable SUCCESS;
+- post-merge workflows: 6/6 SUCCESS, including Pages;
+- acceptance: `docs/project/BKL-031-F1-ACCEPTANCE-2026-09-14.md`.
 
-Not executed or claimed:
-
-- no provider/API selection or external-service test;
-- no ephemeris, lunar, forecast or ranking calculation;
-- no schema, implementation, runtime, PC Principale or EAGLE change;
-- no ARB, Release Quality, merge or deployment acceptance.
+No schema, provider/API, ephemeris/lunar/forecast calculation, ranking implementation, runtime, PC Principale or EAGLE change was accepted. F2 is current only as a governed handoff and its implementation remains unauthorized.

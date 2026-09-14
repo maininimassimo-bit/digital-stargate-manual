@@ -11,8 +11,8 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | Documento | Ruolo |
 |---|---|
 | `AI_BOOTSTRAP.md` | Root bootstrap |
-| [Handover 13/09/2026](HANDOVER_2026-09-13.md) | Handover corrente |
-| [Current Technical Baseline 13/09/2026](CURRENT_TECHNICAL_BASELINE_2026-09-13.md) | Baseline tecnica corrente |
+| [Handover 14/09/2026](HANDOVER_2026-09-14.md) | Handover corrente |
+| [Current Technical Baseline 14/09/2026](CURRENT_TECHNICAL_BASELINE_2026-09-14.md) | Baseline tecnica corrente |
 | [Enterprise Architecture Context](ENTERPRISE_ARCHITECTURE_CONTEXT.md) | Contesto enterprise |
 | [Repository Knowledge Map](REPOSITORY_KNOWLEDGE_MAP.md) | Mappa authority/projection |
 | [BKL-037 Closure](BKL-037-CLOSURE-2026-09-10.md) | Closure del predecessore accettato |
@@ -29,10 +29,14 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [BKL-046 F5 Validation Plan](../architecture/validation/BKL-046-F5-Real-Evidence-Evaluation-Plan.md) | Validation e closure gate completati |
 | [BKL-046 Closure](BKL-046-CLOSURE-2026-09-13.md) | Closure deterministica read-only accettata |
 | [BKL-031 Program Assessment](../architecture/assessments/BKL-031-Architecture-Program-Assessment-and-F1-Handoff-2026-09-13.md) | Current package e handoff F1 |
-| [BKL-031 F1 Source and Semantic Boundary](../architecture/scientific-assets/BKL-031-F1-Observation-Planner-Source-Discovery-and-Semantic-Boundary.md) | Package architetturale F1 proposto; implementazione non autorizzata |
+| [BKL-031 F1 Source and Semantic Boundary](../architecture/scientific-assets/BKL-031-F1-Observation-Planner-Source-Discovery-and-Semantic-Boundary.md) | Package architetturale F1 accepted/post-merge verified |
 | [BKL-031 F1 Validation Plan](../architecture/validation/BKL-031-F1-Source-and-Semantic-Validation-Plan.md) | Gate e casi negativi per la review F1 |
 | [BKL-031 F1 AI-Assisted ARB](../architecture/reviews/ARB-BKL-031-F1-AI-Assisted-Architecture-Review-2026-09-14.md) | Approved with Conditions; non equivalente a review umana indipendente |
 | [BKL-031 F1 AI-Assisted Release Quality](../architecture/reviews/RQ-BKL-031-F1-AI-Assisted-Release-Quality-Review-2026-09-14.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
+| [BKL-031 F1 Acceptance](BKL-031-F1-ACCEPTANCE-2026-09-14.md) | F1 accepted/post-merge verified; condizioni trasferite |
+| [BKL-031 F2 Handoff](../architecture/assessments/BKL-031-F2-Machine-Readable-Context-Contract-Handoff-2026-09-14.md) | F2 current handoff; implementation not authorized |
+| [PR #185 BKL-031 F1 Acceptance/F2 Handoff AI-Assisted ARB](../architecture/reviews/ARB-PR185-BKL-031-F1-Acceptance-F2-Handoff-AI-Assisted-Architecture-Review-2026-09-14.md) | Approved with Conditions — 99/100; non equivalente ad approvazione umana indipendente |
+| [PR #185 BKL-031 F1 Acceptance/F2 Handoff AI-Assisted Release Quality](../architecture/reviews/RQ-PR185-BKL-031-F1-Acceptance-F2-Handoff-AI-Assisted-Release-Quality-Review-2026-09-14.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
 | [PR #184 PHD2 RMS AI-Assisted ARB](../architecture/reviews/ARB-PR184-PHD2-RMS-AI-Assisted-Architecture-Review-2026-09-14.md) | Approved with Conditions; hotfix RMS profile-aware; non equivalente a review umana indipendente |
 | [PR #184 PHD2 RMS AI-Assisted Release Quality](../architecture/reviews/RQ-PR184-PHD2-RMS-AI-Assisted-Release-Quality-Review-2026-09-14.md) | Conditionally Ready for Merge; rielaborazione post-merge richiesta |
 
@@ -45,11 +49,12 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-037 — Session Comparison & Benchmarking: CLOSED / ACCEPTED;
 - BKL-041 — Scientific Data Quality Score: CLOSED / ACCEPTED / POST-MERGE VERIFIED;
 - BKL-046 — AI Post-Processing Assistant: CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica read-only con limitation;
-- BKL-031 — Observation Planner intelligente: CURRENT / F1 source discovery and semantic boundary; implementation not authorized.
+- BKL-031 F1: ACCEPTED / POST-MERGE VERIFIED;
+- BKL-031 F2: CURRENT HANDOFF ONLY; implementation not authorized.
 
 ## Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [CURRENT/F1] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1 ACCEPTED / F2 CURRENT HANDOFF] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## Authority / projection
 

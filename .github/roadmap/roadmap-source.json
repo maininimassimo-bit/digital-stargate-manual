@@ -1,11 +1,11 @@
 {
   "schemaVersion": "2.2",
-  "updatedAt": "2026-09-13",
+  "updatedAt": "2026-09-14",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F1 — Source Discovery and Semantic Boundary",
-  "target": "Define a verified source inventory and semantic boundary for a future explainable, read-only target planner using target knowledge, setup, celestial and lunar context, weather/SQM and scientific history, without implementing ranking, score, thresholds, automatic scheduling, go/no-go, device command, heavy EAGLE workload or Safety Authority",
+  "nextMilestone": "BKL-031 F2 — Machine-Readable Context/Source Contract and Bounded Fixtures",
+  "target": "Promote BKL-031 F2 as a governed handoff for a future bounded, fail-closed machine-readable source/context contract preserving F1 identity, authority, freshness, missingness, Citation and Provenance; implementation, providers, weights, scores, ranking, readiness, scheduling, device command, heavy EAGLE workload and Safety Authority remain unauthorized",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -230,7 +230,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "Current package only for F1 source discovery and semantic boundary. Ranking, score, thresholds, automatic scheduling, go/no-go, device command, heavy EAGLE workload and Safety Authority are not implemented or authorized."
+          "note": "F1 ACCEPTED / POST-MERGE VERIFIED via PR #183 and merge b14d9cdd991b5eef74dd9b972958e74c5903a32d. AI-assisted ARB/RQ were owner-authorized and not equivalent to independent human approvals; the one-time merge waiver is expired. F2 is current as a handoff only. Schema, fixtures, validator, providers, weights, scores, ranking, readiness, scheduling, device command, heavy EAGLE workload and Safety Authority are not implemented or authorized."
         },
         {
           "id": "BKL-032",
@@ -439,7 +439,7 @@
       "itemRef": "BKL-031",
       "title": "BKL-031 Observation Planner F1",
       "date": "2026-09-13",
-      "description": "Source discovery and semantic boundary promoted; ranking implementation, scheduling, go/no-go and Safety Authority remain excluded.",
+      "description": "F1 source discovery and semantic boundary accepted/post-merge verified via PR #183 and merge b14d9cdd991b5eef74dd9b972958e74c5903a32d; F2 promoted as current handoff only.",
       "image": null
     },
     {
@@ -448,6 +448,13 @@
       "title": "BKL-037 Session Comparison & Benchmarking closure",
       "date": "2026-09-10",
       "description": "F1-F5 and dynamic catalog-driven comparison closed/accepted with fail-closed exclusions, read-only descriptive statistics and preserved provenance."
+    },
+    {
+      "id": "M-BKL031-F2",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 Observation Planner F2",
+      "date": "2026-09-14",
+      "description": "Machine-readable context/source contract and bounded fixtures promoted as the next governed increment; implementation is not authorized."
     }
   ]
 }
