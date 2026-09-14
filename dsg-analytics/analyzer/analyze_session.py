@@ -77,6 +77,9 @@ def parse_phd2(folder):
                 try: header={name.strip().lower():index for index,name in enumerate(next(csv.reader([line])))}
                 except (csv.Error,StopIteration): header=None
                 continue
+            if line.startswith('Guiding Ends at '):
+                active_segment=False; header=None
+                continue
             if 'settling started' in low:
                 settling=True
                 continue
