@@ -5,86 +5,146 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "schema_version", "component", "authority", "action_authority",
-    "safety_authority", "execution_zone", "baseline_commit", "bounds",
-    "sources", "target_candidates", "planning_contexts",
-    "evidence_dimensions", "ranking_factors", "ranking_explanations",
-    "citations", "provenance_records"
+    "schema_version",
+    "component",
+    "authority",
+    "action_authority",
+    "safety_authority",
+    "execution_zone",
+    "baseline_commit",
+    "bounds",
+    "sources",
+    "target_candidates",
+    "planning_contexts",
+    "evidence_dimensions",
+    "ranking_factors",
+    "ranking_explanations",
+    "citations",
+    "provenance_records"
   ],
   "properties": {
-    "schema_version": { "const": "1.0" },
-    "component": { "const": "DSG.ObservationPlannerContextContract" },
-    "authority": { "const": "projection" },
-    "action_authority": { "const": "NONE" },
-    "safety_authority": { "const": "NONE" },
-    "execution_zone": { "const": "PORTAL_CI" },
-    "baseline_commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "component": {
+      "const": "DSG.ObservationPlannerContextContract"
+    },
+    "authority": {
+      "const": "projection"
+    },
+    "action_authority": {
+      "const": "NONE"
+    },
+    "safety_authority": {
+      "const": "NONE"
+    },
+    "execution_zone": {
+      "const": "PORTAL_CI"
+    },
+    "baseline_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
     "bounds": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "max_sources", "max_candidates", "max_contexts",
-        "max_dimensions_per_candidate", "max_factor_definitions",
+        "max_sources",
+        "max_candidates",
+        "max_contexts",
+        "max_dimensions_per_candidate",
+        "max_factor_definitions",
         "max_explanations"
       ],
       "properties": {
-        "max_sources": { "const": 11 },
-        "max_candidates": { "const": 2 },
-        "max_contexts": { "const": 1 },
-        "max_dimensions_per_candidate": { "const": 7 },
-        "max_factor_definitions": { "const": 7 },
-        "max_explanations": { "const": 2 }
+        "max_sources": {
+          "const": 11
+        },
+        "max_candidates": {
+          "const": 2
+        },
+        "max_contexts": {
+          "const": 1
+        },
+        "max_dimensions_per_candidate": {
+          "const": 7
+        },
+        "max_factor_definitions": {
+          "const": 7
+        },
+        "max_explanations": {
+          "const": 2
+        }
       }
     },
     "sources": {
       "type": "array",
       "minItems": 11,
       "maxItems": 11,
-      "items": { "$ref": "#/$defs/source" }
+      "items": {
+        "$ref": "#/$defs/source"
+      }
     },
     "target_candidates": {
       "type": "array",
       "minItems": 1,
       "maxItems": 2,
-      "items": { "$ref": "#/$defs/target_candidate" }
+      "items": {
+        "$ref": "#/$defs/target_candidate"
+      }
     },
     "planning_contexts": {
       "type": "array",
       "minItems": 1,
       "maxItems": 1,
-      "items": { "$ref": "#/$defs/planning_context" }
+      "items": {
+        "$ref": "#/$defs/planning_context"
+      }
     },
     "evidence_dimensions": {
       "type": "array",
       "minItems": 7,
       "maxItems": 14,
-      "items": { "$ref": "#/$defs/evidence_dimension" }
+      "items": {
+        "$ref": "#/$defs/evidence_dimension"
+      }
     },
     "ranking_factors": {
       "type": "array",
       "minItems": 7,
       "maxItems": 7,
-      "items": { "$ref": "#/$defs/ranking_factor" }
+      "items": {
+        "$ref": "#/$defs/ranking_factor"
+      }
     },
     "ranking_explanations": {
       "type": "array",
       "minItems": 1,
       "maxItems": 2,
-      "items": { "$ref": "#/$defs/ranking_explanation" }
+      "items": {
+        "$ref": "#/$defs/ranking_explanation"
+      }
     },
     "citations": {
       "type": "array",
       "minItems": 1,
-      "items": { "$ref": "#/$defs/citation" }
+      "items": {
+        "$ref": "#/$defs/citation"
+      }
     },
     "provenance_records": {
       "type": "array",
       "minItems": 1,
-      "items": { "$ref": "#/$defs/provenance" }
+      "items": {
+        "$ref": "#/$defs/provenance"
+      }
     }
   },
   "$defs": {
-    "ref": { "type": "string", "minLength": 2 },
+    "ref": {
+      "type": "string",
+      "minLength": 2
+    },
     "utc": {
       "type": "string",
       "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
@@ -92,267 +152,866 @@
     "ref_array": {
       "type": "array",
       "uniqueItems": true,
-      "items": { "$ref": "#/$defs/ref" }
+      "items": {
+        "$ref": "#/$defs/ref"
+      }
     },
     "non_empty_ref_array": {
       "type": "array",
       "minItems": 1,
       "uniqueItems": true,
-      "items": { "$ref": "#/$defs/ref" }
+      "items": {
+        "$ref": "#/$defs/ref"
+      }
     },
     "interval": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["start_utc", "end_utc"],
+      "required": [
+        "start_utc",
+        "end_utc"
+      ],
       "properties": {
-        "start_utc": { "$ref": "#/$defs/utc" },
-        "end_utc": { "$ref": "#/$defs/utc" }
+        "start_utc": {
+          "$ref": "#/$defs/utc"
+        },
+        "end_utc": {
+          "$ref": "#/$defs/utc"
+        }
       }
     },
     "source": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "source_id", "availability_state", "authority",
-        "exact_locator", "temporal_scope", "public_projection_eligible",
+        "source_id",
+        "availability_state",
+        "authority",
+        "exact_locator",
+        "temporal_scope",
+        "public_projection_eligible",
         "reason_codes"
       ],
       "properties": {
         "source_id": {
           "enum": [
-            "BKL031-S01", "BKL031-S02", "BKL031-S03", "BKL031-S04",
-            "BKL031-S05", "BKL031-S06", "BKL031-S07", "BKL031-S08",
-            "BKL031-S09", "BKL031-S10", "BKL031-S11"
+            "BKL031-S01",
+            "BKL031-S02",
+            "BKL031-S03",
+            "BKL031-S04",
+            "BKL031-S05",
+            "BKL031-S06",
+            "BKL031-S07",
+            "BKL031-S08",
+            "BKL031-S09",
+            "BKL031-S10",
+            "BKL031-S11"
           ]
         },
         "availability_state": {
           "enum": [
-            "AVAILABLE_BOUNDED", "AVAILABLE_HISTORICAL", "AVAILABLE_DERIVED",
-            "AVAILABLE", "UNAVAILABLE_CURRENT_BASELINE", "UNAVAILABLE_CURRENT",
-            "UNAVAILABLE", "UNKNOWN"
+            "AVAILABLE_BOUNDED",
+            "AVAILABLE_HISTORICAL",
+            "AVAILABLE_DERIVED",
+            "AVAILABLE",
+            "UNAVAILABLE_CURRENT_BASELINE",
+            "UNAVAILABLE_CURRENT",
+            "UNAVAILABLE",
+            "UNKNOWN"
           ]
         },
         "authority": {
           "enum": [
-            "BKL035_PROJECTION_CHAIN", "AP014_METADATA_PROJECTION",
-            "AP014_SCIENTIFIC_PROJECTION", "GOVERNED_SESSION_PROJECTION",
-            "ANALYTICS_PROJECTION", "BKL029_SEMANTIC_AUTHORITY",
-            "OBSERVATORY_STATUS_PROJECTION", "NOT_ESTABLISHED"
+            "BKL035_PROJECTION_CHAIN",
+            "AP014_METADATA_PROJECTION",
+            "AP014_SCIENTIFIC_PROJECTION",
+            "GOVERNED_SESSION_PROJECTION",
+            "ANALYTICS_PROJECTION",
+            "BKL029_SEMANTIC_AUTHORITY",
+            "OBSERVATORY_STATUS_PROJECTION",
+            "NOT_ESTABLISHED"
           ]
         },
-        "exact_locator": { "type": ["string", "null"] },
-        "temporal_scope": {
-          "enum": ["STATIC", "HISTORICAL", "CURRENT", "NOT_ESTABLISHED"]
+        "exact_locator": {
+          "type": [
+            "string",
+            "null"
+          ]
         },
-        "public_projection_eligible": { "type": "boolean" },
-        "reason_codes": { "$ref": "#/$defs/ref_array" }
+        "temporal_scope": {
+          "enum": [
+            "STATIC",
+            "HISTORICAL",
+            "CURRENT",
+            "NOT_ESTABLISHED"
+          ]
+        },
+        "public_projection_eligible": {
+          "type": "boolean"
+        },
+        "reason_codes": {
+          "$ref": "#/$defs/ref_array"
+        }
       }
     },
     "target_candidate": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "candidate_id", "target_key", "target_id", "canonical_name",
-        "aliases", "identity_state", "source_refs", "citation_refs",
-        "provenance_refs", "conflict_refs", "evidence_dimension_refs"
+        "candidate_id",
+        "target_key",
+        "target_id",
+        "canonical_name",
+        "aliases",
+        "identity_state",
+        "source_refs",
+        "citation_refs",
+        "provenance_refs",
+        "conflict_refs",
+        "evidence_dimension_refs"
       ],
       "properties": {
-        "candidate_id": { "$ref": "#/$defs/ref" },
+        "candidate_id": {
+          "$ref": "#/$defs/ref"
+        },
         "target_key": {
           "type": "string",
           "pattern": "^dsg-target:[a-z0-9]+(?:-[a-z0-9]+)*$"
         },
-        "target_id": { "type": ["string", "null"] },
-        "canonical_name": { "type": "string", "minLength": 1 },
+        "target_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "canonical_name": {
+          "type": "string",
+          "minLength": 1
+        },
         "aliases": {
           "type": "array",
           "uniqueItems": true,
-          "items": { "type": "string", "minLength": 1 }
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         },
         "identity_state": {
-          "enum": ["validated", "conflicted", "incomplete", "unknown"]
+          "enum": [
+            "validated",
+            "conflicted",
+            "incomplete",
+            "unknown"
+          ]
         },
-        "source_refs": { "$ref": "#/$defs/non_empty_ref_array" },
-        "citation_refs": { "$ref": "#/$defs/non_empty_ref_array" },
-        "provenance_refs": { "$ref": "#/$defs/non_empty_ref_array" },
-        "conflict_refs": { "$ref": "#/$defs/ref_array" },
-        "evidence_dimension_refs": { "$ref": "#/$defs/non_empty_ref_array" }
+        "source_refs": {
+          "$ref": "#/$defs/non_empty_ref_array"
+        },
+        "citation_refs": {
+          "$ref": "#/$defs/non_empty_ref_array"
+        },
+        "provenance_refs": {
+          "$ref": "#/$defs/non_empty_ref_array"
+        },
+        "conflict_refs": {
+          "$ref": "#/$defs/ref_array"
+        },
+        "evidence_dimension_refs": {
+          "$ref": "#/$defs/non_empty_ref_array"
+        }
       }
     },
     "planning_context": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "context_id", "generated_at_utc", "evaluation_instant_utc",
-        "requested_interval", "display_timezone_ref", "site_ref",
-        "active_setup_ref", "candidate_refs", "evidence_snapshot_refs",
-        "unavailable_dimension_refs", "stale_dimension_refs",
+        "context_id",
+        "generated_at_utc",
+        "evaluation_instant_utc",
+        "requested_interval",
+        "display_timezone_ref",
+        "site_ref",
+        "active_setup_ref",
+        "candidate_refs",
+        "evidence_snapshot_refs",
+        "unavailable_dimension_refs",
+        "stale_dimension_refs",
         "conflicted_dimension_refs"
       ],
       "properties": {
-        "context_id": { "$ref": "#/$defs/ref" },
-        "generated_at_utc": { "$ref": "#/$defs/utc" },
-        "evaluation_instant_utc": { "$ref": "#/$defs/utc" },
-        "requested_interval": { "$ref": "#/$defs/interval" },
-        "display_timezone_ref": { "type": ["string", "null"] },
-        "site_ref": { "type": ["string", "null"] },
-        "active_setup_ref": { "type": ["string", "null"] },
-        "candidate_refs": { "$ref": "#/$defs/non_empty_ref_array" },
-        "evidence_snapshot_refs": { "$ref": "#/$defs/non_empty_ref_array" },
-        "unavailable_dimension_refs": { "$ref": "#/$defs/ref_array" },
-        "stale_dimension_refs": { "$ref": "#/$defs/ref_array" },
-        "conflicted_dimension_refs": { "$ref": "#/$defs/ref_array" }
+        "context_id": {
+          "$ref": "#/$defs/ref"
+        },
+        "generated_at_utc": {
+          "$ref": "#/$defs/utc"
+        },
+        "evaluation_instant_utc": {
+          "$ref": "#/$defs/utc"
+        },
+        "requested_interval": {
+          "$ref": "#/$defs/interval"
+        },
+        "display_timezone_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "site_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "active_setup_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "candidate_refs": {
+          "$ref": "#/$defs/non_empty_ref_array"
+        },
+        "evidence_snapshot_refs": {
+          "$ref": "#/$defs/non_empty_ref_array"
+        },
+        "unavailable_dimension_refs": {
+          "$ref": "#/$defs/ref_array"
+        },
+        "stale_dimension_refs": {
+          "$ref": "#/$defs/ref_array"
+        },
+        "conflicted_dimension_refs": {
+          "$ref": "#/$defs/ref_array"
+        }
       }
     },
     "fact": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "fact_id", "semantic_type", "value", "unit", "temporal_scope",
-        "observed_at_utc", "issue_at_utc", "valid_interval",
-        "spatial_scope_ref", "method_ref", "source_ref",
-        "citation_refs", "provenance_refs", "evidence_kind"
+        "fact_id",
+        "semantic_type",
+        "value",
+        "unit",
+        "temporal_scope",
+        "observed_at_utc",
+        "issue_at_utc",
+        "valid_interval",
+        "spatial_scope_ref",
+        "method_ref",
+        "source_ref",
+        "citation_refs",
+        "provenance_refs",
+        "evidence_kind"
       ],
       "properties": {
-        "fact_id": { "$ref": "#/$defs/ref" },
-        "semantic_type": { "type": "string", "minLength": 1 },
-        "value": { "type": ["string", "number", "boolean"] },
-        "unit": { "type": ["string", "null"] },
-        "temporal_scope": { "enum": ["STATIC", "HISTORICAL", "CURRENT", "FORECAST"] },
-        "observed_at_utc": { "oneOf": [{ "$ref": "#/$defs/utc" }, { "type": "null" }] },
-        "issue_at_utc": { "oneOf": [{ "$ref": "#/$defs/utc" }, { "type": "null" }] },
-        "valid_interval": { "oneOf": [{ "$ref": "#/$defs/interval" }, { "type": "null" }] },
-        "spatial_scope_ref": { "type": ["string", "null"] },
-        "method_ref": { "type": ["string", "null"] },
-        "source_ref": { "$ref": "#/$defs/ref" },
-        "citation_refs": { "$ref": "#/$defs/non_empty_ref_array" },
-        "provenance_refs": { "$ref": "#/$defs/non_empty_ref_array" },
-        "evidence_kind": { "enum": ["OBSERVED", "DECLARED", "SUGGESTED"] }
+        "fact_id": {
+          "$ref": "#/$defs/ref"
+        },
+        "semantic_type": {
+          "type": "string",
+          "enum": [
+            "TARGET_KEY",
+            "TARGET_RA_DEG",
+            "TARGET_DEC_DEG",
+            "COORDINATE_EPOCH",
+            "SQM_SESSION_MEDIAN",
+            "SCIENTIFIC_SESSION_REF"
+          ]
+        },
+        "value": {
+          "type": [
+            "string",
+            "number",
+            "boolean"
+          ]
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "temporal_scope": {
+          "enum": [
+            "STATIC",
+            "HISTORICAL",
+            "CURRENT",
+            "FORECAST"
+          ]
+        },
+        "observed_at_utc": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/utc"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "issue_at_utc": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/utc"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "valid_interval": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/interval"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "spatial_scope_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "method_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "citation_refs": {
+          "$ref": "#/$defs/non_empty_ref_array"
+        },
+        "provenance_refs": {
+          "$ref": "#/$defs/non_empty_ref_array"
+        },
+        "evidence_kind": {
+          "enum": [
+            "OBSERVED",
+            "DECLARED",
+            "SUGGESTED"
+          ]
+        }
       }
     },
     "evidence_dimension": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "dimension_id", "candidate_ref", "dimension_type",
-        "availability_state", "semantic_type", "unit", "source_refs",
-        "citation_refs", "provenance_refs", "evidence_kind",
-        "reason_codes", "facts"
+        "dimension_id",
+        "candidate_ref",
+        "dimension_type",
+        "availability_state",
+        "semantic_type",
+        "unit",
+        "source_refs",
+        "citation_refs",
+        "provenance_refs",
+        "evidence_kind",
+        "reason_codes",
+        "facts"
       ],
       "properties": {
-        "dimension_id": { "$ref": "#/$defs/ref" },
-        "candidate_ref": { "$ref": "#/$defs/ref" },
+        "dimension_id": {
+          "$ref": "#/$defs/ref"
+        },
+        "candidate_ref": {
+          "$ref": "#/$defs/ref"
+        },
         "dimension_type": {
           "enum": [
-            "TARGET_IDENTITY", "SETUP_COMPATIBILITY", "CELESTIAL_GEOMETRY",
-            "LUNAR_CONTEXT", "FORECAST", "OBSERVED_WEATHER_SQM",
+            "TARGET_IDENTITY",
+            "SETUP_COMPATIBILITY",
+            "CELESTIAL_GEOMETRY",
+            "LUNAR_CONTEXT",
+            "FORECAST",
+            "OBSERVED_WEATHER_SQM",
             "SCIENTIFIC_HISTORY"
           ]
         },
         "availability_state": {
-          "enum": ["AVAILABLE", "PARTIAL", "UNAVAILABLE", "UNKNOWN", "STALE", "CONFLICTED"]
+          "enum": [
+            "AVAILABLE",
+            "PARTIAL",
+            "UNAVAILABLE",
+            "UNKNOWN",
+            "STALE",
+            "CONFLICTED"
+          ]
         },
-        "semantic_type": { "type": "string", "minLength": 1 },
-        "unit": { "type": ["string", "null"] },
-        "source_refs": { "$ref": "#/$defs/non_empty_ref_array" },
-        "citation_refs": { "$ref": "#/$defs/ref_array" },
-        "provenance_refs": { "$ref": "#/$defs/ref_array" },
+        "semantic_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_refs": {
+          "$ref": "#/$defs/non_empty_ref_array"
+        },
+        "citation_refs": {
+          "$ref": "#/$defs/ref_array"
+        },
+        "provenance_refs": {
+          "$ref": "#/$defs/ref_array"
+        },
         "evidence_kind": {
-          "type": ["string", "null"],
-          "enum": ["OBSERVED", "DECLARED", "SUGGESTED", null]
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "OBSERVED",
+            "DECLARED",
+            "SUGGESTED",
+            null
+          ]
         },
-        "reason_codes": { "$ref": "#/$defs/ref_array" },
-        "facts": { "type": "array", "items": { "$ref": "#/$defs/fact" } }
-      }
+        "reason_codes": {
+          "$ref": "#/$defs/ref_array"
+        },
+        "facts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "dimension_type": {
+                "const": "TARGET_IDENTITY"
+              }
+            },
+            "required": [
+              "dimension_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "facts": {
+                "type": "array",
+                "items": {
+                  "allOf": [
+                    {
+                      "$ref": "#/$defs/fact"
+                    },
+                    {
+                      "properties": {
+                        "semantic_type": {
+                          "enum": [
+                            "TARGET_KEY"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "semantic_type"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension_type": {
+                "const": "SETUP_COMPATIBILITY"
+              }
+            },
+            "required": [
+              "dimension_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "facts": {
+                "type": "array",
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension_type": {
+                "const": "CELESTIAL_GEOMETRY"
+              }
+            },
+            "required": [
+              "dimension_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "facts": {
+                "type": "array",
+                "items": {
+                  "allOf": [
+                    {
+                      "$ref": "#/$defs/fact"
+                    },
+                    {
+                      "properties": {
+                        "semantic_type": {
+                          "enum": [
+                            "TARGET_RA_DEG",
+                            "TARGET_DEC_DEG",
+                            "COORDINATE_EPOCH"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "semantic_type"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension_type": {
+                "const": "LUNAR_CONTEXT"
+              }
+            },
+            "required": [
+              "dimension_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "facts": {
+                "type": "array",
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension_type": {
+                "const": "FORECAST"
+              }
+            },
+            "required": [
+              "dimension_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "facts": {
+                "type": "array",
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension_type": {
+                "const": "OBSERVED_WEATHER_SQM"
+              }
+            },
+            "required": [
+              "dimension_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "facts": {
+                "type": "array",
+                "items": {
+                  "allOf": [
+                    {
+                      "$ref": "#/$defs/fact"
+                    },
+                    {
+                      "properties": {
+                        "semantic_type": {
+                          "enum": [
+                            "SQM_SESSION_MEDIAN"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "semantic_type"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension_type": {
+                "const": "SCIENTIFIC_HISTORY"
+              }
+            },
+            "required": [
+              "dimension_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "facts": {
+                "type": "array",
+                "items": {
+                  "allOf": [
+                    {
+                      "$ref": "#/$defs/fact"
+                    },
+                    {
+                      "properties": {
+                        "semantic_type": {
+                          "enum": [
+                            "SCIENTIFIC_SESSION_REF"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "semantic_type"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "ranking_factor": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "factor_id", "name", "input_dimension_type", "expected_semantic_type",
-        "expected_unit", "interpretation_direction", "missing_behavior",
+        "factor_id",
+        "name",
+        "input_dimension_type",
+        "expected_semantic_type",
+        "expected_unit",
+        "interpretation_direction",
+        "missing_behavior",
         "conflict_behavior"
       ],
       "properties": {
-        "factor_id": { "$ref": "#/$defs/ref" },
-        "name": { "type": "string", "minLength": 1 },
-        "input_dimension_type": { "$ref": "#/$defs/evidence_dimension/properties/dimension_type" },
-        "expected_semantic_type": { "type": "string", "minLength": 1 },
-        "expected_unit": { "type": ["string", "null"] },
-        "interpretation_direction": {
-          "enum": ["HIGHER_BETTER", "LOWER_BETTER", "CONTEXTUAL", "NONE"]
+        "factor_id": {
+          "$ref": "#/$defs/ref"
         },
-        "missing_behavior": { "const": "EXCLUDE_AND_EXPLAIN" },
-        "conflict_behavior": { "const": "EXCLUDE_AND_EXPLAIN" }
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input_dimension_type": {
+          "$ref": "#/$defs/evidence_dimension/properties/dimension_type"
+        },
+        "expected_semantic_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expected_unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "interpretation_direction": {
+          "enum": [
+            "HIGHER_BETTER",
+            "LOWER_BETTER",
+            "CONTEXTUAL",
+            "NONE"
+          ]
+        },
+        "missing_behavior": {
+          "const": "EXCLUDE_AND_EXPLAIN"
+        },
+        "conflict_behavior": {
+          "const": "EXCLUDE_AND_EXPLAIN"
+        }
       }
     },
     "ranking_explanation": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "explanation_id", "candidate_ref", "context_ref", "method_id",
-        "evaluation_state", "factor_refs", "evidence_refs", "citation_refs",
-        "provenance_refs", "excluded_dimension_refs", "stale_dimension_refs",
-        "conflicted_dimension_refs", "missing_reason_codes", "message"
+        "explanation_id",
+        "candidate_ref",
+        "context_ref",
+        "method_id",
+        "evaluation_state",
+        "factor_refs",
+        "evidence_refs",
+        "citation_refs",
+        "provenance_refs",
+        "excluded_dimension_refs",
+        "stale_dimension_refs",
+        "conflicted_dimension_refs",
+        "missing_reason_codes",
+        "message"
       ],
       "properties": {
-        "explanation_id": { "$ref": "#/$defs/ref" },
-        "candidate_ref": { "$ref": "#/$defs/ref" },
-        "context_ref": { "$ref": "#/$defs/ref" },
-        "method_id": { "const": "BKL031-F2-NO-RANKING-1" },
-        "evaluation_state": { "const": "NOT_EVALUATED" },
-        "factor_refs": { "$ref": "#/$defs/non_empty_ref_array" },
-        "evidence_refs": { "$ref": "#/$defs/non_empty_ref_array" },
-        "citation_refs": { "$ref": "#/$defs/non_empty_ref_array" },
-        "provenance_refs": { "$ref": "#/$defs/non_empty_ref_array" },
-        "excluded_dimension_refs": { "$ref": "#/$defs/ref_array" },
-        "stale_dimension_refs": { "$ref": "#/$defs/ref_array" },
-        "conflicted_dimension_refs": { "$ref": "#/$defs/ref_array" },
-        "missing_reason_codes": { "$ref": "#/$defs/ref_array" },
-        "message": { "type": "string", "minLength": 1 }
+        "explanation_id": {
+          "$ref": "#/$defs/ref"
+        },
+        "candidate_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "context_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "method_id": {
+          "const": "BKL031-F2-NO-RANKING-1"
+        },
+        "evaluation_state": {
+          "const": "NOT_EVALUATED"
+        },
+        "factor_refs": {
+          "$ref": "#/$defs/non_empty_ref_array"
+        },
+        "evidence_refs": {
+          "$ref": "#/$defs/non_empty_ref_array"
+        },
+        "citation_refs": {
+          "$ref": "#/$defs/non_empty_ref_array"
+        },
+        "provenance_refs": {
+          "$ref": "#/$defs/non_empty_ref_array"
+        },
+        "excluded_dimension_refs": {
+          "$ref": "#/$defs/ref_array"
+        },
+        "stale_dimension_refs": {
+          "$ref": "#/$defs/ref_array"
+        },
+        "conflicted_dimension_refs": {
+          "$ref": "#/$defs/ref_array"
+        },
+        "missing_reason_codes": {
+          "$ref": "#/$defs/ref_array"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        }
       }
     },
     "citation": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "version", "source_ref", "locator", "public_safe"],
+      "required": [
+        "id",
+        "version",
+        "source_ref",
+        "locator",
+        "public_safe"
+      ],
       "properties": {
-        "id": { "$ref": "#/$defs/ref" },
-        "version": { "type": "string", "minLength": 1 },
-        "source_ref": { "$ref": "#/$defs/ref" },
+        "id": {
+          "$ref": "#/$defs/ref"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ref": {
+          "$ref": "#/$defs/ref"
+        },
         "locator": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["path", "record_key", "record_value"],
+          "required": [
+            "path",
+            "record_key",
+            "record_value"
+          ],
           "properties": {
-            "path": { "type": "string", "minLength": 1 },
-            "record_key": { "type": "string", "minLength": 1 },
-            "record_value": { "type": "string", "minLength": 1 }
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "record_key": {
+              "type": "string",
+              "minLength": 1
+            },
+            "record_value": {
+              "type": "string",
+              "minLength": 1
+            }
           }
         },
-        "public_safe": { "const": true }
+        "public_safe": {
+          "const": true
+        }
       }
     },
     "provenance": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "id", "version", "method_id", "input_refs", "output_ref",
-        "citation_refs", "evidence_kind"
+        "id",
+        "version",
+        "method_id",
+        "input_refs",
+        "output_ref",
+        "citation_refs",
+        "evidence_kind"
       ],
       "properties": {
-        "id": { "$ref": "#/$defs/ref" },
-        "version": { "type": "string", "minLength": 1 },
+        "id": {
+          "$ref": "#/$defs/ref"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
         "method_id": {
           "enum": [
-            "BKL031-F2-SOURCE-SNAPSHOT-1", "BKL031-F2-CANDIDATE-BINDING-1",
-            "BKL031-F2-EVIDENCE-BINDING-1", "BKL031-F2-NO-RANKING-1"
+            "BKL031-F2-SOURCE-SNAPSHOT-1",
+            "BKL031-F2-CANDIDATE-BINDING-1",
+            "BKL031-F2-EVIDENCE-BINDING-1",
+            "BKL031-F2-NO-RANKING-1"
           ]
         },
-        "input_refs": { "$ref": "#/$defs/non_empty_ref_array" },
-        "output_ref": { "$ref": "#/$defs/ref" },
-        "citation_refs": { "$ref": "#/$defs/non_empty_ref_array" },
-        "evidence_kind": { "enum": ["OBSERVED", "DECLARED", "SUGGESTED"] }
+        "input_refs": {
+          "$ref": "#/$defs/non_empty_ref_array"
+        },
+        "output_ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "citation_refs": {
+          "$ref": "#/$defs/non_empty_ref_array"
+        },
+        "evidence_kind": {
+          "enum": [
+            "OBSERVED",
+            "DECLARED",
+            "SUGGESTED"
+          ]
+        }
       }
     }
   }

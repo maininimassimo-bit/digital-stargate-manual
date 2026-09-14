@@ -118,6 +118,128 @@ rejects('N20 conflict cannot be silently resolved by recency file order or UI te
   doc.target_candidates[0].resolution_basis = 'RECENCY_ONLY';
 }, /prohibited conflict resolution basis/);
 
+
+test('M01 validator is total for non-object JSON roots', () => {
+  assert.deepEqual(validateObservationPlannerContext(null, repositorySources), ['observation planner contract must be an object']);
+  assert.deepEqual(validateObservationPlannerContext([], repositorySources), ['observation planner contract must be an object']);
+});
+
+rejects('M01 wrong root collection type returns deterministic errors without throwing', doc => {
+  doc.sources = {};
+}, /source inventory must contain exactly|missing source BKL031-S01/);
+
+rejects('M01 missing nested collection returns deterministic structural error', doc => {
+  delete doc.sources[0].reason_codes;
+}, /required property reason_codes missing|reason_codes must be unique refs/);
+
+rejects('M01 null nested object returns deterministic structural error', doc => {
+  doc.citations[0].locator = null;
+}, /locator: must be an object|locator.*must be non-empty/);
+
+rejects('M02 SQM value must equal its cited source field', doc => {
+  dimension(doc, 'OBSERVED_WEATHER_SQM').facts[0].value = 19.99;
+}, /value does not equal cited sqm_median_mag_arcsec2/);
+
+rejects('M02 identity fact cannot reuse a valid Citation for a different value', doc => {
+  dimension(doc, 'TARGET_IDENTITY').facts[0].value = 'dsg-target:ldn-1320';
+}, /value does not equal (?:the cited BKL-035 target_key|its Citation record_value)/);
+
+rejects('M02 Provenance output_ref must bind to the exact dimension', doc => {
+  doc.provenance_records.find(item => item.id === 'PRV-OP-M27-SQM-DIM').output_ref = 'DIM-OTHER';
+}, /Provenance (?:must bind exactly|output)|dimension Provenance input\/output\/Citation binding mismatch/i);
+
+rejects('M02 session fact cannot reuse another existing session Citation', doc => {
+  const item = dimension(doc, 'SCIENTIFIC_HISTORY').facts[0];
+  item.citation_refs = ['CIT-OP-M27-SESSION-20260815@1.0'];
+}, /value does not equal cited session reference|dimension Citation set/);
+
+rejects('M03 readiness semantic smuggling is rejected inside a fact', doc => {
+  const item = dimension(doc, 'TARGET_IDENTITY').facts[0];
+  item.semantic_type = 'READINESS'; item.value = 'READY';
+}, /readiness\/safety\/authorization\/score\/threshold\/normalization\/ordering semantics are prohibited|closed vocabulary/);
+
+rejects('M03 operational value smuggling is rejected even with an allowed semantic type', doc => {
+  dimension(doc, 'TARGET_IDENTITY').facts[0].value = 'AUTHORIZED';
+}, /readiness\/safety\/authorization\/score\/threshold\/normalization\/ordering semantics are prohibited/);
+
+test('M04 exact governed S02 coordinate triplet is accepted in a synthetic governed-site context', () => {
+  const doc = clone(fixture); addCoordinateEvidence(doc);
+  assert.deepEqual(validateObservationPlannerContext(doc, repositorySources), []);
+});
+
+rejects('M04 coordinate fact rejects the wrong source class', doc => {
+  addCoordinateEvidence(doc);
+  const item = dimension(doc, 'CELESTIAL_GEOMETRY');
+  item.source_refs.push('BKL031-S01');
+  item.facts[0].source_ref = 'BKL031-S01';
+}, /source class is not authorized|coordinate Citation must resolve to eligible S02\/S04/);
+
+rejects('M04 coordinate range is validated', doc => {
+  addCoordinateEvidence(doc);
+  dimension(doc, 'CELESTIAL_GEOMETRY').facts.find(item => item.semantic_type === 'TARGET_RA_DEG').value = 360;
+}, /RA must be in \[0,360\) degrees/);
+
+rejects('M04 coordinate values must match governed S02 evidence', doc => {
+  addCoordinateEvidence(doc);
+  dimension(doc, 'CELESTIAL_GEOMETRY').facts.find(item => item.semantic_type === 'TARGET_DEC_DEG').value = 21;
+}, /coordinate value conflicts with governed S02 evidence/);
+
+rejects('M04 conflicting governed coordinate evidence cannot be published as available', doc => {
+  addCoordinateEvidence(doc);
+}, /conflicting governed S02 coordinate evidence must remain CONFLICTED or UNAVAILABLE/, sources => {
+  sources.scientificMetadataCsv = sources.scientificMetadataCsv.replace(
+    ',M 27,TGT-MESSIER-M27,299.9017,22.7211,C8_QHY695A_BIN1',
+    ',M 27,TGT-MESSIER-M27,300.0000,22.7211,C8_QHY695A_BIN1'
+  );
+});
+
+function addCoordinateEvidence(doc) {
+  const citationRef = 'CIT-OP-M27-COORD-20260814@1.0';
+  const provenanceRef = 'PRV-OP-M27-COORD-DIM@1.0';
+  const item = dimension(doc, 'CELESTIAL_GEOMETRY');
+  item.availability_state = 'AVAILABLE';
+  item.evidence_kind = 'DECLARED';
+  item.source_refs = ['BKL031-S02'];
+  item.citation_refs = [citationRef];
+  item.provenance_refs = [provenanceRef];
+  item.reason_codes = ['HISTORICAL_ONLY'];
+  item.facts = [
+    fact('FACT-M27-RA','TARGET_RA_DEG',299.9017,'DEG','BKL031-S02',citationRef,provenanceRef,'DECLARED'),
+    fact('FACT-M27-DEC','TARGET_DEC_DEG',22.7211,'DEG','BKL031-S02',citationRef,provenanceRef,'DECLARED'),
+    fact('FACT-M27-EPOCH','COORDINATE_EPOCH','J2000',null,'BKL031-S02',citationRef,provenanceRef,'DECLARED')
+  ];
+  item.facts.forEach(value => { value.temporal_scope = 'HISTORICAL'; });
+  doc.citations.push({
+    id:'CIT-OP-M27-COORD-20260814', version:'1.0', source_ref:'BKL031-S02',
+    locator:{
+      path:'data/analytics/metadata/session-scientific-metadata.csv',
+      record_key:'session_id',
+      record_value:'2026-08-14_2026-08-15'
+    },
+    public_safe:true
+  });
+  doc.provenance_records.push({
+    id:'PRV-OP-M27-COORD-DIM', version:'1.0',
+    method_id:'BKL031-F2-EVIDENCE-BINDING-1',
+    input_refs:['session:2026-08-14_2026-08-15','BKL031-S02'],
+    output_ref:item.dimension_id,
+    citation_refs:[citationRef],
+    evidence_kind:'DECLARED'
+  });
+  const context = doc.planning_contexts[0];
+  context.site_ref = 'site:synthetic-governed-test';
+  context.unavailable_dimension_refs = context.unavailable_dimension_refs.filter(value => value !== item.dimension_id);
+  const result = explanation(doc);
+  result.excluded_dimension_refs = result.excluded_dimension_refs.filter(value => value !== item.dimension_id);
+  result.citation_refs.push(citationRef);
+  result.missing_reason_codes = [...new Set(
+    doc.evidence_dimensions
+      .filter(value => value.candidate_ref === result.candidate_ref && value.availability_state !== 'AVAILABLE')
+      .flatMap(value => value.reason_codes)
+  )];
+  doc.provenance_records.find(value => value.id === 'PRV-OP-M27-EXPLANATION').citation_refs.push(citationRef);
+}
+
 function fact(id, semanticType, value, unit, sourceRef, citationRef, provenanceRef, evidenceKind) {
   return {
     fact_id:id, semantic_type:semanticType, value, unit, temporal_scope:'STATIC',

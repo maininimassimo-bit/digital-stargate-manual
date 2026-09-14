@@ -3,10 +3,11 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F2-VAL-001 |
-| Status | **IMPLEMENTATION HEAD VERIFIED — REVIEW NOT AUTHORIZED** |
+| Status | **ARB REMEDIATION CANDIDATE — RE-REVIEW NOT AUTHORIZED** |
 | Date | 2026-09-14 |
 | Baseline | `f6c4b253a56406c930f009af0658b46a12bc088a` |
-| Verified implementation head | `de5215ac7b63f442fc3e591467f8a6402942ce85` |
+| Pre-remediation review-publication head | `86021de468b91f14c38db41bac47551e08b04e53` |
+| Remediation exact head | Established by the PR after atomic publication |
 | Contract | `schemas/observation-planner-context-f2.schema.json` |
 | Fixture | `docs/data/observation-planner-context-f2-fixture.json` |
 | Normative validator | `.github/scripts/verify-observation-planner-context-f2.mjs` |
@@ -17,12 +18,12 @@
 
 ```text
 BKL-031 F2 context contract OK: 11 sources / 1 candidate / 7 dimensions / no ranking
-tests 21
-pass 21
+tests 36
+pass 36
 fail 0
 ```
 
-The suite contains one positive bounded-fixture test and the twenty negative cases transferred unchanged from the accepted F1 validation plan.
+The suite contains one positive bounded-fixture test, the twenty negative cases transferred unchanged from the accepted F1 validation plan, and fifteen regressions for ARB findings M-01–M-04. An additional exploratory matrix exercised 250 malformed JSON variants: every call returned a deterministic, non-empty error array and none threw.
 
 ## 2. Mandatory negative-case traceability
 
@@ -49,15 +50,26 @@ The suite contains one positive bounded-fixture test and the twenty negative cas
 | N19 | raw locator or credential in public projection rejected | PASS |
 | N20 | recency/file-order/UI-only conflict resolution rejected | PASS |
 
-## 3. Source reconciliation evidence
+## 3. ARB remediation traceability
+
+| Finding | Executable remediation | Result |
+|---|---|---|
+| M-01 | type-safe traversal, per-stage fail-closed guards, malformed root/container/missing/null regressions | PASS |
+| M-02 | exact fact-to-source-field comparison and exact candidate/dimension/fact/explanation Provenance binding | PASS |
+| M-03 | closed fact vocabulary per dimension plus prohibited readiness/safety/authorization/scoring semantics in keys and values | PASS |
+| M-04 | S02/S04 coordinate-source restriction, complete RA/Dec/epoch triplet, ranges, governed-value reconciliation and conflict-state enforcement | PASS |
+
+The review documents remain immutable evidence of the decision made on their reviewed head. This remediation does not change that decision and does not constitute a re-review.
+
+## 4. Source reconciliation evidence
 
 - Candidate `dsg-target:m-27` resolves exactly in `docs/data/target-knowledge-read-model.json`.
 - Historical sessions `2026-08-14_2026-08-15` and `2026-08-15_2026-08-16` resolve in the scientific session catalog.
 - SQM evidence resolves to session `2026-09-13_2026-09-14` in the historical analytics projection and remains explicitly historical.
 - S07–S11 match the accepted unavailable/current-unknown states and expose no fixture fact values.
-- Public Citations are limited to three normalized repository paths; no raw operational locator is published.
+- Public fixture Citations remain limited to three normalized repository paths; S02/S04 coordinate reconciliation is validator-only and does not publish raw evidence detail.
 
-## 4. Exact-head CI evidence
+## 5. Exact-head CI evidence
 
 Developer Foundation executed both:
 
@@ -66,7 +78,7 @@ node .github/scripts/verify-observation-planner-context-f2.mjs
 node --test .github/scripts/test-observation-planner-context-f2.mjs
 ```
 
-The exact implementation head `de5215ac7b63f442fc3e591467f8a6402942ce85` produced 7/7 successful workflows:
+The pre-remediation implementation head `de5215ac7b63f442fc3e591467f8a6402942ce85` produced 7/7 successful workflows:
 
 - Developer Foundation #1384 — SUCCESS, including both BKL-031 F2 steps;
 - Validate documentation #1021 — SUCCESS;
@@ -76,8 +88,8 @@ The exact implementation head `de5215ac7b63f442fc3e591467f8a6402942ce85` produce
 - BKL-046 F4 governance #60 — SUCCESS;
 - BKL-046 F5 governance #45 — SUCCESS.
 
-The governed projection commit is included in the verified head. This record documents evidence only; publishing it creates a later documentation-only head whose applicable workflows must also pass before any review request.
+The pre-remediation review-publication head `86021de468b91f14c38db41bac47551e08b04e53` also produced 7/7 successful workflows, but the ARB decision remained `REWORK REQUIRED`. The remediation exact head and its workflow results must be recorded in PR #188 after atomic publication. Re-review remains a separate authorization.
 
-## 5. Governance stop
+## 6. Governance stop
 
 This evidence supports publication of an implementation PR candidate only. It does not constitute ARB approval, Release Quality approval, acceptance, merge authorization, branch-protection waiver or authorization for F3 providers/ranking/runtime work.

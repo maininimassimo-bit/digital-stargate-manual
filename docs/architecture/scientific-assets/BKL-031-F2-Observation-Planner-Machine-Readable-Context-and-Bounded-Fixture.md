@@ -26,7 +26,7 @@ The fixture is source-backed where accepted evidence exists and explicit about m
 | `schemas/observation-planner-context-f2.schema.json` | published JSON Schema 2020-12 structural contract |
 | `docs/data/observation-planner-context-f2-fixture.json` | bounded source-backed fixture with one candidate and one context |
 | `.github/scripts/verify-observation-planner-context-f2.mjs` | normative structural, semantic and source-reconciliation validator |
-| `.github/scripts/test-observation-planner-context-f2.mjs` | deterministic positive test plus the 20 mandatory F1 negative cases |
+| `.github/scripts/test-observation-planner-context-f2.mjs` | deterministic positive test, the 20 mandatory F1 negative cases and 15 ARB-remediation regressions |
 | `.github/workflows/developer-foundation.yml` | exact-head CI quality gate |
 | `docs/architecture/validation/BKL-031-F2-Context-Contract-Validation-Evidence-2026-09-14.md` | traceability and validation evidence |
 
@@ -78,7 +78,7 @@ The context is an immutable envelope with explicit UTC generation/evaluation ins
 
 Every candidate has exactly one dimension of each accepted type. A usable `AVAILABLE` or `PARTIAL` dimension requires facts, evidence kind, Citation and Provenance. An `UNAVAILABLE`, `UNKNOWN`, `STALE` or `CONFLICTED` dimension exposes no value and requires reason codes.
 
-Facts carry source, semantic type, unit, temporal scope, observation/issue time, validity, spatial scope and method where applicable. Current, forecast, celestial and lunar facts have additional fail-closed source and completeness rules.
+Facts carry source, semantic type, unit, temporal scope, observation/issue time, validity, spatial scope and method where applicable. Their vocabulary is closed per dimension. Every value and unit must equal the exact field selected by its bounded Citation, while Provenance must bind the exact input set, output and Citation set. Current, forecast, celestial and lunar facts have additional fail-closed source and completeness rules.
 
 ### 5.4 RankingFactor
 
@@ -105,7 +105,7 @@ F2 has `authority=projection`, `action_authority=NONE`, `safety_authority=NONE` 
 
 F2 defines a file-contract validation port only:
 
-- input: the F2 JSON envelope plus the exact BKL-035 target read model, scientific session catalog and analytics session projection;
+- input: the F2 JSON envelope plus the exact BKL-035 target read model, AP-014 scientific metadata, scientific session catalog and analytics session projection;
 - output: an ordered collection of validation errors, or success with no mutation;
 - failure: any unresolved or semantically misbound source, Citation or Provenance fails closed.
 
@@ -121,7 +121,7 @@ Site/setup, ephemeris/lunar and forecast adapters are intentionally absent. Each
 
 ## 9. Failure behavior
 
-The validator rejects structural drift, authority escalation, bounds expansion, source-state or locator drift, identity mismatch, fuzzy matching, timezone ambiguity, stale/current promotion, historical/current or historical/forecast substitution, incomplete provider facts, traceability failure, prohibited scoring/output fields, command surfaces, EAGLE execution and silent conflict resolution.
+The validator is total for arbitrary JSON input: malformed roots, containers and nested values return deterministic validation errors instead of throwing. It rejects structural drift, authority escalation, bounds expansion, source-state or locator drift, identity mismatch, fuzzy matching, timezone ambiguity, stale/current promotion, historical/current or historical/forecast substitution, incomplete provider facts, Citation/value or Provenance binding mismatch, semantics outside the per-dimension vocabulary, prohibited scoring/output fields, command surfaces, EAGLE execution and silent conflict resolution.
 
 Missing evidence remains visible and excluded. It is never replaced with zero, null, last-known-good values, historical evidence from another fact class or a suggested output.
 
@@ -136,10 +136,12 @@ Migration is limited to adding the schema, fixture, validator, tests, CI steps a
 Local validation on the implementation candidate reports:
 
 - normative fixture verification: PASS;
-- Node test suite: 21/21 PASS;
-- mandatory F1 negative cases N01–N20: 20/20 PASS.
+- Node test suite: 36/36 PASS;
+- mandatory F1 negative cases N01–N20: 20/20 PASS;
+- ARB remediation regressions: 15/15 PASS;
+- malformed-JSON exploratory matrix: 250/250 returned deterministic non-empty error arrays, with zero throws.
 
-GitHub Actions on the exact PR head remains the authoritative publication evidence. F2 is not accepted or closed by this document. ARB review, Release Quality review, merge, any branch-protection waiver and F3 implementation each require separate owner authorization.
+GitHub Actions on the exact PR head remains the authoritative publication evidence. F2 is not accepted or closed by this document. The previous AI-assisted ARB decision remains `REWORK REQUIRED` until a separately authorized re-review evaluates the published remediation exact head. ARB re-review, Release Quality repeat, merge, any branch-protection waiver and F3 implementation each require separate owner authorization.
 
 ## 12. Deferred decisions
 

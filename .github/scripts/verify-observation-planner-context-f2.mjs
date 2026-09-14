@@ -31,11 +31,34 @@ const PROHIBITED_KEYS = new Set([
   'device_command','scheduler','schedule','sequence_edit'
 ]);
 const OPERATIONAL_WORDS = /\b(?:safe|ready|go|no-go|approved|authorized)\b/i;
+const PROHIBITED_FACT_SEMANTICS = /(?:READINESS|READY|SAFE|SAFETY|AUTHORI[ZS]|APPROV|SCORE|WEIGHT|THRESHOLD|NORMALI[ZS]|RANK|ORDER|PRIORITY|GO_NO_GO|NO_GO)/i;
+const FACT_CONTRACTS = {
+  TARGET_IDENTITY: {
+    TARGET_KEY: {unit:null, sources:['BKL031-S01'], temporal:'STATIC', kind:'DECLARED'}
+  },
+  SETUP_COMPATIBILITY: {},
+  CELESTIAL_GEOMETRY: {
+    TARGET_RA_DEG: {unit:'DEG', sources:['BKL031-S02','BKL031-S04'], temporal:'HISTORICAL', kind:'DECLARED'},
+    TARGET_DEC_DEG: {unit:'DEG', sources:['BKL031-S02','BKL031-S04'], temporal:'HISTORICAL', kind:'DECLARED'},
+    COORDINATE_EPOCH: {unit:null, sources:['BKL031-S02','BKL031-S04'], temporal:'HISTORICAL', kind:'DECLARED'}
+  },
+  LUNAR_CONTEXT: {},
+  FORECAST: {},
+  OBSERVED_WEATHER_SQM: {
+    SQM_SESSION_MEDIAN: {unit:'MAG_PER_ARCSEC2', sources:['BKL031-S05'], temporal:'HISTORICAL', kind:'OBSERVED'}
+  },
+  SCIENTIFIC_HISTORY: {
+    SCIENTIFIC_SESSION_REF: {unit:null, sources:['BKL031-S03'], temporal:'HISTORICAL', kind:'OBSERVED'}
+  }
+};
 const UTC = /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]+)?Z$/;
 
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
-const ref = value => value.id + '@' + value.version;
-const sameSet = (a, b) => JSON.stringify([...(a || [])].sort()) === JSON.stringify([...(b || [])].sort());
+const asArray = value => Array.isArray(value) ? value : [];
+const ref = value => isObject(value) ? String(value.id) + '@' + String(value.version) : '<invalid-ref>';
+const sameSet = (a, b) => JSON.stringify([...asArray(a)].sort()) === JSON.stringify([...asArray(b)].sort());
+const numberEqual = (left, right) => Number.isFinite(Number(left)) && Number.isFinite(Number(right)) && Math.abs(Number(left) - Number(right)) < 1e-9;
+const instantEqual = (left, right) => validUtc(left) && validUtc(right) && Date.parse(left) === Date.parse(right);
 const unique = values => Array.isArray(values) && new Set(values).size === values.length;
 const nonEmptyRefs = values => unique(values) && values.every(value => typeof value === 'string' && value.length > 1);
 
@@ -118,9 +141,10 @@ function structuralChecks(doc, fail) {
 function sourceChecks(doc, fail) {
   const keys = ['source_id','availability_state','authority','exact_locator','temporal_scope','public_projection_eligible','reason_codes'];
   const seen = new Set();
-  for (const [index, source] of (doc.sources || []).entries()) {
+  for (const [index, source] of asArray(doc.sources).entries()) {
     const label = 'source[' + index + ']';
     exactKeys(source, keys, label, fail);
+    if (!isObject(source)) continue;
     if (!SOURCE_CONTRACT[source.source_id]) { fail(label + ': unknown source_id ' + source.source_id); continue; }
     if (seen.has(source.source_id)) fail(label + ': duplicate source_id ' + source.source_id);
     seen.add(source.source_id);
@@ -130,7 +154,7 @@ function sourceChecks(doc, fail) {
     if (source.authority !== expected[2]) fail(source.source_id + ': authority drift');
     if (source.temporal_scope !== expected[3]) fail(source.source_id + ': temporal scope drift');
     if (source.public_projection_eligible !== expected[4]) fail(source.source_id + ': public projection eligibility drift');
-    if (!unique(source.reason_codes || []) || source.reason_codes.some(value => typeof value !== 'string' || value.length < 2)) fail(source.source_id + ': reason_codes must be unique refs');
+    if (!unique(source.reason_codes) || asArray(source.reason_codes).some(value => typeof value !== 'string' || value.length < 2)) fail(source.source_id + ': reason_codes must be unique refs');
   }
   for (const id of Object.keys(SOURCE_CONTRACT)) if (!seen.has(id)) fail('missing source ' + id);
 }
@@ -142,9 +166,10 @@ function citationChecks(doc, sources, repositorySources, fail) {
   const targetModel = repositorySources?.targetKnowledgeReadModel;
   const catalog = repositorySources?.scientificSessionCatalog;
   const sessionRows = parseCsv(repositorySources?.analyticsSessionsCsv || '');
-  for (const [index, citation] of (doc.citations || []).entries()) {
+  for (const [index, citation] of asArray(doc.citations).entries()) {
     const label = 'citation[' + index + ']';
     exactKeys(citation, keys, label, fail);
+    if (!isObject(citation)) continue;
     exactKeys(citation.locator, locatorKeys, label + '.locator', fail);
     if (typeof citation.id !== 'string' || citation.id.length < 2 || typeof citation.version !== 'string' || !citation.version.length) fail(label + ': id/version must be non-empty');
     if (typeof citation.source_ref !== 'string' || citation.source_ref.length < 2) fail(label + ': source_ref must be non-empty');
@@ -161,12 +186,21 @@ function citationChecks(doc, sources, repositorySources, fail) {
     const path = citation.locator?.path;
     const key = citation.locator?.record_key;
     const value = citation.locator?.record_value;
+    const metadataRows = parseCsv(repositorySources?.scientificMetadataCsv || '');
     if (path === 'docs/data/target-knowledge-read-model.json' && key === 'targets[].target_key') {
-      if (!(targetModel?.targets || []).some(target => target.target_key === value)) fail(citationRef + ': unresolved target Citation');
+      if (citation.source_ref !== 'BKL031-S01') fail(citationRef + ': target locator requires BKL031-S01');
+      if (!asArray(targetModel?.targets).some(target => target.target_key === value)) fail(citationRef + ': unresolved target Citation');
     } else if (path === 'docs/data/scientific-session-catalog.json' && key === 'sessions[].sessionId') {
-      if (!(catalog?.sessions || []).some(session => session.sessionId === value)) fail(citationRef + ': unresolved session Citation');
+      if (citation.source_ref !== 'BKL031-S03') fail(citationRef + ': catalog locator requires BKL031-S03');
+      if (!asArray(catalog?.sessions).some(session => session.sessionId === value)) fail(citationRef + ': unresolved session Citation');
     } else if (path === 'data/analytics/history/sessions.csv' && key === 'session_id') {
+      if (citation.source_ref !== 'BKL031-S05') fail(citationRef + ': analytics locator requires BKL031-S05');
       if (!sessionRows.some(row => row.session_id === value)) fail(citationRef + ': unresolved analytics session Citation');
+    } else if (path === 'data/analytics/metadata/session-scientific-metadata.csv' && key === 'session_id') {
+      if (citation.source_ref !== 'BKL031-S02') fail(citationRef + ': metadata locator requires BKL031-S02');
+      if (!metadataRows.some(row => row.session_id === value)) fail(citationRef + ': unresolved scientific metadata Citation');
+    } else if (key === 'session_id' && asArray(catalog?.sessions).some(session => session.sessionId === value && session.sourceMetricsPath === path)) {
+      if (citation.source_ref !== 'BKL031-S04') fail(citationRef + ': normalized session locator requires BKL031-S04');
     } else fail(citationRef + ': locator is outside the bounded F2 allowlist');
   }
   return citations;
@@ -177,9 +211,10 @@ function provenanceChecks(doc, citations, fail) {
   const methods = new Set(['BKL031-F2-SOURCE-SNAPSHOT-1','BKL031-F2-CANDIDATE-BINDING-1','BKL031-F2-EVIDENCE-BINDING-1','BKL031-F2-NO-RANKING-1']);
   const kinds = new Set(['OBSERVED','DECLARED','SUGGESTED']);
   const provenance = new Map();
-  for (const [index, item] of (doc.provenance_records || []).entries()) {
+  for (const [index, item] of asArray(doc.provenance_records).entries()) {
     const label = 'provenance[' + index + ']';
     exactKeys(item, keys, label, fail);
+    if (!isObject(item)) continue;
     const itemRef = ref(item);
     if (provenance.has(itemRef)) fail(label + ': duplicate Provenance ' + itemRef);
     provenance.set(itemRef, item);
@@ -188,7 +223,7 @@ function provenanceChecks(doc, citations, fail) {
     if (typeof item.id !== 'string' || item.id.length < 2 || typeof item.version !== 'string' || !item.version.length || typeof item.output_ref !== 'string' || item.output_ref.length < 2) fail(label + ': id/version/output_ref must be non-empty');
     if (!nonEmptyRefs(item.input_refs) || !item.input_refs.length) fail(itemRef + ': input_refs must be unique non-empty refs');
     if (!nonEmptyRefs(item.citation_refs) || !item.citation_refs.length) fail(itemRef + ': citation_refs must be unique non-empty refs');
-    for (const citationRef of item.citation_refs || []) if (!citations.has(citationRef)) fail(itemRef + ': unresolved Citation ' + citationRef);
+    for (const citationRef of asArray(item.citation_refs)) if (!citations.has(citationRef)) fail(itemRef + ': unresolved Citation ' + citationRef);
   }
   return provenance;
 }
@@ -196,10 +231,11 @@ function provenanceChecks(doc, citations, fail) {
 function candidateChecks(doc, sources, citations, provenance, repositorySources, fail) {
   const keys = ['candidate_id','target_key','target_id','canonical_name','aliases','identity_state','source_refs','citation_refs','provenance_refs','conflict_refs','evidence_dimension_refs'];
   const candidates = new Map();
-  const targets = repositorySources?.targetKnowledgeReadModel?.targets || [];
-  for (const [index, candidate] of (doc.target_candidates || []).entries()) {
+  const targets = asArray(repositorySources?.targetKnowledgeReadModel?.targets);
+  for (const [index, candidate] of asArray(doc.target_candidates).entries()) {
     const label = 'candidate[' + index + ']';
     exactKeys(candidate, keys, label, fail);
+    if (!isObject(candidate)) continue;
     if (candidates.has(candidate.candidate_id)) fail(label + ': duplicate candidate_id');
     candidates.set(candidate.candidate_id, candidate);
     if (typeof candidate.candidate_id !== 'string' || candidate.candidate_id.length < 2 || typeof candidate.canonical_name !== 'string' || !candidate.canonical_name.length) fail(label + ': candidate_id/canonical_name must be non-empty');
@@ -207,7 +243,7 @@ function candidateChecks(doc, sources, citations, provenance, repositorySources,
     if (!['validated','conflicted','incomplete','unknown'].includes(candidate.identity_state)) fail(label + ': invalid identity_state');
     if (!/^dsg-target:[a-z0-9]+(?:-[a-z0-9]+)*$/.test(candidate.target_key || '')) fail(label + ': invalid target_key');
     for (const field of ['aliases','conflict_refs']) {
-      if (!unique(candidate[field]) || candidate[field].some(value => typeof value !== 'string' || !value.length)) fail(label + ': ' + field + ' must be unique refs');
+      if (!unique(candidate[field]) || asArray(candidate[field]).some(value => typeof value !== 'string' || !value.length)) fail(label + ': ' + field + ' must be unique refs');
     }
     for (const field of ['source_refs','citation_refs','provenance_refs','evidence_dimension_refs']) {
       if (!nonEmptyRefs(candidate[field]) || !candidate[field].length) fail(label + ': ' + field + ' requires unique non-empty refs');
@@ -217,10 +253,10 @@ function candidateChecks(doc, sources, citations, provenance, repositorySources,
     if (candidate.canonical_name !== exact.canonical_name || candidate.target_id !== exact.target_id) fail(label + ': candidate identity does not preserve BKL-035 fields');
     if (candidate.identity_state !== exact.identity_state) fail(label + ': BKL-035 identity state conflict must be preserved');
     if (exact.identity_state !== 'validated' && candidate.identity_state === 'validated') fail(label + ': conflicted/unknown identity cannot be validated');
-    if (!candidate.source_refs.includes('BKL031-S01')) fail(label + ': candidate must bind to BKL031-S01');
-    for (const sourceRef of candidate.source_refs || []) if (!sources.has(sourceRef)) fail(label + ': unresolved source ' + sourceRef);
-    for (const citationRef of candidate.citation_refs || []) if (!citations.has(citationRef)) fail(label + ': unresolved Citation ' + citationRef);
-    for (const provenanceRef of candidate.provenance_refs || []) {
+    if (!asArray(candidate.source_refs).includes('BKL031-S01')) fail(label + ': candidate must bind to BKL031-S01');
+    for (const sourceRef of asArray(candidate.source_refs)) if (!sources.has(sourceRef)) fail(label + ': unresolved source ' + sourceRef);
+    for (const citationRef of asArray(candidate.citation_refs)) if (!citations.has(citationRef)) fail(label + ': unresolved Citation ' + citationRef);
+    for (const provenanceRef of asArray(candidate.provenance_refs)) {
       const item = provenance.get(provenanceRef);
       if (!item) fail(label + ': unresolved Provenance ' + provenanceRef);
       else if (item.output_ref !== candidate.candidate_id) fail(label + ': Provenance output must bind to candidate');
@@ -233,9 +269,10 @@ function dimensionChecks(doc, sources, citations, provenance, candidates, fail) 
   const keys = ['dimension_id','candidate_ref','dimension_type','availability_state','semantic_type','unit','source_refs','citation_refs','provenance_refs','evidence_kind','reason_codes','facts'];
   const factKeys = ['fact_id','semantic_type','value','unit','temporal_scope','observed_at_utc','issue_at_utc','valid_interval','spatial_scope_ref','method_ref','source_ref','citation_refs','provenance_refs','evidence_kind'];
   const dimensions = new Map(); const perCandidate = new Map();
-  for (const [index, dimension] of (doc.evidence_dimensions || []).entries()) {
+  for (const [index, dimension] of asArray(doc.evidence_dimensions).entries()) {
     const label = 'dimension[' + index + ']';
     exactKeys(dimension, keys, label, fail);
+    if (!isObject(dimension)) continue;
     if (dimensions.has(dimension.dimension_id)) fail(label + ': duplicate dimension_id');
     dimensions.set(dimension.dimension_id, dimension);
     if (!candidates.has(dimension.candidate_ref)) fail(label + ': unresolved candidate_ref');
@@ -244,32 +281,34 @@ function dimensionChecks(doc, sources, citations, provenance, candidates, fail) 
     if (typeof dimension.dimension_id !== 'string' || dimension.dimension_id.length < 2 || typeof dimension.semantic_type !== 'string' || !dimension.semantic_type.length) fail(label + ': dimension_id/semantic_type must be non-empty');
     if (!(dimension.unit === null || (typeof dimension.unit === 'string' && dimension.unit.length))) fail(label + ': unit must be non-empty or null');
     if (!nonEmptyRefs(dimension.source_refs) || !dimension.source_refs.length) fail(label + ': source_refs must be unique non-empty refs');
-    for (const sourceRef of dimension.source_refs || []) if (!sources.has(sourceRef)) fail(label + ': unresolved source ' + sourceRef);
-    if (!unique(dimension.citation_refs || []) || !unique(dimension.provenance_refs || []) || !unique(dimension.reason_codes || [])) fail(label + ': references/reasons must be unique');
+    for (const sourceRef of asArray(dimension.source_refs)) if (!sources.has(sourceRef)) fail(label + ': unresolved source ' + sourceRef);
+    if (!unique(dimension.citation_refs) || !unique(dimension.provenance_refs) || !unique(dimension.reason_codes)) fail(label + ': references/reasons must be arrays of unique values');
+    if (!Array.isArray(dimension.facts)) fail(label + ': facts must be an array');
     const usable = ['AVAILABLE','PARTIAL'].includes(dimension.availability_state);
-    if (usable && (!(dimension.facts || []).length || !dimension.evidence_kind || !(dimension.citation_refs || []).length || !(dimension.provenance_refs || []).length)) {
+    if (usable && (!asArray(dimension.facts).length || !dimension.evidence_kind || !asArray(dimension.citation_refs).length || !asArray(dimension.provenance_refs).length)) {
       fail(label + ': usable evidence requires facts, kind, Citation and Provenance');
     }
-    if (!usable && ((dimension.facts || []).length || dimension.evidence_kind !== null)) fail(label + ': unavailable/stale/conflicted evidence must expose no facts and null kind');
-    if (!usable && !(dimension.reason_codes || []).length) fail(label + ': non-available evidence requires reason_codes');
-    for (const citationRef of dimension.citation_refs || []) if (!citations.has(citationRef)) fail(label + ': unresolved Citation ' + citationRef);
-    for (const provenanceRef of dimension.provenance_refs || []) if (!provenance.has(provenanceRef)) fail(label + ': unresolved Provenance ' + provenanceRef);
+    if (!usable && (asArray(dimension.facts).length || dimension.evidence_kind !== null)) fail(label + ': unavailable/stale/conflicted evidence must expose no facts and null kind');
+    if (!usable && !asArray(dimension.reason_codes).length) fail(label + ': non-available evidence requires reason_codes');
+    for (const citationRef of asArray(dimension.citation_refs)) if (!citations.has(citationRef)) fail(label + ': unresolved Citation ' + citationRef);
+    for (const provenanceRef of asArray(dimension.provenance_refs)) if (!provenance.has(provenanceRef)) fail(label + ': unresolved Provenance ' + provenanceRef);
 
     const types = perCandidate.get(dimension.candidate_ref) || [];
     types.push(dimension.dimension_type); perCandidate.set(dimension.candidate_ref, types);
-    for (const [factIndex, fact] of (dimension.facts || []).entries()) {
+    for (const [factIndex, fact] of asArray(dimension.facts).entries()) {
       const factLabel = label + '.fact[' + factIndex + ']';
       exactKeys(fact, factKeys, factLabel, fail);
+      if (!isObject(fact)) continue;
       if (typeof fact.fact_id !== 'string' || fact.fact_id.length < 2 || typeof fact.semantic_type !== 'string' || !fact.semantic_type.length) fail(factLabel + ': fact_id/semantic_type must be non-empty');
       if (!['string','number','boolean'].includes(typeof fact.value) || fact.value === '' || (fact.semantic_type === 'SQM_SESSION_MEDIAN' && (!(fact.value > 0) || fact.value > 30))) fail(factLabel + ': null, zero, empty or semantically invalid value');
       if (!(fact.unit === null || (typeof fact.unit === 'string' && fact.unit.length))) fail(factLabel + ': unit must be non-empty or null');
       if (!['STATIC','HISTORICAL','CURRENT','FORECAST'].includes(fact.temporal_scope)) fail(factLabel + ': invalid temporal_scope');
       if (!['OBSERVED','DECLARED','SUGGESTED'].includes(fact.evidence_kind)) fail(factLabel + ': invalid evidence_kind');
-      if (!sources.has(fact.source_ref) || !dimension.source_refs.includes(fact.source_ref)) fail(factLabel + ': source must bind to its dimension');
+      if (!sources.has(fact.source_ref) || !asArray(dimension.source_refs).includes(fact.source_ref)) fail(factLabel + ': source must bind to its dimension');
       else if (!sources.get(fact.source_ref).availability_state.startsWith('AVAILABLE')) fail(factLabel + ': unavailable source cannot publish a fact value');
       if (!nonEmptyRefs(fact.citation_refs) || !fact.citation_refs.length || !nonEmptyRefs(fact.provenance_refs) || !fact.provenance_refs.length) fail(factLabel + ': Citation and Provenance are required');
-      for (const citationRef of fact.citation_refs || []) if (!citations.has(citationRef)) fail(factLabel + ': unresolved Citation ' + citationRef);
-      for (const provenanceRef of fact.provenance_refs || []) {
+      for (const citationRef of asArray(fact.citation_refs)) if (!citations.has(citationRef)) fail(factLabel + ': unresolved Citation ' + citationRef);
+      for (const provenanceRef of asArray(fact.provenance_refs)) {
         const item = provenance.get(provenanceRef);
         if (!item) fail(factLabel + ': unresolved Provenance ' + provenanceRef);
         else if (fact.evidence_kind === 'OBSERVED' && item.evidence_kind === 'SUGGESTED') fail(factLabel + ': suggested result cannot be re-ingested as observed evidence');
@@ -283,7 +322,7 @@ function dimensionChecks(doc, sources, citations, provenance, candidates, fail) 
         if (!fact.issue_at_utc || !fact.valid_interval || !fact.spatial_scope_ref || !fact.method_ref) fail(factLabel + ': forecast requires provider run, issue time, valid interval and spatial applicability');
       }
       if (dimension.dimension_type === 'CELESTIAL_GEOMETRY') {
-        const semanticTypes = new Set((dimension.facts || []).map(item => item.semantic_type));
+        const semanticTypes = new Set(asArray(dimension.facts).map(item => item.semantic_type));
         if ((semanticTypes.has('TARGET_RA_DEG') || semanticTypes.has('TARGET_DEC_DEG')) && !semanticTypes.has('COORDINATE_EPOCH')) fail(label + ': target coordinates require epoch');
         if (['ALTITUDE_DEG','TRANSIT_UTC','DARKNESS_STATE'].includes(fact.semantic_type) && (!fact.method_ref || fact.source_ref !== 'BKL031-S10')) fail(factLabel + ': ephemeris output requires governed source and method/version');
       }
@@ -312,12 +351,12 @@ function contextChecks(doc, candidates, dimensions, fail) {
   if (!validUtc(context?.generated_at_utc) || !validUtc(context?.evaluation_instant_utc)) fail('context[0]: generation/evaluation instants must use explicit Z');
   validateInterval(context?.requested_interval, 'context[0].requested_interval', fail);
   for (const field of ['candidate_refs','evidence_snapshot_refs']) if (!nonEmptyRefs(context?.[field]) || !context[field].length) fail('context[0]: ' + field + ' requires unique non-empty refs');
-  for (const field of ['unavailable_dimension_refs','stale_dimension_refs','conflicted_dimension_refs']) if (!unique(context?.[field]) || context[field].some(value => typeof value !== 'string' || value.length < 2)) fail('context[0]: ' + field + ' must contain unique refs');
+  for (const field of ['unavailable_dimension_refs','stale_dimension_refs','conflicted_dimension_refs']) if (!unique(context?.[field]) || asArray(context[field]).some(value => typeof value !== 'string' || value.length < 2)) fail('context[0]: ' + field + ' must contain unique refs');
   if (context?.site_ref === null && context?.display_timezone_ref !== null) fail('context[0]: display timezone cannot be guessed without governed site');
   if (context?.active_setup_ref !== null) fail('context[0]: historical configuration cannot become current without governed validity interval');
-  for (const candidateRef of context?.candidate_refs || []) if (!candidates.has(candidateRef)) fail('context[0]: unresolved candidate_ref ' + candidateRef);
-  for (const dimensionRef of context?.evidence_snapshot_refs || []) if (!dimensions.has(dimensionRef)) fail('context[0]: unresolved evidence ref ' + dimensionRef);
-  const contextDimensions = [...dimensions.values()].filter(item => (context?.candidate_refs || []).includes(item.candidate_ref));
+  for (const candidateRef of asArray(context?.candidate_refs)) if (!candidates.has(candidateRef)) fail('context[0]: unresolved candidate_ref ' + candidateRef);
+  for (const dimensionRef of asArray(context?.evidence_snapshot_refs)) if (!dimensions.has(dimensionRef)) fail('context[0]: unresolved evidence ref ' + dimensionRef);
+  const contextDimensions = [...dimensions.values()].filter(item => asArray(context?.candidate_refs).includes(item.candidate_ref));
   const unavailable = contextDimensions.filter(item => ['UNAVAILABLE','UNKNOWN'].includes(item.availability_state)).map(item => item.dimension_id);
   const stale = contextDimensions.filter(item => item.availability_state === 'STALE').map(item => item.dimension_id);
   const conflicted = contextDimensions.filter(item => item.availability_state === 'CONFLICTED').map(item => item.dimension_id);
@@ -334,9 +373,10 @@ function contextChecks(doc, candidates, dimensions, fail) {
 function factorChecks(doc, fail) {
   const keys = ['factor_id','name','input_dimension_type','expected_semantic_type','expected_unit','interpretation_direction','missing_behavior','conflict_behavior'];
   const factors = new Map(); const types = [];
-  for (const [index, factor] of (doc.ranking_factors || []).entries()) {
+  for (const [index, factor] of asArray(doc.ranking_factors).entries()) {
     const label = 'factor[' + index + ']';
     exactKeys(factor, keys, label, fail);
+    if (!isObject(factor)) continue;
     if (factors.has(factor.factor_id)) fail(label + ': duplicate factor_id');
     factors.set(factor.factor_id, factor); types.push(factor.input_dimension_type);
     if (typeof factor.factor_id !== 'string' || factor.factor_id.length < 2 || typeof factor.name !== 'string' || !factor.name.length || typeof factor.expected_semantic_type !== 'string' || !factor.expected_semantic_type.length) fail(label + ': identifiers and semantic type must be non-empty');
@@ -351,18 +391,19 @@ function factorChecks(doc, fail) {
 
 function explanationChecks(doc, candidates, dimensions, factors, citations, provenance, context, fail) {
   const keys = ['explanation_id','candidate_ref','context_ref','method_id','evaluation_state','factor_refs','evidence_refs','citation_refs','provenance_refs','excluded_dimension_refs','stale_dimension_refs','conflicted_dimension_refs','missing_reason_codes','message'];
-  for (const [index, explanation] of (doc.ranking_explanations || []).entries()) {
+  for (const [index, explanation] of asArray(doc.ranking_explanations).entries()) {
     const label = 'explanation[' + index + ']';
     exactKeys(explanation, keys, label, fail);
+    if (!isObject(explanation)) continue;
     if (typeof explanation.explanation_id !== 'string' || explanation.explanation_id.length < 2 || typeof explanation.message !== 'string' || !explanation.message.length) fail(label + ': explanation_id/message must be non-empty');
     for (const field of ['factor_refs','evidence_refs','citation_refs','provenance_refs']) if (!nonEmptyRefs(explanation[field]) || !explanation[field].length) fail(label + ': ' + field + ' requires unique non-empty refs');
-    for (const field of ['excluded_dimension_refs','stale_dimension_refs','conflicted_dimension_refs','missing_reason_codes']) if (!unique(explanation[field]) || explanation[field].some(value => typeof value !== 'string' || value.length < 2)) fail(label + ': ' + field + ' must contain unique refs');
+    for (const field of ['excluded_dimension_refs','stale_dimension_refs','conflicted_dimension_refs','missing_reason_codes']) if (!unique(explanation[field]) || asArray(explanation[field]).some(value => typeof value !== 'string' || value.length < 2)) fail(label + ': ' + field + ' must contain unique refs');
     if (!candidates.has(explanation.candidate_ref) || explanation.context_ref !== context?.context_id) fail(label + ': candidate/context binding mismatch');
     if (explanation.method_id !== 'BKL031-F2-NO-RANKING-1' || explanation.evaluation_state !== 'NOT_EVALUATED') fail(label + ': F2 explanation must remain NOT_EVALUATED with no-ranking method');
-    for (const factorRef of explanation.factor_refs || []) if (!factors.has(factorRef)) fail(label + ': unresolved factor ' + factorRef);
-    for (const evidenceRef of explanation.evidence_refs || []) if (!dimensions.has(evidenceRef)) fail(label + ': unresolved evidence ' + evidenceRef);
-    for (const citationRef of explanation.citation_refs || []) if (!citations.has(citationRef)) fail(label + ': unresolved Citation ' + citationRef);
-    for (const provenanceRef of explanation.provenance_refs || []) {
+    for (const factorRef of asArray(explanation.factor_refs)) if (!factors.has(factorRef)) fail(label + ': unresolved factor ' + factorRef);
+    for (const evidenceRef of asArray(explanation.evidence_refs)) if (!dimensions.has(evidenceRef)) fail(label + ': unresolved evidence ' + evidenceRef);
+    for (const citationRef of asArray(explanation.citation_refs)) if (!citations.has(citationRef)) fail(label + ': unresolved Citation ' + citationRef);
+    for (const provenanceRef of asArray(explanation.provenance_refs)) {
       const item = provenance.get(provenanceRef);
       if (!item) fail(label + ': unresolved Provenance ' + provenanceRef);
       else if (item.output_ref !== explanation.explanation_id || item.evidence_kind !== 'SUGGESTED') fail(label + ': explanation Provenance binding/kind mismatch');
@@ -375,25 +416,242 @@ function explanationChecks(doc, candidates, dimensions, factors, citations, prov
     if (!sameSet(explanation.excluded_dimension_refs, excluded)) fail(label + ': explanation must enumerate every excluded dimension');
     if (!sameSet(explanation.stale_dimension_refs, stale)) fail(label + ': explanation must enumerate every stale dimension');
     if (!sameSet(explanation.conflicted_dimension_refs, conflicted)) fail(label + ': explanation must enumerate every conflicted dimension');
-    const reasons = [...new Set(candidateDimensions.filter(item => !['AVAILABLE'].includes(item.availability_state)).flatMap(item => item.reason_codes || []))];
+    const reasons = [...new Set(candidateDimensions.filter(item => !['AVAILABLE'].includes(item.availability_state)).flatMap(item => asArray(item.reason_codes)))];
     if (!sameSet(explanation.missing_reason_codes, reasons)) fail(label + ': missing reason codes must preserve all partial/unavailable evidence');
     if (OPERATIONAL_WORDS.test(explanation.message || '')) fail(label + ': operational conclusion vocabulary is prohibited');
   }
 }
 
+
+function governedEpoch(row) {
+  const match = typeof row?.notes === 'string' ? row.notes.match(/\b(J[0-9]{4}(?:\.[0-9]+)?)\b/i) : null;
+  return match ? match[1].toUpperCase() : null;
+}
+
+function semanticBindingChecks(doc, citations, provenance, candidates, dimensions, repositorySources, fail) {
+  const analyticsRows = parseCsv(repositorySources?.analyticsSessionsCsv || '');
+  const metadataRows = parseCsv(repositorySources?.scientificMetadataCsv || '');
+  const catalogSessions = asArray(repositorySources?.scientificSessionCatalog?.sessions);
+  const targetRows = asArray(repositorySources?.targetKnowledgeReadModel?.targets);
+
+  for (const candidate of candidates.values()) {
+    const label = 'candidate ' + candidate.candidate_id;
+    const candidateCitations = asArray(candidate.citation_refs).map(value => citations.get(value)).filter(Boolean);
+    if (candidateCitations.length !== 1) fail(label + ': exact BKL-035 Citation set requires one target Citation');
+    for (const citation of candidateCitations) {
+      if (citation.source_ref !== 'BKL031-S01' ||
+          citation.locator?.path !== 'docs/data/target-knowledge-read-model.json' ||
+          citation.locator?.record_key !== 'targets[].target_key' ||
+          citation.locator?.record_value !== candidate.target_key) {
+        fail(label + ': Citation must bind exactly to its BKL-035 target_key');
+      }
+    }
+    if (asArray(candidate.provenance_refs).length !== 1) fail(label + ': exactly one candidate-binding Provenance is required');
+    for (const provenanceRef of asArray(candidate.provenance_refs)) {
+      const item = provenance.get(provenanceRef);
+      if (!item) continue;
+      if (item.method_id !== 'BKL031-F2-CANDIDATE-BINDING-1' ||
+          item.output_ref !== candidate.candidate_id ||
+          item.evidence_kind !== 'DECLARED' ||
+          !sameSet(item.input_refs, ['BKL031-S01', ...asArray(candidate.citation_refs)]) ||
+          !sameSet(item.citation_refs, candidate.citation_refs)) {
+        fail(label + ': candidate Provenance input/output/Citation binding mismatch');
+      }
+    }
+  }
+
+  for (const dimension of dimensions.values()) {
+    const label = 'dimension ' + dimension.dimension_id;
+    const candidate = candidates.get(dimension.candidate_ref);
+    const facts = asArray(dimension.facts).filter(isObject);
+    const unionCitationRefs = [...new Set(facts.flatMap(fact => asArray(fact.citation_refs)))];
+    if (facts.length && !sameSet(dimension.citation_refs, unionCitationRefs)) {
+      fail(label + ': dimension Citation set must equal the union of fact Citations');
+    }
+
+    for (const fact of facts) {
+      const factLabel = label + ' fact ' + fact.fact_id;
+      if (PROHIBITED_FACT_SEMANTICS.test(String(fact.semantic_type)) ||
+          (typeof fact.value === 'string' && PROHIBITED_FACT_SEMANTICS.test(fact.value))) {
+        fail(factLabel + ': readiness/safety/authorization/score/threshold/normalization/ordering semantics are prohibited');
+      }
+      const contract = FACT_CONTRACTS[dimension.dimension_type]?.[fact.semantic_type];
+      if (!contract) {
+        fail(factLabel + ': semantic_type is outside the closed vocabulary for ' + dimension.dimension_type);
+        continue;
+      }
+      if (fact.unit !== contract.unit) fail(factLabel + ': unit must be ' + String(contract.unit));
+      if (!contract.sources.includes(fact.source_ref)) fail(factLabel + ': source class is not authorized for this semantic_type');
+      if (fact.temporal_scope !== contract.temporal) fail(factLabel + ': temporal_scope must be ' + contract.temporal);
+      if (fact.evidence_kind !== contract.kind) fail(factLabel + ': evidence_kind must be ' + contract.kind);
+
+      const factCitations = asArray(fact.citation_refs).map(value => citations.get(value)).filter(Boolean);
+      if (factCitations.length !== asArray(fact.citation_refs).length || !factCitations.length) {
+        fail(factLabel + ': every fact Citation must resolve');
+      }
+      for (const citation of factCitations) {
+        if (citation.source_ref !== fact.source_ref) fail(factLabel + ': Citation source must equal fact source');
+      }
+      for (const provenanceRef of asArray(fact.provenance_refs)) {
+        const item = provenance.get(provenanceRef);
+        if (!item) continue;
+        if (item.method_id !== 'BKL031-F2-EVIDENCE-BINDING-1' ||
+            item.output_ref !== dimension.dimension_id ||
+            item.evidence_kind !== fact.evidence_kind ||
+            !sameSet(item.citation_refs, dimension.citation_refs)) {
+          fail(factLabel + ': Provenance must bind exactly to its dimension output and Citation set');
+        }
+      }
+
+      if (dimension.dimension_type === 'TARGET_IDENTITY' && candidate) {
+        const target = targetRows.find(item => item.target_key === candidate.target_key);
+        if (fact.value !== target?.target_key) fail(factLabel + ': value does not equal the cited BKL-035 target_key');
+        if (factCitations.some(citation => citation.locator?.record_value !== fact.value)) {
+          fail(factLabel + ': value does not equal its Citation record_value');
+        }
+      }
+
+      if (dimension.dimension_type === 'OBSERVED_WEATHER_SQM') {
+        if (factCitations.length !== 1) fail(factLabel + ': SQM fact requires exactly one analytics Citation');
+        const row = analyticsRows.find(item => item.session_id === factCitations[0]?.locator?.record_value);
+        if (!row) fail(factLabel + ': cited analytics row is unresolved');
+        else {
+          if (!numberEqual(fact.value, row.sqm_median_mag_arcsec2)) fail(factLabel + ': value does not equal cited sqm_median_mag_arcsec2');
+          if (candidate && row.target_name !== candidate.canonical_name) fail(factLabel + ': cited analytics row target does not match candidate');
+          if (!instantEqual(fact.observed_at_utc, row.sqm_start)) fail(factLabel + ': observed_at_utc does not equal cited sqm_start');
+          if (!instantEqual(fact.valid_interval?.start_utc, row.sqm_start) || !instantEqual(fact.valid_interval?.end_utc, row.sqm_end)) {
+            fail(factLabel + ': valid_interval does not equal cited SQM interval');
+          }
+        }
+      }
+
+      if (dimension.dimension_type === 'SCIENTIFIC_HISTORY') {
+        if (factCitations.length !== 1) fail(factLabel + ': session fact requires exactly one catalog Citation');
+        const sessionId = factCitations[0]?.locator?.record_value;
+        const session = catalogSessions.find(item => item.sessionId === sessionId);
+        if (fact.value !== 'session:' + sessionId) fail(factLabel + ': value does not equal cited session reference');
+        if (candidate && session?.target !== candidate.canonical_name) fail(factLabel + ': cited session target does not match candidate');
+      }
+    }
+
+    if (facts.length) {
+      if (asArray(dimension.provenance_refs).length !== 1) fail(label + ': exactly one dimension-binding Provenance is required');
+      const item = provenance.get(asArray(dimension.provenance_refs)[0]);
+      let expectedInputs = null;
+      if (dimension.dimension_type === 'TARGET_IDENTITY') expectedInputs = [dimension.candidate_ref, 'BKL031-S01'];
+      if (dimension.dimension_type === 'OBSERVED_WEATHER_SQM') {
+        expectedInputs = [
+          ...asArray(dimension.citation_refs).map(value => citations.get(value)).filter(Boolean).map(citation => 'session:' + citation.locator.record_value),
+          'BKL031-S05','BKL031-S06'
+        ];
+      }
+      if (dimension.dimension_type === 'SCIENTIFIC_HISTORY') {
+        expectedInputs = [...facts.map(fact => fact.value), 'BKL031-S03'];
+      }
+      if (dimension.dimension_type === 'CELESTIAL_GEOMETRY') {
+        expectedInputs = [
+          ...asArray(dimension.citation_refs).map(value => citations.get(value)).filter(Boolean).map(citation => 'session:' + citation.locator.record_value),
+          ...new Set(facts.map(fact => fact.source_ref))
+        ];
+      }
+      if (!item || item.method_id !== 'BKL031-F2-EVIDENCE-BINDING-1' ||
+          item.output_ref !== dimension.dimension_id ||
+          item.evidence_kind !== dimension.evidence_kind ||
+          !sameSet(item.citation_refs, dimension.citation_refs) ||
+          (expectedInputs && !sameSet(item.input_refs, expectedInputs))) {
+        fail(label + ': dimension Provenance input/output/Citation binding mismatch');
+      }
+    }
+
+    if (dimension.dimension_type === 'CELESTIAL_GEOMETRY') {
+      const coordinateFacts = facts.filter(fact => ['TARGET_RA_DEG','TARGET_DEC_DEG','COORDINATE_EPOCH'].includes(fact.semantic_type));
+      const governedRows = metadataRows.filter(row =>
+        row.metadata_state === 'REGISTERED' &&
+        candidate &&
+        row.target_id === candidate.target_id &&
+        row.target_name === candidate.canonical_name &&
+        Number.isFinite(Number(row.ra_deg)) &&
+        Number.isFinite(Number(row.dec_deg)) &&
+        governedEpoch(row)
+      );
+      const coordinateSets = [...new Set(governedRows.map(row => [Number(row.ra_deg), Number(row.dec_deg), governedEpoch(row)].join('|')))];
+      if (coordinateSets.length > 1 && !['CONFLICTED','UNAVAILABLE'].includes(dimension.availability_state)) {
+        fail(label + ': conflicting governed S02 coordinate evidence must remain CONFLICTED or UNAVAILABLE');
+      }
+      if (coordinateFacts.length) {
+        const byType = new Map(coordinateFacts.map(fact => [fact.semantic_type, fact]));
+        if (coordinateFacts.length !== 3 || !byType.has('TARGET_RA_DEG') || !byType.has('TARGET_DEC_DEG') || !byType.has('COORDINATE_EPOCH')) {
+          fail(label + ': target coordinates require exact RA, Dec and epoch triplet');
+        }
+        const ra = byType.get('TARGET_RA_DEG')?.value;
+        const dec = byType.get('TARGET_DEC_DEG')?.value;
+        const epoch = byType.get('COORDINATE_EPOCH')?.value;
+        if (!(typeof ra === 'number' && ra >= 0 && ra < 360)) fail(label + ': RA must be in [0,360) degrees');
+        if (!(typeof dec === 'number' && dec >= -90 && dec <= 90)) fail(label + ': Dec must be in [-90,90] degrees');
+        if (typeof epoch !== 'string' || !/^J[0-9]{4}(?:\.[0-9]+)?$/.test(epoch)) fail(label + ': coordinate epoch must be explicit');
+        if (!governedRows.length) fail(label + ': no eligible governed S02 coordinate evidence for candidate');
+        if (coordinateSets.length === 1) {
+          const [expectedRa, expectedDec, expectedEpoch] = coordinateSets[0].split('|');
+          if (!numberEqual(ra, expectedRa) || !numberEqual(dec, expectedDec) || epoch !== expectedEpoch) {
+            fail(label + ': coordinate value conflicts with governed S02 evidence');
+          }
+        }
+        for (const fact of coordinateFacts) {
+          for (const citationRef of asArray(fact.citation_refs)) {
+            const citation = citations.get(citationRef);
+            const sessionId = citation?.locator?.record_value;
+            const row = governedRows.find(item => item.session_id === sessionId);
+            if (!row || !['BKL031-S02','BKL031-S04'].includes(citation?.source_ref)) {
+              fail(label + ': coordinate Citation must resolve to eligible S02/S04 evidence for candidate');
+            }
+          }
+        }
+      }
+    }
+  }
+
+  for (const explanation of asArray(doc.ranking_explanations).filter(isObject)) {
+    const candidateDimensions = [...dimensions.values()].filter(item => item.candidate_ref === explanation.candidate_ref);
+    const candidate = candidates.get(explanation.candidate_ref);
+    const expectedCitations = [...new Set([
+      ...asArray(candidate?.citation_refs),
+      ...candidateDimensions.flatMap(item => asArray(item.citation_refs))
+    ])];
+    if (!sameSet(explanation.citation_refs, expectedCitations)) {
+      fail('explanation ' + explanation.explanation_id + ': Citation set must equal candidate and dimension evidence');
+    }
+    for (const provenanceRef of asArray(explanation.provenance_refs)) {
+      const item = provenance.get(provenanceRef);
+      const expectedInputs = [explanation.context_ref, explanation.candidate_ref, ...candidateDimensions.map(value => value.dimension_id)];
+      if (!item || item.method_id !== 'BKL031-F2-NO-RANKING-1' ||
+          item.output_ref !== explanation.explanation_id ||
+          item.evidence_kind !== 'SUGGESTED' ||
+          !sameSet(item.input_refs, expectedInputs) ||
+          !sameSet(item.citation_refs, explanation.citation_refs)) {
+        fail('explanation ' + explanation.explanation_id + ': Provenance input/output/Citation binding mismatch');
+      }
+    }
+  }
+}
+
 export function validateObservationPlannerContext(doc, repositorySources) {
-  const errors = []; const fail = message => errors.push(message);
+  const errors = []; const fail = message => errors.push(String(message));
   if (!isObject(doc)) return ['observation planner contract must be an object'];
-  structuralChecks(doc, fail);
-  sourceChecks(doc, fail);
-  const sources = new Map((doc.sources || []).map(item => [item.source_id, item]));
-  const citations = citationChecks(doc, sources, repositorySources, fail);
-  const provenance = provenanceChecks(doc, citations, fail);
-  const candidates = candidateChecks(doc, sources, citations, provenance, repositorySources, fail);
-  const dimensions = dimensionChecks(doc, sources, citations, provenance, candidates, fail);
-  const context = contextChecks(doc, candidates, dimensions, fail);
-  const factors = factorChecks(doc, fail);
-  explanationChecks(doc, candidates, dimensions, factors, citations, provenance, context, fail);
+  const run = (label, action, fallback) => {
+    try { return action(); }
+    catch { fail(label + ': validation aborted for malformed input'); return fallback; }
+  };
+  run('structure', () => structuralChecks(doc, fail));
+  run('sources', () => sourceChecks(doc, fail));
+  const sources = new Map(asArray(doc.sources).filter(isObject).map(item => [item.source_id, item]));
+  const citations = run('citations', () => citationChecks(doc, sources, repositorySources, fail), new Map());
+  const provenance = run('provenance', () => provenanceChecks(doc, citations, fail), new Map());
+  const candidates = run('candidates', () => candidateChecks(doc, sources, citations, provenance, repositorySources, fail), new Map());
+  const dimensions = run('dimensions', () => dimensionChecks(doc, sources, citations, provenance, candidates, fail), new Map());
+  const context = run('context', () => contextChecks(doc, candidates, dimensions, fail), undefined);
+  const factors = run('factors', () => factorChecks(doc, fail), new Map());
+  run('explanations', () => explanationChecks(doc, candidates, dimensions, factors, citations, provenance, context, fail));
+  run('semantic bindings', () => semanticBindingChecks(doc, citations, provenance, candidates, dimensions, repositorySources, fail));
   return errors;
 }
 
@@ -401,7 +659,8 @@ export function loadRepositorySources() {
   return {
     targetKnowledgeReadModel: JSON.parse(fs.readFileSync('docs/data/target-knowledge-read-model.json', 'utf8')),
     scientificSessionCatalog: JSON.parse(fs.readFileSync('docs/data/scientific-session-catalog.json', 'utf8')),
-    analyticsSessionsCsv: fs.readFileSync('data/analytics/history/sessions.csv', 'utf8')
+    analyticsSessionsCsv: fs.readFileSync('data/analytics/history/sessions.csv', 'utf8'),
+    scientificMetadataCsv: fs.readFileSync('data/analytics/metadata/session-scientific-metadata.csv', 'utf8')
   };
 }
 
