@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 4.1 |
-| Baseline | 13/09/2026 |
-| Stato | Current root bootstrap — BKL-046 closed; BKL-031 F1 current |
+| Versione | 4.2 |
+| Baseline | 14/09/2026 |
+| Stato | Current root bootstrap — BKL-031 F1 accepted; F2 current handoff only |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -15,8 +15,8 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni, roadma
 ## 2. Sequenza obbligatoria di lettura
 
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-09-13.md`
-3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-13.md`
+2. `docs/project/HANDOVER_2026-09-14.md`
+3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-14.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
 6. `docs/project/BACKLOG.md`
@@ -51,13 +51,14 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - BKL-037 — Session Comparison & Benchmarking: CLOSED / ACCEPTED;
 - BKL-041 — Scientific Data Quality Score: CLOSED / ACCEPTED / POST-MERGE VERIFIED;
 - BKL-046 — AI Post-Processing Assistant: CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only con limitation;
-- BKL-031 — Observation Planner intelligente: CURRENT esclusivamente per F1 source discovery e semantic boundary.
+- BKL-031 F1 — Source Discovery and Semantic Boundary: ACCEPTED / POST-MERGE VERIFIED;
+- BKL-031 F2 — Machine-Readable Context/Source Contract and Bounded Fixtures: CURRENT HANDOFF ONLY; implementation not authorized.
 
 La closure BKL-046 non dichiara efficacia scientifica né produzione: `NOT_EVALUABLE_CURRENT_EVIDENCE`, `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`. Nessun modello/provider, automatic acceptance o PixInsight apply è autorizzato.
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [CURRENT/F1] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1 ACCEPTED / F2 CURRENT HANDOFF] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -69,5 +70,5 @@ Nessun portale, planner, comparison layer, quality score o AI è Safety Authorit
 
 ## 9. Punto di partenza operativo
 
-Avviare **BKL-031 F1 — Source Discovery and Semantic Boundary** dal program handoff corrente. Inventariare soltanto source verificabili per target, setup, geometria celeste/Luna, meteo/SQM e storico scientifico; definire authority, freshness, missingness, identity e semantica di ranking spiegabile. F1 non implementa ranking, soglie, scheduler, go/no-go, device command o Safety Authority e deve fermarsi prima di implementazione e review.
+BKL-031 F2 è promosso soltanto come current handoff. Prima di creare schema, fixture, validator, codice, provider selection o consumer è richiesta una nuova autorizzazione owner esplicita. Il futuro F2 dovrà codificare source/context e i cinque oggetti semantici F1 in modo bounded e fail-closed, mantenendo S07–S11 unavailable/unknown e senza pesi, score, ranking, readiness, scheduler, device command, workload pesante EAGLE o Safety Authority.
 

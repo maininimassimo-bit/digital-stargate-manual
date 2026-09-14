@@ -49,7 +49,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
-| BKL-031 | P2 | Observation Planner intelligente | In Progress | BKL-015, BKL-035, meteo/SQM | Ranking target per setup e condizioni | Current only for F1 source discovery and semantic boundary; implementation/ranking not authorized; `docs/architecture/assessments/BKL-031-Architecture-Program-Assessment-and-F1-Handoff-2026-09-13.md` |
+| BKL-031 | P2 | Observation Planner intelligente | In Progress | BKL-015, BKL-035, meteo/SQM | Ranking target per setup e condizioni | F1 ACCEPTED / POST-MERGE VERIFIED via PR #183, merge `b14d9cdd991b5eef74dd9b972958e74c5903a32d`; F2 current handoff only, implementation not authorized; `docs/architecture/assessments/BKL-031-F2-Machine-Readable-Context-Contract-Handoff-2026-09-14.md` |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
@@ -122,13 +122,19 @@ F5-C è promosso come candidato di closure deterministica read-only. La proposta
 BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED tramite PR #181, technical head `36a72f12a050d5330e8a966c68f8f7d25709d843`, review-publication head `d0ad9f0c05e2040ba31e44dfc470eb3c4810b7f0` e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. ARB 98/100 e Release Quality `CONDITIONALLY READY FOR MERGE` erano review AI-assistite, owner-authorized e non equivalenti ad approvazioni umane indipendenti. Le deroghe una tantum `W-BKL046-F5C-REVIEW-001` e `W-BKL046-F5C-MERGE-001` sono consumate/scadute. I sette workflow post-merge e Pages live sono verdi.
 
 BKL-031 è promosso esclusivamente a F1 source discovery e semantic boundary. La promozione non autorizza algoritmo, ranking, score, soglie, scheduler automatico, go/no-go, device command, workload pesante su EAGLE o Safety Authority.
+### BKL-031 F1 acceptance and F2 handoff — 14/09/2026
+
+F1 è ACCEPTED / POST-MERGE VERIFIED tramite PR #183, technical head `55b502fb4e47ef92975767ceb444078cae36caf8`, publication head `7a4d020b59186c4b05b9741bb12689050e2b7e8d` e merge `b14d9cdd991b5eef74dd9b972958e74c5903a32d`. Le review ARB/RQ sono AI-assistite, owner-authorized e non equivalenti ad approvazioni umane indipendenti. I sei workflow post-merge sono verdi.
+
+F2 è promosso esclusivamente come handoff per un futuro machine-readable context/source contract e bounded fixtures. Schema, fixture, validator, provider, ranking e runtime restano non autorizzati. Le condizioni F1, inclusi S07–S11 unavailable/unknown e i 20 casi negativi, sono trasferite.
+
 ## 4. Sequenza di esecuzione raccomandata
 
 ```text
 Completed baseline through BKL-037
   -> BKL-041 Scientific Data Quality Score [CLOSED]
   -> BKL-046 AI Post-Processing Assistant [CLOSED]
-  -> BKL-031 Observation Planner [CURRENT/F1]
+  -> BKL-031 Observation Planner [F1 ACCEPTED / F2 CURRENT HANDOFF]
   -> BKL-032 Session Readiness
   -> BKL-036 Observatory Health Score
   -> BKL-033 Digital Twin

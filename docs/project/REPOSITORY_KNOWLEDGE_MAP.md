@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 2.8 |
+| Versione | 2.9 |
 | Stato | Active |
-| Data | 13/09/2026 |
+| Data | 14/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | BKL-031 — Observation Planner intelligente, F1 only |
+| Current governed package | BKL-031 F2 — current handoff only; implementation not authorized |
 
 ## 1. Scopo
 
@@ -16,7 +16,7 @@ Mappa domini, authority, projection e percorsi di conoscenza. Non sostituisce le
 ## 2. Continuity hierarchy
 
 1. `AI_BOOTSTRAP.md`;
-2. current handover e technical baseline 13/09/2026;
+2. current handover e technical baseline 14/09/2026;
 3. Enterprise Architecture Context;
 4. questo Knowledge Map;
 5. `BACKLOG.md`;
@@ -45,11 +45,11 @@ Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimen
 
 BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`; nessun apply path o Safety Authority è autorizzato.
 
-BKL-031 è current soltanto per F1 source discovery e semantic boundary. Il program handoff richiede source authority, identity, freshness, missingness, explanation e separazione da BKL-032/Safety prima di ogni implementazione.
+BKL-031 F1 è ACCEPTED / POST-MERGE VERIFIED tramite PR #183 e merge `b14d9cdd991b5eef74dd9b972958e74c5903a32d`. F2 è current come handoff soltanto; source/context machine-readable, fixture, validator e ogni implementazione richiedono nuova autorizzazione. S07–S11 restano unavailable/unknown e la separazione da BKL-032/Safety è invariata.
 
 ## 7. Roadmap sequence
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [CURRENT/F1] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1 ACCEPTED / F2 CURRENT HANDOFF] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 8. CI/CD e publishing
 
@@ -73,3 +73,4 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 2.6 | 11/09/2026 | BKL-046 F3 accepted e F4 current |
 | 2.7 | 12/09/2026 | BKL-046 F4 accepted/post-merge verified e F5 design current |
 | 2.8 | 13/09/2026 | BKL-046 closed/accepted/post-merge verified e BKL-031 F1 current |
+| 2.9 | 14/09/2026 | BKL-031 F1 accepted/post-merge verified; F2 current handoff only |

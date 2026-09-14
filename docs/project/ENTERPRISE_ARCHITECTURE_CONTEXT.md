@@ -3,15 +3,15 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 2.7 |
+| Versione | 2.8 |
 | Stato | Active context baseline |
-| Data baseline | 13/09/2026 |
+| Data baseline | 14/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch autorevole | `main` |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Continuity handover | `docs/project/HANDOVER_2026-09-13.md` |
-| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-13.md` |
-| Current governed package | BKL-031 — Observation Planner intelligente, F1 only |
+| Continuity handover | `docs/project/HANDOVER_2026-09-14.md` |
+| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-14.md` |
+| Current governed package | BKL-031 F2 — current handoff only; implementation not authorized |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo e gerarchia
@@ -60,17 +60,17 @@ BKL-041 — Scientific Data Quality Score è CLOSED / ACCEPTED / POST-MERGE VERI
 
 BKL-046 F1-F5 sono CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION` e `aiModelImplemented=false`.
 
-BKL-031 è current soltanto per F1 source discovery e semantic boundary. Il package deve verificare target, setup, geometria celeste/Luna, forecast, meteo/SQM e storico scientifico senza implementare ranking, score, soglie, scheduling, go/no-go, device command, workload pesante su EAGLE o Safety Authority.
+BKL-031 F1 è ACCEPTED / POST-MERGE VERIFIED tramite PR #183 e merge `b14d9cdd991b5eef74dd9b972958e74c5903a32d`. F2 è current soltanto come handoff per un futuro contratto machine-readable source/context e bounded fixtures; implementazione, provider, ranking, score, soglie, scheduling, go/no-go, device command, workload pesante su EAGLE e Safety Authority restano non autorizzati.
 
 ## 7. Roadmap
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [CURRENT/F1] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1 ACCEPTED / F2 CURRENT HANDOFF] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 AMP-002 resta planning authority per AP-007–AP-015, non live status register.
 
 ## 8. Technical debt and decisions
 
-TD-012 resta Accepted e non viene retrofittato. Nessun nuovo debito o ADR è introdotto dalla transizione BKL-046 -> BKL-031 F1.
+TD-012 resta Accepted e non viene retrofittato. Nessun nuovo debito o ADR è introdotto dall'accettazione BKL-031 F1 e dalla promozione F2 a handoff.
 
 ## 9. Delivery
 
@@ -78,7 +78,7 @@ Ogni incremento richiede exact-head CI, review applicabili, merge protetto e pos
 
 ## 10. Runtime impact
 
-La closure BKL-046 e la promozione BKL-031 F1 sono repository-only. Nessuna azione PC/EAGLE è richiesta.
+L'accettazione BKL-031 F1 e l'handoff F2 sono repository-only. Nessuna azione PC/EAGLE è richiesta.
 
 ## 11. Registro revisioni
 
@@ -93,3 +93,4 @@ La closure BKL-046 e la promozione BKL-031 F1 sono repository-only. Nessuna azio
 | 2.5 | 11/09/2026 | BKL-046 F3 accepted e F4 current |
 | 2.6 | 12/09/2026 | BKL-046 F4 accepted/post-merge verified e F5 design current |
 | 2.7 | 13/09/2026 | BKL-046 closed/accepted/post-merge verified e BKL-031 F1 current |
+| 2.8 | 14/09/2026 | BKL-031 F1 accepted/post-merge verified; F2 current handoff only |
