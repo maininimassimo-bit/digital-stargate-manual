@@ -1,6 +1,6 @@
 # ADR-008 — PixInsight Provenance Capture Strategy
 
-**Status:** Accepted — applied by BKL-045 F3/F4 and closure  
+**Status:** Accepted — applied by BKL-045 F3/F4 and closure; native successor planned by BKL-049  
 **Date:** 09/09/2026  
 **Decision owner:** Digital StarGate Architecture  
 **Related package:** BKL-045 F2  
@@ -111,6 +111,21 @@ Rejected for the initial release because its complexity and compatibility burden
 ### PJSR script/package as the sole evidence authority
 
 Rejected because the repository and technical evidence do not prove universal observation of arbitrary PixInsight process execution from a script-only layer.
+
+## Planned native successor — BKL-049 (14/09/2026)
+
+The retained BKL-045 F3-B evidence demonstrated the essential gap anticipated by this ADR: the governed PJSR probe produced repeatable evidence but could not automatically observe an ordered processing history and therefore correctly reported `completeness=UNAVAILABLE` with zero observed steps.
+
+That evidence activates the native-module revisit path. BKL-049 now plans an end-to-end PCL native capability with the following intent:
+
+- automatically observe every process execution and relationship that the supported PixInsight/PCL interfaces can expose;
+- preserve ordered process identifiers, versions, parameters, inputs, outputs, masks, references and environment context;
+- maintain a crash-resilient local journal and deterministic export to the existing PXP/AP14-W06 boundary;
+- correlate evidence with Digital StarGate sessions and scientific assets without taking catalog authority;
+- publish a sanitized, read-only workflow archive and step-by-step visualization in the portal;
+- represent unsupported, opaque or missing activity explicitly as `PARTIAL` or `UNAVAILABLE`, never as inferred `OBSERVED` evidence.
+
+BKL-049 is `Planned`, not current and not implemented. The accepted hybrid exporter remains the operational baseline until a future BKL-049 increment passes SDK/licensing feasibility, detailed architecture, real PixInsight OAT, independent review and governed release acceptance. This planning amendment does not authorize code, installation, catalog writes, image mutation, autonomous processing, AI apply or Safety Authority.
 
 ## Revisit triggers
 
