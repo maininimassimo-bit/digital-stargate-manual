@@ -97,13 +97,14 @@ def parse_phd2(folder):
                 error_text=field('ErrorCode')
                 error_code=int(error_text) if error_text else 0
                 samples_total+=1
+                mount=field('mount').upper()
+                invalid_sample=mount=='DROP' or error_code not in {0,1}
+                if invalid_sample:
+                    rejected+=1; lost+=1
                 if settling:
                     settling_excluded+=1
                     continue
-                mount=field('mount').upper()
-                if mount=='DROP' or error_code not in {0,1}:
-                    rejected+=1; lost+=1
-                    continue
+                if invalid_sample: continue
                 if pixel_scale is None:
                     unscaled+=1
                     continue
