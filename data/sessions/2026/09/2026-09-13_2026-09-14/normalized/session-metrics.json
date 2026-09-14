@@ -1,7 +1,7 @@
 {
   "schema_version": "0.2.0",
   "session_id": "2026-09-13_2026-09-14",
-  "generated_at": "2026-09-14T09:01:58.583382+00:00",
+  "generated_at": "2026-09-14T12:00:11.763740+00:00",
   "scientific": {
     "target_name": "M 27",
     "ra_deg": 299.9,
@@ -31,11 +31,21 @@
   },
   "phd2": {
     "guide_segments": 7,
-    "guide_samples_valid": 0,
-    "rms_ra_arcsec": null,
-    "rms_dec_arcsec": null,
-    "rms_total_arcsec": null,
-    "lost_star_events": 0,
+    "guide_samples_total": 6189,
+    "guide_samples_valid": 5501,
+    "guide_samples_saturated": 5501,
+    "guide_samples_rejected": 346,
+    "guide_samples_settling_excluded": 358,
+    "guide_samples_unscaled": 0,
+    "settling_failures": 26,
+    "equipment_profiles": [
+      "C8_QHY695A"
+    ],
+    "rms_method": "PHD2 RARawDistance/DECRawDistance multiplied by the active segment pixel scale; ErrorCode 0 and STAR_SATURATED (1) included; settling excluded.",
+    "rms_ra_arcsec": 1.21,
+    "rms_dec_arcsec": 0.731,
+    "rms_total_arcsec": 1.414,
+    "lost_star_events": 346,
     "pulse_guide_failures": 0
   },
   "weather": {
@@ -61,8 +71,8 @@
     "serial": "2382",
     "firmware": "5.88"
   },
-  "severity": "GREEN",
+  "severity": "YELLOW",
   "severity_reasons": [
-    "Nessuna anomalia grave rilevata dai criteri v0.2.0."
+    "Lost star ripetuti: 346"
   ]
 }

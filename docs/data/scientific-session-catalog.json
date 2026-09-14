@@ -18764,9 +18764,9 @@
       "lightStarted": 27,
       "lightCompleted": 27,
       "completionPct": 100,
-      "rmsTotalArcsec": null,
-      "severity": "GREEN",
-      "analyticsState": "VALIDATED_ANALYTICS",
+      "rmsTotalArcsec": 1.414,
+      "severity": "YELLOW",
+      "analyticsState": "ATTENTION_REQUIRED",
       "metadataState": "CANONICAL_EVIDENCE",
       "transferState": "NOT_REPRESENTED",
       "manifestState": "VERSIONED",
@@ -19297,13 +19297,13 @@
         }
       },
       "guiding": {
-        "state": "NOT_AVAILABLE",
-        "sampleCount": 0,
+        "state": "AVAILABLE",
+        "sampleCount": 5501,
         "segmentCount": 7,
-        "rmsRaArcsec": null,
-        "rmsDecArcsec": null,
-        "rmsTotalArcsec": null,
-        "lostStarEvents": 0,
+        "rmsRaArcsec": 1.21,
+        "rmsDecArcsec": 0.731,
+        "rmsTotalArcsec": 1.414,
+        "lostStarEvents": 346,
         "pulseGuideFailures": 0,
         "scopeNote": "Proiezione scientifica storica derivata dal PHD2 GuideLog. Usa gli stessi campioni validi dell analytics (settling escluso, ErrorCode=0) e non rappresenta telemetria operativa realtime.",
         "detail": null
@@ -19317,7 +19317,7 @@
         "validSamples": 1300,
         "temporalCoverage": 0.9841
       },
-      "qualityState": "VALIDATED_ANALYTICS"
+      "qualityState": "ATTENTION_REQUIRED"
     }
   ]
 }

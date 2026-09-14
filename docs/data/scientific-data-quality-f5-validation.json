@@ -3,10 +3,10 @@
   "validationType": "SCIENTIFIC_DATA_QUALITY_REAL_EVIDENCE_VALIDATION",
   "validationId": "BKL041-F5-REAL-EVIDENCE-V1",
   "validationState": "COMPLETE",
-  "generatedAt": "2026-09-14T09:01:18.264Z",
+  "generatedAt": "2026-09-14T12:00:15.030Z",
   "sourceCatalog": {
     "path": "docs/data/scientific-session-catalog.json",
-    "digest": "38505f9135cb15c7b0c8002133dfeb2c9cd6eb3658f9441df9d2b782f5194915",
+    "digest": "65673249788355c40e0bc89aa57fdd0f51102bff5465ecf2701c526ee6897d7e",
     "sessionCount": 17,
     "sessionIds": [
       "2026-07-14_2026-07-15",
@@ -30,7 +30,7 @@
   },
   "sourceProjection": {
     "path": "docs/data/scientific-data-quality-projection.json",
-    "digest": "ff52f1fb7821a9857d146dcb9185246967c26fe3016d95629ed3a95b372a6b0b",
+    "digest": "de8aeaf086ef025b8e476ec4ff9f68acbca837405553b2e8449e3796ff6c565b",
     "projectionId": "BKL041-F4-CATALOG-V1",
     "profileId": "DSG-SCIENTIFIC-QUALITY-SYNTHETIC-DEMONSTRATOR",
     "profileVersion": "1.0.0-f3"
@@ -54,13 +54,13 @@
       "sourceMetrics": 17,
       "metadataLineage": 15,
       "acquisitionCompletion": 15,
-      "guidingRms": 14,
+      "guidingRms": 15,
       "guidingTemporalCoverage": 0,
       "sqm": 10
     },
     "assessmentStates": {
-      "available": 5,
-      "unavailable": 4,
+      "available": 6,
+      "unavailable": 3,
       "invalid": 8
     }
   },
@@ -132,12 +132,12 @@
       "evidence": [
         {
           "name": "available",
-          "value": 5,
+          "value": 6,
           "unit": "count"
         },
         {
           "name": "unavailable",
-          "value": 4,
+          "value": 3,
           "unit": "count"
         },
         {
@@ -263,5 +263,5 @@
     "actionAuthority": "NONE",
     "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
   },
-  "validationDigest": "b2307eb796572ba836d3ff71dc2441a91ec4d4476c9a665941ffcff5e7d8ebbb"
+  "validationDigest": "5270d8aee996ccd697a2dd62c84c68e1551c8bd662ce58b6f2d9c3ac0f1c2286"
 }
