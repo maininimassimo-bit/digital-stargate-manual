@@ -53,7 +53,9 @@ La pubblicazione di un documento in questa sezione **non equivale ad autorizzazi
 
 ## BKL-031 — Observation Planner
 
-- [F1 Source and Semantic Validation Plan](BKL-031-F1-Source-and-Semantic-Validation-Plan.md) — proposed architecture-only gate; implementation and review not yet authorized
+- [F1 Source and Semantic Validation Plan](BKL-031-F1-Source-and-Semantic-Validation-Plan.md) — architecture-only gate
+- [F1 AI-Assisted Architecture Review](../reviews/ARB-BKL-031-F1-AI-Assisted-Architecture-Review-2026-09-14.md) — approved with conditions; not an independent human approval
+- [F1 AI-Assisted Release Quality Review](../reviews/RQ-BKL-031-F1-AI-Assisted-Release-Quality-Review-2026-09-14.md) — conditionally ready for merge; not an independent human approval
 
 ## BKL-046 — AI Post-Processing Assistant
 
