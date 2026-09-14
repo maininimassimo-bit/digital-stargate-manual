@@ -29,6 +29,10 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [BKL-046 F5 Validation Plan](../architecture/validation/BKL-046-F5-Real-Evidence-Evaluation-Plan.md) | Validation e closure gate completati |
 | [BKL-046 Closure](BKL-046-CLOSURE-2026-09-13.md) | Closure deterministica read-only accettata |
 | [BKL-031 Program Assessment](../architecture/assessments/BKL-031-Architecture-Program-Assessment-and-F1-Handoff-2026-09-13.md) | Current package e handoff F1 |
+| [BKL-031 F1 Source and Semantic Boundary](../architecture/scientific-assets/BKL-031-F1-Observation-Planner-Source-Discovery-and-Semantic-Boundary.md) | Package architetturale F1 proposto; implementazione non autorizzata |
+| [BKL-031 F1 Validation Plan](../architecture/validation/BKL-031-F1-Source-and-Semantic-Validation-Plan.md) | Gate e casi negativi per la review F1 |
+| [BKL-031 F1 AI-Assisted ARB](../architecture/reviews/ARB-BKL-031-F1-AI-Assisted-Architecture-Review-2026-09-14.md) | Approved with Conditions; non equivalente a review umana indipendente |
+| [BKL-031 F1 AI-Assisted Release Quality](../architecture/reviews/RQ-BKL-031-F1-AI-Assisted-Release-Quality-Review-2026-09-14.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
 
 ## Registri e standard canonici
 
