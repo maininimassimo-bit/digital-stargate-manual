@@ -139,7 +139,7 @@ Il repository owner ha autorizzato il solo incremento F2. Il candidate package m
 Completed baseline through BKL-037
   -> BKL-041 Scientific Data Quality Score [CLOSED]
   -> BKL-046 AI Post-Processing Assistant [CLOSED]
-  -> BKL-031 Observation Planner [F1/F2 ACCEPTED / F3 SA REVIEWED — MERGE PENDING]
+  -> BKL-031 Observation Planner [F1/F2 ACCEPTED / F3 SA ACCEPTED — IMPLEMENTATION DECISION PENDING]
   -> BKL-032 Session Readiness
   -> BKL-036 Observatory Health Score
   -> BKL-033 Digital Twin
@@ -181,3 +181,10 @@ Dopo la closure F2, F3 è promosso come handoff governato per source discovery e
 L'handoff F3 è integrato/post-merge verified tramite PR #190, technical head `5706924c07c3a9fb9d04897c0aaaec4257d514d0`, review-publication head `979523f6c65c86450f7dac8335452aac370ea834` e merge `2ffc77917bcd3fc25a3c5657e8f12e62c9284303`, con ARB 99/100, Release Quality `CONDITIONALLY READY` e 9/9 workflow post-merge. La deroga `W-BKL031-F3-HANDOFF-MERGE-001` è consumata/scaduta.
 
 Il Solution Architecture Package F3 e il validation plan sono stati valutati sulla PR #191 technical head `43a46ac28c30badc40e4cb180ed98924ebcf74a1`. ARB AI-assisted: `APPROVED WITH CONDITIONS`, 98/100; Release Quality AI-assisted: `CONDITIONALLY READY`. Le review non equivalgono ad approvazioni umane indipendenti e registrano due condizioni Minor: separazione tra digest interno del record sito e riferimento pubblico, e semantica half-open degli intervalli di validità. Restano pendenti la CI dell'head di pubblicazione e una separata autorizzazione owner per merge/ruleset. ADR/provider selection, record reali, schema/fixture/validator/adapter e implementazione restano non autorizzati.
+
+
+### BKL-031 F3 Solution Architecture acceptance — 14/09/2026
+
+La PR #191 è confluita in `main` tramite merge `3a79bb93c9a0925280eba5214d517107804cb13c` e ha completato 9/9 workflow post-merge, inclusi Pages, Developer Foundation e Governed Projection Sync. La deroga `W-BKL031-F3-SA-MERGE-001` è consumata/scaduta.
+
+Il Solution Architecture Package F3 è accettato con condizioni come baseline documentale source-neutral; BKL-031 resta `In Progress` e nessuna slice F3-A1/A2/A3/B/C è promossa. `ARB-191-MI01` e `ARB-191-MI02` restano gate obbligatori. Il prossimo passo è una decisione owner separata sull'eventuale handoff F3-A1; provider/ADR, record reali, schema/fixture/validator/adapter, forecast, ranking, readiness, runtime, PC/EAGLE e Safety Authority restano non autorizzati.

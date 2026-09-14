@@ -179,3 +179,10 @@ The handoff was integrated through PR #190 and merge `2ffc77917bcd3fc25a3c5657e8
 - `docs/architecture/validation/BKL-031-F3-Governed-Site-Setup-and-Ephemeris-Lunar-Validation-Plan.md`.
 
 Both artifacts are review candidates only. They select no provider/library, approve no ADR, materialize no real site/setup authority, and implement no schema, fixture, validator, adapter, runtime or portal consumer. ARB, Release Quality, merge and implementation require separate authorizations.
+
+
+## 13. Solution Architecture acceptance
+
+The F3 handoff is fulfilled by the Solution Architecture and validation plan integrated through PR #191 and merge `3a79bb93c9a0925280eba5214d517107804cb13c`. Post-merge workflows completed 9/9 successfully.
+
+The architecture is accepted with conditions and remains non-implementing. `ARB-191-MI01` and `ARB-191-MI02` are carried forward. No F3-A1/A2/A3/B/C slice is promoted or authorized.

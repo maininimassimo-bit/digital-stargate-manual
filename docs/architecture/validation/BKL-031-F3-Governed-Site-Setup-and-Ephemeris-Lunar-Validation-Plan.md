@@ -3,11 +3,13 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-VAL-001 |
-| Status | **PROPOSED — PLAN ONLY / NOT EXECUTED** |
-| Version | 1.0 |
+| Status | **ACCEPTED AS VALIDATION PLAN — NOT EXECUTED** |
+| Version | 1.1 |
 | Date | 2026-09-14 |
 | Contract under validation | `docs/architecture/scientific-assets/BKL-031-F3-Governed-Site-Setup-and-Ephemeris-Lunar-Solution-Architecture.md` |
 | Baseline | `main` @ `2ffc77917bcd3fc25a3c5657e8f12e62c9284303` |
+| Architecture acceptance | PR #191 merge `3a79bb93c9a0925280eba5214d517107804cb13c` |
+| Open conditions | `ARB-191-MI01`, `ARB-191-MI02` |
 | Runtime impact | None |
 | Safety impact | None |
 
@@ -244,3 +246,10 @@ This plan is not evidence that:
 ## 14. Governance stop
 
 On publication of the architecture package and this plan, execute only repository documentation/CI validation. Stop before ARB, Release Quality, ADR acceptance, merge and every F3 implementation/runtime activity unless separately authorized.
+
+
+## 15. Acceptance and execution boundary
+
+This document is accepted as the normative validation plan for future F3 slices. Its acceptance is not evidence that P01–P10, N21–N66, the scientific campaign, privacy tests or runtime/OAT have executed.
+
+`ARB-191-MI01` adds a mandatory public-reference non-correlation test. `ARB-191-MI02` adds explicit half-open interval boundary and adjacency cases. These conditions must be materialized in the applicable future schema/test increment before implementation acceptance.
