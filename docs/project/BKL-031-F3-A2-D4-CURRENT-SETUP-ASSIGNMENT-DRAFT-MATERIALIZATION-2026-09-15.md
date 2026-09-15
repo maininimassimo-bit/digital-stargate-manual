@@ -25,4 +25,4 @@ Revert merge `e99e6b5ff5ea7247ee447a1c6c62dcaa479dee1b`. Because the DRAFT is no
 
 ## Next mandatory gate
 
-Present the exact protected assignment digest to the human Assignment Approval Authority after this reconciliation. Stop for explicit approval; do not infer approval from this package, CI or the continuous mandate.
+The human Assignment Approval Authority subsequently approved the exact protected digest and validity semantics. That decision is implemented only by the separate F3-A2-D5 receipt/promotion package; D4 remains immutable historical DRAFT evidence.

@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | ADR-009 |
-| Stato | **Accepted — baseline and site APPROVED; assignment DRAFT remains a separate gate** |
+| Stato | **Accepted — baseline and site APPROVED; assignment approval/promotion review candidate** |
 | Data | 15/09/2026 |
 | Decision owner | Repository Owner / human Approval Authority |
 | Custodian | Digital StarGate Architecture Office |
@@ -72,8 +72,8 @@ Positive:
 
 Constraints:
 
-- `ARB-197-MI01-B` and `ARB-199-MI01` are closed for the first approved baseline; the F3-A1 site record and separately approved assignment remain open before S09 activation;
-- schema, validator, adapter, persistence, public projection and OAT remain future work;
+- `ARB-197-MI01-B` and `ARB-199-MI01` are closed for the first approved baseline; the F3-A1 site record is approved and D5 supplies the separately approved assignment candidate;
+- runtime adapter, persistence integration, public projection and OAT remain future work;
 - unresolved C8 guiding, serials and runtime versions cannot be inferred;
 - no command, safety, readiness, ranking or go/no-go semantics are introduced.
 
@@ -86,9 +86,14 @@ Constraints:
 
 ## Rollback
 
-Retire the approved baseline envelope and receipt through reviewed Git history, then return baseline eligibility to unavailable. No migration, deployment, device operation or data deletion is involved. S09 already remains `UNAVAILABLE_CURRENT` because no site record or approved assignment exists; never fall back to projection or observed state.
+Retire the applicable approved envelope and receipt through reviewed Git history, then return its repository eligibility to unavailable. No migration, deployment, device operation or data deletion is involved. Runtime S09 remains `UNAVAILABLE_CURRENT` because no adapter exists; never fall back to projection or observed state.
 
 
 ## D4 implementation note — 15/09/2026
 
 The GitHub authority now contains a protected, immutable assignment DRAFT with closed schemas and executable validation. It has no receipt, is not resolver-eligible and does not make S09 available. A later explicit human decision tied to the exact protected assignment digest is mandatory before lifecycle promotion.
+
+
+## D5 assignment approval note — 15/09/2026
+
+The Repository Owner explicitly approved the exact protected `CurrentSetupAssignment` digest and its unbounded validity from the approved setup-baseline effective start. D5 records the approval in a separate protected receipt and creates an `APPROVED` lifecycle envelope without changing the assignment payload or digest. The protected repository resolver becomes eligible for authorized validated callers only; runtime S09 remains `UNAVAILABLE_CURRENT` because no adapter is included.

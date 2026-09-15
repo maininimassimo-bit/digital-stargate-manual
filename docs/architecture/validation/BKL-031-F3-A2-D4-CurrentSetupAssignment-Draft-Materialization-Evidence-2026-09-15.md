@@ -40,4 +40,4 @@ The first workflow attempt failed before tests at the protected binding gate. A 
 
 ## Boundaries
 
-This evidence does not approve the assignment, create a receipt, activate a resolver, validate runtime behavior or authorize EAGLE/observatory activity. Exact-head repository workflows, AI-assisted process-separated reviews, expected-head merge and post-merge verification are complete. Explicit human approval of the exact protected digest remains mandatory.
+This evidence does not approve the assignment, create a receipt, activate a resolver, validate runtime behavior or authorize EAGLE/observatory activity. Exact-head repository workflows, AI-assisted process-separated reviews, expected-head merge and post-merge verification are complete. Explicit human approval was subsequently received; its receipt and lifecycle promotion are validated separately by F3-A2-D5.

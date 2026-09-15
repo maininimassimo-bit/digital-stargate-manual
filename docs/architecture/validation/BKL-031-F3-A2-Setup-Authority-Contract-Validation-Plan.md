@@ -153,3 +153,10 @@ Nessun caso è dichiarato passed finché non esisteranno implementation evidence
 The repository implementation adds the 45 planned A2 cases, six protected D4 binding/schema/privacy cases and six property/boundary cases: 57/57 passed on implementation head `96386395ff0d81d0d93e14666215296ade643a83` in workflow run `35011741820`.
 
 The protected repository DRAFT validates, binds to the two already approved authority records and remains `UNAVAILABLE_CURRENT`. Runtime/OAT remains `NOT APPLICABLE` for this repository-only increment.
+
+
+## 11. F3-A2-D5 approval and promotion evidence
+
+The owner-authorized D5 implementation adds a closed approval-receipt schema, a protected receipt, a separate `APPROVED` envelope and promotion validation. The assignment payload and canonical digest remain unchanged from D4.
+
+Eight D5 cases cover receipt schema validity, approved-envelope validity, payload/digest immutability, exact promotion binding, approved-source repository resolution, payload mutation rejection, custodian/non-owner rejection and subject/validity mismatch rejection. The implementation head completed 65/65 cases in the dedicated redacted workflow. Runtime/OAT remains `NOT APPLICABLE` and S09 remains `UNAVAILABLE_CURRENT` until a separate adapter package is authorized and implemented.
