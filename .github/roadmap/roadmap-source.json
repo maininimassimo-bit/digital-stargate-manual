@@ -2,10 +2,10 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-15",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-A2-D5 accepted/post-merge verified; repository authority APPROVED/AVAILABLE; runtime S09 unavailable",
+  "projectStatus": "BKL-031 F3-A3 Method ADR and validation-spike handoff review candidate; no provider selected; no runtime delta",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 dependency-ready successor selection; any runtime adapter requires a separate architecture package and ARB-204-MI02",
-  "target": "Use the Program Architect to select the next dependency-ready BKL-031 package from repository evidence. Preserve repository authority APPROVED/AVAILABLE, runtime S09 UNAVAILABLE_CURRENT, and the prohibition on EAGLE, readiness/go-no-go, device commands and Safety Authority changes.",
+  "nextMilestone": "BKL-031 F3-A3 documentation-only method ADR and validation-spike architecture package",
+  "target": "Prepare a decision-ready F3-A3 package that compares Astropy+pinned JPL, Skyfield+pinned JPL and JPL Horizons without selecting a provider. Stop at owner gates for provider/terms, kernel, error budget, privacy, host and bounded execution; preserve S10 UNAVAILABLE and no EAGLE/readiness/command/Safety changes.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3-A2-D5 is ACCEPTED / POST-MERGE VERIFIED via PR #209 and merge bc4307c2042a45985622044e11631421de5b2c3d. The protected DRAFT is retained; the separate APPROVED envelope preserves payload/digest; 65/65 tests and 7/7 post-merge workflows passed. Repository authority resolves AVAILABLE for authorized validated input. Runtime S09 remains UNAVAILABLE_CURRENT; adapter, EAGLE and Safety Authority are separate."
+          "note": "F3-A2-D5 is ACCEPTED / POST-MERGE VERIFIED via PR #210 and merge a1d2d84f9f787c247516bc825cb83d2bc15a43f5. Repository authority is APPROVED/AVAILABLE for authorized validated input; runtime S09 remains UNAVAILABLE_CURRENT. F3-A3 method ADR and validation-spike handoff is current; no provider, kernel, error budget, external call or runtime is selected."
         },
         {
           "id": "BKL-032",
@@ -587,6 +587,13 @@
       "title": "BKL-031 F3-A2-D5 Acceptance Reconciliation",
       "date": "2026-09-15",
       "description": "D5 is ACCEPTED / POST-MERGE VERIFIED. Repository authority is APPROVED/AVAILABLE for authorized validated input; runtime S09 remains UNAVAILABLE_CURRENT and the adapter remains unimplemented."
+    },
+    {
+      "id": "M-BKL031-F3-A3-HANDOFF",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A3 Method ADR and Validation Spike Handoff",
+      "date": "2026-09-15",
+      "description": "Program Architect selected the documentation-only F3-A3 handoff after F3-A1/A2 repository-authority completion. The future Solution Architect package must compare candidates and prepare owner gates F3-OD04–F3-OD10; no provider, dependency, data/kernel, external call or runtime is authorized."
     }
   ]
 }

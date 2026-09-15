@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 3.7 |
+| Versione | 3.8 |
 | Stato | Active context baseline |
 | Data baseline | 15/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
@@ -11,7 +11,7 @@
 | Root bootstrap | `AI_BOOTSTRAP.md` |
 | Continuity handover | `docs/project/HANDOVER_2026-09-15.md` |
 | Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-15.md` |
-| Current governed package | BKL-031 F3-A2-D5 accepted/post-merge verified; repository authority available; runtime adapter absent; successor selection current |
+| Current governed package | BKL-031 F3-A3 documentation-only Method ADR and validation-spike handoff; no provider selected |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo e gerarchia
@@ -64,7 +64,7 @@ BKL-031 F1/F2, F3 Solution Architecture, F3-A1 Site Authority and F3-A2 setup-au
 
 ## 7. Roadmap
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2-D5 ACCEPTED / REPOSITORY AVAILABLE / RUNTIME ADAPTER ABSENT / SUCCESSOR SELECTION] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 HANDOFF CURRENT / S10 UNAVAILABLE / RUNTIME ADAPTER ABSENT] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 AMP-002 resta planning authority per AP-007–AP-015, non live status register.
 
@@ -111,3 +111,9 @@ La repository authority F3-A2-D5 è APPROVED/AVAILABLE per caller autorizzati, m
 | 3.6 | 15/09/2026 | PR #194 F3-A1 reconciliation merged/post-merge verified; F3-A2 handoff current |
 
 | 3.7 | 15/09/2026 | PR #209 D5 accepted/post-merge verified; repository authority AVAILABLE, runtime S09 unavailable; successor selection current |
+
+| 3.8 | 15/09/2026 | PR #210 D5 reconciliation accepted; F3-A3 Method ADR and validation-spike handoff current; no provider/runtime selection |
+
+## 12. F3-A3 enterprise boundary
+
+F3-A3 is current only as a documentation package. It prepares an ADR and a bounded validation-spike plan for F3-OD04–F3-OD10. Selection of providers or structural dependencies, scientific thresholds, external transmission of protected site data and operational host placement remain explicit owner/ADR gates. S10 remains `UNAVAILABLE`; Safety Authority and EAGLE operations are unchanged.

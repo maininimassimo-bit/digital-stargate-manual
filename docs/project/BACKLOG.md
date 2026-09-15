@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.24 |
+| Versione | 5.25 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -49,7 +49,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
-| BKL-031 | P1 | Observation Planner intelligente | In Progress | F3-A2-D5 ACCEPTED / POST-MERGE VERIFIED; repository authority APPROVED/AVAILABLE; runtime S09 unavailable | Select the next dependency-ready package through Program Architect; any runtime adapter requires a separate architecture package and ARB-204-MI02 | ADR-009; PR #209; merge `bc4307c2042a45985622044e11631421de5b2c3d`; F3-A2-D5 evidence |
+| BKL-031 | P1 | Observation Planner intelligente | In Progress | F3-A1/A2 repository authorities ACCEPTED / POST-MERGE VERIFIED; PR #210 D5 reconciliation; runtime S08/S09 unavailable | F3-A3 documentation-only Method ADR and validation-spike package; prepare F3-OD04–F3-OD10 owner decisions without selecting a provider | F3 Solution Architecture; BKL-031-F3-A3-PROGRAM-001; PR #210; merge `a1d2d84f9f787c247516bc825cb83d2bc15a43f5` |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
@@ -296,3 +296,8 @@ PR #209 passed 5/5 exact-head workflows at `6947e79a53282db2a7f6d879643e51840ed9
 F3-A2-D5 is ACCEPTED / POST-MERGE VERIFIED. The historical DRAFT remains immutable; the protected receipt and separate `APPROVED` envelope preserve the assignment payload/digest; 65/65 cases pass. Repository authority resolves `AVAILABLE` for authorized validated input. Runtime S09 remains `UNAVAILABLE_CURRENT` because no adapter exists. No EAGLE activity, device command, readiness/go-no-go or Safety Authority change occurred.
 
 The Program Architect must now select the next dependency-ready BKL-031 package from repository evidence. Any runtime adapter requires a separate architecture package and satisfaction of `ARB-204-MI02`.
+
+
+### BKL-031 F3-A3 Program Handoff — 15/09/2026
+
+F3-A3 è il successore dependency-ready selezionato. Lo scope corrente è esclusivamente documentale: confronto source-neutral tra Astropy+pinned JPL, Skyfield+pinned JPL e JPL Horizons; ADR structure; validation-spike plan; decision evidence per F3-OD04–F3-OD10. Nessun candidato è selezionato. Provider/terms, kernel/data, error budget, privacy, host e bounded execution richiedono decisioni tracciate prima di uno spike eseguibile. S10 resta `UNAVAILABLE`; F3-B/C e ogni runtime adapter restano bloccati.

@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEC-001 |
-| Versione | 2.4 |
+| Versione | 2.5 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -82,3 +82,5 @@ La closure BKL-040 e la promozione dependency-driven di BKL-038 non introducono 
 | DLG-030 | 15/09/2026 | Registrare l'approvazione owner dell'exact assignment digest nel registro protetto e promuovere un envelope separato a `APPROVED` senza modificare payload o digest | Rendere auditabile l'atto umano, preservare immutabilità e mantenere runtime/Safety separati | BKL-031 F3-A2-D5 | Accepted | owner-controlled approval; PR #209; merge `bc4307c2042a45985622044e11631421de5b2c3d`; F3-A2-D5 evidence |
 
 | DLG-031 | 15/09/2026 | Accettare F3-A2-D5 dopo exact-head review, expected-head merge e 7/7 post-merge workflow; mantenere la disponibilità limitata al repository e sottoporre il successore al Program Architect | La repository authority è completa, ma il runtime adapter non esiste e non può essere inferito dalla disponibilità repository | BKL-031 post-D5 | Accepted | PR #209; merge `bc4307c2042a45985622044e11631421de5b2c3d`; `ARB-204-MI02`; D5 acceptance reconciliation |
+
+| DLG-032 | 15/09/2026 | Selezionare F3-A3 Method ADR and validation spike come successore dependency-ready, iniziando da un handoff esclusivamente documentale | F3-A1/A2 hanno completato le autorità repository e F3-B dipende da una decisione metodologica accettata; il handoff prepara i gate senza scegliere provider o introdurre runtime | BKL-031 F3-A3 | Accepted | `BKL-031-F3-A3-PROGRAM-001`; PR #210; F3-OD04–F3-OD10 |
