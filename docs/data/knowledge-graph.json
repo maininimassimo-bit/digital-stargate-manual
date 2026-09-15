@@ -2,90 +2,829 @@
   "schema_version": "1.0",
   "component": "DSG.RepositoryKnowledgeGraph",
   "authority": "projection",
-  "generated_at_utc": "2026-09-09T20:30:00Z",
+  "generated_at_utc": "2026-09-15T22:50:00Z",
   "entities": [
-    {"id":"AP-001","type":"architecture_package","title":"Enterprise Metamodel and Repository Information Architecture","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
-    {"id":"AP-002","type":"architecture_package","title":"Enterprise Data Governance","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
-    {"id":"AP-003","type":"architecture_package","title":"Observatory Automation Architecture","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
-    {"id":"AP-004","type":"architecture_package","title":"Enterprise Telemetry and Observability Architecture","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
-    {"id":"AP-005","type":"architecture_package","title":"Identity, Access and Remote Operations Security","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
-    {"id":"AP-006","type":"architecture_package","title":"Enterprise Configuration and Asset Management","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
-    {"id":"AP-007","type":"architecture_package","title":"Enterprise Operations and Service Management Architecture","status":"active","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
-    {"id":"AP-008","type":"architecture_package","title":"Enterprise Integration Architecture","status":"active","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
-    {"id":"AP-009","type":"architecture_package","title":"Enterprise Infrastructure Architecture","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
-    {"id":"AP-010","type":"architecture_package","title":"Enterprise Safety Assurance Architecture","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
-    {"id":"AP-011","type":"architecture_package","title":"Enterprise Analytics Platform Architecture","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
-    {"id":"AP-012","type":"architecture_package","title":"Enterprise Operations Center Architecture","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
-    {"id":"AP-013","type":"architecture_package","title":"Scientific Image Repository Architecture","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
-    {"id":"AP-013C","type":"architecture_package","title":"Verified Transport Cleanup and Convergence Monitoring","status":"Approved with Conditions","authority":"repository_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"AP-014","type":"architecture_package","title":"Scientific Observation Catalog and Search","status":"completed","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
-    {"id":"AP-015","type":"architecture_package","title":"Scientific Knowledge Platform Architecture","status":"planned","authority":"repository_authority","source_locator":{"path":".github/roadmap/roadmap-source.json"}},
-    {"id":"ADR-001","type":"adr","title":"Session Layer","status":"Accepted","authority":"repository_authority","source_locator":{"path":"docs/architecture/ADR-001-Session-Layer.md"}},
-    {"id":"ADR-002","type":"adr","title":"Analytics Quality Gates","status":"Accepted","authority":"repository_authority","source_locator":{"path":"docs/architecture/ADR-002-Analytics-Quality-Gates.md"}},
-    {"id":"ADR-003","type":"adr","title":"Warehouse Engine","status":"Accepted","authority":"repository_authority","source_locator":{"path":"docs/architecture/ADR-003-Warehouse-Engine.md"}},
-    {"id":"ADR-004","type":"adr","title":"Operational Architecture","status":"Accepted","authority":"repository_authority","source_locator":{"path":"docs/architecture/assessments/ADR-004-Operational-Architecture.md"}},
-    {"id":"ADR-005","type":"adr","title":"Weather Safety Interlock fail-safe","status":"Proposed","authority":"repository_authority","source_locator":{"path":"docs/architecture/ADR-005-Weather-Safety-Interlock.md"}},
-    {"id":"ADR-006","type":"adr","title":"Enterprise Plugin SDK","status":"Accepted","authority":"repository_authority","source_locator":{"path":"docs/architecture/ADR-006-Enterprise-Plugin-SDK.md"}},
-    {"id":"ADR-007","type":"adr","title":"SQM Instrument Source Strategy","status":"Proposed","authority":"repository_authority","source_locator":{"path":"docs/architecture/ADR-007-SQM-Instrument-Source-Strategy.md"}},
-    {"id":"ADR-008","type":"adr","title":"PixInsight Provenance Capture Strategy","status":"Proposed","authority":"repository_authority","source_locator":{"path":"docs/architecture/ADR-008-PixInsight-Provenance-Capture-Strategy.md"}},
-    {"id":"ADR-009","type":"adr","title":"GitHub-Governed Setup Authority","status":"Accepted","authority":"repository_authority","source_locator":{"path":"docs/architecture/ADR-009-GitHub-Governed-Setup-Authority.md"}},
-    {"id":"BKL-015","type":"backlog_item","title":"Implementare repository Knowledge Graph machine-readable","status":"Done","authority":"repository_authority","source_locator":{"path":"docs/project/BACKLOG.md"}},
-    {"id":"BKL-044","type":"backlog_item","title":"Knowledge Graph / AI Evidence Contract","status":"Ready","authority":"repository_authority","source_locator":{"path":"docs/project/BACKLOG.md"}},
-    {"id":"TD-008","type":"technical_debt","title":"Knowledge Traceability","status":"Resolved","authority":"repository_authority","source_locator":{"path":"docs/project/TECHNICAL_DEBT.md"}},
-    {"id":"CAP-40","type":"capability","title":"Scientific Knowledge Layer","status":"Planned","authority":"repository_authority","source_locator":{"path":"docs/architecture/scientific-knowledge-layer-vision.md"}},
-    {"id":"BKL-015-F1","type":"component","title":"Knowledge Graph Machine-Readable Foundation Contract","status":"Accepted","authority":"repository_authority","source_locator":{"path":"docs/architecture/knowledge/BKL-015-Knowledge-Graph-Machine-Readable-Foundation.md"}},
-    {"id":"BKL-015-F1-ARB","type":"evidence","title":"BKL-015 F1 Independent Architecture Review","status":"Approved with Conditions","authority":"evidence_authority","source_locator":{"path":"docs/architecture/reviews/ARB-BKL-015-F1-Independent-Review-2026-09-04.md"}},
-    {"id":"BKL-015-F1-RQ","type":"evidence","title":"BKL-015 F1 Release Quality Review","status":"Conditionally Ready","authority":"evidence_authority","source_locator":{"path":"docs/architecture/reviews/RQ-BKL-015-F1-Release-Quality-Review-2026-09-04.md"}},
-    {"id":"OPS-REF-001","type":"component","title":"Operations and Service Management Reference Architecture","status":"Proposed for review","authority":"repository_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"INT-REF-001","type":"component","title":"Enterprise Integration Reference Architecture","status":"Proposed for review","authority":"repository_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"INT-CAT-001","type":"component","title":"Integration Contract Catalog","status":"Initial candidate catalog","authority":"repository_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"INF-REF-001","type":"component","title":"Enterprise Infrastructure Reference Architecture","status":"Approved with conditions via ARB-009","authority":"repository_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"SAF-REF-001","type":"component","title":"Enterprise Safety Reference Architecture","status":"Approved with conditions via ARB-010","authority":"repository_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"SAF-CAT-001","type":"component","title":"Safety Hazard and State Catalog","status":"Initial governed catalog","authority":"repository_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"ARB-009","type":"evidence","title":"Independent Review of AP-009","status":"Completed","authority":"evidence_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"ARB-010","type":"evidence","title":"Independent Review of AP-010","status":"Completed","authority":"evidence_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"ANA-REF-001","type":"component","title":"Enterprise Analytics Reference Architecture","status":"Approved with conditions via ARB-011","authority":"repository_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"ANA-PIPE-001","type":"component","title":"Analytics Data Pipeline Reference","status":"Approved with conditions via ARB-011","authority":"repository_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"ANA-KPI-001","type":"component","title":"Analytics KPI Catalog","status":"Approved as initial governed catalog via ARB-011","authority":"repository_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"ANA-GOV-001","type":"component","title":"Analytics Governance Standard","status":"Approved with conditions via ARB-011","authority":"repository_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"ARB-011","type":"evidence","title":"Independent Review of AP-011","status":"Completed","authority":"evidence_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"OPSC-REF-001","type":"component","title":"Enterprise Operations Center Reference Architecture","status":"Approved with conditions via ARB-012","authority":"repository_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"OPSC-CMD-001","type":"component","title":"Command Authorization Model","status":"Approved with conditions via ARB-012","authority":"repository_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"OPSC-ALM-001","type":"component","title":"Alarm & Incident Model","status":"Approved with conditions via ARB-012","authority":"repository_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"OPSC-RUN-001","type":"component","title":"Operational Runbook Standard","status":"Approved with conditions via ARB-012","authority":"repository_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"OPSC-RACI-001","type":"component","title":"Operations Responsibility Matrix","status":"Approved with conditions via ARB-012","authority":"repository_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"ARB-012","type":"evidence","title":"Independent Review of AP-012","status":"Completed","authority":"evidence_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"DSDM-005","type":"component","title":"Verified Transport Cleanup Solution Design","status":"Proposed/implemented dry-run design v0.2","authority":"repository_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"ARB-013C","type":"evidence","title":"Verified Transport Cleanup Independent Review","status":"Completed — Approved with Conditions","authority":"evidence_authority","source_locator":{"path":"docs/architecture/traceability-register.md"}}
+    {
+      "id": "AP-001",
+      "type": "architecture_package",
+      "title": "Enterprise Metamodel and Repository Information Architecture",
+      "status": "completed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": ".github/roadmap/roadmap-source.json"
+      }
+    },
+    {
+      "id": "AP-002",
+      "type": "architecture_package",
+      "title": "Enterprise Data Governance",
+      "status": "completed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": ".github/roadmap/roadmap-source.json"
+      }
+    },
+    {
+      "id": "AP-003",
+      "type": "architecture_package",
+      "title": "Observatory Automation Architecture",
+      "status": "completed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": ".github/roadmap/roadmap-source.json"
+      }
+    },
+    {
+      "id": "AP-004",
+      "type": "architecture_package",
+      "title": "Enterprise Telemetry and Observability Architecture",
+      "status": "completed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": ".github/roadmap/roadmap-source.json"
+      }
+    },
+    {
+      "id": "AP-005",
+      "type": "architecture_package",
+      "title": "Identity, Access and Remote Operations Security",
+      "status": "completed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": ".github/roadmap/roadmap-source.json"
+      }
+    },
+    {
+      "id": "AP-006",
+      "type": "architecture_package",
+      "title": "Enterprise Configuration and Asset Management",
+      "status": "completed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": ".github/roadmap/roadmap-source.json"
+      }
+    },
+    {
+      "id": "AP-007",
+      "type": "architecture_package",
+      "title": "Enterprise Operations and Service Management Architecture",
+      "status": "active",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": ".github/roadmap/roadmap-source.json"
+      }
+    },
+    {
+      "id": "AP-008",
+      "type": "architecture_package",
+      "title": "Enterprise Integration Architecture",
+      "status": "active",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": ".github/roadmap/roadmap-source.json"
+      }
+    },
+    {
+      "id": "AP-009",
+      "type": "architecture_package",
+      "title": "Enterprise Infrastructure Architecture",
+      "status": "completed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": ".github/roadmap/roadmap-source.json"
+      }
+    },
+    {
+      "id": "AP-010",
+      "type": "architecture_package",
+      "title": "Enterprise Safety Assurance Architecture",
+      "status": "completed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": ".github/roadmap/roadmap-source.json"
+      }
+    },
+    {
+      "id": "AP-011",
+      "type": "architecture_package",
+      "title": "Enterprise Analytics Platform Architecture",
+      "status": "completed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": ".github/roadmap/roadmap-source.json"
+      }
+    },
+    {
+      "id": "AP-012",
+      "type": "architecture_package",
+      "title": "Enterprise Operations Center Architecture",
+      "status": "completed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": ".github/roadmap/roadmap-source.json"
+      }
+    },
+    {
+      "id": "AP-013",
+      "type": "architecture_package",
+      "title": "Scientific Image Repository Architecture",
+      "status": "completed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": ".github/roadmap/roadmap-source.json"
+      }
+    },
+    {
+      "id": "AP-013C",
+      "type": "architecture_package",
+      "title": "Verified Transport Cleanup and Convergence Monitoring",
+      "status": "Approved with Conditions",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "AP-014",
+      "type": "architecture_package",
+      "title": "Scientific Observation Catalog and Search",
+      "status": "completed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": ".github/roadmap/roadmap-source.json"
+      }
+    },
+    {
+      "id": "AP-015",
+      "type": "architecture_package",
+      "title": "Scientific Knowledge Platform Architecture",
+      "status": "planned",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": ".github/roadmap/roadmap-source.json"
+      }
+    },
+    {
+      "id": "ADR-001",
+      "type": "adr",
+      "title": "Session Layer",
+      "status": "Accepted",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/ADR-001-Session-Layer.md"
+      }
+    },
+    {
+      "id": "ADR-002",
+      "type": "adr",
+      "title": "Analytics Quality Gates",
+      "status": "Accepted",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/ADR-002-Analytics-Quality-Gates.md"
+      }
+    },
+    {
+      "id": "ADR-003",
+      "type": "adr",
+      "title": "Warehouse Engine",
+      "status": "Accepted",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/ADR-003-Warehouse-Engine.md"
+      }
+    },
+    {
+      "id": "ADR-004",
+      "type": "adr",
+      "title": "Operational Architecture",
+      "status": "Accepted",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/assessments/ADR-004-Operational-Architecture.md"
+      }
+    },
+    {
+      "id": "ADR-005",
+      "type": "adr",
+      "title": "Weather Safety Interlock fail-safe",
+      "status": "Proposed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/ADR-005-Weather-Safety-Interlock.md"
+      }
+    },
+    {
+      "id": "ADR-006",
+      "type": "adr",
+      "title": "Enterprise Plugin SDK",
+      "status": "Accepted",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/ADR-006-Enterprise-Plugin-SDK.md"
+      }
+    },
+    {
+      "id": "ADR-007",
+      "type": "adr",
+      "title": "SQM Instrument Source Strategy",
+      "status": "Proposed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/ADR-007-SQM-Instrument-Source-Strategy.md"
+      }
+    },
+    {
+      "id": "ADR-008",
+      "type": "adr",
+      "title": "PixInsight Provenance Capture Strategy",
+      "status": "Proposed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/ADR-008-PixInsight-Provenance-Capture-Strategy.md"
+      }
+    },
+    {
+      "id": "ADR-009",
+      "type": "adr",
+      "title": "GitHub-Governed Setup Authority",
+      "status": "Accepted",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/ADR-009-GitHub-Governed-Setup-Authority.md"
+      }
+    },
+    {
+      "id": "ADR-010",
+      "type": "adr",
+      "title": "Ephemeris and Lunar Method and Validation Profile",
+      "status": "Proposed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/ADR-010-Ephemeris-Lunar-Method-and-Validation-Profile.md"
+      }
+    },
+    {
+      "id": "BKL-015",
+      "type": "backlog_item",
+      "title": "Implementare repository Knowledge Graph machine-readable",
+      "status": "Done",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/project/BACKLOG.md"
+      }
+    },
+    {
+      "id": "BKL-044",
+      "type": "backlog_item",
+      "title": "Knowledge Graph / AI Evidence Contract",
+      "status": "Ready",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/project/BACKLOG.md"
+      }
+    },
+    {
+      "id": "TD-008",
+      "type": "technical_debt",
+      "title": "Knowledge Traceability",
+      "status": "Resolved",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/project/TECHNICAL_DEBT.md"
+      }
+    },
+    {
+      "id": "CAP-40",
+      "type": "capability",
+      "title": "Scientific Knowledge Layer",
+      "status": "Planned",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/scientific-knowledge-layer-vision.md"
+      }
+    },
+    {
+      "id": "BKL-015-F1",
+      "type": "component",
+      "title": "Knowledge Graph Machine-Readable Foundation Contract",
+      "status": "Accepted",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/knowledge/BKL-015-Knowledge-Graph-Machine-Readable-Foundation.md"
+      }
+    },
+    {
+      "id": "BKL-015-F1-ARB",
+      "type": "evidence",
+      "title": "BKL-015 F1 Independent Architecture Review",
+      "status": "Approved with Conditions",
+      "authority": "evidence_authority",
+      "source_locator": {
+        "path": "docs/architecture/reviews/ARB-BKL-015-F1-Independent-Review-2026-09-04.md"
+      }
+    },
+    {
+      "id": "BKL-015-F1-RQ",
+      "type": "evidence",
+      "title": "BKL-015 F1 Release Quality Review",
+      "status": "Conditionally Ready",
+      "authority": "evidence_authority",
+      "source_locator": {
+        "path": "docs/architecture/reviews/RQ-BKL-015-F1-Release-Quality-Review-2026-09-04.md"
+      }
+    },
+    {
+      "id": "OPS-REF-001",
+      "type": "component",
+      "title": "Operations and Service Management Reference Architecture",
+      "status": "Proposed for review",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "INT-REF-001",
+      "type": "component",
+      "title": "Enterprise Integration Reference Architecture",
+      "status": "Proposed for review",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "INT-CAT-001",
+      "type": "component",
+      "title": "Integration Contract Catalog",
+      "status": "Initial candidate catalog",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "INF-REF-001",
+      "type": "component",
+      "title": "Enterprise Infrastructure Reference Architecture",
+      "status": "Approved with conditions via ARB-009",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "SAF-REF-001",
+      "type": "component",
+      "title": "Enterprise Safety Reference Architecture",
+      "status": "Approved with conditions via ARB-010",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "SAF-CAT-001",
+      "type": "component",
+      "title": "Safety Hazard and State Catalog",
+      "status": "Initial governed catalog",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "ARB-009",
+      "type": "evidence",
+      "title": "Independent Review of AP-009",
+      "status": "Completed",
+      "authority": "evidence_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "ARB-010",
+      "type": "evidence",
+      "title": "Independent Review of AP-010",
+      "status": "Completed",
+      "authority": "evidence_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "ANA-REF-001",
+      "type": "component",
+      "title": "Enterprise Analytics Reference Architecture",
+      "status": "Approved with conditions via ARB-011",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "ANA-PIPE-001",
+      "type": "component",
+      "title": "Analytics Data Pipeline Reference",
+      "status": "Approved with conditions via ARB-011",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "ANA-KPI-001",
+      "type": "component",
+      "title": "Analytics KPI Catalog",
+      "status": "Approved as initial governed catalog via ARB-011",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "ANA-GOV-001",
+      "type": "component",
+      "title": "Analytics Governance Standard",
+      "status": "Approved with conditions via ARB-011",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "ARB-011",
+      "type": "evidence",
+      "title": "Independent Review of AP-011",
+      "status": "Completed",
+      "authority": "evidence_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "OPSC-REF-001",
+      "type": "component",
+      "title": "Enterprise Operations Center Reference Architecture",
+      "status": "Approved with conditions via ARB-012",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "OPSC-CMD-001",
+      "type": "component",
+      "title": "Command Authorization Model",
+      "status": "Approved with conditions via ARB-012",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "OPSC-ALM-001",
+      "type": "component",
+      "title": "Alarm & Incident Model",
+      "status": "Approved with conditions via ARB-012",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "OPSC-RUN-001",
+      "type": "component",
+      "title": "Operational Runbook Standard",
+      "status": "Approved with conditions via ARB-012",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "OPSC-RACI-001",
+      "type": "component",
+      "title": "Operations Responsibility Matrix",
+      "status": "Approved with conditions via ARB-012",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "ARB-012",
+      "type": "evidence",
+      "title": "Independent Review of AP-012",
+      "status": "Completed",
+      "authority": "evidence_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "DSDM-005",
+      "type": "component",
+      "title": "Verified Transport Cleanup Solution Design",
+      "status": "Proposed/implemented dry-run design v0.2",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "ARB-013C",
+      "type": "evidence",
+      "title": "Verified Transport Cleanup Independent Review",
+      "status": "Completed — Approved with Conditions",
+      "authority": "evidence_authority",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    }
   ],
   "relations": [
-    {"id":"rel:BKL-015:addresses:TD-008","type":"addresses","from":"BKL-015","to":"TD-008","version":"1.0","source_locator":{"path":"docs/project/BACKLOG.md"}},
-    {"id":"rel:BKL-044:depends_on:BKL-015","type":"depends_on","from":"BKL-044","to":"BKL-015","version":"1.0","source_locator":{"path":"docs/project/BACKLOG.md"}},
-    {"id":"rel:BKL-015:implements:BKL-015-F1","type":"implements","from":"BKL-015","to":"BKL-015-F1","version":"1.0","source_locator":{"path":"docs/architecture/knowledge/BKL-015-Knowledge-Graph-Machine-Readable-Foundation.md"}},
-    {"id":"rel:AP-015:implements:CAP-40","type":"implements","from":"AP-015","to":"CAP-40","version":"1.0","source_locator":{"path":"docs/architecture/scientific-knowledge-layer-vision.md"}},
-    {"id":"rel:AP-015:depends_on:BKL-015","type":"depends_on","from":"AP-015","to":"BKL-015","version":"1.0","source_locator":{"path":"docs/project/BACKLOG.md"}},
-    {"id":"rel:BKL-015-F1:evidenced_by:BKL-015-F1-ARB","type":"evidenced_by","from":"BKL-015-F1","to":"BKL-015-F1-ARB","version":"1.0","source_locator":{"path":"docs/architecture/reviews/ARB-BKL-015-F1-Independent-Review-2026-09-04.md"}},
-    {"id":"rel:BKL-015-F1:evidenced_by:BKL-015-F1-RQ","type":"evidenced_by","from":"BKL-015-F1","to":"BKL-015-F1-RQ","version":"1.0","source_locator":{"path":"docs/architecture/reviews/RQ-BKL-015-F1-Release-Quality-Review-2026-09-04.md"}},
-    {"id":"rel:OPS-REF-001:documents:AP-007","type":"documents","from":"OPS-REF-001","to":"AP-007","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:INT-REF-001:documents:AP-008","type":"documents","from":"INT-REF-001","to":"AP-008","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:INT-CAT-001:documents:AP-008","type":"documents","from":"INT-CAT-001","to":"AP-008","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:INF-REF-001:documents:AP-009","type":"documents","from":"INF-REF-001","to":"AP-009","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:SAF-REF-001:documents:AP-010","type":"documents","from":"SAF-REF-001","to":"AP-010","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:SAF-CAT-001:documents:AP-010","type":"documents","from":"SAF-CAT-001","to":"AP-010","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:AP-009:evidenced_by:ARB-009","type":"evidenced_by","from":"AP-009","to":"ARB-009","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:AP-010:evidenced_by:ARB-010","type":"evidenced_by","from":"AP-010","to":"ARB-010","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:ANA-REF-001:documents:AP-011","type":"documents","from":"ANA-REF-001","to":"AP-011","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:ANA-PIPE-001:documents:AP-011","type":"documents","from":"ANA-PIPE-001","to":"AP-011","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:ANA-KPI-001:documents:AP-011","type":"documents","from":"ANA-KPI-001","to":"AP-011","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:ANA-GOV-001:documents:AP-011","type":"documents","from":"ANA-GOV-001","to":"AP-011","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:AP-011:evidenced_by:ARB-011","type":"evidenced_by","from":"AP-011","to":"ARB-011","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:OPSC-REF-001:documents:AP-012","type":"documents","from":"OPSC-REF-001","to":"AP-012","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:OPSC-CMD-001:documents:AP-012","type":"documents","from":"OPSC-CMD-001","to":"AP-012","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:OPSC-ALM-001:documents:AP-012","type":"documents","from":"OPSC-ALM-001","to":"AP-012","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:OPSC-RUN-001:documents:AP-012","type":"documents","from":"OPSC-RUN-001","to":"AP-012","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:OPSC-RACI-001:documents:AP-012","type":"documents","from":"OPSC-RACI-001","to":"AP-012","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:AP-012:evidenced_by:ARB-012","type":"evidenced_by","from":"AP-012","to":"ARB-012","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:DSDM-005:documents:AP-013C","type":"documents","from":"DSDM-005","to":"AP-013C","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}},
-    {"id":"rel:AP-013C:evidenced_by:ARB-013C","type":"evidenced_by","from":"AP-013C","to":"ARB-013C","version":"1.0","source_locator":{"path":"docs/architecture/traceability-register.md"}}
+    {
+      "id": "rel:BKL-015:addresses:TD-008",
+      "type": "addresses",
+      "from": "BKL-015",
+      "to": "TD-008",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/project/BACKLOG.md"
+      }
+    },
+    {
+      "id": "rel:BKL-044:depends_on:BKL-015",
+      "type": "depends_on",
+      "from": "BKL-044",
+      "to": "BKL-015",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/project/BACKLOG.md"
+      }
+    },
+    {
+      "id": "rel:BKL-015:implements:BKL-015-F1",
+      "type": "implements",
+      "from": "BKL-015",
+      "to": "BKL-015-F1",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/knowledge/BKL-015-Knowledge-Graph-Machine-Readable-Foundation.md"
+      }
+    },
+    {
+      "id": "rel:AP-015:implements:CAP-40",
+      "type": "implements",
+      "from": "AP-015",
+      "to": "CAP-40",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/scientific-knowledge-layer-vision.md"
+      }
+    },
+    {
+      "id": "rel:AP-015:depends_on:BKL-015",
+      "type": "depends_on",
+      "from": "AP-015",
+      "to": "BKL-015",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/project/BACKLOG.md"
+      }
+    },
+    {
+      "id": "rel:BKL-015-F1:evidenced_by:BKL-015-F1-ARB",
+      "type": "evidenced_by",
+      "from": "BKL-015-F1",
+      "to": "BKL-015-F1-ARB",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/reviews/ARB-BKL-015-F1-Independent-Review-2026-09-04.md"
+      }
+    },
+    {
+      "id": "rel:BKL-015-F1:evidenced_by:BKL-015-F1-RQ",
+      "type": "evidenced_by",
+      "from": "BKL-015-F1",
+      "to": "BKL-015-F1-RQ",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/reviews/RQ-BKL-015-F1-Release-Quality-Review-2026-09-04.md"
+      }
+    },
+    {
+      "id": "rel:OPS-REF-001:documents:AP-007",
+      "type": "documents",
+      "from": "OPS-REF-001",
+      "to": "AP-007",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:INT-REF-001:documents:AP-008",
+      "type": "documents",
+      "from": "INT-REF-001",
+      "to": "AP-008",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:INT-CAT-001:documents:AP-008",
+      "type": "documents",
+      "from": "INT-CAT-001",
+      "to": "AP-008",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:INF-REF-001:documents:AP-009",
+      "type": "documents",
+      "from": "INF-REF-001",
+      "to": "AP-009",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:SAF-REF-001:documents:AP-010",
+      "type": "documents",
+      "from": "SAF-REF-001",
+      "to": "AP-010",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:SAF-CAT-001:documents:AP-010",
+      "type": "documents",
+      "from": "SAF-CAT-001",
+      "to": "AP-010",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:AP-009:evidenced_by:ARB-009",
+      "type": "evidenced_by",
+      "from": "AP-009",
+      "to": "ARB-009",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:AP-010:evidenced_by:ARB-010",
+      "type": "evidenced_by",
+      "from": "AP-010",
+      "to": "ARB-010",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:ANA-REF-001:documents:AP-011",
+      "type": "documents",
+      "from": "ANA-REF-001",
+      "to": "AP-011",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:ANA-PIPE-001:documents:AP-011",
+      "type": "documents",
+      "from": "ANA-PIPE-001",
+      "to": "AP-011",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:ANA-KPI-001:documents:AP-011",
+      "type": "documents",
+      "from": "ANA-KPI-001",
+      "to": "AP-011",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:ANA-GOV-001:documents:AP-011",
+      "type": "documents",
+      "from": "ANA-GOV-001",
+      "to": "AP-011",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:AP-011:evidenced_by:ARB-011",
+      "type": "evidenced_by",
+      "from": "AP-011",
+      "to": "ARB-011",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:OPSC-REF-001:documents:AP-012",
+      "type": "documents",
+      "from": "OPSC-REF-001",
+      "to": "AP-012",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:OPSC-CMD-001:documents:AP-012",
+      "type": "documents",
+      "from": "OPSC-CMD-001",
+      "to": "AP-012",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:OPSC-ALM-001:documents:AP-012",
+      "type": "documents",
+      "from": "OPSC-ALM-001",
+      "to": "AP-012",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:OPSC-RUN-001:documents:AP-012",
+      "type": "documents",
+      "from": "OPSC-RUN-001",
+      "to": "AP-012",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:OPSC-RACI-001:documents:AP-012",
+      "type": "documents",
+      "from": "OPSC-RACI-001",
+      "to": "AP-012",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:AP-012:evidenced_by:ARB-012",
+      "type": "evidenced_by",
+      "from": "AP-012",
+      "to": "ARB-012",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:DSDM-005:documents:AP-013C",
+      "type": "documents",
+      "from": "DSDM-005",
+      "to": "AP-013C",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:AP-013C:evidenced_by:ARB-013C",
+      "type": "evidenced_by",
+      "from": "AP-013C",
+      "to": "ARB-013C",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    }
   ]
 }

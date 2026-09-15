@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 5.1 |
+| Versione | 5.2 |
 | Stato | Active |
 | Data | 15/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | F3-A3 Method ADR and validation-spike Program Assessment/Handoff; no provider selected |
+| Current governed package | F3-A3 decision-preparation: Solution Architecture, proposed ADR-010 and not-executed validation-spike plan |
 
 ## 1. Scopo
 
@@ -50,7 +50,7 @@ BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integ
 
 ## 7. Roadmap sequence
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 HANDOFF CURRENT / S10 UNAVAILABLE / RUNTIME ADAPTER ABSENT] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 DECISION PREPARATION CURRENT / ADR-010 PROPOSED / S10 UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 8. CI/CD e publishing
 
@@ -109,6 +109,7 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 4.9 | 15/09/2026 | Exact-digest assignment approval received; PR #209 receipt/promotion review candidate with 65/65 implementation tests |
 | 5.0 | 15/09/2026 | PR #209 D5 accepted/post-merge verified; repository authority AVAILABLE; runtime adapter absent; successor selection current |
 | 5.1 | 15/09/2026 | PR #210 D5 reconciliation accepted/post-merge verified; F3-A3 documentation-only handoff current; no provider selected |
+| 5.2 | 15/09/2026 | PR #211 handoff integrated/post-merge verified; F3-A3 Solution/ADR/validation decision-preparation review candidate |
 
 ## F3-A2-D4 acceptance checkpoint — 15/09/2026
 
@@ -122,3 +123,8 @@ PR #209 is ACCEPTED / POST-MERGE VERIFIED at merge `bc4307c2042a45985622044e1163
 ## F3-A3 current handoff
 
 The Program Architect selected F3-A3 after repository-authority completion for F3-A1/A2. The Solution Architect must prepare the method ADR and validation-spike plan for F3-OD04–F3-OD10. This mapping does not authorize dependencies, kernels, external calls, protected-site use, thresholds or runtime; S10 remains `UNAVAILABLE`.
+
+
+## F3-A3 decision-preparation package
+
+Authority remains the repository and future accepted ADR-010. Official-source observations and candidate versions are evidence inputs, not authority or approved pins. BKL-031-F3-A3-SOLUTION-001 defines the source-neutral boundary; ADR-010 exposes F3-OD04–F3-OD10; BKL-031-F3-A3-VAL-001 defines a synthetic, bounded campaign that is NOT EXECUTED. No provider, kernel, threshold, host, external call or runtime is selected.

@@ -27,7 +27,9 @@ It defines components, ports, contracts, failure behavior, privacy boundaries, m
 
 F4 remains owner of forecast evidence. F5 remains owner of weights, scoring, ranking and the read-only planner consumer. BKL-032 remains owner of readiness/go-no-go semantics. Local physical interlocks remain the only Safety Authority.
 
-## 2. Verified current state
+## 2. Verified state at PR #191 acceptance
+
+This section preserves the accepted PR #191 baseline. For the current repository-authority state after F3-A1/F3-A2, see section 23.
 
 ### 2.1 S08 — site
 
@@ -420,7 +422,7 @@ It covers:
 | F3-OD09 | execution host and measured resource/performance budget |
 | F3-OD10 | bounded evaluation grid and maximum request size |
 
-All ten decisions remain open. Implementation is blocked until the applicable decisions are accepted.
+At PR #191 all ten decisions were open. Section 23 records the later resolution of F3-OD01–F3-OD03; F3-OD04–F3-OD10 remain implementation blockers.
 
 ## 19. Acceptance criteria for this architecture package
 
@@ -469,3 +471,20 @@ Binding conditions:
 - `ARB-191-MI02` — define half-open UTC validity intervals before F3-A1/F3-A2/F3-B.
 
 No F3 implementation slice is promoted by this acceptance. The validation plan remains not executed for implementation evidence.
+
+
+## 23. Current-state reconciliation — 2026-09-15
+
+Sections 2.1, 2.2 and the F3-OD01–F3-OD03 entries in section 18 describe the historical baseline at PR #191. Subsequent governed increments resolved the repository-authority decisions and lifecycle for F3-A1/F3-A2 through ADR-009 and PRs #204–#210.
+
+Current state:
+
+- protected Site Authority is APPROVED in repository authority; runtime S08 remains `UNAVAILABLE`;
+- protected CurrentSetupAssignment is APPROVED and repository-resolver eligible for authorized validated callers; runtime S09 remains `UNAVAILABLE_CURRENT`;
+- F3-OD01–F3-OD03 are resolved by the later authority packages;
+- F3-OD04–F3-OD10 remain open;
+- S10 remains `UNAVAILABLE`;
+- BKL-031-F3-A3-SOLUTION-001, proposed ADR-010 and BKL-031-F3-A3-VAL-001 are the current decision-preparation package;
+- no provider, library, kernel, threshold, host, external call or runtime is selected.
+
+This reconciliation does not rewrite the historical acceptance record and exposes no protected values.
