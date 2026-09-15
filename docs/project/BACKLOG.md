@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.17 |
+| Versione | 5.18 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -49,7 +49,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
-| BKL-031 | P1 | Observation Planner intelligente | In Progress | F3-A2 contract accepted with conditions/post-merge verified | Concrete baseline and assignment authority decision required before materialization (`ARB-197-MI01`) | F3-A2 acceptance; PR #197; ARB/RQ evidence |
+| BKL-031 | P1 | Observation Planner intelligente | In Progress | F3-A2 contract accepted; owner-authorized authority model and protected DRAFT prepared | Exact payload digest approval/correction, then separate site/assignment materialization gates | ADR-009; BKL-031 F3-A2-D1 assessment; `DSG-SETUP-BASELINE-001` DRAFT |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
@@ -235,3 +235,8 @@ PR #197 è merged in `main` come `64ecee230431de95fd892849757649da87314e7e` dopo
 F3-A2 è accettato con condizioni come contratto documentale source-neutral non implementato. `ARB-195-MI01` è chiuso normativamente; `ARB-197-MI01` richiede una decisione owner/architetturale su concrete Configuration Baseline Authority, Assignment Authority, approval evidence source e prima approved baseline instance prima di qualsiasi schema, fixture, validator, adapter, assignment reale o F3-B.
 
 S08/S09/S10 restano unavailable. F3-A3/B/C, provider/ADR, runtime, EAGLE, ranking, readiness, go/no-go e Safety Authority non sono promossi.
+
+
+### BKL-031 F3-A2-D1 GitHub authority and first baseline DRAFT — 15/09/2026
+
+The Repository Owner authorized the GitHub-governed authority model. ADR-009 assigns owner/approval authority to `github:user:maininimassimo-bit`, custodianship without approval power to the Digital StarGate Architecture Office, and stores protected records outside `docs/`. The first candidate payload is `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`; it remains `DRAFT`, unpublished and resolver-ineligible pending explicit owner approval or correction. No site record, assignment, schema, adapter, runtime or EAGLE operation is introduced.

@@ -18,6 +18,10 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [PR #196 DSG-AEM-001 AI-Assisted Release Quality](../architecture/reviews/RQ-PR196-DSG-AEM-001-Governance-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
 | [F3-A2 Handoff Acceptance](BKL-031-F3-A2-HANDOFF-ACCEPTANCE-2026-09-15.md) | PR #195 accepted with conditions/post-merge verified |
 | [F3-A2 Contract Acceptance](BKL-031-F3-A2-SETUP-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md) | PR #197 accepted with conditions/post-merge verified; authority decision required before materialization |
+| [ADR-009 GitHub-Governed Setup Authority](../architecture/ADR-009-GitHub-Governed-Setup-Authority.md) | Owner-authorized authority model; first baseline remains DRAFT |
+| [F3-A2-D1 Authority and Baseline Draft Assessment](../architecture/assessments/BKL-031-F3-A2-D1-GitHub-Authority-and-First-Baseline-Draft-Assessment-2026-09-15.md) | Exact payload sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8; approval mandatory |
+| [PR #199 F3-A2-D1 AI-Assisted ARB Review](../architecture/reviews/ARB-PR199-BKL-031-F3-A2-D1-GitHub-Authority-and-Baseline-Draft-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 99/100; non equivalente ad approvazione umana indipendente |
+| [PR #199 F3-A2-D1 AI-Assisted Release Quality](../architecture/reviews/RQ-PR199-BKL-031-F3-A2-D1-GitHub-Authority-and-Baseline-Draft-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready; publication-head CI pending |
 | [PR #197 F3-A2 Contract AI-Assisted ARB Review](../architecture/reviews/ARB-PR197-BKL-031-F3-A2-Setup-Authority-Contract-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 97/100; non equivalente ad approvazione umana indipendente |
 | [PR #197 F3-A2 Contract AI-Assisted Release Quality](../architecture/reviews/RQ-PR197-BKL-031-F3-A2-Setup-Authority-Contract-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
 | [F3-A2 Governed Setup Authority Contract](../architecture/scientific-assets/BKL-031-F3-A2-Governed-Setup-Authority-Contract.md) | Detailed source-neutral contract accepted with conditions/post-merge verified; not implemented |
@@ -91,11 +95,11 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-031 F2: ACCEPTED / POST-MERGE VERIFIED;
 - BKL-031 F3: Solution Architecture `ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED`; closure PR #192 merged as `21524c687a1fa6a9d840a3951c7ef4fe298f9c3c`;
 - BKL-031 F3-A1: Site Authority Contract `ACCEPTED WITH CONDITIONS / RECONCILED / POST-MERGE VERIFIED / NOT IMPLEMENTED`;
-- BKL-031 F3-A2: Setup Authority Contract `ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED / NOT IMPLEMENTED`; `ARB-197-MI01` decision required.
+- BKL-031 F3-A2: contract accepted; ADR-009 authority model owner-authorized; first protected baseline payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8` remains DRAFT and `ARB-197-MI01-B` requires exact-digest owner approval.
 
 ## Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2 ACCEPTED / AUTHORITY DECISION REQUIRED] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2 ACCEPTED / AUTHORITY MODEL DECIDED / EXACT DIGEST APPROVAL REQUIRED] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## Authority / projection
 

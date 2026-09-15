@@ -3,6 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-AEM-001 |
+| Versione | 1.1 |
 | Stato | **ACTIVE / OWNER-AUTHORIZED** |
 | Data efficacia | 15/09/2026 |
 | Owner | Massimo Mainini |
@@ -75,6 +76,18 @@ L'esecuzione si ferma e richiede una decisione owner quando:
 - CI o review rilevano un problema non risolvibile univocamente entro lo scope;
 - è obbligatoria un'approvazione umana indipendente;
 - servono prove fisiche o OAT producibili solo dall'owner.
+
+## 5.1 Notifica obbligatoria di stop
+
+Prima di sospendere il lavoro per una stop condition, l'assistente deve informare esplicitamente l'owner indicando:
+
+1. stato corrente;
+2. motivo esatto del blocco;
+3. lavoro già completato;
+4. decisione o autorità richiesta;
+5. criterio verificabile per la ripresa.
+
+L'assenza di una notifica non trasforma il silenzio in approvazione e deve essere corretta appena rilevata. Questa regola operativa è owner-authorized dal 15/09/2026.
 
 ## 6. Boundary inderogabili
 

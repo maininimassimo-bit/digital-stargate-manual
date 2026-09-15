@@ -4,13 +4,13 @@
 |---|---|
 | Identificativo | BKL-031-F3-A2-CONTRACT-001 |
 | Stato | **ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED — NOT IMPLEMENTED** |
-| Versione | 1.1 |
+| Versione | 1.2 |
 | Data | 15/09/2026 |
-| Baseline | `main@357a5edfbd39346b10a1a2d751018ff6d1dd208f` |
+| Baseline | `main@687f966fa544f7c4b31eaa29433cfa8ab48e52fe` |
 | Parent handoff | `BKL-031-F3-A2-PROGRAM-001` |
 | Parent acceptance | `BKL-031-F3-A2-HANDOFF-ACCEPTANCE-001` |
 | Governing architecture | BKL-031 F3 Solution Architecture; AP-006 governance concepts |
-| Review disposition | `ARB-195-MI01` closed normatively; `ARB-197-MI01` carried before materialization |
+| Review disposition | `ARB-195-MI01` closed; `ARB-197-MI01-A` authority model resolved by ADR-009; `ARB-197-MI01-B` first approved baseline remains open |
 | Runtime / data / schema impact | None |
 | PC Principale / EAGLE | Nessuna attività richiesta |
 
@@ -312,15 +312,14 @@ Il rollback corrente è il revert documentale.
 
 Restano futuri e non impliciti:
 
-- formato/versione dello schema;
-- canonicalizzazione e algoritmo digest;
-- concrete owner/custodian/approval authority;
-- source locator e adapter della baseline authority;
-- storage/retention/encryption/key management;
+- formato/versione dello schema e validator eseguibile;
+- adapter/persistence della baseline e assignment authority;
+- storage hardening, retention ed eventuale encryption/key management;
 - public classification di configuration reference/label/validity;
-- policy di separation of duties;
 - migration data e OAT;
 - provider/method F3-A3.
+
+ADR-009 determina invece repository authority, ruoli concreti, separazione delle approvazioni e `DSG-F3A2-CANONICAL-JSON-SHA256-1`. Il primo record `DSG-SETUP-BASELINE-001` resta `DRAFT`: la sua presenza non soddisfa il gate della prima baseline approvata.
 
 Questi elementi non impediscono la review del contratto logico, ma impediscono materializzazione e disponibilità S09 finché non sono deliberati e provati.
 

@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "0.1-draft",
+  "recordType": "DSG_CONFIGURATION_BASELINE",
+  "lifecycle": {
+    "state": "DRAFT",
+    "eligibleForResolution": false,
+    "approvalEvidenceRef": null,
+    "statement": "This record is a review candidate and is not an approved baseline."
+  },
+  "baselinePayload": {
+    "baselineId": "DSG-SETUP-BASELINE-001",
+    "baselineVersion": "0.1.0-draft.1",
+    "configurationId": "DSG-MANCIANO-DUAL-OTA-SETUP-001",
+    "scope": "OBSERVATION_PLANNER_READ_ONLY_CONTEXT",
+    "authority": {
+      "authoritySystem": "GITHUB_REPOSITORY_PROTECTED_REGISTRY",
+      "repository": "maininimassimo-bit/digital-stargate-manual",
+      "registryRoot": "governance/setup-authority",
+      "configurationBaselineOwnerRef": "github:user:maininimassimo-bit",
+      "configurationBaselineCustodianRef": "role:digital-stargate-architecture-office",
+      "baselineApprovalAuthorityRef": "github:user:maininimassimo-bit",
+      "setupAssignmentOwnerRef": "github:user:maininimassimo-bit",
+      "setupAssignmentCustodianRef": "role:digital-stargate-architecture-office",
+      "assignmentApprovalAuthorityRef": "github:user:maininimassimo-bit",
+      "custodianMayApprove": false,
+      "baselineAndAssignmentApprovalsAreSeparate": true
+    },
+    "validity": {
+      "validFromUtc": "2026-09-16T00:00:00Z",
+      "validToUtc": null,
+      "intervalSemantics": "HALF_OPEN",
+      "status": "PROPOSED_PENDING_OWNER_APPROVAL"
+    },
+    "configurationProfiles": [
+      {
+        "configurationId": "QUATTRO200_TOUPTEK294_BIN1",
+        "configurationName": "Quattro 200P + ToupTek 294MC PRO BIN1",
+        "telescope": {
+          "name": "Sky-Watcher Quattro 200P",
+          "type": "Newtonian",
+          "apertureMm": 200,
+          "nativeFocalLengthMm": 800,
+          "effectiveFocalLengthMm": 760,
+          "nativeFRatio": 4,
+          "effectiveFRatio": 3.8
+        },
+        "opticalModifier": "Riduttore/correttore",
+        "camera": {
+          "name": "ToupTek 294MC PRO",
+          "type": "OSC",
+          "sensor": "IMX294",
+          "pixelSizeUm": 4.63,
+          "binning": 1,
+          "imageScaleArcsecPx": 1.26
+        },
+        "mount": "Celestron CGX-L",
+        "filterSystem": "L-PRO / L-Extreme",
+        "guiding": {
+          "guideTelescope": "Evoguide",
+          "guideCamera": "QHY8IIM"
+        },
+        "focuser": "Esatto 2",
+        "sourceLifecycle": {
+          "activeFrom": "2026-07-14",
+          "activeTo": null,
+          "status": "ACTIVE"
+        },
+        "sourceAuthority": "PROJECTION_ONLY",
+        "sourceNotes": "Configurazione principale grandangolare Digital StarGate; OTA montato in parallelo al Celestron C8 sulla CGX-L"
+      },
+      {
+        "configurationId": "C8_QHY695A_BIN1",
+        "configurationName": "C8 XLT + QHY695A BIN1",
+        "telescope": {
+          "name": "Celestron C8 XLT",
+          "type": "Schmidt-Cassegrain",
+          "apertureMm": 203,
+          "nativeFocalLengthMm": 2032,
+          "effectiveFocalLengthMm": 1260,
+          "nativeFRatio": 10,
+          "effectiveFRatio": 6.2
+        },
+        "opticalModifier": "Riduttore 0.63x",
+        "camera": {
+          "name": "QHY695A",
+          "type": "CCD mono",
+          "sensor": "Sony ICX695",
+          "pixelSizeUm": 4.54,
+          "binning": 1,
+          "imageScaleArcsecPx": 0.74
+        },
+        "mount": "Celestron CGX-L",
+        "filterSystem": "LRGB / SHO",
+        "guiding": {
+          "guideTelescope": null,
+          "guideCamera": null
+        },
+        "focuser": "Pegasus FocusCube",
+        "sourceLifecycle": {
+          "activeFrom": "2026-08-14",
+          "activeTo": null,
+          "status": "ACTIVE"
+        },
+        "sourceAuthority": "PROJECTION_ONLY",
+        "sourceNotes": "Configurazione C8 ad alta focale; OTA montato in parallelo allo Sky-Watcher Quattro 200P sulla CGX-L; guida da censire"
+      }
+    ],
+    "candidateRelations": [
+      {
+        "type": "PARALLEL_MOUNT_CANDIDATE",
+        "subjectConfigurationId": "QUATTRO200_TOUPTEK294_BIN1",
+        "objectConfigurationId": "C8_QHY695A_BIN1",
+        "sharedMount": "Celestron CGX-L",
+        "authority": "PROJECTION_ONLY"
+      }
+    ],
+    "sourceEvidenceRefs": [
+      {
+        "repositoryRef": "main@687f966fa544f7c4b31eaa29433cfa8ab48e52fe",
+        "path": "data/analytics/configurations/equipment-registry.csv",
+        "blobSha": "734bceeaa517022aa2c78977ff0d13f685f20265",
+        "authority": "PROJECTION_ONLY"
+      },
+      {
+        "repositoryRef": "main@687f966fa544f7c4b31eaa29433cfa8ab48e52fe",
+        "path": "docs/architecture/packages/AP-006-Enterprise-Configuration-and-Asset-Management-Architecture.md",
+        "authority": "ARCHITECTURE"
+      },
+      {
+        "repositoryRef": "main@687f966fa544f7c4b31eaa29433cfa8ab48e52fe",
+        "path": "docs/architecture/scientific-assets/BKL-031-F3-A2-Governed-Setup-Authority-Contract.md",
+        "authority": "CONTRACT"
+      }
+    ],
+    "knownGaps": [
+      "NO_BASELINE_APPROVAL_EVIDENCE",
+      "SOURCE_REGISTRY_IS_PROJECTION_ONLY",
+      "C8_GUIDE_SETUP_DA_VALIDARE",
+      "SERIALS_AND_RUNTIME_VERSIONS_DA_VALIDARE",
+      "F3_A1_SITE_RECORD_NOT_MATERIALIZED",
+      "NO_CURRENT_SETUP_ASSIGNMENT"
+    ],
+    "classification": "PROTECTED_CONFIGURATION",
+    "intendedUse": "Candidate baseline for owner review and future Observation Planner read-only context",
+    "prohibitedUses": [
+      "CURRENT_SETUP_RESOLUTION_BEFORE_APPROVAL",
+      "DEVICE_COMMAND",
+      "SAFETY_AUTHORITY",
+      "READINESS_OR_GO_NO_GO",
+      "RUNTIME_TRUTH",
+      "PUBLIC_PORTAL_PROJECTION"
+    ],
+    "rollback": {
+      "currentDraft": "Delete or supersede only through reviewed Git history; no runtime rollback required",
+      "futureApproval": "Retire approval evidence and return S09 to UNAVAILABLE_CURRENT without fallback"
+    }
+  },
+  "payloadDigest": {
+    "method": "DSG-F3A2-CANONICAL-JSON-SHA256-1",
+    "canonicalization": "recursive object-key sort; array order preserved; compact JSON; UTF-8",
+    "algorithm": "SHA-256",
+    "value": "sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8"
+  },
+  "validationEvidence": {
+    "sourceLineageCheck": {
+      "state": "VERIFIED",
+      "evidence": "equipment registry path, commit and blob SHA are pinned in baselinePayload.sourceEvidenceRefs"
+    },
+    "payloadDigestRecomputation": {
+      "state": "VERIFIED",
+      "evidence": "SHA-256 independently recomputed from canonical baselinePayload on 2026-09-15"
+    },
+    "jsonParse": {
+      "state": "VERIFIED"
+    },
+    "approvedSchemaValidation": {
+      "state": "NOT_EXECUTED",
+      "reason": "NO_APPROVED_F3_A2_SCHEMA"
+    },
+    "runtimeOat": {
+      "state": "NOT_EXECUTED",
+      "reason": "OUT_OF_SCOPE_DRAFT"
+    },
+    "physicalInventory": {
+      "state": "NOT_EXECUTED",
+      "reason": "OWNER_SELECTED_EXPLICIT_EXCEPTIONS"
+    }
+  }
+}

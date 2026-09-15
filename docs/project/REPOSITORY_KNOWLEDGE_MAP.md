@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 4.0 |
+| Versione | 4.1 |
 | Stato | Active |
 | Data | 15/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | BKL-031 F3-A2 accepted with conditions; concrete authority decision required before materialization |
+| Current governed package | BKL-031 F3-A2-D1 authority model determined; first protected baseline remains DRAFT pending exact-digest owner approval |
 
 ## 1. Scopo
 
@@ -46,11 +46,11 @@ Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimen
 
 BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`; nessun apply path o Safety Authority è autorizzato.
 
-BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integrato tramite PR #193, accettato con condizioni e riconciliato tramite PR #194 merge `1fd771632239cdca38d7527c55b974d805ffd1b9`, con 9/9 workflow post-merge. F3-A2 handoff è accepted with conditions/post-merge verified via PR #195. Il detailed Setup Authority Contract e il validation plan sono accepted with conditions/post-merge verified via PR #197 merge `64ecee230431de95fd892849757649da87314e7e`; AP-006 governance, concrete baseline evidence, current assignment e observed drift sono separati. `ARB-195-MI01` è chiuso normativamente; `ARB-197-MI01` richiede una decisione concreta prima della materializzazione. `DSG-AEM-001` è integrated/post-merge verified via PR #196 merge `357a5edfbd39346b10a1a2d751018ff6d1dd208f`. Non esistono baseline/assignment, schema o runtime. I finding ARB-193 e ARB-191-MI01 restano gate; ARB-191-MI02 è soddisfatta a livello normativo con test eseguibili ancora richiesti. S07/S11, F4 forecast, F5 ranking/consumer, BKL-032 readiness e Safety restano separati.
+BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integrato tramite PR #193, accettato con condizioni e riconciliato tramite PR #194 merge `1fd771632239cdca38d7527c55b974d805ffd1b9`, con 9/9 workflow post-merge. F3-A2 handoff è accepted with conditions/post-merge verified via PR #195. Il detailed Setup Authority Contract e il validation plan sono accepted with conditions/post-merge verified via PR #197 merge `64ecee230431de95fd892849757649da87314e7e`; AP-006 governance, concrete baseline evidence, current assignment e observed drift sono separati. `ARB-195-MI01` è chiuso normativamente. ADR-009 risolve source e ruoli concreti di `ARB-197-MI01`; il payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8` resta DRAFT e la prima approvazione concreta resta obbligatoria prima della materializzazione. `DSG-AEM-001` è integrated/post-merge verified via PR #196 merge `357a5edfbd39346b10a1a2d751018ff6d1dd208f`. Non esistono baseline APPROVED, assignment, schema o runtime. Il registro protetto `governance/setup-authority/` non è sorgente Pages. I finding ARB-193 e ARB-191-MI01 restano gate; ARB-191-MI02 è soddisfatta a livello normativo con test eseguibili ancora richiesti. S07/S11, F4 forecast, F5 ranking/consumer, BKL-032 readiness e Safety restano separati.
 
 ## 7. Roadmap sequence
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2 ACCEPTED / AUTHORITY DECISION REQUIRED] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2 ACCEPTED / AUTHORITY MODEL DECIDED / EXACT DIGEST APPROVAL REQUIRED] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 8. CI/CD e publishing
 
@@ -93,3 +93,5 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 3.8 | 15/09/2026 | PR #195 F3-A2 handoff post-merge verified; DSG-AEM-001 active; detailed contract next |
 | 3.9 | 15/09/2026 | PR #196 mandate post-merge verified; F3-A2 detailed contract and validation plan current |
 | 4.0 | 15/09/2026 | PR #197 F3-A2 contract accepted/post-merge verified; concrete authority decision gate current |
+
+| 4.1 | 15/09/2026 | ADR-009 authority model owner-authorized; first protected baseline payload remains DRAFT pending exact-digest approval |

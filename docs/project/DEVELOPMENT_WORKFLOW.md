@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEV-001 |
-| Versione | 2.4 |
+| Versione | 2.5 |
 | Stato | Active |
 | Data efficacia | 15/09/2026 |
 
@@ -194,6 +194,8 @@ Per l'osservatorio, safety prevale sulla continuità. Portale, telemetry, replay
 Nessun workflow di sviluppo autorizza implicitamente command path, bypass di interlock, automatic remediation o modifica della Safety Authority locale.
 
 ## 6. Comunicazione
+
+Quando una stop condition obbliga alla pausa, la notifica all'owner deve precedere la sospensione e contenere stato, motivo esatto, lavoro completato, decisione richiesta e criterio di ripresa. L'assistente non può restare silenzioso su un blocco noto.
 
 Durante l'esecuzione vengono comunicati soltanto:
 

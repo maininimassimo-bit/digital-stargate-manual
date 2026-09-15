@@ -3,58 +3,39 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-BASELINE-2026-09-15 |
-| Stato | **CURRENT — F3-A2 ACCEPTED WITH CONDITIONS / NOT IMPLEMENTED** |
-| Repository baseline | `main@64ecee230431de95fd892849757649da87314e7e` |
-| Working branch | `docs/bkl-031-f3-a2-acceptance` |
-| Current package | `BKL-031-F3-A2-ACCEPTANCE-001` |
+| Stato | **CURRENT — F3-A2-D1 AUTHORITY DECISION / DRAFT ONLY** |
+| Repository baseline | `main@687f966fa544f7c4b31eaa29433cfa8ab48e52fe` |
+| Working branch | `docs/bkl-031-f3-a2-d1-authority-baseline-draft` |
+| Current package | `BKL-031-F3-A2-D1` |
 | Runtime delta | None |
-| Data/schema delta | None |
+| Data delta | Protected DRAFT only; no approved authority record |
 | Infrastructure delta | None |
 
-## 1. Baseline integrata
+## 1. Integrated foundation
 
-F3-A2 handoff è accepted tramite PR #195. `DSG-AEM-001` è integrato tramite PR #196. Il detailed contract e validation plan sono integrati tramite PR #197 merge `64ecee230431de95fd892849757649da87314e7e`, verificato con 9/9 workflow post-merge inclusi Pages e Governed Projection Sync.
+F3-A2 contract and acceptance are post-merge verified through PR #198. ADR-009 records the newly owner-authorized GitHub authority model; the target registry is `governance/setup-authority/`, outside Pages.
 
-## 2. Stato tecnico corrente
+## 2. Candidate state
 
-Il contratto definisce aggregate, reference envelope, lifecycle, approval separation, UTC half-open validity, deterministic resolution, failure semantics e public/protected boundary con `publicReasonCode` allowlisted.
+`DSG-SETUP-BASELINE-001` contains two projection-sourced configuration profiles and payload digest `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`. Its lifecycle is `DRAFT`, `eligibleForResolution=false`, with no approval evidence. The validity start `2026-09-16T00:00:00Z` is proposed for owner decision.
 
-Non esistono baseline concrete approvate attestate, assignment, schema JSON, fixture, validator, persistence, API, cache, provider, deployment o integrazione EAGLE.
+## 3. Authority and separation
 
-## 3. Finding disposition
-
-| Finding | Stato |
-|---|---|
-| `ARB-195-MI01` | closed normatively |
-| `ARB-197-MI01` | open / owner-architecture decision required before materialization |
-| `ARB-193-MI01` | open before F3-B |
-| `ARB-193-MI02` | open before F3-B |
-| `ARB-191-MI01` | open before F3-B/F3-C |
-| `ARB-191-MI02` | normative design satisfied / executable gate open |
+The Repository Owner is baseline/assignment owner and human Approval Authority. The Digital StarGate Architecture Office is custodian only. Baseline and assignment approvals remain distinct; no assistant review or CI result can replace owner approval.
 
 ## 4. Dependency readiness
 
 | Elemento | Stato |
 |---|---|
-| F3 architecture | accepted with conditions |
-| F3-A1 | accepted with conditions / not implemented |
-| F3-A2 handoff | accepted with conditions / post-merge verified |
-| F3-A2 detailed contract | accepted with conditions / post-merge verified |
-| F3-A2 validation plan | accepted / tests not executed |
-| Concrete authority decision | **not determined — stop condition** |
+| GitHub authority source/roles | owner-authorized via ADR-009 |
+| First payload | DRAFT / exact digest available |
+| First baseline approval | **mandatory owner decision pending** |
+| F3-A1 concrete site record | absent |
+| CurrentSetupAssignment | absent |
+| Schema/validator/adapter | not implemented |
+| S09 | `UNAVAILABLE_CURRENT` |
 | F3-A3/B/C | not promoted |
-| S08/S09/S10 | unavailable |
 
-## 5. Decision target
+## 5. Rollback
 
-L'owner deve determinare o autorizzare:
-
-- authoritative system/registry della Configuration Baseline;
-- baseline owner/custodian/Approval Authority;
-- assignment owner/custodian/Approval Authority;
-- approval evidence source;
-- prima concrete approved baseline instance, oppure una decisione esplicita che rinvii ogni materializzazione.
-
-## 6. Rollback
-
-Revert documentale del merge #197 e della acceptance reconciliation. Nessuna migrazione, credenziale o azione operativa.
+Revert ADR-009 and the protected DRAFT files. No migration, deployment, credential or observatory operation exists.

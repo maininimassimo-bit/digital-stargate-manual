@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-15",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "48191d28dfb6a5ef2a9e3e16f52c798176549bc5e56d8faf6cc6fd28137ec16c",
+  "sourceDigest": "a7d80feba3c75e2207d4d3be4ae0a02a3a778d01c6423300b13e815e7de2f1bb",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A2 — Concrete Setup Authority Decision Gate",
-  "target": "Owner/architecture decision required by ARB-197-MI01: identify the concrete Configuration Baseline Authority, Assignment Authority, approval evidence source and first approved baseline before any materialization; S08/S09/S10 remain unavailable",
+  "nextMilestone": "BKL-031 F3-A2-D1 — Exact Baseline Digest Owner Approval",
+  "target": "Owner approval or correction of exact DRAFT payload sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8 and proposed validity; baseline and assignment approvals remain separate; S09 stays UNAVAILABLE_CURRENT",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -307,7 +307,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F1/F2 ACCEPTED / POST-MERGE VERIFIED. F3 Solution Architecture and F3-A1 are accepted with conditions. F3-A2 handoff is accepted via PR #195; the detailed contract and validation plan are accepted with conditions/post-merge verified via PR #197 merge 64ecee230431de95fd892849757649da87314e7e. ARB-195-MI01 is closed normatively. ARB-197-MI01 requires an owner/architecture decision on concrete baseline/assignment authority, approval evidence source and first approved baseline before materialization. ARB-191-MI01 and F3-A1 conditions remain later gates; executable validation is not run. S08 stays UNAVAILABLE, S09 UNAVAILABLE_CURRENT and S10 UNAVAILABLE. No real baseline/assignment, schema, fixture, validator, adapter, provider/ADR, F3-A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
+          "note": "F1/F2 and F3 architecture are accepted/post-merge verified. F3-A1 and F3-A2 contracts are accepted with conditions. ADR-009 records the owner-authorized GitHub-governed setup authority model: Repository Owner is human Approval Authority; Architecture Office is custodian without approval power; protected records live outside docs/. DSG-SETUP-BASELINE-001 is DRAFT with payload sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8, sourced from PROJECTION_ONLY registry rows, resolver-ineligible and not published. Exact-digest owner approval/correction, F3-A1 site materialization and a separately approved CurrentSetupAssignment remain mandatory. S09 stays UNAVAILABLE_CURRENT. No schema, validator, adapter, provider/ADR, F3-A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
         },
         {
           "id": "BKL-032",
@@ -611,6 +611,14 @@
       "title": "BKL-031 F3-A2 Setup Authority Contract Acceptance",
       "date": "2026-09-15",
       "description": "PR #197 merged as 64ecee230431de95fd892849757649da87314e7e and post-merge verified 9/9. Contract accepted with conditions/not implemented; ARB-195-MI01 closed normatively and ARB-197-MI01 requires owner/architecture decision before materialization.",
+      "status": "active"
+    },
+    {
+      "id": "M-BKL031-F3-A2-D1",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A2-D1 GitHub Authority and First Baseline Draft",
+      "date": "2026-09-15",
+      "description": "Owner-authorized authority model recorded in ADR-009; protected first baseline payload sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8 remains DRAFT pending exact-digest approval. No assignment or runtime.",
       "status": "active"
     }
   ]
