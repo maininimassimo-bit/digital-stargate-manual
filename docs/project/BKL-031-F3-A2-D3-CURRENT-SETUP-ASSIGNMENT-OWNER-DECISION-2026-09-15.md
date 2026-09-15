@@ -17,7 +17,7 @@ The validity policy is half-open, starts when the already approved setup baselin
 
 ## 2. Authorized repository effect
 
-This package may add only immutable protected owner-decision evidence and update governance continuity. It does not create an assignment payload, schema, canonical digest, approval receipt, lifecycle promotion, adapter, persistence or runtime API.
+This package may add only immutable protected owner-decision evidence and update governance continuity. It does not create an assignment payload, schema, canonical digest, approval receipt, lifecycle promotion, adapter, persistence or runtime API. Decision evidence is not an assignment authority record and cannot be resolved by S09.
 
 ## 3. Capability state
 
