@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | ADR-009 |
-| Stato | **Accepted — owner-authorized authority model; first baseline remains DRAFT** |
+| Stato | **Accepted — first exact baseline APPROVED; site and assignment remain separate gates** |
 | Data | 15/09/2026 |
 | Decision owner | Repository Owner / human Approval Authority |
 | Custodian | Digital StarGate Architecture Office |
-| Repository baseline | `maininimassimo-bit/digital-stargate-manual@687f966fa544f7c4b31eaa29433cfa8ab48e52fe` |
+| Repository baseline | `maininimassimo-bit/digital-stargate-manual@1ce08f4cc5458cc7ac68732a02df0d27a359f8d5` |
 | Parent contract | `BKL-031-F3-A2-CONTRACT-001` |
 | Finding | `ARB-197-MI01` |
 | Runtime / EAGLE / Safety impact | None |
@@ -16,7 +16,7 @@
 
 F3-A2 requires a concrete Configuration Baseline Authority and Setup Assignment Authority before S09 can resolve current setup. AP-006 defines governance semantics but does not attest a concrete record. The current equipment registry is explicitly a projection and cannot be promoted by inference.
 
-On 15/09/2026 the Repository Owner authorized the recommended GitHub-governed authority model and instructed the custodian to proceed. Approval of the first exact baseline payload remains a separate mandatory human decision.
+On 15/09/2026 the Repository Owner authorized the GitHub-governed authority model and subsequently approved the first exact baseline payload, digest `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`, with validity from `2026-09-16T00:00:00Z`. The approval is recorded by a separate immutable receipt. It does not approve a site record or setup assignment.
 
 ## Decision
 
@@ -51,7 +51,7 @@ A future receipt must include at least:
 
 The custodian must present the exact digest and material content before requesting approval. Silence, generic authorization, prior workflow success or assistant review never counts as approval.
 
-## Initial DRAFT
+## First approved baseline
 
 `DSG-SETUP-BASELINE-001.draft.json` is derived only from:
 
@@ -59,7 +59,7 @@ The custodian must present the exact digest and material content before requesti
 - AP-006 architecture rules;
 - the accepted F3-A2 contract.
 
-Its exact payload digest is `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`. It proposes two configuration profiles and a half-open validity start of `2026-09-16T00:00:00Z`. It remains `DRAFT`, protected, ineligible and unpublished until the Repository Owner explicitly approves or corrects that exact payload.
+Its exact payload digest is `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`. It contains two configuration profiles and a half-open validity start of `2026-09-16T00:00:00Z`. The Repository Owner approved that exact payload through the owner-controlled channel on 15/09/2026. The lifecycle envelope is `APPROVED`, the matching receipt is stored under `governance/setup-authority/approval-evidence/`, and the protected record remains excluded from Pages. Proposal-time labels inside the immutable payload remain unchanged because they are covered by the approved digest; current lifecycle truth is the envelope plus receipt.
 
 ## Consequences
 
@@ -72,7 +72,7 @@ Positive:
 
 Constraints:
 
-- `ARB-197-MI01` remains open for the first approved baseline and assignment;
+- `ARB-197-MI01-B` and `ARB-199-MI01` are closed for the first approved baseline; the F3-A1 site record and separately approved assignment remain open before S09 activation;
 - schema, validator, adapter, persistence, public projection and OAT remain future work;
 - unresolved C8 guiding, serials and runtime versions cannot be inferred;
 - no command, safety, readiness, ranking or go/no-go semantics are introduced.
@@ -86,4 +86,4 @@ Constraints:
 
 ## Rollback
 
-Revert ADR-009 and the DRAFT registry files. No migration, deployment, device operation or data deletion is involved. If a future record is approved, retire its approval/activation evidence and return S09 to `UNAVAILABLE_CURRENT`; never fall back to projection or observed state.
+Retire the approved baseline envelope and receipt through reviewed Git history, then return baseline eligibility to unavailable. No migration, deployment, device operation or data deletion is involved. S09 already remains `UNAVAILABLE_CURRENT` because no site record or approved assignment exists; never fall back to projection or observed state.

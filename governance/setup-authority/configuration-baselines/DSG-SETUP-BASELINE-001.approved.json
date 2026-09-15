@@ -2,10 +2,12 @@
   "schemaVersion": "0.1-draft",
   "recordType": "DSG_CONFIGURATION_BASELINE",
   "lifecycle": {
-    "state": "DRAFT",
-    "eligibleForResolution": false,
-    "approvalEvidenceRef": null,
-    "statement": "This record is a review candidate and is not an approved baseline."
+    "state": "APPROVED",
+    "eligibleForResolution": true,
+    "approvalEvidenceRef": "governance/setup-authority/approval-evidence/DSG-SETUP-BASELINE-001.approval.json",
+    "approvalRecordedAtUtc": "2026-09-15T14:19:27Z",
+    "validityGate": "NOT_EFFECTIVE_BEFORE_2026-09-16T00:00:00Z",
+    "statement": "Approved as an immutable baseline reference for its validity interval. No current setup resolves without a separately approved site assignment."
   },
   "baselinePayload": {
     "baselineId": "DSG-SETUP-BASELINE-001",
@@ -173,13 +175,21 @@
     "jsonParse": {
       "state": "VERIFIED"
     },
+    "approvalReceiptBinding": {
+      "state": "VERIFIED",
+      "evidence": "human owner approval receipt references the exact payload digest and validity"
+    },
+    "payloadImmutabilityAcrossTransition": {
+      "state": "VERIFIED",
+      "evidence": "canonical DRAFT and APPROVED baselinePayload digests are identical"
+    },
     "approvedSchemaValidation": {
       "state": "NOT_EXECUTED",
       "reason": "NO_APPROVED_F3_A2_SCHEMA"
     },
     "runtimeOat": {
       "state": "NOT_EXECUTED",
-      "reason": "OUT_OF_SCOPE_DRAFT"
+      "reason": "OUT_OF_SCOPE_BASELINE_APPROVAL"
     },
     "physicalInventory": {
       "state": "NOT_EXECUTED",

@@ -3,15 +3,15 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A2-CONTRACT-001 |
-| Stato | **ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED — NOT IMPLEMENTED** |
-| Versione | 1.2 |
+| Stato | **ACCEPTED WITH CONDITIONS / FIRST BASELINE APPROVED — ASSIGNMENT AND RUNTIME NOT IMPLEMENTED** |
+| Versione | 1.3 |
 | Data | 15/09/2026 |
 | Baseline | `main@687f966fa544f7c4b31eaa29433cfa8ab48e52fe` |
 | Parent handoff | `BKL-031-F3-A2-PROGRAM-001` |
 | Parent acceptance | `BKL-031-F3-A2-HANDOFF-ACCEPTANCE-001` |
 | Governing architecture | BKL-031 F3 Solution Architecture; AP-006 governance concepts |
-| Review disposition | `ARB-195-MI01` closed; `ARB-197-MI01-A` authority model resolved by ADR-009; `ARB-197-MI01-B` first approved baseline remains open |
-| Runtime / data / schema impact | None |
+| Review disposition | `ARB-195-MI01` closed; `ARB-197-MI01-A` resolved by ADR-009; `ARB-197-MI01-B` closed by exact-digest owner approval; site and assignment gates remain open |
+| Runtime / data / schema impact | Protected approved baseline and receipt only; no schema or runtime |
 | PC Principale / EAGLE | Nessuna attività richiesta |
 
 ## 1. Scopo e boundary
@@ -335,3 +335,10 @@ Il contratto può essere accettato come specifica documentale soltanto dopo:
 - merge e post-merge evidence con `W-DSG-AEM-RULESET-001` se applicabile.
 
 Schema, fixture, validator, adapter, materializzazione, runtime ed EAGLE restano fuori scope.
+
+
+## Approval materialization update — 15/09/2026
+
+The Repository Owner approved `DSG-SETUP-BASELINE-001` at exact payload digest `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`, with half-open validity from `2026-09-16T00:00:00Z`. The protected approval receipt and `APPROVED` lifecycle envelope are repository records outside `docs/`.
+
+This closes only the first-baseline portion of `ARB-197-MI01`. The payload is immutable and retains its proposal-time fields; the envelope plus receipt carries current lifecycle truth. No F3-A1 concrete site record or `CurrentSetupAssignment` is created, so S09 remains `UNAVAILABLE_CURRENT`. Schema, validator, adapter, public projection, runtime, EAGLE, readiness, go/no-go and Safety Authority remain outside this increment.

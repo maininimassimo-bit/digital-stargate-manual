@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A2-D1-ACCEPTANCE-001 |
-| Stato | **ACCEPTANCE CANDIDATE — PR #199 POST-MERGE VERIFIED / EXACT-DIGEST APPROVAL PENDING** |
+| Stato | **OWNER APPROVAL RECORDED / LIFECYCLE PROMOTION REVIEW CANDIDATE** |
 | Data | 15/09/2026 |
 | Integrated PR | #199 |
 | Publication head | `7c124d6f2cb1b6356c7008ac2f70824b5579a262` |
@@ -21,7 +21,7 @@ The Repository Owner confirmed:
 - validity from `2026-09-16T00:00:00Z`;
 - explicit null/`DA_VALIDARE` exceptions for C8 guiding, serials and runtime versions.
 
-These choices define the candidate. They do not constitute the separate human approval of its exact digest.
+These choices defined the candidate. The Repository Owner subsequently approved the exact digest and validity through the owner-controlled interaction channel. The separate receipt is now part of this lifecycle-promotion package.
 
 ## 2. Exact candidate state
 
@@ -29,9 +29,9 @@ These choices define the candidate. They do not constitute the separate human ap
 |---|---|
 | Baseline ID | `DSG-SETUP-BASELINE-001` |
 | Payload digest | `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8` |
-| Lifecycle | `DRAFT` |
-| Resolver eligible | false |
-| Approval receipt | absent |
+| Lifecycle | `APPROVED` |
+| Baseline-reference eligible | true only inside the approved validity interval |
+| Approval receipt | `DSG-SETUP-BASELINE-001-APPROVAL-001` / exact-digest bound |
 | CurrentSetupAssignment | absent |
 | S09 | `UNAVAILABLE_CURRENT` |
 | Publication | protected; excluded from Pages |
@@ -59,16 +59,16 @@ Exact publication head completed 7/7 PR workflows. Merge `4e8802c80359efce28d8d7
 ## 4. Finding disposition
 
 - `ARB-197-MI01-A`: closed by ADR-009 for authority system, roles, evidence location and separation.
-- `ARB-197-MI01-B` / `ARB-199-MI01`: open until exact-digest human approval.
+- `ARB-197-MI01-B` / `ARB-199-MI01`: closed by exact-digest human approval and matching receipt.
 - `ARB-199-MI02`: assigned to schema/validator materialization.
 - `ARB-199-MI03`: assigned before S09 activation to F3-A1 site record and separately approved assignment.
 
-No Blocker or Major remains for integration of the DRAFT.
+No Blocker or Major remains for the owner-approved lifecycle-promotion review candidate.
 
 ## 5. Next mandatory gate
 
-The Repository Owner must explicitly approve or correct `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8` and its validity. Only after that decision may the custodian create a matching approval receipt and propose a lifecycle transition. Baseline approval must not create or imply a setup assignment.
+After exact-head review, CI, merge and post-merge verification of this approval package, F3-A1 concrete site materialization and a separately approved `CurrentSetupAssignment` remain mandatory before S09 can become available. Baseline approval does not create or imply either record.
 
 ## 6. Rollback
 
-Revert PR #199. No migration, runtime deployment, credential or observatory operation exists.
+Retire or revert the approved envelope and receipt through reviewed Git history. No migration, runtime deployment, credential or observatory operation exists.

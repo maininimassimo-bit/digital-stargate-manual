@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "0.1-draft",
+  "recordType": "DSG_CONFIGURATION_BASELINE_APPROVAL_RECEIPT",
+  "receiptId": "DSG-SETUP-BASELINE-001-APPROVAL-001",
+  "decision": "APPROVED",
+  "subject": {
+    "baselineId": "DSG-SETUP-BASELINE-001",
+    "baselineVersion": "0.1.0-draft.1",
+    "configurationId": "DSG-MANCIANO-DUAL-OTA-SETUP-001",
+    "payloadDigest": "sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8",
+    "validFromUtc": "2026-09-16T00:00:00Z",
+    "validToUtc": null,
+    "intervalSemantics": "HALF_OPEN"
+  },
+  "approvingAuthority": {
+    "authorityRef": "github:user:maininimassimo-bit",
+    "authorityKind": "HUMAN_REPOSITORY_OWNER",
+    "custodianIsApprover": false
+  },
+  "approval": {
+    "approvalTimestampUtc": "2026-09-15T14:19:27Z",
+    "sourceChannel": "OWNER_CONTROLLED_INTERACTION_CHANNEL",
+    "sourceStatement": "Approvo la Configuration Baseline `DSG-SETUP-BASELINE-001`, digest `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`, con validità dal `2026-09-16T00:00:00Z`, e autorizzo la creazione dell’approval receipt e il passaggio ad `APPROVED`.",
+    "validityAcknowledged": true
+  },
+  "repositoryEvidence": {
+    "repository": "maininimassimo-bit/digital-stargate-manual",
+    "branch": "docs/bkl-031-f3-a2-d2-baseline-approval",
+    "recordPath": "governance/setup-authority/approval-evidence/DSG-SETUP-BASELINE-001.approval.json",
+    "baselinePath": "governance/setup-authority/configuration-baselines/DSG-SETUP-BASELINE-001.approved.json",
+    "pullRequestNumber": null
+  },
+  "scopeBoundaries": [
+    "NO_SETUP_ASSIGNMENT_APPROVAL",
+    "NO_PUBLIC_PORTAL_PROJECTION",
+    "NO_RUNTIME_OR_EAGLE_OPERATION",
+    "NO_READINESS_OR_GO_NO_GO_AUTHORITY",
+    "NO_SAFETY_AUTHORITY_CHANGE"
+  ],
+  "integrity": {
+    "canonicalizationMethod": "DSG-F3A2-CANONICAL-JSON-SHA256-1",
+    "payloadDigestVerified": true,
+    "payloadMutatedDuringApproval": false
+  }
+}
