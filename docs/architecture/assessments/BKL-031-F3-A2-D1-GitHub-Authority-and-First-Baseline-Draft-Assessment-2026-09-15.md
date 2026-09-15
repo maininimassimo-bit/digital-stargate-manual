@@ -3,14 +3,14 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A2-D1-ASSESS-001 |
-| Stato | **OWNER-AUTHORIZED AUTHORITY DECISION / REVIEW CANDIDATE** |
+| Stato | **FIRST BASELINE APPROVED / RECEIPT MATERIALIZATION CANDIDATE** |
 | Data | 15/09/2026 |
-| Baseline verificata | `main@687f966fa544f7c4b31eaa29433cfa8ab48e52fe` |
+| Baseline verificata | `main@1ce08f4cc5458cc7ac68732a02df0d27a359f8d5` |
 | Capability | BKL-031 — Observation Planner intelligente |
 | Parent | `BKL-031-F3-A2-CONTRACT-001` |
 | ADR | ADR-009 |
 | Runtime delta | None |
-| Data delta | One protected DRAFT record; no approved baseline or assignment |
+| Data delta | One protected APPROVED baseline and immutable receipt; no assignment |
 | PC Principale / EAGLE | Nessuna attività richiesta |
 
 ## Outcome
@@ -30,7 +30,7 @@ The repository now has a deterministic target model for setup authority:
 | Publication | deny-by-default; registry excluded from Pages |
 | Digest | `DSG-F3A2-CANONICAL-JSON-SHA256-1` |
 
-This closes the authority-system/role/source part of `ARB-197-MI01`. It does not close the mandatory first-baseline approval or assignment gates.
+This closes the authority-system/role/source and first-baseline approval portions of `ARB-197-MI01`. It does not close the F3-A1 site-record or assignment gates.
 
 ## Evidence selection
 
@@ -43,12 +43,12 @@ The shared CGX-L and parallel-OTA candidate relation comes from the two registry
 
 ## Exact candidate
 
-- record: `governance/setup-authority/configuration-baselines/DSG-SETUP-BASELINE-001.draft.json`;
-- state: `DRAFT`;
+- record: `governance/setup-authority/configuration-baselines/DSG-SETUP-BASELINE-001.approved.json`;
+- state: `APPROVED`;
 - payload digest: `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`;
 - proposed validity: `[2026-09-16T00:00:00Z, +infinity)`;
 - classification: `PROTECTED_CONFIGURATION`;
-- resolver eligibility: false;
+- baseline-reference eligibility: true only inside the approved validity interval;
 - current assignment: absent;
 - S09: `UNAVAILABLE_CURRENT`.
 
@@ -60,14 +60,14 @@ On 15/09/2026 the Repository Owner confirmed through the controlled interaction 
 - validity start `2026-09-16T00:00:00Z`;
 - unresolved C8 guiding, serials and runtime versions remain explicit null/`DA_VALIDARE` exceptions outside the authoritative payload claims.
 
-These confirmations define the candidate and preserve payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`. They are not the separate final approval of that exact digest.
+These confirmations defined the candidate and preserved payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`. The Repository Owner then explicitly approved that exact digest and validity through the owner-controlled interaction channel; receipt `DSG-SETUP-BASELINE-001-APPROVAL-001` records the separate approval act.
 
 ## Remaining gaps
 
 | Gate | Stato |
 |---|---|
-| Owner approval/correction of exact payload digest and validity | **MANDATORY — OPEN** |
-| Baseline approval receipt | absent |
+| Owner approval/correction of exact payload digest and validity | **CLOSED — APPROVED** |
+| Baseline approval receipt | present / exact-digest bound |
 | F3-A1 concrete site record | absent |
 | CurrentSetupAssignment | absent |
 | Assignment approval receipt | absent |
@@ -78,4 +78,4 @@ These confirmations define the candidate and preserve payload `sha256:3f73d6a541
 
 ## Acceptance and rollback
 
-This package may integrate as an authority decision plus protected DRAFT only. It must not claim baseline approval or S09 availability. Rollback is a repository revert; no runtime, migration or observatory operation exists.
+This package may integrate the protected `APPROVED` envelope and exact-digest receipt. It must not claim current-setup resolution or S09 availability. Rollback retires or reverts the envelope and receipt through reviewed Git history; no runtime, migration or observatory operation exists.

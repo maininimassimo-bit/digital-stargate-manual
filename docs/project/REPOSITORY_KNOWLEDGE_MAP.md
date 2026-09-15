@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 4.2 |
+| Versione | 4.3 |
 | Stato | Active |
 | Data | 15/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | PR #199 authority model/DRAFT integrated; exact-digest human approval is the active stop condition |
+| Current governed package | PR #201 first-baseline receipt and `APPROVED` lifecycle envelope under review |
 
 ## 1. Scopo
 
@@ -46,11 +46,11 @@ Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimen
 
 BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`; nessun apply path o Safety Authority è autorizzato.
 
-BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integrato tramite PR #193, accettato con condizioni e riconciliato tramite PR #194 merge `1fd771632239cdca38d7527c55b974d805ffd1b9`, con 9/9 workflow post-merge. F3-A2 handoff è accepted with conditions/post-merge verified via PR #195. Il detailed Setup Authority Contract e il validation plan sono accepted with conditions/post-merge verified via PR #197 merge `64ecee230431de95fd892849757649da87314e7e`; AP-006 governance, concrete baseline evidence, current assignment e observed drift sono separati. `ARB-195-MI01` è chiuso normativamente. ADR-009 risolve source e ruoli concreti di `ARB-197-MI01`. PR #199 è integrata come `4e8802c80359efce28d8d75521a1b9cc4cb44b05` con 9/9 workflow post-merge; il payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8` resta DRAFT e la prima approvazione concreta resta obbligatoria prima della materializzazione. `DSG-AEM-001` è integrated/post-merge verified via PR #196 merge `357a5edfbd39346b10a1a2d751018ff6d1dd208f`. Non esistono baseline APPROVED, assignment, schema o runtime. Il registro protetto `governance/setup-authority/` non è sorgente Pages. I finding ARB-193 e ARB-191-MI01 restano gate; ARB-191-MI02 è soddisfatta a livello normativo con test eseguibili ancora richiesti. S07/S11, F4 forecast, F5 ranking/consumer, BKL-032 readiness e Safety restano separati.
+BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integrato tramite PR #193, accettato con condizioni e riconciliato tramite PR #194 merge `1fd771632239cdca38d7527c55b974d805ffd1b9`, con 9/9 workflow post-merge. F3-A2 handoff è accepted with conditions/post-merge verified via PR #195. Il detailed Setup Authority Contract e il validation plan sono accepted with conditions/post-merge verified via PR #197 merge `64ecee230431de95fd892849757649da87314e7e`; AP-006 governance, concrete baseline evidence, current assignment e observed drift sono separati. `ARB-195-MI01` è chiuso normativamente. ADR-009 risolve source e ruoli concreti di `ARB-197-MI01`. PR #199 è integrata come `4e8802c80359efce28d8d75521a1b9cc4cb44b05` con 9/9 workflow post-merge. Il Repository Owner ha approvato il payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`, valido dal `2026-09-16T00:00:00Z`; PR #201 registra receipt e lifecycle `APPROVED` senza modificare il payload. `DSG-AEM-001` è integrated/post-merge verified via PR #196 merge `357a5edfbd39346b10a1a2d751018ff6d1dd208f`. Esiste una prima baseline owner-approved in pubblicazione su PR #201; non esistono site record concreto, assignment, schema o runtime. Il registro protetto `governance/setup-authority/` non è sorgente Pages. I finding ARB-193 e ARB-191-MI01 restano gate; ARB-191-MI02 è soddisfatta a livello normativo con test eseguibili ancora richiesti. S07/S11, F4 forecast, F5 ranking/consumer, BKL-032 readiness e Safety restano separati.
 
 ## 7. Roadmap sequence
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2 ACCEPTED / AUTHORITY MODEL DECIDED / EXACT DIGEST APPROVAL REQUIRED] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2 BASELINE APPROVED / SITE + ASSIGNMENT REQUIRED] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 8. CI/CD e publishing
 
@@ -97,3 +97,5 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 4.1 | 15/09/2026 | ADR-009 authority model owner-authorized; first protected baseline payload remains DRAFT pending exact-digest approval |
 
 | 4.2 | 15/09/2026 | PR #199 authority/DRAFT integrated and post-merge verified; exact-digest owner gate current |
+
+| 4.3 | 15/09/2026 | Exact-digest owner approval recorded; PR #201 receipt and `APPROVED` lifecycle envelope under review |
