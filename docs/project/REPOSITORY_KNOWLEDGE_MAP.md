@@ -7,7 +7,7 @@
 | Stato | Active |
 | Data | 15/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | PR #207 F3-A2-D4 protected DRAFT materialization review candidate |
+| Current governed package | F3-A2-D4 accepted/post-merge verified; mandatory human exact-digest approval gate |
 
 ## 1. Scopo
 
@@ -46,7 +46,7 @@ Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimen
 
 BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`; nessun apply path o Safety Authority è autorizzato.
 
-BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integrato tramite PR #193 e riconciliato tramite PR #194. F3-A2 handoff e detailed contract sono accepted with conditions/post-merge verified via PR #195 e #197; AP-006 governance, concrete baseline evidence, current assignment e observed drift restano separati. ADR-009 governa i registri protetti. The first setup baseline and Site Authority are independently approved. PR #204 integrated the Site Authority lifecycle; PR #205 reconciled acceptance as `d5f403bbe6a39731213c372cb22296324d10b03d` with 9/9 post-merge workflows. F3-A2-D3 source, roles, separation and validity decisions are complete and may be stored only as protected evidence. F3-A2-D4 is the next bounded DRAFT handoff. No `CurrentSetupAssignment` or runtime adapter exists: S08 is `UNAVAILABLE`, S09 is `UNAVAILABLE_CURRENT`. `ARB-204-MI01` and `ARB-204-MI02` remain preconditions for later revisions/adapters. S07/S11, F3-A3/B/C, F4 forecast, F5 ranking/consumer, BKL-032 readiness and Safety remain separate.
+BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integrato tramite PR #193 e riconciliato tramite PR #194. F3-A2 handoff e detailed contract sono accepted with conditions/post-merge verified via PR #195 e #197; AP-006 governance, concrete baseline evidence, current assignment e observed drift restano separati. ADR-009 governa i registri protetti. The first setup baseline and Site Authority are independently approved. PR #204 integrated the Site Authority lifecycle; PR #205 reconciled acceptance as `d5f403bbe6a39731213c372cb22296324d10b03d` with 9/9 post-merge workflows. F3-A2-D3 source, roles, separation and validity decisions are complete and stored as protected evidence. PR #207 integrated the F3-A2-D4 protected `CurrentSetupAssignment` DRAFT, closed schemas, validator and 57/57 tests. The DRAFT is not approved or resolver-eligible and no runtime adapter exists: S08 is `UNAVAILABLE`, S09 is `UNAVAILABLE_CURRENT`. `ARB-204-MI01` and `ARB-204-MI02` remain preconditions for later revisions/adapters. S07/S11, F3-A3/B/C, F4 forecast, F5 ranking/consumer, BKL-032 readiness and Safety remain separate.
 
 ## 7. Roadmap sequence
 
@@ -105,7 +105,8 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 4.5 | 15/09/2026 | PR #202 baseline verified; F3-A1-M1 decisions complete; F3-A1-M2 protected DRAFT review candidate and exact-digest approval next |
 | 4.6 | 15/09/2026 | PR #204 Site Authority approval accepted/post-merge verified; F3-A2-D3 CurrentSetupAssignment owner decision gate current |
 | 4.7 | 15/09/2026 | PR #205 reconciliation verified; F3-A2-D3 owner decisions complete and F3-A2-D4 DRAFT handoff next |
+| 4.8 | 15/09/2026 | PR #207 D4 protected DRAFT accepted/post-merge verified; mandatory human exact-digest approval next |
 
-## F3-A2-D4 review-candidate checkpoint — 15/09/2026
+## F3-A2-D4 acceptance checkpoint — 15/09/2026
 
-The dependency-ready D4 package materializes a protected DRAFT after PR #206 integrated the owner decisions. Closed schemas, exact-reference binding, canonical identity, fail-closed resolution, privacy enforcement and 57 cases are implemented. No assignment approval, runtime adapter or public protected projection exists. The next mandatory transition after merge is human exact-digest approval.
+PR #207 merged as `e99e6b5ff5ea7247ee447a1c6c62dcaa479dee1b` after 5/5 exact-head workflows and completed 7/7 post-merge workflows. Closed schemas, exact-reference binding, canonical identity, fail-closed resolution, privacy enforcement and 57/57 cases are integrated. No assignment approval, runtime adapter or public protected projection exists. The current mandatory transition is human exact-digest approval or rejection.
