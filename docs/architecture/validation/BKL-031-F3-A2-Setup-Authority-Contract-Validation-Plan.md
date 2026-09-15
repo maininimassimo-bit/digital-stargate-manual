@@ -3,9 +3,10 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A2-VAL-001 |
-| Stato | **REVIEW CANDIDATE / TESTS NOT EXECUTED** |
+| Stato | **ACCEPTED AS VALIDATION PLAN / TESTS NOT EXECUTED** |
 | Data | 15/09/2026 |
-| Contract | `BKL-031-F3-A2-CONTRACT-001` |
+| Contract | `BKL-031-F3-A2-CONTRACT-001` accepted with conditions / not implemented |
+| Review | PR #197 — ARB 97/100; Release Quality conditionally ready; post-merge 9/9 |
 | Baseline | `main@357a5edfbd39346b10a1a2d751018ff6d1dd208f` |
 | Test data | Synthetic future fixtures only |
 | Runtime / OAT | Not executed / not authorized |

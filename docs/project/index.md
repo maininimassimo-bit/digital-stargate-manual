@@ -17,7 +17,10 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [PR #196 DSG-AEM-001 AI-Assisted ARB Review](../architecture/reviews/ARB-PR196-DSG-AEM-001-Governance-AI-Assisted-Review-2026-09-15.md) | Approved — 99/100; non equivalente ad approvazione umana indipendente |
 | [PR #196 DSG-AEM-001 AI-Assisted Release Quality](../architecture/reviews/RQ-PR196-DSG-AEM-001-Governance-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
 | [F3-A2 Handoff Acceptance](BKL-031-F3-A2-HANDOFF-ACCEPTANCE-2026-09-15.md) | PR #195 accepted with conditions/post-merge verified |
-| [F3-A2 Governed Setup Authority Contract](../architecture/scientific-assets/BKL-031-F3-A2-Governed-Setup-Authority-Contract.md) | Detailed source-neutral contract review candidate; not implemented |
+| [F3-A2 Contract Acceptance](BKL-031-F3-A2-SETUP-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md) | PR #197 accepted with conditions/post-merge verified; authority decision required before materialization |
+| [PR #197 F3-A2 Contract AI-Assisted ARB Review](../architecture/reviews/ARB-PR197-BKL-031-F3-A2-Setup-Authority-Contract-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 97/100; non equivalente ad approvazione umana indipendente |
+| [PR #197 F3-A2 Contract AI-Assisted Release Quality](../architecture/reviews/RQ-PR197-BKL-031-F3-A2-Setup-Authority-Contract-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
+| [F3-A2 Governed Setup Authority Contract](../architecture/scientific-assets/BKL-031-F3-A2-Governed-Setup-Authority-Contract.md) | Detailed source-neutral contract accepted with conditions/post-merge verified; not implemented |
 | [F3-A2 Setup Authority Validation Plan](../architecture/validation/BKL-031-F3-A2-Setup-Authority-Contract-Validation-Plan.md) | Positive/negative/security/rollback cases; not executed |
 | [F3-A2 Setup Authority Program Assessment/Handoff](../architecture/assessments/BKL-031-F3-A2-Setup-Authority-Program-Assessment-and-Handoff-2026-09-15.md) | Package corrente: decisione di sequenziamento e handoff documentale |
 | [PR #195 F3-A2 Handoff AI-Assisted ARB Review](../architecture/reviews/ARB-PR195-BKL-031-F3-A2-Handoff-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 98/100; non equivalente ad approvazione umana indipendente |
@@ -88,11 +91,11 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-031 F2: ACCEPTED / POST-MERGE VERIFIED;
 - BKL-031 F3: Solution Architecture `ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED`; closure PR #192 merged as `21524c687a1fa6a9d840a3951c7ef4fe298f9c3c`;
 - BKL-031 F3-A1: Site Authority Contract `ACCEPTED WITH CONDITIONS / RECONCILED / POST-MERGE VERIFIED / NOT IMPLEMENTED`;
-- BKL-031 F3-A2: Setup Authority Program Assessment/Handoff `AUTHORIZED REVIEW CANDIDATE / NOT IMPLEMENTED`.
+- BKL-031 F3-A2: Setup Authority Contract `ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED / NOT IMPLEMENTED`; `ARB-197-MI01` decision required.
 
 ## Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2 HANDOFF REVIEW CANDIDATE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2 ACCEPTED / AUTHORITY DECISION REQUIRED] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## Authority / projection
 

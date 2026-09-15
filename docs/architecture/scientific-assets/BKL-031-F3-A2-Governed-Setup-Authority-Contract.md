@@ -3,14 +3,14 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A2-CONTRACT-001 |
-| Stato | **REVIEW CANDIDATE — NOT IMPLEMENTED** |
-| Versione | 1.0 |
+| Stato | **ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED — NOT IMPLEMENTED** |
+| Versione | 1.1 |
 | Data | 15/09/2026 |
 | Baseline | `main@357a5edfbd39346b10a1a2d751018ff6d1dd208f` |
 | Parent handoff | `BKL-031-F3-A2-PROGRAM-001` |
 | Parent acceptance | `BKL-031-F3-A2-HANDOFF-ACCEPTANCE-001` |
 | Governing architecture | BKL-031 F3 Solution Architecture; AP-006 governance concepts |
-| Open finding addressed | `ARB-195-MI01` |
+| Review disposition | `ARB-195-MI01` closed normatively; `ARB-197-MI01` carried before materialization |
 | Runtime / data / schema impact | None |
 | PC Principale / EAGLE | Nessuna attività richiesta |
 
