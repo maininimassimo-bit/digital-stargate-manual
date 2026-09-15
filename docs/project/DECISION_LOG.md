@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEC-001 |
-| Versione | 2.2 |
+| Versione | 2.3 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -57,6 +57,7 @@ Creare invece un ADR quando la decisione modifica un principio architetturale, i
 | DLG-024 | 15/09/2026 | Materializzare prima un record `DRAFT` ineligible e richiedere in seguito una distinta approvazione owner legata al digest canonico esatto | Separare autorizzazione alla registrazione, approvazione del payload e futura assegnazione; impedire che una generica autorizzazione di scrittura promuova il lifecycle | BKL-031 F3-A1-M2 | Accepted | protected decision evidence; ADR-009; DSG-AEM-001 |
 | DLG-025 | 15/09/2026 | Accettare la decisione owner vincolata all'exact digest e alla validità unbounded e promuovere il Site Authority tramite receipt protetto ed envelope APPROVED separato, senza mutare il payload | Completare F3-A1 rispettando immutabilità, privacy, separazione dall'assegnazione e potere di approvazione esclusivamente umano | BKL-031 F3-A1-M3/M4 | Accepted | owner-controlled approval; F3-A1-M4 evidence; ADR-009 |
 | DLG-026 | 15/09/2026 | Accettare F3-A1-M4 dopo PR #204 e selezionare F3-A2-D3 come owner decision gate separato per `CurrentSetupAssignment` | Site Authority e setup baseline sono approvati ma nessuna relazione current può essere inferita; mantenere S09 fail-closed preserva authority e approval separate | BKL-031 F3-A2-D3 | Accepted | PR #204; F3-A1-M4 acceptance; F3-A2-D3 assessment; ADR-009 |
+| DLG-027 | 15/09/2026 | Registrare per il futuro `CurrentSetupAssignment` il registro GitHub protetto, Repository Owner come owner/Approval Authority, Architecture Office come custodian non approvatore e validità unbounded dalla baseline setup | Chiudere il gate decisionale senza inferire o approvare la relazione sito-baseline e mantenere DRAFT, approval e runtime come incrementi separati | BKL-031 F3-A2-D3/D4 | Accepted | owner decisions 15/09/2026; ADR-009; F3-A2-D3 decision; F3-A2-D4 handoff |
 
 ## 5. Delega operativa GitHub
 
