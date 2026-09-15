@@ -5,6 +5,7 @@ import process from "node:process";
 const root = process.cwd();
 const infra = path.join(root, "infrastructure", "bkl-031-f3-a3-gcp");
 const bootstrap = fs.readFileSync(path.join(infra, "bootstrap", "main.tf"), "utf8");
+const bootstrapVariables = fs.readFileSync(path.join(infra, "bootstrap", "variables.tf"), "utf8");
 const platform = fs.readFileSync(path.join(infra, "platform", "main.tf"), "utf8");
 const variables = fs.readFileSync(path.join(infra, "platform", "variables.tf"), "utf8");
 const workflow = fs.readFileSync(path.join(root, ".github", "workflows", "bkl-031-f3-a3-gcp-iac.yml"), "utf8");
@@ -18,7 +19,7 @@ const forbid = (name, text, regex, reason) => {
 };
 
 requireText("bootstrap", bootstrap, "assertion.repository == '%s' && assertion.ref == 'refs/heads/main'");
-requireText("bootstrap", bootstrap, "maininimassimo-bit/digital-stargate-manual");
+requireText("bootstrap variables", bootstrapVariables, "maininimassimo-bit/digital-stargate-manual");
 requireText("bootstrap", bootstrap, "roles/iam.workloadIdentityUser");
 requireText("bootstrap", bootstrap, 'public_access_prevention    = "enforced"');
 requireText("platform", platform, 'location            = var.region');

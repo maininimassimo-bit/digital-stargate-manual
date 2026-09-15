@@ -58,7 +58,7 @@ This package has no authenticated plan/apply workflow. CI performs format, stati
 
 Run:
 
-1. node ../../.github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs
+1. node .github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs
 2. terraform -chdir=bootstrap fmt -check
 3. terraform -chdir=bootstrap init -backend=false
 4. terraform -chdir=bootstrap validate
