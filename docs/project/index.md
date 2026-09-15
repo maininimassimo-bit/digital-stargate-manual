@@ -42,6 +42,9 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [F3-A2 Setup Authority Validation Plan](../architecture/validation/BKL-031-F3-A2-Setup-Authority-Contract-Validation-Plan.md) | Repository suite 65/65 and post-merge verified; runtime/OAT not executed |
 | [F3-A2 Setup Authority Program Assessment/Handoff](../architecture/assessments/BKL-031-F3-A2-Setup-Authority-Program-Assessment-and-Handoff-2026-09-15.md) | Historical handoff; D5 repository authority accepted, successor selection current |
 | [F3-A3 Method ADR and Validation Spike Program Handoff](../architecture/assessments/BKL-031-F3-A3-Ephemeris-Lunar-Method-ADR-and-Validation-Spike-Program-Assessment-and-Handoff-2026-09-15.md) | Current documentation-only handoff; no provider selected, S10 unavailable |
+| [F3-A3 Method Decision Preparation](../architecture/scientific-assets/BKL-031-F3-A3-Ephemeris-Lunar-Method-Decision-Preparation.md) | Current Solution Architecture review candidate; owner decision pending |
+| [ADR-010 Ephemeris/Lunar Method and Validation Profile](../architecture/ADR-010-Ephemeris-Lunar-Method-and-Validation-Profile.md) | Proposed; no method selected |
+| [F3-A3 Method Validation Spike Plan](../architecture/validation/BKL-031-F3-A3-Ephemeris-Lunar-Method-Validation-Spike-Plan.md) | Proposed and not executed |
 | [PR #195 F3-A2 Handoff AI-Assisted ARB Review](../architecture/reviews/ARB-PR195-BKL-031-F3-A2-Handoff-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 98/100; non equivalente ad approvazione umana indipendente |
 | [PR #195 F3-A2 Handoff AI-Assisted Release Quality](../architecture/reviews/RQ-PR195-BKL-031-F3-A2-Handoff-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
 | [F3-A1 Site Authority Acceptance](BKL-031-F3-A1-SITE-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md) | Acceptance con condizioni, PR #194 post-merge e transizione F3-A2 |

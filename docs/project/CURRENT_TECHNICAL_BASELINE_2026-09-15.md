@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-BASELINE-2026-09-15 |
-| Stato | **CURRENT — F3-A2-D5 ACCEPTED; F3-A3 HANDOFF REVIEW CANDIDATE** |
-| Repository baseline | `main@a1d2d84f9f787c247516bc825cb83d2bc15a43f5` |
-| Current package | `BKL-031-F3-A3` documentation-only Program Assessment/Handoff |
+| Stato | **CURRENT — F3-A3 DECISION-PREPARATION REVIEW CANDIDATE** |
+| Repository baseline | `main@4f76f6646769df378859fbb15147851b4d0543fe` |
+| Current package | `BKL-031-F3-A3-SOLUTION-001` + proposed `ADR-010` + `BKL-031-F3-A3-VAL-001` |
 | Runtime delta | None |
-| Data delta | None; F3-A3 handoff introduces no provider data, kernel or protected-site payload |
+| Data delta | None; no provider artifact, SPK, IERS data or protected-site payload acquired |
 | Infrastructure delta | None |
 
 ## 1. Integrated state
@@ -57,3 +57,8 @@ Exact publication head `6947e79a53282db2a7f6d879643e51840ed9e553` passed 5/5 app
 ## F3-A3 handoff delta
 
 Program selection only: candidate comparison, ADR structure and validation-spike evidence plan. No dependency, provider, data/kernel, cache, schema, adapter, external call, runtime, EAGLE or infrastructure delta exists. S10 remains `UNAVAILABLE`; F3-OD04–F3-OD10 remain open decision gates.
+
+
+## F3-A3 decision-preparation delta
+
+Documentation only. The package records observed official-source versions, candidate roles, owner decision fields, source-neutral components and a not-executed spike plan. It introduces no dependency, kernel, time data, remote request, host, schema, adapter, cache, runtime or EAGLE change. ADR-010 remains Proposed and S10 remains `UNAVAILABLE`.

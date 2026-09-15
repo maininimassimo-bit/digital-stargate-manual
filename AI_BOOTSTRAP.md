@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 6.6 |
+| Versione | 6.7 |
 | Baseline | 15/09/2026 |
-| Stato | Current root bootstrap — PR #210 D5 reconciliation ACCEPTED / POST-MERGE VERIFIED; F3-A3 handoff review candidate; no provider selected |
+| Stato | Current root bootstrap — F3-A3 decision-preparation review candidate; ADR-010 proposed; owner decision pending |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -70,7 +70,7 @@ La closure BKL-046 non dichiara efficacia scientifica né produzione: `NOT_EVALU
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 HANDOFF CURRENT / S10 UNAVAILABLE / RUNTIME ADAPTER ABSENT] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 DECISION PREPARATION CURRENT / ADR-010 PROPOSED / S10 UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -86,7 +86,7 @@ PR #209 merged with expected-head control as `bc4307c2042a45985622044e11631421de
 
 `BKL-031-F3-A2-D5` is ACCEPTED / POST-MERGE VERIFIED. The protected receipt is integrated, the historical DRAFT remains immutable and the separate `APPROVED` envelope preserves the assignment payload and digest. The repository authority resolves `AVAILABLE` only for authorized validated input with approved source authorities. S08 remains `UNAVAILABLE`; runtime S09 remains `UNAVAILABLE_CURRENT` because no adapter exists.
 
-PR #210 reconciled D5 acceptance and merged as `a1d2d84f9f787c247516bc825cb83d2bc15a43f5` with 7/7 post-merge workflows. The Program Architect selected F3-A3 as the next dependency-ready package. The current action is a documentation-only Solution Architect package for method ADR and validation-spike preparation. No provider, library, kernel, error budget, external call or runtime is selected; F3-OD04–F3-OD10 remain owner/ADR gates.
+PR #211 integrated the F3-A3 Program Assessment/Handoff as `4f76f6646769df378859fbb15147851b4d0543fe` with 9/9 post-merge workflows. The current review candidate contains BKL-031-F3-A3-SOLUTION-001, proposed ADR-010 and BKL-031-F3-A3-VAL-001. It prepares, but does not close, F3-OD04–F3-OD10. No provider, library, kernel, threshold, host, external call or runtime is selected.
 
 ## F3-A2-D4 acceptance checkpoint — 15/09/2026
 
@@ -101,3 +101,8 @@ PR #209 is ACCEPTED / POST-MERGE VERIFIED at merge `bc4307c2042a45985622044e1163
 ## F3-A3 program handoff — 15/09/2026
 
 F3-A3 is the current documentation-only handoff. The specialist package must compare Astropy with pinned JPL data, Skyfield with pinned JPL BSP and JPL Horizons without presupposing a winner. It must prepare decision evidence for F3-OD04–F3-OD10 and stop before provider selection, dependency installation, scientific-data download, external calls, protected-site transmission, numeric threshold approval or runtime work. S10 remains `UNAVAILABLE`.
+
+
+## F3-A3 decision-preparation checkpoint — 15/09/2026
+
+Official candidate sources were refreshed. The conditional recommendation is local/offline primary evaluation, explicit local cross-check and Horizons only as a restricted validation reference unless privacy approval permits otherwise. ADR-010 remains `PROPOSED`; all spike cases are `NOT EXECUTED`; S10 remains `UNAVAILABLE`. The next mandatory gate after package integration is explicit owner disposition of F3-OD04–F3-OD10.

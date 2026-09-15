@@ -253,3 +253,19 @@ The architecture and this validation plan are accepted with conditions; their re
 This document is accepted as the normative validation plan for future F3 slices. Its acceptance is not evidence that P01–P10, N21–N66, the scientific campaign, privacy tests or runtime/OAT have executed.
 
 `ARB-191-MI01` adds a mandatory public-reference non-correlation test. `ARB-191-MI02` adds explicit half-open interval boundary and adjacency cases. These conditions must be materialized in the applicable future schema/test increment before implementation acceptance.
+
+
+## 16. Current-state reconciliation — 2026-09-15
+
+The original evidence classification captured the PR #191 baseline. Later F3-A1/F3-A2 increments materialized and approved repository authority with their own dedicated schemas, validators and evidence suites. Those results do not imply runtime availability and do not count as execution of this plan's P01–P10/N21–N66 campaign.
+
+Current classification:
+
+- F3-A1/F3-A2 repository authority: VERIFIED by later acceptance records;
+- runtime S08/S09: `UNAVAILABLE` / `UNAVAILABLE_CURRENT`;
+- F3-A3 provider/library ADR: proposed as ADR-010; decision pending;
+- F3-A3 spike: governed by `docs/architecture/validation/BKL-031-F3-A3-Ephemeris-Lunar-Method-Validation-Spike-Plan.md`; NOT EXECUTED;
+- S10: `UNAVAILABLE`;
+- F3-B/F3-C and runtime/OAT: not authorized.
+
+The original P01–P10/N21–N66 plan remains normative for later full F3 validation where applicable.

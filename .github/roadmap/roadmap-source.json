@@ -2,10 +2,10 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-15",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-A3 Method ADR and validation-spike handoff review candidate; no provider selected; no runtime delta",
+  "projectStatus": "BKL-031 F3-A3 Solution Architecture, proposed ADR-010 and validation-spike plan review candidate; owner decision pending; S10 unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A3 documentation-only method ADR and validation-spike architecture package",
-  "target": "Prepare a decision-ready F3-A3 package that compares Astropy+pinned JPL, Skyfield+pinned JPL and JPL Horizons without selecting a provider. Stop at owner gates for provider/terms, kernel, error budget, privacy, host and bounded execution; preserve S10 UNAVAILABLE and no EAGLE/readiness/command/Safety changes.",
+  "nextMilestone": "BKL-031 F3-A3 owner dispositions F3-OD04–F3-OD10 on an exact decision commit",
+  "target": "Review and integrate the documentation-only F3-A3 decision-preparation package. Then stop for explicit owner decisions on provider roles, kernel/data, per-metric error budget, IERS/EOP, privacy/licensing, execution host and bounded grid. No dependency acquisition, spike or runtime is authorized.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3-A2-D5 is ACCEPTED / POST-MERGE VERIFIED via PR #210 and merge a1d2d84f9f787c247516bc825cb83d2bc15a43f5. Repository authority is APPROVED/AVAILABLE for authorized validated input; runtime S09 remains UNAVAILABLE_CURRENT. F3-A3 method ADR and validation-spike handoff is current; no provider, kernel, error budget, external call or runtime is selected."
+          "note": "F3-A3 decision-preparation is the current review candidate: BKL-031-F3-A3-SOLUTION-001, proposed ADR-010 and BKL-031-F3-A3-VAL-001. Official sources were refreshed; no provider, kernel, threshold, host, external call or runtime is selected. Owner dispositions F3-OD04–F3-OD10 are next; S10 remains UNAVAILABLE."
         },
         {
           "id": "BKL-032",
@@ -594,6 +594,13 @@
       "title": "BKL-031 F3-A3 Method ADR and Validation Spike Handoff",
       "date": "2026-09-15",
       "description": "Program Architect selected the documentation-only F3-A3 handoff after F3-A1/A2 repository-authority completion. The future Solution Architect package must compare candidates and prepare owner gates F3-OD04–F3-OD10; no provider, dependency, data/kernel, external call or runtime is authorized."
+    },
+    {
+      "id": "M-BKL031-F3-A3-DECISION-PREPARATION",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A3 Decision Preparation",
+      "date": "2026-09-15",
+      "description": "Solution Architecture, proposed ADR-010 and validation-spike plan prepared for review. Conditional recommendation favors a local primary and restricted reference path, but all F3-OD04–F3-OD10 owner decisions remain open; no execution or runtime is authorized."
     }
   ]
 }
