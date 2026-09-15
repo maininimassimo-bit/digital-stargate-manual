@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Stato | Active |
-| Repository baseline verificata | `2ffc77917bcd3fc25a3c5657e8f12e62c9284303` |
-| Current governed package | BKL-031 F3 — AI-assisted reviews published; merge decision pending |
-| Accepted increments | BKL-031 F1 and F2; F3 handoff integrated/post-merge verified |
+| Repository baseline verificata | `3a79bb93c9a0925280eba5214d517107804cb13c` |
+| Current governed package | BKL-031 F3 — Solution Architecture accepted with conditions; implementation decision pending |
+| Accepted increments | BKL-031 F1/F2; F3 handoff and Solution Architecture integrated/post-merge verified |
 | Runtime impact | None |
 | PC Principale / EAGLE | Nessuna azione richiesta |
 
@@ -46,4 +46,4 @@ Le review ARB/RQ sono AI-assisted, owner-authorized e non equivalenti ad approva
 
 L'handoff F3 è integrato/post-merge verified tramite PR #190 e merge `2ffc77917bcd3fc25a3c5657e8f12e62c9284303`, con 9/9 workflow post-merge; `W-BKL031-F3-HANDOFF-MERGE-001` è consumata/scaduta.
 
-Il Solution Architecture Package F3 e il validation plan sono stati valutati sulla PR #191 technical head `43a46ac28c30badc40e4cb180ed98924ebcf74a1`. ARB AI-assisted: `APPROVED WITH CONDITIONS`, 98/100; Release Quality AI-assisted: `CONDITIONALLY READY`. Le review non equivalgono ad approvazioni umane indipendenti. Le condizioni `ARB-191-MI01` e `ARB-191-MI02` devono essere trasferite a ogni futura implementazione; non modificano il package valutato. La CI dell'head di pubblicazione e una separata decisione owner su merge/ruleset restano pendenti. Provider/ADR, record reali, schema/fixture/validator/adapter, runtime, F4/F5, BKL-032 e Safety restano non autorizzati.
+Il Solution Architecture Package F3 è integrato tramite PR #191: technical head `43a46ac28c30badc40e4cb180ed98924ebcf74a1`, review-publication head `d0f8098cfff9651b3ba1597fd77f09a11a7c634a`, merge `3a79bb93c9a0925280eba5214d517107804cb13c`. ARB AI-assisted: `APPROVED WITH CONDITIONS`, 98/100; Release Quality: `CONDITIONALLY READY`; post-merge: 9/9 workflow SUCCESS. `W-BKL031-F3-SA-MERGE-001` è consumata/scaduta. L'architettura è accettata con condizioni, non implementata. `ARB-191-MI01` e `ARB-191-MI02` restano gate obbligatori. BKL-031 resta attivo; nessuna slice F3-A1/A2/A3/B/C è promossa. Provider/ADR, record reali, schema/fixture/validator/adapter, runtime, F4/F5, BKL-032 e Safety restano non autorizzati.

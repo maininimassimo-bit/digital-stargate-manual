@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-APA-F3-001 |
-| Stato | **FULFILLED BY SOLUTION ARCHITECTURE REVIEW CANDIDATE — NOT ACCEPTED / NOT IMPLEMENTED** |
+| Stato | **FULFILLED / SOLUTION ARCHITECTURE ACCEPTED WITH CONDITIONS — NOT IMPLEMENTED** |
 | Data | 14/09/2026 |
 | Baseline | `main` @ `4d5526c2fa2af10aeddace4f26c33fc95b7eaa57` |
 | Capability | BKL-031 — Observation Planner intelligente |
@@ -138,7 +138,7 @@ Un ADR sarà richiesto soltanto quando le alternative provider/library saranno s
 | BKL031-F3-R07 | ephemeris trasformata in readiness/Safety | authority NONE, separazione BKL-032/interlock |
 | BKL031-F3-R08 | scope creep verso forecast/ranking | F4/F5 ownership e schema prohibition |
 
-## 9. Quality gates
+## 9. Historical handoff quality gates — satisfied
 
 - repository/source discovery evidence reviewed;
 - architecture package completeness;
@@ -152,9 +152,9 @@ Un ADR sarà richiesto soltanto quando le alternative provider/library saranno s
 
 Runtime/OAT is not applicable to the handoff. It becomes applicable only if a later implementation is authorized.
 
-## 10. Explicit exclusions
+## 10. Historical authorization boundary at handoff publication
 
-This handoff does not authorize:
+At handoff publication, before the later owner authorizations recorded in sections 12–13, this handoff did not authorize:
 
 - detailed solution design or ADR acceptance;
 - provider/library selection;
@@ -167,9 +167,9 @@ This handoff does not authorize:
 - device command, remediation or Safety Authority;
 - ARB, Release Quality or merge.
 
-## 11. Governance stop
+## 11. Historical governance stop — consumed by later authorizations
 
-After publishing this handoff as a draft PR and obtaining exact-head CI, stop. The F3 architecture package, any specialist implementation, AI-assisted review mode, merge, waiver and all runtime activity require separate repository-owner authorization.
+This stop applied after the handoff draft publication. Separate owner authorizations subsequently covered the Solution Architecture package, AI-assisted reviews and PR #190/#191 merges. It never authorized and still does not authorize provider/ADR selection, authority records, implementation or runtime activity.
 
 ## 12. Fulfilment record
 
@@ -178,4 +178,11 @@ The handoff was integrated through PR #190 and merge `2ffc77917bcd3fc25a3c5657e8
 - `docs/architecture/scientific-assets/BKL-031-F3-Governed-Site-Setup-and-Ephemeris-Lunar-Solution-Architecture.md`;
 - `docs/architecture/validation/BKL-031-F3-Governed-Site-Setup-and-Ephemeris-Lunar-Validation-Plan.md`.
 
-Both artifacts are review candidates only. They select no provider/library, approve no ADR, materialize no real site/setup authority, and implement no schema, fixture, validator, adapter, runtime or portal consumer. ARB, Release Quality, merge and implementation require separate authorizations.
+At initial publication both artifacts were review candidates. PR #191 later completed owner-authorized AI-assisted reviews, merge and post-merge verification. The artifacts select no provider/library, approve no ADR, materialize no real site/setup authority, and implement no schema, fixture, validator, adapter, runtime or portal consumer. Implementation remains separately unauthorized.
+
+
+## 13. Solution Architecture acceptance
+
+The F3 handoff is fulfilled by the Solution Architecture and validation plan integrated through PR #191 and merge `3a79bb93c9a0925280eba5214d517107804cb13c`. Post-merge workflows completed 9/9 successfully.
+
+The architecture is accepted with conditions and remains non-implementing. `ARB-191-MI01` and `ARB-191-MI02` are carried forward. No F3-A1/A2/A3/B/C slice is promoted or authorized.

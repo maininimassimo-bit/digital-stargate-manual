@@ -4,8 +4,8 @@
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3 — Reviewed Solution Architecture / Merge Decision Pending",
-  "target": "Decide whether to integrate the source-neutral F3 Solution Architecture after AI-assisted ARB 98/100 and Release Quality CONDITIONALLY READY; review-publication exact-head CI and separate merge/ruleset authorization are required, while provider/ADR selection and every implementation/runtime activity remain unauthorized",
+  "nextMilestone": "BKL-031 F3 — Implementation Slice Decision Pending",
+  "target": "Decide separately whether to authorize BKL-031 F3-A1 Site Authority Contract as the first dependency-ordered implementation slice; ARB-191-MI02 must be resolved before site/setup materialization, while provider/ADR selection, all implementation, forecast, ranking, readiness, runtime, device command, heavy EAGLE workload and Safety Authority remain unauthorized",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F1/F2 ACCEPTED / POST-MERGE VERIFIED. F3 handoff PR #190 merged as 2ffc77917bcd3fc25a3c5657e8f12e62c9284303 with 9/9 post-merge workflows. PR #191 technical head 43a46ac28c30badc40e4cb180ed98924ebcf74a1 received owner-authorized AI-assisted ARB APPROVED WITH CONDITIONS 98/100 and Release Quality CONDITIONALLY READY; reviews are not independent human approvals. Review-publication exact-head CI and separate merge/ruleset authorization remain required. Provider/ADR selection, real authority records and every implementation/runtime activity remain unauthorized."
+          "note": "F1/F2 ACCEPTED / POST-MERGE VERIFIED. F3 handoff and source-neutral Solution Architecture are integrated/post-merge verified through PR #190/#191; PR #191 merge 3a79bb93c9a0925280eba5214d517107804cb13c completed 9/9 workflows. The architecture is ACCEPTED WITH CONDITIONS only; ARB-191-MI01 and ARB-191-MI02 remain mandatory implementation gates. BKL-031 stays active. No F3-A1/A2/A3/B/C slice, provider/ADR, real authority record, schema/fixture/validator/adapter, forecast, ranking, readiness, runtime, device command, heavy EAGLE workload or Safety Authority is authorized."
         },
         {
           "id": "BKL-032",
@@ -467,7 +467,7 @@
       "itemRef": "BKL-031",
       "title": "BKL-031 Observation Planner F3",
       "date": "2026-09-14",
-      "description": "Source-neutral Solution Architecture reviewed on PR #191 technical head 43a46ac28c30badc40e4cb180ed98924ebcf74a1: AI-assisted ARB Approved with Conditions 98/100 and Release Quality Conditionally Ready. Publication CI and merge decision remain pending; provider selection and implementation are not authorized.",
+      "description": "Source-neutral F3 Solution Architecture accepted with conditions after PR #191 merge 3a79bb93c9a0925280eba5214d517107804cb13c and 9/9 post-merge workflows. ARB-191-MI01/MI02 remain implementation gates; no implementation slice is promoted.",
       "status": "active"
     }
   ]

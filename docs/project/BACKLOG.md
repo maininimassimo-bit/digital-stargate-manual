@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.13 |
+| Versione | 5.14 |
 | Stato | Active |
-| Data baseline | 14/09/2026 |
+| Data baseline | 15/09/2026 |
 
 ## 1. Scopo
 
@@ -49,7 +49,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
-| BKL-031 | P2 | Observation Planner intelligente | In Progress | BKL-015, BKL-035, meteo/SQM | Ranking target per setup e condizioni | F1/F2 ACCEPTED / POST-MERGE VERIFIED; F3 handoff PR #190 merge `2ffc77917bcd3fc25a3c5657e8f12e62c9284303`; F3 Solution Architecture and validation plan CURRENT REVIEW CANDIDATE only; provider/ADR/authority records/schema/fixture/validator/adapter/implementation/forecast/ranking/readiness/runtime not authorized |
+| BKL-031 | P2 | Observation Planner intelligente | In Progress | BKL-015, BKL-035, meteo/SQM | Ranking target per setup e condizioni | F1/F2 ACCEPTED / POST-MERGE VERIFIED; F3 handoff and source-neutral Solution Architecture ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED — NOT IMPLEMENTED via PR #190/#191; `ARB-191-MI01`/`ARB-191-MI02` remain open; no F3-A1/A2/A3/B/C, provider/ADR, real authority record, schema/fixture/validator/adapter, forecast, ranking, readiness, runtime, device command, PC/EAGLE workload or Safety Authority is authorized |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
@@ -139,7 +139,7 @@ Il repository owner ha autorizzato il solo incremento F2. Il candidate package m
 Completed baseline through BKL-037
   -> BKL-041 Scientific Data Quality Score [CLOSED]
   -> BKL-046 AI Post-Processing Assistant [CLOSED]
-  -> BKL-031 Observation Planner [F1/F2 ACCEPTED / F3 SA REVIEWED — MERGE PENDING]
+  -> BKL-031 Observation Planner [F1/F2 ACCEPTED / F3 SA ACCEPTED — IMPLEMENTATION DECISION PENDING]
   -> BKL-032 Session Readiness
   -> BKL-036 Observatory Health Score
   -> BKL-033 Digital Twin
@@ -181,3 +181,10 @@ Dopo la closure F2, F3 è promosso come handoff governato per source discovery e
 L'handoff F3 è integrato/post-merge verified tramite PR #190, technical head `5706924c07c3a9fb9d04897c0aaaec4257d514d0`, review-publication head `979523f6c65c86450f7dac8335452aac370ea834` e merge `2ffc77917bcd3fc25a3c5657e8f12e62c9284303`, con ARB 99/100, Release Quality `CONDITIONALLY READY` e 9/9 workflow post-merge. La deroga `W-BKL031-F3-HANDOFF-MERGE-001` è consumata/scaduta.
 
 Il Solution Architecture Package F3 e il validation plan sono stati valutati sulla PR #191 technical head `43a46ac28c30badc40e4cb180ed98924ebcf74a1`. ARB AI-assisted: `APPROVED WITH CONDITIONS`, 98/100; Release Quality AI-assisted: `CONDITIONALLY READY`. Le review non equivalgono ad approvazioni umane indipendenti e registrano due condizioni Minor: separazione tra digest interno del record sito e riferimento pubblico, e semantica half-open degli intervalli di validità. Restano pendenti la CI dell'head di pubblicazione e una separata autorizzazione owner per merge/ruleset. ADR/provider selection, record reali, schema/fixture/validator/adapter e implementazione restano non autorizzati.
+
+
+### BKL-031 F3 Solution Architecture acceptance — 14/09/2026
+
+La PR #191 è confluita in `main` tramite merge `3a79bb93c9a0925280eba5214d517107804cb13c` e ha completato 9/9 workflow post-merge, inclusi Pages, Developer Foundation e Governed Projection Sync. La deroga `W-BKL031-F3-SA-MERGE-001` è consumata/scaduta.
+
+Il Solution Architecture Package F3 è accettato con condizioni come baseline documentale source-neutral; BKL-031 resta `In Progress` e nessuna slice F3-A1/A2/A3/B/C è promossa. `ARB-191-MI01` e `ARB-191-MI02` restano gate obbligatori. Il prossimo passo è una decisione owner separata sull'eventuale handoff F3-A1; provider/ADR, record reali, schema/fixture/validator/adapter, forecast, ranking, readiness, runtime, PC/EAGLE e Safety Authority restano non autorizzati.

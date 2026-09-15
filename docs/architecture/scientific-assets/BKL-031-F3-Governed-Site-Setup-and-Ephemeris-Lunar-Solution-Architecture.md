@@ -3,13 +3,15 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-SA-001 |
-| Status | **PROPOSED FOR ARB / RELEASE QUALITY REVIEW — NOT ACCEPTED / NOT IMPLEMENTED** |
-| Version | 1.0 |
+| Status | **ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED — NOT IMPLEMENTED** |
+| Version | 1.1 |
 | Date | 2026-09-14 |
 | Baseline | `main` @ `2ffc77917bcd3fc25a3c5657e8f12e62c9284303` |
 | Parent handoff | `docs/architecture/assessments/BKL-031-F3-Governed-Site-Setup-Ephemeris-Lunar-Handoff-2026-09-14.md` |
 | Predecessors | BKL-031 F1/F2 — ACCEPTED / POST-MERGE VERIFIED |
 | Authority | Projection only; `action_authority=NONE`; `safety_authority=NONE` |
+| Acceptance | PR #191 merge `3a79bb93c9a0925280eba5214d517107804cb13c`; 9/9 post-merge workflows |
+| Open conditions | `ARB-191-MI01`, `ARB-191-MI02` |
 | Runtime impact | None — architecture package only |
 | PC Principale / EAGLE | No change or activity authorized |
 
@@ -436,9 +438,9 @@ This package is review-ready when:
 10. continuity, roadmap and MkDocs are reconciled;
 11. exact-head CI is successful.
 
-## 20. Explicit exclusions
+## 20. Current explicit exclusions after architecture acceptance
 
-Not authorized or delivered:
+Not authorized or delivered by the accepted architecture baseline:
 
 - accepted provider/library/kernel or ADR;
 - real site/setup authority record;
@@ -448,9 +450,22 @@ Not authorized or delivered:
 - weights, scores, thresholds, ranking, target ordering or portal consumer/F5;
 - readiness, scheduling or go/no-go/BKL-032;
 - device command, remediation or Safety Authority;
-- PC Principale/EAGLE/runtime activity;
-- ARB, Release Quality, merge or acceptance.
+- PC Principale/EAGLE/runtime activity.
 
-## 21. Governance stop
+## 21. Current governance stop after architecture acceptance
 
-Publish this package as a draft PR and verify applicable exact-head CI. Then stop. AI-assisted ARB/Release Quality reviews, merge-control decisions, merge and every implementation slice require separate repository-owner authorization.
+The architecture review, merge-control decision and PR #191 merge are complete and post-merge verified. Stop before F3-A1/A2/A3/B/C, provider/ADR selection, authority records, schema/fixture/validator/adapter work, external calls or runtime activity. Each requires a new repository-owner authorization; ARB-191-MI01 and ARB-191-MI02 remain binding.
+
+
+## 22. Acceptance record
+
+This source-neutral Solution Architecture is **ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED** through PR #191 and merge `3a79bb93c9a0925280eba5214d517107804cb13c`.
+
+Acceptance is limited to architecture direction, contracts, boundaries, migration order and validation requirements. It does not assert that site/setup authority, a provider/library/kernel, schema, fixture, validator, adapter, projection or runtime exists.
+
+Binding conditions:
+
+- `ARB-191-MI01` — separate protected internal record digests from non-correlatable public evidence references before F3-B/F3-C;
+- `ARB-191-MI02` — define half-open UTC validity intervals before F3-A1/F3-A2/F3-B.
+
+No F3 implementation slice is promoted by this acceptance. The validation plan remains not executed for implementation evidence.

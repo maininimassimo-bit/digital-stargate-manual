@@ -3,11 +3,13 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-VAL-001 |
-| Status | **PROPOSED — PLAN ONLY / NOT EXECUTED** |
-| Version | 1.0 |
+| Status | **ACCEPTED AS VALIDATION PLAN — NOT EXECUTED** |
+| Version | 1.1 |
 | Date | 2026-09-14 |
 | Contract under validation | `docs/architecture/scientific-assets/BKL-031-F3-Governed-Site-Setup-and-Ephemeris-Lunar-Solution-Architecture.md` |
 | Baseline | `main` @ `2ffc77917bcd3fc25a3c5657e8f12e62c9284303` |
+| Architecture acceptance | PR #191 merge `3a79bb93c9a0925280eba5214d517107804cb13c` |
+| Open conditions | `ARB-191-MI01`, `ARB-191-MI02` |
 | Runtime impact | None |
 | Safety impact | None |
 
@@ -209,7 +211,7 @@ For future implementation:
 | F1/F2 accepted contract and tests | VERIFIED predecessor evidence |
 | repository source inventory | VERIFIED on baseline |
 | official alternative documentation | REVIEWED for architecture comparison |
-| F3 architecture document | PROPOSED review candidate |
+| F3 architecture document | ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED — NOT IMPLEMENTED |
 | site/setup production authority | NOT MATERIALIZED |
 | provider/library ADR | NOT EXECUTED |
 | schema/fixture/validator | NOT IMPLEMENTED |
@@ -217,9 +219,9 @@ For future implementation:
 | security/privacy runtime test | NOT EXECUTED |
 | PC Principale/EAGLE OAT | NOT APPLICABLE to design; NOT AUTHORIZED for implementation |
 
-## 12. Acceptance rule
+## 12. Architecture acceptance evidence and current implementation rule
 
-The architecture package can be recommended for merge only after separately authorized ARB and Release Quality reviews and successful review-publication exact-head CI.
+The architecture-package gate was satisfied through separately authorized ARB/Release Quality reviews, successful review-publication CI, PR #191 merge and 9/9 post-merge workflows.
 
 F3 implementation cannot be recommended until:
 
@@ -241,6 +243,13 @@ This plan is not evidence that:
 - the capability is production-ready;
 - the planner can rank, recommend, schedule or declare readiness/safety.
 
-## 14. Governance stop
+## 14. Current governance stop after plan acceptance
 
-On publication of the architecture package and this plan, execute only repository documentation/CI validation. Stop before ARB, Release Quality, ADR acceptance, merge and every F3 implementation/runtime activity unless separately authorized.
+The architecture and this validation plan are accepted with conditions; their reviews and PR #191 merge are complete. Stop before remediation of implementation conditions, ADR/provider selection, authority records, schema/fixture/validator/adapter work, P01–P10/N21–N66 execution, scientific validation and every runtime activity unless separately authorized.
+
+
+## 15. Acceptance and execution boundary
+
+This document is accepted as the normative validation plan for future F3 slices. Its acceptance is not evidence that P01–P10, N21–N66, the scientific campaign, privacy tests or runtime/OAT have executed.
+
+`ARB-191-MI01` adds a mandatory public-reference non-correlation test. `ARB-191-MI02` adds explicit half-open interval boundary and adjacency cases. These conditions must be materialized in the applicable future schema/test increment before implementation acceptance.

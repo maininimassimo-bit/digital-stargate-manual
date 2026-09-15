@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 4.6 |
+| Versione | 4.7 |
 | Baseline | 14/09/2026 |
-| Stato | Current root bootstrap — BKL-031 F1/F2 accepted; F3 Solution Architecture reviewed with conditions; merge decision pending |
+| Stato | Current root bootstrap — BKL-031 F1/F2 accepted; F3 Solution Architecture accepted with conditions; implementation decision pending |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -53,13 +53,13 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - BKL-046 — AI Post-Processing Assistant: CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only con limitation;
 - BKL-031 F1 — Source Discovery and Semantic Boundary: ACCEPTED / POST-MERGE VERIFIED;
 - BKL-031 F2 — Machine-Readable Context/Source Contract and Bounded Fixtures: ACCEPTED / POST-MERGE VERIFIED via PR #188 and merge `7f861f7399079858c9744e69b6c773664b6b5b54`;
-- BKL-031 F3 handoff: integrated/post-merge verified via PR #190 and merge `2ffc77917bcd3fc25a3c5657e8f12e62c9284303`; PR #191 technical head `43a46ac28c30badc40e4cb180ed98924ebcf74a1` received owner-authorized AI-assisted ARB `APPROVED WITH CONDITIONS` 98/100 and Release Quality `CONDITIONALLY READY`; review-publication CI and merge decision remain pending.
+- BKL-031 F3 handoff and Solution Architecture: integrated/post-merge verified via PR #190/#191; PR #191 merge `3a79bb93c9a0925280eba5214d517107804cb13c` completed 9/9 workflows. The architecture is accepted with conditions; `ARB-191-MI01` and `ARB-191-MI02` remain mandatory implementation gates. No implementation slice is promoted.
 
 La closure BKL-046 non dichiara efficacia scientifica né produzione: `NOT_EVALUABLE_CURRENT_EVIDENCE`, `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`. Nessun modello/provider, automatic acceptance o PixInsight apply è autorizzato.
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA REVIEWED — MERGE PENDING] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED — IMPLEMENTATION DECISION PENDING] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -71,5 +71,5 @@ Nessun portale, planner, comparison layer, quality score o AI è Safety Authorit
 
 ## 9. Punto di partenza operativo
 
-BKL-031 F2 è ACCEPTED / POST-MERGE VERIFIED e l'handoff F3 è integrato/post-merge verified tramite PR #190. Il Solution Architecture Package F3 è stato valutato sulla PR #191 technical head `43a46ac28c30badc40e4cb180ed98924ebcf74a1`: ARB AI-assisted `APPROVED WITH CONDITIONS` 98/100 e Release Quality `CONDITIONALLY READY`, non equivalenti ad approvazioni umane indipendenti. Restano pendenti la CI dell'head di pubblicazione e una separata decisione owner su merge/ruleset. ADR/provider selection, record reali sito/setup, schema/fixture/validator/adapter, forecast, ranking, readiness, runtime, device command, workload EAGLE e Safety Authority restano non autorizzati.
+BKL-031 F1/F2 e il Solution Architecture Package F3 sono integrati/post-merge verified. PR #191 è confluita in `3a79bb93c9a0925280eba5214d517107804cb13c` con 9/9 workflow, inclusi Pages e Developer Foundation; `W-BKL031-F3-SA-MERGE-001` è consumata/scaduta. L'architettura F3 è accettata con condizioni, non implementata. Il prossimo gate è una decisione owner separata sull'eventuale F3-A1 Site Authority Contract; ADR/provider selection, record reali, schema/fixture/validator/adapter, F3-A1/A2/A3/B/C, forecast, ranking, readiness, runtime, device command, workload EAGLE e Safety Authority restano non autorizzati.
 
