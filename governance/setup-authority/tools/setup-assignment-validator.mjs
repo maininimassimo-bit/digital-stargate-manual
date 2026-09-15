@@ -192,4 +192,4 @@ async function main(){
  const publicScan=scanPublicText(await docsText(p("docs")),r,site);if(!publicScan.valid)throw new Error("PROTECTED_PUBLICATION_BOUNDARY_FAILED");
  process.stdout.write(JSON.stringify({gate:"PASS",assignmentLifecycle:"DRAFT",resolution:"UNAVAILABLE_CURRENT",detailsRedacted:true})+"\n");
 }
-if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url))main().catch(()=>{process.stderr.write("Setup assignment governance gate failed; protected details redacted.\n");process.exitCode=1;});
+if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url))main().catch(error=>{const raw=String(error?.message||"");const code=/^[A-Z0-9_,:-]+$/.test(raw)?raw:"UNCLASSIFIED_FAILURE";process.stderr.write("Setup assignment governance gate failed; protected details redacted; code="+code+"\\n");process.exitCode=1;});
