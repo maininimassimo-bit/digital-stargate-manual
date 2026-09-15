@@ -33,4 +33,5 @@ jobs:
       - name: Validate protected assignment DRAFT and authority bindings
         run: node governance/setup-authority/tools/setup-assignment-validator.mjs
       - name: Execute F3-A2 contract, privacy and mutation cases
+        if: always()
         run: node --test governance/setup-authority/tools/test-setup-assignment.mjs
