@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F1/F2 and F3 architecture are accepted/post-merge verified. F3-A1 and F3-A2 contracts are accepted with conditions. ADR-009 records the owner-authorized GitHub-governed setup authority model: Repository Owner is human Approval Authority; Architecture Office is custodian without approval power; protected records live outside docs/. DSG-SETUP-BASELINE-001 is DRAFT with payload sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8, sourced from PROJECTION_ONLY registry rows, resolver-ineligible and not published. Exact-digest owner approval/correction, F3-A1 site materialization and a separately approved CurrentSetupAssignment remain mandatory. S09 stays UNAVAILABLE_CURRENT. No schema, validator, adapter, provider/ADR, F3-A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
+          "note": "PR #199 integrated ADR-009 and the protected GitHub setup-authority DRAFT as 4e8802c80359efce28d8d75521a1b9cc4cb44b05, post-merge verified 9/9. Repository Owner is the human Approval Authority; Architecture Office is custodian without approval power. DSG-SETUP-BASELINE-001 payload sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8 is independently verified but remains DRAFT, resolver-ineligible and not published. Exact-digest human approval/correction is the active stop condition. F3-A1 site materialization and a separately approved CurrentSetupAssignment remain later gates; S09 stays UNAVAILABLE_CURRENT. No schema, validator, adapter, provider, F3-A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
         },
         {
           "id": "BKL-032",
@@ -516,7 +516,7 @@
       "itemRef": "BKL-031",
       "title": "BKL-031 F3-A2-D1 GitHub Authority and First Baseline Draft",
       "date": "2026-09-15",
-      "description": "Owner-authorized authority model recorded in ADR-009; protected first baseline payload sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8 remains DRAFT pending exact-digest approval. No assignment or runtime."
+      "description": "PR #199 merged as 4e8802c80359efce28d8d75521a1b9cc4cb44b05 and post-merge verified 9/9. ADR-009 authority model integrated; protected payload sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8 remains DRAFT pending exact-digest human approval."
     }
   ]
 }

@@ -20,6 +20,9 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [F3-A2 Contract Acceptance](BKL-031-F3-A2-SETUP-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md) | PR #197 accepted with conditions/post-merge verified; authority decision required before materialization |
 | [ADR-009 GitHub-Governed Setup Authority](../architecture/ADR-009-GitHub-Governed-Setup-Authority.md) | Owner-authorized authority model; first baseline remains DRAFT |
 | [F3-A2-D1 Authority and Baseline Draft Assessment](../architecture/assessments/BKL-031-F3-A2-D1-GitHub-Authority-and-First-Baseline-Draft-Assessment-2026-09-15.md) | Exact payload sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8; approval mandatory |
+| [F3-A2-D1 Authority and Baseline Draft Acceptance](BKL-031-F3-A2-D1-AUTHORITY-AND-BASELINE-DRAFT-ACCEPTANCE-2026-09-15.md) | PR #199 integrated/post-merge verified; exact-digest approval pending |
+| [PR #200 F3-A2-D1 Acceptance AI-Assisted ARB](../architecture/reviews/ARB-PR200-BKL-031-F3-A2-D1-Acceptance-Reconciliation-AI-Assisted-Review-2026-09-15.md) | Approved — 99/100; non equivalente ad approvazione umana indipendente |
+| [PR #200 F3-A2-D1 Acceptance AI-Assisted Release Quality](../architecture/reviews/RQ-PR200-BKL-031-F3-A2-D1-Acceptance-Reconciliation-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready; publication-head CI pending |
 | [PR #199 F3-A2-D1 AI-Assisted ARB Review](../architecture/reviews/ARB-PR199-BKL-031-F3-A2-D1-GitHub-Authority-and-Baseline-Draft-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 99/100; non equivalente ad approvazione umana indipendente |
 | [PR #199 F3-A2-D1 AI-Assisted Release Quality](../architecture/reviews/RQ-PR199-BKL-031-F3-A2-D1-GitHub-Authority-and-Baseline-Draft-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready; publication-head CI pending |
 | [PR #197 F3-A2 Contract AI-Assisted ARB Review](../architecture/reviews/ARB-PR197-BKL-031-F3-A2-Setup-Authority-Contract-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 97/100; non equivalente ad approvazione umana indipendente |
@@ -95,7 +98,7 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-031 F2: ACCEPTED / POST-MERGE VERIFIED;
 - BKL-031 F3: Solution Architecture `ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED`; closure PR #192 merged as `21524c687a1fa6a9d840a3951c7ef4fe298f9c3c`;
 - BKL-031 F3-A1: Site Authority Contract `ACCEPTED WITH CONDITIONS / RECONCILED / POST-MERGE VERIFIED / NOT IMPLEMENTED`;
-- BKL-031 F3-A2: contract accepted; ADR-009 authority model owner-authorized; first protected baseline payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8` remains DRAFT and `ARB-197-MI01-B` requires exact-digest owner approval.
+- BKL-031 F3-A2-D1: PR #199 integrated/post-merge verified; exact payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8` remains DRAFT and requires human approval.
 
 ## Sequenza governata
 

@@ -3,39 +3,35 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-BASELINE-2026-09-15 |
-| Stato | **CURRENT — F3-A2-D1 AUTHORITY DECISION / DRAFT ONLY** |
-| Repository baseline | `main@687f966fa544f7c4b31eaa29433cfa8ab48e52fe` |
-| Working branch | `docs/bkl-031-f3-a2-d1-authority-baseline-draft` |
-| Current package | `BKL-031-F3-A2-D1` |
+| Stato | **CURRENT — AUTHORITY MODEL INTEGRATED / FIRST BASELINE DRAFT** |
+| Repository baseline | `main@4e8802c80359efce28d8d75521a1b9cc4cb44b05` |
+| Current package | `BKL-031-F3-A2-D1-EXACT-DIGEST-OWNER-GATE` |
 | Runtime delta | None |
 | Data delta | Protected DRAFT only; no approved authority record |
 | Infrastructure delta | None |
 
-## 1. Integrated foundation
+## 1. Integrated state
 
-F3-A2 contract and acceptance are post-merge verified through PR #198. ADR-009 records the newly owner-authorized GitHub authority model; the target registry is `governance/setup-authority/`, outside Pages.
+PR #199 is merged/post-merge verified 9/9. ADR-009 makes GitHub the setup-authority registry, the Repository Owner the human Approval Authority and the Architecture Office the non-approving custodian. Protected records remain outside `docs/`.
 
-## 2. Candidate state
+## 2. Exact candidate
 
-`DSG-SETUP-BASELINE-001` contains two projection-sourced configuration profiles and payload digest `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`. Its lifecycle is `DRAFT`, `eligibleForResolution=false`, with no approval evidence. The validity start `2026-09-16T00:00:00Z` is proposed for owner decision.
+`DSG-SETUP-BASELINE-001` represents the owner-confirmed composite dual-OTA setup and has payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`, proposed validity `[2026-09-16T00:00:00Z, +infinity)`, explicit missing-data exceptions and lifecycle `DRAFT`.
 
-## 3. Authority and separation
-
-The Repository Owner is baseline/assignment owner and human Approval Authority. The Digital StarGate Architecture Office is custodian only. Baseline and assignment approvals remain distinct; no assistant review or CI result can replace owner approval.
-
-## 4. Dependency readiness
+## 3. Dependency readiness
 
 | Elemento | Stato |
 |---|---|
-| GitHub authority source/roles | owner-authorized via ADR-009 |
-| First payload | DRAFT / exact digest available |
-| First baseline approval | **mandatory owner decision pending** |
-| F3-A1 concrete site record | absent |
+| Authority source/roles | integrated |
+| Candidate definition | owner-confirmed |
+| Payload digest | independently verified |
+| Human exact-digest approval | **mandatory / pending** |
+| Approval receipt | absent |
+| F3-A1 site record | absent |
 | CurrentSetupAssignment | absent |
 | Schema/validator/adapter | not implemented |
 | S09 | `UNAVAILABLE_CURRENT` |
-| F3-A3/B/C | not promoted |
 
-## 5. Rollback
+## 4. Rollback
 
-Revert ADR-009 and the protected DRAFT files. No migration, deployment, credential or observatory operation exists.
+Revert PR #199; no runtime, migration, credential or observatory impact.
