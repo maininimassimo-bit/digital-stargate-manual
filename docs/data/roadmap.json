@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-15",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "c309bc5e828d35b702a46a10dd4b8a397dee3e8772b2d2d41f3852c0d297f658",
+  "sourceDigest": "e730637f355e55a9344c0215bfeaf6f728bcb218a907a9647dd4c6b21ce6cb22",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A2 — Handoff Merge Decision",
-  "target": "Publish the owner-authorized AI-assisted ARB and Release Quality reviews for PR #195, obtain exact review-publication-head CI, then require a separate owner decision for merge and the absent ruleset; no detailed F3-A2 contract or implementation is authorized",
+  "nextMilestone": "BKL-031 F3-A2 — Detailed Setup Authority Contract",
+  "target": "Produce and review the documentation-only CurrentSetupAssignment contract, resolving ARB-195-MI01 by separating AP-006 architecture authority from concrete approved baseline evidence; no materialization, schema, fixture, validator, provider, runtime or EAGLE activity",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -307,7 +307,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F1/F2 ACCEPTED / POST-MERGE VERIFIED. F3 Solution Architecture and F3-A1 are accepted with conditions; F3-A1 reconciliation PR #194 merged as 1fd771632239cdca38d7527c55b974d805ffd1b9 with 9/9 post-merge workflows. F3-A2 documentation-only Program Assessment/Handoff on PR #195 technical head 047ca2d1f208d8291d88823f4b99c401232ecd6b received owner-authorized AI-assisted ARB APPROVED WITH CONDITIONS 98/100 and Release Quality CONDITIONALLY READY FOR MERGE. ARB-195-MI01 is due before detailed contract approval; carried ARB-193-MI01, ARB-193-MI02 and ARB-191-MI01 remain later gates, and ARB-191-MI02 still requires executable tests before materialization. S08 stays UNAVAILABLE, S09 UNAVAILABLE_CURRENT and S10 UNAVAILABLE. Review-publication exact-head CI and a separate merge/ruleset decision remain pending. No detailed contract, real baseline/assignment, schema, fixture, validator, adapter, provider/ADR, F3-A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
+          "note": "F1/F2 ACCEPTED / POST-MERGE VERIFIED. F3 Solution Architecture and F3-A1 are accepted with conditions. F3-A2 Program Assessment/Handoff is accepted with conditions/post-merge verified via PR #195 and merge 8520f4272d31f5578769e8d12ac34101e1c044e8 with 9/9 workflows. DSG-AEM-001 and the conditioned W-DSG-AEM-RULESET-001 are active. The detailed F3-A2 CurrentSetupAssignment contract is dependency-ready and must resolve ARB-195-MI01 before approval. Carried ARB-193-MI01, ARB-193-MI02 and ARB-191-MI01 remain later gates; ARB-191-MI02 requires executable tests before materialization. S08 stays UNAVAILABLE, S09 UNAVAILABLE_CURRENT and S10 UNAVAILABLE. No real baseline/assignment, schema, fixture, validator, adapter, provider/ADR, F3-A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
         },
         {
           "id": "BKL-032",
@@ -586,7 +586,15 @@
       "itemRef": "BKL-031",
       "title": "BKL-031 F3-A2 Setup Authority Handoff",
       "date": "2026-09-15",
-      "description": "Documentation-only Program Assessment/Handoff reviewed on PR #195 technical head 047ca2d1f208d8291d88823f4b99c401232ecd6b: AI-assisted ARB APPROVED WITH CONDITIONS 98/100 and Release Quality CONDITIONALLY READY FOR MERGE; exact publication-head CI and separate merge/ruleset decision pending; not implemented.",
+      "description": "Program Assessment/Handoff accepted with conditions and post-merge verified via PR #195 merge 8520f4272d31f5578769e8d12ac34101e1c044e8 with 9/9 workflows; detailed CurrentSetupAssignment contract next; not implemented.",
+      "status": "active"
+    },
+    {
+      "id": "M-DSG-AEM-001",
+      "itemRef": "BKL-031",
+      "title": "DSG-AEM-001 Continuous Execution Mandate",
+      "date": "2026-09-15",
+      "description": "Owner-authorized continuous execution mandate and conditioned ruleset exception recorded; exact-head CI, applicable review, rollback, safety, privacy and post-merge gates remain mandatory.",
       "status": "active"
     }
   ]
