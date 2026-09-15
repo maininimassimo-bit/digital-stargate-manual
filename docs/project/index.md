@@ -14,6 +14,8 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [Handover 15/09/2026](HANDOVER_2026-09-15.md) | Handover corrente |
 | [Current Technical Baseline 15/09/2026](CURRENT_TECHNICAL_BASELINE_2026-09-15.md) | Baseline tecnica corrente |
 | [F3-A2 Setup Authority Program Assessment/Handoff](../architecture/assessments/BKL-031-F3-A2-Setup-Authority-Program-Assessment-and-Handoff-2026-09-15.md) | Package corrente: decisione di sequenziamento e handoff documentale |
+| [PR #195 F3-A2 Handoff AI-Assisted ARB Review](../architecture/reviews/ARB-PR195-BKL-031-F3-A2-Handoff-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 98/100; non equivalente ad approvazione umana indipendente |
+| [PR #195 F3-A2 Handoff AI-Assisted Release Quality](../architecture/reviews/RQ-PR195-BKL-031-F3-A2-Handoff-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
 | [F3-A1 Site Authority Acceptance](BKL-031-F3-A1-SITE-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md) | Acceptance con condizioni, PR #194 post-merge e transizione F3-A2 |
 | [F3-A1 Site Authority Handoff](../architecture/assessments/BKL-031-F3-A1-Site-Authority-Contract-Handoff-2026-09-15.md) | Scope e condizioni carried-forward |
 | [F3-A1 Governed Site Authority Contract](../architecture/scientific-assets/BKL-031-F3-A1-Governed-Site-Authority-Contract.md) | Contratto normativo accepted with conditions; not implemented |

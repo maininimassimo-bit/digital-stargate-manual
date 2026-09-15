@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 5.1 |
+| Versione | 5.2 |
 | Baseline | 15/09/2026 |
-| Stato | Current root bootstrap — BKL-031 F3-A1 reconciled/post-merge verified; F3-A2 Setup Authority handoff review candidate; not implemented |
+| Stato | Current root bootstrap — BKL-031 F3-A2 Setup Authority handoff ARB/RQ complete; merge decision pending; not implemented |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -55,13 +55,13 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - BKL-031 F2 — Machine-Readable Context/Source Contract and Bounded Fixtures: ACCEPTED / POST-MERGE VERIFIED via PR #188 and merge `7f861f7399079858c9744e69b6c773664b6b5b54`;
 - BKL-031 F3 handoff and Solution Architecture: ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED; PR #192 acceptance closure merged as `21524c687a1fa6a9d840a3951c7ef4fe298f9c3c` with 9/9 workflows;
 - BKL-031 F3-A1 — Site Authority Contract: ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED via PR #193; acceptance reconciliation PR #194 merged as `1fd771632239cdca38d7527c55b974d805ffd1b9` with 9/9 workflows;
-- BKL-031 F3-A2 — Setup Authority Contract: selected as documentation-only handoff review candidate; no assignment, schema, adapter or runtime exists. `ARB-193-MI01`, `ARB-193-MI02` and `ARB-191-MI01` remain implementation gates, while `ARB-191-MI02` is satisfied at normative-design level with executable tests still required.
+- BKL-031 F3-A2 — Setup Authority Contract: documentation-only handoff reviewed on PR #195 technical head `047ca2d1f208d8291d88823f4b99c401232ecd6b`; AI-assisted ARB **APPROVED WITH CONDITIONS — 98/100** and Release Quality **CONDITIONALLY READY FOR MERGE**. `ARB-195-MI01` is due before detailed contract approval; no assignment, schema, adapter or runtime exists.
 
 La closure BKL-046 non dichiara efficacia scientifica né produzione: `NOT_EVALUABLE_CURRENT_EVIDENCE`, `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`. Nessun modello/provider, automatic acceptance o PixInsight apply è autorizzato.
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2 HANDOFF REVIEW CANDIDATE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2 HANDOFF REVIEWED / MERGE DECISION PENDING] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -75,4 +75,4 @@ Nessun portale, planner, comparison layer, quality score o AI è Safety Authorit
 
 PR #194 ha riconciliato F3-A1 ed è merged in `main@1fd771632239cdca38d7527c55b974d805ffd1b9` con 9/9 workflow post-merge, inclusi Pages e Governed Projection Sync. Il waiver `W-BKL031-F3A1-ACCEPTANCE-MERGE-001` è consumato/scaduto.
 
-F3-A2 — Setup Authority Contract è il nuovo handoff documentale corrente. Il prossimo gate è la CI dell'exact head della draft PR di handoff; ARB/Release Quality, merge e progettazione dettagliata richiedono autorizzazioni separate. Real site/setup assignment, schema/fixture/validator/adapter, storage, provider/ADR, F3-A3/B/C, forecast, ranking, readiness, runtime, device command, PC/EAGLE e Safety Authority restano non autorizzati.
+F3-A2 — Setup Authority Contract è il nuovo handoff documentale corrente. Le review ARB e Release Quality AI-assistite della PR #195 sono pubblicate come valutazioni owner-authorized, non equivalenti ad approvazioni umane indipendenti. Il prossimo gate è la CI dell'exact review-publication head; merge/ruleset e progettazione dettagliata richiedono autorizzazioni separate. `ARB-195-MI01` deve essere risolta prima dell'approvazione del contratto dettagliato. Real site/setup assignment, schema/fixture/validator/adapter, storage, provider/ADR, F3-A3/B/C, forecast, ranking, readiness, runtime, device command, PC/EAGLE e Safety Authority restano non autorizzati.
