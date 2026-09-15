@@ -3,12 +3,12 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A2-VAL-001 |
-| Stato | **ACCEPTED AS VALIDATION PLAN / TESTS NOT EXECUTED** |
+| Stato | **ACCEPTED / REPOSITORY VALIDATOR AND 57 CASES IMPLEMENTED** |
 | Data | 15/09/2026 |
 | Contract | `BKL-031-F3-A2-CONTRACT-001` accepted with conditions / not implemented |
 | Review | PR #197 — ARB 97/100; Release Quality conditionally ready; post-merge 9/9 |
 | Baseline | `main@357a5edfbd39346b10a1a2d751018ff6d1dd208f` |
-| Test data | Synthetic future fixtures only |
+| Test data | Synthetic fixtures plus protected exact-reference binding on repository records |
 | Runtime / OAT | Not executed / not authorized |
 
 ## 1. Scopo
@@ -139,11 +139,17 @@ Future test sequence:
 | Area | Stato |
 |---|---|
 | Document consistency | da verificare con CI della PR |
-| Schema/fixture/validator | NOT IMPLEMENTED |
-| Positive/negative tests | NOT EXECUTED |
-| Leak tests | NOT EXECUTED |
-| Property tests | NOT EXECUTED |
+| Schema/fixture/validator | IMPLEMENTED IN F3-A2-D4 |
+| Positive/negative tests | EXECUTED — 45/45 PASS on implementation head |
+| Leak tests | EXECUTED — PASS on implementation head |
+| Property tests | EXECUTED — 6/6 PASS on implementation head |
 | Runtime/OAT | NOT EXECUTED / NOT AUTHORIZED |
 | PC/EAGLE activity | NONE |
 
 Nessun caso è dichiarato passed finché non esisteranno implementation evidence ed exact-head test output.
+
+## 10. F3-A2-D4 execution evidence
+
+The repository implementation adds the 45 planned A2 cases, six protected D4 binding/schema/privacy cases and six property/boundary cases: 57/57 passed on implementation head `96386395ff0d81d0d93e14666215296ade643a83` in workflow run `35011741820`.
+
+The protected repository DRAFT validates, binds to the two already approved authority records and remains `UNAVAILABLE_CURRENT`. Runtime/OAT remains `NOT APPLICABLE` for this repository-only increment.
