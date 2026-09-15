@@ -3,11 +3,13 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-A2-D5-SA-001 |
-| Status | **IMPLEMENTED / REVIEW CANDIDATE** |
-| Version | 1.0 |
+| Status | **ACCEPTED / POST-MERGE VERIFIED** |
+| Version | 1.1 |
 | Date | 15/09/2026 |
 | Governing ADR | ADR-009 |
 | Predecessor | F3-A2-D4 accepted/post-merge verified |
+| Exact publication head | `6947e79a53282db2a7f6d879643e51840ed9e553` |
+| Merge | `bc4307c2042a45985622044e11631421de5b2c3d` |
 | Runtime impact | None |
 
 ## Purpose
@@ -66,3 +68,9 @@ The exact digest and protected authority details are intentionally omitted from 
 - 65/65 executable cases pass;
 - public protected-literal scan passes;
 - exact-head CI, AI-assisted process-separated reviews and post-merge verification complete.
+
+## Acceptance reconciliation
+
+PR #209 completed 5/5 exact-head workflows and 7/7 post-merge workflows. Documentation governance recorded `ACCEPTED WITH OBSERVATION`; the AI-assisted, process-separated ARB recorded `APPROVED WITH CONDITIONS — 99/100`; Release Quality recorded `CONDITIONALLY READY FOR MERGE`. These reviews are not equivalent to independent human approval. No Blocker or Major remains open.
+
+The accepted state is repository authority `APPROVED/AVAILABLE` for authorized validated input. Runtime S09 remains `UNAVAILABLE_CURRENT`; no adapter, EAGLE operation, readiness/go-no-go, device command or Safety Authority change is introduced.

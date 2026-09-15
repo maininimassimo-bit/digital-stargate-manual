@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A2-VAL-001 |
-| Stato | **ACCEPTED / REPOSITORY VALIDATOR AND 57 CASES IMPLEMENTED** |
+| Stato | **ACCEPTED / REPOSITORY VALIDATOR AND 65 CASES IMPLEMENTED / POST-MERGE VERIFIED** |
 | Data | 15/09/2026 |
-| Contract | `BKL-031-F3-A2-CONTRACT-001` accepted with conditions / not implemented |
+| Contract | `BKL-031-F3-A2-CONTRACT-001` accepted with conditions; repository authority implemented, runtime adapter absent |
 | Review | PR #197 — ARB 97/100; Release Quality conditionally ready; post-merge 9/9 |
 | Baseline | `main@357a5edfbd39346b10a1a2d751018ff6d1dd208f` |
 | Test data | Synthetic fixtures plus protected exact-reference binding on repository records |
@@ -13,7 +13,7 @@
 
 ## 1. Scopo
 
-Definire la matrice di validazione del contratto logico F3-A2. I casi sono acceptance criteria futuri; questa pubblicazione non dichiara schema, fixture, validator o test eseguiti.
+Definire e registrare la matrice di validazione del contratto logico F3-A2. I casi repository sono ora eseguiti attraverso D4/D5; adapter runtime, contract test runtime e OAT restano futuri e non autorizzati.
 
 ## 2. Preconditions future
 
@@ -146,7 +146,7 @@ Future test sequence:
 | Runtime/OAT | NOT EXECUTED / NOT AUTHORIZED |
 | PC/EAGLE activity | NONE |
 
-Nessun caso è dichiarato passed finché non esisteranno implementation evidence ed exact-head test output.
+I casi repository sono dichiarati passed esclusivamente sulla base dell'implementation evidence e degli exact-head output registrati. Runtime/OAT resta non eseguito e non autorizzato.
 
 ## 10. F3-A2-D4 execution evidence
 
@@ -160,3 +160,7 @@ The protected repository DRAFT validates, binds to the two already approved auth
 The owner-authorized D5 implementation adds a closed approval-receipt schema, a protected receipt, a separate `APPROVED` envelope and promotion validation. The assignment payload and canonical digest remain unchanged from D4.
 
 Eight D5 cases cover receipt schema validity, approved-envelope validity, payload/digest immutability, exact promotion binding, approved-source repository resolution, payload mutation rejection, custodian/non-owner rejection and subject/validity mismatch rejection. The implementation head completed 65/65 cases in the dedicated redacted workflow. Runtime/OAT remains `NOT APPLICABLE` and S09 remains `UNAVAILABLE_CURRENT` until a separate adapter package is authorized and implemented.
+
+## 12. D5 acceptance reconciliation
+
+PR #209 exact publication head `6947e79a53282db2a7f6d879643e51840ed9e553` completed 5/5 applicable workflows; the dedicated governance run `35021526883` passed 65/65 cases. Expected-head merge `bc4307c2042a45985622044e11631421de5b2c3d` completed 7/7 post-merge workflows, including Pages. Repository validation is ACCEPTED / POST-MERGE VERIFIED. Runtime S09 remains `UNAVAILABLE_CURRENT`; adapter, runtime contract tests and OAT remain future work under a separate architecture package.

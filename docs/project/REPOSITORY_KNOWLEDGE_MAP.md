@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 4.7 |
+| Versione | 5.0 |
 | Stato | Active |
 | Data | 15/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | PR #209 F3-A2-D5 protected assignment approval/promotion review candidate |
+| Current governed package | PR #209 F3-A2-D5 accepted/post-merge verified; Program Architect successor selection current |
 
 ## 1. Scopo
 
@@ -46,11 +46,11 @@ Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimen
 
 BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`; nessun apply path o Safety Authority è autorizzato.
 
-BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integrato tramite PR #193 e riconciliato tramite PR #194. F3-A2 handoff e detailed contract sono accepted with conditions/post-merge verified via PR #195 e #197; AP-006 governance, concrete baseline evidence, current assignment e observed drift restano separati. ADR-009 governa i registri protetti. The first setup baseline and Site Authority are independently approved. PR #204 integrated the Site Authority lifecycle; PR #205 reconciled acceptance as `d5f403bbe6a39731213c372cb22296324d10b03d` with 9/9 post-merge workflows. F3-A2-D3 source, roles, separation and validity decisions are complete and stored as protected evidence. PR #207 integrated the F3-A2-D4 protected `CurrentSetupAssignment` DRAFT, closed schemas, validator and 57/57 tests. The Repository Owner subsequently approved its exact protected digest; PR #209 records the receipt and unchanged `APPROVED` envelope with 65/65 implementation tests. No runtime adapter exists: S08 is `UNAVAILABLE`, S09 is `UNAVAILABLE_CURRENT`. `ARB-204-MI01` and `ARB-204-MI02` remain preconditions for later revisions/adapters. S07/S11, F3-A3/B/C, F4 forecast, F5 ranking/consumer, BKL-032 readiness and Safety remain separate.
+BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integrato tramite PR #193 e riconciliato tramite PR #194. F3-A2 handoff e detailed contract sono accepted with conditions/post-merge verified via PR #195 e #197; AP-006 governance, concrete baseline evidence, current assignment e observed drift restano separati. ADR-009 governa i registri protetti. The first setup baseline and Site Authority are independently approved. PR #204 integrated the Site Authority lifecycle; PR #205 reconciled acceptance as `d5f403bbe6a39731213c372cb22296324d10b03d` with 9/9 post-merge workflows. F3-A2-D3 source, roles, separation and validity decisions are complete and stored as protected evidence. PR #207 integrated the F3-A2-D4 protected `CurrentSetupAssignment` DRAFT, closed schemas, validator and 57/57 tests. The Repository Owner subsequently approved its exact protected digest; PR #209 integrated the receipt and unchanged `APPROVED` envelope as `bc4307c2042a45985622044e11631421de5b2c3d`, with 65/65 tests and 7/7 post-merge workflows. Repository authority is `AVAILABLE` for authorized validated input. No runtime adapter exists: S08 is `UNAVAILABLE`, S09 is `UNAVAILABLE_CURRENT`. `ARB-204-MI01` and `ARB-204-MI02` remain preconditions for later revisions/adapters. S07/S11, F3-A3/B/C, F4 forecast, F5 ranking/consumer, BKL-032 readiness and Safety remain separate.
 
 ## 7. Roadmap sequence
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2 BASELINE APPROVED / F3-A1 SITE APPROVED / ASSIGNMENT APPROVAL-PROMOTION REVIEW / RUNTIME SEPARATE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2 BASELINE APPROVED / F3-A1 SITE APPROVED / ASSIGNMENT APPROVED-AVAILABLE IN REPOSITORY / RUNTIME ADAPTER ABSENT / SUCCESSOR SELECTION] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 8. CI/CD e publishing
 
@@ -107,6 +107,7 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 4.7 | 15/09/2026 | PR #205 reconciliation verified; F3-A2-D3 owner decisions complete and F3-A2-D4 DRAFT handoff next |
 | 4.8 | 15/09/2026 | PR #207 D4 protected DRAFT accepted/post-merge verified; mandatory human exact-digest approval next |
 | 4.9 | 15/09/2026 | Exact-digest assignment approval received; PR #209 receipt/promotion review candidate with 65/65 implementation tests |
+| 5.0 | 15/09/2026 | PR #209 D5 accepted/post-merge verified; repository authority AVAILABLE; runtime adapter absent; successor selection current |
 
 ## F3-A2-D4 acceptance checkpoint — 15/09/2026
 
@@ -115,4 +116,4 @@ PR #207 merged as `e99e6b5ff5ea7247ee447a1c6c62dcaa479dee1b` after 5/5 exact-hea
 
 ## F3-A2-D5 approval checkpoint — 15/09/2026
 
-PR #209 is the bounded protected receipt/promotion candidate following explicit owner approval. It retains the historical DRAFT, preserves the assignment payload/digest, adds closed receipt validation and resolves `AVAILABLE` only in the repository-authority test boundary with approved sources. Runtime S09 remains `UNAVAILABLE_CURRENT`; adapter, EAGLE and Safety Authority are outside scope.
+PR #209 is ACCEPTED / POST-MERGE VERIFIED at merge `bc4307c2042a45985622044e11631421de5b2c3d`. It retains the historical DRAFT, preserves the assignment payload/digest, integrates the protected receipt and resolves `AVAILABLE` only in repository authority for authorized validated input with approved sources. The 65-case suite and all 7 post-merge workflows passed. Runtime S09 remains `UNAVAILABLE_CURRENT`; adapter, EAGLE and Safety Authority are outside scope.

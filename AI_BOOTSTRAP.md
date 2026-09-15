@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 6.4 |
+| Versione | 6.5 |
 | Baseline | 15/09/2026 |
-| Stato | Current root bootstrap — PR #209 F3-A2-D5 approval/promotion review candidate |
+| Stato | Current root bootstrap — PR #209 F3-A2-D5 ACCEPTED / POST-MERGE VERIFIED; repository authority AVAILABLE; runtime S09 unavailable |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -63,14 +63,14 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - BKL-031 F3-A1-M4 acceptance reconciliation — PR #205 merged as `d5f403bbe6a39731213c372cb22296324d10b03d` with 9/9 post-merge workflows;
 - BKL-031 F3-A2-D3 — source, roles, separation and validity decisions are complete and integrated via PR #206;
 - BKL-031 F3-A2-D4 — protected resolver-ineligible DRAFT, closed schemas, validator and 57-case suite are ACCEPTED / POST-MERGE VERIFIED via PR #207 and merge `e99e6b5ff5ea7247ee447a1c6c62dcaa479dee1b`;
-- BKL-031 F3-A2-D5 — exact-digest owner approval received; protected receipt, unchanged APPROVED envelope and 65-case suite are review candidate in PR #209;
+- BKL-031 F3-A2-D5 — protected receipt and unchanged APPROVED envelope are ACCEPTED / POST-MERGE VERIFIED via PR #209 and merge `bc4307c2042a45985622044e11631421de5b2c3d`; exact-head CI passed 5/5, the suite passed 65/65 and post-merge workflows passed 7/7;
 - Governance: `DSG-AEM-001` and `W-DSG-AEM-RULESET-001` are ACTIVE / POST-MERGE VERIFIED via PR #196 and merge `357a5edfbd39346b10a1a2d751018ff6d1dd208f`, with 9/9 workflows.
 
 La closure BKL-046 non dichiara efficacia scientifica né produzione: `NOT_EVALUABLE_CURRENT_EVIDENCE`, `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`. Nessun modello/provider, automatic acceptance o PixInsight apply è autorizzato.
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2 BASELINE APPROVED / F3-A1 SITE APPROVED / ASSIGNMENT DRAFT INTEGRATED / APPROVAL-PROMOTION REVIEW] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2 BASELINE APPROVED / F3-A1 SITE APPROVED / ASSIGNMENT APPROVED-AVAILABLE IN REPOSITORY / RUNTIME ADAPTER ABSENT / SUCCESSOR SELECTION] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -82,9 +82,11 @@ Nessun portale, planner, comparison layer, quality score o AI è Safety Authorit
 
 ## 9. Punto di partenza operativo
 
-PR #207 merged as `e99e6b5ff5ea7247ee447a1c6c62dcaa479dee1b` and is the verified repository baseline, with 7/7 post-merge workflows including GitHub Pages. The protected Site Authority and setup baseline remain independently APPROVED; protected values stay outside public documentation and logs.
+PR #209 merged with expected-head control as `bc4307c2042a45985622044e11631421de5b2c3d` after 5/5 exact-head workflows, Documentation `ACCEPTED WITH OBSERVATION`, ARB `APPROVED WITH CONDITIONS — 99/100` and Release Quality `CONDITIONALLY READY FOR MERGE`. All 7 applicable post-merge workflows, including GitHub Pages, completed `SUCCESS`.
 
-`BKL-031-F3-A2-D4` is ACCEPTED / POST-MERGE VERIFIED. A protected `CurrentSetupAssignment` DRAFT now exists with closed schemas, canonical identity, exact protected bindings, deterministic fail-closed resolution and 57/57 executable cases. It is not approved or resolver-eligible: S08 remains `UNAVAILABLE`; S09 remains `UNAVAILABLE_CURRENT`. Runtime, EAGLE and Safety Authority remain separate.
+`BKL-031-F3-A2-D5` is ACCEPTED / POST-MERGE VERIFIED. The protected receipt is integrated, the historical DRAFT remains immutable and the separate `APPROVED` envelope preserves the assignment payload and digest. The repository authority resolves `AVAILABLE` only for authorized validated input with approved source authorities. S08 remains `UNAVAILABLE`; runtime S09 remains `UNAVAILABLE_CURRENT` because no adapter exists.
+
+The current action is Program Architect selection of the next dependency-ready package. Any runtime adapter requires a separate architecture package, satisfaction of `ARB-204-MI02`, exact-head review and explicit compliance with the no-EAGLE/no-command/no-readiness/no-Safety-Authority boundary.
 
 ## F3-A2-D4 acceptance checkpoint — 15/09/2026
 
@@ -93,4 +95,4 @@ The AI-assisted process-separated reviews recorded Documentation `ACCEPTED WITH 
 
 ## F3-A2-D5 approval checkpoint — 15/09/2026
 
-The Repository Owner explicitly approved the exact protected assignment digest and unbounded validity from the setup-baseline effective start. PR #209 records the protected receipt and separate unchanged `APPROVED` envelope. The implementation head passed the redacted governance gate with 65/65 tests. Repository-authority resolution is eligible only for authorized validated input; runtime S09 remains `UNAVAILABLE_CURRENT`, and runtime, EAGLE and Safety Authority remain separate.
+PR #209 is ACCEPTED / POST-MERGE VERIFIED at merge `bc4307c2042a45985622044e11631421de5b2c3d`. The protected receipt and separate unchanged `APPROVED` envelope are integrated; 65/65 executable cases and all 7 post-merge workflows passed. Repository-authority resolution is `AVAILABLE` only for authorized validated input. Runtime S09 remains `UNAVAILABLE_CURRENT`; no adapter, EAGLE operation, readiness/go-no-go, device command or Safety Authority change exists.
