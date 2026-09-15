@@ -3,15 +3,15 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-A3-SOLUTION-001 |
-| Status | **PROPOSED / REVIEW CANDIDATE — DECISION PENDING / NOT IMPLEMENTED** |
-| Version | 1.0 |
+| Status | **PROPOSED — PARTIAL OWNER DECISION RECORDED / F3-OD05 PENDING / NOT IMPLEMENTED** |
+| Version | 1.1 |
 | Date | 2026-09-15 |
 | Capability | BKL-031 — Observation Planner intelligente |
 | Governing handoff | BKL-031-F3-A3-PROGRAM-001 |
 | Proposed ADR | ADR-010 |
-| Baseline | `main@4f76f6646769df378859fbb15147851b4d0543fe` |
+| Baseline | `main@527b298094b07e5a00317e60cab3abefed7a5759` |
 | Target release | Release 2.x planning increment |
-| Runtime / data / infrastructure delta | None |
+| Runtime / data / infrastructure delta | Repository-only Terraform and validation CI; no cloud/runtime/data mutation |
 | PC Principale / EAGLE | No action authorized |
 
 ## 1. Purpose
@@ -50,9 +50,9 @@ Out of scope:
 | F3-A1 Site Authority | repository authority APPROVED; runtime S08 remains `UNAVAILABLE` |
 | F3-A2 CurrentSetupAssignment | repository authority APPROVED/AVAILABLE for authorized validated input; runtime S09 remains `UNAVAILABLE_CURRENT` |
 | F3-OD01–F3-OD03 | resolved by ADR-009 and F3-A1/A2 lifecycle evidence |
-| F3-OD04–F3-OD10 | OPEN |
+| F3-OD04 and F3-OD06–F3-OD10 | OWNER APPROVED; exact F3-OD05 SPK remains open |
 | S10 ephemeris/lunar | `UNAVAILABLE` |
-| Provider/library/kernel | none approved |
+| Provider roles | Astropy primary, Skyfield cross-check, Horizons validation-only; exact SPK not approved |
 | Runtime adapter/cache | absent |
 | F3-B/F3-C | blocked |
 
@@ -311,21 +311,25 @@ Rollback of steps 1–2 is a reviewed Git revert. Rejection or failed spike leav
 
 ## 20. Acceptance criteria
 
-This package is review-ready when:
+This partial-decision package is review-ready when:
 
-1. all three candidates remain unselected;
-2. official-source observations are dated and distinguish observation from approval;
-3. ADR-010 exposes owner choices F3-OD04–F3-OD10;
-4. the validation plan is reproducible without real protected site data;
-5. no numeric threshold, host or request bound is invented;
-6. component/layer boundaries are source-neutral;
-7. failure behavior is deterministic and fail-closed;
-8. privacy, licensing, observability, migration and rollback are explicit;
-9. governance documents and navigation are aligned;
-10. exact-head CI and process-separated review complete.
+1. approved provider roles, thresholds, IERS policy, privacy, host and capacity values match ADR-010;
+2. F3-OD05 is visibly open and prevents execution;
+3. the validation plan is reproducible without protected site data;
+4. the Google Cloud topology is isolated from EAGLE/N.I.N.A. and has no public principal or static key;
+5. repository CI validates Terraform without authenticating or applying;
+6. failure behavior is deterministic and fail-closed;
+7. governance documents and navigation are aligned;
+8. exact-head CI and process-separated review complete.
 
 ## 21. Open issues and governance stop
 
-Open: F3-OD04–F3-OD10.
+Open: F3-OD05 exact SPK identity, coverage, provenance, notices and SHA-256.
 
-Stop after integration and post-merge verification of this documentation package. The next action is an explicit owner decision packet. No dependency installation, data/kernel download, external call, protected-site use, spike execution or runtime work is authorized.
+Stop before GCP bootstrap, authenticated plan/apply, dependency/data acquisition, external calls, protected-site use, spike execution or runtime work.
+
+## 22. Owner-decision reconciliation — 2026-09-15
+
+The owner-approved values are normative in ADR-010 and BKL-031-F3-A3-OD-2026-09-15. The repository-only Google Cloud plan is BKL-031-F3-A3-INFRA-001. Earlier language in this preparation document describing F3-OD04 and F3-OD06–F3-OD10 as undecided is superseded by those records.
+
+S10 remains `UNAVAILABLE`; no scientific evidence or production readiness is claimed.

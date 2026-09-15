@@ -3,12 +3,12 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-BASELINE-2026-09-15 |
-| Stato | **CURRENT — F3-A3 DECISION-PREPARATION REVIEW CANDIDATE** |
-| Repository baseline | `main@4f76f6646769df378859fbb15147851b4d0543fe` |
-| Current package | `BKL-031-F3-A3-SOLUTION-001` + proposed `ADR-010` + `BKL-031-F3-A3-VAL-001` |
+| Stato | **CURRENT — F3-A3 PARTIAL OWNER DECISION / REPOSITORY-ONLY GCP SCAFFOLDING** |
+| Repository baseline | `main@527b298094b07e5a00317e60cab3abefed7a5759` |
+| Current package | Partial ADR-010 decision + BKL-031-F3-A3-INFRA-001 + Terraform validation scaffolding |
 | Runtime delta | None |
 | Data delta | None; no provider artifact, SPK, IERS data or protected-site payload acquired |
-| Infrastructure delta | None |
+| Infrastructure delta | Source only; Terraform/GitHub workflow added, no GCP resource created |
 
 ## 1. Integrated state
 
@@ -62,3 +62,7 @@ Program selection only: candidate comparison, ADR structure and validation-spike
 ## F3-A3 decision-preparation delta
 
 Documentation only. The package records observed official-source versions, candidate roles, owner decision fields, source-neutral components and a not-executed spike plan. It introduces no dependency, kernel, time data, remote request, host, schema, adapter, cache, runtime or EAGLE change. ADR-010 remains Proposed and S10 remains `UNAVAILABLE`.
+
+## F3-A3 partial decision / infrastructure-source delta
+
+Repository source now defines a dedicated `europe-west8` Cloud Run Job profile, WIF bootstrap, private state/data/evidence buckets, private VPC without NAT, Artifact Registry and validation-only CI. No cloud authentication, plan, apply, image, SPK, IERS artifact or job exists from this package. F3-OD05 remains open and S10 remains `UNAVAILABLE`. Existing N.I.N.A./EAGLE identities and resources are untouched.

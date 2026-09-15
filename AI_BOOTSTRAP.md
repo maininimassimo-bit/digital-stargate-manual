@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 6.7 |
+| Versione | 6.8 |
 | Baseline | 15/09/2026 |
-| Stato | Current root bootstrap — F3-A3 decision-preparation review candidate; ADR-010 proposed; owner decision pending |
+| Stato | Current root bootstrap — F3-A3 partial owner decision; repository-only GCP scaffolding; F3-OD05 pending |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -86,7 +86,7 @@ PR #209 merged with expected-head control as `bc4307c2042a45985622044e11631421de
 
 `BKL-031-F3-A2-D5` is ACCEPTED / POST-MERGE VERIFIED. The protected receipt is integrated, the historical DRAFT remains immutable and the separate `APPROVED` envelope preserves the assignment payload and digest. The repository authority resolves `AVAILABLE` only for authorized validated input with approved source authorities. S08 remains `UNAVAILABLE`; runtime S09 remains `UNAVAILABLE_CURRENT` because no adapter exists.
 
-PR #211 integrated the F3-A3 Program Assessment/Handoff as `4f76f6646769df378859fbb15147851b4d0543fe` with 9/9 post-merge workflows. The current review candidate contains BKL-031-F3-A3-SOLUTION-001, proposed ADR-010 and BKL-031-F3-A3-VAL-001. It prepares, but does not close, F3-OD04–F3-OD10. No provider, library, kernel, threshold, host, external call or runtime is selected.
+PR #212 integrated the F3-A3 decision-preparation package as `527b298094b07e5a00317e60cab3abefed7a5759`. The owner then approved F3-OD04 and F3-OD06–F3-OD10. F3-OD05 exact SPK remains open. The current increment prepares repository-only Terraform/WIF and validation CI for an isolated Cloud Run Job; no cloud resource, artifact or runtime is created.
 
 ## F3-A2-D4 acceptance checkpoint — 15/09/2026
 
@@ -106,3 +106,7 @@ F3-A3 is the current documentation-only handoff. The specialist package must com
 ## F3-A3 decision-preparation checkpoint — 15/09/2026
 
 Official candidate sources were refreshed. The conditional recommendation is local/offline primary evaluation, explicit local cross-check and Horizons only as a restricted validation reference unless privacy approval permits otherwise. ADR-010 remains `PROPOSED`; all spike cases are `NOT EXECUTED`; S10 remains `UNAVAILABLE`. The next mandatory gate after package integration is explicit owner disposition of F3-OD04–F3-OD10.
+
+## F3-A3 partial owner decision and GCP scaffolding — 15/09/2026
+
+Normative records are ADR-010, BKL-031-F3-A3-OD-2026-09-15 and BKL-031-F3-A3-INFRA-001. Continue only with repository review/CI. Stop before GCP bootstrap or apply, package/SPK/IERS acquisition, image push, Horizons traffic, protected-site processing or spike execution. The next owner action is F3-OD05 exact SPK selection. S10 remains `UNAVAILABLE`.

@@ -3,12 +3,12 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-A3-VAL-001 |
-| Status | **PROPOSED VALIDATION PLAN — NOT EXECUTED / NOT AUTHORIZED** |
-| Version | 1.0 |
+| Status | **APPROVED PROFILE / F3-OD05 PENDING — NOT EXECUTED / NOT AUTHORIZED** |
+| Version | 1.1 |
 | Date | 2026-09-15 |
 | Architecture | BKL-031-F3-A3-SOLUTION-001 |
 | Proposed ADR | ADR-010 |
-| Baseline | `main@4f76f6646769df378859fbb15147851b4d0543fe` |
+| Baseline | `main@527b298094b07e5a00317e60cab3abefed7a5759` |
 | Runtime / PC Principale / EAGLE | None |
 
 ## 1. Objective
@@ -29,7 +29,7 @@ All must be satisfied before execution:
 - external access is disabled unless separately authorized;
 - rollback and evidence destination are approved.
 
-Until then, every case is `NOT EXECUTED`.
+F3-OD04 and F3-OD06–F3-OD10 are recorded. F3-OD05 remains open, so every case is `NOT EXECUTED`. The IERS snapshot must be pinned by SHA-256, no more than 30 days old at campaign preparation, with execution-time auto-download disabled and fail-closed coverage checks.
 
 ## 3. Candidate manifests to prepare after authorization
 
@@ -53,16 +53,16 @@ Observed versions are decision inputs, not approved pins. Refresh them immediate
 
 ## 5. Grid dimensions
 
-The owner must set exact maxima before execution.
+The owner-approved maxima below are normative. The grid generator must enforce both per-axis and aggregate bounds before allocation.
 
 | Dimension | Required coverage | Bound |
 |---|---|---|
-| target declination | representative north/equatorial/south targets | F3-OD10 |
-| hour angle | rise/set vicinity, transit and off-meridian | F3-OD10 |
-| lunar geometry | multiple phases and separations | F3-OD10 |
-| date | normal dates, time-data boundary, kernel boundaries | F3-OD10 |
-| site | synthetic latitude/longitude/elevation classes | F3-OD10 |
-| refraction | airless baseline; refracted only as separate profile | F3-OD10 |
+| target declination | representative north/equatorial/south targets | max 50 targets |
+| hour angle | rise/set vicinity, transit and off-meridian | max 2,016 instants per target |
+| lunar geometry | multiple phases and separations | aggregate target×instant pairs ≤10,000 |
+| date | normal dates, time-data boundary, kernel boundaries | span ≤7 days; grid step ≥1 minute |
+| site | synthetic latitude/longitude/elevation classes | synthetic/generalized only |
+| refraction | airless baseline; refracted only as separate profile | airless only in this campaign |
 | failure mutation | dependency/data/time/cache/provider errors | bounded case list |
 
 The grid generator must reject expansion beyond the accepted manifest.
@@ -71,13 +71,13 @@ The grid generator must reject expansion beyond the accepted manifest.
 
 | Metric | Calculation | Owner threshold |
 |---|---|---|
-| altitude difference | absolute angular difference in arcseconds | `E_alt` |
-| azimuth difference | circular angular difference in arcseconds | `E_az` |
-| transit difference | absolute time difference in seconds | `E_transit` |
-| target–Moon separation difference | absolute angular difference in arcseconds | `E_sep` |
-| lunar illumination difference | absolute fraction difference | `E_illum` |
-| repeatability | same normalized input/profile across repeated executions | `E_repeat` |
-| performance | duration and peak resource observations | F3-OD09 budget |
+| altitude difference | absolute angular difference in arcseconds | ≤60 arcsec at altitude ≥5° |
+| azimuth difference | circular angular difference in arcseconds | ≤60 arcsec for altitude 5°–85°; above 85° use spherical separation ≤60 arcsec |
+| transit difference | absolute time difference in seconds | ≤5 seconds |
+| target–Moon separation difference | absolute angular difference in arcseconds | ≤60 arcsec |
+| lunar illumination difference | absolute fraction difference | ≤0.001 |
+| repeatability | same normalized input/profile across repeated executions | identical normalized output |
+| performance | duration and peak resource observations | Cloud Run task ≤120 s, 2 vCPU/2 GiB, zero retries; service profile p95 ≤5 s and hard timeout 15 s |
 
 Each metric passes independently. No average or weighted score is permitted.
 
@@ -203,12 +203,12 @@ Every run records:
 | architecture/ADR traceability | DEFINED | exact accepted ADR |
 | package/data pins | NOT SELECTED | manifests and hashes |
 | license/provenance | REVIEWED AT SOURCE LEVEL | exact artifact review |
-| scientific error budget | OWNER DECISION REQUIRED | accepted per-metric values |
-| synthetic grid | DEFINED / UNBOUNDED | accepted limits and fixture digest |
+| scientific error budget | OWNER APPROVED | ADR-010 per-metric thresholds |
+| synthetic grid | OWNER BOUNDED | 50 targets; 2,016 instants/target; 10,000 pairs; 7 days; 1-minute minimum step; 256 KiB request |
 | candidate execution | NOT EXECUTED | normalized result evidence |
 | independent reference | NOT SELECTED | accepted reference and vectors |
 | failure/privacy tests | NOT EXECUTED | A3-N01–N24 results |
-| performance/resource | NOT EXECUTED | measurements against F3-OD09 |
+| performance/resource | PROFILE APPROVED / NOT EXECUTED | Cloud Run Job europe-west8, 2 vCPU, 2 GiB, one task, one parallelism, 120 s, zero retries |
 | runtime/OAT | NOT AUTHORIZED | not part of spike |
 
 ## 15. Acceptance criteria
@@ -236,4 +236,10 @@ All stages V1–V5 and cases A3-P01–P10/A3-N01–N24 are `NOT EXECUTED`. Only 
 
 ## 18. Governance stop
 
-Stop before owner dispositions and separate spike authorization. This plan does not authorize installation, download, network calls, real-site use, host selection, tests, schema, adapter or runtime work.
+Stop before F3-OD05 closure, GCP bootstrap, authenticated plan/apply and separate spike authorization. This plan does not authorize installation, download, network calls, protected-site use, execution, schema, adapter or runtime work.
+
+## 19. Approved execution and request envelope
+
+The future local campaign uses a dedicated Cloud Run Job in `europe-west8`, an immutable image digest, 2 vCPU, 2 GiB, task count 1, parallelism 1, 120-second timeout and zero retries. The runtime identity reads a private data bucket and creates objects in a separate private evidence bucket. The job has no EAGLE, N.I.N.A. or observatory-control dependency.
+
+The serialized request is limited to 256 KiB and concurrency to two requests. Capacity rejection occurs before expansion or allocation. Public internet egress is denied in the local job profile. Horizons, if separately authorized, uses another reviewed profile and only geocentric or synthetic/generalized site inputs.

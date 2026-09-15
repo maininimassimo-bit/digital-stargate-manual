@@ -44,7 +44,9 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [F3-A3 Method ADR and Validation Spike Program Handoff](../architecture/assessments/BKL-031-F3-A3-Ephemeris-Lunar-Method-ADR-and-Validation-Spike-Program-Assessment-and-Handoff-2026-09-15.md) | Current documentation-only handoff; no provider selected, S10 unavailable |
 | [F3-A3 Method Decision Preparation](../architecture/scientific-assets/BKL-031-F3-A3-Ephemeris-Lunar-Method-Decision-Preparation.md) | Current Solution Architecture review candidate; owner decision pending |
 | [ADR-010 Ephemeris/Lunar Method and Validation Profile](../architecture/ADR-010-Ephemeris-Lunar-Method-and-Validation-Profile.md) | Proposed; no method selected |
-| [F3-A3 Method Validation Spike Plan](../architecture/validation/BKL-031-F3-A3-Ephemeris-Lunar-Method-Validation-Spike-Plan.md) | Proposed and not executed |
+| [F3-A3 Method Validation Spike Plan](../architecture/validation/BKL-031-F3-A3-Ephemeris-Lunar-Method-Validation-Spike-Plan.md) | Approved profile; F3-OD05 pending; not executed |
+| [F3-A3 Owner Decision Record](BKL-031-F3-A3-OWNER-DECISION-RECORD-2026-09-15.md) | Partial owner decision; F3-OD05 open |
+| [F3-A3 Google Cloud Hosting Plan](../architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md) | Repository scaffolding only; bootstrap not executed |
 | [PR #195 F3-A2 Handoff AI-Assisted ARB Review](../architecture/reviews/ARB-PR195-BKL-031-F3-A2-Handoff-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 98/100; non equivalente ad approvazione umana indipendente |
 | [PR #195 F3-A2 Handoff AI-Assisted Release Quality](../architecture/reviews/RQ-PR195-BKL-031-F3-A2-Handoff-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
 | [F3-A1 Site Authority Acceptance](BKL-031-F3-A1-SITE-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md) | Acceptance con condizioni, PR #194 post-merge e transizione F3-A2 |
@@ -120,7 +122,8 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-031 F3-A1-M4 acceptance reconciliation: PR #205 merged/post-merge verified 9/9;
 - BKL-031 F3-A2-D3: source, roles, separation and validity decisions complete and integrated;
 - BKL-031 F3-A2-D4: protected DRAFT integrated and retained as immutable history;
-- BKL-031 F3-A2-D5: ACCEPTED / POST-MERGE VERIFIED via PR #209 and merge `bc4307c2042a45985622044e11631421de5b2c3d`; repository authority AVAILABLE for authorized validated input; S08 remains `UNAVAILABLE`, runtime S09 remains `UNAVAILABLE_CURRENT`.
+- BKL-031 F3-A2-D5: ACCEPTED / POST-MERGE VERIFIED via PR #209 and merge `bc4307c2042a45985622044e11631421de5b2c3d`; repository authority AVAILABLE for authorized validated input; S08 remains `UNAVAILABLE`, runtime S09 remains `UNAVAILABLE_CURRENT`;
+- BKL-031 F3-A3: partial owner decision recorded; F3-OD04 and F3-OD06–F3-OD10 approved; F3-OD05 open; Google Cloud Terraform is source-only and S10 remains `UNAVAILABLE`.
 
 ## Sequenza governata
 

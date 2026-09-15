@@ -2,124 +2,123 @@
 
 | Field | Value |
 |---|---|
-| Status | **PROPOSED — OWNER DECISION REQUIRED / NOT IMPLEMENTED** |
+| Status | **PROPOSED — PARTIAL OWNER DECISION RECORDED / F3-OD05 PENDING / NOT IMPLEMENTED** |
 | Date | 2026-09-15 |
 | Release | Release 2.x planning increment |
 | Capability | BKL-031 F3-A3 |
-| Baseline | `main@4f76f6646769df378859fbb15147851b4d0543fe` |
+| Baseline | `main@527b298094b07e5a00317e60cab3abefed7a5759` |
 | Decision authority | Repository Owner after evidence and ARB review |
 | Runtime impact | None until separately authorized |
 
 ## Context
 
-F3-A1 and F3-A2 have completed repository authority, but S08/S09 remain unavailable to runtime and S10 remains `UNAVAILABLE`. The accepted F3 architecture requires a provider/library, scientific-data, error-budget, time-data, privacy, host and request-bound decision before any ephemeris/lunar implementation.
+F3-A1 and F3-A2 have completed repository authority, but S08/S09 remain unavailable to runtime and S10 remains `UNAVAILABLE`. The owner approved the prudent method, accuracy, time-data, host and capacity baseline. One material decision remains open: the exact JPL SPK artifact, coverage, provenance and checksum.
 
-The Program Architect authorized a decision-preparation package, not provider selection or spike execution.
+This ADR therefore records a partial owner decision and authorizes repository-only infrastructure scaffolding. It does not authorize cloud resource creation, artifact acquisition, spike execution or runtime integration.
 
 ## Decision drivers
 
 - reproducibility and exact artifact identity;
-- sufficient scientific accuracy for an owner-approved planner use case;
-- local/offline determinism where practical;
-- explicit frame/time/refraction semantics;
+- sufficient scientific accuracy for planner evidence;
+- local/offline determinism;
+- explicit frame, time and refraction semantics;
 - protected site privacy;
 - independent validation;
-- bounded resource use;
-- replaceable adapters behind one source-neutral port;
+- bounded resource use and cost;
 - fail-closed behavior and no silent fallback;
-- license and redistribution compliance.
+- no EAGLE, N.I.N.A. or Safety Authority coupling.
 
-## Considered options
+## Recorded owner dispositions
 
-### Option A — Astropy local primary candidate
-
-Observed decision baseline: Astropy 8.0.1, jplephem 2.24 and a future governed JPL SPK.
-
-Benefits: explicit units, frames, time and Earth location; broad astronomy ecosystem.
-
-Costs/risks: Python >=3.11; IERS and kernel acquisition; refraction and frame policy must be pinned; artifact set is larger.
-
-### Option B — Skyfield local primary candidate
-
-Observed decision baseline: Skyfield 1.55 and a future governed JPL SPK.
-
-Benefits: direct timescale/topos model, SPK visibility and almanac functions.
-
-Costs/risks: separate dependency/convention mapping; independent validation remains necessary; kernel/time-data governance still applies.
-
-### Option C — Horizons remote primary
-
-Benefits: official observer/vector service and explicit output controls.
-
-Costs/risks: external availability, service/parser drift, HTTP 200 semantic errors, exact-site transmission, retention/terms and weaker offline determinism.
-
-### Option D — No selection
-
-S10 remains `UNAVAILABLE`; no spike or implementation proceeds.
-
-## Proposed decision hypothesis
-
-For owner consideration only:
-
-- choose one local library as primary;
-- use the other local implementation as an explicit cross-check, not runtime fallback;
-- allow Horizons only as an optional validation reference using geocentric or synthetic/generalized sites unless exact-site transmission is separately approved;
-- use an exact, checksummed JPL SPK with approved coverage;
-- use an exact, freshness-governed IERS/EOP snapshot;
-- execute only on an authorized off-EAGLE host;
-- reject any unbounded request profile.
-
-**No option is selected by this ADR version.**
-
-## Required owner dispositions
-
-| ID | Required exact decision | Current value |
+| ID | Recorded disposition | State |
 |---|---|---|
-| F3-OD04 | primary library/version; secondary/reference roles | PENDING |
-| F3-OD05 | kernel/data artifact, coverage, provenance and checksum policy | PENDING |
-| F3-OD06 | per-metric scientific error budget and independent reference | PENDING |
-| F3-OD07 | IERS/EOP/leap-second version and freshness/update policy | PENDING |
-| F3-OD08 | cache/retention, license/notice and external-site privacy policy | PENDING |
-| F3-OD09 | authorized execution host and resource/performance budget | PENDING |
-| F3-OD10 | maximum targets, instants, date span and request size | PENDING |
+| F3-OD04 | Astropy 8.0.1 is the local primary candidate; jplephem 2.24 supports the governed SPK; Skyfield 1.55 is an explicit local implementation cross-check; Horizons API v1.3 is validation-only and never a runtime fallback | APPROVED |
+| F3-OD05 | One exact local JPL SPK with declared target/time coverage, authoritative provenance, license/notice review and SHA-256 | **PENDING exact artifact, coverage and checksum** |
+| F3-OD06 | geometric airless altitude ≤60 arcsec at altitude ≥5°; azimuth ≤60 arcsec for 5°–85°; above 85° use spherical separation ≤60 arcsec; target–Moon separation ≤60 arcsec; transit/culmination ≤5 s; lunar illumination absolute difference ≤0.001; rise/set geometric ≤60 s when included; each vector and metric passes independently; no averaging | APPROVED |
+| F3-OD07 | pinned IERS-A snapshot with SHA-256; at most 30 days old when campaign is prepared; `auto_download=false` during execution; fail closed outside coverage; refresh through a governed campaign revision | APPROVED POLICY |
+| F3-OD08 | no protected exact-site value in repository, logs or external requests; spike uses synthetic/generalized sites only; Horizons receives geocentric or synthetic/generalized inputs; local artifacts remain private; notices and retention are recorded | APPROVED |
+| F3-OD09 | Google Cloud Run Job in `europe-west8`; immutable image digest; 2 vCPU, 2 GiB; task count 1, parallelism 1; 120 s task timeout; zero retries; dedicated service accounts; private buckets; no EAGLE/N.I.N.A./cupola access | APPROVED |
+| F3-OD10 | max 50 targets; max 2,016 instants per target; max 10,000 target×instant pairs; max 7-day span; minimum grid step 1 minute; request ≤256 KiB; max concurrency 2; service-profile p95 ≤5 s after warm-up and hard timeout 15 s; spike batch bounded by the 120 s task timeout | APPROVED |
+
+## Method profile
+
+The selected roles are fixed for the future spike. Exact dependency artifacts, container image digest, IERS snapshot identity and the F3-OD05 SPK identity must be recorded in the campaign manifest before execution.
+
+Astropy and Skyfield using the same SPK are an implementation cross-check, not data-model independence. Horizons may be used only as a separately authorized validation reference and only with non-protected location inputs.
+
+## Scientific semantics
+
+- altitude and azimuth are geometric/airless;
+- pressure is zero for the accepted baseline;
+- UTC is the normalized input time scale and all conversion data is pinned;
+- azimuth is not evaluated as a scalar near zenith; spherical separation is used above 85° altitude;
+- refraction is outside this baseline and requires a separate profile;
+- any unexplained over-budget vector blocks acceptance.
+
+## Hosting decision
+
+The validation host profile is a dedicated Cloud Run Job, not a VM and not EAGLE. The Google Cloud project may already host the N.I.N.A. plugin, but this profile shares no runtime identity, secret, bucket, route, queue or authorization with it.
+
+Repository infrastructure:
+
+- bootstrap module: APIs, service accounts, Workload Identity Federation and private buckets;
+- platform module: Artifact Registry, private VPC/subnet and the Cloud Run Job;
+- GitHub workflow: formatting, static policy and Terraform validation only;
+- no service-account key;
+- no `allUsers` or `allAuthenticatedUsers`;
+- no public network egress for the local profile because all traffic uses a VPC without Cloud NAT.
 
 ## Decision
 
-`NO_DECISION_RECORDED`.
+`PARTIAL_OWNER_DECISION_RECORDED`.
 
-ADR-010 remains Proposed. S10 remains `UNAVAILABLE`. Presence or merge of this file cannot be interpreted as provider approval.
+F3-OD04 and F3-OD06–F3-OD10 are approved as recorded above. F3-OD05 remains open. ADR-010 remains Proposed and S10 remains `UNAVAILABLE`.
+
+Authorized now:
+
+- repository-only Terraform and CI scaffolding;
+- static validation and documentation review;
+- preparation of a later WIF-based authenticated plan.
+
+Not authorized now:
+
+- Terraform apply or any GCP mutation;
+- acquisition/upload of packages, SPK or IERS artifacts;
+- container build/push;
+- Cloud Run execution;
+- Horizons call;
+- protected-site use;
+- runtime adapter, F3-B/F3-C, EAGLE or N.I.N.A. change.
 
 ## Consequences
 
 ### Positive
 
-- owner choices are atomic and reviewable;
-- method selection cannot be inferred from adapter order;
-- privacy and scientific thresholds are explicit gates;
-- future validation evidence has a stable decision target.
+- most owner choices are exact and reviewable;
+- the future host is isolated from observatory control paths;
+- no static GCP credential is required after one-time bootstrap;
+- compute cost is pay-per-execution rather than an idle VM;
+- F3-OD05 remains an explicit fail-closed gate.
 
 ### Negative
 
-- F3-B remains blocked;
-- no ephemeris/lunar evidence can be published;
-- owner input and a separate spike increment are required.
-
-### Risks
-
-- accepting a local library without independent vectors;
-- using shared kernel agreement as proof of accuracy;
-- remote coordinate disclosure;
-- mutable dependency/data aliases;
-- one aggregate tolerance hiding directional or timing failures.
+- a one-time GCP administrator bootstrap is still required;
+- the exact SPK choice blocks plan/apply and spike execution;
+- Cloud Run cold start and regional service availability must be measured;
+- private VPC egress prevents Horizons from the local job profile.
 
 ## Migration
 
-1. owner completes F3-OD04–F3-OD10 on an exact commit;
-2. ARB reviews the completed ADR and spike authorization;
-3. dependencies/data are acquired only in an isolated authorized increment;
-4. validation evidence is recorded;
-5. ADR is Accepted or Rejected;
-6. F3-B remains blocked until acceptance conditions are satisfied.
+1. merge this partial-decision and repository-only infrastructure package;
+2. owner selects the exact F3-OD05 SPK, coverage, provenance and SHA-256;
+3. ARB and Release Quality review the completed decision profile;
+4. a GCP administrator performs the one-time bootstrap using short-lived credentials;
+5. GitHub variables are populated from bootstrap outputs;
+6. an authenticated plan/apply increment is separately reviewed;
+7. exact artifacts and immutable container are prepared;
+8. the bounded spike is executed and evidence reviewed;
+9. ADR-010 is Accepted, Rejected or remains Proposed;
+10. F3-B remains blocked until acceptance conditions are satisfied.
 
 ## Validation
 
@@ -127,29 +126,32 @@ Normative plan: `docs/architecture/validation/BKL-031-F3-A3-Ephemeris-Lunar-Meth
 
 Current evidence:
 
-- official sources reviewed on 2026-09-15;
-- repository architecture and authority state verified;
+- owner dispositions recorded on 2026-09-15;
+- Google Cloud topology and Terraform scaffolding prepared;
+- Terraform apply `NOT EXECUTED`;
 - spike and scientific campaign `NOT EXECUTED`;
-- dependency installation/download `NOT EXECUTED`;
+- dependency and scientific-data acquisition `NOT EXECUTED`;
 - privacy/runtime/OAT `NOT EXECUTED`.
 
 ## Traceability
 
 - BKL-031-F3-A3-PROGRAM-001;
 - BKL-031-F3-A3-SOLUTION-001;
-- BKL-031-F3-VAL-001;
+- BKL-031-F3-A3-OD-2026-09-15;
+- BKL-031-F3-A3-INFRA-001;
+- BKL-031-F3-A3-VAL-001;
 - ADR-009;
 - F3-OD04–F3-OD10;
 - ARB-204-MI01 and ARB-204-MI02.
 
 ## Acceptance rule
 
-ADR-010 may become Accepted only when every required owner disposition is explicit, source and artifact terms are reviewed, exact pins/checksums and coverage are recorded, the authorized validation campaign passes the owner-approved error budget, and ARB/Release Quality gates complete.
+ADR-010 may become Accepted only when F3-OD05 is exact, all package/container/data digests and coverage are recorded, the authorized campaign passes every approved metric and capacity bound, and ARB/Release Quality gates complete.
 
 ## Rollback
 
-Reject or revert ADR-010. S10 remains `UNAVAILABLE`; no runtime rollback is needed.
+Revert this repository package. No cloud or runtime rollback is needed because apply and execution remain unauthorized.
 
 ## Governance stop
 
-Stop at owner decision. This Proposed ADR does not authorize dependencies, kernels, external calls, protected-site transmission, spike execution, schemas, adapters or runtime.
+Stop before GCP bootstrap, authenticated plan/apply, artifact acquisition or spike execution. S10 remains `UNAVAILABLE`.

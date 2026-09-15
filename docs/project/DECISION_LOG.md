@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEC-001 |
-| Versione | 2.6 |
+| Versione | 2.7 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -86,3 +86,5 @@ La closure BKL-040 e la promozione dependency-driven di BKL-038 non introducono 
 | DLG-032 | 15/09/2026 | Selezionare F3-A3 Method ADR and validation spike come successore dependency-ready, iniziando da un handoff esclusivamente documentale | F3-A1/A2 hanno completato le autorità repository e F3-B dipende da una decisione metodologica accettata; il handoff prepara i gate senza scegliere provider o introdurre runtime | BKL-031 F3-A3 | Accepted | `BKL-031-F3-A3-PROGRAM-001`; PR #210; F3-OD04–F3-OD10 |
 
 | DLG-033 | 15/09/2026 | Avviare F3-A3 come decision-preparation package composto da Solution Architecture, ADR-010 proposto e validation-spike plan non eseguito | Rendere F3-OD04–F3-OD10 decision-ready senza trasformare una raccomandazione in selezione di provider o autorizzazione allo spike | BKL-031 F3-A3 | Accepted | `BKL-031-F3-A3-SOLUTION-001`; `ADR-010`; `BKL-031-F3-A3-VAL-001`; PR #211 |
+
+| DLG-034 | 15/09/2026 | Registrare la baseline prudente F3-A3 e preparare un host Google Cloud Run Job isolato tramite Terraform e GitHub OIDC/WIF, mantenendo F3-OD05 aperto | Rendere eseguibile il prossimo incremento senza chiavi statiche, costi di VM idle o accoppiamento con EAGLE/N.I.N.A.; impedire apply e spike fino al kernel esatto | BKL-031 F3-A3 | Partially Accepted | `ADR-010`; `BKL-031-F3-A3-OD-2026-09-15`; `BKL-031-F3-A3-INFRA-001` |
