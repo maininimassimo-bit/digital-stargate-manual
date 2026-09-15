@@ -3,15 +3,15 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A1-VAL-001 |
-| Stato | **ACCEPTED AS PLAN — NOT EXECUTED** |
+| Stato | **EXECUTED IN F3-A1-M2 CANDIDATE — 51/51 LOCAL PASS / EXACT-HEAD CI PENDING** |
 | Data | 15/09/2026 |
 | Contratto | BKL-031-F3-A1-CONTRACT-001 |
-| Baseline | `main@b9d08a7cf6b6287825907cab6a846b1ec70f0378` |
+| Baseline | `main@bb11f25192200655427411a46a2e18560a5d9bec` |
 | Runtime/OAT | Not Applicable |
 
 ## 1. Scopo
 
-Definire l'evidenza richiesta per accettare il contratto F3-A1 e, in futuro, per consentirne la materializzazione. I casi sono specifiche verificabili; nessun test eseguibile, fixture reale o validator è incluso in questa slice.
+Definire l'evidenza richiesta per accettare il contratto F3-A1 e consentirne la materializzazione governata. F3-A1-M2 implementa ora i 51 casi come test eseguibili, usando fixture sintetiche per le failure injection e un validator separato per il candidato protetto `DRAFT`.
 
 ## 2. Gate
 
@@ -115,9 +115,11 @@ Il design normativo confermato richiede:
 
 Release Quality della PR #193 ha concluso `CONDITIONALLY READY FOR MERGE`; la verifica post-merge è 9/9 SUCCESS. Le review erano AI-assistite e non equivalgono ad approvazioni umane indipendenti.
 
-## 9. Evidenza non prodotta
+## 9. Evidenza di esecuzione F3-A1-M2
 
-Non sono prodotti test runtime, report scientifici, OAT, coordinate reali, fixture, schema, validator, adapter, benchmark o deployment. Tutti i casi restano `NOT EXECUTED` finché una slice di materializzazione non sarà autorizzata.
+F3-A1-M2 produce schema, canonicalizer, validator, fixture sintetiche e test eseguibili. L'esecuzione locale è 51/51 PASS; il workflow dedicato e gli altri gate repository sul commit esatto restano l'evidenza autorevole prima dell'integrazione. Il candidato protetto resta `DRAFT`, non è resolver-eligible e non rende disponibile S08.
 
-Il piano è accettato, ma non eseguito, tramite [Acceptance Record F3-A1](../../project/BKL-031-F3-A1-SITE-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md).
+Non sono prodotti test runtime, report scientifici, OAT, survey geodetico indipendente, adapter, benchmark o deployment. L'approvazione del digest esatto, il receipt immutabile e la promozione del lifecycle restano un incremento separato.
+
+Riferimenti: [Acceptance Record F3-A1](../../project/BKL-031-F3-A1-SITE-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md) e [F3-A1-M2 Validation Evidence](BKL-031-F3-A1-M2-Site-Authority-Materialization-Evidence-2026-09-15.md).
 

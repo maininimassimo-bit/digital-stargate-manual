@@ -4,8 +4,8 @@
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A1-M1 — Site Authority Materialization Owner Decision",
-  "target": "Owner decision on protected Site Authority, exact WGS84 facts, elevation semantics, validity, canonical resolver and public generalization policy; no site record or CurrentSetupAssignment is inferred; S08 and S09 remain unavailable",
+  "nextMilestone": "BKL-031 F3-A1-M3 — Exact-Digest Owner Approval",
+  "target": "Review and integrate the protected ineligible Site Authority DRAFT, schemas, validator and 51 executable cases; then obtain a separate owner approval of the exact canonical payload digest. CurrentSetupAssignment remains a later gate; S08 and S09 remain unavailable",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "PR #201 merged as 9932bace989565a10fd8e0d6f4a9c3b2cc057c46 and is post-merge verified 6/6. DSG-SETUP-BASELINE-001 is an approved protected baseline reference. F3-A1-M1 is the current owner decision gate for Site Authority materialization; exact site facts and authority are absent and must not be inferred. CurrentSetupAssignment remains a later separate approval gate; S08 and S09 remain unavailable. No schema, validator, adapter, provider, F3-A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
+          "note": "PR #202 merged as bb11f25192200655427411a46a2e18560a5d9bec and is the verified baseline. The first setup baseline is approved. F3-A1-M1 owner source and authority decisions are complete; F3-A1-M2 is the protected ineligible DRAFT/schema/validator/51-test review candidate. Exact-digest approval remains a separate owner gate. CurrentSetupAssignment remains later; S08 and S09 remain unavailable. No adapter, provider, F3-A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
         },
         {
           "id": "BKL-032",
@@ -516,7 +516,21 @@
       "itemRef": "BKL-031",
       "title": "BKL-031 F3-A2-D1 GitHub Authority and First Baseline Draft",
       "date": "2026-09-15",
-      "description": "PR #199 merged as 4e8802c80359efce28d8d75521a1b9cc4cb44b05 and post-merge verified 9/9. ADR-009 authority model integrated; protected payload sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8 remains DRAFT pending exact-digest human approval."
+      "description": "PR #199 merged as 4e8802c80359efce28d8d75521a1b9cc4cb44b05 and post-merge verified 9/9. ADR-009 authority model integrated; the protected setup payload entered DRAFT pending exact-digest human approval."
+    },
+    {
+      "id": "M-BKL031-F3-A2-D2",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A2-D2 Exact Setup Baseline Approval",
+      "date": "2026-09-15",
+      "description": "PR #202 merged as bb11f25192200655427411a46a2e18560a5d9bec and is post-merge verified. The owner-approved setup baseline remains distinct from Site Authority and CurrentSetupAssignment."
+    },
+    {
+      "id": "M-BKL031-F3-A1-M2",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A1-M2 Protected Site Authority Draft",
+      "date": "2026-09-15",
+      "description": "Protected ineligible Site Authority DRAFT, source decision, schemas, validator, public-boundary enforcement and 51 executable cases prepared for exact-head review. Exact-digest lifecycle approval is separate and pending."
     }
   ]
 }

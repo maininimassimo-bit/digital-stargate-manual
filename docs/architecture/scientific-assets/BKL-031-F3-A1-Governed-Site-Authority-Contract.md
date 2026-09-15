@@ -3,8 +3,8 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A1-CONTRACT-001 |
-| Versione | 1.1 |
-| Stato | **ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED — NOT IMPLEMENTED** |
+| Versione | 1.2 |
+| Stato | **ACCEPTED WITH CONDITIONS / F3-A1-M2 MATERIALIZATION CANDIDATE** |
 | Data | 15/09/2026 |
 | Capability | BKL-031 — Observation Planner intelligente |
 | Slice | F3-A1 — Site Authority Contract |
@@ -13,7 +13,7 @@
 
 ## 1. Scopo
 
-Definire il contratto source-neutral con cui il planner potrà, in un incremento futuro, risolvere il sito osservativo governato. Il contratto non crea record reali, storage, schema eseguibile o adapter e non rende S08 disponibile.
+Definire il contratto source-neutral con cui il planner potrà risolvere il sito osservativo governato. F3-A1-M2 aggiunge schema, validator, test e un record protetto `DRAFT`, ma non introduce un adapter runtime e non rende S08 disponibile.
 
 ## 2. Invarianti
 
@@ -192,20 +192,15 @@ Il rollback di F3-A1 è il revert documentale. Nessun dato, dipendenza, secret, 
 | MI01 | namespace/digest separation; enforcement futuro |
 | safety boundary | nessun readiness, command o authority operativa |
 
-## 13. Open decisions e condizioni
+## 13. Materialization decisions and carried conditions
 
-Restano aperti: formato schema, algoritmo e canonicalizzazione digest, storage, owner registry, policy di generalizzazione geografica, retention, key management e adapter. Inoltre:
+F3-A1-M2 materializes the schema shape, canonical JSON/SHA-256 method, GitHub protected registry, owner/custodian roles, municipality-level public generalization, repository-history retention, orthometric MSL elevation range, canonical internal identity and single-observatory authority scope. It also executes the 51 accepted cases and a full `docs/` protected-literal scan.
 
-- `ARB-193-MI01`: vertical reference, unità e range di `elevationM` prima di F3-B;
-- `ARB-193-MI02`: identità del resolver canonico e authority scope prima di F3-B;
-- `ARB-191-MI01`: enforcement pubblico/interno e leak tests prima di F3-B/F3-C;
-- `ARB-191-MI02`: test eseguibili interval/adjacency/boundary/overlap prima della materializzazione.
-
-La loro risoluzione non è implicita in questo contratto.
+The package proposes closure of `ARB-193-MI01`, `ARB-193-MI02`, the repository-level portion of `ARB-191-MI01`, and the executable remainder of `ARB-191-MI02`; only exact-head ARB review can close those findings. Key management and a runtime repository adapter remain future architecture decisions. Any adapter or consumer must repeat identity, privacy, audit and fail-closed validation.
 
 ## 14. Acceptance e governance stop
 
-Il contratto è accettato con condizioni come specifica documentale tramite [Acceptance Record F3-A1](../../project/BKL-031-F3-A1-SITE-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md), PR #193 e merge `b9d08a7cf6b6287825907cab6a846b1ec70f0378`. Non è implementato.
+Il contratto è accettato con condizioni tramite [Acceptance Record F3-A1](../../project/BKL-031-F3-A1-SITE-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md), PR #193 e merge `b9d08a7cf6b6287825907cab6a846b1ec70f0378`. La materializzazione F3-A1-M2 è un candidato protetto separato e resta soggetta a exact-head CI, ARB, Release Quality e integrazione governata.
 
-Non autorizza record reali, schema, fixture, validator, adapter, provider, F3-A2/A3/B/C, runtime, EAGLE o Safety Authority.
+Il record F3-A1-M2 rimane `DRAFT` e ineligible finché il Repository Owner non approva separatamente il digest canonico esatto. Non autorizza adapter, provider, F3-A3/B/C, runtime, EAGLE, assignment o Safety Authority.
 

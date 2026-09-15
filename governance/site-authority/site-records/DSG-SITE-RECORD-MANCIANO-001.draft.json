@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0.0-draft",
+  "recordType": "DSG_GOVERNED_SITE_RECORD",
+  "lifecycle": {
+    "state": "DRAFT",
+    "eligibleForResolution": false,
+    "approvalEvidenceRef": null,
+    "approvedAtUtc": null,
+    "retiredAtUtc": null,
+    "decisionEvidenceRef": "governance/site-authority/decision-evidence/DSG-SITE-MANCIANO-001.owner-decision.json",
+    "statement": "Protected owner-authorized candidate. Not resolver-eligible until separate exact-digest human approval."
+  },
+  "sitePayload": {
+    "siteRecordId": "DSG-SITE-RECORD-MANCIANO-001",
+    "observatoryId": "DSG-OBSERVATORY-MANCIANO-001",
+    "revision": 1,
+    "scope": "OBSERVATION_PLANNER_READ_ONLY_SITE_AUTHORITY",
+    "geodesy": {
+      "datum": "WGS84",
+      "latitudeDeg": 42.4802338365823,
+      "longitudeDeg": 11.56340644166358,
+      "coordinateFormat": "DECIMAL_DEGREES",
+      "elevationM": 100,
+      "elevationUnit": "m",
+      "elevationReference": "ORTHOMETRIC_MEAN_SEA_LEVEL",
+      "acceptedElevationRangeM": {
+        "minInclusive": -500,
+        "maxInclusive": 9000
+      }
+    },
+    "timezoneIana": "Europe/Rome",
+    "authority": {
+      "authoritySystem": "GITHUB_REPOSITORY_PROTECTED_REGISTRY",
+      "repository": "maininimassimo-bit/digital-stargate-manual",
+      "registryRoot": "governance/site-authority",
+      "authorityScope": "SINGLE_OBSERVATORY",
+      "authorityRole": "SITE_AUTHORITY",
+      "ownerRef": "github:user:maininimassimo-bit",
+      "custodianRef": "role:digital-stargate-architecture-office",
+      "approvalAuthorityRef": "github:user:maininimassimo-bit",
+      "custodianMayApprove": false
+    },
+    "source": {
+      "sourceKind": "OWNER_ATTESTED_APPLICATION_CONFIGURATION",
+      "application": "N.I.N.A.",
+      "sourceLocator": "owner-attested:nina:site-configuration",
+      "attestedByRef": "github:user:maininimassimo-bit",
+      "attestationChannel": "OWNER_CONTROLLED_INTERACTION_CHANNEL",
+      "sourceAuthority": "HUMAN_REPOSITORY_OWNER_ATTESTATION"
+    },
+    "validity": {
+      "validFromUtc": "2026-09-15T15:42:01.000Z",
+      "validityEndMode": "UNBOUNDED",
+      "validToUtc": null,
+      "intervalSemantics": "HALF_OPEN"
+    },
+    "classification": "PROTECTED_EXACT_SITE",
+    "retention": "REPOSITORY_HISTORY_UNBOUNDED",
+    "publicationPolicy": {
+      "exactCoordinates": "PROHIBITED",
+      "elevation": "PROHIBITED",
+      "exactAddress": "PROHIBITED",
+      "siteLabelGeneralized": "Manciano (GR), Italia",
+      "timezoneDisplay": "Europe/Rome",
+      "publicRefPolicy": "INDEPENDENT_OPAQUE_IDENTIFIER",
+      "publicDigestPolicy": "PUBLIC_PAYLOAD_ONLY"
+    },
+    "intendedUse": "OBSERVATION_PLANNER_READ_ONLY_SITE_CONTEXT_AFTER_SEPARATE_APPROVAL",
+    "prohibitedUses": [
+      "DEVICE_COMMAND",
+      "SAFETY_AUTHORITY",
+      "READINESS_OR_GO_NO_GO",
+      "PUBLIC_EXACT_SITE_PROJECTION",
+      "EAGLE_WORKLOAD"
+    ],
+    "rollback": {
+      "draft": "Revert the reviewed Git commit; S08 remains UNAVAILABLE.",
+      "futureApproval": "Retire through reviewed Git history and return S08 to UNAVAILABLE without fallback."
+    }
+  },
+  "payloadDigest": {
+    "method": "DSG-F3A1-CANONICAL-JSON-SHA256-1",
+    "canonicalization": "recursive object-key sort; array order preserved; compact JSON; UTF-8",
+    "algorithm": "SHA-256",
+    "value": "sha256:61680073ee535c21033e3041bf181ae0a1e1de87343c54fcd48fd8d6b7ace83d"
+  },
+  "validationEvidence": {
+    "jsonParse": {
+      "state": "VERIFIED",
+      "evidence": "Protected candidate parses as JSON."
+    },
+    "schemaValidatorParity": {
+      "state": "VERIFIED",
+      "evidence": "Versioned schema and fail-closed validator cover the governed envelope and payload."
+    },
+    "payloadDigestRecomputation": {
+      "state": "VERIFIED",
+      "evidence": "Canonical protected payload digest recomputed without logging protected values."
+    },
+    "protectedValueLeakScan": {
+      "state": "VERIFIED",
+      "evidence": "Protected literals are absent from the public docs tree."
+    },
+    "executableContractCases": {
+      "state": "VERIFIED",
+      "evidence": "A1-P01 through A1-P10 and A1-N01 through A1-N41 execute in the dedicated governance workflow."
+    },
+    "runtimeOat": {
+      "state": "NOT_APPLICABLE",
+      "reason": "Repository-only protected authority materialization; no runtime or EAGLE operation."
+    }
+  }
+}

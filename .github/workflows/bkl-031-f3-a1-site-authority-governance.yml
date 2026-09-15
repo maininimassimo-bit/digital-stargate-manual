@@ -1,0 +1,32 @@
+name: BKL-031 F3-A1 Site Authority Governance
+
+on:
+  pull_request:
+    paths:
+      - 'governance/site-authority/**'
+      - 'governance/site-authority/tools/**'
+      - '.github/workflows/bkl-031-f3-a1-site-authority-governance.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'governance/site-authority/**'
+      - 'governance/site-authority/tools/**'
+      - '.github/workflows/bkl-031-f3-a1-site-authority-governance.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  protected-authority-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate protected Site Authority draft
+        run: node governance/site-authority/tools/site-authority-validator.mjs
+      - name: Execute F3-A1 contract and privacy cases
+        run: node --test governance/site-authority/tools/test-site-authority.mjs

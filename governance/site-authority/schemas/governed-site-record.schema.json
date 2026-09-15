@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.invalid/schemas/governed-site-record.schema.json",
+  "title": "Digital StarGate Governed Site Record Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "recordType", "lifecycle", "sitePayload", "payloadDigest", "validationEvidence"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0-draft" },
+    "recordType": { "const": "DSG_GOVERNED_SITE_RECORD" },
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "eligibleForResolution", "approvalEvidenceRef", "approvedAtUtc", "retiredAtUtc", "decisionEvidenceRef", "statement"],
+      "properties": {
+        "state": { "enum": ["DRAFT", "APPROVED", "RETIRED"] },
+        "eligibleForResolution": { "type": "boolean" },
+        "approvalEvidenceRef": { "type": ["string", "null"] },
+        "approvedAtUtc": { "type": ["string", "null"], "format": "date-time" },
+        "retiredAtUtc": { "type": ["string", "null"], "format": "date-time" },
+        "decisionEvidenceRef": { "type": "string", "minLength": 1 },
+        "statement": { "type": "string", "minLength": 1 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "state": { "const": "DRAFT" } }, "required": ["state"] },
+          "then": {
+            "properties": {
+              "eligibleForResolution": { "const": false },
+              "approvalEvidenceRef": { "type": "null" },
+              "approvedAtUtc": { "type": "null" },
+              "retiredAtUtc": { "type": "null" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "state": { "const": "APPROVED" } }, "required": ["state"] },
+          "then": {
+            "properties": {
+              "eligibleForResolution": { "const": true },
+              "approvalEvidenceRef": { "type": "string", "minLength": 1 },
+              "approvedAtUtc": { "type": "string", "format": "date-time" },
+              "retiredAtUtc": { "type": "null" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "state": { "const": "RETIRED" } }, "required": ["state"] },
+          "then": {
+            "properties": {
+              "eligibleForResolution": { "const": false },
+              "retiredAtUtc": { "type": "string", "format": "date-time" }
+            }
+          }
+        }
+      ]
+    },
+    "sitePayload": { "$ref": "#/$defs/sitePayload" },
+    "payloadDigest": { "$ref": "#/$defs/payloadDigest" },
+    "validationEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["jsonParse", "schemaValidatorParity", "payloadDigestRecomputation", "protectedValueLeakScan", "executableContractCases", "runtimeOat"],
+      "properties": {
+        "jsonParse": { "$ref": "#/$defs/evidence" },
+        "schemaValidatorParity": { "$ref": "#/$defs/evidence" },
+        "payloadDigestRecomputation": { "$ref": "#/$defs/evidence" },
+        "protectedValueLeakScan": { "$ref": "#/$defs/evidence" },
+        "executableContractCases": { "$ref": "#/$defs/evidence" },
+        "runtimeOat": { "$ref": "#/$defs/evidence" }
+      }
+    }
+  },
+  "$defs": {
+    "utcTimestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]{3})?Z$"
+    },
+    "validity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["validFromUtc", "validityEndMode", "validToUtc", "intervalSemantics"],
+      "properties": {
+        "validFromUtc": { "$ref": "#/$defs/utcTimestamp" },
+        "validityEndMode": { "enum": ["EXCLUSIVE", "UNBOUNDED"] },
+        "validToUtc": { "oneOf": [{ "$ref": "#/$defs/utcTimestamp" }, { "type": "null" }] },
+        "intervalSemantics": { "const": "HALF_OPEN" }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authoritySystem", "repository", "registryRoot", "authorityScope", "authorityRole", "ownerRef", "custodianRef", "approvalAuthorityRef", "custodianMayApprove"],
+      "properties": {
+        "authoritySystem": { "const": "GITHUB_REPOSITORY_PROTECTED_REGISTRY" },
+        "repository": { "const": "maininimassimo-bit/digital-stargate-manual" },
+        "registryRoot": { "const": "governance/site-authority" },
+        "authorityScope": { "const": "SINGLE_OBSERVATORY" },
+        "authorityRole": { "const": "SITE_AUTHORITY" },
+        "ownerRef": { "const": "github:user:maininimassimo-bit" },
+        "custodianRef": { "const": "role:digital-stargate-architecture-office" },
+        "approvalAuthorityRef": { "const": "github:user:maininimassimo-bit" },
+        "custodianMayApprove": { "const": false }
+      }
+    },
+    "geodesy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["datum", "latitudeDeg", "longitudeDeg", "coordinateFormat", "elevationM", "elevationUnit", "elevationReference", "acceptedElevationRangeM"],
+      "properties": {
+        "datum": { "const": "WGS84" },
+        "latitudeDeg": { "type": "number", "minimum": -90, "maximum": 90 },
+        "longitudeDeg": { "type": "number", "minimum": -180, "exclusiveMaximum": 180 },
+        "coordinateFormat": { "const": "DECIMAL_DEGREES" },
+        "elevationM": { "type": "number", "minimum": -500, "maximum": 9000 },
+        "elevationUnit": { "const": "m" },
+        "elevationReference": { "const": "ORTHOMETRIC_MEAN_SEA_LEVEL" },
+        "acceptedElevationRangeM": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["minInclusive", "maxInclusive"],
+          "properties": {
+            "minInclusive": { "const": -500 },
+            "maxInclusive": { "const": 9000 }
+          }
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceKind", "application", "sourceLocator", "attestedByRef", "attestationChannel", "sourceAuthority"],
+      "properties": {
+        "sourceKind": { "const": "OWNER_ATTESTED_APPLICATION_CONFIGURATION" },
+        "application": { "const": "N.I.N.A." },
+        "sourceLocator": { "type": "string", "minLength": 1 },
+        "attestedByRef": { "const": "github:user:maininimassimo-bit" },
+        "attestationChannel": { "const": "OWNER_CONTROLLED_INTERACTION_CHANNEL" },
+        "sourceAuthority": { "const": "HUMAN_REPOSITORY_OWNER_ATTESTATION" }
+      }
+    },
+    "publicationPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exactCoordinates", "elevation", "exactAddress", "siteLabelGeneralized", "timezoneDisplay", "publicRefPolicy", "publicDigestPolicy"],
+      "properties": {
+        "exactCoordinates": { "const": "PROHIBITED" },
+        "elevation": { "const": "PROHIBITED" },
+        "exactAddress": { "const": "PROHIBITED" },
+        "siteLabelGeneralized": { "const": "Manciano (GR), Italia" },
+        "timezoneDisplay": { "const": "Europe/Rome" },
+        "publicRefPolicy": { "const": "INDEPENDENT_OPAQUE_IDENTIFIER" },
+        "publicDigestPolicy": { "const": "PUBLIC_PAYLOAD_ONLY" }
+      }
+    },
+    "sitePayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["siteRecordId", "observatoryId", "revision", "scope", "geodesy", "timezoneIana", "authority", "source", "validity", "classification", "retention", "publicationPolicy", "intendedUse", "prohibitedUses", "rollback"],
+      "properties": {
+        "siteRecordId": { "type": "string", "minLength": 1 },
+        "observatoryId": { "const": "DSG-OBSERVATORY-MANCIANO-001" },
+        "revision": { "type": "integer", "minimum": 1 },
+        "scope": { "const": "OBSERVATION_PLANNER_READ_ONLY_SITE_AUTHORITY" },
+        "geodesy": { "$ref": "#/$defs/geodesy" },
+        "timezoneIana": { "const": "Europe/Rome" },
+        "authority": { "$ref": "#/$defs/authority" },
+        "source": { "$ref": "#/$defs/source" },
+        "validity": { "$ref": "#/$defs/validity" },
+        "classification": { "const": "PROTECTED_EXACT_SITE" },
+        "retention": { "const": "REPOSITORY_HISTORY_UNBOUNDED" },
+        "publicationPolicy": { "$ref": "#/$defs/publicationPolicy" },
+        "intendedUse": { "const": "OBSERVATION_PLANNER_READ_ONLY_SITE_CONTEXT_AFTER_SEPARATE_APPROVAL" },
+        "prohibitedUses": {
+          "type": "array",
+          "uniqueItems": true,
+          "allOf": [
+            { "contains": { "const": "DEVICE_COMMAND" } },
+            { "contains": { "const": "SAFETY_AUTHORITY" } },
+            { "contains": { "const": "READINESS_OR_GO_NO_GO" } },
+            { "contains": { "const": "PUBLIC_EXACT_SITE_PROJECTION" } },
+            { "contains": { "const": "EAGLE_WORKLOAD" } }
+          ],
+          "items": { "type": "string" }
+        },
+        "rollback": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["draft", "futureApproval"],
+          "properties": {
+            "draft": { "type": "string", "minLength": 1 },
+            "futureApproval": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "payloadDigest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "canonicalization", "algorithm", "value"],
+      "properties": {
+        "method": { "const": "DSG-F3A1-CANONICAL-JSON-SHA256-1" },
+        "canonicalization": { "const": "recursive object-key sort; array order preserved; compact JSON; UTF-8" },
+        "algorithm": { "const": "SHA-256" },
+        "value": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "properties": {
+        "state": { "enum": ["VERIFIED", "NOT_EXECUTED", "NOT_APPLICABLE"] },
+        "evidence": { "type": "string" },
+        "reason": { "type": "string" }
+      }
+    }
+  }
+}

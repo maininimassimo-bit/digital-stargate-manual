@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0.0-draft",
+  "recordType": "DSG_SITE_SOURCE_DECISION_EVIDENCE",
+  "decisionId": "DSG-SITE-MANCIANO-001-SOURCE-DECISION-001",
+  "decision": "AUTHORIZED_FOR_DRAFT_MATERIALIZATION",
+  "decisionRecordedAtUtc": "2026-09-15T15:42:01.000Z",
+  "decidingAuthority": "github:user:maininimassimo-bit",
+  "candidateRef": "governance/site-authority/site-records/DSG-SITE-RECORD-MANCIANO-001.draft.json",
+  "decisions": {
+    "authoritySystem": "GITHUB_REPOSITORY_PROTECTED_REGISTRY",
+    "siteOwnerAndApprovalAuthority": "github:user:maininimassimo-bit",
+    "custodian": "role:digital-stargate-architecture-office",
+    "canonicalObservatoryId": "DSG-OBSERVATORY-MANCIANO-001",
+    "coordinateFormat": "WGS84_DECIMAL_DEGREES",
+    "coordinateSource": "OWNER_ATTESTED_NINA_CONFIGURATION",
+    "elevationSemantics": "ORTHOMETRIC_METRES_MEAN_SEA_LEVEL",
+    "acceptedElevationRangeM": {
+      "minInclusive": -500,
+      "maxInclusive": 9000
+    },
+    "timezoneIana": "Europe/Rome",
+    "validFromPolicy": "DECISION_RECEIPT_RECORDED_AT_UTC",
+    "validityEndMode": "UNBOUNDED",
+    "resolver": "GITHUB_VERSIONED_PROTECTED_REGISTRY",
+    "retention": "REPOSITORY_HISTORY_UNBOUNDED",
+    "publicGeneralization": "Manciano (GR), Italia",
+    "publicExactCoordinates": "PROHIBITED",
+    "publicElevation": "PROHIBITED",
+    "publicExactAddress": "PROHIBITED"
+  },
+  "sourceAuthorization": {
+    "sourceChannel": "OWNER_CONTROLLED_INTERACTION_CHANNEL",
+    "sourceApplication": "N.I.N.A.",
+    "exactValuesStoredOnlyInCandidate": true,
+    "ownerStatement": "Autorizzo la registrazione nel repository GitHub protetto; non autorizzo la pubblicazione di coordinate, quota o indirizzo esatto."
+  },
+  "lifecycleBoundary": "NOT_AN_EXACT_DIGEST_APPROVAL"
+}
