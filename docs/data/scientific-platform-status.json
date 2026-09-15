@@ -19,8 +19,8 @@
       "title": "Observation Planner intelligente",
       "status": "active"
     },
-    "nextMilestone": "BKL-031 F3 — Implementation Slice Decision Pending",
-    "target": "Decide separately whether to authorize BKL-031 F3-A1 Site Authority Contract as the first dependency-ordered implementation slice; ARB-191-MI02 must be resolved before site/setup materialization, while provider/ADR selection, all implementation, forecast, ranking, readiness, runtime, device command, heavy EAGLE workload and Safety Authority remain unauthorized"
+    "nextMilestone": "BKL-031 F3-A1 — Site Authority Contract Review Candidate",
+    "target": "Review the documentation-only F3-A1 contract and proposed ARB-191-MI02 resolution on an exact head; no real site record, schema, fixture, validator, adapter, provider, runtime, EAGLE workload or Safety Authority is authorized"
   },
   "architecture": {
     "ap013": {
@@ -97,7 +97,5 @@
     "commandAuthority": false,
     "automaticRemediationAuthority": false,
     "presentTimeSafetyInferenceFromHistoricalEvidence": false
-  },
-  "nextMilestone": "BKL-031 F3-A1 — Site Authority Contract Review Candidate",
-  "target": "Review the documentation-only F3-A1 contract and proposed ARB-191-MI02 resolution on an exact head; no real site record, schema, fixture, validator, adapter, provider, runtime, EAGLE workload or Safety Authority is authorized"
+  }
 }
