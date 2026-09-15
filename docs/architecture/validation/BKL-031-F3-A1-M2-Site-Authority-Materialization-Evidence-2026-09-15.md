@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A1-M2-VAL-001 |
-| Stato | **LOCAL 51/51 PASS / EXACT-HEAD CI PENDING** |
+| Stato | **INTEGRATED / EXACT-HEAD 8/8 AND POST-MERGE 10/10 SUCCESS** |
 | Data | 15/09/2026 |
-| Baseline | `main@bb11f25192200655427411a46a2e18560a5d9bec` |
+| Baseline | `main@d5750ce160c5f80d20a72bc35dee321200647d03` |
 | Protected values | Omitted by policy |
 | Runtime / OAT | Not Applicable |
 
@@ -13,7 +13,7 @@
 
 The candidate package contains a versioned protected registry, schema contracts, a canonical JSON/SHA-256 implementation, fail-closed lifecycle and resolver validation, public allowlist enforcement, protected-literal scanning and a dedicated GitHub Actions gate.
 
-The owner source decision is present, but it is explicitly not an exact-digest lifecycle approval. The protected candidate is `DRAFT`, `eligibleForResolution=false`; S08 remains `UNAVAILABLE`.
+The owner source decision and protected DRAFT were integrated through PR #203. At that milestone the decision was explicitly not an exact-digest lifecycle approval and the candidate remained ineligible. The owner has since supplied the separate exact-digest decision used only by F3-A1-M4.
 
 ## 2. Commands and local evidence
 
@@ -28,12 +28,12 @@ The test command was executed against synthetic fixtures and the protected candi
 
 | Range | Count | Local result | Exact-head gate |
 |---|---:|---|---|
-| A1-P01–P10 | 10 | PASS | pending |
-| A1-N01–N12 | 12 | PASS | pending |
-| A1-N13–N27 | 15 | PASS | pending |
-| A1-N28–N37 | 10 | PASS | pending |
-| A1-N38–N41 | 4 | PASS | pending |
-| Total | 51 | **PASS** | pending |
+| A1-P01–P10 | 10 | PASS | PASS |
+| A1-N01–N12 | 12 | PASS | PASS |
+| A1-N13–N27 | 15 | PASS | PASS |
+| A1-N28–N37 | 10 | PASS | PASS |
+| A1-N38–N41 | 4 | PASS | PASS |
+| Total | 51 | **PASS** | PASS |
 
 ## 4. Finding disposition
 
@@ -58,7 +58,7 @@ Only the ARB can close architecture findings. This evidence does not self-approv
 ## 6. Not executed or not claimed
 
 - independent geodetic survey or accuracy certification;
-- approved lifecycle receipt or resolver availability;
+- at the M2 milestone, approved lifecycle receipt or resolver availability;
 - runtime adapter, persistence service, caching or public consumer;
 - CurrentSetupAssignment;
 - EAGLE or observatory execution;
@@ -67,17 +67,16 @@ Only the ARB can close architecture findings. This evidence does not self-approv
 
 ## 7. Acceptance gates
 
-Before DRAFT integration:
+F3-A1-M2 integration evidence:
 
-1. dedicated workflow and all applicable repository workflows pass on the exact head;
-2. ARB and Release Quality review the exact head;
-3. no Blocker/Major remains for DRAFT integration;
-4. merge uses DSG-AEM-001 expected-head controls and post-merge verification.
+1. dedicated workflow and all applicable repository workflows passed on the exact head;
+2. ARB and Release Quality reviewed the exact head without Blocker/Major;
+3. merge used DSG-AEM-001 expected-head controls;
+4. post-merge verification completed 10/10 SUCCESS on `main@d5750ce160c5f80d20a72bc35dee321200647d03`.
 
-Before `APPROVED` promotion:
+For `APPROVED` promotion:
 
-1. present the exact protected payload digest to the human Approval Authority;
-2. receive an explicit digest-bound decision and validity acknowledgement;
-3. create a separate immutable approval receipt;
-4. change only the lifecycle envelope, never the approved payload or digest;
-5. re-run ARB, Release Quality, exact-head CI and post-merge verification.
+1. exact digest presentation and explicit validity-bound owner decision are complete;
+2. F3-A1-M4 adds the separate immutable approval receipt;
+3. payload and digest remain unchanged while the lifecycle envelope is promoted;
+4. ARB, Release Quality, exact-head CI and post-merge verification remain mandatory.

@@ -26,7 +26,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Validate protected Site Authority draft
+      - name: Validate protected Site Authority approval promotion
         run: node governance/site-authority/tools/site-authority-validator.mjs
-      - name: Execute F3-A1 contract and privacy cases
+      - name: Execute F3-A1 contract, privacy and promotion cases
         run: node --test governance/site-authority/tools/test-site-authority.mjs

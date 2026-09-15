@@ -46,8 +46,30 @@
         "validityAcknowledged": { "type": "boolean" }
       }
     },
-    "repositoryEvidence": { "type": "object" },
-    "scopeBoundaries": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
-    "integrity": { "type": "object" }
+    "repositoryEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "branch", "candidatePath", "approvedPath", "receiptPath", "authorizationBaselineCommit"],
+      "properties": {
+        "repository": { "const": "maininimassimo-bit/digital-stargate-manual" },
+        "branch": { "const": "feat/bkl-031-f3-a1-m4-site-authority-approval" },
+        "candidatePath": { "const": "governance/site-authority/site-records/DSG-SITE-RECORD-MANCIANO-001.draft.json" },
+        "approvedPath": { "const": "governance/site-authority/site-records/DSG-SITE-RECORD-MANCIANO-001.approved.json" },
+        "receiptPath": { "const": "governance/site-authority/approval-evidence/DSG-SITE-RECORD-MANCIANO-001.approval.json" },
+        "authorizationBaselineCommit": { "type": "string", "pattern": "^[a-f0-9]{40}$" }
+      }
+    },
+    "scopeBoundaries": { "type": "array", "minItems": 7, "items": { "type": "string" }, "uniqueItems": true },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonicalizationMethod", "payloadDigestVerified", "payloadMutatedDuringApproval", "approvalSourceMatchesOwner"],
+      "properties": {
+        "canonicalizationMethod": { "const": "DSG-F3A1-CANONICAL-JSON-SHA256-1" },
+        "payloadDigestVerified": { "const": true },
+        "payloadMutatedDuringApproval": { "const": false },
+        "approvalSourceMatchesOwner": { "const": true }
+      }
+    }
   }
 }

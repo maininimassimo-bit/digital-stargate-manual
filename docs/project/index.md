@@ -23,9 +23,11 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [F3-A2-D1 Authority and Baseline Acceptance](BKL-031-F3-A2-D1-AUTHORITY-AND-BASELINE-DRAFT-ACCEPTANCE-2026-09-15.md) | PR #199 and #201 lifecycle completion |
 | [F3-A2-D2 Baseline Approval Acceptance](BKL-031-F3-A2-D2-BASELINE-APPROVAL-ACCEPTANCE-2026-09-15.md) | PR #201 accepted with conditions/post-merge verified |
 | [F3-A1-M1 Site Authority Program Assessment](../architecture/assessments/BKL-031-F3-A1-M1-Site-Authority-Materialization-Program-Assessment-2026-09-15.md) | Historical owner decision gate; decisions now complete |
-| [F3-A1-M2 Protected Site Authority Materialization](../architecture/scientific-assets/BKL-031-F3-A1-M2-Protected-Site-Authority-Materialization.md) | Protected DRAFT, schema, resolver and privacy design review candidate |
-| [F3-A1-M2 Validation Evidence](../architecture/validation/BKL-031-F3-A1-M2-Site-Authority-Materialization-Evidence-2026-09-15.md) | 51/51 local PASS; exact-head CI pending |
+| [F3-A1-M2 Protected Site Authority Materialization](../architecture/scientific-assets/BKL-031-F3-A1-M2-Protected-Site-Authority-Materialization.md) | PR #203 DRAFT integrated; owner-approved lifecycle promotion candidate |
+| [F3-A1-M2 Validation Evidence](../architecture/validation/BKL-031-F3-A1-M2-Site-Authority-Materialization-Evidence-2026-09-15.md) | PR #203 exact-head 8/8 and post-merge 10/10 SUCCESS |
 | [F3-A1-M2 Draft Materialization Handoff](BKL-031-F3-A1-M2-SITE-AUTHORITY-DRAFT-MATERIALIZATION-2026-09-15.md) | DRAFT integration boundary and exact-digest owner gate |
+| [F3-A1-M4 Approval Promotion](BKL-031-F3-A1-M4-SITE-AUTHORITY-APPROVAL-PROMOTION-2026-09-15.md) | Owner-approved receipt and unchanged APPROVED envelope integration candidate |
+| [F3-A1-M4 Promotion Validation Evidence](../architecture/validation/BKL-031-F3-A1-M4-Site-Authority-Approval-Promotion-Evidence-2026-09-15.md) | Receipt/payload-binding suite 59/59 local PASS; exact-head CI pending |
 | [PR #200 F3-A2-D1 Acceptance AI-Assisted ARB](../architecture/reviews/ARB-PR200-BKL-031-F3-A2-D1-Acceptance-Reconciliation-AI-Assisted-Review-2026-09-15.md) | Approved — 99/100; non equivalente ad approvazione umana indipendente |
 | [PR #200 F3-A2-D1 Acceptance AI-Assisted Release Quality](../architecture/reviews/RQ-PR200-BKL-031-F3-A2-D1-Acceptance-Reconciliation-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready; publication-head CI pending |
 | [PR #199 F3-A2-D1 AI-Assisted ARB Review](../architecture/reviews/ARB-PR199-BKL-031-F3-A2-D1-GitHub-Authority-and-Baseline-Draft-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 99/100; non equivalente ad approvazione umana indipendente |
@@ -40,7 +42,7 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [F3-A1 Site Authority Acceptance](BKL-031-F3-A1-SITE-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md) | Acceptance con condizioni, PR #194 post-merge e transizione F3-A2 |
 | [F3-A1 Site Authority Handoff](../architecture/assessments/BKL-031-F3-A1-Site-Authority-Contract-Handoff-2026-09-15.md) | Scope e condizioni carried-forward |
 | [F3-A1 Governed Site Authority Contract](../architecture/scientific-assets/BKL-031-F3-A1-Governed-Site-Authority-Contract.md) | Contratto normativo accepted with conditions; materializzazione candidata in F3-A1-M2 |
-| [F3-A1 Validation Plan](../architecture/validation/BKL-031-F3-A1-Site-Authority-Contract-Validation-Plan.md) | Matrice implementata nel candidato F3-A1-M2; exact-head CI pending |
+| [F3-A1 Validation Plan](../architecture/validation/BKL-031-F3-A1-Site-Authority-Contract-Validation-Plan.md) | M2 integrated; M4 promotion suite 59/59 local PASS |
 | [PR #193 F3-A1 AI-Assisted ARB Review](../architecture/reviews/ARB-PR193-BKL-031-F3-A1-Site-Authority-Contract-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 96/100; non equivalente ad approvazione umana indipendente |
 | [PR #193 F3-A1 AI-Assisted Release Quality](../architecture/reviews/RQ-PR193-BKL-031-F3-A1-Site-Authority-Contract-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
 | [PR #194 F3-A1 Acceptance AI-Assisted ARB Review](../architecture/reviews/ARB-PR194-BKL-031-F3-A1-Acceptance-Reconciliation-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 99/100; non equivalente ad approvazione umana indipendente |
@@ -105,11 +107,12 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-031 F3-A1: Site Authority Contract `ACCEPTED WITH CONDITIONS / RECONCILED / POST-MERGE VERIFIED`;
 - BKL-031 F3-A2-D2: first setup baseline APPROVED; PR #202 merged as `bb11f25192200655427411a46a2e18560a5d9bec` and verified;
 - BKL-031 F3-A1-M1: owner source/authority decisions complete;
-- BKL-031 F3-A1-M2: protected DRAFT/schema/validator/51-case suite review candidate; exact-digest approval pending; S08/S09 unavailable.
+- BKL-031 F3-A1-M2: protected DRAFT/schema/validator integrated via PR #203 and post-merge verified 10/10;
+- BKL-031 F3-A1-M3/M4: exact-digest owner approval received; protected receipt and unchanged APPROVED envelope are the current integration candidate; runtime S08/S09 remain unavailable.
 
 ## Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2 BASELINE APPROVED / F3-A1-M2 SITE DRAFT CANDIDATE / EXACT-DIGEST APPROVAL NEXT / ASSIGNMENT LATER] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2 BASELINE APPROVED / F3-A1 SITE OWNER-APPROVED / LIFECYCLE PROMOTION CURRENT / ASSIGNMENT LATER] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## Authority / projection
 

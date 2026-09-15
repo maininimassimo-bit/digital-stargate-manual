@@ -3,15 +3,15 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A1-VAL-001 |
-| Stato | **EXECUTED IN F3-A1-M2 CANDIDATE — 51/51 LOCAL PASS / EXACT-HEAD CI PENDING** |
+| Stato | **F3-A1-M2 INTEGRATED / F3-A1-M4 PROMOTION SUITE 59/59 LOCAL PASS** |
 | Data | 15/09/2026 |
 | Contratto | BKL-031-F3-A1-CONTRACT-001 |
-| Baseline | `main@bb11f25192200655427411a46a2e18560a5d9bec` |
+| Baseline | `main@d5750ce160c5f80d20a72bc35dee321200647d03` |
 | Runtime/OAT | Not Applicable |
 
 ## 1. Scopo
 
-Definire l'evidenza richiesta per accettare il contratto F3-A1 e consentirne la materializzazione governata. F3-A1-M2 implementa ora i 51 casi come test eseguibili, usando fixture sintetiche per le failure injection e un validator separato per il candidato protetto `DRAFT`.
+Definire l'evidenza richiesta per accettare il contratto F3-A1 e consentirne la materializzazione governata. F3-A1-M2 integra i 51 casi originari; F3-A1-M4 aggiunge otto casi di promozione per receipt, binding, immutabilità e authority, portando la suite a 59 test.
 
 ## 2. Gate
 
@@ -117,7 +117,7 @@ Release Quality della PR #193 ha concluso `CONDITIONALLY READY FOR MERGE`; la ve
 
 ## 9. Evidenza di esecuzione F3-A1-M2
 
-F3-A1-M2 produce schema, canonicalizer, validator, fixture sintetiche e test eseguibili. L'esecuzione locale è 51/51 PASS; il workflow dedicato e gli altri gate repository sul commit esatto restano l'evidenza autorevole prima dell'integrazione. Il candidato protetto resta `DRAFT`, non è resolver-eligible e non rende disponibile S08.
+F3-A1-M2 ha integrato schema, canonicalizer, validator, fixture sintetiche e 51 test tramite PR #203. F3-A1-M4 aggiunge receipt validation e otto casi di promozione: 59/59 PASS locale, con exact-head CI autorevole prima dell'integrazione. Il runtime S08 resta indisponibile perché nessun adapter viene aggiunto.
 
 Non sono prodotti test runtime, report scientifici, OAT, survey geodetico indipendente, adapter, benchmark o deployment. L'approvazione del digest esatto, il receipt immutabile e la promozione del lifecycle restano un incremento separato.
 
