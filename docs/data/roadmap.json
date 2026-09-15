@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-15",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "b7c477fe06295f9ace8cc9ade1a2dcf1586720cbf92f0c21120687f90bd548df",
+  "sourceDigest": "b782bbc019cb7a270cefdeb6edde271ab1d70a63d2850aae225f3c2c967eb55c",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A2-D4 — CurrentSetupAssignment Protected DRAFT",
-  "target": "After integrating the D3 protected owner-decision evidence, prepare a resolver-ineligible CurrentSetupAssignment DRAFT with closed schema, canonical identity, validator and executable privacy/conflict tests. Approval, adapter and runtime remain separate",
+  "nextMilestone": "BKL-031 F3-A2-D4 integration, then mandatory human exact-digest approval gate",
+  "target": "Complete exact-head CI, AI-assisted process-separated ARB and Release Quality review, merge and post-merge verification for the protected resolver-ineligible DRAFT. Then stop for explicit human approval of the exact protected assignment digest; receipt, lifecycle promotion and runtime remain separate.",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -307,7 +307,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "PR #205 merged as d5f403bbe6a39731213c372cb22296324d10b03d and is post-merge verified 9/9. The setup baseline and Site Authority are independently APPROVED. F3-A2-D3 assignment source, role, separation and validity decisions are complete; protected decision evidence is the current integration package. F3-A2-D4 is the next bounded DRAFT handoff. No assignment is materialized or approved; runtime S08 is UNAVAILABLE and S09 is UNAVAILABLE_CURRENT."
+          "note": "PR #206 owner decisions merged/post-merge verified. PR #207 is the F3-A2-D4 protected, resolver-ineligible DRAFT review candidate with closed schemas, exact-reference validation, privacy enforcement and 57 tests. No assignment approval or runtime exists; S09 remains UNAVAILABLE_CURRENT."
         },
         {
           "id": "BKL-032",
@@ -667,6 +667,14 @@
       "title": "BKL-031 F3-A2-D4 CurrentSetupAssignment DRAFT Handoff",
       "date": "2026-09-15",
       "description": "Solution Architect handoff for a protected resolver-ineligible DRAFT after D3 integration; schema, canonicalization, validator and tests required; approval and runtime remain separate.",
+      "status": "active"
+    },
+    {
+      "id": "M-BKL031-F3-A2-D4-MATERIALIZATION",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A2-D4 Protected Assignment DRAFT",
+      "date": "2026-09-15",
+      "description": "PR #207 review candidate: protected resolver-ineligible DRAFT, closed schemas, validator, privacy gate and 57 tests; human exact-digest approval remains separate.",
       "status": "active"
     }
   ]

@@ -1,0 +1,37 @@
+name: BKL-031 F3-A2 Setup Assignment Governance
+
+on:
+  pull_request:
+    paths:
+      - 'governance/setup-authority/**'
+      - 'governance/site-authority/site-records/**'
+      - 'docs/architecture/scientific-assets/BKL-031-F3-A2-*'
+      - 'docs/architecture/validation/BKL-031-F3-A2-*'
+      - '.github/workflows/bkl-031-f3-a2-setup-assignment-governance.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'governance/setup-authority/**'
+      - 'governance/site-authority/site-records/**'
+      - 'docs/architecture/scientific-assets/BKL-031-F3-A2-*'
+      - 'docs/architecture/validation/BKL-031-F3-A2-*'
+      - '.github/workflows/bkl-031-f3-a2-setup-assignment-governance.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  protected-assignment-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate protected assignment DRAFT and authority bindings
+        run: node governance/setup-authority/tools/setup-assignment-validator.mjs
+      - name: Execute F3-A2 contract, privacy and mutation cases
+        if: always()
+        run: node --test governance/setup-authority/tools/test-setup-assignment.mjs

@@ -7,7 +7,7 @@
 | Stato | Active |
 | Data | 15/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | PR #205 post-merge verified; F3-A2-D3 owner decisions complete; F3-A2-D4 DRAFT handoff next |
+| Current governed package | PR #207 F3-A2-D4 protected DRAFT materialization review candidate |
 
 ## 1. Scopo
 
@@ -105,3 +105,7 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 4.5 | 15/09/2026 | PR #202 baseline verified; F3-A1-M1 decisions complete; F3-A1-M2 protected DRAFT review candidate and exact-digest approval next |
 | 4.6 | 15/09/2026 | PR #204 Site Authority approval accepted/post-merge verified; F3-A2-D3 CurrentSetupAssignment owner decision gate current |
 | 4.7 | 15/09/2026 | PR #205 reconciliation verified; F3-A2-D3 owner decisions complete and F3-A2-D4 DRAFT handoff next |
+
+## F3-A2-D4 review-candidate checkpoint — 15/09/2026
+
+The dependency-ready D4 package materializes a protected DRAFT after PR #206 integrated the owner decisions. Closed schemas, exact-reference binding, canonical identity, fail-closed resolution, privacy enforcement and 57 cases are implemented. No assignment approval, runtime adapter or public protected projection exists. The next mandatory transition after merge is human exact-digest approval.
