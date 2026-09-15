@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "PR #199 integrated ADR-009 and the protected GitHub setup-authority DRAFT as 4e8802c80359efce28d8d75521a1b9cc4cb44b05, post-merge verified 9/9. Repository Owner is the human Approval Authority; Architecture Office is custodian without approval power. DSG-SETUP-BASELINE-001 payload sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8 is independently verified but remains DRAFT, resolver-ineligible and not published. Exact-digest human approval/correction is the active stop condition. F3-A1 site materialization and a separately approved CurrentSetupAssignment remain later gates; S09 stays UNAVAILABLE_CURRENT. No schema, validator, adapter, provider, F3-A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
+          "note": "The Repository Owner approved DSG-SETUP-BASELINE-001 at exact payload sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8, valid from 2026-09-16T00:00:00Z. PR #201 records the protected immutable receipt and promotes only the lifecycle envelope to APPROVED; the payload is unchanged and remains outside Pages. F3-A1 concrete site materialization and a separately approved CurrentSetupAssignment remain mandatory before S09; no schema, validator, adapter, provider, F3-A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
         },
         {
           "id": "BKL-032",

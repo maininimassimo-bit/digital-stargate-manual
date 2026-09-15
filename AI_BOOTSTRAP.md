@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 5.7 |
+| Versione | 5.8 |
 | Baseline | 15/09/2026 |
-| Stato | Current root bootstrap — PR #199 authority model/DRAFT post-merge verified; exact-digest owner approval required |
+| Stato | Current root bootstrap — exact-digest owner approval recorded; PR #201 lifecycle promotion under review |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -56,14 +56,14 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - BKL-031 F2 — Machine-Readable Context/Source Contract and Bounded Fixtures: ACCEPTED / POST-MERGE VERIFIED via PR #188 and merge `7f861f7399079858c9744e69b6c773664b6b5b54`;
 - BKL-031 F3 handoff and Solution Architecture: ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED; PR #192 acceptance closure merged as `21524c687a1fa6a9d840a3951c7ef4fe298f9c3c` with 9/9 workflows;
 - BKL-031 F3-A1 — Site Authority Contract: ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED via PR #193; acceptance reconciliation PR #194 merged as `1fd771632239cdca38d7527c55b974d805ffd1b9` with 9/9 workflows;
-- BKL-031 F3-A2-D1 — PR #199 merged as `4e8802c80359efce28d8d75521a1b9cc4cb44b05` and post-merge verified 9/9; ADR-009 authority model is integrated, while `DSG-SETUP-BASELINE-001` remains a protected DRAFT with payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`; no assignment, schema, adapter or runtime exists;
+- BKL-031 F3-A2-D2 — the Repository Owner approved `DSG-SETUP-BASELINE-001` at exact payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`, valid from `2026-09-16T00:00:00Z`; PR #201 records the protected receipt and `APPROVED` lifecycle envelope; no site record, assignment, schema, adapter or runtime exists;
 - Governance: `DSG-AEM-001` and `W-DSG-AEM-RULESET-001` are ACTIVE / POST-MERGE VERIFIED via PR #196 and merge `357a5edfbd39346b10a1a2d751018ff6d1dd208f`, with 9/9 workflows.
 
 La closure BKL-046 non dichiara efficacia scientifica né produzione: `NOT_EVALUABLE_CURRENT_EVIDENCE`, `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`. Nessun modello/provider, automatic acceptance o PixInsight apply è autorizzato.
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2 ACCEPTED / AUTHORITY MODEL DECIDED / EXACT DIGEST APPROVAL REQUIRED] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2 BASELINE APPROVED / SITE + ASSIGNMENT REQUIRED] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -75,6 +75,6 @@ Nessun portale, planner, comparison layer, quality score o AI è Safety Authorit
 
 ## 9. Punto di partenza operativo
 
-PR #199 integrated ADR-009 and `DSG-SETUP-BASELINE-001` as `main@4e8802c80359efce28d8d75521a1b9cc4cb44b05`; 9/9 post-merge workflows succeeded, including Pages and Governed Projection Sync. The payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8` remains `DRAFT`, `eligibleForResolution=false` and unpublished.
+The Repository Owner approved exact payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8` with validity from `2026-09-16T00:00:00Z`. PR #201 is the current publication package for receipt `DSG-SETUP-BASELINE-001-APPROVAL-001` and the `APPROVED` lifecycle envelope.
 
-**Stop condition:** the human Repository Owner must explicitly approve or correct the exact payload and validity. On approval, create a separate immutable receipt; do not infer a `CurrentSetupAssignment`. S09 remains `UNAVAILABLE_CURRENT`; schema, validator, adapter, F3-A1 site materialization, assignment, provider, runtime, EAGLE and Safety Authority remain separate gates.
+Continue with exact-head CI, AI-assisted ARB/Release Quality, merge and post-merge verification under `DSG-AEM-001`. Baseline approval does not infer a `CurrentSetupAssignment`. S09 remains `UNAVAILABLE_CURRENT`; F3-A1 site materialization and separate assignment approval are the next authority gates. Schema, validator, adapter, provider, runtime, EAGLE and Safety Authority remain separate.
