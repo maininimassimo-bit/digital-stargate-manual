@@ -3,55 +3,62 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-BASELINE-2026-09-15 |
-| Stato | **CURRENT — PR #195 POST-MERGE VERIFIED / DSG-AEM-001 ACTIVE / F3-A2 CONTRACT NEXT** |
-| Repository baseline | `main@8520f4272d31f5578769e8d12ac34101e1c044e8` |
-| Working branch | `docs/dsg-aem-001-governance` |
-| Current package | Governance mandate persistence and F3-A2 contract transition |
+| Stato | **CURRENT — F3-A2 DETAILED CONTRACT REVIEW CANDIDATE / DOCUMENTATION ONLY** |
+| Repository baseline | `main@357a5edfbd39346b10a1a2d751018ff6d1dd208f` |
+| Working branch | `docs/bkl-031-f3-a2-setup-authority-contract` |
+| Current package | `BKL-031-F3-A2-CONTRACT-001` + `BKL-031-F3-A2-VAL-001` |
 | Runtime delta | None |
 | Data/schema delta | None |
 | Infrastructure delta | None |
 
 ## 1. Baseline integrata
 
-PR #195 è merged come `8520f4272d31f5578769e8d12ac34101e1c044e8` e verificata con 9/9 workflow post-merge. Pages build/deployment, published-site integrity e Governed Projection Sync sono SUCCESS.
+`DSG-AEM-001` è integrato tramite PR #196 e merge `357a5edfbd39346b10a1a2d751018ff6d1dd208f`, verificato con 9/9 workflow post-merge inclusi Pages e Governed Projection Sync.
 
-## 2. Governance corrente
+F3-A2 handoff è accepted with conditions/post-merge verified tramite PR #195.
 
-`DSG-AEM-001` autorizza l'esecuzione continuativa fino a completamento o revoca. `W-DSG-AEM-RULESET-001` accetta l'assenza del ruleset soltanto quando tutti i gate sostitutivi sono verificati per l'exact head.
+## 2. Stato tecnico corrente
 
-Le review AI-assistite restano dichiarate come non equivalenti ad approvazioni umane indipendenti. Safety, privacy, rollback e tracciabilità non sono derogati.
+Il detailed contract definisce aggregate, reference envelope, ports, eligibility, lifecycle, UTC half-open validity, failure semantics e public/protected boundary.
 
-## 3. Stato tecnico
+Non esistono baseline concrete approvate attestate, assignment, classi, schema JSON, fixture, validator, persistence, API, cache, provider, deployment o integrazione EAGLE.
 
-F3-A2 handoff è accepted with conditions/post-merge verified. Il detailed contract non è ancora prodotto.
+## 3. Risoluzione ARB-195-MI01
 
-Non esistono setup assignment reali, baseline concrete attestate, classi, schema JSON, fixture, validator, persistence, API, cache, provider, deployment o integrazione EAGLE.
+| Requisito | Stato |
+|---|---|
+| separazione AP-006 architecture / baseline instance | defined |
+| canonical baseline identity/version/digest | required by reference contract |
+| owner/custodian/approval authority | required as resolvable references |
+| approval evidence and effective validity | required |
+| missing/unapproved/ambiguous/mismatch failure | fail-closed reason codes defined |
+| S09 without materialization | UNAVAILABLE_CURRENT |
+
+La closure formale della Minor spetta alla review ARB.
 
 ## 4. Dependency readiness
 
 | Elemento | Stato |
 |---|---|
 | F3 architecture | accepted with conditions |
-| F3-A1 contract | accepted with conditions / not implemented |
+| F3-A1 | accepted with conditions / not implemented |
 | F3-A2 handoff | accepted with conditions / post-merge verified |
-| AP-006 governance concepts | disponibili; nessuna concrete approved baseline attestata |
-| F3-A2 detailed contract | dependency-ready / next |
+| F3-A2 detailed contract | review candidate |
+| F3-A2 validation cases | documented / not executed |
 | F3-A3/B/C | not promoted |
 | S09 | UNAVAILABLE_CURRENT |
 
-## 5. Gate del prossimo package
+## 5. Verification target
 
-Il detailed F3-A2 contract deve:
-
-- risolvere `ARB-195-MI01`;
-- distinguere authority architetturale e baseline instance evidence;
-- identificare owner/custodian e source reference;
-- definire lifecycle, approval/revision e validità UTC half-open;
-- definire resolution e failure semantics fail-closed;
-- preservare public/protected boundary;
-- includere validation plan, migration e rollback;
-- restare documentale e non materializzato.
+- documentation-only scope;
+- no existence claim for concrete baseline/assignment;
+- deterministic no-latest-wins resolution;
+- public allowlist deny-by-default;
+- validation matrix marked NOT EXECUTED;
+- exact-head CI, nav and projection consistency;
+- AI-assisted ARB/RQ disclosure;
+- repository-only rollback.
 
 ## 6. Rollback
 
-Il package corrente è repository-only. Nessuna migrazione, rotazione credenziali o azione operativa è richiesta.
+Revert documentale del package. Nessuna migrazione, credenziale o azione operativa.
