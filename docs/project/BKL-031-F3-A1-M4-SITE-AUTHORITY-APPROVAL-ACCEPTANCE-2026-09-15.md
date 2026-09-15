@@ -56,3 +56,7 @@ The dependency-ready successor is `BKL-031-F3-A2-D3 — CurrentSetupAssignment O
 ## 6. Rollback
 
 Revert the PR #204 promotion commit through reviewed Git history, removing the APPROVED envelope and receipt while preserving the immutable DRAFT. Repository resolution returns fail-closed. No runtime, device or observatory rollback is required.
+
+## 7. Acceptance reconciliation
+
+PR #205 merged as `d5f403bbe6a39731213c372cb22296324d10b03d` and completed 9/9 post-merge workflows. The continuity sources now record F3-A1-M4 as accepted and select the separate F3-A2-D3 owner-decision gate.

@@ -4,8 +4,8 @@
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A2-D3 — CurrentSetupAssignment Owner Decision",
-  "target": "Obtain explicit source, role, separation and half-open validity decisions for a distinct CurrentSetupAssignment; do not materialize an assignment, schema or runtime. S08 remains UNAVAILABLE and S09 remains UNAVAILABLE_CURRENT",
+  "nextMilestone": "BKL-031 F3-A2-D4 — CurrentSetupAssignment Protected DRAFT",
+  "target": "After integrating the D3 protected owner-decision evidence, prepare a resolver-ineligible CurrentSetupAssignment DRAFT with closed schema, canonical identity, validator and executable privacy/conflict tests. Approval, adapter and runtime remain separate",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "PR #204 merged as e73b1aa631c41dff97b9e5ededb6d6be02a667d4 after 8/8 exact-head workflows and is post-merge verified 10/10. The protected Site Authority is APPROVED with immutable payload and separate human receipt; exact values remain omitted publicly. CurrentSetupAssignment is absent and F3-A2-D3 is the separate owner decision gate. Runtime S08 is UNAVAILABLE and S09 is UNAVAILABLE_CURRENT. No assignment, adapter, provider, F3-A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
+          "note": "PR #205 merged as d5f403bbe6a39731213c372cb22296324d10b03d and is post-merge verified 9/9. The setup baseline and Site Authority are independently APPROVED. F3-A2-D3 assignment source, role, separation and validity decisions are complete; protected decision evidence is the current integration package. F3-A2-D4 is the next bounded DRAFT handoff. No assignment is materialized or approved; runtime S08 is UNAVAILABLE and S09 is UNAVAILABLE_CURRENT."
         },
         {
           "id": "BKL-032",
@@ -544,7 +544,21 @@
       "itemRef": "BKL-031",
       "title": "BKL-031 F3-A1-M4 Site Authority Lifecycle Promotion",
       "date": "2026-09-15",
-      "description": "Protected approval receipt and unchanged APPROVED envelope prepared with eight promotion checks added to the 51-case contract suite; exact-head review and integration pending."
+      "description": "PR #204 integrated the protected approval receipt and unchanged APPROVED envelope with 8/8 exact-head and 10/10 post-merge workflows; PR #205 reconciled final acceptance with 9/9 post-merge workflows."
+    },
+    {
+      "id": "M-BKL031-F3-A2-D3",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A2-D3 CurrentSetupAssignment Owner Decisions",
+      "date": "2026-09-15",
+      "description": "Owner selected the protected GitHub registry, established assignment owner/custodian/Approval Authority separation and chose half-open unbounded validity from the approved setup-baseline effective start. Protected decision evidence only; no assignment approval."
+    },
+    {
+      "id": "M-BKL031-F3-A2-D4",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A2-D4 CurrentSetupAssignment DRAFT Handoff",
+      "date": "2026-09-15",
+      "description": "Solution Architect handoff for a protected resolver-ineligible DRAFT after D3 integration; schema, canonicalization, validator and tests required; approval and runtime remain separate."
     }
   ]
 }

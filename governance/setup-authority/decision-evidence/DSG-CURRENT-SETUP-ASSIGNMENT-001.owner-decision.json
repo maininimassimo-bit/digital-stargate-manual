@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "1.0.0-draft",
+  "recordType": "DSG_CURRENT_SETUP_ASSIGNMENT_OWNER_DECISION",
+  "decisionId": "DSG-CURRENT-SETUP-ASSIGNMENT-001-OWNER-DECISION-001",
+  "decision": "OWNER_DECISIONS_COMPLETE",
+  "decisionRecordedAtUtc": "2026-09-15T17:58:04.000Z",
+  "decidingAuthority": "github:user:maininimassimo-bit",
+  "futureCandidateRef": "governance/setup-authority/setup-assignments/DSG-CURRENT-SETUP-ASSIGNMENT-001.draft.json",
+  "decisions": {
+    "authoritySystem": "GITHUB_PROTECTED_REGISTRY",
+    "authorityRoot": "governance/setup-authority/",
+    "publicationRootExcluded": "docs/",
+    "assignmentOwnerRef": "github:user:maininimassimo-bit",
+    "assignmentCustodianRef": "role:digital-stargate-architecture-office",
+    "assignmentApprovalAuthorityRef": "github:user:maininimassimo-bit",
+    "custodianMayApprove": false,
+    "separationPolicy": "OWNER_MAY_APPROVE_CUSTODIAN_MUST_NOT_APPROVE",
+    "siteAuthorityReference": {
+      "recordPath": "governance/site-authority/site-records/DSG-SITE-RECORD-MANCIANO-001.approved.json",
+      "siteRecordId": "DSG-SITE-RECORD-MANCIANO-001",
+      "revision": 1,
+      "observatoryId": "DSG-OBSERVATORY-MANCIANO-001",
+      "payloadDigest": "sha256:61680073ee535c21033e3041bf181ae0a1e1de87343c54fcd48fd8d6b7ace83d",
+      "lifecycleState": "APPROVED"
+    },
+    "setupBaselineReference": {
+      "recordPath": "governance/setup-authority/configuration-baselines/DSG-SETUP-BASELINE-001.approved.json",
+      "baselineId": "DSG-SETUP-BASELINE-001",
+      "baselineVersion": "0.1.0-draft.1",
+      "configurationId": "DSG-MANCIANO-DUAL-OTA-SETUP-001",
+      "payloadDigest": "sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8",
+      "lifecycleState": "APPROVED"
+    },
+    "validity": {
+      "validFromPolicy": "APPROVED_SETUP_BASELINE_EFFECTIVE_START",
+      "validFromUtc": "2026-09-16T00:00:00Z",
+      "validityEndMode": "UNBOUNDED",
+      "validToUtc": null,
+      "intervalSemantics": "HALF_OPEN"
+    },
+    "retention": "APPEND_ONLY_GIT_HISTORY",
+    "publicProjection": "DENY_BY_DEFAULT_OMIT_INTERNAL_REFERENCES_DIGESTS_LOCATORS_AND_EXACT_SITE_FACTS"
+  },
+  "sourceAuthorization": {
+    "sourceChannel": "OWNER_CONTROLLED_INTERACTION_CHANNEL",
+    "ownerSelections": [
+      "Registro GitHub protetto fuori da docs",
+      "Repository Owner: owner e approver; Architecture Office: custodian non approvatore",
+      "Dall'efficacia della baseline setup, senza scadenza"
+    ],
+    "exactReferencesStoredOnlyInProtectedEvidence": true
+  },
+  "scopeBoundaries": [
+    "DECISION_EVIDENCE_ONLY",
+    "NO_ASSIGNMENT_MATERIALIZATION",
+    "NO_ASSIGNMENT_DIGEST_APPROVAL",
+    "NO_ASSIGNMENT_LIFECYCLE_PROMOTION",
+    "NO_RUNTIME_OR_EAGLE_OPERATION",
+    "NO_PUBLIC_PROTECTED_REFERENCES",
+    "NO_READINESS_OR_GO_NO_GO_AUTHORITY",
+    "NO_SAFETY_AUTHORITY_CHANGE"
+  ],
+  "lifecycleBoundary": "OWNER_DECISIONS_COMPLETE_NOT_ASSIGNMENT_APPROVAL"
+}

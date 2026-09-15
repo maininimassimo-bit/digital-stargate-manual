@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.22 |
+| Versione | 5.23 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -49,7 +49,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
-| BKL-031 | P1 | Observation Planner intelligente | In Progress | PR #204 Site Authority approval promotion accepted/post-merge verified; setup baseline and Site Authority independently approved | Complete F3-A2-D3 owner decisions for CurrentSetupAssignment without materializing assignment or runtime | ADR-009; PR #204; F3-A1-M4 acceptance; F3-A2-D3 assessment |
+| BKL-031 | P1 | Observation Planner intelligente | In Progress | PR #205 acceptance reconciliation post-merge verified; F3-A2-D3 source/role/validity decisions complete | Integrate protected D3 decision evidence, then execute the bounded F3-A2-D4 resolver-ineligible DRAFT materialization | ADR-009; PR #205; F3-A2-D3 decision; F3-A2-D4 handoff |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
@@ -271,3 +271,9 @@ PR #203 merged as `d5750ce160c5f80d20a72bc35dee321200647d03` with 10/10 post-mer
 PR #204 was reviewed at `f394ef5c3b5ad089e18fa3c4c431e2fcbd556e38` with 8/8 exact-head workflows, ARB `APPROVED WITH CONDITIONS — 98/100` and Release Quality `CONDITIONALLY READY`, without waiver, Blocker or Major. Expected-head merge produced `e73b1aa631c41dff97b9e5ededb6d6be02a667d4`; 10/10 post-merge workflows succeeded. The protected Site Authority is APPROVED and repository-resolver eligible for authorized callers, while protected values remain omitted publicly.
 
 F3-A2-D3 is selected as the separate `CurrentSetupAssignment` owner decision gate. No assignment, schema, adapter or runtime is authorized. S08 remains `UNAVAILABLE`; S09 remains `UNAVAILABLE_CURRENT`. `ARB-204-MI01` is due before a second site revision/receipt and `ARB-204-MI02` before any runtime adapter.
+
+### BKL-031 F3-A2-D3 owner decisions and D4 handoff — 15/09/2026
+
+PR #205 merged as `d5f403bbe6a39731213c372cb22296324d10b03d` with 9/9 post-merge workflows. The Repository Owner selected the protected GitHub registry outside `docs/`, retained the Repository Owner as assignment owner and human Approval Authority, retained the Architecture Office as non-approving custodian, and selected half-open unbounded validity from the approved setup-baseline effective start.
+
+F3-A2-D3 may record those decisions as protected evidence only. After its integration, F3-A2-D4 is the bounded Solution Architect handoff for a resolver-ineligible DRAFT with schema, canonicalization, validator and tests. No assignment approval, receipt, adapter, runtime, EAGLE activity or Safety Authority change is authorized.

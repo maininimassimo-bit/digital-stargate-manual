@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 4.6 |
+| Versione | 4.7 |
 | Stato | Active |
 | Data | 15/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | PR #204 Site Authority APPROVED/post-merge verified; F3-A2-D3 CurrentSetupAssignment owner decision gate |
+| Current governed package | PR #205 post-merge verified; F3-A2-D3 owner decisions complete; F3-A2-D4 DRAFT handoff next |
 
 ## 1. Scopo
 
@@ -46,11 +46,11 @@ Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimen
 
 BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`; nessun apply path o Safety Authority è autorizzato.
 
-BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integrato tramite PR #193 e riconciliato tramite PR #194. F3-A2 handoff e detailed contract sono accepted with conditions/post-merge verified via PR #195 e #197; AP-006 governance, concrete baseline evidence, current assignment e observed drift restano separati. ADR-009 governa i registri protetti. The first setup baseline is approved. F3-A1-M2 DRAFT/schema/validator was integrated via PR #203. PR #204 then integrated the separately owner-approved receipt and unchanged Site Authority APPROVED envelope as `e73b1aa631c41dff97b9e5ededb6d6be02a667d4`; exact-head CI passed 8/8 and post-merge workflows 10/10. Protected registries remain outside Pages. No `CurrentSetupAssignment` or runtime adapter exists: S08 is `UNAVAILABLE`, S09 is `UNAVAILABLE_CURRENT`. F3-A2-D3 is the current owner decision gate. `ARB-204-MI01` and `ARB-204-MI02` remain preconditions for later revisions/adapters. S07/S11, F3-A3/B/C, F4 forecast, F5 ranking/consumer, BKL-032 readiness and Safety remain separate.
+BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integrato tramite PR #193 e riconciliato tramite PR #194. F3-A2 handoff e detailed contract sono accepted with conditions/post-merge verified via PR #195 e #197; AP-006 governance, concrete baseline evidence, current assignment e observed drift restano separati. ADR-009 governa i registri protetti. The first setup baseline and Site Authority are independently approved. PR #204 integrated the Site Authority lifecycle; PR #205 reconciled acceptance as `d5f403bbe6a39731213c372cb22296324d10b03d` with 9/9 post-merge workflows. F3-A2-D3 source, roles, separation and validity decisions are complete and may be stored only as protected evidence. F3-A2-D4 is the next bounded DRAFT handoff. No `CurrentSetupAssignment` or runtime adapter exists: S08 is `UNAVAILABLE`, S09 is `UNAVAILABLE_CURRENT`. `ARB-204-MI01` and `ARB-204-MI02` remain preconditions for later revisions/adapters. S07/S11, F3-A3/B/C, F4 forecast, F5 ranking/consumer, BKL-032 readiness and Safety remain separate.
 
 ## 7. Roadmap sequence
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2 BASELINE APPROVED / F3-A1 SITE APPROVED / CURRENTSETUPASSIGNMENT OWNER DECISION NEXT] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2 BASELINE APPROVED / F3-A1 SITE APPROVED / ASSIGNMENT OWNER DECISIONS COMPLETE / DRAFT MATERIALIZATION NEXT] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 8. CI/CD e publishing
 
@@ -104,3 +104,4 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 4.4 | 15/09/2026 | PR #201 merged/post-merge verified; F3-A1-M1 Site Authority owner decision gate current |
 | 4.5 | 15/09/2026 | PR #202 baseline verified; F3-A1-M1 decisions complete; F3-A1-M2 protected DRAFT review candidate and exact-digest approval next |
 | 4.6 | 15/09/2026 | PR #204 Site Authority approval accepted/post-merge verified; F3-A2-D3 CurrentSetupAssignment owner decision gate current |
+| 4.7 | 15/09/2026 | PR #205 reconciliation verified; F3-A2-D3 owner decisions complete and F3-A2-D4 DRAFT handoff next |

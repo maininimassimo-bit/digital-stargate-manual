@@ -3,16 +3,16 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-BASELINE-2026-09-15 |
-| Stato | **CURRENT — SETUP BASELINE AND SITE AUTHORITY APPROVED / ASSIGNMENT ABSENT** |
-| Repository baseline | `main@e73b1aa631c41dff97b9e5ededb6d6be02a667d4` |
-| Current package | `BKL-031-F3-A2-D3-CURRENT-SETUP-ASSIGNMENT-OWNER-DECISION` |
+| Stato | **CURRENT — ASSIGNMENT OWNER DECISIONS COMPLETE / ASSIGNMENT ABSENT** |
+| Repository baseline | `main@d5f403bbe6a39731213c372cb22296324d10b03d` |
+| Current package | `BKL-031-F3-A2-D3-DECISION-EVIDENCE` |
 | Runtime delta | None |
-| Data delta | Protected approved setup baseline and Site Authority; no assignment |
+| Data delta | Protected owner-decision evidence only; no assignment |
 | Infrastructure delta | None |
 
 ## 1. Integrated state
 
-PR #204 is merged as `e73b1aa631c41dff97b9e5ededb6d6be02a667d4` and establishes the current verified repository baseline. Exact-head CI passed 8/8 and post-merge workflows passed 10/10. The protected setup and site registries contain their separately approved authority envelopes and immutable receipts.
+PR #205 is merged as `d5f403bbe6a39731213c372cb22296324d10b03d` and establishes the current verified repository baseline with 9/9 post-merge workflows. The protected setup and site registries contain their separately approved authority envelopes and immutable receipts.
 
 ## 2. Approved authority state
 
@@ -31,6 +31,8 @@ The setup baseline and Site Authority are independently approved. Their exact di
 | Canonical site resolver identity/scope | materialized and validated |
 | Executable validity/privacy/promotion tests | 59/59 PASS; exact-head and post-merge verified |
 | CurrentSetupAssignment | absent |
+| Assignment owner decisions | complete; protected evidence integration candidate |
+| Assignment DRAFT materialization | not started; F3-A2-D4 next |
 | S08 / S09 | `UNAVAILABLE` / `UNAVAILABLE_CURRENT` |
 | Runtime adapter | absent; separate package and authorization required |
 

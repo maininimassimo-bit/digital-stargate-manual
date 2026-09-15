@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 6.1 |
+| Versione | 6.2 |
 | Baseline | 15/09/2026 |
-| Stato | Current root bootstrap — PR #204 merged/post-merge verified; Site Authority APPROVED; CurrentSetupAssignment owner decision next |
+| Stato | Current root bootstrap — PR #205 merged/post-merge verified; CurrentSetupAssignment owner decisions complete; DRAFT materialization handoff next |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -60,14 +60,16 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - BKL-031 F3-A1-M1 — owner decisions and protected source authorization are complete;
 - BKL-031 F3-A1-M2 — protected Site Authority DRAFT, schemas, validator and 51-case suite integrated/post-merge verified via PR #203;
 - BKL-031 F3-A1-M3/M4 — exact-digest owner approval, protected receipt and unchanged APPROVED envelope integrated via PR #204, merge `e73b1aa631c41dff97b9e5ededb6d6be02a667d4`, with 10/10 post-merge workflows;
-- BKL-031 F3-A2-D3 — separate `CurrentSetupAssignment` owner decision is the next gate; no assignment record, schema or runtime exists;
+- BKL-031 F3-A1-M4 acceptance reconciliation — PR #205 merged as `d5f403bbe6a39731213c372cb22296324d10b03d` with 9/9 post-merge workflows;
+- BKL-031 F3-A2-D3 — source, roles, separation and validity decisions are complete; protected decision evidence is the current integration package;
+- BKL-031 F3-A2-D4 — bounded DRAFT materialization handoff is next; no assignment record, schema or runtime exists yet;
 - Governance: `DSG-AEM-001` and `W-DSG-AEM-RULESET-001` are ACTIVE / POST-MERGE VERIFIED via PR #196 and merge `357a5edfbd39346b10a1a2d751018ff6d1dd208f`, with 9/9 workflows.
 
 La closure BKL-046 non dichiara efficacia scientifica né produzione: `NOT_EVALUABLE_CURRENT_EVIDENCE`, `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`. Nessun modello/provider, automatic acceptance o PixInsight apply è autorizzato.
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2 BASELINE APPROVED / F3-A1 SITE APPROVED / CURRENTSETUPASSIGNMENT OWNER DECISION NEXT] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2 BASELINE APPROVED / F3-A1 SITE APPROVED / ASSIGNMENT OWNER DECISIONS COMPLETE / DRAFT MATERIALIZATION NEXT] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -79,6 +81,6 @@ Nessun portale, planner, comparison layer, quality score o AI è Safety Authorit
 
 ## 9. Punto di partenza operativo
 
-PR #204 merged as `e73b1aa631c41dff97b9e5ededb6d6be02a667d4` and is the verified repository baseline. Exact-head CI passed 8/8; post-merge workflows passed 10/10. The protected Site Authority is now `APPROVED` and repository-resolver eligible for authorized callers during its governed validity. Protected values remain outside public documentation and logs.
+PR #205 merged as `d5f403bbe6a39731213c372cb22296324d10b03d` and is the verified repository baseline, with 9/9 post-merge workflows. The protected Site Authority and setup baseline remain independently APPROVED; protected values stay outside public documentation and logs.
 
-The next gate is `BKL-031-F3-A2-D3`: obtain explicit owner decisions for a distinct `CurrentSetupAssignment` authority record. No assignment is authorized or materialized yet. Without a runtime adapter S08 remains `UNAVAILABLE`; without a separately approved assignment S09 remains `UNAVAILABLE_CURRENT`. Provider, runtime, EAGLE and Safety Authority remain separate. Carried conditions `ARB-204-MI01` and `ARB-204-MI02` must be addressed before a second site revision/receipt and before any runtime adapter respectively.
+The owner has completed `BKL-031-F3-A2-D3`: the future `CurrentSetupAssignment` uses the protected GitHub registry outside `docs/`; the Repository Owner is assignment owner and human Approval Authority; the Architecture Office is non-approving custodian; validity starts with the approved setup baseline and is unbounded. This authorizes protected decision evidence only. `BKL-031-F3-A2-D4` is the next bounded DRAFT materialization handoff. No assignment is materialized or approved. S08 remains `UNAVAILABLE`; S09 remains `UNAVAILABLE_CURRENT`. Runtime, EAGLE and Safety Authority remain separate.

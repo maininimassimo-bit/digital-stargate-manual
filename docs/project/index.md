@@ -29,7 +29,9 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [F3-A1-M4 Approval Promotion](BKL-031-F3-A1-M4-SITE-AUTHORITY-APPROVAL-PROMOTION-2026-09-15.md) | PR #204 accepted with conditions/post-merge verified |
 | [F3-A1-M4 Promotion Validation Evidence](../architecture/validation/BKL-031-F3-A1-M4-Site-Authority-Approval-Promotion-Evidence-2026-09-15.md) | 59/59 PASS; exact-head 8/8 and post-merge 10/10 SUCCESS |
 | [F3-A1-M4 Approval Acceptance](BKL-031-F3-A1-M4-SITE-AUTHORITY-APPROVAL-ACCEPTANCE-2026-09-15.md) | Final PR #204 acceptance and carried conditions |
-| [F3-A2-D3 CurrentSetupAssignment Owner Decision Assessment](../architecture/assessments/BKL-031-F3-A2-D3-CurrentSetupAssignment-Owner-Decision-Assessment-2026-09-15.md) | Current owner decision gate; no assignment materialization |
+| [F3-A2-D3 CurrentSetupAssignment Owner Decision Assessment](../architecture/assessments/BKL-031-F3-A2-D3-CurrentSetupAssignment-Owner-Decision-Assessment-2026-09-15.md) | Owner decisions complete; protected evidence integration candidate |
+| [F3-A2-D3 CurrentSetupAssignment Owner Decision](BKL-031-F3-A2-D3-CURRENT-SETUP-ASSIGNMENT-OWNER-DECISION-2026-09-15.md) | Public decision boundary; exact protected references omitted |
+| [F3-A2-D4 CurrentSetupAssignment DRAFT Handoff](../architecture/assessments/BKL-031-F3-A2-D4-CurrentSetupAssignment-Draft-Materialization-Handoff-2026-09-15.md) | Next bounded Solution Architect package after D3 integration |
 | [PR #200 F3-A2-D1 Acceptance AI-Assisted ARB](../architecture/reviews/ARB-PR200-BKL-031-F3-A2-D1-Acceptance-Reconciliation-AI-Assisted-Review-2026-09-15.md) | Approved — 99/100; non equivalente ad approvazione umana indipendente |
 | [PR #200 F3-A2-D1 Acceptance AI-Assisted Release Quality](../architecture/reviews/RQ-PR200-BKL-031-F3-A2-D1-Acceptance-Reconciliation-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready; publication-head CI pending |
 | [PR #199 F3-A2-D1 AI-Assisted ARB Review](../architecture/reviews/ARB-PR199-BKL-031-F3-A2-D1-GitHub-Authority-and-Baseline-Draft-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 99/100; non equivalente ad approvazione umana indipendente |
@@ -111,11 +113,13 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-031 F3-A1-M1: owner source/authority decisions complete;
 - BKL-031 F3-A1-M2: protected DRAFT/schema/validator integrated via PR #203 and post-merge verified 10/10;
 - BKL-031 F3-A1-M3/M4: protected receipt and unchanged APPROVED envelope accepted/post-merge verified via PR #204;
-- BKL-031 F3-A2-D3: separate `CurrentSetupAssignment` owner decision is current; no assignment or runtime exists, S08/S09 remain unavailable.
+- BKL-031 F3-A1-M4 acceptance reconciliation: PR #205 merged/post-merge verified 9/9;
+- BKL-031 F3-A2-D3: source, roles, separation and validity decisions complete; protected evidence current;
+- BKL-031 F3-A2-D4: bounded DRAFT materialization handoff next; no assignment or runtime exists, S08/S09 remain unavailable.
 
 ## Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2 BASELINE APPROVED / F3-A1 SITE APPROVED / CURRENTSETUPASSIGNMENT OWNER DECISION NEXT] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2 BASELINE APPROVED / F3-A1 SITE APPROVED / ASSIGNMENT OWNER DECISIONS COMPLETE / DRAFT MATERIALIZATION NEXT] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## Authority / projection
 

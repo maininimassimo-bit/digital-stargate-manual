@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A2-D3-PROGRAM-001 |
-| Stato | **OWNER DECISION REQUIRED — NO ASSIGNMENT MATERIALIZATION** |
+| Stato | **OWNER DECISIONS COMPLETE / PROTECTED EVIDENCE INTEGRATION CANDIDATE** |
 | Data | 15/09/2026 |
-| Verified baseline | `main@e73b1aa631c41dff97b9e5ededb6d6be02a667d4` |
+| Verified baseline | `main@d5f403bbe6a39731213c372cb22296324d10b03d` |
 | Predecessor | F3-A1-M4 accepted with conditions / post-merge verified |
 | Governing contract | `BKL-031-F3-A2-CONTRACT-001` |
 | Runtime / data delta | None |
@@ -24,31 +24,31 @@ This assessment authorizes only collection and recording of owner decisions. It 
 | Setup Authority logical contract | 90/100 | accepted with conditions and post-merge verified |
 | Approved setup baseline authority | 100/100 | protected envelope and receipt integrated |
 | Approved Site Authority | 100/100 | PR #204 accepted and post-merge verified |
-| Assignment authority decision | 20/100 | logical roles defined; concrete choices absent |
+| Assignment authority decision | 100/100 | source, roles, separation and validity explicitly selected by owner |
 | CurrentSetupAssignment materialization | 0/100 | no record, receipt, schema or tests |
 | Runtime resolution | 0/100 | no adapter or operational evidence |
 
 Scores describe architecture/delivery maturity, not scientific accuracy or operational readiness.
 
-## 3. Required owner decisions
+## 3. Completed owner decisions
 
-| Decision | Recommended default | Effect |
+| Decision | Owner choice | Effect |
 |---|---|---|
 | Source authority | protected GitHub registry outside `docs/` | preserves review, audit and Pages separation |
 | Assignment owner | Repository Owner | accountable for the site–baseline relationship |
 | Assignment custodian | Architecture Office | may prepare/remediate but cannot approve |
 | Approval Authority | human Repository Owner | preserves the established human approval boundary |
 | Separation policy | custodian cannot approve; owner may be owner and Approval Authority | prevents Architecture Office self-approval |
-| Validity | half-open, unbounded, with an explicit UTC start chosen by the owner | deterministic current resolution without sentinel dates |
+| Validity | half-open and unbounded from the approved setup-baseline effective start | deterministic current resolution without sentinel dates |
 | Publication | no internal assignment/site/baseline IDs, digests, locators or exact site facts | deny-by-default public boundary |
 
 The exact approved site and baseline references are already present in their protected registries and need not be repeated in public documents.
 
 ## 4. Decision sequence
 
-1. owner confirms the source/registry and concrete role assignments;
-2. owner supplies the exact `validFromUtc` and chooses `UNBOUNDED` or an exclusive end;
-3. Architecture Office records the protected source decision only;
+1. owner confirmed the source/registry and concrete role assignments;
+2. owner selected the approved setup-baseline effective start and `UNBOUNDED` end mode;
+3. Architecture Office records the protected source decision only in this package;
 4. a later, separately reviewed package defines schema/canonicalization and creates an ineligible DRAFT;
 5. the owner receives and explicitly approves the exact assignment digest;
 6. a separate receipt/lifecycle package may promote the assignment to APPROVED;
@@ -68,8 +68,8 @@ The exact approved site and baseline references are already present in their pro
 
 ## 6. Acceptance criteria for this owner gate
 
-F3-A2-D3 is complete only when the owner has explicitly decided all rows in section 3, including an exact validity start. Completion authorizes creation of protected decision evidence, not assignment approval or runtime work.
+F3-A2-D3 owner input is complete. Repository completion requires integration of the protected decision evidence through exact-head CI, ARB, Release Quality, expected-head merge and post-merge verification. Completion does not authorize assignment approval or runtime work.
 
 ## 7. Handoff
 
-After the owner decisions are complete, hand off a bounded DRAFT materialization package to the Solution Architect. The package must reuse the accepted F3-A2 contract and validation plan, preserve protected/public separation, and implement executable identity, interval, approval, conflict and privacy gates before any lifecycle promotion.
+After decision-evidence integration, hand off `BKL-031-F3-A2-D4` as a bounded DRAFT materialization package to the Solution Architect. The package must reuse the accepted F3-A2 contract and validation plan, preserve protected/public separation, and implement executable identity, interval, approval, conflict and privacy gates before any lifecycle promotion.
