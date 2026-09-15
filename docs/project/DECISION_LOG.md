@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEC-001 |
-| Versione | 2.0 |
+| Versione | 2.1 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -55,6 +55,7 @@ Creare invece un ADR quando la decisione modifica un principio architetturale, i
 | DLG-022 | 15/09/2026 | Accettare F3-A2-D2 dopo il merge/post-merge di PR #201 e selezionare F3-A1-M1 come prossimo owner decision gate | La baseline setup è integrata, ma sito e assignment restano authority separate; le coordinate protette e le semantiche aperte non possono essere inferite | BKL-031 F3-A1-M1 | Accepted | PR #201; `BKL-031-F3-A2-D2-ACCEPTANCE-001`; `BKL-031-F3-A1-M1-PROGRAM-001` |
 | DLG-023 | 15/09/2026 | Registrare nel protected GitHub registry i fatti sito forniti dall'owner, con WGS84 decimal degrees, quota ortometrica MSL, timezone governata, validità unbounded e pubblicazione limitata alla generalizzazione comunale | Chiudere F3-A1-M1 senza inferire dati da telemetria, mappe o setup baseline e senza esporre coordinate, quota o indirizzo esatto | BKL-031 F3-A1-M2 | Accepted | owner-controlled source decision 15/09/2026; F3-A1 contract |
 | DLG-024 | 15/09/2026 | Materializzare prima un record `DRAFT` ineligible e richiedere in seguito una distinta approvazione owner legata al digest canonico esatto | Separare autorizzazione alla registrazione, approvazione del payload e futura assegnazione; impedire che una generica autorizzazione di scrittura promuova il lifecycle | BKL-031 F3-A1-M2 | Accepted | protected decision evidence; ADR-009; DSG-AEM-001 |
+| DLG-025 | 15/09/2026 | Accettare la decisione owner vincolata all'exact digest e alla validità unbounded e promuovere il Site Authority tramite receipt protetto ed envelope APPROVED separato, senza mutare il payload | Completare F3-A1 rispettando immutabilità, privacy, separazione dall'assegnazione e potere di approvazione esclusivamente umano | BKL-031 F3-A1-M3/M4 | Accepted | owner-controlled approval; F3-A1-M4 evidence; ADR-009 |
 
 ## 5. Delega operativa GitHub
 

@@ -72,6 +72,11 @@ export function assertSchemaValidatorParity(recordSchema, decisionSchema, approv
   assertClosedSchemaNode(recordSchema.properties.validationEvidence, ["jsonParse", "schemaValidatorParity", "payloadDigestRecomputation", "protectedValueLeakScan", "executableContractCases", "runtimeOat"]);
   assertClosedSchemaNode(decisionSchema, ["schemaVersion", "recordType", "decisionId", "decision", "decisionRecordedAtUtc", "decidingAuthority", "candidateRef", "decisions", "sourceAuthorization", "lifecycleBoundary"]);
   assertClosedSchemaNode(approvalSchema, ["schemaVersion", "recordType", "receiptId", "decision", "subject", "approvingAuthority", "approval", "repositoryEvidence", "scopeBoundaries", "integrity"]);
+  assertClosedSchemaNode(approvalSchema.properties.subject, ["siteRecordId", "revision", "observatoryId", "payloadDigest", "validFromUtc", "validityEndMode", "validToUtc", "intervalSemantics"]);
+  assertClosedSchemaNode(approvalSchema.properties.approvingAuthority, ["authorityRef", "authorityKind", "custodianIsApprover"]);
+  assertClosedSchemaNode(approvalSchema.properties.approval, ["approvalTimestampUtc", "sourceChannel", "sourceStatement", "validityAcknowledged"]);
+  assertClosedSchemaNode(approvalSchema.properties.repositoryEvidence, ["repository", "branch", "candidatePath", "approvedPath", "receiptPath", "authorizationBaselineCommit"]);
+  assertClosedSchemaNode(approvalSchema.properties.integrity, ["canonicalizationMethod", "payloadDigestVerified", "payloadMutatedDuringApproval", "approvalSourceMatchesOwner"]);
   return { valid: true };
 }
 
@@ -245,6 +250,48 @@ export function validateDecisionEvidence(decision) {
   return { valid: errors.length === 0, errors: [...new Set(errors)] };
 }
 
+export function validateApprovalReceipt(receipt) {
+  const errors = [];
+  if (!isObject(receipt) || !hasExactKeys(receipt, ["schemaVersion", "recordType", "receiptId", "decision", "subject", "approvingAuthority", "approval", "repositoryEvidence", "scopeBoundaries", "integrity"])) {
+    return { valid: false, errors: ["INVALID_APPROVAL_RECEIPT_SCHEMA"] };
+  }
+  if (receipt.schemaVersion !== "1.0.0-draft" || receipt.recordType !== "DSG_SITE_AUTHORITY_APPROVAL_RECEIPT" || receipt.receiptId !== "DSG-SITE-RECORD-MANCIANO-001-APPROVAL-001" || receipt.decision !== "APPROVED") errors.push("INVALID_APPROVAL_RECEIPT");
+  const subject = receipt.subject;
+  if (!hasExactKeys(subject, ["siteRecordId", "revision", "observatoryId", "payloadDigest", "validFromUtc", "validityEndMode", "validToUtc", "intervalSemantics"])) errors.push("INVALID_APPROVAL_RECEIPT_SCHEMA");
+  if (!isObject(subject) || typeof subject.siteRecordId !== "string" || !Number.isInteger(subject.revision) || typeof subject.observatoryId !== "string" || !/^sha256:[a-f0-9]{64}$/.test(subject.payloadDigest ?? "") || !isUtcTimestamp(subject.validFromUtc) || subject.validityEndMode !== "UNBOUNDED" || subject.validToUtc !== null || subject.intervalSemantics !== "HALF_OPEN") errors.push("INVALID_APPROVAL_SUBJECT");
+  const authority = receipt.approvingAuthority;
+  if (!hasExactKeys(authority, ["authorityRef", "authorityKind", "custodianIsApprover"]) || authority.authorityRef !== "github:user:maininimassimo-bit" || authority.authorityKind !== "HUMAN_REPOSITORY_OWNER" || authority.custodianIsApprover !== false) errors.push("INVALID_APPROVING_AUTHORITY");
+  const approval = receipt.approval;
+  if (!hasExactKeys(approval, ["approvalTimestampUtc", "sourceChannel", "sourceStatement", "validityAcknowledged"]) || !isUtcTimestamp(approval.approvalTimestampUtc) || approval.sourceChannel !== "OWNER_CONTROLLED_INTERACTION_CHANNEL" || typeof approval.sourceStatement !== "string" || approval.sourceStatement.length === 0 || approval.validityAcknowledged !== true) errors.push("INVALID_APPROVAL_DECISION");
+  const repositoryEvidence = receipt.repositoryEvidence;
+  if (!hasExactKeys(repositoryEvidence, ["repository", "branch", "candidatePath", "approvedPath", "receiptPath", "authorizationBaselineCommit"]) || repositoryEvidence.repository !== "maininimassimo-bit/digital-stargate-manual" || repositoryEvidence.branch !== "feat/bkl-031-f3-a1-m4-site-authority-approval" || !/^[a-f0-9]{40}$/.test(repositoryEvidence.authorizationBaselineCommit ?? "")) errors.push("INVALID_REPOSITORY_EVIDENCE");
+  const requiredBoundaries = ["NO_PUBLIC_EXACT_COORDINATES", "NO_PUBLIC_ELEVATION", "NO_PUBLIC_EXACT_ADDRESS", "NO_SETUP_ASSIGNMENT_APPROVAL", "NO_RUNTIME_OR_EAGLE_OPERATION", "NO_READINESS_OR_GO_NO_GO_AUTHORITY", "NO_SAFETY_AUTHORITY_CHANGE"];
+  if (!Array.isArray(receipt.scopeBoundaries) || new Set(receipt.scopeBoundaries).size !== receipt.scopeBoundaries.length || requiredBoundaries.some((boundary) => !receipt.scopeBoundaries.includes(boundary))) errors.push("INVALID_APPROVAL_SCOPE");
+  const integrity = receipt.integrity;
+  if (!hasExactKeys(integrity, ["canonicalizationMethod", "payloadDigestVerified", "payloadMutatedDuringApproval", "approvalSourceMatchesOwner"]) || integrity.canonicalizationMethod !== CANONICALIZATION_METHOD || integrity.payloadDigestVerified !== true || integrity.payloadMutatedDuringApproval !== false || integrity.approvalSourceMatchesOwner !== true) errors.push("INVALID_APPROVAL_INTEGRITY");
+  return { valid: errors.length === 0, errors: [...new Set(errors)] };
+}
+
+export function validatePromotion(candidate, approved, receipt) {
+  const errors = [];
+  const candidateValidation = validateRecord(candidate);
+  const approvedValidation = validateRecord(approved);
+  const receiptValidation = validateApprovalReceipt(receipt);
+  if (!candidateValidation.valid) errors.push("INVALID_DRAFT_CANDIDATE");
+  if (!approvedValidation.valid) errors.push("INVALID_APPROVED_ENVELOPE");
+  if (!receiptValidation.valid) errors.push(...receiptValidation.errors);
+  if (candidate?.lifecycle?.state !== "DRAFT" || candidate?.lifecycle?.eligibleForResolution !== false || candidate?.lifecycle?.approvalEvidenceRef !== null) errors.push("INVALID_DRAFT_CANDIDATE");
+  if (approved?.lifecycle?.state !== "APPROVED" || approved?.lifecycle?.eligibleForResolution !== true) errors.push("INVALID_APPROVED_ENVELOPE");
+  if (canonicalize(candidate?.sitePayload) !== canonicalize(approved?.sitePayload) || candidate?.payloadDigest?.value !== approved?.payloadDigest?.value) errors.push("PAYLOAD_MUTATED_DURING_APPROVAL");
+  if (candidate?.lifecycle?.decisionEvidenceRef !== approved?.lifecycle?.decisionEvidenceRef) errors.push("DECISION_EVIDENCE_CHANGED_DURING_APPROVAL");
+  const subject = receipt?.subject ?? {};
+  const validity = approved?.sitePayload?.validity ?? {};
+  if (subject.siteRecordId !== approved?.sitePayload?.siteRecordId || subject.revision !== approved?.sitePayload?.revision || subject.observatoryId !== approved?.sitePayload?.observatoryId || subject.payloadDigest !== approved?.payloadDigest?.value || subject.validFromUtc !== validity.validFromUtc || subject.validityEndMode !== validity.validityEndMode || subject.validToUtc !== validity.validToUtc || subject.intervalSemantics !== validity.intervalSemantics) errors.push("APPROVAL_SUBJECT_BINDING_FAILED");
+  if (approved?.lifecycle?.approvedAtUtc !== receipt?.approval?.approvalTimestampUtc || approved?.lifecycle?.approvalEvidenceRef !== receipt?.repositoryEvidence?.receiptPath || receipt?.repositoryEvidence?.candidatePath !== "governance/site-authority/site-records/DSG-SITE-RECORD-MANCIANO-001.draft.json" || receipt?.repositoryEvidence?.approvedPath !== "governance/site-authority/site-records/DSG-SITE-RECORD-MANCIANO-001.approved.json") errors.push("APPROVAL_EVIDENCE_BINDING_FAILED");
+  if (!receipt?.approval?.sourceStatement?.includes(subject.payloadDigest ?? "") || !receipt?.approval?.sourceStatement?.includes(subject.validFromUtc ?? "")) errors.push("APPROVAL_STATEMENT_BINDING_FAILED");
+  return { valid: errors.length === 0, errors: [...new Set(errors)] };
+}
+
 function intervalContains(validity, instant) {
   const t = Date.parse(instant);
   if (!Number.isFinite(t) || !isUtcTimestamp(instant)) return false;
@@ -369,22 +416,29 @@ export async function verifyProtectedValuesAbsentFromDocs(record, docsRoot) {
 
 async function runCli() {
   const repositoryRoot = resolve(fileURLToPath(new URL("../../..", import.meta.url)));
-  const recordPath = join(repositoryRoot, "governance/site-authority/site-records/DSG-SITE-RECORD-MANCIANO-001.draft.json");
+  const candidatePath = join(repositoryRoot, "governance/site-authority/site-records/DSG-SITE-RECORD-MANCIANO-001.draft.json");
+  const approvedPath = join(repositoryRoot, "governance/site-authority/site-records/DSG-SITE-RECORD-MANCIANO-001.approved.json");
   const decisionPath = join(repositoryRoot, "governance/site-authority/decision-evidence/DSG-SITE-MANCIANO-001.owner-decision.json");
-  const record = JSON.parse(await readFile(recordPath, "utf8"));
+  const receiptPath = join(repositoryRoot, "governance/site-authority/approval-evidence/DSG-SITE-RECORD-MANCIANO-001.approval.json");
+  const candidate = JSON.parse(await readFile(candidatePath, "utf8"));
+  const approved = JSON.parse(await readFile(approvedPath, "utf8"));
   const decision = JSON.parse(await readFile(decisionPath, "utf8"));
+  const receipt = JSON.parse(await readFile(receiptPath, "utf8"));
   const schemaRoot = join(repositoryRoot, "governance/site-authority/schemas");
   const recordSchema = JSON.parse(await readFile(join(schemaRoot, "governed-site-record.schema.json"), "utf8"));
   const decisionSchema = JSON.parse(await readFile(join(schemaRoot, "site-source-decision.schema.json"), "utf8"));
   const approvalSchema = JSON.parse(await readFile(join(schemaRoot, "site-authority-approval-receipt.schema.json"), "utf8"));
   assertSchemaValidatorParity(recordSchema, decisionSchema, approvalSchema);
-  const validation = validateRecord(record);
-  if (!validation.valid) throw new Error(`SITE_AUTHORITY_VALIDATION_FAILED:${validation.errors.join(",")}`);
+  const promotion = validatePromotion(candidate, approved, receipt);
+  if (!promotion.valid) throw new Error(`SITE_AUTHORITY_PROMOTION_FAILED:${promotion.errors.join(",")}`);
   const decisionValidation = validateDecisionEvidence(decision);
   if (!decisionValidation.valid) throw new Error(`SITE_AUTHORITY_DECISION_FAILED:${decisionValidation.errors.join(",")}`);
-  if (record.lifecycle.decisionEvidenceRef !== relative(repositoryRoot, decisionPath).replaceAll("\\", "/") || decision.candidateRef !== relative(repositoryRoot, recordPath).replaceAll("\\", "/") || record.sitePayload.validity.validFromUtc !== decision.decisionRecordedAtUtc) throw new Error("SITE_AUTHORITY_DECISION_BINDING_FAILED");
-  await verifyProtectedValuesAbsentFromDocs(record, join(repositoryRoot, "docs"));
-  process.stdout.write("Site Authority protected draft validation passed; sensitive values omitted.\n");
+  if (candidate.lifecycle.decisionEvidenceRef !== relative(repositoryRoot, decisionPath).replaceAll("\\", "/") || decision.candidateRef !== relative(repositoryRoot, candidatePath).replaceAll("\\", "/") || candidate.sitePayload.validity.validFromUtc !== decision.decisionRecordedAtUtc || receipt.repositoryEvidence.receiptPath !== relative(repositoryRoot, receiptPath).replaceAll("\\", "/") || receipt.repositoryEvidence.approvedPath !== relative(repositoryRoot, approvedPath).replaceAll("\\", "/")) throw new Error("SITE_AUTHORITY_EVIDENCE_BINDING_FAILED");
+  const available = resolveSiteAuthority([candidate, approved], { observatoryId: approved.sitePayload.observatoryId, asOfUtc: approved.sitePayload.validity.validFromUtc, authorized: true });
+  const denied = resolveSiteAuthority([candidate, approved], { observatoryId: approved.sitePayload.observatoryId, asOfUtc: approved.sitePayload.validity.validFromUtc, authorized: false });
+  if (available.state !== "AVAILABLE" || denied.reasonCode !== "ACCESS_DENIED") throw new Error("SITE_AUTHORITY_RESOLUTION_GATE_FAILED");
+  await verifyProtectedValuesAbsentFromDocs(approved, join(repositoryRoot, "docs"));
+  process.stdout.write("Site Authority approval promotion validation passed; sensitive values omitted.\n");
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

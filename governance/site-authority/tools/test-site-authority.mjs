@@ -7,6 +7,8 @@ import {
   digestPayload,
   redactAuditEvent,
   resolveSiteAuthority,
+  validateApprovalReceipt,
+  validatePromotion,
   validateRecord,
 } from "./site-authority-validator.mjs";
 
@@ -122,6 +124,42 @@ function envelope({ state = "APPROVED", payload = basePayload(), lifecycle = {} 
   return record;
 }
 
+function promotionFixture() {
+  const payload = basePayload({ validity: { validityEndMode: "UNBOUNDED", validToUtc: null } });
+  const receiptPath = "governance/site-authority/approval-evidence/DSG-SITE-RECORD-MANCIANO-001.approval.json";
+  const candidate = envelope({ state: "DRAFT", payload });
+  const approved = envelope({ state: "APPROVED", payload, lifecycle: { approvalEvidenceRef: receiptPath, approvedAtUtc: "2026-01-02T00:00:00.000Z" } });
+  const receipt = {
+    schemaVersion: "1.0.0-draft",
+    recordType: "DSG_SITE_AUTHORITY_APPROVAL_RECEIPT",
+    receiptId: "DSG-SITE-RECORD-MANCIANO-001-APPROVAL-001",
+    decision: "APPROVED",
+    subject: {
+      siteRecordId: payload.siteRecordId,
+      revision: payload.revision,
+      observatoryId: payload.observatoryId,
+      payloadDigest: approved.payloadDigest.value,
+      validFromUtc: payload.validity.validFromUtc,
+      validityEndMode: payload.validity.validityEndMode,
+      validToUtc: payload.validity.validToUtc,
+      intervalSemantics: payload.validity.intervalSemantics,
+    },
+    approvingAuthority: { authorityRef: "github:user:maininimassimo-bit", authorityKind: "HUMAN_REPOSITORY_OWNER", custodianIsApprover: false },
+    approval: { approvalTimestampUtc: approved.lifecycle.approvedAtUtc, sourceChannel: "OWNER_CONTROLLED_INTERACTION_CHANNEL", sourceStatement: `Approve ${approved.payloadDigest.value} from ${payload.validity.validFromUtc}.`, validityAcknowledged: true },
+    repositoryEvidence: {
+      repository: "maininimassimo-bit/digital-stargate-manual",
+      branch: "feat/bkl-031-f3-a1-m4-site-authority-approval",
+      candidatePath: "governance/site-authority/site-records/DSG-SITE-RECORD-MANCIANO-001.draft.json",
+      approvedPath: "governance/site-authority/site-records/DSG-SITE-RECORD-MANCIANO-001.approved.json",
+      receiptPath,
+      authorizationBaselineCommit: "0".repeat(40),
+    },
+    scopeBoundaries: ["NO_PUBLIC_EXACT_COORDINATES", "NO_PUBLIC_ELEVATION", "NO_PUBLIC_EXACT_ADDRESS", "NO_SETUP_ASSIGNMENT_APPROVAL", "NO_RUNTIME_OR_EAGLE_OPERATION", "NO_READINESS_OR_GO_NO_GO_AUTHORITY", "NO_SAFETY_AUTHORITY_CHANGE"],
+    integrity: { canonicalizationMethod: "DSG-F3A1-CANONICAL-JSON-SHA256-1", payloadDigestVerified: true, payloadMutatedDuringApproval: false, approvalSourceMatchesOwner: true },
+  };
+  return { candidate, approved, receipt };
+}
+
 function expectError(record, code) {
   const result = validateRecord(record);
   assert.equal(result.valid, false);
@@ -183,3 +221,12 @@ test("A1-N38 Domain filesystem dependency fails architecture boundary", () => as
 test("A1-N39 ephemeris provider selection violates scope", () => assert.ok(assertBoundarySource("use Skyfield here").violations.includes("EPHEMERIS_PROVIDER_SCOPE")));
 test("A1-N40 readiness or command semantics violate boundary", () => assert.ok(assertBoundarySource("const readiness = true; deviceCommand();").violations.includes("SAFETY_OR_COMMAND_SCOPE")));
 test("A1-N41 EAGLE workload requirement violates scope", () => assert.ok(assertBoundarySource("EAGLE_WORKLOAD_REQUIRED").violations.includes("EAGLE_SCOPE")));
+
+test("M4-P01 exact receipt shape is valid", () => { const { receipt } = promotionFixture(); assert.equal(validateApprovalReceipt(receipt).valid, true); });
+test("M4-P02 approved envelope binds to unchanged candidate and receipt", () => { const fixture = promotionFixture(); assert.equal(validatePromotion(fixture.candidate, fixture.approved, fixture.receipt).valid, true); });
+test("M4-N01 non-approved receipt decision fails", () => { const fixture = promotionFixture(); fixture.receipt.decision = "REJECTED"; assert.equal(validatePromotion(fixture.candidate, fixture.approved, fixture.receipt).valid, false); });
+test("M4-N02 receipt digest mismatch fails", () => { const fixture = promotionFixture(); fixture.receipt.subject.payloadDigest = "sha256:" + "f".repeat(64); assert.ok(validatePromotion(fixture.candidate, fixture.approved, fixture.receipt).errors.includes("APPROVAL_SUBJECT_BINDING_FAILED")); });
+test("M4-N03 receipt validity mismatch fails", () => { const fixture = promotionFixture(); fixture.receipt.subject.validFromUtc = "2026-01-03T00:00:00.000Z"; assert.ok(validatePromotion(fixture.candidate, fixture.approved, fixture.receipt).errors.includes("APPROVAL_SUBJECT_BINDING_FAILED")); });
+test("M4-N04 approving authority mismatch fails", () => { const fixture = promotionFixture(); fixture.receipt.approvingAuthority.authorityRef = "github:user:synthetic"; assert.ok(validatePromotion(fixture.candidate, fixture.approved, fixture.receipt).errors.includes("INVALID_APPROVING_AUTHORITY")); });
+test("M4-N05 approval evidence reference mismatch fails", () => { const fixture = promotionFixture(); fixture.approved.lifecycle.approvalEvidenceRef = "governance/site-authority/approval-evidence/other.json"; assert.ok(validatePromotion(fixture.candidate, fixture.approved, fixture.receipt).errors.includes("APPROVAL_EVIDENCE_BINDING_FAILED")); });
+test("M4-N06 payload mutation during approval fails", () => { const fixture = promotionFixture(); fixture.approved.sitePayload.revision = 2; fixture.approved.payloadDigest.value = digestPayload(fixture.approved.sitePayload); assert.ok(validatePromotion(fixture.candidate, fixture.approved, fixture.receipt).errors.includes("PAYLOAD_MUTATED_DURING_APPROVAL")); });

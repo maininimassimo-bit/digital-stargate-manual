@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.20 |
+| Versione | 5.21 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -49,7 +49,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
-| BKL-031 | P1 | Observation Planner intelligente | In Progress | PR #202 baseline verified; F3-A1 owner decisions complete; protected DRAFT/schema/validator/51 tests are the F3-A1-M2 review candidate | Integrate DRAFT after exact-head gates, then obtain separate owner approval of the exact payload digest; CurrentSetupAssignment remains a later gate | ADR-009; PR #202; F3-A1 contract; F3-A1-M2 solution/evidence |
+| BKL-031 | P1 | Observation Planner intelligente | In Progress | PR #203 protected DRAFT integrated/post-merge verified; exact-digest and validity owner approval received | Integrate the bound receipt and unchanged APPROVED envelope through F3-A1-M4, then reconcile evidence and promote the CurrentSetupAssignment owner gate | ADR-009; PR #203; F3-A1-M4 approval/evidence |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
@@ -261,3 +261,7 @@ The approved setup baseline does not resolve current setup. F3-A1-M1 is selected
 ### BKL-031 F3-A1-M2 protected Site Authority DRAFT — 15/09/2026
 
 The Repository Owner completed the F3-A1-M1 source and authority decisions and authorized protected repository registration without public disclosure of exact coordinates, elevation or address. F3-A1-M2 is a review candidate containing a protected, ineligible `DRAFT`, source-decision evidence, versioned schemas, deterministic digest validation, privacy enforcement and the executable A1-P01–P10/A1-N01–N41 suite. Local evidence is 51/51 PASS; exact-head CI, ARB and Release Quality remain required. Source authorization is not exact-digest lifecycle approval. S08 remains `UNAVAILABLE`, S09 remains `UNAVAILABLE_CURRENT`, and assignment/adapter/runtime/EAGLE/Safety remain outside scope.
+
+### BKL-031 F3-A1-M3 owner approval and M4 promotion candidate — 15/09/2026
+
+PR #203 merged as `d5750ce160c5f80d20a72bc35dee321200647d03` with 10/10 post-merge workflows. The Repository Owner subsequently approved the exact canonical Site Authority digest and acknowledged its unbounded validity while preserving the prohibition on public coordinates, elevation and exact address. F3-A1-M4 adds the protected receipt and a separate APPROVED envelope with an unchanged payload, plus eight receipt/promotion tests for a 59-case suite. Exact-head CI, ARB, Release Quality, expected-head merge and post-merge reconciliation remain required. No runtime adapter or assignment is included; S08/S09 remain unavailable to runtime consumers.

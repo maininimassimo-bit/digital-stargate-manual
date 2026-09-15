@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A1-M2-SOLUTION-001 |
-| Stato | **IMPLEMENTED AS PROTECTED DRAFT / EXACT-DIGEST APPROVAL REQUIRED** |
+| Stato | **PROTECTED DRAFT INTEGRATED / EXACT-DIGEST OWNER APPROVED / LIFECYCLE PROMOTION CANDIDATE** |
 | Data | 15/09/2026 |
 | Capability | BKL-031 — Observation Planner intelligente |
 | Contratto | BKL-031-F3-A1-CONTRACT-001 |
-| Repository baseline | `main@bb11f25192200655427411a46a2e18560a5d9bec` |
+| Repository baseline | `main@d5750ce160c5f80d20a72bc35dee321200647d03` |
 | Runtime / EAGLE | None |
 
 ## 1. Outcome
@@ -25,7 +25,7 @@ No protected value, internal identifier, source locator or internal digest is re
 | Canonicalizer / validator | recompute payload identity and fail closed on invalid or ambiguous records | logging protected data |
 | Resolver core | select one approved, interval-valid record in one authority scope | latest-wins, fallback or inference |
 | Public-boundary guard | enforce allowlist, independent public identity and protected-literal leak scan | public projection delivery |
-| Dedicated workflow | execute registry validation and 51 contract/privacy/boundary cases | EAGLE or observatory workload |
+| Dedicated workflow | execute registry validation, 51 contract cases and 8 approval-promotion cases | EAGLE or observatory workload |
 
 ## 3. Authority and identity
 
@@ -103,9 +103,9 @@ The dedicated workflow validates the real protected candidate without printing p
 |---|---|---|
 | M2-A schema/canonicalization | implemented candidate | schema and digest parity pass |
 | M2-B protected DRAFT | implemented candidate | source decision present; lifecycle remains ineligible |
-| M2-C validator/test gate | implemented candidate | 51/51 cases and leak scan pass |
-| M3 exact-digest approval | blocked on owner | exact digest explicitly approved through owner-controlled channel |
-| M4 lifecycle promotion | not started | receipt added without payload mutation; re-review and CI |
+| M2-C validator/test gate | integrated | PR #203 exact-head and post-merge gates passed |
+| M3 exact-digest approval | completed | owner explicitly approved the exact digest and unbounded validity through the controlled channel |
+| M4 lifecycle promotion | review candidate | receipt and APPROVED envelope added without payload mutation; 59/59 local cases pass |
 | M5 repository adapter | not started | separate architecture package and authorization |
 | CurrentSetupAssignment | not started | separate record, digest and human approval |
 
@@ -120,4 +120,4 @@ The dedicated workflow validates the real protected candidate without printing p
 
 ## 10. Rollback
 
-Before approval, revert the protected DRAFT, schemas, scripts and documentation commit set. After a future approval, retire the envelope and return S08 to `UNAVAILABLE`; never delete evidence or fall back to N.I.N.A., telemetry or public generalized data. No observatory rollback is required.
+Before lifecycle-promotion integration, revert the protected APPROVED envelope and receipt while retaining the immutable DRAFT candidate. After integration, retire or revert the approved envelope to return repository resolution to `UNAVAILABLE`; never delete evidence or fall back to N.I.N.A., telemetry or public generalized data. No observatory rollback is required.
