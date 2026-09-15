@@ -5,7 +5,7 @@
 | Identificativo | DSG-BASELINE-2026-09-15 |
 | Stato | **CURRENT — ASSIGNMENT OWNER DECISIONS COMPLETE / ASSIGNMENT ABSENT** |
 | Repository baseline | `main@d5f403bbe6a39731213c372cb22296324d10b03d` |
-| Current package | `BKL-031-F3-A2-D3-DECISION-EVIDENCE` |
+| Current package | `BKL-031-F3-A2-D4-DRAFT-MATERIALIZATION` review candidate in PR #207 |
 | Runtime delta | None |
 | Data delta | Protected owner-decision evidence only; no assignment |
 | Infrastructure delta | None |
@@ -30,12 +30,16 @@ The setup baseline and Site Authority are independently approved. Their exact di
 | Elevation vertical semantics | materialized and validated |
 | Canonical site resolver identity/scope | materialized and validated |
 | Executable validity/privacy/promotion tests | 59/59 PASS; exact-head and post-merge verified |
-| CurrentSetupAssignment | absent |
+| CurrentSetupAssignment | protected DRAFT on PR branch; not approved or resolver-eligible |
 | Assignment owner decisions | complete; protected evidence integration candidate |
-| Assignment DRAFT materialization | not started; F3-A2-D4 next |
+| Assignment DRAFT materialization | implemented with closed schemas, validator and 57 tests; integration pending |
 | S08 / S09 | `UNAVAILABLE` / `UNAVAILABLE_CURRENT` |
 | Runtime adapter | absent; separate package and authorization required |
 
 ## 4. Rollback
 
 The F3-A1-M4 promotion can be reverted through reviewed Git history by removing the APPROVED envelope and receipt while retaining the historical DRAFT. Approved authority retirement remains governed by ADR-009. No runtime, migration, credential or observatory impact exists.
+
+## F3-A2-D4 baseline delta
+
+The PR branch adds repository-only protected authority artifacts and a redacted validation workflow. S08 remains unavailable to runtime and S09 remains `UNAVAILABLE_CURRENT`. No runtime, EAGLE, provider, readiness, command or Safety Authority delta is present.

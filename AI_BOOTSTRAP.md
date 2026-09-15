@@ -4,7 +4,7 @@
 |---|---|
 | Versione | 6.2 |
 | Baseline | 15/09/2026 |
-| Stato | Current root bootstrap — PR #205 merged/post-merge verified; CurrentSetupAssignment owner decisions complete; DRAFT materialization handoff next |
+| Stato | Current root bootstrap — PR #206 merged/post-merge verified; PR #207 F3-A2-D4 protected DRAFT review candidate |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -84,3 +84,7 @@ Nessun portale, planner, comparison layer, quality score o AI è Safety Authorit
 PR #205 merged as `d5f403bbe6a39731213c372cb22296324d10b03d` and is the verified repository baseline, with 9/9 post-merge workflows. The protected Site Authority and setup baseline remain independently APPROVED; protected values stay outside public documentation and logs.
 
 The owner has completed `BKL-031-F3-A2-D3`: the future `CurrentSetupAssignment` uses the protected GitHub registry outside `docs/`; the Repository Owner is assignment owner and human Approval Authority; the Architecture Office is non-approving custodian; validity starts with the approved setup baseline and is unbounded. This authorizes protected decision evidence only. `BKL-031-F3-A2-D4` is the next bounded DRAFT materialization handoff. No assignment is materialized or approved. S08 remains `UNAVAILABLE`; S09 remains `UNAVAILABLE_CURRENT`. Runtime, EAGLE and Safety Authority remain separate.
+
+## F3-A2-D4 review-candidate update — 15/09/2026
+
+PR #206 integrated the assignment owner decisions and passed post-merge verification. PR #207 materializes only a protected, resolver-ineligible DRAFT with closed schemas, canonical identity, exact protected bindings, 57 executable cases and a redacted workflow. The implementation head passed its dedicated gate. Assignment approval, receipt and runtime remain absent; S09 is `UNAVAILABLE_CURRENT`. After D4 merge and post-merge verification, the next step is the mandatory human exact-digest approval gate.

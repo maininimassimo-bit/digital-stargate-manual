@@ -3,8 +3,8 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A2-CONTRACT-001 |
-| Stato | **ACCEPTED WITH CONDITIONS / FIRST BASELINE APPROVED — ASSIGNMENT AND RUNTIME NOT IMPLEMENTED** |
-| Versione | 1.3 |
+| Stato | **ACCEPTED WITH CONDITIONS / BASELINE AND SITE APPROVED — ASSIGNMENT DRAFT MATERIALIZED, RUNTIME NOT IMPLEMENTED** |
+| Versione | 1.4 |
 | Data | 15/09/2026 |
 | Baseline | `main@687f966fa544f7c4b31eaa29433cfa8ab48e52fe` |
 | Parent handoff | `BKL-031-F3-A2-PROGRAM-001` |
@@ -319,7 +319,7 @@ Restano futuri e non impliciti:
 - migration data e OAT;
 - provider/method F3-A3.
 
-ADR-009 determina invece repository authority, ruoli concreti, separazione delle approvazioni e `DSG-F3A2-CANONICAL-JSON-SHA256-1`. Il primo record `DSG-SETUP-BASELINE-001` resta `DRAFT`: la sua presenza non soddisfa il gate della prima baseline approvata.
+ADR-009 determina invece repository authority, ruoli concreti, separazione delle approvazioni e `DSG-F3A2-CANONICAL-JSON-SHA256-1`. Il primo record `first protected setup baseline record` resta `DRAFT`: la sua presenza non soddisfa il gate della prima baseline approvata.
 
 Questi elementi non impediscono la review del contratto logico, ma impediscono materializzazione e disponibilità S09 finché non sono deliberati e provati.
 
@@ -339,6 +339,11 @@ Schema, fixture, validator, adapter, materializzazione, runtime ed EAGLE restano
 
 ## Approval materialization update — 15/09/2026
 
-The Repository Owner approved `DSG-SETUP-BASELINE-001` at exact payload digest `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`, with half-open validity from `2026-09-16T00:00:00Z`. The protected approval receipt and `APPROVED` lifecycle envelope are repository records outside `docs/`.
+The Repository Owner approved `first protected setup baseline record` at exact payload digest `[protected digest recorded outside docs]`, with half-open validity from `2026-09-16T00:00:00Z`. The protected approval receipt and `APPROVED` lifecycle envelope are repository records outside `docs/`.
 
 This closes only the first-baseline portion of `ARB-197-MI01`. The payload is immutable and retains its proposal-time fields; the envelope plus receipt carries current lifecycle truth. No F3-A1 concrete site record or `CurrentSetupAssignment` is created, so S09 remains `UNAVAILABLE_CURRENT`. Schema, validator, adapter, public projection, runtime, EAGLE, readiness, go/no-go and Safety Authority remain outside this increment.
+
+
+## D4 protected DRAFT materialization update — 15/09/2026
+
+F3-A2-D4 implements closed schemas, a protected DRAFT bound to the approved authorities, canonical identity, fail-closed validation, privacy enforcement and 57 executable cases. The DRAFT has no receipt, is resolver-ineligible and does not make S09 available. Human exact-digest approval and runtime remain separate.
