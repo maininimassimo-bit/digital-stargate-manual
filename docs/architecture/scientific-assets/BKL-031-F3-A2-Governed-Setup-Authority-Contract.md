@@ -3,15 +3,15 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A2-CONTRACT-001 |
-| Stato | **ACCEPTED WITH CONDITIONS / BASELINE AND SITE APPROVED — ASSIGNMENT DRAFT MATERIALIZED, RUNTIME NOT IMPLEMENTED** |
+| Stato | **ACCEPTED WITH CONDITIONS / ASSIGNMENT APPROVAL-PROMOTION REVIEW CANDIDATE — RUNTIME NOT IMPLEMENTED** |
 | Versione | 1.4 |
 | Data | 15/09/2026 |
 | Baseline | `main@687f966fa544f7c4b31eaa29433cfa8ab48e52fe` |
 | Parent handoff | `BKL-031-F3-A2-PROGRAM-001` |
 | Parent acceptance | `BKL-031-F3-A2-HANDOFF-ACCEPTANCE-001` |
 | Governing architecture | BKL-031 F3 Solution Architecture; AP-006 governance concepts |
-| Review disposition | `ARB-195-MI01` closed; `ARB-197-MI01-A` resolved by ADR-009; `ARB-197-MI01-B` closed by exact-digest owner approval; site and assignment gates remain open |
-| Runtime / data / schema impact | Protected approved baseline and receipt only; no schema or runtime |
+| Review disposition | baseline and site gates closed; exact-digest assignment approval received; D5 promotion awaits exact-head review and integration |
+| Runtime / data / schema impact | Protected assignment receipt, APPROVED envelope and receipt schema; no runtime |
 | PC Principale / EAGLE | Nessuna attività richiesta |
 
 ## 1. Scopo e boundary
@@ -347,3 +347,8 @@ This closes only the first-baseline portion of `ARB-197-MI01`. The payload is im
 ## D4 protected DRAFT materialization update — 15/09/2026
 
 F3-A2-D4 implements closed schemas, a protected DRAFT bound to the approved authorities, canonical identity, fail-closed validation, privacy enforcement and 57 executable cases. The DRAFT has no receipt, is resolver-ineligible and does not make S09 available. Human exact-digest approval and runtime remain separate.
+
+
+## D5 exact-digest approval and promotion update — 15/09/2026
+
+The Repository Owner approved the exact protected assignment digest, valid from the approved setup-baseline effective start without expiry. The D5 package adds a closed protected receipt, preserves the historical DRAFT, and creates a separate `APPROVED` envelope with an unchanged payload and digest. Receipt, authority, validity, source binding and immutability are executable gates. Repository resolution is `AVAILABLE` only for an authorized caller when Site Authority and setup baseline remain approved and effective. Runtime S09 remains `UNAVAILABLE_CURRENT` because an adapter is not part of this package.

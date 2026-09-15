@@ -30,7 +30,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Validate protected assignment DRAFT and authority bindings
+      - name: Validate protected assignment lifecycle and authority bindings
         run: node governance/setup-authority/tools/setup-assignment-validator.mjs
       - name: Execute F3-A2 contract, privacy and mutation cases
         if: always()

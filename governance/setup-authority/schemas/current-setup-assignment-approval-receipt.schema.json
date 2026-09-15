@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.invalid/schemas/current-setup-assignment-approval-receipt.schema.json",
+  "title": "Digital StarGate CurrentSetupAssignment Approval Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordType",
+    "receiptId",
+    "decision",
+    "subject",
+    "approvingAuthority",
+    "approval",
+    "repositoryEvidence",
+    "scopeBoundaries",
+    "integrity"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0-draft"
+    },
+    "recordType": {
+      "const": "DSG_CURRENT_SETUP_ASSIGNMENT_APPROVAL_RECEIPT"
+    },
+    "receiptId": {
+      "const": "DSG-CURRENT-SETUP-ASSIGNMENT-001-APPROVAL-001"
+    },
+    "decision": {
+      "const": "APPROVED"
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assignmentId",
+        "revision",
+        "observatoryId",
+        "payloadDigest",
+        "validFromUtc",
+        "validityEndMode",
+        "validToUtc",
+        "intervalSemantics"
+      ],
+      "properties": {
+        "assignmentId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "observatoryId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "payloadDigest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "validFromUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "validityEndMode": {
+          "enum": [
+            "EXCLUSIVE",
+            "UNBOUNDED"
+          ]
+        },
+        "validToUtc": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "intervalSemantics": {
+          "const": "HALF_OPEN"
+        }
+      }
+    },
+    "approvingAuthority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authorityRef",
+        "authorityKind",
+        "custodianIsApprover"
+      ],
+      "properties": {
+        "authorityRef": {
+          "const": "github:user:maininimassimo-bit"
+        },
+        "authorityKind": {
+          "const": "HUMAN_REPOSITORY_OWNER"
+        },
+        "custodianIsApprover": {
+          "const": false
+        }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approvalTimestampUtc",
+        "sourceChannel",
+        "sourceStatement",
+        "validityAcknowledged"
+      ],
+      "properties": {
+        "approvalTimestampUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sourceChannel": {
+          "const": "OWNER_CONTROLLED_INTERACTION_CHANNEL"
+        },
+        "sourceStatement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "validityAcknowledged": {
+          "const": true
+        }
+      }
+    },
+    "repositoryEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "branch",
+        "candidatePath",
+        "approvedPath",
+        "receiptPath",
+        "authorizationBaselineCommit"
+      ],
+      "properties": {
+        "repository": {
+          "const": "maininimassimo-bit/digital-stargate-manual"
+        },
+        "branch": {
+          "const": "feat/bkl-031-f3-a2-d5-assignment-approval"
+        },
+        "candidatePath": {
+          "const": "governance/setup-authority/setup-assignments/DSG-CURRENT-SETUP-ASSIGNMENT-001.draft.json"
+        },
+        "approvedPath": {
+          "const": "governance/setup-authority/setup-assignments/DSG-CURRENT-SETUP-ASSIGNMENT-001.approved.json"
+        },
+        "receiptPath": {
+          "const": "governance/setup-authority/approval-evidence/DSG-CURRENT-SETUP-ASSIGNMENT-001.approval.json"
+        },
+        "authorizationBaselineCommit": {
+          "const": "88f80d0866ceac6fcd32a90022f7ce113b75ffee"
+        }
+      }
+    },
+    "scopeBoundaries": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalizationMethod",
+        "payloadDigestVerified",
+        "payloadMutatedDuringApproval",
+        "approvalSourceMatchesOwner",
+        "validityMatchesApprovedBaselineStart"
+      ],
+      "properties": {
+        "canonicalizationMethod": {
+          "const": "DSG-F3A2-CANONICAL-JSON-SHA256-1"
+        },
+        "payloadDigestVerified": {
+          "const": true
+        },
+        "payloadMutatedDuringApproval": {
+          "const": false
+        },
+        "approvalSourceMatchesOwner": {
+          "const": true
+        },
+        "validityMatchesApprovedBaselineStart": {
+          "const": true
+        }
+      }
+    }
+  }
+}

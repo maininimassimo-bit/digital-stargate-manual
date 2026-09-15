@@ -2,10 +2,10 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-15",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-A2-D4 accepted/post-merge verified; mandatory human exact-digest approval gate",
+  "projectStatus": "BKL-031 F3-A2-D5 exact-digest assignment approval received; protected receipt/promotion review candidate",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 mandatory human approval or rejection of the exact protected CurrentSetupAssignment digest",
-  "target": "Stop at the human approval boundary. Do not create a receipt, promote lifecycle, expose protected values or begin runtime work until the Repository Owner explicitly approves the exact protected assignment digest.",
+  "nextMilestone": "BKL-031 F3-A2-D5 exact-head integration and post-merge acceptance reconciliation",
+  "target": "Complete exact-head CI, process-separated Documentation/ARB/Release Quality review, expected-head merge and post-merge verification for the protected approval receipt and unchanged APPROVED envelope. Do not start runtime adapter work without a separate architecture package and authorization.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "PR #207 integrated and post-merge verified the protected resolver-ineligible F3-A2-D4 DRAFT, closed schemas, exact-reference validation, privacy enforcement and 57/57 tests. No assignment approval or runtime exists; S09 remains UNAVAILABLE_CURRENT. Progression is blocked only on mandatory human approval or rejection of the exact protected digest."
+          "note": "Exact-digest owner approval received. PR #209 is the protected F3-A2-D5 receipt and unchanged APPROVED-envelope review candidate with closed validation and 65/65 implementation tests. Runtime S09 remains UNAVAILABLE_CURRENT; adapter, EAGLE and Safety Authority are separate."
         },
         {
           "id": "BKL-032",
@@ -573,6 +573,13 @@
       "title": "BKL-031 F3-A2-D4 Acceptance Reconciliation",
       "date": "2026-09-15",
       "description": "PR #207 exact-head, AI-assisted review, expected-head merge and 7/7 post-merge evidence reconciled. Current state stops at mandatory human exact-digest approval."
+    },
+    {
+      "id": "M-BKL031-F3-A2-D5-APPROVAL",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A2-D5 CurrentSetupAssignment Approval and Promotion",
+      "date": "2026-09-15",
+      "description": "Repository Owner exact-digest approval received. PR #209 contains the protected receipt, unchanged APPROVED envelope, closed receipt schema and 65-case suite; exact-head integration and post-merge verification pending."
     }
   ]
 }

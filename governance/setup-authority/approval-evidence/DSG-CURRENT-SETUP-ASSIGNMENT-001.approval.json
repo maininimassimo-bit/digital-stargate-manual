@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0-draft",
+  "recordType": "DSG_CURRENT_SETUP_ASSIGNMENT_APPROVAL_RECEIPT",
+  "receiptId": "DSG-CURRENT-SETUP-ASSIGNMENT-001-APPROVAL-001",
+  "decision": "APPROVED",
+  "subject": {
+    "assignmentId": "DSG-CURRENT-SETUP-ASSIGNMENT-001",
+    "revision": 1,
+    "observatoryId": "DSG-OBSERVATORY-MANCIANO-001",
+    "payloadDigest": "sha256:e7632afb4f0b2dc725b888eb858f650e2669d1ebf78e098c25b950cf36eae4ef",
+    "validFromUtc": "2026-09-16T00:00:00Z",
+    "validityEndMode": "UNBOUNDED",
+    "validToUtc": null,
+    "intervalSemantics": "HALF_OPEN"
+  },
+  "approvingAuthority": {
+    "authorityRef": "github:user:maininimassimo-bit",
+    "authorityKind": "HUMAN_REPOSITORY_OWNER",
+    "custodianIsApprover": false
+  },
+  "approval": {
+    "approvalTimestampUtc": "2026-09-15T20:25:40.000Z",
+    "sourceChannel": "OWNER_CONTROLLED_INTERACTION_CHANNEL",
+    "sourceStatement": "Autorizzo l’approvazione del CurrentSetupAssignment con exact digest sha256:e7632afb4f0b2dc725b888eb858f650e2669d1ebf78e098c25b950cf36eae4ef, valido dall’efficacia della baseline setup senza scadenza. Autorizzo la registrazione del receipt nel registro GitHub protetto e la promozione del lifecycle ad APPROVED, senza pubblicazione del digest, delle coordinate, della quota o dell’indirizzo esatto.",
+    "validityAcknowledged": true
+  },
+  "repositoryEvidence": {
+    "repository": "maininimassimo-bit/digital-stargate-manual",
+    "branch": "feat/bkl-031-f3-a2-d5-assignment-approval",
+    "candidatePath": "governance/setup-authority/setup-assignments/DSG-CURRENT-SETUP-ASSIGNMENT-001.draft.json",
+    "approvedPath": "governance/setup-authority/setup-assignments/DSG-CURRENT-SETUP-ASSIGNMENT-001.approved.json",
+    "receiptPath": "governance/setup-authority/approval-evidence/DSG-CURRENT-SETUP-ASSIGNMENT-001.approval.json",
+    "authorizationBaselineCommit": "88f80d0866ceac6fcd32a90022f7ce113b75ffee"
+  },
+  "scopeBoundaries": [
+    "NO_PUBLIC_PROTECTED_DIGEST",
+    "NO_PUBLIC_EXACT_COORDINATES",
+    "NO_PUBLIC_ELEVATION",
+    "NO_PUBLIC_EXACT_ADDRESS",
+    "NO_RUNTIME_OR_EAGLE_OPERATION",
+    "NO_READINESS_OR_GO_NO_GO_AUTHORITY",
+    "NO_SAFETY_AUTHORITY_CHANGE",
+    "NO_DEVICE_COMMAND"
+  ],
+  "integrity": {
+    "canonicalizationMethod": "DSG-F3A2-CANONICAL-JSON-SHA256-1",
+    "payloadDigestVerified": true,
+    "payloadMutatedDuringApproval": false,
+    "approvalSourceMatchesOwner": true,
+    "validityMatchesApprovedBaselineStart": true
+  }
+}

@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 6.3 |
+| Versione | 6.4 |
 | Baseline | 15/09/2026 |
-| Stato | Current root bootstrap — PR #207 F3-A2-D4 ACCEPTED / POST-MERGE VERIFIED; mandatory human exact-digest approval gate current |
+| Stato | Current root bootstrap — PR #209 F3-A2-D5 approval/promotion review candidate |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -62,14 +62,15 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - BKL-031 F3-A1-M3/M4 — exact-digest owner approval, protected receipt and unchanged APPROVED envelope integrated via PR #204, merge `e73b1aa631c41dff97b9e5ededb6d6be02a667d4`, with 10/10 post-merge workflows;
 - BKL-031 F3-A1-M4 acceptance reconciliation — PR #205 merged as `d5f403bbe6a39731213c372cb22296324d10b03d` with 9/9 post-merge workflows;
 - BKL-031 F3-A2-D3 — source, roles, separation and validity decisions are complete and integrated via PR #206;
-- BKL-031 F3-A2-D4 — protected resolver-ineligible DRAFT, closed schemas, validator and 57-case suite are ACCEPTED / POST-MERGE VERIFIED via PR #207 and merge `e99e6b5ff5ea7247ee447a1c6c62dcaa479dee1b`; exact-digest human approval remains mandatory;
+- BKL-031 F3-A2-D4 — protected resolver-ineligible DRAFT, closed schemas, validator and 57-case suite are ACCEPTED / POST-MERGE VERIFIED via PR #207 and merge `e99e6b5ff5ea7247ee447a1c6c62dcaa479dee1b`;
+- BKL-031 F3-A2-D5 — exact-digest owner approval received; protected receipt, unchanged APPROVED envelope and 65-case suite are review candidate in PR #209;
 - Governance: `DSG-AEM-001` and `W-DSG-AEM-RULESET-001` are ACTIVE / POST-MERGE VERIFIED via PR #196 and merge `357a5edfbd39346b10a1a2d751018ff6d1dd208f`, with 9/9 workflows.
 
 La closure BKL-046 non dichiara efficacia scientifica né produzione: `NOT_EVALUABLE_CURRENT_EVIDENCE`, `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`. Nessun modello/provider, automatic acceptance o PixInsight apply è autorizzato.
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2 BASELINE APPROVED / F3-A1 SITE APPROVED / ASSIGNMENT DRAFT INTEGRATED / HUMAN APPROVAL NEXT] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2 BASELINE APPROVED / F3-A1 SITE APPROVED / ASSIGNMENT DRAFT INTEGRATED / APPROVAL-PROMOTION REVIEW] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -88,3 +89,8 @@ PR #207 merged as `e99e6b5ff5ea7247ee447a1c6c62dcaa479dee1b` and is the verified
 ## F3-A2-D4 acceptance checkpoint — 15/09/2026
 
 The AI-assisted process-separated reviews recorded Documentation `ACCEPTED WITH OBSERVATION`, ARB `APPROVED WITH CONDITIONS — 99/100` and Release Quality `CONDITIONALLY READY`, with no Blocker or Major. The mandatory current step is explicit human approval or rejection of the exact protected assignment digest. No receipt, lifecycle promotion or runtime work may be inferred from CI, merge or the continuous mandate.
+
+
+## F3-A2-D5 approval checkpoint — 15/09/2026
+
+The Repository Owner explicitly approved the exact protected assignment digest and unbounded validity from the setup-baseline effective start. PR #209 records the protected receipt and separate unchanged `APPROVED` envelope. The implementation head passed the redacted governance gate with 65/65 tests. Repository-authority resolution is eligible only for authorized validated input; runtime S09 remains `UNAVAILABLE_CURRENT`, and runtime, EAGLE and Safety Authority remain separate.

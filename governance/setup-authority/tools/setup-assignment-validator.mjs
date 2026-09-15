@@ -26,6 +26,13 @@ const DECISION_SITE_KEYS=["recordPath","siteRecordId","revision","observatoryId"
 const DECISION_BASE_KEYS=["recordPath","baselineId","baselineVersion","configurationId","payloadDigest","lifecycleState"];
 const DECISION_VALIDITY_KEYS=["validFromPolicy","validFromUtc","validityEndMode","validToUtc","intervalSemantics"];
 const SOURCE_AUTH_KEYS=["sourceChannel","ownerSelections","exactReferencesStoredOnlyInProtectedEvidence"];
+const RECEIPT_ROOT_KEYS=["schemaVersion","recordType","receiptId","decision","subject","approvingAuthority","approval","repositoryEvidence","scopeBoundaries","integrity"];
+const RECEIPT_SUBJECT_KEYS=["assignmentId","revision","observatoryId","payloadDigest","validFromUtc","validityEndMode","validToUtc","intervalSemantics"];
+const RECEIPT_AUTHORITY_KEYS=["authorityRef","authorityKind","custodianIsApprover"];
+const RECEIPT_APPROVAL_KEYS=["approvalTimestampUtc","sourceChannel","sourceStatement","validityAcknowledged"];
+const RECEIPT_REPOSITORY_KEYS=["repository","branch","candidatePath","approvedPath","receiptPath","authorizationBaselineCommit"];
+const RECEIPT_INTEGRITY_KEYS=["canonicalizationMethod","payloadDigestVerified","payloadMutatedDuringApproval","approvalSourceMatchesOwner","validityMatchesApprovedBaselineStart"];
+const APPROVAL_BOUNDARIES=["NO_PUBLIC_PROTECTED_DIGEST","NO_PUBLIC_EXACT_COORDINATES","NO_PUBLIC_ELEVATION","NO_PUBLIC_EXACT_ADDRESS","NO_RUNTIME_OR_EAGLE_OPERATION","NO_READINESS_OR_GO_NO_GO_AUTHORITY","NO_SAFETY_AUTHORITY_CHANGE","NO_DEVICE_COMMAND"];
 const REQUIRED_PROHIBITIONS=["CURRENT_SETUP_RESOLUTION_BEFORE_APPROVAL","DEVICE_COMMAND","SAFETY_AUTHORITY","READINESS_OR_GO_NO_GO","PUBLIC_PROTECTED_ASSIGNMENT_PROJECTION","EAGLE_WORKLOAD","LATEST_WINS_FALLBACK","HOST_OR_SESSION_STATE_AS_AUTHORITY"];
 
 function obj(v){return v!==null&&typeof v==="object"&&!Array.isArray(v);}
@@ -89,13 +96,44 @@ export function validateDecisionEvidence(d){
  return{valid:errors.length===0,errors:unique(errors)};
 }
 function schemaNode(node,required){return obj(node)&&node.additionalProperties===false&&same([...(node.required||[])].sort(),[...required].sort())&&same(Object.keys(node.properties||{}).sort(),[...required].sort());}
-export function assertSchemaValidatorParity(as,ds){
+export function assertSchemaValidatorParity(as,ds,rs){
  const checks=[
   schemaNode(as,ROOT_KEYS),schemaNode(as.properties.lifecycle,LIFE_KEYS),schemaNode(as.$defs.assignmentPayload,PAYLOAD_KEYS),schemaNode(as.$defs.siteAuthorityReference,SITE_REF_KEYS),schemaNode(as.$defs.setupBaselineReference,BASE_REF_KEYS),schemaNode(as.$defs.authority,AUTH_KEYS),schemaNode(as.$defs.validity,VALIDITY_KEYS),schemaNode(as.$defs.publicationPolicy,PUBLICATION_KEYS),schemaNode(as.$defs.rollback,ROLLBACK_KEYS),schemaNode(as.$defs.payloadDigest,DIGEST_KEYS),schemaNode(as.properties.validationEvidence,EVIDENCE_KEYS),
-  schemaNode(ds,DECISION_ROOT_KEYS),schemaNode(ds.$defs.decisions,DECISION_KEYS),schemaNode(ds.$defs.siteAuthorityReference,DECISION_SITE_KEYS),schemaNode(ds.$defs.setupBaselineReference,DECISION_BASE_KEYS),schemaNode(ds.$defs.validity,DECISION_VALIDITY_KEYS),schemaNode(ds.$defs.sourceAuthorization,SOURCE_AUTH_KEYS)
+  schemaNode(ds,DECISION_ROOT_KEYS),schemaNode(ds.$defs.decisions,DECISION_KEYS),schemaNode(ds.$defs.siteAuthorityReference,DECISION_SITE_KEYS),schemaNode(ds.$defs.setupBaselineReference,DECISION_BASE_KEYS),schemaNode(ds.$defs.validity,DECISION_VALIDITY_KEYS),schemaNode(ds.$defs.sourceAuthorization,SOURCE_AUTH_KEYS),
+  schemaNode(rs,RECEIPT_ROOT_KEYS),schemaNode(rs.properties.subject,RECEIPT_SUBJECT_KEYS),schemaNode(rs.properties.approvingAuthority,RECEIPT_AUTHORITY_KEYS),schemaNode(rs.properties.approval,RECEIPT_APPROVAL_KEYS),schemaNode(rs.properties.repositoryEvidence,RECEIPT_REPOSITORY_KEYS),schemaNode(rs.properties.integrity,RECEIPT_INTEGRITY_KEYS)
  ];
  if(checks.some(x=>!x))throw new Error("SETUP_ASSIGNMENT_SCHEMA_VALIDATOR_PARITY_FAILED");
  return{valid:true};
+}
+export function validateApprovalReceipt(receipt){
+ const errors=[];add(errors,exact(receipt,RECEIPT_ROOT_KEYS),"INVALID_APPROVAL_RECEIPT_SCHEMA");if(!obj(receipt))return{valid:false,errors:unique(errors)};
+ add(errors,receipt.schemaVersion==="1.0.0-draft"&&receipt.recordType==="DSG_CURRENT_SETUP_ASSIGNMENT_APPROVAL_RECEIPT"&&receipt.receiptId==="DSG-CURRENT-SETUP-ASSIGNMENT-001-APPROVAL-001"&&receipt.decision==="APPROVED","INVALID_APPROVAL_RECEIPT");
+ const s=receipt.subject;add(errors,exact(s,RECEIPT_SUBJECT_KEYS),"INVALID_APPROVAL_RECEIPT_SCHEMA");
+ add(errors,obj(s)&&resolvable(s.assignmentId)&&Number.isInteger(s.revision)&&s.revision>0&&resolvable(s.observatoryId)&&DIGEST_RE.test(s.payloadDigest||"")&&utc(s.validFromUtc)&&s.validityEndMode==="UNBOUNDED"&&s.validToUtc===null&&s.intervalSemantics==="HALF_OPEN","INVALID_APPROVAL_SUBJECT");
+ const a=receipt.approvingAuthority;add(errors,exact(a,RECEIPT_AUTHORITY_KEYS),"INVALID_APPROVAL_RECEIPT_SCHEMA");
+ add(errors,obj(a)&&a.authorityRef==="github:user:maininimassimo-bit"&&a.authorityKind==="HUMAN_REPOSITORY_OWNER"&&a.custodianIsApprover===false,"INVALID_APPROVING_AUTHORITY");
+ const ap=receipt.approval;add(errors,exact(ap,RECEIPT_APPROVAL_KEYS),"INVALID_APPROVAL_RECEIPT_SCHEMA");
+ add(errors,obj(ap)&&utc(ap.approvalTimestampUtc)&&ap.sourceChannel==="OWNER_CONTROLLED_INTERACTION_CHANNEL"&&resolvable(ap.sourceStatement)&&ap.validityAcknowledged===true,"INVALID_APPROVAL_DECISION");
+ const re=receipt.repositoryEvidence;add(errors,exact(re,RECEIPT_REPOSITORY_KEYS),"INVALID_APPROVAL_RECEIPT_SCHEMA");
+ add(errors,obj(re)&&re.repository==="maininimassimo-bit/digital-stargate-manual"&&re.branch==="feat/bkl-031-f3-a2-d5-assignment-approval"&&re.candidatePath==="governance/setup-authority/setup-assignments/DSG-CURRENT-SETUP-ASSIGNMENT-001.draft.json"&&re.approvedPath==="governance/setup-authority/setup-assignments/DSG-CURRENT-SETUP-ASSIGNMENT-001.approved.json"&&re.receiptPath==="governance/setup-authority/approval-evidence/DSG-CURRENT-SETUP-ASSIGNMENT-001.approval.json"&&re.authorizationBaselineCommit==="88f80d0866ceac6fcd32a90022f7ce113b75ffee","INVALID_REPOSITORY_EVIDENCE");
+ add(errors,Array.isArray(receipt.scopeBoundaries)&&receipt.scopeBoundaries.length===APPROVAL_BOUNDARIES.length&&new Set(receipt.scopeBoundaries).size===receipt.scopeBoundaries.length&&APPROVAL_BOUNDARIES.every(x=>receipt.scopeBoundaries.includes(x)),"INVALID_APPROVAL_SCOPE");
+ const i=receipt.integrity;add(errors,exact(i,RECEIPT_INTEGRITY_KEYS),"INVALID_APPROVAL_RECEIPT_SCHEMA");
+ add(errors,obj(i)&&i.canonicalizationMethod===METHOD&&i.payloadDigestVerified===true&&i.payloadMutatedDuringApproval===false&&i.approvalSourceMatchesOwner===true&&i.validityMatchesApprovedBaselineStart===true,"INVALID_APPROVAL_INTEGRITY");
+ return{valid:errors.length===0,errors:unique(errors)};
+}
+export function validatePromotion(candidate,approved,receipt){
+ const errors=[];add(errors,validateAssignment(candidate).valid,"INVALID_DRAFT_CANDIDATE");add(errors,validateAssignment(approved).valid,"INVALID_APPROVED_ENVELOPE");
+ const rv=validateApprovalReceipt(receipt);if(!rv.valid)errors.push(...rv.errors);
+ add(errors,candidate?.lifecycle?.state==="DRAFT"&&candidate?.lifecycle?.eligibleForResolution===false&&candidate?.lifecycle?.approvalEvidenceRef===null&&candidate?.lifecycle?.approvedAtUtc===null,"INVALID_DRAFT_CANDIDATE");
+ add(errors,approved?.lifecycle?.state==="APPROVED"&&approved?.lifecycle?.eligibleForResolution===true,"INVALID_APPROVED_ENVELOPE");
+ add(errors,canonicalize(candidate?.assignmentPayload)===canonicalize(approved?.assignmentPayload)&&candidate?.payloadDigest?.value===approved?.payloadDigest?.value,"PAYLOAD_MUTATED_DURING_APPROVAL");
+ add(errors,candidate?.lifecycle?.decisionEvidenceRef===approved?.lifecycle?.decisionEvidenceRef,"DECISION_EVIDENCE_CHANGED_DURING_APPROVAL");
+ const s=receipt?.subject||{},p=approved?.assignmentPayload||{},v=p.validity||{};
+ add(errors,s.assignmentId===p.assignmentId&&s.revision===p.revision&&s.observatoryId===p.observatoryId&&s.payloadDigest===approved?.payloadDigest?.value&&s.validFromUtc===v.validFromUtc&&s.validityEndMode===v.validityEndMode&&s.validToUtc===v.validToUtc&&s.intervalSemantics===v.intervalSemantics,"APPROVAL_SUBJECT_BINDING_FAILED");
+ add(errors,receipt?.approvingAuthority?.authorityRef===p.authority?.assignmentApprovalAuthorityRef&&receipt?.approvingAuthority?.authorityRef===p.authority?.assignmentOwnerRef&&receipt?.approvingAuthority?.custodianIsApprover===p.authority?.custodianMayApprove,"APPROVAL_AUTHORITY_BINDING_FAILED");
+ add(errors,approved?.lifecycle?.approvedAtUtc===receipt?.approval?.approvalTimestampUtc&&approved?.lifecycle?.approvalEvidenceRef===receipt?.repositoryEvidence?.receiptPath,"APPROVAL_EVIDENCE_BINDING_FAILED");
+ add(errors,receipt?.approval?.sourceStatement?.includes(s.payloadDigest||"")&&receipt?.approval?.sourceStatement?.includes("dall’efficacia della baseline setup senza scadenza"),"APPROVAL_STATEMENT_BINDING_FAILED");
+ return{valid:errors.length===0,errors:unique(errors)};
 }
 function sourceDigestValid(envelope,payloadKey){return obj(envelope)&&obj(envelope[payloadKey])&&obj(envelope.payloadDigest)&&digestPayload(envelope[payloadKey])===envelope.payloadDigest.value;}
 export function validateBinding(r,d,site,baseline){
@@ -177,19 +215,25 @@ async function docsText(root){let out="";for(const entry of await readdir(root,{
 async function main(){
  const root=resolve(fileURLToPath(new URL("../../..",import.meta.url)));
  const p=x=>join(root,x);
- const [r,d,site,baseline,as,ds]=await Promise.all([
+ const [draft,approved,receipt,d,site,baseline,as,ds,rs]=await Promise.all([
   readJson(p("governance/setup-authority/setup-assignments/DSG-CURRENT-SETUP-ASSIGNMENT-001.draft.json")),
+  readJson(p("governance/setup-authority/setup-assignments/DSG-CURRENT-SETUP-ASSIGNMENT-001.approved.json")),
+  readJson(p("governance/setup-authority/approval-evidence/DSG-CURRENT-SETUP-ASSIGNMENT-001.approval.json")),
   readJson(p("governance/setup-authority/decision-evidence/DSG-CURRENT-SETUP-ASSIGNMENT-001.owner-decision.json")),
   readJson(p("governance/site-authority/site-records/DSG-SITE-RECORD-MANCIANO-001.approved.json")),
   readJson(p("governance/setup-authority/configuration-baselines/DSG-SETUP-BASELINE-001.approved.json")),
   readJson(p("governance/setup-authority/schemas/current-setup-assignment.schema.json")),
-  readJson(p("governance/setup-authority/schemas/setup-assignment-owner-decision.schema.json"))
+  readJson(p("governance/setup-authority/schemas/setup-assignment-owner-decision.schema.json")),
+  readJson(p("governance/setup-authority/schemas/current-setup-assignment-approval-receipt.schema.json"))
  ]);
- assertSchemaValidatorParity(as,ds);
- const b=validateBinding(r,d,site,baseline);if(!b.valid)throw new Error("PROTECTED_BINDING_GATE_FAILED:"+b.errors.join(","));
- const resolution=resolveCurrentSetup([r],{observatoryId:r.assignmentPayload.observatoryId,asOfUtc:r.assignmentPayload.validity.validFromUtc,authorized:true,sources:{siteRecords:[site],baselines:[baseline]}});
- if(resolution.state!=="UNAVAILABLE_CURRENT"||resolution.reasonCode!=="NO_APPROVED_ASSIGNMENT")throw new Error("DRAFT_RESOLVER_INELIGIBILITY_FAILED");
- const publicScan=scanPublicText(await docsText(p("docs")),r,site);if(!publicScan.valid)throw new Error("PROTECTED_PUBLICATION_BOUNDARY_FAILED");
- process.stdout.write(JSON.stringify({gate:"PASS",assignmentLifecycle:"DRAFT",resolution:"UNAVAILABLE_CURRENT",detailsRedacted:true})+"\n");
+ assertSchemaValidatorParity(as,ds,rs);
+ for(const r of [draft,approved]){const b=validateBinding(r,d,site,baseline);if(!b.valid)throw new Error("PROTECTED_BINDING_GATE_FAILED:"+b.errors.join(","));}
+ const promotion=validatePromotion(draft,approved,receipt);if(!promotion.valid)throw new Error("ASSIGNMENT_PROMOTION_GATE_FAILED:"+promotion.errors.join(","));
+ const draftResolution=resolveCurrentSetup([draft],{observatoryId:draft.assignmentPayload.observatoryId,asOfUtc:draft.assignmentPayload.validity.validFromUtc,authorized:true,sources:{siteRecords:[site],baselines:[baseline]}});
+ if(draftResolution.state!=="UNAVAILABLE_CURRENT"||draftResolution.reasonCode!=="NO_APPROVED_ASSIGNMENT")throw new Error("DRAFT_RESOLVER_INELIGIBILITY_FAILED");
+ const resolution=resolveCurrentSetup([approved],{observatoryId:approved.assignmentPayload.observatoryId,asOfUtc:approved.assignmentPayload.validity.validFromUtc,authorized:true,sources:{siteRecords:[site],baselines:[baseline]}});
+ if(resolution.state!=="AVAILABLE"||resolution.reasonCode!=="CURRENT_SETUP_RESOLVED")throw new Error("APPROVED_RESOLVER_ELIGIBILITY_FAILED");
+ const publicText=await docsText(p("docs"));for(const r of [draft,approved]){const publicScan=scanPublicText(publicText,r,site);if(!publicScan.valid)throw new Error("PROTECTED_PUBLICATION_BOUNDARY_FAILED");}
+ process.stdout.write(JSON.stringify({gate:"PASS",assignmentLifecycle:"APPROVED",resolution:"AVAILABLE",detailsRedacted:true})+"\n");
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url))main().catch(error=>{const raw=String(error?.message||"");const code=/^[A-Z0-9_,:-]+$/.test(raw)?raw:"UNCLASSIFIED_FAILURE";process.stderr.write("Setup assignment governance gate failed; protected details redacted; code="+code+"\\n");process.exitCode=1;});
