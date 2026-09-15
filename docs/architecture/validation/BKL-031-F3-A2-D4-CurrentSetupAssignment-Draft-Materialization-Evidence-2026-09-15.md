@@ -3,11 +3,14 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A2-D4-VAL-001 |
-| Stato | **IMPLEMENTED / REVIEW CANDIDATE** |
+| Stato | **ACCEPTED / POST-MERGE VERIFIED** |
 | Data | 15/09/2026 |
 | PR | #207 |
 | Implementation head | `96386395ff0d81d0d93e14666215296ade643a83` |
-| Workflow run | `35011741820` — SUCCESS |
+| Implementation workflow | `35011741820` — SUCCESS |
+| Exact publication head | `d845042c1e2094cd82de762e7e2de60e9c54b2c5` — 5/5 SUCCESS |
+| Merge | `e99e6b5ff5ea7247ee447a1c6c62dcaa479dee1b` |
+| Post-merge | 7/7 SUCCESS; dedicated D4 run `35015436160` |
 | Runtime / EAGLE | Not applicable / none |
 
 ## Evidence summary
@@ -37,4 +40,4 @@ The first workflow attempt failed before tests at the protected binding gate. A 
 
 ## Boundaries
 
-This evidence does not approve the assignment, create a receipt, activate a resolver, validate runtime behavior or authorize EAGLE/observatory activity. The full publication head remains subject to exact-head repository workflows and AI-assisted process-separated ARB and Release Quality review.
+This evidence does not approve the assignment, create a receipt, activate a resolver, validate runtime behavior or authorize EAGLE/observatory activity. Exact-head repository workflows, AI-assisted process-separated reviews, expected-head merge and post-merge verification are complete. Explicit human approval of the exact protected digest remains mandatory.

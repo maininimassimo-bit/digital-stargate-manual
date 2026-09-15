@@ -3,16 +3,16 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-BASELINE-2026-09-15 |
-| Stato | **CURRENT — ASSIGNMENT OWNER DECISIONS COMPLETE / ASSIGNMENT ABSENT** |
-| Repository baseline | `main@d5f403bbe6a39731213c372cb22296324d10b03d` |
-| Current package | `BKL-031-F3-A2-D4-DRAFT-MATERIALIZATION` review candidate in PR #207 |
+| Stato | **CURRENT — PROTECTED ASSIGNMENT DRAFT INTEGRATED / HUMAN APPROVAL PENDING** |
+| Repository baseline | `main@e99e6b5ff5ea7247ee447a1c6c62dcaa479dee1b` |
+| Current package | Mandatory human exact-digest approval gate for `BKL-031-F3-A2-D4` |
 | Runtime delta | None |
-| Data delta | Protected owner-decision evidence only; no assignment |
+| Data delta | Protected resolver-ineligible assignment DRAFT; no approval receipt |
 | Infrastructure delta | None |
 
 ## 1. Integrated state
 
-PR #205 is merged as `d5f403bbe6a39731213c372cb22296324d10b03d` and establishes the current verified repository baseline with 9/9 post-merge workflows. The protected setup and site registries contain their separately approved authority envelopes and immutable receipts.
+PR #207 is merged as `e99e6b5ff5ea7247ee447a1c6c62dcaa479dee1b` and establishes the current verified repository baseline with 7/7 post-merge workflows. The protected setup and site registries retain their separately approved authority envelopes and immutable receipts; the assignment registry now contains only a DRAFT.
 
 ## 2. Approved authority state
 
@@ -30,9 +30,9 @@ The setup baseline and Site Authority are independently approved. Their exact di
 | Elevation vertical semantics | materialized and validated |
 | Canonical site resolver identity/scope | materialized and validated |
 | Executable validity/privacy/promotion tests | 59/59 PASS; exact-head and post-merge verified |
-| CurrentSetupAssignment | protected DRAFT on PR branch; not approved or resolver-eligible |
-| Assignment owner decisions | complete; protected evidence integration candidate |
-| Assignment DRAFT materialization | implemented with closed schemas, validator and 57 tests; integration pending |
+| CurrentSetupAssignment | protected DRAFT integrated; not approved or resolver-eligible |
+| Assignment owner decisions | complete; protected evidence integrated |
+| Assignment DRAFT materialization | ACCEPTED / POST-MERGE VERIFIED; closed schemas, validator and 57/57 tests |
 | S08 / S09 | `UNAVAILABLE` / `UNAVAILABLE_CURRENT` |
 | Runtime adapter | absent; separate package and authorization required |
 
@@ -42,4 +42,4 @@ The F3-A1-M4 promotion can be reverted through reviewed Git history by removing 
 
 ## F3-A2-D4 baseline delta
 
-The PR branch adds repository-only protected authority artifacts and a redacted validation workflow. S08 remains unavailable to runtime and S09 remains `UNAVAILABLE_CURRENT`. No runtime, EAGLE, provider, readiness, command or Safety Authority delta is present.
+PR #207 integrated repository-only protected authority artifacts and a redacted validation workflow. S08 remains unavailable to runtime and S09 remains `UNAVAILABLE_CURRENT`. No runtime, EAGLE, provider, readiness, command or Safety Authority delta is present. Rollback is the reviewed revert of the D4 merge; no operational rollback is required.

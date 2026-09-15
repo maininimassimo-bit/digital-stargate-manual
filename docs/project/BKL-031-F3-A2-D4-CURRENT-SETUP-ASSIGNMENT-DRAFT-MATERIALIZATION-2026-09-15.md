@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A2-D4-STATUS-001 |
-| Stato | **REVIEW CANDIDATE — PROTECTED DRAFT, NOT APPROVED** |
+| Stato | **ACCEPTED / POST-MERGE VERIFIED — PROTECTED DRAFT, NOT APPROVED** |
 | Data | 15/09/2026 |
 | PR | #207 |
 | Predecessor | PR #206 merged and post-merge verified |
@@ -17,12 +17,12 @@ The DRAFT is not an approval. It has no receipt, cannot resolve current setup an
 
 ## Gate status
 
-The implementation head passed its dedicated workflow and 57/57 cases. The complete publication head still requires repository-wide exact-head CI, AI-assisted Architecture Review Board and Release Quality reviews, no open Blocker/Major, expected-head merge and post-merge verification under DSG-AEM-001.
+The exact publication head `d845042c1e2094cd82de762e7e2de60e9c54b2c5` passed 5/5 workflows. Documentation governance returned `ACCEPTED WITH OBSERVATION`, the AI-assisted ARB returned `APPROVED WITH CONDITIONS — 99/100`, and Release Quality returned `CONDITIONALLY READY`; no Blocker or Major remained. Expected-head merge produced `e99e6b5ff5ea7247ee447a1c6c62dcaa479dee1b`, which passed 7/7 post-merge workflows including GitHub Pages.
 
 ## Rollback
 
-Revert the reviewed D4 commits. Because the DRAFT is not resolver-eligible and no adapter exists, S09 remains unavailable and no operational rollback is required.
+Revert merge `e99e6b5ff5ea7247ee447a1c6c62dcaa479dee1b`. Because the DRAFT is not resolver-eligible and no adapter exists, S09 remains unavailable and no operational rollback is required.
 
 ## Next mandatory gate
 
-After merge and post-merge reconciliation, present the exact protected assignment digest to the human Assignment Approval Authority. Stop for explicit approval; do not infer approval from this package, CI or the continuous mandate.
+Present the exact protected assignment digest to the human Assignment Approval Authority after this reconciliation. Stop for explicit approval; do not infer approval from this package, CI or the continuous mandate.
