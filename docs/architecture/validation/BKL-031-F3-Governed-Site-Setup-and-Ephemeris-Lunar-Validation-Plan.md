@@ -212,7 +212,7 @@ For future implementation:
 | repository source inventory | VERIFIED on baseline |
 | official alternative documentation | REVIEWED for architecture comparison |
 | F3 architecture document | ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED — NOT IMPLEMENTED |
-| site/setup production authority | NOT MATERIALIZED |
+| site/setup repository authority | HISTORICAL PR #191: NOT MATERIALIZED; see current-state reconciliation in section 16 |
 | provider/library ADR | NOT EXECUTED |
 | schema/fixture/validator | NOT IMPLEMENTED |
 | scientific accuracy campaign | NOT EXECUTED |

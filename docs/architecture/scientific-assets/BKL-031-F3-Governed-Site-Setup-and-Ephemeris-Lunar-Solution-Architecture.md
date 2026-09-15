@@ -27,7 +27,9 @@ It defines components, ports, contracts, failure behavior, privacy boundaries, m
 
 F4 remains owner of forecast evidence. F5 remains owner of weights, scoring, ranking and the read-only planner consumer. BKL-032 remains owner of readiness/go-no-go semantics. Local physical interlocks remain the only Safety Authority.
 
-## 2. Verified current state
+## 2. Verified state at PR #191 acceptance
+
+This section preserves the accepted PR #191 baseline. For the current repository-authority state after F3-A1/F3-A2, see section 23.
 
 ### 2.1 S08 — site
 
@@ -420,7 +422,7 @@ It covers:
 | F3-OD09 | execution host and measured resource/performance budget |
 | F3-OD10 | bounded evaluation grid and maximum request size |
 
-All ten decisions remain open. Implementation is blocked until the applicable decisions are accepted.
+At PR #191 all ten decisions were open. Section 23 records the later resolution of F3-OD01–F3-OD03; F3-OD04–F3-OD10 remain implementation blockers.
 
 ## 19. Acceptance criteria for this architecture package
 
