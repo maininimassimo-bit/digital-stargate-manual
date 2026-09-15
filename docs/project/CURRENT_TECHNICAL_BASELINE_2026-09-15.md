@@ -3,16 +3,16 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-BASELINE-2026-09-15 |
-| Stato | **CURRENT — F3-A2-D5 ACCEPTED / POST-MERGE VERIFIED** |
-| Repository baseline | `main@bc4307c2042a45985622044e11631421de5b2c3d` |
-| Current package | `BKL-031-F3-A2-D5` accepted; Program Architect successor selection current |
+| Stato | **CURRENT — F3-A2-D5 ACCEPTED; F3-A3 HANDOFF REVIEW CANDIDATE** |
+| Repository baseline | `main@a1d2d84f9f787c247516bc825cb83d2bc15a43f5` |
+| Current package | `BKL-031-F3-A3` documentation-only Program Assessment/Handoff |
 | Runtime delta | None |
-| Data delta | Protected approval receipt and unchanged APPROVED lifecycle envelope integrated |
+| Data delta | None; F3-A3 handoff introduces no provider data, kernel or protected-site payload |
 | Infrastructure delta | None |
 
 ## 1. Integrated state
 
-PR #209 is merged as `bc4307c2042a45985622044e11631421de5b2c3d` and establishes the current verified repository baseline with 7/7 post-merge workflows. The protected setup baseline, Site Authority and CurrentSetupAssignment are separately approved. The historical assignment DRAFT remains immutable; the protected receipt and separate APPROVED envelope preserve the payload and digest.
+PR #209 merged the D5 promotion as `bc4307c2042a45985622044e11631421de5b2c3d`; PR #210 reconciled its acceptance and establishes the current verified repository baseline as `a1d2d84f9f787c247516bc825cb83d2bc15a43f5`, with 7/7 post-merge workflows for both merges. The protected setup baseline, Site Authority and CurrentSetupAssignment are separately approved. The historical assignment DRAFT remains immutable; the protected receipt and separate APPROVED envelope preserve the payload and digest.
 
 ## 2. Approved authority state
 
@@ -51,4 +51,9 @@ PR #209 integrated protected receipt/promotion artifacts, one closed schema, val
 
 ## F3-A2-D5 post-merge evidence
 
-Exact publication head `6947e79a53282db2a7f6d879643e51840ed9e553` passed 5/5 applicable workflows and the 65-case suite. Expected-head merge `bc4307c2042a45985622044e11631421de5b2c3d` passed all 7 post-merge workflows, including GitHub Pages. D5 is ACCEPTED / POST-MERGE VERIFIED. The next state transition is Program Architect selection; runtime adapter work remains a separate package gated by `ARB-204-MI02`.
+Exact publication head `6947e79a53282db2a7f6d879643e51840ed9e553` passed 5/5 applicable workflows and the 65-case suite. Expected-head merge `bc4307c2042a45985622044e11631421de5b2c3d` passed all 7 post-merge workflows, including GitHub Pages. D5 is ACCEPTED / POST-MERGE VERIFIED. PR #210 reconciled D5 acceptance as `a1d2d84f9f787c247516bc825cb83d2bc15a43f5`. The next state transition is the documentation-only F3-A3 Solution Architect package; runtime adapter work remains a separate package gated by `ARB-204-MI02`.
+
+
+## F3-A3 handoff delta
+
+Program selection only: candidate comparison, ADR structure and validation-spike evidence plan. No dependency, provider, data/kernel, cache, schema, adapter, external call, runtime, EAGLE or infrastructure delta exists. S10 remains `UNAVAILABLE`; F3-OD04–F3-OD10 remain open decision gates.

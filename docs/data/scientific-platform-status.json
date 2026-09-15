@@ -19,8 +19,8 @@
       "title": "Observation Planner intelligente",
       "status": "active"
     },
-    "nextMilestone": "BKL-031 dependency-ready successor selection; any runtime adapter requires a separate architecture package and ARB-204-MI02",
-    "target": "Use the Program Architect to select the next dependency-ready BKL-031 package from repository evidence. Preserve repository authority APPROVED/AVAILABLE, runtime S09 UNAVAILABLE_CURRENT, and the prohibition on EAGLE, readiness/go-no-go, device commands and Safety Authority changes."
+    "nextMilestone": "BKL-031 F3-A3 documentation-only method ADR and validation-spike architecture package",
+    "target": "Prepare a decision-ready F3-A3 package that compares Astropy+pinned JPL, Skyfield+pinned JPL and JPL Horizons without selecting a provider. Stop at owner gates for provider/terms, kernel, error budget, privacy, host and bounded execution; preserve S10 UNAVAILABLE and no EAGLE/readiness/command/Safety changes."
   },
   "architecture": {
     "ap013": {
