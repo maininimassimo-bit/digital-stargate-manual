@@ -14,6 +14,8 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [Handover 15/09/2026](HANDOVER_2026-09-15.md) | Handover corrente |
 | [Current Technical Baseline 15/09/2026](CURRENT_TECHNICAL_BASELINE_2026-09-15.md) | Baseline tecnica corrente |
 | [DSG-AEM-001 Continuous Autonomous Execution Mandate](DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md) | Mandato owner-authorized e deroga ruleset condizionata |
+| [PR #196 DSG-AEM-001 AI-Assisted ARB Review](../architecture/reviews/ARB-PR196-DSG-AEM-001-Governance-AI-Assisted-Review-2026-09-15.md) | Approved — 99/100; non equivalente ad approvazione umana indipendente |
+| [PR #196 DSG-AEM-001 AI-Assisted Release Quality](../architecture/reviews/RQ-PR196-DSG-AEM-001-Governance-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
 | [F3-A2 Handoff Acceptance](BKL-031-F3-A2-HANDOFF-ACCEPTANCE-2026-09-15.md) | PR #195 accepted with conditions/post-merge verified; detailed contract next |
 | [F3-A2 Setup Authority Program Assessment/Handoff](../architecture/assessments/BKL-031-F3-A2-Setup-Authority-Program-Assessment-and-Handoff-2026-09-15.md) | Package corrente: decisione di sequenziamento e handoff documentale |
 | [PR #195 F3-A2 Handoff AI-Assisted ARB Review](../architecture/reviews/ARB-PR195-BKL-031-F3-A2-Handoff-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 98/100; non equivalente ad approvazione umana indipendente |
