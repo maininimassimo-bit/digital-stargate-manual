@@ -19,8 +19,8 @@
       "title": "Observation Planner intelligente",
       "status": "active"
     },
-    "nextMilestone": "BKL-031 F3-A2-D4 integration, then mandatory human exact-digest approval gate",
-    "target": "Complete exact-head CI, AI-assisted process-separated ARB and Release Quality review, merge and post-merge verification for the protected resolver-ineligible DRAFT. Then stop for explicit human approval of the exact protected assignment digest; receipt, lifecycle promotion and runtime remain separate."
+    "nextMilestone": "BKL-031 mandatory human approval or rejection of the exact protected CurrentSetupAssignment digest",
+    "target": "Stop at the human approval boundary. Do not create a receipt, promote lifecycle, expose protected values or begin runtime work until the Repository Owner explicitly approves the exact protected assignment digest."
   },
   "architecture": {
     "ap013": {
