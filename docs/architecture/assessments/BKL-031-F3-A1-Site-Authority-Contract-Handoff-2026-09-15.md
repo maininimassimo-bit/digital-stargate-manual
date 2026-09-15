@@ -3,20 +3,20 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A1-HANDOFF-001 |
-| Stato | **AUTHORIZED HANDOFF / CONTRACT PACKAGE IN PREPARATION — NOT IMPLEMENTED** |
+| Stato | **ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED — NOT IMPLEMENTED** |
 | Data | 15/09/2026 |
 | Capability | BKL-031 — Observation Planner intelligente |
 | Incremento | F3-A1 — Site Authority Contract |
-| Baseline | `main@21524c687a1fa6a9d840a3951c7ef4fe298f9c3c` |
+| Baseline | `main@b9d08a7cf6b6287825907cab6a846b1ec70f0378` |
 | Predecessore | BKL-031 F3 Solution Architecture accepted with conditions |
 | Impatto runtime | None |
 | PC Principale / EAGLE | Nessuna azione richiesta |
 
 ## 1. Decisione di handoff
 
-F3-A1 è promosso come incremento esclusivamente documentale per rendere revisionabile il contratto dell'autorità sito e risolvere normativamente `ARB-191-MI02`. La promozione non materializza dati, non seleziona storage o provider e non rende disponibile S08.
+F3-A1 è stato promosso, valutato e integrato come incremento esclusivamente documentale. PR #193 è merged in `b9d08a7cf6b6287825907cab6a846b1ec70f0378` e la verifica post-merge è 9/9 SUCCESS. Il contratto è accettato con condizioni come baseline normativa; non materializza dati, non seleziona storage o provider e non rende disponibile S08.
 
-Il pacchetto deve essere sottoposto a review ARB e Release Quality su exact head separato. La sua presenza nel repository non equivale ad acceptance né a implementazione.
+Le review ARB e Release Quality sulla PR #193 erano AI-assistite e non equivalgono ad approvazioni umane indipendenti. Acceptance non equivale a implementazione.
 
 ## 2. Obiettivo
 
@@ -53,18 +53,20 @@ Definire:
 | Elemento | Trattamento F3-A1 |
 |---|---|
 | F3 Solution Architecture | baseline accettata |
-| `ARB-191-MI02` | risoluzione normativa proposta nel contratto; chiusura solo dopo ARB |
+| `ARB-191-MI02` | normativa accettata; executable interval tests restano gate prima della materializzazione |
 | `ARB-191-MI01` | boundary interno/pubblico definito; resta gate aperto per enforcement F3-B/F3-C |
+| `ARB-193-MI01` | vertical reference, unità e range di `elevationM` open prima di F3-B |
+| `ARB-193-MI02` | resolver canonico e authority scope open prima di F3-B |
 | Site/setup authority reale | non disponibile e non materializzata |
 | Provider ephemeris | non selezionato; irrilevante per F3-A1 |
 
 ## 6. Ordine di delivery
 
-1. F3-A1 contract package;
-2. ARB e Release Quality sulla draft PR;
-3. eventuale remediation;
-4. nuova autorizzazione owner per merge;
-5. solo dopo acceptance: decisione separata sulla materializzazione F3-B e sull'eventuale F3-A2.
+1. F3-A1 contract package, review, merge e post-merge verification — completati;
+2. Acceptance Reconciliation — corrente;
+3. decisione owner separata sul successore;
+4. eventuale slice autorizzata per condizioni/materializzazione;
+5. review, merge e verifica propri di ogni slice.
 
 Nessuna fase successiva è implicitamente autorizzata.
 
@@ -92,7 +94,9 @@ Nessuna fase successiva è implicitamente autorizzata.
 | Deriva di timezone | IANA ID obbligatorio, offset numerico non sufficiente |
 | Coupling con EAGLE | contratto repository-only e zero workload operativo |
 
-## 9. Governance stop
+## 9. Acceptance e governance stop
 
-Questa slice termina alla pubblicazione della draft PR e alla verifica CI dell'exact head. ARB, Release Quality, merge e ogni materializzazione richiedono passaggi e autorizzazioni separati.
+L'esito è registrato in [BKL-031 F3-A1 — Site Authority Contract Acceptance](../../project/BKL-031-F3-A1-SITE-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md). Le condizioni `ARB-193-MI01`, `ARB-193-MI02`, `ARB-191-MI01` e il gate eseguibile di `ARB-191-MI02` restano carried-forward.
+
+Questa riconciliazione non autorizza materializzazione o slice successive. ARB, Release Quality e merge della riconciliazione, seguiti dalla decisione sul successore, richiedono passaggi separati.
 

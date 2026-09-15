@@ -146,3 +146,9 @@ Successivamente l'owner ha autorizzato F3-A1 come package documentale di Site Au
 - dettaglia la boundary di `ARB-191-MI01`, che resta aperta per enforcement;
 - non materializza record, coordinate, schema, fixture, validator, adapter o runtime;
 - non autorizza F3-A2/A3/B/C, provider/ADR, EAGLE o Safety Authority.
+
+## 12. Transizione F3-A1 verificata
+
+PR #193 ha integrato il Site Authority Contract F3-A1 in `main` come `b9d08a7cf6b6287825907cab6a846b1ec70f0378`, con 9/9 workflow post-merge. L'esito è riconciliato nel [BKL-031 F3-A1 Site Authority Contract Acceptance](BKL-031-F3-A1-SITE-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md).
+
+F3-A1 è accettato con condizioni come specifica documentale non implementata. La transizione non promuove F3-A2/A3/B/C e conserva tutte le condizioni carried-forward.

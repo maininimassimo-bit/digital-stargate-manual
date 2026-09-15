@@ -3,8 +3,8 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A1-CONTRACT-001 |
-| Versione | 1.0 |
-| Stato | **PROPOSED REVIEW CANDIDATE — NOT IMPLEMENTED** |
+| Versione | 1.1 |
+| Stato | **ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED — NOT IMPLEMENTED** |
 | Data | 15/09/2026 |
 | Capability | BKL-031 — Observation Planner intelligente |
 | Slice | F3-A1 — Site Authority Contract |
@@ -192,11 +192,20 @@ Il rollback di F3-A1 è il revert documentale. Nessun dato, dipendenza, secret, 
 | MI01 | namespace/digest separation; enforcement futuro |
 | safety boundary | nessun readiness, command o authority operativa |
 
-## 13. Open decisions
+## 13. Open decisions e condizioni
 
-Restano aperti: formato schema, algoritmo e canonicalizzazione digest, storage, owner registry, policy di generalizzazione geografica, range elevation, retention, key management e adapter. La loro risoluzione non è implicita in questo contratto.
+Restano aperti: formato schema, algoritmo e canonicalizzazione digest, storage, owner registry, policy di generalizzazione geografica, retention, key management e adapter. Inoltre:
 
-## 14. Governance stop
+- `ARB-193-MI01`: vertical reference, unità e range di `elevationM` prima di F3-B;
+- `ARB-193-MI02`: identità del resolver canonico e authority scope prima di F3-B;
+- `ARB-191-MI01`: enforcement pubblico/interno e leak tests prima di F3-B/F3-C;
+- `ARB-191-MI02`: test eseguibili interval/adjacency/boundary/overlap prima della materializzazione.
 
-Questo documento è un review candidate, non un contratto accettato o implementato. Non autorizza record reali, schema, fixture, validator, adapter, provider, F3-A2/A3/B/C, runtime, EAGLE o Safety Authority.
+La loro risoluzione non è implicita in questo contratto.
+
+## 14. Acceptance e governance stop
+
+Il contratto è accettato con condizioni come specifica documentale tramite [Acceptance Record F3-A1](../../project/BKL-031-F3-A1-SITE-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md), PR #193 e merge `b9d08a7cf6b6287825907cab6a846b1ec70f0378`. Non è implementato.
+
+Non autorizza record reali, schema, fixture, validator, adapter, provider, F3-A2/A3/B/C, runtime, EAGLE o Safety Authority.
 

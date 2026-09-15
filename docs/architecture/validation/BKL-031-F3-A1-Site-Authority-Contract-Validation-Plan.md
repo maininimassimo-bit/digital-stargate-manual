@@ -3,10 +3,10 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A1-VAL-001 |
-| Stato | **PROPOSED VALIDATION PLAN — NOT EXECUTED** |
+| Stato | **ACCEPTED AS PLAN — NOT EXECUTED** |
 | Data | 15/09/2026 |
 | Contratto | BKL-031-F3-A1-CONTRACT-001 |
-| Baseline | `main@21524c687a1fa6a9d840a3951c7ef4fe298f9c3c` |
+| Baseline | `main@b9d08a7cf6b6287825907cab6a846b1ec70f0378` |
 | Runtime/OAT | Not Applicable |
 
 ## 1. Scopo
@@ -99,9 +99,11 @@ Definire l'evidenza richiesta per accettare il contratto F3-A1 e, in futuro, per
 | A1-N40 | risultato sito produce readiness/command | boundary test fallisce |
 | A1-N41 | workload richiesto su EAGLE | scope violation |
 
-## 8. Criteri di review
+## 8. Esito di review e condizioni
 
-ARB può considerare `ARB-191-MI02` normativamente risolta solo se conferma:
+L'ARB AI-assisted della PR #193 ha accettato la risoluzione normativa di `ARB-191-MI02`, mantenendo obbligatori i test eseguibili prima della materializzazione. Restano inoltre open `ARB-193-MI01`, `ARB-193-MI02` e `ARB-191-MI01`.
+
+Il design normativo confermato richiede:
 
 - half-open su ogni intervallo finito;
 - start incluso/end escluso;
@@ -111,9 +113,11 @@ ARB può considerare `ARB-191-MI02` normativamente risolta solo se conferma:
 - nessun tie-break “latest wins”;
 - test eseguibili obbligatori prima della materializzazione.
 
-Release Quality verifica completezza, link, nav, roadmap authority/projection, assenza di drift e exact-head CI.
+Release Quality della PR #193 ha concluso `CONDITIONALLY READY FOR MERGE`; la verifica post-merge è 9/9 SUCCESS. Le review erano AI-assistite e non equivalgono ad approvazioni umane indipendenti.
 
 ## 9. Evidenza non prodotta
 
 Non sono prodotti test runtime, report scientifici, OAT, coordinate reali, fixture, schema, validator, adapter, benchmark o deployment. Tutti i casi restano `NOT EXECUTED` finché una slice di materializzazione non sarà autorizzata.
+
+Il piano è accettato, ma non eseguito, tramite [Acceptance Record F3-A1](../../project/BKL-031-F3-A1-SITE-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md).
 
