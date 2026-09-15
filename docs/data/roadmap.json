@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-15",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "e730637f355e55a9344c0215bfeaf6f728bcb218a907a9647dd4c6b21ce6cb22",
+  "sourceDigest": "447e92658adb7f8fdbfe42b3c1af173fc207e468c30cb4981ba013b8e6090995",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A2 — Detailed Setup Authority Contract",
-  "target": "Produce and review the documentation-only CurrentSetupAssignment contract, resolving ARB-195-MI01 by separating AP-006 architecture authority from concrete approved baseline evidence; no materialization, schema, fixture, validator, provider, runtime or EAGLE activity",
+  "nextMilestone": "BKL-031 F3-A2 — Detailed Setup Authority Contract Review",
+  "target": "Review and integrate the documentation-only BKL-031-F3-A2-CONTRACT-001 and validation plan, confirming normative closure of ARB-195-MI01; no concrete baseline, assignment, schema, fixture, validator, adapter, provider, runtime or EAGLE activity",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -307,7 +307,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F1/F2 ACCEPTED / POST-MERGE VERIFIED. F3 Solution Architecture and F3-A1 are accepted with conditions. F3-A2 Program Assessment/Handoff is accepted with conditions/post-merge verified via PR #195 and merge 8520f4272d31f5578769e8d12ac34101e1c044e8 with 9/9 workflows. DSG-AEM-001 and the conditioned W-DSG-AEM-RULESET-001 are active. The detailed F3-A2 CurrentSetupAssignment contract is dependency-ready and must resolve ARB-195-MI01 before approval. Carried ARB-193-MI01, ARB-193-MI02 and ARB-191-MI01 remain later gates; ARB-191-MI02 requires executable tests before materialization. S08 stays UNAVAILABLE, S09 UNAVAILABLE_CURRENT and S10 UNAVAILABLE. No real baseline/assignment, schema, fixture, validator, adapter, provider/ADR, F3-A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
+          "note": "F1/F2 ACCEPTED / POST-MERGE VERIFIED. F3 Solution Architecture and F3-A1 are accepted with conditions. F3-A2 handoff is accepted with conditions/post-merge verified via PR #195. DSG-AEM-001 is integrated/post-merge verified via PR #196 merge 357a5edfbd39346b10a1a2d751018ff6d1dd208f. Detailed contract BKL-031-F3-A2-CONTRACT-001 and validation plan are documentation-only review candidates that address ARB-195-MI01 by separating AP-006 architecture authority, concrete approved baseline instance, current assignment and observed evidence. ARB-191-MI01 and the F3-A1 conditions remain later gates; executable validation is not run. S08 stays UNAVAILABLE, S09 UNAVAILABLE_CURRENT and S10 UNAVAILABLE. No real baseline/assignment, schema, fixture, validator, adapter, provider/ADR, F3-A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
         },
         {
           "id": "BKL-032",
@@ -595,6 +595,14 @@
       "title": "DSG-AEM-001 Continuous Execution Mandate",
       "date": "2026-09-15",
       "description": "Owner-authorized continuous execution mandate and conditioned ruleset exception recorded; exact-head CI, applicable review, rollback, safety, privacy and post-merge gates remain mandatory.",
+      "status": "active"
+    },
+    {
+      "id": "M-BKL031-F3-A2-CONTRACT",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A2 Detailed Setup Authority Contract",
+      "date": "2026-09-15",
+      "description": "Documentation-only CurrentSetupAssignment contract and validation plan prepared for review; ARB-195-MI01 addressed normatively; not implemented.",
       "status": "active"
     }
   ]
