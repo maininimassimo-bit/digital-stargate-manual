@@ -35,11 +35,11 @@ Il contratto distingue quattro concetti che non sono intercambiabili:
 | Concetto | Authority | Significato | Non prova |
 |---|---|---|---|
 | AP-006 architecture authority | package/review AP-006 | regole per CI, desired/observed state, baseline, approval e drift | esistenza di una baseline concreta |
-| concrete approved baseline instance | futura source authority AP-006-compatible | snapshot immutabile/versionato con owner, custodian, approver, evidence e validità | assegnazione corrente a un sito |
-| `CurrentSetupAssignment` | futura Setup Assignment Authority | relazione approvata tra sito e baseline per un intervallo | configurazione osservata realmente sull'host |
+| concrete approved baseline instance | protected GitHub registry governed by ADR-009 | snapshot immutabile/versionato con owner, custodian, approver, evidence e validità | assegnazione corrente a un sito |
+| `CurrentSetupAssignment` | protected GitHub registry governed by ADR-009 | relazione approvata tra sito e baseline per un intervallo | configurazione osservata realmente sull'host |
 | observed/historical configuration evidence | session evidence, export o telemetry | stato osservato o storico e drift evidence | desired authority o current assignment |
 
-AP-006 è quindi una **governance authority**, non un registro materializzato implicitamente. Una baseline concreta è utilizzabile soltanto se una futura `ConfigurationBaselineAuthorityPort` ne risolve identità, versione, digest, ownership, approval evidence e validità.
+AP-006 è quindi una **governance authority**, non un registro materializzato implicitamente. ADR-009 materializza la repository authority protetta. La futura integrazione runtime potrà usare una `ConfigurationBaselineAuthorityPort` soltanto se risolve identità, versione, digest, ownership, approval evidence e validità senza degradare il boundary fail-closed.
 
 L'assenza o l'ambiguità della baseline concreta non viene colmata da valori storici, host configuration, file recenti o conoscenza dell'operatore: la risoluzione fallisce in modo esplicito e S09 resta `UNAVAILABLE_CURRENT`.
 

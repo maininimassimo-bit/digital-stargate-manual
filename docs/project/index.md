@@ -17,7 +17,7 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [PR #196 DSG-AEM-001 AI-Assisted ARB Review](../architecture/reviews/ARB-PR196-DSG-AEM-001-Governance-AI-Assisted-Review-2026-09-15.md) | Approved — 99/100; non equivalente ad approvazione umana indipendente |
 | [PR #196 DSG-AEM-001 AI-Assisted Release Quality](../architecture/reviews/RQ-PR196-DSG-AEM-001-Governance-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
 | [F3-A2 Handoff Acceptance](BKL-031-F3-A2-HANDOFF-ACCEPTANCE-2026-09-15.md) | PR #195 accepted with conditions/post-merge verified |
-| [F3-A2 Contract Acceptance](BKL-031-F3-A2-SETUP-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md) | PR #197 accepted with conditions/post-merge verified; authority decision required before materialization |
+| [F3-A2 Contract Acceptance](BKL-031-F3-A2-SETUP-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md) | Historical PR #197 acceptance; the authority decision gate was later resolved through D1-D5 |
 | [ADR-009 GitHub-Governed Setup Authority](../architecture/ADR-009-GitHub-Governed-Setup-Authority.md) | Baseline, site and assignment separately APPROVED in repository authority; runtime adapter absent |
 | [F3-A2-D1 Authority and Baseline Assessment](../architecture/assessments/BKL-031-F3-A2-D1-GitHub-Authority-and-First-Baseline-Draft-Assessment-2026-09-15.md) | Authority model and first approved baseline lineage |
 | [F3-A2-D1 Authority and Baseline Acceptance](BKL-031-F3-A2-D1-AUTHORITY-AND-BASELINE-DRAFT-ACCEPTANCE-2026-09-15.md) | PR #199 and #201 lifecycle completion |
