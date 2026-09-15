@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEC-001 |
-| Versione | 1.6 |
+| Versione | 1.7 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -48,6 +48,9 @@ Creare invece un ADR quando la decisione modifica un principio architetturale, i
 | DLG-016 | 15/09/2026 | Attivare il mandato continuativo `DSG-AEM-001` e la deroga condizionata `W-DSG-AEM-RULESET-001` fino a completamento o revoca | Ridurre handoff autorizzativi mantenendo exact-head CI, review applicabile, rollback, privacy, safety, audit e post-merge | Delivery Governance | Accepted | `DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md`; owner authorization 15/09/2026 |
 | DLG-017 | 15/09/2026 | F3-A2 usa un reference envelope version-pinned verso una concrete approved baseline, distinta da AP-006 architecture authority e dall'observed state | Risolvere ARB-195-MI01 senza inventare baseline, owner o materializzazione e mantenere S09 fail-closed | BKL-031 F3-A2 | Accepted | `BKL-031-F3-A2-CONTRACT-001`; PR #197; ARB-197 |
 | DLG-018 | 15/09/2026 | Accettare F3-A2 come contratto documentale e bloccare la materializzazione finché l'owner non risolve `ARB-197-MI01` | Il repository non determina concrete authority, approval source o prima baseline; mantenerne l'assenza fail-closed evita evidence inventata | BKL-031 F3-A2 | Accepted | `BKL-031-F3-A2-ACCEPTANCE-001`; ARB-197-MI01 |
+
+| DLG-019 | 15/09/2026 | Notificare esplicitamente ogni stop condition prima della pausa, con stato, motivo, lavoro completato, decisione richiesta e criterio di ripresa | Rendere visibili i blocchi e preservare la continuità owner-assistente | Delivery Governance | Accepted | `DSG-AEM-001` v1.1; owner instruction 15/09/2026 |
+| DLG-020 | 15/09/2026 | Materializzare il setup authority in un registro GitHub protetto fuori da `docs/`, con Repository Owner come Approval Authority e Architecture Office come custodian senza potere di auto-approvazione | Chiudere la parte authority/source di ARB-197-MI01 mantenendo separate baseline e assignment approval | BKL-031 F3-A2-D1 | Accepted | ADR-009; owner authorization 15/09/2026 |
 
 ## 5. Delega operativa GitHub
 

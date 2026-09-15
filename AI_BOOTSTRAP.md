@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 5.5 |
+| Versione | 5.6 |
 | Baseline | 15/09/2026 |
-| Stato | Current root bootstrap — F3-A2 accepted with conditions/post-merge verified; concrete setup authority decision required before materialization |
+| Stato | Current root bootstrap — F3-A2 authority model owner-authorized; protected first baseline DRAFT pending exact-digest approval |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -56,14 +56,14 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - BKL-031 F2 — Machine-Readable Context/Source Contract and Bounded Fixtures: ACCEPTED / POST-MERGE VERIFIED via PR #188 and merge `7f861f7399079858c9744e69b6c773664b6b5b54`;
 - BKL-031 F3 handoff and Solution Architecture: ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED; PR #192 acceptance closure merged as `21524c687a1fa6a9d840a3951c7ef4fe298f9c3c` with 9/9 workflows;
 - BKL-031 F3-A1 — Site Authority Contract: ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED via PR #193; acceptance reconciliation PR #194 merged as `1fd771632239cdca38d7527c55b974d805ffd1b9` with 9/9 workflows;
-- BKL-031 F3-A2 — Setup Authority Contract: ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED via PR #197 merge `64ecee230431de95fd892849757649da87314e7e`; `ARB-195-MI01` is closed normatively, while `ARB-197-MI01` requires an owner/architecture decision before materialization; no concrete baseline, assignment, schema, adapter or runtime exists;
+- BKL-031 F3-A2 — Setup Authority Contract: ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED; ADR-009 records the owner-authorized GitHub authority model; `DSG-SETUP-BASELINE-001` is a protected DRAFT with payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`, not an approved baseline; no assignment, schema, adapter or runtime exists;
 - Governance: `DSG-AEM-001` and `W-DSG-AEM-RULESET-001` are ACTIVE / POST-MERGE VERIFIED via PR #196 and merge `357a5edfbd39346b10a1a2d751018ff6d1dd208f`, with 9/9 workflows.
 
 La closure BKL-046 non dichiara efficacia scientifica né produzione: `NOT_EVALUABLE_CURRENT_EVIDENCE`, `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`. Nessun modello/provider, automatic acceptance o PixInsight apply è autorizzato.
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2 ACCEPTED / AUTHORITY DECISION REQUIRED] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2 ACCEPTED / AUTHORITY MODEL DECIDED / EXACT DIGEST APPROVAL REQUIRED] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -75,6 +75,6 @@ Nessun portale, planner, comparison layer, quality score o AI è Safety Authorit
 
 ## 9. Punto di partenza operativo
 
-PR #197 ha integrato il detailed F3-A2 Setup Authority Contract in `main@64ecee230431de95fd892849757649da87314e7e` con 9/9 workflow post-merge, inclusi Pages e Governed Projection Sync.
+F3-A2-D1 materializza la decisione owner-authorized in ADR-009 e nel registro non pubblicato `governance/setup-authority/`. Il candidato `DSG-SETUP-BASELINE-001` ha payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`, stato `DRAFT` ed `eligibleForResolution=false`.
 
-Il contratto è accepted with conditions / not implemented. `ARB-197-MI01` è la stop condition corrente: il repository non identifica una concreta Configuration Baseline Authority, Assignment Authority, approval evidence source o prima approved baseline instance. S09 resta `UNAVAILABLE_CURRENT`; schema/fixture/validator/adapter, real baseline/assignment, provider/ADR, F3-A3/B/C, forecast, ranking, readiness, runtime, device command, PC/EAGLE e Safety Authority restano non autorizzati.
+La prossima stop condition obbligatoria è l'approvazione o correzione owner dell'exact payload digest e della validità proposta. Fino ad allora S09 resta `UNAVAILABLE_CURRENT`; non esistono approval receipt, site record concreto o `CurrentSetupAssignment`. Schema, validator, adapter, provider, F3-A3/B/C, runtime, device command, PC/EAGLE e Safety Authority restano non autorizzati.
