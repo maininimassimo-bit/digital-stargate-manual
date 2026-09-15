@@ -52,6 +52,16 @@ The shared CGX-L and parallel-OTA candidate relation comes from the two registry
 - current assignment: absent;
 - S09: `UNAVAILABLE_CURRENT`.
 
+## Owner definition confirmations
+
+On 15/09/2026 the Repository Owner confirmed through the controlled interaction channel:
+
+- one composite baseline for the two OTAs mounted in parallel on the CGX-L;
+- validity start `2026-09-16T00:00:00Z`;
+- unresolved C8 guiding, serials and runtime versions remain explicit null/`DA_VALIDARE` exceptions outside the authoritative payload claims.
+
+These confirmations define the candidate and preserve payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`. They are not the separate final approval of that exact digest.
+
 ## Remaining gaps
 
 | Gate | Stato |
