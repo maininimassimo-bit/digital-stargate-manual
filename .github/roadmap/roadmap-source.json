@@ -4,8 +4,8 @@
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A1 — Acceptance Reconciliation Merge Decision",
-  "target": "Publish PR #194 AI-assisted ARB/RQ reviews, verify the exact review-publication head, then obtain a separate owner merge/ruleset decision; no successor promotion, materialization, runtime, EAGLE workload or Safety Authority is authorized",
+  "nextMilestone": "BKL-031 F3-A2 — Setup Authority Handoff Review Candidate",
+  "target": "Review the documentation-only F3-A2 Program Assessment/Handoff for a future CurrentSetupAssignment contract; no detailed contract, real assignment, schema, fixture, validator, adapter, provider, runtime, EAGLE workload or Safety Authority is authorized",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F1/F2 ACCEPTED / POST-MERGE VERIFIED. F3 Solution Architecture and acceptance closure are integrated. F3-A1 Site Authority Contract is integrated via PR #193 and merge b9d08a7cf6b6287825907cab6a846b1ec70f0378 with 9/9 post-merge workflows and is accepted with conditions as documentation only, not implemented. PR #194 Acceptance Reconciliation technical head b43e137ba36807b7027b60ea907fa559efb98af6 has 7/7 workflows, AI-assisted ARB APPROVED WITH CONDITIONS 99/100 and Release Quality CONDITIONALLY READY FOR MERGE; review-publication CI and a separate owner merge/ruleset decision remain. ARB-193-MI01, ARB-193-MI02 and ARB-191-MI01 remain implementation gates; ARB-191-MI02 is satisfied at normative-design level with executable tests still required. S08 stays UNAVAILABLE. No successor, real authority record, schema, fixture, validator, adapter, provider/ADR, runtime, EAGLE workload or Safety Authority is authorized."
+          "note": "F1/F2 ACCEPTED / POST-MERGE VERIFIED. F3 Solution Architecture is accepted with conditions. F3-A1 Site Authority Contract is accepted with conditions and reconciled by PR #194 merge 1fd771632239cdca38d7527c55b974d805ffd1b9 with 9/9 post-merge workflows; the waiver is consumed/expired. F3-A2 Setup Authority Contract is selected only as a documentation-only Program Assessment/Handoff review candidate. ARB-193-MI01, ARB-193-MI02 and ARB-191-MI01 remain implementation gates; ARB-191-MI02 is satisfied at normative-design level with executable tests still required. S08 stays UNAVAILABLE, S09 UNAVAILABLE_CURRENT and S10 UNAVAILABLE. No detailed F3-A2 contract, real assignment, schema, fixture, validator, adapter, provider/ADR, F3-A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
         },
         {
           "id": "BKL-032",
@@ -481,7 +481,14 @@
       "itemRef": "BKL-031",
       "title": "BKL-031 F3-A1 Acceptance Reconciliation",
       "date": "2026-09-15",
-      "description": "PR #194 Acceptance Reconciliation AI-assisted ARB/RQ complete on technical head b43e137ba36807b7027b60ea907fa559efb98af6; review-publication CI and separate owner merge/ruleset decision pending."
+      "description": "PR #194 Acceptance Reconciliation merged as 1fd771632239cdca38d7527c55b974d805ffd1b9 and post-merge verified 9/9; F3-A2 handoff selected separately."
+    },
+    {
+      "id": "M-BKL031-F3-A2-HANDOFF",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A2 Setup Authority Handoff",
+      "date": "2026-09-15",
+      "description": "Documentation-only Program Assessment and specialist handoff for the future CurrentSetupAssignment contract; not implemented."
     }
   ]
 }

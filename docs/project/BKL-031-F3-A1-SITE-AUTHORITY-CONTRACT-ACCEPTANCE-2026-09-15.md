@@ -99,3 +99,9 @@ Il rollback è documentale: revert del merge #193 e, se necessario, di questa ri
 La prossima azione è una decisione owner separata sul successore. Questa acceptance non promuove F3-A2, F3-A3, F3-B o F3-C e non autorizza la materializzazione del Site Authority Contract.
 
 Ogni successore dovrà dichiarare scope, dependency order, condizioni applicabili, exact-head CI, review e boundary di sicurezza.
+
+## 10. Closure PR #194 e transizione F3-A2
+
+PR #194 ha integrato questa Acceptance Reconciliation in `main` come `1fd771632239cdca38d7527c55b974d805ffd1b9`. La verifica post-merge ha concluso 9/9 workflow SUCCESS, inclusi Pages e Governed Projection Sync. Il waiver `W-BKL031-F3A1-ACCEPTANCE-MERGE-001` è consumato/scaduto.
+
+Con decisione owner successiva, F3-A2 — Setup Authority Contract è promosso esclusivamente come Program Assessment/Handoff documentale al Solution Architect. La promozione non autorizza il contratto dettagliato, assignment reali, schema, fixture, validator, adapter, F3-A3/B/C, runtime, EAGLE o Safety Authority.
