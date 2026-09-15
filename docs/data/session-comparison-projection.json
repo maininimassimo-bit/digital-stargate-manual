@@ -3,7 +3,7 @@
   "projectionType": "SESSION_COMPARISON_PROJECTION",
   "consumerMode": "READ_ONLY",
   "projectionId": "BKL037-SQM-DYNAMIC-V1",
-  "generatedAt": "2026-09-14T09:01:18.198Z",
+  "generatedAt": "2026-09-15T05:57:33.093Z",
   "comparisonSetId": "BKL037-SQM-CATALOG-V1",
   "dimension": "SQM_MEDIAN",
   "unit": "mag/arcsec2",
@@ -88,6 +88,14 @@
       "provenanceRef": "data/sessions/2026/09/2026-09-13_2026-09-14/normalized/session-metrics.json#sqm",
       "quality": "AVAILABLE",
       "completeness": "COMPLETE"
+    },
+    {
+      "sessionId": "2026-09-14_2026-09-15",
+      "value": 20.88,
+      "unit": "mag/arcsec2",
+      "provenanceRef": "data/sessions/2026/09/2026-09-14_2026-09-15/normalized/session-metrics.json#sqm",
+      "quality": "AVAILABLE",
+      "completeness": "COMPLETE"
     }
   ],
   "exclusions": [
@@ -128,11 +136,11 @@
     }
   ],
   "descriptiveSummary": {
-    "sampleSize": 10,
+    "sampleSize": 11,
     "minimum": 18.66,
     "maximum": 20.96,
-    "mean": 20.0375,
-    "median": 20.32,
+    "mean": 20.114090909090912,
+    "median": 20.57,
     "range": 2.3000000000000007
   },
   "limitations": [
@@ -160,7 +168,8 @@
       "data/sessions/2026/09/2026-09-06_2026-09-07/normalized/session-metrics.json",
       "data/sessions/2026/09/2026-09-07_2026-09-08/normalized/session-metrics.json",
       "data/sessions/2026/09/2026-09-12_2026-09-13/normalized/session-metrics.json",
-      "data/sessions/2026/09/2026-09-13_2026-09-14/normalized/session-metrics.json"
+      "data/sessions/2026/09/2026-09-13_2026-09-14/normalized/session-metrics.json",
+      "data/sessions/2026/09/2026-09-14_2026-09-15/normalized/session-metrics.json"
     ]
   },
   "authority": {
@@ -168,8 +177,8 @@
     "actionAuthority": "NONE"
   },
   "catalogCoverage": {
-    "totalSessions": 17,
-    "includedSessions": 10,
+    "totalSessions": 18,
+    "includedSessions": 11,
     "excludedSessions": 7,
     "sourceCatalog": "docs/data/scientific-session-catalog.json"
   }
