@@ -79,6 +79,7 @@ Prima dell'esecuzione dovranno esistere:
 | N30 | campo configuration/label/validity non classificato pubblico | omesso o projection unavailable |
 | N31 | conflict evidence esposta al portale | leak test fallisce |
 | N32 | errore adapter/baseline authority | fail-closed; nessun fallback |
+| N33 | reason code interno copiato nella projection pubblica | leak test fallisce; usare publicReasonCode generalizzato |
 
 ## 5. Property and determinism tests
 
@@ -89,6 +90,7 @@ Prima dell'esecuzione dovranno esistere:
 - revision/mtime/file order non sono tie-break;
 - stessa exact authority snapshot produce stessa decisione;
 - public canonical payload non contiene token della deny-list;
+- reason code interno non è mai pubblicato senza una mappatura allowlisted;
 - la rimozione di un approval/authority reference non può aumentare availability;
 - un observed fact non può mutare desired assignment;
 - un failure non può produrre command, readiness o Safety Authority.
@@ -127,7 +129,7 @@ Future test sequence:
 | `ARB-191-MI01` | P10, N27-N31, security tests |
 | F3-A1 site binding | P01, N12-N13 |
 | deterministic current | P01-P05, N01-N05, N22-N26 |
-| fail-closed S09 | N01-N32 |
+| fail-closed S09 | N01-N33 |
 | rollback | migration/rollback cases |
 | Safety boundary | property test command/readiness prohibition |
 

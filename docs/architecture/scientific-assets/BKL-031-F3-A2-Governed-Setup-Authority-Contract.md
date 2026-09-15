@@ -251,12 +251,12 @@ La sequenza logica è: consumer autorizzato → Setup Authority → Site Authori
 
 - `publicSetupRef`: ID opaco assegnato indipendentemente;
 - `publicEvidenceDigest`: digest del solo payload pubblico canonico;
-- `availabilityState` e `reasonCode`;
+- `availabilityState` e `publicReasonCode`, scelto da una enum pubblica generalizzata e separata dai reason code interni;
 - `asOfUtc`;
 - `configurationPublicRef`, label e validità solo quando ciascun campo è classificato pubblico;
 - provenance pubblicabile senza locator protetti.
 
-Non contiene assignment ID/revision/digest, observatory ID, site record reference, baseline ID/version/digest, owner/custodian/approver reference, approval evidence, source locator, seriali, licenze, credential reference o conflict evidence.
+Non contiene assignment ID/revision/digest, observatory ID, site record reference, baseline ID/version/digest, owner/custodian/approver reference, approval evidence, source locator, seriali, licenze, credential reference, conflict evidence o reason code interno. I dettagli interni sono mappati solo a categorie pubbliche allowlisted; in assenza di una mappatura autorizzata viene pubblicato esclusivamente lo stato generalizzato.
 
 `publicSetupRef` e `publicEvidenceDigest` non possono essere derivati, hashati o cifrati deterministicamente dai valori interni. L'allowlist è deny-by-default. `ARB-191-MI01` resta aperta fino all'enforcement e ai leak test eseguibili di F3-B/F3-C.
 
