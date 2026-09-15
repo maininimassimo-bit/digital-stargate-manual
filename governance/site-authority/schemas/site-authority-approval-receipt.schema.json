@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.invalid/schemas/site-authority-approval-receipt.schema.json",
+  "title": "Digital StarGate Site Authority Approval Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "recordType", "receiptId", "decision", "subject", "approvingAuthority", "approval", "repositoryEvidence", "scopeBoundaries", "integrity"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0-draft" },
+    "recordType": { "const": "DSG_SITE_AUTHORITY_APPROVAL_RECEIPT" },
+    "receiptId": { "type": "string", "minLength": 1 },
+    "decision": { "enum": ["APPROVED", "REJECTED"] },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["siteRecordId", "revision", "observatoryId", "payloadDigest", "validFromUtc", "validityEndMode", "validToUtc", "intervalSemantics"],
+      "properties": {
+        "siteRecordId": { "type": "string", "minLength": 1 },
+        "revision": { "type": "integer", "minimum": 1 },
+        "observatoryId": { "type": "string", "minLength": 1 },
+        "payloadDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "validFromUtc": { "type": "string", "format": "date-time" },
+        "validityEndMode": { "enum": ["EXCLUSIVE", "UNBOUNDED"] },
+        "validToUtc": { "type": ["string", "null"], "format": "date-time" },
+        "intervalSemantics": { "const": "HALF_OPEN" }
+      }
+    },
+    "approvingAuthority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authorityRef", "authorityKind", "custodianIsApprover"],
+      "properties": {
+        "authorityRef": { "const": "github:user:maininimassimo-bit" },
+        "authorityKind": { "const": "HUMAN_REPOSITORY_OWNER" },
+        "custodianIsApprover": { "const": false }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["approvalTimestampUtc", "sourceChannel", "sourceStatement", "validityAcknowledged"],
+      "properties": {
+        "approvalTimestampUtc": { "type": "string", "format": "date-time" },
+        "sourceChannel": { "const": "OWNER_CONTROLLED_INTERACTION_CHANNEL" },
+        "sourceStatement": { "type": "string", "minLength": 1 },
+        "validityAcknowledged": { "type": "boolean" }
+      }
+    },
+    "repositoryEvidence": { "type": "object" },
+    "scopeBoundaries": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "integrity": { "type": "object" }
+  }
+}
