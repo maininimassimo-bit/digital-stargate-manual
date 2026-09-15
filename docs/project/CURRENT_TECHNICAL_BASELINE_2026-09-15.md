@@ -3,10 +3,10 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-BASELINE-2026-09-15 |
-| Stato | **CURRENT — F3-A1 ACCEPTANCE RECONCILIATION / DOCUMENTATION ONLY** |
+| Stato | **CURRENT — F3-A1 ACCEPTANCE REVIEWS COMPLETE / DOCUMENTATION ONLY** |
 | Repository baseline | `main@b9d08a7cf6b6287825907cab6a846b1ec70f0378` |
 | Working branch | `docs/bkl-031-f3-a1-acceptance` |
-| Current package | BKL-031 F3-A1 — Site Authority Contract Acceptance |
+| Current package | BKL-031 F3-A1 — Acceptance Reconciliation review publication |
 | Runtime delta | None |
 | Data/schema delta | None |
 | Infrastructure delta | None |
@@ -35,7 +35,7 @@ Non esistono classi, schema JSON, fixture, validator, persistence, API, cache, d
 | `ARB-193-MI02` | resolver canonico e authority scope open prima di F3-B |
 | `ARB-191-MI01` | boundary definita; enforcement/leak tests F3-B/F3-C open |
 | `ARB-191-MI02` | normativa accettata; test eseguibili obbligatori prima della materializzazione |
-| AI review independence | review PR #193 dichiarate AI-assisted |
+| AI review independence | review PR #193 e PR #194 dichiarate AI-assisted |
 | S08 | UNAVAILABLE |
 | S09 | UNAVAILABLE_CURRENT |
 | S10 | UNAVAILABLE |
@@ -50,9 +50,11 @@ L'ordine descrive dipendenze, non autorizza automaticamente alcuna slice.
 
 La baseline non modifica EAGLE, N.I.N.A., PHD2, CPWI, VPN, rete, interlock, storage operativo o procedure di emergenza. L'autorità di sicurezza resta fisica/locale.
 
-## 6. Verification target
+## 6. Review e verification target
 
-La draft PR di riconciliazione deve dimostrare:
+La PR #194 technical head `b43e137ba36807b7027b60ea907fa559efb98af6` ha 7/7 workflow SUCCESS, ARB AI-assisted `APPROVED WITH CONDITIONS — 99/100` e Release Quality AI-assisted `CONDITIONALLY READY FOR MERGE`.
+
+Il review-publication head deve dimostrare:
 
 - build/documentation governance green;
 - roadmap source/projection allineate;

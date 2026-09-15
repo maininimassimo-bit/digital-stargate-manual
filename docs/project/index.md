@@ -19,6 +19,8 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [F3-A1 Validation Plan](../architecture/validation/BKL-031-F3-A1-Site-Authority-Contract-Validation-Plan.md) | Piano accettato, matrice non eseguita |
 | [PR #193 F3-A1 AI-Assisted ARB Review](../architecture/reviews/ARB-PR193-BKL-031-F3-A1-Site-Authority-Contract-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 96/100; non equivalente ad approvazione umana indipendente |
 | [PR #193 F3-A1 AI-Assisted Release Quality](../architecture/reviews/RQ-PR193-BKL-031-F3-A1-Site-Authority-Contract-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
+| [PR #194 F3-A1 Acceptance AI-Assisted ARB Review](../architecture/reviews/ARB-PR194-BKL-031-F3-A1-Acceptance-Reconciliation-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 99/100; non equivalente ad approvazione umana indipendente |
+| [PR #194 F3-A1 Acceptance AI-Assisted Release Quality](../architecture/reviews/RQ-PR194-BKL-031-F3-A1-Acceptance-Reconciliation-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
 | [Enterprise Architecture Context](ENTERPRISE_ARCHITECTURE_CONTEXT.md) | Contesto enterprise |
 | [Repository Knowledge Map](REPOSITORY_KNOWLEDGE_MAP.md) | Mappa authority/projection |
 | [BKL-037 Closure](BKL-037-CLOSURE-2026-09-10.md) | Closure del predecessore accettato |
@@ -76,7 +78,7 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-031 F1: ACCEPTED / POST-MERGE VERIFIED;
 - BKL-031 F2: ACCEPTED / POST-MERGE VERIFIED;
 - BKL-031 F3: Solution Architecture `ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED`; closure PR #192 merged as `21524c687a1fa6a9d840a3951c7ef4fe298f9c3c`;
-- BKL-031 F3-A1: Site Authority Contract `ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED / NOT IMPLEMENTED`; successor decision pending.
+- BKL-031 F3-A1: Site Authority Contract `ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED / NOT IMPLEMENTED`; PR #194 acceptance reconciliation ARB/RQ complete, merge decision pending.
 
 ## Sequenza governata
 

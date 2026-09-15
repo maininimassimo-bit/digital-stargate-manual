@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 4.9 |
+| Versione | 5.0 |
 | Baseline | 15/09/2026 |
-| Stato | Current root bootstrap — BKL-031 F3-A1 accepted with conditions/post-merge verified; acceptance reconciliation current; not implemented |
+| Stato | Current root bootstrap — BKL-031 F3-A1 acceptance reconciliation ARB/RQ complete; review-publication CI current; not implemented |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -74,4 +74,6 @@ Nessun portale, planner, comparison layer, quality score o AI è Safety Authorit
 
 PR #193 ha integrato il Site Authority Contract F3-A1 in `main@b9d08a7cf6b6287825907cab6a846b1ec70f0378` con 9/9 workflow post-merge. Il contratto è accettato con condizioni come specifica documentale ed è oggetto della corrente Acceptance Reconciliation; non è implementato.
 
-Il prossimo gate è la verifica CI dell'exact head della draft PR di riconciliazione, seguita solo su nuova autorizzazione da ARB/Release Quality. Dopo l'eventuale merge servirà una decisione owner separata sul successore. Coordinate reali, schema/fixture/validator/adapter, storage, provider/ADR, F3-A2/A3/B/C, forecast, ranking, readiness, runtime, device command, PC/EAGLE e Safety Authority restano non autorizzati.
+La draft PR #194 è stata valutata sull'exact technical head `b43e137ba36807b7027b60ea907fa559efb98af6`: ARB AI-assisted `APPROVED WITH CONDITIONS — 99/100` e Release Quality AI-assisted `CONDITIONALLY READY FOR MERGE`. Le review non equivalgono ad approvazioni umane indipendenti.
+
+Il prossimo gate è la verifica CI dell'exact review-publication head, seguita da una decisione owner separata per merge e ruleset. Dopo l'eventuale merge servirà una decisione owner separata sul successore. Coordinate reali, schema/fixture/validator/adapter, storage, provider/ADR, F3-A2/A3/B/C, forecast, ranking, readiness, runtime, device command, PC/EAGLE e Safety Authority restano non autorizzati.
