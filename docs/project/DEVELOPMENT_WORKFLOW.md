@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEV-001 |
-| Versione | 2.3 |
+| Versione | 2.4 |
 | Stato | Active |
-| Data efficacia | 10/09/2026 |
+| Data efficacia | 15/09/2026 |
 
 ## 1. Scopo
 
@@ -29,6 +29,12 @@ Il ciclo comprende, senza ulteriori richieste di approvazione intermedie:
 10. chiusura formale della milestone e post-merge verification.
 
 L'utente riceve aggiornamenti di avanzamento e il rapporto conclusivo, ma non deve approvare ogni passaggio previsto.
+
+### 2.1 Mandato continuativo
+
+Il mandato owner-authorized [`DSG-AEM-001`](DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md) governa l'esecuzione autonoma fino al completamento del progetto o revoca. Le sue stop condition prevalgono sulla continuità operativa.
+
+La deroga `W-DSG-AEM-RULESET-001` consente merge in assenza di ruleset solo con tutti i gate sostitutivi verificati e tracciati per l'exact head. Non deroga a CI, review applicabile, safety, privacy, rollback o post-merge verification.
 
 ## 3. Casi che richiedono approvazione esplicita
 
@@ -164,6 +170,7 @@ Quando richiesta dal package:
 ### 4.7 Merge e post-merge
 
 - usare expected-head protection quando possibile;
+- quando il ruleset è assente, citare `W-DSG-AEM-RULESET-001` e registrare tutti i gate sostitutivi definiti in `DSG-AEM-001`;
 - registrare il merge SHA reale;
 - verificare i workflow applicabili sul merge SHA in `main`;
 - non dichiarare repository-integrated finché i post-merge gate richiesti non sono verificati;

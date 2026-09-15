@@ -3,60 +3,55 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-BASELINE-2026-09-15 |
-| Stato | **CURRENT — F3-A2 HANDOFF REVIEWED / MERGE DECISION PENDING / DOCUMENTATION ONLY** |
-| Repository baseline | `main@1fd771632239cdca38d7527c55b974d805ffd1b9` |
-| Working branch | `docs/bkl-031-f3-a2-handoff` |
-| Current package | BKL-031 F3-A2 — Setup Authority Program Assessment and Handoff |
+| Stato | **CURRENT — PR #195 POST-MERGE VERIFIED / DSG-AEM-001 ACTIVE / F3-A2 CONTRACT NEXT** |
+| Repository baseline | `main@8520f4272d31f5578769e8d12ac34101e1c044e8` |
+| Working branch | `docs/dsg-aem-001-governance` |
+| Current package | Governance mandate persistence and F3-A2 contract transition |
 | Runtime delta | None |
 | Data/schema delta | None |
 | Infrastructure delta | None |
 
 ## 1. Baseline integrata
 
-PR #194 è merged nel commit `1fd771632239cdca38d7527c55b974d805ffd1b9` e verificata con 9/9 workflow post-merge. Pages build/deployment e Governed Projection Sync sono SUCCESS. Il waiver una tantum del merge è consumato/scaduto.
+PR #195 è merged come `8520f4272d31f5578769e8d12ac34101e1c044e8` e verificata con 9/9 workflow post-merge. Pages build/deployment, published-site integrity e Governed Projection Sync sono SUCCESS.
 
-## 2. Stato tecnico corrente
+## 2. Governance corrente
 
-F3-A1 è accettato con condizioni, riconciliato e non implementato. F3-A2 è selezionato esclusivamente come handoff documentale per il futuro contratto di `CurrentSetupAssignment`. Sulla PR #195 technical head `047ca2d1f208d8291d88823f4b99c401232ecd6b`, l'ARB AI-assistita ha deciso **APPROVED WITH CONDITIONS — 98/100** e Release Quality **CONDITIONALLY READY FOR MERGE**; le valutazioni non equivalgono ad approvazioni umane indipendenti.
+`DSG-AEM-001` autorizza l'esecuzione continuativa fino a completamento o revoca. `W-DSG-AEM-RULESET-001` accetta l'assenza del ruleset soltanto quando tutti i gate sostitutivi sono verificati per l'exact head.
 
-Non esistono assignment reali, classi, schema JSON, fixture, validator, persistence, API, cache, deployment o integrazione EAGLE.
+Le review AI-assistite restano dichiarate come non equivalenti ad approvazioni umane indipendenti. Safety, privacy, rollback e tracciabilità non sono derogati.
 
-## 3. Dependency readiness
+## 3. Stato tecnico
+
+F3-A2 handoff è accepted with conditions/post-merge verified. Il detailed contract non è ancora prodotto.
+
+Non esistono setup assignment reali, baseline concrete attestate, classi, schema JSON, fixture, validator, persistence, API, cache, provider, deployment o integrazione EAGLE.
+
+## 4. Dependency readiness
 
 | Elemento | Stato |
 |---|---|
 | F3 architecture | accepted with conditions |
 | F3-A1 contract | accepted with conditions / not implemented |
-| AP-006 setup baseline authority | riferimento architetturale disponibile; baseline concreta approvata non attestata |
-| F3-A2 detailed contract | not produced / specialist handoff current |
+| F3-A2 handoff | accepted with conditions / post-merge verified |
+| AP-006 governance concepts | disponibili; nessuna concrete approved baseline attestata |
+| F3-A2 detailed contract | dependency-ready / next |
 | F3-A3/B/C | not promoted |
 | S09 | UNAVAILABLE_CURRENT |
 
-## 4. Condizioni
+## 5. Gate del prossimo package
 
-| ID | Stato corrente |
-|---|---|
-| `ARB-195-MI01` | open prima dell'approvazione del contratto dettagliato F3-A2 |
-| `ARB-193-MI01` | open prima di F3-B |
-| `ARB-193-MI02` | open prima di F3-B |
-| `ARB-191-MI01` | enforcement/leak tests open prima di F3-B/F3-C |
-| `ARB-191-MI02` | normativa accettata; test eseguibili prima della materializzazione |
-| AI review independence | review PR #193/#194/#195 dichiarate AI-assisted |
-| Safety | authority fisica/locale invariata |
+Il detailed F3-A2 contract deve:
 
-## 5. Verification target
-
-L'exact review-publication head della draft PR #195 deve dimostrare:
-
-- package esclusivamente documentale;
-- dependency order coerente;
-- roadmap source/projection allineate;
-- link e nav validi;
-- nessun runtime, schema, dato reale o segreto;
-- exact head identificato;
-- 7/7 workflow SUCCESS dopo la pubblicazione dei report;
-- branch zero behind rispetto a `main`.
+- risolvere `ARB-195-MI01`;
+- distinguere authority architetturale e baseline instance evidence;
+- identificare owner/custodian e source reference;
+- definire lifecycle, approval/revision e validità UTC half-open;
+- definire resolution e failure semantics fail-closed;
+- preservare public/protected boundary;
+- includere validation plan, migration e rollback;
+- restare documentale e non materializzato.
 
 ## 6. Rollback
 
-Revert documentale del commit F3-A2 handoff. Nessuna migrazione, rotazione credenziali o azione operativa.
+Il package corrente è repository-only. Nessuna migrazione, rotazione credenziali o azione operativa è richiesta.

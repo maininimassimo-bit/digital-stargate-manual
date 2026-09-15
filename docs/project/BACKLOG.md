@@ -49,7 +49,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
-| BKL-031 | P1 | Observation Planner intelligente | In Progress | F3-A1 accepted/reconciled/post-merge verified | F3-A2 Setup Authority Program Assessment/Handoff review candidate; no implementation | F3-A2 assessment/handoff; F3-A1 acceptance |
+| BKL-031 | P1 | Observation Planner intelligente | In Progress | F3-A2 handoff accepted with conditions/post-merge verified | F3-A2 Detailed Setup Authority Contract dependency-ready; no implementation | F3-A2 handoff acceptance; DSG-AEM-001 |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
@@ -139,7 +139,7 @@ Il repository owner ha autorizzato il solo incremento F2. Il candidate package m
 Completed baseline through BKL-037
   -> BKL-041 Scientific Data Quality Score [CLOSED]
   -> BKL-046 AI Post-Processing Assistant [CLOSED]
-  -> BKL-031 Observation Planner [F1/F2 ACCEPTED / F3 SA ACCEPTED — IMPLEMENTATION DECISION PENDING]
+  -> BKL-031 Observation Planner [F1/F2 ACCEPTED / F3 SA/F3-A1 ACCEPTED / F3-A2 CONTRACT NEXT]
   -> BKL-032 Session Readiness
   -> BKL-036 Observatory Health Score
   -> BKL-033 Digital Twin
@@ -206,3 +206,14 @@ PR #194 è merged in `main` come `1fd771632239cdca38d7527c55b974d805ffd1b9` dopo
 ### BKL-031 F3-A2 Setup Authority handoff — 15/09/2026
 
 L'owner ha autorizzato il passo successivo e il Program Architect ha selezionato F3-A2 come successore dependency-ready, limitatamente a Program Assessment/Handoff documentale. Il futuro Solution Architect dovrà definire il contratto `CurrentSetupAssignment`, la reference AP-006, lifecycle, validità half-open e failure semantics. Nessun assignment reale, contratto dettagliato, schema, fixture, validator, adapter, runtime, F3-A3/B/C, EAGLE o Safety Authority è autorizzato.
+
+
+### BKL-031 F3-A2 handoff acceptance — 15/09/2026
+
+PR #195 è merged in `main` come `8520f4272d31f5578769e8d12ac34101e1c044e8` dopo ARB AI-assisted `APPROVED WITH CONDITIONS — 98/100`, Release Quality AI-assisted `CONDITIONALLY READY FOR MERGE` e 7/7 workflow sul review-publication head `09c0ba25fa8c4bc0649deaa6aee3bdeee61dbd60`. Il merge ha concluso 9/9 workflow SUCCESS, inclusi Pages e Governed Projection Sync.
+
+`ARB-195-MI01` resta obbligatoria prima dell'approvazione del detailed F3-A2 contract. Nessun assignment, baseline concreta, schema, fixture, validator, adapter, provider, runtime, EAGLE o Safety Authority è stato introdotto.
+
+### DSG-AEM-001 activation — 15/09/2026
+
+L'owner ha attivato `DSG-AEM-001` e `W-DSG-AEM-RULESET-001` fino al completamento del progetto o revoca. Il programma procede autonomamente attraverso package dependency-ready; ogni merge senza ruleset richiede i gate sostitutivi exact-head e la relativa evidence. Il detailed F3-A2 Setup Authority Contract è il prossimo package.

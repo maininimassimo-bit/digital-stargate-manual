@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEC-001 |
-| Versione | 1.4 |
+| Versione | 1.5 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -45,10 +45,11 @@ Creare invece un ADR quando la decisione modifica un principio architetturale, i
 
 | DLG-014 | 15/09/2026 | Promuovere BKL-031 F3-A1 come package documentale e definire normativamente gli intervalli UTC half-open prima di ogni materializzazione | Rimuovere l'ambiguità di ARB-191-MI02 senza anticipare schema, dati o runtime | BKL-031 F3-A1 | Accepted | F3-A1 handoff/contract/validation plan |
 | DLG-015 | 15/09/2026 | Selezionare BKL-031 F3-A2 Setup Authority Contract come successore, iniziando da un Program Assessment/Handoff esclusivamente documentale | Completare in dependency order l'autorità setup dopo il contratto sito, senza anticipare materializzazione, provider o runtime | BKL-031 F3-A2 | Accepted | BKL-031-F3-A2-PROGRAM-001 |
+| DLG-016 | 15/09/2026 | Attivare il mandato continuativo `DSG-AEM-001` e la deroga condizionata `W-DSG-AEM-RULESET-001` fino a completamento o revoca | Ridurre handoff autorizzativi mantenendo exact-head CI, review applicabile, rollback, privacy, safety, audit e post-merge | Delivery Governance | Accepted | `DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md`; owner authorization 15/09/2026 |
 
 ## 5. Delega operativa GitHub
 
-La delega comprende, entro lo scope approvato: lettura e ricerca nel repository; creazione/aggiornamento/ritiro di file; commit e aggiornamenti fast-forward; controllo GitHub Actions, job, log e artifact; verifica GitHub Pages; correzione autonoma di errori coerenti con la milestone; aggiornamento dei registri di governance.
+La delega comprende, entro lo scope approvato: lettura e ricerca nel repository; creazione/aggiornamento/ritiro di file; commit e aggiornamenti fast-forward; controllo GitHub Actions, job, log e artifact; verifica GitHub Pages; correzione autonoma di errori coerenti con la milestone; review AI-assistite; merge condizionati; post-merge verification; aggiornamento dei registri di governance. `DSG-AEM-001` è la definizione operativa corrente.
 
 Richiedono sempre approvazione esplicita: force push o aggiornamento non fast-forward; operazioni distruttive non previste; ampliamento dello scope o deviazione dalla roadmap; nuove integrazioni o dipendenze strutturali; cambi di boundary, authority, safety, security o contratti pubblici.
 

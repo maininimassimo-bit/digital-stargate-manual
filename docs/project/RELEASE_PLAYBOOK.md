@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-REL-001 |
-| Versione | 1.0 |
+| Versione | 1.1 |
 | Stato | Active |
 
 ## 1. Scopo
@@ -65,6 +65,10 @@ Workflow autorevoli:
 - workflow specialistici per history, session package e analisi scientifica.
 
 Un commit non prova il deployment. La release è pubblicata solo dopo workflow positivo e verifica del sito.
+
+### 6.1 Merge senza ruleset
+
+Quando `main` non dispone di ruleset o branch protection, `W-DSG-AEM-RULESET-001` è applicabile soltanto con exact-head CI completa, branch zero behind, PR mergeable, nessun Blocker/Major, Minor disposta, rollback e classificazione dati verificati. L'uso deve essere commentato nella PR e seguito da verifica post-merge sul merge SHA.
 
 ## 7. Release Acceptance Review
 
