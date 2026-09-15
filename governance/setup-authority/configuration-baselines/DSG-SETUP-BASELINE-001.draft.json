@@ -160,5 +160,30 @@
     "canonicalization": "recursive object-key sort; array order preserved; compact JSON; UTF-8",
     "algorithm": "SHA-256",
     "value": "sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8"
+  },
+  "validationEvidence": {
+    "sourceLineageCheck": {
+      "state": "VERIFIED",
+      "evidence": "equipment registry path, commit and blob SHA are pinned in baselinePayload.sourceEvidenceRefs"
+    },
+    "payloadDigestRecomputation": {
+      "state": "VERIFIED",
+      "evidence": "SHA-256 independently recomputed from canonical baselinePayload on 2026-09-15"
+    },
+    "jsonParse": {
+      "state": "VERIFIED"
+    },
+    "approvedSchemaValidation": {
+      "state": "NOT_EXECUTED",
+      "reason": "NO_APPROVED_F3_A2_SCHEMA"
+    },
+    "runtimeOat": {
+      "state": "NOT_EXECUTED",
+      "reason": "OUT_OF_SCOPE_DRAFT"
+    },
+    "physicalInventory": {
+      "state": "NOT_EXECUTED",
+      "reason": "OWNER_SELECTED_EXPLICIT_EXCEPTIONS"
+    }
   }
 }
