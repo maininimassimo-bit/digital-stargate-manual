@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.23 |
+| Versione | 5.24 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -49,7 +49,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
-| BKL-031 | P1 | Observation Planner intelligente | In Progress | Exact-digest owner approval received; PR #209 D5 protected receipt/APPROVED envelope review candidate; 65/65 implementation tests | Complete exact-head review, merge and post-merge reconciliation; runtime remains separate | ADR-009; PR #209; F3-A2-D5 evidence |
+| BKL-031 | P1 | Observation Planner intelligente | In Progress | F3-A2-D5 ACCEPTED / POST-MERGE VERIFIED; repository authority APPROVED/AVAILABLE; runtime S09 unavailable | Select the next dependency-ready package through Program Architect; any runtime adapter requires a separate architecture package and ARB-204-MI02 | ADR-009; PR #209; merge `bc4307c2042a45985622044e11631421de5b2c3d`; F3-A2-D5 evidence |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
@@ -139,7 +139,7 @@ Il repository owner ha autorizzato il solo incremento F2. Il candidate package m
 Completed baseline through BKL-037
   -> BKL-041 Scientific Data Quality Score [CLOSED]
   -> BKL-046 AI Post-Processing Assistant [CLOSED]
-  -> BKL-031 Observation Planner [F1/F2 ACCEPTED / F3 SA/F3-A1 ACCEPTED / F3-A2 ACCEPTED / AUTHORITY DECISION REQUIRED]
+  -> BKL-031 Observation Planner [F1/F2 ACCEPTED / F3 SA/F3-A1 ACCEPTED / F3-A2-D5 ACCEPTED / REPOSITORY AVAILABLE / RUNTIME ADAPTER ABSENT / SUCCESSOR SELECTION]
   -> BKL-032 Session Readiness
   -> BKL-036 Observatory Health Score
   -> BKL-033 Digital Twin
@@ -288,3 +288,11 @@ The protected resolver-ineligible DRAFT, closed decision and assignment schemas,
 ### BKL-031 F3-A2-D5 exact-digest assignment approval — 15/09/2026
 
 The Repository Owner explicitly approved the exact protected `CurrentSetupAssignment` digest and unbounded validity from the setup-baseline effective start, while preserving the prohibition on public digest and site facts. PR #209 records a separate protected receipt and creates an `APPROVED` lifecycle envelope without changing the assignment payload or digest. The implementation head passed 65/65 cases in the redacted governance workflow. Exact-head repository CI, Documentation governance, AI-assisted ARB/RQ, expected-head merge and post-merge verification remain required. No runtime adapter, EAGLE activity, command, readiness/go-no-go or Safety Authority change is included; S09 remains `UNAVAILABLE_CURRENT`.
+
+### BKL-031 F3-A2-D5 acceptance reconciliation — 15/09/2026
+
+PR #209 passed 5/5 exact-head workflows at `6947e79a53282db2a7f6d879643e51840ed9e553`, received Documentation `ACCEPTED WITH OBSERVATION`, AI-assisted process-separated ARB `APPROVED WITH CONDITIONS — 99/100` and Release Quality `CONDITIONALLY READY FOR MERGE`, then merged with expected-head control as `bc4307c2042a45985622044e11631421de5b2c3d`. All 7 post-merge workflows succeeded. The reviews are not equivalent to independent human approval.
+
+F3-A2-D5 is ACCEPTED / POST-MERGE VERIFIED. The historical DRAFT remains immutable; the protected receipt and separate `APPROVED` envelope preserve the assignment payload/digest; 65/65 cases pass. Repository authority resolves `AVAILABLE` for authorized validated input. Runtime S09 remains `UNAVAILABLE_CURRENT` because no adapter exists. No EAGLE activity, device command, readiness/go-no-go or Safety Authority change occurred.
+
+The Program Architect must now select the next dependency-ready BKL-031 package from repository evidence. Any runtime adapter requires a separate architecture package and satisfaction of `ARB-204-MI02`.

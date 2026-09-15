@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 3.6 |
+| Versione | 3.7 |
 | Stato | Active context baseline |
 | Data baseline | 15/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
@@ -11,7 +11,7 @@
 | Root bootstrap | `AI_BOOTSTRAP.md` |
 | Continuity handover | `docs/project/HANDOVER_2026-09-15.md` |
 | Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-15.md` |
-| Current governed package | BKL-031 F3-A2 — Setup Authority Program Assessment/Handoff review candidate; not implemented |
+| Current governed package | BKL-031 F3-A2-D5 accepted/post-merge verified; repository authority available; runtime adapter absent; successor selection current |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo e gerarchia
@@ -60,17 +60,17 @@ BKL-041 — Scientific Data Quality Score è CLOSED / ACCEPTED / POST-MERGE VERI
 
 BKL-046 F1-F5 sono CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION` e `aiModelImplemented=false`.
 
-BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. Il Solution Architecture Package F3 è integrato tramite PR #191; la closure PR #192 è integrata in `21524c687a1fa6a9d840a3951c7ef4fe298f9c3c`. F3-A1 è integrato tramite PR #193, accettato con condizioni e riconciliato tramite PR #194 merge `1fd771632239cdca38d7527c55b974d805ffd1b9`, con 9/9 workflow post-merge. F3-A2 è promosso soltanto come Program Assessment/Handoff documentale al Solution Architect; non esiste assignment o contratto dettagliato. `ARB-193-MI01`, `ARB-193-MI02` e `ARB-191-MI01` restano implementation gate; `ARB-191-MI02` è soddisfatta a livello normativo, con test eseguibili ancora obbligatori. BKL-031 resta attivo e F3-A3/B/C non sono promossi. Provider/ADR, record reali, schema/fixture/validator/adapter, implementazione, forecast, ranking, readiness, runtime, device command, workload EAGLE e Safety Authority restano non autorizzati.
+BKL-031 F1/F2, F3 Solution Architecture, F3-A1 Site Authority and F3-A2 setup-authority contract are accepted/post-merge verified with their recorded conditions. The protected setup baseline and Site Authority are separately APPROVED. PR #207 integrated the protected assignment DRAFT; PR #209 then integrated the separate approval receipt and unchanged `APPROVED` envelope as merge `bc4307c2042a45985622044e11631421de5b2c3d`. The suite passes 65/65 and all 7 post-merge workflows succeeded. Repository authority resolves `AVAILABLE` only for authorized validated input. S08 remains `UNAVAILABLE`; runtime S09 remains `UNAVAILABLE_CURRENT` because no adapter exists. `ARB-204-MI02` is mandatory before any runtime adapter. F3-A3/B/C, F4 forecast, F5 ranking/consumer, BKL-032 readiness, EAGLE operations and Safety Authority remain separate.
 
 ## 7. Roadmap
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2 HANDOFF REVIEW CANDIDATE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2-D5 ACCEPTED / REPOSITORY AVAILABLE / RUNTIME ADAPTER ABSENT / SUCCESSOR SELECTION] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 AMP-002 resta planning authority per AP-007–AP-015, non live status register.
 
 ## 8. Technical debt and decisions
 
-TD-012 resta Accepted e non viene retrofittato. Le deroghe F2/F2-closure e `W-BKL031-F3-HANDOFF-MERGE-001` sono consumate/scadute. F3 documenta dieci open decision; nessun ADR o provider è accettato.
+TD-012 resta Accepted e non viene retrofittato. Le deroghe una tantum storiche restano consumate/scadute; `W-DSG-AEM-RULESET-001` governa i merge sostitutivi correnti. ADR-009 è Accepted. Nessun runtime provider o adapter è accettato; `ARB-204-MI02` resta un gate obbligatorio.
 
 ## 9. Delivery
 
@@ -78,7 +78,7 @@ Ogni incremento richiede exact-head CI, review applicabili, merge protetto e pos
 
 ## 10. Runtime impact
 
-Le acceptance BKL-031 F1/F2/F3/F3-A1 sono repository-only. Il Program Assessment/Handoff F3-A2 corrente è documentale; nessuna azione PC/EAGLE è richiesta.
+La repository authority F3-A2-D5 è APPROVED/AVAILABLE per caller autorizzati, ma il runtime S09 resta `UNAVAILABLE_CURRENT`. Nessuna azione PC/EAGLE è richiesta e nessun command, readiness/go-no-go o Safety Authority è introdotto.
 
 ## 11. Registro revisioni
 
@@ -109,3 +109,5 @@ Le acceptance BKL-031 F1/F2/F3/F3-A1 sono repository-only. Il Program Assessment
 | 3.4 | 15/09/2026 | PR #192 closure integrated; F3-A1 Site Authority Contract review candidate current |
 | 3.5 | 15/09/2026 | PR #193 F3-A1 merged/post-merge verified; Acceptance Reconciliation current |
 | 3.6 | 15/09/2026 | PR #194 F3-A1 reconciliation merged/post-merge verified; F3-A2 handoff current |
+
+| 3.7 | 15/09/2026 | PR #209 D5 accepted/post-merge verified; repository authority AVAILABLE, runtime S09 unavailable; successor selection current |

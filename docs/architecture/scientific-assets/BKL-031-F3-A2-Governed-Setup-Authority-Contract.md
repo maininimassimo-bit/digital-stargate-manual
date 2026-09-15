@@ -3,14 +3,14 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A2-CONTRACT-001 |
-| Stato | **ACCEPTED WITH CONDITIONS / ASSIGNMENT APPROVAL-PROMOTION REVIEW CANDIDATE — RUNTIME NOT IMPLEMENTED** |
-| Versione | 1.4 |
+| Stato | **ACCEPTED WITH CONDITIONS / ASSIGNMENT APPROVED-AVAILABLE IN REPOSITORY — RUNTIME NOT IMPLEMENTED** |
+| Versione | 1.5 |
 | Data | 15/09/2026 |
-| Baseline | `main@687f966fa544f7c4b31eaa29433cfa8ab48e52fe` |
+| Baseline | `main@bc4307c2042a45985622044e11631421de5b2c3d` |
 | Parent handoff | `BKL-031-F3-A2-PROGRAM-001` |
 | Parent acceptance | `BKL-031-F3-A2-HANDOFF-ACCEPTANCE-001` |
 | Governing architecture | BKL-031 F3 Solution Architecture; AP-006 governance concepts |
-| Review disposition | baseline and site gates closed; exact-digest assignment approval received; D5 promotion awaits exact-head review and integration |
+| Review disposition | baseline, site and assignment repository authority accepted/post-merge verified; runtime adapter remains absent |
 | Runtime / data / schema impact | Protected assignment receipt, APPROVED envelope and receipt schema; no runtime |
 | PC Principale / EAGLE | Nessuna attività richiesta |
 
@@ -20,15 +20,13 @@ Questo contratto definisce, a livello logico e source-neutral, come il planner p
 
 Il contratto definisce identità, authority reference, approval, revision, validità, risoluzione, failure semantics, boundary pubblico/protetto, porte applicative, migrazione e validazione.
 
-Non:
+Il contratto originario non materializzava record. Gli incrementi D1-D5 hanno successivamente materializzato e approvato la baseline, la Site Authority e il `CurrentSetupAssignment` nel solo repository authority, con schema e validator eseguibili. Rimangono fuori scope:
 
-- materializza un `CurrentSetupAssignment`;
-- attesta l'esistenza di una baseline setup approvata;
-- crea schema, fixture, validator, persistence, adapter o API runtime;
-- seleziona CMDB, repository, provider o formato di storage;
-- legge configurazioni da EAGLE, N.I.N.A. o altri host;
-- rende S09 disponibile;
-- introduce ranking, readiness, scheduler, command path o Safety Authority.
+- persistence integration, adapter e API runtime;
+- selezione di provider o protocolli runtime;
+- letture da EAGLE, N.I.N.A. o altri host;
+- disponibilità runtime S09;
+- ranking, readiness, scheduler, command path o Safety Authority.
 
 ## 2. Risoluzione di ARB-195-MI01
 
@@ -312,14 +310,13 @@ Il rollback corrente è il revert documentale.
 
 Restano futuri e non impliciti:
 
-- formato/versione dello schema e validator eseguibile;
-- adapter/persistence della baseline e assignment authority;
+- architecture package, adapter e persistence integration della baseline/assignment authority nel runtime;
 - storage hardening, retention ed eventuale encryption/key management;
 - public classification di configuration reference/label/validity;
-- migration data e OAT;
+- migration data, contract test e OAT;
 - provider/method F3-A3.
 
-ADR-009 determina invece repository authority, ruoli concreti, separazione delle approvazioni e `DSG-F3A2-CANONICAL-JSON-SHA256-1`. Il primo record `first protected setup baseline record` resta `DRAFT`: la sua presenza non soddisfa il gate della prima baseline approvata.
+ADR-009 determina repository authority, ruoli concreti, separazione delle approvazioni e `DSG-F3A2-CANONICAL-JSON-SHA256-1`. La prima baseline, la Site Authority e il `CurrentSetupAssignment` sono separatamente `APPROVED` nel repository authority. Questa disponibilità non implementa né attiva il runtime.
 
 Questi elementi non impediscono la review del contratto logico, ma impediscono materializzazione e disponibilità S09 finché non sono deliberati e provati.
 
@@ -352,3 +349,7 @@ F3-A2-D4 implements closed schemas, a protected DRAFT bound to the approved auth
 ## D5 exact-digest approval and promotion update — 15/09/2026
 
 The Repository Owner approved the exact protected assignment digest, valid from the approved setup-baseline effective start without expiry. The D5 package adds a closed protected receipt, preserves the historical DRAFT, and creates a separate `APPROVED` envelope with an unchanged payload and digest. Receipt, authority, validity, source binding and immutability are executable gates. Repository resolution is `AVAILABLE` only for an authorized caller when Site Authority and setup baseline remain approved and effective. Runtime S09 remains `UNAVAILABLE_CURRENT` because an adapter is not part of this package.
+
+## D5 acceptance reconciliation — 15/09/2026
+
+PR #209 merged as `bc4307c2042a45985622044e11631421de5b2c3d` after 5/5 exact-head workflows, process-separated AI-assisted review and expected-head control. All 7 post-merge workflows succeeded. Repository resolution is `AVAILABLE` only for authorized validated input; runtime S09 remains `UNAVAILABLE_CURRENT`. Any adapter requires a separate architecture package and `ARB-204-MI02`.

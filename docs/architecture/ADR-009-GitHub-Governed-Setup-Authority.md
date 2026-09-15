@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | ADR-009 |
-| Stato | **Accepted — baseline and site APPROVED; assignment approval/promotion review candidate** |
+| Stato | **Accepted — baseline, site and assignment APPROVED in repository authority; runtime adapter absent** |
 | Data | 15/09/2026 |
 | Decision owner | Repository Owner / human Approval Authority |
 | Custodian | Digital StarGate Architecture Office |
-| Repository baseline | `maininimassimo-bit/digital-stargate-manual@1ce08f4cc5458cc7ac68732a02df0d27a359f8d5` |
+| Repository baseline | `maininimassimo-bit/digital-stargate-manual@bc4307c2042a45985622044e11631421de5b2c3d` |
 | Parent contract | `BKL-031-F3-A2-CONTRACT-001` |
 | Finding | `ARB-197-MI01` |
 | Runtime / EAGLE / Safety impact | None |
@@ -72,7 +72,7 @@ Positive:
 
 Constraints:
 
-- `ARB-197-MI01-B` and `ARB-199-MI01` are closed for the first approved baseline; the F3-A1 site record is approved and D5 supplies the separately approved assignment candidate;
+- `ARB-197-MI01-B` and `ARB-199-MI01` are closed for the first approved baseline; the F3-A1 site record and F3-A2 assignment are separately approved in repository authority;
 - runtime adapter, persistence integration, public projection and OAT remain future work;
 - unresolved C8 guiding, serials and runtime versions cannot be inferred;
 - no command, safety, readiness, ranking or go/no-go semantics are introduced.
@@ -97,3 +97,7 @@ The GitHub authority now contains a protected, immutable assignment DRAFT with c
 ## D5 assignment approval note — 15/09/2026
 
 The Repository Owner explicitly approved the exact protected `CurrentSetupAssignment` digest and its unbounded validity from the approved setup-baseline effective start. D5 records the approval in a separate protected receipt and creates an `APPROVED` lifecycle envelope without changing the assignment payload or digest. The protected repository resolver becomes eligible for authorized validated callers only; runtime S09 remains `UNAVAILABLE_CURRENT` because no adapter is included.
+
+## D5 acceptance reconciliation — 15/09/2026
+
+PR #209 merged with expected-head control as `bc4307c2042a45985622044e11631421de5b2c3d`. Exact-head CI passed 5/5, the promotion suite passed 65/65 and 7/7 post-merge workflows succeeded. D5 is ACCEPTED / POST-MERGE VERIFIED. This changes repository eligibility only: runtime S09 remains `UNAVAILABLE_CURRENT`, and `ARB-204-MI02` remains mandatory before any runtime adapter.

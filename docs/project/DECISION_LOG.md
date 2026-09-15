@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEC-001 |
-| Versione | 2.3 |
+| Versione | 2.4 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -79,4 +79,6 @@ La closure BKL-040 e la promozione dependency-driven di BKL-038 non introducono 
 
 | DLG-028 | 15/09/2026 | Materializzare F3-A2-D4 come DRAFT protetto, immutabile e resolver-ineligible con schema decisionale chiuso, schema assignment, canonicalizzazione, validator e test | Implementare unicamente quanto determinato da ADR-009 e dalle decisioni owner, preservando l'approvazione exact-digest come successivo atto umano separato | BKL-031 F3-A2-D4 | Accepted | PR #207; merge `e99e6b5ff5ea7247ee447a1c6c62dcaa479dee1b`; 7/7 post-merge workflows |
 | DLG-029 | 15/09/2026 | Fermare la progressione del lifecycle al gate di approvazione umana dell'exact digest protetto | CI, review AI-assistite e merge non equivalgono all'approvazione umana obbligatoria; receipt e promozione restano separati | BKL-031 F3-A2 | Resolved | owner exact-digest approval 15/09/2026; ADR-009; PR #207 post-merge evidence |
-| DLG-030 | 15/09/2026 | Registrare l'approvazione owner dell'exact assignment digest nel registro protetto e promuovere un envelope separato a `APPROVED` senza modificare payload o digest | Rendere auditabile l'atto umano, preservare immutabilità e mantenere runtime/Safety separati | BKL-031 F3-A2-D5 | Accepted Decision / Integration Candidate | owner-controlled approval; PR #209; F3-A2-D5 evidence |
+| DLG-030 | 15/09/2026 | Registrare l'approvazione owner dell'exact assignment digest nel registro protetto e promuovere un envelope separato a `APPROVED` senza modificare payload o digest | Rendere auditabile l'atto umano, preservare immutabilità e mantenere runtime/Safety separati | BKL-031 F3-A2-D5 | Accepted | owner-controlled approval; PR #209; merge `bc4307c2042a45985622044e11631421de5b2c3d`; F3-A2-D5 evidence |
+
+| DLG-031 | 15/09/2026 | Accettare F3-A2-D5 dopo exact-head review, expected-head merge e 7/7 post-merge workflow; mantenere la disponibilità limitata al repository e sottoporre il successore al Program Architect | La repository authority è completa, ma il runtime adapter non esiste e non può essere inferito dalla disponibilità repository | BKL-031 post-D5 | Accepted | PR #209; merge `bc4307c2042a45985622044e11631421de5b2c3d`; `ARB-204-MI02`; D5 acceptance reconciliation |
