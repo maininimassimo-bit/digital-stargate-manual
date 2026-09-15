@@ -136,8 +136,8 @@ Il primo candidato dependency-ordered è F3-A1 — Site Authority Contract. Una 
 
 Questa acceptance non autorizza F3-A1 né F3-A2/A3/B/C, provider/ADR, record reali, schema/fixture/validator/adapter, dipendenze, chiamate esterne, forecast, ranking, readiness, runtime, device command, PC/EAGLE o Safety Authority.
 
-## 11. Current governance stop after ARB-192-M01 second re-review
+## 11. Current governance stop after ARB-192-M01 third remediation
 
-La seconda re-review AI-assisted sull'exact head `cb519f8e7a36fea3919f7e6cc1f417d5fad09147` ha verificato la correzione del Validation Plan, ma ha mantenuto `ARB-192-M01` aperto perché la riga autorevole BKL-031 in `docs/project/BACKLOG.md` descrive ancora F3 come current review candidate.
+La seconda re-review AI-assisted sull'exact head `cb519f8e7a36fea3919f7e6cc1f417d5fad09147` ha mantenuto `ARB-192-M01` aperto per la riga autorevole BKL-031 del backlog. La remediation del 15/09/2026 riallinea esclusivamente quella riga allo stato F3 accepted-with-conditions/post-merge-verified/not-implemented, preservando BKL-031 `In Progress` e tutti i boundary.
 
-Fermarsi prima della correzione del backlog, di una nuova ARB/Release Quality re-review, del merge, di qualsiasi decisione ruleset/waiver e di ogni implementazione F3. `ARB-191-MI01` e `ARB-191-MI02` restano aperti; nessuna F3-A1/A2/A3/B/C è promossa.
+Dopo la CI sull'exact head della terza remediation, fermarsi prima di una nuova ARB/Release Quality re-review, del merge, di qualsiasi decisione ruleset/waiver e di ogni implementazione F3. `ARB-191-MI01` e `ARB-191-MI02` restano aperti; nessuna F3-A1/A2/A3/B/C è promossa.

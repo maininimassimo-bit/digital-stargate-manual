@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-SA-ACCEPTANCE-M01-REMEDIATION-001 |
-| Status | **SECOND RE-REVIEW COMPLETE — REWORK REQUIRED / ARB-192-M01 OPEN** |
+| Status | **THIRD REMEDIATION APPLIED — RE-REVIEW PENDING** |
 | Date | 2026-09-14 |
 | Pull request | [#192](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/192) |
 | Finding | `ARB-192-M01` |
@@ -12,6 +12,8 @@
 | First remediation head | `dca2639b5a039dbb7f1c73b730d65fee0275f248` |
 | First re-review publication head | `3b2cced9ac1105c7d19898e962a73367073e6f28` |
 | Second remediation head | `cb519f8e7a36fea3919f7e6cc1f417d5fad09147` |
+| Second re-review publication head | `ae2fa3d238cc1a1bfb91bd583ae23866403e7696` |
+| Latest remediation date | 2026-09-15 |
 | Scope | Documentation/governance consistency only |
 | Runtime impact | None |
 | PC Principale / EAGLE | No activity |
@@ -107,3 +109,17 @@ Outcome:
 - remaining inconsistency: the authoritative BKL-031 row in `docs/project/BACKLOG.md` still states `F3 Solution Architecture and validation plan CURRENT REVIEW CANDIDATE only`.
 
 No backlog correction, merge, ruleset decision or implementation is authorized by the re-review. Further remediation and another re-review require separate repository-owner authorization.
+
+
+## 9. Third remediation
+
+The authoritative BKL-031 row in `docs/project/BACKLOG.md` now states the same single current interpretation as the canonical roadmap, bootstrap, handover, technical baseline, Knowledge Map, F3 handoff, Solution Architecture, Validation Plan and Acceptance Record:
+
+- F1/F2: accepted/post-merge verified;
+- F3 handoff and source-neutral Solution Architecture: accepted with conditions/post-merge verified/not implemented;
+- BKL-031: `In Progress`;
+- `ARB-191-MI01` and `ARB-191-MI02`: open;
+- F3-A1/A2/A3/B/C: not promoted/not authorized;
+- provider/ADR, authority records, schema/fixture/validator/adapter, forecast, ranking, readiness, runtime, device command, PC/EAGLE workload and Safety Authority: not authorized.
+
+This 2026-09-15 correction changes no architecture contract, roadmap, generated projection or runtime artifact. After successful exact-head CI, stop before another ARB/Release Quality re-review, merge/ruleset treatment and every implementation activity.
