@@ -3,35 +3,38 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-BASELINE-2026-09-15 |
-| Stato | **CURRENT — FIRST BASELINE OWNER-APPROVED / PR #201 UNDER REVIEW** |
-| Repository baseline | `main@1ce08f4cc5458cc7ac68732a02df0d27a359f8d5` |
-| Current package | `BKL-031-F3-A2-D2-BASELINE-APPROVAL-PUBLICATION` |
+| Stato | **CURRENT — FIRST SETUP BASELINE APPROVED / SITE AUTHORITY UNAVAILABLE** |
+| Repository baseline | `main@9932bace989565a10fd8e0d6f4a9c3b2cc057c46` |
+| Current package | `BKL-031-F3-A1-M1-SITE-AUTHORITY-OWNER-DECISION` |
 | Runtime delta | None |
-| Data delta | Protected APPROVED baseline and immutable receipt; no assignment |
+| Data delta | Protected approved setup baseline and receipt; no site record or assignment |
 | Infrastructure delta | None |
 
 ## 1. Integrated state
 
-PR #199 is merged/post-merge verified 9/9. ADR-009 makes GitHub the setup-authority registry, the Repository Owner the human Approval Authority and the Architecture Office the non-approving custodian. Protected records remain outside `docs/`.
+PR #201 is merged/post-merge verified 6/6. The protected GitHub setup-authority registry contains the owner-approved baseline envelope and immutable receipt. The canonical payload was not mutated during lifecycle promotion.
 
-## 2. Exact candidate
+## 2. Exact approved baseline
 
-`DSG-SETUP-BASELINE-001` represents the owner-approved composite dual-OTA setup and has immutable payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`, validity `[2026-09-16T00:00:00Z, +infinity)`, explicit missing-data exceptions and lifecycle `APPROVED`. Receipt `DSG-SETUP-BASELINE-001-APPROVAL-001` binds the human decision to the exact digest.
+`DSG-SETUP-BASELINE-001` has payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`, validity `[2026-09-16T00:00:00Z, +infinity)` and receipt `DSG-SETUP-BASELINE-001-APPROVAL-001`.
+
+Proposal-time labels inside the immutable payload remain historical assertions. Current lifecycle truth is the envelope plus receipt.
 
 ## 3. Dependency readiness
 
 | Elemento | Stato |
 |---|---|
-| Authority source/roles | integrated |
-| Candidate definition | owner-confirmed |
-| Payload digest | independently verified |
-| Human exact-digest approval | **complete / exact digest approved** |
-| Approval receipt | present / PR #201 |
-| F3-A1 site record | absent |
+| Setup authority source/roles | integrated |
+| First setup baseline | APPROVED / post-merge verified |
+| F3-A1 normative site contract | accepted with conditions |
+| Exact protected site facts | absent / owner input required |
+| Site Authority owner/approver/source | decision required |
+| Elevation vertical semantics | open — `ARB-193-MI01` |
+| Canonical site resolver identity/scope | open — `ARB-193-MI02` |
+| Executable validity/privacy tests | not implemented |
 | CurrentSetupAssignment | absent |
-| Schema/validator/adapter | not implemented |
-| S09 | `UNAVAILABLE_CURRENT` |
+| S08 / S09 | `UNAVAILABLE` / `UNAVAILABLE_CURRENT` |
 
 ## 4. Rollback
 
-Retire or revert the approved envelope and receipt through reviewed Git history; no runtime, migration, credential or observatory impact.
+The acceptance reconciliation is documentation-only and can be reverted through reviewed Git history. The approved setup baseline remains governed by ADR-009 retirement/revert rules. No runtime, migration, credential or observatory impact exists.

@@ -49,7 +49,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
-| BKL-031 | P1 | Observation Planner intelligente | In Progress | Exact-digest owner approval recorded; PR #201 lifecycle promotion under review | Complete exact-head gates and merge; then materialize F3-A1 site authority and separately approve CurrentSetupAssignment before S09 | ADR-009; PR #201; F3-A2-D1 acceptance |
+| BKL-031 | P1 | Observation Planner intelligente | Blocked | PR #201 merged/post-merge verified; F3-A1 contract accepted; protected site facts and authority decision absent | Obtain owner decision for F3-A1-M1, then schema/validator/tests and separately approved site record; CurrentSetupAssignment remains a later gate | ADR-009; PR #201; F3-A1 contract; F3-A1-M1 assessment |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
@@ -250,3 +250,10 @@ PR #199 merged as `4e8802c80359efce28d8d75521a1b9cc4cb44b05` and completed 9/9 p
 ### BKL-031 F3-A2-D2 exact baseline approval — 15/09/2026
 
 The Repository Owner explicitly approved `DSG-SETUP-BASELINE-001` at payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`, valid from `2026-09-16T00:00:00Z`. PR #201 records the separate receipt and promotes only the lifecycle envelope to `APPROVED`; the payload is unchanged. No site record or assignment is inferred, and S09 remains `UNAVAILABLE_CURRENT`.
+
+
+### BKL-031 F3-A2-D2 acceptance and F3-A1-M1 transition — 15/09/2026
+
+PR #201 merged as `9932bace989565a10fd8e0d6f4a9c3b2cc057c46` after ARB AI-assisted `APPROVED WITH CONDITIONS — 99/100`, Release Quality `CONDITIONALLY READY FOR MERGE` and 4/4 exact-head workflows. Post-merge verification completed 6/6 workflows, including Pages and Governed Projection Sync.
+
+The approved setup baseline does not resolve current setup. F3-A1-M1 is selected as the next dependency-ordered owner decision gate for protected site authority materialization. Exact site facts, authority, elevation semantics, resolver identity/scope and publication policy are not present and must not be inferred. BKL-031 is therefore `Blocked` on explicit owner input. S08 remains `UNAVAILABLE`; S09 remains `UNAVAILABLE_CURRENT`.

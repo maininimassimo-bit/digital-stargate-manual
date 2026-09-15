@@ -4,8 +4,8 @@
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A2-D1 — Exact Baseline Digest Owner Approval",
-  "target": "Owner approval or correction of exact DRAFT payload sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8 and proposed validity; baseline and assignment approvals remain separate; S09 stays UNAVAILABLE_CURRENT",
+  "nextMilestone": "BKL-031 F3-A1-M1 — Site Authority Materialization Owner Decision",
+  "target": "Owner decision on protected Site Authority, exact WGS84 facts, elevation semantics, validity, canonical resolver and public generalization policy; no site record or CurrentSetupAssignment is inferred; S08 and S09 remain unavailable",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "The Repository Owner approved DSG-SETUP-BASELINE-001 at exact payload sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8, valid from 2026-09-16T00:00:00Z. PR #201 records the protected immutable receipt and promotes only the lifecycle envelope to APPROVED; the payload is unchanged and remains outside Pages. F3-A1 concrete site materialization and a separately approved CurrentSetupAssignment remain mandatory before S09; no schema, validator, adapter, provider, F3-A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
+          "note": "PR #201 merged as 9932bace989565a10fd8e0d6f4a9c3b2cc057c46 and is post-merge verified 6/6. DSG-SETUP-BASELINE-001 is an approved protected baseline reference. F3-A1-M1 is the current owner decision gate for Site Authority materialization; exact site facts and authority are absent and must not be inferred. CurrentSetupAssignment remains a later separate approval gate; S08 and S09 remain unavailable. No schema, validator, adapter, provider, F3-A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
         },
         {
           "id": "BKL-032",

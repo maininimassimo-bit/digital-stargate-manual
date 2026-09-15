@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEC-001 |
-| Versione | 1.8 |
+| Versione | 1.9 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -52,6 +52,7 @@ Creare invece un ADR quando la decisione modifica un principio architetturale, i
 | DLG-019 | 15/09/2026 | Notificare esplicitamente ogni stop condition prima della pausa, con stato, motivo, lavoro completato, decisione richiesta e criterio di ripresa | Rendere visibili i blocchi e preservare la continuità owner-assistente | Delivery Governance | Accepted | `DSG-AEM-001` v1.1; owner instruction 15/09/2026 |
 | DLG-020 | 15/09/2026 | Materializzare il setup authority in un registro GitHub protetto fuori da `docs/`, con Repository Owner come Approval Authority e Architecture Office come custodian senza potere di auto-approvazione | Chiudere la parte authority/source di ARB-197-MI01 mantenendo separate baseline e assignment approval | BKL-031 F3-A2-D1 | Accepted | ADR-009; owner authorization 15/09/2026 |
 | DLG-021 | 15/09/2026 | Registrare l’approvazione owner dell’exact payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8` tramite receipt separata e promuovere solo l’envelope a `APPROVED` | Preservare immutabilità, audit e separazione dall’approvazione del site assignment | BKL-031 F3-A2-D2 | Accepted | PR #201; ADR-009; `DSG-SETUP-BASELINE-001-APPROVAL-001` |
+| DLG-022 | 15/09/2026 | Accettare F3-A2-D2 dopo il merge/post-merge di PR #201 e selezionare F3-A1-M1 come prossimo owner decision gate | La baseline setup è integrata, ma sito e assignment restano authority separate; le coordinate protette e le semantiche aperte non possono essere inferite | BKL-031 F3-A1-M1 | Accepted | PR #201; `BKL-031-F3-A2-D2-ACCEPTANCE-001`; `BKL-031-F3-A1-M1-PROGRAM-001` |
 
 ## 5. Delega operativa GitHub
 
