@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 6.0 |
+| Versione | 6.1 |
 | Baseline | 15/09/2026 |
-| Stato | Current root bootstrap — PR #202 merged/post-merge verified; F3-A1-M2 protected DRAFT review candidate; exact-digest owner approval next |
+| Stato | Current root bootstrap — PR #204 merged/post-merge verified; Site Authority APPROVED; CurrentSetupAssignment owner decision next |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -58,14 +58,16 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - BKL-031 F3-A1 — Site Authority Contract: ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED via PR #193; acceptance reconciliation PR #194 merged as `1fd771632239cdca38d7527c55b974d805ffd1b9` with 9/9 workflows;
 - BKL-031 F3-A2-D2 — first protected setup baseline is APPROVED; PR #202 merged as `bb11f25192200655427411a46a2e18560a5d9bec` and is post-merge verified;
 - BKL-031 F3-A1-M1 — owner decisions and protected source authorization are complete;
-- BKL-031 F3-A1-M2 — protected Site Authority DRAFT, schemas, validator and 51-case suite are the current review candidate; the candidate is ineligible and its exact digest is not approved;
+- BKL-031 F3-A1-M2 — protected Site Authority DRAFT, schemas, validator and 51-case suite integrated/post-merge verified via PR #203;
+- BKL-031 F3-A1-M3/M4 — exact-digest owner approval, protected receipt and unchanged APPROVED envelope integrated via PR #204, merge `e73b1aa631c41dff97b9e5ededb6d6be02a667d4`, with 10/10 post-merge workflows;
+- BKL-031 F3-A2-D3 — separate `CurrentSetupAssignment` owner decision is the next gate; no assignment record, schema or runtime exists;
 - Governance: `DSG-AEM-001` and `W-DSG-AEM-RULESET-001` are ACTIVE / POST-MERGE VERIFIED via PR #196 and merge `357a5edfbd39346b10a1a2d751018ff6d1dd208f`, with 9/9 workflows.
 
 La closure BKL-046 non dichiara efficacia scientifica né produzione: `NOT_EVALUABLE_CURRENT_EVIDENCE`, `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`. Nessun modello/provider, automatic acceptance o PixInsight apply è autorizzato.
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2 BASELINE APPROVED / F3-A1-M2 SITE DRAFT CANDIDATE / EXACT-DIGEST APPROVAL NEXT / ASSIGNMENT LATER] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2 BASELINE APPROVED / F3-A1 SITE APPROVED / CURRENTSETUPASSIGNMENT OWNER DECISION NEXT] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -77,6 +79,6 @@ Nessun portale, planner, comparison layer, quality score o AI è Safety Authorit
 
 ## 9. Punto di partenza operativo
 
-PR #202 merged as `bb11f25192200655427411a46a2e18560a5d9bec` and is the verified repository baseline.
+PR #204 merged as `e73b1aa631c41dff97b9e5ededb6d6be02a667d4` and is the verified repository baseline. Exact-head CI passed 8/8; post-merge workflows passed 10/10. The protected Site Authority is now `APPROVED` and repository-resolver eligible for authorized callers during its governed validity. Protected values remain outside public documentation and logs.
 
-The current review candidate is `BKL-031-F3-A1-M2`: protected `DRAFT` materialization with schema, canonicalization, validator, privacy enforcement and A1-P01–P10/A1-N01–N41 executable tests. Protected values must remain outside public documentation and logs. After DRAFT integration, the next owner gate is explicit approval of the exact canonical payload digest; until then no approval receipt or lifecycle promotion is permitted. No `CurrentSetupAssignment` is authorized; S08 and S09 remain unavailable. Adapter, provider, runtime, EAGLE and Safety Authority remain separate.
+The next gate is `BKL-031-F3-A2-D3`: obtain explicit owner decisions for a distinct `CurrentSetupAssignment` authority record. No assignment is authorized or materialized yet. Without a runtime adapter S08 remains `UNAVAILABLE`; without a separately approved assignment S09 remains `UNAVAILABLE_CURRENT`. Provider, runtime, EAGLE and Safety Authority remain separate. Carried conditions `ARB-204-MI01` and `ARB-204-MI02` must be addressed before a second site revision/receipt and before any runtime adapter respectively.

@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A1-M4-APPROVAL-001 |
-| Stato | **OWNER APPROVED / REPOSITORY INTEGRATION CANDIDATE** |
+| Stato | **ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED** |
 | Data | 15/09/2026 |
-| Baseline | `main@d5750ce160c5f80d20a72bc35dee321200647d03` |
+| Baseline | `main@e73b1aa631c41dff97b9e5ededb6d6be02a667d4` |
 | Protected values | Omitted by policy |
 | Runtime / EAGLE | None |
 
@@ -28,7 +28,7 @@ The package:
 
 ## 3. Capability effect
 
-After integration, the protected repository resolver may return the approved site to an authorized caller within governed validity. Unauthorized requests remain denied and audited without protected content.
+After PR #204 integration, the protected repository resolver may return the approved site to an authorized caller within governed validity. Unauthorized requests remain denied and audited without protected content.
 
 No runtime adapter or `CurrentSetupAssignment` exists. Therefore the Observation Planner's runtime S08 remains `UNAVAILABLE` and S09 remains `UNAVAILABLE_CURRENT` despite the approved repository authority.
 
@@ -38,6 +38,8 @@ No public exact-site projection, setup assignment, provider, ephemeris calculati
 
 ## 5. Acceptance and rollback
 
-Integration requires exact-head CI, ARB, Release Quality, expected-head merge and post-merge verification. The following reconciliation increment must record the actual PR and merge evidence before promoting the next owner decision gate.
+PR #204 was reviewed at exact head `f394ef5c3b5ad089e18fa3c4c431e2fcbd556e38`: CI passed 8/8, ARB decided **APPROVED WITH CONDITIONS — 98/100**, and Release Quality decided **CONDITIONALLY READY**, with no waiver, Blocker or Major. Expected-head merge produced `e73b1aa631c41dff97b9e5ededb6d6be02a667d4`; all 10 post-merge workflows succeeded.
+
+Carried conditions: generalize schema/validator path binding before a second site revision or receipt (`ARB-204-MI01`), and define key/access/deployment boundaries before any runtime adapter (`ARB-204-MI02`). The next gate is a separate owner decision for `CurrentSetupAssignment`.
 
 Rollback removes the approved envelope and receipt through reviewed Git revert while preserving the DRAFT/history. No runtime, credential, device or observatory rollback is required.
