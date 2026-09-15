@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEC-001 |
-| Versione | 1.5 |
+| Versione | 1.6 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -46,6 +46,7 @@ Creare invece un ADR quando la decisione modifica un principio architetturale, i
 | DLG-014 | 15/09/2026 | Promuovere BKL-031 F3-A1 come package documentale e definire normativamente gli intervalli UTC half-open prima di ogni materializzazione | Rimuovere l'ambiguità di ARB-191-MI02 senza anticipare schema, dati o runtime | BKL-031 F3-A1 | Accepted | F3-A1 handoff/contract/validation plan |
 | DLG-015 | 15/09/2026 | Selezionare BKL-031 F3-A2 Setup Authority Contract come successore, iniziando da un Program Assessment/Handoff esclusivamente documentale | Completare in dependency order l'autorità setup dopo il contratto sito, senza anticipare materializzazione, provider o runtime | BKL-031 F3-A2 | Accepted | BKL-031-F3-A2-PROGRAM-001 |
 | DLG-016 | 15/09/2026 | Attivare il mandato continuativo `DSG-AEM-001` e la deroga condizionata `W-DSG-AEM-RULESET-001` fino a completamento o revoca | Ridurre handoff autorizzativi mantenendo exact-head CI, review applicabile, rollback, privacy, safety, audit e post-merge | Delivery Governance | Accepted | `DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md`; owner authorization 15/09/2026 |
+| DLG-017 | 15/09/2026 | F3-A2 usa un reference envelope version-pinned verso una concrete approved baseline, distinta da AP-006 architecture authority e dall'observed state | Risolvere ARB-195-MI01 senza inventare baseline, owner o materializzazione e mantenere S09 fail-closed | BKL-031 F3-A2 | Proposed | `BKL-031-F3-A2-CONTRACT-001`; `BKL-031-F3-A2-VAL-001` |
 
 ## 5. Delega operativa GitHub
 

@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 5.3 |
+| Versione | 5.4 |
 | Baseline | 15/09/2026 |
-| Stato | Current root bootstrap — PR #195 F3-A2 handoff accepted/post-merge verified; DSG-AEM-001 active; detailed F3-A2 contract next |
+| Stato | Current root bootstrap — DSG-AEM-001 integrated/post-merge verified; F3-A2 detailed Setup Authority Contract review candidate; not implemented |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -56,14 +56,14 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - BKL-031 F2 — Machine-Readable Context/Source Contract and Bounded Fixtures: ACCEPTED / POST-MERGE VERIFIED via PR #188 and merge `7f861f7399079858c9744e69b6c773664b6b5b54`;
 - BKL-031 F3 handoff and Solution Architecture: ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED; PR #192 acceptance closure merged as `21524c687a1fa6a9d840a3951c7ef4fe298f9c3c` with 9/9 workflows;
 - BKL-031 F3-A1 — Site Authority Contract: ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED via PR #193; acceptance reconciliation PR #194 merged as `1fd771632239cdca38d7527c55b974d805ffd1b9` with 9/9 workflows;
-- BKL-031 F3-A2 — Setup Authority Contract: handoff ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED via PR #195 and merge `8520f4272d31f5578769e8d12ac34101e1c044e8`, with 9/9 workflows; detailed contract is next. `ARB-195-MI01` is due before its approval; no assignment, schema, adapter or runtime exists;
-- Governance: `DSG-AEM-001` and `W-DSG-AEM-RULESET-001` are active until completion or owner revocation.
+- BKL-031 F3-A2 — Setup Authority Contract: handoff ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED via PR #195; detailed contract `BKL-031-F3-A2-CONTRACT-001` and validation plan are current review candidates, documentation-only. They address `ARB-195-MI01` normatively; no concrete baseline, assignment, schema, adapter or runtime exists;
+- Governance: `DSG-AEM-001` and `W-DSG-AEM-RULESET-001` are ACTIVE / POST-MERGE VERIFIED via PR #196 and merge `357a5edfbd39346b10a1a2d751018ff6d1dd208f`, with 9/9 workflows.
 
 La closure BKL-046 non dichiara efficacia scientifica né produzione: `NOT_EVALUABLE_CURRENT_EVIDENCE`, `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`. Nessun modello/provider, automatic acceptance o PixInsight apply è autorizzato.
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2 HANDOFF ACCEPTED / DETAILED CONTRACT NEXT] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2 DETAILED CONTRACT REVIEW CANDIDATE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -75,6 +75,6 @@ Nessun portale, planner, comparison layer, quality score o AI è Safety Authorit
 
 ## 9. Punto di partenza operativo
 
-PR #195 ha integrato l'handoff F3-A2 in `main@8520f4272d31f5578769e8d12ac34101e1c044e8` con 9/9 workflow post-merge, inclusi Pages e Governed Projection Sync. `DSG-AEM-001` e `W-DSG-AEM-RULESET-001` sono attivi.
+PR #196 ha integrato il mandato in `main@357a5edfbd39346b10a1a2d751018ff6d1dd208f` con 9/9 workflow post-merge. Il Solution Architect ha prodotto il detailed F3-A2 Setup Authority Contract e il validation plan come review candidate documentali.
 
-Il prossimo package è il detailed F3-A2 Setup Authority Contract affidato al Solution Architect. Deve risolvere `ARB-195-MI01` senza attestare una baseline concreta inesistente. Real setup assignment, schema/fixture/validator/adapter, storage, provider/ADR, F3-A3/B/C, forecast, ranking, readiness, runtime, device command, PC/EAGLE e Safety Authority restano non autorizzati.
+Il package distingue AP-006 architecture authority, concrete approved baseline instance, current assignment e observed evidence. In assenza di baseline concreta risolvibile, S09 resta `UNAVAILABLE_CURRENT`. Schema/fixture/validator/adapter, real baseline/assignment, storage, provider/ADR, F3-A3/B/C, forecast, ranking, readiness, runtime, device command, PC/EAGLE e Safety Authority restano non autorizzati.
