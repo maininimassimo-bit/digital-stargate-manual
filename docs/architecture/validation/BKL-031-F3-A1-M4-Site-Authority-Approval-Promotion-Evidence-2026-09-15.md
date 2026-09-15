@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A1-M4-VAL-001 |
-| Stato | **LOCAL 59/59 PASS / EXACT-HEAD CI PENDING** |
+| Stato | **59/59 PASS / EXACT-HEAD AND POST-MERGE VERIFIED** |
 | Data | 15/09/2026 |
-| Baseline | `main@d5750ce160c5f80d20a72bc35dee321200647d03` |
+| Baseline | `main@e73b1aa631c41dff97b9e5ededb6d6be02a667d4` |
 | Protected values | Omitted by policy |
 | Runtime / OAT | Not Applicable |
 
@@ -32,11 +32,11 @@ The approval is exact-digest and validity-bound. Its protected statement, intern
 
 | Range | Count | Local result | Exact-head gate |
 |---|---:|---|---|
-| A1-P01–P10 | 10 | PASS | pending |
-| A1-N01–N41 | 41 | PASS | pending |
-| M4-P01–P02 | 2 | PASS | pending |
-| M4-N01–N06 | 6 | PASS | pending |
-| Total | 59 | **PASS** | pending |
+| A1-P01–P10 | 10 | PASS | PASS |
+| A1-N01–N41 | 41 | PASS | PASS |
+| M4-P01–P02 | 2 | PASS | PASS |
+| M4-N01–N06 | 6 | PASS | PASS |
+| Total | 59 | **PASS** | **PASS** |
 
 Commands:
 
@@ -60,16 +60,17 @@ The M4 suite rejects:
 
 The protected registry remains outside Pages and repository membership remains the access boundary. No public coordinate, elevation, exact address, internal identifier, source locator or internal digest is added. No runtime, credential, device command, readiness, EAGLE workload or Safety Authority change occurs. Local interlocks remain independent.
 
-## 6. Review and integration gates
+## 6. Review and integration evidence
 
-Before merge:
+- PR: #204;
+- reviewed exact head: `f394ef5c3b5ad089e18fa3c4c431e2fcbd556e38`;
+- exact-head workflows: 8/8 SUCCESS;
+- ARB: `APPROVED WITH CONDITIONS — 98/100`;
+- Release Quality: `CONDITIONALLY READY`; no waiver, Blocker or Major;
+- expected-head merge: `e73b1aa631c41dff97b9e5ededb6d6be02a667d4`;
+- post-merge workflows: 10/10 SUCCESS, including the dedicated Site Authority gate, projection sync, documentation and Pages.
 
-1. dedicated and applicable repository workflows pass on the exact head;
-2. ARB confirms payload immutability, receipt binding and carried adapter conditions;
-3. Release Quality confirms no Blocker/Major and no privacy regression;
-4. merge uses expected-head control under DSG-AEM-001.
-
-After merge, verify all `main` workflows and reconcile continuity documents with the actual PR, merge SHA and post-merge evidence.
+`ARB-204-MI01` and `ARB-204-MI02` are carried into the next applicable revision/adapter packages; neither invalidates the accepted lifecycle promotion.
 
 ## 7. Rollback
 

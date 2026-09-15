@@ -3,22 +3,20 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-BASELINE-2026-09-15 |
-| Stato | **CURRENT — SETUP BASELINE APPROVED / SITE AUTHORITY DRAFT CANDIDATE INELIGIBLE** |
-| Repository baseline | `main@bb11f25192200655427411a46a2e18560a5d9bec` |
-| Current package | `BKL-031-F3-A1-M2-SITE-AUTHORITY-DRAFT-MATERIALIZATION` |
+| Stato | **CURRENT — SETUP BASELINE AND SITE AUTHORITY APPROVED / ASSIGNMENT ABSENT** |
+| Repository baseline | `main@e73b1aa631c41dff97b9e5ededb6d6be02a667d4` |
+| Current package | `BKL-031-F3-A2-D3-CURRENT-SETUP-ASSIGNMENT-OWNER-DECISION` |
 | Runtime delta | None |
-| Data delta | Protected approved setup baseline; protected site DRAFT candidate and source decision; no assignment |
+| Data delta | Protected approved setup baseline and Site Authority; no assignment |
 | Infrastructure delta | None |
 
 ## 1. Integrated state
 
-PR #202 is merged/post-merge verified and establishes the current repository baseline. The protected GitHub setup-authority registry continues to contain the approved setup baseline envelope and immutable receipt.
+PR #204 is merged as `e73b1aa631c41dff97b9e5ededb6d6be02a667d4` and establishes the current verified repository baseline. Exact-head CI passed 8/8 and post-merge workflows passed 10/10. The protected setup and site registries contain their separately approved authority envelopes and immutable receipts.
 
-## 2. Exact approved baseline
+## 2. Approved authority state
 
-`DSG-SETUP-BASELINE-001` has payload `sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8`, validity `[2026-09-16T00:00:00Z, +infinity)` and receipt `DSG-SETUP-BASELINE-001-APPROVAL-001`.
-
-Proposal-time labels inside the immutable payload remain historical assertions. Current lifecycle truth is the envelope plus receipt.
+The setup baseline and Site Authority are independently approved. Their exact digests, internal identifiers, locators and protected site facts are intentionally omitted from this public baseline. Lifecycle truth is the applicable immutable payload plus its separate approval receipt.
 
 ## 3. Dependency readiness
 
@@ -27,14 +25,15 @@ Proposal-time labels inside the immutable payload remain historical assertions. 
 | Setup authority source/roles | integrated |
 | First setup baseline | APPROVED / post-merge verified |
 | F3-A1 normative site contract | accepted with conditions |
-| Exact protected site facts | owner-supplied / DRAFT candidate outside Pages |
-| Site Authority owner/approver/source | decision complete; exact-digest approval pending |
-| Elevation vertical semantics | materialized in schema/validator; ARB review pending |
-| Canonical site resolver identity/scope | materialized in schema/validator; ARB review pending |
-| Executable validity/privacy tests | 51/51 local PASS; exact-head CI pending |
+| Exact protected site facts | approved authority outside Pages; omitted publicly |
+| Site Authority owner/approver/source | complete; receipt and lifecycle post-merge verified |
+| Elevation vertical semantics | materialized and validated |
+| Canonical site resolver identity/scope | materialized and validated |
+| Executable validity/privacy/promotion tests | 59/59 PASS; exact-head and post-merge verified |
 | CurrentSetupAssignment | absent |
 | S08 / S09 | `UNAVAILABLE` / `UNAVAILABLE_CURRENT` |
+| Runtime adapter | absent; separate package and authorization required |
 
 ## 4. Rollback
 
-The F3-A1-M2 DRAFT candidate can be reverted through reviewed Git history. The approved setup baseline remains governed by ADR-009 retirement/revert rules. No runtime, migration, credential or observatory impact exists.
+The F3-A1-M4 promotion can be reverted through reviewed Git history by removing the APPROVED envelope and receipt while retaining the historical DRAFT. Approved authority retirement remains governed by ADR-009. No runtime, migration, credential or observatory impact exists.
