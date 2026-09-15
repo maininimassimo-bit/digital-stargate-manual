@@ -3,65 +3,60 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-BASELINE-2026-09-15 |
-| Stato | **CURRENT — F3-A1 ACCEPTANCE REVIEWS COMPLETE / DOCUMENTATION ONLY** |
-| Repository baseline | `main@b9d08a7cf6b6287825907cab6a846b1ec70f0378` |
-| Working branch | `docs/bkl-031-f3-a1-acceptance` |
-| Current package | BKL-031 F3-A1 — Acceptance Reconciliation review publication |
+| Stato | **CURRENT — F3-A2 HANDOFF REVIEWED / MERGE DECISION PENDING / DOCUMENTATION ONLY** |
+| Repository baseline | `main@1fd771632239cdca38d7527c55b974d805ffd1b9` |
+| Working branch | `docs/bkl-031-f3-a2-handoff` |
+| Current package | BKL-031 F3-A2 — Setup Authority Program Assessment and Handoff |
 | Runtime delta | None |
 | Data/schema delta | None |
 | Infrastructure delta | None |
 
 ## 1. Baseline integrata
 
-PR #193 è merged. Il commit `b9d08a7cf6b6287825907cab6a846b1ec70f0378` è la baseline di partenza verificata con 9/9 workflow post-merge. Il waiver una tantum `W-BKL031-F3A1-MERGE-001` relativo all'assenza del ruleset di `main` è consumato/scaduto e non costituisce precedente automatico.
+PR #194 è merged nel commit `1fd771632239cdca38d7527c55b974d805ffd1b9` e verificata con 9/9 workflow post-merge. Pages build/deployment e Governed Projection Sync sono SUCCESS. Il waiver una tantum del merge è consumato/scaduto.
 
 ## 2. Stato tecnico corrente
 
-F3-A1 è accettato con condizioni come specifica documentale:
+F3-A1 è accettato con condizioni, riconciliato e non implementato. F3-A2 è selezionato esclusivamente come handoff documentale per il futuro contratto di `CurrentSetupAssignment`. Sulla PR #195 technical head `047ca2d1f208d8291d88823f4b99c401232ecd6b`, l'ARB AI-assistita ha deciso **APPROVED WITH CONDITIONS — 98/100** e Release Quality **CONDITIONALLY READY FOR MERGE**; le valutazioni non equivalgono ad approvazioni umane indipendenti.
 
-- aggregate logico `GovernedSiteRecord`;
-- value object `HalfOpenValidityInterval`;
-- porta `SiteAuthorityPort`;
-- failure semantics e public sanitization boundary;
-- validation plan accettato ma non eseguito.
+Non esistono assignment reali, classi, schema JSON, fixture, validator, persistence, API, cache, deployment o integrazione EAGLE.
 
-Non esistono classi, schema JSON, fixture, validator, persistence, API, cache, deployment o record reali.
+## 3. Dependency readiness
 
-## 3. Condizioni
+| Elemento | Stato |
+|---|---|
+| F3 architecture | accepted with conditions |
+| F3-A1 contract | accepted with conditions / not implemented |
+| AP-006 setup baseline authority | riferimento architetturale disponibile; baseline concreta approvata non attestata |
+| F3-A2 detailed contract | not produced / specialist handoff current |
+| F3-A3/B/C | not promoted |
+| S09 | UNAVAILABLE_CURRENT |
+
+## 4. Condizioni
 
 | ID | Stato corrente |
 |---|---|
-| `ARB-193-MI01` | vertical reference, unità e range di `elevationM` open prima di F3-B |
-| `ARB-193-MI02` | resolver canonico e authority scope open prima di F3-B |
-| `ARB-191-MI01` | boundary definita; enforcement/leak tests F3-B/F3-C open |
-| `ARB-191-MI02` | normativa accettata; test eseguibili obbligatori prima della materializzazione |
-| AI review independence | review PR #193 e PR #194 dichiarate AI-assisted |
-| S08 | UNAVAILABLE |
-| S09 | UNAVAILABLE_CURRENT |
-| S10 | UNAVAILABLE |
+| `ARB-195-MI01` | open prima dell'approvazione del contratto dettagliato F3-A2 |
+| `ARB-193-MI01` | open prima di F3-B |
+| `ARB-193-MI02` | open prima di F3-B |
+| `ARB-191-MI01` | enforcement/leak tests open prima di F3-B/F3-C |
+| `ARB-191-MI02` | normativa accettata; test eseguibili prima della materializzazione |
+| AI review independence | review PR #193/#194/#195 dichiarate AI-assisted |
+| Safety | authority fisica/locale invariata |
 
-## 4. Dependency order
+## 5. Verification target
 
-`F3-A1 contract accepted -> owner successor decision -> authorized materialization/setup/provider slices -> F3-B -> F3-C`.
+L'exact review-publication head della draft PR #195 deve dimostrare:
 
-L'ordine descrive dipendenze, non autorizza automaticamente alcuna slice.
-
-## 5. Safety e operations
-
-La baseline non modifica EAGLE, N.I.N.A., PHD2, CPWI, VPN, rete, interlock, storage operativo o procedure di emergenza. L'autorità di sicurezza resta fisica/locale.
-
-## 6. Review e verification target
-
-La PR #194 technical head `b43e137ba36807b7027b60ea907fa559efb98af6` ha 7/7 workflow SUCCESS, ARB AI-assisted `APPROVED WITH CONDITIONS — 99/100` e Release Quality AI-assisted `CONDITIONALLY READY FOR MERGE`.
-
-Il review-publication head deve dimostrare:
-
-- build/documentation governance green;
+- package esclusivamente documentale;
+- dependency order coerente;
 - roadmap source/projection allineate;
 - link e nav validi;
-- nessun file runtime o dato sensibile;
-- exact head finale identificato dopo ogni projection sync.
+- nessun runtime, schema, dato reale o segreto;
+- exact head identificato;
+- 7/7 workflow SUCCESS dopo la pubblicazione dei report;
+- branch zero behind rispetto a `main`.
 
-## 7. Rollback
+## 6. Rollback
 
-Revert documentale del singolo commit di riconciliazione. Nessuna migrazione o azione operativa.
+Revert documentale del commit F3-A2 handoff. Nessuna migrazione, rotazione credenziali o azione operativa.

@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.16 |
+| Versione | 5.17 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -49,7 +49,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
-| BKL-031 | P1 | Observation Planner intelligente | In Progress | BKL-046 closed; F1/F2 accepted; F3 SA accepted with conditions | F3-A1 Site Authority Contract accepted with conditions/post-merge verified; successor decision pending; no implementation | F3-A1 acceptance/handoff/contract/validation plan |
+| BKL-031 | P1 | Observation Planner intelligente | In Progress | F3-A1 accepted/reconciled/post-merge verified | F3-A2 Setup Authority Program Assessment/Handoff review candidate; no implementation | F3-A2 assessment/handoff; F3-A1 acceptance |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
@@ -198,3 +198,11 @@ Dopo il merge della PR #192 in `21524c687a1fa6a9d840a3951c7ef4fe298f9c3c` e 9/9 
 La PR #193 è confluita in `main` come `b9d08a7cf6b6287825907cab6a846b1ec70f0378` dopo review ARB AI-assisted `APPROVED WITH CONDITIONS — 96/100` e Release Quality AI-assisted `CONDITIONALLY READY FOR MERGE`. La verifica post-merge ha concluso 9/9 workflow SUCCESS, inclusi Pages e Governed Projection Sync. Le review non equivalgono ad approvazioni umane indipendenti.
 
 F3-A1 è accettato con condizioni come baseline documentale non implementata. `ARB-193-MI01`, `ARB-193-MI02` e `ARB-191-MI01` restano gate; `ARB-191-MI02` è soddisfatta a livello normativo, con test eseguibili ancora obbligatori prima della materializzazione. Il waiver `W-BKL031-F3A1-MERGE-001` è consumato/scaduto. Nessun successore, record reale, schema, fixture, validator, adapter, storage, provider, runtime, EAGLE o Safety Authority è autorizzato automaticamente.
+
+### BKL-031 F3-A1 Acceptance Reconciliation closure — 15/09/2026
+
+PR #194 è merged in `main` come `1fd771632239cdca38d7527c55b974d805ffd1b9` dopo ARB AI-assisted `APPROVED WITH CONDITIONS — 99/100`, Release Quality AI-assisted `CONDITIONALLY READY FOR MERGE` e 7/7 workflow sul review-publication head. Il merge ha concluso 9/9 workflow SUCCESS, inclusi Pages e Governed Projection Sync. Il waiver `W-BKL031-F3A1-ACCEPTANCE-MERGE-001` è consumato/scaduto.
+
+### BKL-031 F3-A2 Setup Authority handoff — 15/09/2026
+
+L'owner ha autorizzato il passo successivo e il Program Architect ha selezionato F3-A2 come successore dependency-ready, limitatamente a Program Assessment/Handoff documentale. Il futuro Solution Architect dovrà definire il contratto `CurrentSetupAssignment`, la reference AP-006, lifecycle, validità half-open e failure semantics. Nessun assignment reale, contratto dettagliato, schema, fixture, validator, adapter, runtime, F3-A3/B/C, EAGLE o Safety Authority è autorizzato.

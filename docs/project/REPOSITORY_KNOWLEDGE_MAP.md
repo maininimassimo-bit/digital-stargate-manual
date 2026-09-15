@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 3.6 |
+| Versione | 3.7 |
 | Stato | Active |
 | Data | 15/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | BKL-031 F3-A1 — Acceptance Reconciliation; contract accepted with conditions/post-merge verified; not implemented |
+| Current governed package | BKL-031 F3-A2 — Setup Authority Program Assessment/Handoff review candidate; not implemented |
 
 ## 1. Scopo
 
@@ -45,11 +45,11 @@ Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimen
 
 BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`; nessun apply path o Safety Authority è autorizzato.
 
-BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. Il Solution Architecture Package F3 è integrato tramite PR #191 e merge `3a79bb93c9a0925280eba5214d517107804cb13c`; la closure PR #192 è integrata in `21524c687a1fa6a9d840a3951c7ef4fe298f9c3c`. F3-A1 è integrato tramite PR #193 e merge `b9d08a7cf6b6287825907cab6a846b1ec70f0378`, con 9/9 workflow post-merge, ed è accettato con condizioni come contratto documentale non implementato. MI01 e i finding ARB-193 restano gate; MI02 è soddisfatta a livello normativo con test eseguibili ancora richiesti. S07/S11, F4 forecast, F5 ranking/consumer, BKL-032 readiness e Safety restano separati.
+BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integrato tramite PR #193, accettato con condizioni e riconciliato tramite PR #194 merge `1fd771632239cdca38d7527c55b974d805ffd1b9`, con 9/9 workflow post-merge. F3-A2 è il Program Assessment/Handoff documentale corrente verso il futuro Setup Authority Contract; non esistono assignment, schema o runtime. MI01 e i finding ARB-193 restano gate; MI02 è soddisfatta a livello normativo con test eseguibili ancora richiesti. S07/S11, F4 forecast, F5 ranking/consumer, BKL-032 readiness e Safety restano separati.
 
 ## 7. Roadmap sequence
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED WITH CONDITIONS] -> owner successor decision -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2 HANDOFF REVIEW CANDIDATE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 8. CI/CD e publishing
 
@@ -88,3 +88,4 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 3.4 | 14/09/2026 | BKL-031 F3 Solution Architecture accepted with conditions; implementation decision pending |
 | 3.5 | 15/09/2026 | PR #192 closure integrated; F3-A1 Site Authority Contract review candidate current |
 | 3.6 | 15/09/2026 | PR #193 F3-A1 merged/post-merge verified; Acceptance Reconciliation current |
+| 3.7 | 15/09/2026 | PR #194 F3-A1 reconciliation merged/post-merge verified; F3-A2 handoff current |

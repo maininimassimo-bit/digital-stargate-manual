@@ -13,7 +13,10 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | `AI_BOOTSTRAP.md` | Root bootstrap |
 | [Handover 15/09/2026](HANDOVER_2026-09-15.md) | Handover corrente |
 | [Current Technical Baseline 15/09/2026](CURRENT_TECHNICAL_BASELINE_2026-09-15.md) | Baseline tecnica corrente |
-| [F3-A1 Site Authority Acceptance](BKL-031-F3-A1-SITE-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md) | Acceptance con condizioni, evidenza post-merge e successor boundary |
+| [F3-A2 Setup Authority Program Assessment/Handoff](../architecture/assessments/BKL-031-F3-A2-Setup-Authority-Program-Assessment-and-Handoff-2026-09-15.md) | Package corrente: decisione di sequenziamento e handoff documentale |
+| [PR #195 F3-A2 Handoff AI-Assisted ARB Review](../architecture/reviews/ARB-PR195-BKL-031-F3-A2-Handoff-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 98/100; non equivalente ad approvazione umana indipendente |
+| [PR #195 F3-A2 Handoff AI-Assisted Release Quality](../architecture/reviews/RQ-PR195-BKL-031-F3-A2-Handoff-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
+| [F3-A1 Site Authority Acceptance](BKL-031-F3-A1-SITE-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md) | Acceptance con condizioni, PR #194 post-merge e transizione F3-A2 |
 | [F3-A1 Site Authority Handoff](../architecture/assessments/BKL-031-F3-A1-Site-Authority-Contract-Handoff-2026-09-15.md) | Scope e condizioni carried-forward |
 | [F3-A1 Governed Site Authority Contract](../architecture/scientific-assets/BKL-031-F3-A1-Governed-Site-Authority-Contract.md) | Contratto normativo accepted with conditions; not implemented |
 | [F3-A1 Validation Plan](../architecture/validation/BKL-031-F3-A1-Site-Authority-Contract-Validation-Plan.md) | Piano accettato, matrice non eseguita |
@@ -47,7 +50,7 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [BKL-031 F3 Handoff](../architecture/assessments/BKL-031-F3-Governed-Site-Setup-Ephemeris-Lunar-Handoff-2026-09-14.md) | Fulfilled; Solution Architecture accepted with conditions, implementation not authorized |
 | [BKL-031 F3 Solution Architecture](../architecture/scientific-assets/BKL-031-F3-Governed-Site-Setup-and-Ephemeris-Lunar-Solution-Architecture.md) | Accepted with conditions/post-merge verified; not implemented |
 | [BKL-031 F3 Validation Plan](../architecture/validation/BKL-031-F3-Governed-Site-Setup-and-Ephemeris-Lunar-Validation-Plan.md) | Accepted validation plan; P01–P10/N21–N66 not executed |
-| [BKL-031 F3 Solution Architecture Acceptance](BKL-031-F3-SOLUTION-ARCHITECTURE-ACCEPTANCE-2026-09-14.md) | Third re-review complete; ARB-192-M01 closed; merge decision pending |
+| [BKL-031 F3 Solution Architecture Acceptance](BKL-031-F3-SOLUTION-ARCHITECTURE-ACCEPTANCE-2026-09-14.md) | Accepted with conditions; F3-A1 closure and F3-A2 transition recorded |
 | [PR #192 BKL-031 F3 Acceptance AI-Assisted ARB](../architecture/reviews/ARB-PR192-BKL-031-F3-Acceptance-AI-Assisted-Review-2026-09-14.md) | Initial review: Rework Required — 94/100; non equivalente ad approvazione umana indipendente |
 | [PR #192 BKL-031 F3 Acceptance AI-Assisted Release Quality](../architecture/reviews/RQ-PR192-BKL-031-F3-Acceptance-AI-Assisted-Review-2026-09-14.md) | Initial review: Not Ready; non equivalente ad approvazione umana indipendente |
 | [BKL-031 F3 Acceptance M01 Remediation Evidence](../architecture/validation/BKL-031-F3-Acceptance-Governance-Consistency-Remediation-Evidence-2026-09-14.md) | Remediated; ARB-192-M01 closed by third re-review |
@@ -78,11 +81,12 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-031 F1: ACCEPTED / POST-MERGE VERIFIED;
 - BKL-031 F2: ACCEPTED / POST-MERGE VERIFIED;
 - BKL-031 F3: Solution Architecture `ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED`; closure PR #192 merged as `21524c687a1fa6a9d840a3951c7ef4fe298f9c3c`;
-- BKL-031 F3-A1: Site Authority Contract `ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED / NOT IMPLEMENTED`; PR #194 acceptance reconciliation ARB/RQ complete, merge decision pending.
+- BKL-031 F3-A1: Site Authority Contract `ACCEPTED WITH CONDITIONS / RECONCILED / POST-MERGE VERIFIED / NOT IMPLEMENTED`;
+- BKL-031 F3-A2: Setup Authority Program Assessment/Handoff `AUTHORIZED REVIEW CANDIDATE / NOT IMPLEMENTED`.
 
 ## Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED WITH CONDITIONS] -> owner successor decision -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED / F3-A2 HANDOFF REVIEW CANDIDATE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## Authority / projection
 

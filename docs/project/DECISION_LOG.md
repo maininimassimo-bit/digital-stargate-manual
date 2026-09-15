@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEC-001 |
-| Versione | 1.3 |
+| Versione | 1.4 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -44,6 +44,7 @@ Creare invece un ADR quando la decisione modifica un principio architetturale, i
 | DLG-013 | 05/08/2026 | Per file grandi o change set controllati si adottano le Git Database API (`blob -> tree -> commit -> ref`) | Evitare limiti e rischi delle sostituzioni complete tramite Contents API | Repository Operations | Accepted | commit `801c6246983af85fba571515f48fc038cccfcbcf` |
 
 | DLG-014 | 15/09/2026 | Promuovere BKL-031 F3-A1 come package documentale e definire normativamente gli intervalli UTC half-open prima di ogni materializzazione | Rimuovere l'ambiguità di ARB-191-MI02 senza anticipare schema, dati o runtime | BKL-031 F3-A1 | Accepted | F3-A1 handoff/contract/validation plan |
+| DLG-015 | 15/09/2026 | Selezionare BKL-031 F3-A2 Setup Authority Contract come successore, iniziando da un Program Assessment/Handoff esclusivamente documentale | Completare in dependency order l'autorità setup dopo il contratto sito, senza anticipare materializzazione, provider o runtime | BKL-031 F3-A2 | Accepted | BKL-031-F3-A2-PROGRAM-001 |
 
 ## 5. Delega operativa GitHub
 
