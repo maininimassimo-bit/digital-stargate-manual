@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-031-F3-A2-D1-ACCEPTANCE-001 |
-| Stato | **OWNER APPROVAL RECORDED / LIFECYCLE PROMOTION REVIEW CANDIDATE** |
+| Stato | **ACCEPTED / PR #201 POST-MERGE VERIFIED** |
 | Data | 15/09/2026 |
 | Integrated PR | #199 |
 | Publication head | `7c124d6f2cb1b6356c7008ac2f70824b5579a262` |
@@ -72,3 +72,8 @@ After exact-head review, CI, merge and post-merge verification of this approval 
 ## 6. Rollback
 
 Retire or revert the approved envelope and receipt through reviewed Git history. No migration, runtime deployment, credential or observatory operation exists.
+
+
+## 7. PR #201 lifecycle completion
+
+PR #201 integrated the separate approval receipt and the `APPROVED` lifecycle envelope without mutating the canonical payload. The reviewed head was `e12aad1c3ea5f817e78759020a2b4621d094bcc4`; the merge is `9932bace989565a10fd8e0d6f4a9c3b2cc057c46`; post-merge verification completed 6/6 workflows. The detailed outcome is recorded in [BKL-031 F3-A2-D2 Baseline Approval Acceptance](BKL-031-F3-A2-D2-BASELINE-APPROVAL-ACCEPTANCE-2026-09-15.md).
