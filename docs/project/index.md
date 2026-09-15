@@ -16,6 +16,8 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [F3-A1 Site Authority Handoff](../architecture/assessments/BKL-031-F3-A1-Site-Authority-Contract-Handoff-2026-09-15.md) | Scope e gate del package corrente |
 | [F3-A1 Governed Site Authority Contract](../architecture/scientific-assets/BKL-031-F3-A1-Governed-Site-Authority-Contract.md) | Contratto normativo review candidate |
 | [F3-A1 Validation Plan](../architecture/validation/BKL-031-F3-A1-Site-Authority-Contract-Validation-Plan.md) | Matrice di validazione non eseguita |
+| [PR #193 F3-A1 AI-Assisted ARB Review](../architecture/reviews/ARB-PR193-BKL-031-F3-A1-Site-Authority-Contract-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 96/100; non equivalente ad approvazione umana indipendente |
+| [PR #193 F3-A1 AI-Assisted Release Quality](../architecture/reviews/RQ-PR193-BKL-031-F3-A1-Site-Authority-Contract-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
 | [Enterprise Architecture Context](ENTERPRISE_ARCHITECTURE_CONTEXT.md) | Contesto enterprise |
 | [Repository Knowledge Map](REPOSITORY_KNOWLEDGE_MAP.md) | Mappa authority/projection |
 | [BKL-037 Closure](BKL-037-CLOSURE-2026-09-10.md) | Closure del predecessore accettato |
