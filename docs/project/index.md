@@ -13,9 +13,10 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | `AI_BOOTSTRAP.md` | Root bootstrap |
 | [Handover 15/09/2026](HANDOVER_2026-09-15.md) | Handover corrente |
 | [Current Technical Baseline 15/09/2026](CURRENT_TECHNICAL_BASELINE_2026-09-15.md) | Baseline tecnica corrente |
-| [F3-A1 Site Authority Handoff](../architecture/assessments/BKL-031-F3-A1-Site-Authority-Contract-Handoff-2026-09-15.md) | Scope e gate del package corrente |
-| [F3-A1 Governed Site Authority Contract](../architecture/scientific-assets/BKL-031-F3-A1-Governed-Site-Authority-Contract.md) | Contratto normativo review candidate |
-| [F3-A1 Validation Plan](../architecture/validation/BKL-031-F3-A1-Site-Authority-Contract-Validation-Plan.md) | Matrice di validazione non eseguita |
+| [F3-A1 Site Authority Acceptance](BKL-031-F3-A1-SITE-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md) | Acceptance con condizioni, evidenza post-merge e successor boundary |
+| [F3-A1 Site Authority Handoff](../architecture/assessments/BKL-031-F3-A1-Site-Authority-Contract-Handoff-2026-09-15.md) | Scope e condizioni carried-forward |
+| [F3-A1 Governed Site Authority Contract](../architecture/scientific-assets/BKL-031-F3-A1-Governed-Site-Authority-Contract.md) | Contratto normativo accepted with conditions; not implemented |
+| [F3-A1 Validation Plan](../architecture/validation/BKL-031-F3-A1-Site-Authority-Contract-Validation-Plan.md) | Piano accettato, matrice non eseguita |
 | [PR #193 F3-A1 AI-Assisted ARB Review](../architecture/reviews/ARB-PR193-BKL-031-F3-A1-Site-Authority-Contract-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 96/100; non equivalente ad approvazione umana indipendente |
 | [PR #193 F3-A1 AI-Assisted Release Quality](../architecture/reviews/RQ-PR193-BKL-031-F3-A1-Site-Authority-Contract-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
 | [Enterprise Architecture Context](ENTERPRISE_ARCHITECTURE_CONTEXT.md) | Contesto enterprise |
@@ -75,11 +76,11 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-031 F1: ACCEPTED / POST-MERGE VERIFIED;
 - BKL-031 F2: ACCEPTED / POST-MERGE VERIFIED;
 - BKL-031 F3: Solution Architecture `ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED`; closure PR #192 merged as `21524c687a1fa6a9d840a3951c7ef4fe298f9c3c`;
-- BKL-031 F3-A1: Site Authority Contract `AUTHORIZED REVIEW CANDIDATE / NOT IMPLEMENTED`; MI02 normative resolution pending ARB.
+- BKL-031 F3-A1: Site Authority Contract `ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED / NOT IMPLEMENTED`; successor decision pending.
 
 ## Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT REVIEW CANDIDATE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED WITH CONDITIONS] -> owner successor decision -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## Authority / projection
 

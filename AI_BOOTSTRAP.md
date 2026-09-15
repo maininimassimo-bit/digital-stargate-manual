@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 4.8 |
+| Versione | 4.9 |
 | Baseline | 15/09/2026 |
-| Stato | Current root bootstrap — BKL-031 F3-A1 Site Authority Contract review candidate; not implemented |
+| Stato | Current root bootstrap — BKL-031 F3-A1 accepted with conditions/post-merge verified; acceptance reconciliation current; not implemented |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -54,13 +54,13 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - BKL-031 F1 — Source Discovery and Semantic Boundary: ACCEPTED / POST-MERGE VERIFIED;
 - BKL-031 F2 — Machine-Readable Context/Source Contract and Bounded Fixtures: ACCEPTED / POST-MERGE VERIFIED via PR #188 and merge `7f861f7399079858c9744e69b6c773664b6b5b54`;
 - BKL-031 F3 handoff and Solution Architecture: ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED; PR #192 acceptance closure merged as `21524c687a1fa6a9d840a3951c7ef4fe298f9c3c` with 9/9 workflows;
-- BKL-031 F3-A1 — Site Authority Contract: owner-authorized documentation-only review candidate; `ARB-191-MI02` has a normative resolution proposal pending ARB, while `ARB-191-MI01` remains an enforcement gate. No record, schema, adapter or runtime exists.
+- BKL-031 F3-A1 — Site Authority Contract: ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED via PR #193 and merge `b9d08a7cf6b6287825907cab6a846b1ec70f0378`; `ARB-193-MI01`, `ARB-193-MI02` and `ARB-191-MI01` remain implementation gates, while `ARB-191-MI02` is satisfied at normative-design level with executable tests still required. No record, schema, adapter or runtime exists.
 
 La closure BKL-046 non dichiara efficacia scientifica né produzione: `NOT_EVALUABLE_CURRENT_EVIDENCE`, `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`. Nessun modello/provider, automatic acceptance o PixInsight apply è autorizzato.
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT REVIEW CANDIDATE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 ACCEPTED WITH CONDITIONS] -> owner successor decision -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -72,6 +72,6 @@ Nessun portale, planner, comparison layer, quality score o AI è Safety Authorit
 
 ## 9. Punto di partenza operativo
 
-PR #192 ha integrato l'Acceptance Record F3 in `main@21524c687a1fa6a9d840a3951c7ef4fe298f9c3c` con 9/9 workflow post-merge. F3-A1 è ora il package documentale corrente: definisce il Site Authority Contract e propone la risoluzione normativa di `ARB-191-MI02`, ma non è accettato né implementato.
+PR #193 ha integrato il Site Authority Contract F3-A1 in `main@b9d08a7cf6b6287825907cab6a846b1ec70f0378` con 9/9 workflow post-merge. Il contratto è accettato con condizioni come specifica documentale ed è oggetto della corrente Acceptance Reconciliation; non è implementato.
 
-Il prossimo gate è la verifica CI dell'exact head della draft PR F3-A1, seguita solo su nuova autorizzazione da ARB/Release Quality. Coordinate reali, schema/fixture/validator/adapter, storage, provider/ADR, F3-A2/A3/B/C, forecast, ranking, readiness, runtime, device command, PC/EAGLE e Safety Authority restano non autorizzati.
+Il prossimo gate è la verifica CI dell'exact head della draft PR di riconciliazione, seguita solo su nuova autorizzazione da ARB/Release Quality. Dopo l'eventuale merge servirà una decisione owner separata sul successore. Coordinate reali, schema/fixture/validator/adapter, storage, provider/ADR, F3-A2/A3/B/C, forecast, ranking, readiness, runtime, device command, PC/EAGLE e Safety Authority restano non autorizzati.

@@ -4,8 +4,8 @@
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A1 — Site Authority Contract Review Candidate",
-  "target": "Review the documentation-only F3-A1 contract and proposed ARB-191-MI02 resolution on an exact head; no real site record, schema, fixture, validator, adapter, provider, runtime, EAGLE workload or Safety Authority is authorized",
+  "nextMilestone": "BKL-031 F3-A1 — Acceptance Reconciliation Review Candidate",
+  "target": "Reconcile F3-A1 acceptance, post-merge evidence, carried conditions and successor boundary on an exact head; no materialization, real site record, schema, fixture, validator, adapter, provider, runtime, EAGLE workload or Safety Authority is authorized",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F1/F2 ACCEPTED / POST-MERGE VERIFIED. F3 Solution Architecture and acceptance closure are integrated; PR #192 merged as 21524c687a1fa6a9d840a3951c7ef4fe298f9c3c with 9/9 post-merge workflows. F3-A1 Site Authority Contract is an owner-authorized documentation-only review candidate. ARB-191-MI02 has a normative resolution proposal pending ARB; ARB-191-MI01 remains an enforcement gate. S08 stays UNAVAILABLE. No real authority record, schema, fixture, validator, adapter, provider/ADR, F3-A2/A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
+          "note": "F1/F2 ACCEPTED / POST-MERGE VERIFIED. F3 Solution Architecture and acceptance closure are integrated. F3-A1 Site Authority Contract is integrated via PR #193 and merge b9d08a7cf6b6287825907cab6a846b1ec70f0378 with 9/9 post-merge workflows; ARB AI-assisted APPROVED WITH CONDITIONS 96/100 and Release Quality AI-assisted CONDITIONALLY READY FOR MERGE. The contract is accepted with conditions as documentation only and is not implemented. ARB-193-MI01, ARB-193-MI02 and ARB-191-MI01 remain implementation gates; ARB-191-MI02 is satisfied at normative-design level with executable tests still required. S08 stays UNAVAILABLE. Successor decision is pending; no real authority record, schema, fixture, validator, adapter, provider/ADR, F3-A2/A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
         },
         {
           "id": "BKL-032",
@@ -474,7 +474,14 @@
       "itemRef": "BKL-031",
       "title": "BKL-031 F3-A1 Site Authority Contract",
       "date": "2026-09-15",
-      "description": "Documentation-only review candidate defining site authority, UTC half-open validity, conflict handling and public sanitization; not implemented."
+      "description": "Documentation-only Site Authority Contract accepted with conditions and post-merge verified via PR #193; not implemented."
+    },
+    {
+      "id": "M-BKL031-F3-A1-ACCEPTANCE",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A1 Acceptance Reconciliation",
+      "date": "2026-09-15",
+      "description": "Review candidate reconciling PR #193 acceptance, 9/9 post-merge evidence, carried implementation conditions and successor boundary."
     }
   ]
 }
