@@ -1,0 +1,126 @@
+{
+  "assignmentPayload": {
+    "assignmentId": "DSG-CURRENT-SETUP-ASSIGNMENT-001",
+    "authority": {
+      "assignmentApprovalAuthorityRef": "github:user:maininimassimo-bit",
+      "assignmentCustodianRef": "role:digital-stargate-architecture-office",
+      "assignmentOwnerRef": "github:user:maininimassimo-bit",
+      "authorityRole": "SETUP_ASSIGNMENT_AUTHORITY",
+      "authorityScope": "SINGLE_OBSERVATORY_CURRENT_SETUP",
+      "authoritySystem": "GITHUB_PROTECTED_REGISTRY",
+      "custodianMayApprove": false,
+      "registryRoot": "governance/setup-authority/",
+      "repository": "maininimassimo-bit/digital-stargate-manual",
+      "separationPolicy": "OWNER_MAY_APPROVE_CUSTODIAN_MUST_NOT_APPROVE",
+      "sourceLocator": "governance/setup-authority/decision-evidence/DSG-CURRENT-SETUP-ASSIGNMENT-001.owner-decision.json"
+    },
+    "classification": "PROTECTED_SETUP_ASSIGNMENT",
+    "intendedUse": "CURRENT_SETUP_RESOLUTION_AFTER_SEPARATE_EXACT_DIGEST_APPROVAL",
+    "observatoryId": "DSG-OBSERVATORY-MANCIANO-001",
+    "prohibitedUses": [
+      "CURRENT_SETUP_RESOLUTION_BEFORE_APPROVAL",
+      "DEVICE_COMMAND",
+      "SAFETY_AUTHORITY",
+      "READINESS_OR_GO_NO_GO",
+      "PUBLIC_PROTECTED_ASSIGNMENT_PROJECTION",
+      "EAGLE_WORKLOAD",
+      "LATEST_WINS_FALLBACK",
+      "HOST_OR_SESSION_STATE_AS_AUTHORITY"
+    ],
+    "publicationPolicy": {
+      "authorityLocators": "PROHIBITED",
+      "exactSiteFacts": "PROHIBITED",
+      "internalIdentifiers": "PROHIBITED",
+      "protectedDigests": "PROHIBITED",
+      "publicProjection": "DENY_BY_DEFAULT"
+    },
+    "retention": "APPEND_ONLY_GIT_HISTORY",
+    "revision": 1,
+    "rollback": {
+      "draft": "Revert the reviewed Git commit; no runtime rollback is required.",
+      "futureApproval": "Retire through reviewed Git history and return S09 to UNAVAILABLE_CURRENT without fallback.",
+      "retirement": "Preserve immutable evidence and remove resolver eligibility; never select observed or historical configuration."
+    },
+    "scope": "OBSERVATION_PLANNER_READ_ONLY_SETUP_AUTHORITY",
+    "setupBaselineReference": {
+      "approvalEvidenceRef": "governance/setup-authority/approval-evidence/DSG-SETUP-BASELINE-001.approval.json",
+      "baselineId": "DSG-SETUP-BASELINE-001",
+      "baselineVersion": "0.1.0-draft.1",
+      "configurationId": "DSG-MANCIANO-DUAL-OTA-SETUP-001",
+      "lifecycleState": "APPROVED",
+      "payloadDigest": "sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8",
+      "recordPath": "governance/setup-authority/configuration-baselines/DSG-SETUP-BASELINE-001.approved.json"
+    },
+    "siteAuthorityReference": {
+      "approvalEvidenceRef": "governance/site-authority/approval-evidence/DSG-SITE-RECORD-MANCIANO-001.approval.json",
+      "lifecycleState": "APPROVED",
+      "observatoryId": "DSG-OBSERVATORY-MANCIANO-001",
+      "payloadDigest": "sha256:61680073ee535c21033e3041bf181ae0a1e1de87343c54fcd48fd8d6b7ace83d",
+      "recordPath": "governance/site-authority/site-records/DSG-SITE-RECORD-MANCIANO-001.approved.json",
+      "revision": 1,
+      "siteRecordId": "DSG-SITE-RECORD-MANCIANO-001"
+    },
+    "validity": {
+      "intervalSemantics": "HALF_OPEN",
+      "validFromUtc": "2026-09-16T00:00:00Z",
+      "validToUtc": null,
+      "validityEndMode": "UNBOUNDED"
+    }
+  },
+  "lifecycle": {
+    "approvalEvidenceRef": null,
+    "approvedAtUtc": null,
+    "decisionEvidenceRef": "governance/setup-authority/decision-evidence/DSG-CURRENT-SETUP-ASSIGNMENT-001.owner-decision.json",
+    "eligibleForResolution": false,
+    "retiredAtUtc": null,
+    "retirementEvidenceRef": null,
+    "state": "DRAFT",
+    "statement": "Owner decisions are recorded; separate exact-digest human approval is required before resolver eligibility."
+  },
+  "payloadDigest": {
+    "algorithm": "SHA-256",
+    "canonicalization": "recursive object-key sort; array order preserved; compact JSON; UTF-8",
+    "method": "DSG-F3A2-CANONICAL-JSON-SHA256-1",
+    "value": "sha256:e7632afb4f0b2dc725b888eb858f650e2669d1ebf78e098c25b950cf36eae4ef"
+  },
+  "recordType": "DSG_CURRENT_SETUP_ASSIGNMENT",
+  "schemaVersion": "1.0.0-draft",
+  "validationEvidence": {
+    "decisionEvidenceBinding": {
+      "evidence": "Candidate matches the recorded owner decisions.",
+      "state": "VERIFIED"
+    },
+    "executableContractCases": {
+      "evidence": "F3-A2 positive, negative, property, privacy and mutation cases execute in the dedicated governance workflow.",
+      "state": "VERIFIED"
+    },
+    "jsonParse": {
+      "evidence": "Protected candidate parses as JSON.",
+      "state": "VERIFIED"
+    },
+    "lifecycleIneligibility": {
+      "evidence": "DRAFT remains resolver-ineligible and S09 remains UNAVAILABLE_CURRENT.",
+      "state": "VERIFIED"
+    },
+    "payloadDigestRecomputation": {
+      "evidence": "Canonical protected assignment payload digest is recomputed without logging its value.",
+      "state": "VERIFIED"
+    },
+    "protectedValueLeakScan": {
+      "evidence": "Public docs and workflow output exclude protected assignment content.",
+      "state": "VERIFIED"
+    },
+    "runtimeOat": {
+      "reason": "Repository-only DRAFT materialization; no runtime adapter or EAGLE operation.",
+      "state": "NOT_APPLICABLE"
+    },
+    "schemaValidatorParity": {
+      "evidence": "Closed versioned schemas and validator cover the decision evidence and assignment envelope.",
+      "state": "VERIFIED"
+    },
+    "sourceAuthorityBinding": {
+      "evidence": "Exact approved Site Authority and setup-baseline references are verified without public output.",
+      "state": "VERIFIED"
+    }
+  }
+}

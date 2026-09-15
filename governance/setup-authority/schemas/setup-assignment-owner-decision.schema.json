@@ -1,0 +1,506 @@
+{
+  "$defs": {
+    "decisions": {
+      "additionalProperties": false,
+      "properties": {
+        "assignmentApprovalAuthorityRef": {
+          "const": "github:user:maininimassimo-bit"
+        },
+        "assignmentCustodianRef": {
+          "const": "role:digital-stargate-architecture-office"
+        },
+        "assignmentOwnerRef": {
+          "const": "github:user:maininimassimo-bit"
+        },
+        "authorityRoot": {
+          "const": "governance/setup-authority/"
+        },
+        "authoritySystem": {
+          "const": "GITHUB_PROTECTED_REGISTRY"
+        },
+        "custodianMayApprove": {
+          "const": false
+        },
+        "publicProjection": {
+          "const": "DENY_BY_DEFAULT_OMIT_INTERNAL_REFERENCES_DIGESTS_LOCATORS_AND_EXACT_SITE_FACTS"
+        },
+        "publicationRootExcluded": {
+          "const": "docs/"
+        },
+        "retention": {
+          "const": "APPEND_ONLY_GIT_HISTORY"
+        },
+        "separationPolicy": {
+          "const": "OWNER_MAY_APPROVE_CUSTODIAN_MUST_NOT_APPROVE"
+        },
+        "setupBaselineReference": {
+          "additionalProperties": false,
+          "properties": {
+            "baselineId": {
+              "type": "string"
+            },
+            "baselineVersion": {
+              "type": "string"
+            },
+            "configurationId": {
+              "type": "string"
+            },
+            "lifecycleState": {
+              "const": "APPROVED"
+            },
+            "payloadDigest": {
+              "pattern": "^sha256:[a-f0-9]{64}$",
+              "type": "string"
+            },
+            "recordPath": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "recordPath",
+            "baselineId",
+            "baselineVersion",
+            "configurationId",
+            "payloadDigest",
+            "lifecycleState"
+          ],
+          "type": "object"
+        },
+        "siteAuthorityReference": {
+          "additionalProperties": false,
+          "properties": {
+            "lifecycleState": {
+              "const": "APPROVED"
+            },
+            "observatoryId": {
+              "type": "string"
+            },
+            "payloadDigest": {
+              "pattern": "^sha256:[a-f0-9]{64}$",
+              "type": "string"
+            },
+            "recordPath": {
+              "type": "string"
+            },
+            "revision": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "siteRecordId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "recordPath",
+            "siteRecordId",
+            "revision",
+            "observatoryId",
+            "payloadDigest",
+            "lifecycleState"
+          ],
+          "type": "object"
+        },
+        "validity": {
+          "additionalProperties": false,
+          "properties": {
+            "intervalSemantics": {
+              "const": "HALF_OPEN"
+            },
+            "validFromPolicy": {
+              "const": "APPROVED_SETUP_BASELINE_EFFECTIVE_START"
+            },
+            "validFromUtc": {
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\\\.[0-9]{3})?Z$",
+              "type": "string"
+            },
+            "validToUtc": {
+              "type": "null"
+            },
+            "validityEndMode": {
+              "const": "UNBOUNDED"
+            }
+          },
+          "required": [
+            "validFromPolicy",
+            "validFromUtc",
+            "validityEndMode",
+            "validToUtc",
+            "intervalSemantics"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "authoritySystem",
+        "authorityRoot",
+        "publicationRootExcluded",
+        "assignmentOwnerRef",
+        "assignmentCustodianRef",
+        "assignmentApprovalAuthorityRef",
+        "custodianMayApprove",
+        "separationPolicy",
+        "siteAuthorityReference",
+        "setupBaselineReference",
+        "validity",
+        "retention",
+        "publicProjection"
+      ],
+      "type": "object"
+    },
+    "digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "setupBaselineReference": {
+      "additionalProperties": false,
+      "properties": {
+        "baselineId": {
+          "type": "string"
+        },
+        "baselineVersion": {
+          "type": "string"
+        },
+        "configurationId": {
+          "type": "string"
+        },
+        "lifecycleState": {
+          "const": "APPROVED"
+        },
+        "payloadDigest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "recordPath": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "recordPath",
+        "baselineId",
+        "baselineVersion",
+        "configurationId",
+        "payloadDigest",
+        "lifecycleState"
+      ],
+      "type": "object"
+    },
+    "siteAuthorityReference": {
+      "additionalProperties": false,
+      "properties": {
+        "lifecycleState": {
+          "const": "APPROVED"
+        },
+        "observatoryId": {
+          "type": "string"
+        },
+        "payloadDigest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "recordPath": {
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "siteRecordId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "recordPath",
+        "siteRecordId",
+        "revision",
+        "observatoryId",
+        "payloadDigest",
+        "lifecycleState"
+      ],
+      "type": "object"
+    },
+    "sourceAuthorization": {
+      "additionalProperties": false,
+      "properties": {
+        "exactReferencesStoredOnlyInProtectedEvidence": {
+          "const": true
+        },
+        "ownerSelections": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "sourceChannel": {
+          "const": "OWNER_CONTROLLED_INTERACTION_CHANNEL"
+        }
+      },
+      "required": [
+        "sourceChannel",
+        "ownerSelections",
+        "exactReferencesStoredOnlyInProtectedEvidence"
+      ],
+      "type": "object"
+    },
+    "utcTimestamp": {
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\\\.[0-9]{3})?Z$",
+      "type": "string"
+    },
+    "validity": {
+      "additionalProperties": false,
+      "properties": {
+        "intervalSemantics": {
+          "const": "HALF_OPEN"
+        },
+        "validFromPolicy": {
+          "const": "APPROVED_SETUP_BASELINE_EFFECTIVE_START"
+        },
+        "validFromUtc": {
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\\\.[0-9]{3})?Z$",
+          "type": "string"
+        },
+        "validToUtc": {
+          "type": "null"
+        },
+        "validityEndMode": {
+          "const": "UNBOUNDED"
+        }
+      },
+      "required": [
+        "validFromPolicy",
+        "validFromUtc",
+        "validityEndMode",
+        "validToUtc",
+        "intervalSemantics"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://digital-stargate.invalid/schemas/setup-assignment-owner-decision.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "decidingAuthority": {
+      "const": "github:user:maininimassimo-bit"
+    },
+    "decision": {
+      "const": "OWNER_DECISIONS_COMPLETE"
+    },
+    "decisionId": {
+      "type": "string"
+    },
+    "decisionRecordedAtUtc": {
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\\\.[0-9]{3})?Z$",
+      "type": "string"
+    },
+    "decisions": {
+      "additionalProperties": false,
+      "properties": {
+        "assignmentApprovalAuthorityRef": {
+          "const": "github:user:maininimassimo-bit"
+        },
+        "assignmentCustodianRef": {
+          "const": "role:digital-stargate-architecture-office"
+        },
+        "assignmentOwnerRef": {
+          "const": "github:user:maininimassimo-bit"
+        },
+        "authorityRoot": {
+          "const": "governance/setup-authority/"
+        },
+        "authoritySystem": {
+          "const": "GITHUB_PROTECTED_REGISTRY"
+        },
+        "custodianMayApprove": {
+          "const": false
+        },
+        "publicProjection": {
+          "const": "DENY_BY_DEFAULT_OMIT_INTERNAL_REFERENCES_DIGESTS_LOCATORS_AND_EXACT_SITE_FACTS"
+        },
+        "publicationRootExcluded": {
+          "const": "docs/"
+        },
+        "retention": {
+          "const": "APPEND_ONLY_GIT_HISTORY"
+        },
+        "separationPolicy": {
+          "const": "OWNER_MAY_APPROVE_CUSTODIAN_MUST_NOT_APPROVE"
+        },
+        "setupBaselineReference": {
+          "additionalProperties": false,
+          "properties": {
+            "baselineId": {
+              "type": "string"
+            },
+            "baselineVersion": {
+              "type": "string"
+            },
+            "configurationId": {
+              "type": "string"
+            },
+            "lifecycleState": {
+              "const": "APPROVED"
+            },
+            "payloadDigest": {
+              "pattern": "^sha256:[a-f0-9]{64}$",
+              "type": "string"
+            },
+            "recordPath": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "recordPath",
+            "baselineId",
+            "baselineVersion",
+            "configurationId",
+            "payloadDigest",
+            "lifecycleState"
+          ],
+          "type": "object"
+        },
+        "siteAuthorityReference": {
+          "additionalProperties": false,
+          "properties": {
+            "lifecycleState": {
+              "const": "APPROVED"
+            },
+            "observatoryId": {
+              "type": "string"
+            },
+            "payloadDigest": {
+              "pattern": "^sha256:[a-f0-9]{64}$",
+              "type": "string"
+            },
+            "recordPath": {
+              "type": "string"
+            },
+            "revision": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "siteRecordId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "recordPath",
+            "siteRecordId",
+            "revision",
+            "observatoryId",
+            "payloadDigest",
+            "lifecycleState"
+          ],
+          "type": "object"
+        },
+        "validity": {
+          "additionalProperties": false,
+          "properties": {
+            "intervalSemantics": {
+              "const": "HALF_OPEN"
+            },
+            "validFromPolicy": {
+              "const": "APPROVED_SETUP_BASELINE_EFFECTIVE_START"
+            },
+            "validFromUtc": {
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\\\.[0-9]{3})?Z$",
+              "type": "string"
+            },
+            "validToUtc": {
+              "type": "null"
+            },
+            "validityEndMode": {
+              "const": "UNBOUNDED"
+            }
+          },
+          "required": [
+            "validFromPolicy",
+            "validFromUtc",
+            "validityEndMode",
+            "validToUtc",
+            "intervalSemantics"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "authoritySystem",
+        "authorityRoot",
+        "publicationRootExcluded",
+        "assignmentOwnerRef",
+        "assignmentCustodianRef",
+        "assignmentApprovalAuthorityRef",
+        "custodianMayApprove",
+        "separationPolicy",
+        "siteAuthorityReference",
+        "setupBaselineReference",
+        "validity",
+        "retention",
+        "publicProjection"
+      ],
+      "type": "object"
+    },
+    "futureCandidateRef": {
+      "const": "governance/setup-authority/setup-assignments/DSG-CURRENT-SETUP-ASSIGNMENT-001.draft.json"
+    },
+    "lifecycleBoundary": {
+      "const": "OWNER_DECISIONS_COMPLETE_NOT_ASSIGNMENT_APPROVAL"
+    },
+    "recordType": {
+      "const": "DSG_CURRENT_SETUP_ASSIGNMENT_OWNER_DECISION"
+    },
+    "schemaVersion": {
+      "const": "1.0.0-draft"
+    },
+    "scopeBoundaries": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "sourceAuthorization": {
+      "additionalProperties": false,
+      "properties": {
+        "exactReferencesStoredOnlyInProtectedEvidence": {
+          "const": true
+        },
+        "ownerSelections": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "sourceChannel": {
+          "const": "OWNER_CONTROLLED_INTERACTION_CHANNEL"
+        }
+      },
+      "required": [
+        "sourceChannel",
+        "ownerSelections",
+        "exactReferencesStoredOnlyInProtectedEvidence"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "recordType",
+    "decisionId",
+    "decision",
+    "decisionRecordedAtUtc",
+    "decidingAuthority",
+    "futureCandidateRef",
+    "decisions",
+    "sourceAuthorization",
+    "scopeBoundaries",
+    "lifecycleBoundary"
+  ],
+  "title": "Digital StarGate Current Setup Assignment Owner Decision Evidence",
+  "type": "object"
+}
