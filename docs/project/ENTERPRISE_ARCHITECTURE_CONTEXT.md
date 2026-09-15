@@ -3,15 +3,15 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 3.3 |
+| Versione | 3.4 |
 | Stato | Active context baseline |
-| Data baseline | 14/09/2026 |
+| Data baseline | 15/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch autorevole | `main` |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Continuity handover | `docs/project/HANDOVER_2026-09-14.md` |
-| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-14.md` |
-| Current governed package | BKL-031 F3 — Solution Architecture accepted with conditions; implementation decision pending |
+| Continuity handover | `docs/project/HANDOVER_2026-09-15.md` |
+| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-15.md` |
+| Current governed package | BKL-031 F3-A1 — Site Authority Contract review candidate; not implemented |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo e gerarchia
@@ -60,11 +60,11 @@ BKL-041 — Scientific Data Quality Score è CLOSED / ACCEPTED / POST-MERGE VERI
 
 BKL-046 F1-F5 sono CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION` e `aiModelImplemented=false`.
 
-BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. Il Solution Architecture Package F3 è integrato tramite PR #191 e merge `3a79bb93c9a0925280eba5214d517107804cb13c` con 9/9 workflow post-merge. È accettato con condizioni come baseline source-neutral; `ARB-191-MI01` e `ARB-191-MI02` restano aperti per l'implementazione. BKL-031 resta attivo e nessuna slice F3-A1/A2/A3/B/C è promossa. Provider/ADR, record reali, schema/fixture/validator/adapter, implementazione, forecast, ranking, readiness, runtime, device command, workload EAGLE e Safety Authority restano non autorizzati.
+BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. Il Solution Architecture Package F3 è integrato tramite PR #191 e merge `3a79bb93c9a0925280eba5214d517107804cb13c` con 9/9 workflow post-merge. È accettato con condizioni come baseline source-neutral; `ARB-191-MI01` e `ARB-191-MI02` restano aperti per l'implementazione. La closure PR #192 è integrata in `21524c687a1fa6a9d840a3951c7ef4fe298f9c3c`. BKL-031 resta attivo e F3-A1 è promosso soltanto come review candidate documentale; F3-A2/A3/B/C non sono promossi. Provider/ADR, record reali, schema/fixture/validator/adapter, implementazione, forecast, ranking, readiness, runtime, device command, workload EAGLE e Safety Authority restano non autorizzati.
 
 ## 7. Roadmap
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED — IMPLEMENTATION DECISION PENDING] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT REVIEW CANDIDATE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 AMP-002 resta planning authority per AP-007–AP-015, non live status register.
 
@@ -106,3 +106,4 @@ Le acceptance BKL-031 F1/F2 e l'integrazione dell'handoff F3 sono repository-onl
 
 
 | 3.3 | 14/09/2026 | BKL-031 F3 Solution Architecture accepted with conditions; implementation decision pending |
+| 3.4 | 15/09/2026 | PR #192 closure integrated; F3-A1 Site Authority Contract review candidate current |

@@ -1,13 +1,13 @@
 {
   "schemaVersion": "2.2",
-  "updatedAt": "2026-09-14",
+  "updatedAt": "2026-09-15",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "890641e153d55d267cabf6a099068c72f7c2b0587d7afc09f7e13c60181d74af",
+  "sourceDigest": "8fcdc29ddc2daaa28f63e0b1d7721f1e8c139ffac2d65cdc26dcab7801d287d3",
   "authority": "DSG-RGM-001",
   "projectStatus": "Attivo",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3 — Implementation Slice Decision Pending",
-  "target": "Decide separately whether to authorize BKL-031 F3-A1 Site Authority Contract as the first dependency-ordered implementation slice; ARB-191-MI02 must be resolved before site/setup materialization, while provider/ADR selection, all implementation, forecast, ranking, readiness, runtime, device command, heavy EAGLE workload and Safety Authority remain unauthorized",
+  "nextMilestone": "BKL-031 F3-A1 — Site Authority Contract Review Candidate",
+  "target": "Review the documentation-only F3-A1 contract and proposed ARB-191-MI02 resolution on an exact head; no real site record, schema, fixture, validator, adapter, provider, runtime, EAGLE workload or Safety Authority is authorized",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -307,7 +307,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F1/F2 ACCEPTED / POST-MERGE VERIFIED. F3 handoff and source-neutral Solution Architecture are integrated/post-merge verified through PR #190/#191; PR #191 merge 3a79bb93c9a0925280eba5214d517107804cb13c completed 9/9 workflows. The architecture is ACCEPTED WITH CONDITIONS only; ARB-191-MI01 and ARB-191-MI02 remain mandatory implementation gates. BKL-031 stays active. No F3-A1/A2/A3/B/C slice, provider/ADR, real authority record, schema/fixture/validator/adapter, forecast, ranking, readiness, runtime, device command, heavy EAGLE workload or Safety Authority is authorized."
+          "note": "F1/F2 ACCEPTED / POST-MERGE VERIFIED. F3 Solution Architecture and acceptance closure are integrated; PR #192 merged as 21524c687a1fa6a9d840a3951c7ef4fe298f9c3c with 9/9 post-merge workflows. F3-A1 Site Authority Contract is an owner-authorized documentation-only review candidate. ARB-191-MI02 has a normative resolution proposal pending ARB; ARB-191-MI01 remains an enforcement gate. S08 stays UNAVAILABLE. No real authority record, schema, fixture, validator, adapter, provider/ADR, F3-A2/A3/B/C, runtime, EAGLE workload or Safety Authority is authorized."
         },
         {
           "id": "BKL-032",
@@ -562,7 +562,15 @@
       "itemRef": "BKL-031",
       "title": "BKL-031 Observation Planner F3",
       "date": "2026-09-14",
-      "description": "Source-neutral F3 Solution Architecture accepted with conditions after PR #191 merge 3a79bb93c9a0925280eba5214d517107804cb13c and 9/9 post-merge workflows. ARB-191-MI01/MI02 remain implementation gates; no implementation slice is promoted.",
+      "description": "Source-neutral F3 Solution Architecture accepted with conditions; acceptance closure PR #192 merged as 21524c687a1fa6a9d840a3951c7ef4fe298f9c3c with 9/9 post-merge workflows.",
+      "status": "active"
+    },
+    {
+      "id": "M-BKL031-F3-A1",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A1 Site Authority Contract",
+      "date": "2026-09-15",
+      "description": "Documentation-only review candidate defining site authority, UTC half-open validity, conflict handling and public sanitization; not implemented.",
       "status": "active"
     }
   ]
