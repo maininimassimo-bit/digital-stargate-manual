@@ -11,7 +11,7 @@
 | Technical head reviewed | `43a46ac28c30badc40e4cb180ed98924ebcf74a1` |
 | Review-publication head | `d0f8098cfff9651b3ba1597fd77f09a11a7c634a` |
 | Merge commit | `3a79bb93c9a0925280eba5214d517107804cb13c` |
-| Successore | Decisione owner pending; nessuna implementation slice promossa |
+| Successore | F3-A1 Site Authority Contract autorizzato come review candidate documentale; non implementato |
 | Runtime impact | None |
 | PC Principale / EAGLE | Nessuna azione richiesta |
 
@@ -136,14 +136,13 @@ Il primo candidato dependency-ordered è F3-A1 — Site Authority Contract. Una 
 
 Questa acceptance non autorizza F3-A1 né F3-A2/A3/B/C, provider/ADR, record reali, schema/fixture/validator/adapter, dipendenze, chiamate esterne, forecast, ranking, readiness, runtime, device command, PC/EAGLE o Safety Authority.
 
-## 11. Current governance position after PR #192 third re-review
+## 11. Closure PR #192 e transizione F3-A1
 
-The owner-authorized AI-assisted ARB and Release Quality third re-review on synchronized exact head `98a67bc3ff8f2b661d6291374edf7b73302d8292` concluded:
+PR #192 è stata integrata in `main` con merge `21524c687a1fa6a9d840a3951c7ef4fe298f9c3c`. La verifica post-merge ha concluso 9/9 workflow SUCCESS, inclusi Pages e Governed Projection Sync. La decisione owner sull'assenza del ruleset è limitata al merge concluso e non crea un precedente automatico.
 
-- ARB: `APPROVED WITH CONDITIONS` — 99/100;
-- Release Quality: `CONDITIONALLY READY FOR MERGE`;
-- `ARB-192-M01`: **CLOSED**;
-- reviewed-head CI: 7/7 SUCCESS;
-- branch relation: 12 commits ahead / 0 behind `main@77438c43ed42faa8b71757fc43f3aad0cdb21d5a`.
+Successivamente l'owner ha autorizzato F3-A1 come package documentale di Site Authority Contract. La promozione:
 
-The reviews are not equivalent to independent human approvals. Stop before review-publication exact-head CI, ruleset/branch-protection treatment, merge and every implementation activity. `ARB-191-MI01` and `ARB-191-MI02` remain open; no F3-A1/A2/A3/B/C is promoted.
+- propone la risoluzione normativa di `ARB-191-MI02`, soggetta ad ARB;
+- dettaglia la boundary di `ARB-191-MI01`, che resta aperta per enforcement;
+- non materializza record, coordinate, schema, fixture, validator, adapter o runtime;
+- non autorizza F3-A2/A3/B/C, provider/ADR, EAGLE o Safety Authority.

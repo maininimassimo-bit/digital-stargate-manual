@@ -11,8 +11,11 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | Documento | Ruolo |
 |---|---|
 | `AI_BOOTSTRAP.md` | Root bootstrap |
-| [Handover 14/09/2026](HANDOVER_2026-09-14.md) | Handover corrente |
-| [Current Technical Baseline 14/09/2026](CURRENT_TECHNICAL_BASELINE_2026-09-14.md) | Baseline tecnica corrente |
+| [Handover 15/09/2026](HANDOVER_2026-09-15.md) | Handover corrente |
+| [Current Technical Baseline 15/09/2026](CURRENT_TECHNICAL_BASELINE_2026-09-15.md) | Baseline tecnica corrente |
+| [F3-A1 Site Authority Handoff](../architecture/assessments/BKL-031-F3-A1-Site-Authority-Contract-Handoff-2026-09-15.md) | Scope e gate del package corrente |
+| [F3-A1 Governed Site Authority Contract](../architecture/scientific-assets/BKL-031-F3-A1-Governed-Site-Authority-Contract.md) | Contratto normativo review candidate |
+| [F3-A1 Validation Plan](../architecture/validation/BKL-031-F3-A1-Site-Authority-Contract-Validation-Plan.md) | Matrice di validazione non eseguita |
 | [Enterprise Architecture Context](ENTERPRISE_ARCHITECTURE_CONTEXT.md) | Contesto enterprise |
 | [Repository Knowledge Map](REPOSITORY_KNOWLEDGE_MAP.md) | Mappa authority/projection |
 | [BKL-037 Closure](BKL-037-CLOSURE-2026-09-10.md) | Closure del predecessore accettato |
@@ -69,11 +72,12 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-046 — AI Post-Processing Assistant: CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica read-only con limitation;
 - BKL-031 F1: ACCEPTED / POST-MERGE VERIFIED;
 - BKL-031 F2: ACCEPTED / POST-MERGE VERIFIED;
-- BKL-031 F3: Solution Architecture `ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED`; BKL-031 remains active; no implementation slice is promoted.
+- BKL-031 F3: Solution Architecture `ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED`; closure PR #192 merged as `21524c687a1fa6a9d840a3951c7ef4fe298f9c3c`;
+- BKL-031 F3-A1: Site Authority Contract `AUTHORIZED REVIEW CANDIDATE / NOT IMPLEMENTED`; MI02 normative resolution pending ARB.
 
 ## Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED — IMPLEMENTATION DECISION PENDING] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT REVIEW CANDIDATE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## Authority / projection
 
