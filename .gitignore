@@ -70,3 +70,8 @@ SessionTransfer-Launcher/
 
 # Terraform local working directories
 **/.terraform/
+**/*.tfvars
+**/*.tfstate
+**/*.tfstate.*
+**/backend.gcs.hcl
+**/backend_migration.tf
