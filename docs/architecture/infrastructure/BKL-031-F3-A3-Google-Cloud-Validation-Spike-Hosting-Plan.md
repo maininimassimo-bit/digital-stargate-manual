@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-A3-INFRA-001 |
-| Status | **PROPOSED — AUTHENTICATED EXACT-HEAD PLAN VERIFIED / IMAGE UNPUBLISHED / PLATFORM NOT APPLIED** |
+| Status | **PROPOSED — AUTHENTICATED PLAN VERIFIED / REGISTRY-FOUNDATION GATE PREPARED NOT EXECUTED / PLATFORM NOT APPLIED** |
 | Version | 1.0 |
 | Date | 2026-09-15 |
 | Baseline | `main@527b298094b07e5a00317e60cab3abefed7a5759` |
@@ -22,7 +22,8 @@ Provide an isolated, low-idle-cost execution boundary for the future F3-A3 valid
 | GitHub Actions | static validation and manual exact-head authenticated plan | OIDC only; no service-account key |
 | Workload Identity Pool | trusts only this repository and `refs/heads/main` | one deployer service account |
 | bootstrap Terraform | APIs, deployer/runtime identities and three private buckets | one-time administrator action |
-| platform Terraform | Artifact Registry, private VPC/subnet and Cloud Run Job | no apply in this package |
+| registry Terraform | one Artifact Registry Docker repository in dedicated state | exact saved-plan apply only after separate review |
+| platform Terraform | private VPC/subnet and Cloud Run Job | no apply in this package |
 | data bucket | read-only kernel/IERS input for runtime identity | no public access |
 | evidence bucket | create-only spike evidence from runtime identity | versioned, no public access |
 | state bucket | Terraform state for later authenticated runs | versioned, deployer-only |
@@ -107,4 +108,6 @@ CI run `35122782246` acquired all ten artifacts ephemerally with exact hashes, b
 
 Authenticated workflow run `35131365596` on exact commit `380bd8c3d04f570acb21a9a7f532930111adcdc8` used the reviewed WIF deployer identity and produced two identical unpublished OCI manifests at `sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce`. The saved plan is exactly five additions, zero changes and zero destroys. It was not retained outside the job; its text SHA-256 is `6fd9c1c3f9d1c754d310f88fa2e8f3dfb2422a5a9195ec40f6f57087bbb8c83e`. The platform backend contains one validated empty state and no lock. Evidence is recorded in `BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-001` at SHA-256 `06cf923ae2bad1e869782bffd6a7e5389f9a68419d6199d0d7df5319f50b12e6`.
 
-Artifact Registry publication remains impossible until the planned `dsg-f3-a3` repository exists. The next gate is a separately reviewed registry-foundation apply followed by exact OCI publication and a refreshed authenticated plan. Image push, platform apply, artifact upload and job execution remain `NOT EXECUTED`.
+Artifact Registry publication remains impossible until the planned `dsg-f3-a3` repository exists. The next gate is a separately reviewed registry-foundation apply followed by exact OCI publication and a refreshed authenticated plan. Image push, platform apply, artifact upload and job execution remain `NOT_EXECUTED`.
+
+The repository now prepares the registry foundation as an explicit-dispatch, main-only WIF workflow. Artifact Registry ownership is isolated in a dedicated Terraform root and state; the platform state is empty, so the extraction requires no state move. Static policy requires exactly one registry resource and prohibits `-target`, bootstrap/platform apply, image publication and cloud mutations outside the saved registry plan. This source change does not create the repository or publish the image. Exact OCI publication remains the next separate gate after registry evidence is recorded.

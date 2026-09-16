@@ -8,8 +8,10 @@ on:
       - ".github/scripts/verify-bkl-031-f3-a3-container-evidence.mjs"
       - ".github/scripts/acquire-bkl-031-f3-a3-container-artifacts.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-platform-plan-gate.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-registry-foundation-gate.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - ".github/workflows/bkl-031-f3-a3-authenticated-platform-plan.yml"
+      - ".github/workflows/bkl-031-f3-a3-registry-foundation.yml"
       - "infrastructure/bkl-031-f3-a3-gcp/**"
       - "docs/architecture/ADR-010-Ephemeris-Lunar-Method-and-Validation-Profile.md"
       - "docs/architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md"
@@ -24,8 +26,10 @@ on:
       - ".github/scripts/verify-bkl-031-f3-a3-container-evidence.mjs"
       - ".github/scripts/acquire-bkl-031-f3-a3-container-artifacts.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-platform-plan-gate.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-registry-foundation-gate.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - ".github/workflows/bkl-031-f3-a3-authenticated-platform-plan.yml"
+      - ".github/workflows/bkl-031-f3-a3-registry-foundation.yml"
       - "infrastructure/bkl-031-f3-a3-gcp/**"
   workflow_dispatch:
 
@@ -54,6 +58,8 @@ jobs:
         run: node .github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs
       - name: Verify authenticated plan-only gate
         run: node .github/scripts/verify-bkl-031-f3-a3-platform-plan-gate.mjs
+      - name: Verify Artifact Registry foundation gate
+        run: node .github/scripts/verify-bkl-031-f3-a3-registry-foundation-gate.mjs
 
   terraform:
     name: Terraform validate (${{ matrix.directory }})
@@ -64,6 +70,7 @@ jobs:
       matrix:
         directory:
           - infrastructure/bkl-031-f3-a3-gcp/bootstrap
+          - infrastructure/bkl-031-f3-a3-gcp/registry
           - infrastructure/bkl-031-f3-a3-gcp/platform
     defaults:
       run:

@@ -1,15 +1,16 @@
 # BKL-031 F3-A3 Google Cloud infrastructure
 
-This directory contains repository-only Terraform scaffolding for the future ephemeris/lunar validation spike.
+This directory contains the governed Terraform and container gates for the future ephemeris/lunar validation spike.
 
-Current state: BOOTSTRAP APPLIED, REMOTE STATE AND BACKEND PROMOTION POST-VERIFIED, REPRODUCIBLE OFFLINE CONTAINER BUILD AND NETWORK-DISABLED PREFLIGHT VERIFIED, AUTHENTICATED EXACT-HEAD PLATFORM PLAN VERIFIED, IMAGE NOT PUBLISHED, PLATFORM NOT APPLIED, JOB NOT EXECUTED.
+Current state: BOOTSTRAP APPLIED, REMOTE STATE AND BACKEND PROMOTION POST-VERIFIED, REPRODUCIBLE OFFLINE CONTAINER BUILD AND NETWORK-DISABLED PREFLIGHT VERIFIED, AUTHENTICATED FIVE-RESOURCE PLAN VERIFIED, SEPARATE REGISTRY-FOUNDATION GATE PREPARED BUT NOT EXECUTED, IMAGE NOT PUBLISHED, REMAINING PLATFORM NOT APPLIED, JOB NOT EXECUTED.
 
 ## Directories
 
 - bootstrap: enables required APIs, creates the GitHub Workload Identity Federation trust, deployer/runtime service accounts, and private state/data/evidence buckets.
 - container: records the exact linux/amd64 base image, hash-locked Python wheels, pinned IERS-A snapshot identity, offline Astropy policy and fail-closed entrypoint for a future build.
 - method-profile: stores the canonical owner-approved decision profile used by the future container preflight.
-- platform: creates Artifact Registry, an isolated VPC/subnet without Cloud NAT, and the digest-pinned Cloud Run Job.
+- registry: owns only the `dsg-f3-a3` Docker repository in a dedicated Terraform state.
+- platform: owns the isolated VPC/subnet without Cloud NAT and the digest-pinned Cloud Run Job after image publication.
 
 ## Safety and privacy
 
@@ -65,6 +66,8 @@ The one-time bootstrap was applied from the reviewed saved plan for `main@af8b18
 
 Workflow run `35131365596` on exact main commit `380bd8c3d04f570acb21a9a7f532930111adcdc8` authenticated through the main-only WIF, rebuilt two identical unpublished OCI candidates and verified manifest digest `sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce`. Its saved Terraform plan contains exactly five additions, zero changes and zero destroys. The Artifact Registry repository, VPC, subnet and Cloud Run Job were confirmed absent before planning. The GCS backend contains only the empty state with zero resources and no residual lock. `BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-001` records the result. Because the target repository is one of the five unapplied resources, image publication remains blocked until a separately reviewed registry-foundation apply. Platform apply, artifact upload and scientific execution remain blocked.
 
+The registry foundation is now isolated from the platform root without `-target`. The manual main-only workflow `BKL-031 F3-A3 Artifact Registry Foundation` fails closed unless the requested commit is the exact checked-out `main` head, the repository and registry state are absent, and the saved plan contains exactly one create action for `google_artifact_registry_repository.spike`. It applies only that saved plan and verifies one-resource state and zero drift. The source package does not execute the workflow. Exact-head CI, process-separated review, expected-head merge and post-merge verification are required before dispatch. Image publication is a later separate gate. The refreshed platform-plan workflow expects the future published digest and exactly four remaining create actions; it still cannot apply them.
+
 ## Local validation
 
 Run:
@@ -73,11 +76,15 @@ Run:
 2. node .github/scripts/verify-bkl-031-f3-a3-container-evidence.mjs
 3. node .github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs
 4. node .github/scripts/verify-bkl-031-f3-a3-platform-plan-gate.mjs
-5. terraform -chdir=bootstrap fmt -check
-6. terraform -chdir=bootstrap init -backend=false
-7. terraform -chdir=bootstrap validate
-8. terraform -chdir=platform fmt -check
-9. terraform -chdir=platform init -backend=false
-10. terraform -chdir=platform validate
+5. node .github/scripts/verify-bkl-031-f3-a3-registry-foundation-gate.mjs
+6. terraform -chdir=bootstrap fmt -check
+7. terraform -chdir=bootstrap init -backend=false
+8. terraform -chdir=bootstrap validate
+9. terraform -chdir=registry fmt -check
+10. terraform -chdir=registry init -backend=false
+11. terraform -chdir=registry validate
+12. terraform -chdir=platform fmt -check
+13. terraform -chdir=platform init -backend=false
+14. terraform -chdir=platform validate
 
 No command above authenticates to GCP or mutates cloud resources.
