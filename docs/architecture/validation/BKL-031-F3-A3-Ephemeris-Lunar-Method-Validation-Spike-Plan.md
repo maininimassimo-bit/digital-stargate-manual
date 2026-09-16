@@ -244,7 +244,7 @@ Stage V0 record `A3-S01` is complete. Preparatory exact dependency/IERS acquisit
 
 ## 18. Governance stop
 
-F3-OD05, bootstrap/MI02, reproducible offline container-build and authenticated plan-only gates are closed at evidence level. The target Artifact Registry repository does not yet exist and is part of the unapplied plan. Stop before a separately reviewed registry-foundation apply, exact OCI publication and refreshed published-digest plan/apply gate. This plan does not authorize artifact upload, external reference calls, protected-site use, scientific execution, schema, adapter or runtime work.
+F3-OD05, bootstrap/MI02, reproducible offline container-build, authenticated plan-only and isolated Artifact Registry foundation gates are closed at evidence level. The target repository exists with one-resource state, zero drift and zero images. Stop before separately reviewed exact OCI publication and the refreshed published-digest four-resource plan/apply gate. This plan does not authorize artifact upload, external reference calls, protected-site use, scientific execution, schema, adapter or runtime work.
 
 ## 19. Approved execution and request envelope
 
