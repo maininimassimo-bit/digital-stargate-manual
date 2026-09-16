@@ -104,33 +104,18 @@ resource "google_cloud_run_v2_job" "spike" {
         }
 
         env {
-          name  = "DSG_MAX_TARGETS"
-          value = "50"
+          name  = "DSG_METHOD_PROFILE_ID"
+          value = "BKL-031-F3-A3-METHOD-PROFILE-001"
         }
 
         env {
-          name  = "DSG_MAX_INSTANTS_PER_TARGET"
-          value = "2016"
+          name  = "DSG_METHOD_PROFILE_PATH"
+          value = var.method_profile_path
         }
 
         env {
-          name  = "DSG_MAX_TARGET_INSTANT_PAIRS"
-          value = "10000"
-        }
-
-        env {
-          name  = "DSG_MAX_SPAN_DAYS"
-          value = "7"
-        }
-
-        env {
-          name  = "DSG_MIN_GRID_STEP_SECONDS"
-          value = "60"
-        }
-
-        env {
-          name  = "DSG_MAX_REQUEST_BYTES"
-          value = "262144"
+          name  = "DSG_METHOD_PROFILE_SHA256"
+          value = var.method_profile_sha256
         }
       }
 

@@ -72,6 +72,28 @@ variable "kernel_artifact_uri" {
   }
 }
 
+variable "method_profile_sha256" {
+  description = "Exact reviewed ARB-213-MI01 method-profile digest."
+  type        = string
+  nullable    = false
+
+  validation {
+    condition     = var.method_profile_sha256 == "e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca"
+    error_message = "ARB-213-MI01 requires the exact reviewed method-profile SHA-256."
+  }
+}
+
+variable "method_profile_path" {
+  description = "Path of the immutable method profile embedded in the future container image."
+  type        = string
+  nullable    = false
+
+  validation {
+    condition     = var.method_profile_path == "/app/dsg/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json"
+    error_message = "The future container must expose the reviewed method profile at the exact preflight path."
+  }
+}
+
 variable "iers_artifact_sha256" {
   type      = string
   nullable  = false

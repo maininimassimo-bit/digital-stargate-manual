@@ -31,6 +31,12 @@ All must be satisfied before execution:
 
 F3-OD04–F3-OD10 are recorded. F3-OD05 approves the exact `de442s.bsp` identity, but every scientific case remains `NOT EXECUTED`. The IERS snapshot must be pinned by SHA-256, no more than 30 days old at campaign preparation, with execution-time auto-download disabled and fail-closed coverage checks.
 
+## 2.1 Immutable method-profile preflight
+
+The canonical repository profile is `BKL-031-F3-A3-METHOD-PROFILE-001` with SHA-256 `e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`. It records the approved method roles and every F3-OD06 scientific threshold, F3-OD07 time-data policy and F3-OD10 request/capacity limit. The same artifact also carries SPK identity, privacy, hosting and failure semantics.
+
+Before any future scientific process starts, the container entrypoint must run `.github/scripts/verify-bkl-031-f3-a3-method-profile.mjs` against the embedded bytes and the expected digest supplied by Terraform. A missing profile, content mutation, unreviewed digest or value drift exits non-zero before calculation. Static CI executes the positive profile and negative drift/digest cases. Container build and execution remain `NOT EXECUTED`.
+
 ## 3. Candidate manifests to prepare after authorization
 
 | Track | Observed candidate baseline | Required execution pin |

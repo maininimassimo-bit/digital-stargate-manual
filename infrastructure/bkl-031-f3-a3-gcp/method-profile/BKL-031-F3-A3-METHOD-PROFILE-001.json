@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0",
+  "profileId": "BKL-031-F3-A3-METHOD-PROFILE-001",
+  "status": "OWNER_APPROVED_DECISION_PROFILE_NOT_EXECUTED",
+  "decisionAuthority": "BKL-031-F3-A3-OD-2026-09-15",
+  "spkDecisionRef": "BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16",
+  "runtimeAuthority": false,
+  "method": {
+    "primary": {
+      "library": "astropy",
+      "version": "8.0.1",
+      "spkAdapter": "jplephem",
+      "spkAdapterVersion": "2.24"
+    },
+    "crossCheck": {
+      "library": "skyfield",
+      "version": "1.55"
+    },
+    "externalReference": {
+      "provider": "JPL Horizons",
+      "apiVersion": "1.3",
+      "role": "VALIDATION_ONLY",
+      "runtimeFallback": false
+    }
+  },
+  "kernel": {
+    "artifact": "de442s.bsp",
+    "sha256": "54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c",
+    "coverageStartEt": "1849-12-26T00:00:00 ET",
+    "coverageEndEt": "2150-01-22T00:00:00 ET",
+    "outsideCoverageResult": "OUT_OF_COVERAGE",
+    "extrapolationAllowed": false,
+    "silentSubstitutionAllowed": false
+  },
+  "scientificSemantics": {
+    "altitudeAzimuthMode": "GEOMETRIC_AIRLESS",
+    "pressurePascal": 0,
+    "inputTimeScale": "UTC",
+    "refractionMode": "DISABLED",
+    "zenithScalarAzimuthUpperAltitudeDegrees": 85,
+    "perMetricPassRequired": true,
+    "averagingAllowed": false,
+    "unexplainedOverBudgetBlocksAcceptance": true
+  },
+  "thresholds": {
+    "altitudeMinimumDegrees": 5,
+    "altitudeMaximumErrorArcseconds": 60,
+    "azimuthMinimumAltitudeDegrees": 5,
+    "azimuthMaximumAltitudeDegrees": 85,
+    "azimuthMaximumErrorArcseconds": 60,
+    "nearZenithSphericalSeparationMaximumErrorArcseconds": 60,
+    "targetMoonSeparationMaximumErrorArcseconds": 60,
+    "transitCulminationMaximumErrorSeconds": 5,
+    "lunarIlluminationMaximumAbsoluteDifference": 0.001,
+    "riseSetGeometricMaximumErrorSecondsWhenIncluded": 60
+  },
+  "timeData": {
+    "snapshotKind": "IERS_A",
+    "sha256Required": true,
+    "maximumAgeDaysAtCampaignPreparation": 30,
+    "autoDownloadDuringExecution": false,
+    "outsideCoverageResult": "TIME_DATA_UNAVAILABLE",
+    "refreshPolicy": "GOVERNED_CAMPAIGN_REVISION"
+  },
+  "privacy": {
+    "siteProfile": "SYNTHETIC_OR_GENERALIZED_ONLY",
+    "protectedSiteInRepository": false,
+    "protectedSiteInLogs": false,
+    "protectedSiteInExternalRequests": false,
+    "localArtifactsPrivate": true
+  },
+  "hosting": {
+    "kind": "GOOGLE_CLOUD_RUN_JOB",
+    "region": "europe-west8",
+    "cpu": 2,
+    "memoryMiB": 2048,
+    "taskCount": 1,
+    "parallelism": 1,
+    "taskTimeoutSeconds": 120,
+    "maxRetries": 0,
+    "publicInternetEgress": false,
+    "observatoryControlAccess": false
+  },
+  "requestBounds": {
+    "maximumTargets": 50,
+    "maximumInstantsPerTarget": 2016,
+    "maximumTargetInstantPairs": 10000,
+    "maximumSpanDays": 7,
+    "minimumGridStepSeconds": 60,
+    "maximumRequestBytes": 262144,
+    "maximumConcurrency": 2,
+    "serviceP95SecondsAfterWarmup": 5,
+    "hardTimeoutSeconds": 15,
+    "batchTaskTimeoutSeconds": 120
+  },
+  "failurePolicy": {
+    "failClosed": true,
+    "silentFallbackAllowed": false,
+    "remoteReferenceAsRuntimeFallback": false,
+    "resultValueAllowedWhenUnavailableOrConflicted": false
+  }
+}

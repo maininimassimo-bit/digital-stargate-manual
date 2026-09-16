@@ -42,7 +42,11 @@ This ADR records complete owner dispositions for F3-OD04–F3-OD10 and authorize
 
 ## Method profile
 
-The selected roles are fixed for the future spike. Exact dependency artifacts, container image digest, IERS snapshot identity and the F3-OD05 SPK identity must be recorded in the campaign manifest before execution.
+The selected roles are fixed for the future spike. The repository carries the canonical immutable profile `BKL-031-F3-A3-METHOD-PROFILE-001` at SHA-256 `e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`. It includes every approved F3-OD06, F3-OD07 and F3-OD10 value together with the method, SPK, privacy, hosting and fail-closed boundaries. Terraform passes only its exact ID, path and digest; duplicated request-bound environment variables are prohibited.
+
+The future container must embed those exact bytes at `/app/dsg/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json` and invoke the repository preflight before scientific code. The preflight rejects modified bytes, an unreviewed digest or a changed approved value. This is repository-level executable contract evidence only: no container image has been built or executed, and the IERS snapshot identity remains a separately pinned campaign artifact.
+
+Exact dependency artifacts, container image digest, IERS snapshot identity and the F3-OD05 SPK identity must be recorded in the campaign manifest before execution.
 
 Astropy and Skyfield using the same SPK are an implementation cross-check, not data-model independence. Horizons may be used only as a separately authorized validation reference and only with non-protected location inputs.
 
@@ -103,7 +107,7 @@ Not authorized now:
 ### Negative
 
 - a one-time GCP administrator bootstrap is still required;
-- ARB-213-MI01, ARB-213-MI02 and authenticated exact-head plan review still block plan/apply and spike execution;
+- ARB-213-MI01 has repository-level immutable-profile and drift-rejection evidence; ARB-213-MI02, exact container inclusion evidence and authenticated exact-head plan review still block plan/apply and spike execution;
 - Cloud Run cold start and regional service availability must be measured;
 - private VPC egress prevents Horizons from the local job profile.
 
@@ -139,6 +143,8 @@ Current evidence:
 - BKL-031-F3-A3-SOLUTION-001;
 - BKL-031-F3-A3-OD-2026-09-15;
 - BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16;
+- BKL-031-F3-A3-METHOD-PROFILE-001@sha256:e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca;
+- ARB-213-MI01;
 - BKL-031-F3-A3-INFRA-001;
 - BKL-031-F3-A3-VAL-001;
 - ADR-009;
