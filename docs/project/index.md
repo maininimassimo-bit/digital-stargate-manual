@@ -43,11 +43,11 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [F3-A2 Setup Authority Program Assessment/Handoff](../architecture/assessments/BKL-031-F3-A2-Setup-Authority-Program-Assessment-and-Handoff-2026-09-15.md) | Historical handoff; D5 repository authority accepted, successor selection current |
 | [F3-A3 Method ADR and Validation Spike Program Handoff](../architecture/assessments/BKL-031-F3-A3-Ephemeris-Lunar-Method-ADR-and-Validation-Spike-Program-Assessment-and-Handoff-2026-09-15.md) | Current documentation-only handoff; no provider selected, S10 unavailable |
 | [F3-A3 Method Decision Preparation](../architecture/scientific-assets/BKL-031-F3-A3-Ephemeris-Lunar-Method-Decision-Preparation.md) | Current Solution Architecture review candidate; owner decision pending |
-| [ADR-010 Ephemeris/Lunar Method and Validation Profile](../architecture/ADR-010-Ephemeris-Lunar-Method-and-Validation-Profile.md) | Proposed; no method selected |
-| [F3-A3 Method Validation Spike Plan](../architecture/validation/BKL-031-F3-A3-Ephemeris-Lunar-Method-Validation-Spike-Plan.md) | Approved profile; F3-OD05 pending; not executed |
+| [ADR-010 Ephemeris/Lunar Method and Validation Profile](../architecture/ADR-010-Ephemeris-Lunar-Method-and-Validation-Profile.md) | Proposed; owner method complete, static container/IERS evidence prepared, scientific validation absent |
+| [F3-A3 Method Validation Spike Plan](../architecture/validation/BKL-031-F3-A3-Ephemeris-Lunar-Method-Validation-Spike-Plan.md) | Stage V0 static evidence prepared; V1–V5 and scientific cases not executed |
 | [F3-A3 Owner Decision Record](BKL-031-F3-A3-OWNER-DECISION-RECORD-2026-09-15.md) | Complete owner decision; no execution authority |
 | [F3-A3 F3-OD05 Exact SPK Approval](BKL-031-F3-A3-F3-OD05-SPK-APPROVAL-2026-09-16.md) | `de442s.bsp` identity, coverage, provenance and notices approved; no upload/execution authority |
-| [F3-A3 Google Cloud Hosting Plan](../architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md) | Repository scaffolding only; bootstrap not executed |
+| [F3-A3 Google Cloud Hosting Plan](../architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md) | Bootstrap/remote state post-verified; static container/IERS evidence prepared; platform not executed |
 | [ARB PR 213 F3-A3 Google Cloud IaC Review](../architecture/reviews/ARB-PR213-BKL-031-F3-A3-GCP-IaC-AI-Assisted-Review-2026-09-16.md) | Approved with Conditions — 96/100; pre-apply conditions remain |
 | [RQ PR 213 F3-A3 Google Cloud IaC Release Quality](../architecture/reviews/RQ-PR213-BKL-031-F3-A3-GCP-IaC-AI-Assisted-Release-Quality-Review-2026-09-16.md) | Conditionally Ready for Merge; not ready for cloud apply/spike |
 | [PR #195 F3-A2 Handoff AI-Assisted ARB Review](../architecture/reviews/ARB-PR195-BKL-031-F3-A2-Handoff-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 98/100; non equivalente ad approvazione umana indipendente |

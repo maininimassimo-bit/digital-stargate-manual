@@ -100,8 +100,8 @@ variable "iers_artifact_sha256" {
   sensitive = true
 
   validation {
-    condition     = can(regex("^[0-9a-f]{64}$", var.iers_artifact_sha256))
-    error_message = "The IERS snapshot requires an exact lowercase SHA-256."
+    condition     = var.iers_artifact_sha256 == "43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc"
+    error_message = "iers_artifact_sha256 must match the reviewed astropy-iers-data 0.2026.9.14.0.56.43 wheel."
   }
 }
 

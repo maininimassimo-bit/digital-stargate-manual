@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-16",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "484802c6711a285e98e8c0fb0a983a1648547f8c4f72e0fa783743e49c18ba54",
+  "sourceDigest": "182520666f9cd1d31259751a3968d75af2d02e4d3470ab37fe5bef19073737b4",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-A3 bootstrap applied and MI02 post-promotion verified; ADR-010 proposed; S10 unavailable",
+  "projectStatus": "BKL-031 F3-A3 static container/IERS evidence prepared after MI02 closure; ADR-010 proposed; S10 unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A3 exact container and IERS inclusion evidence without platform or scientific execution",
-  "target": "Prepare exact container and IERS inclusion evidence at repository level. Stop before platform plan/apply, artifact acquisition or upload, container build/push, spike execution, Horizons request or runtime activation.",
+  "nextMilestone": "BKL-031 F3-A3 bounded artifact acquisition and container-build evidence",
+  "target": "Acquire only the exact reviewed dependency/IERS artifacts and produce reproducible container-build evidence. Stop before image push, platform plan/apply, artifact upload, spike execution, Horizons request, protected-site use or runtime activation.",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -307,7 +307,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3-A3 decisions, immutable method-profile evidence and ARB-213-MI02 post-promotion verification are complete. The reviewed bootstrap added 27 resources with 0 update/0 destroy and state is active in protected GCS. Exact container/IERS evidence and all scientific cases remain open or NOT EXECUTED; ADR-010 remains Proposed and S10 remains UNAVAILABLE."
+          "note": "F3-A3 decisions, immutable method-profile evidence and ARB-213-MI02 post-promotion verification are complete. Exact static container/IERS identities and fail-closed source controls are prepared; no dependency/IERS bytes were acquired and no image was built. Platform and scientific cases remain NOT EXECUTED; ADR-010 remains Proposed and S10 remains UNAVAILABLE."
         },
         {
           "id": "BKL-032",

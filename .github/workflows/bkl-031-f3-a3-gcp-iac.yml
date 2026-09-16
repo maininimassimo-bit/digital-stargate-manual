@@ -5,6 +5,7 @@ on:
     paths:
       - ".github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-method-profile.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-container-evidence.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - "infrastructure/bkl-031-f3-a3-gcp/**"
       - "docs/architecture/ADR-010-Ephemeris-Lunar-Method-and-Validation-Profile.md"
@@ -17,6 +18,7 @@ on:
     paths:
       - ".github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-method-profile.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-container-evidence.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - "infrastructure/bkl-031-f3-a3-gcp/**"
   workflow_dispatch:
@@ -40,6 +42,8 @@ jobs:
           DSG_METHOD_PROFILE_PATH: infrastructure/bkl-031-f3-a3-gcp/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json
           DSG_METHOD_PROFILE_SHA256: e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca
         run: node .github/scripts/verify-bkl-031-f3-a3-method-profile.mjs
+      - name: Verify exact static container and IERS inclusion evidence
+        run: node .github/scripts/verify-bkl-031-f3-a3-container-evidence.mjs
       - name: Verify isolation and fail-closed gates
         run: node .github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs
 

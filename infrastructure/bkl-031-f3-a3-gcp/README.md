@@ -2,11 +2,12 @@
 
 This directory contains repository-only Terraform scaffolding for the future ephemeris/lunar validation spike.
 
-Current state: BOOTSTRAP APPLIED, BOOTSTRAP STATE MIGRATED TO GCS, BACKEND PROMOTION UNDER REVIEW, PLATFORM NOT PLANNED, PLATFORM NOT APPLIED, JOB NOT EXECUTED.
+Current state: BOOTSTRAP APPLIED, REMOTE STATE AND BACKEND PROMOTION POST-VERIFIED, STATIC CONTAINER/IERS INCLUSION EVIDENCE PREPARED, CONTAINER NOT BUILT, PLATFORM NOT PLANNED OR APPLIED, JOB NOT EXECUTED.
 
 ## Directories
 
 - bootstrap: enables required APIs, creates the GitHub Workload Identity Federation trust, deployer/runtime service accounts, and private state/data/evidence buckets.
+- container: records the exact linux/amd64 base image, hash-locked Python wheels, pinned IERS-A snapshot identity, offline Astropy policy and fail-closed entrypoint for a future build.
 - method-profile: stores the canonical owner-approved decision profile used by the future container preflight.
 - platform: creates Artifact Registry, an isolated VPC/subnet without Cloud NAT, and the digest-pinned Cloud Run Job.
 
@@ -56,18 +57,21 @@ The platform module deliberately requires:
 
 F3-OD05 is approved at artifact-identity level by `BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16`. The checked-in example carries the approved non-secret SPK digest and future private URI while retaining placeholders for still-unmaterialized runtime identities and artifacts. The SPK binary is never repository content.
 
-The future container must embed the exact profile at `/app/dsg/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json` and invoke `.github/scripts/verify-bkl-031-f3-a3-method-profile.mjs` as a fail-closed preflight before scientific code. CI verifies the exact digest and proves that content or digest drift is rejected. No container has been built or executed.
+`BKL-031-F3-A3-CONTAINER-MANIFEST-001` fixes the future linux/amd64 Python base by platform digest, every Python wheel by version and SHA-256, and `astropy-iers-data 0.2026.9.14.0.56.43` by SHA-256 `43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc`. Its raw SHA-256 is `7923206d85c5670ef56f9310a813c165c7d516d226c994561516c843b338412e`. The future container embeds the exact method profile and requires a fail-closed preflight before any supplied command. CI rejects manifest, dependency, base-image, IERS, policy or source-file drift.
 
-This package has no authenticated plan/apply workflow. The one-time bootstrap was applied from the reviewed saved plan for `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46`: 27 resources added, 0 changed and 0 destroyed. PR #219 promoted the permanent backend as merge `6c6a9454f1f1f13f72b4ae5098c0f2475b537d60`; remote lineage/content, recovery candidate, locking and a zero-drift exit code `0` were then verified. ARB-213-MI02 is satisfied. Platform plan/apply, upload and execution remain blocked pending exact container/IERS evidence and a separate authenticated exact-head review.
+This is static inclusion evidence. Official metadata was inspected, but dependency/IERS bytes were not acquired, installed or committed; the image was not built, pushed or executed. The next separately governed step is bounded artifact acquisition and container-build evidence. Platform plan/apply, upload and scientific execution remain outside this gate.
+
+This package has no authenticated plan/apply workflow. The one-time bootstrap was applied from the reviewed saved plan for `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46`: 27 resources added, 0 changed and 0 destroyed. PR #219 promoted the permanent backend as merge `6c6a9454f1f1f13f72b4ae5098c0f2475b537d60`; remote lineage/content, recovery candidate, locking and a zero-drift exit code `0` were then verified. ARB-213-MI02 is satisfied. Platform plan/apply, upload and execution remain blocked pending materialized container evidence and a separate authenticated exact-head review.
 
 ## Local validation
 
 Run:
 
 1. set `DSG_METHOD_PROFILE_PATH=infrastructure/bkl-031-f3-a3-gcp/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json` and `DSG_METHOD_PROFILE_SHA256=e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`, then run `node .github/scripts/verify-bkl-031-f3-a3-method-profile.mjs`
-2. node .github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs
-3. terraform -chdir=bootstrap fmt -check
-4. terraform -chdir=bootstrap init -backend=false
+2. node .github/scripts/verify-bkl-031-f3-a3-container-evidence.mjs
+3. node .github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs
+4. terraform -chdir=bootstrap fmt -check
+5. terraform -chdir=bootstrap init -backend=false
 5. terraform -chdir=bootstrap validate
 6. terraform -chdir=platform fmt -check
 7. terraform -chdir=platform init -backend=false

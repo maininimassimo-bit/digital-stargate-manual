@@ -4,7 +4,7 @@
 |---|---|
 | Versione | 7.1 |
 | Baseline | 16/09/2026 |
-| Stato | Current root bootstrap — F3-A3 bootstrap and MI02 post-promotion verification complete; no platform/scientific execution authority |
+| Stato | Current root bootstrap — F3-A3 static container/IERS evidence prepared after MI02 closure; no artifact acquisition, build, platform or scientific execution authority |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -70,7 +70,7 @@ La closure BKL-046 non dichiara efficacia scientifica né produzione: `NOT_EVALU
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 EXACT SPK DECISION CURRENT / ADR-010 PROPOSED / S10 UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 STATIC CONTAINER-IERS EVIDENCE PREPARED / ADR-010 PROPOSED / S10 UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -86,7 +86,7 @@ PR #209 merged with expected-head control as `bc4307c2042a45985622044e11631421de
 
 `BKL-031-F3-A2-D5` is ACCEPTED / POST-MERGE VERIFIED. The protected receipt is integrated, the historical DRAFT remains immutable and the separate `APPROVED` envelope preserves the assignment payload and digest. The repository authority resolves `AVAILABLE` only for authorized validated input with approved source authorities. S08 remains `UNAVAILABLE`; runtime S09 remains `UNAVAILABLE_CURRENT` because no adapter exists.
 
-PR #212 integrated the F3-A3 decision-preparation package as `527b298094b07e5a00317e60cab3abefed7a5759`. PR #214 integrated the Google Cloud scaffolding, PR #215 integrated the ARB-213-MI02 state-lifecycle procedure, PR #217 integrated the immutable method profile and PR #218 added the reviewed Windows provider checksum. The authorized bootstrap plan for `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46` was applied with 27 additions, 0 changes and 0 destroys; bootstrap state is active in protected GCS. PR #219 promoted the permanent backend and the post-promotion remote-state, recovery and zero-drift checks satisfy ARB-213-MI02. ADR-010 remains Proposed, container inclusion/execution is unproven and S10 remains `UNAVAILABLE`.
+PR #212 integrated the F3-A3 decision-preparation package as `527b298094b07e5a00317e60cab3abefed7a5759`. PR #214 integrated the Google Cloud scaffolding, PR #215 integrated the ARB-213-MI02 state-lifecycle procedure, PR #217 integrated the immutable method profile and PR #218 added the reviewed Windows provider checksum. The authorized bootstrap plan for `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46` was applied with 27 additions, 0 changes and 0 destroys; bootstrap state is active in protected GCS. PR #219 promoted the permanent backend and the post-promotion remote-state, recovery and zero-drift checks satisfy ARB-213-MI02. ADR-010 remains Proposed; static container/IERS identities are prepared, while acquisition, build and execution remain unproven; S10 remains `UNAVAILABLE`.
 
 ## F3-A2-D4 acceptance checkpoint — 15/09/2026
 
@@ -118,7 +118,7 @@ The owner approved `de442s.bsp` with SHA-256 `54d97562a5b094d298b1b8eafa5a2e17e3
 
 ## F3-A3 immutable method profile — 16/09/2026
 
-`BKL-031-F3-A3-METHOD-PROFILE-001` records the approved F3-OD04–F3-OD10 method, scientific, time-data, privacy, hosting and request limits at SHA-256 `e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`. Static preflight validates the exact bytes and rejects drift. The bootstrap-only plan/apply, protected remote state and MI02 post-promotion evidence now exist; no platform plan/apply, container image, IERS artifact or scientific execution exists. Exact container/IERS inclusion and campaign evidence remain gates.
+`BKL-031-F3-A3-METHOD-PROFILE-001` records the approved F3-OD04–F3-OD10 method, scientific, time-data, privacy, hosting and request limits at SHA-256 `e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`. Static preflight validates the exact bytes and rejects drift. The bootstrap-only plan/apply, protected remote state and MI02 post-promotion evidence exist. `BKL-031-F3-A3-CONTAINER-MANIFEST-001` now fixes the future base, dependency wheels and IERS identity as static evidence; no bytes were acquired and no image, platform plan/apply or scientific execution exists. Bounded artifact acquisition and container-build evidence are the next gate.
 
 ## F3-A3 ARB-213-MI02 bootstrap execution — 16/09/2026
 

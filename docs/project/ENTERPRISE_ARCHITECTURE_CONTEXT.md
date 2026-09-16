@@ -117,7 +117,7 @@ La repository authority F3-A2-D5 è APPROVED/AVAILABLE per caller autorizzati, m
 
 ## 12. F3-A3 enterprise boundary
 
-F3-A3 remains a governed validation package. Owner decisions F3-OD04–F3-OD10 and ARB-213-MI01 repository evidence are complete. The bootstrap is applied, its state is remote and ARB-213-MI02 is satisfied by permanent-backend and post-promotion evidence. ADR-010 remains Proposed, the scientific campaign is not executed and S10 remains `UNAVAILABLE`; Safety Authority and EAGLE operations are unchanged.
+F3-A3 remains a governed validation package. Owner decisions F3-OD04–F3-OD10 and ARB-213-MI01 repository evidence are complete. The bootstrap is applied, its state is remote and ARB-213-MI02 is satisfied by permanent-backend and post-promotion evidence. Exact static container/IERS identities and fail-closed source controls are prepared; artifact acquisition and build remain absent. ADR-010 remains Proposed, the scientific campaign is not executed and S10 remains `UNAVAILABLE`; Safety Authority and EAGLE operations are unchanged.
 
 
 ## 13. F3-A3 decision-preparation boundary
@@ -127,7 +127,7 @@ The approved F3-A3 decisions fix the candidate roles, exact local SPK identity, 
 
 ## 14. F3-A3 immutable method-profile boundary
 
-`BKL-031-F3-A3-METHOD-PROFILE-001` is repository evidence for the approved method profile at SHA-256 `e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`. It is passed to future infrastructure by exact ID/path/digest and verified fail-closed before calculation. It does not provide a container image, IERS artifact, platform plan/apply, scientific evidence, runtime S10 or Safety Authority.
+`BKL-031-F3-A3-METHOD-PROFILE-001` is repository evidence for the approved method profile at SHA-256 `e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`. `BKL-031-F3-A3-CONTAINER-MANIFEST-001` fixes the future base, dependencies and IERS identity at static-source level. They are verified fail-closed before future calculation. They do not provide acquired artifacts, a built image, platform plan/apply, scientific evidence, runtime S10 or Safety Authority.
 
 ## 15. F3-A3 bootstrap-state boundary
 
