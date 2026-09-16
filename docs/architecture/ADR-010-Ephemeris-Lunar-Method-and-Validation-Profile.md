@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Status | **PROPOSED — REPRODUCIBLE OFFLINE CONTAINER VERIFIED / NOT PUBLISHED / SCIENTIFIC CAMPAIGN NOT EXECUTED** |
+| Status | **PROPOSED — AUTHENTICATED PLATFORM PLAN VERIFIED / IMAGE NOT PUBLISHED / SCIENTIFIC CAMPAIGN NOT EXECUTED** |
 | Date | 2026-09-15 |
 | Release | Release 2.x planning increment |
 | Capability | BKL-031 F3-A3 |
@@ -12,9 +12,9 @@
 
 ## Context
 
-F3-A1 and F3-A2 have completed repository authority, but S08/S09 remain unavailable to runtime and S10 remains `UNAVAILABLE`. The owner approved the prudent method, accuracy, time-data, host and capacity baseline and completed F3-OD05 with the exact `de442s.bsp` identity, coverage, provenance, notices and SHA-256. The exact dependency/IERS inputs and reproducible offline container build are now verified; image publication, platform materialization and scientific validation remain absent.
+F3-A1 and F3-A2 have completed repository authority, but S08/S09 remain unavailable to runtime and S10 remains `UNAVAILABLE`. The owner approved the prudent method, accuracy, time-data, host and capacity baseline and completed F3-OD05 with the exact `de442s.bsp` identity, coverage, provenance, notices and SHA-256. The exact dependency/IERS inputs, reproducible offline container build and authenticated exact-head platform plan are verified; image publication, platform materialization and scientific validation remain absent.
 
-This ADR records complete owner dispositions for F3-OD04–F3-OD10 and authorizes repository evidence and validation-only infrastructure source. It remains Proposed and does not authorize image publication, authenticated platform plan/apply, further artifact acquisition, artifact upload, spike execution or runtime integration.
+This ADR records complete owner dispositions for F3-OD04–F3-OD10 and authorizes repository evidence and validation-only infrastructure source. It remains Proposed and does not authorize image publication, platform apply, further scientific-artifact acquisition, artifact upload, spike execution or runtime integration.
 
 ## Decision drivers
 
@@ -82,13 +82,13 @@ Authorized now:
 
 - repository-only Terraform and CI scaffolding;
 - static validation and documentation review;
-- preparation of a later WIF-based authenticated plan.
+- the recorded WIF-based exact-head plan-only gate and its empty backend state.
 
 Not authorized now:
 
-- Terraform apply or any GCP mutation;
+- platform-resource apply or any GCP mutation beyond the governed empty backend state;
 - further acquisition or any upload of packages, SPK or IERS artifacts;
-- additional container build or image push outside a separately reviewed gate;
+- additional container build or image push outside the reviewed exact-head gates;
 - Cloud Run execution;
 - Horizons call;
 - protected-site use;
@@ -107,7 +107,7 @@ Not authorized now:
 ### Negative
 
 - the one-time GCP administrator bootstrap, permanent-backend promotion and post-promotion verification are complete;
-- ARB-213-MI01 and ARB-213-MI02 are satisfied; exact artifact acquisition, reproducible build and network-disabled preflight evidence are recorded, while immutable image publication and authenticated exact-head platform-plan review still block platform apply and spike execution;
+- ARB-213-MI01 and ARB-213-MI02 are satisfied; exact artifact acquisition, reproducible build, network-disabled preflight and authenticated exact-head plan evidence are recorded, while registry foundation, immutable image publication and a refreshed published-digest plan still block platform apply and spike execution;
 - Cloud Run cold start and regional service availability must be measured;
 - private VPC egress prevents Horizons from the local job profile.
 
@@ -119,10 +119,12 @@ Not authorized now:
 4. a GCP administrator performed the one-time bootstrap using short-lived credentials and migrated its state to protected GCS;
 5. GitHub variables are populated from bootstrap outputs;
 6. exact artifacts were acquired ephemerally and a reproducible unpublished container was built and preflighted in a bounded increment;
-7. immutable image publication and an authenticated exact-head platform plan/apply increment are separately reviewed;
-8. the bounded spike is executed and evidence reviewed;
-9. ADR-010 is Accepted, Rejected or remains Proposed;
-10. F3-B remains blocked until acceptance conditions are satisfied.
+7. the authenticated exact-head plan-only gate produced a verified five-create plan with an unpublished reproducible OCI digest;
+8. a separately reviewed registry-foundation apply creates only the target repository, then the exact OCI candidate is published;
+9. the authenticated plan is refreshed with the published registry digest and platform apply is separately reviewed;
+10. the bounded spike is executed and evidence reviewed;
+11. ADR-010 is Accepted, Rejected or remains Proposed;
+12. F3-B remains blocked until acceptance conditions are satisfied.
 
 ## Validation
 
@@ -134,6 +136,7 @@ Current evidence:
 - Google Cloud topology and Terraform scaffolding prepared;
 - bootstrap Terraform apply executed with 27 additions, 0 changes and 0 destroys; platform Terraform apply `NOT EXECUTED`;
 - exact container/IERS manifest and fail-closed source contract verified; ten artifacts acquired ephemerally; two reproducible offline builds and network-disabled preflight `PASS`; image push and artifact upload `NOT EXECUTED`;
+- authenticated workflow run `35131365596` on `main@380bd8c3d04f570acb21a9a7f532930111adcdc8` produced two identical OCI manifest digests and an exact platform plan of 5 additions, 0 changes and 0 destroys; the backend state is present and empty; platform apply `NOT EXECUTED`;
 - spike and scientific campaign `NOT EXECUTED`;
 - dependency/IERS acquisition `EXACT_HASH_VERIFIED_EPHEMERAL`; SPK and other scientific-data acquisition `NOT EXECUTED`;
 - privacy/runtime/OAT `NOT EXECUTED`.
@@ -147,6 +150,7 @@ Current evidence:
 - BKL-031-F3-A3-METHOD-PROFILE-001@sha256:e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca;
 - BKL-031-F3-A3-CONTAINER-MANIFEST-002@sha256:02ceba17c1ac97f780cd545554b254ee668d840fcd85e11310d07c4ecc37e879;
 - BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001@sha256:00546062e78887af003adb010bb60dcfbdfb1480429e22314e4476673c7633a3;
+- BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-001@sha256:06cf923ae2bad1e869782bffd6a7e5389f9a68419d6199d0d7df5319f50b12e6;
 - ARB-213-MI01;
 - BKL-031-F3-A3-INFRA-001;
 - BKL-031-F3-A3-VAL-001;
@@ -164,4 +168,4 @@ Revert the repository package for source changes. The authorized bootstrap and r
 
 ## Governance stop
 
-Review a separate immutable image-publication and authenticated exact-head platform-plan gate. Stop before image push or platform planning until that gate is approved, and before platform apply, artifact upload or spike execution. S10 remains `UNAVAILABLE`.
+The authenticated exact-head plan-only gate is complete. Stop before a separately reviewed Artifact Registry foundation apply; after that, stop again before exact OCI publication and before the refreshed published-digest platform plan/apply gate. Artifact upload, spike execution, protected-site use and runtime activation remain blocked. S10 remains `UNAVAILABLE`.

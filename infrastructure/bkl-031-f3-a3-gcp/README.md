@@ -2,7 +2,7 @@
 
 This directory contains repository-only Terraform scaffolding for the future ephemeris/lunar validation spike.
 
-Current state: BOOTSTRAP APPLIED, REMOTE STATE AND BACKEND PROMOTION POST-VERIFIED, REPRODUCIBLE OFFLINE CONTAINER BUILD AND NETWORK-DISABLED PREFLIGHT VERIFIED, IMAGE NOT PUBLISHED, PLATFORM NOT PLANNED OR APPLIED, JOB NOT EXECUTED.
+Current state: BOOTSTRAP APPLIED, REMOTE STATE AND BACKEND PROMOTION POST-VERIFIED, REPRODUCIBLE OFFLINE CONTAINER BUILD AND NETWORK-DISABLED PREFLIGHT VERIFIED, AUTHENTICATED EXACT-HEAD PLATFORM PLAN VERIFIED, IMAGE NOT PUBLISHED, PLATFORM NOT APPLIED, JOB NOT EXECUTED.
 
 ## Directories
 
@@ -41,9 +41,9 @@ After apply, record these outputs as GitHub repository variables:
 - GCP_WIF_PROVIDER
 - GCP_DEPLOY_SERVICE_ACCOUNT
 - GCP_RUNTIME_SERVICE_ACCOUNT
-- GCP_TF_STATE_BUCKET
-- GCP_F3_DATA_BUCKET
-- GCP_F3_EVIDENCE_BUCKET
+- GCP_STATE_BUCKET
+- GCP_DATA_BUCKET
+- GCP_EVIDENCE_BUCKET
 
 ## Platform gate
 
@@ -59,9 +59,11 @@ F3-OD05 is approved at artifact-identity level by `BKL-031-F3-A3-F3-OD05-APPROVA
 
 `BKL-031-F3-A3-CONTAINER-MANIFEST-002` fixes the linux/amd64 Python base and BuildKit by platform digest, every Python wheel by version and SHA-256, and `astropy-iers-data 0.2026.9.14.0.56.43` by SHA-256 `43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc`. Its raw SHA-256 is `02ceba17c1ac97f780cd545554b254ee668d840fcd85e11310d07c4ecc37e879`. The container embeds the exact method profile and requires a fail-closed preflight before any supplied command. CI rejects manifest, dependency, base-image, build-tool, IERS, policy or source-file drift.
 
-CI run `35122782246` acquired the ten exact dependency/IERS artifacts into an ignored ephemeral area and verified every hash. Two isolated no-cache builds with pinned BuildKit, normalized timestamps and no RUN network produced identical image config ID `sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0`. Network-disabled preflight verified the profile, installed package versions, IERS artifact and campaign-date coverage. The result is recorded in `BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001` at SHA-256 `00546062e78887af003adb010bb60dcfbdfb1480429e22314e4476673c7633a3`. This image config ID is not a registry digest. No wheel is committed; image push, artifact upload, platform plan/apply and scientific execution remain outside this gate.
+CI run `35122782246` acquired the ten exact dependency/IERS artifacts into an ignored ephemeral area and verified every hash. Two isolated no-cache builds with pinned BuildKit, normalized timestamps and no RUN network produced identical image config ID `sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0`. Network-disabled preflight verified the profile, installed package versions, IERS artifact and campaign-date coverage. The result is recorded in `BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001` at SHA-256 `00546062e78887af003adb010bb60dcfbdfb1480429e22314e4476673c7633a3`. This image config ID is not a registry digest. No wheel is committed.
 
-This package has no authenticated plan/apply workflow. The one-time bootstrap was applied from the reviewed saved plan for `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46`: 27 resources added, 0 changed and 0 destroyed. PR #219 promoted the permanent backend as merge `6c6a9454f1f1f13f72b4ae5098c0f2475b537d60`; remote lineage/content, recovery candidate, locking and a zero-drift exit code `0` were then verified. ARB-213-MI02 is satisfied. Image publication and authenticated exact-head platform planning require a separate reviewed gate; platform apply, upload and execution remain blocked.
+The one-time bootstrap was applied from the reviewed saved plan for `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46`: 27 resources added, 0 changed and 0 destroyed. PR #219 promoted the permanent backend as merge `6c6a9454f1f1f13f72b4ae5098c0f2475b537d60`; remote lineage/content, recovery candidate, locking and a zero-drift exit code `0` were then verified. ARB-213-MI02 is satisfied.
+
+Workflow run `35131365596` on exact main commit `380bd8c3d04f570acb21a9a7f532930111adcdc8` authenticated through the main-only WIF, rebuilt two identical unpublished OCI candidates and verified manifest digest `sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce`. Its saved Terraform plan contains exactly five additions, zero changes and zero destroys. The Artifact Registry repository, VPC, subnet and Cloud Run Job were confirmed absent before planning. The GCS backend contains only the empty state with zero resources and no residual lock. `BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-001` records the result. Because the target repository is one of the five unapplied resources, image publication remains blocked until a separately reviewed registry-foundation apply. Platform apply, artifact upload and scientific execution remain blocked.
 
 ## Local validation
 
@@ -70,11 +72,12 @@ Run:
 1. set `DSG_METHOD_PROFILE_PATH=infrastructure/bkl-031-f3-a3-gcp/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json` and `DSG_METHOD_PROFILE_SHA256=e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`, then run `node .github/scripts/verify-bkl-031-f3-a3-method-profile.mjs`
 2. node .github/scripts/verify-bkl-031-f3-a3-container-evidence.mjs
 3. node .github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs
-4. terraform -chdir=bootstrap fmt -check
-5. terraform -chdir=bootstrap init -backend=false
-5. terraform -chdir=bootstrap validate
-6. terraform -chdir=platform fmt -check
-7. terraform -chdir=platform init -backend=false
-8. terraform -chdir=platform validate
+4. node .github/scripts/verify-bkl-031-f3-a3-platform-plan-gate.mjs
+5. terraform -chdir=bootstrap fmt -check
+6. terraform -chdir=bootstrap init -backend=false
+7. terraform -chdir=bootstrap validate
+8. terraform -chdir=platform fmt -check
+9. terraform -chdir=platform init -backend=false
+10. terraform -chdir=platform validate
 
 No command above authenticates to GCP or mutates cloud resources.

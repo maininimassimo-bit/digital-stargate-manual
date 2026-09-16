@@ -1,9 +1,14 @@
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
 const workflowPath = path.join(root, ".github", "workflows", "bkl-031-f3-a3-authenticated-platform-plan.yml");
 const workflow = fs.readFileSync(workflowPath, "utf8");
+const evidencePath = path.join(root, "infrastructure", "bkl-031-f3-a3-gcp", "platform", "BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-001.json");
+const evidenceBytes = fs.readFileSync(evidencePath);
+const evidence = JSON.parse(evidenceBytes.toString("utf8"));
+const expectedEvidenceSha256 = "06cf923ae2bad1e869782bffd6a7e5389f9a68419d6199d0d7df5319f50b12e6";
 
 const fail = (message) => { throw new Error(message); };
 const requireText = (fragment) => {
@@ -72,4 +77,37 @@ if (/^\s+(?:push|pull_request|schedule):/m.test(workflow)) {
   fail("authenticated plan workflow must remain explicit workflow_dispatch only");
 }
 
-console.log("BKL-031 F3-A3 authenticated exact-head plan gate verified: manual main-only WIF, reproducible unpublished candidate, saved plan, no apply/push/upload");
+const evidenceSha256 = crypto.createHash("sha256").update(evidenceBytes).digest("hex");
+if (evidenceSha256 !== expectedEvidenceSha256) fail(`authenticated plan evidence digest mismatch: ${evidenceSha256}`);
+const exact = (actual, expected, label) => {
+  if (!Object.is(actual, expected)) fail(`${label}: expected ${JSON.stringify(expected)}, received ${JSON.stringify(actual)}`);
+};
+exact(evidence.schemaVersion, "1.0", "evidence.schemaVersion");
+exact(evidence.evidenceId, "BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-001", "evidence.evidenceId");
+exact(evidence.status, "AUTHENTICATED_EXACT_HEAD_PLAN_VERIFIED_NOT_APPLIED", "evidence.status");
+exact(evidence.source?.commit, "380bd8c3d04f570acb21a9a7f532930111adcdc8", "evidence.source.commit");
+exact(evidence.continuousIntegration?.runId, 35131365596, "evidence.continuousIntegration.runId");
+exact(evidence.continuousIntegration?.jobId, 104912908086, "evidence.continuousIntegration.jobId");
+exact(evidence.continuousIntegration?.conclusion, "SUCCESS", "evidence.continuousIntegration.conclusion");
+exact(evidence.authentication?.mode, "GITHUB_OIDC_WIF_MAIN_ONLY", "evidence.authentication.mode");
+exact(evidence.authentication?.staticServiceAccountKey, false, "evidence.authentication.staticServiceAccountKey");
+exact(evidence.candidateImage?.publication, "BLOCKED_REPOSITORY_NOT_CREATED", "evidence.candidateImage.publication");
+for (const name of ["manifestDigest", "candidateA", "candidateB"]) {
+  exact(evidence.candidateImage?.[name], "sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce", `evidence.candidateImage.${name}`);
+}
+exact(evidence.candidateImage?.configDigest, "sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0", "evidence.candidateImage.configDigest");
+exact(evidence.terraformPlan?.actions?.add, 5, "evidence.terraformPlan.actions.add");
+exact(evidence.terraformPlan?.actions?.change, 0, "evidence.terraformPlan.actions.change");
+exact(evidence.terraformPlan?.actions?.destroy, 0, "evidence.terraformPlan.actions.destroy");
+exact(evidence.terraformPlan?.resourceAddresses?.length, 5, "evidence.terraformPlan.resourceAddresses.length");
+exact(evidence.backendState?.status, "PERSISTED_EMPTY_STATE_ONLY", "evidence.backendState.status");
+exact(evidence.backendState?.rawSha256, "48d4052c2e1a3899e8d568b32ada5e81282873534b720fa36241f9d026166482", "evidence.backendState.rawSha256");
+exact(evidence.backendState?.outputs, 0, "evidence.backendState.outputs");
+exact(evidence.backendState?.resources, 0, "evidence.backendState.resources");
+exact(evidence.backendState?.residualLock, false, "evidence.backendState.residualLock");
+for (const name of ["imagePush", "artifactRegistryRepositoryApply", "platformApply", "artifactUpload", "scientificExecution", "externalReferenceTraffic", "protectedSiteUse", "runtimeActivation"]) {
+  exact(evidence.controls?.[name], "NOT_EXECUTED", `evidence.controls.${name}`);
+}
+exact(evidence.controls?.runtimeAuthority, false, "evidence.controls.runtimeAuthority");
+
+console.log(`BKL-031 F3-A3 authenticated exact-head plan gate and evidence verified: ${evidence.evidenceId}@sha256:${expectedEvidenceSha256}; no apply/push/upload`);
