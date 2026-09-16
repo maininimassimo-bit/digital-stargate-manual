@@ -11,7 +11,7 @@
 | Root bootstrap | `AI_BOOTSTRAP.md` |
 | Continuity handover | `docs/project/HANDOVER_2026-09-15.md` |
 | Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-15.md` |
-| Current governed package | BKL-031 F3-A3 immutable method-profile evidence; ADR-010 proposed; ARB-213-MI02 open |
+| Current governed package | BKL-031 F3-A3 MI02 backend promotion after authorized bootstrap/state migration; ADR-010 proposed |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo e gerarchia
@@ -117,7 +117,7 @@ La repository authority F3-A2-D5 è APPROVED/AVAILABLE per caller autorizzati, m
 
 ## 12. F3-A3 enterprise boundary
 
-F3-A3 remains a repository-governance package. Owner decisions F3-OD04–F3-OD10 are complete, including the exact `de442s.bsp` identity for F3-OD05, but ADR-010 remains Proposed and the scientific campaign is not executed. ARB-213-MI01/MI02 remain open. S10 remains `UNAVAILABLE`; Safety Authority and EAGLE operations are unchanged.
+F3-A3 remains a governed validation package. Owner decisions F3-OD04–F3-OD10 and ARB-213-MI01 repository evidence are complete. The bootstrap is applied and its state is remote; ARB-213-MI02 backend promotion remains open. ADR-010 remains Proposed, the scientific campaign is not executed and S10 remains `UNAVAILABLE`; Safety Authority and EAGLE operations are unchanged.
 
 
 ## 13. F3-A3 decision-preparation boundary
@@ -127,4 +127,8 @@ The approved F3-A3 decisions fix the candidate roles, exact local SPK identity, 
 
 ## 14. F3-A3 immutable method-profile boundary
 
-`BKL-031-F3-A3-METHOD-PROFILE-001` is repository evidence for the approved method profile at SHA-256 `e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`. It is passed to future infrastructure by exact ID/path/digest and verified fail-closed before calculation. It does not provide a container image, IERS artifact, cloud plan/apply, scientific evidence, runtime S10 or Safety Authority.
+`BKL-031-F3-A3-METHOD-PROFILE-001` is repository evidence for the approved method profile at SHA-256 `e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`. It is passed to future infrastructure by exact ID/path/digest and verified fail-closed before calculation. It does not provide a container image, IERS artifact, platform plan/apply, scientific evidence, runtime S10 or Safety Authority.
+
+## 15. F3-A3 bootstrap-state boundary
+
+The authorized bootstrap established only the isolated F3-A3 service identities, main-ref WIF trust and protected state/data/evidence buckets. Bootstrap state is remote and versioned; the current package promotes the permanent backend and corrects the migration serial acceptance rule after fail-closed incident `ARB-213-MI02-I01`. No platform resource, scientific artifact, protected site datum, runtime S10 or Safety Authority is introduced.

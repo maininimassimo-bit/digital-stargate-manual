@@ -106,8 +106,8 @@ Not authorized now:
 
 ### Negative
 
-- a one-time GCP administrator bootstrap is still required;
-- ARB-213-MI01 has repository-level immutable-profile and drift-rejection evidence; ARB-213-MI02, exact container inclusion evidence and authenticated exact-head plan review still block plan/apply and spike execution;
+- the one-time GCP administrator bootstrap is complete, while permanent-backend promotion and post-promotion verification remain open;
+- ARB-213-MI01 has repository-level immutable-profile and drift-rejection evidence; ARB-213-MI02 closure, exact container inclusion evidence and authenticated exact-head platform-plan review still block platform apply and spike execution;
 - Cloud Run cold start and regional service availability must be measured;
 - private VPC egress prevents Horizons from the local job profile.
 
@@ -116,7 +116,7 @@ Not authorized now:
 1. integrate the complete owner-decision evidence and repository-only infrastructure source;
 2. owner completed F3-OD05 through `BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16`;
 3. ARB and Release Quality review the completed decision profile;
-4. a GCP administrator performs the one-time bootstrap using short-lived credentials;
+4. a GCP administrator performed the one-time bootstrap using short-lived credentials and migrated its state to protected GCS;
 5. GitHub variables are populated from bootstrap outputs;
 6. an authenticated plan/apply increment is separately reviewed;
 7. exact artifacts and immutable container are prepared;
@@ -132,7 +132,7 @@ Current evidence:
 
 - owner dispositions recorded on 2026-09-15;
 - Google Cloud topology and Terraform scaffolding prepared;
-- Terraform apply `NOT EXECUTED`;
+- bootstrap Terraform apply executed with 27 additions, 0 changes and 0 destroys; platform Terraform apply `NOT EXECUTED`;
 - spike and scientific campaign `NOT EXECUTED`;
 - dependency and scientific-data acquisition `NOT EXECUTED`;
 - privacy/runtime/OAT `NOT EXECUTED`.
@@ -157,8 +157,8 @@ ADR-010 may become Accepted only when F3-OD05 is exact, all package/container/da
 
 ## Rollback
 
-Revert this repository package. No cloud or runtime rollback is needed because apply and execution remain unauthorized.
+Revert the repository package for source changes. The authorized bootstrap and remote state require the governed Terraform state-recovery and rollback procedure; platform and runtime execution remain unauthorized.
 
 ## Governance stop
 
-Stop before GCP bootstrap, authenticated plan/apply, further artifact acquisition, any upload or spike execution. S10 remains `UNAVAILABLE`.
+Complete ARB-213-MI02 backend promotion and verification, then stop before platform plan/apply, further artifact acquisition, any upload or spike execution. S10 remains `UNAVAILABLE`.

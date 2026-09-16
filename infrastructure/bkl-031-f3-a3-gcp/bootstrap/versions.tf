@@ -1,4 +1,6 @@
 terraform {
+  backend "gcs" {}
+
   required_version = ">= 1.16.2, < 2.0.0"
 
   required_providers {

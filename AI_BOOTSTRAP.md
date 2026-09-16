@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 7.0 |
+| Versione | 7.1 |
 | Baseline | 16/09/2026 |
-| Stato | Current root bootstrap — F3-A3 immutable method profile recorded; no container/cloud/scientific execution authority |
+| Stato | Current root bootstrap — F3-A3 bootstrap applied and state migrated; MI02 backend promotion under review; no platform/scientific execution authority |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -86,7 +86,7 @@ PR #209 merged with expected-head control as `bc4307c2042a45985622044e11631421de
 
 `BKL-031-F3-A2-D5` is ACCEPTED / POST-MERGE VERIFIED. The protected receipt is integrated, the historical DRAFT remains immutable and the separate `APPROVED` envelope preserves the assignment payload and digest. The repository authority resolves `AVAILABLE` only for authorized validated input with approved source authorities. S08 remains `UNAVAILABLE`; runtime S09 remains `UNAVAILABLE_CURRENT` because no adapter exists.
 
-PR #212 integrated the F3-A3 decision-preparation package as `527b298094b07e5a00317e60cab3abefed7a5759`. PR #214 integrated the repository-only Google Cloud scaffolding and PR #215 integrated the ARB-213-MI02 state-lifecycle procedure. The owner has now approved F3-OD04–F3-OD10, including the exact `de442s.bsp` identity, coverage, provenance, notices, SHA-256 and future private object identity for F3-OD05. No Google Cloud resource, upload, scientific execution or runtime is authorized. The immutable method profile now provides repository-level ARB-213-MI01 evidence; ADR-010 remains Proposed, ARB-213-MI02 remains open, container inclusion/execution is unproven and S10 remains `UNAVAILABLE`.
+PR #212 integrated the F3-A3 decision-preparation package as `527b298094b07e5a00317e60cab3abefed7a5759`. PR #214 integrated the Google Cloud scaffolding, PR #215 integrated the ARB-213-MI02 state-lifecycle procedure, PR #217 integrated the immutable method profile and PR #218 added the reviewed Windows provider checksum. The authorized bootstrap plan for `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46` was applied with 27 additions, 0 changes and 0 destroys; bootstrap state is active in protected GCS. ARB-213-MI02 remains open until backend promotion and post-promotion verification. ADR-010 remains Proposed, container inclusion/execution is unproven and S10 remains `UNAVAILABLE`.
 
 ## F3-A2-D4 acceptance checkpoint — 15/09/2026
 
@@ -118,4 +118,8 @@ The owner approved `de442s.bsp` with SHA-256 `54d97562a5b094d298b1b8eafa5a2e17e3
 
 ## F3-A3 immutable method profile — 16/09/2026
 
-`BKL-031-F3-A3-METHOD-PROFILE-001` records the approved F3-OD04–F3-OD10 method, scientific, time-data, privacy, hosting and request limits at SHA-256 `e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`. Static preflight validates the exact bytes and rejects drift. No container image, IERS artifact, cloud plan/apply or scientific execution exists. ARB-213-MI02 and exact container/campaign evidence remain pre-apply gates.
+`BKL-031-F3-A3-METHOD-PROFILE-001` records the approved F3-OD04–F3-OD10 method, scientific, time-data, privacy, hosting and request limits at SHA-256 `e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`. Static preflight validates the exact bytes and rejects drift. The bootstrap-only plan/apply and state migration now exist; no platform plan/apply, container image, IERS artifact or scientific execution exists. ARB-213-MI02 backend promotion and exact container/campaign evidence remain gates.
+
+## F3-A3 ARB-213-MI02 bootstrap execution — 16/09/2026
+
+The exact saved bootstrap plan SHA-256 `9bf2804ae697db1e5369e20f5594fbbaa0fa7fc202bc21e7290776b1e4c08d24` was applied under process-separated ARB and Release Quality authorization. State migrated to the private versioned GCS backend. Fail-closed incident `ARB-213-MI02-I01` stopped progression when Terraform advanced serial `23` to `24`; read-only inspection proved unchanged lineage and managed content. The current repository package corrects the serial acceptance rule and promotes the permanent backend. No platform or scientific operation is authorized.

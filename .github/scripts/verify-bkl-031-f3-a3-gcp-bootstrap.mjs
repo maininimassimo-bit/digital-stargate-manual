@@ -6,6 +6,7 @@ const root = process.cwd();
 const infra = path.join(root, "infrastructure", "bkl-031-f3-a3-gcp");
 const bootstrap = fs.readFileSync(path.join(infra, "bootstrap", "main.tf"), "utf8");
 const bootstrapVariables = fs.readFileSync(path.join(infra, "bootstrap", "variables.tf"), "utf8");
+const bootstrapVersions = fs.readFileSync(path.join(infra, "bootstrap", "versions.tf"), "utf8");
 const platform = fs.readFileSync(path.join(infra, "platform", "main.tf"), "utf8");
 const variables = fs.readFileSync(path.join(infra, "platform", "variables.tf"), "utf8");
 const workflow = fs.readFileSync(path.join(root, ".github", "workflows", "bkl-031-f3-a3-gcp-iac.yml"), "utf8");
@@ -83,8 +84,11 @@ requireText("variables", variables, "@sha256:[0-9a-f]{64}$");
 requireText("workflow", workflow, "terraform validate -no-color");
 requireText("workflow", workflow, "terraform init -backend=false -input=false");
 requireText("backend template", backendTemplate, 'backend "gcs" {}');
+requireText("bootstrap versions", bootstrapVersions, 'backend "gcs" {}');
 requireText("state runbook", stateRunbook, "ARB-213-MI02");
-requireText("state runbook", stateRunbook, "PROCEDURE DEFINED — NOT EXECUTED");
+requireText("state runbook", stateRunbook, "REMOTE STATE ACTIVE — BACKEND PROMOTION UNDER REVIEW");
+requireText("state runbook", stateRunbook, "serial change other than `+1`");
+requireText("state runbook", stateRunbook, "ARB-213-MI02-I01");
 requireText("state runbook", stateRunbook, "terraform -chdir=\"$DSG_BOOTSTRAP_DIR\" init -migrate-state");
 requireText("state runbook", stateRunbook, "gcloud storage ls --all-versions");
 requireText("state runbook", stateRunbook, "terraform force-unlock LOCK_ID");
@@ -102,6 +106,7 @@ forbid("platform", platform, /allUsers|allAuthenticatedUsers/, "public IAM princ
 forbid("bootstrap", bootstrap, /private_key|credentials\s*=/i, "static credential");
 forbid("platform", platform, /google_compute_router_nat/, "Cloud NAT/public egress");
 forbid("backend template", backendTemplate, /bucket\s*=|credentials\s*=/i, "hard-coded backend identity or credential");
+forbid("bootstrap versions", bootstrapVersions, /bucket\s*=|credentials\s*=/i, "hard-coded backend identity or credential");
 forbid("workflow", workflow, /terraform\s+apply/, "cloud mutation in validation workflow");
 forbid("platform", platform, /DSG_MAX_TARGETS|DSG_MAX_INSTANTS_PER_TARGET|DSG_MAX_TARGET_INSTANT_PAIRS|DSG_MAX_SPAN_DAYS|DSG_MIN_GRID_STEP_SECONDS|DSG_MAX_REQUEST_BYTES/, "duplicated method-profile bounds");
 
