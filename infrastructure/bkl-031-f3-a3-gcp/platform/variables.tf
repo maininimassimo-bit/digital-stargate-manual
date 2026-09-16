@@ -134,5 +134,10 @@ variable "job_name" {
 
 variable "subnet_cidr" {
   type    = string
-  default = "10.88.0.0/28"
+  default = "10.88.0.0/26"
+
+  validation {
+    condition     = var.subnet_cidr == "10.88.0.0/26"
+    error_message = "Cloud Run Direct VPC egress requires the reviewed /26 subnet remediation."
+  }
 }
