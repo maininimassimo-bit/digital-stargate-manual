@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "1.0",
+  "evidenceId": "BKL-031-F3-A3-RUNNER-PLATFORM-UPDATE-EVIDENCE-001",
+  "status": "EXACT_RUNNER_PLATFORM_UPDATED_AND_READ_ONLY_POST_VERIFIED_JOB_UNEXECUTED",
+  "recordedAtUtc": "2026-09-16T21:45:34Z",
+  "runner": {
+    "sourceCommit": "9db0267529b6d46a2510b415e4b3f51d668ff024",
+    "imageReference": "europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike@sha256:69a20a994fde9d5b1533b142760af5796b4ac795a1f00c658373a46d2648d60c",
+    "manifestDigest": "sha256:69a20a994fde9d5b1533b142760af5796b4ac795a1f00c658373a46d2648d60c",
+    "configDigest": "sha256:333e5d1b303dda4c5a4037f386b2f56a7f967a9197bbb4186ca6f33dfd4c4cc3"
+  },
+  "review": {
+    "platformGatePullRequest": 240,
+    "platformGateReviewedHead": "16f9dbe9fdbd477c930c62e502115da6b2ec73f2",
+    "platformGateMergeCommit": "94615aa8d74d604a8d10196d3c6de22d19148791",
+    "remediationPullRequest": 241,
+    "remediationReviewedHead": "15a4cdbdc274b326fdff52f31928103b3f246a15",
+    "remediationMergeCommit": "83cf46ee6efdca972480177b47dd4999ab7d75fd",
+    "readOnlyVerificationPullRequest": 242,
+    "readOnlyVerificationReviewedHead": "ec9a314a990b24576b04a1f7d0ecd7c37510659f",
+    "readOnlyVerificationMergeCommit": "aca6766c41c7bc3aa2cc9445f7299a6438e0d7d2"
+  },
+  "apply": {
+    "workflow": "BKL-031 F3-A3 Exact Runner Platform Update",
+    "runId": 35153084496,
+    "jobId": 104985932496,
+    "sourceCommit": "83cf46ee6efdca972480177b47dd4999ab7d75fd",
+    "startedAtUtc": "2026-09-16T21:34:00Z",
+    "completedAtUtc": "2026-09-16T21:35:33Z",
+    "conclusion": "success",
+    "url": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35153084496",
+    "savedPlan": {
+      "add": 0,
+      "change": 1,
+      "destroy": 0,
+      "address": "google_cloud_run_v2_job.spike",
+      "actions": [
+        "update"
+      ]
+    },
+    "appliedPlan": "EXACT_VERIFIED_SAVED_PLAN_ONLY"
+  },
+  "postVerification": {
+    "workflow": "BKL-031 F3-A3 Runner Platform Read-only Verification",
+    "runId": 35154030354,
+    "jobId": 104989054471,
+    "sourceCommit": "aca6766c41c7bc3aa2cc9445f7299a6438e0d7d2",
+    "startedAtUtc": "2026-09-16T21:44:31Z",
+    "completedAtUtc": "2026-09-16T21:45:33Z",
+    "conclusion": "success",
+    "url": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35154030354",
+    "mode": "READ_ONLY"
+  },
+  "platformState": {
+    "uri": "gs://digital-stargate-telemetry-183451329061-f3-state/bkl-031/f3-a3/platform/default.tfstate",
+    "lineage": "2be9b82b-88d3-888f-4fcd-dded2f74f7f3",
+    "serial": 4,
+    "rawSha256": "084b68da6d20d9523ceabce67766cfc211b71f97ee12d8f4e7a0b4a64f57b89b",
+    "resourceCount": 4,
+    "addresses": [
+      "google_cloud_run_v2_job.spike",
+      "google_cloud_run_v2_job_iam_member.deployer_invoker",
+      "google_compute_network.spike",
+      "google_compute_subnetwork.spike"
+    ],
+    "immediateDrift": "ZERO"
+  },
+  "job": {
+    "name": "dsg-f3-a3-spike",
+    "region": "europe-west8",
+    "image": "europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike@sha256:69a20a994fde9d5b1533b142760af5796b4ac795a1f00c658373a46d2648d60c",
+    "runnerSourceCommit": "9db0267529b6d46a2510b415e4b3f51d668ff024",
+    "executionCount": 0,
+    "taskCount": 1,
+    "parallelism": 1,
+    "timeoutSeconds": 120,
+    "maxRetries": 0,
+    "siteProfile": "SYNTHETIC_ONLY",
+    "externalProviderPolicy": "DENY"
+  },
+  "kernel": {
+    "uri": "gs://digital-stargate-telemetry-183451329061-f3-data/bkl-031/f3-a3/artifacts/spk/de442s/sha256/54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c/de442s.bsp",
+    "generation": "1789590110146663",
+    "sha256": "54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c",
+    "unchanged": true
+  },
+  "controls": {
+    "registryMutation": "NOT_EXECUTED",
+    "kernelMutation": "NOT_EXECUTED",
+    "jobExecution": "NOT_EXECUTED",
+    "scientificExecution": "NOT_EXECUTED",
+    "externalReferenceTraffic": "NOT_EXECUTED",
+    "protectedSiteUse": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED",
+    "runtimeAuthority": false
+  },
+  "nextGate": "SEPARATELY_REVIEWED_EXACT_SINGLE_SCIENTIFIC_SPIKE_EXECUTION"
+}

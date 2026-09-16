@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import crypto from "node:crypto";
 
 const root = process.cwd();
 const read = (...parts) => fs.readFileSync(path.join(root, ...parts), "utf8");
@@ -8,6 +9,8 @@ const main = read("infrastructure", "bkl-031-f3-a3-gcp", "platform", "main.tf");
 const variables = read("infrastructure", "bkl-031-f3-a3-gcp", "platform", "variables.tf");
 const evidence = JSON.parse(read("infrastructure", "bkl-031-f3-a3-gcp", "container", "BKL-031-F3-A3-RUNNER-OCI-PUBLICATION-EVIDENCE-001.json"));
 const incident = JSON.parse(read("infrastructure", "bkl-031-f3-a3-gcp", "platform", "BKL-031-F3-A3-RUNNER-PLATFORM-UPDATE-INCIDENT-001.json"));
+const updateEvidenceBytes = fs.readFileSync(path.join(root, "infrastructure", "bkl-031-f3-a3-gcp", "platform", "BKL-031-F3-A3-RUNNER-PLATFORM-UPDATE-EVIDENCE-001.json"));
+const updateEvidence = JSON.parse(updateEvidenceBytes.toString("utf8"));
 
 const runnerSource = "9db0267529b6d46a2510b415e4b3f51d668ff024";
 const oldDigest = "sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce";
@@ -91,5 +94,14 @@ for (const control of ["cloudAuthentication", "registryRead", "kernelRead", "ter
   if (incident.controls?.[control] !== "SKIPPED") fail(`runner platform update incident ${control} must be SKIPPED`);
 }
 if (incident.controls?.jobExecution !== "NOT_EXECUTED" || incident.controls?.scientificExecution !== "NOT_EXECUTED" || incident.controls?.cloudMutation !== "NOT_EXECUTED") fail("runner platform update incident must preserve zero execution and mutation");
+
+if (crypto.createHash("sha256").update(updateEvidenceBytes).digest("hex") !== "cb96049ac9f8723a573b3f3aae26edfb765a845594b427c2000c08040471a700") fail("runner platform update evidence raw digest mismatch");
+if (updateEvidence.status !== "EXACT_RUNNER_PLATFORM_UPDATED_AND_READ_ONLY_POST_VERIFIED_JOB_UNEXECUTED") fail("runner platform update evidence status mismatch");
+if (updateEvidence.apply?.runId !== 35153084496 || updateEvidence.apply?.jobId !== 104985932496 || updateEvidence.apply?.conclusion !== "success") fail("runner platform update apply run mismatch");
+if (updateEvidence.postVerification?.runId !== 35154030354 || updateEvidence.postVerification?.jobId !== 104989054471 || updateEvidence.postVerification?.conclusion !== "success") fail("runner platform post-verification run mismatch");
+if (updateEvidence.platformState?.serial !== 4 || updateEvidence.platformState?.lineage !== "2be9b82b-88d3-888f-4fcd-dded2f74f7f3" || updateEvidence.platformState?.rawSha256 !== "084b68da6d20d9523ceabce67766cfc211b71f97ee12d8f4e7a0b4a64f57b89b") fail("runner platform exact state identity mismatch");
+if (updateEvidence.job?.image !== runnerImage || updateEvidence.job?.runnerSourceCommit !== runnerSource || updateEvidence.job?.executionCount !== 0) fail("runner platform job identity or execution count mismatch");
+if (updateEvidence.controls?.jobExecution !== "NOT_EXECUTED" || updateEvidence.controls?.scientificExecution !== "NOT_EXECUTED" || updateEvidence.controls?.runtimeAuthority !== false) fail("runner platform update evidence overstates execution authority");
+if (updateEvidence.nextGate !== "SEPARATELY_REVIEWED_EXACT_SINGLE_SCIENTIFIC_SPIKE_EXECUTION") fail("runner platform update evidence next gate mismatch");
 
 console.log(`BKL-031 F3-A3 exact runner platform update verified: ${runnerImage}; one in-place job update; science NOT_EXECUTED`);
