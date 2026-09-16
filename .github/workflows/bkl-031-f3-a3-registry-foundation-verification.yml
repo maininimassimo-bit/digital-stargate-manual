@@ -1,0 +1,176 @@
+name: BKL-031 F3-A3 Artifact Registry Foundation Verification
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: Exact main commit authorized for read-only registry foundation verification
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: bkl-031-f3-a3-registry-foundation
+  cancel-in-progress: false
+
+jobs:
+  exact-head-registry-verification:
+    name: Exact-head read-only registry and state verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+      GCP_REGION: ${{ vars.GCP_REGION }}
+      GCP_WIF_PROVIDER: ${{ vars.GCP_WIF_PROVIDER }}
+      GCP_DEPLOY_SERVICE_ACCOUNT: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+      GCP_STATE_BUCKET: ${{ vars.GCP_STATE_BUCKET }}
+      TF_IN_AUTOMATION: "true"
+      TF_INPUT: "false"
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Require exact authorized main head and bootstrap identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${GITHUB_REF}" = "refs/heads/main"
+          test "${GITHUB_SHA}" = "${{ inputs.expected_commit }}"
+          grep -Eq '^[0-9a-f]{40}$' <<<"${GITHUB_SHA}"
+          test "${GCP_PROJECT_ID}" = "digital-stargate-telemetry"
+          test "${GCP_REGION}" = "europe-west8"
+          test "${GCP_WIF_PROVIDER}" = "projects/183451329061/locations/global/workloadIdentityPools/dsg-f3-a3-github/providers/github-main"
+          test "${GCP_DEPLOY_SERVICE_ACCOUNT}" = "dsg-f3-a3-deployer@digital-stargate-telemetry.iam.gserviceaccount.com"
+          test "${GCP_STATE_BUCKET}" = "digital-stargate-telemetry-183451329061-f3-state"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+
+      - name: Verify read-only recovery contract
+        run: node .github/scripts/verify-bkl-031-f3-a3-registry-foundation-verification.mjs
+
+      - name: Authenticate to Google Cloud through main-only WIF
+        id: auth
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+          create_credentials_file: true
+          export_environment_variables: true
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
+        with:
+          version: "583.0.0"
+
+      - name: Verify federated identity, registry properties and empty image inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          active_account="$(gcloud auth list --filter=status:ACTIVE --format='value(account)')"
+          test "$active_account" = "$GCP_DEPLOY_SERVICE_ACCOUNT"
+          gcloud config set project "$GCP_PROJECT_ID" >/dev/null
+          gcloud artifacts repositories describe dsg-f3-a3 --project="$GCP_PROJECT_ID" --location="$GCP_REGION" --format=json > /tmp/registry.json
+          gcloud artifacts docker images list "${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/dsg-f3-a3" --include-tags --format=json > /tmp/registry-images.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          repository = json.loads(Path("/tmp/registry.json").read_text(encoding="utf-8"))
+          expected_labels = {
+              "capability": "bkl-031",
+              "goog-terraform-provisioned": "true",
+              "increment": "f3-a3",
+              "purpose": "validation-spike",
+              "safety": "none",
+          }
+          if repository.get("name") != "projects/digital-stargate-telemetry/locations/europe-west8/repositories/dsg-f3-a3":
+              raise SystemExit(f"unexpected repository name: {repository.get('name')!r}")
+          if repository.get("format") != "DOCKER" or repository.get("mode") != "STANDARD_REPOSITORY":
+              raise SystemExit(f"unexpected repository format/mode: {repository!r}")
+          if repository.get("labels") != expected_labels:
+              raise SystemExit(f"unexpected repository labels: {repository.get('labels')!r}")
+          images = json.loads(Path("/tmp/registry-images.json").read_text(encoding="utf-8"))
+          if images != []:
+              raise SystemExit(f"registry is not empty: {images!r}")
+          PY
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
+        with:
+          terraform_version: 1.16.2
+          terraform_wrapper: false
+
+      - name: Verify exact state and zero drift without apply
+        shell: bash
+        env:
+          TF_VAR_project_id: ${{ vars.GCP_PROJECT_ID }}
+          TF_VAR_region: ${{ vars.GCP_REGION }}
+        run: |
+          set -euo pipefail
+          terraform -chdir=infrastructure/bkl-031-f3-a3-gcp/registry init -reconfigure -input=false -backend-config="bucket=${GCP_STATE_BUCKET}" -backend-config="prefix=bkl-031/f3-a3/registry"
+          mapfile -t resources < <(terraform -chdir=infrastructure/bkl-031-f3-a3-gcp/registry state list)
+          test "${#resources[@]}" -eq 1
+          test "${resources[0]}" = "google_artifact_registry_repository.spike"
+          terraform -chdir=infrastructure/bkl-031-f3-a3-gcp/registry show -json > /tmp/registry-state.json
+          set +e
+          terraform -chdir=infrastructure/bkl-031-f3-a3-gcp/registry plan -input=false -lock-timeout=60s -detailed-exitcode -out=/tmp/registry-zero-drift.tfplan
+          plan_status=$?
+          set -e
+          test "$plan_status" -eq 0
+          state_uri="gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/registry/default.tfstate"
+          mapfile -t state_objects < <(gcloud storage ls "gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/registry/**")
+          test "${#state_objects[@]}" -eq 1
+          test "${state_objects[0]}" = "$state_uri"
+          gcloud storage cat "$state_uri" > /tmp/registry-raw-state.json
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          state = json.loads(Path("/tmp/registry-state.json").read_text(encoding="utf-8"))
+          resources = state.get("values", {}).get("root_module", {}).get("resources", [])
+          if len(resources) != 1 or resources[0].get("address") != "google_artifact_registry_repository.spike":
+              raise SystemExit(f"unexpected Terraform state resources: {resources!r}")
+          if resources[0].get("type") != "google_artifact_registry_repository":
+              raise SystemExit(f"unexpected Terraform state type: {resources[0].get('type')!r}")
+          raw_state = Path("/tmp/registry-raw-state.json").read_bytes()
+          raw = json.loads(raw_state)
+          if raw.get("version") != 4 or len(raw.get("resources", [])) != 1:
+              raise SystemExit("unexpected raw Terraform state")
+          evidence = {
+              "evidenceId": "BKL-031-F3-A3-REGISTRY-FOUNDATION-VERIFICATION-EVIDENCE",
+              "sourceCommit": os.environ["GITHUB_SHA"],
+              "authentication": "GITHUB_OIDC_WIF_MAIN_ONLY",
+              "terraformStateUri": f"gs://{os.environ['GCP_STATE_BUCKET']}/bkl-031/f3-a3/registry/default.tfstate",
+              "terraformStateRawSha256": hashlib.sha256(raw_state).hexdigest(),
+              "terraformStateSerial": raw.get("serial"),
+              "terraformStateLineage": raw.get("lineage"),
+              "resourceCount": 1,
+              "resourceAddress": "google_artifact_registry_repository.spike",
+              "postApplyDrift": 0,
+              "repositoryImageCount": 0,
+              "sourceApplyRunId": 35134193946,
+              "sourceApply": "SUCCEEDED_BEFORE_FINAL_LABEL_ASSERTION",
+              "imagePush": "NOT_EXECUTED",
+              "platformApply": "NOT_EXECUTED",
+              "artifactUpload": "NOT_EXECUTED",
+              "scientificExecution": "NOT_EXECUTED",
+              "protectedSiteUse": "NOT_EXECUTED",
+              "runtimeActivation": "NOT_EXECUTED",
+          }
+          rendered = json.dumps(evidence, indent=2, sort_keys=True)
+          print("BKL031_REGISTRY_FOUNDATION_VERIFICATION_EVIDENCE_BEGIN")
+          print(rendered)
+          print("BKL031_REGISTRY_FOUNDATION_VERIFICATION_EVIDENCE_END")
+          Path(os.environ["GITHUB_STEP_SUMMARY"]).write_text(
+              "## BKL-031 F3-A3 Artifact Registry foundation verification\n\n```json\n" + rendered + "\n```\n",
+              encoding="utf-8",
+          )
+          PY

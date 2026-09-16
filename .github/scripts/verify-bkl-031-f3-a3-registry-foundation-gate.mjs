@@ -40,6 +40,7 @@ for (const fragment of [
   'test "${#resources[@]}" -eq 1',
   'test "${resources[0]}" = "google_artifact_registry_repository.spike"',
   '"resourceActions": {"add": 1, "change": 0, "destroy": 0}',
+  '"goog-terraform-provisioned": "true"',
   '"imagePush": "NOT_EXECUTED"',
   '"platformApply": "NOT_EXECUTED"',
   '"scientificExecution": "NOT_EXECUTED"',
