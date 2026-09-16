@@ -2,10 +2,10 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-16",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-A3 exact approved kernel privately published and full-read-back verified; job unexecuted; scientific spike not executed; ADR-010 proposed; S10 unavailable",
+  "projectStatus": "BKL-031 F3-A3 bounded scientific runner source and reproducible offline candidate verified; runner image unpublished; platform job remains preflight-only and unexecuted; scientific spike not executed; ADR-010 proposed; S10 unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A3 separately reviewed exact scientific-spike execution",
-  "target": "Prepare and review the bounded exact scientific-spike execution gate against the published image, immutable method profile and full-read-back-verified private de442s.bsp generation. Stop before execution until that gate completes; prohibit Horizons traffic, protected-site use and runtime activation; ADR-010 remains Proposed and S10 remains UNAVAILABLE.",
+  "nextMilestone": "BKL-031 F3-A3 separately reviewed exact runner OCI publication",
+  "target": "Prepare and review publication of only the exact reproducible runner candidate digest derived from BKL-031-F3-A3-RUNNER-MANIFEST-001. Stop before platform update and job execution; prohibit Horizons traffic, protected-site use and runtime activation; ADR-010 remains Proposed and S10 remains UNAVAILABLE.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -56,7 +56,7 @@
     },
     {
       "id": "architecture-program",
-      "title": "Architecture Program AP-001–AP-015",
+      "title": "Architecture Program AP-001\u2013AP-015",
       "items": [
         {
           "id": "AP-001",
@@ -593,14 +593,14 @@
       "itemRef": "BKL-031",
       "title": "BKL-031 F3-A3 Method ADR and Validation Spike Handoff",
       "date": "2026-09-15",
-      "description": "Program Architect selected the documentation-only F3-A3 handoff after F3-A1/A2 repository-authority completion. The future Solution Architect package must compare candidates and prepare owner gates F3-OD04–F3-OD10; no provider, dependency, data/kernel, external call or runtime is authorized."
+      "description": "Program Architect selected the documentation-only F3-A3 handoff after F3-A1/A2 repository-authority completion. The future Solution Architect package must compare candidates and prepare owner gates F3-OD04\u2013F3-OD10; no provider, dependency, data/kernel, external call or runtime is authorized."
     },
     {
       "id": "M-BKL031-F3-A3-DECISION-PREPARATION",
       "itemRef": "BKL-031",
       "title": "BKL-031 F3-A3 Decision Preparation",
       "date": "2026-09-15",
-      "description": "Solution Architecture, proposed ADR-010 and validation-spike plan prepared for review. Conditional recommendation favors a local primary and restricted reference path, but all F3-OD04–F3-OD10 owner decisions remain open; no execution or runtime is authorized."
+      "description": "Solution Architecture, proposed ADR-010 and validation-spike plan prepared for review. Conditional recommendation favors a local primary and restricted reference path, but all F3-OD04\u2013F3-OD10 owner decisions remain open; no execution or runtime is authorized."
     },
     {
       "id": "M-BKL031-F3-A3-CONTAINER-BUILD-EVIDENCE",
