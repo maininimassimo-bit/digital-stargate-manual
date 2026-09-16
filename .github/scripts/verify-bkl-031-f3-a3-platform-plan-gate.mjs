@@ -9,6 +9,10 @@ const evidencePath = path.join(root, "infrastructure", "bkl-031-f3-a3-gcp", "pla
 const evidenceBytes = fs.readFileSync(evidencePath);
 const evidence = JSON.parse(evidenceBytes.toString("utf8"));
 const expectedEvidenceSha256 = "06cf923ae2bad1e869782bffd6a7e5389f9a68419d6199d0d7df5319f50b12e6";
+const currentEvidencePath = path.join(root, "infrastructure", "bkl-031-f3-a3-gcp", "platform", "BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-002.json");
+const currentEvidenceBytes = fs.readFileSync(currentEvidencePath);
+const currentEvidence = JSON.parse(currentEvidenceBytes.toString("utf8"));
+const expectedCurrentEvidenceSha256 = "8d1864d0a766d11ff51c8461adc12714a845ef41ee624dbd1e17826cf2d5fbbb";
 
 const fail = (message) => { throw new Error(message); };
 const requireText = (fragment) => {
@@ -114,4 +118,52 @@ for (const name of ["imagePush", "artifactRegistryRepositoryApply", "platformApp
 }
 exact(evidence.controls?.runtimeAuthority, false, "evidence.controls.runtimeAuthority");
 
-console.log(`BKL-031 F3-A3 authenticated exact-head plan gate and evidence verified: ${evidence.evidenceId}@sha256:${expectedEvidenceSha256}; no apply/push/upload`);
+const currentEvidenceSha256 = crypto.createHash("sha256").update(currentEvidenceBytes).digest("hex");
+if (currentEvidenceSha256 !== expectedCurrentEvidenceSha256) fail(`current authenticated plan evidence digest mismatch: ${currentEvidenceSha256}`);
+exact(currentEvidence.schemaVersion, "1.0", "currentEvidence.schemaVersion");
+exact(currentEvidence.evidenceId, "BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-002", "currentEvidence.evidenceId");
+exact(currentEvidence.status, "PUBLISHED_DIGEST_FOUR_RESOURCE_PLAN_VERIFIED_NOT_APPLIED", "currentEvidence.status");
+exact(currentEvidence.source?.commit, "3abc8aa049262336fd5a814593cdfc521e4fc594", "currentEvidence.source.commit");
+exact(currentEvidence.continuousIntegration?.runId, 35138798214, "currentEvidence.continuousIntegration.runId");
+exact(currentEvidence.continuousIntegration?.jobId, 104937814702, "currentEvidence.continuousIntegration.jobId");
+exact(currentEvidence.continuousIntegration?.conclusion, "SUCCESS", "currentEvidence.continuousIntegration.conclusion");
+exact(currentEvidence.authentication?.mode, "GITHUB_OIDC_WIF_MAIN_ONLY", "currentEvidence.authentication.mode");
+exact(currentEvidence.authentication?.staticServiceAccountKey, false, "currentEvidence.authentication.staticServiceAccountKey");
+exact(currentEvidence.candidateImage?.publication, "PUBLISHED_EXACT_DIGEST", "currentEvidence.candidateImage.publication");
+for (const name of ["manifestDigest", "candidateA", "candidateB"]) {
+  exact(currentEvidence.candidateImage?.[name], "sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce", `currentEvidence.candidateImage.${name}`);
+}
+exact(currentEvidence.candidateImage?.configDigest, "sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0", "currentEvidence.candidateImage.configDigest");
+exact(currentEvidence.candidateImage?.registryResolutionVerified, true, "currentEvidence.candidateImage.registryResolutionVerified");
+exact(currentEvidence.terraformPlan?.binarySha256, "34a77cb40dce5adce6ae7fd8809131ae6952731fd4fc8c1d2245e31da255a88e", "currentEvidence.terraformPlan.binarySha256");
+exact(currentEvidence.terraformPlan?.jsonSha256, "da05e0cb220747a1daab2f117ed3a1820d7f3ca230e67f0ce905a85576add269", "currentEvidence.terraformPlan.jsonSha256");
+exact(currentEvidence.terraformPlan?.textSha256, "5a2c204553d8feae1640f978a74f18f4cdc7ba828c1b351a8f940e1c7a73d0b4", "currentEvidence.terraformPlan.textSha256");
+exact(currentEvidence.terraformPlan?.actions?.add, 4, "currentEvidence.terraformPlan.actions.add");
+exact(currentEvidence.terraformPlan?.actions?.change, 0, "currentEvidence.terraformPlan.actions.change");
+exact(currentEvidence.terraformPlan?.actions?.destroy, 0, "currentEvidence.terraformPlan.actions.destroy");
+exact(currentEvidence.terraformPlan?.resourceAddresses?.length, 4, "currentEvidence.terraformPlan.resourceAddresses.length");
+const expectedCurrentAddresses = [
+  "google_cloud_run_v2_job.spike",
+  "google_cloud_run_v2_job_iam_member.deployer_invoker",
+  "google_compute_network.spike",
+  "google_compute_subnetwork.spike",
+];
+exact(
+  JSON.stringify([...(currentEvidence.terraformPlan?.resourceAddresses ?? [])].sort()),
+  JSON.stringify([...expectedCurrentAddresses].sort()),
+  "currentEvidence.terraformPlan.resourceAddresses",
+);
+exact(currentEvidence.backendState?.status, "PERSISTED_EMPTY_STATE_ONLY", "currentEvidence.backendState.status");
+exact(currentEvidence.backendState?.objectCount, 1, "currentEvidence.backendState.objectCount");
+exact(currentEvidence.backendState?.outputs, 0, "currentEvidence.backendState.outputs");
+exact(currentEvidence.backendState?.resources, 0, "currentEvidence.backendState.resources");
+exact(currentEvidence.backendState?.residualLock, false, "currentEvidence.backendState.residualLock");
+exact(currentEvidence.controls?.imagePush, "EXECUTED_SEPARATE_GATE", "currentEvidence.controls.imagePush");
+exact(currentEvidence.controls?.artifactRegistryRepositoryApply, "EXECUTED_SEPARATE_GATE", "currentEvidence.controls.artifactRegistryRepositoryApply");
+for (const name of ["platformApply", "artifactUpload", "scientificExecution", "externalReferenceTraffic", "protectedSiteUse", "runtimeActivation"]) {
+  exact(currentEvidence.controls?.[name], "NOT_EXECUTED", `currentEvidence.controls.${name}`);
+}
+exact(currentEvidence.controls?.runtimeAuthority, false, "currentEvidence.controls.runtimeAuthority");
+exact(currentEvidence.nextGate, "SEPARATELY_REVIEWED_EXACT_FOUR_RESOURCE_PLATFORM_APPLY", "currentEvidence.nextGate");
+
+console.log(`BKL-031 F3-A3 authenticated exact-head plan gate and evidence verified: ${currentEvidence.evidenceId}@sha256:${expectedCurrentEvidenceSha256}; four creates, no apply/upload`);

@@ -168,4 +168,4 @@ Revert the repository package for source changes. The authorized bootstrap and r
 
 ## Governance stop
 
-The authenticated exact-head five-resource plan and isolated Artifact Registry foundation gates are complete. The registry is post-verified with one-resource state, zero drift and zero images. Stop before exact OCI publication and again before the refreshed published-digest four-resource platform plan/apply gate. Artifact upload, spike execution, protected-site use and runtime activation remain blocked. S10 remains `UNAVAILABLE`.
+The authenticated exact-head five-resource plan, isolated Artifact Registry foundation, exact OCI publication and refreshed published-digest four-resource plan gates are complete. The registry contains one post-verified image at the approved digest, while the platform backend remains empty. Stop before the separately reviewed exact four-resource platform apply. Artifact upload, spike execution, protected-site use and runtime activation remain blocked. S10 remains `UNAVAILABLE`.

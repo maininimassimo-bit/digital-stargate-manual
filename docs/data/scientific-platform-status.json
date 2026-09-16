@@ -19,8 +19,8 @@
       "title": "Observation Planner intelligente",
       "status": "active"
     },
-    "nextMilestone": "BKL-031 F3-A3 exact OCI publication and registry-resolved four-resource platform plan",
-    "target": "Review a main-only exact-digest OCI publication gate, publish only the reproduced candidate after exact-head integration, then refresh the authenticated plan for the four remaining resources. Stop before image push until that gate is reviewed and stop again before platform apply; artifact upload, spike execution, Horizons request, protected-site use and runtime activation remain blocked."
+    "nextMilestone": "BKL-031 F3-A3 separately reviewed exact four-resource platform apply",
+    "target": "Prepare and review a main-only gate that recreates the exact four-resource saved plan and applies only that plan after exact-head integration. Stop before artifact upload, job execution, Horizons request, protected-site use and runtime activation; ADR-010 remains Proposed and S10 remains UNAVAILABLE."
   },
   "architecture": {
     "ap013": {

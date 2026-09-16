@@ -74,6 +74,8 @@ Read-only run `35135376900` on exact main commit `9c0bc79f3d7fc12c27f36d8b41c510
 
 The exact OCI publication gate is an explicit-dispatch, main-only WIF workflow. Before it can publish, it revalidates the immutable source and registry-foundation evidence, rebuilds the OCI candidate twice without build network or cache, and requires manifest `sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce` and config `sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0`. A third no-push registry-exporter build must resolve to those same values. WIF then verifies the exact empty repository before the workflow performs its single push exporter. Registry-resolved manifest bytes, config, image count and commit-derived tag must match exactly. The workflow contains no Terraform, platform mutation, artifact upload or scientific execution. This source package prepares the gate; it does not publish the image.
 
+PR #231 merged the reviewed gate as `3abc8aa049262336fd5a814593cdfc521e4fc594`. Run `35138527237` published and post-verified the exact manifest as the repository's sole image under tag `candidate-3abc8aa04926`; `BKL-031-F3-A3-OCI-PUBLICATION-EVIDENCE-001` records it at SHA-256 `be2d999b9383df1e55c1627cdf48fa2dcde4040f88c3198d224bc48bef60833d`. Separate plan-only run `35138798214` then resolved that registry digest and produced exactly four create actions with no change or destroy. `BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-002` records its ephemeral plan hashes and empty backend state at SHA-256 `8d1864d0a766d11ff51c8461adc12714a845ef41ee624dbd1e17826cf2d5fbbb`. The next gate is separately reviewed platform apply; artifact upload and scientific execution remain blocked.
+
 ## Local validation
 
 Run:
