@@ -22,6 +22,14 @@ const expectedPackages = new Map([
   ["sgp4", ["2.27", "4d3775313120dcb6239535fa0c94cb6d5b089fd84bbfb15220923ae38dec7296"]],
   ["skyfield", ["1.55", "9f98964855067460c94aa81a337194136f4a97a62ba8bbbfac1b8556f2b66ad4"]],
 ]);
+const expectedSourceFiles = new Map([
+  ["infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile", "1f341aca4160969efb5a2a8e60218742bdb08fdf26715d2371559fde1bc2d4e1"],
+  ["infrastructure/bkl-031-f3-a3-gcp/container/requirements.lock", "b9356f05eebf75501ef11f698b780837ebdde3fc64162d1c1b42420b30edf490"],
+  ["infrastructure/bkl-031-f3-a3-gcp/container/astropy.cfg", "00aa2cd71966f5c98d7864db1fac834d263f44139c5364d8c1b3efce8aa8cf2a"],
+  ["infrastructure/bkl-031-f3-a3-gcp/container/entrypoint.sh", "fcfe2d5b623e99f643f530b24e683cfc82d39b1c69381406f5f2906d0775e347"],
+  ["infrastructure/bkl-031-f3-a3-gcp/container/preflight.py", "951cc6aaca04a4a9b9c9290999c0acf4b72f368a64ded7394963c0de325cb90c"],
+  ["infrastructure/bkl-031-f3-a3-gcp/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json", expectedProfileSha256],
+]);
 
 const sha256 = (value) => crypto.createHash("sha256").update(value).digest("hex");
 const read = (relativePath) => fs.readFileSync(path.join(root, relativePath));
@@ -58,9 +66,12 @@ function validateManifest(manifest) {
   if (!String(manifest.iersSnapshot?.source).startsWith("https://files.pythonhosted.org/")) fail("IERS artifact source must be files.pythonhosted.org");
 
   equal(manifest.packages?.length, expectedPackages.size, "packages.length");
+  const seenPackages = new Set();
   for (const entry of manifest.packages || []) {
     const expected = expectedPackages.get(entry.name);
     if (!expected) fail(`unreviewed package: ${entry.name}`);
+    if (seenPackages.has(entry.name)) fail(`duplicate package: ${entry.name}`);
+    seenPackages.add(entry.name);
     equal(entry.version, expected[0], `${entry.name}.version`);
     equal(entry.sha256, expected[1], `${entry.name}.sha256`);
     exactSha(entry.sha256, `${entry.name}.sha256`);
@@ -69,9 +80,11 @@ function validateManifest(manifest) {
   }
 
   const sourceFiles = new Map((manifest.sourceFiles || []).map((entry) => [entry.path, entry.sha256]));
-  equal(sourceFiles.size, 6, "sourceFiles count");
-  for (const [relativePath, expectedDigest] of sourceFiles) {
-    exactSha(expectedDigest, `${relativePath} digest`);
+  equal(manifest.sourceFiles?.length, expectedSourceFiles.size, "sourceFiles.length");
+  equal(sourceFiles.size, expectedSourceFiles.size, "sourceFiles unique count");
+  for (const [relativePath, expectedDigest] of expectedSourceFiles) {
+    equal(sourceFiles.get(relativePath), expectedDigest, `${relativePath} declared digest`);
+    exactSha(expectedDigest, `${relativePath} expected digest`);
     const actualDigest = sha256(read(relativePath));
     equal(actualDigest, expectedDigest, `${relativePath} content digest`);
   }
@@ -141,6 +154,8 @@ const mutations = [
   (value) => { value.iersSnapshot.sha256 = "0".repeat(64); },
   (value) => { value.target.baseImagePlatformDigest = "latest"; },
   (value) => { value.packages[0].version = "latest"; },
+  (value) => { value.packages[1] = structuredClone(value.packages[0]); },
+  (value) => { value.sourceFiles[0].path = "README.md"; },
   (value) => { value.iersSnapshot.acquisitionStatus = "ACQUIRED"; },
 ];
 for (const mutate of mutations) {
