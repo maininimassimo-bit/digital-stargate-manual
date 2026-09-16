@@ -2,7 +2,7 @@
 
 This directory contains the governed Terraform and container gates for the future ephemeris/lunar validation spike.
 
-Current state: BOOTSTRAP APPLIED, REMOTE STATE AND BACKEND PROMOTION POST-VERIFIED, REPRODUCIBLE OFFLINE CONTAINER BUILD AND NETWORK-DISABLED PREFLIGHT VERIFIED, AUTHENTICATED FIVE-RESOURCE PLAN VERIFIED, REGISTRY FOUNDATION APPLIED AND POST-VERIFIED EMPTY, IMAGE NOT PUBLISHED, REMAINING PLATFORM NOT APPLIED, JOB NOT EXECUTED.
+Current state: BOOTSTRAP APPLIED, REMOTE STATE AND BACKEND PROMOTION POST-VERIFIED, REPRODUCIBLE OFFLINE CONTAINER BUILD AND NETWORK-DISABLED PREFLIGHT VERIFIED, REGISTRY FOUNDATION APPLIED, EXACT OCI IMAGE PUBLISHED, AUTHENTICATED FOUR-RESOURCE PLAN VERIFIED, REMAINING PLATFORM NOT APPLIED, JOB NOT EXECUTED.
 
 ## Directories
 
@@ -76,6 +76,8 @@ The exact OCI publication gate is an explicit-dispatch, main-only WIF workflow. 
 
 PR #231 merged the reviewed gate as `3abc8aa049262336fd5a814593cdfc521e4fc594`. Run `35138527237` published and post-verified the exact manifest as the repository's sole image under tag `candidate-3abc8aa04926`; `BKL-031-F3-A3-OCI-PUBLICATION-EVIDENCE-001` records it at SHA-256 `be2d999b9383df1e55c1627cdf48fa2dcde4040f88c3198d224bc48bef60833d`. Separate plan-only run `35138798214` then resolved that registry digest and produced exactly four create actions with no change or destroy. `BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-002` records its ephemeral plan hashes and empty backend state at SHA-256 `8d1864d0a766d11ff51c8461adc12714a845ef41ee624dbd1e17826cf2d5fbbb`. The next gate is separately reviewed platform apply; artifact upload and scientific execution remain blocked.
 
+The candidate `BKL-031 F3-A3 Exact Platform Apply` workflow is manual, main-only and serialized with the authenticated plan gate. It fails closed unless the exact published image is the sole registry version, the platform state is the single validated empty object, the four target resources and the approved kernel object are absent, and a newly generated saved plan contains exactly the reviewed four create actions. Its only mutation command applies that saved plan once. Postconditions require the exact four-resource state, immutable job image and configuration, the deployer-only invoker binding, zero job executions, absent kernel, and an immediate zero-drift plan. The workflow records evidence only in its job summary; it cannot upload artifacts, execute the job, transfer the kernel, contact an external reference provider or activate runtime authority. This source package prepares the gate and does not apply the platform.
+
 ## Local validation
 
 Run:
@@ -87,14 +89,15 @@ Run:
 5. node .github/scripts/verify-bkl-031-f3-a3-registry-foundation-gate.mjs
 6. node .github/scripts/verify-bkl-031-f3-a3-registry-foundation-verification.mjs
 7. node .github/scripts/verify-bkl-031-f3-a3-exact-oci-publication.mjs
-8. terraform -chdir=bootstrap fmt -check
-9. terraform -chdir=bootstrap init -backend=false
-10. terraform -chdir=bootstrap validate
-11. terraform -chdir=registry fmt -check
-12. terraform -chdir=registry init -backend=false
-13. terraform -chdir=registry validate
-14. terraform -chdir=platform fmt -check
-15. terraform -chdir=platform init -backend=false
-16. terraform -chdir=platform validate
+8. node .github/scripts/verify-bkl-031-f3-a3-platform-apply-gate.mjs
+9. terraform -chdir=bootstrap fmt -check
+10. terraform -chdir=bootstrap init -backend=false
+11. terraform -chdir=bootstrap validate
+12. terraform -chdir=registry fmt -check
+13. terraform -chdir=registry init -backend=false
+14. terraform -chdir=registry validate
+15. terraform -chdir=platform fmt -check
+16. terraform -chdir=platform init -backend=false
+17. terraform -chdir=platform validate
 
 No command above authenticates to GCP or mutates cloud resources.
