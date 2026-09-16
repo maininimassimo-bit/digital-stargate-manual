@@ -4,7 +4,7 @@
 |---|---|
 | Versione | 7.1 |
 | Baseline | 16/09/2026 |
-| Stato | Current root bootstrap — F3-A3 exact OCI published and registry-resolved four-resource plan verified; platform unapplied; no scientific execution authority |
+| Stato | Current root bootstrap — F3-A3 exact four-resource platform applied and zero-drift verified; job unexecuted; no scientific execution authority |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -54,7 +54,7 @@ Verificare branch, HEAD, PR, workflow, backlog, canonical roadmap, generated pro
 - BKL-046 — AI Post-Processing Assistant: CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only con limitation;
 - BKL-031 F1 — Source Discovery and Semantic Boundary: ACCEPTED / POST-MERGE VERIFIED;
 - BKL-031 F2 — Machine-Readable Context/Source Contract and Bounded Fixtures: ACCEPTED / POST-MERGE VERIFIED via PR #188 and merge `7f861f7399079858c9744e69b6c773664b6b5b54`;
-- BKL-031 F3 handoff and Solution Architecture: ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED; F3-A3 exact OCI publication and registry-resolved four-resource plan are evidence-complete, while platform apply and scientific execution remain blocked;
+- BKL-031 F3 handoff and Solution Architecture: ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED; F3-A3 exact OCI publication and four-resource platform apply are evidence-complete and zero-drift verified, while artifact upload and scientific execution remain blocked;
 - BKL-031 F3-A1 — Site Authority Contract: ACCEPTED WITH CONDITIONS / POST-MERGE VERIFIED via PR #193; acceptance reconciliation PR #194 merged as `1fd771632239cdca38d7527c55b974d805ffd1b9` with 9/9 workflows;
 - BKL-031 F3-A2-D2 — first protected setup baseline is APPROVED; PR #202 merged as `bb11f25192200655427411a46a2e18560a5d9bec` and is post-merge verified;
 - BKL-031 F3-A1-M1 — owner decisions and protected source authorization are complete;
@@ -70,7 +70,7 @@ La closure BKL-046 non dichiara efficacia scientifica né produzione: `NOT_EVALU
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 EXACT OCI PUBLISHED + FOUR-RESOURCE PLAN VERIFIED / PLATFORM UNAPPLIED / ADR-010 PROPOSED / S10 UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 EXACT FOUR-RESOURCE PLATFORM APPLIED + ZERO DRIFT / JOB UNEXECUTED / ADR-010 PROPOSED / S10 UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -86,7 +86,7 @@ PR #209 merged with expected-head control as `bc4307c2042a45985622044e11631421de
 
 `BKL-031-F3-A2-D5` is ACCEPTED / POST-MERGE VERIFIED. The protected receipt is integrated, the historical DRAFT remains immutable and the separate `APPROVED` envelope preserves the assignment payload and digest. The repository authority resolves `AVAILABLE` only for authorized validated input with approved source authorities. S08 remains `UNAVAILABLE`; runtime S09 remains `UNAVAILABLE_CURRENT` because no adapter exists.
 
-PR #212 integrated the F3-A3 decision-preparation package as `527b298094b07e5a00317e60cab3abefed7a5759`. PR #214 integrated the Google Cloud scaffolding, PR #215 integrated the ARB-213-MI02 state-lifecycle procedure, PR #217 integrated the immutable method profile and PR #218 added the reviewed Windows provider checksum. The authorized bootstrap plan for `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46` was applied with 27 additions, 0 changes and 0 destroys; bootstrap state is active in protected GCS. PR #219 promoted the permanent backend and the post-promotion remote-state, recovery and zero-drift checks satisfy ARB-213-MI02. PR #231 merged the exact OCI publication gate as `3abc8aa049262336fd5a814593cdfc521e4fc594`; run `35138527237` published the sole approved image and run `35138798214` verified the four-resource plan without apply. ADR-010 remains Proposed and S10 remains `UNAVAILABLE`.
+PR #212 integrated the F3-A3 decision-preparation package as `527b298094b07e5a00317e60cab3abefed7a5759`. PR #214 integrated the Google Cloud scaffolding, PR #215 integrated the ARB-213-MI02 state-lifecycle procedure, PR #217 integrated the immutable method profile and PR #218 added the reviewed Windows provider checksum. The authorized bootstrap plan for `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46` was applied with 27 additions, 0 changes and 0 destroys; bootstrap state is active in protected GCS. PR #219 promoted the permanent backend and the post-promotion remote-state, recovery and zero-drift checks satisfy ARB-213-MI02. PR #231 merged the exact OCI publication gate as `3abc8aa049262336fd5a814593cdfc521e4fc594`; run `35138527237` published the sole approved image and run `35138798214` verified the four-resource plan. PR #233 merged the exact apply gate as `af81b807c8f6d8861ede3ecf3ae9b34e66df7790`; run `35141947085` applied those four resources, verified zero drift and confirmed zero job executions with the kernel still absent. ADR-010 remains Proposed and S10 remains `UNAVAILABLE`.
 
 ## F3-A2-D4 acceptance checkpoint — 15/09/2026
 
@@ -127,3 +127,7 @@ The exact saved bootstrap plan SHA-256 `9bf2804ae697db1e5369e20f5594fbbaa0fa7fc2
 ## F3-A3 exact OCI publication and four-resource plan — 16/09/2026
 
 PR #231 merged the main-only publication gate as `3abc8aa049262336fd5a814593cdfc521e4fc594` after exact-head review and CI. Run `35138527237` published and post-verified the sole registry image at manifest `sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce`. Separate run `35138798214` resolved that digest and verified exactly four create actions, zero changes and zero destroys while preserving empty platform state. The next gate is a separately reviewed exact saved-plan apply for those four resources. Artifact upload, scientific execution, external reference traffic, protected-site use and runtime activation remain blocked; ADR-010 is Proposed and S10 is `UNAVAILABLE`.
+
+## F3-A3 exact platform apply — 16/09/2026
+
+PR #233 merged the manual main-only apply gate as `af81b807c8f6d8861ede3ecf3ae9b34e66df7790` after 8/8 exact-head checks, ARB `APPROVED — 100/100`, Release Quality readiness and 5/5 post-merge workflows. WIF run `35141947085` applied only the verified saved plan with four additions, zero changes and zero destroys. The final state has the exact VPC, subnet, digest-pinned Cloud Run Job and deployer invoker binding, serial `3`, lineage `2be9b82b-88d3-888f-4fcd-dded2f74f7f3` and immediate zero drift. No job execution or kernel upload occurred. The next gate is separately reviewed acquisition and private content-addressed upload of the approved `de442s.bsp`; scientific execution, external reference traffic, protected-site use and runtime activation remain blocked. ADR-010 is Proposed and S10 is `UNAVAILABLE`.

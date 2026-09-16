@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-A3-INFRA-001 |
-| Status | **PROPOSED — EXACT IMAGE PUBLISHED / FOUR-RESOURCE PLAN VERIFIED / PLATFORM NOT APPLIED** |
+| Status | **PROPOSED — EXACT FOUR-RESOURCE PLATFORM APPLIED / ZERO DRIFT / JOB NOT EXECUTED** |
 | Version | 1.0 |
 | Date | 2026-09-15 |
 | Baseline | `main@527b298094b07e5a00317e60cab3abefed7a5759` |
@@ -23,7 +23,7 @@ Provide an isolated, low-idle-cost execution boundary for the future F3-A3 valid
 | Workload Identity Pool | trusts only this repository and `refs/heads/main` | one deployer service account |
 | bootstrap Terraform | APIs, deployer/runtime identities and three private buckets | one-time administrator action |
 | registry Terraform | one Artifact Registry Docker repository in dedicated state | exact saved-plan apply only after separate review |
-| platform Terraform | private VPC/subnet and Cloud Run Job | manual exact saved-plan apply candidate; no apply in this package |
+| platform Terraform | private VPC/subnet and Cloud Run Job | exact saved plan applied; zero-drift state evidence recorded |
 | data bucket | read-only kernel/IERS input for runtime identity | no public access |
 | evidence bucket | create-only spike evidence from runtime identity | versioned, no public access |
 | state bucket | Terraform state for later authenticated runs | versioned, deployer-only |
@@ -108,7 +108,7 @@ CI run `35122782246` acquired all ten artifacts ephemerally with exact hashes, b
 
 Authenticated workflow run `35131365596` on exact commit `380bd8c3d04f570acb21a9a7f532930111adcdc8` used the reviewed WIF deployer identity and produced two identical unpublished OCI manifests at `sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce`. The saved plan is exactly five additions, zero changes and zero destroys. It was not retained outside the job; its text SHA-256 is `6fd9c1c3f9d1c754d310f88fa2e8f3dfb2422a5a9195ec40f6f57087bbb8c83e`. The platform backend contains one validated empty state and no lock. Evidence is recorded in `BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-001` at SHA-256 `06cf923ae2bad1e869782bffd6a7e5389f9a68419d6199d0d7df5319f50b12e6`.
 
-The dedicated `dsg-f3-a3` Artifact Registry repository exists and its foundation was post-verified empty before publication. Exact OCI publication and the refreshed authenticated four-resource platform plan are now separately evidenced. Platform apply, artifact upload and job execution remain `NOT_EXECUTED`.
+The dedicated `dsg-f3-a3` Artifact Registry repository exists and its foundation was post-verified empty before publication. Exact OCI publication, the refreshed authenticated four-resource plan and the exact saved-plan platform apply are separately evidenced. Artifact upload and job execution remain `NOT_EXECUTED`.
 
 The repository prepared the registry foundation as an explicit-dispatch, main-only WIF workflow. Artifact Registry ownership remains isolated in a dedicated Terraform root and state; the platform state is empty. Static policy requires exactly one registry resource and prohibits `-target`, bootstrap/platform apply, image publication and cloud mutations outside the saved registry plan.
 
@@ -120,4 +120,4 @@ Run `35138527237` on exact commit `3abc8aa049262336fd5a814593cdfc521e4fc594` pub
 
 Separate run `35138798214` resolved that published digest and verified the four remaining absent resources. Its saved plan contains exactly four additions, zero changes and zero destroys; its binary, JSON and text SHA-256 values are recorded in `BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-002` at SHA-256 `8d1864d0a766d11ff51c8461adc12714a845ef41ee624dbd1e17826cf2d5fbbb`. Only the empty platform state persists. The next gate is a separately reviewed exact saved-plan apply; artifact upload and scientific execution remain blocked.
 
-The candidate platform-apply workflow is explicit-dispatch, main-only and serialized against the authenticated plan workflow. Before its sole apply command it revalidates the published image inventory, empty backend state, absence of every target resource and absence of the approved kernel object, then accepts only a saved plan with the four established create addresses. After apply it requires those four state addresses, the exact network/subnet/job/IAM configuration, zero Cloud Run executions, continued kernel absence and zero Terraform drift. It neither uploads artifacts nor executes the job. Exact-head CI, process-separated ARB and Release Quality review, expected-head merge, and post-merge verification remain prerequisites to dispatch.
+PR #233 integrated the explicit-dispatch, main-only platform-apply workflow after exact-head CI, process-separated ARB and Release Quality review. Run `35141947085` revalidated the published image inventory, empty backend state, absence of every target resource and absence of the approved kernel object, then applied only the saved plan with the four established create addresses. The exact network/subnet/job/IAM configuration now persists in state serial `3`; zero Cloud Run executions, continued kernel absence and zero Terraform drift were verified. `BKL-031-F3-A3-PLATFORM-APPLY-EVIDENCE-001` records the result at SHA-256 `ca5952b67904f514e2e05b7abfd8aeb4df71cfdba89958441ca233bd01e710b8`. The next separately reviewed gate is exact approved-kernel acquisition and private content-addressed upload. The job remains unexecuted.

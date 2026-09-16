@@ -151,6 +151,8 @@ Current evidence:
 - BKL-031-F3-A3-CONTAINER-MANIFEST-002@sha256:02ceba17c1ac97f780cd545554b254ee668d840fcd85e11310d07c4ecc37e879;
 - BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001@sha256:00546062e78887af003adb010bb60dcfbdfb1480429e22314e4476673c7633a3;
 - BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-001@sha256:06cf923ae2bad1e869782bffd6a7e5389f9a68419d6199d0d7df5319f50b12e6;
+- BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-002@sha256:8d1864d0a766d11ff51c8461adc12714a845ef41ee624dbd1e17826cf2d5fbbb;
+- BKL-031-F3-A3-PLATFORM-APPLY-EVIDENCE-001@sha256:ca5952b67904f514e2e05b7abfd8aeb4df71cfdba89958441ca233bd01e710b8;
 - ARB-213-MI01;
 - BKL-031-F3-A3-INFRA-001;
 - BKL-031-F3-A3-VAL-001;
@@ -164,8 +166,8 @@ ADR-010 may become Accepted only when F3-OD05 is exact, all package/container/da
 
 ## Rollback
 
-Revert the repository package for source changes. The authorized bootstrap and remote state require the governed Terraform state-recovery and rollback procedure; platform and runtime execution remain unauthorized.
+Revert the repository package for source changes. The authorized bootstrap and applied platform state require the governed Terraform state-recovery and rollback procedure; artifact upload, job execution and scientific runtime remain unauthorized.
 
 ## Governance stop
 
-The authenticated exact-head five-resource plan, isolated Artifact Registry foundation, exact OCI publication and refreshed published-digest four-resource plan gates are complete. The registry contains one post-verified image at the approved digest, while the platform backend remains empty. Stop before the separately reviewed exact four-resource platform apply. Artifact upload, spike execution, protected-site use and runtime activation remain blocked. S10 remains `UNAVAILABLE`.
+The authenticated exact-head plan, isolated Artifact Registry foundation, exact OCI publication and exact four-resource platform apply gates are complete. The registry contains one post-verified image at the approved digest. The platform state contains only the private VPC, subnet, digest-pinned Cloud Run Job and invoker binding; zero drift and zero job executions are verified. Stop before separately reviewed exact kernel acquisition and private content-addressed upload. Artifact upload, spike execution, protected-site use and runtime activation remain blocked. S10 remains `UNAVAILABLE`.

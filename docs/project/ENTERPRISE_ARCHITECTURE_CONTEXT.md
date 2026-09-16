@@ -3,15 +3,15 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 3.9 |
+| Versione | 4.0 |
 | Stato | Active context baseline |
-| Data baseline | 15/09/2026 |
+| Data baseline | 16/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch autorevole | `main` |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
 | Continuity handover | `docs/project/HANDOVER_2026-09-15.md` |
 | Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-15.md` |
-| Current governed package | BKL-031 F3-A3 MI02 post-promotion verified; exact container/IERS evidence next; ADR-010 proposed |
+| Current governed package | BKL-031 F3-A3 exact four-resource platform applied and zero-drift verified; job unexecuted; kernel absent; ADR-010 proposed |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo e gerarchia
