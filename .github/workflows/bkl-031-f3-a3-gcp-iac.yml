@@ -11,11 +11,13 @@ on:
       - ".github/scripts/verify-bkl-031-f3-a3-registry-foundation-gate.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-registry-foundation-verification.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-exact-oci-publication.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-platform-apply-gate.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - ".github/workflows/bkl-031-f3-a3-authenticated-platform-plan.yml"
       - ".github/workflows/bkl-031-f3-a3-registry-foundation.yml"
       - ".github/workflows/bkl-031-f3-a3-registry-foundation-verification.yml"
       - ".github/workflows/bkl-031-f3-a3-exact-oci-publication.yml"
+      - ".github/workflows/bkl-031-f3-a3-platform-apply.yml"
       - "infrastructure/bkl-031-f3-a3-gcp/**"
       - "docs/architecture/ADR-010-Ephemeris-Lunar-Method-and-Validation-Profile.md"
       - "docs/architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md"
@@ -33,11 +35,13 @@ on:
       - ".github/scripts/verify-bkl-031-f3-a3-registry-foundation-gate.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-registry-foundation-verification.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-exact-oci-publication.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-platform-apply-gate.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - ".github/workflows/bkl-031-f3-a3-authenticated-platform-plan.yml"
       - ".github/workflows/bkl-031-f3-a3-registry-foundation.yml"
       - ".github/workflows/bkl-031-f3-a3-registry-foundation-verification.yml"
       - ".github/workflows/bkl-031-f3-a3-exact-oci-publication.yml"
+      - ".github/workflows/bkl-031-f3-a3-platform-apply.yml"
       - "infrastructure/bkl-031-f3-a3-gcp/**"
   workflow_dispatch:
 
@@ -72,6 +76,8 @@ jobs:
         run: node .github/scripts/verify-bkl-031-f3-a3-registry-foundation-verification.mjs
       - name: Verify exact OCI publication gate
         run: node .github/scripts/verify-bkl-031-f3-a3-exact-oci-publication.mjs
+      - name: Verify exact four-resource platform apply gate
+        run: node .github/scripts/verify-bkl-031-f3-a3-platform-apply-gate.mjs
 
   terraform:
     name: Terraform validate (${{ matrix.directory }})
