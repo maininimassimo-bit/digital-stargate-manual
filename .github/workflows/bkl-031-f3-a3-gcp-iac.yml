@@ -143,7 +143,7 @@ jobs:
           cat <<EOF | tee -a "$GITHUB_STEP_SUMMARY"
           BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE
           sourceCommit=${GITHUB_SHA}
-          sourceManifestSha256=c81eb6664bc58a6197a725bf5a0b316b7dae9d4bc419a5ff466b30bf20fe8bd8
+          sourceManifestSha256=3895aa12785e02f0537c95d1932512cd152a578c3bdb9194aff867af10b28d58
           imageId=${DSG_CONTAINER_IMAGE_ID}
           os=${operating_system}
           architecture=${architecture}

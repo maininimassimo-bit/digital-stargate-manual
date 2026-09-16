@@ -7,7 +7,7 @@ const containerDir = path.join(root, "infrastructure", "bkl-031-f3-a3-gcp", "con
 const historicalManifestPath = path.join(containerDir, "BKL-031-F3-A3-CONTAINER-MANIFEST-001.json");
 const manifestPath = path.join(containerDir, "BKL-031-F3-A3-CONTAINER-MANIFEST-002.json");
 const historicalManifestSha256 = "7923206d85c5670ef56f9310a813c165c7d516d226c994561516c843b338412e";
-const expectedManifestSha256 = "c81eb6664bc58a6197a725bf5a0b316b7dae9d4bc419a5ff466b30bf20fe8bd8";
+const expectedManifestSha256 = "3895aa12785e02f0537c95d1932512cd152a578c3bdb9194aff867af10b28d58";
 const expectedProfileSha256 = "e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca";
 const expectedIersSha256 = "43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc";
 const expectedBasePlatformDigest = "sha256:9c47360a2a0355e2da18516d0b1c2126ec22c195d2185e97347c9d98398c5bef";
@@ -29,7 +29,7 @@ const expectedSourceFiles = new Map([
   ["infrastructure/bkl-031-f3-a3-gcp/.dockerignore", "8ce1cb34679acf2cca7ea9847358821de2c36e7720e77ccfdf8e19294230329d"],
   ["infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile", "d1edf2f42604b3b773e4485b4710705d4484d18e46c24789fad539bb165986ff"],
   ["infrastructure/bkl-031-f3-a3-gcp/container/requirements.lock", "b9356f05eebf75501ef11f698b780837ebdde3fc64162d1c1b42420b30edf490"],
-  ["infrastructure/bkl-031-f3-a3-gcp/container/astropy.cfg", "00aa2cd71966f5c98d7864db1fac834d263f44139c5364d8c1b3efce8aa8cf2a"],
+  ["infrastructure/bkl-031-f3-a3-gcp/container/astropy.cfg", "0e26beabf3be0a184c23177d5748c322589dc28e0d0f0fe3c4c6e3ac5f75a2a6"],
   ["infrastructure/bkl-031-f3-a3-gcp/container/entrypoint.sh", "fcfe2d5b623e99f643f530b24e683cfc82d39b1c69381406f5f2906d0775e347"],
   ["infrastructure/bkl-031-f3-a3-gcp/container/preflight.py", "698aee0c6da5db322e13348c471359dbdd2a297616de42a9039aa080c44040bf"],
   ["infrastructure/bkl-031-f3-a3-gcp/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json", expectedProfileSha256],
@@ -191,7 +191,7 @@ for (const [name, [version, digest]] of expectedPackages) {
 const entrypoint = fs.readFileSync(path.join(containerDir, "entrypoint.sh"), "utf8");
 if (entrypoint.indexOf("preflight.py") < 0 || entrypoint.indexOf("preflight.py") > entrypoint.indexOf('exec "$@"')) fail("entrypoint must run preflight before the supplied command");
 const astropyConfig = fs.readFileSync(path.join(containerDir, "astropy.cfg"), "utf8");
-if (!astropyConfig.includes("auto_download = False") || !astropyConfig.includes("iers_degraded_accuracy = error")) fail("Astropy IERS configuration is not fail-closed");
+if (!astropyConfig.includes("[utils.iers]") || !astropyConfig.includes("auto_download = False") || !astropyConfig.includes("iers_degraded_accuracy = error")) fail("Astropy IERS configuration is not fail-closed");
 const preflight = fs.readFileSync(path.join(containerDir, "preflight.py"), "utf8");
 for (const fragment of [expectedProfileSha256, expectedIersSha256, '"astropy": "8.0.1"', '"skyfield": "1.55"', "iers.conf.auto_download is not False"]) {
   if (!preflight.includes(fragment)) fail(`preflight missing: ${fragment}`);
