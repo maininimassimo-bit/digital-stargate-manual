@@ -143,9 +143,9 @@ jobs:
           test "$network_status" -ne 0
           test "$subnetwork_status" -ne 0
           grep -F "NOT_FOUND" /tmp/repository-describe.err
-          grep -F "NOT_FOUND" /tmp/job-describe.err
-          grep -F "NOT_FOUND" /tmp/network-describe.err
-          grep -F "NOT_FOUND" /tmp/subnetwork-describe.err
+          grep -F "Cannot find job [dsg-f3-a3-spike]." /tmp/job-describe.err
+          grep -F "global/networks/dsg-f3-a3-private' was not found" /tmp/network-describe.err
+          grep -F "regions/${GCP_REGION}/subnetworks/dsg-f3-a3-private-ew8' was not found" /tmp/subnetwork-describe.err
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
