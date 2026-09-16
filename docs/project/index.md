@@ -126,7 +126,7 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-031 F3-A2-D3: source, roles, separation and validity decisions complete and integrated;
 - BKL-031 F3-A2-D4: protected DRAFT integrated and retained as immutable history;
 - BKL-031 F3-A2-D5: ACCEPTED / POST-MERGE VERIFIED via PR #209 and merge `bc4307c2042a45985622044e11631421de5b2c3d`; repository authority AVAILABLE for authorized validated input; S08 remains `UNAVAILABLE`, runtime S09 remains `UNAVAILABLE_CURRENT`;
-- BKL-031 F3-A3: F3-OD04–F3-OD10 owner decisions complete; exact `de442s.bsp` identity approved; Google Cloud Terraform remains source-only, ARB-213-MI01/MI02 remain open and S10 remains `UNAVAILABLE`.
+- BKL-031 F3-A3: F3-OD04–F3-OD10 owner decisions and ARB-213-MI01/MI02 evidence complete; exact `de442s.bsp` identity approved; bootstrap and protected remote state active, platform/scientific execution absent and S10 remains `UNAVAILABLE`.
 
 ## Sequenza governata
 

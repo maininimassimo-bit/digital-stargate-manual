@@ -4,7 +4,7 @@
 |---|---|
 | Finding | ARB-213-MI02 |
 | Scope | Bootstrap state lifecycle only |
-| Status | BOOTSTRAP APPLIED / REMOTE STATE ACTIVE — BACKEND PROMOTION UNDER REVIEW |
+| Status | SATISFIED / POST-PROMOTION VERIFIED |
 | Backend | Google Cloud Storage |
 | Bootstrap prefix | `bkl-031/f3-a3/bootstrap` |
 | Platform prefix | `bkl-031/f3-a3/platform` |
@@ -15,7 +15,7 @@ This runbook governs the one-time transition of the bootstrap root from local Te
 
 The state bucket uses uniform bucket-level access, enforced public-access prevention, Object Versioning and `force_destroy = false`.
 
-The one-time bootstrap and state migration were authorized against an exact reviewed plan under `DSG-AEM-001`. This document does not authorize any further Google Cloud mutation and does not authorize platform plan/apply, container publication, artifact upload or Cloud Run execution. ARB-213-MI02 remains open until backend promotion and post-promotion verification complete.
+The one-time bootstrap and state migration were authorized against an exact reviewed plan under `DSG-AEM-001`. This document does not authorize any further Google Cloud mutation and does not authorize platform plan/apply, container publication, artifact upload or Cloud Run execution. ARB-213-MI02 is satisfied by the reviewed backend promotion and post-promotion evidence recorded below.
 
 ## Mandatory stop conditions
 
@@ -252,10 +252,12 @@ The MI02 execution record must contain:
 - read-only recovery-candidate download result;
 - deviations, failures and rollback actions.
 
-Until all evidence is reviewed, ARB-213-MI02 remains open.
+The reviewed record below satisfies ARB-213-MI02. Any later bootstrap or platform operation requires a new exact-head plan and its own authorization.
 
 ## Execution record — 16/09/2026
 
 The authorized bootstrap used `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46`, Terraform `1.16.2`, Google provider `7.46.1` and saved-plan SHA-256 `9bf2804ae697db1e5369e20f5594fbbaa0fa7fc202bc21e7290776b1e4c08d24`. The named change-window operator was Massimo Mainini through the delegated `DSG-AEM-001` session. Apply completed at `2026-09-16T14:45:55Z` with 27 additions, 0 changes and 0 destroys; its transcript SHA-256 is `3fd6a05e7a6c4c925964d16ab9d9d233012130cb0a797bf8d5c8e982f6866ee6`. The state bucket in `europe-west8` has uniform bucket-level access, enforced public-access prevention, Object Versioning and `force_destroy = false`.
 
-Fail-closed incident `ARB-213-MI02-I01` occurred during the first post-migration comparison: lineage remained `50e17f72-9d0a-0152-1130-060b583f103a`, managed resources and outputs were unchanged, while Terraform advanced serial `23` to `24` when it persisted the migrated snapshot. Pre/post state SHA-256 values are `9ccb7f7507a823f19460fee072bf1163561ff67f404ec481239f197864670de2` and `21205d25926a001a85b827f9cc0f8fbfd5859196ee2dccfcde18b0fda45e832f`. The operator stopped before the zero-drift plan and performed read-only generation inspection only. GCS retained the initial empty generation `1789569995809889` and the migrated live generation `1789570006160390`; the live-generation download SHA-256 is `735b5fe6f368802ebf66ba14248ae85e9b7c7016e6a199e1561ea024d0a56386`. The original equality rule was therefore corrected to the observed and fail-closed `+1` transition with managed-content equality. Backend promotion and post-promotion zero-drift evidence remain pending.
+Fail-closed incident `ARB-213-MI02-I01` occurred during the first post-migration comparison: lineage remained `50e17f72-9d0a-0152-1130-060b583f103a`, managed resources and outputs were unchanged, while Terraform advanced serial `23` to `24` when it persisted the migrated snapshot. Pre/post state SHA-256 values are `9ccb7f7507a823f19460fee072bf1163561ff67f404ec481239f197864670de2` and `21205d25926a001a85b827f9cc0f8fbfd5859196ee2dccfcde18b0fda45e832f`. The operator stopped before the zero-drift plan and performed read-only generation inspection only. GCS retained the initial empty generation `1789569995809889` and the migrated live generation `1789570006160390`; the live-generation download SHA-256 is `735b5fe6f368802ebf66ba14248ae85e9b7c7016e6a199e1561ea024d0a56386`. The original equality rule was therefore corrected to the observed and fail-closed `+1` transition with managed-content equality.
+
+PR #219 promoted the permanent GCS backend and merged with expected-head control as `6c6a9454f1f1f13f72b4ae5098c0f2475b537d60`; all 7 post-merge workflows succeeded. At `2026-09-16T15:03:29Z`, the same operator reinitialized that exact revision against the protected backend. The remote snapshot retained lineage `50e17f72-9d0a-0152-1130-060b583f103a`, serial `24`, 16 resource blocks and managed resources/outputs identical to the accepted post-migration snapshot. Live generation `1789570006160390` remained unchanged. The post-promotion state-pull SHA-256 is `55fe415442a7254315dc783fe790fb1db474b7d67732d36bd688f18078dff5c2`; the read-only recovery candidate reproduced SHA-256 `735b5fe6f368802ebf66ba14248ae85e9b7c7016e6a199e1561ea024d0a56386`. The locked plan returned exit code `0` with no changes; transcript SHA-256 is `5268bf2997a9db6064ec54117dc9575d26622b2aaf37d43bb55eeeae2c81122b`. No lock object remained, the ignored migration file was retired, and the protected backend configuration was retained. ARB-213-MI02 is therefore satisfied at the bootstrap-state lifecycle level.

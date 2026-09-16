@@ -122,7 +122,7 @@ PR #209 is ACCEPTED / POST-MERGE VERIFIED at merge `bc4307c2042a45985622044e1163
 
 ## F3-A3 current handoff
 
-F3-A3 owner decisions F3-OD04–F3-OD10 and the immutable method-profile repository evidence are complete. The reviewed bootstrap is applied and protected remote state is active. The current gate is ARB-213-MI02 permanent backend promotion and post-promotion verification. No platform plan/apply, artifact upload, scientific execution, external call, protected-site use or runtime is authorized; S10 remains `UNAVAILABLE`.
+F3-A3 owner decisions F3-OD04–F3-OD10 and the immutable method-profile repository evidence are complete. The reviewed bootstrap is applied and protected remote state is active. PR #219 plus the post-promotion lineage/content, recovery, locking and zero-drift checks satisfy ARB-213-MI02. The current gate is exact container and IERS inclusion evidence. No platform plan/apply, artifact upload, scientific execution, external call, protected-site use or runtime is authorized; S10 remains `UNAVAILABLE`.
 
 
 ## F3-A3 decision-preparation package

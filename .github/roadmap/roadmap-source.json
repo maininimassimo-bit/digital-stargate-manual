@@ -2,10 +2,10 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-16",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-A3 bootstrap applied and remote state active; MI02 backend promotion under review; ADR-010 proposed; S10 unavailable",
+  "projectStatus": "BKL-031 F3-A3 bootstrap applied and MI02 post-promotion verified; ADR-010 proposed; S10 unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A3 ARB-213-MI02 permanent backend promotion and post-promotion zero-drift evidence",
-  "target": "Integrate the corrected migration serial rule and permanent bootstrap backend, then re-verify remote lineage, managed content and zero drift. Stop before platform plan/apply, artifact upload, container build, spike execution, Horizons request or runtime activation.",
+  "nextMilestone": "BKL-031 F3-A3 exact container and IERS inclusion evidence without platform or scientific execution",
+  "target": "Prepare exact container and IERS inclusion evidence at repository level. Stop before platform plan/apply, artifact acquisition or upload, container build/push, spike execution, Horizons request or runtime activation.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3-A3 decisions and immutable method-profile evidence are complete. The reviewed bootstrap added 27 resources with 0 update/0 destroy and state is active in protected GCS. ARB-213-MI02 backend promotion, exact container/IERS evidence and all scientific cases remain open or NOT EXECUTED; ADR-010 remains Proposed and S10 remains UNAVAILABLE."
+          "note": "F3-A3 decisions, immutable method-profile evidence and ARB-213-MI02 post-promotion verification are complete. The reviewed bootstrap added 27 resources with 0 update/0 destroy and state is active in protected GCS. Exact container/IERS evidence and all scientific cases remain open or NOT EXECUTED; ADR-010 remains Proposed and S10 remains UNAVAILABLE."
         },
         {
           "id": "BKL-032",

@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-BASELINE-2026-09-15 |
-| Stato | **CURRENT — F3-A3 BOOTSTRAP APPLIED / REMOTE STATE ACTIVE / MI02 OPEN** |
-| Repository baseline | `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46` |
-| Current package | ARB-213-MI02 serial-rule remediation + permanent bootstrap backend promotion |
+| Stato | **CURRENT — F3-A3 BOOTSTRAP APPLIED / MI02 POST-PROMOTION VERIFIED** |
+| Repository baseline | `main@6c6a9454f1f1f13f72b4ae5098c0f2475b537d60` |
+| Current package | ARB-213-MI02 closure reconciliation; next gate exact container/IERS inclusion evidence |
 | Runtime delta | None |
 | Data delta | None; no provider artifact, SPK, IERS data or protected-site payload acquired |
 | Infrastructure delta | Bootstrap only: 27 resources added; protected GCS state active; platform not planned/applied |
@@ -65,7 +65,7 @@ Documentation only. The package records observed official-source versions, candi
 
 ## F3-A3 partial decision / infrastructure-source delta
 
-Repository source now defines a dedicated `europe-west8` Cloud Run Job profile, WIF bootstrap, private state/data/evidence buckets, private VPC without NAT, Artifact Registry and validation-only CI. No cloud authentication, plan, apply, image, SPK, IERS artifact or job exists from this package. F3-OD05 exact artifact identity is owner-approved; ADR-010 remains Proposed, ARB-213-MI01/MI02 remain open and S10 remains `UNAVAILABLE`. Existing N.I.N.A./EAGLE identities and resources are untouched.
+Repository source defines a dedicated `europe-west8` Cloud Run Job profile, WIF bootstrap, private state/data/evidence buckets, private VPC without NAT, Artifact Registry and validation-only CI. The governed bootstrap and remote state exist; no platform plan/apply, image, SPK upload, IERS artifact or job exists. F3-OD05 exact artifact identity is owner-approved; ADR-010 remains Proposed, ARB-213-MI01/MI02 are satisfied and S10 remains `UNAVAILABLE`. Existing N.I.N.A./EAGLE identities and resources are untouched.
 
 ## F3-A3 exact SPK decision delta — 16/09/2026
 
@@ -78,4 +78,4 @@ The repository carries `BKL-031-F3-A3-METHOD-PROFILE-001` at SHA-256 `e69f60e5ed
 
 ## F3-A3 bootstrap and MI02 delta — 16/09/2026
 
-The exact authenticated bootstrap plan for `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46` added 27 reviewed resources and changed or destroyed none. The three buckets are private, versioned and protected from forced destruction; WIF is restricted to the authoritative repository main ref; no service-account key exists. Bootstrap state migrated to GCS. Incident `ARB-213-MI02-I01` stopped before zero-drift planning when the remote persist advanced serial `23` to `24`; lineage, resources and outputs were unchanged. Permanent backend promotion and post-promotion verification remain open.
+The exact authenticated bootstrap plan for `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46` added 27 reviewed resources and changed or destroyed none. The three buckets are private, versioned and protected from forced destruction; WIF is restricted to the authoritative repository main ref; no service-account key exists. Bootstrap state migrated to GCS. Incident `ARB-213-MI02-I01` stopped before zero-drift planning when the remote persist advanced serial `23` to `24`; lineage, resources and outputs were unchanged. PR #219 merged the corrected rule and permanent backend as `6c6a9454f1f1f13f72b4ae5098c0f2475b537d60`, followed by 7/7 successful post-merge workflows. Reinitialization preserved lineage, serial `24`, 16 resource blocks and generation `1789570006160390`; the recovery candidate matched the live generation, no lock remained and the plan returned exit code `0` with no changes. ARB-213-MI02 is satisfied.
