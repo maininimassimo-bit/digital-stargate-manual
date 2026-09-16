@@ -72,6 +72,8 @@ Workflow run `35134193946` on exact main commit `ccf23e68f4bf8d321ccf707d0918e23
 
 Read-only run `35135376900` on exact main commit `9c0bc79f3d7fc12c27f36d8b41c51058f5b3decd` then verified the exact repository and labels, one-resource state, zero drift and zero images. `BKL-031-F3-A3-REGISTRY-FOUNDATION-EVIDENCE-001` records the apply, fail-closed incident and successful recovery at SHA-256 `3ef42c012c5c8d79a9751beb7c8e7c49ceab603a202c4a0cda359ef85ba08c30`. Exact OCI publication is the next separately reviewed gate. Platform apply, artifact upload and scientific execution remain blocked.
 
+The exact OCI publication gate is an explicit-dispatch, main-only WIF workflow. Before it can publish, it revalidates the immutable source and registry-foundation evidence, rebuilds the OCI candidate twice without build network or cache, and requires manifest `sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce` and config `sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0`. A third no-push registry-exporter build must resolve to those same values. WIF then verifies the exact empty repository before the workflow performs its single push exporter. Registry-resolved manifest bytes, config, image count and commit-derived tag must match exactly. The workflow contains no Terraform, platform mutation, artifact upload or scientific execution. This source package prepares the gate; it does not publish the image.
+
 ## Local validation
 
 Run:
@@ -82,14 +84,15 @@ Run:
 4. node .github/scripts/verify-bkl-031-f3-a3-platform-plan-gate.mjs
 5. node .github/scripts/verify-bkl-031-f3-a3-registry-foundation-gate.mjs
 6. node .github/scripts/verify-bkl-031-f3-a3-registry-foundation-verification.mjs
-7. terraform -chdir=bootstrap fmt -check
-8. terraform -chdir=bootstrap init -backend=false
-9. terraform -chdir=bootstrap validate
-10. terraform -chdir=registry fmt -check
-11. terraform -chdir=registry init -backend=false
-12. terraform -chdir=registry validate
-13. terraform -chdir=platform fmt -check
-14. terraform -chdir=platform init -backend=false
-15. terraform -chdir=platform validate
+7. node .github/scripts/verify-bkl-031-f3-a3-exact-oci-publication.mjs
+8. terraform -chdir=bootstrap fmt -check
+9. terraform -chdir=bootstrap init -backend=false
+10. terraform -chdir=bootstrap validate
+11. terraform -chdir=registry fmt -check
+12. terraform -chdir=registry init -backend=false
+13. terraform -chdir=registry validate
+14. terraform -chdir=platform fmt -check
+15. terraform -chdir=platform init -backend=false
+16. terraform -chdir=platform validate
 
 No command above authenticates to GCP or mutates cloud resources.
