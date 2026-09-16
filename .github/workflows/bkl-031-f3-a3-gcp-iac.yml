@@ -1,0 +1,62 @@
+name: BKL-031 F3-A3 GCP IaC Validation
+
+on:
+  pull_request:
+    paths:
+      - ".github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs"
+      - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
+      - "infrastructure/bkl-031-f3-a3-gcp/**"
+      - "docs/architecture/ADR-010-Ephemeris-Lunar-Method-and-Validation-Profile.md"
+      - "docs/architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md"
+      - "docs/architecture/validation/BKL-031-F3-A3-Ephemeris-Lunar-Method-Validation-Spike-Plan.md"
+      - "docs/project/BKL-031-F3-A3-OWNER-DECISION-RECORD-2026-09-15.md"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs"
+      - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
+      - "infrastructure/bkl-031-f3-a3-gcp/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bkl-031-f3-a3-gcp-iac-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  policy:
+    name: Static policy
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - name: Verify isolation and fail-closed gates
+        run: node .github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs
+
+  terraform:
+    name: Terraform validate (${{ matrix.directory }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        directory:
+          - infrastructure/bkl-031-f3-a3-gcp/bootstrap
+          - infrastructure/bkl-031-f3-a3-gcp/platform
+    defaults:
+      run:
+        working-directory: ${{ matrix.directory }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.16.2
+      - name: Check formatting
+        run: terraform fmt -check -recursive
+      - name: Initialize without remote backend
+        run: terraform init -backend=false -input=false
+      - name: Validate
+        run: terraform validate -no-color
