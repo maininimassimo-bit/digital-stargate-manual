@@ -94,25 +94,29 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          export DOCKER_BUILDKIT=1
-          docker build --platform linux/amd64 --network=none --pull=false --no-cache --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:candidate-a --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile infrastructure/bkl-031-f3-a3-gcp
-          docker build --platform linux/amd64 --network=none --pull=false --no-cache --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:candidate-b --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile infrastructure/bkl-031-f3-a3-gcp
-          image_id_a="$(docker image inspect --format '{{.Id}}' dsg-bkl031-f3a3:candidate-a)"
-          image_id_b="$(docker image inspect --format '{{.Id}}' dsg-bkl031-f3a3:candidate-b)"
+          docker buildx version
+          export SOURCE_DATE_EPOCH=0
+          output='type=docker,dest=/tmp/dsg-candidate-a.tar,rewrite-timestamp=true'
+          docker buildx build --platform linux/amd64 --network=none --pull=false --no-cache --provenance=false --sbom=false --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:candidate --output "$output" --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile infrastructure/bkl-031-f3-a3-gcp
+          docker load --input /tmp/dsg-candidate-a.tar
+          image_id_a="$(docker image inspect --format '{{.Id}}' dsg-bkl031-f3a3:candidate)"
+          output='type=docker,dest=/tmp/dsg-candidate-b.tar,rewrite-timestamp=true'
+          docker buildx build --platform linux/amd64 --network=none --pull=false --no-cache --provenance=false --sbom=false --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:candidate --output "$output" --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile infrastructure/bkl-031-f3-a3-gcp
+          docker load --input /tmp/dsg-candidate-b.tar
+          image_id_b="$(docker image inspect --format '{{.Id}}' dsg-bkl031-f3a3:candidate)"
           printf 'candidate-a=%s\ncandidate-b=%s\n' "$image_id_a" "$image_id_b"
           if [ "$image_id_a" != "$image_id_b" ]; then
-            docker image inspect --format 'candidate-a layers={{json .RootFS.Layers}}' dsg-bkl031-f3a3:candidate-a
-            docker image inspect --format 'candidate-b layers={{json .RootFS.Layers}}' dsg-bkl031-f3a3:candidate-b
+            sha256sum /tmp/dsg-candidate-a.tar /tmp/dsg-candidate-b.tar
             exit 1
           fi
           echo "DSG_CONTAINER_IMAGE_ID=$image_id_a" | tee -a "$GITHUB_ENV" "$GITHUB_STEP_SUMMARY"
       - name: Execute fail-closed preflight with network disabled
-        run: docker run --rm --network none dsg-bkl031-f3a3:candidate-a /bin/true
+        run: docker run --rm --network none dsg-bkl031-f3a3:candidate /bin/true
       - name: Prove absent scientific runner exits 78
         shell: bash
         run: |
           set +e
-          output="$(docker run --rm --network none dsg-bkl031-f3a3:candidate-a 2>&1)"
+          output="$(docker run --rm --network none dsg-bkl031-f3a3:candidate 2>&1)"
           status=$?
           set -e
           printf '%s\n' "$output"
@@ -122,9 +126,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          user="$(docker image inspect --format '{{.Config.User}}' dsg-bkl031-f3a3:candidate-a)"
-          architecture="$(docker image inspect --format '{{.Architecture}}' dsg-bkl031-f3a3:candidate-a)"
-          operating_system="$(docker image inspect --format '{{.Os}}' dsg-bkl031-f3a3:candidate-a)"
+          user="$(docker image inspect --format '{{.Config.User}}' dsg-bkl031-f3a3:candidate)"
+          architecture="$(docker image inspect --format '{{.Architecture}}' dsg-bkl031-f3a3:candidate)"
+          operating_system="$(docker image inspect --format '{{.Os}}' dsg-bkl031-f3a3:candidate)"
           test "$user" = "65532:65532"
           test "$architecture" = "amd64"
           test "$operating_system" = "linux"
@@ -138,7 +142,7 @@ jobs:
           user=${user}
           acquisition=EXACT_HASH_VERIFIED_EPHEMERAL
           buildNetwork=NONE
-          reproducibility=TWO_NO_CACHE_BUILDS_IDENTICAL
+          reproducibility=TWO_NO_CACHE_BUILDS_REWRITE_TIMESTAMP_IDENTICAL
           preflight=PASS_NETWORK_NONE
           scientificRunner=NOT_MATERIALIZED_EXIT_78
           imagePush=NOT_EXECUTED

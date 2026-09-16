@@ -156,7 +156,12 @@ for (const forbidden of ["!bootstrap/", "!platform/", "!../", "!docs/"]) {
 const workflow = fs.readFileSync(path.join(root, ".github", "workflows", "bkl-031-f3-a3-gcp-iac.yml"), "utf8");
 const isolatedBuild = "--file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile infrastructure/bkl-031-f3-a3-gcp";
 equal(workflow.split(isolatedBuild).length - 1, 2, "isolated no-cache build count");
-if (!workflow.includes("docker build --platform linux/amd64 --network=none --pull=false --no-cache --build-arg SOURCE_DATE_EPOCH=0")) fail("workflow must build reproducibly for linux/amd64 without network, pull, or cache");
+for (const fragment of [
+  "docker buildx build --platform linux/amd64 --network=none --pull=false --no-cache",
+  "--provenance=false --sbom=false --build-arg SOURCE_DATE_EPOCH=0",
+  "rewrite-timestamp=true",
+]) if (!workflow.includes(fragment)) fail(`workflow reproducible build missing: ${fragment}`);
+equal(workflow.split("rewrite-timestamp=true").length - 1, 2, "timestamp-rewriting exporter count");
 
 const acquisition = fs.readFileSync(path.join(root, ".github", "scripts", "acquire-bkl-031-f3-a3-container-artifacts.mjs"), "utf8");
 for (const fragment of [
