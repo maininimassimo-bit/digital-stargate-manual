@@ -221,7 +221,7 @@ jobs:
         run: >-
           node .github/scripts/acquire-bkl-031-f3-a3-container-artifacts.mjs
           --destination infrastructure/bkl-031-f3-a3-gcp/container/.build/wheels
-          --evidence infrastructure/bkl-031-f3-a3-gcp/container/.build/runner-acquisition-evidence.json
+          --evidence infrastructure/bkl-031-f3-a3-gcp/container/.build/acquisition-evidence.json
       - name: Pull the reviewed base platform digest
         run: docker pull --platform linux/amd64 python:3.12.14-slim-bookworm@sha256:9c47360a2a0355e2da18516d0b1c2126ec22c195d2185e97347c9d98398c5bef
       - name: Start the reviewed BuildKit platform digest
