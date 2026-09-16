@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0",
+  "incidentId": "BKL-031-F3-A3-SCIENTIFIC-EXECUTION-INCIDENT-001",
+  "status": "GITHUB_WAIT_TIMEOUT_SINGLE_EXECUTION_CREATED_TERMINAL_STATE_PENDING_RECOVERY",
+  "recordedAtUtc": "2026-09-16T22:12:12Z",
+  "sourceCommit": "540baa235ca97de9f72eb8687aa8e478bd5d888a",
+  "workflow": {
+    "name": "BKL-031 F3-A3 Exact Single Scientific Execution",
+    "runId": 35155130422,
+    "jobId": 104992662577,
+    "conclusion": "failure",
+    "failedStep": "Execute the exact synthetic scientific job once",
+    "reason": "GITHUB_JOB_TIMEOUT_WHILE_GCLOUD_WAITED_FOR_TERMINAL_EXECUTION",
+    "url": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35155130422"
+  },
+  "observed": {
+    "preconditions": "PASSED",
+    "priorExecutionCount": 0,
+    "priorEvidenceObjectCount": 0,
+    "singleExecuteCommandEntered": true,
+    "evidenceRetrievalStep": "SKIPPED",
+    "finalPostconditionStep": "SKIPPED",
+    "terminalCloudExecutionState": "NOT_CAPTURED_BY_TIMED_OUT_WORKFLOW",
+    "evidenceObjectState": "NOT_CAPTURED_BY_TIMED_OUT_WORKFLOW"
+  },
+  "controls": {
+    "secondExecution": "PROHIBITED_NOT_EXECUTED",
+    "terraformMutation": "NOT_EXECUTED",
+    "registryMutation": "NOT_EXECUTED",
+    "kernelMutation": "NOT_EXECUTED",
+    "recoveryMode": "READ_ONLY_REQUIRED"
+  },
+  "nextGate": "SEPARATELY_REVIEWED_READ_ONLY_SINGLE_EXECUTION_RECOVERY"
+}
