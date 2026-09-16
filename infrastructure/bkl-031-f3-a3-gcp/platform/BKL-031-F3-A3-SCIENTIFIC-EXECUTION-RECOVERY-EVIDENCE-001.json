@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0",
+  "evidenceId": "BKL-031-F3-A3-SCIENTIFIC-EXECUTION-RECOVERY-EVIDENCE-001",
+  "status": "READ_ONLY_RECOVERY_COMPLETE_CANCELLATION_REQUIRED",
+  "recordedAtUtc": "2026-09-16T22:21:15Z",
+  "sourceCommit": "bd89ef715ff6a76884ab86e7e03c6b8bfa5e0305",
+  "workflow": {
+    "name": "BKL-031 F3-A3 Scientific Execution Read-only Recovery",
+    "runId": 35157173081,
+    "jobId": 104999281886,
+    "conclusion": "success",
+    "url": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35157173081"
+  },
+  "observed": {
+    "executionCount": 1,
+    "executionName": "dsg-f3-a3-spike-9drzb",
+    "executionCreatedAtUtc": "2026-09-16T21:57:42.096014Z",
+    "completedCondition": "UNKNOWN_WAITING_FOR_EXECUTION_TO_START",
+    "startedCondition": "UNKNOWN_WAITING_FOR_EXECUTION_TO_START",
+    "retryReason": "WaitingForOperation",
+    "evidenceObjectCount": 0,
+    "platformStateRawSha256": "084b68da6d20d9523ceabce67766cfc211b71f97ee12d8f4e7a0b4a64f57b89b",
+    "secondExecution": "NOT_EXECUTED",
+    "cloudMutation": "NOT_EXECUTED_BY_RECOVERY"
+  },
+  "rootCause": {
+    "status": "CONFIGURATION_NONCONFORMANCE_CONFIRMED",
+    "configuredSubnetCidr": "10.88.0.0/28",
+    "requiredMinimumSubnetPrefix": "/26",
+    "control": "Cloud Run Direct VPC egress requires an IPv4 subnet /26 or larger",
+    "authoritativeSource": "https://cloud.google.com/run/docs/configuring/vpc-direct-vpc",
+    "sourceCheckedAtUtc": "2026-09-16T22:24:00Z"
+  },
+  "controls": {
+    "scientificCalculation": "NOT_STARTED",
+    "scientificEvidence": "NOT_CREATED",
+    "externalReferenceTraffic": "NOT_EXECUTED",
+    "protectedSiteUse": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED",
+    "secondExecution": "PROHIBITED_PENDING_CANCELLATION_AND_PLATFORM_REMEDIATION"
+  },
+  "nextGate": "SEPARATELY_REVIEWED_EXACT_STUCK_EXECUTION_CANCELLATION"
+}
