@@ -3,15 +3,15 @@
   "projectionType": "AI_POST_PROCESSING_ADVISORY_PROJECTION",
   "projectionState": "PRE_DECISION_READ_ONLY",
   "identityMethod": "BKL046-F4-CANONICAL-JSON-SHA256-1",
-  "projectionId": "BKL046-F4-DBE65BCEF7F1B6D108768AB9",
-  "generatedAt": "2026-09-15T05:57:33.398Z",
+  "projectionId": "BKL046-F4-ACD09E3CDD6FF4E2C2D0F7DF",
+  "generatedAt": "2026-09-16T06:06:41.760Z",
   "producer": "DSG.AiPostProcessingAdvisoryProjection",
   "producerVersion": "1.0.0-f4b",
   "methodId": "BKL046-F3-CLOSED-RULES-1",
   "sourceCatalog": {
     "path": "docs/data/scientific-session-catalog.json",
-    "digest": "cf977204e18ffe9203bbba46dda9a46ce524e61acae48236f5ee8935c39a5940",
-    "sessionCount": 18,
+    "digest": "c63fb1d36dd2063bc49bc2eca36493e7d7901da54ff084349a52d732e51fd608",
+    "sessionCount": 19,
     "sessionIds": [
       "2026-07-14_2026-07-15",
       "2026-07-15_2026-07-16",
@@ -30,7 +30,8 @@
       "2026-09-07_2026-09-08",
       "2026-09-12_2026-09-13",
       "2026-09-13_2026-09-14",
-      "2026-09-14_2026-09-15"
+      "2026-09-14_2026-09-15",
+      "2026-09-15_2026-09-16"
     ]
   },
   "sourceSet": {
@@ -113,7 +114,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-45B5C956DAAC0D37D1766F05",
           "subjectRef": "SESSION-2A631536E918847A719EC85B",
           "category": "QUALITY_CHECK",
@@ -143,7 +144,7 @@
           "limitations": [
             "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
           ],
-          "recommendationDigest": "f179dfea0e5b8dbb7376e7eba5f767b3dac80109bae7b942231918503f3ade98"
+          "recommendationDigest": "bddca631d2067663a4a5bec5328628a10b988c093ddfc6415e77563b304247b7"
         },
         {
           "recommendationId": "REC-BKL046-F3-6F03DC98C68EE4135B27B8E6",
@@ -152,7 +153,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-6F03DC98C68EE4135B27B8E6",
           "subjectRef": "SESSION-2A631536E918847A719EC85B",
           "category": "STOP_AND_REVIEW",
@@ -200,7 +201,7 @@
           "limitations": [
             "This recommendation is fail-closed and cannot be promoted while any reason code remains."
           ],
-          "recommendationDigest": "250ccc00602867db43ed15b5e760188cece9e182c6481bc9876735ed7a5e6375"
+          "recommendationDigest": "a4f885a7b8701ac8055b8a875d986a3655e84eadc57829bbefcf36b33568f16d"
         }
       ],
       "ruleEvaluations": [
@@ -220,7 +221,7 @@
         }
       ],
       "decisionState": "NOT_PRESENT_PRE_DECISION",
-      "recordDigest": "643f9f51444d9497fa49aefdb8dc061b227a374a40c3f37e1aac033d624b6b24"
+      "recordDigest": "70cab6c55aa77f4ae88c74215c904bb3698199146d0df717d7c8ad4bb5073844"
     },
     {
       "recordId": "F4-082EBD3DFCD670E91F47AEE0",
@@ -265,7 +266,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-26545DA4F80FEA2AE13CB9FC",
           "subjectRef": "SESSION-4B4CD785A936BC68311D33BE",
           "category": "STOP_AND_REVIEW",
@@ -313,7 +314,7 @@
           "limitations": [
             "This recommendation is fail-closed and cannot be promoted while any reason code remains."
           ],
-          "recommendationDigest": "e25d35011fe5f242f938e92902205a5f1d4de6b9d5ad755ed08b911a6e0998cb"
+          "recommendationDigest": "517b70a7098463cb18013baf16da898b46d3ddb7773e72ad30b8c54d59a32f18"
         },
         {
           "recommendationId": "REC-BKL046-F3-27352D792C81520FA421AD62",
@@ -322,7 +323,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-27352D792C81520FA421AD62",
           "subjectRef": "SESSION-4B4CD785A936BC68311D33BE",
           "category": "QUALITY_CHECK",
@@ -352,7 +353,7 @@
           "limitations": [
             "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
           ],
-          "recommendationDigest": "7320cae8becbb19b28776e0384eed79788bab3722b4c767f908d34b595937b5c"
+          "recommendationDigest": "aeae151a82f0121df554ba16865c9aad6265870a95c371c78e28db5982a8d205"
         }
       ],
       "ruleEvaluations": [
@@ -372,7 +373,7 @@
         }
       ],
       "decisionState": "NOT_PRESENT_PRE_DECISION",
-      "recordDigest": "af5fd43d53236afee241745c69cb63cc0d1cd91aec6f4f7bf0a24e9b7eca32f4"
+      "recordDigest": "2cd72cb83740c88bc3b9089ada45ed60ae67c5fe657429bbaa496821393f346e"
     },
     {
       "recordId": "F4-EE8DB3DE16247574A2573BEB",
@@ -417,7 +418,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-7FE6BB91CA5FFEF397D6F461",
           "subjectRef": "SESSION-FFCAD98164F342A37030565C",
           "category": "QUALITY_CHECK",
@@ -447,7 +448,7 @@
           "limitations": [
             "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
           ],
-          "recommendationDigest": "9dad3814335993855c210ee34d6148e8309a10288986954f2fee18d8c545e890"
+          "recommendationDigest": "243dcf4655750366aca0735222eb8b97d35398d566596ccb675fb4a35a0b48e8"
         },
         {
           "recommendationId": "REC-BKL046-F3-CC6704F25229396D527F959C",
@@ -456,7 +457,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-CC6704F25229396D527F959C",
           "subjectRef": "SESSION-FFCAD98164F342A37030565C",
           "category": "STOP_AND_REVIEW",
@@ -504,7 +505,7 @@
           "limitations": [
             "This recommendation is fail-closed and cannot be promoted while any reason code remains."
           ],
-          "recommendationDigest": "fd40455baf4884f847182a5430cb87d380dcf76a4d3720fe8accae2fde3cda9d"
+          "recommendationDigest": "7ffef873f21d8eaf70eb0b593322e18729b52f1e957ece1332dad16822d75899"
         }
       ],
       "ruleEvaluations": [
@@ -524,7 +525,7 @@
         }
       ],
       "decisionState": "NOT_PRESENT_PRE_DECISION",
-      "recordDigest": "c16090011b327574615f7d9b76b08ba4e990f43f6f46a2000e73b79baa5ec7da"
+      "recordDigest": "ea45a6aab79a50688d40c853b0e3c4ea7ce09525ed469b254a5261e9d3fe0561"
     },
     {
       "recordId": "F4-D9EDCF4A762FF69DB4513DB7",
@@ -569,7 +570,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-5266063E25E328A955F24904",
           "subjectRef": "SESSION-C418AC7BDF929F9CC0B635ED",
           "category": "STOP_AND_REVIEW",
@@ -617,7 +618,7 @@
           "limitations": [
             "This recommendation is fail-closed and cannot be promoted while any reason code remains."
           ],
-          "recommendationDigest": "a26f388ab26e0e26bdedf754b854d6f7367e077b4fea08d15b178bbf93b6870b"
+          "recommendationDigest": "15611dd45ae520d69e63d5e610a8b8c2c77ae254bb6902653cac6d98c1768a2c"
         },
         {
           "recommendationId": "REC-BKL046-F3-85C7CEFC203EAC2DCD161C25",
@@ -626,7 +627,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-85C7CEFC203EAC2DCD161C25",
           "subjectRef": "SESSION-C418AC7BDF929F9CC0B635ED",
           "category": "QUALITY_CHECK",
@@ -656,7 +657,7 @@
           "limitations": [
             "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
           ],
-          "recommendationDigest": "23f08177f12f72ee483d3dc505ed25f4b2d0bb6df34b27bbec07d9287ed91329"
+          "recommendationDigest": "afb79189e39f1d1d2a2bd6231905d04e2a5ca7f0719f03e05467bc2acedb8113"
         }
       ],
       "ruleEvaluations": [
@@ -676,7 +677,7 @@
         }
       ],
       "decisionState": "NOT_PRESENT_PRE_DECISION",
-      "recordDigest": "0dcc5c341dbc2cdc871a13512f2e69523f9cece0871c3dd9e8d4abf556b4986e"
+      "recordDigest": "420591392a708528ba1f80d72ed68f087134992e4dda9ac288c415120befb23a"
     },
     {
       "recordId": "F4-0F61D9BD819FCF26A61DBCFB",
@@ -721,7 +722,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-49690DB343D68D7E1C94C421",
           "subjectRef": "SESSION-C8817A41E86F82FE301309AE",
           "category": "QUALITY_CHECK",
@@ -751,7 +752,7 @@
           "limitations": [
             "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
           ],
-          "recommendationDigest": "bddc680d32db5b7ae517f073573faba63532ba8fb8086b43161dd415308d6ebe"
+          "recommendationDigest": "3922dc851005a30cdaa723ce10c04e43b662f606605740367d3488d068fd5bf3"
         },
         {
           "recommendationId": "REC-BKL046-F3-5A4394CCEE1488523E122BC4",
@@ -760,7 +761,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-5A4394CCEE1488523E122BC4",
           "subjectRef": "SESSION-C8817A41E86F82FE301309AE",
           "category": "STOP_AND_REVIEW",
@@ -808,7 +809,7 @@
           "limitations": [
             "This recommendation is fail-closed and cannot be promoted while any reason code remains."
           ],
-          "recommendationDigest": "40147eb8547352a677ed294c540d7bebed2c3588e0e1cc670aad0ebb6129b03e"
+          "recommendationDigest": "ebbb650d65c22bfaeb874adbbf0e5b009a1c09a5e0b8accbcf99bfa6d53a2bc9"
         }
       ],
       "ruleEvaluations": [
@@ -828,7 +829,7 @@
         }
       ],
       "decisionState": "NOT_PRESENT_PRE_DECISION",
-      "recordDigest": "24f2c5780c6a2fb600a9b578de5a0047ebd670dcd6c72ebb75da40df597f7b43"
+      "recordDigest": "55d0c6ef74d6262710cf83baac59986eec26d441612b8083939f633831f9d5a0"
     },
     {
       "recordId": "F4-90608C01CE989C6F9A11547D",
@@ -873,7 +874,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-5A7B47567A0A330A4C5850BD",
           "subjectRef": "SESSION-80446584CE1552DD8F9725F6",
           "category": "STOP_AND_REVIEW",
@@ -921,7 +922,7 @@
           "limitations": [
             "This recommendation is fail-closed and cannot be promoted while any reason code remains."
           ],
-          "recommendationDigest": "dd4534db2f470f6ee84a69f5320b8cdd34701746495f9304add91190c6d91d44"
+          "recommendationDigest": "b2c4b637447480f8a8f68058f6a1c60a46f879976be6e4ddcc5c382d28fa221b"
         },
         {
           "recommendationId": "REC-BKL046-F3-831344520984AC5479D63968",
@@ -930,7 +931,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-831344520984AC5479D63968",
           "subjectRef": "SESSION-80446584CE1552DD8F9725F6",
           "category": "QUALITY_CHECK",
@@ -960,7 +961,7 @@
           "limitations": [
             "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
           ],
-          "recommendationDigest": "c3c8a6524de978fb13ee95b060d61f397482ce9a23e4cf9544cfb9252428d5af"
+          "recommendationDigest": "7318893c992afdd665b777bcf55a3c71f105cfffb260d27beaa757c2030b967a"
         }
       ],
       "ruleEvaluations": [
@@ -980,7 +981,7 @@
         }
       ],
       "decisionState": "NOT_PRESENT_PRE_DECISION",
-      "recordDigest": "a8322d0026e95563c29985f01bfecc3ceb6efcad23b082b864954142fd3ea972"
+      "recordDigest": "ed9bbc363bed17f3a7c5361727e3aca416fa5d2ea6b37e85885917e0dbc942bc"
     },
     {
       "recordId": "F4-6B20CE6DAFF485BC3035E4FB",
@@ -1025,7 +1026,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-8F1BBA87C9F25A358CBC2511",
           "subjectRef": "SESSION-72C200D9548799B644FFBEAA",
           "category": "STOP_AND_REVIEW",
@@ -1073,7 +1074,7 @@
           "limitations": [
             "This recommendation is fail-closed and cannot be promoted while any reason code remains."
           ],
-          "recommendationDigest": "17081cc95a132aeb35b2ecc0118bc40c4c0fefe9a4ee1456cdb0b70ce950d226"
+          "recommendationDigest": "d46da240493ca63f45fb1ddd6fe954fd1bf9b1ea89f3504410e5147d7633de04"
         },
         {
           "recommendationId": "REC-BKL046-F3-B8252B4DC413802A3B5F0420",
@@ -1082,7 +1083,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-B8252B4DC413802A3B5F0420",
           "subjectRef": "SESSION-72C200D9548799B644FFBEAA",
           "category": "QUALITY_CHECK",
@@ -1112,7 +1113,7 @@
           "limitations": [
             "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
           ],
-          "recommendationDigest": "d3b8e08bd6bf83ddc5d001f50b90fea44a83715da30feeb138a365a9ece89e8b"
+          "recommendationDigest": "3652fb1c673a3af1de9c1739eab275d8fd63f9abb860b67583af7340e5a816fb"
         }
       ],
       "ruleEvaluations": [
@@ -1132,7 +1133,7 @@
         }
       ],
       "decisionState": "NOT_PRESENT_PRE_DECISION",
-      "recordDigest": "03a8ad50156cbab42d66fc757a6e78978f77692089be7d9177d4f10c388f5e03"
+      "recordDigest": "0f316bc2bd08f55b6ec799eab60128535370b200cc249744e7ad14da0739a107"
     },
     {
       "recordId": "F4-1B56EBA4DB0D6881A3BCE779",
@@ -1177,7 +1178,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-33C2CABEECE86D95CAA454F9",
           "subjectRef": "SESSION-BF7D4456C26D3C4B91E00AE7",
           "category": "STOP_AND_REVIEW",
@@ -1225,7 +1226,7 @@
           "limitations": [
             "This recommendation is fail-closed and cannot be promoted while any reason code remains."
           ],
-          "recommendationDigest": "e7f053dc6b8fa12d610679858eca2b9f38bde68ae5619733b8a81849e00b7784"
+          "recommendationDigest": "1c85c367c4523635fb31e0c9cf21bc3b3fb9ee367961f110ede53a203772805d"
         },
         {
           "recommendationId": "REC-BKL046-F3-70F03C33C298ECDA6E026A9A",
@@ -1234,7 +1235,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-70F03C33C298ECDA6E026A9A",
           "subjectRef": "SESSION-BF7D4456C26D3C4B91E00AE7",
           "category": "QUALITY_CHECK",
@@ -1264,7 +1265,7 @@
           "limitations": [
             "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
           ],
-          "recommendationDigest": "456d1ea664c160ca9d974b0e74539caaa9d4bc4fa7544a427cbdad5a8a7516fb"
+          "recommendationDigest": "b260f24f1d6e4756840db824f4b32243940f4762ae38034b2f3734be3c4456b8"
         }
       ],
       "ruleEvaluations": [
@@ -1284,7 +1285,7 @@
         }
       ],
       "decisionState": "NOT_PRESENT_PRE_DECISION",
-      "recordDigest": "d39b723cadf32e2485a83fc6b85fdd4be43bb568fb33d3740e0d810da5b54391"
+      "recordDigest": "42c4070f98043137907e8f95d4aac1fa8c579fabbbde46b1cd898ca9e6e204f4"
     },
     {
       "recordId": "F4-C0AD79C158341F7508FC86B7",
@@ -1329,7 +1330,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-E765447E2CC84CD1D6332FAE",
           "subjectRef": "SESSION-22029157C9D23B27E2F4778A",
           "category": "QUALITY_CHECK",
@@ -1359,7 +1360,7 @@
           "limitations": [
             "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
           ],
-          "recommendationDigest": "54cd1a0b7657912f0b8c67932b9d9243868006a91b35d68a2ef8732e23f710e1"
+          "recommendationDigest": "487dac390b5e8aa3d8c31d188fb60b3c641c10c3106560d1ff2f8191c5bc528a"
         },
         {
           "recommendationId": "REC-BKL046-F3-FF1A23D72CB17D18F5DE22A1",
@@ -1368,7 +1369,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-FF1A23D72CB17D18F5DE22A1",
           "subjectRef": "SESSION-22029157C9D23B27E2F4778A",
           "category": "STOP_AND_REVIEW",
@@ -1416,7 +1417,7 @@
           "limitations": [
             "This recommendation is fail-closed and cannot be promoted while any reason code remains."
           ],
-          "recommendationDigest": "1b6e0699bc26d37c1ec222fe64444f810216e1758d3b7161460382d11d6d0082"
+          "recommendationDigest": "bf2ebb61b0e0a1988c9d886ed0218064d91063b1ed529b58540990bf41c364a5"
         }
       ],
       "ruleEvaluations": [
@@ -1436,7 +1437,7 @@
         }
       ],
       "decisionState": "NOT_PRESENT_PRE_DECISION",
-      "recordDigest": "81ccf21ac5d42f15b7ba217c75f71d5f47a0a50294cffadd6e04cbc8d72ba302"
+      "recordDigest": "581cd2de589a8b942de9d9fa652e64586b0bd11f83555cd1316f17ffed0969c4"
     },
     {
       "recordId": "F4-3FE45E1B66ED09C01BB1BF97",
@@ -1481,7 +1482,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-252DE7924ECC14FCF7477582",
           "subjectRef": "SESSION-98EB871C8FEDBAFAD224E956",
           "category": "QUALITY_CHECK",
@@ -1511,7 +1512,7 @@
           "limitations": [
             "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
           ],
-          "recommendationDigest": "8bad733d1807bf1f263f62aa240cd03a85003fdda8ac9abff8131a719273514e"
+          "recommendationDigest": "0735504f63bba612960c3e166e3946eb5cc215974cfb05445535ddf9ce23a028"
         },
         {
           "recommendationId": "REC-BKL046-F3-D60DFDAC5624E1563C22FBC5",
@@ -1520,7 +1521,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-D60DFDAC5624E1563C22FBC5",
           "subjectRef": "SESSION-98EB871C8FEDBAFAD224E956",
           "category": "STOP_AND_REVIEW",
@@ -1568,7 +1569,7 @@
           "limitations": [
             "This recommendation is fail-closed and cannot be promoted while any reason code remains."
           ],
-          "recommendationDigest": "93d218d3ed888fd3c9a493ec92dd08a4734506464153926b967447e2046ef180"
+          "recommendationDigest": "9db3139c8b6232dffe2fdc3b0bf63a08359038e374cd7296fe00066f481eb393"
         }
       ],
       "ruleEvaluations": [
@@ -1588,7 +1589,7 @@
         }
       ],
       "decisionState": "NOT_PRESENT_PRE_DECISION",
-      "recordDigest": "d5a6cef48eab386664b5b05f87c8dfe5be8c9d0be9946d2493cffd962bbefcc4"
+      "recordDigest": "fcec5b7ee06046baf59d33121c991673d65fbeaf3692948a4cb42d1dd3fa1574"
     },
     {
       "recordId": "F4-0C81CB7980335F7033DE61F1",
@@ -1633,7 +1634,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-6ABF41484E2ED2E1A3D4D7C1",
           "subjectRef": "SESSION-24B74549C3AADEE31EC8C62A",
           "category": "QUALITY_CHECK",
@@ -1663,7 +1664,7 @@
           "limitations": [
             "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
           ],
-          "recommendationDigest": "a6721cfd45ecafef8680fb7e5b3c15c02c67b74a521c09b93a3f31b336177d50"
+          "recommendationDigest": "46229adbf84761ded21b489352c33656e0b5b3cf6fa868e14c328ec7db155333"
         },
         {
           "recommendationId": "REC-BKL046-F3-8F559CDFA5DB8FE506580702",
@@ -1672,7 +1673,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-8F559CDFA5DB8FE506580702",
           "subjectRef": "SESSION-24B74549C3AADEE31EC8C62A",
           "category": "STOP_AND_REVIEW",
@@ -1720,7 +1721,7 @@
           "limitations": [
             "This recommendation is fail-closed and cannot be promoted while any reason code remains."
           ],
-          "recommendationDigest": "1079887834dcdc85088ef5b702a3c53dcbdf9dda18957d004d42cc0ddff55221"
+          "recommendationDigest": "3aac4a4f4b6246e3dc800a6729cc412bcd1af8d2f96376556d4697b7e05278ae"
         }
       ],
       "ruleEvaluations": [
@@ -1740,7 +1741,7 @@
         }
       ],
       "decisionState": "NOT_PRESENT_PRE_DECISION",
-      "recordDigest": "2a5ed3fba4d28d68f782dd3a249efa03855a0ae0ffb33204db2dbd9692cfb901"
+      "recordDigest": "599549f01bfa0a755c3bf2333d8efdd3714fb87ae70ff4f0bfbcbfcd333aea72"
     },
     {
       "recordId": "F4-2E2E47C7954D60FC6A01169F",
@@ -1785,7 +1786,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-B089FFDD9A36B7BFD7700B3C",
           "subjectRef": "SESSION-9BD429ED1FA9ED1DADA27DD3",
           "category": "QUALITY_CHECK",
@@ -1815,7 +1816,7 @@
           "limitations": [
             "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
           ],
-          "recommendationDigest": "74231406e5492f4c18bcd35c61bcd252e7fb4d62cb009891e62a769db9ca2416"
+          "recommendationDigest": "8831d5a043dff6960cf0e8dc76be7e8a287c1defa558b8453905b32c5b490038"
         },
         {
           "recommendationId": "REC-BKL046-F3-D658208A6A6D9D327394B51A",
@@ -1824,7 +1825,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-D658208A6A6D9D327394B51A",
           "subjectRef": "SESSION-9BD429ED1FA9ED1DADA27DD3",
           "category": "STOP_AND_REVIEW",
@@ -1872,7 +1873,7 @@
           "limitations": [
             "This recommendation is fail-closed and cannot be promoted while any reason code remains."
           ],
-          "recommendationDigest": "5adaff5efb5e147a69333329e892bf0d823c21beddb29b7cfeb422b5016895bc"
+          "recommendationDigest": "f310faa53cc86a045d35b20feed72dde27ecd2da05f7d4126a224d53bb85182c"
         }
       ],
       "ruleEvaluations": [
@@ -1892,7 +1893,7 @@
         }
       ],
       "decisionState": "NOT_PRESENT_PRE_DECISION",
-      "recordDigest": "68f6d2b3a2b81cc69d73f96b4a95745ae3d0379bdb84d917d344ffeb025cd263"
+      "recordDigest": "71ee28373c68fd384bf63369fbe103da2da3aba4390e7db668a15d92a20f7619"
     },
     {
       "recordId": "F4-D0A364A2A9A17AB281495EA5",
@@ -1937,7 +1938,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-4560305CC07A56C9D1B57624",
           "subjectRef": "SESSION-20B60F2F36ADAB31882B5B33",
           "category": "STOP_AND_REVIEW",
@@ -1985,7 +1986,7 @@
           "limitations": [
             "This recommendation is fail-closed and cannot be promoted while any reason code remains."
           ],
-          "recommendationDigest": "875261e51941417c51e76e0e7940e5d4a73f017ac3820495ba961b2209af5f09"
+          "recommendationDigest": "c4582ca5fc0ed876aca53434d07afb8a807dda27de5cd449a8094adb798d5b46"
         },
         {
           "recommendationId": "REC-BKL046-F3-D62C15FCEB4742B3D61B6025",
@@ -1994,7 +1995,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-D62C15FCEB4742B3D61B6025",
           "subjectRef": "SESSION-20B60F2F36ADAB31882B5B33",
           "category": "QUALITY_CHECK",
@@ -2024,7 +2025,7 @@
           "limitations": [
             "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
           ],
-          "recommendationDigest": "6eaa62d0b50122f9ebdf123d67c7670604a802c2b4227b22d4270692d5adb4b0"
+          "recommendationDigest": "94a7f27d629a237080958f48e2da900cb7c9d858953d7a01098578f3e1a6a8a3"
         }
       ],
       "ruleEvaluations": [
@@ -2044,7 +2045,7 @@
         }
       ],
       "decisionState": "NOT_PRESENT_PRE_DECISION",
-      "recordDigest": "fa04805a6e75ae54acd856bf19fd52aee6bea837812649e0bea25918f93a4ff0"
+      "recordDigest": "bb9723b58e706060e3099a4d0a22ccc92cf444246ddd8113cd200229df9c078e"
     },
     {
       "recordId": "F4-6E9BCC71097A60ED706EA971",
@@ -2089,7 +2090,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-0EEE94A2B98B26CB95959A7C",
           "subjectRef": "SESSION-17427218F175AB7864AD3171",
           "category": "STOP_AND_REVIEW",
@@ -2137,7 +2138,7 @@
           "limitations": [
             "This recommendation is fail-closed and cannot be promoted while any reason code remains."
           ],
-          "recommendationDigest": "c089d6dd96809ef968ab6b88152a623fc2cb505d37ac1adc32ef7e46f6131c82"
+          "recommendationDigest": "40f190dc15f1cbc2434cd50d8b70a148e2869e71d67ca255edbee24f1d86cdca"
         },
         {
           "recommendationId": "REC-BKL046-F3-A3DE58B47CF07A9E8954CC72",
@@ -2146,7 +2147,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-A3DE58B47CF07A9E8954CC72",
           "subjectRef": "SESSION-17427218F175AB7864AD3171",
           "category": "QUALITY_CHECK",
@@ -2176,7 +2177,7 @@
           "limitations": [
             "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
           ],
-          "recommendationDigest": "569d7cb8865c735761352d0bd746711e5e180947b7fb510fd6bd4b7c10aaf37b"
+          "recommendationDigest": "850b358cd9fa8e90f04a0225a35b261cc1048e7fb530e2085552118dd79c1353"
         }
       ],
       "ruleEvaluations": [
@@ -2196,7 +2197,7 @@
         }
       ],
       "decisionState": "NOT_PRESENT_PRE_DECISION",
-      "recordDigest": "fcf80c7c224667ee11aa592af64d435fb8be5fb9ed966146bd86554a456a17d3"
+      "recordDigest": "79a46a8bdbc280279aa9c0a93112f2d7c7462e170191619d181ccb70dd1d7d02"
     },
     {
       "recordId": "F4-512C4BCCA80C880E80213E7E",
@@ -2241,7 +2242,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-17027BC5096A25AA57858A47",
           "subjectRef": "SESSION-62EE060A718E96FE1566F48E",
           "category": "QUALITY_CHECK",
@@ -2271,7 +2272,7 @@
           "limitations": [
             "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
           ],
-          "recommendationDigest": "1aee2c2bd92ff8cde5c53fc2dfa6f6399aa4141d9c2f94570a230b56085b278c"
+          "recommendationDigest": "2450de13b598a161bad280d2bfe4eba95a1d3dd3a8d6136baacc0f6d39a12ef9"
         },
         {
           "recommendationId": "REC-BKL046-F3-B4130448980CD8D22A2EB15E",
@@ -2280,7 +2281,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-B4130448980CD8D22A2EB15E",
           "subjectRef": "SESSION-62EE060A718E96FE1566F48E",
           "category": "STOP_AND_REVIEW",
@@ -2328,7 +2329,7 @@
           "limitations": [
             "This recommendation is fail-closed and cannot be promoted while any reason code remains."
           ],
-          "recommendationDigest": "d3db1b26d2d5b8409eaad7f4ac814365445468be9796c9fd9274e73aeeffcc6f"
+          "recommendationDigest": "8889ea03fa039b6b373711c8922ded72a9b4503d07795a134b07a77f7832d155"
         }
       ],
       "ruleEvaluations": [
@@ -2348,7 +2349,7 @@
         }
       ],
       "decisionState": "NOT_PRESENT_PRE_DECISION",
-      "recordDigest": "a14b87d304246c720a67392c098cd93fc29718acd7341f47c6b2e9ee2e71d88a"
+      "recordDigest": "c08bf790cdfa824b76dd5a68d6eb638f0c143c1d66a39bb40c9137d37d178602"
     },
     {
       "recordId": "F4-D9B71CDC3324D20D1EC9D491",
@@ -2393,7 +2394,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-113CFF4AD53A7205D75BBE59",
           "subjectRef": "SESSION-9F70319C0B03511800401907",
           "category": "STOP_AND_REVIEW",
@@ -2441,7 +2442,7 @@
           "limitations": [
             "This recommendation is fail-closed and cannot be promoted while any reason code remains."
           ],
-          "recommendationDigest": "49ca4d20d17086607b5419cbb8d7998626c5cdb79b3848a02fb6af3b48f9e3f9"
+          "recommendationDigest": "aaadbef7b352c6f08d6b68360244c637852b0e91e4d3706c560a5943238657fc"
         },
         {
           "recommendationId": "REC-BKL046-F3-331934B37421415B3EFBBB63",
@@ -2450,7 +2451,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-331934B37421415B3EFBBB63",
           "subjectRef": "SESSION-9F70319C0B03511800401907",
           "category": "QUALITY_CHECK",
@@ -2480,7 +2481,7 @@
           "limitations": [
             "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
           ],
-          "recommendationDigest": "90f25b9ca8a484695ce6806fd5e92ba96fe8ca75f6f18362a6f7e61468a4dc2c"
+          "recommendationDigest": "268c09f43bfcae3231ffe64ac78cc8c8112856e733f128850758c79166dc0140"
         }
       ],
       "ruleEvaluations": [
@@ -2500,7 +2501,7 @@
         }
       ],
       "decisionState": "NOT_PRESENT_PRE_DECISION",
-      "recordDigest": "b974d2e074f476a7ea0aa7a1ca7c62b92499036918384701352295529e08fdee"
+      "recordDigest": "fc65b7be627d3b3fbe3afc8758a924c9bc5bfa6b14ff463ae681f069def7cf36"
     },
     {
       "recordId": "F4-EDD8FC6A1B9BCF2A8E06CB3A",
@@ -2545,7 +2546,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-2918523E1FC4F381F2DE6194",
           "subjectRef": "SESSION-34E568240678CC91A50E85B5",
           "category": "STOP_AND_REVIEW",
@@ -2593,7 +2594,7 @@
           "limitations": [
             "This recommendation is fail-closed and cannot be promoted while any reason code remains."
           ],
-          "recommendationDigest": "4f97886782e5b6fa71003081436b716c2cd66cab05b9ae8fc30abb2043eb4c53"
+          "recommendationDigest": "2401b27b079d0853f90070dce7e4633780b4c48fe5351ccaf8859fbc58e1a608"
         },
         {
           "recommendationId": "REC-BKL046-F3-C19E6E8165804DC0518BCFB4",
@@ -2602,7 +2603,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-C19E6E8165804DC0518BCFB4",
           "subjectRef": "SESSION-34E568240678CC91A50E85B5",
           "category": "QUALITY_CHECK",
@@ -2632,7 +2633,7 @@
           "limitations": [
             "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
           ],
-          "recommendationDigest": "7f543a7359cefb738931eeecff0861cda7f9f8df0daaad249cfbdea8173c2ae1"
+          "recommendationDigest": "84dea3d0e0b281feef0ee47dbb1a7377a3d83fde2cf7a2c00c6e10d3b5e6550a"
         }
       ],
       "ruleEvaluations": [
@@ -2652,7 +2653,7 @@
         }
       ],
       "decisionState": "NOT_PRESENT_PRE_DECISION",
-      "recordDigest": "7391f1e6a754a10847281dba64795e6b9835962fb4d0391d1379e0cc90614d0e"
+      "recordDigest": "5f92a842fafde05411f7107592fc3a580a5ba1e6a9779f6268ffc50f502c9259"
     },
     {
       "recordId": "F4-1F11098648ECE8E55822475B",
@@ -2697,7 +2698,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-61CE7C7229EC2D8F10BC5CE9",
           "subjectRef": "SESSION-131FC99D9A25AC25887D0089",
           "category": "STOP_AND_REVIEW",
@@ -2745,7 +2746,7 @@
           "limitations": [
             "This recommendation is fail-closed and cannot be promoted while any reason code remains."
           ],
-          "recommendationDigest": "cf0264599f0cf84ef1b5a0ad078ee67fed7e9bd9bb9412380fb6ffff176177ff"
+          "recommendationDigest": "14452f21771b5632f74cd65bb33b4e0fc8eedf9176a8e7722710b4191d98f4d6"
         },
         {
           "recommendationId": "REC-BKL046-F3-A94F10978439AB0A26AD2582",
@@ -2754,7 +2755,7 @@
           "producer": "DSG.DeterministicAdvisoryDemonstrator",
           "producerVersion": "1.0.0-f3",
           "methodId": "BKL046-F3-CLOSED-RULES-1",
-          "generatedAt": "2026-09-15T05:57:33.398Z",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
           "correlationId": "CORR-BKL046-F3-A94F10978439AB0A26AD2582",
           "subjectRef": "SESSION-131FC99D9A25AC25887D0089",
           "category": "QUALITY_CHECK",
@@ -2784,7 +2785,7 @@
           "limitations": [
             "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
           ],
-          "recommendationDigest": "881b0da22b7c79e7d2438a7eb1857da9ce7f95b7aa7e38c3f86e78b2bb8e1fd1"
+          "recommendationDigest": "3f69a57e129a019012b8bdc3f110d702a3ba60c4032e6c6ce129505a6f38cabb"
         }
       ],
       "ruleEvaluations": [
@@ -2804,19 +2805,171 @@
         }
       ],
       "decisionState": "NOT_PRESENT_PRE_DECISION",
-      "recordDigest": "016e36f4d23bab57485b81cfb17d3286e52684a34c421fba6318718ec7fcd405"
+      "recordDigest": "2e743dad433407e361db4356990b2f7c6abf78542cf042cafcb170d216b07ad9"
+    },
+    {
+      "recordId": "F4-3AA61A9E582DB9BCF39273BC",
+      "sessionId": "2026-09-15_2026-09-16",
+      "target": "M 27",
+      "correlationState": "PROVENANCE_UNAVAILABLE",
+      "sourceRefs": [],
+      "inputArtifactDigest": "861af6447b6eeb6470de09a7e4e78a42635fa15ce3a27f4a2d0ec2e1c5172e2b",
+      "subject": {
+        "subjectId": "SESSION-D93F471E7B0A9A4EE43F9B2C",
+        "subjectType": "PIXINSIGHT_WORKFLOW",
+        "assetRef": null,
+        "sessionRef": "docs/data/scientific-session-catalog.json#2026-09-15_2026-09-16",
+        "workflowRef": null,
+        "stepRef": null,
+        "correlationState": "RESOLVED"
+      },
+      "sourceBindings": [
+        {
+          "bindingId": "SRC-F4-CATALOG-D93F471E7B0A9A4EE43F",
+          "semanticType": "evidence",
+          "evidenceClass": "DECLARED",
+          "sourceAuthority": "repository_authority",
+          "sourceRef": "docs/data/scientific-session-catalog.json",
+          "lifecycleState": "validated",
+          "quality": "VALID",
+          "completeness": "COMPLETE",
+          "citationRefs": [
+            "docs/data/scientific-session-catalog.json"
+          ],
+          "limitations": [
+            "The catalog establishes governed session identity; it does not establish PixInsight processing completeness."
+          ],
+          "bindingDigest": "bd4c73d8a5a7fe16c1042499733f3dacd4a6d3dfe28b0ad5e27c21b353b2d4b5"
+        }
+      ],
+      "recommendations": [
+        {
+          "recommendationId": "REC-BKL046-F3-86A2AE7061B074613BDC52EC",
+          "semanticType": "recommendation",
+          "aiDerived": false,
+          "producer": "DSG.DeterministicAdvisoryDemonstrator",
+          "producerVersion": "1.0.0-f3",
+          "methodId": "BKL046-F3-CLOSED-RULES-1",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
+          "correlationId": "CORR-BKL046-F3-86A2AE7061B074613BDC52EC",
+          "subjectRef": "SESSION-D93F471E7B0A9A4EE43F9B2C",
+          "category": "QUALITY_CHECK",
+          "lifecycleState": "validated",
+          "proposedAction": "Confirm the governed advisory boundary before requesting subject-specific PixInsight guidance.",
+          "rationale": "The repository authority source is validated, complete and correlated to the governed session subject.",
+          "sourceBindingRefs": [
+            "SRC-F4-CATALOG-D93F471E7B0A9A4EE43F"
+          ],
+          "citationRefs": [
+            "docs/data/scientific-session-catalog.json"
+          ],
+          "provenanceRefs": [
+            "PRV-BKL046-F3-GOVERNANCE_READINESS-86A2AE7061B074613BDC52EC"
+          ],
+          "parameterAdvice": [],
+          "conflicts": [],
+          "unknowns": [],
+          "confidence": {
+            "state": "UNAVAILABLE_F2",
+            "contractRef": null,
+            "value": null,
+            "limitations": [
+              "F3 does not introduce a calibrated recommendation-confidence method."
+            ]
+          },
+          "limitations": [
+            "Validated means contract-valid deterministic guidance over governed session evidence; it is not scientific acceptance, human approval or execution."
+          ],
+          "recommendationDigest": "09c20ab9ed895a14b1e9f3e535623a4e6d49e5642c75c3254d78aea77a014e79"
+        },
+        {
+          "recommendationId": "REC-BKL046-F3-BFB87B44BCE5347C5661B129",
+          "semanticType": "recommendation",
+          "aiDerived": false,
+          "producer": "DSG.DeterministicAdvisoryDemonstrator",
+          "producerVersion": "1.0.0-f3",
+          "methodId": "BKL046-F3-CLOSED-RULES-1",
+          "generatedAt": "2026-09-16T06:06:41.760Z",
+          "correlationId": "CORR-BKL046-F3-BFB87B44BCE5347C5661B129",
+          "subjectRef": "SESSION-D93F471E7B0A9A4EE43F9B2C",
+          "category": "STOP_AND_REVIEW",
+          "lifecycleState": "incomplete",
+          "proposedAction": "Stop subject-specific parameter recommendation and review the PixInsight workflow evidence manually.",
+          "rationale": "The closed F3 eligibility gate failed: REQUIRED_SOURCE_AUTHORITY_MISSING.",
+          "sourceBindingRefs": [
+            "SRC-F4-CATALOG-D93F471E7B0A9A4EE43F"
+          ],
+          "citationRefs": [
+            "docs/data/scientific-session-catalog.json"
+          ],
+          "provenanceRefs": [
+            "PRV-BKL046-F3-PROCESSING_HISTORY_AVAILABILITY-BFB87B44BCE5347C5661B129"
+          ],
+          "parameterAdvice": [
+            {
+              "parameterId": null,
+              "mode": "UNKNOWN_NOT_RECOMMENDED",
+              "unit": null,
+              "categoricalValue": null,
+              "lowerBound": null,
+              "upperBound": null,
+              "applicability": "Subject-specific PixInsight parameters while the deterministic evidence gate is not satisfied.",
+              "evidenceRefs": [
+                "SRC-F4-CATALOG-D93F471E7B0A9A4EE43F"
+              ],
+              "limitations": [
+                "No parameter or value may be inferred from incomplete, stale, invalid, suggested or uncorrelated evidence."
+              ]
+            }
+          ],
+          "conflicts": [],
+          "unknowns": [
+            "REQUIRED_SOURCE_AUTHORITY_MISSING"
+          ],
+          "confidence": {
+            "state": "UNAVAILABLE_F2",
+            "contractRef": null,
+            "value": null,
+            "limitations": [
+              "F3 does not introduce a calibrated recommendation-confidence method."
+            ]
+          },
+          "limitations": [
+            "This recommendation is fail-closed and cannot be promoted while any reason code remains."
+          ],
+          "recommendationDigest": "0fa1662a42e11cc66b741c24881b657c2264e01eaf5a3f4ecf45cf0ba2231448"
+        }
+      ],
+      "ruleEvaluations": [
+        {
+          "ruleId": "GOVERNANCE_READINESS",
+          "recommendationId": "REC-BKL046-F3-86A2AE7061B074613BDC52EC",
+          "decision": "PASS",
+          "reasonCodes": []
+        },
+        {
+          "ruleId": "PROCESSING_HISTORY_AVAILABILITY",
+          "recommendationId": "REC-BKL046-F3-BFB87B44BCE5347C5661B129",
+          "decision": "FAIL_CLOSED",
+          "reasonCodes": [
+            "REQUIRED_SOURCE_AUTHORITY_MISSING"
+          ]
+        }
+      ],
+      "decisionState": "NOT_PRESENT_PRE_DECISION",
+      "recordDigest": "3e92d0cafacc1b0e0169ad55c63377db6e1ad46c66fe8910cd1cbd028a63194c"
     }
   ],
   "summary": {
-    "totalSessions": 18,
+    "totalSessions": 19,
     "provenanceMatched": 0,
-    "provenanceUnavailable": 18,
+    "provenanceUnavailable": 19,
     "correlationAmbiguous": 0,
     "correlationInvalid": 0,
-    "governancePass": 18,
+    "governancePass": 19,
     "governanceFailClosed": 0,
     "processingHistoryPass": 0,
-    "processingHistoryFailClosed": 18,
+    "processingHistoryFailClosed": 19,
     "uncorrelatedSources": 2
   },
   "authority": {
@@ -2835,5 +2988,5 @@
     "Raw BKL-045 sidecars are validated at build time; the published projection excludes host and workspace identifiers.",
     "No human decision, PixInsight execution, automatic acceptance, device command or Safety Authority is represented."
   ],
-  "projectionDigest": "c3ccc14204b2f4878d45cdabe1cc131aa5fccb02fdce35336c06a41e553e1c84"
+  "projectionDigest": "b45329735e1b4ddf5c99ee528e614d5514c345c90453e669f73175854df4e831"
 }

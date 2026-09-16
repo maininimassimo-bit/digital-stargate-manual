@@ -1,0 +1,78 @@
+{
+  "schema_version": "0.2.0",
+  "session_id": "2026-09-15_2026-09-16",
+  "generated_at": "2026-09-16T06:06:38.871349+00:00",
+  "scientific": {
+    "target_name": "M 27",
+    "ra_deg": 299.9,
+    "dec_deg": 22.72111111,
+    "epoch": "J2000",
+    "telescope": "Celestron C8 XLT",
+    "camera": "QHY695A",
+    "binning": 1,
+    "source": "nina-log",
+    "configuration_id": "C8_QHY695A_BIN1"
+  },
+  "nina": {
+    "camera_exposures_total": 110,
+    "light_started": 28,
+    "light_completed": 28,
+    "light_failed_explicit": 0,
+    "light_interrupted_unmatched": 0,
+    "technical_exposures_estimated": 82,
+    "integration_seconds": 16800.0,
+    "autofocus_started": 12,
+    "autofocus_completed": 6,
+    "autofocus_failed_explicit": 0,
+    "autofocus_unmatched": 6,
+    "dither_requests": 53,
+    "nina_errors": 34,
+    "nina_warnings": 62
+  },
+  "phd2": {
+    "guide_segments": 7,
+    "guide_samples_total": 7242,
+    "guide_samples_valid": 6740,
+    "guide_samples_saturated": 6740,
+    "guide_samples_rejected": 50,
+    "guide_samples_settling_excluded": 456,
+    "guide_samples_unscaled": 0,
+    "settling_failures": 25,
+    "equipment_profiles": [
+      "C8_QHY695A"
+    ],
+    "rms_method": "PHD2 RARawDistance/DECRawDistance multiplied by the active segment pixel scale; ErrorCode 0 and STAR_SATURATED (1) included; settling excluded.",
+    "rms_ra_arcsec": 1.209,
+    "rms_dec_arcsec": 0.666,
+    "rms_total_arcsec": 1.38,
+    "lost_star_events": 50,
+    "pulse_guide_failures": 0
+  },
+  "weather": {
+    "weather_rows_total": 3960,
+    "weather_rows_unsafe_full_window": 394,
+    "weather_safe_transitions_full_window": 1,
+    "weather_unsafe_pct_full_window": 9.95,
+    "weather_scope_note": "Valori riferiti alla finestra CSV importata; non penalizzano la severita finche non sono correlati alla sequenza attiva/cupola aperta."
+  },
+  "sqm": {
+    "state": "AVAILABLE",
+    "quality": "AVAILABLE",
+    "start": "2026-09-15T17:00:29.0000000Z",
+    "end": "2026-09-16T03:59:40.0000000Z",
+    "min_mag_arcsec2": 8.91,
+    "max_mag_arcsec2": 20.97,
+    "mean_mag_arcsec2": 19.6334,
+    "median_mag_arcsec2": 20.77,
+    "valid_samples": 1289,
+    "temporal_coverage": 0.9758,
+    "source_path": "data/sessions/2026/09/2026-09-15_2026-09-16/raw/sqm/sqm-summary.json",
+    "source": "AAG CloudWatcher SOLO HTTP / lightmpsas",
+    "serial": "2382",
+    "firmware": "5.88"
+  },
+  "severity": "YELLOW",
+  "severity_reasons": [
+    "Lost star ripetuti: 50"
+  ]
+}
