@@ -17,6 +17,7 @@ on:
       - ".github/scripts/verify-bkl-031-f3-a3-scientific-runner-gate.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-exact-runner-oci-publication.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-runner-platform-update.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-runner-platform-verification.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - ".github/workflows/bkl-031-f3-a3-authenticated-platform-plan.yml"
       - ".github/workflows/bkl-031-f3-a3-registry-foundation.yml"
@@ -26,6 +27,7 @@ on:
       - ".github/workflows/bkl-031-f3-a3-exact-kernel-acquisition-upload.yml"
       - ".github/workflows/bkl-031-f3-a3-exact-runner-oci-publication.yml"
       - ".github/workflows/bkl-031-f3-a3-runner-platform-update.yml"
+      - ".github/workflows/bkl-031-f3-a3-runner-platform-verification.yml"
       - "infrastructure/bkl-031-f3-a3-gcp/**"
       - "docs/architecture/ADR-010-Ephemeris-Lunar-Method-and-Validation-Profile.md"
       - "docs/architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md"
@@ -49,6 +51,7 @@ on:
       - ".github/scripts/verify-bkl-031-f3-a3-scientific-runner-gate.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-exact-runner-oci-publication.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-runner-platform-update.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-runner-platform-verification.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - ".github/workflows/bkl-031-f3-a3-authenticated-platform-plan.yml"
       - ".github/workflows/bkl-031-f3-a3-registry-foundation.yml"
@@ -58,6 +61,7 @@ on:
       - ".github/workflows/bkl-031-f3-a3-exact-kernel-acquisition-upload.yml"
       - ".github/workflows/bkl-031-f3-a3-exact-runner-oci-publication.yml"
       - ".github/workflows/bkl-031-f3-a3-runner-platform-update.yml"
+      - ".github/workflows/bkl-031-f3-a3-runner-platform-verification.yml"
       - "infrastructure/bkl-031-f3-a3-gcp/**"
   workflow_dispatch:
 
@@ -102,6 +106,8 @@ jobs:
         run: node .github/scripts/verify-bkl-031-f3-a3-exact-runner-oci-publication.mjs
       - name: Verify exact runner platform update gate
         run: node .github/scripts/verify-bkl-031-f3-a3-runner-platform-update.mjs
+      - name: Verify runner platform read-only verification gate
+        run: node .github/scripts/verify-bkl-031-f3-a3-runner-platform-verification.mjs
 
   terraform:
     name: Terraform validate (${{ matrix.directory }})
