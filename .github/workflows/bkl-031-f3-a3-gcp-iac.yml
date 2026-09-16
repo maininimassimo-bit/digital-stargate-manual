@@ -95,11 +95,16 @@ jobs:
         run: |
           set -euo pipefail
           export DOCKER_BUILDKIT=1
-          docker build --network=none --pull=false --no-cache --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:candidate-a --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile infrastructure/bkl-031-f3-a3-gcp
-          docker build --network=none --pull=false --no-cache --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:candidate-b --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile infrastructure/bkl-031-f3-a3-gcp
+          docker build --platform linux/amd64 --network=none --pull=false --no-cache --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:candidate-a --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile infrastructure/bkl-031-f3-a3-gcp
+          docker build --platform linux/amd64 --network=none --pull=false --no-cache --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:candidate-b --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile infrastructure/bkl-031-f3-a3-gcp
           image_id_a="$(docker image inspect --format '{{.Id}}' dsg-bkl031-f3a3:candidate-a)"
           image_id_b="$(docker image inspect --format '{{.Id}}' dsg-bkl031-f3a3:candidate-b)"
-          test "$image_id_a" = "$image_id_b"
+          printf 'candidate-a=%s\ncandidate-b=%s\n' "$image_id_a" "$image_id_b"
+          if [ "$image_id_a" != "$image_id_b" ]; then
+            docker image inspect --format 'candidate-a layers={{json .RootFS.Layers}}' dsg-bkl031-f3a3:candidate-a
+            docker image inspect --format 'candidate-b layers={{json .RootFS.Layers}}' dsg-bkl031-f3a3:candidate-b
+            exit 1
+          fi
           echo "DSG_CONTAINER_IMAGE_ID=$image_id_a" | tee -a "$GITHUB_ENV" "$GITHUB_STEP_SUMMARY"
       - name: Execute fail-closed preflight with network disabled
         run: docker run --rm --network none dsg-bkl031-f3a3:candidate-a /bin/true
@@ -126,7 +131,7 @@ jobs:
           cat <<EOF | tee -a "$GITHUB_STEP_SUMMARY"
           BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE
           sourceCommit=${GITHUB_SHA}
-          sourceManifestSha256=2dff1ebeb851ec99e7c6c7ecc73fb5aa7305a8a4937b6720ecb977ba6900c16c
+          sourceManifestSha256=d66696d1ea5d3e02049ff1728fc3d90fcbff4c3504deabf06ad10c17cff0251e
           imageId=${DSG_CONTAINER_IMAGE_ID}
           os=${operating_system}
           architecture=${architecture}

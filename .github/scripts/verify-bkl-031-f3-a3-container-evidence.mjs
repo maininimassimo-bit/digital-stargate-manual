@@ -7,7 +7,7 @@ const containerDir = path.join(root, "infrastructure", "bkl-031-f3-a3-gcp", "con
 const historicalManifestPath = path.join(containerDir, "BKL-031-F3-A3-CONTAINER-MANIFEST-001.json");
 const manifestPath = path.join(containerDir, "BKL-031-F3-A3-CONTAINER-MANIFEST-002.json");
 const historicalManifestSha256 = "7923206d85c5670ef56f9310a813c165c7d516d226c994561516c843b338412e";
-const expectedManifestSha256 = "2dff1ebeb851ec99e7c6c7ecc73fb5aa7305a8a4937b6720ecb977ba6900c16c";
+const expectedManifestSha256 = "d66696d1ea5d3e02049ff1728fc3d90fcbff4c3504deabf06ad10c17cff0251e";
 const expectedProfileSha256 = "e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca";
 const expectedIersSha256 = "43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc";
 const expectedBasePlatformDigest = "sha256:9c47360a2a0355e2da18516d0b1c2126ec22c195d2185e97347c9d98398c5bef";
@@ -26,7 +26,7 @@ const expectedPackages = new Map([
 ]);
 const expectedSourceFiles = new Map([
   ["infrastructure/bkl-031-f3-a3-gcp/.dockerignore", "8ce1cb34679acf2cca7ea9847358821de2c36e7720e77ccfdf8e19294230329d"],
-  ["infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile", "02c2099eb39cfc41acdbb390b43856b4fbaa52c50610443f5c7fbd89dd6bcdb7"],
+  ["infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile", "d1edf2f42604b3b773e4485b4710705d4484d18e46c24789fad539bb165986ff"],
   ["infrastructure/bkl-031-f3-a3-gcp/container/requirements.lock", "b9356f05eebf75501ef11f698b780837ebdde3fc64162d1c1b42420b30edf490"],
   ["infrastructure/bkl-031-f3-a3-gcp/container/astropy.cfg", "00aa2cd71966f5c98d7864db1fac834d263f44139c5364d8c1b3efce8aa8cf2a"],
   ["infrastructure/bkl-031-f3-a3-gcp/container/entrypoint.sh", "fcfe2d5b623e99f643f530b24e683cfc82d39b1c69381406f5f2906d0775e347"],
@@ -123,12 +123,13 @@ validateManifest(manifest);
 
 const dockerfile = fs.readFileSync(path.join(containerDir, "Dockerfile"), "utf8");
 for (const fragment of [
-  `FROM --platform=linux/amd64 python:3.12.14-slim-bookworm@${expectedBasePlatformDigest}`,
+  `FROM python:3.12.14-slim-bookworm@${expectedBasePlatformDigest}`,
   "--only-binary=:all:",
   "--require-hashes",
   "--no-compile",
   "--no-deps",
   "SOURCE_DATE_EPOCH=0",
+  '-exec touch -h -d "@${SOURCE_DATE_EPOCH}"',
   "/app/dsg/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json",
   "/app/dsg/container/BKL-031-F3-A3-CONTAINER-MANIFEST-002.json",
   "container/.build/wheels/",
@@ -155,7 +156,7 @@ for (const forbidden of ["!bootstrap/", "!platform/", "!../", "!docs/"]) {
 const workflow = fs.readFileSync(path.join(root, ".github", "workflows", "bkl-031-f3-a3-gcp-iac.yml"), "utf8");
 const isolatedBuild = "--file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile infrastructure/bkl-031-f3-a3-gcp";
 equal(workflow.split(isolatedBuild).length - 1, 2, "isolated no-cache build count");
-if (!workflow.includes("docker build --network=none --pull=false --no-cache --build-arg SOURCE_DATE_EPOCH=0")) fail("workflow must build reproducibly without network, pull, or cache");
+if (!workflow.includes("docker build --platform linux/amd64 --network=none --pull=false --no-cache --build-arg SOURCE_DATE_EPOCH=0")) fail("workflow must build reproducibly for linux/amd64 without network, pull, or cache");
 
 const acquisition = fs.readFileSync(path.join(root, ".github", "scripts", "acquire-bkl-031-f3-a3-container-artifacts.mjs"), "utf8");
 for (const fragment of [

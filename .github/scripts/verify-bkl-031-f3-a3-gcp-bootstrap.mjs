@@ -87,7 +87,7 @@ requireText("container manifest", containerManifest, '"status": "BUILD_INPUT_EXA
 requireText("container manifest", containerManifest, '"sha256": "43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc"');
 requireText("container manifest", containerManifest, '"runtimeAuthority": false');
 requireText("container Dockerfile", containerDockerfile, "python:3.12.14-slim-bookworm@sha256:9c47360a2a0355e2da18516d0b1c2126ec22c195d2185e97347c9d98398c5bef");
-requireText("container verifier", containerVerifier, "2dff1ebeb851ec99e7c6c7ecc73fb5aa7305a8a4937b6720ecb977ba6900c16c");
+requireText("container verifier", containerVerifier, "d66696d1ea5d3e02049ff1728fc3d90fcbff4c3504deabf06ad10c17cff0251e");
 requireText("platform example", platformExample, "43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc");
 requireText("platform", platform, "DSG_KERNEL_URI");
 requireText("platform example", platformExample, "BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16");
