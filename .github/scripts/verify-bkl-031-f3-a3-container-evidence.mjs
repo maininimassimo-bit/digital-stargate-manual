@@ -85,7 +85,9 @@ function validateManifest(manifest) {
   for (const [relativePath, expectedDigest] of expectedSourceFiles) {
     equal(sourceFiles.get(relativePath), expectedDigest, `${relativePath} declared digest`);
     exactSha(expectedDigest, `${relativePath} expected digest`);
-    const actualDigest = sha256(read(relativePath));
+    const sourceBytes = read(relativePath);
+    if (sourceBytes.includes(0x0d)) fail(`${relativePath} must use canonical LF line endings`);
+    const actualDigest = sha256(sourceBytes);
     equal(actualDigest, expectedDigest, `${relativePath} content digest`);
   }
 
