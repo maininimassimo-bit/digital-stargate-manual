@@ -58,7 +58,7 @@ F3-OD05 is approved at artifact-identity level by `BKL-031-F3-A3-F3-OD05-APPROVA
 
 The future container must embed the exact profile at `/app/dsg/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json` and invoke `.github/scripts/verify-bkl-031-f3-a3-method-profile.mjs` as a fail-closed preflight before scientific code. CI verifies the exact digest and proves that content or digest drift is rejected. No container has been built or executed.
 
-This package has no authenticated plan/apply workflow. The one-time bootstrap was applied from the reviewed saved plan for `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46`: 27 resources added, 0 changed and 0 destroyed. Bootstrap state is active in the protected GCS bucket; backend promotion and post-promotion zero-drift evidence remain the current ARB-213-MI02 gate. Platform plan/apply, upload and execution remain blocked by MI02 closure, exact artifact/container evidence and exact-head re-review.
+This package has no authenticated plan/apply workflow. The one-time bootstrap was applied from the reviewed saved plan for `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46`: 27 resources added, 0 changed and 0 destroyed. PR #219 promoted the permanent backend as merge `6c6a9454f1f1f13f72b4ae5098c0f2475b537d60`; remote lineage/content, recovery candidate, locking and a zero-drift exit code `0` were then verified. ARB-213-MI02 is satisfied. Platform plan/apply, upload and execution remain blocked pending exact container/IERS evidence and a separate authenticated exact-head review.
 
 ## Local validation
 

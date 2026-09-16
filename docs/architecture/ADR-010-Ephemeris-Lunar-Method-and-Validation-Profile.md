@@ -106,8 +106,8 @@ Not authorized now:
 
 ### Negative
 
-- the one-time GCP administrator bootstrap is complete, while permanent-backend promotion and post-promotion verification remain open;
-- ARB-213-MI01 has repository-level immutable-profile and drift-rejection evidence; ARB-213-MI02 closure, exact container inclusion evidence and authenticated exact-head platform-plan review still block platform apply and spike execution;
+- the one-time GCP administrator bootstrap, permanent-backend promotion and post-promotion verification are complete;
+- ARB-213-MI01 has repository-level immutable-profile and drift-rejection evidence and ARB-213-MI02 is satisfied; exact container/IERS inclusion evidence and authenticated exact-head platform-plan review still block platform apply and spike execution;
 - Cloud Run cold start and regional service availability must be measured;
 - private VPC egress prevents Horizons from the local job profile.
 
@@ -161,4 +161,4 @@ Revert the repository package for source changes. The authorized bootstrap and r
 
 ## Governance stop
 
-Complete ARB-213-MI02 backend promotion and verification, then stop before platform plan/apply, further artifact acquisition, any upload or spike execution. S10 remains `UNAVAILABLE`.
+Prepare exact container and IERS inclusion evidence, then stop before platform plan/apply, further artifact acquisition, any upload or spike execution. S10 remains `UNAVAILABLE`.

@@ -11,7 +11,7 @@
 | Root bootstrap | `AI_BOOTSTRAP.md` |
 | Continuity handover | `docs/project/HANDOVER_2026-09-15.md` |
 | Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-15.md` |
-| Current governed package | BKL-031 F3-A3 MI02 backend promotion after authorized bootstrap/state migration; ADR-010 proposed |
+| Current governed package | BKL-031 F3-A3 MI02 post-promotion verified; exact container/IERS evidence next; ADR-010 proposed |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo e gerarchia
@@ -117,7 +117,7 @@ La repository authority F3-A2-D5 è APPROVED/AVAILABLE per caller autorizzati, m
 
 ## 12. F3-A3 enterprise boundary
 
-F3-A3 remains a governed validation package. Owner decisions F3-OD04–F3-OD10 and ARB-213-MI01 repository evidence are complete. The bootstrap is applied and its state is remote; ARB-213-MI02 backend promotion remains open. ADR-010 remains Proposed, the scientific campaign is not executed and S10 remains `UNAVAILABLE`; Safety Authority and EAGLE operations are unchanged.
+F3-A3 remains a governed validation package. Owner decisions F3-OD04–F3-OD10 and ARB-213-MI01 repository evidence are complete. The bootstrap is applied, its state is remote and ARB-213-MI02 is satisfied by permanent-backend and post-promotion evidence. ADR-010 remains Proposed, the scientific campaign is not executed and S10 remains `UNAVAILABLE`; Safety Authority and EAGLE operations are unchanged.
 
 
 ## 13. F3-A3 decision-preparation boundary
@@ -131,4 +131,4 @@ The approved F3-A3 decisions fix the candidate roles, exact local SPK identity, 
 
 ## 15. F3-A3 bootstrap-state boundary
 
-The authorized bootstrap established only the isolated F3-A3 service identities, main-ref WIF trust and protected state/data/evidence buckets. Bootstrap state is remote and versioned; the current package promotes the permanent backend and corrects the migration serial acceptance rule after fail-closed incident `ARB-213-MI02-I01`. No platform resource, scientific artifact, protected site datum, runtime S10 or Safety Authority is introduced.
+The authorized bootstrap established only the isolated F3-A3 service identities, main-ref WIF trust and protected state/data/evidence buckets. Bootstrap state is remote and versioned. PR #219 promoted the permanent backend and corrected the migration serial acceptance rule after fail-closed incident `ARB-213-MI02-I01`; post-promotion lineage/content, recovery candidate, locking and zero drift were verified. No platform resource, scientific artifact, protected site datum, runtime S10 or Safety Authority is introduced.
