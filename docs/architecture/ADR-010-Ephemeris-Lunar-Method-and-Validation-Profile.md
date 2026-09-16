@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Status | **PROPOSED — PARTIAL OWNER DECISION RECORDED / F3-OD05 PENDING / NOT IMPLEMENTED** |
+| Status | **PROPOSED — COMPLETE OWNER DECISION RECORDED / NOT IMPLEMENTED** |
 | Date | 2026-09-15 |
 | Release | Release 2.x planning increment |
 | Capability | BKL-031 F3-A3 |
@@ -12,9 +12,9 @@
 
 ## Context
 
-F3-A1 and F3-A2 have completed repository authority, but S08/S09 remain unavailable to runtime and S10 remains `UNAVAILABLE`. The owner approved the prudent method, accuracy, time-data, host and capacity baseline. One material decision remains open: the exact JPL SPK artifact, coverage, provenance and checksum.
+F3-A1 and F3-A2 have completed repository authority, but S08/S09 remain unavailable to runtime and S10 remains `UNAVAILABLE`. The owner approved the prudent method, accuracy, time-data, host and capacity baseline and completed F3-OD05 with the exact `de442s.bsp` identity, coverage, provenance, notices and SHA-256. Implementation and scientific validation remain absent.
 
-This ADR therefore records a partial owner decision and authorizes repository-only infrastructure scaffolding. It does not authorize cloud resource creation, artifact acquisition, spike execution or runtime integration.
+This ADR records complete owner dispositions for F3-OD04–F3-OD10 and authorizes repository evidence and validation-only infrastructure source. It remains Proposed and does not authorize cloud resource creation, further artifact acquisition, artifact upload, spike execution or runtime integration.
 
 ## Decision drivers
 
@@ -33,7 +33,7 @@ This ADR therefore records a partial owner decision and authorizes repository-on
 | ID | Recorded disposition | State |
 |---|---|---|
 | F3-OD04 | Astropy 8.0.1 is the local primary candidate; jplephem 2.24 supports the governed SPK; Skyfield 1.55 is an explicit local implementation cross-check; Horizons API v1.3 is validation-only and never a runtime fallback | APPROVED |
-| F3-OD05 | One exact local JPL SPK with declared target/time coverage, authoritative provenance, license/notice review and SHA-256 | **PENDING exact artifact, coverage and checksum** |
+| F3-OD05 | One exact local JPL SPK with declared target/time coverage, authoritative provenance, license/notice review and SHA-256 | **APPROVED — `de442s.bsp` / SHA-256 `54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c`** |
 | F3-OD06 | geometric airless altitude ≤60 arcsec at altitude ≥5°; azimuth ≤60 arcsec for 5°–85°; above 85° use spherical separation ≤60 arcsec; target–Moon separation ≤60 arcsec; transit/culmination ≤5 s; lunar illumination absolute difference ≤0.001; rise/set geometric ≤60 s when included; each vector and metric passes independently; no averaging | APPROVED |
 | F3-OD07 | pinned IERS-A snapshot with SHA-256; at most 30 days old when campaign is prepared; `auto_download=false` during execution; fail closed outside coverage; refresh through a governed campaign revision | APPROVED POLICY |
 | F3-OD08 | no protected exact-site value in repository, logs or external requests; spike uses synthetic/generalized sites only; Horizons receives geocentric or synthetic/generalized inputs; local artifacts remain private; notices and retention are recorded | APPROVED |
@@ -70,9 +70,9 @@ Repository infrastructure:
 
 ## Decision
 
-`PARTIAL_OWNER_DECISION_RECORDED`.
+`COMPLETE_OWNER_DECISION_RECORDED`.
 
-F3-OD04 and F3-OD06–F3-OD10 are approved as recorded above. F3-OD05 remains open. ADR-010 remains Proposed and S10 remains `UNAVAILABLE`.
+F3-OD04–F3-OD10 are approved as recorded above. ADR-010 remains Proposed and S10 remains `UNAVAILABLE` because implementation and the authorized scientific campaign are not complete.
 
 Authorized now:
 
@@ -83,7 +83,7 @@ Authorized now:
 Not authorized now:
 
 - Terraform apply or any GCP mutation;
-- acquisition/upload of packages, SPK or IERS artifacts;
+- further acquisition or any upload of packages, SPK or IERS artifacts;
 - container build/push;
 - Cloud Run execution;
 - Horizons call;
@@ -98,19 +98,19 @@ Not authorized now:
 - the future host is isolated from observatory control paths;
 - no static GCP credential is required after one-time bootstrap;
 - compute cost is pay-per-execution rather than an idle VM;
-- F3-OD05 remains an explicit fail-closed gate.
+- the exact SPK identity is content-addressed and fail-closed.
 
 ### Negative
 
 - a one-time GCP administrator bootstrap is still required;
-- the exact SPK choice blocks plan/apply and spike execution;
+- ARB-213-MI01, ARB-213-MI02 and authenticated exact-head plan review still block plan/apply and spike execution;
 - Cloud Run cold start and regional service availability must be measured;
 - private VPC egress prevents Horizons from the local job profile.
 
 ## Migration
 
-1. merge this partial-decision and repository-only infrastructure package;
-2. owner selects the exact F3-OD05 SPK, coverage, provenance and SHA-256;
+1. integrate the complete owner-decision evidence and repository-only infrastructure source;
+2. owner completed F3-OD05 through `BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16`;
 3. ARB and Release Quality review the completed decision profile;
 4. a GCP administrator performs the one-time bootstrap using short-lived credentials;
 5. GitHub variables are populated from bootstrap outputs;
@@ -138,6 +138,7 @@ Current evidence:
 - BKL-031-F3-A3-PROGRAM-001;
 - BKL-031-F3-A3-SOLUTION-001;
 - BKL-031-F3-A3-OD-2026-09-15;
+- BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16;
 - BKL-031-F3-A3-INFRA-001;
 - BKL-031-F3-A3-VAL-001;
 - ADR-009;
@@ -154,4 +155,4 @@ Revert this repository package. No cloud or runtime rollback is needed because a
 
 ## Governance stop
 
-Stop before GCP bootstrap, authenticated plan/apply, artifact acquisition or spike execution. S10 remains `UNAVAILABLE`.
+Stop before GCP bootstrap, authenticated plan/apply, further artifact acquisition, any upload or spike execution. S10 remains `UNAVAILABLE`.

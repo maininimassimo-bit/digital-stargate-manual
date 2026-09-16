@@ -50,7 +50,7 @@ BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integ
 
 ## 7. Roadmap sequence
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 DECISION PREPARATION CURRENT / ADR-010 PROPOSED / S10 UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 EXACT SPK DECISION CURRENT / ADR-010 PROPOSED / S10 UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 8. CI/CD e publishing
 
@@ -122,7 +122,7 @@ PR #209 is ACCEPTED / POST-MERGE VERIFIED at merge `bc4307c2042a45985622044e1163
 
 ## F3-A3 current handoff
 
-The Program Architect selected F3-A3 after repository-authority completion for F3-A1/A2. The Solution Architect must prepare the method ADR and validation-spike plan for F3-OD04–F3-OD10. This mapping does not authorize dependencies, kernels, external calls, protected-site use, thresholds or runtime; S10 remains `UNAVAILABLE`.
+F3-A3 owner decisions F3-OD04–F3-OD10 are complete, including the exact `de442s.bsp` identity and provenance for F3-OD05. The next repository gate is the immutable method profile required by ARB-213-MI01. No cloud mutation, artifact upload, scientific execution, external call, protected-site use or runtime is authorized; S10 remains `UNAVAILABLE`.
 
 
 ## F3-A3 decision-preparation package

@@ -9,6 +9,12 @@ const bootstrapVariables = fs.readFileSync(path.join(infra, "bootstrap", "variab
 const platform = fs.readFileSync(path.join(infra, "platform", "main.tf"), "utf8");
 const variables = fs.readFileSync(path.join(infra, "platform", "variables.tf"), "utf8");
 const workflow = fs.readFileSync(path.join(root, ".github", "workflows", "bkl-031-f3-a3-gcp-iac.yml"), "utf8");
+const platformExample = fs.readFileSync(path.join(infra, "platform", "terraform.tfvars.example"), "utf8");
+const bootstrapExample = fs.readFileSync(path.join(infra, "bootstrap", "terraform.tfvars.example"), "utf8");
+const spkApproval = fs.readFileSync(
+  path.join(root, "docs", "project", "BKL-031-F3-A3-F3-OD05-SPK-APPROVAL-2026-09-16.md"),
+  "utf8",
+);
 const backendTemplate = fs.readFileSync(path.join(infra, "bootstrap", "backend.tf.example"), "utf8");
 const stateRunbook = fs.readFileSync(path.join(infra, "STATE_MIGRATION_AND_RECOVERY.md"), "utf8");
 const readme = fs.readFileSync(path.join(infra, "README.md"), "utf8");
@@ -40,6 +46,19 @@ requireText("platform", platform, 'SYNTHETIC_ONLY');
 requireText("platform", platform, 'DSG_EXTERNAL_PROVIDER_POLICY');
 requireText("platform", platform, 'DENY');
 requireText("variables", variables, 'default = "europe-west8"');
+requireText("variables", variables, "54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c");
+requireText("variables", variables, 'var.data_bucket_name == "digital-stargate-telemetry-183451329061-f3-data"');
+requireText("variables", variables, 'var.owner_decision_ref == "BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16"');
+requireText("bootstrap variables", bootstrapVariables, 'var.data_bucket_name == "digital-stargate-telemetry-183451329061-f3-data"');
+requireText("variables", variables, "kernel_artifact_uri");
+requireText("platform", platform, "DSG_KERNEL_URI");
+requireText("platform example", platformExample, "BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16");
+requireText("platform example", platformExample, "gs://digital-stargate-telemetry-183451329061-f3-data/bkl-031/f3-a3/artifacts/spk/de442s/sha256/54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c/de442s.bsp");
+requireText("bootstrap example", bootstrapExample, 'data_bucket_name     = "digital-stargate-telemetry-183451329061-f3-data"');
+requireText("SPK approval", spkApproval, "OWNER APPROVED — ARTIFACT IDENTITY ONLY / NO EXECUTION AUTHORITY");
+requireText("SPK approval", spkApproval, "cc49327e06088124c0e39d8dde9f0b58");
+requireText("SPK approval", spkApproval, "54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c");
+requireText("SPK approval", spkApproval, "OUT_OF_COVERAGE");
 requireText("variables", variables, "@sha256:[0-9a-f]{64}$");
 requireText("workflow", workflow, "terraform validate -no-color");
 requireText("workflow", workflow, "terraform init -backend=false -input=false");

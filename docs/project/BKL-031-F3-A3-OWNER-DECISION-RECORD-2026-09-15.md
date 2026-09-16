@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-A3-OD-2026-09-15 |
-| Status | **PARTIAL OWNER DECISION — F3-OD05 OPEN / NO EXECUTION AUTHORITY** |
+| Status | **COMPLETE OWNER DECISION — F3-OD05 APPROVED / NO EXECUTION AUTHORITY** |
 | Date | 2026-09-15 |
 | Baseline | `main@527b298094b07e5a00317e60cab3abefed7a5759` |
 | Decision target | ADR-010 |
@@ -22,21 +22,21 @@ The Repository Owner approved the prudent baseline for F3-A3:
 - the request/capacity limits recorded in ADR-010;
 - repository-only Terraform/WIF preparation.
 
-## Remaining owner decision
+## F3-OD05 completion
 
-F3-OD05 is not closed. The owner must approve:
+F3-OD05 is completed by the separate exact approval record
+[BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16](BKL-031-F3-A3-F3-OD05-SPK-APPROVAL-2026-09-16.md).
 
-1. exact JPL SPK filename and immutable source;
-2. required body and date coverage;
-3. SHA-256;
-4. license/notice and retention outcome;
-5. provenance record and private bucket object identity.
+The approved artifact is `de442s.bsp`, SHA-256
+`54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c`,
+with exact coverage, provenance, notices, retention and future private
+content-addressed object identity recorded in that approval.
 
 No placeholder, mutable URL or generic “latest JPL kernel” satisfies this gate.
 
 ## Authorization boundary
 
-This record authorizes repository documentation, Terraform source and non-authenticated validation CI. It does not authorize GCP resource creation, container publication, artifact download/upload, Cloud Run execution, protected-site processing, Horizons traffic or runtime work.
+This record authorizes repository documentation, Terraform source and non-authenticated validation CI. The separately authorized one-time SPK identity acquisition is complete. This record does not authorize GCP resource creation, container publication, further artifact acquisition, any upload, Cloud Run execution, protected-site processing, Horizons traffic or runtime work.
 
 ## Accepted accuracy profile
 
@@ -70,4 +70,4 @@ Each case and metric passes independently. No average, weighted score or majorit
 
 ## Continuity rule
 
-ADR-010 remains Proposed and S10 remains `UNAVAILABLE` until F3-OD05 and the scientific campaign are complete.
+F3-OD05 is approved, but ADR-010 remains Proposed and S10 remains `UNAVAILABLE` until the authorized scientific campaign and all remaining acceptance gates are complete.

@@ -24,8 +24,14 @@ variable "deployer_service_account_email" {
 }
 
 variable "data_bucket_name" {
-  type     = string
-  nullable = false
+  description = "Owner-approved private SPK/IERS data bucket."
+  type        = string
+  nullable    = false
+
+  validation {
+    condition     = var.data_bucket_name == "digital-stargate-telemetry-183451329061-f3-data"
+    error_message = "F3-OD05 requires the exact owner-approved private data bucket."
+  }
 }
 
 variable "evidence_bucket_name" {
@@ -50,8 +56,19 @@ variable "kernel_artifact_sha256" {
   sensitive = true
 
   validation {
-    condition     = can(regex("^[0-9a-f]{64}$", var.kernel_artifact_sha256))
-    error_message = "F3-OD05 requires an exact lowercase SHA-256."
+    condition     = var.kernel_artifact_sha256 == "54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c"
+    error_message = "F3-OD05 requires the owner-approved de442s.bsp SHA-256."
+  }
+}
+
+variable "kernel_artifact_uri" {
+  description = "Owner-approved private content-addressed de442s.bsp URI."
+  type        = string
+  nullable    = false
+
+  validation {
+    condition     = var.kernel_artifact_uri == "gs://digital-stargate-telemetry-183451329061-f3-data/bkl-031/f3-a3/artifacts/spk/de442s/sha256/54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c/de442s.bsp"
+    error_message = "F3-OD05 requires the exact owner-approved private content-addressed URI."
   }
 }
 
@@ -72,8 +89,8 @@ variable "owner_decision_ref" {
   nullable    = false
 
   validation {
-    condition     = length(trimspace(var.owner_decision_ref)) >= 12 && !can(regex("(?i)replace|todo|pending", var.owner_decision_ref))
-    error_message = "owner_decision_ref must be exact and non-placeholder."
+    condition     = var.owner_decision_ref == "BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16"
+    error_message = "owner_decision_ref must identify the exact approved F3-OD05 decision."
   }
 }
 

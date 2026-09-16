@@ -49,7 +49,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
-| BKL-031 | P1 | Observation Planner intelligente | In Progress | F3-A3 partial owner decision recorded; F3-OD04 and F3-OD06–F3-OD10 approved; F3-OD05 exact SPK open; S10 unavailable | Review repository-only Google Cloud/Terraform scaffolding; then select exact SPK and authorize a separate bootstrap/spike increment | ADR-010; BKL-031-F3-A3-OD-2026-09-15; BKL-031-F3-A3-INFRA-001 |
+| BKL-031 | P1 | Observation Planner intelligente | In Progress | F3-A3 owner decisions F3-OD04–F3-OD10 complete; exact `de442s.bsp` identity approved; ADR-010 Proposed; ARB-213-MI01/MI02 open; S10 unavailable | Integrate the exact-SPK decision; then define and review the immutable method profile without cloud mutation or scientific execution | ADR-010; BKL-031-F3-A3-OD-2026-09-15; BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16; BKL-031-F3-A3-INFRA-001 |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
@@ -310,3 +310,7 @@ BKL-031-F3-A3-SOLUTION-001, proposed ADR-010 and BKL-031-F3-A3-VAL-001 are the c
 ### BKL-031 F3-A3 partial owner decision and GCP preparation — 15/09/2026
 
 The owner approved the prudent method roles, numeric accuracy budget, pinned IERS policy, synthetic-site privacy boundary, Cloud Run Job profile and bounded request envelope. F3-OD05 remains open for the exact JPL SPK, coverage, provenance, notices and SHA-256. Repository-only Terraform and validation CI are the current increment; GCP bootstrap/apply, artifact acquisition and spike execution remain blocked. S10 remains `UNAVAILABLE`.
+
+### BKL-031 F3-A3 exact SPK owner decision — 16/09/2026
+
+F3-OD05 is owner-approved at the artifact identity and provenance level using `de442s.bsp` and its exact SHA-256/content-addressed future private URI. The repository package introduces no kernel binary, upload, cloud mutation or scientific execution. ARB-213-MI01 remains the next repository design gate; ARB-213-MI02 remains open pending separately authorized operational evidence. ADR-010 remains Proposed and S10 remains `UNAVAILABLE`.

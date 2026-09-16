@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-A3-SOLUTION-001 |
-| Status | **PROPOSED — PARTIAL OWNER DECISION RECORDED / F3-OD05 PENDING / NOT IMPLEMENTED** |
+| Status | **PROPOSED — COMPLETE OWNER DECISION RECORDED / NOT IMPLEMENTED** |
 | Version | 1.1 |
 | Date | 2026-09-15 |
 | Capability | BKL-031 — Observation Planner intelligente |
@@ -50,9 +50,9 @@ Out of scope:
 | F3-A1 Site Authority | repository authority APPROVED; runtime S08 remains `UNAVAILABLE` |
 | F3-A2 CurrentSetupAssignment | repository authority APPROVED/AVAILABLE for authorized validated input; runtime S09 remains `UNAVAILABLE_CURRENT` |
 | F3-OD01–F3-OD03 | resolved by ADR-009 and F3-A1/A2 lifecycle evidence |
-| F3-OD04 and F3-OD06–F3-OD10 | OWNER APPROVED; exact F3-OD05 SPK remains open |
+| F3-OD04 and F3-OD06–F3-OD10 | OWNER APPROVED; F3-OD05 exact SPK approved |
 | S10 ephemeris/lunar | `UNAVAILABLE` |
-| Provider roles | Astropy primary, Skyfield cross-check, Horizons validation-only; exact SPK not approved |
+| Provider roles | Astropy primary, Skyfield cross-check, Horizons validation-only; exact `de442s.bsp` approved |
 | Runtime adapter/cache | absent |
 | F3-B/F3-C | blocked |
 
@@ -213,7 +213,7 @@ No adapter switch occurs after any failure. A reference result cannot be promote
 | ID | Options prepared | Recommendation for consideration | Required evidence |
 |---|---|---|---|
 | F3-OD04 | Astropy primary / Skyfield primary / no selection; secondary local/reference roles | local primary plus independent explicit reference; no implicit fallback | spike matrix and owner choice |
-| F3-OD05 | bounded current JPL SPK / broader JPL SPK / reject | smallest artifact covering approved range, exact checksum and provenance | official coverage, terms and digest |
+| F3-OD05 | `de442s.bsp` approved / replacement requires governed revision | `de442s.bsp`; content-addressed identity; no silent replacement | verified official coverage, NAIF terms, MD5 and SHA-256 |
 | F3-OD06 | planner error-budget profile / reject pending instrument context | define separate angular, timing, separation and illumination limits; no aggregate tolerance | owner values, rationale and independent vectors |
 | F3-OD07 | pinned packaged IERS snapshot / controlled refresh / reject | pinned snapshot per campaign plus explicit freshness and update review | version, digest, freshness and leap-second policy |
 | F3-OD08 | local-only / restricted remote reference / remote rejected | default local-only; prohibit exact-site transmission absent explicit approval | privacy, terms, retention and cache review |
@@ -311,10 +311,10 @@ Rollback of steps 1–2 is a reviewed Git revert. Rejection or failed spike leav
 
 ## 20. Acceptance criteria
 
-This partial-decision package is review-ready when:
+This complete owner-decision package is review-ready when:
 
 1. approved provider roles, thresholds, IERS policy, privacy, host and capacity values match ADR-010;
-2. F3-OD05 is visibly open and prevents execution;
+2. F3-OD05 is exact and approved while execution remains separately blocked;
 3. the validation plan is reproducible without protected site data;
 4. the Google Cloud topology is isolated from EAGLE/N.I.N.A. and has no public principal or static key;
 5. repository CI validates Terraform without authenticating or applying;
@@ -324,12 +324,23 @@ This partial-decision package is review-ready when:
 
 ## 21. Open issues and governance stop
 
-Open: F3-OD05 exact SPK identity, coverage, provenance, notices and SHA-256.
+Closed owner decision: F3-OD05 exact SPK identity, coverage, provenance, notices and SHA-256. Open pre-apply work: ARB-213-MI01, ARB-213-MI02 and authenticated exact-head plan review.
 
-Stop before GCP bootstrap, authenticated plan/apply, dependency/data acquisition, external calls, protected-site use, spike execution or runtime work.
+Stop before GCP bootstrap, authenticated plan/apply, further dependency/data acquisition, any upload, external calls, protected-site use, spike execution or runtime work.
 
 ## 22. Owner-decision reconciliation — 2026-09-15
 
 The owner-approved values are normative in ADR-010 and BKL-031-F3-A3-OD-2026-09-15. The repository-only Google Cloud plan is BKL-031-F3-A3-INFRA-001. Earlier language in this preparation document describing F3-OD04 and F3-OD06–F3-OD10 as undecided is superseded by those records.
 
 S10 remains `UNAVAILABLE`; no scientific evidence or production readiness is claimed.
+
+## 23. F3-OD05 exact-SPK reconciliation — 2026-09-16
+
+The Repository Owner approved `de442s.bsp` through
+`BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16`. The record fixes the official
+NAIF source, size, SPICE identity, coverage, required body chains, MD5,
+SHA-256, notice/retention outcome and future private content-addressed URI.
+
+This reconciliation closes only the F3-OD05 owner decision. ADR-010 remains
+Proposed, every scientific case remains `NOT EXECUTED`, S10 remains
+`UNAVAILABLE`, and no cloud mutation, upload or runtime activity is authorized.

@@ -46,13 +46,13 @@ After apply, record these outputs as GitHub repository variables:
 The platform module deliberately requires:
 
 - an immutable container image digest;
-- exact SPK SHA-256;
+- exact owner-approved SPK SHA-256 and private content-addressed URI;
 - exact IERS snapshot SHA-256;
 - an exact owner-decision reference.
 
-F3-OD05 is still open, so no real platform tfvars file may be approved yet. The checked-in example uses obvious non-secret placeholders only.
+F3-OD05 is approved at artifact-identity level by `BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16`. The checked-in example carries the approved non-secret SPK digest and future private URI while retaining placeholders for still-unmaterialized runtime identities and artifacts. The SPK binary is never repository content.
 
-This package has no authenticated plan/apply workflow. CI performs format, static policy and Terraform validation only. Authenticated plan/apply is a later reviewed increment after bootstrap and F3-OD05 closure.
+This package has no authenticated plan/apply workflow. CI performs format, static policy and Terraform validation only. Bootstrap, authenticated plan/apply, upload and execution remain blocked by ARB-213-MI01, ARB-213-MI02 and exact-head re-review.
 
 ## Local validation
 

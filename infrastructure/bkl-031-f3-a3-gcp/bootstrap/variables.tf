@@ -58,9 +58,14 @@ variable "state_bucket_name" {
 }
 
 variable "data_bucket_name" {
-  description = "Globally unique private SPK/IERS data bucket."
+  description = "Owner-approved private SPK/IERS data bucket."
   type        = string
   nullable    = false
+
+  validation {
+    condition     = var.data_bucket_name == "digital-stargate-telemetry-183451329061-f3-data"
+    error_message = "F3-OD05 requires the exact owner-approved private data bucket."
+  }
 }
 
 variable "evidence_bucket_name" {

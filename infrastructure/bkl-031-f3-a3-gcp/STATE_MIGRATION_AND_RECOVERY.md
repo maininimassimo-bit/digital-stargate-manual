@@ -15,7 +15,7 @@ This runbook governs the one-time transition of the bootstrap root from local Te
 
 The state bucket uses uniform bucket-level access, enforced public-access prevention, Object Versioning and `force_destroy = false`.
 
-This document does not authorize Google Cloud mutation. It does not close F3-OD05 or ARB-213-MI01 and does not authorize platform plan/apply, container publication, artifact acquisition or Cloud Run execution.
+This document does not authorize Google Cloud mutation. F3-OD05 is separately approved at the identity/provenance level; this procedure does not close ARB-213-MI01 or ARB-213-MI02 execution evidence and does not authorize platform plan/apply, container publication, artifact upload or Cloud Run execution.
 
 ## Mandatory stop conditions
 

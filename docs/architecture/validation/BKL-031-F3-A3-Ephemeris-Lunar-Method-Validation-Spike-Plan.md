@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-A3-VAL-001 |
-| Status | **APPROVED PROFILE / F3-OD05 PENDING — NOT EXECUTED / NOT AUTHORIZED** |
+| Status | **APPROVED DECISION PROFILE — NOT EXECUTED / NOT AUTHORIZED** |
 | Version | 1.1 |
 | Date | 2026-09-15 |
 | Architecture | BKL-031-F3-A3-SOLUTION-001 |
@@ -29,7 +29,7 @@ All must be satisfied before execution:
 - external access is disabled unless separately authorized;
 - rollback and evidence destination are approved.
 
-F3-OD04 and F3-OD06–F3-OD10 are recorded. F3-OD05 remains open, so every case is `NOT EXECUTED`. The IERS snapshot must be pinned by SHA-256, no more than 30 days old at campaign preparation, with execution-time auto-download disabled and fail-closed coverage checks.
+F3-OD04–F3-OD10 are recorded. F3-OD05 approves the exact `de442s.bsp` identity, but every scientific case remains `NOT EXECUTED`. The IERS snapshot must be pinned by SHA-256, no more than 30 days old at campaign preparation, with execution-time auto-download disabled and fail-closed coverage checks.
 
 ## 3. Candidate manifests to prepare after authorization
 
@@ -202,7 +202,7 @@ Every run records:
 |---|---|---|
 | architecture/ADR traceability | DEFINED | exact accepted ADR |
 | package/data pins | NOT SELECTED | manifests and hashes |
-| license/provenance | REVIEWED AT SOURCE LEVEL | exact artifact review |
+| license/provenance | APPROVED FOR EXACT `de442s.bsp` IDENTITY | execution manifest review remains |
 | scientific error budget | OWNER APPROVED | ADR-010 per-metric thresholds |
 | synthetic grid | OWNER BOUNDED | 50 targets; 2,016 instants/target; 10,000 pairs; 7 days; 1-minute minimum step; 256 KiB request |
 | candidate execution | NOT EXECUTED | normalized result evidence |
@@ -236,7 +236,7 @@ All stages V1–V5 and cases A3-P01–P10/A3-N01–N24 are `NOT EXECUTED`. Only 
 
 ## 18. Governance stop
 
-Stop before F3-OD05 closure, GCP bootstrap, authenticated plan/apply and separate spike authorization. This plan does not authorize installation, download, network calls, protected-site use, execution, schema, adapter or runtime work.
+F3-OD05 is closed at owner-decision level. Stop before GCP bootstrap, authenticated plan/apply and separate spike authorization. This plan does not authorize installation, further download, upload, network calls, protected-site use, execution, schema, adapter or runtime work.
 
 ## 19. Approved execution and request envelope
 
