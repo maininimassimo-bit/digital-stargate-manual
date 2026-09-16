@@ -50,6 +50,17 @@ variable "container_image_digest" {
   }
 }
 
+variable "runner_source_commit" {
+  description = "Exact reviewed main commit that produced the immutable scientific runner image."
+  type        = string
+  nullable    = false
+
+  validation {
+    condition     = var.runner_source_commit == "9db0267529b6d46a2510b415e4b3f51d668ff024"
+    error_message = "runner_source_commit must match the exact reviewed runner publication source commit."
+  }
+}
+
 variable "kernel_artifact_sha256" {
   type      = string
   nullable  = false

@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import crypto from "node:crypto";
 
 const root = process.cwd();
 const workflow = fs.readFileSync(
@@ -10,6 +11,10 @@ const runnerManifest = JSON.parse(fs.readFileSync(
   path.join(root, "infrastructure", "bkl-031-f3-a3-gcp", "container", "BKL-031-F3-A3-RUNNER-MANIFEST-001.json"),
   "utf8",
 ));
+const publicationEvidenceBytes = fs.readFileSync(
+  path.join(root, "infrastructure", "bkl-031-f3-a3-gcp", "container", "BKL-031-F3-A3-RUNNER-OCI-PUBLICATION-EVIDENCE-001.json"),
+);
+const publicationEvidence = JSON.parse(publicationEvidenceBytes.toString("utf8"));
 const expectedManifest = "sha256:69a20a994fde9d5b1533b142760af5796b4ac795a1f00c658373a46d2648d60c";
 const expectedConfig = "sha256:333e5d1b303dda4c5a4037f386b2f56a7f967a9197bbb4186ca6f33dfd4c4cc3";
 const preflightManifest = "sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce";
@@ -91,6 +96,20 @@ if (runnerManifest.status !== "RUNNER_SOURCE_MATERIALIZED_NOT_BUILT_NOT_PUBLISHE
 if (runnerManifest.runner?.runtimeAuthority !== false || runnerManifest.controls?.scientificExecution !== "NOT_EXECUTED") {
   fail("runner manifest must preserve no runtime authority and no scientific execution");
 }
+
+if (publicationEvidence.evidenceId !== "BKL-031-F3-A3-RUNNER-OCI-PUBLICATION-EVIDENCE-001") fail("unexpected runner publication evidence identity");
+if (crypto.createHash("sha256").update(publicationEvidenceBytes).digest("hex") !== "0b7992c257580c964118a09954615c75620b2c1018a7184ae02be8d101cbb23f") fail("runner publication evidence raw digest mismatch");
+if (publicationEvidence.status !== "EXACT_RUNNER_OCI_PUBLISHED_POST_VERIFIED") fail("runner publication evidence is not post-verified");
+if (publicationEvidence.source?.commit !== "9db0267529b6d46a2510b415e4b3f51d668ff024") fail("unexpected runner publication source commit");
+if (publicationEvidence.source?.runnerManifestRawSha256 !== "cee2ddb9d434cce1c0d635b2f111baf65fc016993bca1e17e72dca50bdd15ddd") fail("unexpected runner manifest raw digest");
+if (publicationEvidence.continuousIntegration?.runId !== 35150960879 || publicationEvidence.continuousIntegration?.jobId !== 104978864591) fail("unexpected runner publication run identity");
+if (publicationEvidence.continuousIntegration?.conclusion !== "SUCCESS") fail("runner publication did not succeed");
+if (publicationEvidence.image?.manifestDigest !== expectedManifest || publicationEvidence.image?.configDigest !== expectedConfig) fail("runner publication evidence digest mismatch");
+if (publicationEvidence.image?.candidateA !== expectedManifest || publicationEvidence.image?.candidateB !== expectedManifest || publicationEvidence.image?.registryExporterPreflight !== expectedManifest) fail("runner publication reproduction mismatch");
+if (publicationEvidence.registry?.imageCountBefore !== 1 || publicationEvidence.registry?.imageCountAfter !== 2) fail("unexpected runner publication registry cardinality");
+if (publicationEvidence.registry?.preflightImagePreserved !== preflightManifest || publicationEvidence.registry?.exclusiveExpectedPackageVersionTagsVerified !== true) fail("runner publication registry postcondition mismatch");
+if (publicationEvidence.controls?.imagePush !== "EXECUTED_EXACT_DIGEST" || publicationEvidence.controls?.platformApply !== "NOT_EXECUTED" || publicationEvidence.controls?.jobExecution !== "NOT_EXECUTED" || publicationEvidence.controls?.scientificExecution !== "NOT_EXECUTED" || publicationEvidence.controls?.runtimeAuthority !== false) fail("runner publication evidence overstates downstream authority");
+if (publicationEvidence.nextGate !== "EXACT_ONE_UPDATE_RUNNER_PLATFORM_PLAN_APPLY") fail("unexpected runner publication next gate");
 
 console.log(
   `BKL-031 F3-A3 exact runner OCI publication gate verified: ${expectedManifest}; ` +

@@ -1,0 +1,295 @@
+name: BKL-031 F3-A3 Exact Runner Platform Update
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: Exact main commit authorized for the one-update runner platform apply
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: bkl-031-f3-a3-runner-platform-update
+  cancel-in-progress: false
+
+jobs:
+  exact-runner-platform-update:
+    name: Exact-head one-update saved-plan apply
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+      GCP_REGION: ${{ vars.GCP_REGION }}
+      GCP_WIF_PROVIDER: ${{ vars.GCP_WIF_PROVIDER }}
+      GCP_DEPLOY_SERVICE_ACCOUNT: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+      GCP_RUNTIME_SERVICE_ACCOUNT: ${{ vars.GCP_RUNTIME_SERVICE_ACCOUNT }}
+      GCP_STATE_BUCKET: ${{ vars.GCP_STATE_BUCKET }}
+      GCP_DATA_BUCKET: ${{ vars.GCP_DATA_BUCKET }}
+      GCP_EVIDENCE_BUCKET: ${{ vars.GCP_EVIDENCE_BUCKET }}
+      DSG_AUTHORIZED_COMMIT: ${{ inputs.expected_commit }}
+      DSG_RUNNER_SOURCE_COMMIT: 9db0267529b6d46a2510b415e4b3f51d668ff024
+      DSG_OLD_IMAGE_REFERENCE: europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike@sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce
+      DSG_RUNNER_IMAGE_REFERENCE: europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike@sha256:69a20a994fde9d5b1533b142760af5796b4ac795a1f00c658373a46d2648d60c
+      DSG_KERNEL_URI: gs://digital-stargate-telemetry-183451329061-f3-data/bkl-031/f3-a3/artifacts/spk/de442s/sha256/54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c/de442s.bsp
+      TF_IN_AUTOMATION: "true"
+      TF_INPUT: "false"
+      TF_VAR_project_id: ${{ vars.GCP_PROJECT_ID }}
+      TF_VAR_region: ${{ vars.GCP_REGION }}
+      TF_VAR_runtime_service_account_email: ${{ vars.GCP_RUNTIME_SERVICE_ACCOUNT }}
+      TF_VAR_deployer_service_account_email: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+      TF_VAR_data_bucket_name: ${{ vars.GCP_DATA_BUCKET }}
+      TF_VAR_evidence_bucket_name: ${{ vars.GCP_EVIDENCE_BUCKET }}
+      TF_VAR_container_image_digest: europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike@sha256:69a20a994fde9d5b1533b142760af5796b4ac795a1f00c658373a46d2648d60c
+      TF_VAR_runner_source_commit: 9db0267529b6d46a2510b415e4b3f51d668ff024
+      TF_VAR_kernel_artifact_sha256: 54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c
+      TF_VAR_kernel_artifact_uri: gs://digital-stargate-telemetry-183451329061-f3-data/bkl-031/f3-a3/artifacts/spk/de442s/sha256/54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c/de442s.bsp
+      TF_VAR_method_profile_sha256: e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca
+      TF_VAR_method_profile_path: /app/dsg/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json
+      TF_VAR_iers_artifact_sha256: 43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc
+      TF_VAR_owner_decision_ref: BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16
+      TF_VAR_job_name: dsg-f3-a3-spike
+      TF_VAR_subnet_cidr: 10.88.0.0/28
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Require exact authorized main head and identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${GITHUB_REF}" = "refs/heads/main"
+          test "${GITHUB_SHA}" = "${DSG_AUTHORIZED_COMMIT}"
+          grep -Eq '^[0-9a-f]{40}$' <<<"${GITHUB_SHA}"
+          test "${GCP_PROJECT_ID}" = "digital-stargate-telemetry"
+          test "${GCP_REGION}" = "europe-west8"
+          test "${GCP_WIF_PROVIDER}" = "projects/183451329061/locations/global/workloadIdentityPools/dsg-f3-a3-github/providers/github-main"
+          test "${GCP_DEPLOY_SERVICE_ACCOUNT}" = "dsg-f3-a3-deployer@digital-stargate-telemetry.iam.gserviceaccount.com"
+          test "${GCP_RUNTIME_SERVICE_ACCOUNT}" = "dsg-f3-a3-runtime@digital-stargate-telemetry.iam.gserviceaccount.com"
+          test "${GCP_STATE_BUCKET}" = "digital-stargate-telemetry-183451329061-f3-state"
+          test "${GCP_DATA_BUCKET}" = "digital-stargate-telemetry-183451329061-f3-data"
+          test "${GCP_EVIDENCE_BUCKET}" = "digital-stargate-telemetry-183451329061-f3-evidence"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+
+      - name: Verify immutable publication evidence and update gate
+        run: |
+          node .github/scripts/verify-bkl-031-f3-a3-method-profile.mjs
+          node .github/scripts/verify-bkl-031-f3-a3-exact-runner-oci-publication.mjs
+          node .github/scripts/verify-bkl-031-f3-a3-runner-platform-update.mjs
+
+      - name: Authenticate to Google Cloud through main-only WIF
+        id: auth
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+          create_credentials_file: true
+          export_environment_variables: true
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
+        with:
+          version: "583.0.0"
+
+      - name: Require exact two-image registry, current job, kernel and zero executions
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(gcloud auth list --filter=status:ACTIVE --format='value(account)')" = "$GCP_DEPLOY_SERVICE_ACCOUNT"
+          gcloud config set project "$GCP_PROJECT_ID" >/dev/null
+          gcloud artifacts docker images list "${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/dsg-f3-a3" --include-tags --format=json >/tmp/images-before.json
+          gcloud run jobs describe dsg-f3-a3-spike --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/job-before.json
+          gcloud run jobs executions list --job=dsg-f3-a3-spike --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/job-executions-before.json
+          gcloud storage objects describe "$DSG_KERNEL_URI" --format=json >/tmp/kernel-before.json
+          gcloud storage cat "$DSG_KERNEL_URI" | sha256sum >/tmp/kernel-before.sha256
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          images = json.loads(Path('/tmp/images-before.json').read_text())
+          expected = {
+              'sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce': ['candidate-3abc8aa04926'],
+              'sha256:69a20a994fde9d5b1533b142760af5796b4ac795a1f00c658373a46d2648d60c': ['runner-9db0267529b6'],
+          }
+          if len(images) != 2:
+              raise SystemExit(f'unexpected image count: {len(images)}')
+          actual = {image.get('version'): image.get('tags', []) for image in images}
+          if actual != expected:
+              raise SystemExit(f'unexpected registry inventory: {actual!r}')
+
+          job = json.loads(Path('/tmp/job-before.json').read_text())
+          rendered = json.dumps(job, sort_keys=True)
+          required = [
+              'dsg-f3-a3-spike',
+              'europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike@sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce',
+              'dsg-f3-a3-runtime@digital-stargate-telemetry.iam.gserviceaccount.com',
+              'SYNTHETIC_ONLY', 'VALIDATION_SPIKE', 'DENY',
+          ]
+          if any(value not in rendered for value in required):
+              raise SystemExit('current job does not match the reviewed preflight deployment')
+          if 'DSG_SOURCE_COMMIT' in rendered:
+              raise SystemExit('source commit unexpectedly present before runner update')
+          if json.loads(Path('/tmp/job-executions-before.json').read_text()) != []:
+              raise SystemExit('job execution exists before runner update')
+
+          kernel = json.loads(Path('/tmp/kernel-before.json').read_text())
+          if str(kernel.get('generation')) != '1789590110146663' or int(kernel.get('size', -1)) != 32701440:
+              raise SystemExit(f'unexpected kernel metadata: {kernel!r}')
+          if not Path('/tmp/kernel-before.sha256').read_text().startswith('54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c '):
+              raise SystemExit('kernel content digest mismatch')
+          PY
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
+        with:
+          terraform_version: 1.16.2
+          terraform_wrapper: false
+
+      - name: Create exact one-update saved plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          terraform -chdir=infrastructure/bkl-031-f3-a3-gcp/platform init -reconfigure -input=false -backend-config="bucket=${GCP_STATE_BUCKET}" -backend-config="prefix=bkl-031/f3-a3/platform"
+          set +e
+          terraform -chdir=infrastructure/bkl-031-f3-a3-gcp/platform plan -input=false -lock-timeout=60s -detailed-exitcode -out=/tmp/runner-update.tfplan
+          plan_status=$?
+          set -e
+          test "$plan_status" -eq 2
+          terraform -chdir=infrastructure/bkl-031-f3-a3-gcp/platform show -json /tmp/runner-update.tfplan >/tmp/runner-update-plan.json
+
+      - name: Verify exact one-update saved plan before apply
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          plan = json.loads(Path('/tmp/runner-update-plan.json').read_text())
+          changes = [c for c in plan.get('resource_changes', []) if c.get('change', {}).get('actions') != ['no-op']]
+          if len(changes) != 1 or changes[0].get('address') != 'google_cloud_run_v2_job.spike':
+              raise SystemExit(f'unexpected changing resources: {[(c.get("address"), c.get("change", {}).get("actions")) for c in changes]!r}')
+          change = changes[0]['change']
+          if change.get('actions') != ['update']:
+              raise SystemExit(f'unexpected job action: {change.get("actions")!r}')
+
+          def container(value):
+              return value['template'][0]['template'][0]['containers'][0]
+          before = container(change['before'])
+          after = container(change['after'])
+          if before.get('image') != os.environ['DSG_OLD_IMAGE_REFERENCE']:
+              raise SystemExit(f'unexpected old image: {before.get("image")!r}')
+          if after.get('image') != os.environ['DSG_RUNNER_IMAGE_REFERENCE']:
+              raise SystemExit(f'unexpected runner image: {after.get("image")!r}')
+          before_env = {item['name']: item.get('value') for item in before.get('env', [])}
+          after_env = {item['name']: item.get('value') for item in after.get('env', [])}
+          if 'DSG_SOURCE_COMMIT' in before_env:
+              raise SystemExit('source commit existed before update')
+          if after_env != {**before_env, 'DSG_SOURCE_COMMIT': os.environ['DSG_RUNNER_SOURCE_COMMIT']}:
+              raise SystemExit(f'unexpected environment delta: before={before_env!r}, after={after_env!r}')
+          if plan.get('variables', {}).get('container_image_digest', {}).get('value') != os.environ['DSG_RUNNER_IMAGE_REFERENCE']:
+              raise SystemExit('planned image variable mismatch')
+          if plan.get('variables', {}).get('runner_source_commit', {}).get('value') != os.environ['DSG_RUNNER_SOURCE_COMMIT']:
+              raise SystemExit('planned source commit variable mismatch')
+          PY
+
+      - name: Apply only the verified saved plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          terraform -chdir=infrastructure/bkl-031-f3-a3-gcp/platform apply -input=false -lock-timeout=60s /tmp/runner-update.tfplan
+
+      - name: Verify four-resource state, exact runner job and zero executions
+        shell: bash
+        run: |
+          set -euo pipefail
+          terraform -chdir=infrastructure/bkl-031-f3-a3-gcp/platform state list | sort >/tmp/platform-state-list.txt
+          cat >/tmp/expected-state-list.txt <<'EOF'
+          google_cloud_run_v2_job.spike
+          google_cloud_run_v2_job_iam_member.deployer_invoker
+          google_compute_network.spike
+          google_compute_subnetwork.spike
+          EOF
+          diff -u /tmp/expected-state-list.txt /tmp/platform-state-list.txt
+          gcloud run jobs describe dsg-f3-a3-spike --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/job-after.json
+          gcloud run jobs executions list --job=dsg-f3-a3-spike --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/job-executions-after.json
+          gcloud storage objects describe "$DSG_KERNEL_URI" --format=json >/tmp/kernel-after.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          job = json.loads(Path('/tmp/job-after.json').read_text())
+          rendered = json.dumps(job, sort_keys=True)
+          required = [
+              'europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike@sha256:69a20a994fde9d5b1533b142760af5796b4ac795a1f00c658373a46d2648d60c',
+              'DSG_SOURCE_COMMIT', '9db0267529b6d46a2510b415e4b3f51d668ff024',
+              'dsg-f3-a3-runtime@digital-stargate-telemetry.iam.gserviceaccount.com',
+              'SYNTHETIC_ONLY', 'VALIDATION_SPIKE', 'DENY',
+          ]
+          if any(value not in rendered for value in required):
+              raise SystemExit('updated runner job does not match exact reviewed configuration')
+          if json.loads(Path('/tmp/job-executions-after.json').read_text()) != []:
+              raise SystemExit('job execution occurred during platform update')
+          before = json.loads(Path('/tmp/kernel-before.json').read_text())
+          after = json.loads(Path('/tmp/kernel-after.json').read_text())
+          for field in ['generation', 'size', 'md5Hash', 'crc32c']:
+              if before.get(field) != after.get(field):
+                  raise SystemExit(f'kernel changed at field {field}')
+          PY
+
+      - name: Require immediate zero drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          set +e
+          terraform -chdir=infrastructure/bkl-031-f3-a3-gcp/platform plan -input=false -lock-timeout=60s -detailed-exitcode -out=/tmp/platform-post-update.tfplan
+          plan_status=$?
+          set -e
+          test "$plan_status" -eq 0
+
+      - name: Record bounded runner platform update evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          state_uri="gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/platform/default.tfstate"
+          gcloud storage cat "$state_uri" >/tmp/platform-state-after.json
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          raw = Path('/tmp/platform-state-after.json').read_bytes()
+          state = json.loads(raw)
+          if state.get('version') != 4 or state.get('terraform_version') != '1.16.2':
+              raise SystemExit('unexpected Terraform state format')
+          summary = (
+              '# BKL-031 F3-A3 exact runner platform update\n\n'
+              f'- sourceCommit={os.environ["GITHUB_SHA"]}\n'
+              f'- runnerSourceCommit={os.environ["DSG_RUNNER_SOURCE_COMMIT"]}\n'
+              f'- runnerImage={os.environ["DSG_RUNNER_IMAGE_REFERENCE"]}\n'
+              '- savedPlan=0_ADD_1_CHANGE_0_DESTROY\n'
+              '- apply=EXACT_VERIFIED_SAVED_PLAN_ONLY\n'
+              f'- platformStateSerial={state.get("serial")}\n'
+              f'- platformStateLineage={state.get("lineage")}\n'
+              f'- platformStateRawSha256={hashlib.sha256(raw).hexdigest()}\n'
+              '- platformResources=FOUR_EXACT\n'
+              '- immediateDrift=ZERO\n'
+              '- registryMutation=NOT_EXECUTED\n'
+              '- kernelMutation=NOT_EXECUTED\n'
+              '- jobExecution=NOT_EXECUTED\n'
+              '- scientificExecution=NOT_EXECUTED\n'
+              '- externalReferenceTraffic=NOT_EXECUTED\n'
+              '- protectedSiteUse=NOT_EXECUTED\n'
+              '- runtimeActivation=NOT_EXECUTED\n'
+          )
+          Path(os.environ['GITHUB_STEP_SUMMARY']).write_text(summary, encoding='utf-8')
+          PY

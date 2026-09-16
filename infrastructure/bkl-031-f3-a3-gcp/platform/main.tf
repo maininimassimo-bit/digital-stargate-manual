@@ -108,6 +108,11 @@ resource "google_cloud_run_v2_job" "spike" {
           name  = "DSG_METHOD_PROFILE_SHA256"
           value = var.method_profile_sha256
         }
+
+        env {
+          name  = "DSG_SOURCE_COMMIT"
+          value = var.runner_source_commit
+        }
       }
 
       vpc_access {
