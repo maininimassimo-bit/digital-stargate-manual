@@ -15,6 +15,16 @@ const foundationEvidencePath = path.join(
 const foundationEvidenceBytes = fs.readFileSync(foundationEvidencePath);
 const foundationEvidence = JSON.parse(foundationEvidenceBytes.toString("utf8"));
 const expectedFoundationEvidenceSha256 = "3ef42c012c5c8d79a9751beb7c8e7c49ceab603a202c4a0cda359ef85ba08c30";
+const publicationEvidencePath = path.join(
+  root,
+  "infrastructure",
+  "bkl-031-f3-a3-gcp",
+  "container",
+  "BKL-031-F3-A3-OCI-PUBLICATION-EVIDENCE-001.json",
+);
+const publicationEvidenceBytes = fs.readFileSync(publicationEvidencePath);
+const publicationEvidence = JSON.parse(publicationEvidenceBytes.toString("utf8"));
+const expectedPublicationEvidenceSha256 = "be2d999b9383df1e55c1627cdf48fa2dcde4040f88c3198d224bc48bef60833d";
 const expectedManifest = "sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce";
 const expectedConfig = "sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0";
 const fail = (message) => { throw new Error(message); };
@@ -109,7 +119,38 @@ for (const name of ["imagePush", "platformApply", "artifactUpload", "scientificE
   }
 }
 
+const publicationEvidenceSha256 = crypto.createHash("sha256").update(publicationEvidenceBytes).digest("hex");
+if (publicationEvidenceSha256 !== expectedPublicationEvidenceSha256) {
+  fail(`OCI publication evidence digest mismatch: ${publicationEvidenceSha256}`);
+}
+const exact = (actual, expected, label) => {
+  if (!Object.is(actual, expected)) fail(`${label}: expected ${JSON.stringify(expected)}, received ${JSON.stringify(actual)}`);
+};
+exact(publicationEvidence.schemaVersion, "1.0", "publicationEvidence.schemaVersion");
+exact(publicationEvidence.evidenceId, "BKL-031-F3-A3-OCI-PUBLICATION-EVIDENCE-001", "publicationEvidence.evidenceId");
+exact(publicationEvidence.status, "EXACT_OCI_PUBLISHED_POST_VERIFIED", "publicationEvidence.status");
+exact(publicationEvidence.source?.commit, "3abc8aa049262336fd5a814593cdfc521e4fc594", "publicationEvidence.source.commit");
+exact(publicationEvidence.continuousIntegration?.runId, 35138527237, "publicationEvidence.continuousIntegration.runId");
+exact(publicationEvidence.continuousIntegration?.jobId, 104936888146, "publicationEvidence.continuousIntegration.jobId");
+exact(publicationEvidence.continuousIntegration?.conclusion, "SUCCESS", "publicationEvidence.continuousIntegration.conclusion");
+for (const name of ["manifestDigest", "candidateA", "candidateB", "registryExporterPreflight"]) {
+  exact(publicationEvidence.image?.[name], expectedManifest, `publicationEvidence.image.${name}`);
+}
+exact(publicationEvidence.image?.configDigest, expectedConfig, "publicationEvidence.image.configDigest");
+exact(publicationEvidence.image?.tag, "candidate-3abc8aa04926", "publicationEvidence.image.tag");
+exact(publicationEvidence.image?.reference, `europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike@${expectedManifest}`, "publicationEvidence.image.reference");
+exact(publicationEvidence.image?.registryResolvedRawManifestSha256, expectedManifest.slice("sha256:".length), "publicationEvidence.image.registryResolvedRawManifestSha256");
+exact(publicationEvidence.registry?.imageCountBefore, 0, "publicationEvidence.registry.imageCountBefore");
+exact(publicationEvidence.registry?.imageCountAfter, 1, "publicationEvidence.registry.imageCountAfter");
+exact(publicationEvidence.registry?.exclusiveExpectedPackageVersionTagVerified, true, "publicationEvidence.registry.exclusiveExpectedPackageVersionTagVerified");
+exact(publicationEvidence.controls?.imagePush, "EXECUTED_EXACT_DIGEST", "publicationEvidence.controls.imagePush");
+for (const name of ["platformApply", "artifactUpload", "scientificExecution", "externalReferenceTraffic", "protectedSiteUse", "runtimeActivation"]) {
+  exact(publicationEvidence.controls?.[name], "NOT_EXECUTED", `publicationEvidence.controls.${name}`);
+}
+exact(publicationEvidence.controls?.runtimeAuthority, false, "publicationEvidence.controls.runtimeAuthority");
+exact(publicationEvidence.nextGate, "AUTHENTICATED_REGISTRY_RESOLVED_FOUR_RESOURCE_PLATFORM_PLAN", "publicationEvidence.nextGate");
+
 console.log(
   `BKL-031 F3-A3 exact OCI publication contract verified: ${expectedManifest}; ` +
-  `foundation evidence sha256:${expectedFoundationEvidenceSha256}; one guarded push exporter`,
+  `publication evidence sha256:${expectedPublicationEvidenceSha256}; one guarded push exporter`,
 );

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.0",
+  "evidenceId": "BKL-031-F3-A3-OCI-PUBLICATION-EVIDENCE-001",
+  "status": "EXACT_OCI_PUBLISHED_POST_VERIFIED",
+  "recordedAtUtc": "2026-09-16T19:08:40Z",
+  "source": {
+    "commit": "3abc8aa049262336fd5a814593cdfc521e4fc594",
+    "publicationGatePullRequest": 231,
+    "publicationGateHead": "cd86d502a4f78ae0c775ef764c345e5b519bd3d1"
+  },
+  "continuousIntegration": {
+    "provider": "GitHub Actions",
+    "workflow": "BKL-031 F3-A3 Exact OCI Publication",
+    "runId": 35138527237,
+    "jobId": 104936888146,
+    "runUrl": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35138527237",
+    "conclusion": "SUCCESS"
+  },
+  "authentication": {
+    "mode": "GITHUB_OIDC_WIF_MAIN_ONLY",
+    "projectId": "digital-stargate-telemetry",
+    "region": "europe-west8",
+    "deployerServiceAccount": "dsg-f3-a3-deployer@digital-stargate-telemetry.iam.gserviceaccount.com",
+    "staticServiceAccountKey": false
+  },
+  "image": {
+    "repository": "europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike",
+    "tag": "candidate-3abc8aa04926",
+    "reference": "europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike@sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce",
+    "manifestDigest": "sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce",
+    "candidateA": "sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce",
+    "candidateB": "sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce",
+    "registryExporterPreflight": "sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce",
+    "registryResolvedRawManifestSha256": "de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce",
+    "configDigest": "sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0",
+    "os": "linux",
+    "architecture": "amd64"
+  },
+  "registry": {
+    "name": "projects/digital-stargate-telemetry/locations/europe-west8/repositories/dsg-f3-a3",
+    "format": "DOCKER",
+    "mode": "STANDARD_REPOSITORY",
+    "imageCountBefore": 0,
+    "imageCountAfter": 1,
+    "exclusiveExpectedPackageVersionTagVerified": true
+  },
+  "controls": {
+    "sourceReproduction": "TWO_NO_CACHE_NETWORK_NONE_OCI_BUILDS_IDENTICAL",
+    "registryExporterPreflight": "NO_PUSH_EXACT_DIGEST",
+    "imagePush": "EXECUTED_EXACT_DIGEST",
+    "platformPlan": "NOT_EXECUTED_IN_PUBLICATION_GATE",
+    "platformApply": "NOT_EXECUTED",
+    "artifactUpload": "NOT_EXECUTED",
+    "scientificExecution": "NOT_EXECUTED",
+    "externalReferenceTraffic": "NOT_EXECUTED",
+    "protectedSiteUse": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED",
+    "runtimeAuthority": false
+  },
+  "nextGate": "AUTHENTICATED_REGISTRY_RESOLVED_FOUR_RESOURCE_PLATFORM_PLAN"
+}

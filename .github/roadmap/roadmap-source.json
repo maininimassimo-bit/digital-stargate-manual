@@ -2,10 +2,10 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-16",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-A3 Artifact Registry foundation applied and post-verified empty; image unpublished; remaining platform unapplied; ADR-010 proposed; S10 unavailable",
+  "projectStatus": "BKL-031 F3-A3 exact OCI image published and registry-resolved four-resource plan verified; platform unapplied; ADR-010 proposed; S10 unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A3 exact OCI publication and registry-resolved four-resource platform plan",
-  "target": "Review a main-only exact-digest OCI publication gate, publish only the reproduced candidate after exact-head integration, then refresh the authenticated plan for the four remaining resources. Stop before image push until that gate is reviewed and stop again before platform apply; artifact upload, spike execution, Horizons request, protected-site use and runtime activation remain blocked.",
+  "nextMilestone": "BKL-031 F3-A3 separately reviewed exact four-resource platform apply",
+  "target": "Prepare and review a main-only gate that recreates the exact four-resource saved plan and applies only that plan after exact-head integration. Stop before artifact upload, job execution, Horizons request, protected-site use and runtime activation; ADR-010 remains Proposed and S10 remains UNAVAILABLE.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3-A3 decisions, immutable method profile, bootstrap/MI02, reproducible offline build, authenticated five-resource plan and isolated Artifact Registry foundation gates are complete. Run 35134193946 applied exactly one registry resource; fail-closed incident RF-I01 was corrected and read-only run 35135376900 verified one-resource state, zero drift and zero images. Exact OCI publication, the refreshed four-resource plan, platform apply, artifact upload and scientific cases remain NOT EXECUTED. ADR-010 remains Proposed and S10 remains UNAVAILABLE."
+          "note": "F3-A3 decisions, immutable method profile, bootstrap/MI02, reproducible offline build and Artifact Registry foundation are complete. Run 35138527237 published and post-verified the exact OCI manifest sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce as the sole registry image. Run 35138798214 verified the registry-resolved digest and an authenticated plan of exactly four additions, zero changes and zero destroys while preserving empty platform state. Platform apply, artifact upload and scientific cases remain NOT EXECUTED. ADR-010 remains Proposed and S10 remains UNAVAILABLE."
         },
         {
           "id": "BKL-032",
@@ -622,6 +622,13 @@
       "title": "BKL-031 F3-A3 Artifact Registry Foundation Evidence",
       "date": "2026-09-16",
       "description": "Main-only WIF run 35134193946 applied the exact one-resource registry plan and passed immediate zero drift. Fail-closed incident RF-I01 stopped final evidence on a provider-managed label; corrected read-only run 35135376900 verified the exact repository, one-resource state, zero drift and zero images. Image push and remaining platform apply did not occur."
+    },
+    {
+      "id": "M-BKL031-F3-A3-OCI-PUBLICATION-FOUR-RESOURCE-PLAN",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A3 Exact OCI Publication and Four-Resource Plan Evidence",
+      "date": "2026-09-16",
+      "description": "Main-only WIF run 35138527237 published and post-verified the exact OCI manifest as the sole registry image. Run 35138798214 resolved that digest and verified a saved platform plan with exactly 4 additions, 0 changes and 0 destroys. Platform apply, artifact upload and scientific execution did not occur."
     }
   ]
 }
