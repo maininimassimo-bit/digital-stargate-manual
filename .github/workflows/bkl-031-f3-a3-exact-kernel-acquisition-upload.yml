@@ -92,20 +92,24 @@ jobs:
         with:
           version: "583.0.0"
 
-      - name: Require exact private bucket, platform state and absent kernel
+      - name: Require exact protected-bucket state, platform state and absent kernel
         shell: bash
         run: |
           set -euo pipefail
           active_account="$(gcloud auth list --filter=status:ACTIVE --format='value(account)')"
           test "$active_account" = "$GCP_DEPLOY_SERVICE_ACCOUNT"
           gcloud config set project "$GCP_PROJECT_ID" >/dev/null
-          gcloud storage buckets describe "gs://${GCP_DATA_BUCKET}" --format=json >/tmp/data-bucket.json
           gcloud storage objects list "gs://${GCP_DATA_BUCKET}/bkl-031/f3-a3/artifacts/spk/de442s/**" --format=json >/tmp/kernel-prefix-before.json
-          state_uri="gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/platform/default.tfstate"
+          bootstrap_state_uri="gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/bootstrap/default.tfstate"
+          mapfile -t bootstrap_state_objects < <(gcloud storage ls "gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/bootstrap/**")
+          test "${#bootstrap_state_objects[@]}" -eq 1
+          test "${bootstrap_state_objects[0]}" = "$bootstrap_state_uri"
+          gcloud storage cat "$bootstrap_state_uri" >/tmp/bootstrap-state-before.json
+          platform_state_uri="gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/platform/default.tfstate"
           mapfile -t state_objects < <(gcloud storage ls "gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/platform/**")
           test "${#state_objects[@]}" -eq 1
-          test "${state_objects[0]}" = "$state_uri"
-          gcloud storage cat "$state_uri" >/tmp/platform-state-before.json
+          test "${state_objects[0]}" = "$platform_state_uri"
+          gcloud storage cat "$platform_state_uri" >/tmp/platform-state-before.json
           gcloud run jobs describe dsg-f3-a3-spike --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/job-before-kernel.json
           gcloud run jobs executions list --job=dsg-f3-a3-spike --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/job-executions-before-kernel.json
           python - <<'PY'
@@ -114,31 +118,33 @@ jobs:
           import os
           from pathlib import Path
 
-          bucket = json.loads(Path("/tmp/data-bucket.json").read_text(encoding="utf-8"))
-          def first(*values):
-              return next((value for value in values if value is not None), None)
-          uniform = first(
-              bucket.get("uniform_bucket_level_access"),
-              bucket.get("uniformBucketLevelAccess"),
-              bucket.get("iamConfiguration", {}).get("uniformBucketLevelAccess", {}).get("enabled"),
-          )
-          public_prevention = first(
-              bucket.get("public_access_prevention"),
-              bucket.get("publicAccessPrevention"),
-              bucket.get("iamConfiguration", {}).get("publicAccessPrevention"),
-          )
-          raw_versioning = bucket.get("versioning")
-          versioning = first(
-              bucket.get("versioning_enabled"),
-              bucket.get("versioningEnabled"),
-              raw_versioning.get("enabled") if isinstance(raw_versioning, dict) else raw_versioning,
-          )
-          if bucket.get("name") != os.environ["GCP_DATA_BUCKET"]:
-              raise SystemExit(f"unexpected data bucket identity: {bucket!r}")
-          if str(bucket.get("location", "")).upper() != "EUROPE-WEST8":
-              raise SystemExit(f"unexpected data bucket location: {bucket!r}")
-          if uniform is not True or str(public_prevention).lower() != "enforced" or versioning is not True:
-              raise SystemExit(f"data bucket protections are not exact: {bucket!r}")
+          bootstrap_state_path = Path("/tmp/bootstrap-state-before.json")
+          if hashlib.sha256(bootstrap_state_path.read_bytes()).hexdigest() != "735b5fe6f368802ebf66ba14248ae85e9b7c7016e6a199e1561ea024d0a56386":
+              raise SystemExit("bootstrap state differs from the post-promotion verified live generation")
+          bootstrap_state = json.loads(bootstrap_state_path.read_text(encoding="utf-8"))
+          if bootstrap_state.get("lineage") != "50e17f72-9d0a-0152-1130-060b583f103a" or bootstrap_state.get("serial") != 24:
+              raise SystemExit("bootstrap state identity differs from the post-promotion evidence")
+          data_bucket_resources = [
+              resource for resource in bootstrap_state.get("resources", [])
+              if resource.get("mode") == "managed"
+              and resource.get("type") == "google_storage_bucket"
+              and resource.get("name") == "data"
+          ]
+          if len(data_bucket_resources) != 1 or len(data_bucket_resources[0].get("instances", [])) != 1:
+              raise SystemExit("bootstrap state does not contain exactly one managed data bucket")
+          bucket = data_bucket_resources[0]["instances"][0].get("attributes", {})
+          versioning = bucket.get("versioning")
+          if not isinstance(versioning, list) or len(versioning) != 1:
+              raise SystemExit(f"unexpected data bucket versioning state: {bucket!r}")
+          if (
+              bucket.get("name") != os.environ["GCP_DATA_BUCKET"]
+              or str(bucket.get("location", "")).lower() != os.environ["GCP_REGION"]
+              or bucket.get("uniform_bucket_level_access") is not True
+              or bucket.get("public_access_prevention") != "enforced"
+              or bucket.get("force_destroy") is not False
+              or versioning[0].get("enabled") is not True
+          ):
+              raise SystemExit(f"data bucket protections differ from the reviewed bootstrap state: {bucket!r}")
           objects = json.loads(Path("/tmp/kernel-prefix-before.json").read_text(encoding="utf-8"))
           if objects != []:
               raise SystemExit(f"kernel prefix is not empty: {objects!r}")

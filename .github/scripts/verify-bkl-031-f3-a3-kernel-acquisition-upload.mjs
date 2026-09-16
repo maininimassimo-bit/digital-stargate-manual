@@ -64,8 +64,17 @@ for (const fragment of [
   "projects/183451329061/locations/global/workloadIdentityPools/dsg-f3-a3-github/providers/github-main",
   "node .github/scripts/verify-bkl-031-f3-a3-platform-apply-gate.mjs",
   "node .github/scripts/verify-bkl-031-f3-a3-kernel-acquisition-upload.mjs",
-  'gcloud storage buckets describe "gs://${GCP_DATA_BUCKET}"',
   'gcloud storage objects list "gs://${GCP_DATA_BUCKET}/bkl-031/f3-a3/artifacts/spk/de442s/**"',
+  'bootstrap_state_uri="gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/bootstrap/default.tfstate"',
+  'gcloud storage cat "$bootstrap_state_uri" >/tmp/bootstrap-state-before.json',
+  'hashlib.sha256(bootstrap_state_path.read_bytes()).hexdigest() != "735b5fe6f368802ebf66ba14248ae85e9b7c7016e6a199e1561ea024d0a56386"',
+  'bootstrap_state.get("lineage") != "50e17f72-9d0a-0152-1130-060b583f103a" or bootstrap_state.get("serial") != 24',
+  'resource.get("type") == "google_storage_bucket"',
+  'resource.get("name") == "data"',
+  'bucket.get("uniform_bucket_level_access") is not True',
+  'bucket.get("public_access_prevention") != "enforced"',
+  'bucket.get("force_destroy") is not False',
+  'versioning[0].get("enabled") is not True',
   'hashlib.sha256(state_path.read_bytes()).hexdigest() != "11b1888ceac0f39552e735d134a134bbbd7a6a75d623ac5c06897583842cf0e4"',
   'state.get("serial") != 3 or len(state.get("resources", [])) != 4',
   "gcloud run jobs executions list --job=dsg-f3-a3-spike",
@@ -134,6 +143,9 @@ for (const forbidden of [
   /horizons/i,
 ]) {
   if (forbidden.test(workflow)) fail(`kernel workflow contains forbidden operation or authority: ${forbidden}`);
+}
+if (/gcloud storage buckets describe/i.test(workflow)) {
+  fail("kernel workflow must not require bucket-control-plane read authority");
 }
 
 const approvalSha256 = crypto.createHash("sha256").update(approvalBytes).digest("hex");
