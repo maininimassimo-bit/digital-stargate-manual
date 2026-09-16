@@ -47,6 +47,8 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [F3-A3 Method Validation Spike Plan](../architecture/validation/BKL-031-F3-A3-Ephemeris-Lunar-Method-Validation-Spike-Plan.md) | Approved profile; F3-OD05 pending; not executed |
 | [F3-A3 Owner Decision Record](BKL-031-F3-A3-OWNER-DECISION-RECORD-2026-09-15.md) | Partial owner decision; F3-OD05 open |
 | [F3-A3 Google Cloud Hosting Plan](../architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md) | Repository scaffolding only; bootstrap not executed |
+| [ARB PR 213 F3-A3 Google Cloud IaC Review](../architecture/reviews/ARB-PR213-BKL-031-F3-A3-GCP-IaC-AI-Assisted-Review-2026-09-16.md) | Approved with Conditions — 96/100; pre-apply conditions remain |
+| [RQ PR 213 F3-A3 Google Cloud IaC Release Quality](../architecture/reviews/RQ-PR213-BKL-031-F3-A3-GCP-IaC-AI-Assisted-Release-Quality-Review-2026-09-16.md) | Conditionally Ready for Merge; not ready for cloud apply/spike |
 | [PR #195 F3-A2 Handoff AI-Assisted ARB Review](../architecture/reviews/ARB-PR195-BKL-031-F3-A2-Handoff-AI-Assisted-Review-2026-09-15.md) | Approved with Conditions — 98/100; non equivalente ad approvazione umana indipendente |
 | [PR #195 F3-A2 Handoff AI-Assisted Release Quality](../architecture/reviews/RQ-PR195-BKL-031-F3-A2-Handoff-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
 | [F3-A1 Site Authority Acceptance](BKL-031-F3-A1-SITE-AUTHORITY-CONTRACT-ACCEPTANCE-2026-09-15.md) | Acceptance con condizioni, PR #194 post-merge e transizione F3-A2 |
