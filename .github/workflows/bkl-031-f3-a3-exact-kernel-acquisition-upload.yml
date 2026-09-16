@@ -1,0 +1,281 @@
+name: BKL-031 F3-A3 Exact Kernel Acquisition and Upload
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: Exact main commit authorized for the governed kernel acquisition and upload
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: bkl-031-f3-a3-kernel-acquisition-upload
+  cancel-in-progress: false
+
+jobs:
+  exact-kernel-acquisition-upload:
+    name: Exact NAIF kernel acquisition and private upload
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+      GCP_REGION: ${{ vars.GCP_REGION }}
+      GCP_WIF_PROVIDER: ${{ vars.GCP_WIF_PROVIDER }}
+      GCP_DEPLOY_SERVICE_ACCOUNT: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+      GCP_RUNTIME_SERVICE_ACCOUNT: ${{ vars.GCP_RUNTIME_SERVICE_ACCOUNT }}
+      GCP_STATE_BUCKET: ${{ vars.GCP_STATE_BUCKET }}
+      GCP_DATA_BUCKET: ${{ vars.GCP_DATA_BUCKET }}
+      GCP_EVIDENCE_BUCKET: ${{ vars.GCP_EVIDENCE_BUCKET }}
+      DSG_AUTHORIZED_COMMIT: ${{ inputs.expected_commit }}
+      DSG_KERNEL_SOURCE: https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/de442s.bsp
+      DSG_KERNEL_URI: gs://digital-stargate-telemetry-183451329061-f3-data/bkl-031/f3-a3/artifacts/spk/de442s/sha256/54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c/de442s.bsp
+      DSG_KERNEL_OBJECT_NAME: bkl-031/f3-a3/artifacts/spk/de442s/sha256/54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c/de442s.bsp
+      DSG_KERNEL_SHA256: 54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c
+      DSG_KERNEL_MD5: cc49327e06088124c0e39d8dde9f0b58
+      DSG_KERNEL_MD5_BASE64: zEkyfgYIgSTA452N3p8LWA==
+      DSG_KERNEL_SIZE: "32701440"
+      DSG_IMAGE_REFERENCE: europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike@sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Require exact authorized main head and identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${GITHUB_REF}" = "refs/heads/main"
+          test "${GITHUB_SHA}" = "${DSG_AUTHORIZED_COMMIT}"
+          grep -Eq '^[0-9a-f]{40}$' <<<"${GITHUB_SHA}"
+          test "${GCP_PROJECT_ID}" = "digital-stargate-telemetry"
+          test "${GCP_REGION}" = "europe-west8"
+          test "${GCP_WIF_PROVIDER}" = "projects/183451329061/locations/global/workloadIdentityPools/dsg-f3-a3-github/providers/github-main"
+          test "${GCP_DEPLOY_SERVICE_ACCOUNT}" = "dsg-f3-a3-deployer@digital-stargate-telemetry.iam.gserviceaccount.com"
+          test "${GCP_RUNTIME_SERVICE_ACCOUNT}" = "dsg-f3-a3-runtime@digital-stargate-telemetry.iam.gserviceaccount.com"
+          test "${GCP_STATE_BUCKET}" = "digital-stargate-telemetry-183451329061-f3-state"
+          test "${GCP_DATA_BUCKET}" = "digital-stargate-telemetry-183451329061-f3-data"
+          test "${GCP_EVIDENCE_BUCKET}" = "digital-stargate-telemetry-183451329061-f3-evidence"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+
+      - name: Verify immutable source, platform evidence and upload gate
+        env:
+          DSG_METHOD_PROFILE_PATH: infrastructure/bkl-031-f3-a3-gcp/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json
+          DSG_METHOD_PROFILE_SHA256: e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca
+        run: |
+          node .github/scripts/verify-bkl-031-f3-a3-method-profile.mjs
+          node .github/scripts/verify-bkl-031-f3-a3-container-evidence.mjs
+          node .github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs
+          node .github/scripts/verify-bkl-031-f3-a3-platform-plan-gate.mjs
+          node .github/scripts/verify-bkl-031-f3-a3-registry-foundation-verification.mjs
+          node .github/scripts/verify-bkl-031-f3-a3-exact-oci-publication.mjs
+          node .github/scripts/verify-bkl-031-f3-a3-platform-apply-gate.mjs
+          node .github/scripts/verify-bkl-031-f3-a3-kernel-acquisition-upload.mjs
+
+      - name: Authenticate to Google Cloud through main-only WIF
+        id: auth
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+          create_credentials_file: true
+          export_environment_variables: true
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
+        with:
+          version: "583.0.0"
+
+      - name: Require exact private bucket, platform state and absent kernel
+        shell: bash
+        run: |
+          set -euo pipefail
+          active_account="$(gcloud auth list --filter=status:ACTIVE --format='value(account)')"
+          test "$active_account" = "$GCP_DEPLOY_SERVICE_ACCOUNT"
+          gcloud config set project "$GCP_PROJECT_ID" >/dev/null
+          gcloud storage buckets describe "gs://${GCP_DATA_BUCKET}" --format=json >/tmp/data-bucket.json
+          gcloud storage objects list "gs://${GCP_DATA_BUCKET}/bkl-031/f3-a3/artifacts/spk/de442s/**" --format=json >/tmp/kernel-prefix-before.json
+          state_uri="gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/platform/default.tfstate"
+          mapfile -t state_objects < <(gcloud storage ls "gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/platform/**")
+          test "${#state_objects[@]}" -eq 1
+          test "${state_objects[0]}" = "$state_uri"
+          gcloud storage cat "$state_uri" >/tmp/platform-state-before.json
+          gcloud run jobs describe dsg-f3-a3-spike --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/job-before-kernel.json
+          gcloud run jobs executions list --job=dsg-f3-a3-spike --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/job-executions-before-kernel.json
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          bucket = json.loads(Path("/tmp/data-bucket.json").read_text(encoding="utf-8"))
+          def first(*values):
+              return next((value for value in values if value is not None), None)
+          uniform = first(
+              bucket.get("uniform_bucket_level_access"),
+              bucket.get("uniformBucketLevelAccess"),
+              bucket.get("iamConfiguration", {}).get("uniformBucketLevelAccess", {}).get("enabled"),
+          )
+          public_prevention = first(
+              bucket.get("public_access_prevention"),
+              bucket.get("publicAccessPrevention"),
+              bucket.get("iamConfiguration", {}).get("publicAccessPrevention"),
+          )
+          raw_versioning = bucket.get("versioning")
+          versioning = first(
+              bucket.get("versioning_enabled"),
+              bucket.get("versioningEnabled"),
+              raw_versioning.get("enabled") if isinstance(raw_versioning, dict) else raw_versioning,
+          )
+          if bucket.get("name") != os.environ["GCP_DATA_BUCKET"]:
+              raise SystemExit(f"unexpected data bucket identity: {bucket!r}")
+          if str(bucket.get("location", "")).upper() != "EUROPE-WEST8":
+              raise SystemExit(f"unexpected data bucket location: {bucket!r}")
+          if uniform is not True or str(public_prevention).lower() != "enforced" or versioning is not True:
+              raise SystemExit(f"data bucket protections are not exact: {bucket!r}")
+          objects = json.loads(Path("/tmp/kernel-prefix-before.json").read_text(encoding="utf-8"))
+          if objects != []:
+              raise SystemExit(f"kernel prefix is not empty: {objects!r}")
+          state_path = Path("/tmp/platform-state-before.json")
+          if hashlib.sha256(state_path.read_bytes()).hexdigest() != "11b1888ceac0f39552e735d134a134bbbd7a6a75d623ac5c06897583842cf0e4":
+              raise SystemExit("platform state differs from reviewed apply evidence")
+          state = json.loads(state_path.read_text(encoding="utf-8"))
+          if state.get("serial") != 3 or len(state.get("resources", [])) != 4:
+              raise SystemExit("platform state is not the exact reviewed four-resource state")
+          job = json.loads(Path("/tmp/job-before-kernel.json").read_text(encoding="utf-8"))
+          rendered_job = json.dumps(job, sort_keys=True)
+          for expected in ["dsg-f3-a3-spike", os.environ["DSG_IMAGE_REFERENCE"], os.environ["DSG_KERNEL_URI"]]:
+              if expected not in rendered_job:
+                  raise SystemExit(f"job does not contain required value {expected}")
+          if json.loads(Path("/tmp/job-executions-before-kernel.json").read_text(encoding="utf-8")) != []:
+              raise SystemExit("Cloud Run Job already has an execution")
+          PY
+
+      - name: Acquire exact approved kernel once from official NAIF source
+        shell: bash
+        run: |
+          set -euo pipefail
+          node .github/scripts/acquire-bkl-031-f3-a3-kernel.mjs \
+            --destination /tmp/de442s.bsp \
+            --evidence /tmp/kernel-acquisition.json
+
+      - name: Upload only the verified kernel to its content-addressed URI
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcloud storage cp \
+            --if-generation-match=0 \
+            --content-md5="$DSG_KERNEL_MD5_BASE64" \
+            --content-type=application/octet-stream \
+            --cache-control=no-store \
+            /tmp/de442s.bsp \
+            "$DSG_KERNEL_URI"
+
+      - name: Verify registry-resolved kernel bytes and zero job executions
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcloud storage objects describe "$DSG_KERNEL_URI" --format=json >/tmp/kernel-object.json
+          gcloud storage objects list "gs://${GCP_DATA_BUCKET}/bkl-031/f3-a3/artifacts/spk/de442s/**" --format=json >/tmp/kernel-prefix-after.json
+          gcloud storage cat "$DSG_KERNEL_URI" >/tmp/de442s-from-gcs.bsp
+          gcloud run jobs executions list --job=dsg-f3-a3-spike --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/job-executions-after-kernel.json
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          expected_uri = os.environ["DSG_KERNEL_URI"]
+          expected_name = os.environ["DSG_KERNEL_OBJECT_NAME"]
+          metadata = json.loads(Path("/tmp/kernel-object.json").read_text(encoding="utf-8"))
+          name = metadata.get("name") or metadata.get("url") or metadata.get("storage_url")
+          if name not in {expected_name, expected_uri}:
+              raise SystemExit(f"unexpected object name: {name!r}")
+          size = metadata.get("size") or metadata.get("size_bytes")
+          if int(size) != int(os.environ["DSG_KERNEL_SIZE"]):
+              raise SystemExit(f"unexpected object size: {size!r}")
+          md5_hash = metadata.get("md5_hash") or metadata.get("md5Hash")
+          if md5_hash != os.environ["DSG_KERNEL_MD5_BASE64"]:
+              raise SystemExit(f"unexpected GCS MD5: {md5_hash!r}")
+          generation = metadata.get("generation")
+          if not str(generation).isdigit() or int(generation) <= 0:
+              raise SystemExit(f"unexpected object generation: {generation!r}")
+          content_type = metadata.get("content_type") or metadata.get("contentType")
+          cache_control = metadata.get("cache_control") or metadata.get("cacheControl")
+          if content_type != "application/octet-stream" or cache_control != "no-store":
+              raise SystemExit(f"unexpected object metadata: {metadata!r}")
+          objects = json.loads(Path("/tmp/kernel-prefix-after.json").read_text(encoding="utf-8"))
+          if len(objects) != 1:
+              raise SystemExit(f"expected one kernel object, received {len(objects)}")
+          retrieved = Path("/tmp/de442s-from-gcs.bsp")
+          retrieved_bytes = retrieved.read_bytes()
+          if len(retrieved_bytes) != int(os.environ["DSG_KERNEL_SIZE"]):
+              raise SystemExit("registry-resolved kernel size mismatch")
+          if hashlib.sha256(retrieved_bytes).hexdigest() != os.environ["DSG_KERNEL_SHA256"]:
+              raise SystemExit("registry-resolved kernel SHA-256 mismatch")
+          if hashlib.md5(retrieved_bytes).hexdigest() != os.environ["DSG_KERNEL_MD5"]:
+              raise SystemExit("registry-resolved kernel MD5 mismatch")
+          if retrieved_bytes[:7] != b"DAF/SPK":
+              raise SystemExit("registry-resolved SPICE header mismatch")
+          if json.loads(Path("/tmp/job-executions-after-kernel.json").read_text(encoding="utf-8")) != []:
+              raise SystemExit("Cloud Run Job executed unexpectedly")
+          with Path(os.environ["GITHUB_ENV"]).open("a", encoding="utf-8") as env:
+              env.write(f"DSG_KERNEL_GENERATION={generation}\n")
+              env.write(f"DSG_KERNEL_CRC32C={metadata.get('crc32c') or metadata.get('crc32c_hash') or ''}\n")
+          PY
+
+      - name: Record bounded kernel publication evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          acquisition = json.loads(Path("/tmp/kernel-acquisition.json").read_text(encoding="utf-8"))
+          evidence = {
+              "evidenceId": "BKL-031-F3-A3-KERNEL-PUBLICATION-EVIDENCE",
+              "sourceCommit": os.environ["GITHUB_SHA"],
+              "officialSource": os.environ["DSG_KERNEL_SOURCE"],
+              "privateUri": os.environ["DSG_KERNEL_URI"],
+              "generation": os.environ["DSG_KERNEL_GENERATION"],
+              "sizeBytes": int(os.environ["DSG_KERNEL_SIZE"]),
+              "sha256": os.environ["DSG_KERNEL_SHA256"],
+              "md5": os.environ["DSG_KERNEL_MD5"],
+              "crc32c": os.environ["DSG_KERNEL_CRC32C"],
+              "spiceHeader": "DAF/SPK",
+              "sourceRequestCount": acquisition["requestCount"],
+              "redirectAccepted": acquisition["redirectAccepted"],
+              "sourceResponseHeaders": acquisition["responseHeaders"],
+              "tlsPeer": acquisition["tlsPeer"],
+              "objectCount": 1,
+              "jobExecutionCount": 0,
+              "platformMutation": "NOT_EXECUTED",
+              "scientificExecution": "NOT_EXECUTED",
+              "externalReferenceTraffic": "NOT_EXECUTED",
+              "protectedSiteUse": "NOT_EXECUTED",
+              "runtimeActivation": "NOT_EXECUTED",
+              "runtimeAuthority": False,
+          }
+          rendered = json.dumps(evidence, indent=2, sort_keys=True)
+          print("BKL031_KERNEL_PUBLICATION_EVIDENCE_BEGIN")
+          print(rendered)
+          print("BKL031_KERNEL_PUBLICATION_EVIDENCE_END")
+          Path(os.environ["GITHUB_STEP_SUMMARY"]).write_text(
+              "## BKL-031 F3-A3 kernel publication evidence\n\n```json\n" + rendered + "\n```\n",
+              encoding="utf-8",
+          )
+          PY
+
+      - name: Remove ephemeral local kernel bytes
+        if: always()
+        shell: bash
+        run: |
+          rm -f /tmp/de442s.bsp /tmp/de442s.bsp.part /tmp/de442s-from-gcs.bsp /tmp/kernel-acquisition.json

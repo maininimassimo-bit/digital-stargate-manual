@@ -80,6 +80,8 @@ The `BKL-031 F3-A3 Exact Platform Apply` workflow is manual, main-only and seria
 
 PR #233 merged that gate as `af81b807c8f6d8861ede3ecf3ae9b34e66df7790`. Run `35141947085` applied only the exact saved plan with four additions, zero changes and zero destroys. The protected platform state now contains the exact four addresses at serial `3`, lineage `2be9b82b-88d3-888f-4fcd-dded2f74f7f3` and raw SHA-256 `11b1888ceac0f39552e735d134a134bbbd7a6a75d623ac5c06897583842cf0e4`; the immediate plan reported zero drift. The Cloud Run Job has zero executions and the approved kernel object is still absent. `BKL-031-F3-A3-PLATFORM-APPLY-EVIDENCE-001` records the result at SHA-256 `ca5952b67904f514e2e05b7abfd8aeb4df71cfdba89958441ca233bd01e710b8`. The next separately reviewed gate is exact kernel acquisition and private content-addressed upload. Scientific execution, external reference traffic, protected-site use and runtime activation remain blocked.
 
+The candidate `BKL-031 F3-A3 Exact Kernel Acquisition and Upload` workflow is manual and accepts only an exact `main` commit through the established WIF deployer. Before any external request it requires the protected data bucket, the exact reviewed four-resource platform state, the digest-pinned job with zero executions and an empty kernel prefix. A committed Node acquisition script performs one HTTPS request to the owner-approved NAIF URL, rejects redirects and verifies `32701440` bytes, `DAF/SPK`, SHA-256 `54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c` and MD5 `cc49327e06088124c0e39d8dde9f0b58`. The workflow contains one upload command, guarded by destination generation `0` and server-side Content-MD5, to the exact private content-addressed URI. It then reads the GCS object back, verifies the bytes and exclusive one-object inventory, confirms the job remains unexecuted and removes local ephemeral copies. This source package prepares the gate; it does not acquire or upload the kernel.
+
 ## Local validation
 
 Run:
@@ -92,14 +94,15 @@ Run:
 6. node .github/scripts/verify-bkl-031-f3-a3-registry-foundation-verification.mjs
 7. node .github/scripts/verify-bkl-031-f3-a3-exact-oci-publication.mjs
 8. node .github/scripts/verify-bkl-031-f3-a3-platform-apply-gate.mjs
-9. terraform -chdir=bootstrap fmt -check
-10. terraform -chdir=bootstrap init -backend=false
-11. terraform -chdir=bootstrap validate
-12. terraform -chdir=registry fmt -check
-13. terraform -chdir=registry init -backend=false
-14. terraform -chdir=registry validate
-15. terraform -chdir=platform fmt -check
-16. terraform -chdir=platform init -backend=false
-17. terraform -chdir=platform validate
+9. node .github/scripts/verify-bkl-031-f3-a3-kernel-acquisition-upload.mjs
+10. terraform -chdir=bootstrap fmt -check
+11. terraform -chdir=bootstrap init -backend=false
+12. terraform -chdir=bootstrap validate
+13. terraform -chdir=registry fmt -check
+14. terraform -chdir=registry init -backend=false
+15. terraform -chdir=registry validate
+16. terraform -chdir=platform fmt -check
+17. terraform -chdir=platform init -backend=false
+18. terraform -chdir=platform validate
 
 No command above authenticates to GCP or mutates cloud resources.
