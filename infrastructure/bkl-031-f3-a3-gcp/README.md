@@ -68,6 +68,8 @@ Workflow run `35131365596` on exact main commit `380bd8c3d04f570acb21a9a7f532930
 
 The registry foundation is now isolated from the platform root without `-target`. The manual main-only workflow `BKL-031 F3-A3 Artifact Registry Foundation` fails closed unless the requested commit is the exact checked-out `main` head, the repository and registry state are absent, and the saved plan contains exactly one create action for `google_artifact_registry_repository.spike`. It applies only that saved plan and verifies one-resource state and zero drift. The source package does not execute the workflow. Exact-head CI, process-separated review, expected-head merge and post-merge verification are required before dispatch. Image publication is a later separate gate. The refreshed platform-plan workflow expects the future published digest and exactly four remaining create actions; it still cannot apply them.
 
+Workflow run `35134193946` on exact main commit `ccf23e68f4bf8d321ccf707d0918e231c1ec2be1` authenticated through WIF, verified the one-create saved plan, applied the one registry resource and passed the immediate Terraform zero-drift plan. Its final evidence step then failed safely because Google added the provider-managed label `goog-terraform-provisioned=true` and the assertion expected only the four configured labels. No image operation exists in that workflow. The corrected assertion includes the exact provider label. A separate manual verification workflow performs only read-only repository/image inventory, one-resource state and zero-drift checks; it contains no apply, destroy or image publication.
+
 ## Local validation
 
 Run:
@@ -77,14 +79,15 @@ Run:
 3. node .github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs
 4. node .github/scripts/verify-bkl-031-f3-a3-platform-plan-gate.mjs
 5. node .github/scripts/verify-bkl-031-f3-a3-registry-foundation-gate.mjs
-6. terraform -chdir=bootstrap fmt -check
-7. terraform -chdir=bootstrap init -backend=false
-8. terraform -chdir=bootstrap validate
-9. terraform -chdir=registry fmt -check
-10. terraform -chdir=registry init -backend=false
-11. terraform -chdir=registry validate
-12. terraform -chdir=platform fmt -check
-13. terraform -chdir=platform init -backend=false
-14. terraform -chdir=platform validate
+6. node .github/scripts/verify-bkl-031-f3-a3-registry-foundation-verification.mjs
+7. terraform -chdir=bootstrap fmt -check
+8. terraform -chdir=bootstrap init -backend=false
+9. terraform -chdir=bootstrap validate
+10. terraform -chdir=registry fmt -check
+11. terraform -chdir=registry init -backend=false
+12. terraform -chdir=registry validate
+13. terraform -chdir=platform fmt -check
+14. terraform -chdir=platform init -backend=false
+15. terraform -chdir=platform validate
 
 No command above authenticates to GCP or mutates cloud resources.

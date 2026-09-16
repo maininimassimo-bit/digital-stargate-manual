@@ -158,7 +158,7 @@ jobs:
               raise SystemExit(f"unexpected repository name: {repository.get('name')!r}")
           if repository.get("format") != "DOCKER" or repository.get("mode") != "STANDARD_REPOSITORY":
               raise SystemExit(f"unexpected repository format/mode: {repository!r}")
-          if repository.get("labels") != {"capability": "bkl-031", "increment": "f3-a3", "purpose": "validation-spike", "safety": "none"}:
+          if repository.get("labels") != {"capability": "bkl-031", "goog-terraform-provisioned": "true", "increment": "f3-a3", "purpose": "validation-spike", "safety": "none"}:
               raise SystemExit(f"unexpected repository labels: {repository.get('labels')!r}")
           digest = lambda path: hashlib.sha256(Path(path).read_bytes()).hexdigest()
           evidence = {
