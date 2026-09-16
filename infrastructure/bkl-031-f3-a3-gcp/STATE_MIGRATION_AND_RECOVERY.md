@@ -4,7 +4,7 @@
 |---|---|
 | Finding | ARB-213-MI02 |
 | Scope | Bootstrap state lifecycle only |
-| Status | PROCEDURE DEFINED — NOT EXECUTED |
+| Status | BOOTSTRAP APPLIED / REMOTE STATE ACTIVE — BACKEND PROMOTION UNDER REVIEW |
 | Backend | Google Cloud Storage |
 | Bootstrap prefix | `bkl-031/f3-a3/bootstrap` |
 | Platform prefix | `bkl-031/f3-a3/platform` |
@@ -15,7 +15,7 @@ This runbook governs the one-time transition of the bootstrap root from local Te
 
 The state bucket uses uniform bucket-level access, enforced public-access prevention, Object Versioning and `force_destroy = false`.
 
-This document does not authorize Google Cloud mutation. F3-OD05 is separately approved at the identity/provenance level; this procedure does not close ARB-213-MI01 or ARB-213-MI02 execution evidence and does not authorize platform plan/apply, container publication, artifact upload or Cloud Run execution.
+The one-time bootstrap and state migration were authorized against an exact reviewed plan under `DSG-AEM-001`. This document does not authorize any further Google Cloud mutation and does not authorize platform plan/apply, container publication, artifact upload or Cloud Run execution. ARB-213-MI02 remains open until backend promotion and post-promotion verification complete.
 
 ## Mandatory stop conditions
 
@@ -143,9 +143,14 @@ Pull and verify the remote state:
 terraform -chdir="$DSG_BOOTSTRAP_DIR" state pull > "$DSG_STATE_EVIDENCE_DIR/bootstrap-post-migration.tfstate"
 jq -e '.lineage and (.serial | type == "number")' "$DSG_STATE_EVIDENCE_DIR/bootstrap-post-migration.tfstate"
 test "$(jq -r '.lineage' "$DSG_STATE_EVIDENCE_DIR/bootstrap-pre-migration.tfstate")" = "$(jq -r '.lineage' "$DSG_STATE_EVIDENCE_DIR/bootstrap-post-migration.tfstate")"
-test "$(jq -r '.serial' "$DSG_STATE_EVIDENCE_DIR/bootstrap-pre-migration.tfstate")" = "$(jq -r '.serial' "$DSG_STATE_EVIDENCE_DIR/bootstrap-post-migration.tfstate")"
+test "$(( $(jq -r '.serial' "$DSG_STATE_EVIDENCE_DIR/bootstrap-pre-migration.tfstate") + 1 ))" = "$(jq -r '.serial' "$DSG_STATE_EVIDENCE_DIR/bootstrap-post-migration.tfstate")"
+jq -S '{resources, outputs}' "$DSG_STATE_EVIDENCE_DIR/bootstrap-pre-migration.tfstate" > "$DSG_STATE_EVIDENCE_DIR/bootstrap-pre-managed.json"
+jq -S '{resources, outputs}' "$DSG_STATE_EVIDENCE_DIR/bootstrap-post-migration.tfstate" > "$DSG_STATE_EVIDENCE_DIR/bootstrap-post-managed.json"
+cmp -s "$DSG_STATE_EVIDENCE_DIR/bootstrap-pre-managed.json" "$DSG_STATE_EVIDENCE_DIR/bootstrap-post-managed.json"
 sha256sum "$DSG_STATE_EVIDENCE_DIR/bootstrap-post-migration.tfstate"
 ```
+
+Terraform persists the migrated snapshot as a new remote state version. The accepted transition therefore preserves lineage and managed resources/outputs while incrementing the serial exactly once. A different lineage, a serial change other than `+1`, or any managed resource/output difference is fail-closed.
 
 Verify that the live object and its generations are visible:
 
@@ -248,3 +253,9 @@ The MI02 execution record must contain:
 - deviations, failures and rollback actions.
 
 Until all evidence is reviewed, ARB-213-MI02 remains open.
+
+## Execution record — 16/09/2026
+
+The authorized bootstrap used `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46`, Terraform `1.16.2`, Google provider `7.46.1` and saved-plan SHA-256 `9bf2804ae697db1e5369e20f5594fbbaa0fa7fc202bc21e7290776b1e4c08d24`. The named change-window operator was Massimo Mainini through the delegated `DSG-AEM-001` session. Apply completed at `2026-09-16T14:45:55Z` with 27 additions, 0 changes and 0 destroys; its transcript SHA-256 is `3fd6a05e7a6c4c925964d16ab9d9d233012130cb0a797bf8d5c8e982f6866ee6`. The state bucket in `europe-west8` has uniform bucket-level access, enforced public-access prevention, Object Versioning and `force_destroy = false`.
+
+Fail-closed incident `ARB-213-MI02-I01` occurred during the first post-migration comparison: lineage remained `50e17f72-9d0a-0152-1130-060b583f103a`, managed resources and outputs were unchanged, while Terraform advanced serial `23` to `24` when it persisted the migrated snapshot. Pre/post state SHA-256 values are `9ccb7f7507a823f19460fee072bf1163561ff67f404ec481239f197864670de2` and `21205d25926a001a85b827f9cc0f8fbfd5859196ee2dccfcde18b0fda45e832f`. The operator stopped before the zero-drift plan and performed read-only generation inspection only. GCS retained the initial empty generation `1789569995809889` and the migrated live generation `1789570006160390`; the live-generation download SHA-256 is `735b5fe6f368802ebf66ba14248ae85e9b7c7016e6a199e1561ea024d0a56386`. The original equality rule was therefore corrected to the observed and fail-closed `+1` transition with managed-content equality. Backend promotion and post-promotion zero-drift evidence remain pending.

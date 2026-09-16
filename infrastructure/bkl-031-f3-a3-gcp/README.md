@@ -2,7 +2,7 @@
 
 This directory contains repository-only Terraform scaffolding for the future ephemeris/lunar validation spike.
 
-Current state: BOOTSTRAP NOT EXECUTED, PLATFORM NOT PLANNED, PLATFORM NOT APPLIED, JOB NOT EXECUTED.
+Current state: BOOTSTRAP APPLIED, BOOTSTRAP STATE MIGRATED TO GCS, BACKEND PROMOTION UNDER REVIEW, PLATFORM NOT PLANNED, PLATFORM NOT APPLIED, JOB NOT EXECUTED.
 
 ## Directories
 
@@ -58,7 +58,7 @@ F3-OD05 is approved at artifact-identity level by `BKL-031-F3-A3-F3-OD05-APPROVA
 
 The future container must embed the exact profile at `/app/dsg/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json` and invoke `.github/scripts/verify-bkl-031-f3-a3-method-profile.mjs` as a fail-closed preflight before scientific code. CI verifies the exact digest and proves that content or digest drift is rejected. No container has been built or executed.
 
-This package has no authenticated plan/apply workflow. CI performs method-profile preflight, static policy and Terraform validation only. Bootstrap, authenticated plan/apply, upload and execution remain blocked by ARB-213-MI02, exact artifact/container evidence and exact-head re-review.
+This package has no authenticated plan/apply workflow. The one-time bootstrap was applied from the reviewed saved plan for `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46`: 27 resources added, 0 changed and 0 destroyed. Bootstrap state is active in the protected GCS bucket; backend promotion and post-promotion zero-drift evidence remain the current ARB-213-MI02 gate. Platform plan/apply, upload and execution remain blocked by MI02 closure, exact artifact/container evidence and exact-head re-review.
 
 ## Local validation
 

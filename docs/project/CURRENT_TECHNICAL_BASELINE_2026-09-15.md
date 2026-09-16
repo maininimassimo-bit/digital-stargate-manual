@@ -3,12 +3,12 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-BASELINE-2026-09-15 |
-| Stato | **CURRENT — F3-A3 IMMUTABLE METHOD PROFILE / REPOSITORY-ONLY EVIDENCE** |
-| Repository baseline | `main@d8540736950e9d54dd726789f704a6b2d2a9a8bf` |
-| Current package | BKL-031-F3-A3-METHOD-PROFILE-001 + drift-rejecting preflight + Terraform digest wiring |
+| Stato | **CURRENT — F3-A3 BOOTSTRAP APPLIED / REMOTE STATE ACTIVE / MI02 OPEN** |
+| Repository baseline | `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46` |
+| Current package | ARB-213-MI02 serial-rule remediation + permanent bootstrap backend promotion |
 | Runtime delta | None |
 | Data delta | None; no provider artifact, SPK, IERS data or protected-site payload acquired |
-| Infrastructure delta | Source only; Terraform/GitHub workflow added, no GCP resource created |
+| Infrastructure delta | Bootstrap only: 27 resources added; protected GCS state active; platform not planned/applied |
 
 ## 1. Integrated state
 
@@ -75,3 +75,7 @@ The repository records the owner-approved immutable identity of `de442s.bsp`, it
 ## F3-A3 immutable method-profile delta — 16/09/2026
 
 The repository carries `BKL-031-F3-A3-METHOD-PROFILE-001` at SHA-256 `e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`, covering every approved F3-OD06, F3-OD07 and F3-OD10 value and the associated method, kernel, privacy, hosting and fail-closed boundaries. Terraform exposes only the exact profile ID/path/digest; static preflight accepts the reviewed bytes and rejects mutated content or an unreviewed digest. Container build/inclusion, IERS materialization, cloud mutation and scientific execution remain absent.
+
+## F3-A3 bootstrap and MI02 delta — 16/09/2026
+
+The exact authenticated bootstrap plan for `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46` added 27 reviewed resources and changed or destroyed none. The three buckets are private, versioned and protected from forced destruction; WIF is restricted to the authoritative repository main ref; no service-account key exists. Bootstrap state migrated to GCS. Incident `ARB-213-MI02-I01` stopped before zero-drift planning when the remote persist advanced serial `23` to `24`; lineage, resources and outputs were unchanged. Permanent backend promotion and post-promotion verification remain open.

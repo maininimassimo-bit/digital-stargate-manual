@@ -93,3 +93,5 @@ La closure BKL-040 e la promozione dependency-driven di BKL-038 non introducono 
 
 
 | DLG-036 | 16/09/2026 | Materializzare i valori approvati F3-OD04–F3-OD10 nel profilo immutabile `BKL-031-F3-A3-METHOD-PROFILE-001` con SHA-256 `e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca` e preflight fail-closed | Eliminare la duplicazione dei limiti runtime e fornire evidence statica ARB-213-MI01 senza costruire o eseguire container | BKL-031 F3-A3 | Accepted at repository-contract level | `ADR-010`; `ARB-213-MI01`; container/IERS/cloud/scientific evidence remain open |
+
+| DLG-037 | 16/09/2026 | Applicare l'exact saved bootstrap plan `9bf2804a…`, migrare immediatamente lo state in GCS e fermarsi sul mismatch seriale previsto dal runbook | Materializzare il bootstrap autorizzato mantenendo 0 update/0 destroy e applicare fail-closed alla prima divergenza; correggere la regola MI02 al persist remoto `serial +1` solo con lineage e managed content invariati | BKL-031 F3-A3 | Applied / remediation under review | `main@af8b18f2…`; `ARB-213-MI02-I01`; backend promotion pending |

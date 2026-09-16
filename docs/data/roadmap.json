@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-16",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "16d586a294307d42a31229c43fd69cf134562b861ca4340efab2eef79482203f",
+  "sourceDigest": "269948cf9109f20ff127c39036abed62b430574c38b12361b74513ae702d83f5",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-A3 immutable method profile recorded with drift-rejecting preflight; ADR-010 proposed; ARB-213-MI02 and execution evidence open; S10 unavailable",
+  "projectStatus": "BKL-031 F3-A3 bootstrap applied and remote state active; MI02 backend promotion under review; ADR-010 proposed; S10 unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A3 exact container inclusion and ARB-213-MI02 operational evidence",
-  "target": "Review and integrate the immutable full method profile and drift-rejecting preflight. Then stop before container build, artifact acquisition/upload, Google Cloud bootstrap, Terraform plan/apply, state migration, spike execution, Horizons request or runtime activation.",
+  "nextMilestone": "BKL-031 F3-A3 ARB-213-MI02 permanent backend promotion and post-promotion zero-drift evidence",
+  "target": "Integrate the corrected migration serial rule and permanent bootstrap backend, then re-verify remote lineage, managed content and zero drift. Stop before platform plan/apply, artifact upload, container build, spike execution, Horizons request or runtime activation.",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -307,7 +307,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3-A3 owner dispositions F3-OD04–F3-OD10 are complete. The exact de442s.bsp identity and immutable method profile are recorded with fail-closed static preflight. ADR-010 remains Proposed; ARB-213-MI02, exact container/IERS/plan evidence and all scientific cases remain open or NOT EXECUTED; S10 remains UNAVAILABLE."
+          "note": "F3-A3 decisions and immutable method-profile evidence are complete. The reviewed bootstrap added 27 resources with 0 update/0 destroy and state is active in protected GCS. ARB-213-MI02 backend promotion, exact container/IERS evidence and all scientific cases remain open or NOT EXECUTED; ADR-010 remains Proposed and S10 remains UNAVAILABLE."
         },
         {
           "id": "BKL-032",
