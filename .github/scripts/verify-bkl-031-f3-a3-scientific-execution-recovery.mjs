@@ -27,8 +27,8 @@ for (const forbidden of [
   /horizons/i,
 ]) if (forbidden.test(workflow)) fail(`scientific recovery contains forbidden mutation: ${forbidden}`);
 
-if (incident.status !== "TERMINAL_FAILURE_ZERO_EVIDENCE_PLATFORM_REMEDIATION_REQUIRED") fail("scientific execution incident status mismatch");
+if (incident.status !== "PLATFORM_REMEDIATED_REPLACEMENT_EXECUTION_REVIEW_REQUIRED") fail("scientific execution incident status mismatch");
 if (incident.workflow?.runId !== 35155130422 || incident.workflow?.jobId !== 104992662577 || incident.workflow?.conclusion !== "failure") fail("scientific execution incident run identity mismatch");
-if (incident.controls?.secondExecution !== "PROHIBITED_NOT_EXECUTED" || incident.controls?.recoveryMode !== "READ_ONLY_COMPLETE_PLATFORM_REMEDIATION_REQUIRES_SEPARATE_GATE") fail("scientific execution incident recovery boundary mismatch");
+if (incident.controls?.secondExecution !== "PROHIBITED_NOT_EXECUTED" || incident.controls?.recoveryMode !== "PLATFORM_REMEDIATED_REPLACEMENT_EXECUTION_REQUIRES_SEPARATE_GATE") fail("scientific execution incident recovery boundary mismatch");
 
 console.log("BKL-031 F3-A3 scientific execution read-only recovery gate verified: exclusive single execution inspection, optional private evidence read, no mutation");

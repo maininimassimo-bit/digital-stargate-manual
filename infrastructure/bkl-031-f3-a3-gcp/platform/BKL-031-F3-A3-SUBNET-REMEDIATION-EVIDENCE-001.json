@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0",
+  "evidenceId": "BKL-031-F3-A3-SUBNET-REMEDIATION-EVIDENCE-001",
+  "status": "DIRECT_VPC_SUBNET_REMEDIATED_POST_VERIFIED",
+  "recordedAtUtc": "2026-09-16T22:52:28Z",
+  "sourceCommit": "9e2408a828d3797b63df05f3ab7f1f88de20a07b",
+  "workflow": {
+    "name": "BKL-031 F3-A3 Exact Direct VPC Subnet Remediation",
+    "runId": 35159635360,
+    "jobId": 105007158776,
+    "conclusion": "success",
+    "url": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35159635360"
+  },
+  "apply": {
+    "savedPlan": "0_ADD_1_CHANGE_0_DESTROY",
+    "changedResource": "google_compute_subnetwork.spike",
+    "action": "update",
+    "beforeCidr": "10.88.0.0/28",
+    "afterCidr": "10.88.0.0/26",
+    "exactSavedPlanOnly": true
+  },
+  "platformState": {
+    "serial": 5,
+    "lineage": "2be9b82b-88d3-888f-4fcd-dded2f74f7f3",
+    "rawSha256": "b12cbd6c107cd7e38d47fbe353ab125ee909dc77d0bc8c26172bfa484b722889",
+    "resourceCount": 4,
+    "immediateDrift": "ZERO"
+  },
+  "controls": {
+    "historicalExecutionCount": 1,
+    "historicalExecution": "dsg-f3-a3-spike-9drzb",
+    "historicalExecutionResult": "FAILED_NO_EVIDENCE",
+    "replacementExecution": "NOT_EXECUTED",
+    "scientificEvidenceObjectCount": 0,
+    "externalReferenceTraffic": "NOT_EXECUTED",
+    "protectedSiteUse": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED"
+  },
+  "nextGate": "SEPARATELY_REVIEWED_EXACT_SINGLE_REPLACEMENT_SCIENTIFIC_EXECUTION"
+}

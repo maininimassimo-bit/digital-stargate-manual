@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "incidentId": "BKL-031-F3-A3-SCIENTIFIC-EXECUTION-INCIDENT-001",
-  "status": "TERMINAL_FAILURE_ZERO_EVIDENCE_PLATFORM_REMEDIATION_REQUIRED",
+  "status": "PLATFORM_REMEDIATED_REPLACEMENT_EXECUTION_REVIEW_REQUIRED",
   "recordedAtUtc": "2026-09-16T22:12:12Z",
   "sourceCommit": "540baa235ca97de9f72eb8687aa8e478bd5d888a",
   "workflow": {
@@ -28,7 +28,7 @@
     "terraformMutation": "NOT_EXECUTED",
     "registryMutation": "NOT_EXECUTED",
     "kernelMutation": "NOT_EXECUTED",
-    "recoveryMode": "READ_ONLY_COMPLETE_PLATFORM_REMEDIATION_REQUIRES_SEPARATE_GATE"
+    "recoveryMode": "PLATFORM_REMEDIATED_REPLACEMENT_EXECUTION_REQUIRES_SEPARATE_GATE"
   },
   "recovery": {
     "sourceCommit": "bd89ef715ff6a76884ab86e7e03c6b8bfa5e0305",
@@ -55,5 +55,14 @@
     "failedCount": 1,
     "evidenceObjectCount": 0
   },
-  "nextGate": "EXACT_ONE_UPDATE_DIRECT_VPC_SUBNET_REMEDIATION"
+  "platformRemediation": {
+    "runId": 35159635360,
+    "jobId": 105007158776,
+    "conclusion": "success",
+    "subnetCidr": "10.88.0.0/26",
+    "platformStateSerial": 5,
+    "platformStateRawSha256": "b12cbd6c107cd7e38d47fbe353ab125ee909dc77d0bc8c26172bfa484b722889",
+    "immediateDrift": "ZERO"
+  },
+  "nextGate": "SEPARATELY_REVIEWED_EXACT_SINGLE_REPLACEMENT_SCIENTIFIC_EXECUTION"
 }
