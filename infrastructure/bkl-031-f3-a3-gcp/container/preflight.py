@@ -84,7 +84,11 @@ def main() -> None:
     from astropy.time import Time
 
     if iers.conf.auto_download is not False:
-        raise RuntimeError("Astropy IERS auto-download is enabled")
+        raise RuntimeError(
+            "Astropy IERS auto-download is enabled: "
+            f"value={iers.conf.auto_download!r}, "
+            f"XDG_CONFIG_HOME={os.environ.get('XDG_CONFIG_HOME')!r}"
+        )
     if iers.conf.iers_degraded_accuracy != "error":
         raise RuntimeError("Astropy IERS degraded accuracy is not fail-closed")
 
