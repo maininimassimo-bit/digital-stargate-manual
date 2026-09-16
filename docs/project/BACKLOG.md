@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.28 |
+| Versione | 5.29 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -49,7 +49,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
-| BKL-031 | P1 | Observation Planner intelligente | In Progress | F3-A3 decisions and ARB-213-MI01/MI02 evidence complete; bootstrap and registry foundation post-verified; exact OCI image published; authenticated four-resource plan verified; platform unapplied; ADR-010 Proposed; S10 unavailable | Review a separate main-only exact saved-plan apply gate for the four remaining platform resources; retain stop before apply approval, artifact upload, scientific execution or runtime activation | ADR-010; BKL-031-F3-A3-OCI-PUBLICATION-EVIDENCE-001; BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-002; ARB-213-MI02; BKL-031-F3-A3-INFRA-001 |
+| BKL-031 | P1 | Observation Planner intelligente | In Progress | F3-A3 decisions and ARB-213-MI01/MI02 evidence complete; bootstrap, registry and exact OCI image complete; exact four-resource platform applied and zero-drift verified; job unexecuted; kernel absent; ADR-010 Proposed; S10 unavailable | Review a separate exact approved-kernel acquisition and private content-addressed upload gate; retain stop before job/scientific execution, Horizons traffic, protected-site use or runtime activation | ADR-010; BKL-031-F3-A3-PLATFORM-APPLY-EVIDENCE-001; BKL-031-F3-A3-OCI-PUBLICATION-EVIDENCE-001; ARB-213-MI02; BKL-031-F3-A3-INFRA-001 |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
@@ -361,3 +361,7 @@ Separate run `35138798214` resolved the published digest, confirmed the VPC, sub
 ### BKL-031 F3-A3 exact four-resource platform apply gate candidate — 16/09/2026
 
 The manual main-only WIF gate is serialized with authenticated planning and accepts only an exact authorized `main` commit. It requires the sole published image at manifest `sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce`, the single validated empty platform state, absent VPC/subnet/job and absent approved kernel object. It generates a fresh saved plan and permits its only mutation command only when the plan contains exactly the four reviewed create actions for the private network, subnet, digest-pinned Cloud Run Job and deployer invoker binding. Postconditions require exact state and cloud configuration, zero job executions, continued kernel absence and immediate zero drift. This is a review candidate: platform apply remains `NOT_EXECUTED` until exact-head review, expected-head merge and post-merge verification complete. Artifact upload, scientific execution, Horizons traffic, protected-site use and runtime activation remain blocked; ADR-010 remains Proposed and S10 remains `UNAVAILABLE`.
+
+### BKL-031 F3-A3 exact four-resource platform apply evidence — 16/09/2026
+
+PR #233 merged the reviewed gate as `af81b807c8f6d8861ede3ecf3ae9b34e66df7790` after 8/8 exact-head checks, AI-assisted ARB `APPROVED — 100/100`, Release Quality `READY FOR EXPECTED-HEAD MERGE / NOT READY FOR DISPATCH BEFORE POST-MERGE`, and 5/5 successful post-merge workflows. Main-only WIF run `35141947085` verified the unchanged sole image and empty platform preconditions, created an exact four-add/zero-change/zero-destroy saved plan and applied only that plan. The exact network, subnet, digest-pinned Cloud Run Job and deployer invoker binding persist with Terraform state serial `3`, raw SHA-256 `11b1888ceac0f39552e735d134a134bbbd7a6a75d623ac5c06897583842cf0e4` and zero immediate drift. Job execution count is zero and the approved kernel object remains absent. `BKL-031-F3-A3-PLATFORM-APPLY-EVIDENCE-001` records the result at SHA-256 `ca5952b67904f514e2e05b7abfd8aeb4df71cfdba89958441ca233bd01e710b8`. The next gate is separately reviewed exact kernel acquisition and private content-addressed upload. Scientific execution, Horizons traffic, protected-site use and runtime activation remain `NOT_EXECUTED`; ADR-010 remains Proposed and S10 remains `UNAVAILABLE`.

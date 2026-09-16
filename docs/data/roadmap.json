@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-16",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "77cf6d7d828351de08e073df737010e0922c9d010fb461026dc1126f42187561",
+  "sourceDigest": "c0d9d550a8aa6826602d05a1afd8d9e5c0b0fb047a892041fff10b158942524e",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-A3 exact OCI image published and registry-resolved four-resource plan verified; platform unapplied; ADR-010 proposed; S10 unavailable",
+  "projectStatus": "BKL-031 F3-A3 exact four-resource platform applied and zero-drift verified; job unexecuted; kernel absent; ADR-010 proposed; S10 unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A3 separately reviewed exact four-resource platform apply",
-  "target": "Prepare and review a main-only gate that recreates the exact four-resource saved plan and applies only that plan after exact-head integration. Stop before artifact upload, job execution, Horizons request, protected-site use and runtime activation; ADR-010 remains Proposed and S10 remains UNAVAILABLE.",
+  "nextMilestone": "BKL-031 F3-A3 separately reviewed exact kernel acquisition and private content-addressed upload",
+  "target": "Prepare and review a bounded gate that acquires the owner-approved de442s.bsp from the approved source, verifies its exact identity and uploads only the content-addressed private object. Stop before job execution, Horizons request, protected-site use and runtime activation; ADR-010 remains Proposed and S10 remains UNAVAILABLE.",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -307,7 +307,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3-A3 decisions, immutable method profile, bootstrap/MI02, reproducible offline build and Artifact Registry foundation are complete. Run 35138527237 published and post-verified the exact OCI manifest sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce as the sole registry image. Run 35138798214 verified the registry-resolved digest and an authenticated plan of exactly four additions, zero changes and zero destroys while preserving empty platform state. Platform apply, artifact upload and scientific cases remain NOT EXECUTED. ADR-010 remains Proposed and S10 remains UNAVAILABLE."
+          "note": "F3-A3 decisions, immutable method profile, bootstrap/MI02, reproducible offline build, Artifact Registry foundation and exact OCI publication are complete. Main-only WIF run 35141947085 applied only the exact saved plan with four additions, zero changes and zero destroys. The private network, subnet, digest-pinned Cloud Run Job and deployer invoker binding persist at zero drift; job execution count is zero and the approved kernel object remains absent. Artifact upload and scientific cases remain NOT EXECUTED. ADR-010 remains Proposed and S10 remains UNAVAILABLE."
         },
         {
           "id": "BKL-032",
@@ -747,6 +747,14 @@
       "title": "BKL-031 F3-A3 Exact OCI Publication and Four-Resource Plan Evidence",
       "date": "2026-09-16",
       "description": "Main-only WIF run 35138527237 published and post-verified the exact OCI manifest as the sole registry image. Run 35138798214 resolved that digest and verified a saved platform plan with exactly 4 additions, 0 changes and 0 destroys. Platform apply, artifact upload and scientific execution did not occur.",
+      "status": "active"
+    },
+    {
+      "id": "M-BKL031-F3-A3-PLATFORM-APPLY-EVIDENCE",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A3 Exact Four-Resource Platform Apply Evidence",
+      "date": "2026-09-16",
+      "description": "Main-only WIF run 35141947085 applied only the verified saved plan with exactly 4 additions, 0 changes and 0 destroys. The exact private network, subnet, digest-pinned Cloud Run Job and deployer invoker binding persist with zero immediate drift. Job execution count is zero and the approved kernel object remains absent; artifact upload and scientific execution did not occur.",
       "status": "active"
     }
   ]
