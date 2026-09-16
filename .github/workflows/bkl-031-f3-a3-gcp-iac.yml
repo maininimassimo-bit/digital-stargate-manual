@@ -6,6 +6,7 @@ on:
       - ".github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-method-profile.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-container-evidence.mjs"
+      - ".github/scripts/acquire-bkl-031-f3-a3-container-artifacts.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - "infrastructure/bkl-031-f3-a3-gcp/**"
       - "docs/architecture/ADR-010-Ephemeris-Lunar-Method-and-Validation-Profile.md"
@@ -19,6 +20,7 @@ on:
       - ".github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-method-profile.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-container-evidence.mjs"
+      - ".github/scripts/acquire-bkl-031-f3-a3-container-artifacts.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - "infrastructure/bkl-031-f3-a3-gcp/**"
   workflow_dispatch:
@@ -71,3 +73,71 @@ jobs:
         run: terraform init -backend=false -input=false
       - name: Validate
         run: terraform validate -no-color
+
+  container-build-evidence:
+    name: Reproducible offline container build evidence
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Acquire only reviewed wheels and verify exact bytes
+        run: >-
+          node .github/scripts/acquire-bkl-031-f3-a3-container-artifacts.mjs
+          --destination infrastructure/bkl-031-f3-a3-gcp/container/.build/wheels
+          --evidence infrastructure/bkl-031-f3-a3-gcp/container/.build/acquisition-evidence.json
+      - name: Pull the reviewed base platform digest
+        run: docker pull --platform linux/amd64 python:3.12.14-slim-bookworm@sha256:9c47360a2a0355e2da18516d0b1c2126ec22c195d2185e97347c9d98398c5bef
+      - name: Build twice without network and require identical image IDs
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DOCKER_BUILDKIT=1
+          docker build --network=none --pull=false --no-cache --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:candidate-a --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile infrastructure/bkl-031-f3-a3-gcp
+          docker build --network=none --pull=false --no-cache --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:candidate-b --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile infrastructure/bkl-031-f3-a3-gcp
+          image_id_a="$(docker image inspect --format '{{.Id}}' dsg-bkl031-f3a3:candidate-a)"
+          image_id_b="$(docker image inspect --format '{{.Id}}' dsg-bkl031-f3a3:candidate-b)"
+          test "$image_id_a" = "$image_id_b"
+          echo "DSG_CONTAINER_IMAGE_ID=$image_id_a" | tee -a "$GITHUB_ENV" "$GITHUB_STEP_SUMMARY"
+      - name: Execute fail-closed preflight with network disabled
+        run: docker run --rm --network none dsg-bkl031-f3a3:candidate-a /bin/true
+      - name: Prove absent scientific runner exits 78
+        shell: bash
+        run: |
+          set +e
+          output="$(docker run --rm --network none dsg-bkl031-f3a3:candidate-a 2>&1)"
+          status=$?
+          set -e
+          printf '%s\n' "$output"
+          test "$status" -eq 78
+          grep -F "NOT_EXECUTED: scientific runner is not materialized" <<<"$output"
+      - name: Record bounded build evidence without upload
+        shell: bash
+        run: |
+          set -euo pipefail
+          user="$(docker image inspect --format '{{.Config.User}}' dsg-bkl031-f3a3:candidate-a)"
+          architecture="$(docker image inspect --format '{{.Architecture}}' dsg-bkl031-f3a3:candidate-a)"
+          operating_system="$(docker image inspect --format '{{.Os}}' dsg-bkl031-f3a3:candidate-a)"
+          test "$user" = "65532:65532"
+          test "$architecture" = "amd64"
+          test "$operating_system" = "linux"
+          cat <<EOF | tee -a "$GITHUB_STEP_SUMMARY"
+          BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE
+          sourceCommit=${GITHUB_SHA}
+          sourceManifestSha256=2dff1ebeb851ec99e7c6c7ecc73fb5aa7305a8a4937b6720ecb977ba6900c16c
+          imageId=${DSG_CONTAINER_IMAGE_ID}
+          os=${operating_system}
+          architecture=${architecture}
+          user=${user}
+          acquisition=EXACT_HASH_VERIFIED_EPHEMERAL
+          buildNetwork=NONE
+          reproducibility=TWO_NO_CACHE_BUILDS_IDENTICAL
+          preflight=PASS_NETWORK_NONE
+          scientificRunner=NOT_MATERIALIZED_EXIT_78
+          imagePush=NOT_EXECUTED
+          artifactUpload=NOT_EXECUTED
+          platformPlanApply=NOT_EXECUTED
+          scientificExecution=NOT_EXECUTED
+          EOF

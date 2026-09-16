@@ -3,7 +3,9 @@ FROM --platform=linux/amd64 python:3.12.14-slim-bookworm@sha256:9c47360a2a0355e2
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PIP_NO_CACHE_DIR=1 \
     PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONHASHSEED=0 \
     PYTHONUNBUFFERED=1 \
+    SOURCE_DATE_EPOCH=0 \
     XDG_CONFIG_HOME=/app/dsg/config \
     DSG_EXTERNAL_PROVIDER_POLICY=DENY \
     DSG_METHOD_PROFILE_PATH=/app/dsg/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json \
@@ -13,15 +15,13 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
 
 WORKDIR /app/dsg
 
-COPY infrastructure/bkl-031-f3-a3-gcp/container/requirements.lock /tmp/dsg/requirements.lock
+COPY container/requirements.lock /tmp/dsg/requirements.lock
+COPY container/.build/wheels/ /tmp/dsg/wheels/
 
-RUN python -m pip download \
-      --dest /tmp/dsg/wheels \
-      --only-binary=:all: \
-      --require-hashes \
-      --requirement /tmp/dsg/requirements.lock \
-    && python -m pip install \
+RUN python -m pip install \
       --no-index \
+      --no-compile \
+      --no-deps \
       --find-links=/tmp/dsg/wheels \
       --only-binary=:all: \
       --require-hashes \
@@ -30,11 +30,11 @@ RUN python -m pip download \
     && cp /tmp/dsg/wheels/astropy_iers_data-0.2026.9.14.0.56.43-py3-none-any.whl /app/dsg/artifacts/iers/ \
     && rm -rf /tmp/dsg/wheels
 
-COPY infrastructure/bkl-031-f3-a3-gcp/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json /app/dsg/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json
-COPY infrastructure/bkl-031-f3-a3-gcp/container/BKL-031-F3-A3-CONTAINER-MANIFEST-001.json /app/dsg/container/BKL-031-F3-A3-CONTAINER-MANIFEST-001.json
-COPY infrastructure/bkl-031-f3-a3-gcp/container/astropy.cfg /app/dsg/config/astropy/astropy.cfg
-COPY infrastructure/bkl-031-f3-a3-gcp/container/preflight.py /app/dsg/container/preflight.py
-COPY infrastructure/bkl-031-f3-a3-gcp/container/entrypoint.sh /app/dsg/container/entrypoint.sh
+COPY method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json /app/dsg/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json
+COPY container/BKL-031-F3-A3-CONTAINER-MANIFEST-002.json /app/dsg/container/BKL-031-F3-A3-CONTAINER-MANIFEST-002.json
+COPY container/astropy.cfg /app/dsg/config/astropy/astropy.cfg
+COPY container/preflight.py /app/dsg/container/preflight.py
+COPY container/entrypoint.sh /app/dsg/container/entrypoint.sh
 
 RUN groupadd --gid 65532 dsg \
     && useradd --uid 65532 --gid 65532 --no-create-home --shell /usr/sbin/nologin dsg \

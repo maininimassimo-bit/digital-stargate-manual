@@ -20,7 +20,7 @@ const methodProfileVerifier = fs.readFileSync(
   "utf8",
 );
 const containerManifest = fs.readFileSync(
-  path.join(infra, "container", "BKL-031-F3-A3-CONTAINER-MANIFEST-001.json"),
+  path.join(infra, "container", "BKL-031-F3-A3-CONTAINER-MANIFEST-002.json"),
   "utf8",
 );
 const containerDockerfile = fs.readFileSync(path.join(infra, "container", "Dockerfile"), "utf8");
@@ -83,11 +83,11 @@ requireText("method profile verifier", methodProfileVerifier, "e69f60e5ed7f71cd9
 requireText("method profile verifier", methodProfileVerifier, "Mutated method profile was not rejected");
 requireText("workflow", workflow, "Verify immutable method profile and reject drift");
 requireText("workflow", workflow, "Verify exact static container and IERS inclusion evidence");
-requireText("container manifest", containerManifest, '"status": "STATIC_INCLUSION_EVIDENCE_NOT_BUILT_NOT_EXECUTED"');
+requireText("container manifest", containerManifest, '"status": "BUILD_INPUT_EXACT_ARTIFACTS_REQUIRED_NOT_BUILT"');
 requireText("container manifest", containerManifest, '"sha256": "43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc"');
 requireText("container manifest", containerManifest, '"runtimeAuthority": false');
 requireText("container Dockerfile", containerDockerfile, "python:3.12.14-slim-bookworm@sha256:9c47360a2a0355e2da18516d0b1c2126ec22c195d2185e97347c9d98398c5bef");
-requireText("container verifier", containerVerifier, "7923206d85c5670ef56f9310a813c165c7d516d226c994561516c843b338412e");
+requireText("container verifier", containerVerifier, "2dff1ebeb851ec99e7c6c7ecc73fb5aa7305a8a4937b6720ecb977ba6900c16c");
 requireText("platform example", platformExample, "43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc");
 requireText("platform", platform, "DSG_KERNEL_URI");
 requireText("platform example", platformExample, "BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16");
