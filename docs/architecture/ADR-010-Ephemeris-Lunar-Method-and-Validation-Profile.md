@@ -12,7 +12,7 @@
 
 ## Context
 
-F3-A1 and F3-A2 have completed repository authority, but S08/S09 remain unavailable to runtime and S10 remains `UNAVAILABLE`. The owner approved the prudent method, accuracy, time-data, host and capacity baseline and completed F3-OD05 with the exact `de442s.bsp` identity, coverage, provenance, notices and SHA-256. The exact dependency/IERS inputs, reproducible offline container build and authenticated exact-head platform plan are verified; image publication, platform materialization and scientific validation remain absent.
+F3-A1 and F3-A2 have completed repository authority, but S08/S09 remain unavailable to runtime and S10 remains `UNAVAILABLE`. The owner approved the prudent method, accuracy, time-data, host and capacity baseline and completed F3-OD05 with the exact `de442s.bsp` identity, coverage, provenance, notices and SHA-256. Exact dependency/IERS inputs, reproducible offline container build, OCI publication and four-resource platform materialization are verified; the kernel object and scientific validation remain absent.
 
 This ADR records complete owner dispositions for F3-OD04–F3-OD10 and authorizes repository evidence and validation-only infrastructure source. It remains Proposed and does not authorize image publication, platform apply, further scientific-artifact acquisition, artifact upload, spike execution or runtime integration.
 
