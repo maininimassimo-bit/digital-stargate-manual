@@ -20,6 +20,7 @@ on:
       - ".github/scripts/verify-bkl-031-f3-a3-runner-platform-verification.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-exact-scientific-execution.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-scientific-execution-recovery.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-scientific-execution-cancellation.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - ".github/workflows/bkl-031-f3-a3-authenticated-platform-plan.yml"
       - ".github/workflows/bkl-031-f3-a3-registry-foundation.yml"
@@ -32,6 +33,7 @@ on:
       - ".github/workflows/bkl-031-f3-a3-runner-platform-verification.yml"
       - ".github/workflows/bkl-031-f3-a3-exact-scientific-execution.yml"
       - ".github/workflows/bkl-031-f3-a3-scientific-execution-recovery.yml"
+      - ".github/workflows/bkl-031-f3-a3-scientific-execution-cancellation.yml"
       - "infrastructure/bkl-031-f3-a3-gcp/**"
       - "docs/architecture/ADR-010-Ephemeris-Lunar-Method-and-Validation-Profile.md"
       - "docs/architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md"
@@ -58,6 +60,7 @@ on:
       - ".github/scripts/verify-bkl-031-f3-a3-runner-platform-verification.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-exact-scientific-execution.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-scientific-execution-recovery.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-scientific-execution-cancellation.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - ".github/workflows/bkl-031-f3-a3-authenticated-platform-plan.yml"
       - ".github/workflows/bkl-031-f3-a3-registry-foundation.yml"
@@ -70,6 +73,7 @@ on:
       - ".github/workflows/bkl-031-f3-a3-runner-platform-verification.yml"
       - ".github/workflows/bkl-031-f3-a3-exact-scientific-execution.yml"
       - ".github/workflows/bkl-031-f3-a3-scientific-execution-recovery.yml"
+      - ".github/workflows/bkl-031-f3-a3-scientific-execution-cancellation.yml"
       - "infrastructure/bkl-031-f3-a3-gcp/**"
   workflow_dispatch:
 
@@ -120,6 +124,8 @@ jobs:
         run: node .github/scripts/verify-bkl-031-f3-a3-exact-scientific-execution.mjs
       - name: Verify scientific execution read-only recovery gate
         run: node .github/scripts/verify-bkl-031-f3-a3-scientific-execution-recovery.mjs
+      - name: Verify exact stuck scientific execution cancellation gate
+        run: node .github/scripts/verify-bkl-031-f3-a3-scientific-execution-cancellation.mjs
 
   terraform:
     name: Terraform validate (${{ matrix.directory }})

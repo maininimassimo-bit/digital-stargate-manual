@@ -1,0 +1,160 @@
+name: BKL-031 F3-A3 Exact Stuck Scientific Execution Cancellation
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: Exact main commit authorized to cancel the identified stuck execution
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: bkl-031-f3-a3-scientific-execution-recovery
+  cancel-in-progress: false
+
+jobs:
+  cancel-exact-stuck-execution:
+    name: Exact-head cancellation of identified stuck execution
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+      GCP_REGION: ${{ vars.GCP_REGION }}
+      GCP_WIF_PROVIDER: ${{ vars.GCP_WIF_PROVIDER }}
+      GCP_DEPLOY_SERVICE_ACCOUNT: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+      GCP_STATE_BUCKET: ${{ vars.GCP_STATE_BUCKET }}
+      GCP_EVIDENCE_BUCKET: ${{ vars.GCP_EVIDENCE_BUCKET }}
+      DSG_AUTHORIZED_COMMIT: ${{ inputs.expected_commit }}
+      DSG_EXECUTION_NAME: dsg-f3-a3-spike-9drzb
+      DSG_EVIDENCE_PREFIX: bkl-031/f3-a3/scientific-spike/9db0267529b6d46a2510b415e4b3f51d668ff024
+      DSG_PLATFORM_STATE_SHA256: 084b68da6d20d9523ceabce67766cfc211b71f97ee12d8f4e7a0b4a64f57b89b
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Require exact authorized main head and identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${GITHUB_REF}" = "refs/heads/main"
+          test "${GITHUB_SHA}" = "${DSG_AUTHORIZED_COMMIT}"
+          grep -Eq '^[0-9a-f]{40}$' <<<"${GITHUB_SHA}"
+          test "${GCP_PROJECT_ID}" = "digital-stargate-telemetry"
+          test "${GCP_REGION}" = "europe-west8"
+          test "${GCP_WIF_PROVIDER}" = "projects/183451329061/locations/global/workloadIdentityPools/dsg-f3-a3-github/providers/github-main"
+          test "${GCP_DEPLOY_SERVICE_ACCOUNT}" = "dsg-f3-a3-deployer@digital-stargate-telemetry.iam.gserviceaccount.com"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+
+      - name: Verify exact cancellation policy
+        run: node .github/scripts/verify-bkl-031-f3-a3-scientific-execution-cancellation.mjs
+
+      - name: Authenticate to Google Cloud through main-only WIF
+        id: auth
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+          create_credentials_file: true
+          export_environment_variables: true
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
+        with:
+          version: "583.0.0"
+
+      - name: Require the exact non-started execution and unchanged platform
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(gcloud auth list --filter=status:ACTIVE --format='value(account)')" = "$GCP_DEPLOY_SERVICE_ACCOUNT"
+          gcloud config set project "$GCP_PROJECT_ID" >/dev/null
+          gcloud run jobs executions list --job=dsg-f3-a3-spike --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/executions-before.json
+          gcloud run jobs executions describe "$DSG_EXECUTION_NAME" --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/execution-before.json
+          gcloud storage objects list "gs://${GCP_EVIDENCE_BUCKET}/${DSG_EVIDENCE_PREFIX}/**" --format=json >/tmp/evidence-before.json
+          gcloud storage cat "gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/platform/default.tfstate" >/tmp/platform-state-before.json
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          executions = json.loads(Path('/tmp/executions-before.json').read_text())
+          execution = json.loads(Path('/tmp/execution-before.json').read_text())
+          if len(executions) != 1:
+              raise SystemExit(f'expected exactly one existing execution, received {len(executions)}')
+          name = execution.get('metadata', {}).get('name') or execution.get('name', '').rsplit('/', 1)[-1]
+          if name != 'dsg-f3-a3-spike-9drzb':
+              raise SystemExit(f'unexpected execution identity: {name!r}')
+          if execution.get('metadata', {}).get('creationTimestamp') != '2026-09-16T21:57:42.096014Z':
+              raise SystemExit('execution creation identity changed')
+          conditions = execution.get('status', {}).get('conditions', [])
+          by_type = {condition.get('type'): condition for condition in conditions}
+          for condition_type in ('Completed', 'Started'):
+              condition = by_type.get(condition_type, {})
+              if str(condition.get('status')).lower() != 'unknown' or condition.get('message') != 'Waiting for execution to start.':
+                  raise SystemExit(f'execution is no longer in the reviewed non-started state: {conditions!r}')
+          if not any(c.get('type') == 'Retry' and c.get('reason') == 'WaitingForOperation' for c in conditions):
+              raise SystemExit(f'execution is not waiting for the identified operation: {conditions!r}')
+          if json.loads(Path('/tmp/evidence-before.json').read_text()) != []:
+              raise SystemExit('scientific evidence exists; cancellation gate must fail closed')
+          state_raw = Path('/tmp/platform-state-before.json').read_bytes()
+          if hashlib.sha256(state_raw).hexdigest() != '084b68da6d20d9523ceabce67766cfc211b71f97ee12d8f4e7a0b4a64f57b89b':
+              raise SystemExit('platform state changed before cancellation')
+          PY
+
+      - name: Cancel only the identified stuck execution
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcloud run jobs executions cancel "$DSG_EXECUTION_NAME" \
+            --project="$GCP_PROJECT_ID" \
+            --region="$GCP_REGION" \
+            --no-async \
+            --quiet \
+            --format=json \
+            >/tmp/cancel-operation.json
+
+      - name: Verify cancellation, empty evidence and unchanged platform
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcloud run jobs executions list --job=dsg-f3-a3-spike --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/executions-after.json
+          gcloud run jobs executions describe "$DSG_EXECUTION_NAME" --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/execution-after.json
+          gcloud storage objects list "gs://${GCP_EVIDENCE_BUCKET}/${DSG_EVIDENCE_PREFIX}/**" --format=json >/tmp/evidence-after.json
+          gcloud storage cat "gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/platform/default.tfstate" >/tmp/platform-state-after.json
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          executions = json.loads(Path('/tmp/executions-after.json').read_text())
+          execution = json.loads(Path('/tmp/execution-after.json').read_text())
+          if len(executions) != 1:
+              raise SystemExit(f'execution inventory changed unexpectedly: {len(executions)}')
+          conditions = execution.get('status', {}).get('conditions', [])
+          completed = [c for c in conditions if c.get('type') == 'Completed']
+          if len(completed) != 1 or str(completed[0].get('status')).lower() != 'false' or completed[0].get('reason') != 'Cancelled':
+              raise SystemExit(f'execution did not reach exact cancelled state: {conditions!r}')
+          if json.loads(Path('/tmp/evidence-after.json').read_text()) != []:
+              raise SystemExit('scientific evidence appeared during cancellation')
+          state_raw = Path('/tmp/platform-state-after.json').read_bytes()
+          if hashlib.sha256(state_raw).hexdigest() != '084b68da6d20d9523ceabce67766cfc211b71f97ee12d8f4e7a0b4a64f57b89b':
+              raise SystemExit('platform state changed during cancellation')
+          print('DSG_SCIENTIFIC_CANCELLATION_FACTS=' + json.dumps({
+              'executionName': 'dsg-f3-a3-spike-9drzb',
+              'completedCondition': completed[0],
+              'executionCount': len(executions),
+              'evidenceObjectCount': 0,
+              'platformStateRawSha256': hashlib.sha256(state_raw).hexdigest(),
+              'scientificCalculation': 'NOT_STARTED',
+              'secondExecution': 'NOT_EXECUTED',
+              'cloudMutation': 'EXACT_EXECUTION_CANCELLATION_ONLY',
+          }, sort_keys=True, separators=(',', ':')))
+          PY
