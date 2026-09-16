@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0",
+  "incidentId": "BKL-031-F3-A3-REPLACEMENT-EXECUTION-INCIDENT-001",
+  "status": "TERMINAL_REPLACEMENT_FAILURE_READ_ONLY_FORENSICS_REQUIRED",
+  "recordedAtUtc": "2026-09-16T23:03:40Z",
+  "sourceCommit": "d9fd69d978dd97e680309b55db547b34c84c877f",
+  "workflow": {
+    "name": "BKL-031 F3-A3 Exact Single Replacement Scientific Execution",
+    "runId": 35160489890,
+    "jobId": 105009877318,
+    "conclusion": "failure",
+    "failedStep": "Retrieve and verify the single private scientific evidence object",
+    "url": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35160489890"
+  },
+  "observed": {
+    "preconditions": "PASSED",
+    "executionName": "dsg-f3-a3-spike-jv646",
+    "executionCount": 2,
+    "executionResult": "COMPLETED_FALSE_NON_ZERO_EXIT_CODE_1",
+    "completionTime": "2026-09-16T23:03:28.655728Z",
+    "message": "Task dsg-f3-a3-spike-jv646-task0 failed with exit code: 1 and message: The container exited with an error.",
+    "evidenceRetrievalStep": "ENTERED_AND_STOPPED_ON_EXECUTION_FAILURE",
+    "finalPostconditionStep": "SKIPPED"
+  },
+  "controls": {
+    "thirdExecution": "PROHIBITED_NOT_EXECUTED",
+    "terraformMutation": "NOT_EXECUTED",
+    "registryMutation": "NOT_EXECUTED",
+    "kernelMutation": "NOT_EXECUTED",
+    "platformStateRawSha256": "b12cbd6c107cd7e38d47fbe353ab125ee909dc77d0bc8c26172bfa484b722889"
+  },
+  "nextGate": "SEPARATELY_REVIEWED_READ_ONLY_REPLACEMENT_EXECUTION_FORENSICS"
+}
