@@ -107,6 +107,23 @@ for (const fragment of [
 ]) if (!dockerfile.includes(fragment)) fail(`runner Dockerfile missing: ${fragment}`);
 if (/\b(latest|curl|wget)\b/i.test(dockerfile) || /pip\s+download/i.test(dockerfile)) fail("runner Dockerfile contains mutable or network acquisition instructions");
 
+const workflow = read(path.join(".github", "workflows", "bkl-031-f3-a3-gcp-iac.yml")).toString("utf8");
+for (const fragment of [
+  "for candidate in a b; do",
+  "type=oci,dest=/tmp/dsg-runner-${candidate}.tar,oci-mediatypes=true,rewrite-timestamp=true,compatibility-version=30",
+  '--metadata-file "/tmp/dsg-runner-${candidate}.json"',
+  '--file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile.runner infrastructure/bkl-031-f3-a3-gcp',
+  'test "$digest_a" = "$digest_b"',
+  'test "$config_a" = "$config_b"',
+  'test "$image_id" = "$DSG_RUNNER_CONFIG_DIGEST"',
+  "TWO_OCI_NO_CACHE_BUILDS_REWRITE_TIMESTAMP_IDENTICAL",
+  "containerPush=NOT_EXECUTED",
+  "scientificExecution=NOT_EXECUTED",
+]) if (!workflow.includes(fragment)) fail(`runner candidate workflow missing: ${fragment}`);
+if ((workflow.match(/Dockerfile\.runner infrastructure\/bkl-031-f3-a3-gcp/g) || []).length !== 2) {
+  fail("runner candidate workflow must contain one two-iteration OCI build site and one loadable build site");
+}
+
 const mutations = [
   (value) => { value.controls.scientificExecution = "EXECUTED"; },
   (value) => { value.campaign.siteClassification = "PROTECTED"; },
