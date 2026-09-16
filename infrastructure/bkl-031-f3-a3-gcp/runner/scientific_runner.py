@@ -241,47 +241,51 @@ def calculate(campaign: dict[str, Any], kernel_path: Path, profile: dict[str, An
                     skyfield_ephemeris[SKYFIELD_TARGET_NAMES[target]]
                 ).apparent()
                 secondary_alt, secondary_az, _ = secondary_apparent.altaz()
-                altitude_error = abs(primary_altaz.alt.deg - secondary_alt.degrees) * 3600.0
-                azimuth_error = circular_difference_degrees(primary_altaz.az.deg, secondary_az.degrees) * 3600.0
-                spherical_error = primary_altaz.separation(
+                primary_altitude = float(primary_altaz.alt.deg)
+                primary_azimuth = float(primary_altaz.az.deg)
+                secondary_altitude = float(secondary_alt.degrees)
+                secondary_azimuth = float(secondary_az.degrees)
+                altitude_error = float(abs(primary_altitude - secondary_altitude) * 3600.0)
+                azimuth_error = float(circular_difference_degrees(primary_azimuth, secondary_azimuth) * 3600.0)
+                spherical_error = float(primary_altaz.separation(
                     SkyCoord(alt=secondary_alt.degrees * u.deg, az=secondary_az.degrees * u.deg,
                              frame=AltAz(obstime=astropy_time, location=astropy_location, pressure=0 * u.Pa))
-                ).arcsecond
-                if min(primary_altaz.alt.deg, secondary_alt.degrees) >= thresholds["altitudeMinimumDegrees"]:
-                    altitude_pass: bool | None = altitude_error <= thresholds["altitudeMaximumErrorArcseconds"]
+                ).arcsecond)
+                if min(primary_altitude, secondary_altitude) >= thresholds["altitudeMinimumDegrees"]:
+                    altitude_pass: bool | None = bool(altitude_error <= thresholds["altitudeMaximumErrorArcseconds"])
                 else:
                     altitude_pass = None
-                if min(primary_altaz.alt.deg, secondary_alt.degrees) < thresholds["azimuthMinimumAltitudeDegrees"]:
+                if min(primary_altitude, secondary_altitude) < thresholds["azimuthMinimumAltitudeDegrees"]:
                     azimuth_pass: bool | None = None
-                elif max(primary_altaz.alt.deg, secondary_alt.degrees) <= thresholds["azimuthMaximumAltitudeDegrees"]:
-                    azimuth_pass = azimuth_error <= thresholds["azimuthMaximumErrorArcseconds"]
+                elif max(primary_altitude, secondary_altitude) <= thresholds["azimuthMaximumAltitudeDegrees"]:
+                    azimuth_pass = bool(azimuth_error <= thresholds["azimuthMaximumErrorArcseconds"])
                 else:
-                    azimuth_pass = spherical_error <= thresholds["nearZenithSphericalSeparationMaximumErrorArcseconds"]
+                    azimuth_pass = bool(spherical_error <= thresholds["nearZenithSphericalSeparationMaximumErrorArcseconds"])
                 method_positions[target] = {"primary": primary_gcrs, "secondary": secondary_apparent}
                 vectors.append({
                     "instantUtc": instant,
                     "target": target,
-                    "primary": {"altitudeDegrees": primary_altaz.alt.deg, "azimuthDegrees": primary_altaz.az.deg},
-                    "crossCheck": {"altitudeDegrees": secondary_alt.degrees, "azimuthDegrees": secondary_az.degrees},
+                    "primary": {"altitudeDegrees": primary_altitude, "azimuthDegrees": primary_azimuth},
+                    "crossCheck": {"altitudeDegrees": secondary_altitude, "azimuthDegrees": secondary_azimuth},
                     "metrics": {"altitudeErrorArcseconds": altitude_error, "altitudePass": altitude_pass,
                                 "azimuthErrorArcseconds": azimuth_error, "azimuthPass": azimuth_pass,
                                 "sphericalErrorArcseconds": spherical_error},
                 })
-            primary_sep = method_positions["mars"]["primary"].separation(method_positions["moon"]["primary"]).arcsecond
-            secondary_sep = method_positions["mars"]["secondary"].separation_from(method_positions["moon"]["secondary"]).arcseconds()
-            separation_error = abs(primary_sep - secondary_sep)
-            elongation_primary = get_body("sun", astropy_time).separation(get_body("moon", astropy_time)).rad
+            primary_sep = float(method_positions["mars"]["primary"].separation(method_positions["moon"]["primary"]).arcsecond)
+            secondary_sep = float(method_positions["mars"]["secondary"].separation_from(method_positions["moon"]["secondary"]).arcseconds())
+            separation_error = float(abs(primary_sep - secondary_sep))
+            elongation_primary = float(get_body("sun", astropy_time).separation(get_body("moon", astropy_time)).rad)
             earth = skyfield_ephemeris["earth"]
-            elongation_secondary = earth.at(skyfield_time).observe(skyfield_ephemeris["sun"]).apparent().separation_from(
-                earth.at(skyfield_time).observe(skyfield_ephemeris["moon"]).apparent()).radians
+            elongation_secondary = float(earth.at(skyfield_time).observe(skyfield_ephemeris["sun"]).apparent().separation_from(
+                earth.at(skyfield_time).observe(skyfield_ephemeris["moon"]).apparent()).radians)
             illumination_primary = (1.0 - math.cos(elongation_primary)) / 2.0
             illumination_secondary = (1.0 - math.cos(elongation_secondary)) / 2.0
             vectors[-1]["sharedMetrics"] = {
                 "targetMoonSeparationErrorArcseconds": separation_error,
-                "targetMoonSeparationPass": separation_error <= thresholds["targetMoonSeparationMaximumErrorArcseconds"],
+                "targetMoonSeparationPass": bool(separation_error <= thresholds["targetMoonSeparationMaximumErrorArcseconds"]),
                 "lunarIlluminationConvention": "GEOCENTRIC_APPARENT_ELONGATION_COSINE_APPROXIMATION",
                 "lunarIlluminationAbsoluteDifference": abs(illumination_primary - illumination_secondary),
-                "lunarIlluminationPass": abs(illumination_primary - illumination_secondary) <= thresholds["lunarIlluminationMaximumAbsoluteDifference"],
+                "lunarIlluminationPass": bool(abs(illumination_primary - illumination_secondary) <= thresholds["lunarIlluminationMaximumAbsoluteDifference"]),
             }
         transit = campaign["transit"]
         transit_start = parse_utc(transit["startUtc"], "transit.startUtc")
@@ -317,13 +321,13 @@ def calculate(campaign: dict[str, Any], kernel_path: Path, profile: dict[str, An
             "primaryTransitUtc": primary_transit_time.isoformat(timespec="microseconds").replace("+00:00", "Z"),
             "crossCheckTransitUtc": secondary_transit_time.isoformat(timespec="microseconds").replace("+00:00", "Z"),
             "errorSeconds": transit_error_seconds,
-            "pass": transit_error_seconds <= thresholds["transitCulminationMaximumErrorSeconds"],
+            "pass": bool(transit_error_seconds <= thresholds["transitCulminationMaximumErrorSeconds"]),
             "method": "BOUNDED_ONE_MINUTE_GRID_WITH_LOCAL_PARABOLIC_REFINEMENT",
         }
     metric_passes = [value for vector in vectors for key, value in vector["metrics"].items() if key.endswith("Pass") and value is not None]
     metric_passes.extend(value for vector in vectors for key, value in vector.get("sharedMetrics", {}).items() if key.endswith("Pass"))
     metric_passes.append(transit_metric["pass"])
-    return {"vectors": vectors, "metricPassCount": sum(metric_passes), "metricEvaluationCount": len(metric_passes),
+    return {"vectors": vectors, "metricPassCount": int(sum(metric_passes)), "metricEvaluationCount": len(metric_passes),
             "transit": transit_metric, "allEvaluatedMetricsPass": all(metric_passes)}
 
 

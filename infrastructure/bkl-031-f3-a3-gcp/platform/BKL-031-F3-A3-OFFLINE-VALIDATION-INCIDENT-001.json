@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0",
+  "incidentId": "BKL-031-F3-A3-OFFLINE-VALIDATION-INCIDENT-001",
+  "status": "FAILED_CLOSED_RUNNER_JSON_NORMALIZATION_REQUIRED",
+  "recordedAtUtc": "2026-09-16T23:39:00Z",
+  "workflowRunId": 35163106441,
+  "workflowJobId": 105018094036,
+  "sourceCommit": "7a15082af5ae7b4f314790a313dc857bfa580190",
+  "runnerManifest": "BKL-031-F3-A3-RUNNER-MANIFEST-002",
+  "kernel": {
+    "generation": "1789590110146663",
+    "sha256": "54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c",
+    "retrieval": "PRIVATE_GCS_READ_ONLY_PASS"
+  },
+  "execution": {
+    "containerNetwork": "NONE",
+    "containerFilesystem": "READ_ONLY",
+    "preflight": "PASS",
+    "marsTargetResolution": "PASS_MARS_BARYCENTER_4",
+    "calculationCount": 2,
+    "failureStage": "REPEATABILITY_CANONICAL_JSON_SERIALIZATION",
+    "exception": "TypeError",
+    "exceptionMessage": "Object of type int64 is not JSON serializable",
+    "failedSourceLine": 47
+  },
+  "analysis": {
+    "rootCause": "NUMPY_BOOLEAN_SUM_PRODUCED_INT64_METRIC_PASS_COUNT",
+    "boundedCorrection": "normalize scientific scalar values and pass results to native Python float bool and int types before canonical JSON serialization",
+    "methodProfileChange": "NOT_REQUIRED",
+    "kernelChange": "NOT_REQUIRED",
+    "networkChange": "NOT_REQUIRED"
+  },
+  "controls": {
+    "cloudRunJobExecution": "NOT_EXECUTED",
+    "cloudMutation": "NOT_EXECUTED",
+    "evidenceUpload": "NOT_EXECUTED",
+    "externalReferenceTraffic": "NOT_EXECUTED",
+    "protectedSiteUse": "NOT_EXECUTED",
+    "registryMutation": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED"
+  },
+  "nextGate": "REVIEW_NATIVE_SCALAR_NORMALIZATION_AND_REPEAT_OFFLINE_EXACT_KERNEL_VALIDATION"
+}
