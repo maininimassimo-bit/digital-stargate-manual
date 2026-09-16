@@ -127,7 +127,7 @@ jobs:
           active_account="$(gcloud auth list --filter=status:ACTIVE --format='value(account)')"
           test "$active_account" = "$GCP_DEPLOY_SERVICE_ACCOUNT"
           gcloud config set project "$GCP_PROJECT_ID" >/dev/null
-          gcloud storage buckets describe "gs://${GCP_STATE_BUCKET}" >/tmp/state-bucket.json
+          gcloud storage ls "gs://${GCP_STATE_BUCKET}" >/tmp/state-bucket-prefixes.txt
           set +e
           gcloud artifacts repositories describe dsg-f3-a3 --project="$GCP_PROJECT_ID" --location="$GCP_REGION" >/tmp/unexpected-repository.json 2>/tmp/repository-describe.err
           repository_status=$?
@@ -257,13 +257,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          gcloud storage buckets describe "gs://${GCP_STATE_BUCKET}" >/tmp/state-bucket-final.json
-          listing="$(gcloud storage ls "gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/platform/**" 2>/dev/null || true)"
-          if grep -Eq 'default\.(tfstate|tflock)$' <<<"$listing"; then
-            printf '%s\n' "$listing" >&2
-            echo "Unexpected persistent platform state or lock" >&2
-            exit 1
-          fi
+          gcloud storage ls "gs://${GCP_STATE_BUCKET}" >/tmp/state-bucket-prefixes-final.txt
+          set +e
+          listing="$(gcloud storage ls "gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/platform/**" 2>/tmp/platform-state-list.err)"
+          list_status=$?
+          set -e
+          test "$list_status" -eq 1
+          test -z "$listing"
+          grep -F "matched no objects" /tmp/platform-state-list.err
           cat <<'EOF' >> "$GITHUB_STEP_SUMMARY"
 
           apply=NOT_EXECUTED
