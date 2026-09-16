@@ -42,4 +42,3 @@ Local validation also passed the immutable method profile, GCP policy, roadmap g
 ## Readiness recommendation
 
 Ready for expected-head merge as a static repository-evidence increment. After merge, verify push workflows and preserve ADR-010 Proposed and S10 `UNAVAILABLE`. The next gate is bounded acquisition and local container-build evidence; stop before push, platform plan/apply, upload or scientific execution.
-

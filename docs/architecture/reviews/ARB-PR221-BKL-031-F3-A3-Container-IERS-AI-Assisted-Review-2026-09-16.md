@@ -60,4 +60,3 @@ None.
 ## Decision
 
 Approved with Conditions for static repository integration. The reviewed head closes the exact container/IERS source-evidence gate only. It grants no artifact-acquisition, build, cloud, scientific or runtime authority.
-
