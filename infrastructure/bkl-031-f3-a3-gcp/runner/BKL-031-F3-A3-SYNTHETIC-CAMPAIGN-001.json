@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0",
+  "campaignId": "BKL-031-F3-A3-SYNTHETIC-CAMPAIGN-001",
+  "environment": "TEST",
+  "authority": "NONE",
+  "site": {
+    "siteId": "SYNTHETIC-MID-LATITUDE-001",
+    "latitudeDegrees": 45.0,
+    "longitudeDegrees": 10.0,
+    "elevationMeters": 0.0,
+    "classification": "SYNTHETIC_PUBLIC"
+  },
+  "timeScale": "UTC",
+  "frame": "ALTAZ",
+  "datum": "WGS84",
+  "refractionMode": "DISABLED",
+  "targets": [
+    "mars",
+    "moon"
+  ],
+  "instantsUtc": [
+    "2026-09-16T00:00:00Z",
+    "2026-09-16T06:00:00Z",
+    "2026-09-16T12:00:00Z",
+    "2026-09-16T18:00:00Z"
+  ],
+  "transit": {
+    "target": "mars",
+    "startUtc": "2026-09-16T00:00:00Z",
+    "endUtc": "2026-09-17T00:00:00Z",
+    "gridStepSeconds": 60
+  }
+}

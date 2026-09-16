@@ -2,12 +2,13 @@
 
 This directory contains the governed Terraform and container gates for the future ephemeris/lunar validation spike.
 
-Current state: BOOTSTRAP APPLIED, REMOTE STATE AND BACKEND PROMOTION POST-VERIFIED, REPRODUCIBLE OFFLINE CONTAINER BUILD AND NETWORK-DISABLED PREFLIGHT VERIFIED, REGISTRY FOUNDATION APPLIED, EXACT OCI IMAGE PUBLISHED, EXACT FOUR-RESOURCE PLATFORM APPLIED AND ZERO-DRIFT VERIFIED, EXACT APPROVED KERNEL PRIVATELY PUBLISHED AND FULL-READ-BACK VERIFIED, JOB NOT EXECUTED.
+Current state: BOOTSTRAP APPLIED, REMOTE STATE AND BACKEND PROMOTION POST-VERIFIED, PREFLIGHT IMAGE PUBLISHED, EXACT FOUR-RESOURCE PLATFORM APPLIED AND ZERO-DRIFT VERIFIED, EXACT APPROVED KERNEL PRIVATELY PUBLISHED AND FULL-READ-BACK VERIFIED, BOUNDED SCIENTIFIC RUNNER SOURCE GATE PREPARED, JOB NOT EXECUTED.
 
 ## Directories
 
 - bootstrap: enables required APIs, creates the GitHub Workload Identity Federation trust, deployer/runtime service accounts, and private state/data/evidence buckets.
-- container: records the exact linux/amd64 base image, hash-locked Python wheels, pinned IERS-A snapshot identity, offline Astropy policy and fail-closed entrypoint for a future build.
+- container: records the exact linux/amd64 base image, hash-locked Python wheels, pinned IERS-A snapshot identity, offline Astropy policy, fail-closed entrypoint and separate runner-candidate Dockerfile.
+- runner: stores the bounded scientific runner and reviewed synthetic/public campaign fixture; neither file grants publication, platform-update or execution authority.
 - method-profile: stores the canonical owner-approved decision profile used by the future container preflight.
 - registry: owns only the `dsg-f3-a3` Docker repository in a dedicated Terraform state.
 - platform: owns the isolated VPC/subnet without Cloud NAT and the digest-pinned Cloud Run Job after image publication.
@@ -86,6 +87,8 @@ The first dispatch, run `35145051566`, stopped before acquisition because the le
 
 PR #236 merged that least-privilege remediation as `824afce15fe119b94e436fd19ec185d59e91e02c`. Run `35146023621` passed the exact bootstrap/platform/job/empty-prefix preconditions, made one non-redirected request to the approved NAIF source, verified the approved size, SPICE header, SHA-256 and MD5, and made one destination-generation-zero upload to the private content-addressed URI. GCS generation `1789590110146663` was then read back completely and reverified; the prefix contains exactly one object and Cloud Run execution count remains zero. `BKL-031-F3-A3-KERNEL-PUBLICATION-EVIDENCE-001` records the result at SHA-256 `53ca4364cd8c24495a5a7f4d1ca8bf6af3dfd1683ff6e8d73ffad7b884ef399b`. The next gate is separately reviewed exact scientific-spike execution. Horizons traffic, protected-site use and runtime activation remain blocked.
 
+The published image is preflight-only and deliberately exits `78` when invoked without an override. `BKL-031-F3-A3-RUNNER-MANIFEST-001` therefore prepares a separate candidate image containing the exact synthetic/public fixture and a bounded fail-closed runner. It verifies the private kernel digest after read-only acquisition, evaluates Astropy 8.0.1 against Skyfield 1.55 using the same approved SPK, records each metric independently, repeats the calculation for deterministic-output evidence and writes one generation-zero evidence object. It permits only the metadata service and private Google Storage API; Horizons, protected-site data and runtime integration remain prohibited. CI builds the candidate twice offline and runs only its no-network contract self-test. No image publication, platform mutation or scientific calculation belongs to this source gate.
+
 ## Local validation
 
 Run:
@@ -99,14 +102,16 @@ Run:
 7. node .github/scripts/verify-bkl-031-f3-a3-exact-oci-publication.mjs
 8. node .github/scripts/verify-bkl-031-f3-a3-platform-apply-gate.mjs
 9. node .github/scripts/verify-bkl-031-f3-a3-kernel-acquisition-upload.mjs
-10. terraform -chdir=bootstrap fmt -check
-11. terraform -chdir=bootstrap init -backend=false
-12. terraform -chdir=bootstrap validate
-13. terraform -chdir=registry fmt -check
-14. terraform -chdir=registry init -backend=false
-15. terraform -chdir=registry validate
-16. terraform -chdir=platform fmt -check
-17. terraform -chdir=platform init -backend=false
-18. terraform -chdir=platform validate
+10. node .github/scripts/verify-bkl-031-f3-a3-scientific-runner-gate.mjs
+11. python infrastructure/bkl-031-f3-a3-gcp/runner/scientific_runner.py --contract-self-test
+12. terraform -chdir=bootstrap fmt -check
+13. terraform -chdir=bootstrap init -backend=false
+14. terraform -chdir=bootstrap validate
+15. terraform -chdir=registry fmt -check
+16. terraform -chdir=registry init -backend=false
+17. terraform -chdir=registry validate
+18. terraform -chdir=platform fmt -check
+19. terraform -chdir=platform init -backend=false
+20. terraform -chdir=platform validate
 
 No command above authenticates to GCP or mutates cloud resources.

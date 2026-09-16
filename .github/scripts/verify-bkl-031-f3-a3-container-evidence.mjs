@@ -219,7 +219,7 @@ for (const fragment of [
   "rewrite-timestamp=true",
   "compatibility-version=30",
 ]) if (!workflow.includes(fragment)) fail(`workflow reproducible build missing: ${fragment}`);
-equal(workflow.split("rewrite-timestamp=true").length - 1, 2, "timestamp-rewriting exporter count");
+equal(workflow.split("rewrite-timestamp=true").length - 1, 4, "historical and runner timestamp-rewriting exporter count");
 
 const acquisition = fs.readFileSync(path.join(root, ".github", "scripts", "acquire-bkl-031-f3-a3-container-artifacts.mjs"), "utf8");
 for (const fragment of [

@@ -14,6 +14,7 @@ on:
       - ".github/scripts/verify-bkl-031-f3-a3-platform-apply-gate.mjs"
       - ".github/scripts/acquire-bkl-031-f3-a3-kernel.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-kernel-acquisition-upload.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-scientific-runner-gate.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - ".github/workflows/bkl-031-f3-a3-authenticated-platform-plan.yml"
       - ".github/workflows/bkl-031-f3-a3-registry-foundation.yml"
@@ -41,6 +42,7 @@ on:
       - ".github/scripts/verify-bkl-031-f3-a3-platform-apply-gate.mjs"
       - ".github/scripts/acquire-bkl-031-f3-a3-kernel.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-kernel-acquisition-upload.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-scientific-runner-gate.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - ".github/workflows/bkl-031-f3-a3-authenticated-platform-plan.yml"
       - ".github/workflows/bkl-031-f3-a3-registry-foundation.yml"
@@ -86,6 +88,8 @@ jobs:
         run: node .github/scripts/verify-bkl-031-f3-a3-platform-apply-gate.mjs
       - name: Verify exact kernel acquisition and private upload gate
         run: node .github/scripts/verify-bkl-031-f3-a3-kernel-acquisition-upload.mjs
+      - name: Verify bounded scientific runner source gate
+        run: node .github/scripts/verify-bkl-031-f3-a3-scientific-runner-gate.mjs
 
   terraform:
     name: Terraform validate (${{ matrix.directory }})
@@ -198,4 +202,74 @@ jobs:
           artifactUpload=NOT_EXECUTED
           platformPlanApply=NOT_EXECUTED
           scientificExecution=NOT_EXECUTED
+          EOF
+
+  scientific-runner-candidate:
+    name: Reproducible scientific runner candidate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify runner source contract
+        run: node .github/scripts/verify-bkl-031-f3-a3-scientific-runner-gate.mjs
+      - name: Execute contract self-test without scientific libraries or network
+        run: python infrastructure/bkl-031-f3-a3-gcp/runner/scientific_runner.py --contract-self-test
+      - name: Acquire only reviewed wheels and verify exact bytes
+        run: >-
+          node .github/scripts/acquire-bkl-031-f3-a3-container-artifacts.mjs
+          --destination infrastructure/bkl-031-f3-a3-gcp/container/.build/wheels
+          --evidence infrastructure/bkl-031-f3-a3-gcp/container/.build/acquisition-evidence.json
+      - name: Pull the reviewed base platform digest
+        run: docker pull --platform linux/amd64 python:3.12.14-slim-bookworm@sha256:9c47360a2a0355e2da18516d0b1c2126ec22c195d2185e97347c9d98398c5bef
+      - name: Start the reviewed BuildKit platform digest
+        shell: bash
+        run: |
+          set -euo pipefail
+          buildkit_image='moby/buildkit:v0.30.0@sha256:57269d1784e49b46228c45a1a1b870fbe40e0a639ab60b37b032d83af5bccdfc'
+          docker pull --platform linux/amd64 "$buildkit_image"
+          docker buildx create --name dsg-runner-repro --driver docker-container --driver-opt "image=$buildkit_image" --use
+          docker buildx inspect --bootstrap
+      - name: Build runner twice without network and require identical image IDs
+        shell: bash
+        run: |
+          set -euo pipefail
+          export SOURCE_DATE_EPOCH=0
+          output='type=docker,dest=/tmp/dsg-runner-a.tar,rewrite-timestamp=true,compatibility-version=30'
+          docker buildx build --builder dsg-runner-repro --platform linux/amd64 --network=none --pull=false --no-cache --provenance=false --sbom=false --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:runner-candidate --output "$output" --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile.runner infrastructure/bkl-031-f3-a3-gcp
+          docker load --input /tmp/dsg-runner-a.tar
+          image_id_a="$(docker image inspect --format '{{.Id}}' dsg-bkl031-f3a3:runner-candidate)"
+          output='type=docker,dest=/tmp/dsg-runner-b.tar,rewrite-timestamp=true,compatibility-version=30'
+          docker buildx build --builder dsg-runner-repro --platform linux/amd64 --network=none --pull=false --no-cache --provenance=false --sbom=false --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:runner-candidate --output "$output" --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile.runner infrastructure/bkl-031-f3-a3-gcp
+          docker load --input /tmp/dsg-runner-b.tar
+          image_id_b="$(docker image inspect --format '{{.Id}}' dsg-bkl031-f3a3:runner-candidate)"
+          test "$image_id_a" = "$image_id_b"
+          printf 'runner-candidate-a=%s\nrunner-candidate-b=%s\n' "$image_id_a" "$image_id_b" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "DSG_RUNNER_IMAGE_ID=$image_id_a" >> "$GITHUB_ENV"
+      - name: Run preflight and contract self-test with network disabled
+        run: >-
+          docker run --rm --network none
+          dsg-bkl031-f3a3:runner-candidate
+          python /app/dsg/runner/scientific_runner.py --contract-self-test
+      - name: Record bounded candidate evidence without publication or execution
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat <<EOF | tee -a "$GITHUB_STEP_SUMMARY"
+          BKL-031-F3-A3-SCIENTIFIC-RUNNER-CANDIDATE
+          sourceCommit=${GITHUB_SHA}
+          runnerManifestSha256=cee2ddb9d434cce1c0d635b2f111baf65fc016993bca1e17e72dca50bdd15ddd
+          imageId=${DSG_RUNNER_IMAGE_ID}
+          buildNetwork=NONE
+          reproducibility=TWO_NO_CACHE_BUILDS_REWRITE_TIMESTAMP_IDENTICAL
+          contractSelfTest=PASS_NETWORK_NONE
+          containerPush=NOT_EXECUTED
+          platformPlanApply=NOT_EXECUTED
+          jobExecution=NOT_EXECUTED
+          scientificExecution=NOT_EXECUTED
+          externalReferenceTraffic=NOT_EXECUTED
+          protectedSiteUse=NOT_EXECUTED
+          runtimeActivation=NOT_EXECUTED
           EOF
