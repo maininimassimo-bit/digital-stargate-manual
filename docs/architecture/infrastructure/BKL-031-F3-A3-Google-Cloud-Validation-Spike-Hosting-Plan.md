@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-A3-INFRA-001 |
-| Status | **PROPOSED — AUTHENTICATED PLAN VERIFIED / REGISTRY-FOUNDATION GATE PREPARED NOT EXECUTED / PLATFORM NOT APPLIED** |
+| Status | **PROPOSED — REGISTRY FOUNDATION APPLIED AND POST-VERIFIED EMPTY / IMAGE UNPUBLISHED / PLATFORM NOT APPLIED** |
 | Version | 1.0 |
 | Date | 2026-09-15 |
 | Baseline | `main@527b298094b07e5a00317e60cab3abefed7a5759` |
@@ -108,8 +108,10 @@ CI run `35122782246` acquired all ten artifacts ephemerally with exact hashes, b
 
 Authenticated workflow run `35131365596` on exact commit `380bd8c3d04f570acb21a9a7f532930111adcdc8` used the reviewed WIF deployer identity and produced two identical unpublished OCI manifests at `sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce`. The saved plan is exactly five additions, zero changes and zero destroys. It was not retained outside the job; its text SHA-256 is `6fd9c1c3f9d1c754d310f88fa2e8f3dfb2422a5a9195ec40f6f57087bbb8c83e`. The platform backend contains one validated empty state and no lock. Evidence is recorded in `BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-001` at SHA-256 `06cf923ae2bad1e869782bffd6a7e5389f9a68419d6199d0d7df5319f50b12e6`.
 
-Artifact Registry publication remains impossible until the planned `dsg-f3-a3` repository exists. The next gate is a separately reviewed registry-foundation apply followed by exact OCI publication and a refreshed authenticated plan. Image push, platform apply, artifact upload and job execution remain `NOT_EXECUTED`.
+The dedicated `dsg-f3-a3` Artifact Registry repository now exists and contains zero images. The next gate is separately reviewed exact OCI publication followed by a refreshed authenticated four-resource platform plan. Image push, platform apply, artifact upload and job execution remain `NOT_EXECUTED`.
 
 The repository now prepares the registry foundation as an explicit-dispatch, main-only WIF workflow. Artifact Registry ownership is isolated in a dedicated Terraform root and state; the platform state is empty, so the extraction requires no state move. Static policy requires exactly one registry resource and prohibits `-target`, bootstrap/platform apply, image publication and cloud mutations outside the saved registry plan. This source change does not create the repository or publish the image. Exact OCI publication remains the next separate gate after registry evidence is recorded.
 
 Foundation run `35134193946` applied its exact one-resource plan and passed the immediate zero-drift check. The final evidence assertion stopped on the automatically added `goog-terraform-provisioned=true` label; the configured labels and repository identity matched. Incident `BKL-031-F3-A3-RF-I01` therefore preserves the successful apply while requiring a corrected, separately reviewed read-only verification of the existing state, exact labels, zero drift and empty image inventory. Rerunning the one-shot apply is prohibited because the repository and state now exist. Image publication remains `NOT_EXECUTED`.
+
+Read-only recovery run `35135376900` succeeded on exact commit `9c0bc79f3d7fc12c27f36d8b41c51058f5b3decd`. The registry state has one resource, serial `2`, lineage `4badab1d-5898-9bfa-948a-946e0c34492b`, raw SHA-256 `1429875a7626c9faf51f76060ae79f352b1f1e7a96e6bd5f59c152cbeb71ac7f`, zero drift and zero images. Evidence is recorded in `BKL-031-F3-A3-REGISTRY-FOUNDATION-EVIDENCE-001` at SHA-256 `3ef42c012c5c8d79a9751beb7c8e7c49ceab603a202c4a0cda359ef85ba08c30`.

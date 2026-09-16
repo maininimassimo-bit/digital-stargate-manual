@@ -1,0 +1,70 @@
+{
+  "authentication": {
+    "mode": "GITHUB_OIDC_WIF_MAIN_ONLY",
+    "staticServiceAccountKey": false
+  },
+  "controls": {
+    "artifactUpload": "NOT_EXECUTED",
+    "externalReferenceTraffic": "NOT_EXECUTED",
+    "imagePush": "NOT_EXECUTED",
+    "platformApply": "NOT_EXECUTED",
+    "protectedSiteUse": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED",
+    "runtimeAuthority": false,
+    "scientificExecution": "NOT_EXECUTED"
+  },
+  "evidenceId": "BKL-031-F3-A3-REGISTRY-FOUNDATION-EVIDENCE-001",
+  "foundationApply": {
+    "conclusion": "FAILURE_AFTER_SUCCESSFUL_APPLY",
+    "jobId": 104922334083,
+    "postApplyDrift": 0,
+    "resourceActions": {
+      "add": 1,
+      "change": 0,
+      "destroy": 0
+    },
+    "resourceAddress": "google_artifact_registry_repository.spike",
+    "runId": 35134193946,
+    "sourceCommit": "ccf23e68f4bf8d321ccf707d0918e231c1ec2be1",
+    "url": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35134193946"
+  },
+  "incident": {
+    "disposition": "CORRECTED_AND_READ_ONLY_POST_VERIFIED",
+    "id": "BKL-031-F3-A3-RF-I01",
+    "reason": "Final evidence assertion omitted the provider-managed goog-terraform-provisioned=true label; the saved-plan apply and immediate zero-drift plan had already succeeded.",
+    "rerunOfOneShotApply": "PROHIBITED"
+  },
+  "repository": {
+    "format": "DOCKER",
+    "imageCount": 0,
+    "labels": {
+      "capability": "bkl-031",
+      "goog-terraform-provisioned": "true",
+      "increment": "f3-a3",
+      "purpose": "validation-spike",
+      "safety": "none"
+    },
+    "location": "europe-west8",
+    "mode": "STANDARD_REPOSITORY",
+    "name": "projects/digital-stargate-telemetry/locations/europe-west8/repositories/dsg-f3-a3"
+  },
+  "schemaVersion": "1.0",
+  "status": "REGISTRY_FOUNDATION_APPLIED_POST_VERIFIED_EMPTY",
+  "terraformState": {
+    "lineage": "4badab1d-5898-9bfa-948a-946e0c34492b",
+    "rawSha256": "1429875a7626c9faf51f76060ae79f352b1f1e7a96e6bd5f59c152cbeb71ac7f",
+    "residualLock": false,
+    "resourceAddress": "google_artifact_registry_repository.spike",
+    "resourceCount": 1,
+    "serial": 2,
+    "uri": "gs://digital-stargate-telemetry-183451329061-f3-state/bkl-031/f3-a3/registry/default.tfstate"
+  },
+  "verification": {
+    "conclusion": "SUCCESS",
+    "jobId": 104926308969,
+    "postApplyDrift": 0,
+    "runId": 35135376900,
+    "sourceCommit": "9c0bc79f3d7fc12c27f36d8b41c51058f5b3decd",
+    "url": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35135376900"
+  }
+}

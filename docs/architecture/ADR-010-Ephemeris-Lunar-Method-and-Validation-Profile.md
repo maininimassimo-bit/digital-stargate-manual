@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Status | **PROPOSED — AUTHENTICATED PLATFORM PLAN VERIFIED / IMAGE NOT PUBLISHED / SCIENTIFIC CAMPAIGN NOT EXECUTED** |
+| Status | **PROPOSED — REGISTRY FOUNDATION POST-VERIFIED / IMAGE NOT PUBLISHED / SCIENTIFIC CAMPAIGN NOT EXECUTED** |
 | Date | 2026-09-15 |
 | Release | Release 2.x planning increment |
 | Capability | BKL-031 F3-A3 |
@@ -168,4 +168,4 @@ Revert the repository package for source changes. The authorized bootstrap and r
 
 ## Governance stop
 
-The authenticated exact-head plan-only gate is complete. Stop before a separately reviewed Artifact Registry foundation apply; after that, stop again before exact OCI publication and before the refreshed published-digest platform plan/apply gate. Artifact upload, spike execution, protected-site use and runtime activation remain blocked. S10 remains `UNAVAILABLE`.
+The authenticated exact-head five-resource plan and isolated Artifact Registry foundation gates are complete. The registry is post-verified with one-resource state, zero drift and zero images. Stop before exact OCI publication and again before the refreshed published-digest four-resource platform plan/apply gate. Artifact upload, spike execution, protected-site use and runtime activation remain blocked. S10 remains `UNAVAILABLE`.
