@@ -29,7 +29,7 @@ for (const forbidden of [
   /horizons/i,
 ]) if (forbidden.test(workflow)) fail(`scientific cancellation contains forbidden mutation: ${forbidden}`);
 
-if (incident.status !== "TERMINAL_FAILURE_ZERO_EVIDENCE_PLATFORM_REMEDIATION_REQUIRED") fail("incident terminal recovery status mismatch");
+if (incident.status !== "PLATFORM_REMEDIATED_REPLACEMENT_EXECUTION_REVIEW_REQUIRED") fail("incident remediation status mismatch");
 if (incident.recovery?.runId !== 35157173081 || incident.recovery?.executionName !== "dsg-f3-a3-spike-9drzb") fail("incident recovery identity mismatch");
 if (incident.controls?.secondExecution !== "PROHIBITED_NOT_EXECUTED") fail("incident second-execution boundary changed");
 if (incident.cancellationGate?.runId !== 35158064462 || incident.cancellationGate?.cancelCommand !== "SKIPPED" || incident.cancellationGate?.cloudMutation !== "NOT_EXECUTED") fail("cancellation gate fail-closed result mismatch");

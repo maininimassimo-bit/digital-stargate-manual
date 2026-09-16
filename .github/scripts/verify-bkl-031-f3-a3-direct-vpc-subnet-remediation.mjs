@@ -40,7 +40,7 @@ for (const forbidden of [
 
 requireText(variables, 'default = "10.88.0.0/26"', "platform subnet variable");
 requireText(variables, 'var.subnet_cidr == "10.88.0.0/26"', "platform subnet validation");
-if (incident.status !== "TERMINAL_FAILURE_ZERO_EVIDENCE_PLATFORM_REMEDIATION_REQUIRED" || incident.nextGate !== "EXACT_ONE_UPDATE_DIRECT_VPC_SUBNET_REMEDIATION") fail("incident does not authorize exact subnet remediation");
+if (incident.status !== "PLATFORM_REMEDIATED_REPLACEMENT_EXECUTION_REVIEW_REQUIRED" || incident.nextGate !== "SEPARATELY_REVIEWED_EXACT_SINGLE_REPLACEMENT_SCIENTIFIC_EXECUTION") fail("incident remediation lifecycle mismatch");
 if (incident.cancellationGate?.cancelCommand !== "SKIPPED" || incident.cancellationGate?.cloudMutation !== "NOT_EXECUTED") fail("cancellation gate mutation boundary mismatch");
 if (evidence.status !== "TERMINAL_FAILURE_ZERO_EVIDENCE_PLATFORM_REMEDIATION_REQUIRED" || evidence.execution?.failedCount !== 1) fail("terminal recovery evidence mismatch");
 if (evidence.observed?.executionCount !== 1 || evidence.observed?.evidenceObjectCount !== 0 || evidence.observed?.secondExecution !== "NOT_EXECUTED") fail("terminal recovery inventory mismatch");
