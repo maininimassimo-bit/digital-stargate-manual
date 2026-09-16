@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-A3-INFRA-001 |
-| Status | **PROPOSED / REPOSITORY SCAFFOLDING ONLY — BOOTSTRAP NOT EXECUTED** |
+| Status | **PROPOSED — BOOTSTRAP POST-VERIFIED / STATIC CONTAINER-IERS EVIDENCE PREPARED / PLATFORM NOT EXECUTED** |
 | Version | 1.0 |
 | Date | 2026-09-15 |
 | Baseline | `main@527b298094b07e5a00317e60cab3abefed7a5759` |
@@ -73,12 +73,12 @@ Budgets and billing alerts remain project-level operator controls because this r
 
 ## Bootstrap and autonomy sequence
 
-1. select an existing or new GCP project and confirm billing;
-2. choose globally unique state/data/evidence bucket names;
-3. run the bootstrap Terraform once with an authorized GCP administrator identity;
-4. record WIF provider, deployer account and bucket outputs as GitHub repository variables;
-5. use the approved F3-OD05 identity and prepare the remaining exact container, IERS and immutable method-profile digests;
-6. introduce a separately reviewed authenticated plan/apply workflow;
+1. the authorized GCP project, private buckets, WIF trust and service identities were created through the reviewed bootstrap;
+2. bootstrap state was migrated to protected GCS and its permanent backend was post-promotion verified;
+3. the approved F3-OD05 identity, immutable method profile and static container/IERS manifest were prepared;
+4. acquire the exact dependency/IERS bytes and produce container-build evidence in a separate bounded gate;
+5. record the immutable built-image digest;
+6. introduce a separately reviewed authenticated platform plan/apply workflow;
 7. apply platform resources through WIF;
 8. execute the spike only after ADR/ARB/Release Quality authorization.
 
@@ -99,4 +99,6 @@ There is no native Google Cloud connector in the available ChatGPT plugin catalo
 
 ## Current evidence
 
-Terraform source and static checks are prepared. GCP authentication, init against remote state, plan, apply, image push, artifact upload and job execution are all `NOT EXECUTED`.
+The bootstrap applied 27 additions with 0 changes and 0 destroys. Protected remote state, permanent-backend promotion, locking, recovery candidate and zero drift are post-verified; ARB-213-MI02 is satisfied. `BKL-031-F3-A3-CONTAINER-MANIFEST-001` at SHA-256 `7923206d85c5670ef56f9310a813c165c7d516d226c994561516c843b338412e` records the exact future base/platform, hash-locked wheels and IERS identity `43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc` with offline fail-closed policy.
+
+This evidence is static: dependency/IERS acquisition, dependency installation, container build/push, authenticated platform plan/apply, artifact upload and job execution are all `NOT EXECUTED`.

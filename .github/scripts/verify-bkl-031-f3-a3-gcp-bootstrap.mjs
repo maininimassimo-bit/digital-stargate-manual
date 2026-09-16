@@ -19,6 +19,15 @@ const methodProfileVerifier = fs.readFileSync(
   path.join(root, ".github", "scripts", "verify-bkl-031-f3-a3-method-profile.mjs"),
   "utf8",
 );
+const containerManifest = fs.readFileSync(
+  path.join(infra, "container", "BKL-031-F3-A3-CONTAINER-MANIFEST-001.json"),
+  "utf8",
+);
+const containerDockerfile = fs.readFileSync(path.join(infra, "container", "Dockerfile"), "utf8");
+const containerVerifier = fs.readFileSync(
+  path.join(root, ".github", "scripts", "verify-bkl-031-f3-a3-container-evidence.mjs"),
+  "utf8",
+);
 const bootstrapExample = fs.readFileSync(path.join(infra, "bootstrap", "terraform.tfvars.example"), "utf8");
 const spkApproval = fs.readFileSync(
   path.join(root, "docs", "project", "BKL-031-F3-A3-F3-OD05-SPK-APPROVAL-2026-09-16.md"),
@@ -62,6 +71,7 @@ requireText("bootstrap variables", bootstrapVariables, 'var.data_bucket_name == 
 requireText("variables", variables, "kernel_artifact_uri");
 requireText("variables", variables, 'var.method_profile_sha256 == "e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca"');
 requireText("variables", variables, 'var.method_profile_path == "/app/dsg/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json"');
+requireText("variables", variables, 'var.iers_artifact_sha256 == "43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc"');
 requireText("platform", platform, "DSG_METHOD_PROFILE_ID");
 requireText("platform", platform, "DSG_METHOD_PROFILE_PATH");
 requireText("platform", platform, "DSG_METHOD_PROFILE_SHA256");
@@ -72,6 +82,13 @@ requireText("method profile", methodProfile, '"maximumAgeDaysAtCampaignPreparati
 requireText("method profile verifier", methodProfileVerifier, "e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca");
 requireText("method profile verifier", methodProfileVerifier, "Mutated method profile was not rejected");
 requireText("workflow", workflow, "Verify immutable method profile and reject drift");
+requireText("workflow", workflow, "Verify exact static container and IERS inclusion evidence");
+requireText("container manifest", containerManifest, '"status": "STATIC_INCLUSION_EVIDENCE_NOT_BUILT_NOT_EXECUTED"');
+requireText("container manifest", containerManifest, '"sha256": "43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc"');
+requireText("container manifest", containerManifest, '"runtimeAuthority": false');
+requireText("container Dockerfile", containerDockerfile, "python:3.12.14-slim-bookworm@sha256:9c47360a2a0355e2da18516d0b1c2126ec22c195d2185e97347c9d98398c5bef");
+requireText("container verifier", containerVerifier, "7923206d85c5670ef56f9310a813c165c7d516d226c994561516c843b338412e");
+requireText("platform example", platformExample, "43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc");
 requireText("platform", platform, "DSG_KERNEL_URI");
 requireText("platform example", platformExample, "BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16");
 requireText("platform example", platformExample, "gs://digital-stargate-telemetry-183451329061-f3-data/bkl-031/f3-a3/artifacts/spk/de442s/sha256/54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c/de442s.bsp");
