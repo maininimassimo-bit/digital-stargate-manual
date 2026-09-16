@@ -3,8 +3,8 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-A3-VAL-001 |
-| Status | **APPROVED DECISION PROFILE — AUTHENTICATED PLATFORM PLAN VERIFIED / SCIENTIFIC CAMPAIGN NOT EXECUTED** |
-| Version | 1.1 |
+| Status | **APPROVED DECISION PROFILE — SCIENTIFIC RUNNER SOURCE GATE PREPARED / SCIENTIFIC CAMPAIGN NOT EXECUTED** |
+| Version | 1.2 |
 | Date | 2026-09-15 |
 | Architecture | BKL-031-F3-A3-SOLUTION-001 |
 | Proposed ADR | ADR-010 |
@@ -240,11 +240,13 @@ Delete or quarantine the isolated environment and acquired artifacts according t
 
 ## 17. Current execution status
 
-Stage V0 record `A3-S01` is complete. Preparatory exact dependency/IERS acquisition, reproducible offline container builds and the network-disabled preflight passed and are recorded in `BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001`. The exact OCI image was subsequently published and the registry-resolved four-resource plan verified. Main-only WIF run `35141947085` then applied only the reviewed saved plan with four additions, zero changes and zero destroys; `BKL-031-F3-A3-PLATFORM-APPLY-EVIDENCE-001` records the exact state, immediate zero drift and zero job executions. Run `35146023621` subsequently acquired the exact approved `de442s.bsp` once, uploaded it once to the private content-addressed URI and verified GCS generation `1789590110146663` by full read-back; `BKL-031-F3-A3-KERNEL-PUBLICATION-EVIDENCE-001` records the result. This is preparatory infrastructure/data evidence, not execution of V1–V5. All stages V1–V5 and cases A3-P01–P10/A3-N01–N24 remain `NOT EXECUTED`; no scientific calculation occurred.
+Stage V0 record `A3-S01` is complete. Preparatory exact dependency/IERS acquisition, reproducible offline container builds and the network-disabled preflight passed and are recorded in `BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001`. The exact OCI image was subsequently published and the registry-resolved four-resource plan verified. Main-only WIF run `35141947085` then applied only the reviewed saved plan with four additions, zero changes and zero destroys; `BKL-031-F3-A3-PLATFORM-APPLY-EVIDENCE-001` records the exact state, immediate zero drift and zero job executions. Run `35146023621` subsequently acquired the exact approved `de442s.bsp` once, uploaded it once to the private content-addressed URI and verified GCS generation `1789590110146663` by full read-back; `BKL-031-F3-A3-KERNEL-PUBLICATION-EVIDENCE-001` records the result.
+
+The published image intentionally contains only the fail-closed preflight and cannot execute the scientific campaign. `BKL-031-F3-A3-RUNNER-MANIFEST-001` now prepares the separate runner image source: the exact synthetic fixture, bounded Astropy/Skyfield same-SPK comparison, airless metrics, transit refinement, repeatability check, private kernel read and create-only private evidence write. Static contract tests exercise rejection paths without scientific libraries, network or kernel bytes. CI builds this runner candidate twice with the pinned offline toolchain and executes only its contract self-test with network disabled. Image publication, platform update and job execution remain later separately reviewed gates. This is preparatory source/build evidence, not execution of V1–V5. All stages V1–V5 and cases A3-P01–P10/A3-N01–N24 remain `NOT EXECUTED`; no scientific calculation occurred.
 
 ## 18. Governance stop
 
-F3-OD05, bootstrap/MI02, reproducible offline container-build, isolated Artifact Registry foundation, exact OCI publication, refreshed plan, exact four-resource platform apply and exact private kernel publication gates are closed at evidence level. The target repository contains one post-verified image at the approved digest; the platform state contains only the exact VPC, subnet, Cloud Run Job and invoker binding with zero drift and zero executions; the private data prefix contains the one full-read-back-verified approved kernel object. Stop before separately reviewed exact scientific-spike execution. This plan does not authorize job execution, external reference calls, protected-site use, scientific execution, schema, adapter or runtime work.
+F3-OD05, bootstrap/MI02, reproducible preflight-container build, isolated Artifact Registry foundation, exact preflight OCI publication, refreshed plan, exact four-resource platform apply and exact private kernel publication gates are closed at evidence level. The target repository contains one post-verified preflight-only image at the approved digest; the platform state contains only the exact VPC, subnet, Cloud Run Job and invoker binding with zero drift and zero executions; the private data prefix contains the one full-read-back-verified approved kernel object. The runner-source increment prepares a distinct reproducible candidate and cannot mutate those resources. Stop before the separately reviewed runner OCI publication, exact one-update platform apply and scientific-spike execution gates. This plan does not authorize job execution, external reference calls, protected-site use, schema, adapter or runtime work.
 
 ## 19. Approved execution and request envelope
 
