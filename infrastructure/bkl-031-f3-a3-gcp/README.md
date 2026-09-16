@@ -27,6 +27,8 @@ Prerequisites:
 - a short-lived authorized administrator session;
 - Terraform 1.16.2.
 
+The committed provider lock carries the reviewed `linux_amd64` and `windows_amd64` checksums. Operator initialization must keep the lock file unchanged.
+
 The authoritative bootstrap and state-transition procedure is [STATE_MIGRATION_AND_RECOVERY.md](STATE_MIGRATION_AND_RECOVERY.md). Do not execute bootstrap commands from this summary. The reviewed procedure requires an exact saved plan, one operator for the complete change window, an initial local bootstrap, immediate migration to the protected GCS backend, state-lineage verification, recovery evidence and backend promotion before any second operator or automation. This is the only phase that requires a short-lived GCP administrator identity.
 
 Do not create or download a service-account key.
