@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0",
+  "evidenceId": "BKL-031-F3-A3-REPLACEMENT-FORENSICS-EVIDENCE-001",
+  "status": "READ_ONLY_INVENTORY_VERIFIED_LOG_COMMAND_UNAVAILABLE",
+  "recordedAtUtc": "2026-09-16T23:14:56Z",
+  "sourceCommit": "8b4a8c39098766b94a105dd960f7de92a99fa0f7",
+  "workflow": {
+    "name": "BKL-031 F3-A3 Replacement Execution Read-only Forensics",
+    "runId": 35161376374,
+    "jobId": 105012660402,
+    "conclusion": "failure",
+    "failedStep": "Read exact replacement execution logs without mutation",
+    "url": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35161376374"
+  },
+  "verified": {
+    "executionNames": [
+      "dsg-f3-a3-spike-9drzb",
+      "dsg-f3-a3-spike-jv646"
+    ],
+    "replacementTask": "dsg-f3-a3-spike-jv646-task0",
+    "replacementTaskExitCode": 1,
+    "replacementTaskResult": "COMPLETED_FALSE_NON_ZERO_EXIT_CODE",
+    "evidenceObjectCount": 0,
+    "platformStateRawSha256": "b12cbd6c107cd7e38d47fbe353ab125ee909dc77d0bc8c26172bfa484b722889"
+  },
+  "logRead": {
+    "command": "gcloud alpha run jobs executions logs read",
+    "status": "NOT_EXECUTED_ALPHA_COMPONENT_UNAVAILABLE_NON_INTERACTIVE",
+    "entryCount": 0,
+    "outputRawSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "controls": {
+    "thirdExecution": "NOT_EXECUTED",
+    "cloudMutation": "NOT_EXECUTED_BY_FORENSICS"
+  },
+  "nextGate": "CORRECT_TO_STABLE_READ_ONLY_JOB_LOG_COMMAND_AND_REVIEW"
+}

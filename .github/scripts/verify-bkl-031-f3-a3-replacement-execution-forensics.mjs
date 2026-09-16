@@ -5,6 +5,7 @@ const root = process.cwd();
 const read = (...parts) => fs.readFileSync(path.join(root, ...parts), "utf8");
 const workflow = read(".github", "workflows", "bkl-031-f3-a3-replacement-execution-forensics.yml");
 const incident = JSON.parse(read("infrastructure", "bkl-031-f3-a3-gcp", "platform", "BKL-031-F3-A3-REPLACEMENT-EXECUTION-INCIDENT-001.json"));
+const priorForensics = JSON.parse(read("infrastructure", "bkl-031-f3-a3-gcp", "platform", "BKL-031-F3-A3-REPLACEMENT-FORENSICS-EVIDENCE-001.json"));
 const fail = (message) => { throw new Error(message); };
 const requireText = (fragment) => { if (!workflow.includes(fragment)) fail(`replacement forensics workflow missing: ${fragment}`); };
 
@@ -15,7 +16,7 @@ for (const fragment of [
   "DSG_PLATFORM_STATE_SHA256: b12cbd6c107cd7e38d47fbe353ab125ee909dc77d0bc8c26172bfa484b722889",
   "exact two-execution inventory changed", "expected zero scientific evidence objects", "dsg-f3-a3-spike-jv646-task0",
   "gcloud run jobs executions tasks list", "gcloud run jobs executions tasks describe",
-  "gcloud alpha run jobs executions logs read", "DSG_REPLACEMENT_LOG_FORENSICS=", "DSG_REPLACEMENT_LOG_ENTRY=",
+  "gcloud run jobs logs read dsg-f3-a3-spike", "--log-filter='labels.\"run.googleapis.com/execution_name\"=\"dsg-f3-a3-spike-jv646\"'", "DSG_REPLACEMENT_LOG_FORENSICS=", "DSG_REPLACEMENT_LOG_ENTRY=",
   "DSG_REPLACEMENT_FORENSICS_POSTCONDITION=", "thirdExecution': 'NOT_EXECUTED'", "cloudMutation': 'NOT_EXECUTED_BY_FORENSICS'",
 ]) requireText(fragment);
 
@@ -37,5 +38,9 @@ if (incident.workflow?.runId !== 35160489890 || incident.workflow?.jobId !== 105
 if (incident.observed?.executionName !== "dsg-f3-a3-spike-jv646" || incident.observed?.executionCount !== 2 || incident.observed?.executionResult !== "COMPLETED_FALSE_NON_ZERO_EXIT_CODE_1") fail("replacement execution facts mismatch");
 if (incident.controls?.thirdExecution !== "PROHIBITED_NOT_EXECUTED" || incident.controls?.platformStateRawSha256 !== "b12cbd6c107cd7e38d47fbe353ab125ee909dc77d0bc8c26172bfa484b722889") fail("replacement incident control boundary mismatch");
 if (incident.nextGate !== "SEPARATELY_REVIEWED_READ_ONLY_REPLACEMENT_EXECUTION_FORENSICS") fail("replacement incident next gate mismatch");
+if (priorForensics.status !== "READ_ONLY_INVENTORY_VERIFIED_LOG_COMMAND_UNAVAILABLE" || priorForensics.workflow?.runId !== 35161376374 || priorForensics.workflow?.jobId !== 105012660402) fail("prior forensics workflow evidence mismatch");
+if (priorForensics.verified?.executionNames?.join(",") !== "dsg-f3-a3-spike-9drzb,dsg-f3-a3-spike-jv646" || priorForensics.verified?.evidenceObjectCount !== 0 || priorForensics.verified?.platformStateRawSha256 !== "b12cbd6c107cd7e38d47fbe353ab125ee909dc77d0bc8c26172bfa484b722889") fail("prior forensics verified inventory mismatch");
+if (priorForensics.logRead?.status !== "NOT_EXECUTED_ALPHA_COMPONENT_UNAVAILABLE_NON_INTERACTIVE" || priorForensics.controls?.thirdExecution !== "NOT_EXECUTED" || priorForensics.controls?.cloudMutation !== "NOT_EXECUTED_BY_FORENSICS") fail("prior forensics control boundary mismatch");
+if (priorForensics.nextGate !== "CORRECT_TO_STABLE_READ_ONLY_JOB_LOG_COMMAND_AND_REVIEW") fail("prior forensics next gate mismatch");
 
 console.log("BKL-031 F3-A3 replacement execution forensics gate verified: exact two-execution inventory, task and logs read, immutable platform and zero mutation");
