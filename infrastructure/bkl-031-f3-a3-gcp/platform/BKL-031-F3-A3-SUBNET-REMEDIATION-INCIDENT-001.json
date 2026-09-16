@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "incidentId": "BKL-031-F3-A3-SUBNET-REMEDIATION-INCIDENT-001",
+  "status": "FAIL_CLOSED_BEFORE_APPLY_EXPECTED_COMPUTED_EXECUTION_DRIFT",
+  "recordedAtUtc": "2026-09-16T22:43:30Z",
+  "sourceCommit": "ee77c4b40f3963624590f3d4d5b7a31fc75343ef",
+  "workflow": {
+    "name": "BKL-031 F3-A3 Exact Direct VPC Subnet Remediation",
+    "runId": 35158971670,
+    "jobId": 105005027186,
+    "conclusion": "failure",
+    "failedStep": "Verify exact subnet-only update before apply",
+    "url": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35158971670"
+  },
+  "observed": {
+    "preconditions": "PASSED",
+    "savedPlanCreated": true,
+    "plannedManagedResourceChanges": [
+      {
+        "address": "google_compute_subnetwork.spike",
+        "actions": ["update"],
+        "beforeCidr": "10.88.0.0/28",
+        "afterCidr": "10.88.0.0/26"
+      }
+    ],
+    "refreshOnlyComputedDrift": {
+      "address": "google_cloud_run_v2_job.spike",
+      "executionCountBefore": 0,
+      "executionCountAfter": 1,
+      "latestCreatedExecutionAfter": "dsg-f3-a3-spike-9drzb"
+    }
+  },
+  "controls": {
+    "terraformApply": "SKIPPED",
+    "subnetMutation": "NOT_EXECUTED",
+    "jobMutation": "NOT_EXECUTED",
+    "replacementExecution": "NOT_EXECUTED",
+    "cloudMutation": "NOT_EXECUTED"
+  },
+  "nextGate": "SAME_EXACT_SUBNET_PLAN_WITH_BOUNDED_COMPUTED_DRIFT_ASSERTION"
+}
