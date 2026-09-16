@@ -7,6 +7,7 @@ const workflow = read(".github", "workflows", "bkl-031-f3-a3-direct-vpc-subnet-r
 const variables = read("infrastructure", "bkl-031-f3-a3-gcp", "platform", "variables.tf");
 const incident = JSON.parse(read("infrastructure", "bkl-031-f3-a3-gcp", "platform", "BKL-031-F3-A3-SCIENTIFIC-EXECUTION-INCIDENT-001.json"));
 const evidence = JSON.parse(read("infrastructure", "bkl-031-f3-a3-gcp", "platform", "BKL-031-F3-A3-SCIENTIFIC-EXECUTION-RECOVERY-EVIDENCE-002.json"));
+const remediationIncident = JSON.parse(read("infrastructure", "bkl-031-f3-a3-gcp", "platform", "BKL-031-F3-A3-SUBNET-REMEDIATION-INCIDENT-001.json"));
 const fail = (message) => { throw new Error(message); };
 const requireText = (text, fragment, context) => { if (!text.includes(fragment)) fail(`${context} missing: ${fragment}`); };
 
@@ -17,6 +18,8 @@ for (const fragment of [
   "TF_VAR_subnet_cidr: 10.88.0.0/26", "Internal error running task.", "Create exact one-update saved plan",
   "-detailed-exitcode -out=/tmp/subnet-remediation.tfplan", "google_compute_subnetwork.spike",
   "change.get('actions') != ['update']", "10.88.0.0/28", "10.88.0.0/26",
+  "len(drift) != 1", "google_cloud_run_v2_job.spike", "execution_count') != 0", "execution_count') != 1",
+  "dsg-f3-a3-spike-9drzb", "job refresh drift contains fields beyond exact execution observation",
   "terraform -chdir=infrastructure/bkl-031-f3-a3-gcp/platform apply -input=false -lock-timeout=60s /tmp/subnet-remediation.tfplan",
   "test \"$plan_status\" -eq 0", "DSG_SUBNET_REMEDIATION_FACTS=", "replacementExecution': 'NOT_EXECUTED'",
 ]) requireText(workflow, fragment, "subnet remediation workflow");
@@ -43,5 +46,9 @@ if (evidence.status !== "TERMINAL_FAILURE_ZERO_EVIDENCE_PLATFORM_REMEDIATION_REQ
 if (evidence.observed?.executionCount !== 1 || evidence.observed?.evidenceObjectCount !== 0 || evidence.observed?.secondExecution !== "NOT_EXECUTED") fail("terminal recovery inventory mismatch");
 if (evidence.rootCause?.configuredSubnetCidr !== "10.88.0.0/28" || evidence.rootCause?.requiredMinimumSubnetPrefix !== "/26") fail("subnet root-cause evidence mismatch");
 if (evidence.nextGate !== "EXACT_ONE_UPDATE_DIRECT_VPC_SUBNET_REMEDIATION") fail("terminal recovery next gate mismatch");
+if (remediationIncident.status !== "FAIL_CLOSED_BEFORE_APPLY_EXPECTED_COMPUTED_EXECUTION_DRIFT") fail("subnet remediation incident status mismatch");
+if (remediationIncident.workflow?.runId !== 35158971670 || remediationIncident.workflow?.jobId !== 105005027186) fail("subnet remediation incident identity mismatch");
+if (remediationIncident.controls?.terraformApply !== "SKIPPED" || remediationIncident.controls?.cloudMutation !== "NOT_EXECUTED") fail("subnet remediation incident mutation boundary mismatch");
+if (remediationIncident.observed?.plannedManagedResourceChanges?.length !== 1 || remediationIncident.observed.plannedManagedResourceChanges[0]?.address !== "google_compute_subnetwork.spike") fail("subnet remediation incident plan mismatch");
 
 console.log("BKL-031 F3-A3 Direct VPC subnet remediation verified: exact /28 to /26 in-place saved-plan update; no execution or unrelated mutation");

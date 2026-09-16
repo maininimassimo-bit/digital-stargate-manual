@@ -164,8 +164,35 @@ jobs:
               raise SystemExit('plan is not the reviewed /28 to /26 expansion')
           if plan.get('variables', {}).get('subnet_cidr', {}).get('value') != '10.88.0.0/26':
               raise SystemExit('planned subnet variable mismatch')
-          if plan.get('resource_drift') not in (None, []):
-              raise SystemExit(f'unexpected pre-plan resource drift: {plan.get("resource_drift")!r}')
+          drift = plan.get('resource_drift', [])
+          if len(drift) != 1 or drift[0].get('address') != 'google_cloud_run_v2_job.spike' or drift[0].get('change', {}).get('actions') != ['update']:
+              raise SystemExit(f'unexpected pre-plan resource drift: {drift!r}')
+          drift_change = drift[0]['change']
+          drift_before = drift_change['before']
+          drift_after = drift_change['after']
+          expected_latest = [{
+              'completion_time': '2026-09-16T22:27:52.602569Z',
+              'create_time': '2026-09-16T21:57:42.096014Z',
+              'name': 'dsg-f3-a3-spike-9drzb',
+          }]
+          if drift_before.get('execution_count') != 0 or drift_after.get('execution_count') != 1:
+              raise SystemExit('unexpected execution-count refresh drift')
+          if drift_before.get('latest_created_execution') != [] or drift_after.get('latest_created_execution') != expected_latest:
+              raise SystemExit('unexpected latest-execution refresh drift')
+          before_terminal = drift_before.get('terminal_condition', [])
+          after_terminal = drift_after.get('terminal_condition', [])
+          if len(before_terminal) != 1 or len(after_terminal) != 1:
+              raise SystemExit('unexpected terminal-condition refresh shape')
+          if before_terminal[0].get('last_transition_time') != '2026-09-16T19:42:24.073312Z' or after_terminal[0].get('last_transition_time') != '':
+              raise SystemExit('unexpected terminal-condition refresh timestamp')
+          import copy
+          normalized_before = copy.deepcopy(drift_before)
+          normalized_after = copy.deepcopy(drift_after)
+          normalized_before['execution_count'] = normalized_after['execution_count']
+          normalized_before['latest_created_execution'] = normalized_after['latest_created_execution']
+          normalized_before['terminal_condition'][0]['last_transition_time'] = normalized_after['terminal_condition'][0]['last_transition_time']
+          if normalized_before != normalized_after:
+              raise SystemExit('job refresh drift contains fields beyond exact execution observation')
           PY
 
       - name: Apply only the verified saved plan
