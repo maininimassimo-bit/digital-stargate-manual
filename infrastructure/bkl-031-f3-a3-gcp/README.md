@@ -26,7 +26,7 @@ Prerequisites:
 - a short-lived authorized administrator session;
 - Terraform 1.16.2.
 
-Copy bootstrap/terraform.tfvars.example to an untracked tfvars file and replace every placeholder. Then run fmt, init, plan and apply from the bootstrap directory. This is the only step that needs an existing GCP administrator identity.
+The authoritative bootstrap and state-transition procedure is [STATE_MIGRATION_AND_RECOVERY.md](STATE_MIGRATION_AND_RECOVERY.md). Do not execute bootstrap commands from this summary. The reviewed procedure requires an exact saved plan, one operator for the complete change window, an initial local bootstrap, immediate migration to the protected GCS backend, state-lineage verification, recovery evidence and backend promotion before any second operator or automation. This is the only phase that requires a short-lived GCP administrator identity.
 
 Do not create or download a service-account key.
 

@@ -9,6 +9,10 @@ const bootstrapVariables = fs.readFileSync(path.join(infra, "bootstrap", "variab
 const platform = fs.readFileSync(path.join(infra, "platform", "main.tf"), "utf8");
 const variables = fs.readFileSync(path.join(infra, "platform", "variables.tf"), "utf8");
 const workflow = fs.readFileSync(path.join(root, ".github", "workflows", "bkl-031-f3-a3-gcp-iac.yml"), "utf8");
+const backendTemplate = fs.readFileSync(path.join(infra, "bootstrap", "backend.tf.example"), "utf8");
+const stateRunbook = fs.readFileSync(path.join(infra, "STATE_MIGRATION_AND_RECOVERY.md"), "utf8");
+const readme = fs.readFileSync(path.join(infra, "README.md"), "utf8");
+const gitignore = fs.readFileSync(path.join(root, ".gitignore"), "utf8");
 
 const failures = [];
 const requireText = (name, text, fragment) => {
@@ -39,11 +43,26 @@ requireText("variables", variables, 'default = "europe-west8"');
 requireText("variables", variables, "@sha256:[0-9a-f]{64}$");
 requireText("workflow", workflow, "terraform validate -no-color");
 requireText("workflow", workflow, "terraform init -backend=false -input=false");
+requireText("backend template", backendTemplate, 'backend "gcs" {}');
+requireText("state runbook", stateRunbook, "ARB-213-MI02");
+requireText("state runbook", stateRunbook, "PROCEDURE DEFINED — NOT EXECUTED");
+requireText("state runbook", stateRunbook, "terraform -chdir=\"$DSG_BOOTSTRAP_DIR\" init -migrate-state");
+requireText("state runbook", stateRunbook, "gcloud storage ls --all-versions");
+requireText("state runbook", stateRunbook, "terraform force-unlock LOCK_ID");
+requireText("state runbook", stateRunbook, "bkl-031/f3-a3/bootstrap");
+requireText("state runbook", stateRunbook, "Migration failure rollback");
+requireText("README", readme, "STATE_MIGRATION_AND_RECOVERY.md");
+requireText("gitignore", gitignore, "**/*.tfvars");
+requireText("gitignore", gitignore, "**/*.tfstate");
+requireText("gitignore", gitignore, "**/*.tfstate.*");
+requireText("gitignore", gitignore, "**/backend.gcs.hcl");
+requireText("gitignore", gitignore, "**/backend_migration.tf");
 
 forbid("bootstrap", bootstrap, /allUsers|allAuthenticatedUsers/, "public IAM principal");
 forbid("platform", platform, /allUsers|allAuthenticatedUsers/, "public IAM principal");
 forbid("bootstrap", bootstrap, /private_key|credentials\s*=/i, "static credential");
 forbid("platform", platform, /google_compute_router_nat/, "Cloud NAT/public egress");
+forbid("backend template", backendTemplate, /bucket\s*=|credentials\s*=/i, "hard-coded backend identity or credential");
 forbid("workflow", workflow, /terraform\s+apply/, "cloud mutation in validation workflow");
 
 if (failures.length) {
