@@ -142,11 +142,12 @@ jobs:
         run: |
           set -euo pipefail
           set +e
-          gcloud alpha run jobs executions logs read "$DSG_REPLACEMENT_EXECUTION" \
+          gcloud run jobs logs read dsg-f3-a3-spike \
             --project="$GCP_PROJECT_ID" \
             --region="$GCP_REGION" \
             --order=asc \
             --limit=100 \
+            --log-filter='labels."run.googleapis.com/execution_name"="dsg-f3-a3-spike-jv646"' \
             --format=json \
             >/tmp/replacement-logs.json 2>/tmp/replacement-logs.err
           log_status=$?
