@@ -15,6 +15,7 @@ on:
       - ".github/scripts/acquire-bkl-031-f3-a3-kernel.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-kernel-acquisition-upload.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-scientific-runner-gate.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-exact-runner-oci-publication.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - ".github/workflows/bkl-031-f3-a3-authenticated-platform-plan.yml"
       - ".github/workflows/bkl-031-f3-a3-registry-foundation.yml"
@@ -22,6 +23,7 @@ on:
       - ".github/workflows/bkl-031-f3-a3-exact-oci-publication.yml"
       - ".github/workflows/bkl-031-f3-a3-platform-apply.yml"
       - ".github/workflows/bkl-031-f3-a3-exact-kernel-acquisition-upload.yml"
+      - ".github/workflows/bkl-031-f3-a3-exact-runner-oci-publication.yml"
       - "infrastructure/bkl-031-f3-a3-gcp/**"
       - "docs/architecture/ADR-010-Ephemeris-Lunar-Method-and-Validation-Profile.md"
       - "docs/architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md"
@@ -43,6 +45,7 @@ on:
       - ".github/scripts/acquire-bkl-031-f3-a3-kernel.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-kernel-acquisition-upload.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-scientific-runner-gate.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-exact-runner-oci-publication.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - ".github/workflows/bkl-031-f3-a3-authenticated-platform-plan.yml"
       - ".github/workflows/bkl-031-f3-a3-registry-foundation.yml"
@@ -50,6 +53,7 @@ on:
       - ".github/workflows/bkl-031-f3-a3-exact-oci-publication.yml"
       - ".github/workflows/bkl-031-f3-a3-platform-apply.yml"
       - ".github/workflows/bkl-031-f3-a3-exact-kernel-acquisition-upload.yml"
+      - ".github/workflows/bkl-031-f3-a3-exact-runner-oci-publication.yml"
       - "infrastructure/bkl-031-f3-a3-gcp/**"
   workflow_dispatch:
 
@@ -90,6 +94,8 @@ jobs:
         run: node .github/scripts/verify-bkl-031-f3-a3-kernel-acquisition-upload.mjs
       - name: Verify bounded scientific runner source gate
         run: node .github/scripts/verify-bkl-031-f3-a3-scientific-runner-gate.mjs
+      - name: Verify exact runner OCI publication gate
+        run: node .github/scripts/verify-bkl-031-f3-a3-exact-runner-oci-publication.mjs
 
   terraform:
     name: Terraform validate (${{ matrix.directory }})
@@ -232,22 +238,35 @@ jobs:
           docker pull --platform linux/amd64 "$buildkit_image"
           docker buildx create --name dsg-runner-repro --driver docker-container --driver-opt "image=$buildkit_image" --use
           docker buildx inspect --bootstrap
-      - name: Build runner twice without network and require identical image IDs
+      - name: Build runner OCI twice without network and require identical identities
         shell: bash
         run: |
           set -euo pipefail
           export SOURCE_DATE_EPOCH=0
-          output='type=docker,dest=/tmp/dsg-runner-a.tar,rewrite-timestamp=true,compatibility-version=30'
+          for candidate in a b; do
+            output="type=oci,dest=/tmp/dsg-runner-${candidate}.tar,oci-mediatypes=true,rewrite-timestamp=true,compatibility-version=30"
+            docker buildx build --builder dsg-runner-repro --platform linux/amd64 --network=none --pull=false --no-cache --provenance=false --sbom=false --build-arg SOURCE_DATE_EPOCH=0 --metadata-file "/tmp/dsg-runner-${candidate}.json" --output "$output" --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile.runner infrastructure/bkl-031-f3-a3-gcp
+          done
+          digest_a="$(jq -er '."containerimage.digest"' /tmp/dsg-runner-a.json)"
+          digest_b="$(jq -er '."containerimage.digest"' /tmp/dsg-runner-b.json)"
+          config_a="$(jq -er '."containerimage.config.digest"' /tmp/dsg-runner-a.json)"
+          config_b="$(jq -er '."containerimage.config.digest"' /tmp/dsg-runner-b.json)"
+          test "$digest_a" = "$digest_b"
+          test "$config_a" = "$config_b"
+          printf 'runner-manifest-a=%s\nrunner-manifest-b=%s\nrunner-config-a=%s\nrunner-config-b=%s\n' "$digest_a" "$digest_b" "$config_a" "$config_b" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "DSG_RUNNER_MANIFEST_DIGEST=$digest_a" >> "$GITHUB_ENV"
+          echo "DSG_RUNNER_CONFIG_DIGEST=$config_a" >> "$GITHUB_ENV"
+      - name: Build one loadable runner and bind its image ID to the OCI config
+        shell: bash
+        run: |
+          set -euo pipefail
+          export SOURCE_DATE_EPOCH=0
+          output='type=docker,dest=/tmp/dsg-runner-loadable.tar,rewrite-timestamp=true,compatibility-version=30'
           docker buildx build --builder dsg-runner-repro --platform linux/amd64 --network=none --pull=false --no-cache --provenance=false --sbom=false --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:runner-candidate --output "$output" --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile.runner infrastructure/bkl-031-f3-a3-gcp
-          docker load --input /tmp/dsg-runner-a.tar
-          image_id_a="$(docker image inspect --format '{{.Id}}' dsg-bkl031-f3a3:runner-candidate)"
-          output='type=docker,dest=/tmp/dsg-runner-b.tar,rewrite-timestamp=true,compatibility-version=30'
-          docker buildx build --builder dsg-runner-repro --platform linux/amd64 --network=none --pull=false --no-cache --provenance=false --sbom=false --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:runner-candidate --output "$output" --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile.runner infrastructure/bkl-031-f3-a3-gcp
-          docker load --input /tmp/dsg-runner-b.tar
-          image_id_b="$(docker image inspect --format '{{.Id}}' dsg-bkl031-f3a3:runner-candidate)"
-          test "$image_id_a" = "$image_id_b"
-          printf 'runner-candidate-a=%s\nrunner-candidate-b=%s\n' "$image_id_a" "$image_id_b" | tee -a "$GITHUB_STEP_SUMMARY"
-          echo "DSG_RUNNER_IMAGE_ID=$image_id_a" >> "$GITHUB_ENV"
+          docker load --input /tmp/dsg-runner-loadable.tar
+          image_id="$(docker image inspect --format '{{.Id}}' dsg-bkl031-f3a3:runner-candidate)"
+          test "$image_id" = "$DSG_RUNNER_CONFIG_DIGEST"
+          echo "DSG_RUNNER_IMAGE_ID=$image_id" >> "$GITHUB_ENV"
       - name: Run preflight and contract self-test with network disabled
         run: >-
           docker run --rm --network none
@@ -261,9 +280,11 @@ jobs:
           BKL-031-F3-A3-SCIENTIFIC-RUNNER-CANDIDATE
           sourceCommit=${GITHUB_SHA}
           runnerManifestSha256=cee2ddb9d434cce1c0d635b2f111baf65fc016993bca1e17e72dca50bdd15ddd
+          ociManifestDigest=${DSG_RUNNER_MANIFEST_DIGEST}
+          ociConfigDigest=${DSG_RUNNER_CONFIG_DIGEST}
           imageId=${DSG_RUNNER_IMAGE_ID}
           buildNetwork=NONE
-          reproducibility=TWO_NO_CACHE_BUILDS_REWRITE_TIMESTAMP_IDENTICAL
+          reproducibility=TWO_OCI_NO_CACHE_BUILDS_REWRITE_TIMESTAMP_IDENTICAL
           contractSelfTest=PASS_NETWORK_NONE
           containerPush=NOT_EXECUTED
           platformPlanApply=NOT_EXECUTED

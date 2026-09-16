@@ -1,0 +1,248 @@
+name: BKL-031 F3-A3 Exact Runner OCI Publication
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: Exact main commit authorized for publication of the reviewed runner OCI digest
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: bkl-031-f3-a3-exact-runner-oci-publication
+  cancel-in-progress: false
+
+jobs:
+  exact-head-publication:
+    name: Exact-head reproducible runner OCI publication
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+      GCP_REGION: ${{ vars.GCP_REGION }}
+      GCP_WIF_PROVIDER: ${{ vars.GCP_WIF_PROVIDER }}
+      GCP_DEPLOY_SERVICE_ACCOUNT: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+      DSG_AUTHORIZED_COMMIT: ${{ inputs.expected_commit }}
+      DSG_EXPECTED_MANIFEST_DIGEST: sha256:69a20a994fde9d5b1533b142760af5796b4ac795a1f00c658373a46d2648d60c
+      DSG_EXPECTED_CONFIG_DIGEST: sha256:333e5d1b303dda4c5a4037f386b2f56a7f967a9197bbb4186ca6f33dfd4c4cc3
+      DSG_IMAGE_REPOSITORY: europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Require exact authorized main head and publication identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${GITHUB_REF}" = "refs/heads/main"
+          test "${GITHUB_SHA}" = "${DSG_AUTHORIZED_COMMIT}"
+          grep -Eq '^[0-9a-f]{40}$' <<<"${GITHUB_SHA}"
+          grep -Eq '^[0-9a-f]{40}$' <<<"${DSG_AUTHORIZED_COMMIT}"
+          test "${GCP_PROJECT_ID}" = "digital-stargate-telemetry"
+          test "${GCP_REGION}" = "europe-west8"
+          test "${GCP_WIF_PROVIDER}" = "projects/183451329061/locations/global/workloadIdentityPools/dsg-f3-a3-github/providers/github-main"
+          test "${GCP_DEPLOY_SERVICE_ACCOUNT}" = "dsg-f3-a3-deployer@digital-stargate-telemetry.iam.gserviceaccount.com"
+          test "${DSG_IMAGE_REPOSITORY}" = "${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/dsg-f3-a3/spike"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+
+      - name: Verify immutable source, foundation and publication contracts
+        env:
+          DSG_METHOD_PROFILE_PATH: infrastructure/bkl-031-f3-a3-gcp/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json
+          DSG_METHOD_PROFILE_SHA256: e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca
+        run: |
+          node .github/scripts/verify-bkl-031-f3-a3-method-profile.mjs
+          node .github/scripts/verify-bkl-031-f3-a3-container-evidence.mjs
+          node .github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs
+          node .github/scripts/verify-bkl-031-f3-a3-registry-foundation-verification.mjs
+          node .github/scripts/verify-bkl-031-f3-a3-exact-oci-publication.mjs
+          node .github/scripts/verify-bkl-031-f3-a3-scientific-runner-gate.mjs
+          node .github/scripts/verify-bkl-031-f3-a3-exact-runner-oci-publication.mjs
+
+      - name: Acquire only reviewed wheels and verify exact bytes
+        run: >-
+          node .github/scripts/acquire-bkl-031-f3-a3-container-artifacts.mjs
+          --destination infrastructure/bkl-031-f3-a3-gcp/container/.build/wheels
+          --evidence infrastructure/bkl-031-f3-a3-gcp/container/.build/acquisition-evidence.json
+
+      - name: Pull reviewed base and BuildKit platform digests
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker pull --platform linux/amd64 python:3.12.14-slim-bookworm@sha256:9c47360a2a0355e2da18516d0b1c2126ec22c195d2185e97347c9d98398c5bef
+          buildkit_image='moby/buildkit:v0.30.0@sha256:57269d1784e49b46228c45a1a1b870fbe40e0a639ab60b37b032d83af5bccdfc'
+          docker pull --platform linux/amd64 "$buildkit_image"
+          docker buildx create --name dsg-runner-publication --driver docker-container --driver-opt "image=$buildkit_image" --use
+          docker buildx inspect --bootstrap
+
+      - name: Reproduce the reviewed OCI manifest twice
+        shell: bash
+        run: |
+          set -euo pipefail
+          export SOURCE_DATE_EPOCH=0
+          for candidate in a b; do
+            output="type=oci,dest=/tmp/dsg-candidate-${candidate}.tar,oci-mediatypes=true,rewrite-timestamp=true,compatibility-version=30"
+            docker buildx build --builder dsg-runner-publication --platform linux/amd64 --network=none --pull=false --no-cache --provenance=false --sbom=false --build-arg SOURCE_DATE_EPOCH=0 --metadata-file "/tmp/dsg-candidate-${candidate}.json" --output "$output" --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile.runner infrastructure/bkl-031-f3-a3-gcp
+          done
+          digest_a="$(jq -er '."containerimage.digest"' /tmp/dsg-candidate-a.json)"
+          digest_b="$(jq -er '."containerimage.digest"' /tmp/dsg-candidate-b.json)"
+          config_a="$(jq -er '."containerimage.config.digest"' /tmp/dsg-candidate-a.json)"
+          config_b="$(jq -er '."containerimage.config.digest"' /tmp/dsg-candidate-b.json)"
+          test "$digest_a" = "$digest_b"
+          test "$digest_a" = "$DSG_EXPECTED_MANIFEST_DIGEST"
+          test "$config_a" = "$config_b"
+          test "$config_a" = "$DSG_EXPECTED_CONFIG_DIGEST"
+          printf 'candidate-a=%s\ncandidate-b=%s\nconfig-a=%s\nconfig-b=%s\n' "$digest_a" "$digest_b" "$config_a" "$config_b"
+
+      - name: Preflight the exact registry exporter without push
+        shell: bash
+        run: |
+          set -euo pipefail
+          export SOURCE_DATE_EPOCH=0
+          tag="runner-${GITHUB_SHA:0:12}"
+          output="type=image,name=${DSG_IMAGE_REPOSITORY}:${tag},push=false,oci-mediatypes=true,rewrite-timestamp=true,compatibility-version=30"
+          docker buildx build --builder dsg-runner-publication --platform linux/amd64 --network=none --pull=false --no-cache --provenance=false --sbom=false --build-arg SOURCE_DATE_EPOCH=0 --metadata-file /tmp/dsg-registry-preflight.json --output "$output" --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile.runner infrastructure/bkl-031-f3-a3-gcp
+          preflight_digest="$(jq -er '."containerimage.digest"' /tmp/dsg-registry-preflight.json)"
+          preflight_config="$(jq -er '."containerimage.config.digest"' /tmp/dsg-registry-preflight.json)"
+          test "$preflight_digest" = "$DSG_EXPECTED_MANIFEST_DIGEST"
+          test "$preflight_config" = "$DSG_EXPECTED_CONFIG_DIGEST"
+          echo "DSG_PUBLICATION_TAG=$tag" >> "$GITHUB_ENV"
+          echo "registry-exporter-preflight=$preflight_digest"
+
+      - name: Authenticate to Google Cloud through main-only WIF
+        id: auth
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+          create_credentials_file: true
+          export_environment_variables: true
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
+        with:
+          version: "583.0.0"
+
+      - name: Require exact preflight-only registry before runner publication
+        shell: bash
+        run: |
+          set -euo pipefail
+          active_account="$(gcloud auth list --filter=status:ACTIVE --format='value(account)')"
+          test "$active_account" = "$GCP_DEPLOY_SERVICE_ACCOUNT"
+          gcloud config set project "$GCP_PROJECT_ID" >/dev/null
+          gcloud artifacts repositories describe dsg-f3-a3 --project="$GCP_PROJECT_ID" --location="$GCP_REGION" --format=json >/tmp/registry-before.json
+          gcloud artifacts docker images list "${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/dsg-f3-a3" --include-tags --format=json >/tmp/images-before.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          repository = json.loads(Path("/tmp/registry-before.json").read_text(encoding="utf-8"))
+          expected_labels = {
+              "capability": "bkl-031",
+              "goog-terraform-provisioned": "true",
+              "increment": "f3-a3",
+              "purpose": "validation-spike",
+              "safety": "none",
+          }
+          if repository.get("name") != "projects/digital-stargate-telemetry/locations/europe-west8/repositories/dsg-f3-a3":
+              raise SystemExit(f"unexpected repository: {repository.get('name')!r}")
+          if repository.get("format") != "DOCKER" or repository.get("mode") != "STANDARD_REPOSITORY":
+              raise SystemExit("unexpected repository format or mode")
+          if repository.get("labels") != expected_labels:
+              raise SystemExit(f"unexpected repository labels: {repository.get('labels')!r}")
+          images = json.loads(Path("/tmp/images-before.json").read_text(encoding="utf-8"))
+          expected_package = "europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike"
+          expected_digest = "sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce"
+          if len(images) != 1:
+              raise SystemExit(f"expected one preflight image, received {len(images)}: {images!r}")
+          image = images[0]
+          if image.get("package") != expected_package or image.get("version") != expected_digest:
+              raise SystemExit(f"unexpected pre-publication image: {image!r}")
+          if image.get("tags", []) != ["candidate-3abc8aa04926"]:
+              raise SystemExit(f"unexpected preflight image tags: {image.get('tags')!r}")
+          PY
+          gcloud auth configure-docker "${GCP_REGION}-docker.pkg.dev" --quiet
+
+      - name: Publish only the exact reviewed manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          export SOURCE_DATE_EPOCH=0
+          tagged_reference="${DSG_IMAGE_REPOSITORY}:${DSG_PUBLICATION_TAG}"
+          output="type=image,name=${tagged_reference},push=true,oci-mediatypes=true,rewrite-timestamp=true,compatibility-version=30"
+          docker buildx build --builder dsg-runner-publication --platform linux/amd64 --network=none --pull=false --no-cache --provenance=false --sbom=false --build-arg SOURCE_DATE_EPOCH=0 --metadata-file /tmp/dsg-published.json --output "$output" --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile.runner infrastructure/bkl-031-f3-a3-gcp
+          published_digest="$(jq -er '."containerimage.digest"' /tmp/dsg-published.json)"
+          published_config="$(jq -er '."containerimage.config.digest"' /tmp/dsg-published.json)"
+          test "$published_digest" = "$DSG_EXPECTED_MANIFEST_DIGEST"
+          test "$published_config" = "$DSG_EXPECTED_CONFIG_DIGEST"
+          immutable_reference="${DSG_IMAGE_REPOSITORY}@${published_digest}"
+          echo "DSG_PUBLISHED_IMAGE_REFERENCE=$immutable_reference" >> "$GITHUB_ENV"
+          printf 'published-tag=%s\npublished-reference=%s\n' "$tagged_reference" "$immutable_reference"
+
+      - name: Verify registry-resolved bytes and exclusive inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker buildx imagetools inspect --raw "$DSG_PUBLISHED_IMAGE_REFERENCE" >/tmp/registry-manifest.json
+          registry_digest="sha256:$(sha256sum /tmp/registry-manifest.json | cut -d' ' -f1)"
+          registry_config="$(jq -er '.config.digest' /tmp/registry-manifest.json)"
+          test "$registry_digest" = "$DSG_EXPECTED_MANIFEST_DIGEST"
+          test "$registry_config" = "$DSG_EXPECTED_CONFIG_DIGEST"
+          gcloud artifacts docker images describe "$DSG_PUBLISHED_IMAGE_REFERENCE" --format=json >/tmp/published-image.json
+          gcloud artifacts docker images list "${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/dsg-f3-a3" --include-tags --format=json >/tmp/images-after.json
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          expected_digest = os.environ["DSG_EXPECTED_MANIFEST_DIGEST"]
+          expected_preflight_digest = "sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce"
+          expected_package = "europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike"
+          expected_tag = os.environ["DSG_PUBLICATION_TAG"]
+          images = json.loads(Path("/tmp/images-after.json").read_text(encoding="utf-8"))
+          if len(images) != 2:
+              raise SystemExit(f"expected preflight and runner images, received {len(images)}: {images!r}")
+          by_digest = {image.get("version"): image for image in images}
+          if set(by_digest) != {expected_preflight_digest, expected_digest}:
+              raise SystemExit(f"unexpected registry digest inventory: {sorted(by_digest)!r}")
+          for image in images:
+              if image.get("package") != expected_package:
+                  raise SystemExit(f"unexpected package: {image.get('package')!r}")
+          if by_digest[expected_preflight_digest].get("tags", []) != ["candidate-3abc8aa04926"]:
+              raise SystemExit("preflight image identity or tag changed")
+          if by_digest[expected_digest].get("tags", []) != [expected_tag]:
+              raise SystemExit(f"unexpected runner tags: {by_digest[expected_digest].get('tags')!r}")
+          described = json.loads(Path("/tmp/published-image.json").read_text(encoding="utf-8"))
+          if described.get("image_summary", {}).get("digest") not in (None, expected_digest):
+              raise SystemExit(f"unexpected described digest: {described!r}")
+          PY
+
+      - name: Record bounded publication evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat <<EOF >> "$GITHUB_STEP_SUMMARY"
+          ## BKL-031 F3-A3 exact runner OCI publication
+
+          sourceCommit=${GITHUB_SHA}
+          manifestDigest=${DSG_EXPECTED_MANIFEST_DIGEST}
+          configDigest=${DSG_EXPECTED_CONFIG_DIGEST}
+          immutableReference=${DSG_PUBLISHED_IMAGE_REFERENCE}
+          tag=${DSG_PUBLICATION_TAG}
+          registryInventory=TWO_EXACT_IMAGES_PREFLIGHT_AND_RUNNER
+          publication=EXECUTED_EXACT_DIGEST
+          platformPlan=NOT_EXECUTED
+          platformApply=NOT_EXECUTED
+          artifactUpload=NOT_EXECUTED
+          scientificExecution=NOT_EXECUTED
+          externalReferenceTraffic=NOT_EXECUTED
+          protectedSiteUse=NOT_EXECUTED
+          runtimeActivation=NOT_EXECUTED
+          EOF
