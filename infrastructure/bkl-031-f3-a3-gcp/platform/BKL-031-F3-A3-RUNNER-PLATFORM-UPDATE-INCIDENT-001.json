@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0",
+  "incidentId": "BKL-031-F3-A3-RUNNER-PLATFORM-UPDATE-INCIDENT-001",
+  "status": "FAIL_CLOSED_BEFORE_AUTHENTICATION_NO_CLOUD_MUTATION",
+  "recordedAtUtc": "2026-09-16T21:26:49Z",
+  "sourceCommit": "94615aa8d74d604a8d10196d3c6de22d19148791",
+  "workflow": {
+    "name": "BKL-031 F3-A3 Exact Runner Platform Update",
+    "runId": 35152386533,
+    "jobId": 104983607065,
+    "event": "workflow_dispatch",
+    "conclusion": "failure",
+    "url": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35152386533"
+  },
+  "failure": {
+    "step": "Verify immutable publication evidence and update gate",
+    "reason": "METHOD_PROFILE_VERIFIER_ENVIRONMENT_NOT_EXPORTED",
+    "message": "DSG_METHOD_PROFILE_PATH and DSG_METHOD_PROFILE_SHA256 are required."
+  },
+  "controls": {
+    "cloudAuthentication": "SKIPPED",
+    "registryRead": "SKIPPED",
+    "kernelRead": "SKIPPED",
+    "terraformInit": "SKIPPED",
+    "terraformPlan": "SKIPPED",
+    "terraformApply": "SKIPPED",
+    "jobExecution": "NOT_EXECUTED",
+    "scientificExecution": "NOT_EXECUTED",
+    "cloudMutation": "NOT_EXECUTED"
+  },
+  "remediation": "EXPORT_EXACT_REVIEWED_METHOD_PROFILE_PATH_AND_SHA256_ONLY_FOR_VERIFICATION_STEP",
+  "rerunPolicy": "SEPARATELY_REVIEW_CORRECTED_EXACT_HEAD_BEFORE_NEW_DISPATCH"
+}

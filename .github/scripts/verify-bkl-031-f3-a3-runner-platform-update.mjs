@@ -7,6 +7,7 @@ const workflow = read(".github", "workflows", "bkl-031-f3-a3-runner-platform-upd
 const main = read("infrastructure", "bkl-031-f3-a3-gcp", "platform", "main.tf");
 const variables = read("infrastructure", "bkl-031-f3-a3-gcp", "platform", "variables.tf");
 const evidence = JSON.parse(read("infrastructure", "bkl-031-f3-a3-gcp", "container", "BKL-031-F3-A3-RUNNER-OCI-PUBLICATION-EVIDENCE-001.json"));
+const incident = JSON.parse(read("infrastructure", "bkl-031-f3-a3-gcp", "platform", "BKL-031-F3-A3-RUNNER-PLATFORM-UPDATE-INCIDENT-001.json"));
 
 const runnerSource = "9db0267529b6d46a2510b415e4b3f51d668ff024";
 const oldDigest = "sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce";
@@ -33,6 +34,8 @@ for (const fragment of [
   `TF_VAR_runner_source_commit: ${runnerSource}`,
   "node .github/scripts/verify-bkl-031-f3-a3-exact-runner-oci-publication.mjs",
   "node .github/scripts/verify-bkl-031-f3-a3-runner-platform-update.mjs",
+  "DSG_METHOD_PROFILE_PATH: infrastructure/bkl-031-f3-a3-gcp/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json",
+  "DSG_METHOD_PROFILE_SHA256: e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca",
   "gcloud artifacts docker images list",
   "if len(images) != 2:",
   "gcloud run jobs executions list",
@@ -80,5 +83,13 @@ if (evidence.status !== "EXACT_RUNNER_OCI_PUBLISHED_POST_VERIFIED") fail("runner
 if (evidence.source?.commit !== runnerSource || evidence.image?.reference !== runnerImage) fail("runner publication evidence does not bind the exact source and image");
 if (evidence.controls?.jobExecution !== "NOT_EXECUTED" || evidence.controls?.scientificExecution !== "NOT_EXECUTED") fail("runner publication evidence overstates execution");
 if (evidence.nextGate !== "EXACT_ONE_UPDATE_RUNNER_PLATFORM_PLAN_APPLY") fail("runner publication evidence does not authorize this gate");
+
+if (incident.status !== "FAIL_CLOSED_BEFORE_AUTHENTICATION_NO_CLOUD_MUTATION") fail("runner platform update incident status mismatch");
+if (incident.workflow?.runId !== 35152386533 || incident.workflow?.jobId !== 104983607065 || incident.workflow?.conclusion !== "failure") fail("runner platform update incident run identity mismatch");
+if (incident.failure?.reason !== "METHOD_PROFILE_VERIFIER_ENVIRONMENT_NOT_EXPORTED") fail("runner platform update incident reason mismatch");
+for (const control of ["cloudAuthentication", "registryRead", "kernelRead", "terraformInit", "terraformPlan", "terraformApply"]) {
+  if (incident.controls?.[control] !== "SKIPPED") fail(`runner platform update incident ${control} must be SKIPPED`);
+}
+if (incident.controls?.jobExecution !== "NOT_EXECUTED" || incident.controls?.scientificExecution !== "NOT_EXECUTED" || incident.controls?.cloudMutation !== "NOT_EXECUTED") fail("runner platform update incident must preserve zero execution and mutation");
 
 console.log(`BKL-031 F3-A3 exact runner platform update verified: ${runnerImage}; one in-place job update; science NOT_EXECUTED`);

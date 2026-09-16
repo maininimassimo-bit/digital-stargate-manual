@@ -79,6 +79,9 @@ jobs:
           node-version: "24"
 
       - name: Verify immutable publication evidence and update gate
+        env:
+          DSG_METHOD_PROFILE_PATH: infrastructure/bkl-031-f3-a3-gcp/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json
+          DSG_METHOD_PROFILE_SHA256: e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca
         run: |
           node .github/scripts/verify-bkl-031-f3-a3-method-profile.mjs
           node .github/scripts/verify-bkl-031-f3-a3-exact-runner-oci-publication.mjs
