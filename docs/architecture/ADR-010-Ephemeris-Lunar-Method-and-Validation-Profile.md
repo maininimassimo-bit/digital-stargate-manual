@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Status | **PROPOSED — REGISTRY FOUNDATION POST-VERIFIED / IMAGE NOT PUBLISHED / SCIENTIFIC CAMPAIGN NOT EXECUTED** |
+| Status | **PROPOSED — VALIDATION PLATFORM AND EXACT KERNEL READY / SCIENTIFIC CAMPAIGN NOT EXECUTED** |
 | Date | 2026-09-15 |
 | Release | Release 2.x planning increment |
 | Capability | BKL-031 F3-A3 |
@@ -12,9 +12,9 @@
 
 ## Context
 
-F3-A1 and F3-A2 have completed repository authority, but S08/S09 remain unavailable to runtime and S10 remains `UNAVAILABLE`. The owner approved the prudent method, accuracy, time-data, host and capacity baseline and completed F3-OD05 with the exact `de442s.bsp` identity, coverage, provenance, notices and SHA-256. Exact dependency/IERS inputs, reproducible offline container build, OCI publication and four-resource platform materialization are verified; the kernel object and scientific validation remain absent.
+F3-A1 and F3-A2 have completed repository authority, but S08/S09 remain unavailable to runtime and S10 remains `UNAVAILABLE`. The owner approved the prudent method, accuracy, time-data, host and capacity baseline and completed F3-OD05 with the exact `de442s.bsp` identity, coverage, provenance, notices and SHA-256. Exact dependency/IERS inputs, reproducible offline container build, OCI publication, four-resource platform materialization and private content-addressed kernel publication are verified; scientific validation remains absent.
 
-This ADR records complete owner dispositions for F3-OD04–F3-OD10 and authorizes repository evidence and validation-only infrastructure source. It remains Proposed and does not authorize image publication, platform apply, further scientific-artifact acquisition, artifact upload, spike execution or runtime integration.
+This ADR records complete owner dispositions for F3-OD04–F3-OD10 and the separately governed preparatory evidence. It remains Proposed and does not authorize spike execution, further scientific-artifact acquisition, Horizons traffic, protected-site use or runtime integration.
 
 ## Decision drivers
 
@@ -107,7 +107,7 @@ Not authorized now:
 ### Negative
 
 - the one-time GCP administrator bootstrap, permanent-backend promotion and post-promotion verification are complete;
-- ARB-213-MI01 and ARB-213-MI02 are satisfied; exact artifact acquisition, reproducible build, network-disabled preflight and authenticated exact-head plan evidence are recorded, while registry foundation, immutable image publication and a refreshed published-digest plan still block platform apply and spike execution;
+- ARB-213-MI01 and ARB-213-MI02 are satisfied; exact dependency/IERS acquisition, reproducible build, network-disabled preflight, OCI publication, platform apply and private kernel publication evidence are recorded, while scientific-spike execution remains a separate blocked gate;
 - Cloud Run cold start and regional service availability must be measured;
 - private VPC egress prevents Horizons from the local job profile.
 
@@ -122,9 +122,10 @@ Not authorized now:
 7. the authenticated exact-head plan-only gate produced a verified five-create plan with an unpublished reproducible OCI digest;
 8. a separately reviewed registry-foundation apply creates only the target repository, then the exact OCI candidate is published;
 9. the authenticated plan is refreshed with the published registry digest and platform apply is separately reviewed;
-10. the bounded spike is executed and evidence reviewed;
-11. ADR-010 is Accepted, Rejected or remains Proposed;
-12. F3-B remains blocked until acceptance conditions are satisfied.
+10. the exact approved kernel is acquired and privately published through a separately reviewed one-shot gate;
+11. the bounded spike is executed through a separately reviewed gate and evidence reviewed;
+12. ADR-010 is Accepted, Rejected or remains Proposed;
+13. F3-B remains blocked until acceptance conditions are satisfied.
 
 ## Validation
 
@@ -134,11 +135,12 @@ Current evidence:
 
 - owner dispositions recorded on 2026-09-15;
 - Google Cloud topology and Terraform scaffolding prepared;
-- bootstrap Terraform apply executed with 27 additions, 0 changes and 0 destroys; platform Terraform apply `NOT EXECUTED`;
-- exact container/IERS manifest and fail-closed source contract verified; ten artifacts acquired ephemerally; two reproducible offline builds and network-disabled preflight `PASS`; image push and artifact upload `NOT EXECUTED`;
-- authenticated workflow run `35131365596` on `main@380bd8c3d04f570acb21a9a7f532930111adcdc8` produced two identical OCI manifest digests and an exact platform plan of 5 additions, 0 changes and 0 destroys; the backend state is present and empty; platform apply `NOT EXECUTED`;
+- bootstrap Terraform apply executed with 27 additions, 0 changes and 0 destroys; protected backend promotion and zero drift verified;
+- exact container/IERS manifest and fail-closed source contract verified; ten artifacts acquired ephemerally; two reproducible offline builds and network-disabled preflight `PASS`; exact OCI manifest published and post-verified;
+- exact four-resource platform applied from a reviewed saved plan with zero immediate drift and zero job executions;
+- run `35146023621` made one approved NAIF request and one generation-zero private upload; GCS generation `1789590110146663` passed full read-back with exact size, `DAF/SPK`, SHA-256 and MD5;
 - spike and scientific campaign `NOT EXECUTED`;
-- dependency/IERS acquisition `EXACT_HASH_VERIFIED_EPHEMERAL`; SPK and other scientific-data acquisition `NOT EXECUTED`;
+- dependency/IERS acquisition `EXACT_HASH_VERIFIED_EPHEMERAL`; approved SPK acquisition/publication `EXACT_PRIVATE_OBJECT_FULL_READBACK_VERIFIED`; other scientific-data acquisition `NOT EXECUTED`;
 - privacy/runtime/OAT `NOT EXECUTED`.
 
 ## Traceability
@@ -153,6 +155,7 @@ Current evidence:
 - BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-001@sha256:06cf923ae2bad1e869782bffd6a7e5389f9a68419d6199d0d7df5319f50b12e6;
 - BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-002@sha256:8d1864d0a766d11ff51c8461adc12714a845ef41ee624dbd1e17826cf2d5fbbb;
 - BKL-031-F3-A3-PLATFORM-APPLY-EVIDENCE-001@sha256:ca5952b67904f514e2e05b7abfd8aeb4df71cfdba89958441ca233bd01e710b8;
+- BKL-031-F3-A3-KERNEL-PUBLICATION-EVIDENCE-001@sha256:53ca4364cd8c24495a5a7f4d1ca8bf6af3dfd1683ff6e8d73ffad7b884ef399b;
 - ARB-213-MI01;
 - BKL-031-F3-A3-INFRA-001;
 - BKL-031-F3-A3-VAL-001;
@@ -166,8 +169,8 @@ ADR-010 may become Accepted only when F3-OD05 is exact, all package/container/da
 
 ## Rollback
 
-Revert the repository package for source changes. The authorized bootstrap and applied platform state require the governed Terraform state-recovery and rollback procedure; artifact upload, job execution and scientific runtime remain unauthorized.
+Revert the repository package for source changes. The authorized bootstrap and applied platform state require the governed Terraform state-recovery and rollback procedure. The private content-addressed kernel object is immutable evidence input; deletion or replacement requires a separate governed action. Job execution and scientific runtime remain unauthorized.
 
 ## Governance stop
 
-The authenticated exact-head plan, isolated Artifact Registry foundation, exact OCI publication and exact four-resource platform apply gates are complete. The registry contains one post-verified image at the approved digest. The platform state contains only the private VPC, subnet, digest-pinned Cloud Run Job and invoker binding; zero drift and zero job executions are verified. Stop before separately reviewed exact kernel acquisition and private content-addressed upload. Artifact upload, spike execution, protected-site use and runtime activation remain blocked. S10 remains `UNAVAILABLE`.
+The authenticated exact-head plan, isolated Artifact Registry foundation, exact OCI publication, exact four-resource platform apply and exact private kernel publication gates are complete. The registry contains one post-verified image at the approved digest. The platform state contains only the private VPC, subnet, digest-pinned Cloud Run Job and invoker binding; the private data bucket contains the one approved content-addressed kernel generation; zero job executions are verified. Stop before separately reviewed exact scientific-spike execution. Horizons traffic, protected-site use and runtime activation remain blocked. S10 remains `UNAVAILABLE`.

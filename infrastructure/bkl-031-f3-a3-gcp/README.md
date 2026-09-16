@@ -2,7 +2,7 @@
 
 This directory contains the governed Terraform and container gates for the future ephemeris/lunar validation spike.
 
-Current state: BOOTSTRAP APPLIED, REMOTE STATE AND BACKEND PROMOTION POST-VERIFIED, REPRODUCIBLE OFFLINE CONTAINER BUILD AND NETWORK-DISABLED PREFLIGHT VERIFIED, REGISTRY FOUNDATION APPLIED, EXACT OCI IMAGE PUBLISHED, EXACT FOUR-RESOURCE PLATFORM APPLIED AND ZERO-DRIFT VERIFIED, JOB NOT EXECUTED, KERNEL NOT UPLOADED.
+Current state: BOOTSTRAP APPLIED, REMOTE STATE AND BACKEND PROMOTION POST-VERIFIED, REPRODUCIBLE OFFLINE CONTAINER BUILD AND NETWORK-DISABLED PREFLIGHT VERIFIED, REGISTRY FOUNDATION APPLIED, EXACT OCI IMAGE PUBLISHED, EXACT FOUR-RESOURCE PLATFORM APPLIED AND ZERO-DRIFT VERIFIED, EXACT APPROVED KERNEL PRIVATELY PUBLISHED AND FULL-READ-BACK VERIFIED, JOB NOT EXECUTED.
 
 ## Directories
 
@@ -56,7 +56,7 @@ The platform module deliberately requires:
 - immutable method profile `BKL-031-F3-A3-METHOD-PROFILE-001` at SHA-256 `e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`;
 - an exact owner-decision reference.
 
-F3-OD05 is approved at artifact-identity level by `BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16`. The checked-in example carries the approved non-secret SPK digest and future private URI while retaining placeholders for still-unmaterialized runtime identities and artifacts. The SPK binary is never repository content.
+F3-OD05 is approved at artifact-identity level by `BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16`. The checked-in example carries the approved non-secret SPK digest and private URI while retaining placeholders for still-unmaterialized runtime identities and artifacts. The SPK binary is never repository content.
 
 `BKL-031-F3-A3-CONTAINER-MANIFEST-002` fixes the linux/amd64 Python base and BuildKit by platform digest, every Python wheel by version and SHA-256, and `astropy-iers-data 0.2026.9.14.0.56.43` by SHA-256 `43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc`. Its raw SHA-256 is `02ceba17c1ac97f780cd545554b254ee668d840fcd85e11310d07c4ecc37e879`. The container embeds the exact method profile and requires a fail-closed preflight before any supplied command. CI rejects manifest, dependency, base-image, build-tool, IERS, policy or source-file drift.
 
@@ -83,6 +83,8 @@ PR #233 merged that gate as `af81b807c8f6d8861ede3ecf3ae9b34e66df7790`. Run `351
 The candidate `BKL-031 F3-A3 Exact Kernel Acquisition and Upload` workflow is manual and accepts only an exact `main` commit through the established WIF deployer. Before any external request it requires the protected data bucket, the exact reviewed four-resource platform state, the digest-pinned job with zero executions and an empty kernel prefix. A committed Node acquisition script performs one HTTPS request to the owner-approved NAIF URL, rejects redirects and verifies `32701440` bytes, `DAF/SPK`, SHA-256 `54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c` and MD5 `cc49327e06088124c0e39d8dde9f0b58`. The workflow contains one upload command, guarded by destination generation `0` and server-side Content-MD5, to the exact private content-addressed URI. It then reads the GCS object back, verifies the bytes and exclusive one-object inventory, confirms the job remains unexecuted and removes local ephemeral copies. This source package prepares the gate; it does not acquire or upload the kernel.
 
 The first dispatch, run `35145051566`, stopped before acquisition because the least-privilege deployer correctly lacks the bucket-control-plane `storage.buckets.get` permission. No source request or upload occurred. The remediation preserves that IAM boundary and verifies the data bucket through the exact bootstrap state object already available to the deployer: raw live-generation SHA-256 `735b5fe6f368802ebf66ba14248ae85e9b7c7016e6a199e1561ea024d0a56386`, lineage `50e17f72-9d0a-0152-1130-060b583f103a`, serial `24`, and exact private/versioned/non-destructive attributes. Object listing still proves the approved bucket is reachable and the kernel prefix is empty before acquisition.
+
+PR #236 merged that least-privilege remediation as `824afce15fe119b94e436fd19ec185d59e91e02c`. Run `35146023621` passed the exact bootstrap/platform/job/empty-prefix preconditions, made one non-redirected request to the approved NAIF source, verified the approved size, SPICE header, SHA-256 and MD5, and made one destination-generation-zero upload to the private content-addressed URI. GCS generation `1789590110146663` was then read back completely and reverified; the prefix contains exactly one object and Cloud Run execution count remains zero. `BKL-031-F3-A3-KERNEL-PUBLICATION-EVIDENCE-001` records the result at SHA-256 `53ca4364cd8c24495a5a7f4d1ca8bf6af3dfd1683ff6e8d73ffad7b884ef399b`. The next gate is separately reviewed exact scientific-spike execution. Horizons traffic, protected-site use and runtime activation remain blocked.
 
 ## Local validation
 

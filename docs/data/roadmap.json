@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-16",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "c0d9d550a8aa6826602d05a1afd8d9e5c0b0fb047a892041fff10b158942524e",
+  "sourceDigest": "cfb44177a9746193b2c2752f98051569498b8ce9bc151edcd445cd7353983110",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-A3 exact four-resource platform applied and zero-drift verified; job unexecuted; kernel absent; ADR-010 proposed; S10 unavailable",
+  "projectStatus": "BKL-031 F3-A3 exact approved kernel privately published and full-read-back verified; job unexecuted; scientific spike not executed; ADR-010 proposed; S10 unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A3 separately reviewed exact kernel acquisition and private content-addressed upload",
-  "target": "Prepare and review a bounded gate that acquires the owner-approved de442s.bsp from the approved source, verifies its exact identity and uploads only the content-addressed private object. Stop before job execution, Horizons request, protected-site use and runtime activation; ADR-010 remains Proposed and S10 remains UNAVAILABLE.",
+  "nextMilestone": "BKL-031 F3-A3 separately reviewed exact scientific-spike execution",
+  "target": "Prepare and review the bounded exact scientific-spike execution gate against the published image, immutable method profile and full-read-back-verified private de442s.bsp generation. Stop before execution until that gate completes; prohibit Horizons traffic, protected-site use and runtime activation; ADR-010 remains Proposed and S10 remains UNAVAILABLE.",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -307,7 +307,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3-A3 decisions, immutable method profile, bootstrap/MI02, reproducible offline build, Artifact Registry foundation and exact OCI publication are complete. Main-only WIF run 35141947085 applied only the exact saved plan with four additions, zero changes and zero destroys. The private network, subnet, digest-pinned Cloud Run Job and deployer invoker binding persist at zero drift; job execution count is zero and the approved kernel object remains absent. Artifact upload and scientific cases remain NOT EXECUTED. ADR-010 remains Proposed and S10 remains UNAVAILABLE."
+          "note": "F3-A3 decisions, immutable method profile, bootstrap/MI02, reproducible offline build, Artifact Registry foundation, exact OCI publication and four-resource platform apply are complete. Main-only WIF run 35146023621 made one approved NAIF request and one generation-zero private upload; GCS generation 1789590110146663 passed full read-back with exact size, DAF/SPK, SHA-256 and MD5. The private prefix contains one approved kernel object and job execution count remains zero. Scientific cases remain NOT EXECUTED. ADR-010 remains Proposed and S10 remains UNAVAILABLE."
         },
         {
           "id": "BKL-032",
@@ -755,6 +755,14 @@
       "title": "BKL-031 F3-A3 Exact Four-Resource Platform Apply Evidence",
       "date": "2026-09-16",
       "description": "Main-only WIF run 35141947085 applied only the verified saved plan with exactly 4 additions, 0 changes and 0 destroys. The exact private network, subnet, digest-pinned Cloud Run Job and deployer invoker binding persist with zero immediate drift. Job execution count is zero and the approved kernel object remains absent; artifact upload and scientific execution did not occur.",
+      "status": "active"
+    },
+    {
+      "id": "M-BKL031-F3-A3-KERNEL-PUBLICATION-EVIDENCE",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A3 Exact Private Kernel Publication Evidence",
+      "date": "2026-09-16",
+      "description": "Main-only WIF run 35146023621 made exactly one request to the approved NAIF source and one generation-zero upload to the private content-addressed URI. GCS generation 1789590110146663 passed full read-back with exact size, DAF/SPK, SHA-256 and MD5; the prefix contains one object and Cloud Run execution count remains zero. Scientific execution did not occur.",
       "status": "active"
     }
   ]
