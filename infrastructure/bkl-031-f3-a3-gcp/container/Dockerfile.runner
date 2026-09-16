@@ -33,16 +33,17 @@ RUN python -m pip install \
       -xdev -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} +
 
 COPY method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json /app/dsg/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json
-COPY container/BKL-031-F3-A3-RUNNER-MANIFEST-001.json /app/dsg/container/BKL-031-F3-A3-RUNNER-MANIFEST-001.json
+COPY container/BKL-031-F3-A3-RUNNER-MANIFEST-002.json /app/dsg/container/BKL-031-F3-A3-RUNNER-MANIFEST-002.json
 COPY container/astropy.cfg /app/dsg/config/astropy/astropy.cfg
 COPY container/preflight.py /app/dsg/container/preflight.py
 COPY container/entrypoint.sh /app/dsg/container/entrypoint.sh
 COPY runner/scientific_runner.py /app/dsg/runner/scientific_runner.py
+COPY runner/offline_exact_kernel_validation.py /app/dsg/runner/offline_exact_kernel_validation.py
 COPY runner/BKL-031-F3-A3-SYNTHETIC-CAMPAIGN-001.json /app/dsg/runner/BKL-031-F3-A3-SYNTHETIC-CAMPAIGN-001.json
 
 RUN groupadd --gid 65532 dsg \
     && useradd --uid 65532 --gid 65532 --no-create-home --no-log-init --shell /usr/sbin/nologin dsg \
-    && chmod 0555 /app/dsg/container/entrypoint.sh /app/dsg/runner/scientific_runner.py \
+    && chmod 0555 /app/dsg/container/entrypoint.sh /app/dsg/runner/scientific_runner.py /app/dsg/runner/offline_exact_kernel_validation.py \
     && chown -R 65532:65532 /app/dsg \
     && find /app/dsg -xdev -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} + \
     && touch -d "@${SOURCE_DATE_EPOCH}" \

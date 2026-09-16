@@ -28,6 +28,7 @@ KERNEL_URI = (
 )
 CAMPAIGN_ID = "BKL-031-F3-A3-SYNTHETIC-CAMPAIGN-001"
 ALLOWED_TARGETS = frozenset({"mars", "moon"})
+SKYFIELD_TARGET_NAMES = {"mars": "mars barycenter", "moon": "moon"}
 UTC_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
 SHA_PATTERN = re.compile(r"^[0-9a-f]{40}$")
 MAX_REQUEST_BYTES = 262_144
@@ -236,7 +237,9 @@ def calculate(campaign: dict[str, Any], kernel_path: Path, profile: dict[str, An
                 primary_altaz = primary_gcrs.transform_to(
                     AltAz(obstime=astropy_time, location=astropy_location, pressure=0 * u.Pa)
                 )
-                secondary_apparent = skyfield_observer.at(skyfield_time).observe(skyfield_ephemeris[target]).apparent()
+                secondary_apparent = skyfield_observer.at(skyfield_time).observe(
+                    skyfield_ephemeris[SKYFIELD_TARGET_NAMES[target]]
+                ).apparent()
                 secondary_alt, secondary_az, _ = secondary_apparent.altaz()
                 altitude_error = abs(primary_altaz.alt.deg - secondary_alt.degrees) * 3600.0
                 azimuth_error = circular_difference_degrees(primary_altaz.az.deg, secondary_az.degrees) * 3600.0
@@ -297,7 +300,7 @@ def calculate(campaign: dict[str, Any], kernel_path: Path, profile: dict[str, An
         ).alt.deg
         skyfield_transit_times = timescale.from_datetimes(transit_datetimes)
         skyfield_transit_altitudes = skyfield_observer.at(skyfield_transit_times).observe(
-            skyfield_ephemeris[transit["target"]]
+            skyfield_ephemeris[SKYFIELD_TARGET_NAMES[transit["target"]]]
         ).apparent().altaz()[0].degrees
         primary_transit_index = int(astropy_transit_altitudes.argmax())
         secondary_transit_index = int(skyfield_transit_altitudes.argmax())
@@ -397,6 +400,8 @@ def contract_self_test() -> None:
         raise AssertionError("negative contract mutation was accepted")
     if circular_difference_degrees(359.0, 1.0) != 2.0:
         raise AssertionError("circular difference is incorrect")
+    if SKYFIELD_TARGET_NAMES != {"mars": "mars barycenter", "moon": "moon"}:
+        raise AssertionError("reviewed Skyfield target resolution changed")
     peak = parabolic_peak_seconds([0.0, 1.0, 0.0], 1, 60)
     if peak != 60.0:
         raise AssertionError("parabolic peak refinement is incorrect")

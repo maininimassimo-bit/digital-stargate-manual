@@ -1,0 +1,129 @@
+name: BKL-031 F3-A3 Offline Exact Kernel Validation
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: Exact main commit authorized for read-only kernel retrieval and network-free validation
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: bkl-031-f3-a3-offline-exact-kernel-validation
+  cancel-in-progress: false
+
+jobs:
+  offline-exact-kernel-validation:
+    name: Exact-head remediated runner offline validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+      GCP_REGION: ${{ vars.GCP_REGION }}
+      GCP_WIF_PROVIDER: ${{ vars.GCP_WIF_PROVIDER }}
+      GCP_DEPLOY_SERVICE_ACCOUNT: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+      GCP_DATA_BUCKET: ${{ vars.GCP_DATA_BUCKET }}
+      DSG_AUTHORIZED_COMMIT: ${{ inputs.expected_commit }}
+      DSG_KERNEL_URI: gs://digital-stargate-telemetry-183451329061-f3-data/bkl-031/f3-a3/artifacts/spk/de442s/sha256/54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c/de442s.bsp
+      DSG_KERNEL_SHA256: 54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Require exact authorized main head and identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${GITHUB_REF}" = "refs/heads/main"
+          test "${GITHUB_SHA}" = "${DSG_AUTHORIZED_COMMIT}"
+          grep -Eq '^[0-9a-f]{40}$' <<<"${GITHUB_SHA}"
+          test "${GCP_PROJECT_ID}" = "digital-stargate-telemetry"
+          test "${GCP_REGION}" = "europe-west8"
+          test "${GCP_WIF_PROVIDER}" = "projects/183451329061/locations/global/workloadIdentityPools/dsg-f3-a3-github/providers/github-main"
+          test "${GCP_DEPLOY_SERVICE_ACCOUNT}" = "dsg-f3-a3-deployer@digital-stargate-telemetry.iam.gserviceaccount.com"
+          test "${GCP_DATA_BUCKET}" = "digital-stargate-telemetry-183451329061-f3-data"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+
+      - name: Verify remediated source and offline validation policy
+        run: |
+          node .github/scripts/verify-bkl-031-f3-a3-scientific-runner-gate.mjs
+          node .github/scripts/verify-bkl-031-f3-a3-offline-exact-kernel-validation.mjs
+
+      - name: Acquire only reviewed wheels and verify exact bytes
+        run: >-
+          node .github/scripts/acquire-bkl-031-f3-a3-container-artifacts.mjs
+          --destination infrastructure/bkl-031-f3-a3-gcp/container/.build/wheels
+          --evidence infrastructure/bkl-031-f3-a3-gcp/container/.build/acquisition-evidence.json
+
+      - name: Build remediated candidate without network
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker pull --platform linux/amd64 python:3.12.14-slim-bookworm@sha256:9c47360a2a0355e2da18516d0b1c2126ec22c195d2185e97347c9d98398c5bef
+          buildkit_image='moby/buildkit:v0.30.0@sha256:57269d1784e49b46228c45a1a1b870fbe40e0a639ab60b37b032d83af5bccdfc'
+          docker pull --platform linux/amd64 "$buildkit_image"
+          docker buildx create --name dsg-offline-validation --driver docker-container --driver-opt "image=$buildkit_image" --use
+          docker buildx inspect --bootstrap
+          export SOURCE_DATE_EPOCH=0
+          output='type=docker,dest=/tmp/dsg-remediated-runner.tar,rewrite-timestamp=true,compatibility-version=30'
+          docker buildx build --builder dsg-offline-validation --platform linux/amd64 --network=none --pull=false --no-cache --provenance=false --sbom=false --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:remediated-candidate --output "$output" --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile.runner infrastructure/bkl-031-f3-a3-gcp
+          docker load --input /tmp/dsg-remediated-runner.tar
+          docker run --rm --network none dsg-bkl031-f3a3:remediated-candidate python /app/dsg/runner/scientific_runner.py --contract-self-test
+
+      - name: Authenticate to Google Cloud through main-only WIF
+        id: auth
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+          create_credentials_file: true
+          export_environment_variables: true
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
+        with:
+          version: "583.0.0"
+
+      - name: Retrieve the exact private kernel read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(gcloud auth list --filter=status:ACTIVE --format='value(account)')" = "$GCP_DEPLOY_SERVICE_ACCOUNT"
+          gcloud storage objects describe "$DSG_KERNEL_URI" --format=json >/tmp/kernel-metadata.json
+          gcloud storage cat "$DSG_KERNEL_URI" >/tmp/de442s.bsp
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          metadata = json.loads(Path('/tmp/kernel-metadata.json').read_text())
+          if str(metadata.get('generation')) != '1789590110146663' or int(metadata.get('size', -1)) != 32701440:
+              raise SystemExit(f'exact kernel metadata mismatch: {metadata!r}')
+          digest = hashlib.sha256(Path('/tmp/de442s.bsp').read_bytes()).hexdigest()
+          if digest != '54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c':
+              raise SystemExit(f'exact kernel digest mismatch: {digest}')
+          print('DSG_OFFLINE_KERNEL_INPUT={"generation":"1789590110146663","sha256":"54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c","sizeBytes":32701440,"storageOperation":"READ_ONLY"}')
+          PY
+
+      - name: Execute exact campaign twice with container network disabled
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m \
+            --mount type=bind,source=/tmp/de442s.bsp,target=/kernel/de442s.bsp,readonly \
+            dsg-bkl031-f3a3:remediated-candidate \
+            python /app/dsg/runner/offline_exact_kernel_validation.py --kernel /kernel/de442s.bsp \
+            | tee /tmp/offline-validation.log
+          grep -F 'DSG_OFFLINE_EXACT_KERNEL_VALIDATION=' /tmp/offline-validation.log
+
+      - name: Record zero-mutation postcondition
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'DSG_OFFLINE_VALIDATION_POSTCONDITION={"containerNetwork":"NONE","evidenceUpload":"NOT_EXECUTED","externalReferenceTraffic":"NOT_EXECUTED","jobExecution":"NOT_EXECUTED","platformMutation":"NOT_EXECUTED","protectedSiteUse":"NOT_EXECUTED","registryMutation":"NOT_EXECUTED","runtimeActivation":"NOT_EXECUTED"}'
