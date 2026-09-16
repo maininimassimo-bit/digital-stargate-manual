@@ -10,6 +10,14 @@ const platform = fs.readFileSync(path.join(infra, "platform", "main.tf"), "utf8"
 const variables = fs.readFileSync(path.join(infra, "platform", "variables.tf"), "utf8");
 const workflow = fs.readFileSync(path.join(root, ".github", "workflows", "bkl-031-f3-a3-gcp-iac.yml"), "utf8");
 const platformExample = fs.readFileSync(path.join(infra, "platform", "terraform.tfvars.example"), "utf8");
+const methodProfile = fs.readFileSync(
+  path.join(infra, "method-profile", "BKL-031-F3-A3-METHOD-PROFILE-001.json"),
+  "utf8",
+);
+const methodProfileVerifier = fs.readFileSync(
+  path.join(root, ".github", "scripts", "verify-bkl-031-f3-a3-method-profile.mjs"),
+  "utf8",
+);
 const bootstrapExample = fs.readFileSync(path.join(infra, "bootstrap", "terraform.tfvars.example"), "utf8");
 const spkApproval = fs.readFileSync(
   path.join(root, "docs", "project", "BKL-031-F3-A3-F3-OD05-SPK-APPROVAL-2026-09-16.md"),
@@ -51,6 +59,18 @@ requireText("variables", variables, 'var.data_bucket_name == "digital-stargate-t
 requireText("variables", variables, 'var.owner_decision_ref == "BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16"');
 requireText("bootstrap variables", bootstrapVariables, 'var.data_bucket_name == "digital-stargate-telemetry-183451329061-f3-data"');
 requireText("variables", variables, "kernel_artifact_uri");
+requireText("variables", variables, 'var.method_profile_sha256 == "e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca"');
+requireText("variables", variables, 'var.method_profile_path == "/app/dsg/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json"');
+requireText("platform", platform, "DSG_METHOD_PROFILE_ID");
+requireText("platform", platform, "DSG_METHOD_PROFILE_PATH");
+requireText("platform", platform, "DSG_METHOD_PROFILE_SHA256");
+requireText("platform example", platformExample, "e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca");
+requireText("method profile", methodProfile, '"profileId": "BKL-031-F3-A3-METHOD-PROFILE-001"');
+requireText("method profile", methodProfile, '"maximumConcurrency": 2');
+requireText("method profile", methodProfile, '"maximumAgeDaysAtCampaignPreparation": 30');
+requireText("method profile verifier", methodProfileVerifier, "e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca");
+requireText("method profile verifier", methodProfileVerifier, "Mutated method profile was not rejected");
+requireText("workflow", workflow, "Verify immutable method profile and reject drift");
 requireText("platform", platform, "DSG_KERNEL_URI");
 requireText("platform example", platformExample, "BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16");
 requireText("platform example", platformExample, "gs://digital-stargate-telemetry-183451329061-f3-data/bkl-031/f3-a3/artifacts/spk/de442s/sha256/54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c/de442s.bsp");
@@ -83,6 +103,7 @@ forbid("bootstrap", bootstrap, /private_key|credentials\s*=/i, "static credentia
 forbid("platform", platform, /google_compute_router_nat/, "Cloud NAT/public egress");
 forbid("backend template", backendTemplate, /bucket\s*=|credentials\s*=/i, "hard-coded backend identity or credential");
 forbid("workflow", workflow, /terraform\s+apply/, "cloud mutation in validation workflow");
+forbid("platform", platform, /DSG_MAX_TARGETS|DSG_MAX_INSTANTS_PER_TARGET|DSG_MAX_TARGET_INSTANT_PAIRS|DSG_MAX_SPAN_DAYS|DSG_MIN_GRID_STEP_SECONDS|DSG_MAX_REQUEST_BYTES/, "duplicated method-profile bounds");
 
 if (failures.length) {
   console.error(failures.join("\n"));

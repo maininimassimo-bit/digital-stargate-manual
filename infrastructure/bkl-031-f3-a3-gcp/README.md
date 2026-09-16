@@ -7,6 +7,7 @@ Current state: BOOTSTRAP NOT EXECUTED, PLATFORM NOT PLANNED, PLATFORM NOT APPLIE
 ## Directories
 
 - bootstrap: enables required APIs, creates the GitHub Workload Identity Federation trust, deployer/runtime service accounts, and private state/data/evidence buckets.
+- method-profile: stores the canonical owner-approved decision profile used by the future container preflight.
 - platform: creates Artifact Registry, an isolated VPC/subnet without Cloud NAT, and the digest-pinned Cloud Run Job.
 
 ## Safety and privacy
@@ -48,22 +49,26 @@ The platform module deliberately requires:
 - an immutable container image digest;
 - exact owner-approved SPK SHA-256 and private content-addressed URI;
 - exact IERS snapshot SHA-256;
+- immutable method profile `BKL-031-F3-A3-METHOD-PROFILE-001` at SHA-256 `e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`;
 - an exact owner-decision reference.
 
 F3-OD05 is approved at artifact-identity level by `BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16`. The checked-in example carries the approved non-secret SPK digest and future private URI while retaining placeholders for still-unmaterialized runtime identities and artifacts. The SPK binary is never repository content.
 
-This package has no authenticated plan/apply workflow. CI performs format, static policy and Terraform validation only. Bootstrap, authenticated plan/apply, upload and execution remain blocked by ARB-213-MI01, ARB-213-MI02 and exact-head re-review.
+The future container must embed the exact profile at `/app/dsg/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json` and invoke `.github/scripts/verify-bkl-031-f3-a3-method-profile.mjs` as a fail-closed preflight before scientific code. CI verifies the exact digest and proves that content or digest drift is rejected. No container has been built or executed.
+
+This package has no authenticated plan/apply workflow. CI performs method-profile preflight, static policy and Terraform validation only. Bootstrap, authenticated plan/apply, upload and execution remain blocked by ARB-213-MI02, exact artifact/container evidence and exact-head re-review.
 
 ## Local validation
 
 Run:
 
-1. node .github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs
-2. terraform -chdir=bootstrap fmt -check
-3. terraform -chdir=bootstrap init -backend=false
-4. terraform -chdir=bootstrap validate
-5. terraform -chdir=platform fmt -check
-6. terraform -chdir=platform init -backend=false
-7. terraform -chdir=platform validate
+1. set `DSG_METHOD_PROFILE_PATH=infrastructure/bkl-031-f3-a3-gcp/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json` and `DSG_METHOD_PROFILE_SHA256=e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`, then run `node .github/scripts/verify-bkl-031-f3-a3-method-profile.mjs`
+2. node .github/scripts/verify-bkl-031-f3-a3-gcp-bootstrap.mjs
+3. terraform -chdir=bootstrap fmt -check
+4. terraform -chdir=bootstrap init -backend=false
+5. terraform -chdir=bootstrap validate
+6. terraform -chdir=platform fmt -check
+7. terraform -chdir=platform init -backend=false
+8. terraform -chdir=platform validate
 
 No command above authenticates to GCP or mutates cloud resources.

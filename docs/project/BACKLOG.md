@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.27 |
+| Versione | 5.28 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -314,3 +314,8 @@ The owner approved the prudent method roles, numeric accuracy budget, pinned IER
 ### BKL-031 F3-A3 exact SPK owner decision — 16/09/2026
 
 F3-OD05 is owner-approved at the artifact identity and provenance level using `de442s.bsp` and its exact SHA-256/content-addressed future private URI. The repository package introduces no kernel binary, upload, cloud mutation or scientific execution. ARB-213-MI01 remains the next repository design gate; ARB-213-MI02 remains open pending separately authorized operational evidence. ADR-010 remains Proposed and S10 remains `UNAVAILABLE`.
+
+
+### BKL-031 F3-A3 immutable method profile — 16/09/2026
+
+`BKL-031-F3-A3-METHOD-PROFILE-001` is the repository-level ARB-213-MI01 evidence candidate. Its SHA-256 is `e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`; it carries every approved F3-OD06/F3-OD07/F3-OD10 value plus the related method, SPK, privacy, hosting and fail-closed boundaries. Terraform supplies only the exact profile ID/path/digest, and CI proves that mutated bytes or an unreviewed digest are rejected before calculation. No container build, IERS acquisition, GCP mutation or scientific execution is authorized. ARB-213-MI02, exact container inclusion and authenticated-plan review remain open.

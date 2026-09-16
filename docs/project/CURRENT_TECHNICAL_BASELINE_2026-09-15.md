@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-BASELINE-2026-09-15 |
-| Stato | **CURRENT — F3-A3 PARTIAL OWNER DECISION / REPOSITORY-ONLY GCP SCAFFOLDING** |
-| Repository baseline | `main@527b298094b07e5a00317e60cab3abefed7a5759` |
-| Current package | Partial ADR-010 decision + BKL-031-F3-A3-INFRA-001 + Terraform validation scaffolding |
+| Stato | **CURRENT — F3-A3 IMMUTABLE METHOD PROFILE / REPOSITORY-ONLY EVIDENCE** |
+| Repository baseline | `main@d8540736950e9d54dd726789f704a6b2d2a9a8bf` |
+| Current package | BKL-031-F3-A3-METHOD-PROFILE-001 + drift-rejecting preflight + Terraform digest wiring |
 | Runtime delta | None |
 | Data delta | None; no provider artifact, SPK, IERS data or protected-site payload acquired |
 | Infrastructure delta | Source only; Terraform/GitHub workflow added, no GCP resource created |
@@ -70,3 +70,8 @@ Repository source now defines a dedicated `europe-west8` Cloud Run Job profile, 
 ## F3-A3 exact SPK decision delta — 16/09/2026
 
 The repository records the owner-approved immutable identity of `de442s.bsp`, its official NAIF provenance, checksums, coverage, required SPICE chains and future private content-addressed object identity. The acquisition verification was isolated and produced no repository kernel, Google Cloud upload or runtime artifact. No Terraform plan/apply, scientific execution, Horizons request or protected-site use occurred.
+
+
+## F3-A3 immutable method-profile delta — 16/09/2026
+
+The repository carries `BKL-031-F3-A3-METHOD-PROFILE-001` at SHA-256 `e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`, covering every approved F3-OD06, F3-OD07 and F3-OD10 value and the associated method, kernel, privacy, hosting and fail-closed boundaries. Terraform exposes only the exact profile ID/path/digest; static preflight accepts the reviewed bytes and rejects mutated content or an unreviewed digest. Container build/inclusion, IERS materialization, cloud mutation and scientific execution remain absent.

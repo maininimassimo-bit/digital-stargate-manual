@@ -2,10 +2,10 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-16",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-A3 owner decisions complete; exact de442s identity approved; ADR-010 proposed; ARB-213-MI01/MI02 open; S10 unavailable",
+  "projectStatus": "BKL-031 F3-A3 immutable method profile recorded with drift-rejecting preflight; ADR-010 proposed; ARB-213-MI02 and execution evidence open; S10 unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A3 immutable method-profile evidence satisfying ARB-213-MI01",
-  "target": "Integrate the exact F3-OD05 de442s decision, then define and review the immutable full method profile required by ARB-213-MI01. No Google Cloud mutation, artifact upload, Terraform plan/apply, spike execution, Horizons request or runtime activation is authorized.",
+  "nextMilestone": "BKL-031 F3-A3 exact container inclusion and ARB-213-MI02 operational evidence",
+  "target": "Review and integrate the immutable full method profile and drift-rejecting preflight. Then stop before container build, artifact acquisition/upload, Google Cloud bootstrap, Terraform plan/apply, state migration, spike execution, Horizons request or runtime activation.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3-A3 owner dispositions F3-OD04–F3-OD10 are complete. The exact de442s.bsp identity, coverage, provenance, notices, SHA-256 and future private content-addressed URI are approved without upload or execution authority. ADR-010 remains Proposed; ARB-213-MI01/MI02 remain open; all scientific cases remain NOT EXECUTED and S10 remains UNAVAILABLE."
+          "note": "F3-A3 owner dispositions F3-OD04–F3-OD10 are complete. The exact de442s.bsp identity and immutable method profile are recorded with fail-closed static preflight. ADR-010 remains Proposed; ARB-213-MI02, exact container/IERS/plan evidence and all scientific cases remain open or NOT EXECUTED; S10 remains UNAVAILABLE."
         },
         {
           "id": "BKL-032",

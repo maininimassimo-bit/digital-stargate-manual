@@ -11,7 +11,7 @@
 | Root bootstrap | `AI_BOOTSTRAP.md` |
 | Continuity handover | `docs/project/HANDOVER_2026-09-15.md` |
 | Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-15.md` |
-| Current governed package | BKL-031 F3-A3 decision-preparation review candidate; ADR-010 proposed; owner decision pending |
+| Current governed package | BKL-031 F3-A3 immutable method-profile evidence; ADR-010 proposed; ARB-213-MI02 open |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo e gerarchia
@@ -123,3 +123,8 @@ F3-A3 remains a repository-governance package. Owner decisions F3-OD04–F3-OD10
 ## 13. F3-A3 decision-preparation boundary
 
 The approved F3-A3 decisions fix the candidate roles, exact local SPK identity, scientific thresholds, privacy boundary, host profile and bounded request values without changing enterprise intent. Implementation and acceptance remain gated by the immutable method profile and authorized scientific evidence. Domain remains provider-neutral; S10 remains `UNAVAILABLE`; Safety Authority and observatory operations are unchanged.
+
+
+## 14. F3-A3 immutable method-profile boundary
+
+`BKL-031-F3-A3-METHOD-PROFILE-001` is repository evidence for the approved method profile at SHA-256 `e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`. It is passed to future infrastructure by exact ID/path/digest and verified fail-closed before calculation. It does not provide a container image, IERS artifact, cloud plan/apply, scientific evidence, runtime S10 or Safety Authority.
