@@ -4,8 +4,8 @@ import path from "node:path";
 
 const root = process.cwd();
 const base = path.join("infrastructure", "bkl-031-f3-a3-gcp");
-const manifestRelative = path.join(base, "container", "BKL-031-F3-A3-RUNNER-MANIFEST-003.json");
-const expectedManifestSha256 = "4cfd685090cc12fdf46fdc92fe54f752f3d75e87c38310651b77fbed7ab922df";
+const manifestRelative = path.join(base, "container", "BKL-031-F3-A3-RUNNER-MANIFEST-004.json");
+const expectedManifestSha256 = "11163d6ac4901341b409e686740a2090ae23f93eba08ed8b4aa8c8bb98c3f740";
 const expectedProfileSha256 = "e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca";
 const expectedKernelSha256 = "54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c";
 const expectedKernelUri = `gs://digital-stargate-telemetry-183451329061-f3-data/bkl-031/f3-a3/artifacts/spk/de442s/sha256/${expectedKernelSha256}/de442s.bsp`;
@@ -20,10 +20,10 @@ const rawManifest = read(manifestRelative);
 equal(sha256(rawManifest), expectedManifestSha256, "runner manifest raw SHA-256");
 const manifest = JSON.parse(rawManifest);
 equal(manifest.schemaVersion, "1.0", "schemaVersion");
-equal(manifest.manifestId, "BKL-031-F3-A3-RUNNER-MANIFEST-003", "manifestId");
-equal(manifest.status, "RUNNER_SOURCE_JSON_NATIVE_REMEDIATED_NOT_BUILT_NOT_PUBLISHED_NOT_EXECUTED", "status");
-equal(manifest.predecessorManifest?.manifestId, "BKL-031-F3-A3-RUNNER-MANIFEST-002", "predecessor manifest");
-equal(manifest.predecessorManifest?.sha256, "8fbb05a5db8c847db3408939a4aa0ddeee5ce5f972d2e60e9b8f89b08702e591", "predecessor digest");
+equal(manifest.manifestId, "BKL-031-F3-A3-RUNNER-MANIFEST-004", "manifestId");
+equal(manifest.status, "RUNNER_SOURCE_GEOCENTRIC_ILLUMINATION_REMEDIATED_NOT_BUILT_NOT_PUBLISHED_NOT_EXECUTED", "status");
+equal(manifest.predecessorManifest?.manifestId, "BKL-031-F3-A3-RUNNER-MANIFEST-003", "predecessor manifest");
+equal(manifest.predecessorManifest?.sha256, "4cfd685090cc12fdf46fdc92fe54f752f3d75e87c38310651b77fbed7ab922df", "predecessor digest");
 equal(manifest.methodProfile?.sha256, expectedProfileSha256, "method profile digest");
 equal(manifest.kernel?.sha256, expectedKernelSha256, "kernel digest");
 equal(manifest.kernel?.privateUri, expectedKernelUri, "kernel URI");
@@ -40,8 +40,8 @@ equal(manifest.runner?.externalProviderPolicy, "DENY", "external provider policy
 equal(manifest.runner?.runtimeAuthority, false, "runner runtime authority");
 equal(manifest.runner?.targetResolution?.mars, "mars barycenter", "Mars Skyfield target resolution");
 equal(manifest.runner?.targetResolution?.moon, "moon", "Moon Skyfield target resolution");
-equal(manifest.remediation?.rootCause, "NUMPY_BOOLEAN_SUM_PRODUCED_INT64_METRIC_PASS_COUNT", "remediation root cause");
-equal(manifest.remediation?.offlineValidationIncident, "BKL-031-F3-A3-OFFLINE-VALIDATION-INCIDENT-001", "offline validation incident");
+equal(manifest.remediation?.rootCause, "ASTROPY_ILLUMINATION_ELONGATION_INHERITED_SYNTHETIC_SITE_FROM_TIME_WHILE_PROFILE_REQUIRES_GEOCENTRIC_COMPARISON", "remediation root cause");
+equal(manifest.remediation?.offlineValidationIncidents?.join(","), "BKL-031-F3-A3-OFFLINE-VALIDATION-INCIDENT-001,BKL-031-F3-A3-OFFLINE-VALIDATION-INCIDENT-002", "offline validation incidents");
 equal(manifest.runner?.defaultCommand?.join(" "), "python /app/dsg/runner/scientific_runner.py --request /app/dsg/runner/BKL-031-F3-A3-SYNTHETIC-CAMPAIGN-001.json", "default command");
 
 const controls = manifest.controls || {};
@@ -80,6 +80,8 @@ for (const fragment of [
   "metricPassCount\": int(sum(metric_passes))",
   "primary_altitude = float(primary_altaz.alt.deg)",
   "altitude_pass: bool | None = bool(",
+  'geocentric_astropy_time = Time(instant, scale="utc")',
+  'get_body("sun", geocentric_astropy_time)',
   "--contract-self-test",
 ]) if (!runner.includes(fragment)) fail(`runner missing governed fragment: ${fragment}`);
 for (const forbidden of ["horizons", "astroquery", "nina", "eagle", "forecast", "readiness", "safetyState"]) {
@@ -107,7 +109,7 @@ for (const fragment of [
   "python:3.12.14-slim-bookworm@sha256:9c47360a2a0355e2da18516d0b1c2126ec22c195d2185e97347c9d98398c5bef",
   "--no-index",
   "--require-hashes",
-  "BKL-031-F3-A3-RUNNER-MANIFEST-003.json",
+  "BKL-031-F3-A3-RUNNER-MANIFEST-004.json",
   "runner/scientific_runner.py",
   "runner/offline_exact_kernel_validation.py",
   "USER 65532:65532",

@@ -5,8 +5,9 @@ const root = process.cwd();
 const read = (...parts) => fs.readFileSync(path.join(root, ...parts), "utf8");
 const workflow = read(".github", "workflows", "bkl-031-f3-a3-offline-exact-kernel-validation.yml");
 const rootCause = JSON.parse(read("infrastructure", "bkl-031-f3-a3-gcp", "platform", "BKL-031-F3-A3-REPLACEMENT-ROOT-CAUSE-EVIDENCE-001.json"));
-const manifest = JSON.parse(read("infrastructure", "bkl-031-f3-a3-gcp", "container", "BKL-031-F3-A3-RUNNER-MANIFEST-003.json"));
-const incident = JSON.parse(read("infrastructure", "bkl-031-f3-a3-gcp", "platform", "BKL-031-F3-A3-OFFLINE-VALIDATION-INCIDENT-001.json"));
+const manifest = JSON.parse(read("infrastructure", "bkl-031-f3-a3-gcp", "container", "BKL-031-F3-A3-RUNNER-MANIFEST-004.json"));
+const serializationIncident = JSON.parse(read("infrastructure", "bkl-031-f3-a3-gcp", "platform", "BKL-031-F3-A3-OFFLINE-VALIDATION-INCIDENT-001.json"));
+const illuminationIncident = JSON.parse(read("infrastructure", "bkl-031-f3-a3-gcp", "platform", "BKL-031-F3-A3-OFFLINE-VALIDATION-INCIDENT-002.json"));
 const fail = (message) => { throw new Error(message); };
 const requireText = (fragment) => { if (!workflow.includes(fragment)) fail(`offline exact-kernel workflow missing: ${fragment}`); };
 
@@ -34,9 +35,11 @@ if (rootCause.status !== "ROOT_CAUSE_CONFIRMED_RUNNER_SOURCE_REMEDIATION_REQUIRE
 if (rootCause.cloudLog?.exception !== "KeyError" || rootCause.cloudLog?.kernelSupportedMarsNaifId !== 4 || rootCause.cloudLog?.kernelMissingMarsCenterNaifId !== 499) fail("root-cause kernel facts mismatch");
 if (rootCause.controls?.thirdExecution !== "NOT_EXECUTED" || rootCause.controls?.cloudMutation !== "NOT_EXECUTED_BY_ROOT_CAUSE_READ") fail("root-cause control boundary mismatch");
 if (rootCause.nextGate !== "REVIEW_RUNNER_TARGET_RESOLUTION_AND_OFFLINE_EXACT_KERNEL_VALIDATION") fail("root-cause next gate mismatch");
-if (incident.status !== "FAILED_CLOSED_RUNNER_JSON_NORMALIZATION_REQUIRED" || incident.workflowRunId !== 35163106441 || incident.execution?.exception !== "TypeError") fail("offline validation incident identity mismatch");
-if (incident.analysis?.rootCause !== "NUMPY_BOOLEAN_SUM_PRODUCED_INT64_METRIC_PASS_COUNT" || incident.controls?.cloudRunJobExecution !== "NOT_EXECUTED" || incident.controls?.cloudMutation !== "NOT_EXECUTED") fail("offline validation incident control mismatch");
-if (manifest.manifestId !== "BKL-031-F3-A3-RUNNER-MANIFEST-003" || manifest.runner?.targetResolution?.mars !== "mars barycenter" || manifest.runner?.targetResolution?.moon !== "moon") fail("remediated runner manifest mismatch");
-if (manifest.remediation?.offlineValidationIncident !== incident.incidentId || manifest.remediation?.rootCause !== incident.analysis.rootCause) fail("offline validation remediation lineage mismatch");
+if (serializationIncident.status !== "FAILED_CLOSED_RUNNER_JSON_NORMALIZATION_REQUIRED" || serializationIncident.workflowRunId !== 35163106441 || serializationIncident.execution?.exception !== "TypeError") fail("serialization incident identity mismatch");
+if (serializationIncident.analysis?.rootCause !== "NUMPY_BOOLEAN_SUM_PRODUCED_INT64_METRIC_PASS_COUNT" || serializationIncident.controls?.cloudRunJobExecution !== "NOT_EXECUTED" || serializationIncident.controls?.cloudMutation !== "NOT_EXECUTED") fail("serialization incident control mismatch");
+if (illuminationIncident.status !== "FAILED_CLOSED_GEOCENTRIC_ILLUMINATION_CORRECTION_REQUIRED" || illuminationIncident.workflowRunId !== 35163759970 || illuminationIncident.execution?.metricPassCount !== 13 || illuminationIncident.execution?.metricEvaluationCount !== 17) fail("illumination incident identity mismatch");
+if (illuminationIncident.analysis?.scientificConvention !== "GEOCENTRIC_APPARENT_ELONGATION_COSINE_APPROXIMATION" || illuminationIncident.controls?.cloudRunJobExecution !== "NOT_EXECUTED" || illuminationIncident.controls?.cloudMutation !== "NOT_EXECUTED") fail("illumination incident control mismatch");
+if (manifest.manifestId !== "BKL-031-F3-A3-RUNNER-MANIFEST-004" || manifest.runner?.targetResolution?.mars !== "mars barycenter" || manifest.runner?.targetResolution?.moon !== "moon") fail("remediated runner manifest mismatch");
+if (manifest.remediation?.offlineValidationIncidents?.join(",") !== `${serializationIncident.incidentId},${illuminationIncident.incidentId}` || manifest.remediation?.rootCause !== illuminationIncident.analysis.rootCause) fail("offline validation remediation lineage mismatch");
 
 console.log("BKL-031 F3-A3 offline exact-kernel validation gate verified: private kernel read only, container network none, no cloud mutation or scientific job execution");

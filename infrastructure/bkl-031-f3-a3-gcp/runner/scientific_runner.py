@@ -230,6 +230,7 @@ def calculate(campaign: dict[str, Any], kernel_path: Path, profile: dict[str, An
     with solar_system_ephemeris.set(str(kernel_path)):
         for instant in campaign["instantsUtc"]:
             astropy_time = Time(instant, scale="utc", location=astropy_location)
+            geocentric_astropy_time = Time(instant, scale="utc")
             skyfield_time = timescale.from_datetime(parse_utc(instant, "instant"))
             method_positions: dict[str, Any] = {}
             for target in campaign["targets"]:
@@ -274,7 +275,11 @@ def calculate(campaign: dict[str, Any], kernel_path: Path, profile: dict[str, An
             primary_sep = float(method_positions["mars"]["primary"].separation(method_positions["moon"]["primary"]).arcsecond)
             secondary_sep = float(method_positions["mars"]["secondary"].separation_from(method_positions["moon"]["secondary"]).arcseconds())
             separation_error = float(abs(primary_sep - secondary_sep))
-            elongation_primary = float(get_body("sun", astropy_time).separation(get_body("moon", astropy_time)).rad)
+            elongation_primary = float(
+                get_body("sun", geocentric_astropy_time).separation(
+                    get_body("moon", geocentric_astropy_time)
+                ).rad
+            )
             earth = skyfield_ephemeris["earth"]
             elongation_secondary = float(earth.at(skyfield_time).observe(skyfield_ephemeris["sun"]).apparent().separation_from(
                 earth.at(skyfield_time).observe(skyfield_ephemeris["moon"]).apparent()).radians)
