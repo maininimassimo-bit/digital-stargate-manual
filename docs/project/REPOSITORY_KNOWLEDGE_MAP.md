@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 5.2 |
+| Versione | 5.3 |
 | Stato | Active |
-| Data | 15/09/2026 |
+| Data | 16/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | F3-A3 decision-preparation: Solution Architecture, proposed ADR-010 and not-executed validation-spike plan |
+| Current governed package | F3-A3 exact private kernel published; separately reviewed scientific-spike execution gate next |
 
 ## 1. Scopo
 
@@ -122,7 +122,7 @@ PR #209 is ACCEPTED / POST-MERGE VERIFIED at merge `bc4307c2042a45985622044e1163
 
 ## F3-A3 current gate
 
-F3-A3 owner decisions F3-OD04–F3-OD10 and the immutable method-profile repository evidence are complete. The reviewed bootstrap and isolated Artifact Registry foundation are applied and post-verified. `BKL-031-F3-A3-CONTAINER-MANIFEST-002` fixes the exact source; `BKL-031-F3-A3-OCI-PUBLICATION-EVIDENCE-001` records the sole published linux/amd64 image at manifest `sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce`; and `BKL-031-F3-A3-PLATFORM-APPLY-EVIDENCE-001` records the exact four-resource apply, state serial `3`, zero drift and zero job executions. The approved kernel object remains absent. The next gate is separately reviewed exact kernel acquisition and private content-addressed upload. Scientific execution, external call, protected-site use and runtime remain unauthorized; S10 remains `UNAVAILABLE`.
+F3-A3 owner decisions F3-OD04–F3-OD10 and the immutable method-profile repository evidence are complete. The reviewed bootstrap and isolated Artifact Registry foundation are applied and post-verified. `BKL-031-F3-A3-CONTAINER-MANIFEST-002` fixes the exact source; `BKL-031-F3-A3-OCI-PUBLICATION-EVIDENCE-001` records the sole published linux/amd64 image at manifest `sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce`; `BKL-031-F3-A3-PLATFORM-APPLY-EVIDENCE-001` records the exact four-resource apply, state serial `3`, zero drift and zero job executions; and `BKL-031-F3-A3-KERNEL-PUBLICATION-EVIDENCE-001` records the exact approved private kernel generation, full read-back and continued zero job executions. The next gate is separately reviewed exact scientific-spike execution. Scientific execution, external reference traffic, protected-site use and runtime remain unauthorized; S10 remains `UNAVAILABLE`.
 
 
 ## F3-A3 decision-preparation package

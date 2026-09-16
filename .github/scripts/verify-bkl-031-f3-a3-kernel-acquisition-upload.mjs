@@ -23,6 +23,15 @@ const platformEvidencePath = path.join(
 );
 const platformEvidenceBytes = fs.readFileSync(platformEvidencePath);
 const platformEvidence = JSON.parse(platformEvidenceBytes.toString("utf8"));
+const publicationEvidencePath = path.join(
+  root,
+  "infrastructure",
+  "bkl-031-f3-a3-gcp",
+  "platform",
+  "BKL-031-F3-A3-KERNEL-PUBLICATION-EVIDENCE-001.json",
+);
+const publicationEvidenceBytes = fs.readFileSync(publicationEvidencePath);
+const publicationEvidence = JSON.parse(publicationEvidenceBytes.toString("utf8"));
 
 const officialSource = "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/de442s.bsp";
 const privateUri = "gs://digital-stargate-telemetry-183451329061-f3-data/bkl-031/f3-a3/artifacts/spk/de442s/sha256/54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c/de442s.bsp";
@@ -31,6 +40,7 @@ const md5 = "cc49327e06088124c0e39d8dde9f0b58";
 const md5Base64 = "zEkyfgYIgSTA452N3p8LWA==";
 const expectedApprovalSha256 = "833a5be5aee72b3a06620f60cc04fa0269b05ba1f7548d70b51bf4999e99ea18";
 const expectedPlatformEvidenceSha256 = "ca5952b67904f514e2e05b7abfd8aeb4df71cfdba89958441ca233bd01e710b8";
+const expectedPublicationEvidenceSha256 = "53ca4364cd8c24495a5a7f4d1ca8bf6af3dfd1683ff6e8d73ffad7b884ef399b";
 
 const fail = (message) => { throw new Error(message); };
 const requireText = (label, text, fragment) => {
@@ -164,4 +174,33 @@ exact(platformEvidence.postconditions?.jobExecutionCount, 0, "platformEvidence.p
 exact(platformEvidence.postconditions?.kernelArtifact, "NOT_UPLOADED", "platformEvidence.postconditions.kernelArtifact");
 exact(platformEvidence.nextGate, "SEPARATELY_REVIEWED_EXACT_KERNEL_ARTIFACT_ACQUISITION_AND_UPLOAD", "platformEvidence.nextGate");
 
-console.log(`BKL-031 F3-A3 exact kernel acquisition/upload gate verified: one official HTTPS request, one generation-guarded private upload, no job execution; platform evidence sha256:${expectedPlatformEvidenceSha256}`);
+const publicationEvidenceSha256 = crypto.createHash("sha256").update(publicationEvidenceBytes).digest("hex");
+exact(publicationEvidenceSha256, expectedPublicationEvidenceSha256, "kernel publication evidence SHA-256");
+exact(publicationEvidence.evidenceId, "BKL-031-F3-A3-KERNEL-PUBLICATION-EVIDENCE-001", "publicationEvidence.evidenceId");
+exact(publicationEvidence.status, "EXACT_APPROVED_KERNEL_PRIVATELY_PUBLISHED_AND_VERIFIED_JOB_UNEXECUTED", "publicationEvidence.status");
+exact(publicationEvidence.sourceCommit, "824afce15fe119b94e436fd19ec185d59e91e02c", "publicationEvidence.sourceCommit");
+exact(publicationEvidence.workflow?.runId, 35146023621, "publicationEvidence.workflow.runId");
+exact(publicationEvidence.workflow?.conclusion, "success", "publicationEvidence.workflow.conclusion");
+exact(publicationEvidence.failClosedPredecessor?.runId, 35145051566, "publicationEvidence.failClosedPredecessor.runId");
+exact(publicationEvidence.failClosedPredecessor?.sourceAcquisition, "SKIPPED", "publicationEvidence.failClosedPredecessor.sourceAcquisition");
+exact(publicationEvidence.failClosedPredecessor?.upload, "SKIPPED", "publicationEvidence.failClosedPredecessor.upload");
+exact(publicationEvidence.acquisition?.officialSource, officialSource, "publicationEvidence.acquisition.officialSource");
+exact(publicationEvidence.acquisition?.requestCount, 1, "publicationEvidence.acquisition.requestCount");
+exact(publicationEvidence.acquisition?.redirectAccepted, false, "publicationEvidence.acquisition.redirectAccepted");
+exact(publicationEvidence.object?.privateUri, privateUri, "publicationEvidence.object.privateUri");
+exact(publicationEvidence.object?.generation, "1789590110146663", "publicationEvidence.object.generation");
+exact(publicationEvidence.object?.objectCount, 1, "publicationEvidence.object.objectCount");
+exact(publicationEvidence.object?.sizeBytes, 32701440, "publicationEvidence.object.sizeBytes");
+exact(publicationEvidence.object?.spiceHeader, "DAF/SPK", "publicationEvidence.object.spiceHeader");
+exact(publicationEvidence.object?.sha256, sha256, "publicationEvidence.object.sha256");
+exact(publicationEvidence.object?.md5, md5, "publicationEvidence.object.md5");
+exact(publicationEvidence.object?.verification, "FULL_PRIVATE_GCS_READBACK_MATCH", "publicationEvidence.object.verification");
+exact(publicationEvidence.postconditions?.jobExecutionCount, 0, "publicationEvidence.postconditions.jobExecutionCount");
+exact(publicationEvidence.postconditions?.scientificExecution, "NOT_EXECUTED", "publicationEvidence.postconditions.scientificExecution");
+exact(publicationEvidence.postconditions?.externalReferenceTraffic, "NOT_EXECUTED", "publicationEvidence.postconditions.externalReferenceTraffic");
+exact(publicationEvidence.postconditions?.protectedSiteUse, "NOT_EXECUTED", "publicationEvidence.postconditions.protectedSiteUse");
+exact(publicationEvidence.postconditions?.runtimeActivation, "NOT_EXECUTED", "publicationEvidence.postconditions.runtimeActivation");
+exact(publicationEvidence.postconditions?.runtimeAuthority, false, "publicationEvidence.postconditions.runtimeAuthority");
+exact(publicationEvidence.nextGate, "SEPARATELY_REVIEWED_EXACT_SCIENTIFIC_SPIKE_EXECUTION", "publicationEvidence.nextGate");
+
+console.log(`BKL-031 F3-A3 exact kernel acquisition/upload gate and publication evidence verified: one official HTTPS request, one generation-guarded private upload, full read-back, no job execution; publication evidence sha256:${expectedPublicationEvidenceSha256}`);

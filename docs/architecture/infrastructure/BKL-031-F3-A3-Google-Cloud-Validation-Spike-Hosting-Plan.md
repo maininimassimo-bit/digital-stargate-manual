@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-A3-INFRA-001 |
-| Status | **PROPOSED — EXACT FOUR-RESOURCE PLATFORM APPLIED / ZERO DRIFT / JOB NOT EXECUTED** |
+| Status | **PROPOSED — PLATFORM AND EXACT PRIVATE KERNEL READY / JOB NOT EXECUTED** |
 | Version | 1.0 |
 | Date | 2026-09-15 |
 | Baseline | `main@527b298094b07e5a00317e60cab3abefed7a5759` |
@@ -108,7 +108,7 @@ CI run `35122782246` acquired all ten artifacts ephemerally with exact hashes, b
 
 Authenticated workflow run `35131365596` on exact commit `380bd8c3d04f570acb21a9a7f532930111adcdc8` used the reviewed WIF deployer identity and produced two identical unpublished OCI manifests at `sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce`. The saved plan is exactly five additions, zero changes and zero destroys. It was not retained outside the job; its text SHA-256 is `6fd9c1c3f9d1c754d310f88fa2e8f3dfb2422a5a9195ec40f6f57087bbb8c83e`. The platform backend contains one validated empty state and no lock. Evidence is recorded in `BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-001` at SHA-256 `06cf923ae2bad1e869782bffd6a7e5389f9a68419d6199d0d7df5319f50b12e6`.
 
-The dedicated `dsg-f3-a3` Artifact Registry repository exists and its foundation was post-verified empty before publication. Exact OCI publication, the refreshed authenticated four-resource plan and the exact saved-plan platform apply are separately evidenced. Artifact upload and job execution remain `NOT_EXECUTED`.
+The dedicated `dsg-f3-a3` Artifact Registry repository exists and its foundation was post-verified empty before publication. Exact OCI publication, the refreshed authenticated four-resource plan, the exact saved-plan platform apply and the exact private kernel publication are separately evidenced. Job and scientific execution remain `NOT_EXECUTED`.
 
 The repository prepared the registry foundation as an explicit-dispatch, main-only WIF workflow. Artifact Registry ownership remains isolated in a dedicated Terraform root and state; the platform state is empty. Static policy requires exactly one registry resource and prohibits `-target`, bootstrap/platform apply, image publication and cloud mutations outside the saved registry plan.
 
@@ -125,3 +125,5 @@ PR #233 integrated the explicit-dispatch, main-only platform-apply workflow afte
 The candidate kernel-publication workflow is explicit-dispatch and main-only. It permits one HTTPS request only to the approved NAIF `de442s.bsp` URL and one generation-guarded upload only to the approved private content-addressed GCS URI. Exact size, SPICE header, SHA-256 and MD5 are checked before upload; Content-MD5 is enforced during upload; the private object is then read back and rehashed. Platform state must remain the reviewed four-resource state and Cloud Run execution inventory must remain empty before and after the transfer. The workflow contains no Terraform, image operation, job execution, Horizons request, protected-site use or runtime activation. Exact-head CI, process-separated ARB and Release Quality review, expected-head merge and post-merge verification are required before dispatch.
 
 Run `35145051566` stopped fail-closed before the acquisition step because the deployer intentionally lacks `storage.buckets.get`; no NAIF request, kernel upload or job execution occurred. The remediation does not grant that control-plane permission. It reads the exact protected bootstrap state generation already authorized to the deployer and verifies its recorded raw SHA-256, lineage, serial and the managed data-bucket identity, location, uniform bucket-level access, public-access prevention, versioning and non-destructive setting. The separate empty-prefix object listing remains the live reachability and absence check.
+
+PR #236 merged the least-privilege remediation as `824afce15fe119b94e436fd19ec185d59e91e02c` after 8/8 exact-head checks and 5/5 post-merge workflows. Run `35146023621` passed every precondition, made exactly one approved NAIF request and one generation-zero private upload, then completely read back GCS generation `1789590110146663`. Size, `DAF/SPK`, SHA-256, MD5 and exclusive one-object inventory matched; Cloud Run Job execution count remained zero. `BKL-031-F3-A3-KERNEL-PUBLICATION-EVIDENCE-001` records the result at SHA-256 `53ca4364cd8c24495a5a7f4d1ca8bf6af3dfd1683ff6e8d73ffad7b884ef399b`. The next separately reviewed gate is exact scientific-spike execution; Horizons traffic, protected-site use and runtime activation remain blocked.

@@ -1,0 +1,84 @@
+{
+  "evidenceId": "BKL-031-F3-A3-KERNEL-PUBLICATION-EVIDENCE-001",
+  "recordedAtUtc": "2026-09-16T20:21:58.5572995Z",
+  "status": "EXACT_APPROVED_KERNEL_PRIVATELY_PUBLISHED_AND_VERIFIED_JOB_UNEXECUTED",
+  "sourceCommit": "824afce15fe119b94e436fd19ec185d59e91e02c",
+  "workflow": {
+    "name": "BKL-031 F3-A3 Exact Kernel Acquisition and Upload",
+    "runId": 35146023621,
+    "jobId": 104962201956,
+    "event": "workflow_dispatch",
+    "startedAtUtc": "2026-09-16T20:21:03Z",
+    "completedAtUtc": "2026-09-16T20:22:03Z",
+    "conclusion": "success",
+    "url": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35146023621"
+  },
+  "failClosedPredecessor": {
+    "runId": 35145051566,
+    "sourceCommit": "71b0198b84651de7d851648b9748a7611dd35a8b",
+    "conclusion": "failure",
+    "failedStep": "Require exact private bucket, platform state and absent kernel",
+    "reason": "LEAST_PRIVILEGE_DEPLOYER_LACKS_STORAGE_BUCKETS_GET",
+    "sourceAcquisition": "SKIPPED",
+    "upload": "SKIPPED",
+    "jobExecution": "NOT_EXECUTED",
+    "url": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35145051566"
+  },
+  "preconditions": {
+    "bootstrapState": {
+      "uri": "gs://digital-stargate-telemetry-183451329061-f3-state/bkl-031/f3-a3/bootstrap/default.tfstate",
+      "rawSha256": "735b5fe6f368802ebf66ba14248ae85e9b7c7016e6a199e1561ea024d0a56386",
+      "lineage": "50e17f72-9d0a-0152-1130-060b583f103a",
+      "serial": 24,
+      "dataBucketProtections": "EXACT_REVIEWED_PRIVATE_VERSIONED_NON_DESTRUCTIVE_STATE"
+    },
+    "platformState": {
+      "uri": "gs://digital-stargate-telemetry-183451329061-f3-state/bkl-031/f3-a3/platform/default.tfstate",
+      "rawSha256": "11b1888ceac0f39552e735d134a134bbbd7a6a75d623ac5c06897583842cf0e4",
+      "lineage": "2be9b82b-88d3-888f-4fcd-dded2f74f7f3",
+      "serial": 3,
+      "resourceCount": 4
+    },
+    "kernelPrefix": "EMPTY",
+    "jobExecutionCount": 0
+  },
+  "acquisition": {
+    "officialSource": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/de442s.bsp",
+    "requestCount": 1,
+    "redirectAccepted": false,
+    "responseHeaders": {
+      "contentLength": "32701440",
+      "contentType": "model/vnd.valve.source.compiled-map",
+      "etag": null,
+      "lastModified": "Thu, 06 Feb 2025 17:36:42 GMT"
+    },
+    "tlsPeer": {
+      "subjectCommonName": "naif.jpl.nasa.gov",
+      "issuerOrganization": "Entrust Limited",
+      "fingerprint256": "04:CE:F3:8D:45:2B:62:54:9B:06:DF:84:96:DF:C1:82:C9:F1:F2:9C:8D:4E:41:CD:B1:F7:AC:30:48:64:0F:E4",
+      "validFrom": "Jul  8 00:00:00 2026 GMT",
+      "validTo": "Jan 22 23:59:59 2027 GMT"
+    }
+  },
+  "object": {
+    "privateUri": "gs://digital-stargate-telemetry-183451329061-f3-data/bkl-031/f3-a3/artifacts/spk/de442s/sha256/54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c/de442s.bsp",
+    "generation": "1789590110146663",
+    "objectCount": 1,
+    "sizeBytes": 32701440,
+    "spiceHeader": "DAF/SPK",
+    "sha256": "54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c",
+    "md5": "cc49327e06088124c0e39d8dde9f0b58",
+    "crc32cBase64": "B+M/Cw==",
+    "verification": "FULL_PRIVATE_GCS_READBACK_MATCH"
+  },
+  "postconditions": {
+    "jobExecutionCount": 0,
+    "platformMutation": "NOT_EXECUTED",
+    "scientificExecution": "NOT_EXECUTED",
+    "externalReferenceTraffic": "NOT_EXECUTED",
+    "protectedSiteUse": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED",
+    "runtimeAuthority": false
+  },
+  "nextGate": "SEPARATELY_REVIEWED_EXACT_SCIENTIFIC_SPIKE_EXECUTION"
+}
