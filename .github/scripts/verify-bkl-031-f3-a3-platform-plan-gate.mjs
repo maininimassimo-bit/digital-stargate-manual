@@ -31,6 +31,8 @@ for (const fragment of [
   'gcloud storage buckets describe "gs://${GCP_STATE_BUCKET}"',
   'grep -F "NOT_FOUND" /tmp/repository-describe.err',
   'grep -F "NOT_FOUND" /tmp/job-describe.err',
+  'grep -F "NOT_FOUND" /tmp/network-describe.err',
+  'grep -F "NOT_FOUND" /tmp/subnetwork-describe.err',
   "type=oci,dest=/tmp/dsg-candidate-${candidate}.tar,oci-mediatypes=true,rewrite-timestamp=true,compatibility-version=30",
   "--network=none --pull=false --no-cache",
   'test "$config_a" = "sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0"',

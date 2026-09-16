@@ -133,11 +133,19 @@ jobs:
           repository_status=$?
           gcloud run jobs describe dsg-f3-a3-spike --project="$GCP_PROJECT_ID" --region="$GCP_REGION" >/tmp/unexpected-job.json 2>/tmp/job-describe.err
           job_status=$?
+          gcloud compute networks describe dsg-f3-a3-private --project="$GCP_PROJECT_ID" >/tmp/unexpected-network.json 2>/tmp/network-describe.err
+          network_status=$?
+          gcloud compute networks subnets describe dsg-f3-a3-private-ew8 --project="$GCP_PROJECT_ID" --region="$GCP_REGION" >/tmp/unexpected-subnetwork.json 2>/tmp/subnetwork-describe.err
+          subnetwork_status=$?
           set -e
           test "$repository_status" -ne 0
           test "$job_status" -ne 0
+          test "$network_status" -ne 0
+          test "$subnetwork_status" -ne 0
           grep -F "NOT_FOUND" /tmp/repository-describe.err
           grep -F "NOT_FOUND" /tmp/job-describe.err
+          grep -F "NOT_FOUND" /tmp/network-describe.err
+          grep -F "NOT_FOUND" /tmp/subnetwork-describe.err
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
