@@ -4,11 +4,16 @@ import path from "node:path";
 
 const root = process.cwd();
 const containerDir = path.join(root, "infrastructure", "bkl-031-f3-a3-gcp", "container");
-const manifestPath = path.join(containerDir, "BKL-031-F3-A3-CONTAINER-MANIFEST-001.json");
-const expectedManifestSha256 = "7923206d85c5670ef56f9310a813c165c7d516d226c994561516c843b338412e";
+const historicalManifestPath = path.join(containerDir, "BKL-031-F3-A3-CONTAINER-MANIFEST-001.json");
+const manifestPath = path.join(containerDir, "BKL-031-F3-A3-CONTAINER-MANIFEST-002.json");
+const buildEvidencePath = path.join(containerDir, "BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001.json");
+const historicalManifestSha256 = "7923206d85c5670ef56f9310a813c165c7d516d226c994561516c843b338412e";
+const expectedManifestSha256 = "02ceba17c1ac97f780cd545554b254ee668d840fcd85e11310d07c4ecc37e879";
+const expectedBuildEvidenceSha256 = "00546062e78887af003adb010bb60dcfbdfb1480429e22314e4476673c7633a3";
 const expectedProfileSha256 = "e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca";
 const expectedIersSha256 = "43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc";
 const expectedBasePlatformDigest = "sha256:9c47360a2a0355e2da18516d0b1c2126ec22c195d2185e97347c9d98398c5bef";
+const expectedBuildkitPlatformDigest = "sha256:57269d1784e49b46228c45a1a1b870fbe40e0a639ab60b37b032d83af5bccdfc";
 
 const expectedPackages = new Map([
   ["astropy", ["8.0.1", "fa11d56855e10107ea2231a6b6a33dbf1edbea6890adf34634c1f1d8f25c5a5a"]],
@@ -23,11 +28,12 @@ const expectedPackages = new Map([
   ["skyfield", ["1.55", "9f98964855067460c94aa81a337194136f4a97a62ba8bbbfac1b8556f2b66ad4"]],
 ]);
 const expectedSourceFiles = new Map([
-  ["infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile", "1f341aca4160969efb5a2a8e60218742bdb08fdf26715d2371559fde1bc2d4e1"],
+  ["infrastructure/bkl-031-f3-a3-gcp/.dockerignore", "8ce1cb34679acf2cca7ea9847358821de2c36e7720e77ccfdf8e19294230329d"],
+  ["infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile", "d1edf2f42604b3b773e4485b4710705d4484d18e46c24789fad539bb165986ff"],
   ["infrastructure/bkl-031-f3-a3-gcp/container/requirements.lock", "b9356f05eebf75501ef11f698b780837ebdde3fc64162d1c1b42420b30edf490"],
-  ["infrastructure/bkl-031-f3-a3-gcp/container/astropy.cfg", "00aa2cd71966f5c98d7864db1fac834d263f44139c5364d8c1b3efce8aa8cf2a"],
+  ["infrastructure/bkl-031-f3-a3-gcp/container/astropy.cfg", "a09268e3a26df0de881685b230f43f13c1c8651b169b2a2b214dd934cdb1c6f9"],
   ["infrastructure/bkl-031-f3-a3-gcp/container/entrypoint.sh", "fcfe2d5b623e99f643f530b24e683cfc82d39b1c69381406f5f2906d0775e347"],
-  ["infrastructure/bkl-031-f3-a3-gcp/container/preflight.py", "951cc6aaca04a4a9b9c9290999c0acf4b72f368a64ded7394963c0de325cb90c"],
+  ["infrastructure/bkl-031-f3-a3-gcp/container/preflight.py", "1fcfdd93e2a46cdbdc5ffbc5f90a91e3c7217b99f03b04074a734e7bfa636801"],
   ["infrastructure/bkl-031-f3-a3-gcp/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json", expectedProfileSha256],
 ]);
 
@@ -43,8 +49,10 @@ const exactSha = (value, label) => {
 
 function validateManifest(manifest) {
   equal(manifest.schemaVersion, "1.0", "schemaVersion");
-  equal(manifest.manifestId, "BKL-031-F3-A3-CONTAINER-MANIFEST-001", "manifestId");
-  equal(manifest.status, "STATIC_INCLUSION_EVIDENCE_NOT_BUILT_NOT_EXECUTED", "status");
+  equal(manifest.manifestId, "BKL-031-F3-A3-CONTAINER-MANIFEST-002", "manifestId");
+  equal(manifest.status, "BUILD_INPUT_EXACT_ARTIFACTS_REQUIRED_NOT_BUILT", "status");
+  equal(manifest.predecessorManifest?.manifestId, "BKL-031-F3-A3-CONTAINER-MANIFEST-001", "predecessorManifest.manifestId");
+  equal(manifest.predecessorManifest?.sha256, historicalManifestSha256, "predecessorManifest.sha256");
   equal(manifest.methodProfile?.profileId, "BKL-031-F3-A3-METHOD-PROFILE-001", "methodProfile.profileId");
   equal(manifest.methodProfile?.sha256, expectedProfileSha256, "methodProfile.sha256");
   equal(manifest.target?.os, "linux", "target.os");
@@ -53,6 +61,10 @@ function validateManifest(manifest) {
   equal(manifest.target?.baseImage, "python:3.12.14-slim-bookworm", "target.baseImage");
   equal(manifest.target?.baseImagePlatformDigest, expectedBasePlatformDigest, "target.baseImagePlatformDigest");
   if (!String(manifest.target?.source).startsWith("https://hub.docker.com/_/python/")) fail("base image source must be the Docker Hub official image");
+  equal(manifest.buildTool?.name, "moby/buildkit", "buildTool.name");
+  equal(manifest.buildTool?.version, "0.30.0", "buildTool.version");
+  equal(manifest.buildTool?.platformDigest, expectedBuildkitPlatformDigest, "buildTool.platformDigest");
+  equal(manifest.buildTool?.compatibilityVersion, 30, "buildTool.compatibilityVersion");
 
   equal(manifest.iersSnapshot?.snapshotKind, "IERS_A", "iersSnapshot.snapshotKind");
   equal(manifest.iersSnapshot?.version, "0.2026.9.14.0.56.43", "iersSnapshot.version");
@@ -110,24 +122,114 @@ function validateManifest(manifest) {
   equal(controls.nonRootUid, 65532, "controls.nonRootUid");
 }
 
+equal(sha256(fs.readFileSync(historicalManifestPath)), historicalManifestSha256, "historical manifest raw digest");
 const rawManifest = fs.readFileSync(manifestPath);
 equal(sha256(rawManifest), expectedManifestSha256, "manifest raw digest");
 const manifest = JSON.parse(rawManifest.toString("utf8"));
 validateManifest(manifest);
 
+const rawBuildEvidence = fs.readFileSync(buildEvidencePath);
+equal(sha256(rawBuildEvidence), expectedBuildEvidenceSha256, "build evidence raw digest");
+const buildEvidence = JSON.parse(rawBuildEvidence.toString("utf8"));
+equal(buildEvidence.schemaVersion, "1.0", "build evidence schemaVersion");
+equal(buildEvidence.evidenceId, "BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001", "build evidence evidenceId");
+equal(buildEvidence.status, "REPRODUCIBLE_OFFLINE_BUILD_AND_PREFLIGHT_VERIFIED_NOT_PUBLISHED_NOT_EXECUTED", "build evidence status");
+equal(buildEvidence.source?.commit, "7fe808a6759ae4b8ea1499d3b4540dd496e117de", "build evidence source commit");
+equal(buildEvidence.source?.manifestId, manifest.manifestId, "build evidence source manifestId");
+equal(buildEvidence.source?.manifestSha256, expectedManifestSha256, "build evidence source manifestSha256");
+equal(buildEvidence.continuousIntegration?.runId, 35122782246, "build evidence CI runId");
+equal(buildEvidence.continuousIntegration?.jobId, 104884416476, "build evidence CI jobId");
+equal(buildEvidence.continuousIntegration?.conclusion, "SUCCESS", "build evidence CI conclusion");
+equal(buildEvidence.artifactAcquisition?.status, "EXACT_HASH_VERIFIED_EPHEMERAL", "build evidence acquisition status");
+equal(buildEvidence.artifactAcquisition?.artifactCount, expectedPackages.size, "build evidence artifact count");
+equal(buildEvidence.artifactAcquisition?.totalBytes, 31624625, "build evidence artifact bytes");
+equal(buildEvidence.artifactAcquisition?.artifactUpload, "NOT_EXECUTED", "build evidence artifact upload");
+equal(buildEvidence.build?.platformDigest, expectedBuildkitPlatformDigest, "build evidence BuildKit platform digest");
+equal(buildEvidence.build?.compatibilityVersion, 30, "build evidence BuildKit compatibility version");
+equal(buildEvidence.build?.runNetwork, "NONE", "build evidence build network");
+equal(buildEvidence.build?.reproducibility, "PASS_IDENTICAL_IMAGE_CONFIG_IDS", "build evidence reproducibility");
+equal(buildEvidence.image?.identityKind, "DOCKER_IMAGE_CONFIG_ID_NOT_REGISTRY_DIGEST", "build evidence image identity kind");
+for (const name of ["candidateA", "candidateB", "reproducibleImageId"]) {
+  equal(buildEvidence.image?.[name], "sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0", `build evidence image ${name}`);
+}
+equal(buildEvidence.image?.os, "linux", "build evidence image os");
+equal(buildEvidence.image?.architecture, "amd64", "build evidence image architecture");
+equal(buildEvidence.image?.user, "65532:65532", "build evidence image user");
+equal(buildEvidence.image?.registryPublication, "NOT_EXECUTED", "build evidence image publication");
+equal(buildEvidence.image?.registryDigest, "UNAVAILABLE_NOT_PUBLISHED", "build evidence registry digest");
+equal(buildEvidence.iersVerification?.artifactSha256, expectedIersSha256, "build evidence IERS digest");
+equal(buildEvidence.iersVerification?.coverageMinimumMjd, 41684, "build evidence IERS minimum MJD");
+equal(buildEvidence.iersVerification?.coverageMaximumMjd, 61659, "build evidence IERS maximum MJD");
+equal(buildEvidence.iersVerification?.campaignPreparationMjd, 61299, "build evidence campaign MJD");
+equal(buildEvidence.iersVerification?.coverageStatus, "PASS", "build evidence IERS coverage");
+equal(buildEvidence.iersVerification?.runtimeAutoDownload, false, "build evidence IERS auto-download");
+equal(buildEvidence.preflight?.status, "PASS_NETWORK_NONE", "build evidence preflight status");
+equal(buildEvidence.preflight?.scientificRunner, "NOT_MATERIALIZED_EXIT_78", "build evidence scientific runner");
+for (const name of [
+  "imagePush",
+  "artifactUpload",
+  "platformPlan",
+  "platformApply",
+  "scientificExecution",
+  "externalReferenceTraffic",
+  "protectedSiteUse",
+  "runtimeActivation",
+]) equal(buildEvidence.controls?.[name], "NOT_EXECUTED", `build evidence controls.${name}`);
+equal(buildEvidence.controls?.runtimeAuthority, false, "build evidence runtime authority");
+
 const dockerfile = fs.readFileSync(path.join(containerDir, "Dockerfile"), "utf8");
 for (const fragment of [
-  `FROM --platform=linux/amd64 python:3.12.14-slim-bookworm@${expectedBasePlatformDigest}`,
+  `FROM python:3.12.14-slim-bookworm@${expectedBasePlatformDigest}`,
   "--only-binary=:all:",
   "--require-hashes",
+  "--no-compile",
+  "--no-deps",
+  "SOURCE_DATE_EPOCH=0",
+  '-exec touch -h -d "@${SOURCE_DATE_EPOCH}"',
   "/app/dsg/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json",
+  "/app/dsg/container/BKL-031-F3-A3-CONTAINER-MANIFEST-002.json",
+  "container/.build/wheels/",
+  "--no-index",
   "/app/dsg/artifacts/iers/astropy_iers_data-0.2026.9.14.0.56.43-py3-none-any.whl",
   `DSG_IERS_SHA256=${expectedIersSha256}`,
   "USER 65532:65532",
   'ENTRYPOINT ["/app/dsg/container/entrypoint.sh"]',
   "NOT_EXECUTED: scientific runner is not materialized",
 ]) if (!dockerfile.includes(fragment)) fail(`Dockerfile missing: ${fragment}`);
-if (/\b(latest|curl|wget)\b/i.test(dockerfile)) fail("Dockerfile contains a mutable tag or ungoverned downloader");
+if (/\b(latest|curl|wget)\b/i.test(dockerfile) || /pip\s+download/i.test(dockerfile)) fail("Dockerfile contains a mutable tag or network downloader");
+
+const dockerignore = fs.readFileSync(path.join(root, "infrastructure", "bkl-031-f3-a3-gcp", ".dockerignore"), "utf8");
+for (const required of [
+  "**",
+  "!container/.build/wheels/**",
+  "!container/BKL-031-F3-A3-CONTAINER-MANIFEST-002.json",
+  "!method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json",
+]) if (!dockerignore.split("\n").includes(required)) fail(`isolated build context missing rule: ${required}`);
+for (const forbidden of ["!bootstrap/", "!platform/", "!../", "!docs/"]) {
+  if (dockerignore.includes(forbidden)) fail(`isolated build context unexpectedly includes: ${forbidden}`);
+}
+
+const workflow = fs.readFileSync(path.join(root, ".github", "workflows", "bkl-031-f3-a3-gcp-iac.yml"), "utf8");
+const isolatedBuild = "--file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile infrastructure/bkl-031-f3-a3-gcp";
+equal(workflow.split(isolatedBuild).length - 1, 2, "isolated no-cache build count");
+for (const fragment of [
+  `moby/buildkit:v0.30.0@${expectedBuildkitPlatformDigest}`,
+  "docker buildx build --builder dsg-repro --platform linux/amd64 --network=none --pull=false --no-cache",
+  "--provenance=false --sbom=false --build-arg SOURCE_DATE_EPOCH=0",
+  "rewrite-timestamp=true",
+  "compatibility-version=30",
+]) if (!workflow.includes(fragment)) fail(`workflow reproducible build missing: ${fragment}`);
+equal(workflow.split("rewrite-timestamp=true").length - 1, 2, "timestamp-rewriting exporter count");
+
+const acquisition = fs.readFileSync(path.join(root, ".github", "scripts", "acquire-bkl-031-f3-a3-container-artifacts.mjs"), "utf8");
+for (const fragment of [
+  'source.hostname !== "files.pythonhosted.org"',
+  "response.url !== artifact.source",
+  "digest !== artifact.sha256",
+  'flag: "wx"',
+  "EPHEMERAL_IGNORED_BUILD_INPUT",
+  'artifactUpload: "NOT_EXECUTED"',
+]) if (!acquisition.includes(fragment)) fail(`bounded acquisition missing: ${fragment}`);
 
 const requirements = fs.readFileSync(path.join(containerDir, "requirements.lock"), "utf8");
 equal((requirements.match(/--hash=sha256:/g) || []).length, expectedPackages.size, "requirements hash count");
@@ -140,7 +242,7 @@ for (const [name, [version, digest]] of expectedPackages) {
 const entrypoint = fs.readFileSync(path.join(containerDir, "entrypoint.sh"), "utf8");
 if (entrypoint.indexOf("preflight.py") < 0 || entrypoint.indexOf("preflight.py") > entrypoint.indexOf('exec "$@"')) fail("entrypoint must run preflight before the supplied command");
 const astropyConfig = fs.readFileSync(path.join(containerDir, "astropy.cfg"), "utf8");
-if (!astropyConfig.includes("auto_download = False") || !astropyConfig.includes("iers_degraded_accuracy = error")) fail("Astropy IERS configuration is not fail-closed");
+if (!astropyConfig.includes("[utils.iers.iers]") || !astropyConfig.includes("auto_download = False") || !astropyConfig.includes("iers_degraded_accuracy = error")) fail("Astropy IERS configuration is not fail-closed");
 const preflight = fs.readFileSync(path.join(containerDir, "preflight.py"), "utf8");
 for (const fragment of [expectedProfileSha256, expectedIersSha256, '"astropy": "8.0.1"', '"skyfield": "1.55"', "iers.conf.auto_download is not False"]) {
   if (!preflight.includes(fragment)) fail(`preflight missing: ${fragment}`);
@@ -168,4 +270,4 @@ for (const mutate of mutations) {
   if (!rejected) fail("negative container-evidence mutation was not rejected");
 }
 
-console.log(`BKL-031 F3-A3 static container/IERS evidence verified: ${manifest.manifestId}@sha256:${expectedManifestSha256}`);
+console.log(`BKL-031 F3-A3 exact container source and immutable build evidence verified: ${manifest.manifestId}@sha256:${expectedManifestSha256}; ${buildEvidence.evidenceId}@sha256:${expectedBuildEvidenceSha256}`);

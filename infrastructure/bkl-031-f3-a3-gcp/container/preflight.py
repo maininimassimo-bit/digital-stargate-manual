@@ -81,15 +81,31 @@ def main() -> None:
             )
 
     from astropy.utils import iers
+    from astropy.time import Time
 
     if iers.conf.auto_download is not False:
-        raise RuntimeError("Astropy IERS auto-download is enabled")
+        raise RuntimeError(
+            "Astropy IERS auto-download is enabled: "
+            f"value={iers.conf.auto_download!r}, "
+            f"XDG_CONFIG_HOME={os.environ.get('XDG_CONFIG_HOME')!r}"
+        )
     if iers.conf.iers_degraded_accuracy != "error":
         raise RuntimeError("Astropy IERS degraded accuracy is not fail-closed")
 
+    campaign_mjd = float(Time("2026-09-16T00:00:00Z", scale="utc").mjd)
+    iers_a = iers.IERS_A.open(iers.IERS_A_FILE)
+    coverage_min_mjd = float(iers_a["MJD"].min().value)
+    coverage_max_mjd = float(iers_a["MJD"].max().value)
+    if not coverage_min_mjd <= campaign_mjd <= coverage_max_mjd:
+        raise RuntimeError(
+            "reviewed IERS-A artifact does not cover campaign preparation: "
+            f"{coverage_min_mjd} <= {campaign_mjd} <= {coverage_max_mjd} failed"
+        )
+
     print(
         "BKL-031 F3-A3 container preflight passed: exact method profile, "
-        "IERS artifact, package set and offline policy verified"
+        "IERS artifact/coverage, package set and offline policy verified; "
+        f"IERS_A_MJD={coverage_min_mjd}..{coverage_max_mjd}"
     )
 
 

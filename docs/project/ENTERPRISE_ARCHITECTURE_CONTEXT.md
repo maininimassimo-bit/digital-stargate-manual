@@ -117,7 +117,7 @@ La repository authority F3-A2-D5 è APPROVED/AVAILABLE per caller autorizzati, m
 
 ## 12. F3-A3 enterprise boundary
 
-F3-A3 remains a governed validation package. Owner decisions F3-OD04–F3-OD10 and ARB-213-MI01 repository evidence are complete. The bootstrap is applied, its state is remote and ARB-213-MI02 is satisfied by permanent-backend and post-promotion evidence. Exact static container/IERS identities and fail-closed source controls are prepared; artifact acquisition and build remain absent. ADR-010 remains Proposed, the scientific campaign is not executed and S10 remains `UNAVAILABLE`; Safety Authority and EAGLE operations are unchanged.
+F3-A3 remains a governed validation package. Owner decisions F3-OD04–F3-OD10 and ARB-213-MI01 repository evidence are complete. The bootstrap is applied, its state is remote and ARB-213-MI02 is satisfied by permanent-backend and post-promotion evidence. Exact dependency/IERS artifacts were acquired ephemerally with hash verification; two isolated no-cache builds produced the same unpublished linux/amd64 image config ID, and network-disabled preflight passed. Image push, artifact upload and platform plan/apply remain absent. ADR-010 remains Proposed, the scientific campaign is not executed and S10 remains `UNAVAILABLE`; Safety Authority and EAGLE operations are unchanged.
 
 
 ## 13. F3-A3 decision-preparation boundary

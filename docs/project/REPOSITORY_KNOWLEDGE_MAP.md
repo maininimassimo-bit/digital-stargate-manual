@@ -120,9 +120,9 @@ PR #207 merged as `e99e6b5ff5ea7247ee447a1c6c62dcaa479dee1b` after 5/5 exact-hea
 
 PR #209 is ACCEPTED / POST-MERGE VERIFIED at merge `bc4307c2042a45985622044e11631421de5b2c3d`. It retains the historical DRAFT, preserves the assignment payload/digest, integrates the protected receipt and resolves `AVAILABLE` only in repository authority for authorized validated input with approved sources. The 65-case suite and all 7 post-merge workflows passed. Runtime S09 remains `UNAVAILABLE_CURRENT`; adapter, EAGLE and Safety Authority are outside scope.
 
-## F3-A3 current handoff
+## F3-A3 current gate
 
-F3-A3 owner decisions F3-OD04–F3-OD10 and the immutable method-profile repository evidence are complete. The reviewed bootstrap is applied and protected remote state is active. PR #219 plus the post-promotion lineage/content, recovery, locking and zero-drift checks satisfy ARB-213-MI02. Exact static container and IERS identities are now prepared in `BKL-031-F3-A3-CONTAINER-MANIFEST-001`; no artifact bytes or built image exist. The next gate is bounded acquisition and container-build evidence. No image push, platform plan/apply, artifact upload, scientific execution, external call, protected-site use or runtime is authorized; S10 remains `UNAVAILABLE`.
+F3-A3 owner decisions F3-OD04–F3-OD10 and the immutable method-profile repository evidence are complete. The reviewed bootstrap is applied and protected remote state is active. PR #219 plus the post-promotion lineage/content, recovery, locking and zero-drift checks satisfy ARB-213-MI02. `BKL-031-F3-A3-CONTAINER-MANIFEST-002` fixes the exact source, and `BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001` records ephemeral hash-verified acquisition, two identical isolated no-cache builds and a network-disabled preflight. The unpublished linux/amd64 image config ID is `sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0`; it is not a registry digest. The next gate is separately reviewed immutable image publication and authenticated exact-head platform planning. No image push or plan is authorized before that gate; platform apply, artifact upload, scientific execution, external call, protected-site use and runtime remain unauthorized; S10 remains `UNAVAILABLE`.
 
 
 ## F3-A3 decision-preparation package
