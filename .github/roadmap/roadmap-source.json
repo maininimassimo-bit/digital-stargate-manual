@@ -2,10 +2,10 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-16",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-A3 bounded scientific runner source and reproducible offline candidate verified; runner image unpublished; platform job remains preflight-only and unexecuted; scientific spike not executed; ADR-010 proposed; S10 unavailable",
+  "projectStatus": "BKL-031 F3-A3 exact scientific runner OCI privately published and post-verified; platform job remains on the preflight image and unexecuted; scientific spike not executed; ADR-010 proposed; S10 unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A3 separately reviewed exact runner OCI publication",
-  "target": "Prepare and review publication of only the exact reproducible runner candidate digest derived from BKL-031-F3-A3-RUNNER-MANIFEST-001. Stop before platform update and job execution; prohibit Horizons traffic, protected-site use and runtime activation; ADR-010 remains Proposed and S10 remains UNAVAILABLE.",
+  "nextMilestone": "BKL-031 F3-A3 separately reviewed exact runner platform update",
+  "target": "Prepare and review exactly one in-place Cloud Run Job update from the preflight image to the privately published runner digest and bind the exact runner source commit. Stop before job execution; prohibit registry or kernel mutation, Horizons traffic, protected-site use and runtime activation; ADR-010 remains Proposed and S10 remains UNAVAILABLE.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",

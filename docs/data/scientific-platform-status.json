@@ -19,8 +19,8 @@
       "title": "Observation Planner intelligente",
       "status": "active"
     },
-    "nextMilestone": "BKL-031 F3-A3 separately reviewed exact runner OCI publication",
-    "target": "Prepare and review publication of only the exact reproducible runner candidate digest derived from BKL-031-F3-A3-RUNNER-MANIFEST-001. Stop before platform update and job execution; prohibit Horizons traffic, protected-site use and runtime activation; ADR-010 remains Proposed and S10 remains UNAVAILABLE."
+    "nextMilestone": "BKL-031 F3-A3 separately reviewed exact runner platform update",
+    "target": "Prepare and review exactly one in-place Cloud Run Job update from the preflight image to the privately published runner digest and bind the exact runner source commit. Stop before job execution; prohibit registry or kernel mutation, Horizons traffic, protected-site use and runtime activation; ADR-010 remains Proposed and S10 remains UNAVAILABLE."
   },
   "architecture": {
     "ap013": {

@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0",
+  "evidenceId": "BKL-031-F3-A3-RUNNER-OCI-PUBLICATION-EVIDENCE-001",
+  "status": "EXACT_RUNNER_OCI_PUBLISHED_POST_VERIFIED",
+  "recordedAtUtc": "2026-09-16T21:13:29Z",
+  "source": {
+    "commit": "9db0267529b6d46a2510b415e4b3f51d668ff024",
+    "publicationGatePullRequest": 239,
+    "publicationGateReviewedHead": "a051a5a98bf54cd221f56d581100c1e68c10c115",
+    "publicationGateMergeCommit": "9db0267529b6d46a2510b415e4b3f51d668ff024",
+    "runnerManifestId": "BKL-031-F3-A3-RUNNER-MANIFEST-001",
+    "runnerManifestRawSha256": "cee2ddb9d434cce1c0d635b2f111baf65fc016993bca1e17e72dca50bdd15ddd"
+  },
+  "continuousIntegration": {
+    "provider": "GitHub Actions",
+    "workflow": "BKL-031 F3-A3 Exact Runner OCI Publication",
+    "runId": 35150960879,
+    "jobId": 104978864591,
+    "event": "workflow_dispatch",
+    "createdAtUtc": "2026-09-16T21:11:24Z",
+    "startedAtUtc": "2026-09-16T21:11:28Z",
+    "completedAtUtc": "2026-09-16T21:13:28Z",
+    "updatedAtUtc": "2026-09-16T21:13:29Z",
+    "runUrl": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35150960879",
+    "conclusion": "SUCCESS"
+  },
+  "authentication": {
+    "mode": "GITHUB_OIDC_WIF_MAIN_ONLY",
+    "projectId": "digital-stargate-telemetry",
+    "region": "europe-west8",
+    "deployerServiceAccount": "dsg-f3-a3-deployer@digital-stargate-telemetry.iam.gserviceaccount.com",
+    "staticServiceAccountKey": false
+  },
+  "image": {
+    "repository": "europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike",
+    "tag": "runner-9db0267529b6",
+    "reference": "europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike@sha256:69a20a994fde9d5b1533b142760af5796b4ac795a1f00c658373a46d2648d60c",
+    "manifestDigest": "sha256:69a20a994fde9d5b1533b142760af5796b4ac795a1f00c658373a46d2648d60c",
+    "candidateA": "sha256:69a20a994fde9d5b1533b142760af5796b4ac795a1f00c658373a46d2648d60c",
+    "candidateB": "sha256:69a20a994fde9d5b1533b142760af5796b4ac795a1f00c658373a46d2648d60c",
+    "registryExporterPreflight": "sha256:69a20a994fde9d5b1533b142760af5796b4ac795a1f00c658373a46d2648d60c",
+    "registryResolvedRawManifestSha256": "69a20a994fde9d5b1533b142760af5796b4ac795a1f00c658373a46d2648d60c",
+    "configDigest": "sha256:333e5d1b303dda4c5a4037f386b2f56a7f967a9197bbb4186ca6f33dfd4c4cc3",
+    "os": "linux",
+    "architecture": "amd64"
+  },
+  "registry": {
+    "name": "projects/digital-stargate-telemetry/locations/europe-west8/repositories/dsg-f3-a3",
+    "format": "DOCKER",
+    "mode": "STANDARD_REPOSITORY",
+    "imageCountBefore": 1,
+    "imageCountAfter": 2,
+    "preflightImagePreserved": "sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce",
+    "exclusiveExpectedPackageVersionTagsVerified": true
+  },
+  "controls": {
+    "sourceReproduction": "TWO_NO_CACHE_NETWORK_NONE_OCI_BUILDS_IDENTICAL",
+    "registryExporterPreflight": "NO_PUSH_EXACT_DIGEST",
+    "imagePush": "EXECUTED_EXACT_DIGEST",
+    "platformPlan": "NOT_EXECUTED_IN_PUBLICATION_GATE",
+    "platformApply": "NOT_EXECUTED",
+    "jobExecution": "NOT_EXECUTED",
+    "scientificExecution": "NOT_EXECUTED",
+    "externalReferenceTraffic": "NOT_EXECUTED",
+    "protectedSiteUse": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED",
+    "runtimeAuthority": false
+  },
+  "nextGate": "EXACT_ONE_UPDATE_RUNNER_PLATFORM_PLAN_APPLY"
+}
