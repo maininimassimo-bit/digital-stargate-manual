@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.0",
+  "evidenceId": "BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001",
+  "status": "REPRODUCIBLE_OFFLINE_BUILD_AND_PREFLIGHT_VERIFIED_NOT_PUBLISHED_NOT_EXECUTED",
+  "recordedAtUtc": "2026-09-16T16:36:19Z",
+  "source": {
+    "commit": "7fe808a6759ae4b8ea1499d3b4540dd496e117de",
+    "manifestId": "BKL-031-F3-A3-CONTAINER-MANIFEST-002",
+    "manifestSha256": "02ceba17c1ac97f780cd545554b254ee668d840fcd85e11310d07c4ecc37e879"
+  },
+  "continuousIntegration": {
+    "provider": "GitHub Actions",
+    "workflow": "BKL-031 F3-A3 GCP IaC Validation",
+    "runId": 35122782246,
+    "jobId": 104884416476,
+    "runUrl": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35122782246",
+    "conclusion": "SUCCESS"
+  },
+  "artifactAcquisition": {
+    "status": "EXACT_HASH_VERIFIED_EPHEMERAL",
+    "acquiredAtUtc": "2026-09-16T16:35:08.584Z",
+    "artifactCount": 10,
+    "totalBytes": 31624625,
+    "retention": "EPHEMERAL_IGNORED_BUILD_INPUT",
+    "artifactUpload": "NOT_EXECUTED"
+  },
+  "build": {
+    "tool": "moby/buildkit",
+    "version": "0.30.0",
+    "indexDigest": "sha256:0168606be2315b7c807a03b3d8aa79beefdb31c98740cebdffdfeebf31190c9f",
+    "platformDigest": "sha256:57269d1784e49b46228c45a1a1b870fbe40e0a639ab60b37b032d83af5bccdfc",
+    "compatibilityVersion": 30,
+    "sourceDateEpoch": 0,
+    "runNetwork": "NONE",
+    "cachePolicy": "TWO_NO_CACHE_BUILDS",
+    "exporter": "DOCKER_REWRITE_TIMESTAMP",
+    "reproducibility": "PASS_IDENTICAL_IMAGE_CONFIG_IDS"
+  },
+  "image": {
+    "identityKind": "DOCKER_IMAGE_CONFIG_ID_NOT_REGISTRY_DIGEST",
+    "candidateA": "sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0",
+    "candidateB": "sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0",
+    "reproducibleImageId": "sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0",
+    "os": "linux",
+    "architecture": "amd64",
+    "user": "65532:65532",
+    "registryPublication": "NOT_EXECUTED",
+    "registryDigest": "UNAVAILABLE_NOT_PUBLISHED"
+  },
+  "iersVerification": {
+    "snapshotKind": "IERS_A",
+    "distribution": "astropy-iers-data",
+    "version": "0.2026.9.14.0.56.43",
+    "artifactSha256": "43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc",
+    "coverageMinimumMjd": 41684.0,
+    "coverageMaximumMjd": 61659.0,
+    "campaignPreparationMjd": 61299.0,
+    "coverageStatus": "PASS",
+    "runtimeAutoDownload": false
+  },
+  "preflight": {
+    "status": "PASS_NETWORK_NONE",
+    "methodProfileDigestVerified": true,
+    "iersArtifactDigestVerified": true,
+    "installedPackageVersionsVerified": true,
+    "scientificRunner": "NOT_MATERIALIZED_EXIT_78"
+  },
+  "controls": {
+    "imagePush": "NOT_EXECUTED",
+    "artifactUpload": "NOT_EXECUTED",
+    "platformPlan": "NOT_EXECUTED",
+    "platformApply": "NOT_EXECUTED",
+    "scientificExecution": "NOT_EXECUTED",
+    "externalReferenceTraffic": "NOT_EXECUTED",
+    "protectedSiteUse": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED",
+    "runtimeAuthority": false
+  }
+}

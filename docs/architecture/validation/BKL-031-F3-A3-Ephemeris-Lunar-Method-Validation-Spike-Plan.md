@@ -35,7 +35,7 @@ F3-OD04–F3-OD10 are recorded. F3-OD05 approves the exact `de442s.bsp` identity
 
 The canonical repository profile is `BKL-031-F3-A3-METHOD-PROFILE-001` with SHA-256 `e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca`. It records the approved method roles and every F3-OD06 scientific threshold, F3-OD07 time-data policy and F3-OD10 request/capacity limit. The same artifact also carries SPK identity, privacy, hosting and failure semantics.
 
-Before any future scientific process starts, the container entrypoint must verify the embedded method profile, exact IERS wheel and installed package versions. A missing artifact, content mutation, unreviewed digest or value drift exits non-zero before calculation. Static CI executes positive and negative drift cases. `BKL-031-F3-A3-CONTAINER-MANIFEST-001` at SHA-256 `7923206d85c5670ef56f9310a813c165c7d516d226c994561516c843b338412e` fixes the future base/platform and dependency identities, including IERS SHA-256 `43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc`. Container build and execution remain `NOT EXECUTED`.
+Before any future scientific process starts, the container entrypoint verifies the embedded method profile, exact IERS wheel and installed package versions. A missing artifact, content mutation, unreviewed digest or value drift exits non-zero before calculation. Static CI executes positive and negative drift cases. `BKL-031-F3-A3-CONTAINER-MANIFEST-002` at SHA-256 `02ceba17c1ac97f780cd545554b254ee668d840fcd85e11310d07c4ecc37e879` fixes the base/platform, pinned build tool and dependency identities, including IERS SHA-256 `43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc`. CI run `35122782246` acquired the exact inputs ephemerally, produced the same unpublished image config ID in two isolated no-cache builds and passed the preflight with network disabled. Scientific execution remains `NOT EXECUTED`.
 
 ## 3. Candidate manifests
 
@@ -209,8 +209,8 @@ Every run records:
 | Gate | Current state | Execution evidence required |
 |---|---|---|
 | architecture/ADR traceability | DEFINED | exact accepted ADR |
-| package/data pins | STATIC IDENTITIES PREPARED | materialized artifact verification remains for V1 |
-| license/provenance | STATIC PACKAGE/IERS METADATA AND EXACT `de442s.bsp` IDENTITY RECORDED | acquired-artifact and execution-manifest review remains |
+| package/data pins | EXACT DEPENDENCY/IERS ARTIFACTS HASH-VERIFIED EPHEMERALLY; REPRODUCIBLE BUILD/PREFLIGHT PASS | published registry digest and campaign manifest remain |
+| license/provenance | PACKAGE/IERS METADATA, EXACT ACQUIRED HASHES AND EXACT `de442s.bsp` IDENTITY RECORDED | SPK acquisition and execution-manifest review remain |
 | scientific error budget | OWNER APPROVED | ADR-010 per-metric thresholds |
 | synthetic grid | OWNER BOUNDED | 50 targets; 2,016 instants/target; 10,000 pairs; 7 days; 1-minute minimum step; 256 KiB request |
 | candidate execution | NOT EXECUTED | normalized result evidence |
@@ -240,11 +240,11 @@ Delete or quarantine the isolated environment and acquired artifacts according t
 
 ## 17. Current execution status
 
-Stage V0 record `A3-S01` is complete at static repository level. All stages V1–V5 and cases A3-P01–P10/A3-N01–N24 are `NOT EXECUTED`; no artifact acquisition, dependency installation, container build, platform operation or scientific calculation occurred.
+Stage V0 record `A3-S01` is complete. Preparatory exact dependency/IERS acquisition, two reproducible offline container builds and the network-disabled preflight passed and are recorded in `BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001`. This is build evidence, not execution of V1–V5. All stages V1–V5 and cases A3-P01–P10/A3-N01–N24 remain `NOT EXECUTED`; no image push, artifact upload, platform operation or scientific calculation occurred.
 
 ## 18. Governance stop
 
-F3-OD05 and the bootstrap/MI02 gate are closed. Stop before artifact acquisition, dependency installation, container build/push, authenticated platform plan/apply and separate spike authorization. This plan does not authorize upload, external reference calls, protected-site use, scientific execution, schema, adapter or runtime work.
+F3-OD05, bootstrap/MI02 and the reproducible offline container-build gate are closed at evidence level. Stop before image push or authenticated platform planning until a separate reviewed gate authorizes them, and before platform apply or spike authorization. This plan does not authorize upload, external reference calls, protected-site use, scientific execution, schema, adapter or runtime work.
 
 ## 19. Approved execution and request envelope
 

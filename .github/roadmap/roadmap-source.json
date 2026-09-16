@@ -2,10 +2,10 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-16",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-A3 static container/IERS evidence prepared after MI02 closure; ADR-010 proposed; S10 unavailable",
+  "projectStatus": "BKL-031 F3-A3 reproducible offline container build and preflight verified after MI02 closure; image unpublished; ADR-010 proposed; S10 unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A3 bounded artifact acquisition and container-build evidence",
-  "target": "Acquire only the exact reviewed dependency/IERS artifacts and produce reproducible container-build evidence. Stop before image push, platform plan/apply, artifact upload, spike execution, Horizons request, protected-site use or runtime activation.",
+  "nextMilestone": "BKL-031 F3-A3 separately reviewed immutable image publication and authenticated exact-head platform plan",
+  "target": "Review the immutable build evidence, then prepare a separately authorized image-publication and authenticated exact-head platform-plan gate. Stop before image push or platform plan until that gate is approved, and before platform apply, artifact upload, spike execution, Horizons request, protected-site use or runtime activation.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3-A3 decisions, immutable method-profile evidence and ARB-213-MI02 post-promotion verification are complete. Exact static container/IERS identities and fail-closed source controls are prepared; no dependency/IERS bytes were acquired and no image was built. Platform and scientific cases remain NOT EXECUTED; ADR-010 remains Proposed and S10 remains UNAVAILABLE."
+          "note": "F3-A3 decisions, immutable method-profile evidence and ARB-213-MI02 post-promotion verification are complete. Ten exact dependency/IERS artifacts were acquired ephemerally and hash-verified; two isolated no-cache builds produced the same unpublished linux/amd64 image config ID, and the network-disabled preflight passed. Image push, artifact upload, platform plan/apply and scientific cases remain NOT EXECUTED; ADR-010 remains Proposed and S10 remains UNAVAILABLE."
         },
         {
           "id": "BKL-032",
@@ -601,6 +601,13 @@
       "title": "BKL-031 F3-A3 Decision Preparation",
       "date": "2026-09-15",
       "description": "Solution Architecture, proposed ADR-010 and validation-spike plan prepared for review. Conditional recommendation favors a local primary and restricted reference path, but all F3-OD04–F3-OD10 owner decisions remain open; no execution or runtime is authorized."
+    },
+    {
+      "id": "M-BKL031-F3-A3-CONTAINER-BUILD-EVIDENCE",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A3 Reproducible Offline Container Build Evidence",
+      "date": "2026-09-16",
+      "description": "Exact dependency and IERS artifacts were acquired ephemerally with SHA-256 verification. Two isolated no-cache BuildKit builds produced identical unpublished image config ID sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0; network-disabled preflight and IERS coverage passed. No image push, upload, platform plan/apply or scientific execution occurred."
     }
   ]
 }

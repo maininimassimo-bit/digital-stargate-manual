@@ -2,7 +2,7 @@
 
 This directory contains repository-only Terraform scaffolding for the future ephemeris/lunar validation spike.
 
-Current state: BOOTSTRAP APPLIED, REMOTE STATE AND BACKEND PROMOTION POST-VERIFIED, STATIC CONTAINER/IERS INCLUSION EVIDENCE PREPARED, CONTAINER NOT BUILT, PLATFORM NOT PLANNED OR APPLIED, JOB NOT EXECUTED.
+Current state: BOOTSTRAP APPLIED, REMOTE STATE AND BACKEND PROMOTION POST-VERIFIED, REPRODUCIBLE OFFLINE CONTAINER BUILD AND NETWORK-DISABLED PREFLIGHT VERIFIED, IMAGE NOT PUBLISHED, PLATFORM NOT PLANNED OR APPLIED, JOB NOT EXECUTED.
 
 ## Directories
 
@@ -57,11 +57,11 @@ The platform module deliberately requires:
 
 F3-OD05 is approved at artifact-identity level by `BKL-031-F3-A3-F3-OD05-APPROVAL-2026-09-16`. The checked-in example carries the approved non-secret SPK digest and future private URI while retaining placeholders for still-unmaterialized runtime identities and artifacts. The SPK binary is never repository content.
 
-`BKL-031-F3-A3-CONTAINER-MANIFEST-001` fixes the future linux/amd64 Python base by platform digest, every Python wheel by version and SHA-256, and `astropy-iers-data 0.2026.9.14.0.56.43` by SHA-256 `43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc`. Its raw SHA-256 is `7923206d85c5670ef56f9310a813c165c7d516d226c994561516c843b338412e`. The future container embeds the exact method profile and requires a fail-closed preflight before any supplied command. CI rejects manifest, dependency, base-image, IERS, policy or source-file drift.
+`BKL-031-F3-A3-CONTAINER-MANIFEST-002` fixes the linux/amd64 Python base and BuildKit by platform digest, every Python wheel by version and SHA-256, and `astropy-iers-data 0.2026.9.14.0.56.43` by SHA-256 `43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc`. Its raw SHA-256 is `02ceba17c1ac97f780cd545554b254ee668d840fcd85e11310d07c4ecc37e879`. The container embeds the exact method profile and requires a fail-closed preflight before any supplied command. CI rejects manifest, dependency, base-image, build-tool, IERS, policy or source-file drift.
 
-This is static inclusion evidence. Official metadata was inspected, but dependency/IERS bytes were not acquired, installed or committed; the image was not built, pushed or executed. The next separately governed step is bounded artifact acquisition and container-build evidence. Platform plan/apply, upload and scientific execution remain outside this gate.
+CI run `35122782246` acquired the ten exact dependency/IERS artifacts into an ignored ephemeral area and verified every hash. Two isolated no-cache builds with pinned BuildKit, normalized timestamps and no RUN network produced identical image config ID `sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0`. Network-disabled preflight verified the profile, installed package versions, IERS artifact and campaign-date coverage. The result is recorded in `BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001` at SHA-256 `00546062e78887af003adb010bb60dcfbdfb1480429e22314e4476673c7633a3`. This image config ID is not a registry digest. No wheel is committed; image push, artifact upload, platform plan/apply and scientific execution remain outside this gate.
 
-This package has no authenticated plan/apply workflow. The one-time bootstrap was applied from the reviewed saved plan for `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46`: 27 resources added, 0 changed and 0 destroyed. PR #219 promoted the permanent backend as merge `6c6a9454f1f1f13f72b4ae5098c0f2475b537d60`; remote lineage/content, recovery candidate, locking and a zero-drift exit code `0` were then verified. ARB-213-MI02 is satisfied. Platform plan/apply, upload and execution remain blocked pending materialized container evidence and a separate authenticated exact-head review.
+This package has no authenticated plan/apply workflow. The one-time bootstrap was applied from the reviewed saved plan for `main@af8b18f2f4e96642f453a30ead1e60e24ac8bd46`: 27 resources added, 0 changed and 0 destroyed. PR #219 promoted the permanent backend as merge `6c6a9454f1f1f13f72b4ae5098c0f2475b537d60`; remote lineage/content, recovery candidate, locking and a zero-drift exit code `0` were then verified. ARB-213-MI02 is satisfied. Image publication and authenticated exact-head platform planning require a separate reviewed gate; platform apply, upload and execution remain blocked.
 
 ## Local validation
 

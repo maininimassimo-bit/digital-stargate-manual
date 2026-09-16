@@ -19,8 +19,8 @@
       "title": "Observation Planner intelligente",
       "status": "active"
     },
-    "nextMilestone": "BKL-031 F3-A3 bounded artifact acquisition and container-build evidence",
-    "target": "Acquire only the exact reviewed dependency/IERS artifacts and produce reproducible container-build evidence. Stop before image push, platform plan/apply, artifact upload, spike execution, Horizons request, protected-site use or runtime activation."
+    "nextMilestone": "BKL-031 F3-A3 separately reviewed immutable image publication and authenticated exact-head platform plan",
+    "target": "Review the immutable build evidence, then prepare a separately authorized image-publication and authenticated exact-head platform-plan gate. Stop before image push or platform plan until that gate is approved, and before platform apply, artifact upload, spike execution, Horizons request, protected-site use or runtime activation."
   },
   "architecture": {
     "ap013": {

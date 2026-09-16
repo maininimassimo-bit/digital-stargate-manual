@@ -6,8 +6,10 @@ const root = process.cwd();
 const containerDir = path.join(root, "infrastructure", "bkl-031-f3-a3-gcp", "container");
 const historicalManifestPath = path.join(containerDir, "BKL-031-F3-A3-CONTAINER-MANIFEST-001.json");
 const manifestPath = path.join(containerDir, "BKL-031-F3-A3-CONTAINER-MANIFEST-002.json");
+const buildEvidencePath = path.join(containerDir, "BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001.json");
 const historicalManifestSha256 = "7923206d85c5670ef56f9310a813c165c7d516d226c994561516c843b338412e";
 const expectedManifestSha256 = "02ceba17c1ac97f780cd545554b254ee668d840fcd85e11310d07c4ecc37e879";
+const expectedBuildEvidenceSha256 = "00546062e78887af003adb010bb60dcfbdfb1480429e22314e4476673c7633a3";
 const expectedProfileSha256 = "e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca";
 const expectedIersSha256 = "43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc";
 const expectedBasePlatformDigest = "sha256:9c47360a2a0355e2da18516d0b1c2126ec22c195d2185e97347c9d98398c5bef";
@@ -126,6 +128,55 @@ equal(sha256(rawManifest), expectedManifestSha256, "manifest raw digest");
 const manifest = JSON.parse(rawManifest.toString("utf8"));
 validateManifest(manifest);
 
+const rawBuildEvidence = fs.readFileSync(buildEvidencePath);
+equal(sha256(rawBuildEvidence), expectedBuildEvidenceSha256, "build evidence raw digest");
+const buildEvidence = JSON.parse(rawBuildEvidence.toString("utf8"));
+equal(buildEvidence.schemaVersion, "1.0", "build evidence schemaVersion");
+equal(buildEvidence.evidenceId, "BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001", "build evidence evidenceId");
+equal(buildEvidence.status, "REPRODUCIBLE_OFFLINE_BUILD_AND_PREFLIGHT_VERIFIED_NOT_PUBLISHED_NOT_EXECUTED", "build evidence status");
+equal(buildEvidence.source?.commit, "7fe808a6759ae4b8ea1499d3b4540dd496e117de", "build evidence source commit");
+equal(buildEvidence.source?.manifestId, manifest.manifestId, "build evidence source manifestId");
+equal(buildEvidence.source?.manifestSha256, expectedManifestSha256, "build evidence source manifestSha256");
+equal(buildEvidence.continuousIntegration?.runId, 35122782246, "build evidence CI runId");
+equal(buildEvidence.continuousIntegration?.jobId, 104884416476, "build evidence CI jobId");
+equal(buildEvidence.continuousIntegration?.conclusion, "SUCCESS", "build evidence CI conclusion");
+equal(buildEvidence.artifactAcquisition?.status, "EXACT_HASH_VERIFIED_EPHEMERAL", "build evidence acquisition status");
+equal(buildEvidence.artifactAcquisition?.artifactCount, expectedPackages.size, "build evidence artifact count");
+equal(buildEvidence.artifactAcquisition?.totalBytes, 31624625, "build evidence artifact bytes");
+equal(buildEvidence.artifactAcquisition?.artifactUpload, "NOT_EXECUTED", "build evidence artifact upload");
+equal(buildEvidence.build?.platformDigest, expectedBuildkitPlatformDigest, "build evidence BuildKit platform digest");
+equal(buildEvidence.build?.compatibilityVersion, 30, "build evidence BuildKit compatibility version");
+equal(buildEvidence.build?.runNetwork, "NONE", "build evidence build network");
+equal(buildEvidence.build?.reproducibility, "PASS_IDENTICAL_IMAGE_CONFIG_IDS", "build evidence reproducibility");
+equal(buildEvidence.image?.identityKind, "DOCKER_IMAGE_CONFIG_ID_NOT_REGISTRY_DIGEST", "build evidence image identity kind");
+for (const name of ["candidateA", "candidateB", "reproducibleImageId"]) {
+  equal(buildEvidence.image?.[name], "sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0", `build evidence image ${name}`);
+}
+equal(buildEvidence.image?.os, "linux", "build evidence image os");
+equal(buildEvidence.image?.architecture, "amd64", "build evidence image architecture");
+equal(buildEvidence.image?.user, "65532:65532", "build evidence image user");
+equal(buildEvidence.image?.registryPublication, "NOT_EXECUTED", "build evidence image publication");
+equal(buildEvidence.image?.registryDigest, "UNAVAILABLE_NOT_PUBLISHED", "build evidence registry digest");
+equal(buildEvidence.iersVerification?.artifactSha256, expectedIersSha256, "build evidence IERS digest");
+equal(buildEvidence.iersVerification?.coverageMinimumMjd, 41684, "build evidence IERS minimum MJD");
+equal(buildEvidence.iersVerification?.coverageMaximumMjd, 61659, "build evidence IERS maximum MJD");
+equal(buildEvidence.iersVerification?.campaignPreparationMjd, 61299, "build evidence campaign MJD");
+equal(buildEvidence.iersVerification?.coverageStatus, "PASS", "build evidence IERS coverage");
+equal(buildEvidence.iersVerification?.runtimeAutoDownload, false, "build evidence IERS auto-download");
+equal(buildEvidence.preflight?.status, "PASS_NETWORK_NONE", "build evidence preflight status");
+equal(buildEvidence.preflight?.scientificRunner, "NOT_MATERIALIZED_EXIT_78", "build evidence scientific runner");
+for (const name of [
+  "imagePush",
+  "artifactUpload",
+  "platformPlan",
+  "platformApply",
+  "scientificExecution",
+  "externalReferenceTraffic",
+  "protectedSiteUse",
+  "runtimeActivation",
+]) equal(buildEvidence.controls?.[name], "NOT_EXECUTED", `build evidence controls.${name}`);
+equal(buildEvidence.controls?.runtimeAuthority, false, "build evidence runtime authority");
+
 const dockerfile = fs.readFileSync(path.join(containerDir, "Dockerfile"), "utf8");
 for (const fragment of [
   `FROM python:3.12.14-slim-bookworm@${expectedBasePlatformDigest}`,
@@ -219,4 +270,4 @@ for (const mutate of mutations) {
   if (!rejected) fail("negative container-evidence mutation was not rejected");
 }
 
-console.log(`BKL-031 F3-A3 static container/IERS evidence verified: ${manifest.manifestId}@sha256:${expectedManifestSha256}`);
+console.log(`BKL-031 F3-A3 exact container source and immutable build evidence verified: ${manifest.manifestId}@sha256:${expectedManifestSha256}; ${buildEvidence.evidenceId}@sha256:${expectedBuildEvidenceSha256}`);
