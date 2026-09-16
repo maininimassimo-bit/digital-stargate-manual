@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "incidentId": "BKL-031-F3-A3-SCIENTIFIC-EXECUTION-INCIDENT-001",
-  "status": "READ_ONLY_RECOVERY_COMPLETE_STUCK_EXECUTION_CANCELLATION_REQUIRED",
+  "status": "TERMINAL_FAILURE_ZERO_EVIDENCE_PLATFORM_REMEDIATION_REQUIRED",
   "recordedAtUtc": "2026-09-16T22:12:12Z",
   "sourceCommit": "540baa235ca97de9f72eb8687aa8e478bd5d888a",
   "workflow": {
@@ -28,17 +28,32 @@
     "terraformMutation": "NOT_EXECUTED",
     "registryMutation": "NOT_EXECUTED",
     "kernelMutation": "NOT_EXECUTED",
-    "recoveryMode": "READ_ONLY_COMPLETE_MUTATING_CANCELLATION_REQUIRES_SEPARATE_GATE"
+    "recoveryMode": "READ_ONLY_COMPLETE_PLATFORM_REMEDIATION_REQUIRES_SEPARATE_GATE"
   },
   "recovery": {
     "sourceCommit": "bd89ef715ff6a76884ab86e7e03c6b8bfa5e0305",
     "runId": 35157173081,
     "jobId": 104999281886,
     "executionName": "dsg-f3-a3-spike-9drzb",
-    "terminalState": "UNKNOWN_WAITING_FOR_OPERATION",
+    "terminalState": "COMPLETED_FALSE_INTERNAL_ERROR",
     "evidenceObjectCount": 0,
     "secondExecution": "NOT_EXECUTED",
     "platformStateRawSha256": "084b68da6d20d9523ceabce67766cfc211b71f97ee12d8f4e7a0b4a64f57b89b"
   },
-  "nextGate": "SEPARATELY_REVIEWED_EXACT_STUCK_EXECUTION_CANCELLATION"
+  "cancellationGate": {
+    "runId": 35158064462,
+    "jobId": 105002124187,
+    "outcome": "FAIL_CLOSED_STATE_CHANGED_BEFORE_MUTATION",
+    "cancelCommand": "SKIPPED",
+    "cloudMutation": "NOT_EXECUTED"
+  },
+  "terminalRecovery": {
+    "runId": 35158149295,
+    "jobId": 105002397312,
+    "conclusion": "success",
+    "completionTime": "2026-09-16T22:27:52.602569Z",
+    "failedCount": 1,
+    "evidenceObjectCount": 0
+  },
+  "nextGate": "EXACT_ONE_UPDATE_DIRECT_VPC_SUBNET_REMEDIATION"
 }
