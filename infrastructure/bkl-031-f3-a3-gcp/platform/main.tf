@@ -89,6 +89,11 @@ resource "google_cloud_run_v2_job" "spike" {
         }
 
         env {
+          name  = "DSG_KERNEL_URI"
+          value = var.kernel_artifact_uri
+        }
+
+        env {
           name  = "DSG_IERS_SHA256"
           value = var.iers_artifact_sha256
         }

@@ -65,4 +65,8 @@ Documentation only. The package records observed official-source versions, candi
 
 ## F3-A3 partial decision / infrastructure-source delta
 
-Repository source now defines a dedicated `europe-west8` Cloud Run Job profile, WIF bootstrap, private state/data/evidence buckets, private VPC without NAT, Artifact Registry and validation-only CI. No cloud authentication, plan, apply, image, SPK, IERS artifact or job exists from this package. F3-OD05 remains open and S10 remains `UNAVAILABLE`. Existing N.I.N.A./EAGLE identities and resources are untouched.
+Repository source now defines a dedicated `europe-west8` Cloud Run Job profile, WIF bootstrap, private state/data/evidence buckets, private VPC without NAT, Artifact Registry and validation-only CI. No cloud authentication, plan, apply, image, SPK, IERS artifact or job exists from this package. F3-OD05 exact artifact identity is owner-approved; ADR-010 remains Proposed, ARB-213-MI01/MI02 remain open and S10 remains `UNAVAILABLE`. Existing N.I.N.A./EAGLE identities and resources are untouched.
+
+## F3-A3 exact SPK decision delta — 16/09/2026
+
+The repository records the owner-approved immutable identity of `de442s.bsp`, its official NAIF provenance, checksums, coverage, required SPICE chains and future private content-addressed object identity. The acquisition verification was isolated and produced no repository kernel, Google Cloud upload or runtime artifact. No Terraform plan/apply, scientific execution, Horizons request or protected-site use occurred.

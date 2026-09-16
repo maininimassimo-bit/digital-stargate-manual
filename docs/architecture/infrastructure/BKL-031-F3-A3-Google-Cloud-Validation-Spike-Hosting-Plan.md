@@ -77,7 +77,7 @@ Budgets and billing alerts remain project-level operator controls because this r
 2. choose globally unique state/data/evidence bucket names;
 3. run the bootstrap Terraform once with an authorized GCP administrator identity;
 4. record WIF provider, deployer account and bucket outputs as GitHub repository variables;
-5. close F3-OD05 and prepare exact container/data digests;
+5. use the approved F3-OD05 identity and prepare the remaining exact container, IERS and immutable method-profile digests;
 6. introduce a separately reviewed authenticated plan/apply workflow;
 7. apply platform resources through WIF;
 8. execute the spike only after ADR/ARB/Release Quality authorization.

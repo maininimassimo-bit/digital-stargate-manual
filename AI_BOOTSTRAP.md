@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 6.8 |
-| Baseline | 15/09/2026 |
-| Stato | Current root bootstrap — F3-A3 partial owner decision; repository-only GCP scaffolding; F3-OD05 pending |
+| Versione | 6.9 |
+| Baseline | 16/09/2026 |
+| Stato | Current root bootstrap — F3-A3 owner decisions complete; exact de442s identity approved; no execution authority |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro, collaboratore o assistente AI che intervenga sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -70,7 +70,7 @@ La closure BKL-046 non dichiara efficacia scientifica né produzione: `NOT_EVALU
 
 ## 6. Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 DECISION PREPARATION CURRENT / ADR-010 PROPOSED / S10 UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 EXACT SPK DECISION CURRENT / ADR-010 PROPOSED / S10 UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 7. Authority e continuity
 
@@ -86,7 +86,7 @@ PR #209 merged with expected-head control as `bc4307c2042a45985622044e11631421de
 
 `BKL-031-F3-A2-D5` is ACCEPTED / POST-MERGE VERIFIED. The protected receipt is integrated, the historical DRAFT remains immutable and the separate `APPROVED` envelope preserves the assignment payload and digest. The repository authority resolves `AVAILABLE` only for authorized validated input with approved source authorities. S08 remains `UNAVAILABLE`; runtime S09 remains `UNAVAILABLE_CURRENT` because no adapter exists.
 
-PR #212 integrated the F3-A3 decision-preparation package as `527b298094b07e5a00317e60cab3abefed7a5759`. The owner then approved F3-OD04 and F3-OD06–F3-OD10. F3-OD05 exact SPK remains open. The current increment prepares repository-only Terraform/WIF and validation CI for an isolated Cloud Run Job; no cloud resource, artifact or runtime is created.
+PR #212 integrated the F3-A3 decision-preparation package as `527b298094b07e5a00317e60cab3abefed7a5759`. PR #214 integrated the repository-only Google Cloud scaffolding and PR #215 integrated the ARB-213-MI02 state-lifecycle procedure. The owner has now approved F3-OD04–F3-OD10, including the exact `de442s.bsp` identity, coverage, provenance, notices, SHA-256 and future private object identity for F3-OD05. No Google Cloud resource, upload, scientific execution or runtime is authorized. ADR-010 remains Proposed, ARB-213-MI01/MI02 remain open and S10 remains `UNAVAILABLE`.
 
 ## F3-A2-D4 acceptance checkpoint — 15/09/2026
 
@@ -110,3 +110,7 @@ Official candidate sources were refreshed. The conditional recommendation is loc
 ## F3-A3 partial owner decision and GCP scaffolding — 15/09/2026
 
 Normative records are ADR-010, BKL-031-F3-A3-OD-2026-09-15 and BKL-031-F3-A3-INFRA-001. Continue only with repository review/CI. Stop before GCP bootstrap or apply, package/SPK/IERS acquisition, image push, Horizons traffic, protected-site processing or spike execution. The next owner action is F3-OD05 exact SPK selection. S10 remains `UNAVAILABLE`.
+
+## F3-A3 F3-OD05 exact SPK decision — 16/09/2026
+
+The owner approved `de442s.bsp` with SHA-256 `54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c`, verified NAIF MD5 `cc49327e06088124c0e39d8dde9f0b58`, exact kernel coverage, required SPICE chains, official provenance and the future private content-addressed URI. This closes F3-OD05 only at the identity/provenance decision level. No bucket creation, upload, Terraform operation, image build, Cloud Run execution, Horizons traffic, scientific calculation or protected-site use is authorized. The next repository gate is ARB-213-MI01 immutable method-profile evidence; ARB-213-MI02 operational evidence also remains open.

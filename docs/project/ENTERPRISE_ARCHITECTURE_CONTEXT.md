@@ -64,7 +64,7 @@ BKL-031 F1/F2, F3 Solution Architecture, F3-A1 Site Authority and F3-A2 setup-au
 
 ## 7. Roadmap
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 DECISION PREPARATION CURRENT / ADR-010 PROPOSED / S10 UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 EXACT SPK DECISION CURRENT / ADR-010 PROPOSED / S10 UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 AMP-002 resta planning authority per AP-007–AP-015, non live status register.
 
@@ -117,9 +117,9 @@ La repository authority F3-A2-D5 è APPROVED/AVAILABLE per caller autorizzati, m
 
 ## 12. F3-A3 enterprise boundary
 
-F3-A3 is current only as a documentation package. It prepares an ADR and a bounded validation-spike plan for F3-OD04–F3-OD10. Selection of providers or structural dependencies, scientific thresholds, external transmission of protected site data and operational host placement remain explicit owner/ADR gates. S10 remains `UNAVAILABLE`; Safety Authority and EAGLE operations are unchanged.
+F3-A3 remains a repository-governance package. Owner decisions F3-OD04–F3-OD10 are complete, including the exact `de442s.bsp` identity for F3-OD05, but ADR-010 remains Proposed and the scientific campaign is not executed. ARB-213-MI01/MI02 remain open. S10 remains `UNAVAILABLE`; Safety Authority and EAGLE operations are unchanged.
 
 
 ## 13. F3-A3 decision-preparation boundary
 
-The package defines ports, candidate roles, decision fields and validation evidence without changing enterprise intent. A local/offline primary is only a recommendation for owner consideration. Provider/library/kernel, scientific thresholds, external-site transmission, host and bounded request values remain F3-OD04–F3-OD10. Domain remains provider-neutral; S10 remains `UNAVAILABLE`; Safety Authority and observatory operations are unchanged.
+The approved F3-A3 decisions fix the candidate roles, exact local SPK identity, scientific thresholds, privacy boundary, host profile and bounded request values without changing enterprise intent. Implementation and acceptance remain gated by the immutable method profile and authorized scientific evidence. Domain remains provider-neutral; S10 remains `UNAVAILABLE`; Safety Authority and observatory operations are unchanged.
