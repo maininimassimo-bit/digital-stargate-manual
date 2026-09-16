@@ -7,15 +7,6 @@ locals {
   }
 }
 
-resource "google_artifact_registry_repository" "spike" {
-  project       = var.project_id
-  location      = var.region
-  repository_id = "dsg-f3-a3"
-  description   = "Digest-pinned F3-A3 validation images."
-  format        = "DOCKER"
-  labels        = local.labels
-}
-
 resource "google_compute_network" "spike" {
   project                 = var.project_id
   name                    = "dsg-f3-a3-private"
@@ -130,10 +121,7 @@ resource "google_cloud_run_v2_job" "spike" {
     }
   }
 
-  depends_on = [
-    google_artifact_registry_repository.spike,
-    google_compute_subnetwork.spike,
-  ]
+  depends_on = [google_compute_subnetwork.spike]
 }
 
 resource "google_cloud_run_v2_job_iam_member" "deployer_invoker" {
