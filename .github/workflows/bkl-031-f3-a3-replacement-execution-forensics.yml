@@ -1,0 +1,190 @@
+name: BKL-031 F3-A3 Replacement Execution Read-only Forensics
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: Exact main commit authorized for read-only replacement execution forensics
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: bkl-031-f3-a3-replacement-execution-forensics
+  cancel-in-progress: false
+
+jobs:
+  inspect-replacement-failure:
+    name: Exact-head read-only replacement failure forensics
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+      GCP_REGION: ${{ vars.GCP_REGION }}
+      GCP_WIF_PROVIDER: ${{ vars.GCP_WIF_PROVIDER }}
+      GCP_DEPLOY_SERVICE_ACCOUNT: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+      GCP_STATE_BUCKET: ${{ vars.GCP_STATE_BUCKET }}
+      GCP_EVIDENCE_BUCKET: ${{ vars.GCP_EVIDENCE_BUCKET }}
+      DSG_AUTHORIZED_COMMIT: ${{ inputs.expected_commit }}
+      DSG_HISTORICAL_EXECUTION: dsg-f3-a3-spike-9drzb
+      DSG_REPLACEMENT_EXECUTION: dsg-f3-a3-spike-jv646
+      DSG_EVIDENCE_PREFIX: bkl-031/f3-a3/scientific-spike/9db0267529b6d46a2510b415e4b3f51d668ff024
+      DSG_PLATFORM_STATE_SHA256: b12cbd6c107cd7e38d47fbe353ab125ee909dc77d0bc8c26172bfa484b722889
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Require exact authorized main head and identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${GITHUB_REF}" = "refs/heads/main"
+          test "${GITHUB_SHA}" = "${DSG_AUTHORIZED_COMMIT}"
+          grep -Eq '^[0-9a-f]{40}$' <<<"${GITHUB_SHA}"
+          test "${GCP_PROJECT_ID}" = "digital-stargate-telemetry"
+          test "${GCP_REGION}" = "europe-west8"
+          test "${GCP_WIF_PROVIDER}" = "projects/183451329061/locations/global/workloadIdentityPools/dsg-f3-a3-github/providers/github-main"
+          test "${GCP_DEPLOY_SERVICE_ACCOUNT}" = "dsg-f3-a3-deployer@digital-stargate-telemetry.iam.gserviceaccount.com"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+
+      - name: Verify read-only forensics policy
+        run: node .github/scripts/verify-bkl-031-f3-a3-replacement-execution-forensics.mjs
+
+      - name: Authenticate to Google Cloud through main-only WIF
+        id: auth
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+          create_credentials_file: true
+          export_environment_variables: true
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
+        with:
+          version: "583.0.0"
+
+      - name: Inspect exact two-execution history, task and immutable state
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(gcloud auth list --filter=status:ACTIVE --format='value(account)')" = "$GCP_DEPLOY_SERVICE_ACCOUNT"
+          gcloud config set project "$GCP_PROJECT_ID" >/dev/null
+          gcloud run jobs executions list --job=dsg-f3-a3-spike --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/executions.json
+          gcloud run jobs executions describe "$DSG_HISTORICAL_EXECUTION" --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/historical.json
+          gcloud run jobs executions describe "$DSG_REPLACEMENT_EXECUTION" --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/replacement.json
+          gcloud run jobs executions tasks list --execution="$DSG_REPLACEMENT_EXECUTION" --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/tasks.json
+          gcloud storage objects list "gs://${GCP_EVIDENCE_BUCKET}/${DSG_EVIDENCE_PREFIX}/**" --format=json >/tmp/evidence.json
+          gcloud storage cat "gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/platform/default.tfstate" >/tmp/platform-state.json
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+
+          executions = json.loads(Path('/tmp/executions.json').read_text())
+          names = sorted((item.get('metadata', {}).get('name') or item.get('name', '').rsplit('/', 1)[-1]) for item in executions)
+          expected = sorted(['dsg-f3-a3-spike-9drzb', 'dsg-f3-a3-spike-jv646'])
+          if names != expected:
+              raise SystemExit(f'exact two-execution inventory changed: {names!r}')
+          for source, expected_name, expected_reason in [
+              ('/tmp/historical.json', 'dsg-f3-a3-spike-9drzb', 'Internal error running task'),
+              ('/tmp/replacement.json', 'dsg-f3-a3-spike-jv646', 'NonZeroExitCode'),
+          ]:
+              execution = json.loads(Path(source).read_text())
+              name = execution.get('metadata', {}).get('name') or execution.get('name', '').rsplit('/', 1)[-1]
+              completed = [c for c in execution.get('status', {}).get('conditions', []) if c.get('type') == 'Completed']
+              if name != expected_name or execution.get('status', {}).get('failedCount') != 1 or len(completed) != 1 or completed[0].get('status') != 'False':
+                  raise SystemExit(f'unexpected terminal failure for {expected_name}: {execution!r}')
+              if expected_reason not in {completed[0].get('reason'), completed[0].get('message')} and expected_reason not in str(completed[0]):
+                  raise SystemExit(f'unexpected failure reason for {expected_name}: {completed[0]!r}')
+          tasks = json.loads(Path('/tmp/tasks.json').read_text())
+          if len(tasks) != 1:
+              raise SystemExit(f'expected exact replacement task, received {len(tasks)}')
+          task_name = tasks[0].get('metadata', {}).get('name') or tasks[0].get('name', '').rsplit('/', 1)[-1]
+          if task_name != 'dsg-f3-a3-spike-jv646-task0':
+              raise SystemExit(f'unexpected replacement task: {task_name!r}')
+          Path('/tmp/task-name.txt').write_text(task_name, encoding='utf-8')
+          evidence = json.loads(Path('/tmp/evidence.json').read_text())
+          if evidence != []:
+              raise SystemExit(f'expected zero scientific evidence objects, received {len(evidence)}')
+          state_raw = Path('/tmp/platform-state.json').read_bytes()
+          state_sha = hashlib.sha256(state_raw).hexdigest()
+          if state_sha != 'b12cbd6c107cd7e38d47fbe353ab125ee909dc77d0bc8c26172bfa484b722889':
+              raise SystemExit('remediated platform state changed')
+          print('DSG_REPLACEMENT_FORENSICS_INVENTORY=' + json.dumps({
+              'executionNames': names,
+              'replacementTask': task_name,
+              'evidenceObjectCount': 0,
+              'platformStateRawSha256': state_sha,
+              'thirdExecution': 'NOT_EXECUTED',
+              'cloudMutation': 'NOT_EXECUTED_BY_FORENSICS',
+          }, sort_keys=True, separators=(',', ':')))
+          PY
+          gcloud run jobs executions tasks describe "$(cat /tmp/task-name.txt)" --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/task.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          task = json.loads(Path('/tmp/task.json').read_text())
+          print('DSG_REPLACEMENT_TASK_FACTS=' + json.dumps({
+              'metadata': task.get('metadata', {}),
+              'status': task.get('status', {}),
+          }, sort_keys=True, separators=(',', ':')))
+          PY
+
+      - name: Read exact replacement execution logs without mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          set +e
+          gcloud alpha run jobs executions logs read "$DSG_REPLACEMENT_EXECUTION" \
+            --project="$GCP_PROJECT_ID" \
+            --region="$GCP_REGION" \
+            --order=asc \
+            --limit=100 \
+            --format=json \
+            >/tmp/replacement-logs.json 2>/tmp/replacement-logs.err
+          log_status=$?
+          set -e
+          python - "$log_status" <<'PY'
+          import hashlib, json, sys
+          from pathlib import Path
+          status = int(sys.argv[1])
+          raw = Path('/tmp/replacement-logs.json').read_bytes()
+          error = Path('/tmp/replacement-logs.err').read_text(errors='replace')
+          entries = json.loads(raw) if status == 0 and raw.strip() else []
+          print('DSG_REPLACEMENT_LOG_FORENSICS=' + json.dumps({
+              'readStatus': status,
+              'entryCount': len(entries),
+              'rawSha256': hashlib.sha256(raw).hexdigest(),
+              'error': error.strip(),
+          }, sort_keys=True, separators=(',', ':')))
+          if status == 0:
+              for entry in entries:
+                  print('DSG_REPLACEMENT_LOG_ENTRY=' + json.dumps({
+                      'timestamp': entry.get('timestamp'),
+                      'severity': entry.get('severity'),
+                      'logName': entry.get('logName'),
+                      'labels': entry.get('labels', {}),
+                      'textPayload': entry.get('textPayload'),
+                      'jsonPayload': entry.get('jsonPayload'),
+                  }, sort_keys=True, separators=(',', ':')))
+          PY
+          test "$log_status" -eq 0
+
+      - name: Confirm read-only postcondition
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcloud run jobs executions list --job=dsg-f3-a3-spike --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format='value(metadata.name)' | sort >/tmp/execution-names-after.txt
+          printf '%s\n' dsg-f3-a3-spike-9drzb dsg-f3-a3-spike-jv646 | sort >/tmp/execution-names-expected.txt
+          diff -u /tmp/execution-names-expected.txt /tmp/execution-names-after.txt
+          gcloud storage objects list "gs://${GCP_EVIDENCE_BUCKET}/${DSG_EVIDENCE_PREFIX}/**" --format=json | python -c 'import json,sys; assert json.load(sys.stdin) == []'
+          state_sha="$(gcloud storage cat "gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/platform/default.tfstate" | sha256sum | cut -d' ' -f1)"
+          test "$state_sha" = "$DSG_PLATFORM_STATE_SHA256"
+          echo 'DSG_REPLACEMENT_FORENSICS_POSTCONDITION={"cloudMutation":"NOT_EXECUTED","evidenceObjectCount":0,"executionCount":2,"platformStateRawSha256":"b12cbd6c107cd7e38d47fbe353ab125ee909dc77d0bc8c26172bfa484b722889","thirdExecution":"NOT_EXECUTED"}'
