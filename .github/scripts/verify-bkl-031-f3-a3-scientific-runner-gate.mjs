@@ -4,8 +4,8 @@ import path from "node:path";
 
 const root = process.cwd();
 const base = path.join("infrastructure", "bkl-031-f3-a3-gcp");
-const manifestRelative = path.join(base, "container", "BKL-031-F3-A3-RUNNER-MANIFEST-001.json");
-const expectedManifestSha256 = "cee2ddb9d434cce1c0d635b2f111baf65fc016993bca1e17e72dca50bdd15ddd";
+const manifestRelative = path.join(base, "container", "BKL-031-F3-A3-RUNNER-MANIFEST-002.json");
+const expectedManifestSha256 = "8fbb05a5db8c847db3408939a4aa0ddeee5ce5f972d2e60e9b8f89b08702e591";
 const expectedProfileSha256 = "e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca";
 const expectedKernelSha256 = "54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c";
 const expectedKernelUri = `gs://digital-stargate-telemetry-183451329061-f3-data/bkl-031/f3-a3/artifacts/spk/de442s/sha256/${expectedKernelSha256}/de442s.bsp`;
@@ -20,10 +20,10 @@ const rawManifest = read(manifestRelative);
 equal(sha256(rawManifest), expectedManifestSha256, "runner manifest raw SHA-256");
 const manifest = JSON.parse(rawManifest);
 equal(manifest.schemaVersion, "1.0", "schemaVersion");
-equal(manifest.manifestId, "BKL-031-F3-A3-RUNNER-MANIFEST-001", "manifestId");
-equal(manifest.status, "RUNNER_SOURCE_MATERIALIZED_NOT_BUILT_NOT_PUBLISHED_NOT_EXECUTED", "status");
-equal(manifest.predecessorManifest?.manifestId, "BKL-031-F3-A3-CONTAINER-MANIFEST-002", "predecessor manifest");
-equal(manifest.predecessorManifest?.sha256, "02ceba17c1ac97f780cd545554b254ee668d840fcd85e11310d07c4ecc37e879", "predecessor digest");
+equal(manifest.manifestId, "BKL-031-F3-A3-RUNNER-MANIFEST-002", "manifestId");
+equal(manifest.status, "RUNNER_SOURCE_REMEDIATED_NOT_BUILT_NOT_PUBLISHED_NOT_EXECUTED", "status");
+equal(manifest.predecessorManifest?.manifestId, "BKL-031-F3-A3-RUNNER-MANIFEST-001", "predecessor manifest");
+equal(manifest.predecessorManifest?.sha256, "cee2ddb9d434cce1c0d635b2f111baf65fc016993bca1e17e72dca50bdd15ddd", "predecessor digest");
 equal(manifest.methodProfile?.sha256, expectedProfileSha256, "method profile digest");
 equal(manifest.kernel?.sha256, expectedKernelSha256, "kernel digest");
 equal(manifest.kernel?.privateUri, expectedKernelUri, "kernel URI");
@@ -38,6 +38,9 @@ equal(manifest.campaign?.externalReference, "NOT_AUTHORIZED", "external referenc
 equal(manifest.runner?.comparisonClass, "SAME_SPK_IMPLEMENTATION_CROSS_CHECK_NOT_INDEPENDENT_REFERENCE", "comparison class");
 equal(manifest.runner?.externalProviderPolicy, "DENY", "external provider policy");
 equal(manifest.runner?.runtimeAuthority, false, "runner runtime authority");
+equal(manifest.runner?.targetResolution?.mars, "mars barycenter", "Mars Skyfield target resolution");
+equal(manifest.runner?.targetResolution?.moon, "moon", "Moon Skyfield target resolution");
+equal(manifest.remediation?.rootCause, "SKYFIELD_REQUESTED_UNAVAILABLE_MARS_499_IN_DE442S", "remediation root cause");
 equal(manifest.runner?.defaultCommand?.join(" "), "python /app/dsg/runner/scientific_runner.py --request /app/dsg/runner/BKL-031-F3-A3-SYNTHETIC-CAMPAIGN-001.json", "default command");
 
 const controls = manifest.controls || {};
@@ -49,7 +52,7 @@ equal(controls.runtimeAuthority, false, "controls.runtimeAuthority");
 equal(controls.publicInternetEgress, false, "controls.publicInternetEgress");
 
 const sources = new Map((manifest.sourceFiles || []).map((entry) => [entry.path.replaceAll("\\", "/"), entry.sha256]));
-equal(sources.size, 9, "unique source-file count");
+equal(sources.size, 10, "unique source-file count");
 for (const [relative, expected] of sources) {
   if (!/^[0-9a-f]{64}$/.test(expected)) fail(`${relative}: invalid SHA-256`);
   const bytes = read(relative);
@@ -72,6 +75,7 @@ for (const fragment of [
   "ifGenerationMatch",
   "externalReferenceCallCount\": 0",
   "GEOCENTRIC_APPARENT_ELONGATION_COSINE_APPROXIMATION",
+  'SKYFIELD_TARGET_NAMES = {"mars": "mars barycenter", "moon": "moon"}',
   "--contract-self-test",
 ]) if (!runner.includes(fragment)) fail(`runner missing governed fragment: ${fragment}`);
 for (const forbidden of ["horizons", "astroquery", "nina", "eagle", "forecast", "readiness", "safetyState"]) {
@@ -99,8 +103,9 @@ for (const fragment of [
   "python:3.12.14-slim-bookworm@sha256:9c47360a2a0355e2da18516d0b1c2126ec22c195d2185e97347c9d98398c5bef",
   "--no-index",
   "--require-hashes",
-  "BKL-031-F3-A3-RUNNER-MANIFEST-001.json",
+  "BKL-031-F3-A3-RUNNER-MANIFEST-002.json",
   "runner/scientific_runner.py",
+  "runner/offline_exact_kernel_validation.py",
   "USER 65532:65532",
   'ENTRYPOINT ["/app/dsg/container/entrypoint.sh"]',
   'CMD ["python", "/app/dsg/runner/scientific_runner.py", "--request", "/app/dsg/runner/BKL-031-F3-A3-SYNTHETIC-CAMPAIGN-001.json"]',

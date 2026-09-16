@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0",
+  "evidenceId": "BKL-031-F3-A3-REPLACEMENT-ROOT-CAUSE-EVIDENCE-001",
+  "status": "ROOT_CAUSE_CONFIRMED_RUNNER_SOURCE_REMEDIATION_REQUIRED",
+  "recordedAtUtc": "2026-09-16T23:25:00Z",
+  "failedExecution": "dsg-f3-a3-spike-jv646",
+  "forensics": {
+    "workflowRunId": 35162018941,
+    "workflowJobId": 105014706407,
+    "inventory": "PASSED_EXACT_TWO_EXECUTIONS_ZERO_EVIDENCE_UNCHANGED_PLATFORM",
+    "wifLogRead": "PERMISSION_DENIED_ALL_LOG_VIEWS",
+    "operatorRead": "AUTHENTICATED_READ_ONLY_CLOUD_LOGGING_QUERY"
+  },
+  "cloudLog": {
+    "resourceType": "cloud_run_job",
+    "jobName": "dsg-f3-a3-spike",
+    "region": "europe-west8",
+    "executionName": "dsg-f3-a3-spike-jv646",
+    "entryCount": 4,
+    "preflight": "PASSED_EXACT_METHOD_PROFILE_IERS_PACKAGE_SET_AND_OFFLINE_POLICY",
+    "errorTimestamp": "2026-09-16T23:03:25.283889Z",
+    "errorGroupId": "CI2x_4mqsIOybw",
+    "exception": "KeyError",
+    "failedSourceLine": 239,
+    "failedExpression": "skyfield_ephemeris[target]",
+    "requestedTarget": "MARS",
+    "kernel": "de442s.bsp",
+    "kernelSupportedMarsTarget": "MARS BARYCENTER",
+    "kernelSupportedMarsNaifId": 4,
+    "kernelMissingMarsCenterNaifId": 499
+  },
+  "analysis": {
+    "rootCause": "RUNNER_REQUESTED_MARS_CENTER_NAME_NOT_PRESENT_IN_APPROVED_DE442S_KERNEL",
+    "astropyKernelSpecification": "mars maps to the supported (0,4) Solar System Barycenter to Mars Barycenter chain",
+    "boundedCorrection": "map governed target mars to Skyfield target mars barycenter; retain moon as moon",
+    "methodProfileChange": "NOT_REQUIRED",
+    "kernelChange": "NOT_REQUIRED",
+    "networkChange": "NOT_REQUIRED"
+  },
+  "controls": {
+    "thirdExecution": "NOT_EXECUTED",
+    "scientificEvidenceObjectCount": 0,
+    "cloudMutation": "NOT_EXECUTED_BY_ROOT_CAUSE_READ",
+    "protectedSiteUse": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED"
+  },
+  "nextGate": "REVIEW_RUNNER_TARGET_RESOLUTION_AND_OFFLINE_EXACT_KERNEL_VALIDATION"
+}

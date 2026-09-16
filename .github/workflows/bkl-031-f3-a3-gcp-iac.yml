@@ -24,6 +24,7 @@ on:
       - ".github/scripts/verify-bkl-031-f3-a3-direct-vpc-subnet-remediation.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-exact-replacement-scientific-execution.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-replacement-execution-forensics.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-offline-exact-kernel-validation.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - ".github/workflows/bkl-031-f3-a3-authenticated-platform-plan.yml"
       - ".github/workflows/bkl-031-f3-a3-registry-foundation.yml"
@@ -40,6 +41,7 @@ on:
       - ".github/workflows/bkl-031-f3-a3-direct-vpc-subnet-remediation.yml"
       - ".github/workflows/bkl-031-f3-a3-exact-replacement-scientific-execution.yml"
       - ".github/workflows/bkl-031-f3-a3-replacement-execution-forensics.yml"
+      - ".github/workflows/bkl-031-f3-a3-offline-exact-kernel-validation.yml"
       - "infrastructure/bkl-031-f3-a3-gcp/**"
       - "docs/architecture/ADR-010-Ephemeris-Lunar-Method-and-Validation-Profile.md"
       - "docs/architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md"
@@ -70,6 +72,7 @@ on:
       - ".github/scripts/verify-bkl-031-f3-a3-direct-vpc-subnet-remediation.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-exact-replacement-scientific-execution.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-replacement-execution-forensics.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-offline-exact-kernel-validation.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - ".github/workflows/bkl-031-f3-a3-authenticated-platform-plan.yml"
       - ".github/workflows/bkl-031-f3-a3-registry-foundation.yml"
@@ -86,6 +89,7 @@ on:
       - ".github/workflows/bkl-031-f3-a3-direct-vpc-subnet-remediation.yml"
       - ".github/workflows/bkl-031-f3-a3-exact-replacement-scientific-execution.yml"
       - ".github/workflows/bkl-031-f3-a3-replacement-execution-forensics.yml"
+      - ".github/workflows/bkl-031-f3-a3-offline-exact-kernel-validation.yml"
       - "infrastructure/bkl-031-f3-a3-gcp/**"
   workflow_dispatch:
 
@@ -144,6 +148,8 @@ jobs:
         run: node .github/scripts/verify-bkl-031-f3-a3-exact-replacement-scientific-execution.mjs
       - name: Verify replacement execution read-only forensics gate
         run: node .github/scripts/verify-bkl-031-f3-a3-replacement-execution-forensics.mjs
+      - name: Verify offline exact-kernel remediation gate
+        run: node .github/scripts/verify-bkl-031-f3-a3-offline-exact-kernel-validation.mjs
 
   terraform:
     name: Terraform validate (${{ matrix.directory }})
@@ -327,7 +333,7 @@ jobs:
           cat <<EOF | tee -a "$GITHUB_STEP_SUMMARY"
           BKL-031-F3-A3-SCIENTIFIC-RUNNER-CANDIDATE
           sourceCommit=${GITHUB_SHA}
-          runnerManifestSha256=cee2ddb9d434cce1c0d635b2f111baf65fc016993bca1e17e72dca50bdd15ddd
+          runnerManifestSha256=8fbb05a5db8c847db3408939a4aa0ddeee5ce5f972d2e60e9b8f89b08702e591
           ociManifestDigest=${DSG_RUNNER_MANIFEST_DIGEST}
           ociConfigDigest=${DSG_RUNNER_CONFIG_DIGEST}
           imageId=${DSG_RUNNER_IMAGE_ID}
