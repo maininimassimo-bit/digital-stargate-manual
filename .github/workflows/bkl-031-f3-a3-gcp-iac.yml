@@ -333,7 +333,7 @@ jobs:
           cat <<EOF | tee -a "$GITHUB_STEP_SUMMARY"
           BKL-031-F3-A3-SCIENTIFIC-RUNNER-CANDIDATE
           sourceCommit=${GITHUB_SHA}
-          runnerManifestSha256=4cfd685090cc12fdf46fdc92fe54f752f3d75e87c38310651b77fbed7ab922df
+          runnerManifestSha256=11163d6ac4901341b409e686740a2090ae23f93eba08ed8b4aa8c8bb98c3f740
           ociManifestDigest=${DSG_RUNNER_MANIFEST_DIGEST}
           ociConfigDigest=${DSG_RUNNER_CONFIG_DIGEST}
           imageId=${DSG_RUNNER_IMAGE_ID}

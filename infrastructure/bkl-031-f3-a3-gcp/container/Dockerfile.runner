@@ -33,7 +33,7 @@ RUN python -m pip install \
       -xdev -exec touch -h -d "@${SOURCE_DATE_EPOCH}" {} +
 
 COPY method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json /app/dsg/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json
-COPY container/BKL-031-F3-A3-RUNNER-MANIFEST-003.json /app/dsg/container/BKL-031-F3-A3-RUNNER-MANIFEST-003.json
+COPY container/BKL-031-F3-A3-RUNNER-MANIFEST-004.json /app/dsg/container/BKL-031-F3-A3-RUNNER-MANIFEST-004.json
 COPY container/astropy.cfg /app/dsg/config/astropy/astropy.cfg
 COPY container/preflight.py /app/dsg/container/preflight.py
 COPY container/entrypoint.sh /app/dsg/container/entrypoint.sh
