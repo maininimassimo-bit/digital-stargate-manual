@@ -1,0 +1,151 @@
+name: BKL-031 F3-A3 Scientific Execution Read-only Recovery
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: Exact main commit authorized for read-only recovery of the single execution
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: bkl-031-f3-a3-scientific-execution-recovery
+  cancel-in-progress: false
+
+jobs:
+  recover-single-execution:
+    name: Exact-head read-only single-execution recovery
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+      GCP_REGION: ${{ vars.GCP_REGION }}
+      GCP_WIF_PROVIDER: ${{ vars.GCP_WIF_PROVIDER }}
+      GCP_DEPLOY_SERVICE_ACCOUNT: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+      GCP_STATE_BUCKET: ${{ vars.GCP_STATE_BUCKET }}
+      GCP_EVIDENCE_BUCKET: ${{ vars.GCP_EVIDENCE_BUCKET }}
+      DSG_AUTHORIZED_COMMIT: ${{ inputs.expected_commit }}
+      DSG_RUNNER_SOURCE_COMMIT: 9db0267529b6d46a2510b415e4b3f51d668ff024
+      DSG_EVIDENCE_PREFIX: bkl-031/f3-a3/scientific-spike/9db0267529b6d46a2510b415e4b3f51d668ff024
+      DSG_PLATFORM_STATE_SHA256: 084b68da6d20d9523ceabce67766cfc211b71f97ee12d8f4e7a0b4a64f57b89b
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Require exact authorized main head and identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${GITHUB_REF}" = "refs/heads/main"
+          test "${GITHUB_SHA}" = "${DSG_AUTHORIZED_COMMIT}"
+          grep -Eq '^[0-9a-f]{40}$' <<<"${GITHUB_SHA}"
+          test "${GCP_PROJECT_ID}" = "digital-stargate-telemetry"
+          test "${GCP_REGION}" = "europe-west8"
+          test "${GCP_WIF_PROVIDER}" = "projects/183451329061/locations/global/workloadIdentityPools/dsg-f3-a3-github/providers/github-main"
+          test "${GCP_DEPLOY_SERVICE_ACCOUNT}" = "dsg-f3-a3-deployer@digital-stargate-telemetry.iam.gserviceaccount.com"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+
+      - name: Verify fail-closed incident and read-only recovery policy
+        run: |
+          node .github/scripts/verify-bkl-031-f3-a3-scientific-execution-recovery.mjs
+
+      - name: Authenticate to Google Cloud through main-only WIF
+        id: auth
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+          create_credentials_file: true
+          export_environment_variables: true
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
+        with:
+          version: "583.0.0"
+
+      - name: Read exact single execution, private evidence and unchanged platform
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(gcloud auth list --filter=status:ACTIVE --format='value(account)')" = "$GCP_DEPLOY_SERVICE_ACCOUNT"
+          gcloud config set project "$GCP_PROJECT_ID" >/dev/null
+          gcloud run jobs executions list --job=dsg-f3-a3-spike --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/executions.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          executions = json.loads(Path('/tmp/executions.json').read_text())
+          if len(executions) != 1:
+              raise SystemExit(f'expected the exclusive single execution, received {len(executions)}')
+          execution = executions[0]
+          name = execution.get('metadata', {}).get('name') or execution.get('name')
+          if not isinstance(name, str) or not name:
+              raise SystemExit(f'execution name unavailable: {execution!r}')
+          Path('/tmp/execution-name.txt').write_text(name.rsplit('/', 1)[-1], encoding='utf-8')
+          PY
+          execution_name="$(cat /tmp/execution-name.txt)"
+          gcloud run jobs executions describe "$execution_name" --project="$GCP_PROJECT_ID" --region="$GCP_REGION" --format=json >/tmp/execution.json
+          gcloud storage objects list "gs://${GCP_EVIDENCE_BUCKET}/${DSG_EVIDENCE_PREFIX}/**" --format=json >/tmp/evidence-objects.json
+          gcloud storage cat "gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/platform/default.tfstate" >/tmp/platform-state.json
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          execution_name = Path('/tmp/execution-name.txt').read_text().strip()
+          execution = json.loads(Path('/tmp/execution.json').read_text())
+          objects = json.loads(Path('/tmp/evidence-objects.json').read_text())
+          state_raw = Path('/tmp/platform-state.json').read_bytes()
+          if hashlib.sha256(state_raw).hexdigest() != '084b68da6d20d9523ceabce67766cfc211b71f97ee12d8f4e7a0b4a64f57b89b':
+              raise SystemExit('platform state changed during or after execution')
+          if len(objects) > 1:
+              raise SystemExit(f'more than one scientific evidence object exists: {len(objects)}')
+          evidence_summary = None
+          if len(objects) == 1:
+              object_name = objects[0].get('name') or objects[0].get('url') or objects[0].get('storage_url')
+              expected = f'bkl-031/f3-a3/scientific-spike/9db0267529b6d46a2510b415e4b3f51d668ff024/{execution_name}/evidence.json'
+              if object_name not in {expected, f'gs://digital-stargate-telemetry-183451329061-f3-evidence/{expected}'}:
+                  raise SystemExit(f'unexpected evidence object: {object_name!r}')
+              Path('/tmp/evidence-uri.txt').write_text(f'gs://digital-stargate-telemetry-183451329061-f3-evidence/{expected}', encoding='utf-8')
+          facts = {
+              'executionName': execution_name,
+              'executionStatus': execution.get('status', {}),
+              'executionMetadata': execution.get('metadata', {}),
+              'evidenceObjectCount': len(objects),
+              'evidenceObjectMetadata': objects,
+              'platformStateRawSha256': hashlib.sha256(state_raw).hexdigest(),
+              'secondExecution': 'NOT_EXECUTED',
+              'cloudMutation': 'NOT_EXECUTED_BY_RECOVERY',
+          }
+          print('DSG_EXECUTION_RECOVERY_FACTS=' + json.dumps(facts, sort_keys=True, separators=(',', ':')))
+          PY
+          if test -f /tmp/evidence-uri.txt; then
+            gcloud storage cat "$(cat /tmp/evidence-uri.txt)" >/tmp/scientific-evidence.json
+            python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          path = Path('/tmp/scientific-evidence.json')
+          evidence = json.loads(path.read_text())
+          print('DSG_RECOVERED_EVIDENCE_FACTS=' + json.dumps({
+              'rawSha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+              'schemaVersion': evidence.get('schemaVersion'),
+              'executionId': evidence.get('executionId'),
+              'normalizedResultSha256': evidence.get('normalizedResultSha256'),
+              'scientific': evidence.get('scientific'),
+              'networkCalls': evidence.get('networkCalls'),
+              'protectedSiteUse': evidence.get('protectedSiteUse'),
+              'runtimeActivation': evidence.get('runtimeActivation'),
+              'durationMilliseconds': evidence.get('durationMilliseconds'),
+          }, sort_keys=True, separators=(',', ':')))
+          PY
+          fi
