@@ -236,6 +236,8 @@ jobs:
               "resourceAddresses": sorted(addresses),
               "authentication": "GITHUB_OIDC_WIF_MAIN_ONLY",
               "planArtifactRetention": "EPHEMERAL_JOB_ONLY",
+              "terraformBackendState": "PERSISTED_EMPTY_STATE_ONLY",
+              "terraformBackendStateUri": f"gs://{os.environ['GCP_STATE_BUCKET']}/bkl-031/f3-a3/platform/default.tfstate",
               "containerPublication": "BLOCKED_REPOSITORY_NOT_CREATED",
               "artifactRegistryRepositoryApply": "NOT_EXECUTED",
               "platformApply": "NOT_EXECUTED",
@@ -253,20 +255,36 @@ jobs:
           )
           PY
 
-      - name: Prove no platform state or residual lock was persisted
+      - name: Prove only an empty platform state was persisted
         shell: bash
         run: |
           set -euo pipefail
           gcloud storage ls "gs://${GCP_STATE_BUCKET}" >/tmp/state-bucket-prefixes-final.txt
-          set +e
-          listing="$(gcloud storage ls "gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/platform/**" 2>/tmp/platform-state-list.err)"
-          list_status=$?
-          set -e
-          test "$list_status" -eq 1
-          test -z "$listing"
-          grep -F "matched no objects" /tmp/platform-state-list.err
+          state_uri="gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/platform/default.tfstate"
+          mapfile -t state_objects < <(gcloud storage ls "gs://${GCP_STATE_BUCKET}/bkl-031/f3-a3/platform/**")
+          test "${#state_objects[@]}" -eq 1
+          test "${state_objects[0]}" = "$state_uri"
+          gcloud storage cat "$state_uri" >/tmp/platform-empty-state.json
+          python - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+
+          state = json.loads(Path("/tmp/platform-empty-state.json").read_text(encoding="utf-8"))
+          if set(state) != {"version", "terraform_version", "serial", "lineage", "outputs", "resources", "check_results"}:
+              raise SystemExit(f"unexpected state keys: {sorted(state)}")
+          if state["version"] != 4 or state["terraform_version"] != "1.16.2":
+              raise SystemExit("unexpected Terraform state format or writer version")
+          if not isinstance(state["serial"], int) or state["serial"] < 1:
+              raise SystemExit(f"unexpected state serial: {state['serial']!r}")
+          if not re.fullmatch(r"[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}", state["lineage"]):
+              raise SystemExit(f"unexpected state lineage: {state['lineage']!r}")
+          if state["outputs"] != {} or state["resources"] != [] or state["check_results"] is not None:
+              raise SystemExit("platform state is not empty")
+          PY
           cat <<'EOF' >> "$GITHUB_STEP_SUMMARY"
 
+          terraformBackendState=PERSISTED_EMPTY_STATE_ONLY
           apply=NOT_EXECUTED
           imagePush=NOT_EXECUTED
           artifactUpload=NOT_EXECUTED
