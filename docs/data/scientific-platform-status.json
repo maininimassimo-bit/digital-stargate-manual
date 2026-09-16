@@ -19,8 +19,8 @@
       "title": "Observation Planner intelligente",
       "status": "active"
     },
-    "nextMilestone": "BKL-031 F3-A3 separately reviewed immutable image publication and authenticated exact-head platform plan",
-    "target": "Review the immutable build evidence, then prepare a separately authorized image-publication and authenticated exact-head platform-plan gate. Stop before image push or platform plan until that gate is approved, and before platform apply, artifact upload, spike execution, Horizons request, protected-site use or runtime activation."
+    "nextMilestone": "BKL-031 F3-A3 separately reviewed Artifact Registry foundation and exact OCI publication",
+    "target": "Extract and review the Artifact Registry foundation as a one-resource apply, then publish the exact OCI candidate and refresh the authenticated platform plan with the registry-resolved digest. Stop before repository apply, image push and each later gate; platform apply, artifact upload, spike execution, Horizons request, protected-site use and runtime activation remain blocked."
   },
   "architecture": {
     "ap013": {

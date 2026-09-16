@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-A3-VAL-001 |
-| Status | **APPROVED DECISION PROFILE — NOT EXECUTED / NOT AUTHORIZED** |
+| Status | **APPROVED DECISION PROFILE — AUTHENTICATED PLATFORM PLAN VERIFIED / SCIENTIFIC CAMPAIGN NOT EXECUTED** |
 | Version | 1.1 |
 | Date | 2026-09-15 |
 | Architecture | BKL-031-F3-A3-SOLUTION-001 |
@@ -209,7 +209,7 @@ Every run records:
 | Gate | Current state | Execution evidence required |
 |---|---|---|
 | architecture/ADR traceability | DEFINED | exact accepted ADR |
-| package/data pins | EXACT DEPENDENCY/IERS ARTIFACTS HASH-VERIFIED EPHEMERALLY; REPRODUCIBLE BUILD/PREFLIGHT PASS | published registry digest and campaign manifest remain |
+| package/data pins | EXACT DEPENDENCY/IERS ARTIFACTS HASH-VERIFIED EPHEMERALLY; REPRODUCIBLE BUILD/PREFLIGHT AND UNPUBLISHED OCI DIGEST PASS | published registry digest and campaign manifest remain |
 | license/provenance | PACKAGE/IERS METADATA, EXACT ACQUIRED HASHES AND EXACT `de442s.bsp` IDENTITY RECORDED | SPK acquisition and execution-manifest review remain |
 | scientific error budget | OWNER APPROVED | ADR-010 per-metric thresholds |
 | synthetic grid | OWNER BOUNDED | 50 targets; 2,016 instants/target; 10,000 pairs; 7 days; 1-minute minimum step; 256 KiB request |
@@ -240,11 +240,11 @@ Delete or quarantine the isolated environment and acquired artifacts according t
 
 ## 17. Current execution status
 
-Stage V0 record `A3-S01` is complete. Preparatory exact dependency/IERS acquisition, two reproducible offline container builds and the network-disabled preflight passed and are recorded in `BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001`. This is build evidence, not execution of V1–V5. All stages V1–V5 and cases A3-P01–P10/A3-N01–N24 remain `NOT EXECUTED`; no image push, artifact upload, platform operation or scientific calculation occurred.
+Stage V0 record `A3-S01` is complete. Preparatory exact dependency/IERS acquisition, reproducible offline container builds and the network-disabled preflight passed and are recorded in `BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001`. Authenticated exact-head run `35131365596` then reproduced OCI manifest digest `sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce` twice and verified a saved platform plan of five additions, zero changes and zero destroys. `BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-001` records that plan-only gate and the empty backend state. This is build and infrastructure-plan evidence, not execution of V1–V5. All stages V1–V5 and cases A3-P01–P10/A3-N01–N24 remain `NOT EXECUTED`; no image push, platform apply, artifact upload or scientific calculation occurred.
 
 ## 18. Governance stop
 
-F3-OD05, bootstrap/MI02 and the reproducible offline container-build gate are closed at evidence level. Stop before image push or authenticated platform planning until a separate reviewed gate authorizes them, and before platform apply or spike authorization. This plan does not authorize upload, external reference calls, protected-site use, scientific execution, schema, adapter or runtime work.
+F3-OD05, bootstrap/MI02, reproducible offline container-build and authenticated plan-only gates are closed at evidence level. The target Artifact Registry repository does not yet exist and is part of the unapplied plan. Stop before a separately reviewed registry-foundation apply, exact OCI publication and refreshed published-digest plan/apply gate. This plan does not authorize artifact upload, external reference calls, protected-site use, scientific execution, schema, adapter or runtime work.
 
 ## 19. Approved execution and request envelope
 

@@ -2,10 +2,10 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-16",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-A3 reproducible offline container build and preflight verified after MI02 closure; image unpublished; ADR-010 proposed; S10 unavailable",
+  "projectStatus": "BKL-031 F3-A3 authenticated exact-head five-create platform plan verified; image unpublished; platform unapplied; ADR-010 proposed; S10 unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A3 separately reviewed immutable image publication and authenticated exact-head platform plan",
-  "target": "Review the immutable build evidence, then prepare a separately authorized image-publication and authenticated exact-head platform-plan gate. Stop before image push or platform plan until that gate is approved, and before platform apply, artifact upload, spike execution, Horizons request, protected-site use or runtime activation.",
+  "nextMilestone": "BKL-031 F3-A3 separately reviewed Artifact Registry foundation and exact OCI publication",
+  "target": "Extract and review the Artifact Registry foundation as a one-resource apply, then publish the exact OCI candidate and refresh the authenticated platform plan with the registry-resolved digest. Stop before repository apply, image push and each later gate; platform apply, artifact upload, spike execution, Horizons request, protected-site use and runtime activation remain blocked.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3-A3 decisions, immutable method-profile evidence and ARB-213-MI02 post-promotion verification are complete. Ten exact dependency/IERS artifacts were acquired ephemerally and hash-verified; two isolated no-cache builds produced the same unpublished linux/amd64 image config ID, and the network-disabled preflight passed. Image push, artifact upload, platform plan/apply and scientific cases remain NOT EXECUTED; ADR-010 remains Proposed and S10 remains UNAVAILABLE."
+          "note": "F3-A3 decisions, immutable method profile, bootstrap/MI02, reproducible offline build and authenticated exact-head plan gates are complete. Run 35131365596 reproduced OCI manifest digest sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce and verified an exact plan of 5 additions, 0 changes and 0 destroys with an empty backend state. The target registry is still absent; image push, platform apply, artifact upload and scientific cases remain NOT EXECUTED. ADR-010 remains Proposed and S10 remains UNAVAILABLE."
         },
         {
           "id": "BKL-032",
@@ -608,6 +608,13 @@
       "title": "BKL-031 F3-A3 Reproducible Offline Container Build Evidence",
       "date": "2026-09-16",
       "description": "Exact dependency and IERS artifacts were acquired ephemerally with SHA-256 verification. Two isolated no-cache BuildKit builds produced identical unpublished image config ID sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0; network-disabled preflight and IERS coverage passed. No image push, upload, platform plan/apply or scientific execution occurred."
+    },
+    {
+      "id": "M-BKL031-F3-A3-AUTHENTICATED-PLAN-EVIDENCE",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A3 Authenticated Exact-Head Platform Plan Evidence",
+      "date": "2026-09-16",
+      "description": "Main-only WIF run 35131365596 reproduced the unpublished OCI manifest digest and verified an authenticated saved plan with exactly 5 additions, 0 changes and 0 destroys. Only an empty Terraform backend state persists. No image push, repository/platform apply, artifact upload or scientific execution occurred."
     }
   ]
 }

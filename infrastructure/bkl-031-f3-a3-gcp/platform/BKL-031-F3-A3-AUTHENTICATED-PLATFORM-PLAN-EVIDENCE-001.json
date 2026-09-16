@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0",
+  "evidenceId": "BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-001",
+  "status": "AUTHENTICATED_EXACT_HEAD_PLAN_VERIFIED_NOT_APPLIED",
+  "recordedAtUtc": "2026-09-16T17:59:13Z",
+  "source": {
+    "commit": "380bd8c3d04f570acb21a9a7f532930111adcdc8",
+    "workflowGatePullRequest": 224,
+    "stateProbeCorrectionPullRequest": 225,
+    "emptyStateCorrectionPullRequest": 226
+  },
+  "continuousIntegration": {
+    "provider": "GitHub Actions",
+    "workflow": "BKL-031 F3-A3 Authenticated Platform Plan",
+    "runId": 35131365596,
+    "jobId": 104912908086,
+    "runUrl": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35131365596",
+    "conclusion": "SUCCESS"
+  },
+  "authentication": {
+    "mode": "GITHUB_OIDC_WIF_MAIN_ONLY",
+    "projectId": "digital-stargate-telemetry",
+    "region": "europe-west8",
+    "deployerServiceAccount": "dsg-f3-a3-deployer@digital-stargate-telemetry.iam.gserviceaccount.com",
+    "staticServiceAccountKey": false
+  },
+  "candidateImage": {
+    "publication": "BLOCKED_REPOSITORY_NOT_CREATED",
+    "reference": "europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike@sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce",
+    "manifestDigest": "sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce",
+    "candidateA": "sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce",
+    "candidateB": "sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce",
+    "configDigest": "sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0"
+  },
+  "terraformPlan": {
+    "version": "1.16.2",
+    "binarySha256": "fd12e88d11b88351523f840a6d03341abc7d3aadcefaa65d70f09358a0cee52f",
+    "jsonSha256": "e2a8bfc28d2d6b88a3bffbd04b40cf5b6bdf1bb558e2609ccb991cbc61d5c3d7",
+    "textSha256": "6fd9c1c3f9d1c754d310f88fa2e8f3dfb2422a5a9195ec40f6f57087bbb8c83e",
+    "artifactRetention": "EPHEMERAL_JOB_ONLY",
+    "actions": {
+      "add": 5,
+      "change": 0,
+      "destroy": 0
+    },
+    "resourceAddresses": [
+      "google_artifact_registry_repository.spike",
+      "google_cloud_run_v2_job.spike",
+      "google_cloud_run_v2_job_iam_member.deployer_invoker",
+      "google_compute_network.spike",
+      "google_compute_subnetwork.spike"
+    ]
+  },
+  "backendState": {
+    "status": "PERSISTED_EMPTY_STATE_ONLY",
+    "uri": "gs://digital-stargate-telemetry-183451329061-f3-state/bkl-031/f3-a3/platform/default.tfstate",
+    "generation": "1789581106332886",
+    "rawSha256": "48d4052c2e1a3899e8d568b32ada5e81282873534b720fa36241f9d026166482",
+    "sizeBytes": 181,
+    "stateVersion": 4,
+    "serial": 1,
+    "lineage": "2be9b82b-88d3-888f-4fcd-dded2f74f7f3",
+    "outputs": 0,
+    "resources": 0,
+    "checkResults": null,
+    "residualLock": false
+  },
+  "controls": {
+    "resourceAbsenceVerifiedBeforePlan": true,
+    "registryFoundationRequiredBeforePublication": true,
+    "imagePush": "NOT_EXECUTED",
+    "artifactRegistryRepositoryApply": "NOT_EXECUTED",
+    "platformApply": "NOT_EXECUTED",
+    "artifactUpload": "NOT_EXECUTED",
+    "scientificExecution": "NOT_EXECUTED",
+    "externalReferenceTraffic": "NOT_EXECUTED",
+    "protectedSiteUse": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED",
+    "runtimeAuthority": false
+  },
+  "nextGate": "SEPARATELY_REVIEWED_ARTIFACT_REGISTRY_FOUNDATION_APPLY_THEN_EXACT_OCI_PUBLICATION_AND_REFRESHED_PLAN"
+}

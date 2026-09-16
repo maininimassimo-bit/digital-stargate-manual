@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-A3-INFRA-001 |
-| Status | **PROPOSED — BOOTSTRAP POST-VERIFIED / REPRODUCIBLE OFFLINE CONTAINER VERIFIED / IMAGE UNPUBLISHED / PLATFORM NOT EXECUTED** |
+| Status | **PROPOSED — AUTHENTICATED EXACT-HEAD PLAN VERIFIED / IMAGE UNPUBLISHED / PLATFORM NOT APPLIED** |
 | Version | 1.0 |
 | Date | 2026-09-15 |
 | Baseline | `main@527b298094b07e5a00317e60cab3abefed7a5759` |
@@ -19,7 +19,7 @@ Provide an isolated, low-idle-cost execution boundary for the future F3-A3 valid
 
 | Component | Role | Boundary |
 |---|---|---|
-| GitHub Actions | static validation now; future authenticated plan after bootstrap | OIDC only; no service-account key |
+| GitHub Actions | static validation and manual exact-head authenticated plan | OIDC only; no service-account key |
 | Workload Identity Pool | trusts only this repository and `refs/heads/main` | one deployer service account |
 | bootstrap Terraform | APIs, deployer/runtime identities and three private buckets | one-time administrator action |
 | platform Terraform | Artifact Registry, private VPC/subnet and Cloud Run Job | no apply in this package |
@@ -77,10 +77,12 @@ Budgets and billing alerts remain project-level operator controls because this r
 2. bootstrap state was migrated to protected GCS and its permanent backend was post-promotion verified;
 3. the approved F3-OD05 identity, immutable method profile and exact container/IERS source manifest were prepared;
 4. the exact dependency/IERS bytes were acquired ephemerally and reproducible offline container-build/preflight evidence was recorded in a bounded gate;
-5. publish the immutable image and record its registry digest only through a separately reviewed gate;
-6. introduce a separately reviewed authenticated exact-head platform plan/apply workflow;
-7. apply platform resources through WIF;
-8. execute the spike only after ADR/ARB/Release Quality authorization.
+5. the separately reviewed authenticated exact-head workflow produced a five-create saved plan through WIF without apply;
+6. extract and apply only the Artifact Registry foundation through a separate exact-head review;
+7. publish the exact OCI candidate and record the registry-resolved digest;
+8. refresh and review the authenticated platform plan using the published digest;
+9. apply the remaining platform resources through a separate authorization;
+10. execute the spike only after ADR/ARB/Release Quality authorization.
 
 There is no native Google Cloud connector in the available ChatGPT plugin catalog. After the one-time bootstrap, repository changes and GitHub Actions WIF are the governed automation path and avoid reusable cloud keys.
 
@@ -101,4 +103,8 @@ There is no native Google Cloud connector in the available ChatGPT plugin catalo
 
 The bootstrap applied 27 additions with 0 changes and 0 destroys. Protected remote state, permanent-backend promotion, locking, recovery candidate and zero drift are post-verified; ARB-213-MI02 is satisfied. `BKL-031-F3-A3-CONTAINER-MANIFEST-002` at SHA-256 `02ceba17c1ac97f780cd545554b254ee668d840fcd85e11310d07c4ecc37e879` records the exact base/platform, pinned BuildKit, hash-locked wheels and IERS identity `43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc` with offline fail-closed policy.
 
-CI run `35122782246` acquired all ten artifacts ephemerally with exact hashes, built twice without cache or RUN network, and produced the same linux/amd64 image config ID `sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0`. Network-disabled preflight, exact package/profile checks and IERS campaign-date coverage passed. `BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001` at SHA-256 `00546062e78887af003adb010bb60dcfbdfb1480429e22314e4476673c7633a3` records the result. The image config ID is not a registry digest. Image push, artifact upload, authenticated platform plan/apply and job execution are all `NOT EXECUTED`.
+CI run `35122782246` acquired all ten artifacts ephemerally with exact hashes, built twice without cache or RUN network, and produced the same linux/amd64 image config ID `sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0`. Network-disabled preflight, exact package/profile checks and IERS campaign-date coverage passed. `BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001` at SHA-256 `00546062e78887af003adb010bb60dcfbdfb1480429e22314e4476673c7633a3` records the result. The image config ID is not a registry digest.
+
+Authenticated workflow run `35131365596` on exact commit `380bd8c3d04f570acb21a9a7f532930111adcdc8` used the reviewed WIF deployer identity and produced two identical unpublished OCI manifests at `sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce`. The saved plan is exactly five additions, zero changes and zero destroys. It was not retained outside the job; its text SHA-256 is `6fd9c1c3f9d1c754d310f88fa2e8f3dfb2422a5a9195ec40f6f57087bbb8c83e`. The platform backend contains one validated empty state and no lock. Evidence is recorded in `BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-001` at SHA-256 `06cf923ae2bad1e869782bffd6a7e5389f9a68419d6199d0d7df5319f50b12e6`.
+
+Artifact Registry publication remains impossible until the planned `dsg-f3-a3` repository exists. The next gate is a separately reviewed registry-foundation apply followed by exact OCI publication and a refreshed authenticated plan. Image push, platform apply, artifact upload and job execution remain `NOT EXECUTED`.
