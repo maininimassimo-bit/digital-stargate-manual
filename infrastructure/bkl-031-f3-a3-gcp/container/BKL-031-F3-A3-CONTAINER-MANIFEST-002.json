@@ -18,6 +18,14 @@
     "baseImagePlatformDigest": "sha256:9c47360a2a0355e2da18516d0b1c2126ec22c195d2185e97347c9d98398c5bef",
     "source": "https://hub.docker.com/_/python/tags?name=3.12.14-slim-bookworm"
   },
+  "buildTool": {
+    "name": "moby/buildkit",
+    "version": "0.30.0",
+    "indexDigest": "sha256:0168606be2315b7c807a03b3d8aa79beefdb31c98740cebdffdfeebf31190c9f",
+    "platformDigest": "sha256:57269d1784e49b46228c45a1a1b870fbe40e0a639ab60b37b032d83af5bccdfc",
+    "compatibilityVersion": 30,
+    "source": "https://github.com/moby/buildkit/releases/tag/v0.30.0"
+  },
   "iersSnapshot": {
     "snapshotKind": "IERS_A",
     "distribution": "astropy-iers-data",

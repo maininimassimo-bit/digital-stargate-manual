@@ -90,18 +90,26 @@ jobs:
           --evidence infrastructure/bkl-031-f3-a3-gcp/container/.build/acquisition-evidence.json
       - name: Pull the reviewed base platform digest
         run: docker pull --platform linux/amd64 python:3.12.14-slim-bookworm@sha256:9c47360a2a0355e2da18516d0b1c2126ec22c195d2185e97347c9d98398c5bef
+      - name: Start the reviewed BuildKit platform digest
+        shell: bash
+        run: |
+          set -euo pipefail
+          buildkit_image='moby/buildkit:v0.30.0@sha256:57269d1784e49b46228c45a1a1b870fbe40e0a639ab60b37b032d83af5bccdfc'
+          docker pull --platform linux/amd64 "$buildkit_image"
+          docker buildx create --name dsg-repro --driver docker-container --driver-opt "image=$buildkit_image" --use
+          docker buildx inspect --bootstrap
       - name: Build twice without network and require identical image IDs
         shell: bash
         run: |
           set -euo pipefail
           docker buildx version
           export SOURCE_DATE_EPOCH=0
-          output='type=docker,dest=/tmp/dsg-candidate-a.tar,rewrite-timestamp=true'
-          docker buildx build --platform linux/amd64 --network=none --pull=false --no-cache --provenance=false --sbom=false --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:candidate --output "$output" --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile infrastructure/bkl-031-f3-a3-gcp
+          output='type=docker,dest=/tmp/dsg-candidate-a.tar,rewrite-timestamp=true,compatibility-version=30'
+          docker buildx build --builder dsg-repro --platform linux/amd64 --network=none --pull=false --no-cache --provenance=false --sbom=false --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:candidate --output "$output" --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile infrastructure/bkl-031-f3-a3-gcp
           docker load --input /tmp/dsg-candidate-a.tar
           image_id_a="$(docker image inspect --format '{{.Id}}' dsg-bkl031-f3a3:candidate)"
-          output='type=docker,dest=/tmp/dsg-candidate-b.tar,rewrite-timestamp=true'
-          docker buildx build --platform linux/amd64 --network=none --pull=false --no-cache --provenance=false --sbom=false --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:candidate --output "$output" --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile infrastructure/bkl-031-f3-a3-gcp
+          output='type=docker,dest=/tmp/dsg-candidate-b.tar,rewrite-timestamp=true,compatibility-version=30'
+          docker buildx build --builder dsg-repro --platform linux/amd64 --network=none --pull=false --no-cache --provenance=false --sbom=false --build-arg SOURCE_DATE_EPOCH=0 --tag dsg-bkl031-f3a3:candidate --output "$output" --file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile infrastructure/bkl-031-f3-a3-gcp
           docker load --input /tmp/dsg-candidate-b.tar
           image_id_b="$(docker image inspect --format '{{.Id}}' dsg-bkl031-f3a3:candidate)"
           printf 'candidate-a=%s\ncandidate-b=%s\n' "$image_id_a" "$image_id_b"
@@ -135,13 +143,15 @@ jobs:
           cat <<EOF | tee -a "$GITHUB_STEP_SUMMARY"
           BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE
           sourceCommit=${GITHUB_SHA}
-          sourceManifestSha256=d66696d1ea5d3e02049ff1728fc3d90fcbff4c3504deabf06ad10c17cff0251e
+          sourceManifestSha256=c81eb6664bc58a6197a725bf5a0b316b7dae9d4bc419a5ff466b30bf20fe8bd8
           imageId=${DSG_CONTAINER_IMAGE_ID}
           os=${operating_system}
           architecture=${architecture}
           user=${user}
           acquisition=EXACT_HASH_VERIFIED_EPHEMERAL
           buildNetwork=NONE
+          buildkitImage=moby/buildkit:v0.30.0@sha256:57269d1784e49b46228c45a1a1b870fbe40e0a639ab60b37b032d83af5bccdfc
+          buildkitCompatibilityVersion=30
           reproducibility=TWO_NO_CACHE_BUILDS_REWRITE_TIMESTAMP_IDENTICAL
           preflight=PASS_NETWORK_NONE
           scientificRunner=NOT_MATERIALIZED_EXIT_78

@@ -7,10 +7,11 @@ const containerDir = path.join(root, "infrastructure", "bkl-031-f3-a3-gcp", "con
 const historicalManifestPath = path.join(containerDir, "BKL-031-F3-A3-CONTAINER-MANIFEST-001.json");
 const manifestPath = path.join(containerDir, "BKL-031-F3-A3-CONTAINER-MANIFEST-002.json");
 const historicalManifestSha256 = "7923206d85c5670ef56f9310a813c165c7d516d226c994561516c843b338412e";
-const expectedManifestSha256 = "d66696d1ea5d3e02049ff1728fc3d90fcbff4c3504deabf06ad10c17cff0251e";
+const expectedManifestSha256 = "c81eb6664bc58a6197a725bf5a0b316b7dae9d4bc419a5ff466b30bf20fe8bd8";
 const expectedProfileSha256 = "e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca";
 const expectedIersSha256 = "43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc";
 const expectedBasePlatformDigest = "sha256:9c47360a2a0355e2da18516d0b1c2126ec22c195d2185e97347c9d98398c5bef";
+const expectedBuildkitPlatformDigest = "sha256:57269d1784e49b46228c45a1a1b870fbe40e0a639ab60b37b032d83af5bccdfc";
 
 const expectedPackages = new Map([
   ["astropy", ["8.0.1", "fa11d56855e10107ea2231a6b6a33dbf1edbea6890adf34634c1f1d8f25c5a5a"]],
@@ -58,6 +59,10 @@ function validateManifest(manifest) {
   equal(manifest.target?.baseImage, "python:3.12.14-slim-bookworm", "target.baseImage");
   equal(manifest.target?.baseImagePlatformDigest, expectedBasePlatformDigest, "target.baseImagePlatformDigest");
   if (!String(manifest.target?.source).startsWith("https://hub.docker.com/_/python/")) fail("base image source must be the Docker Hub official image");
+  equal(manifest.buildTool?.name, "moby/buildkit", "buildTool.name");
+  equal(manifest.buildTool?.version, "0.30.0", "buildTool.version");
+  equal(manifest.buildTool?.platformDigest, expectedBuildkitPlatformDigest, "buildTool.platformDigest");
+  equal(manifest.buildTool?.compatibilityVersion, 30, "buildTool.compatibilityVersion");
 
   equal(manifest.iersSnapshot?.snapshotKind, "IERS_A", "iersSnapshot.snapshotKind");
   equal(manifest.iersSnapshot?.version, "0.2026.9.14.0.56.43", "iersSnapshot.version");
@@ -157,9 +162,11 @@ const workflow = fs.readFileSync(path.join(root, ".github", "workflows", "bkl-03
 const isolatedBuild = "--file infrastructure/bkl-031-f3-a3-gcp/container/Dockerfile infrastructure/bkl-031-f3-a3-gcp";
 equal(workflow.split(isolatedBuild).length - 1, 2, "isolated no-cache build count");
 for (const fragment of [
-  "docker buildx build --platform linux/amd64 --network=none --pull=false --no-cache",
+  `moby/buildkit:v0.30.0@${expectedBuildkitPlatformDigest}`,
+  "docker buildx build --builder dsg-repro --platform linux/amd64 --network=none --pull=false --no-cache",
   "--provenance=false --sbom=false --build-arg SOURCE_DATE_EPOCH=0",
   "rewrite-timestamp=true",
+  "compatibility-version=30",
 ]) if (!workflow.includes(fragment)) fail(`workflow reproducible build missing: ${fragment}`);
 equal(workflow.split("rewrite-timestamp=true").length - 1, 2, "timestamp-rewriting exporter count");
 
