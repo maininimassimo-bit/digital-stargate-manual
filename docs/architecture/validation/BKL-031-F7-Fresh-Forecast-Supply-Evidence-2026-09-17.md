@@ -2,30 +2,43 @@
 
 | Field | Value |
 |---|---|
-| Status | **EVIDENCE ACQUIRED — REVIEW CANDIDATE** |
+| Status | **PROTECTED-SITE EVIDENCE ACQUIRED — REVIEW CANDIDATE** |
 | Date | 2026-09-17 |
-| Workflow run | `35243920092` |
-| Workflow head | `7b4559111e5a84a00ecbd13611e1ead25276b8b9` |
+| Workflow run | `35255829165` |
+| Workflow head | `2c46ca8be59c9ea8245fa03de71e936249c52a1b` |
 | Run attempt | `1` |
-| Artifact | `10506402579` / `bkl-031-f7-evidence-35243920092` |
-| Artifact digest | `sha256:02cae087b85f6427a66891c85f8e823b200afb1e0590bf0f88be4d05eb909370` |
-| F7 request budget | **`1/1_EXHAUSTED`** |
+| Artifact | `10512359912` / `bkl-031-f7-protected-site-evidence-35255829165` |
+| Artifact digest | `sha256:9c2c58f4f4d63bced1110b94de4463f17eb0a2bc14362c22bb3435cbce9455ef` |
+| Protected-site request budget | **`1/1_EXHAUSTED`** |
+| Site classification | `PROTECTED_EXACT_SITE` — coordinates not published |
 
 ## Result
 
-The single owner-authorized F7 request completed successfully against Open-Meteo Single Runs for upstream ItaliaMeteo/ARPAE ICON-2I run `2026-09-17T12:00Z` at the synthetic/generalized point `42.0,12.0`. Retrieval completed at `2026-09-17T16:01:16.208Z`; observed run age was `4.021169` hours, within the ADR-011 18-hour ceiling, so freshness is `FRESH`.
+The owner-authorized protected-site F7 request completed successfully against Open-Meteo Single Runs for upstream ItaliaMeteo/ARPAE ICON-2I run `2026-09-17T12:00Z`.
 
-The raw response contains 72 hourly positions. Normalization accepts 71 complete positions, excludes the initialization instant `2026-09-17T12:00Z` because `precipitation` is null/non-finite, leaves 67 accepted instants in the future at retrieval time, and performs zero imputations. Availability is therefore `DEGRADED`, not silently upgraded to `AVAILABLE`.
+The server-side adapter resolved the request location only from the approved governed site record. Preflight verified the site authority and explicit outbound privacy decision before network execution. Coordinates were used only to construct the provider request; they were not written to the request plan, normalized supply, logs, durable repository evidence or public projection.
 
-Raw response SHA-256: `7c6805d77c66389aa3e280784f0219912d40089b3a55c5a8bc651ae073f86dbc`.
+Retrieval completed at `2026-09-17T17:57:24.089Z`; observed run age was `5.956691` hours, within the ADR-011 18-hour ceiling, so freshness is `FRESH`.
 
-Normalized supply SHA-256: `7d8205a4d1379927e8648534a3463b19a1a0c99cab48bae01b612348f7d35680`.
+The provider response contains 72 hourly positions. Normalization accepts 71 complete positions, excludes the initialization instant `2026-09-17T12:00Z` because `precipitation` is null/non-finite, leaves 66 accepted instants in the future at retrieval time, and performs zero imputations. Availability is therefore `DEGRADED`, not silently upgraded to `AVAILABLE`.
 
-The repository stores gzip/base64 copies of both exact evidence payloads. The F7 verifier decodes and hashes them offline. No provider request is performed during verification.
+Raw response SHA-256: `1d66a83464c946b203ef60730a993acb913a9ee12bbf5ec0ab0839bff54b3046`.
+
+Normalized supply SHA-256: `1df1894917962b29f83c4f24cbeb6572f71371e3b0877cdd4cf04833395577c8`.
+
+The repository retains only the raw digest plus a gzip/base64 sanitized normalized supply. The raw provider body is not committed.
+
+## Public projection verification
+
+`docs/data/observation-planner-forecast-f7-site-projection.json` contains all 71 accepted real hourly forecast rows and an explicit night window for the Observation Planner. The public projection contains a generalized site label only and excludes protected coordinates, elevation, provider grid location and raw request URL.
+
+The browser consumer verifies lineage, completeness, authority boundaries and prohibited privacy keys. It recomputes current run age and fails closed after the 18-hour freshness ceiling rather than presenting historical data as a current forecast.
 
 ## Boundary verification
 
-- protected-site use: `false`;
+- protected-site provider use: `true`;
+- coordinate persistence: `false`;
+- coordinate publication: `false`;
 - recurring traffic: `false`;
 - production runtime activated: `false`;
 - readiness authority: `false`;
@@ -34,4 +47,10 @@ The repository stores gzip/base64 copies of both exact evidence payloads. The F7
 - command authority: `NONE`;
 - Safety Authority: `LOCAL_PHYSICAL_INTERLOCKS`.
 
-The one-shot acquisition script/workflow is removed after evidence capture. Any additional provider request now requires a new explicit owner authorization and a separately governed package.
+## Superseded generalized validation evidence
+
+Earlier run `35243920092` remains immutable evidence that the fresh-supply mechanics worked at a synthetic/generalized point. It is retained for traceability only and is not the Observation Planner's current site forecast source.
+
+## Replay protection
+
+The protected-site authorization is exhausted after one request. The executable one-shot protected-site acquisition path must be removed before exact-head review; any later provider traffic requires a separately governed runtime/refresh authorization.
