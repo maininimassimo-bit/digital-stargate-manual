@@ -31,12 +31,14 @@ for (const expected of [
   'no third request is permitted'
 ]) assert.ok(firstFailure.includes(expected), `first failure record missing ${expected}`);
 for (const expected of [
-  '**RECONCILED EVIDENCE CANDIDATE / NO FURTHER REQUEST**',
+  '**ACCEPTED — POST-MERGE VERIFIED / NO FURTHER REQUEST**',
   'HTTP 200; 4,723 bytes',
   'DROP_INCOMPLETE_INSTANT_NO_IMPUTATION',
   'accepted exactly indices 1–71',
   'imputed zero values',
-  'No further provider request is authorized'
+  'No further provider request is authorized',
+  '79fe51e71782fff6c952e9291fe8ca567da74e98',
+  '15/15 applicable workflows successful'
 ]) assert.ok(reconciliation.includes(expected), `reconciliation record missing ${expected}`);
 
 assert.equal(normalized.workflowRunId, 35214129960);
@@ -52,7 +54,8 @@ assert.equal(normalized.boundaries.publicProjection, false);
 assert.equal(normalized.location.protectedSiteUsed, false);
 
 const roadmap = JSON.parse(fs.readFileSync('.github/roadmap/roadmap-source.json', 'utf8'));
-assert.equal(roadmap.nextMilestone, 'BKL-031 F4-D sanitized forecast projection and portal integration');
+assert.equal(roadmap.nextMilestone, 'BKL-031 F5 explainable ranking method and read-only consumer');
 assert.ok(roadmap.milestones.some((entry) => entry.id === 'M-BKL031-F4-C-FIRST-ATTEMPT-FAILED'));
 assert.ok(roadmap.milestones.some((entry) => entry.id === 'M-BKL031-F4-C-EVIDENCE-RECONCILIATION'));
-console.log('BKL-031 F4-C gate verified: accepted/post-merge verified, two requests consumed, HTTP 200 raw evidence reconciled to 71 complete instants with zero imputation, acquisition path removed, no protected-site use; F4-D promoted.');
+assert.ok(roadmap.milestones.some((entry) => entry.id === 'M-BKL031-F4-D-ACCEPTANCE'));
+console.log('BKL-031 F4-C gate verified: accepted/post-merge verified, two requests consumed, HTTP 200 raw evidence reconciled to 71 complete instants with zero imputation, acquisition path removed, no protected-site use; F5 is the next separately governed slice.');
