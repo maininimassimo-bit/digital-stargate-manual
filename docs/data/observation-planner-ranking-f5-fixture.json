@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0",
+  "fixtureId": "BKL031-F5-EVALUATION-FIXTURE-001",
+  "environment": "EVALUATION",
+  "authority": "NONE",
+  "consumerMode": "READ_ONLY",
+  "method": {
+    "id": "BKL031-F5-EXPLAINABLE-RANKING",
+    "version": "1.0",
+    "readinessAuthority": false,
+    "actionAuthority": "NONE",
+    "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
+  },
+  "lineage": {
+    "targetKnowledgeProjection": "docs/data/target-knowledge-read-model.json",
+    "astronomicalSemanticAuthority": "docs/data/observation-planner-ephemeris-lunar-f3c-projection.json",
+    "forecastSemanticAuthority": "docs/data/observation-planner-forecast-f4d-projection.json",
+    "forecastEvidenceDigest": "350a7b9ae8b2de308ba55a7105e56bb4de5040572370ab2715c0fa70088af2f5",
+    "forecastCompleteness": "71/72",
+    "providerRequestBudget": "2/2_EXHAUSTED"
+  },
+  "candidates": [
+    {
+      "targetKey": "dsg-target:ldn-1320",
+      "targetId": "TGT-LDN-1320",
+      "canonicalName": "LDN 1320",
+      "identityState": "validated",
+      "evidence": {
+        "astronomicalAltitudeDeg": 60,
+        "lunarSeparationDeg": 120,
+        "forecastEvidenceCompleteness": 0.9861111111111112,
+        "targetIdentityValidation": 1
+      }
+    },
+    {
+      "targetKey": "dsg-target:m-27",
+      "targetId": "TGT-MESSIER-M27",
+      "canonicalName": "M 27",
+      "identityState": "validated",
+      "evidence": {
+        "astronomicalAltitudeDeg": 30,
+        "lunarSeparationDeg": 60,
+        "forecastEvidenceCompleteness": 0.9861111111111112,
+        "targetIdentityValidation": 1
+      }
+    }
+  ],
+  "limitations": [
+    "SYNTHETIC_FACTOR_VALUES_FOR_METHOD_VALIDATION_ONLY",
+    "REAL_TARGET_IDENTITIES_WITHOUT_REAL_F5_TARGET_GEOMETRY",
+    "F4D_FORECAST_VALUES_NOT_PUBLISHED",
+    "NO_ADDITIONAL_PROVIDER_TRAFFIC",
+    "NO_READINESS_GO_NO_GO_SCHEDULING_AUTOMATIC_SELECTION_COMMAND_OR_SAFETY_AUTHORITY",
+    "S10_PRODUCTION_RUNTIME_UNAVAILABLE"
+  ]
+}
