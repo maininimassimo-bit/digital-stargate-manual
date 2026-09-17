@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEC-001 |
-| Versione | 3.0 |
+| Versione | 3.1 |
 | Stato | Active |
-| Data baseline | 15/09/2026 |
+| Data baseline | 17/09/2026 |
 
 ## 1. Scopo
 
@@ -58,6 +58,8 @@ Creare invece un ADR quando la decisione modifica un principio architetturale, i
 | DLG-025 | 15/09/2026 | Accettare la decisione owner vincolata all'exact digest e alla validità unbounded e promuovere il Site Authority tramite receipt protetto ed envelope APPROVED separato, senza mutare il payload | Completare F3-A1 rispettando immutabilità, privacy, separazione dall'assegnazione e potere di approvazione esclusivamente umano | BKL-031 F3-A1-M3/M4 | Accepted | owner-controlled approval; F3-A1-M4 evidence; ADR-009 |
 | DLG-026 | 15/09/2026 | Accettare F3-A1-M4 dopo PR #204 e selezionare F3-A2-D3 come owner decision gate separato per `CurrentSetupAssignment` | Site Authority e setup baseline sono approvati ma nessuna relazione current può essere inferita; mantenere S09 fail-closed preserva authority e approval separate | BKL-031 F3-A2-D3 | Accepted | PR #204; F3-A1-M4 acceptance; F3-A2-D3 assessment; ADR-009 |
 | DLG-027 | 15/09/2026 | Registrare per il futuro `CurrentSetupAssignment` il registro GitHub protetto, Repository Owner come owner/Approval Authority, Architecture Office come custodian non approvatore e validità unbounded dalla baseline setup | Chiudere il gate decisionale senza inferire o approvare la relazione sito-baseline e mantenere DRAFT, approval e runtime come incrementi separati | BKL-031 F3-A2-D3/D4 | Accepted | owner decisions 15/09/2026; ADR-009; F3-A2-D3 decision; F3-A2-D4 handoff |
+
+| DLG-052 | 17/09/2026 | Accettare F8 come bounded current-night astronomy + explicit setup-suitability integration proof, senza chiudere BKL-031, e promuovere esclusivamente F9 repeatable current-night planner closure | F8 dimostra il criterio scientifico su una notte reale ma non un ciclo ricorrente; mantenere separati provider operating authority, BKL-032 readiness e local Safety Authority | BKL-031 F8/F9 | Accepted / Post-Merge Verified | PR #279; exact head `3f05693482208df2b56b66dcb71162589880e72b`; merge `20669f7164460297d7318fc3b5874e4bc7f4bcde`; F8 acceptance |
 
 ## 5. Delega operativa GitHub
 

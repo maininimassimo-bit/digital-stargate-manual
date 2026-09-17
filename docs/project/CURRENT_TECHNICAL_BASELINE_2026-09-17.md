@@ -1,0 +1,38 @@
+# Digital StarGate — Current Technical Baseline 17/09/2026
+
+| Campo | Valore |
+|---|---|
+| Stato | Current governed baseline |
+| Repository | `maininimassimo-bit/digital-stargate-manual` |
+| Baseline implementation merge | `20669f7164460297d7318fc3b5874e4bc7f4bcde` |
+| Current package | BKL-031 |
+| Current next gate | BKL-031 F9 repeatable current-night planner closure |
+
+## Observation Planner baseline
+
+F3–F8 sono Accepted/Post-Merge Verified. F8 accetta la pipeline scientifica bounded della notte 17–18/09/2026: forecast reale F7 site-specific, geometria astronomica corrente per la notte, suitability esplicita setup-target e ranking/finestre advisory nel portale. Il metodo resta `EVALUATION/NONE/READ_ONLY` e non è un readiness/safety engine.
+
+## Authority baseline
+
+- Site Authority: protected GitHub-governed record; coordinate esatte non pubblicabili.
+- Setup Authority: approved GitHub-governed assignment/baseline.
+- Ephemeris/lunar method: ADR-010 accepted repository authority.
+- Forecast source/run lineage: ADR-011 accepted repository authority.
+- Session Readiness / Go-No-Go: BKL-032, non BKL-031.
+- Safety Authority: local physical interlocks.
+- S10 production runtime: `UNAVAILABLE`.
+
+## Provider/request baseline
+
+- F4-C generalized validation budget: `2/2_EXHAUSTED`.
+- F7 protected-site one-shot budget: `1/1_EXHAUSTED`.
+- F8 provider requests: 0.
+- Recurring provider traffic: **NOT AUTHORIZED** by F8 acceptance; requires separate authority/budget/service decision.
+
+## F8 verified implementation
+
+PR #279 exact reviewed head `3f05693482208df2b56b66dcb71162589880e72b`: 9/9 PR workflows SUCCESS; ARB APPROVED WITH CONDITIONS with no Blocker/Major and no waiver; Release Quality CONDITIONALLY READY with no waiver. Expected-head merge `20669f7164460297d7318fc3b5874e4bc7f4bcde`: 10/10 applicable push workflows SUCCESS.
+
+## Open closure gap
+
+BKL-031 is not closed. F9 must prove repeatable/current-night operation of the complete advisory chain — governed fresh forecast, current astronomy, explicit setup suitability, explainable target ordering and best windows — while preserving privacy, fail-closed freshness/missingness and all authority separations.

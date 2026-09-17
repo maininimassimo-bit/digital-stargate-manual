@@ -4,7 +4,7 @@
 |---|---|
 | Parent | BKL-031 — Observation Planner intelligente |
 | Increment | F8 — current astronomy + explicit setup suitability |
-| Status | REVIEW CANDIDATE |
+| Status | **ACCEPTED — POST-MERGE VERIFIED** |
 | Date | 2026-09-17 |
 | Authority | `NONE` / read-only advisory |
 | Predecessor | F7 ACCEPTED — POST-MERGE VERIFIED |

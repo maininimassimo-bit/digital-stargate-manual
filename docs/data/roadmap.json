@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-17",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "a9d0f2a4d0def8d93b53bf5a40739b448191d7a31c4209d99b574fdab0f22a5c",
+  "sourceDigest": "4f66f9dd27354d488bf6d520035d0da829319b5bf1592f8380c311f4bb9686b8",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-C accepted and post-merge verified; ADR-010 accepted; F4-A/ADR-011 accepted and post-merge verified; F4-B v1.1 accepted; F4-C evidence reconciliation accepted with historical generalized provider budget 2/2 exhausted; F4-D sanitized forecast projection/portal accepted; F5 explainable ranking method/read-only consumer accepted; F6 real-evidence setup-aware E2E accepted; F7 protected-site forecast supply accepted and post-merge verified via PR #277 and merge 59a1d690406d733b6e61e64220f84cef9b6fb1a2; F7 protected-site one-shot budget 1/1 exhausted; recurring refresh not activated; current astronomical geometry and explicit OTA/camera/filter suitability remain unresolved; no readiness/go-no-go, scheduling, automatic target selection, commands or Safety Authority; S10 production runtime unavailable",
+  "projectStatus": "BKL-031 F3-C and F4-A/B/C/D/F5/F6/F7/F8 accepted and post-merge verified; F8 PR #279 merge 20669f7164460297d7318fc3b5874e4bc7f4bcde proves bounded 17–18 Sep current astronomy plus explicit setup suitability over real F7 protected-site forecast. F4-C generalized budget 2/2 exhausted; F7 protected-site one-shot budget 1/1 exhausted; F8 performed zero provider requests; recurring refresh remains unauthorized; BKL-031 remains In Progress; no readiness/go-no-go, scheduling, automatic target selection, commands or Safety Authority; S10 production runtime unavailable.",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F8 current astronomy and explicit setup suitability integration",
-  "target": "Establish F8 current astronomical windows/altitude/transit/lunar geometry and explicit OTA/camera/filter/target suitability, then combine them with governed current weather supply in an explainable read-only planner ranking. Historical F4-C generalized validation request budget remains 2/2_EXHAUSTED and no provider request is authorized by F6 acceptance. F7 separately authorized and consumed one protected-site evaluation request (1/1_EXHAUSTED); that one-shot evidence does not authorize recurring traffic. Recurring provider refresh still requires separately governed operating authorization before BKL-031 closure. Preserve privacy, fail-closed freshness/missingness, BKL-032 readiness separation and local physical-interlock Safety Authority.",
+  "nextMilestone": "BKL-031 F9 repeatable current-night planner closure",
+  "target": "Establish a repeatable current-night planner refresh/integration that combines governed fresh forecast supply, current astronomical geometry, explicit OTA/camera/filter suitability and explainable portal ranking. Preserve exact provider/model/run lineage, freshness/missingness, protected-site privacy, BKL-032 readiness separation and local physical-interlock Safety Authority. No recurring provider traffic, scheduler, automatic target selection, device command, readiness/go-no-go or Safety Authority is authorized by F8 acceptance.",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -307,7 +307,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3/F4/F5/F6/F7 are Accepted/Post-Merge Verified. F7 PR #277 merged as 59a1d690406d733b6e61e64220f84cef9b6fb1a2 after 9/9 exact-head and 10/10 post-merge workflows, proving real protected-site forecast acquisition and sanitized read-only portal delivery without publishing coordinates. The one-shot site budget is 1/1 exhausted and recurring refresh is not activated. F8 current astronomy plus explicit OTA/camera/filter suitability is next; BKL-031 remains In Progress, S10 unavailable, and no readiness/go-no-go, scheduler, automatic target selection, commands or Safety Authority is authorized."
+          "note": "F3/F4/F5/F6/F7/F8 are Accepted/Post-Merge Verified. F8 PR #279 merged as 20669f7164460297d7318fc3b5874e4bc7f4bcde after 9/9 exact-head and 10/10 post-merge workflows, binding real F7 protected-site forecast to night-specific astronomy and explicit OTA/camera/filter suitability in a sanitized read-only planner. F8 is bounded to the 17–18 Sep 2026 night and does not prove recurring runtime. F9 repeatable current-night planner closure is next; recurring provider traffic is not authorized, BKL-031 remains In Progress, S10 unavailable, and no readiness/go-no-go, scheduler, automatic target selection, commands or Safety Authority is authorized."
         },
         {
           "id": "BKL-032",
@@ -884,6 +884,14 @@
       "date": "2026-09-17",
       "description": "F7 accepted/post-merge verified via PR #277 and merge 59a1d690406d733b6e61e64220f84cef9b6fb1a2; real protected-site forecast delivered through sanitized read-only projection; one-shot budget 1/1 exhausted; recurring runtime not activated.",
       "status": "active"
+    },
+    {
+      "id": "M-BKL031-F8-ACCEPTANCE",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F8 current astronomy and setup suitability acceptance",
+      "date": "2026-09-17",
+      "status": "active",
+      "description": "PR #279 passed 9/9 exact-head workflows on 3f05693482208df2b56b66dcb71162589880e72b, merged with expected-head control as 20669f7164460297d7318fc3b5874e4bc7f4bcde, and passed 10/10 applicable post-merge workflows. F8 is Accepted/Post-Merge Verified as bounded EVALUATION/NONE/READ_ONLY evidence for the 17–18 Sep 2026 night. F9 repeatable current-night planner closure is next; BKL-031 remains In Progress and recurring provider traffic is not authorized by F8 acceptance."
     }
   ]
 }

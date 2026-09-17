@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.34 |
+| Versione | 5.35 |
 | Stato | Active |
-| Data baseline | 15/09/2026 |
+| Data baseline | 17/09/2026 |
 
 ## 1. Scopo
 
@@ -49,7 +49,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
-| BKL-031 | P1 | Observation Planner intelligente | In Progress | F3-C Accepted/Post-Merge Verified (35/35 tests); F4-A/ADR-011; F4-B v1.1 Accepted/Post-Merge Verified; historical generalized provider budget 2/2 exhausted; F4-D metadata-only projection and portal Accepted/Post-Merge Verified; F5/F6/F7 Accepted/Post-Merge Verified; F7 PR #277 merge `59a1d690406d733b6e61e64220f84cef9b6fb1a2`; protected-site F7 budget 1/1 exhausted; recurring refresh not activated; S10 unavailable | Execute F8 current astronomy and explicit OTA/camera/filter target suitability integration, combining those inputs with governed current weather in explainable read-only ranking. Preserve fail-closed freshness/privacy; recurring provider runtime requires separate operating authorization before closure | ADR-010; ADR-011; `BKL-031-F7-SOLUTION-001`; F7 acceptance; PR #277; merge `59a1d690…` |
+| BKL-031 | P1 | Observation Planner intelligente | In Progress | BKL-035; BKL-040; BKL-037; F3–F8 Accepted/Post-Merge Verified; F8 PR #279 merge `20669f7164460297d7318fc3b5874e4bc7f4bcde`; F7 protected-site one-shot budget 1/1 exhausted; S10 unavailable | Execute F9 repeatable current-night planner closure: governed fresh forecast supply + current astronomy + explicit OTA/camera/filter suitability + explainable portal ranking/windows. Preserve privacy/freshness fail-closed, BKL-032 readiness separation and local physical-interlock Safety Authority. Recurring provider traffic requires separate authority/budget decision. | F8 acceptance 17/09/2026; PR #279; `BKL-031-F8-CURRENT-ASTRONOMY-SETUP-SUITABILITY-ACCEPTANCE-2026-09-17.md` |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
