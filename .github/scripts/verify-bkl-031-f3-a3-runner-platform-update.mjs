@@ -80,7 +80,7 @@ for (const forbidden of [
 requireText(main, 'name  = "DSG_SOURCE_COMMIT"', "platform job");
 requireText(main, "value = var.runner_source_commit", "platform job");
 requireText(variables, 'variable "runner_source_commit"', "platform variables");
-requireText(variables, `var.runner_source_commit == "${runnerSource}"`, "platform variables");
+requireText(variables, `"${runnerSource}"`, "platform variables historical source");
 
 if (evidence.status !== "EXACT_RUNNER_OCI_PUBLISHED_POST_VERIFIED") fail("runner publication evidence is not post-verified");
 if (evidence.source?.commit !== runnerSource || evidence.image?.reference !== runnerImage) fail("runner publication evidence does not bind the exact source and image");

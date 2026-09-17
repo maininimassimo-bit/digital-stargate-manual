@@ -56,8 +56,11 @@ variable "runner_source_commit" {
   nullable    = false
 
   validation {
-    condition     = var.runner_source_commit == "9db0267529b6d46a2510b415e4b3f51d668ff024"
-    error_message = "runner_source_commit must match the exact reviewed runner publication source commit."
+    condition = contains([
+      "9db0267529b6d46a2510b415e4b3f51d668ff024",
+      "5ce8214311757c974134494dcc8f1e232dd4c390",
+    ], var.runner_source_commit)
+    error_message = "runner_source_commit must match an exact reviewed runner publication source commit."
   }
 }
 
