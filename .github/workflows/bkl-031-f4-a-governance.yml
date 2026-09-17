@@ -1,0 +1,53 @@
+name: BKL-031 F4-A Governance
+
+on:
+  pull_request:
+    paths:
+      - ".github/scripts/verify-observation-planner-forecast-f4a.mjs"
+      - ".github/workflows/bkl-031-f4-a-governance.yml"
+      - ".github/workflows/developer-foundation.yml"
+      - "docs/architecture/ADR-011-Forecast-Source-and-Run-Lineage.md"
+      - "docs/architecture/scientific-assets/BKL-031-F4-A-*.md"
+      - "docs/architecture/validation/BKL-031-F4-A-*.md"
+      - "docs/project/BACKLOG.md"
+      - "docs/project/DECISION_LOG.md"
+      - "docs/project/REPOSITORY_KNOWLEDGE_MAP.md"
+      - "docs/project/index.md"
+      - ".github/roadmap/roadmap-source.json"
+      - "docs/data/roadmap.json"
+      - "docs/data/scientific-platform-status.json"
+      - "mkdocs.yml"
+  push:
+    branches: [main]
+    paths:
+      - ".github/scripts/verify-observation-planner-forecast-f4a.mjs"
+      - ".github/workflows/bkl-031-f4-a-governance.yml"
+      - ".github/workflows/developer-foundation.yml"
+      - "docs/architecture/ADR-011-Forecast-Source-and-Run-Lineage.md"
+      - "docs/architecture/scientific-assets/BKL-031-F4-A-*.md"
+      - "docs/architecture/validation/BKL-031-F4-A-*.md"
+      - "docs/project/BACKLOG.md"
+      - "docs/project/DECISION_LOG.md"
+      - "docs/project/REPOSITORY_KNOWLEDGE_MAP.md"
+      - "docs/project/index.md"
+      - ".github/roadmap/roadmap-source.json"
+      - "docs/data/roadmap.json"
+      - "docs/data/scientific-platform-status.json"
+      - "mkdocs.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  source-contract-gate:
+    name: F4-A forecast source and single-run contract
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify source decision, contract and fail-closed plan
+        run: node .github/scripts/verify-observation-planner-forecast-f4a.mjs

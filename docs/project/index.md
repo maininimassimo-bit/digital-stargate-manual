@@ -50,6 +50,9 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [F3-B Contracts and Validator Acceptance](BKL-031-F3-B-CONTRACTS-AND-VALIDATOR-ACCEPTANCE-2026-09-17.md) | PR #259 and merge `8c3b7b84`; 15/15 PR checks and 11/11 post-merge workflows; S10 remains unavailable |
 | [F3-C Bounded Adapter, Projection and Portal](../architecture/scientific-assets/BKL-031-F3-C-Bounded-Adapter-Sanitized-Projection-and-Portal.md) | Accepted / Post-Merge Verified; repository adapter, TEST/NONE projection, browser validator and public Observation Planner page |
 | [F3-C Bounded Integration Acceptance](BKL-031-F3-C-BOUNDED-INTEGRATION-ACCEPTANCE-2026-09-17.md) | PR #261 and merge `fba1287e`; 16/16 PR checks, 12/12 post-merge workflows and deployed route verified |
+| [F4-A Forecast Source Discovery and Integration Contract](../architecture/scientific-assets/BKL-031-F4-A-Forecast-Source-Discovery-and-Integration-Contract.md) | Review candidate; explicit ItaliaMeteo/ARPAE ICON-2I single-run lineage; zero provider traffic |
+| [ADR-011 Forecast Source and Run Lineage](../architecture/ADR-011-Forecast-Source-and-Run-Lineage.md) | Proposed; forbids best-match, seamless, stitched and automatic fallback modes |
+| [F4-A Forecast Source Validation Plan](../architecture/validation/BKL-031-F4-A-Forecast-Source-Validation-Plan.md) | 12 publication gates and 24 mandatory fail-closed cases for F4-B and later gates |
 | [F3-A3 Owner Decision Record](BKL-031-F3-A3-OWNER-DECISION-RECORD-2026-09-15.md) | Complete owner decision; no execution authority |
 | [F3-A3 F3-OD05 Exact SPK Approval](BKL-031-F3-A3-F3-OD05-SPK-APPROVAL-2026-09-16.md) | `de442s.bsp` identity, coverage, provenance and notices approved; no upload/execution authority |
 | [F3-A3 Google Cloud Hosting Plan](../architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md) | Bootstrap/remote state post-verified; static container/IERS evidence prepared; platform not executed |
@@ -135,11 +138,12 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-031 F3-A2-D5: ACCEPTED / POST-MERGE VERIFIED via PR #209 and merge `bc4307c2042a45985622044e11631421de5b2c3d`; repository authority AVAILABLE for authorized validated input; S08 remains `UNAVAILABLE`, runtime S09 remains `UNAVAILABLE_CURRENT`;
 - BKL-031 F3-A3: Accepted / Post-Merge Verified through PR #258 and merge `a0a2e4950f2d908a3aaa0fc149754f904ee8d588`; exact scientific execution passed 17/17 metrics with zero external-reference calls.
 - BKL-031 F3-B: Accepted / Post-Merge Verified through PR #259 and merge `8c3b7b8424a15b4288c79f773b9f0fc3f7cd5c5f`; 34/34 contract tests and all 11 post-merge workflows passed.
-- BKL-031 F3-C: Accepted / Post-Merge Verified through PR #261 and merge `fba1287efea0d1f36b147bc42a4fec5498990756`; 35/35 tests, 12/12 post-merge workflows and the public portal route passed. F4 forecast source discovery and integration contract is next; S10 production runtime remains `UNAVAILABLE`.
+- BKL-031 F3-C: Accepted / Post-Merge Verified through PR #261 and merge `fba1287efea0d1f36b147bc42a4fec5498990756`; 35/35 tests, 12/12 post-merge workflows and the public portal route passed.
+- BKL-031 F4-A: source discovery, proposed ADR-011, normative single-run integration contract and validation plan are a repository-only review candidate. No provider traffic or protected-site use occurred; F4-B schema/fixture/validator remains separately gated and S10 production runtime remains `UNAVAILABLE`.
 
 ## Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 AUTHORITIES ACCEPTED / F3-A3 POST-MERGE VERIFIED / F3-B+F3-C POST-MERGE VERIFIED / F4 NEXT / S10 PRODUCTION UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 AUTHORITIES ACCEPTED / F3-A3 POST-MERGE VERIFIED / F3-B+F3-C POST-MERGE VERIFIED / F4-A REVIEW CANDIDATE / S10 PRODUCTION UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## Authority / projection
 

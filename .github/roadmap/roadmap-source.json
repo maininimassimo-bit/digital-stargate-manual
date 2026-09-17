@@ -2,10 +2,10 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-17",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-C accepted and post-merge verified through PR #261 and merge fba1287efea0d1f36b147bc42a4fec5498990756; deterministic bounded adapter, sanitized TEST/NONE projection, browser integrity validator and public portal route verified; 35/35 tests and 12/12 applicable post-merge workflows passed; ADR-010 accepted; S10 runtime unavailable",
+  "projectStatus": "BKL-031 F3-C accepted and post-merge verified; ADR-010 accepted; F4-A forecast source discovery, proposed ADR-011, explicit ItaliaMeteo/ARPAE ICON-2I single-run integration contract and 24-case fail-closed validation plan prepared as a repository-only review candidate; zero provider traffic and zero protected-site use; S10 runtime unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F4 forecast source discovery and integration contract",
-  "target": "Assess source authority, model/run identity, validity horizon, spatial applicability, freshness, licensing and fail-closed behavior, then define a provider-neutral repository-only forecast integration contract. Do not initiate provider traffic, production runtime, ranking, readiness, commands or Safety Authority.",
+  "nextMilestone": "BKL-031 F4-A exact-head forecast source-contract acceptance",
+  "target": "Review and integrate the F4-A single-run source decision, proposed ADR-011, normative contract and validation plan. Keep provider traffic, protected-site egress, production runtime, ranking, readiness, commands and Safety Authority unavailable.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3-C is Accepted/Post-Merge Verified through PR #261 and merge fba1287efea0d1f36b147bc42a4fec5498990756. Its deterministic repository adapter, sanitized TEST/NONE projection, browser digest validation and public portal route passed 35/35 tests and 12/12 applicable post-merge workflows. F4 forecast source discovery and integration contract is next; S10 remains UNAVAILABLE."
+          "note": "F3-C is Accepted/Post-Merge Verified. F4-A has a repository-only review candidate selecting explicit ItaliaMeteo/ARPAE ICON-2I single-run lineage, proposed ADR-011 and a 24-case fail-closed validation plan. No provider traffic or protected-site use occurred; F4-B remains separately gated and S10 remains UNAVAILABLE."
         },
         {
           "id": "BKL-032",
@@ -671,6 +671,13 @@
       "title": "BKL-031 F3-C Bounded Integration Acceptance",
       "date": "2026-09-17",
       "description": "PR #261 passed 16/16 exact-head checks on 5d6b7127475c9378e19b1bfc5e65f6ad11f597f1, merged with expected-head control as fba1287efea0d1f36b147bc42a4fec5498990756, and passed all 12 applicable post-merge workflows. The public Observation Planner route and projection digest were directly verified; F3-C is Accepted/Post-Merge Verified and S10 remains unavailable."
+    },
+    {
+      "id": "M-BKL031-F4-A-SOURCE-CONTRACT",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F4-A Forecast Source Contract Candidate",
+      "date": "2026-09-17",
+      "description": "Repository-only source discovery selects explicit ItaliaMeteo/ARPAE ICON-2I single-run lineage through Open-Meteo for bounded evaluation, proposes ADR-011 and defines a normative contract plus 24 fail-closed cases. No provider traffic, protected-site use, runtime, ranking, readiness, command or Safety Authority is introduced."
     }
   ]
 }
