@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/schemas/observation-planner-forecast-projection-f7-site.schema.json",
+  "title": "BKL-031 F7 Protected Site Sanitized Forecast Projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion","projectionType","projectionId","environment","authority","publicationState","site","sourceEvidence","model","validity","nightWindow","forecast","excludedInstants","attribution","limitations","boundaries"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "projectionType": {"const": "BKL031_F7_PROTECTED_SITE_SANITIZED_FORECAST_PROJECTION"},
+    "projectionId": {"const": "BKL031-F7-SITE-FORECAST-35255829165"},
+    "environment": {"const": "EVALUATION"},
+    "authority": {"const": "NONE"},
+    "publicationState": {"const": "READ_ONLY"},
+    "site": {"type":"object","additionalProperties":false,"required":["publicLabel","timezoneIana","coordinateDisclosure"],"properties":{"publicLabel":{"const":"Manciano (GR), Italia"},"timezoneIana":{"const":"Europe/Rome"},"coordinateDisclosure":{"const":"PROHIBITED"}}},
+    "sourceEvidence": {"type":"object","additionalProperties":false,"required":["workflowRunId","workflowHeadSha","artifactDigest","acceptedHourlyInstantCount","excludedHourlyInstantCount","imputedValueCount"],"properties":{"workflowRunId":{"const":35255829165},"workflowHeadSha":{"const":"2c46ca8be59c9ea8245fa03de71e936249c52a1b"},"artifactDigest":{"const":"sha256:9c2c58f4f4d63bced1110b94de4463f17eb0a2bc14362c22bb3435cbce9455ef"},"acceptedHourlyInstantCount":{"const":71},"excludedHourlyInstantCount":{"const":1},"imputedValueCount":{"const":0}}},
+    "model": {"type":"object","additionalProperties":false,"required":["providerId","upstreamAuthorityId","modelId","displayName","runInitialisationUtc","retrievedAtUtc","maxRunAgeHours","runAgeHoursAtRetrieval","freshnessState"],"properties":{"providerId":{"const":"OPEN_METEO"},"upstreamAuthorityId":{"const":"ITALIAMETEO_ARPAE"},"modelId":{"const":"italia_meteo_arpae_icon_2i"},"displayName":{"type":"string"},"runInitialisationUtc":{"const":"2026-09-17T12:00Z"},"retrievedAtUtc":{"const":"2026-09-17T17:57:24.089Z"},"maxRunAgeHours":{"const":18},"runAgeHoursAtRetrieval":{"type":"number","maximum":18},"freshnessState":{"const":"FRESH"}}},
+    "validity": {"type":"object","additionalProperties":false,"required":["fromUtc","toUtcExclusive"],"properties":{"fromUtc":{"type":"string"},"toUtcExclusive":{"type":"string"}}},
+    "nightWindow": {"type":"object","additionalProperties":false,"required":["label","fromUtc","toUtcExclusive","localTimezone"],"properties":{"label":{"type":"string"},"fromUtc":{"type":"string"},"toUtcExclusive":{"type":"string"},"localTimezone":{"const":"Europe/Rome"}}},
+    "forecast": {"type":"object","additionalProperties":false,"required":["availabilityState","units","hourly"],"properties":{"availabilityState":{"enum":["AVAILABLE","DEGRADED"]},"units":{"type":"object"},"hourly":{"type":"array","minItems":1,"maxItems":72,"items":{"type":"object","additionalProperties":false,"required":["validAtUtc","temperatureC","relativeHumidityPct","dewPointC","precipitationMm","cloudCoverPct","cloudCoverLowPct","cloudCoverMidPct","cloudCoverHighPct","windSpeedKmh","windGustKmh"],"properties":{"validAtUtc":{"type":"string"},"temperatureC":{"type":"number"},"relativeHumidityPct":{"type":"number","minimum":0,"maximum":100},"dewPointC":{"type":"number"},"precipitationMm":{"type":"number","minimum":0},"cloudCoverPct":{"type":"number","minimum":0,"maximum":100},"cloudCoverLowPct":{"type":"number","minimum":0,"maximum":100},"cloudCoverMidPct":{"type":"number","minimum":0,"maximum":100},"cloudCoverHighPct":{"type":"number","minimum":0,"maximum":100},"windSpeedKmh":{"type":"number","minimum":0},"windGustKmh":{"type":"number","minimum":0}}}}}},
+    "excludedInstants": {"type":"array","items":{"type":"object","additionalProperties":false,"required":["validAtUtc","reasonCode","missingVariables"],"properties":{"validAtUtc":{"type":"string"},"reasonCode":{"type":"string"},"missingVariables":{"type":"array","items":{"type":"string"}}}}},
+    "attribution": {"type":"string"},
+    "limitations": {"type":"array","items":{"type":"string"}},
+    "boundaries": {"type":"object","additionalProperties":false,"required":["recurringTraffic","productionRuntimeActivated","readinessAuthority","schedulingAuthority","automaticTargetSelection","commandAuthority","safetyAuthority"],"properties":{"recurringTraffic":{"const":false},"productionRuntimeActivated":{"const":false},"readinessAuthority":{"const":false},"schedulingAuthority":{"const":false},"automaticTargetSelection":{"const":false},"commandAuthority":{"const":"NONE"},"safetyAuthority":{"const":"LOCAL_PHYSICAL_INTERLOCKS"}}}
+  }
+}
