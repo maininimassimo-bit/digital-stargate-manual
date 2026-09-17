@@ -58,7 +58,18 @@ for (const fragment of ['crypto.subtle.digest', 'TEST/NONE', 'projectionDigest']
 assert.ok(workflow.includes('F3-C bounded adapter, projection and portal') && workflow.includes('test-observation-planner-ephemeris-lunar-f3c.mjs'), 'F3-C workflow is incomplete.');
 assert.ok(developer.includes('Verify Observation Planner F3-C bounded integration') && developer.includes('Test Observation Planner F3-C adapter and portal boundaries'), 'Developer Foundation does not execute F3-C gates.');
 assert.ok(backlog.includes('F3-C Accepted/Post-Merge Verified') && backlog.includes('F4-D metadata-only projection and portal Accepted/Post-Merge Verified'), 'Backlog does not preserve the accepted F3-C through F4-D gates.');
-assert.ok(knowledge.includes('F3-C is Accepted / Post-Merge Verified') && index.includes('F3-C Bounded Adapter, Projection and Portal'), 'Continuity documents do not identify accepted F3-C.');
+assert.ok(knowledge.includes('F3-C are Accepted / Post-Merge Verified') && index.includes('F3-C Bounded Adapter, Projection and Portal'), 'Continuity documents do not identify accepted F3-C.');
+for (const fragment of [
+  'HANDOVER_2026-09-17.md',
+  'CURRENT_TECHNICAL_BASELINE_2026-09-17.md',
+  'F8 is Accepted / Post-Merge Verified',
+  'BKL-031 F9 repeatable current-night planner closure',
+  '2/2_EXHAUSTED',
+  '1/1_EXHAUSTED',
+  'Recurring provider traffic is not authorized',
+  'local physical interlocks remain Safety Authority'
+]) assert.ok(knowledge.includes(fragment), `Repository Knowledge Map continuity drift: missing ${fragment}`);
+assert.equal(knowledge.includes('current handover e technical baseline 15/09/2026'), false, 'Repository Knowledge Map must not retain the superseded 15/09 continuity pointer.');
 assert.ok(nav.includes('Observation Planner: observation-planner/index.md') && nav.includes('BKL-031 F3-C - Bounded Adapter, Projection and Portal'), 'MkDocs navigation does not expose F3-C.');
 assert.equal(roadmap.currentPackage, 'BKL-031');
 assert.equal(roadmap.nextMilestone, 'BKL-031 F9 repeatable current-night planner closure');
