@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 5.3 |
+| Versione | 5.4 |
 | Stato | Active |
-| Data | 16/09/2026 |
+| Data | 17/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | F3-A3 exact private kernel published; separately reviewed scientific-spike execution gate next |
+| Current governed package | F3-B machine-readable contracts and fail-closed validator acceptance candidate; S10 runtime unavailable |
 
 ## 1. Scopo
 
@@ -46,11 +46,11 @@ Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimen
 
 BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`; nessun apply path o Safety Authority è autorizzato.
 
-BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integrato tramite PR #193 e riconciliato tramite PR #194. F3-A2 repository authority is APPROVED/AVAILABLE for authorized validated input. ADR-009 governs protected registries. F3-A3 has now completed its exact local scientific campaign: execution `dsg-f3-a3-spike-g4x8g` passed 17/17 metrics and repeatability with zero external-reference calls. ADR-010 is Accepted for repository method authority. No runtime adapter exists: S08 is `UNAVAILABLE`, S09 is `UNAVAILABLE_CURRENT`, and S10 is `UNAVAILABLE`. F3-B contracts/validator are next; F3-C, F4 forecast, F5 ranking/consumer, BKL-032 readiness and Safety remain separate.
+BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integrato tramite PR #193 e riconciliato tramite PR #194. F3-A2 repository authority is APPROVED/AVAILABLE for authorized validated input. ADR-009 governs protected registries. F3-A3 is Accepted / Post-Merge Verified through PR #258 and merge `a0a2e4950f2d908a3aaa0fc149754f904ee8d588`; execution `dsg-f3-a3-spike-g4x8g` passed 17/17 metrics and repeatability with zero external-reference calls. ADR-010 is Accepted for repository method authority. F3-B now has three source-neutral schemas, a bounded TEST/NONE fixture and a fail-closed validator with 34/34 local tests; exact-head acceptance remains pending. No runtime adapter exists: S08 is `UNAVAILABLE`, S09 is `UNAVAILABLE_CURRENT`, and S10 is `UNAVAILABLE`. F3-C, F4 forecast, F5 ranking/consumer, BKL-032 readiness and Safety remain separate.
 
 ## 7. Roadmap sequence
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 CAMPAIGN PASS / ADR-010 ACCEPTED / F3-B NEXT / S10 UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 POST-MERGE VERIFIED / ADR-010 ACCEPTED / F3-B ACCEPTANCE CANDIDATE / S10 UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 8. CI/CD e publishing
 
@@ -110,6 +110,8 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 5.0 | 15/09/2026 | PR #209 D5 accepted/post-merge verified; repository authority AVAILABLE; runtime adapter absent; successor selection current |
 | 5.1 | 15/09/2026 | PR #210 D5 reconciliation accepted/post-merge verified; F3-A3 documentation-only handoff current; no provider selected |
 | 5.2 | 15/09/2026 | PR #211 handoff integrated/post-merge verified; F3-A3 Solution/ADR/validation decision-preparation review candidate |
+| 5.3 | 17/09/2026 | PR #258 F3-A3 scientific acceptance integrated/post-merge verified; ADR-010 accepted; F3-B authorized repository-only |
+| 5.4 | 17/09/2026 | F3-B method/request/evidence schemas, bounded fixture and 34-case validator suite prepared for exact-head acceptance |
 
 ## F3-A2-D4 acceptance checkpoint — 15/09/2026
 
@@ -128,3 +130,7 @@ F3-A3 owner decisions F3-OD04–F3-OD10, immutable method profile, exact runner,
 ## F3-A3 decision-preparation package
 
 Authority remains the repository and accepted ADR-010. Official-source observations remain evidence inputs. The accepted profile selects the exact local primary, shared-SPK implementation cross-check, kernel, thresholds and host used by the passed campaign. No external reference, protected-site calculation or runtime is selected. F3-B may now materialize the source-neutral request/evidence contracts and validator.
+
+## F3-B contracts and validator candidate
+
+The F3-B candidate materializes separate method-profile, request and evidence schemas plus one bounded synthetic fixture. The canonical contract digest is `b06932edb860cc4062b45d75b62e7874c3a327a4b4dbfd0b8cb70bdf115cd1f1`; 34 fail-closed and privacy tests pass locally. The fixture is `TEST` / `authority=NONE`, and the public projection omits protected coordinates and internal digests. F3-C adapter, runtime activation, protected-site calculation and external-reference traffic remain unimplemented and unauthorized.

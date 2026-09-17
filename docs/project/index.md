@@ -45,7 +45,9 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [F3-A3 Method Decision Preparation](../architecture/scientific-assets/BKL-031-F3-A3-Ephemeris-Lunar-Method-Decision-Preparation.md) | Historical decision preparation; superseded by exact campaign acceptance |
 | [ADR-010 Ephemeris/Lunar Method and Validation Profile](../architecture/ADR-010-Ephemeris-Lunar-Method-and-Validation-Profile.md) | Accepted for repository method authority; runtime S10 unavailable |
 | [F3-A3 Method Validation Spike Plan](../architecture/validation/BKL-031-F3-A3-Ephemeris-Lunar-Method-Validation-Spike-Plan.md) | Exact remediated campaign pass: 8 vectors, 17/17 metrics and repeatability |
-| [F3-A3 Scientific Campaign Acceptance](BKL-031-F3-A3-SCIENTIFIC-CAMPAIGN-ACCEPTANCE-2026-09-17.md) | ADR-010 acceptance and F3-B dependency handoff; post-merge verification pending |
+| [F3-A3 Scientific Campaign Acceptance](BKL-031-F3-A3-SCIENTIFIC-CAMPAIGN-ACCEPTANCE-2026-09-17.md) | Accepted/Post-Merge Verified via PR #258; ADR-010 accepted and F3-B authorized |
+| [F3-B Machine-Readable Contracts and Validator](../architecture/scientific-assets/BKL-031-F3-B-Ephemeris-Lunar-Machine-Readable-Contracts-and-Validator.md) | Three schemas, bounded TEST/NONE fixture and 34-case fail-closed suite; acceptance review pending |
+| [F3-B Contracts and Validator Acceptance](BKL-031-F3-B-CONTRACTS-AND-VALIDATOR-ACCEPTANCE-2026-09-17.md) | Acceptance candidate; S10 and runtime remain unavailable |
 | [F3-A3 Owner Decision Record](BKL-031-F3-A3-OWNER-DECISION-RECORD-2026-09-15.md) | Complete owner decision; no execution authority |
 | [F3-A3 F3-OD05 Exact SPK Approval](BKL-031-F3-A3-F3-OD05-SPK-APPROVAL-2026-09-16.md) | `de442s.bsp` identity, coverage, provenance and notices approved; no upload/execution authority |
 | [F3-A3 Google Cloud Hosting Plan](../architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md) | Bootstrap/remote state post-verified; static container/IERS evidence prepared; platform not executed |
@@ -129,11 +131,12 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-031 F3-A2-D3: source, roles, separation and validity decisions complete and integrated;
 - BKL-031 F3-A2-D4: protected DRAFT integrated and retained as immutable history;
 - BKL-031 F3-A2-D5: ACCEPTED / POST-MERGE VERIFIED via PR #209 and merge `bc4307c2042a45985622044e11631421de5b2c3d`; repository authority AVAILABLE for authorized validated input; S08 remains `UNAVAILABLE`, runtime S09 remains `UNAVAILABLE_CURRENT`;
-- BKL-031 F3-A3: F3-OD04–F3-OD10 owner decisions and ARB-213-MI01/MI02 evidence complete; exact `de442s.bsp` identity approved; bootstrap, registry, exact OCI image and four-resource platform are active with zero drift; kernel upload and job/scientific execution remain absent and S10 remains `UNAVAILABLE`.
+- BKL-031 F3-A3: Accepted / Post-Merge Verified through PR #258 and merge `a0a2e4950f2d908a3aaa0fc149754f904ee8d588`; exact scientific execution passed 17/17 metrics with zero external-reference calls.
+- BKL-031 F3-B: source-neutral method/request/evidence schemas, bounded synthetic fixture and fail-closed validator implemented; 34/34 local tests pass; exact-head acceptance is pending and S10 remains `UNAVAILABLE`.
 
 ## Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1 CONTRACT ACCEPTED / F3-A2-D5 ACCEPTED / REPOSITORY AVAILABLE / RUNTIME ADAPTER ABSENT / SUCCESSOR SELECTION] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 AUTHORITIES ACCEPTED / F3-A3 POST-MERGE VERIFIED / F3-B ACCEPTANCE CANDIDATE / RUNTIME ADAPTER ABSENT] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## Authority / projection
 

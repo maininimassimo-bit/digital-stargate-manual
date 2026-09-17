@@ -44,6 +44,8 @@ jobs:
       - { name: Test Target Knowledge Base F2 fail-closed rules, run: node --test .github/scripts/test-target-knowledge-base.mjs }
       - { name: Verify Observation Planner F2 context contract, run: node .github/scripts/verify-observation-planner-context-f2.mjs }
       - { name: Test Observation Planner F2 fail-closed rules, run: node --test .github/scripts/test-observation-planner-context-f2.mjs }
+      - { name: Verify Observation Planner F3-B ephemeris lunar contracts, run: node .github/scripts/verify-observation-planner-ephemeris-lunar-f3b.mjs }
+      - { name: Test Observation Planner F3-B fail-closed and privacy rules, run: node --test .github/scripts/test-observation-planner-ephemeris-lunar-f3b.mjs }
       - { name: Verify Target Identity Reconciliation F3, run: node .github/scripts/verify-target-identity-reconciliation.mjs }
       - { name: Test Target Identity Reconciliation F3 fail-closed rules, run: node --test .github/scripts/test-target-identity-reconciliation.mjs }
       - { name: Verify Target Knowledge F4 consumer read model, run: node .github/scripts/verify-target-knowledge-read-model.mjs }

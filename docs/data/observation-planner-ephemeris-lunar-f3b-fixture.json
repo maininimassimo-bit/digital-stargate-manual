@@ -1,0 +1,352 @@
+{
+  "schemaVersion": "1.0",
+  "contractType": "BKL031_F3B_BOUNDED_CONTRACT_FIXTURE",
+  "fixtureId": "BKL031-F3B-FIXTURE-001",
+  "environment": "TEST",
+  "authority": "NONE",
+  "methodProfile": {
+    "schemaVersion": "1.0",
+    "contractType": "BKL031_F3B_METHOD_PROFILE",
+    "profileId": "BKL-031-F3-A3-METHOD-PROFILE-001",
+    "profileSourceRef": "infrastructure/bkl-031-f3-a3-gcp/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json",
+    "profileSourceSha256": "e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca",
+    "decisionRef": "ADR-010",
+    "decisionState": "ACCEPTED_REPOSITORY_METHOD_AUTHORITY",
+    "primaryMethod": {
+      "methodId": "ASTROPY_JPLEPHEM_DE442S",
+      "library": "astropy",
+      "libraryVersion": "8.0.1",
+      "ephemerisEngine": "jplephem-2.24",
+      "kernelId": "de442s.bsp",
+      "kernelSha256": "54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c"
+    },
+    "crossCheck": {
+      "methodId": "SKYFIELD_DE442S",
+      "library": "skyfield",
+      "libraryVersion": "1.55",
+      "classification": "IMPLEMENTATION_CROSS_CHECK_SHARED_GOVERNED_SPK",
+      "dataIndependenceClaim": false
+    },
+    "timeSemantics": {
+      "inputTimeScale": "UTC",
+      "calculationTimeScales": [
+        "UTC",
+        "TAI",
+        "TT",
+        "TDB",
+        "UT1"
+      ],
+      "earthOrientationSourceId": "IERS-A-2026-09-11",
+      "earthOrientationSha256": "43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc"
+    },
+    "outputSemantics": {
+      "frame": "TOPOCENTRIC_ALTAZ",
+      "refractionModel": "AIRLESS",
+      "azimuthConvention": "EAST_OF_NORTH",
+      "moonPhaseAngleConvention": "0_NEW_180_FULL_DEGREES",
+      "allowedFacts": [
+        "targetAltitudeDeg",
+        "targetAzimuthDeg",
+        "meridianTransitUtc",
+        "solarAltitudeDeg",
+        "moonAltitudeDeg",
+        "moonAzimuthDeg",
+        "moonPhaseAngleDeg",
+        "moonIlluminatedFraction",
+        "targetMoonSeparationDeg"
+      ]
+    },
+    "coverage": {
+      "startUtc": "1849-12-26T00:00:00Z",
+      "endUtc": "2150-01-22T00:00:00Z",
+      "extrapolationAllowed": false
+    },
+    "errorBudget": {
+      "profileId": "BKL031-F3-A3-LOCAL-ERROR-BUDGET-1",
+      "reference": "ADR-010",
+      "altitudeArcsecMax": 3,
+      "azimuthArcsecMax": 3,
+      "separationArcsecMax": 3,
+      "illuminationAbsoluteMax": 0.0001,
+      "transitSecondsMax": 5
+    },
+    "networkPolicy": {
+      "externalReference": "DENY",
+      "contractValidationNetwork": "DENY"
+    },
+    "authority": {
+      "environment": "TEST",
+      "authority": "NONE",
+      "repositoryMethodAuthority": "ADR-010",
+      "runtimeAuthority": "NONE",
+      "executionAuthority": "NONE",
+      "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
+    },
+    "profileDigest": "482d5eae8a0745f2d2cbe735ede4ab726ba8ea033648722a1470d3c13fad3889"
+  },
+  "request": {
+    "schemaVersion": "1.0",
+    "contractType": "BKL031_F3B_EPHEMERIS_LUNAR_REQUEST",
+    "requestId": "BKL031-F3B-REQUEST-SYNTHETIC-001",
+    "contextId": "BKL031-F2-CONTEXT-001",
+    "environment": "TEST",
+    "authority": "NONE",
+    "generatedAtUtc": "2026-09-17T07:00:00Z",
+    "evaluationTimesUtc": [
+      "2026-09-16T00:00:00Z",
+      "2026-09-16T06:00:00Z",
+      "2026-09-16T12:00:00Z",
+      "2026-09-16T18:00:00Z"
+    ],
+    "target": {
+      "targetIdentityRef": "SYNTHETIC-TARGET-001",
+      "targetRaDeg": 120,
+      "targetDecDeg": 22,
+      "targetFrame": "ICRS",
+      "targetEpoch": "J2000.0"
+    },
+    "siteSnapshot": {
+      "siteRecordRef": "SYNTHETIC-SITE-001",
+      "siteRecordDigest": "941fa45e1c063defa1744eb080e56c20196469ca10f40f0b9f2cf08dd3a8580f",
+      "publicEvidenceRef": "SITE-PUBLIC-SYNTHETIC-7H4M2K",
+      "classification": "SYNTHETIC_PUBLIC",
+      "geodeticDatum": "WGS84",
+      "latitudeDeg": 45,
+      "longitudeDeg": 10,
+      "elevationM": 0,
+      "timezoneIana": "Etc/UTC"
+    },
+    "setupSnapshot": {
+      "assignmentRef": null,
+      "assignmentDigest": null,
+      "availabilityState": "UNAVAILABLE_CURRENT"
+    },
+    "methodProfileRef": "BKL-031-F3-A3-METHOD-PROFILE-001",
+    "requestedFacts": [
+      "targetAltitudeDeg",
+      "targetAzimuthDeg",
+      "meridianTransitUtc",
+      "solarAltitudeDeg",
+      "moonAltitudeDeg",
+      "moonAzimuthDeg",
+      "moonPhaseAngleDeg",
+      "moonIlluminatedFraction",
+      "targetMoonSeparationDeg"
+    ],
+    "bounds": {
+      "maxInstants": 8,
+      "maxFacts": 9,
+      "maxSpanSeconds": 86400
+    },
+    "inputDigest": "92e3aafca517bbd6985adb4f58fd51729d65506b1fa70e6339cd62b2e4b829b0"
+  },
+  "evidence": {
+    "schemaVersion": "1.0",
+    "contractType": "BKL031_F3B_EPHEMERIS_LUNAR_EVIDENCE",
+    "evidenceId": "BKL031-F3B-EVIDENCE-SYNTHETIC-001",
+    "environment": "TEST",
+    "authority": "NONE",
+    "requestRef": "BKL031-F3B-REQUEST-SYNTHETIC-001",
+    "availabilityState": "AVAILABLE",
+    "methodProfileRef": "BKL-031-F3-A3-METHOD-PROFILE-001",
+    "methodId": "ASTROPY_JPLEPHEM_DE442S",
+    "methodVersion": "astropy-8.0.1-jplephem-2.24",
+    "adapterId": "F3B-SYNTHETIC-CONTRACT-ADAPTER",
+    "adapterVersion": "1.0",
+    "providerOrKernelId": "de442s.bsp",
+    "dataDigest": "54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c",
+    "inputTimeScale": "UTC",
+    "calculationTimeScales": [
+      "UTC",
+      "TAI",
+      "TT",
+      "TDB",
+      "UT1"
+    ],
+    "earthOrientationSource": {
+      "sourceId": "IERS-A-2026-09-11",
+      "digest": "43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc"
+    },
+    "outputFrame": "TOPOCENTRIC_ALTAZ",
+    "refractionModel": "AIRLESS",
+    "generatedAtUtc": "2026-09-17T07:00:01Z",
+    "validFromUtc": "2026-09-16T00:00:00Z",
+    "validToUtc": "2026-09-17T00:00:00Z",
+    "inputDigest": "92e3aafca517bbd6985adb4f58fd51729d65506b1fa70e6339cd62b2e4b829b0",
+    "facts": [
+      {
+        "factType": "targetAltitudeDeg",
+        "instantUtc": "2026-09-16T00:00:00Z",
+        "numericValue": 2.7063362753609232,
+        "instantValue": null,
+        "unit": "deg"
+      },
+      {
+        "factType": "targetAzimuthDeg",
+        "instantUtc": "2026-09-16T00:00:00Z",
+        "numericValue": 60.69662289751111,
+        "instantValue": null,
+        "unit": "deg"
+      },
+      {
+        "factType": "meridianTransitUtc",
+        "instantUtc": "2026-09-16T00:00:00Z",
+        "numericValue": null,
+        "instantValue": "2026-09-16T07:18:27.391323Z",
+        "unit": "utc"
+      },
+      {
+        "factType": "solarAltitudeDeg",
+        "instantUtc": "2026-09-16T00:00:00Z",
+        "numericValue": -35,
+        "instantValue": null,
+        "unit": "deg"
+      },
+      {
+        "factType": "moonAltitudeDeg",
+        "instantUtc": "2026-09-16T00:00:00Z",
+        "numericValue": -49.70292541268455,
+        "instantValue": null,
+        "unit": "deg"
+      },
+      {
+        "factType": "moonAzimuthDeg",
+        "instantUtc": "2026-09-16T00:00:00Z",
+        "numericValue": 287.82100602732373,
+        "instantValue": null,
+        "unit": "deg"
+      },
+      {
+        "factType": "moonPhaseAngleDeg",
+        "instantUtc": "2026-09-16T00:00:00Z",
+        "numericValue": 55,
+        "instantValue": null,
+        "unit": "deg"
+      },
+      {
+        "factType": "moonIlluminatedFraction",
+        "instantUtc": "2026-09-16T00:00:00Z",
+        "numericValue": 0.213,
+        "instantValue": null,
+        "unit": "fraction"
+      },
+      {
+        "factType": "targetMoonSeparationDeg",
+        "instantUtc": "2026-09-16T00:00:00Z",
+        "numericValue": 82,
+        "instantValue": null,
+        "unit": "deg"
+      }
+    ],
+    "citations": [
+      "docs/architecture/ADR-010-Ephemeris-Lunar-Method-and-Validation-Profile.md",
+      "infrastructure/bkl-031-f3-a3-gcp/platform/BKL-031-F3-A3-SCIENTIFIC-EXECUTION-EVIDENCE-001.json"
+    ],
+    "provenance": {
+      "evidenceClass": "SYNTHETIC_VALIDATION",
+      "requestRef": "BKL031-F3B-REQUEST-SYNTHETIC-001",
+      "methodProfileRef": "BKL-031-F3-A3-METHOD-PROFILE-001",
+      "sourceRefs": [
+        "infrastructure/bkl-031-f3-a3-gcp/method-profile/BKL-031-F3-A3-METHOD-PROFILE-001.json",
+        "BKL-031-F3-A3-SCIENTIFIC-EXECUTION-EVIDENCE-001"
+      ]
+    },
+    "reasonCodes": [],
+    "precisionProfileId": "BKL031-F3-A3-LOCAL-ERROR-BUDGET-1",
+    "errorBudgetRef": "ADR-010",
+    "outputDigest": "b42151b50f4dc69c9a56ff888f516c8ac4372b7c6037240c5f7a800809951319"
+  },
+  "publicProjection": {
+    "schemaVersion": "1.0",
+    "projectionType": "BKL031_F3B_SANITIZED_SYNTHETIC_EVIDENCE",
+    "environment": "TEST",
+    "authority": "NONE",
+    "sitePublicEvidenceRef": "SITE-PUBLIC-SYNTHETIC-7H4M2K",
+    "evidenceRef": "BKL031-F3B-EVIDENCE-SYNTHETIC-001",
+    "availabilityState": "AVAILABLE",
+    "methodId": "ASTROPY_JPLEPHEM_DE442S",
+    "methodVersion": "astropy-8.0.1-jplephem-2.24",
+    "facts": [
+      {
+        "factType": "targetAltitudeDeg",
+        "instantUtc": "2026-09-16T00:00:00Z",
+        "numericValue": 2.7063362753609232,
+        "instantValue": null,
+        "unit": "deg"
+      },
+      {
+        "factType": "targetAzimuthDeg",
+        "instantUtc": "2026-09-16T00:00:00Z",
+        "numericValue": 60.69662289751111,
+        "instantValue": null,
+        "unit": "deg"
+      },
+      {
+        "factType": "meridianTransitUtc",
+        "instantUtc": "2026-09-16T00:00:00Z",
+        "numericValue": null,
+        "instantValue": "2026-09-16T07:18:27.391323Z",
+        "unit": "utc"
+      },
+      {
+        "factType": "solarAltitudeDeg",
+        "instantUtc": "2026-09-16T00:00:00Z",
+        "numericValue": -35,
+        "instantValue": null,
+        "unit": "deg"
+      },
+      {
+        "factType": "moonAltitudeDeg",
+        "instantUtc": "2026-09-16T00:00:00Z",
+        "numericValue": -49.70292541268455,
+        "instantValue": null,
+        "unit": "deg"
+      },
+      {
+        "factType": "moonAzimuthDeg",
+        "instantUtc": "2026-09-16T00:00:00Z",
+        "numericValue": 287.82100602732373,
+        "instantValue": null,
+        "unit": "deg"
+      },
+      {
+        "factType": "moonPhaseAngleDeg",
+        "instantUtc": "2026-09-16T00:00:00Z",
+        "numericValue": 55,
+        "instantValue": null,
+        "unit": "deg"
+      },
+      {
+        "factType": "moonIlluminatedFraction",
+        "instantUtc": "2026-09-16T00:00:00Z",
+        "numericValue": 0.213,
+        "instantValue": null,
+        "unit": "fraction"
+      },
+      {
+        "factType": "targetMoonSeparationDeg",
+        "instantUtc": "2026-09-16T00:00:00Z",
+        "numericValue": 82,
+        "instantValue": null,
+        "unit": "deg"
+      }
+    ],
+    "limitations": [
+      "SYNTHETIC_CONTRACT_VALIDATION_ONLY",
+      "NO_RUNTIME_AUTHORITY",
+      "NO_FORECAST_RANKING_READINESS_OR_SAFETY_AUTHORITY"
+    ]
+  },
+  "boundaries": {
+    "f3cAdapterImplemented": false,
+    "runtimeActivated": false,
+    "protectedSiteUsed": false,
+    "externalReferenceCalls": 0,
+    "forecastImplemented": false,
+    "rankingImplemented": false,
+    "readinessImplemented": false,
+    "commandAuthority": "NONE",
+    "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
+  },
+  "contractDigest": "b06932edb860cc4062b45d75b62e7874c3a327a4b4dbfd0b8cb70bdf115cd1f1"
+}

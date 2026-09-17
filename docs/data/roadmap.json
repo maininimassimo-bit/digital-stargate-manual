@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-17",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "f30610275c81ff7a37d836020012c2fe483d7c3cb26a1ceec8cb0c23fd030049",
+  "sourceDigest": "74ff4e9909383f418f8544abd181f634262e84138e58439c6143c75e4de85003",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-A3 exact scientific campaign passed; ADR-010 accepted for repository method authority; F3-B contracts and validator next; S10 runtime unavailable",
+  "projectStatus": "BKL-031 F3-A3 post-merge verified and ADR-010 accepted; F3-B source-neutral contracts and fail-closed validator implemented with 34/34 local tests; exact-head acceptance pending; S10 runtime unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-B machine-readable contracts and validator",
-  "target": "Materialize source-neutral EphemerisLunar request, evidence and method-profile schemas, bounded fixtures, fail-closed validator and privacy tests. Keep F3-C adapter, protected-site calculation, external-reference traffic, runtime activation, forecast, ranking, readiness, command and Safety Authority outside the increment.",
+  "nextMilestone": "BKL-031 F3-B exact-head acceptance and F3-C handoff",
+  "target": "Review and integrate the F3-B method-profile, request and evidence schemas, bounded TEST/NONE fixture, deterministic fail-closed validator and 34-case privacy/authority suite. Keep F3-C adapter, protected-site calculation, external-reference traffic, runtime activation, forecast, ranking, readiness, command and Safety Authority outside the increment.",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -307,7 +307,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3-A3 is complete at repository decision/evidence level. Exact run 35189574972 produced one successful remediated execution, one create-only private evidence object, 8 vectors and 17/17 passing metrics with repeatability and transit acceptance. ADR-010 is Accepted for repository method authority. F3-B contracts/validator are next; S10 runtime remains UNAVAILABLE."
+          "note": "F3-A3 is Accepted/Post-Merge Verified through PR #258 and merge a0a2e4950f2d908a3aaa0fc149754f904ee8d588. F3-B now has three source-neutral schemas, a bounded TEST/NONE fixture and a deterministic fail-closed validator with 34/34 local tests; exact-head acceptance is pending. F3-C/runtime remain separate and S10 remains UNAVAILABLE."
         },
         {
           "id": "BKL-032",

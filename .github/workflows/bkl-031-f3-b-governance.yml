@@ -1,0 +1,49 @@
+name: BKL-031 F3-B Governance
+
+on:
+  pull_request:
+    paths:
+      - ".github/scripts/observation-planner-ephemeris-lunar-f3b-contract.mjs"
+      - ".github/scripts/verify-observation-planner-ephemeris-lunar-f3b.mjs"
+      - ".github/scripts/test-observation-planner-ephemeris-lunar-f3b.mjs"
+      - ".github/workflows/bkl-031-f3-b-governance.yml"
+      - "schemas/observation-planner-ephemeris-lunar-*-f3b.schema.json"
+      - "docs/data/observation-planner-ephemeris-lunar-f3b-fixture.json"
+      - "docs/architecture/scientific-assets/BKL-031-F3-B-*.md"
+      - "docs/project/BKL-031-F3-B-*.md"
+      - "docs/project/BACKLOG.md"
+      - ".github/roadmap/roadmap-source.json"
+      - "docs/data/roadmap.json"
+  push:
+    branches: [main]
+    paths:
+      - ".github/scripts/observation-planner-ephemeris-lunar-f3b-contract.mjs"
+      - ".github/scripts/verify-observation-planner-ephemeris-lunar-f3b.mjs"
+      - ".github/scripts/test-observation-planner-ephemeris-lunar-f3b.mjs"
+      - ".github/workflows/bkl-031-f3-b-governance.yml"
+      - "schemas/observation-planner-ephemeris-lunar-*-f3b.schema.json"
+      - "docs/data/observation-planner-ephemeris-lunar-f3b-fixture.json"
+      - "docs/architecture/scientific-assets/BKL-031-F3-B-*.md"
+      - "docs/project/BKL-031-F3-B-*.md"
+      - "docs/project/BACKLOG.md"
+      - ".github/roadmap/roadmap-source.json"
+      - "docs/data/roadmap.json"
+
+permissions:
+  contents: read
+
+jobs:
+  contract-gate:
+    name: F3-B contracts and fail-closed validator
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify source-neutral schemas and bounded fixture
+        run: node .github/scripts/verify-observation-planner-ephemeris-lunar-f3b.mjs
+      - name: Test fail-closed, privacy and authority boundaries
+        run: node --test .github/scripts/test-observation-planner-ephemeris-lunar-f3b.mjs

@@ -1,0 +1,311 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/schemas/observation-planner-ephemeris-lunar-evidence-f3b.schema.json",
+  "title": "Digital StarGate Observation Planner F3-B Ephemeris/Lunar Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractType",
+    "evidenceId",
+    "environment",
+    "authority",
+    "requestRef",
+    "availabilityState",
+    "methodProfileRef",
+    "methodId",
+    "methodVersion",
+    "adapterId",
+    "adapterVersion",
+    "providerOrKernelId",
+    "dataDigest",
+    "inputTimeScale",
+    "calculationTimeScales",
+    "earthOrientationSource",
+    "outputFrame",
+    "refractionModel",
+    "generatedAtUtc",
+    "validFromUtc",
+    "validToUtc",
+    "inputDigest",
+    "facts",
+    "citations",
+    "provenance",
+    "reasonCodes",
+    "precisionProfileId",
+    "errorBudgetRef",
+    "outputDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "contractType": {
+      "const": "BKL031_F3B_EPHEMERIS_LUNAR_EVIDENCE"
+    },
+    "evidenceId": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "environment": {
+      "const": "TEST"
+    },
+    "authority": {
+      "const": "NONE"
+    },
+    "requestRef": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "availabilityState": {
+      "enum": [
+        "AVAILABLE",
+        "PARTIAL",
+        "UNAVAILABLE",
+        "CONFLICTED",
+        "STALE"
+      ]
+    },
+    "methodProfileRef": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "methodId": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "methodVersion": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "adapterId": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "adapterVersion": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "providerOrKernelId": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "dataDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "inputTimeScale": {
+      "const": "UTC"
+    },
+    "calculationTimeScales": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "UTC",
+          "TAI",
+          "TT",
+          "TDB",
+          "UT1"
+        ]
+      }
+    },
+    "earthOrientationSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceId",
+        "digest"
+      ],
+      "properties": {
+        "sourceId": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "outputFrame": {
+      "const": "TOPOCENTRIC_ALTAZ"
+    },
+    "refractionModel": {
+      "const": "AIRLESS"
+    },
+    "generatedAtUtc": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+    },
+    "validFromUtc": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+    },
+    "validToUtc": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+    },
+    "inputDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "facts": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 72,
+      "items": {
+        "$ref": "#/$defs/fact"
+      }
+    },
+    "citations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(?![/\\\\]|[A-Za-z]:|.*(?:^|/)\\.\\.(?:/|$)).+$"
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceClass",
+        "requestRef",
+        "methodProfileRef",
+        "sourceRefs"
+      ],
+      "properties": {
+        "evidenceClass": {
+          "const": "SYNTHETIC_VALIDATION"
+        },
+        "requestRef": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "methodProfileRef": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "sourceRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          }
+        }
+      }
+    },
+    "reasonCodes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 256,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+      }
+    },
+    "precisionProfileId": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "errorBudgetRef": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "outputDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "$defs": {
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "factType",
+        "instantUtc",
+        "numericValue",
+        "instantValue",
+        "unit"
+      ],
+      "properties": {
+        "factType": {
+          "enum": [
+            "targetAltitudeDeg",
+            "targetAzimuthDeg",
+            "meridianTransitUtc",
+            "solarAltitudeDeg",
+            "moonAltitudeDeg",
+            "moonAzimuthDeg",
+            "moonPhaseAngleDeg",
+            "moonIlluminatedFraction",
+            "targetMoonSeparationDeg"
+          ]
+        },
+        "instantUtc": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+        },
+        "numericValue": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "instantValue": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "unit": {
+          "enum": [
+            "deg",
+            "fraction",
+            "utc"
+          ]
+        }
+      }
+    }
+  }
+}
