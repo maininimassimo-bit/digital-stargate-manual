@@ -144,7 +144,7 @@ for (const required of [
 
 const roadmap = JSON.parse(fs.readFileSync(roadmapPath, 'utf8'));
 assert.equal(roadmap.currentPackage, 'BKL-031');
-assert.equal(roadmap.nextMilestone, 'BKL-031 F7 fresh forecast supply and runtime boundary');
+assert.equal(roadmap.nextMilestone, 'BKL-031 F8 current astronomy and explicit setup suitability integration');
 assert.ok(roadmap.milestones.some(entry => entry.id === 'M-BKL031-F6-ACCEPTANCE'), 'roadmap F6 acceptance milestone missing');
 const f6AcceptanceMilestone = roadmap.milestones.find(entry => entry.id === 'M-BKL031-F6-ACCEPTANCE');
 assert.ok(f6AcceptanceMilestone.description.includes('PR #275'), 'F6 acceptance milestone must reference PR #275');
