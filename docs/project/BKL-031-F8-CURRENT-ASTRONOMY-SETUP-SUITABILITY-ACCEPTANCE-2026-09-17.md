@@ -11,15 +11,23 @@
 | Exact head reviewed | `3f05693482208df2b56b66dcb71162589880e72b` |
 | Implementation merge | `20669f7164460297d7318fc3b5874e4bc7f4bcde` |
 | Acceptance reconciliation PR | #280 |
+| Reconciliation exact head | `bca410dcde804483052beded16c29a9f58f43872` |
+| Reconciliation merge | `84d1b889a6c739c9e5d053e1f073fe1d87b8c5d4` |
 | Successore | **BKL-031 F9 repeatable current-night planner closure** |
 
 ## Evidence di acceptance
 
-- exact-head PR workflow matrix: **9/9 SUCCESS** sul commit `3f05693482208df2b56b66dcb71162589880e72b`;
-- ARB exact-head: **APPROVED WITH CONDITIONS**, 0 Blocker, 0 Major, 0 Minor, 2 Observations, nessun waiver;
-- Release Quality exact-head: **CONDITIONALLY READY FOR MERGE**, nessun waiver;
-- expected-head merge: `20669f7164460297d7318fc3b5874e4bc7f4bcde`;
-- post-merge push workflow matrix: **10/10 SUCCESS**, incluso Developer Foundation;
+- implementation exact-head PR workflow matrix: **9/9 SUCCESS** sul commit `3f05693482208df2b56b66dcb71162589880e72b`;
+- implementation ARB exact-head: **APPROVED WITH CONDITIONS**, 0 Blocker, 0 Major, 0 Minor, 2 Observations, nessun waiver;
+- implementation Release Quality exact-head: **CONDITIONALLY READY FOR MERGE**, nessun waiver;
+- implementation expected-head merge: `20669f7164460297d7318fc3b5874e4bc7f4bcde`;
+- implementation post-merge push workflow matrix: **10/10 SUCCESS**, incluso Developer Foundation;
+- acceptance reconciliation PR #280 exact-head `bca410dcde804483052beded16c29a9f58f43872`: **17/17 SUCCESS**;
+- acceptance reconciliation ARB re-review: **APPROVED WITH CONDITIONS**, nessun Blocker/Major residuo;
+- acceptance reconciliation Release Quality: **READY FOR MERGE**;
+- acceptance reconciliation expected-head merge: `84d1b889a6c739c9e5d053e1f073fe1d87b8c5d4`;
+- reconciliation post-merge push workflow matrix: **19/19 SUCCESS**;
+- GitHub Pages: build, published-site integrity, artifact upload e deployment **SUCCESS** sul merge SHA della reconciliation; la sessione non disponeva di accesso HTTP esterno funzionante al dominio `github.io`, quindi non viene dichiarata una distinta verifica browser live;
 - verifier F8 source-bound: meteo F7 verificato per istante, setup ottico verificato contro baseline approvata, FOV ricalcolato, coordinate target legate alla source scientifica registrata, suitability e advisory-window score ricalcolati;
 - mutation tests fail-closed attivi su lineage F7, meteo, setup, suitability, projection, finestre advisory, privacy e authority boundaries.
 
