@@ -21,7 +21,7 @@ This plan converts the accepted F1 forecast negative cases and the F4-A source d
 | V03 run lineage | one `runInitialisationUtc` is mandatory; `best_match`, seamless and stitched modes are prohibited |
 | V04 time | UTC, half-open validity and 72-hour model horizon are explicit |
 | V05 space/privacy | protected site reference is distinct from outbound coordinates and public grid metadata |
-| V06 variables | the bounded eleven-variable vocabulary and exact units are specified |
+| V06 variables | the bounded ten-variable ICON-2I vocabulary and exact units are specified; unsupported visibility is explicit |
 | V07 freshness | source-specific 18-hour run-age ceiling and fail-closed missed-cycle behavior are explicit |
 | V08 licensing | attribution, non-commercial evaluation boundary and production decision gate are recorded |
 | V09 security | off-EAGLE server-side acquisition, allow-list, no redirect, timeout and size bounds are required |
@@ -40,7 +40,7 @@ This plan converts the accepted F1 forecast negative cases and the F4-A source d
 | N05 | request crosses the 72-hour run horizon | reject before network |
 | N06 | local time, missing offset or unordered interval | reject |
 | N07 | multiple locations, models or runs | reject |
-| N08 | unknown query parameter or variable | reject |
+| N08 | unknown query parameter or model-unavailable `visibility` variable | reject |
 | N09 | provider request contains elevation or an unapproved exact-site precision | privacy rejection before network |
 | N10 | redirect, non-allow-listed host, timeout or oversized response | acquisition fails closed |
 | N11 | HTTP error, non-JSON response or provider error envelope | forecast `UNAVAILABLE`; no retry-derived evidence unless profile permits a bounded retry |
@@ -48,8 +48,8 @@ This plan converts the accepted F1 forecast negative cases and the F4-A source d
 | N13 | returned spatial cell is absent or outside the approved applicability rule | `UNAVAILABLE` or `CONFLICTED` |
 | N14 | missing unit, changed unit or array-length mismatch | reject affected dimension |
 | N15 | duplicate, non-monotonic or out-of-range instant | reject evidence |
-| N16 | non-finite cloud, humidity, wind, visibility, temperature or precipitation value | reject affected fact |
-| N17 | cloud or humidity outside 0–100%, negative precipitation/visibility/wind | reject affected fact |
+| N16 | non-finite cloud, humidity, wind, temperature or precipitation value | reject affected fact |
+| N17 | cloud or humidity outside 0–100%, negative precipitation or wind | reject affected fact |
 | N18 | missing raw-response digest, Citation, Provenance or terms revision | reject evidence |
 | N19 | historical CloudWatcher data fills a missing forecast value | reject semantic substitution |
 | N20 | a second run fills a gap or silently extends validity | reject run mixing |
@@ -60,7 +60,7 @@ This plan converts the accepted F1 forecast negative cases and the F4-A source d
 
 ## 4. Positive F4-B fixture
 
-The first machine-readable fixture must remain `TEST` / `NONE`, use a synthetic/generalized Italian-domain location, contain one explicit 00 or 12 UTC ICON-2I run, no more than 72 hourly instants inside a half-open 72-hour horizon and the exact eleven-variable vocabulary. It must include a canonical request digest, raw-response digest placeholder clearly marked synthetic, returned grid metadata, explicit units, Citation/Provenance, CC BY attribution and all prohibited-capability flags set to false/none.
+The first machine-readable fixture must remain `TEST` / `NONE`, use a synthetic/generalized Italian-domain location, contain one explicit 00 or 12 UTC ICON-2I run, no more than 72 hourly instants inside a half-open 72-hour horizon and the exact ten-variable vocabulary. It must record `visibility` as unavailable, include a canonical request digest, raw-response digest placeholder clearly marked synthetic, returned grid metadata, explicit units, Citation/Provenance, CC BY attribution and all prohibited-capability flags set to false/none.
 
 No real response may be fabricated. A synthetic fixture is labelled synthetic; a future captured provider response requires its own network gate and immutable raw evidence.
 

@@ -18,6 +18,7 @@
     "maxRunAgeHours",
     "nativeResolution",
     "allowedVariables",
+    "unavailableVariables",
     "units",
     "requestPolicy",
     "networkPolicy",
@@ -28,7 +29,7 @@
   "properties": {
     "schemaVersion": {
       "type": "string",
-      "const": "1.0"
+      "const": "1.1"
     },
     "contractType": {
       "type": "string",
@@ -124,7 +125,6 @@
         "cloud_cover_low",
         "cloud_cover_mid",
         "cloud_cover_high",
-        "visibility",
         "wind_speed_10m",
         "wind_gusts_10m"
       ],
@@ -151,9 +151,6 @@
           "type": "string"
         },
         "cloud_cover_high": {
-          "type": "string"
-        },
-        "visibility": {
           "type": "string"
         },
         "wind_speed_10m": {
@@ -279,6 +276,17 @@
     },
     "profileDigest": {
       "type": "string"
+    },
+    "unavailableVariables": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "const": "visibility"
+        }
+      ],
+      "items": false,
+      "minItems": 1,
+      "maxItems": 1
     }
   }
 }

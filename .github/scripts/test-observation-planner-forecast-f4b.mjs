@@ -5,6 +5,8 @@ const fresh=()=>loadFixture();
 function reject(name,mutate,parts=[]){test(name,()=>{const f=fresh();mutate(f);resealFixture(f,parts);assert.throws(()=>validateFixture(f));});}
 test('positive synthetic TEST/NONE fixture validates with zero provider calls',()=>assert.equal(validateFixture(fresh()).boundaries.providerCalls,0));
 test('canonical JSON and fixture digest are deterministic',()=>{const f=fresh();const c=structuredClone(f);delete c.contractDigest;assert.equal(digest(c),f.contractDigest);assert.equal(canonicalJson(c),canonicalJson(JSON.parse(JSON.stringify(c))))});
+reject('R01 Previous Runs host cannot satisfy the Single Runs delivery interface',f=>{f.sourceProfile.endpoint.host='previous-runs-api.open-meteo.com'},['profile']);
+reject('R02 model-unavailable visibility cannot re-enter the supported vocabulary',f=>{f.sourceProfile.allowedVariables.splice(8,0,'visibility');f.sourceProfile.units.visibility='m'},['profile']);
 reject('N01 missing provider lineage rejects before network',f=>{f.request.providerId=''},['request']);
 reject('N02 best-match or unapproved model is rejected',f=>{f.request.modelId='best_match'},['request']);
 reject('N03 non-00/12 UTC run is rejected',f=>{f.request.runInitialisationUtc='2026-09-17T06:00:00Z'},['request']);
@@ -12,9 +14,9 @@ reject('N04 run older than 18 hours is stale and rejected',f=>{f.evidence.retrie
 reject('N05 interval crossing 72-hour horizon is rejected',f=>{f.request.endUtc='2026-09-20T01:00:00Z'},['request']);
 reject('N06 local time or non-GMT output is rejected',f=>{f.request.timezone='Europe/Rome'},['request']);
 reject('N07 multiple locations are rejected as unknown shape',f=>{f.request.locations=[[42,12],[43,13]]},['request']);
-reject('N08 unknown variable is rejected',f=>{f.request.hourlyVariables[0]='weather_code'},['request']);
+reject('N08 unknown or model-unavailable visibility variable is rejected',f=>{f.request.hourlyVariables[0]='visibility'},['request']);
 reject('N09 request elevation or exact protected classification is rejected',f=>{f.request.elevation='350'},['request']);
-reject('N10 acquisition-enabled network policy is rejected in F4-B',f=>{f.sourceProfile.networkPolicy.mode='ALLOW';f.sourceProfile.networkPolicy.maxRequests=1;f.sourceProfile.networkPolicy.allowHosts=['previous-runs-api.open-meteo.com']},['profile']);
+reject('N10 acquisition-enabled network policy is rejected in F4-B',f=>{f.sourceProfile.networkPolicy.mode='ALLOW';f.sourceProfile.networkPolicy.maxRequests=1;f.sourceProfile.networkPolicy.allowHosts=['single-runs-api.open-meteo.com']},['profile']);
 reject('N11 provider error envelope is rejected',f=>{f.evidence.providerError={code:500}},['evidence']);
 reject('N12 response model/run mismatch is rejected',f=>{f.evidence.modelId='ecmwf_ifs025'},['evidence']);
 reject('N13 missing returned spatial cell is rejected',f=>{delete f.evidence.returnedGrid});
