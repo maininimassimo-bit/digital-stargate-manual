@@ -1,0 +1,29 @@
+{
+  "schemaVersion":"1.0",
+  "evidenceType":"BKL031_F8_SETUP_SUITABILITY_EVIDENCE",
+  "methodId":"BKL031-F8-SETUP-SUITABILITY@1.1",
+  "authority":"ANALYTICAL_EVIDENCE_ONLY",
+  "sourceBindings":{
+    "setupBaseline":{"path":"governance/setup-authority/configuration-baselines/DSG-SETUP-BASELINE-001.approved.json","payloadDigest":"sha256:3f73d6a541faa88271e7c5fbef4f23791630713f0e3ca03bcb33dd79e8021cb8"},
+    "setupAssignment":{"path":"governance/setup-authority/setup-assignments/DSG-CURRENT-SETUP-ASSIGNMENT-001.approved.json","payloadDigest":"sha256:e7632afb4f0b2dc725b888eb858f650e2669d1ebf78e098c25b950cf36eae4ef"},
+    "targetCoordinates":{"path":"data/analytics/metadata/session-scientific-metadata.csv","blobSha":"4b6cc44ec992e3223134737eab9e1c49ff5a0d83"},
+    "forecast":{"path":"docs/data/observation-planner-forecast-f7-site-projection.json","workflowRunId":35255829165,"artifactDigest":"sha256:9c2c58f4f4d63bced1110b94de4463f17eb0a2bc14362c22bb3435cbce9455ef"}
+  },
+  "componentWeights":{"framing":0.2,"filterSignal":0.4,"imageScaleObjectClass":0.4},
+  "componentSemantics":{
+    "framing":"0..100 analytical score from target angular extent versus short FOV dimension; bounded F8 method evidence, not a safety threshold",
+    "filterSignal":"0..100 analytical match between governed available filter family and target signal family",
+    "imageScaleObjectClass":"0..100 analytical match between governed image scale and bounded target object class"
+  },
+  "catalogProvenance":[
+    {"targetKey":"dsg-target:ldn-1320","sourceAuthority":"NASA_HEASARC_LDN","sourceIdentifier":"LDN 1320","fact":"DARK_NEBULA / bounded angular-extent evidence"},
+    {"targetKey":"dsg-target:m-27","sourceAuthority":"SIMBAD","sourceIdentifier":"M 27 / NGC 6853","fact":"PLANETARY_NEBULA / bounded angular-size evidence"}
+  ],
+  "cases":[
+    {"setupId":"QUATTRO200_TOUPTEK294_BIN1","targetKey":"dsg-target:m-27","inputs":{"framingRatioToShortFov":0.114,"imageScaleArcsecPx":1.26,"filterFamilyUsedForAssessment":"L-Extreme","targetSignalFamily":"EMISSION_LINE"},"components":{"framing":60,"filterSignal":95,"imageScaleObjectClass":88},"aggregateScore":85.2,"reasonCodes":["TARGET_WELL_WITHIN_FOV","NARROWBAND_EMISSION_MATCH","SAMPLING_ACCEPTABLE_FOR_SMALL_PN"]},
+    {"setupId":"QUATTRO200_TOUPTEK294_BIN1","targetKey":"dsg-target:ldn-1320","inputs":{"framingRatioToShortFov":0.785,"imageScaleArcsecPx":1.26,"filterFamilyUsedForAssessment":"L-PRO","targetSignalFamily":"BROADBAND_CONTINUUM"},"components":{"framing":94,"filterSignal":95,"imageScaleObjectClass":87.5},"aggregateScore":91.8,"reasonCodes":["EXTENDED_TARGET_FITS_WIDEFIELD_FOV","BROADBAND_FILTER_MATCH","WIDEFIELD_SAMPLING_MATCH"]},
+    {"setupId":"C8_QHY695A_BIN1","targetKey":"dsg-target:m-27","inputs":{"framingRatioToShortFov":0.192,"imageScaleArcsecPx":0.74,"filterFamilyUsedForAssessment":"SHO","targetSignalFamily":"EMISSION_LINE"},"components":{"framing":85,"filterSignal":100,"imageScaleObjectClass":99},"aggregateScore":96.6,"reasonCodes":["SMALL_TARGET_FITS_FOV","EMISSION_LINE_FILTER_MATCH","FINE_SAMPLING_MATCH_FOR_SMALL_PN"]},
+    {"setupId":"C8_QHY695A_BIN1","targetKey":"dsg-target:ldn-1320","inputs":{"framingRatioToShortFov":1.322,"imageScaleArcsecPx":0.74,"filterFamilyUsedForAssessment":"LRGB","targetSignalFamily":"BROADBAND_CONTINUUM"},"components":{"framing":70.5,"filterSignal":85,"imageScaleObjectClass":72},"aggregateScore":76.9,"reasonCodes":["TARGET_EXTENT_EXCEEDS_SHORT_FOV","BROADBAND_FILTER_AVAILABLE","FINE_SAMPLING_NOT_OPTIMAL_FOR_EXTENDED_DARK_NEBULA"]}
+  ],
+  "boundaries":{"readinessAuthority":false,"safetyAuthority":"LOCAL_PHYSICAL_INTERLOCKS","historicalAcquisitionUsedAsSuitabilityAuthority":false}
+}
