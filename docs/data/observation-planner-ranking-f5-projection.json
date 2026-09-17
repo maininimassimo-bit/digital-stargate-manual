@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0",
+  "projectionType": "BKL031_F5_EXPLAINABLE_RANKING_PROJECTION",
+  "projectionId": "BKL031-F5-81944FBFAB794F2A9A8B371A",
+  "environment": "EVALUATION",
+  "authority": "NONE",
+  "consumerMode": "READ_ONLY",
+  "method": {
+    "id": "BKL031-F5-EXPLAINABLE-RANKING",
+    "version": "1.0",
+    "factorDefinitions": [
+      {"id":"ASTRONOMICAL_ALTITUDE","weight":0.45,"min":0,"max":90,"direction":"HIGHER_IS_BETTER","unit":"deg"},
+      {"id":"LUNAR_SEPARATION","weight":0.25,"min":0,"max":180,"direction":"HIGHER_IS_BETTER","unit":"deg"},
+      {"id":"FORECAST_EVIDENCE_COMPLETENESS","weight":0.2,"min":0,"max":1,"direction":"HIGHER_IS_BETTER","unit":"fraction"},
+      {"id":"TARGET_IDENTITY_VALIDATION","weight":0.1,"min":0,"max":1,"direction":"HIGHER_IS_BETTER","unit":"fraction"}
+    ]
+  },
+  "lineage": {
+    "targetKnowledgeProjection": "docs/data/target-knowledge-read-model.json",
+    "astronomicalSemanticAuthority": "docs/data/observation-planner-ephemeris-lunar-f3c-projection.json",
+    "forecastSemanticAuthority": "docs/data/observation-planner-forecast-f4d-projection.json",
+    "forecastEvidenceDigest": "350a7b9ae8b2de308ba55a7105e56bb4de5040572370ab2715c0fa70088af2f5",
+    "forecastCompleteness": "71/72",
+    "providerRequestBudget": "2/2_EXHAUSTED"
+  },
+  "results": [
+    {
+      "rank":1,"targetKey":"dsg-target:ldn-1320","targetId":"TGT-LDN-1320","canonicalName":"LDN 1320","score":76.3889,
+      "factors":[
+        {"id":"ASTRONOMICAL_ALTITUDE","rawValue":60,"unit":"deg","normalizedValue":0.66666667,"weight":0.45,"contribution":0.3},
+        {"id":"LUNAR_SEPARATION","rawValue":120,"unit":"deg","normalizedValue":0.66666667,"weight":0.25,"contribution":0.16666667},
+        {"id":"FORECAST_EVIDENCE_COMPLETENESS","rawValue":0.9861111111111112,"unit":"fraction","normalizedValue":0.98611111,"weight":0.2,"contribution":0.19722222},
+        {"id":"TARGET_IDENTITY_VALIDATION","rawValue":1,"unit":"fraction","normalizedValue":1,"weight":0.1,"contribution":0.1}
+      ]
+    },
+    {
+      "rank":2,"targetKey":"dsg-target:m-27","targetId":"TGT-MESSIER-M27","canonicalName":"M 27","score":53.0556,
+      "factors":[
+        {"id":"ASTRONOMICAL_ALTITUDE","rawValue":30,"unit":"deg","normalizedValue":0.33333333,"weight":0.45,"contribution":0.15},
+        {"id":"LUNAR_SEPARATION","rawValue":60,"unit":"deg","normalizedValue":0.33333333,"weight":0.25,"contribution":0.08333333},
+        {"id":"FORECAST_EVIDENCE_COMPLETENESS","rawValue":0.9861111111111112,"unit":"fraction","normalizedValue":0.98611111,"weight":0.2,"contribution":0.19722222},
+        {"id":"TARGET_IDENTITY_VALIDATION","rawValue":1,"unit":"fraction","normalizedValue":1,"weight":0.1,"contribution":0.1}
+      ]
+    }
+  ],
+  "limitations": [
+    "SYNTHETIC_FACTOR_VALUES_FOR_METHOD_VALIDATION_ONLY",
+    "REAL_TARGET_IDENTITIES_WITHOUT_REAL_F5_TARGET_GEOMETRY",
+    "F4D_FORECAST_VALUES_NOT_PUBLISHED",
+    "NO_ADDITIONAL_PROVIDER_TRAFFIC",
+    "NO_READINESS_GO_NO_GO_SCHEDULING_AUTOMATIC_SELECTION_COMMAND_OR_SAFETY_AUTHORITY",
+    "S10_PRODUCTION_RUNTIME_UNAVAILABLE"
+  ],
+  "boundary": {
+    "readinessAuthority": false,
+    "actionAuthority": "NONE",
+    "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS",
+    "automaticTargetSelection": false,
+    "schedulingAuthority": false,
+    "commandAuthority": "NONE"
+  },
+  "projectionDigest": "67ccf6fc895095481c5756b4785800acbf53d7f3b67b5a2f0e4d421ec91d7617"
+}
