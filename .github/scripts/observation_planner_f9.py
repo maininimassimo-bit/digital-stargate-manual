@@ -153,6 +153,12 @@ def angular_separation(ra1: float, dec1: float, ra2: float, dec2: float) -> floa
     return math.degrees(math.acos(max(-1.0, min(1.0, cosine))))
 
 
+def illuminated_fraction(sun_ra: float, sun_dec: float, moon_ra: float, moon_dec: float) -> float:
+    """Return the geocentric lunar illuminated fraction from one ephemeris solution."""
+    elongation = math.radians(angular_separation(sun_ra, sun_dec, moon_ra, moon_dec))
+    return (1 - math.cos(elongation)) / 2
+
+
 def astronomy(instant: dt.datetime, latitude: float, longitude: float, elevation: float, targets: list[dict]) -> dict:
     import swisseph as swe
     hour = instant.hour + instant.minute / 60 + instant.second / 3600
@@ -165,7 +171,7 @@ def astronomy(instant: dt.datetime, latitude: float, longitude: float, elevation
     geopos = (longitude, latitude, elevation)
     sun_az_south, sun_alt, _ = swe.azalt(jd, swe.EQU2HOR, geopos, 0, 0, sun[:3])
     moon_az_south, moon_alt, _ = swe.azalt(jd, swe.EQU2HOR, geopos, 0, 0, moon[:3])
-    illumination = float(swe.pheno_ut(jd, swe.MOON)[1])
+    illumination = illuminated_fraction(sun[0], sun[1], moon[0], moon[1])
     facts = {"solarAltitudeDeg": round(sun_alt, 2), "moonAltitudeDeg": round(moon_alt, 2),
              "moonAzimuthDeg": round((moon_az_south + 180) % 360, 2), "moonIlluminatedFraction": round(illumination, 3), "targets": {}}
     for target in targets:
@@ -242,12 +248,15 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
 
 
 def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
-    if data.get("projectionType") != "BKL031_F9_REPEATABLE_CURRENT_NIGHT" or data.get("authority") != "NONE" or data.get("consumerMode") != "READ_ONLY":
+    if (data.get("schemaVersion") != "1.0" or data.get("projectionType") != "BKL031_F9_REPEATABLE_CURRENT_NIGHT"
+            or data.get("environment") != "EVALUATION" or data.get("authority") != "NONE" or data.get("consumerMode") != "READ_ONLY"):
         raise ContractError("IDENTITY_OR_AUTHORITY")
-    if data.get("forecast", {}).get("providerId") != "METEOHUB" or data["forecast"].get("modelId") != "ICON_2I" or data["forecast"].get("freshnessState") != "FRESH":
+    forecast = data.get("forecast", {})
+    if (forecast.get("providerId") != "METEOHUB" or forecast.get("upstreamAuthorityId") != "ITALIAMETEO_ARPAE"
+            or forecast.get("modelId") != "ICON_2I" or forecast.get("freshnessState") != "FRESH"):
         raise ContractError("FORECAST_LINEAGE")
     boundary = data.get("boundaries", {})
-    expected = {"maximumAcquisitionsPerDay": 2, "monetaryBudgetEur": 0, "rawGribRetention": "NONE_EPHEMERAL_ONLY", "readinessAuthority": False,
+    expected = {"recurringTraffic": True, "maximumAcquisitionsPerDay": 2, "monetaryBudgetEur": 0, "rawGribRetention": "NONE_EPHEMERAL_ONLY", "readinessAuthority": False,
                 "automaticTargetSelection": False, "schedulingAuthority": False, "actionAuthority": "NONE", "commandAuthority": "NONE", "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS", "protectedCoordinatesPublished": False}
     if any(boundary.get(k) != v for k, v in expected.items()):
         raise ContractError("BOUNDARY")
@@ -255,11 +264,54 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
     for key in ("latitudedeg", "longitudedeg", "elevationm", "gridlatitude", "gridlongitude"):
         if key in raw:
             raise ContractError("PROTECTED_COORDINATE_KEY")
-    if not data.get("hourly") or not data.get("rankings"):
+    if data.get("site", {}).get("coordinateDisclosure") != "PROHIBITED" or not data["site"].get("publicLabel"):
+        raise ContractError("SITE_PUBLICATION_POLICY")
+    source_files = forecast.get("sourceFiles", [])
+    if ({item.get("variable") for item in source_files} != set(VARIABLES) or len(source_files) != len(VARIABLES)
+            or any(not re.fullmatch(r"[0-9a-f]{64}", str(item.get("sha256", ""))) for item in source_files)
+            or any(not isinstance(item.get("byteLength"), int) or not 0 < item["byteLength"] <= MAX_FILE_BYTES or not item.get("unit") for item in source_files)
+            or sum(item["byteLength"] for item in source_files) > MAX_TOTAL_BYTES):
+        raise ContractError("SOURCE_FILE_EVIDENCE")
+    try:
+        run = dt.datetime.fromisoformat(forecast["runInitialisationUtc"].replace("Z", "+00:00"))
+        retrieved = dt.datetime.fromisoformat(forecast["retrievedAtUtc"].replace("Z", "+00:00"))
+        generated = dt.datetime.fromisoformat(data["generatedAtUtc"].replace("Z", "+00:00"))
+    except (KeyError, TypeError, ValueError) as exc:
+        raise ContractError("FORECAST_TIMESTAMPS") from exc
+    age = (retrieved - run).total_seconds() / 3600
+    if not 0 <= age <= 18 or generated != retrieved or abs(float(forecast.get("runAgeHoursAtRetrieval", -1)) - age) > 0.000001:
+        raise ContractError("FORECAST_FRESHNESS_EVIDENCE")
+    if data.get("method", {}).get("ephemerisMode") != "EXPLICIT_MOSEPH_NO_FALLBACK":
+        raise ContractError("EPHEMERIS_MODE")
+    if data.get("attribution", {}).get("license") != "CC BY 4.0":
+        raise ContractError("ATTRIBUTION")
+    hourly, rankings = data.get("hourly", []), data.get("rankings", [])
+    if len(hourly) != 16 or not rankings:
         raise ContractError("INCOMPLETE_PROJECTION")
+    try:
+        instants = [dt.datetime.fromisoformat(row["validAtUtc"].replace("Z", "+00:00")) for row in hourly]
+    except (KeyError, TypeError, ValueError) as exc:
+        raise ContractError("HOURLY_TIMESTAMPS") from exc
+    if any(b - a != dt.timedelta(hours=1) for a, b in zip(instants, instants[1:])):
+        raise ContractError("NON_CONTIGUOUS_HOURLY")
+    window = data.get("nightWindow", {})
+    if window.get("fromUtc") != utc(instants[0]) or window.get("toUtcExclusive") != utc(instants[-1] + dt.timedelta(hours=1)):
+        raise ContractError("NIGHT_WINDOW")
+    target_keys = {item.get("targetKey") for item in data.get("targetProfiles", [])}
+    setup_ids = {item.get("setupId") for item in data.get("setupProfiles", [])}
+    if None in target_keys or None in setup_ids or not target_keys or not setup_ids or {item.get("setupId") for item in rankings} != setup_ids:
+        raise ContractError("PROFILE_BINDING")
+    for row in hourly:
+        weather = row.get("weather", {})
+        if (not 0 <= weather.get("cloudCoverPct", -1) <= 100 or not 0 <= weather.get("relativeHumidityPct", -1) <= 100
+                or weather.get("precipitationMm", -1) < 0 or weather.get("windSpeedKmh", -1) < 0 or weather.get("windGustKmh", -1) < 0
+                or set(row.get("targets", {})) != target_keys):
+            raise ContractError("HOURLY_VALUES")
+    if any({target.get("targetKey") for target in ranking.get("targets", [])} != target_keys for ranking in rankings):
+        raise ContractError("RANKING_BINDING")
     if now is not None:
-        run = dt.datetime.fromisoformat(data["forecast"]["runInitialisationUtc"].replace("Z", "+00:00"))
-        if (now - run).total_seconds() > 18 * 3600:
+        current_age = (now - run).total_seconds()
+        if current_age < 0 or current_age > 18 * 3600:
             raise ContractError("STALE_PROJECTION")
 
 
@@ -295,7 +347,7 @@ def main() -> None:
     parser.add_argument("--validate", type=Path)
     args = parser.parse_args()
     if args.validate:
-        validate_projection(json.loads(args.validate.read_text(encoding="utf-8")))
+        validate_projection(json.loads(args.validate.read_text(encoding="utf-8")), dt.datetime.now(dt.timezone.utc))
         print("F9 projection verification OK")
         return
     now = dt.datetime.now(dt.timezone.utc)
