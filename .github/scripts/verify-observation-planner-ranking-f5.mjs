@@ -6,7 +6,9 @@ const fixturePath='docs/data/observation-planner-ranking-f5-fixture.json';
 const projectionPath='docs/data/observation-planner-ranking-f5-projection.json';
 const schemaPath='schemas/observation-planner-ranking-f5.schema.json';
 const architecturePath='docs/architecture/scientific-assets/BKL-031-F5-Explainable-Ranking-Method-and-Read-Only-Consumer.md';
-for (const p of [fixturePath,projectionPath,schemaPath,architecturePath,'docs/data/target-knowledge-read-model.json','docs/data/observation-planner-forecast-f4d-projection.json','.github/roadmap/roadmap-source.json']) assert.ok(fs.existsSync(p),`missing F5 artifact: ${p}`);
+const acceptancePath='docs/project/BKL-031-F5-EXPLAINABLE-RANKING-ACCEPTANCE-2026-09-17.md';
+const developerPath='.github/workflows/developer-foundation.yml';
+for (const p of [fixturePath,projectionPath,schemaPath,architecturePath,acceptancePath,developerPath,'docs/data/target-knowledge-read-model.json','docs/data/observation-planner-forecast-f4d-projection.json','.github/roadmap/roadmap-source.json']) assert.ok(fs.existsSync(p),`missing F5 artifact: ${p}`);
 
 const fixture=JSON.parse(fs.readFileSync(fixturePath,'utf8'));
 const projection=JSON.parse(fs.readFileSync(projectionPath,'utf8'));
@@ -15,6 +17,8 @@ const targetKnowledge=JSON.parse(fs.readFileSync('docs/data/target-knowledge-rea
 const forecast=JSON.parse(fs.readFileSync('docs/data/observation-planner-forecast-f4d-projection.json','utf8'));
 const roadmap=JSON.parse(fs.readFileSync('.github/roadmap/roadmap-source.json','utf8'));
 const architecture=fs.readFileSync(architecturePath,'utf8');
+const acceptance=fs.readFileSync(acceptancePath,'utf8');
+const developer=fs.readFileSync(developerPath,'utf8');
 
 assert.equal(schema.$schema,'https://json-schema.org/draft/2020-12/schema');
 assert.equal(schema.additionalProperties,false);
@@ -59,7 +63,14 @@ function scan(value,path='$') {
 }
 scan(projection);
 
-for (const fragment of ['**IMPLEMENTED CANDIDATE — PRE-MERGE VALIDATION REQUIRED**','synthetic factor values','no readiness','BKL-032','S10']) assert.ok(architecture.toLowerCase().includes(fragment.toLowerCase()),`F5 architecture record missing: ${fragment}`);
+for (const fragment of ['**ACCEPTED — POST-MERGE VERIFIED**','synthetic factor values','no readiness','BKL-032','S10','777924e2638430f15bf717fa33dd71057751625a','7/7 applicable push workflows successful']) assert.ok(architecture.toLowerCase().includes(fragment.toLowerCase()),`F5 architecture record missing: ${fragment}`);
+for (const fragment of ['**ACCEPTED — POST-MERGE VERIFIED**','#273','dfda963e7e9d088282516200a6bd8bb64dd0dd1d','777924e2638430f15bf717fa33dd71057751625a','6/6 successful','7/7 successful','2/2_EXHAUSTED']) assert.ok(acceptance.includes(fragment),`F5 acceptance record missing: ${fragment}`);
+for (const fragment of ['Verify Observation Planner F5 explainable ranking','Test Observation Planner F5 deterministic and fail-closed rules','Check Observation Planner F5 browser consumer syntax']) assert.ok(developer.includes(fragment),`Developer Foundation does not preserve F5 regression coverage: ${fragment}`);
 assert.equal(roadmap.currentPackage,'BKL-031');
-assert.equal(roadmap.nextMilestone,'BKL-031 F5 explainable ranking method and read-only consumer');
-console.log(`BKL-031 F5 verified: ${projection.results.length} candidates, method ${projection.method.id}@${projection.method.version}, digest ${projection.projectionDigest}; authority NONE.`);
+assert.equal(roadmap.nextMilestone,'BKL-031 F6 real-evidence setup-aware E2E planner');
+assert.ok(roadmap.milestones.some(entry=>entry.id==='M-BKL031-F5-ACCEPTANCE'),'roadmap F5 acceptance milestone missing');
+const f5AcceptanceMilestone=roadmap.milestones.find(entry=>entry.id==='M-BKL031-F5-ACCEPTANCE');
+assert.ok(f5AcceptanceMilestone.description.includes('F6 real-evidence setup-aware E2E planner integration is next'),'F5 acceptance milestone must promote F6 real-evidence setup-aware E2E planner');
+assert.ok(f5AcceptanceMilestone.description.includes('capability closure remains deferred'),'F5 acceptance milestone must preserve deferred BKL-031 closure');
+assert.ok(!f5AcceptanceMilestone.description.includes('F6 capability closure is next'),'F5 acceptance milestone must not re-authorize early capability closure');
+console.log(`BKL-031 F5 verified: accepted/post-merge verified, ${projection.results.length} candidates, method ${projection.method.id}@${projection.method.version}, digest ${projection.projectionDigest}; F6 real-evidence setup-aware E2E planner integration next; closure deferred.`);

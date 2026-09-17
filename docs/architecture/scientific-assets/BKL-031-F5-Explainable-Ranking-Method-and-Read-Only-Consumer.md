@@ -3,18 +3,22 @@
 | Field | Value |
 |---|---|
 | Identifier | `BKL-031-F5-RANKING-001` |
-| Status | **IMPLEMENTED CANDIDATE — PRE-MERGE VALIDATION REQUIRED** |
+| Status | **ACCEPTED — POST-MERGE VERIFIED** |
 | Version | 1.0 |
 | Date | 2026-09-17 |
 | Parent | BKL-031 — Observation Planner intelligente |
-| Baseline | `main@28d2ddac6be1ebf758a0ac40ac0e080c62d51c38` |
+| Implementation baseline | `main@28d2ddac6be1ebf758a0ac40ac0e080c62d51c38` |
+| Reviewed exact head | `dfda963e7e9d088282516200a6bd8bb64dd0dd1d` |
+| Pull request | #273 |
+| Merge commit | `777924e2638430f15bf717fa33dd71057751625a` |
+| Post-merge verification | 7/7 applicable push workflows successful |
 | Predecessors | F3-C astronomical projection; F4-D sanitized forecast projection |
 | Environment / authority | `EVALUATION` / `NONE` |
 | Consumer mode | `READ_ONLY` |
 | Runtime effect | None; S10 remains `UNAVAILABLE` |
 | Safety effect | None |
 
-## 1. Decision and scope
+## 1. Accepted decision and scope
 
 F5 introduces a deterministic, explainable ranking demonstrator and a read-only repository projection. It validates the ranking method before any production planner exists. The two candidate identities are governed public target identities, while the factor values used by the F5 fixture are explicitly synthetic factor values for method validation only.
 
@@ -35,7 +39,7 @@ The F5 fixture instead reuses only governed identities and semantic lineage whil
 | `FORECAST_EVIDENCE_COMPLETENESS` | 0.20 | 0–1 | higher is better |
 | `TARGET_IDENTITY_VALIDATION` | 0.10 | 0–1 | must equal 1 in F5 |
 
-Weights are explicit, versioned and sum to 1. No silent reweighting, clamping, imputation or fallback is allowed.
+Weights are explicit, versioned and sum to 1 within IEEE-754 tolerance. No silent reweighting, clamping, imputation or fallback is allowed.
 
 For every factor:
 
@@ -91,22 +95,18 @@ The ranking engine fails closed on unknown properties, duplicate candidates, unv
 - `docs/data/observation-planner-ranking-f5-fixture.json`
 - `docs/data/observation-planner-ranking-f5-projection.json`
 - `.github/workflows/bkl-031-f5-governance.yml`
+- `docs/javascripts/observation-planner-ranking-f5.js`
+- `docs/observation-planner/index.md`
 
-Portal consumption is read-only and must display the synthetic/evaluation warning together with factor decomposition. It must not expose a button or route that schedules, commands, approves or marks a target ready.
+Portal consumption is read-only and displays the synthetic/evaluation warning together with factor decomposition. It exposes no button or route that schedules, commands, approves or marks a target ready.
 
-## 9. Validation required before acceptance
+## 9. Validation and acceptance evidence
 
-- deterministic known-answer regeneration;
-- fail-closed tests for range, unknown property, identity, duplicate candidate and authority escalation;
-- F3-C/F4-D regression verification;
-- browser JavaScript syntax and read-only boundary verification;
-- strict MkDocs build;
-- exact-head CI;
-- Architecture Review Board review;
-- Release Quality review;
-- expected-head merge and complete post-merge verification.
+The final exact reviewed head `dfda963e7e9d088282516200a6bd8bb64dd0dd1d` passed all six applicable pull-request workflows, including dedicated F5 governance, F3-C and F4-D regression checks, Developer Foundation, strict documentation validation and Word generation. Architecture Review Board issued **APPROVED WITH CONDITIONS** with no Blocker/Major finding; Release Quality issued **CONDITIONALLY READY FOR MERGE** with no waiver.
 
-Until those gates pass, this document remains an implemented candidate and F6 capability closure is not authorized.
+PR #273 was merged with expected-head control as `777924e2638430f15bf717fa33dd71057751625a`. All seven applicable push workflows completed successfully on the actual merge SHA: F3-C Governance, F4-D Forecast Projection Governance, F5 Explainable Ranking Governance, Developer Foundation, Validate documentation, Generate Word Manual and Deploy MkDocs artifact to GitHub Pages.
+
+F5 is therefore **Accepted / Post-Merge Verified**. Acceptance authorizes only the bounded deterministic ranking method, synthetic validation fixture, read-only projection and portal consumer. It does not authorize real-night ranking evidence, readiness, go/no-go, scheduling, automatic target selection, protected-site provider acquisition, commands, production runtime or Safety Authority.
 
 ## 10. Rollback
 
@@ -114,4 +114,4 @@ Rollback removes the F5 engine, fixture, projection, schema, workflow and read-o
 
 ## 11. Successor boundary
 
-After F5 is Accepted/Post-Merge Verified, F6 may reconcile the complete BKL-031 evidence chain and close the capability. F6 may not expand scope into BKL-032 readiness, production scheduler behavior, protected-site provider acquisition, commands or Safety Authority.
+With F5 Accepted/Post-Merge Verified, **F6 — real-evidence setup-aware E2E planner integration** becomes the next separately governed BKL-031 slice. F6 must bind the accepted F4-C real forecast evidence values, governed setup compatibility, accepted astronomical/lunar evidence and the F5 explainable ranking method into a deterministic read-only end-to-end planner proof and portal consumer. F6 performs no new provider request and must preserve the exhausted `2/2_EXHAUSTED` budget, no protected-site use, no readiness/go-no-go, no scheduling, no automatic target selection, no commands and no Safety Authority. BKL-031 capability closure is explicitly deferred until a later separately governed forecast-refresh/runtime gate proves how fresh forecast evidence is supplied without weakening ADR-011 lineage or the safety boundary.

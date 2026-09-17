@@ -54,8 +54,8 @@ assert.equal(normalized.boundaries.publicProjection, false);
 assert.equal(normalized.location.protectedSiteUsed, false);
 
 const roadmap = JSON.parse(fs.readFileSync('.github/roadmap/roadmap-source.json', 'utf8'));
-assert.equal(roadmap.nextMilestone, 'BKL-031 F5 explainable ranking method and read-only consumer');
+assert.equal(roadmap.nextMilestone, 'BKL-031 F6 real-evidence setup-aware E2E planner');
 assert.ok(roadmap.milestones.some((entry) => entry.id === 'M-BKL031-F4-C-FIRST-ATTEMPT-FAILED'));
 assert.ok(roadmap.milestones.some((entry) => entry.id === 'M-BKL031-F4-C-EVIDENCE-RECONCILIATION'));
 assert.ok(roadmap.milestones.some((entry) => entry.id === 'M-BKL031-F4-D-ACCEPTANCE'));
-console.log('BKL-031 F4-C gate verified: accepted/post-merge verified, two requests consumed, HTTP 200 raw evidence reconciled to 71 complete instants with zero imputation, acquisition path removed, no protected-site use; F5 is the next separately governed slice.');
+console.log('BKL-031 F4-C gate verified: accepted/post-merge verified, two requests consumed, HTTP 200 raw evidence reconciled to 71 complete instants with zero imputation, acquisition path removed, no protected-site use; F5 is accepted; F6 real-evidence setup-aware E2E planner integration is next.');
