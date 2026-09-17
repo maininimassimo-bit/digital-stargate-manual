@@ -19,8 +19,8 @@
       "title": "Observation Planner intelligente",
       "status": "active"
     },
-    "nextMilestone": "BKL-031 F7 fresh forecast supply and runtime boundary",
-    "target": "Establish F7 as a governed fresh forecast supply and runtime boundary for current forecast series at an approved generalized/public location, preserving ADR-011 exact provider/model/run lineage, freshness and missingness semantics, privacy and request accounting. The current validation request budget remains 2/2_EXHAUSTED and no provider request is authorized by F6 acceptance; any new provider traffic requires a separate explicit authority/budget decision before execution. BKL-031 remains In Progress after F7 until a later scientific integration gate provides current astronomical windows plus explicit OTA/camera/filter target suitability and proves final read-only best-target ranking end to end."
+    "nextMilestone": "BKL-031 F8 current astronomy and explicit setup suitability integration",
+    "target": "Establish F8 current astronomical windows/altitude/transit/lunar geometry and explicit OTA/camera/filter/target suitability, then combine them with governed current weather supply in an explainable read-only planner ranking. F7 protected-site forecast evidence is accepted but remains one-shot; recurring provider refresh still requires separately governed operating authorization before BKL-031 closure. Preserve privacy, fail-closed freshness/missingness, BKL-032 readiness separation and local physical-interlock Safety Authority."
   },
   "architecture": {
     "ap013": {

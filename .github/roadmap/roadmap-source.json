@@ -2,10 +2,10 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-17",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-C accepted and post-merge verified; ADR-010 accepted; F4-A/ADR-011, F4-B v1.1, F4-C evidence reconciliation, F4-D sanitized forecast projection/portal, F5 explainable ranking method/read-only consumer and F6 real-evidence setup-aware E2E proof accepted and post-merge verified; F6 PR #275 reviewed on ad7cad8267eaee1e27e7b1373d34f422efd8f088, merged as f75303c9575c77f23de777d55c6067bf08bc99f1 and verified 14/14 post-merge; F5 factor values remain synthetic EVALUATION evidence only; F6 forecast evidence is real bounded/generalized but not a fresh runtime feed and setup compatibility remains historical-only; provider budget 2/2 exhausted, zero protected-site use; no readiness/go-no-go, scheduling, automatic target selection, commands or Safety Authority; S10 production runtime unavailable",
+  "projectStatus": "BKL-031 F3-C and F4-A/F4-B/F4-C/F4-D/F5/F6/F7 accepted and post-merge verified; F7 PR #277 reviewed on 000fc81558060b45e71b9f1a69122249b6a5fe8e, merged as 59a1d690406d733b6e61e64220f84cef9b6fb1a2 and verified 10/10 post-merge; F7 proves real protected-site forecast acquisition and sanitized public delivery with site budget 1/1 exhausted, but recurring refresh is not activated; current astronomical geometry and explicit OTA/camera/filter suitability remain unresolved; no readiness/go-no-go, scheduling, automatic target selection, commands or Safety Authority; S10 production runtime unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F7 fresh forecast supply and runtime boundary",
-  "target": "Establish F7 as a governed fresh forecast supply and runtime boundary for current forecast series at an approved generalized/public location, preserving ADR-011 exact provider/model/run lineage, freshness and missingness semantics, privacy and request accounting. The current validation request budget remains 2/2_EXHAUSTED and no provider request is authorized by F6 acceptance; any new provider traffic requires a separate explicit authority/budget decision before execution. BKL-031 remains In Progress after F7 until a later scientific integration gate provides current astronomical windows plus explicit OTA/camera/filter target suitability and proves final read-only best-target ranking end to end.",
+  "nextMilestone": "BKL-031 F8 current astronomy and explicit setup suitability integration",
+  "target": "Establish F8 current astronomical windows/altitude/transit/lunar geometry and explicit OTA/camera/filter/target suitability, then combine them with governed current weather supply in an explainable read-only planner ranking. F7 protected-site forecast evidence is accepted but remains one-shot; recurring provider refresh still requires separately governed operating authorization before BKL-031 closure. Preserve privacy, fail-closed freshness/missingness, BKL-032 readiness separation and local physical-interlock Safety Authority.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3/F4 evidence chain, F5 ranking method/read-only consumer and F6 real-evidence setup-aware E2E proof are Accepted/Post-Merge Verified. F6 PR #275 merged as f75303c9575c77f23de777d55c6067bf08bc99f1 after 13/13 exact-head workflows and passed all 14 applicable post-merge workflows. F6 proves real bounded forecast-value flow plus governed setup/session evidence, but not fresh runtime forecast, real current target geometry or explicit OTA/camera/filter suitability. Provider validation budget remains 2/2 exhausted; no new provider traffic, readiness/go-no-go, scheduler, automatic target selection, commands, Safety Authority or S10 production runtime is authorized. F7 fresh forecast supply and runtime boundary is next; BKL-031 remains In Progress."
+          "note": "F3/F4/F5/F6/F7 are Accepted/Post-Merge Verified. F7 PR #277 merged as 59a1d690406d733b6e61e64220f84cef9b6fb1a2 after 9/9 exact-head and 10/10 post-merge workflows, proving real protected-site forecast acquisition and sanitized read-only portal delivery without publishing coordinates. The one-shot site budget is 1/1 exhausted and recurring refresh is not activated. F8 current astronomy plus explicit OTA/camera/filter suitability is next; BKL-031 remains In Progress, S10 unavailable, and no readiness/go-no-go, scheduler, automatic target selection, commands or Safety Authority is authorized."
         },
         {
           "id": "BKL-032",
@@ -741,6 +741,13 @@
       "title": "BKL-031 F6 Real-Evidence Setup-Aware E2E Acceptance",
       "date": "2026-09-17",
       "description": "PR #275 passed 13/13 exact-head workflows on ad7cad8267eaee1e27e7b1373d34f422efd8f088, merged with expected-head control as f75303c9575c77f23de777d55c6067bf08bc99f1 and passed 14/14 applicable post-merge workflows. The bounded EVALUATION/NONE/READ_ONLY F6 integration proof is Accepted/Post-Merge Verified with zero provider requests. F7 fresh forecast supply and runtime boundary is next. BKL-031 remains In Progress pending fresh forecast supply, current astronomical windows, explicit OTA/camera/filter suitability and final read-only ranking proof."
+    },
+    {
+      "id": "M-BKL031-F7-ACCEPTANCE",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F7 protected-site forecast acceptance",
+      "date": "2026-09-17",
+      "description": "F7 accepted/post-merge verified via PR #277 and merge 59a1d690406d733b6e61e64220f84cef9b6fb1a2; real protected-site forecast delivered through sanitized read-only projection; one-shot budget 1/1 exhausted; recurring runtime not activated."
     }
   ]
 }
