@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/schemas/observation-planner-e2e-f6.schema.json",
+  "title": "BKL-031 F6 Real-Evidence Setup-Aware E2E Projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion","projectionType","projectionId","environment","authority","consumerMode","method","forecastEvidence","weatherSample","setupScenarios","lineage","limitations","boundary"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "projectionType": { "const": "BKL031_F6_REAL_EVIDENCE_SETUP_AWARE_E2E_PROJECTION" },
+    "projectionId": { "const": "BKL031-F6-E2E-001" },
+    "environment": { "const": "EVALUATION" },
+    "authority": { "const": "NONE" },
+    "consumerMode": { "const": "READ_ONLY" },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id","version","behavior","rankingAuthority"],
+      "properties": {
+        "id": { "const": "BKL031-F6-REAL-EVIDENCE-SETUP-AWARE-E2E" },
+        "version": { "const": "1.0" },
+        "behavior": { "const": "BIND_REAL_F4C_FORECAST_SAMPLE_TO_GOVERNED_SETUP_COMPATIBILITY_AND_F5_METHOD_EVIDENCE" },
+        "rankingAuthority": { "const": "NONE" }
+      }
+    },
+    "forecastEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidenceClass","evidenceId","evidenceDigest","providerId","upstreamAuthorityId","modelId","runInitialisationUtc","validFromUtc","validToUtcExclusive","acceptedHourlyInstantCount","excludedHourlyInstantCount","imputedValueCount","providerRequestBudget","locationClass","protectedSiteUsed"],
+      "properties": {
+        "evidenceClass": { "const": "REAL_PROVIDER_BOUNDED_GENERALIZED" },
+        "evidenceId": { "type": "string", "minLength": 1 },
+        "evidenceDigest": { "const": "350a7b9ae8b2de308ba55a7105e56bb4de5040572370ab2715c0fa70088af2f5" },
+        "providerId": { "const": "OPEN_METEO" },
+        "upstreamAuthorityId": { "const": "ITALIAMETEO_ARPAE" },
+        "modelId": { "const": "italia_meteo_arpae_icon_2i" },
+        "runInitialisationUtc": { "type": "string", "format": "date-time" },
+        "validFromUtc": { "type": "string", "format": "date-time" },
+        "validToUtcExclusive": { "type": "string", "format": "date-time" },
+        "acceptedHourlyInstantCount": { "const": 71 },
+        "excludedHourlyInstantCount": { "const": 1 },
+        "imputedValueCount": { "const": 0 },
+        "providerRequestBudget": { "const": "2/2_EXHAUSTED" },
+        "locationClass": { "const": "SYNTHETIC_GENERALIZED" },
+        "protectedSiteUsed": { "const": false }
+      }
+    },
+    "weatherSample": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["validAtUtc","temperatureC","relativeHumidityPct","dewPointC","precipitationMm","cloudCoverPct","cloudCoverLowPct","cloudCoverMidPct","cloudCoverHighPct","windSpeedKmh","windGustKmh","semantics"],
+      "properties": {
+        "validAtUtc": { "type": "string", "format": "date-time" },
+        "temperatureC": { "type": "number" },
+        "relativeHumidityPct": { "type": "number", "minimum": 0, "maximum": 100 },
+        "dewPointC": { "type": "number" },
+        "precipitationMm": { "type": "number", "minimum": 0 },
+        "cloudCoverPct": { "type": "number", "minimum": 0, "maximum": 100 },
+        "cloudCoverLowPct": { "type": "number", "minimum": 0, "maximum": 100 },
+        "cloudCoverMidPct": { "type": "number", "minimum": 0, "maximum": 100 },
+        "cloudCoverHighPct": { "type": "number", "minimum": 0, "maximum": 100 },
+        "windSpeedKmh": { "type": "number", "minimum": 0 },
+        "windGustKmh": { "type": "number", "minimum": 0 },
+        "semantics": { "const": "REAL_F4C_VALUE_SAMPLE_FOR_E2E_DATA_PATH_PROOF_NOT_READINESS" }
+      }
+    },
+    "setupScenarios": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["setupPublicKey","setupLabel","compatibilityBasis","eligibleTargets","excludedTargets"],
+        "properties": {
+          "setupPublicKey": { "enum": ["WIDEFIELD_OSC","LONG_FOCAL_MONO"] },
+          "setupLabel": { "type": "string", "minLength": 1 },
+          "compatibilityBasis": { "const": "REGISTERED_SCIENTIFIC_SESSION_EVIDENCE" },
+          "eligibleTargets": { "type": "array", "minItems": 1, "maxItems": 1 },
+          "excludedTargets": { "type": "array", "minItems": 1, "maxItems": 1 }
+        }
+      }
+    },
+    "lineage": { "type": "object" },
+    "limitations": { "type": "array", "minItems": 7, "items": { "type": "string" } },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["readinessAuthority","automaticTargetSelection","schedulingAuthority","actionAuthority","commandAuthority","safetyAuthority","runtimeState","providerRequestsPerformedByF6"],
+      "properties": {
+        "readinessAuthority": { "const": false },
+        "automaticTargetSelection": { "const": false },
+        "schedulingAuthority": { "const": false },
+        "actionAuthority": { "const": "NONE" },
+        "commandAuthority": { "const": "NONE" },
+        "safetyAuthority": { "const": "LOCAL_PHYSICAL_INTERLOCKS" },
+        "runtimeState": { "const": "UNAVAILABLE" },
+        "providerRequestsPerformedByF6": { "const": 0 }
+      }
+    }
+  }
+}

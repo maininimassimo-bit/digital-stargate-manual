@@ -1,0 +1,65 @@
+name: BKL-031 F6 Real-Evidence Setup-Aware E2E Governance
+
+on:
+  pull_request:
+    paths:
+      - ".github/scripts/*observation-planner-e2e-f6*.mjs"
+      - ".github/workflows/bkl-031-f6-governance.yml"
+      - "schemas/observation-planner-e2e-f6.schema.json"
+      - "docs/data/observation-planner-e2e-f6-projection.json"
+      - "docs/javascripts/observation-planner-e2e-f6.js"
+      - "docs/observation-planner/**"
+      - "docs/architecture/scientific-assets/BKL-031-F6-*.md"
+      - "governance/forecast-evidence/BKL031-F4C-RUN-35214129960/**"
+      - "governance/setup-authority/**"
+      - "data/analytics/metadata/session-scientific-metadata.csv"
+      - "docs/data/target-knowledge-read-model.json"
+      - "docs/data/observation-planner-ranking-f5-projection.json"
+      - ".github/workflows/developer-foundation.yml"
+      - "docs/project/**"
+      - "mkdocs.yml"
+  push:
+    branches: [main]
+    paths:
+      - ".github/scripts/*observation-planner-e2e-f6*.mjs"
+      - ".github/workflows/bkl-031-f6-governance.yml"
+      - "schemas/observation-planner-e2e-f6.schema.json"
+      - "docs/data/observation-planner-e2e-f6-projection.json"
+      - "docs/javascripts/observation-planner-e2e-f6.js"
+      - "docs/observation-planner/**"
+      - "docs/architecture/scientific-assets/BKL-031-F6-*.md"
+      - "governance/forecast-evidence/BKL031-F4C-RUN-35214129960/**"
+      - "governance/setup-authority/**"
+      - "data/analytics/metadata/session-scientific-metadata.csv"
+      - "docs/data/target-knowledge-read-model.json"
+      - "docs/data/observation-planner-ranking-f5-projection.json"
+      - ".github/workflows/developer-foundation.yml"
+      - "docs/project/**"
+      - "mkdocs.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  f6-e2e-gate:
+    name: F6 real forecast values + governed setup evidence + read-only portal
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify F4-C bounded acquisition gate
+        run: node .github/scripts/verify-observation-planner-forecast-f4c-gate.mjs
+      - name: Reconcile immutable F4-C evidence
+        run: node .github/scripts/reconcile-observation-planner-forecast-f4c.mjs
+      - name: Verify F5 predecessor
+        run: node .github/scripts/verify-observation-planner-ranking-f5.mjs
+      - name: Verify F6 deterministic E2E projection and boundaries
+        run: node .github/scripts/verify-observation-planner-e2e-f6.mjs
+      - name: Test F6 fail-closed evidence bindings
+        run: node --test .github/scripts/test-observation-planner-e2e-f6.mjs
+      - name: Check F6 browser consumer syntax
+        run: node --check docs/javascripts/observation-planner-e2e-f6.js
