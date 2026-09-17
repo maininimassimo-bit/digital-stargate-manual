@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0",
+  "evidenceId": "BKL-031-F3-A3-REMEDIATED-SCIENTIFIC-PREFLIGHT-INCIDENT-001",
+  "status": "PREFLIGHT_FAILED_CLOUD_EXECUTION_NOT_STARTED",
+  "recordedAtUtc": "2026-09-17T06:13:45Z",
+  "sourceCommit": "8a4360cf7c7b834e4a043691e0f4a30494a01b23",
+  "workflow": {
+    "name": "BKL-031 F3-A3 Exact Remediated Scientific Execution",
+    "runId": 35188870937,
+    "jobId": 105096784195,
+    "conclusion": "FAILURE",
+    "failedStep": "Require exact remediated platform, two failed executions and empty evidence prefix",
+    "url": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35188870937"
+  },
+  "cause": {
+    "classification": "LOCAL_EVIDENCE_ACQUISITION_CHANGED_STATE_BYTES",
+    "incorrectRecordedRawSha256": "151721051c7f93db039fcfbc7fd14c0500e7beb37fbb406f1a17d35ca63adb41",
+    "exactCloudRawSha256": "e527e5f03e0d93a456abc2dc761b19d18479a042ac139960037569c52776f25e",
+    "explanation": "The prior local PowerShell text pipeline decoded and re-encoded the Terraform state. A byte-preserving gcloud storage copy establishes the exact cloud object digest."
+  },
+  "verifiedPostconditions": {
+    "platformStateSerial": 6,
+    "platformStateLineage": "2be9b82b-88d3-888f-4fcd-dded2f74f7f3",
+    "platformResourceCount": 4,
+    "executionNames": [
+      "dsg-f3-a3-spike-9drzb",
+      "dsg-f3-a3-spike-jv646"
+    ],
+    "executionCount": 2,
+    "remediatedEvidenceObjectCount": 0
+  },
+  "controls": {
+    "executeStep": "SKIPPED",
+    "jobExecution": "NOT_EXECUTED",
+    "scientificExecution": "NOT_EXECUTED",
+    "evidenceUpload": "NOT_EXECUTED",
+    "cloudMutation": "NOT_EXECUTED",
+    "protectedSiteUse": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED"
+  },
+  "remediation": "REPLACE_ONLY_THE_INCORRECT_RAW_STATE_DIGEST_WITH_BYTE_PRESERVING_DIGEST",
+  "nextGate": "REVIEW_CORRECTED_EXACT_SINGLE_REMEDIATED_SCIENTIFIC_EXECUTION"
+}
