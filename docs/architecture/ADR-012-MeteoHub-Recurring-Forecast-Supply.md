@@ -19,7 +19,7 @@ F9 consumes ItaliaMeteo/ARPAE ICON-2I directly from MeteoHub under CC BY 4.0. Th
 The operating contract is:
 
 - monetary budget EUR 0;
-- because the repository is private, the refresh job remains runner-free unless repository variable `F9_ZERO_EUR_GUARD=CONFIRMED` records that a hard GitHub Actions overage stop (or an equivalent zero-charge execution boundary) has been independently verified;
+- the repository is public and the refresh job additionally requires repository variable `F9_ZERO_EUR_GUARD=CONFIRMED` as an explicit activation switch;
 - at most two acquisition cycles per UTC day, aligned with the 00/12 UTC ICON-2I runs;
 - no manual-dispatch acquisition path, no automatic retry, and `GITHUB_RUN_ATTEMPT=1` enforced so a workflow rerun cannot acquire again;
 - exact run identity, per-variable SHA-256 and retrieval time in the sanitised projection;
@@ -29,7 +29,7 @@ The operating contract is:
 - missing, late, incomplete, inconsistent or stale data fail closed;
 - no automatic fallback, provider/model stitching or silent substitution.
 
-The GitHub workflow may publish only the small read-only JSON projection. The repository is private: GitHub-hosted execution consumes the account's included Actions minutes and can become billable after that allowance. Therefore repository merge does not activate acquisition; the guarded repository variable may be set only after evidence that paid overage is blocked. EAGLE is not involved.
+The GitHub workflow may publish only the small read-only JSON projection. The repository is public, so standard GitHub-hosted runner execution is free; the explicit repository variable remains a defense-in-depth activation switch. EAGLE is not involved.
 
 ## Authority boundaries
 
@@ -37,7 +37,7 @@ The output is `EVALUATION / NONE / READ_ONLY`. It has no readiness, go/no-go, sc
 
 ## Consequences
 
-The provider subscription cost is eliminated, but F9 assumes operational parsing of official GRIB data and availability of MeteoHub. Private-repository runner time is a separate cost risk controlled by the activation guard above. Provider failure never revives stale F7/F8 data as current. Attribution to ItaliaMeteo/ARPAE and the CC BY 4.0 source must remain visible.
+The provider subscription cost is eliminated, and the public-repository standard runner boundary avoids runner charges. F9 still assumes operational parsing of official GRIB data and availability of MeteoHub. Provider failure never revives stale F7/F8 data as current. Attribution to ItaliaMeteo/ARPAE and the CC BY 4.0 source must remain visible.
 
 ADR-011 remains the historical authority for the accepted Open-Meteo single-run evidence. ADR-012 governs only the F9 recurring supply and does not rewrite that evidence.
 

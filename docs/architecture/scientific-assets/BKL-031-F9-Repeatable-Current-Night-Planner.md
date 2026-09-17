@@ -15,7 +15,7 @@ F9 converts the bounded F8 demonstration into a repeatable current-night pipelin
 
 ## Operating model
 
-The scheduled GitHub workflow is defined for 04:15 and 17:15 UTC. These are the only acquisition triggers and therefore cap execution at two cycles per day. Because the repository is private, the job is hard-disabled before runner allocation unless `F9_ZERO_EUR_GUARD=CONFIRMED`; that variable may be set only after a GitHub Actions hard overage stop or equivalent zero-charge boundary is evidenced. Once activated, the job discovers one fresh ICON-2I run, downloads the seven variables required by the accepted scoring method, extracts the governed site point server-side and disposes the temporary directory automatically.
+The scheduled GitHub workflow is defined for 04:15 and 17:15 UTC. These are the only acquisition triggers and therefore cap execution at two cycles per day. The public repository uses standard GitHub-hosted runners; the job additionally requires explicit activation variable `F9_ZERO_EUR_GUARD=CONFIRMED`. Once activated, the job discovers one fresh ICON-2I run, downloads the seven variables required by the accepted scoring method, extracts the governed site point server-side and disposes the temporary directory automatically.
 
 The durable projection retains provider, authority, model, run, retrieval time, byte count and SHA-256 per source file. It never retains raw GRIB bytes or coordinates. An 18-hour run-age ceiling and complete current-night coverage are mandatory.
 
@@ -27,8 +27,8 @@ Discovery failure, HTTP/content-type mismatch, oversized GRIB input, missing mes
 
 ## Cost and retention
 
-The approved monetary budget is EUR 0. MeteoHub is a no-fee open-data path, but standard GitHub-hosted runners in this private repository consume included minutes and can become billable after the allowance. The activation guard prevents any scheduled runner allocation until the hard zero-overage control is verified. The workflow uploads no artifacts and commits only the sanitised JSON projection. GRIB retention is `NONE_EPHEMERAL_ONLY`.
+The approved monetary budget is EUR 0. MeteoHub is a no-fee open-data path and standard GitHub-hosted runners are free for this public repository. The explicit activation guard remains enabled. The workflow uploads no artifacts and commits only the sanitised JSON projection. GRIB retention is `NONE_EPHEMERAL_ONLY`.
 
 ## Acceptance boundary
 
-Implementation presence alone does not close BKL-031. Acceptance requires exact-head CI, ARB, Release Quality, expected-head merge, verified EUR 0 activation guard, one successful governed refresh, portal verification and post-merge workflow evidence. Until then S10 remains `UNAVAILABLE`.
+Implementation presence alone does not close BKL-031. Acceptance requires exact-head CI, ARB, Release Quality, expected-head merge, one successful governed refresh, portal verification and post-merge workflow evidence. Until then S10 remains `UNAVAILABLE`.
