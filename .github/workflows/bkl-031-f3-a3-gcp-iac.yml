@@ -26,6 +26,7 @@ on:
       - ".github/scripts/verify-bkl-031-f3-a3-replacement-execution-forensics.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-offline-exact-kernel-validation.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-remediated-runner-oci-publication.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-remediated-runner-platform-update.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - ".github/workflows/bkl-031-f3-a3-authenticated-platform-plan.yml"
       - ".github/workflows/bkl-031-f3-a3-registry-foundation.yml"
@@ -44,6 +45,7 @@ on:
       - ".github/workflows/bkl-031-f3-a3-replacement-execution-forensics.yml"
       - ".github/workflows/bkl-031-f3-a3-offline-exact-kernel-validation.yml"
       - ".github/workflows/bkl-031-f3-a3-remediated-runner-oci-publication.yml"
+      - ".github/workflows/bkl-031-f3-a3-remediated-runner-platform-update.yml"
       - "infrastructure/bkl-031-f3-a3-gcp/**"
       - "docs/architecture/ADR-010-Ephemeris-Lunar-Method-and-Validation-Profile.md"
       - "docs/architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md"
@@ -76,6 +78,7 @@ on:
       - ".github/scripts/verify-bkl-031-f3-a3-replacement-execution-forensics.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-offline-exact-kernel-validation.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-remediated-runner-oci-publication.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-remediated-runner-platform-update.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - ".github/workflows/bkl-031-f3-a3-authenticated-platform-plan.yml"
       - ".github/workflows/bkl-031-f3-a3-registry-foundation.yml"
@@ -94,6 +97,7 @@ on:
       - ".github/workflows/bkl-031-f3-a3-replacement-execution-forensics.yml"
       - ".github/workflows/bkl-031-f3-a3-offline-exact-kernel-validation.yml"
       - ".github/workflows/bkl-031-f3-a3-remediated-runner-oci-publication.yml"
+      - ".github/workflows/bkl-031-f3-a3-remediated-runner-platform-update.yml"
       - "infrastructure/bkl-031-f3-a3-gcp/**"
   workflow_dispatch:
 
@@ -156,6 +160,8 @@ jobs:
         run: node .github/scripts/verify-bkl-031-f3-a3-offline-exact-kernel-validation.mjs
       - name: Verify remediated runner OCI publication gate
         run: node .github/scripts/verify-bkl-031-f3-a3-remediated-runner-oci-publication.mjs
+      - name: Verify remediated runner platform update gate
+        run: node .github/scripts/verify-bkl-031-f3-a3-remediated-runner-platform-update.mjs
 
   terraform:
     name: Terraform validate (${{ matrix.directory }})
