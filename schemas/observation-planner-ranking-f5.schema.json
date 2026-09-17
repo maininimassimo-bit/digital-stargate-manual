@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/schemas/observation-planner-ranking-f5.schema.json",
+  "title": "BKL-031 F5 Explainable Ranking Projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion","projectionType","projectionId","environment","authority","consumerMode","method","lineage","results","limitations","boundary","projectionDigest"],
+  "properties": {
+    "schemaVersion": {"const":"1.0"},
+    "projectionType": {"const":"BKL031_F5_EXPLAINABLE_RANKING_PROJECTION"},
+    "projectionId": {"type":"string","pattern":"^BKL031-F5-[A-F0-9]{24}$"},
+    "environment": {"const":"EVALUATION"},
+    "authority": {"const":"NONE"},
+    "consumerMode": {"const":"READ_ONLY"},
+    "method": {
+      "type":"object","additionalProperties":false,
+      "required":["id","version","factorDefinitions"],
+      "properties": {
+        "id":{"const":"BKL031-F5-EXPLAINABLE-RANKING"},
+        "version":{"const":"1.0"},
+        "factorDefinitions":{"type":"array","minItems":4,"maxItems":4}
+      }
+    },
+    "lineage": {"type":"object"},
+    "results": {
+      "type":"array","minItems":2,"maxItems":5,
+      "items": {
+        "type":"object","additionalProperties":false,
+        "required":["rank","targetKey","targetId","canonicalName","score","factors"],
+        "properties": {
+          "rank":{"type":"integer","minimum":1,"maximum":5},
+          "targetKey":{"type":"string"},
+          "targetId":{"type":"string"},
+          "canonicalName":{"type":"string"},
+          "score":{"type":"number","minimum":0,"maximum":100},
+          "factors":{"type":"array","minItems":4,"maxItems":4}
+        }
+      }
+    },
+    "limitations":{"type":"array","minItems":1,"items":{"type":"string"}},
+    "boundary": {
+      "type":"object","additionalProperties":false,
+      "required":["readinessAuthority","actionAuthority","safetyAuthority","automaticTargetSelection","schedulingAuthority","commandAuthority"],
+      "properties": {
+        "readinessAuthority":{"const":false},
+        "actionAuthority":{"const":"NONE"},
+        "safetyAuthority":{"const":"LOCAL_PHYSICAL_INTERLOCKS"},
+        "automaticTargetSelection":{"const":false},
+        "schedulingAuthority":{"const":false},
+        "commandAuthority":{"const":"NONE"}
+      }
+    },
+    "projectionDigest":{"type":"string","pattern":"^[a-f0-9]{64}$"}
+  }
+}
