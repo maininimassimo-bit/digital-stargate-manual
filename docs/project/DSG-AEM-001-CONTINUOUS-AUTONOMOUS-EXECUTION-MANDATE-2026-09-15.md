@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-AEM-001 |
-| Versione | 1.1 |
+| Versione | 1.2 |
 | Stato | **ACTIVE / OWNER-AUTHORIZED** |
 | Data efficacia | 15/09/2026 |
 | Owner | Massimo Mainini |
@@ -113,6 +113,24 @@ Ogni package deve registrare almeno:
 6. uso eventuale di `W-DSG-AEM-RULESET-001`;
 7. merge SHA e post-merge evidence;
 8. stato residuo e package successivo.
+
+## 7.1 Continuità tra chat e work package
+
+Ogni work package importante usa una chat dedicata. Esempi non esaustivi includono Observation Planner, Realtime Telemetry, AP-014 e Release Governance. Quando il work package è completato e verificato, la chat corrente viene chiusa e il work package successivo viene avviato in una nuova chat.
+
+Prima del cambio di chat, l'assistente prepara un handover compatto contenente soltanto:
+
+1. stato corrente;
+2. branch;
+3. PR;
+4. commit rilevanti;
+5. decisioni ADR;
+6. file interessati;
+7. comandi eseguiti;
+8. errori ancora aperti;
+9. prossimo passo.
+
+L'handover compatto serve alla continuità conversazionale e non sostituisce il repository come source of truth. Nella nuova chat, ogni stato operativo deve essere riconfermato contro GitHub prima di proseguire.
 
 ## 8. Revoca e modifica
 
