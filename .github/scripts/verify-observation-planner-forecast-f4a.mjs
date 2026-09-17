@@ -66,7 +66,7 @@ assert.ok(decisions.includes('DLG-042') && decisions.includes('fallback silenzio
 assert.ok(nav.includes('BKL-031 F4-A - Forecast Source Discovery and Integration Contract') && nav.includes('ADR-011 - Forecast Source and Run Lineage'), 'MkDocs navigation does not expose F4-A.');
 
 assert.equal(roadmap.currentPackage, 'BKL-031');
-assert.equal(roadmap.nextMilestone, 'BKL-031 F4-C bounded acquisition gate preparation');
+assert.equal(roadmap.nextMilestone, 'BKL-031 F4-C one-request generalized acquisition gate acceptance');
 assert.ok(roadmap.projectStatus.includes('F4-A and ADR-011 accepted') && roadmap.projectStatus.includes('zero provider traffic') && roadmap.projectStatus.includes('S10 runtime unavailable'), 'Roadmap F4-A status/boundary mismatch.');
 assert.ok(roadmap.milestones.some((item) => item.id === 'M-BKL031-F4-A-SOURCE-CONTRACT'), 'Roadmap F4-A milestone missing.');
 assert.ok(roadmap.milestones.some((item) => item.id === 'M-BKL031-F4-A-ACCEPTANCE'), 'Roadmap F4-A acceptance milestone missing.');
