@@ -50,19 +50,20 @@ const index = fs.readFileSync(paths.index, 'utf8');
 const nav = fs.readFileSync(paths.nav, 'utf8');
 const roadmap = JSON.parse(fs.readFileSync(paths.roadmap, 'utf8'));
 
-for (const fragment of ['**IMPLEMENTED — ACCEPTANCE REVIEW PENDING**', '35-case adapter/projection/browser suite', 'S10 remains `UNAVAILABLE`', 'Production runtime activation remains a separate authorization']) assert.ok(architecture.includes(fragment), `F3-C architecture record missing: ${fragment}`);
-for (const fragment of ['**ACCEPTANCE CANDIDATE — POST-MERGE VERIFICATION PENDING**', '35/35 passing locally', '`/observation-planner/`', 'S10 remains `UNAVAILABLE`']) assert.ok(acceptance.includes(fragment), `F3-C acceptance record missing: ${fragment}`);
-for (const fragment of ['data-observation-planner', 'integrazione F3-C in verifica', 'Non sono una proposta osservativa']) assert.ok(page.includes(fragment), `Observation Planner page missing: ${fragment}`);
+for (const fragment of ['**ACCEPTED — POST-MERGE VERIFIED**', '35-case adapter/projection/browser suite', 'Pull request #261', 'all 12 applicable post-merge workflows', 'S10 remains `UNAVAILABLE`', 'Production runtime activation remains separately authorized']) assert.ok(architecture.includes(fragment), `F3-C architecture record missing: ${fragment}`);
+for (const fragment of ['**ACCEPTED — POST-MERGE VERIFIED**', '35/35 passing locally and in governed CI', 'fba1287efea0d1f36b147bc42a4fec5498990756', 'https://maininimassimo-bit.github.io/digital-stargate-manual/observation-planner/', '35194573308', 'S10 remains `UNAVAILABLE`']) assert.ok(acceptance.includes(fragment), `F3-C acceptance record missing: ${fragment}`);
+for (const fragment of ['data-observation-planner', 'F3-C accettata e verificata dopo l’integrazione', 'Non sono una proposta osservativa']) assert.ok(page.includes(fragment), `Observation Planner page missing: ${fragment}`);
 for (const fragment of ['validateObservationPlannerProjection', "fetch('../data/observation-planner-ephemeris-lunar-f3c-projection.json'", 'S10 runtime resta']) assert.ok(browser.includes(fragment), `Observation Planner browser consumer missing: ${fragment}`);
 for (const fragment of ['crypto.subtle.digest', 'TEST/NONE', 'projectionDigest']) assert.ok(browserCore.includes(fragment), `Observation Planner browser validator missing: ${fragment}`);
 assert.ok(workflow.includes('F3-C bounded adapter, projection and portal') && workflow.includes('test-observation-planner-ephemeris-lunar-f3c.mjs'), 'F3-C workflow is incomplete.');
 assert.ok(developer.includes('Verify Observation Planner F3-C bounded integration') && developer.includes('Test Observation Planner F3-C adapter and portal boundaries'), 'Developer Foundation does not execute F3-C gates.');
-assert.ok(backlog.includes('F3-C bounded adapter') && backlog.includes('35/35 local tests'), 'Backlog does not identify the F3-C candidate.');
-assert.ok(knowledge.includes('F3-C now implements') && index.includes('F3-C Bounded Adapter, Projection and Portal'), 'Continuity documents do not identify F3-C.');
+assert.ok(backlog.includes('F3-C Accepted/Post-Merge Verified') && backlog.includes('35/35 tests'), 'Backlog does not identify the accepted F3-C gate.');
+assert.ok(knowledge.includes('F3-C is Accepted / Post-Merge Verified') && index.includes('F3-C Bounded Adapter, Projection and Portal'), 'Continuity documents do not identify accepted F3-C.');
 assert.ok(nav.includes('Observation Planner: observation-planner/index.md') && nav.includes('BKL-031 F3-C - Bounded Adapter, Projection and Portal'), 'MkDocs navigation does not expose F3-C.');
 assert.equal(roadmap.currentPackage, 'BKL-031');
-assert.equal(roadmap.nextMilestone, 'BKL-031 F3-C exact-head acceptance and portal verification');
-assert.ok(roadmap.projectStatus.includes('F3-C bounded adapter') && roadmap.projectStatus.includes('S10 runtime unavailable'), 'Roadmap F3-C status/boundary mismatch.');
+assert.equal(roadmap.nextMilestone, 'BKL-031 F4 forecast source discovery and integration contract');
+assert.ok(roadmap.projectStatus.includes('F3-C accepted and post-merge verified') && roadmap.projectStatus.includes('S10 runtime unavailable'), 'Roadmap F3-C status/boundary mismatch.');
 assert.ok(roadmap.milestones.some(item => item.id === 'M-BKL031-F3-C-IMPLEMENTATION'), 'Roadmap F3-C implementation milestone missing.');
+assert.ok(roadmap.milestones.some(item => item.id === 'M-BKL031-F3-C-ACCEPTANCE'), 'Roadmap F3-C acceptance milestone missing.');
 
 console.log(`BKL-031 F3-C verified: ${projection.facts.length} sanitized facts, adapter ${projection.method.adapterId}@${projection.method.adapterVersion}, digest ${projection.projectionDigest}; S10 ${projection.boundary.runtimeState}.`);

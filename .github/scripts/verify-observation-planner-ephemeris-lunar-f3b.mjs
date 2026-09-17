@@ -58,10 +58,10 @@ const backlog = fs.readFileSync('docs/project/BACKLOG.md', 'utf8');
 const roadmap = JSON.parse(fs.readFileSync('.github/roadmap/roadmap-source.json', 'utf8'));
 for (const fragment of ['**ACCEPTED — POST-MERGE VERIFIED**', documents.fixture.contractDigest, '34 tests', 'F3-C is promoted as the next bounded gate']) assert.ok(architecture.includes(fragment), `F3-B architecture record missing: ${fragment}`);
 for (const fragment of ['**ACCEPTED — POST-MERGE VERIFIED**', '34/34 passing locally and in governed CI', 'S10 remains `UNAVAILABLE`', '35192376713', '35192376685']) assert.ok(acceptance.includes(fragment), `F3-B acceptance record missing: ${fragment}`);
-assert.ok(backlog.includes('F3-B Accepted/Post-Merge Verified') && backlog.includes('34/34 contract tests'), 'BKL-031 backlog does not identify the accepted F3-B gate.');
+assert.ok(backlog.includes('F3-C Accepted/Post-Merge Verified') && backlog.includes('F4 forecast source discovery'), 'BKL-031 backlog does not preserve the accepted successor state after F3-B.');
 assert.equal(roadmap.currentPackage, 'BKL-031');
-assert.equal(roadmap.nextMilestone, 'BKL-031 F3-C exact-head acceptance and portal verification');
-assert.ok(roadmap.projectStatus.includes('F3-B accepted and post-merge verified') && roadmap.projectStatus.includes('S10 runtime unavailable'), 'roadmap F3-B status/boundary mismatch.');
+assert.equal(roadmap.nextMilestone, 'BKL-031 F4 forecast source discovery and integration contract');
+assert.ok(roadmap.projectStatus.includes('F3-C accepted and post-merge verified') && roadmap.projectStatus.includes('S10 runtime unavailable'), 'roadmap successor status/boundary mismatch after F3-B.');
 assert.ok(roadmap.milestones.some((item) => item.id === 'M-BKL031-F3-B-ACCEPTANCE'), 'roadmap F3-B acceptance milestone missing.');
 
 console.log(`BKL-031 F3-B contracts verified: three source-neutral schemas, ${documents.fixture.request.evaluationTimesUtc.length} bounded instants, ${documents.fixture.evidence.facts.length} normalized facts, digest ${documents.fixture.contractDigest}.`);
