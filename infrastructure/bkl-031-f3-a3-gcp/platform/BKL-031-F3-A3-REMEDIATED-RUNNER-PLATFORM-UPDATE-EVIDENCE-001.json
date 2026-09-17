@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0",
+  "evidenceId": "BKL-031-F3-A3-REMEDIATED-RUNNER-PLATFORM-UPDATE-EVIDENCE-001",
+  "status": "EXACT_REMEDIATED_RUNNER_PLATFORM_UPDATED_POST_VERIFIED",
+  "recordedAtUtc": "2026-09-17T00:22:18Z",
+  "source": {
+    "gateCommit": "50290eb0c1fdcb1405f871b88cbf3367886c3163",
+    "runnerCommit": "5ce8214311757c974134494dcc8f1e232dd4c390",
+    "runnerImage": "europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike@sha256:f82acf36b79d6f3d8a3ba501b63bdba3ed446e7cf9070f477b01ed5d356ccb52",
+    "publicationEvidence": "BKL-031-F3-A3-REMEDIATED-RUNNER-OCI-PUBLICATION-EVIDENCE-001"
+  },
+  "continuousIntegration": {
+    "provider": "GitHub Actions",
+    "workflow": "BKL-031 F3-A3 Remediated Runner Platform Update",
+    "runId": 35166175815,
+    "jobId": 105027664096,
+    "event": "workflow_dispatch",
+    "createdAtUtc": "2026-09-17T00:20:47Z",
+    "startedAtUtc": "2026-09-17T00:20:52Z",
+    "completedAtUtc": "2026-09-17T00:22:18Z",
+    "runUrl": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35166175815",
+    "conclusion": "SUCCESS"
+  },
+  "apply": {
+    "savedPlan": "0_ADD_1_CHANGE_0_DESTROY",
+    "resource": "google_cloud_run_v2_job.spike",
+    "action": "UPDATE",
+    "priorRunnerCommit": "9db0267529b6d46a2510b415e4b3f51d668ff024",
+    "priorRunnerImage": "europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike@sha256:69a20a994fde9d5b1533b142760af5796b4ac795a1f00c658373a46d2648d60c",
+    "afterRunnerCommit": "5ce8214311757c974134494dcc8f1e232dd4c390",
+    "afterRunnerImage": "europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike@sha256:f82acf36b79d6f3d8a3ba501b63bdba3ed446e7cf9070f477b01ed5d356ccb52"
+  },
+  "platformState": {
+    "serial": 6,
+    "lineage": "2be9b82b-88d3-888f-4fcd-dded2f74f7f3",
+    "rawSha256": "151721051c7f93db039fcfbc7fd14c0500e7beb37fbb406f1a17d35ca63adb41",
+    "resourceCount": 4,
+    "immediateDrift": "ZERO"
+  },
+  "postconditions": {
+    "jobGeneration": 3,
+    "subnetCidr": "10.88.0.0/26",
+    "registryImageCount": 3,
+    "executionNames": [
+      "dsg-f3-a3-spike-9drzb",
+      "dsg-f3-a3-spike-jv646"
+    ],
+    "executionCount": 2,
+    "kernelGeneration": "1789590110146663",
+    "kernelSha256": "54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c"
+  },
+  "controls": {
+    "registryMutation": "NOT_EXECUTED",
+    "kernelMutation": "NOT_EXECUTED",
+    "jobExecution": "NOT_EXECUTED",
+    "scientificExecution": "NOT_EXECUTED",
+    "externalReferenceTraffic": "NOT_EXECUTED",
+    "protectedSiteUse": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED",
+    "runtimeAuthority": false
+  },
+  "nextGate": "EXACT_SINGLE_REMEDIATED_SCIENTIFIC_EXECUTION"
+}
