@@ -1,25 +1,25 @@
-# BKL-031 F4-C — Replacement Generalized Forecast Acquisition Gate
+# BKL-031 F4-C — Generalized Forecast Acquisition Gate
 
 | Field | Value |
 |---|---|
 | Identifier | `BKL-031-F4-C-GATE-002` |
-| Status | **REMEDIATION REVIEW CANDIDATE — REPLACEMENT NOT EXECUTED** |
+| Status | **EXECUTED — REQUEST BUDGET EXHAUSTED / EVIDENCE RECONCILED** |
 | Date | 2026-09-17 |
-| Predecessor | F4-C first attempt failed after one provider request |
-| First attempt | GitHub Actions run `35201479378`; HTTP 400; request consumed |
-| Replacement budget | Exactly one HTTPS GET; cumulative F4-C ceiling two requests |
+| First attempt | Run `35201479378`; HTTP 400; request consumed; no artifact |
+| Replacement attempt | Run `35214129960`; HTTP 200 raw response; normalization failed closed |
+| Request accounting | Two of two requests consumed; no further request authorized |
 | Location | Synthetic/generalized `42.0, 12.0` |
-| Protected-site use | Prohibited |
+| Protected-site use | False |
 | Runtime effect | None |
 
-The original gate was merged at `48bd61a3337523b7790d78a37813eaf5e1228724`, passed 15/15 post-merge workflows and was dispatched once. Its request reached `previous-runs-api.open-meteo.com` and returned HTTP 400. No artifact was produced because the original workflow uploaded evidence only after success. The request is recorded as consumed and is not retried.
+Gate 001 was merged at `48bd61a3337523b7790d78a37813eaf5e1228724`, passed 15/15 post-merge workflows and issued one request to the incorrect Previous Runs host. The provider returned HTTP 400. The request was recorded as consumed and was not retried.
 
-The source contract and official documentation identify Open-Meteo Single Runs as the required delivery interface for an explicit `run`. The remediation changes the host to `single-runs-api.open-meteo.com`, removes model-unavailable `visibility`, fixes the supported vocabulary at ten variables and authorizes one replacement request under the exact confirmation `F4C_ONE_REPLACEMENT_REQUEST`.
+Gate 002 corrected the interface to `single-runs-api.open-meteo.com`, removed model-unavailable `visibility`, fixed the supported vocabulary at ten variables and was merged at `053fc766bfc7908a984828cc335eef07a558909c` after 19/19 exact-head checks and 15/15 post-merge workflows. Replacement run `35214129960` issued the final authorized request and received a 4,723-byte HTTP 200 JSON response with SHA-256 `e51c6935f8e04bcce38983bc03147f4f897a833f90feb6271b2f510ee6eec102`.
 
-The manual main-only workflow accepts an exact authorized main SHA and one explicit ICON-2I 00/12 UTC run no older than 18 hours. It checks that the authorized SHA is still the remote main head before executing. The request fixes the generalized point, explicit model, 72 forecast hours, GMT/ISO-8601 output, land-cell selection and provider elevation disabled. It accepts no coordinate inputs.
+The replacement workflow failed closed because `precipitation` was null at the run-initialization instant `2026-09-17T00:00:00Z`. Its always-upload control preserved artifact `10494298154` as `bkl-031-f4c-evidence-35214129960`. No network retry followed.
 
-The script contains one fetch site, denies redirects, permits one request in the replacement attempt, enforces a 10-second timeout and 2,000,000-byte response ceiling, validates JSON, hourly lengths and finite values, and computes the raw SHA-256. Request plan and failure evidence are written before or immediately after the request; the workflow uploads the seven-day artifact even when execution fails. A successful response adds raw and normalized evidence.
+Offline reconciliation verified the raw digest and all 72 returned hourly positions. It excluded the single incomplete initialization instant, accepted the complete contiguous suffix from `2026-09-17T01:00:00Z` through `2026-09-19T23:00:00Z`, performed zero imputations and produced 71-instant normalized evidence with digest `350a7b9ae8b2de308ba55a7105e56bb4de5040572370ab2715c0fa70088af2f5`. Raw and normalized evidence remain outside the Pages input under `governance/forecast-evidence/`.
 
-This gate authorizes a cumulative maximum of two F4-C provider requests: the consumed failed request in run `35201479378` and one replacement request. It prohibits any third request, protected-site egress, retry loop, schedule, recurring traffic, production use, runtime activation, public projection, ranking, readiness, commands or Safety Authority.
+The acquisition workflow and executable acquisition script are removed after reconciliation. The repository therefore exposes no third-request dispatch path. F4-C authorizes no protected-site egress, retry loop, schedule, recurring traffic, production use, runtime activation, public projection, ranking, readiness, commands or Safety Authority.
 
-After exact-head review, expected-head merge and post-merge verification, one dispatch may execute the replacement gate. Stop after the evidence artifact is produced and reconcile the run before any F4-D projection work.
+F4-D may now prepare a separately reviewed sanitized read-only projection from the reconciled evidence. It must preserve availability, exclusion, run, model, attribution and no-authority semantics.

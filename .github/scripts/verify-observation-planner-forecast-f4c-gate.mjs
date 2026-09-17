@@ -1,57 +1,55 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
-const script = fs.readFileSync('.github/scripts/observation-planner-forecast-f4c-acquire.mjs', 'utf8');
-const workflow = fs.readFileSync('.github/workflows/bkl-031-f4-c-acquire-once.yml', 'utf8');
 const gate = fs.readFileSync('docs/architecture/scientific-assets/BKL-031-F4-C-One-Request-Generalized-Forecast-Acquisition-Gate.md', 'utf8');
-const failure = fs.readFileSync('docs/architecture/validation/BKL-031-F4-C-Failed-Acquisition-and-Remediation-Gate-2026-09-17.md', 'utf8');
+const firstFailure = fs.readFileSync('docs/architecture/validation/BKL-031-F4-C-Failed-Acquisition-and-Remediation-Gate-2026-09-17.md', 'utf8');
+const reconciliation = fs.readFileSync('docs/architecture/validation/BKL-031-F4-C-Acquisition-Evidence-Reconciliation-2026-09-17.md', 'utf8');
+const normalized = JSON.parse(fs.readFileSync('governance/forecast-evidence/BKL031-F4C-RUN-35214129960/normalized-evidence.json', 'utf8'));
 
-assert.equal((script.match(/fetch\(/g) ?? []).length, 1, 'gate must contain exactly one fetch site');
-for (const expected of [
-  "latitude: '42.0'",
-  "longitude: '12.0'",
-  "https://single-runs-api.open-meteo.com/v1/forecast",
-  "redirect: 'manual'",
-  'maxRequestsThisAttempt: 1',
-  'maxCumulativeProviderRequests: 2',
-  'maxResponseBytes: 2000000',
-  'F4C_ONE_REPLACEMENT_REQUEST',
-  'priorFailedWorkflowRunId: 35201479378',
-  "unavailableVariables: ['visibility']",
-  'protectedSiteUsed: false'
-]) assert.ok(script.includes(expected), `script missing ${expected}`);
-assert.ok(!script.match(/^\s*'visibility',?$/m), 'visibility must not be requested');
+assert.equal(fs.existsSync('.github/workflows/bkl-031-f4-c-acquire-once.yml'), false, 'exhausted acquisition workflow must be removed');
+assert.equal(fs.existsSync('.github/scripts/observation-planner-forecast-f4c-acquire.mjs'), false, 'exhausted acquisition script must be removed');
 
 for (const expected of [
-  'workflow_dispatch:',
-  'expected_main_sha:',
-  'run_initialisation_utc:',
-  'git ls-remote origin refs/heads/main',
-  'F4C_ONE_REPLACEMENT_REQUEST',
-  "id: acquire",
-  "if: always() && steps.acquire.outcome != 'skipped'",
-  'retention-days: 7'
-]) assert.ok(workflow.includes(expected), `workflow missing ${expected}`);
-assert.ok(!workflow.includes('schedule:'), 'workflow must not be scheduled');
-
-for (const expected of [
-  '**REMEDIATION REVIEW CANDIDATE — REPLACEMENT NOT EXECUTED**',
-  'Exactly one HTTPS GET; cumulative F4-C ceiling two requests',
-  'Synthetic/generalized `42.0, 12.0`',
-  'one fetch site',
-  'prohibits any third request',
-  'Stop after the evidence artifact'
-]) assert.ok(gate.includes(expected), `gate document missing ${expected}`);
-for (const expected of [
-  '**FAILED / REQUEST CONSUMED / REMEDIATION PREPARED**',
+  '**EXECUTED — REQUEST BUDGET EXHAUSTED / EVIDENCE RECONCILED**',
   '35201479378',
-  '48bd61a3337523b7790d78a37813eaf5e1228724',
+  '35214129960',
+  '053fc766bfc7908a984828cc335eef07a558909c',
+  '10494298154',
+  'e51c6935f8e04bcce38983bc03147f4f897a833f90feb6271b2f510ee6eec102',
+  '350a7b9ae8b2de308ba55a7105e56bb4de5040572370ab2715c0fa70088af2f5',
+  '71-instant normalized evidence',
+  'no third-request dispatch path',
+  'F4-D'
+]) assert.ok(gate.includes(expected), `gate record missing ${expected}`);
+for (const expected of [
+  '**FIRST REQUEST FAILED / REMEDIATION EXECUTED / HISTORICAL EVIDENCE**',
   'Provider HTTP 400',
-  'No automatic or manual retry was made'
-]) assert.ok(failure.includes(expected), `failure evidence missing ${expected}`);
+  'No automatic or manual retry was made',
+  'no third request is permitted'
+]) assert.ok(firstFailure.includes(expected), `first failure record missing ${expected}`);
+for (const expected of [
+  '**RECONCILED EVIDENCE CANDIDATE / NO FURTHER REQUEST**',
+  'HTTP 200; 4,723 bytes',
+  'DROP_INCOMPLETE_INSTANT_NO_IMPUTATION',
+  'accepted exactly indices 1–71',
+  'imputed zero values',
+  'No further provider request is authorized'
+]) assert.ok(reconciliation.includes(expected), `reconciliation record missing ${expected}`);
+
+assert.equal(normalized.workflowRunId, 35214129960);
+assert.equal(normalized.artifactId, 10494298154);
+assert.equal(normalized.source.rawResponseSha256, 'e51c6935f8e04bcce38983bc03147f4f897a833f90feb6271b2f510ee6eec102');
+assert.equal(normalized.normalization.rawHourlyInstantCount, 72);
+assert.equal(normalized.normalization.acceptedHourlyInstantCount, 71);
+assert.equal(normalized.normalization.excludedHourlyInstantCount, 1);
+assert.equal(normalized.normalization.imputedValueCount, 0);
+assert.equal(normalized.requestAccounting.cumulativeProviderRequestCount, 2);
+assert.equal(normalized.requestAccounting.furtherRequestsAuthorized, false);
+assert.equal(normalized.boundaries.publicProjection, false);
+assert.equal(normalized.location.protectedSiteUsed, false);
 
 const roadmap = JSON.parse(fs.readFileSync('.github/roadmap/roadmap-source.json', 'utf8'));
-assert.equal(roadmap.nextMilestone, 'BKL-031 F4-C one-replacement-request remediation gate acceptance');
+assert.equal(roadmap.nextMilestone, 'BKL-031 F4-D sanitized forecast projection and portal integration');
 assert.ok(roadmap.milestones.some((entry) => entry.id === 'M-BKL031-F4-C-FIRST-ATTEMPT-FAILED'));
-assert.ok(roadmap.milestones.some((entry) => entry.id === 'M-BKL031-F4-C-ACQUISITION-GATE'));
-console.log('BKL-031 F4-C remediation verified: failed request consumed, Single Runs correction, one replacement request, cumulative ceiling two, no protected-site input, no schedule; replacement NOT EXECUTED.');
+assert.ok(roadmap.milestones.some((entry) => entry.id === 'M-BKL031-F4-C-EVIDENCE-RECONCILIATION'));
+console.log('BKL-031 F4-C gate verified: two requests consumed, HTTP 200 raw evidence reconciled to 71 complete instants with zero imputation, acquisition path removed, no protected-site use; F4-D promoted.');
