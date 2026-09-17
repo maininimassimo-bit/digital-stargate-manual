@@ -7,7 +7,7 @@
 | Stato | Active |
 | Data | 17/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | F4-B Accepted/Post-Merge Verified; F4-C bounded synthetic/generalized acquisition gate preparation next; zero provider traffic so far; S10 production runtime unavailable |
+| Current governed package | F4-C exact-main one-request generalized acquisition gate review candidate; not executed; zero provider traffic so far; S10 production runtime unavailable |
 
 ## 1. Scopo
 

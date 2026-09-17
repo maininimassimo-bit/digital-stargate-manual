@@ -2,10 +2,10 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-17",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-C accepted and post-merge verified; ADR-010 accepted; F4-A and ADR-011 accepted and post-merge verified; F4-B accepted and post-merge verified through PR #265 with 26/26 tests, 18/18 exact-head checks and 14/14 post-merge workflows; zero provider traffic and zero protected-site use; S10 runtime unavailable",
+  "projectStatus": "BKL-031 F3-C accepted and post-merge verified; ADR-010 accepted; F4-A and ADR-011 accepted and post-merge verified; F4-B accepted and post-merge verified; F4-C exact-main one-request generalized acquisition gate prepared but not executed; zero provider traffic and zero protected-site use; S10 runtime unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F4-C bounded acquisition gate preparation",
-  "target": "Prepare the exact F4-C network/privacy gate for one bounded synthetic/generalized ItaliaMeteo/ARPAE ICON-2I single-run acquisition. Keep protected-site egress, recurring traffic, production runtime, public projection, ranking, readiness, commands and Safety Authority unavailable.",
+  "nextMilestone": "BKL-031 F4-C one-request generalized acquisition gate acceptance",
+  "target": "Review and integrate the F4-C exact-main gate, then authorize exactly one synthetic/generalized ICON-2I request. Keep protected-site egress, recurring traffic, production runtime, public projection, ranking, readiness, commands and Safety Authority unavailable.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F4-A/ADR-011 and F4-B are Accepted/Post-Merge Verified. F4-B passed 26/26 tests and all 14 post-merge workflows with zero provider traffic. F4-C one-request synthetic/generalized acquisition-gate preparation is next; protected-site use and S10 remain unavailable."
+          "note": "F4-B is Accepted/Post-Merge Verified. F4-C has an exact-main manual gate for one generalized 42.0,12.0 request with no coordinate input, redirects, retry loop or schedule; it is not executed. Gate acceptance precedes the one dispatch; S10 remains unavailable."
         },
         {
           "id": "BKL-032",
@@ -699,6 +699,13 @@
       "title": "BKL-031 F4-B Forecast Contracts Acceptance",
       "date": "2026-09-17",
       "description": "PR #265 passed 18/18 exact-head checks on ba8f63a9d923f1daf2aca7c7c2173aacf6c0e051, merged as b3a136efc2bd8b7afd16a817a22cfaa9211f069e and passed 14/14 post-merge workflows. F4-B is Accepted/Post-Merge Verified with zero provider traffic; F4-C acquisition-gate preparation is promoted."
+    },
+    {
+      "id": "M-BKL031-F4-C-ACQUISITION-GATE",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F4-C One-Request Generalized Acquisition Gate",
+      "date": "2026-09-17",
+      "description": "Manual exact-main gate fixes one generalized 42.0,12.0 HTTPS request, explicit ICON-2I run, eleven variables, no redirects, 10-second timeout, 2 MB limit and seven-day evidence artifact. Not executed; zero provider traffic and no protected-site input."
     }
   ]
 }

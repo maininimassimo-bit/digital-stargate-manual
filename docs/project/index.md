@@ -56,6 +56,7 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [F4-A Forecast Source Contract Acceptance](BKL-031-F4-A-FORECAST-SOURCE-CONTRACT-ACCEPTANCE-2026-09-17.md) | Accepted/Post-Merge Verified via PR #263; 16/16 exact-head checks and 13/13 post-merge workflows |
 | [F4-B Forecast Machine-Readable Contracts, Fixture and Validator](../architecture/scientific-assets/BKL-031-F4-B-Forecast-Machine-Readable-Contracts-Fixture-and-Validator.md) | Accepted/Post-Merge Verified; three closed schemas, four synthetic hourly instants and 24/24 fail-closed cases |
 | [F4-B Forecast Contracts Acceptance](BKL-031-F4-B-FORECAST-CONTRACTS-ACCEPTANCE-2026-09-17.md) | PR #265; 18/18 exact-head checks, 14/14 post-merge workflows and zero provider traffic |
+| [F4-C One-Request Generalized Forecast Acquisition Gate](../architecture/scientific-assets/BKL-031-F4-C-One-Request-Generalized-Forecast-Acquisition-Gate.md) | Review candidate; exact-main, one generalized request, no protected-site input; not executed |
 | [F3-A3 Owner Decision Record](BKL-031-F3-A3-OWNER-DECISION-RECORD-2026-09-15.md) | Complete owner decision; no execution authority |
 | [F3-A3 F3-OD05 Exact SPK Approval](BKL-031-F3-A3-F3-OD05-SPK-APPROVAL-2026-09-16.md) | `de442s.bsp` identity, coverage, provenance and notices approved; no upload/execution authority |
 | [F3-A3 Google Cloud Hosting Plan](../architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md) | Bootstrap/remote state post-verified; static container/IERS evidence prepared; platform not executed |
