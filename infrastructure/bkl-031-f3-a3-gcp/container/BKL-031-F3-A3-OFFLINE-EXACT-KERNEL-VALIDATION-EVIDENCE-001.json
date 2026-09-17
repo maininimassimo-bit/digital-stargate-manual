@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0",
+  "evidenceId": "BKL-031-F3-A3-OFFLINE-EXACT-KERNEL-VALIDATION-EVIDENCE-001",
+  "status": "EXACT_KERNEL_OFFLINE_SCIENTIFIC_VALIDATION_PASS",
+  "recordedAtUtc": "2026-09-17T00:01:00Z",
+  "source": {
+    "commit": "90878ba9a495bf783eeac1637e61836ea95db646",
+    "runnerManifest": "BKL-031-F3-A3-RUNNER-MANIFEST-004",
+    "runnerManifestRawSha256": "11163d6ac4901341b409e686740a2090ae23f93eba08ed8b4aa8c8bb98c3f740"
+  },
+  "candidate": {
+    "continuousIntegrationRunId": 35164161946,
+    "continuousIntegrationJobId": 105021384998,
+    "manifestDigest": "sha256:f82acf36b79d6f3d8a3ba501b63bdba3ed446e7cf9070f477b01ed5d356ccb52",
+    "configDigest": "sha256:75bc408cdfb4e9fc1fe0db59c47f8ff71245b73d76ae66cfe02fd03910f74f87",
+    "reproducibility": "TWO_OCI_NO_CACHE_BUILDS_REWRITE_TIMESTAMP_IDENTICAL"
+  },
+  "validation": {
+    "workflowRunId": 35164615536,
+    "workflowJobId": 105022805528,
+    "conclusion": "SUCCESS",
+    "kernel": {
+      "generation": "1789590110146663",
+      "sha256": "54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c",
+      "sizeBytes": 32701440,
+      "retrieval": "PRIVATE_GCS_READ_ONLY"
+    },
+    "targetResolution": {
+      "mars": "mars barycenter",
+      "moon": "moon"
+    },
+    "vectorCount": 8,
+    "metricPassCount": 17,
+    "metricEvaluationCount": 17,
+    "allEvaluatedMetricsPass": true,
+    "repeatabilityPass": true,
+    "transit": {
+      "target": "mars",
+      "errorSeconds": 0.08065768669985118,
+      "pass": true,
+      "method": "BOUNDED_ONE_MINUTE_GRID_WITH_LOCAL_PARABOLIC_REFINEMENT"
+    }
+  },
+  "controls": {
+    "containerNetwork": "NONE",
+    "cloudMutation": "NOT_EXECUTED",
+    "evidenceUpload": "NOT_EXECUTED",
+    "externalReferenceTraffic": "NOT_EXECUTED",
+    "jobExecution": "NOT_EXECUTED",
+    "platformMutation": "NOT_EXECUTED",
+    "protectedSiteUse": "NOT_EXECUTED",
+    "registryMutation": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED",
+    "runtimeAuthority": false
+  },
+  "nextGate": "EXACT_REMEDIATED_RUNNER_OCI_PUBLICATION"
+}
