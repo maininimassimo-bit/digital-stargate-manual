@@ -1,0 +1,47 @@
+name: BKL-031 F7 Fresh Forecast Supply Governance
+on:
+  pull_request:
+    paths:
+      - docs/architecture/scientific-assets/BKL-031-F7-Fresh-Forecast-Supply-and-Runtime-Boundary.md
+      - docs/architecture/validation/BKL-031-F7-*.md
+      - schemas/observation-planner-forecast-runtime-supply-f7.schema.json
+      - schemas/observation-planner-forecast-projection-f7-site.schema.json
+      - docs/data/observation-planner-forecast-f7-site-projection.json
+      - docs/javascripts/observation-planner-forecast-f7-site.js
+      - docs/observation-planner/index.md
+      - .github/scripts/verify-observation-planner-forecast-f7.mjs
+      - .github/scripts/test-observation-planner-forecast-f7.mjs
+      - .github/workflows/bkl-031-f7-governance.yml
+      - governance/forecast-evidence/BKL031-F7-**
+      - governance/site-authority/site-records/DSG-SITE-RECORD-MANCIANO-001.approved.json
+  push:
+    branches: [main]
+    paths:
+      - docs/architecture/scientific-assets/BKL-031-F7-Fresh-Forecast-Supply-and-Runtime-Boundary.md
+      - docs/architecture/validation/BKL-031-F7-*.md
+      - schemas/observation-planner-forecast-runtime-supply-f7.schema.json
+      - schemas/observation-planner-forecast-projection-f7-site.schema.json
+      - docs/data/observation-planner-forecast-f7-site-projection.json
+      - docs/javascripts/observation-planner-forecast-f7-site.js
+      - docs/observation-planner/index.md
+      - .github/scripts/verify-observation-planner-forecast-f7.mjs
+      - .github/scripts/test-observation-planner-forecast-f7.mjs
+      - .github/workflows/bkl-031-f7-governance.yml
+      - governance/forecast-evidence/BKL031-F7-**
+      - governance/site-authority/site-records/DSG-SITE-RECORD-MANCIANO-001.approved.json
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify F7 protected-site evidence, privacy and portal projection
+        run: node .github/scripts/verify-observation-planner-forecast-f7.mjs
+      - name: Test F7 protected-site fail-closed mutations
+        run: node .github/scripts/test-observation-planner-forecast-f7.mjs
+      - name: Check F7 browser consumer syntax
+        run: node --check docs/javascripts/observation-planner-forecast-f7-site.js

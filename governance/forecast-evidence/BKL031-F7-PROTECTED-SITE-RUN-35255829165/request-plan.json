@@ -1,0 +1,37 @@
+{
+  "gateId": "BKL031-F7-PROTECTED-SITE-ONE-FRESH-FORECAST-REQUEST-001",
+  "authorizationId": "BKL031-F7-PROTECTED-SITE-PROVIDER-REQUEST-AUTH-001",
+  "privacyDecisionId": "BKL031-F7-PROTECTED-SITE-OUTBOUND-PRIVACY-AUTH-001",
+  "expectedHost": "single-runs-api.open-meteo.com",
+  "method": "GET",
+  "redirects": "DENY",
+  "maxRequestsThisGate": 1,
+  "timeoutMs": 10000,
+  "maxResponseBytes": 2000000,
+  "location": {
+    "classification": "PROTECTED_EXACT_SITE",
+    "siteAuthorityRef": "DSG-SITE-RECORD-MANCIANO-001",
+    "publicLabel": "Manciano (GR), Italia",
+    "coordinatesPersisted": false,
+    "coordinatesPublished": false
+  },
+  "providerId": "OPEN_METEO",
+  "upstreamAuthorityId": "ITALIAMETEO_ARPAE",
+  "modelId": "italia_meteo_arpae_icon_2i",
+  "runInitialisationUtc": "2026-09-17T12:00Z",
+  "variables": [
+    "temperature_2m",
+    "relative_humidity_2m",
+    "dew_point_2m",
+    "precipitation",
+    "cloud_cover",
+    "cloud_cover_low",
+    "cloud_cover_mid",
+    "cloud_cover_high",
+    "wind_speed_10m",
+    "wind_gusts_10m"
+  ],
+  "protectedSiteUsed": true,
+  "recurringTraffic": false,
+  "productionUse": false
+}

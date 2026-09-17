@@ -1,0 +1,28 @@
+{
+  "authorizationId": "BKL031-F7-PROTECTED-SITE-PROVIDER-REQUEST-AUTH-001",
+  "scope": "BKL-031-F7-PROTECTED-SITE-FRESH-FORECAST",
+  "status": "AUTHORIZED",
+  "grantedAtUtc": "2026-09-17T17:13:00Z",
+  "decidingAuthority": "github:user:maininimassimo-bit",
+  "decisionBasis": "Owner explicitly authorized proceeding and required real Observation Planner forecast data referenced to the governed technical observatory coordinates.",
+  "privacyDecisionRef": "governance/forecast-evidence/BKL031-F7-PROTECTED-SITE-OUTBOUND-PRIVACY-AUTH-001.json",
+  "siteAuthorityRef": "governance/site-authority/site-records/DSG-SITE-RECORD-MANCIANO-001.approved.json",
+  "locationClassification": "PROTECTED_EXACT_SITE",
+  "protectedSiteUsed": true,
+  "providerId": "OPEN_METEO",
+  "upstreamAuthorityId": "ITALIAMETEO_ARPAE",
+  "modelId": "italia_meteo_arpae_icon_2i",
+  "runInitialisationUtc": "2026-09-17T12:00Z",
+  "maxProviderRequests": 1,
+  "requestBudgetState": "0/1_AUTHORIZED",
+  "recurringTraffic": false,
+  "productionUse": false,
+  "publicProjectionPolicy": "SANITIZED_VALUES_ONLY_NO_COORDINATES_NO_RETURNED_GRID",
+  "boundaries": {
+    "readinessAuthority": false,
+    "schedulingAuthority": false,
+    "automaticTargetSelection": false,
+    "commandAuthority": "NONE",
+    "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
+  }
+}

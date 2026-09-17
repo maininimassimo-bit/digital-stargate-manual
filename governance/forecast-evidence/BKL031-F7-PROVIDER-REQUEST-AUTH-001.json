@@ -1,0 +1,30 @@
+{
+  "authorizationId": "BKL031-F7-PROVIDER-REQUEST-AUTH-001",
+  "scope": "BKL-031-F7-FRESH-FORECAST-SUPPLY",
+  "status": "AUTHORIZED",
+  "grantedAtUtc": "2026-09-17T15:55:00Z",
+  "approvalBasis": "OWNER_EXPLICIT_CHAT_AUTHORIZATION_2026-09-17",
+  "maxProviderRequests": 1,
+  "providerId": "OPEN_METEO",
+  "upstreamAuthorityId": "ITALIAMETEO_ARPAE",
+  "modelId": "italia_meteo_arpae_icon_2i",
+  "runInitialisationUtc": "2026-09-17T12:00Z",
+  "location": {
+    "classification": "SYNTHETIC_GENERALIZED",
+    "latitudeDeg": 42.0,
+    "longitudeDeg": 12.0,
+    "siteAuthorityRef": "SITE-PUBLIC-SYNTHETIC-FORECAST-IT-01"
+  },
+  "protectedSiteUsed": false,
+  "recurringTraffic": false,
+  "productionUse": false,
+  "requestBudgetBeforeExecution": "0/1_AUTHORIZED",
+  "requestBudgetAfterAnyAttempt": "1/1_EXHAUSTED",
+  "boundaries": {
+    "readinessAuthority": false,
+    "schedulingAuthority": false,
+    "automaticTargetSelection": false,
+    "commandAuthority": "NONE",
+    "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
+  }
+}
