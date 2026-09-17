@@ -4,14 +4,14 @@
 |---|---|
 | Stato | Current governed baseline |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
-| Baseline implementation merge | `20669f7164460297d7318fc3b5874e4bc7f4bcde` |
-| Acceptance reconciliation merge | `84d1b889a6c739c9e5d053e1f073fe1d87b8c5d4` |
+| Baseline implementation merge | `3a803202b75cf88a575a26b5175a32fcb107369a` |
+| Latest governed predecessor merge | `f3d915540e942056c3ec9763fcf70a2c187768a0` |
 | Current package | BKL-031 |
-| Current next gate | BKL-031 F9 repeatable current-night planner closure |
+| Current next gate | BKL-031 F9 governed refresh, portal verification and acceptance reconciliation |
 
 ## Observation Planner baseline
 
-F3–F8 sono Accepted/Post-Merge Verified. F8 accetta la pipeline scientifica bounded della notte 17–18/09/2026: forecast reale F7 site-specific, geometria astronomica corrente per la notte, suitability esplicita setup-target e ranking/finestre advisory nel portale. Il metodo resta `EVALUATION/NONE/READ_ONLY` e non è un readiness/safety engine.
+F3–F8 sono Accepted/Post-Merge Verified. F9 è implementata e post-merge verified tramite PR #282, #283 e #284, ma non è ancora formalmente accepted: manca una prima esecuzione governata con refresh effettivo e la relativa verifica del portale. F8 accetta la pipeline scientifica bounded della notte 17–18/09/2026. Il metodo resta `EVALUATION/NONE/READ_ONLY` e non è un readiness/safety engine.
 
 ## Authority baseline
 
@@ -28,7 +28,7 @@ F3–F8 sono Accepted/Post-Merge Verified. F8 accetta la pipeline scientifica bo
 - F4-C generalized validation budget: `2/2_EXHAUSTED`.
 - F7 protected-site one-shot budget: `1/1_EXHAUSTED`.
 - F8 provider requests: 0.
-- Recurring provider traffic: **NOT AUTHORIZED** by F8 acceptance; requires separate authority/budget/service decision.
+- F9 operating model: owner-authorized by ADR-012 at EUR 0 with `F9_ZERO_EUR_GUARD=CONFIRMED`; no F9 governed refresh has yet been evidenced.
 
 ## F8 verified implementation
 
@@ -38,6 +38,8 @@ PR #279 exact reviewed head `3f05693482208df2b56b66dcb71162589880e72b`: 9/9 PR w
 
 PR #280 exact reviewed head `bca410dcde804483052beded16c29a9f58f43872`: 17/17 PR workflows SUCCESS after closure of the Knowledge Map continuity finding; ARB re-review APPROVED WITH CONDITIONS; Release Quality READY FOR MERGE. Expected-head merge `84d1b889a6c739c9e5d053e1f073fe1d87b8c5d4`: **19/19 applicable push workflows SUCCESS**. The GitHub Pages workflow completed build, published-site integrity, artifact upload and deployment successfully. A separate external HTTP/browser validation could not be completed from the available web environment and is therefore not claimed.
 
-## Open closure gap
+## F9 implementation and open closure gap
 
-BKL-031 is not closed. F9 must prove repeatable/current-night operation of the complete advisory chain — governed fresh forecast, current astronomy, explicit setup suitability, explainable target ordering and best windows — while preserving privacy, fail-closed freshness/missingness and all authority separations.
+PR #282 integrated the MeteoHub refresh implementation, PR #283 reconciled the public zero-cost guard and PR #284 exposed the current-night planner functions. Their applicable post-merge workflows succeeded. No scheduled or manually dispatched F9 refresh and no `observation-planner-f9-current-night.json` runtime projection is evidenced in this baseline.
+
+BKL-031 is not closed. F9 still requires one successful governed refresh, portal verification and formal acceptance reconciliation, while preserving privacy, fail-closed freshness/missingness and all authority separations.
