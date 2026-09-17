@@ -5,6 +5,7 @@ const paths = {
   contract: 'docs/architecture/scientific-assets/BKL-031-F4-A-Forecast-Source-Discovery-and-Integration-Contract.md',
   adr: 'docs/architecture/ADR-011-Forecast-Source-and-Run-Lineage.md',
   validation: 'docs/architecture/validation/BKL-031-F4-A-Forecast-Source-Validation-Plan.md',
+  acceptance: 'docs/project/BKL-031-F4-A-FORECAST-SOURCE-CONTRACT-ACCEPTANCE-2026-09-17.md',
   backlog: 'docs/project/BACKLOG.md',
   knowledge: 'docs/project/REPOSITORY_KNOWLEDGE_MAP.md',
   index: 'docs/project/index.md',
@@ -19,6 +20,7 @@ const read = (name) => fs.readFileSync(paths[name], 'utf8');
 const contract = read('contract');
 const adr = read('adr');
 const validation = read('validation');
+const acceptance = read('acceptance');
 const backlog = read('backlog');
 const knowledge = read('knowledge');
 const index = read('index');
@@ -27,7 +29,7 @@ const nav = read('nav');
 const roadmap = JSON.parse(read('roadmap'));
 
 for (const fragment of [
-  '**REVIEW CANDIDATE — NO PROVIDER TRAFFIC AUTHORIZED**',
+  '**ACCEPTED — POST-MERGE VERIFIED / NO PROVIDER TRAFFIC AUTHORIZED**',
   'providerId=OPEN_METEO',
   'upstreamAuthorityId=ITALIAMETEO_ARPAE',
   'modelId=italia_meteo_arpae_icon_2i',
@@ -53,18 +55,20 @@ for (const url of [
   'https://www.ecmwf.int/en/forecasts/datasets/open-data'
 ]) assert.ok(contract.includes(url), `F4-A official-source citation missing: ${url}`);
 
-assert.ok(adr.includes('**PROPOSED — F4-A REVIEW CANDIDATE**') && adr.includes('automatic model fallback are prohibited'), 'ADR-011 decision boundary mismatch.');
+assert.ok(adr.includes('**ACCEPTED — REPOSITORY SOURCE AUTHORITY / PROVIDER TRAFFIC NOT AUTHORIZED**') && adr.includes('automatic model fallback are prohibited'), 'ADR-011 decision boundary mismatch.');
 for (let id = 1; id <= 24; id += 1) assert.ok(validation.includes(`| N${String(id).padStart(2, '0')} |`), `F4-A validation case N${String(id).padStart(2, '0')} missing.`);
-assert.ok(validation.includes('**REVIEW CANDIDATE — NOT EXECUTED AGAINST A PROVIDER**'), 'F4-A validation execution boundary missing.');
-assert.ok(backlog.includes('F4-A source discovery') && backlog.includes('zero-traffic review candidate'), 'Backlog does not identify the F4-A candidate.');
-assert.ok(knowledge.includes('F4-A now records a zero-traffic review candidate'), 'Knowledge map does not identify F4-A.');
+assert.ok(validation.includes('**ACCEPTED REPOSITORY VALIDATION PLAN — NOT EXECUTED AGAINST A PROVIDER**'), 'F4-A validation execution boundary missing.');
+assert.ok(acceptance.includes('**ACCEPTED — POST-MERGE VERIFIED**') && acceptance.includes('16/16 successful') && acceptance.includes('13/13 successful') && acceptance.includes('02a829f21bf76a0dc5d9ef29998ca5690d71395c'), 'F4-A acceptance evidence mismatch.');
+assert.ok(backlog.includes('F4-A and ADR-011 Accepted/Post-Merge Verified') && backlog.includes('zero provider traffic'), 'Backlog does not identify accepted F4-A state.');
+assert.ok(knowledge.includes('F4-A and ADR-011 are Accepted / Post-Merge Verified'), 'Knowledge map does not identify accepted F4-A state.');
 assert.ok(index.includes('F4-A Forecast Source Discovery and Integration Contract'), 'Project index does not expose F4-A.');
 assert.ok(decisions.includes('DLG-042') && decisions.includes('fallback silenzioso'), 'Decision log does not record F4-A source decision.');
 assert.ok(nav.includes('BKL-031 F4-A - Forecast Source Discovery and Integration Contract') && nav.includes('ADR-011 - Forecast Source and Run Lineage'), 'MkDocs navigation does not expose F4-A.');
 
 assert.equal(roadmap.currentPackage, 'BKL-031');
-assert.equal(roadmap.nextMilestone, 'BKL-031 F4-A exact-head forecast source-contract acceptance');
-assert.ok(roadmap.projectStatus.includes('F4-A forecast source discovery') && roadmap.projectStatus.includes('zero provider traffic') && roadmap.projectStatus.includes('S10 runtime unavailable'), 'Roadmap F4-A status/boundary mismatch.');
+assert.equal(roadmap.nextMilestone, 'BKL-031 F4-B machine-readable forecast contracts, TEST/NONE fixture and validator');
+assert.ok(roadmap.projectStatus.includes('F4-A and ADR-011 accepted') && roadmap.projectStatus.includes('zero provider traffic') && roadmap.projectStatus.includes('S10 runtime unavailable'), 'Roadmap F4-A status/boundary mismatch.');
 assert.ok(roadmap.milestones.some((item) => item.id === 'M-BKL031-F4-A-SOURCE-CONTRACT'), 'Roadmap F4-A milestone missing.');
+assert.ok(roadmap.milestones.some((item) => item.id === 'M-BKL031-F4-A-ACCEPTANCE'), 'Roadmap F4-A acceptance milestone missing.');
 
-console.log('BKL-031 F4-A verified: ICON-2I explicit single-run contract, 11 variables, 24 fail-closed cases, zero provider traffic; S10 unavailable.');
+console.log('BKL-031 F4-A accepted and post-merge verified: ADR-011 source authority, 11 variables, 24 fail-closed cases, zero provider traffic; F4-B promoted; S10 unavailable.');

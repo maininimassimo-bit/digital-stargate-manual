@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-17",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "df3f9c696b27fc5359f94444b95ac948668ed5f34e04240fc176a836c8a2e233",
+  "sourceDigest": "110e088bf6960d59f91b0837f1d6983add38b1a6c83c560699f569ed06aef264",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-C accepted and post-merge verified; ADR-010 accepted; F4-A forecast source discovery, proposed ADR-011, explicit ItaliaMeteo/ARPAE ICON-2I single-run integration contract and 24-case fail-closed validation plan prepared as a repository-only review candidate; zero provider traffic and zero protected-site use; S10 runtime unavailable",
+  "projectStatus": "BKL-031 F3-C accepted and post-merge verified; ADR-010 accepted; F4-A and ADR-011 accepted and post-merge verified through PR #263 with 16/16 exact-head checks and 13/13 post-merge workflows; zero provider traffic and zero protected-site use; F4-B machine-readable forecast contracts promoted; S10 runtime unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F4-A exact-head forecast source-contract acceptance",
-  "target": "Review and integrate the F4-A single-run source decision, proposed ADR-011, normative contract and validation plan. Keep provider traffic, protected-site egress, production runtime, ranking, readiness, commands and Safety Authority unavailable.",
+  "nextMilestone": "BKL-031 F4-B machine-readable forecast contracts, TEST/NONE fixture and validator",
+  "target": "Implement F4-B closed request, source-profile and evidence schemas, a synthetic/generalized TEST/NONE fixture, deterministic validator and all 24 fail-closed cases. Keep provider traffic, protected-site egress, production runtime, ranking, readiness, commands and Safety Authority unavailable.",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -307,7 +307,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3-C is Accepted/Post-Merge Verified. F4-A has a repository-only review candidate selecting explicit ItaliaMeteo/ARPAE ICON-2I single-run lineage, proposed ADR-011 and a 24-case fail-closed validation plan. No provider traffic or protected-site use occurred; F4-B remains separately gated and S10 remains UNAVAILABLE."
+          "note": "F3-C and F4-A are Accepted/Post-Merge Verified. ADR-011 is accepted for repository source authority after PR #263, merge 02a829f21bf76a0dc5d9ef29998ca5690d71395c and 13/13 post-merge workflows. No provider traffic or protected-site use occurred; F4-B machine-readable contracts are promoted and S10 remains UNAVAILABLE."
         },
         {
           "id": "BKL-032",
@@ -800,9 +800,17 @@
     {
       "id": "M-BKL031-F4-A-SOURCE-CONTRACT",
       "itemRef": "BKL-031",
-      "title": "BKL-031 F4-A Forecast Source Contract Candidate",
+      "title": "BKL-031 F4-A Forecast Source Contract",
       "date": "2026-09-17",
-      "description": "Repository-only source discovery selects explicit ItaliaMeteo/ARPAE ICON-2I single-run lineage through Open-Meteo for bounded evaluation, proposes ADR-011 and defines a normative contract plus 24 fail-closed cases. No provider traffic, protected-site use, runtime, ranking, readiness, command or Safety Authority is introduced.",
+      "description": "Repository-only source discovery selected explicit ItaliaMeteo/ARPAE ICON-2I single-run lineage through Open-Meteo, defined the normative contract and 24 fail-closed cases, and generated zero provider traffic or protected-site use.",
+      "status": "active"
+    },
+    {
+      "id": "M-BKL031-F4-A-ACCEPTANCE",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F4-A Forecast Source Contract Acceptance",
+      "date": "2026-09-17",
+      "description": "PR #263 passed 16/16 exact-head checks on d2ecedb2c141eb0a17f5a1d659748488802d4200, merged with expected-head control as 02a829f21bf76a0dc5d9ef29998ca5690d71395c, and passed all 13 applicable post-merge workflows. ADR-011 and F4-A are Accepted/Post-Merge Verified; F4-B is promoted with zero provider traffic and S10 unavailable.",
       "status": "active"
     }
   ]

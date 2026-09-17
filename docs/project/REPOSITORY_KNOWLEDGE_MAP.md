@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 5.7 |
+| Versione | 5.8 |
 | Stato | Active |
 | Data | 17/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | F4-A forecast source discovery and single-run integration contract review candidate; zero provider traffic; S10 production runtime unavailable |
+| Current governed package | F4-A forecast source contract and ADR-011 Accepted/Post-Merge Verified; F4-B machine-readable contracts promoted; zero provider traffic; S10 production runtime unavailable |
 
 ## 1. Scopo
 
@@ -46,11 +46,11 @@ Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimen
 
 BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`; nessun apply path o Safety Authority è autorizzato.
 
-BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integrato tramite PR #193 e riconciliato tramite PR #194. F3-A2 repository authority is APPROVED/AVAILABLE for authorized validated input. ADR-009 governs protected registries. F3-A3 is Accepted / Post-Merge Verified through PR #258 and merge `a0a2e4950f2d908a3aaa0fc149754f904ee8d588`; execution `dsg-f3-a3-spike-g4x8g` passed 17/17 metrics and repeatability with zero external-reference calls. ADR-010 is Accepted for repository method authority. F3-B is Accepted / Post-Merge Verified through PR #259 and merge `8c3b7b8424a15b4288c79f773b9f0fc3f7cd5c5f`. F3-C is Accepted / Post-Merge Verified through PR #261 and merge `fba1287efea0d1f36b147bc42a4fec5498990756`; 35/35 tests, all 12 applicable post-merge workflows and the public Observation Planner route passed. F4-A now records a zero-traffic review candidate: ItaliaMeteo/ARPAE ICON-2I through an explicit Open-Meteo single run, proposed ADR-011, a normative integration contract and 24 mandatory negative cases. S08 is `UNAVAILABLE`, S09 is `UNAVAILABLE_CURRENT`, and S10 production runtime is `UNAVAILABLE`. Provider traffic, protected-site egress, F4 implementation, F5 ranking/consumer, BKL-032 readiness and Safety remain separate.
+BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integrato tramite PR #193 e riconciliato tramite PR #194. F3-A2 repository authority is APPROVED/AVAILABLE for authorized validated input. ADR-009 governs protected registries. F3-A3 is Accepted / Post-Merge Verified through PR #258 and merge `a0a2e4950f2d908a3aaa0fc149754f904ee8d588`; execution `dsg-f3-a3-spike-g4x8g` passed 17/17 metrics and repeatability with zero external-reference calls. ADR-010 is Accepted for repository method authority. F3-B is Accepted / Post-Merge Verified through PR #259 and merge `8c3b7b8424a15b4288c79f773b9f0fc3f7cd5c5f`. F3-C is Accepted / Post-Merge Verified through PR #261 and merge `fba1287efea0d1f36b147bc42a4fec5498990756`; 35/35 tests, all 12 applicable post-merge workflows and the public Observation Planner route passed. F4-A and ADR-011 are Accepted / Post-Merge Verified through PR #263 and merge `02a829f21bf76a0dc5d9ef29998ca5690d71395c`; all 16 exact-head checks and 13 post-merge workflows passed with zero provider traffic and zero protected-site egress. S08 is `UNAVAILABLE`, S09 is `UNAVAILABLE_CURRENT`, and S10 production runtime is `UNAVAILABLE`. F4-B machine-readable contracts are promoted; provider acquisition, F5 ranking/consumer, BKL-032 readiness and Safety remain separate.
 
 ## 7. Roadmap sequence
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 POST-MERGE VERIFIED / ADR-010 ACCEPTED / F3-B+F3-C POST-MERGE VERIFIED / F4-A REVIEW CANDIDATE / S10 PRODUCTION UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 POST-MERGE VERIFIED / ADR-010 ACCEPTED / F3-B+F3-C POST-MERGE VERIFIED / F4-A+ADR-011 ACCEPTED / F4-B PROMOTED / S10 PRODUCTION UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 8. CI/CD e publishing
 
@@ -112,6 +112,7 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 5.2 | 15/09/2026 | PR #211 handoff integrated/post-merge verified; F3-A3 Solution/ADR/validation decision-preparation review candidate |
 | 5.3 | 17/09/2026 | PR #258 F3-A3 scientific acceptance integrated/post-merge verified; ADR-010 accepted; F3-B authorized repository-only |
 | 5.4 | 17/09/2026 | F3-B method/request/evidence schemas, bounded fixture and 34-case validator suite prepared for exact-head acceptance |
+| 5.8 | 17/09/2026 | PR #263 F4-A source contract integrated and post-merge verified; ADR-011 accepted; F4-B machine-readable contracts promoted with zero provider traffic |
 
 ## F3-A2-D4 acceptance checkpoint — 15/09/2026
 

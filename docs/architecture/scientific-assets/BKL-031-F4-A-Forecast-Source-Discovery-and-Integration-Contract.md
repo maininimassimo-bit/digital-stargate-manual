@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | `BKL-031-F4-A-CONTRACT-001` |
-| Status | **REVIEW CANDIDATE — NO PROVIDER TRAFFIC AUTHORIZED** |
+| Status | **ACCEPTED — POST-MERGE VERIFIED / NO PROVIDER TRAFFIC AUTHORIZED** |
 | Date | 2026-09-17 |
 | Predecessor | F3-C Accepted / Post-Merge Verified |
 | Source dimension | BKL031-S11 forecast |
@@ -16,7 +16,7 @@ F4-A selects a bounded candidate path for forecast evidence and defines the norm
 
 The adapter must request one explicit UTC model initialization through the `run` parameter. `best_match`, seamless products, stitched time series and silent fallback are prohibited because they do not preserve one stable run identity across the evidence envelope.
 
-This package authorizes only repository documentation, validation rules and the next machine-readable contract gate. It performs zero provider calls, uses zero protected-site facts and does not activate runtime, ranking, readiness, commands or Safety Authority.
+This package authorizes repository documentation, validation rules and F4-B machine-readable contract work. It performed zero provider calls, used zero protected-site facts and does not activate runtime, ranking, readiness, commands or Safety Authority.
 
 ## 2. Verified source discovery
 
