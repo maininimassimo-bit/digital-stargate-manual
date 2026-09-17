@@ -3,8 +3,8 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F6-SOLUTION-001 |
-| Status | **REVIEW CANDIDATE** |
-| Version | 1.0 |
+| Status | **ACCEPTED — POST-MERGE VERIFIED** |
+| Version | 1.1 |
 | Date | 2026-09-17 |
 | Capability | BKL-031 — Observation Planner intelligente |
 | Predecessor | F5 Accepted / Post-Merge Verified |
@@ -12,6 +12,11 @@
 | Consumer mode | `READ_ONLY` |
 | Runtime state | `S10 UNAVAILABLE` |
 | Provider request budget | `2/2_EXHAUSTED` |
+| Reviewed head | `ad7cad8267eaee1e27e7b1373d34f422efd8f088` |
+| Pull request | #275 |
+| Merge commit | `f75303c9575c77f23de777d55c6067bf08bc99f1` |
+| Exact-head workflows | 13/13 successful |
+| Post-merge workflows | 14/14 successful |
 
 ## 1. Purpose and scope
 
@@ -24,7 +29,7 @@ F6 closes the integration gap identified after F5 without closing BKL-031 itself
 5. a sanitized public projection is rendered by the Observation Planner portal;
 6. no new provider request, runtime adapter, readiness decision, scheduler, automatic target selection, device command or Safety Authority is introduced.
 
-The package is deliberately an integration proof. It is not the final real-night recommendation capability and does not authorize BKL-031 closure.
+F6 is now **Accepted / Post-Merge Verified** as an integration proof. It is not the final real-night recommendation capability and does not authorize BKL-031 closure.
 
 ## 2. Current state
 
@@ -32,7 +37,7 @@ F5 is Accepted / Post-Merge Verified but its factor values remain synthetic meth
 
 The provider request budget is exhausted at `2/2_EXHAUSTED`. F4-D intentionally publishes metadata only, not forecast value arrays. The setup registry contains a separately approved current assignment and approved baseline, but those records are protected inputs and are not public portal contracts. S10 remains `UNAVAILABLE`.
 
-## 3. Target state for F6
+## 3. Accepted F6 target state
 
 F6 adds a public, fail-closed, sanitized E2E projection with four evidence layers:
 
@@ -122,7 +127,7 @@ This separation is deliberate:
 - real F4-C weather values prove forecast-value consumption;
 - real governed session/setup evidence proves setup awareness;
 - F5 proves explainable deterministic ranking mechanics;
-- a later gate must replace the remaining synthetic/runtime gaps before the planner can present current best-target recommendations for an observing night.
+- later gates must replace the remaining synthetic/runtime gaps before the planner can present current best-target recommendations for an observing night.
 
 ## 9. Security, privacy and safety
 
@@ -157,35 +162,38 @@ F6 is repository-only and static-portal read-only. CI logs only validation statu
 
 Rollback removes the F6 projection, builder, verifier/tests, schema, browser consumer and portal panel. F1-F5 accepted evidence and the protected setup registry remain unchanged. Rollback causes no provider request and has no EAGLE/device impact.
 
-## 12. Validation plan
+## 12. Validation and acceptance evidence
 
-Required exact-head validation:
+The accepted exact head is `ad7cad8267eaee1e27e7b1373d34f422efd8f088`.
 
-1. F4-C reconciliation/gate remains valid and budget remains exhausted;
-2. F5 accepted projection remains valid;
-3. F6 deterministic regeneration exactly matches the committed projection;
-4. mutation of a real F4-C value changes the F6 public weather sample;
-5. mutation of request budget/protected-site boundary/setup lifecycle/target identity fails closed;
-6. mutation of historical setup evidence is detected;
-7. protected setup identifiers/digests are absent from public F6 output;
-8. browser consumer syntax and fail-closed contract pass;
-9. strict documentation, Developer Foundation and Word/manual pipelines pass;
-10. independent ARB and Release Quality review occur on the same exact head before merge.
+- 13/13 applicable exact-head PR workflows: successful;
+- Architecture Review Board: **APPROVED WITH CONDITIONS**, no Blocker/Major;
+- Release Quality: **CONDITIONALLY READY FOR MERGE**, no waiver;
+- expected-head merge PR #275: `f75303c9575c77f23de777d55c6067bf08bc99f1`;
+- 14/14 applicable post-merge push workflows: successful;
+- provider requests performed by F6: `0`;
+- request budget after acceptance: `2/2_EXHAUSTED`.
+
+The formal acceptance record is `docs/project/BKL-031-F6-REAL-EVIDENCE-SETUP-AWARE-E2E-ACCEPTANCE-2026-09-17.md`.
 
 ## 13. Acceptance criteria
 
-F6 can be accepted only when:
+F6 is accepted because:
 
 - the exact F4-C real forecast sample is proven to flow into the public planner projection;
 - the selected public setup scenario changes eligible/excluded target evidence using governed historical acquisition evidence;
 - F5 synthetic method scores remain clearly classified and never masquerade as real recommendations;
-- zero additional provider requests are executed;
-- no protected setup/site detail leaks;
-- no readiness, scheduling, automatic selection, command or Safety Authority is introduced;
-- exact-head CI, ARB, Release Quality, expected-head merge and post-merge workflows are successful.
+- zero additional provider requests were executed;
+- no protected setup/site detail leaked;
+- no readiness, scheduling, automatic selection, command or Safety Authority was introduced;
+- exact-head CI, ARB, Release Quality, expected-head merge and all 14 post-merge workflows were completed successfully.
 
 ## 14. Residual gap and successor boundary
 
-F6 does **not** complete BKL-031. After F6 acceptance, a separately governed **forecast-refresh/runtime gate** must establish fresh forecast supply for an approved non-protected/public site reference while preserving ADR-011 exact-model/run lineage and request accounting. A subsequent/folded scientific gate must also replace synthetic target geometry and historical-only compatibility with current astronomical windows and an explicit setup-suitability model before the portal can state which targets are genuinely best for the selected setup and night.
+F6 does **not** complete BKL-031. F6 acceptance promotes only **F7 fresh forecast supply and runtime boundary**.
 
-Until those gates are accepted, S10 stays `UNAVAILABLE`, provider budget stays `2/2_EXHAUSTED`, BKL-032 owns readiness/go-no-go, and local physical interlocks remain authoritative.
+F7 must define and validate a refresh/runtime supply contract for current forecast series at an approved generalized/public location while preserving ADR-011 exact provider/model/run lineage, freshness/missingness semantics, privacy and request accounting. F6 acceptance authorizes no new provider traffic: the validation request budget remains `2/2_EXHAUSTED`, and any additional request requires a separate explicit authority/budget decision before execution.
+
+After F7, a later scientific integration gate must still replace synthetic target geometry and historical-only compatibility with current astronomical windows and an explicit OTA/camera/filter suitability model before the portal can state which targets are genuinely best for the selected setup and night.
+
+Until those gates are accepted, S10 stays `UNAVAILABLE`, BKL-031 remains `In Progress`, BKL-032 owns readiness/go-no-go, and local physical interlocks remain authoritative.

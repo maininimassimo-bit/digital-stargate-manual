@@ -62,7 +62,8 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [F4-D Sanitized Forecast Projection and Portal](../architecture/scientific-assets/BKL-031-F4-D-Sanitized-Forecast-Projection-and-Portal.md) | Accepted/Post-Merge Verified via PR #271 and merge `8f948ba9`; metadata-only EVALUATION/NONE/READ_ONLY projection and separate portal consumer; zero provider traffic |
 | [F5 Explainable Ranking Method and Read-Only Consumer](../architecture/scientific-assets/BKL-031-F5-Explainable-Ranking-Method-and-Read-Only-Consumer.md) | Accepted/Post-Merge Verified via PR #273 and merge `777924e2`; synthetic EVALUATION/NONE/READ_ONLY method-validation ranking and read-only consumer |
 | [F5 Explainable Ranking Acceptance](BKL-031-F5-EXPLAINABLE-RANKING-ACCEPTANCE-2026-09-17.md) | 6/6 exact-head and 7/7 post-merge workflows; provider budget remains 2/2 exhausted |
-| [F6 Real-Evidence Setup-Aware E2E Planner](../architecture/scientific-assets/BKL-031-F6-Real-Evidence-Setup-Aware-E2E-Planner.md) | Review Candidate; binds real F4-C forecast values to governed setup/session evidence in a sanitized read-only E2E proof; BKL-031 closure remains deferred |
+| [F6 Real-Evidence Setup-Aware E2E Planner](../architecture/scientific-assets/BKL-031-F6-Real-Evidence-Setup-Aware-E2E-Planner.md) | Accepted/Post-Merge Verified via PR #275 and merge `f75303c9`; real bounded forecast-value + governed setup/session E2E proof; zero provider requests; BKL-031 closure remains deferred |
+| [F6 Real-Evidence Setup-Aware E2E Acceptance](BKL-031-F6-REAL-EVIDENCE-SETUP-AWARE-E2E-ACCEPTANCE-2026-09-17.md) | 13/13 exact-head and 14/14 post-merge workflows; F7 fresh forecast supply/runtime boundary next; provider validation budget remains 2/2 exhausted |
 | [F3-A3 Owner Decision Record](BKL-031-F3-A3-OWNER-DECISION-RECORD-2026-09-15.md) | Complete owner decision; no execution authority |
 | [F3-A3 F3-OD05 Exact SPK Approval](BKL-031-F3-A3-F3-OD05-SPK-APPROVAL-2026-09-16.md) | `de442s.bsp` identity, coverage, provenance and notices approved; no upload/execution authority |
 | [F3-A3 Google Cloud Hosting Plan](../architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md) | Bootstrap/remote state post-verified; static container/IERS evidence prepared; platform not executed |
@@ -149,11 +150,11 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-031 F3-A3: Accepted / Post-Merge Verified through PR #258 and merge `a0a2e4950f2d908a3aaa0fc149754f904ee8d588`; exact scientific execution passed 17/17 metrics with zero external-reference calls.
 - BKL-031 F3-B: Accepted / Post-Merge Verified through PR #259 and merge `8c3b7b8424a15b4288c79f773b9f0fc3f7cd5c5f`; 34/34 contract tests and all 11 post-merge workflows passed.
 - BKL-031 F3-C: Accepted / Post-Merge Verified through PR #261 and merge `fba1287efea0d1f36b147bc42a4fec5498990756`; 35/35 tests, 12/12 post-merge workflows and the public portal route passed.
-- BKL-031 F3/F4 evidence chain and F5 explainable ranking/read-only consumer are Accepted/Post-Merge Verified. F5 merged via PR #273 as `777924e2638430f15bf717fa33dd71057751625a` with 7/7 post-merge workflows. Factor values remain synthetic EVALUATION evidence only; provider budget remains 2/2 exhausted; F6 real-evidence setup-aware E2E planner integration is next; capability closure is deferred pending a separately governed forecast-refresh/runtime gate; S10 production runtime remains `UNAVAILABLE`.
+- BKL-031 F3/F4 evidence chain, F5 explainable ranking/read-only consumer and F6 real-evidence setup-aware E2E proof are Accepted/Post-Merge Verified. F6 merged via PR #275 as `f75303c9575c77f23de777d55c6067bf08bc99f1` after 13/13 exact-head workflows and 14/14 post-merge workflows. Forecast evidence is real bounded/generalized but not a fresh runtime feed; F5 geometry remains synthetic and setup compatibility historical-only. Provider validation budget remains 2/2 exhausted; F7 fresh forecast supply and runtime boundary is next; BKL-031 remains In Progress and S10 production runtime remains `UNAVAILABLE`.
 
 ## Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1-F5 ACCEPTED / F6 REAL-EVIDENCE SETUP-AWARE E2E NEXT / CLOSURE DEFERRED / S10 PRODUCTION UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1-F6 ACCEPTED / F7 FRESH FORECAST SUPPLY NEXT / CLOSURE DEFERRED / S10 PRODUCTION UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## Authority / projection
 
