@@ -56,9 +56,10 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [F4-A Forecast Source Contract Acceptance](BKL-031-F4-A-FORECAST-SOURCE-CONTRACT-ACCEPTANCE-2026-09-17.md) | Accepted/Post-Merge Verified via PR #263; 16/16 exact-head checks and 13/13 post-merge workflows |
 | [F4-B Forecast Machine-Readable Contracts, Fixture and Validator](../architecture/scientific-assets/BKL-031-F4-B-Forecast-Machine-Readable-Contracts-Fixture-and-Validator.md) | v1.1 Accepted/Post-Merge Verified; Single Runs host, ten supported variables, visibility unavailable, 24/24 fail-closed cases |
 | [F4-B Forecast Contracts Acceptance](BKL-031-F4-B-FORECAST-CONTRACTS-ACCEPTANCE-2026-09-17.md) | PR #265; 18/18 exact-head checks, 14/14 post-merge workflows and zero provider traffic |
-| [F4-C Generalized Forecast Acquisition Gate](../architecture/scientific-assets/BKL-031-F4-C-One-Request-Generalized-Forecast-Acquisition-Gate.md) | Two-request budget exhausted; HTTP 200 raw response preserved; acquisition path removed |
+| [F4-C Generalized Forecast Acquisition Gate](../architecture/scientific-assets/BKL-031-F4-C-One-Request-Generalized-Forecast-Acquisition-Gate.md) | Accepted/Post-Merge Verified; two-request budget exhausted; HTTP 200 raw response preserved; acquisition path removed |
 | [F4-C Failed Acquisition and Remediation Evidence](../architecture/validation/BKL-031-F4-C-Failed-Acquisition-and-Remediation-Gate-2026-09-17.md) | Run 35201479378; exact failure and no-artifact boundary; no retry performed |
-| [F4-C Acquisition Evidence Reconciliation](../architecture/validation/BKL-031-F4-C-Acquisition-Evidence-Reconciliation-2026-09-17.md) | Run 35214129960; 71 complete instants, one excluded, zero imputed, no further request |
+| [F4-C Acquisition Evidence Reconciliation](../architecture/validation/BKL-031-F4-C-Acquisition-Evidence-Reconciliation-2026-09-17.md) | Accepted/Post-Merge Verified via PR #270; 71 complete instants, one excluded, zero imputed, no further request |
+| [F4-D Sanitized Forecast Projection and Portal](../architecture/scientific-assets/BKL-031-F4-D-Sanitized-Forecast-Projection-and-Portal.md) | Accepted/Post-Merge Verified via PR #271 and merge `8f948ba9`; metadata-only EVALUATION/NONE/READ_ONLY projection and separate portal consumer; zero provider traffic |
 | [F3-A3 Owner Decision Record](BKL-031-F3-A3-OWNER-DECISION-RECORD-2026-09-15.md) | Complete owner decision; no execution authority |
 | [F3-A3 F3-OD05 Exact SPK Approval](BKL-031-F3-A3-F3-OD05-SPK-APPROVAL-2026-09-16.md) | `de442s.bsp` identity, coverage, provenance and notices approved; no upload/execution authority |
 | [F3-A3 Google Cloud Hosting Plan](../architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md) | Bootstrap/remote state post-verified; static container/IERS evidence prepared; platform not executed |
@@ -101,7 +102,7 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [BKL-031 F2 Acceptance](BKL-031-F2-ACCEPTANCE-2026-09-14.md) | F2 acceptance, merge-control decision and post-merge evidence |
 | [BKL-031 F3 Handoff](../architecture/assessments/BKL-031-F3-Governed-Site-Setup-Ephemeris-Lunar-Handoff-2026-09-14.md) | Fulfilled; Solution Architecture accepted with conditions, implementation not authorized |
 | [BKL-031 F3 Solution Architecture](../architecture/scientific-assets/BKL-031-F3-Governed-Site-Setup-and-Ephemeris-Lunar-Solution-Architecture.md) | Accepted with conditions/post-merge verified; not implemented |
-| [BKL-031 F3 Validation Plan](../architecture/validation/BKL-031-F3-Governed-Site-Setup-and-Ephemeris-Lunar-Validation-Plan.md) | Accepted validation plan; P01–P10/N21–N66 not executed |
+| [BKL-031 F3 Validation Plan](../architecture/validation/BKL-031-F3-Governed-Site-Setup-Ephemeris-Lunar-Validation-Plan.md) | Accepted validation plan; P01–P10/N21–N66 not executed |
 | [BKL-031 F3 Solution Architecture Acceptance](BKL-031-F3-SOLUTION-ARCHITECTURE-ACCEPTANCE-2026-09-14.md) | Accepted with conditions; F3-A1 closure and F3-A2 transition recorded |
 | [PR #192 BKL-031 F3 Acceptance AI-Assisted ARB](../architecture/reviews/ARB-PR192-BKL-031-F3-Acceptance-AI-Assisted-Review-2026-09-14.md) | Initial review: Rework Required — 94/100; non equivalente ad approvazione umana indipendente |
 | [PR #192 BKL-031 F3 Acceptance AI-Assisted Release Quality](../architecture/reviews/RQ-PR192-BKL-031-F3-Acceptance-AI-Assisted-Review-2026-09-14.md) | Initial review: Not Ready; non equivalente ad approvazione umana indipendente |
@@ -145,11 +146,11 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-031 F3-A3: Accepted / Post-Merge Verified through PR #258 and merge `a0a2e4950f2d908a3aaa0fc149754f904ee8d588`; exact scientific execution passed 17/17 metrics with zero external-reference calls.
 - BKL-031 F3-B: Accepted / Post-Merge Verified through PR #259 and merge `8c3b7b8424a15b4288c79f773b9f0fc3f7cd5c5f`; 34/34 contract tests and all 11 post-merge workflows passed.
 - BKL-031 F3-C: Accepted / Post-Merge Verified through PR #261 and merge `fba1287efea0d1f36b147bc42a4fec5498990756`; 35/35 tests, 12/12 post-merge workflows and the public portal route passed.
-- BKL-031 F4-A/ADR-011 and F4-B v1.1 are Accepted/Post-Merge Verified. F4-C consumed its two-request ceiling; the second response is reconciled offline to 71 complete instants with zero imputation, and the acquisition path is removed. F4-D sanitized read-only projection is next; S10 production runtime remains `UNAVAILABLE`.
+- BKL-031 F4-A/ADR-011, F4-B v1.1, F4-C reconciliation and F4-D sanitized forecast projection/portal are Accepted/Post-Merge Verified. F4-C exhausted the provider request budget at 2/2; F4-D merged via PR #271 as `8f948ba9593dc2bfde291d2658fe92eafd4cce28` with 7/7 post-merge workflows, zero additional provider traffic, no protected coordinates, no forecast value arrays and no ranking/readiness/command/Safety Authority. F5 explainable ranking method and read-only consumer is the next separately governed slice; S10 production runtime remains `UNAVAILABLE`.
 
 ## Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 AUTHORITIES ACCEPTED / F3-A3 POST-MERGE VERIFIED / F3-B+F3-C POST-MERGE VERIFIED / F4-A+ADR-011 ACCEPTED / F4-B PROMOTED / S10 PRODUCTION UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 AUTHORITIES ACCEPTED / F3-A3 POST-MERGE VERIFIED / F3-B+F3-C POST-MERGE VERIFIED / F4-A+ADR-011+F4-B+F4-C+F4-D ACCEPTED / F5 NEXT / S10 PRODUCTION UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## Authority / projection
 

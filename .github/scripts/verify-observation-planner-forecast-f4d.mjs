@@ -4,9 +4,11 @@ import fs from 'node:fs';
 const projectionPath='docs/data/observation-planner-forecast-f4d-projection.json';
 const schemaPath='schemas/observation-planner-forecast-projection-f4d.schema.json';
 const sourcePath='governance/forecast-evidence/BKL031-F4C-RUN-35214129960/normalized-evidence.json';
+const acceptancePath='docs/architecture/scientific-assets/BKL-031-F4-D-Sanitized-Forecast-Projection-and-Portal.md';
 const projection=JSON.parse(fs.readFileSync(projectionPath,'utf8'));
 const source=JSON.parse(fs.readFileSync(sourcePath,'utf8'));
 const schema=JSON.parse(fs.readFileSync(schemaPath,'utf8'));
+const acceptance=fs.readFileSync(acceptancePath,'utf8');
 
 assert.equal(schema.$schema,'https://json-schema.org/draft/2020-12/schema');
 assert.equal(projection.projectionType,'BKL031_F4D_SANITIZED_FORECAST_PROJECTION');
@@ -51,4 +53,18 @@ assert.equal(source.location.protectedSiteUsed,false);
 assert.ok(projection.limitations.includes('NO_ADDITIONAL_PROVIDER_TRAFFIC'));
 assert.ok(projection.limitations.includes('NO_FORECAST_VALUES_PUBLISHED_IN_F4D'));
 assert.ok(projection.limitations.includes('S10_RUNTIME_UNAVAILABLE'));
-console.log('BKL-031 F4-D projection verified: sanitized metadata-only read-only projection derived exclusively from reconciled F4-C evidence; no coordinates, values, ranking, readiness, command or Safety Authority.');
+
+for(const expected of [
+  '**ACCEPTED — POST-MERGE VERIFIED**',
+  '#271',
+  'f6aa9c5dffbc172d554872f9072029f56d1195ec',
+  '8f948ba9593dc2bfde291d2658fe92eafd4cce28',
+  '7/7 applicable push workflows successful',
+  'F5 — Explainable Ranking Method and Read-Only Consumer'
+]) assert.ok(acceptance.includes(expected),`F4-D acceptance record missing ${expected}`);
+
+const roadmap=JSON.parse(fs.readFileSync('.github/roadmap/roadmap-source.json','utf8'));
+assert.equal(roadmap.nextMilestone,'BKL-031 F5 explainable ranking method and read-only consumer');
+assert.ok(roadmap.milestones.some(entry=>entry.id==='M-BKL031-F4-D-ACCEPTANCE'));
+
+console.log('BKL-031 F4-D projection verified: accepted/post-merge verified sanitized metadata-only read-only projection derived exclusively from reconciled F4-C evidence; no coordinates, values, ranking, readiness, command or Safety Authority; F5 is next.');

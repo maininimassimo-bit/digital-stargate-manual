@@ -58,10 +58,11 @@ const backlog = fs.readFileSync('docs/project/BACKLOG.md', 'utf8');
 const roadmap = JSON.parse(fs.readFileSync('.github/roadmap/roadmap-source.json', 'utf8'));
 for (const fragment of ['**ACCEPTED — POST-MERGE VERIFIED**', documents.fixture.contractDigest, '34 tests', 'F3-C is promoted as the next bounded gate']) assert.ok(architecture.includes(fragment), `F3-B architecture record missing: ${fragment}`);
 for (const fragment of ['**ACCEPTED — POST-MERGE VERIFIED**', '34/34 passing locally and in governed CI', 'S10 remains `UNAVAILABLE`', '35192376713', '35192376685']) assert.ok(acceptance.includes(fragment), `F3-B acceptance record missing: ${fragment}`);
-assert.ok(backlog.includes('F3-C Accepted/Post-Merge Verified') && backlog.includes('F4-A and ADR-011 Accepted/Post-Merge Verified'), 'BKL-031 backlog does not preserve the accepted successor state after F3-B.');
+assert.ok(backlog.includes('F3-C Accepted/Post-Merge Verified') && backlog.includes('F4-A/ADR-011') && backlog.includes('F4-D metadata-only projection and portal Accepted/Post-Merge Verified'), 'BKL-031 backlog does not preserve the accepted successor chain after F3-B.');
 assert.equal(roadmap.currentPackage, 'BKL-031');
-assert.equal(roadmap.nextMilestone, 'BKL-031 F4-D sanitized forecast projection and portal integration');
-assert.ok(roadmap.projectStatus.includes('F3-C accepted and post-merge verified') && roadmap.projectStatus.includes('S10 runtime unavailable'), 'roadmap successor status/boundary mismatch after F3-B.');
+assert.equal(roadmap.nextMilestone, 'BKL-031 F5 explainable ranking method and read-only consumer');
+assert.ok(roadmap.projectStatus.includes('F3-C accepted and post-merge verified') && roadmap.projectStatus.includes('F4-D sanitized forecast projection/portal') && roadmap.projectStatus.includes('S10 production runtime unavailable'), 'roadmap successor status/boundary mismatch after F3-B.');
 assert.ok(roadmap.milestones.some((item) => item.id === 'M-BKL031-F3-B-ACCEPTANCE'), 'roadmap F3-B acceptance milestone missing.');
+assert.ok(roadmap.milestones.some((item) => item.id === 'M-BKL031-F4-D-ACCEPTANCE'), 'roadmap F4-D acceptance milestone missing.');
 
-console.log(`BKL-031 F3-B contracts verified: three source-neutral schemas, ${documents.fixture.request.evaluationTimesUtc.length} bounded instants, ${documents.fixture.evidence.facts.length} normalized facts, digest ${documents.fixture.contractDigest}.`);
+console.log(`BKL-031 F3-B contracts verified: three source-neutral schemas, ${documents.fixture.request.evaluationTimesUtc.length} bounded instants, ${documents.fixture.evidence.facts.length} normalized facts, digest ${documents.fixture.contractDigest}; F3-C and F4 accepted, F5 next.`);

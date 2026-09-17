@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.30 |
+| Versione | 5.31 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -49,7 +49,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
-| BKL-031 | P1 | Observation Planner intelligente | In Progress | F3-C Accepted/Post-Merge Verified with 35/35 tests; F4-A and ADR-011 Accepted/Post-Merge Verified; F4-B v1.1 Accepted/Post-Merge Verified with zero provider traffic in F4-B; F4-C consumed both bounded requests, preserved HTTP 200 raw evidence and reconciled 71 complete hourly instants with zero imputation; acquisition path removed; no protected-site use; S10 unavailable | Accept F4-C reconciliation, then implement F4-D sanitized read-only forecast projection and portal integration; no further provider request | ADR-010; ADR-011; `BKL-031-F4-C-EVIDENCE-RECONCILIATION-001`; run `35214129960`; raw `e51c6935…`; evidence `350a7b9a…` |
+| BKL-031 | P1 | Observation Planner intelligente | In Progress | F3-C Accepted/Post-Merge Verified with 35/35 tests; F4-A/ADR-011 and F4-B v1.1 Accepted/Post-Merge Verified; F4-C evidence reconciliation Accepted/Post-Merge Verified with 71 complete hourly instants, zero imputation and provider budget 2/2 exhausted; acquisition path removed; F4-D metadata-only projection and portal Accepted/Post-Merge Verified via PR #271; no protected-site use; S10 unavailable | Prepare F5 explainable ranking method and read-only consumer as a separately governed slice; no further provider request, readiness, scheduling, command path or Safety Authority | ADR-010; ADR-011; `BKL-031-F4-C-EVIDENCE-RECONCILIATION-001`; `BKL-031-F4-D-PROJECTION-001`; PR #270 merge `79fe51e7…`; PR #271 merge `8f948ba9…`; evidence `350a7b9a…` |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
@@ -62,7 +62,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-041 | P2 | Scientific Data Quality Score | Done | BKL-029, BKL-037, BKL-045 | Quality score scientifico spiegabile | F1–F5 CLOSED/ACCEPTED as experimental read-only capability; PR #163 merge `e4ccd216b0a0ca4033277ece513f051b052d2b83`; production readiness remains NOT_READY; closure `docs/project/BKL-041-CLOSURE-2026-09-11.md` |
 | BKL-042 | P2 | AI Observatory Assistant | Planned | BKL-015/BKL-044 e intelligence services | Copilot read-only per diagnosis/RCA/planning/science | Functional Roadmap Expansion |
 | BKL-043 | P2 | Observatory Reliability Engineering | Planned | BKL-030/BKL-038/BKL-042 | SLI/SLO, MTBF, MTTR, session completion e failure budget | Functional Roadmap Expansion |
-| BKL-044 | P1 | Knowledge Graph / AI Evidence Contract | Done | BKL-015 | Provenance stabile per AP/ADR/assets/session/target/incident/telemetry/processing/AI | F1-F4 CLOSED/ACCEPTED; PR #104 merge `b7c01ba7221818e1971403ab3befe38c8e40cc54`; closure `docs/project/BKL-044-CLOSURE-2026-09-07.md` |
+| BKL-044 | P1 | Knowledge Graph / AI Evidence Contract | Done | BKL-015 | Provenance stabile per AP/ADR/component/evidence/session/target/incident/telemetry/processing/AI | F1-F4 CLOSED/ACCEPTED; PR #104 merge `b7c01ba7221818e1971403ab3befe38c8e40cc54`; closure `docs/project/BKL-044-CLOSURE-2026-09-07.md` |
 | BKL-045 | P2 | PixInsight Workflow Provenance Plugin | Done | BKL-015/BKL-044 | Estensione PixInsight governata per catturare workflow, parametri e lineage | F1-F5 CLOSED/ACCEPTED; closure `docs/project/BKL-045-CLOSURE-2026-09-10.md`; PR #140 merge `a08aed981e5ffa4af6b68fea521ada25a4b2b338`; retained PixInsight history completeness limitation |
 | BKL-049 | P2 | PixInsight Native Workflow Capture Module | Planned | BKL-045, BKL-044, AP-013/AP-014, verifica SDK/PCL | Modulo PCL nativo end-to-end per cattura automatica, journal locale, export governato e archivio workflow read-only nel portale | Planning package only; implementazione non avviata; `docs/architecture/assessments/BKL-049-PixInsight-Native-Workflow-Capture-Module-Plan.md` |
 | BKL-046 | P2 | AI Post-Processing Assistant for PixInsight | Done | BKL-015/BKL-044/BKL-045 | Assistente advisory per ottimizzare workflow PixInsight | F1-F5 CLOSED/ACCEPTED as deterministic read-only capability; PR #181 merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`; 7/7 post-merge workflows and live Pages verified; closure `docs/project/BKL-046-CLOSURE-2026-09-13.md`; scientific effectiveness NOT_EVALUABLE, production NOT_READY, `aiModelImplemented=false` |
@@ -139,7 +139,7 @@ Il repository owner ha autorizzato il solo incremento F2. Il candidate package m
 Completed baseline through BKL-037
   -> BKL-041 Scientific Data Quality Score [CLOSED]
   -> BKL-046 AI Post-Processing Assistant [CLOSED]
-  -> BKL-031 Observation Planner [F1/F2 ACCEPTED / F3 SA/F3-A1 ACCEPTED / F3-A2-D5 ACCEPTED / REPOSITORY AVAILABLE / RUNTIME ADAPTER ABSENT / SUCCESSOR SELECTION]
+  -> BKL-031 Observation Planner [F1/F2 ACCEPTED / F3 ACCEPTED / F4-A..F4-D ACCEPTED / F5 NEXT / S10 PRODUCTION UNAVAILABLE]
   -> BKL-032 Session Readiness
   -> BKL-036 Observatory Health Score
   -> BKL-033 Digital Twin
@@ -297,7 +297,6 @@ F3-A2-D5 is ACCEPTED / POST-MERGE VERIFIED. The historical DRAFT remains immutab
 
 The Program Architect must now select the next dependency-ready BKL-031 package from repository evidence. Any runtime adapter requires a separate architecture package and satisfaction of `ARB-204-MI02`.
 
-
 ### BKL-031 F3-A3 Program Handoff — 15/09/2026
 
 F3-A3 è il successore dependency-ready selezionato. Lo scope corrente è esclusivamente documentale: confronto source-neutral tra Astropy+pinned JPL, Skyfield+pinned JPL e JPL Horizons; ADR structure; validation-spike plan; decision evidence per F3-OD04–F3-OD10. Nessun candidato è selezionato. Provider/terms, kernel/data, error budget, privacy, host e bounded execution richiedono decisioni tracciate prima di uno spike eseguibile. S10 resta `UNAVAILABLE`; F3-B/C e ogni runtime adapter restano bloccati.
@@ -393,3 +392,9 @@ The final remediated runner at source `5ce8214311757c974134494dcc8f1e232dd4c390`
 Corrected exact-head run `35189574972` created only execution `dsg-f3-a3-spike-g4x8g` and one create-only private evidence object. Eight vectors and all 17 applicable metrics passed; repeatability passed; the transit difference was `0.08065768669985118` seconds; external-reference calls were zero; protected-site use and runtime activation were not executed. `BKL-031-F3-A3-SCIENTIFIC-EXECUTION-EVIDENCE-001` records the immutable result.
 
 ADR-010 is accepted for repository method authority. F3-A3 is complete at repository decision/evidence level. F3-B machine-readable contracts and validator are Accepted/Post-Merge Verified through PR #259 and merge `8c3b7b8424a15b4288c79f773b9f0fc3f7cd5c5f`. F3-C is the next dependency-ready increment; runtime S10, further cloud execution, protected-site calculation and external-reference traffic remain separately gated.
+
+### BKL-031 F4 acceptance reconciliation and F5 transition — 17/09/2026
+
+F4-A/ADR-011 and F4-B v1.1 are Accepted/Post-Merge Verified. F4-C reconciliation is Accepted/Post-Merge Verified through PR #270 and merge `79fe51e71782fff6c952e9291fe8ca567da74e98`; the two-request provider ceiling is exhausted, acquisition code is removed, 71 complete hourly instants are retained with zero imputation, and no protected-site use occurred. F4-D is Accepted/Post-Merge Verified through PR #271, exact reviewed head `f6aa9c5dffbc172d554872f9072029f56d1195ec`, merge `8f948ba9593dc2bfde291d2658fe92eafd4cce28` and 7/7 successful post-merge workflows. The public forecast layer is metadata-only `EVALUATION/NONE/READ_ONLY` and publishes no coordinates or forecast value arrays.
+
+F5 — Explainable Ranking Method and Read-Only Consumer — is the next dependency-ready BKL-031 slice, but remains separately governed. This transition authorizes no numeric factor weights, score, target ordering, readiness/go-no-go, scheduler, automatic target selection, command path, additional provider traffic or Safety Authority. BKL-032 remains the separate readiness capability and S10 production runtime remains `UNAVAILABLE`.

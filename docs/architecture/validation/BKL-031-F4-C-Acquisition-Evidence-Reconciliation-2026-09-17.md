@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Evidence ID | `BKL-031-F4-C-EVIDENCE-RECONCILIATION-001` |
-| Status | **RECONCILED EVIDENCE CANDIDATE / NO FURTHER REQUEST** |
+| Status | **ACCEPTED — POST-MERGE VERIFIED / NO FURTHER REQUEST** |
 | Workflow run | [35214129960](https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35214129960) |
 | Authorized main | `053fc766bfc7908a984828cc335eef07a558909c` |
 | Artifact | `10494298154` / `bkl-031-f4c-evidence-35214129960` |
@@ -11,6 +11,9 @@
 | Raw SHA-256 | `e51c6935f8e04bcce38983bc03147f4f897a833f90feb6271b2f510ee6eec102` |
 | Normalized evidence digest | `350a7b9ae8b2de308ba55a7105e56bb4de5040572370ab2715c0fa70088af2f5` |
 | Request accounting | 2 cumulative; budget exhausted |
+| Reconciliation PR | #270 |
+| Merge commit | `79fe51e71782fff6c952e9291fe8ca567da74e98` |
+| Post-merge verification | 15/15 applicable workflows successful |
 
 The replacement request returned one explicit ItaliaMeteo/ARPAE ICON-2I run through Open-Meteo Single Runs for the fixed generalized point. The response contained 72 hourly positions, correct GMT/zero-offset metadata and the ten governed variables. The initial position had `precipitation=null`; every other required value was finite.
 
@@ -31,5 +34,7 @@ The private repository evidence package is:
 - `governance/forecast-evidence/BKL031-F4C-RUN-35214129960/normalized-evidence.json`.
 
 The deterministic reconciliation verifier recomputes the raw SHA-256, checks request accounting, proves the single exclusion and zero imputation, validates time ordering, lengths, finite values and physical bounds, rebuilds the normalized evidence and verifies its canonical digest.
+
+PR #270 merged the reconciliation into `main` as `79fe51e71782fff6c952e9291fe8ca567da74e98`; all 15 applicable post-merge workflows completed successfully. The evidence package is therefore Accepted/Post-Merge Verified and is the immutable source predecessor used by F4-D.
 
 The two-request ceiling is exhausted. No further provider request is authorized. F4-D public projection, F5 ranking/consumer, BKL-032 readiness and Safety remain separate gates.
