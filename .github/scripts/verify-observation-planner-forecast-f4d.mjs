@@ -64,7 +64,8 @@ for(const expected of [
 ]) assert.ok(acceptance.includes(expected),`F4-D acceptance record missing ${expected}`);
 
 const roadmap=JSON.parse(fs.readFileSync('.github/roadmap/roadmap-source.json','utf8'));
-assert.equal(roadmap.nextMilestone,'BKL-031 F5 explainable ranking method and read-only consumer');
+assert.equal(roadmap.nextMilestone,'BKL-031 F6 capability closure');
 assert.ok(roadmap.milestones.some(entry=>entry.id==='M-BKL031-F4-D-ACCEPTANCE'));
+assert.ok(roadmap.milestones.some(entry=>entry.id==='M-BKL031-F5-ACCEPTANCE'));
 
-console.log('BKL-031 F4-D projection verified: accepted/post-merge verified sanitized metadata-only read-only projection derived exclusively from reconciled F4-C evidence; no coordinates, values, ranking, readiness, command or Safety Authority; F5 is next.');
+console.log('BKL-031 F4-D projection verified: accepted/post-merge verified sanitized metadata-only read-only projection derived exclusively from reconciled F4-C evidence; no coordinates, values, ranking, readiness, command or Safety Authority; F5 accepted and F6 closure next.');
