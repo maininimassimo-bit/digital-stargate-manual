@@ -1,0 +1,70 @@
+name: BKL-031 F5 Approved Gap Reconciliation v2
+
+on:
+  push:
+    branches:
+      - chore/bkl-031-f5-acceptance-reconciliation
+    paths:
+      - '.github/workflows/bkl-031-f5-approved-gap-reconcile-v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v5
+        with:
+          ref: chore/bkl-031-f5-acceptance-reconciliation
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply owner-approved successor reconciliation
+        run: node .github/scripts/reconcile-bkl031-f5-approved-gap-v2.mjs
+      - name: Preserve accepted F3-C backlog evidence
+        run: |
+          node -e "const fs=require('fs');const p='docs/project/BACKLOG.md';let s=fs.readFileSync(p,'utf8');const old='F3-C Accepted/Post-Merge Verified;';if(!s.includes(old)) throw new Error('expected F3-C backlog marker missing');s=s.replace(old,'F3-C Accepted/Post-Merge Verified (35/35 tests);');fs.writeFileSync(p,s);"
+      - name: Generate governed projections
+        run: |
+          node .github/scripts/generate-roadmap.mjs --write
+          node .github/scripts/generate-scientific-platform-status.mjs --write
+      - name: Verify governance and BKL-031 regressions
+        run: |
+          node .github/scripts/generate-roadmap.mjs --check
+          node .github/scripts/generate-scientific-platform-status.mjs --check
+          node .github/scripts/verify-roadmap-consistency.mjs
+          node .github/scripts/verify-observation-planner-ephemeris-lunar-f3b.mjs
+          node .github/scripts/verify-observation-planner-ephemeris-lunar-f3c.mjs
+          node .github/scripts/verify-observation-planner-forecast-f4a.mjs
+          node .github/scripts/verify-observation-planner-forecast-f4b.mjs
+          node .github/scripts/verify-observation-planner-forecast-f4c-gate.mjs
+          node .github/scripts/verify-observation-planner-forecast-f4d.mjs
+          node .github/scripts/verify-observation-planner-ranking-f5.mjs
+      - name: Commit reconciliation
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/roadmap/roadmap-source.json \
+            .github/scripts/verify-observation-planner-ephemeris-lunar-f3b.mjs \
+            .github/scripts/verify-observation-planner-ephemeris-lunar-f3c.mjs \
+            .github/scripts/verify-observation-planner-forecast-f4a.mjs \
+            .github/scripts/verify-observation-planner-forecast-f4b.mjs \
+            .github/scripts/verify-observation-planner-forecast-f4c-gate.mjs \
+            .github/scripts/verify-observation-planner-forecast-f4d.mjs \
+            .github/scripts/verify-observation-planner-ranking-f5.mjs \
+            docs/architecture/scientific-assets/BKL-031-F5-Explainable-Ranking-Method-and-Read-Only-Consumer.md \
+            docs/data/roadmap.json \
+            docs/data/scientific-platform-status.json \
+            docs/project/BACKLOG.md \
+            docs/project/BKL-031-F5-EXPLAINABLE-RANKING-ACCEPTANCE-2026-09-17.md \
+            docs/project/DECISION_LOG.md \
+            docs/project/index.md
+          git diff --cached --quiet && exit 0
+          git commit -m 'docs(bkl-031): defer closure and promote F6 real-evidence integration'
+          git push origin HEAD:chore/bkl-031-f5-acceptance-reconciliation
