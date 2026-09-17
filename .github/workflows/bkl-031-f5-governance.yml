@@ -1,0 +1,55 @@
+name: BKL-031 F5 Explainable Ranking Governance
+
+on:
+  pull_request:
+    paths:
+      - ".github/scripts/*observation-planner-ranking-f5*.mjs"
+      - ".github/workflows/bkl-031-f5-governance.yml"
+      - "schemas/observation-planner-ranking-f5.schema.json"
+      - "docs/data/observation-planner-ranking-f5-*.json"
+      - "docs/javascripts/observation-planner-ranking-f5.js"
+      - "docs/observation-planner/**"
+      - "docs/architecture/scientific-assets/BKL-031-F5-*.md"
+      - "docs/project/BACKLOG.md"
+      - ".github/roadmap/roadmap-source.json"
+      - "docs/data/roadmap.json"
+      - "mkdocs.yml"
+  push:
+    branches: [main]
+    paths:
+      - ".github/scripts/*observation-planner-ranking-f5*.mjs"
+      - ".github/workflows/bkl-031-f5-governance.yml"
+      - "schemas/observation-planner-ranking-f5.schema.json"
+      - "docs/data/observation-planner-ranking-f5-*.json"
+      - "docs/javascripts/observation-planner-ranking-f5.js"
+      - "docs/observation-planner/**"
+      - "docs/architecture/scientific-assets/BKL-031-F5-*.md"
+      - "docs/project/BACKLOG.md"
+      - ".github/roadmap/roadmap-source.json"
+      - "docs/data/roadmap.json"
+      - "mkdocs.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  ranking-gate:
+    name: F5 deterministic explainable ranking and read-only consumer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify F3-C predecessor
+        run: node .github/scripts/verify-observation-planner-ephemeris-lunar-f3c.mjs
+      - name: Verify F4-D predecessor
+        run: node .github/scripts/verify-observation-planner-forecast-f4d.mjs
+      - name: Verify F5 projection and boundaries
+        run: node .github/scripts/verify-observation-planner-ranking-f5.mjs
+      - name: Test F5 deterministic and fail-closed behavior
+        run: node --test .github/scripts/test-observation-planner-ranking-f5.mjs
+      - name: Check F5 browser consumer syntax
+        run: node --check docs/javascripts/observation-planner-ranking-f5.js
