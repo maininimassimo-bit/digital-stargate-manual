@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | `BKL-031-F4-B-CONTRACTS-001` |
-| Status | **REVIEW CANDIDATE — ZERO PROVIDER TRAFFIC** |
+| Status | **ACCEPTED — POST-MERGE VERIFIED / ZERO PROVIDER TRAFFIC** |
 | Date | 2026-09-17 |
 | Decision authority | Accepted ADR-011 |
 | Fixture | `BKL031-F4B-FIXTURE-001` |
@@ -25,4 +25,4 @@ The suite passes two positive/determinism checks and **24/24 negative cases** ma
 
 F4-B authorizes only repository schemas, a synthetic fixture and deterministic validation. Provider calls remain zero. Protected-site coordinates, production subscriptions, runtime S10, public forecast projection, ranking, readiness, scheduling, commands and Safety Authority remain unavailable.
 
-F4-C is the next independent gate. It must first define and pass an exact network/privacy authorization for one bounded synthetic/generalized acquisition; this package does not grant that authorization.
+F4-C is the next independent gate. It must first define and pass an exact network/privacy authorization for one bounded synthetic/generalized acquisition; F4-B acceptance does not grant that authorization.

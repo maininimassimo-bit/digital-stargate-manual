@@ -54,7 +54,8 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [ADR-011 Forecast Source and Run Lineage](../architecture/ADR-011-Forecast-Source-and-Run-Lineage.md) | Accepted for repository source authority; forbids best-match, seamless, stitched and automatic fallback modes |
 | [F4-A Forecast Source Validation Plan](../architecture/validation/BKL-031-F4-A-Forecast-Source-Validation-Plan.md) | 12 publication gates and 24 mandatory fail-closed cases for F4-B and later gates |
 | [F4-A Forecast Source Contract Acceptance](BKL-031-F4-A-FORECAST-SOURCE-CONTRACT-ACCEPTANCE-2026-09-17.md) | Accepted/Post-Merge Verified via PR #263; 16/16 exact-head checks and 13/13 post-merge workflows |
-| [F4-B Forecast Machine-Readable Contracts, Fixture and Validator](../architecture/scientific-assets/BKL-031-F4-B-Forecast-Machine-Readable-Contracts-Fixture-and-Validator.md) | Review candidate; three closed schemas, four synthetic hourly instants and 24/24 fail-closed cases; zero provider calls |
+| [F4-B Forecast Machine-Readable Contracts, Fixture and Validator](../architecture/scientific-assets/BKL-031-F4-B-Forecast-Machine-Readable-Contracts-Fixture-and-Validator.md) | Accepted/Post-Merge Verified; three closed schemas, four synthetic hourly instants and 24/24 fail-closed cases |
+| [F4-B Forecast Contracts Acceptance](BKL-031-F4-B-FORECAST-CONTRACTS-ACCEPTANCE-2026-09-17.md) | PR #265; 18/18 exact-head checks, 14/14 post-merge workflows and zero provider traffic |
 | [F3-A3 Owner Decision Record](BKL-031-F3-A3-OWNER-DECISION-RECORD-2026-09-15.md) | Complete owner decision; no execution authority |
 | [F3-A3 F3-OD05 Exact SPK Approval](BKL-031-F3-A3-F3-OD05-SPK-APPROVAL-2026-09-16.md) | `de442s.bsp` identity, coverage, provenance and notices approved; no upload/execution authority |
 | [F3-A3 Google Cloud Hosting Plan](../architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md) | Bootstrap/remote state post-verified; static container/IERS evidence prepared; platform not executed |
@@ -141,7 +142,7 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-031 F3-A3: Accepted / Post-Merge Verified through PR #258 and merge `a0a2e4950f2d908a3aaa0fc149754f904ee8d588`; exact scientific execution passed 17/17 metrics with zero external-reference calls.
 - BKL-031 F3-B: Accepted / Post-Merge Verified through PR #259 and merge `8c3b7b8424a15b4288c79f773b9f0fc3f7cd5c5f`; 34/34 contract tests and all 11 post-merge workflows passed.
 - BKL-031 F3-C: Accepted / Post-Merge Verified through PR #261 and merge `fba1287efea0d1f36b147bc42a4fec5498990756`; 35/35 tests, 12/12 post-merge workflows and the public portal route passed.
-- BKL-031 F4-A and ADR-011 are Accepted/Post-Merge Verified. F4-B has a repository-only review candidate with three closed schemas, synthetic TEST/NONE evidence and 24/24 negative cases; zero provider calls occurred and S10 production runtime remains `UNAVAILABLE`.
+- BKL-031 F4-A/ADR-011 and F4-B are Accepted/Post-Merge Verified. F4-B passed 26/26 tests and 14/14 post-merge workflows with zero provider calls; F4-C bounded acquisition-gate preparation is next and S10 production runtime remains `UNAVAILABLE`.
 
 ## Sequenza governata
 

@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-17",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "03eae25b0b98a89f67a48279fb5da7c5ea784aaf0cd3ff43ab0432d9068d6b61",
+  "sourceDigest": "77bed7a97165f0ddece2a084cdc85c964bd90bb642839d200f6a7d01196f6c48",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-C accepted and post-merge verified; ADR-010 accepted; F4-A and ADR-011 accepted and post-merge verified; F4-B three closed forecast schemas, four-instant synthetic TEST/NONE fixture and deterministic validator pass 24/24 negative cases with zero provider traffic and zero protected-site use; S10 runtime unavailable",
+  "projectStatus": "BKL-031 F3-C accepted and post-merge verified; ADR-010 accepted; F4-A and ADR-011 accepted and post-merge verified; F4-B accepted and post-merge verified through PR #265 with 26/26 tests, 18/18 exact-head checks and 14/14 post-merge workflows; zero provider traffic and zero protected-site use; S10 runtime unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F4-B exact-head contracts and validator acceptance",
-  "target": "Review and integrate F4-B machine-readable source-profile, request and evidence contracts, synthetic fixture and 24-case fail-closed validator. Keep provider traffic, protected-site egress, production runtime, projection, ranking, readiness, commands and Safety Authority unavailable.",
+  "nextMilestone": "BKL-031 F4-C bounded acquisition gate preparation",
+  "target": "Prepare the exact F4-C network/privacy gate for one bounded synthetic/generalized ItaliaMeteo/ARPAE ICON-2I single-run acquisition. Keep protected-site egress, recurring traffic, production runtime, public projection, ranking, readiness, commands and Safety Authority unavailable.",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -307,7 +307,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F4-A and ADR-011 are Accepted/Post-Merge Verified. F4-B has three closed forecast schemas, a synthetic TEST/NONE fixture and 24/24 fail-closed negative cases with a hard network deny and zero provider calls. Exact-head F4-B acceptance is next; F4-C acquisition and S10 remain separately gated."
+          "note": "F4-A/ADR-011 and F4-B are Accepted/Post-Merge Verified. F4-B passed 26/26 tests and all 14 post-merge workflows with zero provider traffic. F4-C one-request synthetic/generalized acquisition-gate preparation is next; protected-site use and S10 remain unavailable."
         },
         {
           "id": "BKL-032",
@@ -819,6 +819,14 @@
       "title": "BKL-031 F4-B Forecast Contracts and Validator Candidate",
       "date": "2026-09-17",
       "description": "Three closed JSON Schemas, a deterministic four-instant synthetic TEST/NONE fixture and validator execute all 24 F4-A negative cases. Network policy is DENY_F4B with zero allowed requests; provider traffic, protected-site use, runtime, projection, ranking, readiness, commands and Safety Authority remain absent.",
+      "status": "active"
+    },
+    {
+      "id": "M-BKL031-F4-B-ACCEPTANCE",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F4-B Forecast Contracts Acceptance",
+      "date": "2026-09-17",
+      "description": "PR #265 passed 18/18 exact-head checks on ba8f63a9d923f1daf2aca7c7c2173aacf6c0e051, merged as b3a136efc2bd8b7afd16a817a22cfaa9211f069e and passed 14/14 post-merge workflows. F4-B is Accepted/Post-Merge Verified with zero provider traffic; F4-C acquisition-gate preparation is promoted.",
       "status": "active"
     }
   ]
