@@ -141,7 +141,7 @@ nav:
       - Scientific Image Repository:
           - Current-State Scientific Asset Inventory: architecture/scientific-assets/AP13-W02-Current-State-Scientific-Asset-Inventory-Specification.md
           - DSDM-001 - Conceptual Model: architecture/scientific-assets/DSDM-001-Scientific-Data-Manager-Conceptual-Model.md
-          - DSDM-002 - Logical Data Model: architecture/scientific-assets/DSDM-002-Scientific-Data-Manager-Logical-Data-Model.md
+          - DSDM-002 - Logical Data Model: architecture/scientific-assets/DSDM-002-Logical-Data-Model.md
           - DSDM-003 - Contract and Manifest Model: architecture/scientific-assets/DSDM-003-Contract-and-Manifest-Model.md
           - DSDM-004 - Session Importer and Safe Transfer Design: architecture/scientific-assets/DSDM-004-Session-Importer-Architecture-and-Safe-Transfer-Design.md
           - DSDM-005 - Verified Transport Cleanup Solution Design: architecture/scientific-assets/DSDM-005-Verified-Transport-Cleanup-Solution-Design.md
@@ -157,7 +157,7 @@ nav:
           - BKL-046 Program Assessment and F1 Handoff: architecture/assessments/BKL-046-Architecture-Program-Assessment-and-F1-Handoff-2026-09-11.md
           - BKL-046 F1 - Source Discovery and Advisory Semantic Contract: architecture/scientific-assets/BKL-046-F1-AI-Post-Processing-Assistant-Source-Discovery-and-Advisory-Semantic-Contract.md
           - BKL-046 F1 - Acceptance: project/BKL-046-F1-ACCEPTANCE-2026-09-11.md
-          - BKL-046 F2 - Recommendation and Human Decision Contracts: architecture/scientific-assets/BKL-046-F2-Machine-Readable-Recommendation-and-Human-Decision-Contracts.md
+          - BKL-046 F2 - Machine-Readable Recommendation and Human Decision Contracts: architecture/scientific-assets/BKL-046-F2-Machine-Readable-Recommendation-and-Human-Decision-Contracts.md
           - BKL-046 F2 - Acceptance: project/BKL-046-F2-ACCEPTANCE-2026-09-11.md
           - BKL-046 F3 - Deterministic Advisory Demonstrator: architecture/scientific-assets/BKL-046-F3-Deterministic-Advisory-Demonstrator.md
           - BKL-046 F3 - Acceptance: project/BKL-046-F3-ACCEPTANCE-2026-09-11.md
@@ -186,14 +186,14 @@ nav:
           - BKL-031 F3 - Validation Plan: architecture/validation/BKL-031-F3-Governed-Site-Setup-and-Ephemeris-Lunar-Validation-Plan.md
           - BKL-031 F3 - Solution Architecture Acceptance: project/BKL-031-F3-SOLUTION-ARCHITECTURE-ACCEPTANCE-2026-09-14.md
           - ARB PR 192 - BKL-031 F3 Acceptance AI-Assisted Review: architecture/reviews/ARB-PR192-BKL-031-F3-Acceptance-AI-Assisted-Review-2026-09-14.md
-          - RQ PR 192 - BKL-031 F3 Acceptance AI-Assisted Review: architecture/reviews/RQ-PR192-BKL-031-F3-Acceptance-AI-Assisted-Review-2026-09-14.md
+          - RQ PR 192 - BKL-031 F3 Acceptance AI-Assisted Review: architecture/reviews/RQ-PR192-BKL-031-F3-Acceptance-AI-Assisted-Release-Quality-Review-2026-09-14.md
           - BKL-031 F3 Acceptance M01 Remediation Evidence: architecture/validation/BKL-031-F3-Acceptance-Governance-Consistency-Remediation-Evidence-2026-09-14.md
           - ARB PR 192 - BKL-031 F3 Acceptance AI-Assisted Re-Review: architecture/reviews/ARB-PR192-BKL-031-F3-Acceptance-AI-Assisted-ReReview-2026-09-14.md
-          - RQ PR 192 - BKL-031 F3 Acceptance AI-Assisted Re-Review: architecture/reviews/RQ-PR192-BKL-031-F3-Acceptance-AI-Assisted-ReReview-2026-09-14.md
+          - RQ PR 192 - BKL-031 F3 Acceptance AI-Assisted Re-Review: architecture/reviews/RQ-PR192-BKL-031-F3-Acceptance-AI-Assisted-Release-Quality-Review-2026-09-14.md
           - ARB PR 192 - BKL-031 F3 Acceptance AI-Assisted Second Re-Review: architecture/reviews/ARB-PR192-BKL-031-F3-Acceptance-AI-Assisted-Second-ReReview-2026-09-14.md
-          - RQ PR 192 - BKL-031 F3 Acceptance AI-Assisted Second Re-Review: architecture/reviews/RQ-PR192-BKL-031-F3-Acceptance-AI-Assisted-Second-ReReview-2026-09-14.md
+          - RQ PR 192 - BKL-031 F3 Acceptance AI-Assisted Second Re-Review: architecture/reviews/RQ-PR192-BKL-031-F3-Acceptance-AI-Assisted-Release-Quality-Review-2026-09-14.md
           - ARB PR 192 - BKL-031 F3 Acceptance AI-Assisted Third Re-Review: architecture/reviews/ARB-PR192-BKL-031-F3-Acceptance-AI-Assisted-Third-ReReview-2026-09-15.md
-          - RQ PR 192 - BKL-031 F3 Acceptance AI-Assisted Third Re-Review: architecture/reviews/RQ-PR192-BKL-031-F3-Acceptance-AI-Assisted-Third-ReReview-2026-09-15.md
+          - RQ PR 192 - BKL-031 F3 Acceptance AI-Assisted Third Re-Review: architecture/reviews/RQ-PR192-BKL-031-F3-Acceptance-AI-Assisted-Release-Quality-Review-2026-09-15.md
           - BKL-031 F3-A2 - Setup Authority Program Assessment and Handoff: architecture/assessments/BKL-031-F3-A2-Setup-Authority-Program-Assessment-and-Handoff-2026-09-15.md
           - BKL-031 F3-A3 - Method ADR and Validation Spike Program Handoff: architecture/assessments/BKL-031-F3-A3-Ephemeris-Lunar-Method-ADR-and-Validation-Spike-Program-Assessment-and-Handoff-2026-09-15.md
           - BKL-031 F3-A3 - Method Decision Preparation: architecture/scientific-assets/BKL-031-F3-A3-Ephemeris-Lunar-Method-Decision-Preparation.md
@@ -220,7 +220,7 @@ nav:
           - BKL-031 F6 - Real-Evidence Setup-Aware E2E Acceptance: project/BKL-031-F6-REAL-EVIDENCE-SETUP-AWARE-E2E-ACCEPTANCE-2026-09-17.md
           - BKL-031 F7 - Fresh Forecast Supply and Runtime Boundary: architecture/scientific-assets/BKL-031-F7-Fresh-Forecast-Supply-and-Runtime-Boundary.md
           - BKL-031 F7 - Fresh Protected-Site Forecast Supply Acceptance: project/BKL-031-F7-FRESH-FORECAST-SUPPLY-ACCEPTANCE-2026-09-17.md
-      - BKL-031 F8 Acceptance: project/BKL-031-F8-CURRENT-ASTRONOMY-SETUP-SUITABILITY-ACCEPTANCE-2026-09-17.md
+          - BKL-031 F8 Acceptance: project/BKL-031-F8-CURRENT-ASTRONOMY-SETUP-SUITABILITY-ACCEPTANCE-2026-09-17.md
           - BKL-031 F3-A3 - Owner Decision Record: project/BKL-031-F3-A3-OWNER-DECISION-RECORD-2026-09-15.md
           - BKL-031 F3-A3 - F3-OD05 Exact SPK Approval: project/BKL-031-F3-A3-F3-OD05-SPK-APPROVAL-2026-09-16.md
           - BKL-031 F3-A3 - Google Cloud Validation Spike Hosting Plan: architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md
@@ -262,7 +262,7 @@ nav:
           - ARB PR 193 - BKL-031 F3-A1 Site Authority Contract AI-Assisted Review: architecture/reviews/ARB-PR193-BKL-031-F3-A1-Site-Authority-Contract-AI-Assisted-Review-2026-09-15.md
           - RQ PR 193 - BKL-031 F3-A1 Site Authority Contract AI-Assisted Release Quality: architecture/reviews/RQ-PR193-BKL-031-F3-A1-Site-Authority-Contract-AI-Assisted-Release-Quality-Review-2026-09-15.md
           - ARB PR 191 - BKL-031 F3 Solution Architecture AI-Assisted Review: architecture/reviews/ARB-PR191-BKL-031-F3-Solution-Architecture-AI-Assisted-Review-2026-09-14.md
-          - RQ PR 191 - BKL-031 F3 Solution Architecture AI-Assisted Review: architecture/reviews/RQ-PR191-BKL-031-F3-Solution-Architecture-AI-Assisted-Review-2026-09-14.md
+          - RQ PR 191 - BKL-031 F3 Solution Architecture AI-Assisted Review: architecture/reviews/RQ-PR191-BKL-031-F3-Solution-Architecture-AI-Assisted-Release-Quality-Review-2026-09-14.md
           - ARB PR 190 - BKL-031 F3 Handoff AI-Assisted Architecture Review: architecture/reviews/ARB-PR190-BKL-031-F3-Handoff-AI-Assisted-Architecture-Review-2026-09-14.md
           - RQ PR 190 - BKL-031 F3 Handoff AI-Assisted Release Quality Review: architecture/reviews/RQ-PR190-BKL-031-F3-Handoff-AI-Assisted-Release-Quality-Review-2026-09-14.md
           - ARB PR 189 - BKL-031 F2 Closure AI-Assisted Architecture Review: architecture/reviews/ARB-PR189-BKL-031-F2-Closure-AI-Assisted-Architecture-Review-2026-09-14.md
@@ -270,13 +270,13 @@ nav:
           - ARB PR 188 - BKL-031 F2 AI-Assisted Architecture Review: architecture/reviews/ARB-PR188-BKL-031-F2-AI-Assisted-Architecture-Review-2026-09-14.md
           - RQ PR 188 - BKL-031 F2 AI-Assisted Release Quality Review: architecture/reviews/RQ-PR188-BKL-031-F2-AI-Assisted-Release-Quality-Review-2026-09-14.md
           - ARB PR 188 - BKL-031 F2 Remediation AI-Assisted Re-Review: architecture/reviews/ARB-PR188-BKL-031-F2-Remediation-AI-Assisted-ReReview-2026-09-14.md
-          - RQ PR 188 - BKL-031 F2 Remediation AI-Assisted Re-Review: architecture/reviews/RQ-PR188-BKL-031-F2-Remediation-AI-Assisted-ReReview-2026-09-14.md
+          - RQ PR 188 - BKL-031 F2 Remediation AI-Assisted Re-Review: architecture/reviews/RQ-PR188-BKL-031-F2-Remediation-AI-Assisted-Release-Quality-Review-2026-09-14.md
           - ARB PR 188 - BKL-031 F2 M-R1 AI-Assisted Re-Review: architecture/reviews/ARB-PR188-BKL-031-F2-MR1-AI-Assisted-ReReview-2026-09-14.md
-          - RQ PR 188 - BKL-031 F2 M-R1 AI-Assisted Re-Review: architecture/reviews/RQ-PR188-BKL-031-F2-MR1-AI-Assisted-ReReview-2026-09-14.md
+          - RQ PR 188 - BKL-031 F2 M-R1 AI-Assisted Release Quality Re-Review: architecture/reviews/RQ-PR188-BKL-031-F2-MR1-AI-Assisted-ReReview-2026-09-14.md
           - ARB PR 185 - BKL-031 F1 Acceptance and F2 Handoff: architecture/reviews/ARB-PR185-BKL-031-F1-Acceptance-F2-Handoff-AI-Assisted-Architecture-Review-2026-09-14.md
           - RQ PR 185 - BKL-031 F1 Acceptance and F2 Handoff: architecture/reviews/RQ-PR185-BKL-031-F1-Acceptance-F2-Handoff-AI-Assisted-Release-Quality-Review-2026-09-14.md
           - ARB PR 184 - PHD2 RMS AI-Assisted Architecture Review: architecture/reviews/ARB-PR184-PHD2-RMS-AI-Assisted-Architecture-Review-2026-09-14.md
-          - RQ PR 184 - PHD2 RMS AI-Assisted Release Quality Review: architecture/reviews/RQ-PR184-PHD2-RMS-AI-Assisted-Release-Quality-Review-2026-09-14.md
+          - RQ PR 184 - PHD2 RMS AI-Assisted Release Quality: architecture/reviews/RQ-PR184-PHD2-RMS-AI-Assisted-Release-Quality-Review-2026-09-14.md
 
       - Validation e Architecture Review:
           - Indice: architecture/validation/index.md
