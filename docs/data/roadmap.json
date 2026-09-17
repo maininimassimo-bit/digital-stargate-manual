@@ -1,13 +1,13 @@
 {
   "schemaVersion": "2.2",
-  "updatedAt": "2026-09-16",
+  "updatedAt": "2026-09-17",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "328f157a2fa413a4e3091f43c9d2e3efdab1508e347dad33d34c20599300c265",
+  "sourceDigest": "f30610275c81ff7a37d836020012c2fe483d7c3cb26a1ceec8cb0c23fd030049",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-A3 exact scientific runner OCI published and deployed to the isolated Cloud Run Job; one-update apply and read-only zero-drift state post-verified; job and scientific spike not executed; ADR-010 proposed; S10 unavailable",
+  "projectStatus": "BKL-031 F3-A3 exact scientific campaign passed; ADR-010 accepted for repository method authority; F3-B contracts and validator next; S10 runtime unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-A3 separately reviewed exact single scientific spike execution",
-  "target": "Prepare and review one bounded synthetic Cloud Run Job execution that may create only one private evidence object. Require the exact runner image, source commit, kernel, four-resource state, empty execution inventory and empty evidence prefix; prohibit additional execution, Terraform or registry mutation, Horizons traffic, protected-site use and runtime activation; ADR-010 remains Proposed and S10 remains UNAVAILABLE until execution evidence is reviewed.",
+  "nextMilestone": "BKL-031 F3-B machine-readable contracts and validator",
+  "target": "Materialize source-neutral EphemerisLunar request, evidence and method-profile schemas, bounded fixtures, fail-closed validator and privacy tests. Keep F3-C adapter, protected-site calculation, external-reference traffic, runtime activation, forecast, ranking, readiness, command and Safety Authority outside the increment.",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -307,7 +307,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3-A3 decisions, immutable method profile, bootstrap/MI02, reproducible offline build, Artifact Registry foundation, exact OCI publication and four-resource platform apply are complete. Main-only WIF run 35146023621 made one approved NAIF request and one generation-zero private upload; GCS generation 1789590110146663 passed full read-back with exact size, DAF/SPK, SHA-256 and MD5. The private prefix contains one approved kernel object and job execution count remains zero. Scientific cases remain NOT EXECUTED. ADR-010 remains Proposed and S10 remains UNAVAILABLE."
+          "note": "F3-A3 is complete at repository decision/evidence level. Exact run 35189574972 produced one successful remediated execution, one create-only private evidence object, 8 vectors and 17/17 passing metrics with repeatability and transit acceptance. ADR-010 is Accepted for repository method authority. F3-B contracts/validator are next; S10 runtime remains UNAVAILABLE."
         },
         {
           "id": "BKL-032",
@@ -763,6 +763,14 @@
       "title": "BKL-031 F3-A3 Exact Private Kernel Publication Evidence",
       "date": "2026-09-16",
       "description": "Main-only WIF run 35146023621 made exactly one request to the approved NAIF source and one generation-zero upload to the private content-addressed URI. GCS generation 1789590110146663 passed full read-back with exact size, DAF/SPK, SHA-256 and MD5; the prefix contains one object and Cloud Run execution count remains zero. Scientific execution did not occur.",
+      "status": "active"
+    },
+    {
+      "id": "M-BKL031-F3-A3-SCIENTIFIC-ACCEPTANCE",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-A3 Scientific Campaign Acceptance",
+      "date": "2026-09-17",
+      "description": "Exact-head run 35189574972 completed execution dsg-f3-a3-spike-g4x8g successfully: 8 synthetic vectors, 17/17 metrics, repeatability and transit pass; one create-only private evidence object; zero external-reference calls; no protected-site or runtime activation. ADR-010 accepted for repository method authority; F3-B is next.",
       "status": "active"
     }
   ]

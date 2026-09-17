@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-A3-VAL-001 |
-| Status | **APPROVED DECISION PROFILE — SCIENTIFIC RUNNER SOURCE GATE PREPARED / SCIENTIFIC CAMPAIGN NOT EXECUTED** |
+| Status | **EXECUTED — EXACT SCIENTIFIC CAMPAIGN PASS / ADR-010 ACCEPTANCE REVIEW** |
 | Version | 1.2 |
 | Date | 2026-09-15 |
 | Architecture | BKL-031-F3-A3-SOLUTION-001 |
@@ -208,15 +208,15 @@ Every run records:
 
 | Gate | Current state | Execution evidence required |
 |---|---|---|
-| architecture/ADR traceability | DEFINED | exact accepted ADR |
-| package/data pins | EXACT DEPENDENCY/IERS ARTIFACTS HASH-VERIFIED EPHEMERALLY; REPRODUCIBLE BUILD/PREFLIGHT AND UNPUBLISHED OCI DIGEST PASS | published registry digest and campaign manifest remain |
-| license/provenance | PACKAGE/IERS METADATA, EXACT ACQUIRED HASHES AND EXACT `de442s.bsp` IDENTITY RECORDED | SPK acquisition and execution-manifest review remain |
+| architecture/ADR traceability | PASS | ADR-010 accepted in the exact evidence review |
+| package/data pins | PASS | exact runner digest, method profile, IERS identity, kernel generation and campaign manifest verified |
+| license/provenance | PASS | package/IERS metadata, exact acquired hashes and exact `de442s.bsp` provenance retained |
 | scientific error budget | OWNER APPROVED | ADR-010 per-metric thresholds |
 | synthetic grid | OWNER BOUNDED | 50 targets; 2,016 instants/target; 10,000 pairs; 7 days; 1-minute minimum step; 256 KiB request |
-| candidate execution | NOT EXECUTED | normalized result evidence |
-| independent reference | NOT SELECTED | accepted reference and vectors |
-| failure/privacy tests | NOT EXECUTED | A3-N01–N24 results |
-| performance/resource | PROFILE APPROVED / NOT EXECUTED | Cloud Run Job europe-west8, 2 vCPU, 2 GiB, one task, one parallelism, 120 s, zero retries |
+| candidate execution | PASS | 8 vectors, 17/17 metrics, repeatability pass, transit pass |
+| independent reference | SEMANTICS SATISFIED | shared-SPK result is explicitly an implementation cross-check; approved local profile requires no external call |
+| failure/privacy tests | PASS / NOT APPLICABLE BY PROFILE | fail-closed source/preflight gates plus external-provider deny and synthetic-only campaign |
+| performance/resource | PASS FOR SPIKE | Cloud Run Job europe-west8, 2 vCPU, 2 GiB, one task, one parallelism, 120 s, zero retries; 16.34 s execution |
 | runtime/OAT | NOT AUTHORIZED | not part of spike |
 
 ## 15. Acceptance criteria
@@ -242,11 +242,11 @@ Delete or quarantine the isolated environment and acquired artifacts according t
 
 Stage V0 record `A3-S01` is complete. Preparatory exact dependency/IERS acquisition, reproducible offline container builds and the network-disabled preflight passed and are recorded in `BKL-031-F3-A3-CONTAINER-BUILD-EVIDENCE-001`. The exact OCI image was subsequently published and the registry-resolved four-resource plan verified. Main-only WIF run `35141947085` then applied only the reviewed saved plan with four additions, zero changes and zero destroys; `BKL-031-F3-A3-PLATFORM-APPLY-EVIDENCE-001` records the exact state, immediate zero drift and zero job executions. Run `35146023621` subsequently acquired the exact approved `de442s.bsp` once, uploaded it once to the private content-addressed URI and verified GCS generation `1789590110146663` by full read-back; `BKL-031-F3-A3-KERNEL-PUBLICATION-EVIDENCE-001` records the result.
 
-The runner image has now been reproducibly built, privately published and bound to the isolated Cloud Run Job at exact manifest `sha256:69a20a994fde9d5b1533b142760af5796b4ac795a1f00c658373a46d2648d60c` and source commit `9db0267529b6d46a2510b415e4b3f51d668ff024`. Update run `35153084496` changed only the existing job; read-only run `35154030354` verified the four-resource state at serial `4`, raw SHA-256 `084b68da6d20d9523ceabce67766cfc211b71f97ee12d8f4e7a0b4a64f57b89b`, zero drift and zero executions. `BKL-031-F3-A3-RUNNER-PLATFORM-UPDATE-EVIDENCE-001` records the gate. Scientific calculation remains `NOT EXECUTED`. The next separately reviewed gate permits exactly one execution of the exact synthetic fixture and one create-only private evidence object, without Horizons, protected-site data or runtime activation.
+The final runner was reproducibly built, privately published and bound to the isolated Cloud Run Job at manifest `sha256:f82acf36b79d6f3d8a3ba501b63bdba3ed446e7cf9070f477b01ed5d356ccb52` and source commit `5ce8214311757c974134494dcc8f1e232dd4c390`. Exact-head run `35189574972` executed `dsg-f3-a3-spike-g4x8g` once after all remediated preconditions passed. The campaign produced one create-only private evidence object, 8 vectors, 17/17 passing metrics, deterministic repeatability and a `0.08065768669985118` second transit difference. External-reference calls, protected-site use and runtime activation remained zero/not executed.
 
 ## 18. Governance stop
 
-F3-OD05, bootstrap/MI02, reproducible image builds, isolated Artifact Registry foundation, exact preflight and runner OCI publications, four-resource platform apply, private kernel publication and exact one-update runner deployment are closed at evidence level. The target repository contains the two exclusive reviewed image digests; the platform state contains only the exact VPC, subnet, runner Cloud Run Job and invoker binding with zero drift and zero executions; the private data prefix contains the one full-read-back-verified approved kernel object. Stop before the separately reviewed exact single scientific-spike execution. This plan does not authorize external reference calls, protected-site use, schema, adapter or runtime work.
+F3-OD05, bootstrap/MI02, reproducible image builds, isolated Artifact Registry foundation, exact runner publications, four-resource platform, private kernel and scientific campaign are closed at evidence level. The platform state remains serial 6 with the exact four resources; the governed execution history contains two retained failures and one successful remediated campaign; the private evidence prefix contains exactly one create-only object. Stop before another cloud execution, external-reference call, protected-site use, adapter or runtime work. F3-B repository-only contract and validator work becomes dependency-ready after the exact ADR acceptance change is post-merge verified.
 
 ## 19. Approved execution and request envelope
 
