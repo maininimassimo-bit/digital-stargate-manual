@@ -3,11 +3,15 @@
 | Field | Value |
 |---|---|
 | Identifier | `BKL-031-F4-D-PROJECTION-001` |
-| Status | **IMPLEMENTED CANDIDATE — PRE-MERGE VALIDATION REQUIRED** |
+| Status | **ACCEPTED — POST-MERGE VERIFIED** |
 | Date | 2026-09-17 |
 | Predecessor | F4-C reconciliation merged in PR #270; post-merge workflows verified |
 | Source evidence | `BKL031-F4C-EVIDENCE-35214129960` |
 | Environment / authority | `EVALUATION` / `NONE` |
+| Pull request | #271 |
+| Exact reviewed head | `f6aa9c5dffbc172d554872f9072029f56d1195ec` |
+| Merge commit | `8f948ba9593dc2bfde291d2658fe92eafd4cce28` |
+| Post-merge verification | 7/7 applicable push workflows successful |
 | Runtime effect | None; S10 remains `UNAVAILABLE` |
 | Safety effect | None |
 
@@ -77,11 +81,13 @@ The Observation Planner retains the accepted F3-C astronomical projection as an 
 
 The F4-D panel shows model, run, validity, evidence run identity, `71/72` completeness, zero imputations, the excluded instant, `visibility=UNAVAILABLE`, attribution and authority boundary. It labels the data as evaluation context and explicitly states that it is not a planning decision.
 
-## Validation
+## Validation and acceptance evidence
 
-The F4-D verifier must pass against the exact reconciled source evidence and fail if protected or unauthorized semantic keys appear. The governance workflow re-runs the F4-C gate and reconciliation before F4-D verification and checks browser JavaScript syntax.
+F4-D passed its deterministic verifier against the exact reconciled F4-C source evidence and the governance workflow re-ran the F4-C gate/reconciliation before F4-D verification. The accepted implementation head `f6aa9c5dffbc172d554872f9072029f56d1195ec` completed the applicable exact-head repository workflows successfully before expected-head merge.
 
-Repository-wide acceptance additionally requires the normal BKL-031 quality gates, strict MkDocs builds, roadmap/status consistency, exact-head review, expected-head merge and post-merge verification. Until those complete, this package remains an implemented candidate rather than Accepted/Post-Merge Verified.
+PR #271 merged the exact reviewed head into `main` as `8f948ba9593dc2bfde291d2658fe92eafd4cce28`. All seven applicable push workflows completed successfully on the merge commit, including F4-D governance, F4-C reconciliation, F3-C regression protection, Developer Foundation, documentation validation, Word generation and GitHub Pages deployment. No provider call was introduced by implementation, review, merge or post-merge verification.
+
+F4-D is therefore **Accepted / Post-Merge Verified** as a repository-local, metadata-only, read-only forecast projection and portal consumer. This acceptance does not authorize production runtime activation, protected-site acquisition, forecast value publication, ranking, readiness, scheduling, command execution or Safety Authority.
 
 ## Rollback
 
@@ -89,4 +95,6 @@ Rollback removes the F4-D schema, projection, verifier, workflow and forecast po
 
 ## Successor boundary
 
-F5 remains blocked until F4-D is accepted and the complete F4 acceptance reconciliation is post-merge verified. F4-D grants no runtime activation, protected-site acquisition, ranking, readiness, scheduling, command path or Safety Authority.
+With F4-D accepted and the F4 evidence chain reconciled, **F5 — Explainable Ranking Method and Read-Only Consumer** becomes the next dependency-ready BKL-031 slice. F5 remains a separately governed package and requires explicit method/factor definitions, validation evidence and review before any ranking output is implemented or accepted.
+
+F5 grants no readiness, scheduling, automatic target selection, command path or Safety Authority. BKL-032 remains the separate owner of session readiness / go-no-go decision support, and S10 production runtime remains `UNAVAILABLE`.
