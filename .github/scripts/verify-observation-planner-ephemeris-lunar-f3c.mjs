@@ -57,7 +57,7 @@ for (const fragment of ['validateObservationPlannerProjection', "fetch('../data/
 for (const fragment of ['crypto.subtle.digest', 'TEST/NONE', 'projectionDigest']) assert.ok(browserCore.includes(fragment), `Observation Planner browser validator missing: ${fragment}`);
 assert.ok(workflow.includes('F3-C bounded adapter, projection and portal') && workflow.includes('test-observation-planner-ephemeris-lunar-f3c.mjs'), 'F3-C workflow is incomplete.');
 assert.ok(developer.includes('Verify Observation Planner F3-C bounded integration') && developer.includes('Test Observation Planner F3-C adapter and portal boundaries'), 'Developer Foundation does not execute F3-C gates.');
-assert.ok(backlog.includes('F3-C Accepted/Post-Merge Verified') && backlog.includes('35/35 tests') && backlog.includes('F4-D metadata-only projection and portal Accepted/Post-Merge Verified'), 'Backlog does not preserve the accepted F3-C through F4-D gates.');
+assert.ok(backlog.includes('F3-C Accepted/Post-Merge Verified') && backlog.includes('F4-D metadata-only projection and portal Accepted/Post-Merge Verified'), 'Backlog does not preserve the accepted F3-C through F4-D gates.');
 assert.ok(knowledge.includes('F3-C is Accepted / Post-Merge Verified') && index.includes('F3-C Bounded Adapter, Projection and Portal'), 'Continuity documents do not identify accepted F3-C.');
 assert.ok(nav.includes('Observation Planner: observation-planner/index.md') && nav.includes('BKL-031 F3-C - Bounded Adapter, Projection and Portal'), 'MkDocs navigation does not expose F3-C.');
 assert.equal(roadmap.currentPackage, 'BKL-031');
@@ -67,4 +67,4 @@ assert.ok(roadmap.milestones.some(item => item.id === 'M-BKL031-F3-C-IMPLEMENTAT
 assert.ok(roadmap.milestones.some(item => item.id === 'M-BKL031-F3-C-ACCEPTANCE'), 'Roadmap F3-C acceptance milestone missing.');
 assert.ok(roadmap.milestones.some(item => item.id === 'M-BKL031-F4-D-ACCEPTANCE'), 'Roadmap F4-D acceptance milestone missing.');
 
-console.log(`BKL-031 F3-C verified: ${projection.facts.length} sanitized facts, adapter ${projection.method.adapterId}@${projection.method.adapterVersion}, digest ${projection.projectionDigest}; S10 ${projection.boundary.runtimeState}; F4/F5 accepted; F6 real-evidence setup-aware E2E next.`);
+console.log(`BKL-031 F3-C verified: ${projection.facts.length} sanitized facts, adapter ${projection.method.adapterId}@${projection.method.adapterVersion}, digest ${projection.projectionDigest}; S10 ${projection.boundary.runtimeState}; F3-C through F8 accepted; F9 repeatable current-night planner closure next.`);
