@@ -1,0 +1,33 @@
+name: BKL-031 F8 Governance
+on:
+  pull_request:
+    paths:
+      - 'docs/data/observation-planner-f8-current-astronomy-suitability.json'
+      - 'schemas/observation-planner-f8-current-astronomy-suitability.schema.json'
+      - '.github/scripts/verify-observation-planner-f8.mjs'
+      - '.github/scripts/test-observation-planner-f8.mjs'
+      - 'docs/javascripts/observation-planner-f8.js'
+      - 'docs/architecture/scientific-assets/BKL-031-F8-Current-Astronomy-and-Setup-Suitability.md'
+      - 'docs/observation-planner/index.md'
+      - '.github/workflows/bkl-031-f8-governance.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/data/observation-planner-f8-current-astronomy-suitability.json'
+      - 'schemas/observation-planner-f8-current-astronomy-suitability.schema.json'
+      - '.github/scripts/verify-observation-planner-f8.mjs'
+      - '.github/scripts/test-observation-planner-f8.mjs'
+      - 'docs/javascripts/observation-planner-f8.js'
+      - 'docs/architecture/scientific-assets/BKL-031-F8-Current-Astronomy-and-Setup-Suitability.md'
+      - 'docs/observation-planner/index.md'
+      - '.github/workflows/bkl-031-f8-governance.yml'
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: node .github/scripts/verify-observation-planner-f8.mjs
+      - run: node --test .github/scripts/test-observation-planner-f8.mjs
+      - run: node --check docs/javascripts/observation-planner-f8.js
