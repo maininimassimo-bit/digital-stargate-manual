@@ -148,11 +148,11 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-031 F3-A3: Accepted / Post-Merge Verified through PR #258 and merge `a0a2e4950f2d908a3aaa0fc149754f904ee8d588`; exact scientific execution passed 17/17 metrics with zero external-reference calls.
 - BKL-031 F3-B: Accepted / Post-Merge Verified through PR #259 and merge `8c3b7b8424a15b4288c79f773b9f0fc3f7cd5c5f`; 34/34 contract tests and all 11 post-merge workflows passed.
 - BKL-031 F3-C: Accepted / Post-Merge Verified through PR #261 and merge `fba1287efea0d1f36b147bc42a4fec5498990756`; 35/35 tests, 12/12 post-merge workflows and the public portal route passed.
-- BKL-031 F3/F4 evidence chain and F5 explainable ranking/read-only consumer are Accepted/Post-Merge Verified. F5 merged via PR #273 as `777924e2638430f15bf717fa33dd71057751625a` with 7/7 post-merge workflows. Factor values remain synthetic EVALUATION evidence only; provider budget remains 2/2 exhausted; F6 capability closure is next; S10 production runtime remains `UNAVAILABLE`.
+- BKL-031 F3/F4 evidence chain and F5 explainable ranking/read-only consumer are Accepted/Post-Merge Verified. F5 merged via PR #273 as `777924e2638430f15bf717fa33dd71057751625a` with 7/7 post-merge workflows. Factor values remain synthetic EVALUATION evidence only; provider budget remains 2/2 exhausted; F6 real-evidence setup-aware E2E planner integration is next; capability closure is deferred pending a separately governed forecast-refresh/runtime gate; S10 production runtime remains `UNAVAILABLE`.
 
 ## Sequenza governata
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1-F5 ACCEPTED / F6 CLOSURE NEXT / S10 PRODUCTION UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1-F5 ACCEPTED / F6 REAL-EVIDENCE SETUP-AWARE E2E NEXT / CLOSURE DEFERRED / S10 PRODUCTION UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## Authority / projection
 

@@ -67,6 +67,6 @@ for (const fragment of ['**ACCEPTED — POST-MERGE VERIFIED**','synthetic factor
 for (const fragment of ['**ACCEPTED — POST-MERGE VERIFIED**','#273','dfda963e7e9d088282516200a6bd8bb64dd0dd1d','777924e2638430f15bf717fa33dd71057751625a','6/6 successful','7/7 successful','2/2_EXHAUSTED']) assert.ok(acceptance.includes(fragment),`F5 acceptance record missing: ${fragment}`);
 for (const fragment of ['Verify Observation Planner F5 explainable ranking','Test Observation Planner F5 deterministic and fail-closed rules','Check Observation Planner F5 browser consumer syntax']) assert.ok(developer.includes(fragment),`Developer Foundation does not preserve F5 regression coverage: ${fragment}`);
 assert.equal(roadmap.currentPackage,'BKL-031');
-assert.equal(roadmap.nextMilestone,'BKL-031 F6 capability closure');
+assert.equal(roadmap.nextMilestone,'BKL-031 F6 real-evidence setup-aware E2E planner');
 assert.ok(roadmap.milestones.some(entry=>entry.id==='M-BKL031-F5-ACCEPTANCE'),'roadmap F5 acceptance milestone missing');
-console.log(`BKL-031 F5 verified: accepted/post-merge verified, ${projection.results.length} candidates, method ${projection.method.id}@${projection.method.version}, digest ${projection.projectionDigest}; F6 closure next.`);
+console.log(`BKL-031 F5 verified: accepted/post-merge verified, ${projection.results.length} candidates, method ${projection.method.id}@${projection.method.version}, digest ${projection.projectionDigest}; F6 real-evidence setup-aware E2E planner integration next; closure deferred.`);

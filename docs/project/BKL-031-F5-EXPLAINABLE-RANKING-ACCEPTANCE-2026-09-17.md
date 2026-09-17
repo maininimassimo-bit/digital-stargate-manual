@@ -44,4 +44,4 @@ PR #273 was merged with expected-head control as `777924e2638430f15bf717fa33dd71
 
 ## Transition
 
-F5 acceptance authorizes only the separately governed **F6 capability closure** package. F6 must reconcile F1–F5, close BKL-031 and preserve all retained limitations. It may not add new planning/runtime behavior.
+F5 acceptance authorizes only the separately governed **F6 real-evidence setup-aware E2E planner integration** package. F6 must consume the already accepted F4-C real forecast evidence, governed setup compatibility and accepted astronomical/lunar evidence through the F5 explainable method, then prove the resulting read-only planner path end to end on the portal. F6 performs no new provider request and does not authorize readiness/go-no-go, scheduling, automatic target selection, commands or Safety Authority. BKL-031 capability closure is deferred until a later separately governed forecast-refresh/runtime gate establishes fresh forecast supply while preserving ADR-011 lineage, the exhausted current request budget and S10/runtime boundaries.
