@@ -66,29 +66,23 @@ for (const fragment of ['crypto.subtle.digest', 'TEST/NONE', 'projectionDigest']
 assert.ok(workflow.includes('F3-C bounded adapter, projection and portal') && workflow.includes('test-observation-planner-ephemeris-lunar-f3c.mjs'), 'F3-C workflow is incomplete.');
 assert.ok(developer.includes('Verify Observation Planner F3-C bounded integration') && developer.includes('Test Observation Planner F3-C adapter and portal boundaries'), 'Developer Foundation does not execute F3-C gates.');
 assert.ok(backlog.includes('F3-C Accepted/Post-Merge Verified') && backlog.includes('F4-D metadata-only projection and portal Accepted/Post-Merge Verified'), 'Backlog does not preserve the accepted F3-C through F4-D gates.');
-assert.ok(knowledge.includes('F3-C are Accepted / Post-Merge Verified') && index.includes('F3-C Bounded Adapter, Projection and Portal'), 'Continuity documents do not identify accepted F3-C.');
+assert.ok(knowledge.includes('F1–F8 sono ACCEPTED / POST-MERGE VERIFIED') && index.includes('F3-C Bounded Adapter, Projection and Portal'), 'Continuity documents do not identify accepted F3-C.');
 for (const fragment of [
   'HANDOVER_2026-09-17.md',
   'CURRENT_TECHNICAL_BASELINE_2026-09-17.md',
-  'F8 is Accepted / Post-Merge Verified',
-  'BKL-031 F9 repeatable current-night planner closure',
-  '2/2_EXHAUSTED',
-  '1/1_EXHAUSTED',
-  'Recurring provider traffic is not authorized',
+  'F9 implementation/post-merge verified',
+  'governed refresh and acceptance reconciliation pending',
   'local physical interlocks remain Safety Authority'
 ]) assert.ok(knowledge.includes(fragment), `Repository Knowledge Map continuity drift: missing ${fragment}`);
 assert.equal(knowledge.includes('current handover e technical baseline 15/09/2026'), false, 'Repository Knowledge Map must not retain the superseded 15/09 continuity pointer.');
-for (const [name, text] of [['F8 acceptance', f8Acceptance], ['handover', handover], ['technical baseline', baseline], ['bootstrap', bootstrap]]) {
-  for (const fragment of ['84d1b889a6c739c9e5d053e1f073fe1d87b8c5d4', '19/19']) assert.ok(text.includes(fragment), `${name} missing F8 reconciliation post-merge evidence: ${fragment}`);
-}
 for (const fragment of ['#280', 'bca410dcde804483052beded16c29a9f58f43872', 'GitHub Pages']) assert.ok(f8Acceptance.includes(fragment), `F8 acceptance missing reconciliation evidence: ${fragment}`);
-assert.ok(handover.includes('F9 è il solo gate successivo') && baseline.includes('BKL-031 F9 repeatable current-night planner closure') && bootstrap.includes('Next gate: **BKL-031 F9 repeatable current-night planner closure**'), 'F8 reconciliation must preserve F9 as the only promoted successor.');
+assert.ok(handover.includes('F9 è implementata e post-merge verified') && baseline.includes('governed refresh, portal verification and acceptance reconciliation') && bootstrap.includes('Next gate: **BKL-031 F9 governed refresh, portal verification and acceptance reconciliation**'), 'Current continuity must preserve the F9 implementation state and remaining gate.');
 assert.ok(nav.includes('Observation Planner: observation-planner/index.md') && nav.includes('BKL-031 F3-C - Bounded Adapter, Projection and Portal'), 'MkDocs navigation does not expose F3-C.');
 assert.equal(roadmap.currentPackage, 'BKL-031');
-assert.equal(roadmap.nextMilestone, 'BKL-031 F9 repeatable current-night planner closure');
-assert.ok(roadmap.projectStatus.includes('F3-C accepted and post-merge verified') && roadmap.projectStatus.includes('F4-D sanitized forecast projection/portal') && roadmap.projectStatus.includes('S10 production runtime unavailable'), 'Roadmap F3-C-to-F4-D status/boundary mismatch.');
+assert.equal(roadmap.nextMilestone, 'BKL-031 F9 governed refresh, portal verification and acceptance reconciliation');
+assert.ok(roadmap.projectStatus.includes('F3–F8 Accepted/Post-Merge Verified') && roadmap.projectStatus.includes('F9 MeteoHub implementation') && roadmap.projectStatus.includes('S10 production runtime unavailable'), 'Roadmap continuity/status boundary mismatch.');
 assert.ok(roadmap.milestones.some(item => item.id === 'M-BKL031-F3-C-IMPLEMENTATION'), 'Roadmap F3-C implementation milestone missing.');
 assert.ok(roadmap.milestones.some(item => item.id === 'M-BKL031-F3-C-ACCEPTANCE'), 'Roadmap F3-C acceptance milestone missing.');
 assert.ok(roadmap.milestones.some(item => item.id === 'M-BKL031-F4-D-ACCEPTANCE'), 'Roadmap F4-D acceptance milestone missing.');
 
-console.log(`BKL-031 F3-C verified: ${projection.facts.length} sanitized facts, adapter ${projection.method.adapterId}@${projection.method.adapterVersion}, digest ${projection.projectionDigest}; S10 ${projection.boundary.runtimeState}; F3-C through F8 accepted; F8 reconciliation post-merge evidence retained; F9 repeatable current-night planner closure next.`);
+console.log(`BKL-031 F3-C verified: ${projection.facts.length} sanitized facts, adapter ${projection.method.adapterId}@${projection.method.adapterVersion}, digest ${projection.projectionDigest}; S10 ${projection.boundary.runtimeState}; F3-C through F8 accepted; F9 implementation is post-merge verified and its governed refresh/acceptance remains pending.`);

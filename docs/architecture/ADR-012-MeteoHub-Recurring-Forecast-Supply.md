@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Status | **OWNER-AUTHORIZED — IMPLEMENTATION CANDIDATE** |
+| Status | **IMPLEMENTED / POST-MERGE VERIFIED — RUNTIME EVIDENCE PENDING** |
 | Date | 2026-09-17 |
 | Capability | BKL-031 F9 |
 | Monetary budget | **EUR 0** |
@@ -40,6 +40,12 @@ The output is `EVALUATION / NONE / READ_ONLY`. It has no readiness, go/no-go, sc
 The provider subscription cost is eliminated, and the public-repository standard runner boundary avoids runner charges. F9 still assumes operational parsing of official GRIB data and availability of MeteoHub. Provider failure never revives stale F7/F8 data as current. Attribution to ItaliaMeteo/ARPAE and the CC BY 4.0 source must remain visible.
 
 ADR-011 remains the historical authority for the accepted Open-Meteo single-run evidence. ADR-012 governs only the F9 recurring supply and does not rewrite that evidence.
+
+## Implementation evidence and remaining gate
+
+The repository implementation merged through PR #282 (`deeafa665353fa2e88b092a4e8ebaa3d5befa99f`), the public zero-cost reconciliation through PR #283 (`f3d915540e942056c3ec9763fcf70a2c187768a0`) and the planner exposure through PR #284 (`3a803202b75cf88a575a26b5175a32fcb107369a`). Applicable post-merge workflows succeeded.
+
+No successful scheduled or manually dispatched governed refresh, current-night projection or live portal-consumer verification is evidenced by this ADR update. This decision therefore remains implemented but not accepted; BKL-031 remains In Progress and S10 remains `UNAVAILABLE`.
 
 ## Rollback
 
