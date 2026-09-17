@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-031-F3-A3-INFRA-001 |
-| Status | **PROPOSED — PLATFORM AND EXACT PRIVATE KERNEL READY / JOB NOT EXECUTED** |
+| Status | **SCIENTIFIC CAMPAIGN PASS — PLATFORM RETAINED / RUNTIME NOT AUTHORIZED** |
 | Version | 1.0 |
 | Date | 2026-09-15 |
 | Baseline | `main@527b298094b07e5a00317e60cab3abefed7a5759` |
@@ -108,7 +108,7 @@ CI run `35122782246` acquired all ten artifacts ephemerally with exact hashes, b
 
 Authenticated workflow run `35131365596` on exact commit `380bd8c3d04f570acb21a9a7f532930111adcdc8` used the reviewed WIF deployer identity and produced two identical unpublished OCI manifests at `sha256:de3331882e767c3a16fc479224da7c540385a6460e26df1ac73f8305676a0cce`. The saved plan is exactly five additions, zero changes and zero destroys. It was not retained outside the job; its text SHA-256 is `6fd9c1c3f9d1c754d310f88fa2e8f3dfb2422a5a9195ec40f6f57087bbb8c83e`. The platform backend contains one validated empty state and no lock. Evidence is recorded in `BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-001` at SHA-256 `06cf923ae2bad1e869782bffd6a7e5389f9a68419d6199d0d7df5319f50b12e6`.
 
-The dedicated `dsg-f3-a3` Artifact Registry repository exists and its foundation was post-verified empty before publication. Exact OCI publication, the refreshed authenticated four-resource plan, the exact saved-plan platform apply and the exact private kernel publication are separately evidenced. Job and scientific execution remain `NOT_EXECUTED`.
+The dedicated `dsg-f3-a3` Artifact Registry repository, exact OCI images, four-resource platform and private kernel are separately evidenced. The bounded scientific execution completed successfully; the retained platform remains isolated from protected-site and runtime paths.
 
 The repository prepared the registry foundation as an explicit-dispatch, main-only WIF workflow. Artifact Registry ownership remains isolated in a dedicated Terraform root and state; the platform state is empty. Static policy requires exactly one registry resource and prohibits `-target`, bootstrap/platform apply, image publication and cloud mutations outside the saved registry plan.
 
@@ -133,3 +133,7 @@ PR #239 merged the exact runner publication gate as `9db0267529b6d46a2510b415e4b
 Runner platform update run `35152386533` stopped fail-closed in its repository verification step because the exact method-profile path and digest were not exported to that process. Authentication and every cloud, Terraform and execution step were skipped, so no cloud mutation or scientific execution occurred. `BKL-031-F3-A3-RUNNER-PLATFORM-UPDATE-INCIDENT-001` records the incident; the minimal remediation exports only those two immutable verifier inputs and requires a new exact-head review before another dispatch.
 
 Corrected run `35153084496` on exact commit `83cf46ee6efdca972480177b47dd4999ab7d75fd` applied the verified saved plan with exactly zero additions, one in-place change to `google_cloud_run_v2_job.spike` and zero destroys. The job now binds runner manifest `sha256:69a20a994fde9d5b1533b142760af5796b4ac795a1f00c658373a46d2648d60c` and source commit `9db0267529b6d46a2510b415e4b3f51d668ff024`; execution inventory remained empty and immediate drift was zero. Separately reviewed read-only run `35154030354` post-verified the exact registry, kernel, runner job, four-resource state and zero executions. Platform state serial `4`, lineage `2be9b82b-88d3-888f-4fcd-dded2f74f7f3` and raw SHA-256 `084b68da6d20d9523ceabce67766cfc211b71f97ee12d8f4e7a0b4a64f57b89b` are recorded in `BKL-031-F3-A3-RUNNER-PLATFORM-UPDATE-EVIDENCE-001`. The next gate permits one separately reviewed bounded synthetic job execution and one create-only private evidence object; Horizons traffic, protected-site use and runtime activation remain blocked.
+
+The final runner image `sha256:f82acf36b79d6f3d8a3ba501b63bdba3ed446e7cf9070f477b01ed5d356ccb52` and source commit `5ce8214311757c974134494dcc8f1e232dd4c390` were applied under the later remediated runner gates. The platform now remains at state serial `6`, lineage `2be9b82b-88d3-888f-4fcd-dded2f74f7f3` and raw SHA-256 `e527e5f03e0d93a456abc2dc761b19d18479a042ac139960037569c52776f25e` with job generation `3`.
+
+Exact dispatch run `35189574972`, job `105098953021`, executed `dsg-f3-a3-spike-g4x8g` successfully. All 17 evaluated metrics over eight synthetic vectors passed, repeatability passed and the Mars transit difference was `0.08065768669985118` seconds. The create-only private evidence object generation `1789626252024638` has raw SHA-256 `483794c9a8a373e8aff2f0dd2ab0f6342826c9bd210beeebcf92e744fad72494`. `BKL-031-F3-A3-SCIENTIFIC-EXECUTION-EVIDENCE-001` records the exact execution, the two retained failed predecessors and immutable postconditions. There were zero external-reference calls and no protected-site or runtime use. F3-A3 is accepted at repository method/evidence level; F3-B is the next repository-only gate, while further execution and runtime activation require separate authorization.

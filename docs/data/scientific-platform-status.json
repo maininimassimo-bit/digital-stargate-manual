@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "updatedAt": "2026-09-16",
+  "updatedAt": "2026-09-17",
   "generatedFrom": {
     "roadmap": "docs/data/roadmap.json",
     "discovery": "docs/architecture/validation/AP-013-Session-Discovery-Execution-Evidence.md",
@@ -19,8 +19,8 @@
       "title": "Observation Planner intelligente",
       "status": "active"
     },
-    "nextMilestone": "BKL-031 F3-A3 separately reviewed exact single scientific spike execution",
-    "target": "Prepare and review one bounded synthetic Cloud Run Job execution that may create only one private evidence object. Require the exact runner image, source commit, kernel, four-resource state, empty execution inventory and empty evidence prefix; prohibit additional execution, Terraform or registry mutation, Horizons traffic, protected-site use and runtime activation; ADR-010 remains Proposed and S10 remains UNAVAILABLE until execution evidence is reviewed."
+    "nextMilestone": "BKL-031 F3-B machine-readable contracts and validator",
+    "target": "Materialize source-neutral EphemerisLunar request, evidence and method-profile schemas, bounded fixtures, fail-closed validator and privacy tests. Keep F3-C adapter, protected-site calculation, external-reference traffic, runtime activation, forecast, ranking, readiness, command and Safety Authority outside the increment."
   },
   "architecture": {
     "ap013": {

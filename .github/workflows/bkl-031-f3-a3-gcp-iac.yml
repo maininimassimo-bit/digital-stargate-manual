@@ -28,6 +28,7 @@ on:
       - ".github/scripts/verify-bkl-031-f3-a3-remediated-runner-oci-publication.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-remediated-runner-platform-update.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-exact-remediated-scientific-execution.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-scientific-execution-evidence.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - ".github/workflows/bkl-031-f3-a3-authenticated-platform-plan.yml"
       - ".github/workflows/bkl-031-f3-a3-registry-foundation.yml"
@@ -82,6 +83,7 @@ on:
       - ".github/scripts/verify-bkl-031-f3-a3-remediated-runner-oci-publication.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-remediated-runner-platform-update.mjs"
       - ".github/scripts/verify-bkl-031-f3-a3-exact-remediated-scientific-execution.mjs"
+      - ".github/scripts/verify-bkl-031-f3-a3-scientific-execution-evidence.mjs"
       - ".github/workflows/bkl-031-f3-a3-gcp-iac.yml"
       - ".github/workflows/bkl-031-f3-a3-authenticated-platform-plan.yml"
       - ".github/workflows/bkl-031-f3-a3-registry-foundation.yml"
@@ -168,6 +170,8 @@ jobs:
         run: node .github/scripts/verify-bkl-031-f3-a3-remediated-runner-platform-update.mjs
       - name: Verify exact remediated scientific execution gate
         run: node .github/scripts/verify-bkl-031-f3-a3-exact-remediated-scientific-execution.mjs
+      - name: Verify scientific execution evidence and ADR acceptance gate
+        run: node .github/scripts/verify-bkl-031-f3-a3-scientific-execution-evidence.mjs
 
   terraform:
     name: Terraform validate (${{ matrix.directory }})

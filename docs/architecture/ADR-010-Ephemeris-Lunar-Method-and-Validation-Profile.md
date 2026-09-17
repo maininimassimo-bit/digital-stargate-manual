@@ -2,19 +2,19 @@
 
 | Field | Value |
 |---|---|
-| Status | **PROPOSED — VALIDATION PLATFORM AND EXACT KERNEL READY / SCIENTIFIC CAMPAIGN NOT EXECUTED** |
+| Status | **ACCEPTED — EXACT SCIENTIFIC CAMPAIGN PASS / RUNTIME NOT AUTHORIZED** |
 | Date | 2026-09-15 |
 | Release | Release 2.x planning increment |
 | Capability | BKL-031 F3-A3 |
-| Baseline | `main@527b298094b07e5a00317e60cab3abefed7a5759` |
+| Baseline | scientific gate `main@d7d7077e086fee5dfcd344021f806ee3b6cbaa16` |
 | Decision authority | Repository Owner after evidence and ARB review |
 | Runtime impact | None until separately authorized |
 
 ## Context
 
-F3-A1 and F3-A2 have completed repository authority, but S08/S09 remain unavailable to runtime and S10 remains `UNAVAILABLE`. The owner approved the prudent method, accuracy, time-data, host and capacity baseline and completed F3-OD05 with the exact `de442s.bsp` identity, coverage, provenance, notices and SHA-256. Exact dependency/IERS inputs, reproducible offline container build, OCI publication, four-resource platform materialization and private content-addressed kernel publication are verified; scientific validation remains absent.
+F3-A1 and F3-A2 have completed repository authority, but S08/S09 remain unavailable to runtime and S10 remains `UNAVAILABLE`. The owner approved the prudent method, accuracy, time-data, host and capacity baseline and completed F3-OD05 with the exact `de442s.bsp` identity, coverage, provenance, notices and SHA-256. Exact dependency/IERS inputs, reproducible offline container build, OCI publication, four-resource platform materialization, private content-addressed kernel publication and the bounded scientific campaign are verified.
 
-This ADR records complete owner dispositions for F3-OD04–F3-OD10 and the separately governed preparatory evidence. It remains Proposed and does not authorize spike execution, further scientific-artifact acquisition, Horizons traffic, protected-site use or runtime integration.
+This ADR records complete owner dispositions for F3-OD04–F3-OD10 and the separately governed execution evidence. It is Accepted for repository method authority. It does not authorize another spike execution, further scientific-artifact acquisition, Horizons traffic, protected-site use or runtime integration.
 
 ## Decision drivers
 
@@ -74,25 +74,24 @@ Repository infrastructure:
 
 ## Decision
 
-`COMPLETE_OWNER_DECISION_RECORDED`.
+`ACCEPTED_EXACT_SCIENTIFIC_CAMPAIGN_PASS`.
 
-F3-OD04–F3-OD10 are approved as recorded above. ADR-010 remains Proposed and S10 remains `UNAVAILABLE` because implementation and the authorized scientific campaign are not complete.
+F3-OD04–F3-OD10 are approved as recorded above. ADR-010 is Accepted because the exact authorized scientific campaign passed 17/17 applicable metrics, repeatability and the bounded host profile. S10 remains `UNAVAILABLE` because F3-B/F3-C contracts, adapter and projection are not complete.
 
 Authorized now:
 
-- repository-only Terraform and CI scaffolding;
-- static validation and documentation review;
-- the recorded WIF-based exact-head plan-only gate and its empty backend state.
+- repository method authority under the immutable profile and exact artifact identities;
+- F3-B machine-readable contract and validator work through separately reviewed repository gates;
+- retention and read-only review of the exact scientific evidence.
 
 Not authorized now:
 
-- platform-resource apply or any GCP mutation beyond the governed empty backend state;
-- further acquisition or any upload of packages, SPK or IERS artifacts;
-- additional container build or image push outside the reviewed exact-head gates;
-- Cloud Run execution;
+- further platform, registry, kernel or evidence mutation;
+- further acquisition or upload of packages, SPK or IERS artifacts;
+- additional container build, image push or Cloud Run execution;
 - Horizons call;
 - protected-site use;
-- runtime adapter, F3-B/F3-C, EAGLE or N.I.N.A. change.
+- F3-C/runtime adapter, EAGLE or N.I.N.A. change.
 
 ## Consequences
 
@@ -107,7 +106,7 @@ Not authorized now:
 ### Negative
 
 - the one-time GCP administrator bootstrap, permanent-backend promotion and post-promotion verification are complete;
-- ARB-213-MI01 and ARB-213-MI02 are satisfied; exact dependency/IERS acquisition, reproducible build, network-disabled preflight, OCI publication, platform apply and private kernel publication evidence are recorded, while scientific-spike execution remains a separate blocked gate;
+- ARB-213-MI01 and ARB-213-MI02 are satisfied; exact dependency/IERS acquisition, reproducible build, network-disabled preflight, OCI publication, platform apply, private kernel publication and scientific execution evidence are recorded;
 - Cloud Run cold start and regional service availability must be measured;
 - private VPC egress prevents Horizons from the local job profile.
 
@@ -123,9 +122,9 @@ Not authorized now:
 8. a separately reviewed registry-foundation apply creates only the target repository, then the exact OCI candidate is published;
 9. the authenticated plan is refreshed with the published registry digest and platform apply is separately reviewed;
 10. the exact approved kernel is acquired and privately published through a separately reviewed one-shot gate;
-11. the bounded spike is executed through a separately reviewed gate and evidence reviewed;
-12. ADR-010 is Accepted, Rejected or remains Proposed;
-13. F3-B remains blocked until acceptance conditions are satisfied.
+11. the bounded spike was executed through run `35189574972` and exact private evidence was reviewed;
+12. ADR-010 is Accepted by `BKL-031-F3-A3-SCIENTIFIC-CAMPAIGN-ACCEPTANCE-2026-09-17`;
+13. F3-B is the next dependency-ready repository increment.
 
 ## Validation
 
@@ -137,11 +136,11 @@ Current evidence:
 - Google Cloud topology and Terraform scaffolding prepared;
 - bootstrap Terraform apply executed with 27 additions, 0 changes and 0 destroys; protected backend promotion and zero drift verified;
 - exact container/IERS manifest and fail-closed source contract verified; ten artifacts acquired ephemerally; two reproducible offline builds and network-disabled preflight `PASS`; exact OCI manifest published and post-verified;
-- exact four-resource platform applied from a reviewed saved plan with zero immediate drift and zero job executions;
+- exact four-resource platform applied from a reviewed saved plan with zero immediate drift; its later governed history contains two failed executions and one successful remediated execution;
 - run `35146023621` made one approved NAIF request and one generation-zero private upload; GCS generation `1789590110146663` passed full read-back with exact size, `DAF/SPK`, SHA-256 and MD5;
-- spike and scientific campaign `NOT EXECUTED`;
+- exact scientific campaign `PASS`: execution `dsg-f3-a3-spike-g4x8g`, 8 vectors, 17/17 metrics, repeatability pass and transit error `0.08065768669985118` seconds;
 - dependency/IERS acquisition `EXACT_HASH_VERIFIED_EPHEMERAL`; approved SPK acquisition/publication `EXACT_PRIVATE_OBJECT_FULL_READBACK_VERIFIED`; other scientific-data acquisition `NOT EXECUTED`;
-- privacy/runtime/OAT `NOT EXECUTED`.
+- external reference, protected-site use, runtime and OAT `NOT EXECUTED`.
 
 ## Traceability
 
@@ -156,6 +155,8 @@ Current evidence:
 - BKL-031-F3-A3-AUTHENTICATED-PLATFORM-PLAN-EVIDENCE-002@sha256:8d1864d0a766d11ff51c8461adc12714a845ef41ee624dbd1e17826cf2d5fbbb;
 - BKL-031-F3-A3-PLATFORM-APPLY-EVIDENCE-001@sha256:ca5952b67904f514e2e05b7abfd8aeb4df71cfdba89958441ca233bd01e710b8;
 - BKL-031-F3-A3-KERNEL-PUBLICATION-EVIDENCE-001@sha256:53ca4364cd8c24495a5a7f4d1ca8bf6af3dfd1683ff6e8d73ffad7b884ef399b;
+- BKL-031-F3-A3-SCIENTIFIC-EXECUTION-EVIDENCE-001;
+- BKL-031-F3-A3-SCIENTIFIC-CAMPAIGN-ACCEPTANCE-2026-09-17;
 - ARB-213-MI01;
 - BKL-031-F3-A3-INFRA-001;
 - BKL-031-F3-A3-VAL-001;
@@ -165,7 +166,7 @@ Current evidence:
 
 ## Acceptance rule
 
-ADR-010 may become Accepted only when F3-OD05 is exact, all package/container/data digests and coverage are recorded, the authorized campaign passes every approved metric and capacity bound, and ARB/Release Quality gates complete.
+The acceptance rule is satisfied when the exact evidence change completes ARB/Release Quality review, exact-head merge and post-merge verification. Until those repository gates complete, this acceptance remains a review candidate.
 
 ## Rollback
 
@@ -173,4 +174,4 @@ Revert the repository package for source changes. The authorized bootstrap and a
 
 ## Governance stop
 
-The authenticated exact-head plan, isolated Artifact Registry foundation, exact OCI publication, exact four-resource platform apply and exact private kernel publication gates are complete. The registry contains one post-verified image at the approved digest. The platform state contains only the private VPC, subnet, digest-pinned Cloud Run Job and invoker binding; the private data bucket contains the one approved content-addressed kernel generation; zero job executions are verified. Stop before separately reviewed exact scientific-spike execution. Horizons traffic, protected-site use and runtime activation remain blocked. S10 remains `UNAVAILABLE`.
+The infrastructure, exact artifacts and scientific campaign are complete at evidence level. The registry contains the three reviewed images; the platform state remains serial 6 with four resources; the exact kernel generation is unchanged; and the sole successful execution is `dsg-f3-a3-spike-g4x8g`. Stop before another cloud execution, Horizons traffic, protected-site use or runtime activation. F3-B may proceed as a repository-only contract/validator increment. S10 remains `UNAVAILABLE`.

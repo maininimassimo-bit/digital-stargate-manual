@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0",
+  "evidenceId": "BKL-031-F3-A3-SCIENTIFIC-EXECUTION-EVIDENCE-001",
+  "status": "EXACT_REMEDIATED_SCIENTIFIC_CAMPAIGN_PASS",
+  "recordedAtUtc": "2026-09-17T06:24:34Z",
+  "source": {
+    "gateCommit": "d7d7077e086fee5dfcd344021f806ee3b6cbaa16",
+    "runnerCommit": "5ce8214311757c974134494dcc8f1e232dd4c390",
+    "runnerImage": "europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike@sha256:f82acf36b79d6f3d8a3ba501b63bdba3ed446e7cf9070f477b01ed5d356ccb52",
+    "runnerConfigDigest": "sha256:75bc408cdfb4e9fc1fe0db59c47f8ff71245b73d76ae66cfe02fd03910f74f87"
+  },
+  "continuousIntegration": {
+    "provider": "GitHub Actions",
+    "workflow": "BKL-031 F3-A3 Exact Remediated Scientific Execution",
+    "runId": 35189574972,
+    "jobId": 105098953021,
+    "event": "workflow_dispatch",
+    "createdAtUtc": "2026-09-17T06:22:58Z",
+    "completedAtUtc": "2026-09-17T06:24:34Z",
+    "runUrl": "https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35189574972",
+    "conclusion": "SUCCESS"
+  },
+  "execution": {
+    "name": "dsg-f3-a3-spike-g4x8g",
+    "jobGeneration": 3,
+    "createdAtUtc": "2026-09-17T06:23:54.430507Z",
+    "startedAtUtc": "2026-09-17T06:23:58.563375Z",
+    "completedAtUtc": "2026-09-17T06:24:14.907953Z",
+    "result": "COMPLETED_TRUE_SUCCEEDED_COUNT_1",
+    "cloudDurationSeconds": 16.34,
+    "taskCount": 1,
+    "parallelism": 1,
+    "maxRetries": 0
+  },
+  "campaign": {
+    "id": "BKL-031-F3-A3-SYNTHETIC-CAMPAIGN-001",
+    "requestSha256": "dfac74fd72aa2a835c961cf20c16d88e2ec262cfdca8c45011342436bd05a312",
+    "methodProfileId": "BKL-031-F3-A3-METHOD-PROFILE-001",
+    "methodProfileSha256": "e69f60e5ed7f71cd982437f6ca3556b732d6ae9a46718995134aa64a7b7f67ca",
+    "kernelSha256": "54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c",
+    "primary": "ASTROPY_8_0_1_JPLEPHEM_2_24_DE442S",
+    "crossCheck": "SKYFIELD_1_55_DE442S",
+    "comparisonClassification": "IMPLEMENTATION_CROSS_CHECK_SHARED_GOVERNED_SPK",
+    "independentExternalReference": "NOT_REQUIRED_BY_APPROVED_LOCAL_PROFILE",
+    "vectorCount": 8,
+    "metricPassCount": 17,
+    "metricEvaluationCount": 17,
+    "allEvaluatedMetricsPass": true,
+    "repeatabilityPass": true,
+    "transitTarget": "mars",
+    "transitErrorSeconds": 0.08065768669985118,
+    "transitPass": true,
+    "runnerDurationMilliseconds": 5818
+  },
+  "evidenceObject": {
+    "uri": "gs://digital-stargate-telemetry-183451329061-f3-evidence/bkl-031/f3-a3/scientific-spike/5ce8214311757c974134494dcc8f1e232dd4c390/dsg-f3-a3-spike-g4x8g/evidence.json",
+    "generation": "1789626252024638",
+    "sizeBytes": 5937,
+    "rawSha256": "483794c9a8a373e8aff2f0dd2ab0f6342826c9bd210beeebcf92e744fad72494",
+    "normalizedResultSha256": "d4f5163f0ef9c5701fb98a6b9ceef8411c24100e4674298183c770afbc2318e2",
+    "creation": "IF_GENERATION_MATCH_ZERO"
+  },
+  "postconditions": {
+    "executionNames": [
+      "dsg-f3-a3-spike-9drzb",
+      "dsg-f3-a3-spike-jv646",
+      "dsg-f3-a3-spike-g4x8g"
+    ],
+    "executionCount": 3,
+    "successfulExecutionCount": 1,
+    "remediatedEvidenceObjectCount": 1,
+    "platformStateSerial": 6,
+    "platformStateRawSha256": "e527e5f03e0d93a456abc2dc761b19d18479a042ac139960037569c52776f25e",
+    "jobConfigurationGeneration": 3,
+    "registryImageCount": 3,
+    "kernelGeneration": "1789590110146663"
+  },
+  "controls": {
+    "externalReferenceCallCount": 0,
+    "networkDestinations": [
+      "metadata.google.internal",
+      "storage.googleapis.com"
+    ],
+    "protectedSiteUse": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED",
+    "cloudMutation": "ONE_JOB_EXECUTION_AND_ONE_CREATE_ONLY_EVIDENCE_OBJECT",
+    "platformMutation": "NOT_EXECUTED",
+    "registryMutation": "NOT_EXECUTED",
+    "kernelMutation": "NOT_EXECUTED"
+  },
+  "preflightIncident": "BKL-031-F3-A3-REMEDIATED-SCIENTIFIC-PREFLIGHT-INCIDENT-001",
+  "decisionRecommendation": "ACCEPT_ADR_010_FOR_REPOSITORY_METHOD_AUTHORITY_KEEP_RUNTIME_S10_UNAVAILABLE",
+  "nextGate": "F3_A3_EXACT_EVIDENCE_REVIEW_AND_ADR_010_ACCEPTANCE"
+}
