@@ -41,7 +41,7 @@ const regenerated=rankFixture(structuredClone(fixture));
 assert.equal(canonicalJson(projection),canonicalJson(regenerated),'persisted F5 projection differs from deterministic engine output');
 assert.equal(projection.results.length,2);
 assert.deepEqual(projection.results.map(r=>[r.rank,r.targetKey,r.score]),[[1,'dsg-target:ldn-1320',76.3889],[2,'dsg-target:m-27',53.0556]]);
-assert.equal(FACTORS.reduce((s,f)=>s+f.weight,0),1);
+assert.ok(Math.abs(FACTORS.reduce((s,f)=>s+f.weight,0)-1)<=1e-12,'F5 factor weights must sum to 1 within IEEE-754 tolerance');
 assert.equal(projection.boundary.readinessAuthority,false);
 assert.equal(projection.boundary.automaticTargetSelection,false);
 assert.equal(projection.boundary.schedulingAuthority,false);
