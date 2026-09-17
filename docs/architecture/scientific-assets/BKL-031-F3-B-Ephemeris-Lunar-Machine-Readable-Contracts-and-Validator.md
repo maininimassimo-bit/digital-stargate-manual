@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | `BKL-031-F3-B-CONTRACT-001` |
-| Status | **IMPLEMENTED — ACCEPTANCE REVIEW PENDING** |
+| Status | **ACCEPTED — POST-MERGE VERIFIED** |
 | Date | 2026-09-17 |
 | Predecessor | F3-A3 accepted method profile and scientific campaign |
 | Runtime effect | None |
@@ -54,6 +54,10 @@ The existing F3-A1 and F3-A2 authority validators remain responsible for their c
 
 Rollback removes the three F3-B schemas, fixture, validator/test/workflow and their documentation references. The accepted F2 schema, fixture and validator remain unchanged. S08, S09 and S10 runtime states remain unavailable, so rollback requires no runtime or data migration.
 
+## Acceptance evidence
+
+Pull request #259 passed 15/15 exact-head checks on `858a7094d2ae01329617c2c733075f6b87d44113`, merged with expected-head control as `8c3b7b8424a15b4288c79f773b9f0fc3f7cd5c5f`, and passed all 11 applicable post-merge workflows including Pages and F3-B Governance.
+
 ## Successor gate
 
-F3-C may be prepared only after exact-head review, merge and post-merge verification of this increment. F3-C must implement a bounded adapter and sanitized projection as a separate gate. Protected-site calculation, another cloud execution and runtime activation remain outside this package.
+F3-C is promoted as the next bounded gate. It must implement the adapter and sanitized projection with independent CI/OAT acceptance. Protected-site calculation, another cloud execution and runtime activation remain separately gated and are not authorized by this acceptance.
