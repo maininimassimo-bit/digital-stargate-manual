@@ -1,17 +1,18 @@
 name: BKL-031 F4-C Gate Governance
 on:
   pull_request:
-    paths: [".github/scripts/*observation-planner-forecast-f4c*", ".github/workflows/bkl-031-f4-c-*.yml", ".github/workflows/developer-foundation.yml", "docs/architecture/scientific-assets/BKL-031-F4-C-*.md", "docs/project/**", ".github/roadmap/**", "docs/data/roadmap.json", "docs/data/scientific-platform-status.json", "mkdocs.yml"]
+    paths: [".github/scripts/*observation-planner-forecast-f4c*", ".github/workflows/bkl-031-f4-c-*.yml", ".github/workflows/developer-foundation.yml", "governance/forecast-evidence/**", "docs/architecture/scientific-assets/BKL-031-F4-C-*.md", "docs/architecture/validation/BKL-031-F4-C-*.md", "docs/project/**", ".github/roadmap/**", "docs/data/roadmap.json", "docs/data/scientific-platform-status.json", "mkdocs.yml"]
   push:
     branches: [main]
-    paths: [".github/scripts/*observation-planner-forecast-f4c*", ".github/workflows/bkl-031-f4-c-*.yml", ".github/workflows/developer-foundation.yml", "docs/architecture/scientific-assets/BKL-031-F4-C-*.md", "docs/project/**", ".github/roadmap/**", "docs/data/roadmap.json", "docs/data/scientific-platform-status.json", "mkdocs.yml"]
+    paths: [".github/scripts/*observation-planner-forecast-f4c*", ".github/workflows/bkl-031-f4-c-*.yml", ".github/workflows/developer-foundation.yml", "governance/forecast-evidence/**", "docs/architecture/scientific-assets/BKL-031-F4-C-*.md", "docs/architecture/validation/BKL-031-F4-C-*.md", "docs/project/**", ".github/roadmap/**", "docs/data/roadmap.json", "docs/data/scientific-platform-status.json", "mkdocs.yml"]
 permissions: { contents: read }
 jobs:
   gate:
-    name: F4-C one-request generalized acquisition gate
+    name: F4-C bounded acquisition evidence reconciliation
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v4
         with: { node-version: "22" }
       - run: node .github/scripts/verify-observation-planner-forecast-f4c-gate.mjs
+      - run: node .github/scripts/reconcile-observation-planner-forecast-f4c.mjs

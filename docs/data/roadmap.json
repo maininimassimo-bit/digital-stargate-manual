@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-17",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "5f3a37ef00e423585c7c3063e966cf75e7d8e9f6357b39e7a956c0fcdc9c6a48",
+  "sourceDigest": "030dce30a67c320f2b5e17219d88e29dd245cc90018356aa7feb865610fd89a1",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-C accepted and post-merge verified; ADR-010 accepted; F4-A/ADR-011 and F4-B v1.0 accepted and post-merge verified with zero provider traffic; F4-C gate 001 issued one generalized request and failed HTTP 400; request consumed, no artifact and zero protected-site use; F4-B v1.1 / gate 002 remediation prepared; S10 runtime unavailable",
+  "projectStatus": "BKL-031 F3-C accepted and post-merge verified; ADR-010 accepted; F4-A/ADR-011 accepted; F4-B v1.1 integrated with zero provider traffic in F4-B; F4-C consumed two bounded generalized requests, preserved HTTP 200 raw evidence and reconciled 71 complete hourly instants with zero imputation; acquisition path removed, zero protected-site use; S10 runtime unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F4-C one-replacement-request remediation gate acceptance",
-  "target": "Review and integrate the F4-B v1.1 Single Runs correction and F4-C gate 002, then authorize exactly one replacement synthetic/generalized ICON-2I request. Prohibit a third request and keep protected-site egress, recurring traffic, production runtime, public projection, ranking, readiness, commands and Safety Authority unavailable.",
+  "nextMilestone": "BKL-031 F4-D sanitized forecast projection and portal integration",
+  "target": "Review and integrate F4-C immutable raw/normalized evidence reconciliation, then build a separately governed sanitized read-only F4-D forecast projection and portal consumer. Keep provider traffic exhausted, protected-site egress, production runtime, ranking, readiness, commands and Safety Authority unavailable.",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -840,9 +840,17 @@
     {
       "id": "M-BKL031-F4-C-ACQUISITION-GATE",
       "itemRef": "BKL-031",
-      "title": "BKL-031 F4-C One-Replacement-Request Remediation Gate",
+      "title": "BKL-031 F4-C Generalized Acquisition Gate Executed",
       "date": "2026-09-17",
-      "description": "Gate 001 merged at 48bd61a3337523b7790d78a37813eaf5e1228724 and run 35201479378 consumed one generalized request that failed HTTP 400 without an artifact. Gate 002 uses Single Runs, ten supported variables, one replacement request, cumulative ceiling two, no redirects, no schedule and always-uploaded evidence; replacement not executed.",
+      "description": "Two of two authorized generalized requests are consumed. Run 35214129960 returned HTTP 200 raw evidence at SHA-256 e51c6935f8e04bcce38983bc03147f4f897a833f90feb6271b2f510ee6eec102; online normalization failed closed on one null initialization-time precipitation value. The acquisition workflow and script are removed, preventing a third request.",
+      "status": "active"
+    },
+    {
+      "id": "M-BKL031-F4-C-EVIDENCE-RECONCILIATION",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F4-C Acquisition Evidence Reconciliation Candidate",
+      "date": "2026-09-17",
+      "description": "Artifact 10494298154 preserves the 4,723-byte Single Runs response. Offline deterministic reconciliation excludes exactly the incomplete 00:00 precipitation instant, accepts a contiguous 71-hour suffix, imputes zero values and produces normalized evidence digest 350a7b9ae8b2de308ba55a7105e56bb4de5040572370ab2715c0fa70088af2f5. Public projection remains false; F4-D is next.",
       "status": "active"
     }
   ]

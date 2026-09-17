@@ -54,10 +54,11 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [ADR-011 Forecast Source and Run Lineage](../architecture/ADR-011-Forecast-Source-and-Run-Lineage.md) | Accepted for repository source authority; forbids best-match, seamless, stitched and automatic fallback modes |
 | [F4-A Forecast Source Validation Plan](../architecture/validation/BKL-031-F4-A-Forecast-Source-Validation-Plan.md) | 12 publication gates and 24 mandatory fail-closed cases for F4-B and later gates |
 | [F4-A Forecast Source Contract Acceptance](BKL-031-F4-A-FORECAST-SOURCE-CONTRACT-ACCEPTANCE-2026-09-17.md) | Accepted/Post-Merge Verified via PR #263; 16/16 exact-head checks and 13/13 post-merge workflows |
-| [F4-B Forecast Machine-Readable Contracts, Fixture and Validator](../architecture/scientific-assets/BKL-031-F4-B-Forecast-Machine-Readable-Contracts-Fixture-and-Validator.md) | v1.1 correction candidate; Single Runs host, ten supported variables, visibility unavailable, 24/24 fail-closed cases |
+| [F4-B Forecast Machine-Readable Contracts, Fixture and Validator](../architecture/scientific-assets/BKL-031-F4-B-Forecast-Machine-Readable-Contracts-Fixture-and-Validator.md) | v1.1 Accepted/Post-Merge Verified; Single Runs host, ten supported variables, visibility unavailable, 24/24 fail-closed cases |
 | [F4-B Forecast Contracts Acceptance](BKL-031-F4-B-FORECAST-CONTRACTS-ACCEPTANCE-2026-09-17.md) | PR #265; 18/18 exact-head checks, 14/14 post-merge workflows and zero provider traffic |
-| [F4-C Replacement Generalized Forecast Acquisition Gate](../architecture/scientific-assets/BKL-031-F4-C-One-Request-Generalized-Forecast-Acquisition-Gate.md) | Gate 001 request consumed with HTTP 400; gate 002 permits one replacement request; no protected-site input |
+| [F4-C Generalized Forecast Acquisition Gate](../architecture/scientific-assets/BKL-031-F4-C-One-Request-Generalized-Forecast-Acquisition-Gate.md) | Two-request budget exhausted; HTTP 200 raw response preserved; acquisition path removed |
 | [F4-C Failed Acquisition and Remediation Evidence](../architecture/validation/BKL-031-F4-C-Failed-Acquisition-and-Remediation-Gate-2026-09-17.md) | Run 35201479378; exact failure and no-artifact boundary; no retry performed |
+| [F4-C Acquisition Evidence Reconciliation](../architecture/validation/BKL-031-F4-C-Acquisition-Evidence-Reconciliation-2026-09-17.md) | Run 35214129960; 71 complete instants, one excluded, zero imputed, no further request |
 | [F3-A3 Owner Decision Record](BKL-031-F3-A3-OWNER-DECISION-RECORD-2026-09-15.md) | Complete owner decision; no execution authority |
 | [F3-A3 F3-OD05 Exact SPK Approval](BKL-031-F3-A3-F3-OD05-SPK-APPROVAL-2026-09-16.md) | `de442s.bsp` identity, coverage, provenance and notices approved; no upload/execution authority |
 | [F3-A3 Google Cloud Hosting Plan](../architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md) | Bootstrap/remote state post-verified; static container/IERS evidence prepared; platform not executed |
@@ -144,7 +145,7 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 - BKL-031 F3-A3: Accepted / Post-Merge Verified through PR #258 and merge `a0a2e4950f2d908a3aaa0fc149754f904ee8d588`; exact scientific execution passed 17/17 metrics with zero external-reference calls.
 - BKL-031 F3-B: Accepted / Post-Merge Verified through PR #259 and merge `8c3b7b8424a15b4288c79f773b9f0fc3f7cd5c5f`; 34/34 contract tests and all 11 post-merge workflows passed.
 - BKL-031 F3-C: Accepted / Post-Merge Verified through PR #261 and merge `fba1287efea0d1f36b147bc42a4fec5498990756`; 35/35 tests, 12/12 post-merge workflows and the public portal route passed.
-- BKL-031 F4-A/ADR-011 and F4-B v1.0 are Accepted/Post-Merge Verified. F4-C gate 001 issued one generalized request that failed HTTP 400; the request is consumed. F4-B v1.1 and gate 002 prepare one replacement request, prohibit a third request and keep S10 production runtime `UNAVAILABLE`.
+- BKL-031 F4-A/ADR-011 and F4-B v1.1 are Accepted/Post-Merge Verified. F4-C consumed its two-request ceiling; the second response is reconciled offline to 71 complete instants with zero imputation, and the acquisition path is removed. F4-D sanitized read-only projection is next; S10 production runtime remains `UNAVAILABLE`.
 
 ## Sequenza governata
 

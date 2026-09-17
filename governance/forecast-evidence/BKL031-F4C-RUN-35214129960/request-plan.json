@@ -1,0 +1,37 @@
+{
+  "gateId": "BKL031-F4C-ONE-REPLACEMENT-GENERALIZED-REQUEST-002",
+  "priorFailedWorkflowRunId": 35201479378,
+  "attemptOrdinal": 2,
+  "expectedHost": "single-runs-api.open-meteo.com",
+  "method": "GET",
+  "redirects": "DENY",
+  "maxRequestsThisAttempt": 1,
+  "maxCumulativeProviderRequests": 2,
+  "timeoutMs": 10000,
+  "maxResponseBytes": 2000000,
+  "location": {
+    "classification": "SYNTHETIC_GENERALIZED",
+    "latitudeDeg": 42,
+    "longitudeDeg": 12,
+    "siteAuthorityRef": "SITE-PUBLIC-SYNTHETIC-FORECAST-IT-01"
+  },
+  "modelId": "italia_meteo_arpae_icon_2i",
+  "runInitialisationUtc": "2026-09-17T00:00Z",
+  "variables": [
+    "temperature_2m",
+    "relative_humidity_2m",
+    "dew_point_2m",
+    "precipitation",
+    "cloud_cover",
+    "cloud_cover_low",
+    "cloud_cover_mid",
+    "cloud_cover_high",
+    "wind_speed_10m",
+    "wind_gusts_10m"
+  ],
+  "unavailableVariables": [
+    "visibility"
+  ],
+  "protectedSiteUsed": false,
+  "productionUse": false
+}

@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | `BKL-031-F4-B-CONTRACTS-001` |
-| Status | **v1.1 CORRECTION REVIEW CANDIDATE / ORIGINAL v1.0 POST-MERGE VERIFIED** |
+| Status | **v1.1 ACCEPTED — POST-MERGE VERIFIED / ZERO F4-B PROVIDER TRAFFIC** |
 | Date | 2026-09-17 |
 | Decision authority | Accepted ADR-011 |
 | Fixture | `BKL031-F4B-FIXTURE-002` |

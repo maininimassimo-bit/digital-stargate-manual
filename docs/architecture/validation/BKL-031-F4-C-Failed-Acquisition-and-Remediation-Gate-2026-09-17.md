@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Evidence ID | `BKL-031-F4-C-FAILURE-001` |
-| Status | **FAILED / REQUEST CONSUMED / REMEDIATION PREPARED** |
+| Status | **FIRST REQUEST FAILED / REMEDIATION EXECUTED / HISTORICAL EVIDENCE** |
 | Workflow run | [35201479378](https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/35201479378) |
 | Authorized main | `48bd61a3337523b7790d78a37813eaf5e1228724` |
 | Dispatch time | 2026-09-17T08:46Z |
@@ -27,3 +27,5 @@ Remediation gate `BKL-031-F4-C-GATE-002` therefore:
 6. prohibits any third request.
 
 The failed request produced no forecast evidence and grants no F4-D projection, ranking, readiness, production runtime, command or Safety authority.
+
+Gate 002 was subsequently integrated and replacement run `35214129960` returned an HTTP 200 raw response. Its one incomplete initialization instant was rejected online and reconciled offline without imputation. See `BKL-031-F4-C-Acquisition-Evidence-Reconciliation-2026-09-17.md`. Both authorized requests are consumed and no third request is permitted.
