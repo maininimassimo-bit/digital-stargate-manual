@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-17",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "110e088bf6960d59f91b0837f1d6983add38b1a6c83c560699f569ed06aef264",
+  "sourceDigest": "03eae25b0b98a89f67a48279fb5da7c5ea784aaf0cd3ff43ab0432d9068d6b61",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-C accepted and post-merge verified; ADR-010 accepted; F4-A and ADR-011 accepted and post-merge verified through PR #263 with 16/16 exact-head checks and 13/13 post-merge workflows; zero provider traffic and zero protected-site use; F4-B machine-readable forecast contracts promoted; S10 runtime unavailable",
+  "projectStatus": "BKL-031 F3-C accepted and post-merge verified; ADR-010 accepted; F4-A and ADR-011 accepted and post-merge verified; F4-B three closed forecast schemas, four-instant synthetic TEST/NONE fixture and deterministic validator pass 24/24 negative cases with zero provider traffic and zero protected-site use; S10 runtime unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F4-B machine-readable forecast contracts, TEST/NONE fixture and validator",
-  "target": "Implement F4-B closed request, source-profile and evidence schemas, a synthetic/generalized TEST/NONE fixture, deterministic validator and all 24 fail-closed cases. Keep provider traffic, protected-site egress, production runtime, ranking, readiness, commands and Safety Authority unavailable.",
+  "nextMilestone": "BKL-031 F4-B exact-head contracts and validator acceptance",
+  "target": "Review and integrate F4-B machine-readable source-profile, request and evidence contracts, synthetic fixture and 24-case fail-closed validator. Keep provider traffic, protected-site egress, production runtime, projection, ranking, readiness, commands and Safety Authority unavailable.",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -307,7 +307,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3-C and F4-A are Accepted/Post-Merge Verified. ADR-011 is accepted for repository source authority after PR #263, merge 02a829f21bf76a0dc5d9ef29998ca5690d71395c and 13/13 post-merge workflows. No provider traffic or protected-site use occurred; F4-B machine-readable contracts are promoted and S10 remains UNAVAILABLE."
+          "note": "F4-A and ADR-011 are Accepted/Post-Merge Verified. F4-B has three closed forecast schemas, a synthetic TEST/NONE fixture and 24/24 fail-closed negative cases with a hard network deny and zero provider calls. Exact-head F4-B acceptance is next; F4-C acquisition and S10 remain separately gated."
         },
         {
           "id": "BKL-032",
@@ -811,6 +811,14 @@
       "title": "BKL-031 F4-A Forecast Source Contract Acceptance",
       "date": "2026-09-17",
       "description": "PR #263 passed 16/16 exact-head checks on d2ecedb2c141eb0a17f5a1d659748488802d4200, merged with expected-head control as 02a829f21bf76a0dc5d9ef29998ca5690d71395c, and passed all 13 applicable post-merge workflows. ADR-011 and F4-A are Accepted/Post-Merge Verified; F4-B is promoted with zero provider traffic and S10 unavailable.",
+      "status": "active"
+    },
+    {
+      "id": "M-BKL031-F4-B-CONTRACTS",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F4-B Forecast Contracts and Validator Candidate",
+      "date": "2026-09-17",
+      "description": "Three closed JSON Schemas, a deterministic four-instant synthetic TEST/NONE fixture and validator execute all 24 F4-A negative cases. Network policy is DENY_F4B with zero allowed requests; provider traffic, protected-site use, runtime, projection, ranking, readiness, commands and Safety Authority remain absent.",
       "status": "active"
     }
   ]

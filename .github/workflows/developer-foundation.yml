@@ -49,6 +49,8 @@ jobs:
       - { name: Verify Observation Planner F3-C bounded integration, run: node .github/scripts/verify-observation-planner-ephemeris-lunar-f3c.mjs }
       - { name: Test Observation Planner F3-C adapter and portal boundaries, run: node --test .github/scripts/test-observation-planner-ephemeris-lunar-f3c.mjs }
       - { name: Verify Observation Planner F4-A forecast source contract, run: node .github/scripts/verify-observation-planner-forecast-f4a.mjs }
+      - { name: Verify Observation Planner F4-B forecast contracts, run: node .github/scripts/verify-observation-planner-forecast-f4b.mjs }
+      - { name: Test Observation Planner F4-B fail-closed rules, run: node --test .github/scripts/test-observation-planner-forecast-f4b.mjs }
       - { name: Verify Target Identity Reconciliation F3, run: node .github/scripts/verify-target-identity-reconciliation.mjs }
       - { name: Test Target Identity Reconciliation F3 fail-closed rules, run: node --test .github/scripts/test-target-identity-reconciliation.mjs }
       - { name: Verify Target Knowledge F4 consumer read model, run: node .github/scripts/verify-target-knowledge-read-model.mjs }

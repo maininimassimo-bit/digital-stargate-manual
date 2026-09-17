@@ -1,0 +1,284 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema.json",
+  "title": "BKL-031 F4-B Forecast Source Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractType",
+    "profileId",
+    "decisionRef",
+    "providerId",
+    "upstreamAuthorityId",
+    "modelId",
+    "deliveryInterface",
+    "endpoint",
+    "runCadenceHoursUtc",
+    "forecastHorizonHours",
+    "maxRunAgeHours",
+    "nativeResolution",
+    "allowedVariables",
+    "units",
+    "requestPolicy",
+    "networkPolicy",
+    "licensePolicy",
+    "sourceReferences",
+    "profileDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "contractType": {
+      "type": "string",
+      "const": "BKL031_F4B_FORECAST_SOURCE_PROFILE"
+    },
+    "profileId": {
+      "type": "string"
+    },
+    "decisionRef": {
+      "type": "string"
+    },
+    "providerId": {
+      "type": "string"
+    },
+    "upstreamAuthorityId": {
+      "type": "string"
+    },
+    "modelId": {
+      "type": "string"
+    },
+    "deliveryInterface": {
+      "type": "string"
+    },
+    "endpoint": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema.json",
+      "title": "endpoint",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scheme",
+        "host",
+        "path"
+      ],
+      "properties": {
+        "scheme": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        }
+      }
+    },
+    "runCadenceHoursUtc": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "forecastHorizonHours": {
+      "type": "number"
+    },
+    "maxRunAgeHours": {
+      "type": "number"
+    },
+    "nativeResolution": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema.json",
+      "title": "nativeResolution",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "spatialKm",
+        "temporal"
+      ],
+      "properties": {
+        "spatialKm": {
+          "type": "number"
+        },
+        "temporal": {
+          "type": "string"
+        }
+      }
+    },
+    "allowedVariables": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "units": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema.json",
+      "title": "units",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "temperature_2m",
+        "relative_humidity_2m",
+        "dew_point_2m",
+        "precipitation",
+        "cloud_cover",
+        "cloud_cover_low",
+        "cloud_cover_mid",
+        "cloud_cover_high",
+        "visibility",
+        "wind_speed_10m",
+        "wind_gusts_10m"
+      ],
+      "properties": {
+        "temperature_2m": {
+          "type": "string"
+        },
+        "relative_humidity_2m": {
+          "type": "string"
+        },
+        "dew_point_2m": {
+          "type": "string"
+        },
+        "precipitation": {
+          "type": "string"
+        },
+        "cloud_cover": {
+          "type": "string"
+        },
+        "cloud_cover_low": {
+          "type": "string"
+        },
+        "cloud_cover_mid": {
+          "type": "string"
+        },
+        "cloud_cover_high": {
+          "type": "string"
+        },
+        "visibility": {
+          "type": "string"
+        },
+        "wind_speed_10m": {
+          "type": "string"
+        },
+        "wind_gusts_10m": {
+          "type": "string"
+        }
+      }
+    },
+    "requestPolicy": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema.json",
+      "title": "requestPolicy",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "timezone",
+        "timeformat",
+        "cellSelection",
+        "elevationMode",
+        "maxLocations",
+        "maxModels",
+        "maxRuns",
+        "maxHourlyInstants",
+        "unknownParameters"
+      ],
+      "properties": {
+        "timezone": {
+          "type": "string"
+        },
+        "timeformat": {
+          "type": "string"
+        },
+        "cellSelection": {
+          "type": "string"
+        },
+        "elevationMode": {
+          "type": "string"
+        },
+        "maxLocations": {
+          "type": "number"
+        },
+        "maxModels": {
+          "type": "number"
+        },
+        "maxRuns": {
+          "type": "number"
+        },
+        "maxHourlyInstants": {
+          "type": "number"
+        },
+        "unknownParameters": {
+          "type": "string"
+        }
+      }
+    },
+    "networkPolicy": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema.json",
+      "title": "networkPolicy",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "maxRequests",
+        "allowHosts",
+        "redirects",
+        "timeoutMs",
+        "maxResponseBytes"
+      ],
+      "properties": {
+        "mode": {
+          "type": "string"
+        },
+        "maxRequests": {
+          "type": "number"
+        },
+        "allowHosts": {
+          "type": "array",
+          "items": {}
+        },
+        "redirects": {
+          "type": "string"
+        },
+        "timeoutMs": {
+          "type": "number"
+        },
+        "maxResponseBytes": {
+          "type": "number"
+        }
+      }
+    },
+    "licensePolicy": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema.json",
+      "title": "licensePolicy",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evaluationUse",
+        "productionDecision",
+        "termsRevision",
+        "attributionRequired"
+      ],
+      "properties": {
+        "evaluationUse": {
+          "type": "string"
+        },
+        "productionDecision": {
+          "type": "string"
+        },
+        "termsRevision": {
+          "type": "string"
+        },
+        "attributionRequired": {
+          "type": "boolean"
+        }
+      }
+    },
+    "sourceReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "profileDigest": {
+      "type": "string"
+    }
+  }
+}

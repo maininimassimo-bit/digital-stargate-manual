@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema.json",
+  "title": "BKL-031 F4-B Forecast Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractType",
+    "requestId",
+    "generatedAtUtc",
+    "environment",
+    "authority",
+    "siteAuthorityRef",
+    "locationClassification",
+    "outboundLocationPolicy",
+    "latitudeDeg",
+    "longitudeDeg",
+    "providerId",
+    "upstreamAuthorityId",
+    "modelId",
+    "runInitialisationUtc",
+    "startUtc",
+    "endUtc",
+    "hourlyVariables",
+    "timezone",
+    "timeformat",
+    "cellSelection",
+    "elevation",
+    "canonicalRequestDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "contractType": {
+      "type": "string",
+      "const": "BKL031_F4B_FORECAST_REQUEST"
+    },
+    "requestId": {
+      "type": "string"
+    },
+    "generatedAtUtc": {
+      "type": "string"
+    },
+    "environment": {
+      "type": "string",
+      "const": "TEST"
+    },
+    "authority": {
+      "type": "string",
+      "const": "NONE"
+    },
+    "siteAuthorityRef": {
+      "type": "string"
+    },
+    "locationClassification": {
+      "type": "string"
+    },
+    "outboundLocationPolicy": {
+      "type": "string"
+    },
+    "latitudeDeg": {
+      "type": "number"
+    },
+    "longitudeDeg": {
+      "type": "number"
+    },
+    "providerId": {
+      "type": "string"
+    },
+    "upstreamAuthorityId": {
+      "type": "string"
+    },
+    "modelId": {
+      "type": "string"
+    },
+    "runInitialisationUtc": {
+      "type": "string"
+    },
+    "startUtc": {
+      "type": "string"
+    },
+    "endUtc": {
+      "type": "string"
+    },
+    "hourlyVariables": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "timezone": {
+      "type": "string"
+    },
+    "timeformat": {
+      "type": "string"
+    },
+    "cellSelection": {
+      "type": "string"
+    },
+    "elevation": {
+      "type": "string"
+    },
+    "canonicalRequestDigest": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {loadFixture,validateFixture,VARIABLES} from './observation-planner-forecast-f4b-contract.mjs';
+const files=['schemas/observation-planner-forecast-source-profile-f4b.schema.json','schemas/observation-planner-forecast-request-f4b.schema.json','schemas/observation-planner-forecast-evidence-f4b.schema.json','docs/data/observation-planner-forecast-f4b-fixture.json','docs/architecture/scientific-assets/BKL-031-F4-B-Forecast-Machine-Readable-Contracts-Fixture-and-Validator.md','.github/scripts/test-observation-planner-forecast-f4b.mjs','.github/workflows/bkl-031-f4-b-governance.yml'];
+for(const p of files)assert.ok(fs.existsSync(p),`missing F4-B artifact ${p}`);
+for(const p of files.filter(x=>x.endsWith('.json')))JSON.parse(fs.readFileSync(p,'utf8'));
+const f=validateFixture(loadFixture());
+assert.equal(f.sourceProfile.allowedVariables.length,11);assert.deepEqual(f.sourceProfile.allowedVariables,VARIABLES);assert.equal(f.evidence.forecastInstantsUtc.length,4);assert.equal(f.boundaries.providerCalls,0);assert.equal(f.boundaries.runtimeActivated,false);
+const doc=fs.readFileSync(files[4],'utf8');for(const x of ['**REVIEW CANDIDATE — ZERO PROVIDER TRAFFIC**','three closed JSON Schemas','24/24 negative cases','TEST / NONE','a96a8268c571c2fc7fbe715cce8183ecc3ee02d45cbea91aaaa1a46506533d48','F4-C'])assert.ok(doc.includes(x),`F4-B document missing ${x}`);
+const backlog=fs.readFileSync('docs/project/BACKLOG.md','utf8');assert.ok(backlog.includes('F4-B machine-readable forecast contracts')&&backlog.includes('24/24 negative cases'),'backlog F4-B state mismatch.');
+const roadmap=JSON.parse(fs.readFileSync('.github/roadmap/roadmap-source.json','utf8'));assert.equal(roadmap.nextMilestone,'BKL-031 F4-B exact-head contracts and validator acceptance');assert.ok(roadmap.milestones.some(x=>x.id==='M-BKL031-F4-B-CONTRACTS'));
+console.log(`BKL-031 F4-B verified: three closed schemas, ${f.evidence.forecastInstantsUtc.length} synthetic hourly instants, 11 variables, zero provider calls; digest ${f.contractDigest}.`);

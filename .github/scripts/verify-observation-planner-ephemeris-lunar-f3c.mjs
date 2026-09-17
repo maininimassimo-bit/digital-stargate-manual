@@ -61,7 +61,7 @@ assert.ok(backlog.includes('F3-C Accepted/Post-Merge Verified') && backlog.inclu
 assert.ok(knowledge.includes('F3-C is Accepted / Post-Merge Verified') && index.includes('F3-C Bounded Adapter, Projection and Portal'), 'Continuity documents do not identify accepted F3-C.');
 assert.ok(nav.includes('Observation Planner: observation-planner/index.md') && nav.includes('BKL-031 F3-C - Bounded Adapter, Projection and Portal'), 'MkDocs navigation does not expose F3-C.');
 assert.equal(roadmap.currentPackage, 'BKL-031');
-assert.equal(roadmap.nextMilestone, 'BKL-031 F4-B machine-readable forecast contracts, TEST/NONE fixture and validator');
+assert.equal(roadmap.nextMilestone, 'BKL-031 F4-B exact-head contracts and validator acceptance');
 assert.ok(roadmap.projectStatus.includes('F3-C accepted and post-merge verified') && roadmap.projectStatus.includes('S10 runtime unavailable'), 'Roadmap F3-C status/boundary mismatch.');
 assert.ok(roadmap.milestones.some(item => item.id === 'M-BKL031-F3-C-IMPLEMENTATION'), 'Roadmap F3-C implementation milestone missing.');
 assert.ok(roadmap.milestones.some(item => item.id === 'M-BKL031-F3-C-ACCEPTANCE'), 'Roadmap F3-C acceptance milestone missing.');
