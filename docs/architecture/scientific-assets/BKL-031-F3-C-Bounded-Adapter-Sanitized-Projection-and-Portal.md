@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | `BKL-031-F3-C-INTEGRATION-001` |
-| Status | **IMPLEMENTED — ACCEPTANCE REVIEW PENDING** |
+| Status | **ACCEPTED — POST-MERGE VERIFIED** |
 | Date | 2026-09-17 |
 | Predecessor | F3-B Accepted / Post-Merge Verified |
 | Environment / authority | `TEST` / `NONE` |
@@ -58,6 +58,10 @@ This is bounded repository/portal OAT only. Protected-site resolution, productio
 
 Rollback removes the F3-C adapter, generator, schema, projection, consumer page/assets, workflow and documentation references. F3-B evidence remains accepted and unchanged. The portal link disappears and S10 remains `UNAVAILABLE`; F4, F5, BKL-032 and Safety are unaffected.
 
+## Acceptance evidence
+
+Pull request #261 passed 16/16 exact-head checks on `5d6b7127475c9378e19b1bfc5e65f6ad11f597f1`, merged with expected-head control as `fba1287efea0d1f36b147bc42a4fec5498990756`, and passed all 12 applicable post-merge workflows. The deployed [Observation Planner](https://maininimassimo-bit.github.io/digital-stargate-manual/observation-planner/) route then loaded the exact governed projection successfully.
+
 ## Successor gate
 
-F3-C becomes Accepted / Post-Merge Verified only after exact-head ARB and Release Quality review, required pull-request checks, expected-head merge and all applicable post-merge workflows including Pages. Production runtime activation remains a separate authorization even after F3-C acceptance.
+F4 forecast source discovery and integration contract is promoted as the next independent gate. Production runtime activation remains separately authorized; S10 remains `UNAVAILABLE` for production.
