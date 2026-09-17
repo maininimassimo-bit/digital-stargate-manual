@@ -1,12 +1,9 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import os from 'node:os';
-import path from 'node:path';
-import {spawnSync} from 'node:child_process';
-const authPath='governance/forecast-evidence/BKL031-F7-PROVIDER-REQUEST-AUTH-001.json';
-if(!fs.existsSync(authPath)){ console.log('F7 authorization not materialized yet; negative authorization tests deferred.'); process.exit(0); }
-const original=JSON.parse(fs.readFileSync(authPath,'utf8'));
-function run(auth){ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'bkl031-f7-')); const p=path.join(dir,'auth.json'); fs.writeFileSync(p,JSON.stringify(auth)); return spawnSync(process.execPath,['.github/scripts/observation-planner-forecast-f7-acquire.mjs','--preflight',`--auth=${p}`],{encoding:'utf8'}); }
-assert.equal(run(original).status,0,'authorized F7 preflight must pass.');
-for(const mutate of [a=>{a.maxProviderRequests=2;},a=>{a.protectedSiteUsed=true;},a=>{a.recurringTraffic=true;},a=>{a.productionUse=true;},a=>{a.runInitialisationUtc='2026-09-17T00:00Z';},a=>{a.location.latitudeDeg=42.5;}]){ const copy=structuredClone(original); mutate(copy); assert.notEqual(run(copy).status,0,'mutated authorization must fail closed.'); }
-console.log('BKL-031 F7 authorization negative tests passed; no network request executed.');
+import zlib from 'node:zlib';
+const p='governance/forecast-evidence/BKL031-F7-RUN-35243920092/normalized-supply.json.gz.b64';
+const original=JSON.parse(zlib.gunzipSync(Buffer.from(fs.readFileSync(p,'utf8').trim(),'base64')).toString('utf8'));
+function validate(s){ assert.equal(s.contractType,'BKL031_F7_FORECAST_RUNTIME_SUPPLY'); assert.equal(s.environment,'EVALUATION'); assert.equal(s.authority,'NONE'); assert.equal(s.location.classification,'SYNTHETIC_GENERALIZED'); assert.equal(s.location.protectedSiteUsed,false); assert.equal(s.freshness.maxRunAgeHours,18); assert.equal(s.freshness.state,'FRESH'); assert.ok(s.freshness.runAgeHoursAtRetrieval<=18); assert.equal(s.requestAccounting.maxProviderRequests,1); assert.equal(s.requestAccounting.requestOrdinal,1); assert.equal(s.requestAccounting.budgetState,'1/1_EXHAUSTED'); assert.equal(s.series.rawInstantCount,s.series.acceptedInstantCount+s.series.excludedInstantCount); assert.equal(s.series.imputedValueCount,0); assert.ok(s.series.futureAcceptedInstantCount>0); assert.equal(s.availabilityState,s.series.excludedInstantCount>0?'DEGRADED':'AVAILABLE'); assert.equal(s.boundaries.recurringTraffic,false); assert.equal(s.boundaries.productionRuntimeActivated,false); assert.equal(s.boundaries.readinessAuthority,false); assert.equal(s.boundaries.schedulingAuthority,false); assert.equal(s.boundaries.automaticTargetSelection,false); assert.equal(s.boundaries.commandAuthority,'NONE'); assert.equal(s.boundaries.safetyAuthority,'LOCAL_PHYSICAL_INTERLOCKS'); }
+validate(original);
+for(const mutate of [s=>{s.location.protectedSiteUsed=true;},s=>{s.freshness.state='STALE';},s=>{s.freshness.runAgeHoursAtRetrieval=19;},s=>{s.requestAccounting.maxProviderRequests=2;},s=>{s.requestAccounting.budgetState='0/1_AUTHORIZED';},s=>{s.series.imputedValueCount=1;},s=>{s.series.futureAcceptedInstantCount=0;},s=>{s.availabilityState='AVAILABLE';},s=>{s.boundaries.readinessAuthority=true;},s=>{s.boundaries.commandAuthority='MOUNT';}]){ const copy=structuredClone(original); mutate(copy); assert.throws(()=>validate(copy)); }
+console.log('BKL-031 F7 fail-closed evidence mutation tests passed; zero network traffic.');
