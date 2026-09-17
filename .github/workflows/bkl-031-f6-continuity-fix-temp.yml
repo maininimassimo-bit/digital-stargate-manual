@@ -1,0 +1,42 @@
+name: BKL-031 F6 Acceptance Continuity Repair
+
+on:
+  push:
+    branches:
+      - chore/bkl-031-f6-acceptance-reconciliation
+    paths:
+      - ".github/scripts/fix-bkl031-f6-acceptance-continuity-temp.mjs"
+      - ".github/workflows/bkl-031-f6-continuity-fix-temp.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v5
+        with:
+          ref: chore/bkl-031-f6-acceptance-reconciliation
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Restore continuity and regenerate projections
+        run: |
+          node .github/scripts/fix-bkl031-f6-acceptance-continuity-temp.mjs
+          node .github/scripts/generate-roadmap.mjs --write
+          node .github/scripts/generate-scientific-platform-status.mjs --write
+          node .github/scripts/generate-roadmap.mjs --check
+          node .github/scripts/generate-scientific-platform-status.mjs --check
+          node .github/scripts/verify-roadmap-consistency.mjs
+      - name: Commit repair
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/roadmap/roadmap-source.json docs/project/BACKLOG.md docs/data/roadmap.json docs/data/scientific-platform-status.json
+          git diff --cached --quiet && exit 0
+          git commit -m "fix(bkl-031): preserve predecessor continuity markers"
+          git push origin HEAD:chore/bkl-031-f6-acceptance-reconciliation
