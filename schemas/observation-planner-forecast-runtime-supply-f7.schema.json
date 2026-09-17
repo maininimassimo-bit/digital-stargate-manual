@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/schemas/observation-planner-forecast-runtime-supply-f7.schema.json",
+  "title": "BKL-031 F7 Forecast Runtime Supply",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion","contractType","supplyId","environment","authority","authorizationId","providerId","upstreamAuthorityId","modelId","runInitialisationUtc","retrievedAtUtc","location","freshness","requestAccounting","series","availabilityState","boundaries"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "contractType": {"const": "BKL031_F7_FORECAST_RUNTIME_SUPPLY"},
+    "supplyId": {"type": "string"},
+    "environment": {"const": "EVALUATION"},
+    "authority": {"const": "NONE"},
+    "authorizationId": {"const": "BKL031-F7-PROVIDER-REQUEST-AUTH-001"},
+    "providerId": {"const": "OPEN_METEO"},
+    "upstreamAuthorityId": {"const": "ITALIAMETEO_ARPAE"},
+    "modelId": {"const": "italia_meteo_arpae_icon_2i"},
+    "runInitialisationUtc": {"type": "string"},
+    "retrievedAtUtc": {"type": "string"},
+    "location": {
+      "type": "object", "additionalProperties": false,
+      "required": ["classification","siteAuthorityRef","protectedSiteUsed"],
+      "properties": {
+        "classification": {"const": "SYNTHETIC_GENERALIZED"},
+        "siteAuthorityRef": {"const": "SITE-PUBLIC-SYNTHETIC-FORECAST-IT-01"},
+        "protectedSiteUsed": {"const": false}
+      }
+    },
+    "freshness": {
+      "type": "object", "additionalProperties": false,
+      "required": ["maxRunAgeHours","runAgeHoursAtRetrieval","state"],
+      "properties": {
+        "maxRunAgeHours": {"const": 18},
+        "runAgeHoursAtRetrieval": {"type": "number", "minimum": 0},
+        "state": {"enum": ["FRESH","STALE"]}
+      }
+    },
+    "requestAccounting": {
+      "type": "object", "additionalProperties": false,
+      "required": ["maxProviderRequests","requestOrdinal","budgetState"],
+      "properties": {
+        "maxProviderRequests": {"const": 1},
+        "requestOrdinal": {"const": 1},
+        "budgetState": {"const": "1/1_EXHAUSTED"}
+      }
+    },
+    "series": {
+      "type": "object", "additionalProperties": false,
+      "required": ["rawInstantCount","acceptedInstantCount","excludedInstantCount","futureAcceptedInstantCount","imputedValueCount","units","accepted","excluded"],
+      "properties": {
+        "rawInstantCount": {"type": "integer", "minimum": 1, "maximum": 72},
+        "acceptedInstantCount": {"type": "integer", "minimum": 0, "maximum": 72},
+        "excludedInstantCount": {"type": "integer", "minimum": 0, "maximum": 72},
+        "futureAcceptedInstantCount": {"type": "integer", "minimum": 0, "maximum": 72},
+        "imputedValueCount": {"const": 0},
+        "units": {"type": "object"},
+        "accepted": {"type": "array"},
+        "excluded": {"type": "array"}
+      }
+    },
+    "availabilityState": {"enum": ["AVAILABLE","DEGRADED","UNAVAILABLE"]},
+    "boundaries": {
+      "type": "object", "additionalProperties": false,
+      "required": ["recurringTraffic","productionRuntimeActivated","readinessAuthority","schedulingAuthority","automaticTargetSelection","commandAuthority","safetyAuthority"],
+      "properties": {
+        "recurringTraffic": {"const": false},
+        "productionRuntimeActivated": {"const": false},
+        "readinessAuthority": {"const": false},
+        "schedulingAuthority": {"const": false},
+        "automaticTargetSelection": {"const": false},
+        "commandAuthority": {"const": "NONE"},
+        "safetyAuthority": {"const": "LOCAL_PHYSICAL_INTERLOCKS"}
+      }
+    }
+  }
+}

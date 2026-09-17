@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const doc=fs.readFileSync('docs/architecture/scientific-assets/BKL-031-F7-Fresh-Forecast-Supply-and-Runtime-Boundary.md','utf8');
+const script=fs.readFileSync('.github/scripts/observation-planner-forecast-f7-acquire.mjs','utf8');
+const workflow=fs.readFileSync('.github/workflows/bkl-031-f7-one-request-acquisition.yml','utf8');
+const schema=JSON.parse(fs.readFileSync('schemas/observation-planner-forecast-runtime-supply-f7.schema.json','utf8'));
+const f6=fs.readFileSync('docs/project/BKL-031-F6-REAL-EVIDENCE-SETUP-AWARE-E2E-ACCEPTANCE-2026-09-17.md','utf8');
+const roadmap=JSON.parse(fs.readFileSync('.github/roadmap/roadmap-source.json','utf8'));
+assert.equal((script.match(/await fetch\(/g)??[]).length,1,'F7 must contain exactly one network fetch site.');
+for(const marker of ["REQUIRED_RUN = '2026-09-17T12:00Z'","latitude:'42.0'","longitude:'12.0'","maxProviderRequests===1","protectedSiteUsed===false","recurringTraffic===false","budgetState:'1/1_EXHAUSTED'","imputedValueCount:0"]) assert.ok(script.includes(marker),`acquisition script missing ${marker}`);
+for(const marker of ['branches: [feat/bkl-031-f7-fresh-forecast-runtime-boundary]','BKL031-F7-PROVIDER-REQUEST-AUTH-001.json','github.run_attempt == 1','--diff-filter=A','F7_ONE_VALIDATION_REQUEST']) assert.ok(workflow.includes(marker),`workflow missing ${marker}`);
+assert.ok(!workflow.includes('schedule:'),'F7 acquisition must not be scheduled.');
+assert.ok(!script.includes('governance/site-authority/site-records'),'protected site registry must not be read by F7 acquisition.');
+assert.equal(schema.properties.authorizationId.const,'BKL031-F7-PROVIDER-REQUEST-AUTH-001');
+assert.equal(schema.properties.requestAccounting.properties.maxProviderRequests.const,1);
+assert.equal(schema.properties.boundaries.properties.safetyAuthority.const,'LOCAL_PHYSICAL_INTERLOCKS');
+for(const marker of ['one F7 validation request','does not close BKL-031','Protected observatory coordinates are not used','no retry loop','BKL-032']) assert.ok(doc.includes(marker),`architecture doc missing ${marker}`);
+assert.ok(f6.includes('any new provider traffic requires a separate explicit authority/budget decision before execution'),'F6 predecessor authority condition missing.');
+assert.equal(roadmap.nextMilestone,'BKL-031 F7 fresh forecast supply and runtime boundary');
+const authPath='governance/forecast-evidence/BKL031-F7-PROVIDER-REQUEST-AUTH-001.json';
+if(fs.existsSync(authPath)){ const a=JSON.parse(fs.readFileSync(authPath,'utf8')); assert.equal(a.authorizationId,'BKL031-F7-PROVIDER-REQUEST-AUTH-001'); assert.equal(a.status,'AUTHORIZED'); assert.equal(a.maxProviderRequests,1); assert.equal(a.runInitialisationUtc,'2026-09-17T12:00Z'); assert.equal(a.protectedSiteUsed,false); assert.equal(a.recurringTraffic,false); assert.equal(a.productionUse,false); }
+console.log('BKL-031 F7 governance verified: one separately authorized validation request, explicit fresh-run lineage, generalized location, replay protection, no production/readiness/command/Safety authority.');

@@ -1,0 +1,29 @@
+name: BKL-031 F7 Fresh Forecast Supply Governance
+on:
+  pull_request:
+    paths:
+      - docs/architecture/scientific-assets/BKL-031-F7-Fresh-Forecast-Supply-and-Runtime-Boundary.md
+      - schemas/observation-planner-forecast-runtime-supply-f7.schema.json
+      - .github/scripts/observation-planner-forecast-f7-*.mjs
+      - .github/workflows/bkl-031-f7-*.yml
+      - governance/forecast-evidence/BKL031-F7-**
+  push:
+    branches: [main]
+    paths:
+      - docs/architecture/scientific-assets/BKL-031-F7-Fresh-Forecast-Supply-and-Runtime-Boundary.md
+      - schemas/observation-planner-forecast-runtime-supply-f7.schema.json
+      - .github/scripts/observation-planner-forecast-f7-*.mjs
+      - .github/workflows/bkl-031-f7-*.yml
+      - governance/forecast-evidence/BKL031-F7-**
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node .github/scripts/verify-observation-planner-forecast-f7.mjs
+      - run: node .github/scripts/test-observation-planner-forecast-f7.mjs
