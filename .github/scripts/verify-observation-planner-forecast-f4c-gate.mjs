@@ -10,7 +10,7 @@ assert.equal(fs.existsSync('.github/workflows/bkl-031-f4-c-acquire-once.yml'), f
 assert.equal(fs.existsSync('.github/scripts/observation-planner-forecast-f4c-acquire.mjs'), false, 'exhausted acquisition script must be removed');
 
 for (const expected of [
-  '**EXECUTED — REQUEST BUDGET EXHAUSTED / EVIDENCE RECONCILED**',
+  '**ACCEPTED — POST-MERGE VERIFIED / REQUEST BUDGET EXHAUSTED**',
   '35201479378',
   '35214129960',
   '053fc766bfc7908a984828cc335eef07a558909c',
@@ -19,6 +19,9 @@ for (const expected of [
   '350a7b9ae8b2de308ba55a7105e56bb4de5040572370ab2715c0fa70088af2f5',
   '71-instant normalized evidence',
   'no third-request dispatch path',
+  '79fe51e71782fff6c952e9291fe8ca567da74e98',
+  '15/15 applicable workflows successful',
+  'all 15 applicable post-merge workflows completed successfully',
   'F4-D'
 ]) assert.ok(gate.includes(expected), `gate record missing ${expected}`);
 for (const expected of [
@@ -52,4 +55,4 @@ const roadmap = JSON.parse(fs.readFileSync('.github/roadmap/roadmap-source.json'
 assert.equal(roadmap.nextMilestone, 'BKL-031 F4-D sanitized forecast projection and portal integration');
 assert.ok(roadmap.milestones.some((entry) => entry.id === 'M-BKL031-F4-C-FIRST-ATTEMPT-FAILED'));
 assert.ok(roadmap.milestones.some((entry) => entry.id === 'M-BKL031-F4-C-EVIDENCE-RECONCILIATION'));
-console.log('BKL-031 F4-C gate verified: two requests consumed, HTTP 200 raw evidence reconciled to 71 complete instants with zero imputation, acquisition path removed, no protected-site use; F4-D promoted.');
+console.log('BKL-031 F4-C gate verified: accepted/post-merge verified, two requests consumed, HTTP 200 raw evidence reconciled to 71 complete instants with zero imputation, acquisition path removed, no protected-site use; F4-D promoted.');

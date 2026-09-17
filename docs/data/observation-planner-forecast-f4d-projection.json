@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "1.0",
+  "projectionType": "BKL031_F4D_SANITIZED_FORECAST_PROJECTION",
+  "projectionId": "BKL031-F4D-35214129960",
+  "environment": "EVALUATION",
+  "authority": "NONE",
+  "publicationState": "READ_ONLY",
+  "sourceEvidence": {
+    "evidenceId": "BKL031-F4C-EVIDENCE-35214129960",
+    "workflowRunId": 35214129960,
+    "evidenceDigest": "350a7b9ae8b2de308ba55a7105e56bb4de5040572370ab2715c0fa70088af2f5",
+    "rawHourlyInstantCount": 72,
+    "acceptedHourlyInstantCount": 71,
+    "excludedHourlyInstantCount": 1,
+    "imputedValueCount": 0
+  },
+  "model": {
+    "providerId": "OPEN_METEO",
+    "upstreamAuthorityId": "ITALIAMETEO_ARPAE",
+    "modelId": "italia_meteo_arpae_icon_2i",
+    "displayName": "ItaliaMeteo/ARPAE ICON-2I",
+    "deliveryInterface": "OPEN_METEO_SINGLE_RUNS",
+    "runInitialisationUtc": "2026-09-17T00:00:00Z"
+  },
+  "validity": {
+    "fromUtc": "2026-09-17T01:00:00Z",
+    "toUtcExclusive": "2026-09-20T00:00:00Z",
+    "temporalResolution": "PT1H",
+    "acceptedHourlyInstants": 71
+  },
+  "variables": [
+    { "id": "temperature_2m", "unit": "degC", "availability": "AVAILABLE" },
+    { "id": "relative_humidity_2m", "unit": "percent", "availability": "AVAILABLE" },
+    { "id": "dew_point_2m", "unit": "degC", "availability": "AVAILABLE" },
+    { "id": "precipitation", "unit": "mm", "availability": "AVAILABLE" },
+    { "id": "cloud_cover", "unit": "percent", "availability": "AVAILABLE" },
+    { "id": "cloud_cover_low", "unit": "percent", "availability": "AVAILABLE" },
+    { "id": "cloud_cover_mid", "unit": "percent", "availability": "AVAILABLE" },
+    { "id": "cloud_cover_high", "unit": "percent", "availability": "AVAILABLE" },
+    { "id": "wind_speed_10m", "unit": "km/h", "availability": "AVAILABLE" },
+    { "id": "wind_gusts_10m", "unit": "km/h", "availability": "AVAILABLE" },
+    { "id": "visibility", "unit": null, "availability": "UNAVAILABLE" }
+  ],
+  "excludedInstants": [
+    {
+      "validAtUtc": "2026-09-17T00:00:00Z",
+      "missingVariables": ["precipitation"],
+      "reasonCode": "INCOMPLETE_REQUIRED_VARIABLE"
+    }
+  ],
+  "normalizationPolicy": "DROP_INCOMPLETE_INSTANT_NO_IMPUTATION",
+  "attribution": "Weather data by Open-Meteo; model data by ItaliaMeteo/ARPAE ICON-2I.",
+  "citations": [
+    "https://open-meteo.com/en/docs/single-runs-api",
+    "https://open-meteo.com/en/docs/italia-meteo-arpae-api",
+    "https://www.arpae.it/it/temi-ambientali/meteo/previsioni-meteo/previsioni-meteo-modellistiche"
+  ],
+  "limitations": [
+    "GENERALIZED_SYNTHETIC_LOCATION_ONLY",
+    "NO_ADDITIONAL_PROVIDER_TRAFFIC",
+    "NO_FORECAST_VALUES_PUBLISHED_IN_F4D",
+    "S10_RUNTIME_UNAVAILABLE"
+  ]
+}

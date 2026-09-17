@@ -1,0 +1,20 @@
+name: BKL-031 F4-D Forecast Projection Governance
+on:
+  pull_request:
+    paths: [".github/scripts/*observation-planner-forecast-f4d*", ".github/workflows/bkl-031-f4-d-*.yml", "schemas/observation-planner-forecast-projection-f4d.schema.json", "docs/data/observation-planner-forecast-f4d-projection.json", "docs/javascripts/observation-planner.js", "docs/observation-planner/**", "governance/forecast-evidence/**", "docs/architecture/scientific-assets/BKL-031-F4-D-*.md", "docs/project/**", ".github/roadmap/**", "docs/data/roadmap.json", "docs/data/scientific-platform-status.json", "mkdocs.yml"]
+  push:
+    branches: [main]
+    paths: [".github/scripts/*observation-planner-forecast-f4d*", ".github/workflows/bkl-031-f4-d-*.yml", "schemas/observation-planner-forecast-projection-f4d.schema.json", "docs/data/observation-planner-forecast-f4d-projection.json", "docs/javascripts/observation-planner.js", "docs/observation-planner/**", "governance/forecast-evidence/**", "docs/architecture/scientific-assets/BKL-031-F4-D-*.md", "docs/project/**", ".github/roadmap/**", "docs/data/roadmap.json", "docs/data/scientific-platform-status.json", "mkdocs.yml"]
+permissions: { contents: read }
+jobs:
+  gate:
+    name: F4-D sanitized read-only forecast projection
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with: { node-version: "22" }
+      - run: node .github/scripts/verify-observation-planner-forecast-f4c-gate.mjs
+      - run: node .github/scripts/reconcile-observation-planner-forecast-f4c.mjs
+      - run: node .github/scripts/verify-observation-planner-forecast-f4d.mjs
+      - run: node --check docs/javascripts/observation-planner.js

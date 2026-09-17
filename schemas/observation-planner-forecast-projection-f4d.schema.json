@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BKL-031 F4-D Sanitized Forecast Projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion","projectionType","projectionId","environment","authority","publicationState","sourceEvidence","model","validity","variables","excludedInstants","normalizationPolicy","attribution","citations","limitations"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "projectionType": {"const": "BKL031_F4D_SANITIZED_FORECAST_PROJECTION"},
+    "projectionId": {"const": "BKL031-F4D-35214129960"},
+    "environment": {"const": "EVALUATION"},
+    "authority": {"const": "NONE"},
+    "publicationState": {"const": "READ_ONLY"},
+    "sourceEvidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["evidenceId","workflowRunId","evidenceDigest","rawHourlyInstantCount","acceptedHourlyInstantCount","excludedHourlyInstantCount","imputedValueCount"],
+      "properties": {
+        "evidenceId": {"const": "BKL031-F4C-EVIDENCE-35214129960"},
+        "workflowRunId": {"const": 35214129960},
+        "evidenceDigest": {"const": "350a7b9ae8b2de308ba55a7105e56bb4de5040572370ab2715c0fa70088af2f5"},
+        "rawHourlyInstantCount": {"const": 72},
+        "acceptedHourlyInstantCount": {"const": 71},
+        "excludedHourlyInstantCount": {"const": 1},
+        "imputedValueCount": {"const": 0}
+      }
+    },
+    "model": {
+      "type": "object", "additionalProperties": false,
+      "required": ["providerId","upstreamAuthorityId","modelId","displayName","deliveryInterface","runInitialisationUtc"],
+      "properties": {
+        "providerId": {"const": "OPEN_METEO"},
+        "upstreamAuthorityId": {"const": "ITALIAMETEO_ARPAE"},
+        "modelId": {"const": "italia_meteo_arpae_icon_2i"},
+        "displayName": {"const": "ItaliaMeteo/ARPAE ICON-2I"},
+        "deliveryInterface": {"const": "OPEN_METEO_SINGLE_RUNS"},
+        "runInitialisationUtc": {"const": "2026-09-17T00:00:00Z"}
+      }
+    },
+    "validity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["fromUtc","toUtcExclusive","temporalResolution","acceptedHourlyInstants"],
+      "properties": {
+        "fromUtc": {"const": "2026-09-17T01:00:00Z"},
+        "toUtcExclusive": {"const": "2026-09-20T00:00:00Z"},
+        "temporalResolution": {"const": "PT1H"},
+        "acceptedHourlyInstants": {"const": 71}
+      }
+    },
+    "variables": {"type":"array","minItems":11,"maxItems":11,"items":{"type":"object","additionalProperties":false,"required":["id","unit","availability"],"properties":{"id":{"type":"string"},"unit":{"type":["string","null"]},"availability":{"enum":["AVAILABLE","UNAVAILABLE"]}}}},
+    "excludedInstants": {"type":"array","minItems":1,"maxItems":1,"items":{"type":"object","additionalProperties":false,"required":["validAtUtc","missingVariables","reasonCode"],"properties":{"validAtUtc":{"const":"2026-09-17T00:00:00Z"},"missingVariables":{"const":["precipitation"]},"reasonCode":{"const":"INCOMPLETE_REQUIRED_VARIABLE"}}}},
+    "normalizationPolicy": {"const":"DROP_INCOMPLETE_INSTANT_NO_IMPUTATION"},
+    "attribution": {"const":"Weather data by Open-Meteo; model data by ItaliaMeteo/ARPAE ICON-2I."},
+    "citations": {"type":"array","minItems":3,"maxItems":3,"items":{"type":"string"}},
+    "limitations": {"type":"array","minItems":4,"maxItems":4,"items":{"type":"string"}}
+  }
+}
