@@ -162,10 +162,12 @@ assert.ok(!fs.existsSync('.github/scripts/observation-planner-forecast-f7-protec
 assert.ok(!fs.existsSync('.github/workflows/bkl-031-f7-protected-site-one-request.yml'),'consumed protected-site F7 acquisition workflow must be removed.');
 
 const doc=fs.readFileSync('docs/architecture/scientific-assets/BKL-031-F7-Fresh-Forecast-Supply-and-Runtime-Boundary.md','utf8');
-for(const marker of ['PROTECTED-SITE FORECAST EVIDENCE ACQUIRED','35255829165','71 complete positions','66 future accepted instants','does not close BKL-031']) assert.ok(doc.includes(marker),`F7 document missing ${marker}`);
+for(const marker of ['ACCEPTED — POST-MERGE VERIFIED','35255829165','71 complete positions','66 future accepted instants','does not close BKL-031']) assert.ok(doc.includes(marker),`F7 document missing ${marker}`);
 const validation=fs.readFileSync('docs/architecture/validation/BKL-031-F7-Fresh-Forecast-Supply-Evidence-2026-09-17.md','utf8');
 assert.ok(validation.includes('PROTECTED-SITE EVIDENCE ACQUIRED')&&validation.includes('1/1_EXHAUSTED')&&validation.includes('DEGRADED')&&validation.includes('FRESH'));
 const roadmap=json('.github/roadmap/roadmap-source.json');
-assert.equal(roadmap.nextMilestone,'BKL-031 F7 fresh forecast supply and runtime boundary');
+assert.equal(roadmap.nextMilestone,'BKL-031 F8 current astronomy and explicit setup suitability integration');
+const acceptance=fs.readFileSync('docs/project/BKL-031-F7-FRESH-FORECAST-SUPPLY-ACCEPTANCE-2026-09-17.md','utf8');
+for(const marker of ['ACCEPTED — POST-MERGE VERIFIED','000fc81558060b45e71b9f1a69122249b6a5fe8e','59a1d690406d733b6e61e64220f84cef9b6fb1a2','10/10 successful','1/1_EXHAUSTED']) assert.ok(acceptance.includes(marker),`F7 acceptance missing ${marker}`);
 
 console.log('BKL-031 F7 verified: protected-site real forecast, 72 raw / 71 accepted / 1 excluded / 66 future, zero imputation, sanitized public projection, exhausted one-shot path removed.');

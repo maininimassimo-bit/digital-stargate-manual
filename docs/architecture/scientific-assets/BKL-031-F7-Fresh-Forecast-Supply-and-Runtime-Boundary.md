@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | `BKL-031-F7-SOLUTION-001` |
-| Status | **REVIEW CANDIDATE — PROTECTED-SITE FORECAST EVIDENCE ACQUIRED / SITE BUDGET 1/1 EXHAUSTED** |
+| Status | **ACCEPTED — POST-MERGE VERIFIED / SITE BUDGET 1/1 EXHAUSTED** |
 | Date | 2026-09-17 |
 | Parent | BKL-031 — Observation Planner intelligente |
 | Predecessor | F6 Accepted / Post-Merge Verified |
@@ -153,3 +153,9 @@ F7 review must verify:
 ## 12. Successor boundary
 
 Even after F7 acceptance, BKL-031 remains `In Progress`. The next scientific integration gate must replace synthetic ranking geometry and historical-only setup compatibility with current astronomical windows plus explicit OTA/camera/filter target suitability, and then combine those inputs with the current weather forecast in the final explainable read-only planner ranking.
+
+## 13. Acceptance reconciliation
+
+F7 is **ACCEPTED — POST-MERGE VERIFIED**. Exact-head review used `000fc81558060b45e71b9f1a69122249b6a5fe8e` with 9/9 applicable PR workflows successful. PR #277 merged under expected-head control as `59a1d690406d733b6e61e64220f84cef9b6fb1a2`, followed by 10/10 successful applicable push workflows. ARB returned APPROVED WITH CONDITIONS with no blocker/major/minor finding; Release Quality returned CONDITIONALLY READY FOR MERGE with no blocker or waiver.
+
+The formal acceptance record is `docs/project/BKL-031-F7-FRESH-FORECAST-SUPPLY-ACCEPTANCE-2026-09-17.md`. Acceptance preserves the one-shot/production distinction: the real protected-site forecast path is accepted, but recurring refresh remains separately governed and S10 remains unavailable. BKL-031 remains In Progress and F8 is promoted for current astronomy plus explicit setup suitability integration.
