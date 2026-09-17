@@ -121,7 +121,10 @@ def weather_rows(series: dict[str, dict[dt.datetime, float]]) -> dict[dt.datetim
         t = series["T_2M"][instant] - 273.15
         td = series["TD_2M"][instant] - 273.15
         accumulated = series["TOT_PREC"][instant]
-        precipitation = 0.0 if precipitation_previous is None else max(0.0, accumulated - precipitation_previous)
+        delta = 0.0 if precipitation_previous is None else accumulated - precipitation_previous
+        if delta < -0.001:
+            raise ContractError("PRECIPITATION_ACCUMULATOR_REGRESSION")
+        precipitation = max(0.0, delta)
         precipitation_previous = accumulated
         u, v = series["U_10M"][instant], series["V_10M"][instant]
         rows[instant] = {
@@ -154,7 +157,9 @@ def astronomy(instant: dt.datetime, latitude: float, longitude: float, elevation
     import swisseph as swe
     hour = instant.hour + instant.minute / 60 + instant.second / 3600
     jd = swe.julday(instant.year, instant.month, instant.day, hour, swe.GREG_CAL)
-    flags = swe.FLG_SWIEPH | swe.FLG_EQUATORIAL
+    # Explicit Moshier mode prevents Swiss Ephemeris from silently switching
+    # between external ephemeris files and its bundled local implementation.
+    flags = swe.FLG_MOSEPH | swe.FLG_EQUATORIAL
     sun = swe.calc_ut(jd, swe.SUN, flags)[0]
     moon = swe.calc_ut(jd, swe.MOON, flags)[0]
     geopos = (longitude, latitude, elevation)
@@ -228,11 +233,12 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
             "forecast": {"providerId": "METEOHUB", "upstreamAuthorityId": "ITALIAMETEO_ARPAE", "modelId": "ICON_2I", "runInitialisationUtc": utc(run_time),
                          "retrievedAtUtc": utc(retrieval), "runAgeHoursAtRetrieval": round(age, 6), "freshnessState": "FRESH", "sourceFiles": files},
             "nightWindow": {"fromUtc": utc(instants[0]), "toUtcExclusive": utc(instants[-1] + dt.timedelta(hours=1))},
-            "method": {"id": "BKL031-F9-SWISSEPH-SIDEREAL@1.0", "scoreWeights": f8["method"]["scoreWeights"], "displayFilter": "solarAltitudeDeg <= -18 and targetAltitudeDeg > 0"},
+            "method": {"id": "BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.0", "ephemerisMode": "EXPLICIT_MOSEPH_NO_FALLBACK", "scoreWeights": f8["method"]["scoreWeights"], "displayFilter": "solarAltitudeDeg <= -18 and targetAltitudeDeg > 0"},
             "setupProfiles": f8["setupProfiles"], "targetProfiles": targets, "hourly": rows, "rankings": rankings,
             "boundaries": {"recurringTraffic": True, "maximumAcquisitionsPerDay": 2, "monetaryBudgetEur": 0, "rawGribRetention": "NONE_EPHEMERAL_ONLY",
                            "readinessAuthority": False, "automaticTargetSelection": False, "schedulingAuthority": False, "actionAuthority": "NONE", "commandAuthority": "NONE",
-                           "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS", "protectedCoordinatesPublished": False}}
+                           "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS", "protectedCoordinatesPublished": False},
+            "attribution": {"source": "Agenzia ItaliaMeteo / ARPAE ICON-2I via MeteoHub", "license": "CC BY 4.0", "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"}}
 
 
 def validate_projection(data: dict, now: dt.datetime | None = None) -> None:

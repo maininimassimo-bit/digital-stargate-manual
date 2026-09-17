@@ -20,7 +20,7 @@ The operating contract is:
 
 - monetary budget EUR 0;
 - at most two acquisition cycles per UTC day, aligned with the 00/12 UTC ICON-2I runs;
-- no manual-dispatch acquisition path and no automatic retry;
+- no manual-dispatch acquisition path, no automatic retry, and `GITHUB_RUN_ATTEMPT=1` enforced so a workflow rerun cannot acquire again;
 - exact run identity, per-variable SHA-256 and retrieval time in the sanitised projection;
 - all GRIB inputs held only in an ephemeral temporary directory and deleted before the job ends;
 - no GRIB artifact, cache, repository commit or durable raw payload;

@@ -19,7 +19,7 @@ The scheduled GitHub workflow runs at 04:15 and 17:15 UTC. These are the only ac
 
 The durable projection retains provider, authority, model, run, retrieval time, byte count and SHA-256 per source file. It never retains raw GRIB bytes or coordinates. An 18-hour run-age ceiling and complete current-night coverage are mandatory.
 
-The projection carries forward the F8 governed setup profiles, target profiles, suitability evidence and advisory weights. Astronomy is recomputed for the current night using the F8 Swiss Ephemeris plus sidereal-target method. No prior forecast or ranking is used as fallback.
+The projection carries forward the F8 governed setup profiles, target profiles, suitability evidence and advisory weights. Astronomy is recomputed for the current night using explicit Swiss Ephemeris Moshier mode plus sidereal-target geometry. The explicit `MOSEPH` flag prevents an implicit switch to external ephemeris files. No prior forecast or ranking is used as fallback.
 
 ## Failure behavior
 

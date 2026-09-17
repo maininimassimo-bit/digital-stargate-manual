@@ -24,5 +24,11 @@ class F9Tests(unittest.TestCase):
     def test_stale_fail_closed(self):
         with self.assertRaisesRegex(f9.ContractError,'STALE'): f9.validate_projection(valid_projection(),dt.datetime(2026,9,18,tzinfo=dt.timezone.utc))
     def test_relative_humidity(self): self.assertAlmostEqual(f9.rh_from_temperature(20,20),100)
+    def test_precipitation_accumulator_regression_fails_closed(self):
+        times=[dt.datetime(2026,9,17,h,tzinfo=dt.timezone.utc) for h in range(24)]
+        values={name:{instant:1.0 for instant in times} for name in f9.VARIABLES}
+        for index,instant in enumerate(times): values['TOT_PREC'][instant]=float(index)
+        values['TOT_PREC'][times[12]]=1.0
+        with self.assertRaisesRegex(f9.ContractError,'ACCUMULATOR'): f9.weather_rows(values)
 
 if __name__=='__main__': unittest.main()
