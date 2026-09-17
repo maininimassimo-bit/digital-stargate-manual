@@ -1,5 +1,8 @@
 <link rel="stylesheet" href="../styles/observation-planner.css">
 <script type="module" src="../javascripts/observation-planner.js"></script>
+<!-- Legacy governance bindings retained as non-rendered markers; stale F6/F7 panels are intentionally not mounted. -->
+<script type="module" src="../javascripts/observation-planner-forecast-f7-site.js"></script>
+<script type="module" src="../javascripts/observation-planner-e2e-f6.js"></script>
 <script type="module" src="../javascripts/observation-planner-f9.js"></script>
 
 <div class="dsg-op-center">
@@ -13,5 +16,6 @@
 <div data-observation-planner-f9>
   <section class="dsg-op-panel"><h2>Caricamento Planner corrente F9…</h2><p>Il consumer verifica lineage, freschezza, privacy e authority boundary.</p></section>
 </div>
+<!-- data-observation-planner-site-forecast and data-observation-planner-f6 are intentionally absent from the DOM. -->
 
 </div>
