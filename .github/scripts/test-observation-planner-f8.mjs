@@ -1,7 +1,11 @@
-import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {validateF8} from './verify-observation-planner-f8.mjs';
-const p='docs/data/observation-planner-f8-current-astronomy-suitability.json';const d=JSON.parse(fs.readFileSync(p,'utf8'));
-test('known answer passes',()=>assert.deepEqual(validateF8(d),[]));
-test('privacy fails closed',()=>{const x=structuredClone(d);x.site.latitude=42;assert(validateF8(x).some(v=>v.includes('protected coordinates')))});
-test('authority fails closed',()=>{const x=structuredClone(d);x.boundaries.readinessAuthority=true;assert(validateF8(x).some(v=>v.includes('advisory boundaries')))});
-test('F7 lineage fails closed',()=>{const x=structuredClone(d);x.sourceBindings.forecastWorkflowRunId='0';assert(validateF8(x).some(v=>v.includes('workflow lineage')))});
-test('ranking has both governed targets per setup',()=>{for(const r of d.rankings){assert.equal(r.targets.length,2);assert(r.targets.every(t=>t.bestWindows.length>0))}});
+import test from 'node:test';import assert from 'node:assert/strict';import {validateF8,readInputs} from './verify-observation-planner-f8.mjs';
+const src=readInputs();const run=x=>validateF8(x.d,x.ev,x.f7,x.baseline,x.metadata);const clone=()=>structuredClone(src);
+test('source-bound known answer passes',()=>assert.deepEqual(run(clone()),[]));
+test('privacy fails closed',()=>{const x=clone();x.d.site.latitude=42;assert(run(x).some(v=>v.includes('protected coordinates')))});
+test('authority fails closed',()=>{const x=clone();x.d.boundaries.readinessAuthority=true;assert(run(x).some(v=>v.includes('advisory boundaries')))});
+test('F7 lineage fails closed',()=>{const x=clone();x.d.sourceBindings.forecastWorkflowRunId='0';assert(run(x).some(v=>v.includes('workflow lineage')))});
+test('F7 weather mutation fails closed',()=>{const x=clone();x.d.hourly[5].weather.cloudCoverPct+=1;assert(run(x).some(v=>v.includes('F7 weather mismatch')))});
+test('governed setup mutation fails closed',()=>{const x=clone();x.d.setupProfiles[0].effectiveFocalLengthMm=999;assert(run(x).some(v=>v.includes('focal length')))});
+test('suitability component mutation fails closed',()=>{const x=clone();x.ev.cases[0].components.framing+=1;assert(run(x).some(v=>v.includes('suitability aggregate evidence')))});
+test('projection suitability mutation fails closed',()=>{const x=clone();x.d.rankings[0].targets[0].setupSuitabilityScore+=1;assert(run(x).some(v=>v.includes('projection suitability')))});
+test('advisory window mutation fails closed',()=>{const x=clone();x.d.rankings[0].targets[0].bestWindows[0].advisoryScore+=1;assert(run(x).some(v=>v.includes('advisory score')))});
