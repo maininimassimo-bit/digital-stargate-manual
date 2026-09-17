@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'docs/data/observation-planner-f8-current-astronomy-suitability.json'
+      - 'docs/data/observation-planner-f8-suitability-evidence.json'
       - 'schemas/observation-planner-f8-current-astronomy-suitability.schema.json'
       - '.github/scripts/verify-observation-planner-f8.mjs'
       - '.github/scripts/test-observation-planner-f8.mjs'
@@ -14,6 +15,7 @@ on:
     branches: [main]
     paths:
       - 'docs/data/observation-planner-f8-current-astronomy-suitability.json'
+      - 'docs/data/observation-planner-f8-suitability-evidence.json'
       - 'schemas/observation-planner-f8-current-astronomy-suitability.schema.json'
       - '.github/scripts/verify-observation-planner-f8.mjs'
       - '.github/scripts/test-observation-planner-f8.mjs'
