@@ -49,11 +49,13 @@ The future request envelope is closed and must carry:
 - exact `providerId=OPEN_METEO`, `upstreamAuthorityId=ITALIAMETEO_ARPAE`, `modelId=italia_meteo_arpae_icon_2i` and `runInitialisationUtc` at 00 or 12 UTC;
 - `timezone=GMT`, ISO-8601 time format, `cell_selection=land` and `elevation=nan` so the provider does not receive site elevation and no undocumented elevation downscaling is introduced;
 - a half-open requested interval `[startUtc,endUtc)` wholly inside `runInitialisationUtc` through `runInitialisationUtc + 72h`;
-- exactly these hourly variables: `temperature_2m`, `relative_humidity_2m`, `dew_point_2m`, `precipitation`, `cloud_cover`, `cloud_cover_low`, `cloud_cover_mid`, `cloud_cover_high`, `visibility`, `wind_speed_10m`, `wind_gusts_10m`;
+- exactly these hourly variables: `temperature_2m`, `relative_humidity_2m`, `dew_point_2m`, `precipitation`, `cloud_cover`, `cloud_cover_low`, `cloud_cover_mid`, `cloud_cover_high`, `wind_speed_10m`, `wind_gusts_10m`;
 - maximum 72 hourly instants in the half-open 72-hour horizon, one location, one model and one run per request;
 - network policy, timeout, response-size ceiling and attribution profile supplied by a separately reviewed source profile.
 
 Unknown query parameters, default model selection, local-time output, interpolated sub-hourly values, multiple locations, multiple models or a range beyond 72 hours are rejected before network access.
+
+Source erratum recorded on 2026-09-17: the official ItaliaMeteo/ARPAE model page states that visibility is not available for ICON-2I. Contract v1.1 therefore records `visibility` as unavailable and excludes it from the request, normalized evidence and units rather than accepting nulls or substituting another model.
 
 ## 4. Required evidence contract
 

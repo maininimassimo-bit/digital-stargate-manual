@@ -17,7 +17,9 @@
 
 ## Accepted decision
 
-F4-A passed exact-head ARB and Release Quality review, expected-head merge and post-merge verification. ADR-011 is Accepted for repository source authority. The accepted contract requires one explicit `italia_meteo_arpae_icon_2i` run, UTC half-open validity, a maximum 72-hour horizon, an 18-hour run-age ceiling, eleven closed forecast variables and fail-closed handling for lineage, temporal, spatial, unit, licensing and privacy failures.
+F4-A passed exact-head ARB and Release Quality review, expected-head merge and post-merge verification. ADR-011 is Accepted for repository source authority. The original accepted contract required one explicit `italia_meteo_arpae_icon_2i` run, UTC half-open validity, a maximum 72-hour horizon, an 18-hour run-age ceiling, eleven closed forecast variables and fail-closed handling for lineage, temporal, spatial, unit, licensing and privacy failures.
+
+The later F4-C execution exposed a source-profile erratum: the official ICON-2I documentation marks visibility unavailable. F4-B v1.1 corrects the current governed vocabulary to ten supported variables and records visibility as unavailable. This does not change the historical PR #263 evidence.
 
 ## Verification
 

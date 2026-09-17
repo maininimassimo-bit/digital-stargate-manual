@@ -2,10 +2,10 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-17",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-C accepted and post-merge verified; ADR-010 accepted; F4-A and ADR-011 accepted and post-merge verified; F4-B accepted and post-merge verified; F4-C exact-main one-request generalized acquisition gate prepared but not executed; zero provider traffic and zero protected-site use; S10 runtime unavailable",
+  "projectStatus": "BKL-031 F3-C accepted and post-merge verified; ADR-010 accepted; F4-A/ADR-011 and F4-B v1.0 accepted and post-merge verified with zero provider traffic; F4-C gate 001 issued one generalized request and failed HTTP 400; request consumed, no artifact and zero protected-site use; F4-B v1.1 / gate 002 remediation prepared; S10 runtime unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F4-C one-request generalized acquisition gate acceptance",
-  "target": "Review and integrate the F4-C exact-main gate, then authorize exactly one synthetic/generalized ICON-2I request. Keep protected-site egress, recurring traffic, production runtime, public projection, ranking, readiness, commands and Safety Authority unavailable.",
+  "nextMilestone": "BKL-031 F4-C one-replacement-request remediation gate acceptance",
+  "target": "Review and integrate the F4-B v1.1 Single Runs correction and F4-C gate 002, then authorize exactly one replacement synthetic/generalized ICON-2I request. Prohibit a third request and keep protected-site egress, recurring traffic, production runtime, public projection, ranking, readiness, commands and Safety Authority unavailable.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -689,9 +689,9 @@
     {
       "id": "M-BKL031-F4-B-CONTRACTS",
       "itemRef": "BKL-031",
-      "title": "BKL-031 F4-B Forecast Contracts and Validator Candidate",
+      "title": "BKL-031 F4-B Forecast Contracts v1.1 Correction Candidate",
       "date": "2026-09-17",
-      "description": "Three closed JSON Schemas, a deterministic four-instant synthetic TEST/NONE fixture and validator execute all 24 F4-A negative cases. Network policy is DENY_F4B with zero allowed requests; provider traffic, protected-site use, runtime, projection, ranking, readiness, commands and Safety Authority remain absent."
+      "description": "Three closed JSON Schemas, a deterministic four-instant synthetic TEST/NONE fixture and validator execute all 24 F4-A negative cases. v1.1 corrects the delivery host to Single Runs, fixes ten supported ICON-2I variables and records visibility as unavailable. Network policy remains DENY_F4B with zero allowed requests."
     },
     {
       "id": "M-BKL031-F4-B-ACCEPTANCE",
@@ -701,11 +701,18 @@
       "description": "PR #265 passed 18/18 exact-head checks on ba8f63a9d923f1daf2aca7c7c2173aacf6c0e051, merged as b3a136efc2bd8b7afd16a817a22cfaa9211f069e and passed 14/14 post-merge workflows. F4-B is Accepted/Post-Merge Verified with zero provider traffic; F4-C acquisition-gate preparation is promoted."
     },
     {
+      "id": "M-BKL031-F4-C-FIRST-ATTEMPT-FAILED",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F4-C First Acquisition Attempt Failed",
+      "date": "2026-09-17",
+      "description": "After exact-head merge and 15/15 successful post-merge workflows, run 35201479378 issued the single authorized generalized request to the incorrect Previous Runs host and received HTTP 400. The request is consumed; no artifact, forecast evidence, protected-site use, projection or runtime authority resulted."
+    },
+    {
       "id": "M-BKL031-F4-C-ACQUISITION-GATE",
       "itemRef": "BKL-031",
-      "title": "BKL-031 F4-C One-Request Generalized Acquisition Gate",
+      "title": "BKL-031 F4-C One-Replacement-Request Remediation Gate",
       "date": "2026-09-17",
-      "description": "Manual exact-main gate fixes one generalized 42.0,12.0 HTTPS request, explicit ICON-2I run, eleven variables, no redirects, 10-second timeout, 2 MB limit and seven-day evidence artifact. Not executed; zero provider traffic and no protected-site input."
+      "description": "Gate 001 merged at 48bd61a3337523b7790d78a37813eaf5e1228724 and run 35201479378 consumed one generalized request that failed HTTP 400 without an artifact. Gate 002 uses Single Runs, ten supported variables, one replacement request, cumulative ceiling two, no redirects, no schedule and always-uploaded evidence; replacement not executed."
     }
   ]
 }

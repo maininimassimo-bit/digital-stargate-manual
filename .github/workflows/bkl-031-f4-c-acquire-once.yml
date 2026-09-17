@@ -1,4 +1,4 @@
-name: BKL-031 F4-C One Generalized Forecast Acquisition
+name: BKL-031 F4-C One Replacement Generalized Forecast Acquisition
 on:
   workflow_dispatch:
     inputs:
@@ -11,13 +11,13 @@ on:
         required: true
         type: string
       confirmation:
-        description: Enter F4C_ONE_GENERALIZED_REQUEST
+        description: Enter F4C_ONE_REPLACEMENT_REQUEST
         required: true
         type: string
 permissions:
   contents: read
 concurrency:
-  group: bkl-031-f4c-one-generalized-acquisition
+  group: bkl-031-f4c-one-replacement-generalized-acquisition
   cancel-in-progress: false
 jobs:
   acquire-once:
@@ -33,15 +33,17 @@ jobs:
         run: |
           test "$GITHUB_SHA" = "$EXPECTED"
           test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$EXPECTED"
-          test "$CONFIRM" = "F4C_ONE_GENERALIZED_REQUEST"
+          test "$CONFIRM" = "F4C_ONE_REPLACEMENT_REQUEST"
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Preflight exact one-request plan
+      - name: Preflight exact one-replacement-request plan
         run: node .github/scripts/observation-planner-forecast-f4c-acquire.mjs --preflight --run=${{ github.event.inputs.run_initialisation_utc }}
-      - name: Execute exactly one generalized request
-        run: node .github/scripts/observation-planner-forecast-f4c-acquire.mjs --execute --confirm=F4C_ONE_GENERALIZED_REQUEST --run=${{ github.event.inputs.run_initialisation_utc }} --out=work/f4c-evidence
+      - name: Execute exactly one replacement generalized request
+        id: acquire
+        run: node .github/scripts/observation-planner-forecast-f4c-acquire.mjs --execute --confirm=F4C_ONE_REPLACEMENT_REQUEST --run=${{ github.event.inputs.run_initialisation_utc }} --out=work/f4c-evidence
       - uses: actions/upload-artifact@v4
+        if: always() && steps.acquire.outcome != 'skipped'
         with:
           name: bkl-031-f4c-evidence-${{ github.run_id }}
           path: work/f4c-evidence

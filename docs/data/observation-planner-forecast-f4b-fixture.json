@@ -1,13 +1,13 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "contractType": "BKL031_F4B_FORECAST_CONTRACT_FIXTURE",
-  "fixtureId": "BKL031-F4B-FIXTURE-001",
+  "fixtureId": "BKL031-F4B-FIXTURE-002",
   "environment": "TEST",
   "authority": "NONE",
   "sourceProfile": {
-    "schemaVersion": "1.0",
+    "schemaVersion": "1.1",
     "contractType": "BKL031_F4B_FORECAST_SOURCE_PROFILE",
-    "profileId": "BKL031-F4B-SOURCE-PROFILE-001",
+    "profileId": "BKL031-F4B-SOURCE-PROFILE-002",
     "decisionRef": "ADR-011",
     "providerId": "OPEN_METEO",
     "upstreamAuthorityId": "ITALIAMETEO_ARPAE",
@@ -15,7 +15,7 @@
     "deliveryInterface": "OPEN_METEO_SINGLE_RUNS",
     "endpoint": {
       "scheme": "https",
-      "host": "previous-runs-api.open-meteo.com",
+      "host": "single-runs-api.open-meteo.com",
       "path": "/v1/forecast"
     },
     "runCadenceHoursUtc": [
@@ -37,7 +37,6 @@
       "cloud_cover_low",
       "cloud_cover_mid",
       "cloud_cover_high",
-      "visibility",
       "wind_speed_10m",
       "wind_gusts_10m"
     ],
@@ -50,7 +49,6 @@
       "cloud_cover_low": "percent",
       "cloud_cover_mid": "percent",
       "cloud_cover_high": "percent",
-      "visibility": "m",
       "wind_speed_10m": "km/h",
       "wind_gusts_10m": "km/h"
     },
@@ -87,12 +85,15 @@
       "https://open-meteo.com/en/docs/italia-meteo-arpae-api",
       "https://open-meteo.com/en/docs/single-runs-api"
     ],
-    "profileDigest": "5033f524715fd38307cca2f5295ee90f6942532f72a4274af48fee5b9d07bf52"
+    "profileDigest": "a85d09f71214cf9d5e2bdb83bf34b3849502e874d968eedef9ba303190383797",
+    "unavailableVariables": [
+      "visibility"
+    ]
   },
   "request": {
-    "schemaVersion": "1.0",
+    "schemaVersion": "1.1",
     "contractType": "BKL031_F4B_FORECAST_REQUEST",
-    "requestId": "BKL031-F4B-REQUEST-001",
+    "requestId": "BKL031-F4B-REQUEST-002",
     "generatedAtUtc": "2026-09-17T06:00:00Z",
     "environment": "TEST",
     "authority": "NONE",
@@ -116,7 +117,6 @@
       "cloud_cover_low",
       "cloud_cover_mid",
       "cloud_cover_high",
-      "visibility",
       "wind_speed_10m",
       "wind_gusts_10m"
     ],
@@ -124,15 +124,15 @@
     "timeformat": "iso8601",
     "cellSelection": "land",
     "elevation": "nan",
-    "canonicalRequestDigest": "bd6e8af7dbb83b1bcd2aae53cb85a665aa2adc5d6913f778e0ad844c261fbae2"
+    "canonicalRequestDigest": "bf8fba33de23e1f6cd760368eb102dfb6fe8c1e0d74fb8856972c42baa2c289a"
   },
   "evidence": {
-    "schemaVersion": "1.0",
+    "schemaVersion": "1.1",
     "contractType": "BKL031_F4B_FORECAST_EVIDENCE",
-    "evidenceId": "BKL031-F4B-EVIDENCE-001",
+    "evidenceId": "BKL031-F4B-EVIDENCE-002",
     "environment": "TEST",
     "authority": "NONE",
-    "requestRef": "BKL031-F4B-REQUEST-001",
+    "requestRef": "BKL031-F4B-REQUEST-002",
     "availabilityState": "AVAILABLE",
     "providerId": "OPEN_METEO",
     "upstreamAuthorityId": "ITALIAMETEO_ARPAE",
@@ -206,12 +206,6 @@
         8,
         9
       ],
-      "visibility": [
-        24000,
-        23000,
-        22000,
-        21000
-      ],
       "wind_speed_10m": [
         8.2,
         7.6,
@@ -234,7 +228,6 @@
       "cloud_cover_low": "percent",
       "cloud_cover_mid": "percent",
       "cloud_cover_high": "percent",
-      "visibility": "m",
       "wind_speed_10m": "km/h",
       "wind_gusts_10m": "km/h"
     },
@@ -244,8 +237,8 @@
     },
     "provenance": {
       "evidenceClass": "SYNTHETIC_FORECAST_FIXTURE",
-      "sourceProfileRef": "BKL031-F4B-SOURCE-PROFILE-001",
-      "requestRef": "BKL031-F4B-REQUEST-001",
+      "sourceProfileRef": "BKL031-F4B-SOURCE-PROFILE-002",
+      "requestRef": "BKL031-F4B-REQUEST-002",
       "runRefs": [
         "2026-09-17T00:00:00Z"
       ]
@@ -253,7 +246,7 @@
     "termsRevision": "observed-2026-09-17",
     "attribution": "Weather data by Open-Meteo; model data by ItaliaMeteo/ARPAE ICON-2I; synthetic fixture with no provider response.",
     "reasonCodes": [],
-    "evidenceDigest": "56ac387db39810f419c991b497a8ab98bae2bea3648702f084e1717ebc58ede6"
+    "evidenceDigest": "ff5ca4bd22b2db7a7c5745c917a9fed477747079b1cd0c16e39c468e9d10dc0b"
   },
   "boundaries": {
     "providerCalls": 0,
@@ -265,5 +258,5 @@
     "commandAuthority": "NONE",
     "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
   },
-  "contractDigest": "a96a8268c571c2fc7fbe715cce8183ecc3ee02d45cbea91aaaa1a46506533d48"
+  "contractDigest": "22d547c5c91a713ff5ca6398a8eb13a1abdc9b4f90759c900f07a8c6ec90c954"
 }
