@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Status | **PROPOSED — F4-A REVIEW CANDIDATE** |
+| Status | **ACCEPTED — REPOSITORY SOURCE AUTHORITY / PROVIDER TRAFFIC NOT AUTHORIZED** |
 | Date | 2026-09-17 |
 | Capability | BKL-031 F4 |
 | Decision scope | Forecast source evaluation and run-lineage contract |
@@ -37,6 +37,8 @@ The source contract, validation plan, privacy decision and license mode must pas
 - dual-provider automatic fallback: hides conflict and source switching;
 - ECMWF IFS 0.25° as primary: longer horizon but materially coarser than ICON-2I for the selected Italy-domain evaluation.
 
-## Promotion condition
+## Acceptance evidence
 
-ADR-011 becomes Accepted for repository source authority only after exact-head ARB and Release Quality review, required checks, expected-head merge and post-merge verification. Acceptance still does not authorize provider traffic or production runtime.
+Pull request [#263](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/263) passed all 16 exact-head checks on `d2ecedb2c141eb0a17f5a1d659748488802d4200`, merged with expected-head control as `02a829f21bf76a0dc5d9ef29998ca5690d71395c`, and passed all 13 applicable post-merge workflows. ADR-011 is therefore Accepted for repository source authority.
+
+Acceptance authorizes F4-B machine-readable schemas, a TEST/NONE synthetic fixture and a fail-closed validator. It does not authorize provider traffic, protected-site egress, production runtime, ranking, readiness, commands or Safety Authority.

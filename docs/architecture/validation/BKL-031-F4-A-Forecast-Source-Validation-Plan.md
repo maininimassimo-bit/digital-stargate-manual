@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | `BKL-031-F4-A-VAL-001` |
-| Status | **REVIEW CANDIDATE — NOT EXECUTED AGAINST A PROVIDER** |
+| Status | **ACCEPTED REPOSITORY VALIDATION PLAN — NOT EXECUTED AGAINST A PROVIDER** |
 | Date | 2026-09-17 |
 | Contract | `BKL-031-F4-A-CONTRACT-001` |
 | Runtime impact | None |
@@ -77,4 +77,4 @@ Before F4-C performs a provider request, its exact head must record:
 
 ## 6. Stop condition
 
-After F4-A exact-head review and repository integration, stop before schema/fixture implementation unless F4-B is separately promoted. F4-A does not authorize provider traffic, protected-site use, runtime, ranking, readiness, commands or Safety Authority.
+F4-A is Accepted / Post-Merge Verified and promotes F4-B schema, fixture and validator work. Stop before provider acquisition: F4-A does not authorize provider traffic, protected-site use, runtime, ranking, readiness, commands or Safety Authority.
