@@ -2,10 +2,10 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-17",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-C accepted and post-merge verified; ADR-010 accepted; F4-A/ADR-011 accepted; F4-B v1.1 integrated with zero provider traffic in F4-B; F4-C consumed two bounded generalized requests, preserved HTTP 200 raw evidence and reconciled 71 complete hourly instants with zero imputation; acquisition path removed, zero protected-site use; S10 runtime unavailable",
+  "projectStatus": "BKL-031 F3-C accepted and post-merge verified; ADR-010 accepted; F4-A/ADR-011, F4-B v1.1, F4-C evidence reconciliation and F4-D sanitized forecast projection/portal accepted and post-merge verified; provider request budget 2/2 exhausted, acquisition path removed, zero protected-site use; F4-D is metadata-only EVALUATION/NONE/READ_ONLY with no forecast value arrays; S10 production runtime unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F4-D sanitized forecast projection and portal integration",
-  "target": "Review and integrate F4-C immutable raw/normalized evidence reconciliation, then build a separately governed sanitized read-only F4-D forecast projection and portal consumer. Keep provider traffic exhausted, protected-site egress, production runtime, ranking, readiness, commands and Safety Authority unavailable.",
+  "nextMilestone": "BKL-031 F5 explainable ranking method and read-only consumer",
+  "target": "Prepare a separately governed F5 explainable ranking method and read-only consumer using the accepted F3 astronomical and F4 forecast evidence chains. Keep provider traffic exhausted and do not authorize readiness/go-no-go, scheduling, automatic target selection, device commands, Safety Authority, protected-site egress or S10 production runtime.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -236,7 +236,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F4-B is Accepted/Post-Merge Verified. F4-C has an exact-main manual gate for one generalized 42.0,12.0 request with no coordinate input, redirects, retry loop or schedule; it is not executed. Gate acceptance precedes the one dispatch; S10 remains unavailable."
+          "note": "F4-A/ADR-011, F4-B v1.1, F4-C evidence reconciliation and F4-D sanitized forecast projection/portal are Accepted/Post-Merge Verified. F4-C exhausted the 2/2 provider request budget and removed the acquisition path; F4-D merged via PR #271 as 8f948ba9593dc2bfde291d2658fe92eafd4cce28 with 7/7 post-merge workflows and no additional provider traffic. F5 explainable ranking/read-only consumer is next; S10 production runtime remains unavailable."
         },
         {
           "id": "BKL-032",
@@ -717,9 +717,16 @@
     {
       "id": "M-BKL031-F4-C-EVIDENCE-RECONCILIATION",
       "itemRef": "BKL-031",
-      "title": "BKL-031 F4-C Acquisition Evidence Reconciliation Candidate",
+      "title": "BKL-031 F4-C Acquisition Evidence Reconciliation Acceptance",
       "date": "2026-09-17",
-      "description": "Artifact 10494298154 preserves the 4,723-byte Single Runs response. Offline deterministic reconciliation excludes exactly the incomplete 00:00 precipitation instant, accepts a contiguous 71-hour suffix, imputes zero values and produces normalized evidence digest 350a7b9ae8b2de308ba55a7105e56bb4de5040572370ab2715c0fa70088af2f5. Public projection remains false; F4-D is next."
+      "description": "Artifact 10494298154 preserves the 4,723-byte Single Runs response. Offline deterministic reconciliation excludes exactly the incomplete 00:00 precipitation instant, accepts a contiguous 71-hour suffix, imputes zero values and produces normalized evidence digest 350a7b9ae8b2de308ba55a7105e56bb4de5040572370ab2715c0fa70088af2f5. PR #270 merged as 79fe51e71782fff6c952e9291fe8ca567da74e98 and completed 15/15 post-merge workflows; no further provider request is authorized."
+    },
+    {
+      "id": "M-BKL031-F4-D-ACCEPTANCE",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F4-D Sanitized Forecast Projection Acceptance",
+      "date": "2026-09-17",
+      "description": "PR #271 passed exact-head governance on f6aa9c5dffbc172d554872f9072029f56d1195ec, merged with expected-head control as 8f948ba9593dc2bfde291d2658fe92eafd4cce28 and passed all 7 applicable post-merge workflows. The metadata-only EVALUATION/NONE/READ_ONLY forecast projection and separate portal consumer are Accepted/Post-Merge Verified; no provider request, protected coordinates, forecast value arrays, ranking, readiness, commands or Safety Authority were introduced. F5 is next."
     }
   ]
 }
