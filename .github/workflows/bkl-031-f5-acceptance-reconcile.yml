@@ -1,0 +1,36 @@
+name: BKL-031 F5 Acceptance Reconciliation
+
+on:
+  push:
+    branches:
+      - chore/bkl-031-f5-acceptance-reconciliation
+    paths:
+      - ".github/scripts/reconcile-bkl031-f5-acceptance.mjs"
+      - ".github/workflows/bkl-031-f5-acceptance-reconcile.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v5
+        with:
+          ref: chore/bkl-031-f5-acceptance-reconciliation
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Apply deterministic reconciliation
+        run: node .github/scripts/reconcile-bkl031-f5-acceptance.mjs
+      - name: Commit canonical reconciliation
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/roadmap/roadmap-source.json docs/project/BACKLOG.md docs/project/DECISION_LOG.md docs/project/index.md mkdocs.yml
+          git diff --cached --quiet && exit 0
+          git commit -m "docs(bkl-031): reconcile F5 acceptance state"
+          git push origin HEAD:chore/bkl-031-f5-acceptance-reconciliation
