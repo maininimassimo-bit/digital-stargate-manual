@@ -34,7 +34,7 @@ jobs:
       DSG_RUNNER_SOURCE_COMMIT: 5ce8214311757c974134494dcc8f1e232dd4c390
       DSG_RUNNER_IMAGE_REFERENCE: europe-west8-docker.pkg.dev/digital-stargate-telemetry/dsg-f3-a3/spike@sha256:f82acf36b79d6f3d8a3ba501b63bdba3ed446e7cf9070f477b01ed5d356ccb52
       DSG_EVIDENCE_PREFIX: bkl-031/f3-a3/scientific-spike/5ce8214311757c974134494dcc8f1e232dd4c390
-      DSG_PLATFORM_STATE_SHA256: 151721051c7f93db039fcfbc7fd14c0500e7beb37fbb406f1a17d35ca63adb41
+      DSG_PLATFORM_STATE_SHA256: e527e5f03e0d93a456abc2dc761b19d18479a042ac139960037569c52776f25e
       DSG_KERNEL_URI: gs://digital-stargate-telemetry-183451329061-f3-data/bkl-031/f3-a3/artifacts/spk/de442s/sha256/54d97562a5b094d298b1b8eafa5a2e17e3e010ce85e1a366d07f003ad159323c/de442s.bsp
     steps:
       - name: Checkout exact source
@@ -103,7 +103,7 @@ jobs:
           from pathlib import Path
 
           state_raw = Path('/tmp/platform-state-before.json').read_bytes()
-          if hashlib.sha256(state_raw).hexdigest() != '151721051c7f93db039fcfbc7fd14c0500e7beb37fbb406f1a17d35ca63adb41':
+          if hashlib.sha256(state_raw).hexdigest() != 'e527e5f03e0d93a456abc2dc761b19d18479a042ac139960037569c52776f25e':
               raise SystemExit('remediated runner platform state changed')
           state = json.loads(state_raw)
           if state.get('serial') != 6 or state.get('lineage') != '2be9b82b-88d3-888f-4fcd-dded2f74f7f3' or len(state.get('resources', [])) != 4:
@@ -283,7 +283,7 @@ jobs:
           executions = json.loads(Path('/tmp/executions-final.json').read_text())
           if len(executions) != 3:
               raise SystemExit('exact three-execution history postcondition failed')
-          if hashlib.sha256(Path('/tmp/platform-state-final.json').read_bytes()).hexdigest() != '151721051c7f93db039fcfbc7fd14c0500e7beb37fbb406f1a17d35ca63adb41':
+          if hashlib.sha256(Path('/tmp/platform-state-final.json').read_bytes()).hexdigest() != 'e527e5f03e0d93a456abc2dc761b19d18479a042ac139960037569c52776f25e':
               raise SystemExit('remediated runner platform state changed during scientific execution')
           if json.loads(Path('/tmp/kernel-before.json').read_text()) != json.loads(Path('/tmp/kernel-final.json').read_text()):
               raise SystemExit('kernel metadata changed during scientific execution')
@@ -301,7 +301,7 @@ jobs:
               'executionName': Path('/tmp/remediated-execution-name.txt').read_text().strip(),
               'executionCount': 3,
               'evidenceObject': Path('/tmp/evidence-object-name.txt').read_text().strip(),
-              'platformStateRawSha256': '151721051c7f93db039fcfbc7fd14c0500e7beb37fbb406f1a17d35ca63adb41',
+              'platformStateRawSha256': 'e527e5f03e0d93a456abc2dc761b19d18479a042ac139960037569c52776f25e',
               'jobConfigurationGeneration': final_job.get('metadata', {}).get('generation'),
               'cloudMutation': 'ONE_JOB_EXECUTION_AND_ONE_CREATE_ONLY_EVIDENCE_OBJECT',
               'externalReferenceCallCount': 0,
