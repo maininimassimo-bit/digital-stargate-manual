@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-17",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "55bea841552153348e837720d09484520b5ec0245131c6f1b4589d3c3a0e5517",
+  "sourceDigest": "74b2041e6b279a6b22602ccbc8e12d281bab3d1be9b0936ee26142651b7ca80b",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-B accepted and post-merge verified through PR #259; ADR-010 accepted; 34/34 contract tests and 11/11 post-merge workflows passed; F3-C bounded adapter and sanitized projection are next; S10 runtime unavailable",
+  "projectStatus": "BKL-031 F3-B accepted and post-merge verified; ADR-010 accepted; F3-C bounded adapter, sanitized TEST/NONE projection, browser integrity validator and portal page implemented with 35/35 local tests; exact-head acceptance and deployed-route verification pending; S10 runtime unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F3-C bounded adapter and sanitized projection",
-  "target": "Implement and validate the F3-C source-neutral bounded adapter and sanitized projection using accepted synthetic TEST/NONE evidence. Preserve protected-site, external-reference, cloud-execution and runtime-activation boundaries; keep S10 unavailable until independent F3-C acceptance.",
+  "nextMilestone": "BKL-031 F3-C exact-head acceptance and portal verification",
+  "target": "Review and integrate the deterministic F3-C adapter, closed sanitized TEST/NONE projection and fail-closed Observation Planner portal page. Verify the deployed route after expected-head merge while keeping protected-site calculation, external-reference traffic, cloud execution and runtime S10 unavailable.",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -307,7 +307,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3-B is Accepted/Post-Merge Verified through PR #259 and merge 8c3b7b8424a15b4288c79f773b9f0fc3f7cd5c5f. The 34-case suite and all 11 applicable post-merge workflows passed. F3-C bounded adapter and sanitized projection are next; protected-site calculation, external-reference traffic, runtime activation and S10 remain separate."
+          "note": "F3-B is Accepted/Post-Merge Verified. F3-C now has a deterministic repository adapter, sanitized TEST/NONE projection, browser digest validation and a dedicated portal route with 35/35 local tests; exact-head acceptance and deployed-route verification are pending. S10 remains UNAVAILABLE."
         },
         {
           "id": "BKL-032",
@@ -779,6 +779,14 @@
       "title": "BKL-031 F3-B Contracts and Validator Acceptance",
       "date": "2026-09-17",
       "description": "PR #259 passed 15/15 exact-head checks on 858a7094d2ae01329617c2c733075f6b87d44113, merged with expected-head control as 8c3b7b8424a15b4288c79f773b9f0fc3f7cd5c5f, and passed all 11 applicable post-merge workflows. F3-B is Accepted/Post-Merge Verified; F3-C is next and S10 remains unavailable.",
+      "status": "active"
+    },
+    {
+      "id": "M-BKL031-F3-C-IMPLEMENTATION",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F3-C Bounded Adapter and Portal Candidate",
+      "date": "2026-09-17",
+      "description": "Deterministic bounded adapter, closed sanitized TEST/NONE projection, browser SHA-256 validation and fail-closed Observation Planner portal page implemented with 35/35 local tests. Exact-head acceptance and deployed-route verification are pending; S10 remains unavailable.",
       "status": "active"
     }
   ]

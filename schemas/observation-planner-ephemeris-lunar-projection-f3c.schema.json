@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.example/schemas/observation-planner-ephemeris-lunar-projection-f3c.schema.json",
+  "title": "BKL-031 F3-C Bounded Sanitized Ephemeris/Lunar Projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "projectionType", "projectionId", "generatedAtUtc", "environment", "authority", "sourceContractRef", "contextRef", "sitePublicEvidenceRef", "setupAvailabilityState", "evidenceAvailabilityState", "method", "validity", "facts", "citations", "provenance", "limitations", "boundary", "projectionDigest"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "projectionType": { "const": "BKL031_F3C_BOUNDED_SANITIZED_PROJECTION" },
+    "projectionId": { "type": "string", "pattern": "^BKL031-F3C-[0-9A-F]{24}$" },
+    "generatedAtUtc": { "type": "string", "format": "date-time" },
+    "environment": { "const": "TEST" },
+    "authority": { "const": "NONE" },
+    "sourceContractRef": { "type": "string", "minLength": 1 },
+    "contextRef": { "type": "string", "minLength": 1 },
+    "sitePublicEvidenceRef": { "type": "string", "minLength": 1 },
+    "setupAvailabilityState": { "enum": ["AVAILABLE", "UNAVAILABLE_CURRENT", "CONFLICTED"] },
+    "evidenceAvailabilityState": { "enum": ["AVAILABLE", "UNAVAILABLE", "STALE", "CONFLICTED"] },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profileRef", "methodId", "methodVersion", "adapterId", "adapterVersion", "outputFrame", "refractionModel"],
+      "properties": {
+        "profileRef": { "type": "string", "minLength": 1 },
+        "methodId": { "type": "string", "minLength": 1 },
+        "methodVersion": { "type": "string", "minLength": 1 },
+        "adapterId": { "const": "BKL031-F3C-BOUNDED-ADAPTER" },
+        "adapterVersion": { "const": "1.0" },
+        "outputFrame": { "const": "TOPOCENTRIC_ALTAZ" },
+        "refractionModel": { "const": "AIRLESS" }
+      }
+    },
+    "validity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fromUtc", "toUtc"],
+      "properties": {
+        "fromUtc": { "type": "string", "format": "date-time" },
+        "toUtc": { "type": "string", "format": "date-time" }
+      }
+    },
+    "facts": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 72,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["factType", "instantUtc", "numericValue", "instantValue", "unit"],
+        "properties": {
+          "factType": { "enum": ["targetAltitudeDeg", "targetAzimuthDeg", "meridianTransitUtc", "solarAltitudeDeg", "moonAltitudeDeg", "moonAzimuthDeg", "moonPhaseAngleDeg", "moonIlluminatedFraction", "targetMoonSeparationDeg"] },
+          "instantUtc": { "type": "string", "format": "date-time" },
+          "numericValue": { "type": ["number", "null"] },
+          "instantValue": { "type": ["string", "null"] },
+          "unit": { "enum": ["deg", "fraction", "utc"] }
+        }
+      }
+    },
+    "citations": { "type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidenceRef", "fixtureRef", "profileRef", "evidenceClass"],
+      "properties": {
+        "evidenceRef": { "type": "string", "minLength": 1 },
+        "fixtureRef": { "type": "string", "minLength": 1 },
+        "profileRef": { "type": "string", "minLength": 1 },
+        "evidenceClass": { "const": "SYNTHETIC_VALIDATION" }
+      }
+    },
+    "limitations": { "type": "array", "minItems": 4, "maxItems": 4, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["publicationState", "runtimeState", "protectedSiteUsed", "externalReferenceCalls", "commandAuthority", "safetyAuthority"],
+      "properties": {
+        "publicationState": { "const": "TEST_ONLY" },
+        "runtimeState": { "const": "UNAVAILABLE" },
+        "protectedSiteUsed": { "const": false },
+        "externalReferenceCalls": { "const": 0 },
+        "commandAuthority": { "const": "NONE" },
+        "safetyAuthority": { "const": "LOCAL_PHYSICAL_INTERLOCKS" }
+      }
+    },
+    "projectionDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

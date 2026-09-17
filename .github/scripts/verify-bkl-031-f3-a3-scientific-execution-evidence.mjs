@@ -49,7 +49,7 @@ for (const [document, fragments] of [[adr, ["**ACCEPTED — EXACT SCIENTIFIC CAM
   for (const fragment of fragments) if (!document.includes(fragment)) fail(`acceptance document missing: ${fragment}`);
 }
 exact(roadmap.currentPackage, "BKL-031", "roadmap current package changed");
-exact(roadmap.nextMilestone, "BKL-031 F3-C bounded adapter and sanitized projection", "roadmap next milestone mismatch");
+exact(roadmap.nextMilestone, "BKL-031 F3-C exact-head acceptance and portal verification", "roadmap next milestone mismatch");
 if (!roadmap.projectStatus.includes("ADR-010 accepted") || !roadmap.projectStatus.includes("S10 runtime unavailable")) fail("roadmap project status mismatch");
 if (!roadmap.milestones.some((item) => item.id === "M-BKL031-F3-A3-SCIENTIFIC-ACCEPTANCE")) fail("roadmap scientific acceptance milestone missing");
 
