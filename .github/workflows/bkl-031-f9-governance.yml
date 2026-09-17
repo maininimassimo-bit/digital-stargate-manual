@@ -1,0 +1,37 @@
+name: BKL-031 F9 Governance
+on:
+  pull_request:
+    paths:
+      - '.github/scripts/observation_planner_f9.py'
+      - '.github/scripts/test_observation_planner_f9.py'
+      - '.github/scripts/requirements-observation-planner-f9.txt'
+      - '.github/workflows/bkl-031-f9-*.yml'
+      - 'docs/javascripts/observation-planner-f9.js'
+      - 'docs/architecture/ADR-012-MeteoHub-Recurring-Forecast-Supply.md'
+      - 'docs/architecture/scientific-assets/BKL-031-F9-Repeatable-Current-Night-Planner.md'
+      - 'docs/observation-planner/index.md'
+  push:
+    branches: [main]
+    paths:
+      - '.github/scripts/observation_planner_f9.py'
+      - '.github/scripts/test_observation_planner_f9.py'
+      - '.github/scripts/requirements-observation-planner-f9.txt'
+      - '.github/workflows/bkl-031-f9-*.yml'
+      - 'docs/javascripts/observation-planner-f9.js'
+      - 'docs/architecture/ADR-012-MeteoHub-Recurring-Forecast-Supply.md'
+      - 'docs/architecture/scientific-assets/BKL-031-F9-Repeatable-Current-Night-Planner.md'
+      - 'docs/observation-planner/index.md'
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --disable-pip-version-check -r .github/scripts/requirements-observation-planner-f9.txt
+      - run: python -c "import eccodes, swisseph; print(eccodes.codes_get_api_version(), swisseph.version)"
+      - run: python -m py_compile .github/scripts/observation_planner_f9.py
+      - run: python .github/scripts/test_observation_planner_f9.py
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: node --check docs/javascripts/observation-planner-f9.js
