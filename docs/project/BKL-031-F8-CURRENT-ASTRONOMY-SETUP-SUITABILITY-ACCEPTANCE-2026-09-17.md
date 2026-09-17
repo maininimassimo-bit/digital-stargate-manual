@@ -10,7 +10,7 @@
 | Implementation PR | #279 |
 | Exact head reviewed | `3f05693482208df2b56b66dcb71162589880e72b` |
 | Implementation merge | `20669f7164460297d7318fc3b5874e4bc7f4bcde` |
-| Acceptance reconciliation PR | RECONCILIATION_PR_PENDING |
+| Acceptance reconciliation PR | #280 |
 | Successore | **BKL-031 F9 repeatable current-night planner closure** |
 
 ## Evidence di acceptance
