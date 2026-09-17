@@ -37,8 +37,8 @@ jobs:
         run: node .github/scripts/reconcile-bkl-031-f8-acceptance.mjs
       - name: Remove temporary reconciliation helper
         run: |
-          git rm .github/scripts/reconcile-bkl-031-f8-acceptance.mjs
-          git rm .github/workflows/bkl-031-f8-acceptance-reconcile-temporary.yml
+          git rm -f .github/scripts/reconcile-bkl-031-f8-acceptance.mjs
+          git rm -f .github/workflows/bkl-031-f8-acceptance-reconcile-temporary.yml
       - name: Commit reconciled governance state
         run: |
           git config user.name "github-actions[bot]"
