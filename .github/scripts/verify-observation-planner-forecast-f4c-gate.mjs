@@ -20,7 +20,8 @@ for (const expected of [
   '71-instant normalized evidence',
   'no third-request dispatch path',
   '79fe51e71782fff6c952e9291fe8ca567da74e98',
-  '15/15 applicable post-merge workflows',
+  '15/15 applicable workflows successful',
+  'all 15 applicable post-merge workflows completed successfully',
   'F4-D'
 ]) assert.ok(gate.includes(expected), `gate record missing ${expected}`);
 for (const expected of [
