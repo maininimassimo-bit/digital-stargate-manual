@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.31 |
+| Versione | 5.32 |
 | Stato | Active |
 | Data baseline | 15/09/2026 |
 
@@ -49,7 +49,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-028 | P1 | Integrare Power/Network telemetry | Done | BKL-027 | Canonical Observatory Status | N.I.N.A. exporter |
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
-| BKL-031 | P1 | Observation Planner intelligente | In Progress | F3-C Accepted/Post-Merge Verified with 35/35 tests; F4-A/ADR-011 and F4-B v1.1 Accepted/Post-Merge Verified; F4-C evidence reconciliation Accepted/Post-Merge Verified with 71 complete hourly instants, zero imputation and provider budget 2/2 exhausted; acquisition path removed; F4-D metadata-only projection and portal Accepted/Post-Merge Verified via PR #271; no protected-site use; S10 unavailable | Prepare F5 explainable ranking method and read-only consumer as a separately governed slice; no further provider request, readiness, scheduling, command path or Safety Authority | ADR-010; ADR-011; `BKL-031-F4-C-EVIDENCE-RECONCILIATION-001`; `BKL-031-F4-D-PROJECTION-001`; PR #270 merge `79fe51e7…`; PR #271 merge `8f948ba9…`; evidence `350a7b9a…` |
+| BKL-031 | P1 | Observation Planner intelligente | In Progress | F3-C, F4-A/ADR-011, F4-B, F4-C, F4-D and F5 Accepted/Post-Merge Verified; F5 PR #273 merge `777924e2638430f15bf717fa33dd71057751625a`; provider budget 2/2 exhausted; no protected-site use; S10 unavailable | Execute F6 capability closure as a governance-only reconciliation of F1-F5; no new provider traffic, readiness/go-no-go, scheduling, automatic target selection, command path or Safety Authority | ADR-010; ADR-011; `BKL-031-F5-RANKING-001`; F5 acceptance; PR #273; merge `777924e2…`; evidence `350a7b9a…` |
 | BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Planned | BKL-029–031, BKL-036 | Readiness pre-sessione spiegabile, non Safety Authority | Functional Roadmap Expansion |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
