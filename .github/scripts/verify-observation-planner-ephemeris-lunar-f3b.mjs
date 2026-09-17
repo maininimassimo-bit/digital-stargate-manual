@@ -60,7 +60,7 @@ for (const fragment of ['**ACCEPTED — POST-MERGE VERIFIED**', documents.fixtur
 for (const fragment of ['**ACCEPTED — POST-MERGE VERIFIED**', '34/34 passing locally and in governed CI', 'S10 remains `UNAVAILABLE`', '35192376713', '35192376685']) assert.ok(acceptance.includes(fragment), `F3-B acceptance record missing: ${fragment}`);
 assert.ok(backlog.includes('F3-C Accepted/Post-Merge Verified') && backlog.includes('F4-A/ADR-011') && backlog.includes('F4-D metadata-only projection and portal Accepted/Post-Merge Verified'), 'BKL-031 backlog does not preserve the accepted successor chain after F3-B.');
 assert.equal(roadmap.currentPackage, 'BKL-031');
-assert.equal(roadmap.nextMilestone, 'BKL-031 F8 current astronomy and explicit setup suitability integration');
+assert.equal(roadmap.nextMilestone, 'BKL-031 F9 repeatable current-night planner closure');
 assert.ok(roadmap.projectStatus.includes('F3-C accepted and post-merge verified') && roadmap.projectStatus.includes('F4-D sanitized forecast projection/portal') && roadmap.projectStatus.includes('S10 production runtime unavailable'), 'roadmap successor status/boundary mismatch after F3-B.');
 assert.ok(roadmap.milestones.some((item) => item.id === 'M-BKL031-F3-B-ACCEPTANCE'), 'roadmap F3-B acceptance milestone missing.');
 assert.ok(roadmap.milestones.some((item) => item.id === 'M-BKL031-F4-D-ACCEPTANCE'), 'roadmap F4-D acceptance milestone missing.');

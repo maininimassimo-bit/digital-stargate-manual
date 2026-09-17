@@ -11,8 +11,8 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | Documento | Ruolo |
 |---|---|
 | `AI_BOOTSTRAP.md` | Root bootstrap |
-| [Handover 15/09/2026](HANDOVER_2026-09-15.md) | Handover corrente |
-| [Current Technical Baseline 15/09/2026](CURRENT_TECHNICAL_BASELINE_2026-09-15.md) | Baseline tecnica corrente |
+| [Handover 17/09/2026](HANDOVER_2026-09-17.md) | Handover corrente |
+| [Current Technical Baseline 17/09/2026](CURRENT_TECHNICAL_BASELINE_2026-09-17.md) | Baseline tecnica corrente |
 | [DSG-AEM-001 Continuous Autonomous Execution Mandate](DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md) | Mandato owner-authorized e deroga ruleset condizionata |
 | [PR #196 DSG-AEM-001 AI-Assisted ARB Review](../architecture/reviews/ARB-PR196-DSG-AEM-001-Governance-AI-Assisted-Review-2026-09-15.md) | Approved — 99/100; non equivalente ad approvazione umana indipendente |
 | [PR #196 DSG-AEM-001 AI-Assisted Release Quality](../architecture/reviews/RQ-PR196-DSG-AEM-001-Governance-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
@@ -66,6 +66,8 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | [F6 Real-Evidence Setup-Aware E2E Acceptance](BKL-031-F6-REAL-EVIDENCE-SETUP-AWARE-E2E-ACCEPTANCE-2026-09-17.md) | 13/13 exact-head and 14/14 post-merge workflows; F7 fresh forecast supply/runtime boundary next; provider validation budget remains 2/2 exhausted |
 | [F7 Fresh Forecast Supply and Runtime Boundary](../architecture/scientific-assets/BKL-031-F7-Fresh-Forecast-Supply-and-Runtime-Boundary.md) | Accepted/Post-Merge Verified via PR #277 and merge `59a1d690`; real protected-site forecast delivered through sanitized public projection; one-shot budget 1/1 exhausted; recurring runtime not activated |
 | [F7 Fresh Protected-Site Forecast Supply Acceptance](BKL-031-F7-FRESH-FORECAST-SUPPLY-ACCEPTANCE-2026-09-17.md) | 9/9 exact-head and 10/10 post-merge workflows; F8 current astronomy and explicit setup suitability integration next; BKL-031 remains In Progress |
+| [F8 Current Astronomy and Setup Suitability](../architecture/scientific-assets/BKL-031-F8-Current-Astronomy-and-Setup-Suitability.md) | Accepted/Post-Merge Verified via PR #279 and merge `20669f71`; real F7 weather + night-specific astronomy + explicit setup suitability; bounded one-night advisory evidence |
+| [F8 Current Astronomy and Setup Suitability Acceptance](BKL-031-F8-CURRENT-ASTRONOMY-SETUP-SUITABILITY-ACCEPTANCE-2026-09-17.md) | 9/9 exact-head and 10/10 post-merge workflows; F9 repeatable current-night planner closure next; BKL-031 remains In Progress |
 | [F3-A3 Owner Decision Record](BKL-031-F3-A3-OWNER-DECISION-RECORD-2026-09-15.md) | Complete owner decision; no execution authority |
 | [F3-A3 F3-OD05 Exact SPK Approval](BKL-031-F3-A3-F3-OD05-SPK-APPROVAL-2026-09-16.md) | `de442s.bsp` identity, coverage, provenance and notices approved; no upload/execution authority |
 | [F3-A3 Google Cloud Hosting Plan](../architecture/infrastructure/BKL-031-F3-A3-Google-Cloud-Validation-Spike-Hosting-Plan.md) | Bootstrap/remote state post-verified; static container/IERS evidence prepared; platform not executed |
