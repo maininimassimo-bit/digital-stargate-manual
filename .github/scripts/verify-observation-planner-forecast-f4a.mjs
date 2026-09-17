@@ -59,15 +59,15 @@ assert.ok(adr.includes('**ACCEPTED — REPOSITORY SOURCE AUTHORITY / PROVIDER TR
 for (let id = 1; id <= 24; id += 1) assert.ok(validation.includes(`| N${String(id).padStart(2, '0')} |`), `F4-A validation case N${String(id).padStart(2, '0')} missing.`);
 assert.ok(validation.includes('**ACCEPTED REPOSITORY VALIDATION PLAN — NOT EXECUTED AGAINST A PROVIDER**'), 'F4-A validation execution boundary missing.');
 assert.ok(acceptance.includes('**ACCEPTED — POST-MERGE VERIFIED**') && acceptance.includes('16/16 successful') && acceptance.includes('13/13 successful') && acceptance.includes('02a829f21bf76a0dc5d9ef29998ca5690d71395c'), 'F4-A acceptance evidence mismatch.');
-assert.ok(backlog.includes('F4-A/ADR-011') && backlog.includes('F4-D metadata-only projection and portal Accepted/Post-Merge Verified') && backlog.includes('provider budget 2/2 exhausted'), 'Backlog does not preserve accepted F4-A through F4-D state.');
-assert.ok(knowledge.includes('F4-A and ADR-011 are Accepted / Post-Merge Verified'), 'Knowledge map does not identify accepted F4-A state.');
+assert.ok(backlog.includes('F4-A/ADR-011') && backlog.includes('F4-D metadata-only projection and portal Accepted/Post-Merge Verified'), 'Backlog does not preserve accepted F4-A through F4-D state.');
+assert.ok(knowledge.includes('F1–F8 sono ACCEPTED / POST-MERGE VERIFIED'), 'Knowledge map does not identify accepted predecessor state.');
 assert.ok(index.includes('F4-A Forecast Source Discovery and Integration Contract'), 'Project index does not expose F4-A.');
 assert.ok(decisions.includes('DLG-042') && decisions.includes('fallback silenzioso') && decisions.includes('DLG-048'), 'Decision log does not preserve F4-A source decision through F4-D acceptance.');
 assert.ok(nav.includes('BKL-031 F4-A - Forecast Source Discovery and Integration Contract') && nav.includes('ADR-011 - Forecast Source and Run Lineage'), 'MkDocs navigation does not expose F4-A.');
 
 assert.equal(roadmap.currentPackage, 'BKL-031');
-assert.equal(roadmap.nextMilestone, 'BKL-031 F9 repeatable current-night planner closure');
-assert.ok(roadmap.projectStatus.includes('F4-A/ADR-011') && roadmap.projectStatus.includes('F4-D sanitized forecast projection/portal') && roadmap.projectStatus.includes('S10 production runtime unavailable'), 'Roadmap F4-A-to-F4-D status/boundary mismatch.');
+assert.equal(roadmap.nextMilestone, 'BKL-031 F9 governed refresh, portal verification and acceptance reconciliation');
+assert.ok(roadmap.projectStatus.includes('F3–F8 Accepted/Post-Merge Verified') && roadmap.projectStatus.includes('S10 production runtime unavailable'), 'Roadmap F4-A-to-F4-D status/boundary mismatch.');
 assert.ok(roadmap.milestones.some((item) => item.id === 'M-BKL031-F4-A-SOURCE-CONTRACT'), 'Roadmap F4-A milestone missing.');
 assert.ok(roadmap.milestones.some((item) => item.id === 'M-BKL031-F4-A-ACCEPTANCE'), 'Roadmap F4-A acceptance milestone missing.');
 assert.ok(roadmap.milestones.some((item) => item.id === 'M-BKL031-F4-D-ACCEPTANCE'), 'Roadmap F4-D acceptance milestone missing.');
