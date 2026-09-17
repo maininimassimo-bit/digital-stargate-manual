@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 6.1 |
+| Versione | 6.2 |
 | Stato | Active |
-| Data | 17/09/2026 |
+| Data | 18/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | BKL-031 F8 Accepted/Post-Merge Verified; BKL-031 resta In Progress; F9 repeatable current-night planner closure next; S10 production runtime `UNAVAILABLE` |
+| Current governed package | BKL-031 F9 implementation/post-merge verified; governed refresh and acceptance reconciliation pending; S10 production runtime `UNAVAILABLE` |
 
 ## 1. Scopo
 
@@ -49,11 +49,11 @@ Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimen
 
 BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`; nessun apply path o Safety Authority è autorizzato.
 
-BKL-031 resta **In Progress**. F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integrato tramite PR #193 e riconciliato tramite PR #194. F3-A2 repository authority is APPROVED/AVAILABLE for authorized validated input. ADR-009 governs protected registries. F3-A3 is Accepted / Post-Merge Verified through PR #258 and merge `a0a2e4950f2d908a3aaa0fc149754f904ee8d588`; execution `dsg-f3-a3-spike-g4x8g` passed 17/17 metrics and repeatability with zero external-reference calls. ADR-010 is Accepted for repository method authority. F3-B and F3-C are Accepted / Post-Merge Verified. F4-A and ADR-011 are Accepted / Post-Merge Verified through PR #263. F4-B v1.1 is Accepted / Post-Merge Verified through PR #269 and merge `053fc766bfc7908a984828cc335eef07a558909c`; it binds Single Runs and records visibility unavailable. F4-C runs `35201479378` and `35214129960` consumed the complete generalized two-request budget `2/2_EXHAUSTED`; the second raw HTTP 200 evidence was reconciled offline to 71 contiguous complete instants with one incomplete initialization instant excluded and zero imputation, after which the acquisition workflow and script were removed. F4-D, F5 and F6 are Accepted / Post-Merge Verified. F7 is Accepted / Post-Merge Verified via PR #277 and merge `59a1d690406d733b6e61e64220f84cef9b6fb1a2`; its protected-site one-shot request budget is `1/1_EXHAUSTED`. F8 is Accepted / Post-Merge Verified via PR #279 and merge `20669f7164460297d7318fc3b5874e4bc7f4bcde`; it binds the real F7 protected-site forecast to night-specific astronomy and explicit OTA/camera/filter suitability for the bounded 17–18/09/2026 evidence night and performs zero provider requests. The only promoted successor is **BKL-031 F9 repeatable current-night planner closure**. Recurring provider traffic is not authorized by F8 acceptance. S08 is `UNAVAILABLE`, S09 is `UNAVAILABLE_CURRENT`, and S10 production runtime is `UNAVAILABLE`. BKL-032 retains Session Readiness / Go-No-Go authority; local physical interlocks remain Safety Authority; BKL-031 remains read-only/advisory with no scheduler, automatic target selection, device command or Safety Authority.
+BKL-031 resta **In Progress**. F1–F8 sono ACCEPTED / POST-MERGE VERIFIED. ADR-012 governa F9; l'implementazione MeteoHub è confluita con PR #282, la reconciliation pubblica a costo zero con PR #283 e l'esposizione del planner con PR #284, tutte con workflow post-merge applicabili riusciti. Non esistono ancora evidence di refresh F9 governato, projection corrente o verifica del consumer/portale: F9 non è quindi Accepted e S10 resta `UNAVAILABLE`. BKL-032 retains Session Readiness / Go-No-Go authority; local physical interlocks remain Safety Authority; BKL-031 remains read-only/advisory with no scheduler, automatic target selection, device command or Safety Authority.
 
 ## 7. Roadmap sequence
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1-F8 ACCEPTED / POST-MERGE VERIFIED / F9 REPEATABLE CURRENT-NIGHT CLOSURE NEXT / RECURRING PROVIDER TRAFFIC NOT AUTHORIZED / S10 PRODUCTION UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1-F8 ACCEPTED / F9 IMPLEMENTED + POST-MERGE VERIFIED / GOVERNED REFRESH + PORTAL VERIFICATION + ACCEPTANCE PENDING / S10 PRODUCTION UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 8. CI/CD e publishing
 
