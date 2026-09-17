@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Decision | **ACCEPTED — POST-MERGE VERIFICATION PENDING** |
+| Decision | **ACCEPTED — POST-MERGE VERIFIED** |
 | Date | 2026-09-17 |
 | Capability | BKL-031 F3-A3 |
 | Scientific execution | `dsg-f3-a3-spike-g4x8g` |
@@ -49,6 +49,8 @@ ADR-010 is Accepted because the exact approved campaign passed every evaluated m
 
 F3-A3 is complete at repository decision/evidence level. F3-B becomes the next dependency-ready increment for machine-readable contracts and validator work. F3-C, runtime activation, protected-site calculation, further Cloud Run execution and external-reference traffic remain separate gates. S10 remains `UNAVAILABLE` until an accepted F3-C adapter and projection exist.
 
-## Post-merge condition
+## Post-merge verification
 
-The acceptance becomes `POST-MERGE VERIFIED` only after exact-head CI, expected-head merge, successful repository workflows and successful Pages deployment. Failure preserves this record as a candidate and does not promote F3-B.
+PR #258 passed all 14 exact-head checks on `bc519a51f0f4f2da7a3386b747397afbff7cdb22`, including the reproducible scientific runner, offline container, Terraform, governance, projection, documentation and Developer Foundation gates. Expected-head merge produced `a0a2e4950f2d908a3aaa0fc149754f904ee8d588`.
+
+All ten push workflows completed successfully on that merge: BKL-031 F3-A3 GCP IaC `35190806076`, Pages `35190806083`, Governed Projection Sync `35190806058`, Scientific Platform Governance `35190806031`, BKL-041 F4 `35190806028`, documentation validation `35190806040`, BKL-046 F5 `35190806024`, Word `35190806030`, BKL-046 F4 `35190806056` and Developer Foundation `35190806050`. F3-A3 is therefore Accepted / Post-Merge Verified and F3-B is authorized within its repository-only boundary.

@@ -269,3 +269,11 @@ Current classification:
 - F3-B/F3-C and runtime/OAT: not authorized.
 
 The original P01–P10/N21–N66 plan remains normative for later full F3 validation where applicable.
+
+## 17. Current-state reconciliation — 2026-09-17
+
+F3-A3 is Accepted / Post-Merge Verified through PR #258. ADR-010 and the exact scientific campaign close the method, data, error-budget and bounded scientific-validation preconditions for repository method authority.
+
+The F3-B acceptance candidate materializes the three source-neutral schemas, one bounded synthetic fixture and a deterministic validator. Its 34-case suite executes the F3-B-applicable method/request/evidence, validity, fact-range, privacy, prohibited-field and authority-boundary cases. The accepted F3-A1/F3-A2 suites remain authoritative for full site/setup lifecycle and overlap behavior. This candidate does not claim that the complete integration/OAT campaign is executed.
+
+F3-C adapter/projection, protected-site calculation, external-reference traffic and runtime activation remain not implemented. S10 remains `UNAVAILABLE`; P01–P10/N21–N66 cases that require an integrated adapter or runtime remain open for F3-C.

@@ -1,0 +1,252 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/schemas/observation-planner-ephemeris-lunar-request-f3b.schema.json",
+  "title": "Digital StarGate Observation Planner F3-B Ephemeris/Lunar Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractType",
+    "requestId",
+    "contextId",
+    "environment",
+    "authority",
+    "generatedAtUtc",
+    "evaluationTimesUtc",
+    "target",
+    "siteSnapshot",
+    "setupSnapshot",
+    "methodProfileRef",
+    "requestedFacts",
+    "bounds",
+    "inputDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "contractType": {
+      "const": "BKL031_F3B_EPHEMERIS_LUNAR_REQUEST"
+    },
+    "requestId": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "contextId": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "environment": {
+      "const": "TEST"
+    },
+    "authority": {
+      "const": "NONE"
+    },
+    "generatedAtUtc": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+    },
+    "evaluationTimesUtc": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+      }
+    },
+    "target": {
+      "$ref": "#/$defs/target"
+    },
+    "siteSnapshot": {
+      "$ref": "#/$defs/site"
+    },
+    "setupSnapshot": {
+      "$ref": "#/$defs/setup"
+    },
+    "methodProfileRef": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "requestedFacts": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 9,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "targetAltitudeDeg",
+          "targetAzimuthDeg",
+          "meridianTransitUtc",
+          "solarAltitudeDeg",
+          "moonAltitudeDeg",
+          "moonAzimuthDeg",
+          "moonPhaseAngleDeg",
+          "moonIlluminatedFraction",
+          "targetMoonSeparationDeg"
+        ]
+      }
+    },
+    "bounds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "maxInstants",
+        "maxFacts",
+        "maxSpanSeconds"
+      ],
+      "properties": {
+        "maxInstants": {
+          "const": 8
+        },
+        "maxFacts": {
+          "const": 9
+        },
+        "maxSpanSeconds": {
+          "const": 86400
+        }
+      }
+    },
+    "inputDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "$defs": {
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetIdentityRef",
+        "targetRaDeg",
+        "targetDecDeg",
+        "targetFrame",
+        "targetEpoch"
+      ],
+      "properties": {
+        "targetIdentityRef": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "targetRaDeg": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "targetDecDeg": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "targetFrame": {
+          "const": "ICRS"
+        },
+        "targetEpoch": {
+          "const": "J2000.0"
+        }
+      }
+    },
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "siteRecordRef",
+        "siteRecordDigest",
+        "publicEvidenceRef",
+        "classification",
+        "geodeticDatum",
+        "latitudeDeg",
+        "longitudeDeg",
+        "elevationM",
+        "timezoneIana"
+      ],
+      "properties": {
+        "siteRecordRef": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "siteRecordDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "publicEvidenceRef": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "classification": {
+          "const": "SYNTHETIC_PUBLIC"
+        },
+        "geodeticDatum": {
+          "const": "WGS84"
+        },
+        "latitudeDeg": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "longitudeDeg": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "elevationM": {
+          "type": "number",
+          "minimum": -500,
+          "maximum": 9000
+        },
+        "timezoneIana": {
+          "type": "string",
+          "pattern": "^[A-Za-z_+-]+(?:/[A-Za-z_+-]+)*$"
+        }
+      }
+    },
+    "setup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assignmentRef",
+        "assignmentDigest",
+        "availabilityState"
+      ],
+      "properties": {
+        "assignmentRef": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "assignmentDigest": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "availabilityState": {
+          "enum": [
+            "AVAILABLE",
+            "UNAVAILABLE_CURRENT",
+            "CONFLICTED"
+          ]
+        }
+      }
+    }
+  }
+}

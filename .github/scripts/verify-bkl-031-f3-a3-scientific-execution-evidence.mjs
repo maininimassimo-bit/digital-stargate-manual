@@ -45,12 +45,12 @@ exact(evidence.controls?.externalReferenceCallCount, 0, "external reference traf
 exact(evidence.controls?.protectedSiteUse, "NOT_EXECUTED", "protected-site use occurred");
 exact(evidence.controls?.runtimeActivation, "NOT_EXECUTED", "runtime activation occurred");
 
-for (const [document, fragments] of [[adr, ["**ACCEPTED — EXACT SCIENTIFIC CAMPAIGN PASS / RUNTIME NOT AUTHORIZED**", "F3-B machine-readable contract and validator work", "S10 remains `UNAVAILABLE`"]], [hosting, ["**SCIENTIFIC CAMPAIGN PASS — PLATFORM RETAINED / RUNTIME NOT AUTHORIZED**", "dsg-f3-a3-spike-g4x8g", "F3-B is the next repository-only gate"]], [plan, ["**EXECUTED — EXACT SCIENTIFIC CAMPAIGN PASS / ADR-010 ACCEPTANCE REVIEW**", "17/17 passing metrics", "Stop before another cloud execution"]], [acceptance, ["**ACCEPTED — POST-MERGE VERIFICATION PENDING**", "dsg-f3-a3-spike-g4x8g", "F3-B becomes the next dependency-ready increment"]], [backlog, ["F3-A3 exact scientific campaign passed", "Materialize F3-B machine-readable contracts and validator"]]]) {
+for (const [document, fragments] of [[adr, ["**ACCEPTED — EXACT SCIENTIFIC CAMPAIGN PASS / RUNTIME NOT AUTHORIZED**", "F3-B machine-readable contract and validator work", "S10 remains `UNAVAILABLE`"]], [hosting, ["**SCIENTIFIC CAMPAIGN PASS — PLATFORM RETAINED / RUNTIME NOT AUTHORIZED**", "dsg-f3-a3-spike-g4x8g", "F3-B is the next repository-only gate"]], [plan, ["**EXECUTED — EXACT SCIENTIFIC CAMPAIGN PASS / ADR-010 ACCEPTANCE REVIEW**", "17/17 passing metrics", "Stop before another cloud execution"]], [acceptance, ["**ACCEPTED — POST-MERGE VERIFIED**", "dsg-f3-a3-spike-g4x8g", "merge produced `a0a2e4950f2d908a3aaa0fc149754f904ee8d588`"]], [backlog, ["F3-A3 Accepted/Post-Merge Verified", "34/34 local tests"]]]) {
   for (const fragment of fragments) if (!document.includes(fragment)) fail(`acceptance document missing: ${fragment}`);
 }
 exact(roadmap.currentPackage, "BKL-031", "roadmap current package changed");
-exact(roadmap.nextMilestone, "BKL-031 F3-B machine-readable contracts and validator", "roadmap next milestone mismatch");
+exact(roadmap.nextMilestone, "BKL-031 F3-B exact-head acceptance and F3-C handoff", "roadmap next milestone mismatch");
 if (!roadmap.projectStatus.includes("ADR-010 accepted") || !roadmap.projectStatus.includes("S10 runtime unavailable")) fail("roadmap project status mismatch");
 if (!roadmap.milestones.some((item) => item.id === "M-BKL031-F3-A3-SCIENTIFIC-ACCEPTANCE")) fail("roadmap scientific acceptance milestone missing");
 
-console.log("BKL-031 F3-A3 scientific execution evidence verified: dsg-f3-a3-spike-g4x8g; 8 vectors; 17/17 metrics; repeatability/transit pass; ADR-010 acceptance candidate; F3-B next");
+console.log("BKL-031 F3-A3 scientific execution evidence verified: dsg-f3-a3-spike-g4x8g; 8 vectors; 17/17 metrics; repeatability/transit pass; Accepted/Post-Merge Verified; F3-B acceptance candidate");
