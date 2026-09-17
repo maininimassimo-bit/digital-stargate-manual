@@ -1,0 +1,55 @@
+name: BKL-031 F3-C Governance
+
+on:
+  pull_request:
+    paths:
+      - ".github/scripts/*observation-planner-ephemeris-lunar-f3c*.mjs"
+      - ".github/workflows/bkl-031-f3-c-governance.yml"
+      - "schemas/observation-planner-ephemeris-lunar-projection-f3c.schema.json"
+      - "docs/data/observation-planner-ephemeris-lunar-f3c-projection.json"
+      - "docs/javascripts/observation-planner*.js"
+      - "docs/javascripts/observation-planner*.mjs"
+      - "docs/styles/observation-planner.css"
+      - "docs/observation-planner/**"
+      - "docs/architecture/scientific-assets/BKL-031-F3-C-*.md"
+      - "docs/project/BKL-031-F3-C-*.md"
+      - "docs/project/BACKLOG.md"
+      - ".github/roadmap/roadmap-source.json"
+      - "docs/data/roadmap.json"
+      - "mkdocs.yml"
+  push:
+    branches: [main]
+    paths:
+      - ".github/scripts/*observation-planner-ephemeris-lunar-f3c*.mjs"
+      - ".github/workflows/bkl-031-f3-c-governance.yml"
+      - "schemas/observation-planner-ephemeris-lunar-projection-f3c.schema.json"
+      - "docs/data/observation-planner-ephemeris-lunar-f3c-projection.json"
+      - "docs/javascripts/observation-planner*.js"
+      - "docs/javascripts/observation-planner*.mjs"
+      - "docs/styles/observation-planner.css"
+      - "docs/observation-planner/**"
+      - "docs/architecture/scientific-assets/BKL-031-F3-C-*.md"
+      - "docs/project/BKL-031-F3-C-*.md"
+      - "docs/project/BACKLOG.md"
+      - ".github/roadmap/roadmap-source.json"
+      - "docs/data/roadmap.json"
+      - "mkdocs.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  integration-gate:
+    name: F3-C bounded adapter, projection and portal
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify generated projection and governed integration
+        run: node .github/scripts/verify-observation-planner-ephemeris-lunar-f3c.mjs
+      - name: Test adapter, sanitization and browser fail-closed behavior
+        run: node --test .github/scripts/test-observation-planner-ephemeris-lunar-f3c.mjs
