@@ -9,7 +9,9 @@ permissions:
   contents: write
 jobs:
   refresh:
-    if: github.ref == 'refs/heads/main'
+    # The repository is private. Keep the job runner-free until the owner has
+    # independently established a hard EUR 0 Actions overage guard.
+    if: github.ref == 'refs/heads/main' && vars.F9_ZERO_EUR_GUARD == 'CONFIRMED'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
