@@ -1,0 +1,329 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema.json",
+  "title": "BKL-031 F4-B Forecast Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractType",
+    "evidenceId",
+    "environment",
+    "authority",
+    "requestRef",
+    "availabilityState",
+    "providerId",
+    "upstreamAuthorityId",
+    "modelId",
+    "runInitialisationUtc",
+    "retrievedAtUtc",
+    "providerAvailableAtUtc",
+    "rawResponseSha256",
+    "returnedGrid",
+    "nativeTemporalResolution",
+    "validFromUtc",
+    "validToUtc",
+    "forecastInstantsUtc",
+    "series",
+    "units",
+    "citation",
+    "provenance",
+    "termsRevision",
+    "attribution",
+    "reasonCodes",
+    "evidenceDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "contractType": {
+      "type": "string",
+      "const": "BKL031_F4B_FORECAST_EVIDENCE"
+    },
+    "evidenceId": {
+      "type": "string"
+    },
+    "environment": {
+      "type": "string",
+      "const": "TEST"
+    },
+    "authority": {
+      "type": "string",
+      "const": "NONE"
+    },
+    "requestRef": {
+      "type": "string"
+    },
+    "availabilityState": {
+      "type": "string"
+    },
+    "providerId": {
+      "type": "string"
+    },
+    "upstreamAuthorityId": {
+      "type": "string"
+    },
+    "modelId": {
+      "type": "string"
+    },
+    "runInitialisationUtc": {
+      "type": "string"
+    },
+    "retrievedAtUtc": {
+      "type": "string"
+    },
+    "providerAvailableAtUtc": {
+      "type": "string"
+    },
+    "rawResponseSha256": {
+      "type": "string"
+    },
+    "returnedGrid": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema.json",
+      "title": "returnedGrid",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "latitudeDeg",
+        "longitudeDeg",
+        "elevationM",
+        "spatialResolutionKm",
+        "cellSelection"
+      ],
+      "properties": {
+        "latitudeDeg": {
+          "type": "number"
+        },
+        "longitudeDeg": {
+          "type": "number"
+        },
+        "elevationM": {
+          "type": "number"
+        },
+        "spatialResolutionKm": {
+          "type": "number"
+        },
+        "cellSelection": {
+          "type": "string"
+        }
+      }
+    },
+    "nativeTemporalResolution": {
+      "type": "string"
+    },
+    "validFromUtc": {
+      "type": "string"
+    },
+    "validToUtc": {
+      "type": "string"
+    },
+    "forecastInstantsUtc": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "series": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema.json",
+      "title": "series",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "temperature_2m",
+        "relative_humidity_2m",
+        "dew_point_2m",
+        "precipitation",
+        "cloud_cover",
+        "cloud_cover_low",
+        "cloud_cover_mid",
+        "cloud_cover_high",
+        "visibility",
+        "wind_speed_10m",
+        "wind_gusts_10m"
+      ],
+      "properties": {
+        "temperature_2m": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "relative_humidity_2m": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "dew_point_2m": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "precipitation": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "cloud_cover": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "cloud_cover_low": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "cloud_cover_mid": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "cloud_cover_high": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "visibility": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "wind_speed_10m": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "wind_gusts_10m": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "units": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema.json",
+      "title": "units",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "temperature_2m",
+        "relative_humidity_2m",
+        "dew_point_2m",
+        "precipitation",
+        "cloud_cover",
+        "cloud_cover_low",
+        "cloud_cover_mid",
+        "cloud_cover_high",
+        "visibility",
+        "wind_speed_10m",
+        "wind_gusts_10m"
+      ],
+      "properties": {
+        "temperature_2m": {
+          "type": "string"
+        },
+        "relative_humidity_2m": {
+          "type": "string"
+        },
+        "dew_point_2m": {
+          "type": "string"
+        },
+        "precipitation": {
+          "type": "string"
+        },
+        "cloud_cover": {
+          "type": "string"
+        },
+        "cloud_cover_low": {
+          "type": "string"
+        },
+        "cloud_cover_mid": {
+          "type": "string"
+        },
+        "cloud_cover_high": {
+          "type": "string"
+        },
+        "visibility": {
+          "type": "string"
+        },
+        "wind_speed_10m": {
+          "type": "string"
+        },
+        "wind_gusts_10m": {
+          "type": "string"
+        }
+      }
+    },
+    "citation": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema.json",
+      "title": "citation",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "providerDocumentation",
+        "upstreamDocumentation"
+      ],
+      "properties": {
+        "providerDocumentation": {
+          "type": "string"
+        },
+        "upstreamDocumentation": {
+          "type": "string"
+        }
+      }
+    },
+    "provenance": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema.json",
+      "title": "provenance",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceClass",
+        "sourceProfileRef",
+        "requestRef",
+        "runRefs"
+      ],
+      "properties": {
+        "evidenceClass": {
+          "type": "string"
+        },
+        "sourceProfileRef": {
+          "type": "string"
+        },
+        "requestRef": {
+          "type": "string"
+        },
+        "runRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "termsRevision": {
+      "type": "string"
+    },
+    "attribution": {
+      "type": "string"
+    },
+    "reasonCodes": {
+      "type": "array",
+      "items": {}
+    },
+    "evidenceDigest": {
+      "type": "string"
+    }
+  }
+}
