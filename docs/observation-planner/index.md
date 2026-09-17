@@ -7,7 +7,7 @@
   <div class="dsg-op-hero__mark" aria-hidden="true">◎</div>
 </section>
 
-<section class="dsg-op-notice"><strong>Stato della funzionalità: F4-C riconciliata e verificata post-merge; F4-D espone una projection forecast sanificata read-only.</strong><p>Il contesto forecast deriva esclusivamente dall’evidence F4-C riconciliata del workflow run <code>35214129960</code>: 71 istanti orari completi, un istante escluso e zero imputazioni. Non vengono effettuate ulteriori chiamate al provider.</p></section>
+<section class="dsg-op-notice"><strong>Stato della funzionalità: F4-C riconciliata e verificata post-merge; F4-D espone una projection forecast sanificata read-only.</strong><p>Il contesto forecast deriva esclusivamente dall’evidence F4-C riconciliata del workflow run <code>35214129960</code>: 71 istanti orari completi, un istante escluso e zero imputazioni. Non vengono effettuate ulteriori chiamate al provider. F4-B accettata resta la baseline dei contratti previsionali; la fixture astronomica sintetica F3-C resta pubblicata separatamente e invariata nella propria authority boundary.</p></section>
 
 <div data-observation-planner-forecast>
   <section class="dsg-op-panel"><h2>Caricamento projection forecast governata…</h2><p>Se la projection non supera la verifica fail-closed, nessun dato precedente o fallback viene sostituito.</p></section>
