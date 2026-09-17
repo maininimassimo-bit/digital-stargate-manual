@@ -215,6 +215,12 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
         rows.append({"validAtUtc": utc(instant), "solarAltitudeDeg": a["solarAltitudeDeg"], "moonAltitudeDeg": a["moonAltitudeDeg"],
                      "moonIlluminatedFraction": a["moonIlluminatedFraction"], "weather": weather[instant], "targets": target_rows})
     case_map = {(c["setupId"], c["targetKey"]): c for c in suitability["cases"]}
+    suitability_public = {"methodId": suitability["methodId"], "componentWeights": suitability["componentWeights"],
+                          "componentSemantics": suitability["componentSemantics"], "catalogProvenance": suitability["catalogProvenance"],
+                          "sourceBindings": suitability["sourceBindings"], "cases": []}
+    for case in suitability["cases"]:
+        suitability_public["cases"].append({"setupId": case["setupId"], "targetKey": case["targetKey"], "inputs": case["inputs"],
+                                             "components": case["components"], "aggregateScore": case["aggregateScore"], "reasonCodes": case["reasonCodes"]})
     rankings = []
     for setup in f8["setupProfiles"]:
         ranked = []
@@ -240,7 +246,7 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
                          "retrievedAtUtc": utc(retrieval), "runAgeHoursAtRetrieval": round(age, 6), "freshnessState": "FRESH", "sourceFiles": files},
             "nightWindow": {"fromUtc": utc(instants[0]), "toUtcExclusive": utc(instants[-1] + dt.timedelta(hours=1))},
             "method": {"id": "BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.0", "ephemerisMode": "EXPLICIT_MOSEPH_NO_FALLBACK", "scoreWeights": f8["method"]["scoreWeights"], "displayFilter": "solarAltitudeDeg <= -18 and targetAltitudeDeg > 0"},
-            "setupProfiles": f8["setupProfiles"], "targetProfiles": targets, "hourly": rows, "rankings": rankings,
+            "setupProfiles": f8["setupProfiles"], "targetProfiles": targets, "suitabilityEvidence": suitability_public, "hourly": rows, "rankings": rankings,
             "boundaries": {"recurringTraffic": True, "maximumAcquisitionsPerDay": 2, "monetaryBudgetEur": 0, "rawGribRetention": "NONE_EPHEMERAL_ONLY",
                            "readinessAuthority": False, "automaticTargetSelection": False, "schedulingAuthority": False, "actionAuthority": "NONE", "commandAuthority": "NONE",
                            "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS", "protectedCoordinatesPublished": False},
@@ -285,6 +291,10 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
         raise ContractError("EPHEMERIS_MODE")
     if data.get("attribution", {}).get("license") != "CC BY 4.0":
         raise ContractError("ATTRIBUTION")
+    suitability = data.get("suitabilityEvidence", {})
+    weights = suitability.get("componentWeights", {})
+    if suitability.get("methodId") != "BKL031-F8-SETUP-SUITABILITY@1.1" or set(weights) != {"framing", "filterSignal", "imageScaleObjectClass"} or abs(sum(float(v) for v in weights.values()) - 1) > 0.000001:
+        raise ContractError("SUITABILITY_METHOD")
     hourly, rankings = data.get("hourly", []), data.get("rankings", [])
     if len(hourly) != 16 or not rankings:
         raise ContractError("INCOMPLETE_PROJECTION")
@@ -309,6 +319,14 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
             raise ContractError("HOURLY_VALUES")
     if any({target.get("targetKey") for target in ranking.get("targets", [])} != target_keys for ranking in rankings):
         raise ContractError("RANKING_BINDING")
+    expected_cases = {(setup_id, target_key) for setup_id in setup_ids for target_key in target_keys}
+    cases = suitability.get("cases", [])
+    if {(case.get("setupId"), case.get("targetKey")) for case in cases} != expected_cases:
+        raise ContractError("SUITABILITY_BINDING")
+    for case in cases:
+        components = case.get("components", {})
+        if set(components) != set(weights) or any(not 0 <= float(value) <= 100 for value in components.values()) or not 0 <= float(case.get("aggregateScore", -1)) <= 100 or not case.get("reasonCodes"):
+            raise ContractError("SUITABILITY_COMPONENTS")
     if now is not None:
         current_age = (now - run).total_seconds()
         if current_age < 0 or current_age > 18 * 3600:
