@@ -1,0 +1,26 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://digital-stargate/schemas/observation-planner-f8-current-astronomy-suitability.schema.json",
+  "title":"BKL-031 F8 current astronomy and setup suitability projection",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schemaVersion","projectionType","projectionId","environment","authority","consumerMode","site","nightWindow","sourceBindings","method","setupProfiles","targetProfiles","hourly","rankings","boundaries","limitations"],
+  "properties":{
+    "schemaVersion":{"const":"1.0"},
+    "projectionType":{"const":"BKL031_F8_CURRENT_ASTRONOMY_SETUP_SUITABILITY"},
+    "projectionId":{"type":"string","minLength":1},
+    "environment":{"const":"EVALUATION"},
+    "authority":{"const":"NONE"},
+    "consumerMode":{"const":"READ_ONLY"},
+    "site":{"type":"object","required":["publicLabel","coordinateDisclosure","timezoneIana"],"properties":{"publicLabel":{"type":"string"},"coordinateDisclosure":{"const":"PROHIBITED"},"timezoneIana":{"const":"Europe/Rome"}},"additionalProperties":false},
+    "nightWindow":{"type":"object","required":["fromUtc","toUtcExclusive"],"properties":{"fromUtc":{"type":"string","format":"date-time"},"toUtcExclusive":{"type":"string","format":"date-time"}},"additionalProperties":false},
+    "sourceBindings":{"type":"object"},
+    "method":{"type":"object"},
+    "setupProfiles":{"type":"array","minItems":2},
+    "targetProfiles":{"type":"array","minItems":2},
+    "hourly":{"type":"array","minItems":1},
+    "rankings":{"type":"array","minItems":2},
+    "boundaries":{"type":"object","required":["readinessAuthority","automaticTargetSelection","schedulingAuthority","actionAuthority","commandAuthority","safetyAuthority","runtimeState","protectedCoordinatesPublished"]},
+    "limitations":{"type":"array","minItems":1,"items":{"type":"string"}}
+  }
+}
