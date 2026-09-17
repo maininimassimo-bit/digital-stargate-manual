@@ -1,0 +1,37 @@
+{
+  "decisionId": "BKL031-F7-PROTECTED-SITE-OUTBOUND-PRIVACY-AUTH-001",
+  "scope": "BKL-031-F7-PROTECTED-SITE-FORECAST-EGRESS",
+  "status": "AUTHORIZED",
+  "grantedAtUtc": "2026-09-17T17:13:00Z",
+  "decidingAuthority": "github:user:maininimassimo-bit",
+  "decisionBasis": "Owner explicitly required Observation Planner forecast data to be real and referenced to the governed technical observatory coordinates, and instructed the project to proceed.",
+  "siteAuthorityRef": "governance/site-authority/site-records/DSG-SITE-RECORD-MANCIANO-001.approved.json",
+  "permittedRecipient": {
+    "providerId": "OPEN_METEO",
+    "host": "single-runs-api.open-meteo.com",
+    "upstreamAuthorityId": "ITALIAMETEO_ARPAE",
+    "modelId": "italia_meteo_arpae_icon_2i"
+  },
+  "coordinatePolicy": {
+    "source": "GOVERNED_APPROVED_SITE_RECORD",
+    "outboundPrecision": "AS_GOVERNED",
+    "use": "SERVER_SIDE_PROVIDER_REQUEST_ONLY",
+    "logCoordinates": false,
+    "persistCoordinatesInForecastEvidence": false,
+    "publishCoordinates": false,
+    "publishReturnedGrid": false
+  },
+  "retentionPolicy": {
+    "rawProviderPayload": "EPHEMERAL_ACTION_ARTIFACT_MAX_7_DAYS",
+    "repositoryEvidence": "SANITIZED_VALUES_AND_DIGESTS_ONLY",
+    "publicProjection": "SANITIZED_FORECAST_VALUES_WITH_GENERALIZED_SITE_LABEL_ONLY"
+  },
+  "publicLocationLabel": "Manciano (GR), Italia",
+  "boundaries": {
+    "readinessAuthority": false,
+    "schedulingAuthority": false,
+    "automaticTargetSelection": false,
+    "commandAuthority": "NONE",
+    "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
+  }
+}
