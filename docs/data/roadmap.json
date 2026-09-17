@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-17",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "31d6ef59442bdc010a52b489bca2d89f1b1bdb2104d616faba4717a403c68a2d",
+  "sourceDigest": "ed85f2d5f1ecb88c0edc9bd9506b3d1415174c9bd152bbdc05acd6bc3ceaa160",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 F3-C accepted and post-merge verified; ADR-010 accepted; F4-A/ADR-011, F4-B v1.1, F4-C evidence reconciliation and F4-D sanitized forecast projection/portal accepted and post-merge verified; provider request budget 2/2 exhausted, acquisition path removed, zero protected-site use; F4-D is metadata-only EVALUATION/NONE/READ_ONLY with no forecast value arrays; S10 production runtime unavailable",
+  "projectStatus": "BKL-031 F3/F4 evidence chain and F5 explainable ranking method/read-only consumer accepted and post-merge verified; F5 PR #273 merged as 777924e2638430f15bf717fa33dd71057751625a with 7/7 post-merge workflows; factor values remain synthetic EVALUATION evidence only; provider request budget 2/2 exhausted, acquisition path removed, zero protected-site use; no readiness/go-no-go, scheduling, automatic target selection, commands or Safety Authority; S10 production runtime unavailable",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F5 explainable ranking method and read-only consumer",
-  "target": "Prepare a separately governed F5 explainable ranking method and read-only consumer using the accepted F3 astronomical and F4 forecast evidence chains. Keep provider traffic exhausted and do not authorize readiness/go-no-go, scheduling, automatic target selection, device commands, Safety Authority, protected-site egress or S10 production runtime.",
+  "nextMilestone": "BKL-031 F6 capability closure",
+  "target": "Reconcile the complete BKL-031 F1-F5 evidence chain and close the capability without adding runtime behavior. Preserve the exhausted 2/2 provider budget, synthetic F5 evidence classification, BKL-032 readiness boundary, local physical-interlock Safety Authority and S10 production-runtime unavailability.",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -307,7 +307,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F4-A/ADR-011, F4-B v1.1, F4-C evidence reconciliation and F4-D sanitized forecast projection/portal are Accepted/Post-Merge Verified. F4-C exhausted the 2/2 provider request budget and removed the acquisition path; F4-D merged via PR #271 as 8f948ba9593dc2bfde291d2658fe92eafd4cce28 with 7/7 post-merge workflows and no additional provider traffic. F5 explainable ranking/read-only consumer is next; S10 production runtime remains unavailable."
+          "note": "F3/F4 evidence chain and F5 explainable ranking/read-only consumer are Accepted/Post-Merge Verified. F5 merged via PR #273 as 777924e2638430f15bf717fa33dd71057751625a after exact-head ARB/RQ and completed 7/7 post-merge workflows. F5 values are synthetic method-validation evidence only. Provider budget remains 2/2 exhausted; no protected-site acquisition, readiness/go-no-go, scheduler, automatic target selection, commands, Safety Authority or S10 production runtime is authorized. F6 capability closure is next."
         },
         {
           "id": "BKL-032",
@@ -859,6 +859,14 @@
       "title": "BKL-031 F4-D Sanitized Forecast Projection Acceptance",
       "date": "2026-09-17",
       "description": "PR #271 passed exact-head governance on f6aa9c5dffbc172d554872f9072029f56d1195ec, merged with expected-head control as 8f948ba9593dc2bfde291d2658fe92eafd4cce28 and passed all 7 applicable post-merge workflows. The metadata-only EVALUATION/NONE/READ_ONLY forecast projection and separate portal consumer are Accepted/Post-Merge Verified; no provider request, protected coordinates, forecast value arrays, ranking, readiness, commands or Safety Authority were introduced. F5 is next.",
+      "status": "active"
+    },
+    {
+      "id": "M-BKL031-F5-ACCEPTANCE",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F5 Explainable Ranking Acceptance",
+      "date": "2026-09-17",
+      "description": "PR #273 passed exact-head governance on dfda963e7e9d088282516200a6bd8bb64dd0dd1d, merged with expected-head control as 777924e2638430f15bf717fa33dd71057751625a and passed all 7 applicable post-merge workflows. The deterministic EVALUATION/NONE/READ_ONLY ranking method, synthetic validation fixture and read-only consumer are Accepted/Post-Merge Verified. Provider budget remains 2/2 exhausted; F6 capability closure is next.",
       "status": "active"
     }
   ]
