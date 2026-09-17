@@ -69,4 +69,8 @@ for (const fragment of ['Verify Observation Planner F5 explainable ranking','Tes
 assert.equal(roadmap.currentPackage,'BKL-031');
 assert.equal(roadmap.nextMilestone,'BKL-031 F6 real-evidence setup-aware E2E planner');
 assert.ok(roadmap.milestones.some(entry=>entry.id==='M-BKL031-F5-ACCEPTANCE'),'roadmap F5 acceptance milestone missing');
+const f5AcceptanceMilestone=roadmap.milestones.find(entry=>entry.id==='M-BKL031-F5-ACCEPTANCE');
+assert.ok(f5AcceptanceMilestone.description.includes('F6 real-evidence setup-aware E2E planner integration is next'),'F5 acceptance milestone must promote F6 real-evidence setup-aware E2E planner');
+assert.ok(f5AcceptanceMilestone.description.includes('capability closure remains deferred'),'F5 acceptance milestone must preserve deferred BKL-031 closure');
+assert.ok(!f5AcceptanceMilestone.description.includes('F6 capability closure is next'),'F5 acceptance milestone must not re-authorize early capability closure');
 console.log(`BKL-031 F5 verified: accepted/post-merge verified, ${projection.results.length} candidates, method ${projection.method.id}@${projection.method.version}, digest ${projection.projectionDigest}; F6 real-evidence setup-aware E2E planner integration next; closure deferred.`);
