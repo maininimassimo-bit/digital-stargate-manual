@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 6.0 |
+| Versione | 6.1 |
 | Stato | Active |
 | Data | 17/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | F4-C two-request budget exhausted; HTTP 200 raw evidence reconciled to 71 complete hourly instants with zero imputation; acquisition path removed; F4-D sanitized portal projection next; S10 production runtime unavailable |
+| Current governed package | BKL-031 F8 Accepted/Post-Merge Verified; BKL-031 resta In Progress; F9 repeatable current-night planner closure next; S10 production runtime `UNAVAILABLE` |
 
 ## 1. Scopo
 
@@ -16,15 +16,18 @@ Mappa domini, authority, projection e percorsi di conoscenza. Non sostituisce le
 ## 2. Continuity hierarchy
 
 1. `AI_BOOTSTRAP.md`;
-2. current handover e technical baseline 15/09/2026;
-3. Enterprise Architecture Context;
-4. questo Knowledge Map;
-5. `DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md`;
-6. `BACKLOG.md`;
-7. canonical roadmap source;
-8. generated roadmap projection;
-9. Technical Debt, Decision Log, Development Workflow, Coding Standards e Release Playbook;
-10. AMP-002 e package/review/evidence coinvolti.
+2. `docs/project/HANDOVER_2026-09-17.md`;
+3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-17.md`;
+4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`;
+5. questo Knowledge Map;
+6. `DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md`;
+7. `BACKLOG.md`;
+8. canonical roadmap source;
+9. generated roadmap projection;
+10. Technical Debt, Decision Log, Development Workflow, Coding Standards e Release Playbook;
+11. AMP-002 e package/review/evidence coinvolti.
+
+Handover e baseline precedenti restano snapshot storici e non prevalgono sulla baseline corrente.
 
 ## 3. Authority / projection map
 
@@ -46,11 +49,11 @@ Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimen
 
 BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`; nessun apply path o Safety Authority è autorizzato.
 
-BKL-031 F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integrato tramite PR #193 e riconciliato tramite PR #194. F3-A2 repository authority is APPROVED/AVAILABLE for authorized validated input. ADR-009 governs protected registries. F3-A3 is Accepted / Post-Merge Verified through PR #258 and merge `a0a2e4950f2d908a3aaa0fc149754f904ee8d588`; execution `dsg-f3-a3-spike-g4x8g` passed 17/17 metrics and repeatability with zero external-reference calls. ADR-010 is Accepted for repository method authority. F3-B is Accepted / Post-Merge Verified. F3-C is Accepted / Post-Merge Verified. F4-A and ADR-011 are Accepted / Post-Merge Verified through PR #263. F4-B v1.1 is Accepted / Post-Merge Verified through PR #269 and merge `053fc766bfc7908a984828cc335eef07a558909c`; it binds Single Runs and records visibility unavailable. F4-C runs `35201479378` and `35214129960` consumed the complete two-request budget. The second preserved an HTTP 200 raw response at SHA-256 `e51c6935f8e04bcce38983bc03147f4f897a833f90feb6271b2f510ee6eec102`; offline reconciliation excluded one incomplete initialization instant, accepted 71 contiguous complete instants, imputed zero values and produced evidence digest `350a7b9ae8b2de308ba55a7105e56bb4de5040572370ab2715c0fa70088af2f5`. The acquisition workflow and script are removed. S08 is `UNAVAILABLE`, S09 is `UNAVAILABLE_CURRENT`, and S10 production runtime is `UNAVAILABLE`. F4-D projection, F5 ranking/consumer, BKL-032 readiness and Safety remain separate.
+BKL-031 resta **In Progress**. F1/F2 e l'handoff F3 sono ACCEPTED / POST-MERGE VERIFIED. F3-A1 è integrato tramite PR #193 e riconciliato tramite PR #194. F3-A2 repository authority is APPROVED/AVAILABLE for authorized validated input. ADR-009 governs protected registries. F3-A3 is Accepted / Post-Merge Verified through PR #258 and merge `a0a2e4950f2d908a3aaa0fc149754f904ee8d588`; execution `dsg-f3-a3-spike-g4x8g` passed 17/17 metrics and repeatability with zero external-reference calls. ADR-010 is Accepted for repository method authority. F3-B and F3-C are Accepted / Post-Merge Verified. F4-A and ADR-011 are Accepted / Post-Merge Verified through PR #263. F4-B v1.1 is Accepted / Post-Merge Verified through PR #269 and merge `053fc766bfc7908a984828cc335eef07a558909c`; it binds Single Runs and records visibility unavailable. F4-C runs `35201479378` and `35214129960` consumed the complete generalized two-request budget `2/2_EXHAUSTED`; the second raw HTTP 200 evidence was reconciled offline to 71 contiguous complete instants with one incomplete initialization instant excluded and zero imputation, after which the acquisition workflow and script were removed. F4-D, F5 and F6 are Accepted / Post-Merge Verified. F7 is Accepted / Post-Merge Verified via PR #277 and merge `59a1d690406d733b6e61e64220f84cef9b6fb1a2`; its protected-site one-shot request budget is `1/1_EXHAUSTED`. F8 is Accepted / Post-Merge Verified via PR #279 and merge `20669f7164460297d7318fc3b5874e4bc7f4bcde`; it binds the real F7 protected-site forecast to night-specific astronomy and explicit OTA/camera/filter suitability for the bounded 17–18/09/2026 evidence night and performs zero provider requests. The only promoted successor is **BKL-031 F9 repeatable current-night planner closure**. Recurring provider traffic is not authorized by F8 acceptance. S08 is `UNAVAILABLE`, S09 is `UNAVAILABLE_CURRENT`, and S10 production runtime is `UNAVAILABLE`. BKL-032 retains Session Readiness / Go-No-Go authority; local physical interlocks remain Safety Authority; BKL-031 remains read-only/advisory with no scheduler, automatic target selection, device command or Safety Authority.
 
 ## 7. Roadmap sequence
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 POST-MERGE VERIFIED / ADR-010 ACCEPTED / F3-B+F3-C POST-MERGE VERIFIED / F4-A+ADR-011 ACCEPTED / F4-B PROMOTED / S10 PRODUCTION UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1-F8 ACCEPTED / POST-MERGE VERIFIED / F9 REPEATABLE CURRENT-NIGHT CLOSURE NEXT / RECURRING PROVIDER TRAFFIC NOT AUTHORIZED / S10 PRODUCTION UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 8. CI/CD e publishing
 
@@ -58,7 +61,7 @@ Workflow e deployment sono evidence solo per l’exact SHA verificato. Generated
 
 ## 9. Safety boundary
 
-Nessun consumer analytics, comparison, scoring o AI può comandare apparati, autorizzare remediation o sostituire gli interlock fisici.
+Nessun consumer analytics, comparison, scoring, planner o AI può comandare apparati, autorizzare remediation, produrre readiness/go-no-go come authority o sostituire gli interlock fisici. Le coordinate esatte del sito restano protette e non devono essere pubblicate nelle projection.
 
 ## 10. Registro revisioni
 
@@ -75,17 +78,10 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 2.7 | 12/09/2026 | BKL-046 F4 accepted/post-merge verified e F5 design current |
 | 2.8 | 13/09/2026 | BKL-046 closed/accepted/post-merge verified e BKL-031 F1 current |
 | 2.9 | 14/09/2026 | BKL-031 F1 accepted/post-merge verified; F2 current handoff only |
-
 | 3.0 | 14/09/2026 | BKL-031 F2 accepted/post-merge verified; successor decision pending |
-
 | 3.1 | 14/09/2026 | BKL-031 F3 promoted as current handoff only |
-
 | 3.2 | 14/09/2026 | BKL-031 F3 Solution Architecture review candidate |
-
-
 | 3.3 | 14/09/2026 | BKL-031 F3 Solution Architecture AI-assisted ARB/RQ complete; merge decision pending |
-
-
 | 3.4 | 14/09/2026 | BKL-031 F3 Solution Architecture accepted with conditions; implementation decision pending |
 | 3.5 | 15/09/2026 | PR #192 closure integrated; F3-A1 Site Authority Contract review candidate current |
 | 3.6 | 15/09/2026 | PR #193 F3-A1 merged/post-merge verified; Acceptance Reconciliation current |
@@ -93,14 +89,9 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 3.8 | 15/09/2026 | PR #195 F3-A2 handoff post-merge verified; DSG-AEM-001 active; detailed contract next |
 | 3.9 | 15/09/2026 | PR #196 mandate post-merge verified; F3-A2 detailed contract and validation plan current |
 | 4.0 | 15/09/2026 | PR #197 F3-A2 contract accepted/post-merge verified; concrete authority decision gate current |
-
 | 4.1 | 15/09/2026 | ADR-009 authority model owner-authorized; first protected baseline payload remains DRAFT pending exact-digest approval |
-
 | 4.2 | 15/09/2026 | PR #199 authority/DRAFT integrated and post-merge verified; exact-digest owner gate current |
-
 | 4.3 | 15/09/2026 | Exact-digest owner approval recorded; PR #201 receipt and `APPROVED` lifecycle envelope under review |
-
-
 | 4.4 | 15/09/2026 | PR #201 merged/post-merge verified; F3-A1-M1 Site Authority owner decision gate current |
 | 4.5 | 15/09/2026 | PR #202 baseline verified; F3-A1-M1 decisions complete; F3-A1-M2 protected DRAFT review candidate and exact-digest approval next |
 | 4.6 | 15/09/2026 | PR #204 Site Authority approval accepted/post-merge verified; F3-A2-D3 CurrentSetupAssignment owner decision gate current |
@@ -115,11 +106,13 @@ Nessun consumer analytics, comparison, scoring o AI può comandare apparati, aut
 | 5.8 | 17/09/2026 | PR #263 F4-A source contract integrated and post-merge verified; ADR-011 accepted; F4-B machine-readable contracts promoted with zero provider traffic |
 | 5.9 | 17/09/2026 | F4-B three-schema contract, synthetic TEST/NONE fixture and 24-case fail-closed validator prepared with zero provider traffic |
 | 6.0 | 17/09/2026 | PR #265 F4-B integrated and post-merge verified; 26/26 tests and 14/14 workflows; F4-C acquisition-gate preparation promoted |
+| 6.1 | 17/09/2026 | F8 Accepted/Post-Merge Verified via PR #279; continuity riallineata a handover/baseline 17/09 e F9 repeatable current-night planner closure promosso come unico successore |
+
+Le sezioni di checkpoint seguenti sono snapshot storici. Eventuali formulazioni come “current” o “next” valgono al momento del relativo checkpoint e non prevalgono sulla baseline corrente definita nelle sezioni 2, 6 e 7.
 
 ## F3-A2-D4 acceptance checkpoint — 15/09/2026
 
 PR #207 merged as `e99e6b5ff5ea7247ee447a1c6c62dcaa479dee1b` after 5/5 exact-head workflows and completed 7/7 post-merge workflows. Closed schemas, exact-reference binding, canonical identity, fail-closed resolution, privacy enforcement and 57/57 cases are integrated. No assignment approval, runtime adapter or public protected projection exists. The current mandatory transition is human exact-digest approval or rejection.
-
 
 ## F3-A2-D5 approval checkpoint — 15/09/2026
 
@@ -128,7 +121,6 @@ PR #209 is ACCEPTED / POST-MERGE VERIFIED at merge `bc4307c2042a45985622044e1163
 ## F3-A3 scientific acceptance gate
 
 F3-A3 owner decisions F3-OD04–F3-OD10, immutable method profile, exact runner, platform and kernel evidence are complete. Main-only run `35189574972` executed the remediated runner once: 8 synthetic vectors, 17/17 metrics, repeatability and transit passed. One create-only private evidence object was verified at raw SHA-256 `483794c9a8a373e8aff2f0dd2ab0f6342826c9bd210beeebcf92e744fad72494`. ADR-010 is Accepted for repository method authority. Further scientific execution, external-reference traffic, protected-site use and runtime remain unauthorized; S10 remains `UNAVAILABLE`.
-
 
 ## F3-A3 decision-preparation package
 
