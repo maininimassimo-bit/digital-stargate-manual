@@ -20,6 +20,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Align temporary reconciler with current MkDocs label
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('.github/scripts/reconcile-bkl-031-f8-acceptance.mjs')
+          s = p.read_text()
+          old = "- BKL-031 F7 Fresh Forecast Supply Acceptance: project/BKL-031-F7-FRESH-FORECAST-SUPPLY-ACCEPTANCE-2026-09-17.md"
+          new = "- BKL-031 F7 - Fresh Protected-Site Forecast Supply Acceptance: project/BKL-031-F7-FRESH-FORECAST-SUPPLY-ACCEPTANCE-2026-09-17.md"
+          if old not in s:
+              raise SystemExit('temporary reconciler MkDocs anchor not found')
+          p.write_text(s.replace(old, new))
+          PY
       - name: Reconcile F8 acceptance and handover
         run: node .github/scripts/reconcile-bkl-031-f8-acceptance.mjs
       - name: Remove temporary reconciliation helper
