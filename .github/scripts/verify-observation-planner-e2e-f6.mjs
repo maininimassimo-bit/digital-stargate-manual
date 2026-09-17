@@ -144,15 +144,15 @@ for (const required of [
 
 const roadmap = JSON.parse(fs.readFileSync(roadmapPath, 'utf8'));
 assert.equal(roadmap.currentPackage, 'BKL-031');
-assert.equal(roadmap.nextMilestone, 'BKL-031 F9 repeatable current-night planner closure');
+assert.equal(roadmap.nextMilestone, 'BKL-031 F9 governed refresh, portal verification and acceptance reconciliation');
 assert.ok(roadmap.milestones.some(entry => entry.id === 'M-BKL031-F6-ACCEPTANCE'), 'roadmap F6 acceptance milestone missing');
 const f6AcceptanceMilestone = roadmap.milestones.find(entry => entry.id === 'M-BKL031-F6-ACCEPTANCE');
 assert.ok(f6AcceptanceMilestone.description.includes('PR #275'), 'F6 acceptance milestone must reference PR #275');
 assert.ok(f6AcceptanceMilestone.description.includes('14/14'), 'F6 acceptance milestone must retain post-merge workflow evidence');
 assert.ok(f6AcceptanceMilestone.description.includes('F7 fresh forecast supply and runtime boundary'), 'F6 acceptance milestone must promote F7');
 assert.ok(f6AcceptanceMilestone.description.includes('BKL-031 remains In Progress'), 'F6 acceptance milestone must preserve deferred capability closure');
-assert.ok(roadmap.projectStatus.includes('F6 real-evidence setup-aware E2E Accepted/Post-Merge Verified'), 'roadmap must preserve F6 accepted state');
-assert.ok(roadmap.projectStatus.includes('recurring provider traffic not authorized'), 'roadmap must preserve recurring-provider authorization boundary');
-assert.ok(roadmap.target.includes('No recurring provider traffic'), 'F9 target must preserve recurring provider authorization boundary');
+assert.ok(roadmap.projectStatus.includes('F3–F8 Accepted/Post-Merge Verified'), 'roadmap must preserve predecessor acceptance state');
+assert.ok(roadmap.projectStatus.includes('F9 MeteoHub implementation'), 'roadmap must preserve the F9 implementation state');
+assert.ok(roadmap.target.includes('No scheduler, automatic target selection, device command, readiness/go-no-go or Safety Authority is authorized'), 'F9 target must preserve authority boundaries');
 
 console.log('BKL-031 F6 verified: Accepted/Post-Merge Verified real-evidence setup-aware E2E proof; 13/13 exact-head, 14/14 post-merge, zero provider requests; F7/F8 accepted; F9 repeatable current-night planner closure next; BKL-031 closure deferred.');
