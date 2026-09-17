@@ -7,12 +7,28 @@
   "maxRequestsThisGate": 1,
   "timeoutMs": 10000,
   "maxResponseBytes": 2000000,
-  "location": {"classification": "SYNTHETIC_GENERALIZED", "latitudeDeg": 42, "longitudeDeg": 12, "siteAuthorityRef": "SITE-PUBLIC-SYNTHETIC-FORECAST-IT-01"},
+  "location": {
+    "classification": "SYNTHETIC_GENERALIZED",
+    "latitudeDeg": 42,
+    "longitudeDeg": 12,
+    "siteAuthorityRef": "SITE-PUBLIC-SYNTHETIC-FORECAST-IT-01"
+  },
   "providerId": "OPEN_METEO",
   "upstreamAuthorityId": "ITALIAMETEO_ARPAE",
   "modelId": "italia_meteo_arpae_icon_2i",
   "runInitialisationUtc": "2026-09-17T12:00Z",
-  "variables": ["temperature_2m","relative_humidity_2m","dew_point_2m","precipitation","cloud_cover","cloud_cover_low","cloud_cover_mid","cloud_cover_high","wind_speed_10m","wind_gusts_10m"],
+  "variables": [
+    "temperature_2m",
+    "relative_humidity_2m",
+    "dew_point_2m",
+    "precipitation",
+    "cloud_cover",
+    "cloud_cover_low",
+    "cloud_cover_mid",
+    "cloud_cover_high",
+    "wind_speed_10m",
+    "wind_gusts_10m"
+  ],
   "protectedSiteUsed": false,
   "recurringTraffic": false,
   "productionUse": false
