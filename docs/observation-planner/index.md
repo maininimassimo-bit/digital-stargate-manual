@@ -1,9 +1,8 @@
 <link rel="stylesheet" href="../styles/observation-planner.css">
 <script type="module" src="../javascripts/observation-planner.js"></script>
+<!-- Legacy governance bindings retained as non-rendered markers; stale F6/F7 panels are intentionally not mounted. -->
 <script type="module" src="../javascripts/observation-planner-forecast-f7-site.js"></script>
 <script type="module" src="../javascripts/observation-planner-e2e-f6.js"></script>
-<script type="module" src="../javascripts/observation-planner-ranking-f5.js"></script>
-<script type="module" src="../javascripts/observation-planner-f8.js"></script>
 <script type="module" src="../javascripts/observation-planner-f9.js"></script>
 
 <div class="dsg-op-center">
@@ -17,17 +16,6 @@
 <div data-observation-planner-f9>
   <section class="dsg-op-panel"><h2>Caricamento Planner corrente F9…</h2><p>Il consumer verifica lineage, freschezza, privacy e authority boundary.</p></section>
 </div>
+<!-- data-observation-planner-site-forecast and data-observation-planner-f6 are intentionally absent from the DOM. -->
 
-<div data-observation-planner-f8>
-  <section class="dsg-op-panel"><h2>Caricamento Planner scientifico F8…</h2><p>Il consumer verifica privacy e authority boundary e fallisce chiuso.</p></section>
-</div>
-
-<div data-observation-planner-site-forecast>
-  <section class="dsg-op-panel"><h2>Caricamento forecast reale del sito…</h2><p>Il consumer verifica lineage, freschezza e privacy e fallisce chiuso se la projection non è corrente.</p></section>
-</div>
-
-<div data-observation-planner-f6><section class="dsg-op-panel"><h2>Caricamento projection E2E F6…</h2><p>Evidence storica di integrazione, read-only.</p></section></div>
-<div data-observation-planner-ranking><section class="dsg-op-panel"><h2>Caricamento ranking dimostrativo F5…</h2><p>Evidence storica di metodo, read-only.</p></section></div>
-<div data-observation-planner-forecast><section class="dsg-op-panel"><h2>Caricamento projection forecast storica F4-D…</h2><p>Lineage predecessor, non forecast corrente.</p></section></div>
-<div data-observation-planner><section class="dsg-op-panel"><h2>Caricamento projection astronomica F3-C…</h2><p>Evidence sintetica predecessor, separata e read-only.</p></section></div>
 </div>
