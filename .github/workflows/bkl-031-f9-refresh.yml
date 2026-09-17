@@ -9,8 +9,8 @@ permissions:
   contents: write
 jobs:
   refresh:
-    # The repository is private. Keep the job runner-free until the owner has
-    # independently established a hard EUR 0 Actions overage guard.
+    # Keep activation explicit even though this public repository uses the
+    # no-fee standard-runner boundary.
     if: github.ref == 'refs/heads/main' && vars.F9_ZERO_EUR_GUARD == 'CONFIRMED'
     runs-on: ubuntu-latest
     timeout-minutes: 25
