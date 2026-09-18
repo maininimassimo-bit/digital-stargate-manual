@@ -2,18 +2,18 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-18",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "721484a45cdbfbb47bdbe28bdc2dbda3ec94bfc3856ee55b2120874a400e4da5",
+  "sourceDigest": "bb36457b3b720b64a3f8e2a38f29860431cc98238ad733a2bc8b64031cb57890",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 CLOSED / ACCEPTED / POST-MERGE VERIFIED: F3-C accepted and post-merge verified; F4-A/ADR-011 Accepted/Post-Merge Verified; F4-B v1.1, F4-C evidence reconciliation and F4-D sanitized forecast projection/portal Accepted/Post-Merge Verified; F6 real-evidence setup-aware E2E Accepted/Post-Merge Verified; F3-C through F8 and F9 repeatable current-night planner are complete. F9 uses MeteoHub ItaliaMeteo/ARPAE ICON-2I open data with zero-euro budget, maximum two acquisitions per UTC day, fail-closed validation, ephemeral GRIB handling with no retention, current astronomy, setup/target suitability, explainable ranking and sanitized read-only publication. Recurring provider traffic is not authorized outside the governed schedule; recurring provider traffic not authorized beyond the governed schedule. S10 production runtime unavailable; no readiness/go-no-go, scheduling, automatic target selection, commands or Safety Authority is authorized.",
-  "currentPackage": "BKL-032",
-  "nextMilestone": "BKL-032 Session Readiness / Go-No-Go Decision Support",
-  "target": "BKL-031 closure preserves the repeatable, bounded, read-only planner contract and hands off readiness/go-no-go questions to BKL-032 without inheriting authority. No recurring provider traffic, scheduler, automatic target selection, device command or Safety Authority is authorized.",
+  "projectStatus": "BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED. BKL-031 remains the bounded advisory/read-only planner; BKL-032 provides a deterministic fail-closed readiness evaluator with owner-approved thresholds, but live source/transport and public runtime GO remain separately gated. S10 production runtime unavailable; no scheduling, automatic target selection, commands or Safety Authority is authorized.",
+  "currentPackage": "BKL-036",
+  "nextMilestone": "BKL-036 Observatory Health Score",
+  "target": "BKL-032 closure preserves deterministic, fail-closed, read-only decision support and hands off health-score source discovery to BKL-036. No scheduler, automatic target selection, device command or Safety Authority is authorized.",
   "summary": {
     "total": 44,
-    "completed": 33,
+    "completed": 34,
     "active": 4,
-    "planned": 7,
-    "percentCompleted": 75
+    "planned": 6,
+    "percentCompleted": 77
   },
   "evidenceSummary": {
     "sources": 8,
@@ -312,13 +312,14 @@
         {
           "id": "BKL-032",
           "title": "Session Readiness / Go-No-Go Decision Support",
-          "status": "active",
-          "note": "Architecture package BKL-032-ARCH-001 and validation plan BKL-032-VAL-001 define a separate fail-closed readiness record. Owner approved GO/NO_GO/INDETERMINATE semantics, six-hour freshness, mandatory forecast/astronomy/setup evidence and read-only live telemetry domains on 2026-09-18. Source mapping and documented local wind/gust limit references remain open; Safety Authority is not implied."
+          "status": "completed",
+          "note": "BKL-032 closed via PR #304 merge 7e38453b2e499fe577efa0231aeb7bb06329016e. Deterministic fail-closed evaluator, versioned contracts, owner-approved thresholds, bounded tests, exact-head CI, AI-assisted ARB/RQ and 19/19 post-merge workflows are verified. Live source/transport and public runtime GO remain separately gated; local physical interlocks remain Safety Authority."
         },
         {
           "id": "BKL-036",
           "title": "Observatory Health Score",
-          "status": "planned"
+          "status": "active",
+          "note": "Selected as the next governed package after BKL-032 closure. Start with source discovery and semantic contract; no health score thresholds, Safety Authority, remediation or device command is authorized by the transition."
         },
         {
           "id": "BKL-033",

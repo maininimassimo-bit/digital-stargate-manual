@@ -65,9 +65,9 @@ assert.ok(index.includes('F4-A Forecast Source Discovery and Integration Contrac
 assert.ok(decisions.includes('DLG-042') && decisions.includes('fallback silenzioso') && decisions.includes('DLG-048'), 'Decision log does not preserve F4-A source decision through F4-D acceptance.');
 assert.ok(nav.includes('BKL-031 F4-A - Forecast Source Discovery and Integration Contract') && nav.includes('ADR-011 - Forecast Source and Run Lineage'), 'MkDocs navigation does not expose F4-A.');
 
-assert.equal(roadmap.currentPackage, 'BKL-032');
-assert.equal(roadmap.nextMilestone, 'BKL-032 Session Readiness / Go-No-Go Decision Support');
-assert.ok(roadmap.projectStatus.includes('F4-A/ADR-011') && roadmap.projectStatus.includes('F4-D sanitized forecast projection/portal') && roadmap.projectStatus.includes('S10 production runtime unavailable'), 'Roadmap F4-A-to-F4-D status/boundary mismatch.');
+assert.equal(roadmap.currentPackage, 'BKL-036');
+assert.equal(roadmap.nextMilestone, 'BKL-036 Observatory Health Score');
+assert.ok(roadmap.projectStatus.includes('BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED') && roadmap.projectStatus.includes('S10 production runtime unavailable') && roadmap.projectStatus.includes('live source/transport and public runtime GO remain separately gated'), 'Roadmap F4-A-to-F4-D status/boundary mismatch.');
 assert.ok(roadmap.milestones.some((item) => item.id === 'M-BKL031-F4-A-SOURCE-CONTRACT'), 'Roadmap F4-A milestone missing.');
 assert.ok(roadmap.milestones.some((item) => item.id === 'M-BKL031-F4-A-ACCEPTANCE'), 'Roadmap F4-A acceptance milestone missing.');
 assert.ok(roadmap.milestones.some((item) => item.id === 'M-BKL031-F4-D-ACCEPTANCE'), 'Roadmap F4-D acceptance milestone missing.');

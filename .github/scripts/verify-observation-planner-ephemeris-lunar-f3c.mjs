@@ -84,9 +84,9 @@ for (const [name, text] of [['F8 acceptance', f8Acceptance], ['handover', handov
 for (const fragment of ['#280', 'bca410dcde804483052beded16c29a9f58f43872', 'GitHub Pages']) assert.ok(f8Acceptance.includes(fragment), `F8 acceptance missing reconciliation evidence: ${fragment}`);
 assert.ok(handover.includes('BKL-032') && baseline.includes('BKL-032 Session Readiness / Go-No-Go Decision Support') && bootstrap.includes('BKL-032 Session Readiness / Go-No-Go Decision Support'), 'BKL-031 closure must hand off to BKL-032.');
 assert.ok(nav.includes('Observation Planner: observation-planner/index.md') && nav.includes('BKL-031 F3-C - Bounded Adapter, Projection and Portal'), 'MkDocs navigation does not expose F3-C.');
-assert.equal(roadmap.currentPackage, 'BKL-032');
-assert.equal(roadmap.nextMilestone, 'BKL-032 Session Readiness / Go-No-Go Decision Support');
-assert.ok(roadmap.projectStatus.includes('F3-C accepted and post-merge verified') && roadmap.projectStatus.includes('F4-D sanitized forecast projection/portal') && roadmap.projectStatus.includes('S10 production runtime unavailable'), 'Roadmap F3-C-to-F4-D status/boundary mismatch.');
+assert.equal(roadmap.currentPackage, 'BKL-036');
+assert.equal(roadmap.nextMilestone, 'BKL-036 Observatory Health Score');
+assert.ok(roadmap.projectStatus.includes('BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED') && roadmap.projectStatus.includes('S10 production runtime unavailable') && roadmap.projectStatus.includes('no scheduling, automatic target selection, commands or Safety Authority is authorized'), 'Roadmap F3-C-to-F4-D status/boundary mismatch.');
 assert.ok(roadmap.milestones.some(item => item.id === 'M-BKL031-F3-C-IMPLEMENTATION'), 'Roadmap F3-C implementation milestone missing.');
 assert.ok(roadmap.milestones.some(item => item.id === 'M-BKL031-F3-C-ACCEPTANCE'), 'Roadmap F3-C acceptance milestone missing.');
 assert.ok(roadmap.milestones.some(item => item.id === 'M-BKL031-F4-D-ACCEPTANCE'), 'Roadmap F4-D acceptance milestone missing.');

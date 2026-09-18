@@ -11,7 +11,7 @@
 | Root bootstrap | `AI_BOOTSTRAP.md` |
 | Continuity handover | `docs/project/HANDOVER_2026-09-17.md` |
 | Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-17.md` |
-| Current governed package | BKL-031 Closed/Accepted/Post-Merge Verified; BKL-032 current; S10 unavailable |
+| Current governed package | BKL-031 and BKL-032 Closed/Accepted/Post-Merge Verified; BKL-036 next; S10 unavailable |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo e gerarchia
