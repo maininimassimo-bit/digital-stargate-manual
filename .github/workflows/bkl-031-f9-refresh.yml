@@ -48,7 +48,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           today=$(date -u +%Y-%m-%d)
-          count=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/${GITHUB_WORKFLOW}/runs?per_page=100" --jq '.workflow_runs[] | select(.created_at >= "'"$today"'T00:00:00Z" and (.id|tostring) != "'"$GITHUB_RUN_ID"'") | .id' | wc -l)
+          count=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/bkl-031-f9-refresh.yml/runs?per_page=100" --jq '.workflow_runs[] | select(.created_at >= "'"$today"'T00:00:00Z" and (.id|tostring) != "'"$GITHUB_RUN_ID"'") | .id' | wc -l)
           test "$count" -lt 2
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
