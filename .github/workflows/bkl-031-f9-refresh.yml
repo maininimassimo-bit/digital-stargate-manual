@@ -1,7 +1,9 @@
 name: BKL-031 F9 MeteoHub Refresh
 on:
   schedule:
-    - cron: '15 4,17 * * *'
+    # 08:00 UTC (10:00 Europe/Rome during CEST) and 17:15 UTC (19:15 Europe/Rome during CEST).
+    - cron: '0 8 * * *'
+    - cron: '15 17 * * *'
 concurrency:
   group: bkl-031-f9-meteohub-refresh
   cancel-in-progress: false
