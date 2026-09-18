@@ -153,7 +153,7 @@ const buildOutput = async (source) => {
   }
 
   const itemIndex = new Map(waves.flatMap((wave) => wave.items).map((item) => [item.id, item]));
-  const milestones = source.milestones.map((milestone) => ({ ...milestone, status: itemIndex.get(milestone.itemRef).status }));
+  const milestones = source.milestones.map((milestone) => ({ ...milestone, status: milestone.status ?? itemIndex.get(milestone.itemRef).status }));
   evidenceRecords.sort((left, right) => left.itemId.localeCompare(right.itemId));
 
   const sourceDigest = createHash('sha256')
