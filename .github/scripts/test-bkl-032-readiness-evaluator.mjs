@@ -55,6 +55,11 @@ test('valid current non-weather blocking evidence produces NO_GO', () => {
   assert.equal(evaluateReadiness(input).decision, 'NO_GO');
 });
 
+test('missing evidence is not masked by another blocking signal', () => {
+  const input = base(); input.live_telemetry.mount.status = 'BLOCK'; delete input.live_telemetry.camera;
+  assert.equal(evaluateReadiness(input).decision, 'INDETERMINATE');
+});
+
 test('malformed input fails closed without authority escalation', () => {
   const decision = evaluateReadiness({ schema_version: '0.1', evaluated_at_utc: evaluatedAt });
   assert.equal(decision.decision, 'INDETERMINATE');

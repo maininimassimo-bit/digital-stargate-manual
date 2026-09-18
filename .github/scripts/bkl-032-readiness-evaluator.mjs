@@ -98,6 +98,6 @@ export function evaluateReadiness(input, now = new Date()) {
     else checks.push(check('telemetry.weather.thresholds', 'PASS', 'WEATHER_THRESHOLDS_PASSING', { dew_point_margin_c: margin }));
   }
 
-  const decision = blocked ? 'NO_GO' : indeterminate ? 'INDETERMINATE' : 'GO';
+  const decision = indeterminate ? 'INDETERMINATE' : blocked ? 'NO_GO' : 'GO';
   return result(decision, evaluatedAt, checks);
 }
