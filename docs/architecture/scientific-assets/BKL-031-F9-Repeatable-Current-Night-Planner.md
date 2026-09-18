@@ -31,4 +31,4 @@ The approved monetary budget is EUR 0. MeteoHub is a no-fee open-data path and s
 
 ## Acceptance boundary
 
-Closure evidence is recorded in `docs/project/BKL-031-CLOSURE-2026-09-18.md`. PR #300 merged at `dee6f117c964db92f152e3b7d924d7fedb66e093`; the governed workflows, documentation validation, Word generation and GitHub Pages deployment passed, and the public Manciano planner was verified directly. S10 remains `UNAVAILABLE`; the capability remains advisory, read-only and outside readiness, scheduling, command and Safety Authority.
+Closure evidence is recorded in `docs/project/BKL-031-CLOSURE-2026-09-18.md`. PR #301 merged at `4a509d574a004fe7fb72bc6c678c9e7f71fe821f`; the governed workflows, documentation validation, Word generation and GitHub Pages deployment passed, and the public Manciano planner was verified directly. S10 remains `UNAVAILABLE`; the capability remains advisory, read-only and outside readiness, scheduling, command and Safety Authority.

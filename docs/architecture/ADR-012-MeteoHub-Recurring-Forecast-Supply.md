@@ -44,7 +44,7 @@ ADR-011 remains the historical authority for the accepted Open-Meteo single-run 
 
 ## Closure evidence
 
-BKL-031 closure is recorded in `docs/project/BKL-031-CLOSURE-2026-09-18.md`. PR #300 merged at `dee6f117c964db92f152e3b7d924d7fedb66e093`; governed workflows, documentation validation, Word generation, GitHub Pages deployment and direct public planner verification succeeded. The capability remains `EVALUATION / NONE / READ_ONLY`; S10 remains `UNAVAILABLE`.
+BKL-031 closure is recorded in `docs/project/BKL-031-CLOSURE-2026-09-18.md`. PR #301 merged at `4a509d574a004fe7fb72bc6c678c9e7f71fe821f`; governed workflows, documentation validation, Word generation, GitHub Pages deployment and direct public planner verification succeeded. The capability remains `EVALUATION / NONE / READ_ONLY`; S10 remains `UNAVAILABLE`.
 
 ## Rollback
 

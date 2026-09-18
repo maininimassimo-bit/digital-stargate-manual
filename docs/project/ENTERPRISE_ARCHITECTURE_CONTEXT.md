@@ -56,7 +56,7 @@ BKL-037 rimane read-only/descriptive-only; unità non dimostrate, missing eviden
 
 ## 6. Current package — BKL-032
 
-BKL-031 è **CLOSED / ACCEPTED / POST-MERGE VERIFIED** tramite PR #300 e merge `dee6f117c964db92f152e3b7d924d7fedb66e093`. F3–F9 hanno chiuso il planner repeatable read-only: MeteoHub governato, astronomia della notte, suitability esplicita setup-target, ranking esplicabile e verifica della pagina pubblica di Manciano.
+BKL-031 è **CLOSED / ACCEPTED / POST-MERGE VERIFIED** tramite PR #301 e merge `4a509d574a004fe7fb72bc6c678c9e7f71fe821f`. F3–F9 hanno chiuso il planner repeatable read-only: MeteoHub governato, astronomia della notte, suitability esplicita setup-target, ranking esplicabile e verifica della pagina pubblica di Manciano.
 
 La closure non trasferisce authority: BKL-032 resta responsabile di Session Readiness / Go-No-Go; gli interlock fisici locali restano Safety Authority; S10 resta `UNAVAILABLE`. Il Planner non abilita scheduler, selezione automatica, device command o Safety Authority.
 
