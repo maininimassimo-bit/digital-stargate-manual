@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Status | **IMPLEMENTATION CANDIDATE** |
+| Status | **IMPLEMENTED / POST-MERGE VERIFIED — ACCEPTANCE PENDING** |
 | Date | 2026-09-17 |
 | Governing decision | ADR-012 |
 | Environment / authority | `EVALUATION` / `NONE` / `READ_ONLY` |
@@ -31,4 +31,6 @@ The approved monetary budget is EUR 0. MeteoHub is a no-fee open-data path and s
 
 ## Acceptance boundary
 
-Implementation presence alone does not close BKL-031. Acceptance requires exact-head CI, ARB, Release Quality, expected-head merge, one successful governed refresh, portal verification and post-merge workflow evidence. Until then S10 remains `UNAVAILABLE`.
+The repository implementation was integrated through PR #282 (MeteoHub refresh), PR #283 (public zero-cost reconciliation) and PR #284 (planner exposure); their applicable post-merge workflows succeeded. Implementation presence alone does not close BKL-031.
+
+No successful governed refresh, current-night projection or live portal-consumer verification is evidenced yet. Acceptance therefore remains pending until a governed refresh, portal verification and formal reconciliation are recorded. Until then S10 remains `UNAVAILABLE`.
