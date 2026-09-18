@@ -2,18 +2,18 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-18",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "bb36457b3b720b64a3f8e2a38f29860431cc98238ad733a2bc8b64031cb57890",
+  "sourceDigest": "a2b6ebacb0b5b6bb4d7c502d1edea8723afb3ef2717c57a12ec227b659261da3",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED. BKL-031 remains the bounded advisory/read-only planner; BKL-032 provides a deterministic fail-closed readiness evaluator with owner-approved thresholds, but live source/transport and public runtime GO remain separately gated. S10 production runtime unavailable; no scheduling, automatic target selection, commands or Safety Authority is authorized.",
-  "currentPackage": "BKL-036",
-  "nextMilestone": "BKL-036 Observatory Health Score",
-  "target": "BKL-032 closure preserves deterministic, fail-closed, read-only decision support and hands off health-score source discovery to BKL-036. No scheduler, automatic target selection, device command or Safety Authority is authorized.",
+  "projectStatus": "BKL-031, BKL-032 and BKL-036 are CLOSED / ACCEPTED / POST-MERGE VERIFIED. BKL-031 remains the bounded advisory/read-only planner; BKL-032 provides deterministic fail-closed readiness decision support; BKL-036 accepts source discovery and semantic contract only. Live source/transport, public runtime GO and any future health score remain separately gated. S10 production runtime unavailable; no scheduling, automatic target selection, commands or Safety Authority is authorized.",
+  "currentPackage": "BKL-033",
+  "nextMilestone": "BKL-033 Observatory Digital Twin",
+  "target": "BKL-036 closure preserves source-discovery and semantic-contract boundaries and hands off the governed program to BKL-033. No scheduler, automatic target selection, device command or Safety Authority is authorized.",
   "summary": {
     "total": 44,
-    "completed": 34,
+    "completed": 35,
     "active": 4,
-    "planned": 6,
-    "percentCompleted": 77
+    "planned": 5,
+    "percentCompleted": 80
   },
   "evidenceSummary": {
     "sources": 8,
@@ -318,13 +318,14 @@
         {
           "id": "BKL-036",
           "title": "Observatory Health Score",
-          "status": "active",
-          "note": "Selected as the next governed package after BKL-032 closure. Start with source discovery and semantic contract; no health score thresholds, Safety Authority, remediation or device command is authorized by the transition."
+          "status": "completed",
+          "note": "Source discovery and semantic contract accepted via PR #306 merge b0d3a8b1a10ce71610e4592d5c876e9fd0c8d7c5. No health score, thresholds, Safety Authority, remediation or device command is authorized by the closure."
         },
         {
           "id": "BKL-033",
           "title": "Observatory Digital Twin",
-          "status": "planned"
+          "status": "active",
+          "note": "Next governed package after BKL-036 source-discovery and semantic-contract closure."
         },
         {
           "id": "BKL-034",

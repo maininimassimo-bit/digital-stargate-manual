@@ -90,8 +90,8 @@
 | ARB-012 | Independent Review of AP-012 | AP-012 | Completed | 96/100; C01…C08 open |
 | DSDM-005 | Verified Transport Cleanup Solution Design | AP-013C | Proposed/implemented dry-run design v0.2 | ACK schema 1.0 frozen; `TechnicalCandidate` separated from `CleanupAuthorized` |
 | ARB-013C | Verified Transport Cleanup Independent Review | AP-013C | Completed — Approved with Conditions | C01/C02/C06 remediated; C03 real OAT open; C04/C05 governance closure in progress |
-| BKL-036-ARCH-001 | Observatory Health Score Source Discovery and Semantic Contract | BKL-036 | Proposed | No runtime, score, threshold, remediation or command path authorized |
-| BKL-036-VAL-001 | Source Discovery and Semantic Contract Validation Plan | BKL-036 | Proposed | Validation gate open; ARB and Release Quality review pending |
+| BKL-036-ARCH-001 | Observatory Health Score Source Discovery and Semantic Contract | BKL-036 | Accepted / Post-Merge Verified | No runtime, score, threshold, remediation or command path authorized |
+| BKL-036-VAL-001 | Source Discovery and Semantic Contract Validation Plan | BKL-036 | Accepted / Post-Merge Verified | Source mapping and future score policy remain separate gates |
 
 ## 5. Data Product Candidate Register
 

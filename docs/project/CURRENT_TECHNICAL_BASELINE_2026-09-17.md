@@ -7,8 +7,8 @@
 | BKL-031 closure merge | `4a509d574a004fe7fb72bc6c678c9e7f71fe821f` |
 | Closure record | `docs/project/BKL-031-CLOSURE-2026-09-18.md` |
 | BKL-032 closure | PR #304; merge `7e38453b2e499fe577efa0231aeb7bb06329016e` |
-| Current package | BKL-036 |
-| Current next gate | BKL-036 Observatory Health Score |
+| Current package | BKL-033 |
+| Current next gate | BKL-033 Observatory Digital Twin |
 
 ## Observation Planner baseline
 
@@ -35,6 +35,6 @@ Il Planner resta advisory/read-only: nessun readiness/go-no-go, scheduler, selez
 
 BKL-032 closure evidence is recorded in `docs/project/BKL-032-CLOSURE-2026-09-18.md`. Its evaluator does not authorize live apparatus operation or replace local interlocks.
 
-## BKL-036 entry state
+## BKL-036 closure state
 
-BKL-036 è avviato come package **Proposed / Gate Open** per source discovery e semantic contract. Non introduce score numerico, soglie, pesi, RAG, Safety Score, remediation, runtime transport o comandi. Il prossimo gate è la review di source mapping, comparabilità, missingness, privacy e authority boundary.
+BKL-036 è **Closed / Accepted / Post-Merge Verified** per source discovery e semantic contract tramite PR #306 e merge `b0d3a8b1a10ce71610e4592d5c876e9fd0c8d7c5`. Non introduce score numerico, soglie, pesi, RAG, Safety Score, remediation, runtime transport o comandi. Source mapping, comparabilità e qualunque futuro score restano gate separati. Il prossimo gate è BKL-033.
