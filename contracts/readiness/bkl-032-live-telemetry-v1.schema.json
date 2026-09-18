@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/contracts/readiness/bkl-032-live-telemetry-v1.schema.json",
+  "title": "BKL-032 Mandatory Live Telemetry Evidence",
+  "description": "Normalized, read-only evidence consumed by the BKL-032 evaluator. It is not a command or Safety Authority contract.",
+  "type": "object",
+  "required": ["weather", "dome", "mount", "camera", "power", "network", "eagle_health"],
+  "additionalProperties": false,
+  "properties": {
+    "weather": {"$ref": "#/$defs/weather"},
+    "dome": {"$ref": "#/$defs/signal"},
+    "mount": {"$ref": "#/$defs/signal"},
+    "camera": {"$ref": "#/$defs/signal"},
+    "power": {"$ref": "#/$defs/signal"},
+    "network": {"$ref": "#/$defs/signal"},
+    "eagle_health": {"$ref": "#/$defs/signal"}
+  },
+  "$defs": {
+    "signal": {
+      "type": "object",
+      "required": ["status", "observed_at_utc", "fresh_until_utc", "source", "evidence_ref"],
+      "additionalProperties": true,
+      "properties": {
+        "status": {"enum": ["PASS", "BLOCK"]},
+        "observed_at_utc": {"type": "string", "format": "date-time"},
+        "fresh_until_utc": {"type": "string", "format": "date-time"},
+        "source": {"type": "string", "minLength": 1},
+        "evidence_ref": {"type": "string", "minLength": 1}
+      }
+    },
+    "weather": {
+      "allOf": [
+        {"$ref": "#/$defs/signal"},
+        {
+          "required": ["rain_rate_mm_h", "wind_speed_kmh", "wind_gust_kmh", "cloud_cover_pct", "humidity_pct", "ambient_temperature_c", "dew_point_c"],
+          "properties": {
+            "rain_rate_mm_h": {"type": "number", "minimum": 0},
+            "wind_speed_kmh": {"type": "number", "minimum": 0},
+            "wind_gust_kmh": {"type": "number", "minimum": 0},
+            "cloud_cover_pct": {"type": "number", "minimum": 0, "maximum": 100},
+            "humidity_pct": {"type": "number", "minimum": 0, "maximum": 100},
+            "ambient_temperature_c": {"type": "number"},
+            "dew_point_c": {"type": "number"}
+          }
+        }
+      ]
+    }
+  }
+}

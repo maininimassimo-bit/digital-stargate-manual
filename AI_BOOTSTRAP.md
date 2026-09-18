@@ -32,7 +32,7 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni e proje
 Gli handover e le baseline precedenti restano snapshot storici.
 
 ## 3. Stato corrente
-- BKL-031: **Closed / Accepted / Post-Merge Verified** via PR #300 merge `dee6f117c964db92f152e3b7d924d7fedb66e093`.
+- BKL-031: **Closed / Accepted / Post-Merge Verified** via PR #301 merge `4a509d574a004fe7fb72bc6c678c9e7f71fe821f`.
 - F3–F8: Accepted/Post-Merge Verified.
 - F8 implementation: PR #279, reviewed head `3f05693482208df2b56b66dcb71162589880e72b`, merge `20669f7164460297d7318fc3b5874e4bc7f4bcde`, 9/9 exact-head e 10/10 post-merge SUCCESS.
 - F8 acceptance reconciliation: PR #280, reviewed head `bca410dcde804483052beded16c29a9f58f43872`, merge `84d1b889a6c739c9e5d053e1f073fe1d87b8c5d4`, 17/17 exact-head e 19/19 post-merge SUCCESS; GitHub Pages build/integrity/deploy SUCCESS.

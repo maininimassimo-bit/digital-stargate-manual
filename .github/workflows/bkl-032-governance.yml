@@ -1,0 +1,38 @@
+name: BKL-032 Readiness Governance
+
+on:
+  pull_request:
+    paths:
+      - "contracts/readiness/**"
+      - ".github/scripts/bkl-032-readiness-evaluator.mjs"
+      - ".github/scripts/test-bkl-032-readiness-evaluator.mjs"
+      - ".github/workflows/bkl-032-governance.yml"
+      - "docs/architecture/packages/BKL-032-*.md"
+      - "docs/architecture/ADR-013-*.md"
+      - "docs/project/BKL-032-*.md"
+  push:
+    branches: [main]
+    paths:
+      - "contracts/readiness/**"
+      - ".github/scripts/bkl-032-readiness-evaluator.mjs"
+      - ".github/scripts/test-bkl-032-readiness-evaluator.mjs"
+      - ".github/workflows/bkl-032-governance.yml"
+      - "docs/architecture/packages/BKL-032-*.md"
+      - "docs/architecture/ADR-013-*.md"
+      - "docs/project/BKL-032-*.md"
+
+permissions:
+  contents: read
+
+jobs:
+  readiness:
+    name: Deterministic fail-closed readiness evaluator
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with: { node-version: "22" }
+      - name: Test contracts, thresholds and authority boundaries
+        run: node --test .github/scripts/test-bkl-032-readiness-evaluator.mjs
