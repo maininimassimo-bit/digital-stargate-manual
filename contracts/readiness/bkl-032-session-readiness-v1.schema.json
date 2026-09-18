@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.local/contracts/readiness/bkl-032-session-readiness-v1.schema.json",
+  "title": "BKL-032 Session Readiness Decision Support",
+  "description": "Read-only, fail-closed readiness input/output contract. GO never authorizes scheduling, commands or Safety Authority actions.",
+  "type": "object",
+  "required": ["schema_version", "session", "evaluated_at_utc", "forecast", "astronomy", "setup_compatibility", "live_telemetry"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "session": {"$ref": "#/$defs/session"},
+    "evaluated_at_utc": {"type": "string", "format": "date-time"},
+    "forecast": {"$ref": "#/$defs/evidence"},
+    "astronomy": {"$ref": "#/$defs/evidence"},
+    "setup_compatibility": {"$ref": "#/$defs/evidence"},
+    "live_telemetry": {"$ref": "bkl-032-live-telemetry-v1.schema.json"}
+  },
+  "$defs": {
+    "session": {
+      "type": "object",
+      "required": ["session_id", "target_ref", "setup_ref"],
+      "additionalProperties": false,
+      "properties": {
+        "session_id": {"type": "string", "minLength": 1},
+        "target_ref": {"type": "string", "minLength": 1},
+        "setup_ref": {"type": "string", "minLength": 1}
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["status", "observed_at_utc", "fresh_until_utc", "source", "evidence_ref"],
+      "additionalProperties": true,
+      "properties": {
+        "status": {"enum": ["PASS", "BLOCK"]},
+        "observed_at_utc": {"type": "string", "format": "date-time"},
+        "fresh_until_utc": {"type": "string", "format": "date-time"},
+        "source": {"type": "string", "minLength": 1},
+        "evidence_ref": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

@@ -135,6 +135,12 @@ The capability must log correlation ID, contract version, evidence locators, dec
 - selection of the first public/read-only consumer surface;
 - whether any future runtime evidence is needed, subject to a separate authorization.
 
+## 14. Deterministic evaluator slice
+
+The first executable slice is now defined by the versioned readiness and live-telemetry contracts under `contracts/readiness/` and the pure evaluator `.github/scripts/bkl-032-readiness-evaluator.mjs`. It consumes normalized evidence only, applies the owner-approved thresholds, preserves the `GO` / `NO_GO` / `INDETERMINATE` distinction and emits no command or scheduling action. Bounded tests cover complete current evidence, every weather blocker, missing/stale evidence, non-weather blocking evidence and malformed input.
+
+This slice does not claim live source transport, EAGLE execution, apparatus inspection or a public readiness consumer. Those remain separately gated.
+
 ## 14. Future Evolution
 
 Future runtime or device-integrated readiness requires a new architecture and safety review. It cannot be inferred from this package and cannot transfer Safety Authority from local interlocks.
