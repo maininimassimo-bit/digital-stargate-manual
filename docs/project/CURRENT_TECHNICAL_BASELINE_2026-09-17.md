@@ -6,12 +6,12 @@
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Baseline implementation merge | `20669f7164460297d7318fc3b5874e4bc7f4bcde` |
 | Acceptance reconciliation merge | `84d1b889a6c739c9e5d053e1f073fe1d87b8c5d4` |
-| Current package | BKL-031 |
-| Current next gate | BKL-031 F9 repeatable current-night planner closure |
+| Current package | BKL-032 |
+| Current next gate | BKL-032 Session Readiness / Go-No-Go Decision Support |
 
 ## Observation Planner baseline
 
-F3–F8 sono Accepted/Post-Merge Verified. F8 accetta la pipeline scientifica bounded della notte 17–18/09/2026: forecast reale F7 site-specific, geometria astronomica corrente per la notte, suitability esplicita setup-target e ranking/finestre advisory nel portale. Il metodo resta `EVALUATION/NONE/READ_ONLY` e non è un readiness/safety engine.
+F3–F9 sono Accepted/Post-Merge Verified. F9 chiude la pipeline repeatable: forecast MeteoHub corrente di Manciano, geometria astronomica della notte, suitability esplicita setup-target e ranking/finestre advisory nel portale. Il metodo resta `EVALUATION/NONE/READ_ONLY` e non è un readiness/safety engine.
 
 ## Authority baseline
 
