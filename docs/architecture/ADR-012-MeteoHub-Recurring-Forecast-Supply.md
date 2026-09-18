@@ -2,8 +2,8 @@
 
 | Field | Value |
 |---|---|
-| Status | **OWNER-AUTHORIZED — IMPLEMENTATION CANDIDATE** |
-| Date | 2026-09-17 |
+| Status | **ACCEPTED — CLOSED / POST-MERGE VERIFIED** |
+| Date | 2026-09-18 |
 | Capability | BKL-031 F9 |
 | Monetary budget | **EUR 0** |
 | Cadence ceiling | **Maximum two acquisitions per UTC day** |
@@ -21,7 +21,7 @@ The operating contract is:
 - monetary budget EUR 0;
 - the repository is public and the refresh job additionally requires repository variable `F9_ZERO_EUR_GUARD=CONFIRMED` as an explicit activation switch;
 - at most two acquisition cycles per UTC day, aligned with the 00/12 UTC ICON-2I runs;
-- no manual-dispatch acquisition path, no automatic retry, and `GITHUB_RUN_ATTEMPT=1` enforced so a workflow rerun cannot acquire again;
+- a governed `workflow_dispatch` diagnostic path requires explicit `ALLOW_ONE_TEST_ACQUISITION` confirmation and a purpose string; scheduled and manual attempts share the maximum two-acquisitions-per-UTC-day guard; no automatic retry;
 - exact run identity, per-variable SHA-256 and retrieval time in the sanitised projection;
 - all GRIB inputs held only in an ephemeral temporary directory and deleted before the job ends;
 - no GRIB artifact, cache, repository commit or durable raw payload;
@@ -40,6 +40,11 @@ The output is `EVALUATION / NONE / READ_ONLY`. It has no readiness, go/no-go, sc
 The provider subscription cost is eliminated, and the public-repository standard runner boundary avoids runner charges. F9 still assumes operational parsing of official GRIB data and availability of MeteoHub. Provider failure never revives stale F7/F8 data as current. Attribution to ItaliaMeteo/ARPAE and the CC BY 4.0 source must remain visible.
 
 ADR-011 remains the historical authority for the accepted Open-Meteo single-run evidence. ADR-012 governs only the F9 recurring supply and does not rewrite that evidence.
+
+
+## Closure evidence
+
+BKL-031 closure is recorded in `docs/project/BKL-031-CLOSURE-2026-09-18.md`. PR #300 merged at `dee6f117c964db92f152e3b7d924d7fedb66e093`; governed workflows, documentation validation, Word generation, GitHub Pages deployment and direct public planner verification succeeded. The capability remains `EVALUATION / NONE / READ_ONLY`; S10 remains `UNAVAILABLE`.
 
 ## Rollback
 
