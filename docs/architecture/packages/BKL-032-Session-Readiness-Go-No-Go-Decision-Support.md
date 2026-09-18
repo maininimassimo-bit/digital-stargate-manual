@@ -130,8 +130,8 @@ The capability must log correlation ID, contract version, evidence locators, dec
 
 ## 13. Open Issues
 
-- source/transport mapping for every mandatory telemetry domain;
-- exact documented local wind/gust limits to be referenced by the evaluator;
+- repository-level source inventory is recorded in `docs/project/BKL-032-TELEMETRY-SOURCE-MAPPING-2026-09-18.md`; source/transport acceptance and runtime reconciliation remain open for every mandatory domain;
+- owner-approved BKL-032 weather thresholds are recorded in `BKL-032-TELEMETRY-SOURCE-MAPPING-2026-09-18.md`; the operational chapter retains its broader `DA VALIDARE` note because this decision does not change Safety Authority policy;
 - selection of the first public/read-only consumer surface;
 - whether any future runtime evidence is needed, subject to a separate authorization.
 

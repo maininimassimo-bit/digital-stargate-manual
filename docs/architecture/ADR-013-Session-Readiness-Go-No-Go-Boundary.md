@@ -28,6 +28,8 @@ BKL-032 is a separate application capability. It consumes a declared session con
 
 The owner approved on 2026-09-18 that `GO` requires forecast, current astronomy, setup compatibility and read-only live telemetry for weather, dome, mount, camera, power, network and EAGLE health to be present, fresh, consistent and passing. `NO_GO` means valid current evidence contains at least one blocking failure. `INDETERMINATE` means any mandatory domain is missing or stale, or required evidence is conflicting or unavailable, and therefore fails closed. Forecast/readiness freshness is six hours; rain greater than zero blocks; wind/gust beyond documented local limits blocks. No runtime or public readiness claim is authorized until source mappings and local limit references are accepted.
 
+The repository source inventory and owner-approved BKL-032 weather thresholds are recorded in `docs/project/BKL-032-TELEMETRY-SOURCE-MAPPING-2026-09-18.md`. These thresholds are decision-support policy only and do not modify the local Safety Authority or the broader safety-interlock documentation.
+
 ## Consequences
 
 ### Positive
