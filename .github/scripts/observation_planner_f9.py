@@ -226,7 +226,11 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
         raise ContractError("STALE_RUN")
     geo = site["sitePayload"]["geodesy"]
     local = now.astimezone(ZoneInfo(site["sitePayload"]["timezoneIana"]))
-    night_date = local.date() if local.hour >= 12 else local.date() - dt.timedelta(days=1)
+    # Morning refreshes prepare the upcoming night.  Only the early-morning
+    # tail (00:00–05:59 local) still belongs to the night that started the
+    # previous calendar day; after 06:00 the current date is the next
+    # observing window and is covered by the latest forecast run.
+    night_date = local.date() if local.hour >= 6 else local.date() - dt.timedelta(days=1)
     start = dt.datetime.combine(night_date, dt.time(15), tzinfo=dt.timezone.utc)
     instants = [start + dt.timedelta(hours=i) for i in range(16)]
     if any(i not in weather for i in instants):
