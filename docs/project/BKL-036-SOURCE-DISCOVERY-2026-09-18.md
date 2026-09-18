@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | `BKL-036-SOURCE-DISCOVERY-001` |
-| Status | Proposed / Gate Open |
+| Status | Closed / Accepted / Post-Merge Verified |
 | Capability | Observatory Health Score |
 | Date | 2026-09-18 |
 | Architecture package | `BKL-036-ARCH-001` |
@@ -41,4 +41,4 @@ Missing, stale, partial, unavailable and conflicting evidence must remain explic
 
 ## Next governed step
 
-Complete source mapping and semantic-contract review, then submit the package to ARB and Release Quality. No implementation or external traffic is authorized before that review.
+Source discovery and semantic-contract review are accepted. Any source mapping implementation, aggregate score or runtime consumer requires a separate governed increment. The next governed package is BKL-033; no implementation or external traffic is authorized by this closure.

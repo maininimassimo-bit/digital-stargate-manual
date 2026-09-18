@@ -66,7 +66,7 @@ const discoverAcceptedClosures = async () => {
       ...(packageField.match(/BKL-\d{3}/g) || [])
     ]);
 
-    for (const id of ids) accepted.push({ id, filePath, status });
+    for (const id of ids) accepted.push({ id, filePath, status, gateOnly: /gate/i.test(status) });
   }
   return accepted;
 };
@@ -134,6 +134,11 @@ const main = async () => {
     if (!generatedIndex.has(closure.id)) continue;
     const roadmapStatus = generatedIndex.get(closure.id).status;
     const backlogStatus = backlogStatuses.get(closure.id);
+    if (closure.gateOnly) {
+      assert(roadmapStatus === 'active', `${closure.id} has an accepted gate closure ${closure.filePath} but roadmap status is ${roadmapStatus}`);
+      if (backlogStatus) assert(normalizeStatus(backlogStatus) === 'in progress', `${closure.id} has an accepted gate closure ${closure.filePath} but BACKLOG.md status is ${backlogStatus}`);
+      continue;
+    }
     assert(roadmapStatus === 'completed', `${closure.id} has accepted closure ${closure.filePath} but roadmap status is ${roadmapStatus}`);
     if (backlogStatus) {
       assert(normalizeStatus(backlogStatus) === 'done', `${closure.id} has accepted closure ${closure.filePath} but BACKLOG.md status is ${backlogStatus}`);
