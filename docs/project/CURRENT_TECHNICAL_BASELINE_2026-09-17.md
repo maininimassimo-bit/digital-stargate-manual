@@ -7,8 +7,8 @@
 | BKL-031 closure merge | `4a509d574a004fe7fb72bc6c678c9e7f71fe821f` |
 | Closure record | `docs/project/BKL-031-CLOSURE-2026-09-18.md` |
 | BKL-032 closure | PR #304; merge `7e38453b2e499fe577efa0231aeb7bb06329016e` |
-| Current package | BKL-033 |
-| Current next gate | BKL-033 Observatory Digital Twin |
+| Current package | BKL-036 |
+| Current next gate | BKL-036 follow-on source mapping and policy gate |
 
 ## Observation Planner baseline
 
@@ -37,4 +37,4 @@ BKL-032 closure evidence is recorded in `docs/project/BKL-032-CLOSURE-2026-09-18
 
 ## BKL-036 closure state
 
-BKL-036 è **Closed / Accepted / Post-Merge Verified** per source discovery e semantic contract tramite PR #306 e merge `b0d3a8b1a10ce71610e4592d5c876e9fd0c8d7c5`. Non introduce score numerico, soglie, pesi, RAG, Safety Score, remediation, runtime transport o comandi. Source mapping, comparabilità e qualunque futuro score restano gate separati. Il prossimo gate è BKL-033.
+BKL-036 source-discovery gate è **Closed / Accepted / Post-Merge Verified** tramite PR #306 e merge `b0d3a8b1a10ce71610e4592d5c876e9fd0c8d7c5`; la capability BKL-036 resta corrente per follow-on separatamente governati. Non introduce score numerico, soglie, pesi, RAG, Safety Score, remediation, runtime transport o comandi. Source mapping, comparabilità e qualunque futuro score restano gate separati.

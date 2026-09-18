@@ -7,7 +7,7 @@
 | Stato | Active |
 | Data | 17/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | BKL-031, BKL-032 and BKL-036 Closed / Accepted / Post-Merge Verified; BKL-033 next; S10 production runtime `UNAVAILABLE` |
+| Current governed package | BKL-031 and BKL-032 Closed / Accepted / Post-Merge Verified; BKL-036 source-discovery gate closed with follow-on current; S10 production runtime `UNAVAILABLE` |
 
 ## 1. Scopo
 
@@ -57,11 +57,11 @@ BKL-032 is closed through PR #304 merge `7e38453b2e499fe577efa0231aeb7bb06329016
 
 ## 8. BKL-036 closure state
 
-BKL-036 is **CLOSED / ACCEPTED / POST-MERGE VERIFIED** for source discovery and semantic contract only through PR #306 merge `b0d3a8b1a10ce71610e4592d5c876e9fd0c8d7c5`. It does not introduce a numeric health score, thresholds, weights, Safety Score, remediation, runtime transport or device commands. BKL-031, BKL-032 and local physical interlocks remain separate authorities. The closure record is `docs/project/BKL-036-CLOSURE-2026-09-18.md`.
+BKL-036 source-discovery and semantic-contract gate is **CLOSED / ACCEPTED / POST-MERGE VERIFIED** through PR #306 merge `b0d3a8b1a10ce71610e4592d5c876e9fd0c8d7c5`; the broader capability remains current for separately governed follow-on source mapping and policy. It does not introduce a numeric health score, thresholds, weights, Safety Score, remediation, runtime transport or device commands. BKL-031, BKL-032 and local physical interlocks remain separate authorities. The closure record is `docs/project/BKL-036-CLOSURE-2026-09-18.md`.
 
 ## 9. Roadmap sequence
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 CLOSED / ACCEPTED -> BKL-032 CLOSED / ACCEPTED -> BKL-036 CLOSED / ACCEPTED -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 CLOSED / ACCEPTED -> BKL-032 CLOSED / ACCEPTED -> BKL-036 source-discovery gate CLOSED / ACCEPTED -> BKL-036 follow-on -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 ## 10. CI/CD e publishing
 
