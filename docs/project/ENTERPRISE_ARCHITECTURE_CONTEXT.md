@@ -3,15 +3,15 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 4.1 |
+| Versione | 4.2 |
 | Stato | Active context baseline |
-| Data baseline | 17/09/2026 |
+| Data baseline | 18/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch autorevole | `main` |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
 | Continuity handover | `docs/project/HANDOVER_2026-09-17.md` |
 | Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-17.md` |
-| Current governed package | BKL-031 F8 Accepted/Post-Merge Verified; F9 repeatable current-night planner closure next; S10 unavailable |
+| Current governed package | BKL-031 Closed/Accepted/Post-Merge Verified; BKL-032 current; S10 unavailable |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo e gerarchia
@@ -54,17 +54,15 @@ Sono accettati, fra gli altri:
 
 BKL-037 rimane read-only/descriptive-only; unità non dimostrate, missing evidence e processing history PixInsight incompleta restano fail-closed.
 
-## 6. Current package — BKL-031
+## 6. Current package — BKL-032
 
-BKL-041 — Scientific Data Quality Score è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability sperimentale read-only; production readiness resta `NOT_READY_FOR_PRODUCTION`.
+BKL-031 è **CLOSED / ACCEPTED / POST-MERGE VERIFIED** tramite PR #300 e merge `dee6f117c964db92f152e3b7d924d7fedb66e093`. F3–F9 hanno chiuso il planner repeatable read-only: MeteoHub governato, astronomia della notte, suitability esplicita setup-target, ranking esplicabile e verifica della pagina pubblica di Manciano.
 
-BKL-046 F1-F5 sono CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION` e `aiModelImplemented=false`.
-
-BKL-031 F1/F2, F3 Solution Architecture, F3-A1 Site Authority and F3-A2 setup-authority contract are accepted/post-merge verified with their recorded conditions. The protected setup baseline and Site Authority are separately APPROVED. PR #207 integrated the protected assignment DRAFT; PR #209 then integrated the separate approval receipt and unchanged `APPROVED` envelope as merge `bc4307c2042a45985622044e11631421de5b2c3d`. The suite passes 65/65 and all 7 post-merge workflows succeeded. Repository authority resolves `AVAILABLE` only for authorized validated input. S08 remains `UNAVAILABLE`; runtime S09 remains `UNAVAILABLE_CURRENT` because no adapter exists. `ARB-204-MI02` is mandatory before any runtime adapter. F3-A3/B/C, F4 forecast, F5 ranking/consumer, BKL-032 readiness, EAGLE operations and Safety Authority remain separate.
+La closure non trasferisce authority: BKL-032 resta responsabile di Session Readiness / Go-No-Go; gli interlock fisici locali restano Safety Authority; S10 resta `UNAVAILABLE`. Il Planner non abilita scheduler, selezione automatica, device command o Safety Authority.
 
 ## 7. Roadmap
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 [F1/F2 ACCEPTED / F3 SA ACCEPTED / F3-A1+A2 REPOSITORY AUTHORITIES ACCEPTED / F3-A3 EXACT SPK DECISION CURRENT / ADR-010 PROPOSED / S10 UNAVAILABLE] -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 CLOSED / ACCEPTED -> BKL-032 CURRENT -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 AMP-002 resta planning authority per AP-007–AP-015, non live status register.
 

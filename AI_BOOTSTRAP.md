@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 7.3 |
-| Baseline | 17/09/2026 |
-| Stato | Current root bootstrap — BKL-031 F8 acceptance reconciliation merged/post-merge verified; F9 repeatable current-night closure next; S10 unavailable |
+| Versione | 7.4 |
+| Baseline | 18/09/2026 |
+| Stato | Current root bootstrap — BKL-031 Closed/Accepted/Post-Merge Verified; BKL-032 next; S10 unavailable |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -32,12 +32,12 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni e proje
 Gli handover e le baseline precedenti restano snapshot storici.
 
 ## 3. Stato corrente
-- BKL-031: **In Progress**.
+- BKL-031: **Closed / Accepted / Post-Merge Verified** via PR #300 merge `dee6f117c964db92f152e3b7d924d7fedb66e093`.
 - F3–F8: Accepted/Post-Merge Verified.
 - F8 implementation: PR #279, reviewed head `3f05693482208df2b56b66dcb71162589880e72b`, merge `20669f7164460297d7318fc3b5874e4bc7f4bcde`, 9/9 exact-head e 10/10 post-merge SUCCESS.
 - F8 acceptance reconciliation: PR #280, reviewed head `bca410dcde804483052beded16c29a9f58f43872`, merge `84d1b889a6c739c9e5d053e1f073fe1d87b8c5d4`, 17/17 exact-head e 19/19 post-merge SUCCESS; GitHub Pages build/integrity/deploy SUCCESS.
 - F8 evidence: notte bounded 17–18/09/2026, forecast reale F7 site-specific, astronomia night-specific, suitability OTA/camera/filter esplicita, ranking/finestre advisory read-only.
-- BKL-031: **Closed / Accepted / Post-Merge Verified** via PR #300; next gate: **BKL-032 Session Readiness / Go-No-Go Decision Support**.
+- BKL-032 Session Readiness / Go-No-Go Decision Support è il package corrente; non eredita authority dal Planner.
 - S10 production runtime: `UNAVAILABLE`.
 
 ## 4. Boundary non negoziabili
@@ -48,13 +48,13 @@ Gli handover e le baseline precedenti restano snapshot storici.
 - coordinate sito protette mai in projection pubbliche;
 - missing/stale/conflicted evidence fail-closed;
 - provider/model/run lineage esplicita, nessun fallback/stitching silenzioso;
-- recurring provider traffic non autorizzato senza separata authority/budget decision.
+- il traffico MeteoHub F9 resta entro il modello ADR-012 governato: massimo due acquisizioni UTC/giorno, budget EUR 0, fail-closed e GRIB effimeri.
 
 ## 5. Provider budget corrente
 - F4-C generalized validation: `2/2_EXHAUSTED`;
 - F7 protected-site one-shot: `1/1_EXHAUSTED`;
 - F8: zero provider requests;
-- F9 non eredita automaticamente alcuna autorizzazione di traffico ricorrente.
+- F9 closure: refresh MeteoHub governato verificato; nessuna estensione di traffico oltre il limite ADR-012.
 
 ## 6. Disciplina di delivery
 Exact-head CI → ARB → Release Quality sullo stesso SHA → expected-head merge → post-merge verification → acceptance reconciliation. Nessuna acceptance o runtime claim può precedere l'evidence reale.
