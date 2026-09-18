@@ -26,7 +26,7 @@ BKL-031 F3–F9 è Closed / Accepted / Post-Merge Verified. F9 chiude la pipelin
 
 ## Closure evidence
 
-PR #300 merged with governance, documentation validation, Word generation and GitHub Pages deployment SUCCESS. La verifica web diretta ha confermato il planner pubblico di Manciano con forecast corrente, 16 campioni notturni, setup/filtri/ranking e correzione percentuali.
+PR #300 merged with governance, documentation validation, Word generation and GitHub Pages deployment SUCCESS. La verifica web diretta ha confermato il planner pubblico di Manciano con forecast corrente, 16 campioni notturni, setup/filtri/ranking e correzione percentuali. Predecessor F8 reconciliation: reviewed head `bca410dcde804483052beded16c29a9f58f43872`, merge `84d1b889a6c739c9e5d053e1f073fe1d87b8c5d4`, 19/19 applicable post-merge workflows SUCCESS.
 
 ## Maintained limits
 
