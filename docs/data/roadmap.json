@@ -1,13 +1,13 @@
 {
   "schemaVersion": "2.2",
-  "updatedAt": "2026-09-17",
+  "updatedAt": "2026-09-18",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "a62f862c6db0137b0b1da340d6d324041e2f804347a6da4d889764e2a3c1690e",
+  "sourceDigest": "bdbadfa3af07fa3e914b99be593c9dc0ba24bbb0a2d0f029dcef7a9b730b36f9",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 continuity: F3-C accepted and post-merge verified; F4-A/ADR-011 Accepted/Post-Merge Verified; F4-B v1.1 Accepted/Post-Merge Verified; F4-C evidence reconciliation Accepted/Post-Merge Verified; F4-D sanitized forecast projection/portal Accepted/Post-Merge Verified; F5 explainable ranking Accepted/Post-Merge Verified; F6 real-evidence setup-aware E2E Accepted/Post-Merge Verified; F7 fresh protected-site forecast supply Accepted/Post-Merge Verified; F8 current astronomy and explicit setup suitability Accepted/Post-Merge Verified via PR #279 merge 20669f7164460297d7318fc3b5874e4bc7f4bcde; F4-C provider budget 2/2 exhausted; F7 protected-site budget 1/1 exhausted; recurring provider traffic not authorized; BKL-031 remains In Progress; S10 production runtime unavailable; no readiness/go-no-go, scheduling, automatic target selection, commands or Safety Authority.",
+  "projectStatus": "BKL-031 continuity: F3–F8 Accepted/Post-Merge Verified; F9 MeteoHub implementation and planner exposure merged/post-merge verified through PR #282/#283/#284; no governed F9 refresh, current-night projection or portal verification is evidenced; BKL-031 remains In Progress; S10 production runtime unavailable; no readiness/go-no-go, scheduling, automatic target selection, commands or Safety Authority.",
   "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F9 repeatable current-night planner closure",
-  "target": "Establish a repeatable current-night planner refresh/integration that combines governed fresh forecast supply, current astronomical geometry, explicit OTA/camera/filter suitability and explainable portal ranking. Preserve exact provider/model/run lineage, freshness/missingness, protected-site privacy, BKL-032 readiness separation and local physical-interlock Safety Authority. No recurring provider traffic, scheduler, automatic target selection, device command, readiness/go-no-go or Safety Authority is authorized by F8 acceptance.",
+  "nextMilestone": "BKL-031 F9 governed refresh, portal verification and acceptance reconciliation",
+  "target": "Execute and verify one ADR-012-governed current-night refresh and its sanitized portal projection, then complete F9 acceptance reconciliation. Preserve exact provider/model/run lineage, freshness/missingness, protected-site privacy, BKL-032 readiness separation and local physical-interlock Safety Authority. No scheduler, automatic target selection, device command, readiness/go-no-go or Safety Authority is authorized.",
   "summary": {
     "total": 44,
     "completed": 32,
@@ -307,7 +307,7 @@
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
           "status": "active",
-          "note": "F3/F4/F5/F6/F7/F8 are Accepted/Post-Merge Verified. F8 PR #279 merged as 20669f7164460297d7318fc3b5874e4bc7f4bcde after 9/9 exact-head and 10/10 post-merge workflows, binding real F7 protected-site forecast to night-specific astronomy and explicit OTA/camera/filter suitability in a sanitized read-only planner. F8 is bounded to the 17–18 Sep 2026 night and does not prove recurring runtime. F9 repeatable current-night planner closure is next; recurring provider traffic is not authorized, BKL-031 remains In Progress, S10 unavailable, and no readiness/go-no-go, scheduler, automatic target selection, commands or Safety Authority is authorized."
+          "note": "F3/F4/F5/F6/F7/F8 are Accepted/Post-Merge Verified. F9 implementation merged via PR #282, its public zero-cost reconciliation via PR #283 and planner exposure via PR #284; applicable post-merge workflows succeeded. No governed refresh, current-night projection or portal verification is yet evidenced. BKL-031 remains In Progress, S10 unavailable, and no readiness/go-no-go, scheduler, automatic target selection, commands or Safety Authority is authorized."
         },
         {
           "id": "BKL-032",
@@ -892,6 +892,14 @@
       "date": "2026-09-17",
       "status": "active",
       "description": "PR #279 passed 9/9 exact-head workflows on 3f05693482208df2b56b66dcb71162589880e72b, merged with expected-head control as 20669f7164460297d7318fc3b5874e4bc7f4bcde, and passed 10/10 applicable post-merge workflows. F8 is Accepted/Post-Merge Verified as bounded EVALUATION/NONE/READ_ONLY evidence for the 17–18 Sep 2026 night. F9 repeatable current-night planner closure is next; BKL-031 remains In Progress and recurring provider traffic is not authorized by F8 acceptance."
+    },
+    {
+      "id": "M-BKL031-F9-IMPLEMENTATION-POSTMERGE",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F9 implementation and post-merge verification",
+      "date": "2026-09-18",
+      "status": "active",
+      "description": "PR #282 integrated the MeteoHub refresh implementation, PR #283 reconciled the public zero-cost guard and PR #284 exposed the planner; applicable post-merge workflows succeeded. No governed refresh, current-night projection or portal verification is evidenced. BKL-031 remains In Progress."
     }
   ]
 }
