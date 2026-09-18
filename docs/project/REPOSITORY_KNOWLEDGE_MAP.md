@@ -55,19 +55,23 @@ BKL-031 è **CLOSED / ACCEPTED / POST-MERGE VERIFIED** tramite PR #301 e merge `
 
 BKL-032 is closed through PR #304 merge `7e38453b2e499fe577efa0231aeb7bb06329016e`. The accepted capability is a deterministic, read-only evaluator with versioned contracts, owner-approved thresholds and fail-closed missingness. Live source/transport acceptance and public runtime GO remain outside the closure. The governed handoff is **BKL-032 Session Readiness / Go-No-Go Decision Support** → **BKL-036 Observatory Health Score**.
 
-## 8. Roadmap sequence
+## 8. BKL-036 entry state
+
+BKL-036 is **Proposed / Gate Open** for source discovery and semantic contract only. It does not introduce a numeric health score, thresholds, weights, Safety Score, remediation, runtime transport or device commands. BKL-031, BKL-032 and local physical interlocks remain separate authorities.
+
+## 9. Roadmap sequence
 
 `... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 CLOSED / ACCEPTED -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
-## 9. CI/CD e publishing
+## 10. CI/CD e publishing
 
 Workflow e deployment sono evidence solo per l’exact SHA verificato. Generated projection non è authority.
 
-## 10. Safety boundary
+## 11. Safety boundary
 
 Nessun consumer analytics, comparison, scoring, planner o AI può comandare apparati, autorizzare remediation, produrre readiness/go-no-go come authority o sostituire gli interlock fisici. Le coordinate esatte del sito restano protette e non devono essere pubblicate nelle projection.
 
-## 11. Registro revisioni
+## 12. Registro revisioni
 
 | Versione | Data | Descrizione |
 |---|---|---|
