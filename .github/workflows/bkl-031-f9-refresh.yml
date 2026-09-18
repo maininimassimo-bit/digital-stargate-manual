@@ -1,8 +1,8 @@
 name: BKL-031 F9 MeteoHub Refresh
 on:
   schedule:
-    # 08:45 UTC (10:45 Europe/Rome during CEST) for the validation run; 17:15 UTC (19:15 Europe/Rome during CEST) unchanged.
-    - cron: '45 8 * * *'
+    # 09:30 UTC (11:30 Europe/Rome during CEST) for the validation run; 17:15 UTC (19:15 Europe/Rome during CEST) unchanged.
+    - cron: '30 9 * * *'
     - cron: '15 17 * * *'
 concurrency:
   group: bkl-031-f9-meteohub-refresh
