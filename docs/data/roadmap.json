@@ -2,7 +2,7 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-18",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "2201a3c83fa811c927996d15e5a2f5862304e7096bc4d44b6a56968ef7c42a8f",
+  "sourceDigest": "3d6109eb432cc13bee9b88692cea29c5f69f28899244a4d15d862829407f4c29",
   "authority": "DSG-RGM-001",
   "projectStatus": "BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED. The BKL-036 source-discovery gate is CLOSED / ACCEPTED / POST-MERGE VERIFIED, while the broader BKL-036 capability remains current for separately governed follow-on source mapping and policy work. BKL-031 remains the bounded advisory/read-only planner; BKL-032 provides deterministic fail-closed readiness decision support, but live source/transport and public runtime GO remain separately gated. S10 production runtime unavailable; no scheduling, automatic target selection, commands or Safety Authority is authorized.",
   "currentPackage": "BKL-036",
@@ -908,8 +908,8 @@
       "itemRef": "BKL-036",
       "title": "BKL-036-F1 Governed Source Mapping and Evidence Compatibility",
       "date": "2026-09-18",
-      "description": "Repository-only source mapping increment. It records source authority, field, unit, observation time, freshness, evidence status and compatibility while keeping repository evidence, live telemetry and runtime acceptance separate. No score, threshold, runtime, command or Safety Authority change is authorized.",
-      "status": "active"
+      "status": "active",
+      "description": "PR #309 merged with expected-head verification as ab5255638a4b2d566e4082922b331901cbe21d36. Exact-head CI 15/15 and post-merge verification 17/17 workflow runs SUCCESS. BKL-036-F1 is Accepted / Post-Merge Verified as repository-only source mapping and evidence compatibility; no score, threshold, runtime, command or Safety Authority change is authorized."
     }
   ]
 }

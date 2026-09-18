@@ -1,7 +1,7 @@
 # BKL-036-F1 — Source Mapping Validation Plan
 
 **Identifier:** `BKL-036-F1-VAL-001`  
-**Status:** Review candidate  
+**Status:** Accepted / Post-Merge Verified
 **Version:** 0.1  
 **Runtime traffic:** None authorized
 

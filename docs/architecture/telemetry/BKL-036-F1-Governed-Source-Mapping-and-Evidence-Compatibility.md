@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | `BKL-036-F1-SRC-001` |
-| Status | Review candidate — repository/documentation-only |
+| Status | Accepted / Post-Merge Verified — repository/documentation-only |
 | Date | 2026-09-18 |
 | Runtime traffic | None authorized or used |
 | Safety Authority | Local physical interlocks only |

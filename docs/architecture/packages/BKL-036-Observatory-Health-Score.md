@@ -1,7 +1,7 @@
 # BKL-036 — Observatory Health Score
 
 **Identifier:** `BKL-036-ARCH-001`  
-**Status:** Accepted source-discovery boundary; F1 follow-on active
+**Status:** Accepted source-discovery boundary; BKL-036-F1 Accepted / Post-Merge Verified
 **Version:** 0.1  
 **Release:** Release 2.x  
 **Runtime impact:** None in this increment — repository and semantic-contract definition only  

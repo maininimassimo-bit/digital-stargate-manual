@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | `BKL-036-F1-CLOSURE-001` |
-| Status | Review candidate — repository/documentation-only |
+| Status | Accepted / Post-Merge Verified — repository/documentation-only |
 | Date | 2026-09-18 |
 | Capability | Observatory Health Score |
 | Scope | Governed source mapping and evidence compatibility |
@@ -42,3 +42,12 @@ The package is validated by `BKL-036-F1-Source-Mapping-Validation-Plan.md`. Requ
 - Retention and authoritative freshness rules remain source-specific and must not be generalized.
 - Cross-domain comparability is not established for an aggregate score.
 - Any score, threshold, ranking, recommendation, remediation, scheduling or command path requires a new governed increment.
+
+## 7. Verified closure evidence
+
+- PR #309 merged with expected-head verification.
+- Reviewed head: `edd88c1e0efe0b4d6ecbdec15656641e078b79f8`.
+- Merge commit: `ab5255638a4b2d566e4082922b331901cbe21d36`.
+- Exact-head CI: 15/15 workflow runs SUCCESS.
+- Post-merge verification: 17/17 workflow runs SUCCESS.
+- ARB and Release Quality review recommendations were recorded on the exact reviewed head; GitHub self-approval was unavailable because the PR author cannot approve their own PR.
