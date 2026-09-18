@@ -53,7 +53,7 @@ BKL-031 è **CLOSED / ACCEPTED / POST-MERGE VERIFIED** tramite PR #301 e merge `
 
 ## 7. BKL-032 closed baseline
 
-BKL-032 is closed through PR #304 merge `7e38453b2e499fe577efa0231aeb7bb06329016e`. The accepted capability is a deterministic, read-only evaluator with versioned contracts, owner-approved thresholds and fail-closed missingness. Live source/transport acceptance and public runtime GO remain outside the closure.
+BKL-032 is closed through PR #304 merge `7e38453b2e499fe577efa0231aeb7bb06329016e`. The accepted capability is a deterministic, read-only evaluator with versioned contracts, owner-approved thresholds and fail-closed missingness. Live source/transport acceptance and public runtime GO remain outside the closure. The governed handoff is **BKL-032 Session Readiness / Go-No-Go Decision Support** → **BKL-036 Observatory Health Score**.
 
 ## 8. Roadmap sequence
 

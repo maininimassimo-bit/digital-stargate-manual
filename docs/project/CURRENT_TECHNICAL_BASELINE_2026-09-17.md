@@ -21,7 +21,7 @@ BKL-031 F3–F9 è Closed / Accepted / Post-Merge Verified. F9 chiude la pipelin
 - Ephemeris/lunar method: ADR-010 accepted repository authority.
 - Forecast source/run lineage: ADR-011 accepted repository authority.
 - F9 operating model: ADR-012, EUR 0, massimo due acquisizioni UTC/giorno, fail-closed e GRIB effimeri.
-- Session Readiness / Go-No-Go: BKL-032, closed as deterministic read-only decision support; live source/transport remains separately gated.
+- Session Readiness / Go-No-Go: **BKL-032 Session Readiness / Go-No-Go Decision Support**, closed as deterministic read-only decision support; live source/transport remains separately gated.
 - Safety Authority: local physical interlocks.
 - S10 production runtime: `UNAVAILABLE`.
 

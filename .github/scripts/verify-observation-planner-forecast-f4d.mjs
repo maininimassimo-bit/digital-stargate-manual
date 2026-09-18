@@ -64,7 +64,8 @@ for(const expected of [
 ]) assert.ok(acceptance.includes(expected),`F4-D acceptance record missing ${expected}`);
 
 const roadmap=JSON.parse(fs.readFileSync('.github/roadmap/roadmap-source.json','utf8'));
-assert.equal(roadmap.nextMilestone,'BKL-032 Session Readiness / Go-No-Go Decision Support');
+assert.equal(roadmap.currentPackage,'BKL-036');
+assert.equal(roadmap.nextMilestone,'BKL-036 Observatory Health Score');
 assert.ok(roadmap.milestones.some(entry=>entry.id==='M-BKL031-F4-D-ACCEPTANCE'));
 assert.ok(roadmap.milestones.some(entry=>entry.id==='M-BKL031-F5-ACCEPTANCE'));
 
