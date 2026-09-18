@@ -1,7 +1,7 @@
 # BKL-036 — Observatory Health Score
 
 **Identifier:** `BKL-036-ARCH-001`  
-**Status:** Proposed  
+**Status:** Accepted source-discovery boundary; F1 follow-on active
 **Version:** 0.1  
 **Release:** Release 2.x  
 **Runtime impact:** None in this increment — repository and semantic-contract definition only  
@@ -105,7 +105,7 @@ Weather and Safety Authority are dependencies or separate authorities, not healt
 ## 9. Migration strategy
 
 1. Approve this source-discovery and semantic-contract boundary.
-2. Reconcile candidate source inventory with accepted BKL-030, BKL-031, BKL-032 and telemetry documents.
+2. Reconcile candidate source inventory with accepted BKL-030, BKL-031, BKL-032 and telemetry documents. This is the BKL-036-F1 follow-on.
 3. Define a versioned machine-readable evidence envelope and bounded fixtures without live traffic.
 4. Validate missingness, stale, conflict, privacy and authority behavior.
 5. Submit any future score policy as a separate decision increment with independent ARB and Release Quality gates.
@@ -153,4 +153,4 @@ No data migration, runtime deployment or device change is introduced here. Rollb
 
 ## 14. Future evolution
 
-Future increments may define a score policy, projection and read-only portal consumer only after the open issues are resolved and separately reviewed. Predictive maintenance, anomaly diagnosis, remediation and device interaction remain separate capabilities.
+The BKL-036-F1 source-mapping and evidence-compatibility boundary is recorded in ADR-015 and the governed telemetry mapping. Future increments may define a score policy, projection and read-only portal consumer only after the open issues are resolved and separately reviewed. Predictive maintenance, anomaly diagnosis, remediation and device interaction remain separate capabilities.
