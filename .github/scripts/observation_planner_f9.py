@@ -65,6 +65,14 @@ def discover_run(now: dt.datetime) -> str:
     return eligible[-1]
 
 
+def discover_file(run: str, variable: str) -> str:
+    listing = get_text(f"{BASE}/{run}/{variable}/")
+    files = sorted(set(re.findall(r'href=\"([^\"]+\.grib)\"', listing)))
+    if len(files) != 1:
+        raise ContractError(f"VARIABLE_FILE_NOT_UNIQUE:{variable}")
+    return files[0]
+
+
 def download(url: str, destination: Path) -> tuple[int, str]:
     req = urllib.request.Request(url, headers={"User-Agent": "Digital-StarGate-F9/1.0 (+github.com/maininimassimo-bit/digital-stargate-manual)"})
     size = 0
@@ -367,12 +375,12 @@ def acquire(now: dt.datetime) -> dict:
         raise ContractError("SITE_AUTHORITY_UNAVAILABLE")
     geo = site["sitePayload"]["geodesy"]
     run = discover_run(now)
-    filename = f"ICON_2I_SURFACE_PRESSURE_LEVELS_{run}_surface-0.grib"
     series, evidence, total = {}, [], 0
     with tempfile.TemporaryDirectory(prefix="dsg-f9-grib-") as temporary:
         root = Path(temporary)
         for variable in VARIABLES:
             path = root / f"{variable}.grib"
+            filename = discover_file(run, variable)
             size, digest = download(f"{BASE}/{run}/{variable}/{filename}", path)
             total += size
             if total > MAX_TOTAL_BYTES:
