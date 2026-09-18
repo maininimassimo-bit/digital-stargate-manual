@@ -248,7 +248,7 @@
           "id": "BKL-036",
           "title": "Observatory Health Score",
           "status": "active",
-          "note": "Source-discovery and semantic-contract gate accepted via PR #306 merge b0d3a8b1a10ce71610e4592d5c876e9fd0c8d7c5. BKL-036 remains current for separately governed follow-on source mapping and policy work; no health score, thresholds, Safety Authority, remediation or device command is authorized by the closure."
+          "note": "Source-discovery and semantic-contract gate accepted via PR #306 merge b0d3a8b1a10ce71610e4592d5c876e9fd0c8d7c5. BKL-036-F1 is the current repository-only follow-on for governed source mapping and evidence compatibility; no health score, thresholds, Safety Authority, remediation or device command is authorized."
         },
         {
           "id": "BKL-033",
@@ -766,6 +766,13 @@
       "date": "2026-09-18",
       "status": "completed",
       "description": "Closure PR #301 merged as 4a509d574a004fe7fb72bc6c678c9e7f71fe821f. F9 governance, documentation validation, Word generation, all inherited BKL-031 governance workflows and GitHub Pages deployment completed successfully. The public Manciano planner was directly verified with the current-night astronomy, REAL FORECAST SAMPLE, FULL NIGHT FORECAST, setup selector, new/history filters, suitability evidence and explainable ranking. The corrected percentage rendering is live. BKL-031 is CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 remains unavailable and the capability remains read-only/advisory."
+    },
+    {
+      "id": "M-BKL036-F1",
+      "itemRef": "BKL-036",
+      "title": "BKL-036-F1 Governed Source Mapping and Evidence Compatibility",
+      "date": "2026-09-18",
+      "description": "Repository-only source mapping increment. It records source authority, field, unit, observation time, freshness, evidence status and compatibility while keeping repository evidence, live telemetry and runtime acceptance separate. No score, threshold, runtime, command or Safety Authority change is authorized."
     }
   ]
 }

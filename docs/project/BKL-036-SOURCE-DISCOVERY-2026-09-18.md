@@ -41,4 +41,4 @@ Missing, stale, partial, unavailable and conflicting evidence must remain explic
 
 ## Next governed step
 
-Source discovery and semantic-contract review are accepted. Any source mapping implementation, aggregate score or runtime consumer requires a separate governed increment. The next governed package is BKL-033; no implementation or external traffic is authorized by this closure.
+Source discovery and semantic-contract review are accepted. The next separate increment is **BKL-036-F1 — Governed Source Mapping and Evidence Compatibility**, which remains repository/documentation-only. Any aggregate score or runtime consumer requires a further governed increment. No implementation or external traffic is authorized by this closure.
