@@ -24,6 +24,7 @@ MAX_TOTAL_BYTES = 1_500_000_000
 SITE_PATH = Path("governance/site-authority/site-records/DSG-SITE-RECORD-MANCIANO-001.approved.json")
 F8_PATH = Path("docs/data/observation-planner-f8-current-astronomy-suitability.json")
 SUITABILITY_PATH = Path("docs/data/observation-planner-f8-suitability-evidence.json")
+TARGET_CATALOG_PATH = Path("docs/data/observation-planner-target-catalog.json")
 OUTPUT_PATH = Path("docs/data/observation-planner-f9-current-night.json")
 
 
@@ -191,6 +192,25 @@ def factors(weather: dict, astro: dict) -> tuple[float, float]:
     return round(astronomy_factor, 4), round(weather_factor, 4)
 
 
+def candidate_case(setup: dict, target: dict) -> dict:
+    """Bounded advisory suitability for a public catalog candidate."""
+    short_fov_arcmin = min(setup["fovDeg"].values()) * 60
+    extent = float(target["angularSizeEquivalentArcmin"])
+    ratio = extent / short_fov_arcmin
+    framing = round(max(20.0, min(100.0, 100.0 - max(0.0, ratio - 0.7) * 55)), 1)
+    expected = "EMISSION_LINE" if any("SHO" in item or "Extreme" in item for item in setup["filterFamilies"]) else "BROADBAND_CONTINUUM"
+    filter_signal = 95.0 if target["preferredSignalFamily"] == expected else 75.0
+    scale = 92.0 if extent >= 30 and setup["effectiveFocalLengthMm"] <= 800 else (88.0 if extent < 30 else 72.0)
+    aggregate = round(0.45 * framing + 0.30 * filter_signal + 0.25 * scale, 1)
+    reasons = ["CATALOG_COORDINATES_PUBLICLY_GOVERNED", "SUITABILITY_IS_ADVISORY_DERIVED", "TARGET_NOT_PRESENT_IN_IMPORTED_SESSION_HISTORY"]
+    reasons.append("TARGET_EXTENT_FITS_DECLARED_FOV" if ratio <= 1.0 else "TARGET_EXTENT_EXCEEDS_DECLARED_SHORT_FOV")
+    return {"setupId": setup["setupId"], "targetKey": target["targetKey"],
+            "inputs": {"framingRatioToShortFov": round(ratio, 3), "imageScaleArcsecPx": setup["imageScaleArcsecPx"],
+                        "filterFamilyUsedForAssessment": setup["filterFamilies"][0], "targetSignalFamily": target["preferredSignalFamily"]},
+            "components": {"framing": framing, "filterSignal": filter_signal, "imageScaleObjectClass": scale},
+            "aggregateScore": aggregate, "reasonCodes": reasons}
+
+
 def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather: dict, files: list[dict], site: dict, f8: dict, suitability: dict) -> dict:
     run_time = dt.datetime.strptime(run, "%Y%m%d%H").replace(tzinfo=dt.timezone.utc)
     age = (retrieval - run_time).total_seconds() / 3600
@@ -203,7 +223,10 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
     instants = [start + dt.timedelta(hours=i) for i in range(16)]
     if any(i not in weather for i in instants):
         raise ContractError("CURRENT_NIGHT_NOT_COVERED")
-    targets = f8["targetProfiles"]
+    catalog = json.loads(TARGET_CATALOG_PATH.read_text(encoding="utf-8"))
+    history_keys = {item["targetKey"] for item in f8["targetProfiles"]}
+    targets = [dict(item, acquisitionState="ACQUIRED_HISTORY") for item in f8["targetProfiles"]]
+    targets.extend(dict(item, acquisitionState="NOT_YET_ACQUIRED") for item in catalog["targets"] if item["targetKey"] not in history_keys)
     rows = []
     for instant in instants:
         a = astronomy(instant, geo["latitudeDeg"], geo["longitudeDeg"], geo["elevationM"], targets)
@@ -215,10 +238,15 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
         rows.append({"validAtUtc": utc(instant), "solarAltitudeDeg": a["solarAltitudeDeg"], "moonAltitudeDeg": a["moonAltitudeDeg"],
                      "moonIlluminatedFraction": a["moonIlluminatedFraction"], "weather": weather[instant], "targets": target_rows})
     case_map = {(c["setupId"], c["targetKey"]): c for c in suitability["cases"]}
+    for setup in f8["setupProfiles"]:
+        for target in targets:
+            case_map.setdefault((setup["setupId"], target["targetKey"]), candidate_case(setup, target))
+    provenance = list(suitability["catalogProvenance"])
+    provenance.extend({"targetKey": item["targetKey"], "sourceAuthority": item["catalogEvidence"], "sourceIdentifier": item["targetName"], "fact": "PUBLIC_CATALOG_COORDINATE_AND_EXTENT"} for item in catalog["targets"])
     suitability_public = {"methodId": suitability["methodId"], "componentWeights": suitability["componentWeights"],
-                          "componentSemantics": suitability["componentSemantics"], "catalogProvenance": suitability["catalogProvenance"],
-                          "sourceBindings": suitability["sourceBindings"], "cases": []}
-    for case in suitability["cases"]:
+                          "componentSemantics": suitability["componentSemantics"], "catalogProvenance": provenance,
+                          "sourceBindings": {**suitability["sourceBindings"], "targetCatalog": str(TARGET_CATALOG_PATH).replace("\\", "/")}, "cases": []}
+    for case in case_map.values():
         suitability_public["cases"].append({"setupId": case["setupId"], "targetKey": case["targetKey"], "inputs": case["inputs"],
                                              "components": case["components"], "aggregateScore": case["aggregateScore"], "reasonCodes": case["reasonCodes"]})
     rankings = []
@@ -236,7 +264,7 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
                                 "advisoryScore": round(score, 1), "meanAltitudeDeg": round((a["altitudeDeg"] + b["altitudeDeg"]) / 2, 1),
                                 "meanCloudCoverPct": round((first["weather"]["cloudCoverPct"] + second["weather"]["cloudCoverPct"]) / 2, 1)})
             windows.sort(key=lambda x: (-x["advisoryScore"], x["fromUtc"]))
-            ranked.append({"targetKey": target["targetKey"], "targetName": target["targetName"], "setupSuitabilityScore": case["aggregateScore"], "bestWindows": windows[:3]})
+            ranked.append({"targetKey": target["targetKey"], "targetName": target["targetName"], "acquisitionState": target["acquisitionState"], "setupSuitabilityScore": case["aggregateScore"], "bestWindows": windows[:3]})
         ranked.sort(key=lambda x: (-(x["bestWindows"][0]["advisoryScore"] if x["bestWindows"] else -1), x["targetKey"]))
         rankings.append({"setupId": setup["setupId"], "targets": ranked})
     return {"schemaVersion": "1.0", "projectionType": "BKL031_F9_REPEATABLE_CURRENT_NIGHT", "generatedAtUtc": utc(retrieval),
@@ -246,7 +274,7 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
                          "retrievedAtUtc": utc(retrieval), "runAgeHoursAtRetrieval": round(age, 6), "freshnessState": "FRESH", "sourceFiles": files},
             "nightWindow": {"fromUtc": utc(instants[0]), "toUtcExclusive": utc(instants[-1] + dt.timedelta(hours=1))},
             "method": {"id": "BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.0", "ephemerisMode": "EXPLICIT_MOSEPH_NO_FALLBACK", "scoreWeights": f8["method"]["scoreWeights"], "displayFilter": "solarAltitudeDeg <= -18 and targetAltitudeDeg > 0"},
-            "setupProfiles": f8["setupProfiles"], "targetProfiles": targets, "suitabilityEvidence": suitability_public, "hourly": rows, "rankings": rankings,
+            "setupProfiles": f8["setupProfiles"], "targetProfiles": targets, "targetCatalog": {"catalogId": catalog["catalogId"], "catalogCompleteness": catalog["catalogCompleteness"], "candidateCount": len(catalog["targets"])}, "suitabilityEvidence": suitability_public, "hourly": rows, "rankings": rankings,
             "boundaries": {"recurringTraffic": True, "maximumAcquisitionsPerDay": 2, "monetaryBudgetEur": 0, "rawGribRetention": "NONE_EPHEMERAL_ONLY",
                            "readinessAuthority": False, "automaticTargetSelection": False, "schedulingAuthority": False, "actionAuthority": "NONE", "commandAuthority": "NONE",
                            "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS", "protectedCoordinatesPublished": False},

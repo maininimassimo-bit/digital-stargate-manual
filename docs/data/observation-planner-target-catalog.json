@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "1.0",
+  "catalogId": "DSG-OBSERVATORY-TARGET-CATALOG-001",
+  "catalogCompleteness": "BOUNDED_STARTER_CATALOG",
+  "sourcePolicy": "Public catalog coordinates are bounded advisory inputs; no target is auto-selected or scheduled.",
+  "targets": [
+    {"targetKey":"dsg-target:m-31","targetName":"M 31 (Andromeda Galaxy)","objectType":"GALAXY","raDegJ2000":10.6847,"decDegJ2000":41.2687,"angularSizeEquivalentArcmin":178.0,"catalogEvidence":"SIMBAD","preferredSignalFamily":"BROADBAND_CONTINUUM"},
+    {"targetKey":"dsg-target:m-42","targetName":"M 42 (Orion Nebula)","objectType":"EMISSION_NEBULA","raDegJ2000":83.8221,"decDegJ2000":-5.3911,"angularSizeEquivalentArcmin":85.0,"catalogEvidence":"SIMBAD","preferredSignalFamily":"EMISSION_LINE"},
+    {"targetKey":"dsg-target:m-45","targetName":"M 45 (Pleiades)","objectType":"OPEN_CLUSTER","raDegJ2000":56.75,"decDegJ2000":24.1167,"angularSizeEquivalentArcmin":110.0,"catalogEvidence":"SIMBAD","preferredSignalFamily":"BROADBAND_CONTINUUM"},
+    {"targetKey":"dsg-target:ngc-7000","targetName":"NGC 7000 (North America Nebula)","objectType":"EMISSION_NEBULA","raDegJ2000":314.75,"decDegJ2000":44.52,"angularSizeEquivalentArcmin":120.0,"catalogEvidence":"SIMBAD","preferredSignalFamily":"EMISSION_LINE"}
+  ]
+}
