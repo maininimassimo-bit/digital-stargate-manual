@@ -54,7 +54,8 @@ assert.equal(normalized.boundaries.publicProjection, false);
 assert.equal(normalized.location.protectedSiteUsed, false);
 
 const roadmap = JSON.parse(fs.readFileSync('.github/roadmap/roadmap-source.json', 'utf8'));
-assert.equal(roadmap.nextMilestone, 'BKL-032 Session Readiness / Go-No-Go Decision Support');
+assert.equal(roadmap.currentPackage, 'BKL-036');
+assert.equal(roadmap.nextMilestone, 'BKL-036 Observatory Health Score');
 assert.ok(roadmap.milestones.some((entry) => entry.id === 'M-BKL031-F4-C-FIRST-ATTEMPT-FAILED'));
 assert.ok(roadmap.milestones.some((entry) => entry.id === 'M-BKL031-F4-C-EVIDENCE-RECONCILIATION'));
 assert.ok(roadmap.milestones.some((entry) => entry.id === 'M-BKL031-F4-D-ACCEPTANCE'));
