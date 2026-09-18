@@ -92,8 +92,8 @@
 | ARB-013C | Verified Transport Cleanup Independent Review | AP-013C | Completed — Approved with Conditions | C01/C02/C06 remediated; C03 real OAT open; C04/C05 governance closure in progress |
 | BKL-036-ARCH-001 | Observatory Health Score Source Discovery and Semantic Contract | BKL-036 | Accepted / Post-Merge Verified | No runtime, score, threshold, remediation or command path authorized |
 | BKL-036-VAL-001 | Source Discovery and Semantic Contract Validation Plan | BKL-036 | Accepted / Post-Merge Verified | Source mapping and future score policy remain separate gates |
-| BKL-036-F1-SRC-001 | Governed Source Mapping and Evidence Compatibility | BKL-036 | Review candidate | Evidence status and compatibility mapping; live acceptance remains open |
-| BKL-036-F1-VAL-001 | Source Mapping Validation Plan | BKL-036 | Review candidate | F1 validation matrix; no runtime traffic authorized |
+| BKL-036-F1-SRC-001 | Governed Source Mapping and Evidence Compatibility | BKL-036 | Accepted / Post-Merge Verified | PR #309, merge `ab5255638a4b2d566e4082922b331901cbe21d36`; 15/15 exact-head and 17/17 post-merge SUCCESS; live acceptance remains open |
+| BKL-036-F1-VAL-001 | Source Mapping Validation Plan | BKL-036 | Accepted / Post-Merge Verified | Validation matrix passed on reviewed head; no runtime traffic authorized |
 
 ## 5. Data Product Candidate Register
 
