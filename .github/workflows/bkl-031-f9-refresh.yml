@@ -4,11 +4,22 @@ on:
     # 09:30 UTC (11:30 Europe/Rome during CEST) for the validation run; 17:15 UTC (19:15 Europe/Rome during CEST) unchanged.
     - cron: '30 9 * * *'
     - cron: '15 17 * * *'
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'Type ALLOW_ONE_TEST_ACQUISITION to authorize one manual F9 acquisition'
+        required: true
+        type: string
+      purpose:
+        description: 'Short reason for the governed test'
+        required: true
+        type: string
 concurrency:
   group: bkl-031-f9-meteohub-refresh
   cancel-in-progress: false
 permissions:
   contents: write
+  actions: read
 jobs:
   refresh:
     # Keep activation explicit even though this public repository uses the
@@ -22,8 +33,23 @@ jobs:
       - name: Enforce schedule-only first-attempt acquisition
         shell: bash
         run: |
-          test "$GITHUB_EVENT_NAME" = "schedule"
+          if [ "$GITHUB_EVENT_NAME" = "schedule" ]; then
+            true
+          elif [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            test "${{ inputs.confirmation }}" = "ALLOW_ONE_TEST_ACQUISITION"
+            test -n "${{ inputs.purpose }}"
+          else
+            exit 1
+          fi
           test "$GITHUB_RUN_ATTEMPT" = "1"
+      - name: Enforce two-acquisition daily budget
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          today=$(date -u +%Y-%m-%d)
+          count=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/${GITHUB_WORKFLOW}/runs?per_page=100" --jq '.workflow_runs[] | select(.created_at >= "'"$today"'T00:00:00Z" and (.id|tostring) != "'"$GITHUB_RUN_ID"'") | .id' | wc -l)
+          test "$count" -lt 2
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
       - run: python -m pip install --disable-pip-version-check -r .github/scripts/requirements-observation-planner-f9.txt
