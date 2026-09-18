@@ -1,7 +1,7 @@
 # BKL-032 — Validation and Acceptance Plan
 
 **Identifier:** `BKL-032-VAL-001`  
-**Status:** Proposed  
+**Status:** Accepted with Conditions
 **Release:** Release 2.x
 
 ## Scope
@@ -25,7 +25,7 @@ Validate the separate Session Readiness / Go-No-Go decision-support contract wit
 
 ## Required owner decisions
 
-Before implementation, the owner must approve the exact semantics of `GO`, `NO_GO`, `INDETERMINATE`, required checks and freshness thresholds. This plan records the gate; it does not assume those decisions.
+The owner approved the state semantics on 2026-09-18: `GO` requires complete, fresh, consistent and passing mandatory evidence; `NO_GO` requires valid current evidence with at least one blocking failure; `INDETERMINATE` is the fail-closed result for missing, stale, conflicting or unavailable required evidence. Required checks and freshness thresholds remain to be defined and approved before implementation.
 
 ## Quality gates
 

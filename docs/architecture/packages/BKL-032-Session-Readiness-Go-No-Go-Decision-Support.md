@@ -1,7 +1,7 @@
 # BKL-032 — Session Readiness / Go-No-Go Decision Support
 
 **Identifier:** `BKL-032-ARCH-001`  
-**Status:** Proposed  
+**Status:** Accepted with Conditions
 **Version:** 1.0  
 **Release:** Release 2.x
 
@@ -54,7 +54,7 @@ BKL-032 introduces a separate application-level readiness evaluator that consume
 - a bounded decision state: `GO`, `NO_GO` or `INDETERMINATE`;
 - explicit authority boundaries and fail-closed status.
 
-The exact semantics, thresholds and required checks are an owner decision gate and must be accepted before implementation. No value is inferred from BKL-031 ranking alone.
+The owner approved the exact state semantics on 2026-09-18: `GO` means all mandatory evidence is present, fresh, consistent and passing; `NO_GO` means valid current evidence contains at least one blocking failure; `INDETERMINATE` means required evidence is missing, stale, conflicting or unavailable and therefore fails closed. No value is inferred from BKL-031 ranking alone.
 
 ## 6. Architecture Model
 
@@ -128,7 +128,6 @@ The capability must log correlation ID, contract version, evidence locators, dec
 
 ## 13. Open Issues
 
-- owner decision on exact meaning of `GO`, `NO_GO` and `INDETERMINATE`;
 - owner decision on required readiness checks and freshness thresholds;
 - selection of the first public/read-only consumer surface;
 - whether any future runtime evidence is needed, subject to a separate authorization.
