@@ -325,7 +325,9 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
     except (KeyError, TypeError, ValueError) as exc:
         raise ContractError("FORECAST_TIMESTAMPS") from exc
     age = (retrieved - run).total_seconds() / 3600
-    if not 0 <= age <= 18 or generated != retrieved or abs(float(forecast.get("runAgeHoursAtRetrieval", -1)) - age) > 0.000001:
+    # Public timestamps are serialized to whole seconds; allow the resulting
+    # sub-second quantization while retaining the strict 18-hour freshness cap.
+    if not 0 <= age <= 18 or generated != retrieved or abs(float(forecast.get("runAgeHoursAtRetrieval", -1)) - age) > (1 / 3600):
         raise ContractError("FORECAST_FRESHNESS_EVIDENCE")
     if data.get("method", {}).get("ephemerisMode") != "EXPLICIT_MOSEPH_NO_FALLBACK":
         raise ContractError("EPHEMERIS_MODE")
