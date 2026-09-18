@@ -141,6 +141,6 @@ The first executable slice is now defined by the versioned readiness and live-te
 
 This slice does not claim live source transport, EAGLE execution, apparatus inspection or a public readiness consumer. Those remain separately gated.
 
-## 14. Future Evolution
+## 15. Future Evolution
 
 Future runtime or device-integrated readiness requires a new architecture and safety review. It cannot be inferred from this package and cannot transfer Safety Authority from local interlocks.
