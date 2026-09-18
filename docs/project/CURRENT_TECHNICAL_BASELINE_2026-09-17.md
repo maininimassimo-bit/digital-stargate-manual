@@ -34,3 +34,7 @@ PR #301 merged with governance, documentation validation, Word generation and Gi
 Il Planner resta advisory/read-only: nessun readiness/go-no-go, scheduler, selezione automatica, device command o Safety Authority. Nessun GRIB o coordinata protetta è pubblicato. Missing, stale, incompleto o incoerente evidence fallisce chiuso.
 
 BKL-032 closure evidence is recorded in `docs/project/BKL-032-CLOSURE-2026-09-18.md`. Its evaluator does not authorize live apparatus operation or replace local interlocks.
+
+## BKL-036 entry state
+
+BKL-036 è avviato come package **Proposed / Gate Open** per source discovery e semantic contract. Non introduce score numerico, soglie, pesi, RAG, Safety Score, remediation, runtime transport o comandi. Il prossimo gate è la review di source mapping, comparabilità, missingness, privacy e authority boundary.

@@ -54,15 +54,15 @@ Sono accettati, fra gli altri:
 
 BKL-037 rimane read-only/descriptive-only; unità non dimostrate, missing evidence e processing history PixInsight incompleta restano fail-closed.
 
-## 6. Current package — BKL-032
+## 6. Current package — BKL-036
 
 BKL-031 è **CLOSED / ACCEPTED / POST-MERGE VERIFIED** tramite PR #301 e merge `4a509d574a004fe7fb72bc6c678c9e7f71fe821f`. F3–F9 hanno chiuso il planner repeatable read-only: MeteoHub governato, astronomia della notte, suitability esplicita setup-target, ranking esplicabile e verifica della pagina pubblica di Manciano.
 
-La closure non trasferisce authority: BKL-032 resta responsabile di Session Readiness / Go-No-Go; gli interlock fisici locali restano Safety Authority; S10 resta `UNAVAILABLE`. Il Planner non abilita scheduler, selezione automatica, device command o Safety Authority.
+La closure BKL-032 non trasferisce authority: BKL-032 resta responsabile di Session Readiness / Go-No-Go; BKL-036 è avviato solo per source discovery e semantic contract; gli interlock fisici locali restano Safety Authority; S10 resta `UNAVAILABLE`. Il Planner non abilita scheduler, selezione automatica, device command o Safety Authority.
 
 ## 7. Roadmap
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 CLOSED / ACCEPTED -> BKL-032 CURRENT -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 CLOSED / ACCEPTED -> BKL-032 CLOSED / ACCEPTED -> BKL-036 CURRENT -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 AMP-002 resta planning authority per AP-007–AP-015, non live status register.
 
