@@ -1,11 +1,11 @@
 {
   "schemaVersion": "2.2",
-  "updatedAt": "2026-09-17",
+  "updatedAt": "2026-09-18",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 continuity: F3-C accepted and post-merge verified; F4-A/ADR-011 Accepted/Post-Merge Verified; F4-B v1.1 Accepted/Post-Merge Verified; F4-C evidence reconciliation Accepted/Post-Merge Verified; F4-D sanitized forecast projection/portal Accepted/Post-Merge Verified; F5 explainable ranking Accepted/Post-Merge Verified; F6 real-evidence setup-aware E2E Accepted/Post-Merge Verified; F7 fresh protected-site forecast supply Accepted/Post-Merge Verified; F8 current astronomy and explicit setup suitability Accepted/Post-Merge Verified via PR #279 merge 20669f7164460297d7318fc3b5874e4bc7f4bcde; F4-C provider budget 2/2 exhausted; F7 protected-site budget 1/1 exhausted; recurring provider traffic not authorized; BKL-031 remains In Progress; S10 production runtime unavailable; no readiness/go-no-go, scheduling, automatic target selection, commands or Safety Authority.",
-  "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F9 repeatable current-night planner closure",
-  "target": "Establish a repeatable current-night planner refresh/integration that combines governed fresh forecast supply, current astronomical geometry, explicit OTA/camera/filter suitability and explainable portal ranking. Preserve exact provider/model/run lineage, freshness/missingness, protected-site privacy, BKL-032 readiness separation and local physical-interlock Safety Authority. No recurring provider traffic, scheduler, automatic target selection, device command, readiness/go-no-go or Safety Authority is authorized by F8 acceptance.",
+  "projectStatus": "BKL-031 CLOSED / ACCEPTED / POST-MERGE VERIFIED: F3-C accepted and post-merge verified; F4-A/ADR-011 Accepted/Post-Merge Verified; F4-B v1.1, F4-C evidence reconciliation and F4-D sanitized forecast projection/portal Accepted/Post-Merge Verified; F6 real-evidence setup-aware E2E Accepted/Post-Merge Verified; F3-C through F8 and F9 repeatable current-night planner are complete. F9 uses MeteoHub ItaliaMeteo/ARPAE ICON-2I open data with zero-euro budget, maximum two acquisitions per UTC day, fail-closed validation, ephemeral GRIB handling with no retention, current astronomy, setup/target suitability, explainable ranking and sanitized read-only publication. Recurring provider traffic is not authorized outside the governed schedule; recurring provider traffic not authorized beyond the governed schedule. S10 production runtime unavailable; no readiness/go-no-go, scheduling, automatic target selection, commands or Safety Authority is authorized.",
+  "currentPackage": "BKL-032",
+  "nextMilestone": "BKL-032 Session Readiness / Go-No-Go Decision Support",
+  "target": "BKL-031 closure preserves the repeatable, bounded, read-only planner contract and hands off readiness/go-no-go questions to BKL-032 without inheriting authority. No recurring provider traffic, scheduler, automatic target selection, device command or Safety Authority is authorized.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -235,13 +235,14 @@
         {
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
-          "status": "active",
-          "note": "F3/F4/F5/F6/F7/F8 are Accepted/Post-Merge Verified. F8 PR #279 merged as 20669f7164460297d7318fc3b5874e4bc7f4bcde after 9/9 exact-head and 10/10 post-merge workflows, binding real F7 protected-site forecast to night-specific astronomy and explicit OTA/camera/filter suitability in a sanitized read-only planner. F8 is bounded to the 17\u201318 Sep 2026 night and does not prove recurring runtime. F9 repeatable current-night planner closure is next; recurring provider traffic is not authorized, BKL-031 remains In Progress, S10 unavailable, and no readiness/go-no-go, scheduler, automatic target selection, commands or Safety Authority is authorized."
+          "status": "completed",
+          "note": "F3/F4/F5/F6/F7/F8/F9 are Accepted/Post-Merge Verified. F9 PR #300 merged as dee6f117c964db92f152e3b7d924d7fedb66e093 and the public Manciano planner was verified directly. BKL-031 is closed as a bounded, advisory, read-only capability; S10 remains unavailable and no readiness/go-no-go, scheduler, automatic target selection, commands or Safety Authority is authorized."
         },
         {
           "id": "BKL-032",
           "title": "Session Readiness / Go-No-Go Decision Support",
-          "status": "planned"
+          "status": "active",
+          "note": "Handoff opened after BKL-031 closure; no implementation or Safety Authority is implied by the transition."
         },
         {
           "id": "BKL-036",
@@ -754,8 +755,16 @@
       "itemRef": "BKL-031",
       "title": "BKL-031 F8 current astronomy and setup suitability acceptance",
       "date": "2026-09-17",
-      "status": "active",
-      "description": "PR #279 passed 9/9 exact-head workflows on 3f05693482208df2b56b66dcb71162589880e72b, merged with expected-head control as 20669f7164460297d7318fc3b5874e4bc7f4bcde, and passed 10/10 applicable post-merge workflows. F8 is Accepted/Post-Merge Verified as bounded EVALUATION/NONE/READ_ONLY evidence for the 17\u201318 Sep 2026 night. F9 repeatable current-night planner closure is next; BKL-031 remains In Progress and recurring provider traffic is not authorized by F8 acceptance."
+      "status": "completed",
+      "description": "PR #279 passed 9/9 exact-head workflows on 3f05693482208df2b56b66dcb71162589880e72b, merged with expected-head control as 20669f7164460297d7318fc3b5874e4bc7f4bcde, and passed 10/10 applicable post-merge workflows. F8 is Accepted/Post-Merge Verified as bounded EVALUATION/NONE/READ_ONLY evidence for the 17\u201318 Sep 2026 night."
+    },
+    {
+      "id": "M-BKL031-F9-CLOSURE",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F9 repeatable current-night planner closure",
+      "date": "2026-09-18",
+      "status": "completed",
+      "description": "PR #300 merged as dee6f117c964db92f152e3b7d924d7fedb66e093. F9 governance, documentation validation, Word generation, all inherited BKL-031 governance workflows and GitHub Pages deployment completed successfully. The public Manciano planner was directly verified with the current-night astronomy, REAL FORECAST SAMPLE, FULL NIGHT FORECAST, setup selector, new/history filters, suitability evidence and explainable ranking. The corrected percentage rendering is live. BKL-031 is CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 remains unavailable and the capability remains read-only/advisory."
     }
   ]
 }
