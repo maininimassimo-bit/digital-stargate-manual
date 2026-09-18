@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "updatedAt": "2026-09-17",
+  "updatedAt": "2026-09-18",
   "generatedFrom": {
     "roadmap": "docs/data/roadmap.json",
     "discovery": "docs/architecture/validation/AP-013-Session-Discovery-Execution-Evidence.md",
@@ -15,12 +15,12 @@
   },
   "current": {
     "package": {
-      "id": "BKL-031",
-      "title": "Observation Planner intelligente",
+      "id": "BKL-032",
+      "title": "Session Readiness / Go-No-Go Decision Support",
       "status": "active"
     },
-    "nextMilestone": "BKL-031 F9 repeatable current-night planner closure",
-    "target": "Establish a repeatable current-night planner refresh/integration that combines governed fresh forecast supply, current astronomical geometry, explicit OTA/camera/filter suitability and explainable portal ranking. Preserve exact provider/model/run lineage, freshness/missingness, protected-site privacy, BKL-032 readiness separation and local physical-interlock Safety Authority. No recurring provider traffic, scheduler, automatic target selection, device command, readiness/go-no-go or Safety Authority is authorized by F8 acceptance."
+    "nextMilestone": "BKL-032 Session Readiness / Go-No-Go Decision Support",
+    "target": "BKL-031 closure preserves the repeatable, bounded, read-only planner contract and hands off readiness/go-no-go questions to BKL-032 without inheriting authority."
   },
   "architecture": {
     "ap013": {

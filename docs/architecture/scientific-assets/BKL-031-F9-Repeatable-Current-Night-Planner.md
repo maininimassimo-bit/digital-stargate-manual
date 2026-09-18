@@ -2,8 +2,8 @@
 
 | Field | Value |
 |---|---|
-| Status | **IMPLEMENTATION CANDIDATE** |
-| Date | 2026-09-17 |
+| Status | **ACCEPTED — CLOSED / POST-MERGE VERIFIED** |
+| Date | 2026-09-18 |
 | Governing decision | ADR-012 |
 | Environment / authority | `EVALUATION` / `NONE` / `READ_ONLY` |
 
@@ -31,4 +31,4 @@ The approved monetary budget is EUR 0. MeteoHub is a no-fee open-data path and s
 
 ## Acceptance boundary
 
-Implementation presence alone does not close BKL-031. Acceptance requires exact-head CI, ARB, Release Quality, expected-head merge, one successful governed refresh, portal verification and post-merge workflow evidence. Until then S10 remains `UNAVAILABLE`.
+Closure evidence is recorded in `docs/project/BKL-031-CLOSURE-2026-09-18.md`. PR #300 merged at `dee6f117c964db92f152e3b7d924d7fedb66e093`; the governed workflows, documentation validation, Word generation and GitHub Pages deployment passed, and the public Manciano planner was verified directly. S10 remains `UNAVAILABLE`; the capability remains advisory, read-only and outside readiness, scheduling, command and Safety Authority.

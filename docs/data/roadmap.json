@@ -1,19 +1,19 @@
 {
   "schemaVersion": "2.2",
-  "updatedAt": "2026-09-17",
+  "updatedAt": "2026-09-18",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "a62f862c6db0137b0b1da340d6d324041e2f804347a6da4d889764e2a3c1690e",
+  "sourceDigest": "393a6fcb4ec5709138b59691e75c65834d86585e27ea015f86655332d754f63d",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 continuity: F3-C accepted and post-merge verified; F4-A/ADR-011 Accepted/Post-Merge Verified; F4-B v1.1 Accepted/Post-Merge Verified; F4-C evidence reconciliation Accepted/Post-Merge Verified; F4-D sanitized forecast projection/portal Accepted/Post-Merge Verified; F5 explainable ranking Accepted/Post-Merge Verified; F6 real-evidence setup-aware E2E Accepted/Post-Merge Verified; F7 fresh protected-site forecast supply Accepted/Post-Merge Verified; F8 current astronomy and explicit setup suitability Accepted/Post-Merge Verified via PR #279 merge 20669f7164460297d7318fc3b5874e4bc7f4bcde; F4-C provider budget 2/2 exhausted; F7 protected-site budget 1/1 exhausted; recurring provider traffic not authorized; BKL-031 remains In Progress; S10 production runtime unavailable; no readiness/go-no-go, scheduling, automatic target selection, commands or Safety Authority.",
-  "currentPackage": "BKL-031",
-  "nextMilestone": "BKL-031 F9 repeatable current-night planner closure",
-  "target": "Establish a repeatable current-night planner refresh/integration that combines governed fresh forecast supply, current astronomical geometry, explicit OTA/camera/filter suitability and explainable portal ranking. Preserve exact provider/model/run lineage, freshness/missingness, protected-site privacy, BKL-032 readiness separation and local physical-interlock Safety Authority. No recurring provider traffic, scheduler, automatic target selection, device command, readiness/go-no-go or Safety Authority is authorized by F8 acceptance.",
+  "projectStatus": "BKL-031 CLOSED / ACCEPTED / POST-MERGE VERIFIED: F3-C through F8 and F9 repeatable current-night planner are complete. F9 uses MeteoHub ItaliaMeteo/ARPAE ICON-2I open data with zero-euro budget, maximum two acquisitions per UTC day, fail-closed validation, ephemeral GRIB handling with no retention, current astronomy, setup/target suitability, explainable ranking and sanitized read-only publication. S10 production runtime remains unavailable; no readiness/go-no-go, scheduler, automatic target selection, commands or Safety Authority is authorized.",
+  "currentPackage": "BKL-032",
+  "nextMilestone": "BKL-032 Session Readiness / Go-No-Go Decision Support",
+  "target": "BKL-031 closure preserves the repeatable, bounded, read-only planner contract and hands off readiness/go-no-go questions to BKL-032 without inheriting authority.",
   "summary": {
     "total": 44,
-    "completed": 32,
+    "completed": 33,
     "active": 4,
-    "planned": 8,
-    "percentCompleted": 73
+    "planned": 7,
+    "percentCompleted": 75
   },
   "evidenceSummary": {
     "sources": 8,
@@ -306,13 +306,14 @@
         {
           "id": "BKL-031",
           "title": "Observation Planner intelligente",
-          "status": "active",
-          "note": "F3/F4/F5/F6/F7/F8 are Accepted/Post-Merge Verified. F8 PR #279 merged as 20669f7164460297d7318fc3b5874e4bc7f4bcde after 9/9 exact-head and 10/10 post-merge workflows, binding real F7 protected-site forecast to night-specific astronomy and explicit OTA/camera/filter suitability in a sanitized read-only planner. F8 is bounded to the 17–18 Sep 2026 night and does not prove recurring runtime. F9 repeatable current-night planner closure is next; recurring provider traffic is not authorized, BKL-031 remains In Progress, S10 unavailable, and no readiness/go-no-go, scheduler, automatic target selection, commands or Safety Authority is authorized."
+          "status": "completed",
+          "note": "F3/F4/F5/F6/F7/F8/F9 are Accepted/Post-Merge Verified. F9 PR #300 merged as dee6f117c964db92f152e3b7d924d7fedb66e093 and the public Manciano planner was verified directly. BKL-031 is closed as a bounded, advisory, read-only capability; S10 remains unavailable and no readiness/go-no-go, scheduler, automatic target selection, commands or Safety Authority is authorized."
         },
         {
           "id": "BKL-032",
           "title": "Session Readiness / Go-No-Go Decision Support",
-          "status": "planned"
+          "status": "active",
+          "note": "Handoff opened after BKL-031 closure; no implementation or Safety Authority is implied by the transition."
         },
         {
           "id": "BKL-036",
@@ -539,7 +540,7 @@
       "date": "2026-09-13",
       "description": "F1 source discovery and semantic boundary accepted/post-merge verified via PR #183 and merge b14d9cdd991b5eef74dd9b972958e74c5903a32d; F2 promoted as current handoff only.",
       "image": null,
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL037",
@@ -555,7 +556,7 @@
       "title": "BKL-031 Observation Planner F2",
       "date": "2026-09-14",
       "description": "Machine-readable context/source contract and bounded fixtures accepted/post-merge verified via PR #188; closure reconciled by PR #189.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3",
@@ -563,7 +564,7 @@
       "title": "BKL-031 Observation Planner F3",
       "date": "2026-09-14",
       "description": "Source-neutral F3 Solution Architecture accepted with conditions; acceptance closure PR #192 merged as 21524c687a1fa6a9d840a3951c7ef4fe298f9c3c with 9/9 post-merge workflows.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A1",
@@ -571,7 +572,7 @@
       "title": "BKL-031 F3-A1 Site Authority Contract",
       "date": "2026-09-15",
       "description": "Documentation-only Site Authority Contract accepted with conditions and post-merge verified via PR #193; not implemented.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A1-ACCEPTANCE",
@@ -579,7 +580,7 @@
       "title": "BKL-031 F3-A1 Acceptance Reconciliation",
       "date": "2026-09-15",
       "description": "PR #194 Acceptance Reconciliation merged as 1fd771632239cdca38d7527c55b974d805ffd1b9 and post-merge verified 9/9; F3-A2 handoff selected separately.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A2-HANDOFF",
@@ -587,7 +588,7 @@
       "title": "BKL-031 F3-A2 Setup Authority Handoff",
       "date": "2026-09-15",
       "description": "Program Assessment/Handoff accepted with conditions and post-merge verified via PR #195 merge 8520f4272d31f5578769e8d12ac34101e1c044e8 with 9/9 workflows; detailed CurrentSetupAssignment contract next; not implemented.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-DSG-AEM-001",
@@ -595,7 +596,7 @@
       "title": "DSG-AEM-001 Continuous Execution Mandate",
       "date": "2026-09-15",
       "description": "Owner-authorized continuous execution mandate and conditioned ruleset exception recorded; exact-head CI, applicable review, rollback, safety, privacy and post-merge gates remain mandatory.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A2-CONTRACT",
@@ -603,7 +604,7 @@
       "title": "BKL-031 F3-A2 Detailed Setup Authority Contract",
       "date": "2026-09-15",
       "description": "Documentation-only CurrentSetupAssignment contract and validation plan prepared for review; ARB-195-MI01 addressed normatively; not implemented.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A2-ACCEPTANCE",
@@ -611,7 +612,7 @@
       "title": "BKL-031 F3-A2 Setup Authority Contract Acceptance",
       "date": "2026-09-15",
       "description": "PR #197 merged as 64ecee230431de95fd892849757649da87314e7e and post-merge verified 9/9. Contract accepted with conditions/not implemented; ARB-195-MI01 closed normatively and ARB-197-MI01 requires owner/architecture decision before materialization.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A2-D1",
@@ -619,7 +620,7 @@
       "title": "BKL-031 F3-A2-D1 GitHub Authority and First Baseline Draft",
       "date": "2026-09-15",
       "description": "PR #199 merged as 4e8802c80359efce28d8d75521a1b9cc4cb44b05 and post-merge verified 9/9. ADR-009 authority model integrated; the protected setup payload entered DRAFT pending exact-digest human approval.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A2-D2",
@@ -627,7 +628,7 @@
       "title": "BKL-031 F3-A2-D2 Exact Setup Baseline Approval",
       "date": "2026-09-15",
       "description": "PR #202 merged as bb11f25192200655427411a46a2e18560a5d9bec and is post-merge verified. The owner-approved setup baseline remains distinct from Site Authority and CurrentSetupAssignment.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A1-M2",
@@ -635,7 +636,7 @@
       "title": "BKL-031 F3-A1-M2 Protected Site Authority Draft",
       "date": "2026-09-15",
       "description": "PR #203 merged as d5750ce160c5f80d20a72bc35dee321200647d03 and is post-merge verified 10/10. Protected DRAFT, source decision, schemas, validator, public-boundary enforcement and 51 executable cases are integrated.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A1-M3",
@@ -643,7 +644,7 @@
       "title": "BKL-031 F3-A1-M3 Exact-Digest Owner Approval",
       "date": "2026-09-15",
       "description": "The Repository Owner explicitly approved the exact protected Site Authority digest and unbounded validity while prohibiting publication of exact site data.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A1-M4",
@@ -651,7 +652,7 @@
       "title": "BKL-031 F3-A1-M4 Site Authority Lifecycle Promotion",
       "date": "2026-09-15",
       "description": "PR #204 integrated the protected approval receipt and unchanged APPROVED envelope with 8/8 exact-head and 10/10 post-merge workflows; PR #205 reconciled final acceptance with 9/9 post-merge workflows.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A2-D3",
@@ -659,7 +660,7 @@
       "title": "BKL-031 F3-A2-D3 CurrentSetupAssignment Owner Decisions",
       "date": "2026-09-15",
       "description": "Owner selected the protected GitHub registry, established assignment owner/custodian/Approval Authority separation and chose half-open unbounded validity from the approved setup-baseline effective start. Protected decision evidence only; no assignment approval.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A2-D4",
@@ -667,7 +668,7 @@
       "title": "BKL-031 F3-A2-D4 CurrentSetupAssignment DRAFT Handoff",
       "date": "2026-09-15",
       "description": "Solution Architect handoff for a protected resolver-ineligible DRAFT after D3 integration; schema, canonicalization, validator and tests required; approval and runtime remain separate.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A2-D4-MATERIALIZATION",
@@ -675,7 +676,7 @@
       "title": "BKL-031 F3-A2-D4 Protected Assignment DRAFT",
       "date": "2026-09-15",
       "description": "PR #207 merged as e99e6b5ff5ea7247ee447a1c6c62dcaa479dee1b and passed 7/7 post-merge workflows. Protected resolver-ineligible DRAFT, closed schemas, validator, privacy gate and 57/57 tests are accepted; human exact-digest approval remains separate.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A2-D4-ACCEPTANCE",
@@ -683,7 +684,7 @@
       "title": "BKL-031 F3-A2-D4 Acceptance Reconciliation",
       "date": "2026-09-15",
       "description": "PR #207 exact-head, AI-assisted review, expected-head merge and 7/7 post-merge evidence reconciled. Current state stops at mandatory human exact-digest approval.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A2-D5-APPROVAL",
@@ -691,7 +692,7 @@
       "title": "BKL-031 F3-A2-D5 CurrentSetupAssignment Approval and Promotion",
       "date": "2026-09-15",
       "description": "PR #209 merged as bc4307c2042a45985622044e11631421de5b2c3d after exact-head CI and process-separated AI-assisted review. Protected receipt and unchanged APPROVED envelope are integrated; 65/65 tests and 7/7 post-merge workflows passed.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A2-D5-ACCEPTANCE",
@@ -699,7 +700,7 @@
       "title": "BKL-031 F3-A2-D5 Acceptance Reconciliation",
       "date": "2026-09-15",
       "description": "D5 is ACCEPTED / POST-MERGE VERIFIED. Repository authority is APPROVED/AVAILABLE for authorized validated input; runtime S09 remains UNAVAILABLE_CURRENT and the adapter remains unimplemented.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A3-HANDOFF",
@@ -707,7 +708,7 @@
       "title": "BKL-031 F3-A3 Method ADR and Validation Spike Handoff",
       "date": "2026-09-15",
       "description": "Program Architect selected the documentation-only F3-A3 handoff after F3-A1/A2 repository-authority completion. The future Solution Architect package must compare candidates and prepare owner gates F3-OD04–F3-OD10; no provider, dependency, data/kernel, external call or runtime is authorized.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A3-DECISION-PREPARATION",
@@ -715,7 +716,7 @@
       "title": "BKL-031 F3-A3 Decision Preparation",
       "date": "2026-09-15",
       "description": "Solution Architecture, proposed ADR-010 and validation-spike plan prepared for review. Conditional recommendation favors a local primary and restricted reference path, but all F3-OD04–F3-OD10 owner decisions remain open; no execution or runtime is authorized.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A3-CONTAINER-BUILD-EVIDENCE",
@@ -723,7 +724,7 @@
       "title": "BKL-031 F3-A3 Reproducible Offline Container Build Evidence",
       "date": "2026-09-16",
       "description": "Exact dependency and IERS artifacts were acquired ephemerally with SHA-256 verification. Two isolated no-cache BuildKit builds produced identical unpublished image config ID sha256:411df908f3938e0ff21b47986d4d5d9fcd91e1d0da3b64ffb00618aa48bbd5d0; network-disabled preflight and IERS coverage passed. No image push, upload, platform plan/apply or scientific execution occurred.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A3-AUTHENTICATED-PLAN-EVIDENCE",
@@ -731,7 +732,7 @@
       "title": "BKL-031 F3-A3 Authenticated Exact-Head Platform Plan Evidence",
       "date": "2026-09-16",
       "description": "Main-only WIF run 35131365596 reproduced the unpublished OCI manifest digest and verified an authenticated saved plan with exactly 5 additions, 0 changes and 0 destroys. Only an empty Terraform backend state persists. No image push, repository/platform apply, artifact upload or scientific execution occurred.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A3-REGISTRY-FOUNDATION-EVIDENCE",
@@ -739,7 +740,7 @@
       "title": "BKL-031 F3-A3 Artifact Registry Foundation Evidence",
       "date": "2026-09-16",
       "description": "Main-only WIF run 35134193946 applied the exact one-resource registry plan and passed immediate zero drift. Fail-closed incident RF-I01 stopped final evidence on a provider-managed label; corrected read-only run 35135376900 verified the exact repository, one-resource state, zero drift and zero images. Image push and remaining platform apply did not occur.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A3-OCI-PUBLICATION-FOUR-RESOURCE-PLAN",
@@ -747,7 +748,7 @@
       "title": "BKL-031 F3-A3 Exact OCI Publication and Four-Resource Plan Evidence",
       "date": "2026-09-16",
       "description": "Main-only WIF run 35138527237 published and post-verified the exact OCI manifest as the sole registry image. Run 35138798214 resolved that digest and verified a saved platform plan with exactly 4 additions, 0 changes and 0 destroys. Platform apply, artifact upload and scientific execution did not occur.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A3-PLATFORM-APPLY-EVIDENCE",
@@ -755,7 +756,7 @@
       "title": "BKL-031 F3-A3 Exact Four-Resource Platform Apply Evidence",
       "date": "2026-09-16",
       "description": "Main-only WIF run 35141947085 applied only the verified saved plan with exactly 4 additions, 0 changes and 0 destroys. The exact private network, subnet, digest-pinned Cloud Run Job and deployer invoker binding persist with zero immediate drift. Job execution count is zero and the approved kernel object remains absent; artifact upload and scientific execution did not occur.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A3-KERNEL-PUBLICATION-EVIDENCE",
@@ -763,7 +764,7 @@
       "title": "BKL-031 F3-A3 Exact Private Kernel Publication Evidence",
       "date": "2026-09-16",
       "description": "Main-only WIF run 35146023621 made exactly one request to the approved NAIF source and one generation-zero upload to the private content-addressed URI. GCS generation 1789590110146663 passed full read-back with exact size, DAF/SPK, SHA-256 and MD5; the prefix contains one object and Cloud Run execution count remains zero. Scientific execution did not occur.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-A3-SCIENTIFIC-ACCEPTANCE",
@@ -771,7 +772,7 @@
       "title": "BKL-031 F3-A3 Scientific Campaign Acceptance",
       "date": "2026-09-17",
       "description": "Exact-head run 35189574972 completed execution dsg-f3-a3-spike-g4x8g successfully: 8 synthetic vectors, 17/17 metrics, repeatability and transit pass; one create-only private evidence object; zero external-reference calls; no protected-site or runtime activation. ADR-010 accepted for repository method authority; F3-B is next.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-B-ACCEPTANCE",
@@ -779,7 +780,7 @@
       "title": "BKL-031 F3-B Contracts and Validator Acceptance",
       "date": "2026-09-17",
       "description": "PR #259 passed 15/15 exact-head checks on 858a7094d2ae01329617c2c733075f6b87d44113, merged with expected-head control as 8c3b7b8424a15b4288c79f773b9f0fc3f7cd5c5f, and passed all 11 applicable post-merge workflows. F3-B is Accepted/Post-Merge Verified; F3-C is next and S10 remains unavailable.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-C-IMPLEMENTATION",
@@ -787,7 +788,7 @@
       "title": "BKL-031 F3-C Bounded Adapter and Portal Candidate",
       "date": "2026-09-17",
       "description": "Deterministic bounded adapter, closed sanitized TEST/NONE projection, browser SHA-256 validation and fail-closed Observation Planner portal page implemented with 35/35 local tests. Exact-head acceptance and deployed-route verification are pending; S10 remains unavailable.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F3-C-ACCEPTANCE",
@@ -795,7 +796,7 @@
       "title": "BKL-031 F3-C Bounded Integration Acceptance",
       "date": "2026-09-17",
       "description": "PR #261 passed 16/16 exact-head checks on 5d6b7127475c9378e19b1bfc5e65f6ad11f597f1, merged with expected-head control as fba1287efea0d1f36b147bc42a4fec5498990756, and passed all 12 applicable post-merge workflows. The public Observation Planner route and projection digest were directly verified; F3-C is Accepted/Post-Merge Verified and S10 remains unavailable.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F4-A-SOURCE-CONTRACT",
@@ -803,7 +804,7 @@
       "title": "BKL-031 F4-A Forecast Source Contract",
       "date": "2026-09-17",
       "description": "Repository-only source discovery selected explicit ItaliaMeteo/ARPAE ICON-2I single-run lineage through Open-Meteo, defined the normative contract and 24 fail-closed cases, and generated zero provider traffic or protected-site use.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F4-A-ACCEPTANCE",
@@ -811,7 +812,7 @@
       "title": "BKL-031 F4-A Forecast Source Contract Acceptance",
       "date": "2026-09-17",
       "description": "PR #263 passed 16/16 exact-head checks on d2ecedb2c141eb0a17f5a1d659748488802d4200, merged with expected-head control as 02a829f21bf76a0dc5d9ef29998ca5690d71395c, and passed all 13 applicable post-merge workflows. ADR-011 and F4-A are Accepted/Post-Merge Verified; F4-B is promoted with zero provider traffic and S10 unavailable.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F4-B-CONTRACTS",
@@ -819,7 +820,7 @@
       "title": "BKL-031 F4-B Forecast Contracts v1.1 Correction Candidate",
       "date": "2026-09-17",
       "description": "Three closed JSON Schemas, a deterministic four-instant synthetic TEST/NONE fixture and validator execute all 24 F4-A negative cases. v1.1 corrects the delivery host to Single Runs, fixes ten supported ICON-2I variables and records visibility as unavailable. Network policy remains DENY_F4B with zero allowed requests.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F4-B-ACCEPTANCE",
@@ -827,7 +828,7 @@
       "title": "BKL-031 F4-B Forecast Contracts Acceptance",
       "date": "2026-09-17",
       "description": "PR #265 passed 18/18 exact-head checks on ba8f63a9d923f1daf2aca7c7c2173aacf6c0e051, merged as b3a136efc2bd8b7afd16a817a22cfaa9211f069e and passed 14/14 post-merge workflows. F4-B is Accepted/Post-Merge Verified with zero provider traffic; F4-C acquisition-gate preparation is promoted.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F4-C-FIRST-ATTEMPT-FAILED",
@@ -835,7 +836,7 @@
       "title": "BKL-031 F4-C First Acquisition Attempt Failed",
       "date": "2026-09-17",
       "description": "After exact-head merge and 15/15 successful post-merge workflows, run 35201479378 issued the single authorized generalized request to the incorrect Previous Runs host and received HTTP 400. The request is consumed; no artifact, forecast evidence, protected-site use, projection or runtime authority resulted.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F4-C-ACQUISITION-GATE",
@@ -843,7 +844,7 @@
       "title": "BKL-031 F4-C Generalized Acquisition Gate Executed",
       "date": "2026-09-17",
       "description": "Two of two authorized generalized requests are consumed. Run 35214129960 returned HTTP 200 raw evidence at SHA-256 e51c6935f8e04bcce38983bc03147f4f897a833f90feb6271b2f510ee6eec102; online normalization failed closed on one null initialization-time precipitation value. The acquisition workflow and script are removed, preventing a third request.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F4-C-EVIDENCE-RECONCILIATION",
@@ -851,7 +852,7 @@
       "title": "BKL-031 F4-C Acquisition Evidence Reconciliation Acceptance",
       "date": "2026-09-17",
       "description": "Artifact 10494298154 preserves the 4,723-byte Single Runs response. Offline deterministic reconciliation excludes exactly the incomplete 00:00 precipitation instant, accepts a contiguous 71-hour suffix, imputes zero values and produces normalized evidence digest 350a7b9ae8b2de308ba55a7105e56bb4de5040572370ab2715c0fa70088af2f5. PR #270 merged as 79fe51e71782fff6c952e9291fe8ca567da74e98 and completed 15/15 post-merge workflows; no further provider request is authorized.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F4-D-ACCEPTANCE",
@@ -859,7 +860,7 @@
       "title": "BKL-031 F4-D Sanitized Forecast Projection Acceptance",
       "date": "2026-09-17",
       "description": "PR #271 passed exact-head governance on f6aa9c5dffbc172d554872f9072029f56d1195ec, merged with expected-head control as 8f948ba9593dc2bfde291d2658fe92eafd4cce28 and passed all 7 applicable post-merge workflows. The metadata-only EVALUATION/NONE/READ_ONLY forecast projection and separate portal consumer are Accepted/Post-Merge Verified; no provider request, protected coordinates, forecast value arrays, ranking, readiness, commands or Safety Authority were introduced. F5 is next.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F5-ACCEPTANCE",
@@ -867,7 +868,7 @@
       "title": "BKL-031 F5 Explainable Ranking Acceptance",
       "date": "2026-09-17",
       "description": "PR #273 passed exact-head governance on dfda963e7e9d088282516200a6bd8bb64dd0dd1d, merged with expected-head control as 777924e2638430f15bf717fa33dd71057751625a and passed all 7 applicable post-merge workflows. The deterministic EVALUATION/NONE/READ_ONLY ranking method, synthetic validation fixture and read-only consumer are Accepted/Post-Merge Verified. Provider budget remains 2/2 exhausted; F6 real-evidence setup-aware E2E planner integration is next and BKL-031 capability closure remains deferred pending a separately governed forecast-refresh/runtime gate.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F6-ACCEPTANCE",
@@ -875,7 +876,7 @@
       "title": "BKL-031 F6 Real-Evidence Setup-Aware E2E Acceptance",
       "date": "2026-09-17",
       "description": "PR #275 passed 13/13 exact-head workflows on ad7cad8267eaee1e27e7b1373d34f422efd8f088, merged with expected-head control as f75303c9575c77f23de777d55c6067bf08bc99f1 and passed 14/14 applicable post-merge workflows. The bounded EVALUATION/NONE/READ_ONLY F6 integration proof is Accepted/Post-Merge Verified with zero provider requests. F7 fresh forecast supply and runtime boundary is next. BKL-031 remains In Progress pending fresh forecast supply, current astronomical windows, explicit OTA/camera/filter suitability and final read-only ranking proof.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F7-ACCEPTANCE",
@@ -883,15 +884,23 @@
       "title": "BKL-031 F7 protected-site forecast acceptance",
       "date": "2026-09-17",
       "description": "F7 accepted/post-merge verified via PR #277 and merge 59a1d690406d733b6e61e64220f84cef9b6fb1a2; real protected-site forecast delivered through sanitized read-only projection; one-shot budget 1/1 exhausted; recurring runtime not activated.",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "M-BKL031-F8-ACCEPTANCE",
       "itemRef": "BKL-031",
       "title": "BKL-031 F8 current astronomy and setup suitability acceptance",
       "date": "2026-09-17",
-      "status": "active",
-      "description": "PR #279 passed 9/9 exact-head workflows on 3f05693482208df2b56b66dcb71162589880e72b, merged with expected-head control as 20669f7164460297d7318fc3b5874e4bc7f4bcde, and passed 10/10 applicable post-merge workflows. F8 is Accepted/Post-Merge Verified as bounded EVALUATION/NONE/READ_ONLY evidence for the 17–18 Sep 2026 night. F9 repeatable current-night planner closure is next; BKL-031 remains In Progress and recurring provider traffic is not authorized by F8 acceptance."
+      "status": "completed",
+      "description": "PR #279 passed 9/9 exact-head workflows on 3f05693482208df2b56b66dcb71162589880e72b, merged with expected-head control as 20669f7164460297d7318fc3b5874e4bc7f4bcde, and passed 10/10 applicable post-merge workflows. F8 is Accepted/Post-Merge Verified as bounded EVALUATION/NONE/READ_ONLY evidence for the 17–18 Sep 2026 night."
+    },
+    {
+      "id": "M-BKL031-F9-CLOSURE",
+      "itemRef": "BKL-031",
+      "title": "BKL-031 F9 repeatable current-night planner closure",
+      "date": "2026-09-18",
+      "status": "completed",
+      "description": "PR #300 merged as dee6f117c964db92f152e3b7d924d7fedb66e093. F9 governance, documentation validation, Word generation, all inherited BKL-031 governance workflows and GitHub Pages deployment completed successfully. The public Manciano planner was directly verified with the current-night astronomy, REAL FORECAST SAMPLE, FULL NIGHT FORECAST, setup selector, new/history filters, suitability evidence and explainable ranking. The corrected percentage rendering is live. BKL-031 is CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 remains unavailable and the capability remains read-only/advisory."
     }
   ]
 }
