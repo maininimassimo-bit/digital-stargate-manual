@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.36 |
+| Versione | 5.37 |
 | Stato | Active |
 | Data baseline | 17/09/2026 |
 
@@ -50,7 +50,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-029 | P1 | SQM Sky Quality Telemetry & Scientific History | Done | Source discovery su CloudWatcher/Lunatico/ASCOM | SQM realtime `mag/arcsec²` e statistiche SQM storicizzate per sessione con provenance | PR #68; merge `0ebf04ec0ba1c4a1236f2a52e8a7e44abe0c6441` |
 | BKL-030 | P1 | EAGLE Health & Reliability Telemetry | Done | BKL-029; Windows read-only collectors | Health EAGLE spiegabile con collector, history, portal e hosted read-only transport | PR #89 merge `a15d85b27ebfbe8a6488330920d10dda8db79a78` |
 | BKL-031 | P1 | Observation Planner intelligente | Done | BKL-035; BKL-040; BKL-037; F3-C Accepted/Post-Merge Verified; F4-A/ADR-011; F4-B v1.1 Accepted/Post-Merge Verified; F4-C evidence reconciliation Accepted/Post-Merge Verified; F4-D metadata-only projection and portal Accepted/Post-Merge Verified; F5/F6/F7/F8/F9 Accepted/Post-Merge Verified; provider budget 2/2 exhausted; zero-euro MeteoHub operating model under ADR-012; repository public; `F9_ZERO_EUR_GUARD=CONFIRMED`; S10 unavailable | Repeatable, fail-closed, read-only current-night planner for Manciano with maximum two acquisitions/day, ephemeral GRIB/no retention, current astronomy, setup/target suitability, explainable ranking and forecast windows. No readiness, go/no-go, scheduler, commands or Safety Authority. | PR #301; merge `4a509d574a004fe7fb72bc6c678c9e7f71fe821f`; closure `docs/project/BKL-031-CLOSURE-2026-09-18.md` |
-| BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | In Progress | BKL-029–031, BKL-036 | Separate, explainable, fail-closed readiness record; no Safety Authority | Architecture package proposed; owner decision gate remains for states/checks/thresholds; implementation not started |
+| BKL-032 | P2 | Session Readiness / Go-No-Go Decision Support | Done | BKL-029–031, BKL-036 | Separate, explainable, fail-closed readiness record; no Safety Authority | Closed / Accepted / Post-Merge Verified via PR #304, merge `7e38453b2e499fe577efa0231aeb7bb06329016e`; deterministic evaluator, contracts, thresholds and bounded tests accepted; live source/transport and public runtime GO remain separately gated; closure `docs/project/BKL-032-CLOSURE-2026-09-18.md` |
 | BKL-033 | P2 | Observatory Digital Twin | Planned | BKL-015/BKL-044, realtime telemetry | Modello visuale asset/dipendenze/stato | Functional Roadmap Expansion |
 | BKL-034 | P2 | Scientific Image Gallery evoluta | Planned | BKL-035, BKL-045 | Immagini collegate a lineage scientifica e processing | Functional Roadmap Expansion |
 | BKL-035 | P2 | Target Knowledge Base | Done | BKL-015/BKL-044 | Vista target con sessioni, SQM, setup, immagini e workflow | F1-F4 CLOSED/ACCEPTED; PR #112 merge `1eef3e6747d975e40d592933ece655014b808f05`; closure `docs/project/BKL-035-CLOSURE-2026-09-07.md` |

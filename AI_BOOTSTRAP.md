@@ -4,7 +4,7 @@
 |---|---|
 | Versione | 7.4 |
 | Baseline | 18/09/2026 |
-| Stato | Current root bootstrap — BKL-031 Closed/Accepted/Post-Merge Verified; BKL-032 next; S10 unavailable |
+| Stato | Current root bootstrap — BKL-031 and BKL-032 Closed/Accepted/Post-Merge Verified; BKL-036 next; S10 unavailable |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -37,12 +37,13 @@ Gli handover e le baseline precedenti restano snapshot storici.
 - F8 implementation: PR #279, reviewed head `3f05693482208df2b56b66dcb71162589880e72b`, merge `20669f7164460297d7318fc3b5874e4bc7f4bcde`, 9/9 exact-head e 10/10 post-merge SUCCESS.
 - F8 acceptance reconciliation: PR #280, reviewed head `bca410dcde804483052beded16c29a9f58f43872`, merge `84d1b889a6c739c9e5d053e1f073fe1d87b8c5d4`, 17/17 exact-head e 19/19 post-merge SUCCESS; GitHub Pages build/integrity/deploy SUCCESS.
 - F8 evidence: notte bounded 17–18/09/2026, forecast reale F7 site-specific, astronomia night-specific, suitability OTA/camera/filter esplicita, ranking/finestre advisory read-only.
-- BKL-032 Session Readiness / Go-No-Go Decision Support è il package corrente; non eredita authority dal Planner.
+- BKL-032 Session Readiness / Go-No-Go Decision Support è Closed / Accepted / Post-Merge Verified via PR #304; il suo evaluator resta read-only e il runtime source/transport è separatamente gated.
+- BKL-036 Observatory Health Score è il package successivo; non eredita Safety Authority da BKL-032.
 - S10 production runtime: `UNAVAILABLE`.
 
 ## 4. Boundary non negoziabili
 - local physical interlocks = Safety Authority;
-- BKL-032 = Session Readiness / Go-No-Go authority;
+- BKL-032 = Session Readiness / Go-No-Go decision-support authority;
 - BKL-031 = advisory/read-only, nessuna readiness/safety/action authority;
 - nessun scheduler, automatic target selection o device command;
 - coordinate sito protette mai in projection pubbliche;
@@ -60,4 +61,4 @@ Gli handover e le baseline precedenti restano snapshot storici.
 Exact-head CI → ARB → Release Quality sullo stesso SHA → expected-head merge → post-merge verification → acceptance reconciliation. Nessuna acceptance o runtime claim può precedere l'evidence reale.
 
 ## 7. Punto di ripresa
-Riprendere da **BKL-032 Session Readiness / Go-No-Go Decision Support** usando `docs/project/HANDOVER_2026-09-17.md` come handover compatto e `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-17.md` come baseline tecnica corrente.
+Riprendere da **BKL-036 Observatory Health Score** usando `docs/project/HANDOVER_2026-09-17.md` come handover compatto e `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-17.md` come baseline tecnica corrente.

@@ -6,8 +6,9 @@
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | BKL-031 closure merge | `4a509d574a004fe7fb72bc6c678c9e7f71fe821f` |
 | Closure record | `docs/project/BKL-031-CLOSURE-2026-09-18.md` |
-| Current package | BKL-032 |
-| Current next gate | BKL-032 Session Readiness / Go-No-Go Decision Support |
+| BKL-032 closure | PR #304; merge `7e38453b2e499fe577efa0231aeb7bb06329016e` |
+| Current package | BKL-036 |
+| Current next gate | BKL-036 Observatory Health Score |
 
 ## Observation Planner baseline
 
@@ -20,7 +21,7 @@ BKL-031 F3–F9 è Closed / Accepted / Post-Merge Verified. F9 chiude la pipelin
 - Ephemeris/lunar method: ADR-010 accepted repository authority.
 - Forecast source/run lineage: ADR-011 accepted repository authority.
 - F9 operating model: ADR-012, EUR 0, massimo due acquisizioni UTC/giorno, fail-closed e GRIB effimeri.
-- Session Readiness / Go-No-Go: BKL-032, non BKL-031.
+- Session Readiness / Go-No-Go: BKL-032, closed as deterministic read-only decision support; live source/transport remains separately gated.
 - Safety Authority: local physical interlocks.
 - S10 production runtime: `UNAVAILABLE`.
 
@@ -31,3 +32,5 @@ PR #301 merged with governance, documentation validation, Word generation and Gi
 ## Maintained limits
 
 Il Planner resta advisory/read-only: nessun readiness/go-no-go, scheduler, selezione automatica, device command o Safety Authority. Nessun GRIB o coordinata protetta è pubblicato. Missing, stale, incompleto o incoerente evidence fallisce chiuso.
+
+BKL-032 closure evidence is recorded in `docs/project/BKL-032-CLOSURE-2026-09-18.md`. Its evaluator does not authorize live apparatus operation or replace local interlocks.

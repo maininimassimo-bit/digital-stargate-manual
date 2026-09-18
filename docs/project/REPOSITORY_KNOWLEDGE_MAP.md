@@ -7,7 +7,7 @@
 | Stato | Active |
 | Data | 17/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | BKL-031 Closed / Accepted / Post-Merge Verified; BKL-032 Session Readiness / Go-No-Go Decision Support handoff active; S10 production runtime `UNAVAILABLE` |
+| Current governed package | BKL-031 and BKL-032 Closed / Accepted / Post-Merge Verified; BKL-036 next; S10 production runtime `UNAVAILABLE` |
 
 ## 1. Scopo
 
@@ -51,19 +51,23 @@ BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministic
 
 BKL-031 è **CLOSED / ACCEPTED / POST-MERGE VERIFIED** tramite PR #301 e merge `4a509d574a004fe7fb72bc6c678c9e7f71fe821f`. F1/F2, F3-A1/A2/A3/B/C, F4-A/B/C/D, F5/F6/F7/F8 e F9 sono accettati; F3-C are Accepted / Post-Merge Verified; F4-A and ADR-011 are Accepted / Post-Merge Verified; F8 is Accepted / Post-Merge Verified. F9 ha verificato il refresh repeatable MeteoHub, astronomia della notte corrente, suitability setup/target, ranking esplicabile e pagina pubblica di Manciano. Budget provider storico `2/2_EXHAUSTED`; budget sito protetto `1/1_EXHAUSTED`; Recurring provider traffic is not authorized. Il budget monetario resta €0, con massimo due acquisizioni al giorno, fail-closed e GRIB effimeri senza retention. BKL-032 conserva la readiness/go-no-go authority; local physical interlocks remain Safety Authority; S10 production runtime is `UNAVAILABLE`; il planner resta read-only/advisory senza scheduler, selezione automatica, device command o Safety Authority.
 
-## 7. Roadmap sequence
+## 7. BKL-032 closed baseline
+
+BKL-032 is closed through PR #304 merge `7e38453b2e499fe577efa0231aeb7bb06329016e`. The accepted capability is a deterministic, read-only evaluator with versioned contracts, owner-approved thresholds and fail-closed missingness. Live source/transport acceptance and public runtime GO remain outside the closure.
+
+## 8. Roadmap sequence
 
 `... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 CLOSED / ACCEPTED -> BKL-032 -> BKL-036 -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
-## 8. CI/CD e publishing
+## 9. CI/CD e publishing
 
 Workflow e deployment sono evidence solo per l’exact SHA verificato. Generated projection non è authority.
 
-## 9. Safety boundary
+## 10. Safety boundary
 
 Nessun consumer analytics, comparison, scoring, planner o AI può comandare apparati, autorizzare remediation, produrre readiness/go-no-go come authority o sostituire gli interlock fisici. Le coordinate esatte del sito restano protette e non devono essere pubblicate nelle projection.
 
-## 10. Registro revisioni
+## 11. Registro revisioni
 
 | Versione | Data | Descrizione |
 |---|---|---|
