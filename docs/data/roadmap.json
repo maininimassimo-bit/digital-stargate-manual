@@ -2,7 +2,7 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-18",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "298b67137233f17b39a2b45cb00e559f37a333892e05d52373490862295df516",
+  "sourceDigest": "721484a45cdbfbb47bdbe28bdc2dbda3ec94bfc3856ee55b2120874a400e4da5",
   "authority": "DSG-RGM-001",
   "projectStatus": "BKL-031 CLOSED / ACCEPTED / POST-MERGE VERIFIED: F3-C accepted and post-merge verified; F4-A/ADR-011 Accepted/Post-Merge Verified; F4-B v1.1, F4-C evidence reconciliation and F4-D sanitized forecast projection/portal Accepted/Post-Merge Verified; F6 real-evidence setup-aware E2E Accepted/Post-Merge Verified; F3-C through F8 and F9 repeatable current-night planner are complete. F9 uses MeteoHub ItaliaMeteo/ARPAE ICON-2I open data with zero-euro budget, maximum two acquisitions per UTC day, fail-closed validation, ephemeral GRIB handling with no retention, current astronomy, setup/target suitability, explainable ranking and sanitized read-only publication. Recurring provider traffic is not authorized outside the governed schedule; recurring provider traffic not authorized beyond the governed schedule. S10 production runtime unavailable; no readiness/go-no-go, scheduling, automatic target selection, commands or Safety Authority is authorized.",
   "currentPackage": "BKL-032",
@@ -313,7 +313,7 @@
           "id": "BKL-032",
           "title": "Session Readiness / Go-No-Go Decision Support",
           "status": "active",
-          "note": "Architecture package BKL-032-ARCH-001 and validation plan BKL-032-VAL-001 define a separate fail-closed readiness record. Owner approved the exact GO/NO_GO/INDETERMINATE semantics on 2026-09-18; required checks and freshness thresholds remain open before implementation, and Safety Authority is not implied."
+          "note": "Architecture package BKL-032-ARCH-001 and validation plan BKL-032-VAL-001 define a separate fail-closed readiness record. Owner approved GO/NO_GO/INDETERMINATE semantics, six-hour freshness, mandatory forecast/astronomy/setup evidence and read-only live telemetry domains on 2026-09-18. Source mapping and documented local wind/gust limit references remain open; Safety Authority is not implied."
         },
         {
           "id": "BKL-036",

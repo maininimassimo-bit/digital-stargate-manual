@@ -18,6 +18,10 @@ Validate the separate Session Readiness / Go-No-Go decision-support contract wit
 | Stale evidence | Fail-closed result with freshness evidence |
 | Conflict | Fail-closed result with conflict reason |
 | Provenance | Source, run, timestamp, semantic type and correlation ID preserved |
+| Live telemetry | Weather rain/wind/gust/cloudiness/humidity-dew point, dome, mount, camera, power, network and EAGLE health are present and current |
+| Freshness | Forecast and readiness evidence no older than six hours |
+| Weather blocking | Rain > 0 or wind/gust beyond documented local limits produces `NO_GO` |
+| Telemetry missingness | Any mandatory domain missing or stale produces `INDETERMINATE` and prevents `GO` |
 | Privacy | Protected coordinates and exact site data absent from public projection |
 | Boundary | No scheduler, command, automatic target selection or Safety Authority |
 | Architecture | Domain/application/infrastructure dependency rules pass |
@@ -25,7 +29,9 @@ Validate the separate Session Readiness / Go-No-Go decision-support contract wit
 
 ## Required owner decisions
 
-The owner approved the state semantics on 2026-09-18: `GO` requires complete, fresh, consistent and passing mandatory evidence; `NO_GO` requires valid current evidence with at least one blocking failure; `INDETERMINATE` is the fail-closed result for missing, stale, conflicting or unavailable required evidence. Required checks and freshness thresholds remain to be defined and approved before implementation.
+The owner approved the state semantics and mandatory domains on 2026-09-18. `GO` requires forecast, current astronomy, setup compatibility and all mandatory live telemetry to be complete, fresh, consistent and passing. `NO_GO` applies to rain > 0 or wind/gust beyond documented local limits. `INDETERMINATE` applies to missing or stale mandatory domains. Forecast/readiness freshness is six hours.
+
+Remaining pre-implementation gate: map each telemetry domain to an accepted read-only source and reference the exact documented local wind/gust limits. S10 remains `UNAVAILABLE`.
 
 ## Quality gates
 

@@ -15,6 +15,7 @@ Define a bounded, explainable pre-session readiness decision-support capability.
 
 - evaluate a declared target/setup/session context before a session;
 - validate freshness, completeness, provenance and consistency of governed evidence;
+- require read-only live telemetry for weather, dome, mount, camera, power, network and EAGLE health;
 - produce a versioned readiness record with decision, reason codes and evidence references;
 - fail closed when required evidence is missing, stale, conflicting or unavailable;
 - expose the result as read-only decision support.
@@ -26,6 +27,7 @@ Define a bounded, explainable pre-session readiness decision-support capability.
 - scheduling or automatic session start;
 - automatic target selection or setup mutation;
 - replacement of local physical interlocks;
+- operating or commanding EAGLE/apparatus; telemetry consumption remains read-only;
 - S10 production runtime, which remains `UNAVAILABLE`.
 
 ## 3. Architectural Drivers
@@ -54,7 +56,7 @@ BKL-032 introduces a separate application-level readiness evaluator that consume
 - a bounded decision state: `GO`, `NO_GO` or `INDETERMINATE`;
 - explicit authority boundaries and fail-closed status.
 
-The owner approved the exact state semantics on 2026-09-18: `GO` means all mandatory evidence is present, fresh, consistent and passing; `NO_GO` means valid current evidence contains at least one blocking failure; `INDETERMINATE` means required evidence is missing, stale, conflicting or unavailable and therefore fails closed. No value is inferred from BKL-031 ranking alone.
+The owner approved the exact state semantics and mandatory evidence on 2026-09-18: `GO` means forecast, current astronomy, setup compatibility and live read-only telemetry are present, fresh, consistent and passing; `NO_GO` means valid current evidence contains at least one blocking failure; `INDETERMINATE` means required evidence is missing, stale, conflicting or unavailable and therefore fails closed. Mandatory live telemetry domains are weather (rain, wind, gusts, cloudiness, humidity/dew point), dome, mount, camera, power, network and EAGLE health. No value is inferred from BKL-031 ranking alone.
 
 ## 6. Architecture Model
 
@@ -78,16 +80,16 @@ The Domain remains independent of presentation, infrastructure, persistence and 
 4. Missing, stale, incomplete or conflicting evidence produces `INDETERMINATE` or `NO_GO` according to the approved decision contract; it never produces an optimistic result.
 5. Provider/model/run lineage must be explicit; no silent fallback or stitching is allowed.
 6. Protected coordinates, exact site data and GRIB payloads are not public outputs.
-7. No EAGLE, dome, mount, camera, power or network operation is required for the first governed slice.
+7. Telemetry consumption is read-only; no EAGLE, dome, mount, camera, power or network command or operation is authorized.
 
 ## 8. Migration Strategy
 
 1. Reconcile BKL-031 closure references to PR #301 / merge `4a509d574…` without reopening BKL-031.
-2. Accept this architecture package and the owner decision gate for decision states/checks.
-3. Define machine-readable input/output contracts and bounded synthetic fixtures.
+2. Accept this architecture package and the owner decision gate for decision states and mandatory domains.
+3. Define machine-readable input/output contracts, live-telemetry field mappings and bounded synthetic fixtures.
 4. Implement a deterministic fail-closed evaluator and read-only consumer.
 5. Validate exact-head CI, ARB, Release Quality, merge and post-merge evidence.
-6. Consider live/runtime evidence only through a separate package and explicit authorization.
+6. Consider live telemetry transport/runtime evidence only through explicit read-only integration authorization; no command path is permitted.
 
 Rollback is a documentation/code revert to the prior main SHA; no data migration or device change is introduced by this package.
 
@@ -128,7 +130,8 @@ The capability must log correlation ID, contract version, evidence locators, dec
 
 ## 13. Open Issues
 
-- owner decision on required readiness checks and freshness thresholds;
+- source/transport mapping for every mandatory telemetry domain;
+- exact documented local wind/gust limits to be referenced by the evaluator;
 - selection of the first public/read-only consumer surface;
 - whether any future runtime evidence is needed, subject to a separate authorization.
 

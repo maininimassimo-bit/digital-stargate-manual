@@ -26,7 +26,7 @@ BKL-031 now provides a bounded advisory Observation Planner. The next governed c
 
 BKL-032 is a separate application capability. It consumes a declared session context and governed evidence, validates the evidence, and emits a versioned readiness record. Its result is decision support only. `GO` never authorizes a device action, schedule, dome movement or bypass of local interlocks.
 
-The owner approved the exact state semantics on 2026-09-18: `GO` requires all mandatory evidence to be present, fresh, consistent and passing; `NO_GO` means valid current evidence contains at least one blocking failure; `INDETERMINATE` means required evidence is missing, stale, conflicting or unavailable and therefore fails closed. Required checks and freshness thresholds remain open before implementation. No runtime or public readiness claim is authorized until those remaining conditions are accepted.
+The owner approved on 2026-09-18 that `GO` requires forecast, current astronomy, setup compatibility and read-only live telemetry for weather, dome, mount, camera, power, network and EAGLE health to be present, fresh, consistent and passing. `NO_GO` means valid current evidence contains at least one blocking failure. `INDETERMINATE` means any mandatory domain is missing or stale, or required evidence is conflicting or unavailable, and therefore fails closed. Forecast/readiness freshness is six hours; rain greater than zero blocks; wind/gust beyond documented local limits blocks. No runtime or public readiness claim is authorized until source mappings and local limit references are accepted.
 
 ## Consequences
 
