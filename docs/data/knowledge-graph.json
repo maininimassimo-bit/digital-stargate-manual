@@ -305,10 +305,20 @@
       }
     },
     {
+      "id": "ADR-015",
+      "type": "adr",
+      "title": "BKL-036 Source Mapping and Evidence Compatibility Boundary",
+      "status": "Proposed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/ADR-015-BKL-036-Source-Mapping-and-Evidence-Compatibility-Boundary.md"
+      }
+    },
+    {
       "id": "BKL-036",
       "type": "backlog_item",
       "title": "Observatory Health Score",
-      "status": "Closed / Accepted / Post-Merge Verified",
+      "status": "In Progress",
       "authority": "repository_authority",
       "source_locator": {
         "path": "docs/project/BACKLOG.md"
@@ -332,6 +342,26 @@
       "authority": "repository_authority",
       "source_locator": {
         "path": "docs/architecture/validation/BKL-036-Source-Discovery-and-Semantic-Contract-Validation-Plan.md"
+      }
+    },
+    {
+      "id": "BKL-036-F1-SRC-001",
+      "type": "component",
+      "title": "Governed Source Mapping and Evidence Compatibility",
+      "status": "Review candidate",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/telemetry/BKL-036-F1-Governed-Source-Mapping-and-Evidence-Compatibility.md"
+      }
+    },
+    {
+      "id": "BKL-036-F1-VAL-001",
+      "type": "component",
+      "title": "BKL-036-F1 Source Mapping Validation Plan",
+      "status": "Review candidate",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/validation/BKL-036-F1-Source-Mapping-Validation-Plan.md"
       }
     },
     {
@@ -630,6 +660,36 @@
       "id": "rel:BKL-036-VAL-001:documents:BKL-036",
       "type": "documents",
       "from": "BKL-036-VAL-001",
+      "to": "BKL-036",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:ADR-015:governs:BKL-036-F1-SRC-001",
+      "type": "governs",
+      "from": "ADR-015",
+      "to": "BKL-036-F1-SRC-001",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/ADR-015-BKL-036-Source-Mapping-and-Evidence-Compatibility-Boundary.md"
+      }
+    },
+    {
+      "id": "rel:BKL-036-F1-SRC-001:documents:BKL-036",
+      "type": "documents",
+      "from": "BKL-036-F1-SRC-001",
+      "to": "BKL-036",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:BKL-036-F1-VAL-001:documents:BKL-036",
+      "type": "documents",
+      "from": "BKL-036-F1-VAL-001",
       "to": "BKL-036",
       "version": "1.0",
       "source_locator": {
