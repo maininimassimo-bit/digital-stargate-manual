@@ -94,6 +94,9 @@
 | BKL-036-VAL-001 | Source Discovery and Semantic Contract Validation Plan | BKL-036 | Accepted / Post-Merge Verified | Source mapping and future score policy remain separate gates |
 | BKL-036-F1-SRC-001 | Governed Source Mapping and Evidence Compatibility | BKL-036 | Accepted / Post-Merge Verified | PR #309, merge `ab5255638a4b2d566e4082922b331901cbe21d36`; 15/15 exact-head and 17/17 post-merge SUCCESS; live acceptance remains open |
 | BKL-036-F1-VAL-001 | Source Mapping Validation Plan | BKL-036 | Accepted / Post-Merge Verified | Validation matrix passed on reviewed head; no runtime traffic authorized |
+| ADR-016 | BKL-036 evidence envelope and descriptive projection boundary | BKL-036 | Proposed | No score, threshold, runtime or command path authorized |
+| BKL-036-F2-ENV-001 | Evidence Envelope and Descriptive Health Projection | BKL-036 | Implementation candidate | Synthetic offline fixture; descriptive-only projection; action authority NONE |
+| BKL-036-F2-VAL-001 | Evidence Envelope Validation Plan | BKL-036 | Proposed | Fail-closed validator and negative tests; no live traffic authorized |
 
 ## 5. Data Product Candidate Register
 
