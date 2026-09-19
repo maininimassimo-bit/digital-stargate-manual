@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.example/contracts/telemetry/bkl-036-f2-evidence-envelope-v1.schema.json",
+  "title": "Digital StarGate BKL-036-F2 Evidence Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "contract_id", "envelope_id", "fixture_kind", "authority", "action_authority", "descriptive_projection", "evidence"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "contract_id": { "const": "DSG.BKL036.F2.EvidenceEnvelope" },
+    "envelope_id": { "type": "string", "minLength": 1 },
+    "fixture_kind": { "const": "synthetic_offline" },
+    "authority": { "const": "projection" },
+    "action_authority": { "const": "NONE" },
+    "source_mapping_reference": { "type": "string", "minLength": 1 },
+    "descriptive_projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reasons", "score_available"],
+      "properties": {
+        "status": { "enum": ["AVAILABLE", "DEGRADED", "UNKNOWN", "UNAVAILABLE", "CONFLICTING"] },
+        "reasons": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "score_available": { "const": false }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["domain", "source_authority", "semantic_field", "unit", "observed_at_utc", "freshness_state", "evidence_status", "compatibility", "runtime_disposition", "privacy_classification"],
+        "properties": {
+          "domain": { "enum": ["weather", "dome", "mount", "camera", "power", "network", "eagle_health"] },
+          "source_authority": { "type": "string", "minLength": 1 },
+          "semantic_field": { "type": "string", "minLength": 1 },
+          "unit": { "type": ["string", "null"] },
+          "observed_at_utc": { "type": ["string", "null"] },
+          "freshness_state": { "enum": ["CURRENT", "STALE", "UNKNOWN", "NOT_APPLICABLE"] },
+          "evidence_status": { "enum": ["PRESENT", "MISSING", "STALE", "UNAVAILABLE", "PARTIAL", "CONFLICTING"] },
+          "compatibility": { "enum": ["COMPARABLE", "CONTEXT_ONLY", "INCOMPATIBLE", "UNKNOWN"] },
+          "runtime_disposition": { "enum": ["REPOSITORY_EVIDENCE_ONLY", "LIVE_RUNTIME_UNAVAILABLE", "LIVE_RUNTIME_NOT_AUTHORIZED"] },
+          "privacy_classification": { "enum": ["PUBLIC", "REPOSITORY_INTERNAL", "RESTRICTED", "PERSONAL_DATA_NOT_INCLUDED"] },
+          "value": {}
+        }
+      }
+    }
+  }
+}
