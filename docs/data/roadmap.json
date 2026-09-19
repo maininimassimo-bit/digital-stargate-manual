@@ -2,18 +2,18 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-19",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "106b28c568df23c79860779ac76528b6a62bb13d92230dc3ea1070d83ab8ec1e",
+  "sourceDigest": "001f21bc56faa7800a23a234c99fc89a2506b0ff322bfc885ac1e85333aaa2f9",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED. The BKL-036 source-discovery gate is CLOSED / ACCEPTED / POST-MERGE VERIFIED, while the broader BKL-036 capability remains current for separately governed follow-on source mapping and policy work. BKL-031 remains the bounded advisory/read-only planner; BKL-032 provides deterministic fail-closed readiness decision support, but live source/transport and public runtime GO remain separately gated. S10 production runtime unavailable; no scheduling, automatic target selection, commands or Safety Authority is authorized.",
-  "currentPackage": "BKL-036",
-  "nextMilestone": "BKL-036 Observatory Health Score",
+  "projectStatus": "BKL-031, BKL-032 and bounded BKL-036 are CLOSED / ACCEPTED / POST-MERGE VERIFIED. BKL-036 remains closed as a repository-only archived-evidence capability with current output UNAVAILABLE; live source/transport, runtime and public operational use remain separately gated. BKL-031 remains the bounded advisory/read-only planner; BKL-032 provides deterministic fail-closed readiness decision support. S10 production runtime unavailable; no scheduling, automatic target selection, commands or Safety Authority is authorized.",
+  "currentPackage": "AP-007",
+  "nextMilestone": "AP-007 Enterprise Operations and Service Management Architecture",
   "target": "BKL-036 archived-evidence score is defined as a bounded 0–100 read-only public projection; live telemetry, operational interpretation and Safety Authority remain separately gated. No scheduler, automatic target selection, device command or Safety Authority is authorized.",
   "summary": {
     "total": 44,
-    "completed": 34,
-    "active": 4,
+    "completed": 35,
+    "active": 3,
     "planned": 6,
-    "percentCompleted": 77
+    "percentCompleted": 80
   },
   "evidenceSummary": {
     "sources": 8,
@@ -217,7 +217,7 @@
     {
       "id": "observatory-intelligence",
       "title": "Observatory Intelligence & Scientific Processing Roadmap",
-      "status": "active",
+      "status": "planned",
       "items": [
         {
           "id": "BKL-029",
@@ -318,8 +318,8 @@
         {
           "id": "BKL-036",
           "title": "Observatory Health Score",
-          "status": "active",
-          "note": "Source-discovery, source mapping, evidence-envelope, archived-score and F4 repository-archival gates are integrated. BKL-036-F4 is Accepted / Post-Merge Verified; no live transport, readiness, Safety Authority, remediation or device command is authorized."
+          "status": "completed",
+          "note": "F1/F2/F3/F4 Accepted / Post-Merge Verified. BKL-036 is closed as a bounded repository-only archived-evidence capability; F3 remains UNAVAILABLE and live/runtime use remains separately gated."
         },
         {
           "id": "BKL-033",
