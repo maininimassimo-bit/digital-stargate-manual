@@ -3,8 +3,8 @@
 | Campo | Valore |
 |---|---|
 | Identifier | BKL-036-F4 |
-| Status | Implementation candidate |
-| Version | 0.1 |
+| Status | Accepted / Post-Merge Verified |
+| Version | 1.0 |
 | Parent | BKL-036 — Observatory Health Score |
 | Upstream | F1 source mapping, F2 evidence envelope, F3 archived score |
 | Authority | Repository evidence only |
