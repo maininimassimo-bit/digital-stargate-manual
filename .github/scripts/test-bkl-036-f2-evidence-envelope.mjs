@@ -35,7 +35,8 @@ for (const [name, mutate] of [
 ]) {
   test(name, async () => {
     const fixture = JSON.parse(await readFile(fixturePath, 'utf8'));
-    const result = await run(mutate(fixture));
+    const mutated = mutate(fixture);
+    const result = await run(mutated ?? fixture);
     assert.notEqual(result.status, 0, result.stdout || result.stderr || 'expected validator failure');
   });
 }
