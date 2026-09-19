@@ -1,0 +1,111 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "DSG.BKL036.F2.EvidenceEnvelope",
+  "envelope_id": "bkl036-f2-fixture-001",
+  "fixture_kind": "synthetic_offline",
+  "authority": "projection",
+  "action_authority": "NONE",
+  "source_mapping_reference": "docs/architecture/telemetry/BKL-036-F1-Governed-Source-Mapping-and-Evidence-Compatibility.md",
+  "descriptive_projection": {
+    "status": "DEGRADED",
+    "reasons": [
+      "F2_OFFLINE_SYNTHETIC_FIXTURE",
+      "BKL036_F1_MISSING_OR_UNAVAILABLE_EVIDENCE",
+      "CROSS_DOMAIN_AGGREGATE_NOT_AUTHORIZED"
+    ],
+    "score_available": false
+  },
+  "evidence": [
+    {
+      "domain": "weather",
+      "source_authority": "BKL-032 governed weather evidence",
+      "semantic_field": "weather.current_conditions",
+      "unit": null,
+      "observed_at_utc": null,
+      "freshness_state": "UNKNOWN",
+      "evidence_status": "PARTIAL",
+      "compatibility": "CONTEXT_ONLY",
+      "runtime_disposition": "LIVE_RUNTIME_NOT_AUTHORIZED",
+      "privacy_classification": "PERSONAL_DATA_NOT_INCLUDED",
+      "value": null
+    },
+    {
+      "domain": "dome",
+      "source_authority": "Local physical interlocks",
+      "semantic_field": "dome.safe_state",
+      "unit": null,
+      "observed_at_utc": null,
+      "freshness_state": "UNKNOWN",
+      "evidence_status": "UNAVAILABLE",
+      "compatibility": "UNKNOWN",
+      "runtime_disposition": "LIVE_RUNTIME_UNAVAILABLE",
+      "privacy_classification": "PERSONAL_DATA_NOT_INCLUDED",
+      "value": null
+    },
+    {
+      "domain": "mount",
+      "source_authority": "BKL-036 candidate source mapping",
+      "semantic_field": "mount.operational_state",
+      "unit": null,
+      "observed_at_utc": null,
+      "freshness_state": "UNKNOWN",
+      "evidence_status": "MISSING",
+      "compatibility": "UNKNOWN",
+      "runtime_disposition": "REPOSITORY_EVIDENCE_ONLY",
+      "privacy_classification": "PERSONAL_DATA_NOT_INCLUDED",
+      "value": null
+    },
+    {
+      "domain": "camera",
+      "source_authority": "BKL-036 candidate source mapping",
+      "semantic_field": "camera.operational_state",
+      "unit": null,
+      "observed_at_utc": null,
+      "freshness_state": "UNKNOWN",
+      "evidence_status": "MISSING",
+      "compatibility": "UNKNOWN",
+      "runtime_disposition": "REPOSITORY_EVIDENCE_ONLY",
+      "privacy_classification": "PERSONAL_DATA_NOT_INCLUDED",
+      "value": null
+    },
+    {
+      "domain": "power",
+      "source_authority": "BKL-036 candidate source mapping",
+      "semantic_field": "power.availability",
+      "unit": null,
+      "observed_at_utc": null,
+      "freshness_state": "UNKNOWN",
+      "evidence_status": "MISSING",
+      "compatibility": "UNKNOWN",
+      "runtime_disposition": "REPOSITORY_EVIDENCE_ONLY",
+      "privacy_classification": "PERSONAL_DATA_NOT_INCLUDED",
+      "value": null
+    },
+    {
+      "domain": "network",
+      "source_authority": "BKL-036 candidate source mapping",
+      "semantic_field": "network.availability",
+      "unit": null,
+      "observed_at_utc": null,
+      "freshness_state": "UNKNOWN",
+      "evidence_status": "MISSING",
+      "compatibility": "CONTEXT_ONLY",
+      "runtime_disposition": "REPOSITORY_EVIDENCE_ONLY",
+      "privacy_classification": "PERSONAL_DATA_NOT_INCLUDED",
+      "value": null
+    },
+    {
+      "domain": "eagle_health",
+      "source_authority": "BKL-030 EAGLE health evidence",
+      "semantic_field": "eagle.health",
+      "unit": null,
+      "observed_at_utc": null,
+      "freshness_state": "UNKNOWN",
+      "evidence_status": "UNAVAILABLE",
+      "compatibility": "UNKNOWN",
+      "runtime_disposition": "LIVE_RUNTIME_UNAVAILABLE",
+      "privacy_classification": "PERSONAL_DATA_NOT_INCLUDED",
+      "value": null
+    }
+  ]
+}

@@ -64,6 +64,7 @@
 | AP-013C | Verified Transport Cleanup and Convergence Monitoring | AP-013C v0.2, DSDM-005 v0.2, dry-run acceptance plan | ARB-013C | Approved with Conditions — DRY_RUN/NO_DELETE only; C03 real OAT open |
 | AP-014 | Scientific Catalog and Search | SIR-VIS-001 | Nessuna | Planned |
 | AP-015 | Scientific Knowledge Platform | SKL-VIS-001 | Nessuna | Planned |
+| BKL-036-F2 | Evidence Envelope and Descriptive Health Projection | ADR-016, BKL-036-F2-ENV-001, BKL-036-F2-VAL-001 | Review pending | Repository-only; synthetic offline fixture; no runtime authority |
 
 ## 4. Architecture Artifact Register
 
@@ -94,6 +95,8 @@
 | BKL-036-VAL-001 | Source Discovery and Semantic Contract Validation Plan | BKL-036 | Accepted / Post-Merge Verified | Source mapping and future score policy remain separate gates |
 | BKL-036-F1-SRC-001 | Governed Source Mapping and Evidence Compatibility | BKL-036 | Accepted / Post-Merge Verified | PR #309, merge `ab5255638a4b2d566e4082922b331901cbe21d36`; 15/15 exact-head and 17/17 post-merge SUCCESS; live acceptance remains open |
 | BKL-036-F1-VAL-001 | Source Mapping Validation Plan | BKL-036 | Accepted / Post-Merge Verified | Validation matrix passed on reviewed head; no runtime traffic authorized |
+| BKL-036-F2-ENV-001 | Evidence Envelope and Descriptive Health Projection | BKL-036 | Implementation candidate | Synthetic offline fixture; descriptive-only projection; action authority NONE |
+| BKL-036-F2-VAL-001 | Evidence Envelope Validation Plan | BKL-036 | Proposed | Fail-closed validator and negative tests; no live traffic authorized |
 
 ## 5. Data Product Candidate Register
 
