@@ -49,7 +49,7 @@ Gli handover e le baseline precedenti restano snapshot storici.
 - coordinate sito protette mai in projection pubbliche;
 - missing/stale/conflicted evidence fail-closed;
 - provider/model/run lineage esplicita, nessun fallback/stitching silenzioso;
-- il traffico MeteoHub F9 resta entro il modello ADR-012 governato: massimo due acquisizioni UTC/giorno, budget EUR 0, fail-closed e GRIB effimeri.
+- il traffico MeteoHub F9 resta entro il modello ADR-012 governato: nessun limite giornaliero imposto dal workflow, budget EUR 0, fail-closed e GRIB effimeri.
 
 ## 5. Provider budget corrente
 - F4-C generalized validation: `2/2_EXHAUSTED`;
