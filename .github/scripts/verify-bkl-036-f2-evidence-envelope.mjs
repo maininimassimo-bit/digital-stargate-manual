@@ -6,6 +6,9 @@ const DOMAINS = new Set(['weather', 'dome', 'mount', 'camera', 'power', 'network
 const EVIDENCE_STATUS = new Set(['PRESENT', 'MISSING', 'STALE', 'UNAVAILABLE', 'PARTIAL', 'CONFLICTING']);
 const COMPATIBILITY = new Set(['COMPARABLE', 'CONTEXT_ONLY', 'INCOMPATIBLE', 'UNKNOWN']);
 const FORBIDDEN_KEYS = new Set(['score', 'threshold', 'ranking', 'recommendation', 'command', 'remediation', 'readiness', 'safety_authority']);
+const ENVELOPE_KEYS = new Set(['schema_version', 'contract_id', 'envelope_id', 'fixture_kind', 'authority', 'action_authority', 'source_mapping_reference', 'descriptive_projection', 'evidence']);
+const PROJECTION_KEYS = new Set(['status', 'reasons', 'score_available']);
+const EVIDENCE_KEYS = new Set(['domain', 'source_authority', 'semantic_field', 'unit', 'observed_at_utc', 'freshness_state', 'evidence_status', 'compatibility', 'runtime_disposition', 'privacy_classification', 'value']);
 
 const fail = (message) => { throw new Error(message); };
 const assert = (condition, message) => { if (!condition) fail(message); };
@@ -17,13 +20,15 @@ export const validateEnvelope = (envelope, schema) => {
   assert(envelope.fixture_kind === 'synthetic_offline', 'fixture must be synthetic_offline');
   assert(envelope.authority === 'projection', 'authority must be projection');
   assert(envelope.action_authority === 'NONE', 'action authority must be NONE');
-  for (const key of Object.keys(envelope)) assert(!FORBIDDEN_KEYS.has(key), `forbidden top-level key: ${key}`);
+  for (const key of Object.keys(envelope)) { assert(ENVELOPE_KEYS.has(key), `unexpected top-level key: ${key}`); assert(!FORBIDDEN_KEYS.has(key), `forbidden top-level key: ${key}`); }
+  for (const key of Object.keys(envelope.descriptive_projection)) assert(PROJECTION_KEYS.has(key), `unexpected descriptive key: ${key}`);
   assert(envelope.descriptive_projection && envelope.descriptive_projection.score_available === false, 'descriptive projection cannot expose a score');
   assert(['AVAILABLE', 'DEGRADED', 'UNKNOWN', 'UNAVAILABLE', 'CONFLICTING'].includes(envelope.descriptive_projection.status), 'invalid descriptive status');
   assert(Array.isArray(envelope.descriptive_projection.reasons) && envelope.descriptive_projection.reasons.length > 0, 'descriptive reasons required');
   assert(Array.isArray(envelope.evidence) && envelope.evidence.length === DOMAINS.size, 'evidence must contain exactly seven domains');
   const seen = new Set();
   for (const item of envelope.evidence) {
+    for (const key of Object.keys(item)) assert(EVIDENCE_KEYS.has(key), `unexpected evidence key: ${key}`);
     assert(DOMAINS.has(item.domain), `unsupported domain: ${item.domain}`);
     assert(!seen.has(item.domain), `duplicate domain: ${item.domain}`);
     seen.add(item.domain);
