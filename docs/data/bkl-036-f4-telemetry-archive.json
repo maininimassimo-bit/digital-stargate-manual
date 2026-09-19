@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
   "contract_id": "DSG.BKL036.F4.ArchivedTelemetry",
-  "batch_id": "bkl-036-f4-fixture-2026-09-19",
+  "batch_id": "BKL036-F4-SYNTHETIC-OFFLINE-001",
   "fixture_kind": "repository_archived_snapshot",
   "source_plane": "repository_evidence",
   "acquisition_mode": "read_only_snapshot_import",
-  "source_manifest": "docs/data/realtime/observatory-status.json",
-  "archived_at_utc": "2026-09-19T00:00:00Z",
+  "source_manifest": "synthetic_offline_fixture_only",
+  "archived_at_utc": "2026-09-19T12:00:00Z",
   "safety_boundary": {
     "live_transport_used": false,
     "commands_issued": false,
@@ -15,12 +15,96 @@
     "safety_authority": "LOCAL_PHYSICAL_INTERLOCKS"
   },
   "domains": [
-    {"domain":"weather","source":"docs/data/realtime/observatory-status.json","authority":"CloudWatcher evidence mapping","field":"weather","unit":null,"observed_at_utc":null,"fresh_until_utc":null,"evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","quality":"UNKNOWN","value":null},
-    {"domain":"dome","source":"docs/data/realtime/observatory-status.json","authority":"Observatory status evidence mapping","field":"systems.dome","unit":null,"observed_at_utc":null,"fresh_until_utc":null,"evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","quality":"UNKNOWN","value":null},
-    {"domain":"mount","source":"docs/data/realtime/observatory-status.json","authority":"Observatory status evidence mapping","field":"systems.mount","unit":null,"observed_at_utc":null,"fresh_until_utc":null,"evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","quality":"UNKNOWN","value":null},
-    {"domain":"camera","source":"docs/data/realtime/observatory-status.json","authority":"Observatory status evidence mapping","field":"systems.camera","unit":null,"observed_at_utc":null,"fresh_until_utc":null,"evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","quality":"UNKNOWN","value":null},
-    {"domain":"power","source":"docs/data/realtime/observatory-status.json","authority":"Observatory status evidence mapping","field":"systems.power","unit":null,"observed_at_utc":null,"fresh_until_utc":null,"evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","quality":"UNKNOWN","value":null},
-    {"domain":"network","source":"docs/data/realtime/observatory-status.json","authority":"Observatory status evidence mapping","field":"systems.network","unit":null,"observed_at_utc":null,"fresh_until_utc":null,"evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","quality":"UNKNOWN","value":null},
-    {"domain":"eagle_health","source":"docs/data/realtime/eagle-health.json","authority":"EAGLE health evidence mapping","field":"summary","unit":null,"observed_at_utc":null,"fresh_until_utc":null,"evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","quality":"UNKNOWN","value":null}
+    {
+      "domain": "weather",
+      "source": "synthetic_offline_fixture",
+      "authority": "TEST_ONLY",
+      "field": "domain_state",
+      "unit": null,
+      "observed_at_utc": null,
+      "fresh_until_utc": null,
+      "evidence_status": "UNAVAILABLE",
+      "compatibility": "UNKNOWN",
+      "quality": "UNKNOWN",
+      "value": null
+    },
+    {
+      "domain": "dome",
+      "source": "synthetic_offline_fixture",
+      "authority": "TEST_ONLY",
+      "field": "domain_state",
+      "unit": null,
+      "observed_at_utc": null,
+      "fresh_until_utc": null,
+      "evidence_status": "UNAVAILABLE",
+      "compatibility": "UNKNOWN",
+      "quality": "UNKNOWN",
+      "value": null
+    },
+    {
+      "domain": "mount",
+      "source": "synthetic_offline_fixture",
+      "authority": "TEST_ONLY",
+      "field": "domain_state",
+      "unit": null,
+      "observed_at_utc": null,
+      "fresh_until_utc": null,
+      "evidence_status": "UNAVAILABLE",
+      "compatibility": "UNKNOWN",
+      "quality": "UNKNOWN",
+      "value": null
+    },
+    {
+      "domain": "camera",
+      "source": "synthetic_offline_fixture",
+      "authority": "TEST_ONLY",
+      "field": "domain_state",
+      "unit": null,
+      "observed_at_utc": null,
+      "fresh_until_utc": null,
+      "evidence_status": "UNAVAILABLE",
+      "compatibility": "UNKNOWN",
+      "quality": "UNKNOWN",
+      "value": null
+    },
+    {
+      "domain": "power",
+      "source": "synthetic_offline_fixture",
+      "authority": "TEST_ONLY",
+      "field": "domain_state",
+      "unit": null,
+      "observed_at_utc": null,
+      "fresh_until_utc": null,
+      "evidence_status": "UNAVAILABLE",
+      "compatibility": "UNKNOWN",
+      "quality": "UNKNOWN",
+      "value": null
+    },
+    {
+      "domain": "network",
+      "source": "synthetic_offline_fixture",
+      "authority": "TEST_ONLY",
+      "field": "domain_state",
+      "unit": null,
+      "observed_at_utc": null,
+      "fresh_until_utc": null,
+      "evidence_status": "UNAVAILABLE",
+      "compatibility": "UNKNOWN",
+      "quality": "UNKNOWN",
+      "value": null
+    },
+    {
+      "domain": "eagle_health",
+      "source": "synthetic_offline_fixture",
+      "authority": "TEST_ONLY",
+      "field": "domain_state",
+      "unit": null,
+      "observed_at_utc": null,
+      "fresh_until_utc": null,
+      "evidence_status": "UNAVAILABLE",
+      "compatibility": "UNKNOWN",
+      "quality": "UNKNOWN",
+      "value": null
+    }
   ]
 }
