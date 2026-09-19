@@ -3,7 +3,7 @@
 <!-- Legacy governance bindings retained as non-rendered markers; stale F6/F7 panels are intentionally not mounted. -->
 <script type="module" src="../javascripts/observation-planner-forecast-f7-site.js"></script>
 <script type="module" src="../javascripts/observation-planner-e2e-f6.js"></script>
-<script type="module" src="../javascripts/observation-planner-f9.js?v=300"></script>
+<script type="module" src="../javascripts/observation-planner-f9.js?v=301"></script>
 
 <div class="dsg-op-center">
 <section class="dsg-op-hero">
