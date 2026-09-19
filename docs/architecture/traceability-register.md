@@ -96,6 +96,7 @@
 | BKL-036-ARCH-001 | Observatory Health Score Source Discovery and Semantic Contract | BKL-036 | Accepted / Post-Merge Verified | No runtime, score, threshold, remediation or command path authorized |
 | BKL-036-VAL-001 | Source Discovery and Semantic Contract Validation Plan | BKL-036 | Accepted / Post-Merge Verified | Source mapping and future score policy remain separate gates |
 | BKL-036-F1-SRC-001 | Governed Source Mapping and Evidence Compatibility | BKL-036 | Accepted / Post-Merge Verified | PR #309, merge `ab5255638a4b2d566e4082922b331901cbe21d36`; 15/15 exact-head and 17/17 post-merge SUCCESS; live acceptance remains open |
+| BKL-036-CLOSURE-001 | BKL-036 Bounded Capability Closure | BKL-036 | Accepted / Post-Merge Verified | F1/F2/F3/F4; F3 remains `UNAVAILABLE`; closure `docs/project/BKL-036-CLOSURE-2026-09-19.md`; no live/runtime authority |
 | BKL-036-F1-VAL-001 | Source Mapping Validation Plan | BKL-036 | Accepted / Post-Merge Verified | Validation matrix passed on reviewed head; no runtime traffic authorized |
 | BKL-036-F2-ENV-001 | Evidence Envelope and Descriptive Health Projection | BKL-036 | Accepted / Post-Merge Verified | PR #312, merge `0a4f3de87ccf94c2132d3adac2239a52f6a5f475`; descriptive-only projection; action authority NONE |
 | BKL-036-F2-VAL-001 | Evidence Envelope Validation Plan | BKL-036 | Accepted / Post-Merge Verified | 13/13 exact-head and 14/14 post-merge SUCCESS; no live traffic authorized |
