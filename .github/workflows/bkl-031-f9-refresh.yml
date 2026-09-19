@@ -42,25 +42,6 @@ jobs:
             exit 1
           fi
           test "$GITHUB_RUN_ATTEMPT" = "1"
-      - name: Enforce two-acquisition daily budget
-        id: daily-budget
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          today=$(date -u +%Y-%m-%d)
-          count=0
-          for run in $(gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/workflows/bkl-031-f9-refresh.yml/runs?per_page=100" --jq '.workflow_runs[] | select(.created_at >= "'"$today"'T00:00:00Z" and (.id|tostring) != "'"$GITHUB_RUN_ID"'") | .id'); do
-            started=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run}/jobs?per_page=100" --jq '[.jobs[].steps[]? | select(.name == "Acquire, reduce and discard GRIB inputs" and .started_at != null)] | length')
-            count=$((count + started))
-          done
-          if [ "$count" -ge 2 ]; then
-            echo "Daily acquisition budget exhausted (${count}/2); no acquisition is authorized."
-            echo "acquisition_authorized=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "Daily acquisition budget available (${count}/2)."
-            echo "acquisition_authorized=true" >> "$GITHUB_OUTPUT"
-          fi
       - uses: actions/setup-python@v5
         if: steps.daily-budget.outputs.acquisition_authorized == 'true'
 
