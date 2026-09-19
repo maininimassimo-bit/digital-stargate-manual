@@ -1,4 +1,4 @@
-# Decision Log
+| DLG-065 | 19/09/2026 | Rimuovere permanentemente il limite di due acquisizioni/schedule F9 al giorno: nessun contatore giornaliero blocca più i run schedulati o i `workflow_dispatch` autorizzati; mantenere cron 09:30/17:15 UTC, `F9_ZERO_EUR_GUARD=CONFIRMED`, budget monetario EUR 0, GRIB effimeri, nessun retry automatico e boundary read-only | Eliminare il blocco che ha impedito l’aggiornamento dell’Observation Planner mantenendo invariati costi, retention, privacy, fail-closed e authority boundary | BKL-031 F9 | Owner-Authorized / Implementation Candidate | Owner authorization 19/09/2026; ADR-012 superseding update; branch `fix/remove-f9-daily-acquisition-limit` |\n# Decision Log
 
 | Campo | Valore |
 |---|---|
