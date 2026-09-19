@@ -723,6 +723,46 @@
       "source_locator": {
         "path": "docs/data/bkl-036-f3-health-score.json"
       }
+    },
+    {
+      "id": "BKL-036-F4-ARCH-001",
+      "type": "component",
+      "title": "BKL-036-F4 Governed Telemetry Acquisition and Repository Archival",
+      "status": "Implementation candidate",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/telemetry/BKL-036-F4-Governed-Telemetry-Acquisition-and-Repository-Archival.md"
+      }
+    },
+    {
+      "id": "ADR-018",
+      "type": "adr",
+      "title": "BKL-036 Read-Only Telemetry Acquisition and Repository Archival Boundary",
+      "status": "Proposed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/ADR-018-BKL-036-Read-Only-Telemetry-Acquisition-and-Archival-Boundary.md"
+      }
+    },
+    {
+      "id": "BKL-036-F4-VAL-001",
+      "type": "component",
+      "title": "BKL-036-F4 Governed Telemetry Acquisition and Archival Validation Plan",
+      "status": "Proposed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/validation/BKL-036-F4-Governed-Telemetry-Acquisition-and-Archival-Validation-Plan.md"
+      }
+    },
+    {
+      "id": "BKL-036-F4-FIX-001",
+      "type": "evidence",
+      "title": "BKL-036-F4 Archived Telemetry Snapshot",
+      "status": "Implementation candidate",
+      "authority": "evidence_authority",
+      "source_locator": {
+        "path": "docs/data/bkl-036-f4-telemetry-archive.json"
+      }
     }
   ],
   "relations": [
@@ -1174,6 +1214,56 @@
       "version": "1.0",
       "source_locator": {
         "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:ADR-018:governs:BKL-036-F4-ARCH-001",
+      "type": "governs",
+      "from": "ADR-018",
+      "to": "BKL-036-F4-ARCH-001",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/ADR-018-BKL-036-Read-Only-Telemetry-Acquisition-and-Archival-Boundary.md"
+      }
+    },
+    {
+      "id": "rel:BKL-036-F4-ARCH-001:documents:BKL-036",
+      "type": "documents",
+      "from": "BKL-036-F4-ARCH-001",
+      "to": "BKL-036",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:BKL-036-F4-VAL-001:validates:BKL-036-F4-ARCH-001",
+      "type": "relates_to",
+      "from": "BKL-036-F4-VAL-001",
+      "to": "BKL-036-F4-ARCH-001",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/validation/BKL-036-F4-Governed-Telemetry-Acquisition-and-Archival-Validation-Plan.md"
+      }
+    },
+    {
+      "id": "rel:BKL-036-F4-VAL-001:documents:BKL-036",
+      "type": "documents",
+      "from": "BKL-036-F4-VAL-001",
+      "to": "BKL-036",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:BKL-036-F4-ARCH-001:evidenced_by:BKL-036-F4-FIX-001",
+      "type": "evidenced_by",
+      "from": "BKL-036-F4-ARCH-001",
+      "to": "BKL-036-F4-FIX-001",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/data/bkl-036-f4-telemetry-archive.json"
       }
     }
   ]

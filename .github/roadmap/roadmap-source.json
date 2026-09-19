@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.2",
-  "updatedAt": "2026-09-18",
+  "updatedAt": "2026-09-19",
   "authority": "DSG-RGM-001",
   "projectStatus": "BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED. The BKL-036 source-discovery gate is CLOSED / ACCEPTED / POST-MERGE VERIFIED, while the broader BKL-036 capability remains current for separately governed follow-on source mapping and policy work. BKL-031 remains the bounded advisory/read-only planner; BKL-032 provides deterministic fail-closed readiness decision support, but live source/transport and public runtime GO remain separately gated. S10 production runtime unavailable; no scheduling, automatic target selection, commands or Safety Authority is authorized.",
   "currentPackage": "BKL-036",
@@ -248,7 +248,7 @@
           "id": "BKL-036",
           "title": "Observatory Health Score",
           "status": "active",
-          "note": "Source-discovery, source mapping and evidence-envelope gates are Accepted / Post-Merge Verified via PRs #306, #309 and #312. BKL-036-F3 is a repository-archived evidence score published read-only in the public portal; current output is fail-closed UNAVAILABLE because all seven domains are not comparable and current. No live telemetry, readiness, Safety Authority, remediation or device command is authorized."
+          "note": "Source-discovery, source mapping, evidence-envelope and archived-score gates are integrated. BKL-036-F4 is the current implementation candidate for read-only snapshot import and repository archival; no live transport, readiness, Safety Authority, remediation or device command is authorized."
         },
         {
           "id": "BKL-033",
@@ -788,8 +788,16 @@
       "itemRef": "BKL-036",
       "title": "BKL-036-F3 Archived Evidence Health Score",
       "date": "2026-09-19",
+      "status": "completed",
+      "description": "PR #314 merged as f77bdf21fb5456261b323a87db3c92b4b78effde after exact-head CI 15/15, ARB and Release Quality review. Public projection is repository evidence, non-live and non-real-time; current output remains UNAVAILABLE."
+    },
+    {
+      "id": "M-BKL036-F4",
+      "itemRef": "BKL-036",
+      "title": "BKL-036-F4 Governed Telemetry Acquisition and Repository Archival",
+      "date": "2026-09-19",
       "status": "in_progress",
-      "description": "Owner-authorized policy candidate: score 0–100, equal weight across seven mandatory domains, 100 only when all domains are PRESENT/COMPARABLE/CURRENT, otherwise UNAVAILABLE. Public portal projection is repository evidence, non-live and non-real-time; implementation and governance review pending."
+      "description": "Owner-authorized implementation candidate: validate and archive read-only telemetry snapshots in the repository with seven-domain provenance, timestamps, freshness, evidence status and compatibility. No live transport, commands, scheduling, remediation or Safety Authority change is authorized."
     }
   ]
 }

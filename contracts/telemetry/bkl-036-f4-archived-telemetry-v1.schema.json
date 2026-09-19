@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.example/contracts/telemetry/bkl-036-f4-archived-telemetry-v1.schema.json",
+  "title": "Digital StarGate BKL-036-F4 Governed Archived Telemetry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "contract_id", "batch_id", "fixture_kind", "source_plane", "acquisition_mode", "safety_boundary", "domains"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "contract_id": { "const": "DSG.BKL036.F4.ArchivedTelemetry" },
+    "batch_id": { "type": "string", "minLength": 1 },
+    "fixture_kind": { "enum": ["synthetic_offline", "repository_archived_snapshot"] },
+    "source_plane": { "const": "repository_evidence" },
+    "acquisition_mode": { "const": "read_only_snapshot_import" },
+    "source_manifest": { "type": "string", "minLength": 1 },
+    "archived_at_utc": { "type": "string", "format": "date-time" },
+    "safety_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["live_transport_used", "commands_issued", "scheduling_enabled", "remediation_enabled", "safety_authority"],
+      "properties": {
+        "live_transport_used": { "const": false },
+        "commands_issued": { "const": false },
+        "scheduling_enabled": { "const": false },
+        "remediation_enabled": { "const": false },
+        "safety_authority": { "const": "LOCAL_PHYSICAL_INTERLOCKS" }
+      }
+    },
+    "domains": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["domain", "source", "authority", "field", "unit", "observed_at_utc", "fresh_until_utc", "evidence_status", "compatibility", "quality", "value"],
+        "properties": {
+          "domain": { "enum": ["weather", "dome", "mount", "camera", "power", "network", "eagle_health"] },
+          "source": { "type": "string", "minLength": 1 },
+          "authority": { "type": "string", "minLength": 1 },
+          "field": { "type": "string", "minLength": 1 },
+          "unit": { "type": ["string", "null"] },
+          "observed_at_utc": { "type": ["string", "null"] },
+          "fresh_until_utc": { "type": ["string", "null"] },
+          "evidence_status": { "enum": ["PRESENT", "MISSING", "STALE", "UNAVAILABLE", "PARTIAL", "CONFLICTING"] },
+          "compatibility": { "enum": ["COMPARABLE", "CONTEXT_ONLY", "INCOMPATIBLE", "UNKNOWN"] },
+          "quality": { "enum": ["CURRENT", "STALE", "UNKNOWN", "CONFLICTING"] },
+          "value": {}
+        }
+      }
+    }
+  }
+}
