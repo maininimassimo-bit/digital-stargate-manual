@@ -318,7 +318,7 @@
       "id": "BKL-036",
       "type": "backlog_item",
       "title": "Observatory Health Score",
-      "status": "In Progress",
+      "status": "Done",
       "authority": "repository_authority",
       "source_locator": {
         "path": "docs/project/BACKLOG.md"
@@ -762,6 +762,16 @@
       "authority": "evidence_authority",
       "source_locator": {
         "path": "docs/data/bkl-036-f4-telemetry-archive.json"
+      }
+    },
+    {
+      "id": "BKL-036-CLOSURE-001",
+      "type": "component",
+      "title": "BKL-036 Bounded Capability Closure",
+      "status": "Accepted / Post-Merge Verified",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/project/BKL-036-CLOSURE-2026-09-19.md"
       }
     }
   ],
@@ -1264,6 +1274,16 @@
       "version": "1.0",
       "source_locator": {
         "path": "docs/data/bkl-036-f4-telemetry-archive.json"
+      }
+    },
+    {
+      "id": "rel:BKL-036-CLOSURE-001:documents:BKL-036",
+      "type": "documents",
+      "from": "BKL-036-CLOSURE-001",
+      "to": "BKL-036",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/project/BKL-036-CLOSURE-2026-09-19.md"
       }
     }
   ]
