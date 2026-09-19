@@ -248,7 +248,7 @@
           "id": "BKL-036",
           "title": "Observatory Health Score",
           "status": "active",
-          "note": "Source-discovery, source mapping, evidence-envelope and archived-score gates are integrated. BKL-036-F4 is the current implementation candidate for read-only snapshot import and repository archival; no live transport, readiness, Safety Authority, remediation or device command is authorized."
+          "note": "Source-discovery, source mapping, evidence-envelope, archived-score and F4 repository-archival gates are integrated. BKL-036-F4 is Accepted / Post-Merge Verified; no live transport, readiness, Safety Authority, remediation or device command is authorized."
         },
         {
           "id": "BKL-033",
@@ -796,8 +796,8 @@
       "itemRef": "BKL-036",
       "title": "BKL-036-F4 Governed Telemetry Acquisition and Repository Archival",
       "date": "2026-09-19",
-      "status": "in_progress",
-      "description": "Owner-authorized implementation candidate: validate and archive read-only telemetry snapshots in the repository with seven-domain provenance, timestamps, freshness, evidence status and compatibility. No live transport, commands, scheduling, remediation or Safety Authority change is authorized."
+      "status": "completed",
+      "description": "PR #320 merged as c58f0cb241e1b8432ec81c17d9d6b967d023e102 after exact-head CI, ARB and Release Quality review. The repository-only seven-domain snapshot import and deterministic archive are Accepted / Post-Merge Verified; live transport, commands, scheduling, remediation and Safety Authority remain separately gated."
     }
   ]
 }
