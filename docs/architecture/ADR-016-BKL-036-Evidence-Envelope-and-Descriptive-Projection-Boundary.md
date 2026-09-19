@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Proposed |
+| Status | Accepted / Post-Merge Verified |
 | Date | 2026-09-19 |
 | Release | Release 2.x |
 | Capability | BKL-036 |
