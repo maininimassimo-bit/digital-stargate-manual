@@ -643,6 +643,46 @@
       "source_locator": {
         "path": "docs/architecture/traceability-register.md"
       }
+    },
+    {
+      "id": "ADR-016",
+      "type": "adr",
+      "title": "BKL-036 Evidence Envelope and Descriptive Projection Boundary",
+      "status": "Proposed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/ADR-016-BKL-036-Evidence-Envelope-and-Descriptive-Projection-Boundary.md"
+      }
+    },
+    {
+      "id": "BKL-036-F2-ENV-001",
+      "type": "component",
+      "title": "Evidence Envelope and Descriptive Health Projection",
+      "status": "Implementation candidate",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/telemetry/BKL-036-F2-Evidence-Envelope-and-Descriptive-Health-Projection.md"
+      }
+    },
+    {
+      "id": "BKL-036-F2-VAL-001",
+      "type": "component",
+      "title": "BKL-036-F2 Evidence Envelope Validation Plan",
+      "status": "Proposed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/validation/BKL-036-F2-Evidence-Envelope-Validation-Plan.md"
+      }
+    },
+    {
+      "id": "BKL-036-F2-FIX-001",
+      "type": "evidence",
+      "title": "BKL-036-F2 Synthetic Offline Descriptive Health Fixture",
+      "status": "Implementation candidate",
+      "authority": "evidence_authority",
+      "source_locator": {
+        "path": "docs/data/bkl-036-f2-descriptive-health-fixture.json"
+      }
     }
   ],
   "relations": [
@@ -974,6 +1014,46 @@
       "version": "1.0",
       "source_locator": {
         "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:ADR-016:governs:BKL-036-F2-ENV-001",
+      "type": "governs",
+      "from": "ADR-016",
+      "to": "BKL-036-F2-ENV-001",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/ADR-016-BKL-036-Evidence-Envelope-and-Descriptive-Projection-Boundary.md"
+      }
+    },
+    {
+      "id": "rel:BKL-036-F2-ENV-001:documents:BKL-036",
+      "type": "documents",
+      "from": "BKL-036-F2-ENV-001",
+      "to": "BKL-036",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:BKL-036-F2-VAL-001:validates:BKL-036-F2-ENV-001",
+      "type": "relates_to",
+      "from": "BKL-036-F2-VAL-001",
+      "to": "BKL-036-F2-ENV-001",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/validation/BKL-036-F2-Evidence-Envelope-Validation-Plan.md"
+      }
+    },
+    {
+      "id": "rel:BKL-036-F2-ENV-001:evidenced_by:BKL-036-F2-FIX-001",
+      "type": "evidenced_by",
+      "from": "BKL-036-F2-ENV-001",
+      "to": "BKL-036-F2-FIX-001",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/data/bkl-036-f2-descriptive-health-fixture.json"
       }
     }
   ]
