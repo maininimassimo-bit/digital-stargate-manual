@@ -2,7 +2,7 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-19",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "53e242a6fbd617bc8e4fe0fc9259a998bd985f337e48de3780a31fe94fc5675a",
+  "sourceDigest": "106b28c568df23c79860779ac76528b6a62bb13d92230dc3ea1070d83ab8ec1e",
   "authority": "DSG-RGM-001",
   "projectStatus": "BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED. The BKL-036 source-discovery gate is CLOSED / ACCEPTED / POST-MERGE VERIFIED, while the broader BKL-036 capability remains current for separately governed follow-on source mapping and policy work. BKL-031 remains the bounded advisory/read-only planner; BKL-032 provides deterministic fail-closed readiness decision support, but live source/transport and public runtime GO remain separately gated. S10 production runtime unavailable; no scheduling, automatic target selection, commands or Safety Authority is authorized.",
   "currentPackage": "BKL-036",
@@ -27,76 +27,76 @@
       "status": "active",
       "items": [
         {
+          "status": "completed",
+          "evidenceStatus": "Accepted",
+          "evidence": {
+            "present": 1,
+            "accepted": 1,
+            "required": 1
+          },
           "id": "WP-01",
           "title": "Enterprise Foundation Framework",
-          "evidencePath": "docs/architecture/validation/WP-01-Enterprise-Foundation-Framework-Completion-Report.md",
+          "evidencePath": "docs/architecture/validation/WP-01-Enterprise-Foundation-Framework-Completion-Report.md"
+        },
+        {
           "status": "completed",
           "evidenceStatus": "Accepted",
           "evidence": {
             "present": 1,
             "accepted": 1,
             "required": 1
-          }
-        },
-        {
+          },
           "id": "WP-02",
           "title": "Scientific Platform 2.0",
-          "evidencePath": "docs/architecture/validation/WP-02-Scientific-Platform-2.0-Completion-Report.md",
+          "evidencePath": "docs/architecture/validation/WP-02-Scientific-Platform-2.0-Completion-Report.md"
+        },
+        {
           "status": "completed",
           "evidenceStatus": "Accepted",
           "evidence": {
             "present": 1,
             "accepted": 1,
             "required": 1
-          }
-        },
-        {
+          },
           "id": "WP-03",
           "title": "Enterprise Theme Framework",
-          "evidencePath": "docs/architecture/validation/WP-03-Enterprise-Theme-Framework-Completion-Report.md",
+          "evidencePath": "docs/architecture/validation/WP-03-Enterprise-Theme-Framework-Completion-Report.md"
+        },
+        {
           "status": "completed",
           "evidenceStatus": "Accepted",
           "evidence": {
             "present": 1,
             "accepted": 1,
             "required": 1
-          }
-        },
-        {
+          },
           "id": "WP-04",
           "title": "Enterprise Search Center",
-          "evidencePath": "docs/architecture/validation/WP-04-Enterprise-Search-Center-Completion-Report.md",
+          "evidencePath": "docs/architecture/validation/WP-04-Enterprise-Search-Center-Completion-Report.md"
+        },
+        {
           "status": "completed",
           "evidenceStatus": "Accepted",
           "evidence": {
             "present": 1,
             "accepted": 1,
             "required": 1
-          }
-        },
-        {
+          },
           "id": "WP-05",
           "title": "Operations Dashboard",
-          "evidencePath": "docs/architecture/validation/WP-05-Operations-Dashboard-Completion-Report.md",
-          "status": "completed",
-          "evidenceStatus": "Accepted",
-          "evidence": {
-            "present": 1,
-            "accepted": 1,
-            "required": 1
-          }
+          "evidencePath": "docs/architecture/validation/WP-05-Operations-Dashboard-Completion-Report.md"
         },
         {
-          "id": "WP-06",
-          "title": "Enterprise Plugin SDK",
-          "evidencePath": "docs/architecture/validation/WP-06-Enterprise-Plugin-SDK-Completion-Report.md",
           "status": "completed",
           "evidenceStatus": "Accepted",
           "evidence": {
             "present": 1,
             "accepted": 1,
             "required": 1
-          }
+          },
+          "id": "WP-06",
+          "title": "Enterprise Plugin SDK",
+          "evidencePath": "docs/architecture/validation/WP-06-Enterprise-Plugin-SDK-Completion-Report.md"
         },
         {
           "id": "RC2-BASELINE",
@@ -171,9 +171,6 @@
           "status": "completed"
         },
         {
-          "id": "AP-013",
-          "title": "Scientific Image Repository Architecture",
-          "evidencePath": ".github/roadmap/evidence/AP-013.evidence.json",
           "status": "completed",
           "evidenceStatus": "completed",
           "evidence": {
@@ -183,7 +180,10 @@
             "accepted": 4,
             "missing": [],
             "rejected": []
-          }
+          },
+          "id": "AP-013",
+          "title": "Scientific Image Repository Architecture",
+          "evidencePath": ".github/roadmap/evidence/AP-013.evidence.json"
         },
         {
           "id": "AP-013C",
@@ -192,9 +192,6 @@
           "note": "DRY_RUN/NO_DELETE increment accepted; real OAT and ARB-013C-R1 complete; C8 productive cleanup excluded and not authorized."
         },
         {
-          "id": "AP-014",
-          "title": "Scientific Observation Catalog and Search",
-          "evidencePath": ".github/roadmap/evidence/AP-014.evidence.json",
           "status": "completed",
           "evidenceStatus": "completed",
           "evidence": {
@@ -204,7 +201,10 @@
             "accepted": 10,
             "missing": [],
             "rejected": []
-          }
+          },
+          "id": "AP-014",
+          "title": "Scientific Observation Catalog and Search",
+          "evidencePath": ".github/roadmap/evidence/AP-014.evidence.json"
         },
         {
           "id": "AP-015",
@@ -319,7 +319,7 @@
           "id": "BKL-036",
           "title": "Observatory Health Score",
           "status": "active",
-          "note": "Source-discovery, source mapping, evidence-envelope and archived-score gates are integrated. BKL-036-F4 is the current implementation candidate for read-only snapshot import and repository archival; no live transport, readiness, Safety Authority, remediation or device command is authorized."
+          "note": "Source-discovery, source mapping, evidence-envelope, archived-score and F4 repository-archival gates are integrated. BKL-036-F4 is Accepted / Post-Merge Verified; no live transport, readiness, Safety Authority, remediation or device command is authorized."
         },
         {
           "id": "BKL-033",
@@ -932,8 +932,8 @@
       "itemRef": "BKL-036",
       "title": "BKL-036-F4 Governed Telemetry Acquisition and Repository Archival",
       "date": "2026-09-19",
-      "status": "in_progress",
-      "description": "Owner-authorized implementation candidate: validate and archive read-only telemetry snapshots in the repository with seven-domain provenance, timestamps, freshness, evidence status and compatibility. No live transport, commands, scheduling, remediation or Safety Authority change is authorized."
+      "status": "completed",
+      "description": "PR #320 merged as c58f0cb241e1b8432ec81c17d9d6b967d023e102 after exact-head CI, ARB and Release Quality review. The repository-only seven-domain snapshot import and deterministic archive are Accepted / Post-Merge Verified; live transport, commands, scheduling, remediation and Safety Authority remain separately gated."
     }
   ]
 }
