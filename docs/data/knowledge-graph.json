@@ -646,7 +646,7 @@
     },
     {
       "id": "ADR-016",
-      "type": "adr",
+      "type": "component",
       "title": "BKL-036 Evidence Envelope and Descriptive Projection Boundary",
       "status": "Proposed",
       "authority": "repository_authority",
@@ -1054,6 +1054,26 @@
       "version": "1.0",
       "source_locator": {
         "path": "docs/data/bkl-036-f2-descriptive-health-fixture.json"
+      }
+    },
+    {
+      "id": "rel:ADR-016:documents:BKL-036",
+      "type": "documents",
+      "from": "ADR-016",
+      "to": "BKL-036",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:BKL-036-F2-VAL-001:documents:BKL-036",
+      "type": "documents",
+      "from": "BKL-036-F2-VAL-001",
+      "to": "BKL-036",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
       }
     }
   ]
