@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-036-F2 |
-| Status | In Progress — repository-only implementation candidate |
+| Status | Accepted / Post-Merge Verified — repository-only |
 | Version | 0.1 |
 | Date | 2026-09-19 |
 | Parent | BKL-036 — Observatory Health Score |

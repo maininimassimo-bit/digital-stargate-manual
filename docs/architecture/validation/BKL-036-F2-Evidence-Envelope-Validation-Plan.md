@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | BKL-036-F2-VAL-001 |
-| Status | Proposed |
+| Status | Accepted / Post-Merge Verified |
 | Version | 0.1 |
 | Date | 2026-09-19 |
 | Runtime traffic | None authorized |

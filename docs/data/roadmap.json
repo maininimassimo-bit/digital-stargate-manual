@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-18",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "3d6109eb432cc13bee9b88692cea29c5f69f28899244a4d15d862829407f4c29",
+  "sourceDigest": "79b32c4a978bf59dc08fbded725dfae5f803438eaf560eec3087ed89061789a8",
   "authority": "DSG-RGM-001",
   "projectStatus": "BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED. The BKL-036 source-discovery gate is CLOSED / ACCEPTED / POST-MERGE VERIFIED, while the broader BKL-036 capability remains current for separately governed follow-on source mapping and policy work. BKL-031 remains the bounded advisory/read-only planner; BKL-032 provides deterministic fail-closed readiness decision support, but live source/transport and public runtime GO remain separately gated. S10 production runtime unavailable; no scheduling, automatic target selection, commands or Safety Authority is authorized.",
   "currentPackage": "BKL-036",
   "nextMilestone": "BKL-036 Observatory Health Score",
-  "target": "BKL-036 source discovery and semantic contract are accepted; follow-on source mapping and any future score policy require separate governance. No scheduler, automatic target selection, device command or Safety Authority is authorized.",
+  "target": "BKL-036 source discovery, source mapping and evidence envelope boundaries are accepted; future score policy requires separate governance. No scheduler, automatic target selection, device command or Safety Authority is authorized.",
   "summary": {
     "total": 44,
     "completed": 34,
@@ -910,6 +910,14 @@
       "date": "2026-09-18",
       "status": "completed",
       "description": "PR #309 merged with expected-head verification as ab5255638a4b2d566e4082922b331901cbe21d36. Exact-head CI 15/15 and post-merge verification 17/17 workflow runs SUCCESS. BKL-036-F1 is Accepted / Post-Merge Verified as repository-only source mapping and evidence compatibility; no score, threshold, runtime, command or Safety Authority change is authorized."
+    },
+    {
+      "id": "M-BKL036-F2",
+      "itemRef": "BKL-036",
+      "title": "BKL-036-F2 Evidence Envelope and Descriptive Health Projection",
+      "date": "2026-09-19",
+      "status": "completed",
+      "description": "PR #312 merged with expected-head verification as 0a4f3de87ccf94c2132d3adac2239a52f6a5f475. Exact-head CI 13/13 and post-merge verification 14/14 workflow runs SUCCESS. BKL-036-F2 is Accepted / Post-Merge Verified as repository-only evidence envelope and descriptive projection; no score, threshold, runtime, command or Safety Authority change is authorized."
     }
   ]
 }
