@@ -2,7 +2,7 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-19",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "20de73c6becac1d38a83c1ed12a1650a20267962cd3738b6e1c4466a4fc8bee1",
+  "sourceDigest": "106b28c568df23c79860779ac76528b6a62bb13d92230dc3ea1070d83ab8ec1e",
   "authority": "DSG-RGM-001",
   "projectStatus": "BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED. The BKL-036 source-discovery gate is CLOSED / ACCEPTED / POST-MERGE VERIFIED, while the broader BKL-036 capability remains current for separately governed follow-on source mapping and policy work. BKL-031 remains the bounded advisory/read-only planner; BKL-032 provides deterministic fail-closed readiness decision support, but live source/transport and public runtime GO remain separately gated. S10 production runtime unavailable; no scheduling, automatic target selection, commands or Safety Authority is authorized.",
   "currentPackage": "BKL-036",
@@ -10,10 +10,10 @@
   "target": "BKL-036 archived-evidence score is defined as a bounded 0–100 read-only public projection; live telemetry, operational interpretation and Safety Authority remain separately gated. No scheduler, automatic target selection, device command or Safety Authority is authorized.",
   "summary": {
     "total": 44,
-    "completed": 35,
-    "active": 3,
+    "completed": 34,
+    "active": 4,
     "planned": 6,
-    "percentCompleted": 80
+    "percentCompleted": 77
   },
   "evidenceSummary": {
     "sources": 8,
@@ -217,7 +217,7 @@
     {
       "id": "observatory-intelligence",
       "title": "Observatory Intelligence & Scientific Processing Roadmap",
-      "status": "planned",
+      "status": "active",
       "items": [
         {
           "id": "BKL-029",
@@ -318,7 +318,7 @@
         {
           "id": "BKL-036",
           "title": "Observatory Health Score",
-          "status": "completed",
+          "status": "active",
           "note": "Source-discovery, source mapping, evidence-envelope, archived-score and F4 repository-archival gates are integrated. BKL-036-F4 is Accepted / Post-Merge Verified; no live transport, readiness, Safety Authority, remediation or device command is authorized."
         },
         {
