@@ -2,7 +2,7 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-19",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "53e242a6fbd617bc8e4fe0fc9259a998bd985f337e48de3780a31fe94fc5675a",
+  "sourceDigest": "106b28c568df23c79860779ac76528b6a62bb13d92230dc3ea1070d83ab8ec1e",
   "authority": "DSG-RGM-001",
   "projectStatus": "BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED. The BKL-036 source-discovery gate is CLOSED / ACCEPTED / POST-MERGE VERIFIED, while the broader BKL-036 capability remains current for separately governed follow-on source mapping and policy work. BKL-031 remains the bounded advisory/read-only planner; BKL-032 provides deterministic fail-closed readiness decision support, but live source/transport and public runtime GO remain separately gated. S10 production runtime unavailable; no scheduling, automatic target selection, commands or Safety Authority is authorized.",
   "currentPackage": "BKL-036",
@@ -319,7 +319,7 @@
           "id": "BKL-036",
           "title": "Observatory Health Score",
           "status": "active",
-          "note": "Source-discovery, source mapping, evidence-envelope and archived-score gates are integrated. BKL-036-F4 is the current implementation candidate for read-only snapshot import and repository archival; no live transport, readiness, Safety Authority, remediation or device command is authorized."
+          "note": "Source-discovery, source mapping, evidence-envelope, archived-score and F4 repository-archival gates are integrated. BKL-036-F4 is Accepted / Post-Merge Verified; no live transport, readiness, Safety Authority, remediation or device command is authorized."
         },
         {
           "id": "BKL-033",
@@ -932,8 +932,8 @@
       "itemRef": "BKL-036",
       "title": "BKL-036-F4 Governed Telemetry Acquisition and Repository Archival",
       "date": "2026-09-19",
-      "status": "in_progress",
-      "description": "Owner-authorized implementation candidate: validate and archive read-only telemetry snapshots in the repository with seven-domain provenance, timestamps, freshness, evidence status and compatibility. No live transport, commands, scheduling, remediation or Safety Authority change is authorized."
+      "status": "completed",
+      "description": "PR #320 merged as c58f0cb241e1b8432ec81c17d9d6b967d023e102 after exact-head CI, ARB and Release Quality review. The repository-only seven-domain snapshot import and deterministic archive are Accepted / Post-Merge Verified; live transport, commands, scheduling, remediation and Safety Authority remain separately gated."
     }
   ]
 }

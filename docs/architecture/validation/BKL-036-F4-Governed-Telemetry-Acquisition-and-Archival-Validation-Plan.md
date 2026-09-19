@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | ID | BKL-036-F4-VAL-001 |
-| Stato | Proposed |
+| Stato | Accepted / Post-Merge Verified |
 | Scope | Contract, validator, archive projection and boundary enforcement |
 
 ## Matrix
@@ -23,4 +23,4 @@
 
 ## Evidence
 
-The bounded fixture is docs/data/bkl-036-f4-telemetry-ingest-fixture.json; the deterministic archive is docs/data/bkl-036-f4-telemetry-archive.json. The current fixture intentionally contains unavailable domains and therefore cannot produce an F3 numeric score.
+The bounded fixture is `docs/data/bkl-036-f4-telemetry-ingest-fixture.json`; the deterministic archive is `docs/data/bkl-036-f4-telemetry-archive.json`. Exact-head CI and post-merge verification passed on PR #320 / merge `c58f0cb241e1b8432ec81c17d9d6b967d023e102`. The current fixture intentionally contains unavailable domains and therefore cannot produce an F3 numeric score. The current fixture intentionally contains unavailable domains and therefore cannot produce an F3 numeric score.
