@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEC-001 |
-| Versione | 3.1 |
+| Versione | 3.2 |
 | Stato | Active |
-| Data baseline | 17/09/2026 |
+| Data baseline | 19/09/2026 |
 
 ## 1. Scopo
 
@@ -73,6 +73,7 @@ Creare invece un ADR quando la decisione modifica un principio architetturale, i
 | DLG-062 | 18/09/2026 | Avviare BKL-036 con source discovery e semantic contract, senza implementare score, soglie, runtime, Safety Score, remediation o comandi | BKL-030, BKL-031 e BKL-032 restano separati; la comparabilità cross-domain e la qualità delle fonti devono essere verificate prima di qualunque aggregate health score | BKL-036 | Proposed / Gate Open | `BKL-036-ARCH-001`; `BKL-036-VAL-001`; `BKL-036-SOURCE-DISCOVERY-2026-09-18.md` |
 | DLG-063 | 18/09/2026 | Chiudere il gate BKL-036 come source discovery e semantic contract accettati dopo exact-head CI 14/14, merge expected-head PR #306, 15/15 workflow post-merge e verifica pubblica HTTP 200 | La chiusura non accetta score, soglie, runtime, remediation, comandi o Safety Authority; mandatory source mapping, comparability e future score policy restano separati; la capability BKL-036 resta corrente per i follow-on | BKL-036 | Closed / Accepted / Post-Merge Verified | `docs/project/BKL-036-CLOSURE-2026-09-18.md`; merge `b0d3a8b1a10ce71610e4592d5c876e9fd0c8d7c5`; follow-on BKL-036 |
 | DLG-064 | 19/09/2026 | Autorizzare BKL-036-F3 come score `0–100` pubblicato nel portale, calcolato solo su telemetria già acquisita e archiviata nel repository, con peso uguale sui sette domini e risultato `UNAVAILABLE` se anche un dominio non è `PRESENT/COMPARABLE/CURRENT` | Rendere immediatamente visibile una projection deterministica e auditabile senza usare telemetria live, score parziale, readiness, Safety Authority o comandi | BKL-036-F3 | Owner-Authorized / Implementation Candidate | ADR-017; BKL-036-F3 handoff; owner decisions 19/09/2026 |
+| DLG-065 | 19/09/2026 | Rimuovere permanentemente il limite di due acquisizioni/schedule F9 al giorno: nessun contatore giornaliero blocca più i run schedulati o i `workflow_dispatch` autorizzati; mantenere cron 09:30/17:15 UTC, `F9_ZERO_EUR_GUARD=CONFIRMED`, budget monetario EUR 0, GRIB effimeri, nessun retry automatico e boundary read-only | Eliminare il blocco che ha impedito l’aggiornamento dell’Observation Planner mantenendo invariati costi, retention, privacy, fail-closed e authority boundary | BKL-031 F9 | Owner-Authorized / Implementation Candidate | Owner authorization 19/09/2026; ADR-012 superseding update; branch `fix/remove-f9-daily-acquisition-limit` |
 
 ## 5. Delega operativa GitHub
 
