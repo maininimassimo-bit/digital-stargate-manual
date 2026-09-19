@@ -36,6 +36,6 @@ for (const [name, mutate] of [
   test(name, async () => {
     const fixture = JSON.parse(await readFile(fixturePath, 'utf8'));
     const result = await run(mutate(fixture));
-    assert.notEqual(result.status, 0, result.stdout);
+    assert.notEqual(result.status, 0, result.stdout || result.stderr || 'expected validator failure');
   });
 }
