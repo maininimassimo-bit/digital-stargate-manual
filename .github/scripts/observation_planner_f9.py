@@ -287,7 +287,7 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
             "nightWindow": {"fromUtc": utc(instants[0]), "toUtcExclusive": utc(instants[-1] + dt.timedelta(hours=1))},
             "method": {"id": "BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.0", "ephemerisMode": "EXPLICIT_MOSEPH_NO_FALLBACK", "scoreWeights": f8["method"]["scoreWeights"], "displayFilter": "solarAltitudeDeg <= -18 and targetAltitudeDeg > 0"},
             "setupProfiles": f8["setupProfiles"], "targetProfiles": targets, "targetCatalog": {"catalogId": catalog["catalogId"], "catalogCompleteness": catalog["catalogCompleteness"], "candidateCount": len(catalog["targets"])}, "suitabilityEvidence": suitability_public, "hourly": rows, "rankings": rankings,
-            "boundaries": {"recurringTraffic": True, "maximumAcquisitionsPerDay": 2, "monetaryBudgetEur": 0, "rawGribRetention": "NONE_EPHEMERAL_ONLY",
+            "boundaries": {"recurringTraffic": True, "monetaryBudgetEur": 0, "rawGribRetention": "NONE_EPHEMERAL_ONLY",
                            "readinessAuthority": False, "automaticTargetSelection": False, "schedulingAuthority": False, "actionAuthority": "NONE", "commandAuthority": "NONE",
                            "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS", "protectedCoordinatesPublished": False},
             "attribution": {"source": "Agenzia ItaliaMeteo / ARPAE ICON-2I via MeteoHub", "license": "CC BY 4.0", "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"}}
@@ -302,7 +302,7 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
             or forecast.get("modelId") != "ICON_2I" or forecast.get("freshnessState") != "FRESH"):
         raise ContractError("FORECAST_LINEAGE")
     boundary = data.get("boundaries", {})
-    expected = {"recurringTraffic": True, "maximumAcquisitionsPerDay": 2, "monetaryBudgetEur": 0, "rawGribRetention": "NONE_EPHEMERAL_ONLY", "readinessAuthority": False,
+    expected = {"recurringTraffic": True, "monetaryBudgetEur": 0, "rawGribRetention": "NONE_EPHEMERAL_ONLY", "readinessAuthority": False,
                 "automaticTargetSelection": False, "schedulingAuthority": False, "actionAuthority": "NONE", "commandAuthority": "NONE", "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS", "protectedCoordinatesPublished": False}
     if any(boundary.get(k) != v for k, v in expected.items()):
         raise ContractError("BOUNDARY")
