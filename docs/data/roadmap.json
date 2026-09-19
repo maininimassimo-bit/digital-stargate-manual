@@ -27,76 +27,76 @@
       "status": "active",
       "items": [
         {
-          "status": "completed",
-          "evidenceStatus": "Accepted",
-          "evidence": {
-            "present": 1,
-            "accepted": 1,
-            "required": 1
-          },
           "id": "WP-01",
           "title": "Enterprise Foundation Framework",
-          "evidencePath": "docs/architecture/validation/WP-01-Enterprise-Foundation-Framework-Completion-Report.md"
-        },
-        {
+          "evidencePath": "docs/architecture/validation/WP-01-Enterprise-Foundation-Framework-Completion-Report.md",
           "status": "completed",
           "evidenceStatus": "Accepted",
           "evidence": {
             "present": 1,
             "accepted": 1,
             "required": 1
-          },
+          }
+        },
+        {
           "id": "WP-02",
           "title": "Scientific Platform 2.0",
-          "evidencePath": "docs/architecture/validation/WP-02-Scientific-Platform-2.0-Completion-Report.md"
-        },
-        {
+          "evidencePath": "docs/architecture/validation/WP-02-Scientific-Platform-2.0-Completion-Report.md",
           "status": "completed",
           "evidenceStatus": "Accepted",
           "evidence": {
             "present": 1,
             "accepted": 1,
             "required": 1
-          },
+          }
+        },
+        {
           "id": "WP-03",
           "title": "Enterprise Theme Framework",
-          "evidencePath": "docs/architecture/validation/WP-03-Enterprise-Theme-Framework-Completion-Report.md"
-        },
-        {
+          "evidencePath": "docs/architecture/validation/WP-03-Enterprise-Theme-Framework-Completion-Report.md",
           "status": "completed",
           "evidenceStatus": "Accepted",
           "evidence": {
             "present": 1,
             "accepted": 1,
             "required": 1
-          },
+          }
+        },
+        {
           "id": "WP-04",
           "title": "Enterprise Search Center",
-          "evidencePath": "docs/architecture/validation/WP-04-Enterprise-Search-Center-Completion-Report.md"
-        },
-        {
+          "evidencePath": "docs/architecture/validation/WP-04-Enterprise-Search-Center-Completion-Report.md",
           "status": "completed",
           "evidenceStatus": "Accepted",
           "evidence": {
             "present": 1,
             "accepted": 1,
             "required": 1
-          },
+          }
+        },
+        {
           "id": "WP-05",
           "title": "Operations Dashboard",
-          "evidencePath": "docs/architecture/validation/WP-05-Operations-Dashboard-Completion-Report.md"
-        },
-        {
+          "evidencePath": "docs/architecture/validation/WP-05-Operations-Dashboard-Completion-Report.md",
           "status": "completed",
           "evidenceStatus": "Accepted",
           "evidence": {
             "present": 1,
             "accepted": 1,
             "required": 1
-          },
+          }
+        },
+        {
           "id": "WP-06",
           "title": "Enterprise Plugin SDK",
-          "evidencePath": "docs/architecture/validation/WP-06-Enterprise-Plugin-SDK-Completion-Report.md"
+          "evidencePath": "docs/architecture/validation/WP-06-Enterprise-Plugin-SDK-Completion-Report.md",
+          "status": "completed",
+          "evidenceStatus": "Accepted",
+          "evidence": {
+            "present": 1,
+            "accepted": 1,
+            "required": 1
+          }
         },
         {
           "id": "RC2-BASELINE",
@@ -171,6 +171,9 @@
           "status": "completed"
         },
         {
+          "id": "AP-013",
+          "title": "Scientific Image Repository Architecture",
+          "evidencePath": ".github/roadmap/evidence/AP-013.evidence.json",
           "status": "completed",
           "evidenceStatus": "completed",
           "evidence": {
@@ -180,10 +183,7 @@
             "accepted": 4,
             "missing": [],
             "rejected": []
-          },
-          "id": "AP-013",
-          "title": "Scientific Image Repository Architecture",
-          "evidencePath": ".github/roadmap/evidence/AP-013.evidence.json"
+          }
         },
         {
           "id": "AP-013C",
@@ -192,6 +192,9 @@
           "note": "DRY_RUN/NO_DELETE increment accepted; real OAT and ARB-013C-R1 complete; C8 productive cleanup excluded and not authorized."
         },
         {
+          "id": "AP-014",
+          "title": "Scientific Observation Catalog and Search",
+          "evidencePath": ".github/roadmap/evidence/AP-014.evidence.json",
           "status": "completed",
           "evidenceStatus": "completed",
           "evidence": {
@@ -201,10 +204,7 @@
             "accepted": 10,
             "missing": [],
             "rejected": []
-          },
-          "id": "AP-014",
-          "title": "Scientific Observation Catalog and Search",
-          "evidencePath": ".github/roadmap/evidence/AP-014.evidence.json"
+          }
         },
         {
           "id": "AP-015",
