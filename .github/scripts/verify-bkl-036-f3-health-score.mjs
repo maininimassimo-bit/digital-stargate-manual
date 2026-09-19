@@ -1,0 +1,24 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+
+const score = JSON.parse(fs.readFileSync('docs/data/bkl-036-f3-health-score.json','utf8'));
+const input = JSON.parse(fs.readFileSync('docs/data/bkl-036-f3-archived-evidence-input.json','utf8'));
+const domains = ['weather','dome','mount','camera','power','network','eagle_health'];
+assert.equal(score.contract_id,'DSG.BKL036.F3.HealthScore');
+assert.equal(score.source_plane,'repository_evidence');
+assert.equal(score.live_data_used,false);
+assert.equal(score.scale,'0-100');
+assert.deepEqual(score.evidence.map(x=>x.domain),domains);
+assert.equal(score.policy.equal_weight,true);
+assert.equal(score.policy.comparable_domain_value,100);
+assert.equal(score.policy.incomplete_result,'UNAVAILABLE');
+assert.equal(score.publication.target,'public_digital_stargate_portal');
+assert.equal(score.publication.read_only,true);
+assert.equal(score.publication.non_live_label,'repository evidence / non-live / non-real-time');
+assert.deepEqual(score, JSON.parse(fs.readFileSync('docs/data/bkl-036-f3-health-score.json','utf8')));
+assert.deepEqual(input.evidence.map(x=>x.domain),domains);
+assert.equal(score.score_status,'UNAVAILABLE');
+assert.equal(score.score,null);
+assert.ok(score.reasons.includes('NO_PARTIAL_SCORE_ALLOWED'));
+assert.ok(score.evidence.some(x=>x.compatibility !== 'COMPARABLE'));
+console.log('BKL-036-F3 health score validator PASS: archived evidence is fail-closed and non-live.');
