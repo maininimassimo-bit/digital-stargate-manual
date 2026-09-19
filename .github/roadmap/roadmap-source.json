@@ -5,7 +5,7 @@
   "projectStatus": "BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED. The BKL-036 source-discovery gate is CLOSED / ACCEPTED / POST-MERGE VERIFIED, while the broader BKL-036 capability remains current for separately governed follow-on source mapping and policy work. BKL-031 remains the bounded advisory/read-only planner; BKL-032 provides deterministic fail-closed readiness decision support, but live source/transport and public runtime GO remain separately gated. S10 production runtime unavailable; no scheduling, automatic target selection, commands or Safety Authority is authorized.",
   "currentPackage": "BKL-036",
   "nextMilestone": "BKL-036 Observatory Health Score",
-  "target": "BKL-036 source discovery, source mapping and evidence envelope boundaries are accepted; future score policy requires separate governance. No scheduler, automatic target selection, device command or Safety Authority is authorized.",
+  "target": "BKL-036 archived-evidence score is defined as a bounded 0–100 read-only public projection; live telemetry, operational interpretation and Safety Authority remain separately gated. No scheduler, automatic target selection, device command or Safety Authority is authorized.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -248,7 +248,7 @@
           "id": "BKL-036",
           "title": "Observatory Health Score",
           "status": "active",
-          "note": "Source-discovery and semantic-contract gate accepted via PR #306 merge b0d3a8b1a10ce71610e4592d5c876e9fd0c8d7c5. BKL-036-F1 is the current repository-only follow-on for governed source mapping and evidence compatibility; no health score, thresholds, Safety Authority, remediation or device command is authorized."
+          "note": "Source-discovery, source mapping and evidence-envelope gates are Accepted / Post-Merge Verified via PRs #306, #309 and #312. BKL-036-F3 is a repository-archived evidence score published read-only in the public portal; current output is fail-closed UNAVAILABLE because all seven domains are not comparable and current. No live telemetry, readiness, Safety Authority, remediation or device command is authorized."
         },
         {
           "id": "BKL-033",
@@ -782,6 +782,14 @@
       "date": "2026-09-19",
       "status": "completed",
       "description": "PR #312 merged with expected-head verification as 0a4f3de87ccf94c2132d3adac2239a52f6a5f475. Exact-head CI 13/13 and post-merge verification 14/14 workflow runs SUCCESS. BKL-036-F2 is Accepted / Post-Merge Verified as repository-only evidence envelope and descriptive projection; no score, threshold, runtime, command or Safety Authority change is authorized."
+    },
+    {
+      "id": "M-BKL036-F3",
+      "itemRef": "BKL-036",
+      "title": "BKL-036-F3 Archived Evidence Health Score",
+      "date": "2026-09-19",
+      "status": "in_progress",
+      "description": "Owner-authorized policy candidate: score 0–100, equal weight across seven mandatory domains, 100 only when all domains are PRESENT/COMPARABLE/CURRENT, otherwise UNAVAILABLE. Public portal projection is repository evidence, non-live and non-real-time; implementation and governance review pending."
     }
   ]
 }

@@ -683,6 +683,46 @@
       "source_locator": {
         "path": "docs/data/bkl-036-f2-descriptive-health-fixture.json"
       }
+    },
+    {
+      "id": "ADR-017",
+      "type": "adr",
+      "title": "BKL-036 Archived Evidence Score Boundary",
+      "status": "Proposed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/ADR-017-BKL-036-Archived-Evidence-Score-Boundary.md"
+      }
+    },
+    {
+      "id": "BKL-036-F3-SCORE-001",
+      "type": "component",
+      "title": "BKL-036-F3 Archived Evidence Health Score",
+      "status": "Implementation candidate",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/telemetry/BKL-036-F3-Archived-Evidence-Score.md"
+      }
+    },
+    {
+      "id": "BKL-036-F3-VAL-001",
+      "type": "component",
+      "title": "BKL-036-F3 Archived Evidence Score Validation Plan",
+      "status": "Proposed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/validation/BKL-036-F3-Archived-Evidence-Score-Validation-Plan.md"
+      }
+    },
+    {
+      "id": "BKL-036-F3-FIX-001",
+      "type": "evidence",
+      "title": "BKL-036-F3 Archived Evidence Health Score Projection",
+      "status": "Implementation candidate",
+      "authority": "evidence_authority",
+      "source_locator": {
+        "path": "docs/data/bkl-036-f3-health-score.json"
+      }
     }
   ],
   "relations": [
@@ -1070,6 +1110,66 @@
       "id": "rel:BKL-036-F2-VAL-001:documents:BKL-036",
       "type": "documents",
       "from": "BKL-036-F2-VAL-001",
+      "to": "BKL-036",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:ADR-017:governs:BKL-036-F3-SCORE-001",
+      "type": "governs",
+      "from": "ADR-017",
+      "to": "BKL-036-F3-SCORE-001",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/ADR-017-BKL-036-Archived-Evidence-Score-Boundary.md"
+      }
+    },
+    {
+      "id": "rel:BKL-036-F3-SCORE-001:documents:BKL-036",
+      "type": "documents",
+      "from": "BKL-036-F3-SCORE-001",
+      "to": "BKL-036",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:BKL-036-F3-VAL-001:validates:BKL-036-F3-SCORE-001",
+      "type": "relates_to",
+      "from": "BKL-036-F3-VAL-001",
+      "to": "BKL-036-F3-SCORE-001",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/validation/BKL-036-F3-Archived-Evidence-Score-Validation-Plan.md"
+      }
+    },
+    {
+      "id": "rel:BKL-036-F3-SCORE-001:evidenced_by:BKL-036-F3-FIX-001",
+      "type": "evidenced_by",
+      "from": "BKL-036-F3-SCORE-001",
+      "to": "BKL-036-F3-FIX-001",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/data/bkl-036-f3-health-score.json"
+      }
+    },
+    {
+      "id": "rel:ADR-017:documents:BKL-036",
+      "type": "documents",
+      "from": "ADR-017",
+      "to": "BKL-036",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:BKL-036-F3-VAL-001:documents:BKL-036",
+      "type": "documents",
+      "from": "BKL-036-F3-VAL-001",
       "to": "BKL-036",
       "version": "1.0",
       "source_locator": {

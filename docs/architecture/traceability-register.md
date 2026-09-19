@@ -65,6 +65,7 @@
 | AP-014 | Scientific Catalog and Search | SIR-VIS-001 | Nessuna | Planned |
 | AP-015 | Scientific Knowledge Platform | SKL-VIS-001 | Nessuna | Planned |
 | BKL-036-F2 | Evidence Envelope and Descriptive Health Projection | ADR-016, BKL-036-F2-ENV-001, BKL-036-F2-VAL-001 | Accepted / Post-Merge Verified | PR #312, merge `0a4f3de87ccf94c2132d3adac2239a52f6a5f475`; synthetic offline fixture; no runtime authority |
+| BKL-036-F3 | Archived Evidence Health Score | ADR-017, BKL-036-F3-SCORE-001, BKL-036-F3-VAL-001 | In Progress — implementation candidate | Repository-archived evidence only; public read-only projection; current output `UNAVAILABLE`; no live runtime authority |
 
 ## 4. Architecture Artifact Register
 
@@ -97,6 +98,8 @@
 | BKL-036-F1-VAL-001 | Source Mapping Validation Plan | BKL-036 | Accepted / Post-Merge Verified | Validation matrix passed on reviewed head; no runtime traffic authorized |
 | BKL-036-F2-ENV-001 | Evidence Envelope and Descriptive Health Projection | BKL-036 | Accepted / Post-Merge Verified | PR #312, merge `0a4f3de87ccf94c2132d3adac2239a52f6a5f475`; descriptive-only projection; action authority NONE |
 | BKL-036-F2-VAL-001 | Evidence Envelope Validation Plan | BKL-036 | Accepted / Post-Merge Verified | 13/13 exact-head and 14/14 post-merge SUCCESS; no live traffic authorized |
+| BKL-036-F3-SCORE-001 | Archived Evidence Health Score | BKL-036 | Implementation candidate | Deterministic 0–100 equal-weight policy; all seven domains required; current projection `UNAVAILABLE` |
+| BKL-036-F3-VAL-001 | Archived Evidence Score Validation Plan | BKL-036 | Proposed | Fail-closed score and public non-live labeling; no live telemetry or command path |
 
 ## 5. Data Product Candidate Register
 

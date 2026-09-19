@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "DSG.BKL036.F3.HealthScore",
+  "projection_kind": "repository_archived_evidence",
+  "source_plane": "repository_evidence",
+  "live_data_used": false,
+  "scale": "0-100",
+  "domain_count": 7,
+  "policy": {
+    "equal_weight": true,
+    "comparable_domain_value": 100,
+    "incomplete_result": "UNAVAILABLE",
+    "readiness_authority": "BKL-032",
+    "safety_authority": "LOCAL_PHYSICAL_INTERLOCKS"
+  },
+  "score_status": "UNAVAILABLE",
+  "score": null,
+  "evaluated_at_utc": "2026-09-19T00:00:00Z",
+  "reasons": [
+    "BKL036_F3_ARCHIVED_EVIDENCE_ONLY",
+    "ONE_OR_MORE_MANDATORY_DOMAINS_NOT_COMPARABLE",
+    "NO_PARTIAL_SCORE_ALLOWED",
+    "NOT_LIVE_AND_NOT_REAL_TIME"
+  ],
+  "evidence": [
+    {
+      "domain": "weather",
+      "evidence_status": "STALE",
+      "compatibility": "CONTEXT_ONLY",
+      "freshness_state": "STALE",
+      "source_locator": "docs/data/realtime/observatory-status.json",
+      "observed_at_utc": "2026-08-16T00:00:00Z",
+      "reason": "Archived projection is outside the source-specific freshness contract."
+    },
+    {
+      "domain": "dome",
+      "evidence_status": "UNAVAILABLE",
+      "compatibility": "UNKNOWN",
+      "freshness_state": "UNKNOWN",
+      "source_locator": "docs/data/realtime/observatory-status.json",
+      "observed_at_utc": null,
+      "reason": "No usable archived dome observation is present."
+    },
+    {
+      "domain": "mount",
+      "evidence_status": "UNAVAILABLE",
+      "compatibility": "UNKNOWN",
+      "freshness_state": "UNKNOWN",
+      "source_locator": "docs/data/realtime/observatory-status.json",
+      "observed_at_utc": null,
+      "reason": "No usable archived mount observation is present."
+    },
+    {
+      "domain": "camera",
+      "evidence_status": "UNAVAILABLE",
+      "compatibility": "UNKNOWN",
+      "freshness_state": "UNKNOWN",
+      "source_locator": "docs/data/realtime/observatory-status.json",
+      "observed_at_utc": null,
+      "reason": "No usable archived camera observation is present."
+    },
+    {
+      "domain": "power",
+      "evidence_status": "UNAVAILABLE",
+      "compatibility": "UNKNOWN",
+      "freshness_state": "UNKNOWN",
+      "source_locator": "docs/data/realtime/observatory-status.json",
+      "observed_at_utc": null,
+      "reason": "No usable archived power observation is present."
+    },
+    {
+      "domain": "network",
+      "evidence_status": "UNAVAILABLE",
+      "compatibility": "UNKNOWN",
+      "freshness_state": "UNKNOWN",
+      "source_locator": "docs/data/realtime/observatory-status.json",
+      "observed_at_utc": null,
+      "reason": "No usable archived network observation is present."
+    },
+    {
+      "domain": "eagle_health",
+      "evidence_status": "UNAVAILABLE",
+      "compatibility": "UNKNOWN",
+      "freshness_state": "UNKNOWN",
+      "source_locator": "docs/data/realtime/eagle-health.json",
+      "observed_at_utc": null,
+      "reason": "No usable archived EAGLE health observation is present."
+    }
+  ],
+  "publication": {
+    "target": "public_digital_stargate_portal",
+    "read_only": true,
+    "non_live_label": "repository evidence / non-live / non-real-time",
+    "timestamp_label": true,
+    "source_label": true
+  }
+}

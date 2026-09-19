@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "input_kind": "repository_archived_evidence",
+  "evaluated_at_utc": "2026-09-19T00:00:00Z",
+  "live_data_used": false,
+  "evidence": [
+    {"domain":"weather","evidence_status":"STALE","compatibility":"CONTEXT_ONLY","freshness_state":"STALE","source_locator":"docs/data/realtime/observatory-status.json","observed_at_utc":"2026-08-16T00:00:00Z","reason":"Archived projection is outside the source-specific freshness contract."},
+    {"domain":"dome","evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","freshness_state":"UNKNOWN","source_locator":"docs/data/realtime/observatory-status.json","observed_at_utc":null,"reason":"No usable archived dome observation is present."},
+    {"domain":"mount","evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","freshness_state":"UNKNOWN","source_locator":"docs/data/realtime/observatory-status.json","observed_at_utc":null,"reason":"No usable archived mount observation is present."},
+    {"domain":"camera","evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","freshness_state":"UNKNOWN","source_locator":"docs/data/realtime/observatory-status.json","observed_at_utc":null,"reason":"No usable archived camera observation is present."},
+    {"domain":"power","evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","freshness_state":"UNKNOWN","source_locator":"docs/data/realtime/observatory-status.json","observed_at_utc":null,"reason":"No usable archived power observation is present."},
+    {"domain":"network","evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","freshness_state":"UNKNOWN","source_locator":"docs/data/realtime/observatory-status.json","observed_at_utc":null,"reason":"No usable archived network observation is present."},
+    {"domain":"eagle_health","evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","freshness_state":"UNKNOWN","source_locator":"docs/data/realtime/eagle-health.json","observed_at_utc":null,"reason":"No usable archived EAGLE health observation is present."}
+  ]
+}

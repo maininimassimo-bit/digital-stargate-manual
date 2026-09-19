@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.example/contracts/telemetry/bkl-036-f3-health-score-v1.schema.json",
+  "title": "BKL-036-F3 Archived Evidence Health Score",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_id",
+    "projection_kind",
+    "source_plane",
+    "live_data_used",
+    "scale",
+    "domain_count",
+    "policy",
+    "score_status",
+    "score",
+    "evaluated_at_utc",
+    "evidence",
+    "publication"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "contract_id": {"const": "DSG.BKL036.F3.HealthScore"},
+    "projection_kind": {"const": "repository_archived_evidence"},
+    "source_plane": {"const": "repository_evidence"},
+    "live_data_used": {"const": false},
+    "scale": {"const": "0-100"},
+    "domain_count": {"const": 7},
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["equal_weight", "comparable_domain_value", "incomplete_result", "readiness_authority", "safety_authority"],
+      "properties": {
+        "equal_weight": {"const": true},
+        "comparable_domain_value": {"const": 100},
+        "incomplete_result": {"const": "UNAVAILABLE"},
+        "readiness_authority": {"const": "BKL-032"},
+        "safety_authority": {"const": "LOCAL_PHYSICAL_INTERLOCKS"}
+      }
+    },
+    "score_status": {"enum": ["AVAILABLE", "UNAVAILABLE"]},
+    "score": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+    "evaluated_at_utc": {"type": "string", "format": "date-time"},
+    "reasons": {"type": "array", "items": {"type": "string"}},
+    "evidence": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["domain", "evidence_status", "compatibility", "freshness_state", "source_locator", "observed_at_utc"],
+        "properties": {
+          "domain": {"enum": ["weather", "dome", "mount", "camera", "power", "network", "eagle_health"]},
+          "evidence_status": {"enum": ["PRESENT", "MISSING", "STALE", "UNAVAILABLE", "PARTIAL", "CONFLICTING"]},
+          "compatibility": {"enum": ["COMPARABLE", "CONTEXT_ONLY", "INCOMPATIBLE", "UNKNOWN"]},
+          "freshness_state": {"enum": ["CURRENT", "STALE", "UNKNOWN"]},
+          "source_locator": {"type": "string", "minLength": 1},
+          "observed_at_utc": {"type": ["string", "null"], "format": "date-time"},
+          "reason": {"type": "string"}
+        }
+      }
+    },
+    "publication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "read_only", "non_live_label", "timestamp_label", "source_label"],
+      "properties": {
+        "target": {"const": "public_digital_stargate_portal"},
+        "read_only": {"const": true},
+        "non_live_label": {"const": "repository evidence / non-live / non-real-time"},
+        "timestamp_label": {"const": true},
+        "source_label": {"const": true}
+      }
+    }
+  }
+}
