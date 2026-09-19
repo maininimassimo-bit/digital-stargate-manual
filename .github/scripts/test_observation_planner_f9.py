@@ -20,7 +20,7 @@ def valid_projection():
       'suitabilityEvidence':{'methodId':'BKL031-F8-SETUP-SUITABILITY@1.1','componentWeights':{'framing':0.2,'filterSignal':0.4,'imageScaleObjectClass':0.4},'cases':[{'setupId':'S','targetKey':'T','components':{'framing':80,'filterSignal':90,'imageScaleObjectClass':85},'aggregateScore':86,'reasonCodes':['TEST']} ]},
       'hourly':[{'validAtUtc':stamp(instant),'weather':{'cloudCoverPct':10,'relativeHumidityPct':20,'precipitationMm':0,'windSpeedKmh':3,'windGustKmh':4},'targets':{'T':{}}} for instant in instants],
       'rankings':[{'setupId':'S','targets':[{'targetKey':'T'}]}],
-      'boundaries':{'recurringTraffic':True,'maximumAcquisitionsPerDay':2,'monetaryBudgetEur':0,'rawGribRetention':'NONE_EPHEMERAL_ONLY','readinessAuthority':False,'automaticTargetSelection':False,'schedulingAuthority':False,'actionAuthority':'NONE','commandAuthority':'NONE','safetyAuthority':'LOCAL_PHYSICAL_INTERLOCKS','protectedCoordinatesPublished':False}}
+      'boundaries':{'recurringTraffic':True,'monetaryBudgetEur':0,'rawGribRetention':'NONE_EPHEMERAL_ONLY','readinessAuthority':False,'automaticTargetSelection':False,'schedulingAuthority':False,'actionAuthority':'NONE','commandAuthority':'NONE','safetyAuthority':'LOCAL_PHYSICAL_INTERLOCKS','protectedCoordinatesPublished':False}}
 
 class F9Tests(unittest.TestCase):
     def test_known_contract(self): f9.validate_projection(valid_projection())
