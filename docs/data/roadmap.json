@@ -1,19 +1,19 @@
 {
   "schemaVersion": "2.2",
-  "updatedAt": "2026-09-19",
+  "updatedAt": "2026-09-20",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "b536141d10bdbbef48932c7ed07d760b038c26d29a21291470abf96e1b25b71a",
+  "sourceDigest": "f45a861aa2f8946c9f966c95ebbbf37d6149e71a5a95520e3d9c4e7addf8fabc",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED. BKL-036 is CLOSED / ACCEPTED / POST-MERGE VERIFIED as a bounded repository-only archived-evidence capability; current output remains UNAVAILABLE. live source/transport and public runtime GO remain separately gated. BKL-031 remains the bounded advisory/read-only planner; BKL-032 provides deterministic fail-closed readiness decision support. S10 production runtime unavailable; no scheduling, automatic target selection, commands or Safety Authority is authorized.",
-  "currentPackage": "AP-007",
-  "nextMilestone": "AP-007 Enterprise Operations and Service Management Architecture",
-  "target": "BKL-036 archived-evidence score is defined as a bounded 0–100 read-only public projection; live telemetry, operational interpretation and Safety Authority remain separately gated. No scheduler, automatic target selection, device command or Safety Authority is authorized.",
+  "projectStatus": "BKL-031, BKL-032 and BKL-036 are CLOSED / ACCEPTED / POST-MERGE VERIFIED within their bounded scopes. AP-007 and OPS-REF-001 are ACCEPTED WITH CONDITIONS as the enterprise operations architecture baseline; operational roles and evidence remain DA VALIDARE. AP-008 is the next active architecture package. S10 production runtime remains unavailable; no scheduling, automatic target selection, commands or Safety Authority is authorized.",
+  "currentPackage": "AP-008",
+  "nextMilestone": "AP-008 Enterprise Integration Architecture",
+  "target": "Prepare AP-008 enterprise integration contracts and boundaries while preserving read-only, fail-closed and local Safety Authority constraints.",
   "summary": {
     "total": 44,
-    "completed": 35,
-    "active": 3,
+    "completed": 36,
+    "active": 2,
     "planned": 6,
-    "percentCompleted": 80
+    "percentCompleted": 82
   },
   "evidenceSummary": {
     "sources": 8,
@@ -29,7 +29,6 @@
         {
           "id": "WP-01",
           "title": "Enterprise Foundation Framework",
-          "evidencePath": "docs/architecture/validation/WP-01-Enterprise-Foundation-Framework-Completion-Report.md",
           "status": "completed",
           "evidenceStatus": "Accepted",
           "evidence": {
@@ -41,7 +40,6 @@
         {
           "id": "WP-02",
           "title": "Scientific Platform 2.0",
-          "evidencePath": "docs/architecture/validation/WP-02-Scientific-Platform-2.0-Completion-Report.md",
           "status": "completed",
           "evidenceStatus": "Accepted",
           "evidence": {
@@ -53,7 +51,6 @@
         {
           "id": "WP-03",
           "title": "Enterprise Theme Framework",
-          "evidencePath": "docs/architecture/validation/WP-03-Enterprise-Theme-Framework-Completion-Report.md",
           "status": "completed",
           "evidenceStatus": "Accepted",
           "evidence": {
@@ -65,7 +62,6 @@
         {
           "id": "WP-04",
           "title": "Enterprise Search Center",
-          "evidencePath": "docs/architecture/validation/WP-04-Enterprise-Search-Center-Completion-Report.md",
           "status": "completed",
           "evidenceStatus": "Accepted",
           "evidence": {
@@ -77,7 +73,6 @@
         {
           "id": "WP-05",
           "title": "Operations Dashboard",
-          "evidencePath": "docs/architecture/validation/WP-05-Operations-Dashboard-Completion-Report.md",
           "status": "completed",
           "evidenceStatus": "Accepted",
           "evidence": {
@@ -89,7 +84,6 @@
         {
           "id": "WP-06",
           "title": "Enterprise Plugin SDK",
-          "evidencePath": "docs/architecture/validation/WP-06-Enterprise-Plugin-SDK-Completion-Report.md",
           "status": "completed",
           "evidenceStatus": "Accepted",
           "evidence": {
@@ -143,7 +137,7 @@
         {
           "id": "AP-007",
           "title": "Enterprise Operations and Service Management Architecture",
-          "status": "active"
+          "status": "completed"
         },
         {
           "id": "AP-008",
@@ -173,7 +167,6 @@
         {
           "id": "AP-013",
           "title": "Scientific Image Repository Architecture",
-          "evidencePath": ".github/roadmap/evidence/AP-013.evidence.json",
           "status": "completed",
           "evidenceStatus": "completed",
           "evidence": {
@@ -194,7 +187,6 @@
         {
           "id": "AP-014",
           "title": "Scientific Observation Catalog and Search",
-          "evidencePath": ".github/roadmap/evidence/AP-014.evidence.json",
           "status": "completed",
           "evidenceStatus": "completed",
           "evidence": {
