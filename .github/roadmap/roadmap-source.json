@@ -1,11 +1,11 @@
 {
   "schemaVersion": "2.2",
-  "updatedAt": "2026-09-19",
+  "updatedAt": "2026-09-20",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED. BKL-036 is CLOSED / ACCEPTED / POST-MERGE VERIFIED as a bounded repository-only archived-evidence capability; current output remains UNAVAILABLE. live source/transport and public runtime GO remain separately gated. BKL-031 remains the bounded advisory/read-only planner; BKL-032 provides deterministic fail-closed readiness decision support. S10 production runtime unavailable; no scheduling, automatic target selection, commands or Safety Authority is authorized.",
-  "currentPackage": "AP-007",
-  "nextMilestone": "AP-007 Enterprise Operations and Service Management Architecture",
-  "target": "BKL-036 archived-evidence score is defined as a bounded 0–100 read-only public projection; live telemetry, operational interpretation and Safety Authority remain separately gated. No scheduler, automatic target selection, device command or Safety Authority is authorized.",
+  "projectStatus": "BKL-031, BKL-032 and BKL-036 are CLOSED / ACCEPTED / POST-MERGE VERIFIED within their bounded scopes. AP-007 and OPS-REF-001 are ACCEPTED WITH CONDITIONS as the enterprise operations architecture baseline; operational roles and evidence remain DA VALIDARE. AP-008 is the next active architecture package. S10 production runtime remains unavailable; no scheduling, automatic target selection, commands or Safety Authority is authorized.",
+  "currentPackage": "AP-008",
+  "nextMilestone": "AP-008 Enterprise Integration Architecture",
+  "target": "Prepare AP-008 enterprise integration contracts and boundaries while preserving read-only, fail-closed and local Safety Authority constraints.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -91,7 +91,7 @@
         {
           "id": "AP-007",
           "title": "Enterprise Operations and Service Management Architecture",
-          "status": "active"
+          "status": "completed"
         },
         {
           "id": "AP-008",
