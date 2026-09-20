@@ -773,6 +773,16 @@
       "source_locator": {
         "path": "docs/project/BKL-036-CLOSURE-2026-09-19.md"
       }
+    },
+    {
+      "id": "AP007-BASELINE-RECON-001",
+      "type": "evidence",
+      "title": "AP-007 Baseline Reconciliation and Ownership Bootstrap",
+      "status": "Baseline reconciled — review candidate",
+      "source_locator": {
+        "path": "docs/project/AP-007-BASELINE-RECONCILIATION-2026-09-20.md"
+      },
+      "authority": "projection"
     }
   ],
   "relations": [
@@ -1284,6 +1294,16 @@
       "version": "1.0",
       "source_locator": {
         "path": "docs/project/BKL-036-CLOSURE-2026-09-19.md"
+      }
+    },
+    {
+      "id": "rel:AP007-BASELINE-RECON-001:documents:AP-007",
+      "type": "documents",
+      "from": "AP007-BASELINE-RECON-001",
+      "to": "AP-007",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
       }
     }
   ]
