@@ -8,7 +8,7 @@
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch | `main` |
 | Data | 30/07/2026 |
-| Stato | Proposed for independent ARB review |
+| Stato | Accepted with conditions — architecture baseline |
 
 ## 1. Scopo
 

@@ -54,7 +54,7 @@
 | AP-004 | Telemetry and Observability | package e reference architecture | ARB-006 | Approved with conditions |
 | AP-005 | Identity and Remote Security | package e reference architecture | ARB-007 | Approved with conditions, 91/100 |
 | AP-006 | Configuration and Asset Management | package e reference architecture | ARB-008 | Approved with conditions, 92/100 |
-| AP-007 | Operations and Service Management | AP-007, OPS-REF-001 | Nessuna registrata | Proposed for independent ARB review |
+| AP-007 | Operations and Service Management | AP-007, OPS-REF-001 | ARB-AP007-001; RQ-AP007-001 | Accepted with conditions; not operationally verified |
 | AP007-BASELINE-RECON-001 | AP-007 Baseline Reconciliation and Ownership Bootstrap | AP-007, OPS-REF-001 | Nessuna registrata | Baseline reconciled; review candidate |
 | AP-008 | Enterprise Integration | AP-008, INT-REF-001, INT-CAT-001 | Nessuna registrata | Proposed for independent ARB review |
 | AP-009 | Enterprise Infrastructure | AP-009, INF-REF-001 | ARB-009 | Approved with conditions, 94/100 |
@@ -73,7 +73,7 @@
 
 | ID | Artefatto | Package | Stato | Evidence |
 |---|---|---|---|---|
-| OPS-REF-001 | Operations and Service Management Reference Architecture | AP-007 | Proposed for review | documentale |
+| OPS-REF-001 | Operations and Service Management Reference Architecture | AP-007 | ARB-AP007-001; RQ-AP007-001 | Accepted with conditions |
 | INT-REF-001 | Enterprise Integration Reference Architecture | AP-008 | Proposed for review | documentale |
 | INT-CAT-001 | Integration Contract Catalog | AP-008 | Initial candidate catalog | nessun runtime test |
 | INF-REF-001 | Enterprise Infrastructure Reference Architecture | AP-009 | Approved with conditions via ARB-009 | evidence operativa aperta |

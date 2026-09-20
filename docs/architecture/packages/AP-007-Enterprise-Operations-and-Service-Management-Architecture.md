@@ -11,7 +11,7 @@
 | Autorità | Digital StarGate Chief Architect |
 | Sponsor | Project Owner / Architecture Sponsor — Massimo Mainini |
 | Dipendenze | AP-001…AP-006; ADR-004; capitoli 18, 19, 25, 29, 30, 31, 34, 38, 40 e 41 |
-| Stato | Proposed for independent ARB review |
+| Stato | Accepted with conditions — architecture baseline; operational verification not granted |
 | Target release | Da assegnare |
 
 ## 1. Scopo
@@ -425,4 +425,4 @@ Ogni evento deve includere timestamp affidabile, service ID, correlation ID, act
 
 ## 25. Decisione
 
-AP-007 propone il modello operativo enterprise di Digital StarGate ed è pronto per una review ARB indipendente. Non promuove capability a Operationally Verified e non autorizza nuove automazioni o comandi remoti.
+AP-007 è accettato con condizioni come baseline architetturale enterprise. ARB-AP007-001 e RQ-AP007-001 sono registrati; i ruoli non verificati restano `DA VALIDARE`. Il package non promuove capability a Operationally Verified e non autorizza nuove automazioni, scheduling, remediation o comandi remoti.

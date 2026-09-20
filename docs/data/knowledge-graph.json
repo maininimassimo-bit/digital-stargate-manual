@@ -783,6 +783,26 @@
         "path": "docs/project/AP-007-BASELINE-RECONCILIATION-2026-09-20.md"
       },
       "authority": "projection"
+    },
+    {
+      "id": "ARB-AP007-001",
+      "type": "evidence",
+      "title": "AP-007 Independent Architecture Review",
+      "status": "Approved with conditions",
+      "authority": "projection",
+      "source_locator": {
+        "path": "docs/architecture/reviews/ARB-AP007-001-Independent-Architecture-Review.md"
+      }
+    },
+    {
+      "id": "RQ-AP007-001",
+      "type": "evidence",
+      "title": "AP-007 Release Quality Review",
+      "status": "Ready with conditions",
+      "authority": "projection",
+      "source_locator": {
+        "path": "docs/architecture/reviews/RQ-AP007-001-Release-Quality-Review.md"
+      }
     }
   ],
   "relations": [
@@ -1301,6 +1321,26 @@
       "type": "documents",
       "from": "AP007-BASELINE-RECON-001",
       "to": "AP-007",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:AP-007:evidenced_by:ARB-AP007-001",
+      "type": "evidenced_by",
+      "from": "AP-007",
+      "to": "ARB-AP007-001",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:AP-007:evidenced_by:RQ-AP007-001",
+      "type": "evidenced_by",
+      "from": "AP-007",
+      "to": "RQ-AP007-001",
       "version": "1.0",
       "source_locator": {
         "path": "docs/architecture/traceability-register.md"
