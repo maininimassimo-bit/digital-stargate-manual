@@ -104,6 +104,16 @@ L'ordine obbligatorio è:
 
 Ogni fase deve registrare separatamente test eseguiti, non eseguiti, output, failure e decisione di avanzamento. L'output della diagnostica locale deve essere restituito prima di qualunque modifica operativa.
 
+## 7. Interlock applicativo `runtimeEnabled`
+
+Il controllo `runtimeEnabled` è obbligatorio e fail-closed:
+
+- il default è `false` nel launcher, producer, publisher e installer;
+- `false` impedisce lettura dei secrets, scrittura runtime, pubblicazione e avvio del task;
+- il task può essere creato/avviato solo con `-RuntimeEnabled $true`;
+- il parametro `true` non costituisce da solo autorizzazione: richiede il completamento dei gate e l'autorizzazione owner;
+- il controllo non sostituisce interlock locali, Safety Monitor o BKL-032.
+
 ## 7. Preconditions per l'attivazione
 
 L'attivazione resta **bloccata** finché non risultano vere tutte le condizioni:
