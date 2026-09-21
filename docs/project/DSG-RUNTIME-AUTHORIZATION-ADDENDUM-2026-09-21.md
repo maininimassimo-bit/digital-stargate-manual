@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-RTA-ADD-001 |
-| Stato | **OWNER-AUTHORIZED / NOT ACTIVATED** |
+| Stato | **OWNER-AUTHORIZED / ROLLED BACK / ACTIVATION BLOCKED** |
 | Data | 2026-09-21 |
 | Owner | Massimo Mainini |
 | Repository | \`maininimassimo-bit/digital-stargate-manual\` |
@@ -161,12 +161,34 @@ Ogni attivazione futura deve citare:
 - la verifica post-attivazione;
 - il piano di rollback.
 
-## 11. Decisione corrente
+## 11. Evidenza di rollback — 2026-09-21
 
-**Decisione:** autorizzazione runtime formalizzata per preparazione controllata.  
-**Runtime:** non attivato.  
-**Schedule:** non attivato.  
-**Publisher:** non attivato.  
+Il runtime telemetry risultava già attivo prima della diagnostica pre-activation:
+
+- processo `Start-ObservatoryStatusTelemetryRuntime.ps1` rilevato con PID `2480`;
+- task `DigitalStarGate-ObservatoryStatusTelemetry` in esecuzione;
+- publisher outbound attivo con pubblicazione Cloud Run riuscita;
+- NINA stale/non in esecuzione;
+- projection meteo `UNSAFE`, Safety Authority `UNKNOWN`.
+
+Su autorizzazione dell'owner è stato eseguito il rollback:
+
+- task `DigitalStarGate-ObservatoryStatusTelemetry` impostato a `Disabled`;
+- processo runtime arrestato; il PID risultava già terminato al controllo successivo;
+- nessun processo `ObservatoryStatus`, `TelemetryProducer` o `Publish-ObservatoryStatus` residuo;
+- proiezioni e log non cancellati;
+- confronto dei timestamp dopo 10 secondi senza variazioni;
+- nessun flag `runtimeEnabled` trovato sotto `C:\DigitalStarGate`.
+
+Il rollback è verificato. L'assenza del flag `runtimeEnabled` è un gap bloccante da implementare prima di qualunque riattivazione.
+
+## 12. Decisione corrente
+
+**Decisione:** autorizzazione runtime formalizzata, con runtime preesistente ritirato.  
+**Runtime:** fermato.  
+**Schedule telemetry:** disabilitato.  
+**Publisher:** non attivo.  
 **Hardware command path:** non autorizzato.  
 **Safety Authority:** invariata e locale.  
-**Prossimo gate:** eseguire lo script diagnostico read-only su EAGLE30154 e attendere il relativo output.
+**Stato:** `NO_GO` fino all'implementazione del flag `runtimeEnabled=false`, alla correzione dei contratti e ai test autorizzati.  
+**Prossimo gate:** correggere il diagnostico schema-aware e definire il contratto applicativo di enable/disable.
