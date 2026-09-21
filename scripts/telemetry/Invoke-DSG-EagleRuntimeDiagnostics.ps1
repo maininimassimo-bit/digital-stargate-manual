@@ -236,6 +236,12 @@ $now = [datetime]::UtcNow
 $os = Get-CimInstance -ClassName Win32_OperatingSystem
 $computer = Get-CimInstance -ClassName Win32_ComputerSystem
 $ps = $PSVersionTable
+$producerHealthPath = $null
+$observatoryStatusPath = $null
+if (-not [string]::IsNullOrWhiteSpace($TelemetryRoot)) {
+    $producerHealthPath = Join-Path $TelemetryRoot 'producer-health.json'
+    $observatoryStatusPath = Join-Path $TelemetryRoot 'observatory-status.json'
+}
 
 $report = [ordered]@{
     schema_version = '1.0'
@@ -271,8 +277,8 @@ $report = [ordered]@{
         phd2_logs = Get-DirectorySnapshot -Path $Phd2LogRoot
     }
     runtime_files = [ordered]@{
-        producer_health = Get-JsonProjectionSnapshot -Path (if ([string]::IsNullOrWhiteSpace($TelemetryRoot)) { $null } else { Join-Path $TelemetryRoot 'producer-health.json' })
-        observatory_status = Get-JsonProjectionSnapshot -Path (if ([string]::IsNullOrWhiteSpace($TelemetryRoot)) { $null } else { Join-Path $TelemetryRoot 'observatory-status.json' })
+        producer_health = Get-JsonProjectionSnapshot -Path $producerHealthPath
+        observatory_status = Get-JsonProjectionSnapshot -Path $observatoryStatusPath
     }
     limitations = @(
         'This report does not prove runtime compatibility or safety readiness.',
