@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 6.1 |
+| Versione | 6.2 |
 | Stato | Active |
-| Data | 17/09/2026 |
+| Data | 21/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | BKL-031 and BKL-032 Closed / Accepted / Post-Merge Verified; BKL-036 source-discovery gate closed with follow-on current; S10 production runtime `UNAVAILABLE` |
+| Current governed package | AP-007 baseline reconciled / review candidate; BKL-036 repository-only bounded; S10 production runtime `UNAVAILABLE` |
 
 ## 1. Scopo
 
@@ -16,8 +16,8 @@ Mappa domini, authority, projection e percorsi di conoscenza. Non sostituisce le
 ## 2. Continuity hierarchy
 
 1. `AI_BOOTSTRAP.md`;
-2. `docs/project/HANDOVER_2026-09-17.md`;
-3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-17.md`;
+2. `docs/project/HANDOVER_2026-09-21-AP-007.md`;
+3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-21.md`;
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`;
 5. questo Knowledge Map;
 6. `DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md`;
@@ -28,6 +28,10 @@ Mappa domini, authority, projection e percorsi di conoscenza. Non sostituisce le
 11. AMP-002 e package/review/evidence coinvolti.
 
 Handover e baseline precedenti restano snapshot storici e non prevalgono sulla baseline corrente.
+
+## 2.1 Current continuity reconciliation
+
+AP-007 è il package corrente, **Baseline reconciled — review candidate**, con baseline `main@6288bd1a3129ebf519cd1a66868cbe7b77514de9`. La catena corrente è `AI_BOOTSTRAP.md` → `HANDOVER_2026-09-21-AP-007.md` → `CURRENT_TECHNICAL_BASELINE_2026-09-21.md` → `AP007-BASELINE-RECON-001` → AP-007/OPS-REF-001 → Traceability Register. Il prossimo gate è ARB indipendente, seguito da Release Quality. Nessuno stato operativo è promosso da questa riconciliazione.
 
 ## 3. Authority / projection map
 
