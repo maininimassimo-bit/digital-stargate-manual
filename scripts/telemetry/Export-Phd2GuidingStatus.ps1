@@ -146,6 +146,10 @@ $quality = if ($freshUntil -ge $now) { 'CURRENT' } else { 'STALE' }
 
 $profileOutput = @(
     foreach ($p in $profiles.Values) {
+        if ($p.profile -eq 'UNKNOWN' -and $p.valid_samples -eq 0 -and $p.drop_samples -eq 0 -and $p.star_lost_events -eq 0) {
+            continue
+        }
+
         $scale = $p.pixel_scale_arcsec_per_px
         $raRms = $null
         $decRms = $null
