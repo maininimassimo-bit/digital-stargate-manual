@@ -5,11 +5,16 @@ param(
     [string]$BearerToken = $env:DSG_TELEMETRY_INGEST_TOKEN,
     [ValidateRange(1, 120)][int]$TimeoutSeconds = 10,
     [ValidateRange(0, 5)][int]$MaxRetries = 2,
-    [switch]$ValidateOnly
+    [switch]$ValidateOnly,
+    [bool]$RuntimeEnabled = $false
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+
+if (-not $RuntimeEnabled) {
+    throw 'Runtime disabled by contract: publication is blocked unless -RuntimeEnabled $true is explicitly supplied after the governed activation gate.'
+}
 
 function Test-Projection {
     param([Parameter(Mandatory = $true)]$Payload)
