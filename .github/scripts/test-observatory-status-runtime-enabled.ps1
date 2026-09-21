@@ -10,7 +10,8 @@ $files = @(
     'scripts\telemetry\Start-ObservatoryStatusTelemetryRuntime.ps1',
     'scripts\telemetry\Start-ObservatoryStatusTelemetryProducer.ps1',
     'scripts\telemetry\Publish-ObservatoryStatusTelemetry.ps1',
-    'scripts\telemetry\Install-ObservatoryStatusTelemetryScheduledTask.ps1'
+    'scripts\telemetry\Install-ObservatoryStatusTelemetryScheduledTask.ps1',
+    'scripts\telemetry\Invoke-DSG-EagleRuntimeDiagnostics.ps1'
 )
 
 foreach ($relative in $files) {
@@ -34,6 +35,9 @@ foreach ($relative in $files) {
         throw "RuntimeEnabled guard message missing: $path"
     }
 }
+
+$diagnostic = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'scripts\telemetry\Invoke-DSG-EagleRuntimeDiagnostics.ps1') -Raw
+if ($diagnostic -notmatch "schemaVersion.*2" -or $diagnostic -notmatch 'Unsupported projection schema') { throw 'Diagnostic must recognize NINA schemaVersion=2.' }
 
 $publisher = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'scripts\telemetry\Publish-ObservatoryStatusTelemetry.ps1') -Raw
 if ($publisher -notmatch 'RuntimeEnabled') { throw 'Publisher guard missing.' }
