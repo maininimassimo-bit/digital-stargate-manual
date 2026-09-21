@@ -68,8 +68,8 @@ assert.ok(developer.includes('Verify Observation Planner F3-C bounded integratio
 assert.ok(backlog.includes('F3-C Accepted/Post-Merge Verified') && backlog.includes('F4-D metadata-only projection and portal Accepted/Post-Merge Verified'), 'Backlog does not preserve the accepted F3-C through F4-D gates.');
 assert.ok(knowledge.includes('F3-C are Accepted / Post-Merge Verified') && index.includes('F3-C Bounded Adapter, Projection and Portal'), 'Continuity documents do not identify accepted F3-C.');
 for (const fragment of [
-  'HANDOVER_2026-09-17.md',
-  'CURRENT_TECHNICAL_BASELINE_2026-09-17.md',
+  'HANDOVER_2026-09-21-AP-007.md',
+  'CURRENT_TECHNICAL_BASELINE_2026-09-21.md',
   'F8 is Accepted / Post-Merge Verified',
   'BKL-032 Session Readiness / Go-No-Go Decision Support',
   '2/2_EXHAUSTED',
