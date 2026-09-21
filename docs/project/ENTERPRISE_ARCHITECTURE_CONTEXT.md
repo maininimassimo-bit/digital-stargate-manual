@@ -9,9 +9,9 @@
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch autorevole | `main` |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Continuity handover | `docs/project/HANDOVER_2026-09-17.md` |
-| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-17.md` |
-| Current governed package | BKL-031 and BKL-032 Closed/Accepted/Post-Merge Verified; BKL-036 source-discovery gate closed while follow-on remains current; S10 unavailable |
+| Continuity handover | `docs/project/HANDOVER_2026-09-21-AP-007.md` |
+| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-21.md` |
+| Current governed package | AP-007 baseline reconciled / review candidate; BKL-036 repository-only bounded; S10 unavailable |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo e gerarchia
