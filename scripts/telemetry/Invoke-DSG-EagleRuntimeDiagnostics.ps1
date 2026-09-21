@@ -207,16 +207,54 @@ function Get-JsonProjectionSnapshot {
 
     try {
         $json = Get-Content -LiteralPath $Path -Raw -ErrorAction Stop | ConvertFrom-Json -ErrorAction Stop
-        return [ordered]@{
-            file = $base
-            parseable = $true
-            schema_version = Get-SafeString $json.schema_version
-            observed_at_utc = Get-SafeString $json.observed_at_utc
-            fresh_until_utc = Get-SafeString $json.fresh_until_utc
-            quality = Get-SafeString $json.quality
-            state = Get-SafeString $json.state
-            error = $null
+        $properties = @($json.PSObject.Properties.Name)
+
+        if ($properties -contains 'schema_version') {
+            return [ordered]@{
+                file = $base
+                parseable = $true
+                schema_version = Get-SafeString $json.schema_version
+                observed_at_utc = Get-SafeString $json.observed_at_utc
+                fresh_until_utc = Get-SafeString $json.fresh_until_utc
+                quality = Get-SafeString $json.quality
+                state = Get-SafeString $json.state
+                error = $null
+            }
         }
+
+        if (($properties -contains 'schemaVersion') -and ([string]$json.schemaVersion -eq '2')) {
+            $observedAt = [datetime]::Parse(
+                [string]$json.observedAtUtc,
+                [System.Globalization.CultureInfo]::InvariantCulture,
+                [System.Globalization.DateTimeStyles]::RoundtripKind).ToUniversalTime()
+
+            $freshUntil = $observedAt.AddMinutes(5)
+            if ($json.services -and $json.services.sqm -and $json.services.sqm.details -and $json.services.sqm.details.freshUntilUtc) {
+                try {
+                    $freshUntil = [datetime]::Parse(
+                        [string]$json.services.sqm.details.freshUntilUtc,
+                        [System.Globalization.CultureInfo]::InvariantCulture,
+                        [System.Globalization.DateTimeStyles]::RoundtripKind).ToUniversalTime()
+                }
+                catch { }
+            }
+
+            $quality = if ($freshUntil -ge [datetime]::UtcNow) { 'CURRENT' } else { 'STALE' }
+            $state = if ($json.services.safety) { Get-SafeString $json.services.safety.state } else { $null }
+
+            return [ordered]@{
+                file = $base
+                parseable = $true
+                schema_version = '2'
+                observed_at_utc = $observedAt.ToString('o')
+                fresh_until_utc = $freshUntil.ToString('o')
+                quality = $quality
+                state = $state
+                error = $null
+            }
+        }
+
+        throw 'Unsupported projection schema.'
     }
     catch {
         return [ordered]@{
@@ -231,7 +269,6 @@ function Get-JsonProjectionSnapshot {
         }
     }
 }
-
 
 function Get-ProducerHealthSnapshot {
     param([AllowNull()][string]$Path)
