@@ -2,6 +2,7 @@
 param(
     [Parameter(Mandatory = $true)][string]$OutputPath,
     [Parameter(Mandatory = $true)][string]$Phd2LogRoot,
+    [string]$GuideLogPath = '',
     [ValidateRange(1, 86400)][int]$FreshnessSeconds = 300,
     [string]$SourceInstance = $env:COMPUTERNAME
 )
@@ -40,9 +41,17 @@ if (-not (Test-Path -LiteralPath $Phd2LogRoot -PathType Container)) {
     throw "PHD2 log root non trovato: $Phd2LogRoot"
 }
 
-$files = @(Get-ChildItem -LiteralPath $Phd2LogRoot -Recurse -File -ErrorAction Stop |
-    Where-Object { $_.Name -like 'PHD2_GuideLog_*.txt' } |
-    Sort-Object LastWriteTimeUtc -Descending)
+if (-not [string]::IsNullOrWhiteSpace($GuideLogPath)) {
+    if (-not (Test-Path -LiteralPath $GuideLogPath -PathType Leaf)) {
+        throw "PHD2 GuideLog non trovato: $GuideLogPath"
+    }
+    $files = @(Get-Item -LiteralPath $GuideLogPath -ErrorAction Stop)
+}
+else {
+    $files = @(Get-ChildItem -LiteralPath $Phd2LogRoot -Recurse -File -ErrorAction Stop |
+        Where-Object { $_.Name -like 'PHD2_GuideLog_*.txt' } |
+        Sort-Object LastWriteTimeUtc -Descending)
+}
 
 if ($files.Count -eq 0) {
     throw "Nessun PHD2 GuideLog trovato: $Phd2LogRoot"
