@@ -9,11 +9,16 @@ param(
     [ValidateRange(0, 86400)][int]$DurationSeconds = 0,
     [string]$PublishEndpoint = '',
     [ValidateRange(1, 120)][int]$PublishTimeoutSeconds = 10,
-    [ValidateRange(0, 5)][int]$PublishMaxRetries = 2
+    [ValidateRange(0, 5)][int]$PublishMaxRetries = 2,
+    [bool]$RuntimeEnabled = $false
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+
+if (-not $RuntimeEnabled) {
+    throw 'Runtime disabled by contract: pass -RuntimeEnabled $true only after the governed activation gate.'
+}
 
 $ninaAdapter = Join-Path $RepositoryRoot 'scripts\telemetry\Export-NinaObservatoryStatus.ps1'
 $fallbackAdapter = Join-Path $RepositoryRoot 'scripts\telemetry\Export-CloudWatcherObservatoryStatus.ps1'
@@ -128,7 +133,7 @@ try {
             if ($publishEnabled) {
                 $lastPublishAttemptUtc = [datetime]::UtcNow.ToString('o')
                 try {
-                    $publishOutput = & $publisher -ProjectionPath $projectionPath -Endpoint $PublishEndpoint -TimeoutSeconds $PublishTimeoutSeconds -MaxRetries $PublishMaxRetries
+                    $publishOutput = & $publisher -ProjectionPath $projectionPath -Endpoint $PublishEndpoint -TimeoutSeconds $PublishTimeoutSeconds -MaxRetries $PublishMaxRetries -RuntimeEnabled $RuntimeEnabled
                     $publishConsecutiveFailures = 0
                     $lastPublishSuccessUtc = [datetime]::UtcNow.ToString('o')
                     $lastPublishError = $null
