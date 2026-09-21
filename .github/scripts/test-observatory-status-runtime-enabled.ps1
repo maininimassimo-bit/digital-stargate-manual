@@ -11,7 +11,8 @@ $files = @(
     'scripts\telemetry\Start-ObservatoryStatusTelemetryProducer.ps1',
     'scripts\telemetry\Publish-ObservatoryStatusTelemetry.ps1',
     'scripts\telemetry\Install-ObservatoryStatusTelemetryScheduledTask.ps1',
-    'scripts\telemetry\Invoke-DSG-EagleRuntimeDiagnostics.ps1'
+    'scripts\telemetry\Invoke-DSG-EagleRuntimeDiagnostics.ps1',
+    'scripts\telemetry\Export-Phd2GuidingStatus.ps1'
 )
 
 foreach ($relative in $files) {
@@ -35,6 +36,9 @@ foreach ($relative in $files) {
         throw "RuntimeEnabled guard message missing: $path"
     }
 }
+
+$phd2 = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'scripts\telemetry\Export-Phd2GuidingStatus.ps1') -Raw
+if ($phd2 -notmatch 'C8_QHY695A|SW4P_EVO' -or $phd2 -notmatch 'RARawDistance|DECRawDistance') { throw 'Profile-aware PHD2 adapter contract missing.' }
 
 $diagnostic = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'scripts\telemetry\Invoke-DSG-EagleRuntimeDiagnostics.ps1') -Raw
 if ($diagnostic -notmatch "schemaVersion.*2" -or $diagnostic -notmatch 'Unsupported projection schema') { throw 'Diagnostic must recognize NINA schemaVersion=2.' }
