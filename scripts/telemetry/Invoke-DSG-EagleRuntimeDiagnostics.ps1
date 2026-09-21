@@ -232,6 +232,113 @@ function Get-JsonProjectionSnapshot {
     }
 }
 
+
+function Get-ProducerHealthSnapshot {
+    param([AllowNull()][string]$Path)
+
+    $base = Get-PathSnapshot -Path $Path
+    if (-not $base.exists -or $base.kind -ne 'file') {
+        return [ordered]@{
+            file = $base
+            parseable = $false
+            schema_version = $null
+            state = $null
+            last_success_utc = $null
+            last_error = $null
+            active_source = $null
+            fallback_count = $null
+            transport_enabled = $null
+            transport_last_success_utc = $null
+            error = $base.error
+        }
+    }
+
+    try {
+        $json = Get-Content -LiteralPath $Path -Raw -ErrorAction Stop | ConvertFrom-Json -ErrorAction Stop
+        return [ordered]@{
+            file = $base
+            parseable = $true
+            schema_version = Get-SafeString $json.schema_version
+            state = Get-SafeString $json.state
+            last_success_utc = Get-SafeString $json.last_success_utc
+            last_error = Get-SafeString $json.last_error
+            active_source = Get-SafeString $json.source.active
+            fallback_count = [int64]$json.source.fallback_count
+            transport_enabled = [bool]$json.transport.enabled
+            transport_last_success_utc = Get-SafeString $json.transport.last_success_utc
+            error = $null
+        }
+    }
+    catch {
+        return [ordered]@{
+            file = $base
+            parseable = $false
+            schema_version = $null
+            state = $null
+            last_success_utc = $null
+            last_error = $null
+            active_source = $null
+            fallback_count = $null
+            transport_enabled = $null
+            transport_last_success_utc = $null
+            error = $_.Exception.Message
+        }
+    }
+}
+
+function Get-ObservatoryStatusSnapshot {
+    param([AllowNull()][string]$Path)
+
+    $base = Get-PathSnapshot -Path $Path
+    if (-not $base.exists -or $base.kind -ne 'file') {
+        return [ordered]@{
+            file = $base
+            parseable = $false
+            schema_version = $null
+            observed_at_utc = $null
+            fresh_until_utc = $null
+            quality = $null
+            source_component = $null
+            weather_state = $null
+            weather_quality = $null
+            safety_state = $null
+            error = $base.error
+        }
+    }
+
+    try {
+        $json = Get-Content -LiteralPath $Path -Raw -ErrorAction Stop | ConvertFrom-Json -ErrorAction Stop
+        return [ordered]@{
+            file = $base
+            parseable = $true
+            schema_version = Get-SafeString $json.schema_version
+            observed_at_utc = Get-SafeString $json.observed_at_utc
+            fresh_until_utc = Get-SafeString $json.fresh_until_utc
+            quality = Get-SafeString $json.quality
+            source_component = Get-SafeString $json.source_component
+            weather_state = Get-SafeString $json.systems.weather.state
+            weather_quality = Get-SafeString $json.systems.weather.quality
+            safety_state = Get-SafeString $json.safety.observed_state
+            error = $null
+        }
+    }
+    catch {
+        return [ordered]@{
+            file = $base
+            parseable = $false
+            schema_version = $null
+            observed_at_utc = $null
+            fresh_until_utc = $null
+            quality = $null
+            source_component = $null
+            weather_state = $null
+            weather_quality = $null
+            safety_state = $null
+            error = $_.Exception.Message
+        }
+    }
+}
+
 $now = [datetime]::UtcNow
 $os = Get-CimInstance -ClassName Win32_OperatingSystem
 $computer = Get-CimInstance -ClassName Win32_ComputerSystem
@@ -277,8 +384,8 @@ $report = [ordered]@{
         phd2_logs = Get-DirectorySnapshot -Path $Phd2LogRoot
     }
     runtime_files = [ordered]@{
-        producer_health = Get-JsonProjectionSnapshot -Path $producerHealthPath
-        observatory_status = Get-JsonProjectionSnapshot -Path $observatoryStatusPath
+        producer_health = Get-ProducerHealthSnapshot -Path $producerHealthPath
+        observatory_status = Get-ObservatoryStatusSnapshot -Path $observatoryStatusPath
     }
     limitations = @(
         'This report does not prove runtime compatibility or safety readiness.',
