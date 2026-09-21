@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 7.4 |
-| Baseline | 18/09/2026 |
-| Stato | Current root bootstrap — BKL-031 and BKL-032 Closed/Accepted/Post-Merge Verified; BKL-036 next; S10 unavailable |
+| Versione | 7.5 |
+| Baseline | 21/09/2026 |
+| Stato | Current root bootstrap — AP-007 baseline reconciled/review candidate; S10 unavailable |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -13,8 +13,8 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni e proje
 
 ## 2. Sequenza obbligatoria di lettura
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-09-17.md`
-3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-17.md`
+2. `docs/project/HANDOVER_2026-09-21-AP-007.md`
+3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-21.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
 6. `docs/project/BACKLOG.md`
@@ -38,7 +38,8 @@ Gli handover e le baseline precedenti restano snapshot storici.
 - F8 acceptance reconciliation: PR #280, reviewed head `bca410dcde804483052beded16c29a9f58f43872`, merge `84d1b889a6c739c9e5d053e1f073fe1d87b8c5d4`, 17/17 exact-head e 19/19 post-merge SUCCESS; GitHub Pages build/integrity/deploy SUCCESS.
 - F8 evidence: notte bounded 17–18/09/2026, forecast reale F7 site-specific, astronomia night-specific, suitability OTA/camera/filter esplicita, ranking/finestre advisory read-only.
 - BKL-032 Session Readiness / Go-No-Go Decision Support è Closed / Accepted / Post-Merge Verified via PR #304; il suo evaluator resta read-only e il runtime source/transport è separatamente gated.
-- BKL-036 Observatory Health Score è il package successivo; non eredita Safety Authority da BKL-032.
+- BKL-036 è Closed come capability repository-only bounded; F3 Health Score resta `UNAVAILABLE`.
+- AP-007 è il package corrente: baseline e ownership bootstrap sono reconciled; il package è review candidate, non operationally verified.
 - S10 production runtime: `UNAVAILABLE`.
 
 ## 4. Boundary non negoziabili
@@ -61,4 +62,4 @@ Gli handover e le baseline precedenti restano snapshot storici.
 Exact-head CI → ARB → Release Quality sullo stesso SHA → expected-head merge → post-merge verification → acceptance reconciliation. Nessuna acceptance o runtime claim può precedere l'evidence reale.
 
 ## 7. Punto di ripresa
-Riprendere da **BKL-036 Observatory Health Score** usando `docs/project/HANDOVER_2026-09-17.md` come handover compatto e `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-17.md` come baseline tecnica corrente.
+Riprendere da **AP-007 Enterprise Operations and Service Management Architecture** usando `docs/project/HANDOVER_2026-09-21-AP-007.md` come handover compatto e `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-21.md` come baseline tecnica corrente. Il prossimo gate è ARB indipendente, seguito da Release Quality sullo stesso exact head.
