@@ -63,3 +63,15 @@ Il payload deve riferire session_id, manifest, checksum e provenance. Non deve c
 ## Exit criteria
 
 Il pilot può passare a review solo quando owner, schema, compatibility evidence, security review, runbook, rollback/disable evidence e reconciliation report sono registrati. Prima di allora resta Proposed.
+
+## Shadow evidence from real session
+
+The real session `2026-09-21_2026-09-22` produced a shadow-only `DSG.Observation.Event.SessionCompleted` artifact and fail-closed diagnostic test:
+
+- evidence: `docs/architecture/validation/INT-SESSION-METADATA-PILOT-001-Shadow-Diagnostic-2026-09-22.md`;
+- shadow event: `docs/data/integration/session-completed-shadow-event-2026-09-21_2026-09-22.json`;
+- test: `.github/scripts/test-session-completed-shadow-event.mjs`;
+- runtime publication remains disabled;
+- the diagnostic outcome is `YELLOW`, with three unmatched/interrupted LIGHT poses and one PHD2 settling failure preserved as diagnostic evidence.
+
+This evidence does not authorize a live adapter, broker, scheduler change, command path or Safety Authority promotion.
