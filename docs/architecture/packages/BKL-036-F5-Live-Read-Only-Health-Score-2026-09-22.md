@@ -61,12 +61,7 @@ projection and its explicit `UNAVAILABLE` result.
 
 The source mapping and live envelope contract are now versioned in
 `BKL-036-F5-SOURCE-MAPPING-2026-09-22.md`, with a fail-closed `UNAVAILABLE` fixture and
-validator. This closes the contract-definition gate only; production OAT, ARB and Release
-Quality review remain open.
-
-## Current gate result
-
-The source mapping and live envelope contract are now versioned in
-`BKL-036-F5-SOURCE-MAPPING-2026-09-22.md`, with a fail-closed `UNAVAILABLE` fixture and
-validator. This closes the contract-definition gate only; production OAT, ARB and Release
-Quality review remain open.
+validator. The first live OAT also recorded all seven read-backs: six Observatory domains
+were comparable, while EAGLE Health was current but semantically `UNKNOWN` because
+`POLICY_NOT_ACTIVATED`. The aggregate therefore remains `UNAVAILABLE`; ARB/RQ and policy
+review remain open.

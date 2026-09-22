@@ -2,7 +2,7 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-22",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "f1c1a4a29c1ef815b601918e16950043f8bcc86d26cca61ef5dfd9eba6fdf416",
+  "sourceDigest": "24dee3372d2ee7cd41c77d1d3a1de5ccbc6aee7d2075de92a4dc988f0b41cf31",
   "authority": "DSG-RGM-001",
   "projectStatus": "AP-008 bounded read-only integration closed; BKL-036-F5 live descriptive score gate open; BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 production runtime unavailable; live source/transport and public runtime GO remain separately gated; no scheduling, automatic target selection, commands or Safety Authority is authorized",
   "currentPackage": "BKL-036-F5",
@@ -326,7 +326,7 @@
           "id": "BKL-036-F5",
           "title": "Live Read-Only Health Score",
           "status": "active",
-          "note": "Owner-authorized implementation candidate after AP-008 bounded read-only integration. Source mapping and fail-closed envelope contract are implemented; production OAT, ARB/RQ and score-promotion gates remain required."
+          "note": "Owner-authorized implementation candidate after AP-008 bounded read-only integration. Contract and first live OAT are complete; EAGLE comparability, ARB/RQ and score-promotion gates remain required."
         },
         {
           "id": "BKL-033",
@@ -537,7 +537,7 @@
       "itemRef": "BKL-036-F5",
       "title": "BKL-036-F5 Live Read-Only Health Score",
       "date": "2026-09-22",
-      "description": "Owner-authorized proposal opened after AP-008 closure. Seven-domain source mapping and fail-closed envelope contract are implemented; production OAT and independent review remain next; no live score is promoted yet.",
+      "description": "Owner-authorized proposal opened after AP-008 closure. Seven-domain source mapping, envelope contract and first live OAT are complete; EAGLE comparability and independent review remain next; no live score is promoted yet.",
       "image": null,
       "status": "active"
     },

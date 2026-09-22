@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "DSG.BKL036.F5.LiveHealthScore",
+  "projection_kind": "live_read_only_descriptive",
+  "source_plane": "live_read_only_transport",
+  "scale": "0-100",
+  "domain_count": 7,
+  "policy": {"equal_weight": true, "complete_set_required": true, "incomplete_result": "UNAVAILABLE", "readiness_authority": "BKL-032", "safety_authority": "LOCAL_PHYSICAL_INTERLOCKS"},
+  "score_status": "UNAVAILABLE",
+  "score": null,
+  "evaluated_at_utc": "2026-09-22T18:48:31Z",
+  "domains": [
+    {"domain":"weather","source_component":"NINA Observatory Telemetry Exporter","observed_at_utc":"2026-09-22T18:48:31Z","fresh_until_utc":"2026-09-22T18:49:31Z","quality":"CURRENT","evidence_status":"PRESENT","compatibility":"COMPARABLE","correlation_id":null,"reason":"LIVE_READBACK_CURRENT"},
+    {"domain":"dome","source_component":"NINA Observatory Telemetry Exporter","observed_at_utc":"2026-09-22T18:48:31Z","fresh_until_utc":"2026-09-22T18:49:31Z","quality":"CURRENT","evidence_status":"PRESENT","compatibility":"COMPARABLE","correlation_id":null,"reason":"LIVE_READBACK_CURRENT"},
+    {"domain":"mount","source_component":"NINA Observatory Telemetry Exporter","observed_at_utc":"2026-09-22T18:48:31Z","fresh_until_utc":"2026-09-22T18:49:31Z","quality":"CURRENT","evidence_status":"PRESENT","compatibility":"COMPARABLE","correlation_id":null,"reason":"LIVE_READBACK_CURRENT"},
+    {"domain":"camera","source_component":"NINA Observatory Telemetry Exporter","observed_at_utc":"2026-09-22T18:48:31Z","fresh_until_utc":"2026-09-22T18:49:31Z","quality":"CURRENT","evidence_status":"PRESENT","compatibility":"COMPARABLE","correlation_id":null,"reason":"LIVE_READBACK_CURRENT"},
+    {"domain":"power","source_component":"NINA Observatory Telemetry Exporter / TS Shelly","observed_at_utc":"2026-09-22T18:48:31Z","fresh_until_utc":"2026-09-22T18:49:31Z","quality":"CURRENT","evidence_status":"PRESENT","compatibility":"COMPARABLE","correlation_id":null,"reason":"LIVE_READBACK_CURRENT"},
+    {"domain":"network","source_component":"NINA Observatory Telemetry Exporter / Passive Network Observation","observed_at_utc":"2026-09-22T18:48:31Z","fresh_until_utc":"2026-09-22T18:49:31Z","quality":"CURRENT","evidence_status":"PRESENT","compatibility":"COMPARABLE","correlation_id":null,"reason":"LIVE_READBACK_CURRENT"},
+    {"domain":"eagle_health","source_component":"DSG.EagleHostHealthCollector","observed_at_utc":"2026-09-22T18:48:11Z","fresh_until_utc":"2026-09-22T18:50:11Z","quality":"CURRENT","evidence_status":"PRESENT","compatibility":"UNKNOWN","correlation_id":"ad0629e7-4844-40d8-98bb-642582e169fa","reason":"POLICY_NOT_ACTIVATED"}
+  ],
+  "reasons": ["EAGLE_HEALTH_NOT_COMPARABLE", "NO_PARTIAL_SCORE_ALLOWED"],
+  "boundaries": {"read_only": true, "runtime_event_published": false, "command_authority": "NONE", "safety_authority": "NONE", "broker_used": false, "scheduler_used": false, "remediation_used": false},
+  "transport_checks": {"observatory_status_http": 200, "eagle_health_http": 200, "command_path_http": 404, "observatory_quality": "CURRENT", "eagle_quality": "CURRENT", "eagle_summary_state": "UNKNOWN"}
+}
