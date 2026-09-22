@@ -7,7 +7,7 @@
 | Stato | Proposed — not operationally authorized |
 | Safety class | non_safety |
 | Direzione | N.I.N.A. session metadata -> repository/portal projection |
-| Baseline | main @ 162ae63dd80eb69fd6e99c68e91807dafc8ab386 |
+| Baseline | main @ c48cfbae76432cf65d6bca338a06c2775d1147be |
 
 ## Scopo
 
@@ -75,3 +75,17 @@ The real session `2026-09-21_2026-09-22` produced a shadow-only `DSG.Observation
 - the diagnostic outcome is `YELLOW`, with three unmatched/interrupted LIGHT poses and one PHD2 settling failure preserved as diagnostic evidence.
 
 This evidence does not authorize a live adapter, broker, scheduler change, command path or Safety Authority promotion.
+
+
+## Governed remediation and readiness
+
+The real-session shadow evidence is now accompanied by:
+
+- contract schema: `contracts/events/observation-session-completed-shadow-v1.schema.json`;
+- compatibility test: `.github/scripts/test-session-completed-shadow-contract-compatibility.mjs`;
+- readiness record: `docs/architecture/validation/AP008-Remediation-and-Readiness-2026-09-22.md`;
+- independent re-review: `docs/architecture/assessments/ARB-AP008-RR-2026-09-22.md`.
+
+The shadow pilot is `READY_WITH_CONDITIONS` only for repository evidence. Contract and
+adapter ownership, security review, rollback drill, independent consumer reconciliation
+and live transport validation remain open. The pilot is not operationally authorized.
