@@ -141,6 +141,10 @@ def validate_session_completed_shadow(payload, idempotency_key):
 
 def append_session_event(raw, store, message_id):
     store.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        normalized = json.dumps(json.loads(raw.decode('utf-8')), separators=(',', ':')).encode('utf-8')
+    except Exception:
+        normalized = raw.rstrip(b'\r\n')
     if store.exists():
         with store.open('rb') as handle:
             for line in handle:
@@ -150,10 +154,10 @@ def append_session_event(raw, store, message_id):
                     existing = json.loads(line.decode('utf-8'))
                 except Exception:
                     continue
-                if existing.get('message_id') == message_id:
+                if isinstance(existing, dict) and existing.get('message_id') == message_id:
                     return False
     with store.open('ab') as handle:
-        handle.write(raw.rstrip(b'\r\n') + b'\n')
+        handle.write(normalized + b'\n')
         handle.flush()
         os.fsync(handle.fileno())
     return True
