@@ -17,17 +17,17 @@
 
 ## BKL-036 Observatory Health Score
 
-> **Proiezione pubblica read-only.** Questo score è calcolato esclusivamente su telemetria già acquisita e archiviata nel repository. Non è live, non è real-time, non sostituisce BKL-032 e non costituisce Safety Authority o autorizzazione a comandare apparati.
+> **Proiezione pubblica read-only.** Il consumer tenta prima la projection live EAGLE Health del relay AP-008; usa la projection archiviata solo come fallback. Il valore è descrittivo, non sostituisce BKL-032 e non costituisce Safety Authority o autorizzazione a comandare apparati.
 
 | Campo | Valore |
 |---|---|
 | Score | <span data-bkl036-score="status">🟡 UNAVAILABLE</span> |
-| Domini comparabili e correnti | <span data-bkl036-score="domains">—</span> |
+| Segnali obbligatori correnti | <span data-bkl036-score="domains">—</span> |
 | Valutazione | <span data-bkl036-score="timestamp">—</span> |
 | Fonte | <span data-bkl036-score="source">repository evidence / non-live / non-real-time</span> |
 | Motivo | <span data-bkl036-score="reason">—</span> |
 
-Lo score è `100` solo quando tutti i sette domini obbligatori risultano `PRESENT`, `COMPARABLE` e `CURRENT`, con peso uguale. In caso contrario viene mostrato `UNAVAILABLE`: non viene pubblicato alcun punteggio parziale.
+Per la projection live EAGLE Health, lo score è `100` quando i cinque segnali obbligatori risultano correnti e sani, `50` quando la policy rileva una degradazione e `UNAVAILABLE` quando un segnale obbligatorio non è computabile o fresco. Non viene pubblicato alcun punteggio parziale.
 
 ## EAGLE Health
 
