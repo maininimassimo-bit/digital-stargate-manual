@@ -255,7 +255,7 @@
           "id": "BKL-036-F5",
           "title": "Live Read-Only Health Score",
           "status": "active",
-          "note": "Owner-authorized implementation candidate after AP-008 bounded read-only integration. Seven-domain mapping, freshness, comparability, ARB/RQ and OAT remain required before score promotion."
+          "note": "Owner-authorized implementation candidate after AP-008 bounded read-only integration. Source mapping and fail-closed envelope contract are implemented; production OAT, ARB/RQ and score-promotion gates remain required."
         },
         {
           "id": "BKL-033",
@@ -446,7 +446,7 @@
       "itemRef": "BKL-036-F5",
       "title": "BKL-036-F5 Live Read-Only Health Score",
       "date": "2026-09-22",
-      "description": "Owner-authorized proposal opened after AP-008 closure. Seven-domain live mapping and compatibility gates are next; no live score is promoted yet.",
+      "description": "Owner-authorized proposal opened after AP-008 closure. Seven-domain source mapping and fail-closed envelope contract are implemented; production OAT and independent review remain next; no live score is promoted yet.",
       "image": null
     },
     {

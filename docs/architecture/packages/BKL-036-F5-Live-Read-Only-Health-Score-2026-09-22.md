@@ -56,3 +56,17 @@ The AP-008 producer scheduler remains a transport publisher only.
 
 Until these gates pass, the portal must continue showing the current F3 archived-evidence
 projection and its explicit `UNAVAILABLE` result.
+
+## Current gate result
+
+The source mapping and live envelope contract are now versioned in
+`BKL-036-F5-SOURCE-MAPPING-2026-09-22.md`, with a fail-closed `UNAVAILABLE` fixture and
+validator. This closes the contract-definition gate only; production OAT, ARB and Release
+Quality review remain open.
+
+## Current gate result
+
+The source mapping and live envelope contract are now versioned in
+`BKL-036-F5-SOURCE-MAPPING-2026-09-22.md`, with a fail-closed `UNAVAILABLE` fixture and
+validator. This closes the contract-definition gate only; production OAT, ARB and Release
+Quality review remain open.

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.example/contracts/telemetry/bkl-036-f5-live-health-score-v1.schema.json",
+  "title": "BKL-036-F5 Live Read-Only Descriptive Health Score",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "contract_id", "projection_kind", "source_plane", "scale", "domain_count", "policy", "score_status", "score", "evaluated_at_utc", "domains", "reasons", "boundaries"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "contract_id": {"const": "DSG.BKL036.F5.LiveHealthScore"},
+    "projection_kind": {"const": "live_read_only_descriptive"},
+    "source_plane": {"const": "live_read_only_transport"},
+    "scale": {"const": "0-100"},
+    "domain_count": {"const": 7},
+    "policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["equal_weight", "complete_set_required", "incomplete_result", "readiness_authority", "safety_authority"],
+      "properties": {
+        "equal_weight": {"const": true},
+        "complete_set_required": {"const": true},
+        "incomplete_result": {"const": "UNAVAILABLE"},
+        "readiness_authority": {"const": "BKL-032"},
+        "safety_authority": {"const": "LOCAL_PHYSICAL_INTERLOCKS"}
+      }
+    },
+    "score_status": {"enum": ["AVAILABLE", "UNAVAILABLE"]},
+    "score": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+    "evaluated_at_utc": {"type": "string", "format": "date-time"},
+    "domains": {
+      "type": "array", "minItems": 7, "maxItems": 7,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["domain", "source_component", "observed_at_utc", "fresh_until_utc", "quality", "evidence_status", "compatibility", "correlation_id", "reason"],
+        "properties": {
+          "domain": {"enum": ["weather", "dome", "mount", "camera", "power", "network", "eagle_health"]},
+          "source_component": {"type": "string", "minLength": 1},
+          "observed_at_utc": {"type": ["string", "null"], "format": "date-time"},
+          "fresh_until_utc": {"type": ["string", "null"], "format": "date-time"},
+          "quality": {"enum": ["CURRENT", "DEGRADED", "STALE", "UNKNOWN", "CONFLICTING"]},
+          "evidence_status": {"enum": ["PRESENT", "MISSING", "STALE", "UNAVAILABLE", "PARTIAL", "CONFLICTING"]},
+          "compatibility": {"enum": ["COMPARABLE", "CONTEXT_ONLY", "INCOMPATIBLE", "UNKNOWN"]},
+          "correlation_id": {"type": ["string", "null"]},
+          "reason": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "reasons": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "boundaries": {
+      "type": "object", "additionalProperties": false,
+      "required": ["read_only", "runtime_event_published", "command_authority", "safety_authority", "broker_used", "scheduler_used", "remediation_used"],
+      "properties": {
+        "read_only": {"const": true},
+        "runtime_event_published": {"const": false},
+        "command_authority": {"const": "NONE"},
+        "safety_authority": {"const": "NONE"},
+        "broker_used": {"const": false},
+        "scheduler_used": {"const": false},
+        "remediation_used": {"const": false}
+      }
+    }
+  }
+}
