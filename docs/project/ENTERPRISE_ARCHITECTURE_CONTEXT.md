@@ -9,9 +9,9 @@
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch autorevole | `main` |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Continuity handover | `docs/project/HANDOVER_2026-09-21-AP-007.md` |
-| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-21.md` |
-| Current governed package | AP-007 baseline reconciled / review candidate; BKL-036 repository-only bounded; S10 unavailable |
+| Continuity handover | `docs/project/HANDOVER_2026-09-22-AP-008-BKL-036.md` |
+| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-22.md` |
+| Current governed package | BKL-036-F5 live read-only score gate; AP-008 bounded integration closed |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo e gerarchia
@@ -54,15 +54,17 @@ Sono accettati, fra gli altri:
 
 BKL-037 rimane read-only/descriptive-only; unità non dimostrate, missing evidence e processing history PixInsight incompleta restano fail-closed.
 
-## 6. Current package — BKL-036 follow-on
+## 6. Current package — BKL-036-F5 after AP-008 closure
 
 BKL-031 è **CLOSED / ACCEPTED / POST-MERGE VERIFIED** tramite PR #301 e merge `4a509d574a004fe7fb72bc6c678c9e7f71fe821f`. F3–F9 hanno chiuso il planner repeatable read-only: MeteoHub governato, astronomia della notte, suitability esplicita setup-target, ranking esplicabile e verifica della pagina pubblica di Manciano.
 
-La closure BKL-032 non trasferisce authority: BKL-032 resta responsabile di Session Readiness / Go-No-Go. Il gate source discovery e semantic contract di BKL-036 è chiuso, mentre i follow-on di source mapping, comparabilità e policy restano separati. Gli interlock fisici locali restano Safety Authority; S10 resta `UNAVAILABLE`. Il Planner non abilita scheduler, selezione automatica, device command o Safety Authority.
+AP-008 è chiuso per l'integrazione bounded read-only: il portale consuma Observatory Status ed EAGLE Health live, il publisher EAGLE30154 è continuo e il command path resta assente. La closure non trasferisce authority e non abilita broker, remediation o device command. BKL-032 resta responsabile di Session Readiness / Go-No-Go; gli interlock fisici locali restano Safety Authority.
+
+BKL-036-F1/F2/F3/F4 resta chiuso come capability repository-only. BKL-036-F5 è il nuovo gate owner-authorized per definire comparabilità, freshness e proiezione descrittiva live dei sette domini. F3 resta `UNAVAILABLE` finché F5 non supera i propri gate.
 
 ## 7. Roadmap
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 CLOSED / ACCEPTED -> BKL-032 CLOSED / ACCEPTED -> BKL-036 source-discovery gate CLOSED / ACCEPTED -> BKL-036 follow-on CURRENT -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 CLOSED / ACCEPTED -> BKL-032 CLOSED / ACCEPTED -> AP-008 bounded read-only CLOSED -> BKL-036-F5 CURRENT -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
 
 AMP-002 resta planning authority per AP-007–AP-015, non live status register.
 
