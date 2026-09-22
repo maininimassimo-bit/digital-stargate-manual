@@ -37,7 +37,7 @@ test('cohort includes every catalog session without outcome filtering', () => {
 
 test('bias and evidence gaps remain explicit', () => {
   const result = buildRealEvidenceValidation(catalog, projection);
-  assert.deepEqual(result.cohort.knownTargets, ['LDN 1320', 'M 27']);
+  assert.deepEqual(result.cohort.knownTargets, ['LDN 1320', 'M 27', 'NGC 281']);
   assert.equal(result.cohort.evidenceAvailability.guidingTemporalCoverage, 0);
   assert.ok(result.biasDisclosure.includes('AVAILABLE_ASSESSMENTS_ARE_ONLY_FOR_M27_IN_THE_CURRENT_COHORT'));
   assert.ok(result.decision.reasonCodes.includes('REFERENCE_GROUND_TRUTH'));
