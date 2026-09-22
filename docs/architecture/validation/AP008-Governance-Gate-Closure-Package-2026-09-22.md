@@ -8,7 +8,7 @@
 | Scope of this package | governare il passaggio da shadow pilot a eventuale integrazione read-only |
 | Runtime mode | shadow only |
 | Current decision | READY_FOR_LIVE_INTEGRATION_WITH_WAIVER — read-only scope only |
-| Production traffic | unchanged; 100% on `dsg-observatory-status-relay-00005-rof` |
+| Production traffic | 100% on `dsg-observatory-status-relay-00015-hak`; `00005-rof` retained for rollback |
 
 ## 1. Purpose and boundary
 
@@ -107,8 +107,7 @@ an independent reviewer before any live-readiness decision.
 - `safety_authority` and `command_authority` remain `NONE`.
 - No broker, scheduler, command route or device-control integration may be introduced by
   closing this package.
-- Production traffic remains on the rollback revision until the separate rollout preflight is
-  executed.
+- Production rollout preflight completed; `00005-rof` remains retained as rollback.
 
 ## 9. Decision
 

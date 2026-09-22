@@ -25,7 +25,7 @@ This gate records the controlled path from the completed repository shadow pilot
 | G5 | Consumer replay and reconciliation | PASS — technical read-model scope | Observatory, EAGLE Health and shadow read-backs reconciled; independent portal replay remains open |
 | G6 | Disable/rollback drill | PASS — shadow scope | no active producer, unchanged timestamps, then successful fresh restore |
 | G7 | Independent ARB re-review | PASS WITH WAIVER | ARB acceptance recorded for read-only scope |
-| G8 | Live readiness decision | READY WITH WAIVER | readiness only; traffic promotion remains a separate controlled action |
+| G8 | Live readiness decision | READY WITH WAIVER — ROLLOUT EXECUTED | 100% on `dsg-observatory-status-relay-00015-hak`; rollback `00005-rof` retained |
 
 ## Non-negotiable boundaries
 

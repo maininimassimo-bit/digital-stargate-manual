@@ -7,7 +7,7 @@
 | Requested status | `READY_FOR_LIVE_INTEGRATION` |
 | Recorded status | `GRANTED WITH WAIVER — READ-ONLY SCOPE ONLY` |
 | Runtime authorization | `NONE` |
-| Production traffic | unchanged; 100% on `dsg-observatory-status-relay-00005-rof` |
+| Production traffic | 100% on `dsg-observatory-status-relay-00015-hak`; `00005-rof` retained for rollback |
 
 ## Request
 

@@ -290,9 +290,9 @@ The bounded scope is marked:
 
 This readiness status covers portal publication of read-only telemetry and shadow
 SessionCompleted transport only. It does not activate a command path, broker, scheduler, Safety
-Authority integration or `runtime_event_published=true`. Any production traffic change remains
-a separate controlled action requiring the preflight checks and rollback rule documented in the
-governance package.
+Authority integration or `runtime_event_published=true`. The direct 100% read-only rollout was
+executed and verified under the preflight and rollback rule documented in the governance
+package; `dsg-observatory-status-relay-00005-rof` remains the rollback revision.
 
 ## 15. Cross-revision continuity closure — 2026-09-22
 
