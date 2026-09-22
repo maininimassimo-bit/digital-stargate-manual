@@ -50,6 +50,10 @@ There are **no command endpoints**.
 
 ## EAGLE Health validation
 
+During the transition, the relay accepts the legacy `UNKNOWN / POLICY_NOT_ACTIVATED`
+projection as well as the governed states below. The legacy state is transport
+compatibility only and is not comparable for BKL-036-F5.
+
 The relay accepts EAGLE Health only when all of the following hold:
 
 - `schema_version = 1.0`;

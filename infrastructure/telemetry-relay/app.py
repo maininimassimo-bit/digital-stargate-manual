@@ -74,6 +74,7 @@ def validate_eagle_health(payload, idempotency_key):
         'HEALTHY': 'ALL_REQUIRED_SIGNALS_HEALTHY',
         'DEGRADED': 'THRESHOLD_EXCEEDED',
         'UNAVAILABLE': None,
+        'UNKNOWN': 'POLICY_NOT_ACTIVATED',
     }
     state = summary.get('state')
     reason = summary.get('reason')
@@ -83,6 +84,8 @@ def validate_eagle_health(payload, idempotency_key):
         raise ValueError('EAGLE healthy summary reason mismatch')
     if state == 'DEGRADED' and reason != allowed_summary[state]:
         raise ValueError('EAGLE degraded summary reason mismatch')
+    if state == 'UNKNOWN' and reason != allowed_summary[state]:
+        raise ValueError('EAGLE transitional summary reason mismatch')
 
     diagnostics = payload.get('diagnostics') or {}
     if diagnostics.get('projection_mode') != 'READ_ONLY_PUBLIC':
