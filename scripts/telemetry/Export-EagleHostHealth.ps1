@@ -7,11 +7,17 @@ param(
     [ValidateRange(1,60)]
     [int]$ProbeTimeoutSeconds = 10,
     [string]$LockName = 'DigitalStarGate.EagleHostHealthCollector',
+    [string]$WindowPath = '',
     [hashtable]$ProbeOverrides
 )
 
 Set-StrictMode -Version 2.0
 $ErrorActionPreference = 'Stop'
+
+if ([string]::IsNullOrWhiteSpace($WindowPath)) {
+    $telemetryRoot = if ([string]::IsNullOrWhiteSpace($env:LOCALAPPDATA)) { Join-Path ([IO.Path]::GetTempPath()) 'DigitalStarGate' } else { Join-Path $env:LOCALAPPDATA 'DigitalStarGate' }
+    $WindowPath = Join-Path $telemetryRoot 'telemetry\eagle-health-window.json'
+}
 
 function Convert-ToUtcIso([datetime]$Value) { $Value.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ') }
 function Get-GovernedCadence([string]$Cadence) {
@@ -65,7 +71,21 @@ try {
     if($CadenceClass -in @('medium','all')){
         $signals.storage=Invoke-BoundedProbe 'storage' 'Win32_LogicalDisk/Get-PhysicalDisk' 'MEDIUM' { $logical=@(Get-CimInstance Win32_LogicalDisk -Filter 'DriveType=3'|ForEach-Object{$size=[int64]$_.Size;$free=[int64]$_.FreeSpace;[ordered]@{device_id=$_.DeviceID;volume_name=$_.VolumeName;filesystem=$_.FileSystem;size_bytes=$size;free_bytes=$free;free_ratio=if($size -gt 0){[math]::Round($free/[double]$size,6)}else{$null};free_pct=if($size -gt 0){[math]::Round(100*$free/[double]$size,3)}else{$null}}}); $physical=@(); if(Get-Command Get-PhysicalDisk -ErrorAction SilentlyContinue){$physical=@(Get-PhysicalDisk|ForEach-Object{[ordered]@{friendly_name=$_.FriendlyName;media_type=[string]$_.MediaType;bus_type=[string]$_.BusType;health_status=[string]$_.HealthStatus;operational_status=@($_.OperationalStatus|ForEach-Object{[string]$_});size_bytes=[int64]$_.Size}})}; [ordered]@{logical_disks=$logical;physical_disks=$physical;reliability=[ordered]@{available=$false;temperature_c=$null;temperature_max_c=$null;wear_pct=$null;read_errors_total=$null;write_errors_total=$null;power_on_hours=$null;reason='UNAVAILABLE_UNLESS_SEPARATELY_VERIFIED'}} }
         $signals.uptime=Invoke-BoundedProbe 'uptime' 'Win32_OperatingSystem' 'MEDIUM' { $os=Get-CimInstance Win32_OperatingSystem;$boot=[datetime]$os.LastBootUpTime;[ordered]@{last_boot_at_utc=$boot.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ');uptime_seconds=[int64]([datetime]::UtcNow-$boot.ToUniversalTime()).TotalSeconds;unexpected_reboot_observed=$null} }
-        $signals.time_sync=Invoke-BoundedProbe 'time_sync' 'W32Time service state' 'MEDIUM' { $s=Get-Service W32Time -ErrorAction SilentlyContinue;[ordered]@{service_state=if($s){[string]$s.Status}else{'UNKNOWN'};time_source=$null;stratum=$null;last_successful_sync_utc=$null;offset_ms=$null;command_available=($null -ne (Get-Command w32tm.exe -ErrorAction SilentlyContinue))} }
+        $signals.time_sync=Invoke-BoundedProbe 'time_sync' 'W32Time read-only status query' 'MEDIUM' {
+            $s=Get-Service W32Time -ErrorAction SilentlyContinue
+            $lastSync=$null; $source=$null; $stratum=$null
+            $command=(Get-Command w32tm.exe -ErrorAction SilentlyContinue)
+            if ($null -ne $command) {
+                $lines=@(& $command.Source /query /status 2>$null)
+                $syncLine=$lines|Where-Object{$_ -match '(?i)Last Successful Sync Time'}|Select-Object -First 1
+                if($syncLine){$raw=($syncLine -replace '^.*?:','').Trim();$parsed=[datetime]::MinValue;if([datetime]::TryParse($raw,[Globalization.CultureInfo]::CurrentCulture,[Globalization.DateTimeStyles]::AllowWhiteSpaces,[ref]$parsed)){$lastSync=$parsed.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ')}}
+                $sourceLine=$lines|Where-Object{$_ -match '(?i)Source:'}|Select-Object -First 1
+                if($sourceLine){$source=($sourceLine -replace '^.*?:','').Trim()}
+                $stratumLine=$lines|Where-Object{$_ -match '(?i)Stratum:'}|Select-Object -First 1
+                if($stratumLine){$stratum=($stratumLine -replace '^.*?:','').Trim()}
+            }
+            [ordered]@{service_state=if($s){[string]$s.Status}else{'UNKNOWN'};time_source=$source;stratum=$stratum;last_successful_sync_utc=$lastSync;offset_ms=$null;command_available=($null -ne $command)}
+        }
         $signals.usb_com=Invoke-BoundedProbe 'usb_com' 'Win32_PnPEntity' 'MEDIUM' { $ports=@(Get-CimInstance Win32_PnPEntity|Where-Object{$_.Name -match '\(COM\d+\)'}|ForEach-Object{[ordered]@{name=$_.Name;status=$_.Status;manufacturer=$_.Manufacturer;device_id=$_.PNPDeviceID}});[ordered]@{serial_ports=$ports;source_reconciliation='PNP_PRIMARY'} }
         $signals.log_sources=Invoke-BoundedProbe 'log_sources' 'filesystem metadata' 'MEDIUM' { [ordered]@{items=@()} }
     }
@@ -85,6 +105,32 @@ try {
         } @('NoMatchingEventsFound*')
         $signals.configuration_drift=New-Envelope 'governed baseline manifest' 'SLOW_ON_CHANGE' ([ordered]@{baseline_id=$null;baseline_version=$null;observed_items=@();drift_items=@();status='UNKNOWN'}) 'UNKNOWN' 'UNKNOWN' 'BASELINE_NOT_APPROVED'
     }
+
+    # Keep only the governed five-minute window. Samples are recorded at most once
+    # per minute so a fast caller cannot turn repeated reads into false duration.
+    $window = [ordered]@{ last_sample_at_utc = $null; cpu_samples = @(); memory_available_pct_samples = @() }
+    if (Test-Path -LiteralPath $WindowPath -PathType Leaf) {
+        try { $window = Get-Content -LiteralPath $WindowPath -Raw | ConvertFrom-Json } catch { }
+    }
+    $sampleNow = [datetime]::UtcNow
+    $shouldSample = $true
+    if ($window.last_sample_at_utc) {
+        try { $shouldSample = (($sampleNow - [datetime]::Parse([string]$window.last_sample_at_utc)).TotalSeconds -ge 60) } catch { $shouldSample = $true }
+    }
+    $cpuSamples = @($window.cpu_samples)
+    $memorySamples = @($window.memory_available_pct_samples)
+    if ($shouldSample) {
+        if ($signals.Contains('cpu') -and $null -ne $signals.cpu.data -and $null -ne $signals.cpu.data.load_pct -and -not [double]::IsNaN([double]$signals.cpu.data.load_pct) -and -not [double]::IsInfinity([double]$signals.cpu.data.load_pct)) { $cpuSamples += [double]$signals.cpu.data.load_pct }
+        if ($signals.Contains('memory') -and $null -ne $signals.memory.data -and $null -ne $signals.memory.data.available_ratio -and -not [double]::IsNaN([double]$signals.memory.data.available_ratio) -and -not [double]::IsInfinity([double]$signals.memory.data.available_ratio)) { $memorySamples += [math]::Round(([double]$signals.memory.data.available_ratio) * 100, 3) }
+        $cpuSamples = @($cpuSamples | Select-Object -Last 5)
+        $memorySamples = @($memorySamples | Select-Object -Last 5)
+        $window = [ordered]@{ last_sample_at_utc = (Convert-ToUtcIso $sampleNow); cpu_samples = $cpuSamples; memory_available_pct_samples = $memorySamples }
+        $windowDir = Split-Path -Parent $WindowPath
+        if (-not (Test-Path -LiteralPath $windowDir)) { New-Item -ItemType Directory -Path $windowDir -Force | Out-Null }
+        $window | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $WindowPath -Encoding UTF8
+    }
+    if ($signals.Contains('cpu') -and $null -ne $signals.cpu.data) { Add-Member -InputObject $signals.cpu.data -NotePropertyName samples -NotePropertyValue @($cpuSamples) -Force }
+    if ($signals.Contains('memory') -and $null -ne $signals.memory.data) { Add-Member -InputObject $signals.memory.data -NotePropertyName available_pct_samples -NotePropertyValue @($memorySamples) -Force }
 
     $now=[datetime]::UtcNow
     $projection=[ordered]@{schema_version='1.0';component='DSG.EagleHostHealthCollector';computer=$env:COMPUTERNAME;observed_at_utc=(Convert-ToUtcIso $now);fresh_until_utc=(Convert-ToUtcIso $now.AddSeconds($FreshnessSeconds));quality='CURRENT';correlation_id=[guid]::NewGuid().ToString();summary=[ordered]@{state='UNKNOWN';reasons=@([ordered]@{code='POLICY_NOT_ACTIVATED';signal=$null;severity=$null;evidence=$null})};cadence_class=(Get-GovernedCadence $CadenceClass);signals=$signals;diagnostics=[ordered]@{collector_mode='READ_ONLY';safety_authority='OUTSIDE_SCOPE';automatic_remediation=$false;probe_timeout_seconds=$ProbeTimeoutSeconds;non_overlap='MUTEX_SKIP'}}

@@ -70,8 +70,19 @@ def validate_eagle_health(payload, idempotency_key):
         raise ValueError('invalid EAGLE health source_component')
 
     summary = payload.get('summary') or {}
-    if summary.get('state') != 'UNKNOWN' or summary.get('reason') != 'POLICY_NOT_ACTIVATED':
+    allowed_summary = {
+        'HEALTHY': 'ALL_REQUIRED_SIGNALS_HEALTHY',
+        'DEGRADED': 'THRESHOLD_EXCEEDED',
+        'UNAVAILABLE': None,
+    }
+    state = summary.get('state')
+    reason = summary.get('reason')
+    if state not in allowed_summary or not isinstance(reason, str) or not reason:
         raise ValueError('EAGLE health summary policy mismatch')
+    if state == 'HEALTHY' and reason != allowed_summary[state]:
+        raise ValueError('EAGLE healthy summary reason mismatch')
+    if state == 'DEGRADED' and reason != allowed_summary[state]:
+        raise ValueError('EAGLE degraded summary reason mismatch')
 
     diagnostics = payload.get('diagnostics') or {}
     if diagnostics.get('projection_mode') != 'READ_ONLY_PUBLIC':

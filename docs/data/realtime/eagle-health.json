@@ -9,8 +9,10 @@
   "source_schema_version": "1.0",
   "source_correlation_id": null,
   "summary": {
-    "state": "UNKNOWN",
-    "reason": "POLICY_NOT_ACTIVATED"
+    "state": "UNAVAILABLE",
+    "reason": "NO_CURRENT_SNAPSHOT",
+    "score": null,
+    "reasons": ["NO_CURRENT_SNAPSHOT"]
   },
   "signals": {},
   "diagnostics": {
