@@ -23,7 +23,7 @@ command path or Safety Authority integration.
 |---|---|---|
 | G0 accountable owner | PASS | Massimo Mainini recorded as AP-008 accountable owner |
 | G1 bounded transport | PASS — shadow scope only | HTTPS Cloud Run relay, bearer-authenticated ingest, read-only GET, persistent bucket `/data`, 0% canary traffic |
-| G2 distinct role assignment | OPEN | Contract, adapter, consumer, security and operations owners are not named |
+| G2 distinct role assignment | PASS — interim waiver | Massimo Mainini assigned to all four interim operational roles under `W-AP008-INTERIM-OWNERS-2026-09-22`; segregation remains a condition for live approval |
 | G3 security/trust review | OPEN | Threat/trust review, redaction, replay, dependency and audit controls require independent review |
 | G4 live adapter compatibility | NOT APPLICABLE to shadow / BLOCKED for live | No live adapter or live contract activation is authorized |
 | G5 consumer reconciliation | PARTIAL | Canary read-backs pass; independent portal/consumer replay and divergence report are not attached |
@@ -55,8 +55,8 @@ Primary execution evidence:
 
 - No independent human security/trust review has been recorded for the relay and future live
   adapter boundary.
-- No distinct adapter, consumer, security and operations owners have been assigned in the
-  repository.
+- No distinct adapter, consumer, security and operations owners have been assigned; an
+  interim same-person assignment is recorded below and does not satisfy independence.
 - No independent portal-side replay, divergence, partial-publication or recovery report has
   been attached.
 - No complete producer disable drill has recorded stop time, no-new-artifact observation,
@@ -78,14 +78,30 @@ not inferable from technical execution logs:
 
 | Action | Required decision | Current state |
 |---|---|---|
-| Assign adapter owner | named person/account | UNASSIGNED |
-| Assign consumer/portal owner | named person/account | UNASSIGNED |
-| Assign security reviewer | independent reviewer | UNASSIGNED |
-| Assign operations owner | named rollback/disable operator | UNASSIGNED |
+| Assign adapter owner | named person/account | Massimo Mainini — INTERIM |
+| Assign consumer/portal owner | named person/account | Massimo Mainini — INTERIM |
+| Assign security reviewer | independent reviewer | Massimo Mainini — INTERIM; independence not satisfied |
+| Assign operations owner | named rollback/disable operator | Massimo Mainini — INTERIM |
 | Approve bounded transport scope | read-only shadow or future read-only live scope | OWNER DECISION REQUIRED |
 | Record ARB disposition | approve, approve with conditions, or reject | PENDING |
 
-## 7. Non-negotiable decision constraints
+## 7. Interim authorization and waiver
+
+On 2026-09-22 the AP-008 accountable owner authorized the interim assignment of Massimo
+Mainini to all four operational roles:
+
+- read-only session adapter owner;
+- consumer/portal reconciliation owner;
+- security/trust review coordinator;
+- disable/rollback operations owner.
+
+This is recorded as waiver `W-AP008-INTERIM-OWNERS-2026-09-22`. It is limited to governance
+coordination and shadow-pilot continuation. It does not create independent security approval,
+satisfy four-eyes or segregation-of-duties requirements, create an ARB decision, or authorize
+production promotion/live activation. The waiver must be replaced by distinct named owners and
+an independent reviewer before any live-readiness decision.
+
+## 8. Non-negotiable decision constraints
 
 - `runtime_event_published` remains `false`.
 - `safety_authority` and `command_authority` remain `NONE`.
@@ -93,7 +109,7 @@ not inferable from technical execution logs:
   closing this package.
 - Production traffic must remain on the rollback revision until the ARB decision is recorded.
 
-## 8. Decision
+## 9. Decision
 
 Technical OAT completion is recorded. Governance closure is not yet achieved. The authoritative
 status remains:
