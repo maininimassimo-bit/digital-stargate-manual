@@ -7,12 +7,17 @@ param(
     [ValidateRange(1,60)]
     [int]$ProbeTimeoutSeconds = 10,
     [string]$LockName = 'DigitalStarGate.EagleHostHealthCollector',
-    [string]$WindowPath = (Join-Path $env:LOCALAPPDATA 'DigitalStarGate\telemetry\eagle-health-window.json'),
+    [string]$WindowPath = '',
     [hashtable]$ProbeOverrides
 )
 
 Set-StrictMode -Version 2.0
 $ErrorActionPreference = 'Stop'
+
+if ([string]::IsNullOrWhiteSpace($WindowPath)) {
+    $telemetryRoot = if ([string]::IsNullOrWhiteSpace($env:LOCALAPPDATA)) { Join-Path ([IO.Path]::GetTempPath()) 'DigitalStarGate' } else { Join-Path $env:LOCALAPPDATA 'DigitalStarGate' }
+    $WindowPath = Join-Path $telemetryRoot 'telemetry\eagle-health-window.json'
+}
 
 function Convert-ToUtcIso([datetime]$Value) { $Value.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ') }
 function Get-GovernedCadence([string]$Cadence) {
