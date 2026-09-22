@@ -94,7 +94,7 @@ if ($filesStatus -ne 'PASS' -or $checks.status -contains 'FAIL') {
         session_id = $SessionId
         outcome = 'REJECT_NO_EVENT'
         reason = @($fileFailures)
-        checks = @($checks)
+        checks = $checks.ToArray()
         fail_closed_tests = $failClosed
         runtime_event_published = $false
         command_path = 'NONE'
@@ -158,7 +158,7 @@ $evidence = [ordered]@{
     manifest_sha256 = $manifestDigest
     diagnostic_status = [string]$metrics.severity
     diagnostic_reasons = @($metrics.severity_reasons)
-    checks = @($checks)
+    checks = $checks.ToArray()
     fail_closed_tests = $failClosed
     runtime_event_published = $false
     broker_used = $false
