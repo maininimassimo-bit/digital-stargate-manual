@@ -4,10 +4,10 @@
 |---|---|
 | Identificativo | INT-SESSION-METADATA-PILOT-001 |
 | Package | AP-008 |
-| Stato | Proposed — not operationally authorized |
+| Stato | READY_WITH_CONDITIONS — repository shadow only; live not authorized |
 | Safety class | non_safety |
 | Direzione | N.I.N.A. session metadata -> repository/portal projection |
-| Baseline | main @ 966ef897a5c3fd11da82339fec608c134e6740de |
+| Owner | Massimo Mainini — AP-008 accountable owner |\n| Baseline | main @ 966ef897a5c3fd11da82339fec608c134e6740de |
 
 ## Scopo
 
