@@ -9,12 +9,12 @@
 | Branch | `main` |
 | Data | 30/07/2026 |
 | Autorità | Digital StarGate Chief Architect |
-| Sponsor | Project Owner / Architecture Sponsor — Massimo Mainini |
+| Sponsor | Project Owner / Architecture Sponsor — Massimo Mainini |\n| Owner / Accountable | Massimo Mainini |
 | Dipendenze | AP-001…AP-007; ADR-004; OPS-REF-001; CAP-08, CAP-15…CAP-19, CAP-34…CAP-40 |
-| Stato | Proposed for independent ARB review |
+| Stato | Approved with Conditions — shadow pilot and proposed read-only transport; live NOT_READY |
 | Target release | Da assegnare |
 
-## 1. Scopo
+## Current disposition\n\nThe architecture package is closed at the governed document and design level with conditions. The repository shadow pilot is `READY_WITH_CONDITIONS`, and the `SessionCompleted` outbound HTTPS relay is a proposed read-only transport. No live adapter, broker, scheduler, command path or Safety Authority integration is active. Live closure requires the AP008 live-readiness gates and a new ARB decision.\n\n## 1. Scopo
 
 AP-008 definisce il modello di integrazione enterprise di Digital StarGate mediante un **Enterprise Integration Fabric (EIF)** technology-neutral. Il package governa API, eventi, comandi, query, adapter, affidabilità, sicurezza, osservabilità, ownership e ciclo di vita dei contratti.
 

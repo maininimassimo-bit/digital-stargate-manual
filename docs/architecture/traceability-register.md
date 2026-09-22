@@ -76,8 +76,8 @@
 | ID | Artefatto | Package | Stato | Evidence |
 |---|---|---|---|---|
 | OPS-REF-001 | Operations and Service Management Reference Architecture | AP-007 | ARB-AP007-001; RQ-AP007-001 | Accepted with conditions |
-| INT-REF-001 | Enterprise Integration Reference Architecture | AP-008 | Proposed for review | documentale |
-| INT-CAT-001 | Integration Contract Catalog | AP-008 | Initial candidate catalog | nessun runtime test |
+| INT-REF-001 | Enterprise Integration Reference Architecture | AP-008 | Approved with Conditions — runtime unverified | documentale; AP008 live gates open |
+| INT-CAT-001 | Integration Contract Catalog | AP-008 | Governed candidate catalog — live contracts not active | nessun runtime test |
 | INT-SESSION-METADATA-PILOT-001 | Read-only Session Metadata Integration Pilot | AP-008 | READY_WITH_CONDITIONS — repository shadow only | accountable owner Massimo Mainini; real-session event, schema/compatibility test and readiness record; adapter/security/rollback/live reconciliation open |\n| DSG-SOL-SESSIONCOMPLETED-001 | SessionCompleted Read-only Transport Proposal | AP-008 | Proposed — not operationally authorized | outbound HTTPS relay pattern; security, owners, compatibility and rollback gates open |
 | ARB-AP008 | Independent Review of AP-008 | AP-008 | Completed — Rework Required | 73/100; conditions open; no runtime authorization |
 | INF-REF-001 | Enterprise Infrastructure Reference Architecture | AP-009 | Approved with conditions via ARB-009 | evidence operativa aperta |
