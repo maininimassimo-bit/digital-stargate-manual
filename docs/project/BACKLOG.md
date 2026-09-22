@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.37 |
+| Versione | 5.38 |
 | Stato | Active |
-| Data baseline | 17/09/2026 |
+| Data baseline | 23/09/2026 |
 
 ## 1. Scopo
 
@@ -32,7 +32,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-011 | P1 | Evidence residue ARB-012-C04 | Done | C04-W01–W08 | ARB Closed/Approved | AP-012 |
 | BKL-012 | P1 | Validare unattended AP-013 COPY_ONLY | Done | Scheduler/evidence | Runtime OAT | AP-013 |
 | BKL-013 | P1 | Completare AP-014 | Done | AP14-W01-W07 | Catalogo/search accettati | AP-014 |
-| BKL-014 | P2 | Preparare AP-015 Scientific Knowledge Platform | Planned | AP-014, BKL-015 e capability foundation | Architecture Package CAP-40 | AMP-002 |
+| BKL-014 | P2 | Preparare AP-015 Scientific Knowledge Platform | In Progress | AP-014, BKL-015 e capability foundation soddisfatte; RC2 baseline chiusa | Architecture Package CAP-40 | AMP-002; RC2 closure |
 | BKL-015 | P2 | Implementare repository Knowledge Graph machine-readable | Done | BKL-029/BKL-030 architecture requirements; Governance Foundation | Relazioni AP/ADR/component/evidence interrogabili con source locator e gate CI | TD-008 Resolved; F1-F3; PR #96; merge `c1a9f96b34a23407c5804e7fd6facfbad226f8fc` |
 | BKL-016 | P2 | Contestualizzare release e guide storiche | Planned | Inventario | Lineage baseline | TD-007 |
 | BKL-017 | P2 | Tema system | Planned | RC1-HF01 | Preferenza OS | RC1-HF01 |

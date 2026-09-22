@@ -4,8 +4,9 @@
 |---|---|
 | Identificativo | DSG-RC2-RDM-001 |
 | Versione | 1.4 |
-| Stato | Active |
+| Stato | Completed / Accepted / Post-Merge Verified |
 | Data avvio | 05/08/2026 |
+| Data chiusura | 23/09/2026 |
 | Baseline di partenza | `docs/architecture/baselines/RC1_BASELINE.md` |
 
 ## 1. Obiettivo
@@ -42,7 +43,7 @@ WP-01 Foundation [Completed]
   -> WP-04 Search Center [Completed]
   -> WP-05 Operations Dashboard [Completed]
   -> WP-06 Plugin SDK [Completed]
-  -> RC2 Baseline and Acceptance
+  -> RC2 Baseline and Acceptance [Completed / Accepted]
 ```
 
 ## 5. Gate trasversali
@@ -60,4 +61,8 @@ Ogni WP deve superare:
 
 ## 6. Definition of Done RC2
 
-RC2 è completata quando tutti i WP sono chiusi, la baseline RC2 è congelata, le API pubbliche sono documentate, la migrazione da RC1 è verificata e GitHub Pages è accettata senza regressioni.
+RC2 è completata: tutti i WP sono chiusi, la baseline RC2 è congelata, le API pubbliche sono documentate, la migrazione da RC1 è verificata e GitHub Pages è accettata senza regressioni. Evidence integrata e closure: `docs/project/RC2-CLOSURE-2026-09-23.md`.
+
+## 7. Successor package
+
+AP-015 — Scientific Knowledge Platform Architecture è il package corrente successivo, limitato alla preparazione architetturale e semantica di CAP-40. La selezione tecnologica, la materializzazione runtime, nuovi provider, AI execution e qualsiasi authority operativa restano fuori scope e richiedono gate separati.

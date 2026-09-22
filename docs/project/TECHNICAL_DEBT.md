@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEBT-001 |
-| Versione | 1.8 |
+| Versione | 1.9 |
 | Stato | Active |
-| Data review | 08/09/2026 |
+| Data review | 23/09/2026 |
 
 ## 1. Scopo
 
@@ -49,3 +49,7 @@ La review riconcilia il registro con BKL-040 e le foundation precedenti:
 - TD-012 non mette in discussione l'acceptance F2/F3/F4: governa una futura eventuale normalizzazione compatibile;
 - la copertura eseguibile BKL-040 resta bounded: NINA/PHD2/CloudWatcher e session projection dove definita; nessuna dichiarazione implicita di materializzazione Power/Network/Safety;
 - nessuna nuova authority, command path, remediation authority o Safety Authority coupling viene introdotta dalla closure.
+
+## Review 23/09/2026 — RC2 closure
+
+La chiusura RC2 non introduce nuovo debito tecnico e congela la compatibilità RC1. Il lavoro successivo AP-015 è registrato come preparazione architetturale/semantica; eventuale selezione tecnologica, materializzazione runtime, provider o AI execution dovrà essere valutata come incremento separato con propri gate e review.
