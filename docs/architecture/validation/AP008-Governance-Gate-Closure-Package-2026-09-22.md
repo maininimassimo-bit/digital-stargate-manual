@@ -24,11 +24,11 @@ command path or Safety Authority integration.
 | G0 accountable owner | PASS | Massimo Mainini recorded as AP-008 accountable owner |
 | G1 bounded transport | PASS — shadow scope only | HTTPS Cloud Run relay, bearer-authenticated ingest, read-only GET, persistent bucket `/data`, 0% canary traffic |
 | G2 distinct role assignment | PASS — interim waiver | Massimo Mainini assigned to all four interim operational roles under `W-AP008-INTERIM-OWNERS-2026-09-22`; segregation remains a condition for live approval |
-| G3 security/trust review | AI-ASSISTED WITH CONDITIONS | Owner-authorized review published under waiver; independent human review remains required |
+| G3 security/trust review | ATTESTATION RECEIVED — RECONCILIATION OPEN | Owner-witnessed approval received; conflicts with open technical findings and is not yet a reconciled gate closure |
 | G4 live adapter compatibility | NOT APPLICABLE to shadow / BLOCKED for live | No live adapter or live contract activation is authorized |
 | G5 consumer reconciliation | PASS — technical read-model scope | Observatory, EAGLE Health and shadow read-backs reconciled; independent portal/consumer replay remains a separate condition |
 | G6 disable/rollback drill | PASS — shadow scope | No producer was active, timestamps remained unchanged for 20 seconds, then both producers restored fresh snapshots |
-| G7 independent ARB re-review | AI-ASSISTED WITH CONDITIONS | Owner-authorized re-review published under waiver; independent human ARB decision remains required |
+| G7 independent ARB re-review | ATTESTATION RECEIVED — RECONCILIATION OPEN | Owner-witnessed ARB approval received; exact decision basis and independence remain to be reconciled |
 | G8 live readiness | BLOCKED | Remains `NOT_READY` until G2-G7 are independently evidenced |
 
 ## 3. Executed and verified
@@ -81,6 +81,10 @@ not inferable from technical execution logs:
 | Assign operations owner | named rollback/disable operator | Massimo Mainini — INTERIM |
 | Approve bounded transport scope | read-only shadow or future read-only live scope | SHADOW SCOPE VERIFIED; LIVE SCOPE PENDING ARB |
 | Record ARB disposition | approve, approve with conditions, or reject | PENDING |
+
+The two owner-witnessed attestations are recorded in
+`AP008-Approval-Attestations-2026-09-22.md`. Their “no conditions” statements conflict with
+the open findings in the security/trust review and therefore require explicit reconciliation.
 
 ## 7. Interim authorization and waiver
 
