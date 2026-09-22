@@ -808,7 +808,7 @@
       "id": "INT-SESSION-METADATA-PILOT-001",
       "type": "component",
       "title": "Read-only Session Metadata Integration Pilot",
-      "status": "Proposed — not operationally authorized",
+      "status": "READY_WITH_CONDITIONS — repository shadow only",
       "authority": "repository_authority",
       "source_locator": {
         "path": "docs/architecture/solutions/INT-SESSION-METADATA-PILOT-001.md"
@@ -822,6 +822,36 @@
       "authority": "evidence_authority",
       "source_locator": {
         "path": "docs/architecture/assessments/ARB-AP008-AP008-Independent-Architecture-Review.md"
+      }
+    },
+    {
+      "id": "AP008-REM-SESSIONCOMPLETED-2026-09-22",
+      "type": "evidence",
+      "title": "AP-008 Remediation and Readiness Record",
+      "status": "READY_WITH_CONDITIONS — shadow only",
+      "authority": "evidence_authority",
+      "source_locator": {
+        "path": "docs/architecture/validation/AP008-Remediation-and-Readiness-2026-09-22.md"
+      }
+    },
+    {
+      "id": "ARB-AP008-RR-2026-09-22",
+      "type": "evidence",
+      "title": "AP-008 Shadow Pilot Re-review",
+      "status": "Approved with Conditions — shadow pilot only",
+      "authority": "evidence_authority",
+      "source_locator": {
+        "path": "docs/architecture/assessments/ARB-AP008-RR-2026-09-22.md"
+      }
+    },
+    {
+      "id": "DSG-OBS-SESSIONCOMPLETED-SHADOW-V1",
+      "type": "component",
+      "title": "SessionCompleted Shadow Contract v1.0.0",
+      "status": "Candidate — shadow only",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "contracts/events/observation-session-completed-shadow-v1.schema.json"
       }
     }
   ],
@@ -1381,6 +1411,46 @@
       "type": "evidenced_by",
       "from": "AP-008",
       "to": "ARB-AP008",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:AP008-REM-SESSIONCOMPLETED-2026-09-22:documents:INT-SESSION-METADATA-PILOT-001",
+      "type": "documents",
+      "from": "AP008-REM-SESSIONCOMPLETED-2026-09-22",
+      "to": "INT-SESSION-METADATA-PILOT-001",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:ARB-AP008-RR-2026-09-22:relates_to:AP-008",
+      "type": "relates_to",
+      "from": "ARB-AP008-RR-2026-09-22",
+      "to": "AP-008",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:ARB-AP008-RR-2026-09-22:evidenced_by:AP008-REM-SESSIONCOMPLETED-2026-09-22",
+      "type": "evidenced_by",
+      "from": "ARB-AP008-RR-2026-09-22",
+      "to": "AP008-REM-SESSIONCOMPLETED-2026-09-22",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:DSG-OBS-SESSIONCOMPLETED-SHADOW-V1:governs:INT-SESSION-METADATA-PILOT-001",
+      "type": "governs",
+      "from": "DSG-OBS-SESSIONCOMPLETED-SHADOW-V1",
+      "to": "INT-SESSION-METADATA-PILOT-001",
       "version": "1.0",
       "source_locator": {
         "path": "docs/architecture/traceability-register.md"
