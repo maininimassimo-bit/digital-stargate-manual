@@ -77,3 +77,11 @@ broker, scheduler, command path, Safety Authority and runtime event publication 
 - `/v1/observatory-status` and `/v1/eagle-health` remained `404` on the canary because their
   fresh snapshot objects have not yet been republished into the new bucket.
 - Production traffic remained 100% on `dsg-observatory-status-relay-00005-rof`.
+
+## Freshness hardening
+
+- Commit `0a29bef` added GET-side freshness enforcement for Observatory Status and EAGLE Health.
+- Stale or malformed snapshots now return `404` and are not served as current data.
+- Revision `dsg-observatory-status-relay-00013-jog` retained the persisted shadow event after
+  the revision change.
+- Production traffic remained 100% on `dsg-observatory-status-relay-00005-rof`.

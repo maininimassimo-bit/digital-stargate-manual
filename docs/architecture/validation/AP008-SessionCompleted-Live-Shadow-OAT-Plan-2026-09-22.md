@@ -204,3 +204,16 @@ for the shadow channel. The new bucket does not yet contain `observatory-status.
 `eagle-health.json`; those legacy consumers therefore remain `404` on the canary until fresh,
 valid snapshots are republished through their governed producer paths. AP-008 remains blocked
 from production promotion until those continuity checks pass.
+
+## 13. Freshness read-path hardening — 2026-09-22
+
+Commit `0a29bef` added freshness enforcement to GET reads for Observatory Status and EAGLE
+Health. A stored snapshot is now returned only when its `fresh_until_utc` is still valid;
+missing, malformed or stale snapshots return `404` so consumers can render `UNKNOWN`. The
+SessionCompleted shadow read-back remains an immutable evidence read and is not subject to
+snapshot freshness expiry.
+
+Revision `dsg-observatory-status-relay-00013-jog` was deployed with the persistent `/data`
+mount and remained at 0% production traffic. The persisted SessionCompleted event remained
+readable after the revision change. Legacy snapshot GETs remained `404` because fresh
+`observatory-status.json` and `eagle-health.json` objects have not yet been republished.
