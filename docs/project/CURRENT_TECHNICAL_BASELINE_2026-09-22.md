@@ -32,5 +32,7 @@ Scheduled Task. Continuous read-back verified HTTP `200` / `CURRENT` with advanc
 
 BKL-036-F5 is owner-authorized as an implementation candidate. The seven-domain source mapping,
 live envelope schema and fail-closed `UNAVAILABLE` fixture are now validated. The next gate is
-owner-authorized production OAT, followed by independent ARB/RQ review. The archived F3
-projection remains unchanged and `UNAVAILABLE` until F5 is independently accepted.
+owner-authorized production OAT, followed by independent ARB/RQ review. The first live OAT
+passed transport, freshness and schema checks for all seven domains, but EAGLE Health remains
+semantically non-comparable with `POLICY_NOT_ACTIVATED`. The archived F3 projection and F5
+aggregate remain unchanged and `UNAVAILABLE` until that policy is accepted.
