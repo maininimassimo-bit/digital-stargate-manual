@@ -37,8 +37,10 @@ $cpu = $signals.cpu.data
 $memory = $signals.memory.data
 $cpuSamplesProperty = $cpu.PSObject.Properties['samples']
 $memorySamplesProperty = $memory.PSObject.Properties['available_pct_samples']
-$cpuSamples = if ($null -eq $cpuSamplesProperty) { @() } else { @($cpuSamplesProperty.Value) }
-$memorySamples = if ($null -eq $memorySamplesProperty) { @() } else { @($memorySamplesProperty.Value) }
+$cpuSamples = @()
+$memorySamples = @()
+if ($null -ne $cpuSamplesProperty) { $cpuSamples = @($cpuSamplesProperty.Value) }
+if ($null -ne $memorySamplesProperty) { $memorySamples = @($memorySamplesProperty.Value) }
 $minimumSamples = [int]$policy.thresholds.evaluation_window.minimum_samples
 if ($cpuSamples.Count -lt $minimumSamples -or $memorySamples.Count -lt $minimumSamples) {
     return [pscustomobject]@{ state = 'UNAVAILABLE'; score = $null; reason = 'WINDOW_NOT_COMPUTABLE'; reasons = @('WINDOW_NOT_COMPUTABLE') }
