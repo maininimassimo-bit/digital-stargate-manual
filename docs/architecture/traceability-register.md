@@ -58,7 +58,7 @@
 | AP007-BASELINE-RECON-001 | AP-007 Baseline Reconciliation and Ownership Bootstrap | AP-007, OPS-REF-001 | Nessuna registrata | Baseline reconciled; review candidate |
 | DSG-BASELINE-2026-09-21 | Current AP-007 continuity baseline | AP007-BASELINE-RECON-001; AP-007; OPS-REF-001 | Nessuna registrata | Current governed baseline; not operationally verified |
 | DSG-HO-AP007-2026-09-21 | AP-007 compact continuity handover | DSG-BASELINE-2026-09-21 | Nessuna registrata | Current continuity pointer; ARB/RQ next |
-| AP-008 | Enterprise Integration | AP-008, INT-REF-001, INT-CAT-001, INT-SESSION-METADATA-PILOT-001, AP008-REM-SESSIONCOMPLETED-2026-09-22, ARB-AP008-RR-2026-09-22 | ARB-AP008; ARB-AP008-RR-2026-09-22 | Approved with Conditions for repository shadow pilot; live integration NOT_READY |
+| AP-008 | Enterprise Integration | AP-008, INT-REF-001, INT-CAT-001, INT-SESSION-METADATA-PILOT-001, AP008-REM-SESSIONCOMPLETED-2026-09-22, ARB-AP008-RR-2026-09-22, AP008-LIVE-READINESS-GATE-2026-09-22 | ARB-AP008; ARB-AP008-RR-2026-09-22 | Owner: Massimo Mainini; shadow pilot Approved with Conditions; live integration NOT_READY |
 | AP-009 | Enterprise Infrastructure | AP-009, INF-REF-001 | ARB-009 | Approved with conditions, 94/100 |
 | AP-010 | Enterprise Safety Assurance | AP-010, SAF-REF-001, SAF-CAT-001 | ARB-010 | Approved with conditions, 97/100 |
 | AP-011 | Analytics Platform | AP-011, ANA-REF-001, ANA-PIPE-001, ANA-KPI-001, ANA-GOV-001 | ARB-011 | Approved with conditions, 97/100 |
@@ -78,7 +78,7 @@
 | OPS-REF-001 | Operations and Service Management Reference Architecture | AP-007 | ARB-AP007-001; RQ-AP007-001 | Accepted with conditions |
 | INT-REF-001 | Enterprise Integration Reference Architecture | AP-008 | Proposed for review | documentale |
 | INT-CAT-001 | Integration Contract Catalog | AP-008 | Initial candidate catalog | nessun runtime test |
-| INT-SESSION-METADATA-PILOT-001 | Read-only Session Metadata Integration Pilot | AP-008 | READY_WITH_CONDITIONS — repository shadow only | real-session event, schema/compatibility test and readiness record; owner/security/rollback/live reconciliation open |
+| INT-SESSION-METADATA-PILOT-001 | Read-only Session Metadata Integration Pilot | AP-008 | READY_WITH_CONDITIONS — repository shadow only | accountable owner Massimo Mainini; real-session event, schema/compatibility test and readiness record; adapter/security/rollback/live reconciliation open |
 | ARB-AP008 | Independent Review of AP-008 | AP-008 | Completed — Rework Required | 73/100; conditions open; no runtime authorization |
 | INF-REF-001 | Enterprise Infrastructure Reference Architecture | AP-009 | Approved with conditions via ARB-009 | evidence operativa aperta |
 | SAF-REF-001 | Enterprise Safety Reference Architecture | AP-010 | Approved with conditions via ARB-010 | scenario validation aperta |
