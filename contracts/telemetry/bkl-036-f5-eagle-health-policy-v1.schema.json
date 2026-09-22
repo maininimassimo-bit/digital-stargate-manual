@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.example/contracts/telemetry/bkl-036-f5-eagle-health-policy-v1.schema.json",
+  "title": "BKL-036-F5 EAGLE Health Comparability Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "contract_id", "required_signals", "freshness", "thresholds", "aggregation", "scoring", "boundaries"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "contract_id": {"const": "DSG.BKL036.F5.EagleHealthPolicy"},
+    "required_signals": {"const": ["cpu", "memory", "storage", "uptime", "time_sync"]},
+    "freshness": {
+      "type": "object", "additionalProperties": false,
+      "required": ["field", "stale_result", "missing_result"],
+      "properties": {"field": {"const": "fresh_until_utc"}, "stale_result": {"const": "UNAVAILABLE"}, "missing_result": {"const": "UNAVAILABLE"}}
+    },
+    "thresholds": {
+      "type": "object", "additionalProperties": false,
+      "required": ["cpu", "memory_available", "storage_free", "storage_volumes", "evaluation_window"],
+      "properties": {
+        "cpu": {"type": "object", "additionalProperties": false, "required": ["operator", "percent", "duration_seconds"], "properties": {"operator": {"const": ">"}, "percent": {"const": 90}, "duration_seconds": {"const": 300}}},
+        "memory_available": {"type": "object", "additionalProperties": false, "required": ["operator", "percent", "duration_seconds"], "properties": {"operator": {"const": "<"}, "percent": {"const": 20}, "duration_seconds": {"const": 300}}},
+        "storage_free": {"type": "object", "additionalProperties": false, "required": ["operator", "percent", "duration_seconds"], "properties": {"operator": {"const": "<"}, "percent": {"const": 20}, "duration_seconds": {"const": 0}}},
+        "storage_volumes": {"const": ["C:", "D:"]},
+        "evaluation_window": {"type": "object", "additionalProperties": false, "required": ["minimum_samples", "cadence_seconds"], "properties": {"minimum_samples": {"const": 5}, "cadence_seconds": {"const": 60}}}
+      }
+    },
+    "aggregation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["healthy", "degraded", "unavailable", "recovery"],
+      "properties": {
+        "healthy": {"const": "all five signals valid and no threshold exceeded"},
+        "degraded": {"const": "at least one valid threshold exceeded"},
+        "unavailable": {"const": "any required signal missing, stale, invalid or uncomputable"},
+        "recovery": {"const": "first normalized valid sample"}
+      }
+    },
+    "scoring": {
+      "type": "object", "additionalProperties": false,
+      "required": ["healthy", "degraded", "unavailable", "comparable_states"],
+      "properties": {"healthy": {"const": 100}, "degraded": {"const": 50}, "unavailable": {"const": null}, "comparable_states": {"const": ["HEALTHY", "DEGRADED"]}}
+    },
+    "boundaries": {
+      "type": "object", "additionalProperties": false,
+      "required": ["read_only", "command_authority", "safety_authority", "automatic_remediation"],
+      "properties": {"read_only": {"const": true}, "command_authority": {"const": "NONE"}, "safety_authority": {"const": "NONE"}, "automatic_remediation": {"const": false}}
+    }
+  }
+}
