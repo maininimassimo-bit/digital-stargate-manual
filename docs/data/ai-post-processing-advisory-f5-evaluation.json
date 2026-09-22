@@ -3,16 +3,16 @@
   "evaluationType": "BKL046_F5_REAL_EVIDENCE_EVALUATION",
   "evaluationState": "F5C_CLOSURE_EVALUATED",
   "identityMethod": "BKL046-F5-CANONICAL-JSON-SHA256-1",
-  "evaluationId": "BKL046-F5C-A76A015C49453DFB09F5A0C1",
-  "generatedAt": "2026-09-20T06:11:03.990Z",
+  "evaluationId": "BKL046-F5C-1B1B97840D376B9B29F303FC",
+  "generatedAt": "2026-09-22T07:49:38.624Z",
   "producer": "DSG.AiPostProcessingRealEvidenceEvaluator",
   "producerVersion": "2.0.0-f5c",
   "methodId": "BKL046-F5C-CLOSED-EVALUATION-1",
   "sourceSnapshots": {
     "catalog": {
       "path": "docs/data/scientific-session-catalog.json",
-      "digest": "906e73736c63eae8b069119c5b01a723ab2bac96d167279f97d3ecbc00b10414",
-      "sessionCount": 20,
+      "digest": "b1f4215765e51850bcc080e9fef0ea8ba6ee71dac1fc2e3b66a8d1fdf60af495",
+      "sessionCount": 21,
       "sessionIds": [
         "2026-07-14_2026-07-15",
         "2026-07-15_2026-07-16",
@@ -33,16 +33,17 @@
         "2026-09-13_2026-09-14",
         "2026-09-14_2026-09-15",
         "2026-09-15_2026-09-16",
-        "2026-09-19_2026-09-20"
+        "2026-09-19_2026-09-20",
+        "2026-09-21_2026-09-22"
       ]
     },
     "f4Projection": {
       "path": "docs/data/ai-post-processing-advisory-projection.json",
-      "digest": "4e42eae33312f7aa765e5bf33d26747b5989b5a7eecf493c3dcb065cacd827e1",
-      "projectionId": "BKL046-F4-9EB1A7638FBB6FBD3D20E011",
-      "generatedAt": "2026-09-20T06:11:03.835Z",
+      "digest": "2f17266d549f22579c1d35cc97c0ecfed30fe943257f190378dda653d732b523",
+      "projectionId": "BKL046-F4-3102593CCFDC75700E4BEBF5",
+      "generatedAt": "2026-09-22T07:49:38.504Z",
       "sourceSetDigest": "d0529a1abfe7d607991fc1b6172279bb49c28eaba51ebe03983dae05cc2de9dc",
-      "recordCount": 20
+      "recordCount": 21
     },
     "humanDecisionSourceSet": {
       "directory": "docs/data/ai-post-processing-human-decisions",
@@ -144,8 +145,8 @@
     {
       "cohortId": "ALL-CANONICAL-SESSIONS-F5",
       "selectionRuleId": "ALL-CANONICAL-SESSIONS-EXACT-SET-1",
-      "populationCount": 20,
-      "eligibleCount": 20,
+      "populationCount": 21,
+      "eligibleCount": 21,
       "memberRefs": [
         "2026-07-14_2026-07-15",
         "2026-07-15_2026-07-16",
@@ -166,7 +167,8 @@
         "2026-09-13_2026-09-14",
         "2026-09-14_2026-09-15",
         "2026-09-15_2026-09-16",
-        "2026-09-19_2026-09-20"
+        "2026-09-19_2026-09-20",
+        "2026-09-21_2026-09-22"
       ],
       "evidenceState": "AVAILABLE",
       "reasonCodes": [
@@ -179,7 +181,7 @@
     {
       "cohortId": "EXACT-PROVENANCE-MATCHED-F5",
       "selectionRuleId": "F4-PROVENANCE-MATCHED-EXACT-1",
-      "populationCount": 20,
+      "populationCount": 21,
       "eligibleCount": 0,
       "memberRefs": [],
       "evidenceState": "NOT_EVALUABLE",
@@ -193,7 +195,7 @@
     {
       "cohortId": "HUMAN-DECISION-RECEIPTS-F5",
       "selectionRuleId": "F2-HUMAN-DECISION-EXACT-CORRELATION-1",
-      "populationCount": 40,
+      "populationCount": 42,
       "eligibleCount": 0,
       "memberRefs": [],
       "evidenceState": "NOT_AVAILABLE",
@@ -300,7 +302,7 @@
     "aiModelImplemented": false
   },
   "summary": {
-    "canonicalSessions": 20,
+    "canonicalSessions": 21,
     "provenanceEligible": 0,
     "humanDecisionReceipts": 0,
     "executionEvidence": 0,
@@ -313,6 +315,10 @@
       {
         "target": "M 27",
         "count": 16
+      },
+      {
+        "target": "NGC 281",
+        "count": 1
       },
       {
         "target": "UNKNOWN",
@@ -336,5 +342,5 @@
     "Human decisions and execution evidence are separate from scientific outcome quality.",
     "No AI model, provider, confidence score, automatic acceptance, PixInsight apply, device command, production authority or Safety Authority is implemented."
   ],
-  "evaluationDigest": "e8806567d3e9abe8d164e2caa8e79695b951845fb0fd9be6cea58eb7ce9a748d"
+  "evaluationDigest": "a7ae56073b31ce589962ccce158fe19d613c30edf8667648509891da57d282d0"
 }
