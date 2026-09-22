@@ -86,6 +86,14 @@ def test_real_c8_session():
     assert_close(parsed['rms_dec_arcsec'],0.731)
     assert_close(parsed['rms_total_arcsec'],1.414)
 
+def test_real_quattro_touptek_session():
+    nina=ROOT/'data'/'sessions'/'2026'/'09'/'2026-09-21_2026-09-22'/'raw'/'nina'
+    parsed=MOD.parse_nina(nina)['scientific']
+    assert parsed['telescope']=='Sky-Watcher Quattro 200P',parsed
+    assert parsed['camera']=='ToupTek 294MC PRO',parsed
+    assert parsed['binning']==1,parsed
+    assert MOD.resolve_configuration(ROOT,parsed)=='QUATTRO200_TOUPTEK294_BIN1',parsed
+
 def main():
     with tempfile.TemporaryDirectory() as td:
         root=Path(td); nina=root/'nina'; nina.mkdir(); (nina/'session.log').write_text('2026-09-01|INFO| Target: M 27 RA: 19:59:36; Dec: +22° 43\' 16"; Epoch: J2000\nSaved image to D:\\Images NINA\\Target\\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-9.96C_Red_0027.xisf\nQHYCCD: Closing camera 695A-M-0037ec709603ca4e3\n',encoding='utf-8')
@@ -93,5 +101,6 @@ def main():
         sqm=root/'sqm'; sqm.mkdir(); (sqm/'sqm-summary.json').write_text(json.dumps({'statistics':{'min':8.91,'max':20.42,'mean':17.5395,'median':18.66,'valid_samples':1301,'temporal_coverage':0.9849},'quality':'AVAILABLE'}),encoding='utf-8'); projection=MOD.parse_sqm(sqm); assert projection['state']=='AVAILABLE'; assert projection['median_mag_arcsec2']==18.66; assert projection['valid_samples']==1301; assert_close(projection['temporal_coverage'],0.9849)
         test_phd2_profile_aware_rms(root)
         test_real_c8_session()
+        test_real_quattro_touptek_session()
     print('Scientific session evidence regression gates passed.')
 if __name__=='__main__': main()
