@@ -31,12 +31,12 @@ Lo score è `100` solo quando tutti i sette domini obbligatori risultano `PRESEN
 
 ## EAGLE Health
 
-> **Evidence host read-only.** Questa sezione mostra evidence del computer `EAGLE30154`; non applica soglie di salute e non esegue remediation. Finché la policy non è governata, lo stato complessivo resta `UNKNOWN / POLICY_NOT_ACTIVATED`.
+> **Evidence host read-only.** Questa sezione mostra evidence del computer `EAGLE30154`; applica esclusivamente la policy descrittiva BKL-036-F5 e non esegue remediation. In assenza di una projection corrente, lo stato resta `UNAVAILABLE`.
 
 | Evidenza | Valore |
 |---|---|
 | Qualità | <span data-eagle-health="quality">🟡 UNKNOWN</span> |
-| Policy complessiva | <span data-eagle-health="summary">UNKNOWN / POLICY_NOT_ACTIVATED</span> |
+| Policy complessiva | <span data-eagle-health="summary">UNAVAILABLE / NO_CURRENT_SNAPSHOT</span> |
 | Rilevazione | <span data-eagle-health="observed-at">—</span> |
 | Provenienza | <span data-eagle-health="source">—</span> |
 | CPU | <span data-eagle-health="cpu">—</span> |

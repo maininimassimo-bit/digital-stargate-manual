@@ -7,6 +7,8 @@ param(
 Set-StrictMode -Version 2.0
 $ErrorActionPreference = 'Stop'
 
+. (Join-Path $PSScriptRoot 'Invoke-EagleHealthPolicy.ps1')
+
 function Convert-ToPublicSignal([string]$SignalId,[object]$Signal) {
     if ($null -eq $Signal) { return $null }
 
@@ -114,8 +116,8 @@ function Assert-Input([object]$Projection) {
 function Assert-Output([object]$Projection) {
     if ([string]$Projection.schema_version -ne '1.0') { throw 'Invalid portal schema_version.' }
     if ([string]$Projection.component -ne 'DSG.EagleHealthPortalProjection') { throw 'Invalid portal component.' }
-    if ([string]$Projection.summary.state -ne 'UNKNOWN') { throw 'Portal summary state must remain UNKNOWN.' }
-    if ([string]$Projection.summary.reason -ne 'POLICY_NOT_ACTIVATED') { throw 'Portal summary policy reason missing.' }
+    if ([string]$Projection.summary.state -notin @('HEALTHY','DEGRADED','UNAVAILABLE')) { throw 'Invalid portal summary state.' }
+    if ([string]::IsNullOrWhiteSpace([string]$Projection.summary.reason)) { throw 'Portal summary reason missing.' }
 }
 
 if (-not (Test-Path -LiteralPath $InputPath -PathType Leaf)) { throw "Source projection not found: $InputPath" }
@@ -133,7 +135,7 @@ foreach ($signalId in $allowed) {
     $signals[$signalId] = $publicSignal
 }
 
-$reason = 'POLICY_NOT_ACTIVATED'
+$evaluation = Invoke-EagleHealthPolicy -Projection $source
 $projection = [ordered]@{
     schema_version = '1.0'
     component = 'DSG.EagleHealthPortalProjection'
@@ -145,8 +147,10 @@ $projection = [ordered]@{
     source_schema_version = [string]$source.schema_version
     source_correlation_id = [string]$source.correlation_id
     summary = [ordered]@{
-        state = 'UNKNOWN'
-        reason = $reason
+        state = $evaluation.state
+        reason = $evaluation.reason
+        score = $evaluation.score
+        reasons = @($evaluation.reasons)
     }
     signals = $signals
     diagnostics = [ordered]@{

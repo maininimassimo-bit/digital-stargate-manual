@@ -56,14 +56,14 @@ The relay accepts EAGLE Health only when all of the following hold:
 - `component = DSG.EagleHealthPortalProjection`;
 - `host = DSG_RELAY_AUTHORIZED_SOURCE` (currently `EAGLE30154`);
 - `source_component = DSG.EagleHostHealthCollector`;
-- `summary.state = UNKNOWN` and `summary.reason = POLICY_NOT_ACTIVATED`;
+- `summary.state` is `HEALTHY`, `DEGRADED` or fail-closed `UNAVAILABLE`, with a deterministic policy reason;
 - `diagnostics.projection_mode = READ_ONLY_PUBLIC`;
 - `diagnostics.automatic_remediation = false`;
 - `diagnostics.safety_authority = OUTSIDE_SCOPE`;
 - `Idempotency-Key` equals `source_correlation_id`;
 - source `fresh_until_utc` has not expired.
 
-The relay does not calculate host-health severity and does not extend source freshness.
+The relay does not calculate host-health severity and does not extend source freshness. Severity is calculated locally by the governed read-only EAGLE policy before publication.
 
 ## Unified NINA telemetry
 
@@ -124,7 +124,7 @@ The host must provide evidence for:
 10. EAGLE POST `202` and independent browser/client GET `200` for each enabled channel;
 11. SessionCompleted shadow POST `202`, duplicate `NO_OP`, and independent GET `200`;
 12. SessionCompleted shadow transport never promotes runtime publication, command authority or Safety Authority;
-13. EAGLE Health preserves `UNKNOWN / POLICY_NOT_ACTIVATED` and never becomes Safety Authority;
+13. EAGLE Health accepts only the governed `HEALTHY`, `DEGRADED` or `UNAVAILABLE` states and never becomes Safety Authority;
 14. relay outage does not affect local collector, NINA, CloudWatcher or Local Safety Authority;
 15. each portal surface decays independently to `UNKNOWN` when its hosted snapshot becomes stale/unavailable;
 16. static fallback does not override a fresh hosted EAGLE Health projection.

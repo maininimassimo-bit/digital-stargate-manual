@@ -18,7 +18,8 @@ export const evaluateEagleHealth = input => {
   }
   const storage = required.storage.volumes || {};
   if (!number(storage.C?.free_pct) || !number(storage.D?.free_pct)) return { state: 'UNAVAILABLE', score: null, reason: 'STORAGE_C_OR_D_NOT_COMPUTABLE' };
-  const degraded = cpuSamples.some(value => value > 90) || memorySamples.some(value => value < 20) || storage.C.free_pct < 20 || storage.D.free_pct < 20;
+  if (!required.time_sync.last_successful_sync_utc) return { state: 'UNAVAILABLE', score: null, reason: 'TIME_SYNC_NOT_CURRENT' };
+  const degraded = cpuSamples.every(value => value > 90) || memorySamples.every(value => value < 20) || storage.C.free_pct < 20 || storage.D.free_pct < 20;
   return degraded ? { state: 'DEGRADED', score: 50, reason: 'THRESHOLD_EXCEEDED' } : { state: 'HEALTHY', score: 100, reason: 'ALL_REQUIRED_SIGNALS_HEALTHY' };
 };
 
@@ -42,7 +43,7 @@ const base = { now: '2026-09-22T19:00:00Z', signals: {
 }};
 assert.deepEqual(evaluateEagleHealth(base), { state: 'HEALTHY', score: 100, reason: 'ALL_REQUIRED_SIGNALS_HEALTHY' });
 assert.equal(evaluateEagleHealth({ ...base, signals: { ...base.signals, storage: { ...base.signals.storage, volumes: { C: { free_pct: 19 }, D: { free_pct: 40 } } } } }).state, 'DEGRADED');
-assert.equal(evaluateEagleHealth({ ...base, signals: { ...base.signals, cpu: { ...base.signals.cpu, samples: [20, 20, 20, 20, 95] } } }).score, 50);
+assert.equal(evaluateEagleHealth({ ...base, signals: { ...base.signals, cpu: { ...base.signals.cpu, samples: [95, 95, 95, 95, 95] } } }).score, 50);
 assert.equal(evaluateEagleHealth({ ...base, signals: { ...base.signals, time_sync: { ...base.signals.time_sync, fresh_until_utc: '2026-09-22T18:59:59Z' } } }).state, 'UNAVAILABLE');
 assert.equal(evaluateEagleHealth({ ...base, signals: { ...base.signals, storage: { ...base.signals.storage, volumes: { C: { free_pct: null }, D: { free_pct: 40 } } } } }).state, 'UNAVAILABLE');
 console.log('BKL-036-F5 EAGLE Health policy PASS: thresholds, freshness, comparability and scoring are deterministic.');

@@ -22,7 +22,8 @@ function Test-Projection($Payload) {
     if ([string]$Payload.component -ne 'DSG.EagleHealthPortalProjection') { throw 'Invalid component.' }
     if ([string]$Payload.host -ne $env:COMPUTERNAME) { throw 'Projection host must match local computer.' }
     if ([string]$Payload.source_component -ne 'DSG.EagleHostHealthCollector') { throw 'Invalid source_component.' }
-    if ([string]$Payload.summary.state -ne 'UNKNOWN' -or [string]$Payload.summary.reason -ne 'POLICY_NOT_ACTIVATED') { throw 'Health policy must remain UNKNOWN/POLICY_NOT_ACTIVATED.' }
+    if ([string]$Payload.summary.state -notin @('HEALTHY','DEGRADED','UNAVAILABLE')) { throw 'Invalid EAGLE Health summary state.' }
+    if ([string]::IsNullOrWhiteSpace([string]$Payload.summary.reason)) { throw 'EAGLE Health summary reason is required.' }
     if ([string]$Payload.diagnostics.projection_mode -ne 'READ_ONLY_PUBLIC') { throw 'Projection must be READ_ONLY_PUBLIC.' }
     if ([bool]$Payload.diagnostics.automatic_remediation) { throw 'Automatic remediation must remain false.' }
     if ([string]$Payload.diagnostics.safety_authority -ne 'OUTSIDE_SCOPE') { throw 'Safety Authority must remain outside scope.' }

@@ -26,7 +26,7 @@ try {
     & $script -InputPath $input -OutputPath $output | Out-Null
     $p = Get-Content -LiteralPath $output -Raw | ConvertFrom-Json
     if ($p.component -ne 'DSG.EagleHealthPortalProjection') { throw 'Wrong component.' }
-    if ($p.summary.state -ne 'UNKNOWN' -or $p.summary.reason -ne 'POLICY_NOT_ACTIVATED') { throw 'Summary policy changed.' }
+    if ($p.summary.state -ne 'UNAVAILABLE' -or $p.summary.reason -ne 'REQUIRED_SIGNAL_NOT_CURRENT') { throw 'Fail-closed summary changed.' }
     if ($p.host -ne 'EAGLE30154') { throw 'Host provenance lost.' }
     if ($null -eq $p.signals.cpu -or $null -eq $p.signals.storage) { throw 'Required signals missing.' }
     if ($null -ne $p.signals.PSObject.Properties['processes']) { throw 'Process details leaked to public projection.' }
