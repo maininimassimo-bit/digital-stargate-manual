@@ -7,7 +7,7 @@
 | Stato | Proposed — not operationally authorized |
 | Safety class | non_safety |
 | Direzione | N.I.N.A. session metadata -> repository/portal projection |
-| Baseline | main @ c48cfbae76432cf65d6bca338a06c2775d1147be |
+| Baseline | main @ 966ef897a5c3fd11da82339fec608c134e6740de |
 
 ## Scopo
 
