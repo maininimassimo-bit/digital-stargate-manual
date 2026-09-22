@@ -204,11 +204,18 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(raw)
 
-    def write_store(self, store):
+    def write_store(self, store, require_fresh=False):
         if not store.exists():
             self.write_json(404, {'error': 'snapshot_not_found'})
             return
         raw = store.read_bytes()
+        if require_fresh:
+            try:
+                payload = json.loads(raw.decode('utf-8'))
+                validate_freshness(payload)
+            except Exception:
+                self.write_json(404, {'error': 'snapshot_unavailable'})
+                return
         self.send_response(200)
         self.headers_common()
         self.send_header('Content-Length', str(len(raw)))
@@ -228,10 +235,10 @@ class Handler(BaseHTTPRequestHandler):
             self.write_json(200, {'component': 'DSG.ObservatoryStatusTelemetryRelay.Hosted', 'state': 'RUNNING', **STATS})
             return
         if path == '/v1/observatory-status':
-            self.write_store(OBSERVATORY_STORE)
+            self.write_store(OBSERVATORY_STORE, require_fresh=True)
             return
         if path == '/v1/eagle-health':
-            self.write_store(EAGLE_HEALTH_STORE)
+            self.write_store(EAGLE_HEALTH_STORE, require_fresh=True)
             return
         if path == '/v1/session-completed-shadow':
             raw = read_last_session_event(SESSION_COMPLETED_SHADOW_STORE)
