@@ -54,7 +54,8 @@ if ([string]$manifest.report_status -ne 'COMPLETE') {
 $checks = New-Object System.Collections.Generic.List[object]
 $checks.Add([pscustomobject]@{ id='session_identity'; status='PASS'; detail=$SessionId })
 $checks.Add([pscustomobject]@{ id='manifest_complete'; status='PASS'; detail='report_status=COMPLETE' })
-$checks.Add([pscustomobject]@{ id='report_present'; status=(if (Test-Path -LiteralPath $reportPath -PathType Leaf) {'PASS'} else {'FAIL'}); detail=$reportPath })
+$reportStatus = if (Test-Path -LiteralPath $reportPath -PathType Leaf) { 'PASS' } else { 'FAIL' }
+$checks.Add([pscustomobject]@{ id='report_present'; status=$reportStatus; detail=$reportPath })
 
 $fileFailures = New-Object System.Collections.Generic.List[string]
 foreach ($entry in @($manifest.files)) {
@@ -73,7 +74,8 @@ foreach ($entry in @($manifest.files)) {
     }
 }
 $filesStatus = if ($fileFailures.Count -eq 0) { 'PASS' } else { 'FAIL' }
-$checks.Add([pscustomobject]@{ id='manifest_files_size_sha256'; status=$filesStatus; detail=if ($fileFailures.Count -eq 0) {'6/6 files verified'} else {$fileFailures -join '; '} })
+$fileDetail = if ($fileFailures.Count -eq 0) { '6/6 files verified' } else { $fileFailures -join '; ' }
+$checks.Add([pscustomobject]@{ id='manifest_files_size_sha256'; status=$filesStatus; detail=$fileDetail })
 
 # Offline fail-closed assertions: mutations must not qualify for SessionCompleted.
 $failClosed = @(
