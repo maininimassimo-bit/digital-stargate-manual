@@ -20,7 +20,7 @@ This gate records the controlled path from the completed repository shadow pilot
 | G0 | AP-008 accountable owner assigned | PASS | Massimo Mainini |
 | G1 | Transport selected and bounded | PASS — shadow scope only | HTTPS Cloud Run relay, bearer-authenticated ingest, read-only GET, persistent `/data`, 0% canary |
 | G2 | Adapter, consumer, security and operations owners assigned | PASS — interim waiver | Massimo Mainini assigned to all four roles under `W-AP008-INTERIM-OWNERS-2026-09-22`; separation remains required before live approval |
-| G3 | Security/trust review | CANDIDATE READY | dossier prepared; independent reviewer and disposition required |
+| G3 | Security/trust review | AI-ASSISTED WITH CONDITIONS | owner-authorized review under waiver; independent human review remains required |
 | G4 | Read-only adapter implementation and compatibility tests | NOT EXECUTED | implement only after G1-G3 approval |
 | G5 | Consumer replay and reconciliation | PASS — technical read-model scope | Observatory, EAGLE Health and shadow read-backs reconciled; independent portal replay remains open |
 | G6 | Disable/rollback drill | PASS — shadow scope | no active producer, unchanged timestamps, then successful fresh restore |

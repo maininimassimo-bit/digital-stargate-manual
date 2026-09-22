@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Package | AP-008 |
-| Review status | CANDIDATE — independent reviewer required |
+| Review status | AI-assisted, owner-authorized — independent human review still required |
 | Scope | shadow transport and bounded read-only integration boundary |
 | Accountable owner | Massimo Mainini |
 | Runtime authorization | NONE |
@@ -61,8 +61,10 @@ integration.
 
 ## 5. Review disposition
 
-This document is a review candidate and evidence index. It is not a security approval, not an
-ARB decision and not authorization to promote traffic or activate live semantics.
+This document is a review candidate and evidence index. The companion AI-assisted review is
+owner-authorized under `W-AP008-SECURITY-REVIEW-INDEPENDENCE-2026-09-22`; it is not equivalent
+to an independent human security approval, not an ARB decision and not authorization to promote
+traffic or activate live semantics.
 
 Required next action: assign an independent security/trust reviewer, record the disposition on
 this exact package, then submit the package and the completed OAT to ARB for a new decision.
