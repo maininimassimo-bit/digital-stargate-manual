@@ -7,7 +7,7 @@
 | Accountable owner | Massimo Mainini |
 | Scope of this package | governare il passaggio da shadow pilot a eventuale integrazione read-only |
 | Runtime mode | shadow only |
-| Current decision | NOT_READY |
+| Current decision | NOT_READY — exception requested, not effective |
 | Production traffic | unchanged; 100% on `dsg-observatory-status-relay-00005-rof` |
 
 ## 1. Purpose and boundary
@@ -113,5 +113,6 @@ status remains:
 
 `AP-008 = NOT_READY_FOR_LIVE_INTEGRATION`
 
-This package is ready for owner assignment, independent security review and ARB submission; it
-is not itself an approval.
+An owner authorization to elevate readiness was recorded as an exception request, but it is not
+effective because the independent security/trust review and ARB decision remain mandatory. See
+`AP008-Readiness-Exception-Request-2026-09-22.md`.

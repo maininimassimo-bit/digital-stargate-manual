@@ -5,7 +5,7 @@
 | Package | AP-008 |
 | Owner / Accountable | Massimo Mainini |
 | Scope | read-only live integration readiness |
-| Current decision | NOT_READY — technical OAT complete; governance closure open |
+| Current decision | NOT_READY — exception requested, not effective |
 | Runtime authorization | NONE |
 | Safety Authority | unchanged and independent |
 
