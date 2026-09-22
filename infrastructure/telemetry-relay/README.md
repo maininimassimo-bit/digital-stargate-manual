@@ -16,6 +16,7 @@ Optional environment:
 - `PORT=8080`;
 - `DSG_RELAY_STORE_PATH=/data/observatory-status.json`;
 - `DSG_RELAY_EAGLE_HEALTH_STORE_PATH=/data/eagle-health.json`;
+- `DSG_RELAY_SESSION_COMPLETED_SHADOW_STORE_PATH=/data/session-completed-shadow.ndjson`;
 - `DSG_RELAY_AUTHORIZED_SOURCE=EAGLE30154`;
 - `DSG_RELAY_MAX_BODY_BYTES=65536`.
 
@@ -32,6 +33,13 @@ EAGLE host health:
 
 - `POST /v1/eagle-health` — bearer-authenticated ingest of `DSG.EagleHealthPortalProjection`;
 - `GET /v1/eagle-health` — latest accepted public/read-only EAGLE Health projection.
+
+SessionCompleted shadow transport:
+
+- `POST /v1/session-completed-shadow` — bearer-authenticated append-only ingest of the validated shadow event;
+- `GET /v1/session-completed-shadow` — latest accepted shadow event for read-only reconciliation.
+
+The shadow channel accepts only `activation_mode=shadow`, `runtime_event_published=false`, `safety_authority=NONE` and `command_authority=NONE`. Duplicate `message_id` delivery returns `NO_OP` and does not append a second event.
 
 Common:
 
@@ -71,10 +79,12 @@ Weather state `AVAILABLE` means current weather telemetry is available; it must 
 EAGLE30154
   +-- Observatory Status producer -> Publish-ObservatoryStatusTelemetry.ps1 -> POST /v1/observatory-status
   +-- EAGLE Health collector -> public projection adapter -> Publish-EagleHealthTelemetry.ps1 -> POST /v1/eagle-health
+  +-- SessionCompleted shadow event -> Publish-SessionCompletedShadowEvent.ps1 -> POST /v1/session-completed-shadow
 
 Google Cloud Run relay
   +-- GET /v1/observatory-status -> Observatory Status browser
   +-- GET /v1/eagle-health       -> EAGLE Health section
+  +-- GET /v1/session-completed-shadow -> read-only reconciliation
 ```
 
 The bearer token exists only on the publishing side and in Cloud Run secret injection. It is never sent to the browser.
@@ -112,10 +122,12 @@ The host must provide evidence for:
 8. negative auth test (`401`) and wrong-source test (`403`);
 9. stale snapshot rejection (`422`);
 10. EAGLE POST `202` and independent browser/client GET `200` for each enabled channel;
-11. EAGLE Health preserves `UNKNOWN / POLICY_NOT_ACTIVATED` and never becomes Safety Authority;
-12. relay outage does not affect local collector, NINA, CloudWatcher or Local Safety Authority;
-13. each portal surface decays independently to `UNKNOWN` when its hosted snapshot becomes stale/unavailable;
-14. static fallback does not override a fresh hosted EAGLE Health projection.
+11. SessionCompleted shadow POST `202`, duplicate `NO_OP`, and independent GET `200`;
+12. SessionCompleted shadow transport never promotes runtime publication, command authority or Safety Authority;
+13. EAGLE Health preserves `UNKNOWN / POLICY_NOT_ACTIVATED` and never becomes Safety Authority;
+14. relay outage does not affect local collector, NINA, CloudWatcher or Local Safety Authority;
+15. each portal surface decays independently to `UNKNOWN` when its hosted snapshot becomes stale/unavailable;
+16. static fallback does not override a fresh hosted EAGLE Health projection.
 
 ## Safety boundary
 
