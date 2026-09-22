@@ -77,7 +77,7 @@ try {
             $command=(Get-Command w32tm.exe -ErrorAction SilentlyContinue)
             if ($null -ne $command) {
                 $lines=@(& $command.Source /query /status 2>$null)
-                $syncLine=$lines|Where-Object{$_ -match '(?i)Last Successful Sync Time'}|Select-Object -First 1
+                $syncLine=$lines|Where-Object{$_ -match '(?i)(Last Successful Sync Time|ultima sincronizzazione riuscita)'}|Select-Object -First 1
                 if($syncLine){$raw=($syncLine -replace '^.*?:','').Trim();$parsed=[datetime]::MinValue;if([datetime]::TryParse($raw,[Globalization.CultureInfo]::CurrentCulture,[Globalization.DateTimeStyles]::AllowWhiteSpaces,[ref]$parsed)){$lastSync=$parsed.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ')}}
                 $sourceLine=$lines|Where-Object{$_ -match '(?i)Source:'}|Select-Object -First 1
                 if($sourceLine){$source=($sourceLine -replace '^.*?:','').Trim()}
