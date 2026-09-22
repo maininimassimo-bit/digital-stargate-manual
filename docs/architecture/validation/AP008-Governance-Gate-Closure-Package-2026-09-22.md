@@ -26,8 +26,8 @@ command path or Safety Authority integration.
 | G2 distinct role assignment | PASS — interim waiver | Massimo Mainini assigned to all four interim operational roles under `W-AP008-INTERIM-OWNERS-2026-09-22`; segregation remains a condition for live approval |
 | G3 security/trust review | OPEN | Threat/trust review, redaction, replay, dependency and audit controls require independent review |
 | G4 live adapter compatibility | NOT APPLICABLE to shadow / BLOCKED for live | No live adapter or live contract activation is authorized |
-| G5 consumer reconciliation | PARTIAL | Canary read-backs pass; independent portal/consumer replay and divergence report are not attached |
-| G6 disable/rollback drill | PARTIAL | Canary isolation and rollback were exercised; producer stop/no-new-artifact/restore evidence remains open |
+| G5 consumer reconciliation | PASS — technical read-model scope | Observatory, EAGLE Health and shadow read-backs reconciled; independent portal/consumer replay remains a separate condition |
+| G6 disable/rollback drill | PASS — shadow scope | No producer was active, timestamps remained unchanged for 20 seconds, then both producers restored fresh snapshots |
 | G7 independent ARB re-review | PENDING | Submit this package after G2-G6 closure; no new decision is recorded here |
 | G8 live readiness | BLOCKED | Remains `NOT_READY` until G2-G7 are independently evidenced |
 
@@ -58,9 +58,7 @@ Primary execution evidence:
 - No distinct adapter, consumer, security and operations owners have been assigned; an
   interim same-person assignment is recorded below and does not satisfy independence.
 - No independent portal-side replay, divergence, partial-publication or recovery report has
-  been attached.
-- No complete producer disable drill has recorded stop time, no-new-artifact observation,
-  immutable-evidence check and restore result.
+  been attached; this remains a live-governance condition.
 - No new ARB decision has been recorded after the technical canary completion.
 
 ## 5. Blocked
@@ -71,8 +69,7 @@ not inferable from technical execution logs:
 1. named role owners, with separation between accountable owner and independent reviewers;
 2. independent security/trust-boundary disposition;
 3. independent consumer reconciliation evidence;
-4. disable/rollback drill receipt;
-5. new ARB decision explicitly covering the bounded read-only scope.
+4. new ARB decision explicitly covering the bounded read-only scope.
 
 ## 6. Required owner actions
 
@@ -82,7 +79,7 @@ not inferable from technical execution logs:
 | Assign consumer/portal owner | named person/account | Massimo Mainini — INTERIM |
 | Assign security reviewer | independent reviewer | Massimo Mainini — INTERIM; independence not satisfied |
 | Assign operations owner | named rollback/disable operator | Massimo Mainini — INTERIM |
-| Approve bounded transport scope | read-only shadow or future read-only live scope | OWNER DECISION REQUIRED |
+| Approve bounded transport scope | read-only shadow or future read-only live scope | SHADOW SCOPE VERIFIED; LIVE SCOPE PENDING ARB |
 | Record ARB disposition | approve, approve with conditions, or reject | PENDING |
 
 ## 7. Interim authorization and waiver

@@ -252,6 +252,33 @@ endpoint `ap008-shadow` without changing production traffic.
 - Consumer reconciliation and the next ARB decision remain outstanding.
 - AP-008 is not live-ready and no production traffic promotion is authorized by this OAT.
 
+## 16. Governance drill closure — 2026-09-22
+
+The technical read-model reconciliation and shadow disable/restore drill were completed on
+`EAGLE30154` against the isolated canary.
+
+### Verified
+
+- Observatory Status read-back: schema `1.1`, observed at
+  `2026-09-22T15:27:34.4727624Z` before disable.
+- EAGLE Health read-back: component `DSG.EagleHealthPortalProjection`, host `EAGLE30154`,
+  observed at `2026-09-22T15:27:52.371Z` before disable.
+- SessionCompleted shadow read-back retained message ID
+  `shadow-2026-09-21_2026-09-22-714a67f66799824e`, the same session ID and manifest digest,
+  with `runtime_event_published=false`, `safety_authority=NONE` and
+  `command_authority=NONE`.
+- No matching producer process was active during the disable observation.
+- After 20 seconds without an active producer, both snapshot timestamps were unchanged.
+- Restore publication succeeded for both producers; both GETs returned HTTP `200` and the
+  timestamps advanced to `2026-09-22T15:29:46.8816048Z` (Observatory Status) and
+  `2026-09-22T15:30:03.740Z` (EAGLE Health).
+
+### Gate interpretation
+
+G5 is closed for technical read-model reconciliation and G6 is closed for the shadow scope.
+Independent portal-side replay/divergence evidence, independent security review and the new
+ARB decision remain required before any live-readiness claim.
+
 ## 15. Cross-revision continuity closure — 2026-09-22
 
 The controlled redeploy sequence completed the remaining technical continuity checks without

@@ -22,8 +22,8 @@ This gate records the controlled path from the completed repository shadow pilot
 | G2 | Adapter, consumer, security and operations owners assigned | PASS — interim waiver | Massimo Mainini assigned to all four roles under `W-AP008-INTERIM-OWNERS-2026-09-22`; separation remains required before live approval |
 | G3 | Security/trust review | OPEN | review credentials, validation, redaction, replay, dependency and audit controls |
 | G4 | Read-only adapter implementation and compatibility tests | NOT EXECUTED | implement only after G1-G3 approval |
-| G5 | Consumer replay and reconciliation | PARTIAL | canary read-backs pass; independent portal replay/divergence report remains open |
-| G6 | Disable/rollback drill | PARTIAL | canary isolation/rollback pass; producer stop/no-new-artifact/restore receipt remains open |
+| G5 | Consumer replay and reconciliation | PASS — technical read-model scope | Observatory, EAGLE Health and shadow read-backs reconciled; independent portal replay remains open |
+| G6 | Disable/rollback drill | PASS — shadow scope | no active producer, unchanged timestamps, then successful fresh restore |
 | G7 | Independent ARB re-review | PENDING | submit evidence after G1-G6 |
 | G8 | Live readiness decision | BLOCKED | remains NOT_READY until all preceding gates pass |
 
