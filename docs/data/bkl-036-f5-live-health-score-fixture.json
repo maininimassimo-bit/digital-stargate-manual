@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "DSG.BKL036.F5.LiveHealthScore",
+  "projection_kind": "live_read_only_descriptive",
+  "source_plane": "live_read_only_transport",
+  "scale": "0-100",
+  "domain_count": 7,
+  "policy": {
+    "equal_weight": true,
+    "complete_set_required": true,
+    "incomplete_result": "UNAVAILABLE",
+    "readiness_authority": "BKL-032",
+    "safety_authority": "LOCAL_PHYSICAL_INTERLOCKS"
+  },
+  "score_status": "UNAVAILABLE",
+  "score": null,
+  "evaluated_at_utc": "2026-09-22T18:30:00Z",
+  "domains": [
+    {"domain":"weather","source_component":"DSG.ObservatoryStatusTelemetry","observed_at_utc":null,"fresh_until_utc":null,"quality":"UNKNOWN","evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","correlation_id":null,"reason":"LIVE_READBACK_NOT_BOUND_TO_F5_OAT"},
+    {"domain":"dome","source_component":"DSG.ObservatoryStatusTelemetry","observed_at_utc":null,"fresh_until_utc":null,"quality":"UNKNOWN","evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","correlation_id":null,"reason":"LIVE_READBACK_NOT_BOUND_TO_F5_OAT"},
+    {"domain":"mount","source_component":"DSG.ObservatoryStatusTelemetry","observed_at_utc":null,"fresh_until_utc":null,"quality":"UNKNOWN","evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","correlation_id":null,"reason":"LIVE_READBACK_NOT_BOUND_TO_F5_OAT"},
+    {"domain":"camera","source_component":"DSG.ObservatoryStatusTelemetry","observed_at_utc":null,"fresh_until_utc":null,"quality":"UNKNOWN","evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","correlation_id":null,"reason":"LIVE_READBACK_NOT_BOUND_TO_F5_OAT"},
+    {"domain":"power","source_component":"DSG.ObservatoryStatusTelemetry","observed_at_utc":null,"fresh_until_utc":null,"quality":"UNKNOWN","evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","correlation_id":null,"reason":"LIVE_READBACK_NOT_BOUND_TO_F5_OAT"},
+    {"domain":"network","source_component":"DSG.ObservatoryStatusTelemetry","observed_at_utc":null,"fresh_until_utc":null,"quality":"UNKNOWN","evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","correlation_id":null,"reason":"LIVE_READBACK_NOT_BOUND_TO_F5_OAT"},
+    {"domain":"eagle_health","source_component":"DSG.EagleHealthPortalProjection","observed_at_utc":null,"fresh_until_utc":null,"quality":"UNKNOWN","evidence_status":"UNAVAILABLE","compatibility":"UNKNOWN","correlation_id":null,"reason":"LIVE_READBACK_NOT_BOUND_TO_F5_OAT"}
+  ],
+  "reasons": ["F5_LIVE_OAT_NOT_EXECUTED", "NO_PARTIAL_SCORE_ALLOWED"],
+  "boundaries": {
+    "read_only": true,
+    "runtime_event_published": false,
+    "command_authority": "NONE",
+    "safety_authority": "NONE",
+    "broker_used": false,
+    "scheduler_used": false,
+    "remediation_used": false
+  }
+}
