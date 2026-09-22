@@ -8,9 +8,9 @@
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch | `main` |
 | Data | 30/07/2026 |
-| Stato | Proposed for independent ARB review |
+| Stato | Approved with Conditions — technology-neutral reference; runtime unverified |
 
-## 1. Scopo
+## Current disposition\n\nThis reference architecture is accepted as the AP-008 design baseline with conditions. It does not certify a live transport or runtime adapter. The current SessionCompleted transport proposal is documented separately and remains not operationally authorized.\n\n## 1. Scopo
 
 Questa reference architecture traduce AP-008 in boundary, componenti logici, flussi, contratti e gate riutilizzabili. È technology-neutral e non certifica alcuna integrazione runtime.
 
