@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "DSG.BKL036.F5.EagleHealthPolicy",
+  "required_signals": ["cpu", "memory", "storage", "uptime", "time_sync"],
+  "freshness": {"field": "fresh_until_utc", "stale_result": "UNAVAILABLE", "missing_result": "UNAVAILABLE"},
+  "thresholds": {
+    "cpu": {"operator": ">", "percent": 90, "duration_seconds": 300},
+    "memory_available": {"operator": "<", "percent": 20, "duration_seconds": 300},
+    "storage_free": {"operator": "<", "percent": 20, "duration_seconds": 0},
+    "storage_volumes": ["C:", "D:"],
+    "evaluation_window": {"minimum_samples": 5, "cadence_seconds": 60}
+  },
+  "aggregation": {
+    "healthy": "all five signals valid and no threshold exceeded",
+    "degraded": "at least one valid threshold exceeded",
+    "unavailable": "any required signal missing, stale, invalid or uncomputable",
+    "recovery": "first normalized valid sample"
+  },
+  "scoring": {"healthy": 100, "degraded": 50, "unavailable": null, "comparable_states": ["HEALTHY", "DEGRADED"]},
+  "boundaries": {"read_only": true, "command_authority": "NONE", "safety_authority": "NONE", "automatic_remediation": false}
+}

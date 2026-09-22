@@ -83,6 +83,7 @@ jobs:
       - { name: Verify BKL-036 F4 archived telemetry, run: node .github/scripts/verify-bkl-036-f4-archived-telemetry.mjs }
       - { name: Test BKL-036 F4 acquisition and archival boundaries, run: node --test .github/scripts/test-bkl-036-f4-archived-telemetry.mjs }
       - { name: Verify BKL-036 F5 live health score envelope, run: node .github/scripts/verify-bkl-036-f5-live-health-score.mjs }
+      - { name: Verify BKL-036 F5 EAGLE Health policy, run: node .github/scripts/verify-bkl-036-f5-eagle-health-policy.mjs }
       - { name: Test BKL-038 F3 deterministic identity, run: node --test .github/scripts/test-anomaly-trend-f3-id.mjs }
       - { name: Test BKL-038 F3-B deterministic read-only engine, run: node --test .github/scripts/test-anomaly-trend-f3b-engine.mjs }
       - { name: Verify BKL-039 F2 bounded registry fixture, run: node .github/scripts/verify-equipment-performance-registry-f2.mjs }

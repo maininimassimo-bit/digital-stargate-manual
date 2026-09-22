@@ -65,3 +65,8 @@ validator. The first live OAT also recorded all seven read-backs: six Observator
 were comparable, while EAGLE Health was current but semantically `UNKNOWN` because
 `POLICY_NOT_ACTIVATED`. The aggregate therefore remains `UNAVAILABLE`; ARB/RQ and policy
 review remain open.
+
+The owner-confirmed EAGLE comparability policy is versioned in
+`BKL-036-F5-EAGLE-HEALTH-POLICY-2026-09-22.md`. The next step is to activate that policy in
+the EAGLE projection and repeat the seven-domain OAT; this definition alone does not promote
+a score.

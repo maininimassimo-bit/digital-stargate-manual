@@ -35,4 +35,4 @@ live envelope schema and fail-closed `UNAVAILABLE` fixture are now validated. Th
 owner-authorized production OAT, followed by independent ARB/RQ review. The first live OAT
 passed transport, freshness and schema checks for all seven domains, but EAGLE Health remains
 semantically non-comparable with `POLICY_NOT_ACTIVATED`. The archived F3 projection and F5
-aggregate remain unchanged and `UNAVAILABLE` until that policy is accepted.
+aggregate remain unchanged and `UNAVAILABLE` until that policy is activated in the EAGLE projection. The owner-confirmed policy defines `HEALTHY=100`, `DEGRADED=50`, and `UNAVAILABLE=null` with no partial score.
