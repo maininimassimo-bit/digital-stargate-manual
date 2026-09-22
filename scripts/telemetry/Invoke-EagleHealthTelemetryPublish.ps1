@@ -31,12 +31,11 @@ if ($uri.Scheme -ne 'https') { throw 'PublishEndpoint must use HTTPS.' }
 
 # Collector is read-only and performs no remediation. Refresh immediately before
 # publication so the public projection cannot inherit an already-stale sample.
-$collectorArguments = @{
-    OutputPath = $CollectorProjection
-    CadenceClass = 'all'
+if ([string]::IsNullOrWhiteSpace($WindowPath)) {
+    & $collector -OutputPath $CollectorProjection -CadenceClass all | Out-Null
+} else {
+    & $collector -OutputPath $CollectorProjection -WindowPath $WindowPath -CadenceClass all | Out-Null
 }
-if (-not [string]::IsNullOrWhiteSpace($WindowPath)) { $collectorArguments.WindowPath = $WindowPath }
-& $collector @collectorArguments | Out-Null
 & $projector -InputPath $CollectorProjection -OutputPath $PublicProjection | Out-Null
 
 Add-Type -AssemblyName System.Security
