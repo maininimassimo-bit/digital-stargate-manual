@@ -24,7 +24,7 @@ command path or Safety Authority integration.
 | G0 accountable owner | PASS | Massimo Mainini recorded as AP-008 accountable owner |
 | G1 bounded transport | PASS — shadow scope only | HTTPS Cloud Run relay, bearer-authenticated ingest, read-only GET, persistent bucket `/data`, 0% canary traffic |
 | G2 distinct role assignment | PASS — interim waiver | Massimo Mainini assigned to all four interim operational roles under `W-AP008-INTERIM-OWNERS-2026-09-22`; segregation remains a condition for live approval |
-| G3 security/trust review | OPEN | Threat/trust review, redaction, replay, dependency and audit controls require independent review |
+| G3 security/trust review | CANDIDATE READY | Review dossier prepared; independent reviewer and disposition required |
 | G4 live adapter compatibility | NOT APPLICABLE to shadow / BLOCKED for live | No live adapter or live contract activation is authorized |
 | G5 consumer reconciliation | PASS — technical read-model scope | Observatory, EAGLE Health and shadow read-backs reconciled; independent portal/consumer replay remains a separate condition |
 | G6 disable/rollback drill | PASS — shadow scope | No producer was active, timestamps remained unchanged for 20 seconds, then both producers restored fresh snapshots |
@@ -66,7 +66,7 @@ Primary execution evidence:
 AP-008 cannot be declared `live-ready` because the remaining gates require authority that is
 not inferable from technical execution logs:
 
-1. named role owners, with separation between accountable owner and independent reviewers;
+1. distinct role owners, with separation between accountable owner and independent reviewers;
 2. independent security/trust-boundary disposition;
 3. independent consumer reconciliation evidence;
 4. new ARB decision explicitly covering the bounded read-only scope.
