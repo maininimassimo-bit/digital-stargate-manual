@@ -251,3 +251,42 @@ endpoint `ap008-shadow` without changing production traffic.
 - Cross-revision read-back for the newly published legacy snapshots has not yet been executed.
 - Consumer reconciliation and the next ARB decision remain outstanding.
 - AP-008 is not live-ready and no production traffic promotion is authorized by this OAT.
+
+## 15. Cross-revision continuity closure — 2026-09-22
+
+The controlled redeploy sequence completed the remaining technical continuity checks without
+promoting production traffic.
+
+### Executed
+
+- Revision `dsg-observatory-status-relay-00014-bux` was deployed from the existing image
+  `europe-west1-docker.pkg.dev/digital-stargate-telemetry/dsg-telemetry/observatory-status-relay:ap008-0a29bef`
+  with 0% traffic and the existing service configuration preserved.
+- Revision `dsg-observatory-status-relay-00015-hak` was deployed after a fresh EAGLE Health
+  publication.
+- Observatory Status was republished with a 300-second freshness window.
+
+### Verified
+
+- After revision changes, canary `GET /v1/observatory-status`: HTTP `200`, schema `1.1`.
+- After revision changes, canary `GET /v1/eagle-health`: HTTP `200`, component
+  `DSG.EagleHealthPortalProjection`, host `EAGLE30154`.
+- After revision changes, canary `GET /v1/session-completed-shadow`: HTTP `200`, same
+  `message_id` `shadow-2026-09-21_2026-09-22-714a67f66799824e`.
+- The command-path negative check remained HTTP `404` on the canary.
+- Production traffic remained 100% on `dsg-observatory-status-relay-00005-rof`; canary traffic
+  remained isolated at 0%.
+
+### Technical OAT result
+
+The Cloud Run deployment, persistent `/data` mount, shadow idempotency, read-back, freshness
+behavior, legacy consumer continuity and command-path negative check are now technically
+verified. AP-008 remains shadow-only and no live activation semantics are enabled.
+
+### Remaining governance gate
+
+- Reconcile the portal/consumer observations against the three canary read-backs and attach the
+  consumer evidence.
+- Obtain the new ARB decision and security/trust-boundary sign-off.
+- Do not set `runtime_event_published=true`, introduce a broker/scheduler/command path, or
+  promote canary traffic until those approvals are recorded.
