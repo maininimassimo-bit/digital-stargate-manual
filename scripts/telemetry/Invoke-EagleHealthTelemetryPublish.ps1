@@ -4,6 +4,7 @@ param(
     [string]$SecretPath = 'C:\DigitalStarGate\TelemetryRuntime\secrets\ingest-token.dpapi',
     [string]$CollectorProjection = "$env:LOCALAPPDATA\DigitalStarGate\telemetry\eagle-health.json",
     [string]$PublicProjection = "$env:LOCALAPPDATA\DigitalStarGate\telemetry\eagle-health-public.json",
+    [string]$WindowPath = '',
     [string]$PublishEndpoint = 'https://dsg-observatory-status-relay-cfjug35c6q-ew.a.run.app/v1/eagle-health',
     [switch]$ValidateOnly
 )
@@ -30,7 +31,12 @@ if ($uri.Scheme -ne 'https') { throw 'PublishEndpoint must use HTTPS.' }
 
 # Collector is read-only and performs no remediation. Refresh immediately before
 # publication so the public projection cannot inherit an already-stale sample.
-& $collector -OutputPath $CollectorProjection -CadenceClass all | Out-Null
+$collectorArguments = @{
+    OutputPath = $CollectorProjection
+    CadenceClass = 'all'
+}
+if (-not [string]::IsNullOrWhiteSpace($WindowPath)) { $collectorArguments.WindowPath = $WindowPath }
+& $collector @collectorArguments | Out-Null
 & $projector -InputPath $CollectorProjection -OutputPath $PublicProjection | Out-Null
 
 Add-Type -AssemblyName System.Security
