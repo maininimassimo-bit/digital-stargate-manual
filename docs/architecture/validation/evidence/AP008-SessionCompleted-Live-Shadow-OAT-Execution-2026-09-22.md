@@ -66,3 +66,14 @@
 
 AP-008 is **not live-ready**. The shadow transport remains unpromoted and the live contract,
 broker, scheduler, command path, Safety Authority and runtime event publication remain inactive.
+
+## Persistence remediation
+
+- Dedicated bucket: `gs://digital-stargate-telemetry-183451329061-relay-data` in `europe-west1`.
+- Service account granted `roles/storage.objectUser` on the bucket.
+- Gen2 canary revision `dsg-observatory-status-relay-00012-bit` mounted the bucket at `/data`.
+- `session-completed-shadow.ndjson` was observed in the bucket.
+- The same event remained readable after deployment of revision `00012-bit`.
+- `/v1/observatory-status` and `/v1/eagle-health` remained `404` on the canary because their
+  fresh snapshot objects have not yet been republished into the new bucket.
+- Production traffic remained 100% on `dsg-observatory-status-relay-00005-rof`.

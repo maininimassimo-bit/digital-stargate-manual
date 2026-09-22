@@ -182,3 +182,25 @@ Observed results:
 The first canary revision exposed a multiline-JSON/NDJSON defect on duplicate delivery. The
 relay was corrected in commit `035765c` to normalize events to one JSON object per line and to
 ignore non-object legacy fragments during deduplication.
+
+## 12. Persistence remediation — 2026-09-22
+
+A dedicated Cloud Storage bucket was created and mounted for the canary:
+
+- bucket: `digital-stargate-telemetry-183451329061-relay-data`;
+- location: `europe-west1`;
+- mount path: `/data`;
+- service identity: `183451329061-compute@developer.gserviceaccount.com`;
+- bucket role: `roles/storage.objectUser`;
+- execution environment: Gen2;
+- canary revision: `dsg-observatory-status-relay-00012-bit`;
+- canary memory: `512Mi` (required by Gen2);
+- canary maximum instances: `1`;
+- production traffic: still 100% on `dsg-observatory-status-relay-00005-rof`.
+
+The shadow NDJSON object was observed in the bucket and the same SessionCompleted event was
+read back successfully after deploying revision `00012-bit`, proving cross-revision persistence
+for the shadow channel. The new bucket does not yet contain `observatory-status.json` or
+`eagle-health.json`; those legacy consumers therefore remain `404` on the canary until fresh,
+valid snapshots are republished through their governed producer paths. AP-008 remains blocked
+from production promotion until those continuity checks pass.
