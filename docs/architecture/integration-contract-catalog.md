@@ -5,7 +5,7 @@
 | Identificativo | INT-CAT-001 |
 | Package | AP-008 |
 | Data | 30/07/2026 |
-| Stato | Initial candidate catalog — not operationally authorized |
+| Owner / Accountable | Massimo Mainini |\n| Stato | Governed candidate catalog — shadow evidence approved with conditions; live contracts not active |
 
 ## 1. Regole
 
@@ -30,7 +30,7 @@
 | Contract ID | Versione | Producer candidate | Consumer candidate | Stato |
 |---|---:|---|---|---|
 | `DSG.Observation.Event.SessionStarted` | 1.0.0 | N.I.N.A. adapter | DSAP, DSOC, audit | Candidate |
-| `DSG.Observation.Event.SessionCompleted` | 1.0.0 | N.I.N.A. adapter | warehouse, portal, catalog | Candidate |
+| `DSG.Observation.Event.SessionCompleted` | 1.0.0 | N.I.N.A. adapter | warehouse, portal, catalog | Candidate — shadow evidence only; live activation pending gates |
 | `DSG.Observation.Event.SessionAborted` | 1.0.0 | observation application | operations, analytics | Candidate |
 | `DSG.Guiding.Event.StateChanged` | 1.0.0 | PHD2 adapter | operations, telemetry | Candidate |
 | `DSG.Mount.Event.StateChanged` | 1.0.0 | CPWI adapter | operations, telemetry | Candidate |
