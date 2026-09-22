@@ -24,7 +24,7 @@ This gate records the controlled path from the completed repository shadow pilot
 | G4 | Read-only adapter implementation and compatibility tests | NOT EXECUTED | implement only after G1-G3 approval |
 | G5 | Consumer replay and reconciliation | PASS — technical read-model scope | Observatory, EAGLE Health and shadow read-backs reconciled; independent portal replay remains open |
 | G6 | Disable/rollback drill | PASS — shadow scope | no active producer, unchanged timestamps, then successful fresh restore |
-| G7 | Independent ARB re-review | PENDING | submit evidence after G1-G6 |
+| G7 | Independent ARB re-review | AI-ASSISTED WITH CONDITIONS | owner-authorized re-review under waiver; independent human ARB decision remains required |
 | G8 | Live readiness decision | BLOCKED | remains NOT_READY until all preceding gates pass |
 
 ## Non-negotiable boundaries

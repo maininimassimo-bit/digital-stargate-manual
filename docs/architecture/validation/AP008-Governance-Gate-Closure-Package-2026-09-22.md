@@ -28,7 +28,7 @@ command path or Safety Authority integration.
 | G4 live adapter compatibility | NOT APPLICABLE to shadow / BLOCKED for live | No live adapter or live contract activation is authorized |
 | G5 consumer reconciliation | PASS — technical read-model scope | Observatory, EAGLE Health and shadow read-backs reconciled; independent portal/consumer replay remains a separate condition |
 | G6 disable/rollback drill | PASS — shadow scope | No producer was active, timestamps remained unchanged for 20 seconds, then both producers restored fresh snapshots |
-| G7 independent ARB re-review | PENDING | Submit this package after G2-G6 closure; no new decision is recorded here |
+| G7 independent ARB re-review | AI-ASSISTED WITH CONDITIONS | Owner-authorized re-review published under waiver; independent human ARB decision remains required |
 | G8 live readiness | BLOCKED | Remains `NOT_READY` until G2-G7 are independently evidenced |
 
 ## 3. Executed and verified
