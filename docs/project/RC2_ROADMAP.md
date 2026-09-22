@@ -31,7 +31,7 @@ Portare il Digital StarGate Enterprise Portal dalla baseline RC1 a una piattafor
 | WP-03 | Enterprise Theme Framework | Completed | modalità System, Theme API, token enterprise e adapter Material governato |
 | WP-04 | Enterprise Search Center | Completed | ricerca federata, filtri, ranking e integrazione con i servizi della piattaforma |
 | WP-05 | Operations Dashboard | Completed | repository health, CI/CD, runtime telemetry e KPI piattaforma |
-| WP-06 | Enterprise Plugin SDK | In Progress | estensioni modulari senza modifica del core |
+| WP-06 | Enterprise Plugin SDK | Completed | estensioni modulari senza modifica del core |
 
 ## 4. Sequenza
 
@@ -41,7 +41,7 @@ WP-01 Foundation [Completed]
   -> WP-03 Theme Framework [Completed]
   -> WP-04 Search Center [Completed]
   -> WP-05 Operations Dashboard [Completed]
-  -> WP-06 Plugin SDK [In Progress]
+  -> WP-06 Plugin SDK [Completed]
   -> RC2 Baseline and Acceptance
 ```
 

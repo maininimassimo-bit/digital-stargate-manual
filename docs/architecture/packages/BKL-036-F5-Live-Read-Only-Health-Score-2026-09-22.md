@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Package | BKL-036-F5 |
-| Status | Owner-authorized proposal / implementation gate open |
+| Status | CLOSED / ACCEPTED / POST-MERGE VERIFIED |
 | Owner / accountable | Massimo Mainini |
 | Dependency | AP-008 bounded live read-only integration |
 | Authority | Projection only; `action_authority=NONE` |
@@ -67,6 +67,8 @@ were comparable, while EAGLE Health was current but semantically `UNKNOWN` becau
 review remain open.
 
 The owner-confirmed EAGLE comparability policy is versioned in
-`BKL-036-F5-EAGLE-HEALTH-POLICY-2026-09-22.md`. The next step is to activate that policy in
-the EAGLE projection and repeat the seven-domain OAT; this definition alone does not promote
-a score.
+`BKL-036-F5-EAGLE-HEALTH-POLICY-2026-09-22.md` and is now active in production. The final
+read-only OAT returned `HEALTHY`, `CURRENT`, `score=100`, `reason=ALL_REQUIRED_SIGNALS_HEALTHY`
+with all five mandatory EAGLE signals current. The rendered GitHub Pages consumer was directly
+verified with the same live values. Post-merge acceptance is recorded in
+`docs/project/BKL-036-F5-CLOSURE-2026-09-23.md`.

@@ -5,17 +5,17 @@
 | Package | AP-008 |
 | Pilot | INT-SESSION-METADATA-PILOT-001 |
 | Accountable owner | Massimo Mainini |
-| Scope of this package | governare il passaggio da shadow pilot a eventuale integrazione read-only |
-| Runtime mode | shadow only |
-| Current decision | READY_FOR_LIVE_INTEGRATION_WITH_WAIVER — read-only scope only |
-| Production traffic | 100% on `dsg-observatory-status-relay-00015-hak`; `00005-rof` retained for rollback |
+| Scope of this package | governare il passaggio da shadow pilot a integrazione read-only accettata |
+| Runtime mode | live read-only, descriptive only |
+| Current decision | AP-008 CLOSED / ACCEPTED; BKL-036-F5 CLOSED / ACCEPTED / POST-MERGE VERIFIED |
+| Production traffic | 100% on `dsg-observatory-status-relay-00019-keq`; `00005-rof` retained for rollback |
 
 ## 1. Purpose and boundary
 
 This package consolidates the completed technical evidence and identifies the governance
 actions that still require named human owners, independent security review and ARB decision.
-It does not authorize live activation, `runtime_event_published=true`, a broker, scheduler,
-command path or Safety Authority integration.
+It does not authorize `runtime_event_published=true`, a broker, scheduler decision path,
+command path, remediation or Safety Authority integration.
 
 ## 2. Gate status
 
@@ -29,7 +29,26 @@ command path or Safety Authority integration.
 | G5 consumer reconciliation | PASS — technical read-model scope | Observatory, EAGLE Health and shadow read-backs reconciled; independent portal/consumer replay remains a separate condition |
 | G6 disable/rollback drill | PASS — shadow scope | No producer was active, timestamps remained unchanged for 20 seconds, then both producers restored fresh snapshots |
 | G7 independent ARB re-review | PASS WITH WAIVER | Owner-witnessed ARB acceptance of the explicit risk register for read-only/shadow scope |
-| G8 live readiness | READY WITH WAIVER | Read-only readiness only; no traffic promotion or live activation performed |
+| G8 live readiness | ACCEPTED WITH WAIVER | Bounded read-only production scope is live and verified; no authority semantics are added |
+
+## 2a. BKL-036-F5 post-merge acceptance
+
+The successor package is accepted against the final live evidence. Production
+`GET /v1/eagle-health` returned `200`, `quality=CURRENT`, `state=HEALTHY`, `score=100` and
+`reason=ALL_REQUIRED_SIGNALS_HEALTHY` for host `EAGLE30154`; all five mandatory signals were
+current. Windows Time was active and synchronized, and the scheduled publisher returned
+`LastTaskResult=0`.
+
+The rendered GitHub Pages status consumer was verified at
+`https://maininimassimo-bit.github.io/digital-stargate-manual/status/` and showed `✅ 100/100`,
+`5/5 segnali obbligatori correnti`, `Cloud Run relay · EAGLE30154 · live read-only` and
+`ALL_REQUIRED_SIGNALS_HEALTHY`.
+
+The policy remains fail-closed: threshold breaches produce `DEGRADED`, missing, stale,
+malformed or uncomputable required evidence produces `UNAVAILABLE`, and no partial score is
+emitted. ARB/RQ review and the security/trust and ARB attestations are owner-witnessed under
+the recorded waiver. The complete acceptance record is
+`docs/project/BKL-036-F5-CLOSURE-2026-09-23.md`.
 
 ## 3. Executed and verified
 
@@ -44,6 +63,7 @@ command path or Safety Authority integration.
   second event.
 - Stale snapshots return `404 snapshot_unavailable` and are not served as current data.
 - `/v1/command` returned `404`.
+- Final F5 production read-back and Pages rendering were verified after merge.
 - Bearer secret injection and the `EAGLE30154` authorized-source boundary were preserved.
 
 Primary execution evidence:
@@ -111,11 +131,14 @@ an independent reviewer before any live-readiness decision.
 
 ## 9. Decision
 
-Technical OAT and bounded governance closure are recorded. The authoritative status for the
-approved scope is:
+Technical OAT, final live evidence and post-merge governance closure are recorded. The
+authoritative status for the approved scope is:
 
-`AP-008 = READY_FOR_LIVE_INTEGRATION_WITH_WAIVER`
+`AP-008 = CLOSED / ACCEPTED / POST-MERGE VERIFIED`
+
+`BKL-036-F5 = CLOSED / ACCEPTED / POST-MERGE VERIFIED`
 
 The owner authorization is effective only for the bounded read-only scope under the recorded
-waivers. See `AP008-Readiness-Exception-Request-2026-09-22.md` and
-`AP008-Approval-Attestations-2026-09-22.md`.
+waivers. See `AP008-Readiness-Exception-Request-2026-09-22.md`,
+`AP008-Approval-Attestations-2026-09-22.md` and
+`docs/project/BKL-036-F5-CLOSURE-2026-09-23.md`.

@@ -1,19 +1,19 @@
 {
   "schemaVersion": "2.2",
-  "updatedAt": "2026-09-22",
+  "updatedAt": "2026-09-23",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "245163f304f635404e0a5c51ebf195da3b2fe1161526ddba734cbe0a871127f3",
+  "sourceDigest": "695b70dfdbaa755da22eecf0df2acaba7a53a2117b1b994ef220e3b456c2f687",
   "authority": "DSG-RGM-001",
-  "projectStatus": "AP-008 bounded read-only integration closed; BKL-036-F5 policy activated with live fail-closed EAGLE Health evidence; BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 production runtime unavailable; no automatic target selection, commands, remediation or Safety Authority is authorized",
-  "currentPackage": "BKL-036-F5",
-  "nextMilestone": "BKL-036-F5 Live Read-Only Health Score",
+  "projectStatus": "AP-008 and BKL-036-F5 are CLOSED / ACCEPTED / POST-MERGE VERIFIED for bounded live read-only scope; EAGLE Health is live HEALTHY/100 with fail-closed policy; BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 production runtime unavailable; no automatic target selection, commands, remediation or Safety Authority is authorized",
+  "currentPackage": "RC2-BASELINE",
+  "nextMilestone": "RC2-BASELINE",
   "target": "Define and validate a seven-domain live descriptive health projection over AP-008 read-only evidence, preserving fail-closed freshness, BKL-032 separation and local Safety Authority; No scheduler, automatic target selection, device command or Safety Authority is authorized; no readiness, go/no-go, scheduler, commands or Safety Authority is authorized",
   "summary": {
     "total": 45,
-    "completed": 37,
-    "active": 2,
+    "completed": 38,
+    "active": 1,
     "planned": 6,
-    "percentCompleted": 82
+    "percentCompleted": 84
   },
   "evidenceSummary": {
     "sources": 8,
@@ -218,7 +218,7 @@
     {
       "id": "observatory-intelligence",
       "title": "Observatory Intelligence & Scientific Processing Roadmap",
-      "status": "active",
+      "status": "planned",
       "items": [
         {
           "id": "BKL-029",
@@ -325,8 +325,8 @@
         {
           "id": "BKL-036-F5",
           "title": "Live Read-Only Health Score",
-          "status": "active",
-          "note": "Owner-authorized live read-only policy is activated and post-merge verified. EAGLE Health is current and HEALTHY with score 100 after fresh Windows time synchronization; the score remains descriptive-only with no command, remediation or Safety Authority semantics."
+          "status": "completed",
+          "note": "BKL-036-F5 is CLOSED / ACCEPTED / POST-MERGE VERIFIED for the bounded live read-only scope. Production EAGLE Health is current and HEALTHY with score 100 after fresh Windows time synchronization; GitHub Pages renders the live result; fail-closed DEGRADED/UNAVAILABLE semantics, ARB/RQ review and owner-witnessed attestations are recorded. No command, remediation or Safety Authority semantics are introduced. Closure: docs/project/BKL-036-F5-CLOSURE-2026-09-23.md."
         },
         {
           "id": "BKL-033",
@@ -536,10 +536,10 @@
       "id": "M-BKL036-F5",
       "itemRef": "BKL-036-F5",
       "title": "BKL-036-F5 Live Read-Only Health Score",
-      "date": "2026-09-22",
-      "description": "Owner-authorized live read-only policy activated and post-merge verified. EAGLE Health is current and HEALTHY with score 100 after fresh Windows time synchronization; the score remains descriptive-only.",
-      "image": null,
-      "status": "active"
+      "date": "2026-09-23",
+      "status": "completed",
+      "description": "BKL-036-F5 is CLOSED / ACCEPTED / POST-MERGE VERIFIED for the bounded live read-only scope. EAGLE Health is current and HEALTHY with score 100, GitHub Pages renders the live result, and fail-closed DEGRADED/UNAVAILABLE semantics plus owner-witnessed ARB/RQ evidence are recorded; the score remains descriptive-only.",
+      "image": null
     },
     {
       "id": "M-PIXINSIGHT",
