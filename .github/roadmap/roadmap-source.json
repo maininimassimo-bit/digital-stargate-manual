@@ -1,11 +1,11 @@
 {
   "schemaVersion": "2.2",
-  "updatedAt": "2026-09-20",
+  "updatedAt": "2026-09-22",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED. BKL-036 is CLOSED / ACCEPTED / POST-MERGE VERIFIED as a bounded repository-only archived-evidence capability; current output remains UNAVAILABLE. live source/transport and public runtime GO remain separately gated. AP-007 and OPS-REF-001 are ACCEPTED WITH CONDITIONS as the enterprise operations architecture baseline; operational roles and evidence remain DA VALIDARE. AP-008 is the next active architecture package. S10 production runtime unavailable; no scheduling, automatic target selection, commands or Safety Authority is authorized.",
-  "currentPackage": "AP-008",
-  "nextMilestone": "AP-008 Enterprise Integration Architecture",
-  "target": "Prepare AP-008 enterprise integration contracts and boundaries while preserving read-only, fail-closed and local Safety Authority constraints. No scheduler, automatic target selection, device command or Safety Authority is authorized.",
+  "projectStatus": "AP-008 bounded read-only integration closed; BKL-036-F5 live descriptive score gate open; BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 production runtime unavailable; live source/transport and public runtime GO remain separately gated; no scheduling, automatic target selection, commands or Safety Authority is authorized",
+  "currentPackage": "BKL-036-F5",
+  "nextMilestone": "BKL-036-F5 Live Read-Only Health Score",
+  "target": "Define and validate a seven-domain live descriptive health projection over AP-008 read-only evidence, preserving fail-closed freshness, BKL-032 separation and local Safety Authority; No scheduler, automatic target selection, device command or Safety Authority is authorized; no readiness, go/no-go, scheduler, commands or Safety Authority is authorized",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -96,7 +96,8 @@
         {
           "id": "AP-008",
           "title": "Enterprise Integration Architecture",
-          "status": "active"
+          "status": "completed",
+          "note": "Bounded read-only integration closed and post-merge verified. Observatory Status, EAGLE Health and SessionCompleted shadow remain read-only; command path, broker, remediation and Safety Authority remain excluded. Closure: docs/project/AP-008-CLOSURE-2026-09-22.md."
         },
         {
           "id": "AP-009",
@@ -248,7 +249,13 @@
           "id": "BKL-036",
           "title": "Observatory Health Score",
           "status": "completed",
-          "note": "F1/F2/F3/F4 Accepted / Post-Merge Verified. BKL-036 is closed as a bounded repository-only archived-evidence capability; F3 remains UNAVAILABLE and live/runtime use remains separately gated."
+          "note": "F1-F4 Accepted / Post-Merge Verified as repository-only archived-evidence capability. F3 remains UNAVAILABLE. Live descriptive scoring is transferred to BKL-036-F5."
+        },
+        {
+          "id": "BKL-036-F5",
+          "title": "Live Read-Only Health Score",
+          "status": "active",
+          "note": "Owner-authorized implementation candidate after AP-008 bounded read-only integration. Seven-domain mapping, freshness, comparability, ARB/RQ and OAT remain required before score promotion."
         },
         {
           "id": "BKL-033",
@@ -424,6 +431,22 @@
       "title": "BKL-039 Equipment Performance Registry",
       "date": "2026-09-09",
       "description": "F4-A/F4-B/F5-A/F5-B/F5-C/F5-D CLOSED/ACCEPTED after dynamic multi-session registry, persisted read models, exact-head CI, protected merge and post-merge verification.",
+      "image": null
+    },
+    {
+      "id": "M-AP008-CLOSURE",
+      "itemRef": "AP-008",
+      "title": "AP-008 Bounded Read-Only Integration Closure",
+      "date": "2026-09-22",
+      "description": "Bounded production read-only integration, continuous EAGLE30154 publication, portal deployment and command-path negative verification accepted. No command, broker, remediation or Safety Authority semantics introduced.",
+      "image": null
+    },
+    {
+      "id": "M-BKL036-F5",
+      "itemRef": "BKL-036-F5",
+      "title": "BKL-036-F5 Live Read-Only Health Score",
+      "date": "2026-09-22",
+      "description": "Owner-authorized proposal opened after AP-008 closure. Seven-domain live mapping and compatibility gates are next; no live score is promoted yet.",
       "image": null
     },
     {

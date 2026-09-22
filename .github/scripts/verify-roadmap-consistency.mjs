@@ -43,7 +43,7 @@ const parseAmpPackages = (markdown) => {
 
 const parseBacklogStatuses = (markdown) => {
   const map = new Map();
-  const row = /^\|\s*(BKL-\d{3})\s*\|\s*[^|]+\|\s*[^|]+\|\s*([^|]+?)\s*\|/gm;
+  const row = /^\|\s*(BKL-\d{3}(?:-[A-Z0-9]+)*)\s*\|\s*[^|]+\|\s*[^|]+\|\s*([^|]+?)\s*\|/gm;
   for (const match of markdown.matchAll(row)) map.set(match[1], match[2].trim().replace(/^\*\*|\*\*$/g, ''));
   return map;
 };
@@ -123,7 +123,7 @@ const main = async () => {
     }
   }
 
-  const milestoneBacklogRefs = String(source.nextMilestone || '').match(/BKL-\d{3}/g) || [];
+  const milestoneBacklogRefs = String(source.nextMilestone || '').match(/BKL-\d{3}(?:-[A-Z0-9]+)*/g) || [];
   for (const id of milestoneBacklogRefs) {
     const status = backlogStatuses.get(id);
     assert(status, `Roadmap nextMilestone references ${id}, but it is missing from BACKLOG.md`);

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "updatedAt": "2026-09-20",
+  "updatedAt": "2026-09-22",
   "generatedFrom": {
     "roadmap": "docs/data/roadmap.json",
     "discovery": "docs/architecture/validation/AP-013-Session-Discovery-Execution-Evidence.md",
@@ -15,12 +15,12 @@
   },
   "current": {
     "package": {
-      "id": "AP-008",
-      "title": "Enterprise Integration Architecture",
+      "id": "BKL-036-F5",
+      "title": "Live Read-Only Health Score",
       "status": "active"
     },
-    "nextMilestone": "AP-008 Enterprise Integration Architecture",
-    "target": "Prepare AP-008 enterprise integration contracts and boundaries while preserving read-only, fail-closed and local Safety Authority constraints. No scheduler, automatic target selection, device command or Safety Authority is authorized."
+    "nextMilestone": "BKL-036-F5 Live Read-Only Health Score",
+    "target": "Define and validate a seven-domain live descriptive health projection over AP-008 read-only evidence, preserving fail-closed freshness, BKL-032 separation and local Safety Authority; No scheduler, automatic target selection, device command or Safety Authority is authorized; no readiness, go/no-go, scheduler, commands or Safety Authority is authorized"
   },
   "architecture": {
     "ap013": {
