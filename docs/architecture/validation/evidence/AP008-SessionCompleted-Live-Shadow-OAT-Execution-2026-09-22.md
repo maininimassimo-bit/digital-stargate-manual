@@ -12,6 +12,8 @@
 | Deployment UTC | `2026-09-22T13:49Z` (build/deploy window) |
 | Traffic outcome | 0% canary; 100% retained on previous revision |
 | Rollback/disable | Canary tag removed; previous revision remained active |
+| Corrected canary revision | `dsg-observatory-status-relay-00010-maw` |
+| Corrected image digest | `sha256:ec847f5ae724954038f2588ddc9324117d1435852455c1fce80f1ff35f58e416` |
 
 ## Executed
 
@@ -24,6 +26,10 @@
 - Shadow GET before publication: HTTP `404`.
 - Command-route negative checks: HTTP `404`.
 - Canary disable/rollback to previous production traffic.
+- Corrected canary deployment after multiline-JSON/NDJSON duplicate defect.
+- First shadow publish: HTTP `202`.
+- Duplicate shadow publish: HTTP `200`, `NO_OP`.
+- Read-back: HTTP `200` with matching event identity and shadow safety flags.
 
 ## Verified
 
@@ -32,6 +38,10 @@
 - `DSG_RELAY_ALLOWED_ORIGIN=*` and `DSG_RELAY_MAX_BODY_BYTES=65536` preserved.
 - Previous production revision remained at 100% traffic.
 - Canary revision reached `Ready=True`.
+- `activation_mode=shadow`.
+- `runtime_event_published=false`.
+- `safety_authority=NONE`.
+- `command_authority=NONE`.
 
 ## Not executed
 
@@ -40,6 +50,7 @@
 - Duplicate POST and `NO_OP` verification.
 - Authenticated read-back and message/session/digest reconciliation.
 - Consumer reconciliation, full negative suite and ARB decision.
+- Production promotion.
 
 ## Blocked
 
@@ -48,6 +59,8 @@
 - The active Cloud Run service had no explicit `/data` volume or mount. On the new revision,
   `/v1/observatory-status` and `/v1/eagle-health` returned `404`, so persistence continuity
   cannot be accepted as verified.
+- The initial canary revealed multiline JSON being treated as NDJSON; this was corrected in
+  commit `035765c` and the duplicate test then passed.
 
 ## Decision
 

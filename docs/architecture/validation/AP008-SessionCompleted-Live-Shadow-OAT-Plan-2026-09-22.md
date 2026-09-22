@@ -6,7 +6,7 @@
 | Owner / Accountable | Massimo Mainini |
 | Scope | live transport of validated shadow evidence |
 | Runtime mode | shadow event, read-only transport |
-| Current gate | BLOCKED — canary deployed, OAT not executed |
+| Current gate | BLOCKED — shadow canary passed; persistence/consumer continuity open |
 | Safety Authority | local and independent |
 | Command authority | NONE |
 
@@ -160,3 +160,25 @@ Observed canary checks:
 The EAGLE30154 publisher validation, real canary, duplicate delivery, read-back, negative tests,
 and consumer reconciliation were not executed because the EAGLE30154 session and bearer token
 were not available from the operator environment. AP-008 remains blocked and is not live-ready.
+
+## 11. Continued execution — 2026-09-22
+
+After EAGLE30154 access and secret injection became available, the shadow canary was rerun on
+revision `dsg-observatory-status-relay-00010-maw` with image digest
+`sha256:ec847f5ae724954038f2588ddc9324117d1435852455c1fce80f1ff35f58e416`.
+
+Observed results:
+
+- first publish: HTTP `202`;
+- duplicate publish: HTTP `200`, `NO_OP`;
+- read-back: HTTP `200`, with matching `message_id`, `session_id` and `manifest_sha256`;
+- read-back flags: `activation_mode=shadow`, `runtime_event_published=false`,
+  `safety_authority=NONE`, `command_authority=NONE`;
+- command route probe: HTTP `404`;
+- production traffic remained at 100% on `dsg-observatory-status-relay-00005-rof`;
+- canary `/v1/observatory-status` and `/v1/eagle-health` remained HTTP `404`, so persistence
+  and consumer continuity across revisions remain unverified.
+
+The first canary revision exposed a multiline-JSON/NDJSON defect on duplicate delivery. The
+relay was corrected in commit `035765c` to normalize events to one JSON object per line and to
+ignore non-object legacy fragments during deduplication.
