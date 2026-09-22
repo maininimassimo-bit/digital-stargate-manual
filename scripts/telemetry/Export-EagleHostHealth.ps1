@@ -114,9 +114,15 @@ try {
     }
     $sampleNow = [datetime]::UtcNow
     $shouldSample = $true
-    if ($window.last_sample_at_utc) {
-        try { $shouldSample = (($sampleNow - [datetime]::Parse([string]$window.last_sample_at_utc)).TotalSeconds -ge 60) } catch { $shouldSample = $true }
-    }
+if ($window.last_sample_at_utc) {
+        try {
+            $lastSampleAt = [DateTimeOffset]::Parse(
+                [string]$window.last_sample_at_utc,
+                [Globalization.CultureInfo]::InvariantCulture,
+                [Globalization.DateTimeStyles]::RoundtripKind)
+            $shouldSample = (($sampleNow - $lastSampleAt.UtcDateTime).TotalSeconds -ge 60)
+        } catch { $shouldSample = $true }
+}
     $cpuSamples = @($window.cpu_samples)
     $memorySamples = @($window.memory_available_pct_samples)
     if ($shouldSample) {
