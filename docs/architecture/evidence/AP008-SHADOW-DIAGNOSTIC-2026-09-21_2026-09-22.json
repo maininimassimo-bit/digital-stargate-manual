@@ -1,0 +1,73 @@
+﻿{
+    "schema_version":  "1.0.0",
+    "evidence_id":  "AP008-SHADOW-DIAGNOSTIC-2026-09-21_2026-09-22",
+    "pilot":  "INT-SESSION-METADATA-PILOT-001",
+    "session_id":  "2026-09-21_2026-09-22",
+    "outcome":  "SHADOW_EVENT_WRITTEN",
+    "event_path":  "data\\sessions\\2026\\09\\2026-09-21_2026-09-22\\events\\SessionCompleted.shadow.json",
+    "manifest_sha256":  "714a67f66799824e3828e540d468c93e0f4d438c7727a78882cc7d973fa4fe78",
+    "diagnostic_status":  "YELLOW",
+    "diagnostic_reasons":  [
+                               "Pose LIGHT da verificare: fallite=0, non abbinate=3"
+                           ],
+    "checks":  [
+                   {
+                       "id":  "session_identity",
+                       "status":  "PASS",
+                       "detail":  "2026-09-21_2026-09-22"
+                   },
+                   {
+                       "id":  "manifest_complete",
+                       "status":  "PASS",
+                       "detail":  "report_status=COMPLETE"
+                   },
+                   {
+                       "id":  "report_present",
+                       "status":  "PASS",
+                       "detail":  "C:\\DigitalStarGate\\digital-stargate-manual-ap14-runtime\\docs\\session-reports\\2026\\09\\2026-09-21_2026-09-22\\report-sessione.md"
+                   },
+                   {
+                       "id":  "manifest_files_size_sha256",
+                       "status":  "PASS",
+                       "detail":  "6/6 files verified"
+                   }
+               ],
+    "fail_closed_tests":  [
+                              {
+                                  "id":  "missing_file",
+                                  "expected":  "REJECT_NO_EVENT",
+                                  "observed":  "REJECT_NO_EVENT",
+                                  "status":  "PASS"
+                              },
+                              {
+                                  "id":  "checksum_mismatch",
+                                  "expected":  "REJECT_NO_EVENT",
+                                  "observed":  "REJECT_NO_EVENT",
+                                  "status":  "PASS"
+                              },
+                              {
+                                  "id":  "session_identity_mismatch",
+                                  "expected":  "REJECT_NO_EVENT",
+                                  "observed":  "REJECT_NO_EVENT",
+                                  "status":  "PASS"
+                              },
+                              {
+                                  "id":  "duplicate_delivery",
+                                  "expected":  "NO_OP",
+                                  "observed":  "NO_OP",
+                                  "status":  "PASS"
+                              },
+                              {
+                                  "id":  "safety_authority_or_command_path",
+                                  "expected":  "ABSENT",
+                                  "observed":  "ABSENT",
+                                  "status":  "PASS"
+                              }
+                          ],
+    "runtime_event_published":  false,
+    "broker_used":  false,
+    "scheduler_added":  false,
+    "command_path":  "NONE",
+    "safety_authority":  "NONE",
+    "rollback":  "Delete shadow artifact and retain diagnostic evidence; no operational state is changed."
+}

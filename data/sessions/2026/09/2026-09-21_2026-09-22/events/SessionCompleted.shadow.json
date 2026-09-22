@@ -1,0 +1,46 @@
+﻿{
+    "contract_id":  "DSG.Observation.Event.SessionCompleted",
+    "contract_version":  "1.0.0",
+    "message_id":  "shadow-2026-09-21_2026-09-22-714a67f66799824e",
+    "occurred_at":  "2026-09-22T06:00:00.0000000+02:00",
+    "published_at":  null,
+    "correlation_id":  "shadow-2026-09-21_2026-09-22-714a67f66799824e",
+    "producer":  {
+                     "component":  "DSG.NINA.SessionMetadataAdapter",
+                     "instance":  "EAGLE30154",
+                     "mode":  "shadow"
+                 },
+    "subject":  {
+                    "session_id":  "2026-09-21_2026-09-22",
+                    "observatory":  "Digital StarGate - Manciano"
+                },
+    "schema_uri":  "docs/architecture/solutions/INT-SESSION-METADATA-PILOT-001.md#contract-candidate",
+    "classification":  "internal",
+    "freshness":  "current",
+    "activation_mode":  "shadow",
+    "runtime_event_published":  false,
+    "safety_authority":  "NONE",
+    "command_authority":  "NONE",
+    "payload":  {
+                    "session_id":  "2026-09-21_2026-09-22",
+                    "session_start":  "2026-09-21T19:00:00.0000000+02:00",
+                    "session_end":  "2026-09-22T06:00:00.0000000+02:00",
+                    "equipment_profile":  "QUATTRO200_TOUPTEK294_BIN1",
+                    "target_name":  "NGC 281",
+                    "manifest_path":  "data\\sessions\\2026\\09\\2026-09-21_2026-09-22\\manifest.json",
+                    "manifest_sha256":  "714a67f66799824e3828e540d468c93e0f4d438c7727a78882cc7d973fa4fe78",
+                    "evidence_files":  [
+                                           "raw/nina/20260921-152451-3.2.0.9001.4640-202609.log",
+                                           "raw/phd2/PHD2_DebugLog_2026-09-21_153308.txt",
+                                           "raw/phd2/PHD2_GuideLog_2026-09-21_153308.txt",
+                                           "raw/sqm/sqm-history.ndjson",
+                                           "raw/sqm/sqm-summary.json",
+                                           "raw/weather/CloudWatcher_2026-09-21_2026-09-22.csv"
+                                       ],
+                    "source_commit":  "3859f584fcb8568b14a04c78d9de02127d5c4b7f",
+                    "diagnostic_status":  "YELLOW",
+                    "diagnostic_reasons":  [
+                                               "Pose LIGHT da verificare: fallite=0, non abbinate=3"
+                                           ]
+                }
+}
