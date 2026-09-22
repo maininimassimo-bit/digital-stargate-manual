@@ -255,7 +255,7 @@
           "id": "BKL-036-F5",
           "title": "Live Read-Only Health Score",
           "status": "active",
-          "note": "Owner-authorized live read-only policy is activated and post-merge verified. EAGLE Health is current and fail-closed as UNAVAILABLE/TIME_SYNC_NOT_CURRENT because last_successful_sync_utc is absent; numeric score promotion remains intentionally withheld."
+          "note": "Owner-authorized live read-only policy is activated and post-merge verified. EAGLE Health is current and HEALTHY with score 100 after fresh Windows time synchronization; the score remains descriptive-only with no command, remediation or Safety Authority semantics."
         },
         {
           "id": "BKL-033",
@@ -446,7 +446,7 @@
       "itemRef": "BKL-036-F5",
       "title": "BKL-036-F5 Live Read-Only Health Score",
       "date": "2026-09-22",
-      "description": "Owner-authorized live read-only policy activated and post-merge verified. EAGLE Health is current and fail-closed as UNAVAILABLE/TIME_SYNC_NOT_CURRENT; no numeric score is promoted while required time-sync evidence is absent.",
+      "description": "Owner-authorized live read-only policy activated and post-merge verified. EAGLE Health is current and HEALTHY with score 100 after fresh Windows time synchronization; the score remains descriptive-only.",
       "image": null
     },
     {

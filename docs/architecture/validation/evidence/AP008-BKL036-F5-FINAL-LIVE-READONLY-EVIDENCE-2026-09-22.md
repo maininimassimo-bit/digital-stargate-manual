@@ -21,12 +21,15 @@ reached five valid samples. Production read-back returned:
 ```text
 HTTP 200
 quality=CURRENT
-state=UNAVAILABLE
-reason=TIME_SYNC_NOT_CURRENT
+state=HEALTHY
+reason=ALL_REQUIRED_SIGNALS_HEALTHY
+score=100
 ```
 
-This is the expected governed result because `last_successful_sync_utc` is absent on the
-host. A numeric score is therefore intentionally not emitted.
+Windows time synchronization was subsequently activated and verified through `w32tm`; the
+collector recognized the localized Windows output and published fresh
+`last_successful_sync_utc` evidence. The score remains descriptive/read-only and carries no
+command or Safety Authority semantics.
 
 ## Runtime evidence
 
