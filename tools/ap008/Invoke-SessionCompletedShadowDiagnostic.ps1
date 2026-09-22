@@ -140,7 +140,7 @@ $event = [ordered]@{
 }
 if (Test-Path -LiteralPath $eventPath -PathType Leaf) {
     $existing = Get-JsonFile $eventPath
-    if ([string]$existing.message_id -eq $messageId) {
+    if ([string]$existing.message_id -eq $messageId -and -not $Force) {
         Write-Output "AP-008 shadow diagnostic: NO_OP existing event=$eventPath"
         exit 0
     }
