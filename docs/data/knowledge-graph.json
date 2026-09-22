@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "component": "DSG.RepositoryKnowledgeGraph",
   "authority": "projection",
-  "generated_at_utc": "2026-09-17T21:45:00Z",
+  "generated_at_utc": "2026-09-22T08:45:00Z",
   "entities": [
     {
       "id": "AP-001",
@@ -803,6 +803,26 @@
       "source_locator": {
         "path": "docs/architecture/reviews/RQ-AP007-001-Release-Quality-Review.md"
       }
+    },
+    {
+      "id": "INT-SESSION-METADATA-PILOT-001",
+      "type": "component",
+      "title": "Read-only Session Metadata Integration Pilot",
+      "status": "Proposed — not operationally authorized",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/solutions/INT-SESSION-METADATA-PILOT-001.md"
+      }
+    },
+    {
+      "id": "ARB-AP008",
+      "type": "evidence",
+      "title": "Independent Review of AP-008",
+      "status": "Completed — Rework Required",
+      "authority": "evidence_authority",
+      "source_locator": {
+        "path": "docs/architecture/assessments/ARB-AP008-AP008-Independent-Architecture-Review.md"
+      }
     }
   ],
   "relations": [
@@ -1341,6 +1361,26 @@
       "type": "evidenced_by",
       "from": "AP-007",
       "to": "RQ-AP007-001",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:INT-SESSION-METADATA-PILOT-001:documents:AP-008",
+      "type": "documents",
+      "from": "INT-SESSION-METADATA-PILOT-001",
+      "to": "AP-008",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:AP-008:evidenced_by:ARB-AP008",
+      "type": "evidenced_by",
+      "from": "AP-008",
+      "to": "ARB-AP008",
       "version": "1.0",
       "source_locator": {
         "path": "docs/architecture/traceability-register.md"
