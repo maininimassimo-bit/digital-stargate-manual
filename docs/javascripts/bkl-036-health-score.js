@@ -21,8 +21,25 @@
       publication: { label: 'Cloud Run relay · EAGLE30154 · live read-only' }
     };
   };
+  const fromEagleView = () => {
+    const summary = document.querySelector('[data-eagle-health="summary"]')?.textContent?.trim() || '';
+    const observed = document.querySelector('[data-eagle-health="observed-at"]')?.textContent?.trim() || null;
+    if (!summary) return null;
+    const state = summary.split('/')[0].trim().toUpperCase();
+    if (!['HEALTHY', 'DEGRADED', 'UNAVAILABLE'].includes(state)) return null;
+    const score = state === 'HEALTHY' ? 100 : state === 'DEGRADED' ? 50 : null;
+    return fromLive({ summary: { state, score, reason: summary.split('/').slice(1).join('/').trim() }, observed_at_utc: observed });
+  };
+  const observeEagleView = () => {
+    const node = document.querySelector('[data-eagle-health="summary"]');
+    if (!node || !window.MutationObserver) return;
+    const renderFromDom = () => { const live = fromEagleView(); if (live) render(live); };
+    new MutationObserver(renderFromDom).observe(node, { childList: true, characterData: true, subtree: true });
+    renderFromDom();
+  };
   const init = () => {
     if (!document.querySelector('[data-bkl036-score]')) return;
+    observeEagleView();
     fetch(livePath, { cache: 'no-store' })
       .then(response => { if (!response.ok) throw new Error('BKL-036-F5 live score unavailable'); return response.json(); })
       .then(payload => render(fromLive(payload)))
