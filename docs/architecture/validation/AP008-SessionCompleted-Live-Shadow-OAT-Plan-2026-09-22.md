@@ -6,7 +6,7 @@
 | Owner / Accountable | Massimo Mainini |
 | Scope | live transport of validated shadow evidence |
 | Runtime mode | shadow event, read-only transport |
-| Current gate | NOT_EXECUTED |
+| Current gate | BLOCKED — canary deployed, OAT not executed |
 | Safety Authority | local and independent |
 | Command authority | NONE |
 
@@ -140,3 +140,23 @@ The OAT can advance the AP-008 shadow transport gate only if every positive and 
 check passes. It does not by itself change the status of the live contract. A separate
 security review and ARB decision remain required before `runtime_event_published=true`
 or any live activation semantics are introduced.
+
+## 10. Execution record — 2026-09-22
+
+The controlled Cloud Run canary deployment was executed from commit `298d5578679d50e869a63fe0d40936e58f377687`.
+Cloud Build produced image digest `sha256:d09b7b181aa133b85e14f72810b6a11aa153a9023ae4e5d8972ee34441725500`.
+Revision `dsg-observatory-status-relay-00007-bik` became Ready with 0% production traffic, while
+`dsg-observatory-status-relay-00005-rof` remained at 100% and was retained as rollback.
+
+Observed canary checks:
+
+- `GET /v1/session-completed-shadow`: `404` before publication, as expected;
+- unauthenticated `POST /v1/session-completed-shadow`: `401`;
+- command-like GET paths `/v1/command`, `/v1/control`, `/v1/remediate`, `/v1/reboot`: `404`;
+- secret injection `dsg-telemetry-ingest-token`, authorized source `EAGLE30154`, allowed origin and body limit were preserved;
+- canary `GET /v1/observatory-status` and `GET /v1/eagle-health`: `404`, demonstrating that `/data` persistence was not available across the new revision;
+- the canary tag was removed and production traffic remained 100% on `dsg-observatory-status-relay-00005-rof`.
+
+The EAGLE30154 publisher validation, real canary, duplicate delivery, read-back, negative tests,
+and consumer reconciliation were not executed because the EAGLE30154 session and bearer token
+were not available from the operator environment. AP-008 remains blocked and is not live-ready.
