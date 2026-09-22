@@ -863,6 +863,16 @@
       "source_locator": {
         "path": "docs/architecture/validation/AP008-LIVE-READINESS-GATE-2026-09-22.md"
       }
+    },
+    {
+      "id": "DSG-SOL-SESSIONCOMPLETED-001",
+      "type": "component",
+      "title": "SessionCompleted Read-only Transport Proposal",
+      "status": "Proposed — not operationally authorized",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/solutions/DSG-SOL-SESSIONCOMPLETED-001-Read-only-Transport.md"
+      }
     }
   ],
   "relations": [
@@ -1471,6 +1481,16 @@
       "type": "evidenced_by",
       "from": "AP-008",
       "to": "AP008-LIVE-READINESS-GATE-2026-09-22",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:AP-008:relates_to:DSG-SOL-SESSIONCOMPLETED-001",
+      "type": "relates_to",
+      "from": "AP-008",
+      "to": "DSG-SOL-SESSIONCOMPLETED-001",
       "version": "1.0",
       "source_locator": {
         "path": "docs/architecture/traceability-register.md"
