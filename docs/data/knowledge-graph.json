@@ -873,6 +873,16 @@
       "source_locator": {
         "path": "docs/architecture/solutions/DSG-SOL-SESSIONCOMPLETED-001-Read-only-Transport.md"
       }
+    },
+    {
+      "id": "AP008-SESSIONCOMPLETED-LIVE-SHADOW-OAT-2026-09-22",
+      "type": "evidence",
+      "title": "SessionCompleted Live Shadow OAT Plan",
+      "status": "NOT_EXECUTED",
+      "authority": "evidence_authority",
+      "source_locator": {
+        "path": "docs/architecture/validation/AP008-SessionCompleted-Live-Shadow-OAT-Plan-2026-09-22.md"
+      }
     }
   ],
   "relations": [
@@ -1491,6 +1501,16 @@
       "type": "relates_to",
       "from": "AP-008",
       "to": "DSG-SOL-SESSIONCOMPLETED-001",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:DSG-SOL-SESSIONCOMPLETED-001:evidenced_by:AP008-SESSIONCOMPLETED-LIVE-SHADOW-OAT-2026-09-22",
+      "type": "evidenced_by",
+      "from": "DSG-SOL-SESSIONCOMPLETED-001",
+      "to": "AP008-SESSIONCOMPLETED-LIVE-SHADOW-OAT-2026-09-22",
       "version": "1.0",
       "source_locator": {
         "path": "docs/architecture/traceability-register.md"
