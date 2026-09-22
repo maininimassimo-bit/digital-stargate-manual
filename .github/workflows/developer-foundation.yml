@@ -33,6 +33,7 @@ jobs:
       - { name: Test EAGLE health portal browser failure injection, run: node --test .github/scripts/test-eagle-health-portal-failure-injection.mjs }
       - { name: Test SessionCompleted shadow event fail-closed rules, run: node .github/scripts/test-session-completed-shadow-event.mjs }
       - { name: Test SessionCompleted shadow contract compatibility, run: node .github/scripts/test-session-completed-shadow-contract-compatibility.mjs }
+      - { name: Test SessionCompleted live shadow transport boundaries, run: node .github/scripts/test-session-completed-live-shadow-transport.mjs }
       - { name: Verify repository knowledge graph, run: node .github/scripts/verify-knowledge-graph.mjs }
       - { name: Verify repository knowledge graph coverage, run: node .github/scripts/verify-knowledge-graph-coverage.mjs }
       - { name: Verify knowledge graph material relations, run: node .github/scripts/verify-knowledge-graph-material-relations.mjs }
