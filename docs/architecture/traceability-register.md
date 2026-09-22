@@ -78,7 +78,7 @@
 | OPS-REF-001 | Operations and Service Management Reference Architecture | AP-007 | ARB-AP007-001; RQ-AP007-001 | Accepted with conditions |
 | INT-REF-001 | Enterprise Integration Reference Architecture | AP-008 | Proposed for review | documentale |
 | INT-CAT-001 | Integration Contract Catalog | AP-008 | Initial candidate catalog | nessun runtime test |
-| INT-SESSION-METADATA-PILOT-001 | Read-only Session Metadata Integration Pilot | AP-008 | Proposed — not operationally authorized | acceptance tests and security/reconciliation evidence pending |
+| INT-SESSION-METADATA-PILOT-001 | Read-only Session Metadata Integration Pilot | AP-008 | Proposed — not operationally authorized | real-session shadow event and fail-closed diagnostics recorded; live adapter/security/reconciliation evidence pending |
 | ARB-AP008 | Independent Review of AP-008 | AP-008 | Completed — Rework Required | 73/100; conditions open; no runtime authorization |
 | INF-REF-001 | Enterprise Infrastructure Reference Architecture | AP-009 | Approved with conditions via ARB-009 | evidence operativa aperta |
 | SAF-REF-001 | Enterprise Safety Reference Architecture | AP-010 | Approved with conditions via ARB-010 | scenario validation aperta |
