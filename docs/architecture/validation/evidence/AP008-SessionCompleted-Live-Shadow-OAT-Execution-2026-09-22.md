@@ -78,6 +78,29 @@ broker, scheduler, command path, Safety Authority and runtime event publication 
   fresh snapshot objects have not yet been republished into the new bucket.
 - Production traffic remained 100% on `dsg-observatory-status-relay-00005-rof`.
 
+## Observatory producer monitoring closure — 2026-09-22
+
+The EAGLE30154 Observatory Status producer completed the requested one-hour window with
+`PollSeconds=15`, `FreshnessSeconds=300`, and `DurationSeconds=3600`, publishing directly to
+the production read-only endpoint. The operator runtime evidence reports:
+
+- producer state: `STOPPED` after the bounded duration;
+- `last_success_utc`: `2026-09-22T17:18:59.0995008Z`;
+- `publish_last_success`: `2026-09-22T17:18:59.4871674Z`;
+- `consecutive_failures`: `0`;
+- publish failures: `0`;
+- final publish: HTTP `202`, `PUBLISH RESULT: PASS`, correlation ID
+  `cb712393-b25e-4d70-b694-cec65e4c82e0`;
+- producer log: repeated `PUBLISH_OK` entries from `2026-09-22T16:19:xxZ` through
+  `2026-09-22T17:18:59Z`, with NINA as the active source and `weather=AVAILABLE/CURRENT`.
+
+The subsequent production read-back was performed after the five-minute freshness window had
+expired. Observatory Status returned `404` as required by the fail-closed stale-read contract;
+EAGLE Health remained HTTP `200` with `quality=CURRENT` and an advancing timestamp. This
+post-window `404` is therefore not evidence of a publish failure. The command route remained
+HTTP `404`. No deployment, traffic promotion, broker, scheduler, command path, or runtime event
+activation was performed.
+
 ## Freshness hardening
 
 - Commit `0a29bef` added GET-side freshness enforcement for Observatory Status and EAGLE Health.
