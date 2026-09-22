@@ -8,7 +8,7 @@
 | Baseline | main @ 966ef897a5c3fd11da82339fec608c134e6740de |
 | Scope | read-only repository shadow artifact |
 | Decision | READY_WITH_CONDITIONS for shadow evidence; NOT_READY for live integration |
-| Runtime authorization | NONE |
+| Runtime authorization | NONE |\n| AP-008 accountable owner | Massimo Mainini |
 
 ## 1. Purpose
 
@@ -61,13 +61,13 @@ The schema is not an approval of the broader candidate catalog entry or of a liv
 
 | Responsibility | Required owner | Current status |
 |---|---|---|
-| Contract registry and lifecycle | Architecture Office / named contract owner | UNASSIGNED |
+| Contract registry and lifecycle | Massimo Mainini — AP-008 accountable owner | ASSIGNED |
 | Read-only session adapter | Runtime Integration Owner | UNASSIGNED |
 | Repository consumer/projection | Analytics/Portal Owner | UNASSIGNED |
 | Security/trust review | Security reviewer | UNASSIGNED |
 | Operational disable/rollback | Operations owner | UNASSIGNED |
 
-No live activation may proceed while these roles are unassigned.
+Massimo Mainini is assigned as AP-008 accountable owner and contract-lifecycle owner. This assignment does not confer Security Authority, Safety Authority, runtime execution or operational rollback authority. No live activation may proceed while the remaining roles are unassigned.
 
 ## 5. Security and safety decision
 
