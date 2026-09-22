@@ -853,6 +853,16 @@
       "source_locator": {
         "path": "contracts/events/observation-session-completed-shadow-v1.schema.json"
       }
+    },
+    {
+      "id": "AP008-LIVE-READINESS-GATE-2026-09-22",
+      "type": "evidence",
+      "title": "AP-008 Governed Live Readiness Gate",
+      "status": "NOT_READY — live read-only integration",
+      "authority": "evidence_authority",
+      "source_locator": {
+        "path": "docs/architecture/validation/AP008-LIVE-READINESS-GATE-2026-09-22.md"
+      }
     }
   ],
   "relations": [
@@ -1451,6 +1461,16 @@
       "type": "governs",
       "from": "DSG-OBS-SESSIONCOMPLETED-SHADOW-V1",
       "to": "INT-SESSION-METADATA-PILOT-001",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:AP-008:evidenced_by:AP008-LIVE-READINESS-GATE-2026-09-22",
+      "type": "evidenced_by",
+      "from": "AP-008",
+      "to": "AP008-LIVE-READINESS-GATE-2026-09-22",
       "version": "1.0",
       "source_locator": {
         "path": "docs/architecture/traceability-register.md"
