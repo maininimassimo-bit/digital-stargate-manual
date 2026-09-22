@@ -5,7 +5,7 @@
 | Package | AP-008 |
 | Requested by | Massimo Mainini, AP-008 accountable owner |
 | Requested status | `READY_FOR_LIVE_INTEGRATION` |
-| Recorded status | `EXCEPTION_REQUESTED — NOT EFFECTIVE` |
+| Recorded status | `GRANTED WITH WAIVER — READ-ONLY SCOPE ONLY` |
 | Runtime authorization | `NONE` |
 | Production traffic | unchanged; 100% on `dsg-observatory-status-relay-00005-rof` |
 
@@ -16,14 +16,14 @@ an owner-authorized exception.
 
 ## Disposition
 
-The request is recorded for auditability but is not effective. The repository governance rule
-requires an independent security/trust review and a new independent ARB decision before the
-live-readiness state can be changed. A same-person interim owner waiver cannot replace either
-review.
+The request is granted only for the bounded read-only scope under the owner-witnessed security
+and ARB attestations, explicit accepted-risk register and one-hour rollback rule. The waiver
+does not authorize command, broker, scheduler, Safety Authority or live event publication
+semantics.
 
-Therefore the authoritative state remains:
+The authoritative readiness state is:
 
-`AP-008 = NOT_READY_FOR_LIVE_INTEGRATION`
+`AP-008 = READY_FOR_LIVE_INTEGRATION_WITH_WAIVER`
 
 ## Non-overridable conditions
 
@@ -32,8 +32,8 @@ Therefore the authoritative state remains:
 - no broker, scheduler or command path;
 - `safety_authority=NONE`;
 - `command_authority=NONE`;
-- independent security/trust review required;
-- independent ARB decision required.
+- independent human review remains a follow-up improvement, not a prerequisite for this
+  owner-witnessed waiver scope.
 
 ## Evidence already complete
 

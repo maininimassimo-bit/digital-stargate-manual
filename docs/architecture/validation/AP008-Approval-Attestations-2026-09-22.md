@@ -46,3 +46,30 @@ Until reconciliation is complete:
 - no live activation is authorized;
 - `runtime_event_published=false`, `safety_authority=NONE` and `command_authority=NONE` remain
   mandatory.
+
+## Amended security disposition
+
+Leonardo Di Egidio provided the following risk dispositions for the security/trust findings:
+
+| Finding | Decision | Residual risk / mitigation |
+|---|---|---|
+| Secret lifecycle | `ACCETTATO CON RISCHIO` | No automatic expiry; governed manual rotation every 720 days, immediate revocation on suspected compromise, canary verification after rotation |
+| IAM/bucket | `ACCETTATO CON RISCHIO` | Periodic IAM verification is not automated; Cloud Run service-account-only access, no public bucket access, uniform bucket-level access, periodic IAM review |
+| CORS/data exposure | `ACCETTATO CON RISCHIO` | Public read-only GETs expose current operational observations; payloads remain observational, no browser token, command or Safety Authority data |
+| Log redaction | `ACCETTATO CON RISCHIO` | Accidental sensitive header/detail exposure remains possible; application logging excludes tokens, manual post-deploy checks and limited retention |
+| Supply chain | `ACCETTATO CON RISCHIO` | Image/dependency compromise remains possible; immutable digests, reproducible build, dependency scanning and rollback |
+
+Teresa Mainini subsequently confirmed ARB acceptance of this risk register and mitigation set
+for the read-only/shadow scope, including direct 100% rollout only after the gates and rollback
+within one hour when an unresolved technical issue remains. Confirmation time was not supplied.
+
+## Final governed disposition
+
+The owner-witnessed attestations and explicit risk register reconcile the prior “no conditions”
+wording. AP-008 is recorded as:
+
+`READY_FOR_LIVE_INTEGRATION_WITH_WAIVER`
+
+This is a readiness decision for the bounded read-only scope only. It is not a traffic-change
+record and does not activate command, broker, scheduler, Safety Authority or live event
+publication semantics.

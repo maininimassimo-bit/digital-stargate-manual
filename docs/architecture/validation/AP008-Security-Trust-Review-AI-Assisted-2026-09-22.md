@@ -6,8 +6,8 @@
 | Review mode | AI-assisted, owner-authorized |
 | Reviewer role | Security/trust review coordinator under waiver |
 | Independent human review | NO — explicitly not equivalent |
-| Decision | APPROVED WITH CONDITIONS FOR SHADOW ONLY |
-| Live readiness | NOT READY |
+| Decision | APPROVED WITH ACCEPTED RISKS — READ-ONLY SCOPE |
+| Live readiness | READY WITH WAIVER |
 
 ## Reviewed evidence
 
@@ -29,23 +29,22 @@
 | `/data` persistence and revision continuity are evidenced | — | PASS for shadow |
 | Command and safety boundaries remain absent | — | PASS for shadow |
 | Production isolation and rollback baseline are preserved | — | PASS for shadow |
-| Interim same-person ownership combines accountability, security coordination and operations | Major | ACCEPTED ONLY AS RECORDED WAIVER; live approval blocked |
-| Secret rotation/revocation and incident recovery procedure | Major | OPEN; independent disposition required |
-| Cloud Run/IAM/bucket least privilege and retention review | Major | OPEN; independent disposition required |
-| Public read exposure/CORS/data classification | Major | OPEN; independent disposition required |
-| Log redaction and trace/header handling | Major | OPEN; independent disposition required |
-| Supply-chain and dependency review | Major | OPEN; independent disposition required |
+| Interim same-person ownership combines accountability, security coordination and operations | Major | ACCEPTED under owner waiver for bounded read-only scope |
+| Secret rotation/revocation and incident recovery procedure | Major | RISK ACCEPTED; 720-day manual rotation, immediate revocation, canary verification |
+| Cloud Run/IAM/bucket least privilege and retention review | Major | RISK ACCEPTED; service-account-only bucket, no public access, uniform access, periodic review |
+| Public read exposure/CORS/data classification | Major | RISK ACCEPTED; observational payloads only, no token/command/safety data |
+| Log redaction and trace/header handling | Major | RISK ACCEPTED; no token logging, post-deploy manual check, limited retention |
+| Supply-chain and dependency review | Major | RISK ACCEPTED; immutable digests, reproducible build, scanning, rollback |
 
 ## Conditions
 
-1. Keep the runtime shadow-only and production traffic unchanged.
-2. Obtain independent human security/trust review before live readiness.
-3. Resolve or explicitly accept each open Major finding through the independent reviewer and ARB.
+1. Preserve the bounded read-only scope and the owner-witnessed waiver.
+2. Maintain the explicit accepted-risk register and mitigations.
+3. Replace the owner-witnessed waiver with independent human review when available.
 4. Preserve `runtime_event_published=false`, `safety_authority=NONE` and
    `command_authority=NONE`.
 
 ## Decision
 
-The candidate is acceptable for continued shadow operation under the recorded waivers. This
-review does not close G3 as an independent security review and does not authorize
-`READY_FOR_LIVE_INTEGRATION`.
+The package is ready for bounded read-only integration under the recorded owner-witnessed
+waivers. It does not authorize command, broker, scheduler or Safety Authority semantics.

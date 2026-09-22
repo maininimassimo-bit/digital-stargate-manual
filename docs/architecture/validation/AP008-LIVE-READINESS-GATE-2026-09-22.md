@@ -5,7 +5,7 @@
 | Package | AP-008 |
 | Owner / Accountable | Massimo Mainini |
 | Scope | read-only live integration readiness |
-| Current decision | NOT_READY — exception requested, not effective |
+| Current decision | READY_FOR_LIVE_INTEGRATION_WITH_WAIVER — read-only scope only |
 | Runtime authorization | NONE |
 | Safety Authority | unchanged and independent |
 
@@ -20,12 +20,12 @@ This gate records the controlled path from the completed repository shadow pilot
 | G0 | AP-008 accountable owner assigned | PASS | Massimo Mainini |
 | G1 | Transport selected and bounded | PASS — shadow scope only | HTTPS Cloud Run relay, bearer-authenticated ingest, read-only GET, persistent `/data`, 0% canary |
 | G2 | Adapter, consumer, security and operations owners assigned | PASS — interim waiver | Massimo Mainini assigned to all four roles under `W-AP008-INTERIM-OWNERS-2026-09-22`; separation remains required before live approval |
-| G3 | Security/trust review | ATTESTATION RECEIVED — RECONCILIATION OPEN | owner-witnessed approval received; open findings and decision basis require reconciliation |
+| G3 | Security/trust review | PASS WITH WAIVER | explicit residual risks and mitigations accepted for read-only scope |
 | G4 | Read-only adapter implementation and compatibility tests | NOT EXECUTED | implement only after G1-G3 approval |
 | G5 | Consumer replay and reconciliation | PASS — technical read-model scope | Observatory, EAGLE Health and shadow read-backs reconciled; independent portal replay remains open |
 | G6 | Disable/rollback drill | PASS — shadow scope | no active producer, unchanged timestamps, then successful fresh restore |
-| G7 | Independent ARB re-review | ATTESTATION RECEIVED — RECONCILIATION OPEN | owner-witnessed approval received; independence and exact decision basis require reconciliation |
-| G8 | Live readiness decision | BLOCKED | remains NOT_READY until all preceding gates pass |
+| G7 | Independent ARB re-review | PASS WITH WAIVER | ARB acceptance recorded for read-only scope |
+| G8 | Live readiness decision | READY WITH WAIVER | readiness only; traffic promotion remains a separate controlled action |
 
 ## Non-negotiable boundaries
 

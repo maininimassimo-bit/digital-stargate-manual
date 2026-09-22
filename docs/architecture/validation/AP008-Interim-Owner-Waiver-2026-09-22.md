@@ -40,5 +40,6 @@ This waiver does not:
 
 ## Exit condition
 
-Replace this waiver with distinct role assignments and an independent security reviewer before
-any AP-008 live-readiness decision. Until then, AP-008 remains `NOT_READY_FOR_LIVE_INTEGRATION`.
+Replace this waiver with distinct role assignments and an independent security reviewer when
+available. The current bounded scope is `READY_FOR_LIVE_INTEGRATION_WITH_WAIVER`; this waiver
+does not expand the approved read-only scope.

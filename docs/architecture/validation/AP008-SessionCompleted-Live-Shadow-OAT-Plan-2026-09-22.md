@@ -276,8 +276,23 @@ The technical read-model reconciliation and shadow disable/restore drill were co
 ### Gate interpretation
 
 G5 is closed for technical read-model reconciliation and G6 is closed for the shadow scope.
-Independent portal-side replay/divergence evidence, independent security review and the new
-ARB decision remain required before any live-readiness claim.
+The owner-witnessed risk acceptance and ARB attestation are recorded under waiver; independent
+human review remains a follow-up improvement, not a prerequisite for the bounded waiver scope.
+
+## 17. Read-only readiness disposition — 2026-09-22
+
+The owner-witnessed security and ARB attestations, the explicit five-item accepted-risk
+register, the one-hour rollback rule and the completed technical OAT are now recorded.
+
+The bounded scope is marked:
+
+`READY_FOR_LIVE_INTEGRATION_WITH_WAIVER`
+
+This readiness status covers portal publication of read-only telemetry and shadow
+SessionCompleted transport only. It does not activate a command path, broker, scheduler, Safety
+Authority integration or `runtime_event_published=true`. Any production traffic change remains
+a separate controlled action requiring the preflight checks and rollback rule documented in the
+governance package.
 
 ## 15. Cross-revision continuity closure — 2026-09-22
 

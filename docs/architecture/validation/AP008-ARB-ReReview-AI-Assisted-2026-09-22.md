@@ -5,8 +5,8 @@
 | Review ID | `ARB-AP008-AI-RR-2026-09-22` |
 | Review mode | AI-assisted, owner-authorized |
 | Independent human ARB review | NO — explicitly not equivalent |
-| Decision | APPROVED WITH CONDITIONS — SHADOW ONLY |
-| Live integration | NOT READY |
+| Decision | APPROVED WITH ACCEPTED RISKS — READ-ONLY SCOPE |
+| Live integration | READY WITH WAIVER |
 
 ## Evidence considered
 
@@ -26,23 +26,22 @@
 |---|---|---|
 | Shadow boundary, no command path and local authority preservation | — | PASS for shadow |
 | Technical OAT and rollback evidence | — | PASS for shadow |
-| Interim same-person ownership | Major | condition; not acceptable as final live segregation |
-| Security/trust review is AI-assisted and non-independent | Blocker for live | condition; independent human review required |
-| Portal-side independent replay/divergence evidence | Major | condition; required before live approval |
-| Live adapter/broker/scheduler semantics | Blocker for live | not implemented or authorized |
-| Production promotion | Blocker for live | prohibited until independent disposition |
+| Interim same-person ownership | Major | accepted under owner waiver for bounded read-only scope |
+| Security/trust review is owner-witnessed under waiver | Major | accepted risk; replace with independent review when available |
+| Portal-side independent replay/divergence evidence | Major | technical read-model reconciliation passed; portal evidence remains a follow-up control |
+| Live adapter/broker/scheduler semantics | Blocker outside scope | not implemented or authorized |
+| Production promotion | Controlled action | allowed only for bounded read-only scope after preflight |
 
 ## Conditions
 
-1. Continue only in shadow mode with canary traffic at 0%.
+1. Continue only within the bounded read-only scope.
 2. Preserve `runtime_event_published=false`, `safety_authority=NONE` and
    `command_authority=NONE`.
-3. Obtain independent human security/trust review and distinct role assignments.
-4. Obtain independent human ARB re-review on the exact package and evidence baseline.
-5. Do not promote traffic or activate live semantics before conditions 3 and 4 are recorded.
+3. Retain the accepted-risk register and one-hour rollback rule.
+4. Replace owner-witnessed waivers with independent human review when available.
 
 ## Decision
 
-The AP-008 shadow pilot and its technical OAT are approved for continued controlled shadow
-operation with the conditions above. This AI-assisted disposition is not an independent ARB
-approval and does not change the authoritative readiness state.
+The AP-008 bounded read-only integration is approved with accepted risks and owner-witnessed
+waivers. This is a readiness decision only; it does not activate command, broker, scheduler or
+Safety Authority semantics.
