@@ -217,3 +217,37 @@ Revision `dsg-observatory-status-relay-00013-jog` was deployed with the persiste
 mount and remained at 0% production traffic. The persisted SessionCompleted event remained
 readable after the revision change. Legacy snapshot GETs remained `404` because fresh
 `observatory-status.json` and `eagle-health.json` objects have not yet been republished.
+
+## 14. Governed consumer continuity — 2026-09-22
+
+Fresh projections were regenerated on `EAGLE30154` and published to the isolated canary
+endpoint `ap008-shadow` without changing production traffic.
+
+### Executed
+
+- Observatory Status producer ran for 45 seconds with a 15-second cadence and a 60-second
+  freshness window; the initial read returned HTTP `200`.
+- EAGLE Health collector and public projector ran on `EAGLE30154`.
+- EAGLE Health validation returned `VALIDATION RESULT: PASS` with correlation ID
+  `98f39c75-bacb-4651-a2bb-8b7e733a3d1b`.
+- EAGLE Health publish returned HTTP `202`.
+- Observatory Status was republished with a 300-second freshness window for the immediate
+  read-back.
+
+### Verified
+
+- Canary `GET /v1/observatory-status`: HTTP `200`, schema `1.1`, observed at
+  `2026-09-22T15:09:24.4707927Z`, fresh until `2026-09-22T15:14:24.4707927Z`.
+- Canary `GET /v1/eagle-health`: HTTP `200`, component
+  `DSG.EagleHealthPortalProjection`, host `EAGLE30154`.
+- The earlier Observatory `404 snapshot_unavailable` occurred after the 60-second freshness
+  window expired; this confirms stale-read rejection is active rather than indicating data
+  loss.
+- The canary remains isolated at 0% production traffic; production remains on the previous
+  revision for rollback.
+
+### Not executed / blocked
+
+- Cross-revision read-back for the newly published legacy snapshots has not yet been executed.
+- Consumer reconciliation and the next ARB decision remain outstanding.
+- AP-008 is not live-ready and no production traffic promotion is authorized by this OAT.
