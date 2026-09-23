@@ -8,7 +8,7 @@ L’audit distingue tra milestone di fondazione architetturale e milestone funzi
 |---|---|---:|---|
 | AP-015 | Semantic/design baseline CAP-40 | No | Chiusura coerente |
 | BKL-033 | Contract/design del Digital Twin descrittivo | No, esplicitamente successore separato | Chiusura coerente |
-| BKL-034 | Scientific Image Gallery evoluta | Sì, per intento funzionale; non consegnato nella chiusura precedente | Riaperta |
+| BKL-034 | Scientific Image Gallery evoluta | Sì, per intento funzionale | Ora chiusa dopo consumer portale e Pages verification |
 
 ## AP-015
 
@@ -20,6 +20,6 @@ La documentazione dichiara asset/dependency projection e specifica che UI, inges
 
 ## BKL-034
 
-Il contract è valido, ma il nome e l’obiettivo di Gallery evoluta implicano un consumer portale. La milestone è riaperta fino a quando una pagina bounded read-only mostra gli item con sessione, target, provenance, source e stati `current/stale/unknown`, con verifica GitHub Pages e workflow post-merge verdi.
+Il contract è valido e il consumer portale bounded read-only mostra gli item con sessione, target, provenance, source e stati `current/stale/unknown`; GitHub Pages e workflow post-merge sono stati verificati.
 
 Il requisito non autorizza upload, delete, image mutation, processing execution, automatic target selection, command, remediation o Safety Authority.

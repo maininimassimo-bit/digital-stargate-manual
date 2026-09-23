@@ -2,11 +2,11 @@
 
 ## Stato
 
-BKL-034 è riaperta. Il contract, la fixture e il validator restano accettati; manca il consumer portale bounded read-only e la verifica pubblica Pages.
+BKL-034 è stata riaperta e ora chiusa dopo il consumer portale bounded read-only e la verifica pubblica Pages.
 
 ## Gate residuo
 
-Implementare o riallineare una pagina portale che renda navigabile la projection degli item immagine con sessione, target, provenance, source e freshness/state espliciti. Verificare stati stale/unknown senza inferenze di qualità o readiness.
+La pagina `scientific-image-gallery/` rende navigabile la projection degli item immagine con sessione, target, provenance, source e freshness/state espliciti. Gli stati stale/unknown sono verificati senza inferenze di qualità o readiness. Il prossimo gate è BKL-042.
 
 ## Audit predecessori
 
