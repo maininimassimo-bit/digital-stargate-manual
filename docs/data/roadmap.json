@@ -2,7 +2,7 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-23",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "15dafdb79b5bd9a5a14eafb9632d85b83b200ef4b59f6db4c180656d023ed119",
+  "sourceDigest": "e3b22de94c791bef492ae616295d874bbec1b0936f2786c66a10b00757a1b2f8",
   "authority": "DSG-RGM-001",
   "projectStatus": "BKL-034-F2 is CLOSED / ACCEPTED / POST-MERGE VERIFIED for the bounded governed image-ingestion contract and dry-run storage preflight; runtime storage remains separately gated. BKL-042 is the current advisory/read-only successor. AP-015 and BKL-033 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED for their explicitly design/contract-only scopes; RC2 baseline, AP-008 and BKL-036-F5 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED; EAGLE Health is live HEALTHY/100 with fail-closed policy; BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 production runtime unavailable; live source/transport and public runtime GO remain separately gated; no image mutation, processing execution, scheduling, automatic target selection, commands, remediation or Safety Authority is authorized; no scheduling, automatic target selection, commands or Safety Authority is authorized",
   "currentPackage": "BKL-042",
@@ -10,10 +10,10 @@
   "target": "Advance BKL-042-F6 only through separately governed provider/runtime readiness review; retain model/provider execution, runtime storage, upload authority and processing execution as separately gated capabilities. No scheduler, automatic target selection, device command or Safety Authority is authorized",
   "summary": {
     "total": 46,
-    "completed": 43,
-    "active": 1,
+    "completed": 44,
+    "active": 0,
     "planned": 2,
-    "percentCompleted": 93
+    "percentCompleted": 96
   },
   "evidenceSummary": {
     "sources": 8,
@@ -219,7 +219,7 @@
     {
       "id": "observatory-intelligence",
       "title": "Observatory Intelligence & Scientific Processing Roadmap",
-      "status": "active",
+      "status": "planned",
       "items": [
         {
           "id": "BKL-029",
@@ -350,8 +350,8 @@
         {
           "id": "BKL-042",
           "title": "AI Observatory Assistant",
-          "status": "active",
-          "note": "Current governed successor after BKL-034 portal acceptance. F1-F4 are established and the F5 technical evaluation is prepared with real-evidence limitation; formal ARB/RQ/owner acceptance remains open. F6 read-only AI chat integration is the next implementation increment. Bounded synthetic citation/provenance projection only until the gates pass; automatic apply, model/provider execution, command and Safety Authority remain excluded."
+          "status": "completed",
+          "note": "Bounded BKL-042 capability F1-F5 and F6 static read-only consumer are owner-accepted on baseline 52403dfb with retained NOT_EVALUABLE_CURRENT_EVIDENCE limitation. Runtime model/provider, retrieval, automatic apply, command and Safety Authority remain separate, not authorized gates."
         },
         {
           "id": "BKL-043",
