@@ -14,8 +14,12 @@ import threading
 import urllib.error
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from pathlib import Path
 from typing import Any
+
+try:
+    from google.cloud import firestore
+except ImportError:  # Offline repository checks do not require cloud dependencies.
+    firestore = None
 
 
 PROVIDER_URL = "https://api.openai.com/v1/responses"
@@ -38,7 +42,7 @@ def _config() -> dict[str, Any]:
     return {
         "enabled": _bool_env("BKL042_RUNTIME_ENABLED"),
         "api_key": os.getenv("OPENAI_API_KEY", ""),
-        "ledger": os.getenv("BKL042_QUOTA_LEDGER_PATH", ""),
+        "firestore_collection": os.getenv("BKL042_FIRESTORE_COLLECTION", ""),
         "max_requests": int(os.getenv("BKL042_MAX_PILOT_REQUESTS", "100")),
     }
 
@@ -50,8 +54,10 @@ def readiness() -> dict[str, Any]:
         reasons.append("RUNTIME_DISABLED")
     if not config["api_key"]:
         reasons.append("OPENAI_API_KEY_NOT_CONFIGURED")
-    if not config["ledger"]:
+    if not config["firestore_collection"]:
         reasons.append("PERSISTENT_QUOTA_LEDGER_NOT_CONFIGURED")
+    if firestore is None:
+        reasons.append("FIRESTORE_CLIENT_UNAVAILABLE")
     return {
         "status": "READY" if not reasons else "NOT_READY",
         "bounded_read_only": True,
@@ -71,23 +77,29 @@ def choose_model(mode: str, correlation_id: str) -> str:
     return MODEL_BY_MODE[mode]
 
 
-def _read_ledger(path: str) -> dict[str, Any]:
-    ledger = Path(path)
-    if not ledger.is_file():
-        return {"requests_used": 0}
-    return json.loads(ledger.read_text(encoding="utf-8"))
+def _reserve_request(collection: str, maximum: int) -> int:
+    if firestore is None:
+        raise RuntimeError("FIRESTORE_CLIENT_UNAVAILABLE")
+    client = firestore.Client()
+    document = client.collection(collection).document("pilot-quota")
+    transaction = client.transaction()
 
-
-def _reserve_request(path: str, maximum: int) -> int:
-    with _quota_lock:
-        data = _read_ledger(path)
+    @firestore.transactional
+    def reserve(current_transaction: Any) -> int:
+        snapshot = document.get(transaction=current_transaction)
+        data = snapshot.to_dict() if snapshot.exists else {}
         used = int(data.get("requests_used", 0))
         if used >= maximum:
             raise RuntimeError("PILOT_REQUEST_LIMIT_REACHED")
-        data["requests_used"] = used + 1
-        Path(path).parent.mkdir(parents=True, exist_ok=True)
-        Path(path).write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+        current_transaction.set(
+            document,
+            {"requests_used": used + 1, "max_requests": maximum},
+            merge=True,
+        )
         return used + 1
+
+    with _quota_lock:
+        return reserve(transaction)
 
 
 def _extract_text(response: dict[str, Any]) -> str:
@@ -122,7 +134,7 @@ def generate(payload: dict[str, Any]) -> dict[str, Any]:
     if state["status"] != "READY":
         raise RuntimeError("RUNTIME_NOT_READY")
     model = choose_model(mode, correlation_id)
-    request_number = _reserve_request(config["ledger"], config["max_requests"])
+    request_number = _reserve_request(config["firestore_collection"], config["max_requests"])
     prompt = {
         "question": question,
         "evidence": evidence,

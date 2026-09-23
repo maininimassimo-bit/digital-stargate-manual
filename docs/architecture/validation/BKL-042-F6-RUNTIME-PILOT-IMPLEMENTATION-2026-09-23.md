@@ -15,7 +15,7 @@ uses `store=false`; no browser-held key is supported.
 Activation is intentionally blocked until all runtime gates are satisfied:
 
 1. OpenAI API key provisioned to a dedicated Secret Manager secret;
-2. persistent quota ledger provisioned and monitored;
+2. Firestore quota ledger collection `bkl042-pilot-quota` provisioned and monitored;
 3. separate Cloud Run service deployment reviewed and approved;
 4. bounded live OAT performed without command or safety authority.
 

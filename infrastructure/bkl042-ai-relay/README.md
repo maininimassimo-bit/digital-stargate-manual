@@ -9,7 +9,7 @@ runtime before making an external request:
 
 - `BKL042_RUNTIME_ENABLED=true`;
 - `OPENAI_API_KEY` injected from a secret manager, never from the browser or repository;
-- `BKL042_QUOTA_LEDGER_PATH` pointing to a persistent quota ledger.
+- `BKL042_FIRESTORE_COLLECTION=bkl042-pilot-quota` naming the persistent quota collection.
 
 The pilot limit defaults to 100 requests. The intended usage mix is 80% Luna
 triage, 18% Sol consultative analysis, and 2% Astra escalation, selected by the
