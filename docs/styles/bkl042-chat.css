@@ -67,7 +67,7 @@
   font-weight: 750;
 }
 
-.dsg-bkl042-chat__controls select {
+.dsg-bkl042-chat__controls textarea {
   width: 100%;
   min-height: 2.8rem;
   padding: .65rem .8rem;
@@ -76,9 +76,10 @@
   background: var(--md-default-bg-color);
   color: var(--chat-text);
   font: inherit;
+  resize: vertical;
 }
 
-.dsg-bkl042-chat__controls select:focus-visible,
+.dsg-bkl042-chat__controls textarea:focus-visible,
 .dsg-bkl042-chat__live:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--md-accent-fg-color) 55%, transparent);
   outline-offset: 2px;
