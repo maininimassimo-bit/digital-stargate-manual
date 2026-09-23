@@ -2,7 +2,7 @@
 
 | Campo | Valore |
 |---|---|
-| Stato | Implementation candidate — review, deployment e owner OAT pending |
+| Stato | **DEPLOYED — owner-witnessed retrieval OAT pending; package remains open** |
 | Owner / accountable | Massimo Mainini |
 | Authority | bounded read-only; `command_authority=NONE`; `safety_authority=NONE` |
 | Provider | relay e selezione modello esistenti; nessuna nuova credenziale o provider |
@@ -10,6 +10,8 @@
 | Budget | ledger persistente e cap pilota preesistenti, applicati a ogni richiesta |
 | Runtime pre-deploy | `dsg-bkl042-ai-relay-00005-d97`, 100% traffic — read-only describe 23/09/2026 |
 | Rollback | riportare il traffico a `dsg-bkl042-ai-relay-00005-d97` |
+| Runtime post-deploy | `dsg-bkl042-ai-relay-00006-ktv`, 100% traffic — 23/09/2026 |
+| Portal ingress | `dsg-bkl042-portal-gateway-00002-m7c`, readiness `READY` |
 
 ## Scope
 
@@ -62,8 +64,19 @@ fonti e la domanda sono trattati come dati non fidati, non come istruzioni.
 
 ## Verification record
 
-La review locale deve includere test unitari offline per allowlist/privacy e fail-closed,
-verifica del contratto browser/gateway, build strict del portale e CI exact-head. Il
-riscontro read-only delle tre risorse pubbliche va registrato senza stampare i record.
-L'esito provider OAT richiede l'owner: l'assistente non simula né attribuisce tale
-testimonianza.
+Test unitari Python 7/7, compilazione Python, JavaScript syntax, BKL-042 contract verifier,
+runtime dry-run, roadmap consistency, MkDocs strict e tutti i workflow exact-head e
+post-merge applicabili hanno esito PASS. Il riscontro GET read-only ha confermato le tre
+risorse pubbliche disponibili, digest acquisiti e citazioni sul dominio Pages; nessun
+record è stato stampato.
+
+Il deployment sul servizio esistente ha creato la revisione `00006-ktv` con 100% del
+traffico. Il gateway conserva la revisione `00002-m7c`, punta al canonical service URL e
+`/health` restituisce `READY`; il relay rifiuta richieste non autenticate con HTTP `403`.
+La configurazione del secret resta vincolata a Secret Manager, senza leggere o stampare
+valori. La revisione `00005-d97` è disponibile per rollback. Nessuna richiesta autenticata
+al provider è stata eseguita dopo il deployment; quota invariata per questa verifica.
+
+Resta obbligatoria l'OAT autenticata post-deploy witnessed dall'owner. L'assistente non
+simula né attribuisce tale testimonianza; BKL-042 resta `In Progress` fino alla sua
+registrazione e alla valutazione esplicita della copertura residua delle fonti.
