@@ -26,6 +26,10 @@ Il contract è `schemas/bkl034-f2-image-archive-ingestion.schema.json`; la fixtu
 
 La relazione è `ImageAsset -> processingRun/workflowRef -> PixInsight evidence`. BKL-034-F2 non cattura né esegue workflow: consuma sidecar/provenance già governati da BKL-045 e, per la cattura nativa futura, da BKL-049. `PARTIAL` e `UNAVAILABLE` restano visibili e non vengono trasformati in assenza di processing.
 
+## Step successivo: storage boundary preflight
+
+`docs/architecture/packages/BKL-034-F2-Storage-Boundary-Preflight.md` definisce il dry-run eseguibile per validare una richiesta senza trasferire bytes o tentare scritture. Il preflight è il prerequisito per un futuro storage runtime.
+
 ## Gate storage reale
 
 Lo storage runtime deve essere un gate separato con quarantine, validazione MIME/magic bytes, limite dimensionale, checksum SHA-256, deduplicazione, antivirus, sanitizzazione EXIF, retention, ACL, audit e object immutability. GitHub Pages resta un consumer read-only e non riceve credenziali di scrittura.

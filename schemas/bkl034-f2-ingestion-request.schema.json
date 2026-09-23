@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.invalid/schemas/bkl034-f2-ingestion-request.schema.json",
+  "title": "BKL-034-F2 Governed Ingestion Preflight Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["requestId", "mode", "asset", "metadata", "securityPreflight"],
+  "properties": {
+    "requestId": {"type": "string", "pattern": "^ingest:[A-Za-z0-9._:-]+$"},
+    "mode": {"const": "DRY_RUN_PREFLIGHT"},
+    "asset": {"$ref": "#/$defs/asset"},
+    "metadata": {"$ref": "#/$defs/metadata"},
+    "securityPreflight": {"$ref": "#/$defs/security"}
+  },
+  "$defs": {
+    "asset": {
+      "type": "object", "additionalProperties": false,
+      "required": ["filename", "mediaType", "byteSize", "sha256"],
+      "properties": {
+        "filename": {"type": "string", "pattern": "^[A-Za-z0-9._-]{1,180}$"},
+        "mediaType": {"enum": ["image/x-xisf", "image/fits", "image/tiff", "image/png", "image/jpeg"]},
+        "byteSize": {"type": "integer", "minimum": 1, "maximum": 1099511627776},
+        "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "metadata": {
+      "type": "object", "additionalProperties": false,
+      "required": ["sessionRef", "targetRef", "metadataState", "workflowRefs"],
+      "properties": {
+        "sessionRef": {"type": "string", "pattern": "^session:[A-Za-z0-9._:-]+$"},
+        "targetRef": {"type": "string", "pattern": "^target:[A-Za-z0-9._:-]+$"},
+        "metadataState": {"enum": ["COMPLETE", "PARTIAL", "UNAVAILABLE"]},
+        "workflowRefs": {"type": "array", "maxItems": 16, "items": {"type": "string", "pattern": "^workflow:pixinsight:[A-Za-z0-9._:-]+$"}}
+      }
+    },
+    "security": {
+      "type": "object", "additionalProperties": false,
+      "required": ["mimeChecked", "magicBytesChecked", "malwareScanState", "exifPolicy", "writeAttempted"],
+      "properties": {
+        "mimeChecked": {"const": true},
+        "magicBytesChecked": {"const": true},
+        "malwareScanState": {"enum": ["PASS", "PENDING", "UNAVAILABLE"]},
+        "exifPolicy": {"enum": ["RETAIN_NON_SENSITIVE", "SANITIZE_BEFORE_PUBLISH", "UNAVAILABLE"]},
+        "writeAttempted": {"const": false}
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "requestId": "ingest:2026-08-15-m31-lrgb-preflight",
+  "mode": "DRY_RUN_PREFLIGHT",
+  "asset": {
+    "filename": "m31-lrgb.xisf",
+    "mediaType": "image/x-xisf",
+    "byteSize": 1843200,
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "metadata": {
+    "sessionRef": "session:2026-08-15_2026-08-16",
+    "targetRef": "target:M31",
+    "metadataState": "COMPLETE",
+    "workflowRefs": ["workflow:pixinsight:run-2026-08-15-m31-lrgb"]
+  },
+  "securityPreflight": {
+    "mimeChecked": true,
+    "magicBytesChecked": true,
+    "malwareScanState": "PASS",
+    "exifPolicy": "SANITIZE_BEFORE_PUBLISH",
+    "writeAttempted": false
+  }
+}

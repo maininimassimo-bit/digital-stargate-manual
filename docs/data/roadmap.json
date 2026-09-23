@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-23",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "a616391172644ac2ff69d68206ead2852791398c728f85b2a9d67ff2a8acc2ad",
+  "sourceDigest": "b7dafabe81250103e807d78e0d5e386427c6467d53730c2dbeec00148dd64a52",
   "authority": "DSG-RGM-001",
   "projectStatus": "BKL-034 is CLOSED / ACCEPTED / POST-MERGE VERIFIED for the bounded read-only portal consumer; BKL-034-F2 is ACTIVE for governed image ingestion and metadata archive contract design, with runtime storage still separately gated; AP-015 and BKL-033 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED for their explicitly design/contract-only scopes; RC2 baseline, AP-008 and BKL-036-F5 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED; EAGLE Health is live HEALTHY/100 with fail-closed policy; BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 production runtime unavailable; live source/transport and public runtime GO remain separately gated; no image mutation, processing execution, scheduling, automatic target selection, commands, remediation or Safety Authority is authorized; no scheduling, automatic target selection, commands or Safety Authority is authorized",
   "currentPackage": "BKL-034-F2",
   "nextMilestone": "BKL-034-F2",
-  "target": "Define BKL-034-F2 governed image ingestion and metadata archive with checksum, quarantine, provenance and PixInsight workflow relations; keep runtime storage, upload write authority, processing execution and Safety Authority separately gated. No scheduler, automatic target selection, device command or Safety Authority is authorized",
+  "target": "Complete BKL-034-F2 storage boundary preflight for governed image ingestion with checksum, quarantine, metadata completeness and PixInsight workflow relations; keep runtime storage, upload write authority, processing execution and Safety Authority separately gated. No scheduler, automatic target selection, device command or Safety Authority is authorized",
   "summary": {
     "total": 46,
     "completed": 42,
@@ -345,7 +345,7 @@
           "id": "BKL-034-F2",
           "title": "Governed Image Ingestion and Metadata Archive",
           "status": "active",
-          "note": "Current gate for checksum/object reference, quarantine, metadata completeness and PixInsight workflow relations. Contract/fixture/validator only; runtime storage and upload write authority remain separately gated."
+          "note": "Current gate for checksum/object reference, quarantine, metadata completeness, PixInsight workflow relations and dry-run storage preflight. Runtime storage and upload write authority remain separately gated."
         },
         {
           "id": "BKL-042",
@@ -377,7 +377,7 @@
       "title": "BKL-034-F2 Governed Image Ingestion and Metadata Archive",
       "date": "2026-09-23",
       "status": "active",
-      "description": "Contract gate for checksum, quarantine, metadata completeness and PixInsight workflow relations; runtime storage and upload write authority remain separate.",
+      "description": "Storage boundary preflight gate for checksum, quarantine, metadata completeness and PixInsight workflow relations; runtime storage and upload write authority remain separate.",
       "image": null
     },
     {
