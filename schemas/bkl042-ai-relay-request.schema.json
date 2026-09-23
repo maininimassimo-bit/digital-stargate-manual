@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BKL-042 bounded read-only AI relay request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["correlation_id", "question", "mode", "evidence", "citations"],
+  "properties": {
+    "correlation_id": {"type": "string", "minLength": 1, "maxLength": 200},
+    "question": {"type": "string", "minLength": 1, "maxLength": 12000},
+    "mode": {"enum": ["triage", "consultative", "escalation"]},
+    "evidence": {"type": "string", "maxLength": 12000},
+    "citations": {"type": "array", "maxItems": 20, "items": {"type": "string", "maxLength": 1000}}
+  }
+}
