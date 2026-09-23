@@ -1,10 +1,10 @@
+---
+title: Chat AI read-only
+---
+
 <link rel="stylesheet" href="../styles/bkl042-chat.css">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <script type="module" src="../javascripts/bkl042-chat.js"></script>
-
----
-title: BKL-042 · Chat AI read-only
----
 
 <section class="dsg-bkl042-chat" data-bkl042-chat>
   <div class="dsg-bkl042-chat__hero"><span>BKL-042 · F6 BOUNDED CHAT</span><h1>Consultazione verificabile</h1><p>Consumer read-only con citazioni e gateway Google autenticato.</p></div>
