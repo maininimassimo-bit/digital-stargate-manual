@@ -1,8 +1,8 @@
 # BKL-042 F1 — Observatory Assistant Source Discovery and Advisory Contract
 
-**Identifier:** BKL-042-F1  
-**Status:** Active / Owner-Authorized  
-**Owner / accountable:** Massimo Mainini  
+**Identifier:** BKL-042-F1
+**Status:** Active / Owner-Authorized
+**Owner / accountable:** Massimo Mainini
 **Mode:** Advisory-only, repository-bound, read-only
 
 ## Purpose
