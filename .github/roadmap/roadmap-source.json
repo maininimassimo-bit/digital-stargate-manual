@@ -900,7 +900,7 @@
       "title": "BKL-042-F7 Governed Retrieval Post-Deployment Acceptance",
       "date": "2026-09-23",
       "status": "active",
-      "description": "PR #355 (`b4d45c12`) introduced bounded server-side retrieval for public target identity and historical sessions. Owner OAT exposed compact/spaced target-designation mismatch; PR #357 (`7be9fd0b`) fixes normalization as method v2, now deployed to relay revision `00007-wrm` (rollback `00006-ktv`). Repeat owner-witnessed authenticated OAT and formal acceptance remain pending; full F1 source coverage is not claimed. Maintain bounded read-only authority and NONE command/safety authority.",
+      "description": "PR #355 (`b4d45c12`) introduced bounded server-side retrieval for public target identity and historical sessions. PR #357 (`7be9fd0b`) fixed compact/spaced designation matching as method v2, deployed to relay `00007-wrm` (rollback `00006-ktv`). Owner-witnessed live OAT PASS on 2026-09-24: ANSWERED with five M 27 historical-session citations; returned facts checked against the published projection; correlation `bkl042-pages-ad1e6d8b-499a-460e-a4ea-c6546a1ba419`. Formal bounded acceptance and owner decision whether to defer or expand residual F1 source coverage remain pending. Maintain bounded read-only authority and NONE command/safety authority.",
       "image": null
     },
     {
