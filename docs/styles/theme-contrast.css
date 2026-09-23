@@ -177,6 +177,22 @@
   background: var(--dsg-surface-muted);
 }
 
+/* Keep the current-package card visually aligned with its sibling cards. */
+.dsg-enterprise-home .dsg-live-card.dsg-live-card--primary {
+  border-color: var(--dsg-line);
+  background: var(--dsg-surface);
+  color: var(--dsg-text);
+}
+
+.dsg-enterprise-home .dsg-live-card.dsg-live-card--primary > span,
+.dsg-enterprise-home .dsg-live-card.dsg-live-card--primary a {
+  color: var(--dsg-blue);
+}
+
+.dsg-enterprise-home .dsg-live-card.dsg-live-card--primary p {
+  color: var(--dsg-text-muted);
+}
+
 /* The home hero keeps its dark photographic surface in both schemes.  These
  * scoped overrides outrank the light-theme markdown paragraph defaults while
  * preserving the existing dark-theme palette. */
