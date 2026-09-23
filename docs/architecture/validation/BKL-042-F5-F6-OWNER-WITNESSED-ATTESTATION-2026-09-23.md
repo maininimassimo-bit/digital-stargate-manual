@@ -3,7 +3,7 @@
 | Campo | Stato |
 |---|---|
 | Owner / accountable | Massimo Mainini |
-| Attestazione | **PENDING OWNER ACTION** |
+| Attestazione | **ACCEPTED — OWNER-WITNESSED** |
 | Baseline tecnica | `33c8217b` |
 | Scope | F5 bounded technical closure, F6 static consumer e runtime dry-run |
 | Provider / external traffic | None / not authorized |
@@ -32,8 +32,9 @@ Da compilare esclusivamente dall'owner dopo verifica del commit e delle evidenze
 |---|---|
 | Nome | Massimo Mainini |
 | Data/ora | |
-| Commit verificato | |
-| Note / condizioni | |
-| Firma o attestazione | |
+| Commit verificato | `52403dfb` |
+| Note / condizioni | F5/F6 bounded read-only accettati; provider e traffico esterno non autorizzati |
+| Firma o attestazione | Massimo Mainini — conferma registrata il 23/09/2026 |
 
-Fino alla compilazione, F5 formal closure e promozione F6 runtime restano `OPEN`.
+La formal acceptance bounded di F5/F6 è registrata. La promozione F6 runtime/provider
+resta un gate separato e `NOT_AUTHORIZED`.

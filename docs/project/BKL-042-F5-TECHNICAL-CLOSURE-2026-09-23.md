@@ -2,7 +2,7 @@
 
 | Campo | Valore |
 |---|---|
-| Stato | Technical closure prepared; formal acceptance open |
+| Stato | CLOSED / ACCEPTED / OWNER-WITNESSED — bounded technical scope |
 | Capability | Deterministic advisory/read-only bounded capability |
 | Evidence | `docs/data/bkl042-f5-real-evidence-evaluation.json` |
 | Authority | Human-only; action, command, execution and safety `NONE` |
@@ -18,8 +18,8 @@ La baseline F1–F4 è stata valutata con il report F5. Il risultato accettabile
 - `aiModelImplemented=false`;
 - closure recommendation: `CLOSE_DETERMINISTIC_CAPABILITY`.
 
-Questo record non dichiara una chiusura formale owner-witnessed: ARB, Release Quality e
-attestazione del owner devono ancora essere registrati su un head post-merge verificato.
+L'attestazione owner-witnessed è registrata sul baseline `52403dfb`. Le review ARB/RQ
+restano assistite e condizionali; non equivalgono ad approvazioni umane indipendenti.
 
 ## Limitazioni mantenute
 

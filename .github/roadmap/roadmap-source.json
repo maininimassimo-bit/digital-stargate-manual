@@ -5,7 +5,7 @@
   "projectStatus": "BKL-034-F2 is CLOSED / ACCEPTED / POST-MERGE VERIFIED for the bounded governed image-ingestion contract and dry-run storage preflight; runtime storage remains separately gated. BKL-042 is the current advisory/read-only successor. AP-015 and BKL-033 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED for their explicitly design/contract-only scopes; RC2 baseline, AP-008 and BKL-036-F5 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED; EAGLE Health is live HEALTHY/100 with fail-closed policy; BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 production runtime unavailable; live source/transport and public runtime GO remain separately gated; no image mutation, processing execution, scheduling, automatic target selection, commands, remediation or Safety Authority is authorized; no scheduling, automatic target selection, commands or Safety Authority is authorized",
   "currentPackage": "BKL-042",
   "nextMilestone": "BKL-042",
-  "target": "Complete formal governance acceptance of BKL-042-F5 technical closure, then proceed with BKL-042-F6 read-only AI chat integration with citations and provenance; retain model/provider execution, runtime storage, upload authority and processing execution as separately gated capabilities. No scheduler, automatic target selection, device command or Safety Authority is authorized",
+  "target": "Advance BKL-042-F6 only through separately governed provider/runtime readiness review; retain model/provider execution, runtime storage, upload authority and processing execution as separately gated capabilities. No scheduler, automatic target selection, device command or Safety Authority is authorized",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -875,8 +875,8 @@
       "itemRef": "BKL-042",
       "title": "BKL-042-F5 Real-Evidence Advisory Validation and Closure",
       "date": "2026-09-23",
-      "status": "active",
-      "description": "Technical evaluation prepared: F3/F4 deterministic read-only gates pass, current real advisory evidence remains NOT_EVALUABLE_CURRENT_EVIDENCE, and formal ARB/RQ/owner acceptance is still required. No provider action, tool execution or Safety Authority is authorized.",
+      "status": "completed",
+      "description": "F3/F4 deterministic read-only gates pass; current real advisory evidence remains NOT_EVALUABLE_CURRENT_EVIDENCE. Owner-witnessed bounded acceptance is recorded on baseline 52403dfb; no provider action, tool execution or Safety Authority is authorized.",
       "image": null
     },
     {
@@ -885,7 +885,7 @@
       "title": "BKL-042-F6 Read-Only AI Chat Integration",
       "date": "2026-09-23",
       "status": "active",
-      "description": "F6 contract and static bounded chat consumer are prepared with governed citations and provenance for diagnosis, RCA, planning and science. Runtime model/provider, retrieval, automatic acceptance, tool execution, PixInsight apply, command, remediation, scheduler and Safety Authority remain separately gated.",
+      "description": "F6 contract and static bounded chat consumer are owner-accepted with governed citations and provenance for diagnosis, RCA, planning and science. Runtime model/provider, retrieval, automatic acceptance, tool execution, PixInsight apply, command, remediation, scheduler and Safety Authority remain separately gated.",
       "image": null
     }
   ]

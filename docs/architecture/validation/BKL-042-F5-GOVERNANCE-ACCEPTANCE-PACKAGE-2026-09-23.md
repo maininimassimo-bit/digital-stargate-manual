@@ -5,8 +5,8 @@
 | Technical evaluation | PASS with limitations | `docs/data/bkl042-f5-real-evidence-evaluation.json` |
 | ARB review | Conditional / AI-assisted | `docs/architecture/reviews/ARB-BKL042-F5-TECHNICAL-CLOSURE-2026-09-23.md` |
 | Release Quality | Conditionally ready / AI-assisted | `docs/architecture/reviews/RQ-BKL042-F5-TECHNICAL-CLOSURE-2026-09-23.md` |
-| Owner-witnessed acceptance | OPEN | Attestation non ancora registrata |
-| Formal closure | OPEN | Dipende dall'attestazione owner-witnessed |
+| Owner-witnessed acceptance | ACCEPTED | `BKL-042-F5-F6-OWNER-WITNESSED-ATTESTATION-2026-09-23.md` |
+| Formal bounded closure | ACCEPTED WITH LIMITATIONS | Runtime/provider resta separato |
 
 ## Boundary
 
@@ -16,6 +16,6 @@ PixInsight apply, command path, remediation, scheduler o Safety Authority.
 
 ## Decisione proposta
 
-Accettare F5 come `ACCEPTED_READ_ONLY_WITH_LIMITATIONS` solo dopo la registrazione
-dell'attestazione owner-witnessed sul commit post-merge. Mantenere nel frattempo F5 in
-stato governance open e F6 in stato planned.
+F5 è accettata come `ACCEPTED_READ_ONLY_WITH_LIMITATIONS` sul baseline attestato. F6 è
+accettata limitatamente a contratto, fixture e consumer statico bounded. Runtime/provider
+resta `NOT_AUTHORIZED`.
