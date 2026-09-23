@@ -1,6 +1,6 @@
 # BKL-042 F6 — private runtime deployment evidence
 
-Status: **DEPLOYED PRIVATE — PROVIDER OAT NOT EXECUTED**
+Status: **DEPLOYED PRIVATE — PROVIDER OAT BLOCKED BY API CREDIT**
 
 Owner/accountable: Massimo Mainini  
 Project: `digital-stargate-telemetry`  
@@ -21,8 +21,13 @@ Revision: `dsg-bkl042-ai-relay-00002-hq5`
 - `command_authority=NONE`;
 - `safety_authority=NONE`;
 - `runtime_event_published=false` remains enforced by the response contract.
+- quota ledger after controlled attempts: `2/100`;
+- provider response: `credit_balance_exhausted`;
+- runtime subsequently set to `BKL042_RUNTIME_ENABLED=false` and is fail-closed.
 
-No request was sent to `/v1/bkl042-chat`; no provider inference, portal traffic,
-retrieval, command, scheduling, remediation or Safety Authority action was
-executed. The public GitHub Pages consumer remains separately gated because it
-does not yet have an approved authenticated ingress to the private relay.
+Two owner-authenticated OAT attempts reached `/v1/bkl042-chat` and were rejected
+before a successful answer because the OpenAI API project has no available
+credit. No successful provider inference, portal traffic, retrieval, command,
+scheduling, remediation or Safety Authority action was executed. The public
+GitHub Pages consumer remains separately gated because it does not yet have an
+approved authenticated ingress to the private relay.

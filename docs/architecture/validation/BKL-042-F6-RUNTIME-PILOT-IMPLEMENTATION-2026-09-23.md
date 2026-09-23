@@ -21,5 +21,6 @@ Activation is intentionally blocked until all runtime gates are satisfied:
 
 The private relay deployment is recorded in
 `BKL-042-F6-RUNTIME-PRIVATE-DEPLOYMENT-EVIDENCE-2026-09-23.md`. The public
-portal ingress and provider OAT remain separately gated; no provider inference
-request has been made.
+portal ingress and provider OAT remain separately gated. The first controlled
+OAT was rejected by the provider with `credit_balance_exhausted`; runtime was
+then disabled again to preserve the fail-closed boundary.
