@@ -1,6 +1,6 @@
 # BKL-042 F6 — runtime pilot implementation
 
-Status: **IMPLEMENTED — NOT ACTIVATED**
+Status: **IMPLEMENTED — PRIVATE DEPLOYMENT READY — PROVIDER OAT NOT EXECUTED**
 
 The bounded server-side adapter is prepared under
 `infrastructure/bkl042-ai-relay/`. It is separate from the observability
@@ -19,5 +19,7 @@ Activation is intentionally blocked until all runtime gates are satisfied:
 3. separate Cloud Run service deployment reviewed and approved;
 4. bounded live OAT performed without command or safety authority.
 
-At this baseline, the GCP project contains the telemetry ingest secret only and
-no OpenAI key. No Cloud Run deployment or external provider request was made.
+The private relay deployment is recorded in
+`BKL-042-F6-RUNTIME-PRIVATE-DEPLOYMENT-EVIDENCE-2026-09-23.md`. The public
+portal ingress and provider OAT remain separately gated; no provider inference
+request has been made.
