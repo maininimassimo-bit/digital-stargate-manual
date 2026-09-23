@@ -4,14 +4,14 @@
 
 > **Hosted telemetry pilot.** Il browser tenta prima il relay HTTPS governato su Google Cloud Run e non contiene credenziali di ingest. Se il relay non è raggiungibile, usa la projection statica del portale solo come fallback; freshness e stato `UNKNOWN` continuano a essere applicati lato browser.
 
-<div class="dsg-kpi-grid">
+<div class="dsg-kpi-grid dsg-status-kpi-grid">
 <div class="dsg-kpi"><span class="dsg-kpi__label">Qualità telemetria</span><span class="dsg-kpi__value" data-observatory-status="quality">🟡 UNKNOWN</span><span class="dsg-kpi__detail">Rilevazione: <span data-observatory-status="observed-at">—</span> · sorgente: <span data-observatory-status="source">—</span> · trasporto: <span data-observatory-status="transport">—</span></span></div>
 <div class="dsg-kpi"><span class="dsg-kpi__label">Safety osservata</span><span class="dsg-kpi__value" data-observatory-status="safety-state">🟡 UNKNOWN</span><span class="dsg-kpi__detail" data-observatory-status="safety-detail">Telemetria N.I.N.A., non autorità safety</span></div>
 <div class="dsg-kpi"><span class="dsg-kpi__label">Meteo disponibile</span><span class="dsg-kpi__value" data-observatory-status="weather-state">🟡 UNKNOWN</span><span class="dsg-kpi__detail">Disponibilità della telemetria meteo N.I.N.A.</span></div>
 <div class="dsg-kpi"><span class="dsg-kpi__label">Cupola osservata</span><span class="dsg-kpi__value" data-observatory-status="dome-state">🟡 UNKNOWN</span><span class="dsg-kpi__detail" data-observatory-status="dome-detail">Shutter: —</span></div>
 <div class="dsg-kpi"><span class="dsg-kpi__label">Montatura osservata</span><span class="dsg-kpi__value" data-observatory-status="mount-state">🟡 UNKNOWN</span><span class="dsg-kpi__detail" data-observatory-status="mount-detail">parked: — · tracking: —</span></div>
 <div class="dsg-kpi"><span class="dsg-kpi__label">Camera osservata</span><span class="dsg-kpi__value" data-observatory-status="camera-state">🟡 UNKNOWN</span><span class="dsg-kpi__detail" data-observatory-status="camera-detail">cooler: — · temperatura: —</span></div>
-<div class="dsg-kpi"><span class="dsg-kpi__label">Alimentazione osservata</span><span class="dsg-kpi__value" data-observatory-status="power-state">🟡 UNKNOWN</span><span class="dsg-kpi__detail" data-observatory-status="power-detail">Rete 12 V J6: — · fault: —</span></div>
+<div class="dsg-kpi"><span class="dsg-kpi__label">PWR</span><span class="dsg-kpi__value" data-observatory-status="power-state">🟡 UNKNOWN</span><span class="dsg-kpi__detail" data-observatory-status="power-detail">Rete 12 V J6: — · fault: —</span></div>
 <div class="dsg-kpi"><span class="dsg-kpi__label">Rete osservata</span><span class="dsg-kpi__value" data-observatory-status="network-state">🟡 UNKNOWN</span><span class="dsg-kpi__detail" data-observatory-status="network-detail">Telemetria Network N.I.N.A. non ancora disponibile</span></div>
 </div>
 

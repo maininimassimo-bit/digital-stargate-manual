@@ -551,6 +551,21 @@
   opacity: 0.7;
 }
 
+/* Keep live status indicators and their complete values together. */
+.dsg-status-kpi-grid .dsg-kpi {
+  min-width: 0;
+}
+
+.dsg-status-kpi-grid .dsg-kpi__value {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  max-width: 100%;
+  font-size: clamp(0.78rem, 1.25vw, 1rem);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
 /* Tema scuro */
 
 [data-md-color-scheme="slate"] {
