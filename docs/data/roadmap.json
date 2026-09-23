@@ -2,18 +2,18 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-23",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "5c46f2c77244a6b5c3b778223c73ba249bbdb926b37f8f407739cdecb4c2a13f",
+  "sourceDigest": "d3189af9a3b9ee333e38234aff64975d1e53560da8ce1468ec7de72879da20bc",
   "authority": "DSG-RGM-001",
   "projectStatus": "BKL-034-F2 is CLOSED / ACCEPTED / POST-MERGE VERIFIED for the bounded governed image-ingestion contract and dry-run storage preflight; runtime storage remains separately gated. BKL-042 is the current advisory/read-only successor. AP-015 and BKL-033 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED for their explicitly design/contract-only scopes; RC2 baseline, AP-008 and BKL-036-F5 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED; EAGLE Health is live HEALTHY/100 with fail-closed policy; BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 production runtime unavailable; live source/transport and public runtime GO remain separately gated; no image mutation, processing execution, scheduling, automatic target selection, commands, remediation or Safety Authority is authorized; no scheduling, automatic target selection, commands or Safety Authority is authorized",
   "currentPackage": "BKL-042",
   "nextMilestone": "BKL-042",
   "target": "BKL-042-F6 formal bounded acceptance is complete after the owner-witnessed authenticated GitHub Pages OAT. The bounded server-side pilot relay and Google OAuth gateway are deployed and health-verified. The next gate is a separately authorized retrieval/provenance runtime increment. Runtime storage/upload, processing execution, scheduler, automatic target selection, device command and Safety Authority remain separately gated capabilities. No scheduler, automatic target selection, device command or Safety Authority is authorized.",
   "summary": {
-    "total": 46,
+    "total": 47,
     "completed": 42,
     "active": 2,
-    "planned": 2,
-    "percentCompleted": 91
+    "planned": 3,
+    "percentCompleted": 89
   },
   "evidenceSummary": {
     "sources": 8,
@@ -357,6 +357,12 @@
           "id": "BKL-043",
           "title": "Observatory Reliability Engineering",
           "status": "planned"
+        },
+        {
+          "id": "BKL-050",
+          "title": "Final Portal Quality and Accessibility Acceptance",
+          "status": "planned",
+          "note": "Owner-approved 2026-09-23 portal audit and intervention plan. This is the final roadmap milestone to complete, after BKL-042, BKL-043, BKL-049 and any other approved open roadmap work. Scope: availability and security headers; dynamic-data freshness and consistency; Core Web Vitals; WCAG 2.2 AA and light/dark contrast; applicable European Accessibility Act assessment and downloadable documents; cross-device/browser and UX; robots, sitemap, metadata and links. No command, remediation or Safety Authority is introduced. Plan: docs/project/BKL-050-FINAL-PORTAL-QUALITY-MILESTONE-2026-09-23.md."
         }
       ]
     }
@@ -1023,6 +1029,13 @@
       "status": "completed",
       "description": "F6 bounded contract, static chat consumer and runtime adapter dry-run are CLOSED/ACCEPTED on owner-verified baseline 52403dfb. Runtime model/provider, retrieval, automatic acceptance, tool execution, PixInsight apply, command, remediation, scheduler and Safety Authority remain separately gated.",
       "image": null
+    },
+    {
+      "id": "M-BKL050-FINAL-PORTAL-QUALITY",
+      "itemRef": "BKL-050",
+      "title": "Final Portal Quality and Accessibility Acceptance",
+      "status": "planned",
+      "description": "Owner-approved final milestone, to be completed last after all other approved roadmap work. Execute the portal audit intervention plan across security, availability, dynamic data, Core Web Vitals, WCAG AA and contrast in both themes, applicable EAA scope and downloadable documents, desktop/tablet/mobile and browsers, UX, SEO and links. Close only with repeatable evidence and owner acceptance; preserve bounded read-only authority."
     }
   ]
 }

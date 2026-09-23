@@ -69,6 +69,7 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-049 | P2 | PixInsight Native Workflow Capture Module | Planned | BKL-045, BKL-044, AP-013/AP-014, verifica SDK/PCL | Modulo PCL nativo end-to-end per cattura automatica, journal locale, export governato e archivio workflow read-only nel portale | Planning package only; implementazione non avviata; `docs/architecture/assessments/BKL-049-PixInsight-Native-Workflow-Capture-Module-Plan.md` |
 | BKL-046 | P2 | AI Post-Processing Assistant for PixInsight | Done | BKL-015/BKL-044/BKL-045 | Assistente advisory per ottimizzare workflow PixInsight | F1-F5 CLOSED/ACCEPTED as deterministic read-only capability; PR #181 merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`; 7/7 post-merge workflows and live Pages verified; closure `docs/project/BKL-046-CLOSURE-2026-09-13.md`; scientific effectiveness NOT_EVALUABLE, production NOT_READY, `aiModelImplemented=false` |
 | BKL-047 | P1 | AP-013C Verified Transport Cleanup & Convergence Monitoring | Done | AP-013B COPY_ONLY OAT | DRY_RUN/NO_DELETE lifecycle evidence, ACK convergence e fail-closed classification accepted | AP-013C; C8 productive cleanup excluded |
+| BKL-050 | P2 | Final Portal Quality and Accessibility Acceptance | Planned | Completamento di BKL-042, BKL-043, BKL-049 e di ogni altra attività aperta approvata in roadmap; evidenze audit 23/09/2026 | Milestone conclusiva: sicurezza e disponibilità, dati dinamici, Core Web Vitals, WCAG AA e contrasti chiaro/scuro, applicabilità EAA e documenti, device/browser e UX, SEO e link verificati con criteri di accettazione ripetibili | Piano approvato da Massimo Mainini il 23/09/2026; `docs/project/BKL-050-FINAL-PORTAL-QUALITY-MILESTONE-2026-09-23.md`; `M-BKL050-FINAL-PORTAL-QUALITY` |
 
 ### Reconciliation note — 10/09/2026
 
@@ -149,6 +150,8 @@ Completed baseline through BKL-037
   -> BKL-042 AI Observatory Assistant
   -> BKL-043 Reliability Engineering
   -> BKL-014 / AP-015 Scientific Knowledge Platform
+  -> BKL-049 PixInsight Native Workflow Capture Module [PLANNED]
+  -> BKL-050 Final Portal Quality and Accessibility Acceptance [FINAL MILESTONE; PLANNED]
 ```
 
 ## 5. Criteri di priorità
