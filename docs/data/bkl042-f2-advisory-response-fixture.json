@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0",
+  "contractType": "BKL042_F2_ADVISORY_RESPONSE_FIXTURE",
+  "fixtureId": "BKL-042-F2-SYNTHETIC-001",
+  "fixtureMode": "BOUNDED_SYNTHETIC_FIXTURE",
+  "generatedAt": "2026-09-23T20:00:00Z",
+  "cases": [
+    {
+      "caseId": "CASE-CURRENT-CITATION-001",
+      "request": "Quale evidenza governata è disponibile per questa sessione?",
+      "sources": [{"sourceId": "SRC-BKL034-001", "sourceRef": "docs/data/bkl034-scientific-image-gallery-fixture.json", "authority": "projection", "lifecycle": "CURRENT", "freshness": "CURRENT", "completeness": "COMPLETE", "citationRef": "docs/project/BKL-034-CLOSURE-2026-09-23.md", "limitations": ["Projection descrittiva/read-only."]}],
+      "response": {"state": "ANSWERED", "facts": ["La projection collega asset, sessione, target e provenance."], "evidenceRefs": ["SRC-BKL034-001"], "inference": "La relazione è utilizzabile come contesto advisory, non come autorità operativa.", "recommendations": ["Verificare la fonte citata prima di ogni decisione umana."], "limitations": ["Nessuna esecuzione o apply è dimostrata."]},
+      "humanDisposition": {"state": "NOT_PRESENTED", "actorRef": null, "executionState": "NOT_OBSERVED", "actionAuthority": "NONE"}
+    },
+    {
+      "caseId": "CASE-UNAVAILABLE-FAIL-CLOSED-001",
+      "request": "Suggerisci un'azione subject-specific nonostante la provenance mancante.",
+      "sources": [{"sourceId": "SRC-BKL045-UNAVAILABLE", "sourceRef": "docs/project/BKL-045-CLOSURE-2026-09-10.md", "authority": "processing_evidence", "lifecycle": "UNAVAILABLE", "freshness": "UNKNOWN", "completeness": "UNAVAILABLE", "citationRef": "docs/architecture/scientific-assets/BKL-045-F1-PixInsight-Workflow-Provenance-Source-Discovery-and-Semantic-Contract.md", "limitations": ["La history completa PixInsight non è disponibile."]}],
+      "response": {"state": "INSUFFICIENT_EVIDENCE", "facts": [], "evidenceRefs": ["SRC-BKL045-UNAVAILABLE"], "inference": "Non è possibile sostenere un consiglio subject-specific.", "recommendations": [], "limitations": ["Non ricostruire i passaggi mancanti e richiedere review manuale."]},
+      "humanDisposition": {"state": "DEFERRED", "actorRef": "ACTOR-SYNTHETIC-HUMAN-001", "executionState": "NOT_OBSERVED", "actionAuthority": "NONE"}
+    }
+  ],
+  "authority": {"consumerMode": "READ_ONLY", "advisoryOnly": true, "citationRequired": true, "actionAuthority": "NONE", "commandAuthority": "NONE", "executionAuthority": "NONE", "safetyAuthority": "NONE", "automaticAcceptance": false},
+  "limitations": ["Fixture sintetica bounded: non è output di modello, evidenza scientifica o esecuzione PixInsight.", "Nessun provider, upload, tool execution o automatic acceptance è autorizzato."],
+  "artifactDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

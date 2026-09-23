@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maininimassimo-bit.github.io/digital-stargate-manual/schemas/bkl042-f2-advisory-response.schema.json",
+  "title": "BKL-042 F2 Governed Advisory Response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "contractType", "fixtureId", "fixtureMode", "generatedAt", "cases", "authority", "limitations", "artifactDigest"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "contractType": {"const": "BKL042_F2_ADVISORY_RESPONSE_FIXTURE"},
+    "fixtureId": {"type": "string", "pattern": "^[A-Za-z0-9._:-]+$"},
+    "fixtureMode": {"const": "BOUNDED_SYNTHETIC_FIXTURE"},
+    "generatedAt": {"type": "string", "format": "date-time"},
+    "cases": {"type": "array", "minItems": 2, "maxItems": 8, "items": {"$ref": "#/$defs/case"}},
+    "authority": {"$ref": "#/$defs/authority"},
+    "limitations": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "artifactDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9._:-]+$"},
+    "refArray": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+    "source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["sourceId", "sourceRef", "authority", "lifecycle", "freshness", "completeness", "citationRef", "limitations"],
+      "properties": {
+        "sourceId": {"$ref": "#/$defs/id"}, "sourceRef": {"type": "string", "minLength": 1},
+        "authority": {"enum": ["repository_authority", "projection", "processing_evidence", "archive_projection", "advisory_projection"]},
+        "lifecycle": {"enum": ["CURRENT", "STALE", "UNKNOWN", "UNAVAILABLE", "CONFLICT"]},
+        "freshness": {"enum": ["CURRENT", "STALE", "NOT_APPLICABLE", "UNKNOWN"]},
+        "completeness": {"enum": ["COMPLETE", "PARTIAL", "UNAVAILABLE"]},
+        "citationRef": {"type": "string", "minLength": 1}, "limitations": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "case": {
+      "type": "object", "additionalProperties": false,
+      "required": ["caseId", "request", "sources", "response", "humanDisposition"],
+      "properties": {
+        "caseId": {"$ref": "#/$defs/id"}, "request": {"type": "string", "minLength": 1},
+        "sources": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/source"}},
+        "response": {
+          "type": "object", "additionalProperties": false,
+          "required": ["state", "facts", "evidenceRefs", "inference", "recommendations", "limitations"],
+          "properties": {
+            "state": {"enum": ["ANSWERED", "INSUFFICIENT_EVIDENCE", "CONFLICT_REQUIRES_REVIEW", "REFUSED_BOUNDARY"]},
+            "facts": {"type": "array", "items": {"type": "string"}},
+            "evidenceRefs": {"$ref": "#/$defs/refArray"}, "inference": {"type": "string"},
+            "recommendations": {"type": "array", "items": {"type": "string"}},
+            "limitations": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+          }
+        },
+        "humanDisposition": {
+          "type": "object", "additionalProperties": false,
+          "required": ["state", "actorRef", "executionState", "actionAuthority"],
+          "properties": {
+            "state": {"enum": ["NOT_PRESENTED", "DEFERRED", "REJECTED", "ACCEPTED_FOR_MANUAL_REVIEW"]},
+            "actorRef": {"type": ["string", "null"]}, "executionState": {"const": "NOT_OBSERVED"}, "actionAuthority": {"const": "NONE"}
+          }
+        }
+      }
+    },
+    "authority": {
+      "type": "object", "additionalProperties": false,
+      "required": ["consumerMode", "advisoryOnly", "citationRequired", "actionAuthority", "commandAuthority", "executionAuthority", "safetyAuthority", "automaticAcceptance"],
+      "properties": {
+        "consumerMode": {"const": "READ_ONLY"}, "advisoryOnly": {"const": true}, "citationRequired": {"const": true},
+        "actionAuthority": {"const": "NONE"}, "commandAuthority": {"const": "NONE"}, "executionAuthority": {"const": "NONE"},
+        "safetyAuthority": {"const": "NONE"}, "automaticAcceptance": {"const": false}
+      }
+    }
+  }
+}

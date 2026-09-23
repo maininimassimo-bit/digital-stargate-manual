@@ -102,6 +102,7 @@ jobs:
       - { name: Verify BKL-034 Scientific Image Gallery contract, run: node .github/scripts/verify-bkl034-scientific-image-gallery.mjs }
       - { name: Verify BKL-034-F2 image archive contract, run: node .github/scripts/verify-bkl034-f2-image-archive.mjs }
       - { name: Verify BKL-034-F2 ingestion preflight, run: node .github/scripts/verify-bkl034-f2-ingestion-preflight.mjs }
+      - { name: Verify BKL-042-F2 advisory response contract, run: node .github/scripts/verify-bkl042-f2-advisory-response.mjs }
       - { name: Verify knowledge graph projection, run: node .github/scripts/verify-knowledge-graph.mjs }
       - { name: Verify knowledge graph coverage, run: node .github/scripts/verify-knowledge-graph-coverage.mjs }
       - { name: Verify knowledge graph material relations, run: node .github/scripts/verify-knowledge-graph-material-relations.mjs }
