@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-23",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "a69481add162e2a4d882786b9bece59a394079ed02ce2edc53d300638a18e9bc",
+  "sourceDigest": "218af0f5a2611aac8766c910da9ebdec7021a2bcd548982924168c1afb4b1a62",
   "authority": "DSG-RGM-001",
   "projectStatus": "BKL-034-F2 is CLOSED / ACCEPTED / POST-MERGE VERIFIED for the bounded governed image-ingestion contract and dry-run storage preflight; runtime storage remains separately gated. BKL-042 is the current advisory/read-only successor. AP-015 and BKL-033 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED for their explicitly design/contract-only scopes; RC2 baseline, AP-008 and BKL-036-F5 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED; EAGLE Health is live HEALTHY/100 with fail-closed policy; BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 production runtime unavailable; live source/transport and public runtime GO remain separately gated; no image mutation, processing execution, scheduling, automatic target selection, commands, remediation or Safety Authority is authorized; no scheduling, automatic target selection, commands or Safety Authority is authorized",
   "currentPackage": "BKL-042",
   "nextMilestone": "BKL-042",
-  "target": "Complete BKL-042-F5 real-evidence advisory validation and closure, then plan BKL-042-F6 read-only AI chat integration with citations and provenance; retain model/provider execution, runtime storage, upload authority and processing execution as separately gated capabilities. No scheduler, automatic target selection, device command or Safety Authority is authorized",
+  "target": "Complete formal governance acceptance of BKL-042-F5 technical closure, then proceed with BKL-042-F6 read-only AI chat integration with citations and provenance; retain model/provider execution, runtime storage, upload authority and processing execution as separately gated capabilities. No scheduler, automatic target selection, device command or Safety Authority is authorized",
   "summary": {
     "total": 46,
     "completed": 43,
@@ -351,7 +351,7 @@
           "id": "BKL-042",
           "title": "AI Observatory Assistant",
           "status": "active",
-          "note": "Current governed successor after BKL-034 portal acceptance. F1-F4 are established; F5 real-evidence advisory validation is next and F6 read-only AI chat integration is planned. Bounded synthetic citation/provenance projection only until F5/F6 gates pass; automatic apply, model/provider execution, command and Safety Authority remain excluded."
+          "note": "Current governed successor after BKL-034 portal acceptance. F1-F4 are established and the F5 technical evaluation is prepared with real-evidence limitation; formal ARB/RQ/owner acceptance remains open. F6 read-only AI chat integration is the next implementation increment. Bounded synthetic citation/provenance projection only until the gates pass; automatic apply, model/provider execution, command and Safety Authority remain excluded."
         },
         {
           "id": "BKL-043",
@@ -1012,7 +1012,7 @@
       "title": "BKL-042-F5 Real-Evidence Advisory Validation and Closure",
       "date": "2026-09-23",
       "status": "active",
-      "description": "Next gate: validate advisory behavior against real, cited evidence where available; retain NOT_EVALUABLE_CURRENT_EVIDENCE and fail-closed limitations when evidence is insufficient. No provider action, tool execution or Safety Authority is authorized.",
+      "description": "Technical evaluation prepared: F3/F4 deterministic read-only gates pass, current real advisory evidence remains NOT_EVALUABLE_CURRENT_EVIDENCE, and formal ARB/RQ/owner acceptance is still required. No provider action, tool execution or Safety Authority is authorized.",
       "image": null
     },
     {
