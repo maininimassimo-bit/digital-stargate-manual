@@ -215,6 +215,7 @@ def render_dashboard(model: DashboardModel) -> str:
   <section class="dsg-section dsg-card">
     <h2>Trend mensile</h2>
     <p class="dsg-section-intro">Le barre indicano le ore di integrazione; la linea rappresenta l'efficienza mensile. Sotto ogni mese sono riportati sessioni e RMS.</p>
+    <div class="dsg-chart-legend" aria-label="Legenda del trend mensile"><span><i aria-hidden="true"></i>Ore di integrazione</span><span><i class="is-line" aria-hidden="true"></i>Efficienza mensile</span></div>
     <div class="dsg-chart">{core.build_monthly_chart(model.monthly)}</div>
   </section>
 

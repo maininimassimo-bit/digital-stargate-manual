@@ -28,6 +28,92 @@
   box-shadow: 0 0 .7rem color-mix(in srgb, var(--md-accent-fg-color) 70%, transparent);
 }
 
+/* Monthly trend chart: explicit accessible colors for both light and dark themes. */
+.dsg-dashboard .dsg-chart {
+  overflow-x: auto;
+  padding: 1rem;
+  border: 1px solid var(--dsg-line);
+  border-radius: var(--dsg-radius-md);
+  background: var(--dsg-surface-muted);
+}
+
+.dsg-dashboard .dsg-chart svg {
+  display: block;
+  width: 100%;
+  min-width: 760px;
+  height: auto;
+}
+
+.dsg-dashboard .dsg-chart .axis {
+  stroke: var(--dsg-line-strong);
+  stroke-width: 1.5;
+}
+
+.dsg-dashboard .dsg-chart .grid {
+  stroke: var(--dsg-line);
+  stroke-dasharray: 4 5;
+}
+
+.dsg-dashboard .dsg-chart .bar {
+  fill: var(--dsg-blue);
+  opacity: .92;
+}
+
+.dsg-dashboard .dsg-chart .efficiency-line {
+  fill: none;
+  stroke: var(--dsg-amber);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dsg-dashboard .dsg-chart .efficiency-point {
+  fill: var(--dsg-amber);
+  stroke: var(--dsg-surface);
+  stroke-width: 3;
+}
+
+.dsg-dashboard .dsg-chart .tick,
+.dsg-dashboard .dsg-chart .xlabel,
+.dsg-dashboard .dsg-chart .subvalue {
+  fill: var(--dsg-text-muted);
+}
+
+.dsg-dashboard .dsg-chart .value {
+  fill: var(--dsg-text);
+  font-weight: 800;
+}
+
+.dsg-dashboard .dsg-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .9rem 1.4rem;
+  margin: -.45rem 0 1rem;
+  color: var(--dsg-text-muted);
+  font-size: .82rem;
+}
+
+.dsg-dashboard .dsg-chart-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+}
+
+.dsg-dashboard .dsg-chart-legend i {
+  display: inline-block;
+  width: .8rem;
+  height: .8rem;
+  border-radius: .2rem;
+  background: var(--dsg-blue);
+}
+
+.dsg-dashboard .dsg-chart-legend i.is-line {
+  width: 1.1rem;
+  height: .22rem;
+  border-radius: 999px;
+  background: var(--dsg-amber);
+}
+
 .dsg-analytics-frame {
   display: block;
   width: 100%;
