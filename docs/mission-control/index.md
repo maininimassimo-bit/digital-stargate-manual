@@ -13,6 +13,7 @@
   <div class="dsg-mission-actions">
     <a href="../scientific-session-catalog/">Session Explorer</a>
     <a href="../scientific-platform-intelligence/">Scientific Intelligence</a>
+    <a href="../bkl042-chat/">AI Observatory Assistant</a>
     <a href="../operations/">Operations Center</a>
     <a href="../documentation/">Documentation Center</a>
   </div>
