@@ -1,6 +1,6 @@
 # BKL-042 F2 — Governed Advisory Response Contract
 
-**Status:** Active / Contract and fixture verified  
+**Status:** Active / Contract and fixture verified
 **Authority:** `READ_ONLY` / advisory-only
 
 F2 definisce l'envelope machine-readable per risposte dell'Observatory Assistant con
