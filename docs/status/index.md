@@ -15,7 +15,7 @@
 <div class="dsg-kpi"><span class="dsg-kpi__label">Rete osservata</span><span class="dsg-kpi__value" data-observatory-status="network-state">🟡 UNKNOWN</span><span class="dsg-kpi__detail" data-observatory-status="network-detail">Telemetria Network N.I.N.A. non ancora disponibile</span></div>
 </div>
 
-## BKL-036 Observatory Health Score
+## Observatory Health Score
 
 > **Proiezione pubblica read-only.** Il consumer tenta prima la projection live EAGLE Health del relay AP-008; usa la projection archiviata solo come fallback. Il valore è descrittivo, non sostituisce BKL-032 e non costituisce Safety Authority o autorizzazione a comandare apparati.
 
