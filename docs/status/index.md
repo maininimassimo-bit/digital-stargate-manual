@@ -48,6 +48,14 @@ Per la projection live EAGLE Health, lo score è `100` quando i cinque segnali o
 
 Capacità logica e salute fisica dei dischi sono evidence indipendenti: il portale non deriva uno stato fisico dalla percentuale di spazio libero e non applica soglie numeriche non governate.
 
+## Barre di dominio read-only
+
+<div class="dsg-domain-bars" data-observatory-domains>
+<p class="dsg-domain-bars__loading">Caricamento delle barre di dominio…</p>
+</div>
+
+La visualizzazione applica esclusivamente le soglie già approvate per BKL-032 e BKL-036-F5. Il rosso indica il superamento della soglia governata; l’ambra indica dato non corrente, non calcolabile o dominio senza soglia numerica. Le barre sono descrittive e non costituiscono readiness, Safety Authority o comando.
+
 ## Meteo operativo
 
 | Parametro | Valore |
