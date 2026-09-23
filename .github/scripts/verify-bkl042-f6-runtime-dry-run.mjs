@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const result = JSON.parse(fs.readFileSync('docs/data/bkl042-f6-runtime-adapter-dry-run.json', 'utf8'));
+const schema = JSON.parse(fs.readFileSync('schemas/bkl042-f6-runtime-adapter-dry-run.schema.json', 'utf8'));
+assert.equal(result.schemaVersion, schema.properties.schemaVersion.const);
+assert.equal(result.contractType, schema.properties.contractType.const);
+assert.equal(result.decision, 'NOT_AUTHORIZED');
+assert.equal(result.provider, 'NONE_SELECTED');
+assert.equal(result.network, 'NO_EXTERNAL_CALL');
+for (const key of ['actionAuthority', 'commandAuthority', 'executionAuthority', 'safetyAuthority']) assert.equal(result.authority[key], 'NONE');
+assert.ok(result.reasons.length >= 1);
+console.log('BKL-042-F6 runtime dry-run PASS: no provider, no credentials, no external call, no authority');

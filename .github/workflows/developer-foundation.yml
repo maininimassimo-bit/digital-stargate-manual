@@ -110,6 +110,7 @@ jobs:
       - { name: Generate BKL-042-F5 real-evidence evaluation, run: node .github/scripts/generate-bkl042-f5-evaluation.mjs }
       - { name: Verify BKL-042-F5 real-evidence evaluation, run: node .github/scripts/verify-bkl042-f5-evaluation.mjs }
       - { name: Verify BKL-042-F6 read-only chat contract, run: node .github/scripts/verify-bkl042-f6-chat.mjs }
+      - { name: Verify BKL-042-F6 runtime adapter dry-run, run: node .github/scripts/verify-bkl042-f6-runtime-dry-run.mjs }
       - { name: Verify knowledge graph projection, run: node .github/scripts/verify-knowledge-graph.mjs }
       - { name: Verify knowledge graph coverage, run: node .github/scripts/verify-knowledge-graph-coverage.mjs }
       - { name: Verify knowledge graph material relations, run: node .github/scripts/verify-knowledge-graph-material-relations.mjs }
