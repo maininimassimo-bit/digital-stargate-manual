@@ -883,9 +883,49 @@
       "source_locator": {
         "path": "docs/architecture/validation/AP008-SessionCompleted-Live-Shadow-OAT-Plan-2026-09-22.md"
       }
+    },
+    {
+      "id": "BKL-033",
+      "type": "backlog_item",
+      "title": "Observatory Digital Twin",
+      "status": "Done",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/project/BACKLOG.md"
+      }
+    },
+    {
+      "id": "BKL-034",
+      "type": "backlog_item",
+      "title": "Scientific Image Gallery evoluta",
+      "status": "In Progress",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/project/BACKLOG.md"
+      }
     }
   ],
   "relations": [
+    {
+      "id": "rel:BKL-033:depends_on:AP-015",
+      "type": "depends_on",
+      "from": "BKL-033",
+      "to": "AP-015",
+      "version": "1.0",
+      "source_locator": {
+        "path": ".github/roadmap/roadmap-source.json"
+      }
+    },
+    {
+      "id": "rel:BKL-034:depends_on:BKL-033",
+      "type": "depends_on",
+      "from": "BKL-034",
+      "to": "BKL-033",
+      "version": "1.0",
+      "source_locator": {
+        "path": ".github/roadmap/roadmap-source.json"
+      }
+    },
     {
       "id": "rel:BKL-036-ARCH-001:documents:BKL-036",
       "type": "documents",

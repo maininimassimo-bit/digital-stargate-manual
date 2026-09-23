@@ -2,10 +2,10 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-23",
   "authority": "DSG-RGM-001",
-  "projectStatus": "AP-015 is CLOSED / ACCEPTED / POST-MERGE VERIFIED as a design-only CAP-40 semantic baseline; RC2 baseline, AP-008 and BKL-036-F5 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED for bounded read-only scope; EAGLE Health is live HEALTHY/100 with fail-closed policy; BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 production runtime unavailable; live source/transport and public runtime GO remain separately gated; no scheduling, automatic target selection, commands, remediation or Safety Authority is authorized; no scheduling, automatic target selection, commands or Safety Authority is authorized",
-  "currentPackage": "BKL-033",
-  "nextMilestone": "BKL-033",
-  "target": "Prepare BKL-033 Observatory Digital Twin as a bounded descriptive/read-only asset and dependency model using accepted AP-015 semantic contracts, without operational control, readiness, command, remediation or Safety Authority semantics. No scheduler, automatic target selection, device command or Safety Authority is authorized",
+  "projectStatus": "BKL-033 is CLOSED / ACCEPTED / POST-MERGE VERIFIED as a descriptive/read-only asset and dependency projection; AP-015, RC2 baseline, AP-008 and BKL-036-F5 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED; EAGLE Health is live HEALTHY/100 with fail-closed policy; BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 production runtime unavailable; live source/transport and public runtime GO remain separately gated; no scheduling, automatic target selection, commands, remediation or Safety Authority is authorized; no scheduling, automatic target selection, commands or Safety Authority is authorized",
+  "currentPackage": "BKL-034",
+  "nextMilestone": "BKL-034",
+  "target": "Prepare BKL-034 Scientific Image Gallery evoluta as a bounded read-only projection linked to sessions, targets and governed processing provenance, without image mutation, command, remediation or Safety Authority semantics. No scheduler, automatic target selection, device command or Safety Authority is authorized",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -261,13 +261,14 @@
         {
           "id": "BKL-033",
           "title": "Observatory Digital Twin",
-          "status": "active",
-          "note": "Current governed successor after AP-015 closure. Descriptive/read-only asset and dependency model only; no operational control, readiness, command, remediation or Safety Authority."
+          "status": "completed",
+          "note": "Closed / accepted / post-merge verified as a descriptive/read-only asset and dependency projection; closure: docs/project/BKL-033-CLOSURE-2026-09-23.md."
         },
         {
           "id": "BKL-034",
           "title": "Scientific Image Gallery evoluta",
-          "status": "planned"
+          "status": "active",
+          "note": "Current governed successor after BKL-033 closure. Read-only image/session/target/provenance projection only; image mutation and processing execution remain excluded."
         },
         {
           "id": "BKL-042",
@@ -460,6 +461,15 @@
       "date": "2026-09-23",
       "status": "completed",
       "description": "Design-only CAP-40 semantic baseline accepted with bounded schema/fixture, citation/provenance, conflict/unknown semantics and no runtime materialization.",
+      "image": null
+    },
+    {
+      "id": "M-BKL033",
+      "itemRef": "BKL-033",
+      "title": "BKL-033 Observatory Digital Twin",
+      "date": "2026-09-23",
+      "status": "completed",
+      "description": "Descriptive/read-only asset and dependency contract accepted with bounded fixture and explicit unknown/missingness semantics.",
       "image": null
     },
     {

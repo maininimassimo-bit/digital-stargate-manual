@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.0",
+  "authority": "projection",
+  "commandAuthority": "NONE",
+  "safetyAuthority": "NONE",
+  "nodes": [
+    {"id": "twin:observatory", "kind": "observatory", "authority": "github_configuration_baseline", "state": "observed", "freshness": "not_applicable", "sourceRefs": ["src:config"]},
+    {"id": "twin:eagle-health", "kind": "telemetry_projection", "authority": "eagle_health_read_only", "state": "observed", "freshness": "current", "sourceRefs": ["src:eagle"]},
+    {"id": "twin:status-relay", "kind": "read_only_relay", "authority": "cloud_run_projection", "state": "observed", "freshness": "current", "sourceRefs": ["src:relay"]},
+    {"id": "twin:scientific-catalog", "kind": "scientific_catalog", "authority": "scientific_catalog", "state": "observed", "freshness": "current", "sourceRefs": ["src:catalog"]}
+  ],
+  "dependencies": [
+    {"id": "dep:observatory-eagle", "from": "twin:observatory", "to": "twin:eagle-health", "relation": "publishes_observation", "state": "observed", "evidenceRefs": ["src:eagle"]},
+    {"id": "dep:eagle-relay", "from": "twin:eagle-health", "to": "twin:status-relay", "relation": "projected_through", "state": "observed", "evidenceRefs": ["src:relay"]},
+    {"id": "dep:observatory-catalog", "from": "twin:observatory", "to": "twin:scientific-catalog", "relation": "references_catalog", "state": "observed", "evidenceRefs": ["src:catalog"]},
+    {"id": "dep:catalog-missing-history", "from": "twin:scientific-catalog", "to": "twin:observatory", "relation": "historical_completeness", "state": "unknown", "evidenceRefs": ["src:catalog"]}
+  ]
+}

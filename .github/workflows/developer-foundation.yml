@@ -98,6 +98,7 @@ jobs:
         run: node .github/scripts/generate-roadmap.mjs --check
       - { name: Verify closure / roadmap / backlog consistency, run: node .github/scripts/verify-roadmap-consistency.mjs }
       - { name: Verify AP-015 CAP-40 semantic contract, run: node .github/scripts/verify-ap015-semantic-contract.mjs }
+      - { name: Verify BKL-033 Digital Twin contract, run: node .github/scripts/verify-bkl033-digital-twin.mjs }
       - { name: Verify knowledge graph projection, run: node .github/scripts/verify-knowledge-graph.mjs }
       - { name: Verify knowledge graph coverage, run: node .github/scripts/verify-knowledge-graph-coverage.mjs }
       - { name: Verify knowledge graph material relations, run: node .github/scripts/verify-knowledge-graph-material-relations.mjs }
