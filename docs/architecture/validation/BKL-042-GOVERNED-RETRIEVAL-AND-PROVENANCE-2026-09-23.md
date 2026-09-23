@@ -88,8 +88,24 @@ con 100% del traffico; la `00006-ktv` è disponibile per rollback immediato. Il 
 conserva la revisione `00002-m7c`, punta al canonical service URL e
 `/health` restituisce `READY`; il relay rifiuta richieste non autenticate con HTTP `403`.
 La configurazione del secret resta vincolata a Secret Manager, senza leggere o stampare
-valori. Nessuna richiesta autenticata post-redeploy è stata eseguita; la nuova OAT positiva
-owner-witnessed è ancora richiesta.
+valori.
+
+Il 24/09/2026 l'owner ha riportato OAT live autenticata con `ANSWERED`, method
+`bkl042-static-projection-retrieval-v2`, model `gpt-6-sol` e correlation
+`bkl042-pages-ad1e6d8b-499a-460e-a4ea-c6546a1ba419`. La risposta ha citato cinque
+sessioni M 27 (2026-08-10, 08-14, 08-15, 08-31, 09-01), con digest del session catalog
+uguale alla proiezione pubblicata. I campi osservati nella risposta (stato analytics,
+gravità, integrazione e completamento) sono stati verificati contro il catalogo; anche
+il caso del 10 agosto riporta correttamente metadata parziali, zero ore e nessun valore
+di completamento. Sono esposti i limiti storici e le autorità restano `NONE`. OAT
+post-deploy: **PASS / OWNER-WITNESSED** per la query e le fonti verificate.
+
+Il tentativo precedente `INSUFFICIENT_EVIDENCE` aveva `model=NONE`, quindi nessuna
+chiamata provider, ma ha riservato uno slot del budget applicativo perché la reservation
+precede il retrieval. L'OAT positiva v2 ha invece raggiunto il provider. Il residuo
+budget non è stato letto né asserito. La formal acceptance del package e l'eventuale
+estensione alle altre classi source F1 restano una decisione owner; questa evidenza non
+rivendica copertura completa delle fonti.
 
 Resta obbligatoria l'OAT autenticata post-deploy witnessed dall'owner. L'assistente non
 simula né attribuisce tale testimonianza; BKL-042 resta `In Progress` fino alla sua

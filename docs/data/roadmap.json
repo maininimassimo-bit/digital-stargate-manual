@@ -2,7 +2,7 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-23",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "2373157a5091d40e0e491472843267082e9f751dc9e60803f78a9bbced327629",
+  "sourceDigest": "619f7b4e9dd4ee257896fa29fe5385f188c582e66de7067d3c183eaa408885ca",
   "authority": "DSG-RGM-001",
   "projectStatus": "BKL-034-F2 is CLOSED / ACCEPTED / POST-MERGE VERIFIED for the bounded governed image-ingestion contract and dry-run storage preflight; runtime storage remains separately gated. BKL-042 is the current advisory/read-only successor. AP-015 and BKL-033 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED for their explicitly design/contract-only scopes; RC2 baseline, AP-008 and BKL-036-F5 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED; EAGLE Health is live HEALTHY/100 with fail-closed policy; BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 production runtime unavailable; live source/transport and public runtime GO remain separately gated; no image mutation, processing execution, scheduling, automatic target selection, commands, remediation or Safety Authority is authorized; no scheduling, automatic target selection, commands or Safety Authority is authorized",
   "currentPackage": "BKL-042",
@@ -1036,7 +1036,7 @@
       "title": "BKL-042-F7 Governed Retrieval Post-Deployment Acceptance",
       "date": "2026-09-23",
       "status": "active",
-      "description": "PR #355 (`b4d45c12`) introduced bounded server-side retrieval for public target identity and historical sessions. Owner OAT exposed compact/spaced target-designation mismatch; PR #357 (`7be9fd0b`) fixes normalization as method v2, now deployed to relay revision `00007-wrm` (rollback `00006-ktv`). Repeat owner-witnessed authenticated OAT and formal acceptance remain pending; full F1 source coverage is not claimed. Maintain bounded read-only authority and NONE command/safety authority.",
+      "description": "PR #355 (`b4d45c12`) introduced bounded server-side retrieval for public target identity and historical sessions. PR #357 (`7be9fd0b`) fixed compact/spaced designation matching as method v2, deployed to relay `00007-wrm` (rollback `00006-ktv`). Owner-witnessed live OAT PASS on 2026-09-24: ANSWERED with five M 27 historical-session citations; returned facts checked against the published projection; correlation `bkl042-pages-ad1e6d8b-499a-460e-a4ea-c6546a1ba419`. Formal bounded acceptance and owner decision whether to defer or expand residual F1 source coverage remain pending. Maintain bounded read-only authority and NONE command/safety authority.",
       "image": null
     },
     {
