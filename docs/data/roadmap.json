@@ -2,12 +2,12 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-23",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "e7b4b57fc4a0529beb8c641788d5925b4b0cd04d3d178a897a94a7c8d0217412",
+  "sourceDigest": "68c35137e7ce19bc457ba4871f402326bc4e37ef4536b0dc88654c3d6b41e48d",
   "authority": "DSG-RGM-001",
   "projectStatus": "BKL-034-F2 is CLOSED / ACCEPTED / POST-MERGE VERIFIED for the bounded governed image-ingestion contract and dry-run storage preflight; runtime storage remains separately gated. BKL-042 is the current advisory/read-only successor. AP-015 and BKL-033 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED for their explicitly design/contract-only scopes; RC2 baseline, AP-008 and BKL-036-F5 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED; EAGLE Health is live HEALTHY/100 with fail-closed policy; BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 production runtime unavailable; live source/transport and public runtime GO remain separately gated; no image mutation, processing execution, scheduling, automatic target selection, commands, remediation or Safety Authority is authorized; no scheduling, automatic target selection, commands or Safety Authority is authorized",
   "currentPackage": "BKL-042",
   "nextMilestone": "BKL-042",
-  "target": "Advance BKL-042-F6 through separately governed provider/runtime readiness review; the bounded server-side pilot relay is privately deployed and health-verified, but provider OAT and public portal ingress remain gated. Retain runtime storage, upload authority, processing execution, scheduler, automatic target selection, device command and Safety Authority as separately gated capabilities.",
+  "target": "Advance BKL-042-F6 through separately governed portal-ingress review; the bounded server-side pilot relay is privately deployed, health-verified and has passed one owner-authenticated provider OAT. Public portal ingress, runtime storage, upload authority, processing execution, scheduler, automatic target selection, device command and Safety Authority remain separately gated capabilities.",
   "summary": {
     "total": 46,
     "completed": 42,
@@ -351,7 +351,7 @@
           "id": "BKL-042",
           "title": "AI Observatory Assistant",
           "status": "active",
-          "note": "Bounded BKL-042 F1-F5 and F6 static read-only gates are owner-accepted on baseline 52403dfb with retained NOT_EVALUABLE_CURRENT_EVIDENCE limitation. The separate fail-closed server-side pilot relay is privately deployed and health-verified; provider OAT, public portal ingress, retrieval, automatic apply, command and Safety Authority remain gated."
+          "note": "Bounded BKL-042 F1-F5 and F6 static read-only gates are owner-accepted on baseline 52403dfb with retained NOT_EVALUABLE_CURRENT_EVIDENCE limitation. The separate fail-closed server-side pilot relay is privately deployed, health-verified and passed one owner-authenticated provider OAT; public portal ingress, retrieval, automatic apply, command and Safety Authority remain gated."
         },
         {
           "id": "BKL-043",

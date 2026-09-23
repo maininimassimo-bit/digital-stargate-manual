@@ -1,6 +1,6 @@
 # BKL-042 F6 — runtime pilot implementation
 
-Status: **IMPLEMENTED — PRIVATE DEPLOYMENT READY — PROVIDER OAT NOT EXECUTED**
+Status: **IMPLEMENTED — PRIVATE DEPLOYMENT READY — PROVIDER OAT PASSED**
 
 The bounded server-side adapter is prepared under
 `infrastructure/bkl042-ai-relay/`. It is separate from the observability
@@ -21,6 +21,7 @@ Activation is intentionally blocked until all runtime gates are satisfied:
 
 The private relay deployment is recorded in
 `BKL-042-F6-RUNTIME-PRIVATE-DEPLOYMENT-EVIDENCE-2026-09-23.md`. The public
-portal ingress and provider OAT remain separately gated. The first controlled
-OAT was rejected by the provider with `credit_balance_exhausted`; runtime was
-then disabled again to preserve the fail-closed boundary.
+portal ingress remains separately gated. After API credit was provisioned, one
+owner-authenticated bounded OAT succeeded on `gpt-6-luna`; the two earlier
+credit-failed attempts remain recorded in the quota ledger and no other
+provider traffic was generated.
