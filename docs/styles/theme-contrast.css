@@ -1,6 +1,6 @@
 /* Theme contrast compatibility layer.
  * Loaded last so legacy portal surfaces remain readable in both Material themes.
- * The dark theme is intentionally untouched. */
+ * Aurora Observatory supplies the shared light/dark design tokens below. */
 
 [data-md-color-scheme="default"] {
   --md-default-bg-color: #f7faff;
@@ -334,4 +334,255 @@
 
 [data-md-color-scheme="default"] .dsg-domain-bars__loading {
   color: var(--dsg-text-muted);
+}
+
+/* Aurora Observatory — shared visual language for every portal route.
+ * Keep status colors and photographic hero contrast semantically intact. */
+:root {
+  --dsg-navy: #071225;
+  --dsg-navy-2: #102b4c;
+  --dsg-indigo: #6555c8;
+  --dsg-blue: #1766c5;
+  --dsg-cyan: #087f9d;
+  --dsg-border: rgba(26, 70, 112, .17);
+  --dsg-text-soft: #4e647d;
+  --dsg-surface: #fbfdff;
+  --dsg-surface-dark: #0b1c33;
+  --dsg-shadow: 0 14px 36px rgba(11, 37, 70, .12);
+  --dsg-shadow-soft: 0 7px 22px rgba(11, 37, 70, .08);
+  --dsg-nav-bg: rgba(7, 22, 43, .94);
+  --dsg-nav-panel: #0b1c33;
+  --dsg-nav-line: rgba(151, 204, 255, .2);
+  --dsg-nav-text: #edf6ff;
+  --dsg-nav-muted: #afc2d9;
+  --dsg-aurora-cyan: #65e5f1;
+  --dsg-aurora-violet: #b2a0ff;
+}
+
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #102b4c;
+  --md-primary-fg-color--light: #1b4770;
+  --md-primary-fg-color--dark: #091b34;
+  --md-accent-fg-color: #087f9d;
+  --md-default-bg-color: #f2f7fc;
+  --md-default-bg-color--light: #fbfdff;
+  --md-default-bg-color--lightest: #eaf2fa;
+  --md-default-fg-color: #102541;
+  --md-default-fg-color--light: #4e647d;
+  --md-default-fg-color--lighter: #617891;
+  --md-default-fg-color--lightest: rgba(26, 70, 112, .15);
+  --dsg-nav-bg: rgba(248, 252, 255, .94);
+  --dsg-navy: #071225;
+  --dsg-navy-2: #102b4c;
+  --dsg-indigo: #6555c8;
+  --dsg-blue: #1766c5;
+  --dsg-cyan: #087f9d;
+  --dsg-border: rgba(26, 70, 112, .17);
+  --dsg-text-soft: #4e647d;
+  --dsg-surface: #fbfdff;
+  --dsg-surface-dark: #0b1c33;
+  --dsg-shadow: 0 14px 36px rgba(11, 37, 70, .12);
+  --dsg-shadow-soft: 0 7px 22px rgba(11, 37, 70, .08);
+  --dsg-nav-panel: #fbfdff;
+  --dsg-nav-line: rgba(26, 70, 112, .17);
+  --dsg-nav-text: #102541;
+  --dsg-nav-muted: #4e647d;
+  --dsg-aurora-cyan: #087f9d;
+  --dsg-aurora-violet: #6555c8;
+  color-scheme: light;
+}
+
+[data-md-color-scheme="slate"],
+[data-dsg-theme-resolved="dark"] {
+  --md-primary-fg-color: #102b4c;
+  --md-primary-fg-color--light: #1b4770;
+  --md-primary-fg-color--dark: #07152a;
+  --md-accent-fg-color: #65e5f1;
+  --md-default-bg-color: #061326;
+  --md-default-bg-color--light: #0b1c33;
+  --md-default-bg-color--lightest: #102542;
+  --md-default-fg-color: #edf6ff;
+  --md-default-fg-color--light: #afc2d9;
+  --md-default-fg-color--lighter: #8fa8c4;
+  --md-default-fg-color--lightest: rgba(151, 204, 255, .16);
+  --dsg-navy: #040b18;
+  --dsg-navy-2: #0d2140;
+  --dsg-indigo: #b2a0ff;
+  --dsg-blue: #80b6ff;
+  --dsg-cyan: #65e5f1;
+  --dsg-border: rgba(151, 204, 255, .16);
+  --dsg-text-soft: #afc2d9;
+  --dsg-surface: #0b1c33;
+  --dsg-surface-dark: #0b1c33;
+  --dsg-shadow: 0 14px 36px rgba(0, 0, 0, .3);
+  --dsg-shadow-soft: 0 7px 22px rgba(0, 0, 0, .24);
+  color-scheme: dark;
+}
+
+html,
+body,
+.md-container,
+.md-main {
+  background-color: var(--dsg-paper);
+  background-image:
+    radial-gradient(ellipse at 88% 3%, color-mix(in srgb, var(--dsg-violet) 8%, transparent), transparent 32rem),
+    radial-gradient(ellipse at 12% 18%, color-mix(in srgb, var(--dsg-cyan) 7%, transparent), transparent 38rem);
+  color: var(--dsg-text);
+}
+
+.md-header,
+.md-header__inner,
+.dsg-enterprise-nav {
+  color: var(--dsg-nav-text);
+  background-color: var(--dsg-nav-bg);
+  border-color: var(--dsg-nav-line);
+}
+
+.md-header {
+  border-bottom: 1px solid var(--dsg-nav-line);
+  box-shadow: 0 8px 28px rgba(7, 22, 43, .1);
+}
+
+.dsg-enterprise-nav__link,
+.dsg-enterprise-nav__action,
+.dsg-enterprise-nav__current,
+.dsg-enterprise-nav__brand strong {
+  color: var(--dsg-nav-text);
+}
+
+.dsg-enterprise-nav__link:hover,
+.dsg-enterprise-nav__link.is-active,
+.dsg-enterprise-nav__brand small {
+  color: var(--dsg-aurora-cyan);
+}
+
+[data-md-color-scheme="default"] .dsg-enterprise-nav__link:hover,
+[data-md-color-scheme="default"] .dsg-enterprise-nav__link.is-active,
+[data-md-color-scheme="default"] .dsg-enterprise-nav__action:hover {
+  color: var(--dsg-blue);
+  background: color-mix(in srgb, var(--dsg-cyan) 12%, var(--dsg-surface));
+}
+
+[data-md-color-scheme="default"] .dsg-enterprise-nav__current {
+  border-color: color-mix(in srgb, var(--dsg-cyan) 35%, var(--dsg-line));
+  color: var(--dsg-blue);
+}
+
+.dsg-docs-drawer {
+  color: var(--dsg-text);
+  background: var(--dsg-surface);
+  border-color: var(--dsg-line);
+  box-shadow: var(--dsg-shadow-lg);
+}
+
+.md-typeset > h1:first-child,
+.dsg-live-board,
+.dsg-domain-section,
+.dsg-context-section,
+.dsg-quick-section,
+.dsg-showcase,
+.dsg-operations-dashboard__panel,
+.dsg-architecture-card,
+.dsg-capability-card,
+.dsg-assurance-card,
+.dsg-architecture-kpi,
+.dsg-latest-observation.dsg-showcase {
+  border-color: var(--dsg-line);
+  background-color: var(--dsg-surface);
+  box-shadow: var(--dsg-shadow-sm);
+}
+
+.dsg-live-card:not(.dsg-live-card--primary),
+.dsg-domain-card,
+.dsg-quick-card,
+.dsg-operations-dashboard__kpis article,
+.dsg-operations-dashboard__list article,
+.dsg-operations-dashboard__services article,
+.dsg-architecture-actions a {
+  border-color: var(--dsg-line);
+  background-color: var(--dsg-surface-muted);
+  color: var(--dsg-text);
+}
+
+.dsg-live-card:not(.dsg-live-card--primary) strong {
+  color: var(--dsg-text);
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.dsg-enterprise-home :is(.dsg-live-board__heading h2, .dsg-section-intro h2, .dsg-context-section h2),
+.dsg-domain-card h3,
+.dsg-quick-card strong {
+  color: var(--dsg-text);
+}
+
+.md-typeset a:not(.md-button):not(.headerlink),
+.dsg-breadcrumb a,
+.dsg-page-nav__label,
+.dsg-live-card:not(.dsg-live-card--primary) a {
+  color: var(--dsg-blue);
+}
+
+.dsg-section-kicker,
+.dsg-domain-card__meta,
+.dsg-live-card:not(.dsg-live-card--primary) > span {
+  color: var(--dsg-cyan);
+}
+
+.dsg-enterprise-home .dsg-live-card.dsg-live-card--primary {
+  border-color: var(--dsg-line);
+  background: var(--dsg-surface);
+  color: var(--dsg-text);
+  box-shadow: var(--dsg-shadow-sm);
+}
+
+[data-md-color-scheme] .dsg-enterprise-home .dsg-live-card.dsg-live-card--primary {
+  border-color: var(--dsg-line);
+  background: var(--dsg-surface);
+  color: var(--dsg-text);
+}
+
+[data-md-color-scheme] .dsg-enterprise-home .dsg-live-card.dsg-live-card--primary strong {
+  color: var(--dsg-text);
+}
+
+[data-md-color-scheme] .dsg-enterprise-home .dsg-live-card.dsg-live-card--primary > span {
+  color: var(--dsg-cyan);
+}
+
+[data-md-color-scheme] .dsg-enterprise-home .dsg-live-card.dsg-live-card--primary p {
+  color: var(--dsg-text-muted);
+}
+
+[data-md-color-scheme] .dsg-enterprise-home .dsg-live-card.dsg-live-card--primary a {
+  color: var(--dsg-blue);
+}
+
+.md-typeset .md-button--primary,
+.dsg-hero__actions .md-button--primary {
+  border-color: #65e5f1;
+  color: #07152a;
+  background: linear-gradient(115deg, #65e5f1, #92d7ff 58%, #b2a0ff);
+  box-shadow: 0 8px 24px rgba(42, 177, 207, .25);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dsg-live-card,
+  .dsg-domain-card,
+  .dsg-quick-card,
+  .dsg-operations-dashboard__panel,
+  .dsg-architecture-card {
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+  }
+
+  .dsg-live-card:hover,
+  .dsg-domain-card:hover,
+  .dsg-quick-card:hover,
+  .dsg-operations-dashboard__panel:hover,
+  .dsg-architecture-card:hover {
+    border-color: color-mix(in srgb, var(--dsg-cyan) 44%, var(--dsg-line));
+    box-shadow: 0 14px 34px color-mix(in srgb, var(--dsg-blue) 11%, transparent);
+    transform: translateY(-2px);
+  }
 }
