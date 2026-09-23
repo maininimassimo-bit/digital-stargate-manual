@@ -2,10 +2,10 @@
 
 - Schema: `2.1.0`
 - Stato: **WARNING**
-- Sessioni: **21**
+- Sessioni: **22**
 - Errori: **0**
 - Avvisi: **3**
-- Generato: `2026-09-22T07:49:36+00:00`
+- Generato: `2026-09-23T05:54:38+00:00`
 
 ## Errori
 

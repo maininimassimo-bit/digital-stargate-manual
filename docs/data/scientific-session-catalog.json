@@ -22992,6 +22992,583 @@
         "temporalCoverage": 0.9856
       },
       "qualityState": "ATTENTION_REQUIRED"
+    },
+    {
+      "sessionId": "2026-09-22_2026-09-23",
+      "observationDate": "2026-09-22",
+      "start": "2026-09-22T17:00:00.0000000Z",
+      "end": "2026-09-23T03:59:41.0000000Z",
+      "target": "NGC 281",
+      "raDeg": 13.10416667,
+      "decDeg": 56.565,
+      "coordinateSource": "canonical-session-metrics",
+      "configurationId": "QUATTRO200_TOUPTEK294_BIN1",
+      "telescope": "Sky-Watcher Quattro 200P",
+      "camera": "ToupTek 294MC PRO",
+      "filter": "UNKNOWN",
+      "binning": "1",
+      "gain": null,
+      "offset": null,
+      "exposureSeconds": null,
+      "integrationHours": 6.3333,
+      "targetIntegrationHours": null,
+      "lightStarted": 41,
+      "lightCompleted": 38,
+      "completionPct": 92.68,
+      "rmsTotalArcsec": null,
+      "severity": "YELLOW",
+      "analyticsState": "ATTENTION_REQUIRED",
+      "metadataState": "CANONICAL_EVIDENCE",
+      "transferState": "NOT_REPRESENTED",
+      "manifestState": "VERSIONED",
+      "evidenceState": "SOURCE_METRICS_AVAILABLE",
+      "sourceMetricsPath": "data/sessions/2026/09/2026-09-22_2026-09-23/normalized/session-metrics.json",
+      "weather": {
+        "state": "AVAILABLE",
+        "rowsTotal": 3960,
+        "rowsUnsafe": 3630,
+        "unsafePct": 91.67,
+        "safePct": 8.33,
+        "safeTransitions": 16,
+        "scopeNote": "Valori riferiti alla finestra CSV importata; non penalizzano la severita finche non sono correlati alla sequenza attiva/cupola aperta.",
+        "detail": {
+          "sourcePath": "data/sessions/2026/09/2026-09-22_2026-09-23/raw/weather/CloudWatcher_2026-09-22_2026-09-23.csv",
+          "firstTimestamp": "2026-09-22T19:00:08",
+          "lastTimestamp": "2026-09-23T05:59:59",
+          "ambientTemperature": {
+            "min": 17.8,
+            "avg": 19.99,
+            "max": 24.4
+          },
+          "relativeHumidity": {
+            "min": 36,
+            "avg": 40.1,
+            "max": 47
+          },
+          "dewPoint": {
+            "min": 4.1,
+            "avg": 6,
+            "max": 9.4
+          },
+          "windValue": {
+            "min": 5.1,
+            "avg": 15.21,
+            "max": 25.1
+          },
+          "cloudValue": {
+            "min": -9.2,
+            "avg": -7.92,
+            "max": -5
+          },
+          "dominantCloudCondition": "Clear",
+          "dominantRainCondition": "Dry",
+          "dominantWindCondition": "Windy",
+          "samples": [
+            {
+              "timestamp": "2026-09-22T19:00:08",
+              "ambientTemperature": 24.4,
+              "relativeHumidity": 37,
+              "dewPoint": 8.8,
+              "windValue": 5.7,
+              "cloudValue": -5.8,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T19:14:08",
+              "ambientTemperature": 23.9,
+              "relativeHumidity": 39,
+              "dewPoint": 8.9,
+              "windValue": 6.4,
+              "cloudValue": -5.7,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T19:28:08",
+              "ambientTemperature": 23.7,
+              "relativeHumidity": 40,
+              "dewPoint": 9.3,
+              "windValue": 12.4,
+              "cloudValue": -5.6,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T19:42:18",
+              "ambientTemperature": 23.5,
+              "relativeHumidity": 40,
+              "dewPoint": 9.3,
+              "windValue": 12.7,
+              "cloudValue": -5.8,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T19:56:18",
+              "ambientTemperature": 23.2,
+              "relativeHumidity": 40,
+              "dewPoint": 9,
+              "windValue": 12.1,
+              "cloudValue": -6,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T20:10:18",
+              "ambientTemperature": 22.8,
+              "relativeHumidity": 40,
+              "dewPoint": 8.7,
+              "windValue": 15,
+              "cloudValue": -6.6,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T20:24:18",
+              "ambientTemperature": 22.5,
+              "relativeHumidity": 39,
+              "dewPoint": 8,
+              "windValue": 12.4,
+              "cloudValue": -7,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T20:38:28",
+              "ambientTemperature": 22.4,
+              "relativeHumidity": 39,
+              "dewPoint": 7.7,
+              "windValue": 12.4,
+              "cloudValue": -7.1,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T20:52:28",
+              "ambientTemperature": 22,
+              "relativeHumidity": 39,
+              "dewPoint": 7.5,
+              "windValue": 12.9,
+              "cloudValue": -7.3,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T21:06:28",
+              "ambientTemperature": 21.8,
+              "relativeHumidity": 39,
+              "dewPoint": 7.4,
+              "windValue": 13.5,
+              "cloudValue": -7.3,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T21:20:28",
+              "ambientTemperature": 21.6,
+              "relativeHumidity": 39,
+              "dewPoint": 7.2,
+              "windValue": 12.5,
+              "cloudValue": -7.4,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T21:34:38",
+              "ambientTemperature": 21.4,
+              "relativeHumidity": 39,
+              "dewPoint": 6.9,
+              "windValue": 12.9,
+              "cloudValue": -7.7,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T21:48:38",
+              "ambientTemperature": 21.2,
+              "relativeHumidity": 39,
+              "dewPoint": 6.7,
+              "windValue": 13.4,
+              "cloudValue": -7.9,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T22:02:38",
+              "ambientTemperature": 20.9,
+              "relativeHumidity": 39,
+              "dewPoint": 6.5,
+              "windValue": 12.8,
+              "cloudValue": -7.8,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T22:16:38",
+              "ambientTemperature": 20.7,
+              "relativeHumidity": 39,
+              "dewPoint": 6.4,
+              "windValue": 17,
+              "cloudValue": -8.1,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T22:30:48",
+              "ambientTemperature": 20.5,
+              "relativeHumidity": 39,
+              "dewPoint": 6.2,
+              "windValue": 16.9,
+              "cloudValue": -8.2,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T22:44:48",
+              "ambientTemperature": 20.4,
+              "relativeHumidity": 39,
+              "dewPoint": 6.1,
+              "windValue": 15.7,
+              "cloudValue": -8.3,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T22:58:48",
+              "ambientTemperature": 20.2,
+              "relativeHumidity": 39,
+              "dewPoint": 6,
+              "windValue": 18.1,
+              "cloudValue": -8.3,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T23:12:48",
+              "ambientTemperature": 19.9,
+              "relativeHumidity": 40,
+              "dewPoint": 5.9,
+              "windValue": 14.1,
+              "cloudValue": -8.6,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T23:26:48",
+              "ambientTemperature": 19.6,
+              "relativeHumidity": 40,
+              "dewPoint": 5.8,
+              "windValue": 18.4,
+              "cloudValue": -8.5,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T23:40:58",
+              "ambientTemperature": 19.4,
+              "relativeHumidity": 40,
+              "dewPoint": 5.5,
+              "windValue": 15.2,
+              "cloudValue": -8.9,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-22T23:54:58",
+              "ambientTemperature": 19.5,
+              "relativeHumidity": 39,
+              "dewPoint": 5.2,
+              "windValue": 17.6,
+              "cloudValue": -9.1,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T00:08:58",
+              "ambientTemperature": 19.5,
+              "relativeHumidity": 39,
+              "dewPoint": 5,
+              "windValue": 17.7,
+              "cloudValue": -8.8,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T00:22:58",
+              "ambientTemperature": 19.4,
+              "relativeHumidity": 38,
+              "dewPoint": 4.7,
+              "windValue": 18.5,
+              "cloudValue": -8.9,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T00:37:08",
+              "ambientTemperature": 19.7,
+              "relativeHumidity": 36,
+              "dewPoint": 4.3,
+              "windValue": 15.5,
+              "cloudValue": -8.9,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T00:51:08",
+              "ambientTemperature": 19.4,
+              "relativeHumidity": 37,
+              "dewPoint": 4.4,
+              "windValue": 17.8,
+              "cloudValue": -8.8,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T01:05:08",
+              "ambientTemperature": 19.3,
+              "relativeHumidity": 37,
+              "dewPoint": 4.3,
+              "windValue": 15.6,
+              "cloudValue": -8.9,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T01:19:08",
+              "ambientTemperature": 19.3,
+              "relativeHumidity": 38,
+              "dewPoint": 4.5,
+              "windValue": 12.9,
+              "cloudValue": -8.9,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T01:33:18",
+              "ambientTemperature": 19.1,
+              "relativeHumidity": 38,
+              "dewPoint": 4.6,
+              "windValue": 13.8,
+              "cloudValue": -8.5,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T01:47:18",
+              "ambientTemperature": 19.1,
+              "relativeHumidity": 39,
+              "dewPoint": 4.7,
+              "windValue": 12.5,
+              "cloudValue": -8.7,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T02:01:18",
+              "ambientTemperature": 19,
+              "relativeHumidity": 39,
+              "dewPoint": 4.8,
+              "windValue": 16.9,
+              "cloudValue": -8.6,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T02:15:18",
+              "ambientTemperature": 19,
+              "relativeHumidity": 39,
+              "dewPoint": 4.8,
+              "windValue": 17,
+              "cloudValue": -8.6,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T02:29:18",
+              "ambientTemperature": 18.9,
+              "relativeHumidity": 39,
+              "dewPoint": 4.7,
+              "windValue": 15.6,
+              "cloudValue": -8.8,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T02:43:28",
+              "ambientTemperature": 18.8,
+              "relativeHumidity": 40,
+              "dewPoint": 4.7,
+              "windValue": 16.2,
+              "cloudValue": -8.2,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T02:57:28",
+              "ambientTemperature": 18.7,
+              "relativeHumidity": 40,
+              "dewPoint": 4.7,
+              "windValue": 17.6,
+              "cloudValue": -8.4,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T03:11:28",
+              "ambientTemperature": 18.5,
+              "relativeHumidity": 40,
+              "dewPoint": 4.7,
+              "windValue": 16.4,
+              "cloudValue": -8.3,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T03:25:28",
+              "ambientTemperature": 18.4,
+              "relativeHumidity": 41,
+              "dewPoint": 4.8,
+              "windValue": 14.1,
+              "cloudValue": -8.3,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T03:39:39",
+              "ambientTemperature": 18.2,
+              "relativeHumidity": 42,
+              "dewPoint": 5.1,
+              "windValue": 16.7,
+              "cloudValue": -8.4,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T03:53:38",
+              "ambientTemperature": 18.1,
+              "relativeHumidity": 42,
+              "dewPoint": 5,
+              "windValue": 14.8,
+              "cloudValue": -8.3,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T04:07:39",
+              "ambientTemperature": 18.4,
+              "relativeHumidity": 40,
+              "dewPoint": 4.7,
+              "windValue": 12.5,
+              "cloudValue": -7.9,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T04:21:39",
+              "ambientTemperature": 18.4,
+              "relativeHumidity": 40,
+              "dewPoint": 4.6,
+              "windValue": 12.5,
+              "cloudValue": -7.8,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T04:35:49",
+              "ambientTemperature": 18,
+              "relativeHumidity": 43,
+              "dewPoint": 5.3,
+              "windValue": 13.6,
+              "cloudValue": -8.2,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T04:49:49",
+              "ambientTemperature": 18.1,
+              "relativeHumidity": 43,
+              "dewPoint": 5.4,
+              "windValue": 15.2,
+              "cloudValue": -7.9,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T05:03:49",
+              "ambientTemperature": 18,
+              "relativeHumidity": 45,
+              "dewPoint": 5.9,
+              "windValue": 15,
+              "cloudValue": -7.8,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T05:17:49",
+              "ambientTemperature": 18,
+              "relativeHumidity": 46,
+              "dewPoint": 6.1,
+              "windValue": 17.8,
+              "cloudValue": -7.9,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T05:31:59",
+              "ambientTemperature": 18.1,
+              "relativeHumidity": 46,
+              "dewPoint": 6.2,
+              "windValue": 18.4,
+              "cloudValue": -8.1,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T05:45:59",
+              "ambientTemperature": 18,
+              "relativeHumidity": 47,
+              "dewPoint": 6.4,
+              "windValue": 19.2,
+              "cloudValue": -7.9,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-09-23T05:59:59",
+              "ambientTemperature": 17.9,
+              "relativeHumidity": 47,
+              "dewPoint": 6.5,
+              "windValue": 15.9,
+              "cloudValue": -8,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            }
+          ]
+        }
+      },
+      "guiding": {
+        "state": "NOT_AVAILABLE",
+        "sampleCount": 0,
+        "segmentCount": 0,
+        "rmsRaArcsec": null,
+        "rmsDecArcsec": null,
+        "rmsTotalArcsec": null,
+        "lostStarEvents": 0,
+        "pulseGuideFailures": 0,
+        "scopeNote": "Proiezione scientifica storica derivata dal PHD2 GuideLog. Usa gli stessi campioni validi dell analytics (settling escluso, ErrorCode=0) e non rappresenta telemetria operativa realtime.",
+        "detail": null
+      },
+      "sqm": {
+        "state": "AVAILABLE",
+        "minMagArcsec2": 8.9,
+        "maxMagArcsec2": 21.05,
+        "meanMagArcsec2": 19.0268,
+        "medianMagArcsec2": 19.53,
+        "validSamples": 1300,
+        "temporalCoverage": 0.9841
+      },
+      "qualityState": "ATTENTION_REQUIRED"
     }
   ]
 }
