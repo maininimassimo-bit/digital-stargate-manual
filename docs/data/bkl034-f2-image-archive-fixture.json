@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0",
+  "authority": "archive_projection",
+  "ingestionMode": "governed_read_only_projection",
+  "writeAuthority": "NONE",
+  "commandAuthority": "NONE",
+  "safetyAuthority": "NONE",
+  "assets": [
+    {
+      "imageId": "img:2026-08-15-m31-lrgb",
+      "objectRef": "obj:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "mediaType": "image/x-xisf",
+      "byteSize": 1843200,
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "archiveState": "CATALOGED",
+      "sessionRef": "session:2026-08-15_2026-08-16",
+      "targetRef": "target:M31",
+      "metadataRefs": ["meta:fits:img-2026-08-15-m31-lrgb"],
+      "workflowRefs": ["workflow:pixinsight:run-2026-08-15-m31-lrgb"],
+      "derivativeRefs": ["obj:preview:2026-08-15-m31-lrgb"],
+      "sourceRefs": ["src:archive:2026-08-15-m31-lrgb", "src:pixinsight:run-2026-08-15-m31-lrgb"],
+      "metadataState": "COMPLETE"
+    },
+    {
+      "imageId": "img:2026-08-16-m42-ha",
+      "objectRef": "obj:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "mediaType": "image/tiff",
+      "byteSize": 921600,
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "archiveState": "QUARANTINED",
+      "sessionRef": "session:2026-08-16_2026-08-17",
+      "targetRef": "target:M42",
+      "metadataRefs": ["meta:fits:img-2026-08-16-m42-ha"],
+      "workflowRefs": [],
+      "derivativeRefs": [],
+      "sourceRefs": ["src:quarantine:2026-08-16-m42-ha"],
+      "metadataState": "PARTIAL"
+    },
+    {
+      "imageId": "img:2026-08-17-ngc7000-preview",
+      "objectRef": "obj:unavailable:2026-08-17-ngc7000-preview",
+      "mediaType": "image/png",
+      "byteSize": 1,
+      "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "archiveState": "UNAVAILABLE",
+      "sessionRef": "session:2026-08-17_2026-08-18",
+      "targetRef": "target:NGC7000",
+      "metadataRefs": ["meta:unknown:2026-08-17-ngc7000-preview"],
+      "workflowRefs": ["workflow:pixinsight:run-2026-08-17-ngc7000-preview"],
+      "derivativeRefs": [],
+      "sourceRefs": ["src:catalog:2026-08-17_2026-08-18"],
+      "metadataState": "UNAVAILABLE"
+    }
+  ]
+}
