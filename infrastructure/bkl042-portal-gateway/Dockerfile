@@ -1,6 +1,6 @@
 FROM python:3.12-alpine
 WORKDIR /app
-RUN pip install --no-cache-dir "google-auth>=2.30,<3"
+RUN pip install --no-cache-dir "google-auth[requests]>=2.30,<3" "requests>=2.32,<3"
 COPY app.py .
 USER nobody
 CMD ["python", "app.py"]

@@ -12,9 +12,11 @@ from typing import Any
 try:
     from google.auth.transport.requests import Request
     from google.oauth2 import id_token
-except ImportError:  # Offline repository checks do not require cloud dependencies.
+    AUTH_IMPORT_ERROR = ""
+except ImportError as exc:  # Offline repository checks do not require cloud dependencies.
     Request = None
     id_token = None
+    AUTH_IMPORT_ERROR = type(exc).__name__
 
 
 MAX_BODY = 20000
@@ -41,7 +43,7 @@ def readiness() -> dict[str, Any]:
     if not config["relay_url"]:
         reasons.append("PRIVATE_RELAY_URL_NOT_CONFIGURED")
     if id_token is None:
-        reasons.append("GOOGLE_AUTH_CLIENT_UNAVAILABLE")
+        reasons.append(f"GOOGLE_AUTH_CLIENT_UNAVAILABLE:{AUTH_IMPORT_ERROR}")
     return {
         "status": "READY" if not reasons else "NOT_READY",
         "bounded_read_only": True,
