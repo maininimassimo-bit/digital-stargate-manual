@@ -11,7 +11,7 @@
 <div class="dsg-kpi"><span class="dsg-kpi__label">Cupola osservata</span><span class="dsg-kpi__value" data-observatory-status="dome-state">🟡 UNKNOWN</span><span class="dsg-kpi__detail" data-observatory-status="dome-detail">Shutter: —</span></div>
 <div class="dsg-kpi"><span class="dsg-kpi__label">Montatura osservata</span><span class="dsg-kpi__value" data-observatory-status="mount-state">🟡 UNKNOWN</span><span class="dsg-kpi__detail" data-observatory-status="mount-detail">parked: — · tracking: —</span></div>
 <div class="dsg-kpi"><span class="dsg-kpi__label">Camera osservata</span><span class="dsg-kpi__value" data-observatory-status="camera-state">🟡 UNKNOWN</span><span class="dsg-kpi__detail" data-observatory-status="camera-detail">cooler: — · temperatura: —</span></div>
-<div class="dsg-kpi"><span class="dsg-kpi__label">PWR</span><span class="dsg-kpi__value" data-observatory-status="power-state">🟡 UNKNOWN</span><span class="dsg-kpi__detail" data-observatory-status="power-detail">Rete 12 V J6: — · fault: —</span></div>
+<div class="dsg-kpi"><span class="dsg-kpi__label">Power</span><span class="dsg-kpi__value" data-observatory-status="power-state">🟡 UNKNOWN</span><span class="dsg-kpi__detail" data-observatory-status="power-detail">Rete 12 V J6: — · fault: —</span></div>
 <div class="dsg-kpi"><span class="dsg-kpi__label">Rete osservata</span><span class="dsg-kpi__value" data-observatory-status="network-state">🟡 UNKNOWN</span><span class="dsg-kpi__detail" data-observatory-status="network-detail">Telemetria Network N.I.N.A. non ancora disponibile</span></div>
 </div>
 
