@@ -2,7 +2,7 @@
   --chat-border: var(--md-default-fg-color--lightest);
   --chat-panel: var(--md-default-bg-color--light);
   --chat-text: var(--md-default-fg-color);
-  --chat-muted: var(--md-default-fg-color--light);
+  --chat-muted: color-mix(in srgb, var(--chat-text) 76%, var(--chat-panel));
   --chat-accent: var(--md-accent-fg-color);
   --chat-answer: color-mix(in srgb, var(--md-accent-fg-color) 8%, var(--md-default-bg-color));
   --chat-boundary: color-mix(in srgb, #e6a700 12%, var(--md-default-bg-color));
@@ -14,6 +14,10 @@
   background: var(--chat-panel);
   color: var(--chat-text);
   box-shadow: var(--dsg-shadow, 0 14px 36px rgba(11, 37, 70, .12));
+}
+
+.md-typeset .dsg-bkl042-chat-title {
+  color: var(--md-default-fg-color);
 }
 
 .dsg-bkl042-chat__hero {
