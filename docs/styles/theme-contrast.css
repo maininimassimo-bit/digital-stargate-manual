@@ -3,6 +3,13 @@
  * The dark theme is intentionally untouched. */
 
 [data-md-color-scheme="default"] {
+  --md-default-bg-color: #f7faff;
+  --md-default-bg-color--light: #ffffff;
+  --md-default-bg-color--lightest: #e5edf5;
+  --md-default-fg-color: #102035;
+  --md-default-fg-color--light: #53657a;
+  --md-default-fg-color--lighter: #71839a;
+  --md-default-fg-color--lightest: rgba(16, 44, 76, .14);
   --dsg-color-text: var(--dsg-text);
   --dsg-color-text-muted: var(--dsg-text-muted);
   --dsg-color-border: var(--dsg-line);
@@ -168,4 +175,147 @@
 [data-md-color-scheme="default"] .dsg-enterprise-home .dsg-context-section__actions a {
   border-color: var(--dsg-line);
   background: var(--dsg-surface-muted);
+}
+
+/* Global legacy surfaces. extra.css intentionally defines a dark visual
+ * language for the portal; these light-theme counterparts must win when the
+ * Material light scheme is selected. */
+[data-md-color-scheme="default"] html,
+[data-md-color-scheme="default"] body,
+[data-md-color-scheme="default"] .md-container,
+[data-md-color-scheme="default"] .md-main {
+  background:
+    radial-gradient(circle at 82% 8%, rgba(54, 91, 210, .08), transparent 42%),
+    linear-gradient(180deg, #f7faff 0%, #eef4fa 100%);
+  color: var(--dsg-text);
+}
+
+[data-md-color-scheme="default"] .md-typeset,
+[data-md-color-scheme="default"] .md-typeset p,
+[data-md-color-scheme="default"] .md-typeset li,
+[data-md-color-scheme="default"] .md-typeset dd,
+[data-md-color-scheme="default"] .md-typeset dt {
+  color: var(--dsg-text);
+}
+
+[data-md-color-scheme="default"] .md-typeset > h1:first-child {
+  border-color: var(--dsg-line);
+  background: linear-gradient(135deg, #ffffff, #edf4fb);
+  color: var(--dsg-text);
+  box-shadow: var(--dsg-shadow-sm);
+}
+
+[data-md-color-scheme="default"] .md-typeset > h1:first-child::after,
+[data-md-color-scheme="default"] .dsg-breadcrumb a,
+[data-md-color-scheme="default"] .md-typeset h3 {
+  color: var(--dsg-blue);
+}
+
+[data-md-color-scheme="default"] .dsg-breadcrumb,
+[data-md-color-scheme="default"] .md-typeset > h1:first-child + p,
+[data-md-color-scheme="default"] .md-typeset > .dsg-breadcrumb + h1 + p {
+  color: var(--dsg-text-muted);
+}
+
+[data-md-color-scheme="default"] .md-typeset h2 {
+  border-color: var(--dsg-line);
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) {
+  border-color: var(--dsg-line);
+  background: var(--dsg-surface);
+  color: var(--dsg-text);
+  box-shadow: var(--dsg-shadow-sm);
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) th {
+  border-color: var(--dsg-line);
+  background: var(--dsg-surface-muted);
+  color: var(--dsg-text);
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) td,
+[data-md-color-scheme="default"] .md-typeset table:not([class]) tr:hover td {
+  border-color: var(--dsg-line);
+  background: transparent;
+  color: var(--dsg-text);
+}
+
+[data-md-color-scheme="default"] .md-typeset .admonition,
+[data-md-color-scheme="default"] .md-typeset details,
+[data-md-color-scheme="default"] .md-typeset pre,
+[data-md-color-scheme="default"] .dsg-page-nav a {
+  border-color: var(--dsg-line);
+  background: var(--dsg-surface);
+  color: var(--dsg-text);
+  box-shadow: var(--dsg-shadow-sm);
+}
+
+[data-md-color-scheme="default"] .md-typeset :not(pre) > code {
+  border-color: var(--dsg-line);
+  background: #eaf1f8;
+  color: #173f70;
+}
+
+[data-md-color-scheme="default"] .md-typeset blockquote {
+  border-left-color: var(--dsg-blue);
+  background: #edf4fb;
+  color: var(--dsg-text);
+}
+
+[data-md-color-scheme="default"] .dsg-page-nav__label,
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__item .md-nav__link--active,
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__link:hover,
+[data-md-color-scheme="default"] .md-sidebar--secondary .md-nav__link:hover {
+  color: var(--dsg-blue);
+}
+
+/* Home/overview legacy cards. The media/hero remains deliberately dark; the
+ * textual panels and data cards follow the selected light surface. */
+[data-md-color-scheme="default"] .dsg-showcase,
+[data-md-color-scheme="default"] .dsg-timeline__item > div,
+[data-md-color-scheme="default"] .dsg-home-footer {
+  border-color: var(--dsg-line);
+  background: var(--dsg-surface);
+  color: var(--dsg-text);
+}
+
+[data-md-color-scheme="default"] .dsg-showcase__metrics div {
+  border-color: var(--dsg-line);
+  background: var(--dsg-surface-muted);
+}
+
+[data-md-color-scheme="default"] .dsg-showcase__metrics strong,
+[data-md-color-scheme="default"] .dsg-timeline__date,
+[data-md-color-scheme="default"] .dsg-home-footer__release,
+[data-md-color-scheme="default"] .dsg-home-footer__links a:hover {
+  color: var(--dsg-blue);
+}
+
+[data-md-color-scheme="default"] .dsg-showcase__content p,
+[data-md-color-scheme="default"] .dsg-timeline p,
+[data-md-color-scheme="default"] .dsg-home-footer > div:first-child span {
+  color: var(--dsg-text-muted);
+  opacity: 1;
+}
+
+[data-md-color-scheme="default"] .dsg-timeline__dot {
+  border-color: var(--dsg-blue);
+  background: var(--dsg-surface);
+}
+
+/* The dynamic status bars retain their semantic green/red/amber states while
+ * the track and labels remain visible on the light surface. */
+[data-md-color-scheme="default"] .dsg-domain-bars__legend {
+  border-color: var(--dsg-line);
+  background: var(--dsg-surface-muted);
+  color: var(--dsg-text);
+}
+
+[data-md-color-scheme="default"] .dsg-domain-bar__track {
+  background: #d8e2ec;
+}
+
+[data-md-color-scheme="default"] .dsg-domain-bars__loading {
+  color: var(--dsg-text-muted);
 }
