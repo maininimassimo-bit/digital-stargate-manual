@@ -9,9 +9,11 @@
 | Sources | sole proiezioni pubbliche allowlistate indicate sotto |
 | Budget | ledger persistente e cap pilota preesistenti, applicati a ogni richiesta |
 | Runtime pre-deploy | `dsg-bkl042-ai-relay-00005-d97`, 100% traffic — read-only describe 23/09/2026 |
-| Rollback | riportare il traffico a `dsg-bkl042-ai-relay-00005-d97` |
-| Runtime post-deploy | `dsg-bkl042-ai-relay-00006-ktv`, 100% traffic — 23/09/2026 |
+| First retrieval deployment | `dsg-bkl042-ai-relay-00006-ktv`, 100% traffic — 23/09/2026 |
+| Current runtime | `dsg-bkl042-ai-relay-00007-wrm`, 100% traffic — 24/09/2026 |
+| Immediate rollback | riportare il traffico a `dsg-bkl042-ai-relay-00006-ktv` |
 | Portal ingress | `dsg-bkl042-portal-gateway-00002-m7c`, readiness `READY` |
+| Retrieval method | `bkl042-static-projection-retrieval-v2` — compact/spaced astronomical designation normalization |
 
 ## Scope
 
@@ -64,18 +66,30 @@ fonti e la domanda sono trattati come dati non fidati, non come istruzioni.
 
 ## Verification record
 
-Test unitari Python 7/7, compilazione Python, JavaScript syntax, BKL-042 contract verifier,
+Test unitari Python 9/9, compilazione Python, JavaScript syntax, BKL-042 contract verifier,
 runtime dry-run, roadmap consistency, MkDocs strict e tutti i workflow exact-head e
 post-merge applicabili hanno esito PASS. Il riscontro GET read-only ha confermato le tre
 risorse pubbliche disponibili, digest acquisiti e citazioni sul dominio Pages; nessun
 record è stato stampato.
 
-Il deployment sul servizio esistente ha creato la revisione `00006-ktv` con 100% del
-traffico. Il gateway conserva la revisione `00002-m7c`, punta al canonical service URL e
+Il primo OAT live owner-witnessed ha restituito `INSUFFICIENT_EVIDENCE`, `model=NONE`,
+fonti `AVAILABLE` e nessuna citazione per la domanda "riassumi le sessioni per m27 e
+indica le fonti" (correlation `bkl042-pages-4728c49e-0210-41ce-bc16-a9565d39036e`). I
+digest riportati coincidevano con le tre proiezioni governate pubblicate; la riproduzione
+offline sulla stessa domanda e sugli stessi contenuti ha trovato cinque sessioni M 27.
+La causa era la mancata normalizzazione fra designazione compatta `m27` e canonica `M 27`.
+PR #357 (`7be9fd0b`) introduce tale normalizzazione, incrementa il method version a v2 e
+aggiunge regression test per entrambe le grafie e la query esatta. Non è stata eseguita
+una richiesta provider per il ramo senza evidenze; l'esito precedente non costituisce
+acceptance positiva.
+
+Il redeploy necessario sul servizio relay esistente ha creato la revisione `00007-wrm`
+con 100% del traffico; la `00006-ktv` è disponibile per rollback immediato. Il gateway
+conserva la revisione `00002-m7c`, punta al canonical service URL e
 `/health` restituisce `READY`; il relay rifiuta richieste non autenticate con HTTP `403`.
 La configurazione del secret resta vincolata a Secret Manager, senza leggere o stampare
-valori. La revisione `00005-d97` è disponibile per rollback. Nessuna richiesta autenticata
-al provider è stata eseguita dopo il deployment; quota invariata per questa verifica.
+valori. Nessuna richiesta autenticata post-redeploy è stata eseguita; la nuova OAT positiva
+owner-witnessed è ancora richiesta.
 
 Resta obbligatoria l'OAT autenticata post-deploy witnessed dall'owner. L'assistente non
 simula né attribuisce tale testimonianza; BKL-042 resta `In Progress` fino alla sua

@@ -900,7 +900,7 @@
       "title": "BKL-042-F7 Governed Retrieval Post-Deployment Acceptance",
       "date": "2026-09-23",
       "status": "active",
-      "description": "PR #355 (`b4d45c12`) deploys the initial bounded server-side retrieval/provenance slice for public target identity and historical sessions to relay revision `00006-ktv`. Owner-witnessed authenticated live OAT and formal acceptance are pending; full F1 source coverage is not claimed. Maintain bounded read-only authority and NONE command/safety authority.",
+      "description": "PR #355 (`b4d45c12`) introduced bounded server-side retrieval for public target identity and historical sessions. Owner OAT exposed compact/spaced target-designation mismatch; PR #357 (`7be9fd0b`) fixes normalization as method v2, now deployed to relay revision `00007-wrm` (rollback `00006-ktv`). Repeat owner-witnessed authenticated OAT and formal acceptance remain pending; full F1 source coverage is not claimed. Maintain bounded read-only authority and NONE command/safety authority.",
       "image": null
     },
     {
