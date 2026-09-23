@@ -1,0 +1,17 @@
+# Handover — BKL-034 Portal Reopen
+
+## Stato
+
+BKL-034 è riaperta. Il contract, la fixture e il validator restano accettati; manca il consumer portale bounded read-only e la verifica pubblica Pages.
+
+## Gate residuo
+
+Implementare o riallineare una pagina portale che renda navigabile la projection degli item immagine con sessione, target, provenance, source e freshness/state espliciti. Verificare stati stale/unknown senza inferenze di qualità o readiness.
+
+## Audit predecessori
+
+AP-015 e BKL-033 non vengono riaperti: i loro documenti definiscono esplicitamente scope design/contract-only e demandano UI/runtime a successori separati.
+
+## Limiti
+
+Nessuna image mutation, ingestione runtime, processing execution, provider/AI apply, command, remediation, scheduler decisionale o Safety Authority.

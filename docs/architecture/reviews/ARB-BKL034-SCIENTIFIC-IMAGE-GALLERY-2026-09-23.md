@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Package | BKL-034 |
-| Decision | APPROVED WITH BOUNDED READ-ONLY CONDITIONS |
+| Decision | CONTRACT APPROVED; PORTAL ACCEPTANCE PENDING |
 | Owner / accountable | Massimo Mainini |
 | Witness | Owner-witnessed repository review |
 | Date | 23/09/2026 |
@@ -17,4 +17,4 @@
 
 ## Attestation
 
-ARB accepts BKL-034 for contract/design closure and post-merge verification. This approval does not authorize image writes, runtime ingestion, automatic target selection or operational control.
+ARB accepts the BKL-034 contract/design slice, but does not close the milestone until the bounded portal consumer and public Pages rendering are verified. This approval does not authorize image writes, runtime ingestion, automatic target selection or operational control.

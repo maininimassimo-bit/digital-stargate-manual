@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | `BKL-034` |
-| Stato | ACTIVE / BOUNDED READ-ONLY CONTRACT |
+| Stato | REOPENED / PORTAL CONSUMER PENDING |
 | Versione | 1.0 |
 | Data | 23/09/2026 |
 | Predecessore | BKL-033 Observatory Digital Twin |
@@ -25,6 +25,6 @@ Il contract è `schemas/bkl034-scientific-image-gallery.schema.json`; la fixture
 
 Sono esclusi image mutation, upload/delete, processing execution, provider/AI apply, command path, remediation, scheduler decisionale e Safety Authority. La gallery non autorizza né seleziona automaticamente un target.
 
-## Acceptance
+## Acceptance gate
 
-`.github/scripts/verify-bkl034-scientific-image-gallery.mjs` valida schema identity, cardinalità bounded, riferimenti session/target/provenance, provenance/source refs e boundary fail-closed. L'eventuale UI o ingestione runtime è successiva e separatamente gated.
+`.github/scripts/verify-bkl034-scientific-image-gallery.mjs` valida schema identity, cardinalità bounded, riferimenti session/target/provenance, provenance/source refs e boundary fail-closed. La chiusura richiede inoltre un consumer portale bounded read-only, rendering GitHub Pages verificato e workflow post-merge verdi. Ingestione runtime e write path restano esclusi.

@@ -20,4 +20,4 @@ Acceptance of the Scientific Image Gallery as a bounded, descriptive and read-on
 - bounded cardinality is enforced at contract and validator level;
 - authority remains `projection`, with `commandAuthority=NONE` and `safetyAuthority=NONE`.
 
-Runtime ingestion, gallery UI and any image write operation are successor gates and are not accepted by this package.
+Runtime ingestion and any image write operation remain excluded. The bounded gallery UI consumer is now part of the reopened BKL-034 acceptance gate and must be verified on public GitHub Pages.

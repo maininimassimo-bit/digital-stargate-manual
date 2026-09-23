@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Package | BKL-034 |
-| Decision | ACCEPTED FOR MERGE / POST-MERGE VERIFICATION |
+| Decision | CONTRACT ACCEPTED; MILESTONE REMAINS OPEN |
 | Owner / accountable | Massimo Mainini |
 | Witness | Owner-witnessed release review |
 | Date | 23/09/2026 |
@@ -18,4 +18,4 @@
 
 ## Attestation
 
-RQ accepts the package for merge subject to exact-head workflow success and public projection consistency. Any future UI, ingest or write path requires a separate governed gate.
+RQ accepts the contract for merge subject to exact-head workflow success. The milestone remains open pending portal consumer, Pages verification and end-to-end evidence. Ingest and write paths remain separately excluded.
