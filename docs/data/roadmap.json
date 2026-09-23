@@ -2,7 +2,7 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-09-23",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "218af0f5a2611aac8766c910da9ebdec7021a2bcd548982924168c1afb4b1a62",
+  "sourceDigest": "72fef993ff61d630b5ced2569bd4a4655efcb593c32d23a00470e6ab77f8f224",
   "authority": "DSG-RGM-001",
   "projectStatus": "BKL-034-F2 is CLOSED / ACCEPTED / POST-MERGE VERIFIED for the bounded governed image-ingestion contract and dry-run storage preflight; runtime storage remains separately gated. BKL-042 is the current advisory/read-only successor. AP-015 and BKL-033 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED for their explicitly design/contract-only scopes; RC2 baseline, AP-008 and BKL-036-F5 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED; EAGLE Health is live HEALTHY/100 with fail-closed policy; BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 production runtime unavailable; live source/transport and public runtime GO remain separately gated; no image mutation, processing execution, scheduling, automatic target selection, commands, remediation or Safety Authority is authorized; no scheduling, automatic target selection, commands or Safety Authority is authorized",
   "currentPackage": "BKL-042",
@@ -1020,8 +1020,8 @@
       "itemRef": "BKL-042",
       "title": "BKL-042-F6 Read-Only AI Chat Integration",
       "date": "2026-09-23",
-      "status": "planned",
-      "description": "Planned portal chat using governed citations and provenance for diagnosis, RCA, planning and science. First release is advisory/read-only with no automatic acceptance, tool execution, PixInsight apply, command, remediation, scheduler or Safety Authority.",
+      "status": "active",
+      "description": "F6 contract and static bounded chat consumer are prepared with governed citations and provenance for diagnosis, RCA, planning and science. Runtime model/provider, retrieval, automatic acceptance, tool execution, PixInsight apply, command, remediation, scheduler and Safety Authority remain separately gated.",
       "image": null
     }
   ]
