@@ -2,7 +2,7 @@
 title: Chat AI read-only
 ---
 
-<link rel="stylesheet" href="../styles/bkl042-chat.css">
+<link rel="stylesheet" href="../styles/bkl042-chat.css?v=5a51cb2f">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <script type="module" src="../javascripts/bkl042-chat.js"></script>
 
