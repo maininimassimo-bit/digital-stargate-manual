@@ -2,7 +2,7 @@
 
 | Campo | Valore |
 |---|---|
-| Stato | CLOSED / ACCEPTED / OWNER-WITNESSED — bounded technical scope |
+| Stato | ACCEPTED / BOUNDED GATE / OWNER-WITNESSED |
 | Capability | Deterministic advisory/read-only bounded capability |
 | Evidence | `docs/data/bkl042-f5-real-evidence-evaluation.json` |
 | Authority | Human-only; action, command, execution and safety `NONE` |
