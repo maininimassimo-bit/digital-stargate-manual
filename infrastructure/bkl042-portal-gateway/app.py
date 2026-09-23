@@ -20,7 +20,21 @@ except ImportError as exc:  # Offline repository checks do not require cloud dep
 
 
 MAX_BODY = 20000
-ALLOWED_FIELDS = {"correlation_id", "question", "mode", "evidence", "citations"}
+REQUIRED_FIELDS = {"correlation_id", "question", "mode"}
+ALLOWED_FIELDS = REQUIRED_FIELDS | {"evidence", "citations"}  # accepted only during the UI rollout; always stripped
+
+
+def _normalize_payload(payload: Any) -> dict[str, str]:
+    if not isinstance(payload, dict) or not REQUIRED_FIELDS.issubset(payload) or set(payload) - ALLOWED_FIELDS:
+        raise ValueError("request fields are invalid")
+    if not isinstance(payload["question"], str) or not payload["question"].strip() or len(payload["question"]) > 12000:
+        raise ValueError("question must contain 1 to 12000 characters")
+    if not isinstance(payload["mode"], str) or payload["mode"] not in {"triage", "consultative", "escalation"}:
+        raise ValueError("unsupported mode")
+    if not isinstance(payload["correlation_id"], str) or not payload["correlation_id"] or len(payload["correlation_id"]) > 100:
+        raise ValueError("invalid correlation_id")
+    # Never trust or forward browser-supplied evidence/citations.
+    return {key: payload[key] for key in REQUIRED_FIELDS}
 
 
 def _config() -> dict[str, str]:
@@ -137,9 +151,7 @@ class Handler(BaseHTTPRequestHandler):
             length = int(self.headers.get("Content-Length", "0"))
             if length <= 0 or length > MAX_BODY:
                 raise ValueError("request body size is invalid")
-            payload = json.loads(self.rfile.read(length).decode("utf-8"))
-            if set(payload) - ALLOWED_FIELDS:
-                raise ValueError("unsupported request field")
+            payload = _normalize_payload(json.loads(self.rfile.read(length).decode("utf-8")))
             status, data = forward(payload, authorization.removeprefix("Bearer ").strip())
             self._send(status, data, cors=True)
         except (ValueError, json.JSONDecodeError) as exc:
