@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import os
 import threading
 import urllib.error
@@ -32,6 +33,8 @@ MODEL_BY_MODE = {
 MAX_INPUT_CHARS = 12000
 MAX_CITATIONS = 20
 _quota_lock = threading.Lock()
+logging.basicConfig(level=logging.INFO)
+LOGGER = logging.getLogger("bkl042-ai-relay")
 
 
 def _bool_env(name: str, default: bool = False) -> bool:
@@ -162,7 +165,17 @@ def generate(payload: dict[str, Any]) -> dict[str, Any]:
     try:
         with urllib.request.urlopen(request, timeout=30) as response:
             provider_response = json.loads(response.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        provider_code = "UNKNOWN"
+        try:
+            error_body = json.loads(exc.read().decode("utf-8"))
+            provider_code = str(error_body.get("error", {}).get("code", "UNKNOWN"))
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            pass
+        LOGGER.error("provider_http_error status=%s code=%s", exc.code, provider_code)
+        raise RuntimeError("PROVIDER_REQUEST_FAILED") from exc
     except (urllib.error.URLError, json.JSONDecodeError) as exc:
+        LOGGER.error("provider_transport_error type=%s", type(exc).__name__)
         raise RuntimeError("PROVIDER_REQUEST_FAILED") from exc
     return {
         "correlation_id": correlation_id,
