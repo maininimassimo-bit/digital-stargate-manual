@@ -1,6 +1,6 @@
 # BKL-042 F6 — portal OAuth ingress gate
 
-Status: **DEPLOYED — GATEWAY READY — PAGES CONSUMER PENDING PUBLICATION**
+Status: **CLOSED — AUTHENTICATED LIVE OAT PASSED — BOUNDED READ-ONLY**
 
 The gateway under `infrastructure/bkl042-portal-gateway/` is prepared for a
 Google Identity Services web client. It validates the Google ID token audience,
@@ -16,6 +16,9 @@ Deployment evidence:
 - gateway health: `READY`;
 - relay invocation: service-account mediated;
 - allowed owner identity: `maininimassimo@gmail.com`.
+- GitHub Pages consumer publication verified;
+- owner-witnessed authenticated live OAT passed;
+- final OAT evidence: `docs/architecture/validation/BKL-042-F6-PORTAL-OAUTH-OAT-EVIDENCE-2026-09-23.md`.
 
 No OAuth client secret is required by the browser-token validation path and no
 OpenAI credential belongs in this gateway or in GitHub Pages. The public

@@ -36,3 +36,12 @@ runtime o traffico esterno.
 Il lavoro si interrompe prima di selezionare provider, creare credenziali o generare
 traffico esterno. Per superare questo confine serve una nuova decisione/autorizzazione
 esplicita dell’owner e un package runtime separato.
+
+## Addendum post-authorization — 23/09/2026
+
+Con autorizzazione owner separata, il gate portal-ingress Google OAuth e il relay
+provider sono stati trattati in package runtime distinti. Il relativo OAT
+authenticated live è passato con evidenza owner-witnessed; questa chiusura storica
+resta valida per il perimetro statico/dry-run originario e non viene interpretata
+come autorizzazione a tool, retrieval generico, upload, processing, command path o
+Safety Authority.
