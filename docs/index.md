@@ -5,7 +5,7 @@ hide:
   - toc
 ---
 
-<link rel="stylesheet" href="./styles/enterprise-home.css">
+<link rel="stylesheet" href="./styles/enterprise-home.css?v=d6f2d481">
 
 <main class="dsg-enterprise-home">
 
