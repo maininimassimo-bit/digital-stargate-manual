@@ -11,7 +11,7 @@ from typing import Any
 
 
 BASE = "https://maininimassimo-bit.github.io/digital-stargate-manual/"
-METHOD_VERSION = "bkl042-static-projection-retrieval-v1"
+METHOD_VERSION = "bkl042-static-projection-retrieval-v2"
 SOURCES = {
     "observation-index": "docs/data/scientific-observation-index.json",
     "target-read-model": "docs/data/target-knowledge-read-model.json",
@@ -53,7 +53,12 @@ def _get_json(path: str) -> dict[str, Any]:
 
 
 def _terms(value: str) -> set[str]:
-    return {part.casefold() for part in TOKEN_RE.findall(value) if len(part) > 1}
+    terms = {part.casefold() for part in TOKEN_RE.findall(value) if len(part) > 1}
+    # Astronomical designations are commonly written both compactly (M27) and
+    # with a separator (M 27). Add one canonical compact token for either form.
+    for match in re.finditer(r"(?<![\w])([a-z]{1,4})[\s_-]*(\d{1,5})(?![\w])", value, re.IGNORECASE):
+        terms.add(match.group(1).casefold() + match.group(2))
+    return terms
 
 
 def _safe_url(path: Any) -> str:

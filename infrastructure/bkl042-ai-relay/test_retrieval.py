@@ -48,8 +48,40 @@ class RetrievalTests(unittest.TestCase):
         self.assertEqual(result["state"], "INSUFFICIENT_EVIDENCE")
         self.assertEqual(result["records"], [])
 
+    def test_compact_astronomical_designation_matches_spaced_catalog_name(self):
+        fixtures = {
+            "docs/data/scientific-observation-index.json": {"catalogItems": [], "searchDocuments": []},
+            "docs/data/target-knowledge-read-model.json": {"targets": []},
+            "docs/data/scientific-session-catalog.json": {
+                "sessions": [{
+                    "sessionId": "2026-08-14_2026-08-15", "observationDate": "2026-08-14", "target": "M 27",
+                    "analyticsState": "VALIDATED_ANALYTICS", "metadataState": "REGISTERED",
+                    "evidenceState": "CANONICAL_EVIDENCE",
+                }]
+            },
+        }
+        result = retrieve("riassumi le sessioni per m27 e indica le fonti", lambda path: fixtures[path])
+        self.assertEqual(result["state"], "EVIDENCE_FOUND")
+        self.assertEqual(len(result["records"]), 1)
+        self.assertEqual(result["records"][0]["source_id"], "session-catalog")
+        self.assertEqual(result["method_version"], "bkl042-static-projection-retrieval-v2")
+
+    def test_spaced_designation_matches_compact_index_term(self):
+        fixtures = {
+            "docs/data/scientific-observation-index.json": {
+                "catalogItems": [{"catalogItemId": "catalog-1", "entityId": "session-1"}],
+                "searchDocuments": [{"catalogItemId": "catalog-1", "title": "M27", "keywords": []}],
+            },
+            "docs/data/target-knowledge-read-model.json": {"targets": []},
+            "docs/data/scientific-session-catalog.json": {"sessions": [{
+                "sessionId": "2026-08-14_2026-08-15", "observationDate": "2026-08-14", "target": "M 27",
+            }]},
+        }
+        result = retrieve("sessioni per M 27", lambda path: fixtures[path])
+        self.assertEqual(result["state"], "EVIDENCE_FOUND")
+
     def test_empty_query_and_invalid_projection_fail_closed(self):
-        self.assertEqual(retrieve("a", lambda _path: {})["method_version"], "bkl042-static-projection-retrieval-v1")
+        self.assertEqual(retrieve("a", lambda _path: {})["method_version"], "bkl042-static-projection-retrieval-v2")
         with self.assertRaisesRegex(RuntimeError, "SOURCE_INVALID"):
             retrieve("observatory", lambda _path: {})
 
