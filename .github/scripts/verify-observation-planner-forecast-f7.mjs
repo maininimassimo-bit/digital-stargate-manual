@@ -166,7 +166,7 @@ for(const marker of ['ACCEPTED — POST-MERGE VERIFIED','35255829165','71 comple
 const validation=fs.readFileSync('docs/architecture/validation/BKL-031-F7-Fresh-Forecast-Supply-Evidence-2026-09-17.md','utf8');
 assert.ok(validation.includes('PROTECTED-SITE EVIDENCE ACQUIRED')&&validation.includes('1/1_EXHAUSTED')&&validation.includes('DEGRADED')&&validation.includes('FRESH'));
 const roadmap=json('.github/roadmap/roadmap-source.json');
-assert.ok(['BKL-036 Observatory Health Score','BKL-036-F5 Live Read-Only Health Score','AP-015','BKL-033','BKL-034'].includes(roadmap.nextMilestone));
+assert.ok(['BKL-036 Observatory Health Score','BKL-036-F5 Live Read-Only Health Score','AP-015','BKL-033','BKL-034','BKL-042'].includes(roadmap.nextMilestone));
 const acceptance=fs.readFileSync('docs/project/BKL-031-F7-FRESH-FORECAST-SUPPLY-ACCEPTANCE-2026-09-17.md','utf8');
 for(const marker of ['ACCEPTED — POST-MERGE VERIFIED','000fc81558060b45e71b9f1a69122249b6a5fe8e','59a1d690406d733b6e61e64220f84cef9b6fb1a2','10/10 successful','1/1_EXHAUSTED']) assert.ok(acceptance.includes(marker),`F7 acceptance missing ${marker}`);
 

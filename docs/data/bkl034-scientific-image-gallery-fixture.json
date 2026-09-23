@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "authority": "projection",
+  "commandAuthority": "NONE",
+  "safetyAuthority": "NONE",
+  "items": [
+    {
+      "id": "img:2026-08-15-m31-lrgb",
+      "assetType": "scientific_image",
+      "state": "observed",
+      "freshness": "current",
+      "sessionRef": "session:2026-08-15_2026-08-16",
+      "targetRef": "target:M31",
+      "provenanceRefs": ["prov:pixinsight:2026-08-15-m31-lrgb"],
+      "sourceRefs": ["src:catalog:2026-08-15_2026-08-16", "src:provenance:2026-08-15-m31-lrgb"],
+      "caption": "Bounded read-only scientific image projection"
+    },
+    {
+      "id": "img:2026-08-16-m42-ha",
+      "assetType": "scientific_image",
+      "state": "stale",
+      "freshness": "stale",
+      "sessionRef": "session:2026-08-16_2026-08-17",
+      "targetRef": "target:M42",
+      "provenanceRefs": ["prov:pixinsight:2026-08-16-m42-ha"],
+      "sourceRefs": ["src:catalog:2026-08-16_2026-08-17", "src:provenance:2026-08-16-m42-ha"],
+      "caption": "Stale source retained without freshness inference"
+    },
+    {
+      "id": "img:2026-08-17-ngc7000-preview",
+      "assetType": "scientific_image",
+      "state": "unknown",
+      "freshness": "unknown",
+      "sessionRef": "session:2026-08-17_2026-08-18",
+      "targetRef": "target:NGC7000",
+      "provenanceRefs": ["prov:pixinsight:2026-08-17-ngc7000-preview"],
+      "sourceRefs": ["src:catalog:2026-08-17_2026-08-18", "src:provenance:2026-08-17-ngc7000-preview"],
+      "caption": "Unknown state preserved explicitly"
+    }
+  ]
+}

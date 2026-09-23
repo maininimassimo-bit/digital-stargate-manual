@@ -898,6 +898,16 @@
       "id": "BKL-034",
       "type": "backlog_item",
       "title": "Scientific Image Gallery evoluta",
+      "status": "Done",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/project/BACKLOG.md"
+      }
+    }
+    ,{
+      "id": "BKL-042",
+      "type": "backlog_item",
+      "title": "AI Observatory Assistant",
       "status": "In Progress",
       "authority": "repository_authority",
       "source_locator": {
@@ -921,6 +931,16 @@
       "type": "depends_on",
       "from": "BKL-034",
       "to": "BKL-033",
+      "version": "1.0",
+      "source_locator": {
+        "path": ".github/roadmap/roadmap-source.json"
+      }
+    },
+    {
+      "id": "rel:BKL-042:depends_on:BKL-034",
+      "type": "depends_on",
+      "from": "BKL-042",
+      "to": "BKL-034",
       "version": "1.0",
       "source_locator": {
         "path": ".github/roadmap/roadmap-source.json"

@@ -143,8 +143,8 @@ for (const required of [
 ]) assert.ok(developer.includes(required), `Developer Foundation does not preserve F6 regression coverage: ${required}`);
 
 const roadmap = JSON.parse(fs.readFileSync(roadmapPath, 'utf8'));
-assert.ok(['BKL-036', 'BKL-036-F5', 'AP-007', 'AP-008', 'AP-015', 'BKL-033', 'BKL-034'].includes(roadmap.currentPackage));
-assert.ok(['BKL-036 Observatory Health Score', 'BKL-036-F5 Live Read-Only Health Score', 'AP-007 Enterprise Operations and Service Management Architecture', 'AP-008 Enterprise Integration Architecture', 'AP-015', 'BKL-033', 'BKL-034'].includes(roadmap.nextMilestone));
+assert.ok(['BKL-036', 'BKL-036-F5', 'AP-007', 'AP-008', 'AP-015', 'BKL-033', 'BKL-034', 'BKL-042'].includes(roadmap.currentPackage));
+assert.ok(['BKL-036 Observatory Health Score', 'BKL-036-F5 Live Read-Only Health Score', 'AP-007 Enterprise Operations and Service Management Architecture', 'AP-008 Enterprise Integration Architecture', 'AP-015', 'BKL-033', 'BKL-034', 'BKL-042'].includes(roadmap.nextMilestone));
 assert.ok(roadmap.milestones.some(entry => entry.id === 'M-BKL031-F6-ACCEPTANCE'), 'roadmap F6 acceptance milestone missing');
 const f6AcceptanceMilestone = roadmap.milestones.find(entry => entry.id === 'M-BKL031-F6-ACCEPTANCE');
 assert.ok(f6AcceptanceMilestone.description.includes('PR #275'), 'F6 acceptance milestone must reference PR #275');
