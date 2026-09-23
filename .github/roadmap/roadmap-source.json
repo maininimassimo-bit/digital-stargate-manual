@@ -5,7 +5,7 @@
   "projectStatus": "BKL-034-F2 is CLOSED / ACCEPTED / POST-MERGE VERIFIED for the bounded governed image-ingestion contract and dry-run storage preflight; runtime storage remains separately gated. BKL-042 is the current advisory/read-only successor. AP-015 and BKL-033 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED for their explicitly design/contract-only scopes; RC2 baseline, AP-008 and BKL-036-F5 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED; EAGLE Health is live HEALTHY/100 with fail-closed policy; BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 production runtime unavailable; live source/transport and public runtime GO remain separately gated; no image mutation, processing execution, scheduling, automatic target selection, commands, remediation or Safety Authority is authorized; no scheduling, automatic target selection, commands or Safety Authority is authorized",
   "currentPackage": "BKL-042",
   "nextMilestone": "BKL-042",
-  "target": "Complete BKL-042-F3 deterministic advisory demonstrator and gate a future read-only consumer on freshness/accessibility evidence; retain model/provider execution, runtime storage, upload authority and processing execution as separately gated capabilities. No scheduler, automatic target selection, device command or Safety Authority is authorized",
+  "target": "Complete BKL-042-F4 static read-only consumer with bounded freshness/accessibility and fail-closed authority verification; retain model/provider execution, runtime storage, upload authority and processing execution as separately gated capabilities. No scheduler, automatic target selection, device command or Safety Authority is authorized",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -280,7 +280,7 @@
           "id": "BKL-042",
           "title": "AI Observatory Assistant",
           "status": "active",
-          "note": "Current governed successor after BKL-034 portal acceptance. BKL-042-F1/F2 are established and F3 deterministic demonstrator is active; citation/provenance projection only. Automatic apply, model/provider execution, command and Safety Authority remain excluded."
+          "note": "Current governed successor after BKL-034 portal acceptance. BKL-042-F1/F2/F3 are established and F4 static consumer verification is active; bounded synthetic citation/provenance projection only. Automatic apply, model/provider execution, command and Safety Authority remain excluded."
         },
         {
           "id": "BKL-043",

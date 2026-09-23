@@ -3,7 +3,7 @@ import fs from 'node:fs';
 const input = JSON.parse(fs.readFileSync('docs/data/bkl042-f2-advisory-response-fixture.json', 'utf8'));
 const output = {
   schemaVersion: '1.0', contractType: 'BKL042_F3_DETERMINISTIC_ADVISORY_OUTPUT', demonstratorMode: 'BOUNDED_SYNTHETIC_READ_ONLY',
-  producer: 'DSG.DeterministicObservatoryAdvisory', producerVersion: '1.0.0-f3', methodId: 'BKL042-F3-CLOSED-RULES-1', inputFixtureId: input.fixtureId,
+  producer: 'DSG.DeterministicObservatoryAdvisory', producerVersion: '1.0.0-f3', methodId: 'BKL042-F3-CLOSED-RULES-1', inputFixtureId: input.fixtureId, generatedAt: input.generatedAt,
   responses: input.cases.map(item => {
     const unavailable = item.sources.some(source => ['UNAVAILABLE', 'UNKNOWN', 'STALE', 'CONFLICT'].includes(source.lifecycle) || source.completeness !== 'COMPLETE');
     return {caseId: item.caseId, state: unavailable ? 'INSUFFICIENT_EVIDENCE' : 'ANSWERED', sourceRefs: item.sources.map(source => source.sourceId), explanation: unavailable ? 'Evidence availability gate failed; no subject-specific advisory can be produced.' : 'Evidence and citation gate passed; bounded advisory context is available.', recommendations: unavailable ? [] : ['Review the cited governed source before any human decision.'], limitations: ['Deterministic demonstrator output; not model output, scientific acceptance or execution.']};
