@@ -9,7 +9,7 @@
 | Branch | `main` |
 | Data | 30/07/2026 |
 | Autorità | Project Owner / Architecture Sponsor — Massimo Mainini |
-| Stato | Approved for architecture planning |
+| Stato | Superseded by AP-015 Accepted / Post-Merge Verified design baseline |
 | Package futuro | AP-015 — Scientific Knowledge Platform Architecture |
 | Capability | CAP-40 — Scientific Knowledge Layer |
 
@@ -106,7 +106,7 @@ AP-015 dipende almeno da AP-002, AP-006, AP-008, AP-011, AP-013 e AP-014. Può i
 
 ## 11. Acceptance criteria
 
-- CAP-40 registrata come `Planned`;
+    - CAP-40 registrata come architecture baseline accepted; implementation remains `Planned`;
 - AP-015 registrato nella roadmap dopo AP-014;
 - fonti autorevoli e boundary espliciti;
 - modello minimo di entità, relazioni, claim e citation locator;
@@ -145,4 +145,4 @@ AP-015 dipende almeno da AP-002, AP-006, AP-008, AP-011, AP-013 e AP-014. Può i
 
 ## 14. Decisione
 
-La Scientific Knowledge Layer è approvata per la pianificazione come capability trasversale CAP-40 e sarà progettata mediante AP-015 dopo la stabilizzazione del repository scientifico e del catalogo.
+La Scientific Knowledge Layer è approvata come capability trasversale CAP-40 a livello di architecture/design baseline tramite AP-015. L’implementazione, la materializzazione tecnologica e qualsiasi runtime restano pianificati e separatamente governati.

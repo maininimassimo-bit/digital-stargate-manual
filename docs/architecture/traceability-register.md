@@ -42,7 +42,7 @@
 | CAP-37 Scientific Image Repository | In Progress | AP-013 / AP-013C | AP-013B COPY_ONLY; DSDM-005; verified transport cleanup dry-run | ARB-013C, Approved with Conditions | AP-013C DRY_RUN/NO_DELETE; real OAT C03 pending; productive cleanup not authorized |
 | CAP-38 Scientific Observation Catalog and Search | Planned | SIR-VIS-001 / AP-008 / AP-011 | catalog e semantic boundary | ARB-011; nessuna review AP-014 | Manifest richiesti |
 | CAP-39 Scientific Processing Provenance | Planned | SIR-VIS-001 / AP-011 | lineage e reproducibility rules | ARB-011; nessuna review AP-013/AP-014 | Run immutabili |
-| CAP-40 Scientific Knowledge Layer | Planned | SKL-VIS-001 / AP-010 / AP-011 | AI governance boundary | ARB-010 / ARB-011 | Claim e citation governati |
+| CAP-40 Scientific Knowledge Layer | Architecture baseline accepted / implementation planned | SKL-VIS-001 / AP-015 / AP-010 / AP-011 | semantic contract, claim/citation/provenance boundary | ARB-AP015-CAP40-001; ARB-010; ARB-011 | Runtime materialization and provider selection remain separately gated |
 
 ## 3. Architecture Package Register
 
@@ -66,7 +66,7 @@
 | AP-013 | Scientific Image Repository | AP-013, DSDM-001…DSDM-004 | AP-013 acceptance evidence | Implemented baseline; AP-013B COPY_ONLY operational |
 | AP-013C | Verified Transport Cleanup and Convergence Monitoring | AP-013C v0.2, DSDM-005 v0.2, dry-run acceptance plan | ARB-013C | Approved with Conditions — DRY_RUN/NO_DELETE only; C03 real OAT open |
 | AP-014 | Scientific Catalog and Search | SIR-VIS-001 | Nessuna | Planned |
-| AP-015 | Scientific Knowledge Platform | SKL-VIS-001 | Nessuna | Planned |
+| AP-015 | Scientific Knowledge Platform | SKL-VIS-001; AP015-CAP40-001; AP015-CAP40-VAL-001 | ARB-AP015-CAP40-001; RQ-AP015-CAP40-001 | Accepted / Post-Merge Verified; design-only |
 | BKL-036-F2 | Evidence Envelope and Descriptive Health Projection | ADR-016, BKL-036-F2-ENV-001, BKL-036-F2-VAL-001 | Accepted / Post-Merge Verified | PR #312, merge `0a4f3de87ccf94c2132d3adac2239a52f6a5f475`; synthetic offline fixture; no runtime authority |
 | BKL-036-F3 | Archived Evidence Health Score | ADR-017, BKL-036-F3-SCORE-001, BKL-036-F3-VAL-001 | Accepted / Post-Merge Verified | PR #314, merge f77bdf21fb5456261b323a87db3c92b4b78effde; repository-archived evidence only; public read-only projection; current output `UNAVAILABLE` |
 | BKL-036-F4 | Governed Telemetry Acquisition and Repository Archival | ADR-018, BKL-036-F4, BKL-036-F4-VAL-001 | Accepted / Post-Merge Verified | PR #320, merge `c58f0cb241e1b8432ec81c17d9d6b967d023e102`; repository-only snapshot import and archive; no live transport, command, scheduling, remediation or Safety Authority |

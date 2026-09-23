@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0",
+  "authority": "projection",
+  "entities": [
+    {"id": "session:S-001", "type": "observation_session", "lifecycle": "validated", "authority": "scientific_catalog", "citationRefs": ["cit:catalog"]},
+    {"id": "asset:A-001", "type": "scientific_asset", "lifecycle": "validated", "authority": "scientific_catalog", "citationRefs": ["cit:catalog"]},
+    {"id": "target:T-001", "type": "target", "lifecycle": "validated", "authority": "target_knowledge_base", "citationRefs": ["cit:target"]}
+  ],
+  "relations": [
+    {"id": "rel:session-asset", "type": "produced_asset", "from": "session:S-001", "to": "asset:A-001", "citationRefs": ["cit:catalog"]},
+    {"id": "rel:session-target", "type": "observed_target", "from": "session:S-001", "to": "target:T-001", "citationRefs": ["cit:catalog"]}
+  ],
+  "claims": [
+    {"id": "claim:asset-linked", "subject": "asset:A-001", "kind": "claim", "lifecycle": "validated", "method": "bounded_catalog_reconciliation", "provenanceRef": "prov:catalog", "citationRefs": ["cit:catalog"]}
+  ],
+  "citations": [
+    {"id": "cit:catalog", "authority": "github_repository", "locator": "docs/data/scientific-session-catalog.json"},
+    {"id": "cit:target", "authority": "github_repository", "locator": "docs/data/target-knowledge-read-model.json"}
+  ],
+  "provenance": [
+    {"id": "prov:catalog", "method": "bounded_catalog_reconciliation", "producer": "AP-015-contract-fixture", "inputRefs": ["session:S-001", "asset:A-001"], "outputRefs": ["claim:asset-linked"], "citationRefs": ["cit:catalog"]}
+  ],
+  "conflicts": [
+    {"id": "conflict:target-alias", "subject": "target:T-001", "status": "open", "assertionRefs": ["claim:asset-linked", "unknown:target-alias"], "citationRefs": ["cit:target"]}
+  ],
+  "unknowns": [
+    {"id": "unknown:target-alias", "subject": "target:T-001", "reason": "Historical alias cannot be resolved without authoritative evidence.", "citationRefs": ["cit:target"]}
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.invalid/schemas/ap015-knowledge-semantic-contract.schema.json",
+  "title": "AP-015 CAP-40 Knowledge Semantic Contract",
+  "type": "object",
+  "required": ["schemaVersion", "authority", "entities", "relations", "claims", "citations", "provenance", "conflicts", "unknowns"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "authority": {"const": "projection"},
+    "entities": {"type": "array", "items": {"$ref": "#/$defs/entity"}},
+    "relations": {"type": "array", "items": {"$ref": "#/$defs/relation"}},
+    "claims": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+    "citations": {"type": "array", "items": {"$ref": "#/$defs/citation"}},
+    "provenance": {"type": "array", "items": {"$ref": "#/$defs/provenance"}},
+    "conflicts": {"type": "array", "items": {"$ref": "#/$defs/conflict"}},
+    "unknowns": {"type": "array", "items": {"$ref": "#/$defs/unknown"}}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9._:-]+$"},
+    "lifecycle": {"enum": ["incomplete", "unknown", "draft", "validated", "superseded", "rejected"]},
+    "citationRef": {"type": "string", "minLength": 1},
+    "entity": {"type": "object", "required": ["id", "type", "lifecycle", "authority", "citationRefs"], "properties": {"id": {"$ref": "#/$defs/id"}, "type": {"type": "string", "minLength": 1}, "lifecycle": {"$ref": "#/$defs/lifecycle"}, "authority": {"type": "string", "minLength": 1}, "citationRefs": {"type": "array", "items": {"$ref": "#/$defs/citationRef"}, "minItems": 1}}, "additionalProperties": false},
+    "relation": {"type": "object", "required": ["id", "type", "from", "to", "citationRefs"], "properties": {"id": {"$ref": "#/$defs/id"}, "type": {"type": "string", "minLength": 1}, "from": {"$ref": "#/$defs/id"}, "to": {"$ref": "#/$defs/id"}, "citationRefs": {"type": "array", "items": {"$ref": "#/$defs/citationRef"}, "minItems": 1}}, "additionalProperties": false},
+    "claim": {"type": "object", "required": ["id", "subject", "kind", "lifecycle", "method", "provenanceRef", "citationRefs"], "properties": {"id": {"$ref": "#/$defs/id"}, "subject": {"$ref": "#/$defs/id"}, "kind": {"enum": ["claim", "inference", "recommendation"]}, "lifecycle": {"$ref": "#/$defs/lifecycle"}, "method": {"type": "string", "minLength": 1}, "provenanceRef": {"$ref": "#/$defs/id"}, "citationRefs": {"type": "array", "items": {"$ref": "#/$defs/citationRef"}, "minItems": 1}}, "additionalProperties": false},
+    "citation": {"type": "object", "required": ["id", "authority", "locator"], "properties": {"id": {"$ref": "#/$defs/id"}, "authority": {"type": "string", "minLength": 1}, "locator": {"type": "string", "pattern": "^[^/].*"}, "digest": {"type": "string"}}, "additionalProperties": false},
+    "provenance": {"type": "object", "required": ["id", "method", "producer", "inputRefs", "outputRefs", "citationRefs"], "properties": {"id": {"$ref": "#/$defs/id"}, "method": {"type": "string", "minLength": 1}, "producer": {"type": "string", "minLength": 1}, "inputRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}, "minItems": 1}, "outputRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}, "minItems": 1}, "citationRefs": {"type": "array", "items": {"$ref": "#/$defs/citationRef"}, "minItems": 1}}, "additionalProperties": false},
+    "conflict": {"type": "object", "required": ["id", "subject", "status", "assertionRefs", "citationRefs"], "properties": {"id": {"$ref": "#/$defs/id"}, "subject": {"$ref": "#/$defs/id"}, "status": {"const": "open"}, "assertionRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}, "minItems": 2}, "citationRefs": {"type": "array", "items": {"$ref": "#/$defs/citationRef"}, "minItems": 1}}, "additionalProperties": false},
+    "unknown": {"type": "object", "required": ["id", "subject", "reason", "citationRefs"], "properties": {"id": {"$ref": "#/$defs/id"}, "subject": {"$ref": "#/$defs/id"}, "reason": {"type": "string", "minLength": 1}, "citationRefs": {"type": "array", "items": {"$ref": "#/$defs/citationRef"}, "minItems": 1}}, "additionalProperties": false}
+  }
+}
