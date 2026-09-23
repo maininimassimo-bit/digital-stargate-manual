@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.0",
+  "contractType": "BKL042_F3_DETERMINISTIC_ADVISORY_OUTPUT",
+  "demonstratorMode": "BOUNDED_SYNTHETIC_READ_ONLY",
+  "producer": "DSG.DeterministicObservatoryAdvisory",
+  "producerVersion": "1.0.0-f3",
+  "methodId": "BKL042-F3-CLOSED-RULES-1",
+  "inputFixtureId": "BKL-042-F2-SYNTHETIC-001",
+  "responses": [
+    {
+      "caseId": "CASE-CURRENT-CITATION-001",
+      "state": "ANSWERED",
+      "sourceRefs": [
+        "SRC-BKL034-001"
+      ],
+      "explanation": "Evidence and citation gate passed; bounded advisory context is available.",
+      "recommendations": [
+        "Review the cited governed source before any human decision."
+      ],
+      "limitations": [
+        "Deterministic demonstrator output; not model output, scientific acceptance or execution."
+      ]
+    },
+    {
+      "caseId": "CASE-UNAVAILABLE-FAIL-CLOSED-001",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "sourceRefs": [
+        "SRC-BKL045-UNAVAILABLE"
+      ],
+      "explanation": "Evidence availability gate failed; no subject-specific advisory can be produced.",
+      "recommendations": [],
+      "limitations": [
+        "Deterministic demonstrator output; not model output, scientific acceptance or execution."
+      ]
+    }
+  ],
+  "ruleEvaluations": [
+    {
+      "ruleId": "CITATION_AND_AUTHORITY",
+      "caseId": "CASE-CURRENT-CITATION-001",
+      "decision": "PASS",
+      "reasonCodes": []
+    },
+    {
+      "ruleId": "SOURCE_AVAILABILITY",
+      "caseId": "CASE-CURRENT-CITATION-001",
+      "decision": "PASS",
+      "reasonCodes": []
+    },
+    {
+      "ruleId": "CITATION_AND_AUTHORITY",
+      "caseId": "CASE-UNAVAILABLE-FAIL-CLOSED-001",
+      "decision": "PASS",
+      "reasonCodes": []
+    },
+    {
+      "ruleId": "SOURCE_AVAILABILITY",
+      "caseId": "CASE-UNAVAILABLE-FAIL-CLOSED-001",
+      "decision": "FAIL_CLOSED",
+      "reasonCodes": [
+        "SOURCE_UNAVAILABLE_OR_INCOMPLETE"
+      ]
+    }
+  ],
+  "authority": {
+    "consumerMode": "READ_ONLY",
+    "advisoryOnly": true,
+    "actionAuthority": "NONE",
+    "commandAuthority": "NONE",
+    "executionAuthority": "NONE",
+    "safetyAuthority": "NONE",
+    "automaticAcceptance": false
+  },
+  "limitations": [
+    "Bounded synthetic deterministic output; no model, provider, upload, tool execution or PixInsight apply.",
+    "Human disposition and execution evidence remain separate future inputs."
+  ],
+  "artifactDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

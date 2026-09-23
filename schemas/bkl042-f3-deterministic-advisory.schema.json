@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maininimassimo-bit.github.io/digital-stargate-manual/schemas/bkl042-f3-deterministic-advisory.schema.json",
+  "title": "BKL-042 F3 Deterministic Advisory Demonstrator",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "contractType", "demonstratorMode", "producer", "producerVersion", "methodId", "inputFixtureId", "responses", "ruleEvaluations", "authority", "limitations", "artifactDigest"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"}, "contractType": {"const": "BKL042_F3_DETERMINISTIC_ADVISORY_OUTPUT"},
+    "demonstratorMode": {"const": "BOUNDED_SYNTHETIC_READ_ONLY"}, "producer": {"const": "DSG.DeterministicObservatoryAdvisory"},
+    "producerVersion": {"const": "1.0.0-f3"}, "methodId": {"const": "BKL042-F3-CLOSED-RULES-1"},
+    "inputFixtureId": {"type": "string", "minLength": 1},
+    "responses": {"type": "array", "minItems": 2, "maxItems": 8, "items": {"$ref": "#/$defs/response"}},
+    "ruleEvaluations": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/rule"}},
+    "authority": {"$ref": "#/$defs/authority"}, "limitations": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "artifactDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  },
+  "$defs": {
+    "response": {"type": "object", "additionalProperties": false, "required": ["caseId", "state", "sourceRefs", "explanation", "recommendations", "limitations"], "properties": {
+      "caseId": {"type": "string"}, "state": {"enum": ["ANSWERED", "INSUFFICIENT_EVIDENCE", "CONFLICT_REQUIRES_REVIEW", "REFUSED_BOUNDARY"]},
+      "sourceRefs": {"type": "array", "minItems": 1, "items": {"type": "string"}}, "explanation": {"type": "string", "minLength": 1},
+      "recommendations": {"type": "array", "items": {"type": "string"}}, "limitations": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+    }},
+    "rule": {"type": "object", "additionalProperties": false, "required": ["ruleId", "caseId", "decision", "reasonCodes"], "properties": {
+      "ruleId": {"enum": ["CITATION_AND_AUTHORITY", "SOURCE_AVAILABILITY"]}, "caseId": {"type": "string"},
+      "decision": {"enum": ["PASS", "FAIL_CLOSED"]}, "reasonCodes": {"type": "array", "items": {"type": "string"}}
+    }},
+    "authority": {"type": "object", "additionalProperties": false, "required": ["consumerMode", "advisoryOnly", "actionAuthority", "commandAuthority", "executionAuthority", "safetyAuthority", "automaticAcceptance"], "properties": {
+      "consumerMode": {"const": "READ_ONLY"}, "advisoryOnly": {"const": true}, "actionAuthority": {"const": "NONE"}, "commandAuthority": {"const": "NONE"}, "executionAuthority": {"const": "NONE"}, "safetyAuthority": {"const": "NONE"}, "automaticAcceptance": {"const": false}
+    }}
+  }
+}
