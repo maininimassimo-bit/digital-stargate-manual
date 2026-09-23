@@ -1,0 +1,171 @@
+/* Theme contrast compatibility layer.
+ * Loaded last so legacy portal surfaces remain readable in both Material themes.
+ * The dark theme is intentionally untouched. */
+
+[data-md-color-scheme="default"] {
+  --dsg-color-text: var(--dsg-text);
+  --dsg-color-text-muted: var(--dsg-text-muted);
+  --dsg-color-border: var(--dsg-line);
+  --dsg-color-surface: var(--dsg-surface);
+  --dsg-color-surface-muted: var(--dsg-surface-muted);
+  --dsg-color-surface-elevated: var(--dsg-surface);
+  --dsg-color-accent: var(--dsg-blue);
+}
+
+[data-md-color-scheme="default"] .dsg-roadmap-app {
+  --rm-panel: var(--dsg-surface);
+  color: var(--dsg-text);
+}
+
+[data-md-color-scheme="default"] .dsg-roadmap-hero,
+[data-md-color-scheme="default"] .dsg-roadmap-wave,
+[data-md-color-scheme="default"] .dsg-roadmap-milestones,
+[data-md-color-scheme="default"] .dsg-roadmap-overview,
+[data-md-color-scheme="default"] .dsg-roadmap-source {
+  border-color: var(--dsg-line);
+  background: linear-gradient(145deg, #ffffff, #f1f5fb);
+  box-shadow: var(--dsg-shadow-sm);
+}
+
+[data-md-color-scheme="default"] .dsg-roadmap-summary div,
+[data-md-color-scheme="default"] .dsg-roadmap-card,
+[data-md-color-scheme="default"] .dsg-roadmap-milestone {
+  border-color: var(--dsg-line);
+  background: var(--dsg-surface);
+}
+
+[data-md-color-scheme="default"] .dsg-roadmap-summary strong,
+[data-md-color-scheme="default"] .dsg-roadmap-card__id,
+[data-md-color-scheme="default"] .dsg-roadmap-milestone span,
+[data-md-color-scheme="default"] .dsg-roadmap-kicker,
+[data-md-color-scheme="default"] .dsg-roadmap-wave > header span {
+  color: var(--dsg-blue);
+}
+
+[data-md-color-scheme="default"] .dsg-roadmap-donut::after {
+  background: linear-gradient(145deg, #ffffff, #edf3fb);
+}
+
+[data-md-color-scheme="default"] .dsg-roadmap-donut__center strong,
+[data-md-color-scheme="default"] .dsg-roadmap-overview__stats strong {
+  color: var(--dsg-text);
+}
+
+[data-md-color-scheme="default"] .dsg-roadmap-card h3,
+[data-md-color-scheme="default"] .dsg-roadmap-milestone h3,
+[data-md-color-scheme="default"] .dsg-roadmap-wave h2,
+[data-md-color-scheme="default"] .dsg-roadmap-section-heading h2 {
+  color: var(--dsg-text);
+}
+
+[data-md-color-scheme="default"] .dsg-roadmap-card p,
+[data-md-color-scheme="default"] .dsg-roadmap-card__review,
+[data-md-color-scheme="default"] .dsg-roadmap-milestone p,
+[data-md-color-scheme="default"] .dsg-roadmap-summary span,
+[data-md-color-scheme="default"] .dsg-roadmap-overview__stats small {
+  color: var(--dsg-text-muted);
+}
+
+[data-md-color-scheme="default"] .dsg-operations-dashboard {
+  --dsg-color-text: var(--dsg-text);
+  --dsg-color-text-muted: var(--dsg-text-muted);
+  --dsg-color-border: var(--dsg-line);
+  --dsg-color-surface-muted: var(--dsg-surface-muted);
+  --dsg-color-surface-elevated: var(--dsg-surface);
+}
+
+[data-md-color-scheme="default"] .dsg-operations-dashboard__panel,
+[data-md-color-scheme="default"] .dsg-operations-dashboard__kpis article,
+[data-md-color-scheme="default"] .dsg-operations-dashboard__list article,
+[data-md-color-scheme="default"] .dsg-operations-dashboard__services article {
+  border-color: var(--dsg-line);
+  background: var(--dsg-surface);
+}
+
+[data-md-color-scheme="default"] .dsg-operations-ap013 {
+  border-color: color-mix(in srgb, var(--dsg-amber) 55%, var(--dsg-line));
+  background: color-mix(in srgb, var(--dsg-amber) 9%, var(--dsg-surface));
+}
+
+[data-md-color-scheme="default"] .dsg-operations-ap013 > div span,
+[data-md-color-scheme="default"] .dsg-operations-ap013 dt {
+  color: var(--dsg-amber);
+}
+
+[data-md-color-scheme="default"] .dsg-latest-observation.dsg-showcase {
+  color: var(--dsg-text);
+  background: linear-gradient(145deg, #ffffff, #f1f5fb);
+}
+
+[data-md-color-scheme="default"] .dsg-latest-observation__header p,
+[data-md-color-scheme="default"] .dsg-showcase__coordinate-panel .dsg-showcase__sky-meta span:nth-child(odd) {
+  color: var(--dsg-text-muted);
+}
+
+[data-md-color-scheme="default"] .dsg-latest-observation .dsg-showcase__media,
+[data-md-color-scheme="default"] .dsg-latest-observation .dsg-showcase__content {
+  border-color: var(--dsg-line);
+  background: rgba(255, 255, 255, .72);
+}
+
+[data-md-color-scheme="default"] .dsg-latest-observation .dsg-showcase__content h2,
+[data-md-color-scheme="default"] .dsg-latest-observation .dsg-showcase__content strong,
+[data-md-color-scheme="default"] .dsg-latest-observation .dsg-showcase__content dt,
+[data-md-color-scheme="default"] .dsg-latest-observation .dsg-showcase__content dd {
+  color: var(--dsg-text);
+}
+
+[data-md-color-scheme="default"] .dsg-architecture-center {
+  --arch-border: var(--dsg-line);
+  --arch-panel: linear-gradient(145deg, #ffffff, #f1f5fb);
+  --arch-muted: var(--dsg-text-muted);
+  --dsg-text-strong: var(--dsg-text);
+  --dsg-accent: var(--dsg-blue);
+}
+
+[data-md-color-scheme="default"] .dsg-architecture-center .dsg-architecture-hero,
+[data-md-color-scheme="default"] .dsg-architecture-actions a,
+[data-md-color-scheme="default"] .dsg-architecture-card,
+[data-md-color-scheme="default"] .dsg-capability-card,
+[data-md-color-scheme="default"] .dsg-assurance-card,
+[data-md-color-scheme="default"] .dsg-architecture-kpi {
+  color: var(--dsg-text);
+}
+
+[data-md-color-scheme="default"] .dsg-architecture-center .dsg-architecture-hero h1,
+[data-md-color-scheme="default"] .dsg-architecture-kpi strong,
+[data-md-color-scheme="default"] .dsg-capability-card strong,
+[data-md-color-scheme="default"] .dsg-assurance-card strong,
+[data-md-color-scheme="default"] .dsg-architecture-card strong {
+  color: var(--dsg-text);
+}
+
+[data-md-color-scheme="default"] .dsg-architecture-center .dsg-architecture-hero p,
+[data-md-color-scheme="default"] .dsg-architecture-kpi small,
+[data-md-color-scheme="default"] .dsg-capability-card p,
+[data-md-color-scheme="default"] .dsg-assurance-card p,
+[data-md-color-scheme="default"] .dsg-architecture-card small {
+  color: var(--dsg-text-muted);
+}
+
+[data-md-color-scheme="default"] .dsg-architecture-card.is-active {
+  border-color: color-mix(in srgb, var(--dsg-green) 55%, var(--dsg-line));
+  background: color-mix(in srgb, var(--dsg-green) 8%, var(--dsg-surface));
+}
+
+[data-md-color-scheme="default"] .dsg-enterprise-home .dsg-context-section {
+  color: var(--dsg-text);
+  background: linear-gradient(145deg, #ffffff, #edf4fb);
+}
+
+[data-md-color-scheme="default"] .dsg-enterprise-home .dsg-context-section h2,
+[data-md-color-scheme="default"] .dsg-enterprise-home .dsg-context-section p,
+[data-md-color-scheme="default"] .dsg-enterprise-home .dsg-context-section__actions a,
+[data-md-color-scheme="default"] .dsg-enterprise-home .dsg-context-section__actions span {
+  color: var(--dsg-text);
+}
+
+[data-md-color-scheme="default"] .dsg-enterprise-home .dsg-context-section__actions a {
+  border-color: var(--dsg-line);
+  background: var(--dsg-surface-muted);
+}
