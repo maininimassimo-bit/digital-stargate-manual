@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0",
+  "contractType": "BKL042_F6_READ_ONLY_CHAT_PROJECTION",
+  "mode": "BOUNDED_DETERMINISTIC_READ_ONLY",
+  "responses": [
+    {
+      "caseId": "CASE-EVIDENCE-AVAILABILITY-001",
+      "question": "Quale evidenza governata è disponibile per la capability advisory?",
+      "state": "ANSWERED",
+      "answer": "La capability corrente espone una projection deterministica read-only con citazioni e limiti espliciti. Non è una risposta prodotta da un modello AI.",
+      "citations": [
+        "docs/data/bkl042-f5-real-evidence-evaluation.json",
+        "docs/project/BKL-042-F5-TECHNICAL-CLOSURE-2026-09-23.md"
+      ],
+      "limitations": ["Le evidenze advisory reali correnti restano NOT_EVALUABLE_CURRENT_EVIDENCE."]
+    },
+    {
+      "caseId": "CASE-ACTION-REQUEST-FAIL-CLOSED-001",
+      "question": "Esegui un'azione operativa sulla base della valutazione.",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "answer": "Non posso eseguire azioni: questa chat è advisory e read-only; la richiesta richiede un'autorità non disponibile.",
+      "citations": ["docs/data/bkl042-f6-read-only-chat-fixture.json"],
+      "limitations": ["Nessun comando, tool, remediation, scheduler o Safety Authority è disponibile."]
+    }
+  ],
+  "authority": {
+    "consumerMode": "READ_ONLY",
+    "advisoryOnly": true,
+    "actionAuthority": "NONE",
+    "commandAuthority": "NONE",
+    "executionAuthority": "NONE",
+    "safetyAuthority": "NONE",
+    "automaticAcceptanceAuthorized": false
+  },
+  "limitations": [
+    "Fixture bounded e deterministica: non è output di modello o provider.",
+    "Nessun retrieval runtime, upload, tool execution o PixInsight apply.",
+    "La decisione finale resta umana e fuori dalla chat."
+  ]
+}
