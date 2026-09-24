@@ -86,10 +86,11 @@ Massimo Mainini authorized a dedicated architecture gate for a possible
 system-wide detection tool, potentially started at EAGLE boot. The gate is
 defined in
 `docs/architecture/validation/BKL-043-F2-DETECTION-ARCHITECTURE-GATE-2026-09-24.md`
-and is design/review only. The evidence-based candidate architecture is recorded
-in `docs/architecture/validation/BKL-043-F2-SYSTEM-DETECTION-ARCHITECTURE-2026-09-24.md`;
-its two-plane recommendation awaits owner/ARB disposition. It does not authorize implementation, automatic
-startup, recurring polling/writes, live source access, alerts, numeric
+and is design/review only. Massimo Mainini approved the two-plane F2 logical
+design baseline on 2026-09-24, recorded in
+`docs/architecture/validation/BKL-043-F2-SYSTEM-DETECTION-ARCHITECTURE-2026-09-24.md`.
+The design approval does not authorize implementation, automatic startup,
+recurring polling/writes, live source access, alerts, numeric
 MTBF/MTTR claims, or any command/execution/safety authority. The N.I.N.A.
 attempt population is defined as log-observed activity only; planned sessions
 without N.I.N.A. activity are excluded. Architecture approval and any later

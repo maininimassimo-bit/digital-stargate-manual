@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Gate ID | `M-BKL043-F2-DETECTION-ARCHITECTURE` |
-| Status | Repository-evidence architecture proposal prepared; owner/ARB disposition pending; implementation not authorized |
+| Status | F2 design baseline ACCEPTED by owner on 2026-09-24; runtime implementation not authorized |
 | Package | BKL-043 Observatory Reliability Engineering |
 | Owner / accountable | Massimo Mainini |
 | Authority | Architecture-design only; command/execution/safety `NONE` |
@@ -110,9 +110,14 @@ have been validated.
 
 ## Current disposition
 
-The gate is created and owner-authorized for architecture work. The evidence-
-based proposal is recorded in
+The gate is complete at the architecture/design level. On 2026-09-24, Massimo
+Mainini explicitly approved the two-plane proposal in the project task. The
+accepted design baseline is recorded in
 `docs/architecture/validation/BKL-043-F2-SYSTEM-DETECTION-ARCHITECTURE-2026-09-24.md`.
-The recommended two-plane design is proposed, not accepted. Owner/ARB disposition
-and any required independent review remain pending. No implementation has been
-started and no live source has been contacted.
+Acceptance is limited to the logical architecture: a local read-only observer
+and an independently durable heartbeat witness, with a separately governed
+human-confirmed incident lifecycle. It does not approve implementation,
+technology/vendor selection, cadence, retention values, source access, startup,
+polling, writes, alerts or deployment. Those require follow-on review and
+explicit authorization. No implementation has been started and no live source
+has been contacted.

@@ -4,7 +4,7 @@
 |---|---|
 | Evidence ID | `BKL043-F2-SYSTEM-DETECTION-ARCHITECTURE-2026-09-24` |
 | Gate | `M-BKL043-F2-DETECTION-ARCHITECTURE` |
-| Status | Proposed architecture prepared from repository evidence; owner/ARB decision pending |
+| Status | F2 logical design baseline ACCEPTED by owner on 2026-09-24; implementation not authorized |
 | Owner / accountable | Massimo Mainini |
 | Authority | Design-only; repository evidence only; command/execution/safety `NONE` |
 | Baseline | `77fb7980492cad24b86fa51fcbe7ef1437783eca` |
@@ -226,7 +226,7 @@ No pilot is authorized by this design. A separate pilot proposal should require:
 10. owner authorization for exact target, cadence, source, retention and runtime
     deployment before any change is activated.
 
-## 10. Architecture recommendation and decision
+## 10. Architecture recommendation and owner decision
 
 **Recommendation:** retain Option D as the target for the stated whole-system
 objective, but phase delivery. First validate the local source map and a bounded
@@ -236,10 +236,17 @@ lifecycle could support broader system-level claims. If no independent witness
 is approved, explicitly narrow the capability to “EAGLE-observed component
 telemetry” and leave offline gaps unknown.
 
-The decision requested from owner/ARB is whether to accept this two-plane
-architecture as the F2 design baseline, with the independent durable witness and
-incident journal remaining separate runtime gates. Approval of this proposal
-does not authorize either writer or any boot/recurring task.
+**Owner decision (2026-09-24): APPROVED.** Massimo Mainini accepted the two-plane
+architecture as the BKL-043 F2 logical design baseline. The acceptance covers
+the local read-only observation plane, the independent durable heartbeat-witness
+plane needed for whole-system coverage, and a separately governed,
+human-confirmed incident lifecycle. The architecture is accepted as a design
+target; it is not a choice of runtime technology, hosting vendor, data retention,
+polling cadence or operational source configuration.
+
+The independent witness, durable journals and incident lifecycle remain subject
+to their own security, privacy, operational and runtime gates. No implementation,
+writer, boot/recurring task, live source access or deployment is authorized.
 
 ## References
 
