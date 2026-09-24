@@ -2,9 +2,10 @@
 
 ## Stato
 
-BKL-042 resta **IN PROGRESS** e non viene chiuso. L'OAT owner-witnessed v2 ha
-superato la query M 27; Massimo Mainini ha richiesto esplicitamente l'estensione
-delle altre fonti F1 eleggibili prima della formal acceptance. L'incremento F7 è
+BKL-042 F7 è **ACCEPTED / BOUNDED GATE / OWNER-WITNESSED**. L'OAT owner-witnessed v2
+aveva superato la query M 27; dopo l'estensione F1 e l'OAT v3, Massimo Mainini ha
+formalmente accettato F7 nel perimetro bounded read-only, inclusi i limiti
+documentati. L'incremento F7 è
 stato integrato in `main` tramite PR #360, merge
 `6e6cf43fdf7d29d67d4800541049a4acdf7f42ee`.
 
@@ -22,7 +23,10 @@ workflow post-merge applicabili sono PASS; i relativi run ID sono nel documento
 evidence F7. Metodo v3 è ora sul relay esistente, revisione `00008-qat`, traffico
 100%, massimo istanze 1. Rollback `00007-wrm`; l'evidence di deploy è
 `docs/architecture/validation/BKL-042-F7-V3-DEPLOYMENT-EVIDENCE-2026-09-24.md`.
-L'OAT autenticato owner-witnessed v3 è ancora da eseguire.
+L'OAT v3 è PASS con limiti accettati: il confronto SQM è aggregato e non contiene
+misure per singola sessione; i record M 27 BKL-041 restano sperimentali, sintetici
+e non calibrati. I correlation ID e l'acceptance owner sono in
+`docs/project/BKL-042-F7-BOUNDED-ACCEPTANCE-2026-09-24.md`.
 
 ## Fonti residue e prossimo gate
 
@@ -34,8 +38,7 @@ provenance risolte.
 
 Le review AI-assisted ARB/RQ sull'implementation commit `8b89c048` sono registrate
 nei rispettivi review record; non equivalgono ad approvazione umana indipendente.
-Prossimo gate: Massimo esegue/witnessa l'OAT autenticato v3 dal portale, verificando
-separatamente il recupero del confronto SQM BKL-037 e il contesto qualità BKL-041
-`EXPERIMENTAL_NOT_ACCEPTED` senza punteggi sintetici; poi fornisce la formal
-acceptance separata. Fino ad allora mantenere `command_authority=NONE`,
+Nessun gate runtime ulteriore è autorizzato o necessario per l'acceptance F7.
+Eventuali future estensioni alle classi escluse richiederanno nuove projection e
+una decisione separata. Mantenere `command_authority=NONE`,
 `execution_authority=NONE`, `safety_authority=NONE` e `acceptance_authority=HUMAN_ONLY`.

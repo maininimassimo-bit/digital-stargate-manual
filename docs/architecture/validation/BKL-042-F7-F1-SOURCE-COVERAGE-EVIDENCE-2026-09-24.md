@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Evidence ID | `BKL042-F7-SOURCE-COVERAGE-2026-09-24` |
-| Status | Method v3 deployed on existing relay with max 1 instance; owner-witnessed OAT and formal acceptance pending |
+| Status | Method v3 deployed; owner-witnessed OAT PASS WITH ACCEPTED LIMITATIONS; F7 accepted within bounded read-only scope |
 | Authority | Bounded advisory / read-only |
 | Owner / accountable | Massimo Mainini |
 | Method | `bkl042-static-projection-retrieval-v3` |
@@ -91,14 +91,17 @@ The only failed run visible in the recent main history is
 `e404b282799f7379aa7b7af9b8b9c289ff646d81`; it is not a run on the merged F7 head.
 The deployment and live configuration are recorded separately in
 `docs/architecture/validation/BKL-042-F7-V3-DEPLOYMENT-EVIDENCE-2026-09-24.md`.
-Method v3 is now deployed to the existing relay; the BKL-042 portal gateway is
-unchanged. No authenticated OAT has yet been performed on v3. The deployment was
-separately authorized by the owner to enable that OAT; no new service or package
-closure is authorized by the source-coverage review.
+Method v3 is deployed to the existing relay; the BKL-042 portal gateway is
+unchanged. Owner-witnessed OAT was completed on both added-source intents. The SQM
+projection supports aggregate descriptive statistics but not per-session values;
+the answer returned this limitation rather than inventing detail. M 27 quality
+context was explicitly experimental, synthetic and uncalibrated. Massimo accepted
+these limitations and formally accepted F7 within the bounded read-only scope;
+see `docs/project/BKL-042-F7-BOUNDED-ACCEPTANCE-2026-09-24.md`.
 
 ## Remaining gates
 
-This document records implementation evidence only. BKL-042 is **not closed**.
-Required next gates are owner-witnessed authenticated OAT on method v3 and separate
-formal owner acceptance. Source classes excluded above need eligible,
-fresh, provenance-resolved upstream projections before later inclusion.
+F7 is accepted within the bounded scope. BKL-042 remains the tracked package for
+any separately approved future source-coverage increment; excluded source classes
+need eligible, fresh, provenance-resolved upstream projections before inclusion.
+No further OAT or runtime change is authorized by this acceptance.
