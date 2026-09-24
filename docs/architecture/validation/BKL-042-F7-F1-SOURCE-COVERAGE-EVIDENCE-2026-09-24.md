@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Evidence ID | `BKL042-F7-SOURCE-COVERAGE-2026-09-24` |
-| Status | Implementation merged and post-merge verified; relay deployment and owner-witnessed OAT pending |
+| Status | Method v3 deployed on existing relay with max 1 instance; owner-witnessed OAT and formal acceptance pending |
 | Authority | Bounded advisory / read-only |
 | Owner / accountable | Massimo Mainini |
 | Method | `bkl042-static-projection-retrieval-v3` |
@@ -89,15 +89,16 @@ merge. All applicable post-merge workflows on the merge commit also passed:
 The only failed run visible in the recent main history is
 `35961982173` (“Analyze Observatory Session Automatically”) on superseded commit
 `e404b282799f7379aa7b7af9b8b9c289ff646d81`; it is not a run on the merged F7 head.
-The configured relay remains on method v2; method v3 has not been deployed or
-authenticated-OAT-tested. Deployment to the existing relay is limited to enabling
-the required owner-witnessed v3 OAT; this evidence does not authorize a new service,
-traffic promotion or package closure.
+The deployment and live configuration are recorded separately in
+`docs/architecture/validation/BKL-042-F7-V3-DEPLOYMENT-EVIDENCE-2026-09-24.md`.
+Method v3 is now deployed to the existing relay; the BKL-042 portal gateway is
+unchanged. No authenticated OAT has yet been performed on v3. The deployment was
+separately authorized by the owner to enable that OAT; no new service or package
+closure is authorized by the source-coverage review.
 
 ## Remaining gates
 
 This document records implementation evidence only. BKL-042 is **not closed**.
-Required next gates are an authorized deployment of method v3 to the existing relay
-solely to enable OAT, owner-witnessed authenticated OAT on method v3, and separate
+Required next gates are owner-witnessed authenticated OAT on method v3 and separate
 formal owner acceptance. Source classes excluded above need eligible,
 fresh, provenance-resolved upstream projections before later inclusion.

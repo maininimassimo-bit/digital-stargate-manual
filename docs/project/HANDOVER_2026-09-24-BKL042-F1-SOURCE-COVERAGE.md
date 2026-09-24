@@ -19,8 +19,10 @@ L'evidence di dettaglio è
 I test locali sono 12/12 PASS e i replay read-only sulle projection statiche
 pubbliche hanno risolto entrambi i percorsi di retrieval. Final-head e tutti i
 workflow post-merge applicabili sono PASS; i relativi run ID sono nel documento
-evidence F7. Il metodo v3 non è ancora stato deployato né provato con l'OAT
-autenticato owner-witnessed.
+evidence F7. Metodo v3 è ora sul relay esistente, revisione `00008-qat`, traffico
+100%, massimo istanze 1. Rollback `00007-wrm`; l'evidence di deploy è
+`docs/architecture/validation/BKL-042-F7-V3-DEPLOYMENT-EVIDENCE-2026-09-24.md`.
+L'OAT autenticato owner-witnessed v3 è ancora da eseguire.
 
 ## Fonti residue e prossimo gate
 
@@ -32,9 +34,8 @@ provenance risolte.
 
 Le review AI-assisted ARB/RQ sull'implementation commit `8b89c048` sono registrate
 nei rispettivi review record; non equivalgono ad approvazione umana indipendente.
-Prossimo gate: deploy autorizzato del metodo v3 sul relay esistente, limitato a
-rendere possibile l'OAT owner-witnessed; la necessità deriva dal fatto che il relay
-pubblicato serve ancora il metodo v2. Nessun nuovo servizio o promozione del
-traffico. Dopo il deploy, Massimo deve eseguire/witnessare l'OAT autenticato v3 e
-fornire la formal acceptance separata. Fino ad allora mantenere `command_authority=NONE`,
+Prossimo gate: Massimo esegue/witnessa l'OAT autenticato v3 dal portale, verificando
+separatamente il recupero del confronto SQM BKL-037 e il contesto qualità BKL-041
+`EXPERIMENTAL_NOT_ACCEPTED` senza punteggi sintetici; poi fornisce la formal
+acceptance separata. Fino ad allora mantenere `command_authority=NONE`,
 `execution_authority=NONE`, `safety_authority=NONE` e `acceptance_authority=HUMAN_ONLY`.
