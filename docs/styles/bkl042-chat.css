@@ -86,6 +86,9 @@
 }
 
 .dsg-bkl042-chat__live {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
   padding: .72rem 1rem;
   border: 1px solid color-mix(in srgb, var(--md-accent-fg-color) 55%, transparent);
   border-radius: 9px;
@@ -94,6 +97,24 @@
   font: inherit;
   font-weight: 750;
   cursor: pointer;
+}
+
+.dsg-bkl042-chat__brand-badge {
+  display: inline-grid;
+  width: 1.8rem;
+  height: 1.8rem;
+  flex: 0 0 1.8rem;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  color: #111;
+}
+
+.dsg-bkl042-chat__brand-badge svg {
+  display: block;
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: currentColor;
 }
 
 .dsg-bkl042-chat__live:disabled {
