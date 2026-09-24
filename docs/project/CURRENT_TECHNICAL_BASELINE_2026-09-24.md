@@ -96,13 +96,19 @@ attempt population is defined as log-observed activity only; planned sessions
 without N.I.N.A. activity are excluded. Architecture approval and any later
 runtime pilot require separate gates.
 
-### BKL-043 F3 read-only pilot readiness — planned 24/09/2026
+### BKL-043 F3 read-only pilot readiness — decision draft 24/09/2026
 
-The next gate is repository-only preparation of a bounded pilot specification
-and exact authorization decision package. Its gate definition is
+The repository-only specification draft and separate exact-authorization
+decision sheet are prepared in
+`docs/architecture/validation/BKL-043-F3-PILOT-SPECIFICATION-DRAFT-2026-09-24.md`
+and `docs/architecture/validation/BKL-043-F3-EXACT-PILOT-AUTHORIZATION-DECISION-2026-09-24.md`.
+They qualify source eligibility, trust boundaries, local-only versus two-plane
+scope, privacy/data minimization, coverage and unknown semantics, synthetic
+offline test cases, non-interference and rollback. No source, cadence, retention,
+target, witness, transport or deployment is selected. Offline synthetic contract
+tests and owner disposition are still pending; the decision record explicitly
+grants no runtime authorization. No live source access, collector, startup,
+recurring write, incident register, alert or deployment has been activated. The
+separate F3 gate definition remains
 `docs/architecture/validation/BKL-043-F3-READONLY-PILOT-READINESS-GATE-2026-09-24.md`.
-It covers sources and trust boundaries, synthetic/offline validation,
-coverage/unknown semantics, privacy, non-interference, rollback and the owner
-decisions required before a later runtime pilot. F3 authorizes no live source
-access, collector, startup/recurring execution, durable writer, alert or deploy.
 BKL-043 remains in progress; no numeric reliability baseline is claimed.
