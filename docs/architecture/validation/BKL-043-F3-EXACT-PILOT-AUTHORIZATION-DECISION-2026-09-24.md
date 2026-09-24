@@ -46,7 +46,7 @@ are not authorization.
 | Resource stop thresholds and measurement method during imaging workload | **UNSELECTED** |
 | Installation/start mode (including whether boot/recurring execution is allowed) | **UNSELECTED** |
 | Stop conditions, disable/uninstall, rollback and recovery owner | **UNSELECTED** |
-| Offline test evidence, security/privacy review and independent reviewer | **UNSELECTED** |
+| Offline test evidence, security/privacy review and independent reviewer | Synthetic offline envelope tests are implemented; CI/review evidence pending; security/privacy review and independent reviewer **UNSELECTED** |
 | Post-change OAT and acceptance criteria | **UNSELECTED** |
 | Whether any incident lifecycle is in scope (default: excluded) | **EXCLUDED unless separately gated** |
 

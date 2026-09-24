@@ -104,10 +104,13 @@ decision sheet are prepared in
 and `docs/architecture/validation/BKL-043-F3-EXACT-PILOT-AUTHORIZATION-DECISION-2026-09-24.md`.
 They qualify source eligibility, trust boundaries, local-only versus two-plane
 scope, privacy/data minimization, coverage and unknown semantics, synthetic
-offline test cases, non-interference and rollback. No source, cadence, retention,
-target, witness, transport or deployment is selected. Offline synthetic contract
-tests and owner disposition are still pending; the decision record explicitly
-grants no runtime authorization. No live source access, collector, startup,
+offline test cases, non-interference and rollback. A proposed closed observation
+envelope schema and ten offline synthetic tests are implemented at
+`contracts/telemetry/bkl-043-reliability-observation-v1.schema.json` and
+`.github/scripts/test-bkl043-f3-offline-contract.mjs`; they pass locally and are
+added to Developer Foundation CI. CI evidence and owner disposition are pending.
+No source, cadence, retention, target, witness, transport or deployment is
+selected; the decision record explicitly grants no runtime authorization. No live source access, collector, startup,
 recurring write, incident register, alert or deployment has been activated. The
 separate F3 gate definition remains
 `docs/architecture/validation/BKL-043-F3-READONLY-PILOT-READINESS-GATE-2026-09-24.md`.
