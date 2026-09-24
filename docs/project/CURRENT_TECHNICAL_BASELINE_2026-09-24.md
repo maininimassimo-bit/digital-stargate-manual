@@ -95,3 +95,14 @@ MTBF/MTTR claims, or any command/execution/safety authority. The N.I.N.A.
 attempt population is defined as log-observed activity only; planned sessions
 without N.I.N.A. activity are excluded. Architecture approval and any later
 runtime pilot require separate gates.
+
+### BKL-043 F3 read-only pilot readiness — planned 24/09/2026
+
+The next gate is repository-only preparation of a bounded pilot specification
+and exact authorization decision package. Its gate definition is
+`docs/architecture/validation/BKL-043-F3-READONLY-PILOT-READINESS-GATE-2026-09-24.md`.
+It covers sources and trust boundaries, synthetic/offline validation,
+coverage/unknown semantics, privacy, non-interference, rollback and the owner
+decisions required before a later runtime pilot. F3 authorizes no live source
+access, collector, startup/recurring execution, durable writer, alert or deploy.
+BKL-043 remains in progress; no numeric reliability baseline is claimed.
