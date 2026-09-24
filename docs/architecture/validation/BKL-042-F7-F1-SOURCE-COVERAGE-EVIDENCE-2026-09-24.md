@@ -3,11 +3,14 @@
 | Field | Value |
 |---|---|
 | Evidence ID | `BKL042-F7-SOURCE-COVERAGE-2026-09-24` |
-| Status | Implementation evidence; AI-assisted ARB/RQ review completed on implementation commit `8b89c048`; final PR-head checks, merge, deployment and owner OAT pending |
+| Status | Implementation merged and post-merge verified; relay deployment and owner-witnessed OAT pending |
 | Authority | Bounded advisory / read-only |
 | Owner / accountable | Massimo Mainini |
 | Method | `bkl042-static-projection-retrieval-v3` |
 | Base `main` | `50624ba6ac94b83a41647ae7f5f716ea00ec5ce7` |
+| Merged `main` | `6e6cf43fdf7d29d67d4800541049a4acdf7f42ee` (PR #360; merged 2026-09-24) |
+| Reviewed implementation head | `8b89c048828187a5ca67e06bc51fa94a6f6649fc` |
+| Final PR head | `7d7bc9d2c134a710e67b779d5d33cbc0e1aeb53d` |
 
 ## Scope
 
@@ -64,11 +67,37 @@ BKL-041 source contract; it does not change the F1 eligibility inventory.
   `execution_authority=NONE`, `safety_authority=NONE`, and acceptance is
   `HUMAN_ONLY`.
 
+## Merge and post-merge verification
+
+PR [#360](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/360)
+was merged to `main` as `6e6cf43fdf7d29d67d4800541049a4acdf7f42ee`. Every applicable
+final-head workflow on `7d7bc9d2c134a710e67b779d5d33cbc0e1aeb53d` passed before
+merge. All applicable post-merge workflows on the merge commit also passed:
+
+| Workflow | Run | Result |
+|---|---:|---|
+| Developer Foundation | `35969957210` | SUCCESS |
+| Validate documentation (no deploy) | `35969957340` | SUCCESS |
+| Genera manuale Word | `35969957208` | SUCCESS |
+| Deploy MkDocs artifact to GitHub Pages | `35969957266` | SUCCESS |
+| Governed Projection Sync | `35969957197` | SUCCESS |
+| Scientific Platform Governance | `35969957278` | SUCCESS |
+| BKL-031 F3-B / F3-C | `35969957346` / `35969957352` | SUCCESS / SUCCESS |
+| BKL-031 F4-A / F4-B / F4-C / F4-D | `35969957290` / `35969957338` / `35969957382` / `35969957388` | SUCCESS / SUCCESS / SUCCESS / SUCCESS |
+| BKL-031 F5 / F6 | `35969957202` / `35969957125` | SUCCESS / SUCCESS |
+
+The only failed run visible in the recent main history is
+`35961982173` (“Analyze Observatory Session Automatically”) on superseded commit
+`e404b282799f7379aa7b7af9b8b9c289ff646d81`; it is not a run on the merged F7 head.
+The configured relay remains on method v2; method v3 has not been deployed or
+authenticated-OAT-tested. Deployment to the existing relay is limited to enabling
+the required owner-witnessed v3 OAT; this evidence does not authorize a new service,
+traffic promotion or package closure.
+
 ## Remaining gates
 
 This document records implementation evidence only. BKL-042 is **not closed**.
-Required next gates are exact final PR-head CI, protected merge/post-merge checks,
-an authorized deployment decision if evidence
-shows deployment is necessary, owner-witnessed authenticated OAT on method v3, and
-separate formal owner acceptance. Source classes excluded above need eligible,
+Required next gates are an authorized deployment of method v3 to the existing relay
+solely to enable OAT, owner-witnessed authenticated OAT on method v3, and separate
+formal owner acceptance. Source classes excluded above need eligible,
 fresh, provenance-resolved upstream projections before later inclusion.
