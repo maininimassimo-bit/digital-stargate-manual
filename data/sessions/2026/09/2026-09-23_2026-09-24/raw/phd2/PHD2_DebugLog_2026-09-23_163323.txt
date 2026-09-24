@@ -1,0 +1,385 @@
+16:33:23.132 00.047 5672 PHD2 version 2.6.14dev1 begins execution with:
+16:33:23.132 00.000 5672    Windows 10 (build 17763), 64-bit edition
+16:33:23.132 00.000 5672    wxWidgets 3.0.5
+16:33:23.132 00.000 5672    cfitsio 3.49
+16:33:23.132 00.000 5672 GetString("/frame/logdir", "") returns ""
+16:33:23.148 00.016 5672 CoInitializeEx returns 1
+16:33:23.148 00.000 5672 locale: using dir C:\Program Files (x86)\PHDGuiding2\locale exists=1
+16:33:23.148 00.000 5672 GetInt("/wxLanguage", 0) returns 110
+16:33:23.179 00.031 5672 locale: initialized with lang id 110 (r=1)
+16:33:23.210 00.031 5672 locale: wxTranslations language set to 110
+16:33:23.226 00.016 5672 GetInt("/currentProfile", 0) returns 2
+16:33:23.257 00.031 5672 reset dither spiral
+16:33:23.272 00.015 5672 StartWorkerThread(00000000) begins
+16:33:23.272 00.000 5672 WorkerThread constructor called
+16:33:23.272 00.000 5672 StartWorkerThread(0021C3A0) ends
+16:33:23.288 00.016 9604 WorkerThread::Entry() begins
+16:33:23.288 00.000 5672 StartWorkerThread(00000000) begins
+16:33:23.288 00.000 9604 worker thread CoInitializeEx returns 0
+16:33:23.288 00.000 5672 WorkerThread constructor called
+16:33:23.288 00.000 5672 StartWorkerThread(0021C700) ends
+16:33:23.288 00.000 2428 WorkerThread::Entry() begins
+16:33:23.288 00.000 2428 worker thread CoInitializeEx returns 0
+16:33:23.288 00.000 5672 GetBoolean("/ServerMode", 1) returns 1
+16:33:23.460 00.172 5672 GetInt("/profile/2/NoiseReductionMethod", 0) returns 1
+16:33:23.460 00.000 5672 GetDouble("/profile/2/DitherScaleFactor", 1.000000) returns 1.000000
+16:33:23.460 00.000 5672 GetBoolean("/profile/2/DitherRaOnly", 0) returns 0
+16:33:23.476 00.016 5672 GetInt("/profile/2/DitherMode", 0) returns 0
+16:33:23.476 00.000 5672 set dither mode 0
+16:33:23.476 00.000 5672 GetInt("/profile/2/frame/timeLapse", 0) returns 0
+16:33:23.476 00.000 5672 GetInt("/profile/2/frame/var_delay/long_delay", 10000) returns 10000
+16:33:23.491 00.015 5672 GetInt("/profile/2/frame/var_delay/short_delay", 1000) returns 1000
+16:33:23.491 00.000 5672 GetBoolean("/profile/2/frame/var_delay/enabled", 0) returns 0
+16:33:23.491 00.000 5672 Variable delay: Disabled, Short = 1000 ms, Long = 10000 ms
+16:33:23.491 00.000 5672 GetInt("/profile/2/AutoLoadCalibration", -1) returns 1
+16:33:23.507 00.016 5672 GetInt("/profile/2/frame/focalLength", 0) returns 266
+16:33:23.507 00.000 5672 GetInt("/profile/2/auto_exp/exposure_min", 1000) returns 1000
+16:33:23.507 00.000 5672 GetInt("/profile/2/auto_exp/exposure_max", 5000) returns 5000
+16:33:23.507 00.000 5672 GetDouble("/profile/2/auto_exp/target_snr", 6.000000) returns 6.000000
+16:33:23.507 00.000 5672 AutoExp: config min = 1000 max = 5000 snr = 6.00
+16:33:23.522 00.015 5672 AutoExp: reset exp to 5000
+16:33:23.522 00.000 5672 GetInt("/profile/2/CustomExposureDuration", 30000) returns 30000
+16:33:23.522 00.000 5672 GetInt("/profile/2/ExposureDurationMs", 1000) returns 2000
+16:33:23.538 00.016 5672 OnExposureDurationSelected: duration = 2000
+16:33:23.538 00.000 5672 GetBoolean("/profile/2/BeepForLostStar", 1) returns 1
+16:33:23.538 00.000 5672 GetInt("/profile/2/Gamma", 100) returns 39
+16:33:23.538 00.000 5672 GetBoolean("/profile/2/ImageLogger/LoggingEnabled", 0) returns 0
+16:33:23.554 00.016 5672 GetBoolean("/profile/2/ImageLogger/LogFramesOverThreshRel", 0) returns 0
+16:33:23.554 00.000 5672 GetBoolean("/profile/2/ImageLogger/LogFramesOverThreshPx", 0) returns 0
+16:33:23.554 00.000 5672 GetBoolean("/profile/2/ImageLogger/LogFramesDropped", 0) returns 0
+16:33:23.569 00.015 5672 GetBoolean("/profile/2/ImageLogger/LogAutoSelectFrames", 0) returns 0
+16:33:23.569 00.000 5672 GetDouble("/profile/2/ImageLogger/ErrorThreshRel", 4.000000) returns 4.000000
+16:33:23.569 00.000 5672 GetDouble("/profile/2/ImageLogger/ErrorThreshPx", 4.000000) returns 4.000000
+16:33:23.569 00.000 5672 ImgLogger: Settings LogEnabled=0 Log Rel=0, 0.00 Log Px=0, 0.00 LogFrameDrop=0 LogAutoSel=0 NextN=0
+16:33:23.569 00.000 5672 GetBoolean("/profile/2/indi/VerboseLogging", 0) returns 0
+16:33:23.585 00.016 5672 guider state => UNINITIALIZED
+16:33:23.601 00.016 5672 GetInt("/profile/2/overlay/slit/center.x", 376) returns 376
+16:33:23.601 00.000 5672 GetInt("/profile/2/overlay/slit/center.y", 290) returns 290
+16:33:23.601 00.000 5672 GetInt("/profile/2/overlay/slit/width", 8) returns 8
+16:33:23.601 00.000 5672 GetInt("/profile/2/overlay/slit/height", 100) returns 100
+16:33:23.601 00.000 5672 GetInt("/profile/2/overlay/slit/angle", 0) returns 0
+16:33:23.616 00.015 5672 Changing from state UNINITIALIZED to UNINITIALIZED
+16:33:23.616 00.000 5672 guider state => SELECTING
+16:33:23.616 00.000 5672 GetBoolean("/profile/2/guider/FastRecenter", 1) returns 1
+16:33:23.616 00.000 5672 GetBoolean("/profile/2/guider/ScaleImage", 1) returns 1
+16:33:23.632 00.016 5672 GetDouble("/profile/2/guider/StarMinHFD", 1.500000) returns 1.500000
+16:33:23.632 00.000 5672 Setting StarMinHFD = 1.50
+16:33:23.632 00.000 5672 GetDouble("/profile/2/guider/StarMaxHFD", 20.000000) returns 10.000000
+16:33:23.632 00.000 5672 Setting MaxHFD = 10.0
+16:33:23.647 00.015 5672 GetDouble("/profile/2/guider/StarMinSNR", 6.000000) returns 6.000000
+16:33:23.647 00.000 5672 Setting StarMinSNR = 6.0
+16:33:23.647 00.000 5672 GetInt("/profile/2/guider/AutoSelDownsample", 0) returns 0
+16:33:23.663 00.016 5672 Setting AutoSelDownsample = 0
+16:33:23.663 00.000 5672 GetString("/profile/2/guider/bookmarks", "") returns ""
+16:33:23.663 00.000 5672 GetDouble("/profile/2/guider/onestar/MassChangeThreshold", 0.500000) returns 0.500000
+16:33:23.663 00.000 5672 GetBoolean("/profile/2/guider/onestar/MassChangeThresholdEnabled", 1) returns 1
+16:33:23.679 00.016 5672 GetBoolean("/profile/2/guider/onestar/TolerateJumpsEnabled", 0) returns 0
+16:33:23.679 00.000 5672 GetDouble("/profile/2/guider/onestar/TolerateJumpsThreshold", 4.000000) returns 4.000000
+16:33:23.679 00.000 5672 GetInt("/profile/2/guider/onestar/SearchRegion", 15) returns 15
+16:33:23.679 00.000 5672 GetBoolean("/profile/2/guider/multistar/enabled", 0) returns 1
+16:33:23.694 00.015 5672 MultiStar mode enabled
+16:33:23.694 00.000 5672 GetBoolean("/StickyLockPosition", 0) returns 0
+16:33:23.694 00.000 5672 GetString("/geometry", "") returns "1;1936;1056;-8;-8"
+16:33:23.819 00.125 5672 GetInt("/graph/ScopeOrCameraUnits", 0) returns 0
+16:33:23.819 00.000 5672 GetString("/graph/RAColor", "") returns "#6464FF"
+16:33:23.835 00.016 5672 GetString("/graph/DecColor", "") returns "#FF0000"
+16:33:23.835 00.000 5672 GetInt("/graph/minLength", 50) returns 50
+16:33:23.835 00.000 5672 GetInt("/graph/maxLength", 400) returns 400
+16:33:23.835 00.000 5672 GetInt("/graph/minHeight", 1) returns 1
+16:33:23.850 00.015 5672 GetInt("/graph/maxHeight", 16) returns 16
+16:33:23.850 00.000 5672 GetInt("/graph/length", 100) returns 100
+16:33:23.850 00.000 5672 GraphStats window size = 100
+16:33:23.850 00.000 5672 GetInt("/graph/height", 4) returns 16
+16:33:23.866 00.016 5672 GetInt("graph/HeightUnits", 1) returns 1
+16:33:23.866 00.000 5672 GetBoolean("/graph/showCorrections", 1) returns 1
+16:33:23.866 00.000 5672 GetBoolean("/graph/showStarMass", 0) returns 0
+16:33:23.866 00.000 5672 GetBoolean("/graph/showStarSNR", 0) returns 0
+16:33:23.882 00.016 5672 GetBoolean("/graph/correctionsToScale", 0) returns 0
+16:33:23.960 00.078 5672 GetInt("/graph_stepguider/length", 1) returns 1
+16:33:23.960 00.000 5672 GetBoolean("/ProfileRawMode", 0) returns 1
+16:33:23.975 00.015 5672 GetInt("/target/length", 100) returns 100
+16:33:23.975 00.000 5672 GetDouble("/target/zoom", 1.000000) returns 1.000000
+16:33:23.991 00.016 5672 GetBoolean("/profile/2/target/refCircleEnabled", 0) returns 0
+16:33:23.991 00.000 5672 GetDouble("/profile/2/target/refCircleRadius", 2.000000) returns 2.000000
+16:33:24.850 00.859 5672 GetString("/profile/1/name", "") returns "I miei dispositivi"
+16:33:24.850 00.000 5672 GetString("/profile/2/name", "") returns "SW4P_EVO"
+16:33:24.850 00.000 5672 GetString("/profile/3/name", "") returns "C8_QHY695A"
+16:33:24.850 00.000 5672 GetString("/profile/4/name", "") returns "Guide F4 x C8"
+16:33:24.881 00.031 5672 GetString("/profile/2/name", "") returns "SW4P_EVO"
+16:33:26.100 01.219 5672 GetString("/profile/2/indi/INDIcam", "") returns ""
+16:33:26.131 00.031 5672 GetString("/profile/2/indi/INDImount", "") returns ""
+16:33:26.162 00.031 5672 GetString("/profile/2/indi/INDImount", "") returns ""
+16:33:26.193 00.031 5672 GetString("/profile/2/indi/INDIrotator", "") returns ""
+16:33:26.209 00.016 5672 GetString("/profile/2/camera/LastMenuChoice", "Nessuno") returns "ASI Camera (1) (ASCOM)"
+16:33:26.225 00.016 5672 CameraFactory(ASI Camera (1) (ASCOM))
+16:33:26.225 00.000 5672 GetBoolean("/profile/2/camera/UseSubframes", 0) returns 0
+16:33:26.225 00.000 5672 GetInt("/profile/2/camera/gain", 95) returns 95
+16:33:26.225 00.000 5672 GetInt("/profile/2/camera/TimeoutMs", 15000) returns 15000
+16:33:26.240 00.015 5672 GetInt("/profile/2/camera/SaturationADU", 0) returns 65535
+16:33:26.240 00.000 5672 GetBoolean("/profile/2/camera/SaturationByADU", 1) returns 1
+16:33:26.240 00.000 5672 GetDouble("/profile/2/camera/pixelsize", 0.000000) returns 3.750000
+16:33:26.240 00.000 5672 GetInt("/profile/2/camera/binning", 1) returns 1
+16:33:26.256 00.016 5672 GetInt("/profile/2/camera/SoftwareBinning", 1) returns 1
+16:33:26.256 00.000 5672 Created new camera of type ASI Camera (1) (ASCOM) = 0F5BAC90
+16:33:26.256 00.000 5672 GetString("/profile/2/camera/LastMenuChoice", "") returns "ASI Camera (1) (ASCOM)"
+16:33:26.272 00.016 5672 GetString("/profile/2/scope/LastMenuChoice", "Nessuno") returns "GPUSB"
+16:33:26.272 00.000 5672 ScopeFactory(GPUSB)
+16:33:26.272 00.000 5672 GetInt("/profile/2/scope/CalibrationDuration", 750) returns 450
+16:33:26.272 00.000 5672 GetInt("/profile/2/scope/CalibrationDistance", 25) returns 25
+16:33:26.287 00.015 5672 GetInt("/profile/2/scope/MaxRaDuration", 2500) returns 2500
+16:33:26.287 00.000 5672 GetInt("/profile/2/scope/MaxDecDuration", 2500) returns 2500
+16:33:26.287 00.000 5672 GetInt("/profile/2/scope/DecGuideMode", 1) returns 1
+16:33:26.287 00.000 5672 DecGuideMode set to Auto (1)
+16:33:26.303 00.016 5672 GetInt("/profile/2/scope/XGuideAlgorithm", 1) returns 1
+16:33:26.303 00.000 5672 GetDouble("/profile/2/scope/GuideAlgorithm/X/Hysteresis/minMove", 0.200000) returns 0.227500
+16:33:26.303 00.000 5672 GetDouble("/profile/2/scope/GuideAlgorithm/X/Hysteresis/hysteresis", 0.100000) returns 0.100000
+16:33:26.318 00.015 5672 GetDouble("/profile/2/scope/GuideAlgorithm/X/Hysteresis/aggression", 0.700000) returns 0.700000
+16:33:26.318 00.000 5672 GetInt("/profile/2/scope/YGuideAlgorithm", 4) returns 4
+16:33:26.318 00.000 5672 GetDouble("/profile/2/scope/GuideAlgorithm/Y/ResistSwitch/minMove", 0.200000) returns 0.350000
+16:33:26.334 00.016 5672 GuideAlgorithmResistSwitch::SetMinMove() returns 0, m_minMove=0.35
+16:33:26.334 00.000 5672 GetDouble("/profile/2/scope/GuideAlgorithm/Y/ResistSwitch/aggression", 1.000000) returns 1.000000
+16:33:26.334 00.000 5672 GuideAlgorithmResistSwitch::SetAggression() returns 0, m_aggression=1.00
+16:33:26.334 00.000 5672 GetBoolean("/profile/2/scope/GuideAlgorithm/Y/ResistSwitch/fastSwitch", 1) returns 1
+16:33:26.334 00.000 5672 GuideAlgorithmResistSwitch::SetFastSwitchEnabled(1)
+16:33:26.350 00.016 5672 GetBoolean("/profile/2/scope/CalFlipRequiresDecFlip", 0) returns 0
+16:33:26.350 00.000 5672 GetBoolean("/profile/2/scope/AssumeOrthogonal", 0) returns 1
+16:33:26.350 00.000 5672 GetBoolean("/profile/2/scope/UseDecComp", 1) returns 1
+16:33:26.350 00.000 5672 GetBoolean("/profile/2/scope/HiResEncoders", 0) returns 0
+16:33:26.365 00.015 5672 GetInt("/profile/2/scope/DecBacklashPulse", 0) returns 1427
+16:33:26.365 00.000 5672 GetInt("/profile/2/scope/DecBacklashFloor", 0) returns 20
+16:33:26.365 00.000 5672 GetInt("/profile/2/scope/DecBacklashCeiling", 0) returns 3330
+16:33:26.365 00.000 5672 GetBoolean("/profile/2/scope/BacklashCompEnabled", 0) returns 1
+16:33:26.381 00.016 5672 BLC: Enabled with correction = 1427 ms, Floor = 20, Ceiling = 3330, Adjustable
+16:33:26.381 00.000 5672 GetBoolean("/profile/2/scope/StopGuidingWhenSlewing", 0) returns 1
+16:33:26.381 00.000 5672 Scope: enabling slew check, guiding will stop when slew is detected
+16:33:26.381 00.000 5672 Created new scope of type GPUSB = 0F4FB118
+16:33:26.396 00.015 5672 GetString("/profile/2/scope/LastMenuChoice", "") returns "GPUSB"
+16:33:26.396 00.000 5672 GetString("/profile/2/scope/LastAuxMenuChoice", "Nessuno") returns "Optec ASCOM Server"
+16:33:26.396 00.000 5672 ScopeFactory(Optec ASCOM Server)
+16:33:26.396 00.000 5672 GetInt("/profile/2/scope/CalibrationDuration", 750) returns 450
+16:33:26.412 00.016 5672 GetInt("/profile/2/scope/CalibrationDistance", 25) returns 25
+16:33:26.412 00.000 5672 GetInt("/profile/2/scope/MaxRaDuration", 2500) returns 2500
+16:33:26.412 00.000 5672 GetInt("/profile/2/scope/MaxDecDuration", 2500) returns 2500
+16:33:26.412 00.000 5672 GetInt("/profile/2/scope/DecGuideMode", 1) returns 1
+16:33:26.412 00.000 5672 DecGuideMode set to Auto (1)
+16:33:26.428 00.016 5672 GetInt("/profile/2/scope/XGuideAlgorithm", 1) returns 1
+16:33:26.428 00.000 5672 GetDouble("/profile/2/scope/GuideAlgorithm/X/Hysteresis/minMove", 0.200000) returns 0.227500
+16:33:26.428 00.000 5672 GetDouble("/profile/2/scope/GuideAlgorithm/X/Hysteresis/hysteresis", 0.100000) returns 0.100000
+16:33:26.428 00.000 5672 GetDouble("/profile/2/scope/GuideAlgorithm/X/Hysteresis/aggression", 0.700000) returns 0.700000
+16:33:26.443 00.015 5672 GetInt("/profile/2/scope/YGuideAlgorithm", 4) returns 4
+16:33:26.443 00.000 5672 GetDouble("/profile/2/scope/GuideAlgorithm/Y/ResistSwitch/minMove", 0.200000) returns 0.350000
+16:33:26.443 00.000 5672 GuideAlgorithmResistSwitch::SetMinMove() returns 0, m_minMove=0.35
+16:33:26.443 00.000 5672 GetDouble("/profile/2/scope/GuideAlgorithm/Y/ResistSwitch/aggression", 1.000000) returns 1.000000
+16:33:26.459 00.016 5672 GuideAlgorithmResistSwitch::SetAggression() returns 0, m_aggression=1.00
+16:33:26.459 00.000 5672 GetBoolean("/profile/2/scope/GuideAlgorithm/Y/ResistSwitch/fastSwitch", 1) returns 1
+16:33:26.459 00.000 5672 GuideAlgorithmResistSwitch::SetFastSwitchEnabled(1)
+16:33:26.459 00.000 5672 GetBoolean("/profile/2/scope/CalFlipRequiresDecFlip", 0) returns 0
+16:33:26.475 00.016 5672 GetBoolean("/profile/2/scope/AssumeOrthogonal", 0) returns 1
+16:33:26.475 00.000 5672 GetBoolean("/profile/2/scope/UseDecComp", 1) returns 1
+16:33:26.475 00.000 5672 GetBoolean("/profile/2/scope/HiResEncoders", 0) returns 0
+16:33:26.475 00.000 5672 GetInt("/profile/2/scope/DecBacklashPulse", 0) returns 1427
+16:33:26.475 00.000 5672 GetInt("/profile/2/scope/DecBacklashFloor", 0) returns 20
+16:33:26.490 00.015 5672 GetInt("/profile/2/scope/DecBacklashCeiling", 0) returns 3330
+16:33:26.490 00.000 5672 GetBoolean("/profile/2/scope/BacklashCompEnabled", 0) returns 1
+16:33:26.490 00.000 5672 BLC: Enabled with correction = 1427 ms, Floor = 20, Ceiling = 3330, Adjustable
+16:33:26.506 00.016 5672 GetBoolean("/profile/2/scope/StopGuidingWhenSlewing", 1) returns 1
+16:33:26.506 00.000 5672 Scope: enabling slew check, guiding will stop when slew is detected
+16:33:26.506 00.000 5672 Created new aux scope of type Optec ASCOM Server = 0F5CD948
+16:33:26.506 00.000 5672 GetString("/profile/2/scope/LastAuxMenuChoice", "") returns "Optec ASCOM Server"
+16:33:26.521 00.015 5672 GetString("/profile/2/stepguider/LastMenuChoice", "Nessuno") returns "Nessuno"
+16:33:26.521 00.000 5672 StepGuiderFactory(Nessuno)
+16:33:26.521 00.000 5672 Created new stepguider of type Nessuno = 00000000
+16:33:26.521 00.000 5672 GetString("/profile/2/stepguider/LastMenuChoice", "") returns "Nessuno"
+16:33:26.521 00.000 5672 Throw from C:\cygwin\home\Andy\projects\phd2-build-20260829-231856\src\gear_dialog.cpp:1593->OnChoiceStepGuider: m_pStepGuider == NULL
+16:33:26.537 00.016 5672 GetString("/profile/2/rotator/LastMenuChoice", "Nessuno") returns "Nessuno"
+16:33:26.537 00.000 5672 RotatorFactory(Nessuno)
+16:33:26.537 00.000 5672 Created new Rotator of type Nessuno = 00000000
+16:33:26.553 00.016 5672 GetString("/profile/2/rotator/LastMenuChoice", "") returns "Nessuno"
+16:33:26.553 00.000 5672 Throw from C:\cygwin\home\Andy\projects\phd2-build-20260829-231856\src\gear_dialog.cpp:1731->OnChoiceRotator: m_pRotator == NULL
+16:33:26.568 00.015 5672 GetString("/profile/2/name", "") returns "SW4P_EVO"
+16:33:26.568 00.000 5672 SetupHelpFile: langid=110, locale-specific help = C:\Program Files (x86)\PHDGuiding2\locale\it_IT\PHD2GuideHelp.zip
+16:33:26.584 00.016 5672 SetupHelpFile: using default help C:\Program Files (x86)\PHDGuiding2\PHD2GuideHelp.zip
+16:33:26.662 00.078 5672 starting server
+16:33:26.678 00.016 5672 event server started, listening on port 4400
+16:33:26.678 00.000 5672 Server started, listening on port 4300
+16:33:26.678 00.000 5672 Status Line: Server avviato
+16:33:26.693 00.015 5672 GetString("/perspective", "") returns "layout2|name=MainToolBar;caption=Main tool bar;state=2106108;dir=3;layer=10;row=0;pos=0;prop=100000;bestw=567;besth=42;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=Guider;caption=Guider;state=256;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=640;besth=512;minw=640;minh=512;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=GraphLog;caption=Storia;state=2099196;dir=3;layer=0;row=1;pos=0;prop=148967;bestw=535;besth=233;minw=-1;minh=240;maxw=-1;maxh=-1;floatx=13;floaty=275;floatw=551;floath=272|name=Stats;caption=Statistiche della guida;state=2099198;dir=3;layer=0;row=1;pos=0;prop=51033;bestw=272;besth=424;minw=-1;minh=240;maxw=-1;maxh=-1;floatx=1157;floaty=424;floatw=288;floath=463|name=AOPosition;caption=Posizione OA;state=2099198;dir=4;layer=0;row=0;pos=0;prop=100000;bestw=293;besth=207;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=Profile;caption=Profilo della stella;state=2099196;dir=2;layer=0;row=0;pos=0;prop=100000;bestw=20;besth=20;minw=115;minh=85;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=Target;caption=Soggetto;state=2099196;dir=2;layer=0;row=0;pos=1;prop=100000;bestw=351;besth=207;minw=293;minh=208;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(3,10,0)=44|dock_size(5,0,0)=642|dock_size(2,0,0)=347|dock_size(3,0,1)=259|"
+16:33:26.787 00.094 5672 GetBoolean("/Update/enabled", 1) returns 1
+16:33:26.787 00.000 5672 GetInt("/Update/series", 1) returns 1
+16:33:26.803 00.016 7792 UPD: updater thread entry
+16:33:26.818 00.015 7792 UPD: fetch https://openphdguiding.org/release-dev-win.txt
+16:33:27.443 00.625 7792 UPD: latest ver = 2.6.14dev1
+16:33:27.443 00.000 7792 UPD: URL = https://openphdguiding.org/phd2-2.6.14dev1-installer.exe
+16:33:27.443 00.000 7792 UPD: SHA1 = 846c0d798733858013fe7383c468a5ebacc02f6e
+16:33:27.443 00.000 7792 GetInt("/Update/force", 0) returns 0
+16:33:27.443 00.000 7792 UPD: version is up-to-date
+16:33:27.443 00.000 7792 UPD: updater thread exit
+16:33:31.910 04.467 5672 gear_dialog: OnButtonConnectAll
+16:33:31.910 00.000 5672 gear_dialog: DoConnectCamera [ASI Camera (1) (ASCOM)]
+16:33:31.910 00.000 5672 Status Line: Connessione alla camera...
+16:33:31.910 00.000 5672 GetString("/profile/2/cam_hash/8b703f25/whichCamera", "") returns "1,ZWO ASI120MM Mini"
+16:33:31.926 00.016 5672 Connecting to camera [ASI Camera (1) (ASCOM)] id = [1,ZWO ASI120MM Mini]
+16:33:31.926 00.000 5672 Create ASCOM Camera: choice 'ASI Camera (1) (ASCOM)' progid ASCOM.ASICamera2.Camera
+16:33:34.027 02.101 5672 setting camera Name = ZWO ASI120MM Mini (ASCOM)
+16:33:34.027 00.000 5672 ASCOM camera: MaxBinning is 2
+16:33:34.027 00.000 5672 ASCOM camera: has cooler
+16:33:34.043 00.016 5672 ASCOM Camera: set binning = 1
+16:33:34.043 00.000 5672 GetDouble("/profile/2/camera/pixelsize", 0.000000) returns 3.750000
+16:33:34.043 00.000 5672 DoConnectCamera: reconnecting=0 warningIssued=0 lastCam=[ASI Camera (1) (ASCOM)] scaleRatio=1.000
+16:33:34.043 00.000 5672 Connected Camera: ZWO ASI120MM Mini (ASCOM)
+16:33:34.043 00.000 5672 FrameSize=(0,0)
+16:33:34.058 00.015 5672 PixelSize=3.75
+16:33:34.058 00.000 5672 BitsPerPixel=16
+16:33:34.058 00.000 5672 HasGainControl=0
+16:33:34.058 00.000 5672 HasShutter=0
+16:33:34.074 00.016 5672 HasSubFrames=1
+16:33:34.074 00.000 5672 ST4HasGuideOutput=1
+16:33:34.074 00.000 5672 GetBoolean("/profile/2/camera/AutoLoadDefectMap", 1) returns 1
+16:33:34.074 00.000 5672 auto-loading defect map
+16:33:34.090 00.016 5672 Loading defect map file C:\Users\PrimaLuceLab\AppData\Local\phd2\darks_defects\PHD2_defect_map_2.txt
+16:33:34.090 00.000 5672 Defect map file not found: C:\Users\PrimaLuceLab\AppData\Local\phd2\darks_defects\PHD2_defect_map_2.txt
+16:33:34.090 00.000 5672 Status Line: Impossibile caricare la mappa dei difetti
+16:33:34.105 00.015 5672 GetBoolean("/profile/2/camera/AutoLoadDarks", 1) returns 1
+16:33:34.105 00.000 5672 Auto-loading dark library
+16:33:34.246 00.141 5672 loaded dark frame exposure = 1000, med = 2454, 1280x960 bin 1, bpp = 16, gain = 0
+16:33:34.355 00.109 5672 loaded dark frame exposure = 1500, med = 2502, 1280x960 bin 1, bpp = 16, gain = 0
+16:33:34.480 00.125 5672 loaded dark frame exposure = 2000, med = 2572, 1280x960 bin 1, bpp = 16, gain = 0
+16:33:34.589 00.109 5672 loaded dark frame exposure = 2500, med = 2620, 1280x960 bin 1, bpp = 16, gain = 0
+16:33:34.699 00.110 5672 loaded dark frame exposure = 3000, med = 2688, 1280x960 bin 1, bpp = 16, gain = 0
+16:33:34.699 00.000 5672 loaded dark library from C:\Users\PrimaLuceLab\AppData\Local\phd2\darks_defects\PHD2_dark_lib_2.fit
+16:33:34.699 00.000 5672 Status Line: Dark caricati
+16:33:34.714 00.015 5672 DarkLib check: undefined frame size for current camera
+16:33:34.714 00.000 5672 Status Line: Camera connessa
+16:33:34.730 00.016 5672 gear_dialog: OnButtonConnectStepGuider
+16:33:34.746 00.016 5672 Connected AO:None
+16:33:34.746 00.000 5672 gear_dialog: OnButtonConnectScope
+16:33:34.746 00.000 5672 Status Line: Connessione alla montatura...
+16:33:34.761 00.015 5672 Connecting to mount [GPUSB]
+16:33:48.835 14.074 5672 Error thrown from C:\cygwin\home\Andy\projects\phd2-build-20260829-231856\src\scope_ascom.cpp:903->ASCOM Scope: cannot get Declination when not connected to mount
+16:33:48.835 00.000 5672 ScopeASCOM::GetDeclinationRadians() returns Unknown
+16:33:48.835 00.000 5672 Error thrown from C:\cygwin\home\Andy\projects\phd2-build-20260829-231856\src\scope_ascom.cpp:1390->ASCOM Scope: cannot get side of pier when not connected
+16:33:48.850 00.015 5672 ScopeASCOM::SideOfPier() returns -1
+16:33:48.850 00.000 5672 Status Line: Montatura connessa
+16:33:48.850 00.000 5672 Connected Scope:GPUSB
+16:33:48.866 00.016 5672 gear_dialog: OnButtonConnectAuxScope
+16:33:48.866 00.000 5672 Status Line: Connessione alla montatura esterna...
+16:33:48.866 00.000 5672 Connecting to aux mount [Optec ASCOM Server]
+16:33:48.866 00.000 5672 ASCOM Scope: Connecting
+16:33:48.882 00.016 5672 Create ASCOM Scope: choice 'Optec ASCOM Server' progid ASCOM.Optec ASCOM.Telescope
+16:33:50.303 01.421 5672 pScopeDriver = 0x12B1B9B4
+16:33:52.068 01.765 5672 Scope reports its name as CPWI_ASCOM_Telescope
+16:33:52.068 00.000 5672 ASCOM scope CanSlewAsync is true
+16:33:52.084 00.016 5672 ASCCOM scope CanSetTracking is true
+16:33:52.084 00.000 5672 CPWI_ASCOM_Telescope connected
+16:33:52.099 00.015 5672 ScopeASCOM::GetDeclinationRadians() returns 88.7
+16:33:52.099 00.000 5672 ScopeASCOM::SideOfPier() returns 0
+16:33:52.099 00.000 5672 ASCOM Scope: Connect success
+16:33:52.131 00.032 5672 ASCOM scope: reports count=3 of tracking rates
+16:33:52.131 00.000 5672 ASCOM scope: supports tracking rate: 0
+16:33:52.131 00.000 5672 ASCOM scope: supports tracking rate: 1
+16:33:52.146 00.015 5672 ASCOM scope: supports tracking rate: 2
+16:33:52.146 00.000 5672 Status Line: Montatura esterna connessa
+16:33:52.146 00.000 5672 Connected AuxScope:CPWI_ASCOM_Telescope
+16:33:52.162 00.016 5672 gear_dialog: OnButtonConnectRotator
+16:33:52.162 00.000 5672 Connected Rotator:None
+16:33:52.256 00.094 5672 GetBoolean("/profile/2/target/refCircleEnabled", 0) returns 0
+16:33:52.256 00.000 5672 GetDouble("/profile/2/target/refCircleRadius", 2.000000) returns 2.000000
+16:33:52.256 00.000 5672 Auto-loading calibration data
+16:33:52.271 00.015 5672 GetDouble("/profile/2/scope/calibration/xRate", 1.000000) returns 0.005538
+16:33:52.271 00.000 5672 GetDouble("/profile/2/scope/calibration/yRate", 1.000000) returns 0.004901
+16:33:52.271 00.000 5672 GetInt("/profile/2/scope/calibration/binning", 1) returns 1
+16:33:52.271 00.000 5672 GetDouble("/profile/2/scope/calibration/xAngle", 0.000000) returns -0.444923
+16:33:52.287 00.016 5672 GetDouble("/profile/2/scope/calibration/yAngle", 1.570796) returns -2.015720
+16:33:52.287 00.000 5672 GetDouble("/profile/2/scope/calibration/declination", 0.000000) returns -0.000020
+16:33:52.287 00.000 5672 GetInt("/profile/2/scope/calibration/pierSide", -1) returns 0
+16:33:52.287 00.000 5672 GetInt("/profile/2/scope/calibration/raGuideParity", 0) returns 1
+16:33:52.287 00.000 5672 GetInt("/profile/2/scope/calibration/decGuideParity", 0) returns -1
+16:33:52.303 00.016 5672 GetDouble("/profile/2/scope/calibration/rotatorAngle", -888.000000) returns -888.000000
+16:33:52.303 00.000 5672 Mount::SetCalibration (scope) -- xAngle=-25.5 yAngle=-115.5 xRate=5.538 yRate=4.901 bin=1 dec=-0.0 pierSide=0 par=+/- rotAng=Nessuno
+16:33:52.303 00.000 5672 Mount::SetCalibration (scope) -- sets m_xAngle=-25.5 m_yAngleError=-180.0
+16:33:52.318 00.015 5672 ScopeASCOM::GetDeclinationRadians() returns 88.7
+16:33:52.318 00.000 5672 ScopeASCOM::SideOfPier() returns 0
+16:33:53.021 00.703 5672 GetBoolean("/profile/2/ShowDecModeWarning", 1) returns 1
+16:35:39.090 106.069 5672 evsrv: cli 0F474A40 connect
+16:35:39.124 00.034 5672 evsrv: cli 0F474C20 connect
+16:35:39.143 00.019 5672 evsrv: cli 0F474C20 request: {"method":"get_profile","id":"36c52bf4-45dc-4f25-a26e-30bfbe56a3e6"}
+16:35:39.148 00.005 5672 GetString("/profile/2/name", "") returns "SW4P_EVO"
+16:35:39.152 00.004 5672 evsrv: cli 0F474C20 response: {"jsonrpc":"2.0","result":{"id":2,"name":"SW4P_EVO"},"id":"36c52bf4-45dc-4f25-a26e-30bfbe56a3e6"}
+16:35:39.170 00.018 5672 evsrv: cli 0F474C20 disconnect
+16:35:39.182 00.012 5672 evsrv: cli 0F474720 connect
+16:35:39.188 00.006 5672 evsrv: cli 0F474720 request: {"method":"get_profiles","id":"367803d8-6c20-44f6-ac97-5992e44d02df"}
+16:35:39.195 00.007 5672 GetString("/profile/1/name", "") returns "I miei dispositivi"
+16:35:39.199 00.004 5672 GetString("/profile/2/name", "") returns "SW4P_EVO"
+16:35:39.203 00.004 5672 GetString("/profile/3/name", "") returns "C8_QHY695A"
+16:35:39.207 00.004 5672 GetString("/profile/4/name", "") returns "Guide F4 x C8"
+16:35:39.214 00.007 5672 GetString("/profile/1/name", "") returns "I miei dispositivi"
+16:35:39.220 00.006 5672 GetString("/profile/1/name", "") returns "I miei dispositivi"
+16:35:39.235 00.015 5672 GetString("/profile/2/name", "") returns "SW4P_EVO"
+16:35:39.239 00.004 5672 GetString("/profile/1/name", "") returns "I miei dispositivi"
+16:35:39.266 00.027 5672 GetString("/profile/2/name", "") returns "SW4P_EVO"
+16:35:39.275 00.009 5672 GetString("/profile/3/name", "") returns "C8_QHY695A"
+16:35:39.279 00.004 5672 GetString("/profile/1/name", "") returns "I miei dispositivi"
+16:35:39.288 00.009 5672 GetString("/profile/2/name", "") returns "SW4P_EVO"
+16:35:39.294 00.006 5672 GetString("/profile/3/name", "") returns "C8_QHY695A"
+16:35:39.299 00.005 5672 GetString("/profile/4/name", "") returns "Guide F4 x C8"
+16:35:39.320 00.021 5672 evsrv: cli 0F474720 response: {"jsonrpc":"2.0","result":[{"id":1,"name":"I miei dispositivi"},{"id":2,"name":"SW4P_EVO","selected":true},{"id":3,"name":"C8_QHY695A"},{"id":4,"name":"Guide F4 x C8"}],"id":"367803d8-6c20-44f6-ac97-5992e44d02df"}
+16:35:39.344 00.024 5672 evsrv: cli 0F474720 disconnect
+16:35:39.373 00.029 5672 evsrv: cli 0F475260 connect
+16:35:39.382 00.009 5672 evsrv: cli 0F475260 request: {"method":"get_connected","id":"985f1b57-80e4-412f-93a8-daeac0935e4f"}
+16:35:39.386 00.004 5672 evsrv: cli 0F475260 response: {"jsonrpc":"2.0","result":true,"id":"985f1b57-80e4-412f-93a8-daeac0935e4f"}
+16:35:39.392 00.006 5672 evsrv: cli 0F475260 disconnect
+16:35:39.399 00.007 5672 evsrv: cli 0F475580 connect
+16:35:39.402 00.003 5672 evsrv: cli 0F475580 request: {"method":"get_lock_shift_params","id":"17d64c74-a936-4a7a-8d58-ea7fe2f1e319"}
+16:35:39.407 00.005 5672 evsrv: cli 0F475580 response: {"jsonrpc":"2.0","result":{"enabled":false,"rate":[0.00,0.00],"units":"arcsec/hr","axes":"RA/Dec"},"id":"17d64c74-a936-4a7a-8d58-ea7fe2f1e319"}
+16:35:39.427 00.020 5672 evsrv: cli 0F475580 disconnect
+16:35:39.438 00.011 5672 evsrv: cli 0F475760 connect
+16:35:39.443 00.005 5672 evsrv: cli 0F475760 request: {"method":"get_pixel_scale","id":"4087a068-723d-4eba-bd9c-9c4442307779"}
+16:35:39.447 00.004 5672 evsrv: cli 0F475760 response: {"jsonrpc":"2.0","result":2.90787,"id":"4087a068-723d-4eba-bd9c-9c4442307779"}
+16:35:39.452 00.005 5672 evsrv: cli 0F475760 disconnect
+19:22:25.872 10006.420 5672 evsrv: cli 0F474A40 disconnect
+19:22:44.392 18.520 5672 gear_dialog: OnButtonDisconnectAll
+19:22:44.397 00.005 5672 gear_dialog: OnButtonDisconnectScope
+19:22:44.407 00.010 5672 ScopeASCOM::GetDeclinationRadians() returns 88.7
+19:22:44.417 00.010 5672 ScopeASCOM::SideOfPier() returns 0
+19:22:44.417 00.000 5672 Status Line: Montatura disconnessa
+19:22:44.432 00.015 5672 gear_dialog: OnButtonDisconnectAuxScope
+19:22:44.437 00.005 5672 ASCOM Scope: Disconnecting
+19:22:44.442 00.005 5672 ASCOM Scope: Disconnected Successfully
+19:22:44.447 00.005 5672 Error thrown from C:\cygwin\home\Andy\projects\phd2-build-20260829-231856\src\scope_ascom.cpp:903->ASCOM Scope: cannot get Declination when not connected to mount
+19:22:44.452 00.005 5672 ScopeASCOM::GetDeclinationRadians() returns Unknown
+19:22:44.457 00.005 5672 Error thrown from C:\cygwin\home\Andy\projects\phd2-build-20260829-231856\src\scope_ascom.cpp:1390->ASCOM Scope: cannot get side of pier when not connected
+19:22:44.457 00.000 5672 ScopeASCOM::SideOfPier() returns -1
+19:22:44.462 00.005 5672 Status Line: Montatura esterna disconnessa
+19:22:44.472 00.010 5672 gear_dialog: OnButtonDisconnectCamera
+19:22:44.482 00.010 5672 Status Line: Camera disconnessa
+19:22:44.492 00.010 5672 gear_dialog: OnButtonDisconnectStepGuider
+19:22:44.497 00.005 5672 Error thrown from C:\cygwin\home\Andy\projects\phd2-build-20260829-231856\src\gear_dialog.cpp:1678->OnButtonDisconnectStepGuider called with m_pStepGuider == NULL
+19:22:44.502 00.005 5672 gear_dialog: OnButtonDisconnectRotator
+19:22:44.507 00.005 5672 Error thrown from C:\cygwin\home\Andy\projects\phd2-build-20260829-231856\src\gear_dialog.cpp:1809->OnButtonDisconnectRotator called with m_pRotator == NULL
+19:22:45.230 00.723 5672 GetBoolean("/profile/2/target/refCircleEnabled", 0) returns 0
+19:22:45.235 00.005 5672 GetDouble("/profile/2/target/refCircleRadius", 2.000000) returns 2.000000
+19:22:45.369 00.134 5672 GetBoolean("/profile/2/ShowDecModeWarning", 1) returns 1
+19:22:46.897 01.528 5672 MyFrame::OnClose proceeding
+19:22:46.902 00.005 5672 StopCapturing CaptureActive=0 continueCapturing=0 exposurePending=0
+19:22:46.907 00.005 5672 StopWorkerThread(0x0021C3A0) begins
+19:22:46.907 00.000 9604 Worker thread wakes up
+19:22:46.907 00.000 9604 worker thread servicing REQUEST_TERMINATE
+19:22:46.907 00.000 9604 worker thread done servicing request
+19:22:46.907 00.000 9604 WorkerThread::Entry() ends
+19:22:46.912 00.005 5672 StopWorkerThread() threadExitCode=0
+19:22:46.912 00.000 5672 StopWorkerThread(0x0021C3A0) ends
+19:22:46.917 00.005 5672 WorkerThread destructor called
+19:22:46.922 00.005 5672 StopWorkerThread(0x0021C700) begins
+19:22:46.922 00.000 2428 Worker thread wakes up
+19:22:46.922 00.000 2428 worker thread servicing REQUEST_TERMINATE
+19:22:46.922 00.000 2428 worker thread done servicing request
+19:22:46.922 00.000 2428 WorkerThread::Entry() ends
+19:22:46.927 00.005 5672 StopWorkerThread() threadExitCode=0
+19:22:46.927 00.000 5672 StopWorkerThread(0x0021C700) ends
+19:22:46.932 00.005 5672 WorkerThread destructor called
+19:22:46.937 00.005 5672 Shutdown: forced=0
+19:22:46.937 00.000 5672 Shutdown complete
+19:22:46.942 00.005 5672 UPD: shutdown
+19:22:46.947 00.005 5672 stopping server
+19:22:46.952 00.005 5672 event server stopped
+19:22:46.957 00.005 5672 Status Line: Server fermato
