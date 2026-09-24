@@ -32,9 +32,12 @@ PixInsight provenance, or the current EAGLE snapshot (`UNAVAILABLE` / `UNKNOWN` 
 current snapshot). Evidence: `docs/architecture/validation/BKL-042-F7-F1-SOURCE-COVERAGE-EVIDENCE-2026-09-24.md`.
 
 Local verification on the feature worktree: 12 retrieval tests pass; live static-
-projection replay resolves the expanded source set. These results are not yet
-post-merge or owner OAT evidence. F7 and BKL-042 remain open pending exact-head
-reviews/workflows, protected merge, any evidence-based runtime deployment decision,
+projection replay resolves the expanded source set. AI-assisted ARB and Release
+Quality reviews are recorded against implementation commit `8b89c048`; they are not
+independent human approvals. The applicable GitHub workflows passed on that code
+head, while final PR-head workflows after review-record updates remain pending. These
+results are not post-merge or owner OAT evidence. F7 and BKL-042 remain open pending
+final-head checks, protected merge, any evidence-based runtime deployment decision,
 owner-witnessed OAT on method v3, and formal human acceptance.
 
 ## Non-negotiable boundaries

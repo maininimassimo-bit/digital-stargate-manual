@@ -26,8 +26,10 @@ incomplete, scadute o `UNAVAILABLE`/`UNKNOWN`. Non reinterpretare questi stati c
 healthy, ready, safe o completati; attendere projection eleggibile con freshness e
 provenance risolte.
 
-Prossimo gate: PR con controlli exact-head e review; poi merge/post-merge. Il deploy
-del relay esistente richiede evidenza di necessità; nessun nuovo servizio o
+Le review AI-assisted ARB/RQ sull'implementation commit `8b89c048` sono registrate
+nei rispettivi review record; non equivalgono ad approvazione umana indipendente.
+Prossimo gate: controlli sul final PR head, poi merge/post-merge. Il deploy del relay
+esistente richiede evidenza di necessità; nessun nuovo servizio o
 promozione. Dopo l'eventuale deploy, richiedere a Massimo l'OAT autenticato v3 e la
 formal acceptance. Fino ad allora mantenere `command_authority=NONE`,
 `execution_authority=NONE`, `safety_authority=NONE` e `acceptance_authority=HUMAN_ONLY`.

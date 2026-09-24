@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Evidence ID | `BKL042-F7-SOURCE-COVERAGE-2026-09-24` |
-| Status | Implementation evidence; exact-head review, merge, deployment and owner OAT pending |
+| Status | Implementation evidence; AI-assisted ARB/RQ review completed on implementation commit `8b89c048`; final PR-head checks, merge, deployment and owner OAT pending |
 | Authority | Bounded advisory / read-only |
 | Owner / accountable | Massimo Mainini |
 | Method | `bkl042-static-projection-retrieval-v3` |
@@ -67,8 +67,8 @@ BKL-041 source contract; it does not change the F1 eligibility inventory.
 ## Remaining gates
 
 This document records implementation evidence only. BKL-042 is **not closed**.
-Required next gates are exact-head architecture/release-quality review and CI,
-protected merge/post-merge checks, an authorized deployment decision if evidence
+Required next gates are exact final PR-head CI, protected merge/post-merge checks,
+an authorized deployment decision if evidence
 shows deployment is necessary, owner-witnessed authenticated OAT on method v3, and
 separate formal owner acceptance. Source classes excluded above need eligible,
 fresh, provenance-resolved upstream projections before later inclusion.
