@@ -25,6 +25,7 @@ deliberation and prohibits invented numeric thresholds.
 | `docs/data/scientific-session-catalog.json` | Versioned historical analytics projection; 22 sessions, 7 `VALIDATED_ANALYTICS`, 15 `ATTENTION_REQUIRED`; includes session window, integration, light counts and `completionPct` | Descriptive session-history candidate only. No planned-session denominator, declared failure event, service uptime window or incident lifecycle. `ATTENTION_REQUIRED` is analytics state, not an operational fault. |
 | `docs/data/session-comparison-projection.json` | BKL-037 historical SQM set, 15 included and 7 excluded records | Scientific comparison, unrelated to service availability or reliability. Explicitly descriptive; no ranking/quality threshold. |
 | `docs/data/realtime/eagle-health.json` | Public read-only projection reports `UNAVAILABLE` / `UNKNOWN` / `NO_CURRENT_SNAPSHOT`; zero signals and null observation time | No current health or availability evidence; must remain unknown/unavailable. |
+| `docs/architecture/telemetry/evidence/BKL-030-G6-Runtime-OAT-2026-09-04.md` | Real read-only collector projection and one manual history write: 14 samples appended; identical replay skipped 14; 14 records / 13,945 bytes | Bounded point-in-time persistence pilot, not continuous history or uptime. No permanent writer cadence was approved; raw history is not present as a repository-complete time series. |
 | `docs/data/bkl-036-f4-telemetry-archive.json` | Seven-domain repository archive labelled `repository_archived_snapshot`, synthetic offline fixture, no live transport | Test fixture only; excluded from operational baseline and incident counts. |
 | `docs/data/integration/session-completed-shadow-event-2026-09-21_2026-09-22.json` and `contracts/events/observation-session-completed-shadow-v1.schema.json` | One repository-shadow integration artifact; schema states `SHADOW_VALIDATED`, internal classification and `runtime_published=false` | Contract/shadow proof, not a population-complete production event stream. Cannot establish session success rate or telemetry availability. |
 | `docs/architecture/alarm-and-incident-model.md` (OPSC-ALM-001) | Draft alarm/incident lifecycle and candidate timestamps/identifiers | Semantics are draft; no correlated observatory incident population with detected/acknowledged/restored timestamps was found in reliability datasets. Not usable for MTBF/MTTR. |
@@ -55,6 +56,7 @@ decision and the applicable architecture/review gate.
 
 ## References
 
+- `docs/architecture/validation/BKL-043-F1-POPULATION-AND-CONTRACT-GAP-DISCOVERY-2026-09-24.md` — follow-up contract and population completeness analysis.
 - `docs/project/BACKLOG.md` — BKL-043 and BKL-050 sequencing.
 - `docs/project/FUNCTIONAL_ROADMAP_EXPANSION_2026-08-30.md` — BKL-043 candidate metrics.
 - `docs/architecture/packages/AP-004-Enterprise-Telemetry-and-Observability-Architecture.md` — measured baseline and telemetry boundary.

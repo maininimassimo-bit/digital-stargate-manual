@@ -70,3 +70,12 @@ rates, MTBF, MTTR or failure budget. Historical session completion fields are
 descriptive only; EAGLE is `UNAVAILABLE` / `UNKNOWN`; the archived telemetry is a
 synthetic fixture. Per AP-007, numeric SLI/SLO thresholds remain undefined pending
 measured baseline and applicable owner/architecture deliberation.
+
+The follow-up population/contract analysis is recorded in
+`docs/architecture/validation/BKL-043-F1-POPULATION-AND-CONTRACT-GAP-DISCOVERY-2026-09-24.md`.
+It also accounts for the bounded real BKL-030 G6 OAT (one 14-signal manual write
+and idempotent replay), which proves pilot persistence mechanics but not continuous
+availability. The repository still lacks an authoritative planned-session
+denominator, a complete incident lifecycle population, and continuous telemetry
+coverage. No new schema, event source, writer cadence, alert, or metric threshold
+has been approved.
