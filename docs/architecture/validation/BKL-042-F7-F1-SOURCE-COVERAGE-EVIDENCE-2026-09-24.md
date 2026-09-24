@@ -101,7 +101,8 @@ see `docs/project/BKL-042-F7-BOUNDED-ACCEPTANCE-2026-09-24.md`.
 
 ## Remaining gates
 
-F7 is accepted within the bounded scope. BKL-042 remains the tracked package for
-any separately approved future source-coverage increment; excluded source classes
-need eligible, fresh, provenance-resolved upstream projections before inclusion.
+BKL-042 is now **ACCEPTED** within its bounded read-only scope; the owner closure is
+`docs/project/BKL-042-CLOSURE-2026-09-24.md`. Excluded source classes are limitations
+of the accepted scope, not pending F7 gates. Any future addition requires a separately
+approved increment and eligible, fresh, provenance-resolved upstream projections.
 No further OAT or runtime change is authorized by this acceptance.

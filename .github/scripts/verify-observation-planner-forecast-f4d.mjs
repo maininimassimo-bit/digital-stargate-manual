@@ -64,8 +64,8 @@ for(const expected of [
 ]) assert.ok(acceptance.includes(expected),`F4-D acceptance record missing ${expected}`);
 
 const roadmap=JSON.parse(fs.readFileSync('.github/roadmap/roadmap-source.json','utf8'));
-assert.ok(['BKL-036', 'BKL-036-F5', 'AP-007', 'AP-008', 'AP-015', 'BKL-033', 'BKL-034', 'BKL-034-F2', 'BKL-042'].includes(roadmap.currentPackage));
-assert.ok(['BKL-036 Observatory Health Score', 'BKL-036-F5 Live Read-Only Health Score', 'AP-007 Enterprise Operations and Service Management Architecture', 'AP-008 Enterprise Integration Architecture', 'AP-015', 'BKL-033', 'BKL-034', 'BKL-034-F2', 'BKL-042'].includes(roadmap.nextMilestone));
+assert.ok(['BKL-036', 'BKL-036-F5', 'AP-007', 'AP-008', 'AP-015', 'BKL-033', 'BKL-034', 'BKL-034-F2', 'BKL-042', 'BKL-043'].includes(roadmap.currentPackage));
+assert.ok(['BKL-036 Observatory Health Score', 'BKL-036-F5 Live Read-Only Health Score', 'AP-007 Enterprise Operations and Service Management Architecture', 'AP-008 Enterprise Integration Architecture', 'AP-015', 'BKL-033', 'BKL-034', 'BKL-034-F2', 'BKL-042', 'BKL-043'].includes(roadmap.nextMilestone));
 assert.ok(roadmap.milestones.some(entry=>entry.id==='M-BKL031-F4-D-ACCEPTANCE'));
 assert.ok(roadmap.milestones.some(entry=>entry.id==='M-BKL031-F5-ACCEPTANCE'));
 

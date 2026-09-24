@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-042-F7 |
-| Stato | ACCEPTED / BOUNDED GATE / OWNER-WITNESSED |
+| Stato | ACCEPTED / BOUNDED READ-ONLY / OWNER-WITNESSED |
 | Data | 2026-09-24 |
 | Owner / accountable | Massimo Mainini |
 | Metodo accettato | `bkl042-static-projection-retrieval-v3` |
@@ -53,7 +53,8 @@ Nessuna autorità command/execution/safety è stata concessa.
 
 ## Stato successivo
 
-F7 è accettata entro questo perimetro bounded read-only. Ogni ulteriore copertura
-delle classi escluse richiede una projection eleggibile e una decisione separata;
-non viene inferita da questa acceptance. Preservare `acceptance_authority=HUMAN_ONLY`
-e le tre autorità runtime `NONE`.
+La capability BKL-042 è accettata entro il perimetro bounded read-only definito in
+questo record. Le classi escluse sono limiti espliciti del perimetro accettato, non
+gate pendenti per questa closure. Ogni estensione futura richiede projection
+eleggibile e decisione separata. Preservare `acceptance_authority=HUMAN_ONLY` e le
+tre autorità runtime `NONE`.

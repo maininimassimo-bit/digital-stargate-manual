@@ -6,8 +6,8 @@
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch baseline | `main` |
 | Base head before this increment | `50624ba6ac94b83a41647ae7f5f716ea00ec5ce7` |
-| Current `main` head before owner-acceptance reconciliation | `bdb15037f4a2505992c284a1dff4930af90801f8` (PR #362) |
-| Current package | BKL-042 AI Observatory Assistant — F7 accepted within bounded read-only scope |
+| Current `main` head before BKL-042 closure / BKL-043 start | `ec17c69cbf350b4952e781525b782128ed293a22` (PR #363) |
+| Current package | BKL-043 Observatory Reliability Engineering — F1 repository-only source discovery |
 | Owner / accountable | Massimo Mainini |
 | Authority | bounded advisory, repository-governed projections, read-only |
 
@@ -58,3 +58,15 @@ separately gated.
 `acceptance_authority=HUMAN_ONLY`. No command path, broker, decision scheduler,
 automatic remediation, image mutation, processing execution, provider tool execution,
 or Safety Authority change is included or authorized.
+
+## BKL-043 initial source-discovery state
+
+BKL-042 is ACCEPTED / POST-MERGE VERIFIED within its bounded read-only scope by
+`docs/project/BKL-042-CLOSURE-2026-09-24.md`. BKL-043 is the dependency-ready
+successor. Its initial repository-only inventory is recorded in
+`docs/architecture/validation/BKL-043-F1-SOURCE-DISCOVERY-2026-09-24.md` and finds
+no eligible operational population for service availability, correlated incident
+rates, MTBF, MTTR or failure budget. Historical session completion fields are
+descriptive only; EAGLE is `UNAVAILABLE` / `UNKNOWN`; the archived telemetry is a
+synthetic fixture. Per AP-007, numeric SLI/SLO thresholds remain undefined pending
+measured baseline and applicable owner/architecture deliberation.
