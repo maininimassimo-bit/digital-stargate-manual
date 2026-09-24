@@ -26,6 +26,10 @@ F8_PATH = Path("docs/data/observation-planner-f8-current-astronomy-suitability.j
 SUITABILITY_PATH = Path("docs/data/observation-planner-f8-suitability-evidence.json")
 TARGET_CATALOG_PATH = Path("docs/data/observation-planner-target-catalog.json")
 OUTPUT_PATH = Path("docs/data/observation-planner-f9-current-night.json")
+# F9 planning gates: BKL-032 weather limits, with the owner's stricter
+# cloud-cover constraint for opening a dome represented only in this planner.
+WEATHER_LIMITS = {"cloudCoverPct": 20, "relativeHumidityPct": 90, "precipitationMm": 0,
+                  "windSpeedKmh": 15, "windGustKmh": 20, "dewPointMarginC": 10}
 
 
 class ContractError(RuntimeError):
@@ -137,6 +141,8 @@ def weather_rows(series: dict[str, dict[dt.datetime, float]]) -> dict[dt.datetim
         precipitation_previous = accumulated
         u, v = series["U_10M"][instant], series["V_10M"][instant]
         rows[instant] = {
+            "temperatureC": round(t, 2),
+            "dewPointC": round(td, 2),
             "cloudCoverPct": round(max(0.0, min(100.0, series["CLCT"][instant])), 1),
             "relativeHumidityPct": round(rh_from_temperature(t, td), 1),
             "precipitationMm": round(precipitation, 3),
@@ -144,6 +150,21 @@ def weather_rows(series: dict[str, dict[dt.datetime, float]]) -> dict[dt.datetim
             "windGustKmh": round(max(0.0, series["VMAX_10M"][instant]) * 3.6, 1),
         }
     return rows
+
+
+def weather_gate(weather: dict) -> tuple[bool, list[str]]:
+    """Return a fail-closed, planning-only hourly weather eligibility decision."""
+    fields = ("temperatureC", "dewPointC", "cloudCoverPct", "relativeHumidityPct", "precipitationMm", "windSpeedKmh", "windGustKmh")
+    if any(not isinstance(weather.get(key), (int, float)) or not math.isfinite(weather[key]) for key in fields):
+        return False, ["METEO_INCOMPLETO"]
+    reasons = []
+    if weather["cloudCoverPct"] > WEATHER_LIMITS["cloudCoverPct"]: reasons.append("NUVOLOSITA_SOPRA_20_PERCENTO")
+    if weather["relativeHumidityPct"] > WEATHER_LIMITS["relativeHumidityPct"]: reasons.append("UMIDITA_SOPRA_90_PERCENTO")
+    if weather["precipitationMm"] > WEATHER_LIMITS["precipitationMm"]: reasons.append("PIOGGIA_PRESENTE")
+    if weather["windSpeedKmh"] > WEATHER_LIMITS["windSpeedKmh"]: reasons.append("VENTO_SOPRA_15_KMH")
+    if weather["windGustKmh"] > WEATHER_LIMITS["windGustKmh"]: reasons.append("RAFFICHE_SOPRA_20_KMH")
+    if weather["temperatureC"] - weather["dewPointC"] < WEATHER_LIMITS["dewPointMarginC"]: reasons.append("MARGINE_DEWPOINT_SOTTO_10_C")
+    return not reasons, reasons
 
 
 def altaz(ra_deg: float, dec_deg: float, jd: float, latitude: float, longitude: float) -> tuple[float, float]:
@@ -269,6 +290,8 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
             windows = []
             for first, second in zip(rows, rows[1:]):
                 a, b = first["targets"][target["targetKey"]], second["targets"][target["targetKey"]]
+                if not weather_gate(first["weather"])[0] or not weather_gate(second["weather"])[0]:
+                    continue
                 if first["solarAltitudeDeg"] > -18 or second["solarAltitudeDeg"] > -18 or a["altitudeDeg"] <= 0 or b["altitudeDeg"] <= 0:
                     continue
                 score = 100 * (0.6 * ((a["astronomyFactor"] + b["astronomyFactor"]) / 2) + 0.3 * ((a["weatherFactor"] + b["weatherFactor"]) / 2) + 0.1 * case["aggregateScore"] / 100)
@@ -286,6 +309,9 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
                          "retrievedAtUtc": utc(retrieval), "runAgeHoursAtRetrieval": round(age, 6), "freshnessState": "FRESH", "sourceFiles": files},
             "nightWindow": {"fromUtc": utc(instants[0]), "toUtcExclusive": utc(instants[-1] + dt.timedelta(hours=1))},
             "method": {"id": "BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.0", "ephemerisMode": "EXPLICIT_MOSEPH_NO_FALLBACK", "scoreWeights": f8["method"]["scoreWeights"], "displayFilter": "solarAltitudeDeg <= -18 and targetAltitudeDeg > 0"},
+            "weatherPolicy": {"id": "DSG-F9-PLANNER-WEATHER-GATE@1.0", "limits": WEATHER_LIMITS,
+                              "cloudLimitRationale": "OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT",
+                              "authority": "ADVISORY_PLANNING_ONLY"},
             "setupProfiles": f8["setupProfiles"], "targetProfiles": targets, "targetCatalog": {"catalogId": catalog["catalogId"], "catalogCompleteness": catalog["catalogCompleteness"], "candidateCount": len(catalog["targets"])}, "suitabilityEvidence": suitability_public, "hourly": rows, "rankings": rankings,
             "boundaries": {"recurringTraffic": True, "monetaryBudgetEur": 0, "rawGribRetention": "NONE_EPHEMERAL_ONLY",
                            "readinessAuthority": False, "automaticTargetSelection": False, "schedulingAuthority": False, "actionAuthority": "NONE", "commandAuthority": "NONE",
@@ -331,6 +357,11 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
         raise ContractError("FORECAST_FRESHNESS_EVIDENCE")
     if data.get("method", {}).get("ephemerisMode") != "EXPLICIT_MOSEPH_NO_FALLBACK":
         raise ContractError("EPHEMERIS_MODE")
+    expected_policy = {"id": "DSG-F9-PLANNER-WEATHER-GATE@1.0", "limits": WEATHER_LIMITS,
+                       "cloudLimitRationale": "OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT",
+                       "authority": "ADVISORY_PLANNING_ONLY"}
+    if data.get("weatherPolicy") != expected_policy:
+        raise ContractError("WEATHER_POLICY")
     if data.get("attribution", {}).get("license") != "CC BY 4.0":
         raise ContractError("ATTRIBUTION")
     suitability = data.get("suitabilityEvidence", {})
@@ -357,10 +388,19 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
         weather = row.get("weather", {})
         if (not 0 <= weather.get("cloudCoverPct", -1) <= 100 or not 0 <= weather.get("relativeHumidityPct", -1) <= 100
                 or weather.get("precipitationMm", -1) < 0 or weather.get("windSpeedKmh", -1) < 0 or weather.get("windGustKmh", -1) < 0
+                or any(not isinstance(weather.get(key), (int, float)) or not math.isfinite(weather[key]) for key in ("temperatureC", "dewPointC"))
                 or set(row.get("targets", {})) != target_keys):
             raise ContractError("HOURLY_VALUES")
     if any({target.get("targetKey") for target in ranking.get("targets", [])} != target_keys for ranking in rankings):
         raise ContractError("RANKING_BINDING")
+    for ranking in rankings:
+        for target in ranking.get("targets", []):
+            for candidate in target.get("bestWindows", []):
+                start = dt.datetime.fromisoformat(candidate["fromUtc"].replace("Z", "+00:00"))
+                end = dt.datetime.fromisoformat(candidate["toUtcExclusive"].replace("Z", "+00:00"))
+                samples = [row for row in hourly if start <= dt.datetime.fromisoformat(row["validAtUtc"].replace("Z", "+00:00")) < end]
+                if len(samples) != 2 or any(not weather_gate(row["weather"])[0] for row in samples):
+                    raise ContractError("RANKING_WINDOW_WEATHER_GATE")
     expected_cases = {(setup_id, target_key) for setup_id in setup_ids for target_key in target_keys}
     cases = suitability.get("cases", [])
     if {(case.get("setupId"), case.get("targetKey")) for case in cases} != expected_cases:

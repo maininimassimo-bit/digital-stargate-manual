@@ -15,11 +15,11 @@ def valid_projection():
       'forecast':{'providerId':'METEOHUB','upstreamAuthorityId':'ITALIAMETEO_ARPAE','modelId':'ICON_2I','freshnessState':'FRESH','runInitialisationUtc':'2026-09-17T00:00:00Z','retrievedAtUtc':'2026-09-17T01:00:00Z','runAgeHoursAtRetrieval':1.0,
         'sourceFiles':[{'variable':name,'sha256':'0'*64,'byteLength':1,'unit':'unit'} for name in f9.VARIABLES]},
       'nightWindow':{'fromUtc':stamp(instants[0]),'toUtcExclusive':stamp(instants[-1]+dt.timedelta(hours=1))},
-      'method':{'ephemerisMode':'EXPLICIT_MOSEPH_NO_FALLBACK'},'attribution':{'license':'CC BY 4.0'},
+      'method':{'ephemerisMode':'EXPLICIT_MOSEPH_NO_FALLBACK'},'weatherPolicy':{'id':'DSG-F9-PLANNER-WEATHER-GATE@1.0','limits':f9.WEATHER_LIMITS,'cloudLimitRationale':'OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT','authority':'ADVISORY_PLANNING_ONLY'},'attribution':{'license':'CC BY 4.0'},
       'setupProfiles':[{'setupId':'S'}],'targetProfiles':[{'targetKey':'T'}],
       'suitabilityEvidence':{'methodId':'BKL031-F8-SETUP-SUITABILITY@1.1','componentWeights':{'framing':0.2,'filterSignal':0.4,'imageScaleObjectClass':0.4},'cases':[{'setupId':'S','targetKey':'T','components':{'framing':80,'filterSignal':90,'imageScaleObjectClass':85},'aggregateScore':86,'reasonCodes':['TEST']} ]},
-      'hourly':[{'validAtUtc':stamp(instant),'weather':{'cloudCoverPct':10,'relativeHumidityPct':20,'precipitationMm':0,'windSpeedKmh':3,'windGustKmh':4},'targets':{'T':{}}} for instant in instants],
-      'rankings':[{'setupId':'S','targets':[{'targetKey':'T'}]}],
+      'hourly':[{'validAtUtc':stamp(instant),'weather':{'temperatureC':15,'dewPointC':4,'cloudCoverPct':10,'relativeHumidityPct':20,'precipitationMm':0,'windSpeedKmh':3,'windGustKmh':4},'targets':{'T':{}}} for instant in instants],
+      'rankings':[{'setupId':'S','targets':[{'targetKey':'T','bestWindows':[{'fromUtc':stamp(instants[0]),'toUtcExclusive':stamp(instants[2])}]}]}],
       'boundaries':{'recurringTraffic':True,'monetaryBudgetEur':0,'rawGribRetention':'NONE_EPHEMERAL_ONLY','readinessAuthority':False,'automaticTargetSelection':False,'schedulingAuthority':False,'actionAuthority':'NONE','commandAuthority':'NONE','safetyAuthority':'LOCAL_PHYSICAL_INTERLOCKS','protectedCoordinatesPublished':False}}
 
 class F9Tests(unittest.TestCase):
@@ -41,6 +41,20 @@ class F9Tests(unittest.TestCase):
         value=valid_projection();value['hourly'][1]['validAtUtc']='2026-09-17T18:00:00Z'
         with self.assertRaisesRegex(f9.ContractError,'NON_CONTIGUOUS'): f9.validate_projection(value)
     def test_relative_humidity(self): self.assertAlmostEqual(f9.rh_from_temperature(20,20),100)
+    def test_weather_gate_accepts_exact_boundaries(self):
+        self.assertEqual(f9.weather_gate({'temperatureC':20,'dewPointC':10,'cloudCoverPct':20,'relativeHumidityPct':90,'precipitationMm':0,'windSpeedKmh':15,'windGustKmh':20}), (True, []))
+    def test_weather_gate_blocks_cloud_and_reports_reason(self):
+        ok, reasons=f9.weather_gate({'temperatureC':20,'dewPointC':10,'cloudCoverPct':20.1,'relativeHumidityPct':90,'precipitationMm':0,'windSpeedKmh':15,'windGustKmh':20})
+        self.assertFalse(ok); self.assertIn('NUVOLOSITA_SOPRA_20_PERCENTO',reasons)
+    def test_weather_gate_fails_closed_on_missing_dewpoint(self):
+        ok,reasons=f9.weather_gate({'temperatureC':20,'cloudCoverPct':10,'relativeHumidityPct':20,'precipitationMm':0,'windSpeedKmh':3,'windGustKmh':4})
+        self.assertFalse(ok); self.assertEqual(reasons,['METEO_INCOMPLETO'])
+    def test_weather_policy_cannot_drift(self):
+        value=valid_projection(); value['weatherPolicy']['limits']=dict(value['weatherPolicy']['limits']); value['weatherPolicy']['limits']['cloudCoverPct']=50
+        with self.assertRaisesRegex(f9.ContractError,'WEATHER_POLICY'): f9.validate_projection(value)
+    def test_ranked_window_fails_if_one_hour_breaks_cloud_limit(self):
+        value=valid_projection(); value['hourly'][1]['weather']['cloudCoverPct']=20.1
+        with self.assertRaisesRegex(f9.ContractError,'RANKING_WINDOW_WEATHER_GATE'): f9.validate_projection(value)
     def test_lunar_illumination_known_answers(self):
         self.assertAlmostEqual(f9.illuminated_fraction(0,0,0,0),0.0,places=6)
         self.assertAlmostEqual(f9.illuminated_fraction(0,0,180,0),1.0,places=6)
