@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Gate ID | `M-BKL043-F4-EXACT-PILOT-RUNTIME-AUTHORIZATION` |
-| Status | **PREPARATION ONLY — OWNER PARAMETERS AND RUNTIME AUTHORIZATION PENDING** |
+| Status | **PREPARATION ONLY — SELECTED DESIGN DECISIONS RECORDED; EXACT RUNTIME AUTHORIZATION PENDING** |
 | Owner / accountable | Massimo Mainini |
 | Predecessor disposition | F3 approved for preparation of a separate exact authorization on 2026-09-24 |
 | Authority | Repository-only design; `command_authority=NONE`, `execution_authority=NONE`, `safety_authority=NONE` |
@@ -24,10 +24,14 @@ inherit a historical default.
 
 The stated objective is measuring reliability of the whole observatory system.
 The F2 design therefore describes two logical planes: an EAGLE-local observer
-and a separately durable witness outside the EAGLE failure domain. This is a
-candidate topology, not a selected runtime scope. A local-only pilot could
-describe only EAGLE-observed component telemetry and cannot claim coverage while
-EAGLE is offline. No witness service or storage provider has been selected.
+and a separately durable witness outside the EAGLE failure domain. Massimo
+Mainini selected the two-plane pilot scope for this gate on 2026-09-24. This is a
+scope decision only; it does not select a deployable implementation or authorize
+runtime activity. The owner selected GitHub as the witness-provider candidate;
+the exact private repository/service, durable receipt mechanism, access model,
+failure-domain evidence, transport and retention remain unselected. The existing
+`maininimassimo-bit/digital-stargate-manual` repository is public and is not an
+authorized destination for runtime receipts or operational telemetry.
 
 The incident lifecycle remains excluded: OPSC-ALM-001 is a draft and no incident
 register exists. N.I.N.A.-logged activity remains the candidate attempt
@@ -39,13 +43,13 @@ scope, not as live runtime authorization.
 
 | Decision field | Current proposal / evidence | Owner decision |
 |---|---|---|
-| Pilot scope | Two-plane is the F2 logical design; local-only narrows coverage and cannot establish whole-system uptime | **UNSELECTED** |
-| Target host and environment | EAGLE host is the stated concept; exact machine identity, OS baseline and maintenance window are not established in this gate | **UNSELECTED** |
+| Pilot scope | Owner selected two-plane observer plus independent witness on 2026-09-24; this selects scope, not runtime activation | **SELECTED — TWO-PLANE; runtime remains unauthorized** |
+| Target host and environment | Repository status evidence identifies the EAGLE evidence host as `EAGLE30154`; OS build, device identity verification and maintenance window are not established by that documentation | **TARGET SELECTED — EAGLE30154; OS/build and window UNSELECTED** |
 | Service identity and operator | Least privilege is mandatory; no new identity selected | **UNSELECTED** |
 | Software artifact and configuration | F3 schema/validator are contract tests, not a runtime collector; implementation and immutable artifact digest do not exist | **UNSELECTED** |
 | Included sources/components | Candidate source-owned projections only; no live producer/read-only boundary has been revalidated for this pilot | **UNSELECTED** |
 | N.I.N.A. logs | User confirmed logs are available; parsing, event grouping, retry/terminal semantics and population reconciliation are not accepted | **OFFLINE ANALYSIS ONLY; runtime ingestion unselected** |
-| Independent witness | Required for EAGLE-off coverage; no independent service/provider or durable receipt store is selected | **UNSELECTED** |
+| Independent witness | Owner selected GitHub as provider candidate on 2026-09-24. Existing Digital StarGate repo is public; it cannot receive operational telemetry. A separate private GitHub resource and durable receipt mechanism must be selected and shown independent of EAGLE host, power and network failure domains. | **PROVIDER CANDIDATE SELECTED — GITHUB; exact private resource, receipt store and independence proof UNSELECTED** |
 | Transport, authentication and egress | No endpoint, protocol, credential, network rule or secret provisioning approved | **UNSELECTED** |
 | Sampling/heartbeat cadence, timeout, freshness and gap semantics | Historical producer cadence is not transferable; no approved values | **UNSELECTED** |
 | Start mode | User-originated concept mentioned starting with EAGLE; F2/F3 do not authorize boot-start, scheduled task or recurring execution | **UNSELECTED** |
@@ -55,25 +59,28 @@ scope, not as live runtime authorization.
 | Retention/deletion/disposal | No duration, deletion procedure or approver selected | **UNSELECTED** |
 | Resource budget and stop limits | Must be measured against an agreed imaging workload; no numeric limits approved | **UNSELECTED** |
 | Installation, disable, uninstall and rollback | Must be exact for the selected artifact/host; not prepared for runtime | **UNSELECTED** |
-| Security/privacy review | Required before any live access or persistence | **PENDING** |
-| Independent architecture and release-quality review | Required; no reviewer nominated | **PENDING** |
+| Security/privacy review | Required before any live access or persistence; reviewer scope and recorded finding still required | **PENDING — Leonardo Di Egidio nominated; review not performed** |
+| Independent architecture and release-quality review | Leonardo Di Egidio nominated by owner on 2026-09-24. Massimo Mainini remains accountable owner and runtime approver, not an independent reviewer of his own decision. | **REVIEWER NOMINATED — finding pending** |
 | OAT and acceptance criteria | Must be tied to exact sources, coverage, stop conditions and rollback | **UNSELECTED** |
 | Incident lifecycle | Separate contract and authorization required; current default excludes it | **EXCLUDED** |
 
 ## 4. Required evidence before the runtime decision can be submitted
 
 1. Close the F3 review findings and preserve the offline test evidence.
-2. Select the pilot scope and exact host, identity, artifact and components.
+2. Complete the selected scope and host definition: verify `EAGLE30154`, record
+   its OS/build and maintenance window, then select identity, artifact and
+   components.
 3. Prove every selected source is available through an exact read-only interface;
    exclude direct device probing and command-capable credentials.
-4. For a two-plane scope, demonstrate an independent witness and durable receipt
-   store outside EAGLE's host, power and network failure domains.
+4. For the selected two-plane scope, provision and assess a separate private
+   GitHub resource (not the public manual repository) and demonstrate a durable
+   receipt store outside EAGLE's host, power and network failure domains.
 5. Define data minimization, privacy/security controls, retention/deletion,
    resource stop limits, observation window and review checkpoints.
 6. Specify install/start/stop/uninstall/rollback and recovery verification.
-7. Complete independent reviews and offline, security/privacy and resource
-   preflight evidence. The preflight must not access live sources until separately
-   authorized.
+7. Complete Leonardo Di Egidio's independent architecture/release review and
+   security/privacy review, plus offline and resource preflight evidence. The
+   preflight must not access live sources until separately authorized.
 8. Submit a final decision record with every field exact and no `UNSELECTED`,
    then wait for explicit owner approval naming that exact record/version.
 
@@ -103,3 +110,7 @@ safety_authority=NONE
 - `docs/architecture/validation/BKL-043-F2-SYSTEM-DETECTION-ARCHITECTURE-2026-09-24.md`
 - `docs/architecture/validation/BKL-043-F1-SOURCE-DISCOVERY-2026-09-24.md`
 - `docs/architecture/validation/BKL-043-F1-POPULATION-AND-CONTRACT-GAP-DISCOVERY-2026-09-24.md`
+- `docs/status/index.md` — identifies the documented EAGLE evidence host as
+  `EAGLE30154`; does not establish OS/build or validate current machine identity.
+- GitHub repository visibility check on 2026-09-24: `maininimassimo-bit/digital-stargate-manual`
+  is public; it is explicitly excluded as a destination for pilot telemetry.
