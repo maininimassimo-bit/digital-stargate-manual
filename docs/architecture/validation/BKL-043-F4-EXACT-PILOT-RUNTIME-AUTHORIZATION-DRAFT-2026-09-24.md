@@ -44,7 +44,7 @@ scope, not as live runtime authorization.
 | Decision field | Current proposal / evidence | Owner decision |
 |---|---|---|
 | Pilot scope | Owner selected two-plane observer plus independent witness on 2026-09-24; this selects scope, not runtime activation | **SELECTED — TWO-PLANE; runtime remains unauthorized** |
-| Target host and environment | Repository status evidence identifies the EAGLE evidence host as `EAGLE30154`; OS build, device identity verification and maintenance window are not established by that documentation | **TARGET SELECTED — EAGLE30154; OS/build and window UNSELECTED** |
+| Target host and environment | `EAGLE30154`; source-discovery evidence recorded Windows 10 Enterprise LTSC `10.0.17763` x64 as verified on 2026-09-03. This is a historical baseline, not current identity/OS attestation; maintenance window is not documented. | **TARGET SELECTED — EAGLE30154; historical OS baseline recorded; current host/OS confirmation and window UNSELECTED** |
 | Service identity and operator | Least privilege is mandatory; no new identity selected | **UNSELECTED** |
 | Software artifact and configuration | F3 schema/validator are contract tests, not a runtime collector; implementation and immutable artifact digest do not exist | **UNSELECTED** |
 | Included sources/components | Candidate source-owned projections only; no live producer/read-only boundary has been revalidated for this pilot | **UNSELECTED** |
@@ -112,5 +112,8 @@ safety_authority=NONE
 - `docs/architecture/validation/BKL-043-F1-POPULATION-AND-CONTRACT-GAP-DISCOVERY-2026-09-24.md`
 - `docs/status/index.md` — identifies the documented EAGLE evidence host as
   `EAGLE30154`; does not establish OS/build or validate current machine identity.
+- `docs/architecture/telemetry/evidence/BKL-030-EAGLE-Health-Source-Discovery-2026-09-03.md`
+  — records the historical `EAGLE30154` OS baseline as Windows 10 Enterprise
+  LTSC `10.0.17763` x64; reconfirmation is required before runtime activity.
 - GitHub repository visibility check on 2026-09-24: `maininimassimo-bit/digital-stargate-manual`
   is public; it is explicitly excluded as a destination for pilot telemetry.
