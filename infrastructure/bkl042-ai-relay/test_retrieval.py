@@ -5,6 +5,26 @@ from pathlib import Path
 from app import validate_answer
 from retrieval import SOURCES, _safe_url, retrieve
 
+EXTRA_PROJECTIONS = {
+    "docs/data/session-comparison-projection.json": {
+        "projectionType": "SESSION_COMPARISON_PROJECTION", "comparisonSetId": "BKL037-SQM-CATALOG-V1",
+        "generatedAt": "2026-09-23T05:54:41Z",
+        "dimension": "SQM_MEDIAN", "unit": "mag/arcsec2", "comparisonState": "COMPARABLE",
+        "descriptiveSummary": {"sampleSize": 15, "median": 20.57},
+        "authority": {"acceptanceAuthority": False, "actionAuthority": "NONE"},
+    },
+    "docs/data/scientific-data-quality-projection.json": {
+        "projectionState": "EXPERIMENTAL_NOT_ACCEPTED", "generatedAt": "2026-09-23T05:54:41Z",
+        "authority": {"productionUseAuthorized": False, "acceptanceAuthority": False, "actionAuthority": "NONE"},
+        "assessments": [{"sessionId": "2026-08-14_2026-08-15", "target": "M 27", "observedAt": "2026-08-14T20:00:00Z",
+                         "assessment": {"assessmentState": "UNAVAILABLE", "score": 99.9, "decomposition": [{"value": "must-not-leak"}]}}],
+    },
+}
+
+
+def fixture_fetch(fixtures):
+    return lambda path: fixtures[path] if path in fixtures else EXTRA_PROJECTIONS[path]
+
 gateway_path = Path(__file__).parents[1] / "bkl042-portal-gateway" / "app.py"
 gateway_spec = importlib.util.spec_from_file_location("bkl042_portal_gateway", gateway_path)
 gateway = importlib.util.module_from_spec(gateway_spec)
@@ -26,9 +46,9 @@ class RetrievalTests(unittest.TestCase):
                 }]
             },
         }
-        result = retrieve("M 27 session", lambda path: fixtures[path])
+        result = retrieve("M 27 session", fixture_fetch(fixtures))
         self.assertEqual(result["state"], "CONFLICT_REQUIRES_REVIEW")
-        self.assertEqual(len(result["records"]), 2)
+        self.assertGreaterEqual(len(result["records"]), 2)
         serialized = str(result)
         for forbidden in ("123.4", "55.6", "private/path", "secret"):
             self.assertNotIn(forbidden, serialized)
@@ -36,7 +56,7 @@ class RetrievalTests(unittest.TestCase):
         self.assertNotIn("private-conflict-ref", serialized)
         self.assertNotIn("must-not-leak", serialized)
         self.assertEqual(result["state"], "CONFLICT_REQUIRES_REVIEW")
-        self.assertEqual(set(fixtures), set(SOURCES.values()))
+        self.assertEqual(len(SOURCES), 5)
 
     def test_no_match_returns_insufficient_evidence(self):
         fixtures = {
@@ -44,7 +64,7 @@ class RetrievalTests(unittest.TestCase):
             "docs/data/target-knowledge-read-model.json": {"targets": []},
             "docs/data/scientific-session-catalog.json": {"sessions": []},
         }
-        result = retrieve("unlisted imaginary subject", lambda path: fixtures[path])
+        result = retrieve("unlisted imaginary subject", fixture_fetch(fixtures))
         self.assertEqual(result["state"], "INSUFFICIENT_EVIDENCE")
         self.assertEqual(result["records"], [])
 
@@ -60,11 +80,12 @@ class RetrievalTests(unittest.TestCase):
                 }]
             },
         }
-        result = retrieve("riassumi le sessioni per m27 e indica le fonti", lambda path: fixtures[path])
+        result = retrieve("riassumi le sessioni per m27 e indica le fonti", fixture_fetch(fixtures))
         self.assertEqual(result["state"], "EVIDENCE_FOUND")
-        self.assertEqual(len(result["records"]), 1)
-        self.assertEqual(result["records"][0]["source_id"], "session-catalog")
-        self.assertEqual(result["method_version"], "bkl042-static-projection-retrieval-v2")
+        self.assertTrue(any(record["source_id"] == "session-catalog" for record in result["records"]))
+        self.assertEqual(sum(record["source_id"] == "scientific-data-quality" for record in result["records"]), 0)
+        self.assertEqual(sum(record["source_id"] == "session-catalog" for record in result["records"]), 1)
+        self.assertEqual(result["method_version"], "bkl042-static-projection-retrieval-v3")
 
     def test_spaced_designation_matches_compact_index_term(self):
         fixtures = {
@@ -77,11 +98,40 @@ class RetrievalTests(unittest.TestCase):
                 "sessionId": "2026-08-14_2026-08-15", "observationDate": "2026-08-14", "target": "M 27",
             }]},
         }
-        result = retrieve("sessioni per M 27", lambda path: fixtures[path])
+        result = retrieve("sessioni per M 27", fixture_fetch(fixtures))
         self.assertEqual(result["state"], "EVIDENCE_FOUND")
 
+    def test_quality_source_is_experimental_and_never_exposes_synthetic_scores(self):
+        fixtures = {
+            "docs/data/scientific-observation-index.json": {"catalogItems": [], "searchDocuments": []},
+            "docs/data/target-knowledge-read-model.json": {"targets": []},
+            "docs/data/scientific-session-catalog.json": {"sessions": []},
+        }
+        result = retrieve("M 27 experimental quality", fixture_fetch(fixtures))
+        quality = next(record for record in result["records"] if record["source_id"] == "scientific-data-quality")
+        self.assertEqual(quality["freshness"], "VERSIONED_EXPERIMENTAL_PROJECTION")
+        self.assertEqual(quality["authority"], "EXPERIMENTAL_CONTEXT_ONLY")
+        self.assertIn("EXPERIMENTAL_NOT_ACCEPTED", quality["summary"])
+        self.assertNotIn("99.9", str(result))
+        self.assertNotIn("must-not-leak", str(result))
+
+    def test_sq_m_comparison_query_retrieves_descriptive_projection(self):
+        fixtures = {
+            "docs/data/scientific-observation-index.json": {"catalogItems": [], "searchDocuments": []},
+            "docs/data/target-knowledge-read-model.json": {"targets": []},
+            "docs/data/scientific-session-catalog.json": {"sessions": []},
+        }
+        result = retrieve("confronto SQM sessioni", fixture_fetch(fixtures))
+        comparison = next(record for record in result["records"] if record["source_id"] == "session-comparison")
+        self.assertEqual(comparison["authority"], "DESCRIPTIVE_PROJECTION")
+        self.assertIn("not a quality score", comparison["summary"])
+
+    def test_comparison_citation_route_is_allowlisted(self):
+        self.assertEqual(_safe_url("session-comparison/"), "https://maininimassimo-bit.github.io/digital-stargate-manual/session-comparison/")
+        self.assertEqual(_safe_url("scientific-data-quality/"), "https://maininimassimo-bit.github.io/digital-stargate-manual/scientific-data-quality/")
+
     def test_empty_query_and_invalid_projection_fail_closed(self):
-        self.assertEqual(retrieve("a", lambda _path: {})["method_version"], "bkl042-static-projection-retrieval-v2")
+        self.assertEqual(retrieve("a", lambda _path: {})["method_version"], "bkl042-static-projection-retrieval-v3")
         with self.assertRaisesRegex(RuntimeError, "SOURCE_INVALID"):
             retrieve("observatory", lambda _path: {})
 
