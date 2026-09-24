@@ -1,13 +1,13 @@
 {
   "schemaVersion": "2.2",
-  "updatedAt": "2026-09-23",
+  "updatedAt": "2026-09-24",
   "generatedFrom": ".github/roadmap/roadmap-source.json",
-  "sourceDigest": "619f7b4e9dd4ee257896fa29fe5385f188c582e66de7067d3c183eaa408885ca",
+  "sourceDigest": "77e3369c7f408681dd70cd269de2ae7092f23cf058d91f4eb6f5aa3473466600",
   "authority": "DSG-RGM-001",
-  "projectStatus": "BKL-034-F2 is CLOSED / ACCEPTED / POST-MERGE VERIFIED for the bounded governed image-ingestion contract and dry-run storage preflight; runtime storage remains separately gated. BKL-042 is the current advisory/read-only successor. AP-015 and BKL-033 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED for their explicitly design/contract-only scopes; RC2 baseline, AP-008 and BKL-036-F5 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED; EAGLE Health is live HEALTHY/100 with fail-closed policy; BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 production runtime unavailable; live source/transport and public runtime GO remain separately gated; no image mutation, processing execution, scheduling, automatic target selection, commands, remediation or Safety Authority is authorized; no scheduling, automatic target selection, commands or Safety Authority is authorized",
+  "projectStatus": "BKL-034-F2 is CLOSED / ACCEPTED / POST-MERGE VERIFIED for the bounded governed image-ingestion contract and dry-run storage preflight; runtime storage remains separately gated. BKL-042 is the current advisory/read-only successor and remains open for F1 source-coverage expansion. AP-015 and BKL-033 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED for their explicitly design/contract-only scopes; RC2 baseline, AP-008 and BKL-036-F5 remain CLOSED / ACCEPTED / POST-MERGE VERIFIED. The inspected public EAGLE projection currently reports UNAVAILABLE / UNKNOWN / NO_CURRENT_SNAPSHOT and is not consumed as live health evidence. BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 production runtime unavailable; live source/transport and public runtime GO remain separately gated; no image mutation, processing execution, scheduling, automatic target selection, commands, remediation or Safety Authority is authorized",
   "currentPackage": "BKL-042",
   "nextMilestone": "BKL-042",
-  "target": "BKL-042-F6 formal bounded acceptance is complete after the owner-witnessed authenticated GitHub Pages OAT. The bounded server-side pilot relay and Google OAuth gateway are deployed and health-verified. The next gate is a separately authorized retrieval/provenance runtime increment. Runtime storage/upload, processing execution, scheduler, automatic target selection, device command and Safety Authority remain separately gated capabilities. No scheduler, automatic target selection, device command or Safety Authority is authorized.",
+  "target": "BKL-042-F7 remains active and not closed: after owner-witnessed OAT v2 passed, the owner directed expansion of other eligible F1 sources. Retrieval method v3 adds bounded BKL-037 descriptive and BKL-041 experimental context; exact-head review/CI, merge, evidence-based deployment decision, owner-witnessed v3 OAT and formal acceptance remain. Runtime storage/upload, processing execution, scheduler, automatic target selection, device command and Safety Authority remain separately gated.",
   "summary": {
     "total": 47,
     "completed": 42,
@@ -351,7 +351,7 @@
           "id": "BKL-042",
           "title": "AI Observatory Assistant",
           "status": "active",
-          "note": "BKL-042 F1-F5 and F6 are accepted for bounded read-only scope with retained NOT_EVALUABLE_CURRENT_EVIDENCE limitation. The fail-closed server-side pilot relay and Google OAuth gateway are deployed and health-verified; the owner-witnessed authenticated GitHub Pages OAT passed. Retrieval, automatic apply, command and Safety Authority remain gated."
+          "note": "BKL-042 F1-F5 and F6 are accepted for bounded read-only scope. Owner-witnessed v2 OAT passed; owner directed that the package remain open until other eligible F1 source coverage is extended. Method v3 adds only BKL-037 descriptive and BKL-041 experimental context; see docs/architecture/validation/BKL-042-F7-F1-SOURCE-COVERAGE-EVIDENCE-2026-09-24.md. Exact-head review/CI, merge, evidence-based deployment decision, owner-witnessed v3 OAT and formal acceptance remain pending."
         },
         {
           "id": "BKL-043",
@@ -1036,7 +1036,7 @@
       "title": "BKL-042-F7 Governed Retrieval Post-Deployment Acceptance",
       "date": "2026-09-23",
       "status": "active",
-      "description": "PR #355 (`b4d45c12`) introduced bounded server-side retrieval for public target identity and historical sessions. PR #357 (`7be9fd0b`) fixed compact/spaced designation matching as method v2, deployed to relay `00007-wrm` (rollback `00006-ktv`). Owner-witnessed live OAT PASS on 2026-09-24: ANSWERED with five M 27 historical-session citations; returned facts checked against the published projection; correlation `bkl042-pages-ad1e6d8b-499a-460e-a4ea-c6546a1ba419`. Formal bounded acceptance and owner decision whether to defer or expand residual F1 source coverage remain pending. Maintain bounded read-only authority and NONE command/safety authority.",
+      "description": "PR #355 (`b4d45c12`) introduced bounded server-side retrieval for public target identity and historical sessions. PR #357 (`7be9fd0b`) fixed compact/spaced designation matching as method v2, deployed to relay `00007-wrm` (rollback `00006-ktv`). Owner-witnessed live OAT PASS on 2026-09-24 answered the M 27 query with five historical-session citations; facts matched the published projection (correlation `bkl042-pages-ad1e6d8b-499a-460e-a4ea-c6546a1ba419`). Owner explicitly directed source-coverage expansion before closure. In-progress method v3 adds BKL-037 descriptive historical comparison and BKL-041 experimental-only quality context; evidence `docs/architecture/validation/BKL-042-F7-F1-SOURCE-COVERAGE-EVIDENCE-2026-09-24.md`. Fixture-only, incomplete, stale or unavailable classes remain excluded. Exact-head CI/review, merge, evidence-based deployment decision, owner-witnessed v3 OAT and formal acceptance remain pending. Maintain bounded read-only authority and NONE command/execution/safety authority.",
       "image": null
     },
     {
