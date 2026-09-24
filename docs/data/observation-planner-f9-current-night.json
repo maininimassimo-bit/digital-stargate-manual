@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "projectionType": "BKL031_F9_REPEATABLE_CURRENT_NIGHT",
-  "generatedAtUtc": "2026-09-24T14:20:15Z",
+  "generatedAtUtc": "2026-09-24T20:29:13Z",
   "environment": "EVALUATION",
   "authority": "NONE",
   "consumerMode": "READ_ONLY",
@@ -15,8 +15,8 @@
     "upstreamAuthorityId": "ITALIAMETEO_ARPAE",
     "modelId": "ICON_2I",
     "runInitialisationUtc": "2026-09-24T12:00:00Z",
-    "retrievedAtUtc": "2026-09-24T14:20:15Z",
-    "runAgeHoursAtRetrieval": 2.337632,
+    "retrievedAtUtc": "2026-09-24T20:29:13Z",
+    "runAgeHoursAtRetrieval": 8.486974,
     "freshnessState": "FRESH",
     "sourceFiles": [
       {
@@ -76,6 +76,19 @@
       "setupSuitability": 0.1
     },
     "displayFilter": "solarAltitudeDeg <= -18 and targetAltitudeDeg > 0"
+  },
+  "weatherPolicy": {
+    "id": "DSG-F9-PLANNER-WEATHER-GATE@1.0",
+    "limits": {
+      "cloudCoverPct": 20,
+      "relativeHumidityPct": 90,
+      "precipitationMm": 0,
+      "windSpeedKmh": 15,
+      "windGustKmh": 20,
+      "dewPointMarginC": 10
+    },
+    "cloudLimitRationale": "OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT",
+    "authority": "ADVISORY_PLANNING_ONLY"
   },
   "setupProfiles": [
     {
@@ -1018,6 +1031,8 @@
       "moonAltitudeDeg": -11.52,
       "moonIlluminatedFraction": 0.952,
       "weather": {
+        "temperatureC": 23.29,
+        "dewPointC": 16.84,
         "cloudCoverPct": 100.0,
         "relativeHumidityPct": 67.1,
         "precipitationMm": 0.0,
@@ -1131,6 +1146,8 @@
       "moonAltitudeDeg": -0.7,
       "moonIlluminatedFraction": 0.953,
       "weather": {
+        "temperatureC": 22.54,
+        "dewPointC": 17.23,
         "cloudCoverPct": 98.4,
         "relativeHumidityPct": 71.9,
         "precipitationMm": 0.0,
@@ -1244,6 +1261,8 @@
       "moonAltitudeDeg": 9.79,
       "moonIlluminatedFraction": 0.955,
       "weather": {
+        "temperatureC": 21.61,
+        "dewPointC": 17.73,
         "cloudCoverPct": 99.5,
         "relativeHumidityPct": 78.6,
         "precipitationMm": 0.0,
@@ -1357,6 +1376,8 @@
       "moonAltitudeDeg": 19.6,
       "moonIlluminatedFraction": 0.957,
       "weather": {
+        "temperatureC": 20.58,
+        "dewPointC": 18.13,
         "cloudCoverPct": 100.0,
         "relativeHumidityPct": 85.8,
         "precipitationMm": 0.0,
@@ -1470,6 +1491,8 @@
       "moonAltitudeDeg": 28.26,
       "moonIlluminatedFraction": 0.959,
       "weather": {
+        "temperatureC": 20.28,
+        "dewPointC": 18.13,
         "cloudCoverPct": 99.9,
         "relativeHumidityPct": 87.5,
         "precipitationMm": 0.0,
@@ -1583,6 +1606,8 @@
       "moonAltitudeDeg": 35.13,
       "moonIlluminatedFraction": 0.961,
       "weather": {
+        "temperatureC": 20.26,
+        "dewPointC": 18.07,
         "cloudCoverPct": 100.0,
         "relativeHumidityPct": 87.3,
         "precipitationMm": 0.0,
@@ -1696,6 +1721,8 @@
       "moonAltitudeDeg": 39.41,
       "moonIlluminatedFraction": 0.962,
       "weather": {
+        "temperatureC": 19.98,
+        "dewPointC": 17.96,
         "cloudCoverPct": 100.0,
         "relativeHumidityPct": 88.2,
         "precipitationMm": 0.0,
@@ -1809,6 +1836,8 @@
       "moonAltitudeDeg": 40.41,
       "moonIlluminatedFraction": 0.964,
       "weather": {
+        "temperatureC": 19.93,
+        "dewPointC": 17.93,
         "cloudCoverPct": 100.0,
         "relativeHumidityPct": 88.3,
         "precipitationMm": 0.0,
@@ -1922,6 +1951,8 @@
       "moonAltitudeDeg": 37.93,
       "moonIlluminatedFraction": 0.965,
       "weather": {
+        "temperatureC": 19.75,
+        "dewPointC": 17.79,
         "cloudCoverPct": 100.0,
         "relativeHumidityPct": 88.5,
         "precipitationMm": 0.0,
@@ -2035,6 +2066,8 @@
       "moonAltitudeDeg": 32.45,
       "moonIlluminatedFraction": 0.967,
       "weather": {
+        "temperatureC": 19.65,
+        "dewPointC": 17.5,
         "cloudCoverPct": 96.3,
         "relativeHumidityPct": 87.4,
         "precipitationMm": 0.0,
@@ -2148,6 +2181,8 @@
       "moonAltitudeDeg": 24.77,
       "moonIlluminatedFraction": 0.969,
       "weather": {
+        "temperatureC": 19.66,
+        "dewPointC": 17.62,
         "cloudCoverPct": 91.7,
         "relativeHumidityPct": 88.0,
         "precipitationMm": 0.0,
@@ -2261,6 +2296,8 @@
       "moonAltitudeDeg": 15.65,
       "moonIlluminatedFraction": 0.97,
       "weather": {
+        "temperatureC": 19.7,
+        "dewPointC": 17.61,
         "cloudCoverPct": 54.0,
         "relativeHumidityPct": 87.7,
         "precipitationMm": 0.0,
@@ -2374,6 +2411,8 @@
       "moonAltitudeDeg": 5.65,
       "moonIlluminatedFraction": 0.971,
       "weather": {
+        "temperatureC": 19.15,
+        "dewPointC": 17.13,
         "cloudCoverPct": 0.4,
         "relativeHumidityPct": 88.1,
         "precipitationMm": 0.0,
@@ -2487,6 +2526,8 @@
       "moonAltitudeDeg": -4.79,
       "moonIlluminatedFraction": 0.973,
       "weather": {
+        "temperatureC": 18.75,
+        "dewPointC": 16.39,
         "cloudCoverPct": 2.4,
         "relativeHumidityPct": 86.2,
         "precipitationMm": 0.0,
@@ -2600,6 +2641,8 @@
       "moonAltitudeDeg": -15.34,
       "moonIlluminatedFraction": 0.974,
       "weather": {
+        "temperatureC": 18.6,
+        "dewPointC": 15.6,
         "cloudCoverPct": 3.7,
         "relativeHumidityPct": 82.7,
         "precipitationMm": 0.0,
@@ -2713,6 +2756,8 @@
       "moonAltitudeDeg": -25.63,
       "moonIlluminatedFraction": 0.976,
       "weather": {
+        "temperatureC": 19.17,
+        "dewPointC": 16.0,
         "cloudCoverPct": 10.0,
         "relativeHumidityPct": 81.9,
         "precipitationMm": 0.0,
@@ -2826,410 +2871,102 @@
       "setupId": "QUATTRO200_TOUPTEK294_BIN1",
       "targets": [
         {
-          "targetKey": "dsg-target:ngc-281",
-          "targetName": "NGC 281 (Pacman Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 96.5,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 85.9,
-              "meanAltitudeDeg": 61.1,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-25T01:00:00Z",
-              "toUtcExclusive": "2026-09-25T03:00:00Z",
-              "advisoryScore": 79.2,
-              "meanAltitudeDeg": 68.6,
-              "meanCloudCoverPct": 72.8
-            },
-            {
-              "fromUtc": "2026-09-25T00:00:00Z",
-              "toUtcExclusive": "2026-09-25T02:00:00Z",
-              "advisoryScore": 75.8,
-              "meanAltitudeDeg": 73.9,
-              "meanCloudCoverPct": 94.0
-            }
-          ]
-        },
-        {
           "targetKey": "dsg-target:ic-1805",
           "targetName": "IC 1805 (Heart Nebula)",
           "acquisitionState": "NOT_YET_ACQUIRED",
           "setupSuitabilityScore": 63.3,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 85.4,
-              "meanAltitudeDeg": 68.7,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-25T01:00:00Z",
-              "toUtcExclusive": "2026-09-25T03:00:00Z",
-              "advisoryScore": 78.0,
-              "meanAltitudeDeg": 70.5,
-              "meanCloudCoverPct": 72.8
-            },
-            {
-              "fromUtc": "2026-09-25T00:00:00Z",
-              "toUtcExclusive": "2026-09-25T02:00:00Z",
-              "advisoryScore": 74.6,
-              "meanAltitudeDeg": 68.6,
-              "meanCloudCoverPct": 94.0
-            }
-          ]
-        },
-        {
-          "targetKey": "dsg-target:m-45",
-          "targetName": "M 45 (Pleiades)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 61.5,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 84.9,
-              "meanAltitudeDeg": 70.4,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-25T01:00:00Z",
-              "toUtcExclusive": "2026-09-25T03:00:00Z",
-              "advisoryScore": 77.5,
-              "meanAltitudeDeg": 65.5,
-              "meanCloudCoverPct": 72.8
-            },
-            {
-              "fromUtc": "2026-09-25T00:00:00Z",
-              "toUtcExclusive": "2026-09-25T02:00:00Z",
-              "advisoryScore": 71.8,
-              "meanAltitudeDeg": 56.5,
-              "meanCloudCoverPct": 94.0
-            }
-          ]
-        },
-        {
-          "targetKey": "dsg-target:ldn-1320",
-          "targetName": "LDN 1320",
-          "acquisitionState": "ACQUIRED_HISTORY",
-          "setupSuitabilityScore": 91.8,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 82.7,
-              "meanAltitudeDeg": 46.7,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-25T01:00:00Z",
-              "toUtcExclusive": "2026-09-25T03:00:00Z",
-              "advisoryScore": 75.0,
-              "meanAltitudeDeg": 46.3,
-              "meanCloudCoverPct": 72.8
-            },
-            {
-              "fromUtc": "2026-09-25T00:00:00Z",
-              "toUtcExclusive": "2026-09-25T02:00:00Z",
-              "advisoryScore": 71.2,
-              "meanAltitudeDeg": 45.7,
-              "meanCloudCoverPct": 94.0
-            }
-          ]
-        },
-        {
-          "targetKey": "dsg-target:m-31",
-          "targetName": "M 31 (Andromeda Galaxy)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 54.5,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 78.4,
-              "meanAltitudeDeg": 58.8,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-25T01:00:00Z",
-              "toUtcExclusive": "2026-09-25T03:00:00Z",
-              "advisoryScore": 72.8,
-              "meanAltitudeDeg": 69.8,
-              "meanCloudCoverPct": 72.8
-            },
-            {
-              "fromUtc": "2026-09-25T00:00:00Z",
-              "toUtcExclusive": "2026-09-25T02:00:00Z",
-              "advisoryScore": 69.4,
-              "meanAltitudeDeg": 80.8,
-              "meanCloudCoverPct": 94.0
-            }
-          ]
-        },
-        {
-          "targetKey": "dsg-target:ngc-2392",
-          "targetName": "NGC 2392 (Eskimo Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 95.5,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 77.4,
-              "meanAltitudeDeg": 36.3,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-25T01:00:00Z",
-              "toUtcExclusive": "2026-09-25T03:00:00Z",
-              "advisoryScore": 63.8,
-              "meanAltitudeDeg": 25.3,
-              "meanCloudCoverPct": 72.8
-            },
-            {
-              "fromUtc": "2026-09-25T00:00:00Z",
-              "toUtcExclusive": "2026-09-25T02:00:00Z",
-              "advisoryScore": 54.4,
-              "meanAltitudeDeg": 14.4,
-              "meanCloudCoverPct": 94.0
-            }
-          ]
+          "bestWindows": []
         },
         {
           "targetKey": "dsg-target:ic-434",
           "targetName": "IC 434 (Horsehead Nebula)",
           "acquisitionState": "NOT_YET_ACQUIRED",
           "setupSuitabilityScore": 82.6,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 76.0,
-              "meanAltitudeDeg": 36.2,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-25T01:00:00Z",
-              "toUtcExclusive": "2026-09-25T03:00:00Z",
-              "advisoryScore": 64.0,
-              "meanAltitudeDeg": 27.9,
-              "meanCloudCoverPct": 72.8
-            },
-            {
-              "fromUtc": "2026-09-25T00:00:00Z",
-              "toUtcExclusive": "2026-09-25T02:00:00Z",
-              "advisoryScore": 55.1,
-              "meanAltitudeDeg": 18.1,
-              "meanCloudCoverPct": 94.0
-            }
-          ]
+          "bestWindows": []
         },
         {
-          "targetKey": "dsg-target:m-42",
-          "targetName": "M 42 (Orion Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 78.0,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 74.5,
-              "meanAltitudeDeg": 34.2,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-25T01:00:00Z",
-              "toUtcExclusive": "2026-09-25T03:00:00Z",
-              "advisoryScore": 62.7,
-              "meanAltitudeDeg": 26.4,
-              "meanCloudCoverPct": 72.8
-            },
-            {
-              "fromUtc": "2026-09-25T00:00:00Z",
-              "toUtcExclusive": "2026-09-25T02:00:00Z",
-              "advisoryScore": 54.0,
-              "meanAltitudeDeg": 17.0,
-              "meanCloudCoverPct": 94.0
-            }
-          ]
-        },
-        {
-          "targetKey": "dsg-target:m-27",
-          "targetName": "M 27",
+          "targetKey": "dsg-target:ldn-1320",
+          "targetName": "LDN 1320",
           "acquisitionState": "ACQUIRED_HISTORY",
-          "setupSuitabilityScore": 85.2,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-24T19:00:00Z",
-              "toUtcExclusive": "2026-09-24T21:00:00Z",
-              "advisoryScore": 71.2,
-              "meanAltitudeDeg": 68.4,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-24T20:00:00Z",
-              "toUtcExclusive": "2026-09-24T22:00:00Z",
-              "advisoryScore": 70.6,
-              "meanAltitudeDeg": 62.2,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-24T21:00:00Z",
-              "toUtcExclusive": "2026-09-24T23:00:00Z",
-              "advisoryScore": 67.1,
-              "meanAltitudeDeg": 52.8,
-              "meanCloudCoverPct": 100.0
-            }
-          ]
-        },
-        {
-          "targetKey": "dsg-target:m-13",
-          "targetName": "M 13 (Hercules Globular Cluster)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 89.5,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-24T19:00:00Z",
-              "toUtcExclusive": "2026-09-24T21:00:00Z",
-              "advisoryScore": 70.8,
-              "meanAltitudeDeg": 46.2,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-24T20:00:00Z",
-              "toUtcExclusive": "2026-09-24T22:00:00Z",
-              "advisoryScore": 64.8,
-              "meanAltitudeDeg": 35.6,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-24T21:00:00Z",
-              "toUtcExclusive": "2026-09-24T23:00:00Z",
-              "advisoryScore": 59.2,
-              "meanAltitudeDeg": 25.5,
-              "meanCloudCoverPct": 100.0
-            }
-          ]
-        },
-        {
-          "targetKey": "dsg-target:ngc-7000",
-          "targetName": "NGC 7000 (North America Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 63.3,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-24T19:00:00Z",
-              "toUtcExclusive": "2026-09-24T21:00:00Z",
-              "advisoryScore": 70.2,
-              "meanAltitudeDeg": 83.6,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-24T20:00:00Z",
-              "toUtcExclusive": "2026-09-24T22:00:00Z",
-              "advisoryScore": 70.1,
-              "meanAltitudeDeg": 83.3,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-24T21:00:00Z",
-              "toUtcExclusive": "2026-09-24T23:00:00Z",
-              "advisoryScore": 70.0,
-              "meanAltitudeDeg": 73.2,
-              "meanCloudCoverPct": 100.0
-            }
-          ]
+          "setupSuitabilityScore": 91.8,
+          "bestWindows": []
         },
         {
           "targetKey": "dsg-target:m-101",
           "targetName": "M 101 (Pinwheel Galaxy)",
           "acquisitionState": "NOT_YET_ACQUIRED",
           "setupSuitabilityScore": 89.5,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-24T19:00:00Z",
-              "toUtcExclusive": "2026-09-24T21:00:00Z",
-              "advisoryScore": 61.8,
-              "meanAltitudeDeg": 29.9,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 61.7,
-              "meanAltitudeDeg": 8.9,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-24T20:00:00Z",
-              "toUtcExclusive": "2026-09-24T22:00:00Z",
-              "advisoryScore": 57.9,
-              "meanAltitudeDeg": 23.0,
-              "meanCloudCoverPct": 100.0
-            }
-          ]
+          "bestWindows": []
+        },
+        {
+          "targetKey": "dsg-target:m-13",
+          "targetName": "M 13 (Hercules Globular Cluster)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 89.5,
+          "bestWindows": []
+        },
+        {
+          "targetKey": "dsg-target:m-27",
+          "targetName": "M 27",
+          "acquisitionState": "ACQUIRED_HISTORY",
+          "setupSuitabilityScore": 85.2,
+          "bestWindows": []
+        },
+        {
+          "targetKey": "dsg-target:m-31",
+          "targetName": "M 31 (Andromeda Galaxy)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 54.5,
+          "bestWindows": []
+        },
+        {
+          "targetKey": "dsg-target:m-42",
+          "targetName": "M 42 (Orion Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 78.0,
+          "bestWindows": []
+        },
+        {
+          "targetKey": "dsg-target:m-45",
+          "targetName": "M 45 (Pleiades)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 61.5,
+          "bestWindows": []
         },
         {
           "targetKey": "dsg-target:m-51",
           "targetName": "M 51 (Whirlpool Galaxy)",
           "acquisitionState": "NOT_YET_ACQUIRED",
           "setupSuitabilityScore": 89.5,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 58.9,
-              "meanAltitudeDeg": 3.9,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-24T19:00:00Z",
-              "toUtcExclusive": "2026-09-24T21:00:00Z",
-              "advisoryScore": 57.1,
-              "meanAltitudeDeg": 21.5,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-24T20:00:00Z",
-              "toUtcExclusive": "2026-09-24T22:00:00Z",
-              "advisoryScore": 53.1,
-              "meanAltitudeDeg": 14.2,
-              "meanCloudCoverPct": 100.0
-            }
-          ]
+          "bestWindows": []
+        },
+        {
+          "targetKey": "dsg-target:ngc-2392",
+          "targetName": "NGC 2392 (Eskimo Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 95.5,
+          "bestWindows": []
+        },
+        {
+          "targetKey": "dsg-target:ngc-281",
+          "targetName": "NGC 281 (Pacman Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 96.5,
+          "bestWindows": []
+        },
+        {
+          "targetKey": "dsg-target:ngc-7000",
+          "targetName": "NGC 7000 (North America Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 63.3,
+          "bestWindows": []
         },
         {
           "targetKey": "dsg-target:ngc-7293",
           "targetName": "NGC 7293 (Helix Nebula)",
           "acquisitionState": "NOT_YET_ACQUIRED",
           "setupSuitabilityScore": 95.5,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-24T21:00:00Z",
-              "toUtcExclusive": "2026-09-24T23:00:00Z",
-              "advisoryScore": 47.6,
-              "meanAltitudeDeg": 26.3,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-24T20:00:00Z",
-              "toUtcExclusive": "2026-09-24T22:00:00Z",
-              "advisoryScore": 46.9,
-              "meanAltitudeDeg": 24.9,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-24T22:00:00Z",
-              "toUtcExclusive": "2026-09-25T00:00:00Z",
-              "advisoryScore": 46.9,
-              "meanAltitudeDeg": 24.8,
-              "meanCloudCoverPct": 100.0
-            }
-          ]
+          "bestWindows": []
         }
       ]
     },
@@ -3241,406 +2978,98 @@
           "targetName": "IC 1805 (Heart Nebula)",
           "acquisitionState": "NOT_YET_ACQUIRED",
           "setupSuitabilityScore": 55.5,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 84.6,
-              "meanAltitudeDeg": 68.7,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-25T01:00:00Z",
-              "toUtcExclusive": "2026-09-25T03:00:00Z",
-              "advisoryScore": 77.2,
-              "meanAltitudeDeg": 70.5,
-              "meanCloudCoverPct": 72.8
-            },
-            {
-              "fromUtc": "2026-09-25T00:00:00Z",
-              "toUtcExclusive": "2026-09-25T02:00:00Z",
-              "advisoryScore": 73.8,
-              "meanAltitudeDeg": 68.6,
-              "meanCloudCoverPct": 94.0
-            }
-          ]
-        },
-        {
-          "targetKey": "dsg-target:ngc-281",
-          "targetName": "NGC 281 (Pacman Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 84.0,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 84.6,
-              "meanAltitudeDeg": 61.1,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-25T01:00:00Z",
-              "toUtcExclusive": "2026-09-25T03:00:00Z",
-              "advisoryScore": 78.0,
-              "meanAltitudeDeg": 68.6,
-              "meanCloudCoverPct": 72.8
-            },
-            {
-              "fromUtc": "2026-09-25T00:00:00Z",
-              "toUtcExclusive": "2026-09-25T02:00:00Z",
-              "advisoryScore": 74.6,
-              "meanAltitudeDeg": 73.9,
-              "meanCloudCoverPct": 94.0
-            }
-          ]
-        },
-        {
-          "targetKey": "dsg-target:m-45",
-          "targetName": "M 45 (Pleiades)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 49.5,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 83.7,
-              "meanAltitudeDeg": 70.4,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-25T01:00:00Z",
-              "toUtcExclusive": "2026-09-25T03:00:00Z",
-              "advisoryScore": 76.3,
-              "meanAltitudeDeg": 65.5,
-              "meanCloudCoverPct": 72.8
-            },
-            {
-              "fromUtc": "2026-09-25T00:00:00Z",
-              "toUtcExclusive": "2026-09-25T02:00:00Z",
-              "advisoryScore": 70.6,
-              "meanAltitudeDeg": 56.5,
-              "meanCloudCoverPct": 94.0
-            }
-          ]
-        },
-        {
-          "targetKey": "dsg-target:ldn-1320",
-          "targetName": "LDN 1320",
-          "acquisitionState": "ACQUIRED_HISTORY",
-          "setupSuitabilityScore": 76.9,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 81.2,
-              "meanAltitudeDeg": 46.7,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-25T01:00:00Z",
-              "toUtcExclusive": "2026-09-25T03:00:00Z",
-              "advisoryScore": 73.5,
-              "meanAltitudeDeg": 46.3,
-              "meanCloudCoverPct": 72.8
-            },
-            {
-              "fromUtc": "2026-09-25T00:00:00Z",
-              "toUtcExclusive": "2026-09-25T02:00:00Z",
-              "advisoryScore": 69.7,
-              "meanAltitudeDeg": 45.7,
-              "meanCloudCoverPct": 94.0
-            }
-          ]
-        },
-        {
-          "targetKey": "dsg-target:m-31",
-          "targetName": "M 31 (Andromeda Galaxy)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 49.5,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 77.9,
-              "meanAltitudeDeg": 58.8,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-25T01:00:00Z",
-              "toUtcExclusive": "2026-09-25T03:00:00Z",
-              "advisoryScore": 72.3,
-              "meanAltitudeDeg": 69.8,
-              "meanCloudCoverPct": 72.8
-            },
-            {
-              "fromUtc": "2026-09-25T00:00:00Z",
-              "toUtcExclusive": "2026-09-25T02:00:00Z",
-              "advisoryScore": 68.9,
-              "meanAltitudeDeg": 80.8,
-              "meanCloudCoverPct": 94.0
-            }
-          ]
-        },
-        {
-          "targetKey": "dsg-target:ngc-2392",
-          "targetName": "NGC 2392 (Eskimo Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 95.5,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 77.4,
-              "meanAltitudeDeg": 36.3,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-25T01:00:00Z",
-              "toUtcExclusive": "2026-09-25T03:00:00Z",
-              "advisoryScore": 63.8,
-              "meanAltitudeDeg": 25.3,
-              "meanCloudCoverPct": 72.8
-            },
-            {
-              "fromUtc": "2026-09-25T00:00:00Z",
-              "toUtcExclusive": "2026-09-25T02:00:00Z",
-              "advisoryScore": 54.4,
-              "meanAltitudeDeg": 14.4,
-              "meanCloudCoverPct": 94.0
-            }
-          ]
+          "bestWindows": []
         },
         {
           "targetKey": "dsg-target:ic-434",
           "targetName": "IC 434 (Horsehead Nebula)",
           "acquisitionState": "NOT_YET_ACQUIRED",
           "setupSuitabilityScore": 60.3,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 73.8,
-              "meanAltitudeDeg": 36.2,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-25T01:00:00Z",
-              "toUtcExclusive": "2026-09-25T03:00:00Z",
-              "advisoryScore": 61.7,
-              "meanAltitudeDeg": 27.9,
-              "meanCloudCoverPct": 72.8
-            },
-            {
-              "fromUtc": "2026-09-25T00:00:00Z",
-              "toUtcExclusive": "2026-09-25T02:00:00Z",
-              "advisoryScore": 52.9,
-              "meanAltitudeDeg": 18.1,
-              "meanCloudCoverPct": 94.0
-            }
-          ]
+          "bestWindows": []
         },
         {
-          "targetKey": "dsg-target:m-27",
-          "targetName": "M 27",
+          "targetKey": "dsg-target:ldn-1320",
+          "targetName": "LDN 1320",
           "acquisitionState": "ACQUIRED_HISTORY",
-          "setupSuitabilityScore": 96.6,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-24T19:00:00Z",
-              "toUtcExclusive": "2026-09-24T21:00:00Z",
-              "advisoryScore": 72.3,
-              "meanAltitudeDeg": 68.4,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-24T20:00:00Z",
-              "toUtcExclusive": "2026-09-24T22:00:00Z",
-              "advisoryScore": 71.7,
-              "meanAltitudeDeg": 62.2,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-24T21:00:00Z",
-              "toUtcExclusive": "2026-09-24T23:00:00Z",
-              "advisoryScore": 68.3,
-              "meanAltitudeDeg": 52.8,
-              "meanCloudCoverPct": 100.0
-            }
-          ]
-        },
-        {
-          "targetKey": "dsg-target:m-42",
-          "targetName": "M 42 (Orion Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 55.5,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 72.2,
-              "meanAltitudeDeg": 34.2,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-25T01:00:00Z",
-              "toUtcExclusive": "2026-09-25T03:00:00Z",
-              "advisoryScore": 60.4,
-              "meanAltitudeDeg": 26.4,
-              "meanCloudCoverPct": 72.8
-            },
-            {
-              "fromUtc": "2026-09-25T00:00:00Z",
-              "toUtcExclusive": "2026-09-25T02:00:00Z",
-              "advisoryScore": 51.8,
-              "meanAltitudeDeg": 17.0,
-              "meanCloudCoverPct": 94.0
-            }
-          ]
-        },
-        {
-          "targetKey": "dsg-target:m-13",
-          "targetName": "M 13 (Hercules Globular Cluster)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 89.5,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-24T19:00:00Z",
-              "toUtcExclusive": "2026-09-24T21:00:00Z",
-              "advisoryScore": 70.8,
-              "meanAltitudeDeg": 46.2,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-24T20:00:00Z",
-              "toUtcExclusive": "2026-09-24T22:00:00Z",
-              "advisoryScore": 64.8,
-              "meanAltitudeDeg": 35.6,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-24T21:00:00Z",
-              "toUtcExclusive": "2026-09-24T23:00:00Z",
-              "advisoryScore": 59.2,
-              "meanAltitudeDeg": 25.5,
-              "meanCloudCoverPct": 100.0
-            }
-          ]
-        },
-        {
-          "targetKey": "dsg-target:ngc-7000",
-          "targetName": "NGC 7000 (North America Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 55.5,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-24T19:00:00Z",
-              "toUtcExclusive": "2026-09-24T21:00:00Z",
-              "advisoryScore": 69.4,
-              "meanAltitudeDeg": 83.6,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-24T20:00:00Z",
-              "toUtcExclusive": "2026-09-24T22:00:00Z",
-              "advisoryScore": 69.3,
-              "meanAltitudeDeg": 83.3,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-24T21:00:00Z",
-              "toUtcExclusive": "2026-09-24T23:00:00Z",
-              "advisoryScore": 69.3,
-              "meanAltitudeDeg": 73.2,
-              "meanCloudCoverPct": 100.0
-            }
-          ]
+          "setupSuitabilityScore": 76.9,
+          "bestWindows": []
         },
         {
           "targetKey": "dsg-target:m-101",
           "targetName": "M 101 (Pinwheel Galaxy)",
           "acquisitionState": "NOT_YET_ACQUIRED",
           "setupSuitabilityScore": 86.4,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-24T19:00:00Z",
-              "toUtcExclusive": "2026-09-24T21:00:00Z",
-              "advisoryScore": 61.5,
-              "meanAltitudeDeg": 29.9,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 61.4,
-              "meanAltitudeDeg": 8.9,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-24T20:00:00Z",
-              "toUtcExclusive": "2026-09-24T22:00:00Z",
-              "advisoryScore": 57.6,
-              "meanAltitudeDeg": 23.0,
-              "meanCloudCoverPct": 100.0
-            }
-          ]
+          "bestWindows": []
+        },
+        {
+          "targetKey": "dsg-target:m-13",
+          "targetName": "M 13 (Hercules Globular Cluster)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 89.5,
+          "bestWindows": []
+        },
+        {
+          "targetKey": "dsg-target:m-27",
+          "targetName": "M 27",
+          "acquisitionState": "ACQUIRED_HISTORY",
+          "setupSuitabilityScore": 96.6,
+          "bestWindows": []
+        },
+        {
+          "targetKey": "dsg-target:m-31",
+          "targetName": "M 31 (Andromeda Galaxy)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 49.5,
+          "bestWindows": []
+        },
+        {
+          "targetKey": "dsg-target:m-42",
+          "targetName": "M 42 (Orion Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 55.5,
+          "bestWindows": []
+        },
+        {
+          "targetKey": "dsg-target:m-45",
+          "targetName": "M 45 (Pleiades)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 49.5,
+          "bestWindows": []
         },
         {
           "targetKey": "dsg-target:m-51",
           "targetName": "M 51 (Whirlpool Galaxy)",
           "acquisitionState": "NOT_YET_ACQUIRED",
           "setupSuitabilityScore": 89.5,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-25T02:00:00Z",
-              "toUtcExclusive": "2026-09-25T04:00:00Z",
-              "advisoryScore": 58.9,
-              "meanAltitudeDeg": 3.9,
-              "meanCloudCoverPct": 27.2
-            },
-            {
-              "fromUtc": "2026-09-24T19:00:00Z",
-              "toUtcExclusive": "2026-09-24T21:00:00Z",
-              "advisoryScore": 57.1,
-              "meanAltitudeDeg": 21.5,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-24T20:00:00Z",
-              "toUtcExclusive": "2026-09-24T22:00:00Z",
-              "advisoryScore": 53.1,
-              "meanAltitudeDeg": 14.2,
-              "meanCloudCoverPct": 100.0
-            }
-          ]
+          "bestWindows": []
+        },
+        {
+          "targetKey": "dsg-target:ngc-2392",
+          "targetName": "NGC 2392 (Eskimo Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 95.5,
+          "bestWindows": []
+        },
+        {
+          "targetKey": "dsg-target:ngc-281",
+          "targetName": "NGC 281 (Pacman Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 84.0,
+          "bestWindows": []
+        },
+        {
+          "targetKey": "dsg-target:ngc-7000",
+          "targetName": "NGC 7000 (North America Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 55.5,
+          "bestWindows": []
         },
         {
           "targetKey": "dsg-target:ngc-7293",
           "targetName": "NGC 7293 (Helix Nebula)",
           "acquisitionState": "NOT_YET_ACQUIRED",
           "setupSuitabilityScore": 95.1,
-          "bestWindows": [
-            {
-              "fromUtc": "2026-09-24T21:00:00Z",
-              "toUtcExclusive": "2026-09-24T23:00:00Z",
-              "advisoryScore": 47.6,
-              "meanAltitudeDeg": 26.3,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-24T20:00:00Z",
-              "toUtcExclusive": "2026-09-24T22:00:00Z",
-              "advisoryScore": 46.8,
-              "meanAltitudeDeg": 24.9,
-              "meanCloudCoverPct": 100.0
-            },
-            {
-              "fromUtc": "2026-09-24T22:00:00Z",
-              "toUtcExclusive": "2026-09-25T00:00:00Z",
-              "advisoryScore": 46.8,
-              "meanAltitudeDeg": 24.8,
-              "meanCloudCoverPct": 100.0
-            }
-          ]
+          "bestWindows": []
         }
       ]
     }
