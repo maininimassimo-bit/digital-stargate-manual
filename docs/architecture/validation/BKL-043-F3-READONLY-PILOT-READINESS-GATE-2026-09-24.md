@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Gate ID | `M-BKL043-F3-READONLY-PILOT-READINESS` |
-| Status | Planned; design preparation only; exact pilot authorization not granted |
+| Status | Owner approved preparation of a separate exact pilot authorization on 2026-09-24; F3 review findings and runtime authorization remain open |
 | Package | BKL-043 Observatory Reliability Engineering |
 | Owner / accountable | Massimo Mainini |
 | Entry baseline | BKL-043 F2 two-plane logical architecture, owner-approved 2026-09-24 |
@@ -108,6 +108,12 @@ reproducible, limitations and unmade decisions are explicit, and review findings
 are recorded. Owner disposition may be `APPROVED FOR A SEPARATE EXACT PILOT
 AUTHORIZATION`, `APPROVED WITH CONDITIONS`, or `RETURNED`; none by itself
 activates runtime work unless it names the exact authorized change.
+
+Massimo Mainini selected `APPROVED FOR A SEPARATE EXACT PILOT AUTHORIZATION`
+on 2026-09-24. This permits preparation of the distinct F4 authorization draft
+only. F3 review findings remain open, and no runtime parameter or operation is
+approved. See `BKL-043-F3-EXACT-PILOT-AUTHORIZATION-DECISION-2026-09-24.md`
+and `BKL-043-F4-EXACT-PILOT-RUNTIME-AUTHORIZATION-DRAFT-2026-09-24.md`.
 
 Any local observer pilot, durable witness, incident journal, live source read,
 scheduled/boot execution, recurring write, hosted relay change, or deployment
