@@ -12,8 +12,8 @@
 | Runtime image | `europe-west1-docker.pkg.dev/digital-stargate-telemetry/cloud-run-source-deploy/dsg-bkl042-ai-relay@sha256:625a5df4ae211b0b2d45dbb814066a67d0b11be823058f90e352de988cee77f7` |
 | Cloud Build ID | `8a9eb24c-98da-4e2d-8d2a-26e4deff564d` |
 | Cloud Run operation ID | `3b0f3e2e-96da-43d5-9c96-37295103cb6c` |
-| Owner-witnessed v3 OAT | **PENDING** |
-| BKL-042 acceptance | **NOT ACCEPTED / PACKAGE OPEN** |
+| Owner-witnessed v3 OAT | **PASS WITH ACCEPTED LIMITATIONS — 2026-09-24** |
+| BKL-042-F7 acceptance | **ACCEPTED / BOUNDED READ-ONLY SCOPE** |
 
 ## Scope and source
 
@@ -72,10 +72,18 @@ The runtime remains advisory and bounded read-only:
 - no storage/upload, processing, command, broker, scheduler, automatic remediation
   or Safety Authority change.
 
-No authenticated request, model response, citation result or owner acceptance is
-claimed here. Massimo must perform and witness OAT through the existing portal for
-both new-source intents: BKL-037 descriptive SQM comparison and BKL-041 experimental
-quality context. Verify response `method_version` is v3, BKL-037 is cited as
-descriptive only, BKL-041 is labeled `EXPERIMENTAL_NOT_ACCEPTED`, and no synthetic
-score/confidence/decomposition is exposed. Record correlation IDs and non-secret
-response evidence only. Formal acceptance remains a separate human decision.
+## Owner-witnessed OAT and acceptance
+
+Massimo performed and supplied the authenticated portal OAT results on 2026-09-24.
+Both responses identify `bkl042-static-projection-retrieval-v3` and include the
+expected governed projection and source digest:
+
+| Intent | OAT evidence | Outcome and accepted limitation |
+|---|---|---|
+| BKL-037 SQM comparison | `bkl042-pages-7597330b-5970-4696-b7a6-767defa6e8ff`; citation `session-comparison`; digest `b1d1e516eb872e686ce18178858f42eb85c690de2ce011d845a7f2436c0717d4` | Bounded descriptive retrieval passed. Available evidence is aggregate (15 sessions; min 18.66, max 20.96, median 20.57 mag/arcsec²), not per-session SQM. The answer explicitly reports that limitation and does not present a quality score. |
+| BKL-041 M 27 quality context | `bkl042-pages-4971ae55-44cf-47e0-afc5-ecca6e774442`; citation `scientific-data-quality`; digest `7c4ffc905f2a57b18f221ffabf4e58820ad03549968db2e2aec78d2b88846838` | Bounded experimental-context retrieval passed. Both cited records are `EXPERIMENTAL_NOT_ACCEPTED`, synthetic and uncalibrated; no definitive quality grade is claimed. |
+
+The owner explicitly confirmed formal acceptance of BKL-042/F7 within the bounded
+read-only scope and accepted the limitations reported above. The acceptance record
+is `docs/project/BKL-042-F7-BOUNDED-ACCEPTANCE-2026-09-24.md`. This does not accept
+or promote excluded source classes or authorize any additional runtime authority.
