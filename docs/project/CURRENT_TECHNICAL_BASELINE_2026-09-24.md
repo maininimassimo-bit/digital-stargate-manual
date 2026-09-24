@@ -108,8 +108,9 @@ offline test cases, non-interference and rollback. A proposed closed observation
 envelope schema and ten offline synthetic tests are implemented at
 `contracts/telemetry/bkl-043-reliability-observation-v1.schema.json` and
 `.github/scripts/test-bkl043-f3-offline-contract.mjs`; they pass locally and are
-added to Developer Foundation CI. CI evidence and owner disposition are pending.
-No source, cadence, retention, target, witness, transport or deployment is
+added to Developer Foundation CI. The local run passed 10/10; post-merge
+Developer Foundation run `36021635340` also passed on `b2aa86d790644cf6791ffa413d23b80701c72170`.
+Review findings and owner disposition remain pending. No source, cadence, retention, target, witness, transport or deployment is
 selected; the decision record explicitly grants no runtime authorization. No live source access, collector, startup,
 recurring write, incident register, alert or deployment has been activated. The
 separate F3 gate definition remains
