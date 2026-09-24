@@ -115,3 +115,19 @@ recurring write, incident register, alert or deployment has been activated. The
 separate F3 gate definition remains
 `docs/architecture/validation/BKL-043-F3-READONLY-PILOT-READINESS-GATE-2026-09-24.md`.
 BKL-043 remains in progress; no numeric reliability baseline is claimed.
+
+### BKL-031 F9 weather-window eligibility — PR #373
+
+PR #373 merged to `main` as `fd59ba711697efcd324af8a77ae78855fb174f40`.
+The portal now labels each hourly forecast GO/NO-GO and excludes a ranked
+multi-hour window if any included hour violates the F9 planning policy:
+cloud ≤20%, no precipitation, wind ≤15 km/h, gust ≤20 km/h, relative humidity
+≤90%, and temperature/dew-point margin ≥10 °C. The cloud limit is the owner's
+stricter planning constraint and does not change the BKL-032 50% readiness
+threshold. This is advisory forecast eligibility only, not readiness, dome
+authorization, scheduling, command or Safety Authority. Missing/stale policy
+inputs fail closed; the currently published projection predates the added
+temperature/dew-point fields, so its consumer suppresses ranking and reports
+indeterminate/NO-GO until the next scheduled F9 projection supplies valid data.
+PR #373 post-merge F9 governance, strict documentation validation and Pages
+publication succeeded. Detailed policy: `docs/architecture/scientific-assets/BKL-031-F9-Repeatable-Current-Night-Planner.md`.
