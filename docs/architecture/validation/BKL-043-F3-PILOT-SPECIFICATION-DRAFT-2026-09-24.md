@@ -201,12 +201,23 @@ and independent witness, cadence/timeout/observation window, local/remote store,
 retention/deletion, privacy/security controls, deployment/rollback, and stop
 conditions. Incident lifecycle remains out of scope unless separately authorized.
 
+The proposed machine-readable envelope is
+`contracts/telemetry/bkl-043-reliability-observation-v1.schema.json`; its
+synthetic contract tests are
+`.github/scripts/test-bkl043-f3-offline-contract.mjs`. The validator is an
+offline design/contract test only, not a collector, journal, heartbeat client,
+incident system or runtime package. The tests cover current/stale/missing and
+conflicting evidence, replay identity, ordering, clock issues, forbidden
+payload/control fields and fixed `NONE` authorities. CI runs the same test from
+Developer Foundation. These tests validate the proposal's envelope semantics;
+they do not prove any source is available, fresh or read-only on a live host.
+
 **Disposition: READY FOR OWNER REVIEW, NOT READY FOR RUNTIME.** F3 can be closed
-only after synthetic/offline contract tests exist and pass, a source/review
-package is internally consistent, review findings are recorded, and the owner
-records a disposition. Even `APPROVED FOR A SEPARATE EXACT PILOT AUTHORIZATION`
-does not activate runtime work; the separate exact runtime decision and its own
-preflight/OAT/release gate remain mandatory.
+only after the offline tests pass in CI, the source/review package is internally
+consistent, review findings are recorded, and the owner records a disposition.
+Even `APPROVED FOR A SEPARATE EXACT PILOT AUTHORIZATION` does not activate
+runtime work; the separate exact runtime decision and its own preflight/OAT/
+release gate remain mandatory.
 
 ```text
 command_authority=NONE

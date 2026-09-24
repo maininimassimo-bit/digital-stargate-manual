@@ -102,6 +102,7 @@ jobs:
       - { name: Verify BKL-034 Scientific Image Gallery contract, run: node .github/scripts/verify-bkl034-scientific-image-gallery.mjs }
       - { name: Verify BKL-034-F2 image archive contract, run: node .github/scripts/verify-bkl034-f2-image-archive.mjs }
       - { name: Verify BKL-034-F2 ingestion preflight, run: node .github/scripts/verify-bkl034-f2-ingestion-preflight.mjs }
+      - { name: Test BKL-043-F3 offline reliability envelope, run: node --test .github/scripts/test-bkl043-f3-offline-contract.mjs }
       - { name: Verify BKL-042-F2 advisory response contract, run: node .github/scripts/verify-bkl042-f2-advisory-response.mjs }
       - { name: Generate BKL-042-F3 deterministic advisory, run: node .github/scripts/generate-bkl042-f3-advisory.mjs }
       - { name: Verify BKL-042-F3 deterministic advisory, run: node .github/scripts/verify-bkl042-f3-advisory.mjs }
