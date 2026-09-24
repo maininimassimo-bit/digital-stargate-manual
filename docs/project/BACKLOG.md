@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-BKL-001 |
-| Versione | 5.39 |
+| Versione | 5.40 |
 | Stato | Active |
-| Data baseline | 23/09/2026 |
+| Data baseline | 24/09/2026 |
 
 ## 1. Scopo
 
@@ -62,8 +62,8 @@ Ogni voce deve includere identificativo, titolo, priorità, stato, dipendenze, r
 | BKL-039 | P2 | Equipment Performance Registry | Done | BKL-015, session history | Prestazioni storiche setup/componenti | F4-A/F4-B/F5-A/F5-B/F5-C/F5-D CLOSED/ACCEPTED; PR #132 merge `651fc340fbb5e58ca36409d574bdd09c3ae55790`; closure `docs/project/BKL-039-CLOSURE-2026-09-09.md` |
 | BKL-040 | P2 | Night Timeline / Observatory Replay | Done | BKL-015/BKL-044, historical telemetry | Replay sincronizzato della notte | F1-F4 CLOSED/ACCEPTED; PR #117 merge `80d22a255540ac582733c60dfe9bbf7807bcdf9b`; closure `docs/project/BKL-040-CLOSURE-2026-09-08.md` |
 | BKL-041 | P2 | Scientific Data Quality Score | Done | BKL-029, BKL-037, BKL-045 | Quality score scientifico spiegabile | F1–F5 CLOSED/ACCEPTED as experimental read-only capability; PR #163 merge `e4ccd216b0a0ca4033277ece513f051b052d2b83`; production readiness remains NOT_READY; closure `docs/project/BKL-041-CLOSURE-2026-09-11.md` |
-| BKL-042 | P2 | AI Observatory Assistant | In Progress | BKL-015/BKL-044 e intelligence services | Copilot read-only per diagnosis/RCA/planning/science | F1-F6 bounded ACCEPTED; F7 ACCEPTED / BOUNDED GATE / OWNER-WITNESSED il 24/09/2026. Method v3 sul relay esistente `dsg-bkl042-ai-relay-00008-qat`, 100% traffico, massimo service/revision 1; rollback `00007-wrm`. OAT e limiti accettati: `docs/project/BKL-042-F7-BOUNDED-ACCEPTANCE-2026-09-24.md`; deployment evidence `docs/architecture/validation/BKL-042-F7-V3-DEPLOYMENT-EVIDENCE-2026-09-24.md`. BKL-037 fornisce solo statistiche SQM aggregate storiche, non valori per sessione; BKL-041 M 27 resta sintetico, non calibrato e `EXPERIMENTAL_NOT_ACCEPTED`. Fonti non eleggibili restano escluse, senza inferenze. Storage/upload, processing, tool, command e Safety Authority restano fuori scope; future estensioni richiedono evidenza e autorizzazione separate |
-| BKL-043 | P2 | Observatory Reliability Engineering | Planned | BKL-030/BKL-038/BKL-042 | SLI/SLO, MTBF, MTTR, session completion e failure budget | Functional Roadmap Expansion |
+| BKL-042 | P2 | AI Observatory Assistant | Done | BKL-015/BKL-044 e intelligence services | Copilot read-only per diagnosis/RCA/planning/science | ACCEPTED / BOUNDED READ-ONLY / OWNER-WITNESSED 24/09/2026; closure `docs/project/BKL-042-CLOSURE-2026-09-24.md`; OAT e limiti `docs/project/BKL-042-F7-BOUNDED-ACCEPTANCE-2026-09-24.md`; relay v3 `00008-qat`, service/revision max 1, rollback `00007-wrm`; future source expansion excluded pending separate evidence/authorization |
+| BKL-043 | P2 | Observatory Reliability Engineering | In Progress | BKL-030/BKL-038/BKL-042 | SLI/SLO, MTBF, MTTR, session completion e failure budget | F1 source inventory: `docs/architecture/validation/BKL-043-F1-SOURCE-DISCOVERY-2026-09-24.md`; no operational baseline found; no thresholds/SLO invented; AP-004/AP-007 boundaries apply |
 | BKL-044 | P1 | Knowledge Graph / AI Evidence Contract | Done | BKL-015 | Provenance stabile per AP/ADR/component/evidence/session/target/incident/telemetry/processing/AI | F1-F4 CLOSED/ACCEPTED; PR #104 merge `b7c01ba7221818e1971403ab3befe38c8e40cc54`; closure `docs/project/BKL-044-CLOSURE-2026-09-07.md` |
 | BKL-045 | P2 | PixInsight Workflow Provenance Plugin | Done | BKL-015/BKL-044 | Estensione PixInsight governata per catturare workflow, parametri e lineage | F1-F5 CLOSED/ACCEPTED; closure `docs/project/BKL-045-CLOSURE-2026-09-10.md`; PR #140 merge `a08aed981e5ffa4af6b68fea521ada25a4b2b338`; retained PixInsight history completeness limitation |
 | BKL-049 | P2 | PixInsight Native Workflow Capture Module | Planned | BKL-045, BKL-044, AP-013/AP-014, verifica SDK/PCL | Modulo PCL nativo end-to-end per cattura automatica, journal locale, export governato e archivio workflow read-only nel portale | Planning package only; implementazione non avviata; `docs/architecture/assessments/BKL-049-PixInsight-Native-Workflow-Capture-Module-Plan.md` |

@@ -135,6 +135,10 @@ const main = async () => {
     const roadmapStatus = generatedIndex.get(closure.id).status;
     const backlogStatus = backlogStatuses.get(closure.id);
     if (closure.gateOnly) {
+      const supersededByFinalClosure = acceptedClosures.some(
+        (candidate) => candidate.id === closure.id && !candidate.gateOnly
+      );
+      if (supersededByFinalClosure) continue;
       assert(roadmapStatus === 'active', `${closure.id} has an accepted gate closure ${closure.filePath} but roadmap status is ${roadmapStatus}`);
       if (backlogStatus) assert(normalizeStatus(backlogStatus) === 'in progress', `${closure.id} has an accepted gate closure ${closure.filePath} but BACKLOG.md status is ${backlogStatus}`);
       continue;
