@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Gate ID | `M-BKL043-F2-DETECTION-ARCHITECTURE` |
-| Status | Owner-authorized to define and review architecture; design decision pending; implementation not authorized |
+| Status | Repository-evidence architecture proposal prepared; owner/ARB disposition pending; implementation not authorized |
 | Package | BKL-043 Observatory Reliability Engineering |
 | Owner / accountable | Massimo Mainini |
 | Authority | Architecture-design only; command/execution/safety `NONE` |
@@ -110,6 +110,9 @@ have been validated.
 
 ## Current disposition
 
-The gate is created and owner-authorized for architecture work. No architecture
-decision has yet been made, no implementation has been started, and no live
-source has been contacted.
+The gate is created and owner-authorized for architecture work. The evidence-
+based proposal is recorded in
+`docs/architecture/validation/BKL-043-F2-SYSTEM-DETECTION-ARCHITECTURE-2026-09-24.md`.
+The recommended two-plane design is proposed, not accepted. Owner/ARB disposition
+and any required independent review remain pending. No implementation has been
+started and no live source has been contacted.
