@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Decision ID | `BKL043-F3-EXACT-PILOT-AUTHORIZATION-DECISION-2026-09-24` |
-| Status | **PENDING OWNER DECISION — NO RUNTIME AUTHORIZATION** |
+| Status | **OWNER APPROVED PREPARATION OF A SEPARATE EXACT PILOT AUTHORIZATION — NO RUNTIME AUTHORIZATION** |
 | Owner / accountable | Massimo Mainini |
 | Related proposal | `BKL-043-F3-PILOT-SPECIFICATION-DRAFT-2026-09-24.md` |
 | Authority | `command_authority=NONE`, `execution_authority=NONE`, `safety_authority=NONE` |
@@ -13,15 +13,16 @@
 Select one disposition after reviewing the repository-only specification:
 
 - [ ] `RETURNED` — revise the design; comments/required changes: ____________________
-- [ ] `APPROVED FOR A SEPARATE EXACT PILOT AUTHORIZATION` — continue preparing a
+- [x] `APPROVED FOR A SEPARATE EXACT PILOT AUTHORIZATION` — continue preparing a
   runtime gate, but **this does not authorize installation, live reads, polling,
   writes, transport or deployment**.
 - [ ] `APPROVED WITH CONDITIONS` — conditions and evidence required before a
   separate runtime decision: ________________________________________________
 
-No box is selected by the author of this draft. A general “proceed” instruction
-does not supply the exact runtime parameters below and is not consent to access
-live systems.
+This disposition was explicitly selected by Massimo Mainini on 2026-09-24.
+It authorizes preparation of a distinct exact-scope runtime decision only. It
+does not supply or approve any runtime parameter below and is not consent to
+access live systems.
 
 ## Scope fields required before any runtime action
 
@@ -66,14 +67,15 @@ are not authorization.
 
 ## Owner record
 
-- Owner decision: **PENDING**
+- Owner decision: **APPROVED FOR A SEPARATE EXACT PILOT AUTHORIZATION**
 - Name: Massimo Mainini
-- Date/time and decision reference: **PENDING**
-- Conditions / rationale: **PENDING**
-- Signature or explicit recorded approval reference: **PENDING**
+- Date/time and decision reference: **2026-09-24; explicit owner message in the project task, recorded in this decision sheet**
+- Conditions / rationale: **Preparation of the separate exact pilot authorization only; all runtime parameters remain unselected and no pilot operation is authorized**
+- Signature or explicit recorded approval reference: **Massimo Mainini's explicit approval recorded 2026-09-24**
 
-Until this record and a separate runtime gate are fully approved, the authorized
-scope remains repository-only design and synthetic/offline validation.
+The approved disposition advances design preparation. Until the separate exact
+runtime gate is fully completed and explicitly approved, the authorized scope
+remains repository-only design and synthetic/offline validation.
 
 ```text
 command_authority=NONE

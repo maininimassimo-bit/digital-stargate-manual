@@ -212,12 +212,14 @@ payload/control fields and fixed `NONE` authorities. CI runs the same test from
 Developer Foundation. These tests validate the proposal's envelope semantics;
 they do not prove any source is available, fresh or read-only on a live host.
 
-**Disposition: READY FOR OWNER REVIEW, NOT READY FOR RUNTIME.** F3 can be closed
-only after the offline tests pass in CI, the source/review package is internally
-consistent, review findings are recorded, and the owner records a disposition.
-Even `APPROVED FOR A SEPARATE EXACT PILOT AUTHORIZATION` does not activate
-runtime work; the separate exact runtime decision and its own preflight/OAT/
-release gate remain mandatory.
+**Disposition: OWNER APPROVED PREPARATION OF A SEPARATE EXACT PILOT AUTHORIZATION;
+NOT READY FOR RUNTIME.** The ten offline tests pass locally and in post-merge CI.
+F3 review findings remain to be recorded. Massimo Mainini's 2026-09-24 owner
+disposition permits preparation of the distinct F4 exact-authorization draft;
+it does not select runtime parameters or authorize installation, live source
+reads, polling, persistence, network transmission or deployment. The separate
+exact runtime decision and its own reviews, preflight, OAT and release gate remain
+mandatory.
 
 ```text
 command_authority=NONE

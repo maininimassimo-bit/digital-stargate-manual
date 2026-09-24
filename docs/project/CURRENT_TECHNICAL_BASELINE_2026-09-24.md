@@ -110,7 +110,11 @@ envelope schema and ten offline synthetic tests are implemented at
 `.github/scripts/test-bkl043-f3-offline-contract.mjs`; they pass locally and are
 added to Developer Foundation CI. The local run passed 10/10; post-merge
 Developer Foundation run `36021635340` also passed on `b2aa86d790644cf6791ffa413d23b80701c72170`.
-Review findings and owner disposition remain pending. No source, cadence, retention, target, witness, transport or deployment is
+Massimo Mainini approved preparation of a separate exact pilot authorization on
+2026-09-24; the recorded disposition does not authorize runtime. F3 review
+findings remain pending. The F4 exact runtime authorization draft is
+`docs/architecture/validation/BKL-043-F4-EXACT-PILOT-RUNTIME-AUTHORIZATION-DRAFT-2026-09-24.md`.
+No source, cadence, retention, target, witness, transport or deployment is
 selected; the decision record explicitly grants no runtime authorization. No live source access, collector, startup,
 recurring write, incident register, alert or deployment has been activated. The
 separate F3 gate definition remains
