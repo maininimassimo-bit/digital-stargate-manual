@@ -64,7 +64,7 @@ scope, not as live runtime authorization.
 | Cost ceiling and billing controls | Preliminary scenarios are recorded in `BKL-043-F4-COST-ESTIMATE-2026-09-25.md`; account plan, quota remaining, billing owner, approved products/region and caps are unknown | **UNSELECTED — no spending or resource creation authorized** |
 | Installation, disable, uninstall and rollback | Must be exact for the selected artifact/host; not prepared for runtime | **UNSELECTED** |
 | Security/privacy review | Required before any live access or persistence; a separate scoped finding is still required | **PENDING — not covered by the draft-quality approval below** |
-| Independent architecture and release-quality review | Leonardo Di Egidio was nominated by the owner on 2026-09-24. On 2026-09-25 Massimo Mainini reported Leonardo's approval of the quality of the BKL-043 F4 drafts. Massimo remains accountable owner and runtime approver, not an independent reviewer of his own decision. | **DRAFT QUALITY APPROVED (owner-reported); full exact-runtime ARB/Release Quality review remains pending** |
+| Independent architecture and release-quality review | Leonardo Di Egidio was nominated by the owner on 2026-09-24. On 2026-09-25 Massimo Mainini reported Leonardo's approval of the updated draft quality, including the all-Digital-StarGate production-script scope and repository map, as they stood at PR head `854b15f6f50df3c0e2713d1ea3275889aebd5bbc`. Massimo remains accountable owner and runtime approver, not an independent reviewer of his own decision. | **UPDATED DRAFT QUALITY APPROVED (owner-reported at exact head); full exact-runtime ARB/Release Quality review remains pending** |
 | OAT and acceptance criteria | Must be tied to exact sources, coverage, stop conditions and rollback | **UNSELECTED** |
 | Incident lifecycle | Separate contract and authorization required; current default excludes it | **EXCLUDED** |
 
@@ -124,11 +124,11 @@ scope, not as live runtime authorization.
 ### Review disposition — draft quality only (2026-09-25)
 
 Massimo Mainini reported that Leonardo Di Egidio approved the quality of the
-BKL-043 F4 drafts as they stood at PR head `83110cd9e80cf8e0d2751c52e51d5b3a892fffed`.
-The later owner decision to include every Digital StarGate production script,
-including external execution boundaries, and the subsequent repository-wide
-candidate map were not part of that reviewed snapshot and need review before
-they are treated as independently approved. The reported disposition does not
+updated BKL-043 F4 drafts, including the all-Digital-StarGate production-script
+scope and repository map, as they stood at PR head
+`854b15f6f50df3c0e2713d1ea3275889aebd5bbc`. This supersedes the earlier
+owner-reported draft-quality disposition for head
+`83110cd9e80cf8e0d2751c52e51d5b3a892fffed`. The updated disposition does not
 constitute a GitHub PR review record, security/privacy finding, approval of an
 exact runtime design, or authorization to access EAGLE, read real logs, install
 or run software, spend, or deploy. The full exact-runtime ARB and Release Quality
@@ -138,8 +138,8 @@ gates remain open until their exact scope and evidence are reviewed.
 review_scope=draft_quality_for_BKL-043_F4
 reviewer=Leonardo_Di_Egidio
 review_disposition=approved_as_reported_by_Massimo_Mainini
-reviewed_head=83110cd9e80cf8e0d2751c52e51d5b3a892fffed
-later_all_DSG_script_scope_and_static_map=not_covered
+reviewed_head=854b15f6f50df3c0e2713d1ea3275889aebd5bbc
+scope=all_Digital_StarGate_production_scripts_and_repository_map
 runtime_authorization=NONE
 ```
 
