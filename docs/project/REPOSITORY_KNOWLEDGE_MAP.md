@@ -29,6 +29,8 @@ Mappa domini, authority, projection e percorsi di conoscenza. Non sostituisce le
 
 Handover e baseline precedenti restano snapshot storici e non prevalgono sulla baseline corrente.
 
+Riferimenti di continuità storici mantenuti per la verificabilità delle capability già accettate: `HANDOVER_2026-09-21-AP-007.md`, `CURRENT_TECHNICAL_BASELINE_2026-09-21.md`, F8 is Accepted / Post-Merge Verified, `BKL-032 Session Readiness / Go-No-Go Decision Support` e `2/2_EXHAUSTED`. Questi riferimenti non definiscono il package corrente né sostituiscono i documenti del 25/09/2026.
+
 ## 2.1 Current continuity reconciliation
 
 AP-007 è Accepted with conditions come architecture baseline e AP-008 è chiuso nel suo perimetro bounded read-only. La catena corrente è `AI_BOOTSTRAP.md` → `HANDOVER_2026-09-25-BKL043-F4.md` → `CURRENT_TECHNICAL_BASELINE_2026-09-25.md` → roadmap source → BKL-043 F1/F2/F3/F4 evidence → Traceability Register. BKL-043 è il package corrente: F1/F2 sono completati, F3 è repository-only e F4 è una decision draft. Nessuno stato operativo è promosso da questa riconciliazione.
