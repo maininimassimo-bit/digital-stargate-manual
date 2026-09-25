@@ -51,7 +51,7 @@ scope, not as live runtime authorization.
 | N.I.N.A. logs | User confirmed logs are available; parsing, event grouping, retry/terminal semantics and population reconciliation are not accepted | **OFFLINE ANALYSIS ONLY; runtime ingestion unselected** |
 | Planned EAGLE shutdown evidence | Owner selected a local shutdown-event approach on 2026-09-25. A locally recorded orderly shutdown can evidence shutdown mode/time, but alone does not prove prior planning or rule out an operational incident. | **DESIGN POLICY SELECTED: record local shutdown event; classify intent only with independent supporting evidence or human review; otherwise UNKNOWN** |
 | Historical EAGLE operating hours | Windows System event logs are a candidate source for reconstructing host boot/shutdown intervals; actual log contents have not been inspected or imported. Host uptime is not equivalent to observatory availability or scientific session time. | **OFFLINE RECONCILIATION CANDIDATE ONLY; source selection, event semantics, completeness and import approval pending** |
-| Production-script health monitoring extension | On 2026-09-25 Massimo Mainini requested that the EAGLE monitoring design also cover scheduled health checks for all scripts currently in production. The exact script population and what “in production” means for this monitoring scope have not yet been inventoried. | **OWNER REQUEST RECORDED — DESIGN ONLY; define the script inventory, ownership, execution locations/triggers, expected cadence, authoritative run/outcome evidence, freshness and missed-run semantics, dependencies, resource impact and reporting before any exact runtime decision. No scheduled check, script execution, task/service installation, or live EAGLE inspection is authorized.** |
+| Production-script health monitoring extension | On 2026-09-25 Massimo Mainini requested that the EAGLE monitoring design also cover scheduled health checks for all scripts currently in production. Repository-only evidence and open population boundaries are documented in `BKL-043-F4-PRODUCTION-SCRIPT-HEALTH-EXTENSION-DRAFT-2026-09-25.md`; no current production inventory is verified. | **OWNER REQUEST RECORDED — DESIGN ONLY; exact population, execution locations/triggers, schedule policies, authoritative run/outcome evidence and missed-run semantics remain unselected. No scheduled check, script execution, task/service installation, or live EAGLE inspection is authorized.** |
 | Independent witness | Owner selected GitHub as provider candidate on 2026-09-24. Official GitHub documentation states scheduled workflows have a five-minute minimum and may be delayed or dropped; event-driven runs cannot detect absent events. A private repository could be an archive, but GitHub Actions alone is not an accepted bounded-latency witness. Existing public manual repository is excluded. | **GITHUB SELECTED AS CANDIDATE; archival-vs-independent-receiver disposition, exact private resource, receipt-time contract and failure-domain proof UNSELECTED; see F4 feasibility assessment** |
 | Transport, authentication and egress | No endpoint, protocol, credential, network rule or secret provisioning approved | **UNSELECTED** |
 | Sampling/heartbeat cadence, timeout, freshness and gap semantics | Historical producer cadence is not transferable; no approved values | **UNSELECTED** |
@@ -86,22 +86,19 @@ scope, not as live runtime authorization.
    `BKL-043-F4-SHUTDOWN-EVIDENCE-AND-HISTORICAL-RECONCILIATION-DRAFT-2026-09-25.md`;
    its recording mechanism and any real historical snapshot still require
    separate owner authorization.
-5. Incorporate the owner-requested production-script health extension into the
-   design. First establish, from approved repository evidence and later only
-   from separately authorized sources, which scripts are in the EAGLE
-   observatory/monitoring production scope; record each script's owner,
-   execution location and trigger, expected schedule, success/failure evidence,
-   freshness, dependencies and known blind spots. Define how a check distinguishes
-   a failed script from a host that is intentionally or unexpectedly off, a
-   missed/delayed check, and unavailable monitoring evidence. EAGLE is not always
-   on, so a host-local scheduled check cannot observe the host while it is off;
-   absence of a check result must remain `UNKNOWN` unless an independently
-   governed witness establishes a bounded receipt gap. Script execution health
-   is a separate evidence dimension and must not be counted as host uptime,
-   observatory availability, scientific activity, or a qualifying MTBF failure
-   without separately accepted event and exposure semantics. This request does
-   not authorize live inventory, polling, script execution, a scheduled task,
-   persistence, transport, alerting or deployment.
+5. Continue the owner-requested production-script health extension using the
+   repository-only design in
+   `BKL-043-F4-PRODUCTION-SCRIPT-HEALTH-EXTENSION-DRAFT-2026-09-25.md`. Resolve
+   whether the scope includes EAGLE-local scripts only or external production
+   workflows/services too, identify the authoritative inventory and run
+   evidence, and define trigger-specific expected-run/missed-run semantics.
+   EAGLE is not always on, so absence of a local result must remain `UNKNOWN`
+   unless a separately governed witness bounds the relevant receipt gap. Script
+   execution health is separate from host uptime, observatory availability and
+   scientific activity; it is not a qualifying MTBF failure without accepted
+   event and exposure semantics. This request does not authorize live inventory,
+   polling, script execution, a scheduled task, persistence, transport, alerting
+   or deployment.
 6. Close `BKL-043-F4-GITHUB-WITNESS-FEASIBILITY-2026-09-25.md`: owner selects
    the best-effort GitHub archive limitation or a separate independent receiver;
    then demonstrate a durable receipt store outside EAGLE's host, power and
@@ -154,6 +151,7 @@ safety_authority=NONE
 - `docs/architecture/validation/BKL-043-F4-GITHUB-WITNESS-FEASIBILITY-2026-09-25.md`
 - `docs/architecture/validation/BKL-043-F4-COST-ESTIMATE-2026-09-25.md`
 - `docs/architecture/validation/BKL-043-F4-SHUTDOWN-EVIDENCE-AND-HISTORICAL-RECONCILIATION-DRAFT-2026-09-25.md`
+- `docs/architecture/validation/BKL-043-F4-PRODUCTION-SCRIPT-HEALTH-EXTENSION-DRAFT-2026-09-25.md`
 - `docs/status/index.md` — identifies the documented EAGLE evidence host as
   `EAGLE30154`; does not establish OS/build or validate current machine identity.
 - `docs/architecture/telemetry/evidence/BKL-030-EAGLE-Health-Source-Discovery-2026-09-03.md`
