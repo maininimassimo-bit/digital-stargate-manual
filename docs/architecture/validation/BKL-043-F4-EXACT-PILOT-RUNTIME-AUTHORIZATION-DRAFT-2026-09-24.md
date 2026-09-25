@@ -58,6 +58,7 @@ scope, not as live runtime authorization.
 | Data classification, roles, encryption and backup | Minimum-data design exists; target-specific controls not reviewed | **UNSELECTED** |
 | Retention/deletion/disposal | No duration, deletion procedure or approver selected | **UNSELECTED** |
 | Resource budget and stop limits | Must be measured against an agreed imaging workload; no numeric limits approved | **UNSELECTED** |
+| Cost ceiling and billing controls | Preliminary scenarios are recorded in `BKL-043-F4-COST-ESTIMATE-2026-09-25.md`; account plan, quota remaining, billing owner, approved products/region and caps are unknown | **UNSELECTED — no spending or resource creation authorized** |
 | Installation, disable, uninstall and rollback | Must be exact for the selected artifact/host; not prepared for runtime | **UNSELECTED** |
 | Security/privacy review | Required before any live access or persistence; reviewer scope and recorded finding still required | **PENDING — Leonardo Di Egidio nominated; review not performed** |
 | Independent architecture and release-quality review | Leonardo Di Egidio nominated by owner on 2026-09-24. Massimo Mainini remains accountable owner and runtime approver, not an independent reviewer of his own decision. | **REVIEWER NOMINATED — finding pending** |
@@ -78,11 +79,16 @@ scope, not as live runtime authorization.
    network failure domains.
 5. Define data minimization, privacy/security controls, retention/deletion,
    resource stop limits, observation window and review checkpoints.
-6. Specify install/start/stop/uninstall/rollback and recovery verification.
-7. Complete Leonardo Di Egidio's independent architecture/release review and
+6. Review the indicative cost scenarios in
+   `BKL-043-F4-COST-ESTIMATE-2026-09-25.md`; verify account plan and quotas,
+   then set explicit recurring and one-time cost ceilings, billing owner,
+   approved products/region, and stop action. No spend is approved by the
+   estimate itself.
+7. Specify install/start/stop/uninstall/rollback and recovery verification.
+8. Complete Leonardo Di Egidio's independent architecture/release review and
    security/privacy review, plus offline and resource preflight evidence. The
    preflight must not access live sources until separately authorized.
-8. Submit a final decision record with every field exact and no `UNSELECTED`,
+9. Submit a final decision record with every field exact and no `UNSELECTED`,
    then wait for explicit owner approval naming that exact record/version.
 
 ## 5. Fixed constraints
@@ -112,6 +118,7 @@ safety_authority=NONE
 - `docs/architecture/validation/BKL-043-F1-SOURCE-DISCOVERY-2026-09-24.md`
 - `docs/architecture/validation/BKL-043-F1-POPULATION-AND-CONTRACT-GAP-DISCOVERY-2026-09-24.md`
 - `docs/architecture/validation/BKL-043-F4-GITHUB-WITNESS-FEASIBILITY-2026-09-25.md`
+- `docs/architecture/validation/BKL-043-F4-COST-ESTIMATE-2026-09-25.md`
 - `docs/status/index.md` — identifies the documented EAGLE evidence host as
   `EAGLE30154`; does not establish OS/build or validate current machine identity.
 - `docs/architecture/telemetry/evidence/BKL-030-EAGLE-Health-Source-Discovery-2026-09-03.md`
