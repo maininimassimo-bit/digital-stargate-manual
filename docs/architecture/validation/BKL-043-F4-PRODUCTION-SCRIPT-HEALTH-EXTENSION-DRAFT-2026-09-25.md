@@ -47,6 +47,26 @@ the installed script versions, external schedulers, current run history, or
 whether a given task is enabled. The current exact population is therefore
 `UNKNOWN / NOT INVENTORIED`; do not publish an inventory-completeness claim.
 
+### 2.1 Static source-to-execution evidence map
+
+This map makes the repository evidence more specific without treating historical
+reports as current runtime verification:
+
+| Execution candidate | Repository-visible entry point | Last documented evidence found in this repository | What remains unverified |
+|---|---|---|---|
+| EAGLE Health publisher | `DigitalStarGate-EagleHealthTelemetry` is documented with wrapper `scripts/telemetry/Invoke-EagleHealthTelemetryPublish.ps1`, which composes `Export-EagleHostHealth.ps1`, `Export-EagleHealthPortalProjection.ps1` and `Publish-EagleHealthTelemetry.ps1`. | `HANDOVER_2026-09-22-AP-008-BKL-036.md` reports that the task pointed to the AP-008 worktree and had `LastTaskResult = 0`; the 2026-09-04 baseline records a one-minute schedule. | Current task definition, enabled state, action path/revision, task history and present execution state. The report is documentary evidence dated 2026-09-22, not a fresh host observation. |
+| Observatory Status publisher | Installer `scripts/telemetry/Install-ObservatoryStatusTelemetryScheduledTask.ps1` defines a default task name and boot trigger; its runtime launcher is `Start-ObservatoryStatusTelemetryRuntime.ps1`, composing the producer, N.I.N.A./CloudWatcher adapters and publisher. | `CURRENT_TECHNICAL_BASELINE_2026-09-22.md` reports an EAGLE Scheduled Task continuously publishing Observatory Status and successful continuous read-back at that time. | Whether the reported task is the installer default, whether it remains installed/enabled, which scripts/revision it runs now, and current run receipts. Installer code alone does not prove it was executed or remains installed. |
+| Session upload / reporting | Historical handovers name `DigitalStarGate - Daily Session Upload` and the preflight `scripts/eagle/Invoke-DSGSessionPreflight.ps1`; downstream action/artifact boundaries require confirmation from the authoritative installed task definition. | `HANDOVER_2026-09-03.md` reports a successful upload for the 2026-09-02/03 session. | Current task presence, exact launcher/action, cadence, current production owner and run history. This historical single execution is not a present health signal. |
+| OneDrive export | No authoritative repository action mapping was identified in this static pass. | The 2026-09-03 source-discovery record lists `OneDrive Export` among the tasks observed during that historical discovery. | Current presence, action/script identity, intended schedule, owner and results; keep as unresolved task candidate only. |
+| GitHub-hosted forecast refresh | `.github/workflows/bkl-031-f9-refresh.yml` invokes `.github/scripts/observation_planner_f9.py` on two UTC schedules, with `workflow_dispatch` also available. | The workflow file defines these triggers and guards the job on `main` plus `F9_ZERO_EUR_GUARD == CONFIRMED`; its existence establishes configuration, not current guard value or successful/expected runs. | Whether external GitHub workflows/services belong in the requested population; current guard/runner state and source run evidence. Scheduled Actions remains unsuitable as a bounded-latency EAGLE witness. |
+| N.I.N.A. dome telemetry exporter | `.github/workflows/nina-dome-telemetry-exporter.yml` builds an exporter artifact and runs a regression check for push, pull request or manual dispatch. | The workflow proves a repository CI/build path only. | It does not prove plugin installation, activation, or execution in N.I.N.A.; include only if an authoritative production inventory confirms the deployed plugin and its run evidence. |
+
+The latest time-stamped production-oriented repository record found in this pass
+is the 2026-09-22 handover. All entries above need a dated, authoritative current
+inventory snapshot before they can be called the complete population “currently
+in production.” Do not query Task Scheduler, workflow secrets/variables, live
+run history, EAGLE or remote services as part of this repository-only pass.
+
 ## 3. Proposed inventory and run-evidence fields
 
 Before defining a health rule for any script, create a controlled inventory with
