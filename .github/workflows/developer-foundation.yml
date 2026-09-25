@@ -128,6 +128,8 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v6
         with: { python-version: "3.13", cache: pip }
+      - name: Test race-safe F9 projection publication
+        run: python .github/scripts/test-publish-observation-planner-f9.py
       - name: Test BKL-042 server-side retrieval minimization
         run: python -m unittest
         working-directory: infrastructure/bkl042-ai-relay
