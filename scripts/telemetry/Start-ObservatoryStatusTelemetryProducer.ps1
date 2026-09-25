@@ -3,24 +3,32 @@ param(
     [string]$RepositoryRoot = 'C:\DigitalStarGate\digital-stargate-manual-ap14-runtime',
     [string]$NinaProjection = "$env:LOCALAPPDATA\DigitalStarGate\telemetry\nina-observatory-status.json",
     [string]$CloudWatcherCsv = 'C:\Users\PrimaLuceLab\Documents\CloudWatcher\CloudWatcher.csv',
+    [string]$Phd2LogRoot = 'C:\Users\PrimaLuceLab\Documents\PHD2',
     [string]$RuntimeRoot = 'C:\DigitalStarGate\TelemetryRuntime',
     [ValidateRange(5, 300)][int]$PollSeconds = 15,
     [ValidateRange(1, 3600)][int]$FreshnessSeconds = 60,
     [ValidateRange(0, 86400)][int]$DurationSeconds = 0,
     [string]$PublishEndpoint = '',
     [ValidateRange(1, 120)][int]$PublishTimeoutSeconds = 10,
-    [ValidateRange(0, 5)][int]$PublishMaxRetries = 2
+    [ValidateRange(0, 5)][int]$PublishMaxRetries = 2,
+    [bool]$RuntimeEnabled = $false
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
+if (-not $RuntimeEnabled) {
+    throw 'Runtime disabled by contract: pass -RuntimeEnabled $true only after the governed activation gate.'
+}
+
 $ninaAdapter = Join-Path $RepositoryRoot 'scripts\telemetry\Export-NinaObservatoryStatus.ps1'
 $fallbackAdapter = Join-Path $RepositoryRoot 'scripts\telemetry\Export-CloudWatcherObservatoryStatus.ps1'
 $publisher = Join-Path $RepositoryRoot 'scripts\telemetry\Publish-ObservatoryStatusTelemetry.ps1'
+$phd2Adapter = Join-Path $RepositoryRoot 'scripts\telemetry\Export-Phd2GuidingStatus.ps1'
 if (-not (Test-Path -LiteralPath $ninaAdapter -PathType Leaf)) { throw "Adapter NINA non trovato: $ninaAdapter" }
 if (-not (Test-Path -LiteralPath $fallbackAdapter -PathType Leaf)) { throw "Adapter fallback CloudWatcher non trovato: $fallbackAdapter" }
 if ($PublishEndpoint -and -not (Test-Path -LiteralPath $publisher -PathType Leaf)) { throw "Publisher non trovato: $publisher" }
+if (-not (Test-Path -LiteralPath $phd2Adapter -PathType Leaf)) { throw "Adapter PHD2 non trovato: $phd2Adapter" }
 
 New-Item -ItemType Directory -Path $RuntimeRoot -Force | Out-Null
 $projectionPath = Join-Path $RuntimeRoot 'observatory-status.json'
@@ -119,16 +127,46 @@ try {
                 Add-Content -LiteralPath $logPath -Value ('{0} FALLBACK primary_error={1}' -f [datetime]::UtcNow.ToString('o'), $primaryError)
             }
 
+            $phd2ProjectionPath = Join-Path $RuntimeRoot 'phd2-guiding-status.next.json'
+            try {
+                & $phd2Adapter -Phd2LogRoot $Phd2LogRoot -OutputPath $phd2ProjectionPath -FreshnessSeconds $FreshnessSeconds -SourceInstance $env:COMPUTERNAME | Out-Null
+                $guiding = Get-Content -LiteralPath $phd2ProjectionPath -Raw | ConvertFrom-Json
+                Add-Member -InputObject $candidate.systems -MemberType NoteProperty -Name guiding -Value $guiding -Force
+                if ($guiding.quality -ne 'CURRENT' -or $guiding.state -eq 'UNKNOWN') {
+                    $cycleState = 'DEGRADED'
+                }
+            }
+            catch {
+                $guiding = [ordered]@{
+                    schema_version = '1.0'
+                    source_component = 'DSG.Phd2GuideLogAdapter'
+                    source_instance = $env:COMPUTERNAME
+                    observed_at_utc = $null
+                    fresh_until_utc = $null
+                    quality = 'UNKNOWN'
+                    state = 'UNKNOWN'
+                    profiles = @()
+                    diagnostics = [ordered]@{
+                        reason = $_.Exception.Message
+                        no_hardware_commands = $true
+                        safety_authority = 'LOCAL_PHYSICAL_INTERLOCKS'
+                    }
+                }
+                Add-Member -InputObject $candidate.systems -MemberType NoteProperty -Name guiding -Value $guiding -Force
+                $cycleState = 'DEGRADED'
+                Add-Content -LiteralPath $logPath -Value ('{0} PHD2_ERROR message={1}' -f [datetime]::UtcNow.ToString('o'), $_.Exception.Message)
+            }
+
             Move-Item -LiteralPath $tempPath -Destination $projectionPath -Force
             $consecutiveFailures = 0
             $lastSuccessUtc = [datetime]::UtcNow.ToString('o')
             $lastError = $primaryError
-            Add-Content -LiteralPath $logPath -Value ('{0} OK source={1} observed={2} weather={3}/{4} safety={5}' -f $lastSuccessUtc, $activeSource, $candidate.observed_at_utc, $candidate.systems.weather.state, $candidate.systems.weather.quality, $candidate.safety.observed_state)
+            Add-Content -LiteralPath $logPath -Value ('{0} OK source={1} observed={2} weather={3}/{4} safety={5} guiding={6}/{7}' -f $lastSuccessUtc, $activeSource, $candidate.observed_at_utc, $candidate.systems.weather.state, $candidate.systems.weather.quality, $candidate.safety.observed_state, $candidate.systems.guiding.state, $candidate.systems.guiding.quality)
 
             if ($publishEnabled) {
                 $lastPublishAttemptUtc = [datetime]::UtcNow.ToString('o')
                 try {
-                    $publishOutput = & $publisher -ProjectionPath $projectionPath -Endpoint $PublishEndpoint -TimeoutSeconds $PublishTimeoutSeconds -MaxRetries $PublishMaxRetries
+                    $publishOutput = & $publisher -ProjectionPath $projectionPath -Endpoint $PublishEndpoint -TimeoutSeconds $PublishTimeoutSeconds -MaxRetries $PublishMaxRetries -RuntimeEnabled $RuntimeEnabled
                     $publishConsecutiveFailures = 0
                     $lastPublishSuccessUtc = [datetime]::UtcNow.ToString('o')
                     $lastPublishError = $null

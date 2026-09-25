@@ -5,11 +5,16 @@ param(
     [string]$BearerToken = $env:DSG_TELEMETRY_INGEST_TOKEN,
     [ValidateRange(1, 120)][int]$TimeoutSeconds = 10,
     [ValidateRange(0, 5)][int]$MaxRetries = 2,
-    [switch]$ValidateOnly
+    [switch]$ValidateOnly,
+    [bool]$RuntimeEnabled = $false
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+
+if (-not $RuntimeEnabled) {
+    throw 'Runtime disabled by contract: publication is blocked unless -RuntimeEnabled $true is explicitly supplied after the governed activation gate.'
+}
 
 function Test-Projection {
     param([Parameter(Mandatory = $true)]$Payload)
@@ -17,15 +22,15 @@ function Test-Projection {
     if ([string]$Payload.schema_version -ne '1.1') { throw 'Projection schema_version must be 1.1.' }
 
     $safetyState = ([string]$Payload.safety.observed_state).Trim().ToUpperInvariant()
-    if ($safetyState -notin @('SAFE','UNSAFE','UNKNOWN')) {
-        throw 'safety.observed_state must be SAFE, UNSAFE, or UNKNOWN.'
-    }
+if ($safetyState -ne 'UNKNOWN') {
+    throw 'Pilot publication requires safety.observed_state=UNKNOWN.'
+}
 
     $safetyAuthority = ([string]$Payload.safety.authority).Trim().ToUpperInvariant()
     if ([string]::IsNullOrWhiteSpace($safetyAuthority)) { throw 'safety.authority is required.' }
-    if ($safetyAuthority -notin @('LOCAL_SAFETY_AUTHORITY','NINA_SAFETY_MONITOR_OBSERVATION')) {
-        throw 'Unsupported safety.authority.'
-    }
+if ($safetyAuthority -ne 'LOCAL_SAFETY_AUTHORITY') {
+    throw 'Pilot publication requires safety.authority=LOCAL_SAFETY_AUTHORITY.'
+}
 
     if ([string]::IsNullOrWhiteSpace([string]$Payload.correlation_id)) { throw 'correlation_id is required.' }
 
