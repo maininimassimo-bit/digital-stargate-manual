@@ -4,7 +4,7 @@
 |---|---|
 | Evidence ID | `BKL043-F4-PRODUCTION-SCRIPT-HEALTH-EXTENSION-DRAFT-2026-09-25` |
 | Gate | `M-BKL043-F4-EXACT-PILOT-RUNTIME-AUTHORIZATION` |
-| Status | Owner-requested repository-only design; production inventory incomplete; no runtime monitoring authorized |
+| Status | Owner-selected repository-wide production-script scope; static inventory incomplete; no runtime monitoring authorized |
 | Owner / accountable | Massimo Mainini |
 | Authority | `command_authority=NONE`, `execution_authority=NONE`, `safety_authority=NONE` |
 
@@ -12,9 +12,13 @@
 
 On 2026-09-25 Massimo Mainini requested that the planned EAGLE reliability
 monitoring be extended to include scheduled health checks for **all scripts
-currently in production**. This draft records that request and defines the
-repository-only discovery and semantic work needed before a check can be
-specified. It does not claim that the production script population is known.
+currently in production across Digital StarGate**. The owner clarified on
+2026-09-25 that this includes production scripts beyond the EAGLE-local boundary,
+including externally hosted workflow execution where the executed unit is a
+script. This scope choice does not make the production population known or
+authorize any check. Hosted services that are not scripts are not themselves
+script inventory entries; whether their health is a dependency signal is a
+separate design decision.
 
 The monitoring must observe execution evidence; it must not rerun a script,
 change its schedule, restart a failed process, or infer that a script is healthy
@@ -60,12 +64,22 @@ reports as current runtime verification:
 | OneDrive export | No authoritative repository action mapping was identified in this static pass. | The 2026-09-03 source-discovery record lists `OneDrive Export` among the tasks observed during that historical discovery. | Current presence, action/script identity, intended schedule, owner and results; keep as unresolved task candidate only. |
 | GitHub-hosted forecast refresh | `.github/workflows/bkl-031-f9-refresh.yml` invokes `.github/scripts/observation_planner_f9.py` on two UTC schedules, with `workflow_dispatch` also available. | The workflow file defines these triggers and guards the job on `main` plus `F9_ZERO_EUR_GUARD == CONFIRMED`; its existence establishes configuration, not current guard value or successful/expected runs. | Whether external GitHub workflows/services belong in the requested population; current guard/runner state and source run evidence. Scheduled Actions remains unsuitable as a bounded-latency EAGLE witness. |
 | N.I.N.A. dome telemetry exporter | `.github/workflows/nina-dome-telemetry-exporter.yml` builds an exporter artifact and runs a regression check for push, pull request or manual dispatch. | The workflow proves a repository CI/build path only. | It does not prove plugin installation, activation, or execution in N.I.N.A.; include only if an authoritative production inventory confirms the deployed plugin and its run evidence. |
+| Analytics Center synchronization | `.github/workflows/analytics-center-sync.yml` calls `.github/scripts/refresh-analytics-center.sh`, writes generated views, pushes to `main`, then dispatches Pages deployment. | The repository configures `push` and `workflow_dispatch` triggers and write/deploy steps. | Whether the workflow is part of the accepted production-script population, its expected-run semantics, and run outcomes for the relevant period. A push-triggered workflow has no fixed periodic cadence. |
+| Session analysis/projection pipeline | `.github/workflows/analyze-session-automatic.yml` invokes multiple `.github/scripts/` generators and validators on session-manifest pushes or manual dispatch. | The repository configures event-driven and manually triggered execution with write-capable generated projections. | Per-script production ownership, expected trigger population, successful output consumption and run evidence; do not turn a missing event into a missed periodic run. |
+| Governed projection sync | `.github/workflows/roadmap-projection-sync.yml` runs roadmap/status generators on pushes or manual dispatch and may commit generated projections. | Workflow trigger and action definitions are repository-visible. | Whether each generator is a production script or governance/maintenance automation; current usage and per-run receipts. |
+| Session package promotion | `.github/workflows/promote-session-package.yml` runs on session-branch pushes and promotes validated packages to `main`. | Workflow definition shows an event-driven promotion path. | Whether to inventory as a production script or release pipeline, its event population and authoritative per-run evidence. |
+| Pages publication | `.github/workflows/deploy-pages.yml` builds and publishes the public manual on `main` pushes, explicit dispatch or selected workflow completion. | Workflow definition identifies an external production publishing path. | Whether publishing scripts belong in the health-monitoring population or release governance only; no periodic cadence is implied. |
+| Other gated BKL-031 F3-A3 workflows | Multiple workflow files contain schedule and/or manual triggers for exact acquisition, infrastructure, execution or recovery operations. | Repository-visible workflow configuration only. | Do not classify them as ordinary production health checks. Their authorization, active state, ownership and production status require separate governance evidence; do not dispatch or execute them as part of inventory discovery. |
 
 The latest time-stamped production-oriented repository record found in this pass
-is the 2026-09-22 handover. All entries above need a dated, authoritative current
-inventory snapshot before they can be called the complete population “currently
-in production.” Do not query Task Scheduler, workflow secrets/variables, live
-run history, EAGLE or remote services as part of this repository-only pass.
+is the 2026-09-22 handover. The owner has selected the population boundary as all
+Digital StarGate production scripts, including scripts executed outside EAGLE.
+The exact production classification for event-driven pipelines, release
+automation, and scripts supporting hosted services still needs review. All
+entries above need a dated, authoritative current inventory snapshot before they
+can be called the complete population “currently in production.” Do not query
+Task Scheduler, workflow secrets/variables, live run history, EAGLE or remote
+services as part of this repository-only pass.
 
 ## 3. Proposed inventory and run-evidence fields
 
@@ -154,8 +168,10 @@ completeness or live source quality.
 Before a complete inventory or health check can be claimed, the owner/reviewers
 must resolve:
 
-1. whether the population means EAGLE-local observatory scripts only or also
-   production workflows/services outside EAGLE;
+1. owner-selected population is all Digital StarGate production scripts across
+   EAGLE and external execution boundaries; decide which event-driven/release
+   workflows qualify as production script executions, without counting a hosted
+   service itself as a script;
 2. the authoritative current inventory source and responsible owner for each
    execution boundary;
 3. which receipts count as authoritative and how task-specific raw result codes

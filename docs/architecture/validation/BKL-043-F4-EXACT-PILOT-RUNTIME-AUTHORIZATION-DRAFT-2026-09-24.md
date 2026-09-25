@@ -51,7 +51,7 @@ scope, not as live runtime authorization.
 | N.I.N.A. logs | User confirmed logs are available; parsing, event grouping, retry/terminal semantics and population reconciliation are not accepted | **OFFLINE ANALYSIS ONLY; runtime ingestion unselected** |
 | Planned EAGLE shutdown evidence | Owner selected a local shutdown-event approach on 2026-09-25. A locally recorded orderly shutdown can evidence shutdown mode/time, but alone does not prove prior planning or rule out an operational incident. | **DESIGN POLICY SELECTED: record local shutdown event; classify intent only with independent supporting evidence or human review; otherwise UNKNOWN** |
 | Historical EAGLE operating hours | Windows System event logs are a candidate source for reconstructing host boot/shutdown intervals; actual log contents have not been inspected or imported. Host uptime is not equivalent to observatory availability or scientific session time. | **OFFLINE RECONCILIATION CANDIDATE ONLY; source selection, event semantics, completeness and import approval pending** |
-| Production-script health monitoring extension | On 2026-09-25 Massimo Mainini requested that the EAGLE monitoring design also cover scheduled health checks for all scripts currently in production. Repository-only evidence and open population boundaries are documented in `BKL-043-F4-PRODUCTION-SCRIPT-HEALTH-EXTENSION-DRAFT-2026-09-25.md`; no current production inventory is verified. | **OWNER REQUEST RECORDED — DESIGN ONLY; exact population, execution locations/triggers, schedule policies, authoritative run/outcome evidence and missed-run semantics remain unselected. No scheduled check, script execution, task/service installation, or live EAGLE inspection is authorized.** |
+| Production-script health monitoring extension | On 2026-09-25 Massimo Mainini selected the monitoring population as all Digital StarGate production scripts, including scripts running outside EAGLE. Repository-only evidence and unresolved workflow classifications are documented in `BKL-043-F4-PRODUCTION-SCRIPT-HEALTH-EXTENSION-DRAFT-2026-09-25.md`; no current complete production inventory is verified. | **OWNER SCOPE SELECTED — ALL DSG PRODUCTION SCRIPTS ACROSS EXECUTION BOUNDARIES; DESIGN ONLY. Current inventory, authoritative receipts, per-trigger expectations and missed-run semantics remain pending. No scheduled check, script execution, task/service installation, or live EAGLE inspection is authorized.** |
 | Independent witness | Owner selected GitHub as provider candidate on 2026-09-24. Official GitHub documentation states scheduled workflows have a five-minute minimum and may be delayed or dropped; event-driven runs cannot detect absent events. A private repository could be an archive, but GitHub Actions alone is not an accepted bounded-latency witness. Existing public manual repository is excluded. | **GITHUB SELECTED AS CANDIDATE; archival-vs-independent-receiver disposition, exact private resource, receipt-time contract and failure-domain proof UNSELECTED; see F4 feasibility assessment** |
 | Transport, authentication and egress | No endpoint, protocol, credential, network rule or secret provisioning approved | **UNSELECTED** |
 | Sampling/heartbeat cadence, timeout, freshness and gap semantics | Historical producer cadence is not transferable; no approved values | **UNSELECTED** |
@@ -89,9 +89,11 @@ scope, not as live runtime authorization.
 5. Continue the owner-requested production-script health extension using the
    repository-only design in
    `BKL-043-F4-PRODUCTION-SCRIPT-HEALTH-EXTENSION-DRAFT-2026-09-25.md`. Resolve
-   whether the scope includes EAGLE-local scripts only or external production
-   workflows/services too, identify the authoritative inventory and run
-   evidence, and define trigger-specific expected-run/missed-run semantics.
+   the authoritative current inventory and run evidence across all Digital
+   StarGate production execution boundaries, classify which event-driven and
+   release workflows are production script executions, and define
+   trigger-specific expected-run/missed-run semantics. The owner selected the
+   all-DSG-script scope; this does not authorize live inventory or checks.
    EAGLE is not always on, so absence of a local result must remain `UNKNOWN`
    unless a separately governed witness bounds the relevant receipt gap. Script
    execution health is separate from host uptime, observatory availability and
@@ -122,16 +124,22 @@ scope, not as live runtime authorization.
 ### Review disposition — draft quality only (2026-09-25)
 
 Massimo Mainini reported that Leonardo Di Egidio approved the quality of the
-BKL-043 F4 drafts. This disposition covers the draft-quality review only; it
-does not constitute a GitHub PR review record, security/privacy finding, approval
-of an exact runtime design, or authorization to access EAGLE, read real logs,
-install or run software, spend, or deploy. The full exact-runtime ARB and Release
-Quality gates remain open until their exact scope and evidence are reviewed.
+BKL-043 F4 drafts as they stood at PR head `83110cd9e80cf8e0d2751c52e51d5b3a892fffed`.
+The later owner decision to include every Digital StarGate production script,
+including external execution boundaries, and the subsequent repository-wide
+candidate map were not part of that reviewed snapshot and need review before
+they are treated as independently approved. The reported disposition does not
+constitute a GitHub PR review record, security/privacy finding, approval of an
+exact runtime design, or authorization to access EAGLE, read real logs, install
+or run software, spend, or deploy. The full exact-runtime ARB and Release Quality
+gates remain open until their exact scope and evidence are reviewed.
 
 ```text
 review_scope=draft_quality_for_BKL-043_F4
 reviewer=Leonardo_Di_Egidio
 review_disposition=approved_as_reported_by_Massimo_Mainini
+reviewed_head=83110cd9e80cf8e0d2751c52e51d5b3a892fffed
+later_all_DSG_script_scope_and_static_map=not_covered
 runtime_authorization=NONE
 ```
 
