@@ -51,6 +51,7 @@ scope, not as live runtime authorization.
 | N.I.N.A. logs | User confirmed logs are available; parsing, event grouping, retry/terminal semantics and population reconciliation are not accepted | **OFFLINE ANALYSIS ONLY; runtime ingestion unselected** |
 | Planned EAGLE shutdown evidence | Owner selected a local shutdown-event approach on 2026-09-25. A locally recorded orderly shutdown can evidence shutdown mode/time, but alone does not prove prior planning or rule out an operational incident. | **DESIGN POLICY SELECTED: record local shutdown event; classify intent only with independent supporting evidence or human review; otherwise UNKNOWN** |
 | Historical EAGLE operating hours | Windows System event logs are a candidate source for reconstructing host boot/shutdown intervals; actual log contents have not been inspected or imported. Host uptime is not equivalent to observatory availability or scientific session time. | **OFFLINE RECONCILIATION CANDIDATE ONLY; source selection, event semantics, completeness and import approval pending** |
+| Production-script health monitoring extension | On 2026-09-25 Massimo Mainini selected the monitoring population as all Digital StarGate production scripts, including scripts running outside EAGLE. Repository-only evidence and unresolved workflow classifications are documented in `BKL-043-F4-PRODUCTION-SCRIPT-HEALTH-EXTENSION-DRAFT-2026-09-25.md`; no current complete production inventory is verified. | **OWNER SCOPE SELECTED — ALL DSG PRODUCTION SCRIPTS ACROSS EXECUTION BOUNDARIES; DESIGN ONLY. Current inventory, authoritative receipts, per-trigger expectations and missed-run semantics remain pending. No scheduled check, script execution, task/service installation, or live EAGLE inspection is authorized.** |
 | Independent witness | Owner selected GitHub as provider candidate on 2026-09-24. Official GitHub documentation states scheduled workflows have a five-minute minimum and may be delayed or dropped; event-driven runs cannot detect absent events. A private repository could be an archive, but GitHub Actions alone is not an accepted bounded-latency witness. Existing public manual repository is excluded. | **GITHUB SELECTED AS CANDIDATE; archival-vs-independent-receiver disposition, exact private resource, receipt-time contract and failure-domain proof UNSELECTED; see F4 feasibility assessment** |
 | Transport, authentication and egress | No endpoint, protocol, credential, network rule or secret provisioning approved | **UNSELECTED** |
 | Sampling/heartbeat cadence, timeout, freshness and gap semantics | Historical producer cadence is not transferable; no approved values | **UNSELECTED** |
@@ -62,8 +63,8 @@ scope, not as live runtime authorization.
 | Resource budget and stop limits | Must be measured against an agreed imaging workload; no numeric limits approved | **UNSELECTED** |
 | Cost ceiling and billing controls | Preliminary scenarios are recorded in `BKL-043-F4-COST-ESTIMATE-2026-09-25.md`; account plan, quota remaining, billing owner, approved products/region and caps are unknown | **UNSELECTED — no spending or resource creation authorized** |
 | Installation, disable, uninstall and rollback | Must be exact for the selected artifact/host; not prepared for runtime | **UNSELECTED** |
-| Security/privacy review | Required before any live access or persistence; reviewer scope and recorded finding still required | **PENDING — Leonardo Di Egidio nominated; review not performed** |
-| Independent architecture and release-quality review | Leonardo Di Egidio nominated by owner on 2026-09-24. Massimo Mainini remains accountable owner and runtime approver, not an independent reviewer of his own decision. | **REVIEWER NOMINATED — finding pending** |
+| Security/privacy review | Required before any live access or persistence; a separate scoped finding is still required | **PENDING — not covered by the draft-quality approval below** |
+| Independent architecture and release-quality review | Leonardo Di Egidio was nominated by the owner on 2026-09-24. On 2026-09-25 Massimo Mainini reported Leonardo's approval of the updated draft quality, including the all-Digital-StarGate production-script scope and repository map, as they stood at PR head `854b15f6f50df3c0e2713d1ea3275889aebd5bbc`. Massimo remains accountable owner and runtime approver, not an independent reviewer of his own decision. | **UPDATED DRAFT QUALITY APPROVED (owner-reported at exact head); full exact-runtime ARB/Release Quality review remains pending** |
 | OAT and acceptance criteria | Must be tied to exact sources, coverage, stop conditions and rollback | **UNSELECTED** |
 | Incident lifecycle | Separate contract and authorization required; current default excludes it | **EXCLUDED** |
 
@@ -81,26 +82,66 @@ scope, not as live runtime authorization.
    classified. Design offline reconciliation of candidate Windows System
    event logs with N.I.N.A. attempts and other evidence; do not equate host
    uptime with observatory availability or science hours. No actual EAGLE log
-   access/import is authorized by this draft.
-5. Close `BKL-043-F4-GITHUB-WITNESS-FEASIBILITY-2026-09-25.md`: owner selects
+   access/import is authorized by this draft. The repository-only proposal is
+   `BKL-043-F4-SHUTDOWN-EVIDENCE-AND-HISTORICAL-RECONCILIATION-DRAFT-2026-09-25.md`;
+   its recording mechanism and any real historical snapshot still require
+   separate owner authorization.
+5. Continue the owner-requested production-script health extension using the
+   repository-only design in
+   `BKL-043-F4-PRODUCTION-SCRIPT-HEALTH-EXTENSION-DRAFT-2026-09-25.md`. Resolve
+   the authoritative current inventory and run evidence across all Digital
+   StarGate production execution boundaries, classify which event-driven and
+   release workflows are production script executions, and define
+   trigger-specific expected-run/missed-run semantics. The owner selected the
+   all-DSG-script scope; this does not authorize live inventory or checks.
+   EAGLE is not always on, so absence of a local result must remain `UNKNOWN`
+   unless a separately governed witness bounds the relevant receipt gap. Script
+   execution health is separate from host uptime, observatory availability and
+   scientific activity; it is not a qualifying MTBF failure without accepted
+   event and exposure semantics. This request does not authorize live inventory,
+   polling, script execution, a scheduled task, persistence, transport, alerting
+   or deployment.
+6. Close `BKL-043-F4-GITHUB-WITNESS-FEASIBILITY-2026-09-25.md`: owner selects
    the best-effort GitHub archive limitation or a separate independent receiver;
    then demonstrate a durable receipt store outside EAGLE's host, power and
    network failure domains.
-6. Define data minimization, privacy/security controls, retention/deletion,
+7. Define data minimization, privacy/security controls, retention/deletion,
    resource stop limits, observation window and review checkpoints.
-7. Review the indicative cost scenarios in
+8. Review the indicative cost scenarios in
    `BKL-043-F4-COST-ESTIMATE-2026-09-25.md`; verify account plan and quotas,
    then set explicit recurring and one-time cost ceilings, billing owner,
    approved products/region, and stop action. No spend is approved by the
    estimate itself.
-8. Specify install/start/stop/uninstall/rollback and recovery verification.
-9. Complete Leonardo Di Egidio's independent architecture/release review and
+9. Specify install/start/stop/uninstall/rollback and recovery verification.
+10. Complete Leonardo Di Egidio's independent architecture/release review and
    security/privacy review, plus offline and resource preflight evidence. The
    preflight must not access live sources until separately authorized.
-10. Submit a final decision record with every field exact and no `UNSELECTED`,
+11. Submit a final decision record with every field exact and no `UNSELECTED`,
    then wait for explicit owner approval naming that exact record/version.
 
 ## 5. Fixed constraints
+
+### Review disposition — draft quality only (2026-09-25)
+
+Massimo Mainini reported that Leonardo Di Egidio approved the quality of the
+updated BKL-043 F4 drafts, including the all-Digital-StarGate production-script
+scope and repository map, as they stood at PR head
+`854b15f6f50df3c0e2713d1ea3275889aebd5bbc`. This supersedes the earlier
+owner-reported draft-quality disposition for head
+`83110cd9e80cf8e0d2751c52e51d5b3a892fffed`. The updated disposition does not
+constitute a GitHub PR review record, security/privacy finding, approval of an
+exact runtime design, or authorization to access EAGLE, read real logs, install
+or run software, spend, or deploy. The full exact-runtime ARB and Release Quality
+gates remain open until their exact scope and evidence are reviewed.
+
+```text
+review_scope=draft_quality_for_BKL-043_F4
+reviewer=Leonardo_Di_Egidio
+review_disposition=approved_as_reported_by_Massimo_Mainini
+reviewed_head=854b15f6f50df3c0e2713d1ea3275889aebd5bbc
+scope=all_Digital_StarGate_production_scripts_and_repository_map
+runtime_authorization=NONE
+```
 
 - No device commands, control path, broker, decision scheduler, remediation,
   alert, interlock change, readiness decision or Safety Authority.
@@ -133,6 +174,8 @@ safety_authority=NONE
 - `docs/architecture/validation/BKL-043-F1-POPULATION-AND-CONTRACT-GAP-DISCOVERY-2026-09-24.md`
 - `docs/architecture/validation/BKL-043-F4-GITHUB-WITNESS-FEASIBILITY-2026-09-25.md`
 - `docs/architecture/validation/BKL-043-F4-COST-ESTIMATE-2026-09-25.md`
+- `docs/architecture/validation/BKL-043-F4-SHUTDOWN-EVIDENCE-AND-HISTORICAL-RECONCILIATION-DRAFT-2026-09-25.md`
+- `docs/architecture/validation/BKL-043-F4-PRODUCTION-SCRIPT-HEALTH-EXTENSION-DRAFT-2026-09-25.md`
 - `docs/status/index.md` — identifies the documented EAGLE evidence host as
   `EAGLE30154`; does not establish OS/build or validate current machine identity.
 - `docs/architecture/telemetry/evidence/BKL-030-EAGLE-Health-Source-Discovery-2026-09-03.md`
