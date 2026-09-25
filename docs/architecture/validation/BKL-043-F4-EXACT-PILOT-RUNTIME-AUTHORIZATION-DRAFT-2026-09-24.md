@@ -81,7 +81,10 @@ scope, not as live runtime authorization.
    classified. Design offline reconciliation of candidate Windows System
    event logs with N.I.N.A. attempts and other evidence; do not equate host
    uptime with observatory availability or science hours. No actual EAGLE log
-   access/import is authorized by this draft.
+   access/import is authorized by this draft. The repository-only proposal is
+   `BKL-043-F4-SHUTDOWN-EVIDENCE-AND-HISTORICAL-RECONCILIATION-DRAFT-2026-09-25.md`;
+   its recording mechanism and any real historical snapshot still require
+   separate owner authorization.
 5. Close `BKL-043-F4-GITHUB-WITNESS-FEASIBILITY-2026-09-25.md`: owner selects
    the best-effort GitHub archive limitation or a separate independent receiver;
    then demonstrate a durable receipt store outside EAGLE's host, power and
@@ -133,6 +136,7 @@ safety_authority=NONE
 - `docs/architecture/validation/BKL-043-F1-POPULATION-AND-CONTRACT-GAP-DISCOVERY-2026-09-24.md`
 - `docs/architecture/validation/BKL-043-F4-GITHUB-WITNESS-FEASIBILITY-2026-09-25.md`
 - `docs/architecture/validation/BKL-043-F4-COST-ESTIMATE-2026-09-25.md`
+- `docs/architecture/validation/BKL-043-F4-SHUTDOWN-EVIDENCE-AND-HISTORICAL-RECONCILIATION-DRAFT-2026-09-25.md`
 - `docs/status/index.md` — identifies the documented EAGLE evidence host as
   `EAGLE30154`; does not establish OS/build or validate current machine identity.
 - `docs/architecture/telemetry/evidence/BKL-030-EAGLE-Health-Source-Discovery-2026-09-03.md`
