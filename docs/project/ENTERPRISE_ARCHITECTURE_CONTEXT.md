@@ -3,15 +3,15 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 4.2 |
+| Versione | 4.3 |
 | Stato | Active context baseline |
-| Data baseline | 18/09/2026 |
+| Data baseline | 25/09/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch autorevole | `main` |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Continuity handover | `docs/project/HANDOVER_2026-09-22-AP-008-BKL-036.md` |
-| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-22.md` |
-| Current governed package | BKL-036-F5 live read-only score gate; AP-008 bounded integration closed |
+| Continuity handover | `docs/project/HANDOVER_2026-09-25-BKL043-F4.md` |
+| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-25.md` |
+| Current governed package | BKL-043 F3/F4 exact pilot authorization preparation; BKL-042 closed/accepted |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo e gerarchia
@@ -54,17 +54,19 @@ Sono accettati, fra gli altri:
 
 BKL-037 rimane read-only/descriptive-only; unità non dimostrate, missing evidence e processing history PixInsight incompleta restano fail-closed.
 
-## 6. Current package — BKL-036-F5 after AP-008 closure
+## 6. Current package — BKL-043 pre-pilot governance
 
 BKL-031 è **CLOSED / ACCEPTED / POST-MERGE VERIFIED** tramite PR #301 e merge `4a509d574a004fe7fb72bc6c678c9e7f71fe821f`. F3–F9 hanno chiuso il planner repeatable read-only: MeteoHub governato, astronomia della notte, suitability esplicita setup-target, ranking esplicabile e verifica della pagina pubblica di Manciano.
 
-AP-008 è chiuso per l'integrazione bounded read-only: il portale consuma Observatory Status ed EAGLE Health live, il publisher EAGLE30154 è continuo e il command path resta assente. La closure non trasferisce authority e non abilita broker, remediation o device command. BKL-032 resta responsabile di Session Readiness / Go-No-Go; gli interlock fisici locali restano Safety Authority.
+AP-008 è chiuso per l'integrazione bounded read-only: il portale consuma Observatory Status ed EAGLE Health live e il command path resta assente. La closure non trasferisce authority e non abilita broker, remediation o device command. BKL-032 resta responsabile di Session Readiness / Go-No-Go; gli interlock fisici locali restano Safety Authority.
 
-BKL-036-F1/F2/F3/F4 resta chiuso come capability repository-only. BKL-036-F5 è il nuovo gate owner-authorized per definire comparabilità, freshness e proiezione descrittiva live dei sette domini. F3 resta `UNAVAILABLE` finché F5 non supera i propri gate.
+BKL-036-F1/F2/F3/F4 e BKL-036-F5 restano chiusi nei rispettivi perimetri accettati. BKL-042 è CLOSED / ACCEPTED per retrieval advisory bounded read-only con limiti OAT espliciti.
+
+BKL-043 è il package corrente. F1 source/population discovery e F2 two-plane logical architecture sono completati; F3 è repository-only con test offline riusciti. F4 è una decision draft: scope a due piani e target `EAGLE30154` sono selezionati, GitHub è un witness-provider candidate e Leonardo Di Egidio è nominato reviewer indipendente. Tutti gli altri campi runtime e le review restano obbligatori; nessun collector, live source, startup, polling, persistence, transport, deployment o authority change è autorizzato.
 
 ## 7. Roadmap
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 CLOSED / ACCEPTED -> BKL-032 CLOSED / ACCEPTED -> AP-008 bounded read-only CLOSED -> BKL-036-F5 CURRENT -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 CLOSED / ACCEPTED -> BKL-032 CLOSED / ACCEPTED -> AP-008 bounded read-only CLOSED -> BKL-036 CLOSED -> BKL-033 CLOSED -> BKL-034 CLOSED -> BKL-042 CLOSED / ACCEPTED -> BKL-043 CURRENT -> BKL-049 PLANNED -> BKL-050 PLANNED`.
 
 AMP-002 resta planning authority per AP-007–AP-015, non live status register.
 

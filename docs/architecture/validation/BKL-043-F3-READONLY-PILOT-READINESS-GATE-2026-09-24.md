@@ -9,6 +9,11 @@
 | Entry baseline | BKL-043 F2 two-plane logical architecture, owner-approved 2026-09-24 |
 | Authority | Repository-only design; command/execution/safety `NONE` |
 
+> **Continuity update — 25/09/2026.** The F3 statements below describe its entry
+> baseline. The current partial selections are recorded only in the F4 exact runtime
+> authorization draft. They do not change F3's repository-only status or authorize
+> live access, a collector, startup, polling, persistence, transport or deployment.
+
 ## Purpose
 
 Convert the accepted F2 logical design into a reviewable, bounded pilot
