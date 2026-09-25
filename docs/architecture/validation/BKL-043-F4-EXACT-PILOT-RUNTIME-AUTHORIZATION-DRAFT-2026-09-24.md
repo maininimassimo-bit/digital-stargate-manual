@@ -63,8 +63,8 @@ scope, not as live runtime authorization.
 | Resource budget and stop limits | Must be measured against an agreed imaging workload; no numeric limits approved | **UNSELECTED** |
 | Cost ceiling and billing controls | Preliminary scenarios are recorded in `BKL-043-F4-COST-ESTIMATE-2026-09-25.md`; account plan, quota remaining, billing owner, approved products/region and caps are unknown | **UNSELECTED — no spending or resource creation authorized** |
 | Installation, disable, uninstall and rollback | Must be exact for the selected artifact/host; not prepared for runtime | **UNSELECTED** |
-| Security/privacy review | Required before any live access or persistence; reviewer scope and recorded finding still required | **PENDING — Leonardo Di Egidio nominated; review not performed** |
-| Independent architecture and release-quality review | Leonardo Di Egidio nominated by owner on 2026-09-24. Massimo Mainini remains accountable owner and runtime approver, not an independent reviewer of his own decision. | **REVIEWER NOMINATED — finding pending** |
+| Security/privacy review | Required before any live access or persistence; a separate scoped finding is still required | **PENDING — not covered by the draft-quality approval below** |
+| Independent architecture and release-quality review | Leonardo Di Egidio was nominated by the owner on 2026-09-24. On 2026-09-25 Massimo Mainini reported Leonardo's approval of the quality of the BKL-043 F4 drafts. Massimo remains accountable owner and runtime approver, not an independent reviewer of his own decision. | **DRAFT QUALITY APPROVED (owner-reported); full exact-runtime ARB/Release Quality review remains pending** |
 | OAT and acceptance criteria | Must be tied to exact sources, coverage, stop conditions and rollback | **UNSELECTED** |
 | Incident lifecycle | Separate contract and authorization required; current default excludes it | **EXCLUDED** |
 
@@ -118,6 +118,22 @@ scope, not as live runtime authorization.
    then wait for explicit owner approval naming that exact record/version.
 
 ## 5. Fixed constraints
+
+### Review disposition — draft quality only (2026-09-25)
+
+Massimo Mainini reported that Leonardo Di Egidio approved the quality of the
+BKL-043 F4 drafts. This disposition covers the draft-quality review only; it
+does not constitute a GitHub PR review record, security/privacy finding, approval
+of an exact runtime design, or authorization to access EAGLE, read real logs,
+install or run software, spend, or deploy. The full exact-runtime ARB and Release
+Quality gates remain open until their exact scope and evidence are reviewed.
+
+```text
+review_scope=draft_quality_for_BKL-043_F4
+reviewer=Leonardo_Di_Egidio
+review_disposition=approved_as_reported_by_Massimo_Mainini
+runtime_authorization=NONE
+```
 
 - No device commands, control path, broker, decision scheduler, remediation,
   alert, interlock change, readiness decision or Safety Authority.
