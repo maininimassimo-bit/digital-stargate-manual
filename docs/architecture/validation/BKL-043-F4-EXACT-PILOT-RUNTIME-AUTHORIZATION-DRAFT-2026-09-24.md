@@ -49,6 +49,8 @@ scope, not as live runtime authorization.
 | Software artifact and configuration | F3 schema/validator are contract tests, not a runtime collector; implementation and immutable artifact digest do not exist | **UNSELECTED** |
 | Included sources/components | Candidate source-owned projections only; no live producer/read-only boundary has been revalidated for this pilot | **UNSELECTED** |
 | N.I.N.A. logs | User confirmed logs are available; parsing, event grouping, retry/terminal semantics and population reconciliation are not accepted | **OFFLINE ANALYSIS ONLY; runtime ingestion unselected** |
+| Planned EAGLE shutdown evidence | Owner selected a local shutdown-event approach on 2026-09-25. A locally recorded orderly shutdown can evidence shutdown mode/time, but alone does not prove prior planning or rule out an operational incident. | **DESIGN POLICY SELECTED: record local shutdown event; classify intent only with independent supporting evidence or human review; otherwise UNKNOWN** |
+| Historical EAGLE operating hours | Windows System event logs are a candidate source for reconstructing host boot/shutdown intervals; actual log contents have not been inspected or imported. Host uptime is not equivalent to observatory availability or scientific session time. | **OFFLINE RECONCILIATION CANDIDATE ONLY; source selection, event semantics, completeness and import approval pending** |
 | Independent witness | Owner selected GitHub as provider candidate on 2026-09-24. Official GitHub documentation states scheduled workflows have a five-minute minimum and may be delayed or dropped; event-driven runs cannot detect absent events. A private repository could be an archive, but GitHub Actions alone is not an accepted bounded-latency witness. Existing public manual repository is excluded. | **GITHUB SELECTED AS CANDIDATE; archival-vs-independent-receiver disposition, exact private resource, receipt-time contract and failure-domain proof UNSELECTED; see F4 feasibility assessment** |
 | Transport, authentication and egress | No endpoint, protocol, credential, network rule or secret provisioning approved | **UNSELECTED** |
 | Sampling/heartbeat cadence, timeout, freshness and gap semantics | Historical producer cadence is not transferable; no approved values | **UNSELECTED** |
@@ -73,22 +75,29 @@ scope, not as live runtime authorization.
    components.
 3. Prove every selected source is available through an exact read-only interface;
    exclude direct device probing and command-capable credentials.
-4. Close `BKL-043-F4-GITHUB-WITNESS-FEASIBILITY-2026-09-25.md`: owner selects
+4. Define the local shutdown record contract, its provenance and failure cases.
+   It must not infer planned intent from an orderly shutdown alone; unknown
+   intervals remain `UNKNOWN` unless independently corroborated or human
+   classified. Design offline reconciliation of candidate Windows System
+   event logs with N.I.N.A. attempts and other evidence; do not equate host
+   uptime with observatory availability or science hours. No actual EAGLE log
+   access/import is authorized by this draft.
+5. Close `BKL-043-F4-GITHUB-WITNESS-FEASIBILITY-2026-09-25.md`: owner selects
    the best-effort GitHub archive limitation or a separate independent receiver;
    then demonstrate a durable receipt store outside EAGLE's host, power and
    network failure domains.
-5. Define data minimization, privacy/security controls, retention/deletion,
+6. Define data minimization, privacy/security controls, retention/deletion,
    resource stop limits, observation window and review checkpoints.
-6. Review the indicative cost scenarios in
+7. Review the indicative cost scenarios in
    `BKL-043-F4-COST-ESTIMATE-2026-09-25.md`; verify account plan and quotas,
    then set explicit recurring and one-time cost ceilings, billing owner,
    approved products/region, and stop action. No spend is approved by the
    estimate itself.
-7. Specify install/start/stop/uninstall/rollback and recovery verification.
-8. Complete Leonardo Di Egidio's independent architecture/release review and
+8. Specify install/start/stop/uninstall/rollback and recovery verification.
+9. Complete Leonardo Di Egidio's independent architecture/release review and
    security/privacy review, plus offline and resource preflight evidence. The
    preflight must not access live sources until separately authorized.
-9. Submit a final decision record with every field exact and no `UNSELECTED`,
+10. Submit a final decision record with every field exact and no `UNSELECTED`,
    then wait for explicit owner approval naming that exact record/version.
 
 ## 5. Fixed constraints
@@ -97,6 +106,11 @@ scope, not as live runtime authorization.
   alert, interlock change, readiness decision or Safety Authority.
 - No automatic incident creation or closure; no incident register in this gate.
 - Unknown, stale, missing, conflicting and unobserved intervals remain unknown.
+- An orderly local shutdown record alone is not proof of planned downtime and
+  does not by itself classify an interval as non-incident. Host uptime,
+  observatory availability and scientific operating time are distinct measures;
+  historical uptime must not be converted to MTBF/MTTR without reconciled,
+  coverage-qualified event populations and accepted semantics.
 - No whole-system uptime, availability, MTBF, MTTR, SLI/SLO or failure-budget
   claim until the population, denominator, event semantics and coverage are
   separately accepted and validated.
