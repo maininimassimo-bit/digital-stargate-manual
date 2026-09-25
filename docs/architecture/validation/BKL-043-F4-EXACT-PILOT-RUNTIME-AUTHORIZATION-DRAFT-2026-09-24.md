@@ -49,7 +49,7 @@ scope, not as live runtime authorization.
 | Software artifact and configuration | F3 schema/validator are contract tests, not a runtime collector; implementation and immutable artifact digest do not exist | **UNSELECTED** |
 | Included sources/components | Candidate source-owned projections only; no live producer/read-only boundary has been revalidated for this pilot | **UNSELECTED** |
 | N.I.N.A. logs | User confirmed logs are available; parsing, event grouping, retry/terminal semantics and population reconciliation are not accepted | **OFFLINE ANALYSIS ONLY; runtime ingestion unselected** |
-| Independent witness | Owner selected GitHub as provider candidate on 2026-09-24. Existing Digital StarGate repo is public; it cannot receive operational telemetry. A separate private GitHub resource and durable receipt mechanism must be selected and shown independent of EAGLE host, power and network failure domains. | **PROVIDER CANDIDATE SELECTED — GITHUB; exact private resource, receipt store and independence proof UNSELECTED** |
+| Independent witness | Owner selected GitHub as provider candidate on 2026-09-24. Official GitHub documentation states scheduled workflows have a five-minute minimum and may be delayed or dropped; event-driven runs cannot detect absent events. A private repository could be an archive, but GitHub Actions alone is not an accepted bounded-latency witness. Existing public manual repository is excluded. | **GITHUB SELECTED AS CANDIDATE; archival-vs-independent-receiver disposition, exact private resource, receipt-time contract and failure-domain proof UNSELECTED; see F4 feasibility assessment** |
 | Transport, authentication and egress | No endpoint, protocol, credential, network rule or secret provisioning approved | **UNSELECTED** |
 | Sampling/heartbeat cadence, timeout, freshness and gap semantics | Historical producer cadence is not transferable; no approved values | **UNSELECTED** |
 | Start mode | User-originated concept mentioned starting with EAGLE; F2/F3 do not authorize boot-start, scheduled task or recurring execution | **UNSELECTED** |
@@ -72,9 +72,10 @@ scope, not as live runtime authorization.
    components.
 3. Prove every selected source is available through an exact read-only interface;
    exclude direct device probing and command-capable credentials.
-4. For the selected two-plane scope, provision and assess a separate private
-   GitHub resource (not the public manual repository) and demonstrate a durable
-   receipt store outside EAGLE's host, power and network failure domains.
+4. Close `BKL-043-F4-GITHUB-WITNESS-FEASIBILITY-2026-09-25.md`: owner selects
+   the best-effort GitHub archive limitation or a separate independent receiver;
+   then demonstrate a durable receipt store outside EAGLE's host, power and
+   network failure domains.
 5. Define data minimization, privacy/security controls, retention/deletion,
    resource stop limits, observation window and review checkpoints.
 6. Specify install/start/stop/uninstall/rollback and recovery verification.
@@ -110,6 +111,7 @@ safety_authority=NONE
 - `docs/architecture/validation/BKL-043-F2-SYSTEM-DETECTION-ARCHITECTURE-2026-09-24.md`
 - `docs/architecture/validation/BKL-043-F1-SOURCE-DISCOVERY-2026-09-24.md`
 - `docs/architecture/validation/BKL-043-F1-POPULATION-AND-CONTRACT-GAP-DISCOVERY-2026-09-24.md`
+- `docs/architecture/validation/BKL-043-F4-GITHUB-WITNESS-FEASIBILITY-2026-09-25.md`
 - `docs/status/index.md` — identifies the documented EAGLE evidence host as
   `EAGLE30154`; does not establish OS/build or validate current machine identity.
 - `docs/architecture/telemetry/evidence/BKL-030-EAGLE-Health-Source-Discovery-2026-09-03.md`
