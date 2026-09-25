@@ -6,8 +6,8 @@
 | Package | AP-001 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch | `main` |
-| Stato | Active baseline — conditions open |
-| Data | 04/09/2026 |
+| Stato | Active baseline — BKL-043 pre-pilot conditions open |
+| Data | 25/09/2026 |
 | Roadmap autorevole | AMP-002 per i package successivi ad AP-006 |
 
 ## 1. Regole
@@ -27,12 +27,12 @@
 | CAP-02 Historical Analytics Dashboard | Implemented, continuità non certificata | PAA-002 v1.1 / AP-011 | dashboard esistente; ANA-KPI-001 target | ARB-002 / ARB-011 | Migrazione al semantic layer; C02/C07 aperte |
 | CAP-03 Data Warehouse | Implemented, consumer incompleto | PAA-002 v1.1 / AP-002 / AP-011 | warehouse baseline | ARB-004 / ARB-006 / ARB-011 | Recovery, lineage e serving evidence aperte |
 | CAP-04 Warehouse metadata and validation | Implemented, release non certificata | PAA-002 v1.1 / AP-011 | ANA-PIPE-001 quality model | ARB-004 / ARB-006 / ARB-011 | Quality suite da provare |
-| CAP-08 Live telemetry | Planned | AP-004 / AP-008 / AP-011 / AP-012 | reference architectures | ARB-006 / ARB-011 / ARB-012; nessuna review AP-008 | Protocollo, freshness e pilot richiesti |
+| CAP-08 Live telemetry | Bounded read-only implemented | AP-004 / AP-008 / AP-011 / AP-012 | Observatory Status and EAGLE Health relay/portal | AP-008 closure; ARB-006 / ARB-011 / ARB-012 | Reliability collection and SLI/SLO remain separately gated |
 | CAP-15 AllSky integration | Planned | AP-008 / AP-011 / AP-012 | adapter candidate e ingestion target | ARB-011 / ARB-012; nessuna review AP-008 | Contratti e health richiesti |
 | CAP-16 Observatory Automation | Partial | AP-003 / AP-009 / AP-010 / AP-012 | target architecture e DSOC command boundary | ARB-005 / ARB-009 / ARB-010 / ARB-012 | Runtime command enablement non autorizzato |
 | CAP-17 Local safety interlocks | Partial | AP-003 / AP-010 / AP-012 | SAF-REF-001 / SAF-CAT-001 / OPSC-REF-001 | ARB-010 / ARB-012 | Authority preservata; evidence aperta |
-| CAP-18 AI boundary contracts | Prepared | AP-008 / AP-010 / AP-011 / AP-012 | integration, safety, analytics e command boundary | ARB-010 / ARB-011 / ARB-012; nessuna review AP-008 | AI advisory only |
-| CAP-19 AI Assistant | Planned | AP-010 / AP-011 / AP-012 | ANA-GOV-001 / OPSC-CMD-001 | ARB-010 / ARB-011 / ARB-012 | Nessun ruolo autorizzativo o command path |
+| CAP-18 AI boundary contracts | Bounded read-only implemented | AP-008 / AP-010 / AP-011 / AP-012 / BKL-042 | integration, safety, analytics and governed retrieval boundary | AP-008 and BKL-042 closure evidence | AI advisory only; no tool, command or safety authority |
+| CAP-19 AI Assistant | Accepted bounded read-only | BKL-042 / AP-010 / AP-011 / AP-012 | governed retrieval relay, citations and provenance | BKL-042 closure and owner-witnessed acceptance | Excluded sources and experimental context remain explicit; no command path |
 | CAP-31 Architecture Governance | Partial | AP-001 | metamodel e registro | ARB-003…ARB-012 | Condizioni aperte |
 | CAP-32 Documentation Governance | Partial | AP-001 | MkDocs e standard | ARB-003…ARB-012 | Automazione progressiva |
 | CAP-33 Release Quality Governance | Partial | AP-001 | release note | ARB-003…ARB-012 | Mapping incompleto |
@@ -55,10 +55,10 @@
 | AP-005 | Identity and Remote Security | package e reference architecture | ARB-007 | Approved with conditions, 91/100 |
 | AP-006 | Configuration and Asset Management | package e reference architecture | ARB-008 | Approved with conditions, 92/100 |
 | AP-007 | Operations and Service Management | AP-007, OPS-REF-001 | ARB-AP007-001; RQ-AP007-001 | Accepted with conditions; not operationally verified |
-| AP007-BASELINE-RECON-001 | AP-007 Baseline Reconciliation and Ownership Bootstrap | AP-007, OPS-REF-001 | Nessuna registrata | Baseline reconciled; review candidate |
-| DSG-BASELINE-2026-09-21 | Current AP-007 continuity baseline | AP007-BASELINE-RECON-001; AP-007; OPS-REF-001 | Nessuna registrata | Current governed baseline; not operationally verified |
-| DSG-HO-AP007-2026-09-21 | AP-007 compact continuity handover | DSG-BASELINE-2026-09-21 | Nessuna registrata | Current continuity pointer; ARB/RQ next |
-| AP-008 | Enterprise Integration | AP-008, INT-REF-001, INT-CAT-001, INT-SESSION-METADATA-PILOT-001, AP008-REM-SESSIONCOMPLETED-2026-09-22, ARB-AP008-RR-2026-09-22, AP008-LIVE-READINESS-GATE-2026-09-22, DSG-SOL-SESSIONCOMPLETED-001 | ARB-AP008; ARB-AP008-RR-2026-09-22 | Owner: Massimo Mainini; shadow pilot Approved with Conditions; live integration NOT_READY; transport proposal pending approval |
+| AP007-BASELINE-RECON-001 | AP-007 Baseline Reconciliation and Ownership Bootstrap | AP-007, OPS-REF-001 | ARB-AP007-001; RQ-AP007-001 | Historical reconciliation; AP-007 accepted with conditions |
+| DSG-BASELINE-2026-09-25 | Current BKL-043 continuity baseline | BKL-043 F1/F2/F3/F4 evidence | No new architecture acceptance | Current governed baseline; pre-pilot only |
+| DSG-HO-BKL043-F4-2026-09-25 | BKL-043 compact continuity handover | DSG-BASELINE-2026-09-25 | No new architecture acceptance | Current continuity pointer; F3 findings and F4 exact decision next |
+| AP-008 | Enterprise Integration | AP-008, INT-REF-001 and bounded read-only relay/publisher/consumer evidence | AP-008 closure | Closed / accepted / post-merge verified within bounded read-only scope; command path remains absent |
 | AP-009 | Enterprise Infrastructure | AP-009, INF-REF-001 | ARB-009 | Approved with conditions, 94/100 |
 | AP-010 | Enterprise Safety Assurance | AP-010, SAF-REF-001, SAF-CAT-001 | ARB-010 | Approved with conditions, 97/100 |
 | AP-011 | Analytics Platform | AP-011, ANA-REF-001, ANA-PIPE-001, ANA-KPI-001, ANA-GOV-001 | ARB-011 | Approved with conditions, 97/100 |
@@ -76,10 +76,12 @@
 | ID | Artefatto | Package | Stato | Evidence |
 |---|---|---|---|---|
 | OPS-REF-001 | Operations and Service Management Reference Architecture | AP-007 | ARB-AP007-001; RQ-AP007-001 | Accepted with conditions |
-| INT-REF-001 | Enterprise Integration Reference Architecture | AP-008 | Approved with Conditions — runtime unverified | documentale; AP008 live gates open |
-| INT-CAT-001 | Integration Contract Catalog | AP-008 | Governed candidate catalog — live contracts not active | nessun runtime test |
-| INT-SESSION-METADATA-PILOT-001 | Read-only Session Metadata Integration Pilot | AP-008 | READY_WITH_CONDITIONS — repository shadow only | accountable owner Massimo Mainini; real-session event, schema/compatibility test and readiness record; adapter/security/rollback/live reconciliation open |\n| DSG-SOL-SESSIONCOMPLETED-001 | SessionCompleted Read-only Transport Proposal | AP-008 | Proposed — not operationally authorized | outbound HTTPS relay pattern; security, owners, compatibility and rollback gates open |\n| AP008-SESSIONCOMPLETED-LIVE-SHADOW-OAT-2026-09-22 | SessionCompleted Live Shadow OAT Plan | AP-008 | NOT_EXECUTED | EAGLE-to-relay canary, duplicate, read-back, negative and rollback evidence required |
-| ARB-AP008 | Independent Review of AP-008 | AP-008 | Completed — Rework Required | 73/100; conditions open; no runtime authorization |
+| INT-REF-001 | Enterprise Integration Reference Architecture | AP-008 | Accepted bounded read-only integration baseline | Closure `docs/project/AP-008-CLOSURE-2026-09-22.md`; no command or Safety Authority |
+| INT-CAT-001 | Integration Contract Catalog | AP-008 | Bounded read-only contracts implemented | Consumer/publisher evidence retained; new command contracts remain separately governed |
+| INT-SESSION-METADATA-PILOT-001 | Read-only Session Metadata Integration Pilot | AP-008 | Closed within AP-008 bounded scope | SessionCompleted remains read-only; no command or authority transfer |
+| DSG-SOL-SESSIONCOMPLETED-001 | SessionCompleted Read-only Transport Proposal | AP-008 | Superseded by accepted bounded AP-008 closure | Retained as historical design evidence |
+| AP008-SESSIONCOMPLETED-LIVE-SHADOW-OAT-2026-09-22 | SessionCompleted Live Shadow OAT Plan | AP-008 | Executed within bounded AP-008 closure | Does not authorize command, remediation or Safety Authority |
+| ARB-AP008 | Independent Review of AP-008 | AP-008 | Historical review superseded by closure evidence | Closure is bounded read-only, not a general runtime authorization |
 | INF-REF-001 | Enterprise Infrastructure Reference Architecture | AP-009 | Approved with conditions via ARB-009 | evidence operativa aperta |
 | SAF-REF-001 | Enterprise Safety Reference Architecture | AP-010 | Approved with conditions via ARB-010 | scenario validation aperta |
 | SAF-CAT-001 | Safety Hazard and State Catalog | AP-010 | Initial governed catalog | owner, risk ed evidence da completare |
@@ -106,9 +108,14 @@
 | BKL-036-F2-ENV-001 | Evidence Envelope and Descriptive Health Projection | BKL-036 | Accepted / Post-Merge Verified | PR #312, merge `0a4f3de87ccf94c2132d3adac2239a52f6a5f475`; descriptive-only projection; action authority NONE |
 | BKL-036-F2-VAL-001 | Evidence Envelope Validation Plan | BKL-036 | Accepted / Post-Merge Verified | 13/13 exact-head and 14/14 post-merge SUCCESS; no live traffic authorized |
 | BKL-036-F3-SCORE-001 | Archived Evidence Health Score | BKL-036 | Accepted / Post-Merge Verified | Deterministic 0–100 equal-weight policy; all seven domains required; current projection `UNAVAILABLE`; PR #314 merged |
-| BKL-036-F3-VAL-001 | Archived Evidence Score Validation Plan | BKL-036 | Proposed | Fail-closed score and public non-live labeling; no live telemetry or command path |
+| BKL-036-F3-VAL-001 | Archived Evidence Score Validation Plan | BKL-036 | Accepted / Post-Merge Verified | Fail-closed score and public non-live labeling; no live telemetry or command path |
 | BKL-036-F4-ARCH-001 | Governed Telemetry Acquisition and Repository Archival | BKL-036 | Accepted / Post-Merge Verified | PR #320, merge `c58f0cb241e1b8432ec81c17d9d6b967d023e102`; seven-domain archived snapshot contract, deterministic validator and repository archive command |
 | BKL-036-F4-VAL-001 | Governed Telemetry Acquisition and Archival Validation Plan | BKL-036 | Accepted / Post-Merge Verified | PR #320, merge `c58f0cb241e1b8432ec81c17d9d6b967d023e102`; boundary enforcement and bounded negative tests passed; live source access not executed |
+| BKL-042-CLOSURE-2026-09-24 | AI Observatory Assistant bounded closure | BKL-042 | Closed / Accepted | Owner-witnessed v3 OAT; server-side retrieval, citation and provenance are bounded; excluded sources remain excluded |
+| BKL-043-F1 | Reliability source/population discovery | BKL-043 | Completed repository-only gate | No eligible operational population for availability, MTBF, MTTR, failure budget or numeric SLI/SLO |
+| BKL-043-F2 | Reliability two-plane logical architecture | BKL-043 | Owner-approved design-only gate | Local read-only observer and independent witness design; no implementation or runtime authority |
+| BKL-043-F3 | Read-only pilot readiness | BKL-043 | Repository-only tests passed; review findings pending | Ten offline envelope tests; not live or pilot evidence |
+| BKL-043-F4 | Exact pilot runtime authorization | BKL-043 | Preparation-only decision draft | Scope/target selected; all remaining exact runtime fields and independent reviews are blocking |
 
 ## 5. Data Product Candidate Register
 
@@ -134,8 +141,8 @@
 | ABC-001 | Baseline certificate | Conditionally certified |
 | AMP-002 | Roadmap AP-007…AP-015 | Approved for planning |
 | AP-001…AP-006 / ARB-003…ARB-008 | Foundation packages | Approved with conditions |
-| AP-007 / OPS-REF-001 | Operations | Proposed for independent ARB review |
-| AP-008 / INT-REF-001 / INT-CAT-001 | Integration | Proposed for independent ARB review |
+| AP-007 / OPS-REF-001 | Operations | Accepted with conditions; not operationally verified |
+| AP-008 / INT-REF-001 / INT-CAT-001 | Integration | Closed / accepted / post-merge verified in bounded read-only scope |
 | AP-009 / INF-REF-001 / ARB-009 | Infrastructure | Approved with conditions; C01…C05 open |
 | AP-010 / SAF-REF-001 / SAF-CAT-001 / ARB-010 | Safety assurance | Approved with conditions; C01…C05 open |
 | AP-011 / ANA-REF-001 / ANA-PIPE-001 / ANA-KPI-001 / ANA-GOV-001 / ARB-011 | Enterprise Analytics Platform | Approved with conditions; C01…C07 open |
@@ -153,6 +160,8 @@
 | TR-G12 | fault injection non provata | capability non promuovibili | ARB-010-C04 |
 | TR-G16 / ARB-012-C01/C05 | command authorization non validata runtime | comandi non abilitabili | OPSC-CMD-001 command e security scenarios |
 | TR-G19 | SLI/SLO/routing/escalation non deliberati | operations non certificabili | AP-007 pilot e AP-012 validation |
+| TR-G93 | BKL-043 exact pilot decision incompleta | nessun pilot/runtime può essere autorizzato | completare F4: identity, artifact, sources, witness, transport, retention, rollback e OAT |
+| TR-G94 | BKL-043 witness independence non dimostrata | affidabilità cross-domain non dimostrabile | selezionare risorsa privata e durable receipt store, poi provare l'indipendenza da EAGLE/power/network |
 | TR-G38 / ARB-011-C02 | ownership KPI DSAP non definita | dashboard ambigua | ANA-KPI-001 owner assignment |
 | TR-G79 / ARB-011-C01 | data product owner DP-001…DP-005 non nominati | qualità e lifecycle non attribuibili | enterprise data catalog |
 | TR-G80 / ARB-011-C03 | quality gate suite non eseguita | dati errati pubblicabili | ANA-PIPE-001 validation |

@@ -30,7 +30,7 @@ let identitiesCovered = 0;
 let materialRelationsCovered = 0;
 
 for (const [id, title, packageId] of rows) {
-  const expectedType = id.startsWith('ARB-') ? 'evidence' : 'component';
+  const expectedType = /^(ARB-|.*(?:CLOSURE|OAT).*)/.test(id) ? 'evidence' : 'component';
   const entity = entities.get(id);
   if (!entity) {
     failures.push(`Missing ${expectedType} entity: ${id}`);

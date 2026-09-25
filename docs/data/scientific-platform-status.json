@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "updatedAt": "2026-09-24",
+  "updatedAt": "2026-09-25",
   "generatedFrom": {
     "roadmap": "docs/data/roadmap.json",
     "discovery": "docs/architecture/validation/AP-013-Session-Discovery-Execution-Evidence.md",
@@ -20,7 +20,7 @@
       "status": "active"
     },
     "nextMilestone": "BKL-043",
-    "target": "BKL-043 F3/F4 exact pilot authorization gates. F3 offline envelope tests pass locally and in Developer Foundation post-merge run 36021635340 on b2aa86d790644cf6791ffa413d23b80701c72170. Massimo Mainini approved preparation of a separate exact pilot authorization on 2026-09-24; F3 review findings remain pending. F4 runtime authorization draft: docs/architecture/validation/BKL-043-F4-EXACT-PILOT-RUNTIME-AUTHORIZATION-DRAFT-2026-09-24.md. All exact runtime fields remain unselected; the draft conveys no live access, installation, polling, persistence, transport, boot trigger, deployment or runtime authority. The F3 specification addresses source eligibility, trust boundaries, coverage/unknown semantics, data minimization, offline scenarios, non-interference, rollback and exact decisions needed for a separate runtime gate. The accepted F2 two-plane logical baseline is documented in docs/architecture/validation/BKL-043-F2-SYSTEM-DETECTION-ARCHITECTURE-2026-09-24.md. Historical sessions remain descriptive; N.I.N.A.-observed attempts exclude planned sessions with no N.I.N.A. log activity. AP-007 requires a measured baseline before SLO deliberation. Do not invent thresholds or interpret unknown as healthy. No scheduler, automatic target selection, device command or Safety Authority is authorized; command_authority=NONE, execution_authority=NONE, safety_authority=NONE. BKL-050 remains the last approved milestone after BKL-043, BKL-049 and other approved open roadmap work."
+    "target": "BKL-043 F3/F4 exact pilot authorization gates. F3 offline envelope tests pass locally and in Developer Foundation post-merge run 36021635340 on b2aa86d790644cf6791ffa413d23b80701c72170; review findings remain pending. F4 runtime authorization draft: docs/architecture/validation/BKL-043-F4-EXACT-PILOT-RUNTIME-AUTHORIZATION-DRAFT-2026-09-24.md. The two-plane scope and target host EAGLE30154 are selected; GitHub is a witness-provider candidate and Leonardo Di Egidio is nominated as independent reviewer. This is not runtime authorization: current host/OS attestation, identity, artifact, sources, private witness resource, receipt store, transport, cadence, persistence, retention, start mode, rollback and OAT criteria remain unselected. The F3 specification addresses source eligibility, trust boundaries, coverage/unknown semantics, data minimization, offline scenarios, non-interference, rollback and exact decisions needed for a separate runtime gate. Historical sessions remain descriptive; N.I.N.A.-observed attempts exclude planned sessions with no N.I.N.A. log activity. AP-007 requires a measured baseline before SLO deliberation. Do not invent thresholds or interpret unknown as healthy. No scheduler, automatic target selection, device command or Safety Authority is authorized; command_authority=NONE, execution_authority=NONE, safety_authority=NONE. BKL-050 remains the last approved milestone after BKL-043, BKL-049 and other approved open roadmap work."
   },
   "architecture": {
     "ap013": {

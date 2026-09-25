@@ -318,7 +318,7 @@
       "id": "BKL-036",
       "type": "backlog_item",
       "title": "Observatory Health Score",
-      "status": "In Progress",
+      "status": "Done",
       "authority": "repository_authority",
       "source_locator": {
         "path": "docs/project/BACKLOG.md"
@@ -766,7 +766,7 @@
     },
     {
       "id": "BKL-036-CLOSURE-001",
-      "type": "component",
+      "type": "evidence",
       "title": "BKL-036 Bounded Capability Closure",
       "status": "Accepted / Post-Merge Verified",
       "authority": "repository_authority",
@@ -908,7 +908,7 @@
       "id": "BKL-034-F2",
       "type": "backlog_item",
       "title": "Governed Image Ingestion and Metadata Archive",
-      "status": "In Progress",
+      "status": "Done",
       "authority": "repository_authority",
       "source_locator": {
         "path": "docs/project/BACKLOG.md"
@@ -918,10 +918,70 @@
       "id": "BKL-042",
       "type": "backlog_item",
       "title": "AI Observatory Assistant",
+      "status": "Done",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/project/BACKLOG.md"
+      }
+    }
+    ,{
+      "id": "BKL-043",
+      "type": "backlog_item",
+      "title": "Observatory Reliability Engineering",
       "status": "In Progress",
       "authority": "repository_authority",
       "source_locator": {
         "path": "docs/project/BACKLOG.md"
+      }
+    }
+    ,{
+      "id": "BKL-042-CLOSURE-2026-09-24",
+      "type": "evidence",
+      "title": "AI Observatory Assistant bounded closure",
+      "status": "Closed / Accepted",
+      "authority": "evidence_authority",
+      "source_locator": {
+        "path": "docs/project/BKL-042-CLOSURE-2026-09-24.md"
+      }
+    }
+    ,{
+      "id": "BKL-043-F1",
+      "type": "component",
+      "title": "Reliability source/population discovery",
+      "status": "Completed repository-only gate",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/validation/BKL-043-F1-SOURCE-DISCOVERY-2026-09-24.md"
+      }
+    }
+    ,{
+      "id": "BKL-043-F2",
+      "type": "component",
+      "title": "Reliability two-plane logical architecture",
+      "status": "Owner-approved design-only gate",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/validation/BKL-043-F2-SYSTEM-DETECTION-ARCHITECTURE-2026-09-24.md"
+      }
+    }
+    ,{
+      "id": "BKL-043-F3",
+      "type": "component",
+      "title": "Read-only pilot readiness",
+      "status": "Repository-only tests passed; review findings pending",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/validation/BKL-043-F3-READONLY-PILOT-READINESS-GATE-2026-09-24.md"
+      }
+    }
+    ,{
+      "id": "BKL-043-F4",
+      "type": "component",
+      "title": "Exact pilot runtime authorization",
+      "status": "Preparation-only decision draft",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/validation/BKL-043-F4-EXACT-PILOT-RUNTIME-AUTHORIZATION-DRAFT-2026-09-24.md"
       }
     }
   ],
@@ -1467,10 +1527,10 @@
       }
     },
     {
-      "id": "rel:BKL-036-CLOSURE-001:documents:BKL-036",
-      "type": "documents",
-      "from": "BKL-036-CLOSURE-001",
-      "to": "BKL-036",
+      "id": "rel:BKL-036:evidenced_by:BKL-036-CLOSURE-001",
+      "type": "evidenced_by",
+      "from": "BKL-036",
+      "to": "BKL-036-CLOSURE-001",
       "version": "1.0",
       "source_locator": {
         "path": "docs/project/BKL-036-CLOSURE-2026-09-19.md"
@@ -1577,10 +1637,10 @@
       }
     },
     {
-      "id": "rel:AP-008:relates_to:DSG-SOL-SESSIONCOMPLETED-001",
-      "type": "relates_to",
-      "from": "AP-008",
-      "to": "DSG-SOL-SESSIONCOMPLETED-001",
+      "id": "rel:DSG-SOL-SESSIONCOMPLETED-001:documents:AP-008",
+      "type": "documents",
+      "from": "DSG-SOL-SESSIONCOMPLETED-001",
+      "to": "AP-008",
       "version": "1.0",
       "source_locator": {
         "path": "docs/architecture/traceability-register.md"
@@ -1591,6 +1651,66 @@
       "type": "evidenced_by",
       "from": "DSG-SOL-SESSIONCOMPLETED-001",
       "to": "AP008-SESSIONCOMPLETED-LIVE-SHADOW-OAT-2026-09-22",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:AP-008:evidenced_by:AP008-SESSIONCOMPLETED-LIVE-SHADOW-OAT-2026-09-22",
+      "type": "evidenced_by",
+      "from": "AP-008",
+      "to": "AP008-SESSIONCOMPLETED-LIVE-SHADOW-OAT-2026-09-22",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:BKL-042:evidenced_by:BKL-042-CLOSURE-2026-09-24",
+      "type": "evidenced_by",
+      "from": "BKL-042",
+      "to": "BKL-042-CLOSURE-2026-09-24",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:BKL-043-F1:documents:BKL-043",
+      "type": "documents",
+      "from": "BKL-043-F1",
+      "to": "BKL-043",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:BKL-043-F2:documents:BKL-043",
+      "type": "documents",
+      "from": "BKL-043-F2",
+      "to": "BKL-043",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:BKL-043-F3:documents:BKL-043",
+      "type": "documents",
+      "from": "BKL-043-F3",
+      "to": "BKL-043",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/traceability-register.md"
+      }
+    },
+    {
+      "id": "rel:BKL-043-F4:documents:BKL-043",
+      "type": "documents",
+      "from": "BKL-043-F4",
+      "to": "BKL-043",
       "version": "1.0",
       "source_locator": {
         "path": "docs/architecture/traceability-register.md"

@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 6.2 |
+| Versione | 6.3 |
 | Stato | Active |
-| Data | 21/09/2026 |
+| Data | 25/09/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | AP-007 baseline reconciled / review candidate; BKL-036 repository-only bounded; S10 production runtime `UNAVAILABLE` |
+| Current governed package | BKL-043 F3/F4 exact pilot authorization preparation; S10 production runtime `UNAVAILABLE` |
 
 ## 1. Scopo
 
@@ -16,8 +16,8 @@ Mappa domini, authority, projection e percorsi di conoscenza. Non sostituisce le
 ## 2. Continuity hierarchy
 
 1. `AI_BOOTSTRAP.md`;
-2. `docs/project/HANDOVER_2026-09-21-AP-007.md`;
-3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-21.md`;
+2. `docs/project/HANDOVER_2026-09-25-BKL043-F4.md`;
+3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-25.md`;
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`;
 5. questo Knowledge Map;
 6. `DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md`;
@@ -31,7 +31,7 @@ Handover e baseline precedenti restano snapshot storici e non prevalgono sulla b
 
 ## 2.1 Current continuity reconciliation
 
-AP-007 è il package corrente, **Baseline reconciled — review candidate**, con baseline `main@6288bd1a3129ebf519cd1a66868cbe7b77514de9`. La catena corrente è `AI_BOOTSTRAP.md` → `HANDOVER_2026-09-21-AP-007.md` → `CURRENT_TECHNICAL_BASELINE_2026-09-21.md` → `AP007-BASELINE-RECON-001` → AP-007/OPS-REF-001 → Traceability Register. Il prossimo gate è ARB indipendente, seguito da Release Quality. Nessuno stato operativo è promosso da questa riconciliazione.
+AP-007 è Accepted with conditions come architecture baseline e AP-008 è chiuso nel suo perimetro bounded read-only. La catena corrente è `AI_BOOTSTRAP.md` → `HANDOVER_2026-09-25-BKL043-F4.md` → `CURRENT_TECHNICAL_BASELINE_2026-09-25.md` → roadmap source → BKL-043 F1/F2/F3/F4 evidence → Traceability Register. BKL-043 è il package corrente: F1/F2 sono completati, F3 è repository-only e F4 è una decision draft. Nessuno stato operativo è promosso da questa riconciliazione.
 
 ## 3. Authority / projection map
 
@@ -49,11 +49,13 @@ BKL-015, BKL-044, BKL-035, BKL-040, BKL-038, BKL-039, BKL-045, BKL-037, BKL-041 
 
 Session Comparison è read-only/descriptive-only. Confronta esclusivamente dimensioni/unità/provenance compatibili, conserva exclusions e non crea ranking, score, threshold, recommendation o authority.
 
-## 6. BKL-046 closed and BKL-031 current
+## 6. Current accepted capability baseline
 
 BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministica advisory read-only tramite PR #181 e merge `3d680dd3a05c70b2a4654c4187c293e36b0af4a7`. Scientific effectiveness resta `NOT_EVALUABLE_CURRENT_EVIDENCE`, production `NOT_READY_FOR_PRODUCTION`, `aiModelImplemented=false`; nessun apply path o Safety Authority è autorizzato.
 
 BKL-031 è **CLOSED / ACCEPTED / POST-MERGE VERIFIED** tramite PR #301 e merge `4a509d574a004fe7fb72bc6c678c9e7f71fe821f`. F1/F2, F3-A1/A2/A3/B/C, F4-A/B/C/D, F5/F6/F7/F8 e F9 sono accettati; F3-C are Accepted / Post-Merge Verified; F4-A and ADR-011 are Accepted / Post-Merge Verified; F8 is Accepted / Post-Merge Verified. F9 ha verificato il refresh repeatable MeteoHub, astronomia della notte corrente, suitability setup/target, ranking esplicabile e pagina pubblica di Manciano. Budget provider storico `2/2_EXHAUSTED`; budget sito protetto `1/1_EXHAUSTED`; Recurring provider traffic is not authorized. Il budget monetario resta €0, senza limite giornaliero imposto dal workflow, fail-closed e GRIB effimeri senza retention. BKL-032 conserva la readiness/go-no-go authority; local physical interlocks remain Safety Authority; S10 production runtime is `UNAVAILABLE`; il planner resta read-only/advisory senza scheduler, selezione automatica, device command o Safety Authority.
+
+BKL-042 è CLOSED / ACCEPTED come retrieval advisory bounded read-only. BKL-043 è il package corrente: F1 source/population discovery e F2 two-plane design sono completati; F3 è repository-only; F4 è una decision draft e non autorizza un runtime.
 
 ## 7. BKL-032 closed baseline
 
@@ -61,11 +63,11 @@ BKL-032 is closed through PR #304 merge `7e38453b2e499fe577efa0231aeb7bb06329016
 
 ## 8. BKL-036 closure state
 
-BKL-036 source-discovery and semantic-contract gate is **CLOSED / ACCEPTED / POST-MERGE VERIFIED** through PR #306 merge `b0d3a8b1a10ce71610e4592d5c876e9fd0c8d7c5`; the broader capability remains current for separately governed follow-on source mapping and policy. It does not introduce a numeric health score, thresholds, weights, Safety Score, remediation, runtime transport or device commands. BKL-031, BKL-032 and local physical interlocks remain separate authorities. The closure record is `docs/project/BKL-036-CLOSURE-2026-09-18.md`.
+BKL-036 is **CLOSED / ACCEPTED / POST-MERGE VERIFIED** for its bounded evidence and live read-only gates. It does not transfer command, remediation, scheduler or Safety Authority. BKL-031, BKL-032 and local physical interlocks remain separate authorities. Closure records are `docs/project/BKL-036-CLOSURE-2026-09-19.md` and `docs/project/BKL-036-F5-CLOSURE-2026-09-23.md`.
 
 ## 9. Roadmap sequence
 
-`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 CLOSED / ACCEPTED -> BKL-032 CLOSED / ACCEPTED -> BKL-036 source-discovery gate CLOSED / ACCEPTED -> BKL-036 follow-on -> BKL-033 -> BKL-034 -> BKL-042 -> BKL-043 -> BKL-014/AP-015`.
+`... -> BKL-037 CLOSED -> BKL-041 CLOSED -> BKL-046 CLOSED -> BKL-031 CLOSED / ACCEPTED -> BKL-032 CLOSED / ACCEPTED -> BKL-036 CLOSED -> BKL-033 CLOSED -> BKL-034 CLOSED -> BKL-042 CLOSED / ACCEPTED -> BKL-043 CURRENT -> BKL-049 PLANNED -> BKL-050 PLANNED`.
 
 ## 10. CI/CD e publishing
 
@@ -119,6 +121,7 @@ Nessun consumer analytics, comparison, scoring, planner o AI può comandare appa
 | 5.9 | 17/09/2026 | F4-B three-schema contract, synthetic TEST/NONE fixture and 24-case fail-closed validator prepared with zero provider traffic |
 | 6.0 | 17/09/2026 | PR #265 F4-B integrated and post-merge verified; 26/26 tests and 14/14 workflows; F4-C acquisition-gate preparation promoted |
 | 6.1 | 17/09/2026 | F8 Accepted/Post-Merge Verified via PR #279; continuity riallineata a handover/baseline 17/09 e F9 repeatable current-night planner closure promosso come unico successore |
+| 6.3 | 25/09/2026 | Continuità riallineata a BKL-042 closed/accepted e BKL-043 F3/F4 preparation; nessun runtime BKL-043 autorizzato |
 
 Le sezioni di checkpoint seguenti sono snapshot storici. Eventuali formulazioni come “current” o “next” valgono al momento del relativo checkpoint e non prevalgono sulla baseline corrente definita nelle sezioni 2, 6 e 7.
 

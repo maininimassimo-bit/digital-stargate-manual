@@ -8,6 +8,13 @@
 | Related proposal | `BKL-043-F3-PILOT-SPECIFICATION-DRAFT-2026-09-24.md` |
 | Authority | `command_authority=NONE`, `execution_authority=NONE`, `safety_authority=NONE` |
 
+> **Continuity update — 25/09/2026.** This is the historical F3 disposition that
+> authorized preparation only. For the current partial owner selections, use
+> `BKL-043-F4-EXACT-PILOT-RUNTIME-AUTHORIZATION-DRAFT-2026-09-24.md`, which
+> records the selected two-plane scope, target `EAGLE30154`, GitHub witness-provider
+> candidate and nominated reviewer. F4 remains a draft and no runtime authorization
+> is created by either record.
+
 ## Decision requested
 
 Select one disposition after reviewing the repository-only specification:
