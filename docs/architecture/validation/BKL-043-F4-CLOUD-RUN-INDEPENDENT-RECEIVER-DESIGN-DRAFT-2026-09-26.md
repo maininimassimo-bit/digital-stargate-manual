@@ -15,7 +15,9 @@ On 2026-09-26 Massimo Mainini stated a preference for Cloud Run as the
 independent receiver candidate. This draft turns that preference into a
 reviewable logical design for minimal, durable EAGLE health receipts. It does
 not select a Google Cloud project, region, service, identity, authentication
-mechanism, storage policy, cadence, cost ceiling or runtime configuration.
+mechanism, exact storage policy, cost ceiling or runtime configuration. Massimo
+Mainini selected a one-minute receipt cadence as a design direction on
+2026-09-26; delivery implementation and runtime remain unapproved.
 
 The receiver must remain outside the EAGLE host and its power domain. Its
 internet path still depends on EAGLE's local network and upstream connectivity;
@@ -65,11 +67,12 @@ The envelope should be allowlisted and bounded. Candidate fields are:
 | `observation_state`, `quality_state`, `reason_codes` | Small, governed observation summary; no raw logs or arbitrary command output. |
 | `payload_digest`, `producer_version`, `evidence_reference` | Integrity and parser/producer lineage without embedding private paths. |
 
-Exact enum values, maximum payload size, cadence, sequence reset behavior,
-clock-skew handling, duplicate/conflict policy and schema digest remain
-unselected. The source must not be allowed to set receiver time, receiver
-identity, a planned/unplanned classification, an incident outcome or a safety
-state.
+Exact enum values, maximum payload size, sequence reset behavior, clock-skew
+handling, duplicate/conflict policy, deadline/gap semantics and schema digest
+remain unselected. The owner-selected design cadence is one receipt per minute;
+it is not an installed schedule or runtime authorization. The source must not
+be allowed to set receiver time, receiver identity, a planned/unplanned
+classification, an incident outcome or a safety state.
 
 ## 3. Candidate Cloud Run and storage pattern
 
@@ -138,6 +141,10 @@ configuration-specific cost comparison. No numerical monthly ceiling is set by
 that decision; a one-time ceiling, billing owner and allowed products remain
 open as well.
 
+The estimate's one-receipt-per-minute workload now matches the owner's selected
+design cadence (2026-09-26). This alignment does not convert the old illustrative
+rates into a quote or authorize a schedule, endpoint, resource or charge.
+
 Before any runtime authorization Massimo must set monthly and one-time ceilings,
 allowed project/products/region, billing owner, resource caps, stop action and
 alert behavior. Budget alerts are not a guaranteed hard spending cap. Preference
@@ -160,8 +167,9 @@ any charge.
    implementation, deletion authority/evidence, object naming/idempotency,
    report-reader identity and recovery requirements. Do not enable irreversible
    Bucket Lock by default.
-5. Define exact receipt fields, source cadence, timestamp/clock-quality rules,
-   timeout/retry/outbox behavior, gap threshold and `UNKNOWN` interval rules.
+5. Owner selected a one-minute receipt cadence (2026-09-26); define exact receipt
+   fields, timestamp/clock-quality rules, timeout/retry/outbox behavior, gap
+   threshold and `UNKNOWN` interval rules.
 6. Recalculate the estimate after selecting the concrete region and configuration;
    then set the monthly ceiling as directed by the owner, plus one-time ceiling,
    billing owner, allowed products, resource limits and stop action.

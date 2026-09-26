@@ -15,9 +15,12 @@ does not select an exact hosting configuration, create resources, authorize
 charges, or replace the provider pricing calculator and billing-account review.
 On 2026-09-26 Massimo Mainini stated a preference for Cloud Run as the receiver
 candidate; this does not select its scaling mode, region, storage, or billing
-configuration. Existing account plan, remaining free quotas, region, logs,
-retention, storage volume, egress and implementation shape are not known; actual
-costs can therefore be higher or lower. No charge ceiling has been approved.
+configuration. On 2026-09-26 he selected one receipt per minute as a design
+cadence, matching the illustrative workload below; this does not authorize a
+schedule or runtime activity. The cadence implementation, payload size, region,
+logs, retention, storage volume, egress, implementation shape, account plan and
+remaining free quotas are not known; actual costs can therefore be higher or
+lower. No charge ceiling has been approved.
 
 ## Indicative monthly scenarios
 
