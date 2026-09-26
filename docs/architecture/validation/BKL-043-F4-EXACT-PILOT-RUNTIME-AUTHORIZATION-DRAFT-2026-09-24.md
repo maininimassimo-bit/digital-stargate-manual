@@ -59,7 +59,7 @@ scope, not as live runtime authorization.
 | Observation window/checkpoints | No duration or start/end selected | **UNSELECTED** |
 | Local/remote data stores | On 2026-09-26 Massimo Mainini selected single-region receipt storage as the design direction. Cloud Storage remains a candidate; no project or concrete region is selected. | **DESIGN PREFERENCE RECORDED; project, region, IAM, retention, backup/recovery and runtime approval pending** |
 | Data classification, roles, encryption and backup | Minimum-data design exists; target-specific controls not reviewed | **UNSELECTED** |
-| Retention/deletion/disposal | No duration, deletion procedure or approver selected | **UNSELECTED** |
+| Retention/deletion/disposal | On 2026-09-26 Massimo Mainini selected a 90-day retention horizon for design. Exact lifecycle/deletion mechanism, authority, evidence and disposal process remain open; no runtime retention policy is approved. | **90-DAY DESIGN HORIZON RECORDED; lifecycle, deletion and runtime approval pending** |
 | Resource budget and stop limits | Must be measured against an agreed imaging workload; no numeric limits approved | **UNSELECTED** |
 | Cost ceiling and billing controls | Preliminary scenarios are recorded in `BKL-043-F4-COST-ESTIMATE-2026-09-25.md`; account plan, quota remaining, billing owner, approved products/region and caps are unknown | **UNSELECTED — no spending or resource creation authorized** |
 | Installation, disable, uninstall and rollback | Must be exact for the selected artifact/host; not prepared for runtime | **UNSELECTED** |
