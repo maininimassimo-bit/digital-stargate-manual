@@ -37,11 +37,13 @@ witness.
 
 ```text
 EAGLE local observer (future; separately authorized)
-  -> minimal HTTPS receipt with source sequence and source-observed time
+  -> persist uniquely identified receipt to a bounded local outbox
+  -> send minimal HTTPS receipt with source sequence and source-observed time
   -> Cloud Run HTTPS receiver (Cloud Run preference; configuration unselected)
   -> validate strict receipt envelope
   -> write immutable-by-application receipt object to private durable storage
   -> acknowledge only after durable write succeeds
+  -> source marks/removes the outbox entry only after durable acknowledgement
 
 Offline reporting (future, separately governed)
   -> reads receipt history using a separate read identity
@@ -78,6 +80,29 @@ clock and delivery uncertainty. The source must not be allowed to set receiver
 time, receiver identity, a planned/unplanned classification, an incident
 outcome or a safety state.
 
+### 2.2 Local outbox and delayed delivery
+
+Massimo Mainini selected a local receipt outbox and later delivery for network
+interruptions (2026-09-26). This applies only to observations actually produced
+while the source is operating. EAGLE being powered off produces no new
+heartbeat, and a local queue does not evidence activity during that off period.
+
+The producer should persist an event before attempting transmission and retain
+its stable record ID, sequence, source-observed time and quality. It should
+retry safely until it receives a durable acknowledgement; receiver time remains
+the actual later arrival time. A delayed receipt can revise a previously
+reported candidate gap, so offline reports must preserve original observation
+and receipt timestamps and report revision/provenance rather than silently
+erasing the initial gap. A backfilled observation evidences that the producer
+recorded that observation; by itself it does not prove continuous host,
+observatory or scientific activity between records.
+
+Outbox capacity, disk-full behavior, power-loss/reboot durability, local file
+ACL/encryption, maximum offline duration, batching, backoff, duplicate handling,
+ack validation, and deletion after acknowledgement remain unselected and need
+contract testing. No local outbox implementation or installation is authorized
+by this design draft.
+
 ## 3. Candidate Cloud Run and storage pattern
 
 | Concern | Candidate design for review | Still unresolved |
@@ -87,7 +112,7 @@ outcome or a safety state.
 | Authentication | Owner-selected design direction (2026-09-26): prefer keyless Cloud Run IAM invocation through Workload Identity Federation, conditional on the EAGLE-side environment having a supported, governed identity provider. Never introduce a long-lived service-account key. | Capability is unverified and no live inspection is authorized by this draft. No identity, ingress or authentication is configured. If federation is unavailable, an application-level signed request remains an unselected fallback requiring separate threat, secret storage, rotation, replay and revocation review. |
 | Receipt storage | Owner-selected direction (2026-09-26): private Cloud Storage in a single region, with one small object per accepted receipt and a 90-day retention horizon. Use a unique object name and a create-only generation precondition (`ifGenerationMatch=0`) so retries cannot overwrite a live object. | Project and concrete region, Cloud Run co-location, object naming, lifecycle implementation/deletion controls, read identity, backup, audit and recovery remain unselected. Single-region storage reduces replication complexity/cost but leaves regional interruption as a documented availability risk. The 90-day horizon is a design preference, not a configured or runtime-approved retention policy. A conditional create does not make the bucket immutable against administrators. |
 | Runtime identity | Dedicated Cloud Run service identity with only the permissions required to create receipt objects; a separate identity would read data for offline reports. | Exact service account and IAM bindings require security review. Google’s predefined Storage Object Creator role is a candidate because it allows object creation without object read, delete or overwrite permissions; verify the final permission set against the exact write API. |
-| Write/ack behavior | Validate, assign receiver time, attempt durable object creation, then return success only after storage acknowledges the write. Return retryable failure if validation-independent infrastructure/storage errors prevent persistence. | HTTP codes, timeout, retries/backoff, replay handling, conflict evidence and client outbox behavior require contract tests. |
+| Write/ack behavior | Validate, assign receiver time, attempt durable object creation, then return success only after storage acknowledges the write. Return retryable failure if validation-independent infrastructure/storage errors prevent persistence. | HTTP codes, timeout, retries/backoff, replay handling, conflict evidence and client outbox acknowledgement contract require tests. |
 | Retention | A finite, owner-selected retention and deletion policy is required. Do not lock a bucket retention policy by default. | Retention duration, deletion authority, backup and account-disposal process remain open. Bucket Lock is irreversible and requires a separate explicit decision if ever proposed. |
 | Ingress protection | HTTPS and strict request validation, bounded body/rate, no GET/list access on the public ingest surface, and logs that exclude credentials and payload secrets. | Public versus restricted ingress, rate-limiting/WAF controls, abuse handling, credential lifecycle and privacy classification require security review. |
 
@@ -171,11 +196,12 @@ any charge.
    implementation, deletion authority/evidence, object naming/idempotency,
    report-reader identity and recovery requirements. Do not enable irreversible
    Bucket Lock by default.
-5. Owner selected a one-minute receipt cadence and an approximately two-minute
-   threshold for marking a candidate silent interval (2026-09-26); define exact
-   receipt fields, timestamp/clock-quality rules, timeout/retry/outbox behavior
-   and `UNKNOWN` interval boundaries. The threshold does not establish cause or
-   authorize a live evaluator/alert.
+5. Owner selected a one-minute receipt cadence, an approximately two-minute
+   offline candidate-gap threshold, and local outbox/backfill during network
+   interruptions (2026-09-26); define exact receipt fields, timestamp/clock
+   quality, outbox limits/durability, timeout/retry/ack behavior, report
+   revision, and `UNKNOWN` interval boundaries. These choices do not establish
+   cause or authorize local installation or a live evaluator/alert.
 6. Recalculate the estimate after selecting the concrete region and configuration;
    then set the monthly ceiling as directed by the owner, plus one-time ceiling,
    billing owner, allowed products, resource limits and stop action.

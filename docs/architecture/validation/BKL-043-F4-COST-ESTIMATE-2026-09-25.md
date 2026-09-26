@@ -19,8 +19,9 @@ configuration. On 2026-09-26 he selected one receipt per minute as a design
 cadence, matching the illustrative workload below; this does not authorize a
 schedule or runtime activity. The cadence implementation, payload size, region,
 logs, retention, storage volume, egress, implementation shape, account plan and
-remaining free quotas are not known; actual costs can therefore be higher or
-lower. No charge ceiling has been approved.
+remaining free quotas are not known; owner-selected local outbox retries and
+backfill may also create catch-up request bursts after network recovery. Actual
+costs can therefore be higher or lower. No charge ceiling has been approved.
 
 ## Indicative monthly scenarios
 
