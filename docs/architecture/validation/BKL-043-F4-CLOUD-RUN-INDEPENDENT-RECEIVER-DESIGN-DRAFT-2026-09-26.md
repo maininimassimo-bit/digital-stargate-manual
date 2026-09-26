@@ -147,10 +147,11 @@ any charge.
 2. Select ingress/authentication after an authorized identity-capability
    review; keyless federation is the preferred direction only if its
    prerequisites are proven. No live capability inspection is authorized.
-3. Owner selected single-region receipt storage (2026-09-26); choose the
-   concrete region/project and Cloud Run placement after data-residency,
-   failure-domain and latency review; also select scaling mode (minimum/maximum
-   instances).
+3. Owner selected single-region receipt storage and chose to select the
+   concrete region only after comparing cost, latency and data-residency
+   requirements (2026-09-26). No EU-only constraint or region is assumed. Then
+   select project, Cloud Run placement, failure-domain treatment and scaling
+   mode (minimum/maximum instances).
 4. Owner selected a 90-day retention horizon (2026-09-26); define lifecycle
    implementation, deletion authority/evidence, object naming/idempotency,
    report-reader identity and recovery requirements. Do not enable irreversible
