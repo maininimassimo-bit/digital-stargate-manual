@@ -78,7 +78,7 @@ state.
 | Receiver | One non-GPU Cloud Run HTTP service dedicated to minimal receipts. | Project, service name, region, ingress, concurrency, CPU/memory, request timeout, instance maximum and artifact digest. |
 | Scaling and billing | Request-based billing and zero minimum instances is the low-idle-cost candidate. This accepts cold-start and variable request latency; it cannot be described as a hard per-receipt time bound. | Whether this latency is acceptable; minimum instances change idle cost but do not create a complete end-to-end receipt-time guarantee. Exact cost model and ceilings remain open. |
 | Authentication | Owner-selected design direction (2026-09-26): prefer keyless Cloud Run IAM invocation through Workload Identity Federation, conditional on the EAGLE-side environment having a supported, governed identity provider. Never introduce a long-lived service-account key. | Capability is unverified and no live inspection is authorized by this draft. No identity, ingress or authentication is configured. If federation is unavailable, an application-level signed request remains an unselected fallback requiring separate threat, secret storage, rotation, replay and revocation review. |
-| Receipt storage | Private Cloud Storage bucket is the simplest candidate for one small object per accepted receipt. Use a unique object name and a create-only generation precondition (`ifGenerationMatch=0`) so retries cannot overwrite a live object. | Bucket/project, region or dual-region, object naming, lifecycle, retention, read identity, backup, audit and recovery are unselected. A conditional create prevents accidental overwrite; it does not make the bucket immutable against administrators. |
+| Receipt storage | Owner-selected direction (2026-09-26): private Cloud Storage in a single region, with one small object per accepted receipt. Use a unique object name and a create-only generation precondition (`ifGenerationMatch=0`) so retries cannot overwrite a live object. | Project and concrete region, Cloud Run co-location, object naming, lifecycle, retention, read identity, backup, audit and recovery remain unselected. Single-region storage reduces replication complexity/cost but leaves regional interruption as a documented availability risk. A conditional create does not make the bucket immutable against administrators. |
 | Runtime identity | Dedicated Cloud Run service identity with only the permissions required to create receipt objects; a separate identity would read data for offline reports. | Exact service account and IAM bindings require security review. Google’s predefined Storage Object Creator role is a candidate because it allows object creation without object read, delete or overwrite permissions; verify the final permission set against the exact write API. |
 | Write/ack behavior | Validate, assign receiver time, attempt durable object creation, then return success only after storage acknowledges the write. Return retryable failure if validation-independent infrastructure/storage errors prevent persistence. | HTTP codes, timeout, retries/backoff, replay handling, conflict evidence and client outbox behavior require contract tests. |
 | Retention | A finite, owner-selected retention and deletion policy is required. Do not lock a bucket retention policy by default. | Retention duration, deletion authority, backup and account-disposal process remain open. Bucket Lock is irreversible and requires a separate explicit decision if ever proposed. |
@@ -147,11 +147,12 @@ any charge.
 2. Select ingress/authentication after an authorized identity-capability
    review; keyless federation is the preferred direction only if its
    prerequisites are proven. No live capability inspection is authorized.
-3. Select region/project and Cloud Run scaling mode (including minimum and
-   maximum instances) after data residency, failure-domain and latency trade-off
-   review.
-4. Select durable-store location, replication, object naming/idempotency,
-   retention/deletion, report reader and recovery requirements.
+3. Owner selected single-region receipt storage (2026-09-26); choose the
+   concrete region/project and Cloud Run placement after data-residency,
+   failure-domain and latency review; also select scaling mode (minimum/maximum
+   instances).
+4. Define object naming/idempotency, retention/deletion, report-reader identity
+   and recovery requirements for the selected store.
 5. Define exact receipt fields, source cadence, timestamp/clock-quality rules,
    timeout/retry/outbox behavior, gap threshold and `UNKNOWN` interval rules.
 6. Set recurring/one-time cost ceilings, billing owner, allowed products,
