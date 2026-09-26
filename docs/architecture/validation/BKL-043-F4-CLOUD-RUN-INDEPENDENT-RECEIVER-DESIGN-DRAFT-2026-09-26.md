@@ -89,6 +89,11 @@ heartbeat, and a local queue does not evidence activity during that off period.
 He subsequently selected survival of source reboot and unexpected power loss as
 the outbox design objective (2026-09-26). This is a requirement to design and
 verify, not a durability guarantee established by the current draft.
+He also selected preserving all unacknowledged entries and explicitly
+signalling a full outbox rather than evicting pending receipts (2026-09-26).
+While full, the producer cannot durably enqueue new receipts; that condition
+must be visible and represented as missing evidence, never as a healthy receipt
+or inferred shutdown.
 
 The producer should persist an event before attempting transmission and retain
 its stable record ID, sequence, source-observed time and quality. It should
@@ -100,14 +105,14 @@ erasing the initial gap. A backfilled observation evidences that the producer
 recorded that observation; by itself it does not prove continuous host,
 observatory or scientific activity between records.
 
-Outbox capacity and disk-full behavior, transactional/atomic persistence and
-flush semantics, corruption detection and recovery after reboot or power loss,
-local file ACL/encryption, maximum offline duration, batching, backoff,
-duplicate handling, ack validation, and deletion after acknowledgement remain
-unselected and need contract testing. Do not claim zero-loss power-failure
-durability until the selected storage mechanism and its failure behavior are
-verified. No local outbox implementation or installation is authorized by this
-design draft.
+Outbox capacity and a durable/observable full condition, disk-full behavior,
+transactional/atomic persistence and flush semantics, corruption detection and
+recovery after reboot or power loss, local file ACL/encryption, maximum offline
+duration, batching, backoff, duplicate handling, ack validation, and deletion
+after acknowledgement remain unselected and need contract testing. Do not
+claim zero-loss power-failure durability until the selected storage mechanism
+and its failure behavior are verified. No local outbox implementation or
+installation is authorized by this design draft.
 
 ## 3. Candidate Cloud Run and storage pattern
 
