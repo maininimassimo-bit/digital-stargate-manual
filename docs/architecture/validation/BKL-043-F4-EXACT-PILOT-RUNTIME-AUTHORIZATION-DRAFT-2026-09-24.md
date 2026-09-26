@@ -106,8 +106,12 @@ scope, not as live runtime authorization.
    durable receipt store, receiver-time contract, availability/cold-start and
    failure-domain assumptions, including the EAGLE outbound path. GitHub archive
    use remains a separate unselected decision. The preference does not authorize
+<<<<<<< HEAD
    service creation, traffic, persistence or spending. Repository-only proposal:
    `BKL-043-F4-CLOUD-RUN-INDEPENDENT-RECEIVER-DESIGN-DRAFT-2026-09-26.md`.
+=======
+   service creation, traffic, persistence or spending.
+>>>>>>> origin/main
 7. Define data minimization, privacy/security controls, retention/deletion,
    resource stop limits, observation window and review checkpoints.
 8. Review the indicative cost scenarios in
