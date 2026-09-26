@@ -94,6 +94,12 @@ signalling a full outbox rather than evicting pending receipts (2026-09-26).
 While full, the producer cannot durably enqueue new receipts; that condition
 must be visible and represented as missing evidence, never as a healthy receipt
 or inferred shutdown.
+The owner selected both a byte-capacity limit and a maximum queued-age limit
+(2026-09-26). Reaching either limit must trigger the same no-eviction full
+policy; the age limit is not permission to delete older unacknowledged records.
+The numeric limits remain unselected and must be calibrated against the
+approved local-storage budget, receipt size/cadence and desired offline
+recovery horizon.
 
 The producer should persist an event before attempting transmission and retain
 its stable record ID, sequence, source-observed time and quality. It should
@@ -105,7 +111,8 @@ erasing the initial gap. A backfilled observation evidences that the producer
 recorded that observation; by itself it does not prove continuous host,
 observatory or scientific activity between records.
 
-Outbox capacity and a durable/observable full condition, disk-full behavior,
+Numeric byte and queued-age limits, a durable/observable full condition,
+disk-full behavior,
 transactional/atomic persistence and flush semantics, corruption detection and
 recovery after reboot or power loss, local file ACL/encryption, maximum offline
 duration, batching, backoff, duplicate handling, ack validation, and deletion
