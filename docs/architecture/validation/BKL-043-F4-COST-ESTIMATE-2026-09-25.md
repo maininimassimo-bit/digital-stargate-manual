@@ -11,11 +11,13 @@
 ## Purpose and limits
 
 This is an order-of-magnitude comparison to inform the exact pilot decision. It
-does not select GitHub or Google Cloud, create resources, authorize charges, or
-replace the provider pricing calculator and billing-account review. Existing
-account plan, remaining free quotas, region, logs, retention, storage volume,
-egress and implementation shape are not known; actual costs can therefore be
-higher or lower. No charge ceiling has been approved.
+does not select an exact hosting configuration, create resources, authorize
+charges, or replace the provider pricing calculator and billing-account review.
+On 2026-09-26 Massimo Mainini stated a preference for Cloud Run as the receiver
+candidate; this does not select its scaling mode, region, storage, or billing
+configuration. Existing account plan, remaining free quotas, region, logs,
+retention, storage volume, egress and implementation shape are not known; actual
+costs can therefore be higher or lower. No charge ceiling has been approved.
 
 ## Indicative monthly scenarios
 
