@@ -133,6 +133,10 @@ only: cadence, payload size, region, request duration, authentication, storage
 retention, egress, logging, monitoring, build artifacts and account quotas are
 not known. Recalculate with the official pricing calculator only after those
 inputs are defined and the billing account/remaining quotas are verified.
+Massimo Mainini selected (2026-09-26) to set the monthly ceiling after this
+configuration-specific cost comparison. No numerical monthly ceiling is set by
+that decision; a one-time ceiling, billing owner and allowed products remain
+open as well.
 
 Before any runtime authorization Massimo must set monthly and one-time ceilings,
 allowed project/products/region, billing owner, resource caps, stop action and
@@ -158,9 +162,9 @@ any charge.
    Bucket Lock by default.
 5. Define exact receipt fields, source cadence, timestamp/clock-quality rules,
    timeout/retry/outbox behavior, gap threshold and `UNKNOWN` interval rules.
-6. Set recurring/one-time cost ceilings, billing owner, allowed products,
-   resource limits and stop action; revalidate the estimate for the selected
-   configuration.
+6. Recalculate the estimate after selecting the concrete region and configuration;
+   then set the monthly ceiling as directed by the owner, plus one-time ceiling,
+   billing owner, allowed products, resource limits and stop action.
 7. Complete Leonardo Di Egidio's independent review and security/privacy review
    of the exact design; then produce a versioned exact-runtime authorization and
    wait for Massimo's explicit approval of that exact record before any runtime
