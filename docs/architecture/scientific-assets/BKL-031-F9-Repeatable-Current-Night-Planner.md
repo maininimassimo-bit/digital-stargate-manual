@@ -19,7 +19,28 @@ The scheduled GitHub workflow is defined for 09:30 and 17:15 UTC (11:30 and 19:1
 
 The durable projection retains provider, authority, model, run, retrieval time, byte count and SHA-256 per source file. It never retains raw GRIB bytes or coordinates. An 18-hour run-age ceiling and complete current-night coverage are mandatory.
 
-The projection carries forward the F8 governed setup profiles, target profiles, suitability evidence and advisory weights. Astronomy is recomputed for the current night using explicit Swiss Ephemeris Moshier mode plus sidereal-target geometry. The explicit `MOSEPH` flag prevents an implicit switch to external ephemeris files. No prior forecast or ranking is used as fallback.
+The projection carries forward the F8 governed setup profiles and target/source provenance. F9 recomputes a single versioned heuristic suitability score (`BKL031-F9-SETUP-SUITABILITY@1.0`) for every current target/setup pair so catalog and history candidates are comparable: framing 45%, filter/signal 30%, and image-scale/object-class 25%. This F9 method is distinct from the bounded F8 scores; it is a heuristic, not an optical calibration. Astronomy is recomputed for the current night using explicit Swiss Ephemeris Moshier mode plus sidereal-target geometry. The explicit `MOSEPH` flag prevents an implicit switch to external ephemeris files. No prior forecast or ranking is used as fallback.
+
+## Target ranking and lunar suitability
+
+F9 method `BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.2` keeps the existing final
+advisory weights: astronomy 60%, weather 30%, and setup suitability 10%.
+Target windows require two adjacent hourly samples to pass the common weather
+policy, solar altitude at or below −18°, and target altitude at or above 20°.
+The owner selected the 20° target-altitude floor on 2026-09-26. Targets are
+ordered by their highest eligible-window advisory score; ties are broken by the
+number of eligible two-hour windows, then setup-suitability score, then stable
+target key. Targets without a qualifying window follow those with one.
+
+The astronomy factor retains altitude, darkness, and a lunar term with the
+existing 0.55 / 0.20 / 0.25 weights. The lunar suitability factor is
+`1 - illuminatedFraction × max(0, sin(radians(clamp(moonAltitudeDeg, 0°, 90°)))) × max(0, 1 − separationDeg / 90°)`.
+It reduces the lunar contribution when the Moon is above the horizon, more
+illuminated, and closer to the target. Its per-window penalty and mean lunar
+inputs are shown for explanation. This is an advisory heuristic: it does not
+model atmospheric extinction, local obstructions, filter-specific skyglow,
+seeing, or physical setup limits and is not a scientific performance
+calibration. It does not create an observing go/no-go or device command.
 
 ## Failure behavior
 
