@@ -103,8 +103,14 @@ recovery horizon.
 For age evaluation, the owner selected using source-observed time when source
 clock quality is reliable and reporting age as uncertain otherwise
 (2026-09-26). An uncertain age must not be silently treated as within budget;
-all pending receipts remain preserved. Whether age uncertainty pauses admission
-of new receipts remains unselected.
+all pending receipts remain preserved. On 2026-09-27 the owner selected pausing
+durable admission of new receipts while queued age is uncertain. Existing
+unacknowledged entries remain intact; observations that cannot be durably
+enqueued must be surfaced as missing evidence, not held only in volatile memory
+or reported as accepted. Resume admission only after queue age can again be
+evaluated against the configured limit. This fail-closed behavior can create an
+explicit coverage gap during clock uncertainty; it does not authorize clock
+repair or deletion of pending entries.
 
 The producer should persist an event before attempting transmission and retain
 its stable record ID, sequence, source-observed time and quality. It should
@@ -117,7 +123,7 @@ recorded that observation; by itself it does not prove continuous host,
 observatory or scientific activity between records.
 
 Numeric byte and queued-age limits, a durable/observable full condition,
-admission behavior when age is uncertain, disk-full behavior,
+disk-full behavior,
 transactional/atomic persistence and flush semantics, corruption detection and
 recovery after reboot or power loss, local file ACL/encryption, maximum offline
 duration, batching, backoff, duplicate handling, ack validation, and deletion
