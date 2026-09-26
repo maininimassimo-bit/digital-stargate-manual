@@ -77,7 +77,7 @@ state.
 |---|---|---|
 | Receiver | One non-GPU Cloud Run HTTP service dedicated to minimal receipts. | Project, service name, region, ingress, concurrency, CPU/memory, request timeout, instance maximum and artifact digest. |
 | Scaling and billing | Request-based billing and zero minimum instances is the low-idle-cost candidate. This accepts cold-start and variable request latency; it cannot be described as a hard per-receipt time bound. | Whether this latency is acceptable; minimum instances change idle cost but do not create a complete end-to-end receipt-time guarantee. Exact cost model and ceilings remain open. |
-| Authentication | Prefer keyless Cloud Run IAM invocation through Workload Identity Federation only if the EAGLE-side environment has a supported, governed identity provider. Never introduce a long-lived service-account key. | EAGLE identity-provider capability is not verified and must not be inspected live under this draft. If unavailable, an application-level signed request is a fallback design requiring separate threat, secret storage, rotation, replay and revocation review. No auth pattern is selected. |
+| Authentication | Owner-selected design direction (2026-09-26): prefer keyless Cloud Run IAM invocation through Workload Identity Federation, conditional on the EAGLE-side environment having a supported, governed identity provider. Never introduce a long-lived service-account key. | Capability is unverified and no live inspection is authorized by this draft. No identity, ingress or authentication is configured. If federation is unavailable, an application-level signed request remains an unselected fallback requiring separate threat, secret storage, rotation, replay and revocation review. |
 | Receipt storage | Private Cloud Storage bucket is the simplest candidate for one small object per accepted receipt. Use a unique object name and a create-only generation precondition (`ifGenerationMatch=0`) so retries cannot overwrite a live object. | Bucket/project, region or dual-region, object naming, lifecycle, retention, read identity, backup, audit and recovery are unselected. A conditional create prevents accidental overwrite; it does not make the bucket immutable against administrators. |
 | Runtime identity | Dedicated Cloud Run service identity with only the permissions required to create receipt objects; a separate identity would read data for offline reports. | Exact service account and IAM bindings require security review. Google’s predefined Storage Object Creator role is a candidate because it allows object creation without object read, delete or overwrite permissions; verify the final permission set against the exact write API. |
 | Write/ack behavior | Validate, assign receiver time, attempt durable object creation, then return success only after storage acknowledges the write. Return retryable failure if validation-independent infrastructure/storage errors prevent persistence. | HTTP codes, timeout, retries/backoff, replay handling, conflict evidence and client outbox behavior require contract tests. |
@@ -142,23 +142,22 @@ any charge.
 
 ## 7. Decisions required to close the design gate
 
-1. Confirm the service's purpose: receipt archive and offline gap reconstruction
-   only, or a separately bounded missing-heartbeat detection/alert objective.
-2. If a time bound is required, select and review the evaluator/monitor path,
-   its trigger and failure semantics; do not infer one from a Cloud Run SLA.
-3. Select ingress/authentication after an authorized identity-capability review;
-   the keyless identity path is preferred only if its prerequisites are proven.
-4. Select region/project and Cloud Run scaling mode (including minimum and
+1. Owner selected receipt archive and offline gap reconstruction only
+   (2026-09-26); no bounded missing-heartbeat alert is in scope for this design.
+2. Select ingress/authentication after an authorized identity-capability
+   review; keyless federation is the preferred direction only if its
+   prerequisites are proven. No live capability inspection is authorized.
+3. Select region/project and Cloud Run scaling mode (including minimum and
    maximum instances) after data residency, failure-domain and latency trade-off
    review.
-5. Select durable-store location, replication, object naming/idempotency,
+4. Select durable-store location, replication, object naming/idempotency,
    retention/deletion, report reader and recovery requirements.
-6. Define exact receipt fields, source cadence, timestamp/clock-quality rules,
+5. Define exact receipt fields, source cadence, timestamp/clock-quality rules,
    timeout/retry/outbox behavior, gap threshold and `UNKNOWN` interval rules.
-7. Set recurring/one-time cost ceilings, billing owner, allowed products,
+6. Set recurring/one-time cost ceilings, billing owner, allowed products,
    resource limits and stop action; revalidate the estimate for the selected
    configuration.
-8. Complete Leonardo Di Egidio's independent review and security/privacy review
+7. Complete Leonardo Di Egidio's independent review and security/privacy review
    of the exact design; then produce a versioned exact-runtime authorization and
    wait for Massimo's explicit approval of that exact record before any runtime
    preflight or deployment.
