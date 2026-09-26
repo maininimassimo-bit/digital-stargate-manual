@@ -11,9 +11,13 @@
 
 ## Decision question
 
-Massimo selected GitHub as the preferred platform for the independent witness
-plane. This assessment distinguishes durable receipt storage from timely
-independent detection of missing receipts. Those are separate capabilities.
+On 2026-09-26 Massimo Mainini stated a preference for Cloud Run as the
+independent receiver candidate. This supersedes GitHub Actions as the preferred
+missing-receipt detection mechanism; it does not authorize a Cloud Run service,
+resource, network path, or spend. GitHub may still be considered separately as
+an archive, but that role is not selected here. This assessment distinguishes
+durable receipt storage from timely independent detection of missing receipts.
+Those are separate capabilities.
 
 ## Findings
 
@@ -35,28 +39,36 @@ independent detection of missing receipts. Those are separate capabilities.
 5. GitHub Actions is not an always-on receiver. A private repository plus a
    scheduled workflow alone is not accepted as evidence of a durable remote
    receipt journal or bounded independent liveness monitor.
+6. Cloud Run is the owner's preferred receiver candidate, but the service alone
+   does not define durable receipt history or prove a bounded receipt-time
+   contract. The receiver design must specify write-before-ack persistence,
+   receiver timestamps, availability and cold-start behavior, retry/idempotency,
+   and the failure domains of the receiver, storage, and EAGLE's outbound path.
+   Any provider SLA or cost assumption must be verified against the exact future
+   service configuration and account; none is accepted by this preference.
 
 ## Disposition
 
-**GitHub remains a candidate receipt archive, not an accepted independent
-time-bounded witness.** The F4 runtime authorization cannot claim an upper
-bound for missing-heartbeat detection based solely on GitHub Actions scheduling.
-Any skipped/delayed scheduled run, unavailable API, missing receipt or uncertain
-receiver timestamp remains an unknown coverage interval.
+**Owner preference recorded: Cloud Run as the independent receiver candidate.**
+This is a planning choice, not a selected service configuration or an accepted
+time-bounded witness. The F4 runtime authorization cannot claim bounded
+missing-heartbeat detection until the exact receiver, durable receipt store,
+receipt-time contract, failure domains, availability assumptions and unknown-gap
+behavior have been reviewed. Cloud Run scale-to-zero/cold-start behavior,
+receiver or storage unavailability, network loss, retries, or uncertain
+timestamps must leave affected coverage `UNKNOWN` unless a later exact contract
+establishes a defensible bound.
 
-The owner must choose one of these design dispositions before the exact runtime
-record can be prepared:
+GitHub Actions is not accepted as the independent liveness witness because its
+scheduled runs may be delayed or dropped. GitHub may be evaluated as a separate
+archive only after its exact private resource, access, retention and cost are
+reviewed; the public manual repository remains excluded from pilot data.
 
-- accept GitHub as best-effort receipt archive and explicitly accept that
-  witness gaps have no guaranteed detection latency; or
-- require a separate independent receiver with a documented availability and
-  receipt-time contract, while GitHub remains archival storage only.
-
-Neither choice authorizes repository creation, workflow activation, credential
-provisioning, EAGLE access, network transmission, data persistence, deployment,
-or a runtime pilot. If a future design uses a private repository, raw N.I.N.A.
-logs, secrets, personal information, private local paths and arbitrary command
-output remain prohibited from receipts.
+The Cloud Run preference authorizes no project or service creation, workflow
+activation, credential provisioning, EAGLE access, network transmission, data
+persistence, deployment, or runtime pilot. Raw N.I.N.A. logs, secrets, personal
+information, private local paths and arbitrary command output remain prohibited
+from receipts.
 
 ## Evidence and sources
 
@@ -78,11 +90,14 @@ output remain prohibited from receipts.
 
 ## Required follow-up
 
-Leonardo Di Egidio must review the feasibility assessment and record findings.
-Massimo Mainini must select one of the two dispositions above. A separate
-runtime authorization must still specify the exact private repository/service,
-receiver contract, identity, transport, cadence, unknown-gap rule, source list,
-retention, resource limits, observation window, installation/rollback and OAT.
+Leonardo Di Egidio must review the updated feasibility assessment and record
+findings. The exact runtime authorization must still specify the Cloud Run
+service shape and region, receiver and durable-store contract, identity,
+transport, cadence, unknown-gap rule, source list, retention, resource and cost
+ceilings, billing owner, observation window, installation/rollback and OAT.
+Any GitHub archive remains a separate, unselected decision. The recorder and
+historical-log authorizations documented in the shutdown/reconciliation draft
+remain separate from this witness preference.
 
 ```text
 command_authority=NONE

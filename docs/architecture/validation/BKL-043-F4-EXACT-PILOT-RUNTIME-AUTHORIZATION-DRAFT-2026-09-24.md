@@ -52,7 +52,7 @@ scope, not as live runtime authorization.
 | Planned EAGLE shutdown evidence | Owner selected a local shutdown-event approach on 2026-09-25. A locally recorded orderly shutdown can evidence shutdown mode/time, but alone does not prove prior planning or rule out an operational incident. | **DESIGN POLICY SELECTED: record local shutdown event; classify intent only with independent supporting evidence or human review; otherwise UNKNOWN** |
 | Historical EAGLE operating hours | Windows System event logs are a candidate source for reconstructing host boot/shutdown intervals; actual log contents have not been inspected or imported. Host uptime is not equivalent to observatory availability or scientific session time. | **OFFLINE RECONCILIATION CANDIDATE ONLY; source selection, event semantics, completeness and import approval pending** |
 | Production-script health monitoring extension | On 2026-09-25 Massimo Mainini selected the monitoring population as all Digital StarGate production scripts, including scripts running outside EAGLE. Repository-only evidence and unresolved workflow classifications are documented in `BKL-043-F4-PRODUCTION-SCRIPT-HEALTH-EXTENSION-DRAFT-2026-09-25.md`; no current complete production inventory is verified. | **OWNER SCOPE SELECTED — ALL DSG PRODUCTION SCRIPTS ACROSS EXECUTION BOUNDARIES; DESIGN ONLY. Current inventory, authoritative receipts, per-trigger expectations and missed-run semantics remain pending. No scheduled check, script execution, task/service installation, or live EAGLE inspection is authorized.** |
-| Independent witness | Owner selected GitHub as provider candidate on 2026-09-24. Official GitHub documentation states scheduled workflows have a five-minute minimum and may be delayed or dropped; event-driven runs cannot detect absent events. A private repository could be an archive, but GitHub Actions alone is not an accepted bounded-latency witness. Existing public manual repository is excluded. | **GITHUB SELECTED AS CANDIDATE; archival-vs-independent-receiver disposition, exact private resource, receipt-time contract and failure-domain proof UNSELECTED; see F4 feasibility assessment** |
+| Independent witness | On 2026-09-26 Massimo Mainini stated a preference for Cloud Run as the independent receiver candidate. GitHub Actions schedules may be delayed or dropped and are not accepted as a bounded-latency witness; the public manual repository is excluded from telemetry. | **OWNER PREFERENCE: CLOUD RUN RECEIVER CANDIDATE; exact service shape/region, receiver and durable-store contract, identity, transport, cadence, receipt-time/failure-domain proof, cost ceiling and runtime approval UNSELECTED; GitHub archival role also unselected; see F4 feasibility assessment** |
 | Transport, authentication and egress | No endpoint, protocol, credential, network rule or secret provisioning approved | **UNSELECTED** |
 | Sampling/heartbeat cadence, timeout, freshness and gap semantics | Historical producer cadence is not transferable; no approved values | **UNSELECTED** |
 | Start mode | User-originated concept mentioned starting with EAGLE; F2/F3 do not authorize boot-start, scheduled task or recurring execution | **UNSELECTED** |
@@ -101,10 +101,12 @@ scope, not as live runtime authorization.
    event and exposure semantics. This request does not authorize live inventory,
    polling, script execution, a scheduled task, persistence, transport, alerting
    or deployment.
-6. Close `BKL-043-F4-GITHUB-WITNESS-FEASIBILITY-2026-09-25.md`: owner selects
-   the best-effort GitHub archive limitation or a separate independent receiver;
-   then demonstrate a durable receipt store outside EAGLE's host, power and
-   network failure domains.
+6. Close `BKL-043-F4-GITHUB-WITNESS-FEASIBILITY-2026-09-25.md` against the
+   owner's Cloud Run receiver preference. Define and review the exact receiver,
+   durable receipt store, receiver-time contract, availability/cold-start and
+   failure-domain assumptions, including the EAGLE outbound path. GitHub archive
+   use remains a separate unselected decision. The preference does not authorize
+   service creation, traffic, persistence or spending.
 7. Define data minimization, privacy/security controls, retention/deletion,
    resource stop limits, observation window and review checkpoints.
 8. Review the indicative cost scenarios in
