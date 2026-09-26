@@ -3,6 +3,7 @@ if(root){
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const fmt=(s,tz='Europe/Rome')=>new Date(s).toLocaleString('it-IT',{timeZone:tz,day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
  const fail=m=>root.innerHTML=`<section class="dsg-op-panel"><h2>Planner corrente non disponibile</h2><p>${esc(m)}</p><p>Fail-closed: nessun dato storico viene presentato come corrente.</p></section>`;
+ const aggregateSuitability=(components,weights)=>{let numerator=0;for(const key of ['framing','filterSignal','imageScaleObjectClass'])numerator+=Math.round(weights[key]*100)*Math.round(Number(components[key])*10);let quotient=Math.floor(numerator/100),remainder=numerator%100;if(remainder>50||(remainder===50&&quotient%2===1))quotient++;return quotient/10;};
  try{
   const response=await fetch('../data/observation-planner-f9-current-night.json',{cache:'no-store'});
   if(!response.ok)throw new Error(`projection F9 assente (HTTP ${response.status})`);
@@ -29,7 +30,7 @@ if(root){
   const nightRows=d.hourly.map(row=>{const x=row.weather||{},gate=weatherGate(x),badge=gate.go?'GO':'NO-GO',state=gate.go?'go':'no-go';return `<tr><td>${fmt(row.validAtUtc,siteTz)}</td><td><span class="dsg-op-weather-gate dsg-op-weather-gate--${state}" aria-label="Meteo ${badge}">${badge}</span>${gate.reasons.length?`<small class="dsg-op-weather-reasons">${gate.reasons.map(esc).join(' · ')}</small>`:''}</td><td>${display(x.cloudCoverPct,1,'%')}</td><td>${display(x.relativeHumidityPct,1,'%')}</td><td>${display(x.precipitationMm,3,' mm')}</td><td>${display(x.windSpeedKmh,1)} / ${display(x.windGustKmh,1)} km/h</td><td>${display(Number.isFinite(x.temperatureC)&&Number.isFinite(x.dewPointC)?x.temperatureC-x.dewPointC:NaN,1,' °C')}</td></tr>`}).join('');
   if(d.suitabilityEvidence?.methodId!=='BKL031-F9-SETUP-SUITABILITY@1.0'||JSON.stringify(d.suitabilityEvidence?.componentWeights)!==JSON.stringify({framing:0.45,filterSignal:0.3,imageScaleObjectClass:0.25}))throw new Error('metodo suitability non aggiornato');
   const cases=new Map((d.suitabilityEvidence?.cases||[]).map(x=>[`${x.setupId}|${x.targetKey}`,x]));
-  for(const c of cases.values()){const w=d.suitabilityEvidence.componentWeights,expected=Math.round((w.framing*c.components.framing+w.filterSignal*c.components.filterSignal+w.imageScaleObjectClass*c.components.imageScaleObjectClass+Number.EPSILON)*10)/10;if(Math.abs(expected-c.aggregateScore)>0.051)throw new Error('score suitability incoerente con i componenti');}
+  for(const c of cases.values()){const w=d.suitabilityEvidence.componentWeights,expected=aggregateSuitability(c.components,w);if(Math.abs(expected-c.aggregateScore)>0.051)throw new Error('score suitability incoerente con i componenti');}
   const profiles=new Map((d.targetProfiles||[]).map(x=>[x.targetKey,x]));
   const categoryLabel=value=>({EMISSION_NEBULA:'Nebulosa a emissione',PLANETARY_NEBULA:'Nebulosa planetaria',DARK_NEBULA:'Nebulosa oscura',GALAXY:'Galassia',OPEN_CLUSTER:'Ammasso aperto',GLOBULAR_CLUSTER:'Ammasso globulare'}[value]||value||'Categoria non disponibile');
   const categories=[...new Set((d.targetProfiles||[]).map(x=>x.objectType).filter(Boolean))].sort();

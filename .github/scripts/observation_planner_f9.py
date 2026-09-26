@@ -14,6 +14,7 @@ import math
 import re
 import tempfile
 import urllib.request
+from decimal import Decimal
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -33,10 +34,21 @@ WEATHER_LIMITS = {"cloudCoverPct": 20, "relativeHumidityPct": 90, "precipitation
 MIN_TARGET_ALTITUDE_DEG = 20.0
 SUITABILITY_METHOD_ID = "BKL031-F9-SETUP-SUITABILITY@1.0"
 SUITABILITY_WEIGHTS = {"framing": 0.45, "filterSignal": 0.30, "imageScaleObjectClass": 0.25}
+SUITABILITY_WEIGHT_PERCENT = {"framing": 45, "filterSignal": 30, "imageScaleObjectClass": 25}
 
 
 class ContractError(RuntimeError):
     pass
+
+
+def aggregate_suitability_score(components: dict) -> float:
+    """Compute one-decimal suitability using exact, cross-language ties-to-even."""
+    component_tenths = {name: int(Decimal(str(components[name])) * 10) for name in SUITABILITY_WEIGHT_PERCENT}
+    numerator = sum(SUITABILITY_WEIGHT_PERCENT[name] * component_tenths[name] for name in SUITABILITY_WEIGHT_PERCENT)
+    quotient, remainder = divmod(numerator, 100)
+    if remainder > 50 or (remainder == 50 and quotient % 2 == 1):
+        quotient += 1
+    return quotient / 10
 
 
 def utc(value: dt.datetime) -> str:
@@ -251,8 +263,8 @@ def candidate_case(setup: dict, target: dict) -> dict:
     filter_signal = 95.0 if matching else 75.0
     filter_used = matching_filters[0] if matching else setup["filterFamilies"][0]
     scale = 92.0 if extent >= 30 and setup["effectiveFocalLengthMm"] <= 800 else (88.0 if extent < 30 else 72.0)
-    aggregate = round(SUITABILITY_WEIGHTS["framing"] * framing + SUITABILITY_WEIGHTS["filterSignal"] * filter_signal
-                      + SUITABILITY_WEIGHTS["imageScaleObjectClass"] * scale, 1)
+    aggregate = aggregate_suitability_score({"framing": framing, "filterSignal": filter_signal,
+                                             "imageScaleObjectClass": scale})
     reasons = ["CATALOG_COORDINATES_PUBLICLY_GOVERNED", "SUITABILITY_IS_ADVISORY_DERIVED"]
     reasons.append("TARGET_NOT_PRESENT_IN_IMPORTED_SESSION_HISTORY" if target["acquisitionState"] == "NOT_YET_ACQUIRED"
                    else "TARGET_PRESENT_IN_IMPORTED_SESSION_HISTORY")
@@ -475,7 +487,7 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
         components = case.get("components", {})
         if set(components) != set(weights) or any(not 0 <= float(value) <= 100 for value in components.values()) or not 0 <= float(case.get("aggregateScore", -1)) <= 100 or not case.get("reasonCodes"):
             raise ContractError("SUITABILITY_COMPONENTS")
-        calculated = round(sum(weights[name] * float(components[name]) for name in weights), 1)
+        calculated = aggregate_suitability_score(components)
         if abs(calculated - float(case["aggregateScore"])) > 0.051:
             raise ContractError("SUITABILITY_AGGREGATE")
     for row in hourly:
