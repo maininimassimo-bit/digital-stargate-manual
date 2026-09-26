@@ -57,7 +57,7 @@ scope, not as live runtime authorization.
 | Sampling/heartbeat cadence, timeout, freshness and gap semantics | Historical producer cadence is not transferable; no approved values | **UNSELECTED** |
 | Start mode | User-originated concept mentioned starting with EAGLE; F2/F3 do not authorize boot-start, scheduled task or recurring execution | **UNSELECTED** |
 | Observation window/checkpoints | No duration or start/end selected | **UNSELECTED** |
-| Local/remote data stores | No journal, database or hosted store approved | **UNSELECTED** |
+| Local/remote data stores | On 2026-09-26 Massimo Mainini selected single-region receipt storage as the design direction. Cloud Storage remains a candidate; no project or concrete region is selected. | **DESIGN PREFERENCE RECORDED; project, region, IAM, retention, backup/recovery and runtime approval pending** |
 | Data classification, roles, encryption and backup | Minimum-data design exists; target-specific controls not reviewed | **UNSELECTED** |
 | Retention/deletion/disposal | No duration, deletion procedure or approver selected | **UNSELECTED** |
 | Resource budget and stop limits | Must be measured against an agreed imaging workload; no numeric limits approved | **UNSELECTED** |
