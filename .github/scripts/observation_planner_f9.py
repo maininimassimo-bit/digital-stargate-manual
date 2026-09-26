@@ -30,6 +30,9 @@ OUTPUT_PATH = Path("docs/data/observation-planner-f9-current-night.json")
 # cloud-cover constraint for opening a dome represented only in this planner.
 WEATHER_LIMITS = {"cloudCoverPct": 20, "relativeHumidityPct": 90, "precipitationMm": 0,
                   "windSpeedKmh": 15, "windGustKmh": 20, "dewPointMarginC": 10}
+MIN_TARGET_ALTITUDE_DEG = 20.0
+SUITABILITY_METHOD_ID = "BKL031-F9-SETUP-SUITABILITY@1.0"
+SUITABILITY_WEIGHTS = {"framing": 0.45, "filterSignal": 0.30, "imageScaleObjectClass": 0.25}
 
 
 class ContractError(RuntimeError):
@@ -214,11 +217,22 @@ def astronomy(instant: dt.datetime, latitude: float, longitude: float, elevation
 def factors(weather: dict, astro: dict) -> tuple[float, float]:
     darkness = max(0.0, min(1.0, -astro["solarAltitudeDeg"] / 18.0))
     altitude = max(0.0, min(1.0, astro["altitudeDeg"] / 60.0))
-    lunar = max(0.0, min(1.0, astro["moonSeparationDeg"] / 90.0))
+    lunar = lunar_suitability_factor(astro["moonAltitudeDeg"], astro["moonIlluminatedFraction"], astro["moonSeparationDeg"])
     astronomy_factor = 0.55 * altitude + 0.25 * lunar + 0.20 * darkness
     weather_factor = (0.55 * (1 - weather["cloudCoverPct"] / 100) + 0.20 * (1 if weather["precipitationMm"] == 0 else 0)
                       + 0.15 * (1 - weather["relativeHumidityPct"] / 100) + 0.10 * max(0, 1 - weather["windSpeedKmh"] / 40))
     return round(astronomy_factor, 4), round(weather_factor, 4)
+
+
+def lunar_suitability_factor(moon_altitude_deg: float, illuminated_fraction: float, separation_deg: float) -> float:
+    """0..1 lunar factor; bright, high and nearby Moon lowers suitability."""
+    illumination = max(0.0, min(1.0, float(illuminated_fraction)))
+    altitude = max(0.0, min(90.0, float(moon_altitude_deg)))
+    separation = max(0.0, min(180.0, float(separation_deg)))
+    above_horizon_factor = math.sin(math.radians(altitude))
+    proximity_factor = max(0.0, 1.0 - separation / 90.0)
+    interference = illumination * above_horizon_factor * proximity_factor
+    return round(1.0 - interference, 4)
 
 
 def candidate_case(setup: dict, target: dict) -> dict:
@@ -227,15 +241,26 @@ def candidate_case(setup: dict, target: dict) -> dict:
     extent = float(target["angularSizeEquivalentArcmin"])
     ratio = extent / short_fov_arcmin
     framing = round(max(20.0, min(100.0, 100.0 - max(0.0, ratio - 0.7) * 55)), 1)
-    expected = "EMISSION_LINE" if any("SHO" in item or "Extreme" in item for item in setup["filterFamilies"]) else "BROADBAND_CONTINUUM"
-    filter_signal = 95.0 if target["preferredSignalFamily"] == expected else 75.0
+    emission_filters = [item for item in setup["filterFamilies"] if "SHO" in item or "Extreme" in item]
+    broadband_filters = [item for item in setup["filterFamilies"] if item not in emission_filters]
+    if target["preferredSignalFamily"] == "EMISSION_LINE":
+        matching_filters = emission_filters
+    else:
+        matching_filters = broadband_filters
+    matching = bool(matching_filters)
+    filter_signal = 95.0 if matching else 75.0
+    filter_used = matching_filters[0] if matching else setup["filterFamilies"][0]
     scale = 92.0 if extent >= 30 and setup["effectiveFocalLengthMm"] <= 800 else (88.0 if extent < 30 else 72.0)
-    aggregate = round(0.45 * framing + 0.30 * filter_signal + 0.25 * scale, 1)
-    reasons = ["CATALOG_COORDINATES_PUBLICLY_GOVERNED", "SUITABILITY_IS_ADVISORY_DERIVED", "TARGET_NOT_PRESENT_IN_IMPORTED_SESSION_HISTORY"]
+    aggregate = round(SUITABILITY_WEIGHTS["framing"] * framing + SUITABILITY_WEIGHTS["filterSignal"] * filter_signal
+                      + SUITABILITY_WEIGHTS["imageScaleObjectClass"] * scale, 1)
+    reasons = ["CATALOG_COORDINATES_PUBLICLY_GOVERNED", "SUITABILITY_IS_ADVISORY_DERIVED"]
+    reasons.append("TARGET_NOT_PRESENT_IN_IMPORTED_SESSION_HISTORY" if target["acquisitionState"] == "NOT_YET_ACQUIRED"
+                   else "TARGET_PRESENT_IN_IMPORTED_SESSION_HISTORY")
+    reasons.append("FILTER_SIGNAL_FAMILY_MATCH" if matching else "FILTER_SIGNAL_FAMILY_PARTIAL_MATCH")
     reasons.append("TARGET_EXTENT_FITS_DECLARED_FOV" if ratio <= 1.0 else "TARGET_EXTENT_EXCEEDS_DECLARED_SHORT_FOV")
     return {"setupId": setup["setupId"], "targetKey": target["targetKey"],
             "inputs": {"framingRatioToShortFov": round(ratio, 3), "imageScaleArcsecPx": setup["imageScaleArcsecPx"],
-                        "filterFamilyUsedForAssessment": setup["filterFamilies"][0], "targetSignalFamily": target["preferredSignalFamily"]},
+                        "filterFamilyUsedForAssessment": filter_used, "targetSignalFamily": target["preferredSignalFamily"]},
             "components": {"framing": framing, "filterSignal": filter_signal, "imageScaleObjectClass": scale},
             "aggregateScore": aggregate, "reasonCodes": reasons}
 
@@ -266,18 +291,27 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
         target_rows = {}
         for target in targets:
             values = a["targets"][target["targetKey"]]
-            af, wf = factors(weather[instant], {**values, "solarAltitudeDeg": a["solarAltitudeDeg"]})
-            target_rows[target["targetKey"]] = {**values, "astronomyFactor": af, "weatherFactor": wf}
+            astro_values = {**values, "solarAltitudeDeg": a["solarAltitudeDeg"],
+                            "moonAltitudeDeg": a["moonAltitudeDeg"],
+                            "moonIlluminatedFraction": a["moonIlluminatedFraction"]}
+            af, wf = factors(weather[instant], astro_values)
+            lunar_factor = lunar_suitability_factor(a["moonAltitudeDeg"], a["moonIlluminatedFraction"], values["moonSeparationDeg"])
+            target_rows[target["targetKey"]] = {**values, "astronomyFactor": af, "weatherFactor": wf,
+                                                 "lunarSuitabilityFactor": lunar_factor}
         rows.append({"validAtUtc": utc(instant), "solarAltitudeDeg": a["solarAltitudeDeg"], "moonAltitudeDeg": a["moonAltitudeDeg"],
                      "moonIlluminatedFraction": a["moonIlluminatedFraction"], "weather": weather[instant], "targets": target_rows})
-    case_map = {(c["setupId"], c["targetKey"]): c for c in suitability["cases"]}
-    for setup in f8["setupProfiles"]:
-        for target in targets:
-            case_map.setdefault((setup["setupId"], target["targetKey"]), candidate_case(setup, target))
+    # Use one current F9 suitability method for every setup-target pair so
+    # catalog and historical targets remain directly comparable in ranking.
+    case_map = {(setup["setupId"], target["targetKey"]): candidate_case(setup, target)
+                for setup in f8["setupProfiles"] for target in targets}
     provenance = list(suitability["catalogProvenance"])
     provenance.extend({"targetKey": item["targetKey"], "sourceAuthority": item["catalogEvidence"], "sourceIdentifier": item["targetName"], "fact": "PUBLIC_CATALOG_COORDINATE_AND_EXTENT"} for item in catalog["targets"])
-    suitability_public = {"methodId": suitability["methodId"], "componentWeights": suitability["componentWeights"],
-                          "componentSemantics": suitability["componentSemantics"], "catalogProvenance": provenance,
+    suitability_public = {"methodId": SUITABILITY_METHOD_ID, "componentWeights": SUITABILITY_WEIGHTS,
+                          "componentSemantics": {
+                              "framing": "0..100 heuristic from target angular extent versus setup short FOV side",
+                              "filterSignal": "0..100 heuristic match between target signal family and available filter family",
+                              "imageScaleObjectClass": "0..100 heuristic from target angular extent/class and governed setup scale/focal length; not a calibrated optical model"},
+                          "sourceMethodRef": suitability["methodId"], "catalogProvenance": provenance,
                           "sourceBindings": {**suitability["sourceBindings"], "targetCatalog": str(TARGET_CATALOG_PATH).replace("\\", "/")}, "cases": []}
     for case in case_map.values():
         suitability_public["cases"].append({"setupId": case["setupId"], "targetKey": case["targetKey"], "inputs": case["inputs"],
@@ -292,15 +326,21 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
                 a, b = first["targets"][target["targetKey"]], second["targets"][target["targetKey"]]
                 if not weather_gate(first["weather"])[0] or not weather_gate(second["weather"])[0]:
                     continue
-                if first["solarAltitudeDeg"] > -18 or second["solarAltitudeDeg"] > -18 or a["altitudeDeg"] <= 0 or b["altitudeDeg"] <= 0:
+                if (first["solarAltitudeDeg"] > -18 or second["solarAltitudeDeg"] > -18
+                        or a["altitudeDeg"] < MIN_TARGET_ALTITUDE_DEG or b["altitudeDeg"] < MIN_TARGET_ALTITUDE_DEG):
                     continue
                 score = 100 * (0.6 * ((a["astronomyFactor"] + b["astronomyFactor"]) / 2) + 0.3 * ((a["weatherFactor"] + b["weatherFactor"]) / 2) + 0.1 * case["aggregateScore"] / 100)
                 windows.append({"fromUtc": first["validAtUtc"], "toUtcExclusive": utc(dt.datetime.fromisoformat(second["validAtUtc"].replace("Z", "+00:00")) + dt.timedelta(hours=1)),
                                 "advisoryScore": round(score, 1), "meanAltitudeDeg": round((a["altitudeDeg"] + b["altitudeDeg"]) / 2, 1),
-                                "meanCloudCoverPct": round((first["weather"]["cloudCoverPct"] + second["weather"]["cloudCoverPct"]) / 2, 1)})
+                                "meanCloudCoverPct": round((first["weather"]["cloudCoverPct"] + second["weather"]["cloudCoverPct"]) / 2, 1),
+                                "meanMoonAltitudeDeg": round((first["moonAltitudeDeg"] + second["moonAltitudeDeg"]) / 2, 1),
+                                "meanMoonIlluminatedFraction": round((first["moonIlluminatedFraction"] + second["moonIlluminatedFraction"]) / 2, 3),
+                                "meanMoonSeparationDeg": round((a["moonSeparationDeg"] + b["moonSeparationDeg"]) / 2, 1),
+                                "lunarPenaltyPct": round(100 * (1 - (a["lunarSuitabilityFactor"] + b["lunarSuitabilityFactor"]) / 2), 1)})
             windows.sort(key=lambda x: (-x["advisoryScore"], x["fromUtc"]))
-            ranked.append({"targetKey": target["targetKey"], "targetName": target["targetName"], "acquisitionState": target["acquisitionState"], "setupSuitabilityScore": case["aggregateScore"], "bestWindows": windows[:3]})
-        ranked.sort(key=lambda x: (-(x["bestWindows"][0]["advisoryScore"] if x["bestWindows"] else -1), x["targetKey"]))
+            ranked.append({"targetKey": target["targetKey"], "targetName": target["targetName"], "acquisitionState": target["acquisitionState"], "setupSuitabilityScore": case["aggregateScore"], "eligibleTwoHourWindowCount": len(windows), "bestWindows": windows[:3]})
+        ranked.sort(key=lambda x: (-(x["bestWindows"][0]["advisoryScore"] if x["bestWindows"] else -1),
+                                   -x["eligibleTwoHourWindowCount"], -x["setupSuitabilityScore"], x["targetKey"]))
         rankings.append({"setupId": setup["setupId"], "targets": ranked})
     return {"schemaVersion": "1.0", "projectionType": "BKL031_F9_REPEATABLE_CURRENT_NIGHT", "generatedAtUtc": utc(retrieval),
             "environment": "EVALUATION", "authority": "NONE", "consumerMode": "READ_ONLY",
@@ -308,7 +348,8 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
             "forecast": {"providerId": "METEOHUB", "upstreamAuthorityId": "ITALIAMETEO_ARPAE", "modelId": "ICON_2I", "runInitialisationUtc": utc(run_time),
                          "retrievedAtUtc": utc(retrieval), "runAgeHoursAtRetrieval": round(age, 6), "freshnessState": "FRESH", "sourceFiles": files},
             "nightWindow": {"fromUtc": utc(instants[0]), "toUtcExclusive": utc(instants[-1] + dt.timedelta(hours=1))},
-            "method": {"id": "BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.0", "ephemerisMode": "EXPLICIT_MOSEPH_NO_FALLBACK", "scoreWeights": f8["method"]["scoreWeights"], "displayFilter": "solarAltitudeDeg <= -18 and targetAltitudeDeg > 0"},
+            "method": {"id": "BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.2", "ephemerisMode": "EXPLICIT_MOSEPH_NO_FALLBACK", "scoreWeights": f8["method"]["scoreWeights"], "displayFilter": "solarAltitudeDeg <= -18 and targetAltitudeDeg >= 20", "minimumTargetAltitudeDeg": MIN_TARGET_ALTITUDE_DEG,
+                        "lunarFactor": "1 - illuminatedFraction * max(0,sin(radians(clamp(moonAltitudeDeg,0,90)))) * max(0,1-separationDeg/90)"},
             "weatherPolicy": {"id": "DSG-F9-PLANNER-WEATHER-GATE@1.0", "limits": WEATHER_LIMITS,
                               "cloudLimitRationale": "OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT",
                               "authority": "ADVISORY_PLANNING_ONLY"},
@@ -355,8 +396,15 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
     # sub-second quantization while retaining the strict 18-hour freshness cap.
     if not 0 <= age <= 18 or generated != retrieved or abs(float(forecast.get("runAgeHoursAtRetrieval", -1)) - age) > (1 / 3600):
         raise ContractError("FORECAST_FRESHNESS_EVIDENCE")
-    if data.get("method", {}).get("ephemerisMode") != "EXPLICIT_MOSEPH_NO_FALLBACK":
-        raise ContractError("EPHEMERIS_MODE")
+    method = data.get("method", {})
+    expected_score_weights = {"astronomy": 0.6, "weather": 0.3, "setupSuitability": 0.1}
+    if (method.get("id") != "BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.2"
+            or method.get("ephemerisMode") != "EXPLICIT_MOSEPH_NO_FALLBACK"
+            or method.get("minimumTargetAltitudeDeg") != MIN_TARGET_ALTITUDE_DEG
+            or method.get("displayFilter") != "solarAltitudeDeg <= -18 and targetAltitudeDeg >= 20"
+            or method.get("lunarFactor") != "1 - illuminatedFraction * max(0,sin(radians(clamp(moonAltitudeDeg,0,90)))) * max(0,1-separationDeg/90)"
+            or method.get("scoreWeights") != expected_score_weights):
+        raise ContractError("ASTRONOMY_METHOD")
     expected_policy = {"id": "DSG-F9-PLANNER-WEATHER-GATE@1.0", "limits": WEATHER_LIMITS,
                        "cloudLimitRationale": "OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT",
                        "authority": "ADVISORY_PLANNING_ONLY"}
@@ -366,7 +414,7 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
         raise ContractError("ATTRIBUTION")
     suitability = data.get("suitabilityEvidence", {})
     weights = suitability.get("componentWeights", {})
-    if suitability.get("methodId") != "BKL031-F8-SETUP-SUITABILITY@1.1" or set(weights) != {"framing", "filterSignal", "imageScaleObjectClass"} or abs(sum(float(v) for v in weights.values()) - 1) > 0.000001:
+    if suitability.get("methodId") != SUITABILITY_METHOD_ID or weights != SUITABILITY_WEIGHTS or set(weights) != {"framing", "filterSignal", "imageScaleObjectClass"} or abs(sum(float(v) for v in weights.values()) - 1) > 0.000001:
         raise ContractError("SUITABILITY_METHOD")
     hourly, rankings = data.get("hourly", []), data.get("rankings", [])
     if len(hourly) != 16 or not rankings:
@@ -386,6 +434,10 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
         raise ContractError("PROFILE_BINDING")
     for row in hourly:
         weather = row.get("weather", {})
+        if (not isinstance(row.get("solarAltitudeDeg"), (int, float)) or not -90 <= row["solarAltitudeDeg"] <= 90
+                or not isinstance(row.get("moonAltitudeDeg"), (int, float)) or not -90 <= row["moonAltitudeDeg"] <= 90
+                or not isinstance(row.get("moonIlluminatedFraction"), (int, float)) or not 0 <= row["moonIlluminatedFraction"] <= 1):
+            raise ContractError("ASTRONOMY_VALUES")
         if (not 0 <= weather.get("cloudCoverPct", -1) <= 100 or not 0 <= weather.get("relativeHumidityPct", -1) <= 100
                 or weather.get("precipitationMm", -1) < 0 or weather.get("windSpeedKmh", -1) < 0 or weather.get("windGustKmh", -1) < 0
                 or any(not isinstance(weather.get(key), (int, float)) or not math.isfinite(weather[key]) for key in ("temperatureC", "dewPointC"))
@@ -401,6 +453,20 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
                 samples = [row for row in hourly if start <= dt.datetime.fromisoformat(row["validAtUtc"].replace("Z", "+00:00")) < end]
                 if len(samples) != 2 or any(not weather_gate(row["weather"])[0] for row in samples):
                     raise ContractError("RANKING_WINDOW_WEATHER_GATE")
+                sample_targets = [row["targets"][target["targetKey"]] for row in samples]
+                if (any(row["solarAltitudeDeg"] > -18 for row in samples)
+                        or any(item["altitudeDeg"] < MIN_TARGET_ALTITUDE_DEG for item in sample_targets)):
+                    raise ContractError("RANKING_WINDOW_ASTRONOMY_GATE")
+                aggregate = next(case["aggregateScore"] for case in suitability.get("cases", [])
+                                 if case["setupId"] == ranking["setupId"] and case["targetKey"] == target["targetKey"])
+                astro = sum(item["astronomyFactor"] for item in sample_targets) / 2
+                weather_value = sum(item["weatherFactor"] for item in sample_targets) / 2
+                expected_score = round(100 * (0.6 * astro + 0.3 * weather_value + 0.1 * aggregate / 100), 1)
+                if abs(float(candidate.get("advisoryScore", -1)) - expected_score) > 0.051:
+                    raise ContractError("RANKING_SCORE")
+                expected_penalty = round(100 * (1 - sum(item["lunarSuitabilityFactor"] for item in sample_targets) / 2), 1)
+                if abs(float(candidate.get("lunarPenaltyPct", -1)) - expected_penalty) > 0.051:
+                    raise ContractError("RANKING_LUNAR_EVIDENCE")
     expected_cases = {(setup_id, target_key) for setup_id in setup_ids for target_key in target_keys}
     cases = suitability.get("cases", [])
     if {(case.get("setupId"), case.get("targetKey")) for case in cases} != expected_cases:
@@ -409,6 +475,22 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
         components = case.get("components", {})
         if set(components) != set(weights) or any(not 0 <= float(value) <= 100 for value in components.values()) or not 0 <= float(case.get("aggregateScore", -1)) <= 100 or not case.get("reasonCodes"):
             raise ContractError("SUITABILITY_COMPONENTS")
+        calculated = round(sum(weights[name] * float(components[name]) for name in weights), 1)
+        if abs(calculated - float(case["aggregateScore"])) > 0.051:
+            raise ContractError("SUITABILITY_AGGREGATE")
+    for row in hourly:
+        for target in row["targets"].values():
+            if (not isinstance(target.get("altitudeDeg"), (int, float)) or not -90 <= target["altitudeDeg"] <= 90
+                    or not isinstance(target.get("moonSeparationDeg"), (int, float)) or not 0 <= target["moonSeparationDeg"] <= 180):
+                raise ContractError("TARGET_ASTRONOMY_VALUES")
+            expected_lunar = lunar_suitability_factor(row["moonAltitudeDeg"], row["moonIlluminatedFraction"], target["moonSeparationDeg"])
+            if abs(float(target.get("lunarSuitabilityFactor", -1)) - expected_lunar) > 0.000051:
+                raise ContractError("LUNAR_FACTOR")
+            darkness = max(0.0, min(1.0, -row["solarAltitudeDeg"] / 18.0))
+            altitude = max(0.0, min(1.0, target["altitudeDeg"] / 60.0))
+            expected_astronomy = round(0.55 * altitude + 0.25 * expected_lunar + 0.20 * darkness, 4)
+            if abs(float(target.get("astronomyFactor", -1)) - expected_astronomy) > 0.000051:
+                raise ContractError("ASTRONOMY_FACTOR")
     if now is not None:
         current_age = (now - run).total_seconds()
         if current_age < 0 or current_age > 18 * 3600:
