@@ -100,6 +100,11 @@ policy; the age limit is not permission to delete older unacknowledged records.
 The numeric limits remain unselected and must be calibrated against the
 approved local-storage budget, receipt size/cadence and desired offline
 recovery horizon.
+For age evaluation, the owner selected using source-observed time when source
+clock quality is reliable and reporting age as uncertain otherwise
+(2026-09-26). An uncertain age must not be silently treated as within budget;
+all pending receipts remain preserved. Whether age uncertainty pauses admission
+of new receipts remains unselected.
 
 The producer should persist an event before attempting transmission and retain
 its stable record ID, sequence, source-observed time and quality. It should
@@ -112,7 +117,7 @@ recorded that observation; by itself it does not prove continuous host,
 observatory or scientific activity between records.
 
 Numeric byte and queued-age limits, a durable/observable full condition,
-disk-full behavior,
+admission behavior when age is uncertain, disk-full behavior,
 transactional/atomic persistence and flush semantics, corruption detection and
 recovery after reboot or power loss, local file ACL/encryption, maximum offline
 duration, batching, backoff, duplicate handling, ack validation, and deletion
