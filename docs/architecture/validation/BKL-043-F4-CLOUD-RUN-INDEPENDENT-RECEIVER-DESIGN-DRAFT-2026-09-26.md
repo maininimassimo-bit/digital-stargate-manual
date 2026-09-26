@@ -68,11 +68,15 @@ The envelope should be allowlisted and bounded. Candidate fields are:
 | `payload_digest`, `producer_version`, `evidence_reference` | Integrity and parser/producer lineage without embedding private paths. |
 
 Exact enum values, maximum payload size, sequence reset behavior, clock-skew
-handling, duplicate/conflict policy, deadline/gap semantics and schema digest
+handling, late/duplicate/conflict policy, deadline handling and schema digest
 remain unselected. The owner-selected design cadence is one receipt per minute;
-it is not an installed schedule or runtime authorization. The source must not
-be allowed to set receiver time, receiver identity, a planned/unplanned
-classification, an incident outcome or a safety state.
+after approximately two minutes without a received receipt, an offline report
+may mark a candidate gap. This threshold identifies a possible data interval
+only: it does not establish host failure, cause or planned shutdown, and it does
+not authorize a real-time evaluator or alert. Exact interval bounds must retain
+clock and delivery uncertainty. The source must not be allowed to set receiver
+time, receiver identity, a planned/unplanned classification, an incident
+outcome or a safety state.
 
 ## 3. Candidate Cloud Run and storage pattern
 
@@ -167,9 +171,11 @@ any charge.
    implementation, deletion authority/evidence, object naming/idempotency,
    report-reader identity and recovery requirements. Do not enable irreversible
    Bucket Lock by default.
-5. Owner selected a one-minute receipt cadence (2026-09-26); define exact receipt
-   fields, timestamp/clock-quality rules, timeout/retry/outbox behavior, gap
-   threshold and `UNKNOWN` interval rules.
+5. Owner selected a one-minute receipt cadence and an approximately two-minute
+   threshold for marking a candidate silent interval (2026-09-26); define exact
+   receipt fields, timestamp/clock-quality rules, timeout/retry/outbox behavior
+   and `UNKNOWN` interval boundaries. The threshold does not establish cause or
+   authorize a live evaluator/alert.
 6. Recalculate the estimate after selecting the concrete region and configuration;
    then set the monthly ceiling as directed by the owner, plus one-time ceiling,
    billing owner, allowed products, resource limits and stop action.
