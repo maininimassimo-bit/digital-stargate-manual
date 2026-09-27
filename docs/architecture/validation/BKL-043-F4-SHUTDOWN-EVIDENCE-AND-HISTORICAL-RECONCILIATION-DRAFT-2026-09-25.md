@@ -78,7 +78,10 @@ does not authorize configuring a shutdown hook, scheduled task, service, or
 writer. The owner selected interactive use either at the target's local console
 or through an interactive remote session such as RDP. Here “local command” means
 the command runs on the target host; it does not require the operator to be
-physically at its console. Automation must not invoke it. The
+physically at its console. Any account that already has interactive access to
+the host may invoke it; this design does not add or change OS accounts, groups,
+or access controls. Automation must not invoke it, and the event record must not
+store an account name, SID, or other individual identifier. The
 `APPROVED_AUTOMATED_REQUEST` value remains part of the
 controlled vocabulary but has no selected or authorized production trigger in
 this design. Shutdowns initiated through other paths may lack a request marker
