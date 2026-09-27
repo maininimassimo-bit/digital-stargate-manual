@@ -18,6 +18,9 @@ pre-shutdown request marker in the proposed evidence sequence, and preserve the
 source timestamp with its timezone/offset while deriving UTC only when
 defensible (DLG-140), and preserve separate confirmation and reported durable
 marker-persistence timestamps for the interactive request path (DLG-141).
+When timezone, daylight-saving or clock evidence is ambiguous, retain raw
+timestamps and leave UTC normalization `UNKNOWN`; do not infer it from general
+location or presumed historical settings (DLG-142).
 
 A local orderly-shutdown record can support the fact and recorded time of an
 orderly shutdown. By itself it does not show that the shutdown was planned, rule
@@ -102,7 +105,7 @@ remain unselected.
 | `schema_version`, `record_kind`, `record_id` | Versioned envelope; kind distinguishes request, OS shutdown, and boot evidence. `record_id` is deterministic from source identity, native record identity and content digest where available. |
 | `host_identity`, `boot_epoch_id` | Host as evidenced by the source and the boot epoch to which the record is attributed; missing or conflicting identity remains unknown. |
 | `source_provider`, `source_event_id`, `source_record_id` | Native provider/event and record identity, or the named local writer identity for a request marker. Preserve native identifiers; do not manufacture them. |
-| `event_time_raw`, `event_time_utc`, `time_zone_or_offset`, `clock_quality` | Preserve the source's original timestamp representation and the evidenced timezone/offset. Derive UTC only when timezone/offset, source semantics and clock quality are defensible; otherwise leave normalized UTC unknown. Never overwrite the raw value or silently repair clock drift. |
+| `event_time_raw`, `event_time_utc`, `time_zone_or_offset`, `clock_quality` | Preserve the source's original timestamp representation and the evidenced timezone/offset. Derive UTC only when timezone/offset, source semantics and clock quality are defensible; otherwise leave normalized UTC unknown. Do not infer an absent/ambiguous offset from location or presumed historic host settings. Never overwrite the raw value or silently repair clock drift. |
 | `request_confirmed_at_raw`, `request_confirmed_at_utc`, `request_confirmed_time_zone_or_offset` | For the interactive request marker, preserve the timestamp and timezone/offset captured when the operator explicitly confirms Yes. Derive UTC only when defensible. This records confirmation time, not persistence completion or OS shutdown. |
 | `recorded_at_raw`, `recorded_at_utc`, `recorded_time_zone_or_offset`, `recording_outcome` | Preserve the recorder's timestamp and timezone/offset for its reported durable-persistence completion; derive UTC only when defensible. Keep it distinct from request confirmation and OS event time. If persistence fails or completion cannot be evidenced, persistence time is absent/unknown and the controlled writer path must not issue the shutdown request. Exact implementation and proof of durable completion remain unselected. |
 | `shutdown_mode_observed`, `request_mechanism_class` | Only values directly evidenced by the source. `request_mechanism_class` is one of `INTERACTIVE_LOCAL_REQUEST`, `APPROVED_AUTOMATED_REQUEST`, or `UNKNOWN`; it must not include an individual identity. Do not infer intent from a generic orderly event. |
@@ -164,6 +167,8 @@ import actual EAGLE logs or N.I.N.A. logs as part of this gate.
    source timezone/offset and provider/record identity. Derive UTC only when
    conversion is defensible, including source timestamp semantics and clock
    quality; otherwise retain the raw value and mark normalized time unknown.
+   If timezone/DST or clock evidence is ambiguous, do not infer UTC from the
+   host's general location or presumed settings; retain `UNKNOWN`.
    Keep recorder persistence time separate from source event time. Flag DST
    ambiguity, clock steps, missing offsets, impossible ordering, duplicates and
    conflicting identities.
