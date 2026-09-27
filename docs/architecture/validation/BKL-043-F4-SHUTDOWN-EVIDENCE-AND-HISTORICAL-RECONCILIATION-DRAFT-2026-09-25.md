@@ -75,8 +75,11 @@ durable, or authorize a hook, task, service, or writer. Whether and how such a
 design can be implemented without interfering with operating-system or safety
 controls remains subject to review. This selection
 does not authorize configuring a shutdown hook, scheduled task, service, or
-writer. The dedicated command is a selected interaction model only; automation
-must not invoke it. The `APPROVED_AUTOMATED_REQUEST` value remains part of the
+writer. The owner selected interactive use either at the target's local console
+or through an interactive remote session such as RDP. Here “local command” means
+the command runs on the target host; it does not require the operator to be
+physically at its console. Automation must not invoke it. The
+`APPROVED_AUTOMATED_REQUEST` value remains part of the
 controlled vocabulary but has no selected or authorized production trigger in
 this design. Shutdowns initiated through other paths may lack a request marker
 and must be reconciled from their own evidence without inferring intent. The
