@@ -56,8 +56,9 @@ Keep these distinct; do not merge them into one inferred “planned shutdown” 
    are adequate. A boot marker does not prove observatory availability.
 
 The owner-selected design direction includes an append-only, non-elevated
-request marker produced by a dedicated local command before that command issues
-the shutdown request, paired where available with
+request marker produced by a dedicated local command used interactively by a
+local operator before that command issues the shutdown request, paired where
+available with
 OS-native shutdown and subsequent boot evidence. The marker remains distinct
 from evidence that the OS completed shutdown. The three mechanism categories
 are selected; writer placement, trigger, storage path, permissions, durability,
@@ -70,8 +71,13 @@ durable, or authorize a hook, task, service, or writer. Whether and how such a
 design can be implemented without interfering with operating-system or safety
 controls remains subject to review. This selection
 does not authorize configuring a shutdown hook, scheduled task, service, or
-writer. The dedicated command is a selected interaction model only; its
-implementation, invocation details, storage and permissions remain unselected.
+writer. The dedicated command is a selected interaction model only; automation
+must not invoke it. The `APPROVED_AUTOMATED_REQUEST` value remains part of the
+controlled vocabulary but has no selected or authorized production trigger in
+this design. Shutdowns initiated through other paths may lack a request marker
+and must be reconciled from their own evidence without inferring intent. The
+command's implementation, invocation details, storage and permissions remain
+unselected.
 
 ### 2.2 Minimum normalized record fields
 
