@@ -57,8 +57,9 @@ Keep these distinct; do not merge them into one inferred “planned shutdown” 
 
 The owner-selected design direction includes an append-only, non-elevated
 request marker produced by a dedicated local command used interactively by a
-local operator before that command issues the shutdown request, paired where
-available with
+local operator. After explicit confirmation, that command persists the marker
+before issuing the shutdown request; cancellation must issue no request and
+must not record a request marker. Pair the marker where available with
 OS-native shutdown and subsequent boot evidence. The marker remains distinct
 from evidence that the OS completed shutdown. The three mechanism categories
 are selected; writer placement, trigger, storage path, permissions, durability,
