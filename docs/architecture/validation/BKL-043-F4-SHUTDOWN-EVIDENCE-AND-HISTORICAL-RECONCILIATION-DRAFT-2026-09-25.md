@@ -60,7 +60,14 @@ request marker before the shutdown request, paired where available with
 OS-native shutdown and subsequent boot evidence. The marker remains distinct
 from evidence that the OS completed shutdown. The three mechanism categories
 are selected; writer placement, trigger, storage path, permissions, durability,
-and failure handling remain unselected implementation decisions. This selection
+and failure handling remain unselected implementation decisions. The owner
+selected a fail-closed design direction for the writer-controlled shutdown path:
+if the marker cannot be durably persisted, that path must not issue the orderly
+shutdown request and must surface the persistence failure for human choice.
+This does not disable independent/manual OS controls, prove persistence is
+durable, or authorize a hook, task, service, or writer. Whether and how such a
+design can be implemented without interfering with operating-system or safety
+controls remains subject to review. This selection
 does not authorize configuring a shutdown hook, scheduled task, service, or
 writer.
 
