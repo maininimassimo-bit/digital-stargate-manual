@@ -16,7 +16,8 @@ activity and session evidence. It records the owner decisions of 2026-09-25 and
 2026-09-27: policy B, record shutdown evidence locally, include a local
 pre-shutdown request marker in the proposed evidence sequence, and preserve the
 source timestamp with its timezone/offset while deriving UTC only when
-defensible (DLG-140).
+defensible (DLG-140), and preserve separate confirmation and reported durable
+marker-persistence timestamps for the interactive request path (DLG-141).
 
 A local orderly-shutdown record can support the fact and recorded time of an
 orderly shutdown. By itself it does not show that the shutdown was planned, rule
@@ -102,7 +103,8 @@ remain unselected.
 | `host_identity`, `boot_epoch_id` | Host as evidenced by the source and the boot epoch to which the record is attributed; missing or conflicting identity remains unknown. |
 | `source_provider`, `source_event_id`, `source_record_id` | Native provider/event and record identity, or the named local writer identity for a request marker. Preserve native identifiers; do not manufacture them. |
 | `event_time_raw`, `event_time_utc`, `time_zone_or_offset`, `clock_quality` | Preserve the source's original timestamp representation and the evidenced timezone/offset. Derive UTC only when timezone/offset, source semantics and clock quality are defensible; otherwise leave normalized UTC unknown. Never overwrite the raw value or silently repair clock drift. |
-| `recorded_at_raw`, `recorded_at_utc`, `recorded_time_zone_or_offset`, `recording_outcome` | Preserve the recorder's original persistence-time representation and timezone/offset; derive UTC only when defensible. This is distinct from event time and must not replace or imply the OS shutdown event time. |
+| `request_confirmed_at_raw`, `request_confirmed_at_utc`, `request_confirmed_time_zone_or_offset` | For the interactive request marker, preserve the timestamp and timezone/offset captured when the operator explicitly confirms Yes. Derive UTC only when defensible. This records confirmation time, not persistence completion or OS shutdown. |
+| `recorded_at_raw`, `recorded_at_utc`, `recorded_time_zone_or_offset`, `recording_outcome` | Preserve the recorder's timestamp and timezone/offset for its reported durable-persistence completion; derive UTC only when defensible. Keep it distinct from request confirmation and OS event time. If persistence fails or completion cannot be evidenced, persistence time is absent/unknown and the controlled writer path must not issue the shutdown request. Exact implementation and proof of durable completion remain unselected. |
 | `shutdown_mode_observed`, `request_mechanism_class` | Only values directly evidenced by the source. `request_mechanism_class` is one of `INTERACTIVE_LOCAL_REQUEST`, `APPROVED_AUTOMATED_REQUEST`, or `UNKNOWN`; it must not include an individual identity. Do not infer intent from a generic orderly event. |
 | `evidence_digest`, `evidence_reference`, `parser_or_writer_version` | Integrity and lineage to the locally retained evidence, parser/writer version, and any approved evidence locator. Do not embed private file paths or raw log bodies in a report. |
 | `quality_state`, `ambiguity_codes` | `CURRENT`, `CONFLICTING`, `INCOMPLETE`, or `UNKNOWN` evidence quality and explicit reasons. Quality is not incident severity or safety state. |
