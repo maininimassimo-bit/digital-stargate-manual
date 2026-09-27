@@ -13,8 +13,10 @@
 This draft defines a reviewable local shutdown evidence contract and an offline
 method for considering historical Windows System events alongside N.I.N.A.
 activity and session evidence. It records the owner decisions of 2026-09-25 and
-2026-09-27: policy B, record shutdown evidence locally, and include a local
-pre-shutdown request marker in the proposed evidence sequence.
+2026-09-27: policy B, record shutdown evidence locally, include a local
+pre-shutdown request marker in the proposed evidence sequence, and preserve the
+source timestamp with its timezone/offset while deriving UTC only when
+defensible (DLG-140).
 
 A local orderly-shutdown record can support the fact and recorded time of an
 orderly shutdown. By itself it does not show that the shutdown was planned, rule
@@ -99,8 +101,8 @@ remain unselected.
 | `schema_version`, `record_kind`, `record_id` | Versioned envelope; kind distinguishes request, OS shutdown, and boot evidence. `record_id` is deterministic from source identity, native record identity and content digest where available. |
 | `host_identity`, `boot_epoch_id` | Host as evidenced by the source and the boot epoch to which the record is attributed; missing or conflicting identity remains unknown. |
 | `source_provider`, `source_event_id`, `source_record_id` | Native provider/event and record identity, or the named local writer identity for a request marker. Preserve native identifiers; do not manufacture them. |
-| `event_time_raw`, `event_time_utc`, `time_zone_or_offset`, `clock_quality` | Original timestamp and a normalized UTC instant only when its offset/timezone and clock quality are defensible. Never overwrite the raw value. |
-| `recorded_at_utc`, `recording_outcome` | When the local recorder says it persisted the record and whether persistence succeeded, failed, or is unknown. This is distinct from event time. |
+| `event_time_raw`, `event_time_utc`, `time_zone_or_offset`, `clock_quality` | Preserve the source's original timestamp representation and the evidenced timezone/offset. Derive UTC only when timezone/offset, source semantics and clock quality are defensible; otherwise leave normalized UTC unknown. Never overwrite the raw value or silently repair clock drift. |
+| `recorded_at_raw`, `recorded_at_utc`, `recorded_time_zone_or_offset`, `recording_outcome` | Preserve the recorder's original persistence-time representation and timezone/offset; derive UTC only when defensible. This is distinct from event time and must not replace or imply the OS shutdown event time. |
 | `shutdown_mode_observed`, `request_mechanism_class` | Only values directly evidenced by the source. `request_mechanism_class` is one of `INTERACTIVE_LOCAL_REQUEST`, `APPROVED_AUTOMATED_REQUEST`, or `UNKNOWN`; it must not include an individual identity. Do not infer intent from a generic orderly event. |
 | `evidence_digest`, `evidence_reference`, `parser_or_writer_version` | Integrity and lineage to the locally retained evidence, parser/writer version, and any approved evidence locator. Do not embed private file paths or raw log bodies in a report. |
 | `quality_state`, `ambiguity_codes` | `CURRENT`, `CONFLICTING`, `INCOMPLETE`, or `UNKNOWN` evidence quality and explicit reasons. Quality is not incident severity or safety state. |
@@ -158,8 +160,11 @@ import actual EAGLE logs or N.I.N.A. logs as part of this gate.
    established, represent coverage gaps explicitly.
 3. **Normalize without erasing source time.** Preserve native timestamp text,
    source timezone/offset and provider/record identity. Derive UTC only when
-   conversion is defensible. Flag DST ambiguity, clock steps, missing offsets,
-   impossible ordering, duplicates and conflicting identities.
+   conversion is defensible, including source timestamp semantics and clock
+   quality; otherwise retain the raw value and mark normalized time unknown.
+   Keep recorder persistence time separate from source event time. Flag DST
+   ambiguity, clock steps, missing offsets, impossible ordering, duplicates and
+   conflicting identities.
 4. **Build a host-epoch event ledger.** Pair validated boot and shutdown events
    only when identity, epoch, ordering and source continuity support a unique
    pairing. Label outputs as bounded host-on intervals, open-ended intervals,
