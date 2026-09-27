@@ -20,18 +20,18 @@ Validate the separate Session Readiness / Go-No-Go decision-support contract wit
 | Provenance | Source, run, timestamp, semantic type and correlation ID preserved |
 | Live telemetry | Weather rain/wind/gust/cloudiness/humidity-dew point, dome, mount, camera, power, network and EAGLE health are present and current |
 | Freshness | Forecast and readiness evidence no older than six hours |
-| Weather blocking | Rain > 0; mean wind > 15 km/h; gust > 20 km/h; cloudiness > 50%; humidity > 90%; or dew-point margin < 10 °C produces `NO_GO` |
+| Weather blocking | Rain > 0; mean wind > 15 km/h; gust > 20 km/h; cloudiness > 50%; humidity > 90%; or dew-point margin ≤ 3 °C produces `NO_GO` |
 | Telemetry missingness | Any mandatory domain missing or stale produces `INDETERMINATE` and prevents `GO` |
 | Privacy | Protected coordinates and exact site data absent from public projection |
 | Boundary | No scheduler, command, automatic target selection or Safety Authority |
 | Architecture | Domain/application/infrastructure dependency rules pass |
 | Documentation | Links, navigation, roadmap and closure lineage consistent |
 | Deterministic evaluator | Contract-backed evaluator produces only `GO`, `NO_GO` or `INDETERMINATE` and remains read-only |
-| Threshold fixtures | Equality passes; every approved weather exceedance blocks; dew margin below 10 °C blocks |
+| Threshold fixtures | Equality passes for the existing inclusive limits; every approved weather exceedance blocks; dew-point margin exactly 3 °C blocks and only margin >3 °C passes |
 
 ## Required owner decisions
 
-The owner approved the state semantics and mandatory domains on 2026-09-18. `GO` requires forecast, current astronomy, setup compatibility and all mandatory live telemetry to be complete, fresh, consistent and passing. `NO_GO` applies to rain > 0 or wind/gust beyond documented local limits. `INDETERMINATE` applies to missing or stale mandatory domains. Forecast/readiness freshness is six hours.
+The owner approved the state semantics and mandatory domains on 2026-09-18. On 2026-09-27, DLG-144 amended the dew-point readiness threshold to `ambient_temperature - dew_point <= 3 °C` as `NO_GO`; the exact boundary is blocking. Other weather limits and state semantics remain unchanged. `GO` requires forecast, current astronomy, setup compatibility and all mandatory live telemetry to be complete, fresh, consistent and passing. `INDETERMINATE` applies to missing or stale mandatory domains. Forecast/readiness freshness is six hours.
 
 The repository-level source inventory and owner-approved BKL-032 thresholds are recorded in `BKL-032-TELEMETRY-SOURCE-MAPPING-2026-09-18.md`. The deterministic evaluator and bounded fixtures are implemented in `.github/scripts/bkl-032-readiness-evaluator.mjs` and `test-bkl-032-readiness-evaluator.mjs`. Remaining runtime gate: acceptance of the read-only source/transport mapping for each domain. S10 remains `UNAVAILABLE`.
 

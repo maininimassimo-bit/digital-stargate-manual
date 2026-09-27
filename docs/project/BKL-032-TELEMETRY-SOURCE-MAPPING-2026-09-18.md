@@ -51,9 +51,9 @@ The owner approved these BKL-032 readiness thresholds on 2026-09-18. They apply 
 | Gust | `wind_gust > 20 km/h` | `NO_GO` |
 | Cloudiness | `cloud_cover > 50%` | `NO_GO` |
 | Relative humidity | `humidity > 90%` | `NO_GO` |
-| Dew-point margin | `ambient_temperature - dew_point < 10 °C` | `NO_GO` |
+| Dew-point margin | `ambient_temperature - dew_point <= 3 °C` | `NO_GO` |
 
-The dew-point rule means that a margin of exactly `10 °C` passes this threshold check; a smaller margin blocks. Missing, stale, conflicting or unavailable values remain `INDETERMINATE` under the approved fail-closed semantics, rather than being treated as passing.
+The owner amended the dew-point threshold on 2026-09-27 (DLG-144): a margin of exactly `3 °C` is `NO_GO`, and only a value greater than `3 °C` passes this threshold check. This supersedes the dew-point component of DLG-059; other BKL-032 weather thresholds remain unchanged. Missing, stale, conflicting or unavailable values remain `INDETERMINATE` under the approved fail-closed semantics, rather than being treated as passing.
 
 The older operational weather chapter still contains a generic `DA VALIDARE` note. The BKL-032 decision is scoped to this readiness capability and does not rewrite or promote that chapter into Safety Authority policy. A future safety/interlock change remains separately governed.
 
