@@ -86,8 +86,11 @@ store an account name, SID, or other individual identifier. The
 controlled vocabulary but has no selected or authorized production trigger in
 this design. Shutdowns initiated through other paths may lack a request marker
 and must be reconciled from their own evidence without inferring intent. The
-command's implementation, invocation details, storage and permissions remain
-unselected.
+owner also selected not to record whether invocation came from the local
+console or an interactive remote session. The marker must not imply or encode
+that distinction, and later reconciliation must not infer it from the marker.
+The command's implementation, invocation details, storage and permissions
+remain unselected.
 
 ### 2.2 Minimum normalized record fields
 
