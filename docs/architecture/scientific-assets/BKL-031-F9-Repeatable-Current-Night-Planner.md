@@ -55,8 +55,10 @@ most 20 km/h, and relative humidity at most 90%. The dew-point margin is
 computed per hourly sample as ambient temperature minus dew-point temperature;
 a margin at or below 3 °C is NO-GO, and only a value above 3 °C passes this
 planner check. This owner-selected F9 planning threshold is versioned as
-`DSG-F9-PLANNER-WEATHER-GATE@1.1`; it does not replace or change the BKL-032
-readiness threshold of 10 °C. The 20% cloud limit is the owner's stricter
+`DSG-F9-PLANNER-WEATHER-GATE@1.1`. On 2026-09-27 the owner separately amended
+the BKL-032 dew-point readiness threshold to the same ≤3 °C blocking boundary
+(DLG-144); this does not merge the planner and readiness policies, whose other
+weather constraints remain distinct. The 20% cloud limit is the owner's stricter
 planning constraint for dome/session suitability and does not replace or
 change the BKL-032 cloud threshold of 50%.
 

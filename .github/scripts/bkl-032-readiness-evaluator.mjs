@@ -6,7 +6,7 @@ export const THRESHOLDS = Object.freeze({
   windGustKmh: 20,
   cloudCoverPct: 50,
   humidityPct: 90,
-  dewPointMarginC: 10
+  dewPointMarginC: 3
 });
 
 const TELEMETRY_DOMAINS = Object.freeze(['weather', 'dome', 'mount', 'camera', 'power', 'network', 'eagle_health']);
@@ -93,7 +93,7 @@ export function evaluateReadiness(input, now = new Date()) {
     if (weather.wind_gust_kmh > THRESHOLDS.windGustKmh) blocking.push('GUST_ABOVE_LIMIT');
     if (weather.cloud_cover_pct > THRESHOLDS.cloudCoverPct) blocking.push('CLOUD_ABOVE_LIMIT');
     if (weather.humidity_pct > THRESHOLDS.humidityPct) blocking.push('HUMIDITY_ABOVE_LIMIT');
-    if (margin < THRESHOLDS.dewPointMarginC) blocking.push('DEW_MARGIN_BELOW_LIMIT');
+    if (margin <= THRESHOLDS.dewPointMarginC) blocking.push('DEW_MARGIN_LESS_THAN_OR_EQUAL_LIMIT');
     if (blocking.length > 0) { checks.push(check('telemetry.weather.thresholds', 'NO_GO', 'WEATHER_THRESHOLD_BLOCKING', { blocking, dew_point_margin_c: margin })); blocked = true; }
     else checks.push(check('telemetry.weather.thresholds', 'PASS', 'WEATHER_THRESHOLDS_PASSING', { dew_point_margin_c: margin }));
   }

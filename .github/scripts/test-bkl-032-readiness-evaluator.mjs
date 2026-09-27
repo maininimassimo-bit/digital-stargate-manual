@@ -36,11 +36,25 @@ test('complete current evidence produces GO and equality passes', () => {
 test('each approved weather threshold produces NO_GO', () => {
   for (const mutation of [
     w => { w.rain_rate_mm_h = 0.1; }, w => { w.wind_speed_kmh = 15.1; }, w => { w.wind_gust_kmh = 20.1; },
-    w => { w.cloud_cover_pct = 50.1; }, w => { w.humidity_pct = 90.1; }, w => { w.dew_point_c = 0.1; }
+    w => { w.cloud_cover_pct = 50.1; }, w => { w.humidity_pct = 90.1; }, w => { w.ambient_temperature_c = 3; w.dew_point_c = 0; }
   ]) {
     const input = base(); mutation(input.live_telemetry.weather);
     assert.equal(evaluateReadiness(input).decision, 'NO_GO');
   }
+});
+
+test('dew-point margin must be strictly greater than 3 C', () => {
+  const exactBoundary = base();
+  exactBoundary.live_telemetry.weather.ambient_temperature_c = 3;
+  exactBoundary.live_telemetry.weather.dew_point_c = 0;
+  const blocked = evaluateReadiness(exactBoundary);
+  assert.equal(blocked.decision, 'NO_GO');
+  assert.ok(blocked.checks.find(item => item.id === 'telemetry.weather.thresholds').details.blocking.includes('DEW_MARGIN_LESS_THAN_OR_EQUAL_LIMIT'));
+
+  const aboveBoundary = base();
+  aboveBoundary.live_telemetry.weather.ambient_temperature_c = 3.01;
+  aboveBoundary.live_telemetry.weather.dew_point_c = 0;
+  assert.equal(evaluateReadiness(aboveBoundary).decision, 'GO');
 });
 
 test('missing or stale mandatory evidence produces INDETERMINATE', () => {
