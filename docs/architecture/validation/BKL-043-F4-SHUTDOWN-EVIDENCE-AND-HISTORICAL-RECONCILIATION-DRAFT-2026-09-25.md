@@ -37,12 +37,14 @@ Keep these distinct; do not merge them into one inferred “planned shutdown” 
 
 1. **Shutdown request marker (owner-selected design element, 2026-09-27):** a
    local writer records that an orderly shutdown request was issued, preserving
-   only a controlled mechanism category (for example, interactive local action
-   or approved automated mechanism). Per owner decision on 2026-09-27, do not
-   record a person's name, account name, SID, or other individual identifier.
-   This proves only that the writer recorded a request; it does not prove the OS
-   completed shutdown or that the shutdown was planned. Tying the request to a
-   reviewed plan still requires independent corroboration or human review.
+   only one controlled mechanism category. The owner selected these values on
+   2026-09-27: `INTERACTIVE_LOCAL_REQUEST`,
+   `APPROVED_AUTOMATED_REQUEST`, and `UNKNOWN`. Do not record a person's name,
+   account name, SID, or other individual identifier. `UNKNOWN` is required when
+   the mechanism class cannot be established from the marker. This proves only
+   that the writer recorded a request; it does not prove the OS completed
+   shutdown or that the shutdown was planned. Tying the request to a reviewed
+   plan still requires independent corroboration or human review.
 2. **OS shutdown evidence:** a validated Windows System event from an approved
    provider/event allowlist indicating an orderly shutdown transition. Preserve
    provider, event identity, native record identity and timestamp provenance.
@@ -56,11 +58,11 @@ Keep these distinct; do not merge them into one inferred “planned shutdown” 
 The owner-selected design direction includes an append-only, non-elevated
 request marker before the shutdown request, paired where available with
 OS-native shutdown and subsequent boot evidence. The marker remains distinct
-from evidence that the OS completed shutdown. The mechanism category is the
-only actor-related value selected; the exact controlled vocabulary, writer
-placement, trigger, storage path, permissions, durability, and failure handling
-remain unselected implementation decisions. This selection does not authorize
-configuring a shutdown hook, scheduled task, service, or writer.
+from evidence that the OS completed shutdown. The three mechanism categories
+are selected; writer placement, trigger, storage path, permissions, durability,
+and failure handling remain unselected implementation decisions. This selection
+does not authorize configuring a shutdown hook, scheduled task, service, or
+writer.
 
 ### 2.2 Minimum normalized record fields
 
@@ -71,7 +73,7 @@ configuring a shutdown hook, scheduled task, service, or writer.
 | `source_provider`, `source_event_id`, `source_record_id` | Native provider/event and record identity, or the named local writer identity for a request marker. Preserve native identifiers; do not manufacture them. |
 | `event_time_raw`, `event_time_utc`, `time_zone_or_offset`, `clock_quality` | Original timestamp and a normalized UTC instant only when its offset/timezone and clock quality are defensible. Never overwrite the raw value. |
 | `recorded_at_utc`, `recording_outcome` | When the local recorder says it persisted the record and whether persistence succeeded, failed, or is unknown. This is distinct from event time. |
-| `shutdown_mode_observed`, `request_mechanism_class` | Only values directly evidenced by the source. The mechanism class uses a future controlled vocabulary; it must not include an individual identity. Do not infer intent from a generic orderly event. |
+| `shutdown_mode_observed`, `request_mechanism_class` | Only values directly evidenced by the source. `request_mechanism_class` is one of `INTERACTIVE_LOCAL_REQUEST`, `APPROVED_AUTOMATED_REQUEST`, or `UNKNOWN`; it must not include an individual identity. Do not infer intent from a generic orderly event. |
 | `evidence_digest`, `evidence_reference`, `parser_or_writer_version` | Integrity and lineage to the locally retained evidence, parser/writer version, and any approved evidence locator. Do not embed private file paths or raw log bodies in a report. |
 | `quality_state`, `ambiguity_codes` | `CURRENT`, `CONFLICTING`, `INCOMPLETE`, or `UNKNOWN` evidence quality and explicit reasons. Quality is not incident severity or safety state. |
 
