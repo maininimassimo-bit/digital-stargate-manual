@@ -59,10 +59,10 @@ The owner-selected design direction includes an append-only, non-elevated
 request marker produced by a dedicated local command used interactively by a
 local operator. Before confirmation, the command must display the target host
 identity and state that it will request an orderly shutdown of that host. It
-presents an explicit Yes/No confirmation; only an affirmative Yes proceeds to
-persist the marker and then issue the shutdown request. No, blank, invalid, or
-canceled input issues no request and records no request marker. Pair the marker
-where available with
+presents an explicit Yes/No confirmation with No selected by default; only an
+affirmative Yes proceeds to persist the marker and then issue the shutdown
+request. No, blank, invalid, or canceled input issues no request and records no
+request marker. Pair the marker where available with
 OS-native shutdown and subsequent boot evidence. The marker remains distinct
 from evidence that the OS completed shutdown. The three mechanism categories
 are selected; writer placement, trigger, storage path, permissions, durability,
