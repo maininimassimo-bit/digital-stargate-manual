@@ -80,14 +80,14 @@
     "lunarFactor": "1 - illuminatedFraction * max(0,sin(radians(clamp(moonAltitudeDeg,0,90)))) * max(0,1-separationDeg/90)"
   },
   "weatherPolicy": {
-    "id": "DSG-F9-PLANNER-WEATHER-GATE@1.0",
+    "id": "DSG-F9-PLANNER-WEATHER-GATE@1.1",
     "limits": {
       "cloudCoverPct": 20,
       "relativeHumidityPct": 90,
       "precipitationMm": 0,
       "windSpeedKmh": 15,
       "windGustKmh": 20,
-      "dewPointMarginC": 10
+      "dewPointMarginC": 3
     },
     "cloudLimitRationale": "OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT",
     "authority": "ADVISORY_PLANNING_ONLY"
@@ -3130,114 +3130,490 @@
       "setupId": "QUATTRO200_TOUPTEK294_BIN1",
       "targets": [
         {
-          "targetKey": "dsg-target:ngc-281",
-          "targetName": "NGC 281 (Pacman Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 96.5,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:m-101",
-          "targetName": "M 101 (Pinwheel Galaxy)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 95.5,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:m-13",
-          "targetName": "M 13 (Hercules Globular Cluster)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 95.5,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
           "targetKey": "dsg-target:m-27",
           "targetName": "M 27",
           "acquisitionState": "ACQUIRED_HISTORY",
           "setupSuitabilityScore": 95.5,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
+          "eligibleTwoHourWindowCount": 5,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-27T19:00:00Z",
+              "toUtcExclusive": "2026-09-27T21:00:00Z",
+              "advisoryScore": 95.4,
+              "meanAltitudeDeg": 67.6,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 25.6,
+              "meanMoonIlluminatedFraction": 0.984,
+              "meanMoonSeparationDeg": 73.0,
+              "lunarPenaltyPct": 8.0
+            },
+            {
+              "fromUtc": "2026-09-27T20:00:00Z",
+              "toUtcExclusive": "2026-09-27T22:00:00Z",
+              "advisoryScore": 94.1,
+              "meanAltitudeDeg": 60.5,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 36.1,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 73.3,
+              "lunarPenaltyPct": 10.6
+            },
+            {
+              "fromUtc": "2026-09-27T21:00:00Z",
+              "toUtcExclusive": "2026-09-27T23:00:00Z",
+              "advisoryScore": 89.9,
+              "meanAltitudeDeg": 50.7,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 45.7,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 73.7,
+              "lunarPenaltyPct": 12.6
+            }
+          ]
         },
         {
-          "targetKey": "dsg-target:m-51",
-          "targetName": "M 51 (Whirlpool Galaxy)",
+          "targetKey": "dsg-target:ngc-281",
+          "targetName": "NGC 281 (Pacman Nebula)",
           "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 95.5,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:ngc-2392",
-          "targetName": "NGC 2392 (Eskimo Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 95.5,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:ngc-7293",
-          "targetName": "NGC 7293 (Helix Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 95.5,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:ldn-1320",
-          "targetName": "LDN 1320",
-          "acquisitionState": "ACQUIRED_HISTORY",
-          "setupSuitabilityScore": 94.4,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:ic-434",
-          "targetName": "IC 434 (Horsehead Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 88.6,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:m-42",
-          "targetName": "M 42 (Orion Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 78.0,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:m-45",
-          "targetName": "M 45 (Pleiades)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 67.5,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:ic-1805",
-          "targetName": "IC 1805 (Heart Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 63.3,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
+          "setupSuitabilityScore": 96.5,
+          "eligibleTwoHourWindowCount": 8,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-27T21:00:00Z",
+              "toUtcExclusive": "2026-09-27T23:00:00Z",
+              "advisoryScore": 91.7,
+              "meanAltitudeDeg": 64.9,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 45.7,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 45.2,
+              "lunarPenaltyPct": 34.9
+            },
+            {
+              "fromUtc": "2026-09-27T22:00:00Z",
+              "toUtcExclusive": "2026-09-28T00:00:00Z",
+              "advisoryScore": 90.9,
+              "meanAltitudeDeg": 71.6,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 53.6,
+              "meanMoonIlluminatedFraction": 0.98,
+              "meanMoonSeparationDeg": 45.0,
+              "lunarPenaltyPct": 39.4
+            },
+            {
+              "fromUtc": "2026-09-27T20:00:00Z",
+              "toUtcExclusive": "2026-09-27T22:00:00Z",
+              "advisoryScore": 90.7,
+              "meanAltitudeDeg": 56.9,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 36.1,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 45.4,
+              "lunarPenaltyPct": 28.6
+            }
+          ]
         },
         {
           "targetKey": "dsg-target:ngc-7000",
           "targetName": "NGC 7000 (North America Nebula)",
           "acquisitionState": "NOT_YET_ACQUIRED",
           "setupSuitabilityScore": 63.3,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
+          "eligibleTwoHourWindowCount": 7,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-27T19:00:00Z",
+              "toUtcExclusive": "2026-09-27T21:00:00Z",
+              "advisoryScore": 91.4,
+              "meanAltitudeDeg": 84.1,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 25.6,
+              "meanMoonIlluminatedFraction": 0.984,
+              "meanMoonSeparationDeg": 61.8,
+              "lunarPenaltyPct": 13.2
+            },
+            {
+              "fromUtc": "2026-09-27T20:00:00Z",
+              "toUtcExclusive": "2026-09-27T22:00:00Z",
+              "advisoryScore": 90.9,
+              "meanAltitudeDeg": 81.6,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 36.1,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 62.0,
+              "lunarPenaltyPct": 17.9
+            },
+            {
+              "fromUtc": "2026-09-27T21:00:00Z",
+              "toUtcExclusive": "2026-09-27T23:00:00Z",
+              "advisoryScore": 90.4,
+              "meanAltitudeDeg": 71.1,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 45.7,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 62.2,
+              "lunarPenaltyPct": 21.6
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:ic-1805",
+          "targetName": "IC 1805 (Heart Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 63.3,
+          "eligibleTwoHourWindowCount": 8,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-28T02:00:00Z",
+              "toUtcExclusive": "2026-09-28T04:00:00Z",
+              "advisoryScore": 88.3,
+              "meanAltitudeDeg": 67.9,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 46.6,
+              "meanMoonIlluminatedFraction": 0.974,
+              "meanMoonSeparationDeg": 50.5,
+              "lunarPenaltyPct": 31.0
+            },
+            {
+              "fromUtc": "2026-09-27T23:00:00Z",
+              "toUtcExclusive": "2026-09-28T01:00:00Z",
+              "advisoryScore": 88.0,
+              "meanAltitudeDeg": 64.8,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 58.3,
+              "meanMoonIlluminatedFraction": 0.978,
+              "meanMoonSeparationDeg": 51.5,
+              "lunarPenaltyPct": 35.6
+            },
+            {
+              "fromUtc": "2026-09-28T00:00:00Z",
+              "toUtcExclusive": "2026-09-28T02:00:00Z",
+              "advisoryScore": 87.8,
+              "meanAltitudeDeg": 69.2,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 58.5,
+              "meanMoonIlluminatedFraction": 0.978,
+              "meanMoonSeparationDeg": 51.2,
+              "lunarPenaltyPct": 35.9
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:m-13",
+          "targetName": "M 13 (Hercules Globular Cluster)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 95.5,
+          "eligibleTwoHourWindowCount": 2,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-27T19:00:00Z",
+              "toUtcExclusive": "2026-09-27T21:00:00Z",
+              "advisoryScore": 87.9,
+              "meanAltitudeDeg": 44.1,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 25.6,
+              "meanMoonIlluminatedFraction": 0.984,
+              "meanMoonSeparationDeg": 110.1,
+              "lunarPenaltyPct": 0.0
+            },
+            {
+              "fromUtc": "2026-09-27T20:00:00Z",
+              "toUtcExclusive": "2026-09-27T22:00:00Z",
+              "advisoryScore": 82.3,
+              "meanAltitudeDeg": 33.6,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 36.1,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 110.3,
+              "lunarPenaltyPct": 0.0
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:m-45",
+          "targetName": "M 45 (Pleiades)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 67.5,
+          "eligibleTwoHourWindowCount": 6,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-28T02:00:00Z",
+              "toUtcExclusive": "2026-09-28T04:00:00Z",
+              "advisoryScore": 87.1,
+              "meanAltitudeDeg": 70.6,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 46.6,
+              "meanMoonIlluminatedFraction": 0.974,
+              "meanMoonSeparationDeg": 36.9,
+              "lunarPenaltyPct": 41.6
+            },
+            {
+              "fromUtc": "2026-09-28T01:00:00Z",
+              "toUtcExclusive": "2026-09-28T03:00:00Z",
+              "advisoryScore": 86.5,
+              "meanAltitudeDeg": 66.9,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 54.2,
+              "meanMoonIlluminatedFraction": 0.976,
+              "meanMoonSeparationDeg": 37.5,
+              "lunarPenaltyPct": 46.1
+            },
+            {
+              "fromUtc": "2026-09-28T00:00:00Z",
+              "toUtcExclusive": "2026-09-28T02:00:00Z",
+              "advisoryScore": 84.6,
+              "meanAltitudeDeg": 58.4,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 58.5,
+              "meanMoonIlluminatedFraction": 0.978,
+              "meanMoonSeparationDeg": 38.0,
+              "lunarPenaltyPct": 48.1
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:ldn-1320",
+          "targetName": "LDN 1320",
+          "acquisitionState": "ACQUIRED_HISTORY",
+          "setupSuitabilityScore": 94.4,
+          "eligibleTwoHourWindowCount": 8,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-28T02:00:00Z",
+              "toUtcExclusive": "2026-09-28T04:00:00Z",
+              "advisoryScore": 86.9,
+              "meanAltitudeDeg": 46.8,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 46.6,
+              "meanMoonIlluminatedFraction": 0.974,
+              "meanMoonSeparationDeg": 74.1,
+              "lunarPenaltyPct": 12.4
+            },
+            {
+              "fromUtc": "2026-09-28T01:00:00Z",
+              "toUtcExclusive": "2026-09-28T03:00:00Z",
+              "advisoryScore": 86.6,
+              "meanAltitudeDeg": 46.4,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 54.2,
+              "meanMoonIlluminatedFraction": 0.976,
+              "meanMoonSeparationDeg": 74.4,
+              "lunarPenaltyPct": 13.7
+            },
+            {
+              "fromUtc": "2026-09-28T00:00:00Z",
+              "toUtcExclusive": "2026-09-28T02:00:00Z",
+              "advisoryScore": 86.4,
+              "meanAltitudeDeg": 45.8,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 58.5,
+              "meanMoonIlluminatedFraction": 0.978,
+              "meanMoonSeparationDeg": 74.7,
+              "lunarPenaltyPct": 14.2
+            }
+          ]
         },
         {
           "targetKey": "dsg-target:m-31",
           "targetName": "M 31 (Andromeda Galaxy)",
           "acquisitionState": "NOT_YET_ACQUIRED",
           "setupSuitabilityScore": 60.5,
+          "eligibleTwoHourWindowCount": 8,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-27T21:00:00Z",
+              "toUtcExclusive": "2026-09-27T23:00:00Z",
+              "advisoryScore": 86.4,
+              "meanAltitudeDeg": 67.8,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 45.7,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 30.2,
+              "lunarPenaltyPct": 46.5
+            },
+            {
+              "fromUtc": "2026-09-27T22:00:00Z",
+              "toUtcExclusive": "2026-09-28T00:00:00Z",
+              "advisoryScore": 85.4,
+              "meanAltitudeDeg": 78.8,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 53.6,
+              "meanMoonIlluminatedFraction": 0.98,
+              "meanMoonSeparationDeg": 30.1,
+              "lunarPenaltyPct": 52.4
+            },
+            {
+              "fromUtc": "2026-09-27T20:00:00Z",
+              "toUtcExclusive": "2026-09-27T22:00:00Z",
+              "advisoryScore": 85.3,
+              "meanAltitudeDeg": 56.9,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 36.1,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 30.4,
+              "lunarPenaltyPct": 38.2
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:ngc-2392",
+          "targetName": "NGC 2392 (Eskimo Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 95.5,
+          "eligibleTwoHourWindowCount": 2,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-28T02:00:00Z",
+              "toUtcExclusive": "2026-09-28T04:00:00Z",
+              "advisoryScore": 84.1,
+              "meanAltitudeDeg": 38.5,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 46.6,
+              "meanMoonIlluminatedFraction": 0.974,
+              "meanMoonSeparationDeg": 87.9,
+              "lunarPenaltyPct": 1.6
+            },
+            {
+              "fromUtc": "2026-09-28T01:00:00Z",
+              "toUtcExclusive": "2026-09-28T03:00:00Z",
+              "advisoryScore": 78.1,
+              "meanAltitudeDeg": 27.5,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 54.2,
+              "meanMoonIlluminatedFraction": 0.976,
+              "meanMoonSeparationDeg": 88.5,
+              "lunarPenaltyPct": 1.3
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:ic-434",
+          "targetName": "IC 434 (Horsehead Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 88.6,
+          "eligibleTwoHourWindowCount": 2,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-28T02:00:00Z",
+              "toUtcExclusive": "2026-09-28T04:00:00Z",
+              "advisoryScore": 80.4,
+              "meanAltitudeDeg": 37.5,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 46.6,
+              "meanMoonIlluminatedFraction": 0.974,
+              "meanMoonSeparationDeg": 66.9,
+              "lunarPenaltyPct": 18.1
+            },
+            {
+              "fromUtc": "2026-09-28T01:00:00Z",
+              "toUtcExclusive": "2026-09-28T03:00:00Z",
+              "advisoryScore": 75.9,
+              "meanAltitudeDeg": 29.7,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 54.2,
+              "meanMoonIlluminatedFraction": 0.976,
+              "meanMoonSeparationDeg": 67.4,
+              "lunarPenaltyPct": 19.9
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:m-101",
+          "targetName": "M 101 (Pinwheel Galaxy)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 95.5,
+          "eligibleTwoHourWindowCount": 1,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-27T19:00:00Z",
+              "toUtcExclusive": "2026-09-27T21:00:00Z",
+              "advisoryScore": 79.3,
+              "meanAltitudeDeg": 28.5,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 25.6,
+              "meanMoonIlluminatedFraction": 0.984,
+              "meanMoonSeparationDeg": 113.4,
+              "lunarPenaltyPct": 0.0
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:m-42",
+          "targetName": "M 42 (Orion Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 78.0,
+          "eligibleTwoHourWindowCount": 2,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-28T02:00:00Z",
+              "toUtcExclusive": "2026-09-28T04:00:00Z",
+              "advisoryScore": 78.2,
+              "meanAltitudeDeg": 35.5,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 46.6,
+              "meanMoonIlluminatedFraction": 0.974,
+              "meanMoonSeparationDeg": 66.3,
+              "lunarPenaltyPct": 18.6
+            },
+            {
+              "fromUtc": "2026-09-28T01:00:00Z",
+              "toUtcExclusive": "2026-09-28T03:00:00Z",
+              "advisoryScore": 73.9,
+              "meanAltitudeDeg": 28.1,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 54.2,
+              "meanMoonIlluminatedFraction": 0.976,
+              "meanMoonSeparationDeg": 66.8,
+              "lunarPenaltyPct": 20.4
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:ngc-7293",
+          "targetName": "NGC 7293 (Helix Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 95.5,
+          "eligibleTwoHourWindowCount": 3,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-27T20:00:00Z",
+              "toUtcExclusive": "2026-09-27T22:00:00Z",
+              "advisoryScore": 74.0,
+              "meanAltitudeDeg": 25.4,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 36.1,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 50.0,
+              "lunarPenaltyPct": 25.6
+            },
+            {
+              "fromUtc": "2026-09-27T21:00:00Z",
+              "toUtcExclusive": "2026-09-27T23:00:00Z",
+              "advisoryScore": 73.7,
+              "meanAltitudeDeg": 26.2,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 45.7,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 50.6,
+              "lunarPenaltyPct": 30.7
+            },
+            {
+              "fromUtc": "2026-09-27T22:00:00Z",
+              "toUtcExclusive": "2026-09-28T00:00:00Z",
+              "advisoryScore": 71.9,
+              "meanAltitudeDeg": 24.1,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 53.6,
+              "meanMoonIlluminatedFraction": 0.98,
+              "meanMoonSeparationDeg": 51.1,
+              "lunarPenaltyPct": 34.0
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:m-51",
+          "targetName": "M 51 (Whirlpool Galaxy)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 95.5,
           "eligibleTwoHourWindowCount": 0,
           "bestWindows": []
         }
@@ -3247,114 +3623,490 @@
       "setupId": "C8_QHY695A_BIN1",
       "targets": [
         {
-          "targetKey": "dsg-target:m-13",
-          "targetName": "M 13 (Hercules Globular Cluster)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 95.5,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
           "targetKey": "dsg-target:m-27",
           "targetName": "M 27",
           "acquisitionState": "ACQUIRED_HISTORY",
           "setupSuitabilityScore": 95.5,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:m-51",
-          "targetName": "M 51 (Whirlpool Galaxy)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 95.5,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:ngc-2392",
-          "targetName": "NGC 2392 (Eskimo Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 95.5,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:ngc-7293",
-          "targetName": "NGC 7293 (Helix Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 95.1,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:m-101",
-          "targetName": "M 101 (Pinwheel Galaxy)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 92.4,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:ngc-281",
-          "targetName": "NGC 281 (Pacman Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 84.0,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:ldn-1320",
-          "targetName": "LDN 1320",
-          "acquisitionState": "ACQUIRED_HISTORY",
-          "setupSuitabilityScore": 76.1,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:ic-434",
-          "targetName": "IC 434 (Horsehead Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 66.3,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:ic-1805",
-          "targetName": "IC 1805 (Heart Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 55.5,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:m-31",
-          "targetName": "M 31 (Andromeda Galaxy)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 55.5,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:m-42",
-          "targetName": "M 42 (Orion Nebula)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 55.5,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
-        },
-        {
-          "targetKey": "dsg-target:m-45",
-          "targetName": "M 45 (Pleiades)",
-          "acquisitionState": "NOT_YET_ACQUIRED",
-          "setupSuitabilityScore": 55.5,
-          "eligibleTwoHourWindowCount": 0,
-          "bestWindows": []
+          "eligibleTwoHourWindowCount": 5,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-27T19:00:00Z",
+              "toUtcExclusive": "2026-09-27T21:00:00Z",
+              "advisoryScore": 95.4,
+              "meanAltitudeDeg": 67.6,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 25.6,
+              "meanMoonIlluminatedFraction": 0.984,
+              "meanMoonSeparationDeg": 73.0,
+              "lunarPenaltyPct": 8.0
+            },
+            {
+              "fromUtc": "2026-09-27T20:00:00Z",
+              "toUtcExclusive": "2026-09-27T22:00:00Z",
+              "advisoryScore": 94.1,
+              "meanAltitudeDeg": 60.5,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 36.1,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 73.3,
+              "lunarPenaltyPct": 10.6
+            },
+            {
+              "fromUtc": "2026-09-27T21:00:00Z",
+              "toUtcExclusive": "2026-09-27T23:00:00Z",
+              "advisoryScore": 89.9,
+              "meanAltitudeDeg": 50.7,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 45.7,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 73.7,
+              "lunarPenaltyPct": 12.6
+            }
+          ]
         },
         {
           "targetKey": "dsg-target:ngc-7000",
           "targetName": "NGC 7000 (North America Nebula)",
           "acquisitionState": "NOT_YET_ACQUIRED",
           "setupSuitabilityScore": 55.5,
+          "eligibleTwoHourWindowCount": 7,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-27T19:00:00Z",
+              "toUtcExclusive": "2026-09-27T21:00:00Z",
+              "advisoryScore": 90.6,
+              "meanAltitudeDeg": 84.1,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 25.6,
+              "meanMoonIlluminatedFraction": 0.984,
+              "meanMoonSeparationDeg": 61.8,
+              "lunarPenaltyPct": 13.2
+            },
+            {
+              "fromUtc": "2026-09-27T20:00:00Z",
+              "toUtcExclusive": "2026-09-27T22:00:00Z",
+              "advisoryScore": 90.1,
+              "meanAltitudeDeg": 81.6,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 36.1,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 62.0,
+              "lunarPenaltyPct": 17.9
+            },
+            {
+              "fromUtc": "2026-09-27T21:00:00Z",
+              "toUtcExclusive": "2026-09-27T23:00:00Z",
+              "advisoryScore": 89.6,
+              "meanAltitudeDeg": 71.1,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 45.7,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 62.2,
+              "lunarPenaltyPct": 21.6
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:ngc-281",
+          "targetName": "NGC 281 (Pacman Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 84.0,
+          "eligibleTwoHourWindowCount": 8,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-27T21:00:00Z",
+              "toUtcExclusive": "2026-09-27T23:00:00Z",
+              "advisoryScore": 90.5,
+              "meanAltitudeDeg": 64.9,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 45.7,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 45.2,
+              "lunarPenaltyPct": 34.9
+            },
+            {
+              "fromUtc": "2026-09-27T22:00:00Z",
+              "toUtcExclusive": "2026-09-28T00:00:00Z",
+              "advisoryScore": 89.7,
+              "meanAltitudeDeg": 71.6,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 53.6,
+              "meanMoonIlluminatedFraction": 0.98,
+              "meanMoonSeparationDeg": 45.0,
+              "lunarPenaltyPct": 39.4
+            },
+            {
+              "fromUtc": "2026-09-27T20:00:00Z",
+              "toUtcExclusive": "2026-09-27T22:00:00Z",
+              "advisoryScore": 89.4,
+              "meanAltitudeDeg": 56.9,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 36.1,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 45.4,
+              "lunarPenaltyPct": 28.6
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:m-13",
+          "targetName": "M 13 (Hercules Globular Cluster)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 95.5,
+          "eligibleTwoHourWindowCount": 2,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-27T19:00:00Z",
+              "toUtcExclusive": "2026-09-27T21:00:00Z",
+              "advisoryScore": 87.9,
+              "meanAltitudeDeg": 44.1,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 25.6,
+              "meanMoonIlluminatedFraction": 0.984,
+              "meanMoonSeparationDeg": 110.1,
+              "lunarPenaltyPct": 0.0
+            },
+            {
+              "fromUtc": "2026-09-27T20:00:00Z",
+              "toUtcExclusive": "2026-09-27T22:00:00Z",
+              "advisoryScore": 82.3,
+              "meanAltitudeDeg": 33.6,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 36.1,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 110.3,
+              "lunarPenaltyPct": 0.0
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:ic-1805",
+          "targetName": "IC 1805 (Heart Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 55.5,
+          "eligibleTwoHourWindowCount": 8,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-28T02:00:00Z",
+              "toUtcExclusive": "2026-09-28T04:00:00Z",
+              "advisoryScore": 87.5,
+              "meanAltitudeDeg": 67.9,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 46.6,
+              "meanMoonIlluminatedFraction": 0.974,
+              "meanMoonSeparationDeg": 50.5,
+              "lunarPenaltyPct": 31.0
+            },
+            {
+              "fromUtc": "2026-09-27T23:00:00Z",
+              "toUtcExclusive": "2026-09-28T01:00:00Z",
+              "advisoryScore": 87.2,
+              "meanAltitudeDeg": 64.8,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 58.3,
+              "meanMoonIlluminatedFraction": 0.978,
+              "meanMoonSeparationDeg": 51.5,
+              "lunarPenaltyPct": 35.6
+            },
+            {
+              "fromUtc": "2026-09-28T01:00:00Z",
+              "toUtcExclusive": "2026-09-28T03:00:00Z",
+              "advisoryScore": 87.1,
+              "meanAltitudeDeg": 70.4,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 54.2,
+              "meanMoonIlluminatedFraction": 0.976,
+              "meanMoonSeparationDeg": 50.8,
+              "lunarPenaltyPct": 34.4
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:m-31",
+          "targetName": "M 31 (Andromeda Galaxy)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 55.5,
+          "eligibleTwoHourWindowCount": 8,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-27T21:00:00Z",
+              "toUtcExclusive": "2026-09-27T23:00:00Z",
+              "advisoryScore": 85.9,
+              "meanAltitudeDeg": 67.8,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 45.7,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 30.2,
+              "lunarPenaltyPct": 46.5
+            },
+            {
+              "fromUtc": "2026-09-27T22:00:00Z",
+              "toUtcExclusive": "2026-09-28T00:00:00Z",
+              "advisoryScore": 84.9,
+              "meanAltitudeDeg": 78.8,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 53.6,
+              "meanMoonIlluminatedFraction": 0.98,
+              "meanMoonSeparationDeg": 30.1,
+              "lunarPenaltyPct": 52.4
+            },
+            {
+              "fromUtc": "2026-09-27T20:00:00Z",
+              "toUtcExclusive": "2026-09-27T22:00:00Z",
+              "advisoryScore": 84.8,
+              "meanAltitudeDeg": 56.9,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 36.1,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 30.4,
+              "lunarPenaltyPct": 38.2
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:m-45",
+          "targetName": "M 45 (Pleiades)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 55.5,
+          "eligibleTwoHourWindowCount": 6,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-28T02:00:00Z",
+              "toUtcExclusive": "2026-09-28T04:00:00Z",
+              "advisoryScore": 85.9,
+              "meanAltitudeDeg": 70.6,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 46.6,
+              "meanMoonIlluminatedFraction": 0.974,
+              "meanMoonSeparationDeg": 36.9,
+              "lunarPenaltyPct": 41.6
+            },
+            {
+              "fromUtc": "2026-09-28T01:00:00Z",
+              "toUtcExclusive": "2026-09-28T03:00:00Z",
+              "advisoryScore": 85.3,
+              "meanAltitudeDeg": 66.9,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 54.2,
+              "meanMoonIlluminatedFraction": 0.976,
+              "meanMoonSeparationDeg": 37.5,
+              "lunarPenaltyPct": 46.1
+            },
+            {
+              "fromUtc": "2026-09-28T00:00:00Z",
+              "toUtcExclusive": "2026-09-28T02:00:00Z",
+              "advisoryScore": 83.4,
+              "meanAltitudeDeg": 58.4,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 58.5,
+              "meanMoonIlluminatedFraction": 0.978,
+              "meanMoonSeparationDeg": 38.0,
+              "lunarPenaltyPct": 48.1
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:ldn-1320",
+          "targetName": "LDN 1320",
+          "acquisitionState": "ACQUIRED_HISTORY",
+          "setupSuitabilityScore": 76.1,
+          "eligibleTwoHourWindowCount": 8,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-28T02:00:00Z",
+              "toUtcExclusive": "2026-09-28T04:00:00Z",
+              "advisoryScore": 85.1,
+              "meanAltitudeDeg": 46.8,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 46.6,
+              "meanMoonIlluminatedFraction": 0.974,
+              "meanMoonSeparationDeg": 74.1,
+              "lunarPenaltyPct": 12.4
+            },
+            {
+              "fromUtc": "2026-09-28T01:00:00Z",
+              "toUtcExclusive": "2026-09-28T03:00:00Z",
+              "advisoryScore": 84.8,
+              "meanAltitudeDeg": 46.4,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 54.2,
+              "meanMoonIlluminatedFraction": 0.976,
+              "meanMoonSeparationDeg": 74.4,
+              "lunarPenaltyPct": 13.7
+            },
+            {
+              "fromUtc": "2026-09-28T00:00:00Z",
+              "toUtcExclusive": "2026-09-28T02:00:00Z",
+              "advisoryScore": 84.5,
+              "meanAltitudeDeg": 45.8,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 58.5,
+              "meanMoonIlluminatedFraction": 0.978,
+              "meanMoonSeparationDeg": 74.7,
+              "lunarPenaltyPct": 14.2
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:ngc-2392",
+          "targetName": "NGC 2392 (Eskimo Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 95.5,
+          "eligibleTwoHourWindowCount": 2,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-28T02:00:00Z",
+              "toUtcExclusive": "2026-09-28T04:00:00Z",
+              "advisoryScore": 84.1,
+              "meanAltitudeDeg": 38.5,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 46.6,
+              "meanMoonIlluminatedFraction": 0.974,
+              "meanMoonSeparationDeg": 87.9,
+              "lunarPenaltyPct": 1.6
+            },
+            {
+              "fromUtc": "2026-09-28T01:00:00Z",
+              "toUtcExclusive": "2026-09-28T03:00:00Z",
+              "advisoryScore": 78.1,
+              "meanAltitudeDeg": 27.5,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 54.2,
+              "meanMoonIlluminatedFraction": 0.976,
+              "meanMoonSeparationDeg": 88.5,
+              "lunarPenaltyPct": 1.3
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:m-101",
+          "targetName": "M 101 (Pinwheel Galaxy)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 92.4,
+          "eligibleTwoHourWindowCount": 1,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-27T19:00:00Z",
+              "toUtcExclusive": "2026-09-27T21:00:00Z",
+              "advisoryScore": 78.9,
+              "meanAltitudeDeg": 28.5,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 25.6,
+              "meanMoonIlluminatedFraction": 0.984,
+              "meanMoonSeparationDeg": 113.4,
+              "lunarPenaltyPct": 0.0
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:ic-434",
+          "targetName": "IC 434 (Horsehead Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 66.3,
+          "eligibleTwoHourWindowCount": 2,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-28T02:00:00Z",
+              "toUtcExclusive": "2026-09-28T04:00:00Z",
+              "advisoryScore": 78.2,
+              "meanAltitudeDeg": 37.5,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 46.6,
+              "meanMoonIlluminatedFraction": 0.974,
+              "meanMoonSeparationDeg": 66.9,
+              "lunarPenaltyPct": 18.1
+            },
+            {
+              "fromUtc": "2026-09-28T01:00:00Z",
+              "toUtcExclusive": "2026-09-28T03:00:00Z",
+              "advisoryScore": 73.6,
+              "meanAltitudeDeg": 29.7,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 54.2,
+              "meanMoonIlluminatedFraction": 0.976,
+              "meanMoonSeparationDeg": 67.4,
+              "lunarPenaltyPct": 19.9
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:m-42",
+          "targetName": "M 42 (Orion Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 55.5,
+          "eligibleTwoHourWindowCount": 2,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-28T02:00:00Z",
+              "toUtcExclusive": "2026-09-28T04:00:00Z",
+              "advisoryScore": 75.9,
+              "meanAltitudeDeg": 35.5,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 46.6,
+              "meanMoonIlluminatedFraction": 0.974,
+              "meanMoonSeparationDeg": 66.3,
+              "lunarPenaltyPct": 18.6
+            },
+            {
+              "fromUtc": "2026-09-28T01:00:00Z",
+              "toUtcExclusive": "2026-09-28T03:00:00Z",
+              "advisoryScore": 71.6,
+              "meanAltitudeDeg": 28.1,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 54.2,
+              "meanMoonIlluminatedFraction": 0.976,
+              "meanMoonSeparationDeg": 66.8,
+              "lunarPenaltyPct": 20.4
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:ngc-7293",
+          "targetName": "NGC 7293 (Helix Nebula)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 95.1,
+          "eligibleTwoHourWindowCount": 3,
+          "bestWindows": [
+            {
+              "fromUtc": "2026-09-27T20:00:00Z",
+              "toUtcExclusive": "2026-09-27T22:00:00Z",
+              "advisoryScore": 73.9,
+              "meanAltitudeDeg": 25.4,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 36.1,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 50.0,
+              "lunarPenaltyPct": 25.6
+            },
+            {
+              "fromUtc": "2026-09-27T21:00:00Z",
+              "toUtcExclusive": "2026-09-27T23:00:00Z",
+              "advisoryScore": 73.6,
+              "meanAltitudeDeg": 26.2,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 45.7,
+              "meanMoonIlluminatedFraction": 0.982,
+              "meanMoonSeparationDeg": 50.6,
+              "lunarPenaltyPct": 30.7
+            },
+            {
+              "fromUtc": "2026-09-27T22:00:00Z",
+              "toUtcExclusive": "2026-09-28T00:00:00Z",
+              "advisoryScore": 71.9,
+              "meanAltitudeDeg": 24.1,
+              "meanCloudCoverPct": 0.0,
+              "meanMoonAltitudeDeg": 53.6,
+              "meanMoonIlluminatedFraction": 0.98,
+              "meanMoonSeparationDeg": 51.1,
+              "lunarPenaltyPct": 34.0
+            }
+          ]
+        },
+        {
+          "targetKey": "dsg-target:m-51",
+          "targetName": "M 51 (Whirlpool Galaxy)",
+          "acquisitionState": "NOT_YET_ACQUIRED",
+          "setupSuitabilityScore": 95.5,
           "eligibleTwoHourWindowCount": 0,
           "bestWindows": []
         }
