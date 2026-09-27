@@ -27,10 +27,10 @@ F8_PATH = Path("docs/data/observation-planner-f8-current-astronomy-suitability.j
 SUITABILITY_PATH = Path("docs/data/observation-planner-f8-suitability-evidence.json")
 TARGET_CATALOG_PATH = Path("docs/data/observation-planner-target-catalog.json")
 OUTPUT_PATH = Path("docs/data/observation-planner-f9-current-night.json")
-# F9 planning gates: BKL-032 weather limits, with the owner's stricter
-# cloud-cover constraint for opening a dome represented only in this planner.
+# F9 planning gates: the dome cloud constraint and dew-point rule are planner-only;
+# the dew-point margin is intentionally distinct from BKL-032 readiness.
 WEATHER_LIMITS = {"cloudCoverPct": 20, "relativeHumidityPct": 90, "precipitationMm": 0,
-                  "windSpeedKmh": 15, "windGustKmh": 20, "dewPointMarginC": 10}
+                  "windSpeedKmh": 15, "windGustKmh": 20, "dewPointMarginC": 3}
 MIN_TARGET_ALTITUDE_DEG = 20.0
 SUITABILITY_METHOD_ID = "BKL031-F9-SETUP-SUITABILITY@1.0"
 SUITABILITY_WEIGHTS = {"framing": 0.45, "filterSignal": 0.30, "imageScaleObjectClass": 0.25}
@@ -178,7 +178,8 @@ def weather_gate(weather: dict) -> tuple[bool, list[str]]:
     if weather["precipitationMm"] > WEATHER_LIMITS["precipitationMm"]: reasons.append("PIOGGIA_PRESENTE")
     if weather["windSpeedKmh"] > WEATHER_LIMITS["windSpeedKmh"]: reasons.append("VENTO_SOPRA_15_KMH")
     if weather["windGustKmh"] > WEATHER_LIMITS["windGustKmh"]: reasons.append("RAFFICHE_SOPRA_20_KMH")
-    if weather["temperatureC"] - weather["dewPointC"] < WEATHER_LIMITS["dewPointMarginC"]: reasons.append("MARGINE_DEWPOINT_SOTTO_10_C")
+    dew_point_margin = round(weather["temperatureC"] - weather["dewPointC"], 2)
+    if dew_point_margin <= WEATHER_LIMITS["dewPointMarginC"]: reasons.append("MARGINE_DEWPOINT_MINORE_O_UGUALE_A_3_C")
     return not reasons, reasons
 
 
@@ -277,6 +278,46 @@ def candidate_case(setup: dict, target: dict) -> dict:
             "aggregateScore": aggregate, "reasonCodes": reasons}
 
 
+def rank_targets(hourly: list[dict], setups: list[dict], targets: list[dict], cases: list[dict]) -> list[dict]:
+    """Build explainable two-hour target windows from a sanitised hourly projection."""
+    case_map = {(case["setupId"], case["targetKey"]): case for case in cases}
+    rankings = []
+    for setup in setups:
+        ranked = []
+        for target in targets:
+            case = case_map[(setup["setupId"], target["targetKey"])]
+            windows = []
+            for first, second in zip(hourly, hourly[1:]):
+                a = first["targets"][target["targetKey"]]
+                b = second["targets"][target["targetKey"]]
+                if not weather_gate(first["weather"])[0] or not weather_gate(second["weather"])[0]:
+                    continue
+                if (first["solarAltitudeDeg"] > -18 or second["solarAltitudeDeg"] > -18
+                        or a["altitudeDeg"] < MIN_TARGET_ALTITUDE_DEG or b["altitudeDeg"] < MIN_TARGET_ALTITUDE_DEG):
+                    continue
+                score = 100 * (0.6 * ((a["astronomyFactor"] + b["astronomyFactor"]) / 2)
+                               + 0.3 * ((a["weatherFactor"] + b["weatherFactor"]) / 2)
+                               + 0.1 * case["aggregateScore"] / 100)
+                windows.append({"fromUtc": first["validAtUtc"],
+                                "toUtcExclusive": utc(dt.datetime.fromisoformat(second["validAtUtc"].replace("Z", "+00:00")) + dt.timedelta(hours=1)),
+                                "advisoryScore": round(score, 1),
+                                "meanAltitudeDeg": round((a["altitudeDeg"] + b["altitudeDeg"]) / 2, 1),
+                                "meanCloudCoverPct": round((first["weather"]["cloudCoverPct"] + second["weather"]["cloudCoverPct"]) / 2, 1),
+                                "meanMoonAltitudeDeg": round((first["moonAltitudeDeg"] + second["moonAltitudeDeg"]) / 2, 1),
+                                "meanMoonIlluminatedFraction": round((first["moonIlluminatedFraction"] + second["moonIlluminatedFraction"]) / 2, 3),
+                                "meanMoonSeparationDeg": round((a["moonSeparationDeg"] + b["moonSeparationDeg"]) / 2, 1),
+                                "lunarPenaltyPct": round(100 * (1 - (a["lunarSuitabilityFactor"] + b["lunarSuitabilityFactor"]) / 2), 1)})
+            windows.sort(key=lambda item: (-item["advisoryScore"], item["fromUtc"]))
+            ranked.append({"targetKey": target["targetKey"], "targetName": target["targetName"],
+                           "acquisitionState": target["acquisitionState"],
+                           "setupSuitabilityScore": case["aggregateScore"],
+                           "eligibleTwoHourWindowCount": len(windows), "bestWindows": windows[:3]})
+        ranked.sort(key=lambda item: (-(item["bestWindows"][0]["advisoryScore"] if item["bestWindows"] else -1),
+                                      -item["eligibleTwoHourWindowCount"], -item["setupSuitabilityScore"], item["targetKey"]))
+        rankings.append({"setupId": setup["setupId"], "targets": ranked})
+    return rankings
+
+
 def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather: dict, files: list[dict], site: dict, f8: dict, suitability: dict) -> dict:
     run_time = dt.datetime.strptime(run, "%Y%m%d%H").replace(tzinfo=dt.timezone.utc)
     age = (retrieval - run_time).total_seconds() / 3600
@@ -328,32 +369,7 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
     for case in case_map.values():
         suitability_public["cases"].append({"setupId": case["setupId"], "targetKey": case["targetKey"], "inputs": case["inputs"],
                                              "components": case["components"], "aggregateScore": case["aggregateScore"], "reasonCodes": case["reasonCodes"]})
-    rankings = []
-    for setup in f8["setupProfiles"]:
-        ranked = []
-        for target in targets:
-            case = case_map[(setup["setupId"], target["targetKey"])]
-            windows = []
-            for first, second in zip(rows, rows[1:]):
-                a, b = first["targets"][target["targetKey"]], second["targets"][target["targetKey"]]
-                if not weather_gate(first["weather"])[0] or not weather_gate(second["weather"])[0]:
-                    continue
-                if (first["solarAltitudeDeg"] > -18 or second["solarAltitudeDeg"] > -18
-                        or a["altitudeDeg"] < MIN_TARGET_ALTITUDE_DEG or b["altitudeDeg"] < MIN_TARGET_ALTITUDE_DEG):
-                    continue
-                score = 100 * (0.6 * ((a["astronomyFactor"] + b["astronomyFactor"]) / 2) + 0.3 * ((a["weatherFactor"] + b["weatherFactor"]) / 2) + 0.1 * case["aggregateScore"] / 100)
-                windows.append({"fromUtc": first["validAtUtc"], "toUtcExclusive": utc(dt.datetime.fromisoformat(second["validAtUtc"].replace("Z", "+00:00")) + dt.timedelta(hours=1)),
-                                "advisoryScore": round(score, 1), "meanAltitudeDeg": round((a["altitudeDeg"] + b["altitudeDeg"]) / 2, 1),
-                                "meanCloudCoverPct": round((first["weather"]["cloudCoverPct"] + second["weather"]["cloudCoverPct"]) / 2, 1),
-                                "meanMoonAltitudeDeg": round((first["moonAltitudeDeg"] + second["moonAltitudeDeg"]) / 2, 1),
-                                "meanMoonIlluminatedFraction": round((first["moonIlluminatedFraction"] + second["moonIlluminatedFraction"]) / 2, 3),
-                                "meanMoonSeparationDeg": round((a["moonSeparationDeg"] + b["moonSeparationDeg"]) / 2, 1),
-                                "lunarPenaltyPct": round(100 * (1 - (a["lunarSuitabilityFactor"] + b["lunarSuitabilityFactor"]) / 2), 1)})
-            windows.sort(key=lambda x: (-x["advisoryScore"], x["fromUtc"]))
-            ranked.append({"targetKey": target["targetKey"], "targetName": target["targetName"], "acquisitionState": target["acquisitionState"], "setupSuitabilityScore": case["aggregateScore"], "eligibleTwoHourWindowCount": len(windows), "bestWindows": windows[:3]})
-        ranked.sort(key=lambda x: (-(x["bestWindows"][0]["advisoryScore"] if x["bestWindows"] else -1),
-                                   -x["eligibleTwoHourWindowCount"], -x["setupSuitabilityScore"], x["targetKey"]))
-        rankings.append({"setupId": setup["setupId"], "targets": ranked})
+    rankings = rank_targets(rows, f8["setupProfiles"], targets, list(case_map.values()))
     return {"schemaVersion": "1.0", "projectionType": "BKL031_F9_REPEATABLE_CURRENT_NIGHT", "generatedAtUtc": utc(retrieval),
             "environment": "EVALUATION", "authority": "NONE", "consumerMode": "READ_ONLY",
             "site": {"publicLabel": site["sitePayload"]["publicationPolicy"]["siteLabelGeneralized"], "timezoneIana": site["sitePayload"]["timezoneIana"], "coordinateDisclosure": "PROHIBITED"},
@@ -362,7 +378,7 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
             "nightWindow": {"fromUtc": utc(instants[0]), "toUtcExclusive": utc(instants[-1] + dt.timedelta(hours=1))},
             "method": {"id": "BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.2", "ephemerisMode": "EXPLICIT_MOSEPH_NO_FALLBACK", "scoreWeights": f8["method"]["scoreWeights"], "displayFilter": "solarAltitudeDeg <= -18 and targetAltitudeDeg >= 20", "minimumTargetAltitudeDeg": MIN_TARGET_ALTITUDE_DEG,
                         "lunarFactor": "1 - illuminatedFraction * max(0,sin(radians(clamp(moonAltitudeDeg,0,90)))) * max(0,1-separationDeg/90)"},
-            "weatherPolicy": {"id": "DSG-F9-PLANNER-WEATHER-GATE@1.0", "limits": WEATHER_LIMITS,
+            "weatherPolicy": {"id": "DSG-F9-PLANNER-WEATHER-GATE@1.1", "limits": WEATHER_LIMITS,
                               "cloudLimitRationale": "OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT",
                               "authority": "ADVISORY_PLANNING_ONLY"},
             "setupProfiles": f8["setupProfiles"], "targetProfiles": targets, "targetCatalog": {"catalogId": catalog["catalogId"], "catalogCompleteness": catalog["catalogCompleteness"], "candidateCount": len(catalog["targets"])}, "suitabilityEvidence": suitability_public, "hourly": rows, "rankings": rankings,
@@ -417,7 +433,7 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
             or method.get("lunarFactor") != "1 - illuminatedFraction * max(0,sin(radians(clamp(moonAltitudeDeg,0,90)))) * max(0,1-separationDeg/90)"
             or method.get("scoreWeights") != expected_score_weights):
         raise ContractError("ASTRONOMY_METHOD")
-    expected_policy = {"id": "DSG-F9-PLANNER-WEATHER-GATE@1.0", "limits": WEATHER_LIMITS,
+    expected_policy = {"id": "DSG-F9-PLANNER-WEATHER-GATE@1.1", "limits": WEATHER_LIMITS,
                        "cloudLimitRationale": "OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT",
                        "authority": "ADVISORY_PLANNING_ONLY"}
     if data.get("weatherPolicy") != expected_policy:

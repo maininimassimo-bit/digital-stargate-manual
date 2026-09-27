@@ -20,7 +20,7 @@ def valid_projection():
       'forecast':{'providerId':'METEOHUB','upstreamAuthorityId':'ITALIAMETEO_ARPAE','modelId':'ICON_2I','freshnessState':'FRESH','runInitialisationUtc':'2026-09-17T00:00:00Z','retrievedAtUtc':'2026-09-17T01:00:00Z','runAgeHoursAtRetrieval':1.0,
         'sourceFiles':[{'variable':name,'sha256':'0'*64,'byteLength':1,'unit':'unit'} for name in f9.VARIABLES]},
       'nightWindow':{'fromUtc':stamp(instants[0]),'toUtcExclusive':stamp(instants[-1]+dt.timedelta(hours=1))},
-      'method':{'id':'BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.2','ephemerisMode':'EXPLICIT_MOSEPH_NO_FALLBACK','scoreWeights':{'astronomy':0.6,'weather':0.3,'setupSuitability':0.1},'displayFilter':'solarAltitudeDeg <= -18 and targetAltitudeDeg >= 20','minimumTargetAltitudeDeg':20.0,'lunarFactor':'1 - illuminatedFraction * max(0,sin(radians(clamp(moonAltitudeDeg,0,90)))) * max(0,1-separationDeg/90)'},'weatherPolicy':{'id':'DSG-F9-PLANNER-WEATHER-GATE@1.0','limits':f9.WEATHER_LIMITS,'cloudLimitRationale':'OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT','authority':'ADVISORY_PLANNING_ONLY'},'attribution':{'license':'CC BY 4.0'},
+      'method':{'id':'BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.2','ephemerisMode':'EXPLICIT_MOSEPH_NO_FALLBACK','scoreWeights':{'astronomy':0.6,'weather':0.3,'setupSuitability':0.1},'displayFilter':'solarAltitudeDeg <= -18 and targetAltitudeDeg >= 20','minimumTargetAltitudeDeg':20.0,'lunarFactor':'1 - illuminatedFraction * max(0,sin(radians(clamp(moonAltitudeDeg,0,90)))) * max(0,1-separationDeg/90)'},'weatherPolicy':{'id':'DSG-F9-PLANNER-WEATHER-GATE@1.1','limits':f9.WEATHER_LIMITS,'cloudLimitRationale':'OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT','authority':'ADVISORY_PLANNING_ONLY'},'attribution':{'license':'CC BY 4.0'},
       'setupProfiles':[{'setupId':'S'}],'targetProfiles':[{'targetKey':'T'}],
       'suitabilityEvidence':{'methodId':f9.SUITABILITY_METHOD_ID,'componentWeights':f9.SUITABILITY_WEIGHTS,'cases':[{'setupId':'S','targetKey':'T','components':{'framing':80,'filterSignal':90,'imageScaleObjectClass':85},'aggregateScore':aggregate,'reasonCodes':['TEST']} ]},
       'hourly':[{'validAtUtc':stamp(instant),'solarAltitudeDeg':-30,'moonAltitudeDeg':60,'moonIlluminatedFraction':0.5,'weather':{'temperatureC':15,'dewPointC':4,'cloudCoverPct':10,'relativeHumidityPct':20,'precipitationMm':0,'windSpeedKmh':3,'windGustKmh':4},'targets':{'T':{'altitudeDeg':30,'moonSeparationDeg':45,'lunarSuitabilityFactor':lunar,'astronomyFactor':astronomy,'weatherFactor':weather_factor}}} for instant in instants],
@@ -46,8 +46,11 @@ class F9Tests(unittest.TestCase):
         value=valid_projection();value['hourly'][1]['validAtUtc']='2026-09-17T18:00:00Z'
         with self.assertRaisesRegex(f9.ContractError,'NON_CONTIGUOUS'): f9.validate_projection(value)
     def test_relative_humidity(self): self.assertAlmostEqual(f9.rh_from_temperature(20,20),100)
-    def test_weather_gate_accepts_exact_boundaries(self):
-        self.assertEqual(f9.weather_gate({'temperatureC':20,'dewPointC':10,'cloudCoverPct':20,'relativeHumidityPct':90,'precipitationMm':0,'windSpeedKmh':15,'windGustKmh':20}), (True, []))
+    def test_weather_gate_blocks_exact_dewpoint_boundary_and_accepts_above(self):
+        base={'temperatureC':20,'dewPointC':17,'cloudCoverPct':20,'relativeHumidityPct':90,'precipitationMm':0,'windSpeedKmh':15,'windGustKmh':20}
+        self.assertEqual(f9.weather_gate(base), (False, ['MARGINE_DEWPOINT_MINORE_O_UGUALE_A_3_C']))
+        base['dewPointC']=16.99
+        self.assertEqual(f9.weather_gate(base), (True, []))
     def test_weather_gate_blocks_cloud_and_reports_reason(self):
         ok, reasons=f9.weather_gate({'temperatureC':20,'dewPointC':10,'cloudCoverPct':20.1,'relativeHumidityPct':90,'precipitationMm':0,'windSpeedKmh':15,'windGustKmh':20})
         self.assertFalse(ok); self.assertIn('NUVOLOSITA_SOPRA_20_PERCENTO',reasons)

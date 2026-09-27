@@ -51,10 +51,14 @@ Discovery failure, HTTP/content-type mismatch, oversized GRIB input, missing mes
 The portal's hourly weather signal and ranked forecast windows use the same
 published F9 eligibility policy. A forecast hour is eligible only when cloud
 cover is at most 20%, precipitation is zero, wind is at most 15 km/h, gusts at
-most 20 km/h, relative humidity at most 90%, and temperature-to-dew-point
-margin at least 10 °C. The 20% cloud limit is the owner's stricter planning
-constraint for dome/session suitability; it does not replace or change the
-BKL-032 readiness threshold of 50%.
+most 20 km/h, and relative humidity at most 90%. The dew-point margin is
+computed per hourly sample as ambient temperature minus dew-point temperature;
+a margin at or below 3 °C is NO-GO, and only a value above 3 °C passes this
+planner check. This owner-selected F9 planning threshold is versioned as
+`DSG-F9-PLANNER-WEATHER-GATE@1.1`; it does not replace or change the BKL-032
+readiness threshold of 10 °C. The 20% cloud limit is the owner's stricter
+planning constraint for dome/session suitability and does not replace or
+change the BKL-032 cloud threshold of 50%.
 
 Each hourly row is explicitly GO or NO-GO with its failing weather reasons.
 Multi-hour forecast windows are omitted from ranking when any included hourly
