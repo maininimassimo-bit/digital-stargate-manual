@@ -12,8 +12,9 @@
 
 This draft defines a reviewable local shutdown evidence contract and an offline
 method for considering historical Windows System events alongside N.I.N.A.
-activity and session evidence. It records the owner decision of 2026-09-25:
-policy B, record a shutdown event locally.
+activity and session evidence. It records the owner decisions of 2026-09-25 and
+2026-09-27: policy B, record shutdown evidence locally, and include a local
+pre-shutdown request marker in the proposed evidence sequence.
 
 A local orderly-shutdown record can support the fact and recorded time of an
 orderly shutdown. By itself it does not show that the shutdown was planned, rule
@@ -34,11 +35,12 @@ custody, processing, and destination.
 
 Keep these distinct; do not merge them into one inferred “planned shutdown” fact:
 
-1. **Shutdown request marker (optional future local record):** a local writer
-   records that an orderly shutdown request was issued through an explicitly
-   identified operator or approved mechanism. This proves only that the writer
-   recorded a request. It does not prove the OS completed shutdown or establish
-   intent unless the request is independently tied to a reviewed plan.
+1. **Shutdown request marker (owner-selected design element, 2026-09-27):** a
+   local writer records that an orderly shutdown request was issued through an
+   explicitly identified operator or approved mechanism. This proves only that
+   the writer recorded a request. It does not prove the OS completed shutdown
+   or that the shutdown was planned. Tying the request to a reviewed plan still
+   requires independent corroboration or human review.
 2. **OS shutdown evidence:** a validated Windows System event from an approved
    provider/event allowlist indicating an orderly shutdown transition. Preserve
    provider, event identity, native record identity and timestamp provenance.
@@ -49,12 +51,13 @@ Keep these distinct; do not merge them into one inferred “planned shutdown” 
    It starts a new host observation epoch only when identity and timestamp quality
    are adequate. A boot marker does not prove observatory availability.
 
-The proposed local recording pattern is an append-only, non-elevated request
-marker before shutdown, paired where available with the OS-native shutdown and
-subsequent boot evidence. Writer placement, trigger, storage path, permissions,
-durability, and failure handling are unselected implementation decisions. Do
-not configure a shutdown hook, scheduled task, service, or writer under this
-document.
+The owner-selected design direction includes an append-only, non-elevated
+request marker before the shutdown request, paired where available with
+OS-native shutdown and subsequent boot evidence. The marker remains distinct
+from evidence that the OS completed shutdown. Writer placement, trigger,
+operator/mechanism identity, storage path, permissions, durability, and failure
+handling are unselected implementation decisions. This selection does not
+authorize configuring a shutdown hook, scheduled task, service, or writer.
 
 ### 2.2 Minimum normalized record fields
 
