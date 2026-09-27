@@ -97,9 +97,12 @@ or inferred shutdown.
 The owner selected both a byte-capacity limit and a maximum queued-age limit
 (2026-09-26). Reaching either limit must trigger the same no-eviction full
 policy; the age limit is not permission to delete older unacknowledged records.
-The numeric limits remain unselected and must be calibrated against the
-approved local-storage budget, receipt size/cadence and desired offline
-recovery horizon.
+On 2026-09-27 the owner deferred selecting the numeric queued-age limit until
+the maximum receipt size, approved local-storage budget and desired offline
+recovery horizon are defined. The byte and age limits remain unselected; derive
+them from those inputs and the selected receipt cadence before any runtime
+authorization. Do not infer or inspect EAGLE storage capacity as part of this
+repository-only decision.
 For age evaluation, the owner selected using source-observed time when source
 clock quality is reliable and reporting age as uncertain otherwise
 (2026-09-26). An uncertain age must not be silently treated as within budget;
