@@ -52,7 +52,7 @@ jobs:
         id: upload
         uses: actions/upload-artifact@v4
         with:
-          name: BKL043-F4-Portable-Collector-${{ github.sha }}
+          name: BKL043-F4-Portable-Collector-${{ github.event.pull_request.head.sha }}
           path: ${{ runner.temp }}/BKL043-F4-Portable-Collector/*
           if-no-files-found: error
           retention-days: 90
@@ -60,6 +60,9 @@ jobs:
         shell: pwsh
         env:
           ARTIFACT_DIGEST: ${{ steps.upload.outputs.artifact-digest }}
+          SOURCE_COMMIT: ${{ github.event.pull_request.head.sha }}
         run: |
+          "Source commit: $env:SOURCE_COMMIT" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+          "Workflow run ID: $env:GITHUB_RUN_ID" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
           "Downloadable artifact SHA-256: $env:ARTIFACT_DIGEST" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
 
