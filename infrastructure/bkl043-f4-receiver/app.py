@@ -15,6 +15,7 @@ from datetime import datetime, timezone
 from uuid import UUID
 
 from flask import Flask, jsonify, request
+from werkzeug.exceptions import RequestEntityTooLarge
 from google.api_core.exceptions import PreconditionFailed
 from google.cloud import storage
 
@@ -62,10 +63,10 @@ def _no_duplicate_keys(pairs):
 
 def _parse_body() -> dict:
     if request.content_length is not None and request.content_length > MAX_REQUEST_BYTES:
-        raise InvalidPayload("payload_too_large")
+        raise RequestEntityTooLarge()
     raw = request.get_data(cache=False)
     if not raw or len(raw) > MAX_REQUEST_BYTES:
-        raise InvalidPayload("payload_too_large_or_empty")
+        raise RequestEntityTooLarge() if len(raw) > MAX_REQUEST_BYTES else InvalidPayload("empty_body")
     try:
         value = json.loads(raw, object_pairs_hook=_no_duplicate_keys)
     except (UnicodeDecodeError, json.JSONDecodeError) as exc:
