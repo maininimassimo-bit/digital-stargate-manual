@@ -1,9 +1,17 @@
+import importlib.util
 import json
-from uuid import UUID
+import os
+from pathlib import Path
+import sys
 
 import pytest
 
-from infrastructure.bkl043_f4_receiver import app as receiver
+os.environ.setdefault("RECEIPT_BUCKET", "test-receipts")
+APP_PATH = Path(__file__).resolve().parents[1] / "app.py"
+SPEC = importlib.util.spec_from_file_location("bkl043_f4_receiver_app", APP_PATH)
+receiver = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = receiver
+SPEC.loader.exec_module(receiver)
 
 
 RECORD_ID = "a0d06a14-8f17-4b12-94dc-b0d74fd91f91"
