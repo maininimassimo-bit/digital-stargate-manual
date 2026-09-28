@@ -173,13 +173,14 @@ def test_eagle_contract_rejects_out_of_scope_or_inconsistent_data(client, mutati
     assert receiver._bucket.objects == {}
 
 
-def test_unknown_clock_must_not_claim_a_source_utc_time(client):
+def test_unknown_clock_pauses_durable_admission(client):
     payload = eagle_payload()
     payload["source_clock_quality"] = "UNKNOWN"
     payload["source_observed_at_utc"] = None
     response = client.post("/v1/receipts", json=payload)
-    assert response.status_code == 200
-
+    assert response.status_code == 400
+    assert response.json["error"] == "clock_quality_unknown_admission_paused"
+    assert receiver._bucket.objects == {}
 
 def test_invalid_calendar_timestamp_is_rejected(client):
     payload = eagle_payload()
