@@ -19,7 +19,7 @@ from google.api_core.exceptions import PreconditionFailed
 from google.cloud import storage
 
 MAX_REQUEST_BYTES = 4096
-BUCKET_NAME = os.environ["RECEIPT_BUCKET"]
+BUCKET_NAME = os.environ.get("RECEIPT_BUCKET", "")
 EAGLE_HOST = "EAGLE30154"
 TASK_NAMES = {
     "Digital StarGate - Daily Session Upload",
@@ -193,12 +193,12 @@ def _store_immutable(object_name: str, payload: dict):
         "receiver_received_at_utc": datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z"),
     }
     body = json.dumps(stored, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
-    blob = _bucket.blob(object_name)
+    blob = _get_bucket().blob(object_name)
     try:
         blob.upload_from_string(body, content_type="application/json", if_generation_match=0)
         return "DURABLE_CREATED", digest
     except PreconditionFailed:
-        existing = _bucket.blob(object_name)
+        existing = _get_bucket().blob(object_name)
         try:
             existing_payload = json.loads(existing.download_as_bytes())
         except Exception as exc:  # A corrupt existing object must not be acknowledged.
