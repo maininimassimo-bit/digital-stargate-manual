@@ -15,7 +15,7 @@ F9 converts the bounded F8 demonstration into a repeatable current-night pipelin
 
 ## Operating model
 
-The scheduled GitHub workflow is defined for 09:30 and 17:15 UTC (11:30 and 19:15 Europe/Rome during CEST) for the current validation cycle. A separately authorized `workflow_dispatch` diagnostic path is available only with explicit `ALLOW_ONE_TEST_ACQUISITION` confirmation and a purpose string. The workflow imposes no daily acquisition counter: scheduled and authorized manual runs can execute independently. No automatic retry is introduced. GitHub cron is UTC; the first local-time display shifts to 10:30 during CET unless the schedule is adjusted seasonally. The public repository uses standard GitHub-hosted runners; the job additionally requires explicit activation variable `F9_ZERO_EUR_GUARD=CONFIRMED`. Once activated, the job discovers one fresh ICON-2I run, downloads the seven variables required by the accepted scoring method, extracts the governed site point server-side and disposes the temporary directory automatically.
+The scheduled GitHub workflow runs four times daily at 00:15, 06:15, 12:15 and 18:15 UTC, six hours apart (02:15, 08:15, 14:15 and 20:15 Europe/Rome during CEST; 01:15, 07:15, 13:15 and 19:15 during CET). This shortens the interval during which a missed scheduled refresh can leave the projection unavailable, while keeping every run within the approved EUR 0 MeteoHub and public-repository runner path. GitHub cron is best effort and may be delayed or skipped; the portal therefore continues to enforce the 18-hour freshness ceiling and fails closed. A separately authorized `workflow_dispatch` diagnostic path is available only with explicit `ALLOW_ONE_TEST_ACQUISITION` confirmation and a purpose string. There is no daily acquisition counter, automatic retry or stale-data fallback. The public repository uses standard GitHub-hosted runners; the job additionally requires explicit activation variable `F9_ZERO_EUR_GUARD=CONFIRMED`. Once activated, each run discovers one fresh ICON-2I run, downloads the seven variables required by the accepted scoring method, extracts the governed site point server-side and disposes the temporary directory automatically.
 
 The durable projection retains provider, authority, model, run, retrieval time, byte count and SHA-256 per source file. It never retains raw GRIB bytes or coordinates. An 18-hour run-age ceiling and complete current-night coverage are mandatory.
 
@@ -50,8 +50,8 @@ Discovery failure, HTTP/content-type mismatch, oversized GRIB input, missing mes
 
 The portal's hourly weather signal and ranked forecast windows use the same
 published F9 eligibility policy. A forecast hour is eligible only when cloud
-cover is at most 20%, precipitation is zero, wind is at most 15 km/h, gusts at
-most 20 km/h, and relative humidity at most 90%. The dew-point margin is
+cover is at most 20%, precipitation is zero, wind is at most 15 km/h, gusts
+at most 20 km/h, and relative humidity at most 90%. The dew-point margin is
 computed per hourly sample as ambient temperature minus dew-point temperature;
 a margin at or below 3 °C is NO-GO, and only a value above 3 °C passes this
 planner check. This owner-selected F9 planning threshold is versioned as
