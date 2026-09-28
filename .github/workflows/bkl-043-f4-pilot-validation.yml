@@ -1,0 +1,63 @@
+name: BKL-043 F4 Pilot Artifact and Receiver Validation
+on:
+  pull_request:
+    paths:
+      - 'scripts/telemetry/Start-BKL043-F4Pilot.ps1'
+      - 'infrastructure/bkl043-f4-receiver/**'
+      - 'infrastructure/bkl043-f4-pilot/**'
+      - '.github/workflows/bkl-043-f4-pilot-validation.yml'
+permissions:
+  contents: read
+jobs:
+  receiver-contract:
+    name: Synthetic receiver contract tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned receiver and test dependencies
+        run: python -m pip install --disable-pip-version-check -r infrastructure/bkl043-f4-receiver/requirements.txt -r infrastructure/bkl043-f4-receiver/tests/requirements.txt
+      - name: Run synthetic tests without cloud credentials
+        run: python -m pytest -q infrastructure/bkl043-f4-receiver/tests
+  portable-package:
+    name: Parse and package the manual Windows collector
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse script without running it
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            'scripts/telemetry/Start-BKL043-F4Pilot.ps1',
+            [ref]$tokens,
+            [ref]$errors
+          ) | Out-Null
+          if ($errors.Count -gt 0) {
+            $errors | ForEach-Object { Write-Error $_.Message }
+            exit 1
+          }
+      - name: Create portable ZIP and record its digest
+        id: package
+        shell: pwsh
+        run: |
+          $stage = Join-Path $env:RUNNER_TEMP 'BKL043-F4-Portable-Collector'
+          $zip = Join-Path $env:RUNNER_TEMP 'BKL043-F4-Portable-Collector.zip'
+          New-Item -ItemType Directory -Path $stage -Force | Out-Null
+          Copy-Item 'scripts/telemetry/Start-BKL043-F4Pilot.ps1' $stage
+          Copy-Item 'infrastructure/bkl043-f4-pilot/README.md' $stage
+          Compress-Archive -Path (Join-Path $stage '*') -DestinationPath $zip -Force
+          $digest = (Get-FileHash -Algorithm SHA256 -LiteralPath $zip).Hash
+          "sha256=$digest" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+          "BKL043-F4 portable collector ZIP SHA-256: `$digest" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+          "Package file: BKL043-F4-Portable-Collector.zip" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+      - name: Upload reviewable package
+        uses: actions/upload-artifact@v4
+        with:
+          name: BKL043-F4-Portable-Collector-${{ github.sha }}
+          path: ${{ runner.temp }}/BKL043-F4-Portable-Collector.zip
+          if-no-files-found: error
+          retention-days: 90
