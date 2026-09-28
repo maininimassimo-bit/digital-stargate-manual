@@ -160,10 +160,17 @@ def _validate_eagle(payload: dict) -> str:
         raise InvalidPayload("invalid_nina_heartbeat")
     if heartbeat["last_write_utc"] is not None:
         _utc(heartbeat["last_write_utc"], "nina_last_write_utc")
-    if heartbeat["age_seconds"] is not None and (type(heartbeat["age_seconds"]) not in (int, float) or heartbeat["age_seconds"] < 0):
+    age = heartbeat["age_seconds"]
+    if age is not None and (type(age) not in (int, float) or age < 0):
         raise InvalidPayload("invalid_nina_age")
-    if heartbeat["freshness"] == "UNKNOWN" and heartbeat["exists"] and heartbeat["last_write_utc"] is not None:
+    if not heartbeat["exists"] and (heartbeat["last_write_utc"] is not None or age is not None or heartbeat["freshness"] != "UNKNOWN"):
+        raise InvalidPayload("inconsistent_missing_nina_projection")
+    if heartbeat["freshness"] == "UNKNOWN" and (heartbeat["exists"] or heartbeat["last_write_utc"] is not None or age is not None):
         raise InvalidPayload("inconsistent_nina_unknown")
+    if heartbeat["freshness"] == "FRESH" and (not heartbeat["exists"] or heartbeat["last_write_utc"] is None or age is None or age > 60):
+        raise InvalidPayload("inconsistent_nina_freshness")
+    if heartbeat["freshness"] == "STALE" and (not heartbeat["exists"] or heartbeat["last_write_utc"] is None or age is None or age <= 60):
+        raise InvalidPayload("inconsistent_nina_freshness")
     return f"v1/{payload['record_id']}.json"
 
 
