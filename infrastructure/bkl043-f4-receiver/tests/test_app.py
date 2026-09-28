@@ -82,6 +82,7 @@ def eagle_payload():
                     "state": "Ready",
                     "last_task_result": 0,
                     "result_hex": "0x00000000",
+                    "outcome_interpretation": "SUCCESS",
                     "last_run_utc": "2026-09-28T08:00:00Z",
                     "process_present": False,
                 }
@@ -122,6 +123,19 @@ def test_eagle_receipt_is_durably_created_and_acknowledged(client):
     assert response.json["ack"] == "DURABLE_CREATED"
     assert response.json["record_id"] == RECORD_ID
     assert set(receiver._bucket.objects) == {f"v1/{RECORD_ID}.json"}
+
+
+def test_nonzero_task_result_is_review_not_automatic_failure(client):
+    payload = eagle_payload()
+    payload["signals"]["tasks"][0]["last_task_result"] = 259
+    payload["signals"]["tasks"][0]["result_hex"] = "0x00000103"
+    payload["signals"]["tasks"][0]["outcome_interpretation"] = "NONZERO_REVIEW"
+    response = client.post("/v1/receipts", json=payload)
+    assert response.status_code == 200
+    stored = json.loads(next(iter(receiver._bucket.objects.values())))
+    task = stored["payload"]["signals"]["tasks"][0]
+    assert task["last_task_result"] == 259
+    assert task["outcome_interpretation"] == "NONZERO_REVIEW"
 
 
 def test_identical_eagle_retry_is_acknowledged_without_second_object(client):
