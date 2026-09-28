@@ -17,6 +17,7 @@ $script:FreshHeartbeatSeconds = 60
 $script:ExpectedHost = 'EAGLE30154'
 $script:ExpectedTimezone = 'W. Europe Standard Time'
 $script:ApprovedAccount = 'maininimassimo@gmail.com'
+$script:InvokerServiceAccount = 'dsg-bkl043-f4-eagle-invoker@digital-stargate-telemetry.iam.gserviceaccount.com'
 $script:ApprovedStart = [DateTimeOffset]::Parse('2026-09-29T10:00:00+02:00')
 $script:ApprovedEnd = [DateTimeOffset]::Parse('2026-09-29T12:00:00+02:00')
 $script:ReceiverUrl = $ReceiverUrl.TrimEnd('/')
@@ -230,7 +231,7 @@ function Get-IdentityToken {
     if (-not (Test-Path -LiteralPath $script:GCloud -PathType Leaf)) { throw 'GCLOUD_NOT_FOUND' }
     $active = & $script:GCloud auth list --filter=status:ACTIVE --format='value(account)' 2>$null
     if ($LASTEXITCODE -ne 0 -or [string]$active -ne $script:ApprovedAccount) { throw 'GCLOUD_ACTIVE_ACCOUNT_MISMATCH' }
-    $token = & $script:GCloud auth print-identity-token $script:ApprovedAccount "--audiences=$($script:ReceiverUrl)" 2>$null
+    $token = & $script:GCloud auth print-identity-token "--impersonate-service-account=$($script:InvokerServiceAccount)" "--audiences=$($script:ReceiverUrl)" 2>$null
     if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace([string]$token)) { throw 'IDENTITY_TOKEN_UNAVAILABLE' }
     return [string]$token
 }
