@@ -138,7 +138,7 @@ def _validate_eagle(payload: dict) -> str:
         raise InvalidPayload("three_task_results_required")
     seen = set()
     for task in tasks:
-        _exact_keys(task, {"name", "state", "last_task_result", "result_hex", "last_run_utc", "process_present"}, "task")
+        _exact_keys(task, {"name", "state", "last_task_result", "result_hex", "outcome_interpretation", "last_run_utc", "process_present"}, "task")
         if task["name"] not in TASK_NAMES or task["name"] in seen:
             raise InvalidPayload("invalid_or_duplicate_task")
         seen.add(task["name"])
