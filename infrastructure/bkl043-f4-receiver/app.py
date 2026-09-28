@@ -76,7 +76,7 @@ def _parse_body() -> dict:
 
 
 def _exact_keys(value: dict, expected: set[str], label: str) -> None:
-    if set(value) != expected:
+    if not isinstance(value, dict) or set(value) != expected:
         raise InvalidPayload(f"{label}_fields_mismatch")
 
 
@@ -85,6 +85,10 @@ def _utc(value, label: str, nullable: bool = False) -> None:
         return
     if not isinstance(value, str) or not UTC_RE.fullmatch(value):
         raise InvalidPayload(f"{label}_must_be_utc_z")
+    try:
+        datetime.fromisoformat(value[:-1] + "+00:00")
+    except ValueError as exc:
+        raise InvalidPayload(f"{label}_invalid_timestamp") from exc
 
 
 def _validate_eagle(payload: dict) -> str:
