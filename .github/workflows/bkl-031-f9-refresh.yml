@@ -1,9 +1,8 @@
 name: BKL-031 F9 MeteoHub Refresh
 on:
   schedule:
-    # 09:30 UTC (11:30 Europe/Rome during CEST) for the validation run; 17:15 UTC (19:15 Europe/Rome during CEST) unchanged.
-    - cron: '30 9 * * *'
-    - cron: '15 17 * * *'
+    # Four daily refresh windows, six hours apart. GitHub cron uses UTC.
+    - cron: '15 0,6,12,18 * * *'
   workflow_dispatch:
     inputs:
       confirmation:
@@ -43,7 +42,6 @@ jobs:
           fi
           test "$GITHUB_RUN_ATTEMPT" = "1"
       - uses: actions/setup-python@v5
-
         with: {python-version: '3.12'}
       - name: Test race-safe F9 projection publication
         run: python .github/scripts/test-publish-observation-planner-f9.py
