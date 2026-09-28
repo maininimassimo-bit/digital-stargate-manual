@@ -148,6 +148,9 @@ def _validate_eagle(payload: dict) -> str:
             raise InvalidPayload("invalid_task_result")
         if not isinstance(task["result_hex"], str) or not re.fullmatch(r"0x[0-9A-F]{8}", task["result_hex"]):
             raise InvalidPayload("invalid_task_result_hex")
+        expected_interpretation = "SUCCESS" if task["last_task_result"] == 0 else "NONZERO_REVIEW"
+        if task["outcome_interpretation"] != expected_interpretation:
+            raise InvalidPayload("invalid_task_outcome_interpretation")
         _utc(task["last_run_utc"], "task_last_run_utc", nullable=True)
         if type(task["process_present"]) is not bool:
             raise InvalidPayload("invalid_process_presence")
