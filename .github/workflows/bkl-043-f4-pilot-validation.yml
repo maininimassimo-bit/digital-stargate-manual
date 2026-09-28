@@ -6,6 +6,7 @@ on:
       - 'infrastructure/bkl043-f4-receiver/**'
       - 'infrastructure/bkl043-f4-pilot/**'
       - '.github/workflows/bkl-043-f4-pilot-validation.yml'
+      - '.github/workflows/bkl-043-f4-github-outcome-reporter.yml'
 permissions:
   contents: read
 jobs:
