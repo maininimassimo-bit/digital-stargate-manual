@@ -2,11 +2,11 @@
 
 | Field | Value |
 |---|---|
-| Evidence ID | `BKL043-F4-COST-ESTIMATE-2026-09-25` |
+| Evidence ID | `BKL043-F4-COST-ESTIMATE-2026-09-25` (price refresh 2026-09-28) |
 | Gate | `M-BKL043-F4-EXACT-PILOT-RUNTIME-AUTHORIZATION` |
 | Status | Indicative estimate only; no provider, resource, spending limit or runtime activity authorized |
 | Owner / accountable | Massimo Mainini |
-| Currency / price basis | USD list rates reviewed 2026-09-25; taxes, exchange-rate effects and account-specific discounts excluded |
+| Currency / price basis | USD published list rates refreshed 2026-09-28; taxes, exchange-rate effects and account-specific discounts excluded |
 
 ## Purpose and limits
 
@@ -23,18 +23,27 @@ remaining free quotas are not known; owner-selected local outbox retries and
 backfill may also create catch-up request bursts after network recovery. Actual
 costs can therefore be higher or lower. No charge ceiling has been approved.
 
+The current location check confirms that Cloud Run and Cloud Storage both list
+Milan (`europe-west8`) as a supported region. Co-locating the receiver and bucket
+there is a plausible candidate for an Italian data location and same-region
+traffic, but no end-to-end latency measurement or owner data-residency choice
+exists, and this check does not prove it is the lowest-cost location. The owner
+deferred the region choice until cost, latency and data-residency requirements
+are compared; Milan therefore remains a candidate, not a selection.
+
 ## Indicative monthly scenarios
 
 | Scenario | Workload assumptions | Indicative recurring cost | Important limitation |
 |---|---|---|---|
 | GitHub Actions scheduled check | Private repository; every 5 minutes for 30 days; one Linux 2-core hosted job billed as one minute per run (8,640 runs/minutes) | $51.84 gross at $0.006/minute. If all 2,000 GitHub Free minutes remain unused: about $39.84 incremental; if none remain: up to $51.84. Artifact/storage overages are additional. | **Not suitable as a bounded-latency witness:** scheduled runs may be delayed or dropped. This is only a best-effort archive/check scenario, not a recommendation. Actual billed duration rounds to runner billing units and should be verified against the account. |
-| Cloud Run request-based receiver, scale to zero | One lightweight request/minute (43,200/month), 0.167 vCPU, 256 MiB RAM, 100 ms processing/request; no minimum instances | Illustratively, about 721 vCPU-seconds, 1,080 GiB-seconds and 43,200 requests. These are below the published request-based free allowances (180,000 vCPU-seconds, 360,000 GiB-seconds, 2 million requests/month), **if the billing account has those quotas unused**. Not a guaranteed $0 bill. | Add durable storage, logging, networking/egress, image builds/artifact storage, monitoring, and other account usage. Cold starts and service availability still need a separately reviewed receipt-time contract. |
-| Same Cloud Run receiver with one minimum warm instance | Above request workload plus one continuously configured minimum instance at 1 vCPU / 256 MiB for a 30-day month | Rough idle list-rate arithmetic: 2,592,000 seconds × ($0.0000025/vCPU-s + 0.25 × $0.0000025/GiB-s) = **about $8.10/month** idle compute, before active requests and other products. This is not a quote and free-tier treatment/account discounts must be checked in the calculator. | Keeping an instance warm does not itself create an availability or latency SLA. Minimum-instance configuration and its cost would require explicit approval. |
-| Cloud Storage receipt objects (single-region Standard, flat namespace) | One new receipt object/minute, 43,200 Class A writes/month; illustrative European single region such as Milan | At $0.005 per 1,000 Class A operations: **about $0.22/month** for those writes. Data storage at $0.000027397/GiB-hour is about $0.02/GiB for 30 days. Reads, listing, metadata operations, retention/versioning and transfer add cost. | Simplified object-per-receipt model only; actual API/client behavior can issue multiple operations. The published always-free Cloud Storage allowance does not apply to European regions. |
+| Cloud Run request-based receiver, scale to zero | One lightweight request/minute (43,200/month), 0.167 vCPU, 256 MiB RAM, 100 ms billed processing/request; no minimum instances | At the published default request-based rates: about 721 vCPU-seconds, 1,080 GiB-seconds and 43,200 requests. Gross arithmetic is **about $0.04/month** ($0.017 CPU + $0.003 memory + $0.017 requests), before any free tier. The published allowances are 180,000 vCPU-seconds, 360,000 GiB-seconds and 2 million requests/month; this workload fits only if the shared billing account has sufficient unused allowance. This is not a guaranteed $0 bill. | Add durable storage, logging, networking/egress, image builds/artifact storage, monitoring and other account usage. Cold starts and service availability still need a separately reviewed receipt-time contract. |
+| Same Cloud Run receiver with one minimum warm instance | Above request workload plus one continuously configured minimum instance at 1 vCPU / 256 MiB for a 30-day month | Rough idle list-rate arithmetic: 2,592,000 seconds × ($0.0000025/vCPU-s + 0.25 × $0.0000025/GiB-s) = **about $8.10/month** idle compute, before active requests and other products. This is not a quote; pricing and free-tier treatment/account discounts must be checked in the calculator. | Keeping an instance warm does not itself create an availability or latency SLA. Minimum-instance configuration and its cost would require explicit approval. |
+| Cloud Storage receipt objects (single-region Standard, flat namespace) | One new receipt object/minute, 43,200 Class A writes/month; illustrative single region | At $0.005 per 1,000 Class A operations: **about $0.22/month** for those writes. Standard storage is $0.000027397/GiB-hour (about $0.02/GiB-month). Actual retained volume cannot be estimated until the maximum receipt size is selected. Reads, listing, metadata operations, retention/versioning and transfer add cost. | Simplified object-per-receipt model only; actual API/client behavior can issue multiple operations. Cloud Storage Always Free applies only in three US regions, not European regions. |
 
-As a rough combination only, scale-to-zero Cloud Run plus the modeled writes
-could be around $0.22/month plus stored data and other charges if all relevant
-Cloud Run free quotas are available. With one continuously warm minimum
+As a rough combination only, request-based Cloud Run plus the modeled writes
+could be around $0.26/month plus stored data and other charges if no Cloud Run
+free quota is available; if eligible account-wide free quotas are available,
+the Cloud Run portion could be lower. With one continuously warm minimum
 instance, the same simplified model is around $8.32/month plus stored data and
 other charges. Neither figure is a bill estimate or cost cap.
 
@@ -68,8 +77,10 @@ invented.
 
 - [GitHub Docs — GitHub Actions billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions): plan allowances, Linux runner rate and storage overage rates. Reviewed 2026-09-25.
 - [GitHub Docs — workflow trigger events](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows): scheduled workflow cadence and delay/drop caveats. Reviewed 2026-09-25.
-- [Google Cloud — Cloud Run pricing](https://cloud.google.com/run/pricing): request/instance rates, billing modes and aggregated free-tier notes. Reviewed 2026-09-25.
-- [Google Cloud — Cloud Storage pricing](https://cloud.google.com/storage/pricing): regional storage and operation rates. Reviewed 2026-09-25.
+- [Google Cloud — Cloud Run pricing](https://cloud.google.com/run/pricing): request/instance rates and account-aggregated free-tier allowances. Refreshed 2026-09-28.
+- [Google Cloud — Cloud Storage pricing](https://cloud.google.com/storage/pricing): regional storage, operation rates and US-only Always Free locations. Refreshed 2026-09-28.
+- [Google Cloud — Cloud Run locations](https://cloud.google.com/run/docs/locations): Cloud Run supported locations including Milan. Refreshed 2026-09-28.
+- [Google Cloud — Cloud Storage locations](https://cloud.google.com/storage/docs/locations): bucket locations including Milan. Refreshed 2026-09-28.
 
 ```text
 command_authority=NONE
