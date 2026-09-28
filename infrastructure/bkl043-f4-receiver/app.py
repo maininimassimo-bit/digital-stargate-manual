@@ -168,7 +168,7 @@ def _validate_eagle(payload: dict) -> str:
         raise InvalidPayload("invalid_nina_age")
     if not heartbeat["exists"] and (heartbeat["last_write_utc"] is not None or age is not None or heartbeat["freshness"] != "UNKNOWN"):
         raise InvalidPayload("inconsistent_missing_nina_projection")
-    if heartbeat["freshness"] == "UNKNOWN" and (heartbeat["exists"] or heartbeat["last_write_utc"] is not None or age is not None):
+    if heartbeat["freshness"] == "UNKNOWN" and age is not None:
         raise InvalidPayload("inconsistent_nina_unknown")
     if heartbeat["freshness"] == "FRESH" and (not heartbeat["exists"] or heartbeat["last_write_utc"] is None or age is None or age > 60):
         raise InvalidPayload("inconsistent_nina_freshness")
