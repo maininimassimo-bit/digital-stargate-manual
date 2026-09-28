@@ -36,8 +36,15 @@ UTC_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$")
 
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = MAX_REQUEST_BYTES
-_storage_client = storage.Client()
-_bucket = _storage_client.bucket(BUCKET_NAME)
+_bucket = None
+
+def _get_bucket():
+    global _bucket
+    if _bucket is None:
+        if not BUCKET_NAME:
+            raise RuntimeError("RECEIPT_BUCKET is not configured")
+        _bucket = storage.Client().bucket(BUCKET_NAME)
+    return _bucket
 
 
 class InvalidPayload(ValueError):
