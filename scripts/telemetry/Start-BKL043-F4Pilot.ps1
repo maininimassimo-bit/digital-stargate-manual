@@ -19,7 +19,8 @@ $script:ExpectedTimezone = 'W. Europe Standard Time'
 $script:ApprovedAccount = 'maininimassimo@gmail.com'
 $script:ApprovedStart = [DateTimeOffset]::Parse('2026-09-29T10:00:00+02:00')
 $script:ApprovedEnd = [DateTimeOffset]::Parse('2026-09-29T12:00:00+02:00')
-$script:ReceiverEndpoint = $ReceiverUrl.TrimEnd('/') + '/v1/receipts'
+$script:ReceiverUrl = $ReceiverUrl.TrimEnd('/')
+$script:ReceiverEndpoint = $script:ReceiverUrl + '/v1/receipts'
 $script:RetryState = @{}
 $script:TaskNames = @(
     'Digital StarGate - Daily Session Upload',
@@ -180,6 +181,8 @@ function Get-QueueFiles {
     if (-not (Test-Path -LiteralPath $script:OutboxRoot -PathType Container)) {
         New-Item -ItemType Directory -Path $script:OutboxRoot -Force | Out-Null
     }
+    $temporary = @(Get-ChildItem -LiteralPath $script:OutboxRoot -File -Filter '*.pending')
+    if ($temporary.Count -gt 0) { throw 'OUTBOX_UNRECOVERED_TEMP' }
     return @(Get-ChildItem -LiteralPath $script:OutboxRoot -File -Filter '*.json' | Sort-Object Name)
 }
 
@@ -234,12 +237,14 @@ function Get-IdentityToken {
 
 function Send-Pending([object[]]$Files, [datetime]$NowUtc) {
     foreach ($file in $Files) {
+        if ([DateTimeOffset]::Now -ge $script:ApprovedEnd.AddSeconds(-30)) { break }
         $key = $file.Name
         if ($script:RetryState.ContainsKey($key) -and $NowUtc -lt $script:RetryState[$key].NextUtc) { continue }
         try {
             $payload = Get-Content -LiteralPath $file.FullName -Raw
             $record = $payload | ConvertFrom-Json
             $token = Get-IdentityToken
+            if ([DateTimeOffset]::Now -ge $script:ApprovedEnd.AddSeconds(-30)) { break }
             $response = Invoke-RestMethod -Method Post -Uri $script:ReceiverEndpoint -TimeoutSec 30 -ContentType 'application/json' -Headers @{ Authorization = "Bearer $token" } -Body $payload
             if ($response.ack -notin @('DURABLE_CREATED', 'DURABLE_DUPLICATE') -or $response.record_id -ne $record.record_id) {
                 throw 'INVALID_DURABLE_ACK'
@@ -296,6 +301,6 @@ try {
     }
     Write-Output 'BKL043_F4_PILOT_STOPPED_WINDOW_END'
 } catch {
-    Write-Output ('BKL043_F4_PILOT_STOPPED reason=' + $_.Exception.Message)
+    Write-Output 'BKL043_F4_PILOT_STOPPED reason=SEE_OPERATOR_LOCAL_ERROR'
     exit 1
 }
