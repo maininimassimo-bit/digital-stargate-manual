@@ -112,7 +112,8 @@ def _validate_eagle(payload: dict) -> str:
         raise InvalidPayload("invalid_clock_quality")
     _utc(payload["source_observed_at_utc"], "source_observed_at_utc",
          nullable=payload["source_clock_quality"] == "UNKNOWN")
-    if payload["source_clock_quality"] == "UNKNOWN" and payload["source_observed_at_utc"] is not None:
+    if payload["source_clock_quality"] == "UNKNOWN":
+        raise InvalidPayload("clock_quality_unknown_admission_paused")
         raise InvalidPayload("unknown_clock_must_not_claim_utc")
 
     signals = payload["signals"]
