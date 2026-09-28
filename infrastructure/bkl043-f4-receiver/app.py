@@ -27,7 +27,7 @@ TASK_NAMES = {
     "Digital StarGate - OneDrive Export",
     "DigitalStarGate-EagleHealthTelemetry",
 }
-ALLOWED_CONCLUSIONS = {"success", "failure", "cancelled", "skipped"}
+ALLOWED_CONCLUSIONS = {"success", "failure", "cancelled", "skipped", "action_required", "neutral", "stale", "timed_out", "startup_failure"}
 ALLOWED_WORKFLOWS = {
     "BKL-031 F9 MeteoHub Refresh",
     "Analyze Observatory Session Automatically",
