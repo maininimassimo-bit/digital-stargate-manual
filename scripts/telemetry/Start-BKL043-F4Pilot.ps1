@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidatePattern('^https://[a-z0-9-]+-[a-z0-9-]+\\.a\\.run\\.app$')]
+    [ValidatePattern('^https://[a-z0-9-]+-[a-z0-9-]+\.a\.run\.app$')]
     [string]$ReceiverUrl
 )
 
@@ -66,7 +66,7 @@ function Get-ClockQuality {
 
     $syncUtc = Convert-LocalTimeToUtc $syncLocal $timeZone
     $dispersion = [double]::Parse(($dispersionMatch.Groups[1].Value -replace ',', '.'), [Globalization.CultureInfo]::InvariantCulture)
-    $ageHours = ([DateTimeOffset]::UtcNow - [DateTimeOffset]::Parse($syncUtc)).TotalHours
+    if ($null -eq $syncUtc) { return [pscustomobject]@{ Valid = $false; TimeZone = $timeZone.Id; OffsetMinutes = [int][DateTimeOffset]::Now.Offset.TotalMinutes; LastSyncUtc = $null; RootDispersionSeconds = $dispersion } }\n    $ageHours = ([DateTimeOffset]::UtcNow - [DateTimeOffset]::Parse($syncUtc)).TotalHours
     $valid = ($null -ne $syncUtc -and $ageHours -ge 0 -and $ageHours -le 24 -and $dispersion -le 1)
     return [pscustomobject]@{
         Valid = $valid
@@ -103,11 +103,13 @@ function Get-TaskSignals([TimeZoneInfo]$TimeZone) {
         }
         $result = [int]$info.LastTaskResult
         $resultHex = '0x{0:X8}' -f [uint32]$result
+        $interpretation = if ($result -eq 0) { 'SUCCESS' } else { 'NONZERO_REVIEW' }
         $items += [pscustomobject][ordered]@{
             name = $name
             state = [string]$task.State
             last_task_result = $result
             result_hex = $resultHex
+            outcome_interpretation = $interpretation
             last_run_utc = $lastRunUtc
             process_present = (Get-RunningTaskProcessPresence $name)
         }
@@ -115,10 +117,11 @@ function Get-TaskSignals([TimeZoneInfo]$TimeZone) {
     return ,$items
 }
 
-function Get-ProjectionHeartbeat([datetime]$NowUtc) {
+function Get-ProjectionHeartbeat([datetime]$NowUtc, [bool]$ClockValid) {
     try {
         $item = Get-Item -LiteralPath $script:ProjectionPath -ErrorAction Stop
         $writeUtc = $item.LastWriteTimeUtc
+        if (-not $ClockValid) { return [pscustomobject]@{ exists = $true; last_write_utc = $writeUtc.ToString('yyyy-MM-ddTHH:mm:ssZ'); age_seconds = $null; freshness = 'UNKNOWN' } }
         $age = [math]::Round(($NowUtc - $writeUtc).TotalSeconds, 1)
         if ($age -lt 0) {
             return [pscustomobject]@{ exists = $true; last_write_utc = $writeUtc.ToString('yyyy-MM-ddTHH:mm:ssZ'); age_seconds = $null; freshness = 'UNKNOWN' }
@@ -157,7 +160,7 @@ function New-Receipt([long]$SequenceId, [object]$Clock) {
         uptime_seconds = $uptime
         disks = $disks
         tasks = $tasks
-        nina_plugin_projection = (Get-ProjectionHeartbeat $nowUtc)
+        nina_plugin_projection = (Get-ProjectionHeartbeat $nowUtc $Clock.Valid)
     }
     return [ordered]@{
         schema_version = 1
@@ -181,7 +184,7 @@ function Get-QueueFiles {
 
 function Test-QueueAllowsAdmission([object[]]$Files, [datetime]$NowUtc) {
     $totalBytes = [int64](($Files | Measure-Object -Property Length -Sum).Sum)
-    if ($Files.Count -ge 1440 -or $totalBytes -ge $script:MaximumOutboxBytes) {
+if ($Files.Count -ge 1440 -or ($totalBytes + $script:MaximumReceiptBytes) -gt $script:MaximumOutboxBytes) {
         return [pscustomobject]@{ Allowed = $false; Reason = 'OUTBOX_FULL' }
     }
     if ($Files.Count -gt 0) {
@@ -246,7 +249,7 @@ function Send-Pending([object[]]$Files, [datetime]$NowUtc) {
         } catch {
             $attempt = 1
             if ($script:RetryState.ContainsKey($key)) { $attempt = [int]$script:RetryState[$key].Attempt + 1 }
-            $delay = [math]::Min(300, [math]::Pow(2, [math]::Min($attempt, 8)))
+$delay = [math]::Min(300, [math]::Pow(2, [math]::Min($attempt, 9)))
             $script:RetryState[$key] = [pscustomobject]@{ Attempt = $attempt; NextUtc = $NowUtc.AddSeconds($delay) }
             Write-Output ('RETRY_PENDING ' + $file.BaseName + ' delay_seconds=' + $delay)
         }
