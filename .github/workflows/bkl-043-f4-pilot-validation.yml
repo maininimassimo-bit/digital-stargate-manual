@@ -53,7 +53,7 @@ jobs:
           Compress-Archive -Path (Join-Path $stage '*') -DestinationPath $zip -Force
           $digest = (Get-FileHash -Algorithm SHA256 -LiteralPath $zip).Hash
           "sha256=$digest" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
-          "BKL043-F4 portable collector ZIP SHA-256: `$digest" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+          "BKL043-F4 portable collector ZIP SHA-256: $digest" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
           "Package file: BKL043-F4-Portable-Collector.zip" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
       - name: Upload reviewable package
         uses: actions/upload-artifact@v4
