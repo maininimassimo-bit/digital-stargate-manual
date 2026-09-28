@@ -66,7 +66,8 @@ function Get-ClockQuality {
 
     $syncUtc = Convert-LocalTimeToUtc $syncLocal $timeZone
     $dispersion = [double]::Parse(($dispersionMatch.Groups[1].Value -replace ',', '.'), [Globalization.CultureInfo]::InvariantCulture)
-    if ($null -eq $syncUtc) { return [pscustomobject]@{ Valid = $false; TimeZone = $timeZone.Id; OffsetMinutes = [int][DateTimeOffset]::Now.Offset.TotalMinutes; LastSyncUtc = $null; RootDispersionSeconds = $dispersion } }\n    $ageHours = ([DateTimeOffset]::UtcNow - [DateTimeOffset]::Parse($syncUtc)).TotalHours
+    if ($null -eq $syncUtc) { return [pscustomobject]@{ Valid = $false; TimeZone = $timeZone.Id; OffsetMinutes = [int][DateTimeOffset]::Now.Offset.TotalMinutes; LastSyncUtc = $null; RootDispersionSeconds = $dispersion } }
+    $ageHours = ([DateTimeOffset]::UtcNow - [DateTimeOffset]::Parse($syncUtc)).TotalHours
     $valid = ($null -ne $syncUtc -and $ageHours -ge 0 -and $ageHours -le 24 -and $dispersion -le 1)
     return [pscustomobject]@{
         Valid = $valid
