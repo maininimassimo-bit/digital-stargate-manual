@@ -50,7 +50,9 @@ Receipts use a UUID object key `v1/<receipt-id>.json`. The sender removes an
 outbox item only after Cloud Run returns an explicit acknowledgement that the
 object was durably created, or that the same ID and payload were already
 stored. Unacknowledged receipts are retried with backoff up to five minutes.
-The reporter and collector do not delete pending items.
+The GitHub outcome reporter is limited to the two approved F9 workflow names on the repository's default branch. It preserves success, failure, cancelled, skipped, and other completed conclusions distinctly. It uses GitHub OIDC with Google Workload Identity Federation and a dedicated reporter service account; it sends the workflow run metadata only, never workflow logs or artifacts. Configure the receiver base URL as the GitHub Actions variable `DSG_F4_RECEIVER_URL`, and the provider resource and reporter service-account email as the secrets `DSG_F4_WIF_PROVIDER` and `DSG_F4_REPORTER_SERVICE_ACCOUNT`. The runtime URL, provider and service-account IAM bindings must be reviewed before enabling those settings. The reporter has no local queue, so a failed report remains visible as a failed GitHub Actions run and must be reconciled from its run metadata and Usage Logs.
+
+The collector removes an outbox receipt only after durable acknowledgement. Unacknowledged receipts are never deleted.
 
 ## Stop and rollback
 
@@ -66,7 +68,7 @@ The reporter and collector do not delete pending items.
 
 This package is a review artifact, not runtime authorization. Before the pilot,
 the gate still requires exact receiver and audience URLs, service/storage IAM
-configuration, Usage Logs lifecycle evidence, permitted identity-token
+configuration, Usage Logs lifecycle evidence, the GitHub reporter's WIF provider, invoker IAM and repository Actions configuration, permitted identity-token
 endpoint egress, security/privacy and independent architecture/release-quality
 reviews, failure-injection/acceptance evidence, and Massimo Mainini's approval
 of the exact final authorization revision. No Cloud resource or EAGLE run is
