@@ -197,7 +197,7 @@ def test_github_outcomes_are_stored_immutably_and_distinctly(client):
     assert set(receiver._bucket.objects) == {"github/36400000123/1.json"}
 
 
-@pytest.mark.parametrize("conclusion", ["cancelled", "skipped", "failure"])
+@pytest.mark.parametrize("conclusion", ["cancelled", "skipped", "failure", "action_required", "neutral", "stale", "timed_out", "startup_failure"])
 def test_non_success_github_conclusions_remain_valid_distinct_values(client, conclusion):
     payload = github_payload()
     payload["conclusion"] = conclusion
