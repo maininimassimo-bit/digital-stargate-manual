@@ -34,7 +34,7 @@ target key. Targets without a qualifying window follow those with one.
 
 The astronomy factor retains altitude, darkness, and a lunar term with the
 existing 0.55 / 0.20 / 0.25 weights. The lunar suitability factor is
-`1 - illuminatedFraction × max(0, sin(radians(clamp(moonAltitudeDeg, 0°, 90°))) × max(0, 1 − separationDeg / 90°)`.
+`1 - illuminatedFraction × max(0, sin(radians(clamp(moonAltitudeDeg, 0°, 90°)))) × max(0, 1 − separationDeg / 90°)`.
 It reduces the lunar contribution when the Moon is above the horizon, more
 illuminated, and closer to the target. Its per-window penalty and mean lunar
 inputs are shown for explanation. This is an advisory heuristic: it does not
