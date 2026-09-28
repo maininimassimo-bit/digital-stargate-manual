@@ -41,24 +41,25 @@ jobs:
             $errors | ForEach-Object { Write-Error $_.Message }
             exit 1
           }
-      - name: Create portable ZIP and record its digest
-        id: package
+      - name: Stage the portable collector
         shell: pwsh
         run: |
           $stage = Join-Path $env:RUNNER_TEMP 'BKL043-F4-Portable-Collector'
-          $zip = Join-Path $env:RUNNER_TEMP 'BKL043-F4-Portable-Collector.zip'
           New-Item -ItemType Directory -Path $stage -Force | Out-Null
           Copy-Item 'scripts/telemetry/Start-BKL043-F4Pilot.ps1' $stage
           Copy-Item 'infrastructure/bkl043-f4-pilot/README.md' $stage
-          Compress-Archive -Path (Join-Path $stage '*') -DestinationPath $zip -Force
-          $digest = (Get-FileHash -Algorithm SHA256 -LiteralPath $zip).Hash
-          "sha256=$digest" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
-          "BKL043-F4 portable collector ZIP SHA-256: $digest" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
-          "Package file: BKL043-F4-Portable-Collector.zip" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
       - name: Upload reviewable package
+        id: upload
         uses: actions/upload-artifact@v4
         with:
           name: BKL043-F4-Portable-Collector-${{ github.sha }}
-          path: ${{ runner.temp }}/BKL043-F4-Portable-Collector.zip
+          path: ${{ runner.temp }}/BKL043-F4-Portable-Collector/*
           if-no-files-found: error
           retention-days: 90
+      - name: Record the downloadable artifact digest
+        shell: pwsh
+        env:
+          ARTIFACT_DIGEST: ${{ steps.upload.outputs.artifact-digest }}
+        run: |
+          "Downloadable artifact SHA-256: $env:ARTIFACT_DIGEST" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+
