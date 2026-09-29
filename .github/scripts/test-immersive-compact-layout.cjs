@@ -40,7 +40,7 @@ const base = process.env.DSG_TEST_BASE_URL || 'http://127.0.0.1:8766/digital-sta
   // Empty governed summary must not invent a visible completed segment.
   await page.route('**/data/roadmap.json',r=>r.fulfill({json:{...data,summary:{total:0,completed:0,active:0,planned:0,percentCompleted:0}}}));
   await page.reload();await meter.waitFor();assert.equal(await meter.getAttribute('aria-valuenow'),'0');
-  const widths=await page.locator('.dsg-roadmap-meter__rail i').evaluateAll(es=>es.map(e=>e.getBoundingClientRect().width));
+  const widths=await page.locator('.dsg-roadmap-meter__rail i').evaluateAll(es=>es.map(e=>parseFloat(getComputedStyle(e).width)));
   assert(widths.every(w=>w===0),'Zero values have zero graphical width');
   await page.goto(base+'observation-planner/');
   for(const width of [1157,768,390]){
