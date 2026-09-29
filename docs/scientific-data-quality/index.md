@@ -3,6 +3,7 @@
 
 <div class="dsg-dq-center">
 <section class="dsg-dq-hero">
+<!-- DSG:IMMERSIVE-SCENE -->
   <div>
     <span>BKL-041 · SCIENTIFIC DATA QUALITY</span>
     <h1>Qualità scientifica, spiegata</h1>

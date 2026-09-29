@@ -9,6 +9,7 @@ description: Decisioni, package, contratti e assurance della piattaforma Digital
 <div class="dsg-architecture-center" data-architecture-roadmap="../data/roadmap.json">
 
 <section class="dsg-architecture-hero">
+<!-- DSG:IMMERSIVE-SCENE -->
   <span class="dsg-architecture-hero__eyebrow">DIGITAL STARGATE · ARCHITECTURE CENTER</span>
   <h1>Capire le decisioni, non soltanto i componenti</h1>
   <p>

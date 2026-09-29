@@ -10,6 +10,7 @@ hide:
 <main class="dsg-enterprise-home">
 
 <section class="dsg-hero dsg-hero--home" aria-labelledby="dsg-home-title">
+  <!-- DSG:IMMERSIVE-SCENE -->
   <div class="dsg-hero__overlay"></div>
   <div class="dsg-hero__content">
     <p class="dsg-hero__eyebrow">OSSERVATORIO ASTRONOMICO REMOTO · MANCIANO</p>

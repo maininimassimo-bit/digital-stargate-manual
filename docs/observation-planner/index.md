@@ -7,6 +7,7 @@
 
 <div class="dsg-op-center">
 <section class="dsg-op-hero">
+<!-- DSG:IMMERSIVE-SCENE -->
   <div><span>BKL-031 · OBSERVATION PLANNER INTELLIGENTE</span><h1>Observation Planner</h1><p>Vista read-only di forecast reale del sito, geometria astronomica corrente della notte e suitability esplicita dei setup governati. Nessuna projection costituisce readiness, go/no-go, scheduling, comando o Safety Authority.</p></div>
   <div class="dsg-op-hero__mark" aria-hidden="true">◎</div>
 </section>

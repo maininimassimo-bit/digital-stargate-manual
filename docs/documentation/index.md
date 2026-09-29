@@ -11,6 +11,7 @@ description: Catalogo visuale e Search Center della documentazione Digital StarG
 <div class="dsg-documentation-center" data-dsg-documentation-center>
 
 <section class="dsg-documentation-hero">
+<!-- DSG:IMMERSIVE-SCENE -->
   <span class="dsg-documentation-hero__eyebrow">DIGITAL STARGATE · DOCUMENTATION CENTER</span>
   <h1>Tutta la documentazione, organizzata per dominio</h1>
   <p>

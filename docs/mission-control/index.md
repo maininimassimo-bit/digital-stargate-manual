@@ -3,6 +3,7 @@
 <div class="dsg-mission-control" data-mission-control data-session-catalog="../data/scientific-session-catalog.json">
 
 <section class="dsg-mission-hero">
+<!-- DSG:IMMERSIVE-SCENE -->
   <span class="dsg-mission-kicker">DIGITAL STARGATE · MISSION CONTROL</span>
   <h1>Centro di controllo della piattaforma scientifica</h1>
   <p>

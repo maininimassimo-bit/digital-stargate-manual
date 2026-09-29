@@ -4,6 +4,8 @@
 
 > **Hosted telemetry pilot.** Il browser tenta prima il relay HTTPS governato su Google Cloud Run e non contiene credenziali di ingest. Se il relay non è raggiungibile, usa la projection statica del portale solo come fallback; freshness e stato `UNKNOWN` continuano a essere applicati lato browser.
 
+<!-- DSG:IMMERSIVE-SCENE -->
+
 <div class="dsg-kpi-grid dsg-status-kpi-grid">
 <div class="dsg-kpi"><span class="dsg-kpi__label">Qualità telemetria</span><span class="dsg-kpi__value" data-observatory-status="quality">🟡 UNKNOWN</span><span class="dsg-kpi__detail">Rilevazione: <span data-observatory-status="observed-at">—</span> · sorgente: <span data-observatory-status="source">—</span> · trasporto: <span data-observatory-status="transport">—</span></span></div>
 <div class="dsg-kpi"><span class="dsg-kpi__label">Safety osservata</span><span class="dsg-kpi__value" data-observatory-status="safety-state">🟡 UNKNOWN</span><span class="dsg-kpi__detail" data-observatory-status="safety-detail">Telemetria N.I.N.A., non autorità safety</span></div>

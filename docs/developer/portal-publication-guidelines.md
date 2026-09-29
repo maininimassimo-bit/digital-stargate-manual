@@ -95,3 +95,19 @@ Il rollback ripristina file UI, navigation e generatori del commit precedente. N
 |---|---|---|---|
 | 1.0 | 26/07/2026 | Superseded | Workflow editoriale UI 6.1 |
 | 2.0 | 10/09/2026 | Active | Governance dinamica e quality gate UI 7.0; ARB-UI-7 APPROVED |
+
+
+## Addendum — manutenzione del portale immersivo (29/09/2026)
+
+- Non copiare fixture dai prototipi nelle pagine produttive.
+- Non associare stato di cupola o orientamento del modello a valori assenti/scaduti.
+- Mantenere i marker `DSG:IMMERSIVE-SCENE` fuori dai blocchi rigenerati dalle pipeline.
+- Non cambiare binding dei consumer per adattarli alla geometria del modello.
+- Per aggiungere scene o aggiornare Three.js seguire
+  [DSG-UI-IMMERSIVE-001](../ui/immersive-portal-implementation.md).
+- Eseguire `verify-immersive-assets.mjs` e `test-immersive-portal.cjs`, oltre ai gate
+  esistenti. Verificare tema chiaro/scuro, mobile, navigazione, riduzione movimento,
+  assenza WebGL e round-trip della modalità essenziale.
+- Il workflow Immersive portal validation esegue soltanto verifiche; il proprietario
+  del deployment resta `deploy-pages.yml`.
+- Registrare separatamente test locali, exact-head CI, review e deployment verificato.

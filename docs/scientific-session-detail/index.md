@@ -3,6 +3,7 @@
 
 <div class="dsg-session-detail" data-session-detail data-session-catalog="../data/scientific-session-catalog.json">
   <section class="dsg-session-detail__hero">
+<!-- DSG:IMMERSIVE-SCENE -->
     <span>DIGITAL STARGATE · SESSION DETAIL</span>
     <h1 data-detail-title>Caricamento sessione…</h1>
     <p data-detail-subtitle>Recupero dei metadati dal catalogo versionato.</p>

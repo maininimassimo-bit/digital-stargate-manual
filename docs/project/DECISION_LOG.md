@@ -211,3 +211,18 @@ La closure BKL-040 e la promozione dependency-driven di BKL-038 non introducono 
 | DLG-144 | 27/09/2026 | Modificare la soglia dewpoint di readiness BKL-032 | Massimo Mainini sceglie per la readiness BKL-032 di calcolare il margine come temperatura ambiente meno dewpoint: margine ≤3 °C è `NO_GO`; solo un margine >3 °C supera questo controllo. Dato mancante/stale/conflict resta `INDETERMINATE`. Questa decisione sostituisce esclusivamente il componente dewpoint della soglia DLG-059 `<10 °C`; gli altri limiti meteo e le semantiche readiness restano invariati. Aggiornamento di decision-support read-only: nessuna modifica a device command, interlock fisici o Safety Authority e nessuna autorizzazione runtime aggiuntiva | BKL-032 | Owner-Authorized Threshold Amendment / Runtime Gate Unchanged | owner decision 27/09/2026; `BKL-032-TELEMETRY-SOURCE-MAPPING-2026-09-18.md`; `BKL-032-VALIDATION-AND-ACCEPTANCE-PLAN-2026-09-18.md`; `BKL-032-CLOSURE-2026-09-18.md` |
 | DLG-145 | 28/09/2026 | Autorizzare l'analisi offline dell'export storico Windows fornito per BKL-043 F4 | Massimo Mainini autorizza la lettura offline e read-only dello snapshot EVTX fornito, limitatamente ai dati presenti nell'export (2025-10-02–2026-09-27), per determinare la copertura storica e correlare evidenze aggregate. L'autorizzazione non comprende ulteriori snapshot, accesso live a EAGLE, installazione, importazione degli export originali o payload grezzi nel repository, o attività runtime | BKL-043 F4 | Bounded Historical Snapshot Analysis Authorized and Completed / Runtime Not Authorized | owner authorization 28/09/2026; `BKL-043-F4-HISTORICAL-EAGLE-EXPORT-RECONCILIATION-2026-09-28.md` |
 | DLG-146 | 28/09/2026 | Autorizzare la pubblicazione del riepilogo redatto della riconciliazione storica BKL-043 F4 | Massimo Mainini autorizza a registrare nel repository pubblico solo il riepilogo redatto e aggregato dell'analisi storica. Export grezzi, percorsi locali, identificativi, campi personali e payload non sono pubblicati. L'autorizzazione non chiude né amplia il gate runtime F4 | BKL-043 F4 | Redacted Aggregate Publication Authorized / Runtime Gate Unchanged | owner authorization 28/09/2026; PR #425; `BKL-043-F4-HISTORICAL-EAGLE-EXPORT-RECONCILIATION-2026-09-28.md` |
+
+
+## 29/09/2026 — redesign visuale immersivo del portale
+
+Richiesta owner in sessione: procedere con il redesign completo preservando dati e
+contenuti delle pagine, quindi aggiornare i documenti tecnici. Scope implementativo:
+shell Material condivisa, scene WebGL illustrative e opzionali, nessuna nuova
+fonte o modifica di authority. La scelta Three.js procede dai prototipi richiesti;
+la versione è vendorizzata e non è una dipendenza di dominio o del runtime EAGLE.
+
+Stato: implementazione candidata; nessuna acceptance o pubblicazione implicita.
+BKL-043 e la roadmap canonica non vengono modificati o dichiarati completati da
+questa richiesta visuale. Riferimenti:
+[implementazione](../ui/immersive-portal-implementation.md),
+[release candidate](../releases/immersive-portal.md).

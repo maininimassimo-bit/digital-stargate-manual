@@ -3,6 +3,7 @@
 
 <div class="dsg-sc-center">
 <section class="dsg-sc-hero">
+<!-- DSG:IMMERSIVE-SCENE -->
   <span>BKL-037 · SESSION COMPARISON</span>
   <h1>Scientific session comparison</h1>
   <p>Vista read-only delle projection multi-sessione governate. I valori vengono mostrati soltanto con unità, provenance, completeness ed exclusions fornite dalla projection accettata.</p>
