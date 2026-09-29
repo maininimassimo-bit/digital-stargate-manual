@@ -23,41 +23,53 @@
   let latestObservatoryPayload = null;
   let latestEaglePayload = null;
   const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+  // Presentation scales are separate from governed evaluation thresholds.
+  const finiteValue = value => (typeof value === 'number' || typeof value === 'string' && value.trim() !== '') && Number.isFinite(Number(value));
   const domainBar = (label, value, threshold, unit, state, note) => {
-    const numeric = Number(value);
-    const hasValue = Number.isFinite(numeric);
+    const hasValue = state !== 'unavailable' && finiteValue(value);
+    const numeric = hasValue ? Number(value) : null;
     const minimum = threshold?.minExclusive ?? threshold?.min;
-    const ratio = hasValue ? Math.max(0, Math.min(100, threshold?.max === 0 ? (numeric > 0 ? 100 : 0) : threshold?.max !== undefined ? (numeric / threshold.max) * 100 : minimum !== undefined ? (numeric / minimum) * 100 : 100)) : 0;
+    const maximum = unit.includes('%') ? 100 : threshold?.max === 0 ? 1 : threshold?.max !== undefined ? threshold.max * 2 : 20;
+    const limit = threshold?.max ?? minimum;
+    const ratio = hasValue ? Math.max(0, Math.min(1, numeric / maximum)) : 0;
     const isBad = hasValue && ((threshold?.max !== undefined && numeric > threshold.max) || (threshold?.minExclusive !== undefined && numeric <= threshold.minExclusive) || (threshold?.min !== undefined && numeric < threshold.min));
-    const tone = state === 'unavailable' || !hasValue && state !== 'good' ? 'unknown' : isBad || state === 'bad' ? 'bad' : 'good';
-    const display = hasValue ? `${numeric.toLocaleString('it-IT', { maximumFractionDigits: 1 })}${unit}` : '—';
-    return `<div class="dsg-domain-bar is-${tone}"><div class="dsg-domain-bar__head"><span>${escapeHtml(label)}</span><strong>${escapeHtml(display)}</strong></div><div class="dsg-domain-bar__track" role="img" aria-label="${escapeHtml(label)}: ${escapeHtml(display)}"><span style="width:${ratio.toFixed(1)}%"></span></div><small>${escapeHtml(note)}</small></div>`;
+    const tone = !hasValue ? 'unknown' : isBad || state === 'bad' ? 'bad' : 'good';
+    const display = hasValue ? `${numeric.toLocaleString('it-IT', { maximumFractionDigits: 1 })}${unit}` : 'UNKNOWN';
+    const status = !hasValue ? 'Non corrente / non disponibile' : isBad ? 'Soglia superata' : 'Entro soglia';
+    return `<article class="dsg-instrument is-${tone}" data-instrument-type="dial" data-instrument-value="${hasValue ? numeric : ''}" data-instrument-ratio="${ratio}" data-instrument-limit="${limit / maximum}" data-instrument-tone="${tone}"><h4>${escapeHtml(label)}</h4><div class="dsg-instrument__port" aria-hidden="true"><span class="dsg-instrument__poster" style="--instrument-fill:${ratio * 360}deg"></span></div><strong class="dsg-instrument__value">${escapeHtml(display)}</strong><span class="dsg-instrument__status">${status}</span><small>${escapeHtml(note)}</small><small>Scala 0–${maximum}${escapeHtml(unit)}${hasValue && (numeric < 0 || numeric > maximum) ? ' · fuori scala' : ''}</small></article>`;
   };
   const stateBar = (label, state, detail) => {
     const value = String(state || 'UNKNOWN').toUpperCase();
     const good = ['SAFE','OPEN','CLOSED','PARKED','TRACKING','ONLINE','IDLE','READY','MAINS_PRESENT','AVAILABLE','CURRENT','HEALTHY'].includes(value);
     const bad = ['UNSAFE','FAULT','OFFLINE','ALARM','MAINS_LOST','DEGRADED'].includes(value);
     const tone = good ? 'good' : bad ? 'bad' : 'unknown';
-    return `<div class="dsg-domain-bar is-${tone}"><div class="dsg-domain-bar__head"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div><div class="dsg-domain-bar__track" role="img" aria-label="${escapeHtml(label)}: ${escapeHtml(value)}"><span style="width:${good || bad ? '100' : '35'}%"></span></div><small>${escapeHtml(detail || 'Stato descrittivo read-only')}</small></div>`;
+    const type = ({ Cupola:'dome', Montatura:'mount', Camera:'camera', Alimentazione:'power', Rete:'network', Uptime:'clock', 'Windows Time':'clock' })[label] || 'state';
+    return `<article class="dsg-instrument is-${tone}" data-instrument-type="${type}" data-instrument-state="${escapeHtml(value)}" data-instrument-tone="${tone}"><h4>${escapeHtml(label)}</h4><div class="dsg-instrument__port" aria-hidden="true"><span class="dsg-instrument__symbol">${tone === 'unknown' ? '?' : bad ? '!' : '●'}</span></div><strong class="dsg-instrument__value">${escapeHtml(value)}</strong><small>${escapeHtml(detail || 'Stato descrittivo read-only')}</small></article>`;
   };
+  const domainMarkup = new WeakMap();
   const renderDomainBars = () => {
     const root = document.querySelector('[data-observatory-domains]');
     if (!root) return;
     const weather = latestObservatoryPayload?.systems?.weather;
-    const systems = latestObservatoryPayload?.systems || {};
+    const observatoryFresh = isFresh(latestObservatoryPayload);
+    const systems = Object.fromEntries(Object.entries(latestObservatoryPayload?.systems || {}).map(([key, value]) => {
+      const normalized = normalize(value);
+      return [key, observatoryFresh && normalized.quality === 'CURRENT' ? normalized : { ...normalized, state: 'UNKNOWN', quality: observatoryFresh ? normalized.quality : 'STALE' }];
+    }));
     const eagle = latestEaglePayload;
     const signals = eagle?.signals || {};
-    const current = signal => signal && isFresh(signal) && signal.quality === 'CURRENT' ? signal.data || {} : null;
+    const current = signal => isFresh(eagle) && signal && isFresh(signal) && signal.quality === 'CURRENT' ? signal.data || {} : null;
     const cpu = current(signals.cpu), memory = current(signals.memory), storage = current(signals.storage), timeSync = current(signals.time_sync);
-    const eagleState = latestEaglePayload?.summary?.state;
-    const weatherCurrent = weather && isFresh(weather) && weather.quality === 'CURRENT' ? weather : null;
+    const eagleState = isFresh(eagle) ? eagle?.summary?.state : 'UNAVAILABLE / STALE_OR_MISSING';
+    const weatherCurrent = observatoryFresh && weather && isFresh(weather) && weather.quality === 'CURRENT' ? weather : null;
     const weatherTemp = Number(weatherCurrent?.temperature_c), weatherDew = Number(weatherCurrent?.dew_point_c);
-    const dewMargin = Number.isFinite(weatherTemp) && Number.isFinite(weatherDew) ? weatherTemp - weatherDew : null;
+    const dewMargin = finiteValue(weatherCurrent?.temperature_c) && finiteValue(weatherCurrent?.dew_point_c) ? weatherTemp - weatherDew : null;
     const sections = [];
-    sections.push(`<section class="dsg-domain-group"><h3>EAGLE Health</h3><p>Policy BKL-036-F5 · aggregate: ${escapeHtml(eagleState || 'UNAVAILABLE')}</p>${domainBar('CPU load', cpu?.load_pct, {max:90}, ' %', cpu ? 'good' : 'unavailable', cpu ? 'verde ≤ 90%; rosso > 90%' : 'UNAVAILABLE / non corrente')}${domainBar('Memoria disponibile', Number.isFinite(Number(memory?.available_ratio)) ? Number(memory.available_ratio) * 100 : null, {min:20}, ' %', memory ? 'good' : 'unavailable', memory ? 'verde ≥ 20%; rosso < 20%' : 'UNAVAILABLE / non corrente')}${(Array.isArray(storage?.logical_disks) ? storage.logical_disks.filter(d => ['C:','D:'].includes(d.device_id)) : []).map(d => domainBar(`Storage ${d.device_id}`, d.free_pct, {min:20}, ' % libero', 'good', 'verde ≥ 20%; rosso < 20%')).join('')}${stateBar('Uptime', signals.uptime?.quality === 'CURRENT' ? 'CURRENT' : 'UNKNOWN', 'Nessuna soglia di degrado; freshness obbligatoria')}${stateBar('Windows Time', timeSync?.last_successful_sync_utc ? 'CURRENT' : 'UNKNOWN', timeSync?.last_successful_sync_utc ? 'Sync corrente verificata' : 'Sync corrente non computabile')}</section>`);
-    sections.push(`<section class="dsg-domain-group"><h3>Meteo operativo</h3><p>Policy BKL-032 · decision-support read-only</p>${domainBar('Vento medio', weatherCurrent?.wind_speed_kmh, {max:15}, ' km/h', weatherCurrent ? 'good' : 'unavailable', 'verde ≤ 15; rosso > 15')}${domainBar('Raffiche', weatherCurrent?.wind_gust_kmh, {max:20}, ' km/h', weatherCurrent ? 'good' : 'unavailable', 'verde ≤ 20; rosso > 20')}${domainBar('Nuvolosità', weatherCurrent?.cloud_cover_pct, {max:50}, ' %', weatherCurrent ? 'good' : 'unavailable', 'verde ≤ 50%; rosso > 50%')}${domainBar('Umidità relativa', weatherCurrent?.humidity_pct, {max:90}, ' %', weatherCurrent ? 'good' : 'unavailable', 'verde ≤ 90%; rosso > 90%')}${domainBar('Margine dew point', dewMargin, {minExclusive:3}, ' °C', weatherCurrent ? 'good' : 'unavailable', 'temperatura ambiente − dewpoint; verde > 3 °C; rosso ≤ 3 °C')}${domainBar('Pioggia', weatherCurrent?.rain_rate_mm_h, {max:0}, ' mm/h', weatherCurrent ? 'good' : 'unavailable', 'verde = 0; rosso > 0')}</section>`);
-    sections.push(`<section class="dsg-domain-group"><h3>Sistemi osservati</h3><p>Stato descrittivo della telemetria N.I.N.A.; nessuna soglia numerica aggiunta</p>${stateBar('Cupola', systems.dome?.state, systems.dome?.quality || 'UNKNOWN')}${stateBar('Montatura', systems.mount?.state, systems.mount?.quality || 'UNKNOWN')}${stateBar('Camera', systems.camera?.state, systems.camera?.quality || 'UNKNOWN')}${stateBar('Alimentazione', systems.power?.state, systems.power?.quality || 'UNKNOWN')}${stateBar('Rete', systems.network?.state, systems.network?.quality || 'UNKNOWN')}</section>`);
-    root.innerHTML = `<div class="dsg-domain-bars__legend"><span class="is-good">Verde · entro soglia / stato positivo</span><span class="is-bad">Rosso · soglia superata / stato degradato</span><span class="is-unknown">Ambra · non corrente o non disponibile</span></div>${sections.join('')}`;
+    sections.push(`<section class="dsg-domain-group dsg-instrument-panel"><h3>EAGLE Health</h3><p>Policy BKL-036-F5 · aggregate: ${escapeHtml(eagleState || 'UNAVAILABLE')}</p><div class="dsg-instrument-grid">${domainBar('CPU load', cpu?.load_pct, {max:90}, ' %', cpu ? 'good' : 'unavailable', cpu ? 'verde ≤ 90%; rosso > 90%' : 'UNAVAILABLE / non corrente')}${domainBar('Memoria disponibile', finiteValue(memory?.available_ratio) ? Number(memory.available_ratio) * 100 : null, {min:20}, ' %', memory ? 'good' : 'unavailable', memory ? 'verde ≥ 20%; rosso < 20%' : 'UNAVAILABLE / non corrente')}${['C:', 'D:'].map(id => { const disk = (Array.isArray(storage?.logical_disks) ? storage.logical_disks : []).find(d => d.device_id === id); return domainBar(`Storage ${id}`, disk?.free_pct, {min:20}, ' % libero', disk ? 'good' : 'unavailable', 'verde ≥ 20%; rosso < 20%'); }).join('')}${stateBar('Uptime', Boolean(current(signals.uptime)) ? 'CURRENT' : 'UNKNOWN', 'Nessuna soglia di degrado; freshness obbligatoria')}${stateBar('Windows Time', timeSync?.last_successful_sync_utc ? 'CURRENT' : 'UNKNOWN', timeSync?.last_successful_sync_utc ? 'Sync corrente verificata' : 'Sync corrente non computabile')}</div></section>`);
+    sections.push(`<section class="dsg-domain-group dsg-instrument-panel"><h3>Meteo operativo</h3><p>Policy BKL-032 · decision-support read-only</p><div class="dsg-instrument-grid">${domainBar('Vento medio', weatherCurrent?.wind_speed_kmh, {max:15}, ' km/h', weatherCurrent ? 'good' : 'unavailable', 'verde ≤ 15; rosso > 15')}${domainBar('Raffiche', weatherCurrent?.wind_gust_kmh, {max:20}, ' km/h', weatherCurrent ? 'good' : 'unavailable', 'verde ≤ 20; rosso > 20')}${domainBar('Nuvolosità', weatherCurrent?.cloud_cover_pct, {max:50}, ' %', weatherCurrent ? 'good' : 'unavailable', 'verde ≤ 50%; rosso > 50%')}${domainBar('Umidità relativa', weatherCurrent?.humidity_pct, {max:90}, ' %', weatherCurrent ? 'good' : 'unavailable', 'verde ≤ 90%; rosso > 90%')}${domainBar('Margine dew point', dewMargin, {minExclusive:3}, ' °C', weatherCurrent ? 'good' : 'unavailable', 'temperatura ambiente − dewpoint; verde > 3 °C; rosso ≤ 3 °C')}${domainBar('Pioggia', weatherCurrent?.rain_rate_mm_h, {max:0}, ' mm/h', weatherCurrent ? 'good' : 'unavailable', 'verde = 0; rosso > 0')}</div></section>`);
+    sections.push(`<section class="dsg-domain-group dsg-instrument-panel"><h3>Sistemi osservati</h3><p>Stato descrittivo della telemetria N.I.N.A.; nessuna soglia numerica aggiunta</p><div class="dsg-instrument-grid">${stateBar('Cupola', systems.dome?.state, systems.dome?.quality || 'UNKNOWN')}${stateBar('Montatura', systems.mount?.state, systems.mount?.quality || 'UNKNOWN')}${stateBar('Camera', systems.camera?.state, systems.camera?.quality || 'UNKNOWN')}${stateBar('Alimentazione', systems.power?.state, systems.power?.quality || 'UNKNOWN')}${stateBar('Rete', systems.network?.state, systems.network?.quality || 'UNKNOWN')}</div></section>`);
+    const markup = `<div class="dsg-domain-bars__legend"><span class="is-good">Verde · entro soglia / stato positivo</span><span class="is-bad">Rosso · soglia superata / stato degradato</span><span class="is-unknown">Ambra · non corrente o non disponibile</span></div>${sections.join('')}`;
+    if (domainMarkup.get(root) !== markup) { domainMarkup.set(root, markup); root.innerHTML = markup; }
   };
 
   const render = (payload,transport='HOSTED') => {
@@ -77,10 +89,10 @@
     renderDomainBars();
   };
 
-  const renderEagleUnavailable = quality => { setEagle('quality',badge(quality||'UNKNOWN')); setEagle('summary','UNAVAILABLE / NO_CURRENT_SNAPSHOT'); setEagle('observed-at','—'); setEagle('source','—'); ['cpu','memory','storage-capacity','storage-health','uptime','time-sync'].forEach(key=>setEagle(key,'—')); };
+  const renderEagleUnavailable = quality => { latestEaglePayload = null; renderDomainBars(); setEagle('quality',badge(quality||'UNKNOWN')); setEagle('summary','UNAVAILABLE / NO_CURRENT_SNAPSHOT'); setEagle('observed-at','—'); setEagle('source','—'); ['cpu','memory','storage-capacity','storage-health','uptime','time-sync'].forEach(key=>setEagle(key,'—')); };
   const renderEagle = (payload,transport='HOSTED') => {
-    latestEaglePayload = payload;
     if(payload?.component!=='DSG.EagleHealthPortalProjection'||!['HEALTHY','DEGRADED','UNAVAILABLE','UNKNOWN'].includes(payload?.summary?.state)||!payload?.summary?.reason)throw new Error('Invalid EAGLE health portal projection contract');
+    latestEaglePayload = payload;
     const payloadFresh=isFresh(payload), signals=payload?.signals||{}; setEagle('quality',badge(payloadFresh?payload.quality:'STALE')); setEagle('summary',payloadFresh?`${text(payload.summary.state)} / ${text(payload.summary.reason)}`:'UNAVAILABLE / STALE_PROJECTION'); setEagle('observed-at',parseTime(payload?.observed_at_utc)?.toLocaleString('it-IT')||'—'); setEagle('source',`${text(payload?.source_component)} · ${text(payload?.host)} · ${transport}`);
     const cpu=normalize(signals.cpu), memory=normalize(signals.memory), storage=normalize(signals.storage), uptime=normalize(signals.uptime), timeSync=normalize(signals.time_sync);
     const cpuData=cpu.quality==='CURRENT'?cpu.data||{}:{}, memoryData=memory.quality==='CURRENT'?memory.data||{}:{}, storageData=storage.quality==='CURRENT'?storage.data||{}:{}, uptimeData=uptime.quality==='CURRENT'?uptime.data||{}:{}, timeData=timeSync.quality==='CURRENT'?timeSync.data||{}:{};
@@ -103,6 +115,6 @@
   };
   let timer;
   const refresh = async () => { try{render(await fetchJson(RUNTIME_ENDPOINT),'CLOUD RUN');return;}catch(runtimeError){console.warn('Digital StarGate: hosted observatory telemetry unavailable',runtimeError);} try{render(await fetchJson(new URL(FALLBACK_DATA_PATH,document.baseURI)),'FALLBACK');}catch(fallbackError){console.warn('Digital StarGate: fallback observatory telemetry unavailable',fallbackError);renderUnavailable();} };
-  const initialize = () => { if(!document.querySelector('[data-observatory-status], [data-eagle-health]'))return; clearInterval(timer); refreshLatestScientific(); refreshEagleHealth(); refresh(); timer=window.setInterval(()=>{refresh();refreshEagleHealth();},REFRESH_MS); };
+  const initialize = () => { if(!document.querySelector('[data-observatory-status], [data-eagle-health]'))return; clearInterval(timer); refreshLatestScientific(); refreshEagleHealth(); refresh(); timer=window.setInterval(()=>{renderDomainBars();refresh();refreshEagleHealth();},REFRESH_MS); };
   if(window.DSG?.components)window.DSG.components.register({name:'observatory-status',order:66,initialize}); else if(window.document$?.subscribe)window.document$.subscribe(initialize); else if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initialize,{once:true}); else initialize();
 })();

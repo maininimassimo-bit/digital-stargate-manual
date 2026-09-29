@@ -63,6 +63,13 @@
       essential = !essential;
       try { localStorage.setItem(storageKey, String(essential)); } catch { /* Private mode. */ }
       modeChanged();
+      window.dispatchEvent(new CustomEvent('dsg:visual-mode-change', { detail: { essential } }));
+    }, { signal });
+    window.addEventListener('dsg:visual-mode-change', event => {
+      let value = essential;
+      if (typeof event.detail?.essential === 'boolean') value = event.detail.essential;
+      else try { value = localStorage.getItem(storageKey) === 'true'; } catch { /* Private mode. */ }
+      if (value !== essential) { essential = value; modeChanged(); }
     }, { signal });
     reduced.addEventListener('change', modeChanged, { signal });
     navigator.connection?.addEventListener('change', modeChanged, { signal });

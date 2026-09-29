@@ -1,0 +1,21 @@
+.dsg-instrument-panel { position: relative; isolation: isolate; }
+.dsg-instrument-panel > canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+.dsg-instrument-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .7rem; }
+.md-typeset .dsg-instrument { --instrument-color: #35bd87; margin: 0; padding: .85rem; min-width: 0; border: 1px solid var(--dsg-line); border-radius: .7rem; background: var(--dsg-surface); }
+.md-typeset .dsg-instrument.is-bad { --instrument-color: #ed5366; }
+.md-typeset .dsg-instrument.is-unknown { --instrument-color: #d9a540; }
+.md-typeset .dsg-instrument h4 { margin: 0; font-size: .82rem; color: var(--dsg-text); font-weight: 600; }
+.dsg-instrument__port { height: 118px; display: grid; place-items: center; }
+.md-typeset .dsg-instrument__value { display: block; color: var(--dsg-text); font: 500 clamp(.95rem,2.2vw,1.5rem)/1.4 ui-monospace,monospace; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.dsg-instrument__status { display: block; margin-top: .25rem; color: var(--dsg-text); font-size: .72rem; }
+.md-typeset .dsg-instrument small { display: block; color: var(--dsg-text-muted); font-size: max(.65rem,12px); line-height: 1.55; margin-top: .3rem; }
+.dsg-instrument__poster { width: 84px; height: 84px; border-radius: 50%; background: conic-gradient(from 180deg,var(--instrument-color) var(--instrument-fill),var(--dsg-line) 0); mask: radial-gradient(circle,transparent 55%,black 57%); transform: scaleX(-1); }
+.dsg-instrument.is-unknown .dsg-instrument__poster { background: repeating-conic-gradient(var(--instrument-color) 0deg 20deg,transparent 20deg 40deg); }
+.dsg-instrument__symbol { font: 500 2rem ui-monospace,monospace; color: var(--instrument-color); }
+.dsg-instrument-panel.is-instruments-ready .dsg-instrument__port > span { visibility: hidden; }
+.dsg-instrument-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; }
+.md-typeset .dsg-instrument-controls button { min-height: 44px; padding: .45rem .8rem; border: 1px solid var(--dsg-line); border-radius: .4rem; background: var(--dsg-surface); color: var(--dsg-text); cursor: pointer; }
+.dsg-instrument-controls small { color: var(--dsg-text-muted); }
+@media(max-width:700px) { .dsg-instrument-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } .md-typeset .dsg-instrument { padding: .6rem; } }
+@media(max-width:370px) { .dsg-instrument-grid { grid-template-columns: minmax(0,1fr); } }
+@media print { .dsg-instrument-panel > canvas,.dsg-instrument-controls { display: none; } .dsg-instrument-panel.is-instruments-ready .dsg-instrument__port > span { visibility: visible; } }

@@ -163,6 +163,13 @@ ARB/Release Quality ed exact-head CI restano gate applicabili alla pubblicazione
 
 ## 9. Revisioni
 
+### Estensione dei pannelli status
+
+I quadranti e simboli dei tre pannelli sono documentati in
+[DSG-UI-INSTRUMENTS-001](digital-status-instruments.md), inclusi scale,
+normalizzazione UNKNOWN, lifecycle dei canvas e suite di regressione.
+La preferenza di vista essenziale è condivisa con la hero.
+
 | Versione | Data | Descrizione |
 |---|---|---|
 | 1.0 | 29/09/2026 | Shell comune, 19 scene, dipendenza locale, lifecycle e piano di regressione |

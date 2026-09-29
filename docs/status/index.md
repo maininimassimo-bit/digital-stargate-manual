@@ -50,13 +50,15 @@ Per la projection live EAGLE Health, lo score è `100` quando i cinque segnali o
 
 Capacità logica e salute fisica dei dischi sono evidence indipendenti: il portale non deriva uno stato fisico dalla percentuale di spazio libero e non applica soglie numeriche non governate.
 
-## Barre di dominio read-only
+## Strumenti digitali read-only { #barre-di-dominio-read-only }
+
+<div class="dsg-instrument-controls"><button type="button" data-instruments-mode aria-pressed="false" hidden>Vista essenziale</button><small>Quadranti e simboli 3D · sola lettura · tacche ambra: soglie governate</small></div>
 
 <div class="dsg-domain-bars" data-observatory-domains>
-<p class="dsg-domain-bars__loading">Caricamento delle barre di dominio…</p>
+<p class="dsg-domain-bars__loading">Caricamento degli strumenti digitali… Valori non disponibili; nessuno stato operativo deducibile.</p>
 </div>
 
-La visualizzazione applica esclusivamente le soglie già approvate per BKL-032 e BKL-036-F5. Il rosso indica il superamento della soglia governata; l’ambra indica dato non corrente, non calcolabile o dominio senza soglia numerica. Le barre sono descrittive e non costituiscono readiness, Safety Authority o comando.
+La visualizzazione applica esclusivamente le soglie già approvate per BKL-032 e BKL-036-F5. Il rosso indica il superamento della soglia governata; l’ambra indica dato non corrente, non calcolabile o dominio senza soglia numerica. Le scale dei quadranti sono dichiarate e non introducono nuove soglie; i valori fuori scala restano leggibili. I simboli degli apparati sono schematici: lo stato testuale è autorevole, `UNKNOWN` non è una percentuale. Gli strumenti sono descrittivi e non costituiscono readiness, Safety Authority o comando. La vista essenziale mantiene tutti i valori senza WebGL.
 
 ## Meteo operativo
 
