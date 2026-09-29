@@ -284,17 +284,24 @@ function Send-Pending([object[]]$Files, [datetime]$NowUtc) {
             if ($script:RetryState.ContainsKey($key)) { $attempt = [int]$script:RetryState[$key].Attempt + 1 }
 $delay = [math]::Min(300, [math]::Pow(2, [math]::Min($attempt, 9)))
             $script:RetryState[$key] = [pscustomobject]@{ Attempt = $attempt; NextUtc = $NowUtc.AddSeconds($delay) }
+            $errorRecord = $_
+            $exception = $errorRecord.Exception
             $httpStatus = $null
             $serverError = $null
-            if ($_.Exception.Response) {
-                try { $httpStatus = [int]$_.Exception.Response.StatusCode } catch {}
+            $responseProperty = $exception.PSObject.Properties['Response']
+            if ($null -ne $responseProperty -and $null -ne $responseProperty.Value) {
+                try { $httpStatus = [int]$responseProperty.Value.StatusCode } catch {}
             }
-            if ($_.ErrorDetails.Message) {
-                try { $serverError = [string](($_.ErrorDetails.Message | ConvertFrom-Json).error) } catch {}
+            $detailsProperty = $errorRecord.PSObject.Properties['ErrorDetails']
+            if ($null -ne $detailsProperty -and $null -ne $detailsProperty.Value) {
+                $messageProperty = $detailsProperty.Value.PSObject.Properties['Message']
+                if ($null -ne $messageProperty -and $messageProperty.Value) {
+                    try { $serverError = [string](($messageProperty.Value | ConvertFrom-Json).error) } catch {}
+                }
             }
-            $safeError = [string]$_.Exception.Message
+            $safeError = [string]$exception.Message
             if ($safeError -notin @('GCLOUD_NOT_FOUND', 'GCLOUD_ACTIVE_ACCOUNT_MISMATCH', 'IDENTITY_TOKEN_UNAVAILABLE', 'TASK_SIGNAL_COUNT_INVALID', 'INVALID_DURABLE_ACK')) {
-                $safeError = $_.Exception.GetType().Name
+                $safeError = $exception.GetType().Name
             }
             if ($serverError) { $safeError = $serverError }
             Write-Output ('RETRY_PENDING ' + $file.BaseName + ' delay_seconds=' + $delay + ' stage=' + $stage + ' error=' + $safeError + ' http_status=' + $httpStatus)
@@ -341,6 +348,12 @@ try {
     }
     Write-Output 'BKL043_F4_PILOT_STOPPED_WINDOW_END'
 } catch {
-    Write-Output 'BKL043_F4_PILOT_STOPPED reason=SEE_OPERATOR_LOCAL_ERROR'
+    $fatalRecord = $_
+    $fatalException = $fatalRecord.Exception
+    $fatalMessage = [string]$fatalException.Message
+    if ($fatalMessage -notin @('HOST_IDENTITY_MISMATCH', 'TIMEZONE_MISMATCH', 'OUTSIDE_APPROVED_WINDOW', 'RECEIVER_URL_INVALID', 'OUTBOX_UNRECOVERED_TEMP', 'DISK_SOURCE_INCOMPLETE', 'TASK_SIGNAL_COUNT_INVALID', 'RECEIPT_SIZE_LIMIT', 'QUEUE_AGE_UNKNOWN', 'QUEUE_STALE', 'QUEUE_UNREADABLE', 'OUTBOX_FULL', 'CLOCK_QUALITY_UNKNOWN')) {
+        $fatalMessage = $fatalException.GetType().Name
+    }
+    Write-Output ('BKL043_F4_PILOT_STOPPED reason=SEE_OPERATOR_LOCAL_ERROR error=' + $fatalMessage)
     exit 1
 }
