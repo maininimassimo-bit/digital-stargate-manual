@@ -218,6 +218,17 @@ La mappa usa il `nav` canonico e `hooks/portal_navigation.py` per includere anch
 
 ## Inquadratura completa del Celestial Atlas
 
-La distanza della camera usa il campo visivo più restrittivo fra verticale e orizzontale, con un volume conservativo di raggio 5 unità per l'atlante. Lo scroll varia la distanza mantenendo un margine di contenimento. Il canvas delle scene atlas/gateway occupa esclusivamente lo spazio fra intestazione e controlli. Il Planner ha un'altezza indipendente dal riquadro meteo, compresa tra 28 e 34 rem, adattiva alla larghezza. Il modello osservatorio e il collegamento al badge cupola non cambiano.
+La distanza della camera usa il campo visivo più restrittivo fra verticale e orizzontale, con un volume conservativo di raggio 5 unità per l'atlante. Lo scroll varia la distanza mantenendo un margine di contenimento. Il canvas delle scene atlas/gateway occupa esclusivamente lo spazio fra intestazione e controlli. Nel Planner l'introduzione occupa la prima riga; cielo previsto e atlante sono affiancati con altezza condivisa (minimo 26 rem). Fino a 700 pixel si dispongono in sequenza e l'atlante ha altezza 28 rem. Il modello osservatorio e il collegamento al badge cupola non cambiano.
 
 Verificati viewport 390, 768, 1157 e 1440 pixel, preset Orbita/Dall'alto e ridimensionamento; ispezione delle immagini con anello completo. Rimangono i limiti di pixel e l'arresto del rendering a riposo. Rollback: revert della PR di navigazione/inquadratura e rebuild; nessuna modifica ai dati. CI, review e pubblicazione sono registrate nella PR dedicata.
+
+
+## Roadmap compatta e allineamento Planner — 29/09/2026
+
+La Roadmap usa una hero a larghezza piena, identificativi sintetici del package e della prossima milestone, seguiti da `details` nativi per stato progetto e target integrali. Anche le note dei package e degli elementi aperti sono espandibili: nessuna nota è troncata, riscritta o rimossa. Le wave hanno due colonne su desktop e una su mobile; lo storico usa righe compatte con anteprima laterale. La legenda e le etichette testuali mantengono comprensibili gli stati senza dipendere dal colore.
+
+Il precedente donut e la barra duplicata sono sostituiti da un indicatore prospettico CSS, senza nuove dipendenze, canvas o animazioni continue. Percentuale e conteggi conservano la priorità di `data.summary`, con il precedente fallback sui conteggi delle wave. Le larghezze verde/azzurro/ambra sono proporzionali a completati/in corso/pianificati sul totale; le tacche sono una scala percentuale, non singoli package. Il componente espone `role=meter`, valore e descrizione testuale dei conteggi. Non misura readiness o avanzamento fisico degli apparati.
+
+Nel Planner i bordi del cielo previsto e del Celestial Atlas sono allineati sotto l'introduzione. Il ResizeObserver esistente adatta il canvas anche quando si espandono i dettagli del meteo. Restano invariati il contenimento del globo, i controlli visivi, il refresh F9 e la scadenza dei dati.
+
+File: `docs/styles/roadmap.css`, `docs/javascripts/roadmap.js`, le due pagine Markdown e `docs/styles/planner-weather-sky.css`. Il test `test-immersive-compact-layout.cjs` confronta titoli, stati, note e summary con la projection, verifica apertura da tastiera, overflow a 390/768/1157/1440 pixel e allineamento del Planner. La suite di navigazione verifica separatamente canvas e controlli. Temi chiaro/scuro e screenshot sono verificati in browser; non equivale a un audit assistivo completo. Nessuna modifica alla canonical source o alla projection roadmap. Rollback: revert della PR di presentazione e rebuild Pages; CI, review e pubblicazione nella PR.

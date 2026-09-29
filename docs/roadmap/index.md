@@ -40,11 +40,7 @@
     </div>
   </section>
 
-  <div class="dsg-roadmap-progress" aria-label="Avanzamento complessivo">
-    <div class="dsg-roadmap-progress__bar" data-roadmap-progress></div>
-  </div>
-
-  <section class="dsg-roadmap-center-section">
+<section class="dsg-roadmap-center-section">
     <div class="dsg-roadmap-section-heading">
       <span class="dsg-roadmap-kicker">CAPABILITY WAVES</span>
       <h2>Sequenza degli Architecture Package</h2>

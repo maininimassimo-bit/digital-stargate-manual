@@ -88,3 +88,8 @@ Il simbolo della hero diventa un’immagine realistica selezionata dalla nuvolos
 ## Incremento: reperibilità delle pagine e atlante completo
 
 Navigazione di sezione prima del contenuto su tutte le pagine; nuova mappa completa per ambito; menu laterale completato con sei destinazioni mancanti. L'audit di copertura verifica 831 pagine e impedisce che una pagina resti raggiungibile soltanto dal footer. La hero del Planner inquadra interamente il Celestial Atlas con spazio riservato ai controlli, anche su mobile. Dettagli e rollback nella guida di implementazione.
+
+
+## Incremento: Roadmap compatta e Planner allineato
+
+Stato progetto e target restano integrali in dettagli espandibili; schede package e milestone più compatte. Il progresso usa un indicatore prospettico leggero con percentuale e conteggi governati, senza duplicare la barra. Nel Planner cielo e atlante sono affiancati e allineati sotto l'introduzione, oppure impilati su mobile. [Implementazione e verifiche](../ui/immersive-portal-implementation.md). Nessuna variazione a dati, freshness, authority o policy; rollback tramite revert della PR e rebuild.

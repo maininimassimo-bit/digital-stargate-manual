@@ -260,3 +260,8 @@ Owner richiede di rendere visibili per gruppi logici le destinazioni poco espost
 ## 29/09/2026 — continuità serale del Planner
 
 Owner segnala forecast scaduto alle 20:00 locali. Causa: run 00 UTC con validità massima 18 ore e successivo refresh pianificato alle 18:15 UTC, soggetto a ritardi GitHub. Avviato recupero governato del run 12 UTC; autorizzazione Owner applicata alla correzione della cadenza: discovery oraria con skip dello stesso run/notte validi, polling pagina cinque minuti e invalidazione esplicita dei pannelli alla scadenza. Il limite di freshness e le policy scientifiche non cambiano; nessuna garanzia SLA né nuova autorità di comando. ADR-012 aggiornato e verifiche nella PR dedicata.
+
+
+## 29/09/2026 — Roadmap leggibile e allineamento della hero Planner
+
+Owner richiede badge meno ingombranti, un indicatore di progresso moderno e l'allineamento del Celestial Atlas. Si adottano dettagli nativi per testi estesi preservati integralmente, schede responsive e indicatore prospettico CSS alimentato dalla stessa projection. Cielo previsto e scena 3D condividono la seconda riga della hero, con disposizione verticale su mobile. Aggiornati documentazione tecnica e test di regressione; nessuna variazione a stato governato, fonti, calcoli o autorità. Review e pubblicazione registrate nella PR dedicata.

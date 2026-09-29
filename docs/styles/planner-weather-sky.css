@@ -21,5 +21,12 @@
 .md-typeset .dsg-immersive-page .dsg-op-hero > div > p {color: #dcebf7;}
 .md-typeset .dsg-immersive-page .dsg-op-hero .dsg-scene__heading > span {color: #a7dce9;}
 
-/* Keep the atlas independent of the weather card height. */
-.md-typeset .dsg-immersive-page .dsg-op-center .dsg-op-hero > .dsg-scene {align-self: start; height: clamp(28rem, 48vw, 34rem); min-height: 28rem;}
+/* Intro above an aligned pair; renderer fits the globe to the remaining viewport. */
+.md-typeset .dsg-immersive-page .dsg-op-center .dsg-op-hero {grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem;}
+.md-typeset .dsg-immersive-page .dsg-op-center .dsg-op-hero > .dsg-op-hero__intro {grid-column: 1 / -1; grid-row: 1;}
+.md-typeset .dsg-immersive-page .dsg-op-center .dsg-op-hero > .dsg-weather-sky {grid-column: 1; grid-row: 2; margin: 0; align-self: stretch;}
+.md-typeset .dsg-immersive-page .dsg-op-center .dsg-op-hero > .dsg-scene {grid-column: 2; grid-row: 2; align-self: stretch; height: auto; min-height: 26rem; margin: 0;}
+@media(max-width:700px) {
+  .md-typeset .dsg-immersive-page .dsg-op-center .dsg-op-hero {grid-template-columns: minmax(0, 1fr);}
+  .md-typeset .dsg-immersive-page .dsg-op-center .dsg-op-hero > .dsg-scene {grid-column: 1; grid-row: 3; height: 28rem; min-height: 28rem;}
+}
