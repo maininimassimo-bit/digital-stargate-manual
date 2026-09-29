@@ -1,10 +1,10 @@
-# Immersive Portal — release candidate
+# Immersive Portal — rilascio pubblicato
 
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-REL-IMMERSIVE-001 |
 | Data | 29/09/2026 |
-| Stato | Implemented candidate; non attestazione di deployment |
+| Stato | Pubblicato; limiti di verifica fisica e assistiva registrati |
 | Baseline verificata | `d0779f1d31f539cf45c0883c3d4bfca94dd6f301` |
 | Ambito | Redesign visuale completo; nessuna modifica alla semantica dei dati |
 
@@ -49,8 +49,24 @@ GSAP, Spline o runtime server.
 | Browser regression | PASS locale Edge headless: 19 hub × 2 viewport (1440/390 px); temi, comandi visuali, persistenza/remount, ricerca/Escape, reduced-motion, WebGL bloccato, no-JS |
 | Integrità vendor e presentation boundary | PASS locale: `verify-immersive-assets.mjs` |
 | Gate esistenti | PASS locale: no-inline JS; ricerca (5 check); integrità 830 pagine; 14 test EAGLE/score; regression homepage; coerenza roadmap e Scientific Platform |
-| CI GitHub / ARB / Release Quality | Da verificare sul publication head; non dichiarate approvate da questo documento |
-| Deployment Pages | Non attestato dal solo test locale |
+| CI GitHub | 22 check PR superati su `fb60018b5b14c3397bc51e869ac21cad6ca3bfbd`; workflow post-merge superati |
+| ARB / Release Quality | Review AI-assistite in passaggi distinti, stesso assistente implementatore; nessuna approvazione umana indipendente dichiarata |
+| Deployment Pages | Workflow autorevole completato sul merge `2ea44f897b22a675cb8fd7bfe00734d86eaf6ddc` |
+| Verifica sito pubblico | PASS: 19 scene × 2 viewport, ricerca, controlli, essential/remount, reduced-motion, fallback; provider esterni bloccati durante il test, nessuna attestazione della loro disponibilità |
+
+## Registro di pubblicazione
+
+La [PR #429](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/429)
+è stata integrata il 29/09/2026 dopo l'istruzione owner di procedere.
+Il [verbale ARB/Release Quality](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/429#issuecomment-5893730865)
+registra scope, disclosure della review, 22 check exact-head, branch zero behind,
+rollback e applicazione di `W-DSG-AEM-RULESET-001`. Nessun Blocker/Major identificato.
+
+Il [workflow Pages](https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/36593414390)
+ha pubblicato il merge `2ea44f897b22a675cb8fd7bfe00734d86eaf6ddc`.
+L'evidence di verifica live e gli aggiornamenti documentali sono tracciati nella PR.
+Le misure termiche su dispositivi fisici e l'audit assistivo completo rimangono
+assegnati al gate futuro BKL-050; non sono dichiarati eseguiti o chiusi.
 
 ## Limiti espliciti
 

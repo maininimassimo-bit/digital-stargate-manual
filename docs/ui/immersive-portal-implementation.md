@@ -5,7 +5,7 @@
 | Identificativo | DSG-UI-IMMERSIVE-001 |
 | Versione | 1.0 |
 | Data | 29/09/2026 |
-| Stato | Implemented candidate — release review pending |
+| Stato | Pubblicato — evidence e limiti nelle note di rilascio |
 | Richiesta | Redesign completo del portale, mantenendo dati e contenuti, con aggiornamento tecnico |
 | Baseline | `d0779f1d31f539cf45c0883c3d4bfca94dd6f301` |
 | Boundary | Presentation-only; nessuna nuova fonte, policy, autorità o comando |
@@ -136,7 +136,7 @@ python .github/scripts/verify-immersive-content.py --baseline /path/to/baseline-
 Escludere esplicitamente soltanto i documenti tecnici aggiornati intenzionalmente.
 I test del consumer EAGLE e dello score restano quelli esistenti: il visual layer
 non li sostituisce. Evidence e limiti di verifica sono registrati nelle
-[note della release candidata](../releases/immersive-portal.md).
+[note di rilascio](../releases/immersive-portal.md).
 
 ## 7. Estensione e rollback
 
@@ -154,8 +154,9 @@ residua è innocua.
 
 ## 8. Limiti e gate di rilascio
 
-Questa documentazione descrive l'implementazione; non attesta deployment,
-approvazioni indipendenti o verifiche fisiche degli apparati. Il testing headless
+La pubblicazione e le review AI-assistite sono registrate nelle
+[note di rilascio](../releases/immersive-portal.md). Non sono dichiarate
+approvazioni umane indipendenti o verifiche fisiche degli apparati. Il testing headless
 non sostituisce misure termiche su smartphone reali o un audit assistivo completo.
 La modifica non chiude BKL-043 né anticipa la closure complessiva di BKL-050.
 ARB/Release Quality ed exact-head CI restano gate applicabili alla pubblicazione.
