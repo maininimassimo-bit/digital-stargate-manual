@@ -9,7 +9,7 @@
 <div class="dsg-op-center">
 <section class="dsg-op-hero">
 <!-- DSG:IMMERSIVE-SCENE -->
-  <div><span>BKL-031 · OBSERVATION PLANNER INTELLIGENTE</span><h1>Observation Planner</h1><p>Vista read-only di forecast reale del sito, geometria astronomica corrente della notte e suitability esplicita dei setup governati. Nessuna projection costituisce readiness, go/no-go, scheduling, comando o Safety Authority.</p></div>
+  <div class="dsg-op-hero__intro"><span>BKL-031 · OBSERVATION PLANNER INTELLIGENTE</span><h1>Observation Planner</h1><p>Vista read-only di forecast reale del sito, geometria astronomica corrente della notte e suitability esplicita dei setup governati. Nessuna projection costituisce readiness, go/no-go, scheduling, comando o Safety Authority.</p></div>
   <figure class="dsg-weather-sky" data-weather-sky data-sky-state="unknown">
     <div class="dsg-weather-sky__view"><img width="768" height="768" decoding="async" alt="" hidden></div>
     <figcaption><span>CIELO DELLA NOTTE · MANCIANO</span><strong data-sky-title>Verifica della previsione…</strong><p data-sky-details>In attesa dei dati del Planner.</p><small data-sky-period></small><small>Illustrazione atmosferica · non fotografia né mappa astronomica</small><details><summary>Come viene scelta l’immagine</summary><p>Stessi campioni della previsione completa della notte, fonte MeteoHub · ItaliaMeteo/ARPAE ICON-2I. Media aritmetica delle nuvole: fino al 20% immagine serena, oltre il 20% nuvolosa. Qualsiasi precipitazione prevista nella notte seleziona la pioggia, anche se limitata a poche ore. Convenzione solo visiva: non modifica semafori, ranking o autorità operativa. La Via Lattea è illustrativa: posizione e visibilità reale non sono calcolate.</p></details></figcaption>

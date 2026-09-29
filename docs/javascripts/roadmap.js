@@ -10,7 +10,7 @@
       <div class="dsg-roadmap-card__body">
         <span class="dsg-roadmap-card__id">${escapeHtml(item.id)}</span>
         <h3>${escapeHtml(item.title)}</h3>
-        ${item.note ? `<p>${escapeHtml(item.note)}</p>` : ''}
+        ${item.note ? `<details><summary>Note del package</summary><p>${escapeHtml(item.note)}</p></details>` : ''}
         ${item.review ? `<span class="dsg-roadmap-card__review">Review ${escapeHtml(item.review)}</span>` : ''}
       </div>
     </article>`;
@@ -18,15 +18,14 @@
 
   function renderOverview(overviewEl, { completed, active, planned, total, percent }) {
     const remaining = active + planned;
-    const activeStart = percent;
-    const activeEnd = total ? Math.round(((completed + active) / total) * 100) : 0;
-
+    // Fixed-size graphic: proportions follow the governed summary; no WebGL loop.
+    const completedWidth = total ? completed / total * 100 : 0;
+    const activeWidth = total ? active / total * 100 : 0;
+    const plannedWidth = total ? planned / total * 100 : 0;
     overviewEl.innerHTML = `
-      <div class="dsg-roadmap-donut" style="--completed:${percent};--active-start:${activeStart};--active-end:${activeEnd}" role="img" aria-label="${completed} elementi completati, ${active} in corso e ${planned} pianificati su ${total}">
-        <div class="dsg-roadmap-donut__center">
-          <strong>${percent}%</strong>
-          <span>completato</span>
-        </div>
+      <div class="dsg-roadmap-meter" role="meter" aria-label="Avanzamento roadmap" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${percent}" aria-valuetext="${percent}% completato; ${completed} completati, ${active} in corso, ${planned} pianificati su ${total}">
+        <div class="dsg-roadmap-meter__readout"><strong>${percent}<span>%</span></strong><div>COMPLETATO<small>${completed} / ${total} elementi</small></div></div>
+        <div class="dsg-roadmap-meter__deck" aria-hidden="true"><div class="dsg-roadmap-meter__rail"><i class="is-completed" style="width:${completedWidth}%"></i><i class="is-active" style="width:${activeWidth}%"></i><i class="is-planned" style="width:${plannedWidth}%"></i></div><div class="dsg-roadmap-meter__scale"><span>0</span><span>25</span><span>50</span><span>75</span><span>100%</span></div></div>
       </div>
       <div class="dsg-roadmap-overview__stats">
         <article class="is-completed"><span>Completati</span><strong>${completed}</strong><small>Elementi roadmap conclusi</small></article>
@@ -45,7 +44,7 @@
     }
     currentEl.innerHTML = `
       <div><span>PACKAGE CORRENTE</span><strong>${escapeHtml(current.id)}</strong></div>
-      <div><h2>${escapeHtml(current.title)}</h2><p>${escapeHtml(current.note || 'Stato derivato dal registro versionato.')}</p></div>
+      <div><h2>${escapeHtml(current.title)}</h2><details><summary>Note e vincoli del package</summary><p>${escapeHtml(current.note || 'Stato derivato dal registro versionato.')}</p></details></div>
       <div class="dsg-roadmap-current__status is-${escapeHtml(current.status)}">${labels[current.status] || escapeHtml(current.status)}</div>`;
   }
 
@@ -56,7 +55,7 @@
       <article class="is-${escapeHtml(item.status)}">
         <span>${escapeHtml(item.id)}</span>
         <strong>${escapeHtml(item.title)}</strong>
-        <small>${escapeHtml(item.note || labels[item.status])}</small>
+        <details><summary>Note e stato</summary><p>${escapeHtml(item.note || labels[item.status])}</p></details>
       </article>`).join('');
     nextEl.innerHTML = `${cards}
       <article class="is-governance">
@@ -76,7 +75,6 @@
     const summaryEl = root.querySelector('[data-roadmap-summary]');
     const overviewEl = root.querySelector('[data-roadmap-overview]');
     const galleryEl = root.querySelector('[data-roadmap-gallery]');
-    const progressEl = root.querySelector('[data-roadmap-progress]');
     const currentEl = root.querySelector('[data-roadmap-current]');
     const nextEl = root.querySelector('[data-roadmap-next]');
 
@@ -96,18 +94,14 @@
         : (total ? Math.round((completed / total) * 100) : 0);
 
       summaryEl.innerHTML = `
-        <div><span>Stato progetto</span><strong>${escapeHtml(data.projectStatus)}</strong></div>
+        <details class="dsg-roadmap-summary__long"><summary>Stato progetto · testo integrale</summary><p>${escapeHtml(data.projectStatus)}</p></details>
         <div><span>Package corrente</span><strong>${escapeHtml(data.currentPackage)}</strong></div>
         <div><span>Prossima milestone</span><strong>${escapeHtml(data.nextMilestone)}</strong></div>
-        <div><span>Target</span><strong>${escapeHtml(data.target)}</strong></div>`;
+        <details class="dsg-roadmap-summary__long"><summary>Target e vincoli · testo integrale</summary><p>${escapeHtml(data.target)}</p></details>`;
 
       renderCurrent(currentEl, data, items);
       renderOverview(overviewEl, { completed, active, planned, total, percent });
       renderNext(nextEl, data, items);
-
-      progressEl.style.width = `${percent}%`;
-      progressEl.setAttribute('aria-valuenow', String(percent));
-      progressEl.title = `${completed} elementi roadmap completati, ${active} in corso, ${planned} pianificati`;
 
       wavesEl.innerHTML = data.waves.map(wave => `
         <section class="dsg-roadmap-wave is-${escapeHtml(wave.status)}">
