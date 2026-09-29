@@ -159,3 +159,13 @@ The portal, registry, analytics and automation remain non-authoritative for phys
 ## 12. Acceptance
 
 F5 is accepted only when repository evidence proves both historical multi-session coverage and automatic future-session onboarding through the existing AP-014 publication chain, with exact-head CI, independent ARB, Release Quality and post-merge verification.
+
+## Riconciliazione automatica delle importazioni — 29 settembre 2026
+
+La discovery F5 risolve anche le sessioni presenti nello storico ma assenti dal registro manuale. Legge il percorso canonico `data/sessions/YYYY/MM/SESSION/normalized/session-metrics.json` e accetta il blocco `scientific` soltanto quando session_id coincide, source è nina-log e configuration_id, telescope, camera e binning coincidono con equipment-registry.csv. I metadati espliciti preesistenti, inclusi PARTIAL, hanno precedenza e non vengono sovrascritti. Non si deduce il setup da date, sessioni vicine o dal solo target. La riconciliazione è una proiezione derivata per Equipment Performance, non una modifica al registro manuale o alle coordinate.
+
+Il generatore F3/F5 usa la discovery a ogni importazione tramite analyze-session-automatic.yml, sia nel percorso principale sia nella rigenerazione dopo rebase. Non servono elenchi di sessioni fissi. La CI controlla anche variazioni dei normalized metrics, dello storico e del registro setup. Il gate conserva i controlli di completezza FWHM per l'intero gruppo sessione/target/filtro: nessuna sostituzione con medie o score, nessuna selezione dei soli frame validi per far passare una popolazione incompleta.
+
+Il consumer mostra notti disponibili/esaminate, gruppi per filtro ed esclusioni leggibili. La pubblicazione dei nuovi JSON rende visibili i dati alla visita/ricarica della pagina. Non viene dichiarato un aggiornamento live della scheda già aperta.
+
+Riconciliazione iniziale: 22 notti esaminate, 8 disponibili, 9 popolazioni ammesse (prima 4 notti / 5 popolazioni). Restano 19 esclusioni a livello sessione o filtro; alcune riguardano filtri di notti parzialmente disponibili. Il 22–23 settembre ha metadati risolti ma nessuna posa LIGHT nella proiezione target-exposures corrente: non è una dichiarazione di assenza di acquisizioni nell'osservatorio. Le sorgenti raw non vengono riscritte.
