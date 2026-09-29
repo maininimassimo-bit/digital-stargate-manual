@@ -117,7 +117,7 @@ function Get-TaskSignals([TimeZoneInfo]$TimeZone) {
             process_present = (Get-RunningTaskProcessPresence $name)
         }
     }
-    return ,$items
+    return $items
 }
 
 function Get-ProjectionHeartbeat([datetime]$NowUtc, [bool]$ClockValid) {
@@ -153,6 +153,7 @@ function New-Receipt([long]$SequenceId, [object]$Clock) {
     $sourceTime = if ($Clock.Valid) { $nowUtc.ToString('yyyy-MM-ddTHH:mm:ssZ') } else { $null }
     $lastRunTimeZone = Get-TimeZone
     $tasks = @(Get-TaskSignals $lastRunTimeZone)
+    if ($tasks.Count -ne 3) { throw 'TASK_SIGNAL_COUNT_INVALID' }
     $signals = [ordered]@{
         os = [ordered]@{
             caption = [string]$os.Caption
