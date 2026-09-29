@@ -41,6 +41,39 @@ jobs:
             $errors | ForEach-Object { Write-Error $_.Message }
             exit 1
           }
+      - name: Verify nested and flat receipt task arrays
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $errors = $null
+          $ast = [System.Management.Automation.Language.Parser]::ParseFile(
+            'scripts/telemetry/Start-BKL043-F4Pilot.ps1',
+            [ref]$tokens,
+            [ref]$errors
+          )
+          $fn = $ast.Find({ param($node) $node -is [System.Management.Automation.Language.FunctionDefinitionAst] -and $node.Name -eq 'Normalize-ReceiptTaskArray' }, $true)
+          if ($null -eq $fn) { throw 'NORMALIZER_FUNCTION_MISSING' }
+          Invoke-Expression $fn.Extent.Text
+          $items = @(
+            [pscustomobject]@{ name = 'task-a' }
+            [pscustomobject]@{ name = 'task-b' }
+            [pscustomobject]@{ name = 'task-c' }
+          )
+          $nested = [object[]]::new(1)
+          $nested[0] = [object[]]$items
+          $legacy = [pscustomobject]@{ signals = [pscustomobject]@{ tasks = $nested } }
+          if (-not (Normalize-ReceiptTaskArray $legacy)) { throw 'LEGACY_ARRAY_NOT_NORMALIZED' }
+          $roundTrip = ($legacy | ConvertTo-Json -Depth 12 -Compress) | ConvertFrom-Json
+          if ($roundTrip.signals.tasks.Count -ne 3) { throw 'NORMALIZED_ARRAY_ROUNDTRIP_FAILED' }
+          $flat = [pscustomobject]@{ signals = [pscustomobject]@{ tasks = [object[]]$items } }
+          if (Normalize-ReceiptTaskArray $flat) { throw 'FLAT_ARRAY_WAS_UNEXPECTEDLY_CHANGED' }
+          try {
+            $invalid = [pscustomobject]@{ signals = [pscustomobject]@{ tasks = @([pscustomobject]@{ name = 'one' }) } }
+            Normalize-ReceiptTaskArray $invalid
+            throw 'INVALID_ARRAY_WAS_ACCEPTED'
+          } catch {
+            if ($_.Exception.Message -ne 'TASK_SIGNAL_COUNT_INVALID') { throw }
+          }
       - name: Stage the portable collector
         shell: pwsh
         run: |

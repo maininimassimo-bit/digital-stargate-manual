@@ -120,6 +120,19 @@ function Get-TaskSignals([TimeZoneInfo]$TimeZone) {
     return $items
 }
 
+function Normalize-ReceiptTaskArray([object]$Receipt) {
+    $tasks = $Receipt.signals.tasks
+    if ($tasks -is [System.Array] -and $tasks.Count -eq 1 -and
+        $tasks[0] -is [System.Array] -and $tasks[0].Count -eq 3) {
+        $Receipt.signals.tasks = [object[]]$tasks[0]
+        return $true
+    }
+    if ($null -eq $tasks -or $tasks.Count -ne 3) {
+        throw 'TASK_SIGNAL_COUNT_INVALID'
+    }
+    return $false
+}
+
 function Get-ProjectionHeartbeat([datetime]$NowUtc, [bool]$ClockValid) {
     try {
         $item = Get-Item -LiteralPath $script:ProjectionPath -ErrorAction Stop
@@ -246,6 +259,10 @@ function Send-Pending([object[]]$Files, [datetime]$NowUtc) {
         try {
             $payload = Get-Content -LiteralPath $file.FullName -Raw
             $record = $payload | ConvertFrom-Json
+            if (Normalize-ReceiptTaskArray $record) {
+                $payload = $record | ConvertTo-Json -Depth 12 -Compress
+                Write-Output ('RECEIPT_NORMALIZED_LEGACY_TASK_ARRAY ' + $record.record_id)
+            }
             $token = Get-IdentityToken
             if ([DateTimeOffset]::Now -ge $script:ApprovedEnd.AddSeconds(-30)) { break }
             $response = Invoke-RestMethod -Method Post -Uri $script:ReceiverEndpoint -TimeoutSec 30 -ContentType 'application/json' -Headers @{ Authorization = "Bearer $token" } -Body $payload
