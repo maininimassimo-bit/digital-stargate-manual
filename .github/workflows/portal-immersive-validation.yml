@@ -31,6 +31,8 @@ jobs:
         run: node .github/scripts/verify-immersive-assets.mjs
       - name: Build site
         run: python -m mkdocs build --strict --config-file mkdocs.pages.yml
+      - name: Executive dashboard generation
+        run: python .github/scripts/test-executive-dashboard.py
       - name: Quality trend data mapping
         run: node --test .github/scripts/test-quality-trend.mjs .github/scripts/test-sky-quality-trend.mjs
       - name: Verify site links and assets
@@ -51,3 +53,4 @@ jobs:
           node .github/scripts/test-immersive-compact-layout.cjs
           node .github/scripts/test-immersive-quality-trend.cjs
           node .github/scripts/test-immersive-sky-trend.cjs
+          node .github/scripts/test-immersive-executive-dashboard.cjs
