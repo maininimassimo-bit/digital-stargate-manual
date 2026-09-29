@@ -37,6 +37,11 @@ const base = process.env.DSG_TEST_BASE_URL || 'http://127.0.0.1:8766/digital-sta
     if(process.env.DSG_COMPACT_SCREENSHOTS)await page.locator('.dsg-roadmap-overview').screenshot({path:`${process.env.DSG_COMPACT_SCREENSHOTS}/roadmap-${width}-${scheme}.png`});
    }
   }
+  // Empty governed summary must not invent a visible completed segment.
+  await page.route('**/data/roadmap.json',r=>r.fulfill({json:{...data,summary:{total:0,completed:0,active:0,planned:0,percentCompleted:0}}}));
+  await page.reload();await meter.waitFor();assert.equal(await meter.getAttribute('aria-valuenow'),'0');
+  const widths=await page.locator('.dsg-roadmap-meter__rail i').evaluateAll(es=>es.map(e=>e.getBoundingClientRect().width));
+  assert(widths.every(w=>w===0),'Zero values have zero graphical width');
   await page.goto(base+'observation-planner/');
   for(const width of [1157,768,390]){
    await page.setViewportSize({width,height:900});await page.locator('.dsg-scene').scrollIntoViewIfNeeded();await page.waitForTimeout(600);
