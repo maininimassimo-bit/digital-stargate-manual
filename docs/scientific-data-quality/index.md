@@ -4,12 +4,12 @@
 <div class="dsg-dq-center">
 <section class="dsg-dq-hero">
 <!-- DSG:IMMERSIVE-SCENE -->
-  <div>
+  <div class="dsg-dq-intro">
     <span>BKL-041 · SCIENTIFIC DATA QUALITY</span>
     <h1>Qualità scientifica, spiegata</h1>
     <p>Projection read-only aggiornata dalla pipeline di importazione. Score, confidence, coverage, decomposition ed exclusions vengono mostrati insieme e verificati contro il catalogo corrente.</p>
   </div>
-  <div class="dsg-dq-hero__mark" aria-hidden="true">Q</div>
+  <div class="dsg-quality-trend" data-quality-trend aria-label="Score delle sessioni per setup"><h2>Score nel tempo</h2><p role="status">Verifica dei dati in corso…</p><noscript>Attiva JavaScript per visualizzare il grafico.</noscript></div>
 </section>
 
 <section class="dsg-dq-notice" aria-label="Stato sperimentale">

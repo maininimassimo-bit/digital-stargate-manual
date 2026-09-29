@@ -1,8 +1,10 @@
 import { validateProjectionFreshness, validateRealEvidenceFreshness } from './scientific-data-quality-core.mjs';
+import { renderQualityTrend } from './scientific-quality-trend.mjs';
 
 const host = document.querySelector('[data-scientific-data-quality]');
 
 if (host) {
+  let renderedKey = null;
   const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
   const pct = value => Number.isFinite(value) ? `${Number(value).toLocaleString('it-IT', { maximumFractionDigits: 2 })}%` : '—';
   const number = value => Number.isFinite(value) ? Number(value).toLocaleString('it-IT', { maximumFractionDigits: 4 }) : '—';
@@ -12,6 +14,9 @@ if (host) {
   };
   const labels = { AVAILABLE: 'Disponibile', UNAVAILABLE: 'Non disponibile', INVALID: 'Fuori profilo' };
   const fail = message => {
+    renderedKey = null;
+    const trend = document.querySelector('[data-quality-trend]');
+    if (trend) trend.innerHTML = `<h2>Score nel tempo</h2><p role="alert">Grafico non disponibile: ${esc(message)}</p>`;
     host.innerHTML = `<section class="dsg-dq-panel dsg-dq-fail" role="alert"><span>FAIL-CLOSED</span><h2>Quality projection non disponibile</h2><p>${esc(message || 'La verifica di freshness non è stata completata.')}</p><p>Nessuno score viene inferito o recuperato da dati precedenti.</p></section>`;
   };
 
@@ -66,7 +71,11 @@ if (host) {
     apply();
   };
 
-  Promise.all([
+  let loading = false;
+  const refresh = () => {
+  if (loading || !host.isConnected) return;
+  loading = true;
+  return Promise.all([
     fetch('../data/scientific-data-quality-projection.json', { cache: 'no-store' }),
     fetch('../data/scientific-session-catalog.json', { cache: 'no-store' }),
     fetch('../data/scientific-data-quality-f5-validation.json', { cache: 'no-store' })
@@ -75,6 +84,17 @@ if (host) {
     const [projection, catalog, validation] = await Promise.all([projectionResponse.json(), catalogResponse.json(), validationResponse.json()]);
     await validateProjectionFreshness(projection, catalog);
     await validateRealEvidenceFreshness(validation, projection, catalog);
+    const key = projection.projectionDigest + JSON.stringify(validation);
+    if (key === renderedKey) return;
     render(projection, validation);
-  }).catch(error => fail(error.message));
+    const trend = document.querySelector('[data-quality-trend]');
+    if (trend) renderQualityTrend(trend, projection, catalog);
+    renderedKey = key;
+  }).catch(error => fail(error.message)).finally(() => { loading = false; });
+  };
+  refresh();
+  const timer = setInterval(() => {
+    if (!host.isConnected) { clearInterval(timer); return; }
+    if (!document.hidden) refresh();
+  }, 300000);
 }
