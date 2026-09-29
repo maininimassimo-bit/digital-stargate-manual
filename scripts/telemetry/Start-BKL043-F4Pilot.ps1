@@ -256,19 +256,26 @@ function Send-Pending([object[]]$Files, [datetime]$NowUtc) {
         if ([DateTimeOffset]::Now -ge $script:ApprovedEnd.AddSeconds(-30)) { break }
         $key = $file.Name
         if ($script:RetryState.ContainsKey($key) -and $NowUtc -lt $script:RetryState[$key].NextUtc) { continue }
+        $stage = 'READ_QUEUE_FILE'
         try {
             $payload = Get-Content -LiteralPath $file.FullName -Raw
+            $stage = 'PARSE_QUEUE_FILE'
             $record = $payload | ConvertFrom-Json
+            $stage = 'NORMALIZE_TASK_ARRAY'
             if (Normalize-ReceiptTaskArray $record) {
                 $payload = $record | ConvertTo-Json -Depth 12 -Compress
                 Write-Output ('RECEIPT_NORMALIZED_LEGACY_TASK_ARRAY ' + $record.record_id)
             }
+            $stage = 'MINT_IDENTITY_TOKEN'
             $token = Get-IdentityToken
             if ([DateTimeOffset]::Now -ge $script:ApprovedEnd.AddSeconds(-30)) { break }
+            $stage = 'POST_RECEIPT'
             $response = Invoke-RestMethod -Method Post -Uri $script:ReceiverEndpoint -TimeoutSec 30 -ContentType 'application/json' -Headers @{ Authorization = "Bearer $token" } -Body $payload
+            $stage = 'VALIDATE_DURABLE_ACK'
             if ($response.ack -notin @('DURABLE_CREATED', 'DURABLE_DUPLICATE') -or $response.record_id -ne $record.record_id) {
                 throw 'INVALID_DURABLE_ACK'
             }
+            $stage = 'REMOVE_LOCAL_FILE'
             Remove-Item -LiteralPath $file.FullName -Force
             $script:RetryState.Remove($key)
             Write-Output ('DURABLE_ACK ' + $record.record_id + ' ' + $response.ack)
@@ -277,7 +284,20 @@ function Send-Pending([object[]]$Files, [datetime]$NowUtc) {
             if ($script:RetryState.ContainsKey($key)) { $attempt = [int]$script:RetryState[$key].Attempt + 1 }
 $delay = [math]::Min(300, [math]::Pow(2, [math]::Min($attempt, 9)))
             $script:RetryState[$key] = [pscustomobject]@{ Attempt = $attempt; NextUtc = $NowUtc.AddSeconds($delay) }
-            Write-Output ('RETRY_PENDING ' + $file.BaseName + ' delay_seconds=' + $delay)
+            $httpStatus = $null
+            $serverError = $null
+            if ($_.Exception.Response) {
+                try { $httpStatus = [int]$_.Exception.Response.StatusCode } catch {}
+            }
+            if ($_.ErrorDetails.Message) {
+                try { $serverError = [string](($_.ErrorDetails.Message | ConvertFrom-Json).error) } catch {}
+            }
+            $safeError = [string]$_.Exception.Message
+            if ($safeError -notin @('GCLOUD_NOT_FOUND', 'GCLOUD_ACTIVE_ACCOUNT_MISMATCH', 'IDENTITY_TOKEN_UNAVAILABLE', 'TASK_SIGNAL_COUNT_INVALID', 'INVALID_DURABLE_ACK')) {
+                $safeError = $_.Exception.GetType().Name
+            }
+            if ($serverError) { $safeError = $serverError }
+            Write-Output ('RETRY_PENDING ' + $file.BaseName + ' delay_seconds=' + $delay + ' stage=' + $stage + ' error=' + $safeError + ' http_status=' + $httpStatus)
         }
     }
 }
