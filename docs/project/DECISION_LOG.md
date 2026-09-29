@@ -232,6 +232,15 @@ questa richiesta visuale. Riferimenti:
 
 ## 29/09/2026 — strumenti digitali nei pannelli status
 
+### Collegamento visuale alla cupola osservata
+
+Owner richiede CLOSED → esterno chiuso e OPEN → interno. L'incremento collega
+soltanto il preset del modello al badge esistente; UNKNOWN resta neutro. Sono
+mantenuti l'esplorazione manuale esplicita e il ritorno «Segui badge». Nessuna
+modifica alla telemetria, alle soglie o all'autorità degli apparati. Dettagli,
+test e rollback nella guida dell'implementazione immersiva; rilascio tracciato
+nella PR dedicata.
+
 Owner approva l'integrazione della proposta: quadranti 3D per EAGLE/meteo,
 simboli di stato per gli apparati. La presentazione resta read-only e conserva
 le policy governate; valori assenti/scaduti non diventano zero o percentuali.

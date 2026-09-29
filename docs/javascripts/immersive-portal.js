@@ -50,7 +50,7 @@
         stopScene = cleanup;
         stage.dataset.dsgSceneState = 'ready';
         stage.classList.add('is-ready'); views.hidden = false;
-        status.textContent = 'Modello 3D illustrativo · controlli solo visuali';
+        if (!stage.hasAttribute('data-dsg-dome-sync')) status.textContent = 'Modello 3D illustrativo · controlli solo visuali';
       } catch (error) {
         if (signal.aborted || ticket !== epoch) return;
         reset(); stage.dataset.dsgSceneState = 'unavailable';
