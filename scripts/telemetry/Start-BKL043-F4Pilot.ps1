@@ -188,7 +188,8 @@ function Get-QueueFiles {
 }
 
 function Test-QueueAllowsAdmission([object[]]$Files, [datetime]$NowUtc) {
-    $totalBytes = [int64](($Files | Measure-Object -Property Length -Sum).Sum)
+    $totalBytes = 0L
+    foreach ($file in $Files) { $totalBytes += [int64]$file.Length }
 if ($Files.Count -ge 1440 -or ($totalBytes + $script:MaximumReceiptBytes) -gt $script:MaximumOutboxBytes) {
         return [pscustomobject]@{ Allowed = $false; Reason = 'OUTBOX_FULL' }
     }
