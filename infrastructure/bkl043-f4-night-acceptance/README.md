@@ -1,5 +1,9 @@
 # BKL-043 F4 — night-window candidate
 
+## Unreleased OAT remediation
+
+This branch adds two corrections after offline/observational review: preserve high-bit Task Scheduler return values without Int32 overflow, and measure projection freshness after reading its metadata instead of before task enumeration. Six task-result regression cases preserve numeric/hex values and NONZERO_REVIEW semantics; four heartbeat cases cover concurrent update, current observation, future timestamp and unreadable metadata. The receiver contract and freshness threshold are unchanged. This is **not** the approved running commit `53394ea35e499662a3c0a86513261e995a805776`; do not replace or restart the active pilot with these files. A new exact review and runtime authorization are required. Original PR438 and its ZIP remain unchanged. The retained dates below are not a new launch permission.
+
 **DRAFT / NOT AUTHORIZED FOR RUNTIME.** Owner supplied availability: 29 September 2026 22:00 through 30 September 2026 02:00 Europe/Rome. This is preparation, not permission to launch a changed artifact. The previous source approval does not automatically cover this candidate. PR #428 remains draft.
 
 ## Exact scope
