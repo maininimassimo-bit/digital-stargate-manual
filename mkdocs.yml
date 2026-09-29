@@ -37,6 +37,9 @@ theme:
         icon: material/brightness-4
         name: Passa alla modalità chiara
 
+hooks:
+  - hooks/portal_navigation.py
+
 plugins:
   - search:
       lang: it
@@ -65,6 +68,7 @@ markdown_extensions:
       custom_checkbox: true
 
 extra_css:
+  - styles/section-navigation.css
   - styles/theme-tokens.css
   - styles/extra.css
   - styles/analytics.css
@@ -420,6 +424,7 @@ nav:
 
 
   - Governance e documentazione:
+      - Mappa del portale: portal-map/index.md
       - Documentation Center: documentation/index.md
       - Governance Center: project/index.md
       - Current BKL-043 F4 Handover 25/09/2026: project/HANDOVER_2026-09-25-BKL043-F4.md

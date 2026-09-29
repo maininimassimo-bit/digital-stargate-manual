@@ -4,6 +4,7 @@ on:
     paths:
       - 'docs/**'
       - 'overrides/**'
+      - 'hooks/**'
       - 'mkdocs*.yml'
       - '.github/scripts/*immersive*'
       - '.github/workflows/portal-immersive-validation.yml'
@@ -32,6 +33,8 @@ jobs:
         run: python -m mkdocs build --strict --config-file mkdocs.pages.yml
       - name: Verify site links and assets
         run: python .github/scripts/verify-published-site.py --site site --base-path /digital-stargate-manual/
+      - name: Navigation coverage
+        run: python .github/scripts/verify-immersive-navigation.py
       - name: Browser regression (live providers blocked)
         env:
           DSG_TEST_BASE_URL: http://127.0.0.1:8766/
@@ -41,3 +44,4 @@ jobs:
           node .github/scripts/test-immersive-instruments.cjs
           node .github/scripts/test-immersive-dome-sync.cjs
           node .github/scripts/test-immersive-planner-sky.cjs
+          node .github/scripts/test-immersive-navigation.cjs

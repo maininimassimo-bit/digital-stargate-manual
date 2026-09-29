@@ -87,15 +87,22 @@
         <strong>Esplora Digital StarGate</strong>
         <button class="dsg-docs-drawer__close" type="button" data-dsg-docs-close aria-label="Chiudi navigazione">×</button>
       </div>
+      <a class="dsg-docs-drawer__search" href="${href('portal-map/')}">Mappa completa del portale →</a>
       <button class="dsg-docs-drawer__search" type="button" data-dsg-drawer-search>Cerca in tutta la documentazione…</button>
       ${drawerGroup('OSSERVATORIO', [
         ['Mission Control', 'mission-control/'],
         ['Stato osservatorio', 'status/'],
         ['Catalogo sessioni', 'scientific-session-catalog/'],
+        ['Galleria immagini', 'scientific-image-gallery/'],
+        ['Dettaglio sessione', 'scientific-session-detail/'],
         ['Report sessioni', 'session-reports/']
       ])}
       ${drawerGroup('SCIENZA E ANALYTICS', [
         ['Scientific Platform', 'scientific-platform/'],
+        ['Observation Planner', 'observation-planner/'],
+        ['AI Observatory Assistant', 'bkl042-chat/'],
+        ['AI Post-Processing Assistant', 'ai-post-processing-assistant/'],
+        ['Scientific Intelligence', 'scientific-platform-intelligence/'],
         ['Analytics Center', 'analytics/'],
         ['Session Comparison', 'session-comparison/'],
         ['Scientific Data Quality', 'scientific-data-quality/'],

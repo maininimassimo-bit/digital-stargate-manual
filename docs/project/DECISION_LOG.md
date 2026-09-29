@@ -252,3 +252,7 @@ o nuova autorizzazione di attività sugli apparati deriva da questa modifica.
 ## 29/09/2026 — cielo illustrativo collegato al forecast F9
 
 Su richiesta Owner il badge ◎ di Observation Planner viene sostituito da immagini atmosferiche realistiche. La sintesi riusa la projection verificata e i campioni della notte già mostrati. Le convenzioni di scelta immagine sono esclusivamente visive: non alterano semafori, ranking, contratti dati o autorità. [Implementazione, limiti e rollback](../ui/planner-weather-sky.md). Review e pubblicazione tracciate nella PR; nessuna closure di capability scientifiche o operative.
+
+## 29/09/2026 — navigazione visibile e inquadratura dell'atlante
+
+Owner richiede di rendere visibili per gruppi logici le destinazioni poco esposte al di fuori del footer e di contenere interamente il globo del Planner. Si riusa la gerarchia MkDocs con collegamenti contestuali, mappa statica completa generata al build e menu laterale completato. Report e Planner sono accessibili dalla sezione Scienza. Nessun contenuto scientifico, dato o authority viene modificato. La camera atlas adatta la distanza all'area disponibile; l'osservatorio mantiene i preset esistenti. Audit, test e limiti nella guida di implementazione immersiva; rilascio nella PR dedicata.

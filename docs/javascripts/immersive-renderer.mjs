@@ -68,7 +68,10 @@ export async function mountScene(stage, { signal }) {
         camera.position.set(Math.cos(angle) * Math.cos(elevation) * distance, Math.sin(elevation) * distance + 1, Math.sin(angle) * Math.cos(elevation) * distance);
         camera.lookAt(0, 1.5, 0);
       } else {
-        const distance = (camera.aspect < 1 ? 13 : 11) - progress * 3;
+        // Fit the entire atlas in the usable viewport, including narrow/tall cards.
+        const halfVertical = THREE.MathUtils.degToRad(camera.fov / 2);
+        const halfHorizontal = Math.atan(Math.tan(halfVertical) * camera.aspect);
+        const distance = 5 / Math.sin(Math.min(halfVertical, halfHorizontal)) * (1.1 - progress * .05);
         camera.position.set(px * .8, py * .5, distance);
         camera.lookAt(0, 0, 0);
       }
@@ -83,7 +86,15 @@ export async function mountScene(stage, { signal }) {
       if (active() && !frame && !timer) { last = performance.now() - 16; frame = requestAnimationFrame(render); }
     }
     const resize = () => {
-      const width = stage.clientWidth, height = stage.clientHeight;
+      const width = stage.clientWidth;
+      let height = stage.clientHeight;
+      if (!observatory) {
+        const heading = stage.querySelector('.dsg-scene__heading');
+        const toolbar = stage.querySelector('.dsg-scene__toolbar');
+        const top = heading.offsetTop + heading.offsetHeight + 12;
+        height = Math.max(1, toolbar.offsetTop - top - 12);
+        canvas.style.top = `${top}px`; canvas.style.height = `${height}px`;
+      }
       if (!width || !height || disposed) return;
       renderer.setPixelRatio(Math.min(devicePixelRatio || 1, compact ? 1 : 1.5, Math.sqrt(1500000 / (width * height))));
       renderer.setSize(width, height, false);
@@ -130,6 +141,10 @@ export async function mountScene(stage, { signal }) {
       stage.querySelector('.dsg-scene__status').textContent = 'Modello 3D illustrativo · controlli solo visuali'; if(domeSync) updateViewControls(); resize();
     });
     resizeObserver = new ResizeObserver(resize); resizeObserver.observe(stage);
+    if (!observatory) {
+      resizeObserver.observe(stage.querySelector('.dsg-scene__heading'));
+      resizeObserver.observe(stage.querySelector('.dsg-scene__toolbar'));
+    }
     intersectionObserver = new IntersectionObserver(entries => { visible = entries[0].isIntersecting; if (visible) wake(); else stop(); });
     intersectionObserver.observe(stage); resize();
     return dispose;

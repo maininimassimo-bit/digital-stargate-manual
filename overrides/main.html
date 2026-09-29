@@ -3,8 +3,10 @@
 {% set scenes = {"analytics/index.md": "atlas", "ai-post-processing-assistant/index.md": "atlas", "anomaly-trend-center/index.md": "atlas", "architecture/index.md": "atlas", "bkl042-advisory/index.md": "atlas", "documentation/index.md": "atlas", "equipment-performance/index.md": "atlas", "mission-control/index.md": "atlas", "observation-planner/index.md": "atlas", "operations/index.md": "observatory", "scientific-data-quality/index.md": "atlas", "scientific-image-gallery/index.md": "atlas", "scientific-platform/index.md": "atlas", "scientific-platform-intelligence/index.md": "atlas", "scientific-session-catalog/index.md": "atlas", "scientific-session-detail/index.md": "atlas", "session-comparison/index.md": "atlas", "index.md": "gateway", "status/index.md": "observatory"} %}
 {% set scene_kind = scenes.get(page.file.src_uri, '') if page else '' %}
 {% set original %}{{ super() }}{% endset %}
+{% set directory %}{% if page and page.file.src_uri == "portal-map/index.md" %}{% include "partials/portal-directory.html" %}{% endif %}{% endset %}
+{% include "partials/section-navigation.html" %}
 {% set stage %}{% include "partials/immersive-scene.html" %}{% endset %}
 <div class="dsg-immersive-page" data-dsg-page="{{ page.file.src_uri if page else '404' }}" data-dsg-scene-kind="{{ scene_kind }}">
-  {{ original | replace('<!-- DSG:IMMERSIVE-SCENE -->', stage) | safe }}
+  {{ original | replace('<!-- DSG:IMMERSIVE-SCENE -->', stage) | replace('<!-- DSG:PORTAL-DIRECTORY -->', directory) | safe }}
 </div>
 {% endblock %}

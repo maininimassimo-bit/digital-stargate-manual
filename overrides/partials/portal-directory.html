@@ -1,0 +1,10 @@
+{% macro tree(items) %}
+<ul>{% for item in items %}<li>{% if item.is_page or item.is_link %}<a href="{{ item.url | url }}">{{ item.title }}</a>{% else %}<details><summary>{{ item.title }}</summary>{{ tree(item.children) }}</details>{% endif %}</li>{% endfor %}</ul>
+{% endmacro %}
+<div id="dsg-portal-directory" class="dsg-portal-directory">
+  <p>{{ config.extra.dsg_directory_count }} pagine indicizzate. I gruppi seguono l'organizzazione del manuale; i report individuali e gli approfondimenti sono raccolti nelle sezioni complementari.</p>
+  <h2>Percorsi principali</h2>
+  {{ tree(nav.items) }}
+  <h2>Report e documenti complementari</h2>
+  {% for group in config.extra.dsg_directory_extras %}<details><summary>{{ group.title }} · {{ group.links | length }}</summary><ul>{% for link in group.links %}<li><a href="{{ link.url | url }}">{{ link.title }}</a></li>{% endfor %}</ul></details>{% endfor %}
+</div>
