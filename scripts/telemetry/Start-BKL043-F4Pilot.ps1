@@ -244,11 +244,21 @@ function Save-Receipt([object]$Receipt) {
 
 function Get-IdentityToken {
     if (-not (Test-Path -LiteralPath $script:GCloud -PathType Leaf)) { throw 'GCLOUD_NOT_FOUND' }
-    $active = & $script:GCloud auth list --filter=status:ACTIVE --format='value(account)' 2>$null
-    if ($LASTEXITCODE -ne 0 -or [string]$active -ne $script:ApprovedAccount) { throw 'GCLOUD_ACTIVE_ACCOUNT_MISMATCH' }
-    $token = & $script:GCloud auth print-identity-token "--impersonate-service-account=$($script:InvokerServiceAccount)" "--audiences=$($script:ReceiverUrl)" 2>$null
-    if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace([string]$token)) { throw 'IDENTITY_TOKEN_UNAVAILABLE' }
-    return [string]$token
+    $previousErrorActionPreference = $ErrorActionPreference
+    try {
+        # Native gcloud stderr becomes a terminating RemoteException under Stop in Windows PowerShell 5.1.
+        # Temporarily continue for these calls, then rely on exit code and validated stdout.
+        $ErrorActionPreference = 'Continue'
+        $active = & $script:GCloud auth list --filter=status:ACTIVE --format='value(account)' 2>$null
+        $activeExitCode = $LASTEXITCODE
+        if ($activeExitCode -ne 0 -or [string]$active -ne $script:ApprovedAccount) { throw 'GCLOUD_ACTIVE_ACCOUNT_MISMATCH' }
+        $token = & $script:GCloud auth print-identity-token "--impersonate-service-account=$($script:InvokerServiceAccount)" "--audiences=$($script:ReceiverUrl)" 2>$null
+        $tokenExitCode = $LASTEXITCODE
+        if ($tokenExitCode -ne 0 -or [string]::IsNullOrWhiteSpace([string]$token)) { throw 'IDENTITY_TOKEN_UNAVAILABLE' }
+        return [string]$token
+    } finally {
+        $ErrorActionPreference = $previousErrorActionPreference
+    }
 }
 
 function Send-Pending([object[]]$Files, [datetime]$NowUtc) {
