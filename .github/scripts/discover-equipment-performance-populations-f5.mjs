@@ -57,8 +57,8 @@ function sortPopulation(a,b){
   return [a.session_id,a.configuration_id,a.target_name,a.filter_name,a.frame_type].join('\u001f').localeCompare([b.session_id,b.configuration_id,b.target_name,b.filter_name,b.frame_type].join('\u001f'));
 }
 
-export function discoverFromTexts({metadataText,exposureText,summaryText}){
-  const metadata=parseCsv(metadataText);
+export function discoverFromTexts({metadataText,exposureText,summaryText,metadataRecords}){
+  const metadata=metadataRecords ?? parseCsv(metadataText);
   const exposures=parseCsv(exposureText);
   const summaries=parseCsv(summaryText);
   const summaryMap=new Map(summaries.map(r=>[key(r.session_id,r.target_name,r.filter_name),r]));
@@ -124,9 +124,30 @@ export function discoverFromTexts({metadataText,exposureText,summaryText}){
   return {schema_version:'0.1',component:'DSG.EquipmentPerformanceRegistry.F5.Discovery',authority:'projection',action_authority:'NONE',source_contract:{scientific_metadata:INPUTS.metadata,target_exposures:INPUTS.exposures,target_summary:INPUTS.summary,unit:UNIT,unit_semantics:UNIT_SEMANTICS,angular_calibration_state:CALIBRATION},eligible_populations:eligible,exclusions};
 }
 
+// Derived reconciliation only: explicit registry rows (including PARTIAL) are never overwritten.
+export function reconcileMetadata(manual, sessions, equipment, readMetrics){
+  const rows=[...manual];
+  for(const session of sessions){
+    const id=String(session.session_id||'').trim();
+    if(rows.some(r=>r.session_id===id)) continue;
+    const ref=`data/sessions/${id.slice(0,4)}/${id.slice(5,7)}/${id}/normalized/session-metrics.json`;
+    let metrics; try { metrics=readMetrics(ref); } catch { metrics=null; }
+    const s=metrics?.scientific;
+    const config=equipment.find(e=>e.configuration_id===s?.configuration_id);
+    const resolved=metrics?.session_id===id && s?.source==='nina-log' && s?.target_name?.trim() && config &&
+      ['telescope','camera','binning'].every(k=>String(s[k]??'').trim()===String(config[k]??'').trim());
+    rows.push({session_id:id,target_name:s?.target_name||session.target_name||'UNKNOWN',
+      configuration_id:resolved?s.configuration_id:'',metadata_state:resolved?'REGISTERED':'PARTIAL',
+      source_reference:ref});
+  }
+  return rows;
+}
+
 export function discoverRepository(){
   const read=rel=>fs.readFileSync(path.join(root,rel),'utf8');
-  return discoverFromTexts({metadataText:read(INPUTS.metadata),exposureText:read(INPUTS.exposures),summaryText:read(INPUTS.summary)});
+  const metadataRecords=reconcileMetadata(parseCsv(read(INPUTS.metadata)),parseCsv(read('data/analytics/history/sessions.csv')),
+    parseCsv(read('data/analytics/configurations/equipment-registry.csv')),rel=>JSON.parse(read(rel)));
+  return discoverFromTexts({metadataRecords,exposureText:read(INPUTS.exposures),summaryText:read(INPUTS.summary)});
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
