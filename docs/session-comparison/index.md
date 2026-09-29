@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="../styles/session-comparison.css">
-<script src="../javascripts/session-comparison.js" defer></script>
+<script type="module" src="../javascripts/session-comparison.js"></script>
 
 <div class="dsg-sc-center">
 <section class="dsg-sc-hero">

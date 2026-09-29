@@ -1,3 +1,4 @@
+import { skyChart } from './sky-quality-trend.mjs';
 (() => {
   const host = document.querySelector('[data-session-comparison]');
   if (!host) return;
@@ -18,11 +19,16 @@
   const exclusion = item => `<article class="dsg-sc-record dsg-sc-excluded"><div><strong>${esc(item.sessionId)}</strong><small>EXCLUDED</small></div><p>${esc(item.reason)}</p><p>Class: <code>${esc(item.comparabilityClass)}</code></p></article>`;
   const summary = s => s ? `<section class="dsg-sc-kpis"><article><span>SAMPLE</span><strong>${esc(s.sampleSize)}</strong></article><article><span>MIN</span><strong>${esc(s.minimum)}</strong></article><article><span>MAX</span><strong>${esc(s.maximum)}</strong></article><article><span>MEAN</span><strong>${esc(s.mean)}</strong></article><article><span>MEDIAN</span><strong>${esc(s.median)}</strong></article><article><span>RANGE</span><strong>${esc(s.range)}</strong></article></section>` : '<section class="dsg-sc-panel"><h2>Nessuna aggregazione numerica</h2><p>La projection non dispone di una cohort numerica comparabile sufficiente.</p></section>';
 
-  fetch('../data/session-comparison-projection.json', { cache: 'no-store' })
+  let loading=false, lastSnapshot=null;
+  const refresh=()=>{if(loading||!host.isConnected)return;loading=true; return fetch('../data/session-comparison-projection.json', { cache: 'no-store' })
     .then(response => { if (!response.ok) throw new Error('projection repository assente'); return response.json(); })
     .then(data => {
       validate(data);
-      host.innerHTML = `${summary(data.descriptiveSummary)}<section class="dsg-sc-panel"><span>COMPARISON SET</span><h2>${esc(data.dimension)} · ${esc(data.unit)}</h2><p>State: <strong>${esc(data.comparisonState)}</strong> · Projection: <code>${esc(data.projectionId)}</code></p><h3>Sessioni incluse</h3><div class="dsg-sc-records">${data.includedSessions.map(session).join('') || '<p>Nessuna sessione inclusa.</p>'}</div><h3>Exclusions</h3><div class="dsg-sc-records">${data.exclusions.map(exclusion).join('') || '<p>Nessuna exclusion.</p>'}</div>${list('Limitations',data.limitations)}${list('Source refs',data.lineage?.sourceRefs)}</section>`;
+      const snapshot=JSON.stringify(data); if(snapshot===lastSnapshot)return;
+      host.innerHTML = `${skyChart(data)}${summary(data.descriptiveSummary)}<section class="dsg-sc-panel"><span>COMPARISON SET</span><h2>${esc(data.dimension)} · ${esc(data.unit)}</h2><p>State: <strong>${esc(data.comparisonState)}</strong> · Projection: <code>${esc(data.projectionId)}</code></p><h3>Sessioni incluse</h3><div class="dsg-sc-records">${data.includedSessions.map(session).join('') || '<p>Nessuna sessione inclusa.</p>'}</div><h3>Exclusions</h3><div class="dsg-sc-records">${data.exclusions.map(exclusion).join('') || '<p>Nessuna exclusion.</p>'}</div>${list('Limitations',data.limitations)}${list('Source refs',data.lineage?.sourceRefs)}</section>`;
+      lastSnapshot=snapshot;
     })
-    .catch(error => fail(error.message));
+    .catch(error => {lastSnapshot=null;fail(error.message);}).finally(()=>{loading=false;});
+  }; refresh();
+  const timer=setInterval(()=>{if(!host.isConnected){clearInterval(timer);return;}if(!document.hidden)refresh();},300000);
 })();

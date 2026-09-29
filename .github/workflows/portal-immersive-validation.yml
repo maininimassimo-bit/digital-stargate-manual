@@ -32,7 +32,7 @@ jobs:
       - name: Build site
         run: python -m mkdocs build --strict --config-file mkdocs.pages.yml
       - name: Quality trend data mapping
-        run: node --test .github/scripts/test-quality-trend.mjs
+        run: node --test .github/scripts/test-quality-trend.mjs .github/scripts/test-sky-quality-trend.mjs
       - name: Verify site links and assets
         run: python .github/scripts/verify-published-site.py --site site --base-path /digital-stargate-manual/
       - name: Navigation coverage
@@ -50,3 +50,4 @@ jobs:
           node .github/scripts/test-immersive-planner-refresh.cjs
           node .github/scripts/test-immersive-compact-layout.cjs
           node .github/scripts/test-immersive-quality-trend.cjs
+          node .github/scripts/test-immersive-sky-trend.cjs
