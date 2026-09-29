@@ -1,0 +1,25 @@
+name: BKL-043 F4 Reporter Activation Validation
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/bkl-043-f4-github-outcome-reporter.yml'
+      - '.github/workflows/bkl-043-f4-reporter-validation.yml'
+      - '.github/scripts/test-bkl043-f4-reporter-activation.py'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bkl-043-f4-github-outcome-reporter.yml'
+      - '.github/workflows/bkl-043-f4-reporter-validation.yml'
+      - '.github/scripts/test-bkl043-f4-reporter-activation.py'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check PyYAML==6.0.2
+      - run: python .github/scripts/test-bkl043-f4-reporter-activation.py

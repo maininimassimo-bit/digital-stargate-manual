@@ -1,0 +1,100 @@
+name: BKL-043 F4 GitHub workflow outcome reporter
+on:
+  workflow_run:
+    workflows:
+      - BKL-031 F9 MeteoHub Refresh
+      - Analyze Observatory Session Automatically
+    types:
+      - completed
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  report:
+    name: Report approved F9 workflow outcome
+    if: (github.event.workflow_run.name == 'BKL-031 F9 MeteoHub Refresh' || github.event.workflow_run.name == 'Analyze Observatory Session Automatically') && github.event.workflow_run.head_branch == github.event.repository.default_branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate runtime configuration
+        env:
+          RECEIVER_URL: ${{ vars.DSG_F4_RECEIVER_URL }}
+          WIF_PROVIDER: ${{ secrets.DSG_F4_WIF_PROVIDER }}
+          REPORTER_SERVICE_ACCOUNT: ${{ secrets.DSG_F4_REPORTER_SERVICE_ACCOUNT }}
+        run: |
+          test -n "$RECEIVER_URL"
+          test -n "$WIF_PROVIDER"
+          test -n "$REPORTER_SERVICE_ACCOUNT"
+          case "$RECEIVER_URL" in https://*.a.run.app) ;; *) echo "Invalid receiver URL configuration" >&2; exit 1 ;; esac
+      - name: Authenticate with workload identity federation
+        id: auth
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093
+        with:
+          workload_identity_provider: ${{ secrets.DSG_F4_WIF_PROVIDER }}
+          service_account: ${{ secrets.DSG_F4_REPORTER_SERVICE_ACCOUNT }}
+          token_format: id_token
+          id_token_audience: ${{ vars.DSG_F4_RECEIVER_URL }}
+          id_token_include_email: true
+          create_credentials_file: false
+          export_environment_variables: false
+      - name: Submit workflow outcome
+        env:
+          RECEIVER_URL: ${{ vars.DSG_F4_RECEIVER_URL }}
+          ID_TOKEN: ${{ steps.auth.outputs.id_token }}
+          REPOSITORY: ${{ github.repository }}
+          WORKFLOW_NAME: ${{ github.event.workflow_run.name }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          RUN_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
+          EVENT_NAME: ${{ github.event.workflow_run.event }}
+          STATUS: ${{ github.event.workflow_run.status }}
+          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          CREATED_AT: ${{ github.event.workflow_run.created_at }}
+          STARTED_AT: ${{ github.event.workflow_run.run_started_at }}
+          COMPLETED_AT: ${{ github.event.workflow_run.updated_at }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import urllib.request
+
+          allowed = {
+              "BKL-031 F9 MeteoHub Refresh",
+              "Analyze Observatory Session Automatically",
+          }
+          if os.environ["REPOSITORY"] != "maininimassimo-bit/digital-stargate-manual":
+              raise SystemExit("Unapproved repository")
+          if os.environ["WORKFLOW_NAME"] not in allowed:
+              raise SystemExit("Unapproved workflow")
+          payload = {
+              "schema_version": 1,
+              "event_id": f"github/{os.environ['REPOSITORY']}/{os.environ['RUN_ID']}/{os.environ['RUN_ATTEMPT']}",
+              "repository": os.environ["REPOSITORY"],
+              "workflow_name": os.environ["WORKFLOW_NAME"],
+              "run_id": os.environ["RUN_ID"],
+              "run_attempt": int(os.environ["RUN_ATTEMPT"]),
+              "event": os.environ["EVENT_NAME"],
+              "status": os.environ["STATUS"],
+              "conclusion": os.environ["CONCLUSION"],
+              "head_sha": os.environ["HEAD_SHA"],
+              "created_at_utc": os.environ["CREATED_AT"],
+              "started_at_utc": os.environ["STARTED_AT"] or None,
+              "completed_at_utc": os.environ["COMPLETED_AT"],
+          }
+          request = urllib.request.Request(
+              os.environ["RECEIVER_URL"].rstrip("/") + "/v1/github-workflow-outcome",
+              data=json.dumps(payload, separators=(",", ":")).encode("utf-8"),
+              headers={
+                  "Authorization": "Bearer " + os.environ["ID_TOKEN"],
+                  "Content-Type": "application/json",
+              },
+              method="POST",
+          )
+          try:
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  result = json.loads(response.read())
+                  if response.status != 200 or result.get("event_id") != payload["event_id"] or result.get("ack") not in {"DURABLE_CREATED", "DURABLE_DUPLICATE"}:
+                      raise SystemExit("Receiver did not confirm durable storage")
+                  print("GitHub workflow outcome durably acknowledged")
+          except Exception:
+              raise SystemExit("Workflow outcome was not durably acknowledged; inspect the run and receiver Usage Logs")
+          PY
