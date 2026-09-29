@@ -80,3 +80,7 @@ assegnati al gate futuro BKL-050; non sono dichiarati eseguiti o chiusi.
 
 Revert atomico del commit/PR di presentazione e rebuild Pages. Fonti scientifiche,
 telemetria, policy, apparati e dataset non richiedono ripristino perché non modificati.
+
+## Incremento: cielo della notte nel Planner
+
+Il simbolo della hero diventa un’immagine realistica selezionata dalla nuvolosità media e dalla pioggia previste nella finestra del Planner. Didascalia con valori, periodo e limiti illustrativi; fallback per dati indisponibili e immagine assente; nessun ulteriore rendering continuo. [Dettagli tecnici e test](../ui/planner-weather-sky.md). Evidenze esatte di CI e pubblicazione nella PR dedicata.

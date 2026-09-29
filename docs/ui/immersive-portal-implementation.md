@@ -201,3 +201,7 @@ La preferenza di vista essenziale è condivisa con la hero.
 | Versione | Data | Descrizione |
 |---|---|---|
 | 1.0 | 29/09/2026 | Shell comune, 19 scene, dipendenza locale, lifecycle e piano di regressione |
+
+## Cielo atmosferico del Planner
+
+La hero integra un [cielo illustrativo basato sul forecast notturno](planner-weather-sky.md), con tre asset locali, dati F9 già verificati, scadenza automatica e fallback neutro.
