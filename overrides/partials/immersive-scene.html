@@ -1,13 +1,15 @@
-<section class="dsg-scene" data-dsg-scene="{{ scene_kind }}" aria-label="Visualizzazione tridimensionale illustrativa">
+{% set dome_sync = page and page.file.src_uri == 'status/index.md' %}
+<section class="dsg-scene" data-dsg-scene="{{ scene_kind }}" {% if dome_sync %}data-dsg-dome-sync data-dsg-observed-dome="UNKNOWN"{% endif %} aria-label="Visualizzazione tridimensionale illustrativa">
   <canvas class="dsg-scene__canvas" aria-hidden="true"></canvas>
   <div class="dsg-scene__heading">
     <span class="dsg-scene__eyebrow">DIGITAL STARGATE / {{ 'OBSERVATORY' if scene_kind == 'observatory' else 'CELESTIAL ATLAS' }}</span>
-    <span class="dsg-scene__caption">{{ 'Modello illustrativo · non rappresenta lo stato degli apparati' if scene_kind == 'observatory' else 'Scena illustrativa · non rappresenta coordinate o dati scientifici' }}</span>
+    <span class="dsg-scene__caption">{{ 'Modello schematico · vista collegata al badge Cupola osservata' if dome_sync else 'Modello illustrativo · non rappresenta lo stato degli apparati' if scene_kind == 'observatory' else 'Scena illustrativa · non rappresenta coordinate o dati scientifici' }}</span>
   </div>
   <div class="dsg-scene__poster" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="dsg-scene__toolbar">
     <div class="dsg-scene__views" aria-label="Solo visualizzazione, nessun comando agli apparati" hidden>
-      <button type="button" data-dsg-scene-view="section" aria-pressed="true">{{ 'Strumenti' if scene_kind == 'observatory' else 'Orbita' }}</button>
+      {% if dome_sync %}<button type="button" data-dsg-follow-dome aria-pressed="true">Segui badge</button>{% endif %}
+      <button type="button" data-dsg-scene-view="section" aria-pressed="true">{{ 'Interno' if dome_sync else 'Strumenti' if scene_kind == 'observatory' else 'Orbita' }}</button>
       {% if scene_kind == 'observatory' %}<button type="button" data-dsg-scene-view="exterior" aria-pressed="false">Esterno</button>{% endif %}
       <button type="button" data-dsg-scene-view="top" aria-pressed="false">Dall’alto</button>
     </div>

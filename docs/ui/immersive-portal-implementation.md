@@ -163,6 +163,34 @@ ARB/Release Quality ed exact-head CI restano gate applicabili alla pubblicazione
 
 ## 9. Revisioni
 
+### Vista cupola collegata al badge (29/09/2026)
+
+Su richiesta owner, soltanto in Observatory Status il modello osservatorio segue
+il badge **Cupola osservata** già visualizzato. CLOSED seleziona l'esterno con
+copertura e pareti opache chiuse; OPEN seleziona l'interno schematico in sezione.
+UNKNOWN, stato assente o diverso da OPEN/CLOSED selezionano una vista neutra,
+senza cupola o strumenti rappresentati come correnti. Non si simula una posizione
+fisica misurata e non viene inviato alcun comando.
+
+`status-dome-view.js` osserva il testo del badge e pubblica soltanto il preset
+`data-dsg-observed-dome` sul contenitore visuale. Non esegue fetch, non modifica
+il badge e non interpreta un secondo payload. `immersive-renderer.mjs` osserva
+quel metadato, aggiorna la vista e ridisegna; observer e listener sono rilasciati
+con la scena. La preferenza essenziale conserva il collegamento testuale e, alla
+riattivazione, usa lo stato corrente. Operations mantiene le viste illustrative.
+
+I pulsanti Interno/Esterno/Dall'alto consentono un'esplorazione dichiarata
+**Vista libera**. **Segui badge** torna alla selezione automatica. Un cambio
+semantico del badge ripristina automaticamente la vista collegata; un refresh
+con lo stesso stato non interrompe l'esplorazione manuale.
+
+`test-immersive-dome-sync.cjs` intercetta risposte sintetiche e verifica CLOSED →
+OPEN → stale/UNKNOWN, stato intermedio, vista libera/automatica, refresh invariato,
+riattivazione dopo vista essenziale, navigazione e mobile. I fixture non sono
+pubblicati come dati. CI, review AI-assistita e verifica Pages sono registrate
+nella PR di integrazione. Rollback: revert dell'incremento e rebuild Pages dalla
+baseline `d7b3ab57747d670221f72ae37fdf566a19a07619`.
+
 ### Estensione dei pannelli status
 
 I quadranti e simboli dei tre pannelli sono documentati in

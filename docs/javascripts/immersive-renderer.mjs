@@ -14,16 +14,20 @@ export async function mountScene(stage, { signal }) {
   const compact = matchMedia('(max-width: 700px), (pointer: coarse)').matches;
   const resources = new Set();
   const keep = value => { resources.add(value); return value; };
-  let renderer, resizeObserver, intersectionObserver;
+  let renderer, resizeObserver, intersectionObserver, domeObserver;
   let disposed = false, lost = false, visible = true, frame = 0, timer = 0, until = 0, last = 0, time = 0;
   let view = 'section', px = 0, py = 0, angle = .73, elevation = .51, progress = 0;
+  const domeSync = stage.hasAttribute('data-dsg-dome-sync');
+  let following = domeSync;
+  const observedView = () => ({CLOSED:'exterior',OPEN:'section'})[stage.dataset.dsgObservedDome] || 'neutral';
+  if (domeSync) view = observedView();
   stage.querySelectorAll('[data-dsg-scene-view]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.dsgSceneView === view)));
   const listeners = new AbortController();
   const stop = () => { cancelAnimationFrame(frame); clearTimeout(timer); frame = timer = 0; };
   function dispose() {
     if (disposed) return;
     disposed = true; stop(); listeners.abort();
-    resizeObserver?.disconnect(); intersectionObserver?.disconnect();
+    resizeObserver?.disconnect(); intersectionObserver?.disconnect(); domeObserver?.disconnect();
     resources.forEach(resource => resource.dispose());
     renderer?.dispose(); renderer?.forceContextLoss();
     signal.removeEventListener('abort', dispose);
@@ -69,6 +73,7 @@ export async function mountScene(stage, { signal }) {
         camera.lookAt(0, 0, 0);
       }
       model.update({ time, progress, view });
+      stage.dataset.dsgRenderedView = view;
       renderer.render(scene, camera);
       // No endless ambient loop: stop after input settles, including desktop.
       if (now < until) timer = setTimeout(() => { timer = 0; frame = requestAnimationFrame(render); }, compact ? 32 : 16);
@@ -85,6 +90,21 @@ export async function mountScene(stage, { signal }) {
       camera.aspect = width / height; camera.updateProjectionMatrix(); wake();
     };
     const on = (target, name, fn, options = {}) => target.addEventListener(name, fn, { ...options, signal: listeners.signal });
+    function updateViewControls() {
+      stage.dataset.dsgViewMode = following ? 'auto' : 'manual';
+      stage.dataset.dsgSelectedView = view;
+      stage.querySelector('[data-dsg-follow-dome]')?.setAttribute('aria-pressed', String(following));
+      stage.querySelectorAll('[data-dsg-scene-view]').forEach(item => item.setAttribute('aria-pressed', String(item.dataset.dsgSceneView === view)));
+      if (domeSync) stage.querySelector('.dsg-scene__status').textContent = following
+        ? (view === 'neutral' ? 'Stato non disponibile · nessuna apertura/chiusura dedotta' : view === 'exterior' ? 'Dal badge: esterno chiuso · nessun comando' : 'Dal badge: interno in sezione · nessun comando')
+        : 'Vista libera · non rappresenta lo stato corrente';
+    }
+    const followBadge = () => { following = true; view = observedView(); updateViewControls(); wake(); };
+    if (domeSync) {
+      domeObserver = new MutationObserver(followBadge);
+      domeObserver.observe(stage, { attributes:true, attributeFilter:['data-dsg-observed-dome'] });
+      updateViewControls();
+    }
     on(stage, 'pointermove', event => {
       if (compact) return;
       const rect = stage.getBoundingClientRect();
@@ -92,10 +112,11 @@ export async function mountScene(stage, { signal }) {
     }, { passive: true });
     on(stage, 'pointerleave', () => { px = py = 0; wake(); });
     on(stage, 'click', event => {
+      if (domeSync && event.target.closest('[data-dsg-follow-dome]')) { followBadge(); return; }
       const button = event.target.closest('[data-dsg-scene-view]');
       if (!button) return;
       view = button.dataset.dsgSceneView;
-      stage.querySelectorAll('[data-dsg-scene-view]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+      following = false; updateViewControls();
       wake();
     });
     on(window, 'scroll', wake, { passive: true });
@@ -106,7 +127,7 @@ export async function mountScene(stage, { signal }) {
     });
     on(canvas, 'webglcontextrestored', () => {
       lost = false; stage.classList.add('is-ready');
-      stage.querySelector('.dsg-scene__status').textContent = 'Modello 3D illustrativo · controlli solo visuali'; resize();
+      stage.querySelector('.dsg-scene__status').textContent = 'Modello 3D illustrativo · controlli solo visuali'; if(domeSync) updateViewControls(); resize();
     });
     resizeObserver = new ResizeObserver(resize); resizeObserver.observe(stage);
     intersectionObserver = new IntersectionObserver(entries => { visible = entries[0].isIntersecting; if (visible) wake(); else stop(); });

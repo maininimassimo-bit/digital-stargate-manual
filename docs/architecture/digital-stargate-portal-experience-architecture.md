@@ -202,7 +202,11 @@ Nessuna evoluzione di stack, BFF, identity o command surface è autorizzata da q
 Su richiesta esplicita dell'owner, il layer di presentazione incorpora un renderer
 Three.js locale e opzionale. Non cambia il presentation contract della sezione 5.3:
 nessun nuovo source adapter, valutatore, comando o collegamento agli apparati.
-Il modulo visuale riceve esclusivamente il tipo di scena e gli input di navigazione.
+Il modulo visuale riceve il tipo di scena e gli input di navigazione. In Observatory
+Status, su richiesta owner del 29/09/2026, un bridge di presentazione osserva anche
+il badge Cupola osservata e comunica un preset visuale: CLOSED → esterno chiuso,
+OPEN → interno in sezione, altri stati → vista neutra. Non introduce un secondo
+consumer di dati o un comando; il badge esistente rimane la fonte del preset.
 
 L'override Material conserva il contenuto originale tramite `super()` e sostituisce
 solo marker decorativi espliciti. Il bootstrap è idempotente e rilascia risorse al

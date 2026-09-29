@@ -60,7 +60,12 @@ export function createObservatory(T, scene, keep) {
  return {
    update({view}) {
      const exterior=view==='exterior';
-     shell.material.opacity=exterior?.97:.075;
+     const neutral=view==='neutral';
+     shell.visible=shellGrid.visible=roofRibs.visible=model.visible=wall.visible=!neutral;
+     shell.material.opacity=exterior?1:.075;
+     shell.material.transparent=!exterior; shell.material.depthWrite=exterior;
+     wall.material.opacity=exterior?1:.12;
+     wall.material.transparent=!exterior; wall.material.depthWrite=exterior;
      shellGrid.material.opacity=exterior?.08:.24;
    }
  };
