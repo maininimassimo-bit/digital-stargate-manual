@@ -256,3 +256,7 @@ Su richiesta Owner il badge ◎ di Observation Planner viene sostituito da immag
 ## 29/09/2026 — navigazione visibile e inquadratura dell'atlante
 
 Owner richiede di rendere visibili per gruppi logici le destinazioni poco esposte al di fuori del footer e di contenere interamente il globo del Planner. Si riusa la gerarchia MkDocs con collegamenti contestuali, mappa statica completa generata al build e menu laterale completato. Report e Planner sono accessibili dalla sezione Scienza. Nessun contenuto scientifico, dato o authority viene modificato. La camera atlas adatta la distanza all'area disponibile; l'osservatorio mantiene i preset esistenti. Audit, test e limiti nella guida di implementazione immersiva; rilascio nella PR dedicata.
+
+## 29/09/2026 — continuità serale del Planner
+
+Owner segnala forecast scaduto alle 20:00 locali. Causa: run 00 UTC con validità massima 18 ore e successivo refresh pianificato alle 18:15 UTC, soggetto a ritardi GitHub. Avviato recupero governato del run 12 UTC; autorizzazione Owner applicata alla correzione della cadenza: discovery oraria con skip dello stesso run/notte validi, polling pagina cinque minuti e invalidazione esplicita dei pannelli alla scadenza. Il limite di freshness e le policy scientifiche non cambiano; nessuna garanzia SLA né nuova autorità di comando. ADR-012 aggiornato e verifiche nella PR dedicata.

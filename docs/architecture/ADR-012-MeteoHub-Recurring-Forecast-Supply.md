@@ -20,7 +20,7 @@ The operating contract is:
 
 - monetary budget EUR 0;
 - the repository is public and the refresh job additionally requires repository variable `F9_ZERO_EUR_GUARD=CONFIRMED` as an explicit activation switch;
-- no workflow-imposed daily acquisition limit; the two cron entries remain aligned with the 00/12 UTC ICON-2I runs, while authorized manual dispatches are not blocked by a daily counter;
+- no workflow-imposed daily acquisition limit; hourly discovery checks for new 00/12 UTC ICON-2I runs (Owner evening-availability correction, 29/09/2026), while authorized manual dispatches are not blocked by a daily counter;
 - a governed `workflow_dispatch` diagnostic path requires explicit `ALLOW_ONE_TEST_ACQUISITION` confirmation and a purpose string; scheduled and manual attempts do not share a daily acquisition counter; no automatic retry;
 - exact run identity, per-variable SHA-256 and retrieval time in the sanitised projection;
 - all GRIB inputs held only in an ephemeral temporary directory and deleted before the job ends;
@@ -29,7 +29,7 @@ The operating contract is:
 - missing, late, incomplete, inconsistent or stale data fail closed;
 - no automatic fallback, provider/model stitching or silent substitution.
 
-The GitHub workflow may publish only the small read-only JSON projection. This decision supersedes the prior daily acquisition cap; it does not authorize automatic retries, additional cron entries, paid runners, raw GRIB retention, or any operational authority. The repository is public, so standard GitHub-hosted runner execution is free; the explicit repository variable remains a defense-in-depth activation switch. EAGLE is not involved.
+The GitHub workflow may publish only the small read-only JSON projection. This decision supersedes the prior daily acquisition cap; it does not authorize automatic retries, paid runners, raw GRIB retention, or any operational authority. The repository is public, so standard GitHub-hosted runner execution is free; the explicit repository variable remains a defense-in-depth activation switch. EAGLE is not involved.
 
 ## Authority boundaries
 
@@ -51,3 +51,9 @@ BKL-031 closure is recorded in `docs/project/BKL-031-CLOSURE-2026-09-18.md`. PR 
 ## Rollback
 
 Disable the scheduled workflow and revert the F9 consumer. The portal then fails closed; no provider fallback is enabled and the accepted F8 bounded evidence remains historical only.
+
+## Evening availability correction — 29/09/2026
+
+Owner requests valid forecasts near evening session planning. The previous six-hour cadence could leave a gap: the 00 UTC run expires at 18 UTC, before the 18:15 UTC scheduled acquisition (and scheduler delays). Discovery now runs hourly at minute 23, UTC year-round. This explicitly supersedes the old cadence restriction; no retry loop within a run, cost guard, privacy, retention and the 18-hour freshness cap remain unchanged.
+
+When the newest discovered run matches a currently valid projection for the same governed observing night, the acquisition skips GRIB downloads and leaves retrieval timestamps unchanged. A new run, new observing night, invalid or expired projection triggers normal acquisition. GitHub schedule and provider delivery remain best effort, not an availability SLA. A governed manual recovery remains available if scheduled delivery is delayed.

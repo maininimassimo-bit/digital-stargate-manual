@@ -28,6 +28,23 @@ def valid_projection():
       'boundaries':{'recurringTraffic':True,'monetaryBudgetEur':0,'rawGribRetention':'NONE_EPHEMERAL_ONLY','readinessAuthority':False,'automaticTargetSelection':False,'schedulingAuthority':False,'actionAuthority':'NONE','commandAuthority':'NONE','safetyAuthority':'LOCAL_PHYSICAL_INTERLOCKS','protectedCoordinatesPublished':False}}
 
 class F9Tests(unittest.TestCase):
+    def test_same_run_night_is_reused_without_changing_retrieval(self):
+        value=valid_projection(); before=json.dumps(value,sort_keys=True)
+        self.assertTrue(f9.reusable_projection(value,'2026091700',dt.datetime(2026,9,17,14,tzinfo=dt.timezone.utc)))
+        self.assertEqual(before,json.dumps(value,sort_keys=True))
+    def test_new_run_or_night_requires_acquisition(self):
+        value=valid_projection()
+        self.assertFalse(f9.reusable_projection(value,'2026091712',dt.datetime(2026,9,17,16,tzinfo=dt.timezone.utc)))
+        self.assertFalse(f9.reusable_projection(value,'2026091700',dt.datetime(2026,9,17,2,tzinfo=dt.timezone.utc)))
+    def test_stale_and_invalid_projections_cannot_be_reused(self):
+        self.assertFalse(f9.reusable_projection(valid_projection(),'2026091700',dt.datetime(2026,9,17,19,tzinfo=dt.timezone.utc)))
+        self.assertFalse(f9.reusable_projection({},'2026091700',dt.datetime(2026,9,17,14,tzinfo=dt.timezone.utc)))
+    def test_night_boundary_and_dst_remain_local(self):
+        # 05:59 vs 06:00 local, both summer and winter offsets.
+        for day,hour in [(dt.date(2026,9,29),4),(dt.date(2026,12,29),5)]:
+            now=dt.datetime.combine(day,dt.time(hour),tzinfo=dt.timezone.utc)
+            self.assertEqual(f9.night_start(now).date(),day)
+            self.assertEqual(f9.night_start(now-dt.timedelta(minutes=1)).date(),day-dt.timedelta(days=1))
     def test_known_contract(self): f9.validate_projection(valid_projection())
     def test_privacy_fail_closed(self):
         value=valid_projection();value['site']={'latitudeDeg':42}

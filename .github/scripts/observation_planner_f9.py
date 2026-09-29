@@ -318,19 +318,31 @@ def rank_targets(hourly: list[dict], setups: list[dict], targets: list[dict], ca
     return rankings
 
 
+def night_start(now: dt.datetime, timezone: str = "Europe/Rome") -> dt.datetime:
+    local = now.astimezone(ZoneInfo(timezone))
+    night_date = local.date() if local.hour >= 6 else local.date() - dt.timedelta(days=1)
+    return dt.datetime.combine(night_date, dt.time(15), tzinfo=dt.timezone.utc)
+
+
+def reusable_projection(projection: dict, run: str, now: dt.datetime) -> bool:
+    """Skip heavy GRIB downloads only for the same valid run and observing night."""
+    try:
+        validate_projection(projection, now)
+        expected_run = dt.datetime.strptime(run, "%Y%m%d%H").replace(tzinfo=dt.timezone.utc)
+        return (projection["forecast"]["runInitialisationUtc"] == utc(expected_run)
+                and projection["nightWindow"]["fromUtc"] == utc(night_start(now)))
+    except (ContractError, KeyError, ValueError, TypeError):
+        return False
+
+
 def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather: dict, files: list[dict], site: dict, f8: dict, suitability: dict) -> dict:
     run_time = dt.datetime.strptime(run, "%Y%m%d%H").replace(tzinfo=dt.timezone.utc)
     age = (retrieval - run_time).total_seconds() / 3600
     if age < 0 or age > 18:
         raise ContractError("STALE_RUN")
     geo = site["sitePayload"]["geodesy"]
-    local = now.astimezone(ZoneInfo(site["sitePayload"]["timezoneIana"]))
-    # Morning refreshes prepare the upcoming night.  Only the early-morning
-    # tail (00:00–05:59 local) still belongs to the night that started the
-    # previous calendar day; after 06:00 the current date is the next
-    # observing window and is covered by the latest forecast run.
-    night_date = local.date() if local.hour >= 6 else local.date() - dt.timedelta(days=1)
-    start = dt.datetime.combine(night_date, dt.time(15), tzinfo=dt.timezone.utc)
+    # Preserve the governed early-morning/current-night convention.
+    start = night_start(now, site["sitePayload"]["timezoneIana"])
     instants = [start + dt.timedelta(hours=i) for i in range(16)]
     if any(i not in weather for i in instants):
         raise ContractError("CURRENT_NIGHT_NOT_COVERED")
@@ -525,12 +537,12 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
             raise ContractError("STALE_PROJECTION")
 
 
-def acquire(now: dt.datetime) -> dict:
+def acquire(now: dt.datetime, run: str | None = None) -> dict:
     site = json.loads(SITE_PATH.read_text(encoding="utf-8"))
     if site.get("lifecycle", {}).get("state") != "APPROVED" or site["sitePayload"].get("classification") != "PROTECTED_EXACT_SITE":
         raise ContractError("SITE_AUTHORITY_UNAVAILABLE")
     geo = site["sitePayload"]["geodesy"]
-    run = discover_run(now)
+    run = run or discover_run(now)
     series, evidence, total = {}, [], 0
     with tempfile.TemporaryDirectory(prefix="dsg-f9-grib-") as temporary:
         root = Path(temporary)
@@ -555,13 +567,23 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
     parser.add_argument("--validate", type=Path)
+    parser.add_argument("--skip-unchanged", action="store_true")
     args = parser.parse_args()
     if args.validate:
         validate_projection(json.loads(args.validate.read_text(encoding="utf-8")), dt.datetime.now(dt.timezone.utc))
         print("F9 projection verification OK")
         return
     now = dt.datetime.now(dt.timezone.utc)
-    projection = acquire(now)
+    run = discover_run(now)
+    if args.skip_unchanged and args.output.is_file():
+        try:
+            existing = json.loads(args.output.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            existing = {}
+        if reusable_projection(existing, run, now):
+            print(json.dumps({"status": "UNCHANGED", "run": run, "reason": "same valid run and night"}))
+            return
+    projection = acquire(now, run=run)
     args.output.write_text(json.dumps(projection, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": "UPDATED", "run": projection["forecast"]["runInitialisationUtc"], "output": str(args.output)}))
 
