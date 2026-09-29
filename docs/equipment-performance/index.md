@@ -3,6 +3,7 @@
 
 <div class="dsg-ep-center">
 <section class="dsg-ep-hero">
+<!-- DSG:IMMERSIVE-SCENE -->
   <span>BKL-039 · EQUIPMENT PERFORMANCE</span>
   <h1>Historical equipment performance</h1>
   <p>Vista read-only delle misure e statistiche descrittive accettate. I valori FWHM restano nella loro unità sorgente non calibrata e non costituiscono una valutazione dello stato dell'attrezzatura.</p>

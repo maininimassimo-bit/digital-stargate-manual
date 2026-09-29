@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-UI-001 |
-| Versione | 2.0 |
-| Stato | Accepted |
-| Data | 10/09/2026 |
+| Versione | 2.1 |
+| Stato | Baseline 2.0 Accepted; addendum immersivo implemented candidate |
+| Data | 29/09/2026 |
 | Ambito | GitHub Pages, MkDocs, dashboard e hub |
 | Release | UI 7.0 |
 | Responsabile | Massimo Mainini |
@@ -200,3 +200,21 @@ Una modifica significativa richiede aggiornamento coordinato di Design System, s
 |---|---|---|---|
 | 1.0 | 26/07/2026 | Superseded | Prima emissione UI 6.1 |
 | 2.0 | 10/09/2026 | Accepted | Redesign UI 7.0, nuova IA e dynamic content contract; ARB-UI-7 APPROVED |
+
+
+## Addendum 2.1 — presentazione immersiva
+
+Il redesign autorizzato il 29/09/2026 aggiunge una shell condivisa all'intero
+portale e scene 3D illustrative a 19 hub. Il design approvato 2.0 resta la baseline
+semantica; l'addendum è un candidato implementato, non una release già accettata.
+
+- Hero a due colonne: contenuto originale e scena; su mobile flusso verticale.
+- Poster statico, controlli HTML da almeno 44 px, reduced-motion e vista essenziale.
+- Modelli e colori decorativi non rappresentano safety, freshness o score.
+- Testo e tabelle restano nel DOM; URL, anchor e binding dei consumer sono invariati.
+- Le pagine documentali adottano la stessa tipografia e le stesse superfici senza WebGL.
+- Tema light/dark ereditato dal Theme Service esistente.
+
+Specifiche, mappa delle scene, dipendenze e gestione risorse:
+[DSG-UI-IMMERSIVE-001](immersive-portal-implementation.md).
+Evidence e stato di rilascio: [Immersive Portal](../releases/immersive-portal.md).

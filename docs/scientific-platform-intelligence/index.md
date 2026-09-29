@@ -9,6 +9,7 @@ description: Stato governato e read-only delle capability scientifiche Digital S
 <div class="dsg-scientific-center">
 
 <section class="dsg-scientific-hero">
+<!-- DSG:IMMERSIVE-SCENE -->
   <span class="dsg-scientific-hero__eyebrow">DIGITAL STARGATE · SCIENTIFIC INTELLIGENCE</span>
   <h1>Capire lo stato della piattaforma scientifica</h1>
   <p>

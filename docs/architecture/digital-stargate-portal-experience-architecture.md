@@ -195,3 +195,20 @@ Il rollback consiste nel revert del package UI 7.0; dataset, import scientifico 
 ## 14. Open issues
 
 Nessuna evoluzione di stack, BFF, identity o command surface è autorizzata da questo incremento.
+
+
+## Addendum implementativo — rendering illustrativo (29/09/2026)
+
+Su richiesta esplicita dell'owner, il layer di presentazione incorpora un renderer
+Three.js locale e opzionale. Non cambia il presentation contract della sezione 5.3:
+nessun nuovo source adapter, valutatore, comando o collegamento agli apparati.
+Il modulo visuale riceve esclusivamente il tipo di scena e gli input di navigazione.
+
+L'override Material conserva il contenuto originale tramite `super()` e sostituisce
+solo marker decorativi espliciti. Il bootstrap è idempotente e rilascia risorse al
+cambio pagina o preferenza. Reduced-motion, Save-Data, errore di caricamento e WebGL
+indisponibile mantengono la vista statica. Gli asset versionati sono same-origin.
+
+L'addendum non estende l'approvazione ARB-UI-7 alla nuova implementazione.
+[Implementazione e boundary](../ui/immersive-portal-implementation.md) e
+[release candidate](../releases/immersive-portal.md) tracciano il nuovo perimetro.

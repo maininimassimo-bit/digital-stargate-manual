@@ -218,7 +218,7 @@
   const addBreadcrumb = () => {
     const content = document.querySelector('.md-content__inner');
     if (!content || content.querySelector('.dsg-breadcrumb')) return;
-    const heading = content.querySelector(':scope > h1');
+    const heading = content.querySelector(':scope > h1, :scope > .dsg-immersive-page > h1');
     if (!heading || content.querySelector('.dsg-hero')) return;
 
     const relativePath = normalize(window.location.href)
@@ -231,7 +231,7 @@
     breadcrumb.className = 'dsg-breadcrumb';
     breadcrumb.setAttribute('aria-label', 'Percorso pagina');
     breadcrumb.innerHTML = `<a href="${href()}">Home</a><span aria-hidden="true">/</span><span aria-current="page">${heading.textContent.trim()}</span>`;
-    content.insertBefore(breadcrumb, heading);
+    heading.parentNode.insertBefore(breadcrumb, heading);
   };
 
   const addPageNavigation = () => {

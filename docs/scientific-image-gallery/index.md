@@ -2,6 +2,7 @@
 
 <div class="dsg-image-gallery" data-bkl034-gallery data-source="../data/bkl034-scientific-image-gallery-fixture.json">
   <section class="dsg-image-gallery__hero">
+<!-- DSG:IMMERSIVE-SCENE -->
     <span class="dsg-image-gallery__kicker">DIGITAL STARGATE · BKL-034</span>
     <h1>Scientific Image Gallery</h1>
     <p>Projection bounded e read-only delle immagini scientifiche collegate a sessione, target e processing provenance.</p>

@@ -3,6 +3,7 @@
 
 <div class="dsg-bkl042">
 <section class="dsg-bkl042__hero">
+<!-- DSG:IMMERSIVE-SCENE -->
   <div><span>BKL-042 · OBSERVATORY ASSISTANT</span><h1>Advisory verificabile</h1><p>Consumer statico read-only del demonstrator deterministico F3. Ogni esito mostra stato, fonti e limiti senza eseguire azioni.</p></div>
   <div class="dsg-bkl042__mark" aria-hidden="true">A</div>
 </section>

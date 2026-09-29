@@ -1,0 +1,17 @@
+<section class="dsg-scene" data-dsg-scene="{{ scene_kind }}" aria-label="Visualizzazione tridimensionale illustrativa">
+  <canvas class="dsg-scene__canvas" aria-hidden="true"></canvas>
+  <div class="dsg-scene__heading">
+    <span class="dsg-scene__eyebrow">DIGITAL STARGATE / {{ 'OBSERVATORY' if scene_kind == 'observatory' else 'CELESTIAL ATLAS' }}</span>
+    <span class="dsg-scene__caption">{{ 'Modello illustrativo · non rappresenta lo stato degli apparati' if scene_kind == 'observatory' else 'Scena illustrativa · non rappresenta coordinate o dati scientifici' }}</span>
+  </div>
+  <div class="dsg-scene__poster" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="dsg-scene__toolbar">
+    <div class="dsg-scene__views" aria-label="Solo visualizzazione, nessun comando agli apparati" hidden>
+      <button type="button" data-dsg-scene-view="section" aria-pressed="true">{{ 'Strumenti' if scene_kind == 'observatory' else 'Orbita' }}</button>
+      {% if scene_kind == 'observatory' %}<button type="button" data-dsg-scene-view="exterior" aria-pressed="false">Esterno</button>{% endif %}
+      <button type="button" data-dsg-scene-view="top" aria-pressed="false">Dall’alto</button>
+    </div>
+    <button type="button" class="dsg-scene__mode" data-dsg-scene-mode aria-pressed="false" hidden>Vista essenziale</button>
+  </div>
+  <p class="dsg-scene__status" role="status">Vista statica · informazioni e navigazione sempre disponibili</p>
+</section>

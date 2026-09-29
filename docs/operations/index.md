@@ -4,6 +4,7 @@
 <div class="dsg-operations-center">
 
 <section class="dsg-operations-hero">
+<!-- DSG:IMMERSIVE-SCENE -->
   <span class="dsg-operations-hero__eyebrow">DIGITAL STARGATE · OPERATIONS CENTER</span>
   <h1>Osservatorio, automazione e continuità operativa</h1>
   <p>

@@ -1,0 +1,132 @@
+/* Shared visual layer. Semantic status colors and consumer bindings are unchanged. */
+body:has(.dsg-immersive-page) {
+  --dsg-radius-sm: .55rem;
+  --dsg-radius-md: .85rem;
+  --dsg-radius-lg: 1.1rem;
+  --dsg-content-max: 88rem;
+  background: radial-gradient(ellipse at 75% 0%, color-mix(in srgb, var(--dsg-cyan) 7%, transparent), transparent 45%), var(--dsg-paper);
+}
+body[data-md-color-scheme="slate"]:has(.dsg-immersive-page) {
+  --dsg-paper: #080f1b;
+  --dsg-surface: #101e30;
+  --dsg-surface-muted: #14273d;
+  --dsg-text: #edf4fd;
+  --dsg-text-muted: #afc1d5;
+  --dsg-line: #aacdea29;
+  --md-default-bg-color: #080f1b;
+}
+body:has(.dsg-immersive-page) .md-grid { max-width: 88rem; }
+body:has(.dsg-immersive-page) .md-content__inner { min-width: 0; }
+@media (min-width: 62.01rem) {
+  /* The existing sticky header already occupies normal flow; avoid a second offset. */
+  body:has(.dsg-immersive-page) .md-container { padding-top: 0; }
+  body:has(.dsg-immersive-page) .md-content__inner { padding-top: 1rem; }
+}
+.md-typeset .dsg-immersive-page { color: var(--dsg-text); line-height: 1.7; min-width: 0; overflow-wrap: anywhere; }
+.md-typeset .dsg-immersive-page :is(div, section, article) { min-width: 0; }
+.md-typeset .dsg-immersive-page :is(input, select, textarea) { max-width: 100%; }
+.md-typeset .dsg-immersive-page h1 { font-size: clamp(2rem, 3.4vw, 3.7rem); font-weight: 500; letter-spacing: -.045em; line-height: 1.12; }
+.md-typeset .dsg-immersive-page h2 { font-weight: 550; letter-spacing: -.025em; padding-bottom: .45rem; border-bottom: 1px solid var(--dsg-line); }
+.md-typeset .dsg-immersive-page h3 { font-weight: 600; }
+.md-typeset .dsg-immersive-page > h1 { padding-top: 1.1rem; border-top: 1px solid var(--dsg-line); }
+.md-typeset .dsg-immersive-page > h1::before { content: 'DIGITAL STARGATE / KNOWLEDGE'; display: block; margin-bottom: .9rem; color: var(--dsg-cyan); font: .65rem/1.6 ui-monospace, monospace; letter-spacing: .14em; }
+.md-typeset .dsg-immersive-page a { text-underline-offset: .2em; }
+.md-typeset .dsg-immersive-page a:focus-visible,
+.md-typeset .dsg-immersive-page button:focus-visible { outline: 3px solid var(--dsg-focus); outline-offset: 4px; }
+.md-typeset .dsg-immersive-page :is(.md-button, button, select, input) { min-height: 2.3rem; }
+.md-typeset .dsg-immersive-page .md-button { border-radius: .4rem; font-weight: 600; }
+.md-typeset .dsg-immersive-page :is(table:not([class]), .dsg-kpi, .dsg-live-card, .dsg-domain-card, .dsg-mission-panel, .dsg-quick-card, .dsg-page-nav a) {
+  border: 1px solid var(--dsg-line); border-radius: var(--dsg-radius-sm);
+  background: linear-gradient(125deg, color-mix(in srgb, var(--dsg-surface-muted) 80%, transparent), var(--dsg-surface));
+  box-shadow: 0 10px 28px #0000000c, inset 0 1px #ffffff08;
+}
+.md-typeset .dsg-immersive-page table:not([class]) { display: table; width: 100%; }
+.md-typeset .dsg-immersive-page .md-typeset__scrollwrap { margin-inline: 0; max-width: 100%; overflow-x: auto; }
+.md-typeset .dsg-immersive-page .md-typeset__table { padding-inline: 0; }
+.md-typeset .dsg-immersive-page :is(th, td) { font-size: max(.75rem, 14px); line-height: 1.6; }
+.md-typeset .dsg-immersive-page th { letter-spacing: .025em; }
+.md-typeset .dsg-immersive-page blockquote { border-left: 2px solid var(--dsg-cyan); background: color-mix(in srgb, var(--dsg-surface-muted) 55%, transparent); padding: .9rem 1.1rem; border-radius: 0 .5rem .5rem 0; }
+.md-typeset .dsg-immersive-page .dsg-kpi { padding: 1rem 1.2rem; }
+.md-typeset .dsg-immersive-page .dsg-kpi__value { font-family: ui-monospace, monospace; font-weight: 500; }
+.md-typeset .dsg-immersive-page :is(.dsg-domain-card, .dsg-quick-card) { transition: border-color .18s, box-shadow .18s; }
+.md-typeset .dsg-immersive-page :is(.dsg-domain-card, .dsg-quick-card):hover { border-color: var(--dsg-cyan); box-shadow: 0 12px 32px #00000012; }
+.md-typeset .dsg-immersive-page .dsg-domain-card { position: relative; overflow: hidden; }
+.md-typeset .dsg-immersive-page .dsg-domain-card::after { content: ''; position: absolute; right: -1.4rem; top: -1.4rem; width: 6rem; height: 6rem; border: 1px solid var(--dsg-line); border-radius: 50%; box-shadow: 0 0 0 .7rem color-mix(in srgb, var(--dsg-cyan) 3%, transparent); pointer-events: none; }
+.md-typeset .dsg-immersive-page .dsg-live-board { margin-block: 1.6rem 2.6rem; }
+/* A single reusable stage shares each existing hub hero. All copy remains in place. */
+.md-typeset .dsg-immersive-page section:has(> .dsg-scene) {
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: .7rem 1.4rem;
+  position: relative; isolation: isolate; padding: clamp(1.2rem, 3vw, 2.6rem);
+  background: linear-gradient(125deg, #091728, #102c40 70%, #111b37); background-image: linear-gradient(125deg, #091728, #102c40 70%, #111b37);
+  color: #eaf4ff; border: 1px solid #8cc3dd38; border-radius: 1rem; min-height: 22rem;
+}
+.md-typeset .dsg-immersive-page section:has(> .dsg-scene)::before,
+.md-typeset .dsg-immersive-page section:has(> .dsg-scene)::after { display: none; }
+.md-typeset .dsg-immersive-page section:has(> .dsg-scene) > :not(.dsg-scene) { grid-column: 1; position: relative; z-index: 1; }
+.md-typeset .dsg-immersive-page section:has(> .dsg-scene) > .dsg-scene { grid-column: 2; grid-row: 1 / span 5; height: 100%; min-height: 22rem; align-self: stretch; margin: 0; }
+.md-typeset .dsg-immersive-page .dsg-hero--home { grid-template-rows: auto auto; min-height: 0; }
+.md-typeset .dsg-immersive-page .dsg-hero--home > .dsg-scene { grid-row: 1; height: 26rem; }
+.md-typeset .dsg-immersive-page section:has(> .dsg-scene) :is(h1, h2, h3) { color: #eef7ff; }
+.md-typeset .dsg-immersive-page section:has(> .dsg-scene) h1 { font-size: clamp(2rem, 3.4vw, 3.4rem); line-height: 1.1; max-width: none; }
+.md-typeset .dsg-immersive-page section:has(> .dsg-scene) > [class*="actions"] { display: flex; flex-wrap: wrap; gap: .6rem; align-content: start; }
+.md-typeset .dsg-immersive-page section:has(> .dsg-scene) > [class*="actions"] a { flex: 1 1 9rem; padding: .7rem; font-size: .75rem; }
+.md-typeset .dsg-immersive-page section:has(> .dsg-scene) > p,
+.md-typeset .dsg-immersive-page .dsg-hero__subtitle { color: #bacddd; }
+.md-typeset .dsg-immersive-page section:has(> .dsg-scene) :is(.md-button:not(.md-button--primary), .dsg-mission-actions a, .dsg-operations-hero a, .dsg-architecture-hero a, .dsg-session-hero__actions a) { color: #eaf7ff; background: #20394e; border-color: #8eb8cf66; }
+.md-typeset .dsg-immersive-page .dsg-hero__overlay { display: none; }
+.md-typeset .dsg-immersive-page .dsg-hero__content { align-self: center; padding-block: 1.2rem; }
+.md-typeset .dsg-immersive-page .dsg-hero__content h1 { font-size: clamp(2.2rem, 4vw, 4.6rem); line-height: 1.05; max-width: 15ch; }
+.md-typeset .dsg-immersive-page .dsg-hero__trust { grid-column: 1 / -1 !important; }
+.md-typeset .dsg-immersive-page .dsg-hero__eyebrow { color: #8be6ef; }
+.md-typeset .dsg-immersive-page .dsg-scene {
+  position: relative; min-width: 0; height: 25rem; margin: 1.2rem 0; overflow: hidden; isolation: isolate;
+  background: radial-gradient(ellipse at 50% 45%, #20465a66, transparent 65%), #08121e;
+  border: 1px solid #8cc3dd33; border-radius: .85rem; color: #eef7ff;
+}
+.dsg-scene [hidden] { display: none !important; }
+.dsg-scene__canvas { position: absolute; width: 100%; height: 100%; inset: 0; touch-action: pan-y; }
+.dsg-scene:not(.is-ready) .dsg-scene__canvas { visibility: hidden; }
+.dsg-scene__heading { position: absolute; left: 1rem; right: 1rem; top: 1rem; pointer-events: none; z-index: 2; }
+.dsg-scene__eyebrow { display: block; color: #acf1f3; font: .6rem/1.5 ui-monospace, monospace; letter-spacing: .12em; }
+.dsg-scene__caption { display: block; margin-top: .3rem; font-size: max(.6rem, 12px); line-height: 1.4; color: #b4c7d8; max-width: 32rem; }
+.dsg-scene__toolbar { position: absolute; left: .75rem; right: .75rem; bottom: 2.2rem; z-index: 2; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .4rem; }
+.dsg-scene__views { display: flex; flex-wrap: wrap; gap: .2rem; }
+.md-typeset .dsg-immersive-page .dsg-scene button { font-size: max(.6rem, 12px); line-height: 1.3; padding: .4rem .6rem; min-height: 44px; background: #112a3de8; color: #d7e9f6; border: 1px solid #8cc3dd44; border-radius: .35rem; cursor: pointer; }
+.md-typeset .dsg-immersive-page .dsg-scene button[aria-pressed="true"] { background: #214b5d; color: #a6fbf6; border-color: #8addd7; }
+.md-typeset .dsg-immersive-page .dsg-scene__status { position: absolute; left: .9rem; right: .9rem; bottom: .45rem; z-index: 2; margin: 0; color: #adbdcd; font-size: max(.6rem, 12px); line-height: 1.4; }
+.dsg-scene__poster { position: absolute; inset: 25% 15%; pointer-events: none; }
+.dsg-scene__poster span { position: absolute; inset: 0; border: 1px solid #9adce766; border-radius: 50%; transform: rotate(-25deg); box-shadow: 0 0 30px #59b7e222; }
+.dsg-scene__poster span:nth-child(2) { inset: 10% -5%; transform: rotate(40deg); }
+.dsg-scene__poster span:nth-child(3) { inset: -10% 20%; transform: rotate(40deg); }
+.dsg-scene.is-ready .dsg-scene__poster { display: none; }
+.dsg-magnetic-reticle { position: fixed; top: 0; left: 0; width: 42px; height: 42px; border: 1px solid var(--dsg-cyan); border-radius: 9px; pointer-events: none; z-index: 30; }
+.dsg-magnetic-reticle[hidden] { display: none; }
+.md-typeset .dsg-immersive-page[data-dsg-page="status/index.md"] > .dsg-scene { float: right; width: 53%; height: 34rem; margin: 0 0 1.5rem 1.3rem; }
+.md-typeset .dsg-immersive-page[data-dsg-page="status/index.md"] .dsg-status-kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.md-typeset .dsg-immersive-page[data-dsg-page="status/index.md"] > h2 { clear: both; }
+.md-typeset .dsg-immersive-page[data-dsg-page="status/index.md"] .dsg-kpi__value { font-size: 1.15rem; overflow-wrap: anywhere; }
+/* Scoped shell improvements apply to all generated pages, including future chapters. */
+body:has(.dsg-immersive-page) .md-sidebar__scrollwrap { scrollbar-width: thin; scrollbar-color: var(--dsg-line-strong) transparent; }
+body:has(.dsg-immersive-page) .md-nav__link { padding: .28rem .35rem; border-left: 2px solid transparent; }
+body:has(.dsg-immersive-page) .md-nav__link--active { border-left-color: var(--dsg-cyan); background: color-mix(in srgb, var(--dsg-cyan) 7%, transparent); }
+@media (min-width: 76.25em) {
+  body:has(.dsg-immersive-page[data-dsg-scene-kind]:not([data-dsg-scene-kind=""])) .md-sidebar--primary { display: none; }
+  body:has(.dsg-immersive-page[data-dsg-scene-kind]:not([data-dsg-scene-kind=""])) .md-content { margin-left: 0; }
+}
+@media (max-width: 960px) {
+  .md-typeset .dsg-immersive-page section:has(> .dsg-scene) { grid-template-columns: 1fr; }
+  .md-typeset .dsg-immersive-page section:has(> .dsg-scene) > .dsg-scene { grid-column: 1; grid-row: auto; order: 2; height: 24rem; min-height: 24rem; }
+  .md-typeset .dsg-immersive-page .dsg-hero__trust { order: 3; }
+  .md-typeset .dsg-immersive-page[data-dsg-page="status/index.md"] > .dsg-scene { float: none; width: 100%; height: 25rem; margin: 1rem 0; }
+}
+@media (max-width: 600px) {
+  .md-typeset .dsg-immersive-page .dsg-scene { height: 23rem; }
+  .md-typeset .dsg-immersive-page section:has(> .dsg-scene) { padding: 1rem; }
+  .md-typeset .dsg-immersive-page .dsg-scene__heading { left: .7rem; right: .7rem; }
+  .md-typeset .dsg-immersive-page section:has(> .dsg-scene) > .dsg-scene { height: 23rem; min-height: 23rem; }
+  .md-typeset .dsg-immersive-page .dsg-hero__content h1 { font-size: 2.3rem; }
+  .md-typeset .dsg-immersive-page .dsg-kpi { padding: .8rem; }
+  .md-typeset .dsg-immersive-page .dsg-kpi__value { font-size: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) { .dsg-magnetic-reticle { display: none; } }
+@media print { .dsg-scene, .dsg-magnetic-reticle { display: none !important; } .dsg-immersive-page { color: black !important; } }

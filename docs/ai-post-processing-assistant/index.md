@@ -3,6 +3,7 @@
 
 <div class="dsg-ai-center">
 <section class="dsg-ai-hero">
+<!-- DSG:IMMERSIVE-SCENE -->
   <div>
     <span>BKL-046 · AI POST-PROCESSING ASSISTANT</span>
     <h1>Advisory PixInsight, verificabile</h1>

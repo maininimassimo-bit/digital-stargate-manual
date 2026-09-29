@@ -18,5 +18,8 @@
 # Scientific session raw evidence must remain byte-identical to the manifest SHA-256.
 data/sessions/**/raw/** -text
 
+# Vendored distribution and license bytes must match the pinned SHA-256 manifest.
+docs/assets/vendor/three-0.180.0/** -text
+
 infrastructure/bkl-031-f3-a3-gcp/container/** text eol=lf
 infrastructure/bkl-031-f3-a3-gcp/.dockerignore text eol=lf

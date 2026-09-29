@@ -3,6 +3,7 @@
 
 <div class="dsg-at-center">
 <section class="dsg-at-hero">
+<!-- DSG:IMMERSIVE-SCENE -->
   <span>BKL-038 · ANOMALY &amp; TREND CENTER</span>
   <h1>Historical analytical projection</h1>
   <p>Vista read-only e descrittiva sulle evidence storiche accettate. I delta temporali non sono automaticamente anomalie e la correlazione non implica causalità.</p>

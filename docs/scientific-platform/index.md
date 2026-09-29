@@ -4,6 +4,7 @@
 <div class="dsg-scientific-center">
 
 <section class="dsg-scientific-hero">
+<!-- DSG:IMMERSIVE-SCENE -->
   <span class="dsg-scientific-hero__eyebrow">DIGITAL STARGATE · SCIENTIFIC PLATFORM</span>
   <h1>Scientific Platform Center</h1>
   <p>

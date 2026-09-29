@@ -4,6 +4,8 @@ Benvenuto nel portale Analytics del progetto **Digital StarGate**.
 
 Questa sezione raccoglie gli strumenti di analisi, i report e le projection governate generate automaticamente dalla pipeline delle sessioni osservative.
 
+<!-- DSG:IMMERSIVE-SCENE -->
+
 ---
 
 ## Accesso rapido

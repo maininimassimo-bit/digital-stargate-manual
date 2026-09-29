@@ -3,6 +3,7 @@
 <div class="dsg-session-explorer" data-session-catalog="../data/scientific-session-catalog.json">
 
 <section class="dsg-session-hero">
+<!-- DSG:IMMERSIVE-SCENE -->
   <span class="dsg-session-kicker">DIGITAL STARGATE · SCIENTIFIC SESSION CATALOG</span>
   <h1>Esplora le sessioni scientifiche</h1>
   <p>
