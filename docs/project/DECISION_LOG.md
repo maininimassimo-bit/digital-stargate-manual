@@ -248,3 +248,7 @@ Implementazione, correzioni di freshness delle precedenti barre, test e rollback
 [DSG-UI-INSTRUMENTS-001](../ui/digital-status-instruments.md).
 Review, CI e pubblicazione saranno tracciate nella PR; nessuna closure BKL-050
 o nuova autorizzazione di attività sugli apparati deriva da questa modifica.
+
+## 29/09/2026 — cielo illustrativo collegato al forecast F9
+
+Su richiesta Owner il badge ◎ di Observation Planner viene sostituito da immagini atmosferiche realistiche. La sintesi riusa la projection verificata e i campioni della notte già mostrati. Le convenzioni di scelta immagine sono esclusivamente visive: non alterano semafori, ranking, contratti dati o autorità. [Implementazione, limiti e rollback](../ui/planner-weather-sky.md). Review e pubblicazione tracciate nella PR; nessuna closure di capability scientifiche o operative.

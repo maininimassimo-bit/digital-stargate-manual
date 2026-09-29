@@ -1,0 +1,22 @@
+.md-typeset .dsg-op-hero .dsg-weather-sky {
+  display: block; margin: .4rem 0 0; min-width: 0; width: 100%; overflow: hidden;
+  border-radius: 1rem; border: 1px solid #8eb8cf66; background: #071322; color: #eef7ff;
+  box-shadow: 0 12px 32px #0004; text-align: left;
+}
+.dsg-weather-sky__view {position: relative; aspect-ratio: 1.35; background: radial-gradient(ellipse at 50% 100%, #233b52, #071322 75%);}
+.md-typeset .dsg-weather-sky img {position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; margin: 0;}
+.md-typeset .dsg-weather-sky img[hidden] {display: none;}
+.dsg-weather-sky__view::after {content: ''; position: absolute; inset: 55% 0 0; background: linear-gradient(transparent, #071322); pointer-events: none;}
+.md-typeset .dsg-weather-sky figcaption {display: grid; gap: .45rem; margin: 0; padding: 1rem; font-style: normal; max-width: none; text-align: left;}
+.md-typeset .dsg-weather-sky strong {font-size: 1.05rem; color: #eef7ff; line-height: 1.3;}
+.md-typeset .dsg-weather-sky small {font-size: .65rem; color: #bfd3e4; line-height: 1.55;}
+.md-typeset .dsg-weather-sky p {font-size: .72rem; margin: 0; color: #dcebf7; line-height: 1.6;}
+.md-typeset .dsg-weather-sky details {margin: 0; border: 0; box-shadow: none; padding: 0; background: transparent; font-size: .65rem;}
+.md-typeset .dsg-weather-sky summary {background: transparent; color: #9aeaf3; padding: .3rem 0; cursor: pointer;}
+.md-typeset .dsg-weather-sky summary::before,.md-typeset .dsg-weather-sky summary::after {display: none;}
+@media(max-width:800px) {.dsg-weather-sky__view {aspect-ratio: 1.6;}}
+
+.md-typeset .dsg-op-hero .dsg-weather-sky figcaption > span {color: #9aeaf3;}
+
+.md-typeset .dsg-immersive-page .dsg-op-hero > div > p {color: #dcebf7;}
+.md-typeset .dsg-immersive-page .dsg-op-hero .dsg-scene__heading > span {color: #a7dce9;}
