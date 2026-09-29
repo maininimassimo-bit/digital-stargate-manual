@@ -4,7 +4,7 @@
 |---|---|
 | Identificativo | DSG-UI-001 |
 | Versione | 2.1 |
-| Stato | Baseline 2.0 Accepted; addendum immersivo implemented candidate |
+| Stato | Baseline 2.0 Accepted; addendum immersivo pubblicato con limiti registrati |
 | Data | 29/09/2026 |
 | Ambito | GitHub Pages, MkDocs, dashboard e hub |
 | Release | UI 7.0 |
@@ -206,7 +206,8 @@ Una modifica significativa richiede aggiornamento coordinato di Design System, s
 
 Il redesign autorizzato il 29/09/2026 aggiunge una shell condivisa all'intero
 portale e scene 3D illustrative a 19 hub. Il design approvato 2.0 resta la baseline
-semantica; l'addendum è un candidato implementato, non una release già accettata.
+semantica; pubblicazione, review AI-assistite e limiti dell'addendum sono registrati
+nelle [note di rilascio](../releases/immersive-portal.md).
 
 - Hero a due colonne: contenuto originale e scena; su mobile flusso verticale.
 - Poster statico, controlli HTML da almeno 44 px, reduced-motion e vista essenziale.

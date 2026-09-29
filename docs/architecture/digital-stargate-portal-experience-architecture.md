@@ -211,4 +211,5 @@ indisponibile mantengono la vista statica. Gli asset versionati sono same-origin
 
 L'addendum non estende l'approvazione ARB-UI-7 alla nuova implementazione.
 [Implementazione e boundary](../ui/immersive-portal-implementation.md) e
-[release candidate](../releases/immersive-portal.md) tracciano il nuovo perimetro.
+[note di rilascio](../releases/immersive-portal.md) tracciano il nuovo perimetro,
+le review AI-assistite e la pubblicazione della PR #429.

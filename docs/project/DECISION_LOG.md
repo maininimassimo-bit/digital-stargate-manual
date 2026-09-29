@@ -221,8 +221,11 @@ shell Material condivisa, scene WebGL illustrative e opzionali, nessuna nuova
 fonte o modifica di authority. La scelta Three.js procede dai prototipi richiesti;
 la versione è vendorizzata e non è una dipendenza di dominio o del runtime EAGLE.
 
-Stato: implementazione candidata; nessuna acceptance o pubblicazione implicita.
+Stato aggiornato: owner ha richiesto di procedere; PR #429 integrata e workflow
+Pages completato sul merge `2ea44f897b22a675cb8fd7bfe00734d86eaf6ddc`.
+Review AI-assistite e limiti espliciti sono registrati nelle note di rilascio;
+nessuna approvazione umana indipendente o prova fisica è implicita.
 BKL-043 e la roadmap canonica non vengono modificati o dichiarati completati da
 questa richiesta visuale. Riferimenti:
 [implementazione](../ui/immersive-portal-implementation.md),
-[release candidate](../releases/immersive-portal.md).
+[note di rilascio](../releases/immersive-portal.md).
