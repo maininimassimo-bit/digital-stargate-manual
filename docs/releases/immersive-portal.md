@@ -84,3 +84,7 @@ telemetria, policy, apparati e dataset non richiedono ripristino perché non mod
 ## Incremento: cielo della notte nel Planner
 
 Il simbolo della hero diventa un’immagine realistica selezionata dalla nuvolosità media e dalla pioggia previste nella finestra del Planner. Didascalia con valori, periodo e limiti illustrativi; fallback per dati indisponibili e immagine assente; nessun ulteriore rendering continuo. [Dettagli tecnici e test](../ui/planner-weather-sky.md). Evidenze esatte di CI e pubblicazione nella PR dedicata.
+
+## Incremento: reperibilità delle pagine e atlante completo
+
+Navigazione di sezione prima del contenuto su tutte le pagine; nuova mappa completa per ambito; menu laterale completato con sei destinazioni mancanti. L'audit di copertura verifica 831 pagine e impedisce che una pagina resti raggiungibile soltanto dal footer. La hero del Planner inquadra interamente il Celestial Atlas con spazio riservato ai controlli, anche su mobile. Dettagli e rollback nella guida di implementazione.

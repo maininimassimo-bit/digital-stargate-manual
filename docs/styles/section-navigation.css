@@ -1,0 +1,17 @@
+.md-typeset .dsg-section-nav {margin: 0 0 1.2rem; padding: .8rem 1rem; border: 1px solid var(--dsg-line-strong,#8eb8cf55); border-radius: .8rem; background: var(--dsg-surface); font-size: .72rem;}
+.dsg-section-nav__heading {display:flex; flex-wrap:wrap; justify-content:space-between; gap:.5rem; margin-bottom:.6rem;}
+.dsg-section-nav__links {display:flex; flex-wrap:wrap; align-items:flex-start; gap:.4rem;}
+.md-typeset .dsg-section-nav__links > a {padding:.4rem .65rem; border:1px solid #8eb8cf55; border-radius:.4rem; line-height:1.45; color:var(--md-typeset-a-color);}
+.md-typeset .dsg-section-nav a[aria-current="page"] {font-weight:750; border-color:currentColor;}
+.md-typeset .dsg-section-nav details {margin:0; padding:.4rem .65rem; box-shadow:none; border:1px solid #8eb8cf55; border-radius:.4rem; max-width:100%; background:transparent; font-size:inherit;}
+.md-typeset .dsg-section-nav details[open] {flex-basis:100%;}
+.md-typeset .dsg-section-nav summary,.md-typeset .dsg-portal-directory summary {padding:.2rem .4rem; margin:0; background:transparent; cursor:pointer; color:var(--md-typeset-a-color);}
+.md-typeset .dsg-section-nav summary::before,.md-typeset .dsg-section-nav summary::after,.md-typeset .dsg-portal-directory summary::before,.md-typeset .dsg-portal-directory summary::after {display:none;}
+.dsg-section-nav details .dsg-section-nav__links {padding-top:.65rem;}
+.md-typeset .dsg-portal-directory details {padding:.55rem; box-shadow:none; border:1px solid #8eb8cf55; border-radius:.4rem; font-size:.78rem; background:transparent;}
+.md-typeset .dsg-portal-directory li {overflow-wrap:anywhere;}
+
+.dsg-docs-drawer > a.dsg-docs-drawer__search {display:flex; align-items:center;}
+
+.md-typeset .dsg-section-nav summary::after,.md-typeset .dsg-portal-directory summary::after {display:inline; content:'＋'; position:static; background:none; mask:none; transform:none; margin-left:.5rem;}
+.md-typeset .dsg-section-nav details[open] > summary::after,.md-typeset .dsg-portal-directory details[open] > summary::after {content:'−';}

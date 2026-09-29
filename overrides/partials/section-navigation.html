@@ -1,0 +1,16 @@
+{% macro entry(item) %}
+  {% if item.is_page or item.is_link %}
+    <a href="{{ item.url | url }}"{% if item == page %} aria-current="page"{% endif %}>{{ item.title }}</a>
+  {% else %}
+    <details><summary>{{ item.title }}</summary><div class="dsg-section-nav__links">{% for child in item.children %}{{ entry(child) }}{% endfor %}</div></details>
+  {% endif %}
+{% endmacro %}
+<nav class="dsg-section-nav" aria-label="Percorsi della sezione">
+  <div class="dsg-section-nav__heading"><strong>{{ page.parent.title if page and page.parent else 'Esplora il portale' }}</strong><a href="{{ 'portal-map/' | url }}">Mappa completa del portale →</a></div>
+  <div class="dsg-section-nav__links">
+    {% set siblings = page.parent.children if page and page.parent else nav.items %}
+    {% for item in siblings[:6] %}{{ entry(item) }}{% endfor %}
+    {% if page and page.parent and page.parent.title == 'Scienza e Analytics' %}<a href="{{ 'scientific-session-catalog/' | url }}">Catalogo sessioni</a><a href="{{ 'session-reports/' | url }}">Report delle sessioni</a>{% endif %}
+    {% if siblings | length > 6 %}<details><summary>Altri percorsi ({{ siblings | length - 6 }})</summary><div class="dsg-section-nav__links">{% for item in siblings[6:] %}{{ entry(item) }}{% endfor %}</div></details>{% endif %}
+  </div>
+</nav>

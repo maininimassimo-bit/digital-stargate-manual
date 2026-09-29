@@ -20,3 +20,6 @@
 
 .md-typeset .dsg-immersive-page .dsg-op-hero > div > p {color: #dcebf7;}
 .md-typeset .dsg-immersive-page .dsg-op-hero .dsg-scene__heading > span {color: #a7dce9;}
+
+/* Keep the atlas independent of the weather card height. */
+.md-typeset .dsg-immersive-page .dsg-op-center .dsg-op-hero > .dsg-scene {align-self: start; height: clamp(28rem, 48vw, 34rem); min-height: 28rem;}

@@ -205,3 +205,19 @@ La preferenza di vista essenziale è condivisa con la hero.
 ## Cielo atmosferico del Planner
 
 La hero integra un [cielo illustrativo basato sul forecast notturno](planner-weather-sky.md), con tre asset locali, dati F9 già verificati, scadenza automatica e fallback neutro.
+
+## Navigazione per sezione e mappa completa
+
+L'audit del 29/09/2026 sul portale aggiornato verifica 831 pagine HTML documentali. Il menu grafico precedente ometteva sei destinazioni di primo livello ora reinserite: Galleria immagini, Dettaglio sessione, Observation Planner, AI Observatory Assistant, AI Post-Processing Assistant e Scientific Intelligence. Report delle sessioni era nel menu laterale, ma poco visibile dal percorso Scienza: ora figura esplicitamente nei collegamenti della sezione insieme al Catalogo sessioni.
+
+`partials/section-navigation.html` inserisce prima del contenuto i collegamenti del gruppo MkDocs corrente: fino a sei voci immediatamente visibili, altre espandibili. Le sottosezioni mantengono la loro gerarchia. Ogni pagina offre inoltre [Mappa completa del portale](../portal-map/index.md), raggiungibile anche dal menu laterale. Funziona senza JavaScript.
+
+La mappa usa il `nav` canonico e `hooks/portal_navigation.py` per includere anche i documenti non presenti in nav, raccolti per ambito (report individuali, architettura, governance, manuali, interfaccia, sviluppo, rilasci). Il catalogo è generato al build da tutte le pagine documentali: nessun inventario manuale da sincronizzare né richiesta runtime. I link precedente/successivo restano disponibili come comodità, non come unico ingresso.
+
+`verify-immersive-navigation.py` controlla ogni pagina generata: presenza nella mappa, destinazioni risolte e navigazione prima del contenuto. `test-immersive-navigation.cjs` verifica i due esempi Owner, gruppi espandibili, mobile e navigazione senza JavaScript. I documenti sono reperibili per appartenenza al gruppo, senza alterarne stato, autorevolezza o contenuto.
+
+## Inquadratura completa del Celestial Atlas
+
+La distanza della camera usa il campo visivo più restrittivo fra verticale e orizzontale, con un volume conservativo di raggio 5 unità per l'atlante. Lo scroll varia la distanza mantenendo un margine di contenimento. Il canvas delle scene atlas/gateway occupa esclusivamente lo spazio fra intestazione e controlli. Il Planner ha un'altezza indipendente dal riquadro meteo, compresa tra 28 e 34 rem, adattiva alla larghezza. Il modello osservatorio e il collegamento al badge cupola non cambiano.
+
+Verificati viewport 390, 768, 1157 e 1440 pixel, preset Orbita/Dall'alto e ridimensionamento; ispezione delle immagini con anello completo. Rimangono i limiti di pixel e l'arresto del rendering a riposo. Rollback: revert della PR di navigazione/inquadratura e rebuild; nessuna modifica ai dati. CI, review e pubblicazione sono registrate nella PR dedicata.
