@@ -229,3 +229,13 @@ BKL-043 e la roadmap canonica non vengono modificati o dichiarati completati da
 questa richiesta visuale. Riferimenti:
 [implementazione](../ui/immersive-portal-implementation.md),
 [note di rilascio](../releases/immersive-portal.md).
+
+## 29/09/2026 — strumenti digitali nei pannelli status
+
+Owner approva l'integrazione della proposta: quadranti 3D per EAGLE/meteo,
+simboli di stato per gli apparati. La presentazione resta read-only e conserva
+le policy governate; valori assenti/scaduti non diventano zero o percentuali.
+Implementazione, correzioni di freshness delle precedenti barre, test e rollback:
+[DSG-UI-INSTRUMENTS-001](../ui/digital-status-instruments.md).
+Review, CI e pubblicazione saranno tracciate nella PR; nessuna closure BKL-050
+o nuova autorizzazione di attività sugli apparati deriva da questa modifica.
