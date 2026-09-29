@@ -1,0 +1,6 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
+import {skyPoints,skyChart} from '../../docs/javascripts/sky-quality-trend.mjs';
+const data=JSON.parse(fs.readFileSync('docs/data/session-comparison-projection.json','utf8'));
+test('SQM values and chronology come unchanged from projection',()=>{const p=skyPoints(data);assert.equal(p.length,data.includedSessions.length);for(const s of p)assert.equal(s.value,data.includedSessions.find(x=>x.sessionId===s.sessionId).value);assert(p.every((s,i)=>!i||s.time>=p[i-1].time));});
+test('future import appears; missing values and incompatible units fail closed',()=>{const d=structuredClone(data);d.includedSessions.push({...d.includedSessions[0],sessionId:'2099-01-01_2099-01-02',value:21});assert(skyChart(d).includes('2099-01-01'));d.includedSessions[0].value=null;assert.throws(()=>skyChart(d));assert.throws(()=>skyChart({...data,unit:'score'}));});
+test('empty and singleton series render without invented continuity',()=>{assert(!skyChart({...data,includedSessions:[]}).includes('<svg'));const s=skyChart({...data,includedSessions:[data.includedSessions[0]]});assert(!s.includes('NaN'));assert.equal((s.match(/data-sky-point/g)||[]).length,1);});
