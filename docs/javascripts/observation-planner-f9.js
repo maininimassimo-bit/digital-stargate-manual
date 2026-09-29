@@ -2,23 +2,34 @@ import {createWeatherSky} from './planner-weather-sky.mjs';
 const root=document.querySelector('[data-observation-planner-f9]');
 if(root){
  const sky=createWeatherSky(document.querySelector('[data-weather-sky]'));
+ let inFlight=false, expiryTimer=0, expiresAt=0, lastProjection='';
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const fmt=(s,tz='Europe/Rome')=>new Date(s).toLocaleString('it-IT',{timeZone:tz,day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
  const fail=m=>{sky.clear();root.innerHTML=`<section class="dsg-op-panel"><h2>Planner corrente non disponibile</h2><p>${esc(m)}</p><p>Fail-closed: nessun dato storico viene presentato come corrente.</p></section>`;};
  const aggregateSuitability=(components,weights)=>{let numerator=0;for(const key of ['framing','filterSignal','imageScaleObjectClass'])numerator+=Math.round(weights[key]*100)*Math.round(Number(components[key])*10);let quotient=Math.floor(numerator/100),remainder=numerator%100;if(remainder>50||(remainder===50&&quotient%2===1))quotient++;return quotient/10;};
+ async function refresh(){
+ if(!root.isConnected||inFlight)return;
+ if(expiresAt && Date.now()>expiresAt)fail('Previsione scaduta: verifica di un nuovo run in corso.');
+ inFlight=true;
+ const selected=[...root.querySelectorAll('select')].map(e=>[e.id,e.value]);
+ const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),15000);
  try{
-  const response=await fetch('../data/observation-planner-f9-current-night.json',{cache:'no-store'});
+  const response=await fetch('../data/observation-planner-f9-current-night.json',{cache:'no-store',signal:controller.signal});
   if(!response.ok)throw new Error(`projection F9 assente (HTTP ${response.status})`);
+  if(!root.isConnected)return;
   const d=await response.json(), b=d.boundaries||{}, f=d.forecast||{};
   if(d.projectionType!=='BKL031_F9_REPEATABLE_CURRENT_NIGHT'||d.authority!=='NONE'||d.consumerMode!=='READ_ONLY')throw new Error('identity/authority boundary non valida');
   if(f.providerId!=='METEOHUB'||f.upstreamAuthorityId!=='ITALIAMETEO_ARPAE'||f.modelId!=='ICON_2I'||f.freshnessState!=='FRESH')throw new Error('lineage forecast non valida');
   const runMs=Date.parse(f.runInitialisationUtc),retrievedMs=Date.parse(f.retrievedAtUtc),generatedMs=Date.parse(d.generatedAtUtc),runAge=(Date.now()-runMs)/3600000;
   if(!Number.isFinite(runMs)||!Number.isFinite(retrievedMs)||!Number.isFinite(generatedMs)||runAge<0||runAge>18||retrievedMs<runMs||retrievedMs-runMs>18*3600000||generatedMs!==retrievedMs)throw new Error('forecast non corrente o timestamp non valido');
+  const nightEndMs=Date.parse(d.nightWindow?.toUtcExclusive);
+  if(!Number.isFinite(nightEndMs)||nightEndMs<=Date.now())throw new Error('finestra notturna terminata o non valida');
   if(b.recurringTraffic!==true||b.monetaryBudgetEur!==0||b.rawGribRetention!=='NONE_EPHEMERAL_ONLY'||b.readinessAuthority!==false||b.automaticTargetSelection!==false||b.schedulingAuthority!==false||b.actionAuthority!=='NONE'||b.commandAuthority!=='NONE'||b.safetyAuthority!=='LOCAL_PHYSICAL_INTERLOCKS'||b.protectedCoordinatesPublished!==false)throw new Error('boundary F9 non valida');
   if(d.method?.id!=='BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.2'||d.method?.minimumTargetAltitudeDeg!==20||d.method?.ephemerisMode!=='EXPLICIT_MOSEPH_NO_FALLBACK'||d.attribution?.license!=='CC BY 4.0'||d.site?.coordinateDisclosure!=='PROHIBITED')throw new Error('metodo, quota minima, attribuzione o pubblicazione sito non validi');
   const weatherPolicy=d.weatherPolicy,limits=weatherPolicy?.limits;
   const weatherPolicyValid=weatherPolicy?.id==='DSG-F9-PLANNER-WEATHER-GATE@1.1'&&weatherPolicy?.authority==='ADVISORY_PLANNING_ONLY'&&weatherPolicy?.cloudLimitRationale==='OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT'&&limits?.cloudCoverPct===20&&limits?.relativeHumidityPct===90&&limits?.precipitationMm===0&&limits?.windSpeedKmh===15&&limits?.windGustKmh===20&&limits?.dewPointMarginC===3;
-  const raw=JSON.stringify(d).toLowerCase();for(const key of ['latitudedeg','longitudedeg','elevationm','gridlatitude','gridlongitude'])if(raw.includes(key))throw new Error('projection contiene coordinate protette');
+  const payload=JSON.stringify(d),raw=payload.toLowerCase();for(const key of ['latitudedeg','longitudedeg','elevationm','gridlatitude','gridlongitude'])if(raw.includes(key))throw new Error('projection contiene coordinate protette');
+  if(payload===lastProjection&&root.querySelector('#dsg-f9-results'))return;
   const options=d.setupProfiles.map(s=>`<option value="${esc(s.setupId)}">${esc(s.setupName)}</option>`).join('');
   const first=d.hourly[0], solar=d.hourly.map(x=>x.solarAltitudeDeg), moon=d.hourly.map(x=>x.moonAltitudeDeg), siteTz=d.site?.timezoneIana||'Europe/Rome';
   const nearest=d.hourly.reduce((best,row)=>Math.abs(Date.parse(row.validAtUtc)-Date.now())<Math.abs(Date.parse(best.validAtUtc)-Date.now())?row:best,d.hourly[0]);
@@ -44,7 +55,19 @@ if(root){
   if(fullNight){const summary=fullNight.querySelectorAll('.dsg-op-facts article strong');if(summary[0])summary[0].textContent=`${range(cloudValues)}%`;if(summary[1])summary[1].textContent=`${range(humidityValues)}%`;}
   const select=root.querySelector('#dsg-f9-setup'),statusSelect=root.querySelector('#dsg-f9-status'),categorySelect=root.querySelector('#dsg-f9-category'),out=root.querySelector('#dsg-f9-results');
   const render=()=>{if(!weatherPolicyValid){out.innerHTML='<p>Graduatoria e finestre sospese: è in attesa della prossima projection F9 con policy meteo e temperatura/dewpoint. Le ore restano NO-GO/indeterminate.</p>';return;}const ranking=d.rankings.find(x=>x.setupId===select.value);if(!ranking)return fail('setup non governato');const filtered=ranking.targets.filter(t=>{const p=profiles.get(t.targetKey)||{};return (statusSelect.value==='ALL'||t.acquisitionState===statusSelect.value)&&(categorySelect.value==='ALL'||p.objectType===categorySelect.value)});out.innerHTML=filtered.length?filtered.map((t,i)=>{const p=profiles.get(t.targetKey)||{},c=cases.get(`${select.value}|${t.targetKey}`),comp=c?Object.entries(c.components).map(([key,value])=>`${esc(key)} ${Number(value).toFixed(1)}/100`).join(' · '):'non disponibile';const reasons=c?.reasonCodes?.map(esc).join(' · ')||'nessuna';const peak=Math.max(...d.hourly.map(x=>x.targets[t.targetKey]?.altitudeDeg??-90));const state=t.acquisitionState==='NOT_YET_ACQUIRED'?'NUOVO TARGET':'GIÀ PRESENTE NELLO STORICO';return `<article class="dsg-op-card"><h3>${i+1}. ${esc(t.targetName)} <span class="dsg-op-card__meta">${state} · ${esc(categoryLabel(p.objectType))}</span></h3><p>Suitability target/setup: <strong>${Number(t.setupSuitabilityScore).toFixed(1)}/100</strong> <span class="dsg-op-card__meta">(framing · filtro/segnale · scala/classe)</span></p><p><strong>Componenti (pesi framing 45%, filtro/segnale 30%, scala/classe 25%):</strong> ${comp}</p><p><strong>Motivazioni:</strong> ${reasons}</p><p><strong>Ranking spiegabile:</strong> 60% astronomia + 30% meteo + 10% suitability · ${Number(t.eligibleTwoHourWindowCount)} intervalli candidati da 2h · quota massima ${peak.toFixed(1)}° · soglia minima finestra 20°</p>${t.bestWindows.length?t.bestWindows.map(w=>`<p>${fmt(w.fromUtc,siteTz)}–${fmt(w.toUtcExclusive,siteTz)} · score advisory ${Number(w.advisoryScore).toFixed(1)} · quota media ${Number(w.meanAltitudeDeg).toFixed(1)}° · nuvolosità media ${Number(w.meanCloudCoverPct).toFixed(1)}% · penalità lunare ${Number(w.lunarPenaltyPct).toFixed(1)}% (Luna media ${Number(w.meanMoonAltitudeDeg).toFixed(1)}°, illuminazione ${(Number(w.meanMoonIlluminatedFraction)*100).toFixed(1)}%, separazione ${Number(w.meanMoonSeparationDeg).toFixed(1)}°)</p>`).join(''):'<p>Nessuna finestra supera i filtri meteo e astronomici nella projection corrente.</p>'}</article>`}).join(''):'<p>Nessun target corrisponde ai filtri selezionati.</p>';};
+  for(const [id,value] of selected){const control=root.querySelector(`#${id}`);if(control&&[...control.options].some(o=>o.value===value))control.value=value;}
   [select,statusSelect,categorySelect].forEach(control=>control.addEventListener('change',render));render();
   sky.show(d);
- }catch(error){fail(error.message||'errore sconosciuto')}
+  clearTimeout(expiryTimer);expiresAt=Math.min(runMs+18*3600000,Date.parse(d.nightWindow.toUtcExclusive));
+  expiryTimer=setTimeout(()=>{fail('Previsione scaduta: attesa di un nuovo run verificato.');refresh();},Math.max(1,expiresAt-Date.now()+1));
+  const freshness=document.createElement('p');freshness.className='dsg-op-refresh-status';
+  freshness.textContent=`Run ${fmt(f.runInitialisationUtc,siteTz)} · valido fino al ${fmt(new Date(expiresAt).toISOString(),siteTz)}. Verifica aggiornamenti ogni 5 minuti mentre la pagina è visibile.`;
+  root.prepend(freshness);lastProjection=payload;
+ }catch(error){fail(error.message||'errore sconosciuto')}finally{clearTimeout(timeout);inFlight=false;}
+ }
+ refresh();
+ const interval=setInterval(()=>{if(!document.hidden)refresh();},300000);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh();});
+ window.addEventListener('pageshow',event=>{if(event.persisted)refresh();});
+ window.addEventListener('pagehide',event=>{if(!event.persisted){clearInterval(interval);clearTimeout(expiryTimer);}});
 }

@@ -16,10 +16,14 @@ La Via Lattea, le stelle, le colline e l'intensità della pioggia sono illustrat
 
 Tre asset locali in `docs/assets/images/planner-sky/`: `clear.webp` (128766 byte), `cloudy.webp` (36264 byte), `rain.webp` (44358 byte), 768×768 pixel. Generati con lo strumento imagegen integrato, poi ridimensionati e compressi per il web. Viene scaricata solo l'immagine selezionata. Nessun canvas aggiuntivo, loop di animazione, CDN o servizio AI al caricamento della pagina. Layout riservato per evitare salti; decodifica asincrona; testo disponibile anche se l'immagine fallisce.
 
-Un timer invalida il riquadro al termine della notte o alla scadenza del run; il controllo viene ripetuto al ritorno alla scheda. Non viene mantenuta una rappresentazione meteo ormai scaduta. Il riquadro non rinnova autonomamente il forecast: il caricamento segue il consumer esistente.
+Un timer invalida il riquadro al termine della notte o alla scadenza del run; il controllo viene ripetuto al ritorno alla scheda. Non viene mantenuta una rappresentazione meteo ormai scaduta. Il consumer F9 verifica la projection pubblicata ogni cinque minuti mentre la pagina è visibile e al ritorno alla scheda. Il riquadro viene aggiornato con la stessa projection verificata. Alla scadenza vengono rimossi anche ranking e pannelli correnti, senza prolungare artificialmente la freschezza.
 
 ## Verifica e manutenzione
 
 `.github/scripts/test-immersive-planner-sky.cjs` verifica tre condizioni, soglia visiva, priorità pioggia, media e unità, singolo fetch, mobile, campioni mancanti/duplicati/invalidi, fonte indisponibile o stale, immagine assente e scadenza mentre la pagina resta aperta. La suite fa parte di Immersive portal validation; i provider esterni sono bloccati e le fixture non vengono pubblicate.
 
 Per il rollback ripristinare il markup precedente e rimuovere l'import e le chiamate `sky` dal consumer F9. Nessuna migrazione dei dati è necessaria. Le evidenze di CI, revisione e pubblicazione sono registrate nella PR di rilascio.
+
+## Continuità serale
+
+La fonte viene controllata ogni ora al minuto 23 UTC. Stesso modello valido e stessa notte: nessun nuovo download GRIB e nessun timestamp rinnovato. Modello nuovo o notte nuova: normale acquisizione e pubblicazione. Nel Planner sono esposti orario del run e scadenza locale. I filtri selezionati vengono conservati negli aggiornamenti riusciti. Il polling visibile a cinque minuti e il ritorno alla scheda recuperano una nuova pubblicazione senza ricaricamento manuale. La scadenza a 18 ore dal run resta invariata; ritardi del provider o dello scheduler possono ancora produrre indisponibilità esplicita.

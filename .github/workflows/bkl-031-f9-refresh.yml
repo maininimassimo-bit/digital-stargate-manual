@@ -1,8 +1,9 @@
 name: BKL-031 F9 MeteoHub Refresh
 on:
   schedule:
-    # Four daily refresh windows, six hours apart. GitHub cron uses UTC.
-    - cron: '15 0,6,12,18 * * *'
+    # Hourly discovery avoids the former 18:00 UTC expiry / 18:15 refresh gap.
+    # Unchanged valid run/night skips GRIB downloads; GitHub cron is best effort.
+    - cron: '23 * * * *'
   workflow_dispatch:
     inputs:
       confirmation:
@@ -47,7 +48,7 @@ jobs:
         run: python .github/scripts/test-publish-observation-planner-f9.py
       - run: python -m pip install --disable-pip-version-check -r .github/scripts/requirements-observation-planner-f9.txt
       - name: Acquire, reduce and discard GRIB inputs
-        run: python .github/scripts/observation_planner_f9.py
+        run: python .github/scripts/observation_planner_f9.py --skip-unchanged
       - name: Verify sanitised projection
         run: python .github/scripts/observation_planner_f9.py --validate docs/data/observation-planner-f9-current-night.json
       - name: Commit only the sanitised projection
