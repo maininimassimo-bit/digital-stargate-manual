@@ -157,3 +157,34 @@ Full F4 and BKL-049 remain OPEN. BKL-043, its monitor, EAGLE and existing privat
 The Owner explicitly authorized only the empty private bucket and its verification. Following PR #454 review and 7/7 exact-head checks, creation succeeded: EUROPE-WEST1, STANDARD, uniform access enabled, public-access prevention enforced, seven-day soft deletion, no public IAM members and zero objects. Only expected default project owner/editor/viewer convenience principals were present; no IAM write was issued. Private raw configuration/authorization and verification receipts remain outside Git. No upload, image operation, budget or notification was activated. PR #454 merge `454129a8847dc31f13f9c559aad8326a0480f642` passed all 7 post-merge workflows, Pages run 36776309091 and live HTTP 200/content verification. [Execution and acceptance evidence](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/454#issuecomment-5919671441).
 
 The Owner selected only the existing Google Cloud account email as the future budget alert recipient. This is a recipient choice, not activation evidence; the private address is not published. Monitoring remains inactive pending its concrete reviewed configuration. No default billing-role distribution list is authorized.
+
+
+## Exact alerts-only activation plan
+
+**PREPARED / NOT ACTIVATED.** The Owner selected the existing Google Cloud account email as the sole recipient; the address stays private. Read-only preflight confirms `billingbudgets.googleapis.com` and `monitoring.googleapis.com` are already enabled. No matching dedicated budget exists at read time. An existing general project budget is visible and remains untouched: it is not silently relabelled as a preview-specific monitor. Console access is available through the existing Owner session. The local beta CLI command group is unavailable; no SDK component was installed or elevated. Use the supported console for the email channel, then the existing stable budget CLI. No token extraction, new credentials or service activation is required by this plan.
+
+The next authorization request covers exactly three configuration writes and their verification:
+
+1. Add only `dsg_scope=bkl049_previews` to the already created dedicated preview bucket, preserving all other metadata, labels, access and retention. Pin the current metageneration and use `--if-metageneration-match` to reject concurrent changes. No project-wide label or existing-resource modification.
+2. Create one Cloud Monitoring **email** notification channel named `BKL049 preview budget owner` in the pinned project, addressed only to the existing account email selected by the Owner. Before saving, confirm the exact recipient privately. Inspect for a matching channel first; ambiguity or an existing mismatched record stops the operation. No group recipients, verification bypass or unrelated channel changes. If Google requires recipient verification, hand that step to the Owner.
+3. Create one monthly **alerts-only** budget named `BKL049 public previews EUR5`, amount `5EUR`, scoped to the pinned project and the single bucket label. Exclude credits so promotional credits do not hide usage. Actual-spend thresholds: 50%, 80%, 100% (EUR 2.50 / 4 / 5). Link only the new verified email channel and disable all default IAM recipients. No spend cap, billing shutdown, Pub/Sub, scheduled function, project-owner distribution list or existing budget modification.
+
+Command shapes use private resolved inputs; they are not an instruction to run placeholders:
+
+```text
+gcloud storage buckets update gs://CANDIDATE --update-labels=dsg_scope=bkl049_previews --if-metageneration-match=EXPECTED_METAGENERATION --project=PROJECT --account=EXISTING_INTERACTIVE_ACCOUNT --quiet --format=json
+
+gcloud billing budgets create --billing-account=LINKED_ACCOUNT --display-name="BKL049 public previews EUR5" --budget-amount=5EUR --calendar-period=month --filter-projects=projects/PROJECT --filter-labels=dsg_scope=bkl049_previews --credit-types-treatment=exclude-all-credits --threshold-rule=percent=0.5 --threshold-rule=percent=0.8 --threshold-rule=percent=1.0 --disable-default-iam-recipients --notifications-rule-monitoring-notification-channels=EXACT_OWNER_EMAIL_CHANNEL --project=PROJECT --account=EXISTING_INTERACTIVE_ACCOUNT --quiet --format=json
+```
+
+[Bucket metadata update/precondition](https://docs.cloud.google.com/sdk/gcloud/reference/storage/buckets/update), [budget flags](https://docs.cloud.google.com/sdk/gcloud/reference/billing/budgets/create), [custom email recipients](https://docs.cloud.google.com/billing/docs/how-to/budgets-notification-recipients), consulted 2026-09-30.
+
+### Verification and limitations
+
+Privately retain before/after configuration and exact resource IDs. Verify the bucket still has enforced public-access prevention, uniform access and zero objects. Read back the channel recipient/type/enabled state and the budget's currency, amount, period, project, label, credit treatment, thresholds, default-recipient suppression and sole channel reference. On unknown creation outcome, inspect the exact matching resource before any retry; never create duplicates to work around uncertainty. No IAM escalation follows a denial. Preserve any completed bounded resource and report partial state on failure; rollback/removal is deliberate and limited to the newly created configuration, never the general project budget.
+
+A label-filtered budget counts only charges attributed to that label. Configuration acceptance is **not proof of complete billing attribution or received email**. Google notes that labels with no usage may not yet appear in console filters and notification delivery can take hours; no usage means no threshold email. Do not generate artificial paid traffic to trigger an alert. Before calling the pilot's operational cost gate accepted, reconcile available billed preview usage with the selected filter and record notification-delivery evidence or an explicit unresolved limitation. Unlabelled/late charges, taxes and other invoice items must not be claimed covered by this filter. [Budget scope and label limits](https://docs.cloud.google.com/billing/docs/how-to/budgets).
+
+The console also identifies the existing account as a time-limited trial. Trial credits are not a sustainable-hosting guarantee. Keep detailed account balances/expiry private; establish an Owner-controlled account-continuity decision before promising long-term availability. No account upgrade, new agreement or payment-method change is authorized or performed by this plan.
+
+This operation enables cost emails only. It does not authorize image modification, upload, public exposure, scientific metadata acceptance or a gallery release. Its remaining approval is specific to the three writes above; provider selection, recipient preference and empty-bucket authorization alone were not recorded as activation.
