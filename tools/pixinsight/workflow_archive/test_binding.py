@@ -59,6 +59,11 @@ class BindingTests(unittest.TestCase):
         self.assertEqual(result['sidecar']['capture']['observedStepCount'], 0)
         self.assertEqual(result['sidecar']['workflow']['inputs'], [])
         self.assertEqual(result['sidecar']['workflow']['outputs'][0]['assetId'], 'img:synthetic-original')
+        limitations = ' '.join(result['sidecar']['capture']['limitations'])
+        self.assertIn('mandatory original output is verified against the selected snapshot', limitations)
+        self.assertIn('step-level outputs and masks remain unresolved', limitations)
+        self.assertNotIn('No authoritative image/version binding', limitations)
+        self.assertNotIn('Inputs, outputs and mask associations are unresolved.', limitations)
 
     def test_retry_identical_and_changed_declaration_conflict(self):
         parts = fixture(); receipt = invoke(parts)['receipt']; raw = encode(receipt)

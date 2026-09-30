@@ -25,6 +25,8 @@ assert.equal(result.outputs.matched, 1);
 assert.deepEqual(result.outputs.missing, []);
 assert.deepEqual(manifest.processingRun.processes, []);
 assert.equal(manifest.processingRun.parameters.captureCompleteness, 'PARTIAL');
+assert.ok(manifest.processingRun.parameters.limitations.some(text => text.includes('mandatory original output is verified against the selected snapshot')));
+assert.ok(!manifest.processingRun.parameters.limitations.some(text => text.startsWith('No authoritative image/version binding')));
 assert.equal(receipt.evidenceClass, 'DECLARED');
 assert.equal(receipt.publicationState, 'PRIVATE_NOT_APPROVED');
 // A bare reconciliation can match a wrong object; it must never bypass this guard.

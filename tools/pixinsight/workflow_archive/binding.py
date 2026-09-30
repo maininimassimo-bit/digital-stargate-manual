@@ -175,6 +175,15 @@ def build_binding(packet_bytes, packet_digest, declaration, *, exported_at,
     sidecar = deepcopy(sidecar)
     sidecar['workflow']['outputs'] = [{'reference': main['objectRef'], 'resolutionState': 'RESOLVED',
                                       'assetId': main['imageId']}]
+    limitation_updates = {
+        'Inputs, outputs and mask associations are unresolved. Ordered mask commands remain in the private source packet.':
+            'The mandatory original output is verified against the selected snapshot. Upstream inputs, step-level outputs and masks remain unresolved; ordered mask commands remain in the private source packet.',
+        'No authoritative image/version binding, public classification or gallery acceptance is established.':
+            'Original/preview identity is verified against the selected governed snapshot with an Owner-declared workflow association. Current eligibility must be rechecked; public classification and gallery acceptance are not established.',
+    }
+    require(set(limitation_updates).issubset(sidecar['capture']['limitations']), 'BINDING_F3_PROFILE_DRIFT')
+    sidecar['capture']['limitations'] = [limitation_updates.get(item, item)
+                                         for item in sidecar['capture']['limitations']]
     validate_emitted_profile(sidecar)
     receipt = {
         'kind': 'BKL049_PRIVATE_BINDING_V1', 'bindingId': association['bindingId'],

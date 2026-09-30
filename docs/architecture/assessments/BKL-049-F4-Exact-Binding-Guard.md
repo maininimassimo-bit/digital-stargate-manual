@@ -53,3 +53,5 @@ Sixteen synthetic Python tests cover exact identity, deterministic retry, change
 Rollback removes the additive guard and tests via a reviewed revert, retaining all existing private evidence. No runtime, catalog or image migration exists. Delivery reviews, exact-head CI and merge-SHA/Pages verification are recorded in the PR; they do not close the remaining F4 operational gates.
 
 ARB M01 remediation: malformed catalog/archive/metadata enum values now return fixed ArchiveError diagnostics, including list/dict/null/boolean/integer cases. No acceptance bypass existed; the fix prevents an undocumented caller exception.
+
+RQ M02 remediation: the bound sidecar updates only the two F3 limitations superseded by the exact original/preview association. It now distinguishes that selected-snapshot result from unresolved upstream/step-level/mask relations and unapproved publication. Python and Node assertions prevent contradictory inherited text; the F3 source sidecar is unchanged.
