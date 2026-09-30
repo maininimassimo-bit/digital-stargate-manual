@@ -18,8 +18,8 @@ $script:ExpectedHost = 'EAGLE30154'
 $script:ExpectedTimezone = 'W. Europe Standard Time'
 $script:ApprovedAccount = 'maininimassimo@gmail.com'
 $script:InvokerServiceAccount = 'dsg-bkl043-f4-eagle-invoker@digital-stargate-telemetry.iam.gserviceaccount.com'
-$script:ApprovedStart = [DateTimeOffset]::Parse('2026-09-29T22:00:00+02:00')
-$script:ApprovedEnd = [DateTimeOffset]::Parse('2026-09-30T02:00:00+02:00')
+$script:ApprovedStart = [DateTimeOffset]::Parse('2026-09-30T02:56:23+02:00')
+$script:ApprovedEnd = [DateTimeOffset]::Parse('2026-09-30T04:56:23+02:00')
 $script:ReceiverUrl = $ReceiverUrl.TrimEnd('/')
 $script:ReceiverEndpoint = $script:ReceiverUrl + '/v1/receipts'
 $script:RetryState = @{}
@@ -104,8 +104,9 @@ function Get-TaskSignals([TimeZoneInfo]$TimeZone) {
         if ($info.LastRunTime -and $info.LastRunTime -ne [datetime]::MinValue) {
             $lastRunUtc = Convert-LocalTimeToUtc $info.LastRunTime $TimeZone
         }
-        $result = [int]$info.LastTaskResult
-        $resultHex = '0x{0:X8}' -f [uint32]$result
+        # Task Scheduler codes may use the high bit; preserve the reported number.
+        $result = [long]$info.LastTaskResult
+        $resultHex = '0x{0:X8}' -f ($result -band 4294967295L)
         $interpretation = if ($result -eq 0) { 'SUCCESS' } else { 'NONZERO_REVIEW' }
         $items += [pscustomobject][ordered]@{
             name = $name
@@ -133,10 +134,12 @@ function Normalize-ReceiptTaskArray([object]$Receipt) {
     return $false
 }
 
-function Get-ProjectionHeartbeat([datetime]$NowUtc, [bool]$ClockValid) {
+function Get-ProjectionHeartbeat([Nullable[datetime]]$NowUtc, [bool]$ClockValid) {
     try {
         $item = Get-Item -LiteralPath $script:ProjectionPath -ErrorAction Stop
         $writeUtc = $item.LastWriteTimeUtc
+        # Measure age at metadata observation, not before potentially slow task queries.
+        if ($null -eq $NowUtc) { $NowUtc = [datetime]::UtcNow }
         if (-not $ClockValid) { return [pscustomobject]@{ exists = $true; last_write_utc = $writeUtc.ToString('yyyy-MM-ddTHH:mm:ssZ'); age_seconds = $null; freshness = 'UNKNOWN' } }
         $age = [math]::Round(($NowUtc - $writeUtc).TotalSeconds, 1)
         if ($age -lt 0) {
@@ -177,7 +180,7 @@ function New-Receipt([long]$SequenceId, [object]$Clock) {
         uptime_seconds = $uptime
         disks = $disks
         tasks = $tasks
-        nina_plugin_projection = (Get-ProjectionHeartbeat $nowUtc $Clock.Valid)
+        nina_plugin_projection = (Get-ProjectionHeartbeat -ClockValid $Clock.Valid)
     }
     return [ordered]@{
         schema_version = 1
