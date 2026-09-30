@@ -364,3 +364,8 @@ Two-sided RC parameter inventory found 34 export-only and 20 project-only occurr
 ### 2026-09-30 — BKL-049 RC schema-change versus migration matrix
 
 Consolidated the accumulating evidence report and distinguished 11 officially documented changed/removed project-only RC parameter occurrences from nine without established mapping. These explanations do not resolve 34 export-only assignments or establish reversible migration. Owner reported current BlurXTerminator, NoiseXTerminator and StarXTerminator 2.6.9 (DECLARED). No historical model/runtime identity inferred. See the [current report](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN and native implementation not authorized.
+
+
+### 2026-09-30 — BKL-049 current RC update chronology separated from historical models
+
+Owner confirmed the three RC tools were updated today. Retained-project presence-only inspection found nonempty model-file references in six RC instance elements across MAIN/STARS, without following paths or identifying model binaries. Current 2.6.9 declarations cannot certify May runtime/model versions. See the [chronology and model-reference boundary](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN; no installation, processing or image change by the assistant.
