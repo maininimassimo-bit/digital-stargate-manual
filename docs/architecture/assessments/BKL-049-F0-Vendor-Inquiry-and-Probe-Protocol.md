@@ -4,6 +4,8 @@ Date: 2026-09-30. Status: PREPARED / NOT SENT / NOT EXECUTED. F0 remains open.
 
 This concretizes the questions and proof scenarios in the [evidence addendum](BKL-049-F0-Evidence-Addendum.md). It does not authorize vendor contact, installation, runtime processing or F1. The Owner's instruction to proceed continues the already authorized research scope.
 
+**Superseding Owner direction:** vendor contact is deferred. The inquiry below is retained as an unsent historical draft, not an active request or prerequisite for all research. Owner-assisted export evidence and the authorized sanitized public report are recorded in the [history evidence report](BKL-049-F0-Owner-Assisted-History-Evidence.md). No contact is authorized by publication.
+
 ## 1. Reviewable vendor inquiry
 
 Proposed recipient: `info@pixinsight.com`, explicitly identified for written permission in the official PCL License 2.0.1. The Owner may send the text below or explicitly authorize a sending channel. No account or sending channel is assumed. The inquiry contains public project context and the already confirmed product/platform baseline, without private machine identities or scientific data.

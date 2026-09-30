@@ -111,3 +111,7 @@ Research implications: each RC Astro test must identify product, module version 
 ### Post-upgrade evidence boundary
 
 Owner confirmation of the unified repository and successful upgrade is DECLARED evidence. PCL 2.11.0 source labels align with core 1706, and the documented minimum version for extended image notifications is met. This removes the earlier version-threshold obstacle, not the cross-module identity limitation. Historical 1695 analyses above remain comparisons; current SDK/load/signing tests and project/history/RC Astro capture coverage remain unproven. No further installation or processing authorization is inferred. The unsent vendor inquiry has been updated to target 1706.
+
+## 7. Subsequent Owner-assisted evidence and publication authorization
+
+The [sanitized history evidence report](BKL-049-F0-Owner-Assisted-History-Evidence.md) supersedes earlier statements that no project/history samples were available. It records partial positive evidence and the single-image export limitation. Vendor contact is deferred; the inquiry is not a blocking prerequisite for documentary/artifact research. The Owner subsequently authorized public documentation; original scientific exports remain private. F0 and all unresolved proof gates remain open.

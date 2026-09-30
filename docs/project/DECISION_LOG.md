@@ -284,3 +284,8 @@ During the Owner-authorized absence, official PCL/PJSR revisions were inventorie
 ### 2026-09-30 — BKL-049 Owner-confirmed PixInsight upgrade
 
 Owner confirmed the unified RC Astro repository, upgrade to PixInsight 1.9.5 build 1706 and working BlurXTerminator, NoiseXTerminator and StarXTerminator. Recorded as DECLARED evidence, superseding the installed 1695 baseline while retaining historical OAT. No native capture, scientific processing or independent validation is implied. Updated dossier and unsent vendor inquiry; F0 remains open and BKL-043 scope unchanged.
+
+
+### 2026-09-30 — BKL-049 sanitized Owner-assisted history findings
+
+Owner deferred PixInsight vendor contact, then authorized publication of documentation needed for the repository. Published a [sanitized evidence report](../architecture/assessments/BKL-049-F0-Owner-Assisted-History-Evidence.md) without raw exports or private asset names. Project history supplies RC Astro, nested-process, mask and recombination evidence; single-image final export showed a bounded omission. Overall PARTIAL, F0 OPEN; no F1 architecture, SDK implementation or catalog authority change. BKL-043 remains outside this work.

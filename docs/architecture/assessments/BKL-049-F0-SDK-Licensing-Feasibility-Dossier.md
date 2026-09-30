@@ -12,6 +12,8 @@
 
 ## 1. Recommendation and current state
 
+**Latest evidence:** the [Owner-assisted history report](BKL-049-F0-Owner-Assisted-History-Evidence.md) documents a rich project export, RC Astro instances, mask history and explicit recombination references. These make the artifact route concrete but do not establish complete coverage. Vendor contact is deferred at Owner request; sanitized public documentation is authorized. F0 remains OPEN.
+
 **Owner-confirmed product objective (2026-09-30): archive the entire PixInsight workflow and associate it with the corresponding images in the [Scientific Image Gallery](https://maininimassimo-bit.github.io/digital-stargate-manual/scientific-image-gallery/).** The gallery image must be an entry point to its archived workflow: ordered steps, available execution parameters, inputs/outputs, masks, run/project continuity, evidence sources and explicit gaps. Association must use governed scientific asset identity and exact AP14-W06 reconciliation, not filenames or visual similarity. Multiple outputs or processing versions must retain their own run/asset relationships rather than silently overwrite lineage.
 
 This is the acceptance objective, not a claim of current capability. A bounded support matrix is an evidence instrument, not permission to redefine “entire workflow” as only the convenient subset. Any material reduction requires an explicit Owner decision. Unsupported activity remains PARTIAL/UNAVAILABLE and prevents a complete-workflow claim; manual DECLARED entries do not silently satisfy automatic OBSERVED capture. A standalone event log or archive disconnected from gallery images does not meet the objective.
