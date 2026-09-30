@@ -169,6 +169,24 @@ Non consentito nel primo rilascio: aprire/chiudere cupola, muovere montatura, co
 
 SLI/SLO e metriche: availability della telemetria, session completion rate, fault frequency, MTBF, MTTR, recovery time, notti perse per meteo vs guasti tecnici, failure budget e trend di affidabilità.
 
+### BKL-043 F5 — Integrazione e collaudo dell’affidabilità nel portale
+
+**Planned — inserimento in roadmap richiesto dall’Owner il 30/09/2026.** Dipendenze: accettazione completa F4, BKL-030 e BKL-036-F5. Preparazione documentale consentita durante F4; attivazione e collaudo operativo F5 successivi alla sua accettazione. F4 resta OPEN fino alle prove mancanti e all’accettazione finale. BKL-050 rimane la milestone conclusiva, successiva anche a F5. Nessuna data di rilascio fissata.
+
+Obiettivo: utilizzare le evidenze validate in F4 per affiancare a EAGLE Health una vista read-only dell’affidabilità, con segnali semplici, verificabili e aggiornati.
+
+| Passaggio | Consegna e criterio di accettazione |
+|---|---|
+| F4: qualificare la raccolta | Completare le prove mancanti di raccolta, conservazione durante interruzioni, recupero, deduplicazione e stop; distinguere test sintetici, filesystem isolato e prove operative reali. Nessuna esclusione implicita. |
+| F5: definire la proiezione pubblicabile | Approvare campi minimi, provenienza, identità della sorgente, tempi di osservazione/ricezione/aggiornamento, regole di freshness, accesso, frequenza di aggiornamento e costi. Ricevute complete, raw log, credenziali e dettagli privati restano esclusi dalla pubblicazione. |
+| F5: integrare il portale | Mostrare stato dei task monitorati, heartbeat, ultimo aggiornamento, continuità delle consegne e intervalli non verificabili. Dati mancanti, scaduti o clock incerto producono stato sconosciuto; assenza di ricevute non equivale a EAGLE guasto o spento. Separare salute osservata del componente e salute della raccolta. |
+| F5: collaudare il percorso completo | Verificare dalla proiezione autorizzata alla vista pubblicata casi aggiornato, scaduto, mancante, parziale, clock incerto, gap, duplicato e consegna tardiva. Conservare evidenze private, verificare minimizzazione, leggibilità e corrispondenza dei valori mostrati; acquisire review e accettazione Owner prima del rilascio. |
+| F5: rendere riutilizzabili i test | Eseguire in CI i test sintetici e isolati a ogni modifica pertinente. Mappare modifiche a collector, trasporto, receiver o proiezione alle prove operative da ripetere in finestre autorizzate. I test automatici non sostituiscono le prove reali richieste. |
+
+Il rilevatore gap e la fonte autorevole dell’operatività sono ancora da progettare e validare nel lavoro F4; F5 ne consuma soltanto esiti qualificati, senza dedurre continuità da due campioni ai bordi. Percentuali di disponibilità, SLI/SLO, MTBF e MTTR restano subordinati a storico sufficiente, popolazione/denominatore definiti, qualità temporale e classificazione governata degli incidenti; nessun valore viene inventato per completare la dashboard.
+
+Questo inserimento approva la pianificazione. Non autorizza esercizio continuativo, nuovi collector, dispatch, deployment, pubblicazione di dati operativi, comandi agli apparati o modifiche alla Safety Authority. Il pacchetto F5 richiederà versione verificata, review, autorizzazione di rilascio e rollback definito.
+
 ## 17. BKL-044 — Knowledge Graph / AI Evidence Contract
 
 Estensione della foundation BKL-015 per garantire che AP, ADR, componenti, asset, sessioni, target, incident, evidence, telemetria, workflow PixInsight e recommendation AI siano collegabili con provenance e identificativi stabili.
