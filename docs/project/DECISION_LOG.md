@@ -354,3 +354,8 @@ All 78 assignments across three nested PixelMath instances match the retained pr
 ### 2026-09-30 — BKL-049 non-RC representation checks resolved for supplied export
 
 Seven symbolic enum labels agree directly; the remaining MultiscaleMedianTransform table agrees in all 35 cells using explicit source column labels. Consolidated supplied MAIN assignment correspondence is 347/381, leaving 34 RC Astro fields unresolved. This is bounded artifact comparison, not a general supported importer, model-version equivalence or workflow completeness. See the [current evidence](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN.
+
+
+### 2026-09-30 — BKL-049 RC Astro preservation boundary and evidence-index successor
+
+Two-sided RC parameter inventory found 34 export-only and 20 project-only occurrences. Official schema-change documentation does not establish their full equivalence. Preserve original and exported representations separately; never treat 347/381 correspondence as a completeness score. A private successor index verified 13 analysis records while retaining the original index unchanged. See the [archival consequence](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN, no source-image copies or production changes.

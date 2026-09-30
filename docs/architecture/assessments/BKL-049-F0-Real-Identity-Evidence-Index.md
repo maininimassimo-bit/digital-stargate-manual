@@ -161,3 +161,23 @@ The outstanding 34 are distributed across two BlurXTerminator instances (five ea
 
 
 Official RC Astro follow-up (retrieved 2026-09-30): the [unified-suite announcement](https://www.rc-astro.com/unified-pixinsight-rc-astro-suite/) explicitly documents that `ai_file` was replaced by numeric `ml_version`, and zero selects the latest available model. This resolves the current suite's selection-policy meaning, not the actual model used in a historical execution or a complete mapping of the 34 fields. Persisting only zero cannot pin reproducibility across changing available models. Preserve the original source values and distinguish model-selection policy from resolved model identity; no historical model number is inferred from today's installation. The same source documents removed parameters and a changed version-number scheme, reinforcing the need for version-specific comparison rather than silent migration.
+
+
+## RC Astro two-sided schema difference and archival consequence
+
+Comparison of parameter identifiers in the five aligned RC Astro instances yields differences in both directions:
+
+| Process instances | Export-only assignments | Project-only assignments | Examples of project-only identifiers |
+|---|---:|---:|---|
+| BlurXTerminator, two | 10 | 12 | `ai_file`, `correct_first`, `lum_only`, `nonstellar_then_stellar`, `adjust_halos`, `nonstellar_psf_diameter` |
+| StarXTerminator, one | 6 | 2 | `ai_file`, `stars` |
+| NoiseXTerminator, two | 18 | 6 | `ai_file`, `denoise_lf`, `denoise_lf_color` |
+| Total | 34 | 20 | Counts are occurrences across instances, not unique names |
+
+Project-only fields are additional to the 381-assignment export denominator. Thus 347/381 is not a preservation/completeness score: it says nothing about fields omitted from that denominator. For example, similarly named halo, diameter or stars controls are not treated as equivalent without verified version-specific rules. Values, model paths and other private content remain unpublished.
+
+The [official unified-suite announcement](https://www.rc-astro.com/unified-pixinsight-rc-astro-suite/), rechecked on 2026-09-30, documents changed/removed parameters and replacement of `ai_file` with `ml_version`. That supports schema-change risk, but neither certifies the migration of this project nor provides a complete field/value equivalence for the 34 assignments. No RC module binary was inspected, installed or executed and no vendor was contacted.
+
+**Archival consequence:** preserve the original retained project and original export as distinct versioned evidence; do not replace one with the other or overwrite an original by re-saving solely to remove compatibility warnings. A future derived normalized representation must cite its source and transformation rules, retain unsupported fields privately and declare gaps. This is an F0 requirement/recommendation, not an implemented archival service or a change in scientific authority. Compatibility sufficient to open a project is not proof of historical provenance preservation or reproducibility.
+
+A successor private evidence index now fingerprints all 13 local analysis records, including seven project/comparison records previously outside the original six-record index. All 13 fingerprints were verified. The earlier index remains byte-for-byte unchanged and is referenced by its digest. Both are research indexes, not self-contained original-source archives, signatures or trusted timestamps. No source files or pixel data were copied into the repository.
