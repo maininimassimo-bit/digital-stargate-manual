@@ -140,3 +140,8 @@ Reconsider this ADR if:
 ## Owner scope revision — 2026-09-30, supersedes native-successor requirement
 
 The Owner changed the BKL-049 objective to an archive of available workflow evidence, accepting explicit PARTIAL/UNAVAILABLE gaps while retaining **mandatory linkage to the correct gallery image/version**. Automatic integral capture and a native PCL module are no longer required. The [revised plan](assessments/BKL-049-PixInsight-Native-Workflow-Capture-Module-Plan.md) supersedes the native-successor planning intent above; original research remains retained. This scope decision aligns with retaining the hybrid evidence boundary, but does not approve a new importer architecture or contract delta. F0 revised-scope review and delivery are accepted in the [phase acceptance](../project/BKL-049-F0-ACCEPTANCE-2026-09-30.md). F1 detailed design is dependency-ready; no importer architecture or production implementation is accepted by F0 closure. Catalog authority, evidence semantics, privacy, read-only constraints and deferred vendor contact remain unchanged.
+
+
+## BKL-049 F1 artifact archive design — 2026-09-30
+
+The [F1 architecture](assessments/BKL-049-F1-Workflow-Archive-Architecture.md) specifies a local nonexecuting supported-export importer, private rich source retention, unchanged PXP/AP14-W06 delivery, an upstream exact identity/version guard and a separately approved sanitized gallery projection. It is an implementation design of the revised archive objective, subject to separate ARB/RQ acceptance. No catalog authority, automatic processing, SDK use or silent public-contract change is introduced. Existing BKL-045 behavior remains the production baseline until the corresponding implementation gates pass.

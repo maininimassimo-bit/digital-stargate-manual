@@ -3,8 +3,8 @@
 | Field | Value |
 |---|---|
 | Identifier | DSG-BKL-049-PLAN-001 |
-| Status | F0 ACCEPTED / POST-MERGE VERIFIED — F1 detailed design next; milestone remains open |
-| Version / date | 1.3 / 2026-09-30 |
+| Status | F0 ACCEPTED / POST-MERGE VERIFIED — F1 detailed design IN REVIEW; milestone remains open |
+| Version / date | 1.4 / 2026-09-30 |
 | Predecessor | BKL-045 — CLOSED / ACCEPTED |
 | Related decision | ADR-008, Owner scope revision recorded in Decision Log |
 | Action authority | NONE |
@@ -65,6 +65,6 @@ Scientific images/projects stay in external scientific storage. Governed evidenc
 
 Risks include lossy exports, missing history, changed module schemas, unknown historical models, ambiguous masks/branches and incorrect derivative association. Treat these with separate source retention, explicit gaps and exact governed binding. Accepting partial evidence does not permit an incorrect link. Rollback must preserve accepted source evidence while disabling the new import/projection path, retaining BKL-045 behavior.
 
-## 7. Next review boundary
+## 7. Current review boundary
 
-Finalize the revised F0 assessment around the artifact source selected, retained-source handling and the mandatory exact image/workflow binding. The existing native NO-GO findings remain valid for the old objective but do not constitute a NO-GO for the newly accepted partial archive. Do not claim F0 closure, gallery association or production delivery until their respective evidence and review gates are satisfied.
+F0 is accepted. Review the [F1 detailed architecture](BKL-049-F1-Workflow-Archive-Architecture.md) before implementation. The design preserves the partial archive scope and mandatory exact image/version association; production import and real gallery acceptance remain later gates. No new scientific processing is needed for design.

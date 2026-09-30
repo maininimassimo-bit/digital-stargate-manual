@@ -421,3 +421,8 @@ Recommended detailed architecture review for the explicitly selected available-h
 ## 2026-09-30 — BKL-049 F0 accepted after review and delivery
 
 La [riconciliazione F0](BKL-049-F0-ACCEPTANCE-2026-09-30.md) registra PR #445, merge `fc281eb80342c746303c58c2d2a8f61d134a5f5b`, review ARB/RQ e 17/17 workflow post-merge SUCCESS con Pages verificato. F0 è accettata nel perimetro archivio parziale con collegamento obbligatorio immagine/versione–workflow. Questa decisione successiva supera gli stati F0 OPEN precedenti; F1 è pronta per progettazione dettagliata, non ancora accettata. BKL-049 resta aperta e BKL-043 corrente. Nessuna funzionalità gallery reale, codice di produzione o autorità runtime viene dichiarata completata.
+
+
+## 2026-09-30 — BKL-049 F1 detailed architecture prepared
+
+Following F0 acceptance/reconciliation PR #448 (`88445810ff6e2f2091a2a69ade8dd6cca029b72f`, 17/17 post-merge SUCCESS and Pages verified), prepare [F1](../architecture/assessments/BKL-049-F1-Workflow-Archive-Architecture.md) for separate review: nonexecuting artifact import, source retention, truthful PXP mapping, upstream identity guard and minimized gallery projection. No production code, real asset registration or raw-source publication is included. BKL-043 remains current; F1 is not accepted before its review/delivery evidence.
