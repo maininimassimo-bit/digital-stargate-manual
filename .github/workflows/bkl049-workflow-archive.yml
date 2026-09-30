@@ -1,0 +1,33 @@
+name: BKL-049 workflow archive boundaries
+on:
+  pull_request:
+    paths:
+      - 'tools/pixinsight/workflow_archive/**'
+      - 'experiments/bkl049-f0/**'
+      - '.github/workflows/bkl049-workflow-archive.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tools/pixinsight/workflow_archive/**'
+      - 'experiments/bkl049-f0/**'
+      - '.github/workflows/bkl049-workflow-archive.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  synthetic-boundaries:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Private packet and filesystem boundary tests (synthetic only)
+        run: python -m unittest tools.pixinsight.workflow_archive.test_archive -v
+      - name: Retained export grammar regressions
+        run: python experiments/bkl049-f0/test_read_export_subset.py
+      - name: Supplementary bounded XISF reader regressions
+        run: python experiments/bkl049-f0/test_read_xisf_header.py
