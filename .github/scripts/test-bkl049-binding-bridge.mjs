@@ -8,7 +8,7 @@ import { validateManifest } from './pixinsight-manifest.mjs';
 import { PixInsightReconciliationService } from './pixinsight-reconciliation.mjs';
 
 const child = spawnSync('python', ['-c',
-  'import json; from tools.pixinsight.workflow_archive.test_binding import fixture, invoke; print(json.dumps(invoke(fixture())))'],
+  'import json; from tools.pixinsight.workflow_archive.test_delivery import retained_handoff; print(json.dumps(retained_handoff()))'],
 { cwd: fileURLToPath(new URL('../../', import.meta.url)), shell: false, encoding: 'utf8', timeout: 10000, maxBuffer: 1024 * 1024 });
 assert.equal(child.status, 0, 'Synthetic F4 guard failed');
 const { receipt, sidecar, reconciliationInput } = JSON.parse(child.stdout);
