@@ -334,3 +334,8 @@ Owner-selected project bundle located. Read-only bounded XML structure inspectio
 ### 2026-09-30 — BKL-049 project/export/XISF content corroboration
 
 Nonexecuting structural comparisons matched the MAIN export's 19 class labels/order and all three FINAL parameter/table/time representations against the XISF header. A separate initial ImageIntegration and two RangeSelection views expose additional coverage/identity questions. No XOSM semantic support, executed-event promotion, pixel reads or catalog writes are claimed. See the [cross-artifact report](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 remains OPEN.
+
+
+### 2026-09-30 — BKL-049 bounded parameter comparison and mask disambiguation
+
+Compared 303 direct MAIN assignments: 129 supported value comparisons match; 174 remain outside direct comparison and are not treated as missing or equivalent. One RangeSelection candidate matches all seven supplied values; another differs in three. This corroborates configuration identity without asserting historical mask-version or execution proof. See the [parameter comparison](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). No production mapping, scientific processing or F0 closure.
