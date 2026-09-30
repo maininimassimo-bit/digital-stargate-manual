@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "updatedAt": "2026-09-25",
+  "updatedAt": "2026-09-30",
   "generatedFrom": {
     "roadmap": "docs/data/roadmap.json",
     "discovery": "docs/architecture/validation/AP-013-Session-Discovery-Execution-Evidence.md",
@@ -20,7 +20,7 @@
       "status": "active"
     },
     "nextMilestone": "BKL-043",
-    "target": "BKL-043 F3/F4 exact pilot authorization gates. F3 offline envelope tests pass locally and in Developer Foundation post-merge run 36021635340 on b2aa86d790644cf6791ffa413d23b80701c72170; review findings remain pending. F4 runtime authorization draft: docs/architecture/validation/BKL-043-F4-EXACT-PILOT-RUNTIME-AUTHORIZATION-DRAFT-2026-09-24.md. The two-plane scope and target host EAGLE30154 are selected; GitHub is a witness-provider candidate and Leonardo Di Egidio is nominated as independent reviewer. This is not runtime authorization: current host/OS attestation, identity, artifact, sources, private witness resource, receipt store, transport, cadence, persistence, retention, start mode, rollback and OAT criteria remain unselected. The F3 specification addresses source eligibility, trust boundaries, coverage/unknown semantics, data minimization, offline scenarios, non-interference, rollback and exact decisions needed for a separate runtime gate. Historical sessions remain descriptive; N.I.N.A.-observed attempts exclude planned sessions with no N.I.N.A. log activity. AP-007 requires a measured baseline before SLO deliberation. Do not invent thresholds or interpret unknown as healthy. No scheduler, automatic target selection, device command or Safety Authority is authorized; command_authority=NONE, execution_authority=NONE, safety_authority=NONE. BKL-050 remains the last approved milestone after BKL-043, BKL-049 and other approved open roadmap work."
+    "target": "Complete BKL-043 F4 residual evidence and final Owner acceptance without implicit exclusions. Then implement and validate BKL-043-F5 portal reliability integration under its own reviewed release authorization. Plan: docs/project/FUNCTIONAL_ROADMAP_EXPANSION_2026-08-30.md, BKL-043 F5. Maintain separate synthetic, isolated-filesystem and operational evidence. Publish only approved minimized indicators, preserve unknown/stale/clock-uncertain states, and keep receipts/raw logs private. Availability and MTBF/MTTR require sufficient history, governed populations and incident semantics. This planning update grants no new runtime, recurring collection, scientific dispatch or publication authority. BKL-050 remains the final milestone after BKL-043 including F5, BKL-049 and other approved open work."
   },
   "architecture": {
     "ap013": {
