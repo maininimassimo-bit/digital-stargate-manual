@@ -359,3 +359,8 @@ Seven symbolic enum labels agree directly; the remaining MultiscaleMedianTransfo
 ### 2026-09-30 — BKL-049 RC Astro preservation boundary and evidence-index successor
 
 Two-sided RC parameter inventory found 34 export-only and 20 project-only occurrences. Official schema-change documentation does not establish their full equivalence. Preserve original and exported representations separately; never treat 347/381 correspondence as a completeness score. A private successor index verified 13 analysis records while retaining the original index unchanged. See the [archival consequence](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN, no source-image copies or production changes.
+
+
+### 2026-09-30 — BKL-049 RC schema-change versus migration matrix
+
+Consolidated the accumulating evidence report and distinguished 11 officially documented changed/removed project-only RC parameter occurrences from nine without established mapping. These explanations do not resolve 34 export-only assignments or establish reversible migration. Owner reported current BlurXTerminator, NoiseXTerminator and StarXTerminator 2.6.9 (DECLARED). No historical model/runtime identity inferred. See the [current report](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN and native implementation not authorized.

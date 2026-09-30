@@ -2,6 +2,16 @@
 
 Date: 2026-09-30. Status: PARTIAL / F0 OPEN. Sanitized public report; private file identity and source records remain local.
 
+## Current consolidated position
+
+- The supplied MAIN export contains 381 assignments; 347 have corroborated representations in the retained project, including nested PixelMath and curve tables. This is not an execution/completeness score.
+- Five RC Astro occurrences account for 58 export assignments: 24 same-ID values match and 34 are export-only. Their retained-project counterparts contain 44 assignments: the same 24 plus 20 project-only occurrences.
+- Official documentation identifies schema changes for 11 of those 20 project-only occurrences; nine still lack a documented relationship in the inspected sources. A documented removal/replacement is not a verified value-preserving migration.
+- Retained-project and final-XISF representations corroborate the three final processes. Initial history, multiple mask candidates and unknown state/version semantics prevent whole-workflow claims.
+- Thirteen local analysis records are fingerprinted in a private successor index. No original image/project payload is archived by this PR. Real gallery binding and native automatic capture remain unproven.
+
+The sections below preserve the investigation sequence; later consolidated totals supersede interim counts. F0 remains OPEN.
+
 ## New evidence
 
 After the [synthetic identity experiment](BKL-049-F0-Identity-Packet-Experiment.md), the Owner identified a standalone final XISF on the computer hosting this chat. The assistant enumerated only the top level of each specifically supplied directory and calculated SHA-256 and byte size of its sole XISF, without modifying or decoding the image. File size and last-write metadata were stable before/after each read; this was not an atomic locked snapshot.
@@ -181,3 +191,20 @@ The [official unified-suite announcement](https://www.rc-astro.com/unified-pixin
 **Archival consequence:** preserve the original retained project and original export as distinct versioned evidence; do not replace one with the other or overwrite an original by re-saving solely to remove compatibility warnings. A future derived normalized representation must cite its source and transformation rules, retain unsupported fields privately and declare gaps. This is an F0 requirement/recommendation, not an implemented archival service or a change in scientific authority. Compatibility sufficient to open a project is not proof of historical provenance preservation or reproducibility.
 
 A successor private evidence index now fingerprints all 13 local analysis records, including seven project/comparison records previously outside the original six-record index. All 13 fingerprints were verified. The earlier index remains byte-for-byte unchanged and is referenced by its digest. Both are research indexes, not self-contained original-source archives, signatures or trusted timestamps. No source files or pixel data were copied into the repository.
+
+
+## RC compatibility matrix: documented change versus verified migration
+
+The following classifies parameter-name evidence against the official unified-suite announcement, not against an assumed installed version:
+
+| Group | Project-only occurrences | Official evidence | Archival disposition |
+|---|---:|---|---|
+| `ai_file`, across all five RC instances | 5 | Replaced by numeric `ml_version`; zero means latest available | Preserve original reference privately and preserve exported selector separately; exact model identity and value conversion unproven |
+| `correct_first`, `lum_only`, `nonstellar_then_stellar`, across two BlurX instances | 6 | Listed among skipped/removed parameters | Retain original fields; do not erase their historical meaning or assert a successful replay |
+| Remaining project-only identifiers | 9 | No explicit field-to-field equivalence established in inspected official material | Keep unresolved; similar naming does not authorize migration |
+| Export-only assignments | 34 | New-suite behavior and selection policy are only partially documented | Retain as export-time representation; do not backdate them as historical execution values |
+| Shared RC assignments | 24 | Values already compared equal in the selected instances | Content corroboration only; equal values do not prove equal module/model semantics |
+
+The 11 documented-change occurrences remain within the 20 project-only occurrences; they do not reduce the 34 unresolved export assignments or increase the 347 corroborated total. This separates a schema-change explanation from a proven reversible conversion.
+
+Exact current module versions are not available from the Owner's earlier statement that all tools work. Serialized instance-version fields and model selectors must not be substituted for module build identity. The Owner subsequently reported **BlurXTerminator 2.6.9** on 2026-09-30. Preserve that literal as DECLARED current product-version evidence; no binary/API verification or reinterpretation as a four-part unified module build is made. The Owner also reported **NoiseXTerminator 2.6.9** (DECLARED current version). The Owner finally reported **StarXTerminator 2.6.9** (DECLARED current version), completing the three-product declaration without any assistant execution, setting change or project resave. That information identifies today's representation only; it cannot establish the version used in the historical processing. The three current version declarations do not identify the binaries/models used in the historical run, nor independently establish suite build/ABI identity. No runtime or production work is unlocked by a version response.
