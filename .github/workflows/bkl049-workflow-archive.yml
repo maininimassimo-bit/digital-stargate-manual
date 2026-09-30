@@ -4,12 +4,16 @@ on:
     paths:
       - 'tools/pixinsight/workflow_archive/**'
       - 'experiments/bkl049-f0/**'
+      - '.github/scripts/test-bkl049-provenance-bridge.mjs'
+      - 'docs/contracts/pixinsight-workflow-provenance.schema.json'
       - '.github/workflows/bkl049-workflow-archive.yml'
   push:
     branches: [main]
     paths:
       - 'tools/pixinsight/workflow_archive/**'
       - 'experiments/bkl049-f0/**'
+      - '.github/scripts/test-bkl049-provenance-bridge.mjs'
+      - 'docs/contracts/pixinsight-workflow-provenance.schema.json'
       - '.github/workflows/bkl049-workflow-archive.yml'
   workflow_dispatch:
 permissions:
@@ -25,9 +29,16 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - name: Private packet and filesystem boundary tests (synthetic only)
         run: python -m unittest tools.pixinsight.workflow_archive.test_archive -v
       - name: Retained export grammar regressions
         run: python experiments/bkl049-f0/test_read_export_subset.py
       - name: Supplementary bounded XISF reader regressions
         run: python experiments/bkl049-f0/test_read_xisf_header.py
+      - name: F3 declared evidence and emitted profile constraints
+        run: python -m unittest tools.pixinsight.workflow_archive.test_provenance -v
+      - name: Existing PXP and AP14-W06 compatibility (synthetic only)
+        run: node .github/scripts/test-bkl049-provenance-bridge.mjs

@@ -3,8 +3,8 @@
 | Field | Value |
 |---|---|
 | Identifier | DSG-BKL-049-PLAN-001 |
-| Status | F0 ACCEPTED / POST-MERGE VERIFIED — F1 ACCEPTED; F2 importer IN REVIEW; milestone remains open |
-| Version / date | 1.5 / 2026-09-30 |
+| Status | F0 ACCEPTED / POST-MERGE VERIFIED — F1/F2 ACCEPTED; F3 evidence adapter IN REVIEW; milestone remains open |
+| Version / date | 1.6 / 2026-09-30 |
 | Predecessor | BKL-045 — CLOSED / ACCEPTED |
 | Related decision | ADR-008, Owner scope revision recorded in Decision Log |
 | Action authority | NONE |
@@ -45,7 +45,7 @@ The published gallery currently uses bounded fixture data. No real image/workflo
 | F6 — Compatibility and OAT | Supported artifact/version matrix and partial/unavailable cases | Real authorized read-only import evidence and negative cases |
 | F7 — Release and closure | Runbook, upgrade/rollback and governed delivery | Required reviews, exact-head CI, merge and post-merge verification |
 
-F0 is ACCEPTED for this revised scope; see the [phase decision and exact delivery evidence](../../project/BKL-049-F0-ACCEPTANCE-2026-09-30.md). F1 architecture is accepted via PR #449; F2 bounded importer is in review. Native SDK licensing/ABI/signing gates are not applicable to an implementation that neither uses nor redistributes the SDK; they are not declared resolved or waived for any future native work. F1 and production work are not automatically promoted by the scope decision. BKL-043 remains the current open package.
+F0 is ACCEPTED for this revised scope; see the [phase decision and exact delivery evidence](../../project/BKL-049-F0-ACCEPTANCE-2026-09-30.md). F1 architecture is accepted via PR #449; F2 bounded importer is accepted via PR #450; F3 private evidence adapter is in review. Native SDK licensing/ABI/signing gates are not applicable to an implementation that neither uses nor redistributes the SDK; they are not declared resolved or waived for any future native work. F1 and production work are not automatically promoted by the scope decision. BKL-043 remains the current open package.
 
 ## 5. Acceptance criteria
 
@@ -67,4 +67,4 @@ Risks include lossy exports, missing history, changed module schemas, unknown hi
 
 ## 7. Current review boundary
 
-F0 is accepted. The [F1 detailed architecture](BKL-049-F1-Workflow-Archive-Architecture.md) is accepted. Review the [F2 bounded importer](BKL-049-F2-Bounded-Importer-Implementation.md) before promotion. The design preserves the partial archive scope and mandatory exact image/version association; production import and real gallery acceptance remain later gates. No new scientific processing is needed for design.
+F0 is accepted. The [F1 detailed architecture](BKL-049-F1-Workflow-Archive-Architecture.md) is accepted. The [F2 bounded importer](BKL-049-F2-Bounded-Importer-Implementation.md) is accepted. Review the [F3 declared-evidence adapter](BKL-049-F3-Declared-Evidence-Adapter.md) before promotion. The design preserves the partial archive scope and mandatory exact image/version association; production import and real gallery acceptance remain later gates. No new scientific processing is needed for design.

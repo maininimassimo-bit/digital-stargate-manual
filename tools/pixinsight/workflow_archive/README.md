@@ -35,3 +35,8 @@ One packet contains both original bytes and extracted result. It is staged in th
 `python -m unittest tools.pixinsight.workflow_archive.test_archive -v` plus retained F0 grammar/header tests. All fixtures are synthetic and temporary. CI runs Windows and Linux; local Windows may skip creating symlinks without OS permission, with a deterministic reparse-attribute test plus Linux real-symlink coverage. No tests access scientific folders or PixInsight.
 
 Original F0 parser is retained in Git history; its old path is now a compatibility shim to the single hardened parser. Rollback reverts this module/shim change; preserve already-created private packets and verify their version before future reads. No watcher, installation, automatic invocation, catalog/PXP delivery or gallery publication is wired by F2.
+
+
+## F3 private PXP library
+
+`provenance.build_sidecar` accepts verified packet bytes, an independently retained expected packet digest, an explicit source-bound declaration and a separate `exported_at` UTC timestamp. See `docs/architecture/assessments/BKL-049-F3-Declared-Evidence-Adapter.md` for the versioned lexical envelope, clock semantics and validation limits. The returned sidecar is private and unlinked; no publication or file writer is provided. Run `python -m unittest tools.pixinsight.workflow_archive.test_provenance -v` and `node .github/scripts/test-bkl049-provenance-bridge.mjs` for synthetic compatibility evidence.

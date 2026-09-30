@@ -4,10 +4,12 @@
 |---|---|
 | Identifier | DSG-BKL049-F2-IMPL-001 |
 | Version / date | 1.0 / 2026-09-30 |
-| Status | Repository implementation for review; real import/OAT not performed |
+| Status | ACCEPTED / POST-MERGE VERIFIED, bounded repository scope; real import/OAT not performed |
 | Entry gate | F1 accepted via PR #449, merge `32050f0a12ac1942c017f393c17b2e52466d6bd5` |
 | Scope | Selected history export to private unlinked evidence packet |
 | Action authority | NONE |
+
+[F2 acceptance](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/450#issuecomment-5918149706): PR #450, merge `b57adb0e8ee8d43b5bf7d5e05a718341520128ab`, 19/19 post-merge workflows SUCCESS and Pages verified.
 
 ## Delivered code and boundaries
 

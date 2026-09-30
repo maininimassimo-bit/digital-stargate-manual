@@ -431,3 +431,8 @@ Following F0 acceptance/reconciliation PR #448 (`88445810ff6e2f2091a2a69ade8dd6c
 ## 2026-09-30 — BKL-049 F1 accepted, F2 bounded importer prepared
 
 F1 PR #449 passed separate ARB/RQ (zero findings), 17/17 exact-head and 17/17 post-merge workflows at `32050f0a12ac1942c017f393c17b2e52466d6bd5`; Pages verified. [F2](../architecture/assessments/BKL-049-F2-Bounded-Importer-Implementation.md) implements selected nonexecuting import/private retention only, with synthetic tests and explicit skipped local symlink coverage to be exercised in Linux CI. No real private import, PXP delivery, catalog registration, scientific processing or gallery publication occurred. BKL-043 remains current.
+
+
+## 2026-09-30 — BKL-049 F2 accepted; F3 private declared-evidence adapter
+
+F2 PR #450 accepted after separate ARB/RQ, cleanup-outcome remediation and 19/19 post-merge workflow successes on `b57adb0e8ee8d43b5bf7d5e05a718341520128ab`; Pages verified. [F3](../architecture/assessments/BKL-049-F3-Declared-Evidence-Adapter.md) adds a private source-bound DECLARED/PARTIAL PXP adapter with exact lexical preservation and synthetic AP14-W06 compatibility tests. No real catalog association/publication or observed-execution promotion. Owner-declared external origin of the demonstration material will remain external; no Digital StarGate session is inferred. BKL-043 current.
