@@ -319,3 +319,8 @@ La successiva decisione esplicita dell’Owner sostituisce il requisito di cattu
 ## 2026-09-30 — BKL-049 F0 accepted after review and delivery
 
 La [riconciliazione F0](BKL-049-F0-ACCEPTANCE-2026-09-30.md) registra PR #445, merge `fc281eb80342c746303c58c2d2a8f61d134a5f5b`, review ARB/RQ e 17/17 workflow post-merge SUCCESS con Pages verificato. F0 è accettata nel perimetro archivio parziale con collegamento obbligatorio immagine/versione–workflow. Questa decisione successiva supera gli stati F0 OPEN precedenti; F1 è pronta per progettazione dettagliata, non ancora accettata. BKL-049 resta aperta e BKL-043 corrente. Nessuna funzionalità gallery reale, codice di produzione o autorità runtime viene dichiarata completata.
+
+
+## 2026-09-30 — BKL-049 F3 accepted; F4 exact-binding guard increment
+
+F3 PR #451 passed separate ARB/RQ, 20/20 exact-head checks and 19/19 post-merge runs at `f689bea2d0b0aba11774c589d47669486bf61978`; Pages verified. The [F4 guard](../architecture/assessments/BKL-049-F4-Exact-Binding-Guard.md) checks selected governed identities, independent measurements and source-bound Owner association before AP14-W06. Synthetic-only implementation; full F4 remains open for immutable retention/delivery and a real eligible external-origin asset/context. No real scientific publication or catalog registration. BKL-043 stays current.

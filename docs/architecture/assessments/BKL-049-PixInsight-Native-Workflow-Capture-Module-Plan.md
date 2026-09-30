@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | DSG-BKL-049-PLAN-001 |
-| Status | F0 ACCEPTED / POST-MERGE VERIFIED — F1/F2 ACCEPTED; F3 evidence adapter IN REVIEW; milestone remains open |
+| Status | F0 ACCEPTED / POST-MERGE VERIFIED — F1/F2/F3 ACCEPTED; F4 exact-binding guard IN REVIEW; milestone remains open |
 | Version / date | 1.6 / 2026-09-30 |
 | Predecessor | BKL-045 — CLOSED / ACCEPTED |
 | Related decision | ADR-008, Owner scope revision recorded in Decision Log |
@@ -45,7 +45,7 @@ The published gallery currently uses bounded fixture data. No real image/workflo
 | F6 — Compatibility and OAT | Supported artifact/version matrix and partial/unavailable cases | Real authorized read-only import evidence and negative cases |
 | F7 — Release and closure | Runbook, upgrade/rollback and governed delivery | Required reviews, exact-head CI, merge and post-merge verification |
 
-F0 is ACCEPTED for this revised scope; see the [phase decision and exact delivery evidence](../../project/BKL-049-F0-ACCEPTANCE-2026-09-30.md). F1 architecture is accepted via PR #449; F2 bounded importer is accepted via PR #450; F3 private evidence adapter is in review. Native SDK licensing/ABI/signing gates are not applicable to an implementation that neither uses nor redistributes the SDK; they are not declared resolved or waived for any future native work. F1 and production work are not automatically promoted by the scope decision. BKL-043 remains the current open package.
+F0 is ACCEPTED for this revised scope; see the [phase decision and exact delivery evidence](../../project/BKL-049-F0-ACCEPTANCE-2026-09-30.md). F1 architecture is accepted via PR #449; F2 bounded importer is accepted via PR #450; F3 private evidence adapter is accepted via PR #451; the F4 exact-binding guard is in review, with operational retention and real association still open. Native SDK licensing/ABI/signing gates are not applicable to an implementation that neither uses nor redistributes the SDK; they are not declared resolved or waived for any future native work. F1 and production work are not automatically promoted by the scope decision. BKL-043 remains the current open package.
 
 ## 5. Acceptance criteria
 
