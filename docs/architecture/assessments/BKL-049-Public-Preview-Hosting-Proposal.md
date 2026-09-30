@@ -4,10 +4,10 @@
 |---|---|
 | Identifier | DSG-BKL049-PREVIEW-HOSTING-001 |
 | Version / date | 1.0 / 2026-09-30 |
-| Status | OWNER-SELECTED architecture — implementation/preflight authorization and delivery gates remain |
+| Status | OWNER-SELECTED architecture — implementation and delivery gates remain |
 | Purpose | Supply an approved public preview URL for the mandatory exact gallery image/version-to-workflow relationship |
 
-Owner disposition (2026-09-30): **"Approvo la soluzione Google Cloud proposta"**, in response to the exact preview-only proposal and EUR 5/month monitoring threshold (not a guaranteed spending cap). This accepts the provider/design candidate, not service activation, credential reuse, paid operations, image changes or publication.
+Owner disposition (2026-09-30): **"Approvo la soluzione Google Cloud proposta"**, in response to the exact preview-only proposal and EUR 5/month monitoring threshold (not a guaranteed spending cap). This accepts the provider/design candidate, not service activation, new/extracted credentials or reuse of workload identities, paid activation, image changes or publication.
 
 ## Confirmed need
 
@@ -17,7 +17,7 @@ F3 is accepted and the F4 identity guard is delivered separately. They do not su
 
 ## Recommended candidate
 
-Use **one new, dedicated Google Cloud Storage bucket for approved web previews only**, region `europe-west1` (Belgium), Standard storage. Google Cloud is already used in the repository's separately governed infrastructure; this proposal does not reuse its private buckets, identities, permissions or deployment authorization. The exact project/bucket identity and organization policy remain to be verified in a bounded infrastructure plan after the provider decision and separately authorized read-only preflight. No paid resource has been created or inspected live for this proposal.
+Use **one new, dedicated Google Cloud Storage bucket for approved web previews only**, region `europe-west1` (Belgium), Standard storage. Google Cloud is already used in the repository's separately governed infrastructure; this proposal does not reuse its private buckets, identities, permissions or deployment authorization. The exact project/bucket identity and organization policy remain to be verified in a bounded infrastructure plan after the provider decision and bounded read-only preflight under the standing noninvasive-work authorization. No paid resource has been created or inspected live for this proposal.
 
 | Boundary | Candidate configuration |
 |---|---|
@@ -43,17 +43,17 @@ Candidate pilot budget: a **EUR 5/month monitoring threshold** scoped to the new
 
 ## Separate gates, in order
 
-1. **Provider/design decision — accepted:** the Owner selected the dedicated Google Cloud preview candidate. This alone is not permission to create resources, reuse credentials, upload or publish an image.
+1. **Provider/design decision — accepted:** the Owner selected the dedicated Google Cloud preview candidate. This alone is not permission to create resources, extract credentials, reuse workload identities, upload or publish an image.
 2. Prepare exact infrastructure/security/billing plan and reviewable preview/metadata selection. Keep protected scientific sources local. Present any required account action to the Owner; never request secrets in chat.
 3. Resolve the governed external asset/context record without fabricating a Digital StarGate observation session. Complete source-bound Owner association, current expected/measured identities and immutable private retention/delivery. Missing context cannot be bypassed by a hosting decision.
 4. Complete MIME/magic, malware/metadata/privacy and publication-rights checks required by BKL-034-F2. Existing header inspection is not this full gate; incomplete evidence stays quarantined.
 5. Obtain exact resource/apply and selected-image publication authority, then execute only the reviewed bounded plan. Verify public bytes, exact gallery/workflow relationship, rollback and real OAT before milestone closure.
 
-BKL-049 remains OPEN. BKL-043, its monitor/pilot, private infrastructure and Safety Authority remain unchanged. The provider/design choice is Owner-approved; this document does not grant an operational release. DSG-AEM-001 section 5 remains binding for credential reuse, paid activation and publication.
+BKL-049 remains OPEN. BKL-043, its monitor/pilot, private infrastructure and Safety Authority remain unchanged. The provider/design choice is Owner-approved; this document does not grant an operational release. DSG-AEM-001 section 5 remains binding for new/extracted credentials or workload-identity reuse, paid activation and publication.
 
 ## Prepared next step: bounded read-only cloud preflight
 
-**NOT EXECUTED / authorization pending.** The Owner's provider choice expressly excludes credential reuse and activation. The next requested authorization is limited to the existing local Google Cloud CLI user session and the project already pinned by this repository's `GCP_PROJECT_ID` / authenticated-platform workflow. The existing BKL-031 deployment identities, WIF workflows, state/data/evidence buckets and BKL-043 resources are not reused or changed.
+**PREPARED / read-only execution under standing authorization.** The Owner authorized autonomous noninvasive technical verification and selected Google Cloud. Normal metadata reads through the existing interactive user CLI session fall within that scope; they do not require an additional approval. This is not permission to extract/reuse tokens or keys, impersonate a service account or activate infrastructure. The scope is limited to the project already pinned by this repository's `GCP_PROJECT_ID` / authenticated-platform workflow. The existing BKL-031 deployment identities, WIF workflows, state/data/evidence buckets and BKL-043 resources are not reused or changed.
 
 Before contacting Google Cloud, resolve the repository project value without displaying private configuration, verify it agrees with the pinned repository project, record a neutral candidate preview-bucket name privately, and check that an existing interactive CLI identity is available. No login, service-account impersonation, token printing/export, key file, secret lookup, SDK installation/update or persistent configuration change is allowed. A missing/ambiguous identity stops the preflight.
 
@@ -76,3 +76,23 @@ The allowlist is at most **nine high-level read commands**, once each, using an 
 Official command references: [organization policy describe](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/describe), [project billing describe](https://docs.cloud.google.com/sdk/gcloud/reference/billing/projects/describe), [billing account describe](https://docs.cloud.google.com/sdk/gcloud/reference/billing/accounts/describe), [bucket describe](https://docs.cloud.google.com/sdk/gcloud/reference/storage/buckets/describe).
 
 Expected result: a private evidence record and a sanitized availability/blocker summary sufficient to prepare the exact resource/apply plan. No new bucket, budget, IAM binding, upload, image conversion, public URL or chargeable runtime is activated. Any standard metadata-operation charges remain governed by the service's pricing; no zero-cost guarantee is made. An unavailable prerequisite requires an explicit Owner disposition, not a workaround through another identity or project.
+
+## Read-only preflight evidence and precise blocker
+
+The bounded preflight was completed with the already authenticated interactive user profile under the standing noninvasive-work authorization. No new login, token/key extraction, impersonation, service-account use or cloud mutation occurred. All nine high-level reads were attempted; private responses/identities stay outside Git.
+
+- Project: ACTIVE; the selected Storage API is already enabled.
+- Linked billing account: open, billing enabled, currency EUR. The selected EUR 5 monitoring objective therefore needs no invented currency conversion; filter support and actual budget creation remain unverified.
+- Candidate preview name: NOT_FOUND at read time; this does not reserve it or prove create permission.
+- All four policy reads: UNAVAILABLE with explicit `SERVICE_DISABLED` for `orgpolicy.googleapis.com`. This is not evidence that public access or the region is permitted, and it does not prove the underlying policy-read permissions.
+- No storage object, budget, IAM binding or policy was created/changed. The selected image remains private and unlinked.
+
+The minimum proposed unblock is **one service activation** in the same pinned project:
+
+```text
+gcloud services enable orgpolicy.googleapis.com --project=PROJECT
+```
+
+This is a genuine state change and is **NOT AUTHORIZED / NOT EXECUTED** by the architecture selection or read-only preflight. It requires a specific Owner decision. It enables the administrative policy API only; it does not create a bucket, change a policy/IAM rule, enable public access, create a workload or upload an image. After authorization and the applicable review gate, rerun only the four policy descriptions above; permission failure stays blocked with no broader role grant or alternate identity. Verify the returned policy evidence before any storage apply plan.
+
+The prior disabled state is recorded. Rollback, if specifically required, is disabling only this API after checking dependencies; never force-disable dependent services or change another workload. No recurring activity is introduced. [Official service-enable command](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable).
