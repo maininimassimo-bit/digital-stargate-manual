@@ -406,3 +406,8 @@ Updated the support matrix and G3 to include the completed positive/negative ret
 ### 2026-09-30 — BKL-049 Owner retains integral automatic capture
 
 Owner explicitly retained automatic entire-workflow capture; an archive of available history may support but not replace it. Scope question settled without accepting technical feasibility. F0 gate NOT PASSED/OPEN; no F1 promotion, vendor contact, install or new runtime permission. Updated backlog to accurately include authorized SYN-01/SYN-02 instead of the obsolete no-PixInsight-activity statement. See the [gate disposition](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md#12-owner-decision-integral-automatic-capture-retained). BKL-043 remains current.
+
+
+### 2026-09-30 — BKL-049 scope supersession: partial archive accepted, gallery binding mandatory
+
+Owner explicitly changed the earlier integral-capture decision and confirmed acceptance of available/partial workflow evidence **with mandatory correct image-to-workflow linkage in the gallery**. The previous scope reconfirmation is superseded, not erased. Revised plan, ADR planning amendment, backlog and canonical roadmap retain partial/unavailable semantics and exact governed identity. Native-only feasibility gates become inapplicable to the non-SDK route, not retrospectively passed. F0 remains open for revised review; no F1/production promotion or new runtime/catalog/vendor authority. BKL-043 remains current. See the [current plan](../architecture/assessments/BKL-049-PixInsight-Native-Workflow-Capture-Module-Plan.md).

@@ -135,3 +135,8 @@ Reconsider this ADR if:
 - F3 demonstrates an essential provenance gap requiring PCL;
 - Project/history persistence semantics change incompatibly;
 - a supported structured provenance API becomes available.
+
+
+## Owner scope revision — 2026-09-30, supersedes native-successor requirement
+
+The Owner changed the BKL-049 objective to an archive of available workflow evidence, accepting explicit PARTIAL/UNAVAILABLE gaps while retaining **mandatory linkage to the correct gallery image/version**. Automatic integral capture and a native PCL module are no longer required. The [revised plan](assessments/BKL-049-PixInsight-Native-Workflow-Capture-Module-Plan.md) supersedes the native-successor planning intent above; original research remains retained. This scope decision aligns with retaining the hybrid evidence boundary, but does not approve a new importer architecture or contract delta. F0 revised-scope review remains open; F1 and implementation are not promoted. Catalog authority, evidence semantics, privacy, read-only constraints and deferred vendor contact remain unchanged.

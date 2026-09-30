@@ -309,3 +309,8 @@ L'ordine potrà essere raffinato durante architecture review. BKL-029 è deliber
 Su autorizzazione Owner, F0 è **In Progress** per ricerca ufficiale su SDK/licenze, osservabilità, compatibilità PXP/AP14-W06 e preparazione documentale. BKL-043 rimane il package corrente e aperto; F4/F5, monitor e pilot non sono modificati. La sequenza di implementazione successiva non è promossa da questo avvio.
 
 Il [dossier F0](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md) conserva fonti versionate, matrice preliminare, prerequisiti, alternative e prove mancanti. Baseline PixInsight 1.9.4 build 1695 riconfermata dall’Owner; la capacità di cattura universale non è dimostrata. F0 non è conclusa, F1 non è promossa, nessun codice di produzione o autorizzazione runtime deriva dalla ricerca.
+
+
+## 30/09/2026 — BKL-049 scope aggiornato: archivio parziale e gallery
+
+La successiva decisione esplicita dell’Owner sostituisce il requisito di cattura automatica integrale: archiviare le history disponibili, accettando lacune visibili, **con collegamento obbligatorio alla corretta immagine/versione nella gallery**. Nessuna associazione per supposizione. Il [piano aggiornato](../architecture/assessments/BKL-049-PixInsight-Native-Workflow-Capture-Module-Plan.md) prevale sulle descrizioni native precedenti. Baseline attuale dichiarata: PixInsight 1.9.5 build 1706; SYN-01/SYN-02 autorizzati separatamente hanno fornito evidenze circoscritte. F0 resta aperta per review del nuovo scope; F1 non promossa, BKL-043 corrente e autorità scientifiche invariate.

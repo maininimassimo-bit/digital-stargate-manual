@@ -10,6 +10,12 @@
 | Branch | `codex/bkl-049-f0` |
 | Authority | Processing evidence only; `actionAuthority=NONE` |
 
+## Current Owner-approved scope — supersedes the earlier integral requirement
+
+The Owner subsequently changed the decision on 2026-09-30 and confirmed: **archive available PixInsight workflow evidence, accept explicit gaps, and require its link to the correct gallery image/version**. Automatic integral capture is no longer required. The [revised plan](BKL-049-PixInsight-Native-Workflow-Capture-Module-Plan.md) is current; earlier scope statements and native NO-GO recommendations below remain historical findings for the former objective, not current requirements.
+
+F0 stays OPEN for revised-scope review. G5 scope selection is recorded; feasibility acceptance is still pending. Native-only SDK/ABI/signing gates G1/G2 are NOT APPLICABLE to a route with no SDK use/distribution, not resolved for future native work. G3 has positive bounded artifact evidence with known gaps now acceptable if disclosed. G4 retains the unresolved exact real image/version/gallery binding and truthful contract/retention/privacy questions. Acceptable history gaps never authorize an inferred or incorrect image association. No production change, F1 promotion, catalog write, runtime permission or vendor contact follows automatically.
+
 ## 1. Recommendation and current state
 
 **Negative control:** separately authorized [SYN-02](BKL-049-F0-Vendor-Inquiry-and-Probe-Protocol.md#8-syn-02-result-missing-history-preserved-as-unavailable) has no image-scoped history property and the Owner reports an empty History Explorer after reopening. The reader returns UNAVAILABLE and the SYN-01 original fingerprint is unchanged. This validates the bounded missing-history case without inferring that no processing occurred.
