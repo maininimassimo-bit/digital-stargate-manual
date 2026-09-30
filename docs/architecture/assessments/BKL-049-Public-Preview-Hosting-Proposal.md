@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | DSG-BKL049-PREVIEW-HOSTING-001 |
-| Version / date | 1.0 / 2026-09-30 |
+| Version / date | 1.1 / 2026-09-30 |
 | Status | OWNER-SELECTED architecture — implementation and delivery gates remain |
 | Purpose | Supply an approved public preview URL for the mandatory exact gallery image/version-to-workflow relationship |
 
@@ -17,7 +17,7 @@ F3 is accepted and the F4 identity guard is delivered separately. They do not su
 
 ## Recommended candidate
 
-Use **one new, dedicated Google Cloud Storage bucket for approved web previews only**, region `europe-west1` (Belgium), Standard storage. Google Cloud is already used in the repository's separately governed infrastructure; this proposal does not reuse its private buckets, identities, permissions or deployment authorization. The exact project/bucket identity and organization policy remain to be verified in a bounded infrastructure plan after the provider decision and bounded read-only preflight under the standing noninvasive-work authorization. No paid resource has been created or inspected live for this proposal.
+Use **one new, dedicated Google Cloud Storage bucket for approved web previews only**, region `europe-west1` (Belgium), Standard storage. Google Cloud is already used in the repository's separately governed infrastructure; this proposal does not reuse its private buckets, identities, permissions or deployment authorization. The existing project and a neutral candidate bucket identity were resolved privately during the bounded metadata preflight. The four selected effective organization constraints were subsequently read after the separately authorized API activation, as recorded below. No preview bucket or paid workload has been created.
 
 | Boundary | Candidate configuration |
 |---|---|
@@ -77,7 +77,7 @@ Official command references: [organization policy describe](https://docs.cloud.g
 
 Expected result: a private evidence record and a sanitized availability/blocker summary sufficient to prepare the exact resource/apply plan. No new bucket, budget, IAM binding, upload, image conversion, public URL or chargeable runtime is activated. Any standard metadata-operation charges remain governed by the service's pricing; no zero-cost guarantee is made. An unavailable prerequisite requires an explicit Owner disposition, not a workaround through another identity or project.
 
-## Read-only preflight evidence and precise blocker
+## Initial read-only preflight evidence
 
 The bounded preflight was completed with the already authenticated interactive user profile under the standing noninvasive-work authorization. No new login, token/key extraction, impersonation, service-account use or cloud mutation occurred. All nine high-level reads were attempted; private responses/identities stay outside Git.
 
@@ -93,6 +93,60 @@ The minimum proposed unblock is **one service activation** in the same pinned pr
 gcloud services enable orgpolicy.googleapis.com --project=PROJECT
 ```
 
-This is a genuine state change and is **NOT AUTHORIZED / NOT EXECUTED** by the architecture selection or read-only preflight. It requires a specific Owner decision. It enables the administrative policy API only; it does not create a bucket, change a policy/IAM rule, enable public access, create a workload or upload an image. After authorization and the applicable review gate, rerun only the four policy descriptions above; permission failure stays blocked with no broader role grant or alternate identity. Verify the returned policy evidence before any storage apply plan.
+At the initial preflight this state change was **NOT AUTHORIZED / NOT EXECUTED**. That historical state is superseded only for this API by the subsequent explicit authorization and execution receipt below. It enables the administrative policy API only; it does not create a bucket, change a policy/IAM rule, enable public access, create a workload or upload an image. After authorization and the applicable review gate, rerun only the four policy descriptions above; permission failure stays blocked with no broader role grant or alternate identity. Verify the returned policy evidence before any storage apply plan.
 
 The prior disabled state is recorded. Rollback, if specifically required, is disabling only this API after checking dependencies; never force-disable dependent services or change another workload. No recurring activity is introduced. [Official service-enable command](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable).
+
+## Authorized API activation and verified result
+
+On 2026-09-30 the Owner explicitly authorized **only** Organization Policy API activation and the four policy reads. The API activation completed successfully, followed by four successful effective-policy responses in the same pinned project and existing interactive session. No credentials were extracted or identities impersonated. Private raw evidence and the authorization receipt remain outside Git.
+
+| Effective constraint | Observed response |
+|---|---|
+| `storage.publicAccessPrevention` | `enforce=false` |
+| `iam.allowedPolicyMemberDomains` | `allowAll=true` |
+| `iam.managed.allowedPolicyMembers` | `enforce=false` |
+| `gcp.resourceLocations` | `allowAll=true` |
+
+Each response contained one unconditional rule. These four constraints do not themselves prohibit the proposed region/public reader at the time of reading. They do not prove bucket creation, IAM mutation or budget permissions; other controls and later changes may still block an operation. No organization policy was changed. No bucket, budget, IAM grant, upload or public image was created.
+
+Architecture PR #453 is integrated at `731cc8ce1dd3322d088ca15811cd1476ed1a332a`: 17/17 post-merge runs succeeded, including Pages run 36773773573. The published proposal returned HTTP 200 with expected content. [Recorded post-merge and activation evidence](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/453#issuecomment-5919374995).
+
+## Reviewable next operation: empty private preview bucket
+
+**PREPARED / NOT EXECUTED / specific resource authorization required.** This step creates exactly one empty preview bucket in the already resolved project. It deliberately keeps public-access prevention enforced while the image and catalog gates are completed. The private receipt pins the neutral candidate name; no alternate project/name is selected silently if it is unavailable.
+
+| Setting | Exact proposed disposition |
+|---|---|
+| Resource count | One new empty bucket; no objects |
+| Location / class | `europe-west1` / `STANDARD` |
+| Access model | Uniform bucket-level access; public-access prevention enforced |
+| Principal changes | None; existing inherited project access is inspected after creation, not silently rewritten |
+| Encryption | Google-managed default; no new key or key service |
+| Recovery | Explicit seven-day soft deletion; no locked retention policy |
+| Other features | No Autoclass, lifecycle deletion, object-versioning activation, website, CDN, CORS or background sync |
+| Identity | Same existing interactive session; explicit project/account arguments; no service-account reuse |
+| Output | Private creation/configuration/IAM receipts and sanitized public result |
+
+Reviewed command shape (placeholders are resolved from the private preflight receipt, never literal public identifiers):
+
+```text
+gcloud storage buckets create gs://CANDIDATE --project=PROJECT --account=EXISTING_INTERACTIVE_ACCOUNT --location=europe-west1 --default-storage-class=STANDARD --uniform-bucket-level-access --public-access-prevention --soft-delete-duration=7d --quiet --format=json
+```
+
+Before the write, recheck the pinned project/session, candidate absence and relevant effective constraints. A conflict, permission failure or changed restrictive policy stops the operation; no role grant, alternate identity, replacement bucket or retry that changes scope follows. After an unknown write outcome, describe this exact candidate and establish ownership/configuration before considering any retry. After success, describe the bucket and read its IAM policy privately; verify region, class, uniform access, prevention and soft-delete interval. Unexpected inherited access is a blocker for uploading data, not permission to alter project IAM.
+
+This creates a billable-service resource, with no stored bytes or public-download traffic in this step. No zero-cost guarantee is made: metadata operations and future usage follow service pricing. The selected EUR 5 monitoring objective is **not yet activated**, and no cost ceiling is claimed. Exact regional storage/request pricing and an approved budget/notification configuration remain prerequisites to uploading the pilot image. [Bucket creation flags](https://docs.cloud.google.com/sdk/gcloud/reference/storage/buckets/create).
+
+Rollback for this step is to leave the empty bucket private and stop. Deletion requires a separate deliberate decision after proving it is still empty and exclusively this resource; no automatic deletion or project-wide rollback. Source originals remain local throughout.
+
+## Subsequent publication and monitoring gates
+
+These are **not included** in the empty-bucket authorization:
+
+- Budget: EUR 5 monthly alerts-only objective. The CLI supports a resource-label filter and project filter, but a label must be applied and actual billing attribution verified before calling this a preview-only monitor. Budget API availability and creation permission remain unverified. Default budget notification recipients include billing administrators/users, so no default-recipient budget is created silently. Select and authorize the recipient configuration before enabling alerts; no billing shutdown. [Budget command and notification options](https://docs.cloud.google.com/sdk/gcloud/reference/billing/budgets/create).
+- Preview: choose the exact approved bytes, complete integrity/MIME/malware/privacy/rights checks and the authoritative external-origin catalog association. No resize, upload or public classification follows from bucket creation.
+- Publication: separately authorize lifting prevention **only on this dedicated bucket** and the public read-without-listing binding. Recheck effective policies first. Public-read bucket access exposes every object in that bucket: it must contain only individually approved previews, never private staging material. A public URL and its metadata are public even without listing. [Public access guidance](https://docs.cloud.google.com/storage/docs/access-control/making-data-public).
+- Delivery: verify public bytes and exact image/version-to-workflow binding, minimized field selection, private retention/delivery and real gallery OAT. Revoking public access cannot recall cached/downloaded copies.
+
+Full F4 and BKL-049 remain OPEN. BKL-043, its monitor, EAGLE and existing private storage/IAM remain untouched. This document is an operational plan, not evidence that the resource or monitoring exists.
