@@ -96,7 +96,7 @@ The follow-up [vendor inquiry and bounded proof protocol](BKL-049-F0-Vendor-Inqu
 
 ## 6. Owner module inventory and upgrade candidate — 2026-09-30
 
-Owner DECLARED regular use of RC Astro BlurXTerminator, NoiseXTerminator and StarXTerminator. Installed module/model versions and legacy versus unified distribution remain unknown. Owner reports PixInsight 1.9.5 build 1706 as the offered upgrade, not as an installed version; the confirmed installed baseline remains 1.9.4 build 1695 until explicitly superseded.
+Owner DECLARED regular use of RC Astro BlurXTerminator, NoiseXTerminator and StarXTerminator. At initial inventory, module/model versions and distribution were unknown. Subsequently the Owner confirmed the single unified RC Astro repository, completed the upgrade to PixInsight 1.9.5 build 1706 and reported the RC Astro tools working. This supersedes 1695 as the current DECLARED baseline. Exact RC Astro module/model versions remain unknown. No scientific processing, capture validation or independent runtime observation is inferred from the report.
 
 Official RC Astro sources checked on 2026-09-30:
 
@@ -107,3 +107,7 @@ Official RC Astro sources checked on 2026-09-30:
 This establishes vendor-declared compatibility for the unified distribution with the 1.9.5 family, not a verified installation on the Owner's workstation or proof of complete workflow capture. Before advising the upgrade, determine which repository/distribution is installed. No repository configuration, module, license activation, model download or application version was changed.
 
 Research implications: each RC Astro test must identify product, module version and selected ML model version where exposed; record actual parameters, image inputs/outputs and evidence source. Missing model identity stays an explicit gap. Preserve original historical process representations and their version context; do not silently reinterpret old parameters using a newer module. StarXTerminator cases must check every actually generated output and its relationship to the input. Internal proprietary model computation is not claimed observable, and model binaries/weights are not collected or redistributed. These are proof requirements, not new runtime acceptance claims.
+
+### Post-upgrade evidence boundary
+
+Owner confirmation of the unified repository and successful upgrade is DECLARED evidence. PCL 2.11.0 source labels align with core 1706, and the documented minimum version for extended image notifications is met. This removes the earlier version-threshold obstacle, not the cross-module identity limitation. Historical 1695 analyses above remain comparisons; current SDK/load/signing tests and project/history/RC Astro capture coverage remain unproven. No further installation or processing authorization is inferred. The unsent vendor inquiry has been updated to target 1706.

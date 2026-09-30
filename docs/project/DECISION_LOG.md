@@ -279,3 +279,8 @@ L’Owner ribadisce come obiettivo l’archiviazione dell’intero workflow PixI
 ### 2026-09-30 — BKL-049 F0 autonomous evidence follow-up
 
 During the Owner-authorized absence, official PCL/PJSR revisions were inventoried and twelve isolated synthetic contract probes reproduced existing boundaries, including order, capacity, privacy and image-binding gaps. See the [evidence addendum](../architecture/assessments/BKL-049-F0-Evidence-Addendum.md). No native code, install, runtime processing, vendor contact or production fix was performed. F0 remains open, PR draft; questions are held for the Owner return. The full workflow linked to gallery images remains the objective; BKL-043 stays current/next.
+
+
+### 2026-09-30 — BKL-049 Owner-confirmed PixInsight upgrade
+
+Owner confirmed the unified RC Astro repository, upgrade to PixInsight 1.9.5 build 1706 and working BlurXTerminator, NoiseXTerminator and StarXTerminator. Recorded as DECLARED evidence, superseding the installed 1695 baseline while retaining historical OAT. No native capture, scientific processing or independent validation is implied. Updated dossier and unsent vendor inquiry; F0 remains open and BKL-043 scope unchanged.

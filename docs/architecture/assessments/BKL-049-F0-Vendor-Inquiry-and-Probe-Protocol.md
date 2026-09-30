@@ -8,11 +8,11 @@ This concretizes the questions and proof scenarios in the [evidence addendum](BK
 
 Proposed recipient: `info@pixinsight.com`, explicitly identified for written permission in the official PCL License 2.0.1. The Owner may send the text below or explicitly authorize a sending channel. No account or sending channel is assumed. The inquiry contains public project context and the already confirmed product/platform baseline, without private machine identities or scientific data.
 
-Subject: PixInsight 1.9.4 build 1695 — supported workflow provenance capture and PCL development conditions
+Subject: PixInsight 1.9.5 build 1706 — supported workflow provenance capture and PCL development conditions
 
 Hello PixInsight team,
 
-We are assessing a proposed Digital StarGate integration that would archive a PixInsight workflow and associate its evidence with the exact resulting image in a scientific image gallery. This is a feasibility inquiry, not a claim that such capture is currently supported. The intended baseline is PixInsight 1.9.4 build 1695 on Windows 11 Pro x64.
+We are assessing a proposed Digital StarGate integration that would archive a PixInsight workflow and associate its evidence with the exact resulting image in a scientific image gallery. This is a feasibility inquiry, not a claim that such capture is currently supported. The Owner has upgraded to PixInsight 1.9.5 build 1706 on Windows 11 Pro x64 and reports the unified RC Astro BlurXTerminator, NoiseXTerminator and StarXTerminator tools working. Complete workflow capture remains untested.
 
 We have inspected the official PCL repository at revision 5a3902196a7d7a701385a7113cbdce2976ae1a85, the older PCL revision afea714e681853dfc21e70b5d53811ae41849e97, and the official PJSR revision 76e4f38c461320f07a0010bcc973fe26133f303a labelled for build 1695. No native module has been developed, installed or tested as part of this inquiry.
 
@@ -20,7 +20,7 @@ Could you clarify the following, or point us to authoritative documentation?
 
 1. Development and distribution conditions. The PCL License 2.0.1 distinguishes restrictions on training, training datasets and API services for automated code generation. Does using a coding assistant to help develop an independent third-party module require written permission in the intended workflow? We are not proposing to train models on PCL, distribute PCL as a code-generation service, or redistribute PixInsight itself. Please identify any required permission, application-license/automated-build entitlement and requirements for distributing the resulting module and linked libraries. We do not assume that every use of a coding assistant is prohibited by the license.
 
-2. Supported API baseline. Which PCL revision, API version, Visual Studio/toolset and Windows SDK should be used for a module targeting build 1695? We found API 0x0188 in current PCL and 0x0187 in the older header. Is there a supported reproducible build recipe for the appropriate libraries and module?
+2. Supported API baseline. Which PCL revision, API version, Visual Studio/toolset and Windows SDK should be used for a module targeting build 1706? We found API 0x0188 in current PCL and 0x0187 in the older header. Is there a supported reproducible build recipe for the appropriate libraries and module?
 
 3. Execution and history coverage. Is there a supported interface to observe or enumerate process execution order, exposed parameter values, input/output relationships and mask relationships across built-in and third-party modules, scripts and global operations? The extended ImageUpdated callback appears to require build 1696 and to provide a process instance only for the same module. Please distinguish currently supported capabilities from unsupported or planned ones.
 

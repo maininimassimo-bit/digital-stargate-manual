@@ -58,8 +58,8 @@ PCL access is distinct from entitlement to run or redistribute the proprietary P
 
 | Item | Established evidence | Remaining requirement |
 |---|---|---|
-| Owner runtime | Owner reconfirmed 1.9.4 build 1695 and the same Windows workstation on 2026-09-30; `DECLARED` confirmation, supported by older BKL-045 OAT | Owner supplied Windows 11 Pro 25H2, build 26200.9550, 64-bit OS, then Win32_Processor Architecture=9 confirming x64; research host is not assumed to be target |
-| Current SDK | S1 revision labelled PCL 2.11.0 / core 1.9.5 build 1706 | Do not pair silently with core 1695; determine supported SDK/API/ABI baseline |
+| Owner runtime | Owner subsequently confirmed upgrade to **1.9.5 build 1706** on 2026-09-30 and reported all three RC Astro tools working; `DECLARED`, not independently observed. Earlier 1695 confirmation and BKL-045 OAT remain historical evidence | Owner supplied Windows 11 Pro 25H2, build 26200.9550, 64-bit OS, then Win32_Processor Architecture=9 confirming x64; research host is not assumed to be target |
+| Current SDK | S1 revision labelled PCL 2.11.0 / core 1.9.5 build 1706 | Version label now aligns with Owner-declared 1706; compiled SDK/API/ABI compatibility remains untested |
 | Historical candidate | S7 labelled PCL 2.10.4 / core 1.9.4 | Exact build 1695 support and vendor guidance not proven |
 | Windows build | S1 specifies Visual C++ 2022, C++20; reference Windows 11; S8 uses v143 and release DLL CRT | Pin MSVC patch, Windows SDK, dependencies and reproducible commands; inspect actual library project availability (README layout alone is insufficient) |
 | Environment | S1 documents PCLDIR, PCLINCDIR, PCLSRCDIR, PCLBINDIR/PCLBINDIR64, PCLLIBDIR/PCLLIBDIR64 | Configure only in an authorized isolated build environment; no machine environment changed |
@@ -77,7 +77,7 @@ PCL access is distinct from entitlement to run or redistribute the proprietary P
 | Process identity/version and parameters | ParentProcess, Version, ParameterValue/TableRowCount, ToSource/ToHistorySource (S4) for an available instance | `PARTIAL`: serialized configuration does not prove execution; instance version is not necessarily module binary version | Known scalar/table/string cases, unsupported/private fields, redaction and event-time snapshot |
 | Process notifications | ProcessCreated/Updated/Deleted/Saved (S3/S7) | Instance lifecycle, not documented start/end/completion of every execution; ordered executed workflow `UNAVAILABLE` | Distinguish edit/icon-save from execute; repeated instance, abort and failure |
 | Image notifications | ImageCreated/Updated/Renamed/Deleted (S3/S7) | `PARTIAL`: state change does not identify process, input set or success; notifications can be broadcast | Correlate without inferring causality, duplicates, previews, dynamic operations |
-| Extended image update | S3 adds instance pointer from core 1.9.4 build 1696 / API 0x188 | **Unavailable on 1695**. Pointer is null for another module's process or core modification. Upgrade does not provide universal cross-module identity | Optional later same-module vs different-module test, only if upgrade authorized |
+| Extended image update | S3 adds instance pointer from core 1.9.4 build 1696 / API 0x188 | **Unavailable on historical 1695; documented version threshold met by Owner-declared 1706, runtime untested**. Pointer is null for another module's process or core modification. Upgrade does not provide universal cross-module identity | Later same-module vs different-module test requires separate runtime authorization |
 | Built-in/standard processes | Usually implemented in separate modules; S3/S6 | `PARTIAL` image/instance metadata; no automatic complete history demonstrated | Per-family in-place, global/multi-output, non-image and dynamic-process cases |
 | Own process callbacks | Before/AfterExecution, global counterparts (S6) | Local process implementation lifecycle, not interception of arbitrary other modules; outside passive recorder proof | Vendor-supported observer mechanism or explicitly bounded cooperative design |
 | Timing and order | GetExecutionTimes records latest execution of an available instance, zeros if missing (S4) | `PARTIAL`: no complete journal; repeated executions can supersede timing; timestamp sorting cannot prove global order | Repeated same-instance runs, concurrent/global work, cancellation, unknown times |
@@ -124,7 +124,7 @@ The [reproducible evidence addendum](BKL-049-F0-Evidence-Addendum.md) adds a pin
 | Retain BKL-045 exporter | Proven fail-closed baseline and lowest operational impact | Default until richer evidence passes gates; automatic history remains UNAVAILABLE |
 | Vendor-supported new observer API | Could address actual missing boundary | Ask for documentation/roadmap only after Owner authorizes contact; no promise of availability |
 
-Principal risks: unsupported ABI on 1695; license/workflow uncertainty; false causality from callbacks; privacy leakage in source strings; lost undo/redo and project branches; journal gaps or resource overhead; coarse manifest losing detail. Treatments are version pinning, license clarification, explicit negative tests, allowlisted metadata/redaction, durable evidence design and preserving sidecar/source locators. CPU/I/O/latency budgets require later measurement; no numeric budget invented.
+Principal risks: unverified compiled ABI on the new 1706 baseline; license/workflow uncertainty; false causality from callbacks; privacy leakage in source strings; lost undo/redo and project branches; journal gaps or resource overhead; coarse manifest losing detail. Treatments are version pinning, license clarification, explicit negative tests, allowlisted metadata/redaction, durable evidence design and preserving sidecar/source locators. CPU/I/O/latency budgets require later measurement; no numeric budget invented.
 
 ## 8. F0 exit and F1 entry evidence
 
@@ -132,7 +132,7 @@ Principal risks: unsupported ABI on 1695; license/workflow uncertainty; false ca
 |---|---|---|
 | G0 parallel authorization and isolation | RECORDED | Owner request; dedicated branch; BKL-043 unchanged |
 | G1 SDK and license inventory | PARTIAL | Official sources pinned; resolve workflow restriction, dependency notices, application/CI entitlement and signing path before development |
-| G2 exact environment/ABI/toolchain | PARTIAL | Owner confirmed core 1695/same workstation and supplied Windows 11 Pro 25H2 build 26200.9550, x64 (Win32_Processor Architecture=9); matching SDK/API and reproducible toolchain still needed |
+| G2 exact environment/ABI/toolchain | PARTIAL | Owner confirmed upgrade to core 1706 and RC Astro operation after previously supplying Windows 11 Pro 25H2 build 26200.9550, x64 (Win32_Processor Architecture=9); matching SDK/API and reproducible toolchain still needed |
 | G3 support matrix | PRELIMINARY | Vendor-documented cross-module/history/project mechanism, or explicit decision accepting reduced scope/alternative. No universal recorder claim |
 | G4 contract feasibility | STATIC + SYNTHETIC BOUNDARY PROBES; END-TO-END UNPROVEN | Decide capture-method versioning, detail preservation, privacy and digest model in reviewed F1 design |
 | G5 feasibility decision | NOT ACCEPTED | Review the evidence and alternative trade-offs; do not promote F1 automatically |
