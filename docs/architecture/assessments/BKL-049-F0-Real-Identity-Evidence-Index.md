@@ -132,3 +132,18 @@ Across the six direct CurvesTransformation instances, all 66 exported curve tabl
 This resolves 132 of the earlier 174 unverified assignments. The cumulative direct-entry comparison is now **261 corroborated assignments out of 303, with 42 unresolved**. Tables count as assignments here, not as individual scalar cells. The 78 assignments in the three nested PixelMath instances remain outside this particular comparison. Original historical counts are retained above to show the scope progression, not competing final totals.
 
 The private comparison report retains aggregate results. No parameter values or curve points are published. Remaining nonmatching representations, especially third-party fields, must not be equated speculatively. Better parameter coverage does not establish execution, historical image/mask versions, supported automatic project extraction or complete capture. F0 remains OPEN.
+
+
+## Nested PixelMath and consolidated assignment coverage
+
+The three direct children of the nested ProcessContainer were aligned in retained source order with the three exported PixelMath instances. All parameter identifier sets agree, with no duplicate direct XML identifiers. Each instance has 26 matching assignments: **78/78** in total. Strings, including expressions, were compared exactly without execution; booleans explicitly and numbers using Decimal equality without tolerance. The two SameAsTarget enum fields per instance were checked against the explicit definitions in the pinned official [header](https://gitlab.com/pixinsight/PCL/-/blob/5a3902196a7d7a701385a7113cbdce2976ae1a85/src/modules/processes/PixelMath/PixelMathParameters.h) and [implementation](https://gitlab.com/pixinsight/PCL/-/blob/5a3902196a7d7a701385a7113cbdce2976ae1a85/src/modules/processes/PixelMath/PixelMathParameters.cpp). Both file fingerprints are now in the source registry. No default substitution, expression evaluation or vendor-code redistribution occurred.
+
+Together with the direct-entry comparisons, **339 of the 381 exported MAIN assignments are corroborated; 42 remain unresolved**. This denominator covers supplied assignments, not every field in the project, every processing event or the entire workflow. It does not measure completeness as a percentage of the Owner's scientific workflow.
+
+| Unresolved assignment group | Count | Required disposition |
+|---|---|---|
+| RC Astro parameters without same-ID direct XML counterparts | 34 | Preserve both original representations; seek version-specific documented correspondence without guessing migration or filling defaults |
+| Other process enums | 7 | Explicit source-backed mapping for the relevant parameter/version, not numeric coincidence |
+| Other process table | 1 | Verified column/row semantics and representation comparison |
+
+The remaining non-RC fields belong to BackgroundNeutralization, SpectrophotometricColorCalibration, SCNR, LocalHistogramEqualization and MultiscaleMedianTransform. An unresolved field is not automatically a mismatch or loss. The private comparison record stays separate from the six-record index. Masks, state selection, omitted initial operations, exact image versions, automatic extraction and gallery binding remain independent open questions. F0 stays OPEN.

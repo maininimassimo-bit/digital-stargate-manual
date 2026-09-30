@@ -344,3 +344,8 @@ Compared 303 direct MAIN assignments: 129 supported value comparisons match; 174
 ### 2026-09-30 — BKL-049 Curves representation comparison
 
 Pinned official parameter definitions support comparison of 66 curve-table assignments and 66 interpolation enums, all matching retained project/export representations. Direct MAIN comparison now corroborates 261/303 assignments, with 42 unresolved; nested PixelMath remains separately unverified. Two official source fingerprints added, no vendor source redistributed. See the [follow-up evidence](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN, no automatic-capture or historical runtime claim.
+
+
+### 2026-09-30 — BKL-049 nested PixelMath comparison
+
+All 78 assignments across three nested PixelMath instances match the retained project representation, including exact expression text without evaluation. Two official parameter-definition fingerprints support enum comparison. Cumulative MAIN assignment coverage is 339/381, with 34 RC Astro and eight other representation questions unresolved. This is not workflow completeness or execution proof. See the [consolidated comparison](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN; no image or production changes.
