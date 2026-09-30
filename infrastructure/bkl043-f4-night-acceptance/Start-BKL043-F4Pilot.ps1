@@ -95,14 +95,25 @@ function Get-RunningTaskProcessPresence([string]$TaskName) {
     return $false
 }
 
-function Get-TaskSignals([TimeZoneInfo]$TimeZone) {
+function Get-TaskSignals([TimeZoneInfo]$TimeZone, [scriptblock]$UtcNow = { [datetime]::UtcNow }) {
     $items = @()
     foreach ($name in $script:TaskNames) {
         $task = Get-ScheduledTask -TaskPath '\' -TaskName $name
+        $readStartUtc = & $UtcNow
         $info = Get-ScheduledTaskInfo -InputObject $task
+        $readEndUtc = & $UtcNow
         $lastRunUtc = $null
         if ($info.LastRunTime -and $info.LastRunTime -ne [datetime]::MinValue) {
             $lastRunUtc = Convert-LocalTimeToUtc $info.LastRunTime $TimeZone
+            # Preserve subsecond precision when checking the original Scheduler value.
+            $wallTime = [datetime]::SpecifyKind($info.LastRunTime, [DateTimeKind]::Unspecified)
+            if ($null -ne $lastRunUtc) {
+                $candidateUtc = [TimeZoneInfo]::ConvertTimeToUtc($wallTime, $TimeZone)
+                if ($readEndUtc -lt $readStartUtc -or $candidateUtc -gt $readEndUtc) {
+                    $lastRunUtc = $null
+                    Write-Warning "BKL043_TASK_LAST_RUN_UNVERIFIABLE task=$name"
+                }
+            }
         }
         # Task Scheduler codes may use the high bit; preserve the reported number.
         $result = [long]$info.LastTaskResult

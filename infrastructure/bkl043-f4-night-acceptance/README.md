@@ -1,4 +1,16 @@
-# BKL-043 F4 — night-window candidate
+# TIME-01 follow-up candidate — no new runtime authorization
+
+This revision mitigates inconsistent Task Scheduler last-run timestamps: capture UTC immediately before and after the task-info read, preserve full timestamp precision for comparison, and emit `last_run_utc: null` plus `BKL043_TASK_LAST_RUN_UNVERIFIABLE` if the timestamp is later than the read end or the local clock moves backwards during the read. Other task fields remain unchanged. No automatic COM fallback is introduced. The receiver already accepts null last-run timestamps.
+
+This is a mitigation, not a diagnosis of the underlying CIM discrepancy. Incorrect past timestamps and constant external clock offset are not detected by this guard. Task result zero does not prove delivery. Six synthetic cases cover future/past timestamps, execution during acquisition, exact boundary, subsecond future values and a backwards clock. They run in the existing offline validation workflow.
+
+Private evidence includes an offline replay of an observed discrepant sample and an Owner-executed read-only check of all three tasks using this candidate. The latter returned ordinary timestamps and no warnings: it does not exercise the anomalous branch live or prove end-to-end delivery. Raw/private evidence is not included in this repository.
+
+The dates retained below and in the manifest are the **expired historical window**, not a proposed new window. Do not launch this candidate. A new window, exact package, applicable review and Owner runtime authorization remain required. F4 remains OPEN; this change does not merge or authorize the pending runtime PRs. The manifest collector hash has been updated for this candidate only.
+
+---
+
+# BKL-043 F4 â€” night-window candidate
 
 ## Unreleased OAT remediation
 
