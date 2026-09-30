@@ -1,0 +1,19 @@
+// SYNTHETIC RESEARCH FIXTURE. Never run in PixInsight.
+var Root = new ProcessContainer;
+var Group = new ProcessContainer;
+var First = new PixelMath;
+First.expression = "$T";
+First.amount = 0.120000;
+Group.add(First);
+Group.setMask(0, "SYNTHETIC-MASK");
+Group.invertMask(0);
+var Second = new PixelMath;
+Second.expression = "$T";
+Second.amount = 0.240000;
+Group.add(Second);
+Root.add(Group);
+var Final = new PixelMath;
+Final.expression = "SYNTHETIC_MAIN + SYNTHETIC_STARS";
+Final.createNewImage = true;
+Final.newImageId = "SYNTHETIC_FINAL";
+Root.add(Final);

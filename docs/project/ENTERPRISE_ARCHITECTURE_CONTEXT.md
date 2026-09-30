@@ -134,3 +134,13 @@ The approved F3-A3 decisions fix the candidate roles, exact local SPK identity, 
 ## 15. F3-A3 bootstrap-state boundary
 
 The authorized bootstrap established only the isolated F3-A3 service identities, main-ref WIF trust and protected state/data/evidence buckets. Bootstrap state is remote and versioned. PR #219 promoted the permanent backend and corrected the migration serial acceptance rule after fail-closed incident `ARB-213-MI02-I01`; post-promotion lineage/content, recovery candidate, locking and zero drift were verified. No platform resource, scientific artifact, protected site datum, runtime S10 or Safety Authority is introduced.
+
+
+## 30/09/2026 — BKL-049 F0 in parallelo
+
+BKL-043 resta corrente e aperta. L’Owner autorizza BKL-049 F0 limitatamente a ricerca SDK/licenze e fattibilità non invasiva, su branch dedicato. [Dossier e gate aperti](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md). Nessuna closure F0, promozione F1 o estensione di autorità runtime.
+
+
+## 30/09/2026 — BKL-049 scope aggiornato: archivio parziale e gallery
+
+La successiva decisione esplicita dell’Owner sostituisce il requisito di cattura automatica integrale: archiviare le history disponibili, accettando lacune visibili, **con collegamento obbligatorio alla corretta immagine/versione nella gallery**. Nessuna associazione per supposizione. Il [piano aggiornato](../architecture/assessments/BKL-049-PixInsight-Native-Workflow-Capture-Module-Plan.md) prevale sulle descrizioni native precedenti. Baseline attuale dichiarata: PixInsight 1.9.5 build 1706; SYN-01/SYN-02 autorizzati separatamente hanno fornito evidenze circoscritte. F0 resta aperta per review del nuovo scope; F1 non promossa, BKL-043 corrente e autorità scientifiche invariate.

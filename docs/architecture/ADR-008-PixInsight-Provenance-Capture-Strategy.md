@@ -1,6 +1,6 @@
 # ADR-008 — PixInsight Provenance Capture Strategy
 
-**Status:** Accepted — applied by BKL-045 F3/F4 and closure; native successor planned by BKL-049  
+**Status:** Accepted — applied by BKL-045 F3/F4 and closure; native successor BKL-049 in F0 feasibility research
 **Date:** 09/09/2026  
 **Decision owner:** Digital StarGate Architecture  
 **Related package:** BKL-045 F2  
@@ -125,7 +125,7 @@ That evidence activates the native-module revisit path. BKL-049 now plans an end
 - publish a sanitized, read-only workflow archive and step-by-step visualization in the portal;
 - represent unsupported, opaque or missing activity explicitly as `PARTIAL` or `UNAVAILABLE`, never as inferred `OBSERVED` evidence.
 
-BKL-049 is `Planned`, not current and not implemented. The accepted hybrid exporter remains the operational baseline until a future BKL-049 increment passes SDK/licensing feasibility, detailed architecture, real PixInsight OAT, independent review and governed release acceptance. This planning amendment does not authorize code, installation, catalog writes, image mutation, autonomous processing, AI apply or Safety Authority.
+BKL-049 was initially `Planned`. On 2026-09-30 the Owner authorized parallel F0 feasibility research and documentation; BKL-043 remains the current open package. F0 is not closed and native implementation remains unstarted. The [F0 dossier](assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md) records current SDK/licensing and cross-module observation gaps; it does not accept a new native architecture or promote F1. The accepted hybrid exporter remains the operational baseline until a future BKL-049 increment passes SDK/licensing feasibility, detailed architecture, real PixInsight OAT, independent review and governed release acceptance. This planning amendment does not authorize code, installation, catalog writes, image mutation, autonomous processing, AI apply or Safety Authority.
 
 ## Revisit triggers
 
@@ -135,3 +135,8 @@ Reconsider this ADR if:
 - F3 demonstrates an essential provenance gap requiring PCL;
 - Project/history persistence semantics change incompatibly;
 - a supported structured provenance API becomes available.
+
+
+## Owner scope revision — 2026-09-30, supersedes native-successor requirement
+
+The Owner changed the BKL-049 objective to an archive of available workflow evidence, accepting explicit PARTIAL/UNAVAILABLE gaps while retaining **mandatory linkage to the correct gallery image/version**. Automatic integral capture and a native PCL module are no longer required. The [revised plan](assessments/BKL-049-PixInsight-Native-Workflow-Capture-Module-Plan.md) supersedes the native-successor planning intent above; original research remains retained. This scope decision aligns with retaining the hybrid evidence boundary, but does not approve a new importer architecture or contract delta. F0 revised-scope review remains open; F1 and implementation are not promoted. Catalog authority, evidence semantics, privacy, read-only constraints and deferred vendor contact remain unchanged.

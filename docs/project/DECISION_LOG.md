@@ -265,3 +265,154 @@ Owner segnala forecast scaduto alle 20:00 locali. Causa: run 00 UTC con validit�
 ## 29/09/2026 — Roadmap leggibile e allineamento della hero Planner
 
 Owner richiede badge meno ingombranti, un indicatore di progresso moderno e l'allineamento del Celestial Atlas. Si adottano dettagli nativi per testi estesi preservati integralmente, schede responsive e indicatore prospettico CSS alimentato dalla stessa projection. Cielo previsto e scena 3D condividono la seconda riga della hero, con disposizione verticale su mobile. Aggiornati documentazione tecnica e test di regressione; nessuna variazione a stato governato, fonti, calcoli o autorità. Review e pubblicazione registrate nella PR dedicata.
+
+
+## 30/09/2026 — avvio parallelo BKL-049 F0
+
+L’Owner autorizza SDK/licensing and feasibility, ricerca ufficiale, verifica tecnica non invasiva e documentazione su worktree/branch dedicato da origin/main aggiornato. BKL-043 resta corrente e aperta; monitor, pilot e PR #428/#438/#439 non sono modificati. Nessun codice di produzione, installazione, acquisto, elaborazione scientifica o accesso EAGLE è autorizzato. Versione PixInsight 1.9.4 build 1695 e stessa workstation Windows riconfermate dall’Owner, senza pubblicarne identità.
+
+[Dossier F0](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md): raccomandazione tecnica preliminare di continuare la verifica, senza approvare la cattura passiva universale. Restrizioni di licenza, esatto abbinamento SDK/ABI e interfacce cross-module/progetto restano gate aperti; F0 non conclusa, F1 non promossa. Questa registrazione non seleziona un’alternativa architetturale.
+
+L’Owner ribadisce come obiettivo l’archiviazione dell’intero workflow PixInsight abbinato alle immagini della Scientific Image Gallery. Il piano e il dossier richiedono navigazione dall’immagine al workflow archiviato e correlazione esatta asset/run tramite AP14-W06, preservando AP-013. La matrice di supporto non autorizza riduzioni implicite dell’obiettivo; gap restano PARTIAL/UNAVAILABLE e una riduzione materiale richiede decisione Owner. Nessuna nuova autorizzazione a pubblicare immagini o a eseguire processing deriva da questa precisazione.
+
+
+### 2026-09-30 — BKL-049 F0 autonomous evidence follow-up
+
+During the Owner-authorized absence, official PCL/PJSR revisions were inventoried and twelve isolated synthetic contract probes reproduced existing boundaries, including order, capacity, privacy and image-binding gaps. See the [evidence addendum](../architecture/assessments/BKL-049-F0-Evidence-Addendum.md). No native code, install, runtime processing, vendor contact or production fix was performed. F0 remains open, PR draft; questions are held for the Owner return. The full workflow linked to gallery images remains the objective; BKL-043 stays current/next.
+
+
+### 2026-09-30 — BKL-049 Owner-confirmed PixInsight upgrade
+
+Owner confirmed the unified RC Astro repository, upgrade to PixInsight 1.9.5 build 1706 and working BlurXTerminator, NoiseXTerminator and StarXTerminator. Recorded as DECLARED evidence, superseding the installed 1695 baseline while retaining historical OAT. No native capture, scientific processing or independent validation is implied. Updated dossier and unsent vendor inquiry; F0 remains open and BKL-043 scope unchanged.
+
+
+### 2026-09-30 — BKL-049 sanitized Owner-assisted history findings
+
+Owner deferred PixInsight vendor contact, then authorized publication of documentation needed for the repository. Published a [sanitized evidence report](../architecture/assessments/BKL-049-F0-Owner-Assisted-History-Evidence.md) without raw exports or private asset names. Project history supplies RC Astro, nested-process, mask and recombination evidence; single-image final export showed a bounded omission. Overall PARTIAL, F0 OPEN; no F1 architecture, SDK implementation or catalog authority change. BKL-043 remains outside this work.
+
+
+### 2026-09-30 — BKL-049 isolated export reader feasibility
+
+Added an original standard-library nonexecuting reader for a bounded JavaScript export subset under experiments, with 27 synthetic tests and sanitized count observations on two privately supplied artifacts. See the [reader report](../architecture/assessments/BKL-049-F0-Nonexecuting-Export-Reader.md). No production importer, SDK dependency, execution, public raw data, PXP classification or scientific authority change; F0 remains open.
+
+
+### 2026-09-30 — BKL-049 synthetic export-to-consumer feasibility
+
+A fixed synthetic export traverses the nonexecuting research reader, an experiment-only DECLARED/PARTIAL sidecar and existing PXP/AP14-W06 validator, manifest, ledger, reconciliation, projection and read-model functions. Nine assertions verify preservation and fail-closed boundaries; no real source ingestion or production contract change. See the [pipeline report](../architecture/assessments/BKL-049-F0-Synthetic-Pipeline-Experiment.md). F0 remains open; BKL-043 unchanged.
+
+
+### 2026-09-30 — BKL-049 synthetic identity boundary and F0 consolidation
+
+Ten generated-file scenarios characterize a research identity envelope, including a counterexample showing that replaced trust anchors defeat an authenticity claim. Updated G3/G4 evidence status without closing F0 or altering AP-013/AP14-W06. See the [identity experiment](../architecture/assessments/BKL-049-F0-Identity-Packet-Experiment.md). No real images accessed, public raw data, vendor contact or BKL-043 changes.
+
+
+### 2026-09-30 — BKL-049 real final-file identity and private evidence index
+
+Owner-specified XISF hashing established a real final-file identity; a different-project candidate was explicitly excluded. Local records and the original project export were fingerprint-checked without decoding pixels or publishing raw sources. Subsequent bounded header inspection found the matching recombination and two additional saved steps, DynamicCrop and CurvesTransformation. See the [sanitized index report](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). Association is corroborated by embedded text but not independent execution evidence; coverage remains PARTIAL, gallery binding UNRESOLVED within inspected fixture scope, F0 OPEN. No scientific catalog writes or BKL-043 changes.
+
+
+### 2026-09-30 — BKL-049 repeatable bounded header reader
+
+An isolated counts-only XISF header reader reproduces the three-instance final-file observation and explicitly scopes history to its image. Synthetic malformed/unsupported input checks pass; attached history and full-workflow capture remain unsupported. See the [evidence report](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). No pixel reads beyond the header, image mutation, production adapter or F0 acceptance; BKL-043 unchanged.
+
+
+### 2026-09-30 — BKL-049 published gallery boundary verified
+
+Read-only HTTP checks confirmed the published gallery selects the three-entry bounded fixture and the published gallery/archive JSON equals the checked-in data at `9058402e`. Documented the required real version, upstream branch, mask and governed gallery associations without changing fixtures or scientific authority. See the [evidence and association sequence](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN; no upload, processing, vendor contact or BKL-043 intervention.
+
+
+### 2026-09-30 — BKL-049 consolidated F0 recommendation, no false closure
+
+Reconciled the plan's obsolete 1695 target and dossier's obsolete live-gallery access statement. Consolidated evidence for all five requested research subjects and the negative recommendation for a universal passive native recorder, with retained artifacts as a conditional research candidate. Separated F0 evidence/decision gates from later build and production gallery OAT. Owner scope decision, SDK-dependent disposition and supported extraction/continuity evidence remain open. See the [dossier completion boundary](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md#10-completion-boundary-and-recommendation-for-decision). No F0 closure, F1 promotion, vendor contact or BKL-043 change.
+
+
+### 2026-09-30 — BKL-049 retained project structural evidence
+
+Owner-selected project bundle located. Read-only bounded XML structure inspection found five image-window elements and additional processing/mask structures; raw blocks, seal and calibration directories were not inspected. Structural element counts do not become executed-step evidence or a supported XOSM importer. Private index fingerprint retained outside the repository; see the [sanitized report](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN.
+
+
+### 2026-09-30 — BKL-049 project/export/XISF content corroboration
+
+Nonexecuting structural comparisons matched the MAIN export's 19 class labels/order and all three FINAL parameter/table/time representations against the XISF header. A separate initial ImageIntegration and two RangeSelection views expose additional coverage/identity questions. No XOSM semantic support, executed-event promotion, pixel reads or catalog writes are claimed. See the [cross-artifact report](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 remains OPEN.
+
+
+### 2026-09-30 — BKL-049 bounded parameter comparison and mask disambiguation
+
+Compared 303 direct MAIN assignments: 129 supported value comparisons match; 174 remain outside direct comparison and are not treated as missing or equivalent. One RangeSelection candidate matches all seven supplied values; another differs in three. This corroborates configuration identity without asserting historical mask-version or execution proof. See the [parameter comparison](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). No production mapping, scientific processing or F0 closure.
+
+
+### 2026-09-30 — BKL-049 Curves representation comparison
+
+Pinned official parameter definitions support comparison of 66 curve-table assignments and 66 interpolation enums, all matching retained project/export representations. Direct MAIN comparison now corroborates 261/303 assignments, with 42 unresolved; nested PixelMath remains separately unverified. Two official source fingerprints added, no vendor source redistributed. See the [follow-up evidence](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN, no automatic-capture or historical runtime claim.
+
+
+### 2026-09-30 — BKL-049 nested PixelMath comparison
+
+All 78 assignments across three nested PixelMath instances match the retained project representation, including exact expression text without evaluation. Two official parameter-definition fingerprints support enum comparison. Cumulative MAIN assignment coverage is 339/381, with 34 RC Astro and eight other representation questions unresolved. This is not workflow completeness or execution proof. See the [consolidated comparison](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN; no image or production changes.
+
+
+### 2026-09-30 — BKL-049 non-RC representation checks resolved for supplied export
+
+Seven symbolic enum labels agree directly; the remaining MultiscaleMedianTransform table agrees in all 35 cells using explicit source column labels. Consolidated supplied MAIN assignment correspondence is 347/381, leaving 34 RC Astro fields unresolved. This is bounded artifact comparison, not a general supported importer, model-version equivalence or workflow completeness. See the [current evidence](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN.
+
+
+### 2026-09-30 — BKL-049 RC Astro preservation boundary and evidence-index successor
+
+Two-sided RC parameter inventory found 34 export-only and 20 project-only occurrences. Official schema-change documentation does not establish their full equivalence. Preserve original and exported representations separately; never treat 347/381 correspondence as a completeness score. A private successor index verified 13 analysis records while retaining the original index unchanged. See the [archival consequence](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN, no source-image copies or production changes.
+
+
+### 2026-09-30 — BKL-049 RC schema-change versus migration matrix
+
+Consolidated the accumulating evidence report and distinguished 11 officially documented changed/removed project-only RC parameter occurrences from nine without established mapping. These explanations do not resolve 34 export-only assignments or establish reversible migration. Owner reported current BlurXTerminator, NoiseXTerminator and StarXTerminator 2.6.9 (DECLARED). No historical model/runtime identity inferred. See the [current report](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN and native implementation not authorized.
+
+
+### 2026-09-30 — BKL-049 current RC update chronology separated from historical models
+
+Owner confirmed the three RC tools were updated today. Retained-project presence-only inspection found nonempty model-file references in six RC instance elements across MAIN/STARS, without following paths or identifying model binaries. Current 2.6.9 declarations cannot certify May runtime/model versions. See the [chronology and model-reference boundary](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN; no installation, processing or image change by the assistant.
+
+Owner backup availability response: UNKNOWN, not absent. Preserve the historical model-identity gap without restore or broad filesystem search.
+
+
+### 2026-09-30 — BKL-049 SYN-01 ready for specific Owner authorization
+
+Prepared a concrete Owner-operated 64×64 synthetic PixelMath sequence with independent expected order and expressions, followed by XISF save/reopen and supported UI history exports. It tests retained artifact coverage without native code, SDK, RC Astro, real-image processing or vendor contact. The exact scope and stop conditions are in the [protocol](../architecture/assessments/BKL-049-F0-Vendor-Inquiry-and-Probe-Protocol.md#4-concrete-next-experiment-syn-01-owner-operated-retained-history-check). NOT AUTHORIZED/NOT EXECUTED; F0 OPEN. Specific approval is required by the Owner's initial runtime/processing constraints.
+
+
+### 2026-09-30 — BKL-049 SYN-01 authorized and post-reopen text corroborated
+
+Owner specifically authorized and performed the synthetic sequence, then supplied a post-reopen three-entry export. Manual comparison matches 78 parameter assignments plus recorded start/duration fields to the separate pre-save texts. Exact XISF location requested for pending S6 header/integrity verification. No assistant PixInsight control, pixel measurement, original export-byte verification or universal capture claim. See the [bounded result](../architecture/assessments/BKL-049-F0-Vendor-Inquiry-and-Probe-Protocol.md#5-syn-01-result-beforeafter-pasted-history). F0 OPEN.
+
+
+### 2026-09-30 — BKL-049 SYN-01 file inspection completes bounded persistence proof
+
+Owner-selected synthetic XISF contains the three planned ordered instances, all 78 matching parameters and start timestamps; two durations differ from displayed text by sub-microsecond precision, retained explicitly. Header metadata matches the synthetic configuration. File fingerprint recorded privately, no pixel decoding/modification. S6 completed and SYN-01 has a positive bounded outcome; native automatic capture and F0 remain open. See the [file result](../architecture/assessments/BKL-049-F0-Vendor-Inquiry-and-Probe-Protocol.md#6-syn-01-file-verification-and-bounded-outcome).
+
+
+### 2026-09-30 — BKL-049 SYN-02 negative control prepared
+
+Prepared a separate Owner-operated Save As/reopen of the existing synthetic image with per-save history disabled, new filename only and no reprocessing. Missing history must remain UNAVAILABLE, never COMPLETE or silently backfilled from SYN-01. Original SYN-01 integrity will be rechecked. Specific authorization remains pending because SYN-01 excluded this variant. See the [protocol](../architecture/assessments/BKL-049-F0-Vendor-Inquiry-and-Probe-Protocol.md#7-syn-02-history-disabled-negative-control-prepared-for-approval). F0 OPEN.
+
+
+### 2026-09-30 — BKL-049 SYN-02 authorized negative control verified
+
+Owner explicitly authorized the history-disabled synthetic Save As/reopen and reported an empty History Explorer. File inspection found no direct image history property; reader result UNAVAILABLE. SYN-01 original digest remains unchanged. No pixel decoding, history backfill, image writes or COMPLETE zero-step claim. See the [negative-control result](../architecture/assessments/BKL-049-F0-Vendor-Inquiry-and-Probe-Protocol.md#8-syn-02-result-missing-history-preserved-as-unavailable). F0 OPEN.
+
+
+### 2026-09-30 — BKL-049 F0 evidence checkpoint after SYN-01/SYN-02
+
+Updated the support matrix and G3 to include the completed positive/negative retained-history tests. Distinguished their bounded result from native automatic capture, historical completeness, licensing and gallery acceptance. No repetitive PixelMath test or implementation promotion is justified by these results. See the [review checkpoint](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md#11-f0-evidence-review-after-controlled-positive-and-negative-tests). F0 OPEN; BKL-043 current, no new runtime authorization.
+
+
+### 2026-09-30 — BKL-049 Owner retains integral automatic capture
+
+Owner explicitly retained automatic entire-workflow capture; an archive of available history may support but not replace it. Scope question settled without accepting technical feasibility. F0 gate NOT PASSED/OPEN; no F1 promotion, vendor contact, install or new runtime permission. Updated backlog to accurately include authorized SYN-01/SYN-02 instead of the obsolete no-PixInsight-activity statement. See the [gate disposition](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md#12-owner-decision-integral-automatic-capture-retained). BKL-043 remains current.
+
+
+### 2026-09-30 — BKL-049 scope supersession: partial archive accepted, gallery binding mandatory
+
+Owner explicitly changed the earlier integral-capture decision and confirmed acceptance of available/partial workflow evidence **with mandatory correct image-to-workflow linkage in the gallery**. The previous scope reconfirmation is superseded, not erased. Revised plan, ADR planning amendment, backlog and canonical roadmap retain partial/unavailable semantics and exact governed identity. Native-only feasibility gates become inapplicable to the non-SDK route, not retrospectively passed. F0 remains open for revised review; no F1/production promotion or new runtime/catalog/vendor authority. BKL-043 remains current. See the [current plan](../architecture/assessments/BKL-049-PixInsight-Native-Workflow-Capture-Module-Plan.md).
+
+
+### 2026-09-30 — BKL-049 revised-scope F0 technical assessment ready
+
+Recommended detailed architecture review for the explicitly selected available-history export route, with XISF as supplementary evidence and mandatory exact gallery image/version linkage. Native dependencies are outside this route; retained research findings are not declared resolved. RC/history gaps are acceptable if disclosed; missing or wrong image association is not. Assigned concrete retention/privacy, PXP context, identity/digest/uniqueness, derivative and end-to-end obligations to F1/F4/F5. Technical review package ready, formal F0 gate OPEN pending review/delivery; no F1 promotion or production change. See [assessment](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md#13-revised-f0-exit-assessment-and-transfer-obligations).

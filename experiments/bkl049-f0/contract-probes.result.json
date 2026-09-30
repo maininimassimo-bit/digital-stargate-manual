@@ -1,0 +1,67 @@
+{
+  "experiment": "BKL-049-F0-CONTRACT-PROBES",
+  "dataClass": "SYNTHETIC_ONLY",
+  "scope": "Existing JavaScript boundaries, not full JSON Schema validation or native feasibility",
+  "results": [
+    {
+      "id": "C01",
+      "outcome": "REPRODUCED",
+      "finding": "Native captureMethod is not accepted by PXP 1.0."
+    },
+    {
+      "id": "C02",
+      "outcome": "REPRODUCED",
+      "finding": "Contiguous ordinal set can pass in reverse array order; mapper preserves array order."
+    },
+    {
+      "id": "C03",
+      "outcome": "REPRODUCED",
+      "finding": "Manifest summarizes process IDs and omits per-step parameters and masks."
+    },
+    {
+      "id": "C04",
+      "outcome": "REPRODUCED",
+      "finding": "513 observed steps pass the JS provenance validator but fail manifest process capacity 512; schema step ceiling is 2048."
+    },
+    {
+      "id": "C05",
+      "outcome": "REPRODUCED",
+      "finding": "Exact payload duplicate is a no-op; changed payload under same manifest ID is conflict."
+    },
+    {
+      "id": "C06",
+      "outcome": "REPRODUCED",
+      "finding": "Direct mapper selects a supplied assetId even when resolutionState is UNRESOLVED."
+    },
+    {
+      "id": "C07",
+      "outcome": "REPRODUCED",
+      "finding": "JS validator permits an extra nested source field prohibited by JSON Schema."
+    },
+    {
+      "id": "C08",
+      "outcome": "REPRODUCED",
+      "finding": "Read model copies arbitrary parameter text; it is not a privacy sanitizer."
+    },
+    {
+      "id": "C09",
+      "outcome": "REPRODUCED",
+      "finding": "Read model accepts a projection without an explicit sidecar binding when acceptanceAuthority is false."
+    },
+    {
+      "id": "C10",
+      "outcome": "REPRODUCED",
+      "finding": "SUGGESTED is rejected as executed provenance."
+    },
+    {
+      "id": "C11",
+      "outcome": "REPRODUCED",
+      "finding": "Unavailable capture remains unavailable through mapper and read model."
+    },
+    {
+      "id": "C12",
+      "outcome": "REPRODUCED",
+      "finding": "Changing export identity and timestamp changes the digest even with identical workflow content."
+    }
+  ]
+}

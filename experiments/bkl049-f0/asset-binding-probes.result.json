@@ -1,0 +1,37 @@
+{
+  "experiment": "BKL049-F0-ASSET-BINDING",
+  "dataClass": "SYNTHETIC_ONLY",
+  "scope": "Direct calls to existing reconciliation; minimal internal input, not a validated full manifest or a live gallery integration",
+  "results": [
+    {
+      "id": "A01",
+      "outcome": "REPRODUCED",
+      "finding": "Exact asset and session IDs yield matched with read-only authority."
+    },
+    {
+      "id": "A02",
+      "outcome": "REPRODUCED",
+      "finding": "Same display name with a different asset ID does not resolve the expected output."
+    },
+    {
+      "id": "A03",
+      "outcome": "REPRODUCED",
+      "finding": "Known asset integrity conflict yields conflict."
+    },
+    {
+      "id": "A04",
+      "outcome": "REPRODUCED",
+      "finding": "Missing session remains partially matched despite exact assets."
+    },
+    {
+      "id": "A05",
+      "outcome": "REPRODUCED",
+      "finding": "Different catalog digests under the same IDs both yield matched: this layer does not prove expected byte identity."
+    },
+    {
+      "id": "A06",
+      "outcome": "REPRODUCED",
+      "finding": "Duplicate asset IDs select the last record; conflicting duplicates require an upstream uniqueness invariant."
+    }
+  ]
+}
