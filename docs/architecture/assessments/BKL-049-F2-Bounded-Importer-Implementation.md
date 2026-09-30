@@ -59,3 +59,10 @@ Profile 1.1 permits strings up to **16,384 decoded characters**, including liter
 Packets keep schemaVersion 1.0 and explicitly record importerVersion 1.0 or 1.1. Verification reconstructs with the recorded version, so a historical 1.0 unsupported packet remains byte-verifiable after the upgrade. New imports default to 1.1. Re-importing with improved support requires a new receipt ID and separate immutable packet; old records are never silently rewritten or reclassified. Unknown importer versions fail closed. The research parser's default remains profile 1.0 for reproducibility.
 
 Synthetic tests cover the exact accepted bound, overflow through concatenation, a long synthetic reference value, unchanged verification of historical unsupported packets and rejection of unknown versions. A private read-only dry run of the selected source with 1.1 returned 23 instances (2 containers, 21 processes), 381 parameter assignments and 9 mask commands. These are export syntax observations only: no runtime order, complete lineage or scientific correctness is established. No raw parameter or source digest is published. Reviewed operational re-import and real binding remain separate.
+
+
+## Real retained-source reimport — 2026-10-01
+
+After PR #457 acceptance, the explicitly selected real history was reimported privately with profile 1.1 into a new immutable receipt. The original profile-1.0 UNSUPPORTED packet was preserved and verified under its stored version. The new packet was committed and independently reread against its separately retained digest: 23 instances (2 containers, 21 processes), 381 parameter assignments, 9 mask commands and 435 statements. No source parameter text or private digest is published here.
+
+This is an actual private retained import, superseding the earlier in-memory dry run as operational importer evidence. It remains `PARSED_SUBSET`, `UNLINKED`, `PRIVATE_NOT_APPROVED`, with execution `NOT_ESTABLISHED` and workflow completeness `UNAVAILABLE`. It does not prove runtime execution, historical model identity, authoritative image/catalog binding or public gallery delivery. Original image bytes and PixInsight were not modified.
