@@ -58,3 +58,25 @@ The isolated [reader](https://github.com/maininimassimo-bit/digital-stargate-man
 The real-file repeat found the same 14,121-byte header and three instances, with parameter/table counts 26/1, 25/0 and 11/11 respectively, each containing a time element. It reports one image-scoped property: the earlier count of seven covered the entire header, including properties outside that image scope. No private identifiers, process parameter values, paths or file digests are emitted by the command.
 
 The repeat does not redo whole-file hashing or compare expressions: the prior identity and exact-value checks remain separate evidence. Its structural counts corroborate that inspection, not historical execution or a complete workflow. The command intentionally omits arbitrary process class names from public output; ordered process identities above come from the prior private inspection. No parameter-to-PXP adapter is introduced. F0 remains OPEN.
+
+
+## Published gallery verification and next integration boundary
+
+On 2026-09-30, a read-only HTTP inspection of the [published gallery](https://maininimassimo-bit.github.io/digital-stargate-manual/scientific-image-gallery/) returned HTTP 200 and confirmed its `data-source` points to the bounded BKL-034 gallery fixture. The published [gallery JSON](https://maininimassimo-bit.github.io/digital-stargate-manual/data/bkl034-scientific-image-gallery-fixture.json) and [archive JSON](https://maininimassimo-bit.github.io/digital-stargate-manual/data/bkl034-f2-image-archive-fixture.json) also returned HTTP 200. Each contained three entries and parsed equal to its checked-in counterpart at research commit `9058402e`. This extends the earlier repository-only check to these specific published resources; it does not enumerate other catalogs or storage systems.
+
+The checked-in gallery renderer displays metadata references and placeholder previews. The fetched page references that renderer; no browser-rendered visual inspection is claimed. The archive fixture contains example digest identities. Consequently, this evidence does not establish a real final-file binding in the published gallery. The search-highlighting query in the Owner's URL is not an asset identity. No fixture was replaced and no real image or digest was uploaded.
+
+### Required association sequence (research recommendation, not a new contract)
+
+| Boundary | Present evidence | Required next proof | Failure state |
+|---|---|---|---|
+| Saved final version | Local measured file identity and inline history | Governed AP-013 identity/version acceptance, with retained integrity evidence | UNRESOLVED catalog binding |
+| Last saved operations | Recombination corroboration followed by crop and curves | Preserve all three occurrences and source ordering; retain upstream histories separately | PARTIAL workflow |
+| MAIN and STARS inputs | Explicit references in recombination and Owner attribution | Exact versions consumed, not merely current names or final branch files | PARTIAL input lineage |
+| MASK inputs | Creation snippet, named use and inversion evidence | Mask version at each use and source version used to create it | PARTIAL mask lineage |
+| Script and third-party context | Owner attribution and serialized process parameters | Script/module/model version evidence with explicit unavailable fields | PARTIAL reproducibility |
+| Archive to gallery | Existing projection/reference route and synthetic tests | Accepted image identity plus workflow reference; explicit original-to-preview relation when applicable | UNRESOLVED gallery binding |
+
+The archive must retain the original evidence outside a lossy consumer projection: current PXP-to-manifest behavior does not carry all parameter, mask or branch detail. This requirement does not approve a new graph schema, storage service or catalog authority. A successful card display or reconciliation match must never upgrade PARTIAL coverage to complete workflow capture.
+
+The next Owner-assisted evidence should target the exact saved project or retained versions behind MAIN, STARS and MASK, if available. Do not request reprocessing to manufacture historical lineage: newly generated files cannot establish which historical input bytes were consumed. Missing retained versions must remain explicit. Selecting an existing source for read-only inspection is separate from authorizing uploads or catalog writes. No additional question is required to document this boundary.

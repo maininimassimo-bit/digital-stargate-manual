@@ -314,3 +314,8 @@ Owner-specified XISF hashing established a real final-file identity; a different
 ### 2026-09-30 — BKL-049 repeatable bounded header reader
 
 An isolated counts-only XISF header reader reproduces the three-instance final-file observation and explicitly scopes history to its image. Synthetic malformed/unsupported input checks pass; attached history and full-workflow capture remain unsupported. See the [evidence report](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). No pixel reads beyond the header, image mutation, production adapter or F0 acceptance; BKL-043 unchanged.
+
+
+### 2026-09-30 — BKL-049 published gallery boundary verified
+
+Read-only HTTP checks confirmed the published gallery selects the three-entry bounded fixture and the published gallery/archive JSON equals the checked-in data at `9058402e`. Documented the required real version, upstream branch, mask and governed gallery associations without changing fixtures or scientific authority. See the [evidence and association sequence](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN; no upload, processing, vendor contact or BKL-043 intervention.
