@@ -319,3 +319,8 @@ An isolated counts-only XISF header reader reproduces the three-instance final-f
 ### 2026-09-30 — BKL-049 published gallery boundary verified
 
 Read-only HTTP checks confirmed the published gallery selects the three-entry bounded fixture and the published gallery/archive JSON equals the checked-in data at `9058402e`. Documented the required real version, upstream branch, mask and governed gallery associations without changing fixtures or scientific authority. See the [evidence and association sequence](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN; no upload, processing, vendor contact or BKL-043 intervention.
+
+
+### 2026-09-30 — BKL-049 consolidated F0 recommendation, no false closure
+
+Reconciled the plan's obsolete 1695 target and dossier's obsolete live-gallery access statement. Consolidated evidence for all five requested research subjects and the negative recommendation for a universal passive native recorder, with retained artifacts as a conditional research candidate. Separated F0 evidence/decision gates from later build and production gallery OAT. Owner scope decision, SDK-dependent disposition and supported extraction/continuity evidence remain open. See the [dossier completion boundary](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md#10-completion-boundary-and-recommendation-for-decision). No F0 closure, F1 promotion, vendor contact or BKL-043 change.

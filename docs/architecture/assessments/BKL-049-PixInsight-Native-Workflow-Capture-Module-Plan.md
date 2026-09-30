@@ -164,8 +164,8 @@ Bulk FITS/XISF data and PixInsight Project files remain in external scientific s
 | AP-013 | Accepted baseline | scientific asset authority |
 | AP-014/AP14-W06 | Accepted baseline | session reconciliation and synchronization |
 | BKL-046 | Accepted with limitations | existing portal consumer boundary |
-| PixInsight PCL SDK/license | To verify in F0 | native build and redistribution |
-| Supported PixInsight version matrix | To define in F0/F1 | compatibility and release support |
+| PixInsight PCL SDK/license | Official source and terms inspected; development/signing disposition OPEN | native build and redistribution |
+| Supported PixInsight version matrix | Owner baseline 1.9.5 build 1706 / Windows x64; native compatibility untested | compatibility and release support |
 
 BKL-048 remains reserved for Anomaly & Trend Center multi-session planning. On 2026-09-30 the Owner authorized BKL-049 F0 research and documentation in parallel with BKL-043, which remains open and the current governed package. F0 is IN PROGRESS, not closed; F1 and production implementation are not promoted. See the [F0 dossier](BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md) for current sources, limitations and proof gates. This supersedes the historical reference to BKL-031 as current; it does not change BKL-043 pilot/monitor authorization or PRs #428/#438/#439.
 
@@ -205,7 +205,7 @@ Planned validation includes:
 
 - unit and contract tests for serialization, ordering, digest and redaction;
 - compatibility fixtures per supported process family and PixInsight version;
-- real PixInsight OAT on the Owner-reconfirmed baseline (1.9.4 build 1695; confirmation 2026-09-30), subject to a verified compatible SDK and separate runtime authorization, before expanding the version matrix;
+- real PixInsight OAT on the Owner-reconfirmed baseline (1.9.5 build 1706; Owner-confirmed upgrade 2026-09-30; historical 1695 evidence retained separately), subject to a verified compatible SDK and separate runtime authorization, before expanding the version matrix;
 - built-in process, script and supported third-party module scenarios;
 - masks/references, multiple images, project save/reopen and restart scenarios;
 - crash/failure injection for journal and outbox;
@@ -244,3 +244,8 @@ Planned evidence is not execution evidence. No validation in this section is cla
 Future implementation must update the PCL developer/build guide, installation and rollback runbook, PXP contract documentation, AP14-W06 integration guide, portal workflow user guide, release notes, MkDocs navigation, validation matrix and BKL-049 closure record.
 
 This planning package updates only backlog, canonical roadmap, ADR-008 traceability and navigation. It does not change generated projections manually; the governed roadmap synchronization workflow owns those projections.
+
+
+### F0 recommendation update — 2026-09-30
+
+The [consolidated dossier decision boundary](BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md#10-completion-boundary-and-recommendation-for-decision) recommends against a universal passive-recorder implementation on current evidence. Retained-history artifacts are a concrete but incomplete feasibility route. The native target diagram remains a proposed target, not an accepted capability. Published gallery fixtures do not constitute real image/workflow integration. F0 remains OPEN and no F1–F7 promotion follows from documentary progress.

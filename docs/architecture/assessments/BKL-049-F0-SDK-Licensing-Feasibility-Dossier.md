@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | DSG-BKL-049-F0-001 |
-| Version / date | 0.1 / 2026-09-30 |
+| Version / date | 0.2 / 2026-09-30 |
 | Status | IN PROGRESS — F0 NOT CLOSED; F1 NOT AUTHORIZED BY THIS DOSSIER |
 | Scope | Official-source research, Owner-assisted artifact evidence, read-only identity/header checks and isolated nonproduction experiments |
 | Repository baseline | `b848f9416693bdce0ab0b20a331e709d5028510e` — origin/main including PR #444 |
@@ -20,9 +20,9 @@
 
 This is the acceptance objective, not a claim of current capability. A bounded support matrix is an evidence instrument, not permission to redefine “entire workflow” as only the convenient subset. Any material reduction requires an explicit Owner decision. Unsupported activity remains PARTIAL/UNAVAILABLE and prevents a complete-workflow claim; manual DECLARED entries do not silently satisfy automatic OBSERVED capture. A standalone event log or archive disconnected from gallery images does not meet the objective.
 
-Repository inspection shows the current gallery uses a governed fixture with metadata/provenance references and non-materialized previews (`docs/scientific-image-gallery/index.md`, `docs/javascripts/bkl-034-image-gallery.js`). It does not demonstrate a real end-to-end image/workflow archive. The supplied live URL could not be retrieved by the research browser; no live-page verification is claimed. Gallery linkage remains an explicit F4/F5 end-to-end proof obligation, preserving AP-013 asset authority and the existing public-data boundary.
+Repository inspection shows the current gallery uses a governed fixture with metadata/provenance references and non-materialized previews (`docs/scientific-image-gallery/index.md`, `docs/javascripts/bkl-034-image-gallery.js`). It does not demonstrate a real end-to-end image/workflow archive. Subsequent read-only HTTP verification succeeded: the published page selects the three-entry fixture, and both published gallery/archive JSON resources match their repository counterparts; see the local evidence index report. This establishes the published data boundary, not a browser-rendered acceptance test. Gallery linkage remains an explicit F4/F5 end-to-end proof obligation, preserving AP-013 asset authority and the existing public-data boundary.
 
-**Do not approve a universal passive native workflow recorder on the evidence available. Continue bounded F0 verification.** PCL provides useful instance, image and mask interfaces, but the inspected documentation does not establish a supported cross-module execution stream with process identity, execution-time parameters, complete lineage and project continuity. A reduced support matrix or a history-artifact adapter may be feasible; neither is selected or proven here. A platform upgrade alone does not resolve the cross-module limitation.
+**Do not approve a universal passive native workflow recorder on the evidence available. Continue bounded F0 verification.** PCL provides useful instance, image and mask interfaces, but the inspected documentation does not establish a supported cross-module execution stream with process identity, execution-time parameters, complete lineage and project continuity. A history-artifact adapter is the recommended candidate for further feasibility work because real retained artifacts have yielded ordered processes and parameters. It is not an accepted replacement for the native-module objective or proof of complete capture; a reduced support scope still requires an explicit Owner decision. A platform upgrade alone does not resolve the cross-module limitation.
 
 The Owner authorized F0 in parallel with BKL-043 on 2026-09-30. BKL-043 remains the current open package; its monitor, pilot, PRs #428/#438/#439 and runtime permissions are outside this work. A separate worktree was created from freshly fetched origin/main. The app worktree action was unavailable for this projectless chat (not a Git repository), so Git worktree creation was used against the existing repository without changing its checkout branch or files.
 
@@ -73,7 +73,7 @@ PCL access is distinct from entitlement to run or redistribute the proprietary P
 
 ## 5. Preliminary support matrix
 
-`DOCUMENTED` below describes a source statement, **not** a passed runtime test. All runtime proof is NOT EXECUTED. `PARTIAL`/`UNAVAILABLE` describe the maximum defensible present claim, not a released supported feature.
+`DOCUMENTED` below describes a source statement, **not** a passed runtime test. Native API/runtime probes are NOT EXECUTED. Owner-assisted exports and independent artifact reads are separately evidenced below and in the linked reports; they are not native observer tests. `PARTIAL`/`UNAVAILABLE` describe the maximum defensible present claim, not a released supported feature.
 
 | Capability / process family | Documented interface or evidence | Limit / preliminary disposition | Required proof |
 |---|---|---|---|
@@ -160,3 +160,23 @@ Rollback is a normal revert of this documentation/roadmap commit, followed by th
 | Revision | Change |
 |---|---|
 | 0.1 — 2026-09-30 | Parallel F0 start, current official SDK/license inspection, support/contract gaps, conditional recommendation and open proof gates; Owner Windows version evidence recorded |
+
+
+## 10. Completion boundary and recommendation for decision
+
+The five requested research subjects now have written evidence: SDK availability and conditional distribution terms (sections 2–3 and addendum); target/toolchain prerequisites (section 4); supported-interface limits (section 5); built-in/script/third-party evidence and gaps (Owner-assisted report); and PXP/AP14-W06 constraints (section 6 and isolated experiments). This is substantial dossier coverage, not completion of the evidence gates.
+
+**Recommendation:** NO-GO for implementing or advertising a universal passive native recorder on current evidence. Continue the nonexecuting retained-artifact feasibility route within F0. Keep BKL-045 as the accepted production baseline. A technically negative feasibility result is valid; unresolved evidence must not be converted to either a positive feasibility claim or proof that no future supported solution can exist.
+
+| Remaining issue | What can settle it | Stage / present disposition |
+|---|---|---|
+| SDK-dependent development and distribution | Applicable terms and a documented permitted development/signing route; independent qualified review can assess public terms without contacting the vendor | G1 OPEN; no native implementation, vendor contact remains deferred |
+| Exact supported build configuration | Pinned compiler/SDK/library configuration justified from official projects; compile/load verification later | G2 PARTIAL; native build/install belongs to authorized F2, not invented as already passed F0 evidence |
+| Scope of retained workflow | Read-only evidence from the Owner-selected saved project and retained branch/mask exports; explicitly record missing historical versions | G3 PARTIAL; never reprocess science to manufacture past lineage |
+| Automatic supported extraction | Supported route demonstrated against independent controlled ground truth, including missing-history cases | G3 OPEN; exact synthetic experiment requires separate authorization under the existing protocol |
+| Whole-workflow versus supported-subset decision | Owner reviews the matrix and decides whether the candidate still meets the intended objective; no silent scope reduction | G5 NOT ACCEPTED |
+| Real asset/gallery acceptance | Governed asset/version and source-to-preview relationships plus preserved workflow references | F4/F5 proof obligation; G4 feasibility remains conditional, not a demand to deploy production during F0 |
+
+F0 may not be closed while required evidence or the scope decision remains missing. Full operational closure additionally requires the later F1–F7 increments; the request to continue does not by itself authorize installations, scientific processing or changes to scientific authority. No further synthetic success can substitute for missing original evidence. The next useful Owner input is the location of the already-saved project that produced the supplied histories, if retained; no credentials, account or host identity are needed. Inspection must remain bounded to that selected source, and any unsupported project representation must be reported rather than reverse-engineered through private hooks.
+
+Revision 0.2 reconciles Owner-updated 1706, real artifact/header evidence and published-gallery verification; it consolidates the feasibility recommendation and distinguishes F0 decisions from later production proof obligations. F0 remains OPEN.
