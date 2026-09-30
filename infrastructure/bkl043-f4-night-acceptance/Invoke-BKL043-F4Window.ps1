@@ -60,8 +60,8 @@ function Invoke-BoundedPilotJob {
     }
 }
 
-$start = [DateTimeOffset]::Parse('2026-09-30T12:09:21+02:00')
-$end = [DateTimeOffset]::Parse('2026-09-30T14:09:21+02:00')
+$start = [DateTimeOffset]::Parse('2026-09-30T23:29:55+02:00')
+$end = [DateTimeOffset]::Parse('2026-10-01T03:29:55+02:00')
 if ($env:COMPUTERNAME -ne 'EAGLE30154') { throw 'HOST_IDENTITY_MISMATCH' }
 if ((Get-TimeZone).Id -ne 'W. Europe Standard Time') { throw 'TIMEZONE_MISMATCH' }
 if ([DateTimeOffset]::Now -lt $start -or [DateTimeOffset]::Now -ge $end.AddSeconds(-30)) { throw 'OUTSIDE_APPROVED_WINDOW' }
