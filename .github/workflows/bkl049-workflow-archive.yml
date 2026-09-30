@@ -48,3 +48,6 @@ jobs:
         run: python -m unittest tools.pixinsight.workflow_archive.test_binding -v
       - name: F4 guard before AP14-W06 reconciliation (synthetic only)
         run: node .github/scripts/test-bkl049-binding-bridge.mjs
+
+      - name: F4 immutable retention and replay boundaries
+        run: python -m unittest tools.pixinsight.workflow_archive.test_delivery -v

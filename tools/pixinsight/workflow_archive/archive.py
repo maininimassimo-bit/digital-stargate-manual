@@ -136,6 +136,16 @@ def write_packet(packet, output):
     raw = encode(packet)
     # Reject even a self-consistent caller-supplied object that the importer cannot reproduce.
     verify_packet(raw, digest(raw))
+    return write_immutable(raw, output)
+
+
+def write_immutable(raw, output):
+    """Internal bounded byte commit; callers validate their own artifact first.
+
+    Trusted private local filesystem required. No ACL or hostile-parent guarantee.
+    """
+    if not isinstance(raw, bytes) or len(raw) > MAX_PACKET_BYTES:
+        raise ArchiveError("PACKET_SIZE_LIMIT")
     path = checked_path(output, must_exist=False)
     if path.exists():
         previous = read_regular(path, MAX_PACKET_BYTES)

@@ -114,7 +114,7 @@ Architecture PR #453 is integrated at `731cc8ce1dd3322d088ca15811cd1476ed1a332a`
 
 ## Reviewable next operation: empty private preview bucket
 
-**PREPARED / NOT EXECUTED / specific resource authorization required.** This step creates exactly one empty preview bucket in the already resolved project. It deliberately keeps public-access prevention enforced while the image and catalog gates are completed. The private receipt pins the neutral candidate name; no alternate project/name is selected silently if it is unavailable.
+**EXECUTED under subsequent explicit Owner authorization — empty/private only.** The reviewed plan below defines the bounded operation; execution evidence follows. This step creates exactly one empty preview bucket in the already resolved project. It deliberately keeps public-access prevention enforced while the image and catalog gates are completed. The private receipt pins the neutral candidate name; no alternate project/name is selected silently if it is unavailable.
 
 | Setting | Exact proposed disposition |
 |---|---|
@@ -149,4 +149,11 @@ These are **not included** in the empty-bucket authorization:
 - Publication: separately authorize lifting prevention **only on this dedicated bucket** and the public read-without-listing binding. Recheck effective policies first. Public-read bucket access exposes every object in that bucket: it must contain only individually approved previews, never private staging material. A public URL and its metadata are public even without listing. [Public access guidance](https://docs.cloud.google.com/storage/docs/access-control/making-data-public).
 - Delivery: verify public bytes and exact image/version-to-workflow binding, minimized field selection, private retention/delivery and real gallery OAT. Revoking public access cannot recall cached/downloaded copies.
 
-Full F4 and BKL-049 remain OPEN. BKL-043, its monitor, EAGLE and existing private storage/IAM remain untouched. This document is an operational plan, not evidence that the resource or monitoring exists.
+Full F4 and BKL-049 remain OPEN. BKL-043, its monitor, EAGLE and existing private storage/IAM remain untouched. The execution receipt below establishes only the empty private resource; monitoring and publication remain inactive.
+
+
+## Empty private bucket execution receipt
+
+The Owner explicitly authorized only the empty private bucket and its verification. Following PR #454 review and 7/7 exact-head checks, creation succeeded: EUROPE-WEST1, STANDARD, uniform access enabled, public-access prevention enforced, seven-day soft deletion, no public IAM members and zero objects. Only expected default project owner/editor/viewer convenience principals were present; no IAM write was issued. Private raw configuration/authorization and verification receipts remain outside Git. No upload, image operation, budget or notification was activated. PR #454 merge `454129a8847dc31f13f9c559aad8326a0480f642` passed all 7 post-merge workflows, Pages run 36776309091 and live HTTP 200/content verification. [Execution and acceptance evidence](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/454#issuecomment-5919671441).
+
+The Owner selected only the existing Google Cloud account email as the future budget alert recipient. This is a recipient choice, not activation evidence; the private address is not published. Monitoring remains inactive pending its concrete reviewed configuration. No default billing-role distribution list is authorized.
