@@ -456,3 +456,8 @@ PR #453 is post-merge verified at `731cc8ce1dd3322d088ca15811cd1476ed1a332a` wit
 ## 2026-09-30 — BKL-049 private storage verified; immutable workflow handoff prepared
 
 PR #454 passed separate ARB/RQ, 7/7 exact-head and 7/7 post-merge workflows at `454129a8847dc31f13f9c559aad8326a0480f642`, with Pages verified. Explicit Owner authorization enabled one empty private preview bucket only; configuration, no public members and zero objects were verified. Monitoring/upload/publication remain inactive; the Owner selected only the existing account email for future alerts. The F4 private delivery increment retains source and guarded binding atomically and revalidates current authority before private AP14-W06 handoff. Synthetic tests do not establish real catalog context, publication or OAT. BKL-049 remains open and BKL-043 current.
+
+
+## 2026-09-30 — BKL-049 dedicated cost-alert plan prepared
+
+The [exact alert plan](../architecture/assessments/BKL-049-Public-Preview-Hosting-Proposal.md#exact-alerts-only-activation-plan) uses the existing APIs, the Owner-selected account email only, a dedicated preview-bucket label and EUR 5 monthly alerts at 50/80/100%, excluding credits and default IAM recipients. It leaves the general project budget untouched and requires specific activation authority. Label attribution/email delivery and trial-account continuity remain explicit operational gates; no account upgrade, image upload or public access is included. The private workflow delivery implementation is integrated via PR #455, merge `a57927934431586421092e2684a29259606b7605`, after 17/17 exact-head checks and zero ARB/RQ findings; post-merge verification is pending at this entry. BKL-049 remains open and BKL-043 current.
