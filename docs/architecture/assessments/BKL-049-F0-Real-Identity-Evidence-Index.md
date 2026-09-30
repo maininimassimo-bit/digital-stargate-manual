@@ -80,3 +80,14 @@ The checked-in gallery renderer displays metadata references and placeholder pre
 The archive must retain the original evidence outside a lossy consumer projection: current PXP-to-manifest behavior does not carry all parameter, mask or branch detail. This requirement does not approve a new graph schema, storage service or catalog authority. A successful card display or reconciliation match must never upgrade PARTIAL coverage to complete workflow capture.
 
 The next Owner-assisted evidence should target the exact saved project or retained versions behind MAIN, STARS and MASK, if available. Do not request reprocessing to manufacture historical lineage: newly generated files cannot establish which historical input bytes were consumed. Missing retained versions must remain explicit. Selecting an existing source for read-only inspection is separate from authorizing uploads or catalog writes. No additional question is required to document this boundary.
+
+
+## Owner-selected retained project located
+
+The Owner confirmed the same project directory as the source of the supplied histories. Bounded directory enumeration located a project bundle containing an 857,498-byte XML index and a data directory with 528 extensionless files and one seal file. The data files and seal contents were not read or interpreted. Calibration/raw-data subdirectories were not traversed.
+
+A bounded generic XML inspection of the index rejected DTD/entity declarations and null-byte encodings, parsed without execution, and retained an index digest only in a private local report. File size and modification metadata stayed stable across the read; this is not an atomic snapshot or a digest of the whole project. No paths, names, attribute values, parameter content or digest are published.
+
+Structural counts include five `ImageWindow` and five `MainView` elements, five `initialProcessing` elements, three `processing` elements, 33 `instance` elements, 31 `time` elements, 562 `parameter` elements, 86 `table` elements and 14 `mask` elements. These are XML element counts, **not executed-step counts**, unique process occurrences or proven mask applications. Initial/current history, saved instances, image states and unsupported semantics must not be conflated.
+
+This establishes that a retained project source exists for further supported export verification. It does not establish a documented XOSM semantic importer, complete project integrity, image-version identity or supported automatic capture. The inspected official SDK references recognize the extension as XML but did not supply a project-format semantic contract in the examined files. No inferred internal parser, decompressor or block traversal is introduced. The separate private structural report is not yet part of the six-record index; no claim that the earlier index includes it is made.

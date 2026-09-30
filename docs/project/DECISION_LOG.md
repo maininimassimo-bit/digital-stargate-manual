@@ -324,3 +324,8 @@ Read-only HTTP checks confirmed the published gallery selects the three-entry bo
 ### 2026-09-30 — BKL-049 consolidated F0 recommendation, no false closure
 
 Reconciled the plan's obsolete 1695 target and dossier's obsolete live-gallery access statement. Consolidated evidence for all five requested research subjects and the negative recommendation for a universal passive native recorder, with retained artifacts as a conditional research candidate. Separated F0 evidence/decision gates from later build and production gallery OAT. Owner scope decision, SDK-dependent disposition and supported extraction/continuity evidence remain open. See the [dossier completion boundary](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md#10-completion-boundary-and-recommendation-for-decision). No F0 closure, F1 promotion, vendor contact or BKL-043 change.
+
+
+### 2026-09-30 — BKL-049 retained project structural evidence
+
+Owner-selected project bundle located. Read-only bounded XML structure inspection found five image-window elements and additional processing/mask structures; raw blocks, seal and calibration directories were not inspected. Structural element counts do not become executed-step evidence or a supported XOSM importer. Private index fingerprint retained outside the repository; see the [sanitized report](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN.
