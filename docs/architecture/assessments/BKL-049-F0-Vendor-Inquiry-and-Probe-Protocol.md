@@ -134,7 +134,7 @@ A private aggregate report retains the fingerprint and comparisons outside the r
 
 ## 7. SYN-02 — history-disabled negative control, prepared for approval
 
-Status: PREPARED / NOT AUTHORIZED / NOT EXECUTED. SYN-01 explicitly excluded this variant; its authorization is not silently extended. The next single Owner decision is whether to perform this exact local save/reopen test.
+Status: separately AUTHORIZED by the Owner on 2026-09-30; Owner reported empty history after reopening and file inspection completed. SYN-01 had excluded this variant; its permission was not silently extended. The original proposed scope follows, with the measured result in section 8.
 
 Use only the already-created SYN-01 synthetic image and the existing Owner-selected scratch directory. The Owner performs Save As to a **new, unused** `BKL049_SYN02_nohistory.xisf`, with the per-save **Save processing history** option unchecked. No PixelMath or other image processing is repeated, no global preferences are edited, and the original SYN-01 file remains untouched. If the per-save checkbox state would modify global settings, cannot be determined, or the filename already exists, stop before saving and clarify. Preserve the outputs; no deletion or overwrite is included.
 
@@ -143,3 +143,23 @@ After saving, close only the synthetic view and reopen the new file. Report the 
 The assistant will inspect the bounded XML header for the inline history property and any alternative representation. Missing history is reported as **UNAVAILABLE**, not a COMPLETE zero-step workflow. Unexpected retained history or unsupported encoding remains explicit and requires review. If no inline history exists, do not silently import SYN-01's three steps merely because these synthetic files are related. Any later association to a separately retained evidence source must be explicit and does not change what SYN-02 itself contains.
 
 Record file fingerprints locally and recheck the original SYN-01 fingerprint to confirm that the original test artifact remains unchanged. Different whole-file digests do not establish different pixels; equal geometry does not establish equal pixel content. No pixel equality, historical execution or universal exporter claim is part of this test. Owner actions remain DECLARED context, header contents are independently inspected artifact evidence. No gallery write, native module, RC Astro, project-level state operation or vendor contact is included. F0 remains OPEN regardless of this single negative-control outcome.
+
+
+## 8. SYN-02 result — missing history preserved as unavailable
+
+The Owner explicitly approved SYN-02 and reported that nothing appeared in History Explorer after the instructed save/reopen. This is DECLARED UI evidence. The assistant then read only the specifically agreed synthetic files for bounded XML-header inspection and whole-file hashing. No processing, decoding of pixels, global preference changes, writes to the images or broad directory search occurred.
+
+| Check | SYN-01 original | SYN-02 history-disabled variant |
+|---|---|---|
+| File size | 184,576 bytes | 180,480 bytes |
+| Header size | 7,511 bytes | 1,133 bytes |
+| Image elements | 1 | 1 |
+| Direct image properties | 1, including inline processing history | 0 |
+| Reader history result | Three instances, 26 parameters each | UNAVAILABLE |
+| Integrity | SHA-256 matches the previously retained SYN-01 identity | SHA-256 recorded privately |
+
+Both files had stable size and modification metadata across inspection. This is not an atomic snapshot. Whole-file byte differences are expected evidence differences, not proof of pixel differences; pixel equality was not tested. No history was inferred from the filename, common synthetic origin or SYN-01. No PXP sidecar, gallery record or catalog association was created.
+
+**SYN-02 negative-control result: confirmed absence of the image-scoped history property in the inspected header, consistent with the Owner's empty post-reopen History Explorer report.** The reader correctly reports UNAVAILABLE; it does not emit COMPLETE or a claimed executed zero-step workflow. This is a bounded artifact-reader behavior, not proof of every production consumer's behavior or a universal capture mechanism.
+
+Together, SYN-01/SYN-02 establish a concrete retention boundary for this controlled PixelMath case: the saved artifact can retain the three configured operations, while the separately saved history-disabled artifact does not provide them. Absence of persisted history cannot prove absence of past processing. These results strengthen G3's artifact feasibility evidence but do not resolve native interfaces, masks/project continuity, licensing, RC schema migration or F0 acceptance. A private negative-control report retains both fingerprints and aggregate findings separately from historical-project indexes. F0 remains OPEN.

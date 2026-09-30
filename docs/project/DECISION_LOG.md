@@ -391,3 +391,8 @@ Owner-selected synthetic XISF contains the three planned ordered instances, all 
 ### 2026-09-30 — BKL-049 SYN-02 negative control prepared
 
 Prepared a separate Owner-operated Save As/reopen of the existing synthetic image with per-save history disabled, new filename only and no reprocessing. Missing history must remain UNAVAILABLE, never COMPLETE or silently backfilled from SYN-01. Original SYN-01 integrity will be rechecked. Specific authorization remains pending because SYN-01 excluded this variant. See the [protocol](../architecture/assessments/BKL-049-F0-Vendor-Inquiry-and-Probe-Protocol.md#7-syn-02-history-disabled-negative-control-prepared-for-approval). F0 OPEN.
+
+
+### 2026-09-30 — BKL-049 SYN-02 authorized negative control verified
+
+Owner explicitly authorized the history-disabled synthetic Save As/reopen and reported an empty History Explorer. File inspection found no direct image history property; reader result UNAVAILABLE. SYN-01 original digest remains unchanged. No pixel decoding, history backfill, image writes or COMPLETE zero-step claim. See the [negative-control result](../architecture/assessments/BKL-049-F0-Vendor-Inquiry-and-Probe-Protocol.md#8-syn-02-result-missing-history-preserved-as-unavailable). F0 OPEN.
