@@ -53,3 +53,8 @@ La review riconcilia il registro con BKL-040 e le foundation precedenti:
 ## Review 23/09/2026 — RC2 closure
 
 La chiusura RC2 non introduce nuovo debito tecnico e congela la compatibilità RC1. Il lavoro successivo AP-015 è registrato come preparazione architetturale/semantica; eventuale selezione tecnologica, materializzazione runtime, provider o AI execution dovrà essere valutata come incremento separato con propri gate e review.
+
+
+## Review 30/09/2026 — BKL-049 F0 acceptance
+
+[Phase acceptance](BKL-049-F0-ACCEPTANCE-2026-09-30.md) transfers the demonstrated identity/digest/duplicate, source retention, privacy and PXP mapping gaps to explicit F1/F4/F5 acceptance obligations. They are not silently repaired or waived; no production component is introduced. ARB M01 stale ADR-008 status wording is corrected by this reconciliation. Existing debt dispositions remain unchanged.
