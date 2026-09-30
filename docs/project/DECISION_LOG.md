@@ -396,3 +396,8 @@ Prepared a separate Owner-operated Save As/reopen of the existing synthetic imag
 ### 2026-09-30 — BKL-049 SYN-02 authorized negative control verified
 
 Owner explicitly authorized the history-disabled synthetic Save As/reopen and reported an empty History Explorer. File inspection found no direct image history property; reader result UNAVAILABLE. SYN-01 original digest remains unchanged. No pixel decoding, history backfill, image writes or COMPLETE zero-step claim. See the [negative-control result](../architecture/assessments/BKL-049-F0-Vendor-Inquiry-and-Probe-Protocol.md#8-syn-02-result-missing-history-preserved-as-unavailable). F0 OPEN.
+
+
+### 2026-09-30 — BKL-049 F0 evidence checkpoint after SYN-01/SYN-02
+
+Updated the support matrix and G3 to include the completed positive/negative retained-history tests. Distinguished their bounded result from native automatic capture, historical completeness, licensing and gallery acceptance. No repetitive PixelMath test or implementation promotion is justified by these results. See the [review checkpoint](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md#11-f0-evidence-review-after-controlled-positive-and-negative-tests). F0 OPEN; BKL-043 current, no new runtime authorization.

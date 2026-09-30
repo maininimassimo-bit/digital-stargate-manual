@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | DSG-BKL-049-F0-001 |
-| Version / date | 0.2 / 2026-09-30 |
+| Version / date | 0.3 / 2026-09-30 |
 | Status | IN PROGRESS — F0 NOT CLOSED; F1 NOT AUTHORIZED BY THIS DOSSIER |
 | Scope | Official-source research, Owner-assisted artifact evidence, read-only identity/header checks and isolated nonproduction experiments |
 | Repository baseline | `b848f9416693bdce0ab0b20a331e709d5028510e` — origin/main including PR #444 |
@@ -93,7 +93,7 @@ PCL access is distinct from entitlement to run or redistribute the proprietary P
 | Masks | MaskUpdated/Enabled/Disabled/Shown/Hidden and current Mask/IsMaskEnabled/IsMaskInverted (S3/S5) | `PARTIAL`: current mask state is not proof it was used by a particular executed step | Attach/remove/invert/disable, event ordering, step linkage and reopen |
 | Scripts | Potential downstream image/instance changes | Script identity/version, internal operations and orchestration not established; opaque segments `UNAVAILABLE` | Script with process calls vs direct image changes and cancellation; no inference from downstream effects |
 | Third-party modules | Public instance parameters may be exposed | Proprietary/internal operations and model/version state may remain opaque; `PARTIAL` or `UNAVAILABLE` per module | Explicit approved module/version inventory, exported/public interfaces and negative cases |
-| History artifacts | S5 says history is core-owned; S4 serializes an already available instance; S10 exposes optional embedded XML history | Candidate bounded history export; no full history enumerator or cross-image run reconstruction demonstrated | Existing authorized sanitized artifact with known history, disabled/missing history, undo/redo branches |
+| History artifacts | S5/S4/S10 plus Owner-authorized SYN-01/SYN-02 and independent saved-header inspection | POSITIVE bounded evidence: three planned configurations retained with history enabled; history UNAVAILABLE in disabled variant. No native observer or cross-image reconstruction demonstrated | Extend only for a specific unresolved capability; undo/redo, masks and project lifecycle remain untested |
 | Project save/reopen and restart | Instance serialization/settings are not stable project/run identity APIs | `UNAVAILABLE` continuity; no verified project lifecycle subscription/replay | Supported project identifiers/events, save-as/reopen, crash/gap and duplicate recovery |
 | Module inventory | S9 process enumeration is useful | Complete loaded-module binary inventory/version is not established by enumerating processes | Supported module inventory source including non-process modules |
 
@@ -141,13 +141,13 @@ Principal risks: unverified compiled ABI on the new 1706 baseline; license/workf
 | G0 parallel authorization and isolation | RECORDED | Owner request; dedicated branch; BKL-043 unchanged |
 | G1 SDK and license inventory | PARTIAL | Official sources pinned; resolve workflow restriction, dependency notices, application/CI entitlement and signing path before development |
 | G2 exact environment/ABI/toolchain | PARTIAL | Owner confirmed upgrade to core 1706 and RC Astro operation after previously supplying Windows 11 Pro 25H2 build 26200.9550, x64 (Win32_Processor Architecture=9); matching SDK/API and reproducible toolchain still needed |
-| G3 support matrix | PARTIAL REAL-SOURCE + SYNTHETIC EVIDENCE | Supplied project histories support the artifact candidate; supported automatic extraction, full project coverage and exact source provenance remain unproven. No universal recorder claim; no implicit scope reduction |
+| G3 support matrix | PARTIAL REAL-SOURCE + SYNTHETIC EVIDENCE | Historical artifact comparisons and controlled SYN-01/SYN-02 support saved-history retention and truthful absence handling. Autonomous runtime extraction, full project coverage and exact source provenance remain unproven. No universal recorder claim; no implicit scope reduction |
 | G4 contract feasibility | SYNTHETIC DECLARED PIPELINE VERIFIED; REAL END-TO-END UNPROVEN | Reader, existing-code pipeline and identity experiments recorded; real version/gallery association, accepted encoding, privacy and source trust remain open |
 | G5 feasibility decision | NOT ACCEPTED | Review the evidence and alternative trade-offs; do not promote F1 automatically |
 
 Before F1, resolve G1–G3 sufficiently to make an evidence-backed scope decision. If runtime proof is indispensable to resolve G3, propose a separate minimal experiment with exact binary/source baseline, license clearance, synthetic images, read-only observation behavior, installation/rollback and Owner authorization. It must not use scientific images, EAGLE, hidden hooks or production code. Compilation alone cannot prove observation completeness.
 
-Later F2/F3/OAT must test built-in/script/third-party families, edits without execution, repeated executions, abort/failure, masks, multi-image global processes, undo/redo, project save/reopen, restart/crash, deterministic export/replay and privacy. Ground truth must be supplied independently of recorder output. Report omissions/duplicates, parameter equality, causal links and journal gaps. No runtime test in this list is claimed executed.
+Later F2/F3/OAT must test built-in/script/third-party families, edits without execution, repeated executions, abort/failure, masks, multi-image global processes, undo/redo, project save/reopen, restart/crash, deterministic export/replay and privacy. Ground truth must be supplied independently of recorder output. Report omissions/duplicates, parameter equality, causal links and journal gaps. Only the separately documented Owner-operated SYN-01/SYN-02 saved-file persistence cases have runtime context and artifact evidence; the broader scenarios in this list have not been exercised.
 
 Owner input is requested one item at a time: (1) core/workstation reconfirmation received; (2) Windows 11 Pro 25H2 build 26200.9550 and x64 processor evidence received; (3) SDK-dependent development/licensing disposition remains open, with vendor contact explicitly deferred; (4) only if necessary, separately bounded experiment authorization. RC Astro product families and unified distribution are confirmed. Owner reported current BlurXTerminator, NoiseXTerminator and StarXTerminator versions 2.6.9 on 2026-09-30 and explicitly confirmed that all three were updated that day (DECLARED literal; not independently verified or attributed to the historical run). Independent module-build identity, model identity and historical versions remain unverified for supported cases. Private host/user identity, keys and raw science data are unnecessary.
 
@@ -184,3 +184,21 @@ The five requested research subjects now have written evidence: SDK availability
 F0 may not be closed while required evidence or the scope decision remains missing. Full operational closure additionally requires the later F1–F7 increments; the request to continue does not by itself authorize installations, scientific processing or changes to scientific authority. No further synthetic success can substitute for missing original evidence. The Owner subsequently supplied the retained project location. A bounded structural inspection found five image-window elements and richer XML history structures, as recorded in the evidence index report; semantic interpretation and complete project integrity remain unproven. No credentials, account or host identity are needed. Inspection must remain bounded to that selected source, and any unsupported project representation must be reported rather than reverse-engineered through private hooks.
 
 Revision 0.2 reconciles Owner-updated 1706, real artifact/header evidence and published-gallery verification; it consolidates the feasibility recommendation and distinguishes F0 decisions from later production proof obligations. F0 remains OPEN.
+
+
+## 11. F0 evidence review after controlled positive and negative tests
+
+The two tests settle the narrow saved-file question: a three-operation synthetic history can survive saving/reopening when retained, and a history-disabled file can legitimately provide no processing history. The latter is a concrete limitation of an artifact-only archive: a missing history cannot be reconstructed merely from the final file. Repeating this PixelMath pair would not answer the native-observer, mask, script or project questions.
+
+| Claim | Current defensible conclusion | What is still needed |
+|---|---|---|
+| Saved history available for this synthetic case | Demonstrated in selected XISF header and Owner-supplied post-reopen export | No repeat needed to establish this specific result |
+| Missing saved history handled truthfully | Reader returns UNAVAILABLE; original positive-control file unchanged | Production ingestion/consumer proof remains a later integration task |
+| Entire historical workflow recoverable | Not demonstrated; initial structures, RC representation differences, masks and exact versions remain unresolved | Source-specific evidence and supported semantics; retained absence must remain explicit |
+| Capture every future operation automatically | Not demonstrated; no supported universal cross-module event stream established | A supported extraction/observation mechanism with controlled independent ground truth |
+| Native module can be implemented/distributed under the intended workflow | Not yet cleared | Resolve SDK-dependent use, toolchain and signing questions before implementation; vendor contact remains deferred |
+| Gallery represents the actual image/workflow | Not demonstrated; current public data are bounded examples | Governed asset/version binding and richer retained evidence, then F4/F5 end-to-end proof |
+
+**Review recommendation remains unchanged:** do not start a universal passive native implementation or close F0 on these tests. The retained-artifact route has a positive bounded feasibility result, but it is insufficient by itself for the Owner's entire-workflow objective. Preserve BKL-045 as the production baseline and keep BKL-043 current. Additional experiments should be selected for a specific open claim, not to increase counts or create the appearance of closure.
+
+No additional runtime test is authorized at this checkpoint. Before any next test, state which open claim it distinguishes, what supported mechanism it uses and what independent ground truth makes its outcome decisive. If no such mechanism is established, record the limitation rather than ask the Owner to repeatedly reprocess images. Historical missing models and unsupported field mappings are not repairable by tests performed today. F0 review acceptance and any material alternative-scope decision remain explicit future decisions, not implied by successful documentation CI.
