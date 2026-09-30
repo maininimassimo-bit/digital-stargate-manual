@@ -329,3 +329,8 @@ Reconciled the plan's obsolete 1695 target and dossier's obsolete live-gallery a
 ### 2026-09-30 — BKL-049 retained project structural evidence
 
 Owner-selected project bundle located. Read-only bounded XML structure inspection found five image-window elements and additional processing/mask structures; raw blocks, seal and calibration directories were not inspected. Structural element counts do not become executed-step evidence or a supported XOSM importer. Private index fingerprint retained outside the repository; see the [sanitized report](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN.
+
+
+### 2026-09-30 — BKL-049 project/export/XISF content corroboration
+
+Nonexecuting structural comparisons matched the MAIN export's 19 class labels/order and all three FINAL parameter/table/time representations against the XISF header. A separate initial ImageIntegration and two RangeSelection views expose additional coverage/identity questions. No XOSM semantic support, executed-event promotion, pixel reads or catalog writes are claimed. See the [cross-artifact report](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 remains OPEN.

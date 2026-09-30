@@ -91,3 +91,20 @@ A bounded generic XML inspection of the index rejected DTD/entity declarations a
 Structural counts include five `ImageWindow` and five `MainView` elements, five `initialProcessing` elements, three `processing` elements, 33 `instance` elements, 31 `time` elements, 562 `parameter` elements, 86 `table` elements and 14 `mask` elements. These are XML element counts, **not executed-step counts**, unique process occurrences or proven mask applications. Initial/current history, saved instances, image states and unsupported semantics must not be conflated.
 
 This establishes that a retained project source exists for further supported export verification. It does not establish a documented XOSM semantic importer, complete project integrity, image-version identity or supported automatic capture. The inspected official SDK references recognize the extension as XML but did not supply a project-format semantic contract in the examined files. No inferred internal parser, decompressor or block traversal is introduced. The separate private structural report is not yet part of the six-record index; no claim that the earlier index includes it is made.
+
+
+## Cross-artifact structural comparison
+
+A subsequent nonexecuting comparison verified that the project-index digest still matches the privately retained structural-inspection digest. It read only the selected XML index, supplied export and bounded final-XISF header. This is content corroboration, not a supported XOSM semantic importer: no binary block, seal, image state or `historyIndex` semantics were interpreted.
+
+| Comparison | Result | Interpretation limit |
+|---|---|---|
+| Project MAIN `processing` versus supplied container | All 19 direct instance class labels agree in source order | Does not compare every MAIN parameter, nested container or mask state; no execution proof |
+| Separate MAIN `initialProcessing` | Contains ImageIntegration | The supplied 19-entry export omits this separate initial structure; do not silently prepend it as a proven executed event |
+| Candidate STARS structure | Initial StarXTerminator followed by PixelMath, ColorSaturation and SCNR | Agrees with supplied class sequence; not exact input/output version proof |
+| RangeSelection structures | Two distinct views each have an initial RangeSelection | One supplied mask snippet cannot establish both masks' identities or use relationships |
+| Candidate FINAL versus final-XISF embedded history | Three ordered instances agree in class/version/enabled attributes and parameter/table/time representations | Structural normalization sorts attributes and trims surrounding element-text whitespace; not byte-for-byte XML equality or proof of pixel identity |
+
+The final comparison includes recursive parameter/table row/cell/time attributes and text; it deliberately excludes image-state and other project-only children. All three comparisons matched. The labels MAIN/STARS/FINAL above are corroborated research roles, not newly accepted catalog IDs. No private view identifier or parameter value is published.
+
+These observations show why a single exported container cannot certify the entire project: the project retains additional initial structures and multiple mask candidates. A future supported exporter must distinguish initial versus subsequent processing, current versus retained/undone state, shared occurrences and exact image versions. It must not concatenate everything found in XML or count duplicate branch occurrences as independent executions. The separate comparison report remains private and outside the earlier six-record index. F0 and whole-workflow coverage remain PARTIAL/OPEN.
