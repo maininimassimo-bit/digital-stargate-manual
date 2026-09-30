@@ -4,9 +4,11 @@
 |---|---|
 | Identifier | DSG-BKL049-F3-ADAPTER-001 |
 | Version / date | 1.0 / 2026-09-30 |
-| Status | Repository implementation in review; synthetic compatibility evidence only |
+| Status | ACCEPTED / POST-MERGE VERIFIED via PR #451; synthetic compatibility evidence only |
 | Entry gate | F2 accepted via PR #450, merge `b57adb0e8ee8d43b5bf7d5e05a718341520128ab`, 19/19 post-merge SUCCESS and Pages verified |
 | Authority | Processing evidence only; action NONE |
+
+Delivery: [PR #451 post-merge evidence](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/451#issuecomment-5918603605), merge `f689bea2d0b0aba11774c589d47669486bf61978`, 19/19 post-merge runs SUCCESS and Pages verified.
 
 ## Scope and API
 

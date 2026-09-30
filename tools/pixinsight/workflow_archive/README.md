@@ -40,3 +40,7 @@ Original F0 parser is retained in Git history; its old path is now a compatibili
 ## F3 private PXP library
 
 `provenance.build_sidecar` accepts verified packet bytes, an independently retained expected packet digest, an explicit source-bound declaration and a separate `exported_at` UTC timestamp. See `docs/architecture/assessments/BKL-049-F3-Declared-Evidence-Adapter.md` for the versioned lexical envelope, clock semantics and validation limits. The returned sidecar is private and unlinked; no publication or file writer is provided. Run `python -m unittest tools.pixinsight.workflow_archive.test_provenance -v` and `node .github/scripts/test-bkl049-provenance-bridge.mjs` for synthetic compatibility evidence.
+
+## F4 private binding guard
+
+`binding.build_binding` consumes independently anchored selected catalog/asset, measurement and Owner-association records before producing one exact original/preview binding. It does not read images, grant catalog authority, persist receipts or publish data. `compare_retained` only classifies immutable receipt retries. Full F4 retention/delivery and operational inputs remain open. See the F4 assessment for the private transfer profile and trust boundary.

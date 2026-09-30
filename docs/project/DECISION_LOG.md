@@ -436,3 +436,8 @@ F1 PR #449 passed separate ARB/RQ (zero findings), 17/17 exact-head and 17/17 po
 ## 2026-09-30 — BKL-049 F2 accepted; F3 private declared-evidence adapter
 
 F2 PR #450 accepted after separate ARB/RQ, cleanup-outcome remediation and 19/19 post-merge workflow successes on `b57adb0e8ee8d43b5bf7d5e05a718341520128ab`; Pages verified. [F3](../architecture/assessments/BKL-049-F3-Declared-Evidence-Adapter.md) adds a private source-bound DECLARED/PARTIAL PXP adapter with exact lexical preservation and synthetic AP14-W06 compatibility tests. No real catalog association/publication or observed-execution promotion. Owner-declared external origin of the demonstration material will remain external; no Digital StarGate session is inferred. BKL-043 current.
+
+
+## 2026-09-30 — BKL-049 F3 accepted; F4 exact-binding guard increment
+
+F3 PR #451 passed separate ARB/RQ, 20/20 exact-head checks and 19/19 post-merge runs at `f689bea2d0b0aba11774c589d47669486bf61978`; Pages verified. The [F4 guard](../architecture/assessments/BKL-049-F4-Exact-Binding-Guard.md) checks selected governed identities, independent measurements and source-bound Owner association before AP14-W06. Synthetic-only implementation; full F4 remains open for immutable retention/delivery and a real eligible external-origin asset/context. No real scientific publication or catalog registration. BKL-043 stays current.

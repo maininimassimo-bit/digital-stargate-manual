@@ -5,6 +5,7 @@ on:
       - 'tools/pixinsight/workflow_archive/**'
       - 'experiments/bkl049-f0/**'
       - '.github/scripts/test-bkl049-provenance-bridge.mjs'
+      - '.github/scripts/test-bkl049-binding-bridge.mjs'
       - 'docs/contracts/pixinsight-workflow-provenance.schema.json'
       - '.github/workflows/bkl049-workflow-archive.yml'
   push:
@@ -13,6 +14,7 @@ on:
       - 'tools/pixinsight/workflow_archive/**'
       - 'experiments/bkl049-f0/**'
       - '.github/scripts/test-bkl049-provenance-bridge.mjs'
+      - '.github/scripts/test-bkl049-binding-bridge.mjs'
       - 'docs/contracts/pixinsight-workflow-provenance.schema.json'
       - '.github/workflows/bkl049-workflow-archive.yml'
   workflow_dispatch:
@@ -42,3 +44,7 @@ jobs:
         run: python -m unittest tools.pixinsight.workflow_archive.test_provenance -v
       - name: Existing PXP and AP14-W06 compatibility (synthetic only)
         run: node .github/scripts/test-bkl049-provenance-bridge.mjs
+      - name: F4 identity and association negative cases
+        run: python -m unittest tools.pixinsight.workflow_archive.test_binding -v
+      - name: F4 guard before AP14-W06 reconciliation (synthetic only)
+        run: node .github/scripts/test-bkl049-binding-bridge.mjs

@@ -1,6 +1,6 @@
 # ADR-008 — PixInsight Provenance Capture Strategy
 
-**Status:** Accepted — applied by BKL-045 F3/F4 and closure; BKL-049 available-workflow archive F0 accepted; F1 architecture accepted; F2 bounded importer accepted; F3 private evidence adapter in review
+**Status:** Accepted — applied by BKL-045 F3/F4 and closure; BKL-049 available-workflow archive F0 accepted; F1 architecture accepted; F2 bounded importer accepted; F3 private evidence adapter accepted via PR #451; F4 exact-binding guard in review
 **Date:** 09/09/2026  
 **Decision owner:** Digital StarGate Architecture  
 **Related package:** BKL-045 F2  
