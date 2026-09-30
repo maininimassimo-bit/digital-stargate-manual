@@ -369,3 +369,5 @@ Consolidated the accumulating evidence report and distinguished 11 officially do
 ### 2026-09-30 — BKL-049 current RC update chronology separated from historical models
 
 Owner confirmed the three RC tools were updated today. Retained-project presence-only inspection found nonempty model-file references in six RC instance elements across MAIN/STARS, without following paths or identifying model binaries. Current 2.6.9 declarations cannot certify May runtime/model versions. See the [chronology and model-reference boundary](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN; no installation, processing or image change by the assistant.
+
+Owner backup availability response: UNKNOWN, not absent. Preserve the historical model-identity gap without restore or broad filesystem search.
