@@ -10,6 +10,12 @@
 | Branch | `codex/bkl-049-f0` |
 | Authority | Processing evidence only; `actionAuthority=NONE` |
 
+## Revised-scope technical assessment
+
+**Recommendation: GO to detailed architecture review for the available-history archive with mandatory exact gallery image/version linkage.** The original universal native-recorder NO-GO does not apply to this Owner-approved replacement objective. This is a technical feasibility recommendation, not formal F0 acceptance, F1 promotion, a production-ready importer or proof of an existing gallery link. The acceptance review remains pending on the delivered PR.
+
+The bounded initial source is an explicitly supplied ProcessContainer/history export in the already-probed nonexecuting subset. Use the existing PROCESS_HISTORY_EXPORT classification only for an actual such export. XISF inline history is supplementary retained evidence; do not label a pure XISF read as a JavaScript export. Unknown syntax/encoding stays unsupported. Treat saved project bundles as retained opaque supporting sources, not a production XOSM importer on the basis of structural inspection. No native SDK/module or script execution is required for this candidate route.
+
 ## Current Owner-approved scope — supersedes the earlier integral requirement
 
 The Owner subsequently changed the decision on 2026-09-30 and confirmed: **archive available PixInsight workflow evidence, accept explicit gaps, and require its link to the correct gallery image/version**. Automatic integral capture is no longer required. The [revised plan](BKL-049-PixInsight-Native-Workflow-Capture-Module-Plan.md) is current; earlier scope statements and native NO-GO recommendations below remain historical findings for the former objective, not current requirements.
@@ -224,3 +230,33 @@ The gate disposition is therefore **NOT PASSED / F0 OPEN / F1 NOT PROMOTED**. Th
 | SDK-dependent development route | Applicable license/use/distribution and signing conditions sufficiently resolved to approve the intended implementation route | Public SDK availability or permission to perform synthetic tests |
 
 Until a supported candidate mechanism is identified, another Owner-operated PixelMath test or more equality counts are not a productive next gate action. Source/API research and a concrete, source-backed candidate protocol remain authorized; vendor contact remains deferred at the Owner's request. If public evidence cannot settle the mechanism or licensing question, present that exact unresolved question for a separate Owner decision rather than silently reducing scope, installing a probe or claiming completion. Real gallery integration remains a later required proof; it cannot repair missing capture capability.
+
+
+## 13. Revised F0 exit assessment and transfer obligations
+
+This assessment applies only to the latest Owner-approved partial-archive scope. Historical native gates remain in the preceding research record and are not relabelled as passed.
+
+| F0 subject | Evidence and disposition | Requirement transferred to later increment |
+|---|---|---|
+| Source availability | Owner supplied real exports; nonexecuting subset reader preserves supported structures. SYN-01/SYN-02 establish retained/missing saved-history cases | F2 hardened ingestion, limits, source validation and unsupported-format quarantine |
+| Licensing/dependencies | Candidate uses no PCL/PJSR code or redistributed native/model binaries; existing original stdlib experiments need no new installation. Owner authorized sanitized findings, not raw scientific payload publication | F1 source-retention/access policy; verify every eventual selected dependency/source before redistribution. Native conditions remain unresolved only for future native scope |
+| Target compatibility | Owner-declared PixInsight 1.9.5 build 1706 / Windows x64 and bounded real export/XISF evidence; current RC 2.6.9 declarations retained | F6 artifact/version matrix; never claim old/new RC semantic equivalence |
+| Partial evidence semantics | Existing PXP supports DECLARED/PARTIAL and limitations; synthetic path preserved these through existing functions | F1 explicit source/evidence mapping; no promotion of supplied text to observed execution or recommendations to executed steps |
+| Image/workflow association feasibility | Real final identity measured; exact-ID path and synthetic identity/mismatch probes available | F4 verified asset/version/source binding, uniqueness and integrity checks; F5 actual linked image-to-workflow experience |
+| Data preservation/privacy | Rich evidence must survive separately from lossy manifest projection; private paths/model references remain local | F1 retention design; F2/F5 redaction and access tests for parameter strings, expressions, locators and identifiers |
+
+The tests show feasibility ingredients and known constraints, not an accepted complete integration. The 34 unmatched RC export fields and unknown historical models are now permissible declared limitations; they are not prerequisites to repair before a partial archive can be designed. Missing main-image binding is different: it remains a release-blocking condition for the requested image/workflow feature.
+
+### Non-negotiable F1/F4/F5 design obligations
+
+- An explicit governed source-to-asset/version binding is required. A workflow with unresolved identity may be retained as unlinked evidence but cannot satisfy the gallery-link acceptance criterion.
+- Existing reconciliation probes show ID matching alone does not compare expected file digests and duplicate IDs can be order-dependent. The design must locate/enforce authoritative invariants or validate them before association; do not assume these gaps are already fixed.
+- A displayed preview may differ from the retained XISF. Preserve an explicit accepted original-to-derivative relation; filename or visual similarity is insufficient.
+- Retain source evidence and normalized available steps separately. The coarse manifest intentionally omits details; do not rely on it as the sole workflow archive.
+- Required PXP context fields must come from a governed association or a truthful supported representation. Do not invent scientific session IDs, targets, host identity or historical versions merely to pass validation.
+- Ambiguous/unsupported parameter encodings remain explicit. Existing handwritten validators are not proof of complete JSON Schema validation; implementation must select and validate its conformance boundary.
+- Private source text must not flow unchanged into the public read model. Keep a separately reviewed sanitized projection and preserve citations without private paths.
+
+These are concrete architecture/implementation acceptance obligations, not silently waived F0 findings. They do not require building the entire gallery integration during feasibility research. No schema or authority change is pre-approved: if F1 finds an unavoidable contract delta, it must document and review it before implementation.
+
+**F0 technical review package: ready. Formal gate: OPEN pending applicable review and delivery checks.** The next repository action is review of this revised assessment and plan, then detailed design only after the phase decision is recorded. No further Owner-operated image processing is needed to assemble this review package. BKL-043 remains current; no merge or runtime acceptance is inferred from this recommendation.

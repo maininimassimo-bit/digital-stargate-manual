@@ -411,3 +411,8 @@ Owner explicitly retained automatic entire-workflow capture; an archive of avail
 ### 2026-09-30 — BKL-049 scope supersession: partial archive accepted, gallery binding mandatory
 
 Owner explicitly changed the earlier integral-capture decision and confirmed acceptance of available/partial workflow evidence **with mandatory correct image-to-workflow linkage in the gallery**. The previous scope reconfirmation is superseded, not erased. Revised plan, ADR planning amendment, backlog and canonical roadmap retain partial/unavailable semantics and exact governed identity. Native-only feasibility gates become inapplicable to the non-SDK route, not retrospectively passed. F0 remains open for revised review; no F1/production promotion or new runtime/catalog/vendor authority. BKL-043 remains current. See the [current plan](../architecture/assessments/BKL-049-PixInsight-Native-Workflow-Capture-Module-Plan.md).
+
+
+### 2026-09-30 — BKL-049 revised-scope F0 technical assessment ready
+
+Recommended detailed architecture review for the explicitly selected available-history export route, with XISF as supplementary evidence and mandatory exact gallery image/version linkage. Native dependencies are outside this route; retained research findings are not declared resolved. RC/history gaps are acceptable if disclosed; missing or wrong image association is not. Assigned concrete retention/privacy, PXP context, identity/digest/uniqueness, derivative and end-to-end obligations to F1/F4/F5. Technical review package ready, formal F0 gate OPEN pending review/delivery; no F1 promotion or production change. See [assessment](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md#13-revised-f0-exit-assessment-and-transfer-obligations).
