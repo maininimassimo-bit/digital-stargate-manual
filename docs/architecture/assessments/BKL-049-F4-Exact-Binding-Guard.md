@@ -48,6 +48,8 @@ F5 separately requires explicit per-field public selection, a permitted preview 
 
 ## Verification and rollback
 
-Fifteen synthetic Python tests cover exact identity, deterministic retry, changed receipt conflict, missing/incorrect trust anchors, duplicate IDs/versions, wrong measured size/digest, missing identity, unrelated source/workflow, unknown context, snapshot change, catalog withdrawal, quarantine, partial asset metadata, absent/wrong preview relation, Owner attestation and bounded input/fixed diagnostics. The synthetic Node bridge checks existing PXP/manifest validators and AP14-W06 exact mandatory output reconciliation while retaining DECLARED/PARTIAL/private status. Windows/Linux CI runs both.
+Sixteen synthetic Python tests cover exact identity, deterministic retry, changed receipt conflict, missing/incorrect trust anchors, duplicate IDs/versions, wrong measured size/digest, missing identity, unrelated source/workflow, unknown context, snapshot change, catalog withdrawal, quarantine, partial asset metadata, absent/wrong preview relation, Owner attestation and bounded input/fixed diagnostics. The synthetic Node bridge checks existing PXP/manifest validators and AP14-W06 exact mandatory output reconciliation while retaining DECLARED/PARTIAL/private status. Windows/Linux CI runs both.
 
 Rollback removes the additive guard and tests via a reviewed revert, retaining all existing private evidence. No runtime, catalog or image migration exists. Delivery reviews, exact-head CI and merge-SHA/Pages verification are recorded in the PR; they do not close the remaining F4 operational gates.
+
+ARB M01 remediation: malformed catalog/archive/metadata enum values now return fixed ArchiveError diagnostics, including list/dict/null/boolean/integer cases. No acceptance bypass existed; the fix prevents an undocumented caller exception.

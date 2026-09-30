@@ -101,14 +101,16 @@ def build_binding(packet_bytes, packet_digest, declaration, *, exported_at,
         closed(item, {'entityId', 'catalogItemId', 'qualityState', 'targetRef'})
         identifier(item['targetRef'])
         require(item['targetRef'].startswith('target:'), 'BINDING_TARGET')
-        require(item['qualityState'] in {'ACCEPTED', 'WITHDRAWN', 'UNAVAILABLE'}, 'BINDING_CATALOG_STATE')
+        require(isinstance(item['qualityState'], str)
+                and item['qualityState'] in {'ACCEPTED', 'WITHDRAWN', 'UNAVAILABLE'}, 'BINDING_CATALOG_STATE')
     for asset in snapshot['assets']:
         closed(asset, IDENTITY | {'archiveState', 'metadataState', 'sessionRef', 'targetRef', 'derivativeRefs'})
         identity(asset_identity(asset))
         identifier(asset['sessionRef']); identifier(asset['targetRef'])
         require(asset['sessionRef'].startswith('session:') and asset['targetRef'].startswith('target:'),
                 'BINDING_CONTEXT_REF')
-        require(asset['archiveState'] in {'CATALOGED', 'QUARANTINED', 'UNAVAILABLE'}
+        require(isinstance(asset['archiveState'], str) and isinstance(asset['metadataState'], str)
+                and asset['archiveState'] in {'CATALOGED', 'QUARANTINED', 'UNAVAILABLE'}
                 and asset['metadataState'] in {'COMPLETE', 'PARTIAL', 'UNAVAILABLE'}, 'BINDING_ASSET_STATE')
         refs = asset['derivativeRefs']
         require(type(refs) is list and len(refs) <= 8, 'BINDING_DERIVATIVE_REFS')

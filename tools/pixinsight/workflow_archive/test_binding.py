@@ -164,6 +164,15 @@ class BindingTests(unittest.TestCase):
         raw = b' ' * (256 * 1024 + 1)
         with self.assertRaisesRegex(ArchiveError, '^BINDING_RECORD_INTEGRITY$'):
             invoke(fixture(), association_bytes=raw, association_digest=digest(raw))
+
+    def test_malformed_state_types_return_only_fixed_diagnostics(self):
+        for collection, field, code in (('catalogItems', 'qualityState', 'BINDING_CATALOG_STATE'),
+                                        ('assets', 'archiveState', 'BINDING_ASSET_STATE'),
+                                        ('assets', 'metadataState', 'BINDING_ASSET_STATE')):
+            for value in ([], {}, None, True, 1):
+                parts = fixture(); parts[2][collection][0][field] = value; reattest_snapshot(parts)
+                with self.subTest(field=field, value=value), self.assertRaisesRegex(ArchiveError, '^'+code+'$'):
+                    invoke(parts)
         raw = b'{"a":1,"a":2}'
         with self.assertRaises(ArchiveError):
             invoke(fixture(), association_bytes=raw, association_digest=digest(raw))
