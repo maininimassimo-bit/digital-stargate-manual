@@ -40,3 +40,8 @@ jobs:
           if($LASTEXITCODE -ne 0){throw 'TASK_REGRESSION_FAILED'}
           & powershell.exe -NoLogo -NoProfile -File infrastructure/bkl043-f4-night-acceptance/Test-HeartbeatObservation.ps1
           if($LASTEXITCODE -ne 0){throw 'HEARTBEAT_REGRESSION_FAILED'}
+      - name: Exercise isolated real filesystem without cloud or EAGLE
+        shell: powershell
+        run: |
+          & powershell.exe -NoLogo -NoProfile -File infrastructure/bkl043-f4-night-acceptance/Test-IsolatedFilesystem.ps1
+          if($LASTEXITCODE -ne 0){throw 'ISOLATED_FILESYSTEM_FAILED'}

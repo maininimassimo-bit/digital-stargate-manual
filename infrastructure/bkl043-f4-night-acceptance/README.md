@@ -29,3 +29,7 @@ Before release: record immutable commit and ZIP digest; independent architecture
 Full F4 acceptance still needs the remaining task/clock/gap/heartbeat/retry/identity and reporter scenarios, cost-stop evidence and lifecycle evidence. This package covers a bounded recovery/baseline run and offline checks; it does not manufacture those missing PASS results. Identify the authoritative gap-detection component before claiming its test is ready. No public runtime receipt/log belongs in this folder.
 
 Rollback: stop the supervising console and verify its child has exited; preserve outbox and all receipts. Do not merge PR #428 or restart outside this window. Changes to runtime approval or missed window require a new exact record.
+
+### Additional isolated filesystem acceptance
+
+Test-IsolatedFilesystem.ps1 imports selected functions through AST only. It creates a fresh temporary synthetic directory, verifies real atomic receipt writes, exact/over 24-hour admission, 16 MiB cap and preservation, plus real file timestamps at 60/61 seconds and absent metadata. Retry and ACK use a simulated transport and no token credentials; these checks do not prove cloud end-to-end or EAGLE runtime behavior. Eleven cases passed locally in Windows PowerShell 5.1. Synthetic files are preserved, with no recursive cleanup or interaction with the production outbox. Collector runtime bytes and expired window are unchanged. Do not launch the expired supervisor.
