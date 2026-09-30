@@ -3,6 +3,8 @@ import importlib.util
 import json
 import pathlib
 import unittest
+from unittest.mock import patch
+import urllib.error
 
 PATH=pathlib.Path(__file__).with_name('observation_planner_f9.py')
 SPEC=importlib.util.spec_from_file_location('f9',PATH); f9=importlib.util.module_from_spec(SPEC); SPEC.loader.exec_module(f9)
@@ -122,5 +124,47 @@ class F9Tests(unittest.TestCase):
         for index,instant in enumerate(times): values['TOT_PREC'][instant]=float(index)
         values['TOT_PREC'][times[12]]=1.0
         with self.assertRaisesRegex(f9.ContractError,'ACCUMULATOR'): f9.weather_rows(values)
+
+
+class F9AcquisitionPreflightTests(unittest.TestCase):
+    def test_http_diagnostic_identifies_run_variable_and_status_only(self):
+        error = urllib.error.HTTPError('https://example.invalid/private', 404, 'sensitive detail', {}, None)
+        with patch.object(f9, 'get_text', side_effect=error):
+            with self.assertRaises(f9.ContractError) as raised:
+                f9.discover_file('2026093000', 'TD_2M')
+        self.assertEqual(str(raised.exception), 'VARIABLE_LISTING_HTTP:2026093000:TD_2M:404')
+        self.assertTrue(raised.exception.__suppress_context__)
+
+    def test_nonunique_listing_is_rejected(self):
+        for listing in ('', '<a href="a.grib">a</a><a href="b.grib">b</a>'):
+            with self.subTest(listing=listing), patch.object(f9, 'get_text', return_value=listing):
+                with self.assertRaisesRegex(f9.ContractError, 'VARIABLE_FILE_NOT_UNIQUE:2026093000:CLCT'):
+                    f9.discover_file('2026093000', 'CLCT')
+
+    def test_missing_last_variable_prevents_all_downloads(self):
+        site = {'lifecycle': {'state': 'APPROVED'}, 'sitePayload': {'classification': 'PROTECTED_EXACT_SITE', 'geodesy': {}}}
+        def listing(run, variable):
+            if variable == f9.VARIABLES[-1]:
+                raise f9.ContractError('VARIABLE_LISTING_HTTP:2026093000:VMAX_10M:404')
+            return 'input.grib'
+        with patch.object(pathlib.Path, 'read_text', return_value=json.dumps(site)), patch.object(f9, 'discover_file', side_effect=listing) as discover, patch.object(f9, 'download') as download:
+            with self.assertRaisesRegex(f9.ContractError, 'VMAX_10M:404'):
+                f9.acquire(dt.datetime(2026, 9, 30, 8, tzinfo=dt.timezone.utc), run='2026093000')
+        self.assertEqual(discover.call_count, 7)
+        download.assert_not_called()
+
+    def test_all_listings_resolved_before_first_download(self):
+        site = {'lifecycle': {'state': 'APPROVED'}, 'sitePayload': {'classification': 'PROTECTED_EXACT_SITE', 'geodesy': {}}}
+        events = []
+        def listing(run, variable):
+            events.append(variable)
+            return variable + '.grib'
+        def download(url, path):
+            self.assertEqual(events, list(f9.VARIABLES))
+            self.assertIn('/2026093000/CLCT/CLCT.grib', url)
+            raise RuntimeError('TEST_STOP_BEFORE_NETWORK')
+        with patch.object(pathlib.Path, 'read_text', return_value=json.dumps(site)), patch.object(f9, 'discover_file', side_effect=listing), patch.object(f9, 'download', side_effect=download):
+            with self.assertRaisesRegex(RuntimeError, 'TEST_STOP_BEFORE_NETWORK'):
+                f9.acquire(dt.datetime(2026, 9, 30, 8, tzinfo=dt.timezone.utc), run='2026093000')
 
 if __name__=='__main__': unittest.main()
