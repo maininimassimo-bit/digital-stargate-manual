@@ -146,3 +146,8 @@ Authority remains the repository and accepted ADR-010. Official-source observati
 ## F3-B contracts and validator acceptance
 
 F3-B materializes separate method-profile, request and evidence schemas plus one bounded synthetic fixture. The canonical contract digest is `b06932edb860cc4062b45d75b62e7874c3a327a4b4dbfd0b8cb70bdf115cd1f1`; 34 fail-closed and privacy tests passed locally and in governed CI. The fixture is `TEST` / `authority=NONE`, and the public projection omits protected coordinates and internal digests. Exact-head review, expected-head merge and all 11 applicable post-merge workflows passed. F3-C adapter, runtime activation, protected-site calculation and external-reference traffic remain unimplemented and separately gated.
+
+
+## 30/09/2026 — BKL-049 F0 in parallelo
+
+BKL-043 resta corrente e aperta. L’Owner autorizza BKL-049 F0 limitatamente a ricerca SDK/licenze e fattibilità non invasiva, su branch dedicato. [Dossier e gate aperti](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md). Nessuna closure F0, promozione F1 o estensione di autorità runtime.

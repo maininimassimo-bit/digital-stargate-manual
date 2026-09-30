@@ -302,3 +302,10 @@ BKL-029 SQM integration
 ```
 
 L'ordine potrà essere raffinato durante architecture review. BKL-029 è deliberatamente posto prima del Knowledge Graph perché SQM è già un gap reale della telemetria e diventerà un attributo fondamentale del modello scientifico futuro. BKL-045 e BKL-046 sono invece modellati già dalla foundation per evitare che processing provenance e AI post-processing vengano aggiunti come silos separati in una fase successiva.
+
+
+## BKL-049 — avvio parallelo F0 (30/09/2026)
+
+Su autorizzazione Owner, F0 è **In Progress** per ricerca ufficiale su SDK/licenze, osservabilità, compatibilità PXP/AP14-W06 e preparazione documentale. BKL-043 rimane il package corrente e aperto; F4/F5, monitor e pilot non sono modificati. La sequenza di implementazione successiva non è promossa da questo avvio.
+
+Il [dossier F0](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md) conserva fonti versionate, matrice preliminare, prerequisiti, alternative e prove mancanti. Baseline PixInsight 1.9.4 build 1695 riconfermata dall’Owner; la capacità di cattura universale non è dimostrata. F0 non è conclusa, F1 non è promossa, nessun codice di produzione o autorizzazione runtime deriva dalla ricerca.

@@ -3,9 +3,9 @@
 | Field | Value |
 |---|---|
 | Identifier | DSG-BKL-049-PLAN-001 |
-| Status | **PLANNED — IMPLEMENTATION NOT STARTED** |
-| Version | 1.0 |
-| Date | 2026-09-14 |
+| Status | **F0 IN PROGRESS — PRODUCTION IMPLEMENTATION NOT STARTED** |
+| Version | 1.1 |
+| Date | 2026-09-30 |
 | Target release | Release 2.x — scheduling to be governed |
 | Predecessor | BKL-045 — CLOSED / ACCEPTED |
 | Related decision | ADR-008 — native successor planning amendment |
@@ -165,7 +165,7 @@ Bulk FITS/XISF data and PixInsight Project files remain in external scientific s
 | PixInsight PCL SDK/license | To verify in F0 | native build and redistribution |
 | Supported PixInsight version matrix | To define in F0/F1 | compatibility and release support |
 
-BKL-048 is already reserved by PR #186 for Anomaly & Trend Center multi-session planning. BKL-049 does not change BKL-031 as the current governed package and does not alter the existing program sequence until separately promoted.
+BKL-048 remains reserved for Anomaly & Trend Center multi-session planning. On 2026-09-30 the Owner authorized BKL-049 F0 research and documentation in parallel with BKL-043, which remains open and the current governed package. F0 is IN PROGRESS, not closed; F1 and production implementation are not promoted. See the [F0 dossier](BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md) for current sources, limitations and proof gates. This supersedes the historical reference to BKL-031 as current; it does not change BKL-043 pilot/monitor authorization or PRs #428/#438/#439.
 
 ## 12. Risks and trade-offs
 
@@ -203,7 +203,7 @@ Planned validation includes:
 
 - unit and contract tests for serialization, ordering, digest and redaction;
 - compatibility fixtures per supported process family and PixInsight version;
-- real PixInsight OAT on the current baseline (1.9.4 build 1695) before expanding the version matrix;
+- real PixInsight OAT on the Owner-reconfirmed baseline (1.9.4 build 1695; confirmation 2026-09-30), subject to a verified compatible SDK and separate runtime authorization, before expanding the version matrix;
 - built-in process, script and supported third-party module scenarios;
 - masks/references, multiple images, project save/reopen and restart scenarios;
 - crash/failure injection for journal and outbox;

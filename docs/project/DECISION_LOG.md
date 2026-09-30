@@ -265,3 +265,10 @@ Owner segnala forecast scaduto alle 20:00 locali. Causa: run 00 UTC con validit�
 ## 29/09/2026 — Roadmap leggibile e allineamento della hero Planner
 
 Owner richiede badge meno ingombranti, un indicatore di progresso moderno e l'allineamento del Celestial Atlas. Si adottano dettagli nativi per testi estesi preservati integralmente, schede responsive e indicatore prospettico CSS alimentato dalla stessa projection. Cielo previsto e scena 3D condividono la seconda riga della hero, con disposizione verticale su mobile. Aggiornati documentazione tecnica e test di regressione; nessuna variazione a stato governato, fonti, calcoli o autorità. Review e pubblicazione registrate nella PR dedicata.
+
+
+## 30/09/2026 — avvio parallelo BKL-049 F0
+
+L’Owner autorizza SDK/licensing and feasibility, ricerca ufficiale, verifica tecnica non invasiva e documentazione su worktree/branch dedicato da origin/main aggiornato. BKL-043 resta corrente e aperta; monitor, pilot e PR #428/#438/#439 non sono modificati. Nessun codice di produzione, installazione, acquisto, elaborazione scientifica o accesso EAGLE è autorizzato. Versione PixInsight 1.9.4 build 1695 e stessa workstation Windows riconfermate dall’Owner, senza pubblicarne identità.
+
+[Dossier F0](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md): raccomandazione tecnica preliminare di continuare la verifica, senza approvare la cattura passiva universale. Restrizioni di licenza, esatto abbinamento SDK/ABI e interfacce cross-module/progetto restano gate aperti; F0 non conclusa, F1 non promossa. Questa registrazione non seleziona un’alternativa architetturale.

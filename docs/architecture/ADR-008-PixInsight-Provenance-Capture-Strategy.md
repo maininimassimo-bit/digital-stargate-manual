@@ -1,6 +1,6 @@
 # ADR-008 — PixInsight Provenance Capture Strategy
 
-**Status:** Accepted — applied by BKL-045 F3/F4 and closure; native successor planned by BKL-049  
+**Status:** Accepted — applied by BKL-045 F3/F4 and closure; native successor BKL-049 in F0 feasibility research
 **Date:** 09/09/2026  
 **Decision owner:** Digital StarGate Architecture  
 **Related package:** BKL-045 F2  
@@ -125,7 +125,7 @@ That evidence activates the native-module revisit path. BKL-049 now plans an end
 - publish a sanitized, read-only workflow archive and step-by-step visualization in the portal;
 - represent unsupported, opaque or missing activity explicitly as `PARTIAL` or `UNAVAILABLE`, never as inferred `OBSERVED` evidence.
 
-BKL-049 is `Planned`, not current and not implemented. The accepted hybrid exporter remains the operational baseline until a future BKL-049 increment passes SDK/licensing feasibility, detailed architecture, real PixInsight OAT, independent review and governed release acceptance. This planning amendment does not authorize code, installation, catalog writes, image mutation, autonomous processing, AI apply or Safety Authority.
+BKL-049 was initially `Planned`. On 2026-09-30 the Owner authorized parallel F0 feasibility research and documentation; BKL-043 remains the current open package. F0 is not closed and native implementation remains unstarted. The [F0 dossier](assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md) records current SDK/licensing and cross-module observation gaps; it does not accept a new native architecture or promote F1. The accepted hybrid exporter remains the operational baseline until a future BKL-049 increment passes SDK/licensing feasibility, detailed architecture, real PixInsight OAT, independent review and governed release acceptance. This planning amendment does not authorize code, installation, catalog writes, image mutation, autonomous processing, AI apply or Safety Authority.
 
 ## Revisit triggers
 
