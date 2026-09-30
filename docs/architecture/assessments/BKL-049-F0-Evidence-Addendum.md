@@ -93,3 +93,17 @@ G1 has a preliminary dependency/signing inventory but licensing and entitlement 
 Validation on 2026-09-30: 12/12 research assertions reproduced and saved JSON matched a fresh run; 37/37 existing provenance/manifest/ledger/reconciliation/read-model regression tests passed; roadmap generator/consistency checks passed with BKL-043 current/next. MkDocs strict build passed in 26.76 seconds after correcting research links to repository URLs. Targeted privacy and diff-whitespace checks passed. CI is verified separately on the PR head; these results do not establish SDK/runtime feasibility.
 
 The follow-up [vendor inquiry and bounded proof protocol](BKL-049-F0-Vendor-Inquiry-and-Probe-Protocol.md) provides the complete unsent inquiry and staged experiment prerequisites, stop conditions and result requirements. Neither contact nor runtime execution has occurred.
+
+## 6. Owner module inventory and upgrade candidate — 2026-09-30
+
+Owner DECLARED regular use of RC Astro BlurXTerminator, NoiseXTerminator and StarXTerminator. Installed module/model versions and legacy versus unified distribution remain unknown. Owner reports PixInsight 1.9.5 build 1706 as the offered upgrade, not as an installed version; the confirmed installed baseline remains 1.9.4 build 1695 until explicitly superseded.
+
+Official RC Astro sources checked on 2026-09-30:
+
+- [Installation instructions](https://www.rc-astro.com/pixinsight-installation-instructions/) cover all three products through PixInsight 1.9.5 via the unified repository `https://www.rc-astro.com/PixInsight`.
+- [FAQ, tools disappeared or will not update](https://www.rc-astro.com/frequently-asked-questions/) explicitly states legacy individual repositories do not work with PixInsight 1.9.5.
+- [Unified Suite announcement, 2026-07-27](https://www.rc-astro.com/unified-pixinsight-rc-astro-suite/) documents migration from individual repositories and changes/removal of some process parameters. Existing saved icons may show skipped-parameter warnings; scripts relying on removed parameters need adjustment.
+
+This establishes vendor-declared compatibility for the unified distribution with the 1.9.5 family, not a verified installation on the Owner's workstation or proof of complete workflow capture. Before advising the upgrade, determine which repository/distribution is installed. No repository configuration, module, license activation, model download or application version was changed.
+
+Research implications: each RC Astro test must identify product, module version and selected ML model version where exposed; record actual parameters, image inputs/outputs and evidence source. Missing model identity stays an explicit gap. Preserve original historical process representations and their version context; do not silently reinterpret old parameters using a newer module. StarXTerminator cases must check every actually generated output and its relationship to the input. Internal proprietary model computation is not claimed observable, and model binaries/weights are not collected or redistributed. These are proof requirements, not new runtime acceptance claims.
