@@ -309,3 +309,8 @@ Ten generated-file scenarios characterize a research identity envelope, includin
 ### 2026-09-30 — BKL-049 real final-file identity and private evidence index
 
 Owner-specified XISF hashing established a real final-file identity; a different-project candidate was explicitly excluded. Local records and the original project export were fingerprint-checked without decoding pixels or publishing raw sources. Subsequent bounded header inspection found the matching recombination and two additional saved steps, DynamicCrop and CurvesTransformation. See the [sanitized index report](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). Association is corroborated by embedded text but not independent execution evidence; coverage remains PARTIAL, gallery binding UNRESOLVED within inspected fixture scope, F0 OPEN. No scientific catalog writes or BKL-043 changes.
+
+
+### 2026-09-30 — BKL-049 repeatable bounded header reader
+
+An isolated counts-only XISF header reader reproduces the three-instance final-file observation and explicitly scopes history to its image. Synthetic malformed/unsupported input checks pass; attached history and full-workflow capture remain unsupported. See the [evidence report](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). No pixel reads beyond the header, image mutation, production adapter or F0 acceptance; BKL-043 unchanged.

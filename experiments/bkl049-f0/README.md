@@ -26,3 +26,8 @@ Run `node experiments/bkl049-f0/synthetic-pipeline-probes.mjs` (requires existin
 ## Synthetic image-version identity experiment
 
 Run `python experiments/bkl049-f0/identity_packet_probes.py`. Ten scenarios exercise a proposed research envelope on generated temporary files; no real-file input is accepted. This is not AP-013 implementation or full untrusted-input validation. The deliberate I10 counterexample shows the need for an independently governed trust anchor. See the [identity report](../../docs/architecture/assessments/BKL-049-F0-Identity-Packet-Experiment.md).
+
+
+## Bounded XISF header-only reader
+
+Run `python experiments/bkl049-f0/test_read_xisf_header.py` for four synthetic test methods (including rejection subcases). `python experiments/bkl049-f0/read_xisf_header.py <explicit-local-file>` reads only the 16-byte signature and bounded XML header. Counts-only output; inline String history subset only; no pixel decoding, hashing, execution, external references, PXP conversion or completeness claim. See the [real evidence report](../../docs/architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md).

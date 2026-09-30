@@ -49,3 +49,12 @@ The two subsequent steps establish that the recombination-only export was not al
 A sixth local inspection record was added to the index and all record fingerprints were rechecked. The index still is not a self-contained archive. The one-off inspection enforces a 2 MiB header bound, signature/file-size checks and rejection of DTD/entity declarations; it is not a general XISF importer or a production security boundary.
 
 No vendor contact, native module, scientific processing, image mutation, production contract change, EAGLE access or BKL-043 intervention occurred. File hashing and header inspection are distinct from scientific processing or historical execution evidence.
+
+
+## Repeatable header-only experiment
+
+The isolated [reader](https://github.com/maininimassimo-bit/digital-stargate-manual/blob/codex/bkl-049-f0/experiments/bkl049-f0/read_xisf_header.py) reproduces the bounded inspection without reading beyond the XML header. Four synthetic test methods cover image scoping, counts-only privacy, attached/compressed/encoded representations, malformed signatures, truncation, reserved fields, size/depth limits, duplicate histories, DTD and null-byte rejection. Unsupported representations remain unsupported; no external resource or image block is followed. This is an original research implementation using Python standard-library XML parsing, not a general hardened importer or SDK implementation.
+
+The real-file repeat found the same 14,121-byte header and three instances, with parameter/table counts 26/1, 25/0 and 11/11 respectively, each containing a time element. It reports one image-scoped property: the earlier count of seven covered the entire header, including properties outside that image scope. No private identifiers, process parameter values, paths or file digests are emitted by the command.
+
+The repeat does not redo whole-file hashing or compare expressions: the prior identity and exact-value checks remain separate evidence. Its structural counts corroborate that inspection, not historical execution or a complete workflow. The command intentionally omits arbitrary process class names from public output; ordered process identities above come from the prior private inspection. No parameter-to-PXP adapter is introduced. F0 remains OPEN.
