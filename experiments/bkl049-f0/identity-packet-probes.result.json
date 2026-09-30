@@ -1,0 +1,56 @@
+{
+  "experiment": "BKL049-F0-SYNTHETIC-IDENTITY-PACKET",
+  "scope": "Original research verifier on fixed synthetic files; not AP-013, signed provenance, live gallery integration or production validation",
+  "results": [
+    {
+      "id": "I01",
+      "outcome": "REPRODUCED",
+      "finding": "Typed image/export IDs can share text without aliasing; successful identity check retains DECLARED/PARTIAL."
+    },
+    {
+      "id": "I02",
+      "outcome": "REPRODUCED",
+      "finding": "Same file name and ID with changed bytes fails the original digest."
+    },
+    {
+      "id": "I03",
+      "outcome": "REPRODUCED",
+      "finding": "A missing source artifact prevents a verified packet association."
+    },
+    {
+      "id": "I04",
+      "outcome": "REPRODUCED",
+      "finding": "Duplicate typed IDs/versions are rejected rather than selecting the last record."
+    },
+    {
+      "id": "I05",
+      "outcome": "REPRODUCED",
+      "finding": "A gallery reference to another version is rejected."
+    },
+    {
+      "id": "I06",
+      "outcome": "REPRODUCED",
+      "finding": "A source-to-output link cannot point to an absent typed asset."
+    },
+    {
+      "id": "I07",
+      "outcome": "REPRODUCED",
+      "finding": "Image and source-export namespaces are not interchangeable."
+    },
+    {
+      "id": "I08",
+      "outcome": "REPRODUCED",
+      "finding": "A changed manifest fails the separately retained packet anchor."
+    },
+    {
+      "id": "I09",
+      "outcome": "REPRODUCED",
+      "finding": "Renaming a file with unchanged bytes and explicit identity does not break this identity check."
+    },
+    {
+      "id": "I10",
+      "outcome": "REPRODUCED",
+      "finding": "Replacing payload, metadata AND accepted anchor yields a match: hashes alone do not authenticate origin."
+    }
+  ]
+}

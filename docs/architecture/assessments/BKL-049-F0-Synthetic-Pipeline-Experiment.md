@@ -69,3 +69,5 @@ The existing route can carry a deliberately bounded DECLARED/PARTIAL candidate t
 Before a real-source adapter, decide and verify source-provenance rules, immutable image/version bindings, nested/branch semantics, supported parameter representation, privacy projection, missing-binding handling and bounded-size behavior. Any changes to scientific contracts require the established review path. Further research may use synthetic artifacts without new scientific processing; no vendor contact is required or performed here.
 
 Validation: nine pipeline observations reproduced and matched saved output, 27 subset-reader tests and 37 existing provenance/manifest/ledger/reconciliation/read-model tests passed. MkDocs strict build passed (33.26 seconds); targeted privacy, whitespace and roadmap checks passed with BKL-043 current/next. GitHub CI is a separate exact-head gate.
+
+The [synthetic identity-packet experiment](BKL-049-F0-Identity-Packet-Experiment.md) follows up on invented bindings with byte-digest/version mismatch scenarios and explicitly demonstrates that hashes alone do not authenticate provenance.

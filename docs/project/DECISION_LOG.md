@@ -299,3 +299,8 @@ Added an original standard-library nonexecuting reader for a bounded JavaScript 
 ### 2026-09-30 — BKL-049 synthetic export-to-consumer feasibility
 
 A fixed synthetic export traverses the nonexecuting research reader, an experiment-only DECLARED/PARTIAL sidecar and existing PXP/AP14-W06 validator, manifest, ledger, reconciliation, projection and read-model functions. Nine assertions verify preservation and fail-closed boundaries; no real source ingestion or production contract change. See the [pipeline report](../architecture/assessments/BKL-049-F0-Synthetic-Pipeline-Experiment.md). F0 remains open; BKL-043 unchanged.
+
+
+### 2026-09-30 — BKL-049 synthetic identity boundary and F0 consolidation
+
+Ten generated-file scenarios characterize a research identity envelope, including a counterexample showing that replaced trust anchors defeat an authenticity claim. Updated G3/G4 evidence status without closing F0 or altering AP-013/AP14-W06. See the [identity experiment](../architecture/assessments/BKL-049-F0-Identity-Packet-Experiment.md). No real images accessed, public raw data, vendor contact or BKL-043 changes.

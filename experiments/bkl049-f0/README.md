@@ -22,3 +22,7 @@ Run `python experiments/bkl049-f0/test_read_export_subset.py` for 27 synthetic t
 ## Fixed synthetic export-to-consumer path
 
 Run `node experiments/bkl049-f0/synthetic-pipeline-probes.mjs` (requires existing Python on PATH). Nine assertions exercise reader -> candidate DECLARED sidecar -> existing validators/mapper/ledger/reconciliation/projection/read model. The Python builder accepts no arbitrary file input and reads only the fixed synthetic fixture. No real export ingestion, full JSON Schema validation, production adapter or native observation is claimed. See the [pipeline report](../../docs/architecture/assessments/BKL-049-F0-Synthetic-Pipeline-Experiment.md).
+
+## Synthetic image-version identity experiment
+
+Run `python experiments/bkl049-f0/identity_packet_probes.py`. Ten scenarios exercise a proposed research envelope on generated temporary files; no real-file input is accepted. This is not AP-013 implementation or full untrusted-input validation. The deliberate I10 counterexample shows the need for an independently governed trust anchor. See the [identity report](../../docs/architecture/assessments/BKL-049-F0-Identity-Packet-Experiment.md).

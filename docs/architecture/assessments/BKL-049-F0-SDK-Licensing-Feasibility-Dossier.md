@@ -135,15 +135,17 @@ Principal risks: unverified compiled ABI on the new 1706 baseline; license/workf
 | G0 parallel authorization and isolation | RECORDED | Owner request; dedicated branch; BKL-043 unchanged |
 | G1 SDK and license inventory | PARTIAL | Official sources pinned; resolve workflow restriction, dependency notices, application/CI entitlement and signing path before development |
 | G2 exact environment/ABI/toolchain | PARTIAL | Owner confirmed upgrade to core 1706 and RC Astro operation after previously supplying Windows 11 Pro 25H2 build 26200.9550, x64 (Win32_Processor Architecture=9); matching SDK/API and reproducible toolchain still needed |
-| G3 support matrix | PRELIMINARY | Vendor-documented cross-module/history/project mechanism, or explicit decision accepting reduced scope/alternative. No universal recorder claim |
-| G4 contract feasibility | STATIC + SYNTHETIC BOUNDARY PROBES; END-TO-END UNPROVEN | Decide capture-method versioning, detail preservation, privacy and digest model in reviewed F1 design |
+| G3 support matrix | PARTIAL REAL-SOURCE + SYNTHETIC EVIDENCE | Supplied project histories support the artifact candidate; supported automatic extraction, full project coverage and exact source provenance remain unproven. No universal recorder claim; no implicit scope reduction |
+| G4 contract feasibility | SYNTHETIC DECLARED PIPELINE VERIFIED; REAL END-TO-END UNPROVEN | Reader, existing-code pipeline and identity experiments recorded; real version/gallery association, accepted encoding, privacy and source trust remain open |
 | G5 feasibility decision | NOT ACCEPTED | Review the evidence and alternative trade-offs; do not promote F1 automatically |
 
 Before F1, resolve G1–G3 sufficiently to make an evidence-backed scope decision. If runtime proof is indispensable to resolve G3, propose a separate minimal experiment with exact binary/source baseline, license clearance, synthetic images, read-only observation behavior, installation/rollback and Owner authorization. It must not use scientific images, EAGLE, hidden hooks or production code. Compilation alone cannot prove observation completeness.
 
 Later F2/F3/OAT must test built-in/script/third-party families, edits without execution, repeated executions, abort/failure, masks, multi-image global processes, undo/redo, project save/reopen, restart/crash, deterministic export/replay and privacy. Ground truth must be supplied independently of recorder output. Report omissions/duplicates, parameter equality, causal links and journal gaps. No runtime test in this list is claimed executed.
 
-Owner input is requested one item at a time: (1) core/workstation reconfirmation received; (2) Windows 11 Pro 25H2 build 26200.9550 and x64 processor evidence received; (3) development/licensing disposition and any vendor-contact permission; (4) only if necessary, separately bounded experiment authorization. Installed module inventory is needed when selecting concrete supported third-party cases. Private host/user identity, keys and raw science data are unnecessary.
+Owner input is requested one item at a time: (1) core/workstation reconfirmation received; (2) Windows 11 Pro 25H2 build 26200.9550 and x64 processor evidence received; (3) SDK-dependent development/licensing disposition remains open, with vendor contact explicitly deferred; (4) only if necessary, separately bounded experiment authorization. RC Astro product families and unified distribution are confirmed; exact module/model versions remain needed for supported cases. Private host/user identity, keys and raw science data are unnecessary.
+
+The [identity experiment and consolidated F0 position](BKL-049-F0-Identity-Packet-Experiment.md) distinguish progress achievable synthetically from remaining real-source proof obligations.
 
 ## 9. Delivery, validation and rollback
 
