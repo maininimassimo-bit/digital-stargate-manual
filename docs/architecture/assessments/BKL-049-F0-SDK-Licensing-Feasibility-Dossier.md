@@ -5,12 +5,14 @@
 | Identifier | DSG-BKL-049-F0-001 |
 | Version / date | 0.1 / 2026-09-30 |
 | Status | IN PROGRESS — F0 NOT CLOSED; F1 NOT AUTHORIZED BY THIS DOSSIER |
-| Scope | Official-source research, static API/contract inspection and planning only |
+| Scope | Official-source research, Owner-assisted artifact evidence, read-only identity/header checks and isolated nonproduction experiments |
 | Repository baseline | `b848f9416693bdce0ab0b20a331e709d5028510e` — origin/main including PR #444 |
 | Branch | `codex/bkl-049-f0` |
 | Authority | Processing evidence only; `actionAuthority=NONE` |
 
 ## 1. Recommendation and current state
+
+**Real identity follow-up:** the [local evidence index report](BKL-049-F0-Real-Identity-Evidence-Index.md) records a measured final-file digest and embedded-history corroboration of the Owner-declared association. The saved history contains the matching recombination and two further processes. The unrelated first candidate is excluded; the checked-in archive fixture has no matching digest. No gallery association or complete capture is claimed.
 
 **Latest evidence:** the [Owner-assisted history report](BKL-049-F0-Owner-Assisted-History-Evidence.md) documents a rich project export, RC Astro instances, mask history and explicit recombination references. These make the artifact route concrete but do not establish complete coverage. Vendor contact is deferred at Owner request; sanitized public documentation is authorized. F0 remains OPEN.
 

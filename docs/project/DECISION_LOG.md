@@ -304,3 +304,8 @@ A fixed synthetic export traverses the nonexecuting research reader, an experime
 ### 2026-09-30 — BKL-049 synthetic identity boundary and F0 consolidation
 
 Ten generated-file scenarios characterize a research identity envelope, including a counterexample showing that replaced trust anchors defeat an authenticity claim. Updated G3/G4 evidence status without closing F0 or altering AP-013/AP14-W06. See the [identity experiment](../architecture/assessments/BKL-049-F0-Identity-Packet-Experiment.md). No real images accessed, public raw data, vendor contact or BKL-043 changes.
+
+
+### 2026-09-30 — BKL-049 real final-file identity and private evidence index
+
+Owner-specified XISF hashing established a real final-file identity; a different-project candidate was explicitly excluded. Local records and the original project export were fingerprint-checked without decoding pixels or publishing raw sources. Subsequent bounded header inspection found the matching recombination and two additional saved steps, DynamicCrop and CurvesTransformation. See the [sanitized index report](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). Association is corroborated by embedded text but not independent execution evidence; coverage remains PARTIAL, gallery binding UNRESOLVED within inspected fixture scope, F0 OPEN. No scientific catalog writes or BKL-043 changes.
