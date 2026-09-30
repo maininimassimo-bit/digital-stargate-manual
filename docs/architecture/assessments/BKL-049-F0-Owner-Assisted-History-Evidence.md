@@ -72,3 +72,5 @@ This candidate preserves the entire-workflow objective without asserting it achi
 Owner initially requested local-only research and no vendor contact; later explicitly authorized publication of material needed for public repository documentation. This sanitized report exercises that authorization. The no-contact instruction remains effective. No vendor message, SDK installation, assistant-run scientific processing, image mutation, EAGLE action, catalog-authority change or BKL-043 intervention occurred. Owner-performed actions are described above, not recast as assistant runtime tests. Protected PRs remain untouched.
 
 Next autonomous work can refine artifact requirements and isolated synthetic ingestion experiments. Further runtime actions or scientific data handling require the existing specific authorization boundaries. Raw attachments are not added to Git and no public mapping back to private image names is provided.
+
+The subsequent [archive linkage experiment](BKL-049-F0-Archive-Linkage-Experiment.md) tests six synthetic reconciliation boundaries and records required identity evidence without modifying production contracts.

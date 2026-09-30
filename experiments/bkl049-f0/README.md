@@ -10,3 +10,7 @@ C04 checks the schema step ceiling and JavaScript validators, not a complete JSO
 See the [research addendum](../../docs/architecture/assessments/BKL-049-F0-Evidence-Addendum.md) for implications and outstanding proof gates.
 
 Probed DSG baseline: `dddb95748f2741b1bcbf8a550cd4ba0d7e9b0880`. Re-run assertions against later revisions; a failing assertion can indicate a corrected boundary and requires reassessment, not automatic restoration of old behavior.
+
+## Asset binding follow-up
+
+Run `node experiments/bkl049-f0/asset-binding-probes.mjs` for six direct reconciliation observations with synthetic identifiers. These use minimal internal inputs, not a fully validated manifest. A reproduced gap is not product acceptance. See the [archive linkage experiment](../../docs/architecture/assessments/BKL-049-F0-Archive-Linkage-Experiment.md). No scientific image, private exported source or SDK code is included.
