@@ -48,3 +48,14 @@ Rollback reverts the module/workflow and compatibility shim through a reviewed c
 ## Revision history
 
 - 1.0 — Bounded importer with original source retention and synthetic boundary tests; no real ingestion or public publication.
+
+
+## Importer profile 1.1: retained long parameter literals
+
+A selected real export was retained privately by profile 1.0 with UNSUPPORTED/STRING_LIMIT: one calibration reference-spectrum string has 9,620 characters, beyond the previous 4,096-character limit. Its original bytes remain retained and unchanged; unsupported did not mean discarded.
+
+Profile 1.1 permits strings up to **16,384 decoded characters**, including literal concatenation, while keeping the 2 MiB source, token, instance, nesting, parameter and array limits unchanged. No execution, spectrum interpretation, scientific validation or publication is introduced. The scientific/PXP contract remains unchanged; only this private parser support profile advances.
+
+Packets keep schemaVersion 1.0 and explicitly record importerVersion 1.0 or 1.1. Verification reconstructs with the recorded version, so a historical 1.0 unsupported packet remains byte-verifiable after the upgrade. New imports default to 1.1. Re-importing with improved support requires a new receipt ID and separate immutable packet; old records are never silently rewritten or reclassified. Unknown importer versions fail closed. The research parser's default remains profile 1.0 for reproducibility.
+
+Synthetic tests cover the exact accepted bound, overflow through concatenation, a long synthetic reference value, unchanged verification of historical unsupported packets and rejection of unknown versions. A private read-only dry run of the selected source with 1.1 returned 23 instances (2 containers, 21 processes), 381 parameter assignments and 9 mask commands. These are export syntax observations only: no runtime order, complete lineage or scientific correctness is established. No raw parameter or source digest is published. Reviewed operational re-import and real binding remain separate.

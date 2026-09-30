@@ -14,6 +14,7 @@ MAX_INSTANCES = 512
 MAX_DEPTH = 32
 MAX_PARAMETERS = 2048
 MAX_STRING = 4096
+STRING_LIMITS = {"1.0": MAX_STRING, "1.1": 16384}
 MAX_ARRAY_ITEMS = 4096
 MAX_IDENTIFIER = 128
 MAX_MASK_COMMANDS = 128
@@ -24,7 +25,10 @@ class Unsupported(ValueError):
         self.code, self.offset = code, offset
         super().__init__(f'{code} at character {offset}')
 
-def parse_export(text):
+def parse_export(text, *, profile="1.0"):
+    if not isinstance(profile, str) or profile not in STRING_LIMITS:
+        raise Unsupported("PROFILE_UNSUPPORTED", 0)
+    max_string = STRING_LIMITS[profile]
     if len(text.encode('utf-8')) > MAX_BYTES:
         raise Unsupported('SIZE_LIMIT', 0)
     tokens, comments = [], []
@@ -63,7 +67,7 @@ def parse_export(text):
         try:
             value = json.loads(token[1])
             value.encode('utf-8')
-            if len(value) > MAX_STRING:
+            if len(value) > max_string:
                 raise Unsupported('STRING_LIMIT', token[2])
             return value
         except Unsupported:
@@ -80,7 +84,7 @@ def parse_export(text):
             while current()[1] == '+':
                 take('+')
                 result += string()  # Literal concatenation only.
-                if len(result) > MAX_STRING:
+                if len(result) > max_string:
                     raise Unsupported('STRING_LIMIT', token[2])
             return result
         if token[1] == '[':

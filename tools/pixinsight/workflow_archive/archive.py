@@ -13,6 +13,7 @@ import tempfile
 from .export_parser import MAX_BYTES, Unsupported, parse_export, safe_summary
 
 VERSION = "1.0"
+IMPORTER_VERSION = "1.1"
 MAX_PACKET_BYTES = 32 * 1024 * 1024
 
 
@@ -74,7 +75,9 @@ def read_regular(value, limit):
         raise ArchiveError("INPUT_UNAVAILABLE") from None
 
 
-def build_packet(raw, receipt_id, imported_at):
+def build_packet(raw, receipt_id, imported_at, *, importer_version=IMPORTER_VERSION):
+    if not isinstance(importer_version, str) or importer_version not in {"1.0", "1.1"}:
+        raise ArchiveError("IMPORTER_VERSION_UNSUPPORTED")
     if not isinstance(raw, bytes) or len(raw) > MAX_BYTES:
         raise ArchiveError("SOURCE_SIZE_LIMIT")
     if not isinstance(receipt_id, str) or not re.fullmatch(r"BKL049-[A-Za-z0-9_-]{1,80}", receipt_id):
@@ -88,7 +91,7 @@ def build_packet(raw, receipt_id, imported_at):
     result, diagnostic = None, None
     try:
         text = raw.decode("utf-8-sig")
-        result = parse_export(text)
+        result = parse_export(text, profile=importer_version)
     except UnicodeError:
         diagnostic = {"code": "UTF8_INVALID", "offset": 0}
     except Unsupported as exc:
@@ -98,7 +101,7 @@ def build_packet(raw, receipt_id, imported_at):
         "kind": "BKL049_PRIVATE_SOURCE_PACKET",
         "receiptId": receipt_id,
         "importedAt": imported_at,
-        "importerVersion": VERSION,
+        "importerVersion": importer_version,
         "authority": "processing_evidence",
         "actionAuthority": "NONE",
         "publicationState": "PRIVATE_NOT_APPROVED",
@@ -124,7 +127,8 @@ def verify_packet(raw, expected_digest):
     try:
         packet = json.loads(raw)
         original = base64.b64decode(packet["source"]["originalBase64"], validate=True)
-        rebuilt = build_packet(original, packet["receiptId"], packet["importedAt"])
+        rebuilt = build_packet(original, packet["receiptId"], packet["importedAt"],
+                               importer_version=packet["importerVersion"])
         if encode(rebuilt) != raw:
             raise ArchiveError("PACKET_CONTENT_MISMATCH")
         return packet
