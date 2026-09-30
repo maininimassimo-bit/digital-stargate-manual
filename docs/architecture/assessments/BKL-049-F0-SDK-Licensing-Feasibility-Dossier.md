@@ -52,7 +52,7 @@ PCL access is distinct from entitlement to run or redistribute the proprietary P
 
 | Item | Established evidence | Remaining requirement |
 |---|---|---|
-| Owner runtime | Owner reconfirmed 1.9.4 build 1695 and the same Windows workstation on 2026-09-30; `DECLARED` confirmation, supported by older BKL-045 OAT | Exact Windows release/build and architecture not supplied by “confermo”; no assumption that research host is target |
+| Owner runtime | Owner reconfirmed 1.9.4 build 1695 and the same Windows workstation on 2026-09-30; `DECLARED` confirmation, supported by older BKL-045 OAT | Owner subsequently supplied Windows 11 Pro 25H2, build 26200.9550, OSArchitecture 64 bit; exact processor ABI (x64/ARM64) is not established by that field; research host is not assumed to be target |
 | Current SDK | S1 revision labelled PCL 2.11.0 / core 1.9.5 build 1706 | Do not pair silently with core 1695; determine supported SDK/API/ABI baseline |
 | Historical candidate | S7 labelled PCL 2.10.4 / core 1.9.4 | Exact build 1695 support and vendor guidance not proven |
 | Windows build | S1 specifies Visual C++ 2022, C++20; reference Windows 11; S8 uses v143 and release DLL CRT | Pin MSVC patch, Windows SDK, dependencies and reproducible commands; inspect actual library project availability (README layout alone is insufficient) |
@@ -124,7 +124,7 @@ Principal risks: unsupported ABI on 1695; license/workflow uncertainty; false ca
 |---|---|---|
 | G0 parallel authorization and isolation | RECORDED | Owner request; dedicated branch; BKL-043 unchanged |
 | G1 SDK and license inventory | PARTIAL | Official sources pinned; resolve workflow restriction, dependency notices, application/CI entitlement and signing path before development |
-| G2 exact environment/ABI/toolchain | PARTIAL | Owner confirmed core 1695/same workstation; exact OS/architecture, matching SDK/API and reproducible toolchain still needed |
+| G2 exact environment/ABI/toolchain | PARTIAL | Owner confirmed core 1695/same workstation and supplied Windows 11 Pro 25H2 build 26200.9550, 64-bit OS; exact processor ABI, matching SDK/API and reproducible toolchain still needed |
 | G3 support matrix | PRELIMINARY | Vendor-documented cross-module/history/project mechanism, or explicit decision accepting reduced scope/alternative. No universal recorder claim |
 | G4 contract feasibility | STATIC ASSESSMENT ONLY | Decide capture-method versioning, detail preservation, privacy and digest model in reviewed F1 design |
 | G5 feasibility decision | NOT ACCEPTED | Review the evidence and alternative trade-offs; do not promote F1 automatically |
@@ -133,7 +133,7 @@ Before F1, resolve G1–G3 sufficiently to make an evidence-backed scope decisio
 
 Later F2/F3/OAT must test built-in/script/third-party families, edits without execution, repeated executions, abort/failure, masks, multi-image global processes, undo/redo, project save/reopen, restart/crash, deterministic export/replay and privacy. Ground truth must be supplied independently of recorder output. Report omissions/duplicates, parameter equality, causal links and journal gaps. No runtime test in this list is claimed executed.
 
-Owner input is requested one item at a time: (1) core/workstation reconfirmation received; (2) exact Windows release/build and architecture; (3) development/licensing disposition and any vendor-contact permission; (4) only if necessary, separately bounded experiment authorization. Installed module inventory is needed when selecting concrete supported third-party cases. Private host/user identity, keys and raw science data are unnecessary.
+Owner input is requested one item at a time: (1) core/workstation reconfirmation received; (2) Windows 11 Pro 25H2 build 26200.9550 and 64-bit OS received, processor ABI still to verify before selecting binaries; (3) development/licensing disposition and any vendor-contact permission; (4) only if necessary, separately bounded experiment authorization. Installed module inventory is needed when selecting concrete supported third-party cases. Private host/user identity, keys and raw science data are unnecessary.
 
 ## 9. Delivery, validation and rollback
 
@@ -145,4 +145,4 @@ Rollback is a normal revert of this documentation/roadmap commit, followed by th
 
 | Revision | Change |
 |---|---|
-| 0.1 — 2026-09-30 | Parallel F0 start, current official SDK/license inspection, support/contract gaps, conditional recommendation and open proof gates |
+| 0.1 — 2026-09-30 | Parallel F0 start, current official SDK/license inspection, support/contract gaps, conditional recommendation and open proof gates; Owner Windows version evidence recorded |
