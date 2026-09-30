@@ -69,3 +69,32 @@ Stop on unexpected access to a real project/image, requirement for an installati
 ## 3. Required result record
 
 A later evidence record must state: authorization scope and date; exact product/API/source versions; methods actually executed; independent expected history; observed entries and missing entries; per-step input/output/mask bindings; source locators and artifact digests; privacy treatment; limitations; and next decision. Repository tests and CI must be reported separately from runtime findings. G1–G5 are not closed by preparation of this protocol.
+
+
+## 4. Concrete next experiment SYN-01 — Owner-operated retained-history check
+
+Status: PREPARED, NOT AUTHORIZED OR EXECUTED. This is the next discriminating experiment after the historical project comparisons. It uses ordinary existing PixelMath and XISF facilities, not SDK-derived code, a new module or scientific data. The earlier vendor-response prerequisite is not required for this specific Owner-operated artifact test: source artifacts have already demonstrated the supported UI export and XISF history routes. Native API probes remain separately gated, and vendor contact remains deferred.
+
+### Exact scope for approval
+
+The Owner operates PixInsight 1.9.5 build 1706. The assistant supplies instructions and subsequently inspects only explicitly selected synthetic artifacts. No assistant UI control, installation, update, license change, historical-project resave, EAGLE access or gallery upload is included. Use a scratch location chosen by the Owner, with new filenames only; retain test outputs for review. Existing scientific projects must not be closed, saved or changed by these instructions. If a separate safe workspace cannot be selected without affecting them, stop.
+
+| Step | Owner action on synthetic target only | Independently specified expectation |
+|---|---|---|
+| S0 | Record current version and confirm a fresh synthetic view identifier is unused | No existing image is the target |
+| S1 | In PixelMath, generate a new 64×64 grayscale, 32-bit floating-point image using the constant expression `0.25`, with a new synthetic identifier, rescale off | Creation configuration recorded independently; nominal initial pixel value 0.25 |
+| S2 | Apply PixelMath `$T + 0.125` to that synthetic image, create-new-image off, rescale off | One subsequent in-place operation; nominal value 0.375 |
+| S3 | Apply PixelMath `$T * 0.5` to the same synthetic image, create-new-image off, rescale off | Second subsequent operation; nominal value 0.1875 |
+| S4 | Export available history using the already-used supported UI action; save as a new XISF using the visible per-save processing-history option if available | Retain the exported text and record the option actually shown; no global preferences changed |
+| S5 | Close only the saved synthetic view and reopen its saved XISF; export history through the same UI action | Compare initial and subsequent history representations before/after reopening |
+| S6 | Provide the explicit synthetic XISF and export locations for read-only inspection | Bounded header comparison, integrity and omission report; no pixel decoding required |
+
+The UI's complete effective PixelMath settings must be recorded before execution; do not reuse a historical process instance or assume reset/default values. If a listed setting or per-save history option cannot be identified, report what is available and pause that dependent step. No guessed script/API is substituted. Truncation bounds, if enabled, must remain 0 to 1; all nominal values above lie within those bounds. Expected values are arithmetic ground truth, not a claim that pixels have been measured.
+
+Creation can appear as `initialProcessing` separately from subsequent operations. Do not require a single flattened three-entry export or treat an export omitting initial history as proof of no creation. Compare each available source location explicitly. Preserve order S2 then S3: swapping them produces a different nominal result, so the sequence is discriminating even though the assistant will not decode pixels. Preserve original expressions without evaluating them in the inspection tool.
+
+### Outcome criteria
+
+Report observed artifact content separately from Owner-declared execution. A successful bounded artifact result requires both subsequent operations and exact expressions in the expected order after reopening, with source locators and explicit treatment of creation history. If one export omits a section but the XISF retains it, report source-specific coverage rather than an unconditional pass. Missing, transformed or unsupported content remains PARTIAL/UNAVAILABLE. No historical model, RC Astro migration, script origin, mask lineage, universal recorder, native ABI or F0 closure is established by this experiment.
+
+Only this three-operation synthetic sequence and its new local outputs are proposed. No RC Astro processing, undo/redo, masks, project save/reopen test, negative history-disabled variant or failure injection is included. Those require subsequent evidence review and separately bounded scope.

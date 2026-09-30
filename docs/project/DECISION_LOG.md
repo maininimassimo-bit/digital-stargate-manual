@@ -371,3 +371,8 @@ Consolidated the accumulating evidence report and distinguished 11 officially do
 Owner confirmed the three RC tools were updated today. Retained-project presence-only inspection found nonempty model-file references in six RC instance elements across MAIN/STARS, without following paths or identifying model binaries. Current 2.6.9 declarations cannot certify May runtime/model versions. See the [chronology and model-reference boundary](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN; no installation, processing or image change by the assistant.
 
 Owner backup availability response: UNKNOWN, not absent. Preserve the historical model-identity gap without restore or broad filesystem search.
+
+
+### 2026-09-30 — BKL-049 SYN-01 ready for specific Owner authorization
+
+Prepared a concrete Owner-operated 64×64 synthetic PixelMath sequence with independent expected order and expressions, followed by XISF save/reopen and supported UI history exports. It tests retained artifact coverage without native code, SDK, RC Astro, real-image processing or vendor contact. The exact scope and stop conditions are in the [protocol](../architecture/assessments/BKL-049-F0-Vendor-Inquiry-and-Probe-Protocol.md#4-concrete-next-experiment-syn-01-owner-operated-retained-history-check). NOT AUTHORIZED/NOT EXECUTED; F0 OPEN. Specific approval is required by the Owner's initial runtime/processing constraints.
