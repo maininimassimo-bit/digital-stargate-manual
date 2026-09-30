@@ -349,3 +349,8 @@ Pinned official parameter definitions support comparison of 66 curve-table assig
 ### 2026-09-30 — BKL-049 nested PixelMath comparison
 
 All 78 assignments across three nested PixelMath instances match the retained project representation, including exact expression text without evaluation. Two official parameter-definition fingerprints support enum comparison. Cumulative MAIN assignment coverage is 339/381, with 34 RC Astro and eight other representation questions unresolved. This is not workflow completeness or execution proof. See the [consolidated comparison](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN; no image or production changes.
+
+
+### 2026-09-30 — BKL-049 non-RC representation checks resolved for supplied export
+
+Seven symbolic enum labels agree directly; the remaining MultiscaleMedianTransform table agrees in all 35 cells using explicit source column labels. Consolidated supplied MAIN assignment correspondence is 347/381, leaving 34 RC Astro fields unresolved. This is bounded artifact comparison, not a general supported importer, model-version equivalence or workflow completeness. See the [current evidence](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN.

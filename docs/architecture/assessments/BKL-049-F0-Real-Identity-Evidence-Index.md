@@ -147,3 +147,17 @@ Together with the direct-entry comparisons, **339 of the 381 exported MAIN assig
 | Other process table | 1 | Verified column/row semantics and representation comparison |
 
 The remaining non-RC fields belong to BackgroundNeutralization, SpectrophotometricColorCalibration, SCNR, LocalHistogramEqualization and MultiscaleMedianTransform. An unresolved field is not automatically a mismatch or loss. The private comparison record stays separate from the six-record index. Masks, state selection, omitted initial operations, exact image versions, automatic extraction and gallery binding remain independent open questions. F0 stays OPEN.
+
+
+## Remaining non-RC representation checks
+
+All seven remaining non-RC enum assignments use identical symbolic labels in the export and XML. Comparison verified the export enum owner equals the aligned process class, the parameter identifier agrees, and the member label equals the XML value. This resolves textual representation correspondence without inventing numeric enum semantics, relying on a default, or asserting historical module equivalence.
+
+The MultiscaleMedianTransform table has five rows and seven columns. Its supplied export contains explicit column labels; these were matched to XML cell identifiers with duplicate/shape checks. All 35 cells agree, using explicit boolean text or Decimal numeric equality without tolerance. The labels are source-artifact evidence, not an independently certified general schema. This table counts as one assignment, not 35 assignments, in the cumulative totals.
+
+**Current consolidated result: 347 of 381 supplied MAIN assignments corroborated; 34 RC Astro assignments remain unresolved.** This supersedes the interim 339/381 count above. All non-RC assignments in this particular supplied MAIN export have representation correspondence under the documented comparison rules. This does not establish all non-RC processes are supported, does not cover arbitrary exports, and does not certify entire-workflow completeness.
+
+The outstanding 34 are distributed across two BlurXTerminator instances (five each), one StarXTerminator (six) and two NoiseXTerminator instances (nine each). They lack same-ID direct XML counterparts in this comparison. Do not relabel them as dropped, migrate them to similarly named fields or populate current defaults. The next useful evidence is a version-specific official representation/migration rule or supported export evidence retaining both schemas, rather than another generic equality test. No vendor contact, proprietary module inspection or execution is authorized by this result. A private aggregate comparison report was retained separately from the original evidence index.
+
+
+Official RC Astro follow-up (retrieved 2026-09-30): the [unified-suite announcement](https://www.rc-astro.com/unified-pixinsight-rc-astro-suite/) explicitly documents that `ai_file` was replaced by numeric `ml_version`, and zero selects the latest available model. This resolves the current suite's selection-policy meaning, not the actual model used in a historical execution or a complete mapping of the 34 fields. Persisting only zero cannot pin reproducibility across changing available models. Preserve the original source values and distinguish model-selection policy from resolved model identity; no historical model number is inferred from today's installation. The same source documents removed parameters and a changed version-number scheme, reinforcing the need for version-specific comparison rather than silent migration.
