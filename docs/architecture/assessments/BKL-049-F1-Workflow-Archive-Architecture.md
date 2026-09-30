@@ -4,10 +4,12 @@
 |---|---|
 | Identifier | DSG-BKL049-F1-ARCH-001 |
 | Version / date | 1.0 / 2026-09-30 |
-| Status | Design baseline for separate ARB and Release Quality review |
+| Status | ACCEPTED / POST-MERGE VERIFIED via PR #449; implementation obligations remain |
 | Entry evidence | [F0 acceptance](../../project/BKL-049-F0-ACCEPTANCE-2026-09-30.md), PR #445 and reconciliation PR #448 |
 | Authority | Processing evidence only; catalog AP-014 and scientific identity AP-013 unchanged |
 | Action / command / safety authority | NONE |
+
+F1 delivery: [PR #449 post-merge acceptance](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/449#issuecomment-5917671178), merge `32050f0a12ac1942c017f393c17b2e52466d6bd5`, 17/17 post-merge workflows SUCCESS and Pages verified.
 
 ## 1. Decision
 

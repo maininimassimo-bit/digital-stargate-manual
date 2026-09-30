@@ -426,3 +426,8 @@ La [riconciliazione F0](BKL-049-F0-ACCEPTANCE-2026-09-30.md) registra PR #445, m
 ## 2026-09-30 — BKL-049 F1 detailed architecture prepared
 
 Following F0 acceptance/reconciliation PR #448 (`88445810ff6e2f2091a2a69ade8dd6cca029b72f`, 17/17 post-merge SUCCESS and Pages verified), prepare [F1](../architecture/assessments/BKL-049-F1-Workflow-Archive-Architecture.md) for separate review: nonexecuting artifact import, source retention, truthful PXP mapping, upstream identity guard and minimized gallery projection. No production code, real asset registration or raw-source publication is included. BKL-043 remains current; F1 is not accepted before its review/delivery evidence.
+
+
+## 2026-09-30 — BKL-049 F1 accepted, F2 bounded importer prepared
+
+F1 PR #449 passed separate ARB/RQ (zero findings), 17/17 exact-head and 17/17 post-merge workflows at `32050f0a12ac1942c017f393c17b2e52466d6bd5`; Pages verified. [F2](../architecture/assessments/BKL-049-F2-Bounded-Importer-Implementation.md) implements selected nonexecuting import/private retention only, with synthetic tests and explicit skipped local symlink coverage to be exercised in Linux CI. No real private import, PXP delivery, catalog registration, scientific processing or gallery publication occurred. BKL-043 remains current.

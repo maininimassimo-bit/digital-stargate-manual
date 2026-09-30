@@ -1,6 +1,6 @@
 # ADR-008 — PixInsight Provenance Capture Strategy
 
-**Status:** Accepted — applied by BKL-045 F3/F4 and closure; BKL-049 available-workflow archive F0 accepted; F1 detailed design next
+**Status:** Accepted — applied by BKL-045 F3/F4 and closure; BKL-049 available-workflow archive F0 accepted; F1 architecture accepted; F2 bounded importer in review
 **Date:** 09/09/2026  
 **Decision owner:** Digital StarGate Architecture  
 **Related package:** BKL-045 F2  
@@ -145,3 +145,6 @@ The Owner changed the BKL-049 objective to an archive of available workflow evid
 ## BKL-049 F1 artifact archive design — 2026-09-30
 
 The [F1 architecture](assessments/BKL-049-F1-Workflow-Archive-Architecture.md) specifies a local nonexecuting supported-export importer, private rich source retention, unchanged PXP/AP14-W06 delivery, an upstream exact identity/version guard and a separately approved sanitized gallery projection. It is an implementation design of the revised archive objective, subject to separate ARB/RQ acceptance. No catalog authority, automatic processing, SDK use or silent public-contract change is introduced. Existing BKL-045 behavior remains the production baseline until the corresponding implementation gates pass.
+
+
+F1 delivery update: PR #449 accepted the detailed design after separate ARB/RQ and 17/17 merge-SHA workflow successes. The F2 repository importer implements only the selected source/retention boundary; PXP mapping, real binding and gallery acceptance remain separate.
