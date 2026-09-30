@@ -386,3 +386,8 @@ Owner specifically authorized and performed the synthetic sequence, then supplie
 ### 2026-09-30 — BKL-049 SYN-01 file inspection completes bounded persistence proof
 
 Owner-selected synthetic XISF contains the three planned ordered instances, all 78 matching parameters and start timestamps; two durations differ from displayed text by sub-microsecond precision, retained explicitly. Header metadata matches the synthetic configuration. File fingerprint recorded privately, no pixel decoding/modification. S6 completed and SYN-01 has a positive bounded outcome; native automatic capture and F0 remain open. See the [file result](../architecture/assessments/BKL-049-F0-Vendor-Inquiry-and-Probe-Protocol.md#6-syn-01-file-verification-and-bounded-outcome).
+
+
+### 2026-09-30 — BKL-049 SYN-02 negative control prepared
+
+Prepared a separate Owner-operated Save As/reopen of the existing synthetic image with per-save history disabled, new filename only and no reprocessing. Missing history must remain UNAVAILABLE, never COMPLETE or silently backfilled from SYN-01. Original SYN-01 integrity will be rechecked. Specific authorization remains pending because SYN-01 excluded this variant. See the [protocol](../architecture/assessments/BKL-049-F0-Vendor-Inquiry-and-Probe-Protocol.md#7-syn-02-history-disabled-negative-control-prepared-for-approval). F0 OPEN.
