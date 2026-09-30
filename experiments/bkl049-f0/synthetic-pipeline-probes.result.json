@@ -1,0 +1,52 @@
+{
+  "experiment": "BKL049-F0-SYNTHETIC-PIPELINE",
+  "dataClass": "SYNTHETIC_ONLY",
+  "scope": "Parser -> candidate sidecar -> existing JS validators/mapper/ledger/reconciliation/projection/read-model; not live ingestion, gallery or native execution",
+  "results": [
+    {
+      "id": "B01",
+      "outcome": "REPRODUCED",
+      "finding": "Synthetic sidecar and manifest pass existing JS validators; no full JSON Schema validation claimed."
+    },
+    {
+      "id": "B02",
+      "outcome": "REPRODUCED",
+      "finding": "Three repeated process types retain separate ordinals and source container paths."
+    },
+    {
+      "id": "B03",
+      "outcome": "REPRODUCED",
+      "finding": "Lexical numeric parameters and mask command metadata survive in the rich read model."
+    },
+    {
+      "id": "B04",
+      "outcome": "REPRODUCED",
+      "finding": "All synthetic declarations stay DECLARED and manifest/projected executed process lists stay empty."
+    },
+    {
+      "id": "B05",
+      "outcome": "REPRODUCED",
+      "finding": "Matched synthetic identities and accepted ledger do not upgrade PARTIAL completeness or grant authority."
+    },
+    {
+      "id": "B06",
+      "outcome": "REPRODUCED",
+      "finding": "Same manifest replay is duplicate-noop and cannot produce a new projection from that record."
+    },
+    {
+      "id": "B07",
+      "outcome": "REPRODUCED",
+      "finding": "Declared provenance without actor is rejected by existing validation."
+    },
+    {
+      "id": "B08",
+      "outcome": "REPRODUCED",
+      "finding": "A mismatched sidecar binding in the projection is rejected by the read model."
+    },
+    {
+      "id": "B09",
+      "outcome": "REPRODUCED",
+      "finding": "Manifest remains a coarse summary and does not carry detailed mask/parameter payload."
+    }
+  ]
+}

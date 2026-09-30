@@ -294,3 +294,8 @@ Owner deferred PixInsight vendor contact, then authorized publication of documen
 ### 2026-09-30 — BKL-049 isolated export reader feasibility
 
 Added an original standard-library nonexecuting reader for a bounded JavaScript export subset under experiments, with 27 synthetic tests and sanitized count observations on two privately supplied artifacts. See the [reader report](../architecture/assessments/BKL-049-F0-Nonexecuting-Export-Reader.md). No production importer, SDK dependency, execution, public raw data, PXP classification or scientific authority change; F0 remains open.
+
+
+### 2026-09-30 — BKL-049 synthetic export-to-consumer feasibility
+
+A fixed synthetic export traverses the nonexecuting research reader, an experiment-only DECLARED/PARTIAL sidecar and existing PXP/AP14-W06 validator, manifest, ledger, reconciliation, projection and read-model functions. Nine assertions verify preservation and fail-closed boundaries; no real source ingestion or production contract change. See the [pipeline report](../architecture/assessments/BKL-049-F0-Synthetic-Pipeline-Experiment.md). F0 remains open; BKL-043 unchanged.

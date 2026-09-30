@@ -18,3 +18,7 @@ Run `node experiments/bkl049-f0/asset-binding-probes.mjs` for six direct reconci
 ## Nonexecuting JavaScript export subset reader
 
 Run `python experiments/bkl049-f0/test_read_export_subset.py` for 27 synthetic tests. `python experiments/bkl049-f0/read_export_subset.py <local-export-file>` reads the bounded subset and emits an aggregate summary only. No JS/PixInsight execution, SDK or dependency installation. The in-memory result contains private values; do not publish it by default. See [reader boundaries and observations](../../docs/architecture/assessments/BKL-049-F0-Nonexecuting-Export-Reader.md).
+
+## Fixed synthetic export-to-consumer path
+
+Run `node experiments/bkl049-f0/synthetic-pipeline-probes.mjs` (requires existing Python on PATH). Nine assertions exercise reader -> candidate DECLARED sidecar -> existing validators/mapper/ledger/reconciliation/projection/read model. The Python builder accepts no arbitrary file input and reads only the fixed synthetic fixture. No real export ingestion, full JSON Schema validation, production adapter or native observation is claimed. See the [pipeline report](../../docs/architecture/assessments/BKL-049-F0-Synthetic-Pipeline-Experiment.md).

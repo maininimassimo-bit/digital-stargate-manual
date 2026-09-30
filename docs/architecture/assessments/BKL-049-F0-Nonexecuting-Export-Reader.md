@@ -47,3 +47,5 @@ Successful parsing returns `PARSED_SUBSET`, `executionEvidence=NOT_ESTABLISHED`,
 The supplied export structures can be read without executing their contents, preserving distinctions the earlier regex-only inspection could not formally enforce. This advances the artifact route and resolves the narrow missing-reader experiment, not universal extraction or complete workflow capture.
 
 Still unproven: additional real export syntax, module/schema version interpretation, automatic history acquisition, immutable image/mask identities, originating script identity, complete project graph, snapshot overlap/restart behavior and final gallery binding. The reader does not resolve PixelMath dependencies or infer script names from expressions. Any future adapter must also address PXP ordering/capacity/privacy gaps and scientific asset authority. No contract or authority is changed here; F1 is not promoted.
+
+The subsequent [synthetic export-to-consumer experiment](BKL-049-F0-Synthetic-Pipeline-Experiment.md) exercises the reader with existing PXP/AP14-W06 functions. Its candidate encoding is research-only and does not convert private exports or promote execution evidence.
