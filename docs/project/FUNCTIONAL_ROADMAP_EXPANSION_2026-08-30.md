@@ -324,3 +324,8 @@ La [riconciliazione F0](BKL-049-F0-ACCEPTANCE-2026-09-30.md) registra PR #445, m
 ## 2026-09-30 — BKL-049 F3 accepted; F4 exact-binding guard increment
 
 F3 PR #451 passed separate ARB/RQ, 20/20 exact-head checks and 19/19 post-merge runs at `f689bea2d0b0aba11774c589d47669486bf61978`; Pages verified. The [F4 guard](../architecture/assessments/BKL-049-F4-Exact-Binding-Guard.md) checks selected governed identities, independent measurements and source-bound Owner association before AP14-W06. Synthetic-only implementation; full F4 remains open for immutable retention/delivery and a real eligible external-origin asset/context. No real scientific publication or catalog registration. BKL-043 stays current.
+
+
+## 2026-09-30 — BKL-049 F4 guard delivered; preview provider selected
+
+The F4 guard increment passed separate ARB/RQ after M01/M02 remediation, 19/19 exact-head checks and 19/19 post-merge runs at `171a42b09e7191563210a47b85a84f19a0f8f468` (PR #452); Pages verified. Full F4 remains open for private retention/delivery and real authoritative association. Owner confirmed absence of an online image space and selected the [dedicated Google Cloud preview architecture](../architecture/assessments/BKL-049-Public-Preview-Hosting-Proposal.md), with a EUR 5/month monitoring objective, not a guaranteed cap. This does not authorize new/extracted credentials or workload-identity reuse, resource activation, image changes or public upload. Bounded metadata reads with the existing interactive user session remain within the standing noninvasive-work authorization. BKL-043 remains current; external-origin image context is not replaced with a fabricated observatory session.

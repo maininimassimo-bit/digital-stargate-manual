@@ -4,9 +4,11 @@
 |---|---|
 | Identifier | DSG-BKL049-F4-GUARD-001 |
 | Version / date | 1.0 / 2026-09-30 |
-| Status | F4 guard increment in review; full F4 and real association OPEN |
+| Status | Guard increment ACCEPTED / POST-MERGE VERIFIED via PR #452; full F4 and real association OPEN |
 | Entry | F3 accepted via PR #451, merge `f689bea2d0b0aba11774c589d47669486bf61978`; 19/19 post-merge runs SUCCESS, Pages verified |
 | Authority | Processing evidence only; action NONE |
+
+Delivery: [PR #452 post-merge evidence](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/452#issuecomment-5918948742), merge `171a42b09e7191563210a47b85a84f19a0f8f468`, 19/19 post-merge runs SUCCESS and Pages verified.
 
 ## Purpose and bounded profile
 
