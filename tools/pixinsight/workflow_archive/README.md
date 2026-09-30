@@ -47,3 +47,6 @@ Original F0 parser is retained in Git history; its old path is now a compatibili
 
 
 F4 private delivery: `delivery.build_delivery`, `retain_delivery` and `load_delivery` retain/revalidate a single canonical source+binding artifact before AP14-W06 handoff. The caller supplies independently governed inputs, a trusted private local directory, an externally retained artifact digest and the fresh current snapshot anchor. No CLI, catalog writes, public upload or credential handling is added. Changed content for one binding ID conflicts; intentional revisions require a new ID. Destination privacy/backup and current authority are caller responsibilities. See the F4 assessment for limits.
+
+
+Importer 1.1 supports decoded parameter strings through 16,384 characters; all other bounds remain. Packet schema stays 1.0. Historical importer 1.0 records are verified using the original 4,096-character profile, including unsupported results. Upgrade by a deliberate new import receipt, never overwrite or silently reinterpret an old packet.

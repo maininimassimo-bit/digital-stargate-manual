@@ -151,6 +151,35 @@ class ArchiveTests(unittest.TestCase):
             with self.assertRaisesRegex(ArchiveError, 'REPARSE_PATH'):
                 write_packet(self.packet(), link)
 
+    def test_versioned_long_literals_preserve_legacy_packets(self):
+        source = ('var P=new Synthetic; P.x="' + 's'*9620 + '";').encode()
+        old = build_packet(source, 'BKL049-LONG-OLD', '2026-09-30T18:00:00Z', importer_version='1.0')
+        self.assertEqual(old['extractionState'], 'UNSUPPORTED')
+        self.assertEqual(old['diagnostic']['code'], 'STRING_LIMIT')
+        old_raw = encode(old)
+        self.assertEqual(verify_packet(old_raw, digest(old_raw)), old)
+        new = build_packet(source, 'BKL049-LONG-NEW', '2026-09-30T18:00:00Z')
+        self.assertEqual(new['importerVersion'], '1.1')
+        self.assertEqual(new['archive']['instances']['P']['parameters']['x'], 's'*9620)
+        self.assertEqual(verify_packet(encode(new), digest(encode(new))), new)
+        self.assertEqual(encode(old), old_raw)
+
+    def test_profile_11_string_bound_includes_concatenation(self):
+        for literal in ('"'+'x'*16385+'"', '"'+'x'*10000+'"+"'+'y'*6385+'"'):
+            with self.assertRaises(parser.Unsupported) as caught:
+                parser.parse_export('var P=new Synthetic;P.x='+literal+';', profile='1.1')
+            self.assertEqual(caught.exception.code, 'STRING_LIMIT')
+        accepted = parser.parse_export('var P=new Synthetic;P.x="'+'x'*16384+'";', profile='1.1')
+        self.assertEqual(len(accepted['instances']['P']['parameters']['x']), 16384)
+
+    def test_unknown_importer_profile_cannot_be_self_authenticated(self):
+        for value in ('2.0', None, [], True):
+            with self.subTest(value=value), self.assertRaises(ArchiveError):
+                build_packet(b'var P=new Synthetic;', 'BKL049-INVALID', '2026-09-30T18:00:00Z', importer_version=value)
+        packet = self.packet(); packet['importerVersion'] = '2.0'
+        with self.assertRaises(ArchiveError):
+            verify_packet(encode(packet), digest(encode(packet)))
+
     def test_new_limits_are_fail_closed(self):
         for source, code in [
             ('var P=new Synthetic; P.x="' + 'x'*4097 + '";', 'STRING_LIMIT'),

@@ -461,3 +461,10 @@ PR #454 passed separate ARB/RQ, 7/7 exact-head and 7/7 post-merge workflows at `
 ## 2026-09-30 — BKL-049 dedicated cost-alert plan prepared
 
 The [exact alert plan](../architecture/assessments/BKL-049-Public-Preview-Hosting-Proposal.md#exact-alerts-only-activation-plan) uses the existing APIs, the Owner-selected account email only, a dedicated preview-bucket label and EUR 5 monthly alerts at 50/80/100%, excluding credits and default IAM recipients. It leaves the general project budget untouched and requires specific activation authority. Label attribution/email delivery and trial-account continuity remain explicit operational gates; no account upgrade, image upload or public access is included. The private workflow delivery implementation is integrated via PR #455, merge `a57927934431586421092e2684a29259606b7605`, after 17/17 exact-head checks and zero ARB/RQ findings; post-merge verification is pending at this entry. BKL-049 remains open and BKL-043 current.
+
+
+## 2026-09-30 — BKL-049 real export compatibility and label-command correction
+
+The real selected export was retained privately but exceeded importer 1.0's string limit. A versioned 1.1 profile raises only that bound to 16,384 characters and preserves historical packet verification. A read-only dry run parsed all 21 process instances/381 assignments without execution or public release. The Owner declared acquisition date 2026-05-27, precision day only; no time or timezone is inferred. PR #455 is accepted with 16/16 post-merge runs and live Pages verified.
+
+The authorized preview label attempt failed locally on an unsupported CLI flag, before cloud mutation. The [corrected installed-command path](../architecture/assessments/BKL-049-Public-Preview-Hosting-Proposal.md#label-command-correction-after-authorized-attempt) preserves the three-write authorization and conditional label updates without installation or broader access. Channel/budget activation remains pending. BKL-049 stays open, BKL-043 current.

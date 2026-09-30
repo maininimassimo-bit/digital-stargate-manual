@@ -165,14 +165,14 @@ The Owner selected only the existing Google Cloud account email as the future bu
 
 The next authorization request covers exactly three configuration writes and their verification:
 
-1. Add only `dsg_scope=bkl049_previews` to the already created dedicated preview bucket, preserving all other metadata, labels, access and retention. Pin the current metageneration and use `--if-metageneration-match` to reject concurrent changes. No project-wide label or existing-resource modification.
+1. Add only `dsg_scope=bkl049_previews` to the already created dedicated preview bucket, preserving all other metadata, labels, access and retention. Use the already installed official `gsutil label ch` XML path, which reads the current labels/metageneration and applies a conditional update. Each bounded retry rereads and preserves unrelated labels. No project-wide label or existing-resource modification.
 2. Create one Cloud Monitoring **email** notification channel named `BKL049 preview budget owner` in the pinned project, addressed only to the existing account email selected by the Owner. Before saving, confirm the exact recipient privately. Inspect for a matching channel first; ambiguity or an existing mismatched record stops the operation. No group recipients, verification bypass or unrelated channel changes. If Google requires recipient verification, hand that step to the Owner.
 3. Create one monthly **alerts-only** budget named `BKL049 public previews EUR5`, amount `5EUR`, scoped to the pinned project and the single bucket label. Exclude credits so promotional credits do not hide usage. Actual-spend thresholds: 50%, 80%, 100% (EUR 2.50 / 4 / 5). Link only the new verified email channel and disable all default IAM recipients. No spend cap, billing shutdown, Pub/Sub, scheduled function, project-owner distribution list or existing budget modification.
 
 Command shapes use private resolved inputs; they are not an instruction to run placeholders:
 
 ```text
-gcloud storage buckets update gs://CANDIDATE --update-labels=dsg_scope=bkl049_previews --if-metageneration-match=EXPECTED_METAGENERATION --project=PROJECT --account=EXISTING_INTERACTIVE_ACCOUNT --quiet --format=json
+gsutil -o GSUtil:prefer_api=xml label ch -l dsg_scope:bkl049_previews gs://CANDIDATE
 
 gcloud billing budgets create --billing-account=LINKED_ACCOUNT --display-name="BKL049 public previews EUR5" --budget-amount=5EUR --calendar-period=month --filter-projects=projects/PROJECT --filter-labels=dsg_scope=bkl049_previews --credit-types-treatment=exclude-all-credits --threshold-rule=percent=0.5 --threshold-rule=percent=0.8 --threshold-rule=percent=1.0 --disable-default-iam-recipients --notifications-rule-monitoring-notification-channels=EXACT_OWNER_EMAIL_CHANNEL --project=PROJECT --account=EXISTING_INTERACTIVE_ACCOUNT --quiet --format=json
 ```
@@ -188,3 +188,10 @@ A label-filtered budget counts only charges attributed to that label. Configurat
 The console also identifies the existing account as a time-limited trial. Trial credits are not a sustainable-hosting guarantee. Keep detailed account balances/expiry private; establish an Owner-controlled account-continuity decision before promising long-term availability. No account upgrade, new agreement or payment-method change is authorized or performed by this plan.
 
 This operation enables cost emails only. It does not authorize image modification, upload, public exposure, scientific metadata acceptance or a gallery release. Its remaining approval is specific to the three writes above; provider selection, recipient preference and empty-bucket authorization alone were not recorded as activation.
+
+
+### Label-command correction after authorized attempt
+
+The initial label command was rejected locally because `gcloud storage buckets update` does not expose `--if-metageneration-match`. The exact CLI help and current official reference confirm the missing flag; the earlier reviewed command shape was incorrect. No cloud label change occurred. The email channel form was prepared but not saved, and no dedicated budget was created. Owner authorization to the same three bounded operations remains in force.
+
+Technical remediation uses bundled gsutil 5.37, already installed with Google Cloud SDK 583.0.0. Its label-change implementation was inspected read-only: with `GSUtil:prefer_api=xml`, it reads current labels/metageneration, modifies only the selected key and supplies the matching metageneration to the write. It performs at most three conditional attempts on concurrent modification, rereading the current labels each time; this replaces the earlier proposed fixed-generation CLI flag. No unconditional fallback, overwrite of unrelated labels, SDK modification or new authentication is permitted. Confirm the existing active interactive account/project immediately before invocation; process-local Cloud SDK account/project settings pin that already selected session without persistent configuration changes. Stop on permission/authentication failures or exhausted preconditions. Re-describe the exact bucket afterward to verify the approved label and unchanged private access/retention. [Official label command](https://docs.cloud.google.com/storage/docs/gsutil/commands/label).
