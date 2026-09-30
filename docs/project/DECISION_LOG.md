@@ -401,3 +401,8 @@ Owner explicitly authorized the history-disabled synthetic Save As/reopen and re
 ### 2026-09-30 — BKL-049 F0 evidence checkpoint after SYN-01/SYN-02
 
 Updated the support matrix and G3 to include the completed positive/negative retained-history tests. Distinguished their bounded result from native automatic capture, historical completeness, licensing and gallery acceptance. No repetitive PixelMath test or implementation promotion is justified by these results. See the [review checkpoint](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md#11-f0-evidence-review-after-controlled-positive-and-negative-tests). F0 OPEN; BKL-043 current, no new runtime authorization.
+
+
+### 2026-09-30 — BKL-049 Owner retains integral automatic capture
+
+Owner explicitly retained automatic entire-workflow capture; an archive of available history may support but not replace it. Scope question settled without accepting technical feasibility. F0 gate NOT PASSED/OPEN; no F1 promotion, vendor contact, install or new runtime permission. Updated backlog to accurately include authorized SYN-01/SYN-02 instead of the obsolete no-PixInsight-activity statement. See the [gate disposition](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md#12-owner-decision-integral-automatic-capture-retained). BKL-043 remains current.
