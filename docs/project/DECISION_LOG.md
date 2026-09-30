@@ -339,3 +339,8 @@ Nonexecuting structural comparisons matched the MAIN export's 19 class labels/or
 ### 2026-09-30 — BKL-049 bounded parameter comparison and mask disambiguation
 
 Compared 303 direct MAIN assignments: 129 supported value comparisons match; 174 remain outside direct comparison and are not treated as missing or equivalent. One RangeSelection candidate matches all seven supplied values; another differs in three. This corroborates configuration identity without asserting historical mask-version or execution proof. See the [parameter comparison](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). No production mapping, scientific processing or F0 closure.
+
+
+### 2026-09-30 — BKL-049 Curves representation comparison
+
+Pinned official parameter definitions support comparison of 66 curve-table assignments and 66 interpolation enums, all matching retained project/export representations. Direct MAIN comparison now corroborates 261/303 assignments, with 42 unresolved; nested PixelMath remains separately unverified. Two official source fingerprints added, no vendor source redistributed. See the [follow-up evidence](../architecture/assessments/BKL-049-F0-Real-Identity-Evidence-Index.md). F0 OPEN, no automatic-capture or historical runtime claim.

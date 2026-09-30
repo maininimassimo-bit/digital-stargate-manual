@@ -121,3 +121,14 @@ RC Astro instances illustrate the limit: some supplied parameter identifiers hav
 Both RangeSelection candidates have the same seven parameter identifiers as the supplied mask analysis. Candidate MASK-A matches all seven values; MASK-B matches four and differs in three. The labels refer only to these private comparison records. MASK-A is therefore more strongly corroborated as the supplied configuration, but parameter equality is not pixel/version identity, causal source proof or evidence of which immutable mask version was applied at every use.
 
 The aggregate private report is retained separately from the original six-record index. No source strings, view names, file paths, parameter values or image bytes are published. Whole-workflow coverage, native automatic capture and F0 acceptance remain unproven.
+
+
+## Curves table and enumeration follow-up
+
+The pinned official [CurvesTransformation parameter definitions](https://gitlab.com/pixinsight/PCL/-/blob/5a3902196a7d7a701385a7113cbdce2976ae1a85/src/modules/processes/IntensityTransformations/CurvesTransformationParameters.h) identify eleven curve tables with x/y columns and the interpolation enumeration. The companion [implementation](https://gitlab.com/pixinsight/PCL/-/blob/5a3902196a7d7a701385a7113cbdce2976ae1a85/src/modules/processes/IntensityTransformations/CurvesTransformationParameters.cpp) defines enumeration identifiers and numeric values. Both official file fingerprints were added to the source registry; no vendor implementation was copied, built or distributed.
+
+Across the six direct CurvesTransformation instances, all 66 exported curve tables match the corresponding XML tables in row order and x/y numeric values, using Decimal equality without tolerance. Row counts, two-column shape and column identifiers were checked. All 66 interpolation assignments also agree under the explicit mapping defined by the pinned source; no default filling or guessed enum translation occurred. This source revision supports the representation comparison, not a claim about the originally installed module build or runtime behavior.
+
+This resolves 132 of the earlier 174 unverified assignments. The cumulative direct-entry comparison is now **261 corroborated assignments out of 303, with 42 unresolved**. Tables count as assignments here, not as individual scalar cells. The 78 assignments in the three nested PixelMath instances remain outside this particular comparison. Original historical counts are retained above to show the scope progression, not competing final totals.
+
+The private comparison report retains aggregate results. No parameter values or curve points are published. Remaining nonmatching representations, especially third-party fields, must not be equated speculatively. Better parameter coverage does not establish execution, historical image/mask versions, supported automatic project extraction or complete capture. F0 remains OPEN.
