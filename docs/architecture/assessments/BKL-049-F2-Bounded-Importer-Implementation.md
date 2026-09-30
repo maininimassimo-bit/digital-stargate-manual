@@ -13,7 +13,7 @@
 
 `tools/pixinsight/workflow_archive` implements the selected nonexecuting export parser, private source packet constructor/verifier and explicit local import CLI. The F0 reader path delegates to the single hardened parser; the original research revision remains in Git history. No vendor code, new dependency or PixInsight installation is introduced.
 
-A packet retains exact original bytes separately from normalized lexical parameters, statement spans, exported container order and mask commands. It remains PRIVATE_NOT_APPROVED, UNLINKED and execution NOT_ESTABLISHED. Unsupported syntax/encoding retains original bytes with UNSUPPORTED extraction and no partially normalized result. File/context failures do not create an accepted packet.
+A packet retains exact original bytes separately from normalized lexical parameters, statement spans, exported container order and mask commands. It remains PRIVATE_NOT_APPROVED, UNLINKED and execution NOT_ESTABLISHED. Unsupported syntax/encoding retains original bytes with UNSUPPORTED extraction and no partially normalized result. File/context failures do not create an accepted packet. Successful commit followed by staging cleanup failure is reported as CREATED_CLEANUP_PENDING, not REJECTED; exact retry preserves the committed packet.
 
 The parser rejects execution calls, unknown syntax, duplicate variables/properties, reused children, cycles, post-attachment mutation and resource excess. Explicit numeric signs, decimal precision and exponent representation survive as lexical data. Embedded file references and expressions are never followed or evaluated.
 
@@ -29,11 +29,13 @@ The internal tagged lexical values are not an approved PXP interchange encoding.
 
 ## Validation
 
-Local Windows: 20 packet/boundary tests executed, 19 passed and 1 real-symlink creation test skipped because the OS lacks creation permission. The deterministic Windows reparse-attribute rejection test passed. The 27 retained export grammar regressions and 4 supplementary XISF reader tests passed. The skipped case requires Linux CI evidence before acceptance; Windows/Linux CI also test actual local hard-link packet creation.
+Local Windows after RQ M01 remediation: 22 packet/boundary tests executed, 21 passed and 1 real-symlink creation test skipped because the OS lacks creation permission. The deterministic Windows reparse-attribute rejection test passed. The 27 retained export grammar regressions and 4 supplementary XISF reader tests passed. The skipped case requires Linux CI evidence before acceptance; Windows/Linux CI also test actual local hard-link packet creation.
 
 Cases cover byte retention/BOM/line endings, deterministic construction, lexical round-trip, integrity/trust-anchor failure, source mutation, excessive input/values, duplicate retry, changed-source conflict, concurrent conflicting writer, interrupted commit cleanup, incomplete output preservation, encoding/syntax quarantine, private console output and no embedded path follow. All fixtures are synthetic temporary files; no scientific folder, PixInsight runtime or real image was used for F2 tests.
 
 The workflow `.github/workflows/bkl049-workflow-archive.yml` runs packet, export and supplementary header tests on Windows and Linux for relevant PRs and main pushes. Exact-head CI/review and merge-SHA evidence must be recorded in the delivery PR; the local result is not a CI claim.
+
+RQ M01 on the initial F2 head identified a misleading rejection after successful commit followed by cleanup failure. This increment distinguishes committed-with-cleanup-pending from commit failure and tests both the retained packet/retry and failure-with-residue paths. Earlier CI results do not validate this revised head.
 
 ## Residual gates and rollback
 

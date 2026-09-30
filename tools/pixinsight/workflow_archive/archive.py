@@ -143,6 +143,8 @@ def write_packet(packet, output):
             return "DUPLICATE_NOOP"
         raise ArchiveError("RECEIPT_CONFLICT")
     temporary = None
+    outcome = None
+    cleanup_pending = False
     try:
         # A single packet keeps source and normalized result together. The hard-link
         # commit is create-if-absent, never rename-overwrite. Unsupported filesystems
@@ -153,12 +155,13 @@ def write_packet(packet, output):
             stream.flush()
             os.fsync(stream.fileno())
         os.link(temporary, path)
-        return "CREATED"
+        outcome = "CREATED"
     except FileExistsError:
         previous = read_regular(path, MAX_PACKET_BYTES)
         if previous == raw:
-            return "DUPLICATE_NOOP"
-        raise ArchiveError("RECEIPT_CONFLICT") from None
+            outcome = "DUPLICATE_NOOP"
+        else:
+            raise ArchiveError("RECEIPT_CONFLICT") from None
     except OSError:
         raise ArchiveError("ATOMIC_COMMIT_UNAVAILABLE") from None
     finally:
@@ -166,7 +169,10 @@ def write_packet(packet, output):
             try:
                 temporary.unlink(missing_ok=True)
             except OSError:
-                raise ArchiveError("TEMP_CLEANUP_FAILED") from None
+                # Do not turn a completed commit into a rejection, or mask an
+                # earlier commit error. Staging residue is private and unaccepted.
+                cleanup_pending = True
+    return outcome + ("_CLEANUP_PENDING" if cleanup_pending else "")
 
 
 def main():

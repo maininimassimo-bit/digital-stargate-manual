@@ -96,6 +96,26 @@ class ArchiveTests(unittest.TestCase):
             self.assertFalse(output.exists())
             self.assertEqual(list(Path(temp).iterdir()), [])
 
+    def test_committed_packet_survives_cleanup_failure_and_retry(self):
+        with tempfile.TemporaryDirectory() as temp:
+            output = Path(temp) / 'packet.json'
+            packet = self.packet()
+            with patch.object(Path, 'unlink', side_effect=OSError('synthetic cleanup failure')):
+                self.assertEqual(write_packet(packet, output), 'CREATED_CLEANUP_PENDING')
+            self.assertEqual(verify_packet(output.read_bytes(), digest(encode(packet))), packet)
+            self.assertEqual(write_packet(packet, output), 'DUPLICATE_NOOP')
+            self.assertEqual(len(list(Path(temp).glob('.bkl049-*'))), 1)
+
+    def test_failed_commit_cleanup_error_does_not_mask_original(self):
+        with tempfile.TemporaryDirectory() as temp:
+            output = Path(temp) / 'packet.json'
+            with patch('os.link', side_effect=OSError('synthetic commit failure')):
+                with patch.object(Path, 'unlink', side_effect=OSError('synthetic cleanup failure')):
+                    with self.assertRaisesRegex(ArchiveError, '^ATOMIC_COMMIT_UNAVAILABLE$'):
+                        write_packet(self.packet(), output)
+            self.assertFalse(output.exists())
+            self.assertEqual(len(list(Path(temp).glob('.bkl049-*'))), 1)
+
     def test_existing_partial_packet_is_conflict_not_overwritten(self):
         with tempfile.TemporaryDirectory() as temp:
             output = Path(temp) / 'packet.json'; output.write_bytes(b'{')
