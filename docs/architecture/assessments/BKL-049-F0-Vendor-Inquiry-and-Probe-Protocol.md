@@ -73,7 +73,7 @@ A later evidence record must state: authorization scope and date; exact product/
 
 ## 4. Concrete next experiment SYN-01 — Owner-operated retained-history check
 
-Status: PREPARED, NOT AUTHORIZED OR EXECUTED. This is the next discriminating experiment after the historical project comparisons. It uses ordinary existing PixelMath and XISF facilities, not SDK-derived code, a new module or scientific data. The earlier vendor-response prerequisite is not required for this specific Owner-operated artifact test: source artifacts have already demonstrated the supported UI export and XISF history routes. Native API probes remain separately gated, and vendor contact remains deferred.
+Status: Owner specifically AUTHORIZED SYN-01 on 2026-09-30; Owner-assisted execution and before/after export text received. File-level S6 header and integrity inspection subsequently completed; see section 6. This is the discriminating experiment following the historical project comparisons. It uses ordinary existing PixelMath and XISF facilities, not SDK-derived code, a new module or scientific data. The earlier vendor-response prerequisite is not required for this specific Owner-operated artifact test: source artifacts have already demonstrated the supported UI export and XISF history routes. Native API probes remain separately gated, and vendor contact remains deferred.
 
 ### Exact scope for approval
 
@@ -98,3 +98,35 @@ Creation can appear as `initialProcessing` separately from subsequent operations
 Report observed artifact content separately from Owner-declared execution. A successful bounded artifact result requires both subsequent operations and exact expressions in the expected order after reopening, with source locators and explicit treatment of creation history. If one export omits a section but the XISF retains it, report source-specific coverage rather than an unconditional pass. Missing, transformed or unsupported content remains PARTIAL/UNAVAILABLE. No historical model, RC Astro migration, script origin, mask lineage, universal recorder, native ABI or F0 closure is established by this experiment.
 
 Only this three-operation synthetic sequence and its new local outputs are proposed. No RC Astro processing, undo/redo, masks, project save/reopen test, negative history-disabled variant or failure injection is included. Those require subsequent evidence review and separately bounded scope.
+
+
+## 5. SYN-01 result — before/after pasted history
+
+Date: 2026-09-30. Status: **POSITIVE TEXT CORROBORATION; SUBSEQUENT FILE RESULT BELOW**, not F0 closure. The Owner explicitly authorized the proposed synthetic test, confirmed configuration and completion of the addition, supplied the subsequent-operation snippets, confirmed the XISF processing-history option exists, and supplied a three-entry container in response to the save/close/reopen instruction. Application actions and reopening are Owner-assisted/DECLARED context; the assistant did not control PixInsight or independently observe the UI. The exact per-save checkbox state has not been independently verified.
+
+| Step | Before-save source in chat | After-reopen container | Recorded start UTC / duration |
+|---|---|---|---|
+| S1 creation | One-entry container, expression `0.25` | First entry, same expression, create-new true | 17:02:02.433 / 281.943 ms |
+| S2 addition | Standalone instance, `$T + 0.125` | Second entry, same expression, create-new false | 17:02:50.528 / 17.098 ms |
+| S3 multiplication | Standalone instance, `$T * 0.5` | Third entry, same expression, create-new false | 17:03:24.879 / 18.027 ms |
+
+All timestamps above are on 2026-09-30. Manual field-by-field inspection of the supplied text finds the same 26 parameter assignments per instance, **78/78**, including string/boolean/numeric/enum representations; variable names change with container serialization and are not process identity. All three recorded start times and durations are unchanged. The rounded container total 0.317 s is consistent with 317.068 ms from the three durations; it is not independent timing or performance measurement.
+
+The supplied configurations specify synthetic identifier BKL049_SYN01, 64×64, Gray, f32, rescale false and truncation 0–1. The initial single-entry export was followed by two standalone snippets before saving: it was not a full three-entry pre-save container and must not be described as one. The subsequent post-reopen text contains all three in the independently planned order. No claim is made about why the first export selected only creation history.
+
+The comparison is manual inspection of user-pasted source text, not byte comparison of original exported files, an automated replay or a measured pixel result. The expected 0.1875 remains arithmetic expectation; no pixel decoding was performed. The evidence sources are the three pre-save chat submissions (creation container and two subsequent snippets) and the post-reopen three-entry submission, identified by the occurrence times above. No original-file digest is available for pasted text, and no reconstructed transcript is labelled original bytes.
+
+The result supports persistence of these three configured PixelMath operations in the Owner's supplied post-reopen export. It does not prove automatic capture, complete workflows, undo/redo history, mask or branch identity, RC compatibility, native interfaces or exact file binding. Step S6 remains pending the exact synthetic XISF location; the requested read will be limited to header interpretation and file-byte integrity, without pixel decoding or modification. No negative history-disabled test or further processing is authorized by this result.
+
+
+## 6. SYN-01 file verification and bounded outcome
+
+The Owner supplied the synthetic file directory; inspection selected only the agreed synthetic filename, with no broad search. Its size is 184,576 bytes and the bounded XISF XML header is 7,511 bytes. A whole-file SHA-256 was recorded privately; size and last-write metadata were unchanged across the read. This establishes read-time byte identity, not an atomic snapshot or an independently trusted timestamp. Bytes outside the header were streamed for hashing only, without pixel decoding.
+
+One image reports geometry 64:64:1, Gray and Float32. Its inline ProcessingHistory contains the three PixelMath instances in the planned order. Comparison against manually transcribed expected values from the Owner's pasted source confirms identical parameter-ID sets and **26/26 assignments for each instance**, plus the three start timestamps. Expressions were compared as strings, never evaluated. The expected-value transcription is not presented as an original exported file or independent evidence of UI execution.
+
+The XISF duration values in seconds are 0.2819432, 0.0170985 and 0.018027, whereas the pasted exports represent 0.281943, 0.017098 and 0.018027. The first two differ by 0.2 and 0.5 microseconds. This is consistent with different serialization/display precision, but the exact rounding rule was not established; no silent equality or timing correction is applied. The before/after pasted timing strings themselves matched as recorded in section 5.
+
+**SYN-01 bounded result: positive evidence of retention of all three planned process configurations in the saved XISF and Owner-supplied post-reopen history.** S6 is complete for authorized header/integrity inspection. The nominal final pixel value remains unmeasured; the actual reopen action is Owner-assisted context, not assistant-observed UI execution. No general importer, native observer, process replay, source trust certification, history-disabled case, RC migration, masks or project-state coverage is established. F0 remains OPEN and no F1 promotion follows.
+
+A private aggregate report retains the fingerprint and comparisons outside the repository, separate from the historical-project evidence indexes. No local path, file digest or pixel payload is published. Only the synthetic identifier, planned expressions and sanitized evidence are documented. No additional runtime experiment is automatically authorized by this success.

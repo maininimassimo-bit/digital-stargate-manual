@@ -376,3 +376,13 @@ Owner backup availability response: UNKNOWN, not absent. Preserve the historical
 ### 2026-09-30 — BKL-049 SYN-01 ready for specific Owner authorization
 
 Prepared a concrete Owner-operated 64×64 synthetic PixelMath sequence with independent expected order and expressions, followed by XISF save/reopen and supported UI history exports. It tests retained artifact coverage without native code, SDK, RC Astro, real-image processing or vendor contact. The exact scope and stop conditions are in the [protocol](../architecture/assessments/BKL-049-F0-Vendor-Inquiry-and-Probe-Protocol.md#4-concrete-next-experiment-syn-01-owner-operated-retained-history-check). NOT AUTHORIZED/NOT EXECUTED; F0 OPEN. Specific approval is required by the Owner's initial runtime/processing constraints.
+
+
+### 2026-09-30 — BKL-049 SYN-01 authorized and post-reopen text corroborated
+
+Owner specifically authorized and performed the synthetic sequence, then supplied a post-reopen three-entry export. Manual comparison matches 78 parameter assignments plus recorded start/duration fields to the separate pre-save texts. Exact XISF location requested for pending S6 header/integrity verification. No assistant PixInsight control, pixel measurement, original export-byte verification or universal capture claim. See the [bounded result](../architecture/assessments/BKL-049-F0-Vendor-Inquiry-and-Probe-Protocol.md#5-syn-01-result-beforeafter-pasted-history). F0 OPEN.
+
+
+### 2026-09-30 — BKL-049 SYN-01 file inspection completes bounded persistence proof
+
+Owner-selected synthetic XISF contains the three planned ordered instances, all 78 matching parameters and start timestamps; two durations differ from displayed text by sub-microsecond precision, retained explicitly. Header metadata matches the synthetic configuration. File fingerprint recorded privately, no pixel decoding/modification. S6 completed and SYN-01 has a positive bounded outcome; native automatic capture and F0 remain open. See the [file result](../architecture/assessments/BKL-049-F0-Vendor-Inquiry-and-Probe-Protocol.md#6-syn-01-file-verification-and-bounded-outcome).
