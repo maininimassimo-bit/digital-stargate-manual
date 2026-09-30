@@ -289,3 +289,8 @@ Owner confirmed the unified RC Astro repository, upgrade to PixInsight 1.9.5 bui
 ### 2026-09-30 — BKL-049 sanitized Owner-assisted history findings
 
 Owner deferred PixInsight vendor contact, then authorized publication of documentation needed for the repository. Published a [sanitized evidence report](../architecture/assessments/BKL-049-F0-Owner-Assisted-History-Evidence.md) without raw exports or private asset names. Project history supplies RC Astro, nested-process, mask and recombination evidence; single-image final export showed a bounded omission. Overall PARTIAL, F0 OPEN; no F1 architecture, SDK implementation or catalog authority change. BKL-043 remains outside this work.
+
+
+### 2026-09-30 — BKL-049 isolated export reader feasibility
+
+Added an original standard-library nonexecuting reader for a bounded JavaScript export subset under experiments, with 27 synthetic tests and sanitized count observations on two privately supplied artifacts. See the [reader report](../architecture/assessments/BKL-049-F0-Nonexecuting-Export-Reader.md). No production importer, SDK dependency, execution, public raw data, PXP classification or scientific authority change; F0 remains open.

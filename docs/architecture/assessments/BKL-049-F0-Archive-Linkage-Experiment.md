@@ -62,3 +62,5 @@ A supported, nonexecuting parser for real JavaScript exports remains unimplement
 F0 remains open on licensing where relevant, supported extraction coverage, exact version identity, full workflow completeness and end-to-end gallery association. The candidate artifact route is better evidenced, but a universal native capture module is not demonstrated. No vendor contact is needed for this synthetic experiment and none occurred.
 
 Validation: six synthetic observations reproduced and saved result matched a fresh run; six existing reconciliation tests passed. MkDocs strict build passed (27.32 seconds), targeted privacy/diff checks passed, roadmap consistency retained BKL-043 as current/next. CI is a separate exact-head check.
+
+Subsequent experiment: the [nonexecuting export subset reader](BKL-049-F0-Nonexecuting-Export-Reader.md) implements bounded parsing and verifies two supplied source shapes plus synthetic rejection cases. This supersedes the narrow statement that no reader has been implemented, while preserving all broader extraction, identity and completeness gaps.

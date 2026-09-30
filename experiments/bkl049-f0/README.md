@@ -14,3 +14,7 @@ Probed DSG baseline: `dddb95748f2741b1bcbf8a550cd4ba0d7e9b0880`. Re-run assertio
 ## Asset binding follow-up
 
 Run `node experiments/bkl049-f0/asset-binding-probes.mjs` for six direct reconciliation observations with synthetic identifiers. These use minimal internal inputs, not a fully validated manifest. A reproduced gap is not product acceptance. See the [archive linkage experiment](../../docs/architecture/assessments/BKL-049-F0-Archive-Linkage-Experiment.md). No scientific image, private exported source or SDK code is included.
+
+## Nonexecuting JavaScript export subset reader
+
+Run `python experiments/bkl049-f0/test_read_export_subset.py` for 27 synthetic tests. `python experiments/bkl049-f0/read_export_subset.py <local-export-file>` reads the bounded subset and emits an aggregate summary only. No JS/PixInsight execution, SDK or dependency installation. The in-memory result contains private values; do not publish it by default. See [reader boundaries and observations](../../docs/architecture/assessments/BKL-049-F0-Nonexecuting-Export-Reader.md).
