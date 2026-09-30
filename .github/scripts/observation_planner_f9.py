@@ -13,6 +13,7 @@ import json
 import math
 import re
 import tempfile
+import urllib.error
 import urllib.request
 from decimal import Decimal
 from pathlib import Path
@@ -85,10 +86,15 @@ def discover_run(now: dt.datetime) -> str:
 
 
 def discover_file(run: str, variable: str) -> str:
-    listing = get_text(f"{BASE}/{run}/{variable}/")
+    try:
+        listing = get_text(f"{BASE}/{run}/{variable}/")
+    except urllib.error.HTTPError as exc:
+        raise ContractError(
+            f"VARIABLE_LISTING_HTTP:{run}:{variable}:{exc.code}"
+        ) from None
     files = sorted(set(re.findall(r'href=\"([^\"]+\.grib)\"', listing)))
     if len(files) != 1:
-        raise ContractError(f"VARIABLE_FILE_NOT_UNIQUE:{variable}")
+        raise ContractError(f"VARIABLE_FILE_NOT_UNIQUE:{run}:{variable}")
     return files[0]
 
 
@@ -543,12 +549,14 @@ def acquire(now: dt.datetime, run: str | None = None) -> dict:
         raise ContractError("SITE_AUTHORITY_UNAVAILABLE")
     geo = site["sitePayload"]["geodesy"]
     run = run or discover_run(now)
+    # Resolve all seven listings before downloading any raw input.
+    files = {variable: discover_file(run, variable) for variable in VARIABLES}
     series, evidence, total = {}, [], 0
     with tempfile.TemporaryDirectory(prefix="dsg-f9-grib-") as temporary:
         root = Path(temporary)
         for variable in VARIABLES:
             path = root / f"{variable}.grib"
-            filename = discover_file(run, variable)
+            filename = files[variable]
             size, digest = download(f"{BASE}/{run}/{variable}/{filename}", path)
             total += size
             if total > MAX_TOTAL_BYTES:
