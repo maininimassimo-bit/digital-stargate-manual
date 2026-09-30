@@ -274,3 +274,8 @@ L’Owner autorizza SDK/licensing and feasibility, ricerca ufficiale, verifica t
 [Dossier F0](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md): raccomandazione tecnica preliminare di continuare la verifica, senza approvare la cattura passiva universale. Restrizioni di licenza, esatto abbinamento SDK/ABI e interfacce cross-module/progetto restano gate aperti; F0 non conclusa, F1 non promossa. Questa registrazione non seleziona un’alternativa architetturale.
 
 L’Owner ribadisce come obiettivo l’archiviazione dell’intero workflow PixInsight abbinato alle immagini della Scientific Image Gallery. Il piano e il dossier richiedono navigazione dall’immagine al workflow archiviato e correlazione esatta asset/run tramite AP14-W06, preservando AP-013. La matrice di supporto non autorizza riduzioni implicite dell’obiettivo; gap restano PARTIAL/UNAVAILABLE e una riduzione materiale richiede decisione Owner. Nessuna nuova autorizzazione a pubblicare immagini o a eseguire processing deriva da questa precisazione.
+
+
+### 2026-09-30 — BKL-049 F0 autonomous evidence follow-up
+
+During the Owner-authorized absence, official PCL/PJSR revisions were inventoried and twelve isolated synthetic contract probes reproduced existing boundaries, including order, capacity, privacy and image-binding gaps. See the [evidence addendum](../architecture/assessments/BKL-049-F0-Evidence-Addendum.md). No native code, install, runtime processing, vendor contact or production fix was performed. F0 remains open, PR draft; questions are held for the Owner return. The full workflow linked to gallery images remains the objective; BKL-043 stays current/next.

@@ -111,6 +111,8 @@ Sources inspected: [PXP schema](../../contracts/pixinsight-workflow-provenance.s
 
 Compatibility is **architecturally plausible, not demonstrated end-to-end for a native producer**. No schema, validator, mapper or scientific contract was altered.
 
+The [reproducible evidence addendum](BKL-049-F0-Evidence-Addendum.md) adds a pinned source registry, twelve isolated synthetic contract probes, preliminary linked-library/signing inventory and full-workflow/gallery proof criteria. These establish contract boundaries, not native capture feasibility.
+
 ## 7. Alternatives and risks
 
 | Option | Value | Constraint / recommendation |
@@ -132,7 +134,7 @@ Principal risks: unsupported ABI on 1695; license/workflow uncertainty; false ca
 | G1 SDK and license inventory | PARTIAL | Official sources pinned; resolve workflow restriction, dependency notices, application/CI entitlement and signing path before development |
 | G2 exact environment/ABI/toolchain | PARTIAL | Owner confirmed core 1695/same workstation and supplied Windows 11 Pro 25H2 build 26200.9550, x64 (Win32_Processor Architecture=9); matching SDK/API and reproducible toolchain still needed |
 | G3 support matrix | PRELIMINARY | Vendor-documented cross-module/history/project mechanism, or explicit decision accepting reduced scope/alternative. No universal recorder claim |
-| G4 contract feasibility | STATIC ASSESSMENT ONLY | Decide capture-method versioning, detail preservation, privacy and digest model in reviewed F1 design |
+| G4 contract feasibility | STATIC + SYNTHETIC BOUNDARY PROBES; END-TO-END UNPROVEN | Decide capture-method versioning, detail preservation, privacy and digest model in reviewed F1 design |
 | G5 feasibility decision | NOT ACCEPTED | Review the evidence and alternative trade-offs; do not promote F1 automatically |
 
 Before F1, resolve G1–G3 sufficiently to make an evidence-backed scope decision. If runtime proof is indispensable to resolve G3, propose a separate minimal experiment with exact binary/source baseline, license clearance, synthetic images, read-only observation behavior, installation/rollback and Owner authorization. It must not use scientific images, EAGLE, hidden hooks or production code. Compilation alone cannot prove observation completeness.
