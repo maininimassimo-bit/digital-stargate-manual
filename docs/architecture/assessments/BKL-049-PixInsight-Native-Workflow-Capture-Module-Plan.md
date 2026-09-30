@@ -16,6 +16,8 @@
 
 Plan a native PixInsight PCL module and its governed Digital StarGate delivery path so that a complete, ordered and reproducible processing workflow can be captured automatically, correlated with sessions and scientific assets, archived as provenance evidence and presented in the portal.
 
+The Owner reaffirmed on 2026-09-30 that the product objective is to archive the **entire PixInsight workflow associated with the corresponding images in the [Scientific Image Gallery](https://maininimassimo-bit.github.io/digital-stargate-manual/scientific-image-gallery/)**. Each image must lead to its archived workflow and exact run/asset lineage. An isolated event archive does not meet this objective. The support matrix must expose feasibility gaps; it must not silently narrow the intended workflow coverage. Material scope reductions require an explicit Owner decision. F4/F5 must prove image-to-workflow linkage with real authorized evidence; fixture metadata alone is insufficient.
+
 “Complete” means **100% of the process types and relationships declared in the accepted support matrix**, using evidence actually exposed by supported PixInsight/PCL interfaces. Opaque or unsupported activity remains explicit as `PARTIAL` or `UNAVAILABLE`; it is never reconstructed as `OBSERVED`.
 
 ## 2. Scope
