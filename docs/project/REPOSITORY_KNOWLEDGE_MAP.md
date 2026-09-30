@@ -156,3 +156,8 @@ BKL-043 resta corrente e aperta. L’Owner autorizza BKL-049 F0 limitatamente a 
 ## 30/09/2026 — BKL-049 scope aggiornato: archivio parziale e gallery
 
 La successiva decisione esplicita dell’Owner sostituisce il requisito di cattura automatica integrale: archiviare le history disponibili, accettando lacune visibili, **con collegamento obbligatorio alla corretta immagine/versione nella gallery**. Nessuna associazione per supposizione. Il [piano aggiornato](../architecture/assessments/BKL-049-PixInsight-Native-Workflow-Capture-Module-Plan.md) prevale sulle descrizioni native precedenti. Baseline attuale dichiarata: PixInsight 1.9.5 build 1706; SYN-01/SYN-02 autorizzati separatamente hanno fornito evidenze circoscritte. F0 resta aperta per review del nuovo scope; F1 non promossa, BKL-043 corrente e autorità scientifiche invariate.
+
+
+## 2026-09-30 — BKL-049 F0 accepted after review and delivery
+
+La [riconciliazione F0](BKL-049-F0-ACCEPTANCE-2026-09-30.md) registra PR #445, merge `fc281eb80342c746303c58c2d2a8f61d134a5f5b`, review ARB/RQ e 17/17 workflow post-merge SUCCESS con Pages verificato. F0 è accettata nel perimetro archivio parziale con collegamento obbligatorio immagine/versione–workflow. Questa decisione successiva supera gli stati F0 OPEN precedenti; F1 è pronta per progettazione dettagliata, non ancora accettata. BKL-049 resta aperta e BKL-043 corrente. Nessuna funzionalità gallery reale, codice di produzione o autorità runtime viene dichiarata completata.

@@ -3,8 +3,8 @@
 | Field | Value |
 |---|---|
 | Identifier | DSG-BKL-049-PLAN-001 |
-| Status | F0 IN PROGRESS — revised Owner-approved scope; production implementation not started |
-| Version / date | 1.2 / 2026-09-30 |
+| Status | F0 ACCEPTED / POST-MERGE VERIFIED — F1 detailed design next; milestone remains open |
+| Version / date | 1.3 / 2026-09-30 |
 | Predecessor | BKL-045 — CLOSED / ACCEPTED |
 | Related decision | ADR-008, Owner scope revision recorded in Decision Log |
 | Action authority | NONE |
@@ -45,7 +45,7 @@ The published gallery currently uses bounded fixture data. No real image/workflo
 | F6 — Compatibility and OAT | Supported artifact/version matrix and partial/unavailable cases | Real authorized read-only import evidence and negative cases |
 | F7 — Release and closure | Runbook, upgrade/rollback and governed delivery | Required reviews, exact-head CI, merge and post-merge verification |
 
-F0 remains OPEN pending review against this revised scope. Native SDK licensing/ABI/signing gates are not applicable to an implementation that neither uses nor redistributes the SDK; they are not declared resolved or waived for any future native work. F1 and production work are not automatically promoted by the scope decision. BKL-043 remains the current open package.
+F0 is ACCEPTED for this revised scope; see the [phase decision and exact delivery evidence](../../project/BKL-049-F0-ACCEPTANCE-2026-09-30.md). F1 is dependency-ready for detailed design, not completed or accepted. Native SDK licensing/ABI/signing gates are not applicable to an implementation that neither uses nor redistributes the SDK; they are not declared resolved or waived for any future native work. F1 and production work are not automatically promoted by the scope decision. BKL-043 remains the current open package.
 
 ## 5. Acceptance criteria
 

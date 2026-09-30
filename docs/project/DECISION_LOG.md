@@ -416,3 +416,8 @@ Owner explicitly changed the earlier integral-capture decision and confirmed acc
 ### 2026-09-30 — BKL-049 revised-scope F0 technical assessment ready
 
 Recommended detailed architecture review for the explicitly selected available-history export route, with XISF as supplementary evidence and mandatory exact gallery image/version linkage. Native dependencies are outside this route; retained research findings are not declared resolved. RC/history gaps are acceptable if disclosed; missing or wrong image association is not. Assigned concrete retention/privacy, PXP context, identity/digest/uniqueness, derivative and end-to-end obligations to F1/F4/F5. Technical review package ready, formal F0 gate OPEN pending review/delivery; no F1 promotion or production change. See [assessment](../architecture/assessments/BKL-049-F0-SDK-Licensing-Feasibility-Dossier.md#13-revised-f0-exit-assessment-and-transfer-obligations).
+
+
+## 2026-09-30 — BKL-049 F0 accepted after review and delivery
+
+La [riconciliazione F0](BKL-049-F0-ACCEPTANCE-2026-09-30.md) registra PR #445, merge `fc281eb80342c746303c58c2d2a8f61d134a5f5b`, review ARB/RQ e 17/17 workflow post-merge SUCCESS con Pages verificato. F0 è accettata nel perimetro archivio parziale con collegamento obbligatorio immagine/versione–workflow. Questa decisione successiva supera gli stati F0 OPEN precedenti; F1 è pronta per progettazione dettagliata, non ancora accettata. BKL-049 resta aperta e BKL-043 corrente. Nessuna funzionalità gallery reale, codice di produzione o autorità runtime viene dichiarata completata.

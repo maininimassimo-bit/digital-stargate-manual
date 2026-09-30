@@ -1,5 +1,7 @@
 # BKL-049 F0 — SDK, licensing and feasibility dossier
 
+> **Current phase decision:** [F0 ACCEPTED / POST-MERGE VERIFIED](../../project/BKL-049-F0-ACCEPTANCE-2026-09-30.md) after PR #445 review and delivery. F1 detailed design is next. OPEN/pending labels below are retained pre-review research checkpoints, superseded by this decision; BKL-049 and real gallery linkage remain unfinished.
+
 | Field | Value |
 |---|---|
 | Identifier | DSG-BKL-049-F0-001 |
