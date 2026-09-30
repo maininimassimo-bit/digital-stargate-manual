@@ -18,8 +18,8 @@ $script:ExpectedHost = 'EAGLE30154'
 $script:ExpectedTimezone = 'W. Europe Standard Time'
 $script:ApprovedAccount = 'maininimassimo@gmail.com'
 $script:InvokerServiceAccount = 'dsg-bkl043-f4-eagle-invoker@digital-stargate-telemetry.iam.gserviceaccount.com'
-$script:ApprovedStart = [DateTimeOffset]::Parse('2026-09-30T02:56:23+02:00')
-$script:ApprovedEnd = [DateTimeOffset]::Parse('2026-09-30T04:56:23+02:00')
+$script:ApprovedStart = [DateTimeOffset]::Parse('2026-09-30T23:29:55+02:00')
+$script:ApprovedEnd = [DateTimeOffset]::Parse('2026-10-01T03:29:55+02:00')
 $script:ReceiverUrl = $ReceiverUrl.TrimEnd('/')
 $script:ReceiverEndpoint = $script:ReceiverUrl + '/v1/receipts'
 $script:RetryState = @{}
@@ -95,14 +95,25 @@ function Get-RunningTaskProcessPresence([string]$TaskName) {
     return $false
 }
 
-function Get-TaskSignals([TimeZoneInfo]$TimeZone) {
+function Get-TaskSignals([TimeZoneInfo]$TimeZone, [scriptblock]$UtcNow = { [datetime]::UtcNow }) {
     $items = @()
     foreach ($name in $script:TaskNames) {
         $task = Get-ScheduledTask -TaskPath '\' -TaskName $name
+        $readStartUtc = & $UtcNow
         $info = Get-ScheduledTaskInfo -InputObject $task
+        $readEndUtc = & $UtcNow
         $lastRunUtc = $null
         if ($info.LastRunTime -and $info.LastRunTime -ne [datetime]::MinValue) {
             $lastRunUtc = Convert-LocalTimeToUtc $info.LastRunTime $TimeZone
+            # Preserve subsecond precision when checking the original Scheduler value.
+            $wallTime = [datetime]::SpecifyKind($info.LastRunTime, [DateTimeKind]::Unspecified)
+            if ($null -ne $lastRunUtc) {
+                $candidateUtc = [TimeZoneInfo]::ConvertTimeToUtc($wallTime, $TimeZone)
+                if ($readEndUtc -lt $readStartUtc -or $candidateUtc -gt $readEndUtc) {
+                    $lastRunUtc = $null
+                    Write-Warning "BKL043_TASK_LAST_RUN_UNVERIFIABLE task=$name"
+                }
+            }
         }
         # Task Scheduler codes may use the high bit; preserve the reported number.
         $result = [long]$info.LastTaskResult
