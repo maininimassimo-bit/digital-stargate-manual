@@ -1,4 +1,16 @@
-# Private registration draft journal and structural preflight
+# Private scientific registration components
+
+## Approved external retrospective profile
+
+[ADR-019](../../docs/architecture/ADR-019-External-Retrospective-Scientific-Records.md) records the Owner's 2026-10-01 approval of a separate external profile with partial scientific metadata. `external_registry.py` provides a closed candidate validator, explicit role-separated decision consumer, global immutable journal, collision/revision/revocation checks and current external snapshot export. `tools/pixinsight/workflow_archive/external_delivery.py` reconstructs a separate private F4/PXP V2 handoff from the whole anchored journal and exact packet/measurement identities. Legacy V1 consumers are unchanged and reject this new profile.
+
+This is a library for an authenticated manual operator, not an autonomous acceptance service. No CLI discovers records or generates consent. Production use requires independently governed decisions/head, private ACL/location, evidence verification and actual backup/restore acceptance. The approval of the profile does not register or admit any real record. Public V2 projection/publisher and real gallery OAT remain separate work.
+
+Typical explicit sequence: validate selected candidate and independently selected full-file measurements; consume the Owner's REGISTER event; retain event and independent new head; consume a separate ADMIT event bound to that exact registered revision and association; retain/update head; export the snapshot or build external delivery. Use `load_events`/`replay` with the freshly retained authority head before every use. A revision resets admission; WITHDRAW and QUARANTINE prevent export. The journal bounds total events to 128 and reserves immutable identities permanently; capacity or conflicts fail closed. No automatic reset, reinstatement or unanchored recovery is provided.
+
+Run `python -m unittest tools.scientific_registry.test_external_registry -v` for synthetic end-to-end admission, refusal, tamper, restore and delivery boundaries. Tests are not real authority decisions or operational acceptance.
+
+## Earlier draft and V1 structural components
 
 The journal is the first implementation step of the Owner-approved [external registration route](../../docs/architecture/assessments/BKL-049-External-Origin-Registration-Plan.md). It preserves private submission drafts only. Separate read-only configuration and catalog-context checkers are described below. None is an operational catalog, acceptance service, F4 snapshot producer or publisher. There is no command-line entry point and no directory discovery of scientific images.
 

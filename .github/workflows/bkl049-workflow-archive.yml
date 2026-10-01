@@ -81,3 +81,6 @@ jobs:
 
       - name: Private asset metadata and composed selection (synthetic only)
         run: python -m unittest tools.scientific_registry.test_asset_metadata -v
+
+      - name: External retrospective decisions and private PXP V2 (synthetic only)
+        run: python -m unittest tools.scientific_registry.test_external_registry -v

@@ -10,6 +10,8 @@
 
 ## Current result
 
+**Scope note, 2026-10-01:** this matrix describes the V1 structural subset and its still-closed acceptance path. The Owner subsequently approved [ADR-019](../ADR-019-External-Retrospective-Scientific-Records.md), a separate external retrospective profile whose PARTIAL metadata/UNKNOWN quality are explicit. Its decision journal and external snapshot/private PXP V2 implementation do not promote these V1 checker reports to acceptance. Real decisions, operational acceptance and publication remain separate gates.
+
 The [approved registration route](BKL-049-External-Origin-Registration-Plan.md) now has immutable draft retention and configuration structural checks. The catalog-context increment extends candidate checking to selected project, campaign, target, observation, session and session catalog-item metadata. It is read-only and returns a private source-bound report. It neither creates these scientific entities nor accepts them. BKL-049 remains OPEN; BKL-043 remains current and untouched.
 
 The contract sources are [AP14-W01](../scientific-catalog/AP14-W01-Observation-Catalog-Conceptual-Model.md), [AP14-W02](../scientific-catalog/AP14-W02-Logical-Data-Model-and-Identifier-Standard.md) and [DSDM-002](../scientific-assets/DSDM-002-Scientific-Data-Manager-Logical-Data-Model.md). Existing observatory analytics generators remain unchanged. No external candidate is inserted into their inputs, and no generated catalog is hand-edited.

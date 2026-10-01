@@ -1,5 +1,7 @@
 # AP14-W06 — PixInsight Synchronization Adapter
 
+> **External retrospective extension:** [ADR-019](../ADR-019-External-Retrospective-Scientific-Records.md) defines a separate private PXP V2 handoff for an external acquisition. It has no session alias and must be verified by `external_delivery.load_external_delivery` against the current independent external journal head. It is not input to the V1 reconciliation/analytics adapter documented below; that adapter and its accepted scientific semantics remain unchanged.
+
 | Campo | Valore |
 |---|---|
 | Work Package | AP14-W06 |
