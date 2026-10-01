@@ -1,4 +1,4 @@
-# Private registration draft journal
+# Private registration draft journal and structural preflight
 
 This is the first implementation step of the Owner-approved [external registration route](../../docs/architecture/assessments/BKL-049-External-Origin-Registration-Plan.md). It preserves private submission drafts only. It is **not** a scientific metadata validator, operational catalog, acceptance service, F4 snapshot producer or publisher. There is no command-line entry point and no directory discovery of scientific images.
 
@@ -19,3 +19,13 @@ A private pilot dry run may retain the existing incomplete candidate and restore
 Still required for the full registry: governed scientific validation and acceptance rubric, explicit record decisions, complete mandatory context, operational retention/restore acceptance, current eligible snapshot export with collision/revision/withdrawal/quarantine checks, and unchanged F4 handoff. None is implied by a successful draft append. No new approval for implementation already authorized by PR #462 is needed; actual record acceptance remains separate.
 
 Rollback removes the draft API from use and reverts its additive code/test/CI change. Preserve private draft files and independent receipts; this tool does not delete or migrate them.
+
+## Configuration structural preflight
+
+`configuration_preflight.check_configuration(source, expected_digest)` checks an explicitly selected private JSON object containing `observatory`, `telescope`, `camera` and `configuration`. It reuses the journal's bounded exact-byte JSON parser; no filesystem, network, clock, image read or registration operation is called. The input is an internal selection, not an AP-013/AP-014 schema replacement. A report retains the selected source digest privately and emits only fixed section/field/code diagnostics, never source values or unknown keys.
+
+The checked subset is DSDM-002 sections 2.2 and 5.1/5.2/5.3/5.5: mandatory presence and basic types, explicit UTC calendar syntax, chronological audit/configuration intervals, positive versions/optical quantities and exact selected observatory/telescope/camera references. Optional nulls remain unknown. Unknown fields are findings, not silently ignored. Instrument-configuration status uses the documented DRAFT/ACTIVE/RETIRED vocabulary; other equipment/lifecycle vocabularies, identifier allocation, timezone interpretation and provenance require governed review and are not claimed verified. The selected references are not resolved against a live registry.
+
+`NO_STRUCTURAL_FINDINGS` means only that this bounded subset found no errors. Every report keeps `acceptanceEligible=false`, DRAFT_NOT_ACCEPTED, PRIVATE_NOT_APPROVED and scientificAuthority NONE. Even a syntactically valid `validFromUtc` does not prove historical validity or association with an acquisition. No date, equipment, priority, UTC interpretation or quality default is generated. This module cannot accept records, export an F4 snapshot or replace the full metadata validator and acceptance rubric.
+
+Eleven synthetic cases exercise missing configuration despite known models, missing historical time, invalid/naive/offset times, fractional-time ordering, exact-reference mismatch, unknown optional values, malformed types, source integrity/resource bounds, fixed private diagnostics and no acceptance on structurally clean input. CI runs these on Windows and Linux. Rollback reverts this additive checker and its parser extraction, leaving all private drafts intact.

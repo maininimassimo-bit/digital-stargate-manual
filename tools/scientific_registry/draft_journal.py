@@ -26,26 +26,12 @@ def sha(value):
     require(type(value) is str and re.fullmatch(r'[a-f0-9]{64}', value), 'REGISTRY_ANCHOR')
 
 
-def build_draft(source, source_digest, *, submission_id, revision, previous_digest, recorded_at):
-    """Preserve selected UTF-8 JSON bytes exactly, including unresolved fields.
-
-    source_digest must be independently selected by the caller. No claim about
-    source authenticity or scientific validity follows from hashing/parsing.
-    """
+def parse_selected_source(source, source_digest):
+    """Check bounded selected JSON bytes; integrity is not source authenticity."""
     require(type(source) is bytes and 0 < len(source) <= MAX_SOURCE_BYTES, 'REGISTRY_SOURCE_SIZE')
     sha(source_digest)
     require(digest(source) == source_digest, 'REGISTRY_SOURCE_INTEGRITY')
-    require(type(submission_id) is str and re.fullmatch(r'REG-[A-Z0-9-]{1,64}', submission_id),
-            'REGISTRY_SUBMISSION_ID')
-    require(type(revision) is int and 1 <= revision <= MAX_REVISIONS, 'REGISTRY_REVISION')
-    if revision == 1:
-        require(previous_digest is None, 'REGISTRY_PREVIOUS')
-    else:
-        sha(previous_digest)
-    require(type(recorded_at) is str and re.fullmatch(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z', recorded_at),
-            'REGISTRY_TIME')
     try:
-        datetime.strptime(recorded_at, '%Y-%m-%dT%H:%M:%SZ')
         def pairs(items):
             out = {}
             for key, value in items:
@@ -73,6 +59,29 @@ def build_draft(source, source_digest, *, submission_id, revision, previous_dige
         raise
     except (ValueError, UnicodeError, TypeError, RecursionError):
         raise ArchiveError('REGISTRY_SOURCE_JSON') from None
+    return parsed
+
+
+def build_draft(source, source_digest, *, submission_id, revision, previous_digest, recorded_at):
+    """Preserve selected UTF-8 JSON bytes exactly, including unresolved fields.
+
+    source_digest must be independently selected by the caller. No claim about
+    source authenticity or scientific validity follows from hashing/parsing.
+    """
+    parse_selected_source(source, source_digest)
+    require(type(submission_id) is str and re.fullmatch(r'REG-[A-Z0-9-]{1,64}', submission_id),
+            'REGISTRY_SUBMISSION_ID')
+    require(type(revision) is int and 1 <= revision <= MAX_REVISIONS, 'REGISTRY_REVISION')
+    if revision == 1:
+        require(previous_digest is None, 'REGISTRY_PREVIOUS')
+    else:
+        sha(previous_digest)
+    require(type(recorded_at) is str and re.fullmatch(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z', recorded_at),
+            'REGISTRY_TIME')
+    try:
+        datetime.strptime(recorded_at, '%Y-%m-%dT%H:%M:%SZ')
+    except ValueError:
+        raise ArchiveError('REGISTRY_TIME') from None
     return {
         'kind': KIND, 'submissionId': submission_id, 'revision': revision,
         'previousSha256': previous_digest, 'recordedAt': recorded_at,
