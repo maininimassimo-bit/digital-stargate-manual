@@ -21,4 +21,13 @@
   <aside class="dsg-image-gallery__governance"><strong>Limite di interpretazione</strong><p>Le card mostrano solo metadati e riferimenti della projection. Stati stale/unknown restano espliciti e non vengono trasformati in qualità, readiness, ranking o raccomandazioni.</p></aside>
 </div>
 
+<section class="dsg-workflows" data-bkl049-workflows aria-labelledby="bkl049-title">
+  <h2 id="bkl049-title">Workflow delle immagini</h2>
+  <p>Ogni workflow disponibile è collegato a una precisa versione dell’immagine. I passaggi mancanti restano espliciti.</p>
+  <button type="button" data-workflow-refresh>Aggiorna workflow</button>
+  <p data-workflow-status role="status">Workflow non disponibile senza verifica dei dati.</p>
+  <div data-workflow-body></div>
+  <noscript>Per verificare e consultare i workflow occorre JavaScript. Nessun workflow è mostrato senza verifica.</noscript>
+</section>
+
 <script src="../javascripts/bkl-034-image-gallery.js"></script>

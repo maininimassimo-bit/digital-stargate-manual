@@ -4,7 +4,7 @@
 |---|---|
 | Date | 2026-10-01 |
 | Scope | Bounded producer API and additive schema; synthetic verification |
-| Status | IMPLEMENTED / REVIEW PENDING; full F5 OPEN |
+| Status | ACCEPTED / POST-MERGE VERIFIED via PR #460; full F5 OPEN |
 | Authority | Processing evidence only; action/catalog/publication authority NONE |
 
 ## Result and boundary
@@ -39,3 +39,8 @@ Synthetic tests cover allowlist leakage checks, exact lexical preservation, omis
 Before full F5 acceptance: implement Scientific Data Engine loading and gallery text rendering; reject duplicate/version-conflicting public records; verify collection freshness/withdrawal, safe routes and no fixture fallback; test browser/keyboard/mobile/refresh/Instant Navigation. A real accepted [external-origin registration](BKL-049-External-Origin-Registration-Plan.md), retained binding and exact approved field selection are still required. Synthetic fixtures cannot replace those decisions. Exact preview publication/access remains separately authorized.
 
 Rollback removes the additive producer/schema through a reviewed revert. Existing private archives, gallery fixture behavior, scientific contracts, BKL-043 and Safety Authority remain unchanged. This increment does not close F4 real binding, F5 or BKL-049.
+
+
+## Delivery evidence and continuation
+
+[PR #460 acceptance](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/460#issuecomment-5927521922) records merge `7deef6cbaea3b7658849f39a732c24691b578e26`, all 16 post-merge workflows successful and live documentation verification. The subsequent [gallery reader](BKL-049-F5-Gallery-Consumer.md) implements a separate bounded consumer over an empty published collection; real registration, publisher and preview acceptance remain open.
