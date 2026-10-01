@@ -2,6 +2,17 @@ name: Analyze Observatory Session Automatically
 on:
   workflow_dispatch:
     inputs:
+      telemetry_probe:
+        description: 'F4 telemetry-only test; off keeps scientific behavior'
+        type: choice
+        required: true
+        default: 'off'
+        options: ['off', 'success', 'failure', 'cancelled', 'skipped']
+      confirm_telemetry_probe:
+        description: 'Explicitly confirm an authorized F4 telemetry-only run'
+        type: boolean
+        required: true
+        default: false
       session_id:
         description: 'Session ID YYYY-MM-DD_YYYY-MM-DD'
         required: true
@@ -10,9 +21,38 @@ on:
     branches: [main, 'session/**']
     paths: ['data/sessions/**/manifest.json']
 permissions: { contents: write, actions: write }
-concurrency: { group: scientific-analytics-projection-main, cancel-in-progress: false }
+concurrency:
+  group: ${{ github.event_name == 'workflow_dispatch' && inputs.telemetry_probe != 'off' && inputs.telemetry_probe != '' && format('f4-telemetry-probe-{0}', github.run_id) || 'scientific-analytics-projection-main' }}
+  cancel-in-progress: false
 jobs:
+  telemetry_probe:
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      inputs.telemetry_probe != 'off' && inputs.telemetry_probe != '' &&
+      (inputs.telemetry_probe != 'skipped' || !inputs.confirm_telemetry_probe || github.ref != 'refs/heads/main')
+    permissions: {}
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Run isolated F4 outcome probe
+        env:
+          PROBE_MODE: ${{ inputs.telemetry_probe }}
+          PROBE_CONFIRMED: ${{ inputs.confirm_telemetry_probe }}
+          PROBE_REF: ${{ github.ref }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$PROBE_CONFIRMED" = 'true'
+          test "$PROBE_REF" = 'refs/heads/main'
+          echo 'F4_TELEMETRY_ONLY_NO_SCIENTIFIC_WORK'
+          case "$PROBE_MODE" in
+            success) exit 0 ;;
+            failure) echo 'F4_EXPECTED_FAILURE'; exit 1 ;;
+            cancelled) echo 'F4_WAITING_FOR_AUTHORIZED_CANCELLATION'; sleep 300; echo 'F4_CANCELLATION_NOT_OBSERVED'; exit 1 ;;
+            *) echo 'F4_INVALID_PROBE_MODE'; exit 1 ;;
+          esac
   analyze:
+    if: github.event_name != 'workflow_dispatch' || inputs.telemetry_probe == 'off' || inputs.telemetry_probe == ''
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
