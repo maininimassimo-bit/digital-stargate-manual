@@ -3,13 +3,13 @@
 | Field | Value |
 |---|---|
 | Date | 2026-10-01 |
-| Status | PROPOSED; private candidate retained, catalog acceptance NOT PERFORMED |
+| Status | Manual route APPROVED FOR IMPLEMENTATION by Owner on 2026-10-01; real catalog acceptance NOT PERFORMED |
 | Scope | First external image and its exact workflow association |
 | Authority | Existing AP-013/AP-014 only; importer and gallery authority NONE |
 
 ## Current result
 
-The Owner supplied an external acquisition context, instrument models, nominal focal length and an observing-site description. These remain private DECLARED evidence, not independently observed instrument configuration. A third private candidate revision preserves the earlier drafts and references the source declarations. The selected final-file header inspection found none of the specifically searched acquisition/instrument FITS keywords; it does not establish that all metadata or other sources are absent. No coordinates, exact acquisition times, effective focal length, instrument generation or historical validity interval were inferred.
+The Owner supplied an external acquisition context, instrument models, nominal focal length and an observing-site description. These remain private DECLARED evidence, not independently observed instrument configuration. The current private candidate preserves earlier drafts and references the source declarations. A bounded primary-header inventory of five available source frames and subsequent Owner confirmation reconcile the acquisition day separately from the processing day. Only primary headers were read; header fingerprints are not whole-file fingerprints, and collection membership is Owner-declared rather than an independently reconstructed processing lineage. Literal timestamps are not promoted to UTC where their time basis is unresolved. Header-reported focal length and Owner-declared nominal focal length remain separate evidence; no optical accessory or equipment replacement is inferred. The selected final-file header inspection found none of the specifically searched acquisition/instrument FITS keywords; it does not establish that all metadata or other sources are absent. No coordinates, exact acquisition times, effective focal length, instrument generation or historical validity interval were inferred.
 
 The explicitly authorized antivirus scan of the selected JPEG completed with exit 0 and an explicit no-threats result; independently checked pre/post bytes were identical. The signed installed scanner used current definitions at scan time and remediation was disabled. Existing provider sample-submission settings were not changed; actual transmission was not measured. This is a bounded scan result, not a guarantee of safety or publication permission. Private receipts retain tool/version, hashes and output. [Sanitized scan evidence](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/458#issuecomment-5926259882).
 
@@ -61,3 +61,55 @@ Keeping the image private and unlinked remains a valid fallback while required c
 Technical preparation and F5 projection hardening can proceed independently. Real registration cannot proceed until the route and mandatory semantics are resolved. No new Owner question about optional exposure details or coordinates is required by this increment. The next necessary decision must present a concrete design, rather than ask the Owner to invent technical catalog fields.
 
 Rollback is to stop before registration/publication and retain the private evidence. Any documentation change can be reverted through a reviewed PR. No original bytes, cloud access, analytics, Safety Authority, BKL-043 work or EAGLE operation changes.
+
+## Gate review and concrete registration proposal — 2026-10-01
+
+The [gallery reader release](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/461#issuecomment-5928290802) is accepted: reviewed head `e68728c8da01a88e5d0d2466712f4952f5da181a`, merge `e78c5058b1f18ed847f3d2f239c06fd768fe367a`, 18 successful PR checks and 17 successful applicable post-merge runs. Live Pages verification found the deliberately empty collection, no real workflow cards and no JavaScript console errors. This closes the reader increment, not the real-data gate.
+
+| Gate | Evidence / disposition |
+|---|---|
+| Acquisition versus processing day | Reconciled in private immutable declarations and candidate revision; no public case dates or timestamps |
+| Source membership | Owner-declared source collection to selected final; no claim of independently reconstructed lineage |
+| Instrument and historical validity | OPEN: literal header values retained separately; historical configuration validity not established |
+| External registration authority | OPEN: MANUAL is a permitted source category, not an operational registration service |
+| Real binding / private delivery | OPEN: no accepted authoritative context snapshot exists |
+| Public gallery reader | ACCEPTED, synthetic tests and empty live collection only |
+| Real preview, selected fields, publisher and OAT | OPEN; no cloud/publication authorization is inferred from this proposal |
+
+### Proposed manual route (decision candidate, not activation)
+
+Use the existing AP-013 asset-management and AP-014 catalog responsibilities with a **private, manually approved registration journal**. The PixInsight importer remains an evidence producer with no registration or acceptance authority. The journal is a proposed implementation of those responsibilities, not a new scientific authority or an accepted record created by this document.
+
+The proposed accountable operator is the Project Owner acting explicitly in the registration role. Architecture review must confirm the role mapping before activation. A declaration of instrument/date/source, approval of this design, approval of a software release, and approval of an individual catalog record are four different events; none substitutes for another.
+
+Proposed retention is a dedicated private local directory, outside Git and outside the preview bucket, using immutable revisions and a separately retained current-revision reference. The actual location, access controls, independent trust anchor and tested backup/restore destination must be recorded privately before real acceptance. Existing task-output drafts are evidence inputs, not a durable catalog. No new service, cloud resource or credential is selected by this design.
+
+The bounded first implementation must provide these separate operations:
+
+1. **Prepare:** consume explicitly selected retained evidence and create a draft with per-field provenance, original values, unresolved mandatory fields and stable proposed identifiers. Never infer astronomical identification, historical UTC validity, scientific priority, acquisition mode or quality. Repeating the same request is idempotent; conflicting identities stop.
+2. **Validate:** check existing AP-013/AP-014 required fields, enumerations, references, byte identities and revisions. Missing mandatory context blocks acceptance. Optional unknowns remain null only where the governing contract permits it. Validation produces findings, not an ACCEPTED transition.
+3. **Decide:** present the exact candidate digest, unresolved findings and source references to the authorized registration operator. Record a distinct asset-registration decision and catalog-acceptance decision under their existing responsibilities. A generic “proceed” or date correction is not a scientific quality decision. No default ACCEPTED, COMPLETE or CATALOGED state is allowed.
+4. **Retain:** append the decision and accepted revision atomically, with optimistic concurrency and an independently retained integrity anchor. Preserve superseded evidence. Failure leaves the previous current reference intact. Retention has no image-deletion or processing operation.
+5. **Export:** derive the minimal current snapshot needed by the unchanged F4 guard only from a presently eligible revision. Rejected, incomplete, withdrawn, quarantined or stale records fail closed. Reuse the existing private delivery and PXP/AP14-W06 path; never inject external records into observatory analytics or hand-edit generated catalogs.
+
+Historical `validFromUtc` remains a prerequisite under the current model. It must not become the registration date or an assumed midnight. If it cannot be established truthfully, this route stays blocked for that record; a separate contract proposal would be required. Likewise, the proposal does not invent a neutral scientific priority or an observation mode to satisfy a schema. The complete acceptance rubric and vocabulary mapping must be reviewed against the current governing sources before the decision operation is enabled.
+
+### Release and operational acceptance evidence
+
+Before enabling real registration, require separate ARB and Release Quality review, exact-head CI, and synthetic checks for missing mandatory fields, unapproved decision, wrong digest, concurrent update, duplicate identities, idempotent retry, revision supersession, withdrawal, quarantine, stale export, interrupted writes, restore and unchanged existing catalog/analytics behavior. A restore test must recover both the record and its independently anchored current revision; a checksum alone does not authenticate an operator.
+
+Then use a private dry run against the retained real candidate. Real acceptance requires the resolved mandatory context, a recorded authorized operator decision, verified private retention/restore and a fresh snapshot that passes the unchanged F4 guard. Publication is a later distinct gate: exact preview bytes, rights/privacy, public aliases and selected fields, publisher freshness/withdrawal policy, specific cloud access operation and real gallery OAT. No blind renewal of the reader's 24-hour validity window is permitted.
+
+### Decision requested and alternatives
+
+Recommended decision: approve implementation of this manual route within AP-013/AP-014, including the proposed private journal and explicit Owner registration role, while retaining all current eligibility requirements. Approval permits design implementation and synthetic/private dry runs; it does **not** accept the pilot record, change a scientific contract, upload an image or make the bucket public.
+
+Alternative: retain the current private unlinked archive until an existing governed external registration service becomes available. This avoids implementing a journal but leaves the required real gallery association unfinished. A less restrictive external-archive eligibility profile is not silently adopted: it would change the current binding/contract semantics and needs its own concrete proposal and decision.
+
+The decision boundary follows [DSG-AEM-001 section 5](../../project/DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md): “cambia esperienza utente, priorità di prodotto, authority, boundary, contratto pubblico o semantica scientifica”. The proposed operational authority/retention mapping must therefore be explicitly settled before activation; acceptance of partial workflow content alone does not settle it. BKL-049 remains OPEN and BKL-043 remains current.
+
+### Owner decision — 2026-10-01
+
+The Owner explicitly approved the private registry proposed in PR #462, including implementation, private tests and the Owner's responsibility for explicit registration and acceptance decisions. The decision applies to the proposal reviewed at `1788eb41961896ea30edf9841e6dbd7121a71396`; its earlier proposal wording is retained above for audit. No second authorization for that same implementation scope is required.
+
+The route is approved for implementation, **not yet implemented or operationally accepted**. Real-record eligibility, the acceptance rubric, retention/restore evidence, exact binding, field selection and public image/access authorization remain outstanding. No scientific contract or automatic record acceptance is approved. The next step is a separately reviewed bounded implementation and synthetic/private dry run under these constraints.

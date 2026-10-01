@@ -4,7 +4,7 @@
 |---|---|
 | Date | 2026-10-01 |
 | Scope | Bounded collection, Scientific Data Engine reader and gallery panel |
-| State | Implemented with synthetic verification; release evidence tracked in the delivery PR |
+| State | ACCEPTED / POST-MERGE VERIFIED via PR #461; real-data gate remains OPEN |
 | Real-data gate | OPEN: no accepted real collection, preview or association is published |
 | Authority | Processing evidence only; action/catalog/Safety Authority unchanged |
 
@@ -41,3 +41,5 @@ The dedicated BKL-049 workflow runs the contract/engine suite on Windows and Lin
 Still required: the [governed external registration route](BKL-049-External-Origin-Registration-Plan.md), accepted real asset/context snapshot, exact retained binding, approved public aliases/fields, reviewed publisher with immutable public version policy, authorized preview access/upload and real end-to-end gallery OAT. F4 real binding, full F5 and BKL-049 remain OPEN. BKL-043 stays current.
 
 Rollback reverts the additive panel, collection reader/schema and scripts, leaving the former fixture gallery and private archive intact. To withdraw future records, publish the reviewed empty collection; disabling this feature grants no authority to delete private originals or change cloud access.
+
+Release evidence: [PR #461 acceptance and live verification](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/461#issuecomment-5928290802). The subsequent [registration gate review and decision candidate](BKL-049-External-Origin-Registration-Plan.md#gate-review-and-concrete-registration-proposal-2026-10-01) does not promote the real-data gate.
