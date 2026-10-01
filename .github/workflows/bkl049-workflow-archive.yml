@@ -72,3 +72,6 @@ jobs:
 
       - name: Private registration draft journal (synthetic only)
         run: python -m unittest tools.scientific_registry.test_draft_journal -v
+
+      - name: Private configuration structural preflight (synthetic only)
+        run: python -m unittest tools.scientific_registry.test_configuration_preflight -v
