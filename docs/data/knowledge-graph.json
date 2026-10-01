@@ -5,6 +5,16 @@
   "generated_at_utc": "2026-09-22T08:45:00Z",
   "entities": [
     {
+      "id": "ADR-019",
+      "type": "adr",
+      "title": "External Retrospective Scientific Records",
+      "status": "Owner-approved direction; real activation pending",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/architecture/ADR-019-External-Retrospective-Scientific-Records.md"
+      }
+    },
+    {
       "id": "AP-001",
       "type": "architecture_package",
       "title": "Enterprise Metamodel and Repository Information Architecture",
@@ -986,6 +996,26 @@
     }
   ],
   "relations": [
+    {
+      "id": "rel:ADR-019:documents:AP-013",
+      "type": "documents",
+      "from": "ADR-019",
+      "to": "AP-013",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/ADR-019-External-Retrospective-Scientific-Records.md"
+      }
+    },
+    {
+      "id": "rel:ADR-019:documents:AP-014",
+      "type": "documents",
+      "from": "ADR-019",
+      "to": "AP-014",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/architecture/ADR-019-External-Retrospective-Scientific-Records.md"
+      }
+    },
     {
       "id": "rel:BKL-033:depends_on:AP-015",
       "type": "depends_on",
