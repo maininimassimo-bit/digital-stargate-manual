@@ -78,3 +78,6 @@ jobs:
 
       - name: Private catalog context and references (synthetic only)
         run: python -m unittest tools.scientific_registry.test_catalog_context -v
+
+      - name: Private asset metadata and composed selection (synthetic only)
+        run: python -m unittest tools.scientific_registry.test_asset_metadata -v
