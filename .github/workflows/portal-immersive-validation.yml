@@ -7,6 +7,7 @@ on:
       - 'hooks/**'
       - 'mkdocs*.yml'
       - '.github/scripts/*immersive*'
+      - '.github/scripts/test-bkl049-gallery-browser.cjs'
       - '.github/workflows/portal-immersive-validation.yml'
   workflow_dispatch:
 permissions:
@@ -44,6 +45,7 @@ jobs:
           DSG_TEST_BASE_URL: http://127.0.0.1:8766/
         run: |
           python -m http.server 8766 --bind 127.0.0.1 --directory site > /tmp/portal-server.log 2>&1 &
+          node .github/scripts/test-bkl049-gallery-browser.cjs
           node .github/scripts/test-immersive-portal.cjs
           node .github/scripts/test-immersive-instruments.cjs
           node .github/scripts/test-immersive-dome-sync.cjs

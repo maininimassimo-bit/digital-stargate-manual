@@ -3,7 +3,11 @@ on:
   pull_request:
     paths:
       - 'tools/pixinsight/workflow_archive/**'
-      - 'schemas/bkl049-public-workflow.schema.json'
+      - 'schemas/bkl049-public-workflow*.schema.json'
+      - 'docs/javascripts/bkl049-*.js'
+      - 'docs/javascripts/scientific-data-engine.js'
+      - 'docs/data/bkl049-public-workflows.json'
+      - '.github/scripts/test-bkl049-gallery.cjs'
       - 'experiments/bkl049-f0/**'
       - '.github/scripts/test-bkl049-provenance-bridge.mjs'
       - '.github/scripts/test-bkl049-binding-bridge.mjs'
@@ -13,7 +17,11 @@ on:
     branches: [main]
     paths:
       - 'tools/pixinsight/workflow_archive/**'
-      - 'schemas/bkl049-public-workflow.schema.json'
+      - 'schemas/bkl049-public-workflow*.schema.json'
+      - 'docs/javascripts/bkl049-*.js'
+      - 'docs/javascripts/scientific-data-engine.js'
+      - 'docs/data/bkl049-public-workflows.json'
+      - '.github/scripts/test-bkl049-gallery.cjs'
       - 'experiments/bkl049-f0/**'
       - '.github/scripts/test-bkl049-provenance-bridge.mjs'
       - '.github/scripts/test-bkl049-binding-bridge.mjs'
@@ -56,3 +64,6 @@ jobs:
 
       - name: F5 explicit field selection and public minimization
         run: python -m unittest tools.pixinsight.workflow_archive.test_public_projection -v
+
+      - name: F5 public collection and Scientific Data Engine boundary
+        run: node .github/scripts/test-bkl049-gallery.cjs

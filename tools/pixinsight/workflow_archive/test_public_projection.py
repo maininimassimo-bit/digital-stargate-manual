@@ -1,9 +1,11 @@
 """Synthetic public boundary checks; no real approval, gallery or cloud writes."""
 from copy import deepcopy
+import json
 import unittest
 
 from .archive import ArchiveError, build_packet, digest, encode
-from .public_projection import build_public_projection
+from .public_projection import build_public_projection, SCHEMA
+from .provenance import validate_emitted_profile
 from .test_delivery import candidate
 from .test_binding import fixture
 from .test_provenance import SOURCE, STAMP
@@ -47,6 +49,14 @@ class PublicProjectionTests(unittest.TestCase):
                         self.bundle['packetSha256'].encode(), self.bundle['snapshotSha256'].encode(),
                         self.bundle['association']['original']['sha256'].encode()]:
             self.assertNotIn(private, raw)
+
+    def test_schema_identifier_patterns_require_the_absolute_end(self):
+        schema = json.loads(SCHEMA.read_text(encoding='utf-8'))
+        for suffix in ['\n', '\r', '\u2028', '/', '?secret', '<tag>']:
+            value = project(self.bundle, self.selection)
+            value['imageId'] += suffix
+            with self.subTest(suffix=suffix), self.assertRaises(ArchiveError):
+                validate_emitted_profile(value, schema)
 
     def test_no_selection_is_unavailable_not_complete(self):
         self.selection['steps'] = []

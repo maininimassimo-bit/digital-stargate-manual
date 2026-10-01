@@ -1,7 +1,9 @@
 (() => {
   'use strict';
 
-  const VERSION = '2.1.1-rc2';
+  const VERSION = '2.1.2-rc1';
+  const engineScript = document.currentScript?.src;
+  const workflowSource = engineScript ? new URL('../data/bkl049-public-workflows.json', engineScript).href : null;
   const cache = new Map();
   const metrics = {
     requests: 0,
@@ -259,8 +261,48 @@
     indexedSessions: [...cache.values()].reduce((sum, entry) => sum + (entry.indexes?.byId?.size || 0), 0)
   });
 
+  // Separate bounded evidence reader; never normalize workflows as sessions.
+  // No cache/fallback: each refresh reads the current published collection.
+  const getPublicWorkflowCollection = async ({signal} = {}) => {
+    const contract = window.DSGBkl049WorkflowContract;
+    if (!contract || !workflowSource || new URL(workflowSource).origin !== location.origin) {
+      throw new Error('WORKFLOW_UNAVAILABLE');
+    }
+    const controller = new AbortController();
+    const abort = () => controller.abort();
+    signal?.addEventListener('abort', abort, {once: true});
+    if (signal?.aborted) abort();
+    const timer = setTimeout(abort, 10000);
+    let reader;
+    try {
+      const response = await fetch(workflowSource, {signal: controller.signal, cache: 'no-store',
+        redirect: 'error', credentials: 'omit', mode: 'same-origin'});
+      if (!response.ok || response.url !== workflowSource || !response.body) throw new Error('WORKFLOW_UNAVAILABLE');
+      reader = response.body.getReader();
+      const decoder = new TextDecoder('utf-8', {fatal: true});
+      let bytes = 0, text = '';
+      while (true) {
+        const chunk = await reader.read();
+        if (chunk.done) break;
+        bytes += chunk.value.byteLength;
+        if (bytes > contract.MAX_BYTES) throw new Error('WORKFLOW_UNAVAILABLE');
+        text += decoder.decode(chunk.value, {stream: true});
+      }
+      text += decoder.decode();
+      if (controller.signal.aborted) throw new Error('WORKFLOW_UNAVAILABLE');
+      return contract.parseCollection(text);
+    } catch {
+      throw new Error('WORKFLOW_UNAVAILABLE');
+    } finally {
+      clearTimeout(timer);
+      signal?.removeEventListener('abort', abort);
+      if (reader) { await reader.cancel().catch(() => {}); reader.releaseLock(); }
+    }
+  };
+
   window.DSGScientificDataEngine = Object.freeze({
     version: VERSION,
+    getPublicWorkflowCollection,
     loadCatalog,
     preload,
     getSessions,

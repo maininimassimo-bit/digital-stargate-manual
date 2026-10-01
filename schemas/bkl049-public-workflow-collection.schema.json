@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BKL-049 current public workflow collection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "authority",
+    "actionAuthority",
+    "publishedAt",
+    "validUntil",
+    "records"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "kind": {
+      "const": "BKL049_PUBLIC_COLLECTION"
+    },
+    "authority": {
+      "const": "processing_evidence"
+    },
+    "actionAuthority": {
+      "const": "NONE"
+    },
+    "publishedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "validUntil": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "records": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "$ref": "bkl049-public-workflow.schema.json"
+      }
+    }
+  },
+  "description": "Runtime checks also enforce canonical bytes, unique image/version and workflow IDs, ordered unique steps, empty/null pairing and a current publication interval of at most 24 hours. Validation is not publication authority."
+}
