@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Date | 2026-10-01 |
-| Status | PROPOSED; private candidate retained, catalog acceptance NOT PERFORMED |
+| Status | Manual route APPROVED FOR IMPLEMENTATION by Owner on 2026-10-01; real catalog acceptance NOT PERFORMED |
 | Scope | First external image and its exact workflow association |
 | Authority | Existing AP-013/AP-014 only; importer and gallery authority NONE |
 
@@ -107,3 +107,9 @@ Recommended decision: approve implementation of this manual route within AP-013/
 Alternative: retain the current private unlinked archive until an existing governed external registration service becomes available. This avoids implementing a journal but leaves the required real gallery association unfinished. A less restrictive external-archive eligibility profile is not silently adopted: it would change the current binding/contract semantics and needs its own concrete proposal and decision.
 
 The decision boundary follows [DSG-AEM-001 section 5](../../project/DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md): “cambia esperienza utente, priorità di prodotto, authority, boundary, contratto pubblico o semantica scientifica”. The proposed operational authority/retention mapping must therefore be explicitly settled before activation; acceptance of partial workflow content alone does not settle it. BKL-049 remains OPEN and BKL-043 remains current.
+
+### Owner decision — 2026-10-01
+
+The Owner explicitly approved the private registry proposed in PR #462, including implementation, private tests and the Owner's responsibility for explicit registration and acceptance decisions. The decision applies to the proposal reviewed at `1788eb41961896ea30edf9841e6dbd7121a71396`; its earlier proposal wording is retained above for audit. No second authorization for that same implementation scope is required.
+
+The route is approved for implementation, **not yet implemented or operationally accepted**. Real-record eligibility, the acceptance rubric, retention/restore evidence, exact binding, field selection and public image/access authorization remain outstanding. No scientific contract or automatic record acceptance is approved. The next step is a separately reviewed bounded implementation and synthetic/private dry run under these constraints.
