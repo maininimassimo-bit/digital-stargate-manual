@@ -1,0 +1,28 @@
+name: BKL-043 F4 Telemetry Probe Validation
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/analyze-session-automatic.yml'
+      - '.github/workflows/bkl-043-f4-telemetry-probe-validation.yml'
+      - '.github/scripts/test-bkl043-f4-telemetry-probe.py'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/analyze-session-automatic.yml'
+      - '.github/workflows/bkl-043-f4-telemetry-probe-validation.yml'
+      - '.github/scripts/test-bkl043-f4-telemetry-probe.py'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check PyYAML==6.0.2
+      - run: python .github/scripts/test-bkl043-f4-telemetry-probe.py
