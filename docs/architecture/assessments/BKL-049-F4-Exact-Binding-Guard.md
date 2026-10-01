@@ -1,5 +1,7 @@
 # BKL-049 F4 — Exact image/version binding guard
 
+> **Separate approved external path:** [ADR-019](../ADR-019-External-Retrospective-Scientific-Records.md) specifies F4/PXP V2 for retrospective external records with PARTIAL metadata and UNKNOWN quality. The V1 guard documented here is unchanged; external records never fake COMPLETE/ACCEPTED to enter it. The external handoff replays its own current authority journal and exact byte/workflow identities, with explicit Owner registration and admission.
+
 | Field | Value |
 |---|---|
 | Identifier | DSG-BKL049-F4-GUARD-001 |

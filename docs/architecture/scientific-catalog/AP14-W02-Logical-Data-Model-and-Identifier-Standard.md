@@ -1,5 +1,7 @@
 # AP14-W02 — Logical Data Model and Identifier Standard
 
+> **Additive external profile, 2026-10-01:** [ADR-019](../ADR-019-External-Retrospective-Scientific-Records.md) adds a separate retrospective external acquisition identity, without a fabricated planning hierarchy/session or priority. External ADMITTED means record inclusion and exact declared association, not scientific quality ACCEPTED; quality remains UNKNOWN. The contracts and required fields below remain unchanged. AP-014 admission/withdrawal authority is retained, with separate exact-revision decisions.
+
 | Campo | Valore |
 |---|---|
 | Architecture Package | AP-014 — Scientific Observation Catalog and Search |

@@ -1,5 +1,7 @@
 # DSDM-002 — Digital StarGate Scientific Data Manager Logical Data Model
 
+> **Additive external profile, 2026-10-01:** [ADR-019](../ADR-019-External-Retrospective-Scientific-Records.md) defines the separately approved retrospective external record. Its explicitly partial historical facts may omit configuration UTC validity, with provenance and reasons. The instrument configuration and all mandatory fields below remain unchanged for this model; no external record is represented as a COMPLETE legacy asset. AP-013 registration/quarantine authority is unchanged.
+
 | Campo | Valore |
 |---|---|
 | Architecture Package | AP-013 — Scientific Image Repository Architecture |
