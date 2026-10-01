@@ -75,3 +75,6 @@ jobs:
 
       - name: Private configuration structural preflight (synthetic only)
         run: python -m unittest tools.scientific_registry.test_configuration_preflight -v
+
+      - name: Private catalog context and references (synthetic only)
+        run: python -m unittest tools.scientific_registry.test_catalog_context -v
