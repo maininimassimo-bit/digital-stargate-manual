@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Identifier | DSG-BKL049-REGISTRY-VALIDATION-001 |
-| Version / date | 1.0 / 2026-10-01 |
+| Version / date | 1.1 / 2026-10-01 |
 | Status | Bounded candidate-validation implementation; production acceptance CLOSED TO ACTIVATION |
 | Scope | Owner-approved manual route, selected external catalog context |
 | Authority | Existing AP-013/AP-014; validator authority NONE |
@@ -41,7 +41,7 @@ The following conditions are cumulative, not interchangeable. This matrix operat
 | Gate | Required evidence | Current implementation disposition |
 |---|---|---|
 | Candidate integrity | Exact selected bytes/revision with independently retained current anchor | Draft journal and bounded parsers available; hashes are not operator authentication |
-| Required scientific metadata | Complete applicable contract fields, governed vocabularies, references and per-field source evidence | Configuration and catalog-context subset checks available; full asset/provenance validation and unresolved vocabularies remain open |
+| Required scientific metadata | Complete applicable contract fields, governed vocabularies, references and per-field source evidence | Configuration, catalog-context and selected asset/storage/integrity subset checks available; complete provenance validation and unresolved vocabularies remain open |
 | External context | Governed observatory/timezone, equipment/configuration, target and project/campaign/observation/session identities | Must be resolved by the existing responsible authority; no fictitious observatory session |
 | Historical configuration | Truthful DSDM-002 validFromUtc and evidence tying the configuration to the acquisition | Mandatory, still not supplied by checking syntax or models; receipt/import times cannot substitute |
 | Asset registration decision | Explicit accountable AP-013 registration event tied to exact candidate revision and byte identities | Decision operation not enabled; implementation approval is not this event |
@@ -57,3 +57,23 @@ Every report retains DRAFT_NOT_ACCEPTED, PRIVATE_NOT_APPROVED, scientificAuthori
 Eighteen synthetic catalog-context tests exercise every mandatory field, reference chains, duplicates, malformed values, wrong types, source integrity/resource boundaries, private diagnostics, invalid dates/intervals, explicit vocabulary gaps and forged acceptance. CI runs them on Windows and Linux with the existing archive/configuration/draft suites. A private real-candidate dry run may select already retained facts and report missing records, but cannot allocate or accept entities or read image pixels.
 
 Separate AI-assisted ARB then Release Quality, exact-head CI, expected-head merge under DSG-AEM-001/W-DSG-AEM-RULESET-001 and merge-SHA/Pages verification are recorded in the delivery PR. These reviews are not human scientific acceptance. The code is additive: rollback reverts the checker, tests, CI step and supporting documentation while preserving every private source/draft/receipt. No database migration, new dependency, cloud resource, device access or catalog write is introduced.
+
+## Selected asset/storage/integrity and composed validation increment
+
+`asset_metadata.check_asset_metadata` adds a read-only subset of DSDM-002 sections 2.2 and 7.1–7.5: asset metadata, storage volumes/locators, integrity records and asset relations. The caller selects the original and preview by explicit IDs, never by filename. Five collections are bounded to 1..8 rows each. Required fields, controlled enums where actually defined, numeric/hash constraints, duplicate identities, selected references, storage collisions, integrity predecessor coherence/cycles and the pair's declared derivative direction are checked. Existing AP-013/AP-014 and BKL-034 public schemas are not changed.
+
+| Check | Failure behavior / boundary |
+|---|---|
+| Asset identity and size | Wrong type, negative/out-of-range size, duplicate ID or unresolved selection is a finding; matching hashes do not merge scientific identities |
+| Storage locator | Relative-path syntax and exact selected volume/asset references checked without reading a path; duplicate active locations detected with separator normalization only; actual availability, filesystem aliases and ACLs remain unverified |
+| Integrity receipt | Wrong locator ownership, inconsistent positive hash, cyclic/cross-asset predecessor or reversed receipt time is a finding; historical negative/partial results remain explicit eligibility findings |
+| Original/preview relation | Candidate relation must explicitly point from selected preview to selected original using DERIVED_FROM/PUBLICATION_VARIANT_OF; this private comparison convention supplies no scientific lineage evidence |
+| Independent full-file measurement input | Separate byte anchor required; original/preview IDs, full-file scope, size and SHA-256 compared exactly; header-only/missing/duplicate measurements cannot supply the comparison |
+| Non-eligible selected state | Quarantine, withdrawal, unreadable/mismatched integrity or immutability violation remain eligibility findings, even when measured bytes match |
+| Composed context | The registration checker retains both reports and checks explicit selected session/catalog/observation/target consistency; no workflow association or authoritative snapshot is constructed |
+
+The measurement record's FULL_FILE_BYTES field is a claim from the selected evidence source, not proof that this validator measured a file. Its caller must independently establish authenticity, actual scope and currentness. This increment performs no hashing of images, pixel read, antivirus scan or new original-file access. SHA-256 is only the selected comparison profile; no hashing-policy authority is introduced. Hashes of FITS headers alone remain insufficient. Nested report digests derive from the anchored parent candidate and do not masquerade as independent anchors.
+
+DSDM-002 names but does not enumerate shared lifecycle status, locator availability and relation confidence in these field tables. Those remain `VOCABULARY_UNRESOLVED`. Optional processing-run references are explicitly unsupported rather than accepted without resolution. UTC syntax is checked only on selected values; original retained evidence is never rewritten or silently converted. Global namespace/collision policy, per-field provenance, relationship authority, current lifecycle decisions and operational retention remain separate gates. All reports continue to prohibit scientific acceptance and catalog writes.
+
+Twenty-five added synthetic tests cover mandatory fields, duplicates including unrelated selected rows, reference failures, relative-path rejection, storage collisions, hash mismatch, full-file versus header scope, predecessor cycles, negative eligibility and composed-context ambiguity. CI runs them on Windows/Linux alongside earlier suites. An authorized private dry run can carry retained original/preview byte facts into an incomplete candidate without allocating identities or fabricating receipts/relations; absent governed records and independent measurements remain findings. Private results stay outside Git. Rollback removes only the additive validators, tests, CI step and documentation; originals, retained drafts, measurements and other evidence are preserved.
