@@ -50,3 +50,10 @@ F4 private delivery: `delivery.build_delivery`, `retain_delivery` and `load_deli
 
 
 Importer 1.1 supports decoded parameter strings through 16,384 characters; all other bounds remain. Packet schema stays 1.0. Historical importer 1.0 records are verified using the original 4,096-character profile, including unsupported results. Upgrade by a deliberate new import receipt, never overwrite or silently reinterpret an old packet.
+
+
+## F5 explicit public-field producer (API only)
+
+`public_projection.build_public_projection` reverifies the private delivery using current external anchors, then constructs only explicitly approved source-bound fields. It requires a separately governed current selection record. It never creates approvals, copies arbitrary notes, accepts preview URLs or publishes files. The additive schema is `schemas/bkl049-public-workflow.schema.json`; the implementation scope and remaining gallery gates are in `docs/architecture/assessments/BKL-049-F5-Public-Projection-Builder.md`.
+
+Run synthetic negatives with `python -m unittest tools.pixinsight.workflow_archive.test_public_projection -v`. No real image/catalog acceptance or cloud authorization is established by these tests. Future consumers must use text rendering and enforce collection-level identity uniqueness and withdrawal; this single-record producer does not implement those boundaries.

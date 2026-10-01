@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'tools/pixinsight/workflow_archive/**'
+      - 'schemas/bkl049-public-workflow.schema.json'
       - 'experiments/bkl049-f0/**'
       - '.github/scripts/test-bkl049-provenance-bridge.mjs'
       - '.github/scripts/test-bkl049-binding-bridge.mjs'
@@ -12,6 +13,7 @@ on:
     branches: [main]
     paths:
       - 'tools/pixinsight/workflow_archive/**'
+      - 'schemas/bkl049-public-workflow.schema.json'
       - 'experiments/bkl049-f0/**'
       - '.github/scripts/test-bkl049-provenance-bridge.mjs'
       - '.github/scripts/test-bkl049-binding-bridge.mjs'
@@ -51,3 +53,6 @@ jobs:
 
       - name: F4 immutable retention and replay boundaries
         run: python -m unittest tools.pixinsight.workflow_archive.test_delivery -v
+
+      - name: F5 explicit field selection and public minimization
+        run: python -m unittest tools.pixinsight.workflow_archive.test_public_projection -v

@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.example/schemas/bkl049-public-workflow.schema.json",
+  "title": "BKL-049 minimized workflow projection v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "authority",
+    "actionAuthority",
+    "imageId",
+    "imageVersionId",
+    "workflowId",
+    "bindingEvidenceClass",
+    "captureCompleteness",
+    "executionEvidence",
+    "orderSemantics",
+    "methodCitation",
+    "steps",
+    "omittedStepCount",
+    "gaps"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "kind": {
+      "const": "BKL049_PUBLIC_WORKFLOW"
+    },
+    "authority": {
+      "const": "processing_evidence"
+    },
+    "actionAuthority": {
+      "const": "NONE"
+    },
+    "imageId": {
+      "type": "string",
+      "pattern": "^IMG-[A-Za-z0-9_-]{1,64}(?![\\s\\S])"
+    },
+    "imageVersionId": {
+      "type": "string",
+      "pattern": "^VER-[A-Za-z0-9_-]{1,64}(?![\\s\\S])"
+    },
+    "workflowId": {
+      "type": "string",
+      "pattern": "^WF-[A-Za-z0-9_-]{1,64}(?![\\s\\S])"
+    },
+    "bindingEvidenceClass": {
+      "const": "DECLARED"
+    },
+    "captureCompleteness": {
+      "enum": [
+        "PARTIAL",
+        "UNAVAILABLE"
+      ]
+    },
+    "executionEvidence": {
+      "const": "NOT_ESTABLISHED"
+    },
+    "orderSemantics": {
+      "const": "EXPORTED_CONFIGURATION_ORDER"
+    },
+    "methodCitation": {
+      "const": "architecture/assessments/BKL-049-F1-Workflow-Archive-Architecture/"
+    },
+    "steps": {
+      "type": "array",
+      "maxItems": 512,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sourceOrdinal",
+          "processId",
+          "evidenceClass",
+          "parameters",
+          "omittedParameterCount"
+        ],
+        "properties": {
+          "sourceOrdinal": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "processId": {
+            "type": "string",
+            "pattern": "^[A-Za-z_][A-Za-z0-9_]{0,127}(?![\\s\\S])"
+          },
+          "evidenceClass": {
+            "const": "DECLARED"
+          },
+          "parameters": {
+            "type": "array",
+            "maxItems": 128,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "lexicalJson"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z_][A-Za-z0-9_]{0,127}(?![\\s\\S])"
+                },
+                "lexicalJson": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 4096
+                }
+              }
+            }
+          },
+          "omittedParameterCount": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "omittedStepCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "gaps": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "enum": [
+          "PARTIAL_HISTORY",
+          "EXECUTION_NOT_OBSERVED",
+          "UPSTREAM_RELATIONS_UNRESOLVED",
+          "PROCESS_VERSIONS_UNAVAILABLE",
+          "PUBLIC_FIELDS_OMITTED"
+        ]
+      }
+    }
+  }
+}
