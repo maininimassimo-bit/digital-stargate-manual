@@ -72,3 +72,8 @@ Trust limits remain explicit: hashes provide integrity, not actor authentication
 Validation: 12 new synthetic retention tests cover roundtrip/source preservation, exact retry, conflicting revisions, stale authority, corruption, forged results, malformed canonical input, source changes/quarantine, atomic commit failure, cleanup residue, symlink rejection and input alias isolation. Combined F2/F3/F4 suite: 59 tests, 57 passed and 2 local Windows symlink-permission skips; Linux/Windows CI supplies platform evidence. No real scientific file is imported, catalog record created or image published by these tests.
 
 This delivers a private persistence/handoff API, not a scheduled coordinator, catalog authority producer, cloud workflow store, public projection or whole F4 acceptance. Real external-origin context, measurements/source-bound attestations, private operational retention and gallery OAT remain open.
+
+
+## External-origin pilot continuation — 2026-10-01
+
+The private pilot now has additional Owner-declared instrument/site context and a completed bounded JPEG antivirus scan with unchanged bytes. These do not create scientific acceptance. The [external-origin registration plan](BKL-049-External-Origin-Registration-Plan.md) records the missing governed manual route and mandatory-context gaps. No analytics session is fabricated, and CATALOGED/COMPLETE/ACCEPTED eligibility remains unchanged. Real binding and publication remain OPEN.
