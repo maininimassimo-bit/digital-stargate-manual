@@ -1,8 +1,11 @@
 # ADR-019 — External retrospective scientific records
 
-**Status:** Owner-approved direction; bounded private implementation, real activation pending  
-**Date:** 2026-10-01  
-**Scope:** BKL-049, additive AP-013/AP-014 external profile  
+**Status:** Owner-approved direction; bounded private implementation, real activation pending
+
+**Date:** 2026-10-01
+
+**Scope:** BKL-049, additive AP-013/AP-014 external profile
+
 **Decision owner:** Project Owner
 
 ## Context and explicit decision
