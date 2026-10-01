@@ -153,7 +153,7 @@ class PublicProjectionTests(unittest.TestCase):
 
     def test_total_output_limit_rejects_many_individually_valid_values(self):
         parts = list(fixture())
-        source = SOURCE + b''.join(b'A.p%d="'%i + b'x'*4000 + b'";' for i in range(80))
+        source = SOURCE.replace(b'Group.add(A);', b''.join(b'A.p%d="'%i + b'x'*4000 + b'";' for i in range(80)) + b'Group.add(A);')
         parts[0] = build_packet(source, parts[0]['receiptId'], STAMP)
         parts[1]['sourceSha256'] = digest(source)
         parts[4]['packetSha256'] = digest(encode(parts[0]))
