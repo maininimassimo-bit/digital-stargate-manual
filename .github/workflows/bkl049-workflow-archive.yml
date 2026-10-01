@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'tools/pixinsight/workflow_archive/**'
+      - 'tools/scientific_registry/**'
       - 'schemas/bkl049-public-workflow*.schema.json'
       - 'docs/javascripts/bkl049-*.js'
       - 'docs/javascripts/scientific-data-engine.js'
@@ -17,6 +18,7 @@ on:
     branches: [main]
     paths:
       - 'tools/pixinsight/workflow_archive/**'
+      - 'tools/scientific_registry/**'
       - 'schemas/bkl049-public-workflow*.schema.json'
       - 'docs/javascripts/bkl049-*.js'
       - 'docs/javascripts/scientific-data-engine.js'
@@ -67,3 +69,6 @@ jobs:
 
       - name: F5 public collection and Scientific Data Engine boundary
         run: node .github/scripts/test-bkl049-gallery.cjs
+
+      - name: Private registration draft journal (synthetic only)
+        run: python -m unittest tools.scientific_registry.test_draft_journal -v
