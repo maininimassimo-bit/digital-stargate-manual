@@ -1,5 +1,22 @@
 # Decision Log
 
+## 2026-10-02 — Owner approves guided session photo and workflow ingestion
+
+The Owner approved the complete guided upload proposal and clarified that the
+initial manual procedure is reserved to the Owner. The successor implementation
+links multiple already-imported sessions, retains originals and workflow exports
+privately, provides review/private-save/publication/version/withdrawal actions,
+and removes the M31/M42/NGC7000 examples from the visible gallery at the Owner's
+explicit request. Association to the analytics catalogue is Owner-declared; it
+does not silently grant AP-014 registry admission or scientific quality. Legacy
+F2 contract/dry-run and BKL-049 exact publication profiles remain unchanged.
+The independent runtime/resource proposal is
+`infrastructure/scientific-photo-ingestion/deployment-plan.json`; new paid cloud
+resources and live deployment need an exact Owner decision under DSG-AEM-001
+section 5. No old one-JPEG IAM/budget grant is broadened by inference. Source/UI
+delivery is governed separately from runtime acceptance. BKL-043 is untouched.
+
+
 ## 2026-10-02 — Owner removes automatic gallery expiry
 
 The Owner explicitly requested removal of the expiry after clarification of its effect. The same approved real BKL-049 image/version/workflow and public fields now remain visible until explicit withdrawal. A new source-bound private selection V3 and public collection V2 represent null expiry; old timed approvals and collections keep their historical rules. No new public content, cloud grant, image processing or scientific-quality promotion is authorized. Exact current authority, revision and selection checks remain enforced. This supersedes the 24-hour display condition in the earlier release/closure entries, while preserving their evidence.

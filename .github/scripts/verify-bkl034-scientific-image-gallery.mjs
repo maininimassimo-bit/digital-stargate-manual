@@ -34,7 +34,9 @@ assert(fixture.items.some((item) => item.state === 'observed' && item.freshness 
 assert(fixture.items.some((item) => item.state === 'stale' && item.freshness === 'stale'), 'stale image state missing');
 assert(fixture.items.some((item) => item.state === 'unknown' && item.freshness === 'unknown'), 'unknown image state missing');
 for (const forbidden of ['image mutation', 'processing execution', 'command path', 'remediation', 'scheduler decisionale', 'Safety Authority']) assert(contract.includes(forbidden), `boundary marker missing: ${forbidden}`);
-for (const marker of ['data-bkl034-gallery', 'data-gallery-search', 'data-gallery-state', 'data-gallery-grid', 'read-only']) assert(page.includes(marker), `portal page marker missing: ${marker}`);
+// Retained fixture remains a contract regression; it is no longer a production gallery source.
+for (const marker of ['data-session-photo-gallery', 'data-gallery-search', 'data-gallery-grid', 'data-bkl049-workflows']) assert(page.includes(marker), `portal page marker missing: ${marker}`);
+assert(!page.includes('bkl034-scientific-image-gallery-fixture.json'), 'sample fixtures must not appear as real published images');
 for (const marker of ['failClosed', 'commandAuthority', 'safetyAuthority', 'stale', 'unknown']) assert(script.includes(marker), `portal consumer boundary missing: ${marker}`);
 for (const file of [fixturePath, schemaPath, contractPath, pagePath, scriptPath, stylePath]) { assert(!path.isAbsolute(file) && !file.includes('..'), `unsafe repository path: ${file}`); await access(file); }
 console.log(`BKL-034 scientific image gallery portal PASS: items=${fixture.items.length}; sessions=${sessions.size}; targets=${targets.size}; authority=projection; command=NONE; safety=NONE; portal=bounded-read-only`);

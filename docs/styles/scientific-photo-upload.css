@@ -1,0 +1,16 @@
+.dsg-photo-upload { max-width: 58rem; margin: auto; }
+.dsg-photo-upload fieldset { border: 1px solid var(--md-default-fg-color--lighter); border-radius: .7rem; padding: 1.2rem; }
+.dsg-photo-upload label { display: block; margin: .8rem 0; }
+.dsg-photo-upload input:not([type=checkbox]), .dsg-photo-upload select { display: block; width: 100%; padding: .55rem; border: 1px solid var(--md-default-fg-color--lighter); background: var(--md-default-bg-color); color: var(--md-default-fg-color); border-radius: .3rem; }
+.dsg-photo-upload input[type=file] { overflow: hidden; }
+.dsg-photo-upload button { padding: .65rem 1rem; border: 1px solid var(--md-default-fg-color--light); border-radius: .4rem; margin: .4rem .4rem .4rem 0; cursor: pointer; }
+.dsg-photo-upload button:disabled { opacity: .55; cursor: default; }
+.dsg-photo-upload :focus-visible { outline: 3px solid var(--md-accent-fg-color); outline-offset: 3px; }
+.dsg-photo-upload__check { display: flex !important; gap: .5rem; align-items: flex-start; }
+.dsg-photo-upload progress { width: 100%; }
+.dsg-photo-upload [data-photo-review-image] { max-width: 100%; max-height: 32rem; object-fit: contain; }
+.dsg-photo-upload [data-photo-steps] details { border-bottom: 1px solid var(--md-default-fg-color--lighter); padding: .7rem 0; }
+.dsg-photo-upload pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.dsg-photo-upload [data-photo-archive] article { padding: .8rem; margin: .6rem 0; border: 1px solid var(--md-default-fg-color--lighter); }
+.dsg-photo-upload [data-photo-public-review] { border: 1px solid var(--md-default-fg-color--lighter); padding: .8rem; margin: 1rem 0; }
+.dsg-photo-upload [hidden] { display: none !important; }

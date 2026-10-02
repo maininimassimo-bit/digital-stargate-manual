@@ -9,6 +9,15 @@
 
 ## 1. Scopo
 
+Owner-approved successor (02/10/2026): BKL-034 session photo ingestion implements
+the guided Owner-only portal procedure, separate from the closed F2 dry-run.
+Source/UI delivery is in progress; runtime activation is awaiting the exact
+paid-resource decision and live authentication/storage/security/recovery OAT.
+Implementation and deployment boundary:
+`infrastructure/scientific-photo-ingestion/README.md`. This does not reopen old
+scientific acceptance, grant AP-014 admission or change BKL-043 sequencing.
+
+
 Raccogliere il lavoro pianificato del progetto senza sostituire `AMP-002`, i singoli Architecture Package o il sistema di issue tracking. Questo backlog ordina le attività per priorità, dipendenze e milestone.
 
 ## 2. Regole
