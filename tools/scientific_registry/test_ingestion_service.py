@@ -159,6 +159,10 @@ class ServiceTests(unittest.TestCase):
         new_catalog = self.catalog.replace(b'M31', b'M42')
         self.service.catalog_loader = lambda: new_catalog
         self.assertEqual(self.service.create(old_request, self.owner)["id"], uid)
+        saved = self.service.status(uid, self.owner)
+        self.assertEqual(saved["request"], old_request)
+        self.assertEqual(saved["frozenSessionContext"][0]["target"], "M31")
+        self.assertEqual([s["sessionId"] for s in saved["frozenSessionContext"]], old_request["sessionIds"])
         self.request["idempotencyKey"] = "synthetic-new-key"
         with self.assertRaisesRegex(IngestionError, "CATALOG_CHANGED_REFRESH"):
             self.service.create(self.request, self.owner)

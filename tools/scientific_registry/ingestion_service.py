@@ -145,6 +145,12 @@ class IngestionService:
 
     def status(self, upload_id, actor):
         item = deepcopy(self._upload(upload_id, actor))
+        catalog_raw, _ = self.store.get("catalogs/" + item["catalogSha256"])
+        if catalog_raw is None or sha256(catalog_raw) != item["catalogSha256"]:
+            raise IngestionError("CATALOG_ANCHOR_MISMATCH")
+        source = {s["sessionId"]: s for s in json.loads(catalog_raw)["sessions"]}
+        item["frozenSessionContext"] = [{"sessionId": sid, "target": source[sid]["target"],
+            "observationDate": source[sid].get("observationDate")} for sid in item["request"]["sessionIds"]]
         item["received"] = {}
         for role, descriptor in item["request"]["files"].items():
             item["received"][role] = [i for i in range(math.ceil(descriptor["byteSize"] / CHUNK_BYTES))
@@ -243,7 +249,7 @@ class IngestionService:
             parameters = []
             for name, value in step["parameters"]["bkl049LexicalV1"]["exportParameters"].items():
                 lexical = encode(value)
-                if len(lexical) > 4096 or len(lexical) + len(name) + 128 > remaining:
+                if len(parameters) >= 128 or len(lexical) > 4096 or len(lexical) + len(name) + 128 > remaining:
                     omitted += 1
                     continue
                 remaining -= len(lexical) + len(name) + 128

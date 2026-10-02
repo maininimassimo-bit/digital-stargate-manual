@@ -11,7 +11,9 @@
     const sessionSource=new URL('data/scientific-session-catalog.json',api.base).href;
     const pendingKey='dsg-photo-upload-v1';
     const message=text=>{if(alive)status.textContent=text;};
-    const lock=value=>{busy=value;fields.disabled=value || !signedIn;q('save').disabled=value;q('new').disabled=value;q('recheck').disabled=value;q('publish').disabled=value || !review?.publicationEligible || !q('rights').checked;};
+    const lock=value=>{busy=value;fields.disabled=value || !signedIn;q('save').disabled=value;q('new').disabled=value;q('recheck').disabled=value;q('publish').disabled=value || !review?.publicationEligible || !q('rights').checked;
+      for(const name of ['target','title','date','version','attest'])q(name).disabled=Boolean(frozenRequest);
+      sessionsBox.querySelectorAll('input').forEach(input=>{input.disabled=Boolean(frozenRequest);});};
     const run=async action=>{if(busy)return;lock(true);try{await action();}catch(error){message(error.message);}finally{if(alive)lock(false);}};
     const selection=()=>review.steps.filter(s=>host.querySelector(`[data-step="${s.stepId}"]`).checked).map(s=>({stepId:s.stepId,processId:s.processId,
       parameters:s.parameters.filter((_,i)=>host.querySelector(`[data-param="${s.stepId}-${i}"]`).checked).map(p=>({name:p.name,valueSha256:p.valueSha256}))}));
@@ -37,8 +39,7 @@
             selectedUpload=item.uploadId;
             if(item.state==='UPLOADING'){
               review=null;q('review').hidden=true;q('new').hidden=false;
-              const saved=await api.request(`/v1/uploads/${selectedUpload}`);frozenRequest=saved.request;sessionStorage.setItem(pendingKey,JSON.stringify({idempotencyKey:saved.request.idempotencyKey,uploadId:selectedUpload}));
-              target.value=item.target;renderSessions(saved.request.sessionIds);q('title').value=saved.request.title;q('date').value=saved.request.processingDate;q('version').value=saved.request.imageId || '';q('attest').checked=true;
+              await restoreUpload(selectedUpload);
               message('Riseleziona gli stessi tre file per riprendere. La ripresa conserva il catalogo e la selezione originali; per modificarli inizia un nuovo caricamento.');form.scrollIntoView();
             }else await showReview(item.uploadId);
           }));
@@ -49,11 +50,14 @@
         }
       }
       renderVersions();
+      let pending;try{pending=JSON.parse(sessionStorage.getItem(pendingKey));}catch{}
+      if(!review && !frozenRequest && archive.some(item=>item.uploadId===pending?.uploadId && item.state==='UPLOADING'))await restoreUpload(pending.uploadId);
     };
     const renderVersions=()=>{
-      const select=q('version'), old=select.value;select.replaceChildren();const fresh=el('option','Nuova immagine',select);fresh.value='';
+      const select=q('version'), old=frozenRequest?.imageId || select.value;select.replaceChildren();const fresh=el('option','Nuova immagine',select);fresh.value='';
       const seen=new Set();for(const item of archive){if(item.target!==target.value || !['SAVED_PRIVATE','PUBLISHED','WITHDRAWN'].includes(item.state) || seen.has(item.imageId))continue;seen.add(item.imageId);const option=el('option',`Nuova versione di ${item.title}`,select);option.value=item.imageId;}
       select.value=seen.has(old)?old:'';
+      if(frozenRequest?.imageId && !seen.has(old)){const option=el('option','Versione conservata',select);option.value=old;select.value=old;}
     };
     let sessions=[];
     const renderSessions=(selected=[])=>{
@@ -61,6 +65,21 @@
         const label=el('label',undefined,sessionsBox);label.className='dsg-photo-upload__check';const check=el('input',undefined,label);check.type='checkbox';check.value=session.sessionId;check.checked=selected.includes(session.sessionId);check.dataset.sessionChoice='';
         label.append(document.createTextNode(`${session.observationDate} · ${session.sessionId}`));
       }renderVersions();
+    };
+    const freezeUpload=saved=>{
+      frozenRequest=structuredClone(saved.request);selectedUpload=saved.id;
+      const oldTarget=saved.frozenSessionContext[0].target;
+      if(![...target.options].some(option=>option.value===oldTarget)){const option=el('option',`${oldTarget} · selezione conservata`,target);option.value=oldTarget;}
+      target.value=oldTarget;q('title').value=frozenRequest.title;q('date').value=frozenRequest.processingDate;q('attest').checked=frozenRequest.previewAttested;
+      sessionsBox.replaceChildren();for(const session of saved.frozenSessionContext){
+        const label=el('label',undefined,sessionsBox);label.className='dsg-photo-upload__check';const check=el('input',undefined,label);check.type='checkbox';check.value=session.sessionId;check.checked=true;check.dataset.sessionChoice='';
+        label.append(document.createTextNode(`${session.observationDate || 'Data non disponibile'} · ${session.sessionId} · selezione conservata`));
+      }
+      renderVersions();q('version').value=frozenRequest.imageId || '';q('new').hidden=false;
+      sessionStorage.setItem(pendingKey,JSON.stringify({idempotencyKey:frozenRequest.idempotencyKey,uploadId:saved.id}));lock(busy);
+    };
+    const restoreUpload=async uploadId=>{
+      freezeUpload(await api.request(`/v1/uploads/${uploadId}`));message('Caricamento conservato: riseleziona gli stessi tre file per riprendere. Per cambiare sessioni o metadati, inizia un nuovo caricamento.');
     };
     const showReview=async (uploadId,recheck=false)=>{
       selectedUpload=uploadId;review=await api.request(`/v1/uploads/${uploadId}/review`,{method:'POST',body:recheck?{recheck:true}:{}});
@@ -85,9 +104,11 @@
       publicReview();q('review').scrollIntoView({block:'start'});message('Verifica il contenuto, poi scegli come salvarlo.');
     };
     target.addEventListener('change',()=>renderSessions());q('rights').addEventListener('change',publicReview);
-    q('new').addEventListener('click',()=>{if(busy)return;sessionStorage.removeItem(pendingKey);selectedUpload=null;review=null;frozenRequest=null;q('review').hidden=true;q('new').hidden=true;form.reset();renderSessions();message('Nuovo caricamento.');});
+    q('new').addEventListener('click',()=>{if(busy)return;sessionStorage.removeItem(pendingKey);selectedUpload=null;review=null;frozenRequest=null;q('review').hidden=true;q('new').hidden=true;form.reset();renderSessions();lock(false);message('Nuovo caricamento.');});
     form.addEventListener('submit',event=>{event.preventDefault();run(async()=>{
-      const sessionIds=[...sessionsBox.querySelectorAll('input:checked')].map(node=>node.value);if(!sessionIds.length)throw new Error('Seleziona almeno una sessione.');
+      let pending;try{pending=JSON.parse(sessionStorage.getItem(pendingKey));}catch{}
+      if(pending?.uploadId && !frozenRequest)await restoreUpload(pending.uploadId);
+      const sessionIds=frozenRequest?.sessionIds || [...sessionsBox.querySelectorAll('input:checked')].map(node=>node.value);if(!sessionIds.length)throw new Error('Seleziona almeno una sessione.');
       const files={original:q('original').files[0],preview:q('preview').files[0],workflow:q('workflow').files[0]};
       const extension=file=>file.name.split('.').pop().toLowerCase(), descriptors={};
       for(const [role,file] of Object.entries(files)){
@@ -98,13 +119,14 @@
         message(`Verifica di integrità: ${role==='original'?'originale':role==='preview'?'anteprima':'workflow'}…`);
         descriptors[role]={byteSize:file.size,mediaType:types[extension(file)],sha256:await window.DSGPhotoFileHash.hashFile(file)};
       }
-      let pending;try{pending=JSON.parse(sessionStorage.getItem(pendingKey));}catch{}
       if(!pending){pending={idempotencyKey:crypto.randomUUID()};sessionStorage.setItem(pendingKey,JSON.stringify(pending));}
       q('new').hidden=false;
-      if(pending.uploadId && !frozenRequest)frozenRequest=(await api.request(`/v1/uploads/${pending.uploadId}`)).request;
-      const created=await api.request('/v1/uploads',{method:'POST',body:{idempotencyKey:pending.idempotencyKey,catalogSha256:frozenRequest?.catalogSha256 || catalogSha256,imageId:q('version').value||null,sessionIds,title:q('title').value,processingDate:q('date').value,files:descriptors,previewAttested:q('attest').checked}});
+      if(frozenRequest)for(const role of Object.keys(files))for(const key of ['byteSize','mediaType','sha256'])if(descriptors[role][key]!==frozenRequest.files[role][key])throw new Error('Questa ripresa richiede gli stessi tre file. Per caricare file diversi, inizia un nuovo caricamento.');
+      const request=frozenRequest || {idempotencyKey:pending.idempotencyKey,catalogSha256,imageId:q('version').value||null,sessionIds,title:q('title').value,processingDate:q('date').value,files:descriptors,previewAttested:q('attest').checked};
+      const created=await api.request('/v1/uploads',{method:'POST',body:request});
       sessionStorage.setItem(pendingKey,JSON.stringify({idempotencyKey:pending.idempotencyKey,uploadId:created.uploadId}));
       selectedUpload=created.uploadId;const saved=await api.request(`/v1/uploads/${selectedUpload}`);
+      if(saved.state==='UPLOADING')freezeUpload(saved);
       q('progress').hidden=false;
       if(saved.state==='UPLOADING'){
         const total=Object.values(files).reduce((sum,f)=>sum+f.size,0);let sent=0;
@@ -131,7 +153,7 @@
       if(!/^[A-Za-z0-9.-]+\.apps\.googleusercontent\.com$/.test(health.googleClientId))throw new Error('Accesso Google non configurato.');
       if(!window.google?.accounts?.id)await new Promise((resolve,reject)=>{const script=el('script');script.src='https://accounts.google.com/gsi/client';script.onload=resolve;script.onerror=reject;document.head.append(script);});
       if(!alive)return;
-      google.accounts.id.initialize({client_id:health.googleClientId,callback:response=>run(async()=>{api.setCredential(response.credential);await loadArchive();signedIn=true;message('Accesso eseguito. Seleziona le sessioni e i file.');})});
+      google.accounts.id.initialize({client_id:health.googleClientId,callback:response=>run(async()=>{api.setCredential(response.credential);await loadArchive();signedIn=true;message(frozenRequest?'Caricamento conservato: riseleziona gli stessi tre file per riprendere.':'Accesso eseguito. Seleziona le sessioni e i file.');})});
       google.accounts.id.renderButton(q('signin'),{theme:'outline',size:'large'});message('Accedi con il tuo account Google per caricare le immagini.');
     }catch(error){message(error.message);}
     const cleanup=()=>{if(!host.isConnected){alive=false;if(imageUrl)URL.revokeObjectURL(imageUrl);subscription?.unsubscribe();}};

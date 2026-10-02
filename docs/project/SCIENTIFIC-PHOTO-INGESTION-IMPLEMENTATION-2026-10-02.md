@@ -10,8 +10,11 @@ Local verification: 16 Python boundary/security/persistence tests PASS; strict
 MkDocs build PASS; browser regression PASS against the real HTTP adapter with
 synthetic authentication, antivirus and storage. Streaming SHA-256 agrees with
 Node crypto at padding and upload boundaries. Browser checks include private
-save, default parameter omission, publication, mobile overflow, hostile text and
-withdrawal. These tests do not establish cloud IAM, actual Google token OAT,
+save, default parameter omission, publication, mobile overflow, hostile text,
+withdrawal and exact resume after catalogue removal/reordering. Resume restores
+the entire pinned request and its original session labels, locks metadata until
+an explicit new upload, rejects changed reselected bytes and transfers only
+missing chunks. These tests do not establish cloud IAM, actual Google token OAT,
 real ClamAV definitions, production storage/recovery or actual scientific-file
 acceptance. CI and ARB/RQ exact-head review are pending at this source snapshot.
 

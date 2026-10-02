@@ -25,8 +25,15 @@ for(const length of [0,1,55,56,63,64,65,127,128,1000,4194305]){
     const page=await browser.newPage(),errors=[];page.on('pageerror',error=>errors.push(error.message));
     await page.route('**/*',route=>new URL(route.request().url()).origin===origin?route.continue():route.abort());
     await page.route('**/photo-ingestion-config.json',route=>route.fulfill({json:{schemaVersion:'1.0',serviceUrl:'https://photo-test.run.app',deploymentState:'SYNTHETIC_TEST'}}));
+    let interruptResume=false,interrupted=false;const chunkWrites=[],createRequests=[];
     await page.route('https://photo-test.run.app/**',async route=>{
       const request=route.request(),headers={...request.headers(),origin};delete headers.host;
+      const pathname=new URL(request.url()).pathname;
+      if(request.method()==='POST' && pathname==='/v1/uploads')createRequests.push(JSON.parse(request.postData()));
+      if(request.method()==='PUT'){
+        if(interruptResume && !interrupted && pathname.endsWith('/original/1')){interrupted=true;await route.abort();return;}
+        chunkWrites.push(pathname);
+      }
       const response=await fetch(local+new URL(request.url()).pathname,{method:request.method(),headers,body:['GET','HEAD'].includes(request.method())?undefined:request.postDataBuffer()});
       await route.fulfill({status:response.status,headers:Object.fromEntries(response.headers),body:Buffer.from(await response.arrayBuffer())});
     });
@@ -51,7 +58,7 @@ for(const length of [0,1,55,56,63,64,65,127,128,1000,4194305]){
     await page.goto(origin+'/scientific-image-gallery/');await page.locator('[data-session-photo-gallery] article').waitFor();
     assert.equal(await page.locator('[data-session-photo-gallery] article').count(),1);assert.equal(await page.locator('[data-session-photo-gallery] script').count(),0);
     assert.equal(await page.locator('[data-bkl034-gallery]').count(),0);
-    await page.clock.setFixedTime(Date.now()+2*86400000);await page.locator('[data-gallery-reset]').click();await page.locator('[data-session-photo-gallery] article').waitFor();
+    await page.evaluate(()=>{const RealDate=Date;window.Date=class extends RealDate{constructor(...args){super(...(args.length?args:[RealDate.now()+2*86400000]));}static now(){return RealDate.now()+2*86400000;}};});await page.locator('[data-gallery-reset]').click();await page.locator('[data-session-photo-gallery] article').waitFor();
     await page.evaluate(()=>document.body.setAttribute('data-md-color-scheme','slate'));
     if(process.env.DSG_TEST_OUTPUT)await page.screenshot({path:path.join(process.env.DSG_TEST_OUTPUT,'photo-ingestion-gallery-synthetic.png'),fullPage:true});
     await page.setViewportSize({width:390,height:844});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
@@ -59,7 +66,44 @@ for(const length of [0,1,55,56,63,64,65,127,128,1000,4194305]){
     assert.equal((await (await fetch(local+'/v1/gallery')).json()).records.length,0);
     assert.equal((await fetch(local+new URL(previewUrl).pathname)).status,400);
     await page.goto(origin+'/scientific-image-gallery/');await page.getByText('Nessuna immagine ancora pubblicata dalle sessioni importate.',{exact:true}).waitFor();
+    // A stopped multi-chunk upload must preserve its exact request across a
+    // reload even when the current catalogue removes/reorders the selection.
+    await page.goto(`${origin}/scientific-photo-upload/?sessionId=${encodeURIComponent(session.sessionId)}`);
+    await page.getByText('Synthetic owner login',{exact:true}).click();await page.waitForFunction(()=>!document.querySelector('[data-photo-fields]').disabled);
+    await page.locator('[data-photo-title]').fill('Frozen resume title');await page.locator('[data-photo-date]').fill('2026-10-01');
+    const original=Buffer.alloc(4194304+128,7);original.write('XISF0100');
+    const selectFiles=async bytes=>{
+      await page.locator('[data-photo-original]').setInputFiles({name:'resume.xisf',mimeType:'application/octet-stream',buffer:bytes});
+      await page.locator('[data-photo-preview]').setInputFiles({name:'resume.png',mimeType:'image/png',buffer:Buffer.from(fixture.preview,'base64')});
+      await page.locator('[data-photo-workflow]').setInputFiles({name:'resume.js',mimeType:'text/plain',buffer:Buffer.from('var P = new PixelMath; P.expression = "resume-private";')});
+    };
+    await selectFiles(original);await page.locator('[data-photo-attest]').check();interruptResume=true;
+    await page.getByRole('button',{name:'Carica e verifica',exact:true}).click();
+    try{await page.waitForFunction(()=>!document.querySelector('[data-photo-fields]').disabled && document.querySelector('[data-photo-progress]').value>0);}catch(error){throw Error(error.message+' resume status: '+await page.locator('[data-photo-status]').textContent()+' writes: '+JSON.stringify(chunkWrites)+' interrupted: '+interrupted);}
+    assert.equal(interrupted,true);const frozen=createRequests.at(-1);
+    const pending=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('dsg-photo-upload-v1')));
+    const changedCatalog={...catalog,sessions:catalog.sessions.filter(s=>s.sessionId!==session.sessionId).reverse()};
+    const changedRaw=Buffer.from(JSON.stringify(changedCatalog));
+    assert.equal((await fetch(local+'/synthetic/catalog',{method:'POST',body:changedRaw})).status,204);
+    await page.route('**/scientific-session-catalog.json',route=>route.fulfill({contentType:'application/json',body:changedRaw}));
+    await page.reload();await page.getByText('Synthetic owner login',{exact:true}).click();
+    await page.waitForFunction(()=>!document.querySelector('[data-photo-fields]').disabled);
+    assert.equal(await page.locator('[data-photo-title]').inputValue(),'Frozen resume title');assert.equal(await page.locator('[data-photo-title]').isDisabled(),true);
+    assert.equal(await page.locator('[data-photo-date]').inputValue(),'2026-10-01');
+    assert.equal(await page.locator('[data-photo-sessions] input:checked').inputValue(),session.sessionId);
+    assert.equal(await page.locator('[data-photo-sessions] input:checked').isDisabled(),true);
+    const modified=Buffer.from(original);modified[modified.length-1]^=1;await selectFiles(modified);
+    const beforeMismatch=createRequests.length;await page.getByRole('button',{name:'Carica e verifica',exact:true}).click();
+    await page.getByText('Questa ripresa richiede gli stessi tre file. Per caricare file diversi, inizia un nuovo caricamento.',{exact:true}).waitFor();
+    assert.equal(createRequests.length,beforeMismatch);
+    await selectFiles(original);await page.getByRole('button',{name:'Carica e verifica',exact:true}).click();
+    await page.locator('[data-photo-review]').waitFor({state:'visible'});await page.waitForFunction(()=>!document.querySelector('[data-photo-save]').disabled);
+    assert.deepEqual(createRequests.at(-1),frozen);
+    assert.equal(chunkWrites.filter(p=>p===`/v1/uploads/${pending.uploadId}/original/0`).length,1);
+    assert.equal(chunkWrites.filter(p=>p===`/v1/uploads/${pending.uploadId}/original/1`).length,1);
+    assert.ok((await page.locator('[data-photo-summary]').textContent()).includes(session.sessionId));
+    await page.locator('[data-photo-save]').click();await page.getByText('Immagine e workflow salvati privatamente.',{exact:true}).waitFor();
     const nojs=await browser.newContext({javaScriptEnabled:false});const staticPage=await nojs.newPage();await staticPage.goto(origin+'/scientific-photo-upload/');assert.equal(await staticPage.getByRole('button',{name:'Carica e verifica',exact:true}).isDisabled(),true);await nojs.close();
-    assert.deepEqual(errors,[]);console.log('Photo ingestion PASS: SHA256, owner/origin gates, real synthetic HTTP upload, private save, minimization, publication, mobile, XSS, withdrawal.');
+    assert.deepEqual(errors,[]);console.log('Photo ingestion PASS: SHA256, owner/origin gates, real synthetic HTTP upload, frozen resume after catalogue removal/reorder, file mismatch rejection, private save, minimization, publication, mobile, XSS, withdrawal.');
   }finally{await browser?.close();child?.kill();if(server)await new Promise(resolve=>server.close(resolve));}
 })().catch(error=>{console.error(error);process.exitCode=1;});
