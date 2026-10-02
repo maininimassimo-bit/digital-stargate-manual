@@ -1,6 +1,6 @@
-# BKL-049 bounded local workflow import — F2
+# BKL-049 bounded workflow archive
 
-Repository implementation, not a PixInsight plugin or released gallery integration. Uses Python standard library only. Never executes JavaScript or PixelMath, opens embedded paths, modifies scientific images, registers catalog assets or publishes packets. No native/vendor code is included.
+Bounded repository implementation with a separately approved external gallery release; not a PixInsight plugin. Uses Python standard library only. Never executes JavaScript or PixelMath, opens embedded paths, modifies scientific images, registers catalog assets or publishes packets. No native/vendor code is included.
 
 ## Explicit invocation
 
@@ -57,3 +57,8 @@ Importer 1.1 supports decoded parameter strings through 16,384 characters; all o
 `public_projection.build_public_projection` reverifies the private delivery using current external anchors, then constructs only explicitly approved source-bound fields. It requires a separately governed current selection record. It never creates approvals, copies arbitrary notes, accepts preview URLs or publishes files. The additive schema is `schemas/bkl049-public-workflow.schema.json`; the implementation scope and remaining gallery gates are in `docs/architecture/assessments/BKL-049-F5-Public-Projection-Builder.md`.
 
 Run synthetic negatives with `python -m unittest tools.pixinsight.workflow_archive.test_public_projection -v`. No real image/catalog acceptance or cloud authorization is established by these tests. Future consumers must use text rendering and enforce collection-level identity uniqueness and withdrawal; this single-record producer does not implement those boundaries.
+
+
+## Current external release and operator runbook
+
+BKL-049 is accepted for the revised available-history scope, with real exact gallery association verified. External registration uses `tools/scientific_registry/external_registry.py`, retained handoff uses `external_delivery.py`, and explicit public selection/local publication uses `external_public.py`. These remain separate authority stages; the earlier F2/F3/V1 descriptions above do not authorize bypassing them. See `docs/project/BKL-049-CLOSURE-2026-10-02.md` for compatibility, actual OAT, supported retention, per-release consent, expiry and rollback. No automatic upload, renewal or processing is installed.

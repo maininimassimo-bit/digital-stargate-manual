@@ -5,10 +5,30 @@
   "generated_at_utc": "2026-09-22T08:45:00Z",
   "entities": [
     {
+      "id": "BKL-049",
+      "type": "backlog_item",
+      "title": "PixInsight Workflow Archive and Gallery Linkage",
+      "status": "completed",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/project/BACKLOG.md"
+      }
+    },
+    {
+      "id": "BKL-049-CLOSURE-2026-10-02",
+      "type": "evidence",
+      "title": "Available workflow archive and exact real gallery linkage closure",
+      "status": "accepted",
+      "authority": "repository_authority",
+      "source_locator": {
+        "path": "docs/project/BKL-049-CLOSURE-2026-10-02.md"
+      }
+    },
+    {
       "id": "ADR-019",
       "type": "adr",
       "title": "External Retrospective Scientific Records",
-      "status": "Owner-approved profile; private real record admitted; public activation pending",
+      "status": "Owner-approved profile; real record admitted and exact public release verified; bounded BKL-049 closure",
       "authority": "repository_authority",
       "source_locator": {
         "path": "docs/architecture/ADR-019-External-Retrospective-Scientific-Records.md"
@@ -996,6 +1016,16 @@
     }
   ],
   "relations": [
+    {
+      "id": "rel:BKL-049:evidenced_by:BKL-049-CLOSURE-2026-10-02",
+      "type": "evidenced_by",
+      "from": "BKL-049",
+      "to": "BKL-049-CLOSURE-2026-10-02",
+      "version": "1.0",
+      "source_locator": {
+        "path": "docs/project/BKL-049-CLOSURE-2026-10-02.md"
+      }
+    },
     {
       "id": "rel:ADR-019:documents:AP-013",
       "type": "documents",
