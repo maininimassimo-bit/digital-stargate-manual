@@ -242,6 +242,7 @@ class IngestionService:
         return {key: review[key] for key in ("title", "target", "processingDate", "sessionContext", "original", "preview",
                 "sanitizedPreview", "securityScans", "publicationEligible", "gaps")} | {
                 "steps": steps, "unlistedParameterCount": omitted,
+                "publishedFields": deepcopy(item["publication"]),
                 "reviewSha256": item["reviewSha256"], "imageId": item["imageId"],
                 "imageVersionId": "VER-" + upload_id[:32], "workflowId": "WF-" + upload_id[:32],
                 "workflowState": review["workflow"]["extractionState"], "state": item["state"]}

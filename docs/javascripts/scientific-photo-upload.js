@@ -11,13 +11,13 @@
     const sessionSource=new URL('data/scientific-session-catalog.json',api.base).href;
     const pendingKey='dsg-photo-upload-v1';
     const message=text=>{if(alive)status.textContent=text;};
-    const lock=value=>{busy=value;fields.disabled=value || !signedIn;q('save').disabled=value;q('publish').disabled=value || !review?.publicationEligible || !q('rights').checked;};
+    const lock=value=>{busy=value;fields.disabled=value || !signedIn;q('save').disabled=value;q('new').disabled=value;q('recheck').disabled=value;q('publish').disabled=value || !review?.publicationEligible || !q('rights').checked;};
     const run=async action=>{if(busy)return;lock(true);try{await action();}catch(error){message(error.message);}finally{if(alive)lock(false);}};
     const selection=()=>review.steps.filter(s=>host.querySelector(`[data-step="${s.stepId}"]`).checked).map(s=>({stepId:s.stepId,processId:s.processId,
       parameters:s.parameters.filter((_,i)=>host.querySelector(`[data-param="${s.stepId}-${i}"]`).checked).map(p=>({name:p.name,valueSha256:p.valueSha256}))}));
     const publicReview=()=>{
       if(!review)return;
-      const box=q('public-review');box.replaceChildren();el('h3','Contenuto che sarà pubblico',box);
+      const box=q('public-review');box.replaceChildren();el('h3',review.state==='PUBLISHED'?'Pubblicazione corrente':'Contenuto che sarà pubblico',box);
       el('p',`${review.title} · ${review.target} · elaborazione ${review.processingDate}`,box);
       el('p',`Sessioni: ${review.sessionContext.sessions.map(s=>s.sessionId).join(', ')}`,box);
       const steps=selection();el('p',`${steps.length} processi selezionati. Storia ${steps.length?'parziale':'non disponibile'}. Esecuzione non verificata.`,box);
@@ -36,6 +36,7 @@
           open.addEventListener('click',()=>run(async()=>{
             selectedUpload=item.uploadId;
             if(item.state==='UPLOADING'){
+              review=null;q('review').hidden=true;q('new').hidden=false;
               const saved=await api.request(`/v1/uploads/${selectedUpload}`);sessionStorage.setItem(pendingKey,JSON.stringify({idempotencyKey:saved.request.idempotencyKey}));
               target.value=item.target;renderSessions(saved.request.sessionIds);q('title').value=saved.request.title;q('date').value=saved.request.processingDate;q('version').value=saved.request.imageId || '';q('attest').checked=true;
               message('Riseleziona gli stessi tre file e premi Carica e verifica per riprendere.');form.scrollIntoView();
@@ -73,9 +74,10 @@
       if(review.sanitizedPreview){imageUrl=URL.createObjectURL(await api.request(`/v1/uploads/${uploadId}/preview`,{binary:true}));q('review-image').src=imageUrl;q('review-image').hidden=false;}
       for(const step of review.steps){
         const details=el('details',undefined,q('steps')), summary=el('summary',undefined,details), label=el('label',undefined,summary);
-        const selected=el('input',undefined,label);selected.type='checkbox';selected.checked=true;selected.dataset.step=step.stepId;label.append(document.createTextNode(` ${step.ordinal}. ${step.processId}`));selected.addEventListener('change',publicReview);
+        const published=review.publishedFields?.steps.find(s=>s.sourceOrdinal===step.ordinal && s.processId===step.processId);
+        const selected=el('input',undefined,label);selected.type='checkbox';selected.checked=review.state==='PUBLISHED'?Boolean(published):true;selected.disabled=review.state==='PUBLISHED';selected.dataset.step=step.stepId;label.append(document.createTextNode(` ${step.ordinal}. ${step.processId}`));selected.addEventListener('change',publicReview);
         for(const [i,param] of step.parameters.entries()){
-          const label=el('label',undefined,details);label.className='dsg-photo-upload__check';const check=el('input',undefined,label);check.type='checkbox';check.dataset.param=`${step.stepId}-${i}`;label.append(document.createTextNode(`Pubblica ${param.name}`));el('pre',param.lexicalJson,details);check.addEventListener('change',publicReview);
+          const label=el('label',undefined,details);label.className='dsg-photo-upload__check';const check=el('input',undefined,label);check.type='checkbox';check.checked=Boolean(published?.parameters.some(p=>p.name===param.name));check.disabled=review.state==='PUBLISHED';check.dataset.param=`${step.stepId}-${i}`;label.append(document.createTextNode(`Pubblica ${param.name}`));el('pre',param.lexicalJson,details);check.addEventListener('change',publicReview);
         }
       }
       if(!review.steps.length)el('p','Passaggi non disponibili. La fonte originale del workflow è conservata privatamente.',q('steps'));
@@ -83,7 +85,7 @@
       publicReview();q('review').scrollIntoView({block:'start'});message('Verifica il contenuto, poi scegli come salvarlo.');
     };
     target.addEventListener('change',()=>renderSessions());q('rights').addEventListener('change',publicReview);
-    q('new').addEventListener('click',()=>{sessionStorage.removeItem(pendingKey);selectedUpload=null;review=null;q('review').hidden=true;q('new').hidden=true;form.reset();renderSessions();message('Nuovo caricamento.');});
+    q('new').addEventListener('click',()=>{if(busy)return;sessionStorage.removeItem(pendingKey);selectedUpload=null;review=null;q('review').hidden=true;q('new').hidden=true;form.reset();renderSessions();message('Nuovo caricamento.');});
     form.addEventListener('submit',event=>{event.preventDefault();run(async()=>{
       const sessionIds=[...sessionsBox.querySelectorAll('input:checked')].map(node=>node.value);if(!sessionIds.length)throw new Error('Seleziona almeno una sessione.');
       const files={original:q('original').files[0],preview:q('preview').files[0],workflow:q('workflow').files[0]};
@@ -98,6 +100,7 @@
       }
       let pending;try{pending=JSON.parse(sessionStorage.getItem(pendingKey));}catch{}
       if(!pending){pending={idempotencyKey:crypto.randomUUID()};sessionStorage.setItem(pendingKey,JSON.stringify(pending));}
+      q('new').hidden=false;
       const created=await api.request('/v1/uploads',{method:'POST',body:{...pending,imageId:q('version').value||null,sessionIds,title:q('title').value,processingDate:q('date').value,files:descriptors,previewAttested:q('attest').checked}});
       selectedUpload=created.uploadId;const saved=await api.request(`/v1/uploads/${selectedUpload}`);
       q('progress').hidden=false;

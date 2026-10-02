@@ -153,6 +153,17 @@ class ServiceTests(unittest.TestCase):
         with self.assertRaises(IngestionError):
             self.service.commit(uid, old, self.owner)
 
+    def test_exact_selected_parameter_stays_selected_in_readonly_published_review(self):
+        uid = self.uploaded()
+        review = self.service.review_summary(uid, self.owner)
+        selection = self.selection(uid)
+        parameter = next(p for p in review["steps"][0]["parameters"] if p["name"] == "n")
+        selection["steps"][0]["parameters"] = [{"name": parameter["name"], "valueSha256": parameter["valueSha256"]}]
+        self.service.commit(uid, selection, self.owner)
+        current = self.service.review_summary(uid, self.owner)
+        self.assertEqual(current["publishedFields"]["steps"][0]["parameters"], [{"name": "n", "lexicalJson": parameter["lexicalJson"]}])
+        self.assertNotIn("private-path", json.dumps(current["publishedFields"]))
+
     def test_separate_backup_failure_prevents_primary_write_and_replay(self):
         from .ingestion_storage import BackedUpStore
         backup = MemoryStore()

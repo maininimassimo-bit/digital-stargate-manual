@@ -38,7 +38,7 @@ for(const length of [0,1,55,56,63,64,65,127,128,1000,4194305]){
     await page.locator('[data-photo-original]').setInputFiles({name:'synthetic.xisf',mimeType:'application/octet-stream',buffer:Buffer.from('XISF0100synthetic original')});
     await page.locator('[data-photo-preview]').setInputFiles({name:'synthetic.png',mimeType:'image/png',buffer:Buffer.from(fixture.preview,'base64')});
     await page.locator('[data-photo-workflow]').setInputFiles({name:'synthetic.js',mimeType:'text/plain',buffer:Buffer.from('var P = new PixelMath; P.expression = "private-path"; P.n = 0.25;')});
-    await page.locator('[data-photo-attest]').check();await page.getByRole('button',{name:'Carica e verifica',exact:true}).click();
+    await page.locator('[data-photo-attest]').check();await page.getByRole('button',{name:'Carica e verifica',exact:true}).focus();await page.keyboard.press('Enter');
     await page.locator('[data-photo-review]').waitFor({state:'visible'});await page.waitForFunction(()=>!document.querySelector('[data-photo-save]').disabled);
     assert.equal(await page.locator('[data-photo-steps] input[data-param]:checked').count(),0);
     assert.equal(await page.locator('[data-photo-review-image]').evaluate(image=>image.complete&&image.naturalWidth>0),true);
@@ -50,11 +50,15 @@ for(const length of [0,1,55,56,63,64,65,127,128,1000,4194305]){
     await page.goto(origin+'/scientific-image-gallery/');await page.locator('[data-session-photo-gallery] article').waitFor();
     assert.equal(await page.locator('[data-session-photo-gallery] article').count(),1);assert.equal(await page.locator('[data-session-photo-gallery] script').count(),0);
     assert.equal(await page.locator('[data-bkl034-gallery]').count(),0);
+    await page.clock.setFixedTime(Date.now()+2*86400000);await page.locator('[data-gallery-reset]').click();await page.locator('[data-session-photo-gallery] article').waitFor();
+    await page.evaluate(()=>document.body.setAttribute('data-md-color-scheme','slate'));
+    if(process.env.DSG_TEST_OUTPUT)await page.screenshot({path:path.join(process.env.DSG_TEST_OUTPUT,'photo-ingestion-gallery-synthetic.png'),fullPage:true});
     await page.setViewportSize({width:390,height:844});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
     await page.goto(origin+'/scientific-photo-upload/');await page.getByText('Synthetic owner login',{exact:true}).click();await page.getByRole('button',{name:'Ritira pubblicazione',exact:true}).click();await page.getByText('Pubblicazione ritirata. I file privati restano conservati.',{exact:true}).waitFor();
     assert.equal((await (await fetch(local+'/v1/gallery')).json()).records.length,0);
     assert.equal((await fetch(local+new URL(previewUrl).pathname)).status,400);
     await page.goto(origin+'/scientific-image-gallery/');await page.getByText('Nessuna immagine ancora pubblicata dalle sessioni importate.',{exact:true}).waitFor();
+    const nojs=await browser.newContext({javaScriptEnabled:false});const staticPage=await nojs.newPage();await staticPage.goto(origin+'/scientific-photo-upload/');assert.equal(await staticPage.locator('[data-photo-fields]').isDisabled(),true);await nojs.close();
     assert.deepEqual(errors,[]);console.log('Photo ingestion PASS: SHA256, owner/origin gates, real synthetic HTTP upload, private save, minimization, publication, mobile, XSS, withdrawal.');
   }finally{await browser?.close();child?.kill();if(server)await new Promise(resolve=>server.close(resolve));}
 })().catch(error=>{console.error(error);process.exitCode=1;});
