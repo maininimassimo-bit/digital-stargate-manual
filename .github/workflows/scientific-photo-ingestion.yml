@@ -1,0 +1,54 @@
+name: Scientific photo ingestion portal
+on:
+  pull_request:
+    paths:
+      - 'tools/scientific_registry/**'
+      - 'infrastructure/scientific-photo-ingestion/**'
+      - 'docs/javascripts/scientific-photo-*.js'
+      - 'docs/javascripts/photo-file-hash.js'
+      - 'docs/javascripts/scientific-data-engine.js'
+      - 'docs/scientific-photo-upload/**'
+      - 'docs/styles/scientific-photo-upload.css'
+      - 'docs/scientific-image-gallery/**'
+      - 'docs/scientific-session-detail/**'
+      - 'docs/data/photo-ingestion-config.json'
+      - '.github/scripts/*photo-ingestion*'
+      - '.github/workflows/scientific-photo-ingestion.yml'
+      - 'mkdocs.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tools/scientific_registry/**'
+      - 'infrastructure/scientific-photo-ingestion/**'
+      - 'docs/javascripts/scientific-photo-*.js'
+      - 'docs/javascripts/photo-file-hash.js'
+      - 'docs/javascripts/scientific-data-engine.js'
+      - 'docs/scientific-photo-upload/**'
+      - 'docs/styles/scientific-photo-upload.css'
+      - 'docs/scientific-image-gallery/**'
+      - 'docs/scientific-session-detail/**'
+      - 'docs/data/photo-ingestion-config.json'
+      - '.github/scripts/*photo-ingestion*'
+      - '.github/workflows/scientific-photo-ingestion.yml'
+      - 'mkdocs.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-http-synthetic-browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -r requirements.txt Pillow==12.3.0
+      - run: python -m mkdocs build --strict
+      - run: npm install --no-save --package-lock=false playwright@1.58.2
+      - run: npx playwright install --with-deps chromium
+      - run: node .github/scripts/test-photo-ingestion.cjs
+      - name: Build the non-root runtime candidate (no deployment)
+        run: docker build --file infrastructure/scientific-photo-ingestion/Dockerfile --tag scientific-photo-ingestion:review .

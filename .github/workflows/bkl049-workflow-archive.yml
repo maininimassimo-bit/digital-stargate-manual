@@ -14,6 +14,10 @@ on:
       - '.github/scripts/test-bkl049-binding-bridge.mjs'
       - 'docs/contracts/pixinsight-workflow-provenance.schema.json'
       - '.github/workflows/bkl049-workflow-archive.yml'
+      - 'infrastructure/scientific-photo-ingestion/**'
+      - 'docs/javascripts/scientific-photo-*.js'
+      - 'docs/javascripts/photo-file-hash.js'
+      - '.github/scripts/*photo-ingestion*'
   push:
     branches: [main]
     paths:
@@ -29,6 +33,10 @@ on:
       - '.github/scripts/test-bkl049-binding-bridge.mjs'
       - 'docs/contracts/pixinsight-workflow-provenance.schema.json'
       - '.github/workflows/bkl049-workflow-archive.yml'
+      - 'infrastructure/scientific-photo-ingestion/**'
+      - 'docs/javascripts/scientific-photo-*.js'
+      - 'docs/javascripts/photo-file-hash.js'
+      - '.github/scripts/*photo-ingestion*'
   workflow_dispatch:
 permissions:
   contents: read
@@ -87,3 +95,8 @@ jobs:
 
       - name: External approved projection and local publication boundaries (synthetic only)
         run: python -m unittest tools.pixinsight.workflow_archive.test_external_public -v
+
+      - name: Session photo ingestion, persistence, sanitization and publication gates
+        run: |
+          python -m pip install Pillow==12.3.0
+          python -m unittest tools.scientific_registry.test_photo_ingestion tools.scientific_registry.test_ingestion_service tools.scientific_registry.test_ingestion_security -v

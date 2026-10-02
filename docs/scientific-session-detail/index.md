@@ -13,6 +13,7 @@
         <select data-detail-session-selector aria-label="Seleziona sessione"></select>
       </label>
       <a href="../scientific-session-catalog/">← Torna al Catalogo</a>
+      <a href="../scientific-photo-upload/" data-session-photo-upload>Aggiungi foto e workflow</a>
       <a href="../scientific-platform/">Scientific Platform</a>
       <a href="../scientific-platform-intelligence/">Scientific Intelligence</a>
     </div>

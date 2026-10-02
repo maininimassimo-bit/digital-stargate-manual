@@ -300,9 +300,39 @@
     }
   };
 
+  const getSessionPhotoCollection = async () => {
+    const config = await window.DSGPhotoApi.config();
+    const url = config.serviceUrl + '/v1/gallery';
+    const controller = new AbortController(), timer = setTimeout(() => controller.abort(), 10000);
+    let reader;
+    try {
+      const response = await fetch(url, {signal:controller.signal,cache:'no-store',redirect:'error',credentials:'omit'});
+      if(!response.ok || response.url!==url || !response.body) throw new Error('PHOTO_GALLERY_UNAVAILABLE');
+      reader=response.body.getReader();const decoder=new TextDecoder('utf-8',{fatal:true});let raw='',bytes=0;
+      while(true){const item=await reader.read();if(item.done)break;bytes+=item.value.byteLength;if(bytes>2*1024*1024)throw new Error('PHOTO_GALLERY_LIMIT');raw+=decoder.decode(item.value,{stream:true});}
+      raw+=decoder.decode();const collection=JSON.parse(raw);
+      const closed=(value,keys)=>value && typeof value==='object' && !Array.isArray(value) && Object.keys(value).sort().join('|')===keys.sort().join('|');
+      const text=(value,max)=>typeof value==='string' && value.trim() && value.length<=max;
+      if(!closed(collection,['schemaVersion','kind','authority','actionAuthority','records']) || collection.schemaVersion!=='1.0' || collection.kind!=='DSG_SESSION_PHOTO_COLLECTION_V1' || collection.authority!=='projection' || collection.actionAuthority!=='NONE' || !Array.isArray(collection.records) || collection.records.length>64)throw new Error('PHOTO_GALLERY_PROFILE');
+      const versions=new Set();
+      for(const record of collection.records){
+        if(!closed(record,['schemaVersion','kind','imageId','imageVersionId','workflowId','title','target','sessionIds','processingDate','previewUrl','captureCompleteness','executionEvidence','associationEvidence','steps','omittedStepCount','validUntil']) || record.schemaVersion!=='1.0' || record.kind!=='DSG_SESSION_PHOTO_V1' || !/^IMG-[a-f0-9]{32}$/.test(record.imageId) || !/^VER-[a-f0-9]{32}$/.test(record.imageVersionId) || record.workflowId!=='WF-'+record.imageVersionId.slice(4) || versions.has(record.imageVersionId) || !text(record.title,160) || !text(record.target,160) || !/^\d{4}-\d{2}-\d{2}$/.test(record.processingDate) || record.validUntil!==null || record.executionEvidence!=='NOT_ESTABLISHED' || record.associationEvidence!=='OWNER_DECLARED' || !['PARTIAL','UNAVAILABLE'].includes(record.captureCompleteness) || !Array.isArray(record.sessionIds) || record.sessionIds.length<1 || record.sessionIds.length>32 || new Set(record.sessionIds).size!==record.sessionIds.length || !record.sessionIds.every(id=>text(id,160)) || !Array.isArray(record.steps) || record.steps.length>512 || !Number.isInteger(record.omittedStepCount) || record.omittedStepCount<0)throw new Error('PHOTO_RECORD_INVALID');
+        const preview=new URL(record.previewUrl);if(preview.origin!==config.serviceUrl || !/^\/v1\/previews\/[a-f0-9]{64}$/.test(preview.pathname) || preview.search || preview.hash || preview.username || preview.password || !preview.pathname.split('/').pop().startsWith(record.imageVersionId.slice(4)))throw new Error('PHOTO_PREVIEW_INVALID');
+        versions.add(record.imageVersionId);let previous=0;
+        for(const step of record.steps){
+          if(!closed(step,['sourceOrdinal','processId','evidenceClass','parameters','omittedParameterCount']) || !Number.isInteger(step.sourceOrdinal) || step.sourceOrdinal<=previous || !/^[A-Za-z_][A-Za-z0-9_]{0,127}$/.test(step.processId) || step.evidenceClass!=='DECLARED' || !Number.isInteger(step.omittedParameterCount) || step.omittedParameterCount<0 || !Array.isArray(step.parameters) || step.parameters.length>128)throw new Error('PHOTO_STEP_INVALID');
+          previous=step.sourceOrdinal;const names=new Set();for(const parameter of step.parameters){if(!closed(parameter,['name','lexicalJson']) || !/^[A-Za-z_][A-Za-z0-9_]{0,127}$/.test(parameter.name) || names.has(parameter.name) || !text(parameter.lexicalJson,4096))throw new Error('PHOTO_PARAMETER_INVALID');names.add(parameter.name);}
+        }
+        if((record.steps.length>0)!==(record.captureCompleteness==='PARTIAL'))throw new Error('PHOTO_COMPLETENESS_INVALID');
+      }
+      return collection;
+    } finally {clearTimeout(timer);if(reader){await reader.cancel().catch(()=>{});reader.releaseLock();}}
+  };
+
   window.DSGScientificDataEngine = Object.freeze({
     version: VERSION,
     getPublicWorkflowCollection,
+    getSessionPhotoCollection,
     loadCatalog,
     preload,
     getSessions,
