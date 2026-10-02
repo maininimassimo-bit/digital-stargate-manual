@@ -14,7 +14,10 @@
   ],
   "properties": {
     "schemaVersion": {
-      "const": "1.0"
+      "enum": [
+        "1.0",
+        "2.0"
+      ]
     },
     "kind": {
       "const": "BKL049_PUBLIC_COLLECTION"
@@ -54,5 +57,61 @@
       }
     }
   },
-  "description": "Runtime checks also enforce canonical bytes, unique image/version and workflow IDs, ordered unique steps, empty/null pairing and a current publication interval of at most 24 hours. Validation is not publication authority."
+  "description": "Runtime checks also enforce canonical bytes, unique exact identifiers and ordered steps. V1 nonempty releases require a current interval of at most 24 hours. V2 nonempty external releases require a nonfuture publication time and null validUntil, meaning until explicit withdrawal. Empty withdrawal remains V1/null times. Validation is not publication authority.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": {
+            "const": "2.0"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "publishedAt": {
+            "type": "string"
+          },
+          "validUntil": {
+            "type": "null"
+          },
+          "records": {
+            "minItems": 1,
+            "items": {
+              "$ref": "bkl049-public-workflow-external.schema.json"
+            }
+          }
+        }
+      },
+      "else": {
+        "if": {
+          "properties": {
+            "records": {
+              "maxItems": 0
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "publishedAt": {
+              "type": "null"
+            },
+            "validUntil": {
+              "type": "null"
+            }
+          }
+        },
+        "else": {
+          "properties": {
+            "publishedAt": {
+              "type": "string"
+            },
+            "validUntil": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  ]
 }

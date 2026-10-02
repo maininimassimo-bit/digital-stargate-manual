@@ -18,6 +18,15 @@ const current = () => {
 };
 const snapshot = contract.parseCollection(contract.canonical(current()));
 const externalCollection = {...current(), records:[externalWorkflow]};
+const persistent={...externalCollection,schemaVersion:'2.0',validUntil:null};
+const later=Date.parse(persistent.publishedAt)+366*86400000;
+assert.equal(contract.parseCollection(contract.canonical(persistent),later).records.length,1);
+assert.equal(contract.resolve(persistent,externalWorkflow.imageId,externalWorkflow.imageVersionId,externalWorkflow.workflowId,later).workflowId,externalWorkflow.workflowId);
+for(const change of [{schemaVersion:'1.0'},{validUntil:externalCollection.validUntil},
+  {records:[workflow]},{records:[]},{publishedAt:'2099-01-01T00:00:00Z'},
+  {records:[externalWorkflow,externalWorkflow]}]) {
+  assert.throws(()=>contract.parseCollection(contract.canonical({...persistent,...change})));
+}
 assert.equal(contract.parseCollection(contract.canonical(externalCollection)).records[0].scientificContext.qualityState, 'UNKNOWN');
 for (const mutate of [
   r => r.scientificContext.qualityState='ACCEPTED',
@@ -73,8 +82,10 @@ const committedShape=JSON.parse(committed);
 // A historical artifact must not make unrelated CI fail after its live window.
 const committedAt=committedShape.publishedAt ? Date.parse(committedShape.publishedAt) : Date.now();
 contract.parseCollection(committed,committedAt);
-if(committedShape.records.length) {
+if(committedShape.records.length && committedShape.validUntil !== null) {
   assert.throws(()=>contract.parseCollection(committed,Date.parse(committedShape.validUntil)));
+} else if(committedShape.records.length) {
+  assert.equal(contract.parseCollection(committed,committedAt+366*86400000).records.length,committedShape.records.length);
 }
 const empty=contract.canonical({schemaVersion:'1.0',kind:'BKL049_PUBLIC_COLLECTION',authority:'processing_evidence',
   actionAuthority:'NONE',publishedAt:null,validUntil:null,records:[]});

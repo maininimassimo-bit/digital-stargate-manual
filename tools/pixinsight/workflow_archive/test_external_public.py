@@ -43,6 +43,52 @@ def projection():
 
 
 class ExternalPublicTests(unittest.TestCase):
+    def test_until_withdrawal_requires_new_current_exact_approval(self):
+        bundle, selected, parts, events = fixture()
+        with self.assertRaises(ArchiveError):
+            build_external_collection([entry(bundle, selected)], published_at=NOW, valid_until=None, now=NOW)
+        selected['validUntil'] = None
+        with self.assertRaises(ArchiveError):
+            build_external_projection(**entry(bundle, selected), now=NOW)
+        selected['kind'] = 'BKL049_EXTERNAL_PUBLIC_SELECTION_V3'
+        future = '2027-10-01T11:00:00Z'
+        item = entry(bundle, selected)
+        value = build_external_collection([item], published_at=NOW, valid_until=None, now=future)
+        self.assertEqual(value['schemaVersion'], '2.0')
+        self.assertIsNone(value['validUntil'])
+        self.assertEqual(len(value['records']), 1)
+        for changed in ({**item, 'current_selection_digest':'0'*64},
+                        {**item, 'current_head':'0'*64}):
+            with self.assertRaises(ArchiveError):
+                build_external_collection([changed], published_at=NOW, valid_until=None, now=future)
+        events.append(encode(event_for(events, *parts[:2], 'WITHDRAW')))
+        with self.assertRaises(ArchiveError):
+            build_external_projection(**{**item, 'current_head':digest(events[-1])}, now=future)
+        with self.assertRaises(ArchiveError):
+            build_external_collection([item, item], published_at=NOW, valid_until=None, now=NOW)
+        with self.assertRaises(ArchiveError):
+            build_external_collection([item], published_at=NOW, valid_until=END, now=NOW)
+        selected['validUntil'] = END
+        with self.assertRaises(ArchiveError):
+            build_external_projection(**entry(bundle, selected), now=NOW)
+        selected['validUntil'] = None
+        with self.assertRaises(ArchiveError):
+            build_external_projection(**entry(bundle, selected), now='2026-10-01T10:59:59Z')
+
+    def test_persistent_local_publication_and_explicit_withdrawal(self):
+        bundle, selected, *_ = fixture()
+        selected.update(kind='BKL049_EXTERNAL_PUBLIC_SELECTION_V3', validUntil=None)
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / 'bkl049-public-workflows.json'
+            empty = encode(build_external_collection([], published_at=None, valid_until=None, now=NOW)) + b'\n'
+            target.write_bytes(empty)
+            result = publish_external_collection([entry(bundle, selected)], target,
+                expected_previous_digest=digest(empty), published_at=NOW, valid_until=None, now=NOW)
+            self.assertEqual(json.loads(target.read_bytes())['schemaVersion'], '2.0')
+            publish_external_collection([], target, expected_previous_digest=result['sha256'],
+                published_at=None, valid_until=None, now='2027-10-01T11:00:00Z')
+            self.assertEqual(target.read_bytes(), empty)
+
     def test_minimized_profile_and_no_private_identifiers(self):
         bundle, selected, *_ = fixture()
         result = build_external_projection(**entry(bundle, selected), now=NOW)

@@ -11,7 +11,7 @@
 
 ## Current acceptance — 2026-10-02
 
-The [closure record](../../project/BKL-049-CLOSURE-2026-10-02.md) supersedes the historical open-gate observations retained below. F0–F7 are accepted for the Owner-revised bounded archive and exact gallery-linkage scope after the real publication and browser OAT. Metadata and scientific quality are not promoted. Public display is time-bounded, local recovery remains same-volume, and automatic renewal/native capture are excluded.
+The [closure record](../../project/BKL-049-CLOSURE-2026-10-02.md) supersedes the historical open-gate observations retained below. F0–F7 are accepted for the Owner-revised bounded archive and exact gallery-linkage scope after the real publication and browser OAT. Metadata and scientific quality are not promoted. The Owner subsequently removed automatic gallery expiry; publication now lasts until explicit withdrawal. Local recovery remains same-volume and native capture remains excluded.
 
 ## 1. Current objective and supersession
 

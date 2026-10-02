@@ -1,5 +1,9 @@
 # Decision Log
 
+## 2026-10-02 — Owner removes automatic gallery expiry
+
+The Owner explicitly requested removal of the expiry after clarification of its effect. The same approved real BKL-049 image/version/workflow and public fields now remain visible until explicit withdrawal. A new source-bound private selection V3 and public collection V2 represent null expiry; old timed approvals and collections keep their historical rules. No new public content, cloud grant, image processing or scientific-quality promotion is authorized. Exact current authority, revision and selection checks remain enforced. This supersedes the 24-hour display condition in the earlier release/closure entries, while preserving their evidence.
+
 ## 2026-10-02 — BKL-049 bounded closure after real gallery OAT
 
 BKL-049 is CLOSED / ACCEPTED for the bounded available-history archive and exact gallery linkage. Separate real external registration/admission, retained delivery and local restore verified; Owner-approved JPEG and 21 DECLARED process names published through PR #471, with actual desktop/mobile/keyboard/exact-link OAT PASS. PARTIAL metadata, UNKNOWN quality and incomplete execution/history remain explicit. First gallery window ends 2026-10-03 12:04:35 UTC, without renewal; JPEG public until explicit withdrawal. Closure: docs/project/BKL-049-CLOSURE-2026-10-02.md. Same-volume recovery only; no native observer, processing or device authority. The [closure matrix](BKL-049-CLOSURE-2026-10-02.md) distinguishes actual private recovery, public release and browser evidence from synthetic failure tests. This technical acceptance follows the continuing delivery mandate and the separate Owner decisions; it grants no scientific-quality, future-upload, automatic renewal or operational-device authority.

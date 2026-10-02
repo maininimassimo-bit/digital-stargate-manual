@@ -90,7 +90,9 @@
         const method = element('a', 'Come leggere queste evidenze', article);
         method.href = new URL(record.methodCitation, base).href;
       }
-      expiry = setTimeout(unavailable, Math.max(0, Date.parse(collection.validUntil) - Date.now()));
+      if (collection.validUntil !== null) {
+        expiry = setTimeout(unavailable, Math.max(0, Date.parse(collection.validUntil) - Date.now()));
+      }
     };
     const load = async () => {
       const request = ++sequence;
