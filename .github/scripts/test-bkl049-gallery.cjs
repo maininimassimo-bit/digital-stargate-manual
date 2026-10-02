@@ -67,7 +67,17 @@ const raw=contract.canonical(current());
 assert.throws(()=>contract.parseCollection('{"kind":"duplicate",'+raw.slice(1)));
 assert.throws(()=>contract.parseCollection(raw+' garbage'));
 assert.throws(()=>contract.parseCollection(' '.repeat(contract.MAX_BYTES+1)));
-const empty=fs.readFileSync('docs/data/bkl049-public-workflows.json','utf8');
+const committed=fs.readFileSync('docs/data/bkl049-public-workflows.json','utf8');
+const committedShape=JSON.parse(committed);
+// Validate a retained release at its publication instant, then enforce expiry.
+// A historical artifact must not make unrelated CI fail after its live window.
+const committedAt=committedShape.publishedAt ? Date.parse(committedShape.publishedAt) : Date.now();
+contract.parseCollection(committed,committedAt);
+if(committedShape.records.length) {
+  assert.throws(()=>contract.parseCollection(committed,Date.parse(committedShape.validUntil)));
+}
+const empty=contract.canonical({schemaVersion:'1.0',kind:'BKL049_PUBLIC_COLLECTION',authority:'processing_evidence',
+  actionAuthority:'NONE',publishedAt:null,validUntil:null,records:[]});
 assert.equal(contract.parseCollection(empty).records.length,0);
 
 const source='https://example.test/manual/data/bkl049-public-workflows.json';
