@@ -73,6 +73,26 @@ class ServiceTests(unittest.TestCase):
         with self.assertRaises(IngestionError):
             self.service.commit(uid, selection, self.owner)
 
+    def test_long_spectrum_is_preserved_privately_and_step_remains_reviewable(self):
+        spectrum = "synthetic-spectrum-" * 4000
+        self.files["workflow"] = ('var P = new SpectrophotometricColorCalibration; '
+            'P.whiteReferenceSpectrum = "' + spectrum + '"; P.enabled = true;').encode()
+        self.request["files"]["workflow"].update(byteSize=len(self.files["workflow"]),
+            sha256=sha256(self.files["workflow"]))
+        uid = self.uploaded()
+        private = self.service.review(uid, self.owner)
+        self.assertEqual(private["workflow"]["importerVersion"], "1.2")
+        self.assertEqual(private["workflow"]["archive"]["instances"]["P"]["parameters"]["whiteReferenceSpectrum"], spectrum)
+        summary = self.service.review_summary(uid, self.owner)
+        self.assertEqual(summary["workflowState"], "PARSED_SUBSET")
+        self.assertEqual(len(summary["steps"]), 1)
+        self.assertEqual(summary["steps"][0]["processId"], "SpectrophotometricColorCalibration")
+        self.assertEqual([p["name"] for p in summary["steps"][0]["parameters"]], ["enabled"])
+        self.assertEqual(summary["unlistedParameterCount"], 1)
+        self.assertNotIn(spectrum, json.dumps(summary))
+        self.assertEqual(self.store.get("assets/" + sha256(self.files["workflow"]))[0], self.files["workflow"])
+        self.assertEqual(self.service.collection()["records"], [])
+
     def test_versions_and_restart_keep_previous_assets(self):
         uid = self.uploaded()
         self.service.commit(uid, self.selection(uid, False), self.owner)

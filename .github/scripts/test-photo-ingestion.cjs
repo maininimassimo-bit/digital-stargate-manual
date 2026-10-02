@@ -19,6 +19,7 @@ for(const length of [0,1,55,56,63,64,65,127,128,1000,4194305]){
     child=spawn(process.env.DSG_TEST_PYTHON || 'python',['.github/scripts/run-photo-ingestion-test-server.py'],{env:{...process.env,DSG_TEST_ORIGIN:origin},stdio:['ignore','pipe','pipe']});let stderr='';child.stderr.on('data',chunk=>stderr+=chunk);
     const fixture=await new Promise((resolve,reject)=>{let output='';const timer=setTimeout(()=>reject(Error('HTTP test server timed out: '+stderr)),15000);child.on('exit',code=>reject(Error('HTTP fixture exited '+code+stderr)));child.stdout.on('data',chunk=>{output+=chunk;if(output.includes('\n')){clearTimeout(timer);resolve(JSON.parse(output.split('\n')[0]));}});});
     const local=`http://127.0.0.1:${fixture.port}`;
+    assert.equal((await (await fetch(local+'/health')).json()).workflowImporterVersion,'1.2');
     const unauthenticated=await fetch(local+'/v1/uploads',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:'{}'});assert.equal(unauthenticated.status,403);
     const badOrigin=await fetch(local+'/v1/uploads',{method:'POST',headers:{Origin:'https://attacker.example',Authorization:'Bearer synthetic-owner-token','Content-Type':'application/json'},body:'{}'});assert.equal(badOrigin.status,403);
     browser=await chromium.launch({headless:true,...(process.env.DSG_BROWSER_CHANNEL?{channel:process.env.DSG_BROWSER_CHANNEL}:{})});

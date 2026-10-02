@@ -159,7 +159,7 @@ class ArchiveTests(unittest.TestCase):
         old_raw = encode(old)
         self.assertEqual(verify_packet(old_raw, digest(old_raw)), old)
         new = build_packet(source, 'BKL049-LONG-NEW', '2026-09-30T18:00:00Z')
-        self.assertEqual(new['importerVersion'], '1.1')
+        self.assertEqual(new['importerVersion'], '1.2')
         self.assertEqual(new['archive']['instances']['P']['parameters']['x'], 's'*9620)
         self.assertEqual(verify_packet(encode(new), digest(encode(new))), new)
         self.assertEqual(encode(old), old_raw)
@@ -171,6 +171,38 @@ class ArchiveTests(unittest.TestCase):
             self.assertEqual(caught.exception.code, 'STRING_LIMIT')
         accepted = parser.parse_export('var P=new Synthetic;P.x="'+'x'*16384+'";', profile='1.1')
         self.assertEqual(len(accepted['instances']['P']['parameters']['x']), 16384)
+
+    def test_profile_12_retains_large_spectrum_and_old_unsupported_packet(self):
+        spectrum = 's' * 70514
+        source = ('var P=new SpectrophotometricColorCalibration;'
+                  'P.whiteReferenceSpectrum="' + spectrum + '";').encode()
+        old = build_packet(source, 'BKL049-SPECTRUM-OLD', STAMP, importer_version='1.1')
+        self.assertEqual(old['extractionState'], 'UNSUPPORTED')
+        old_raw = encode(old)
+        self.assertEqual(verify_packet(old_raw, digest(old_raw)), old)
+        new = self.packet(source)
+        self.assertEqual(new['importerVersion'], '1.2')
+        self.assertEqual(new['archive']['instances']['P']['parameters']['whiteReferenceSpectrum'], spectrum)
+        self.assertEqual(verify_packet(encode(new), digest(encode(new))), new)
+        self.assertEqual(base64.b64decode(new['source']['originalBase64']), source)
+        self.assertEqual(encode(old), old_raw)
+
+    def test_profile_12_string_boundary_and_concatenation(self):
+        accepted = parser.parse_export('var P=new Synthetic;P.x="'+'x'*131072+'";', profile='1.2')
+        self.assertEqual(len(accepted['instances']['P']['parameters']['x']), 131072)
+        for literal in ('"'+'x'*131073+'"', '"'+'x'*70514+'"+"'+'y'*60559+'"'):
+            with self.subTest(concatenated='+' in literal), self.assertRaises(parser.Unsupported) as caught:
+                parser.parse_export('var P=new Synthetic;P.x='+literal+';', profile='1.2')
+            self.assertEqual(caught.exception.code, 'STRING_LIMIT')
+
+    def test_profile_12_does_not_enable_execution_or_remove_other_bounds(self):
+        for source, code in [
+            ('var P=new Synthetic;P.executeGlobal();', 'UNSUPPORTED_CALL'),
+            ('var P=new Synthetic;P.x=['+','.join(['0']*4097)+'];', 'ARRAY_LIMIT'),
+            ('var P=new Synthetic;P.x="\\ud800";', 'UNSUPPORTED_STRING_ESCAPE')]:
+            with self.subTest(code=code), self.assertRaises(parser.Unsupported) as caught:
+                parser.parse_export(source, profile='1.2')
+            self.assertEqual(caught.exception.code, code)
 
     def test_unknown_importer_profile_cannot_be_self_authenticated(self):
         for value in ('2.0', None, [], True):

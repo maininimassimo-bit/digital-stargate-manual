@@ -542,3 +542,8 @@ The Owner supplied the selected acquisition date (day precision) and subject lab
 ## 2026-10-01 — BKL-043 F4: riesame eseguibile accettato, lifecycle pendente
 
 L’Owner accetta il riesame conclusivo v2 e l’ultima prova GET autenticata estranea nel solo perimetro documentato, quindi richiede l’allineamento della roadmap. Le precedenti accettazioni reporter quattro esiti, cinque fixture integrate, task/heartbeat e cost-stop documentale restano valide; nessuna nuova esecuzione è autorizzata. Il [riepilogo tecnico minimizzato](BKL-043-F4-STATUS-2026-10-01.md) mantiene F4 OPEN per lifecycle realmente maturato e successiva accettazione finale complessiva; F5 resta Planned e subordinato a F4. Evidenze operative private, nessun account o payload pubblicato. Nessuna modifica al lavoro BKL-049.
+
+
+## 2026-10-02 — PixInsight portal importer 1.2
+
+The Owner requests adapting the portal to the complete available-history export. Adopt a versioned 131,072-character string bound for new imports, preserving old profile verification and all other bounds. Local private verification parses all 49 processes without truncating the spectral parameter. No real image or workflow is uploaded or published by the reader release. [Compatibility, synthetic evidence and governed runtime rollout](../architecture/assessments/BKL-049-Portal-Importer-1.2.md) retain manual scientific acceptance and the existing cloud authorization.

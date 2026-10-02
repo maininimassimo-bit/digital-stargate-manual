@@ -35,6 +35,21 @@ class PhotoIngestionTests(unittest.TestCase):
         args["original_raw"] += b"new version"
         self.assertNotEqual(first["draftKey"], build_review(**args)["draftKey"])
 
+    def test_large_spectrum_is_available_in_private_review_without_publication(self):
+        spectrum = 'synthetic' * 8000
+        args = self.args()
+        args['workflow_raw'] = ('var Root=new ProcessContainer;'
+            'var P=new SpectrophotometricColorCalibration;'
+            'P.whiteReferenceSpectrum="'+spectrum+'";Root.add(P);').encode()
+        review = build_review(**args)
+        packet = review['workflow']
+        self.assertEqual(packet['importerVersion'], '1.2')
+        self.assertEqual(packet['extractionState'], 'PARSED_SUBSET')
+        self.assertEqual(packet['archive']['instances']['P']['parameters']['whiteReferenceSpectrum'], spectrum)
+        self.assertFalse(review['publicationEligible'])
+        self.assertEqual(review['publicationState'], 'PRIVATE_NOT_APPROVED')
+        self.assertEqual(packet['executionEvidence'], 'NOT_ESTABLISHED')
+
     def test_conflicting_target_unknown_session_duplicates_and_tampering_reject(self):
         for changes in ({"session_ids": ["night1", "night3"]}, {"session_ids": ["absent"]},
                         {"session_ids": ["night1", "night1"]}, {"catalog_digest": "0" * 64},

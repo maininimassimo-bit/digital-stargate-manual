@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'tools/scientific_registry/**'
+      - 'tools/pixinsight/workflow_archive/**'
       - 'infrastructure/scientific-photo-ingestion/**'
       - 'docs/javascripts/scientific-photo-*.js'
       - 'docs/javascripts/photo-file-hash.js'
@@ -19,6 +20,7 @@ on:
     branches: [main]
     paths:
       - 'tools/scientific_registry/**'
+      - 'tools/pixinsight/workflow_archive/**'
       - 'infrastructure/scientific-photo-ingestion/**'
       - 'docs/javascripts/scientific-photo-*.js'
       - 'docs/javascripts/photo-file-hash.js'

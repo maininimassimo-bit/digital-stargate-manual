@@ -13,7 +13,7 @@ import tempfile
 from .export_parser import MAX_BYTES, Unsupported, parse_export, safe_summary
 
 VERSION = "1.0"
-IMPORTER_VERSION = "1.1"
+IMPORTER_VERSION = "1.2"
 MAX_PACKET_BYTES = 32 * 1024 * 1024
 
 
@@ -76,7 +76,7 @@ def read_regular(value, limit):
 
 
 def build_packet(raw, receipt_id, imported_at, *, importer_version=IMPORTER_VERSION):
-    if not isinstance(importer_version, str) or importer_version not in {"1.0", "1.1"}:
+    if not isinstance(importer_version, str) or importer_version not in {"1.0", "1.1", "1.2"}:
         raise ArchiveError("IMPORTER_VERSION_UNSUPPORTED")
     if not isinstance(raw, bytes) or len(raw) > MAX_BYTES:
         raise ArchiveError("SOURCE_SIZE_LIMIT")

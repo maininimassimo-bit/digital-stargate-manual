@@ -6,7 +6,7 @@ import re
 import urllib.request
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-from tools.pixinsight.workflow_archive.archive import ArchiveError
+from tools.pixinsight.workflow_archive.archive import ArchiveError, IMPORTER_VERSION
 from tools.scientific_registry.ingestion_service import IngestionService, CHUNK_BYTES, json_bytes
 from tools.scientific_registry.ingestion_storage import GCSStore, BackedUpStore, Conflict
 from tools.scientific_registry.ingestion_security import ClamScanner
@@ -115,6 +115,7 @@ def handler_for(service, authenticate, origin, client_id):
             path = self.path
             if self.command == "GET" and path == "/health":
                 return self.send(200, {"status": "READY", "googleClientId": client_id,
+                    "workflowImporterVersion": IMPORTER_VERSION,
                     "chunkBytes": CHUNK_BYTES, "originalLimit": 1024 * 1024 * 1024})
             if self.command == "GET" and path == "/v1/gallery":
                 return self.send(200, service.collection())
