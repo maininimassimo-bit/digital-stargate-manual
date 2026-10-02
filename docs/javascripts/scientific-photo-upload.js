@@ -7,11 +7,11 @@
     host.dataset.initialized='true';
     const api=window.DSGPhotoApi, q=name=>host.querySelector(`[data-photo-${name}]`);
     const status=q('status'), fields=q('fields'), form=q('form'), target=q('target'), sessionsBox=q('sessions');
-    let alive=true, busy=false, signedIn=false, archive=[], selectedUpload=null, review=null, imageUrl=null, catalogSha256, frozenRequest=null;
+    let alive=true, busy=false, signedIn=false, activationPending=false, archive=[], selectedUpload=null, review=null, imageUrl=null, catalogSha256, frozenRequest=null;
     const sessionSource=new URL('data/scientific-session-catalog.json',api.base).href;
     const pendingKey='dsg-photo-upload-v1';
     const message=text=>{if(alive)status.textContent=text;};
-    const lock=value=>{busy=value;fields.disabled=value || !signedIn;q('save').disabled=value;q('new').disabled=value;q('recheck').disabled=value;q('publish').disabled=value || !review?.publicationEligible || !q('rights').checked;
+    const lock=value=>{busy=value;fields.disabled=value || !signedIn || activationPending;q('save').disabled=value || activationPending;q('new').disabled=value || activationPending;q('recheck').disabled=value || activationPending;q('publish').disabled=value || activationPending || !review?.publicationEligible || !q('rights').checked;
       for(const name of ['target','title','date','version','attest'])q(name).disabled=Boolean(frozenRequest);
       sessionsBox.querySelectorAll('input').forEach(input=>{input.disabled=Boolean(frozenRequest);});};
     const run=async action=>{if(busy)return;lock(true);try{await action();}catch(error){message(error.message);}finally{if(alive)lock(false);}};
@@ -35,6 +35,7 @@
         const card=el('article',undefined,box);el('strong',item.title,card);el('p',`${item.target} · ${labels[item.state] || item.state} · ${item.createdAt}`,card);
         if(item.state!=='WITHDRAWN'){
           const open=el('button',item.state==='UPLOADING'?'Riprendi caricamento':'Apri revisione',card);open.type='button';
+          open.disabled=activationPending;
           open.addEventListener('click',()=>run(async()=>{
             selectedUpload=item.uploadId;
             if(item.state==='UPLOADING'){
@@ -46,6 +47,7 @@
         }
         if(item.state==='PUBLISHED'){
           const withdraw=el('button','Ritira pubblicazione',card);withdraw.type='button';
+          withdraw.disabled=activationPending;
           withdraw.addEventListener('click',()=>run(async()=>{await api.request(`/v1/uploads/${item.uploadId}/withdraw`,{method:'POST',body:{}});message('Pubblicazione ritirata. I file privati restano conservati.');await loadArchive();}));
         }
       }
@@ -105,7 +107,7 @@
     };
     target.addEventListener('change',()=>renderSessions());q('rights').addEventListener('change',publicReview);
     q('new').addEventListener('click',()=>{if(busy)return;sessionStorage.removeItem(pendingKey);selectedUpload=null;review=null;frozenRequest=null;q('review').hidden=true;q('new').hidden=true;form.reset();renderSessions();lock(false);message('Nuovo caricamento.');});
-    form.addEventListener('submit',event=>{event.preventDefault();run(async()=>{
+    form.addEventListener('submit',event=>{event.preventDefault();if(activationPending)return;run(async()=>{
       let pending;try{pending=JSON.parse(sessionStorage.getItem(pendingKey));}catch{}
       if(pending?.uploadId && !frozenRequest)await restoreUpload(pending.uploadId);
       const sessionIds=frozenRequest?.sessionIds || [...sessionsBox.querySelectorAll('input:checked')].map(node=>node.value);if(!sessionIds.length)throw new Error('Seleziona almeno una sessione.');
@@ -138,13 +140,14 @@
       }
       message('Lettura del workflow e controlli dei file…');await showReview(selectedUpload);await loadArchive();
     });});
-    const commit=publish=>run(async()=>{
+    const commit=publish=>{if(activationPending)return;return run(async()=>{
       const result=await api.request(`/v1/uploads/${selectedUpload}/commit`,{method:'POST',body:{reviewSha256:review.reviewSha256,publish,rightsConfirmed:q('rights').checked,steps:publish?selection():[]}});
       sessionStorage.removeItem(pendingKey);frozenRequest=null;message(result.state==='PUBLISHED'?'Immagine e workflow pubblicati.':'Immagine e workflow salvati privatamente.');await loadArchive();
-    });
+    });};
     q('save').addEventListener('click',()=>commit(false));q('publish').addEventListener('click',()=>commit(true));
     q('recheck').addEventListener('click',()=>run(async()=>{await showReview(selectedUpload,true);await loadArchive();}));
     try{
+      activationPending=(await api.config()).deploymentState==='OWNER_LOGIN_OAT_PENDING';
       if(!window.DSGScientificDataEngine){await new Promise((resolve,reject)=>{const script=el('script');script.src=new URL('javascripts/scientific-data-engine.js',api.base);script.onload=resolve;script.onerror=reject;document.head.append(script);});}
       const context=await window.DSGScientificDataEngine.getPhotoUploadContext(sessionSource);sessions=context.sessions;catalogSha256=context.catalogSha256;const initial=sessions.find(s=>s.sessionId===new URLSearchParams(location.search).get('sessionId'));
       [...new Set(sessions.map(s=>s.target))].sort().forEach(name=>{const option=el('option',name,target);option.value=name;});if(initial)target.value=initial.target;
@@ -153,8 +156,8 @@
       if(!/^[A-Za-z0-9.-]+\.apps\.googleusercontent\.com$/.test(health.googleClientId))throw new Error('Accesso Google non configurato.');
       if(!window.google?.accounts?.id)await new Promise((resolve,reject)=>{const script=el('script');script.src='https://accounts.google.com/gsi/client';script.onload=resolve;script.onerror=reject;document.head.append(script);});
       if(!alive)return;
-      google.accounts.id.initialize({client_id:health.googleClientId,callback:response=>run(async()=>{api.setCredential(response.credential);await loadArchive();signedIn=true;message(frozenRequest?'Caricamento conservato: riseleziona gli stessi tre file per riprendere.':'Accesso eseguito. Seleziona le sessioni e i file.');})});
-      google.accounts.id.renderButton(q('signin'),{theme:'outline',size:'large'});message('Accedi con il tuo account Google per caricare le immagini.');
+      google.accounts.id.initialize({client_id:health.googleClientId,callback:response=>run(async()=>{api.setCredential(response.credential);await loadArchive();signedIn=true;message(activationPending?'Accesso Owner verificato. Caricamento in attesa dell’ultima verifica.':frozenRequest?'Caricamento conservato: riseleziona gli stessi tre file per riprendere.':'Accesso eseguito. Seleziona le sessioni e i file.');})});
+      google.accounts.id.renderButton(q('signin'),{theme:'outline',size:'large'});message(activationPending?'Verifica finale: accedi con il tuo account Google. I caricamenti saranno abilitati dopo questa prova.':'Accedi con il tuo account Google per caricare le immagini.');
     }catch(error){message(error.message);}
     const cleanup=()=>{if(!host.isConnected){alive=false;if(imageUrl)URL.revokeObjectURL(imageUrl);subscription?.unsubscribe();}};
     const subscription=window.document$?.subscribe(cleanup);

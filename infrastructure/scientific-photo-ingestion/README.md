@@ -82,11 +82,16 @@ activation gate, not established by synthetic tests.
 
 ## Deployment gate
 
-`deployment-plan.json` is the exact resource proposal, **not executed**. The
-portal configuration deliberately has `serviceUrl=null` until a separately
-authorized Cloud deployment and live OAT succeed. Functional Owner approval
-does not extend the old one-JPEG bucket grant or its budget to new paid resources.
-DSG-AEM-001 section 5 requires an Owner decision for new paid services/cost scope.
+The Owner separately approved the exact paid resource/cost proposal on 02/10/2026.
+The service and two private versioned buckets are deployed; the old one-JPEG
+grant remains separate. See the runtime activation evidence in
+`docs/project/SCIENTIFIC-PHOTO-RUNTIME-ACTIVATION-2026-10-02.md`.
+The portal configuration stages the verified HTTPS endpoint in
+`OWNER_LOGIN_OAT_PENDING` mode: Google login and readonly archive retrieval are
+available, while upload, review, publication and withdrawal controls are disabled.
+An actual Owner Google login is still required; the endpoint is not operational
+acceptance. A reviewed configuration change enables the complete procedure only
+after this gate. Tokens remain in browser memory and are not extracted for evidence.
 The new service has min=0/max=1 instances, request-based billing and no hard
 spending cap. Storage/egress/build/registry charges remain possible while idle.
 
@@ -109,8 +114,10 @@ After authorization and reviewed source merge:
    preview, new version, withdrawal, state contention and separate-bucket restore
    using clearly synthetic files. Do not migrate or upload existing science files.
 6. Submit the verified service URL as a separately reviewed portal configuration
-   change; verify exact merge workflows and actual Pages. Leave uploads disabled
-   if any live gate fails. Owner real-file OAT follows, without fake acceptance.
+   change in the readonly Owner-login verification mode; verify exact merge
+   workflows and actual Pages. Complete actual Owner login, then review normal
+   activation. Leave upload/mutation controls disabled if a live gate fails.
+   Owner real-file OAT follows, without fake acceptance.
 
 Rollback: leave all retained originals and recovery copies intact, set portal
 `serviceUrl=null`, and disable new service requests. Revert portal code only via a

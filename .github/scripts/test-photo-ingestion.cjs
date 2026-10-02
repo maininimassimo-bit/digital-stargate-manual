@@ -103,6 +103,14 @@ for(const length of [0,1,55,56,63,64,65,127,128,1000,4194305]){
     assert.equal(chunkWrites.filter(p=>p===`/v1/uploads/${pending.uploadId}/original/1`).length,1);
     assert.ok((await page.locator('[data-photo-summary]').textContent()).includes(session.sessionId));
     await page.locator('[data-photo-save]').click();await page.getByText('Immagine e workflow salvati privatamente.',{exact:true}).waitFor();
+    // A staged activation permits only the real login/readonly archive check.
+    await page.route('**/photo-ingestion-config.json',route=>route.fulfill({json:{schemaVersion:'1.0',serviceUrl:'https://photo-test.run.app',deploymentState:'OWNER_LOGIN_OAT_PENDING'}}));
+    const beforePreflight=createRequests.length,writesBeforePreflight=chunkWrites.length;
+    await page.goto(origin+'/scientific-photo-upload/');await page.getByText('Synthetic owner login',{exact:true}).click();
+    await page.getByText('Accesso Owner verificato. Caricamento in attesa dell’ultima verifica.',{exact:true}).waitFor();
+    assert.equal(await page.getByRole('button',{name:'Carica e verifica',exact:true}).isDisabled(),true);
+    for(const button of await page.locator('[data-photo-archive] button').all())assert.equal(await button.isDisabled(),true);
+    assert.equal(createRequests.length,beforePreflight);assert.equal(chunkWrites.length,writesBeforePreflight);
     const nojs=await browser.newContext({javaScriptEnabled:false});const staticPage=await nojs.newPage();await staticPage.goto(origin+'/scientific-photo-upload/');assert.equal(await staticPage.getByRole('button',{name:'Carica e verifica',exact:true}).isDisabled(),true);await nojs.close();
     assert.deepEqual(errors,[]);console.log('Photo ingestion PASS: SHA256, owner/origin gates, real synthetic HTTP upload, frozen resume after catalogue removal/reorder, file mismatch rejection, private save, minimization, publication, mobile, XSS, withdrawal.');
   }finally{await browser?.close();child?.kill();if(server)await new Promise(resolve=>server.close(resolve));}

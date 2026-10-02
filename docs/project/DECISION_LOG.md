@@ -1,5 +1,19 @@
 # Decision Log
 
+## 2026-10-02 — Owner authorizes exact photo ingestion runtime and costs
+
+After the reviewed source/portal release (PR #474) and concrete resource/cost
+proposal, the Owner answered "Approvo" to activating the dedicated Google Cloud
+service, identity, two private versioned buckets and Artifact Registry in
+europe-west1, with usage-based costs and no automatic hard spending cap.
+This is a new bounded grant; it does not broaden the earlier one-JPEG grant.
+Deployment and real AV/GCS recovery tests use synthetic inputs only. The staged
+portal permits Google login and readonly archive verification while uploads and
+archive mutations remain disabled until actual Owner login OAT and reviewed
+activation. No credentials are extracted or persisted for acceptance evidence.
+See `SCIENTIFIC-PHOTO-RUNTIME-ACTIVATION-2026-10-02.md`. No science-file migration,
+AP-014 promotion, scientific-quality inference or BKL-043/device mutation occurs.
+
 ## 2026-10-02 — Owner approves guided session photo and workflow ingestion
 
 The Owner approved the complete guided upload proposal and clarified that the
