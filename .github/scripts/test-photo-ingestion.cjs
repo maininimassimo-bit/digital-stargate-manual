@@ -58,7 +58,7 @@ for(const length of [0,1,55,56,63,64,65,127,128,1000,4194305]){
     assert.equal((await (await fetch(local+'/v1/gallery')).json()).records.length,0);
     assert.equal((await fetch(local+new URL(previewUrl).pathname)).status,400);
     await page.goto(origin+'/scientific-image-gallery/');await page.getByText('Nessuna immagine ancora pubblicata dalle sessioni importate.',{exact:true}).waitFor();
-    const nojs=await browser.newContext({javaScriptEnabled:false});const staticPage=await nojs.newPage();await staticPage.goto(origin+'/scientific-photo-upload/');assert.equal(await staticPage.locator('[data-photo-fields]').isDisabled(),true);await nojs.close();
+    const nojs=await browser.newContext({javaScriptEnabled:false});const staticPage=await nojs.newPage();await staticPage.goto(origin+'/scientific-photo-upload/');assert.equal(await staticPage.getByRole('button',{name:'Carica e verifica',exact:true}).isDisabled(),true);await nojs.close();
     assert.deepEqual(errors,[]);console.log('Photo ingestion PASS: SHA256, owner/origin gates, real synthetic HTTP upload, private save, minimization, publication, mobile, XSS, withdrawal.');
   }finally{await browser?.close();child?.kill();if(server)await new Promise(resolve=>server.close(resolve));}
 })().catch(error=>{console.error(error);process.exitCode=1;});
