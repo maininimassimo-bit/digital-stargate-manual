@@ -86,12 +86,13 @@ The Owner separately approved the exact paid resource/cost proposal on 02/10/202
 The service and two private versioned buckets are deployed; the old one-JPEG
 grant remains separate. See the runtime activation evidence in
 `docs/project/SCIENTIFIC-PHOTO-RUNTIME-ACTIVATION-2026-10-02.md`.
-The portal configuration stages the verified HTTPS endpoint in
-`OWNER_LOGIN_OAT_PENDING` mode: Google login and readonly archive retrieval are
-available, while upload, review, publication and withdrawal controls are disabled.
-An actual Owner Google login is still required; the endpoint is not operational
-acceptance. A reviewed configuration change enables the complete procedure only
-after this gate. Tokens remain in browser memory and are not extracted for evidence.
+Actual Owner Google login and production readonly archive retrieval passed on
+the live staged portal after PR #475. Credentials were not extracted or retained.
+The reviewed `ACTIVE` configuration enables the full procedure for final deployed
+browser OAT with labelled synthetic inputs and subsequent Owner use. It does not
+establish acceptance of a real scientific file or scientific quality. The
+`OWNER_LOGIN_OAT_PENDING` mode remains available for rollback to readonly login
+verification. Tokens remain in browser memory and are not extracted for evidence.
 The new service has min=0/max=1 instances, request-based billing and no hard
 spending cap. Storage/egress/build/registry charges remain possible while idle.
 

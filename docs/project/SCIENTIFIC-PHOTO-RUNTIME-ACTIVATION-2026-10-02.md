@@ -1,4 +1,4 @@
-# Session photo runtime — authorized deployment, Owner login gate pending
+# Session photo runtime — deployed and actual Owner login verified
 
 The Owner explicitly approved the concrete new paid-resource/cost proposal on
 02/10/2026, after source/portal PR #474 was verified. This authorizes the exact
@@ -55,6 +55,21 @@ OAT remain explicit gates. Security freshness is unrelated to gallery expiry.
 
 ## Staged portal and remaining gate
 
+**Owner-login gate resolved:** PR #475 merged as
+`eae39da586d754faed664eaae0f226fed5ce2eb8`, with all 14 applicable post-merge
+workflows SUCCESS and actual Pages verified. The live Google button displayed
+the already authenticated Owner account; clicking it completed production archive
+retrieval and the portal displayed "Accesso Owner verificato". Upload and archive
+review controls remained disabled. No credentials or tokens were extracted or
+persisted. Evidence consists of the visible outcome, readonly control state and
+screenshot, not a reconstructed or synthetic Google identity.
+
+The separately reviewed `ACTIVE` configuration enables the complete procedure
+for final deployed browser OAT with labelled synthetic inputs and subsequent
+Owner use. Actual real scientific-file acceptance remains unexecuted and is not
+implied by this technical activation. The staging behavior below remains the
+documented historical test and an available readonly mode.
+
 `OWNER_LOGIN_OAT_PENDING` permits Google login and readonly archive retrieval
 only through the UI. Upload, review, publication and withdrawal controls remain
 disabled, including keyboard form submission. The browser regression verifies
@@ -64,8 +79,7 @@ All private service routes still require a valid Owner token and exact origin.
 
 Actual Owner login cannot be inferred from a synthetic token or a service-account
 token. Acceptance records retain only the outcome, never Google credentials or
-tokens. After actual Owner login succeeds, a separately reviewed configuration
-change enables the complete procedure; Owner real-file OAT then follows.
+tokens. Owner real-file OAT follows technical activation.
 
 Rollback sets the portal service URL to null and disables new requests while
 preserving private originals/recovery objects. No bucket deletion, science-file
