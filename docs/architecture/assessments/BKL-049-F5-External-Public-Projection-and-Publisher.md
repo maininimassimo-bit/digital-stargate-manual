@@ -5,7 +5,7 @@
 | Date | 2026-10-02 |
 | Scope | ADR-019 external retrospective records, reviewed public selection, gallery V2 |
 | Authority | Processing evidence only; no scientific quality or action authority |
-| Activation | Owner-approved first real public release; gallery deployment and live OAT pending |
+| Activation | Owner-approved real release deployed; real gallery OAT PASS; bounded closure |
 
 ## First approved real release — 2026-10-02
 
@@ -15,7 +15,7 @@ The approval window is **2026-10-02 12:04:35 UTC to 2026-10-03 12:04:35 UTC**, w
 
 The dedicated bucket now permits public object reads through `allUsers` / `roles/storage.legacyObjectReader`; uniform bucket-level access remains enabled. This permits reading by known URL, not listing, but applies to all objects in the bucket. Only the approved JPEG was uploaded; further objects are not authorized by this decision. The gallery window's expiry hides the record from the consumer; it does not revoke JPEG access or erase the committed JSON/history. The JPEG remains public until explicit withdrawal. Withdrawal requires the empty collection and revocation of the public grant/restoration of public-access prevention. Third-party copies or caches cannot be recalled.
 
-Live gallery OAT and release verification remain pending in this release candidate. BKL-049 is not yet closed. Later status supersedes the preactivation observations below.
+Real gallery OAT and release verification passed after PR #471. The [closure record](../../project/BKL-049-CLOSURE-2026-10-02.md) contains the evidence matrix, actual release commit, runbook and retained limitations. This current acceptance supersedes the preactivation observations below.
 
 ## Result and prerequisite
 

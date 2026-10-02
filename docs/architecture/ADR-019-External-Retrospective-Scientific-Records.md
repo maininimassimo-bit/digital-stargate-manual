@@ -1,6 +1,6 @@
 # ADR-019 — External retrospective scientific records
 
-**Status:** Owner-approved profile; private real record admitted; public activation pending
+**Status:** Owner-approved profile; real record admitted and exact public release verified; bounded BKL-049 closure
 
 **Date:** 2026-10-01
 
