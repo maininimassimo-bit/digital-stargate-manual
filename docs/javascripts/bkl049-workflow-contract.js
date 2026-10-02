@@ -34,14 +34,31 @@
     return value;
   };
   const validateWorkflow = value => {
-    closed(value, ['schemaVersion', 'kind', 'authority', 'actionAuthority', 'imageId', 'imageVersionId',
+    const external = value?.kind === 'BKL049_PUBLIC_EXTERNAL_WORKFLOW';
+    const keys = ['schemaVersion', 'kind', 'authority', 'actionAuthority', 'imageId', 'imageVersionId',
       'workflowId', 'bindingEvidenceClass', 'captureCompleteness', 'executionEvidence', 'orderSemantics',
-      'methodCitation', 'steps', 'omittedStepCount', 'gaps']);
-    need(value.schemaVersion === '1.0' && value.kind === 'BKL049_PUBLIC_WORKFLOW'
+      'methodCitation', 'steps', 'omittedStepCount', 'gaps'];
+    if (external) keys.push('scientificContext', 'title', 'attribution', 'preview');
+    closed(value, keys);
+    const expectedCitation = external ? 'architecture/ADR-019-External-Retrospective-Scientific-Records/' : citation;
+    if (external) {
+      closed(value.scientificContext, ['origin', 'metadataState', 'qualityState', 'subjectIdentification']);
+      need(value.scientificContext.origin === 'EXTERNAL' && value.scientificContext.metadataState === 'PARTIAL'
+        && value.scientificContext.qualityState === 'UNKNOWN'
+        && value.scientificContext.subjectIdentification === 'DECLARED_NOT_INDEPENDENTLY_VERIFIED');
+      const text = (item, limit) => typeof item === 'string' && item.trim().length > 0
+        && item.length <= limit && !/[\u0000-\u001f]/u.test(item);
+      closed(value.preview, ['url', 'alt']);
+      need(text(value.title, 200) && text(value.attribution, 256) && text(value.preview.alt, 300)
+        && typeof value.preview.url === 'string' && value.preview.url.length <= 1024
+        && /^https:\/\/storage\.googleapis\.com\/[a-z0-9][a-z0-9.-]{1,220}\/[A-Za-z0-9_-][A-Za-z0-9_/-]*\.(?:jpg|jpeg|png|webp)(?![\s\S])/u.test(value.preview.url));
+    }
+    need(value.schemaVersion === (external ? '2.0' : '1.0')
+      && value.kind === (external ? 'BKL049_PUBLIC_EXTERNAL_WORKFLOW' : 'BKL049_PUBLIC_WORKFLOW')
       && value.authority === 'processing_evidence' && value.actionAuthority === 'NONE'
       && id(value.imageId, 'IMG') && id(value.imageVersionId, 'VER') && id(value.workflowId, 'WF')
       && value.bindingEvidenceClass === 'DECLARED' && value.executionEvidence === 'NOT_ESTABLISHED'
-      && value.orderSemantics === 'EXPORTED_CONFIGURATION_ORDER' && value.methodCitation === citation
+      && value.orderSemantics === 'EXPORTED_CONFIGURATION_ORDER' && value.methodCitation === expectedCitation
       && count(value.omittedStepCount) && Array.isArray(value.steps) && value.steps.length <= 512
       && value.omittedStepCount + value.steps.length <= 512
       && value.captureCompleteness === (value.steps.length ? 'PARTIAL' : 'UNAVAILABLE')

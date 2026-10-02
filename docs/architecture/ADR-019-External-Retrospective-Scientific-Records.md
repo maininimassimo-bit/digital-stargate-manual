@@ -1,6 +1,6 @@
 # ADR-019 — External retrospective scientific records
 
-**Status:** Owner-approved direction; bounded private implementation, real activation pending
+**Status:** Owner-approved profile; private real record admitted; public activation pending
 
 **Date:** 2026-10-01
 
@@ -69,9 +69,9 @@ This new private handoff is **not an input to the old AP14-W06 reconciliation pa
 
 ## Public projection and remaining real gates
 
-No external V2 public projection, gallery consumer or publisher is activated by this private implementation. A public extension must preserve external origin, partial acquisition metadata, declared identification and partial/unavailable workflow in a closed allowlist, with exact aliases/field/rights/preview approval, currentness, expiry and revocation. The existing public collection remains empty. Full workflows and originals remain private. No upload, cloud access change or operational equipment work is authorized by this ADR.
+The [external F5 extension](assessments/BKL-049-F5-External-Public-Projection-and-Publisher.md) supplies a V2 allowlisted projection, gallery reader and local collection publisher with explicit field/rights/preview approval, currentness, expiry and withdrawal. It preserves external origin, partial acquisition metadata, declared identification and partial/unavailable workflow. Real publication is not activated: the collection remains empty. Full workflows and originals remain private. No upload, cloud access change or operational equipment work is authorized by this ADR.
 
-The real candidate still requires evidenced field mapping, independently selected byte identities, operational retention/restore, the two explicit Owner decisions, private exact binding, and separately approved publication plus real gallery OAT before milestone closure. No real registration/admission decision is manufactured in tests or preparation.
+The private real registration/admission, retained event restore and exact external delivery were completed under explicit Owner approval on 2026-10-02, as recorded without private values in the external F5 assessment. Separately approved publication, cloud activation/served-byte verification and real gallery OAT remain required before milestone closure. No real registration/admission decision is manufactured in tests or preparation.
 
 ## Verification and rollback
 

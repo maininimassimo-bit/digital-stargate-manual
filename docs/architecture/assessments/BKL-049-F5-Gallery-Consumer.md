@@ -1,5 +1,7 @@
 # BKL-049 F5 — Gallery workflow reader
 
+> **External V2 extension, 2026-10-02:** the [external projection/local publisher](BKL-049-F5-External-Public-Projection-and-Publisher.md) adds a closed external record with an explicitly approved preview and mandatory external/PARTIAL/UNKNOWN/declared-identification labels. V1 lookup and validation remain unchanged. Real publication is still closed and the collection is empty.
+
 | Field | Value |
 |---|---|
 | Date | 2026-10-01 |

@@ -43,7 +43,14 @@
       "type": "array",
       "maxItems": 8,
       "items": {
-        "$ref": "bkl049-public-workflow.schema.json"
+        "oneOf": [
+          {
+            "$ref": "bkl049-public-workflow.schema.json"
+          },
+          {
+            "$ref": "bkl049-public-workflow-external.schema.json"
+          }
+        ]
       }
     }
   },

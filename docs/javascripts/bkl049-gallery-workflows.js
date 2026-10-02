@@ -54,6 +54,20 @@
         const article = element('article', undefined, body);
         article.className = 'dsg-workflow-card';
         element('h3', `Immagine ${record.imageId} · versione ${record.imageVersionId}`, article);
+        if (record.kind === 'BKL049_PUBLIC_EXTERNAL_WORKFLOW') {
+          element('h4', record.title, article);
+          element('p', 'Acquisizione esterna · dati scientifici parziali · qualità non valutata.', article);
+          element('p', 'Identificazione del soggetto dichiarata, non verificata indipendentemente.', article);
+          const preview = element('img', undefined, article);
+          preview.alt = record.preview.alt;
+          preview.loading = 'lazy'; preview.referrerPolicy = 'no-referrer';
+          preview.style.maxWidth = '100%'; preview.style.height = 'auto';
+          preview.addEventListener('error', () => {
+            preview.remove(); element('p', 'Anteprima non disponibile.', article);
+          }, {once: true});
+          preview.src = record.preview.url;
+          element('p', record.attribution, article);
+        }
         const url = new URL('scientific-image-gallery/', base);
         url.searchParams.set('image', record.imageId); url.searchParams.set('version', record.imageVersionId);
         url.searchParams.set('workflow', record.workflowId);

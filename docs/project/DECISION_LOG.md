@@ -1,5 +1,9 @@
 # Decision Log
 
+## 2026-10-02 — External record acts approved separately from public release
+
+The Owner explicitly approved both distinct private acts for the reviewed BKL-049 external revision: AP-013 registration and AP-014 admission, with the disclosed local-only retention scope. The two events and private exact F4/PXP V2 delivery were retained, independently anchored and verified after local restore. This preserves PARTIAL metadata and UNKNOWN scientific quality. No private source identifiers or byte hashes are published. The [external F5 component](../architecture/assessments/BKL-049-F5-External-Public-Projection-and-Publisher.md) requires a separate exact public field/rights/preview approval; cloud activation and real gallery OAT remain open. BKL-049 remains open.
+
 ## 2026-10-01 — Owner approves separate retrospective external metadata profile
 
 The Owner explicitly approved the concrete BKL-049 completion proposal: a versioned external scientific record with partial metadata, day-precision acquisition evidence and nullable historical configuration validity; no fabricated planning hierarchy or DSG session. [ADR-019](../architecture/ADR-019-External-Retrospective-Scientific-Records.md) records the scope, closed fields and decisions. Asset registration and catalog admission remain distinct AP-013/AP-014 acts; external admission never asserts scientific quality ACCEPTED. The additive private implementation provides an anchored global journal and external F4/PXP V2 handoff while V1 stays unchanged. Real registration/admission, operational retention/restore acceptance, public field/rights selection, publisher and real gallery OAT remain open. No private case identifiers, scientific source values or hashes are published here. BKL-049 remains open and BKL-043 current.
