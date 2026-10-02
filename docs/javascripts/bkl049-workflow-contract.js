@@ -85,11 +85,14 @@
   };
   const validateCollection = (value, now = Date.now()) => {
     closed(value, ['schemaVersion', 'kind', 'authority', 'actionAuthority', 'publishedAt', 'validUntil', 'records']);
-    need(Number.isFinite(now) && value.schemaVersion === '1.0' && value.kind === 'BKL049_PUBLIC_COLLECTION'
+    const persistent = value.schemaVersion === '2.0';
+    need(Number.isFinite(now) && (persistent || value.schemaVersion === '1.0') && value.kind === 'BKL049_PUBLIC_COLLECTION'
       && value.authority === 'processing_evidence' && value.actionAuthority === 'NONE'
       && Array.isArray(value.records) && value.records.length <= 8);
     if (!value.records.length) {
-      need(value.publishedAt === null && value.validUntil === null);
+      need(!persistent && value.publishedAt === null && value.validUntil === null);
+    } else if (persistent) {
+      need(stamp(value.publishedAt) <= now && value.validUntil === null);
     } else {
       const start = stamp(value.publishedAt), end = stamp(value.validUntil);
       need(start <= now && now < end && end > start && end - start <= MAX_LIFETIME_MS);
@@ -97,6 +100,7 @@
     const images = new Set(), workflows = new Set();
     value.records.forEach(record => {
       validateWorkflow(record);
+      if (persistent) need(record.kind === 'BKL049_PUBLIC_EXTERNAL_WORKFLOW');
       const key = record.imageId + '/' + record.imageVersionId;
       need(!images.has(key) && !workflows.has(record.workflowId));
       images.add(key); workflows.add(record.workflowId);

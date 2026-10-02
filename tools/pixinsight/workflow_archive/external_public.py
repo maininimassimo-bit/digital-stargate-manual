@@ -40,16 +40,22 @@ def build_external_projection(*, delivery_bytes, delivery_digest, current_head,
     closed(selected, {'kind', 'scope', 'deliverySha256', 'approvedBy', 'approvedAt', 'validUntil',
                       'rightsConfirmed', 'imageId', 'imageVersionId', 'workflowId', 'title',
                       'attribution', 'preview', 'steps'})
-    require(selected['kind'] == 'BKL049_EXTERNAL_PUBLIC_SELECTION_V2'
+    persistent = selected['kind'] == 'BKL049_EXTERNAL_PUBLIC_SELECTION_V3'
+    require((persistent or selected['kind'] == 'BKL049_EXTERNAL_PUBLIC_SELECTION_V2')
             and selected['scope'] == 'EXACT_EXTERNAL_PREVIEW_AND_WORKFLOW'
             and selected['rightsConfirmed'] is True, 'EXTERNAL_PUBLIC_APPROVAL')
     require(selected['deliverySha256'] == delivery_digest, 'PUBLIC_SELECTION_SOURCE')
     bounded_text(selected['approvedBy'], 256)
-    utc_stamp(selected['approvedAt']); utc_stamp(selected['validUntil'])
-    require(bundle['exportedAtUtc'] <= selected['approvedAt'] <= now < selected['validUntil'],
+    utc_stamp(selected['approvedAt'])
+    require(bundle['exportedAtUtc'] <= selected['approvedAt'] <= now,
             'EXTERNAL_PUBLIC_APPROVAL_TIME')
-    require((utc(selected['validUntil']) - utc(selected['approvedAt'])).total_seconds() <= 86400,
-            'EXTERNAL_PUBLIC_APPROVAL_WINDOW')
+    if persistent:
+        require(selected['validUntil'] is None, 'EXTERNAL_PUBLIC_APPROVAL_WINDOW')
+    else:
+        utc_stamp(selected['validUntil'])
+        require(now < selected['validUntil'], 'EXTERNAL_PUBLIC_APPROVAL_TIME')
+        require((utc(selected['validUntil']) - utc(selected['approvedAt'])).total_seconds() <= 86400,
+                'EXTERNAL_PUBLIC_APPROVAL_WINDOW')
     closed(selected['preview'], {'url', 'alt', 'sha256'})
     preview = selected['preview']
     require(type(preview['url']) is str and len(preview['url']) <= 1024
@@ -82,11 +88,15 @@ def build_external_collection(entries, *, published_at, valid_until, now):
     utc_stamp(now)
     require(type(entries) is list and len(entries) <= 8, 'EXTERNAL_PUBLIC_COUNT')
     records, images, workflows = [], set(), set()
+    persistent = bool(entries) and valid_until is None
     if entries:
-        utc_stamp(published_at); utc_stamp(valid_until)
-        require(published_at <= now < valid_until
-                and 0 < (utc(valid_until) - utc(published_at)).total_seconds() <= 86400,
-                'EXTERNAL_PUBLIC_WINDOW')
+        utc_stamp(published_at)
+        require(published_at <= now, 'EXTERNAL_PUBLIC_WINDOW')
+        if not persistent:
+            utc_stamp(valid_until)
+            require(now < valid_until
+                    and 0 < (utc(valid_until) - utc(published_at)).total_seconds() <= 86400,
+                    'EXTERNAL_PUBLIC_WINDOW')
     else:
         require(published_at is None and valid_until is None, 'EXTERNAL_PUBLIC_EMPTY')
     for entry in entries:
@@ -94,12 +104,17 @@ def build_external_collection(entries, *, published_at, valid_until, now):
                       'selection_digest', 'current_selection_digest'})
         result = build_external_projection(**entry, now=now)
         approval = trusted_record(entry['selection_bytes'], entry['selection_digest'])
-        require(approval['approvedAt'] <= published_at and valid_until <= approval['validUntil'],
-                'EXTERNAL_PUBLIC_RELEASE_WINDOW')
+        require(approval['approvedAt'] <= published_at, 'EXTERNAL_PUBLIC_RELEASE_WINDOW')
+        if persistent:
+            require(approval['kind'] == 'BKL049_EXTERNAL_PUBLIC_SELECTION_V3'
+                    and approval['validUntil'] is None, 'EXTERNAL_PUBLIC_RELEASE_WINDOW')
+        else:
+            require(approval['kind'] == 'BKL049_EXTERNAL_PUBLIC_SELECTION_V2'
+                    and valid_until <= approval['validUntil'], 'EXTERNAL_PUBLIC_RELEASE_WINDOW')
         key = (result['imageId'], result['imageVersionId'])
         require(key not in images and result['workflowId'] not in workflows, 'EXTERNAL_PUBLIC_DUPLICATE')
         images.add(key); workflows.add(result['workflowId']); records.append(result)
-    collection = dict(schemaVersion='1.0', kind='BKL049_PUBLIC_COLLECTION', authority='processing_evidence',
+    collection = dict(schemaVersion='2.0' if persistent else '1.0', kind='BKL049_PUBLIC_COLLECTION', authority='processing_evidence',
                       actionAuthority='NONE', publishedAt=published_at, validUntil=valid_until, records=records)
     require(len(encode(collection)) <= MAX_COLLECTION_BYTES, 'EXTERNAL_PUBLIC_COLLECTION_SIZE')
     return collection

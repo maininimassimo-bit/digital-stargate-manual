@@ -105,6 +105,31 @@ const makeCollection = () => {
     await panel.locator('[data-workflow-refresh]').click();await waitRecord();
     await page.clock.fastForward(61000);await waitUnavailable();
     assert.deepEqual(errors,[]);
+    await page.close();
+    // A fresh page with future Date.now keeps real timers, avoiding unrelated
+    // portal interval queues being replayed across a two-day clock jump.
+    const persistentPage=await browser.newPage(),persistentErrors=[];
+    persistentPage.on('pageerror',error=>persistentErrors.push(error.message));
+    await persistentPage.clock.setFixedTime(Date.now()+2*86400000);
+    collection={...makeCollection(),schemaVersion:'2.0',validUntil:null,records:[structuredClone(externalRecord)]};
+    await persistentPage.route('**/*',route=>{
+      const url=new URL(route.request().url());
+      if(url.href===externalRecord.preview.url) return route.fulfill({contentType:'image/svg+xml',body:'<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"/>'});
+      if(url.pathname.endsWith('/data/bkl049-public-workflows.json')) return route.fulfill({contentType:'application/json',body:contract.canonical(collection)});
+      return url.origin===new URL(base).origin?route.continue():route.abort();
+    });
+    await persistentPage.goto(base+'scientific-image-gallery/');
+    await persistentPage.locator('.dsg-workflow-card').waitFor();
+    await persistentPage.locator('[data-workflow-refresh]').click();
+    await persistentPage.locator('.dsg-workflow-card').waitFor();
+    await persistentPage.locator('.dsg-workflow-card summary').click();
+    assert.equal(await persistentPage.locator('.dsg-workflow-card').count(),1,'persistent record survives former daily expiry');
+    collection={...makeCollection(),publishedAt:null,validUntil:null,records:[]};
+    await persistentPage.locator('[data-workflow-refresh]').click();
+    await persistentPage.waitForFunction(()=>document.querySelector('[data-workflow-status]')?.textContent.startsWith('Workflow non disponibile'));
+    assert.equal(await persistentPage.locator('.dsg-workflow-card').count(),0);
+    assert.deepEqual(persistentErrors,[]);
+    await persistentPage.close();
     const nojs=await browser.newPage({javaScriptEnabled:false});
     await nojs.route('**/*',route=>new URL(route.request().url()).origin===new URL(base).origin?route.continue():route.abort());
     await nojs.goto(base+'scientific-image-gallery/');
