@@ -62,3 +62,8 @@ Run synthetic negatives with `python -m unittest tools.pixinsight.workflow_archi
 ## Current external release and operator runbook
 
 BKL-049 is accepted for the revised available-history scope, with real exact gallery association verified. External registration uses `tools/scientific_registry/external_registry.py`, retained handoff uses `external_delivery.py`, and explicit public selection/local publication uses `external_public.py`. These remain separate authority stages; the earlier F2/F3/V1 descriptions above do not authorize bypassing them. See `docs/project/BKL-049-CLOSURE-2026-10-02.md` for compatibility, actual OAT, supported retention, exact-content consent, explicit withdrawal and rollback. No automatic upload, renewal or processing is installed.
+
+
+## Portal importer 1.2
+
+New imports use profile 1.2 with a 131,072-character decoded-string bound, including concatenation. Profiles 1.0/1.1 and their immutable unsupported results retain their original bounds. All other limits and non-executing grammar remain unchanged. The service exposes `workflowImporterVersion` in `/health`; large parameters remain intact privately while the review's presentation/public-selection limits remain unchanged. See `docs/architecture/assessments/BKL-049-Portal-Importer-1.2.md` for evidence, rollout and rollback compatibility.
