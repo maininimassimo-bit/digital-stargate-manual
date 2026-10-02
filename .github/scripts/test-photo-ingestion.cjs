@@ -23,6 +23,7 @@ for(const length of [0,1,55,56,63,64,65,127,128,1000,4194305]){
     const badOrigin=await fetch(local+'/v1/uploads',{method:'POST',headers:{Origin:'https://attacker.example',Authorization:'Bearer synthetic-owner-token','Content-Type':'application/json'},body:'{}'});assert.equal(badOrigin.status,403);
     browser=await chromium.launch({headless:true,...(process.env.DSG_BROWSER_CHANNEL?{channel:process.env.DSG_BROWSER_CHANNEL}:{})});
     const page=await browser.newPage(),errors=[];page.on('pageerror',error=>errors.push(error.message));
+    await page.route('**/*',route=>new URL(route.request().url()).origin===origin?route.continue():route.abort());
     await page.route('**/photo-ingestion-config.json',route=>route.fulfill({json:{schemaVersion:'1.0',serviceUrl:'https://photo-test.run.app',deploymentState:'SYNTHETIC_TEST'}}));
     await page.route('https://photo-test.run.app/**',async route=>{
       const request=route.request(),headers={...request.headers(),origin};delete headers.host;
