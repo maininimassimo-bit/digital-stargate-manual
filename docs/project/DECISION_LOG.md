@@ -1,5 +1,9 @@
 # Decision Log
 
+## 2026-10-02 — Exact public preview and workflow release approved
+
+After reviewing the concrete private publication sheet, the Owner approved the exact JPEG, selected title/attribution/alternative text, all 21 exported process names without parameter values, rights confirmation, dedicated-bucket public reads and first gallery window of at most 24 hours. The separate decision does not promote scientific quality or observed execution. The original remains private. The JPEG was uploaded with a create-only precondition and its anonymously served bytes matched the approved file. Public-read scope, expiry versus media withdrawal, and release/OAT gates are recorded in the [F5 release assessment](../architecture/assessments/BKL-049-F5-External-Public-Projection-and-Publisher.md). No automatic renewal, further upload, device action or unrelated program change is authorized. BKL-049 remains open until real gallery OAT and governed closure.
+
 ## 2026-10-02 — External record acts approved separately from public release
 
 The Owner explicitly approved both distinct private acts for the reviewed BKL-049 external revision: AP-013 registration and AP-014 admission, with the disclosed local-only retention scope. The two events and private exact F4/PXP V2 delivery were retained, independently anchored and verified after local restore. This preserves PARTIAL metadata and UNKNOWN scientific quality. No private source identifiers or byte hashes are published. The [external F5 component](../architecture/assessments/BKL-049-F5-External-Public-Projection-and-Publisher.md) requires a separate exact public field/rights/preview approval; cloud activation and real gallery OAT remain open. BKL-049 remains open.
