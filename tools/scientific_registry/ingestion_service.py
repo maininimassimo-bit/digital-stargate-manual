@@ -33,10 +33,11 @@ def stamp():
 
 
 class IngestionService:
-    def __init__(self, store, catalog_raw, scanner, public_base):
+    def __init__(self, store, catalog_raw, scanner, public_base, *, catalog_loader=None):
         self.store, self.catalog_raw, self.scanner = store, catalog_raw, scanner
         self.catalog_digest = sha256(catalog_raw)
         self.public_base = public_base.rstrip("/")
+        self.catalog_loader = catalog_loader
 
     def _state(self):
         raw, generation = self.store.get(STATE_KEY)
@@ -70,11 +71,22 @@ class IngestionService:
         return item
 
     def create(self, request, actor):
-        if not isinstance(request, dict) or set(request) != {"idempotencyKey", "imageId", "sessionIds", "title", "processingDate", "files", "previewAttested"}:
+        if not isinstance(request, dict) or set(request) != {"idempotencyKey", "catalogSha256", "imageId", "sessionIds", "title", "processingDate", "files", "previewAttested"}:
             raise IngestionError("REQUEST_FIELDS_INVALID")
         key = request["idempotencyKey"]
         if not isinstance(key, str) or not re.fullmatch(r"[A-Za-z0-9_-]{16,80}", key):
             raise IngestionError("IDEMPOTENCY_KEY_INVALID")
+        upload_id = sha256(json_bytes({"actor": actor, "key": key}))
+        request_digest = sha256(json_bytes(request))
+        existing = self._state()[0]["uploads"].get(upload_id)
+        if existing:
+            if existing["requestDigest"] != request_digest:
+                raise IngestionError("IDEMPOTENCY_CONFLICT")
+            return existing  # An exact retry pins its original snapshot, even after catalog updates.
+        catalog_raw = self.catalog_loader() if self.catalog_loader else self.catalog_raw
+        catalog_digest = sha256(catalog_raw)
+        if request["catalogSha256"] != catalog_digest:
+            raise IngestionError("CATALOG_CHANGED_REFRESH")
         files = request["files"]
         if not isinstance(files, dict) or set(files) != set(LIMITS):
             raise IngestionError("ASSET_ROLES_INVALID")
@@ -86,13 +98,11 @@ class IngestionService:
             if not isinstance(item["mediaType"], str) or item["mediaType"] not in MEDIA[role] or not isinstance(item["sha256"], str) or not re.fullmatch(r"[a-f0-9]{64}", item["sha256"]):
                 raise IngestionError("ASSET_DESCRIPTOR_INVALID")
         # Validate selection/date/attestation before accepting any large file.
-        context = build_review(catalog_raw=self.catalog_raw, catalog_digest=self.catalog_digest,
+        context = build_review(catalog_raw=catalog_raw, catalog_digest=catalog_digest,
                      session_ids=request["sessionIds"], title=request["title"], processing_date=request["processingDate"],
                      original_raw=b"XISF0100", original_media_type="application/x-xisf",
                      preview_raw=b"\xff\xd8\xff", preview_media_type="image/jpeg", workflow_raw=b"",
                      receipt_id="BKL049-validation", imported_at=stamp(), preview_attested=request["previewAttested"])
-        upload_id = sha256(json_bytes({"actor": actor, "key": key}))
-        request_digest = sha256(json_bytes(request))
         def change(state):
             old = state["uploads"].get(upload_id)
             if old:
@@ -115,11 +125,11 @@ class IngestionService:
                 image_id = "IMG-" + upload_id[:32]
             state["uploads"][upload_id] = {"id": upload_id, "actor": actor, "createdAt": stamp(),
                 "imageId": image_id, "target": context["target"],
-                "request": deepcopy(request), "requestDigest": request_digest, "catalogSha256": self.catalog_digest,
+                "request": deepcopy(request), "requestDigest": request_digest, "catalogSha256": catalog_digest,
                 "state": "UPLOADING", "reviewSha256": None, "publication": None}
             return True
         # Preserve the exact selected catalogue for replay, independently of future deploys.
-        immutable(self.store, "catalogs/" + self.catalog_digest, self.catalog_raw)
+        immutable(self.store, "catalogs/" + catalog_digest, catalog_raw)
         return self._change(actor, "UPLOAD_CREATED", upload_id, change)
 
     def chunk(self, upload_id, role, index, raw, actor):

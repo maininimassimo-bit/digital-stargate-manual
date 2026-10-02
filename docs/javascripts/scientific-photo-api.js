@@ -26,6 +26,7 @@
         if(response.status===403){token=''; throw new Error('Accesso scaduto o account non autorizzato. Accedi di nuovo; i file ricevuti restano conservati.');}
         let error;try{error=(await response.json()).error;}catch{}
         const messages={PUBLICATION_NOT_ALLOWED:'La pubblicazione richiede controlli superati e conferma dei diritti.',UPLOAD_INCOMPLETE:'Caricamento incompleto: riseleziona gli stessi file e riprendi.',FULL_FILE_INTEGRITY_FAILED:'Il contenuto ricevuto non coincide con il file selezionato.',PREVIEW_DECODE_INVALID:'L’anteprima non è un’immagine JPEG o PNG valida.',IDEMPOTENCY_CONFLICT:'Questa ripresa contiene dati diversi. Inizia un nuovo caricamento.',REVIEW_CHANGED:'La revisione è cambiata. Riapri il caricamento prima di confermare.'};
+        if(error==='CATALOG_CHANGED_REFRESH')throw new Error('Il catalogo delle sessioni è cambiato. Aggiorna la pagina prima di iniziare un nuovo caricamento; le bozze restano conservate.');
         throw new Error(messages[error] || 'Operazione non completata. Puoi riprendere il caricamento conservato.');
       }
       return binary && method==='GET' ? response.blob() : response.json();

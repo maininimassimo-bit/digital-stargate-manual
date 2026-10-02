@@ -300,6 +300,22 @@
     }
   };
 
+  const getPhotoUploadContext = async source => {
+    const url=new URL(source,location.href);if(url.origin!==location.origin)throw new Error('PHOTO_CATALOG_ORIGIN');
+    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),15000);let reader;
+    try{
+      const response=await fetch(url.href,{cache:'no-store',redirect:'error',credentials:'omit',signal:controller.signal});
+      if(!response.ok || response.url!==url.href || !response.body)throw new Error('PHOTO_CATALOG_UNAVAILABLE');
+      reader=response.body.getReader();const chunks=[];let length=0;
+      while(true){const item=await reader.read();if(item.done)break;length+=item.value.length;if(length>16*1024*1024)throw new Error('PHOTO_CATALOG_LIMIT');chunks.push(item.value);}
+      const bytes=new Uint8Array(length);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length;}
+      const catalog=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
+      if(catalog.schemaVersion!=='1.5' || catalog.catalogStatus!=='VERSIONED_ANALYTICS_PROJECTION' || !Array.isArray(catalog.sessions))throw new Error('PHOTO_CATALOG_PROFILE');
+      const digest=await crypto.subtle.digest('SHA-256',bytes);
+      return {catalogSha256:[...new Uint8Array(digest)].map(x=>x.toString(16).padStart(2,'0')).join(''),sessions:catalog.sessions};
+    }finally{clearTimeout(timer);if(reader){await reader.cancel().catch(()=>{});reader.releaseLock();}}
+  };
+
   const getSessionPhotoCollection = async () => {
     const config = await window.DSGPhotoApi.config();
     const url = config.serviceUrl + '/v1/gallery';
@@ -333,6 +349,7 @@
     version: VERSION,
     getPublicWorkflowCollection,
     getSessionPhotoCollection,
+    getPhotoUploadContext,
     loadCatalog,
     preload,
     getSessions,

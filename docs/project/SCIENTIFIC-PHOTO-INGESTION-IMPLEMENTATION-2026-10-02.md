@@ -6,7 +6,7 @@ import, source-byte preservation, exact public field review, publication and
 withdrawal. The three sample gallery cards are removed from the production page.
 Existing BKL-049 real publication remains untouched.
 
-Local verification: 15 Python boundary/security/persistence tests PASS; strict
+Local verification: 16 Python boundary/security/persistence tests PASS; strict
 MkDocs build PASS; browser regression PASS against the real HTTP adapter with
 synthetic authentication, antivirus and storage. Streaming SHA-256 agrees with
 Node crypto at padding and upload boundaries. Browser checks include private

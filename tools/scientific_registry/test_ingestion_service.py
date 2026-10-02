@@ -29,7 +29,7 @@ class ServiceTests(unittest.TestCase):
         image.save(output, format="JPEG", exif=exif)
         self.files = {"original": b"XISF0100scientific bytes", "preview": output.getvalue(),
                       "workflow": b'var P = new PixelMath; P.expression = "private path"; P.n = 0.250;'}
-        self.request = {"idempotencyKey": "synthetic-key-001", "imageId": None, "title": "M31 final",
+        self.request = {"idempotencyKey": "synthetic-key-001", "catalogSha256": sha256(self.catalog), "imageId": None, "title": "M31 final",
             "sessionIds": ["night1", "night2"], "processingDate": "2026-10-02", "previewAttested": True,
             "files": {role: {"byteSize": len(raw), "sha256": sha256(raw), "mediaType": media}
                 for (role, raw), media in zip(self.files.items(), ("application/x-xisf", "image/jpeg", "text/plain"))}}
@@ -152,6 +152,17 @@ class ServiceTests(unittest.TestCase):
         self.assertNotEqual(current["reviewSha256"], old["reviewSha256"])
         with self.assertRaises(IngestionError):
             self.service.commit(uid, old, self.owner)
+
+    def test_catalogue_changed_new_upload_rejects_but_exact_resume_uses_retained_snapshot(self):
+        uid = self.uploaded()
+        old_request = json.loads(json.dumps(self.request))
+        new_catalog = self.catalog.replace(b'M31', b'M42')
+        self.service.catalog_loader = lambda: new_catalog
+        self.assertEqual(self.service.create(old_request, self.owner)["id"], uid)
+        self.request["idempotencyKey"] = "synthetic-new-key"
+        with self.assertRaisesRegex(IngestionError, "CATALOG_CHANGED_REFRESH"):
+            self.service.create(self.request, self.owner)
+        self.assertEqual(self.service.review_summary(uid, self.owner)["target"], "M31")
 
     def test_exact_selected_parameter_stays_selected_in_readonly_published_review(self):
         uid = self.uploaded()

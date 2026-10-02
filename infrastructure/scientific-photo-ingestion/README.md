@@ -15,8 +15,13 @@ head and its approved sanitized previews. Buckets remain private, including
 backups. Public preview URLs never select an arbitrary storage object.
 
 One image can originate from 1–32 imported sessions with the same literal target.
-The service pins its bundled analytics catalogue bytes and retains that exact
-snapshot. The relationship is `OWNER_DECLARED`, not AP-014 registry admission,
+For each new upload, the service independently reads the current analytics
+catalogue from the fixed public repository projection URL, rejects redirects and
+bounds the response. Its measured digest must match the exact catalogue bytes
+shown by the Scientific Data Engine in the upload form. It retains that snapshot;
+exact resume requests keep the original snapshot despite later updates. There
+is no stale bundled fallback if the current catalogue cannot be verified.
+The relationship is `OWNER_DECLARED`, not AP-014 registry admission,
 independent target identification or acquisition metadata certification. Dates
 and absent historical configuration are not inferred. Processing date is separate.
 
@@ -25,7 +30,7 @@ Original XISF/FITS (1 GiB), JPEG/PNG preview (32 MiB), and exported workflow
 chunk is idempotent; changed content under the same identity rejects. The browser
 hashes files incrementally; the service independently measures complete bytes.
 Status reads chunk metadata instead of re-downloading files. Browser session
-storage holds only the request nonce; filenames, tokens and file contents are
+storage holds only the request nonce and opaque upload identifier; filenames, tokens and file contents are
 not persisted there. The authenticated archive can recover the nonce after a
 browser restart. Reselecting identical files resumes only missing chunks.
 

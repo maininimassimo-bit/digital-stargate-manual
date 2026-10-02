@@ -3,6 +3,7 @@ import json
 import os
 from pathlib import Path
 import re
+import urllib.request
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 from tools.pixinsight.workflow_archive.archive import ArchiveError
@@ -14,6 +15,27 @@ from tools.scientific_registry.photo_ingestion import IngestionError
 
 class AuthenticationError(ValueError):
     pass
+
+
+def current_catalog(portal_origin):
+    # Fixed repository projection URL; never use a browser-supplied locator.
+    class NoRedirect(urllib.request.HTTPRedirectHandler):
+        def redirect_request(self, *_):
+            return None
+    url = portal_origin + "/digital-stargate-manual/data/scientific-session-catalog.json"
+    request = urllib.request.Request(url, headers={"Cache-Control": "no-cache"})
+    try:
+        with urllib.request.build_opener(NoRedirect).open(request, timeout=15) as response:
+            if response.status != 200 or response.url != url:
+                raise IngestionError("CATALOG_UNAVAILABLE")
+            raw = response.read(16 * 1024 * 1024 + 1)
+            if len(raw) > 16 * 1024 * 1024:
+                raise IngestionError("CATALOG_SIZE_INVALID")
+            return raw
+    except IngestionError:
+        raise
+    except Exception:
+        raise IngestionError("CATALOG_UNAVAILABLE") from None
 
 
 def owner_auth(token, client_id, owner_email):
@@ -151,7 +173,8 @@ def main():
         raise RuntimeError("INGESTION_CONFIGURATION_REQUIRED")
     catalog = Path("docs/data/scientific-session-catalog.json").read_bytes()
     store = BackedUpStore(GCSStore(os.environ["DSG_INGESTION_BUCKET"]), GCSStore(os.environ["DSG_INGESTION_BACKUP_BUCKET"]))
-    service = IngestionService(store, catalog, ClamScanner(), os.environ["DSG_INGESTION_PUBLIC_BASE"])
+    service = IngestionService(store, catalog, ClamScanner(), os.environ["DSG_INGESTION_PUBLIC_BASE"],
+                               catalog_loader=lambda: current_catalog(os.environ["DSG_PORTAL_ORIGIN"]))
     auth = lambda token: owner_auth(token, os.environ["GOOGLE_CLIENT_ID"], os.environ["DSG_OWNER_EMAIL"])
     # Single request per instance matches the reviewed memory/scan envelope.
     HTTPServer(("0.0.0.0", int(os.getenv("PORT", "8080"))),
