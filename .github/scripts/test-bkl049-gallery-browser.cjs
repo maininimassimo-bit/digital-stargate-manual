@@ -9,6 +9,9 @@ let base = process.env.DSG_TEST_BASE_URL || 'http://127.0.0.1:8766/';
 const result = spawnSync('python', ['-c', 'import json; from tools.pixinsight.workflow_archive.test_public_projection import candidate,selection_for,project; b=candidate(); print(json.dumps(project(b,selection_for(b))))'], {encoding:'utf8',timeout:10000,maxBuffer:1024*1024});
 assert.equal(result.status,0,result.stderr);
 const record = JSON.parse(result.stdout);
+const externalResult = spawnSync('python', ['-c', 'import json; from tools.pixinsight.workflow_archive.test_external_public import projection; print(json.dumps(projection()))'], {encoding:'utf8',timeout:10000,maxBuffer:1024*1024});
+assert.equal(externalResult.status,0,externalResult.stderr);
+const externalRecord = JSON.parse(externalResult.stdout);
 const attack = '</pre><img src=x onerror="globalThis.__bkl049Executed=true">';
 record.steps[0].parameters[0].lexicalJson = JSON.stringify(attack);
 const makeCollection = () => {
@@ -42,6 +45,7 @@ const makeCollection = () => {
     let collection=makeCollection(), unavailable=false, requests=0;
     await page.route('**/*',route=>{
       const url=new URL(route.request().url());
+      if(url.href===externalRecord.preview.url) return route.fulfill({contentType:'image/svg+xml',body:'<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"><rect width="1" height="1"/></svg>'});
       if(url.pathname.endsWith('/data/bkl049-public-workflows.json')) {
         requests++;return unavailable?route.abort():route.fulfill({contentType:'application/json',body:contract.canonical(collection)});
       }
@@ -83,7 +87,21 @@ const makeCollection = () => {
     await panel.locator('[data-workflow-refresh]').click();await waitUnavailable();
     collection={...makeCollection(),publishedAt:null,validUntil:null,records:[]};
     await panel.locator('[data-workflow-refresh]').click();await waitUnavailable();
-    collection=makeCollection();await page.clock.install({time:Date.now()});
+    collection={...makeCollection(),records:[structuredClone(externalRecord)]};
+    collection.records[0].title=attack;
+    await panel.locator('[data-workflow-refresh]').click();await waitRecord();
+    assert.match(await panel.innerText(),/Acquisizione esterna.*dati scientifici parziali.*qualità non valutata/);
+    assert.match(await panel.innerText(),/Identificazione del soggetto dichiarata/);
+    assert.equal(await panel.locator('h4').first().textContent(),attack);
+    assert.equal(await panel.locator('img').getAttribute('src'),externalRecord.preview.url);
+    assert.equal(await panel.locator('img').getAttribute('referrerpolicy'),'no-referrer');
+    assert.equal(await page.evaluate(()=>globalThis.__bkl049Executed),undefined);
+    await page.setViewportSize({width:390,height:900});
+    assert.ok(await panel.evaluate(node=>node.scrollWidth<=node.clientWidth+2),'external mobile overflow');
+    collection.records[0].scientificContext.qualityState='ACCEPTED';
+    await panel.locator('[data-workflow-refresh]').click();await waitUnavailable();
+    collection={...makeCollection(),records:[structuredClone(externalRecord)]};
+    await page.clock.install({time:Date.now()});
     await panel.locator('[data-workflow-refresh]').click();await waitRecord();
     await page.clock.fastForward(61000);await waitUnavailable();
     assert.deepEqual(errors,[]);
@@ -92,6 +110,6 @@ const makeCollection = () => {
     await nojs.goto(base+'scientific-image-gallery/');
     assert.equal(await nojs.locator('.dsg-workflow-card').count(),0);
     assert.match(await nojs.locator('[data-bkl049-workflows]').innerText(),/occorre JavaScript/);
-    console.log('PASS BKL049 browser: exact triple/deep refresh, wrong/duplicate refs, text-only XSS, keyboard, mobile/dark, lifecycle, offline/withdrawal/expiry and no-JS.');
+    console.log('PASS BKL049 browser: V1/external V2, explicit partial scientific context, approved preview, exact triple, text-only XSS, keyboard/mobile/dark, offline/withdrawal/expiry and no-JS.');
   } finally {await browser?.close();if(server){server.closeAllConnections();await new Promise(resolve=>server.close(resolve));}}
 })().catch(error=>{console.error(error);process.exitCode=1;});

@@ -50,9 +50,26 @@ def build_public_projection(delivery_bytes, delivery_digest, current_snapshot_di
     image_id = public_id(selection['imageId'], 'IMG')
     version_id = public_id(selection['imageVersionId'], 'VER')
     workflow_id = public_id(selection['workflowId'], 'WF')
-    selected = selection['steps']
-    require(type(selected) is list and len(selected) <= 512, 'PUBLIC_STEP_LIMIT')
     source = bundle['result']['sidecar']['workflow']['steps']
+    steps = select_steps(source, selection['steps'])
+    output = {
+        'schemaVersion': '1.0', 'kind': 'BKL049_PUBLIC_WORKFLOW',
+        'authority': 'processing_evidence', 'actionAuthority': 'NONE',
+        'imageId': image_id, 'imageVersionId': version_id, 'workflowId': workflow_id,
+        'bindingEvidenceClass': 'DECLARED', 'captureCompleteness': 'PARTIAL' if steps else 'UNAVAILABLE',
+        'executionEvidence': 'NOT_ESTABLISHED', 'orderSemantics': 'EXPORTED_CONFIGURATION_ORDER',
+        'methodCitation': CITATION, 'steps': steps,
+        'omittedStepCount': len(source) - len(steps), 'gaps': list(GAPS),
+    }
+    # This schema is additive; existing PXP/catalog/gallery contracts stay closed.
+    validate_emitted_profile(output, json.loads(SCHEMA.read_text(encoding='utf-8')))
+    require(len(encode(output)) <= MAX_PUBLIC_BYTES, 'PUBLIC_OUTPUT_LIMIT')
+    return output
+
+
+def select_steps(source, selected):
+    """Shared exact allowlist projection after a profile-specific authority check."""
+    require(type(selected) is list and len(selected) <= 512, 'PUBLIC_STEP_LIMIT')
     by_id = {step['stepId']: step for step in source}
     steps, seen = [], set()
     for entry in selected:
@@ -86,16 +103,4 @@ def build_public_projection(delivery_bytes, delivery_digest, current_snapshot_di
                       'evidenceClass': 'DECLARED', 'parameters': params,
                       'omittedParameterCount': len(original_params) - len(params)})
     steps.sort(key=lambda step: step['sourceOrdinal'])
-    output = {
-        'schemaVersion': '1.0', 'kind': 'BKL049_PUBLIC_WORKFLOW',
-        'authority': 'processing_evidence', 'actionAuthority': 'NONE',
-        'imageId': image_id, 'imageVersionId': version_id, 'workflowId': workflow_id,
-        'bindingEvidenceClass': 'DECLARED', 'captureCompleteness': 'PARTIAL' if steps else 'UNAVAILABLE',
-        'executionEvidence': 'NOT_ESTABLISHED', 'orderSemantics': 'EXPORTED_CONFIGURATION_ORDER',
-        'methodCitation': CITATION, 'steps': steps,
-        'omittedStepCount': len(source) - len(steps), 'gaps': list(GAPS),
-    }
-    # This schema is additive; existing PXP/catalog/gallery contracts stay closed.
-    validate_emitted_profile(output, json.loads(SCHEMA.read_text(encoding='utf-8')))
-    require(len(encode(output)) <= MAX_PUBLIC_BYTES, 'PUBLIC_OUTPUT_LIMIT')
-    return output
+    return steps

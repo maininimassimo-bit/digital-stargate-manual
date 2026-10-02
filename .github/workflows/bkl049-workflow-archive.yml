@@ -84,3 +84,6 @@ jobs:
 
       - name: External retrospective decisions and private PXP V2 (synthetic only)
         run: python -m unittest tools.scientific_registry.test_external_registry -v
+
+      - name: External approved projection and local publication boundaries (synthetic only)
+        run: python -m unittest tools.pixinsight.workflow_archive.test_external_public -v

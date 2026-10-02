@@ -7,6 +7,9 @@ const contract = require('../../docs/javascripts/bkl049-workflow-contract.js');
 const child = spawnSync('python', ['-c', 'import json; from tools.pixinsight.workflow_archive.test_public_projection import candidate,selection_for,project; b=candidate(); print(json.dumps(project(b,selection_for(b))))'], {encoding:'utf8',timeout:10000,maxBuffer:1024*1024});
 assert.equal(child.status, 0, child.stderr);
 const workflow = JSON.parse(child.stdout);
+const externalChild = spawnSync('python', ['-c', 'import json; from tools.pixinsight.workflow_archive.test_external_public import projection; print(json.dumps(projection()))'], {encoding:'utf8',timeout:10000,maxBuffer:1024*1024});
+assert.equal(externalChild.status, 0, externalChild.stderr);
+const externalWorkflow = JSON.parse(externalChild.stdout);
 const current = () => {
   const now = Math.floor(Date.now()/1000)*1000;
   return {schemaVersion:'1.0',kind:'BKL049_PUBLIC_COLLECTION',authority:'processing_evidence',actionAuthority:'NONE',
@@ -14,6 +17,25 @@ const current = () => {
     validUntil:new Date(now+60000).toISOString().replace('.000Z','Z'), records:[structuredClone(workflow)]};
 };
 const snapshot = contract.parseCollection(contract.canonical(current()));
+const externalCollection = {...current(), records:[externalWorkflow]};
+assert.equal(contract.parseCollection(contract.canonical(externalCollection)).records[0].scientificContext.qualityState, 'UNKNOWN');
+for (const mutate of [
+  r => r.scientificContext.qualityState='ACCEPTED',
+  r => r.scientificContext.metadataState='COMPLETE',
+  r => delete r.scientificContext,
+  r => r.preview.url='javascript:alert(1)',
+  r => r.preview.url+='?token=secret',
+  r => r.preview.url+='\n',
+  r => r.preview.sha256='private',
+  r => r.title='x'.repeat(201),
+  r => r.attribution='\u0000secret',
+  r => r.schemaVersion='1.0'
+]) {
+  const bad=structuredClone(externalWorkflow);mutate(bad);
+  assert.throws(()=>contract.validateWorkflow(bad));
+}
+assert.equal(contract.resolve(externalCollection, externalWorkflow.imageId, externalWorkflow.imageVersionId, externalWorkflow.workflowId).kind, 'BKL049_PUBLIC_EXTERNAL_WORKFLOW');
+assert.equal(contract.resolve(externalCollection, externalWorkflow.imageId, 'VER-wrong', externalWorkflow.workflowId), null);
 assert.ok(Object.isFrozen(snapshot.records[0].steps));
 assert.equal(contract.resolve(snapshot, workflow.imageId, workflow.imageVersionId, workflow.workflowId).workflowId, workflow.workflowId);
 assert.equal(contract.resolve(snapshot, workflow.imageId, 'VER-wrong', workflow.workflowId), null);

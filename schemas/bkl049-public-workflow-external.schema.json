@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-stargate.example/schemas/bkl049-public-workflow-external.schema.json",
+  "title": "BKL-049 explicit external retrospective public projection v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "authority",
+    "actionAuthority",
+    "imageId",
+    "imageVersionId",
+    "workflowId",
+    "bindingEvidenceClass",
+    "captureCompleteness",
+    "executionEvidence",
+    "orderSemantics",
+    "methodCitation",
+    "steps",
+    "omittedStepCount",
+    "gaps",
+    "scientificContext",
+    "title",
+    "attribution",
+    "preview"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "2.0"
+    },
+    "kind": {
+      "const": "BKL049_PUBLIC_EXTERNAL_WORKFLOW"
+    },
+    "authority": {
+      "const": "processing_evidence"
+    },
+    "actionAuthority": {
+      "const": "NONE"
+    },
+    "imageId": {
+      "type": "string",
+      "pattern": "^IMG-[A-Za-z0-9_-]{1,64}(?![\\s\\S])"
+    },
+    "imageVersionId": {
+      "type": "string",
+      "pattern": "^VER-[A-Za-z0-9_-]{1,64}(?![\\s\\S])"
+    },
+    "workflowId": {
+      "type": "string",
+      "pattern": "^WF-[A-Za-z0-9_-]{1,64}(?![\\s\\S])"
+    },
+    "bindingEvidenceClass": {
+      "const": "DECLARED"
+    },
+    "captureCompleteness": {
+      "enum": [
+        "PARTIAL",
+        "UNAVAILABLE"
+      ]
+    },
+    "executionEvidence": {
+      "const": "NOT_ESTABLISHED"
+    },
+    "orderSemantics": {
+      "const": "EXPORTED_CONFIGURATION_ORDER"
+    },
+    "methodCitation": {
+      "const": "architecture/ADR-019-External-Retrospective-Scientific-Records/"
+    },
+    "steps": {
+      "type": "array",
+      "maxItems": 512,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sourceOrdinal",
+          "processId",
+          "evidenceClass",
+          "parameters",
+          "omittedParameterCount"
+        ],
+        "properties": {
+          "sourceOrdinal": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "processId": {
+            "type": "string",
+            "pattern": "^[A-Za-z_][A-Za-z0-9_]{0,127}(?![\\s\\S])"
+          },
+          "evidenceClass": {
+            "const": "DECLARED"
+          },
+          "parameters": {
+            "type": "array",
+            "maxItems": 128,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "lexicalJson"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z_][A-Za-z0-9_]{0,127}(?![\\s\\S])"
+                },
+                "lexicalJson": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 4096
+                }
+              }
+            }
+          },
+          "omittedParameterCount": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "omittedStepCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "gaps": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "enum": [
+          "PARTIAL_HISTORY",
+          "EXECUTION_NOT_OBSERVED",
+          "UPSTREAM_RELATIONS_UNRESOLVED",
+          "PROCESS_VERSIONS_UNAVAILABLE",
+          "PUBLIC_FIELDS_OMITTED"
+        ]
+      }
+    },
+    "scientificContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "origin",
+        "metadataState",
+        "qualityState",
+        "subjectIdentification"
+      ],
+      "properties": {
+        "origin": {
+          "const": "EXTERNAL"
+        },
+        "metadataState": {
+          "const": "PARTIAL"
+        },
+        "qualityState": {
+          "const": "UNKNOWN"
+        },
+        "subjectIdentification": {
+          "const": "DECLARED_NOT_INDEPENDENTLY_VERIFIED"
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "attribution": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "preview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "alt"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "maxLength": 1024,
+          "pattern": "^https://storage\\.googleapis\\.com/[a-z0-9][a-z0-9.-]{1,220}/[A-Za-z0-9_-][A-Za-z0-9_/-]*\\.(?:jpg|jpeg|png|webp)(?![\\s\\S])"
+        },
+        "alt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        }
+      }
+    }
+  }
+}
