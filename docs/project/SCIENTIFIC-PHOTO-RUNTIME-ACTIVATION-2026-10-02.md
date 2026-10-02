@@ -39,6 +39,15 @@ No older publication head was restored. The current public collection is empty.
 Synthetic test entries and original/recovery bytes remain private; they are
 labelled as technical tests and do not represent scientific acceptance.
 
+Deployed HTTP OAT build `8cf66628-d683-46f1-9013-793ef3da4f25` passed health,
+empty public discovery, anonymous read/write denial, invalid-token denial,
+wrong-origin denial and rejection of a real, independently verified Google ID
+token belonging to the dedicated service account (a non-Owner). The temporary
+token-generation grant was then removed; credentials were never logged or
+retained. Earlier fixture attempts could not obtain a metadata ID token, then
+encountered IAM propagation; these were test provisioning failures, not passing
+evidence. The final actual-token test succeeded without weakening verification.
+
 This establishes container antivirus/GCS behavior, not actual Owner Google
 login or acceptance of a real scientific file. Cloud Run startup/HTTP checks are
 separate from the build-side core tests. Live Owner/browser upload and real-file
