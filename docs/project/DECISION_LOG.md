@@ -1,5 +1,17 @@
 # Decision Log
 
+## 2026-10-02 — Actual Owner login verified before photo procedure activation
+
+After PR #475 exact merge-SHA checks and actual Pages publication, the Google
+button used the existing authenticated Owner browser session. The deployed
+service accepted readonly archive retrieval and the UI displayed "Accesso Owner
+verificato"; uploads and archive actions remained disabled throughout the staged
+test. No token was extracted or persisted. This satisfies the actual Owner-login
+gate for the separately reviewed enabling configuration. Final deployed browser
+OAT uses labelled synthetic inputs only; real scientific files are not migrated,
+uploaded or accepted by inference. The previous exact resource/cost approval and
+authority boundaries remain unchanged.
+
 ## 2026-10-02 — Owner authorizes exact photo ingestion runtime and costs
 
 After the reviewed source/portal release (PR #474) and concrete resource/cost

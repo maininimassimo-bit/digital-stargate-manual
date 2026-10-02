@@ -13,9 +13,10 @@ Owner-approved successor (02/10/2026): BKL-034 session photo ingestion implement
 the guided Owner-only portal procedure, separate from the closed F2 dry-run.
 Source/UI delivery is complete through PR #474. The Owner separately approved
 the exact paid resources; the service is deployed and real AV/GCS tests passed
-with synthetic inputs. Actual Owner Google login remains pending. The staged
-portal enables only login/readonly verification, with upload and archive mutation
-controls disabled until reviewed activation. Operational acceptance remains open.
+with synthetic inputs. Actual Owner Google login and production readonly archive
+retrieval passed on the staged portal after PR #475. Reviewed activation enables
+the full procedure for final deployed browser OAT and Owner use. Real scientific
+file acceptance and scientific quality are not inferred from synthetic tests.
 Implementation and deployment boundary:
 `infrastructure/scientific-photo-ingestion/README.md`. This does not reopen old
 scientific acceptance, grant AP-014 admission or change BKL-043 sequencing.
