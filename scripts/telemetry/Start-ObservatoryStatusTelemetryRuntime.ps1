@@ -5,11 +5,16 @@ param(
     [string]$PublishEndpoint = 'https://dsg-observatory-status-relay-cfjug35c6q-ew.a.run.app/v1/observatory-status',
     [string]$NinaProjection = 'C:\Users\PrimaLuceLab\AppData\Local\DigitalStarGate\telemetry\nina-observatory-status.json',
     [ValidateRange(5,300)][int]$PollSeconds = 15,
-    [ValidateRange(1,3600)][int]$FreshnessSeconds = 60
+    [ValidateRange(1,3600)][int]$FreshnessSeconds = 60,
+    [bool]$RuntimeEnabled = $false
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+
+if (-not $RuntimeEnabled) {
+    throw 'Runtime disabled by contract: pass -RuntimeEnabled $true only after the governed activation gate.'
+}
 
 Add-Type -AssemblyName System.Security
 
@@ -33,7 +38,8 @@ try {
         -NinaProjection $NinaProjection `
         -PollSeconds $PollSeconds `
         -FreshnessSeconds $FreshnessSeconds `
-        -PublishEndpoint $PublishEndpoint
+        -PublishEndpoint $PublishEndpoint `
+        -RuntimeEnabled $RuntimeEnabled
 }
 finally {
     if ($plainBytes) { [Array]::Clear($plainBytes, 0, $plainBytes.Length) }

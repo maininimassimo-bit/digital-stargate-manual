@@ -77,8 +77,21 @@ $weather.sqm_observed_at_utc = $sqmObservedAt
 $weather.sqm_fresh_until_utc = $sqmFreshUntil
 $weather.sqm_source = $sqmSource
 
-$observedSafety = if ($overallQuality -eq 'CURRENT') { $safetySignal.state } else { 'UNKNOWN' }
-$reason = if ($observedSafety -eq 'UNKNOWN') { 'NINA SafetyMonitor state unavailable or stale; local physical interlocks remain authoritative' } else { 'Observed through NINA SafetyMonitor; local physical interlocks remain authoritative' }
+$safetyObservationState = if ($overallQuality -eq 'CURRENT') { $safetySignal.state } else { 'UNKNOWN' }
+$safetyObservation = [ordered]@{
+    state = $safetyObservationState
+    quality = $safetySignal.quality
+    observed_at_utc = if ($overallQuality -eq 'CURRENT') { $observedAt.ToString('o') } else { $null }
+    fresh_until_utc = if ($overallQuality -eq 'CURRENT') { $freshUntil.ToString('o') } else { $null }
+    source = 'NINA_SAFETY_MONITOR'
+    source_instance = $SourceInstance
+    is_safe = if ($overallQuality -eq 'CURRENT') { [bool]$projection.services.safety.details.isSafe } else { $null }
+    safeties_raw = if ($overallQuality -eq 'CURRENT') { $projection.services.power.details.safetiesRaw } else { $null }
+    power_fault_mask = if ($overallQuality -eq 'CURRENT') { $projection.services.power.details.powerFaultMask } else { $null }
+    power_fault = if ($overallQuality -eq 'CURRENT') { $projection.services.power.details.powerFault } else { $null }
+    no_hardware_commands = $true
+}
+$reason = 'Overall Safety Authority remains local; NINA SafetyMonitor is observational evidence only'
 
 $payload = [ordered]@{
     schema_version = '1.1'
@@ -90,7 +103,12 @@ $payload = [ordered]@{
     quality = $overallQuality
     correlation_id = [guid]::NewGuid().ToString('D')
     systems = [ordered]@{ dome = $dome; mount = $mount; camera = $camera; power = $power; network = $network; weather = $weather }
-    safety = [ordered]@{ observed_state = $observedSafety; authority = 'NINA_SAFETY_MONITOR_OBSERVATION'; reasons = @($reason) }
+    safety = [ordered]@{
+        observed_state = 'UNKNOWN'
+        authority = 'LOCAL_SAFETY_AUTHORITY'
+        reasons = @($reason)
+        observation = $safetyObservation
+    }
     diagnostics = [ordered]@{
         telemetry_author = $projection.author; nina_projection = $NinaProjection
         dome_raw_shutter_status = $projection.services.dome.details.rawShutterStatus
