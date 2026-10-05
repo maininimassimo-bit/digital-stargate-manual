@@ -62,3 +62,7 @@ La chiusura RC2 non introduce nuovo debito tecnico e congela la compatibilità R
 ## Review 2026-10-05 — continuità M27 e pilota locale
 
 La riconciliazione corregge i punti d’ingresso obsoleti. History disponibile incompleta, replay non garantito e worker/coda/IA di produzione assenti sono limiti e lavoro pianificato espliciti nel [piano pilota](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md), non debiti dichiarati risolti. Le disposition TD esistenti restano invariate.
+
+### 2026-10-05 — P2 local boundary
+
+P2 adds a tested local coordinator and fixed linear executor; remote queue/model and full nonlinear pipeline remain planned. Crash recovery intentionally retains the reservation and requires confirmed stopped execution plus quarantine/new root; there is no expiry, automatic retry or forced unlock. This bounded pilot does not resolve production availability/recovery or scientific quality gaps. Existing TD dispositions remain unchanged.

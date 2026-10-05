@@ -427,3 +427,7 @@ BKL-049 resta Done per l’archivio accepted. [Handover corrente](HANDOVER_2026-
 | BKL-049-EXT-PIAI | P1 | PixInsight AI Local Processing Pilot | In Progress | Archivio BKL-049; importer 1.2; Owner PC e master | Preflight, esecutore su copie e prova M27; successivamente protocollo/coda/portale con gate distinti | [Piano](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md) |
 
 BKL-043 conserva priorità e lifecycle propri. BKL-050 richiede anche la disposition dell’estensione; questa voce non è una nuova milestone numerata e non riapre la closure storica.
+
+### 2026-10-05 — BKL-049-EXT-PIAI P2
+
+P1 delivered via PR #479. P2 implemented and tested natively on private copies: five native processes/checkpoints, original files unchanged, pre-cancel and replay refusal. Fixed linear recipe and owner-supervised local launch only. P3 nonlinear output and remote/provider/portal phases remain planned; exact-head CI/review required for this increment. [Evidence](evidence/BKL-049-PIAI-P2-2026-10-05.json).

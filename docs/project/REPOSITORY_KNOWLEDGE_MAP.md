@@ -167,3 +167,5 @@ La [riconciliazione F0](BKL-049-F0-ACCEPTANCE-2026-09-30.md) registra PR #445, m
 Le sezioni datate precedenti conservano l’evidenza storica. Il [nuovo handover](HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md) e la [baseline corrente](CURRENT_TECHNICAL_BASELINE_2026-10-05.md) prevalgono per lo stato: BKL-043 F4 lifecycle pendente; BKL-049 archivio chiuso, procedura foto/workflow e importer 1.2 consegnati; ultima M27 pubblicata con 80 processi e 16 associazioni dichiarate. Il [pilota locale BKL-049-EXT-PIAI](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md) aggiunge elaborazione file su copie del PC Owner. Worker remoto, modello API e pubblicazione automatica non sono implementati. Safety Authority e dispositivi restano invariati.
 
 Versione 6.4 — 05/10/2026: nuova continuità M27 e pilota locale; snapshot storici conservati.
+
+P2 locale implementato in `tools/pixinsight/local_pilot/worker.py` e `executor.jsh`; procedura in README, test sintetici Node/Python e [ricevuta nativa minimizzata](evidence/BKL-049-PIAI-P2-2026-10-05.json). Il journal e i checkpoint sono privati. P3 non lineare e remoto rimangono pianificati.

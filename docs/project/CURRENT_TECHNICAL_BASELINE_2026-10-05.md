@@ -3,8 +3,8 @@
 | Campo | Valore |
 |---|---|
 | ID | DSG-BASELINE-20261005 |
-| Versione | 1.1 |
-| Stato | Current reconciliation; native pilot P1 tested |
+| Versione | 1.2 |
+| Stato | Current reconciliation; native pilot P1/P2 tested |
 | Data | 2026-10-05 |
 
 La [baseline del 25 settembre](CURRENT_TECHNICAL_BASELINE_2026-09-25.md) conserva le foundation storiche. Il presente aggiornamento prevale per continuità, BKL-049 e M27; non promuove capability estranee.
@@ -16,7 +16,7 @@ La [baseline del 25 settembre](CURRENT_TECHNICAL_BASELINE_2026-09-25.md) conserv
 - BKL-034 procedura foto/sessioni: caricamento manuale Owner-only e archiviazione separata, runbook in `infrastructure/scientific-photo-ingestion/README.md`; PR #474–#476.
 - Importer PixInsight 1.2: PR #477 merged; esportatore multi-view 2.0.1. Esportazione/importazione non equivalgono a completezza universale o replay.
 - M27 ultima versione: elaborazione locale nativa assistita, export 24 viste/80 processi/147 istanze; nuova pubblicazione verificata il 5 ottobre con 16 associazioni Owner-declared. [Handover ed evidenza](HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md).
-- BKL-049-EXT-PIAI: estensione autorizzata; preflight P1 nativo verificato, esecutore P2 ed elaborazione P3 ancora pianificati. Nessun worker remoto o modello IA di produzione già implementato.
+- BKL-049-EXT-PIAI: P1 consegnata con PR #479; P2 esecutore locale implementato e provato nativamente su copie M27, cinque processi e cinque checkpoint lineari. P3 non lineare e P4–P6 restano pianificati. Nessun worker remoto o modello IA di produzione già implementato.
 - BKL-046 resta advisory/read-only, `aiModelImplemented=false`, efficacia scientifica non valutabile e produzione non pronta. Il pilota PixInsight è distinto.
 
 ## Contratti e autorità
@@ -27,6 +27,8 @@ Il pilota autorizza esclusivamente elaborazione di file su copie locali sul PC d
 
 ## Prossimo gate
 
-Consegnare la riconciliazione con CI/review e poi verificare l’ambiente reale PixInsight, implementare manifest ed esecutore locale controllato e registrare un primo test. Il [piano](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md) separa preflight, prova di elaborazione e integrazione futura. Registro: v1.0, riconciliazione 2026-10-05; review e consegna tracciate sulla PR.
+Consegnare P2 con CI/review sullo stesso head, poi procedere alla prova P3 non lineare con verifica tecnica e visiva. Il [piano](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md) separa preflight, esecutore, elaborazione e integrazione futura. Registro: v1.0, riconciliazione 2026-10-05; review e consegna tracciate sulle PR.
 
 Aggiornamento v1.1: preflight nativo e 13 test sintetici; [evidenza P1](evidence/BKL-049-PIAI-P1-2026-10-05.json). La disponibilità dei processi non attesta versioni/licenze/modelli.
+
+Aggiornamento v1.2: [evidenza P2](evidence/BKL-049-PIAI-P2-2026-10-05.json), run completato, pre-cancel e replay nativi; integrità e identità esecutore verificate. 14 test esecutore e 16 coordinatore sintetici. Header verificati, qualità pixel/scientifica non certificata; nessun provider o mutazione del portale.

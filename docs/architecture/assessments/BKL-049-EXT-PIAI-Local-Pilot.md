@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | ID | BKL-049-EXT-PIAI |
-| Versione | 1.1 |
+| Versione | 1.2 |
 | Stato | Owner-authorized pilot; architecture/release review required |
 | Data | 2026-10-05 |
 | Dipendenze | BKL-049 archive; importer 1.2; Owner PC/PixInsight; calibrated aligned masters |
@@ -34,7 +34,7 @@ Un futuro worker sul PC riceverà job attraverso connessione autenticata in usci
 | Fase | Risultato richiesto | Stato iniziale |
 |---|---|---|
 | P1 — Preflight | Prova nativa M27 eseguita il 5 ottobre: PI 1.9.5 build 1706, quattro master invariati, 12 costruttori di processo disponibili; versioni moduli/licenze/modelli non attestati | Native test PASS; delivery/review tracked on PR |
-| P2 — Esecutore locale | Un job, copie, ricetta ammessa, journal, cancellazione tra processi, errore esplicito, export separato | Planned |
+| P2 — Esecutore locale | Coordinatore locale, copie, snapshot esecutore, ricetta lineare fissa, journal e checkpoint; prova nativa completa, pre-cancel e replay | Native tests PASS; delivery/review tracked on PR |
 | P3 — Prova M27 | Input bloccati, output non lineare, verifiche finite/dimensioni/colore, confronto visivo; nessuna accettazione scientifica automatica | Planned |
 | P4 — Connessione e IA | Protocollo autenticato, costi/provider/diritti definiti, job idempotenti e recupero offline | Planned |
 | P5 — Portale e provenance | Comando Owner, stato, preview, revisione e collegamento esatto a sessioni e workflow | Planned |
@@ -66,4 +66,14 @@ Versione 1.0: piano autorizzato il 5 ottobre, nessuna fase dichiarata accettata 
 
 La [ricevuta minimizzata](../../project/evidence/BKL-049-PIAI-P1-2026-10-05.json) registra il primo controllo reale. Il primo tentativo ha rifiutato correttamente il contenitore XISF multi-image: master più maschera di ritaglio. La selezione esplicita dell’indice immagine e delle dimensioni attese ha consentito il secondo test. Quattro master monocromatici Float32 4634×2808, 12 costruttori richiesti disponibili, integrità dei file confermata dopo il run, zero master modificati, zero processi applicati e zero richieste provider. Parametri, percorsi e digest privati non sono pubblicati.
 
-Libreria `tools/pixinsight/local_pilot/preflight.jsh`; 13 test sintetici di rifiuto/selezione passati localmente. I test CI usano stub e non sostituiscono il test nativo. Le versioni dei moduli non sono esposte da ProcessInstance e restano sconosciute; disponibilità dei costruttori non prova licenza o caricamento dei modelli RC. P2 resta da implementare: esecutore su copie, journal runtime, serializzazione job e annullamento tra processi. Il risultato P1 non produce una nuova foto né modifica la gallery. Versione 1.1: prova nativa P1 e gate successivo; consegna governata sulla PR relativa.
+Libreria `tools/pixinsight/local_pilot/preflight.jsh`; 13 test sintetici di rifiuto/selezione passati localmente. I test CI usano stub e non sostituiscono il test nativo. Le versioni dei moduli non sono esposte da ProcessInstance e restano sconosciute; disponibilità dei costruttori non prova licenza o caricamento dei modelli RC. Il risultato P1 non produce una nuova foto né modifica la gallery. Versione 1.1: prova nativa P1; consegnata con PR #479, merge `76d6186489c78aceb32f34a6b96afbe8f88457a7`, 17 controlli exact-head e 16 workflow post-merge SUCCESS, review sequenziali senza finding finali.
+
+## P2 — esecutore e prove native 2026-10-05
+
+Implementati `worker.py` e `executor.jsh`, con [procedura operativa nel repository](https://github.com/maininimassimo-bit/digital-stargate-manual/tree/main/tools/pixinsight/local_pilot). La ricetta `LRGB_LINEAR_PREP_V1` applica quattro ABE alle copie R/G/B/L e compone RGB: cinque processi, cinque checkpoint XISF Float32 lineari. La luminanza è preparata ma non ancora integrata. Non è una foto finale né una ricetta universale. Calibrazione colore, astrometria RGB, riduzione rumore, dettaglio, stretch e confronto visivo restano P3.
+
+La [ricevuta minimizzata P2](../../project/evidence/BKL-049-PIAI-P2-2026-10-05.json) distingue la prova reale dai test sintetici. Run nativo completato: cinque processi/checkpoint, file originali e viste di input invariati, snapshot dello script e header verificati. Pre-cancel nativo: zero processi/output. Replay nativo rifiutato: tutti i 37 file del job concluso invariati. Seconda preparazione nello stesso worker root rifiutata. Test locali: 13 preflight, 14 esecutore, 16 coordinatore; errore nativo simulato e annullamento tra processi non sono presentati come OAT fisiche.
+
+Una prenotazione locale e un handle File esclusivo Windows, verificato a runtime prima dei pixel, serializzano un root configurato. Non è un lock globale di più worker. Il lancio resta supervisionato da Script → Execute Script File. Crash o preparazione incompleta conservano la prenotazione; nessuna ripresa o scadenza automatica. Per recuperare, confermare l’arresto di PixInsight, conservare/quarantinare il root e usare un root nuovo. Non forzare lo sblocco di un job vivo.
+
+Le sorgenti native di ogni processo restano esatte nel journal privato. `workflow.js` esporta solo le cinque istanze riuscite, con identificatori rinominati e valori letterali preservati; il lettore 1.2 le legge come dati. Le correlazioni runtime restano separate; questa prova non rende completa la History a monte e non modifica il contratto pubblico importato. Nessuna API provider, connessione remota, modifica gallery o accettazione scientifica. Versione 1.2: P2 implementato e provato nativamente; delivery, CI e review da registrare sulla PR del relativo head.
