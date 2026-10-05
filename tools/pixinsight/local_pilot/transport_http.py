@@ -90,7 +90,7 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                 if self.command == "GET" and path in {"/v1/science/intakes", "/v1/worker/science/intakes"}:
                     return self.send(200, {"intakes": scientific.intakes()})
                 if self.command == "POST" and path == "/v1/science/intakes":
-                    return self.send(200, scientific.create_intake(self.body()))
+                    return self.send(200, scientific.create_intake(self.body(65536)))
                 intake_match = re.fullmatch(r"/v1/science/intakes/([a-f0-9]{32})", path)
                 if intake_match and self.command == "GET":
                     return self.send(200, scientific.intake(intake_match[1]))

@@ -201,6 +201,12 @@ class IntakeTests(unittest.TestCase):
             self.assertEqual(error.exception.code,403)
             with request('/v1/science/intakes/'+self.request['requestId']+'/approve',{'proposalSha256':plan['proposalSha256']}) as response:
                 self.assertEqual(decode(response.read())['state'],'QUEUED')
+            unicode_selection={**self.selection(),'requestId':'8'*32,'prompt':'🌌'*4000}
+            self.assertGreater(len(encode(unicode_selection)),16384)
+            with request('/v1/science/intakes',unicode_selection) as response:
+                self.assertEqual(response.status,200)
+            self.assertEqual(self.portal.intake('8'*32)['selection']['prompt'],unicode_selection['prompt'])
+            self.assertEqual(len(self.portal.jobs()),1)
             selection={**self.selection(),'requestId':'7'*32,'sourceProfile':{'mode':'OSC','layout':'PANELS','bayerPattern':None,'panels':[]}}
             with request('/v1/science/intakes',selection) as response:self.assertEqual(response.status,200)
             stem='/science/intakes/'+selection['requestId']
