@@ -1,0 +1,22 @@
+name: PixInsight local pilot contract
+on:
+  pull_request:
+    paths: ['tools/pixinsight/local_pilot/**', '.github/workflows/pixinsight-local-pilot.yml']
+  push:
+    branches: [main]
+    paths: ['tools/pixinsight/local_pilot/**', '.github/workflows/pixinsight-local-pilot.yml']
+permissions:
+  contents: read
+jobs:
+  preflight-contract:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test synthetic preflight rejection and multi-image selection
+        run: node --test tools/pixinsight/local_pilot/preflight.test.mjs

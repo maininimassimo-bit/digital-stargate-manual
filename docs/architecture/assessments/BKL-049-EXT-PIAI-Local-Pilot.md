@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | ID | BKL-049-EXT-PIAI |
-| Versione | 1.0 |
+| Versione | 1.1 |
 | Stato | Owner-authorized pilot; architecture/release review required |
 | Data | 2026-10-05 |
 | Dipendenze | BKL-049 archive; importer 1.2; Owner PC/PixInsight; calibrated aligned masters |
@@ -33,7 +33,7 @@ Un futuro worker sul PC riceverà job attraverso connessione autenticata in usci
 
 | Fase | Risultato richiesto | Stato iniziale |
 |---|---|---|
-| P1 — Preflight | Versione PI, moduli disponibili, master presenti e invariati; manifest privato e nessuna elaborazione implicita | In Progress |
+| P1 — Preflight | Prova nativa M27 eseguita il 5 ottobre: PI 1.9.5 build 1706, quattro master invariati, 12 costruttori di processo disponibili; versioni moduli/licenze/modelli non attestati | Native test PASS; delivery/review tracked on PR |
 | P2 — Esecutore locale | Un job, copie, ricetta ammessa, journal, cancellazione tra processi, errore esplicito, export separato | Planned |
 | P3 — Prova M27 | Input bloccati, output non lineare, verifiche finite/dimensioni/colore, confronto visivo; nessuna accettazione scientifica automatica | Planned |
 | P4 — Connessione e IA | Protocollo autenticato, costi/provider/diritti definiti, job idempotenti e recupero offline | Planned |
@@ -61,3 +61,9 @@ Acceptance P1/P2: prove di rifiuto per identità/input incoerenti e destinazione
 [Handover](../../project/HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md), [baseline](../../project/CURRENT_TECHNICAL_BASELINE_2026-10-05.md), [closure archivio](../../project/BKL-049-CLOSURE-2026-10-02.md), [importer 1.2](BKL-049-Portal-Importer-1.2.md).
 
 Versione 1.0: piano autorizzato il 5 ottobre, nessuna fase dichiarata accettata prima di esecuzione/review. Rollback: interrompere nuovi job, conservare ricevute e output parziali, ritirare il codice aggiuntivo; originali e gallery non richiedono modifica.
+
+## P1 — prova nativa 2026-10-05
+
+La [ricevuta minimizzata](../../project/evidence/BKL-049-PIAI-P1-2026-10-05.json) registra il primo controllo reale. Il primo tentativo ha rifiutato correttamente il contenitore XISF multi-image: master più maschera di ritaglio. La selezione esplicita dell’indice immagine e delle dimensioni attese ha consentito il secondo test. Quattro master monocromatici Float32 4634×2808, 12 costruttori richiesti disponibili, integrità dei file confermata dopo il run, zero master modificati, zero processi applicati e zero richieste provider. Parametri, percorsi e digest privati non sono pubblicati.
+
+Libreria `tools/pixinsight/local_pilot/preflight.jsh`; 13 test sintetici di rifiuto/selezione passati localmente. I test CI usano stub e non sostituiscono il test nativo. Le versioni dei moduli non sono esposte da ProcessInstance e restano sconosciute; disponibilità dei costruttori non prova licenza o caricamento dei modelli RC. P2 resta da implementare: esecutore su copie, journal runtime, serializzazione job e annullamento tra processi. Il risultato P1 non produce una nuova foto né modifica la gallery. Versione 1.1: prova nativa P1 e gate successivo; consegna governata sulla PR relativa.

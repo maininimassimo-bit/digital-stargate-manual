@@ -551,3 +551,7 @@ The Owner requests adapting the portal to the complete available-history export.
 ## 2026-10-05 — M27 riconciliata e pilota PixInsight IA sul PC Owner
 
 L’Owner autorizza documentazione/roadmap/handover cumulativi e poi il pilota locale. Registrata l’ultima M27 elaborata nativamente, esportata e pubblicata al posto della precedente, con 16 associazioni Owner-declared. Le evidenze importate restano PARTIAL/NOT_ESTABLISHED. Selezionato il PC Owner per il primo test personale, un job per volta, copie dei master e nessun nuovo provider a pagamento. BKL-049 archive resta chiusa; BKL-049-EXT-PIAI è un’estensione separata in progress. [Piano](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md) e [handover](HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md). La licenza installata non attesta diritti commerciali/multiutente; nessun worker remoto o modello API è già implementato. Nessuna authority dispositivi/Safety introdotta.
+
+## 2026-10-05 — PixInsight IA P1 native preflight
+
+Dopo la consegna documentale #478 viene eseguito il preflight locale. Un contenitore multi-image è prima rifiutato e poi selezionato tramite indice esplicito/dimensioni attese. Quattro master invariati e 12 costruttori disponibili; nessuna elaborazione o chiamata provider. P2/P3 restano successivi; licenze/modelli/versioni plugin non sono certificati. [Evidenza minimizzata](evidence/BKL-049-PIAI-P1-2026-10-05.json).
