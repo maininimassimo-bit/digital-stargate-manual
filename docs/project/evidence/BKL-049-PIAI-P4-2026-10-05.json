@@ -21,8 +21,8 @@
   },
   "tests": {
     "nodePass": 33,
-    "pythonWindowsPass": 57,
-    "transportCases": 27,
+    "pythonWindowsPass": 62,
+    "transportCases": 32,
     "evidenceMode": "Synthetic persistence and actual loopback HTTP; fake Owner auth; no cloud/native transport OAT",
     "coverage": [
       "Role/origin denial",
@@ -39,7 +39,8 @@
       "Supervised collection",
       "Terminal ack crash reconciliation",
       "Conservative ambiguous recovery",
-      "Missing activation refuses startup"
+      "Missing activation refuses startup",
+      "Root loss/new-root and advanced-claim refusal; durable PREPARING fence before copies"
     ]
   },
   "notEstablished": [
@@ -57,5 +58,12 @@
     "P4 activation/OAT",
     "P5",
     "P6"
-  ]
+  ],
+  "reviewCorrection": {
+    "initialHead": "8f7a2cc49cacf40f2bfeca6c06ac645dbf1bb05b",
+    "initialARB": "1 Major: duplicate preparation after local binding loss",
+    "change": "Persistent local root identity pinned by first claim plus remote PREPARING acknowledgement before copies; advanced claims require original binding",
+    "regressionCases": 5,
+    "finalExactHeadReview": "TRACKED_ON_PR"
+  }
 }

@@ -13,7 +13,7 @@ from tools.pixinsight.local_pilot.worker import RECIPE, NONLINEAR_RECIPE
 STATE_KEY = "control/piai-state.json"
 LIMIT = 1024 * 1024
 TERMINAL = {"COMPLETED", "FAILED", "CANCELLED", "RECOVERY_REQUIRED"}
-STAGES = {"RESERVED", "PREPARED", "AWAITING_NATIVE", "RUNNING"} | TERMINAL
+STAGES = {"RESERVED", "PREPARING", "PREPARED", "AWAITING_NATIVE", "RUNNING"} | TERMINAL
 
 
 class ProtocolError(ValueError):
@@ -56,7 +56,7 @@ class Broker:
     def _state(self):
         raw, generation = self.store.get(STATE_KEY)
         if raw is None:
-            return {"schemaVersion": "1.0", "workerId": self.worker_id, "lastSeen": None, "jobs": []}, generation
+            return {"schemaVersion": "1.0", "workerId": self.worker_id, "rootId": None, "lastSeen": None, "jobs": []}, generation
         require(len(raw) <= LIMIT, "STATE_LIMIT")
         state = decode(raw)
         require(state["schemaVersion"] == "1.0" and state["workerId"] == self.worker_id, "STATE_IDENTITY")
@@ -109,10 +109,13 @@ class Broker:
             return self._view(item)
         return self._mutate(operation)
 
-    def claim(self, worker_id):
+    def claim(self, worker_id, root_id):
         require(worker_id == self.worker_id, "WORKER_NOT_ALLOWED")
+        require(opaque(root_id), "ROOT_ID_INVALID")
         token = secrets.token_hex(32)
         def operation(state, now):
+            require(state["rootId"] in {None, root_id}, "ROOT_ID_MISMATCH_RECOVERY_REQUIRED")
+            state["rootId"] = root_id
             state["lastSeen"] = now
             active = [x for x in state["jobs"] if x["state"] in (STAGES - TERMINAL) | {"RECOVERY_REQUIRED"}]
             require(len(active) <= 1, "QUEUE_INVARIANT")
@@ -120,7 +123,7 @@ class Broker:
                 return self._view(active[0], worker=True)
             pending = next((x for x in state["jobs"] if x["state"] == "QUEUED"), None)
             if pending:
-                pending.update(state="RESERVED", leaseToken=token, updatedAt=now)
+                pending.update(state="RESERVED", leaseToken=token, rootId=root_id, updatedAt=now)
                 return self._view(pending, worker=True)
             return None
         return self._mutate(operation)
@@ -164,7 +167,7 @@ class Broker:
                 state["lastSeen"] = now
                 return self._view(item, worker=True)
             require(item["state"] not in TERMINAL and request["sequence"] == item["sequence"] + 1, "REPORT_ORDER")
-            rank = {"RESERVED": 0, "PREPARED": 1, "AWAITING_NATIVE": 2, "RUNNING": 3}
+            rank = {"RESERVED": 0, "PREPARING": 1, "PREPARED": 2, "AWAITING_NATIVE": 3, "RUNNING": 4}
             stage = request["stage"]
             require(stage in TERMINAL or rank[stage] >= rank[item["state"]], "STAGE_REGRESSION")
             previous = item["report"]

@@ -18,11 +18,18 @@ parameters and paths are registered in a private local configuration.
    scheduled task or background daemon is installed. Redirects, environment
    proxies, plaintext origins and invalid responses are refused.
 3. The queue issues one persistent reservation for the configured worker.
+   Its first claim durably binds an opaque local root identity; a fresh root
+   cannot adopt the queue even before the first progress report. The PC keeps
+   `transport/root-identity.json`; it is an identity nonce, not an authentication
+   credential. Never clone it to another root or reconstruct a lost binding.
    A repeated claim returns it unchanged, including after a lost response or
    service restart. `OFFLINE` after 120 seconds is a contact diagnostic, not
    job expiry, cancellation, worker reallocation or scientific freshness.
 4. The PC binds the request durably, resolves the local allowlist reference,
-   and invokes the existing trusted coordinator to copy and verify masters.
+   and obtains an acknowledged remote `PREPARING` transition before any copy.
+   An advanced claim without local binding is refused, even if the root identity
+   is preserved. A lost PREPARING response resends identical data before copying.
+   It then invokes the existing trusted coordinator to copy and verify masters.
    It never executes server-supplied code or automatically starts PixInsight.
    The operator runs the prepared `run.js` in PixInsight's script menu.
 5. Invoke the adapter again to send bounded progress and receive cancellation.

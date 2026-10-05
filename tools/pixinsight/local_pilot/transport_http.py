@@ -96,8 +96,8 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest):
                     return self.send(200, broker.cancel(job_id))
             if self.command == "POST" and path == "/v1/worker/claim":
                 request = self.body()
-                require(isinstance(request, dict) and set(request) == {"workerId"} and opaque(request["workerId"]), "REQUEST_FIELDS")
-                return self.send(200, {"job": broker.claim(request["workerId"])})
+                require(isinstance(request, dict) and set(request) == {"workerId", "rootId"} and opaque(request["workerId"]) and opaque(request["rootId"]), "REQUEST_FIELDS")
+                return self.send(200, {"job": broker.claim(request["workerId"], request["rootId"])})
             match = re.fullmatch(r"/v1/worker/(PIAI_[a-f0-9]{32})/report", path)
             if self.command == "POST" and match:
                 request = self.body()

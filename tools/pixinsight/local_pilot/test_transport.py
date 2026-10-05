@@ -21,6 +21,7 @@ from tools.pixinsight.local_pilot.transport import Transport, SessionWorker
 from tools.pixinsight.local_pilot import worker
 from tools.scientific_registry.ingestion_storage import MemoryStore, BackedUpStore, Conflict
 
+ROOT = "1" * 32
 WORKER = "a" * 32
 TOKEN = "b" * 64
 INPUT = "c" * 32
@@ -36,7 +37,7 @@ class BrokerTests(unittest.TestCase):
 
     def claim(self):
         self.broker.create(REQUEST)
-        return self.broker.claim(WORKER)
+        return self.broker.claim(WORKER, ROOT)
 
     def report(self, claim, stage, sequence=1, processes=0, outputs=0):
         return dict(leaseToken=claim["leaseToken"], sequence=sequence, stage=stage,
@@ -62,10 +63,10 @@ class BrokerTests(unittest.TestCase):
         self.broker.create({**REQUEST, "requestId": "e" * 32})
         self.now += dt.timedelta(days=365)
         self.assertEqual(self.broker.status(claim["jobId"])["connection"], "OFFLINE")
-        self.assertEqual(claim["leaseToken"], self.broker.claim(WORKER)["leaseToken"])
-        self.assertEqual(claim["jobId"], self.broker.claim(WORKER)["jobId"])
+        self.assertEqual(claim["leaseToken"], self.broker.claim(WORKER, ROOT)["leaseToken"])
+        self.assertEqual(claim["jobId"], self.broker.claim(WORKER, ROOT)["jobId"])
         with self.assertRaises(ProtocolError):
-            self.broker.claim("f" * 32)
+            self.broker.claim("f" * 32, ROOT)
 
     def test_status_never_exposes_lease_and_clock_uncertainty(self):
         claim = self.claim()
@@ -79,7 +80,7 @@ class BrokerTests(unittest.TestCase):
     def test_concurrent_claims_have_one_durable_identity(self):
         self.broker.create(REQUEST)
         with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
-            claims = list(pool.map(lambda _: self.broker.claim(WORKER), range(4)))
+            claims = list(pool.map(lambda _: self.broker.claim(WORKER, ROOT), range(4)))
         self.assertEqual(len({item["leaseToken"] for item in claims}), 1)
         self.assertEqual(len({item["jobId"] for item in claims}), 1)
 
@@ -101,7 +102,7 @@ class BrokerTests(unittest.TestCase):
         self.broker.report(claim["jobId"], WORKER, report)
         with self.assertRaises(ProtocolError):
             self.broker.report(claim["jobId"], WORKER, self.report(claim, "RUNNING", sequence=2))
-        self.assertIsNone(self.broker.claim(WORKER))
+        self.assertIsNone(self.broker.claim(WORKER, ROOT))
 
     def test_recipe_count_and_stage_regression(self):
         claim = self.claim()
@@ -116,14 +117,14 @@ class BrokerTests(unittest.TestCase):
     def test_cancel_queued_and_active_and_recovery_holds_queue(self):
         queued = self.broker.create(REQUEST)
         self.broker.cancel(queued["jobId"])
-        self.assertIsNone(self.broker.claim(WORKER))
+        self.assertIsNone(self.broker.claim(WORKER, ROOT))
         self.broker.create({**REQUEST, "requestId": "e" * 32})
-        claim = self.broker.claim(WORKER)
+        claim = self.broker.claim(WORKER, ROOT)
         self.broker.cancel(claim["jobId"])
-        self.assertTrue(self.broker.claim(WORKER)["cancelRequested"])
+        self.assertTrue(self.broker.claim(WORKER, ROOT)["cancelRequested"])
         self.broker.report(claim["jobId"], WORKER, self.report(claim, "RECOVERY_REQUIRED"))
         self.broker.create({**REQUEST, "requestId": "f" * 32})
-        self.assertEqual(claim["jobId"], self.broker.claim(WORKER)["jobId"])
+        self.assertEqual(claim["jobId"], self.broker.claim(WORKER, ROOT)["jobId"])
 
     def test_backup_failure_and_primary_conflict(self):
         with patch.object(self.backup, "put", side_effect=RuntimeError("offline")):
@@ -156,7 +157,7 @@ class BrokerTests(unittest.TestCase):
                 decode(raw)
         self.broker.create(REQUEST)
         with self.assertRaisesRegex(ProtocolError, "STATE_IDENTITY"):
-            Broker(self.primary, "f" * 32).claim("f" * 32)
+            Broker(self.primary, "f" * 32).claim("f" * 32, ROOT)
 
     def test_deployment_startup_refuses_missing_activation_without_cloud_access(self):
         app = Path(__file__).resolve().parents[3] / "infrastructure/pixinsight-pilot/app.py"
@@ -211,15 +212,15 @@ class HttpTests(HttpHarness):
     def test_roles_origins_and_anonymous_denial(self):
         for token, origin in ((None, None), (TOKEN, None), ("synthetic-owner", None), ("synthetic-owner", "https://evil.invalid")):
             self.assertEqual(self.request("/v1/jobs", REQUEST, token, origin)[0], 403)
-        self.assertEqual(self.request("/v1/worker/claim", {"workerId": WORKER}, "synthetic-owner")[0], 403)
-        self.assertEqual(self.request("/v1/worker/claim", {"workerId": WORKER}, TOKEN, "https://portal.invalid")[0], 403)
+        self.assertEqual(self.request("/v1/worker/claim", {"workerId": WORKER, "rootId": ROOT}, "synthetic-owner")[0], 403)
+        self.assertEqual(self.request("/v1/worker/claim", {"workerId": WORKER, "rootId": ROOT}, TOKEN, "https://portal.invalid")[0], 403)
         self.assertEqual(self.store.items, {})
 
     def test_authenticated_http_roundtrip_restart_and_status_minimization(self):
         item = self.create()
-        claimed = self.client.post("/v1/worker/claim", {"workerId": WORKER})["job"]
+        claimed = self.client.post("/v1/worker/claim", {"workerId": WORKER, "rootId": ROOT})["job"]
         restarted = Transport(self.origin, TOKEN, test_loopback=True)
-        self.assertEqual(claimed, restarted.post("/v1/worker/claim", {"workerId": WORKER})["job"])
+        self.assertEqual(claimed, restarted.post("/v1/worker/claim", {"workerId": WORKER, "rootId": ROOT})["job"])
         report = dict(leaseToken=claimed["leaseToken"], sequence=1, stage="COMPLETED", processCount=5, outputCount=5, verified=True)
         restarted.post("/v1/worker/" + item["jobId"] + "/report", {"workerId": WORKER, "report": report})
         code, status = self.request("/v1/jobs/" + item["jobId"], token="synthetic-owner", origin="https://portal.invalid")
@@ -258,7 +259,7 @@ class HttpTests(HttpHarness):
         redirect_thread = threading.Thread(target=redirect.serve_forever, daemon=True); redirect_thread.start()
         try:
             with self.assertRaises(ProtocolError):
-                Transport(f"http://127.0.0.1:{redirect.server_port}", TOKEN, test_loopback=True).post("/v1/worker/claim", {"workerId": WORKER})
+                Transport(f"http://127.0.0.1:{redirect.server_port}", TOKEN, test_loopback=True).post("/v1/worker/claim", {"workerId": WORKER, "rootId": ROOT})
             self.assertEqual(received, [])
         finally:
             redirect.shutdown(); redirect.server_close(); redirect_thread.join()
@@ -306,7 +307,7 @@ class SessionTests(HttpHarness):
         original = self.client.post
         def lost(path, payload):
             result = original(path, payload)
-            if path.endswith("/report"):
+            if path.endswith("/report") and payload["report"]["stage"] == "AWAITING_NATIVE":
                 raise ProtocolError("lost response")
             return result
         with patch.object(self.client, "post", side_effect=lost):
@@ -347,10 +348,10 @@ class SessionTests(HttpHarness):
     def test_crash_after_terminal_ack_before_local_close_recovers(self):
         item = self.create(); self.session.cycle()
         folder = self.root / "transport" / item["jobId"]
-        remote = self.broker.claim(WORKER)
-        message = dict(leaseToken=remote["leaseToken"], sequence=2, stage="CANCELLED", processCount=0, outputCount=0, verified=False)
+        remote = self.broker.claim(WORKER, self.session.root_id)
+        message = dict(leaseToken=remote["leaseToken"], sequence=3, stage="CANCELLED", processCount=0, outputCount=0, verified=False)
         self.broker.report(item["jobId"], WORKER, message)
-        worker.write_new(folder / "ack-002.json", message)
+        worker.write_new(folder / "ack-003.json", message)
         # Simulated crash after durable ack: no new remote claim or preparation.
         with patch.object(self.client, "post", side_effect=AssertionError("must close before claiming")):
             self.assertEqual(self.session.cycle()["state"], "ACKNOWLEDGED")
@@ -378,6 +379,73 @@ class SessionTests(HttpHarness):
         worker.write_new(self.root / "transport/cycle-lock.json", {"crash": True})
         with self.assertRaises(FileExistsError):
             self.session.cycle()
+        self.assertFalse((self.root / "active-job.json").exists())
+
+    def test_new_root_cannot_repeat_awaiting_native_job(self):
+        item = self.create(); self.session.cycle()
+        new_root = self.root.parent / "new-root"; new_root.mkdir()
+        second = SessionWorker(new_root, self.registry, WORKER, self.client)
+        with patch.object(worker, "prepare", side_effect=AssertionError("must not duplicate")):
+            with self.assertRaises(ProtocolError):
+                second.cycle()
+        self.assertFalse((new_root / item["jobId"]).exists())
+        self.assertTrue((self.root / item["jobId"] / "run.js").exists())
+
+    def test_advanced_claim_without_binding_refused_even_with_copied_identity(self):
+        item = self.create(); self.session.cycle()
+        claim = self.broker.claim(WORKER, self.session.root_id)
+        for stage in ("AWAITING_NATIVE", "RUNNING"):
+            if stage == "RUNNING":
+                self.broker.report(item["jobId"], WORKER, dict(leaseToken=claim["leaseToken"], sequence=3,
+                    stage="RUNNING", processCount=1, outputCount=0, verified=False))
+            root = self.root.parent / stage; root.mkdir()
+            folder = root / "transport"; folder.mkdir()
+            (folder / "root-identity.json").write_bytes((self.root / "transport/root-identity.json").read_bytes())
+            second = SessionWorker(root, self.registry, WORKER, self.client)
+            with patch.object(worker, "prepare", side_effect=AssertionError("must not duplicate")):
+                with self.assertRaisesRegex(ProtocolError, "ADVANCED_CLAIM_WITHOUT_BINDING"):
+                    second.cycle()
+            self.assertFalse((root / item["jobId"]).exists())
+
+    def test_preparing_fence_survives_lost_response_before_first_copy(self):
+        self.create()
+        original = self.client.post
+        def lost(path, payload):
+            result = original(path, payload)
+            if path.endswith("/report") and payload["report"]["stage"] == "PREPARING":
+                raise ProtocolError("lost PREPARING response")
+            return result
+        with patch.object(self.client, "post", side_effect=lost), patch.object(worker, "prepare", side_effect=AssertionError("unacknowledged fence")):
+            with self.assertRaises(ProtocolError):
+                self.session.cycle()
+        self.assertFalse((self.root / "active-job.json").exists())
+        new_root = self.root.parent / "fence-root"; new_root.mkdir()
+        folder = new_root / "transport"; folder.mkdir()
+        (folder / "root-identity.json").write_bytes((self.root / "transport/root-identity.json").read_bytes())
+        second = SessionWorker(new_root, self.registry, WORKER, self.client)
+        with self.assertRaisesRegex(ProtocolError, "ADVANCED_CLAIM_WITHOUT_BINDING"):
+            second.cycle()
+        self.assertEqual(self.session.cycle()["state"], "AWAITING_NATIVE")
+
+    def test_reserved_claim_bound_to_root_before_any_report(self):
+        item = self.create()
+        self.broker.claim(WORKER, self.session.root_id)
+        new_root = self.root.parent / "reserved-root"; new_root.mkdir()
+        second = SessionWorker(new_root, self.registry, WORKER, self.client)
+        with patch.object(worker, "prepare", side_effect=AssertionError("root mismatch")):
+            with self.assertRaises(ProtocolError):
+                second.cycle()
+        self.assertFalse((new_root / item["jobId"]).exists())
+
+    def test_partial_preparation_is_not_replayed_after_restart(self):
+        self.create()
+        with patch.object(worker, "prepare", side_effect=KeyboardInterrupt):
+            with self.assertRaises(KeyboardInterrupt):
+                self.session.cycle()
+        restarted = SessionWorker(self.root, self.registry, WORKER, self.client)
+        with patch.object(worker, "prepare", side_effect=AssertionError("ambiguous preparation must remain blocked")):
+            with self.assertRaisesRegex(ProtocolError, "AMBIGUOUS_PREPARATION"):
+                restarted.cycle()
         self.assertFalse((self.root / "active-job.json").exists())
 
 

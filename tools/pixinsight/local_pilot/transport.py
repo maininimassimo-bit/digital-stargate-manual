@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import re
 import ssl
+import secrets
 import urllib.request
 from urllib.parse import urlsplit
 
@@ -61,6 +62,13 @@ class SessionWorker:
         if not self.directory.exists():
             self.directory.mkdir()
         require(not self.directory.is_symlink() and not self.directory.is_junction(), "TRANSPORT_ROOT_INVALID")
+        identity = self.directory / "root-identity.json"
+        if not identity.exists():
+            require(not any(self.directory.iterdir()), "ROOT_IDENTITY_LOST_RECOVERY_REQUIRED")
+            worker.write_new(identity, {"rootId": secrets.token_hex(16), "workerId": worker_id})
+        value = self._read(identity)
+        require(set(value) == {"rootId", "workerId"} and opaque(value["rootId"]) and value["workerId"] == worker_id, "ROOT_IDENTITY_INVALID")
+        self.root_id = value["rootId"]
 
     def _read(self, path):
         require(path.stat().st_size <= 1024 * 1024 and not path.is_symlink() and not path.is_junction(), "LOCAL_STATE_INVALID")
@@ -93,9 +101,10 @@ class SessionWorker:
                    "stage": stage, "processCount": processes, "outputCount": outputs, "verified": stage == "COMPLETED"}
         previous = remote.get("report")
         if previous and all(previous[k] == message[k] for k in message if k != "sequence"):
-            return
+            return remote
         worker.write_new(self.directory / binding["jobId"] / "pending.json", message)
         self._flush(binding)
+        return {**remote, "sequence": message["sequence"], "state": stage, "report": message}
 
     def cycle(self, *, native_stopped=False):
         # Exclusive create also blocks concurrent invocations; crashes retain it.
@@ -106,7 +115,7 @@ class SessionWorker:
             binding = self._read(active) if active.exists() else None
             if binding and self._flush(binding):
                 return {"state": "ACKNOWLEDGED", "jobId": binding["jobId"]}
-            response = self.transport.post("/v1/worker/claim", {"workerId": self.worker_id})
+            response = self.transport.post("/v1/worker/claim", {"workerId": self.worker_id, "rootId": self.root_id})
             require(isinstance(response, dict) and set(response) == {"job"}, "CLAIM_INVALID")
             remote = response["job"]
             if remote is None:
@@ -120,12 +129,15 @@ class SessionWorker:
                     remote["jobId"] == "PIAI_" + envelope["requestId"] and envelope["aiMode"] == "SESSION_ASSISTED" and
                     envelope["recipe"] in {worker.RECIPE, worker.NONLINEAR_RECIPE}, "ENVELOPE_INVALID")
             require(isinstance(remote.get("leaseToken"), str) and re.fullmatch(r"[a-f0-9]{64}", remote["leaseToken"]) and
-                    type(remote.get("sequence")) is int and remote["state"] in {"RESERVED", "PREPARED", "AWAITING_NATIVE", "RUNNING", "RECOVERY_REQUIRED"}, "CLAIM_INVALID")
+                    remote.get("rootId") == self.root_id and type(remote.get("sequence")) is int and
+                    remote["state"] in {"RESERVED", "PREPARING", "PREPARED", "AWAITING_NATIVE", "RUNNING", "RECOVERY_REQUIRED"}, "CLAIM_INVALID")
             if binding:
                 require(binding == {"jobId": remote["jobId"], "leaseToken": remote["leaseToken"], "request": envelope,
-                                    "workerId": self.worker_id}, "BINDING_CONFLICT")
+                                    "workerId": self.worker_id, "rootId": self.root_id}, "BINDING_CONFLICT")
             else:
-                binding = {"jobId": remote["jobId"], "leaseToken": remote["leaseToken"], "request": envelope, "workerId": self.worker_id}
+                require(remote["state"] == "RESERVED" and remote["sequence"] == 0, "ADVANCED_CLAIM_WITHOUT_BINDING")
+                binding = {"jobId": remote["jobId"], "leaseToken": remote["leaseToken"], "request": envelope,
+                           "workerId": self.worker_id, "rootId": self.root_id}
                 folder = self.directory / remote["jobId"]
                 require(not folder.exists(), "OLD_BINDING_CANNOT_REOPEN")
                 folder.mkdir()
@@ -143,6 +155,10 @@ class SessionWorker:
                     return {"state": "RECOVERY_REQUIRED", "jobId": binding["jobId"]}
                 folder = self.directory / binding["jobId"]
                 require(not (folder / "preparing.json").exists(), "AMBIGUOUS_PREPARATION")
+                require(remote["state"] in {"RESERVED", "PREPARING"}, "ADVANCED_CLAIM_WITHOUT_PREPARATION")
+                # Remote durable fence precedes all preparation. Losing local evidence
+                # after this transition cannot adopt the advanced claim on a new root.
+                remote = self._report(binding, remote, "PREPARING")
                 worker.write_new(folder / "preparing.json", {"jobId": binding["jobId"]})
                 try:
                     worker.prepare(self.root, {**request, "jobId": binding["jobId"]})

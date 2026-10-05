@@ -10,12 +10,46 @@
   "artifactRepository": "pixinsight-pilot",
   "primaryBucket": "dsg-piai-private-183451329061",
   "backupBucket": "dsg-piai-backup-183451329061",
-  "runtime": {"cpu": 1, "memory": "512Mi", "minInstances": 0, "maxInstances": 1, "concurrency": 1, "timeoutSeconds": 60},
-  "persistence": {"publicAccessPrevention": "enforced", "uniformBucketLevelAccess": true, "versioning": true, "automaticDeletion": false, "stateLimitBytes": 1048576, "maxJobs": 16},
-  "credentials": {"workerBearerBits": 256, "serverStores": "SHA256_ONLY", "clientSource": "ENVIRONMENT_ONLY", "rotation": "EXPLICIT_OPERATOR", "ownerAuth": "EXISTING_GOOGLE_OWNER_IDENTITY"},
-  "desktop": {"inboundPorts": 0, "polling": "OPERATOR_ONE_SHOT", "automaticPixInsightLaunch": false, "jobExpiry": null, "automaticReassignment": false},
+  "runtime": {
+    "cpu": 1,
+    "memory": "512Mi",
+    "minInstances": 0,
+    "maxInstances": 1,
+    "concurrency": 1,
+    "timeoutSeconds": 60
+  },
+  "persistence": {
+    "publicAccessPrevention": "enforced",
+    "uniformBucketLevelAccess": true,
+    "versioning": true,
+    "automaticDeletion": false,
+    "stateLimitBytes": 1048576,
+    "maxJobs": 16
+  },
+  "credentials": {
+    "workerBearerBits": 256,
+    "serverStores": "SHA256_ONLY",
+    "clientSource": "ENVIRONMENT_ONLY",
+    "rotation": "EXPLICIT_OPERATOR",
+    "ownerAuth": "EXISTING_GOOGLE_OWNER_IDENTITY"
+  },
+  "desktop": {
+    "inboundPorts": 0,
+    "polling": "OPERATOR_ONE_SHOT",
+    "automaticPixInsightLaunch": false,
+    "jobExpiry": null,
+    "automaticReassignment": false,
+    "rootIdentity": "LOCAL_OPAQUE_NONCE_PINNED_BY_FIRST_CLAIM",
+    "beforeCopy": "DURABLE_ACKNOWLEDGED_PREPARING_FENCE"
+  },
   "cloudData": "Opaque local input reference, recipe identifier, bounded worker reports; no photos, paths, master hashes or native process parameters",
   "existingPhotoRuntimeMutation": false,
   "deviceAuthority": "NONE",
-  "budget": {"newPaidResources": true, "hardSpendingCap": false, "aiApiRequests": 0, "billing": "Cloud Run request-based, storage/operations/backups, image builds/registry and possible egress", "activationRequiresOwnerApproval": true}
+  "budget": {
+    "newPaidResources": true,
+    "hardSpendingCap": false,
+    "aiApiRequests": 0,
+    "billing": "Cloud Run request-based, storage/operations/backups, image builds/registry and possible egress",
+    "activationRequiresOwnerApproval": true
+  }
 }
