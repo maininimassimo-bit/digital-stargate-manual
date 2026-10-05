@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | ID | DSG-HO-BKL049-20261005 |
-| Versione | 1.0 |
+| Versione | 1.1 |
 | Data | 2026-10-05 |
 | Stato | Riconciliazione operativa; estensione pilota autorizzata, non accettata come produzione |
 | Pacchetto | BKL-049 archivio chiuso; BKL-049-EXT-PIAI pilota distinto |
@@ -53,3 +53,7 @@ Per un errore del pilota fermare il job tra i processi, conservare la ricevuta e
 ## Gate e registro revisione
 
 Riconciliazione locale e verifica GET effettuate. CI, ARB, Release Quality, merge e verifica Pages della presente revisione devono risultare dalla PR di consegna; non sono anticipati come completati. Versione 1.0: prima riconciliazione cumulativa al 5 ottobre e consegna al pilota locale.
+
+## Aggiornamento successivo — pilota P1 avviato
+
+Riconciliazione documentale consegnata tramite PR #478, merge `351067822c5b5ac0632c57408fd530ad85614914`, 17 controlli exact-head e 18 workflow post-merge SUCCESS; ARB e RQ AI-assistite sequenziali, zero finding finali. Successivamente effettuato il preflight nativo sul PC Owner: PI 1.9.5 build 1706, quattro master integri e invariati, selezione esplicita nei contenitori multi-image e 12 costruttori di processo disponibili. [Ricevuta minimizzata](evidence/BKL-049-PIAI-P1-2026-10-05.json). Nessuna elaborazione pixel o richiesta provider nel test. Versioni moduli, modelli e licenze non attestati dal preflight. P2 esecutore su copie e P3 elaborazione restano successivi; il pilota è avviato, non completo né di produzione. Versione 1.1: esito P1, nuova consegna CI/review da tracciare sulla PR di implementazione.
