@@ -15,6 +15,11 @@ def digest(raw):
     return hashlib.sha256(raw).hexdigest()
 
 
+def is_m27(value):
+    # Explicit aliases used by the registered pilot and governed scientific catalog.
+    return value in ("M27", "M 27")
+
+
 class ScientificPortal:
     def __init__(self, broker, catalog_loader, gallery_loader):
         self.broker, self.store = broker, broker.store
@@ -43,9 +48,9 @@ class ScientificPortal:
         gallery = self.gallery_loader()
         return {"inputs": inputs, "catalogSha256": digest(catalog),
                 "sessions": [{"sessionId": s["sessionId"], "target": s["target"], "observationDate": s.get("observationDate")}
-                             for s in parsed["sessions"] if s.get("target") == "M27"],
+                             for s in parsed["sessions"] if is_m27(s.get("target"))],
                 "images": [{k: row[k] for k in ("imageId", "imageVersionId", "workflowId", "title", "target")}
-                           for row in gallery["records"] if row["target"] == "M27"]}
+                           for row in gallery["records"] if is_m27(row["target"])]}
 
     def create(self, value):
         fields = {"requestId", "inputRef", "catalogSha256", "sessionIds", "parent", "title", "processingDate", "associationConfirmed"}
@@ -66,12 +71,12 @@ class ScientificPortal:
                 original_media_type="application/x-xisf", preview_raw=b"\xff\xd8\xff", preview_media_type="image/jpeg",
                 workflow_raw=b"", receipt_id="BKL049-P5-selection", imported_at=self.broker.clock().strftime("%Y-%m-%dT%H:%M:%SZ"),
                 preview_attested=value["associationConfirmed"])
-            require(context_review["target"] == registered["target"], "INPUT_TARGET_CONFLICT")
+            require(is_m27(context_review["target"]) and registered["target"] == "M27", "INPUT_TARGET_CONFLICT")
             parent = value["parent"]
             require(parent is None or (isinstance(parent, dict) and set(parent) == {"imageId", "imageVersionId", "workflowId"}), "PARENT_FIELDS")
             if parent is not None:
                 matches = [r for r in self.gallery_loader()["records"] if all(r.get(k) == v for k, v in parent.items())]
-                require(len(matches) == 1 and matches[0]["target"] == registered["target"], "PARENT_NOT_CURRENT")
+                require(len(matches) == 1 and is_m27(matches[0]["target"]) and registered["target"] == "M27", "PARENT_NOT_CURRENT")
             context = {"selection": copy.deepcopy(value), "input": registered, "sessionContext": context_review["sessionContext"],
                        "createdAt": self.broker.clock().strftime("%Y-%m-%dT%H:%M:%SZ"), "associationEvidence": "OWNER_DECLARED"}
             immutable(self.store, "science/catalogs/" + digest(catalog), catalog)

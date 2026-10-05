@@ -87,6 +87,41 @@ class ScientificTests(unittest.TestCase):
         self.assertEqual(decode(result)["instances"][0]["dependencies"], ["MASTER_R", "RGB"])
         self.assertIn(b"a"*64, raw)
 
+    def test_governed_spaced_target_alias_preserves_exact_scientific_context(self):
+        self.catalog = self.catalog.replace(b'"M27"', b'"M 27"')
+        self.gallery["records"][0]["target"] = "M 27"
+        self.request["catalogSha256"] = digest(self.catalog)
+        options = self.portal.options()
+        self.assertEqual(options["sessions"][0]["target"], "M 27")
+        self.assertEqual(options["images"][0]["target"], "M 27")
+        job = self.portal.create(self.request)
+        context = self.portal.context(job["jobId"])
+        self.assertEqual(context["sessionContext"]["sessions"][0]["target"], "M 27")
+        self.assertEqual(context["input"]["target"], "M27")
+        self.assertEqual(context["selection"]["parent"], self.request["parent"])
+
+    def test_catalog_selection_keeps_all_spaced_m27_sessions_and_excludes_other_targets(self):
+        catalog = decode(self.catalog)
+        selected = [{"sessionId": f"SESSION-M27-{i}", "target": "M 27", "observationDate": "2026-09-01"}
+                    for i in range(1, 17)]
+        catalog["sessions"] = selected + [catalog["sessions"][1]]
+        self.catalog = encode(catalog)
+        expected = [row["sessionId"] for row in selected]
+        self.assertEqual([s["sessionId"] for s in self.portal.options()["sessions"]], expected)
+        self.request["catalogSha256"] = digest(self.catalog)
+        self.request["sessionIds"] = expected
+        self.request["parent"] = None
+        job = self.portal.create(self.request)
+        context = self.portal.context(job["jobId"])
+        self.assertEqual([s["sessionId"] for s in context["sessionContext"]["sessions"]], expected)
+
+    def test_target_aliases_do_not_accept_other_or_ambiguous_targets(self):
+        from .scientific_portal import is_m27
+        for target in (None, "M270", "M-27", "m27", "M  27", "M27?", "NGC 281"):
+            self.assertFalse(is_m27(target))
+        for target in ("M27", "M 27"):
+            self.assertTrue(is_m27(target))
+
     def test_selection_pins_sessions_parent_and_recipe(self):
         created = self.portal.create(self.request)
         context = self.portal.context(created['jobId'])

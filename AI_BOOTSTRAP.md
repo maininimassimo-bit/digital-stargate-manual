@@ -2,7 +2,7 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 8.4 |
+| Versione | 8.5 |
 | Baseline | 05/10/2026 |
 | Stato | Current root bootstrap — BKL-043 F4 lifecycle pending; BKL-049 archive closed; PixInsight AI extension pilot; S10 unavailable |
 
@@ -65,7 +65,7 @@ Gli handover e le baseline precedenti restano snapshot storici.
 Exact-head CI → ARB → Release Quality sullo stesso SHA → expected-head merge → post-merge verification → acceptance reconciliation. Nessuna acceptance o runtime claim può precedere l'evidence reale.
 
 ## 7. Punto di ripresa
-Riprendere dall’handover del 5 ottobre v1.8 e dal runbook PIAI-P4-CLOUD-ACTIVATION-2026-10-05.md v1.1. P1–P3 e candidato P4 consegnati #479–#482; attivazione #483 post-merge verificata. P4 Owner HTTP sintetico, non-Owner negato, IAM/restore, restart/lost-ack, CAS GCS concorrente amministrativo e trasporto nativo amministrativo M27 verificati. P4 acceptance operativa resta aperta e concorrenza HTTP Owner soltanto sintetica; P5 è distribuita (#485), ma la prova scientifica Owner UI/nativa/consegna resta aperta; P6 è successiva. SESSION_ASSISTED senza nuove API IA; M27 pubblicata invariata, BKL-043 conserva i propri gate, nessuna authority dispositivi/Safety. Consegna CI/review e Pages della riconciliazione attuale da tracciare sulla PR.
+Riprendere dall’handover del 5 ottobre v1.9 e dal runbook PIAI-P4-CLOUD-ACTIVATION-2026-10-05.md v1.1. P1–P3 e candidato P4 consegnati #479–#482; attivazione #483 post-merge verificata. P4 Owner HTTP sintetico, non-Owner negato, IAM/restore, restart/lost-ack, CAS GCS concorrente amministrativo e trasporto nativo amministrativo M27 verificati. P4 acceptance operativa resta aperta e concorrenza HTTP Owner soltanto sintetica; P5 è distribuita (#485), ma la prova scientifica Owner UI/nativa/consegna resta aperta; P6 è successiva. SESSION_ASSISTED senza nuove API IA; M27 pubblicata invariata, BKL-043 conserva i propri gate, nessuna authority dispositivi/Safety. Consegna CI/review e Pages della riconciliazione attuale da tracciare sulla PR.
 
 
 ## Aggiornamento P5 — portale scientifico privato (2026-10-05)
@@ -77,3 +77,7 @@ Implementato il candidato P5: pagina Owner, selezione di master M27 registrati, 
 PR #485 integrata nel commit `f1a4650dfb8da54c498b763752fd4d5d2b8877ad`: 20/20 check sullo head revisionato, ARB e RQ AI-assistite sequenziali PASS con zero finding residui; 22/22 check post-merge e deployment Pages effettivo SUCCESS. Cloud Build del codice revisionato PASS con 77 test; digest `sha256:b6d14fa1934076f16f0c44721fdc2852dd5e49f68bd21bf3cae0cf54b38e1ee0`, revisione `dsg-pixinsight-pilot-p5-science-01`, traffico 100%. Nessuna nuova risorsa, credenziale o estensione IAM. Registrazione reale di un gruppo M27 dopo verifica dei quattro master e ripetizione idempotente PASS.
 
 La pagina scientifica è pubblicata e aperta; il completamento tecnico P5 richiede ancora accesso Owner sulla nuova pagina, creazione scientifica HTTP/UI, nuova esecuzione nativa e consegna/revisione privata con sessioni esatte. Non sostituire questa prova con fixture amministrative, prove P4 o accettazione scientifica simulata. Le dipendenze dei master nelle correlazioni cloud usano i ruoli, mentre il grafo originale e gli hash individuali restano sul PC. P6 e accettazione scientifica Owner rimangono aperti. La M27 pubblicata non è stata modificata. Questa riconciliazione documentale richiede i propri gate di consegna.
+
+## Correzione compatibilità target durante il collaudo P5
+
+Accesso Owner sulla nuova pagina verificato. Nessun job scientifico creato: confronto letterale `M27`/`M 27` rendeva invisibili le sessioni e il parent reali. Correzione con soli due alias espliciti, contesto originale conservato, tre regressioni e verifica locale dei profili pubblici reali (16 sessioni/un parent). Correzione candidata da rilasciare; il percorso Owner HTTP → nativo → consegna privata resta aperto. [Procedura P5](docs/project/PIAI-P5-PORTAL-2026-10-05.md).

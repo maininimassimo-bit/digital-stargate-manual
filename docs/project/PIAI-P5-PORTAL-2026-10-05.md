@@ -2,7 +2,7 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 1.1 |
+| Versione | 1.2 |
 | Stato | Released and deployed #485; live Owner scientific OAT pending |
 | Data | 2026-10-05 |
 | Perimetro | BKL-049-EXT-PIAI P5; M27, Owner PC, SESSION_ASSISTED |
@@ -43,7 +43,7 @@ Registrazione limitata a otto gruppi immutabili, coda a 16 job e un root/worker 
 
 ## Prove e gate
 
-Test locali PASS: 43 Node e 77 Python Windows, MkDocs strict e consistenza roadmap. [Ricevuta minimizzata](evidence/BKL-049-PIAI-P5-2026-10-05.json). Test sintetici di selezione, idempotenza, parent/versione, integrità contesto, consegna/decisione immutabile, ordine dei processi, binding e privacy; HTTP loopback reale con identità sintetiche, distinto da Google/cloud/PixInsight. Test browser sintetici per risposta persa, richiesta congelata, account negato e OFFLINE senza mutazioni automatiche. CI, review ARB/RQ separate e sequenziali, deployment per digest e Pages sul merge SHA precedono il completamento operativo.
+Test locali PASS: 43 Node e 80 Python Windows, MkDocs strict e consistenza roadmap. [Ricevuta minimizzata](evidence/BKL-049-PIAI-P5-2026-10-05.json). Test sintetici di selezione, idempotenza, parent/versione, integrità contesto, consegna/decisione immutabile, ordine dei processi, binding e privacy; HTTP loopback reale con identità sintetiche, distinto da Google/cloud/PixInsight. Test browser sintetici per risposta persa, richiesta congelata, account negato e OFFLINE senza mutazioni automatiche. CI, review ARB/RQ separate e sequenziali, deployment per digest e Pages sul merge SHA precedono il completamento operativo.
 
 La prova reale richiesta è: comando scientifico Owner HTTP/UI → preparazione PC → nuova esecuzione nativa → raccolta verificata → consegna privata → anteprima/workflow/sessioni esatte. Finché questa prova non è registrata, P5 non è dichiarata completata. P6 mantiene errore/annullamento/crash recovery e acceptance complessiva; le prove P4 restano circoscritte ai perimetri già registrati.
 
@@ -58,3 +58,7 @@ Correzioni ARB: le registrazioni condividono il solo oggetto CAS già autorizzat
 PR #485 integrata nel commit `f1a4650dfb8da54c498b763752fd4d5d2b8877ad`: 20/20 check sullo head revisionato, ARB e RQ AI-assistite sequenziali PASS con zero finding residui; 22/22 check post-merge e deployment Pages effettivo SUCCESS. Cloud Build del codice revisionato PASS con 77 test; digest `sha256:b6d14fa1934076f16f0c44721fdc2852dd5e49f68bd21bf3cae0cf54b38e1ee0`, revisione `dsg-pixinsight-pilot-p5-science-01`, traffico 100%. Nessuna nuova risorsa, credenziale o estensione IAM. Registrazione reale di un gruppo M27 dopo verifica dei quattro master e ripetizione idempotente PASS.
 
 La pagina scientifica è pubblicata e aperta; il completamento tecnico P5 richiede ancora accesso Owner sulla nuova pagina, creazione scientifica HTTP/UI, nuova esecuzione nativa e consegna/revisione privata con sessioni esatte. Non sostituire questa prova con fixture amministrative, prove P4 o accettazione scientifica simulata. Le dipendenze dei master nelle correlazioni cloud usano i ruoli, mentre il grafo originale e gli hash individuali restano sul PC. P6 e accettazione scientifica Owner rimangono aperti. La M27 pubblicata non è stata modificata. Questa riconciliazione documentale richiede i propri gate di consegna.
+
+## Compatibilità del target rilevata nel collaudo Owner
+
+Il primo accesso Owner alla pagina scientifica è stato verificato, senza creazione di job: catalogo e galleria usano `M 27`, mentre il gruppo locale registrato usa `M27`. Il confronto letterale della prima versione nascondeva sessioni e parent. La correzione ammette esclusivamente questi due alias per il pilota M27, conserva target e identità originali nel contesto scientifico e non amplia i target o le ricette consentiti. Tre regressioni coprono parent/catalogo con nome spaziato, 16 sessioni e rifiuto di nomi ambigui. Verifica aggiuntiva dei profili pubblici reali in un broker locale sintetico: 16 sessioni e un parent corrente, target originale conservato; non è prova Owner HTTP/nativa. La correzione deve superare CI/ARB/RQ e distribuzione prima del collaudo scientifico; P5 rimane aperta.
