@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "BKL-049-EXT-PIAI",
+  "phase": "P4",
+  "date": "2026-10-05",
+  "classification": "PUBLIC_MINIMIZED",
+  "status": "IMPLEMENTED_CANDIDATE_NOT_ACTIVATED",
+  "aiMode": "SESSION_ASSISTED",
+  "ownerChoice": "Current assistant session; no new paid AI API calls",
+  "providerRequests": 0,
+  "cloudResourcesCreated": false,
+  "credentialCreated": false,
+  "desktopInboundPorts": 0,
+  "automaticNativeLaunch": false,
+  "jobExpiry": null,
+  "automaticOfflineReassignment": false,
+  "queueLimits": {
+    "jobs": 16,
+    "stateBytes": 1048576,
+    "reportChangesPerJob": 128
+  },
+  "tests": {
+    "nodePass": 33,
+    "pythonWindowsPass": 57,
+    "transportCases": 27,
+    "evidenceMode": "Synthetic persistence and actual loopback HTTP; fake Owner auth; no cloud/native transport OAT",
+    "coverage": [
+      "Role/origin denial",
+      "Duplicate/conflicting request",
+      "Concurrent claims",
+      "Service/client restart and lost response",
+      "No expiry or offline reassignment",
+      "Backup failure and CAS conflict",
+      "Capacity and monotonic reports",
+      "No private payload upload",
+      "Redirect credential non-forwarding",
+      "Prepare once without native launch",
+      "Token-bound cancel",
+      "Supervised collection",
+      "Terminal ack crash reconciliation",
+      "Conservative ambiguous recovery",
+      "Missing activation refuses startup"
+    ]
+  },
+  "notEstablished": [
+    "Deployed Google Owner authentication",
+    "Cloud TLS and IAM",
+    "Cloud committed-state restore/read-back",
+    "Native end-to-end transport OAT",
+    "Commercial/multiuser license rights",
+    "Scientific acceptance"
+  ],
+  "activation": "Exact new cloud resources and dedicated credential require Owner approval under DSG-AEM-001 section 5",
+  "publishedM27": "UNCHANGED",
+  "deviceAuthority": "NONE",
+  "remainingPhases": [
+    "P4 activation/OAT",
+    "P5",
+    "P6"
+  ]
+}

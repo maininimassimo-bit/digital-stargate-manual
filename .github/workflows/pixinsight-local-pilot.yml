@@ -1,10 +1,10 @@
 name: PixInsight local pilot contract
 on:
   pull_request:
-    paths: ['tools/pixinsight/local_pilot/**', '.github/workflows/pixinsight-local-pilot.yml']
+    paths: ['tools/pixinsight/local_pilot/**', 'infrastructure/pixinsight-pilot/**', '.github/workflows/pixinsight-local-pilot.yml']
   push:
     branches: [main]
-    paths: ['tools/pixinsight/local_pilot/**', '.github/workflows/pixinsight-local-pilot.yml']
+    paths: ['tools/pixinsight/local_pilot/**', 'infrastructure/pixinsight-pilot/**', '.github/workflows/pixinsight-local-pilot.yml']
 permissions:
   contents: read
 jobs:
@@ -24,4 +24,4 @@ jobs:
         with:
           python-version: '3.13'
       - name: Test local coordinator reservation and private retention
-        run: python -m unittest tools.pixinsight.local_pilot.test_worker tools.pixinsight.local_pilot.test_quality
+        run: python -m unittest tools.pixinsight.local_pilot.test_worker tools.pixinsight.local_pilot.test_quality tools.pixinsight.local_pilot.test_transport
