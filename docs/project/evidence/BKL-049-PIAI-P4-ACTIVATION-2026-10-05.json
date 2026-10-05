@@ -4,7 +4,7 @@
   "phase": "P4_ACTIVATION",
   "date": "2026-10-05",
   "classification": "PUBLIC_MINIMIZED",
-  "status": "OWNER_AUTHORIZED_DEPLOYED_PARTIAL_OAT",
+  "status": "OWNER_AUTHORIZED_DEPLOYED_BOUNDED_NATIVE_OAT",
   "ownerApproval": "Explicit approval of proposed resources and dedicated credential",
   "candidateMerge": "e000a3b96c980c22d47967e26fb5e79633c3d249",
   "cloudResourcesCreated": true,
@@ -13,7 +13,7 @@
   "cloudBuildId": "86d1d49e-0156-4263-8244-8206f688491f",
   "cloudBuild": "SUCCESS",
   "imageDigest": "sha256:14a8ceb98989fe2e69b217b4ccf034cbfd63346401af506a3599cc44ffd65f66",
-  "revision": "dsg-pixinsight-pilot-00001-bmw",
+  "revision": "dsg-pixinsight-pilot-p4-oat-restart-01",
   "liveHttpChecks": {
     "health": {
       "status": 200,
@@ -66,8 +66,8 @@
     "backupDeleteDenied": "PASS",
     "kind": "DSG_PIAI_LIVE_STORAGE_OAT_V1"
   },
-  "actualOwnerGoogleLogin": "NOT_EXECUTED",
-  "nativeTransportOAT": "NOT_EXECUTED",
+  "actualOwnerGoogleLogin": "PASS",
+  "nativeTransportOAT": "PASS_ADMINISTRATIVE_FIXTURE",
   "providerRequests": 0,
   "desktopInboundPorts": 0,
   "automaticNativeLaunch": false,
@@ -75,9 +75,9 @@
   "deviceAuthority": "NONE",
   "hardSpendingCap": false,
   "remainingGates": [
-    "P4 Owner authentication and native transport OAT",
-    "P5",
-    "P6",
+    "P4 broader operational acceptance; concurrent Owner HTTP operations remain synthetic",
+    "P5 scientific Owner command, sessions, preview and provenance",
+    "P6 acceptance and recovery",
     "Owner scientific acceptance"
   ],
   "candidateResourceFlags": "Historical false flags in candidate receipt are not current activation state",
@@ -87,5 +87,100 @@
     "ownerPageTests": 4,
     "roadmap": "PASS",
     "mkdocsStrict": "PASS"
+  },
+  "activationDeliveryMerge": "eed23a46de17806d9cd1cfae070fa19e3a9acbc2",
+  "ownerHttpOAT": {
+    "ownerAuthentication": "PASS",
+    "idempotentCreate": "PASS",
+    "cancelBeforeNative": "PASS",
+    "state": "CANCELLED",
+    "publication": "NONE",
+    "executionEvidence": "WORKER_REPORTED_NOT_ATTESTED"
+  },
+  "additionalLiveOAT": {
+    "controlMutated": false,
+    "liveControlStaleCreateDenied": "PASS",
+    "kind": "DSG_PIAI_ADDITIONAL_LIVE_OAT_V1",
+    "validGoogleNonOwnerDenied": "PASS"
+  },
+  "restartRecovery": {
+    "kind": "DSG_PIAI_RESTART_RETRY_OAT_V1",
+    "sameJobRetained": true,
+    "acknowledgedPreparingReports": 1,
+    "newPreparationBeforeAck": false,
+    "repeatedCycleJobFilesIdentical": 8,
+    "actualCloudRestart": true,
+    "ackLoss": "DELIBERATELY_DISCARDED_AFTER_REAL_SERVER_COMMIT"
+  },
+  "offlineDiagnostic": {
+    "result": "PASS",
+    "connection": "OFFLINE",
+    "jobStatePreserved": "RUNNING",
+    "sameJobAndRootRetained": true,
+    "automaticReassignmentObserved": false,
+    "scope": "Status observation after >120 seconds without contact; not desktop crash recovery"
+  },
+  "cancelNative": {
+    "status": "CANCELLED",
+    "originalIntegrity": "UNCHANGED",
+    "processCount": 0,
+    "outputCount": 0,
+    "workflowInstanceCount": 0,
+    "providerRequests": 0
+  },
+  "nativeCompletion": {
+    "status": "COMPLETED",
+    "originalIntegrity": "UNCHANGED",
+    "processCount": 29,
+    "outputCount": 15,
+    "workflowInstanceCount": 29,
+    "providerRequests": 0,
+    "recipe": "M27_LRGB_NONLINEAR_V1",
+    "scientificAcceptance": "OWNER_REVIEW_REQUIRED",
+    "width": 4634,
+    "height": 2808,
+    "format": "Float32 RGB",
+    "nonLinear": true,
+    "allFinite": true,
+    "normalizedRange": true,
+    "clipping": "MEASURED_NOT_CERTIFIED_ABSENT",
+    "reservationClosed": true,
+    "remoteVerifiedReport": true,
+    "executionEvidence": "WORKER_REPORTED_NOT_ATTESTED",
+    "publication": "NONE",
+    "astrometricSolutionRetained": true
+  },
+  "scientificCreationRoute": "ADMINISTRATIVE_OAT_FIXTURE_NOT_SCIENTIFIC_OWNER_HTTP_UI",
+  "availableHistory": {
+    "views": 13,
+    "steps": 47,
+    "instances": 82,
+    "bytes": 429679,
+    "parser": "PARSED_SUBSET",
+    "upstreamCompleteness": "NOT_ESTABLISHED",
+    "importedExecutionEvidence": "NOT_ESTABLISHED",
+    "importedWorkflowCompleteness": "UNAVAILABLE",
+    "distinctRuntimeJournalActions": 29
+  },
+  "derivatives": {
+    "tiffRGB16": "PASS",
+    "jpegSRGB": "PASS",
+    "webJPEG": "PASS",
+    "detail100JPEG": "PASS",
+    "nativeCheckpointUnchangedAfterExport": true,
+    "publication": "NONE"
+  },
+  "liveConcurrentCAS": {
+    "kind": "DSG_PIAI_LIVE_CONCURRENT_STORAGE_CAS_V1",
+    "result": "PASS",
+    "route": "ADMINISTRATIVE_OWNER_GCS_CLI",
+    "scope": "Two concurrent writes of identical terminal queue bytes with the same generation; not concurrent Owner HTTP creates",
+    "successfulWriters": 1,
+    "staleWritersDenied": 1,
+    "primaryBytesUnchanged": true,
+    "immutableBackupReadback": "PASS",
+    "allJobsTerminalBeforeTest": true,
+    "newPrimaryGeneration": true,
+    "temporaryIdentityGrant": false
   }
 }

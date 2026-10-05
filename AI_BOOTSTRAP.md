@@ -2,7 +2,7 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 8.1 |
+| Versione | 8.2 |
 | Baseline | 05/10/2026 |
 | Stato | Current root bootstrap — BKL-043 F4 lifecycle pending; BKL-049 archive closed; PixInsight AI extension pilot; S10 unavailable |
 
@@ -65,4 +65,4 @@ Gli handover e le baseline precedenti restano snapshot storici.
 Exact-head CI → ARB → Release Quality sullo stesso SHA → expected-head merge → post-merge verification → acceptance reconciliation. Nessuna acceptance o runtime claim può precedere l'evidence reale.
 
 ## 7. Punto di ripresa
-Riprendere dall’handover del 5 ottobre v1.5. P1/P2/P3 e candidato P4 consegnati #479–#482. Risorse e credenziale P4 approvate; cloud attivo, collegamento PC e dieci controlli HTTP reali PASS. Storage IAM/restore reale PASS. Completare accesso Google Owner e prova nativa trasporto: non anticipare P5/P6 o acceptance scientifica. SESSION_ASSISTED senza nuove API IA a pagamento; BKL-043 conserva i propri gate, nessuna authority dispositivi/Safety o pubblicazione automatica. Runbook PIAI-P4-CLOUD-ACTIVATION-2026-10-05.md.
+Riprendere dall’handover del 5 ottobre v1.6 e dal runbook PIAI-P4-CLOUD-ACTIVATION-2026-10-05.md v1.1. P1–P3 e candidato P4 consegnati #479–#482; attivazione #483 post-merge verificata. P4 Owner HTTP sintetico, non-Owner negato, IAM/restore, restart/lost-ack, CAS GCS concorrente amministrativo e trasporto nativo amministrativo M27 verificati. P4 acceptance operativa resta aperta e concorrenza HTTP Owner soltanto sintetica; P5 comando scientifico/sessioni/provenance e P6 sono successivi. SESSION_ASSISTED senza nuove API IA; M27 pubblicata invariata, BKL-043 conserva i propri gate, nessuna authority dispositivi/Safety. Consegna CI/review e Pages della riconciliazione attuale da tracciare sulla PR.
