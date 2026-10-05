@@ -149,6 +149,6 @@ paid provider integration and portal linkage/acceptance belong to P4–P6.
 
 ## P4: authenticated outbound transport candidate
 
-`broker.py`, `transport_http.py` and `transport.py` implement a bounded queue and one-shot supervised PC adapter. SESSION_ASSISTED, no paid AI API or automatic native launch. See [procedure and activation proposal](../../../infrastructure/pixinsight-pilot/README.md). Cloud activation/dedicated credential and deployed/native end-to-end OAT remain gated. The P2/P3 executor is unchanged.
+`broker.py`, `transport_http.py` and `transport.py` implement a bounded queue and one-shot supervised PC adapter. SESSION_ASSISTED, no paid AI API or automatic native launch. See [procedure and approved activation](../../../infrastructure/pixinsight-pilot/README.md). Owner-approved cloud/credential active; partial HTTP/IAM/restore OAT passed. Owner Google login/native end-to-end OAT remain gated. The P2/P3 executor is unchanged. The separate Owner diagnostic page cannot request a scientific run.
 
 `python -m unittest tools.pixinsight.local_pilot.test_transport`

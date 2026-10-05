@@ -2,7 +2,7 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 8.0 |
+| Versione | 8.1 |
 | Baseline | 05/10/2026 |
 | Stato | Current root bootstrap — BKL-043 F4 lifecycle pending; BKL-049 archive closed; PixInsight AI extension pilot; S10 unavailable |
 
@@ -65,4 +65,4 @@ Gli handover e le baseline precedenti restano snapshot storici.
 Exact-head CI → ARB → Release Quality sullo stesso SHA → expected-head merge → post-merge verification → acceptance reconciliation. Nessuna acceptance o runtime claim può precedere l'evidence reale.
 
 ## 7. Punto di ripresa
-Riprendere dall’handover del 5 ottobre v1.4 e dal piano BKL-049-EXT-PIAI. P1/P2/P3 consegnate #479/#480/#481; P3 native technical PASS, Owner acceptance scientifica aperta. P4 candidato coda/adapter autenticato e recupero offline, modalità SESSION_ASSISTED scelta dall’Owner senza API IA a pagamento. Nuovo cloud e credenziale da approvare prima di attivazione/OAT; P5/P6 restano futuri. BKL-043 conserva i propri gate; nessuna authority dispositivi/Safety o pubblicazione automatica.
+Riprendere dall’handover del 5 ottobre v1.5. P1/P2/P3 e candidato P4 consegnati #479–#482. Risorse e credenziale P4 approvate; cloud attivo, collegamento PC e dieci controlli HTTP reali PASS. Storage IAM/restore reale PASS. Completare accesso Google Owner e prova nativa trasporto: non anticipare P5/P6 o acceptance scientifica. SESSION_ASSISTED senza nuove API IA a pagamento; BKL-043 conserva i propri gate, nessuna authority dispositivi/Safety o pubblicazione automatica. Runbook PIAI-P4-CLOUD-ACTIVATION-2026-10-05.md.

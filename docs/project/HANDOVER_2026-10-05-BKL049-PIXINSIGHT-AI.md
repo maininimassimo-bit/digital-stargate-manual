@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | ID | DSG-HO-BKL049-20261005 |
-| Versione | 1.4 |
+| Versione | 1.5 |
 | Data | 2026-10-05 |
 | Stato | Riconciliazione operativa; estensione pilota autorizzata, non accettata come produzione |
 | Pacchetto | BKL-049 archivio chiuso; BKL-049-EXT-PIAI pilota distinto |
@@ -42,7 +42,7 @@ La [evidenza minimizzata](evidence/BKL-049-M27-PUBLIC-2026-10-05.json) deriva da
 
 Seguire il [piano BKL-049-EXT-PIAI](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md). Prima verificare ambiente e disponibilità dei master senza modificarli, poi eseguire una ricetta controllata su copie. Un job per volta; journal privato per ogni azione, output e dipendenza. Le history importate restano dati, mai programmi da eseguire.
 
-La coda remota, un provider IA con API, budget, credenziali e il comando dal portale sono fasi successive non implementate. L’abbonamento alla chat non è una credenziale API per un servizio. L’installazione già presente non costituisce attestazione di licenza per usi multiutente o commerciali.
+La coda P4 è implementata e il cloud/credenziale sono stati approvati e attivati; OAT Owner/nativo ancora aperto. Provider IA con API e comando scientifico P5 non sono attivati. L’abbonamento alla chat non è una credenziale API per un servizio. L’installazione già presente non costituisce attestazione di licenza per usi multiutente o commerciali.
 
 ## Handover operativo e rollback
 
@@ -84,7 +84,7 @@ Prove native negative: pre-cancel con zero processi/output; selezione della masc
 
 Consegna P3 completata: PR #481, head `ce819ea192a30522f2c168631a0c1b05f77adfd9`, merge `342a169dbc87433da971f1660a239e6dc5a6b343`; 17 controlli exact-head e 16 workflow post-merge SUCCESS, ARB/RQ AI-assistite separate e sequenziali senza finding finali, Pages effettive verificate. Supera le indicazioni storiche di consegna P3 ancora pendente; acceptance scientifica Owner aperta.
 
-## Aggiornamento corrente — P4 candidato autenticato
+## Snapshot precedente — P4 candidato prima dell’approvazione
 
 L’Owner sceglie `SESSION_ASSISTED`: assistente di questa sessione, zero nuove chiamate API IA a pagamento. Implementati coda privata con CAS/backup, identità persistente senza scadenza o riassegnazione offline, autenticazione distinta Google Owner/credenziale worker e adapter PC HTTPS in uscita con allowlist locale. Preparazione una sola volta, retry di messaggi identici, cancellazione P2, raccolta solo dopo conferma di arresto nativo, recupero conservativo. Nessun avvio automatico PixInsight o modello cloud autonomo.
 
@@ -93,3 +93,11 @@ L’Owner sceglie `SESSION_ASSISTED`: assistente di questa sessione, zero nuove 
 Verifica candidato P4: 33 test Node e 62 Python Windows, inclusi 32 casi trasporto. [Ricevuta minimizzata](evidence/BKL-049-PIAI-P4-2026-10-05.json). CI/review dello stesso head e post-merge da registrare sulla PR; nessuna attivazione cloud anticipata.
 
 Riesame P4: un Major ARB ha riprodotto una seconda preparazione su root nuovo privo di binding. Corretto con identità locale persistente fissata dalla prima claim e transizione PREPARING confermata prima delle copie; claim avanzata senza binding rifiutata. Cinque regressioni coprono nuovo root, stati avanzati, perdita della risposta iniziale e preparazione interrotta. CI e riesame finale dello stesso head richiesti sulla PR.
+
+## Aggiornamento corrente — P4 cloud autorizzato e attivato
+
+L’Owner ha approvato le risorse e la credenziale dedicate il 5 ottobre. PR #482 consegnata: head `875cc375a130268b4be98b28ad11a7c8c11e4552`, merge `e000a3b96c980c22d47967e26fb5e79633c3d249`; 16 CI exact-head e 16 workflow post-merge SUCCESS, ARB/RQ AI-assistite separate e sequenziali senza finding finali, Pages effettive verificate.
+
+Il nuovo servizio Cloud Run è attivo su immagine verificata per digest, con identità/registry e due bucket privati versionati separati. Credenziale PC generata e protetta con Windows User DPAPI, solo digest al server. Collegamento PC HTTPS reale e dieci controlli HTTP PASS; nessuna nuova API IA, porta PC in ingresso, esecuzione nativa automatica o pubblicazione. La [ricevuta di attivazione](evidence/BKL-049-PIAI-P4-ACTIVATION-2026-10-05.json) e il [runbook](PIAI-P4-CLOUD-ACTIVATION-2026-10-05.md) distinguono prove reali e gate ancora aperti.
+
+Autenticazione Google Owner e prova nativa tramite trasporto non ancora eseguite. Pagina diagnostica P4 separata dalla navigazione principale: prova sintetica crea/legge/annulla, credenziale solo in memoria, destinazione approvata fissata per digest. Non abilita P5 né comandi scientifici dal portale. P4 OAT/P5/P6 e acceptance Owner restano aperti. M27 pubblicata e autorità dispositivi/Safety invariate.

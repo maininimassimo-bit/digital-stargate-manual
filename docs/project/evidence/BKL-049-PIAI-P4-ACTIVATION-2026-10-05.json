@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "BKL-049-EXT-PIAI",
+  "phase": "P4_ACTIVATION",
+  "date": "2026-10-05",
+  "classification": "PUBLIC_MINIMIZED",
+  "status": "OWNER_AUTHORIZED_DEPLOYED_PARTIAL_OAT",
+  "ownerApproval": "Explicit approval of proposed resources and dedicated credential",
+  "candidateMerge": "e000a3b96c980c22d47967e26fb5e79633c3d249",
+  "cloudResourcesCreated": true,
+  "credentialCreated": true,
+  "credentialProtection": "Windows User DPAPI; server SHA256 only; no token in Git",
+  "cloudBuildId": "86d1d49e-0156-4263-8244-8206f688491f",
+  "cloudBuild": "SUCCESS",
+  "imageDigest": "sha256:14a8ceb98989fe2e69b217b4ccf034cbfd63346401af506a3599cc44ffd65f66",
+  "revision": "dsg-pixinsight-pilot-00001-bmw",
+  "liveHttpChecks": {
+    "health": {
+      "status": 200,
+      "result": "PASS"
+    },
+    "anonymous_worker_denied": {
+      "status": 403,
+      "result": "PASS"
+    },
+    "wrong_worker_token_denied": {
+      "status": 403,
+      "result": "PASS"
+    },
+    "worker_with_browser_origin_denied": {
+      "status": 403,
+      "result": "PASS"
+    },
+    "worker_token_owner_route_denied": {
+      "status": 403,
+      "result": "PASS"
+    },
+    "anonymous_owner_denied": {
+      "status": 403,
+      "result": "PASS"
+    },
+    "wrong_portal_origin_denied": {
+      "status": 403,
+      "result": "PASS"
+    },
+    "authenticated_worker_idle": {
+      "status": 200,
+      "result": "PASS"
+    },
+    "different_root_denied": {
+      "status": 400,
+      "result": "PASS"
+    },
+    "original_root_remains_idle": {
+      "status": 200,
+      "result": "PASS"
+    }
+  },
+  "storageOAT": {
+    "separateNamespaceRestore": "PASS",
+    "runtimeIdentity": "dsg-pixinsight-pilot@digital-stargate-telemetry.iam.gserviceaccount.com",
+    "backupOverwriteDenied": "PASS",
+    "nonControlOverwriteDenied": "PASS",
+    "liveControlRestored": false,
+    "backupReadback": "PASS",
+    "backupDeleteDenied": "PASS",
+    "kind": "DSG_PIAI_LIVE_STORAGE_OAT_V1"
+  },
+  "actualOwnerGoogleLogin": "NOT_EXECUTED",
+  "nativeTransportOAT": "NOT_EXECUTED",
+  "providerRequests": 0,
+  "desktopInboundPorts": 0,
+  "automaticNativeLaunch": false,
+  "publishedM27": "UNCHANGED",
+  "deviceAuthority": "NONE",
+  "hardSpendingCap": false,
+  "remainingGates": [
+    "P4 Owner authentication and native transport OAT",
+    "P5",
+    "P6",
+    "Owner scientific acceptance"
+  ],
+  "candidateResourceFlags": "Historical false flags in candidate receipt are not current activation state",
+  "localVerification": {
+    "nodePass": 37,
+    "pythonWindowsPass": 62,
+    "ownerPageTests": 4,
+    "roadmap": "PASS",
+    "mkdocsStrict": "PASS"
+  }
+}

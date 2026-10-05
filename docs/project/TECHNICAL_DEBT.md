@@ -74,3 +74,7 @@ P3 supplies one M27-specific empirical recipe, not a universal image-planning mo
 ### 2026-10-05 — P4 transport candidate
 
 Authenticated queue/client candidate does not resolve production cloud availability, identity provisioning, licensed commercial rights or native end-to-end recovery. SESSION_ASSISTED has zero new paid AI API calls and requires an active supervised conversation/operator. New cloud resources, dedicated credential, cloud restore/OAT and P5/P6 remain gated. Existing TD dispositions unchanged.
+
+### 2026-10-05 — P4 approved deployment, partial live OAT
+
+Resource/credential approval satisfied and bounded service deployed. Real PC HTTPS/role/root denial established. Owner Google authentication, native transport OAT, P5/P6 and scientific acceptance remain open; no production completion claimed. Infrastructure costs remain possible; no hard spending cap. Existing debt dispositions unchanged.
