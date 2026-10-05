@@ -57,7 +57,7 @@
     },
     {
       "id": "architecture-program",
-      "title": "Architecture Program AP-001–AP-015",
+      "title": "Architecture Program AP-001â€“AP-015",
       "items": [
         {
           "id": "AP-001",
@@ -291,7 +291,7 @@
         },
         {
           "id": "BKL-043-F5",
-          "title": "Integrazione e collaudo dell’affidabilità nel portale",
+          "title": "Integrazione e collaudo dellâ€™affidabilitÃ  nel portale",
           "status": "planned",
           "note": "Owner requested planning on 2026-09-30. BKL-043-F5 adds read-only portal reliability integration after full F4 acceptance and before BKL-050: minimized publishable projection, task/heartbeat status, freshness, delivery continuity and unknown gaps; synthetic/isolated CI regressions plus authorized operational acceptance. Full receipts and raw logs remain private. No runtime, continuous operation or publication is authorized by this planning entry. No release date committed. Plan: docs/project/FUNCTIONAL_ROADMAP_EXPANSION_2026-08-30.md, BKL-043 F5."
         },
@@ -305,7 +305,7 @@
           "id": "BKL-049-EXT-PIAI",
           "title": "PixInsight AI Local Processing Pilot",
           "status": "active",
-          "note": "Owner-authorized extension; documentation/P1 delivered via PR #478/#479. P2 local executor implemented and natively tested on private M27 copies: five processes/checkpoints, linear Float32, original files unchanged; pre-cancel and replay refusal tested natively. Fixed recipe and owner-supervised launch only; P3 nonlinear processing and P4-P6 remote connector/provider/portal acceptance remain planned. No device/Safety authority or portal mutation. Plugin versions/license/model readiness unverified. Plan: docs/architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md. Evidence: docs/project/evidence/BKL-049-PIAI-P2-2026-10-05.json. Exact-head delivery/review tracked on PR."
+          "note": "Owner-authorized extension; documentation/P1 delivered via PR #478/#479. P2 local executor implemented and natively tested on private M27 copies: five processes/checkpoints, linear Float32, original files unchanged; pre-cancel and replay refusal tested natively. Fixed recipe and owner-supervised launch only; P3 nonlinear processing and P4-P6 remote connector/provider/portal acceptance remain planned. No device/Safety authority or portal mutation. Plugin versions/license/model readiness unverified. Plan: docs/architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md. Evidence: docs/project/evidence/BKL-049-PIAI-P2-2026-10-05.json. Exact-head delivery/review tracked on PR. ARB cancellation Major remediated: job-scoped identity and atomic token-bound marker; cancel command verified during a real PixInsight process under exclusive lease, plus successful complete run of corrected executor."
         }
       ]
     }
@@ -686,14 +686,14 @@
       "itemRef": "BKL-031",
       "title": "BKL-031 F3-A3 Method ADR and Validation Spike Handoff",
       "date": "2026-09-15",
-      "description": "Program Architect selected the documentation-only F3-A3 handoff after F3-A1/A2 repository-authority completion. The future Solution Architect package must compare candidates and prepare owner gates F3-OD04–F3-OD10; no provider, dependency, data/kernel, external call or runtime is authorized."
+      "description": "Program Architect selected the documentation-only F3-A3 handoff after F3-A1/A2 repository-authority completion. The future Solution Architect package must compare candidates and prepare owner gates F3-OD04â€“F3-OD10; no provider, dependency, data/kernel, external call or runtime is authorized."
     },
     {
       "id": "M-BKL031-F3-A3-DECISION-PREPARATION",
       "itemRef": "BKL-031",
       "title": "BKL-031 F3-A3 Decision Preparation",
       "date": "2026-09-15",
-      "description": "Solution Architecture, proposed ADR-010 and validation-spike plan prepared for review. Conditional recommendation favors a local primary and restricted reference path, but all F3-OD04–F3-OD10 owner decisions remain open; no execution or runtime is authorized."
+      "description": "Solution Architecture, proposed ADR-010 and validation-spike plan prepared for review. Conditional recommendation favors a local primary and restricted reference path, but all F3-OD04â€“F3-OD10 owner decisions remain open; no execution or runtime is authorized."
     },
     {
       "id": "M-BKL031-F3-A3-CONTAINER-BUILD-EVIDENCE",
@@ -848,7 +848,7 @@
       "title": "BKL-031 F8 current astronomy and setup suitability acceptance",
       "date": "2026-09-17",
       "status": "completed",
-      "description": "PR #279 passed 9/9 exact-head workflows on 3f05693482208df2b56b66dcb71162589880e72b, merged with expected-head control as 20669f7164460297d7318fc3b5874e4bc7f4bcde, and passed 10/10 applicable post-merge workflows. F8 is Accepted/Post-Merge Verified as bounded EVALUATION/NONE/READ_ONLY evidence for the 17–18 Sep 2026 night."
+      "description": "PR #279 passed 9/9 exact-head workflows on 3f05693482208df2b56b66dcb71162589880e72b, merged with expected-head control as 20669f7164460297d7318fc3b5874e4bc7f4bcde, and passed 10/10 applicable post-merge workflows. F8 is Accepted/Post-Merge Verified as bounded EVALUATION/NONE/READ_ONLY evidence for the 17â€“18 Sep 2026 night."
     },
     {
       "id": "M-BKL031-F9-CLOSURE",
@@ -941,13 +941,13 @@
       "title": "BKL-043-F4 Exact Pilot Runtime Authorization Gate",
       "date": "2026-10-01",
       "status": "active",
-      "description": "F4 OPEN — prove eseguibili completate e accettate; attesa lifecycle. Il 01/10/2026 l’Owner ha accettato il riesame v2 e il singolo GET autenticato estraneo respinto con HTTP403, nei limiti documentati; restano valide le accettazioni reporter, integrazione offline, task/heartbeat e cost-stop documentale. Nessuna prova POST/payload o stop reale dedotta. Soglie minime dei campioni: 29/12/2026 22:38:18 e 30/12/2026 10:28:49 Europe/Rome, non date garantite di cancellazione. Verificare azione lifecycle autentica, soft-delete e rimozione definitiva dopo il relativo periodo di 7 giorni e latenza; configurazione, metadati o HTTP404 non sono PASS. Poi riesame e accettazione finale complessiva. Nessun controllo automatico programmato, nuovo runtime o attivazione F5. Riepilogo: docs/project/BKL-043-F4-STATUS-2026-10-01.md.",
+      "description": "F4 OPEN â€” prove eseguibili completate e accettate; attesa lifecycle. Il 01/10/2026 lâ€™Owner ha accettato il riesame v2 e il singolo GET autenticato estraneo respinto con HTTP403, nei limiti documentati; restano valide le accettazioni reporter, integrazione offline, task/heartbeat e cost-stop documentale. Nessuna prova POST/payload o stop reale dedotta. Soglie minime dei campioni: 29/12/2026 22:38:18 e 30/12/2026 10:28:49 Europe/Rome, non date garantite di cancellazione. Verificare azione lifecycle autentica, soft-delete e rimozione definitiva dopo il relativo periodo di 7 giorni e latenza; configurazione, metadati o HTTP404 non sono PASS. Poi riesame e accettazione finale complessiva. Nessun controllo automatico programmato, nuovo runtime o attivazione F5. Riepilogo: docs/project/BKL-043-F4-STATUS-2026-10-01.md.",
       "image": null
     },
     {
       "id": "M-BKL043-F5-PORTAL-RELIABILITY",
       "itemRef": "BKL-043-F5",
-      "title": "BKL-043 F5 — Affidabilità nel portale",
+      "title": "BKL-043 F5 â€” AffidabilitÃ  nel portale",
       "date": null,
       "status": "planned",
       "description": "Owner requested planning on 2026-09-30. BKL-043-F5 adds read-only portal reliability integration after full F4 acceptance and before BKL-050: minimized publishable projection, task/heartbeat status, freshness, delivery continuity and unknown gaps; synthetic/isolated CI regressions plus authorized operational acceptance. Full receipts and raw logs remain private. No runtime, continuous operation or publication is authorized by this planning entry. No release date committed. Plan: docs/project/FUNCTIONAL_ROADMAP_EXPANSION_2026-08-30.md, BKL-043 F5.",

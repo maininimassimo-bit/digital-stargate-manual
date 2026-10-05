@@ -25,12 +25,14 @@
     "status": "CANCELLED",
     "nativeProcessCount": 0,
     "checkpointCount": 0,
-    "originalFilesIntegrity": "UNCHANGED"
+    "originalFilesIntegrity": "UNCHANGED",
+    "executorScope": "Earlier immutable pre-remediation snapshot"
   },
   "nativeReplay": {
     "refused": true,
     "completedJobBytesUnchanged": true,
-    "checkedPrivateFiles": 37
+    "checkedPrivateFiles": 37,
+    "executorScope": "Earlier immutable snapshot; replay guard unchanged in remediation"
   },
   "coordinatorConflict": {
     "secondJobRejected": true,
@@ -38,16 +40,16 @@
   },
   "syntheticTests": {
     "preflight": 13,
-    "executor": 14,
-    "coordinator": 17,
-    "result": "PASS_LOCAL"
+    "executor": 15,
+    "coordinator": 20,
+    "result": "PASS_LOCAL",
+    "windowsSharingModeTest": "PASS_LOCAL; skipped on Linux"
   },
   "providerRequests": 0,
   "portalMutations": 0,
   "fullUpstreamHistoryCompleteness": "NOT_ESTABLISHED",
   "nonlinearFinalImageProduced": false,
   "scientificQualityAcceptance": "NOT_ESTABLISHED",
-  "nativeFailureAndMidProcessCancel": "SYNTHETIC_BOUNDARY_TESTS_ONLY",
   "privateEvidence": "Original/copy/output/runtime hashes, native source parameters, journal, receipts and checkpoints retained on Owner PC; excluded from public repository",
   "deliveryReview": "Exact publication head, CI, separated ARB/RQ and post-merge verification tracked on delivery PR",
   "additionalNativeCorrelationRun": {
@@ -59,5 +61,29 @@
     "completionTargetsVerified": true,
     "originalFilesIntegrity": "UNCHANGED",
     "runtimeSnapshotIdentityVerified": true
+  },
+  "nativeProcessFailure": "SYNTHETIC_BOUNDARY_TESTS_ONLY",
+  "nativeMidRunCancel": {
+    "status": "CANCELLED",
+    "nativeProcessCount": 1,
+    "checkpointCount": 0,
+    "originalFilesIntegrity": "UNCHANGED",
+    "exclusiveNativeLeaseDeniedPythonRead": true,
+    "coordinatorCancelDuringNativeProcess": "PASS",
+    "tokenBoundMarker": "VERIFIED",
+    "successfulInstanceJournalRetained": true
+  },
+  "reviewRemediation": "ARB Major: cancellation read of leased file removed; job-scoped identity plus atomically published marker; native concurrent proof retained privately",
+  "releaseExecutorRun": {
+    "status": "COMPLETED",
+    "nativeProcessCount": 5,
+    "checkpointCount": 5,
+    "workflowInstanceCount": 5,
+    "startedAt": "2026-10-05T12:22:32.401Z",
+    "finishedAt": "2026-10-05T12:24:04.697Z",
+    "completionTargetsVerified": true,
+    "originalFilesIntegrity": "UNCHANGED",
+    "runtimeSnapshotIdentityVerified": true,
+    "tokenAwareCancellationProtocol": "CURRENT"
   }
 }

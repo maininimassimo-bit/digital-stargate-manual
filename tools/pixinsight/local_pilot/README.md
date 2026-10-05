@@ -42,7 +42,12 @@ separate. Keep requests, hashes, images, runtime parameters and receipts private
 3. In PixInsight use **Script → Execute Script File** to run that job's `run.js`.
    This owner-supervised launch is the P2 procedure; remote dispatch is future work.
 4. To request cancellation use `python -m tools.pixinsight.local_pilot.worker cancel --root <private-root> --job <job-id>`.
-   The marker is checked before each process and save. It does not guarantee
+   The coordinator reads the immutable job-scoped `reservation.json`, not the
+   exclusively leased file. It validates manifest/scope/identity and publishes
+   complete token-bound JSON atomically with a create-only hard link. The native
+   executor checks that identity before accepting the marker. The local worker
+   filesystem must support hard links; failure preserves evidence and sends no
+   cancellation. The marker is checked before each process and save. It does not guarantee
    immediate interruption of a native process already running.
 5. After the native run stops, collect:
    `python -m tools.pixinsight.local_pilot.worker collect --root <private-root> --job <job-id>`.
@@ -61,7 +66,8 @@ auxiliary masks remain available for inspection; source files are never targets.
 ## Evidence and recovery
 
 Each job retains `manifest.json`, executor snapshot, immutable numbered events,
-`terminal.json`, checkpoints, `verification.json` and `reservation-closed.json`.
+`reservation.json`, `terminal.json`, checkpoints, `verification.json` and
+`reservation-closed.json`.
 The native exclusive lease lasts through processing and terminal writing. A
 second preparation in the configured root and replay of a claimed job are
 refused. This is a per-root guard, not a global multi-worker coordinator.
@@ -94,3 +100,6 @@ python -m unittest tools.pixinsight.local_pilot.test_worker
 
 Native receipts are reported separately; stub tests do not establish native
 platform compatibility or scientific acceptance.
+One coordinator test uses an actual Windows sharing-mode handle and is skipped
+on Linux. It proves cancellation does not read the leased file; the separate
+native PixInsight test proves the command during a real process.

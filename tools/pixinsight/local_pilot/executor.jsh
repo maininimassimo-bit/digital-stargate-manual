@@ -39,7 +39,13 @@ function DSGExecuteLocalPilot(m) {
       var ordinal=('0000'+eventOrdinal++).slice(-4);
       write(root+'/events/'+ordinal+'-'+label+'.json', {at:new Date().toISOString(),event:label,jobId:m.jobId,data:data});
    }
-   function checkCancel() { if(File.exists(root+'/cancel.json')) throw Error('DSG_CANCEL_REQUESTED'); }
+   function checkCancel() {
+      if(File.exists(root+'/cancel.json')) {
+         var marker=JSON.parse(File.readTextFile(root+'/cancel.json'));
+         require(marker.jobId===m.jobId && marker.token===m.token && marker.requested===true, 'Cancellation identity mismatch');
+         throw Error('DSG_CANCEL_REQUESTED');
+      }
+   }
    function apply(process,window,label,dependencies) {
       checkCancel();
       event('process-started',{label:label,target:window.mainView.id,dependencies:dependencies,nativeSource:process.toSource()});

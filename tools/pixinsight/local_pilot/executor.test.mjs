@@ -17,6 +17,7 @@ function fixture(){
   class File {
     static exists(p){return files.has(p);}
     static readFile(p){return {digest:files.get(p)==='corrupt'?'c'.repeat(64):digest};}
+    static readTextFile(p){return files.get(p);}
     openForReadWrite(p){if(leased && leaseEnforced)throw Error('exclusive');leased=true;this.isOpen=true;this.path=p;this.size=files.get(p).length;}
     createForWriting(p){this.path=p;this.isOpen=true;}
     read(){return {utf8ToString:()=>files.get(this.path)};}
@@ -34,7 +35,7 @@ function fixture(){
   function ImageWindow(width,height,channels,bits,float,color,id){return window(channels,id);}
   ImageWindow.windowById=id=>views.get(id)||{isNull:true};
   ImageWindow.open=()=>[window()];ImageWindow.activeWindow={isNull:true};
-  function process(){operations++;if(cancelAfter)files.set(root+'/cancel.json','cancel');if(failProcess)return false;return true;}
+  function process(){operations++;if(cancelAfter)files.set(root+'/cancel.json',JSON.stringify({jobId:m.jobId,token,requested:true}));if(failProcess)return false;return true;}
   class ABE{toSource(){return 'synthetic-native-ABE';}executeOn(){return process();}}
   class CC{toSource(){return 'synthetic-native-CC';}executeGlobal(){if(!process())return false;ImageWindow.activeWindow=window(3,'rgb');return true;}}
   const context={File,ImageWindow,AutomaticBackgroundExtractor:ABE,ChannelCombination:CC,
@@ -51,11 +52,15 @@ test('fixed recipe completes five native operations and five separate checkpoint
   assert.ok([...f.files.keys()].some(k=>k.endsWith('process-started.json')));
 });
 test('pre-cancel executes no pixel operation and retains terminal receipt',()=>{
-  const f=fixture();f.files.set(root+'/cancel.json','cancel');const r=f.run();
+  const f=fixture();f.files.set(root+'/cancel.json',JSON.stringify({jobId:f.m.jobId,token,requested:true}));const r=f.run();
   assert.equal(r.status,'CANCELLED');assert.equal(f.operations(),0);assert.ok(f.files.has(root+'/terminal.json'));
 });
 test('cancel between processes retains completed action and stops next operation',()=>{
   const f=fixture();f.cancelAfter();const r=f.run();assert.equal(r.status,'CANCELLED');assert.equal(r.processCount,1);assert.equal(f.operations(),1);
+});
+test('mismatched cancellation identity fails without classifying another job cancellation',()=>{
+  const f=fixture();f.files.set(root+'/cancel.json',JSON.stringify({jobId:'Other',token,requested:true}));
+  const r=f.run();assert.equal(r.status,'FAILED');assert.match(r.error,/Cancellation identity mismatch/);assert.equal(f.operations(),0);
 });
 test('native false result becomes failure without success checkpoint',()=>{
   const f=fixture();f.failProcess();const r=f.run();assert.equal(r.status,'FAILED');assert.equal(r.outputs.length,0);

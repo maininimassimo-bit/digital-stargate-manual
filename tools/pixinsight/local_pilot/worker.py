@@ -154,6 +154,8 @@ def prepare(root: Path, request: dict) -> Path:
     try:
         job.mkdir()
         job_created = True
+        # Job-scoped immutable identity stays readable while the native lease is held.
+        write_new(job / "reservation.json", reservation)
         for folder in ("inputs", "outputs", "events"):
             (job / folder).mkdir()
         inputs = []
@@ -189,9 +191,19 @@ def prepare(root: Path, request: dict) -> Path:
 def cancel(root: Path, job_id: str) -> None:
     require(re.fullmatch(r"[A-Za-z][A-Za-z0-9_]{0,47}", job_id) is not None, "Invalid job ID")
     root = root.resolve()
-    active = json.loads((root / "active-job.json").read_text(encoding="utf-8"))
-    require(active["jobId"] == job_id, "Different active job")
-    write_new(root / job_id / "cancel.json", {"jobId": job_id, "requested": True})
+    job = root / job_id
+    require((root / "active-job.json").is_file(), "No active reservation")
+    require(not (job / "terminal.json").exists() and not (job / "reservation-closed.json").exists(), "Job already terminal")
+    manifest = json.loads((job / "manifest.json").read_text(encoding="utf-8"))
+    reservation = json.loads((job / "reservation.json").read_text(encoding="utf-8"))
+    require(manifest["workerRoot"] == root.as_posix() and manifest["jobDirectory"] == job.as_posix(), "Cancellation scope mismatch")
+    require(reservation["jobId"] == manifest["jobId"] == job_id and reservation["token"] == manifest["token"], "Cancellation identity mismatch")
+    # Never read active-job.json here: PJSR denies sharing while processing.
+    staged = job / ("cancel-request-" + uuid.uuid4().hex + ".json")
+    write_new(staged, {"jobId": job_id, "token": reservation["token"], "requested": True})
+    # Publish only complete JSON, atomically and without replacing an existing marker.
+    os.link(staged, job / "cancel.json")
+    staged.unlink()
 
 
 def collect(root: Path, job_id: str) -> dict:

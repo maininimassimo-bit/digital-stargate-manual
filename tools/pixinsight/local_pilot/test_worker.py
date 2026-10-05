@@ -4,6 +4,7 @@ import json
 import tempfile
 import unittest
 import struct
+import os
 
 from tools.pixinsight.local_pilot import worker
 
@@ -166,6 +167,48 @@ class WorkerTests(unittest.TestCase):
         worker.export_runtime_instances(job, dict(jobId=self.request["jobId"], processCount=5))
         correlations = json.loads((job / "runtime-correlations.json").read_text())
         self.assertEqual(correlations["instances"][-1]["target"], "Synthetic_4")
+
+    def test_cancel_refuses_terminal_job_and_wrong_identity(self):
+        job = worker.prepare(self.root, self.request)
+        identity = json.loads((job / "reservation.json").read_text())
+        (job / "reservation.json").write_text(json.dumps({**identity, "token": "wrong"}))
+        with self.assertRaisesRegex(ValueError, "Cancellation identity mismatch"):
+            worker.cancel(self.root, self.request["jobId"])
+        self.assertFalse((job / "cancel.json").exists())
+        (job / "reservation.json").write_text(json.dumps(identity))
+        self.terminal(job)
+        with self.assertRaisesRegex(ValueError, "already terminal"):
+            worker.cancel(self.root, self.request["jobId"])
+
+    def test_cancel_publishes_complete_identity_once(self):
+        job = worker.prepare(self.root, self.request)
+        worker.cancel(self.root, self.request["jobId"])
+        marker = json.loads((job / "cancel.json").read_text())
+        identity = json.loads((job / "reservation.json").read_text())
+        self.assertEqual(marker, {**{k:identity[k] for k in ("jobId", "token")}, "requested": True})
+        with self.assertRaises(FileExistsError):
+            worker.cancel(self.root, self.request["jobId"])
+        self.assertEqual(json.loads((job / "cancel.json").read_text()), marker)
+
+    @unittest.skipUnless(os.name == "nt", "Actual Windows sharing-mode proof")
+    def test_cancel_while_windows_exclusive_handle_is_held(self):
+        import ctypes
+        from ctypes import wintypes
+        job = worker.prepare(self.root, self.request)
+        kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel.CreateFileW.argtypes = [wintypes.LPCWSTR, wintypes.DWORD, wintypes.DWORD, ctypes.c_void_p, wintypes.DWORD, wintypes.DWORD, wintypes.HANDLE]
+        kernel.CreateFileW.restype = wintypes.HANDLE
+        kernel.CloseHandle.argtypes = [wintypes.HANDLE]
+        kernel.CloseHandle.restype = wintypes.BOOL
+        handle = kernel.CreateFileW(str(self.root / "active-job.json"), 0xC0000000, 0, None, 3, 0x80, None)
+        self.assertNotEqual(handle, ctypes.c_void_p(-1).value)
+        try:
+            with self.assertRaises(PermissionError):
+                (self.root / "active-job.json").read_text()
+            worker.cancel(self.root, self.request["jobId"])
+            self.assertTrue((job / "cancel.json").exists())
+        finally:
+            self.assertTrue(kernel.CloseHandle(handle))
 
 
 if __name__ == "__main__":
