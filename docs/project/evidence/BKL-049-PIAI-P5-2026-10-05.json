@@ -2,7 +2,7 @@
   "kind": "DSG_PIAI_P5_MINIMIZED_EVIDENCE_V1",
   "date": "2026-10-05",
   "phase": "P5",
-  "state": "DEPLOYED_TARGET_COMPATIBILITY_REMEDIATION_CANDIDATE_REAL_OAT_PENDING",
+  "state": "TECHNICAL_M27_OWNER_HTTP_UI_NATIVE_PRIVATE_DELIVERY_OAT_PASS",
   "aiMode": "SESSION_ASSISTED",
   "paidAiApiRequests": 0,
   "localValidation": {
@@ -12,9 +12,9 @@
     "roadmapConsistency": "PASS",
     "testClassification": "SYNTHETIC_MODELS_AND_REAL_LOOPBACK_HTTP_WITH_SYNTHETIC_IDENTITIES"
   },
-  "scientificOwnerHttpUI": "NOT_YET_EXECUTED",
-  "nativeScientificJob": "NOT_YET_EXECUTED",
-  "privatePreviewWorkflowReview": "SYNTHETIC_ONLY",
+  "scientificOwnerHttpUI": "REAL_OWNER_GOOGLE_UI_REQUEST_PASS",
+  "nativeScientificJob": "REAL_PIXINSIGHT_NEW_CONTEXT_BOUND_JOB_PASS",
+  "privatePreviewWorkflowReview": "REAL_OWNER_AUTHENTICATED_PREVIEW_AND_29_WORKFLOW_STEPS_PASS",
   "scientificAcceptance": "OWNER_REVIEW_REQUIRED",
   "executionEvidence": "WORKER_REPORTED_NOT_ATTESTED",
   "sessionAssociation": "OWNER_DECLARED",
@@ -28,11 +28,10 @@
   "newCredential": false,
   "deviceAuthority": "NONE",
   "remainingGates": [
-    "TARGET_COMPATIBILITY_EXACT_HEAD_RELEASE_DEPLOYMENT",
-    "REAL_SCIENTIFIC_OWNER_HTTP_UI_NATIVE_DELIVERY_OAT",
     "DOCUMENTATION_DELIVERY_GATES",
     "P6_OPERATIONAL_ACCEPTANCE",
-    "OWNER_SCIENTIFIC_ACCEPTANCE"
+    "OWNER_SCIENTIFIC_ACCEPTANCE",
+    "OWNER_BROWSER_DOWNLOAD_PERSISTENCE_CHECK"
   ],
   "release": {
     "pr": 485,
@@ -46,17 +45,17 @@
     "pages": "ACTUAL_MERGE_HEAD_SUCCESS"
   },
   "deployment": {
-    "buildId": "2bc77ad5-901a-4429-a64c-84314c674b76",
-    "build": "SUCCESS_77_TESTS",
-    "imageDigest": "sha256:b6d14fa1934076f16f0c44721fdc2852dd5e49f68bd21bf3cae0cf54b38e1ee0",
-    "revision": "dsg-pixinsight-pilot-p5-science-01",
+    "buildId": "60d5ab2b-a855-4da0-ac29-bb2e73d00835",
+    "build": "SUCCESS_80_TESTS",
+    "imageDigest": "sha256:c6a4c7ead3035d896afda66b3f3580473418cb19f9ec92478f7cfb2ecbe9f993",
+    "revision": "dsg-pixinsight-pilot-p5-target-01",
     "trafficPercent": 100,
     "registeredMasterGroups": 1,
     "registration": "REAL_VERIFIED_IDEMPOTENT_PASS",
     "iamExpansion": false
   },
   "cloudMasterDependencies": "MANIFEST_BOUND_ROLES",
-  "ownerNewPageLogin": "REAL_OWNER_VERIFIED_NO_SCIENTIFIC_REQUEST",
+  "ownerNewPageLogin": "REAL_OWNER_VERIFIED_SCIENTIFIC_REQUEST",
   "targetCompatibility": {
     "observedCatalogTarget": "M 27",
     "registeredPilotTarget": "M27",
@@ -71,6 +70,37 @@
       "currentParents": 1,
       "classification": "REAL_PUBLIC_PROFILES_LOCAL_SYNTHETIC_BROKER_NOT_OWNER_HTTP_NATIVE_OAT"
     },
-    "status": "IMPLEMENTED_RELEASE_DEPLOYMENT_PENDING"
+    "status": "RELEASED_DEPLOYED_REAL_OWNER_UI_16_SESSIONS_1_PARENT_PASS"
+  },
+  "targetRelease": {
+    "pr": 487,
+    "reviewedHead": "912d433345db0dc053f9e70466c1f2a340b23032",
+    "tree": "c91ff9182a986611b82187e637cde37092bb07a7",
+    "exactHeadChecks": 9,
+    "arb": "AI_ASSISTED_PASS_0_FINDINGS",
+    "rq": "AI_ASSISTED_PASS_0_FINDINGS",
+    "mergeHead": "85fea6c2955471427a50d93adf01aef2b4808350",
+    "postMergeChecks": 10,
+    "pages": "ACTUAL_MERGE_HEAD_SUCCESS"
+  },
+  "realScientificOat": {
+    "requestSource": "REAL_AUTHENTICATED_OWNER_PORTAL",
+    "newNativeExecution": true,
+    "selectedSessionCount": 16,
+    "exactPublishedParentBound": true,
+    "processCount": 29,
+    "checkpointCount": 15,
+    "workflowInstanceCount": 29,
+    "width": 4634,
+    "height": 2808,
+    "sampleFormat": "RGB_FLOAT32_NONLINEAR",
+    "originalIntegrity": "UNCHANGED",
+    "allFinalPixelsVerified": true,
+    "delivery": "PRIVATE_AUTHENTICATED_IMMUTABLE",
+    "privateStoredAssetsIntegrity": "PASS_ADMINISTRATIVE_GCS_READBACK_AND_LOCAL_COMPARISON",
+    "ownerBrowserDownloadPersistence": "UNVERIFIED_OWNER_CHECK_REQUESTED",
+    "ownerDecision": "NOT_TAKEN",
+    "privateProofs": "OWNER_PC_ONLY",
+    "publicProfileUnchanged": true
   }
 }
