@@ -1,4 +1,11 @@
-# P4 — authenticated queue candidate
+# P4 — authenticated queue and approved cloud activation
+
+Current 2026-10-05 state: Owner-approved resources/credential provisioned and
+reviewed image deployed. Real PC HTTPS and bounded HTTP denial checks PASS;
+runtime IAM backup/read-back/separate restore PASS. Google Owner login and native
+transport OAT remain pending. See the [activation runbook](../../docs/project/PIAI-P4-CLOUD-ACTIVATION-2026-10-05.md).
+The proposal-time instructions below are retained for reproducibility; approval
+has already been granted. No P5 production command or new publication is enabled.
 
 Owner choice on 2026-10-05: `SESSION_ASSISTED`, using the current assistant
 conversation, with zero new paid AI API requests. This is not an autonomous
@@ -84,7 +91,7 @@ fallback exists in the deployment. MemoryStore and loopback plaintext are test-o
 Polling/updates create storage operations and retained versions/backups: capacity
 bounds are not a cloud spending cap or an infinite-storage guarantee.
 
-## Concrete activation proposal — not yet authorized
+## Approved concrete activation proposal
 
 Exact resources and limits: [deployment-plan.json](deployment-plan.json).
 Separate Cloud Run `dsg-pixinsight-pilot` (1 CPU/512 MiB, min=0/max=1,
@@ -96,10 +103,10 @@ operations/retained versions/recovery candidates, registry/builds and possible
 egress are billable. No hard spending cap is supplied. No continuous polling
 is enabled; requests are bounded operator invocations.
 
-This proposal requires explicit Owner approval for the new resources and dedicated
-credential before activation under DSG-AEM-001 section 5. Installed PixInsight
+Owner approval for the new resources and dedicated credential was received on
+2026-10-05 under DSG-AEM-001 section 5. Installed PixInsight
 licenses remain for this personal single-Owner pilot; no commercial/multiuser rights
-are asserted. Code/tests/docs may be delivered now; no cloud OAT is claimed.
+are asserted. Partial live cloud OAT is documented separately; no complete OAT is claimed.
 
 After approval and reviewed merge:
 
@@ -119,8 +126,10 @@ After approval and reviewed merge:
    Google Owner login, primary/backup IAM, generation conflicts, committed-state
    restore/read-back, restart/offline/lost-response and cancellation with labelled
    synthetic inputs. Only then register private M27 references for supervised OAT.
-5. Review portal activation as P5; do not publish a service URL or enable a command
-   before live gates. Complete P6 native end-to-end/recovery and Owner acceptance.
+5. Use the hidden P4 diagnostic page for the required live Owner-auth check. Its
+   destination is pinned by digest; no default service URL or scientific command.
+   Review production portal activation as P5 only after live gates; complete P6
+   native end-to-end/recovery and Owner acceptance.
 
 Rollback: stop new invocations and revoke the worker credential/server digest,
 disable service traffic, retain both buckets and PC evidence. Revert code through

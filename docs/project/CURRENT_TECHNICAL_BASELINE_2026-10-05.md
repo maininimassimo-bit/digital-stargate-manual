@@ -3,8 +3,8 @@
 | Campo | Valore |
 |---|---|
 | ID | DSG-BASELINE-20261005 |
-| Versione | 1.4 |
-| Stato | P1/P2/P3 delivered; P4 transport candidate; activation and Owner acceptance gated |
+| Versione | 1.5 |
+| Stato | P1/P2/P3 and P4 candidate delivered; P4 approved cloud active; live OAT incomplete |
 | Data | 2026-10-05 |
 
 La [baseline del 25 settembre](CURRENT_TECHNICAL_BASELINE_2026-09-25.md) conserva le foundation storiche. Il presente aggiornamento prevale per continuità, BKL-049 e M27; non promuove capability estranee.
@@ -16,7 +16,7 @@ La [baseline del 25 settembre](CURRENT_TECHNICAL_BASELINE_2026-09-25.md) conserv
 - BKL-034 procedura foto/sessioni: caricamento manuale Owner-only e archiviazione separata, runbook in `infrastructure/scientific-photo-ingestion/README.md`; PR #474–#476.
 - Importer PixInsight 1.2: PR #477 merged; esportatore multi-view 2.0.1. Esportazione/importazione non equivalgono a completezza universale o replay.
 - M27 ultima versione: elaborazione locale nativa assistita, export 24 viste/80 processi/147 istanze; nuova pubblicazione verificata il 5 ottobre con 16 associazioni Owner-declared. [Handover ed evidenza](HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md).
-- BKL-049-EXT-PIAI: P1 consegnata con PR #479; P2 consegnata con PR #480: cinque processi e checkpoint lineari. P3 ricetta non lineare provata: 29 azioni, 15 checkpoint e pixel finali verificati; confronto visivo effettuato, Owner acceptance richiesta. P4–P6 restano pianificati. Nessun worker remoto o modello IA di produzione già implementato.
+- BKL-049-EXT-PIAI: P1 consegnata con PR #479; P2 consegnata con PR #480: cinque processi e checkpoint lineari. P3 ricetta non lineare provata: 29 azioni, 15 checkpoint e pixel finali verificati; confronto visivo effettuato, Owner acceptance richiesta. P4 cloud/worker implementati e attivati nel pilota con OAT parziale; P5/P6 pianificati, nessun modello IA di produzione.
 - BKL-046 resta advisory/read-only, `aiModelImplemented=false`, efficacia scientifica non valutabile e produzione non pronta. Il pilota PixInsight è distinto.
 
 ## Contratti e autorità
@@ -27,7 +27,7 @@ Il pilota autorizza esclusivamente elaborazione di file su copie locali sul PC d
 
 ## Prossimo gate
 
-P3 consegnata #481. Consegnare il candidato P4 con CI e review sullo stesso head; poi acquisire approvazione del cloud/credenziale della proposta concreta prima di attivazione e OAT. La modalità IA è SESSION_ASSISTED senza nuove API a pagamento; diritti commerciali/multiutente non attestati. Il [piano](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md) separa preflight, esecutore, elaborazione e integrazione futura. Registro: v1.0, riconciliazione 2026-10-05; review e consegna tracciate sulle PR.
+P3 consegnata #481 e candidato P4 consegnato #482. Cloud/credenziale approvati e attivati; completare autenticazione Owner e OAT reale prima di P5/P6. La modalità IA è SESSION_ASSISTED senza nuove API a pagamento; diritti commerciali/multiutente non attestati. Il [piano](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md) separa preflight, esecutore, elaborazione e integrazione futura. Registro: v1.0, riconciliazione 2026-10-05; review e consegna tracciate sulle PR.
 
 Aggiornamento v1.1: preflight nativo e 13 test sintetici; [evidenza P1](evidence/BKL-049-PIAI-P1-2026-10-05.json). La disponibilità dei processi non attesta versioni/licenze/modelli.
 
@@ -43,8 +43,16 @@ Prove native negative: pre-cancel con zero processi/output; selezione della masc
 
 Consegna P3 completata: PR #481, head `ce819ea192a30522f2c168631a0c1b05f77adfd9`, merge `342a169dbc87433da971f1660a239e6dc5a6b343`; 17 controlli exact-head e 16 workflow post-merge SUCCESS, ARB/RQ AI-assistite separate e sequenziali senza finding finali, Pages effettive verificate. Supera le indicazioni storiche di consegna P3 ancora pendente; acceptance scientifica Owner aperta.
 
-## Aggiornamento corrente — P4 candidato autenticato
+## Snapshot precedente — P4 candidato prima dell’approvazione
 
 L’Owner sceglie `SESSION_ASSISTED`: assistente di questa sessione, zero nuove chiamate API IA a pagamento. Implementati coda privata con CAS/backup, identità persistente senza scadenza o riassegnazione offline, autenticazione distinta Google Owner/credenziale worker e adapter PC HTTPS in uscita con allowlist locale. Preparazione una sola volta, retry di messaggi identici, cancellazione P2, raccolta solo dopo conferma di arresto nativo, recupero conservativo. Nessun avvio automatico PixInsight o modello cloud autonomo.
 
 [Pacchetto operativo e proposta concreta](https://github.com/maininimassimo-bit/digital-stargate-manual/tree/main/infrastructure/pixinsight-pilot): servizio Cloud Run separato, identità/registry e due bucket privati per soli stati, min=0/max=1, 1 CPU/512 MiB. Nuova infrastruttura potenzialmente a pagamento e credenziale dedicata richiedono approvazione prima di creazione/attivazione. Nessuna risorsa o credenziale creata, nessun OAT cloud/Google/TLS nativo dichiarato. Test persistenti sintetici e HTTP loopback reali restano distinti da runtime operativo. P4 resta aperta per attivazione; P5/P6 e acceptance Owner restano successivi. Archivio/M27 pubblicata e autorità dispositivi/Safety invariati.
+
+## Aggiornamento corrente — P4 cloud autorizzato e attivato
+
+L’Owner ha approvato le risorse e la credenziale dedicate il 5 ottobre. PR #482 consegnata: head `875cc375a130268b4be98b28ad11a7c8c11e4552`, merge `e000a3b96c980c22d47967e26fb5e79633c3d249`; 16 CI exact-head e 16 workflow post-merge SUCCESS, ARB/RQ AI-assistite separate e sequenziali senza finding finali, Pages effettive verificate.
+
+Il nuovo servizio Cloud Run è attivo su immagine verificata per digest, con identità/registry e due bucket privati versionati separati. Credenziale PC generata e protetta con Windows User DPAPI, solo digest al server. Collegamento PC HTTPS reale e dieci controlli HTTP PASS; nessuna nuova API IA, porta PC in ingresso, esecuzione nativa automatica o pubblicazione. La [ricevuta di attivazione](evidence/BKL-049-PIAI-P4-ACTIVATION-2026-10-05.json) e il [runbook](PIAI-P4-CLOUD-ACTIVATION-2026-10-05.md) distinguono prove reali e gate ancora aperti.
+
+Autenticazione Google Owner e prova nativa tramite trasporto non ancora eseguite. Pagina diagnostica P4 separata dalla navigazione principale: prova sintetica crea/legge/annulla, credenziale solo in memoria, destinazione approvata fissata per digest. Non abilita P5 né comandi scientifici dal portale. P4 OAT/P5/P6 e acceptance Owner restano aperti. M27 pubblicata e autorità dispositivi/Safety invariate.
