@@ -24,12 +24,12 @@ function fixture(mode='OSC',layout='PANELS'){
   const files=new Map([['/worker/active-job.json',JSON.stringify({jobId:m.jobId,token,authority:m.authority,requestSha256:sha})],[m.jobDirectory+'/request.json',JSON.stringify(request)]]);
   for(const name of Object.keys(m.runtimeHashes))files.set(m.jobDirectory+'/'+name,'trusted');
   files.set(m.enginePath,'installed');for(const row of m.inputs){files.set(row.path,'pixels');files.set(row.sourcePath,'pixels');}
-  let leased=false,operationCount=0,opened=0,unsolved=false;
+  let leased=false,operationCount=0,opened=0,unsolved=false,writeFailurePath=null;
   class File{
     static exists(p){return files.has(p);}static readFile(p){return {hash:files.get(p)==='corrupt'?'c'.repeat(64):sha};}static readTextFile(p){return files.get(p);}
     openForReadWrite(p){if(leased)throw Error('exclusive');leased=true;this.path=p;this.isOpen=true;this.size=files.get(p).length;}
     read(){return {utf8ToString:()=>files.get(this.path)};}createForWriting(p){this.path=p;this.isOpen=true;}
-    write(value){files.set(this.path,value);}close(){this.isOpen=false;if(this.path==='/worker/active-job.json')leased=false;}
+    write(value){if(this.path===writeFailurePath)throw Error('synthetic write failure');files.set(this.path,value);}close(){this.isOpen=false;if(this.path==='/worker/active-job.json')leased=false;}
   }
   const windows=[];
   function window(channels,id,bits=32){
@@ -50,7 +50,7 @@ function fixture(mode='OSC',layout='PANELS'){
     GradientMergeMosaic:Mosaic,Debayer,Projection:{Gnomonic:0},InterpolationAlgorithm:{Auto:0},DataType:{ByteArray:0},
     ByteArray:{stringToUTF8:s=>s},Console:{show(){},criticalln(){}},CryptographicHash:class{hash(v){return {toHex:()=>v.hash};}}};
   vm.createContext(ctx);vm.runInContext(kernel+'\n'+executor,ctx);
-  return {m,ctx,files,windows,run:()=>ctx.DSGExecuteMasterPreparation(m),operationCount:()=>operationCount,leased:()=>leased,unsolved:()=>{unsolved=true;}};
+  return {m,ctx,files,windows,run:()=>ctx.DSGExecuteMasterPreparation(m),operationCount:()=>operationCount,leased:()=>leased,unsolved:()=>{unsolved=true;},failWrite:path=>{writeFailurePath=path;}};
 }
 
 for(const mode of ['LRGB','OSC','SHO','HOO','OSC_CFA'])test(`preparation ${mode} has exact native instances/checkpoints and closes owned views`,()=>{
@@ -76,4 +76,18 @@ test('unsolved mosaic preflight and identity-bound pre-cancel execute no native 
 });
 test('same preparation cannot replay or overwrite terminal artifacts',()=>{
   const f=fixture();f.run();const count=f.operationCount();assert.throws(f.run,/scope\/replay/);assert.equal(f.operationCount(),count);
+});
+test('busy or foreign reservation cannot create terminal or journal artifacts',()=>{
+  const busy=fixture(),holder=new busy.ctx.File;holder.openForReadWrite('/worker/active-job.json');
+  const before=[...busy.files.entries()];assert.equal(busy.run().status,'FAILED');
+  assert.equal(busy.operationCount(),0);assert.deepEqual([...busy.files.entries()],before);
+  assert.equal(busy.leased(),true);holder.close();assert.equal(busy.leased(),false);
+  const foreign=fixture();foreign.files.set('/worker/active-job.json',JSON.stringify({jobId:'AnotherJob',token,authority:foreign.m.authority,requestSha256:sha}));
+  const foreignBefore=[...foreign.files.entries()];assert.equal(foreign.run().status,'FAILED');
+  assert.deepEqual([...foreign.files.entries()],foreignBefore);assert.equal(foreign.operationCount(),0);assert.equal(foreign.leased(),false);
+});
+test('terminal write failure always releases the owned native lease',()=>{
+  const f=fixture();f.failWrite(f.m.jobDirectory+'/terminal.json');
+  assert.throws(f.run,/synthetic write failure/);assert.equal(f.leased(),false);assert.equal(f.windows.length,0);
+  assert.equal(f.files.has(f.m.jobDirectory+'/terminal.json'),false);
 });

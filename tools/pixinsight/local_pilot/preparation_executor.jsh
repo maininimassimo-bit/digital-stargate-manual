@@ -3,7 +3,7 @@ function DSGExecuteMasterPreparation(m){
    function require(ok,message){if(!ok)throw Error(message);}
    function hash(path){return(new CryptographicHash(CryptographicHash.SHA256)).hash(File.readFile(path)).toHex();}
    function write(path,value){require(!File.exists(path),'Preparation artifact exists');var f=new File;f.createForWriting(path);try{f.write(ByteArray.stringToUTF8(JSON.stringify(value,null,2)));}finally{f.close();}}
-   var lease=new File,owned=[],outputs=[],processCount=0,eventCount=0;
+   var lease=new File,terminalAuthorized=false,owned=[],outputs=[],processCount=0,eventCount=0;
    var receipt={schemaVersion:'1.0',jobId:m.jobId,token:m.token,status:'FAILED',authority:m.authority,
                 recipe:'MASTER_PREPARATION_V1',outputs:outputs,providerRequests:0,nonLinear:false,
                 runtimeHashes:m.runtimeHashes,engineSha256:m.engineSha256,requestSha256:m.requestSha256};
@@ -45,7 +45,7 @@ function DSGExecuteMasterPreparation(m){
       var reservation=JSON.parse(lease.read(DataType.ByteArray,lease.size).utf8ToString());
       require(reservation.jobId===m.jobId && reservation.token===m.token && reservation.authority===m.authority && reservation.requestSha256===m.requestSha256,'Preparation reservation');
       var other=new File,denied=false;try{other.openForReadWrite(m.workerRoot+'/active-job.json');}catch(e){denied=true;}finally{if(other.isOpen)other.close();}
-      require(denied,'Exclusive native preparation lease');receipt.exclusiveLeaseVerified=true;
+      require(denied,'Exclusive native preparation lease');terminalAuthorized=true;receipt.exclusiveLeaseVerified=true;
       require(Object.keys(m.runtimeHashes).sort().join(',')==='preparation_executor.jsh,source_preparation.jsh','Preparation runtime scope');
       Object.keys(m.runtimeHashes).forEach(function(name){require(hash(m.jobDirectory+'/'+name)===m.runtimeHashes[name],'Preparation runtime integrity');});
       require(hash(m.enginePath)===m.engineSha256,'Installed astrometric engine integrity');
@@ -111,8 +111,10 @@ function DSGExecuteMasterPreparation(m){
       receipt.originalIntegrity='UNCHANGED';receipt.status='COMPLETED';receipt.scientificAcceptance='OWNER_REVIEW_REQUIRED';
    }catch(error){receipt.error=String(error);if(receipt.error.indexOf('PREPARATION_CANCELLED')>=0)receipt.status='CANCELLED';Console.criticalln(receipt.error);}
    finally{
-      owned.forEach(function(w){if(!w.isNull)w.forceClose();});receipt.processCount=processCount;
-      write(m.jobDirectory+'/terminal.json',receipt);if(lease.isOpen)lease.close();
+      try{
+         owned.forEach(function(w){if(!w.isNull)w.forceClose();});receipt.processCount=processCount;
+         if(terminalAuthorized)write(m.jobDirectory+'/terminal.json',receipt);
+      }finally{if(lease.isOpen)lease.close();}
    }
    return receipt;
 }

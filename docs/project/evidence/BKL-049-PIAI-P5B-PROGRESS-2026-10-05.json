@@ -8,7 +8,7 @@
       "result": "PASS"
     },
     "javascript": {
-      "tests": 69,
+      "tests": 71,
       "result": "PASS"
     }
   },
@@ -163,9 +163,38 @@
     "realOwnerEndToEnd": "NOT_ESTABLISHED"
   },
   "nativeOscProcessing": {
-    "status": "RUNNING",
+    "status": "COMPLETED",
     "scope": "LOCAL_NATIVE_OSC_FIELD_OAT_NOT_OWNER_PORTAL_JOB",
-    "scientificAcceptance": "NOT_ESTABLISHED",
-    "catalogAssociation": "NOT_CREATED"
+    "recipe": "OSC_FIELD_NONLINEAR_V1",
+    "processCount": 26,
+    "checkpointCount": 12,
+    "workflowInstanceCount": 26,
+    "originalMasterIntegrity": "8_OF_8_UNCHANGED_SHA256",
+    "preparedMosaicInputIntegrity": "UNCHANGED_SHA256",
+    "geometry": [
+      7510,
+      5164,
+      3
+    ],
+    "sampleFormat": "Float32",
+    "nonLinear": true,
+    "providerRequests": 0,
+    "reservation": "CLOSED_AFTER_VERIFICATION",
+    "catalogAssociation": "NOT_CREATED",
+    "scientificAcceptance": "OWNER_REVIEW_REQUIRED",
+    "portalEndToEnd": "NOT_ESTABLISHED",
+    "preparationAndRecipeSingleOwnerChain": "NOT_ESTABLISHED",
+    "allFinalPixelsFinite": true,
+    "allFinalPixelsNormalized": true,
+    "upstreamHistoryCompleteness": "NOT_ESTABLISHED"
+  },
+  "reviewDisposition": {
+    "review": "ARB_AI_ASSISTED",
+    "reviewedHead": "feab959292c32779adab8f860e739d13658a7d5b",
+    "result": "FAIL_BEFORE_CORRECTION",
+    "blocker": 0,
+    "major": "Terminal write without verified native lease ownership; candidate corrected with busy/foreign reservation and write-failure regressions.",
+    "minor": "Earlier P5b procedure reconciled to current profiles and preparation.",
+    "newExactHeadCiArbRq": "REQUIRED_BEFORE_RELEASE"
   }
 }

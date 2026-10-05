@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | ID | DSG-HO-BKL049-20261005 |
-| Versione | 2.3 |
+| Versione | 2.4 |
 | Data | 2026-10-06 |
 | Stato | Riconciliazione operativa; estensione pilota autorizzata, non accettata come produzione |
 | Pacchetto | BKL-049 archivio chiuso; BKL-049-EXT-PIAI pilota distinto |
@@ -151,4 +151,6 @@ Il candidato include selezione immutabile dei pannelli e conferma Owner dell'esa
 
 ## Avanzamento candidato P5b: conferma della preparazione e consegna
 
-Il candidato integra ora conferma Owner del piano di preparazione, raccolta indipendente versione 1.1 con analisi delle istanze native, associazione dei master preparati al piano finale e workflow combinato preparazione/ricetta. Le conferme sono separate e vincolate ai rispettivi digest; nessun avvio nativo automatico. 125 test Python e 69 JavaScript PASS. La prova nativa OSC sul mosaico M31 è in corso e non è ancora una prova completata. Le sessioni M31 anteriori al portale non sono inventate né associate a M27. Questo aggiornamento supera le precedenti note sul collegamento ancora da implementare; rilascio, controlli del commit esatto, review e percorso autenticato reale restano aperti. I precedenti artefatti nativi non sono riscritti con la nuova versione del raccoglitore. Nessun nuovo costo API IA, risorsa cloud o permesso IAM. P6 resta aperto.
+Il candidato integra ora conferma Owner del piano di preparazione, raccolta indipendente versione 1.1 con analisi delle istanze native, associazione dei master preparati al piano finale e workflow combinato preparazione/ricetta. Le conferme sono separate e vincolate ai rispettivi digest; nessun avvio nativo automatico. 125 test Python e 71 JavaScript PASS. La prova nativa OSC sul mosaico M31 è ora COMPLETED e raccolta indipendentemente: 26 operazioni, 12 checkpoint, 26 istanze esportate; finale RGB Float32 7510×5164 non lineare, tutti i pixel finiti e normalizzati. Gli otto master originali e il mosaico lineare usato come input sono invariati; prenotazione chiusa dopo la verifica. È una prova tecnica locale, senza associazione al catalogo, accettazione scientifica o prova della catena unica preparazione/ricetta approvata dall’Owner nel portale. La History precedente resta NOT_ESTABLISHED. Le sessioni M31 anteriori al portale non sono inventate né associate a M27. Questo aggiornamento supera le precedenti note sul collegamento ancora da implementare; rilascio, controlli del commit esatto, review e percorso autenticato reale restano aperti. I precedenti artefatti nativi non sono riscritti con la nuova versione del raccoglitore. Nessun nuovo costo API IA, risorsa cloud o permesso IAM. P6 resta aperto.
+
+La prima ARB del candidato ha rilevato un Major sulla scrittura del terminale senza ownership verificata del lease e un Minor sulla procedura precedente. Il candidato corretto non scrive artefatti da un tentativo respinto e rilascia il lease anche quando la scrittura del terminale fallisce; entrambe le condizioni hanno regressioni sintetiche. Procedura riconciliata. Nuovi CI, ARB e RQ sul commit esatto restano necessari prima del rilascio.
