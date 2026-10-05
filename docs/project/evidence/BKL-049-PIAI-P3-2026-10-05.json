@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "BKL-049-EXT-PIAI",
+  "phase": "P3",
+  "date": "2026-10-05",
+  "classification": "PUBLIC_MINIMIZED",
+  "scope": "Supervised fixed M27 nonlinear recipe on private locked copies; empirical colour, not photometric acceptance",
+  "nativeEnvironment": "1.9.5 build 1706",
+  "completedRun": {
+    "status": "COMPLETED",
+    "startedAt": "2026-10-05T13:07:57.873Z",
+    "finishedAt": "2026-10-05T13:19:35.540Z",
+    "nativeProcessCount": 29,
+    "checkpointCount": 15,
+    "workflowInstanceCount": 29,
+    "finalGeometry": "4634x2808 RGB Float32; nonlinear",
+    "exclusiveLeaseVerified": true,
+    "originalFilesIntegrity": "UNCHANGED",
+    "openedInputViewsUnmodified": true,
+    "runtimeSnapshotIdentityVerified": true,
+    "outputHashesAndHeadersVerified": true,
+    "nativeAstrometricMetadataRetained": true
+  },
+  "pixelVerification": {
+    "allFinalSamplesInspected": true,
+    "allFinite": true,
+    "normalizedRange": true,
+    "constantChannelsRejected": true,
+    "clippedSamplesPresent": true,
+    "countsAndPerChannelStatistics": "MEASURED_PRIVATE; no absence-of-clipping claim"
+  },
+  "visualComparison": {
+    "reference": "Previously published M27; full field and same 100% crop",
+    "observation": "Same field/structures, coherent stars/hue. Previously published image retains stronger internal contrast.",
+    "scientificEffectiveness": "NOT_ESTABLISHED",
+    "ownerAcceptance": "OWNER_REVIEW_REQUIRED",
+    "publishedImageChanged": false
+  },
+  "products": {
+    "nativeXisf": true,
+    "rgb16TiffSrgb": true,
+    "fullResolutionJpegSrgb": true,
+    "webJpegSrgb": true,
+    "geometryAndHashesVerified": true
+  },
+  "availableHistory": {
+    "viewCount": 13,
+    "processCount": 47,
+    "instanceCount": 82,
+    "byteCount": 427862,
+    "viewsUnchangedDuringCapture": true,
+    "boundedReaderProfile": "1.2",
+    "boundedReaderStatus": "PARSED_SUBSET",
+    "importedExecutionEvidence": "NOT_ESTABLISHED",
+    "importedWorkflowCompleteness": "UNAVAILABLE",
+    "fullUpstreamCompleteness": "NOT_ESTABLISHED"
+  },
+  "runtimeCorrelations": "Private clone, mask/inversion and stars-secondary-output relations retained; distinct from imported History classification",
+  "nativePreCancel": {
+    "status": "CANCELLED",
+    "nativeProcessCount": 0,
+    "outputCount": 0,
+    "originalFilesIntegrity": "UNCHANGED"
+  },
+  "nativeWrongSelection": {
+    "status": "FAILED",
+    "reason": "Selected master incompatible",
+    "nativeProcessCount": 0,
+    "outputCount": 0,
+    "originalFilesIntegrity": "UNCHANGED"
+  },
+  "nativeReplay": {
+    "refused": true,
+    "completedJobBytesUnchanged": true,
+    "checkedPrivateFiles": 117
+  },
+  "nativePluginFaultInjection": "NOT_PERFORMED; failure return and missing constructors covered synthetically",
+  "syntheticTests": {
+    "preflight": 13,
+    "executor": 20,
+    "coordinator": 25,
+    "pixels": 5,
+    "result": "PASS_LOCAL",
+    "windowsSharingMode": "PASS_LOCAL; skipped on Linux"
+  },
+  "pluginModelVersionLicenseIdentity": "NOT_ATTESTED; actual successful processing demonstrates readiness only for this run",
+  "providerRequests": 0,
+  "portalMutations": 0,
+  "scientificAcceptance": "OWNER_REVIEW_REQUIRED",
+  "privateEvidence": "Raw sources/parameters, digests, paths, model files, manifests, journals, complete pixel statistics and image files retained on Owner PC; excluded from public repository",
+  "deliveryReview": "Exact publication head, CI, separated ARB/RQ and post-merge/actual Pages verification tracked on delivery PR"
+}

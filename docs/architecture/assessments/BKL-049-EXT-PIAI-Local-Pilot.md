@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | ID | BKL-049-EXT-PIAI |
-| Versione | 1.2 |
+| Versione | 1.3 |
 | Stato | Owner-authorized pilot; architecture/release review required |
 | Data | 2026-10-05 |
 | Dipendenze | BKL-049 archive; importer 1.2; Owner PC/PixInsight; calibrated aligned masters |
@@ -33,9 +33,9 @@ Un futuro worker sul PC riceverà job attraverso connessione autenticata in usci
 
 | Fase | Risultato richiesto | Stato iniziale |
 |---|---|---|
-| P1 — Preflight | Prova nativa M27 eseguita il 5 ottobre: PI 1.9.5 build 1706, quattro master invariati, 12 costruttori di processo disponibili; versioni moduli/licenze/modelli non attestati | Native test PASS; delivery/review tracked on PR |
-| P2 — Esecutore locale | Coordinatore locale, copie, snapshot esecutore, ricetta lineare fissa, journal e checkpoint; prova nativa completa, pre-cancel e replay | Native tests PASS; delivery/review tracked on PR |
-| P3 — Prova M27 | Input bloccati, output non lineare, verifiche finite/dimensioni/colore, confronto visivo; nessuna accettazione scientifica automatica | Planned |
+| P1 — Preflight | Prova nativa M27 eseguita il 5 ottobre: PI 1.9.5 build 1706, quattro master invariati, 12 costruttori di processo disponibili; versioni moduli/licenze/modelli non attestati | Delivered #479; native PASS |
+| P2 — Esecutore locale | Coordinatore locale, copie, snapshot esecutore, ricetta lineare fissa, journal e checkpoint; prova nativa completa, pre-cancel e replay | Delivered #480; native PASS |
+| P3 — Prova M27 | Input bloccati, output non lineare, verifiche finite/dimensioni/colore, confronto visivo; nessuna accettazione scientifica automatica | Native technical/visual trial performed; Owner acceptance and exact-head delivery tracked on PR |
 | P4 — Connessione e IA | Protocollo autenticato, costi/provider/diritti definiti, job idempotenti e recupero offline | Planned |
 | P5 — Portale e provenance | Comando Owner, stato, preview, revisione e collegamento esatto a sessioni e workflow | Planned |
 | P6 — Acceptance | Casi errore/annullamento/offline, integrità originali, evidenza reale, review e rollback | Planned |
@@ -50,7 +50,7 @@ Per cancellare, controllare il segnale prima del prossimo processo e conservare 
 
 ## Privacy, rischi e prove
 
-Percorsi, immagini, modelli plugin e parametri restano privati. Git conserva codice, documenti e prove sintetiche/minimizzate. La catena runtime registrata e l’export storico importato hanno classificazioni distinte. Sessioni associate per dichiarazione non diventano origine pixel provata.
+Percorsi, immagini, modelli plugin e parametri delle ricevute restano privati. Git conserva codice, default della ricetta revisionata, documenti e prove sintetiche/minimizzate; non pubblica le sorgenti native integrali dei run. La catena runtime registrata e l’export storico importato hanno classificazioni distinte. Sessioni associate per dichiarazione non diventano origine pixel provata.
 
 Rischi: desktop non disponibile, occupazione RAM/disco, moduli mancanti, incompatibilità PJSR, gradienti/dati inadatti alla ricetta e qualità variabile. Le operazioni originali su M27 non sono una ricetta universale LRGB. L’Owner valuta il risultato prima di qualsiasi pubblicazione; il pilota conserva la versione pubblicata attuale.
 
@@ -81,3 +81,21 @@ Le sorgenti native di ogni processo restano esatte nel journal privato. `workflo
 Una seconda prova nativa completa conferma anche la correlazione dell’immagine creata da ChannelCombination: il target registrato al completamento coincide con l’output salvato. Entrambi i run e le ricevute restano privati e immutati.
 
 Riesame P2: un Major ARB ha rilevato che il comando cancel tentava di leggere il file tenuto con handle esclusivo. Corretto con identità immutabile del job separata e marker completo pubblicato atomicamente, vincolato al token e verificato dal runtime. Prova Windows con handle reale e prova nativa PixInsight: lettura del lease negata, comando cancel riuscito durante il primo processo; arresto prima del checkpoint successivo, un processo registrato, zero output e originali invariati. Il processo in corso può terminare prima dell’annullamento. Il riesame finale richiede CI e ARB/RQ sul nuovo head.
+
+Consegna P2 completata: PR #480, head `1a9e90142ec969d23540ff344eb983af6dde1564`, merge `f8ec8a066b56095db430f1c50d4b8dad9f812ce4`; 17 controlli exact-head e 16 workflow post-merge SUCCESS, ARB/RQ AI-assistite separate e sequenziali senza finding finali, Pages effettive verificate. Questo esito supera le indicazioni di consegna ancora pendente nelle sezioni storiche.
+
+## P3 — ricetta non lineare e verifica
+
+`M27_LRGB_NONLINEAR_V1` aggiunge alla preparazione lineare la correzione radiale, calibrazione stellare empirica, BXT/NXT lineari, SXT, stretch separato RGB/L, maschera di luminanza, contrasto locale, combinazione LRGB, colore selettivo e ricomposizione delle stelle. Non usa SPCC e non certifica colori fotometrici. La ROI relativa è specifica del campo M27: un altro soggetto richiede una nuova ricetta revisionata. I costruttori sono verificati prima dei pixel; l’esecuzione effettiva dei plugin attesta disponibilità per quel run, non licenze, versione o hash del modello.
+
+Un run completo richiede 29 azioni native e 15 checkpoint XISF. I metadati della combinazione RGB sono mantenuti; il finale è marcato LRGB/non lineare senza attribuire esposizione aggregata non ricostruita. Le relazioni private registrano copie, output stelle, maschere e inversione. Le 29 istanze derivate sono dati per l’importer, non replay o History integrale a monte.
+
+La raccolta controlla integrità, geometria, canali e ordine/processi della ricetta. Sul finale legge tutti i pixel Float32, rifiutando non finiti, intervallo non normalizzato, canali costanti, blocchi troncati e formati non supportati. Per questo pilota è richiesto XISF planar little-endian senza compressione. Conta clipping ed estremi per canale senza dichiararli assenti. Se la raccolta fallisce, la prenotazione resta conservata anche con ricevuta di esecuzione `COMPLETED`.
+
+Confronto visivo e valutazione Owner restano distinti dall’esito tecnico. Originali e M27 pubblicata restano invariati; P4–P6 non sono attivati. La prova tecnica/visiva è registrata di seguito; consegna e review di questo head sono tracciate sulla PR.
+
+Prova definitiva nativa 2026-10-05: 29 azioni, 15 checkpoint, finale RGB Float32 4634×2808 non lineare, originali invariati e snapshot verificato. Tutti i pixel finali finiti e in [0,1]; clipping presente e misurato, senza dichiarazione di assenza. Astrometria nativa conservata, TIFF RGB16 e JPEG sRGB verificati. Confrontati campo intero e ritaglio 100% con la versione pubblicata: strutture/stelle/colore coerenti, ma la precedente conserva maggior contrasto interno. Nessuna sostituzione né acceptance scientifica automatica.
+
+History disponibili esportate: 13 viste, 47 passi, 82 istanze, 427862 byte; immagini invariate durante la lettura, importer 1.2 `PARSED_SUBSET`. `executionEvidence=NOT_ESTABLISHED` e `workflowCompleteness=UNAVAILABLE` restano le classificazioni del file importato; non sono convertite dalla prova nativa del pilota. Il journal nuovo conserva separatamente 29 azioni e relazioni con maschere/stelle/copie.
+
+Prove native negative: pre-cancel con zero processi/output; selezione della maschera ausiliaria invece del master rifiutata prima delle operazioni; replay rifiutato con tutti i 117 file del job concluso identici. Le prove di errore plugin restano sintetiche. Test locali: 13 preflight, 20 esecutore, 25 coordinatore e 5 pixel. [Ricevuta minimizzata P3](../../project/evidence/BKL-049-PIAI-P3-2026-10-05.json). CI/review e post-merge tracciati sulla PR dello stesso head. P4–P6 e acceptance Owner restano successivi.

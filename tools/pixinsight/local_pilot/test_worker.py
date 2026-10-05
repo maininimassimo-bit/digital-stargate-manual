@@ -190,6 +190,96 @@ class WorkerTests(unittest.TestCase):
             worker.cancel(self.root, self.request["jobId"])
         self.assertEqual(json.loads((job / "cancel.json").read_text()), marker)
 
+    def p3_job(self):
+        request = {**self.request, "recipe": worker.NONLINEAR_RECIPE,
+                   "inputs": [{**i, "width": 1000, "height": 800} for i in self.inputs]}
+        return worker.prepare(self.root, request)
+
+    def p3_events(self, job, mask_evidence=True):
+        ordinal = 0
+        masked = {"background-color", "contrast-large", "contrast-small", "contrast-curve", "nebula-color"}
+        for label, process in worker.NONLINEAR_ACTIONS:
+            if label in masked and mask_evidence:
+                worker.write_new(job / f"events/{ordinal:04}-mask.json", dict(event="mask-attached", data=dict(target="Synthetic_target", mask="Synthetic_mask", inverted=label == "background-color")))
+                ordinal += 1
+            worker.write_new(job / f"events/{ordinal:04}-start.json", dict(event="process-started", data=dict(label=label, target="Synthetic_target", nativeSource=f"var P = new {process};", dependencies=["Synthetic_mask"])))
+            ordinal += 1
+            worker.write_new(job / f"events/{ordinal:04}-completed.json", dict(event="process-completed", data=dict(label=label, target="Synthetic_target")))
+            ordinal += 1
+            if label in masked and mask_evidence:
+                worker.write_new(job / f"events/{ordinal:04}-unmask.json", dict(event="mask-detached", data=dict(target="Synthetic_target")))
+                ordinal += 1
+
+    def test_p3_exports_all_actions_with_mask_context(self):
+        job = self.p3_job()
+        self.p3_events(job)
+        result = worker.export_runtime_instances(job, dict(jobId=self.request["jobId"], recipe=worker.NONLINEAR_RECIPE, processCount=29))
+        self.assertEqual(result["instanceCount"], 29)
+        report = json.loads((job / "runtime-correlations.json").read_text())
+        self.assertEqual(sum("mask" in p for p in report["instances"]), 5)
+        self.assertEqual(report["upstreamHistoryCompleteness"], "NOT_ESTABLISHED")
+
+    def test_p3_missing_masks_cannot_export_complete_workflow(self):
+        job = self.p3_job()
+        self.p3_events(job, False)
+        with self.assertRaisesRegex(ValueError, "mask evidence"):
+            worker.export_runtime_instances(job, dict(jobId=self.request["jobId"], recipe=worker.NONLINEAR_RECIPE, processCount=29))
+        self.assertFalse((job / "workflow.js").exists())
+
+    def test_p3_recipe_downgrade_receipt_retains_reservation(self):
+        job = self.p3_job()
+        self.terminal(job)
+        with self.assertRaisesRegex(ValueError, "recipe mismatch"):
+            worker.collect(self.root, self.request["jobId"])
+        self.assertTrue((self.root / "active-job.json").exists())
+
+    def p3_completed(self):
+        job = self.p3_job()
+        manifest = json.loads((job / "manifest.json").read_text())
+        self.p3_events(job)
+        outputs = {r + "-linear.xisf": (1, False) for r in worker.ROLES} | {"RGB-linear.xisf": (3, False)} | worker.NONLINEAR_OUTPUTS
+        receipt_outputs = []
+        for name, (channels, nonlinear) in outputs.items():
+            path = job / "outputs" / name
+            extra = 'location="attachment:4096:9600000"' if name == "LRGB-nonlinear.xisf" else ''
+            header = f'<xisf><Image geometry="1000:800:{channels}" sampleFormat="Float32" colorSpace="{"RGB" if channels == 3 else "Gray"}" {extra}/></xisf>'.encode()
+            with path.open("wb") as stream:
+                stream.write(b"XISF0100" + struct.pack("<II", len(header), 0) + header)
+                if name == "LRGB-nonlinear.xisf":
+                    stream.truncate(4096 + 9600000)
+                    for channel in range(3):
+                        stream.seek(4096 + channel * 3200000)
+                        stream.write(struct.pack("<f", 0.5))
+            receipt_outputs.append(dict(name=name, sha256=worker.digest(path), nonLinear=nonlinear))
+        worker.write_new(job / "terminal.json", dict(jobId=manifest["jobId"], token=manifest["token"], recipe=worker.NONLINEAR_RECIPE,
+                         runtimeSha256=manifest["runtimeSha256"], status="COMPLETED", outputs=receipt_outputs, processCount=29,
+                         exclusiveLeaseVerified=True, originalViewsUnmodified=True))
+        return job
+
+    def test_p3_collect_validates_pixels_and_remains_owner_review_required(self):
+        self.p3_completed()
+        result = worker.collect(self.root, self.request["jobId"])
+        self.assertEqual(result["outputCount"], 15)
+        self.assertEqual(result["workflowInstanceCount"], 29)
+        self.assertTrue(result["pixelVerification"]["allFinite"])
+        self.assertEqual(result["scientificAcceptance"], "OWNER_REVIEW_REQUIRED")
+        self.assertEqual(worker.collect(self.root, self.request["jobId"]), result)
+
+    def test_p3_invalid_pixel_retains_reservation_despite_matching_output_hash(self):
+        job = self.p3_completed()
+        path = job / "outputs/LRGB-nonlinear.xisf"
+        with path.open("r+b") as stream:
+            stream.seek(4096)
+            stream.write(struct.pack("<f", float("nan")))
+        receipt_path = job / "terminal.json"
+        receipt = json.loads(receipt_path.read_text())
+        next(o for o in receipt["outputs"] if o["name"] == path.name)["sha256"] = worker.digest(path)
+        receipt_path.write_text(json.dumps(receipt))
+        with self.assertRaisesRegex(ValueError, "Nonfinite"):
+            worker.collect(self.root, self.request["jobId"])
+        self.assertTrue((self.root / "active-job.json").exists())
+        self.assertFalse((job / "verification.json").exists())
+
     @unittest.skipUnless(os.name == "nt", "Actual Windows sharing-mode proof")
     def test_cancel_while_windows_exclusive_handle_is_held(self):
         import ctypes

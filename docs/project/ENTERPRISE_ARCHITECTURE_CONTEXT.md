@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 4.4 |
+| Versione | 4.5 |
 | Stato | Active context baseline |
 | Data baseline | 05/10/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
@@ -157,3 +157,9 @@ Le sezioni datate precedenti conservano l’evidenza storica. Il [nuovo handover
 Versione 4.4 — 05/10/2026: riconciliazione BKL-049/M27 e nuova estensione locale.
 
 Aggiornamento P2 al 5 ottobre: coordinatore/esecutore locale su copie, ricetta lineare fissa, prenotazione per root e handle esclusivo Windows verificato; cinque processi/checkpoint nativi, originali invariati, pre-cancel e replay rifiutato. P3 non lineare e connessione remota restano successivi. [Evidenza](evidence/BKL-049-PIAI-P2-2026-10-05.json).
+
+### 2026-10-05 — P3 local nonlinear boundary
+
+P2 delivered via PR #480 with exact-head CI, separated sequential reviews and post-merge verification. P3 adds a fixed M27 nonlinear recipe, native processing on locked copies, runtime mask/stars relations and streaming final pixel checks. Technical/visual evidence and delivery remain to be reconciled before release. The preset is not a universal or photometric recipe; production provider, remote transport, portal and scientific acceptance remain separate.
+
+P3 native technical/visual trial completed; [minimized evidence](evidence/BKL-049-PIAI-P3-2026-10-05.json): 29 actions, 15 checkpoints, finite normalized final pixels, unchanged originals, native cancel/selection/replay rejection and full-field/100% comparison. Prior published M27 retains stronger internal contrast; Owner acceptance remains required. Available History: 13 views, 47 steps, 82 instances, imported as data without promoting completeness/execution classifications. Exact-head CI/review and post-merge delivery are tracked on the PR; no remote/provider/portal activation.

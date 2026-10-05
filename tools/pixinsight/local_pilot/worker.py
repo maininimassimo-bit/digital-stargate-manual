@@ -1,4 +1,4 @@
-"""Trusted local P2 coordinator. No remote dispatch or PixInsight subprocess launch."""
+"""Trusted local P2/P3 coordinator. No remote dispatch or PixInsight subprocess launch."""
 from __future__ import annotations
 
 import argparse
@@ -16,6 +16,30 @@ from tools.pixinsight.workflow_archive.export_parser import TOKEN, parse_export,
 
 ROLES = ("R", "G", "B", "L")
 RECIPE = "LRGB_LINEAR_PREP_V1"
+NONLINEAR_RECIPE = "M27_LRGB_NONLINEAR_V1"
+LINEAR_ACTIONS = [("background-" + r, "AutomaticBackgroundExtractor") for r in ROLES] + [("RGB-composition", "ChannelCombination")]
+NONLINEAR_ACTIONS = LINEAR_ACTIONS + [
+    ("radial-RGB", "AutomaticBackgroundExtractor"), ("radial-L", "AutomaticBackgroundExtractor"),
+    ("optical-RGB", "BlurXTerminator"), ("neutralize-RGB", "BackgroundNeutralization"),
+    ("calibrate-RGB", "ColorCalibration"), ("deconvolve-RGB", "BlurXTerminator"),
+    ("deconvolve-L", "BlurXTerminator"), ("denoise-RGB", "NoiseXTerminator"),
+    ("denoise-L", "NoiseXTerminator"), ("separate-RGB", "StarXTerminator"),
+    ("separate-L", "StarXTerminator"), ("stretch-RGB", "MaskedStretch"), ("stretch-L", "MaskedStretch"),
+    ("mask-build", "PixelMath"), ("background-color", "CurvesTransformation"),
+    ("contrast-large", "LocalHistogramEqualization"), ("contrast-small", "LocalHistogramEqualization"),
+    ("contrast-curve", "CurvesTransformation"), ("LRGB-combine", "LRGBCombination"),
+    ("nebula-color", "CurvesTransformation"), ("stars-background", "PixelMath"),
+    ("stars-stretch", "ArcsinhStretch"), ("stars-color", "CurvesTransformation"), ("stars-recombine", "PixelMath")]
+NONLINEAR_OUTPUTS = {
+    "RGB-processed-linear.xisf": (3, False), "L-processed-linear.xisf": (1, False),
+    "RGB-starless-linear.xisf": (3, False), "L-starless-linear.xisf": (1, False),
+    "stars-linear.xisf": (3, False), "mask.xisf": (1, True), "L-nonlinear.xisf": (1, True),
+    "RGB-nonlinear.xisf": (3, True), "stars-nonlinear.xisf": (3, True), "LRGB-nonlinear.xisf": (3, True)}
+
+
+def actions(recipe: str) -> list:
+    require(recipe in {RECIPE, NONLINEAR_RECIPE}, "Recipe not allowed")
+    return NONLINEAR_ACTIONS if recipe == NONLINEAR_RECIPE else LINEAR_ACTIONS
 
 
 def digest(path: Path) -> str:
@@ -59,11 +83,23 @@ def export_runtime_instances(job: Path, receipt: dict) -> dict:
     events = [json.loads(p.read_text(encoding="utf-8")) for p in sorted((job / "events").glob("*.json"))]
     starts = {}
     completed = []
+    masks = {}
+    masked_labels = {"background-color", "contrast-large", "contrast-small", "contrast-curve", "nebula-color"}
     for event in events:
+        if event["event"] == "mask-attached":
+            require(event["data"]["target"] not in masks, "Mask already attached")
+            masks[event["data"]["target"]] = event["data"]
+        if event["event"] == "mask-detached":
+            require(event["data"]["target"] in masks, "Mask detach lacks attachment")
+            del masks[event["data"]["target"]]
         if event["event"] == "process-started":
             label = event["data"]["label"]
             require(label not in starts, "Duplicate process action")
             starts[label] = event["data"]
+            if receipt.get("recipe") == NONLINEAR_RECIPE and label in masked_labels:
+                state = masks.get(event["data"].get("target"))
+                require(state is not None and state["mask"] in event["data"]["dependencies"], "Masked action lacks mask evidence")
+                starts[label] = {**event["data"], "mask": state["mask"], "maskInverted": state["inverted"]}
         if event["event"] == "process-completed":
             label = event["data"]["label"]
             require(label in starts, "Completed process lacks start evidence")
@@ -72,7 +108,9 @@ def export_runtime_instances(job: Path, receipt: dict) -> dict:
             require(starts[label].get("target", target) == target, "Native target mismatch")
             completed.append({**starts[label], "target": target})
     require(len(completed) == receipt["processCount"], "Journal/process count mismatch")
-    expected = ["background-R", "background-G", "background-B", "background-L", "RGB-composition"]
+    recipe = receipt.get("recipe", RECIPE)
+    specification = actions(recipe)
+    expected = [label for label, _ in specification]
     require([e["label"] for e in completed] == expected[:len(completed)], "Journal recipe order mismatch")
     sources, correlations = [], []
     for ordinal, event in enumerate(completed, 1):
@@ -80,7 +118,7 @@ def export_runtime_instances(job: Path, receipt: dict) -> dict:
         parsed = parse_export(raw, profile="1.2")
         require(safe_summary(parsed)["processInstanceCount"] == 1, "One native instance per action required")
         old = next(iter(parsed["instances"]))
-        require(parsed["instances"][old]["process"] == ("ChannelCombination" if event["label"] == "RGB-composition" else "AutomaticBackgroundExtractor"), "Journal native process mismatch")
+        require(parsed["instances"][old]["process"] == specification[ordinal - 1][1], "Journal native process mismatch")
         new = f"DSGPilotProcess{ordinal:03}"
         # Rename only identifier tokens; strings/comments/parameter literals stay exact.
         derived = "".join(new if match.lastgroup == "id" and match.group() == old else match.group()
@@ -89,8 +127,10 @@ def export_runtime_instances(job: Path, receipt: dict) -> dict:
         correlations.append(dict(ordinal=ordinal, label=event["label"], target=event.get("target"),
                                  dependencies=event["dependencies"], variable=new,
                                  nativeSourceSha256=hashlib.sha256(raw.encode()).hexdigest()))
-    raw_export = ("// DSG P2: successful native instances only; imported as data.\n"
-                  "// Raw sources and runtime dependencies are retained separately in the private journal.\n"
+        if "mask" in event:
+            correlations[-1].update(mask=event["mask"], maskInverted=event["maskInverted"])
+    raw_export = (("// DSG P2: successful native instances only; imported as data.\n" if recipe == RECIPE else "// DSG P3: successful native instances only; imported as data.\n")
+                  + "// Raw sources and runtime dependencies are retained separately in the private journal.\n"
                   "// This is not complete upstream project History or an executable replay.\n"
                   "var DSGPilotWorkflow = new ProcessContainer;\n" + "\n".join(sources) + "\n").encode()
     if sources:
@@ -102,8 +142,12 @@ def export_runtime_instances(job: Path, receipt: dict) -> dict:
         with path.open("xb") as stream:
             stream.write(raw_export)
     correlation_path = job / "runtime-correlations.json"
-    value = dict(schemaVersion="1.0", jobId=receipt["jobId"], scope="Successful P2 native instances only",
+    value = dict(schemaVersion="1.0", jobId=receipt["jobId"], scope="Successful P2 native instances only" if recipe == RECIPE else "Successful P3 native instances only",
                  upstreamHistoryCompleteness="NOT_ESTABLISHED", instances=correlations)
+    if recipe == NONLINEAR_RECIPE:
+        require(not masks, "Mask left attached")
+        value.update(recipe=recipe, runtimeRelations=[e["data"] | {"event": e["event"]} for e in events
+                     if e["event"] in {"derived-copy", "secondary-output", "mask-attached", "mask-detached"}])
     if correlation_path.exists():
         require(json.loads(correlation_path.read_text(encoding="utf-8")) == value, "Correlation conflict")
     else:
@@ -115,7 +159,7 @@ def validate(request: dict) -> None:
     require(set(request) == {"schemaVersion", "jobId", "recipe", "inputs", "background"}, "Unknown request fields")
     require(request["schemaVersion"] == "1.0", "Unsupported request")
     require(isinstance(request["jobId"], str) and re.fullmatch(r"[A-Za-z][A-Za-z0-9_]{0,47}", request["jobId"]) is not None, "Invalid job ID")
-    require(request["recipe"] == RECIPE, "Recipe not allowed")
+    actions(request["recipe"])
     require(isinstance(request["inputs"], list) and len(request["inputs"]) == 4, "Four masters required")
     paths = set()
     for role, item in zip(ROLES, request["inputs"]):
@@ -132,6 +176,8 @@ def validate(request: dict) -> None:
         paths.add(path)
         require(digest(path) == item["sha256"], "Source digest mismatch")
     require(len({(i["width"], i["height"]) for i in request["inputs"]}) == 1, "Master dimensions differ")
+    if request["recipe"] == NONLINEAR_RECIPE:
+        require(request["inputs"][0]["width"] >= 1000 and request["inputs"][0]["height"] >= 800, "M27 recipe minimum geometry")
     settings = request["background"]
     require(isinstance(settings, dict) and set(settings) == {"polyDegree", "boxSize", "boxSeparation"}, "Unknown background parameters")
     for key, low, high in (("polyDegree", 0, 2), ("boxSize", 5, 32), ("boxSeparation", 5, 64)):
@@ -168,7 +214,7 @@ def prepare(root: Path, request: dict) -> Path:
         runtime = job / "executor.jsh"
         with Path(__file__).with_name("executor.jsh").open("rb") as incoming, runtime.open("xb") as outgoing:
             shutil.copyfileobj(incoming, outgoing)
-        manifest = {"schemaVersion": "1.0", "jobId": request["jobId"], "recipe": RECIPE,
+        manifest = {"schemaVersion": "1.0", "jobId": request["jobId"], "recipe": request["recipe"],
                     "workerRoot": root.as_posix(), "jobDirectory": job.as_posix(), "token": token,
                     "inputs": inputs, "background": request["background"],
                     "runtimeLibrary": runtime.as_posix(), "runtimeSha256": digest(runtime)}
@@ -215,11 +261,18 @@ def collect(root: Path, job_id: str) -> dict:
     require(manifest["jobId"] == receipt["jobId"] == job_id, "Receipt identity mismatch")
     require(receipt["status"] in {"COMPLETED", "FAILED", "CANCELLED"}, "Terminal status required")
     require(receipt["token"] == manifest["token"], "Receipt reservation mismatch")
-    require(type(receipt["processCount"]) is int and 0 <= receipt["processCount"] <= 5, "Invalid process count")
+    recipe = manifest["recipe"]
+    specification = actions(recipe)
+    if recipe == NONLINEAR_RECIPE:
+        require(receipt.get("recipe") == recipe, "Receipt recipe mismatch")
+    require(type(receipt["processCount"]) is int and 0 <= receipt["processCount"] <= len(specification), "Invalid process count")
     integrity = all(digest(Path(i["sourcePath"])) == i["sha256"] == digest(Path(i["path"])) for i in manifest["inputs"])
     require(integrity, "Original/copy changed; reservation retained")
     require(digest(job / "executor.jsh") == manifest.get("runtimeSha256") == receipt.get("runtimeSha256"), "Runtime identity mismatch")
-    expected_names = {f"{r}-linear.xisf" for r in ROLES} | {"RGB-linear.xisf"}
+    outputs = {f"{r}-linear.xisf": (1, False) for r in ROLES} | {"RGB-linear.xisf": (3, False)}
+    if recipe == NONLINEAR_RECIPE:
+        outputs.update(NONLINEAR_OUTPUTS)
+    expected_names = set(outputs)
     names = [o["name"] for o in receipt["outputs"]]
     require(len(names) == len(set(names)), "Duplicate output")
     require(set(names) <= expected_names, "Unexpected output name")
@@ -228,17 +281,27 @@ def collect(root: Path, job_id: str) -> dict:
         require(path.parent == (job / "outputs").resolve(), "Output escaped job")
         require(digest(path) == output["sha256"], "Output integrity mismatch")
         header = xisf_header(path)
-        channels = 3 if output["name"] == "RGB-linear.xisf" else 1
+        channels, nonlinear = outputs[output["name"]]
+        if recipe == NONLINEAR_RECIPE:
+            require(output.get("nonLinear") is nonlinear, "Output processing domain mismatch")
         require(header == dict(width=manifest["inputs"][0]["width"], height=manifest["inputs"][0]["height"],
                               channels=channels, sampleFormat="Float32", colorSpace="RGB" if channels == 3 else "Gray"), "Output header mismatch")
     if receipt["status"] == "COMPLETED":
-        require(set(names) == expected_names and receipt["processCount"] == 5, "Incomplete recipe cannot complete")
+        require(set(names) == expected_names and receipt["processCount"] == len(specification), "Incomplete recipe cannot complete")
         require(receipt.get("exclusiveLeaseVerified") is True and receipt.get("originalViewsUnmodified") is True, "Native integrity/lease evidence required")
+    quality = None
+    if recipe == NONLINEAR_RECIPE and "LRGB-nonlinear.xisf" in names:
+        from tools.pixinsight.local_pilot.quality import inspect_pixels
+        final_path = job / "outputs" / "LRGB-nonlinear.xisf"
+        quality = inspect_pixels(final_path)
+        require(digest(final_path) == next(o["sha256"] for o in receipt["outputs"] if o["name"] == "LRGB-nonlinear.xisf"), "Final output changed during pixel verification")
     exported = export_runtime_instances(job, receipt)
     result = {"schemaVersion": "1.0", "jobId": job_id, "status": receipt["status"],
               "originalIntegrity": "UNCHANGED", "outputCount": len(receipt["outputs"]),
               "processCount": receipt["processCount"], "workflowInstanceCount": exported["instanceCount"],
               "workflowSha256": exported["sha256"], "providerRequests": 0}
+    if recipe == NONLINEAR_RECIPE:
+        result.update(recipe=recipe, pixelVerification=quality, scientificAcceptance="OWNER_REVIEW_REQUIRED")
     verification = job / "verification.json"
     if verification.exists():
         require(json.loads(verification.read_text(encoding="utf-8")) == result, "Verification conflict")
