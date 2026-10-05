@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 4.5 |
+| Versione | 4.6 |
 | Stato | Active context baseline |
 | Data baseline | 05/10/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
@@ -163,3 +163,11 @@ Aggiornamento P2 al 5 ottobre: coordinatore/esecutore locale su copie, ricetta l
 P2 delivered via PR #480 with exact-head CI, separated sequential reviews and post-merge verification. P3 adds a fixed M27 nonlinear recipe, native processing on locked copies, runtime mask/stars relations and streaming final pixel checks. Technical/visual evidence and delivery remain to be reconciled before release. The preset is not a universal or photometric recipe; production provider, remote transport, portal and scientific acceptance remain separate.
 
 P3 native technical/visual trial completed; [minimized evidence](evidence/BKL-049-PIAI-P3-2026-10-05.json): 29 actions, 15 checkpoints, finite normalized final pixels, unchanged originals, native cancel/selection/replay rejection and full-field/100% comparison. Prior published M27 retains stronger internal contrast; Owner acceptance remains required. Available History: 13 views, 47 steps, 82 instances, imported as data without promoting completeness/execution classifications. Exact-head CI/review and post-merge delivery are tracked on the PR; no remote/provider/portal activation.
+
+Consegna P3 completata: PR #481, head `ce819ea192a30522f2c168631a0c1b05f77adfd9`, merge `342a169dbc87433da971f1660a239e6dc5a6b343`; 17 controlli exact-head e 16 workflow post-merge SUCCESS, ARB/RQ AI-assistite separate e sequenziali senza finding finali, Pages effettive verificate. Supera le indicazioni storiche di consegna P3 ancora pendente; acceptance scientifica Owner aperta.
+
+## Aggiornamento corrente — P4 candidato autenticato
+
+L’Owner sceglie `SESSION_ASSISTED`: assistente di questa sessione, zero nuove chiamate API IA a pagamento. Implementati coda privata con CAS/backup, identità persistente senza scadenza o riassegnazione offline, autenticazione distinta Google Owner/credenziale worker e adapter PC HTTPS in uscita con allowlist locale. Preparazione una sola volta, retry di messaggi identici, cancellazione P2, raccolta solo dopo conferma di arresto nativo, recupero conservativo. Nessun avvio automatico PixInsight o modello cloud autonomo.
+
+[Pacchetto operativo e proposta concreta](https://github.com/maininimassimo-bit/digital-stargate-manual/tree/main/infrastructure/pixinsight-pilot): servizio Cloud Run separato, identità/registry e due bucket privati per soli stati, min=0/max=1, 1 CPU/512 MiB. Nuova infrastruttura potenzialmente a pagamento e credenziale dedicata richiedono approvazione prima di creazione/attivazione. Nessuna risorsa o credenziale creata, nessun OAT cloud/Google/TLS nativo dichiarato. Test persistenti sintetici e HTTP loopback reali restano distinti da runtime operativo. P4 resta aperta per attivazione; P5/P6 e acceptance Owner restano successivi. Archivio/M27 pubblicata e autorità dispositivi/Safety invariati.
