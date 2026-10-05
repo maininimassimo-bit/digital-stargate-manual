@@ -1,8 +1,8 @@
 # P4/P5 — authenticated queue and scientific portal
 
 Current status: P4 Owner login and bounded administrative native transport are proven.
-P5 portal/delivery is an implemented candidate awaiting exact-head release,
-reviewed-image deployment and real Owner scientific HTTP/UI/native OAT.
+P5 portal/delivery is released in #485 and deployed by reviewed image digest.
+Real Owner scientific HTTP/UI/native delivery OAT remains pending.
 The proposal/P4-specific text below remains historical. P5 adds private preview,
 runtime workflow/correlations and immutable scientific context in existing private buckets;
 original XISF and full journal stay on the PC. No automatic native launch/publication.

@@ -2,8 +2,8 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 1.0 |
-| Stato | Implemented candidate; release/deployment/live Owner OAT pending |
+| Versione | 1.1 |
+| Stato | Released and deployed #485; live Owner scientific OAT pending |
 | Data | 2026-10-05 |
 | Perimetro | BKL-049-EXT-PIAI P5; M27, Owner PC, SESSION_ASSISTED |
 
@@ -13,7 +13,7 @@ La pagina [Elabora con PixInsight e IA](../pixinsight-pilot/index.md) è raggiun
 
 Il server verifica catalogo e relativa impronta, sessioni dello stesso target e identità della versione corrente. Conserva lo snapshot privato e crea il job con l’impronta del contesto nella stessa transizione CAS della coda. Il retry dello stesso identificativo conserva la selezione originaria anche se il catalogo cambia; un contenuto differente viene rifiutato. Il browser conserva solo la richiesta ambigua, mai la credenziale Google. Non aggiunge una scadenza.
 
-Il worker riceve il contesto tramite autenticazione dedicata in uscita e confronta l’impronta del manifest locale: ricetta, parametri di background, hash dei quattro master, ruoli, indici immagine e geometria; percorsi e parametri integrali non vengono trasmessi. La verifica precede la preparazione delle copie. La ricetta resta quella M27 revisionata, non un’elaborazione arbitraria proposta da un file caricato. L’assistente attivo avvia lo script nativo preparato sotto supervisione.
+Il worker riceve il contesto tramite autenticazione dedicata in uscita e confronta l’impronta del manifest locale: ricetta, parametri di background, hash dei quattro master, ruoli, indici immagine e geometria; nella registrazione e nel contesto non vengono trasmessi percorsi o parametri integrali; il workflow runtime consegnato successivamente conserva i parametri dei processi. La verifica precede la preparazione delle copie. La ricetta resta quella M27 revisionata, non un’elaborazione arbitraria proposta da un file caricato. L’assistente attivo avvia lo script nativo preparato sotto supervisione.
 
 La pagina mostra stato, conteggi e contatto PC su aggiornamento esplicito. OFFLINE conserva job/prenotazione; nessuna riassegnazione o elaborazione continua. L’annullamento viene applicato tra processi; quello in corso può terminare. La raccolta richiede conferma che l’esecuzione nativa sia arrestata.
 
@@ -52,3 +52,9 @@ La prova reale richiesta è: comando scientifico Owner HTTP/UI → preparazione 
 Interrompere nuove richieste e cicli prima del rollback; non forzare lo sblocco di un job vivo. Conservare root, binding, prenotazioni, copie, journal, ricevute e bucket/backup. Ripristinare il digest P4 già verificato e ritirare il collegamento P5 tramite revert revisionato solo quando non ci sono job P5 attivi; un job scientifico non deve essere adottato da un worker privo del controllo del contesto. Non cancellare evidence né modificare M27 pubblicata. [Piano](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md), [P4](PIAI-P4-CLOUD-ACTIVATION-2026-10-05.md), [handover](HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md).
 
 Correzioni ARB: le registrazioni condividono il solo oggetto CAS già autorizzato `control/piai-state.json`; nessun ampliamento IAM. Un rifiuto HTTP 400 consente una nuova selezione solo dopo verifica autenticata `JOB_NOT_FOUND`; esiti ambigui conservano la richiesta. Le dipendenze dei master nelle correlazioni cloud sono riferimenti di ruolo associati al digest composto del manifest; il grafo originale con hash individuali rimane sul PC. Regressioni per seconda registrazione, minimizzazione e recupero del catalogo obsolete aggiunte.
+
+## Rilascio P5 del 5 ottobre — prova scientifica Owner ancora aperta
+
+PR #485 integrata nel commit `f1a4650dfb8da54c498b763752fd4d5d2b8877ad`: 20/20 check sullo head revisionato, ARB e RQ AI-assistite sequenziali PASS con zero finding residui; 22/22 check post-merge e deployment Pages effettivo SUCCESS. Cloud Build del codice revisionato PASS con 77 test; digest `sha256:b6d14fa1934076f16f0c44721fdc2852dd5e49f68bd21bf3cae0cf54b38e1ee0`, revisione `dsg-pixinsight-pilot-p5-science-01`, traffico 100%. Nessuna nuova risorsa, credenziale o estensione IAM. Registrazione reale di un gruppo M27 dopo verifica dei quattro master e ripetizione idempotente PASS.
+
+La pagina scientifica è pubblicata e aperta; il completamento tecnico P5 richiede ancora accesso Owner sulla nuova pagina, creazione scientifica HTTP/UI, nuova esecuzione nativa e consegna/revisione privata con sessioni esatte. Non sostituire questa prova con fixture amministrative, prove P4 o accettazione scientifica simulata. Le dipendenze dei master nelle correlazioni cloud usano i ruoli, mentre il grafo originale e gli hash individuali restano sul PC. P6 e accettazione scientifica Owner rimangono aperti. La M27 pubblicata non è stata modificata. Questa riconciliazione documentale richiede i propri gate di consegna.
