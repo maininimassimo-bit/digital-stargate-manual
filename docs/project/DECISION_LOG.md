@@ -555,3 +555,7 @@ L’Owner autorizza documentazione/roadmap/handover cumulativi e poi il pilota l
 ## 2026-10-05 — PixInsight IA P1 native preflight
 
 Dopo la consegna documentale #478 viene eseguito il preflight locale. Un contenitore multi-image è prima rifiutato e poi selezionato tramite indice esplicito/dimensioni attese. Quattro master invariati e 12 costruttori disponibili; nessuna elaborazione o chiamata provider. P2/P3 restano successivi; licenze/modelli/versioni plugin non sono certificati. [Evidenza minimizzata](evidence/BKL-049-PIAI-P1-2026-10-05.json).
+
+## 2026-10-05 — PixInsight IA P2 controlled local executor
+
+Implemented the authorized local-file processing boundary with a fixed linear recipe, per-root reservation, verified Windows exclusive handle, copied inputs, pinned executor snapshot, private native journal and data-only workflow export. Native completion, pre-cancel and replay refusal passed; originals unchanged. P3 scientific/visual validation and P4–P6 remote integration remain separate. No cloud/model/device/portal authority added. [Plan](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md) and [evidence](evidence/BKL-049-PIAI-P2-2026-10-05.json); delivery reviews tracked at the exact PR head.

@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | ID | DSG-HO-BKL049-20261005 |
-| Versione | 1.1 |
+| Versione | 1.2 |
 | Data | 2026-10-05 |
 | Stato | Riconciliazione operativa; estensione pilota autorizzata, non accettata come produzione |
 | Pacchetto | BKL-049 archivio chiuso; BKL-049-EXT-PIAI pilota distinto |
@@ -57,3 +57,13 @@ Riconciliazione locale e verifica GET effettuate. CI, ARB, Release Quality, merg
 ## Aggiornamento successivo — pilota P1 avviato
 
 Riconciliazione documentale consegnata tramite PR #478, merge `351067822c5b5ac0632c57408fd530ad85614914`, 17 controlli exact-head e 18 workflow post-merge SUCCESS; ARB e RQ AI-assistite sequenziali, zero finding finali. Successivamente effettuato il preflight nativo sul PC Owner: PI 1.9.5 build 1706, quattro master integri e invariati, selezione esplicita nei contenitori multi-image e 12 costruttori di processo disponibili. [Ricevuta minimizzata](evidence/BKL-049-PIAI-P1-2026-10-05.json). Nessuna elaborazione pixel o richiesta provider nel test. Versioni moduli, modelli e licenze non attestati dal preflight. P2 esecutore su copie e P3 elaborazione restano successivi; il pilota è avviato, non completo né di produzione. Versione 1.1: esito P1, nuova consegna CI/review da tracciare sulla PR di implementazione.
+
+## Aggiornamento corrente — P2 locale verificato
+
+P1 consegnata tramite PR #479, merge `76d6186489c78aceb32f34a6b96afbe8f88457a7`, 17 controlli exact-head e 16 workflow post-merge SUCCESS, ARB/RQ sequenziali senza finding finali. P2 ora dispone di coordinatore, prenotazione di un job, snapshot esecutore, handle esclusivo Windows, copie verificate e journal privato delle operazioni native. Il lancio rimane supervisionato in PixInsight; nessuna connessione remota è inclusa.
+
+Prova nativa M27: cinque processi riusciti e cinque checkpoint Float32 4634×2808 lineari, con originali invariati. Quattro estrazioni del fondo sulle copie e composizione RGB; luminanza preparata ma non integrata. Pre-cancel nativo con zero processi; replay rifiutato e 37 file del job concluso invariati. [Ricevuta P2](evidence/BKL-049-PIAI-P2-2026-10-05.json). Il workflow derivato contiene solo le cinque operazioni riuscite, leggibili come dati dall’importer 1.2; non rappresenta tutta la History precedente dei master.
+
+Il prossimo gate è P3: elaborazione non lineare, controlli pixel, colore/astrometria e confronto visivo. Questa prova non sostituisce la M27 pubblicata e non ne certifica qualità scientifica. Annullamento durante un processo reale verificato dopo la correzione ARB del canale di richiesta; guasti nativi coperti da test sintetici; crash/offline e connessione remota restano gate futuri. Per un crash conservare la prenotazione e l’evidenza, confermare PixInsight fermo e quarantinare il root prima di usarne uno nuovo. Procedura dettagliata in `tools/pixinsight/local_pilot/README.md`. Versione 1.2: esito P2; CI/review/merge e post-merge da registrare sulla PR della consegna.
+
+Riesame P2: un Major ARB ha rilevato che il comando cancel tentava di leggere il file tenuto con handle esclusivo. Corretto con identità immutabile del job separata e marker completo pubblicato atomicamente, vincolato al token e verificato dal runtime. Prova Windows con handle reale e prova nativa PixInsight: lettura del lease negata, comando cancel riuscito durante il primo processo; arresto prima del checkpoint successivo, un processo registrato, zero output e originali invariati. Il processo in corso può terminare prima dell’annullamento. Il riesame finale richiede CI e ARB/RQ sul nuovo head.
