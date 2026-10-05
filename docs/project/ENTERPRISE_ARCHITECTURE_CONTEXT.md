@@ -3,15 +3,15 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 4.3 |
+| Versione | 4.4 |
 | Stato | Active context baseline |
-| Data baseline | 25/09/2026 |
+| Data baseline | 05/10/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch autorevole | `main` |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Continuity handover | `docs/project/HANDOVER_2026-09-25-BKL043-F4.md` |
-| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-25.md` |
-| Current governed package | BKL-043 F3/F4 exact pilot authorization preparation; BKL-042 closed/accepted |
+| Continuity handover | `docs/project/HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md` |
+| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-05.md` |
+| Current governed package | BKL-043 F4 lifecycle pending; BKL-049 archive closed; local PixInsight AI pilot |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo e gerarchia
@@ -149,3 +149,7 @@ La successiva decisione esplicita dell’Owner sostituisce il requisito di cattu
 ## 2026-09-30 — BKL-049 F0 accepted after review and delivery
 
 La [riconciliazione F0](BKL-049-F0-ACCEPTANCE-2026-09-30.md) registra PR #445, merge `fc281eb80342c746303c58c2d2a8f61d134a5f5b`, review ARB/RQ e 17/17 workflow post-merge SUCCESS con Pages verificato. F0 è accettata nel perimetro archivio parziale con collegamento obbligatorio immagine/versione–workflow. Questa decisione successiva supera gli stati F0 OPEN precedenti; F1 è pronta per progettazione dettagliata, non ancora accettata. BKL-049 resta aperta e BKL-043 corrente. Nessuna funzionalità gallery reale, codice di produzione o autorità runtime viene dichiarata completata.
+
+## Riconciliazione corrente — 2026-10-05
+
+Le sezioni datate precedenti conservano l’evidenza storica. Il [nuovo handover](HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md) e la [baseline corrente](CURRENT_TECHNICAL_BASELINE_2026-10-05.md) prevalgono per lo stato: BKL-043 F4 lifecycle pendente; BKL-049 archivio chiuso, procedura foto/workflow e importer 1.2 consegnati; ultima M27 pubblicata con 80 processi e 16 associazioni dichiarate. Il [pilota locale BKL-049-EXT-PIAI](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md) aggiunge elaborazione file su copie del PC Owner. Worker remoto, modello API e pubblicazione automatica non sono implementati. Safety Authority e dispositivi restano invariati.

@@ -417,3 +417,13 @@ ADR-010 is accepted for repository method authority. F3-A3 is complete at reposi
 F4-A/ADR-011 and F4-B v1.1 are Accepted/Post-Merge Verified. F4-C reconciliation is Accepted/Post-Merge Verified through PR #270 and merge `79fe51e71782fff6c952e9291fe8ca567da74e98`; the two-request provider ceiling is exhausted, acquisition code is removed, 71 complete hourly instants are retained with zero imputation, and no protected-site use occurred. F4-D is Accepted/Post-Merge Verified through PR #271, exact reviewed head `f6aa9c5dffbc172d554872f9072029f56d1195ec`, merge `8f948ba9593dc2bfde291d2658fe92eafd4cce28` and 7/7 successful post-merge workflows. The public forecast layer is metadata-only `EVALUATION/NONE/READ_ONLY` and publishes no coordinates or forecast value arrays.
 
 F5 — Explainable Ranking Method and Read-Only Consumer — is the next dependency-ready BKL-031 slice, but remains separately governed. This transition authorizes no numeric factor weights, score, target ordering, readiness/go-no-go, scheduler, automatic target selection, command path, additional provider traffic or Safety Authority. BKL-032 remains the separate readiness capability and S10 production runtime remains `UNAVAILABLE`.
+
+## Riconciliazione M27 e nuova estensione — 2026-10-05
+
+BKL-049 resta Done per l’archivio accepted. [Handover corrente](HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md): ultima M27 pubblicata, 24 viste/80 processi/147 istanze esportate e 16 sessioni associate per dichiarazione Owner. Importer 1.2 consegnato tramite PR #477. Non si deduce replay universale o contributo pixel delle sessioni.
+
+| ID | Priorità | Titolo | Stato | Dipendenze | Risultato atteso | Riferimenti |
+|---|---|---|---|---|---|---|
+| BKL-049-EXT-PIAI | P1 | PixInsight AI Local Processing Pilot | In Progress | Archivio BKL-049; importer 1.2; Owner PC e master | Preflight, esecutore su copie e prova M27; successivamente protocollo/coda/portale con gate distinti | [Piano](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md) |
+
+BKL-043 conserva priorità e lifecycle propri. BKL-050 richiede anche la disposition dell’estensione; questa voce non è una nuova milestone numerata e non riapre la closure storica.

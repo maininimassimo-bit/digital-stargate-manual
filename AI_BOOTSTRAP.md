@@ -2,9 +2,9 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 7.6 |
-| Baseline | 25/09/2026 |
-| Stato | Current root bootstrap — BKL-043 F3/F4 exact pilot authorization preparation; S10 unavailable |
+| Versione | 7.7 |
+| Baseline | 05/10/2026 |
+| Stato | Current root bootstrap — BKL-043 F4 lifecycle pending; BKL-049 archive closed; PixInsight AI extension pilot; S10 unavailable |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -13,8 +13,8 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni e proje
 
 ## 2. Sequenza obbligatoria di lettura
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-09-25-BKL043-F4.md`
-3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-25.md`
+2. `docs/project/HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md`
+3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-05.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
 6. `docs/project/BACKLOG.md`
@@ -42,7 +42,7 @@ Gli handover e le baseline precedenti restano snapshot storici.
 - AP-007 è **Accepted with conditions** come architecture baseline; non è un servizio operativo verificato.
 - AP-008 è chiuso nel perimetro bounded read-only; non abilita command path, remediation o Safety Authority.
 - BKL-042 è **Closed / Accepted** nel perimetro bounded read-only con limiti OAT espliciti.
-- BKL-043 è il package corrente: F1/F2 sono completati, F3 è repository-only con test offline passati e F4 è una decision draft. Scope e target `EAGLE30154` sono selezionati, ma nessun runtime o pilot è autorizzato.
+- BKL-043 resta corrente: F4 attende lifecycle e accettazione finale secondo lo stato del 1 ottobre. BKL-049 archivio chiusa; M27 e importer aggiornati nel nuovo handover. Estensione BKL-049-EXT-PIAI autorizzata sul PC Owner, non produzione.
 - S10 production runtime: `UNAVAILABLE`.
 
 ## 4. Boundary non negoziabili
@@ -65,4 +65,4 @@ Gli handover e le baseline precedenti restano snapshot storici.
 Exact-head CI → ARB → Release Quality sullo stesso SHA → expected-head merge → post-merge verification → acceptance reconciliation. Nessuna acceptance o runtime claim può precedere l'evidence reale.
 
 ## 7. Punto di ripresa
-Riprendere da **BKL-043 F3/F4 exact pilot authorization preparation** usando `docs/project/HANDOVER_2026-09-25-BKL043-F4.md` come handover compatto e `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-25.md` come baseline tecnica corrente. Il prossimo gate è chiudere F3, completare tutti i campi F4 e ottenere review indipendenti; un eventuale pilot richiede poi una decisione owner separata.
+Riprendere dal nuovo handover del 5 ottobre e dal piano BKL-049-EXT-PIAI. Consegnare la riconciliazione documentale, poi eseguire preflight e pilota locale su copie. BKL-043 conserva i propri gate; l’estensione non autorizza dispositivi, Safety Authority, provider a pagamento o pubblicazione automatica.

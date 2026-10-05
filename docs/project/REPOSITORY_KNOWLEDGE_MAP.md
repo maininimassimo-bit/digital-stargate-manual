@@ -3,11 +3,11 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 6.3 |
+| Versione | 6.4 |
 | Stato | Active |
-| Data | 25/09/2026 |
+| Data | 05/10/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | BKL-043 F3/F4 exact pilot authorization preparation; S10 production runtime `UNAVAILABLE` |
+| Current governed package | BKL-043 F4 lifecycle pending; BKL-049 archive closed; local PixInsight AI pilot; S10 production runtime `UNAVAILABLE` |
 
 ## 1. Scopo
 
@@ -16,8 +16,8 @@ Mappa domini, authority, projection e percorsi di conoscenza. Non sostituisce le
 ## 2. Continuity hierarchy
 
 1. `AI_BOOTSTRAP.md`;
-2. `docs/project/HANDOVER_2026-09-25-BKL043-F4.md`;
-3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-09-25.md`;
+2. `docs/project/HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md`;
+3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-05.md`;
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`;
 5. questo Knowledge Map;
 6. `DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md`;
@@ -29,11 +29,11 @@ Mappa domini, authority, projection e percorsi di conoscenza. Non sostituisce le
 
 Handover e baseline precedenti restano snapshot storici e non prevalgono sulla baseline corrente.
 
-Riferimenti di continuità storici mantenuti per la verificabilità delle capability già accettate: `HANDOVER_2026-09-21-AP-007.md`, `CURRENT_TECHNICAL_BASELINE_2026-09-21.md`, F8 is Accepted / Post-Merge Verified, `BKL-032 Session Readiness / Go-No-Go Decision Support` e `2/2_EXHAUSTED`. Questi riferimenti non definiscono il package corrente né sostituiscono i documenti del 25/09/2026.
+Riferimenti di continuità storici mantenuti per la verificabilità delle capability già accettate: `HANDOVER_2026-09-21-AP-007.md`, `CURRENT_TECHNICAL_BASELINE_2026-09-21.md`, F8 is Accepted / Post-Merge Verified, `BKL-032 Session Readiness / Go-No-Go Decision Support` e `2/2_EXHAUSTED`. Questi riferimenti non definiscono il package corrente né sostituiscono i documenti del 05/10/2026.
 
 ## 2.1 Current continuity reconciliation
 
-AP-007 è Accepted with conditions come architecture baseline e AP-008 è chiuso nel suo perimetro bounded read-only. La catena corrente è `AI_BOOTSTRAP.md` → `HANDOVER_2026-09-25-BKL043-F4.md` → `CURRENT_TECHNICAL_BASELINE_2026-09-25.md` → roadmap source → BKL-043 F1/F2/F3/F4 evidence → Traceability Register. BKL-043 è il package corrente: F1/F2 sono completati, F3 è repository-only e F4 è una decision draft. Nessuno stato operativo è promosso da questa riconciliazione.
+AP-007 è Accepted with conditions come architecture baseline e AP-008 è chiuso nel suo perimetro bounded read-only. La catena corrente è `AI_BOOTSTRAP.md` → `HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md` → `CURRENT_TECHNICAL_BASELINE_2026-10-05.md` → roadmap source → BKL-043 F1/F2/F3/F4 evidence → Traceability Register. BKL-043 resta corrente: F4 attende lifecycle e accettazione finale secondo BKL-043-F4-STATUS-2026-10-01. BKL-049 archivio è chiusa; il pilota locale è una nuova estensione autorizzata.
 
 ## 3. Authority / projection map
 
@@ -57,7 +57,7 @@ BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministic
 
 BKL-031 è **CLOSED / ACCEPTED / POST-MERGE VERIFIED** tramite PR #301 e merge `4a509d574a004fe7fb72bc6c678c9e7f71fe821f`. F1/F2, F3-A1/A2/A3/B/C, F4-A/B/C/D, F5/F6/F7/F8 e F9 sono accettati; F3-C are Accepted / Post-Merge Verified; F4-A and ADR-011 are Accepted / Post-Merge Verified; F8 is Accepted / Post-Merge Verified. F9 ha verificato il refresh repeatable MeteoHub, astronomia della notte corrente, suitability setup/target, ranking esplicabile e pagina pubblica di Manciano. Budget provider storico `2/2_EXHAUSTED`; budget sito protetto `1/1_EXHAUSTED`; Recurring provider traffic is not authorized. Il budget monetario resta €0, senza limite giornaliero imposto dal workflow, fail-closed e GRIB effimeri senza retention. BKL-032 conserva la readiness/go-no-go authority; local physical interlocks remain Safety Authority; S10 production runtime is `UNAVAILABLE`; il planner resta read-only/advisory senza scheduler, selezione automatica, device command o Safety Authority.
 
-BKL-042 è CLOSED / ACCEPTED come retrieval advisory bounded read-only. BKL-043 è il package corrente: F1 source/population discovery e F2 two-plane design sono completati; F3 è repository-only; F4 è una decision draft e non autorizza un runtime.
+BKL-042 è CLOSED / ACCEPTED come retrieval advisory bounded read-only. BKL-043 è il package corrente: F1 source/population discovery e F2 two-plane design sono completati; F4 attende lifecycle e accettazione finale secondo lo stato del 1 ottobre; la presente revisione non ne estende il runtime.
 
 ## 7. BKL-032 closed baseline
 
@@ -123,7 +123,7 @@ Nessun consumer analytics, comparison, scoring, planner o AI può comandare appa
 | 5.9 | 17/09/2026 | F4-B three-schema contract, synthetic TEST/NONE fixture and 24-case fail-closed validator prepared with zero provider traffic |
 | 6.0 | 17/09/2026 | PR #265 F4-B integrated and post-merge verified; 26/26 tests and 14/14 workflows; F4-C acquisition-gate preparation promoted |
 | 6.1 | 17/09/2026 | F8 Accepted/Post-Merge Verified via PR #279; continuity riallineata a handover/baseline 17/09 e F9 repeatable current-night planner closure promosso come unico successore |
-| 6.3 | 25/09/2026 | Continuità riallineata a BKL-042 closed/accepted e BKL-043 F3/F4 preparation; nessun runtime BKL-043 autorizzato |
+| 6.3 | 05/10/2026 | Continuità riallineata a BKL-042 closed/accepted e BKL-043 F3/F4 preparation; nessun runtime BKL-043 autorizzato |
 
 Le sezioni di checkpoint seguenti sono snapshot storici. Eventuali formulazioni come “current” o “next” valgono al momento del relativo checkpoint e non prevalgono sulla baseline corrente definita nelle sezioni 2, 6 e 7.
 
@@ -161,3 +161,7 @@ La successiva decisione esplicita dell’Owner sostituisce il requisito di cattu
 ## 2026-09-30 — BKL-049 F0 accepted after review and delivery
 
 La [riconciliazione F0](BKL-049-F0-ACCEPTANCE-2026-09-30.md) registra PR #445, merge `fc281eb80342c746303c58c2d2a8f61d134a5f5b`, review ARB/RQ e 17/17 workflow post-merge SUCCESS con Pages verificato. F0 è accettata nel perimetro archivio parziale con collegamento obbligatorio immagine/versione–workflow. Questa decisione successiva supera gli stati F0 OPEN precedenti; F1 è pronta per progettazione dettagliata, non ancora accettata. BKL-049 resta aperta e BKL-043 corrente. Nessuna funzionalità gallery reale, codice di produzione o autorità runtime viene dichiarata completata.
+
+## Riconciliazione corrente — 2026-10-05
+
+Le sezioni datate precedenti conservano l’evidenza storica. Il [nuovo handover](HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md) e la [baseline corrente](CURRENT_TECHNICAL_BASELINE_2026-10-05.md) prevalgono per lo stato: BKL-043 F4 lifecycle pendente; BKL-049 archivio chiuso, procedura foto/workflow e importer 1.2 consegnati; ultima M27 pubblicata con 80 processi e 16 associazioni dichiarate. Il [pilota locale BKL-049-EXT-PIAI](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md) aggiunge elaborazione file su copie del PC Owner. Worker remoto, modello API e pubblicazione automatica non sono implementati. Safety Authority e dispositivi restano invariati.
