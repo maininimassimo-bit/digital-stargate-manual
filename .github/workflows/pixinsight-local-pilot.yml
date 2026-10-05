@@ -1,10 +1,10 @@
 name: PixInsight local pilot contract
 on:
   pull_request:
-    paths: ['tools/pixinsight/local_pilot/**', 'infrastructure/pixinsight-pilot/**', 'docs/pixinsight-pilot-check/**', 'docs/javascripts/pixinsight-pilot-check.js', '.github/workflows/pixinsight-local-pilot.yml']
+    paths: ['tools/pixinsight/local_pilot/**', 'infrastructure/pixinsight-pilot/**', 'docs/pixinsight-pilot*/**', 'docs/javascripts/pixinsight-pilot*.js', '.github/workflows/pixinsight-local-pilot.yml']
   push:
     branches: [main]
-    paths: ['tools/pixinsight/local_pilot/**', 'infrastructure/pixinsight-pilot/**', 'docs/pixinsight-pilot-check/**', 'docs/javascripts/pixinsight-pilot-check.js', '.github/workflows/pixinsight-local-pilot.yml']
+    paths: ['tools/pixinsight/local_pilot/**', 'infrastructure/pixinsight-pilot/**', 'docs/pixinsight-pilot*/**', 'docs/javascripts/pixinsight-pilot*.js', '.github/workflows/pixinsight-local-pilot.yml']
 permissions:
   contents: read
 jobs:
@@ -19,9 +19,11 @@ jobs:
         with:
           node-version: '22'
       - name: Test synthetic preflight rejection and multi-image selection
-        run: node --test tools/pixinsight/local_pilot/preflight.test.mjs tools/pixinsight/local_pilot/executor.test.mjs tools/pixinsight/local_pilot/owner_check.test.mjs
+        run: node --test tools/pixinsight/local_pilot/preflight.test.mjs tools/pixinsight/local_pilot/executor.test.mjs tools/pixinsight/local_pilot/owner_check.test.mjs tools/pixinsight/local_pilot/scientific_portal.test.mjs
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
       - name: Test local coordinator reservation and private retention
-        run: python -m unittest tools.pixinsight.local_pilot.test_worker tools.pixinsight.local_pilot.test_quality tools.pixinsight.local_pilot.test_transport
+        run: |
+          python -m pip install "Pillow>=11,<13"
+          python -m unittest tools.pixinsight.local_pilot.test_worker tools.pixinsight.local_pilot.test_quality tools.pixinsight.local_pilot.test_transport tools.pixinsight.local_pilot.test_scientific_portal

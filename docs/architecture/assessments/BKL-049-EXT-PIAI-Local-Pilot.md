@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | ID | BKL-049-EXT-PIAI |
-| Versione | 1.6 |
+| Versione | 1.7 |
 | Stato | Owner-authorized pilot; architecture/release review required |
 | Data | 2026-10-05 |
 | Dipendenze | BKL-049 archive; importer 1.2; Owner PC/PixInsight; calibrated aligned masters |
@@ -37,7 +37,7 @@ Un futuro worker sul PC riceverà job attraverso connessione autenticata in usci
 | P2 — Esecutore locale | Coordinatore locale, copie, snapshot esecutore, ricetta lineare fissa, journal e checkpoint; prova nativa completa, pre-cancel e replay | Delivered #480; native PASS |
 | P3 — Prova M27 | Input bloccati, output non lineare, verifiche finite/dimensioni/colore, confronto visivo; nessuna accettazione scientifica automatica | Delivered #481; native technical/visual PASS; Owner acceptance open |
 | P4 — Connessione e IA | Candidato autenticato/coda/adapter e recupero offline; SESSION_ASSISTED senza nuove API IA; proposta cloud distinta | Delivered #482/#483; Owner login and bounded administrative native transport PASS; operational acceptance/P5/P6 open |
-| P5 — Portale e provenance | Comando Owner, stato, preview, revisione e collegamento esatto a sessioni e workflow | Planned |
+| P5 — Portale e provenance | Comando Owner, stato, preview, revisione e collegamento esatto a sessioni e workflow | Implemented candidate; release/live Owner scientific OAT pending |
 | P6 — Acceptance | Casi errore/annullamento/offline, integrità originali, evidenza reale, review e rollback | Planned |
 
 La disponibilità futura nel portale dipende da P4–P6. Il successo della vecchia elaborazione M27 non dimostra il funzionamento del nuovo worker.
@@ -127,3 +127,8 @@ P4 ha ora una prova tecnica nativa circoscritta; CAS GCS concorrente reale PASS 
 Osservazione reale dopo oltre 120 secondi senza contatto: OFFLINE diagnostico, stesso job/root ancora RUNNING, nessuna scadenza o riassegnazione osservata. Non è una prova di crash recovery del desktop.
 
 Derivati locali TIFF RGB16/JPEG sRGB verificati; soluzione astrometrica conservata e checkpoint invariato dopo export. History disponibile: 13 viste, 47 passi, 82 istanze, 429679 byte; importer 1.2 PARSED_SUBSET. La History conservata non prova completezza a monte: executionEvidence=NOT_ESTABLISHED e workflowCompleteness=UNAVAILABLE del file importato restano invariati. Journal e correlazioni runtime delle 29 azioni conservati separatamente. Campo intero/dettaglio coerenti con la ricetta P3; nessuna superiorità scientifica o sostituzione pubblica dichiarata.
+
+
+## Aggiornamento P5 — portale scientifico privato (2026-10-05)
+
+Implementato il candidato P5: pagina Owner, selezione di master M27 registrati, sessioni/catalogo e versione di riferimento esatti; job con contesto immutabile e verifica sul PC prima delle copie; stato/cancel espliciti, preview privata, workflow delle 29 azioni, correlazioni runtime e revisione Owner vincolata alla ricevuta. Originale e journal completo restano sul PC. Le identità IMG/VER/WF del pilota sono private e distinte dall’archivio di pubblicazione; nessun caricamento o pubblicazione automatica. SESSION_ASSISTED senza nuove API IA; classificazioni WORKER_REPORTED_NOT_ATTESTED, OWNER_DECLARED e History a monte NOT_ESTABLISHED preservate. Deployment/release e prova scientifica reale HTTP/UI → PixInsight → consegna/revisione sono ancora gate P5 aperti, non simulati dai test. P6 e acceptance scientifica Owner restano successivi. [Procedura P5](../../project/PIAI-P5-PORTAL-2026-10-05.md).

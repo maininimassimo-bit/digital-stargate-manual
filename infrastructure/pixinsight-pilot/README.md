@@ -1,4 +1,14 @@
-# P4 — authenticated queue and approved cloud activation
+# P4/P5 — authenticated queue and scientific portal
+
+Current status: P4 Owner login and bounded administrative native transport are proven.
+P5 portal/delivery is an implemented candidate awaiting exact-head release,
+reviewed-image deployment and real Owner scientific HTTP/UI/native OAT.
+The proposal/P4-specific text below remains historical. P5 adds private preview,
+runtime workflow/correlations and immutable scientific context in existing private buckets;
+original XISF and full journal stay on the PC. No automatic native launch/publication.
+See [P5 procedure](../../docs/project/PIAI-P5-PORTAL-2026-10-05.md).
+
+# P4 â€” authenticated queue and approved cloud activation
 
 Current 2026-10-05 state: Owner-approved resources/credential provisioned and
 reviewed image deployed. Real PC HTTPS and bounded HTTP denial checks PASS;

@@ -2,7 +2,7 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 8.2 |
+| Versione | 8.3 |
 | Baseline | 05/10/2026 |
 | Stato | Current root bootstrap — BKL-043 F4 lifecycle pending; BKL-049 archive closed; PixInsight AI extension pilot; S10 unavailable |
 
@@ -66,3 +66,8 @@ Exact-head CI → ARB → Release Quality sullo stesso SHA → expected-head mer
 
 ## 7. Punto di ripresa
 Riprendere dall’handover del 5 ottobre v1.6 e dal runbook PIAI-P4-CLOUD-ACTIVATION-2026-10-05.md v1.1. P1–P3 e candidato P4 consegnati #479–#482; attivazione #483 post-merge verificata. P4 Owner HTTP sintetico, non-Owner negato, IAM/restore, restart/lost-ack, CAS GCS concorrente amministrativo e trasporto nativo amministrativo M27 verificati. P4 acceptance operativa resta aperta e concorrenza HTTP Owner soltanto sintetica; P5 comando scientifico/sessioni/provenance e P6 sono successivi. SESSION_ASSISTED senza nuove API IA; M27 pubblicata invariata, BKL-043 conserva i propri gate, nessuna authority dispositivi/Safety. Consegna CI/review e Pages della riconciliazione attuale da tracciare sulla PR.
+
+
+## Aggiornamento P5 — portale scientifico privato (2026-10-05)
+
+Implementato il candidato P5: pagina Owner, selezione di master M27 registrati, sessioni/catalogo e versione di riferimento esatti; job con contesto immutabile e verifica sul PC prima delle copie; stato/cancel espliciti, preview privata, workflow delle 29 azioni, correlazioni runtime e revisione Owner vincolata alla ricevuta. Originale e journal completo restano sul PC. Le identità IMG/VER/WF del pilota sono private e distinte dall’archivio di pubblicazione; nessun caricamento o pubblicazione automatica. SESSION_ASSISTED senza nuove API IA; classificazioni WORKER_REPORTED_NOT_ATTESTED, OWNER_DECLARED e History a monte NOT_ESTABLISHED preservate. Deployment/release e prova scientifica reale HTTP/UI → PixInsight → consegna/revisione sono ancora gate P5 aperti, non simulati dai test. P6 e acceptance scientifica Owner restano successivi. [Procedura P5](docs/project/PIAI-P5-PORTAL-2026-10-05.md).

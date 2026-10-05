@@ -34,10 +34,14 @@ class Transport:
                             urllib.request.HTTPSHandler(context=ssl.create_default_context()))
 
     def post(self, path, value):
-        require(re.fullmatch(r"/v1/worker/(?:claim|PIAI_[a-f0-9]{32}/report)", path), "ROUTE_INVALID")
-        raw = encode(value)
-        require(len(raw) <= 16384, "REQUEST_SIZE")
-        req = urllib.request.Request(self.origin + path, raw, method="POST",
+        return self.request(path, value)
+
+    def request(self, path, value=None):
+        require(re.fullmatch(r"/v1/worker/(?:claim|PIAI_[a-f0-9]{32}/report|science/register|science/PIAI_[a-f0-9]{32}/(?:context|result))", path), "ROUTE_INVALID")
+        raw = encode(value) if value is not None else None
+        limit = 9 * 1024 * 1024 if path.endswith('/result') else 16384
+        require(raw is None or len(raw) <= limit, "REQUEST_SIZE")
+        req = urllib.request.Request(self.origin + path, raw, method="POST" if raw is not None else "GET",
                 headers={"Authorization": "Bearer " + self.token, "Content-Type": "application/json"})
         try:
             with self.opener.open(req, timeout=30) as response:
@@ -153,6 +157,12 @@ class SessionWorker:
                 if not request or request.get("recipe") != envelope["recipe"]:
                     self._report(binding, remote, "RECOVERY_REQUIRED")
                     return {"state": "RECOVERY_REQUIRED", "jobId": binding["jobId"]}
+                if remote.get("scientificContextSha256"):
+                    from tools.pixinsight.local_pilot.scientific_delivery import registry_digest
+                    context = self.transport.request("/v1/worker/science/" + binding["jobId"] + "/context")
+                    import hashlib
+                    require(hashlib.sha256(encode(context)).hexdigest() == remote["scientificContextSha256"] and
+                            context["input"]["manifestSha256"] == registry_digest(request), "SCIENTIFIC_INPUT_BINDING")
                 folder = self.directory / binding["jobId"]
                 require(not (folder / "preparing.json").exists(), "AMBIGUOUS_PREPARATION")
                 require(remote["state"] in {"RESERVED", "PREPARING"}, "ADVANCED_CLAIM_WITHOUT_PREPARATION")

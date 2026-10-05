@@ -6,6 +6,8 @@ from http.server import BaseHTTPRequestHandler
 
 from tools.pixinsight.local_pilot.broker import ProtocolError, decode, encode, require, opaque
 from tools.scientific_registry.ingestion_storage import Conflict
+from tools.scientific_registry.photo_ingestion import IngestionError
+from tools.pixinsight.workflow_archive.archive import ArchiveError
 
 
 class AuthError(ValueError):
@@ -23,16 +25,16 @@ def google_owner(token, client_id, owner_email):
         raise AuthError() from None
 
 
-def handler_for(broker, authenticate_owner, portal_origin, worker_digest):
+def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scientific=None):
     require(re.fullmatch(r"[a-f0-9]{64}", worker_digest) is not None, "WORKER_DIGEST_INVALID")
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *_):
             pass
 
-        def send(self, code, value):
-            raw = encode(value)
+        def send(self, code, value, media="application/json"):
+            raw = value if isinstance(value, bytes) else encode(value)
             self.send_response(code)
-            for name, value in (("Content-Type", "application/json"), ("Content-Length", str(len(raw))),
+            for name, value in (("Content-Type", media), ("Content-Length", str(len(raw))),
                                 ("Cache-Control", "no-store"), ("X-Content-Type-Options", "nosniff")):
                 self.send_header(name, value)
             if self.headers.get("Origin") == portal_origin:
@@ -58,10 +60,10 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest):
                     raise AuthError()
                 authenticate_owner(token)
 
-        def body(self):
+        def body(self, limit=16384):
             require(len(self.headers.get_all("Content-Length", [])) == 1 and not self.headers.get("Transfer-Encoding"), "BODY_SIZE")
             value = self.headers.get("Content-Length", "")
-            require(re.fullmatch(r"[0-9]{1,5}", value) is not None and 0 < int(value) <= 16384, "BODY_SIZE")
+            require(re.fullmatch(r"[0-9]{1,8}", value) is not None and 0 < int(value) <= limit, "BODY_SIZE")
             require(self.headers.get("Content-Type") == "application/json", "CONTENT_TYPE")
             self.connection.settimeout(20)
             raw = self.rfile.read(int(value))
@@ -84,6 +86,29 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest):
                 return self.send(200, {"protocol": "DSG_PIAI_QUEUE_V1", "aiMode": "SESSION_ASSISTED", "providerRequests": 0})
             worker = path.startswith("/v1/worker/")
             self.authenticate(worker)
+            if scientific:
+                if self.command == "GET" and path == "/v1/science/options":
+                    return self.send(200, scientific.options())
+                if self.command == "GET" and path == "/v1/science/jobs":
+                    return self.send(200, {"jobs": scientific.jobs()})
+                if self.command == "POST" and path == "/v1/science/jobs":
+                    return self.send(200, scientific.create(self.body()))
+                if self.command == "POST" and path == "/v1/worker/science/register":
+                    return self.send(200, scientific.register(self.body()))
+                match = re.fullmatch(r"/v1/(worker/)?science/(PIAI_[a-f0-9]{32})/(context|result|preview|workflow|correlations|decision)", path)
+                if match:
+                    worker_route, job_id, action = match.groups()
+                    if worker_route and self.command == "GET" and action == "context":
+                        return self.send(200, scientific.context(job_id))
+                    if worker_route and self.command == "POST" and action == "result":
+                        result = scientific.deliver(job_id, self.body(9 * 1024 * 1024))
+                        return self.send(200, {"jobId": job_id, "reviewSha256": result["reviewSha256"], "publication": "NONE"})
+                    if not worker_route and self.command == "GET" and action == "result":
+                        return self.send(200, scientific.result(job_id))
+                    if not worker_route and self.command == "GET" and action in {"preview", "workflow", "correlations"}:
+                        return self.send(200, scientific.asset(job_id, action), "image/jpeg" if action == "preview" else "application/json" if action == "correlations" else "text/plain; charset=utf-8")
+                    if not worker_route and self.command == "POST" and action == "decision":
+                        return self.send(200, scientific.decide(job_id, self.body()))
             if self.command == "POST" and path == "/v1/jobs":
                 return self.send(200, broker.create(self.body()))
             match = re.fullmatch(r"/v1/jobs/(PIAI_[a-f0-9]{32})(/cancel)?", path)
@@ -110,7 +135,7 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest):
                 self.dispatch()
             except AuthError:
                 self.send(403, {"error": "ACCESS_DENIED"})
-            except ProtocolError as error:
+            except (ProtocolError, IngestionError, ArchiveError) as error:
                 self.send(400, {"error": str(error)})
             except Conflict:
                 self.send(409, {"error": "CONFLICT_RETRY_IDENTICAL"})

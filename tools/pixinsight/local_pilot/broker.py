@@ -92,7 +92,7 @@ class Broker:
                 value["report"].pop("leaseToken", None)
         return value
 
-    def create(self, request):
+    def create(self, request, scientific_context_sha=None):
         require(isinstance(request, dict) and set(request) == {"schemaVersion", "requestId", "inputRef", "recipe", "aiMode"}, "REQUEST_FIELDS")
         require(request["schemaVersion"] == "1.0" and opaque(request["requestId"]) and opaque(request["inputRef"]), "REQUEST_IDENTITY")
         require(request["recipe"] in {RECIPE, NONLINEAR_RECIPE} and request["aiMode"] == "SESSION_ASSISTED", "RECIPE_OR_AI_MODE")
@@ -100,11 +100,15 @@ class Broker:
             for item in state["jobs"]:
                 if item["request"]["requestId"] == request["requestId"]:
                     require(item["request"] == request, "IDEMPOTENCY_CONFLICT")
+                    require(item.get("scientificContextSha256") == scientific_context_sha, "IDEMPOTENCY_CONTEXT_CONFLICT")
                     return self._view(item)
             require(len(state["jobs"]) < 16, "QUEUE_CAPACITY")
             item = {"jobId": "PIAI_" + request["requestId"], "request": copy.deepcopy(request),
                     "state": "QUEUED", "cancelRequested": False, "sequence": 0,
                     "report": None, "createdAt": now, "updatedAt": now}
+            if scientific_context_sha is not None:
+                require(isinstance(scientific_context_sha, str) and re.fullmatch(r"[a-f0-9]{64}", scientific_context_sha), "CONTEXT_DIGEST")
+                item["scientificContextSha256"] = scientific_context_sha
             state["jobs"].append(item)
             return self._view(item)
         return self._mutate(operation)
