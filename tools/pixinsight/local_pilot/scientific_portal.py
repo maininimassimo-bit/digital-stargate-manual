@@ -25,23 +25,18 @@ class ScientificPortal:
         require(opaque(value["inputRef"]) and value["target"] == "M27" and value["recipe"] == NONLINEAR_RECIPE and
                 isinstance(value["manifestSha256"], str) and re.fullmatch(r"[a-f0-9]{64}", value["manifestSha256"]), "INPUT_INVALID")
         immutable(self.store, "science/inputs/" + value["inputRef"], encode(value))
-        # Fixed bounded input index; immutable identities cannot be silently rebound.
-        for _ in range(8):
-            raw, generation = self.store.get("science/input-index")
-            index = decode(raw) if raw else []
-            if value["inputRef"] in index:
-                return value
-            require(len(index) < 8, "INPUT_CAPACITY")
-            try:
-                self.store.put("science/input-index", encode(index + [value["inputRef"]]), generation)
-                return value
-            except Conflict:
-                continue
-        raise Conflict("INPUT_BUSY")
+        # Reuse the only mutable object authorized by the existing P4 IAM.
+        def operation(state, _now):
+            index = state.setdefault("scientificInputs", [])
+            if value["inputRef"] not in index:
+                require(len(index) < 8, "INPUT_CAPACITY")
+                index.append(value["inputRef"])
+            return value
+        return self.broker._mutate(operation)
 
     def options(self):
-        raw, _ = self.store.get("science/input-index")
-        inputs = [decode(self.store.get("science/inputs/" + ref)[0]) for ref in (decode(raw) if raw else [])]
+        state, _ = self.broker._state()
+        inputs = [decode(self.store.get("science/inputs/" + ref)[0]) for ref in state.get("scientificInputs", [])]
         catalog = self.catalog_loader()
         parsed = decode(catalog)
         require(parsed.get("schemaVersion") == "1.5" and parsed.get("catalogStatus") == "VERSIONED_ANALYTICS_PROJECTION", "CATALOG_PROFILE")
@@ -137,6 +132,11 @@ class ScientificPortal:
                 len(correlations["instances"]) == 29 and
                 [i.get("ordinal") for i in correlations["instances"]] == list(range(1,30)) and
                 [i.get("variable") for i in correlations["instances"]] == root["children"], "CORRELATIONS_BINDING")
+        # Dependencies are local view identifiers or manifest-bound master roles.
+        for row in correlations["instances"] + correlations.get("runtimeRelations", []):
+            require(isinstance(row, dict) and all(isinstance(dep, str) and
+                    re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", dep) and not re.fullmatch(r"[a-f0-9]{64}", dep)
+                    for dep in row.get("dependencies", [])), "CORRELATIONS_PRIVACY")
         receipt = {"jobId": job_id, "context": context, "original": original,
                    "imageId": selection["parent"]["imageId"] if selection["parent"] else "IMG-" + job_id[5:],
                    "imageVersionId": "VER-" + job_id[5:], "workflowId": "WF-" + job_id[5:],

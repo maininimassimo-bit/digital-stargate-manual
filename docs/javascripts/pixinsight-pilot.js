@@ -38,8 +38,8 @@
           if(response.status===403){token='';throw new Error('Accedi di nuovo. La richiesta conservata resta disponibile.');}
           const code=(await response.json()).error;
           if(code==='RESULT_PENDING')throw new Error('Il PC non ha ancora consegnato anteprima e workflow.');
-          if(code==='CATALOG_CHANGED_REFRESH')throw new Error('Il catalogo è cambiato. Conserva la richiesta e aggiorna le sessioni prima di un nuovo invio.');
-          throw new Error('Operazione non completata. Ripeti la stessa richiesta; non avviare un secondo job.');
+          const error=new Error('Operazione non completata. Ripeti la stessa richiesta; non avviare un secondo job.');
+          error.status=response.status;error.code=code;throw error;
         }
         return binary?response.blob():response.json();
       } finally {clearTimeout(timer);}
@@ -94,7 +94,21 @@
       message(options.inputs.length?'Accesso Owner verificato. Seleziona le sessioni e prepara la richiesta.':'Accesso Owner verificato. L’assistente deve registrare i master verificati sul PC.');
     }
     async function submitFrozen() {
-      const job=await call('/v1/science/jobs',frozen);
+      let job;
+      try {job=await call('/v1/science/jobs',frozen);}
+      catch(error) {
+        if(error.status===400) {
+          let absent=false;
+          try {await call(`/v1/jobs/PIAI_${frozen.requestId}`);}
+          catch(check) {absent=check.status===400 && check.code==='JOB_NOT_FOUND';}
+          if(absent) {
+            sessionStorage.removeItem(KEY);frozen=null;await loadOptions();
+            message('Richiesta rifiutata e assenza del job verificata. Catalogo e riferimenti aggiornati: seleziona nuovamente i dati e invia.');
+            return;
+          }
+        }
+        throw error;
+      }
       if(job.jobId!==`PIAI_${frozen.requestId}`)throw new Error('Identità della risposta non valida. Conserva la richiesta.');
       sessionStorage.removeItem(KEY);frozen=null;await refresh();message('Richiesta scientifica conservata. L’assistente può prepararla sul PC e avviare PixInsight sotto supervisione.');
     }

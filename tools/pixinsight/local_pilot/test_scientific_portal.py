@@ -64,6 +64,29 @@ class ScientificTests(unittest.TestCase):
         self.assertEqual(self.portal.options()['inputs'],[self.input])
         self.assertEqual(len(self.portal.options()['sessions']),1)
 
+    def test_second_registration_reuses_only_authorized_mutable_state(self):
+        from .broker import STATE_KEY
+        original_put = self.store.put
+        def guarded_put(key, raw, generation=0):
+            if generation != 0 and key != STATE_KEY:
+                raise PermissionError("immutable object overwrite forbidden")
+            return original_put(key, raw, generation)
+        self.store.put = guarded_put
+        second = {**self.input, "inputRef": "9"*32}
+        self.portal.register(second)
+        self.portal.register(second)
+        self.assertEqual(self.portal.options()["inputs"], [self.input, second])
+        self.assertFalse(self.store.exists("science/input-index"))
+
+    def test_cloud_correlations_replace_master_hashes_with_roles(self):
+        from .scientific_delivery import minimized_correlations
+        raw = encode({"instances": [{"dependencies": ["a"*64, "RGB"]}],
+                      "runtimeRelations": [{"dependencies": ["a"*64]}]})
+        result = minimized_correlations(raw, {"inputs": [{"role": "R", "sha256": "a"*64}]})
+        self.assertNotIn(b"a"*64, result)
+        self.assertEqual(decode(result)["instances"][0]["dependencies"], ["MASTER_R", "RGB"])
+        self.assertIn(b"a"*64, raw)
+
     def test_selection_pins_sessions_parent_and_recipe(self):
         created = self.portal.create(self.request)
         context = self.portal.context(created['jobId'])

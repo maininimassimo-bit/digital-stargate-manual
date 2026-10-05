@@ -20,6 +20,24 @@ def registry_digest(request):
     return digest(encode(value))
 
 
+def minimized_correlations(raw, manifest):
+    """Preserve the graph using manifest-bound roles, never individual master hashes."""
+    value = decode(raw)
+    roles = {row["sha256"]: "MASTER_" + row["role"] for row in manifest["inputs"]}
+    def minimize(item):
+        if isinstance(item, dict):
+            return {key: minimize(child) for key, child in item.items()}
+        if isinstance(item, list):
+            return [minimize(child) for child in item]
+        if isinstance(item, str) and item in roles:
+            return roles[item]
+        return item
+    value = minimize(value)
+    value["scope"] = "MINIMIZED_RUNTIME_RECIPE_CORRELATIONS"
+    value["masterDependencies"] = "ROLE_REFERENCES_MANIFEST_BOUND"
+    return encode(value)
+
+
 def preview_bytes(path):
     from PIL import Image
     from .quality import inspect_pixels
@@ -87,7 +105,7 @@ def deliver(config, transport, job_id):
                "original": {"sha256": worker.digest(final), "byteSize": final.stat().st_size,
                             "width": header["width"], "height": header["height"], "nonLinear": True},
                "previewBase64": base64.b64encode(preview).decode(), "workflowBase64": base64.b64encode(workflow).decode(),
-               "correlationsBase64": base64.b64encode((job / "runtime-correlations.json").read_bytes()).decode()}
+               "correlationsBase64": base64.b64encode(minimized_correlations((job / "runtime-correlations.json").read_bytes(), manifest)).decode()}
     result = transport.post("/v1/worker/science/" + job_id + "/result", payload)
     require(result["jobId"] == job_id and result["publication"] == "NONE", "RESULT_ACK")
     receipt = job / "p5-delivery.json"
