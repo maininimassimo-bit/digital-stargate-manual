@@ -62,7 +62,7 @@ class ScientificTests(unittest.TestCase):
         with self.assertRaises(Conflict):self.portal.register({**self.input,'manifestSha256':'0'*64})
         with self.assertRaises(ProtocolError):self.portal.register({**self.input,'path':'private'})
         self.assertEqual(self.portal.options()['inputs'],[self.input])
-        self.assertEqual(len(self.portal.options()['sessions']),1)
+        self.assertEqual(len(self.portal.options()['sessions']),2)
 
     def test_second_registration_reuses_only_authorized_mutable_state(self):
         from .broker import STATE_KEY
@@ -100,14 +100,14 @@ class ScientificTests(unittest.TestCase):
         self.assertEqual(context["input"]["target"], "M27")
         self.assertEqual(context["selection"]["parent"], self.request["parent"])
 
-    def test_catalog_selection_keeps_all_spaced_m27_sessions_and_excludes_other_targets(self):
+    def test_catalog_exposes_all_targets_and_selection_keeps_all_spaced_m27_sessions(self):
         catalog = decode(self.catalog)
         selected = [{"sessionId": f"SESSION-M27-{i}", "target": "M 27", "observationDate": "2026-09-01"}
                     for i in range(1, 17)]
         catalog["sessions"] = selected + [catalog["sessions"][1]]
         self.catalog = encode(catalog)
         expected = [row["sessionId"] for row in selected]
-        self.assertEqual([s["sessionId"] for s in self.portal.options()["sessions"]], expected)
+        self.assertEqual([s["sessionId"] for s in self.portal.options()["sessions"]], expected + ["SESSION-M42-1"])
         self.request["catalogSha256"] = digest(self.catalog)
         self.request["sessionIds"] = expected
         self.request["parent"] = None

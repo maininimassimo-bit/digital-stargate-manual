@@ -2,7 +2,7 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 1.3 |
+| Versione | 1.4 |
 | Stato | Technical M27 Owner HTTP/UI/native/private-delivery OAT PASS; Owner private result accepted |
 | Data | 2026-10-05 |
 | Perimetro | BKL-049-EXT-PIAI P5; M27, Owner PC, SESSION_ASSISTED |
@@ -71,3 +71,29 @@ P5 è tecnicamente completata nel perimetro M27 del pilota: richiesta reale dall
 La correzione dei soli alias `M27` e `M 27` è consegnata con PR #487: head revisionato `912d433345db0dc053f9e70466c1f2a340b23032`, 9/9 check exact-head, ARB e RQ AI-assistite separate e sequenziali senza finding; merge `85fea6c2955471427a50d93adf01aef2b4808350`, 10/10 check post-merge inclusa Pages effettiva SUCCESS. Cloud Build `60d5ab2b-a855-4da0-ac29-bb2e73d00835` SUCCESS con 80 test; revisione `dsg-pixinsight-pilot-p5-target-01`, digest `sha256:c6a4c7ead3035d896afda66b3f3580473418cb19f9ec92478f7cfb2ecbe9f993`, traffico 100%. Fonte e identità scientifiche originali conservate; nessuna nuova risorsa, credenziale o estensione IAM.
 
 L'Owner ha accettato il risultato privato: `ACCEPT_PRIVATE` osservato nella pagina autenticata dopo la conferma umana del 5 ottobre. Nessun pulsante di accettazione/rifiuto è stato premuto dall'assistente e nessuna pubblicazione è avvenuta. Le sessioni restano `OWNER_DECLARED`, l'evidenza di esecuzione `WORKER_REPORTED_NOT_ATTESTED`, il workflow `RUNTIME_RECIPE_ONLY` e la History a monte `NOT_ESTABLISHED`. L'Owner conferma che entrambi i pulsanti workflow e collegamenti/ricevuta funzionano e salvano i file nella cartella Download (`PASS_OWNER_REPORTED_DOWNLOADS_FOLDER`). È una conferma umana del trasferimento browser → file locale, distinta dalla precedente verifica amministrativa degli asset e senza confronto indipendente degli hash dei file scaricati. La catena tecnica P5 richiesta → nativo → consegna privata → anteprima/workflow è provata. Dopo il ricaricamento della pagina, riaprire «Apri anteprima e workflow» nella sezione Stato delle elaborazioni per riabilitare i download. P6 deve completare acceptance operativa, casi errore/annullamento/offline/crash recovery e rollback secondo il piano, senza confondere i test sintetici con prove reali. SESSION_ASSISTED, zero nuove chiamate API IA; originali e journal completo sul PC. Le precedenti sezioni P5 pending sono snapshot storici superati da questo aggiornamento. La presente riconciliazione documentale conserva i propri gate CI → ARB → RQ → merge → Pages, registrati nella PR di consegna. [Procedura P5](PIAI-P5-PORTAL-2026-10-05.md), [evidenza minimizzata](evidence/BKL-049-PIAI-P5-2026-10-05.json).
+
+
+## P5b — cartella dei master e prompt (candidato del 5 ottobre 2026)
+
+Incremento autorizzato dall’Owner dopo l’accettazione privata P5 e la conferma dei download. Il modulo aggiunge cartella locale assoluta e prompt, richiesta privata di pianificazione, verifica esplicita sul PC, proposta immutabile e conferma Owner dell’esatto piano prima della coda PixInsight. Nessun job alla sola ricezione del prompt; nessuna lettura automatica del disco o esecuzione di testo/script dal browser. SESSION_ASSISTED: questa sessione interpreta il prompt e propone ricetta, parametri ammessi di fondo, dettaglio, rumore, contrasto e stretch, motivazione e limiti; nessuna nuova API IA, risorsa, credenziale o espansione IAM. Il perimetro richiesto include altri oggetti importati, LRGB, OSC, SHO/HOO e mosaici da pannelli. Il candidato comprende inventario e selezione esplicita; le nuove ricette per campo singolo richiedono parametri di campo verificati. OSC CFA e assemblaggio mosaici restano bloccati fino a implementazione e collaudo nativo. [Stato e procedura](PIAI-P5B-SOURCE-PROFILES-2026-10-05.md). Nessuna estensione è ancora pubblicata o dichiarata accettata.
+
+Il piano conserva ruoli R/G/B/L, dimensioni, selezione esplicita dell’immagine nei contenitori, impronta del manifest e sequenza dei 29 processi. Cartella, prompt e piano sono dati privati Owner; master/hash individuali e diagnostica locale restano sul PC. Il worker confronta cartella, piano e manifest prima delle copie. Aggiornamenti di catalogo o riferimenti conflittuali fermano l’approvazione; retry identici non duplicano richieste/job. I vecchi risultati P5 rimangono accessibili e invariati. Il candidato richiede CI sull’head esatto, ARB/RQ sequenziali, merge, deployment API/Pages e prova Owner della nuova procedura; non è ancora dichiarato disponibile nel portale pubblico. P6 e acceptance operativa restano aperti.
+
+
+### Procedura P5b del candidato cartella/prompt
+
+1. Owner accede, indica una cartella locale assoluta (per esempio un percorso su F:), scrive il prompt e seleziona le sessioni importate dello stesso oggetto e l’eventuale versione pubblicata di riferimento. «Invia cartella e prompt» conserva soltanto una richiesta privata di pianificazione.
+2. Owner scrive nella chat «richiesta inviata». L’assistente della sessione legge le richieste con il trasporto worker esistente, verifica la cartella non ricorsivamente e identifica R/G/B/L. Per nomi ambigui o contenitori multi-image produce una mappatura locale esplicita di filename/imageIndex, senza scegliere tacitamente. Le intestazioni sono limitate a 1 MiB; niente XML DTD/entity, immagini colore o campioni diversi da Gray Float32. Metadati/digest non certificano la linearità: verifica nativa e valutazione del campo restano necessarie.
+3. L’assistente interpreta il prompt senza provider/API nuovi. Scrive una proposta JSON con ricetta M27, fondo, sette parametri ammessi di dettaglio/rumore/contrasto/stretch, motivazione e limiti. I parametri delle altre azioni, inclusa calibrazione/curve colore, restano espliciti default M27: non dichiarare di avere eseguito una richiesta che richiede modifiche non ammesse.
+4. Dopo la verifica, registra sul PC il manifest e invia una proposta immutabile. La pagina mostra ruoli/dimensioni/indice, motivazione, parametri e 29 processi. «Conferma piano e richiedi elaborazione» crea il job soltanto per l’esatto hash del piano. Il prompt e l’hash del piano vengono conservati nella ricevuta del risultato. Catalogo modificato prima della conferma: fermare e ricreare la selezione, senza adottare tacitamente nuovi dati.
+5. L’assistente avvia il ciclo worker esplicito e la procedura nativa supervisionata già approvata. Nessun monitor, daemon, esecutore arbitrario o nuova API IA. Il worker riconfronta cartella, parametri e digest del manifest prima delle copie. Download e accettazione privata seguono la procedura P5 esistente; nessuna pubblicazione.
+
+Comandi locali per l’assistente, usando la configurazione privata e la stessa credenziale DPAPI nel solo ambiente del processo:
+
+```text
+python -m tools.pixinsight.local_pilot.intake_assistant list --config <private-config.json> --output <new-private-intakes.json>
+python -m tools.pixinsight.local_pilot.intake_assistant inspect --config <private-config.json> --request-id <opaque-id> --mapping <private-role-map.json> --output <new-private-inspection.json>
+python -m tools.pixinsight.local_pilot.intake_assistant propose --config <private-config.json> --request-id <opaque-id> --mapping <private-role-map.json> --plan <private-plan.json> --output <new-private-plan-ack.json>
+```
+
+`--mapping` è facoltativo solo quando i nomi distinguono esattamente i quattro ruoli e ogni contenitore contiene una sola immagine. Output e backup sono privati e creati senza sovrascrittura. La configurazione è aggiornata atomicamente con backup e lock esclusivo; un lock/pending rimasto dopo crash richiede verifica dell’assistente, non cancellazione automatica. Retry conserva lo stesso input/piano. Limiti ereditati/espliciti: 8 gruppi master, 16 richieste di piano e 16 job; nessuna scadenza o riassegnazione.

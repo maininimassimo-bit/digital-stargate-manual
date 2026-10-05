@@ -17,13 +17,23 @@ def registry_digest(request):
     # Exclude paths/job IDs; include exact master hashes, image selection and recipe.
     value = {"recipe": request["recipe"], "background": request["background"],
              "inputs": [{k: v for k, v in row.items() if k != "path"} for row in request["inputs"]]}
+    if "processing" in request:
+        value["processing"] = request["processing"]
+    if "field" in request:
+        value["field"] = request["field"]
+    if 'preparationTrace' in request:
+        value['preparationTrace']=request['preparationTrace']
     return digest(encode(value))
 
 
 def minimized_correlations(raw, manifest):
     """Preserve the graph using manifest-bound roles, never individual master hashes."""
     value = decode(raw)
-    roles = {row["sha256"]: "MASTER_" + row["role"] for row in manifest["inputs"]}
+    roles = {row["sha256"]: ("PREPARED_" if 'preparationTrace' in manifest else "MASTER_") + row["role"] for row in manifest["inputs"]}
+    if 'preparationTrace' in manifest:
+        root=Path(manifest['workerRoot']);prep=root/('PREP_'+manifest['preparationTrace']['requestId'])
+        sources=decode((prep/'manifest.json').read_bytes())['inputs']
+        roles.update({row['sha256']:'MASTER_'+row['role']+'_'+row['panelId'].replace('-','_') for row in sources})
     def minimize(item):
         if isinstance(item, dict):
             return {key: minimize(child) for key, child in item.items()}
@@ -64,13 +74,23 @@ def preview_bytes(path):
 
 def register(config, transport):
     rows = []
+    intakes=None
     for ref, request in config["registry"].items():
-        if request["recipe"] != worker.NONLINEAR_RECIPE:
+        if request["recipe"] not in worker.NONLINEAR_RECIPES:
             continue
         worker.validate({**request, "jobId": "P5Registration"})
-        rows.append(transport.post("/v1/worker/science/register", {"inputRef": ref, "target": "M27",
-            "recipe": request["recipe"], "manifestSha256": registry_digest(request)}))
-    require(rows, "NO_M27_REGISTERED_INPUT")
+        value={"inputRef": ref, "target": request.get("field", {}).get("target", "M27"),
+            "recipe": request["recipe"], "manifestSha256": registry_digest(request)}
+        if 'preparationTrace' in request:
+            from .preparation_bridge import verify_trace
+            trace=verify_trace(config['workerRoot'],request)
+            if intakes is None:intakes=transport.request('/v1/worker/science/intakes')['intakes']
+            matches=[i for i in intakes if i['selection']['requestId']==trace['requestId']]
+            require(len(matches)==1 and matches[0]['preparationApproved'] is True and matches[0].get('preparationResult') and
+                    all(trace[k]==matches[0]['preparationResult'][k] for k in trace if k!='requestId'),'REGISTER_PREPARATION_BINDING')
+            value['preparation']={'requestId':trace['requestId'],'resultSha256':matches[0]['preparationResultSha256']}
+        rows.append(transport.post('/v1/worker/science/register',value))
+    require(rows, "NO_REGISTERED_NONLINEAR_INPUT")
     return {"registeredInputs": len(rows)}
 
 
@@ -87,9 +107,15 @@ def deliver(config, transport, job_id):
     manifest = decode((job / "manifest.json").read_bytes())
     projected = {"recipe": manifest["recipe"], "background": manifest["background"],
                  "inputs": [{k: row[k] for k in ("role", "sha256", "imageIndex", "width", "height")} for row in manifest["inputs"]]}
+    if "processing" in manifest:
+        projected["processing"] = manifest["processing"]
+    if 'field' in manifest:
+        projected['field'] = manifest['field']
+    if 'preparationTrace' in manifest:
+        projected['preparationTrace']=manifest['preparationTrace']
     require(digest(encode(projected)) == context["input"]["manifestSha256"], "MANIFEST_BINDING")
     verification = worker.collect(root, job_id)  # Reverify originals, copies, journal, outputs and all final pixels.
-    require(verification["status"] == "COMPLETED" and verification["processCount"] == 29, "VERIFIED_COMPLETION_REQUIRED")
+    require(verification["status"] == "COMPLETED" and verification["processCount"] == len(worker.actions(manifest['recipe'])), "VERIFIED_COMPLETION_REQUIRED")
     final = job / "outputs" / "LRGB-nonlinear.xisf"
     workflow = (job / "workflow.js").read_bytes()
     require(digest(workflow) == verification["workflowSha256"], "WORKFLOW_INTEGRITY")
@@ -123,7 +149,7 @@ def main():
     parser.add_argument("--job")
     args = parser.parse_args()
     try:
-        require(args.config.stat().st_size <= 16384, "CONFIG_SIZE")
+        require(args.config.stat().st_size <= 65536, "CONFIG_SIZE")
         config = decode(args.config.read_bytes())
         require(set(config) == {"serviceOrigin", "workerId", "workerRoot", "registry"}, "CONFIG_FIELDS")
         transport = Transport(config["serviceOrigin"], os.environ.get("DSG_PIAI_WORKER_TOKEN", ""))

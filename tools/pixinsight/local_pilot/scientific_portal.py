@@ -5,7 +5,8 @@ import hashlib
 import re
 
 from .broker import decode, encode, require, opaque
-from .worker import NONLINEAR_RECIPE, actions
+from .worker import NONLINEAR_RECIPE, NONLINEAR_RECIPES, RECIPE_MODES, actions
+from .intake import IntakeMixin
 from tools.scientific_registry.ingestion_storage import immutable, Conflict
 from tools.scientific_registry.photo_ingestion import build_review
 from tools.scientific_registry.ingestion_security import sanitize_preview
@@ -20,15 +21,40 @@ def is_m27(value):
     return value in ("M27", "M 27")
 
 
-class ScientificPortal:
+def same_target(left, right):
+    def identity(value):
+        if isinstance(value, str) and re.fullmatch(r'(M|NGC|IC) *[0-9]+', value):
+            return value.replace(' ', '')
+        return value
+    return identity(left) == identity(right)
+
+
+def known_target(value):
+    return isinstance(value,str) and bool(value.strip()) and value.strip().upper() not in {'UNKNOWN','UNSPECIFIED','N/A'}
+
+
+class ScientificPortal(IntakeMixin):
     def __init__(self, broker, catalog_loader, gallery_loader):
         self.broker, self.store = broker, broker.store
         self.catalog_loader, self.gallery_loader = catalog_loader, gallery_loader
 
     def register(self, value):
-        require(isinstance(value, dict) and set(value) == {"inputRef", "target", "recipe", "manifestSha256"}, "INPUT_FIELDS")
-        require(opaque(value["inputRef"]) and value["target"] == "M27" and value["recipe"] == NONLINEAR_RECIPE and
+        fields={"inputRef", "target", "recipe", "manifestSha256"}
+        require(isinstance(value, dict) and set(value) in (fields,fields|{'preparation'}), "INPUT_FIELDS")
+        require(opaque(value["inputRef"]) and known_target(value['target']) and len(value['target'].strip()) <= 160 and
+                value["recipe"] in NONLINEAR_RECIPES and
                 isinstance(value["manifestSha256"], str) and re.fullmatch(r"[a-f0-9]{64}", value["manifestSha256"]), "INPUT_INVALID")
+        if value['recipe'] == NONLINEAR_RECIPE:
+            require(is_m27(value['target']), 'M27_RECIPE_TARGET')
+        else:
+            require(any(same_target(value['target'], s.get('target')) for s in decode(self.catalog_loader())['sessions']),
+                    'TARGET_NOT_IMPORTED')
+        if 'preparation' in value:
+            preparation=value['preparation']
+            require(isinstance(preparation,dict) and set(preparation)=={'requestId','resultSha256'} and opaque(preparation['requestId']),'INPUT_PREPARATION_FIELDS')
+            state=self.preparation_state(preparation['requestId'])
+            require(state['preparationApproved'] and state['preparationResult'] and preparation['resultSha256']==state['preparationResultSha256'] and
+                    same_target(value['target'],self.intake(preparation['requestId'])['target']),'INPUT_PREPARATION_BINDING')
         immutable(self.store, "science/inputs/" + value["inputRef"], encode(value))
         # Reuse the only mutable object authorized by the existing P4 IAM.
         def operation(state, _now):
@@ -48,18 +74,26 @@ class ScientificPortal:
         gallery = self.gallery_loader()
         return {"inputs": inputs, "catalogSha256": digest(catalog),
                 "sessions": [{"sessionId": s["sessionId"], "target": s["target"], "observationDate": s.get("observationDate")}
-                             for s in parsed["sessions"] if is_m27(s.get("target"))],
+                             for s in parsed["sessions"] if known_target(s.get('target'))],
                 "images": [{k: row[k] for k in ("imageId", "imageVersionId", "workflowId", "title", "target")}
-                           for row in gallery["records"] if is_m27(row["target"])]}
+                           for row in gallery["records"]]}
 
-    def create(self, value):
+    def create(self, value, intent=None):
         fields = {"requestId", "inputRef", "catalogSha256", "sessionIds", "parent", "title", "processingDate", "associationConfirmed"}
         require(isinstance(value, dict) and set(value) == fields and opaque(value["requestId"]) and opaque(value["inputRef"]), "SCIENTIFIC_FIELDS")
+        if self.store.exists("science/intakes/" + value["requestId"]):
+            require(isinstance(intent, dict) and set(intent) == {"intake", "plan", "proposalSha256"}, "PLAN_APPROVAL_REQUIRED")
+            saved_plan, _ = self.store.get("science/plans/" + value["requestId"])
+            require(saved_plan is not None and intent["plan"] == decode(saved_plan) and
+                    intent["intake"] == self.intake(value["requestId"]) and
+                    intent["proposalSha256"] == digest(saved_plan) and
+                    value["inputRef"] == intent["plan"]["inputRef"], "APPROVED_PLAN_REQUIRED")
         key = "science/contexts/PIAI_" + value["requestId"]
         raw, _ = self.store.get(key)
         if raw:
             context = decode(raw)
             require(context["selection"] == value, "IDEMPOTENCY_CONFLICT")
+            require(context.get("intent") == intent, "IDEMPOTENCY_PLAN_CONFLICT")
         else:
             registered, _ = self.store.get("science/inputs/" + value["inputRef"])
             require(registered is not None, "INPUT_NOT_REGISTERED")
@@ -71,18 +105,25 @@ class ScientificPortal:
                 original_media_type="application/x-xisf", preview_raw=b"\xff\xd8\xff", preview_media_type="image/jpeg",
                 workflow_raw=b"", receipt_id="BKL049-P5-selection", imported_at=self.broker.clock().strftime("%Y-%m-%dT%H:%M:%SZ"),
                 preview_attested=value["associationConfirmed"])
-            require(is_m27(context_review["target"]) and registered["target"] == "M27", "INPUT_TARGET_CONFLICT")
+            require(same_target(context_review['target'], registered['target']), 'INPUT_TARGET_CONFLICT')
+            if registered['recipe'] in RECIPE_MODES:
+                require(intent is not None and intent['plan']['field']['target'] == context_review['target'],
+                        'FIELD_PLAN_APPROVAL_REQUIRED')
+            else:
+                require(is_m27(context_review['target']), 'M27_RECIPE_TARGET')
             parent = value["parent"]
             require(parent is None or (isinstance(parent, dict) and set(parent) == {"imageId", "imageVersionId", "workflowId"}), "PARENT_FIELDS")
             if parent is not None:
                 matches = [r for r in self.gallery_loader()["records"] if all(r.get(k) == v for k, v in parent.items())]
-                require(len(matches) == 1 and is_m27(matches[0]["target"]) and registered["target"] == "M27", "PARENT_NOT_CURRENT")
+                require(len(matches) == 1 and same_target(matches[0]['target'], context_review['target']), 'PARENT_NOT_CURRENT')
             context = {"selection": copy.deepcopy(value), "input": registered, "sessionContext": context_review["sessionContext"],
                        "createdAt": self.broker.clock().strftime("%Y-%m-%dT%H:%M:%SZ"), "associationEvidence": "OWNER_DECLARED"}
+            if intent is not None:
+                context["intent"] = copy.deepcopy(intent)
             immutable(self.store, "science/catalogs/" + digest(catalog), catalog)
             immutable(self.store, key, encode(context))
         envelope = {"schemaVersion": "1.0", "requestId": value["requestId"], "inputRef": value["inputRef"],
-                    "recipe": NONLINEAR_RECIPE, "aiMode": "SESSION_ASSISTED"}
+                    "recipe": context['input']['recipe'], "aiMode": "SESSION_ASSISTED"}
         return self.broker.create(envelope, digest(encode(context)))
 
     def context(self, job_id):
@@ -130,13 +171,29 @@ class ScientificPortal:
         root = instances[archive["root"]]
         require(root["process"] == "ProcessContainer", "RUNTIME_WORKFLOW_REQUIRED")
         steps = [{"ordinal": i + 1, "processId": instances[name]["process"]} for i, name in enumerate(root["children"])]
-        require([s["processId"] for s in steps] == [a[1] for a in actions(NONLINEAR_RECIPE)], "RUNTIME_WORKFLOW_REQUIRED")
+        recipe = context['input']['recipe']
+        expected_processes=[a[1] for a in actions(recipe)]
+        preparation=context.get('intent',{}).get('plan',{}).get('preparation')
+        if preparation:
+            plan=preparation['plan']
+            from .source_profile import MODES
+            panels=list(dict.fromkeys(m['panelId'] for m in plan['masters']))
+            prefix=(['Debayer']*len(panels) if plan['mode']=='OSC_CFA' else [])
+            if plan['layout']=='PANELS':prefix+=['GradientMergeMosaic']*(1 if plan['mode']=='OSC_CFA' else len(MODES[plan['mode']]))
+            require(len(prefix)==plan['nativeProcessCount'],'RUNTIME_PREPARATION_COUNTS')
+            expected_processes=prefix+expected_processes
+        require([s["processId"] for s in steps] == expected_processes, "RUNTIME_WORKFLOW_REQUIRED")
         correlations = decode(assets["correlations"])
-        require(isinstance(correlations, dict) and correlations.get("jobId") == job_id and correlations.get("recipe") == NONLINEAR_RECIPE and
+        require(isinstance(correlations, dict) and correlations.get("jobId") == job_id and correlations.get("recipe") == recipe and
                 correlations.get("upstreamHistoryCompleteness") == "NOT_ESTABLISHED" and isinstance(correlations.get("instances"), list) and
-                len(correlations["instances"]) == 29 and
-                [i.get("ordinal") for i in correlations["instances"]] == list(range(1,30)) and
+                len(correlations["instances"]) == len(steps) and
+                [i.get("ordinal") for i in correlations["instances"]] == list(range(1,len(steps)+1)) and
                 [i.get("variable") for i in correlations["instances"]] == root["children"], "CORRELATIONS_BINDING")
+        if preparation:
+            expected_trace={k:preparation['result'][k] for k in ('preparationPlanSha256','sourceManifestSha256','verificationSha256','nativeInstancesSha256','outputManifestSha256')}
+            expected_trace['requestId']=selection['requestId']
+            require(correlations.get('preparation',{}).get('trace')==expected_trace and
+                    correlations['preparation']['nativeInstanceCount']==plan['nativeProcessCount'],'CORRELATIONS_PREPARATION_BINDING')
         # Dependencies are local view identifiers or manifest-bound master roles.
         for row in correlations["instances"] + correlations.get("runtimeRelations", []):
             require(isinstance(row, dict) and all(isinstance(dep, str) and
@@ -150,6 +207,7 @@ class ScientificPortal:
                    "steps": steps, "executionEvidence": "WORKER_REPORTED_NOT_ATTESTED",
                    "workflowCompleteness": "RUNTIME_RECIPE_ONLY", "upstreamHistoryCompleteness": "NOT_ESTABLISHED",
                    "scientificAcceptance": "OWNER_REVIEW_REQUIRED", "publication": "NONE", "originalLocation": "OWNER_PC"}
+        if preparation:receipt['workflowCompleteness']='RUNTIME_PREPARATION_AND_RECIPE_ONLY'
         receipt["reviewSha256"] = digest(encode(receipt))
         immutable(self.store, "science/assets/" + receipt["previewSha256"], preview)
         immutable(self.store, "science/assets/" + receipt["workflowSha256"], assets["workflow"])

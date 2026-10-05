@@ -8,7 +8,7 @@ import re
 import secrets
 
 from tools.scientific_registry.ingestion_storage import Conflict
-from tools.pixinsight.local_pilot.worker import RECIPE, NONLINEAR_RECIPE
+from tools.pixinsight.local_pilot.worker import RECIPE, NONLINEAR_RECIPE, NONLINEAR_RECIPES, actions, expected_outputs
 
 STATE_KEY = "control/piai-state.json"
 LIMIT = 1024 * 1024
@@ -95,7 +95,7 @@ class Broker:
     def create(self, request, scientific_context_sha=None):
         require(isinstance(request, dict) and set(request) == {"schemaVersion", "requestId", "inputRef", "recipe", "aiMode"}, "REQUEST_FIELDS")
         require(request["schemaVersion"] == "1.0" and opaque(request["requestId"]) and opaque(request["inputRef"]), "REQUEST_IDENTITY")
-        require(request["recipe"] in {RECIPE, NONLINEAR_RECIPE} and request["aiMode"] == "SESSION_ASSISTED", "RECIPE_OR_AI_MODE")
+        require(request["recipe"] in {RECIPE} | NONLINEAR_RECIPES and request["aiMode"] == "SESSION_ASSISTED", "RECIPE_OR_AI_MODE")
         def operation(state, now):
             for item in state["jobs"]:
                 if item["request"]["requestId"] == request["requestId"]:
@@ -176,7 +176,8 @@ class Broker:
             require(stage in TERMINAL or rank[stage] >= rank[item["state"]], "STAGE_REGRESSION")
             previous = item["report"]
             require(previous is None or (request["processCount"] >= previous["processCount"] and request["outputCount"] >= previous["outputCount"]), "COUNT_REGRESSION")
-            expected = (29, 15) if item["request"]["recipe"] == NONLINEAR_RECIPE else (5, 5)
+            recipe = item['request']['recipe']
+            expected = (len(actions(recipe)),len(expected_outputs(recipe)))
             require(request["processCount"] <= expected[0] and request["outputCount"] <= expected[1], "RECIPE_COUNTS")
             require(request["verified"] == (stage == "COMPLETED"), "VERIFICATION_REQUIRED")
             if stage == "COMPLETED":
