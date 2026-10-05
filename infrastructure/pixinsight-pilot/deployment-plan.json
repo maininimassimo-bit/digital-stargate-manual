@@ -1,6 +1,6 @@
 {
   "kind": "DSG_PIAI_P4_DEPLOYMENT_PLAN_V1",
-  "state": "OWNER_AUTHORIZED_DEPLOYED_PARTIAL_OAT",
+  "state": "OWNER_AUTHORIZED_DEPLOYED_BOUNDED_NATIVE_OAT",
   "aiMode": "SESSION_ASSISTED",
   "paidAiApi": false,
   "project": "digital-stargate-telemetry",
@@ -53,6 +53,9 @@
     "activationRequiresOwnerApproval": true
   },
   "ownerApprovalDate": "2026-10-05",
-  "revision": "dsg-pixinsight-pilot-00001-bmw",
-  "imageDigest": "sha256:14a8ceb98989fe2e69b217b4ccf034cbfd63346401af506a3599cc44ffd65f66"
+  "revision": "dsg-pixinsight-pilot-p4-oat-restart-01",
+  "imageDigest": "sha256:14a8ceb98989fe2e69b217b4ccf034cbfd63346401af506a3599cc44ffd65f66",
+  "ownerLogin": "PASS",
+  "nativeTransport": "PASS_ADMINISTRATIVE_FIXTURE",
+  "scientificOwnerHttpUI": "P5_PENDING"
 }
