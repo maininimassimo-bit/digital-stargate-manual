@@ -15,7 +15,7 @@
   "scientificOwnerHttpUI": "REAL_OWNER_GOOGLE_UI_REQUEST_PASS",
   "nativeScientificJob": "REAL_PIXINSIGHT_NEW_CONTEXT_BOUND_JOB_PASS",
   "privatePreviewWorkflowReview": "REAL_OWNER_AUTHENTICATED_PREVIEW_AND_29_WORKFLOW_STEPS_PASS",
-  "scientificAcceptance": "OWNER_REVIEW_REQUIRED",
+  "scientificAcceptance": "REAL_OWNER_ACCEPT_PRIVATE_UI_VERIFIED",
   "executionEvidence": "WORKER_REPORTED_NOT_ATTESTED",
   "sessionAssociation": "OWNER_DECLARED",
   "workflowScope": "RUNTIME_RECIPE_ONLY",
@@ -29,9 +29,7 @@
   "deviceAuthority": "NONE",
   "remainingGates": [
     "DOCUMENTATION_DELIVERY_GATES",
-    "P6_OPERATIONAL_ACCEPTANCE",
-    "OWNER_SCIENTIFIC_ACCEPTANCE",
-    "OWNER_BROWSER_DOWNLOAD_PERSISTENCE_CHECK"
+    "P6_OPERATIONAL_ACCEPTANCE"
   ],
   "release": {
     "pr": 485,
@@ -98,9 +96,10 @@
     "allFinalPixelsVerified": true,
     "delivery": "PRIVATE_AUTHENTICATED_IMMUTABLE",
     "privateStoredAssetsIntegrity": "PASS_ADMINISTRATIVE_GCS_READBACK_AND_LOCAL_COMPARISON",
-    "ownerBrowserDownloadPersistence": "UNVERIFIED_OWNER_CHECK_REQUESTED",
-    "ownerDecision": "NOT_TAKEN",
+    "ownerBrowserDownloadPersistence": "PASS_OWNER_REPORTED_DOWNLOADS_FOLDER",
+    "ownerDecision": "ACCEPT_PRIVATE_UI_OBSERVED",
     "privateProofs": "OWNER_PC_ONLY",
-    "publicProfileUnchanged": true
+    "publicProfileUnchanged": true,
+    "ownerDownloadedFilesIndependentHashCheck": "NOT_PERFORMED"
   }
 }
