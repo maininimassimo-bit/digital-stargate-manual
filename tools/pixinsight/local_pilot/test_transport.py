@@ -302,6 +302,29 @@ class SessionTests(HttpHarness):
         self.assertNotIn(self.registry[INPUT]["inputs"][0]["sha256"], remote)
         self.assertNotIn("background", remote)
 
+    def test_scientific_context_is_checked_before_any_copy(self):
+        from tools.pixinsight.local_pilot.scientific_delivery import registry_digest
+        context = {"input": {"manifestSha256": registry_digest(self.registry[INPUT])}}
+        self.broker.create(REQUEST, hashlib.sha256(encode(context)).hexdigest())
+        original = self.client.request
+        with patch.object(self.client, "request", side_effect=lambda path, value=None: {"input":{"manifestSha256":"0"*64}} if path.endswith('/context') else original(path,value)):
+            with patch.object(worker, "prepare", side_effect=AssertionError("must not copy")):
+                with self.assertRaisesRegex(ProtocolError,"SCIENTIFIC_INPUT_BINDING"):
+                    self.session.cycle()
+        self.assertFalse((self.root / ("PIAI_"+REQUEST["requestId"])).exists())
+        # Correct identical retry resumes the reservation, without bypassing its fence.
+        with patch.object(self.client, "request", side_effect=lambda path, value=None: context if path.endswith('/context') else original(path,value)):
+            self.assertEqual(self.session.cycle()["state"], "AWAITING_NATIVE")
+
+    def test_scientific_manifest_mismatch_with_valid_context_hash_is_rejected(self):
+        context = {"input": {"manifestSha256": "0"*64}}
+        self.broker.create(REQUEST, hashlib.sha256(encode(context)).hexdigest())
+        original = self.client.request
+        with patch.object(self.client, "request", side_effect=lambda path, value=None: context if path.endswith('/context') else original(path,value)):
+            with patch.object(worker, "prepare", side_effect=AssertionError("must not copy")):
+                with self.assertRaisesRegex(ProtocolError,"SCIENTIFIC_INPUT_BINDING"):
+                    self.session.cycle()
+
     def test_lost_report_response_retries_identical_without_reprepare(self):
         self.create()
         original = self.client.post

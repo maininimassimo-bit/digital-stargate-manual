@@ -7,6 +7,7 @@
     <h1>Scientific Image Gallery</h1>
     <p>Immagini pubblicate con le loro sessioni di origine e i workflow disponibili.</p>
     <a href="../scientific-photo-upload/">Aggiungi foto e workflow · accesso riservato</a>
+    <a href="../pixinsight-pilot/">Elabora con PixInsight e IA · pilota Owner</a>
   </section>
 
   <section class="dsg-image-gallery__toolbar" aria-label="Filtri gallery">

@@ -1,0 +1,31 @@
+{
+  "kind": "DSG_PIAI_P5_MINIMIZED_EVIDENCE_V1",
+  "date": "2026-10-05",
+  "phase": "P5",
+  "state": "IMPLEMENTED_CANDIDATE_RELEASE_DEPLOYMENT_LIVE_OAT_PENDING",
+  "aiMode": "SESSION_ASSISTED",
+  "paidAiApiRequests": 0,
+  "localValidation": {
+    "nodeSyntheticTests": 41,
+    "pythonWindowsTests": 75,
+    "strictMkDocs": "PASS",
+    "roadmapConsistency": "PASS",
+    "testClassification": "SYNTHETIC_MODELS_AND_REAL_LOOPBACK_HTTP_WITH_SYNTHETIC_IDENTITIES"
+  },
+  "scientificOwnerHttpUI": "NOT_YET_EXECUTED",
+  "nativeScientificJob": "NOT_YET_EXECUTED",
+  "privatePreviewWorkflowReview": "SYNTHETIC_ONLY",
+  "scientificAcceptance": "OWNER_REVIEW_REQUIRED",
+  "executionEvidence": "WORKER_REPORTED_NOT_ATTESTED",
+  "sessionAssociation": "OWNER_DECLARED",
+  "workflowScope": "RUNTIME_RECIPE_ONLY",
+  "upstreamHistoryCompleteness": "NOT_ESTABLISHED",
+  "pilotImageIdentities": "PRIVATE_DISTINCT_FROM_PUBLICATION_ARCHIVE",
+  "originalLocation": "OWNER_PC",
+  "publication": "NONE",
+  "publishedM27Mutation": false,
+  "newCloudResources": false,
+  "newCredential": false,
+  "deviceAuthority": "NONE",
+  "remainingGates": ["EXACT_HEAD_CI_ARB_RQ", "REVIEWED_IMAGE_DEPLOYMENT", "POST_MERGE_PAGES", "REAL_SCIENTIFIC_OWNER_HTTP_UI_NATIVE_DELIVERY_OAT", "P6_OPERATIONAL_ACCEPTANCE", "OWNER_SCIENTIFIC_ACCEPTANCE"]
+}

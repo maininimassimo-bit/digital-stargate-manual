@@ -42,7 +42,7 @@
     "rootIdentity": "LOCAL_OPAQUE_NONCE_PINNED_BY_FIRST_CLAIM",
     "beforeCopy": "DURABLE_ACKNOWLEDGED_PREPARING_FENCE"
   },
-  "cloudData": "Opaque local input reference, recipe identifier, bounded worker reports; no photos, paths, master hashes or native process parameters",
+  "cloudData": "P4 state plus P5 private registered-manifest digest, Owner-declared catalog/session/parent context, sanitized preview, runtime workflow/parameters and runtime correlations. No local paths, individual master hashes, original XISF or public scientific asset access.",
   "existingPhotoRuntimeMutation": false,
   "deviceAuthority": "NONE",
   "budget": {
@@ -57,5 +57,17 @@
   "imageDigest": "sha256:14a8ceb98989fe2e69b217b4ccf034cbfd63346401af506a3599cc44ffd65f66",
   "ownerLogin": "PASS",
   "nativeTransport": "PASS_ADMINISTRATIVE_FIXTURE",
-  "scientificOwnerHttpUI": "P5_PENDING"
+  "scientificOwnerHttpUI": "P5_PENDING",
+  "p5Candidate": {
+    "status": "IMPLEMENTED_REVIEW_DEPLOYMENT_OAT_PENDING",
+    "scope": "M27_OWNER_PRIVATE_REVIEW",
+    "originalLocation": "OWNER_PC",
+    "cloudAssets": [
+      "SANITIZED_PRIVATE_PREVIEW",
+      "PRIVATE_RUNTIME_WORKFLOW",
+      "PRIVATE_RUNTIME_CORRELATIONS"
+    ],
+    "publication": "NONE",
+    "receipt": "PRIVATE_PILOT_IDENTITIES_DISTINCT_FROM_PUBLICATION_ARCHIVE"
+  }
 }
