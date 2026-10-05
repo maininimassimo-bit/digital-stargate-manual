@@ -58,3 +58,7 @@ La chiusura RC2 non introduce nuovo debito tecnico e congela la compatibilità R
 ## Review 30/09/2026 — BKL-049 F0 acceptance
 
 [Phase acceptance](BKL-049-F0-ACCEPTANCE-2026-09-30.md) transfers the demonstrated identity/digest/duplicate, source retention, privacy and PXP mapping gaps to explicit F1/F4/F5 acceptance obligations. They are not silently repaired or waived; no production component is introduced. ARB M01 stale ADR-008 status wording is corrected by this reconciliation. Existing debt dispositions remain unchanged.
+
+## Review 2026-10-05 — continuità M27 e pilota locale
+
+La riconciliazione corregge i punti d’ingresso obsoleti. History disponibile incompleta, replay non garantito e worker/coda/IA di produzione assenti sono limiti e lavoro pianificato espliciti nel [piano pilota](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md), non debiti dichiarati risolti. Le disposition TD esistenti restano invariate.
