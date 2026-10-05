@@ -24,4 +24,4 @@ jobs:
         with:
           python-version: '3.13'
       - name: Test local coordinator reservation and private retention
-        run: python -m unittest tools.pixinsight.local_pilot.test_worker
+        run: python -m unittest tools.pixinsight.local_pilot.test_worker tools.pixinsight.local_pilot.test_quality

@@ -431,3 +431,9 @@ BKL-043 conserva priorità e lifecycle propri. BKL-050 richiede anche la disposi
 ### 2026-10-05 — BKL-049-EXT-PIAI P2
 
 P1 delivered via PR #479. P2 implemented and tested natively on private copies: five native processes/checkpoints, original files unchanged, pre-cancel and replay refusal. Fixed linear recipe and owner-supervised local launch only. P3 nonlinear output and remote/provider/portal phases remain planned; exact-head CI/review required for this increment. [Evidence](evidence/BKL-049-PIAI-P2-2026-10-05.json).
+
+### 2026-10-05 — BKL-049-EXT-PIAI P3
+
+P2 delivered #480. P3 fixed M27 nonlinear recipe implemented: 29 native actions, 15 checkpoints, streaming pixel validation and mask/stars correlations. Native/visual result and exact-head delivery require reconciliation before release. The extension remains In Progress; P4–P6 are not implemented. Scientific acceptance/publication require Owner review, independently of technical PASS.
+
+P3 native technical/visual trial completed; [minimized evidence](evidence/BKL-049-PIAI-P3-2026-10-05.json): 29 actions, 15 checkpoints, finite normalized final pixels, unchanged originals, native cancel/selection/replay rejection and full-field/100% comparison. Prior published M27 retains stronger internal contrast; Owner acceptance remains required. Available History: 13 views, 47 steps, 82 instances, imported as data without promoting completeness/execution classifications. Exact-head CI/review and post-merge delivery are tracked on the PR; no remote/provider/portal activation.

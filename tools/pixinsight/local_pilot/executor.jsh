@@ -1,4 +1,118 @@
-// P2 trusted Windows-local executor. No eval, imports of History or network API.
+// Trusted Windows-local executor. No eval, imports of History or network API.
+// M27-specific empirical recipe: owner review required, no photometric claim.
+function DSGRunM27Nonlinear(m,rgb,lum,apply,save,event,checkCancel) {
+   var prefix='DSG_'+m.jobId+'_';
+   function clone(w,suffix) {
+      checkCancel();
+      var id=prefix+suffix;
+      if(!ImageWindow.windowById(id).isNull) throw Error('Work view already exists');
+      var im=w.mainView.image,out=new ImageWindow(im.width,im.height,im.numberOfNominalChannels,32,true,im.isColor,id);
+      out.mainView.beginProcess();
+      try {out.mainView.image.assign(im);} finally {out.mainView.endProcess();}
+      out.keywords=w.keywords;
+      w.mainView.properties.forEach(function(key) {
+         if(key==='Image:Id' || key.indexOf('XISF:')===0) return;
+         out.mainView.setPropertyValue(key,w.mainView.propertyValue(key));
+         out.mainView.setPropertyAttributes(key,w.mainView.propertyAttributes(key));
+      });
+      if(w.hasAstrometricSolution) out.regenerateAstrometricSolution();
+      event('derived-copy',{target:id,dependencies:[w.mainView.id]});
+      return out;
+   }
+   function run(p,w,label,deps) {apply(p,w,label,deps || [w.mainView.id]);}
+   function roi(p,background) {
+      var width=rgb.mainView.image.width,height=rgb.mainView.image.height;
+      var x0=Math.round(width*0.022),y0=Math.round(height*0.036),x1=Math.round(width*0.216),y1=Math.round(height*0.231);
+      if(background) {p.backgroundUseROI=true;p.backgroundROIX0=x0;p.backgroundROIY0=y0;p.backgroundROIX1=x1;p.backgroundROIY1=y1;}
+      else {p.useROI=true;p.roiX0=x0;p.roiY0=y0;p.roiX1=x1;p.roiY1=y1;}
+   }
+   function pm(w,expression,label,deps) {
+      var p=new PixelMath;p.expression=expression;p.useSingleExpression=true;
+      p.createNewImage=false;p.rescale=false;p.truncate=true;p.use64BitWorkingImage=true;
+      run(p,w,label,deps);
+   }
+   function masked(w,mask,inverted,fn) {
+      w.mask=mask;w.maskEnabled=true;w.maskVisible=false;w.maskInverted=inverted;
+      event('mask-attached',{target:w.mainView.id,mask:mask.mainView.id,inverted:inverted});
+      try {fn();} finally {w.removeMask();event('mask-detached',{target:w.mainView.id});}
+   }
+   function separate(w,suffix,label) {
+      var before=ImageWindow.windows.map(function(x){return x.mainView.id;});
+      var p=new StarXTerminator;p.output_stars=true;p.unscreen=false;
+      run(p,w,label);
+      var fresh=ImageWindow.windows.filter(function(x){return before.indexOf(x.mainView.id)<0;});
+      if(fresh.length!==1) throw Error('Unique stars output required');
+      fresh[0].mainView.id=prefix+suffix;
+      event('secondary-output',{target:fresh[0].mainView.id,dependencies:[w.mainView.id],action:label});
+      return fresh[0];
+   }
+   [rgb,lum].forEach(function(w,k) {
+      var p=new AutomaticBackgroundExtractor;p.polyDegree=2;p.tolerance=0.8;p.boxSize=m.background.boxSize;p.boxSeparation=m.background.boxSeparation;
+      p.targetCorrection=AutomaticBackgroundExtractor.Correction_Subtract;p.normalize=true;p.discardModel=true;p.replaceTarget=true;
+      run(p,w,'radial-'+(k?'L':'RGB'));
+   });
+   var p=new BlurXTerminator;p.correct_only=true;run(p,rgb,'optical-RGB');
+   p=new BackgroundNeutralization;roi(p,false);p.backgroundHigh=0.05;run(p,rgb,'neutralize-RGB');
+   p=new ColorCalibration;p.structureDetection=true;p.structureLayers=6;p.noiseLayers=2;p.whiteLow=0;p.whiteHigh=0.65;roi(p,true);p.backgroundHigh=0.05;
+   run(p,rgb,'calibrate-RGB');
+   [rgb,lum].forEach(function(w,k) {
+      var bx=new BlurXTerminator;bx.correct_only=false;bx.sharpen_stars=0.25;bx.sharpen_nonstellar=k?0.50:0.45;bx.adjust_star_halos=0;
+      run(bx,w,'deconvolve-'+(k?'L':'RGB'));
+   });
+   [rgb,lum].forEach(function(w,k) {
+      var nx=new NoiseXTerminator;nx.denoise=k?0.65:0.70;nx.denoise_intensity=0.65;nx.denoise_color=0.80;
+      nx.enable_color_separation=!k;nx.enable_frequency_separation=false;nx.iterations=2;
+      run(nx,w,'denoise-'+(k?'L':'RGB'));save(w,(k?'L':'RGB')+'-processed-linear.xisf');
+   });
+   var stars=separate(rgb,'stars','separate-RGB');
+   separate(lum,'Lstars','separate-L');
+   save(rgb,'RGB-starless-linear.xisf');save(lum,'L-starless-linear.xisf');save(stars,'stars-linear.xisf');
+   var med=stars.mainView.computeOrFetchProperty('Median'),background=[med.at(0),med.at(1),med.at(2)];
+   [rgb,lum].forEach(function(w,k) {
+      var ms=new MaskedStretch;ms.targetBackground=0.085;ms.numberOfIterations=150;ms.clippingFraction=0.00001;
+      roi(ms,false);ms.backgroundLow=0;ms.backgroundHigh=0.05;ms.maskType=MaskedStretch.MaskType_Intensity;
+      run(ms,w,'stretch-'+(k?'L':'RGB'));
+   });
+   var mask=clone(lum,'mask');pm(mask,'min(1,max(0,($T-0.115)/0.40))','mask-build');save(mask,'mask.xisf',true);
+   masked(rgb,mask,true,function() {
+      var c=new CurvesTransformation;c.K=[[0,0],[1,1]];c.S=[[0,0],[0.20,0.07],[0.50,0.18],[0.80,0.30],[1,0.40]];
+      run(c,rgb,'background-color',[rgb.mainView.id,mask.mainView.id]);
+   });
+   masked(lum,mask,false,function() {
+      var h=new LocalHistogramEqualization;h.radius=96;h.slopeLimit=1.6;h.amount=0.22;
+      run(h,lum,'contrast-large',[lum.mainView.id,mask.mainView.id]);
+      h=new LocalHistogramEqualization;h.radius=48;h.slopeLimit=1.6;h.amount=0.28;
+      run(h,lum,'contrast-small',[lum.mainView.id,mask.mainView.id]);
+      var c=new CurvesTransformation;c.K=[[0,0],[0.2,0.16],[0.4,0.35],[0.6,0.62],[0.8,0.85],[1,1]];
+      run(c,lum,'contrast-curve',[lum.mainView.id,mask.mainView.id]);
+   });
+   save(lum,'L-nonlinear.xisf',true);save(rgb,'RGB-nonlinear.xisf',true);
+   var result=clone(rgb,'final');
+   p=new LRGBCombination;p.channels=[[false,'',1],[false,'',1],[false,'',1],[true,lum.mainView.id,1]];
+   p.mL=0.5;p.mc=0.5;p.clipHighlights=true;p.noiseReduction=false;
+   run(p,result,'LRGB-combine',[rgb.mainView.id,lum.mainView.id]);
+   masked(result,mask,false,function() {
+      var c=new CurvesTransformation;c.K=[[0,0],[1,1]];c.S=[[0,0],[0.15,0.21],[0.4,0.53],[0.65,0.78],[1,1]];
+      run(c,result,'nebula-color',[result.mainView.id,mask.mainView.id]);
+   });
+   p=new PixelMath;p.useSingleExpression=false;p.createNewImage=false;p.rescale=false;p.truncate=true;p.use64BitWorkingImage=true;
+   p.expression='max(0,$T[0]-'+background[0]+')';p.expression1='max(0,$T[1]-'+background[1]+')';p.expression2='max(0,$T[2]-'+background[2]+')';
+   run(p,stars,'stars-background');
+   p=new ArcsinhStretch;p.stretch=150;p.blackPoint=0;p.protectHighlights=true;p.useRGBWS=true;p.previewClipped=false;
+   run(p,stars,'stars-stretch');
+   p=new CurvesTransformation;p.K=[[0,0],[1,1]];p.S=[[0,0],[0.2,0.25],[0.5,0.58],[0.8,0.85],[1,1]];
+   run(p,stars,'stars-color');save(stars,'stars-nonlinear.xisf',true);
+   pm(result,'1-(1-$T)*(1-'+stars.mainView.id+')','stars-recombine',[result.mainView.id,stars.mainView.id]);
+   result.keywords=result.keywords.filter(function(k){return ['FILTER','IMAGETYP','EXPTIME'].indexOf(k.name)<0;}).concat([
+      new FITSKeyword('FILTER',"'LRGB'",'RGB with L luminance'),
+      new FITSKeyword('IMAGETYP',"'Processed LRGB'",'Nonlinear local pilot; Owner review required')]);
+   result.mainView.setPropertyValue('Instrument:Filter:Name','LRGB');
+   result.mainView.setPropertyValue('Image:Type','Processed nonlinear LRGB');
+   result.mainView.deleteProperty('PCL:TotalExposureTime');
+   result.mainView.deleteProperty('Instrument:ExposureTime');
+   event('metadata-updated',{target:result.mainView.id,combinedFilter:true,aggregateExposureNotAsserted:true});
+   save(result,'LRGB-nonlinear.xisf',true);result.show();result.bringToFront();
+}
 function DSGExecuteLocalPilot(m) {
    function require(ok, message) { if(!ok) throw Error(message); }
    function hash(path) { return (new CryptographicHash(CryptographicHash.SHA256)).hash(File.readFile(path)).toHex(); }
@@ -10,7 +124,8 @@ function DSGExecuteLocalPilot(m) {
       finally { f.close(); }
    }
    require(m.schemaVersion==='1.0' && /^[A-Za-z][A-Za-z0-9_]{0,47}$/.test(m.jobId), 'Invalid manifest');
-   require(m.recipe==='LRGB_LINEAR_PREP_V1', 'Recipe not allowed');
+   require(m.recipe==='LRGB_LINEAR_PREP_V1' || m.recipe==='M27_LRGB_NONLINEAR_V1', 'Recipe not allowed');
+   var nonlinear=m.recipe==='M27_LRGB_NONLINEAR_V1';
    require(m.jobDirectory===m.workerRoot+'/'+m.jobId, 'Invalid job directory');
    require(m.inputs.length===4, 'Four inputs required');
    require(m.runtimeLibrary===m.jobDirectory+'/executor.jsh' && /^[a-f0-9]{64}$/.test(m.runtimeSha256), 'Runtime snapshot required');
@@ -53,14 +168,14 @@ function DSGExecuteLocalPilot(m) {
       executed++;
       event('process-completed',{label:label,target:window.mainView.id,historyIndex:window.mainView.historyIndex});
    }
-   function save(window,name) {
+   function save(window,name,nonLinear) {
       checkCancel();
       var path=root+'/outputs/'+name;
       require(!File.exists(path), 'Output already exists');
       require(window.saveAs(path,false,false,true,false), 'Native save failed');
       outputs.push({name:name,sha256:hash(path),viewId:window.mainView.id,
          width:window.mainView.image.width,height:window.mainView.image.height,
-         channels:window.mainView.image.numberOfNominalChannels,nonLinear:false});
+         channels:window.mainView.image.numberOfNominalChannels,nonLinear:nonLinear===true});
       event('checkpoint',outputs[outputs.length-1]);
    }
    try {
@@ -81,6 +196,14 @@ function DSGExecuteLocalPilot(m) {
       checkCancel();
       // All constructors must be available before any work copy is processed.
       var abe=new AutomaticBackgroundExtractor, cc=new ChannelCombination;
+      if(nonlinear) {
+         // Fail before pixel processing if any required native module is missing.
+         [new BlurXTerminator,new NoiseXTerminator,new StarXTerminator,
+          new BackgroundNeutralization,new ColorCalibration,new MaskedStretch,
+          new PixelMath,new LocalHistogramEqualization,new CurvesTransformation,
+          new LRGBCombination,new ArcsinhStretch];
+         require(m.inputs[0].width>=1000 && m.inputs[0].height>=800,'M27 recipe minimum geometry');
+      }
       for(var k=0;k<4;++k) {
          var input=m.inputs[k];
          require(hash(input.path)===input.sha256 && hash(input.sourcePath)===input.sha256, 'Input/source digest mismatch');
@@ -122,9 +245,14 @@ function DSGExecuteLocalPilot(m) {
       var rgb=ImageWindow.activeWindow;
       require(!rgb.isNull && rgb.mainView.image.numberOfNominalChannels===3,'RGB output missing');
       rgb.mainView.id='DSG_'+m.jobId+'_RGB';
-      rgb.keywords=targets[0].keywords;
+      // P2 compatibility; P3 retains native combination metadata rather than
+      // attributing RGB to the Red filter/exposure. Astrometry is inherited by CC.
+      if(!nonlinear) rgb.keywords=targets[0].keywords;
+      if(nonlinear && targets[0].hasAstrometricSolution)
+         require(rgb.hasAstrometricSolution,'Combined RGB astrometry missing');
       event('process-completed',{label:'RGB-composition',target:rgb.mainView.id});
       save(rgb,'RGB-linear.xisf');
+      if(nonlinear) DSGRunM27Nonlinear(m,rgb,targets[3],apply,save,event,checkCancel);
       rgb.show();
       terminal.status='COMPLETED';
    } catch(error) {

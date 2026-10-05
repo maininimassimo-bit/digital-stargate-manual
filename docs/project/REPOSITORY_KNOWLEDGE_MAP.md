@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 6.4 |
+| Versione | 6.5 |
 | Stato | Active |
 | Data | 05/10/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
@@ -169,3 +169,9 @@ Le sezioni datate precedenti conservano l’evidenza storica. Il [nuovo handover
 Versione 6.4 — 05/10/2026: nuova continuità M27 e pilota locale; snapshot storici conservati.
 
 P2 locale implementato in `tools/pixinsight/local_pilot/worker.py` e `executor.jsh`; procedura in README, test sintetici Node/Python e [ricevuta nativa minimizzata](evidence/BKL-049-PIAI-P2-2026-10-05.json). Il journal e i checkpoint sono privati. P3 non lineare e remoto rimangono pianificati.
+
+### 2026-10-05 — P3 implementation
+
+P2 delivered #480. P3 adds `quality.py`, synthetic pixel/coordinator/native-boundary tests, the fixed `M27_LRGB_NONLINEAR_V1` executor and a private journal of masks/secondary outputs. See the current plan and handover for native/visual evidence and delivery status. P4–P6 remain planned; the available-history importer contract is unchanged.
+
+P3 native technical/visual trial completed; [minimized evidence](evidence/BKL-049-PIAI-P3-2026-10-05.json): 29 actions, 15 checkpoints, finite normalized final pixels, unchanged originals, native cancel/selection/replay rejection and full-field/100% comparison. Prior published M27 retains stronger internal contrast; Owner acceptance remains required. Available History: 13 views, 47 steps, 82 instances, imported as data without promoting completeness/execution classifications. Exact-head CI/review and post-merge delivery are tracked on the PR; no remote/provider/portal activation.

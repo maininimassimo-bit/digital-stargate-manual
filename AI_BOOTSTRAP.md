@@ -2,7 +2,7 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | 7.8 |
+| Versione | 7.9 |
 | Baseline | 05/10/2026 |
 | Stato | Current root bootstrap — BKL-043 F4 lifecycle pending; BKL-049 archive closed; PixInsight AI extension pilot; S10 unavailable |
 
@@ -65,4 +65,4 @@ Gli handover e le baseline precedenti restano snapshot storici.
 Exact-head CI → ARB → Release Quality sullo stesso SHA → expected-head merge → post-merge verification → acceptance reconciliation. Nessuna acceptance o runtime claim può precedere l'evidence reale.
 
 ## 7. Punto di ripresa
-Riprendere dall’handover del 5 ottobre v1.2 e dal piano BKL-049-EXT-PIAI. Documentazione e P1 consegnate con PR #478/#479; P2 locale implementato e provato su copie con cinque processi/checkpoint lineari, pre-cancel e replay nativi. Consegnare il relativo head con CI/review e poi procedere a P3 non lineare. BKL-043 conserva i propri gate; l’estensione non autorizza dispositivi, Safety Authority, provider a pagamento o pubblicazione automatica.
+Riprendere dall’handover del 5 ottobre v1.3 e dal piano BKL-049-EXT-PIAI. Documentazione/P1/P2 consegnate con PR #478/#479/#480. P3 provata nativamente: 29 azioni, 15 checkpoint, pixel finiti, originali invariati e confronto visivo effettuato. Acceptance scientifica Owner richiesta; consegna soggetta a CI e review dello stesso head. P4–P6 restano successivi. BKL-043 conserva i propri gate; l’estensione non autorizza dispositivi, Safety Authority, provider a pagamento o pubblicazione automatica.

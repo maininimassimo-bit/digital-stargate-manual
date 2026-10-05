@@ -66,3 +66,7 @@ La riconciliazione corregge i punti d’ingresso obsoleti. History disponibile i
 ### 2026-10-05 — P2 local boundary
 
 P2 adds a tested local coordinator and fixed linear executor; remote queue/model and full nonlinear pipeline remain planned. Crash recovery intentionally retains the reservation and requires confirmed stopped execution plus quarantine/new root; there is no expiry, automatic retry or forced unlock. This bounded pilot does not resolve production availability/recovery or scientific quality gaps. Existing TD dispositions remain unchanged.
+
+### 2026-10-05 — P3 bounded nonlinear recipe
+
+P3 supplies one M27-specific empirical recipe, not a universal image-planning model or production service. Compression/unsupported XISF layouts are rejected by pixel validation; model/version/license identity and commercial rights remain unverified. Pixel checks and visual comparison do not certify scientific effectiveness or no clipping. P4–P6 and all existing TD dispositions remain open/unchanged as applicable.
