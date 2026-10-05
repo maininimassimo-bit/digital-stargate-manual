@@ -77,7 +77,7 @@ Authenticated queue/client candidate does not resolve production cloud availabil
 
 ### 2026-10-05 — P4 approved deployment, partial live OAT
 
-Resource/credential approval satisfied and bounded service deployed. Real PC HTTPS/role/root denial established. Owner Google authentication and bounded administrative native transport OAT are now proven; concurrent live CAS, broader operational acceptance, P5/P6 and scientific acceptance remain open; no production completion claimed. Infrastructure costs remain possible; no hard spending cap. Existing debt dispositions unchanged.
+Resource/credential approval satisfied and bounded service deployed. Real PC HTTPS/role/root denial established. Owner Google authentication and bounded administrative native transport OAT are now proven; administrative GCS concurrent CAS is proven, while concurrent Owner HTTP operations remain synthetic. Broader operational acceptance, P5/P6 and scientific acceptance remain open; no production completion claimed. Infrastructure costs remain possible; no hard spending cap. Existing debt dispositions unchanged.
 
 ### 2026-10-05 — P4 bounded live/native OAT
 
