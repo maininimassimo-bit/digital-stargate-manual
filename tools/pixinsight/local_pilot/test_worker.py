@@ -144,7 +144,7 @@ class WorkerTests(unittest.TestCase):
         job = worker.prepare(self.root, self.request)
         source = 'var P = new AutomaticBackgroundExtractor;\nP.someText = "P";\n'
         worker.write_new(job / "events/0000-start.json", dict(event="process-started", data=dict(label="background-R", nativeSource=source, target="Synthetic_R", dependencies=["synthetic"])))
-        worker.write_new(job / "events/0001-completed.json", dict(event="process-completed", data=dict(label="background-R")))
+        worker.write_new(job / "events/0001-completed.json", dict(event="process-completed", data=dict(label="background-R", target="Synthetic_R")))
         exported = worker.export_runtime_instances(job, dict(jobId=self.request["jobId"], processCount=1))
         self.assertEqual(exported["instanceCount"], 1)
         self.assertIn('DSGPilotProcess001.someText = "P";', (job / "workflow.js").read_text())
@@ -152,9 +152,20 @@ class WorkerTests(unittest.TestCase):
     def test_wrong_native_process_rejected(self):
         job = worker.prepare(self.root, self.request)
         worker.write_new(job / "events/0000-start.json", dict(event="process-started", data=dict(label="background-R", nativeSource="var P = new ChannelCombination;", dependencies=[])))
-        worker.write_new(job / "events/0001-completed.json", dict(event="process-completed", data=dict(label="background-R")))
+        worker.write_new(job / "events/0001-completed.json", dict(event="process-completed", data=dict(label="background-R", target="Synthetic_R")))
         with self.assertRaisesRegex(ValueError, "native process mismatch"):
             worker.export_runtime_instances(job, dict(jobId=self.request["jobId"], processCount=1))
+
+    def test_completion_target_is_preserved_for_global_process(self):
+        job = worker.prepare(self.root, self.request)
+        labels = ["background-R", "background-G", "background-B", "background-L", "RGB-composition"]
+        for ordinal, label in enumerate(labels):
+            process = "ChannelCombination" if ordinal == 4 else "AutomaticBackgroundExtractor"
+            worker.write_new(job / f"events/{ordinal*2:04}-start.json", dict(event="process-started", data=dict(label=label, nativeSource=f"var P = new {process};", dependencies=[])))
+            worker.write_new(job / f"events/{ordinal*2+1:04}-completed.json", dict(event="process-completed", data=dict(label=label, target=f"Synthetic_{ordinal}")))
+        worker.export_runtime_instances(job, dict(jobId=self.request["jobId"], processCount=5))
+        correlations = json.loads((job / "runtime-correlations.json").read_text())
+        self.assertEqual(correlations["instances"][-1]["target"], "Synthetic_4")
 
 
 if __name__ == "__main__":

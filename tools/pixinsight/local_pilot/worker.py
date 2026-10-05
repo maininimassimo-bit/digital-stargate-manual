@@ -67,7 +67,10 @@ def export_runtime_instances(job: Path, receipt: dict) -> dict:
         if event["event"] == "process-completed":
             label = event["data"]["label"]
             require(label in starts, "Completed process lacks start evidence")
-            completed.append(starts[label])
+            target = event["data"].get("target", starts[label].get("target"))
+            require(isinstance(target, str) and target, "Completed process lacks target evidence")
+            require(starts[label].get("target", target) == target, "Native target mismatch")
+            completed.append({**starts[label], "target": target})
     require(len(completed) == receipt["processCount"], "Journal/process count mismatch")
     expected = ["background-R", "background-G", "background-B", "background-L", "RGB-composition"]
     require([e["label"] for e in completed] == expected[:len(completed)], "Journal recipe order mismatch")

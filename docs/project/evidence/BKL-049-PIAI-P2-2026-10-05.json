@@ -21,10 +21,27 @@
     "boundedOutputHeadersVerified": true,
     "boundedImporterProfile": "1.2"
   },
-  "nativePreCancel": { "status": "CANCELLED", "nativeProcessCount": 0, "checkpointCount": 0, "originalFilesIntegrity": "UNCHANGED" },
-  "nativeReplay": { "refused": true, "completedJobBytesUnchanged": true, "checkedPrivateFiles": 37 },
-  "coordinatorConflict": { "secondJobRejected": true, "secondJobDirectoryCreated": false },
-  "syntheticTests": { "preflight": 13, "executor": 14, "coordinator": 16, "result": "PASS_LOCAL" },
+  "nativePreCancel": {
+    "status": "CANCELLED",
+    "nativeProcessCount": 0,
+    "checkpointCount": 0,
+    "originalFilesIntegrity": "UNCHANGED"
+  },
+  "nativeReplay": {
+    "refused": true,
+    "completedJobBytesUnchanged": true,
+    "checkedPrivateFiles": 37
+  },
+  "coordinatorConflict": {
+    "secondJobRejected": true,
+    "secondJobDirectoryCreated": false
+  },
+  "syntheticTests": {
+    "preflight": 13,
+    "executor": 14,
+    "coordinator": 17,
+    "result": "PASS_LOCAL"
+  },
   "providerRequests": 0,
   "portalMutations": 0,
   "fullUpstreamHistoryCompleteness": "NOT_ESTABLISHED",
@@ -32,5 +49,15 @@
   "scientificQualityAcceptance": "NOT_ESTABLISHED",
   "nativeFailureAndMidProcessCancel": "SYNTHETIC_BOUNDARY_TESTS_ONLY",
   "privateEvidence": "Original/copy/output/runtime hashes, native source parameters, journal, receipts and checkpoints retained on Owner PC; excluded from public repository",
-  "deliveryReview": "Exact publication head, CI, separated ARB/RQ and post-merge verification tracked on delivery PR"
+  "deliveryReview": "Exact publication head, CI, separated ARB/RQ and post-merge verification tracked on delivery PR",
+  "additionalNativeCorrelationRun": {
+    "status": "COMPLETED",
+    "nativeProcessCount": 5,
+    "checkpointCount": 5,
+    "startedAt": "2026-10-05T12:02:42.196Z",
+    "finishedAt": "2026-10-05T12:04:23.188Z",
+    "completionTargetsVerified": true,
+    "originalFilesIntegrity": "UNCHANGED",
+    "runtimeSnapshotIdentityVerified": true
+  }
 }
