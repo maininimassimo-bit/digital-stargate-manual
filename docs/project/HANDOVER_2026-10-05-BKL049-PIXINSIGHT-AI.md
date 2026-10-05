@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | ID | DSG-HO-BKL049-20261005 |
-| Versione | 1.8 |
+| Versione | 1.9 |
 | Data | 2026-10-05 |
 | Stato | Riconciliazione operativa; estensione pilota autorizzata, non accettata come produzione |
 | Pacchetto | BKL-049 archivio chiuso; BKL-049-EXT-PIAI pilota distinto |
@@ -120,3 +120,7 @@ Implementato il candidato P5: pagina Owner, selezione di master M27 registrati, 
 PR #485 integrata nel commit `f1a4650dfb8da54c498b763752fd4d5d2b8877ad`: 20/20 check sullo head revisionato, ARB e RQ AI-assistite sequenziali PASS con zero finding residui; 22/22 check post-merge e deployment Pages effettivo SUCCESS. Cloud Build del codice revisionato PASS con 77 test; digest `sha256:b6d14fa1934076f16f0c44721fdc2852dd5e49f68bd21bf3cae0cf54b38e1ee0`, revisione `dsg-pixinsight-pilot-p5-science-01`, traffico 100%. Nessuna nuova risorsa, credenziale o estensione IAM. Registrazione reale di un gruppo M27 dopo verifica dei quattro master e ripetizione idempotente PASS.
 
 La pagina scientifica è pubblicata e aperta; il completamento tecnico P5 richiede ancora accesso Owner sulla nuova pagina, creazione scientifica HTTP/UI, nuova esecuzione nativa e consegna/revisione privata con sessioni esatte. Non sostituire questa prova con fixture amministrative, prove P4 o accettazione scientifica simulata. Le dipendenze dei master nelle correlazioni cloud usano i ruoli, mentre il grafo originale e gli hash individuali restano sul PC. P6 e accettazione scientifica Owner rimangono aperti. La M27 pubblicata non è stata modificata. Questa riconciliazione documentale richiede i propri gate di consegna.
+
+## Correzione compatibilità target durante il collaudo P5
+
+Accesso Owner sulla nuova pagina verificato. Nessun job scientifico creato: confronto letterale `M27`/`M 27` rendeva invisibili le sessioni e il parent reali. Correzione con soli due alias espliciti, contesto originale conservato, tre regressioni e verifica locale dei profili pubblici reali (16 sessioni/un parent). Correzione candidata da rilasciare; il percorso Owner HTTP → nativo → consegna privata resta aperto. [Procedura P5](PIAI-P5-PORTAL-2026-10-05.md).

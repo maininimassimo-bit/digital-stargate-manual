@@ -2,12 +2,12 @@
   "kind": "DSG_PIAI_P5_MINIMIZED_EVIDENCE_V1",
   "date": "2026-10-05",
   "phase": "P5",
-  "state": "RELEASED_DEPLOYED_REAL_OWNER_SCIENTIFIC_OAT_PENDING",
+  "state": "DEPLOYED_TARGET_COMPATIBILITY_REMEDIATION_CANDIDATE_REAL_OAT_PENDING",
   "aiMode": "SESSION_ASSISTED",
   "paidAiApiRequests": 0,
   "localValidation": {
     "nodeSyntheticTests": 43,
-    "pythonWindowsTests": 77,
+    "pythonWindowsTests": 80,
     "strictMkDocs": "PASS",
     "roadmapConsistency": "PASS",
     "testClassification": "SYNTHETIC_MODELS_AND_REAL_LOOPBACK_HTTP_WITH_SYNTHETIC_IDENTITIES"
@@ -28,6 +28,7 @@
   "newCredential": false,
   "deviceAuthority": "NONE",
   "remainingGates": [
+    "TARGET_COMPATIBILITY_EXACT_HEAD_RELEASE_DEPLOYMENT",
     "REAL_SCIENTIFIC_OWNER_HTTP_UI_NATIVE_DELIVERY_OAT",
     "DOCUMENTATION_DELIVERY_GATES",
     "P6_OPERATIONAL_ACCEPTANCE",
@@ -54,5 +55,22 @@
     "registration": "REAL_VERIFIED_IDEMPOTENT_PASS",
     "iamExpansion": false
   },
-  "cloudMasterDependencies": "MANIFEST_BOUND_ROLES"
+  "cloudMasterDependencies": "MANIFEST_BOUND_ROLES",
+  "ownerNewPageLogin": "REAL_OWNER_VERIFIED_NO_SCIENTIFIC_REQUEST",
+  "targetCompatibility": {
+    "observedCatalogTarget": "M 27",
+    "registeredPilotTarget": "M27",
+    "allowedAliases": [
+      "M27",
+      "M 27"
+    ],
+    "rawScientificTargetPreserved": true,
+    "regressionTests": 3,
+    "publicProfileLocalValidation": {
+      "sessions": 16,
+      "currentParents": 1,
+      "classification": "REAL_PUBLIC_PROFILES_LOCAL_SYNTHETIC_BROKER_NOT_OWNER_HTTP_NATIVE_OAT"
+    },
+    "status": "IMPLEMENTED_RELEASE_DEPLOYMENT_PENDING"
+  }
 }
