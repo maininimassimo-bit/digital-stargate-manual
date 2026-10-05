@@ -2,7 +2,7 @@
   "kind": "DSG_PIAI_P5_MINIMIZED_EVIDENCE_V1",
   "date": "2026-10-05",
   "phase": "P5",
-  "state": "IMPLEMENTED_CANDIDATE_RELEASE_DEPLOYMENT_LIVE_OAT_PENDING",
+  "state": "RELEASED_DEPLOYED_REAL_OWNER_SCIENTIFIC_OAT_PENDING",
   "aiMode": "SESSION_ASSISTED",
   "paidAiApiRequests": 0,
   "localValidation": {
@@ -27,5 +27,32 @@
   "newCloudResources": false,
   "newCredential": false,
   "deviceAuthority": "NONE",
-  "remainingGates": ["EXACT_HEAD_CI_ARB_RQ", "REVIEWED_IMAGE_DEPLOYMENT", "POST_MERGE_PAGES", "REAL_SCIENTIFIC_OWNER_HTTP_UI_NATIVE_DELIVERY_OAT", "P6_OPERATIONAL_ACCEPTANCE", "OWNER_SCIENTIFIC_ACCEPTANCE"]
+  "remainingGates": [
+    "REAL_SCIENTIFIC_OWNER_HTTP_UI_NATIVE_DELIVERY_OAT",
+    "DOCUMENTATION_DELIVERY_GATES",
+    "P6_OPERATIONAL_ACCEPTANCE",
+    "OWNER_SCIENTIFIC_ACCEPTANCE"
+  ],
+  "release": {
+    "pr": 485,
+    "reviewedHead": "6ed26fdaa612e290fbc6df7a2710968e019e186f",
+    "tree": "a2d3fc8cfac83a7cb5996e6f62deb31260504921",
+    "exactHeadChecks": 20,
+    "arb": "AI_ASSISTED_PASS_0_FINDINGS",
+    "rq": "AI_ASSISTED_PASS_0_FINDINGS",
+    "mergeHead": "f1a4650dfb8da54c498b763752fd4d5d2b8877ad",
+    "postMergeChecks": 22,
+    "pages": "ACTUAL_MERGE_HEAD_SUCCESS"
+  },
+  "deployment": {
+    "buildId": "2bc77ad5-901a-4429-a64c-84314c674b76",
+    "build": "SUCCESS_77_TESTS",
+    "imageDigest": "sha256:b6d14fa1934076f16f0c44721fdc2852dd5e49f68bd21bf3cae0cf54b38e1ee0",
+    "revision": "dsg-pixinsight-pilot-p5-science-01",
+    "trafficPercent": 100,
+    "registeredMasterGroups": 1,
+    "registration": "REAL_VERIFIED_IDEMPOTENT_PASS",
+    "iamExpansion": false
+  },
+  "cloudMasterDependencies": "MANIFEST_BOUND_ROLES"
 }
