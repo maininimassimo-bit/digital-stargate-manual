@@ -123,7 +123,7 @@ Nessun consumer analytics, comparison, scoring, planner o AI può comandare appa
 | 5.9 | 17/09/2026 | F4-B three-schema contract, synthetic TEST/NONE fixture and 24-case fail-closed validator prepared with zero provider traffic |
 | 6.0 | 17/09/2026 | PR #265 F4-B integrated and post-merge verified; 26/26 tests and 14/14 workflows; F4-C acquisition-gate preparation promoted |
 | 6.1 | 17/09/2026 | F8 Accepted/Post-Merge Verified via PR #279; continuity riallineata a handover/baseline 17/09 e F9 repeatable current-night planner closure promosso come unico successore |
-| 6.3 | 05/10/2026 | Continuità riallineata a BKL-042 closed/accepted e BKL-043 F3/F4 preparation; nessun runtime BKL-043 autorizzato |
+| 6.3 | 25/09/2026 | Continuità riallineata a BKL-042 closed/accepted e BKL-043 F3/F4 preparation; nessun runtime BKL-043 autorizzato |
 
 Le sezioni di checkpoint seguenti sono snapshot storici. Eventuali formulazioni come “current” o “next” valgono al momento del relativo checkpoint e non prevalgono sulla baseline corrente definita nelle sezioni 2, 6 e 7.
 
@@ -165,3 +165,5 @@ La [riconciliazione F0](BKL-049-F0-ACCEPTANCE-2026-09-30.md) registra PR #445, m
 ## Riconciliazione corrente — 2026-10-05
 
 Le sezioni datate precedenti conservano l’evidenza storica. Il [nuovo handover](HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md) e la [baseline corrente](CURRENT_TECHNICAL_BASELINE_2026-10-05.md) prevalgono per lo stato: BKL-043 F4 lifecycle pendente; BKL-049 archivio chiuso, procedura foto/workflow e importer 1.2 consegnati; ultima M27 pubblicata con 80 processi e 16 associazioni dichiarate. Il [pilota locale BKL-049-EXT-PIAI](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md) aggiunge elaborazione file su copie del PC Owner. Worker remoto, modello API e pubblicazione automatica non sono implementati. Safety Authority e dispositivi restano invariati.
+
+Versione 6.4 — 05/10/2026: nuova continuità M27 e pilota locale; snapshot storici conservati.

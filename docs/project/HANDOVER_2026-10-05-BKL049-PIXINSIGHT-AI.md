@@ -22,7 +22,7 @@ L’Owner ha richiesto documentazione completa e avvio del pilota sul proprio PC
 | Caricamento foto e workflow | Procedura Owner-only autenticata, archivio privato e preview pubblica; PR #474–#476, runbook infrastrutturale. Gli esempi M31/M42/NGC7000 sono stati rimossi. |
 | Esportazione History e lettore | Esportatore multi-view 2.0.1 e importer 1.2, PR #477. Importazione dati senza eseguire JavaScript caricato. Correlazioni e lacune esplicite. |
 | M27 LRGB con assistenza IA | Elaborazione nativa PixInsight su quattro master calibrati/allineati, 4634×2808, senza modificare i master. ABE, composizione RGB, calibrazione colore stellare, BXT/NXT/SXT, stretch, luminanza, contrasto locale, saturazione e reintegrazione stelle. Non è stata applicata SPCC. |
-| Dettaglio interno M27 | Due LHE mascherate sulla nebulosa senza stelle, raggi 32 e 80, quantità 0.36 e 0.18; ricomposizione con le stelle conservate. Versione precedente conservata. |
+| Dettaglio interno M27 | Due LHE mascherate sulla nebulosa senza stelle; parametri conservati privatamente; ricomposizione con le stelle conservate. Versione precedente conservata. |
 | File finali | XISF Float32 non lineare, TIFF RGB16 sRGB, JPEG piena risoluzione e derivato web. Verifiche native e integrità conservate privatamente. Non si dichiara assenza di clipping o qualità scientifica certificata. |
 | History dell’ultima versione | 24 viste selezionate, 80 processi, 147 istanze, export di 452929 byte. Viste invariate dopo esportazione. Completezza delle history disponibili, non ricostruzione universale del progetto o replay garantito. |
 | Sostituzione pubblicazione | Il 5 ottobre vecchia versione ritirata e nuova versione pubblicata sulla stessa immagine M27, con il relativo workflow. UI archivio e successiva GET pubblica verificate; evidenze private conservate. |
@@ -35,8 +35,6 @@ L’Owner ha richiesto documentazione completa e avvio del pilota sul proprio PC
 - Versione pubblicata: `VER-5e5dd49a62f90e349e2931f3d143b941`.
 - Workflow: `WF-5e5dd49a62f90e349e2931f3d143b941`.
 - Data elaborazione: 2026-10-02; pubblicazione: 2026-10-05.
-- XISF SHA-256: `c50b89abe5bfbf6003d51384fb32e826af9d69bd5fae74d08226a359d68755ec`.
-- JPEG SHA-256: `84ce923d3b7d35c3bfc85afe9c1b45e5a22e22cf6b32f9d66235ea7fae2ddb5f`.
 
 La [evidenza minimizzata](evidence/BKL-049-M27-PUBLIC-2026-10-05.json) deriva da una nuova GET anonima effettuata il 5 ottobre: una sola riga per M27, versione corretta, 80 passi, 16 sessioni, zero parametri pubblici. La GET non dimostra da sola il ritiro privato della vecchia versione o gli hash dei file privati. La [gallery](../scientific-image-gallery/index.md) conserva `PARTIAL`, `NOT_ESTABLISHED` e `OWNER_DECLARED`: l’importer non certifica l’esecuzione anche quando l’elaborazione assistita è documentata separatamente.
 
