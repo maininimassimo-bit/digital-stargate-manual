@@ -63,3 +63,23 @@ Totale: 35 test Python con ecCodes installato; i dati di fuso orario Windows
 sono una dipendenza locale del venv diagnostico, non una modifica del runtime
 Linux governato. Il secondo incremento richiede nuovi CI/ARB/RQ exact-head
 prima del merge e una nuova acquisizione governata dopo la verifica post-merge.
+
+
+## Controllo visivo delle quantità sotto la precisione di visualizzazione
+
+La nuova acquisizione `37490192028` è riuscita e ha pubblicato soltanto la
+projection nel commit `8e5b2345978c04bd80b71d6778459f97afc5dd03`, dopo
+PR #495 (head `0d9151c7c46fc618153a7ead4b6d01704bd6e34c`, merge
+`a3cae2b34d6ae6a683258a74f54be788e6208fdb`; otto CI e otto workflow
+post-merge PASS, ARB/RQ separati PASS). Pages `37490394390` PASS; dati pubblici
+identici al repository, validator nativo PASS: aggiornamento 06/10 alle
+17:46:52 Europe/Rome, run 12:00 UTC, 16 ore, nessuna ora meteo eleggibile.
+
+Il controllo visivo ha rilevato quantità positive sotto 0,001 mm mostrate come
+0,000 pur mantenendo il blocco pioggia. Il formatter condiviso le presenta come
+`<0,001 mm` nei campioni, tabella, totale, picco e riepilogo del cielo. Lo zero
+rimane zero; quantità e soglie non cambiano. Il picco è indeterminato se ci sono
+ore indeterminate, coerentemente con il totale. Test consumer aggiornati per
+tracce positive, zero, limite 0,001 e picco indeterminato. Solo presentazione:
+non è necessaria una nuova acquisizione GRIB. Rollback limitato a questo
+incremento conserva il recupero e i reader compatibili delle PR #494/#495.
