@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | ID | DSG-HO-BKL049-20261005 |
-| Versione | 2.5 |
+| Versione | 2.6 |
 | Data | 2026-10-06 |
 | Stato | Riconciliazione operativa; estensione pilota autorizzata, non accettata come produzione |
 | Pacchetto | BKL-049 archivio chiuso; BKL-049-EXT-PIAI pilota distinto |
@@ -165,3 +165,17 @@ Cloud Build `78bb9d31-1b02-46f9-ab63-b088ee8ccfea` SUCCESS sul codice revisionat
 La [pagina pubblica](https://maininimassimo-bit.github.io/digital-stargate-manual/pixinsight-pilot/) è verificata nel browser: cartella locale, prompt, LRGB, OSC RGB/CFA, SHO/HOO e mosaico da pannelli sono presenti. L'accesso Google Owner e la nuova catena completa di conferme nel portale restano da collaudare; la verifica senza login non li sostituisce. Il pulsante Google incorporato richiede il clic dell'Owner perché il controllo browser non può indirizzarlo. Le prove native M31 restano tecniche locali su copie, senza sessioni inventate, accettazione scientifica o pubblicazione della foto. L'accettazione privata M27 precedente resta conservata. P6 e acceptance operativa dei nuovi profili restano aperti.
 
 Rollback API: ripristinare il traffico sulla revisione precedente `dsg-pixinsight-pilot-p5-target-01` e riconciliare la pagina con il codice precedente, senza cancellare richieste, ricevute e risultati privati immutabili. Questo aggiornamento supera esclusivamente le precedenti note di candidato non pubblicato e gate di rilascio pendenti; conserva le limitazioni scientifiche e gli snapshot storici.
+
+
+## Master storici senza sessioni importate — 6 ottobre 2026
+
+La correzione Owner chiarisce che M27 è già elaborata e pubblicata; il nuovo collaudo riguarda M31, i cui pannelli precedono il portale. Il modulo distingue «Sessioni già importate» da «Riprese storiche senza sessioni nel portale». Il secondo percorso richiede nome dell'oggetto, provenienza dichiarata e conferma Owner. Non richiede sessioni, catalogo o immagine di riferimento: conserva `sessionIds=[]`, `catalogSha256=null`, `parent=null` e associazione al catalogo `NOT_ESTABLISHED`. La data richiesta è la data di elaborazione, non una data di ripresa inventata.
+
+La dichiarazione `historicalSource` è immutabile e vincola registrazione degli input, selezione dei pannelli, piano esatto, coda, contesto locale e ricevuta privata. Il worker non può registrare un oggetto storico arbitrario senza la richiesta Owner corrispondente. I pannelli storici hanno associazioni di sessione vuote; profili, file, indici, astrometria, griglia, copie, raccolta verificata e conferme separate mantengono gli stessi controlli. La consegna conserva `HISTORICAL_OWNER_DECLARATION` e zero sessioni. Nessuna nuova sessione scientifica, ammissione al registro o pubblicazione è generata. M31 non usa la ricetta o le sessioni di M27.
+
+«Ritira richiesta» conserva proposta e ricevute e impedisce nuove approvazioni e l'ingresso in coda, anche se il ritiro vince tra scrittura del contesto e commit della coda. È ammesso prima del job e dell'approvazione della preparazione nativa; non sostituisce annullamento e recupero di elaborazioni già autorizzate. La richiesta M27 creata erroneamente dall'assistente è un piano non eseguito: va ritirata tramite questo percorso, preservando il risultato M27 precedente.
+
+Validazione sintetica locale: 136 Python e 74 JavaScript PASS, inclusi limiti della provenienza, idempotenza, assenza di sessioni inventate, vincolo di registrazione, consegna privata, ritiro e ruoli HTTP. Gate di rilascio CI → ARB → RQ e verifiche post-merge registrati nella PR di consegna. Le prove non sostituiscono il nuovo collaudo Owner M31 nel portale né accettazione scientifica, History a monte, pubblicazione o P6. Le precedenti note che limitano la procedura alle sessioni importate sono superate esclusivamente da questo ingresso storico esplicito.
+
+
+Sospensione delle nuove richieste storiche: impostare DSG_PIAI_HISTORICAL_INTAKE=0 sul servizio corrente, mantenendo lettura delle ricevute, ritiro e guardie della coda. Non ripristinare il vecchio backend che ignora i ritiri o la provenienza storica dopo che questi record sono stati creati. Un recupero del codice deve conservare tali controlli e i record immutabili; eventuali job autorizzati seguono annullamento e recupero supervisionati.

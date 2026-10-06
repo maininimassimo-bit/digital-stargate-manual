@@ -92,7 +92,10 @@ def source_profile(selection):
         local_directory(directory)
         require(directory in directories, 'MOSAIC_PANEL_OUTSIDE_DECLARED_DIRECTORIES')
         sessions = panel['sessionIds']
-        require(isinstance(sessions, list) and sessions and len(sessions) == len(set(sessions)) and
+        from .historical_source import historical, validate_historical
+        if historical(selection):
+            validate_historical(selection)
+        require(isinstance(sessions, list) and (sessions or historical(selection)) and len(sessions) == len(set(sessions)) and
                 set(sessions) <= set(selection['sessionIds']), 'MOSAIC_PANEL_SESSIONS')
         covered.update(sessions)
     require(covered == set(selection['sessionIds']), 'MOSAIC_SESSION_COVERAGE')

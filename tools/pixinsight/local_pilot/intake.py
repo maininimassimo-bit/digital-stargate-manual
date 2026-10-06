@@ -8,6 +8,7 @@ from .broker import decode, encode, opaque, require
 from .worker import NONLINEAR_RECIPE, NONLINEAR_RECIPES, RECIPE_MODES, actions, input_roles, expected_outputs, processing_settings, field_settings
 from .source_profile import source_profile, selected_panels
 from .preparation_flow import PreparationFlowMixin
+from .historical_source import historical, historical_review, historical_intake_enabled
 from tools.scientific_registry.ingestion_storage import immutable
 from tools.scientific_registry.photo_ingestion import build_review
 
@@ -30,6 +31,8 @@ def local_directory(value):
 class IntakeMixin(PreparationFlowMixin):
     def intake(self, request_id):
         require(opaque(request_id), 'INTAKE_ID')
+        state, _ = self.broker._state()
+        require(request_id not in state.get('withdrawnIntakes', []), 'INTAKE_WITHDRAWN')
         raw, _ = self.store.get('science/intakes/' + request_id)
         require(raw is not None, 'INTAKE_NOT_FOUND')
         return decode(raw)
@@ -37,7 +40,8 @@ class IntakeMixin(PreparationFlowMixin):
     def create_intake(self, value):
         fields = {'requestId', 'masterDirectory', 'prompt', 'catalogSha256', 'sessionIds',
                   'parent', 'title', 'processingDate', 'associationConfirmed'}
-        require(isinstance(value, dict) and set(value) in (fields, fields | {'sourceProfile'}) and opaque(value['requestId']), 'INTAKE_FIELDS')
+        require(isinstance(value, dict) and set(value) in (fields, fields | {'sourceProfile'},
+                fields | {'historicalSource'}, fields | {'sourceProfile', 'historicalSource'}) and opaque(value['requestId']), 'INTAKE_FIELDS')
         local_directory(value['masterDirectory'])
         source_profile(value)
         require(isinstance(value['prompt'], str) and 1 <= len(value['prompt'].strip()) <= 4000 and
@@ -47,10 +51,11 @@ class IntakeMixin(PreparationFlowMixin):
         if existing:
             require(decode(existing)['selection'] == value, 'IDEMPOTENCY_CONFLICT')
         else:
-            catalog = self.catalog_loader()
-            require(hashlib.sha256(catalog).hexdigest() == value['catalogSha256'], 'CATALOG_CHANGED_REFRESH')
+            require(not historical(value) or historical_intake_enabled(), 'HISTORICAL_INTAKE_SUSPENDED')
+            catalog = self.catalog_loader() if not historical(value) else None
+            require(historical(value) or hashlib.sha256(catalog).hexdigest() == value['catalogSha256'], 'CATALOG_CHANGED_REFRESH')
             from .scientific_portal import same_target, known_target
-            review = build_review(catalog_raw=catalog, catalog_digest=value['catalogSha256'],
+            review = historical_review(value) if historical(value) else build_review(catalog_raw=catalog, catalog_digest=value['catalogSha256'],
                 session_ids=value['sessionIds'], title=value['title'], processing_date=value['processingDate'],
                 original_raw=b'XISF0100', original_media_type='application/x-xisf', preview_raw=b'\xff\xd8\xff',
                 preview_media_type='image/jpeg', workflow_raw=b'', receipt_id='BKL049-P5-intake',
@@ -66,6 +71,7 @@ class IntakeMixin(PreparationFlowMixin):
                 'selection': copy.deepcopy(value), 'createdAt': self.broker.clock().isoformat(),
                 'target': review['target'], 'authority': 'PLANNING_ONLY', 'aiMode': 'SESSION_ASSISTED'}))
         def index(state, _now):
+            require(value['requestId'] not in state.get('withdrawnIntakes', []), 'INTAKE_WITHDRAWN')
             rows = state.setdefault('scientificIntakes', [])
             if value['requestId'] not in rows:
                 require(len(rows) < 16, 'INTAKE_CAPACITY')
@@ -77,7 +83,7 @@ class IntakeMixin(PreparationFlowMixin):
         state, _ = self.broker._state()
         rows = []
         for request_id in state.get('scientificIntakes', []):
-            item = self.intake(request_id)
+            item = decode(self.store.get('science/intakes/' + request_id)[0])
             raw, _ = self.store.get('science/plans/' + request_id)
             plan = decode(raw) if raw else None
             source_raw, _ = self.store.get('science/source-plans/' + request_id)
@@ -90,8 +96,22 @@ class IntakeMixin(PreparationFlowMixin):
                          **self.preparation_state(request_id),
                          'sourcePlan':source_plan,'sourcePlanSha256':sha(source_plan) if source_plan else None,
                          'sourceSelectionApproved':source_approved,
-                         'state': 'JOB_CREATED' if jobs else 'PLAN_READY' if plan else 'AWAITING_ASSISTANT_PLAN'})
+                         'state': 'WITHDRAWN' if request_id in state.get('withdrawnIntakes', []) else
+                         'JOB_CREATED' if jobs else 'PLAN_READY' if plan else 'AWAITING_ASSISTANT_PLAN'})
         return rows
+
+    def withdraw_intake(self, request_id, value):
+        require(opaque(request_id) and value == {}, 'WITHDRAWAL_FIELDS')
+        require(self.store.exists('science/intakes/' + request_id), 'INTAKE_NOT_FOUND')
+        def operation(state, _now):
+            require(not any(j['jobId'] == 'PIAI_' + request_id for j in state['jobs']), 'JOB_ALREADY_CREATED')
+            require(request_id not in state.get('preparationAuthorizedIntakes', []) and
+                    not self.store.exists('science/preparation-approvals/' + request_id), 'PREPARATION_ALREADY_APPROVED')
+            rows = state.setdefault('withdrawnIntakes', [])
+            if request_id not in rows:
+                rows.append(request_id)
+            return {'requestId': request_id, 'state': 'WITHDRAWN', 'nativeStarted': False}
+        return self.broker._mutate(operation)
 
     def propose_sources(self, request_id, value):
         intake = self.intake(request_id)
@@ -109,7 +129,7 @@ class IntakeMixin(PreparationFlowMixin):
         plan = decode(raw)
         require(value['sourcePlanSha256'] == sha(plan), 'SOURCE_PLAN_CHANGED')
         selected_panels(intake['selection'],plan)
-        require(hashlib.sha256(self.catalog_loader()).hexdigest() == intake['selection']['catalogSha256'],
+        require(historical(intake['selection']) or hashlib.sha256(self.catalog_loader()).hexdigest() == intake['selection']['catalogSha256'],
                 'CATALOG_CHANGED_REFRESH')
         immutable(self.store,'science/source-approvals/'+request_id,encode(value))
         return {'requestId':request_id,'state':'SOURCE_SELECTION_APPROVED','nativeStarted':False}
@@ -139,6 +159,8 @@ class IntakeMixin(PreparationFlowMixin):
         registered, _ = self.store.get('science/inputs/' + value['inputRef'])
         require(registered is not None and decode(registered)['manifestSha256'] == value['manifestSha256'] and
                 decode(registered)['recipe'] == value['recipe'], 'PLAN_REGISTERED_BINDING')
+        require(decode(registered).get('historicalRequestId') == (request_id if historical(intake['selection']) else None),
+                'HISTORICAL_INPUT_BINDING')
         if prepared:
             require(value['preparationResultSha256']==preparation['preparationResultSha256'] and
                     decode(registered).get('preparation')=={'requestId':request_id,'resultSha256':preparation['preparationResultSha256']} and

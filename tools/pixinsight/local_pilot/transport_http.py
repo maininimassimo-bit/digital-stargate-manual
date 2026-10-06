@@ -94,9 +94,11 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                 intake_match = re.fullmatch(r"/v1/science/intakes/([a-f0-9]{32})", path)
                 if intake_match and self.command == "GET":
                     return self.send(200, scientific.intake(intake_match[1]))
-                plan_match = re.fullmatch(r"/v1/(worker/)?science/intakes/([a-f0-9]{32})/(plan|approve|sources|approve-sources|preparation|approve-preparation|prepared)", path)
+                plan_match = re.fullmatch(r"/v1/(worker/)?science/intakes/([a-f0-9]{32})/(plan|approve|sources|approve-sources|preparation|approve-preparation|prepared|withdraw)", path)
                 if plan_match and self.command == "POST":
                     worker_plan, request_id, action = plan_match.groups()
+                    if not worker_plan and action == 'withdraw':
+                        return self.send(200, scientific.withdraw_intake(request_id, self.body()))
                     if worker_plan and action == "plan":
                         return self.send(200, scientific.propose(request_id, self.body(65536)))
                     if not worker_plan and action == "approve":

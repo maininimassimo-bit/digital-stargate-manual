@@ -64,7 +64,7 @@
         el('p',`Piano confermato: ${result.context.intent.plan.rationale}`,q('summary'));
       }
       el('p',`Workflow: ${result.workflowId}. Originale: ${result.original.width} × ${result.original.height}, non lineare.`,q('summary'));
-      el('p',`Sessioni dichiarate: ${result.context.selection.sessionIds.join(', ')}`,q('summary'));
+      el('p',result.context.selection.historicalSource ? `Riprese storiche: ${result.context.selection.historicalSource.target}. Provenienza dichiarata: ${result.context.selection.historicalSource.provenance}. Sessioni non importate; nessuna associazione al catalogo.` : `Sessioni dichiarate: ${result.context.selection.sessionIds.join(', ')}`,q('summary'));
       el('p','Il PC ha verificato l’esecuzione; il servizio conserva il rapporto del worker senza attestazione indipendente. Il workflow descrive la nuova ricetta e la preparazione dei master quando presente; la History precedente resta da verificare.',q('summary'));
       el('p',result.decision?`Valutazione conservata: ${result.decision.decision}. Nessuna pubblicazione.`:'In attesa della tua valutazione scientifica.',q('summary'));
       q('steps').replaceChildren();const list=el('ol','',q('steps'));
@@ -79,8 +79,17 @@
         el('h3',selection.title,card);
         el('p',`Cartella sul PC: ${selection.masterDirectory}`,card);
         el('p',`Prompt: ${selection.prompt}`,card);
+        if(selection.historicalSource)el('p',`Origine storica dichiarata: ${selection.historicalSource.provenance}. Sessioni non importate; nessuna associazione al catalogo.`,card);
+        if(intake.state==='WITHDRAWN'){el('p','Richiesta ritirata. Piano ed evidenze conservati; nessuna elaborazione autorizzata da questa richiesta.',card);continue;}
         if(selection.sourceProfile)el('p',`Master: ${selection.sourceProfile.mode} · ${selection.sourceProfile.layout==='PANELS'?'pannelli da unire':'campo singolo'} · oggetto ${intake.target || ''}.`,card);
         if(intake.state==='JOB_CREATED'){el('p','Piano confermato: elaborazione presente nello stato qui sotto.',card);continue;}
+        if(!intake.preparationApproved){
+          const withdraw=el('button','Ritira richiesta',card);withdraw.type='button';
+          withdraw.addEventListener('click',()=>run(async()=>{
+            await call(`/v1/science/intakes/${selection.requestId}/withdraw`,{});await refresh();
+            message('Richiesta ritirata. I dati restano conservati, senza creare un job.');
+          }));
+        }
         if(intake.sourcePlan){
           el('h4','Selezione dei pannelli',card);
           el('p',intake.sourcePlan.rationale,card);el('p',`Limiti: ${intake.sourcePlan.limitations}`,card);
@@ -152,12 +161,17 @@
     }
     const targetKey=value=>typeof value==='string'?value.replace(/^(M|NGC|IC) +(?=\d+$)/,'$1'):value;
     function renderSources() {
+      const historical=q('origin').value==='HISTORICAL';
+      q('catalog-label').hidden=historical;q('parent-label').hidden=historical;
+      q('session-fields').hidden=historical;q('historical-fields').hidden=!historical;
+      q('target').required=!historical;q('attest').required=!historical;
+      for(const name of ['historical-target','provenance','historical-attest'])q(name).required=historical;
       const selected=targetKey(q('target').value);
       q('parent').replaceChildren();el('option','Nuova immagine',q('parent')).value='';
       q('parent').value='';
-      options.images.forEach((image,index)=>{if(targetKey(image.target)===selected)el('option',`${image.title} · ${image.imageVersionId}`,q('parent')).value=String(index);});
+      if(!historical)options.images.forEach((image,index)=>{if(targetKey(image.target)===selected)el('option',`${image.title} · ${image.imageVersionId}`,q('parent')).value=String(index);});
       q('sessions').replaceChildren();
-      for(const session of options.sessions.filter(s=>targetKey(s.target)===selected)){const label=el('label','',q('sessions'));label.className='dsg-photo-upload__check';
+      for(const session of options.sessions.filter(s=>!historical && targetKey(s.target)===selected)){const label=el('label','',q('sessions'));label.className='dsg-photo-upload__check';
         const check=document.createElement('input');check.type='checkbox';check.value=session.sessionId;check.dataset.sessionChoice='';label.append(check,document.createTextNode(`${session.target} · ${session.observationDate || ''} · ${session.sessionId}`));}
     }
     async function loadOptions() {
@@ -191,7 +205,9 @@
     q('form').addEventListener('submit',event=>{event.preventDefault();run(async()=>{
       if(!frozen){
         const sessionIds=[...q('sessions').querySelectorAll('input:checked')].map(node=>node.value);
-        if(!sessionIds.length || !q('attest').checked)throw new Error('Seleziona le sessioni e conferma l’associazione ai master.');
+        const historical=q('origin').value==='HISTORICAL';
+        if(historical && options.historicalIntakeEnabled===false)throw new Error('Le nuove richieste storiche sono temporaneamente sospese. Le evidenze precedenti restano conservate.');
+        if(historical ? !q('historical-target').value.trim() || !q('provenance').value.trim() || !q('historical-attest').checked : !sessionIds.length || !q('attest').checked)throw new Error(historical?'Indica oggetto e provenienza e conferma la dichiarazione storica.':'Seleziona le sessioni e conferma l’associazione ai master.');
         if(!q('directory').value.trim() || !q('prompt').value.trim())throw new Error('Indica la cartella completa e il risultato desiderato.');
         const image=q('parent').value===''?null:options.images[Number(q('parent').value)];
         const mode=q('mode').value,layout=q('layout').value;
@@ -199,10 +215,11 @@
         const bayerPattern=mode==='OSC_CFA'?q('bayer').value:null;
         if(mode==='OSC_CFA' && !bayerPattern)throw new Error('Indica lo schema Bayer verificato; non viene dedotto dal nome del file.');
         frozen={requestId:Array.from(crypto.getRandomValues(new Uint8Array(16)),x=>x.toString(16).padStart(2,'0')).join(''),
-          masterDirectory:q('directory').value.trim(),prompt:q('prompt').value,catalogSha256:options.catalogSha256,sessionIds,
+          masterDirectory:q('directory').value.trim(),prompt:q('prompt').value,catalogSha256:historical?null:options.catalogSha256,sessionIds:historical?[]:sessionIds,
           sourceProfile:{mode,layout,bayerPattern,panels:[],additionalDirectories},
-          parent:image?{imageId:image.imageId,imageVersionId:image.imageVersionId,workflowId:image.workflowId}:null,
-          title:q('title').value,processingDate:q('date').value,associationConfirmed:true};
+          parent:!historical&&image?{imageId:image.imageId,imageVersionId:image.imageVersionId,workflowId:image.workflowId}:null,
+          title:q('title').value,processingDate:q('date').value,associationConfirmed:!historical};
+        if(historical)frozen.historicalSource={target:q('historical-target').value.trim(),provenance:q('provenance').value.trim(),attested:true};
         sessionStorage.setItem(KEY,JSON.stringify(frozen));
       }
       await submitFrozen();
@@ -217,6 +234,7 @@
     q('correlations').addEventListener('click',()=>run(async()=>save(await call(`/v1/science/${result.jobId}/correlations`,undefined,true),`${result.workflowId}-correlazioni.json`)));
     q('receipt').addEventListener('click',()=>save(new Blob([JSON.stringify(result,null,2)],{type:'application/json'}),`${result.jobId}-collegamenti.json`));
     q('target').addEventListener('change',()=>{if(options && !frozen)renderSources();});
+    q('origin').addEventListener('change',()=>{if(options && !frozen){q('attest').checked=false;q('historical-attest').checked=false;renderSources();}});
     q('mode').addEventListener('change',()=>{q('bayer-label').hidden=q('mode').value!=='OSC_CFA';});
     q('layout').addEventListener('change',()=>{q('additional-label').hidden=q('layout').value!=='PANELS';});
     q('connect').addEventListener('click',()=>run(async()=>{
