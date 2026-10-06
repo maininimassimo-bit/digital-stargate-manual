@@ -39,10 +39,12 @@ def main():
     parser.add_argument('--bundle',required=True)
     parser.add_argument('--output',required=True)
     args=parser.parse_args()
+    require(Path(args.config).stat().st_size <= 65536 and Path(args.bundle).stat().st_size <= 65536,'CONFIG_SIZE')
     config=decode(Path(args.config).read_bytes())
+    require(set(config) == {'serviceOrigin','workerId','workerRoot','registry'},'CONFIG_FIELDS')
     bundle=decode(Path(args.bundle).read_bytes())
     value=prepare_payload(bundle)
-    transport=Transport(config['origin'],os.environ['DSG_PIAI_WORKER_TOKEN'])
+    transport=Transport(config['serviceOrigin'],os.environ['DSG_PIAI_WORKER_TOKEN'])
     response=transport.post(f"/v1/worker/science/{bundle['jobId']}/revisions/{bundle['revisionId']}/result",value)
     require(response.get('jobId') == bundle['jobId'] and response.get('revisionId') == bundle['revisionId'] and
             response.get('publication') == 'NONE','DELIVERY_RESPONSE_BINDING')

@@ -130,6 +130,7 @@ class RevisionTests(unittest.TestCase):
         import urllib.error
         from http.server import HTTPServer
         from .transport_http import handler_for, AuthError
+        from .transport import Transport
         def owner(token):
             if token != 'OWNER':raise AuthError()
         server=HTTPServer(('127.0.0.1',0),handler_for(self.fixture.broker,owner,'https://portal.test',
@@ -143,8 +144,9 @@ class RevisionTests(unittest.TestCase):
             return urllib.request.urlopen(urllib.request.Request(origin+path,
                 encode(body) if body is not None else None,headers=headers or {}))
         try:
-            with request('/v1/worker'+route+'/result',self.value,worker_headers) as response:
-                self.assertEqual(decode(response.read())['revisionId'],self.identity)
+            transport=Transport(origin,fixtures.TOKEN,test_loopback=True)
+            response=transport.post('/v1/worker'+route+'/result',self.value)
+            self.assertEqual(response['revisionId'],self.identity)
             for role in ('result','preview','workflow','correlations'):
                 with self.assertRaises(urllib.error.HTTPError) as caught:request('/v1'+route+'/'+role)
                 self.assertEqual(caught.exception.code,403)
@@ -160,6 +162,43 @@ class RevisionTests(unittest.TestCase):
             self.assertEqual(caught.exception.code,404)
         finally:
             server.shutdown();thread.join();server.server_close()
+
+    def test_explicit_cli_uses_existing_config_and_verifies_local_original(self):
+        import contextlib,io,json,struct,sys,tempfile
+        from pathlib import Path
+        from unittest.mock import patch
+        from . import revision_delivery
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            header=b'<xisf><Image geometry="1:1:3" sampleFormat="Float32" colorSpace="RGB" location="attachment:4096:12"/></xisf>'
+            raw=b'XISF0100'+struct.pack('<II',len(header),0)+header
+            raw+=bytes(4096-len(raw))+struct.pack('<fff',0.1,0.2,0.3)
+            original=root/'original.xisf';original.write_bytes(raw)
+            bundle={k:self.value[k] for k in ('parentReviewSha256','label','processingDate')}
+            bundle.update(jobId=self.job,revisionId=self.identity,original=str(original),nonLinearConfirmed=True)
+            for role in ('preview','workflow','correlations'):
+                path=root/(role+'.dat');path.write_bytes(base64.b64decode(self.value[role+'Base64']))
+                bundle[role]=str(path)
+            config={'serviceOrigin':'https://synthetic.run.app','workerId':fixtures.WORKER,'workerRoot':str(root),'registry':{}}
+            config_path=root/'config.json';config_path.write_bytes(encode(config))
+            bundle_path=root/'bundle.json';bundle_path.write_bytes(encode(bundle))
+            output=root/'receipt.json'
+            class Client:
+                def post(_self,path,value):
+                    self.assertEqual(path,f'/v1/worker/science/{self.job}/revisions/{self.identity}/result')
+                    result=self.portal.deliver_revision(self.job,self.identity,value)
+                    return {k:result[k] for k in ('jobId','revisionId','reviewSha256','publication')}
+            with patch.object(sys,'argv',['revision_delivery','--config',str(config_path),'--bundle',str(bundle_path),'--output',str(output)]),\
+                 patch.object(revision_delivery,'Transport',return_value=Client()) as transport,\
+                 patch.dict('os.environ',{'DSG_PIAI_WORKER_TOKEN':fixtures.TOKEN}),contextlib.redirect_stdout(io.StringIO()):
+                revision_delivery.main();revision_delivery.main()
+                transport.assert_called_with(config['serviceOrigin'],fixtures.TOKEN)
+            self.assertEqual(original.read_bytes(),raw)
+            self.assertEqual(self.portal.revision(self.job,self.identity)['original']['sha256'],digest(raw))
+            self.assertEqual(decode(output.read_bytes())['revisionId'],self.identity)
+            bundle['nonLinearConfirmed']=False
+            with self.assertRaisesRegex(ProtocolError,'NONLINEAR_DECLARATION_REQUIRED'):
+                revision_delivery.prepare_payload(bundle)
 
 
 if __name__ == '__main__':unittest.main()
