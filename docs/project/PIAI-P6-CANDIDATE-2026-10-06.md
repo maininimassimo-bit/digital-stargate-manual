@@ -55,11 +55,13 @@ use the same explicit encoding.
 The local operational exercise used native synthetic monochrome fixtures, an
 isolated PixInsight instance and an actual authenticated loopback HTTP adapter. The
 test terminated only its own instance after a process-start event, before a terminal
-receipt. Result: `RECOVERY_REQUIRED`, same claim on worker restart, second job still
+receipt. Result: `RECOVERY_REQUIRED`, same claim after reconstructing the coordinator
+from its on-disk state in the same Python process, second job still
 queued, reservations retained, fourteen job files unchanged on restart, original
 fixtures/copies unchanged, no automatic native restart. Existing Owner instances
 and the approved M31 were not terminated or modified. This is controlled native
-process termination with synthetic data, not a power-loss/desktop crash or a cloud
+process termination with synthetic data, not an OS worker-process restart,
+power-loss/desktop crash or a cloud
 end-to-end recovery test. See the [minimized candidate evidence](evidence/BKL-049-PIAI-P6-CANDIDATE-2026-10-06.json).
 
 ## Remaining gates
