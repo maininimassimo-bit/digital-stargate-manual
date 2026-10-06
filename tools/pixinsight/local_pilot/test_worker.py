@@ -42,6 +42,9 @@ class WorkerTests(unittest.TestCase):
         self.assertEqual((job / "executor.jsh").read_bytes(), Path(worker.__file__).with_name("executor.jsh").read_bytes())
         self.assertNotIn("eval(", script)
         self.assertNotIn("new Function", script)
+        raw_launcher = (job / 'run.js').read_bytes()
+        self.assertTrue(raw_launcher.startswith(b'#engine v8\r\n#include '))
+        self.assertNotIn(b'\n', raw_launcher.replace(b'\r\n', b''))
 
     def test_second_job_rejected_while_reserved(self):
         worker.prepare(self.root, self.request)

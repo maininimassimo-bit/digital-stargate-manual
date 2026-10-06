@@ -200,6 +200,11 @@ class SessionWorker:
             manifest = self._read(job / "manifest.json")
             require(manifest["jobId"] == binding["jobId"] and manifest["recipe"] == envelope["recipe"] and
                     manifest["workerRoot"] == self.root.as_posix() and manifest["jobDirectory"] == job.as_posix(), "MANIFEST_BINDING")
+            if native_stopped and not (job / 'terminal.json').exists() and any((job / 'events').glob('*.json')):
+                # Explicit confirmation of a stopped native instance, with evidence
+                # of a run but no terminal receipt, cannot remain a running job.
+                self._report(binding, remote, 'RECOVERY_REQUIRED')
+                return {'state':'RECOVERY_REQUIRED','jobId':binding['jobId']}
             if (job / "terminal.json").exists() and native_stopped:
                 try:
                     result = worker.collect(self.root, binding["jobId"])

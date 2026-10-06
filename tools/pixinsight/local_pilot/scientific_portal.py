@@ -7,6 +7,7 @@ import re
 from .broker import decode, encode, require, opaque
 from .worker import NONLINEAR_RECIPE, NONLINEAR_RECIPES, RECIPE_MODES, actions
 from .intake import IntakeMixin
+from .scientific_revisions import RevisionMixin
 from .historical_source import historical, validate_historical, historical_review, historical_intake_enabled
 from tools.scientific_registry.ingestion_storage import immutable, Conflict
 from tools.scientific_registry.photo_ingestion import build_review
@@ -34,7 +35,7 @@ def known_target(value):
     return isinstance(value,str) and bool(value.strip()) and value.strip().upper() not in {'UNKNOWN','UNSPECIFIED','N/A'}
 
 
-class ScientificPortal(IntakeMixin):
+class ScientificPortal(IntakeMixin, RevisionMixin):
     def __init__(self, broker, catalog_loader, gallery_loader):
         self.broker, self.store = broker, broker.store
         self.catalog_loader, self.gallery_loader = catalog_loader, gallery_loader

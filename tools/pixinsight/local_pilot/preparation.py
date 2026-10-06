@@ -141,7 +141,7 @@ def prepare(root, request):
                   '#include '+json.dumps(engine.as_posix())]
         includes+=['#include '+json.dumps((job/name).as_posix()) for name in runtime]
         launcher='\n'.join(includes)+'\nDSGExecuteMasterPreparation(JSON.parse(File.readTextFile('+json.dumps((job/'manifest.json').as_posix())+')));\n'
-        with (job/'run.js').open('x',encoding='utf-8') as stream:stream.write(launcher)
+        with (job/'run.js').open('x',encoding='utf-8',newline='\r\n') as stream:stream.write(launcher)
         return job
     except Exception:
         if job.is_dir():write_new(job/'preparation-failed.json',{'status':'PREPARATION_FAILED','authority':reservation['authority']})

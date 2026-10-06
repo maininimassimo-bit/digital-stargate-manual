@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0",
+  "status": "CANDIDATE_NOT_RELEASED_NOT_OPERATIONALLY_ACCEPTED",
+  "scope": "BKL-049-EXT-PIAI",
+  "imageApproval": "OWNER_APPROVED_LOCAL_M31_IN_CHAT",
+  "portalRefinementDelivered": false,
+  "publication": "NONE",
+  "nativeRecovery": {
+    "status": "PASS_CONSERVATIVE_RECOVERY_FENCE",
+    "classification": "ACTUAL_NATIVE_PROCESS_SYNTHETIC_DATA_LOOPBACK_HTTP",
+    "terminationKind": "CONTROLLED_PROCESS_TERMINATION",
+    "cloudTest": false,
+    "desktopCrash": false,
+    "remoteState": "RECOVERY_REQUIRED",
+    "restartState": "RECOVERY_REQUIRED",
+    "secondJobState": "QUEUED",
+    "sameClaim": true,
+    "originalAndCopiesUnchanged": true,
+    "jobFilesUnchangedOnRestart": true,
+    "nativeReservationRetained": true,
+    "transportBindingRetained": true,
+    "noAutomaticNativeRestart": true,
+    "checkedFiles": 14
+  },
+  "realNarrowbandProfileAcceptance": "NOT_ESTABLISHED",
+  "realCfaProfileAcceptance": "NOT_ESTABLISHED",
+  "masterDirectoryPolicy": "OWNER_SELECTS_PER_REQUEST",
+  "operationalAcceptance": "PENDING",
+  "rootCompatibilityJunction": "WAITING_FOR_OWNER_PIXINSIGHT_CLOSURE_CONFIRMATION"
+}

@@ -5,7 +5,7 @@ import {readFileSync} from 'node:fs';
 import {webcrypto} from 'node:crypto';
 const source=readFileSync(new URL('../../../docs/javascripts/pixinsight-pilot.js',import.meta.url),'utf8');
 const tick=async()=>{for(let i=0;i<12;i++)await new Promise(resolve=>setTimeout(resolve,3));};
-function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=false,plansReady=false,sourcePlanReady=false,preparationReady=false}={}) {
+function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=false,plansReady=false,sourcePlanReady=false,preparationReady=false,completedRevision=false,legacyRevisions=false}={}) {
   function node(){return {dataset:{},children:[],callbacks:{},value:'',checked:false,isConnected:true,
     addEventListener(type,callback){this.callbacks[type]=callback;},append(...items){this.children.push(...items);},
     replaceChildren(){this.children=[];},querySelectorAll(){return this.children.flatMap(label=>label.children).filter(x=>x.type==='checkbox'&&x.checked);},
@@ -15,6 +15,8 @@ function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=fal
   controls.mode.value='LRGB';controls.layout.value='SINGLE';controls.additional.value='';controls.directory.value='F:\\Astro\\M27\\Master';controls.prompt.value='Dettaglio interno, fondo naturale';
   const root=node();root.querySelector=selector=>controls[selector.match(/data-p5-(.+)\]/)[1]];
   const stored=new Map(),requests=[];let callback,job,intake,first=lostCreate;
+  if(completedRevision)job={jobId:'PIAI_'+'1'.repeat(32),state:'COMPLETED'};
+  const revision={revisionId:'8'.repeat(32),imageVersionId:'VER-'+'8'.repeat(32),label:'M31 colore approvato',processingDate:'2026-10-06',reviewSha256:'9'.repeat(64)};
   const google={accounts:{id:{initialize(value){callback=value.callback;},renderButton(){}}}};
   const context={document:{readyState:'complete',querySelector:()=>root,createElement:node,createTextNode:text=>({textContent:text})},
     window:{google},google,crypto:webcrypto,Blob,URL,AbortController,setTimeout,clearTimeout,
@@ -23,6 +25,13 @@ function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=fal
       requests.push({url,options});assert.equal(options.redirect,'error');assert.equal(options.credentials,'omit');
       assert.equal(options.headers.Authorization,'Bearer PRIVATE_OWNER_TOKEN');
       if(denied)return {ok:false,status:403,json:async()=>({error:'ACCESS_DENIED'})};
+      if(url.endsWith('/revisions'))return legacyRevisions ? {ok:false,status:404,json:async()=>({error:'NOT_FOUND'})} : {ok:true,json:async()=>({revisions:completedRevision?[revision]:[]})};
+      if(completedRevision&&url.includes('/revisions/'+revision.revisionId+'/')){
+        if(url.endsWith('/result'))return {ok:true,json:async()=>({...revision,jobId:job.jobId,imageId:'IMG-test',workflowId:'WF-'+revision.revisionId,
+          context:{selection:{title:'M31',sessionIds:[]}},original:{width:1000,height:800},steps:[{ordinal:1,processId:'PixelMath'}],decision:null})};
+        if(url.endsWith('/decision'))return {ok:true,json:async()=>({publication:'NONE'})};
+        return {ok:true,blob:async()=>new Blob(['private fixture'])};
+      }
       if(url.endsWith('/options'))return {ok:true,json:async()=>({inputs:[{inputRef:'b'.repeat(32),target:'M27'}],images:[],catalogSha256:'a'.repeat(64),sessions:[{sessionId:'SESSION-M27',target:'M27'}]})};
       if(url.endsWith('/science/intakes')){
         if(options.method==='POST'){
@@ -74,6 +83,30 @@ function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=fal
       controls.input.value='b'.repeat(32);controls.sessions.children[0]?.children.forEach(x=>{if(x.type==='checkbox')x.checked=true;});},
     async submit(){controls.form.callbacks.submit({preventDefault(){}});await tick();},async retry(){controls.retry.click();await tick();}};
 }
+
+test('derived review and downloads use exact revision, preserving the first delivery',async()=>{
+  const h=harness({completedRevision:true});await h.login();
+  const card=h.controls.jobs.children[0];
+  const revised=card.children.find(x=>x.textContent==='M31 colore approvato · 2026-10-06');
+  assert.ok(revised);revised.click();await tick();
+  assert.match(h.controls.summary.children[0].textContent,/VER-8888/);
+  h.controls.workflow.click();await tick();h.controls.correlations.click();await tick();
+  h.controls.accept.click();await tick();
+  const revisionRequests=h.requests.filter(x=>/\/(result|preview|workflow|correlations|decision)$/.test(x.url));
+  assert.ok(revisionRequests.length>=6);
+  assert.ok(revisionRequests.every(x=>x.url.includes('/revisions/'+'8'.repeat(32)+'/')));
+  const decision=revisionRequests.find(x=>x.url.endsWith('/decision'));
+  assert.deepEqual(JSON.parse(decision.options.body),{reviewSha256:'9'.repeat(64),decision:'ACCEPT_PRIVATE'});
+});
+
+test('previous delivery remains reachable when revision API is rolled back',async()=>{
+  const h=harness({completedRevision:true,legacyRevisions:true});await h.login();
+  const card=h.controls.jobs.children[0];
+  assert.ok(card.children.some(x=>x.textContent==='Apri anteprima e workflow'));
+  assert.equal(card.children.some(x=>x.textContent==='M31 colore approvato · 2026-10-06'),false);
+  assert.equal(h.controls.refresh.disabled,false);
+  assert.doesNotMatch(h.controls.message.textContent,/Operazione non completata/);
+});
 test('folder and prompt create planning intake only, no native queue or code evaluation',async()=>{
   const h=harness();await h.login();await h.submit();
   const posts=h.requests.filter(x=>x.url.endsWith('/science/intakes')&&x.options.method==='POST');

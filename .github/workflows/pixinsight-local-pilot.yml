@@ -26,4 +26,4 @@ jobs:
       - name: Test local coordinator reservation and private retention
         run: |
           python -m pip install "Pillow>=11,<13"
-          python -m unittest tools.pixinsight.local_pilot.test_worker tools.pixinsight.local_pilot.test_quality tools.pixinsight.local_pilot.test_transport tools.pixinsight.local_pilot.test_scientific_portal tools.pixinsight.local_pilot.test_intake tools.pixinsight.local_pilot.test_source_profile tools.pixinsight.local_pilot.test_preparation tools.pixinsight.local_pilot.test_preparation_flow tools.pixinsight.local_pilot.test_historical_source
+          python -m unittest tools.pixinsight.local_pilot.test_worker tools.pixinsight.local_pilot.test_quality tools.pixinsight.local_pilot.test_transport tools.pixinsight.local_pilot.test_scientific_portal tools.pixinsight.local_pilot.test_scientific_revisions tools.pixinsight.local_pilot.test_intake tools.pixinsight.local_pilot.test_source_profile tools.pixinsight.local_pilot.test_preparation tools.pixinsight.local_pilot.test_preparation_flow tools.pixinsight.local_pilot.test_historical_source
