@@ -31,4 +31,8 @@ assert.doesNotMatch(clear.panel,/indeterminata/);
 assert.equal(summarizeNightSky(clear.data,clear.now)?.state,'clear');
 const legacy=await render(false,'DSG-F9-PLANNER-WEATHER-GATE@1.1');
 assert.match(legacy.ranking,/Graduatoria e finestre sospese/);
+const rollback=await render(true,'DSG-F9-PLANNER-WEATHER-GATE@1.1');
+assert.match(rollback.ranking,/Graduatoria e finestre sospese/);
+assert.match(rollback.panel,/<strong>indeterminata<\/strong>/);
+assert.equal(summarizeNightSky(rollback.data,rollback.now),null);
 console.log('F9 consumer: uncertainty, dry baseline, sky and legacy-policy checks PASS');

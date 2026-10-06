@@ -27,9 +27,18 @@ asseriti risultati futuri. Evidenza exact-head, merge e post-merge nella PR
 associata e nel rapporto locale di consegna.
 
 Mandato: DSG-AEM-001; eventuale merge usa W-DSG-AEM-RULESET-001.
-Rollback: revert del commit di merge e nuovo deployment Pages; nessun force push.
-Una projection 1.2 residua è bloccata dal consumer 1.1 fino a nuova acquisizione
-coerente; dati scaduti restano indisponibili. Non richiede conservazione GRIB.
+Rollback: PR governata con ripristino selettivo della riduzione/acquisizione
+precedente, mantenendo consumer F9, modulo sky e relativi test compatibili con
+`precipitationUncertain` e policy 1.2. Non fare revert integrale del merge:
+il consumer precedente sospende ranking ma può mostrare zero e cielo sereno
+per una projection 1.2 residua. Il consumer mantenuto mostra l’incertezza anche
+con policy 1.1 e sospende le nuove graduatorie incompatibili. Dataset scaduti
+restano indisponibili; nessun force push o conservazione GRIB. Il rollback
+richiede i propri gate CI/ARB/RQ e verifica Pages, prima di una nuova acquisizione.
+
+ARB iniziale sul head `88e72a47f0bc324a0c3c61087363287ca6902ede`: un Major sulla
+procedura di rollback, corretto con conservazione dei lettori compatibili e test
+policy legacy + ora indeterminata; necessario nuovo exact-head review.
 
 P6 rimane aperta, con percorsi master indicati dall’Owner per ogni elaborazione.
 Il collegamento unico C → F attende sempre la conferma di chiusura PixInsight.
