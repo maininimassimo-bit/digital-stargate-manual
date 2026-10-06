@@ -15,8 +15,8 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | Documento | Ruolo |
 |---|---|
 | `AI_BOOTSTRAP.md` | Root bootstrap |
-| [BKL-043 F4 Handover 25/09/2026](HANDOVER_2026-09-25-BKL043-F4.md) | Handover corrente |
-| [Current Technical Baseline 25/09/2026](CURRENT_TECHNICAL_BASELINE_2026-09-25.md) | Baseline tecnica corrente |
+| [M31 e PixInsight Handover 06/10/2026](HANDOVER_2026-10-06-BKL049-M31.md) | Handover corrente |
+| [Current Technical Baseline 06/10/2026](CURRENT_TECHNICAL_BASELINE_2026-10-06.md) | Baseline tecnica corrente |
 | [DSG-AEM-001 Continuous Autonomous Execution Mandate](DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md) | Mandato owner-authorized e deroga ruleset condizionata |
 | [PR #196 DSG-AEM-001 AI-Assisted ARB Review](../architecture/reviews/ARB-PR196-DSG-AEM-001-Governance-AI-Assisted-Review-2026-09-15.md) | Approved — 99/100; non equivalente ad approvazione umana indipendente |
 | [PR #196 DSG-AEM-001 AI-Assisted Release Quality](../architecture/reviews/RQ-PR196-DSG-AEM-001-Governance-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |
