@@ -1,21 +1,22 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
-import {summarizeNightSky} from '../../docs/javascripts/planner-weather-sky.mjs';
+import {summarizeNightSky,formatPrecipitation} from '../../docs/javascripts/planner-weather-sky.mjs';
 
 // Run the actual consumer with a minimal DOM and a governed public projection.
 const source=fs.readFileSync(new URL('../../docs/javascripts/observation-planner-f9.js',import.meta.url),'utf8').replace(/^import .*;\r?\n/,'');
 const baseline=JSON.parse(fs.readFileSync(new URL('../../docs/data/observation-planner-f9-current-night.json',import.meta.url)));
-async function render(uncertain,policy='DSG-F9-PLANNER-WEATHER-GATE@1.2'){
+async function render(uncertain,policy='DSG-F9-PLANNER-WEATHER-GATE@1.2',trace=0){
   const data=structuredClone(baseline);data.weatherPolicy.id=policy;
   // Keep this test independent of the age of the checked-in forecast.
   const now=Date.parse(data.generatedAtUtc);
   for(const row of data.hourly){Object.assign(row.weather,{cloudCoverPct:0,relativeHumidityPct:20,precipitationMm:0,temperatureC:15,dewPointC:4,windSpeedKmh:0,windGustKmh:0});}
+  if(trace>0)data.hourly[0].weather.precipitationMm=trace;
   if(uncertain)data.hourly[0].weather.precipitationUncertain=true;
   const controls=new Map(['setup','status','category','results'].map(k=>['#dsg-f9-'+k,{value:k==='setup'?data.setupProfiles[0].setupId:'ALL',innerHTML:'',addEventListener(){}}]));
   let panel='';const root={isConnected:true,innerHTML:'',querySelector:s=>controls.get(s)||null,querySelectorAll:s=>s==='.dsg-op-panel'?[{}, {insertAdjacentHTML:(_,html)=>{panel=html;}}]:[],prepend(){}};
   class Clock extends Date{static now(){return now;}}
-  vm.runInNewContext(source,{Date:Clock,document:{hidden:false,querySelector:()=>root,createElement:()=>({}),addEventListener(){}},window:{addEventListener(){}},createWeatherSky:()=>({show(){},clear(){}}),AbortController,fetch:async()=>({ok:true,json:async()=>data}),setTimeout:()=>1,clearTimeout(){},setInterval:()=>1,clearInterval(){}});
+  vm.runInNewContext(source,{Date:Clock,document:{hidden:false,querySelector:()=>root,createElement:()=>({}),addEventListener(){}},window:{addEventListener(){}},createWeatherSky:()=>({show(){},clear(){}}),formatPrecipitation,AbortController,fetch:async()=>({ok:true,json:async()=>data}),setTimeout:()=>1,clearTimeout(){},setInterval:()=>1,clearInterval(){}});
   await new Promise(resolve=>setImmediate(resolve));
   assert.ok(root.innerHTML.includes('Planner della notte corrente'),root.innerHTML);
   return {panel,ranking:controls.get('#dsg-f9-results').innerHTML,data,now};
@@ -35,4 +36,14 @@ const rollback=await render(true,'DSG-F9-PLANNER-WEATHER-GATE@1.1');
 assert.match(rollback.ranking,/Graduatoria e finestre sospese/);
 assert.match(rollback.panel,/<strong>indeterminata<\/strong>/);
 assert.equal(summarizeNightSky(rollback.data,rollback.now),null);
+assert.match(uncertain.panel,/picco orario indeterminato/);
+assert.equal(formatPrecipitation(0),'0,000');
+assert.equal(formatPrecipitation(0.0000001),'<0,001');
+assert.equal(formatPrecipitation(0.001),'0,001');
+assert.equal(formatPrecipitation(0.01),'0,010');
+assert.equal(formatPrecipitation(NaN),'non disponibile');
+const trace=await render(false,'DSG-F9-PLANNER-WEATHER-GATE@1.2',0.0000001);
+assert.match(trace.panel,/&lt;0,001 mm/);
+assert.match(trace.panel,/pioggia/);
+assert.equal(summarizeNightSky(trace.data,trace.now)?.state,'rain');
 console.log('F9 consumer: uncertainty, dry baseline, sky and legacy-policy checks PASS');

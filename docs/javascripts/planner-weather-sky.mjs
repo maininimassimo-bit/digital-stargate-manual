@@ -1,5 +1,10 @@
 // Presentation only. Called with the projection already accepted by the F9 consumer.
 const HOUR = 3_600_000;
+export function formatPrecipitation(value) {
+  if (!Number.isFinite(value) || value < 0) return 'non disponibile';
+  if (value > 0 && value < 0.001) return '<0,001';
+  return (value === 0 ? 0 : value).toLocaleString('it-IT', {minimumFractionDigits: 3, maximumFractionDigits: 3});
+}
 export function summarizeNightSky(d, now = Date.now()) {
   const from = Date.parse(d?.nightWindow?.fromUtc), to = Date.parse(d?.nightWindow?.toUtcExclusive);
   const run = Date.parse(d?.forecast?.runInitialisationUtc);
@@ -44,7 +49,7 @@ export function createWeatherSky(host) {
     clearTimeout(timer); projection = d; host.dataset.skyState = s.state;
     title.textContent = labels[s.state];
     const number = (n, digits) => n.toLocaleString('it-IT', {minimumFractionDigits: digits, maximumFractionDigits: digits});
-    details.textContent = `Nuvole medie ${number(s.meanCloud, 1)}% · Pioggia totale ${number(s.rain, 3)} mm · ${s.wetHours}/${s.count} campioni con pioggia`;
+    details.textContent = `Nuvole medie ${number(s.meanCloud, 1)}% · Pioggia totale ${formatPrecipitation(s.rain)} mm · ${s.wetHours}/${s.count} campioni con pioggia`;
     const date = n => new Date(n).toLocaleString('it-IT', {timeZone: 'Europe/Rome', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'});
     period.textContent = `${date(s.from)} – ${date(s.to)} · Europe/Rome · ${s.count} campioni orari`;
     image.alt = `${labels[s.state]}: illustrazione della media notturna, non fotografia del sito`;
