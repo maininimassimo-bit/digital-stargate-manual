@@ -4,6 +4,8 @@ on:
     paths:
       - '.github/scripts/observation_planner_f9.py'
       - '.github/scripts/test_observation_planner_f9.py'
+      - '.github/scripts/test-observation-planner-f9-consumer.mjs'
+      - 'docs/javascripts/planner-weather-sky.mjs'
       - '.github/scripts/requirements-observation-planner-f9.txt'
       - '.github/workflows/bkl-031-f9-*.yml'
       - 'docs/javascripts/observation-planner-f9.js'
@@ -17,6 +19,8 @@ on:
     paths:
       - '.github/scripts/observation_planner_f9.py'
       - '.github/scripts/test_observation_planner_f9.py'
+      - '.github/scripts/test-observation-planner-f9-consumer.mjs'
+      - 'docs/javascripts/planner-weather-sky.mjs'
       - '.github/scripts/requirements-observation-planner-f9.txt'
       - '.github/workflows/bkl-031-f9-*.yml'
       - 'docs/javascripts/observation-planner-f9.js'
@@ -39,3 +43,4 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: '22'}
       - run: node --check docs/javascripts/observation-planner-f9.js
+      - run: node .github/scripts/test-observation-planner-f9-consumer.mjs

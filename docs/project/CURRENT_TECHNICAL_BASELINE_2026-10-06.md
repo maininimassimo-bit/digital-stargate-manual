@@ -35,3 +35,7 @@ Foto: precedente revisione `dsg-scientific-photo-ingestion-00002-lrw`, digest `s
 P6 resta aperta per acceptance operativa esplicita, collaudi residui/concorrenza/recupero nel perimetro del piano e profili reali SII/Hα/OIII e OSC CFA. Arresto nativo e nuovo processo worker su dati sintetici/HTTP locale non provano crash desktop, perdita di alimentazione o recupero nativo cloud. Directory dei master indicata dall'Owner per ogni richiesta. Collegamento unico C → F sospeso fino alla conferma esplicita di chiusura PixInsight; compatibilità per cartelle già conservata. Il rilascio foto non carica/pubblica M31 e non chiude P6.
 
 [Dossier P6](PIAI-P6-CANDIDATE-2026-10-06.md), [contratto foto storico](SCIENTIFIC-PHOTO-HISTORICAL-SOURCE-2026-10-06.md), [evidenza minimizzata](evidence/BKL-049-WORK-RECONCILIATION-2026-10-06.json).
+
+## Intervento planner prima della ripresa P6
+
+[Diagnosi e correzione della precisione GRIB F9](PLANNER-F9-GRIB-PRECISION-2026-10-06.md). Le soglie approvate e lo stato aperto di P6 restano invariati; il rilascio e la nuova acquisizione richiedono le verifiche governate registrate nella PR associata.
