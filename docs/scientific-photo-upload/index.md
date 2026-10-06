@@ -2,15 +2,24 @@
 
 <div class="dsg-photo-upload" data-photo-upload>
   <h1>Aggiungi foto e workflow</h1>
-  <p>Collega una nuova immagine alle sessioni già importate. L’originale e il file del workflow restano privati. Potrai pubblicare l’anteprima dopo averla verificata.</p>
+  <p>Aggiungi un’immagine da sessioni già importate oppure da riprese storiche. L’originale e il file del workflow restano privati. Potrai pubblicare l’anteprima dopo averla verificata.</p>
   <p data-photo-status role="status">Verifica del servizio di caricamento…</p>
   <div data-photo-signin></div>
   <form data-photo-form>
     <fieldset disabled data-photo-fields>
-      <legend>1. Sessioni di origine</legend>
-      <label>Oggetto osservato<select data-photo-target required></select></label>
-      <p>Se l’immagine combina più notti, seleziona tutte le sessioni di origine.</p>
-      <div data-photo-sessions></div>
+      <legend>1. Origine delle riprese</legend>
+      <label>Origine<select data-photo-origin><option value="IMPORTED">Sessioni già importate</option><option value="HISTORICAL">Riprese storiche senza sessioni nel portale</option></select></label>
+      <div data-photo-imported-fields>
+        <label>Oggetto osservato<select data-photo-target required></select></label>
+        <p>Se l’immagine combina più notti, seleziona tutte le sessioni di origine.</p>
+        <div data-photo-sessions></div>
+      </div>
+      <div data-photo-historical-fields hidden>
+        <label>Oggetto delle riprese storiche<input data-photo-historical-target maxlength="160"></label>
+        <label>Provenienza delle riprese<textarea data-photo-provenance maxlength="2000"></textarea></label>
+        <p>Descrivi l’origine delle riprese. Questa dichiarazione resta privata. Nella gallery comparirà soltanto che le riprese sono storiche, senza sessioni importate.</p>
+        <label class="dsg-photo-upload__check"><input type="checkbox" data-photo-historical-attest>Confermo l’oggetto e la provenienza dichiarati; le sessioni di queste riprese non sono presenti nel portale.</label>
+      </div>
       <label>Versione<select data-photo-version><option value="">Nuova immagine</option></select></label>
       <label>Titolo<input data-photo-title required maxlength="160"></label>
       <label>Data di elaborazione<input type="date" data-photo-date required></label>
@@ -20,7 +29,7 @@
       <label>Anteprima · JPEG o PNG (massimo 32 MiB)<input type="file" data-photo-preview accept=".jpg,.jpeg,.png" required></label>
       <label>Workflow PixInsight esportato · JavaScript (massimo 2 MiB)<input type="file" data-photo-workflow accept=".js,.txt" required></label>
       <p>Il workflow viene letto e conservato, senza eseguire i processi. Se il formato non è supportato, il file resta archiviato e i passaggi sono indicati come non disponibili.</p>
-      <label class="dsg-photo-upload__check"><input type="checkbox" data-photo-attest required>Confermo che l’anteprima deriva dall’originale e che le sessioni selezionate sono quelle di origine.</label>
+      <label class="dsg-photo-upload__check"><input type="checkbox" data-photo-attest required><span data-photo-attest-label>Confermo che l’anteprima deriva dall’originale e che le sessioni selezionate sono quelle di origine.</span></label>
       <button type="submit">Carica e verifica</button>
     </fieldset>
   </form>

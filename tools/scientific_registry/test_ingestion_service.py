@@ -17,6 +17,92 @@ class Scanner:
 
 
 class ServiceTests(unittest.TestCase):
+    def historical_request(self):
+        self.request.update(catalogSha256=None, sessionIds=[],
+            historicalSource={"target": "M31", "provenance": "Private historical source <script>never public</script>", "attested": True})
+
+    def test_historical_upload_review_publish_without_catalog_and_private_provenance(self):
+        self.historical_request()
+        self.service.catalog_loader = lambda: self.fail("Historical path must not load the catalogue")
+        uid = self.uploaded()
+        self.assertEqual(self.service.status(uid, self.owner)["frozenSessionContext"], [])
+        self.assertFalse(any(k.startswith("catalogs/") for k in self.store.items))
+        review = self.service.review_summary(uid, self.owner)
+        self.assertEqual(review["sessionContext"]["source"], "HISTORICAL_OWNER_DECLARATION")
+        self.assertEqual(review["sessionContext"]["association"], "NOT_ESTABLISHED")
+        self.assertIsNone(review["sessionContext"]["catalogSha256"])
+        self.assertEqual(review["sessionContext"]["sessions"], [])
+        self.assertEqual(review["sessionContext"]["historicalSource"], self.request["historicalSource"])
+        self.service.commit(uid, self.selection(uid), self.owner)
+        record = self.service.collection()["records"][0]
+        self.assertEqual(record["associationEvidence"], "HISTORICAL_OWNER_DECLARATION")
+        self.assertEqual(record["sessionIds"], [])
+        self.assertEqual(record["target"], "M31")
+        self.assertNotIn("Private historical", json.dumps(record))
+        self.assertNotIn("historicalSource", record)
+        self.service.withdraw(uid, self.owner)
+        self.assertEqual(self.service.collection()["records"], [])
+        with self.assertRaises(IngestionError):
+            self.service.preview(uid)
+
+    def test_historical_mixed_source_and_invalid_declarations_rejected_before_writes(self):
+        from copy import deepcopy
+        self.historical_request()
+        valid = deepcopy(self.request)
+        variants = [valid | {"sessionIds": ["night1"]}, valid | {"catalogSha256": sha256(self.catalog)},
+                    valid | {"historicalSource": None}]
+        for field, value in [("attested", False), ("attested", 1), ("target", " "), ("target", "UNKNOWN"),
+                             ("provenance", ""), ("provenance", "x" * 2001), ("provenance", "hidden\x00text")]:
+            variants.append(valid | {"historicalSource": valid["historicalSource"] | {field: value}})
+        variants.append(valid | {"historicalSource": valid["historicalSource"] | {"sessions": []}})
+        for request in variants:
+            with self.subTest(request=request), self.assertRaises(IngestionError):
+                self.service.create(request, self.owner)
+            self.assertEqual(self.store.items, {})
+
+    def test_historical_exact_retry_freezes_declaration_and_requires_new_identity_for_changes(self):
+        from copy import deepcopy
+        self.historical_request()
+        original = deepcopy(self.request)
+        uid = self.uploaded()
+        self.service.catalog_loader = lambda: (_ for _ in ()).throw(OSError("catalog offline"))
+        self.assertEqual(self.service.create(original, self.owner)["id"], uid)
+        self.assertEqual(self.service.status(uid, self.owner)["request"], original)
+        for field in ("target", "provenance"):
+            changed = original | {"historicalSource": original["historicalSource"] | {field: "changed"}}
+            with self.assertRaisesRegex(IngestionError, "IDEMPOTENCY_CONFLICT"):
+                self.service.create(changed, self.owner)
+        self.assertEqual(self.service.review_summary(uid, self.owner)["target"], "M31")
+
+    def test_historical_preserves_scan_rights_and_actor_gates(self):
+        self.historical_request()
+        self.service.scanner = Scanner("UNAVAILABLE")
+        uid = self.uploaded()
+        with self.assertRaises(IngestionError):
+            self.service.commit(uid, self.selection(uid), self.owner)
+        with self.assertRaises(IngestionError):
+            self.service.status(uid, "other@example.com")
+        current = self.service.review_summary(uid, self.owner, recheck=True)
+        self.assertFalse(current["publicationEligible"])
+        self.service.scanner = Scanner("PASS")
+        current = self.service.review_summary(uid, self.owner, recheck=True)
+        selection = self.selection(uid)
+        with self.assertRaises(IngestionError):
+            self.service.commit(uid, selection | {"rightsConfirmed": False}, self.owner)
+        self.assertEqual(self.service.collection()["records"], [])
+
+    def test_historical_suspension_keeps_retained_retries_and_public_readers(self):
+        self.historical_request()
+        uid = self.uploaded()
+        self.service.commit(uid, self.selection(uid), self.owner)
+        with patch.dict("os.environ", {"DSG_PHOTO_HISTORICAL_UPLOAD": "0"}):
+            self.assertEqual(self.service.create(self.request, self.owner)["id"], uid)
+            self.assertEqual(self.service.status(uid, self.owner)["target"], "M31")
+            self.assertEqual(len(self.service.collection()["records"]), 1)
+            self.assertTrue(self.service.preview(uid))
+            with self.assertRaisesRegex(IngestionError, "HISTORICAL_UPLOAD_SUSPENDED"):
+                self.service.create(self.request | {"idempotencyKey": "another-historical-key"}, self.owner)
+
     def setUp(self):
         self.store = MemoryStore()
         self.catalog = json_bytes({"schemaVersion": "1.5", "catalogStatus": "VERSIONED_ANALYTICS_PROJECTION",

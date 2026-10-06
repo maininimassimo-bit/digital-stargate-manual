@@ -10,13 +10,13 @@
     const el=(tag,text,parent)=>{const node=document.createElement(tag);if(text!==undefined)node.textContent=text;parent?.append(node);return node;};
     const render=()=>{
       const query=search.value.toLocaleLowerCase();const filtered=records.filter(r=>`${r.title} ${r.target} ${r.sessionIds.join(' ')}`.toLocaleLowerCase().includes(query));
-      grid.replaceChildren();status.textContent=`${filtered.length} immagini pubblicate dalle sessioni importate`;
-      if(!filtered.length)el('p',records.length?'Nessun risultato.':'Nessuna immagine ancora pubblicata dalle sessioni importate.',grid);
+      grid.replaceChildren();status.textContent=`${filtered.length} immagini pubblicate`;
+      if(!filtered.length)el('p',records.length?'Nessun risultato.':'Nessuna immagine ancora pubblicata.',grid);
       for(const record of filtered){
         const card=el('article',undefined,grid);card.className='dsg-image-card';const image=el('img',undefined,card);image.src=record.previewUrl;image.alt=record.title;image.loading='lazy';image.style.maxWidth='100%';
         el('h2',record.title,card);el('p',`${record.target} · elaborazione ${record.processingDate}`,card);
         for(const id of record.sessionIds){const link=el('a',id,card);const url=new URL('scientific-session-detail/',window.DSGPhotoApi.base);url.searchParams.set('sessionId',id);link.href=url.href;el('br',undefined,card);}
-        el('p',`Versione ${record.imageVersionId}`,card);el('p',`Sessioni dichiarate dall’autore. Workflow ${record.captureCompleteness==='PARTIAL'?'parziale':'non disponibile'}. Esecuzione non verificata.`,card);
+        el('p',`Versione ${record.imageVersionId}`,card);el('p',`${record.associationEvidence==='HISTORICAL_OWNER_DECLARATION'?'Riprese storiche dichiarate dall’autore; sessioni non importate.':'Sessioni dichiarate dall’autore.'} Workflow ${record.captureCompleteness==='PARTIAL'?'parziale':'non disponibile'}. Esecuzione non verificata.`,card);
         const details=el('details',undefined,card);el('summary','Leggi workflow',details);
         for(const step of record.steps){el('h3',`${step.sourceOrdinal}. ${step.processId}`,details);for(const p of step.parameters)el('pre',`${p.name}: ${p.lexicalJson}`,details);}
         if(!record.steps.length)el('p','Nessun passaggio disponibile per questa versione.',details);
