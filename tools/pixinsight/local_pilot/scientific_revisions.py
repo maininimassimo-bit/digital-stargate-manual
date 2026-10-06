@@ -50,7 +50,7 @@ class RevisionMixin:
         require(value['parentReviewSha256'] == parent['reviewSha256'], 'REVISION_PARENT_CHANGED')
         require(self.broker.status(job_id)['job']['state'] == 'COMPLETED', 'RESULT_NOT_COMPLETED')
         label = value['label']
-        require(isinstance(label,str) and 0 < len(label.strip()) <= 160 and
+        require(isinstance(label,str) and bool(label.strip()) and len(label) <= 160 and
                 not any(ord(c) < 32 for c in label) and not re.search(r'[\\/]', label), 'REVISION_LABEL')
         day = value['processingDate']
         require(isinstance(day,str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}',day), 'PROCESSING_DATE_INVALID')

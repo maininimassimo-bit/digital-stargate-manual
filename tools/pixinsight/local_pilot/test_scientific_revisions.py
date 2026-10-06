@@ -48,7 +48,8 @@ class RevisionTests(unittest.TestCase):
 
     def test_stale_parent_and_extra_fields_rejected_before_write(self):
         for patch in [{'parentReviewSha256':'0'*64},{'path':'C:/private'},{'processingDate':'2026-02-30'},
-                      {'label':'C:/private'},{'original':{**self.value['original'],'width':True}}]:
+                      {'label':'C:/private'},{'label':' '*161+'M31'},
+                      {'original':{**self.value['original'],'width':True}}]:
             original=copy.deepcopy(self.value)
             self.value.update(patch)
             with self.assertRaises(ProtocolError):self.submit()
