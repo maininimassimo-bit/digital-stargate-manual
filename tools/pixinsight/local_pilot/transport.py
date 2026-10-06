@@ -37,9 +37,9 @@ class Transport:
         return self.request(path, value)
 
     def request(self, path, value=None):
-        require(re.fullmatch(r"/v1/worker/(?:claim|PIAI_[a-f0-9]{32}/report|science/register|science/PIAI_[a-f0-9]{32}/(?:context|result))", path), "ROUTE_INVALID")
+        require(re.fullmatch(r"/v1/worker/(?:claim|PIAI_[a-f0-9]{32}/report|science/register|science/intakes(?:/[a-f0-9]{32}/(?:plan|sources|preparation|prepared))?|science/PIAI_[a-f0-9]{32}/(?:context|result))", path), "ROUTE_INVALID")
         raw = encode(value) if value is not None else None
-        limit = 9 * 1024 * 1024 if path.endswith('/result') else 16384
+        limit = 9 * 1024 * 1024 if path.endswith('/result') else 65536 if '/science/intakes/' in path else 16384
         require(raw is None or len(raw) <= limit, "REQUEST_SIZE")
         req = urllib.request.Request(self.origin + path, raw, method="POST" if raw is not None else "GET",
                 headers={"Authorization": "Bearer " + self.token, "Content-Type": "application/json"})
@@ -47,8 +47,9 @@ class Transport:
             with self.opener.open(req, timeout=30) as response:
                 require(response.status == 200 and response.url == self.origin + path and
                         response.headers.get_content_type() == "application/json", "RESPONSE_INVALID")
-                data = response.read(16385)
-                require(len(data) <= 16384, "RESPONSE_SIZE")
+                response_limit = 8 * 1024 * 1024 if path.endswith('/intakes') else 512 * 1024 if path.endswith('/context') else 16384
+                data = response.read(response_limit + 1)
+                require(len(data) <= response_limit, "RESPONSE_SIZE")
                 return decode(data)
         except ProtocolError:
             raise
@@ -131,7 +132,7 @@ class SessionWorker:
             require(set(envelope) == {"schemaVersion", "requestId", "inputRef", "recipe", "aiMode"} and
                     envelope["schemaVersion"] == "1.0" and opaque(envelope["requestId"]) and opaque(envelope["inputRef"]) and
                     remote["jobId"] == "PIAI_" + envelope["requestId"] and envelope["aiMode"] == "SESSION_ASSISTED" and
-                    envelope["recipe"] in {worker.RECIPE, worker.NONLINEAR_RECIPE}, "ENVELOPE_INVALID")
+                    envelope["recipe"] in {worker.RECIPE} | worker.NONLINEAR_RECIPES, "ENVELOPE_INVALID")
             require(isinstance(remote.get("leaseToken"), str) and re.fullmatch(r"[a-f0-9]{64}", remote["leaseToken"]) and
                     remote.get("rootId") == self.root_id and type(remote.get("sequence")) is int and
                     remote["state"] in {"RESERVED", "PREPARING", "PREPARED", "AWAITING_NATIVE", "RUNNING", "RECOVERY_REQUIRED"}, "CLAIM_INVALID")
@@ -163,6 +164,26 @@ class SessionWorker:
                     import hashlib
                     require(hashlib.sha256(encode(context)).hexdigest() == remote["scientificContextSha256"] and
                             context["input"]["manifestSha256"] == registry_digest(request), "SCIENTIFIC_INPUT_BINDING")
+                    if context.get("intent"):
+                        require(context["intent"]["plan"]["background"] == request["background"] and
+                                context["intent"]["plan"]["recipe"] == request["recipe"] and
+                                context["intent"]["plan"]["processing"] == request.get("processing") and
+                                context["intent"]["plan"].get("field") == request.get("field"), "APPROVED_PLAN_BINDING")
+                        if 'preparationTrace' in request:
+                            from .preparation_bridge import verify_trace
+                            trace=verify_trace(self.root,request)
+                            preparation=context['intent']['plan'].get('preparation')
+                            authorization=self._read(self.root/('PREP_'+trace['requestId'])/'owner-authorization.json')
+                            require(preparation and context['intent']['plan']['preparationResultSha256']==preparation['resultSha256'] and
+                                    authorization['intake']['selection']==context['intent']['intake']['selection'] and
+                                    trace['requestId']==context['intent']['intake']['selection']['requestId'] and
+                                    all(trace[k]==preparation['result'][k] for k in trace if k!='requestId') and
+                                    trace['preparationPlanSha256']==preparation['planSha256'],'APPROVED_PREPARATION_BINDING')
+                        else:
+                            require('preparation' not in context['intent']['plan'],'APPROVED_PREPARATION_BINDING')
+                            selected_directory = Path(context["intent"]["intake"]["selection"]["masterDirectory"]).resolve(strict=True)
+                            require(all(Path(row["path"]).resolve(strict=True).parent == selected_directory for row in request["inputs"]),
+                                    "APPROVED_DIRECTORY_BINDING")
                 folder = self.directory / binding["jobId"]
                 require(not (folder / "preparing.json").exists(), "AMBIGUOUS_PREPARATION")
                 require(remote["state"] in {"RESERVED", "PREPARING"}, "ADVANCED_CLAIM_WITHOUT_PREPARATION")
@@ -205,7 +226,7 @@ def main():
     parser.add_argument("--native-stopped", action="store_true", help="Owner confirms native execution has stopped before collection")
     args = parser.parse_args()
     try:
-        require(args.config.stat().st_size <= 16384, "CONFIG_SIZE")
+        require(args.config.stat().st_size <= 65536, "CONFIG_SIZE")
         config = decode(args.config.read_bytes())
         require(set(config) == {"serviceOrigin", "workerId", "workerRoot", "registry"}, "CONFIG_FIELDS")
         transport = Transport(config["serviceOrigin"], os.environ.get("DSG_PIAI_WORKER_TOKEN", ""))

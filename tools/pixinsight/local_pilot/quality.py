@@ -9,9 +9,9 @@ import xml.etree.ElementTree as ET
 from tools.pixinsight.local_pilot.worker import require, xisf_header
 
 
-def inspect_pixels(path: Path) -> dict:
+def inspect_pixels(path: Path, *, expected_channels=3) -> dict:
     header = xisf_header(path)
-    require(header["sampleFormat"] == "Float32" and header["channels"] == 3 and header["colorSpace"] == "RGB", "Float32 RGB pixels required")
+    require(expected_channels in (1, 3) and header["sampleFormat"] == "Float32" and header["channels"] == expected_channels and header["colorSpace"] == ("RGB" if expected_channels == 3 else "Gray"), "Float32 pixels with expected channels required")
     width, height = header["width"], header["height"]
     require(0 < width <= 12000 and 0 < height <= 12000, "Pixel geometry outside bounds")
     with path.open("rb") as stream:
@@ -24,10 +24,10 @@ def inspect_pixels(path: Path) -> dict:
         location = image.get("location", "").split(":")
         require(len(location) == 3 and location[0] == "attachment", "Attached pixel block required")
         offset, size = int(location[1]), int(location[2])
-        require(size == width * height * 3 * 4 and offset >= 16 + length and offset + size <= path.stat().st_size, "Pixel block bounds mismatch")
+        require(size == width * height * expected_channels * 4 and offset >= 16 + length and offset + size <= path.stat().st_size, "Pixel block bounds mismatch")
         stream.seek(offset)
         channels = []
-        for _ in range(3):
+        for _ in range(expected_channels):
             remaining = width * height
             low, high, total, zero, clipped = math.inf, -math.inf, 0.0, 0, 0
             while remaining:

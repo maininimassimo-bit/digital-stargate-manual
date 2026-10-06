@@ -19,11 +19,11 @@ jobs:
         with:
           node-version: '22'
       - name: Test synthetic preflight rejection and multi-image selection
-        run: node --test tools/pixinsight/local_pilot/preflight.test.mjs tools/pixinsight/local_pilot/executor.test.mjs tools/pixinsight/local_pilot/owner_check.test.mjs tools/pixinsight/local_pilot/scientific_portal.test.mjs
+        run: node --test tools/pixinsight/local_pilot/preflight.test.mjs tools/pixinsight/local_pilot/executor.test.mjs tools/pixinsight/local_pilot/owner_check.test.mjs tools/pixinsight/local_pilot/scientific_portal.test.mjs tools/pixinsight/local_pilot/source_preparation.test.mjs tools/pixinsight/local_pilot/preparation_executor.test.mjs
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
       - name: Test local coordinator reservation and private retention
         run: |
           python -m pip install "Pillow>=11,<13"
-          python -m unittest tools.pixinsight.local_pilot.test_worker tools.pixinsight.local_pilot.test_quality tools.pixinsight.local_pilot.test_transport tools.pixinsight.local_pilot.test_scientific_portal
+          python -m unittest tools.pixinsight.local_pilot.test_worker tools.pixinsight.local_pilot.test_quality tools.pixinsight.local_pilot.test_transport tools.pixinsight.local_pilot.test_scientific_portal tools.pixinsight.local_pilot.test_intake tools.pixinsight.local_pilot.test_source_profile tools.pixinsight.local_pilot.test_preparation tools.pixinsight.local_pilot.test_preparation_flow

@@ -33,6 +33,17 @@ class QualityTests(unittest.TestCase):
         self.assertEqual(r["acceptance"], "OWNER_REVIEW_REQUIRED")
         json.dumps(r, allow_nan=False)
 
+    def test_monochrome_preparation_requires_explicit_channel_contract(self):
+        header=b'<xisf><Image geometry="2:1:1" sampleFormat="Float32" colorSpace="Gray" location="attachment:4096:8"/></xisf>'
+        data=b'XISF0100'+struct.pack('<II',len(header),0)+header
+        self.path.write_bytes(data+bytes(4096-len(data))+struct.pack('<ff',.1,.7))
+        with self.assertRaises(ValueError):inspect_pixels(self.path)
+        result=inspect_pixels(self.path,expected_channels=1)
+        self.assertEqual(len(result['channels']),1)
+        self.assertTrue(result['normalizedRange'])
+        self.path.write_bytes(data+bytes(4096-len(data))+struct.pack('<ff',.1,float('nan')))
+        with self.assertRaisesRegex(ValueError,'Nonfinite'):inspect_pixels(self.path,expected_channels=1)
+
     def test_rejects_nonfinite_and_out_of_range(self):
         for bad in (float("nan"), float("inf"), -0.01, 1.01):
             with self.subTest(bad=bad):

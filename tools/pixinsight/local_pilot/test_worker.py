@@ -50,6 +50,23 @@ class WorkerTests(unittest.TestCase):
             worker.prepare(self.root, other)
         self.assertFalse((self.root / "Synthetic_02").exists())
 
+    def test_reviewed_tuning_is_bound_into_digest_and_native_manifest(self):
+        from .scientific_delivery import registry_digest
+        from .broker import encode
+        import hashlib
+        baseline = {**self.request, "recipe": worker.NONLINEAR_RECIPE}
+        baseline["inputs"] = [{**row, "width":4634,"height":2808} for row in self.inputs]
+        legacy_projection = {"recipe":baseline["recipe"], "background":baseline["background"],
+                             "inputs":[{k:v for k,v in row.items() if k != "path"} for row in baseline["inputs"]]}
+        self.assertEqual(registry_digest(baseline), hashlib.sha256(encode(legacy_projection)).hexdigest())
+        tuned = {**baseline, "processing": {**worker.PROCESSING_DEFAULTS, "sharpenL":0.58}}
+        self.assertNotEqual(registry_digest(baseline), registry_digest(tuned))
+        changed = {**tuned, "processing": {**tuned["processing"], "sharpenL":0.57}}
+        self.assertNotEqual(registry_digest(tuned), registry_digest(changed))
+        job = worker.prepare(self.root, tuned)
+        manifest = json.loads((job / "manifest.json").read_text())
+        self.assertEqual(manifest["processing"], tuned["processing"])
+
     def test_replay_rejected(self):
         job = worker.prepare(self.root, self.request)
         self.terminal(job)
