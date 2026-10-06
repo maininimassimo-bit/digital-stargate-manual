@@ -10,7 +10,7 @@ function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=fal
     addEventListener(type,callback){this.callbacks[type]=callback;},append(...items){this.children.push(...items);},
     replaceChildren(){this.children=[];},querySelectorAll(){return this.children.flatMap(label=>label.children).filter(x=>x.type==='checkbox'&&x.checked);},
     click(){this.callbacks.click?.();},remove(){}};}
-  const controls=Object.fromEntries(['message','connect','signin','form','fields','input','directory','prompt','target','mode','layout','bayer','bayer-label','additional','additional-label','plans','parent','title','date','sessions','attest','create','pending','retry','refresh','jobs','review','summary','preview','steps','workflow','correlations','receipt','accept','reject'].map(name=>[name,node()]));
+  const controls=Object.fromEntries(['origin','catalog-label','parent-label','session-fields','historical-fields','historical-target','provenance','historical-attest','message','connect','signin','form','fields','input','directory','prompt','target','mode','layout','bayer','bayer-label','additional','additional-label','plans','parent','title','date','sessions','attest','create','pending','retry','refresh','jobs','review','summary','preview','steps','workflow','correlations','receipt','accept','reject'].map(name=>[name,node()]));
   controls.title.value='M27 test';controls.date.value='2026-10-05';controls.attest.checked=true;
   controls.mode.value='LRGB';controls.layout.value='SINGLE';controls.additional.value='';controls.directory.value='F:\\Astro\\M27\\Master';controls.prompt.value='Dettaglio interno, fondo naturale';
   const root=node();root.querySelector=selector=>controls[selector.match(/data-p5-(.+)\]/)[1]];
@@ -31,7 +31,7 @@ function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=fal
           if(first){first=false;throw new Error('lost response');}
           return {ok:true,json:async()=>({requestId:selection.requestId,state:intake.state})};
         }
-        if(intake&&plansReady){intake.state='PLAN_READY';intake.proposalSha256='d'.repeat(64);intake.plan={rationale:'Piano per il prompt',limitations:'M27 soltanto',masters:[{role:'R',width:1000,height:800,imageIndex:0}],background:{polyDegree:1,boxSize:16,boxSeparation:32},steps:['ChannelCombination'],checkpointCount:15,processing:{sharpenL:0.5,sharpenRGB:0.45,denoiseL:0.65,denoiseRGB:0.7,contrastLarge:0.22,contrastSmall:0.28,targetBackground:0.085}};}
+        if(intake&&plansReady&&intake.state!=='WITHDRAWN'){intake.state='PLAN_READY';intake.proposalSha256='d'.repeat(64);intake.plan={rationale:'Piano per il prompt',limitations:'M27 soltanto',masters:[{role:'R',width:1000,height:800,imageIndex:0}],background:{polyDegree:1,boxSize:16,boxSeparation:32},steps:['ChannelCombination'],checkpointCount:15,processing:{sharpenL:0.5,sharpenRGB:0.45,denoiseL:0.65,denoiseRGB:0.7,contrastLarge:0.22,contrastSmall:0.28,targetBackground:0.085}};}
         if(intake&&sourcePlanReady){intake.sourcePlanSha256='e'.repeat(64);intake.sourcePlan={rationale:'Selezione esplicita',limitations:'Astrometria da verificare',panels:[{panelId:'P1',directory:'F:\\Astro',sessionIds:['SESSION-M27'],masters:{RGB:{filename:'<img src=x>.xisf',imageIndex:0}}},{panelId:'P2',directory:'F:\\Astro',sessionIds:['SESSION-M27'],masters:{RGB:{filename:'Panel2.xisf',imageIndex:0}}}]};}
         if(intake&&preparationReady){intake.preparationPlanSha256='f'.repeat(64);intake.preparationPlan={rationale:'Preparazione CFA verificata',limitations:'Piano finale separato',masters:[{panelId:'P1',role:'CFA',filename:'<img src=x>.xisf',width:1000,height:800,imageIndex:0}],bayerPattern:'RGGB',canvas:null,nativeProcessCount:1,checkpointCount:2};}
         return {ok:true,json:async()=>({intakes:intake?[intake]:[]})};
@@ -50,6 +50,10 @@ function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=fal
         const request=JSON.parse(options.body);assert.equal(request.proposalSha256,intake.proposalSha256);
         job={jobId:'PIAI_'+intake.selection.requestId,state:'QUEUED'};intake.state='JOB_CREATED';
         return {ok:true,json:async()=>job};
+      }
+      if(url.endsWith('/withdraw')){
+        assert.deepEqual(JSON.parse(options.body),{});intake.state='WITHDRAWN';
+        return {ok:true,json:async()=>({requestId:intake.selection.requestId,state:'WITHDRAWN',nativeStarted:false})};
       }
       if(/\/science\/intakes\/[a-f0-9]+$/.test(url))return intake?{ok:true,json:async()=>intake}:{ok:false,status:unknownStatus?503:400,json:async()=>({error:unknownStatus?'UNAVAILABLE':'INTAKE_NOT_FOUND'})};
       if(url.endsWith('/science/jobs')){
@@ -80,6 +84,39 @@ test('folder and prompt create planning intake only, no native queue or code eva
   assert.equal(h.stored.size,0);assert.match(h.controls.message.textContent,/conservat/);
   assert.equal(h.requests.some(x=>/worker|decision|commit/.test(x.url)),false);
   assert.equal(h.requests.some(x=>x.url.endsWith('/science/jobs')&&x.options.method==='POST'),false);
+});
+
+test('historical mosaic clears catalog choices and sends declared target without fake sessions',async()=>{
+  const h=harness();await h.login();h.controls.origin.value='HISTORICAL';
+  h.controls.origin.callbacks.change();
+  assert.equal(h.controls.sessions.children.length,0);assert.equal(h.controls.attest.required,false);
+  h.controls['historical-target'].value='M31';h.controls.provenance.value='Riprese anteriori al portale';
+  h.controls['historical-attest'].checked=true;h.controls.mode.value='OSC';h.controls.layout.value='PANELS';
+  await h.submit();
+  const body=JSON.parse(h.requests.find(r=>r.url.endsWith('/science/intakes')&&r.options.method==='POST').options.body);
+  assert.deepEqual(body.sessionIds,[]);assert.equal(body.catalogSha256,null);assert.equal(body.parent,null);
+  assert.equal(body.associationConfirmed,false);assert.equal(body.historicalSource.target,'M31');
+  assert.equal(body.historicalSource.attested,true);assert.equal(body.sourceProfile.layout,'PANELS');
+  assert.equal(h.requests.some(r=>r.url.endsWith('/approve')||r.url.includes('/worker/')),false);
+});
+
+test('historical provenance requires a separate human declaration and switching resets attestations',async()=>{
+  const h=harness();await h.login();h.controls.origin.value='HISTORICAL';h.controls.origin.callbacks.change();
+  h.controls['historical-target'].value='M31';h.controls.provenance.value='Riprese storiche';await h.submit();
+  assert.equal(h.requests.some(r=>r.options.method==='POST'),false);
+  assert.match(h.controls.message.textContent,/conferma la dichiarazione/);
+  h.controls['historical-attest'].checked=true;h.controls.origin.value='CATALOG';h.controls.origin.callbacks.change();
+  assert.equal(h.controls['historical-attest'].checked,false);assert.equal(h.controls.attest.checked,false);
+  assert.equal(h.controls.attest.required,true);
+});
+
+test('withdrawal preserves the visible receipt and removes all plan approval controls',async()=>{
+  const h=harness({plansReady:true});await h.login();await h.submit();
+  h.controls.plans.children[0].children.find(n=>n.textContent==='Ritira richiesta').click();await tick();
+  assert.equal(h.requests.filter(r=>r.url.endsWith('/withdraw')).length,1);
+  const card=h.controls.plans.children[0];assert.match(JSON.stringify(card.children),/Richiesta ritirata/);
+  assert.equal(card.children.some(n=>n.textContent==='Conferma piano e richiedi elaborazione'),false);
+  assert.equal(h.requests.some(r=>r.url.endsWith('/approve')||r.url.endsWith('/cancel')),false);
 });
 test('lost create response retains exact request and retry cannot duplicate or change it',async()=>{
   const h=harness({lostCreate:true});await h.login();await h.submit();

@@ -97,6 +97,7 @@ class Broker:
         require(request["schemaVersion"] == "1.0" and opaque(request["requestId"]) and opaque(request["inputRef"]), "REQUEST_IDENTITY")
         require(request["recipe"] in {RECIPE} | NONLINEAR_RECIPES and request["aiMode"] == "SESSION_ASSISTED", "RECIPE_OR_AI_MODE")
         def operation(state, now):
+            require(request['requestId'] not in state.get('withdrawnIntakes', []), 'INTAKE_WITHDRAWN')
             for item in state["jobs"]:
                 if item["request"]["requestId"] == request["requestId"]:
                     require(item["request"] == request, "IDEMPOTENCY_CONFLICT")

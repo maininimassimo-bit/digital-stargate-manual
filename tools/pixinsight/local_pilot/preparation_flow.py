@@ -96,7 +96,14 @@ class PreparationFlowMixin:
         intake=self._preparation_intake(request_id)
         validate_plan(intake,{k:v for k,v in plan.items() if k not in {'nativeProcessCount','checkpointCount','verification'}},self.broker.worker_id)
         if not state['preparationApproved']:
-            require(hashlib.sha256(self.catalog_loader()).hexdigest()==intake['selection']['catalogSha256'],'CATALOG_CHANGED_REFRESH')
+            from .historical_source import historical
+            require(historical(intake['selection']) or hashlib.sha256(self.catalog_loader()).hexdigest()==intake['selection']['catalogSha256'],'CATALOG_CHANGED_REFRESH')
+        def authorize(current, _now):
+            require(request_id not in current.get('withdrawnIntakes', []), 'INTAKE_WITHDRAWN')
+            rows=current.setdefault('preparationAuthorizedIntakes', [])
+            if request_id not in rows:rows.append(request_id)
+            return {'requestId':request_id}
+        self.broker._mutate(authorize)
         immutable(self.store,'science/preparation-approvals/'+request_id,encode(value))
         return {'requestId':request_id,'state':'LOCAL_PREPARATION_APPROVED','nativeStarted':False}
 

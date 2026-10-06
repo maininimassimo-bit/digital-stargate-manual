@@ -7,6 +7,7 @@ import re
 from .broker import decode, encode, require, opaque
 from .worker import NONLINEAR_RECIPE, NONLINEAR_RECIPES, RECIPE_MODES, actions
 from .intake import IntakeMixin
+from .historical_source import historical, validate_historical, historical_review
 from tools.scientific_registry.ingestion_storage import immutable, Conflict
 from tools.scientific_registry.photo_ingestion import build_review
 from tools.scientific_registry.ingestion_security import sanitize_preview
@@ -40,13 +41,18 @@ class ScientificPortal(IntakeMixin):
 
     def register(self, value):
         fields={"inputRef", "target", "recipe", "manifestSha256"}
-        require(isinstance(value, dict) and set(value) in (fields,fields|{'preparation'}), "INPUT_FIELDS")
+        require(isinstance(value, dict) and set(value) in (fields, fields|{'preparation'},
+                fields|{'historicalRequestId'}, fields|{'preparation','historicalRequestId'}), "INPUT_FIELDS")
         require(opaque(value["inputRef"]) and known_target(value['target']) and len(value['target'].strip()) <= 160 and
                 value["recipe"] in NONLINEAR_RECIPES and
                 isinstance(value["manifestSha256"], str) and re.fullmatch(r"[a-f0-9]{64}", value["manifestSha256"]), "INPUT_INVALID")
+        if 'historicalRequestId' in value:
+            declared = self.intake(value['historicalRequestId'])
+            require(historical(declared['selection']) and
+                    value['target'] == validate_historical(declared['selection'])['target'].strip(), 'HISTORICAL_INPUT_BINDING')
         if value['recipe'] == NONLINEAR_RECIPE:
             require(is_m27(value['target']), 'M27_RECIPE_TARGET')
-        else:
+        elif 'historicalRequestId' not in value:
             require(any(same_target(value['target'], s.get('target')) for s in decode(self.catalog_loader())['sessions']),
                     'TARGET_NOT_IMPORTED')
         if 'preparation' in value:
@@ -80,7 +86,10 @@ class ScientificPortal(IntakeMixin):
 
     def create(self, value, intent=None):
         fields = {"requestId", "inputRef", "catalogSha256", "sessionIds", "parent", "title", "processingDate", "associationConfirmed"}
-        require(isinstance(value, dict) and set(value) == fields and opaque(value["requestId"]) and opaque(value["inputRef"]), "SCIENTIFIC_FIELDS")
+        require(isinstance(value, dict) and set(value) in (fields, fields|{'historicalSource'}) and opaque(value["requestId"]) and opaque(value["inputRef"]), "SCIENTIFIC_FIELDS")
+        if historical(value):
+            validate_historical(value)
+            require(intent is not None, 'HISTORICAL_INTAKE_REQUIRED')
         if self.store.exists("science/intakes/" + value["requestId"]):
             require(isinstance(intent, dict) and set(intent) == {"intake", "plan", "proposalSha256"}, "PLAN_APPROVAL_REQUIRED")
             saved_plan, _ = self.store.get("science/plans/" + value["requestId"])
@@ -88,6 +97,10 @@ class ScientificPortal(IntakeMixin):
                     intent["intake"] == self.intake(value["requestId"]) and
                     intent["proposalSha256"] == digest(saved_plan) and
                     value["inputRef"] == intent["plan"]["inputRef"], "APPROVED_PLAN_REQUIRED")
+            expected = {k:v for k,v in intent['intake']['selection'].items()
+                        if k not in {'masterDirectory', 'prompt', 'sourceProfile'}}
+            expected['inputRef'] = intent['plan']['inputRef']
+            require(value == expected, 'APPROVED_SELECTION_REQUIRED')
         key = "science/contexts/PIAI_" + value["requestId"]
         raw, _ = self.store.get(key)
         if raw:
@@ -98,9 +111,13 @@ class ScientificPortal(IntakeMixin):
             registered, _ = self.store.get("science/inputs/" + value["inputRef"])
             require(registered is not None, "INPUT_NOT_REGISTERED")
             registered = decode(registered)
-            catalog = self.catalog_loader()
-            require(digest(catalog) == value["catalogSha256"], "CATALOG_CHANGED_REFRESH")
-            context_review = build_review(catalog_raw=catalog, catalog_digest=digest(catalog), session_ids=value["sessionIds"],
+            catalog = self.catalog_loader() if not historical(value) else None
+            require(historical(value) or digest(catalog) == value["catalogSha256"], "CATALOG_CHANGED_REFRESH")
+            if historical(value):
+                require(registered.get('historicalRequestId') == value['requestId'], 'HISTORICAL_INPUT_BINDING')
+            else:
+                require('historicalRequestId' not in registered, 'HISTORICAL_INPUT_BINDING')
+            context_review = historical_review(value) if historical(value) else build_review(catalog_raw=catalog, catalog_digest=digest(catalog), session_ids=value["sessionIds"],
                 title=value["title"], processing_date=value["processingDate"], original_raw=b"XISF0100",
                 original_media_type="application/x-xisf", preview_raw=b"\xff\xd8\xff", preview_media_type="image/jpeg",
                 workflow_raw=b"", receipt_id="BKL049-P5-selection", imported_at=self.broker.clock().strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -117,10 +134,12 @@ class ScientificPortal(IntakeMixin):
                 matches = [r for r in self.gallery_loader()["records"] if all(r.get(k) == v for k, v in parent.items())]
                 require(len(matches) == 1 and same_target(matches[0]['target'], context_review['target']), 'PARENT_NOT_CURRENT')
             context = {"selection": copy.deepcopy(value), "input": registered, "sessionContext": context_review["sessionContext"],
-                       "createdAt": self.broker.clock().strftime("%Y-%m-%dT%H:%M:%SZ"), "associationEvidence": "OWNER_DECLARED"}
+                       "createdAt": self.broker.clock().strftime("%Y-%m-%dT%H:%M:%SZ"),
+                       "associationEvidence": "NOT_ESTABLISHED" if historical(value) else "OWNER_DECLARED"}
             if intent is not None:
                 context["intent"] = copy.deepcopy(intent)
-            immutable(self.store, "science/catalogs/" + digest(catalog), catalog)
+            if catalog is not None:
+                immutable(self.store, "science/catalogs/" + digest(catalog), catalog)
             immutable(self.store, key, encode(context))
         envelope = {"schemaVersion": "1.0", "requestId": value["requestId"], "inputRef": value["inputRef"],
                     "recipe": context['input']['recipe'], "aiMode": "SESSION_ASSISTED"}
@@ -159,8 +178,8 @@ class ScientificPortal(IntakeMixin):
             require(0 < len(assets[name]) <= maximum, "RESULT_SIZE")
         preview = sanitize_preview(assets["preview"], "image/jpeg")
         selection = context["selection"]
-        catalog, _ = self.store.get("science/catalogs/" + selection["catalogSha256"])
-        review = build_review(catalog_raw=catalog, catalog_digest=selection["catalogSha256"], session_ids=selection["sessionIds"],
+        catalog = None if historical(selection) else self.store.get("science/catalogs/" + selection["catalogSha256"])[0]
+        review = historical_review(selection, assets['workflow'], 'BKL049-' + job_id, context['createdAt']) if historical(selection) else build_review(catalog_raw=catalog, catalog_digest=selection["catalogSha256"], session_ids=selection["sessionIds"],
             title=selection["title"], processing_date=selection["processingDate"], original_raw=b"XISF0100",
             original_media_type="application/x-xisf", preview_raw=preview, preview_media_type="image/jpeg",
             workflow_raw=assets["workflow"], receipt_id="BKL049-" + job_id, imported_at=context["createdAt"], preview_attested=True)

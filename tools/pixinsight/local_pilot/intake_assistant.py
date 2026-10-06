@@ -9,7 +9,7 @@ import xml.etree.ElementTree as ET
 
 from . import worker
 from .broker import decode, encode, opaque, require
-from .intake import local_directory
+from .intake import local_directory, sha
 from .scientific_delivery import registry_digest
 from .transport import Transport
 from .source_profile import inspect_sources, source_profile, inventory_sources, selected_panels
@@ -117,7 +117,8 @@ def _propose_locked(config_path, intake, plan, mapping, transport):
     if trace:request['preparationTrace']=trace
     worker.validate(request)
     manifest_sha = registry_digest(request)
-    ref = manifest_sha[:32]
+    from .historical_source import historical
+    ref = sha({'manifest':manifest_sha,'historicalRequestId':intake['selection']['requestId']})[:32] if historical(intake['selection']) else manifest_sha[:32]
     require(set(config) == {'serviceOrigin', 'workerId', 'workerRoot', 'registry'}, 'CONFIG_FIELDS')
     if ref in config['registry']:
         require(config['registry'][ref] == request, 'LOCAL_REGISTRY_CONFLICT')
@@ -137,6 +138,8 @@ def _propose_locked(config_path, intake, plan, mapping, transport):
             stream.write(encode(updated)); stream.flush(); os.fsync(stream.fileno())
         temporary.replace(config_path)
     registration={'inputRef': ref, 'target': intake.get('target','M27'), 'recipe': plan['recipe'],'manifestSha256': manifest_sha}
+    from .historical_source import historical
+    if historical(intake['selection']):registration['historicalRequestId']=intake['selection']['requestId']
     if prepared:registration['preparation']={'requestId':intake['selection']['requestId'],'resultSha256':intake['preparationResultSha256']}
     transport.post('/v1/worker/science/register',registration)
     payload = {**plan, 'workerId': config['workerId'], 'inputRef': ref, 'manifestSha256': manifest_sha,
