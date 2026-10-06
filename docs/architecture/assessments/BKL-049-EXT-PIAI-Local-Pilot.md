@@ -1,5 +1,7 @@
 # BKL-049-EXT-PIAI — Pilota locale PixInsight con IA
 
+> Stato corrente al 6 ottobre 2026: [baseline dei rilasci](../../project/CURRENT_TECHNICAL_BASELINE_2026-10-06.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
+
 | Campo | Valore |
 |---|---|
 | ID | BKL-049-EXT-PIAI |

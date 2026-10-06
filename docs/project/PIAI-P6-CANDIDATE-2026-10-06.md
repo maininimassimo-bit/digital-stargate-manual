@@ -1,12 +1,13 @@
-# P6 candidate — private refinements and conservative native recovery
+# P6 — released private refinements and conservative native recovery
 
-Status: candidate, not released. BKL-049 remains closed in its accepted archive scope;
+Status: increment released in PR #491; overall P6 operational acceptance pending. BKL-049 remains closed in its accepted archive scope;
 BKL-049-EXT-PIAI and its operational acceptance remain open. No scientific image,
 workflow parameters, local paths, credentials or production receipts are included here.
 
-The Owner approved the final local M31 image in chat and requested completion of the
-extension and tests. This records approval of that local image; it does not fabricate
-a portal decision, publication, catalog/session association or acceptance of every
+The Owner approved the final local M31 image in chat. After release, its private
+refinement was delivered and the Owner recorded ACCEPT_PRIVATE on that exact final
+version. Asset/backup integrity and the immutable decision were verified. This
+does not imply publication, catalog/session association or acceptance of every
 processing profile. The Owner will specify the master directory for each future
 processing request. No fixed directory is inferred from that clarification.
 
@@ -52,7 +53,7 @@ PixInsight 1.9.5, LF-only engine directives consumed following source and failed
 before execution; CRLF launchers ran successfully. Both preparation launchers now
 use the same explicit encoding.
 
-The local operational exercise used native synthetic monochrome fixtures, an
+The initial candidate exercise (historical snapshot) used native synthetic monochrome fixtures, an
 isolated PixInsight instance and an actual authenticated loopback HTTP adapter. The
 test terminated only its own instance after a process-start event, before a terminal
 receipt. Result: `RECOVERY_REQUIRED`, same claim after reconstructing the coordinator
@@ -64,11 +65,19 @@ process termination with synthetic data, not an OS worker-process restart,
 power-loss/desktop crash or a cloud
 end-to-end recovery test. See the [minimized candidate evidence](evidence/BKL-049-PIAI-P6-CANDIDATE-2026-10-06.json).
 
-## Remaining gates
+## Release verified and remaining gates
 
-The candidate requires exact-head CI, separate sequential ARB and RQ reviews,
-merge, API/Pages deployment and authenticated private refinement delivery/review.
-No deployment or receipt for the approved M31 refinement is claimed yet.
+PR #491 passed 9 exact-head checks, sequential separate AI-assisted ARB and RQ,
+merge and all 8 applicable post-merge workflows including Pages. Existing API
+deployment, private M31 refinement delivery/review, backup integrity and bounded
+service rollback/forward were verified. The Owner reports all three browser
+downloads working after the normal-browser check; downloaded-file hashes were
+not independently compared. The prior in-app browser failure is not claimed fixed.
+A later recovery exercise with a fresh worker process preserved the same claim,
+RECOVERY_REQUIRED and reservations on synthetic data/loopback HTTP. This adds to,
+and does not rewrite, the earlier same-process exercise above.
+See the [current baseline](CURRENT_TECHNICAL_BASELINE_2026-10-06.md) and
+[current minimized evidence](evidence/BKL-049-WORK-RECONCILIATION-2026-10-06.json).
 
 P6 must reconcile the existing real cancellation, offline, CAS and service restart
 evidence with concurrency, cloud recovery/rollback and explicit operational Owner
@@ -77,11 +86,13 @@ acceptance. Real SII/Hα/OIII and OSC CFA masters have not been selected for tho
 profile tests; RGB Extreme panels cannot replace them. Profile acceptance cannot be
 inferred from synthetic tests or M31 approval.
 
-Rollback of this candidate means reverting code through the governed release flow,
+Rollback of this released increment means reverting code through the governed release flow,
 retaining immutable private receipts/assets and the current queue state. Do not
 restore old state over current decisions, change M27 publication, clear an ambiguous
 native reservation, expand IAM or revoke credentials merely to exercise a test.
-Actual rollback OAT remains separate from this documented procedure.
+A bounded actual service rollback/forward has since passed; native cloud recovery
+and overall operational acceptance remain separate. Retain compatible historical
+readers and withdrawal guards; do not restore legacy code that ignores them.
 
 The single C-to-F root compatibility junction remains pending the Owner's explicit
 confirmation that PixInsight has been closed. Per-folder compatibility and the

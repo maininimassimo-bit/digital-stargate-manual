@@ -1,5 +1,7 @@
 # Current P5 technical result (2026-10-05)
 
+> Stato corrente al 6 ottobre 2026: [baseline dei servizi](../../docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-06.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
+
 Real Owner portal request, 16 exact M27 sessions and published parent, new supervised native execution (29 operations/15 checkpoints), verified unchanged masters and all final pixels, private delivery and authenticated preview/29 workflow steps: PASS. Stored asset integrity verified by administrative CLI/local comparison; browser local download persistence remains unverified (Owner check requested). Deployed revision `dsg-pixinsight-pilot-p5-target-01` uses reviewed PR #487 digest. P6 and human scientific acceptance remain open. Published M27 unchanged; no automatic publication or paid AI API request. Earlier pending statements below are historical snapshots.
 
 # P4/P5 — authenticated queue and scientific portal

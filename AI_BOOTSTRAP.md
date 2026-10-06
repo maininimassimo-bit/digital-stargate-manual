@@ -1,9 +1,11 @@
 # Digital StarGate AI Bootstrap
 
+> Stato corrente al 6 ottobre 2026: [handover M31](docs/project/HANDOVER_2026-10-06-BKL049-M31.md) e [baseline](docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-06.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
+
 | Campo | Valore |
 |---|---|
-| Versione | 8.7 |
-| Baseline | 05/10/2026 |
+| Versione | 8.8 |
+| Baseline | 06/10/2026 |
 | Stato | Current root bootstrap — BKL-043 F4 lifecycle pending; BKL-049 archive closed; PixInsight AI extension pilot; S10 unavailable |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro sul repository `maininimassimo-bit/digital-stargate-manual`.
@@ -13,8 +15,8 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni e proje
 
 ## 2. Sequenza obbligatoria di lettura
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md`
-3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-05.md`
+2. `docs/project/HANDOVER_2026-10-06-BKL049-M31.md`
+3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-06.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
 6. `docs/project/BACKLOG.md`

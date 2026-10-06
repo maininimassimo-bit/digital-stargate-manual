@@ -6,6 +6,10 @@ Il Project Governance Center raccoglie le regole che governano sviluppo, pubblic
 
 Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 
+## Stato aggiornato del 6 ottobre 2026
+
+[Handover M31 e caricamento storico](HANDOVER_2026-10-06-BKL049-M31.md), [baseline tecnica](CURRENT_TECHNICAL_BASELINE_2026-10-06.md) ed [evidenza minimizzata](evidence/BKL-049-WORK-RECONCILIATION-2026-10-06.json) definiscono la ripresa corrente. P6 resta in corso; M31 accettata privatamente e non pubblicata. Le sezioni di continuità precedenti sono snapshot.
+
 ## Continuity authority corrente
 
 | Documento | Ruolo |

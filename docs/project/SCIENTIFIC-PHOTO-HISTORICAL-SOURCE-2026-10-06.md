@@ -47,3 +47,18 @@ interrupted multi-chunk resume with unavailable catalogue, immutable declaration
 private provenance minimization, public gallery with no invented session links,
 rights/scanner/actor gates and explicit withdrawal. Synthetic publication is not
 real scientific-file acceptance or Owner operational acceptance.
+
+## Release verified — PR #492
+
+Reviewed head `5915ddf009a10e1b5744c8f565fdc5a03238cd20`, merge
+`1c48ca7624f8d2a5cc07070681b8656d51ee4685`: 10 exact-head checks,
+sequential separate AI-assisted ARB/RQ PASS without findings and 9 post-merge
+workflows including Pages PASS. Cloud Build
+`75bc3a67-80b4-4927-b13f-136f83457a47` SUCCESS, including 23 tests.
+Existing photo service updated by digest; health READY and historical capability
+enabled. Resource envelope, private control state and public gallery unchanged;
+anonymous uploads still denied. Production form observed before Owner sign-in.
+Synthetic browser publication/resume tests are distinct from a real Owner upload.
+No M31 file was uploaded or published during the release.
+See [current service baseline](CURRENT_TECHNICAL_BASELINE_2026-10-06.md) and
+[handover/publication procedure](HANDOVER_2026-10-06-BKL049-M31.md#ripresa-operativa).
