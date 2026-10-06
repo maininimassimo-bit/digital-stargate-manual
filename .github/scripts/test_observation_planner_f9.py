@@ -184,6 +184,7 @@ class F9AcquisitionPreflightTests(unittest.TestCase):
         def read(messages):
             iterator=iter(messages+[None])
             fake=types.SimpleNamespace(codes_get=lambda gid,key:gid[key],
+                codes_get_long=lambda gid,key:int(str(gid[key]).removesuffix('m')),
                 codes_grib_find_nearest=lambda gid,*args:[{'value':gid['value'],'index':gid['index']}],
                 codes_grib_new_from_file=lambda stream:next(iterator),codes_release=lambda gid:None)
             with tempfile.TemporaryDirectory() as directory,patch.dict(sys.modules,{'eccodes':fake}):
@@ -193,12 +194,33 @@ class F9AcquisitionPreflightTests(unittest.TestCase):
         values,unit,errors=read([first,second])
         self.assertEqual(unit,'kg m**-2');self.assertEqual(len(values),2)
         self.assertEqual(list(errors.values()),[0.001953125,0.00390625])
+        self.assertEqual(len(read([dict(first,startStep='0m'),second])[0]),2)
         for key,invalid in [('dataDate',20261005),('startStep',1),('md5GridSection','other'),
                             ('index',2),('stepType','instant'),('units','m'),('packingError',float('nan'))]:
             with self.subTest(key=key),self.assertRaisesRegex(f9.ContractError,'METADATA_INVALID'):
                 read([first,dict(second,**{key:invalid})])
         with self.assertRaisesRegex(f9.ContractError,'DUPLICATE_GRIB_VALID_TIME'):
             read([first,first])
+
+    @unittest.skipUnless(importlib.util.find_spec('eccodes'), 'native ecCodes installed by F9 CI')
+    def test_native_eccodes_zero_step_with_unit_suffix_is_accepted(self):
+        import eccodes
+        gid=eccodes.codes_grib_new_from_samples('regular_ll_sfc_grib2')
+        try:
+            for key,value in [('paramId',228228),('stepType','accum'),('stepUnits','m'),
+                              ('startStep',0),('endStep',0),('dataDate',20261006),('dataTime',1200)]:
+                eccodes.codes_set(gid,key,value)
+            eccodes.codes_set_values(gid,[0.0]*eccodes.codes_get(gid,'numberOfDataPoints'))
+            self.assertEqual(str(eccodes.codes_get(gid,'startStep')),'0m')
+            self.assertEqual(eccodes.codes_get_long(gid,'startStep'),0)
+        except BaseException:
+            eccodes.codes_release(gid)
+            raise
+        with tempfile.TemporaryDirectory() as directory,patch.object(eccodes,'codes_grib_new_from_file',side_effect=[gid,None]):
+            path=pathlib.Path(directory)/'placeholder';path.write_bytes(b'')
+            errors={};values,unit=f9.read_series(path,0,0,errors)
+            self.assertEqual(unit,'kg m**-2');self.assertEqual(list(values.values()),[0.0])
+            self.assertEqual(len(errors),1)
 
     def test_http_diagnostic_identifies_run_variable_and_status_only(self):
         error = urllib.error.HTTPError('https://example.invalid/private', 404, 'sensitive detail', {}, None)

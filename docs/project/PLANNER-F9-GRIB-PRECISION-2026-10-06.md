@@ -42,3 +42,24 @@ policy legacy + ora indeterminata; necessario nuovo exact-head review.
 
 P6 rimane aperta, con percorsi master indicati dall’Owner per ogni elaborazione.
 Il collegamento unico C → F attende sempre la conferma di chiusura PixInsight.
+
+## Verifica reale e correzione dello step zero
+
+PR #494: publication head `4f3ff8f464a182c22e5aff490a406ceef6e929f1`,
+merge `44bead238397f3b9697e971403529475486d76e4`; nove workflow exact-head
+e nove workflow post-merge PASS, ARB/RQ AI separati PASS, Pages verificata.
+Il tentativo manuale governato `37487868127` è fallito prima della pubblicazione
+per `PRECIPITATION_ACCUMULATOR_METADATA_INVALID`; nessun rerun del tentativo.
+
+La lettura limitata in memoria del primo messaggio ufficiale del run
+`2026100612` (210 byte) ha isolato un errore introdotto dal confronto generico:
+ecCodes 2.44.0 restituisce `startStep`/`endStep` come `0m` nel campione iniziale,
+pur essendo accumulazione da zero. L’accessore tipizzato `codes_get_long`
+legge correttamente zero senza dipendere dal suffisso di unità. Il reader usa
+questo accessore per l’origine; gli altri vincoli e la policy 1.2 sono invariati.
+Il nuovo test nativo costruisce in memoria un GRIB sintetico a step `0m` e
+verifica il reader effettivo, oltre al controllo del formato nel test mock.
+Totale: 35 test Python con ecCodes installato; i dati di fuso orario Windows
+sono una dipendenza locale del venv diagnostico, non una modifica del runtime
+Linux governato. Il secondo incremento richiede nuovi CI/ARB/RQ exact-head
+prima del merge e una nuova acquisizione governata dopo la verifica post-merge.
