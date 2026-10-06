@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "status": "RELEASES_VERIFIED_EXTENSION_OPERATIONAL_ACCEPTANCE_PENDING",
+  "scope": "BKL-049-EXT-PIAI_AND_SEPARATE_PHOTO_UPLOAD",
+  "checkedThrough": "2026-10-06",
+  "releaseEvidence": [
+    {
+      "pr": 491,
+      "reviewedHead": "6dd0f94c594856adc0f79fabd96dd86c3bb27188",
+      "mergeHead": "f2afb30f9fafb906895e7c937ba8b23f51357452",
+      "exactHeadChecksPassed": 9,
+      "postMergeWorkflowsPassed": 8,
+      "sequentialAiReviews": [
+        "ARB_PASS",
+        "RQ_PASS"
+      ],
+      "cloudBuild": "46a94c53-8adf-409d-8513-110ec1942069",
+      "deployment": "PASS",
+      "privateM31RefinementDelivered": true,
+      "ownerPrivateDecision": "ACCEPT_PRIVATE_VERIFIED",
+      "downloads": "PASS_OWNER_REPORTED",
+      "downloadFileHashesIndependentlyCompared": false,
+      "boundedCloudRollback": "PASS_HEALTH_STATE_UNCHANGED",
+      "nativeCloudCrashRecovery": "NOT_TESTED"
+    },
+    {
+      "pr": 492,
+      "reviewedHead": "5915ddf009a10e1b5744c8f565fdc5a03238cd20",
+      "mergeHead": "1c48ca7624f8d2a5cc07070681b8656d51ee4685",
+      "exactHeadChecksPassed": 10,
+      "postMergeWorkflowsPassed": 9,
+      "sequentialAiReviews": [
+        "ARB_PASS",
+        "RQ_PASS"
+      ],
+      "cloudBuild": "75bc3a67-80b4-4927-b13f-136f83457a47",
+      "deployment": "PASS",
+      "photoHistoricalEnabled": true,
+      "publicGalleryUnchanged": true,
+      "privateControlStateUnchanged": true,
+      "resourceEnvelopeUnchanged": true,
+      "liveUiEvidence": "OPTION_VISIBLE_BEFORE_OWNER_SIGN_IN",
+      "browserUploadTests": "LOOPBACK_SYNTHETIC_PASS",
+      "realM31UploadPerformed": false,
+      "realM31PublicationPerformed": false
+    }
+  ],
+  "waiver": "W-DSG-AEM-RULESET-001",
+  "reviewClassification": "SEPARATE_SEQUENTIAL_AI_NOT_HUMAN_APPROVAL",
+  "nativeRecovery": {
+    "controlledNativeTermination": "PASS_SYNTHETIC_DATA_LOOPBACK_HTTP",
+    "freshWorkerProcessRecovery": "PASS_SYNTHETIC_DATA_LOOPBACK_HTTP",
+    "cloudNativeRecovery": false,
+    "desktopCrash": false,
+    "powerLoss": false,
+    "automaticRestart": false
+  },
+  "historicalCandidateEvidence": "BKL-049-PIAI-P6-CANDIDATE-2026-10-06.json",
+  "privateEvidencePolicy": "EXACT_SCIENTIFIC_RECEIPTS_PATHS_HASHES_AND_OWNER_DECISION_RETAINED_PRIVATELY",
+  "masterDirectoryPolicy": "OWNER_SELECTS_PER_REQUEST",
+  "realNarrowbandProfileAcceptance": "NOT_ESTABLISHED_DATA_NOT_SELECTED",
+  "realCfaProfileAcceptance": "NOT_ESTABLISHED_DATA_NOT_SELECTED",
+  "publicationM31": "NONE",
+  "globalP6Acceptance": "PENDING",
+  "extensionStatus": "IN_PROGRESS",
+  "rootJunction": "WAITING_FOR_EXPLICIT_OWNER_PIXINSIGHT_CLOSURE_CONFIRMATION",
+  "documentationReconciliationDelivery": "OWN_EXACT_HEAD_CI_ARB_RQ_AND_POSTMERGE_GATES_REQUIRED"
+}

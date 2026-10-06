@@ -6,13 +6,17 @@ Il Project Governance Center raccoglie le regole che governano sviluppo, pubblic
 
 Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 
+## Stato aggiornato del 6 ottobre 2026
+
+[Handover M31 e caricamento storico](HANDOVER_2026-10-06-BKL049-M31.md), [baseline tecnica](CURRENT_TECHNICAL_BASELINE_2026-10-06.md) ed [evidenza minimizzata](evidence/BKL-049-WORK-RECONCILIATION-2026-10-06.json) definiscono la ripresa corrente. P6 resta in corso; M31 accettata privatamente e non pubblicata. Le sezioni di continuità precedenti sono snapshot.
+
 ## Continuity authority corrente
 
 | Documento | Ruolo |
 |---|---|
 | `AI_BOOTSTRAP.md` | Root bootstrap |
-| [BKL-043 F4 Handover 25/09/2026](HANDOVER_2026-09-25-BKL043-F4.md) | Handover corrente |
-| [Current Technical Baseline 25/09/2026](CURRENT_TECHNICAL_BASELINE_2026-09-25.md) | Baseline tecnica corrente |
+| [M31 e PixInsight Handover 06/10/2026](HANDOVER_2026-10-06-BKL049-M31.md) | Handover corrente |
+| [Current Technical Baseline 06/10/2026](CURRENT_TECHNICAL_BASELINE_2026-10-06.md) | Baseline tecnica corrente |
 | [DSG-AEM-001 Continuous Autonomous Execution Mandate](DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md) | Mandato owner-authorized e deroga ruleset condizionata |
 | [PR #196 DSG-AEM-001 AI-Assisted ARB Review](../architecture/reviews/ARB-PR196-DSG-AEM-001-Governance-AI-Assisted-Review-2026-09-15.md) | Approved — 99/100; non equivalente ad approvazione umana indipendente |
 | [PR #196 DSG-AEM-001 AI-Assisted Release Quality](../architecture/reviews/RQ-PR196-DSG-AEM-001-Governance-AI-Assisted-Release-Quality-Review-2026-09-15.md) | Conditionally Ready for Merge; non equivalente ad approvazione umana indipendente |

@@ -1,5 +1,7 @@
 # P5 — richiesta scientifica e revisione privata PixInsight
 
+> Stato corrente al 6 ottobre 2026: [handover M31](HANDOVER_2026-10-06-BKL049-M31.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
+
 | Campo | Valore |
 |---|---|
 | Versione | 1.5 |

@@ -1,11 +1,13 @@
 # Repository Knowledge Map
 
+> Stato corrente al 6 ottobre 2026: [handover M31](HANDOVER_2026-10-06-BKL049-M31.md) e [baseline](CURRENT_TECHNICAL_BASELINE_2026-10-06.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
+
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 6.12 |
+| Versione | 6.13 |
 | Stato | Active |
-| Data | 05/10/2026 |
+| Data | 06/10/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
 | Current governed package | BKL-043 F4 lifecycle pending; BKL-049 archive closed; local PixInsight AI pilot; S10 production runtime `UNAVAILABLE` |
 
@@ -16,8 +18,8 @@ Mappa domini, authority, projection e percorsi di conoscenza. Non sostituisce le
 ## 2. Continuity hierarchy
 
 1. `AI_BOOTSTRAP.md`;
-2. `docs/project/HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md`;
-3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-05.md`;
+2. `docs/project/HANDOVER_2026-10-06-BKL049-M31.md`;
+3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-06.md`;
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`;
 5. questo Knowledge Map;
 6. `DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md`;
@@ -33,7 +35,7 @@ Riferimenti di continuità storici mantenuti per la verificabilità delle capabi
 
 ## 2.1 Current continuity reconciliation
 
-AP-007 è Accepted with conditions come architecture baseline e AP-008 è chiuso nel suo perimetro bounded read-only. La catena corrente è `AI_BOOTSTRAP.md` → `HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md` → `CURRENT_TECHNICAL_BASELINE_2026-10-05.md` → roadmap source → BKL-043 F1/F2/F3/F4 evidence → Traceability Register. BKL-043 resta corrente: F4 attende lifecycle e accettazione finale secondo BKL-043-F4-STATUS-2026-10-01. BKL-049 archivio è chiusa; il pilota locale è una nuova estensione autorizzata.
+AP-007 è Accepted with conditions come architecture baseline e AP-008 è chiuso nel suo perimetro bounded read-only. La catena corrente è `AI_BOOTSTRAP.md` → `HANDOVER_2026-10-06-BKL049-M31.md` → `CURRENT_TECHNICAL_BASELINE_2026-10-06.md` → roadmap source → BKL-043 F1/F2/F3/F4 evidence → Traceability Register. BKL-043 resta corrente: F4 attende lifecycle e accettazione finale secondo BKL-043-F4-STATUS-2026-10-01. BKL-049 archivio è chiusa; il pilota locale è una nuova estensione autorizzata.
 
 ## 3. Authority / projection map
 
@@ -164,7 +166,7 @@ La [riconciliazione F0](BKL-049-F0-ACCEPTANCE-2026-09-30.md) registra PR #445, m
 
 ## Riconciliazione corrente — 2026-10-05
 
-Le sezioni datate precedenti conservano l’evidenza storica. Il [nuovo handover](HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md) e la [baseline corrente](CURRENT_TECHNICAL_BASELINE_2026-10-05.md) prevalgono per lo stato: BKL-043 F4 lifecycle pendente; BKL-049 archivio chiuso, procedura foto/workflow e importer 1.2 consegnati; ultima M27 pubblicata con 80 processi e 16 associazioni dichiarate. Il [pilota locale BKL-049-EXT-PIAI](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md) aggiunge elaborazione file su copie del PC Owner. Worker remoto, modello API e pubblicazione automatica non sono implementati. Safety Authority e dispositivi restano invariati.
+Le sezioni datate precedenti conservano l’evidenza storica. Il [nuovo handover](HANDOVER_2026-10-06-BKL049-M31.md) e la [baseline corrente](CURRENT_TECHNICAL_BASELINE_2026-10-06.md) prevalgono per lo stato: BKL-043 F4 lifecycle pendente; BKL-049 archivio chiuso, procedura foto/workflow e importer 1.2 consegnati; ultima M27 pubblicata con 80 processi e 16 associazioni dichiarate. Il [pilota locale BKL-049-EXT-PIAI](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md) aggiunge elaborazione file su copie del PC Owner. Worker remoto, modello API e pubblicazione automatica non sono implementati. Safety Authority e dispositivi restano invariati.
 
 Versione 6.4 — 05/10/2026: nuova continuità M27 e pilota locale; snapshot storici conservati.
 

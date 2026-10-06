@@ -1,5 +1,7 @@
 # Current Technical Baseline — 2026-10-05
 
+> Stato corrente al 6 ottobre 2026: [handover aggiornato](HANDOVER_2026-10-06-BKL049-M31.md) e [baseline aggiornata](CURRENT_TECHNICAL_BASELINE_2026-10-06.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
+
 | Campo | Valore |
 |---|---|
 | ID | DSG-BASELINE-20261005 |

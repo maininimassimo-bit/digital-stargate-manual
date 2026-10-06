@@ -1,5 +1,7 @@
 # Technical Debt Register
 
+> Stato corrente al 6 ottobre 2026: [gate residui e baseline](CURRENT_TECHNICAL_BASELINE_2026-10-06.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
+
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-DEBT-001 |

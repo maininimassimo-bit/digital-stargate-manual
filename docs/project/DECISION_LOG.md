@@ -618,3 +618,17 @@ L'Owner ha accettato il risultato privato: `ACCEPT_PRIVATE` osservato nella pagi
 ## 2026-10-05 — P5b cartella/prompt e piano confermato
 
 Owner approva percorso dei master e prompt prima di P6, estendendo il requisito ad altri oggetti importati, LRGB, banda stretta, OSC e mosaici da pannelli. La richiesta di pianificazione resta separata dalla coda: verifica locale esplicita, proposta immutabile e conferma dell'esatta impronta del piano. Prompt come dati; nessun esecutore generico remoto, daemon, chiamata IA a pagamento o espansione IAM. Copie originali e M27 pubblicata preservate. [Stato dei profili e collaudi residui](PIAI-P5B-SOURCE-PROFILES-2026-10-05.md). Gate CI/ARB/RQ/deployment/OAT del nuovo candidato obbligatori.
+
+## 2026-10-06 — Riconciliazione rilasci M31 e ingresso fotografico storico
+
+La verifica Owner richiesta evidenzia entrypoint/handover ancora fermi a candidati
+P5b/P6, consegna M31 pendente e assenza del rilascio #492. Nuovi handover e baseline
+del 6 ottobre prevalgono; vecchi documenti e ricevuta candidate rimangono snapshot.
+PR #491 ha consegna privata M31 accettata dall'Owner e download PASS_OWNER_REPORTED;
+PR #492 rende disponibile il caricamento foto storico ma non pubblica M31.
+P6/acceptance operativa resta aperta; master reali per richiesta e collegamento
+unico C → F attendono gli input/conferma previsti. Review AI separate distinte
+dall'Owner; evidenza pubblica minimizzata, ricevute scientifiche conservate private.
+Riconciliazione secondo DSG-AEM-001/W-DSG-AEM-RULESET-001, con propri gate.
+[Stato corrente](HANDOVER_2026-10-06-BKL049-M31.md),
+[evidenza](evidence/BKL-049-WORK-RECONCILIATION-2026-10-06.json).

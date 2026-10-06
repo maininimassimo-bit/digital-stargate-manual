@@ -1,16 +1,18 @@
 # Digital StarGate Enterprise Architecture Context
 
+> Stato corrente al 6 ottobre 2026: [handover M31](HANDOVER_2026-10-06-BKL049-M31.md) e [baseline](CURRENT_TECHNICAL_BASELINE_2026-10-06.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
+
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 4.12 |
+| Versione | 4.13 |
 | Stato | Active context baseline |
-| Data baseline | 05/10/2026 |
+| Data baseline | 06/10/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch autorevole | `main` |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Continuity handover | `docs/project/HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md` |
-| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-05.md` |
+| Continuity handover | `docs/project/HANDOVER_2026-10-06-BKL049-M31.md` |
+| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-06.md` |
 | Current governed package | BKL-043 F4 lifecycle pending; BKL-049 archive closed; local PixInsight AI pilot |
 | Owner | Massimo Mainini |
 
@@ -152,7 +154,7 @@ La [riconciliazione F0](BKL-049-F0-ACCEPTANCE-2026-09-30.md) registra PR #445, m
 
 ## Riconciliazione corrente — 2026-10-05
 
-Le sezioni datate precedenti conservano l’evidenza storica. Il [nuovo handover](HANDOVER_2026-10-05-BKL049-PIXINSIGHT-AI.md) e la [baseline corrente](CURRENT_TECHNICAL_BASELINE_2026-10-05.md) prevalgono per lo stato: BKL-043 F4 lifecycle pendente; BKL-049 archivio chiuso, procedura foto/workflow e importer 1.2 consegnati; ultima M27 pubblicata con 80 processi e 16 associazioni dichiarate. Il [pilota locale BKL-049-EXT-PIAI](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md) aggiunge elaborazione file su copie del PC Owner. Worker remoto, modello API e pubblicazione automatica non sono implementati. Safety Authority e dispositivi restano invariati.
+Le sezioni datate precedenti conservano l’evidenza storica. Il [nuovo handover](HANDOVER_2026-10-06-BKL049-M31.md) e la [baseline corrente](CURRENT_TECHNICAL_BASELINE_2026-10-06.md) prevalgono per lo stato: BKL-043 F4 lifecycle pendente; BKL-049 archivio chiuso, procedura foto/workflow e importer 1.2 consegnati; ultima M27 pubblicata con 80 processi e 16 associazioni dichiarate. Il [pilota locale BKL-049-EXT-PIAI](../architecture/assessments/BKL-049-EXT-PIAI-Local-Pilot.md) aggiunge elaborazione file su copie del PC Owner. Worker remoto, modello API e pubblicazione automatica non sono implementati. Safety Authority e dispositivi restano invariati.
 
 Versione 4.4 — 05/10/2026: riconciliazione BKL-049/M27 e nuova estensione locale.
 
