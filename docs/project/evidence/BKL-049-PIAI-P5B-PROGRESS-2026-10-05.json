@@ -1,7 +1,7 @@
 {
   "date": "2026-10-05",
-  "scope": "BKL-049-EXT-PIAI-P5B-CANDIDATE",
-  "deployment": "NOT_DEPLOYED",
+  "scope": "BKL-049-EXT-PIAI-P5B-RELEASED-TECHNICAL-OAT",
+  "deployment": "API_AND_PAGES_DEPLOYED",
   "syntheticChecks": {
     "python": {
       "tests": 125,
@@ -46,12 +46,12 @@
     "catalogAssociation": "NOT_CREATED"
   },
   "notEstablished": [
-    "NEW_PROFILE_NATIVE_PROCESSING",
     "MOSAIC_ASSEMBLY_ACCEPTANCE",
     "CFA_NATIVE_ACCEPTANCE",
     "OWNER_PORTAL_END_TO_END",
     "RELEASE_ACCEPTANCE",
-    "P6"
+    "P6",
+    "ALL_PROFILE_SCIENTIFIC_ACCEPTANCE"
   ],
   "updatedAt": "2026-10-06",
   "nativeMosaicPreparation": {
@@ -109,7 +109,7 @@
     "ownerExactDigestApproval": "PASS",
     "workerCannotApprove": "PASS",
     "nativeAuthority": "NONE",
-    "portalDeployment": "NOT_DEPLOYED"
+    "portalDeployment": "API_AND_PAGES_DEPLOYED"
   },
   "localCommonPreparationContract": {
     "profiles": [
@@ -129,8 +129,8 @@
     ],
     "inputHeaderLimitMiB": 4,
     "nativeInstanceValidation": "IMPLEMENTED_SCHEMA_1_1_SYNTHETIC_CHECKS_PASS",
-    "portalQueueIntegration": "CANDIDATE_SYNTHETIC_CHECKS_PASS",
-    "deployment": "NOT_DEPLOYED"
+    "portalQueueIntegration": "IMPLEMENTED_SYNTHETIC_CHECKS_PASS_OWNER_E2E_NOT_ESTABLISHED",
+    "deployment": "API_AND_PAGES_DEPLOYED"
   },
   "nativeCommonPreparation": {
     "status": "COMPLETED",
@@ -159,7 +159,7 @@
     "collectorVersion": "1.1",
     "preparedInputs": "SOURCE_RUNTIME_JOURNAL_NATIVE_INSTANCE_OUTPUT_BOUND",
     "workflow": "PREPARATION_AND_RECIPE_RUNTIME_WITH_LOGICAL_RESOURCES",
-    "deployment": "NOT_DEPLOYED",
+    "deployment": "API_AND_PAGES_DEPLOYED",
     "realOwnerEndToEnd": "NOT_ESTABLISHED"
   },
   "nativeOscProcessing": {
@@ -195,6 +195,33 @@
     "blocker": 0,
     "major": "Terminal write without verified native lease ownership; candidate corrected with busy/foreign reservation and write-failure regressions.",
     "minor": "Earlier P5b procedure reconciled to current profiles and preparation.",
-    "newExactHeadCiArbRq": "REQUIRED_BEFORE_RELEASE"
+    "newExactHeadCiArbRq": "PASS_ON_CORRECTED_HEAD_SEE_RELEASE"
+  },
+  "release": {
+    "pr": 488,
+    "reviewedHead": "bd628c51d0b5f76f22bf94a3ba8c8b673ed0c289",
+    "reviewedTree": "ed8a9ef7ac6fb640408621c5d1256ce5d4c1f945",
+    "mergeSha": "ebbb7d3c1034130ef49df674fcc596c0403647f0",
+    "preMergeWorkflows": {
+      "count": 17,
+      "result": "SUCCESS"
+    },
+    "arb": "PASS_AI_ASSISTED_ZERO_RESIDUAL_FINDINGS",
+    "rq": "PASS_AI_ASSISTED_ZERO_RESIDUAL_FINDINGS",
+    "postMergeWorkflows": {
+      "count": 17,
+      "result": "SUCCESS",
+      "pages": "SUCCESS"
+    },
+    "cloudBuild": "78bb9d31-1b02-46f9-ab63-b088ee8ccfea",
+    "cloudBuildResult": "SUCCESS",
+    "revision": "dsg-pixinsight-pilot-p5b-bd628c51",
+    "trafficPercent": 100,
+    "imageDigest": "sha256:ddf1abe4369c5b682ddc92d377dbb6e77d3905a349b45a759905c56bafa337d8",
+    "liveHttpSmoke": "PASS_STATE_UNCHANGED_NO_NATIVE_LAUNCH",
+    "publicBrowserFields": "VERIFIED_UNAUTHENTICATED",
+    "ownerPortalEndToEnd": "NOT_ESTABLISHED",
+    "rollbackRevision": "dsg-pixinsight-pilot-p5-target-01",
+    "waiver": "W-DSG-AEM-RULESET-001"
   }
 }

@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | ID | DSG-HO-BKL049-20261005 |
-| Versione | 2.4 |
+| Versione | 2.5 |
 | Data | 2026-10-06 |
 | Stato | Riconciliazione operativa; estensione pilota autorizzata, non accettata come produzione |
 | Pacchetto | BKL-049 archivio chiuso; BKL-049-EXT-PIAI pilota distinto |
@@ -154,3 +154,14 @@ Il candidato include selezione immutabile dei pannelli e conferma Owner dell'esa
 Il candidato integra ora conferma Owner del piano di preparazione, raccolta indipendente versione 1.1 con analisi delle istanze native, associazione dei master preparati al piano finale e workflow combinato preparazione/ricetta. Le conferme sono separate e vincolate ai rispettivi digest; nessun avvio nativo automatico. 125 test Python e 71 JavaScript PASS. La prova nativa OSC sul mosaico M31 è ora COMPLETED e raccolta indipendentemente: 26 operazioni, 12 checkpoint, 26 istanze esportate; finale RGB Float32 7510×5164 non lineare, tutti i pixel finiti e normalizzati. Gli otto master originali e il mosaico lineare usato come input sono invariati; prenotazione chiusa dopo la verifica. È una prova tecnica locale, senza associazione al catalogo, accettazione scientifica o prova della catena unica preparazione/ricetta approvata dall’Owner nel portale. La History precedente resta NOT_ESTABLISHED. Le sessioni M31 anteriori al portale non sono inventate né associate a M27. Questo aggiornamento supera le precedenti note sul collegamento ancora da implementare; rilascio, controlli del commit esatto, review e percorso autenticato reale restano aperti. I precedenti artefatti nativi non sono riscritti con la nuova versione del raccoglitore. Nessun nuovo costo API IA, risorsa cloud o permesso IAM. P6 resta aperto.
 
 La prima ARB del candidato ha rilevato un Major sulla scrittura del terminale senza ownership verificata del lease e un Minor sulla procedura precedente. Il candidato corretto non scrive artefatti da un tentativo respinto e rilascia il lease anche quando la scrittura del terminale fallisce; entrambe le condizioni hanno regressioni sintetiche. Procedura riconciliata. Nuovi CI, ARB e RQ sul commit esatto restano necessari prima del rilascio.
+
+
+## Rilascio P5b verificato — 6 ottobre 2026
+
+La PR [#488](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/488) è integrata nel commit `ebbb7d3c1034130ef49df674fcc596c0403647f0`. Il codice revisionato è `bd628c51d0b5f76f22bf94a3ba8c8b673ed0c289`, albero `ed8a9ef7ac6fb640408621c5d1256ce5d4c1f945`: CI completa, ARB e RQ AI-assistite separate e sequenziali PASS, zero finding residui. La prima ARB fallita resta storica; il difetto di ownership della prenotazione e la procedura obsoleta sono corretti e verificati. Merge eseguito secondo DSG-AEM-001 e W-DSG-AEM-RULESET-001, senza deroga alla CI. Tutti i 17 workflow post-merge, inclusa la pubblicazione Pages, sono SUCCESS sul merge SHA.
+
+Cloud Build `78bb9d31-1b02-46f9-ab63-b088ee8ccfea` SUCCESS sul codice revisionato, con 125 test Python. Il servizio esistente usa la revisione `dsg-pixinsight-pilot-p5b-bd628c51`, traffico 100%, immagine per digest `sha256:ddf1abe4369c5b682ddc92d377dbb6e77d3905a349b45a759905c56bafa337d8`. Prove HTTP reali PASS: health SESSION_ASSISTED e zero richieste provider, lettura worker autenticata, rifiuto degli accessi anonimi e delle approvazioni Owner da worker, rifiuto delle chiamate browser ai percorsi worker; stato invariato e nessun avvio nativo. Non sono state create risorse, credenziali o autorizzazioni IAM.
+
+La [pagina pubblica](https://maininimassimo-bit.github.io/digital-stargate-manual/pixinsight-pilot/) è verificata nel browser: cartella locale, prompt, LRGB, OSC RGB/CFA, SHO/HOO e mosaico da pannelli sono presenti. L'accesso Google Owner e la nuova catena completa di conferme nel portale restano da collaudare; la verifica senza login non li sostituisce. Il pulsante Google incorporato richiede il clic dell'Owner perché il controllo browser non può indirizzarlo. Le prove native M31 restano tecniche locali su copie, senza sessioni inventate, accettazione scientifica o pubblicazione della foto. L'accettazione privata M27 precedente resta conservata. P6 e acceptance operativa dei nuovi profili restano aperti.
+
+Rollback API: ripristinare il traffico sulla revisione precedente `dsg-pixinsight-pilot-p5-target-01` e riconciliare la pagina con il codice precedente, senza cancellare richieste, ricevute e risultati privati immutabili. Questo aggiornamento supera esclusivamente le precedenti note di candidato non pubblicato e gate di rilascio pendenti; conserva le limitazioni scientifiche e gli snapshot storici.
