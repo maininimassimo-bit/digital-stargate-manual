@@ -66,7 +66,7 @@ for(const length of [0,1,55,56,63,64,65,127,128,1000,4194305]){
     await page.goto(origin+'/scientific-photo-upload/');await page.getByText('Synthetic owner login',{exact:true}).click();await page.getByRole('button',{name:'Ritira pubblicazione',exact:true}).click();await page.getByText('Pubblicazione ritirata. I file privati restano conservati.',{exact:true}).waitFor();
     assert.equal((await (await fetch(local+'/v1/gallery')).json()).records.length,0);
     assert.equal((await fetch(local+new URL(previewUrl).pathname)).status,400);
-    await page.goto(origin+'/scientific-image-gallery/');await page.getByText('Nessuna immagine ancora pubblicata dalle sessioni importate.',{exact:true}).waitFor();
+    await page.goto(origin+'/scientific-image-gallery/');await page.getByText('Nessuna immagine ancora pubblicata.',{exact:true}).waitFor();
     // A stopped multi-chunk upload must preserve its exact request across a
     // reload even when the current catalogue removes/reorders the selection.
     await page.goto(`${origin}/scientific-photo-upload/?sessionId=${encodeURIComponent(session.sessionId)}`);
@@ -104,6 +104,63 @@ for(const length of [0,1,55,56,63,64,65,127,128,1000,4194305]){
     assert.equal(chunkWrites.filter(p=>p===`/v1/uploads/${pending.uploadId}/original/1`).length,1);
     assert.ok((await page.locator('[data-photo-summary]').textContent()).includes(session.sessionId));
     await page.locator('[data-photo-save]').click();await page.getByText('Immagine e workflow salvati privatamente.',{exact:true}).waitFor();
+    // Historical provenance freezes independently of the catalogue and survives
+    // an interrupted upload plus an unavailable browser catalogue on reload.
+    await page.getByRole('button',{name:'Inizia un nuovo caricamento',exact:true}).click();
+    await page.locator('[data-photo-origin]').selectOption('HISTORICAL');
+    await page.locator('[data-photo-historical-target]').fill('M31');
+    await page.locator('[data-photo-provenance]').fill('Private historical source <img src=x onerror=alert(1)>');
+    await page.locator('[data-photo-title]').fill('Synthetic historical M31');
+    await page.locator('[data-photo-date]').fill('2026-10-06');
+    await selectFiles(original);await page.locator('[data-photo-attest]').check();
+    const missingDeclaration=createRequests.length;
+    await page.getByRole('button',{name:'Carica e verifica',exact:true}).click();
+    assert.equal(createRequests.length,missingDeclaration);
+    await page.locator('[data-photo-historical-attest]').check();
+    interruptResume=true;interrupted=false;
+    await page.getByRole('button',{name:'Carica e verifica',exact:true}).click();
+    await page.waitForFunction(()=>!document.querySelector('[data-photo-fields]').disabled && document.querySelector('[data-photo-progress]').value>0);
+    assert.equal(interrupted,true);const historicalFrozen=createRequests.at(-1);
+    assert.deepEqual(historicalFrozen.sessionIds,[]);assert.equal(historicalFrozen.catalogSha256,null);
+    const historicalPending=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('dsg-photo-upload-v1')));
+    await page.route('**/scientific-session-catalog.json',route=>route.fulfill({status:503,body:'Unavailable'}));
+    await page.reload();await page.getByText('Synthetic owner login',{exact:true}).click();
+    await page.waitForFunction(()=>!document.querySelector('[data-photo-fields]').disabled);
+    assert.equal(await page.locator('[data-photo-origin]').inputValue(),'HISTORICAL');
+    assert.equal(await page.locator('[data-photo-origin]').isDisabled(),true);
+    assert.equal(await page.locator('[data-photo-historical-target]').inputValue(),'M31');
+    assert.equal(await page.locator('[data-photo-provenance]').inputValue(),historicalFrozen.historicalSource.provenance);
+    assert.equal(await page.locator('[data-photo-provenance]').isDisabled(),true);
+    assert.equal(await page.locator('[data-photo-sessions] input').count(),0);
+    await selectFiles(original);await page.getByRole('button',{name:'Carica e verifica',exact:true}).click();
+    await page.locator('[data-photo-review]').waitFor({state:'visible'});await page.waitForFunction(()=>!document.querySelector('[data-photo-save]').disabled);
+    assert.deepEqual(createRequests.at(-1),historicalFrozen);
+    assert.equal(chunkWrites.filter(p=>p===`/v1/uploads/${historicalPending.uploadId}/original/0`).length,1);
+    assert.equal(chunkWrites.filter(p=>p===`/v1/uploads/${historicalPending.uploadId}/original/1`).length,1);
+    assert.ok((await page.locator('[data-photo-summary]').textContent()).includes('sessioni non importate'));
+    assert.ok(!(await page.locator('[data-photo-public-review]').textContent()).includes('Private historical'));
+    assert.equal(await page.locator('[data-photo-summary] img').count(),0);
+    await page.locator('[data-photo-rights]').check();await page.locator('[data-photo-publish]').click();
+    await page.getByText('Immagine e workflow pubblicati.',{exact:true}).waitFor();
+    const historicalRecord=(await (await fetch(local+'/v1/gallery')).json()).records[0];
+    assert.equal(historicalRecord.associationEvidence,'HISTORICAL_OWNER_DECLARATION');
+    assert.deepEqual(historicalRecord.sessionIds,[]);assert.equal(historicalRecord.target,'M31');
+    assert.ok(!JSON.stringify(historicalRecord).includes('Private historical'));
+    await page.goto(origin+'/scientific-image-gallery/');await page.locator('[data-session-photo-gallery] article').waitFor();
+    assert.ok((await page.locator('[data-session-photo-gallery] article').textContent()).includes('Riprese storiche'));
+    assert.equal(await page.locator('[data-session-photo-gallery] article a[href*="sessionId="]').count(),0);
+    if(process.env.DSG_TEST_OUTPUT)await page.screenshot({path:path.join(process.env.DSG_TEST_OUTPUT,'photo-ingestion-historical-synthetic.png'),fullPage:true});
+    for(const invalid of [historicalRecord.associationEvidence==='HISTORICAL_OWNER_DECLARATION' && {...historicalRecord,sessionIds:['invented-session']},
+                          {...historicalRecord,associationEvidence:'OWNER_DECLARED'}]){
+      await page.route('https://photo-test.run.app/v1/gallery',route=>route.fulfill({json:{...collection,records:[invalid]}}));
+      await page.reload();await page.getByText('Archivio delle sessioni non ancora disponibile. Le immagini già pubblicate con workflow sono consultabili qui sotto.',{exact:true}).waitFor();
+      assert.equal(await page.locator('[data-session-photo-gallery] article').count(),0);
+      await page.unroute('https://photo-test.run.app/v1/gallery');
+    }
+    await page.goto(origin+'/scientific-photo-upload/');await page.getByText('Synthetic owner login',{exact:true}).click();
+    await page.getByRole('button',{name:'Ritira pubblicazione',exact:true}).click();
+    await page.getByText('Pubblicazione ritirata. I file privati restano conservati.',{exact:true}).waitFor();
+    assert.equal((await (await fetch(local+'/v1/gallery')).json()).records.length,0);
     // A staged activation permits only the real login/readonly archive check.
     await page.route('**/photo-ingestion-config.json',route=>route.fulfill({json:{schemaVersion:'1.0',serviceUrl:'https://photo-test.run.app',deploymentState:'OWNER_LOGIN_OAT_PENDING'}}));
     const beforePreflight=createRequests.length,writesBeforePreflight=chunkWrites.length;

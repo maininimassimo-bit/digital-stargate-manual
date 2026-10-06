@@ -7,12 +7,15 @@
     host.dataset.initialized='true';
     const api=window.DSGPhotoApi, q=name=>host.querySelector(`[data-photo-${name}]`);
     const status=q('status'), fields=q('fields'), form=q('form'), target=q('target'), sessionsBox=q('sessions');
-    let alive=true, busy=false, signedIn=false, activationPending=false, archive=[], selectedUpload=null, review=null, imageUrl=null, catalogSha256, frozenRequest=null;
+    let alive=true, busy=false, signedIn=false, activationPending=false, archive=[], selectedUpload=null, review=null, imageUrl=null, catalogSha256, frozenRequest=null,historicalUploadEnabled=false;
     const sessionSource=new URL('data/scientific-session-catalog.json',api.base).href;
+    const historical=()=>q('origin').value==='HISTORICAL';
+    const selectedTarget=()=>historical()?q('historical-target').value.trim():target.value;
+    const sourceLabel=context=>context.source==='HISTORICAL_OWNER_DECLARATION'?'Riprese storiche dichiarate dall’autore; sessioni non importate.':`Sessioni: ${context.sessions.map(s=>s.sessionId).join(', ')}`;
     const pendingKey='dsg-photo-upload-v1';
     const message=text=>{if(alive)status.textContent=text;};
     const lock=value=>{busy=value;fields.disabled=value || !signedIn || activationPending;q('save').disabled=value || activationPending;q('new').disabled=value || activationPending;q('recheck').disabled=value || activationPending;q('publish').disabled=value || activationPending || !review?.publicationEligible || !q('rights').checked;
-      for(const name of ['target','title','date','version','attest'])q(name).disabled=Boolean(frozenRequest);
+      for(const name of ['origin','historical-target','provenance','historical-attest','target','title','date','version','attest'])q(name).disabled=Boolean(frozenRequest);
       sessionsBox.querySelectorAll('input').forEach(input=>{input.disabled=Boolean(frozenRequest);});};
     const run=async action=>{if(busy)return;lock(true);try{await action();}catch(error){message(error.message);}finally{if(alive)lock(false);}};
     const selection=()=>review.steps.filter(s=>host.querySelector(`[data-step="${s.stepId}"]`).checked).map(s=>({stepId:s.stepId,processId:s.processId,
@@ -21,7 +24,7 @@
       if(!review)return;
       const box=q('public-review');box.replaceChildren();el('h3',review.state==='PUBLISHED'?'Pubblicazione corrente':'Contenuto che sarà pubblico',box);
       el('p',`${review.title} · ${review.target} · elaborazione ${review.processingDate}`,box);
-      el('p',`Sessioni: ${review.sessionContext.sessions.map(s=>s.sessionId).join(', ')}`,box);
+      el('p',sourceLabel(review.sessionContext),box);
       const steps=selection();el('p',`${steps.length} processi selezionati. Storia ${steps.length?'parziale':'non disponibile'}. Esecuzione non verificata.`,box);
       steps.forEach(s=>{el('p',s.processId,box);s.parameters.forEach(p=>{const source=review.steps.find(x=>x.stepId===s.stepId).parameters.find(x=>x.name===p.name);el('pre',`${p.name}: ${source.lexicalJson}`,box);});});
       lock(busy);
@@ -57,7 +60,7 @@
     };
     const renderVersions=()=>{
       const select=q('version'), old=frozenRequest?.imageId || select.value;select.replaceChildren();const fresh=el('option','Nuova immagine',select);fresh.value='';
-      const seen=new Set();for(const item of archive){if(item.target!==target.value || !['SAVED_PRIVATE','PUBLISHED','WITHDRAWN'].includes(item.state) || seen.has(item.imageId))continue;seen.add(item.imageId);const option=el('option',`Nuova versione di ${item.title}`,select);option.value=item.imageId;}
+      const seen=new Set();for(const item of archive){if(item.target!==selectedTarget() || !['SAVED_PRIVATE','PUBLISHED','WITHDRAWN'].includes(item.state) || seen.has(item.imageId))continue;seen.add(item.imageId);const option=el('option',`Nuova versione di ${item.title}`,select);option.value=item.imageId;}
       select.value=seen.has(old)?old:'';
       if(frozenRequest?.imageId && !seen.has(old)){const option=el('option','Versione conservata',select);option.value=old;select.value=old;}
     };
@@ -68,9 +71,20 @@
         label.append(document.createTextNode(`${session.observationDate} · ${session.sessionId}`));
       }renderVersions();
     };
+    const renderOrigin=()=>{
+      const old=historical();q('imported-fields').hidden=old;q('historical-fields').hidden=!old;
+      target.required=!old;
+      for(const name of ['historical-target','provenance','historical-attest'])q(name).required=old;
+      q('attest-label').textContent=old?'Confermo che l’anteprima deriva dall’originale caricato.':'Confermo che l’anteprima deriva dall’originale e che le sessioni selezionate sono quelle di origine.';
+      renderVersions();
+    };
     const freezeUpload=saved=>{
       frozenRequest=structuredClone(saved.request);selectedUpload=saved.id;
-      const oldTarget=saved.frozenSessionContext[0].target;
+      const oldTarget=saved.target;
+      q('origin').value=frozenRequest.historicalSource?'HISTORICAL':'IMPORTED';
+      q('historical-target').value=frozenRequest.historicalSource?.target || '';
+      q('provenance').value=frozenRequest.historicalSource?.provenance || '';
+      q('historical-attest').checked=frozenRequest.historicalSource?.attested===true;renderOrigin();
       if(![...target.options].some(option=>option.value===oldTarget)){const option=el('option',`${oldTarget} · selezione conservata`,target);option.value=oldTarget;}
       target.value=oldTarget;q('title').value=frozenRequest.title;q('date').value=frozenRequest.processingDate;q('attest').checked=frozenRequest.previewAttested;
       sessionsBox.replaceChildren();for(const session of saved.frozenSessionContext){
@@ -89,7 +103,8 @@
       q('review').hidden=false;q('new').hidden=false;q('summary').replaceChildren();q('steps').replaceChildren();q('rights').checked=false;
       q('recheck').hidden=review.state==='PUBLISHED';q('save').hidden=review.state==='PUBLISHED';q('publish').hidden=review.state==='PUBLISHED';
       el('p',`${review.title} · ${review.target} · ${review.imageVersionId}`,q('summary'));
-      el('p',`Sessioni di origine: ${review.sessionContext.sessions.map(s=>s.sessionId).join(', ')}`,q('summary'));
+      el('p',sourceLabel(review.sessionContext),q('summary'));
+      if(review.sessionContext.historicalSource)el('p',`Provenienza privata: ${review.sessionContext.historicalSource.provenance}`,q('summary'));
       el('p',review.publicationEligible?'Controlli dei file superati. Anteprima pronta per la revisione.':'File conservati in quarantena. La pubblicazione è bloccata finché i controlli non sono superati.',q('summary'));
       if(imageUrl)URL.revokeObjectURL(imageUrl);q('review-image').hidden=true;
       if(review.sanitizedPreview){imageUrl=URL.createObjectURL(await api.request(`/v1/uploads/${uploadId}/preview`,{binary:true}));q('review-image').src=imageUrl;q('review-image').hidden=false;}
@@ -106,11 +121,14 @@
       publicReview();q('review').scrollIntoView({block:'start'});message('Verifica il contenuto, poi scegli come salvarlo.');
     };
     target.addEventListener('change',()=>renderSessions());q('rights').addEventListener('change',publicReview);
-    q('new').addEventListener('click',()=>{if(busy)return;sessionStorage.removeItem(pendingKey);selectedUpload=null;review=null;frozenRequest=null;q('review').hidden=true;q('new').hidden=true;form.reset();renderSessions();lock(false);message('Nuovo caricamento.');});
+    q('origin').addEventListener('change',renderOrigin);q('historical-target').addEventListener('input',renderVersions);
+    q('new').addEventListener('click',()=>{if(busy)return;sessionStorage.removeItem(pendingKey);selectedUpload=null;review=null;frozenRequest=null;q('review').hidden=true;q('new').hidden=true;form.reset();renderOrigin();renderSessions();lock(false);message('Nuovo caricamento.');});
     form.addEventListener('submit',event=>{event.preventDefault();if(activationPending)return;run(async()=>{
       let pending;try{pending=JSON.parse(sessionStorage.getItem(pendingKey));}catch{}
       if(pending?.uploadId && !frozenRequest)await restoreUpload(pending.uploadId);
-      const sessionIds=frozenRequest?.sessionIds || [...sessionsBox.querySelectorAll('input:checked')].map(node=>node.value);if(!sessionIds.length)throw new Error('Seleziona almeno una sessione.');
+      if(!frozenRequest&&historical()&&!historicalUploadEnabled)throw new Error('Il caricamento da riprese storiche non è attivo. I caricamenti già conservati restano accessibili.');
+      const sessionIds=frozenRequest?.sessionIds || (historical()?[]:[...sessionsBox.querySelectorAll('input:checked')].map(node=>node.value));if(!historical()&&!sessionIds.length)throw new Error('Seleziona almeno una sessione.');
+      if(historical()&&(!selectedTarget()||!q('provenance').value.trim()||!q('historical-attest').checked))throw new Error('Indica oggetto e provenienza e conferma la dichiarazione delle riprese storiche.');
       const files={original:q('original').files[0],preview:q('preview').files[0],workflow:q('workflow').files[0]};
       const extension=file=>file.name.split('.').pop().toLowerCase(), descriptors={};
       for(const [role,file] of Object.entries(files)){
@@ -124,7 +142,8 @@
       if(!pending){pending={idempotencyKey:crypto.randomUUID()};sessionStorage.setItem(pendingKey,JSON.stringify(pending));}
       q('new').hidden=false;
       if(frozenRequest)for(const role of Object.keys(files))for(const key of ['byteSize','mediaType','sha256'])if(descriptors[role][key]!==frozenRequest.files[role][key])throw new Error('Questa ripresa richiede gli stessi tre file. Per caricare file diversi, inizia un nuovo caricamento.');
-      const request=frozenRequest || {idempotencyKey:pending.idempotencyKey,catalogSha256,imageId:q('version').value||null,sessionIds,title:q('title').value,processingDate:q('date').value,files:descriptors,previewAttested:q('attest').checked};
+      const request=frozenRequest || {idempotencyKey:pending.idempotencyKey,catalogSha256:historical()?null:catalogSha256,imageId:q('version').value||null,sessionIds,title:q('title').value,processingDate:q('date').value,files:descriptors,previewAttested:q('attest').checked,
+        ...(historical()?{historicalSource:{target:selectedTarget(),provenance:q('provenance').value.trim(),attested:q('historical-attest').checked}}:{})};
       const created=await api.request('/v1/uploads',{method:'POST',body:request});
       sessionStorage.setItem(pendingKey,JSON.stringify({idempotencyKey:pending.idempotencyKey,uploadId:created.uploadId}));
       selectedUpload=created.uploadId;const saved=await api.request(`/v1/uploads/${selectedUpload}`);
@@ -149,10 +168,13 @@
     try{
       activationPending=(await api.config()).deploymentState==='OWNER_LOGIN_OAT_PENDING';
       if(!window.DSGScientificDataEngine){await new Promise((resolve,reject)=>{const script=el('script');script.src=new URL('javascripts/scientific-data-engine.js',api.base);script.onload=resolve;script.onerror=reject;document.head.append(script);});}
-      const context=await window.DSGScientificDataEngine.getPhotoUploadContext(sessionSource);sessions=context.sessions;catalogSha256=context.catalogSha256;const initial=sessions.find(s=>s.sessionId===new URLSearchParams(location.search).get('sessionId'));
+      try{const context=await window.DSGScientificDataEngine.getPhotoUploadContext(sessionSource);sessions=context.sessions;catalogSha256=context.catalogSha256;}
+      catch{q('origin').options[0].disabled=true;q('origin').value='HISTORICAL';}
+      const initial=sessions.find(s=>s.sessionId===new URLSearchParams(location.search).get('sessionId'));
       [...new Set(sessions.map(s=>s.target))].sort().forEach(name=>{const option=el('option',name,target);option.value=name;});if(initial)target.value=initial.target;
-      renderSessions(initial?[initial.sessionId]:[]);
+      renderSessions(initial?[initial.sessionId]:[]);renderOrigin();
       const health=await api.request('/health',{publicRead:true});
+      historicalUploadEnabled=health.historicalUploadEnabled===true;q('origin').options[1].disabled=!historicalUploadEnabled;
       if(!/^[A-Za-z0-9.-]+\.apps\.googleusercontent\.com$/.test(health.googleClientId))throw new Error('Accesso Google non configurato.');
       if(!window.google?.accounts?.id)await new Promise((resolve,reject)=>{const script=el('script');script.src='https://accounts.google.com/gsi/client';script.onload=resolve;script.onerror=reject;document.head.append(script);});
       if(!alive)return;

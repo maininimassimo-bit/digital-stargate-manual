@@ -15,6 +15,10 @@ head and its approved sanitized previews. Buckets remain private, including
 backups. Public preview URLs never select an arbitrary storage object.
 
 One image can originate from 1–32 imported sessions with the same literal target.
+The additive [historical-source path](../../docs/project/SCIENTIFIC-PHOTO-HISTORICAL-SOURCE-2026-10-06.md)
+requires an explicit Owner target/provenance declaration and uses zero imported
+sessions with no catalogue anchor. Its full provenance text remains private;
+the public record explicitly identifies historical origin without session links.
 For each new upload, the service independently reads the current analytics
 catalogue from the fixed public repository projection URL, rejects redirects and
 bounds the response. Its measured digest must match the exact catalogue bytes

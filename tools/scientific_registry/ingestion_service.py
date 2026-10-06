@@ -8,6 +8,7 @@ from copy import deepcopy
 from datetime import datetime, timezone
 import json
 import math
+import os
 import re
 
 from tools.pixinsight.workflow_archive.archive import encode
@@ -22,6 +23,11 @@ LIMITS = {"original": 1024 * 1024 * 1024, "preview": 32 * 1024 * 1024, "workflow
 MEDIA = {"original": {"application/x-xisf", "application/fits"},
          "preview": {"image/jpeg", "image/png"}, "workflow": {"text/plain"}}
 STATE_KEY = "control/state.json"
+
+
+def historical_upload_enabled():
+    # Suspension preserves compatible readers and exact retries of retained uploads.
+    return os.environ.get("DSG_PHOTO_HISTORICAL_UPLOAD", "1") == "1"
 
 
 def json_bytes(value):
@@ -71,8 +77,12 @@ class IngestionService:
         return item
 
     def create(self, request, actor):
-        if not isinstance(request, dict) or set(request) != {"idempotencyKey", "catalogSha256", "imageId", "sessionIds", "title", "processingDate", "files", "previewAttested"}:
+        fields = {"idempotencyKey", "catalogSha256", "imageId", "sessionIds", "title", "processingDate", "files", "previewAttested"}
+        if not isinstance(request, dict) or set(request) not in (fields, fields | {"historicalSource"}):
             raise IngestionError("REQUEST_FIELDS_INVALID")
+        historical = "historicalSource" in request
+        if historical and request["historicalSource"] is None:
+            raise IngestionError("HISTORICAL_SOURCE_FIELDS")
         key = request["idempotencyKey"]
         if not isinstance(key, str) or not re.fullmatch(r"[A-Za-z0-9_-]{16,80}", key):
             raise IngestionError("IDEMPOTENCY_KEY_INVALID")
@@ -83,8 +93,10 @@ class IngestionService:
             if existing["requestDigest"] != request_digest:
                 raise IngestionError("IDEMPOTENCY_CONFLICT")
             return existing  # An exact retry pins its original snapshot, even after catalog updates.
-        catalog_raw = self.catalog_loader() if self.catalog_loader else self.catalog_raw
-        catalog_digest = sha256(catalog_raw)
+        if historical and not historical_upload_enabled():
+            raise IngestionError("HISTORICAL_UPLOAD_SUSPENDED")
+        catalog_raw = None if historical else (self.catalog_loader() if self.catalog_loader else self.catalog_raw)
+        catalog_digest = None if historical else sha256(catalog_raw)
         if request["catalogSha256"] != catalog_digest:
             raise IngestionError("CATALOG_CHANGED_REFRESH")
         files = request["files"]
@@ -102,7 +114,8 @@ class IngestionService:
                      session_ids=request["sessionIds"], title=request["title"], processing_date=request["processingDate"],
                      original_raw=b"XISF0100", original_media_type="application/x-xisf",
                      preview_raw=b"\xff\xd8\xff", preview_media_type="image/jpeg", workflow_raw=b"",
-                     receipt_id="BKL049-validation", imported_at=stamp(), preview_attested=request["previewAttested"])
+                     receipt_id="BKL049-validation", imported_at=stamp(), preview_attested=request["previewAttested"],
+                     historical_source=request.get("historicalSource"))
         def change(state):
             old = state["uploads"].get(upload_id)
             if old:
@@ -129,7 +142,8 @@ class IngestionService:
                 "state": "UPLOADING", "reviewSha256": None, "publication": None}
             return True
         # Preserve the exact selected catalogue for replay, independently of future deploys.
-        immutable(self.store, "catalogs/" + catalog_digest, catalog_raw)
+        if not historical:
+            immutable(self.store, "catalogs/" + catalog_digest, catalog_raw)
         return self._change(actor, "UPLOAD_CREATED", upload_id, change)
 
     def chunk(self, upload_id, role, index, raw, actor):
@@ -145,12 +159,15 @@ class IngestionService:
 
     def status(self, upload_id, actor):
         item = deepcopy(self._upload(upload_id, actor))
-        catalog_raw, _ = self.store.get("catalogs/" + item["catalogSha256"])
-        if catalog_raw is None or sha256(catalog_raw) != item["catalogSha256"]:
-            raise IngestionError("CATALOG_ANCHOR_MISMATCH")
-        source = {s["sessionId"]: s for s in json.loads(catalog_raw)["sessions"]}
-        item["frozenSessionContext"] = [{"sessionId": sid, "target": source[sid]["target"],
-            "observationDate": source[sid].get("observationDate")} for sid in item["request"]["sessionIds"]]
+        if "historicalSource" in item["request"]:
+            item["frozenSessionContext"] = []
+        else:
+            catalog_raw, _ = self.store.get("catalogs/" + item["catalogSha256"])
+            if catalog_raw is None or sha256(catalog_raw) != item["catalogSha256"]:
+                raise IngestionError("CATALOG_ANCHOR_MISMATCH")
+            source = {s["sessionId"]: s for s in json.loads(catalog_raw)["sessions"]}
+            item["frozenSessionContext"] = [{"sessionId": sid, "target": source[sid]["target"],
+                "observationDate": source[sid].get("observationDate")} for sid in item["request"]["sessionIds"]]
         item["received"] = {}
         for role, descriptor in item["request"]["files"].items():
             item["received"][role] = [i for i in range(math.ceil(descriptor["byteSize"] / CHUNK_BYTES))
@@ -182,7 +199,9 @@ class IngestionService:
                 raise IngestionError("REVIEW_INTEGRITY_FAILED")
             return json.loads(raw)
         request = item["request"]
-        catalog, _ = self.store.get("catalogs/" + item["catalogSha256"])
+        catalog = None
+        if "historicalSource" not in request:
+            catalog, _ = self.store.get("catalogs/" + item["catalogSha256"])
         original = self._file(item, "original")
         preview = self._file(item, "preview")
         workflow = self._file(item, "workflow")
@@ -191,7 +210,7 @@ class IngestionService:
             original_raw=original, original_media_type=request["files"]["original"]["mediaType"],
             preview_raw=preview, preview_media_type=request["files"]["preview"]["mediaType"],
             workflow_raw=workflow, receipt_id="BKL049-" + upload_id, imported_at=item["createdAt"],
-            preview_attested=request["previewAttested"])
+            preview_attested=request["previewAttested"], historical_source=request.get("historicalSource"))
         scans = {role: self.scanner.scan(raw) for role, raw in (("original", original), ("preview", preview), ("workflow", workflow))}
         if any(value not in {"PASS", "FAIL", "UNAVAILABLE"} for value in scans.values()):
             raise IngestionError("SCAN_RESULT_INVALID")
@@ -200,7 +219,7 @@ class IngestionService:
             result[role]["securityScan"] = scans[role]
             result[role]["state"] = "STORED_PRIVATE" if scans[role] == "PASS" else "QUARANTINED"
         result["publicationEligible"] = all(value == "PASS" for value in scans.values())
-        result["gaps"] = ["EXECUTION_NOT_ESTABLISHED", "SESSION_ASSOCIATION_OWNER_DECLARED"]
+        result["gaps"] = ["EXECUTION_NOT_ESTABLISHED", "SESSION_ASSOCIATION_NOT_ESTABLISHED" if "historicalSource" in request else "SESSION_ASSOCIATION_OWNER_DECLARED"]
         if not result["publicationEligible"]:
             result["gaps"].append("SECURITY_SCAN_NOT_PASSED")
         # Do not decode potentially malicious previews before a passing scan.
@@ -283,7 +302,7 @@ class IngestionService:
                 "sessionIds": [s["sessionId"] for s in review["sessionContext"]["sessions"]],
                 "processingDate": review["processingDate"], "previewUrl": self.public_base + "/v1/previews/" + upload_id,
                 "captureCompleteness": "PARTIAL" if steps else "UNAVAILABLE", "executionEvidence": "NOT_ESTABLISHED",
-                "associationEvidence": "OWNER_DECLARED", "steps": steps,
+                "associationEvidence": "HISTORICAL_OWNER_DECLARATION" if "historicalSource" in item["request"] else "OWNER_DECLARED", "steps": steps,
                 "omittedStepCount": len(review["steps"]) - len(steps), "validUntil": None}
             if len(json_bytes(publication)) > 256 * 1024:
                 raise IngestionError("PUBLICATION_SIZE_LIMIT")
