@@ -55,7 +55,8 @@ at most 20 km/h, and relative humidity at most 90%. The dew-point margin is
 computed per hourly sample as ambient temperature minus dew-point temperature;
 a margin at or below 3 °C is NO-GO, and only a value above 3 °C passes this
 planner check. This owner-selected F9 planning threshold is versioned as
-`DSG-F9-PLANNER-WEATHER-GATE@1.1`. On 2026-09-27 the owner separately amended
+`DSG-F9-PLANNER-WEATHER-GATE@1.2` (precision handling added on 2026-10-06;
+all owner-selected thresholds are unchanged). On 2026-09-27 the owner separately amended
 the BKL-032 dew-point readiness threshold to the same ≤3 °C blocking boundary
 (DLG-144); this does not merge the planner and readiness policies, whose other
 weather constraints remain distinct. The 20% cloud limit is the owner's stricter
@@ -72,6 +73,32 @@ readiness, dome-opening authorization, scheduling, command or Safety Authority;
 BKL-032 and local physical interlocks retain their respective authority.
 
 ## Cost and retention
+
+### Accumulated precipitation precision
+
+The ICON-2I run `2026100600` reproduced a previously uncovered failure:
+the nearest-point total fell from 0.00390625 to 0 mm between 05:00 and
+06:00 UTC, while the two GRIB `packingError` values were 0.001953125 and
+0.00390625 mm. This decrement is compatible with the declared packing
+uncertainty; it is not evidence that precipitation was absent. The diagnostic
+used the currently available official run, not retained bytes from the failed
+workflow. Raw GRIB was deleted; no site/grid coordinates are published.
+
+The reader requires accumulation from step zero, one origin/grid/nearest point,
+the supported kg m**-2 unit and finite nonnegative packing errors. Duplicate
+valid times and changed accumulation identities abort acquisition. A negative
+difference is accepted only within the sum of the two endpoint errors, without
+an extra fixed tolerance. That hour carries `precipitationUncertain: true`;
+its numeric placeholder is zero, but both publisher and consumer exclude it
+from eligible windows and display its precipitation as indeterminate, including
+the nightly total. Larger regressions or missing precision evidence abort
+publication. Positive amounts remain positive even below display precision;
+the approved zero-rain threshold is unchanged. Version 1.1 projections cannot
+be reused as version 1.2, and older consumers suspend their ranking when they
+see the new policy identifier.
+
+This interpretation follows the [ECMWF ecCodes packing-precision explanation](https://confluence.ecmwf.int/plugins/viewsource/viewpagesrc.action?pageId=208501579).
+The ECMWF product-specific fixed thresholds are not adopted for ICON-2I.
 
 The approved monetary budget is EUR 0. MeteoHub is a no-fee open-data path and standard GitHub-hosted runners are free for this public repository. The explicit activation guard remains enabled. The workflow uploads no artifacts and commits only the sanitised JSON projection. GRIB retention is `NONE_EPHEMERAL_ONLY`.
 

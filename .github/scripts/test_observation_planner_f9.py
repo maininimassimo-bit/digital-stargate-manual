@@ -5,6 +5,9 @@ import pathlib
 import unittest
 from unittest.mock import patch
 import urllib.error
+import sys
+import tempfile
+import types
 
 PATH=pathlib.Path(__file__).with_name('observation_planner_f9.py')
 SPEC=importlib.util.spec_from_file_location('f9',PATH); f9=importlib.util.module_from_spec(SPEC); SPEC.loader.exec_module(f9)
@@ -22,7 +25,7 @@ def valid_projection():
       'forecast':{'providerId':'METEOHUB','upstreamAuthorityId':'ITALIAMETEO_ARPAE','modelId':'ICON_2I','freshnessState':'FRESH','runInitialisationUtc':'2026-09-17T00:00:00Z','retrievedAtUtc':'2026-09-17T01:00:00Z','runAgeHoursAtRetrieval':1.0,
         'sourceFiles':[{'variable':name,'sha256':'0'*64,'byteLength':1,'unit':'unit'} for name in f9.VARIABLES]},
       'nightWindow':{'fromUtc':stamp(instants[0]),'toUtcExclusive':stamp(instants[-1]+dt.timedelta(hours=1))},
-      'method':{'id':'BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.2','ephemerisMode':'EXPLICIT_MOSEPH_NO_FALLBACK','scoreWeights':{'astronomy':0.6,'weather':0.3,'setupSuitability':0.1},'displayFilter':'solarAltitudeDeg <= -18 and targetAltitudeDeg >= 20','minimumTargetAltitudeDeg':20.0,'lunarFactor':'1 - illuminatedFraction * max(0,sin(radians(clamp(moonAltitudeDeg,0,90)))) * max(0,1-separationDeg/90)'},'weatherPolicy':{'id':'DSG-F9-PLANNER-WEATHER-GATE@1.1','limits':f9.WEATHER_LIMITS,'cloudLimitRationale':'OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT','authority':'ADVISORY_PLANNING_ONLY'},'attribution':{'license':'CC BY 4.0'},
+      'method':{'id':'BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.2','ephemerisMode':'EXPLICIT_MOSEPH_NO_FALLBACK','scoreWeights':{'astronomy':0.6,'weather':0.3,'setupSuitability':0.1},'displayFilter':'solarAltitudeDeg <= -18 and targetAltitudeDeg >= 20','minimumTargetAltitudeDeg':20.0,'lunarFactor':'1 - illuminatedFraction * max(0,sin(radians(clamp(moonAltitudeDeg,0,90)))) * max(0,1-separationDeg/90)'},'weatherPolicy':{'id':'DSG-F9-PLANNER-WEATHER-GATE@1.2','limits':f9.WEATHER_LIMITS,'cloudLimitRationale':'OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT','authority':'ADVISORY_PLANNING_ONLY'},'attribution':{'license':'CC BY 4.0'},
       'setupProfiles':[{'setupId':'S'}],'targetProfiles':[{'targetKey':'T'}],
       'suitabilityEvidence':{'methodId':f9.SUITABILITY_METHOD_ID,'componentWeights':f9.SUITABILITY_WEIGHTS,'cases':[{'setupId':'S','targetKey':'T','components':{'framing':80,'filterSignal':90,'imageScaleObjectClass':85},'aggregateScore':aggregate,'reasonCodes':['TEST']} ]},
       'hourly':[{'validAtUtc':stamp(instant),'solarAltitudeDeg':-30,'moonAltitudeDeg':60,'moonIlluminatedFraction':0.5,'weather':{'temperatureC':15,'dewPointC':4,'cloudCoverPct':10,'relativeHumidityPct':20,'precipitationMm':0,'windSpeedKmh':3,'windGustKmh':4},'targets':{'T':{'altitudeDeg':30,'moonSeparationDeg':45,'lunarSuitabilityFactor':lunar,'astronomyFactor':astronomy,'weatherFactor':weather_factor}}} for instant in instants],
@@ -125,8 +128,78 @@ class F9Tests(unittest.TestCase):
         values['TOT_PREC'][times[12]]=1.0
         with self.assertRaisesRegex(f9.ContractError,'ACCUMULATOR'): f9.weather_rows(values)
 
+    def precipitation_case(self):
+        times=[dt.datetime(2026,10,6,tzinfo=dt.timezone.utc)+dt.timedelta(hours=h) for h in range(24)]
+        values={name:{instant:0.0 for instant in times} for name in f9.VARIABLES}
+        values['T_2M']={instant:288.15 for instant in times}
+        values['TD_2M']={instant:277.15 for instant in times}
+        # Measured official ICON-2I run 2026100600, h5 -> h6; other fields are synthetic.
+        values['TOT_PREC'][times[5]]=0.00390625
+        errors={instant:0.00390625 for instant in times}
+        errors[times[5]]=0.001953125
+        return times,values,errors
+
+    def test_measured_packing_change_preserves_forecast_but_hour_is_not_dry(self):
+        times,values,errors=self.precipitation_case()
+        rows=f9.weather_rows(values,errors)
+        self.assertEqual(len(rows),24)
+        self.assertTrue(rows[times[6]]['precipitationUncertain'])
+        self.assertEqual(f9.weather_gate(rows[times[6]]),(False,['PRECIPITAZIONE_NON_DETERMINABILE']))
+        self.assertTrue(f9.weather_gate(rows[times[7]])[0])
+
+    def test_regression_beyond_declared_error_is_rejected(self):
+        times,values,errors=self.precipitation_case()
+        values['TOT_PREC'][times[5]]=0.01
+        with self.assertRaisesRegex(f9.ContractError,'ACCUMULATOR_REGRESSION'):
+            f9.weather_rows(values,errors)
+
+    def test_missing_or_invalid_error_does_not_authorize_clipping(self):
+        times,values,errors=self.precipitation_case()
+        with self.assertRaisesRegex(f9.ContractError,'ACCUMULATOR_REGRESSION'):
+            f9.weather_rows(values)
+        for invalid in (None,-1,float('nan'),float('inf')):
+            errors[times[6]]=invalid
+            with self.subTest(invalid=invalid), self.assertRaisesRegex(f9.ContractError,'PACKING_ERROR_UNAVAILABLE'):
+                f9.weather_rows(values,errors)
+
+    def test_positive_sub_millimetre_rain_is_not_rounded_to_dry(self):
+        times,values,errors=self.precipitation_case()
+        values['TOT_PREC']={instant:0.0001*i for i,instant in enumerate(times)}
+        rows=f9.weather_rows(values,errors)
+        self.assertGreater(rows[times[1]]['precipitationMm'],0)
+        self.assertIn('PIOGGIA_PRESENTE',f9.weather_gate(rows[times[1]])[1])
+
+    def test_uncertain_hour_cannot_enter_a_ranked_window(self):
+        value=valid_projection();value['hourly'][1]['weather']['precipitationUncertain']=True
+        with self.assertRaisesRegex(f9.ContractError,'RANKING_WINDOW_WEATHER_GATE'):
+            f9.validate_projection(value)
+
 
 class F9AcquisitionPreflightTests(unittest.TestCase):
+    def test_precipitation_reader_checks_identity_precision_and_duplicates(self):
+        first={'validityDate':20261006,'validityTime':500,'units':'kg m**-2',
+               'dataDate':20261006,'dataTime':0,'startStep':0,'md5GridSection':'grid',
+               'stepType':'accum','packingError':0.001953125,'value':0.00390625,'index':1}
+        second=dict(first,validityTime=600,packingError=0.00390625,value=0)
+        def read(messages):
+            iterator=iter(messages+[None])
+            fake=types.SimpleNamespace(codes_get=lambda gid,key:gid[key],
+                codes_grib_find_nearest=lambda gid,*args:[{'value':gid['value'],'index':gid['index']}],
+                codes_grib_new_from_file=lambda stream:next(iterator),codes_release=lambda gid:None)
+            with tempfile.TemporaryDirectory() as directory,patch.dict(sys.modules,{'eccodes':fake}):
+                path=pathlib.Path(directory)/'synthetic.grib';path.write_bytes(b'fixture')
+                errors={};values,unit=f9.read_series(path,0,0,errors)
+                return values,unit,errors
+        values,unit,errors=read([first,second])
+        self.assertEqual(unit,'kg m**-2');self.assertEqual(len(values),2)
+        self.assertEqual(list(errors.values()),[0.001953125,0.00390625])
+        for key,invalid in [('dataDate',20261005),('startStep',1),('md5GridSection','other'),
+                            ('index',2),('stepType','instant'),('units','m'),('packingError',float('nan'))]:
+            with self.subTest(key=key),self.assertRaisesRegex(f9.ContractError,'METADATA_INVALID'):
+                read([first,dict(second,**{key:invalid})])
+        with self.assertRaisesRegex(f9.ContractError,'DUPLICATE_GRIB_VALID_TIME'):
+            read([first,first])
+
     def test_http_diagnostic_identifies_run_variable_and_status_only(self):
         error = urllib.error.HTTPError('https://example.invalid/private', 404, 'sensitive detail', {}, None)
         with patch.object(f9, 'get_text', side_effect=error):

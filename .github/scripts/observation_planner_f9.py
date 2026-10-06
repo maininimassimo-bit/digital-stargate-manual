@@ -114,10 +114,12 @@ def download(url: str, destination: Path) -> tuple[int, str]:
     return size, digest.hexdigest()
 
 
-def read_series(path: Path, latitude: float, longitude: float) -> tuple[dict[dt.datetime, float], str]:
+def read_series(path: Path, latitude: float, longitude: float,
+                precipitation_errors: dict | None = None) -> tuple[dict[dt.datetime, float], str]:
     from eccodes import codes_get, codes_grib_find_nearest, codes_grib_new_from_file, codes_release
     result: dict[dt.datetime, float] = {}
     unit = ""
+    accumulator_identity = None
     with path.open("rb") as stream:
         while True:
             gid = codes_grib_new_from_file(stream)
@@ -132,6 +134,20 @@ def read_series(path: Path, latitude: float, longitude: float) -> tuple[dict[dt.
                 if not math.isfinite(value):
                     raise ContractError("NON_FINITE_GRIB_VALUE")
                 instant = dt.datetime.strptime(f"{valid_date:08d}{valid_time:04d}", "%Y%m%d%H%M").replace(tzinfo=dt.timezone.utc)
+                if instant in result:
+                    raise ContractError("DUPLICATE_GRIB_VALID_TIME")
+                if precipitation_errors is not None:
+                    # Compare only one accumulation origin, grid and nearest point.
+                    # Identity stays in memory; protected grid coordinates are never published.
+                    identity = (codes_get(gid, "dataDate"), codes_get(gid, "dataTime"),
+                                codes_get(gid, "startStep"), codes_get(gid, "md5GridSection"), nearest["index"])
+                    error = float(codes_get(gid, "packingError"))
+                    if (unit != "kg m**-2" or codes_get(gid, "stepType") != "accum"
+                            or identity[2] != 0 or (accumulator_identity is not None and identity != accumulator_identity)
+                            or not math.isfinite(error) or error < 0 or value < 0):
+                        raise ContractError("PRECIPITATION_ACCUMULATOR_METADATA_INVALID")
+                    accumulator_identity = identity
+                    precipitation_errors[instant] = error
                 result[instant] = value
             finally:
                 codes_release(gid)
@@ -145,31 +161,41 @@ def rh_from_temperature(temp_c: float, dew_c: float) -> float:
     return max(0.0, min(100.0, 100 * math.exp(a * dew_c / (b + dew_c) - a * temp_c / (b + temp_c))))
 
 
-def weather_rows(series: dict[str, dict[dt.datetime, float]]) -> dict[dt.datetime, dict[str, float]]:
+def weather_rows(series: dict[str, dict[dt.datetime, float]],
+                 precipitation_errors: dict | None = None) -> dict[dt.datetime, dict]:
     common = sorted(set.intersection(*(set(values) for values in series.values())))
     if len(common) < 24:
         raise ContractError("INCOMPLETE_VARIABLE_INTERSECTION")
     precipitation_previous = None
+    previous_error = None
     rows = {}
     for instant in common:
         t = series["T_2M"][instant] - 273.15
         td = series["TD_2M"][instant] - 273.15
         accumulated = series["TOT_PREC"][instant]
         delta = 0.0 if precipitation_previous is None else accumulated - precipitation_previous
-        if delta < -0.001:
+        error = precipitation_errors.get(instant) if precipitation_errors is not None else None
+        if precipitation_errors is not None and (not isinstance(error, (int, float)) or not math.isfinite(error) or error < 0):
+            raise ContractError("PRECIPITATION_PACKING_ERROR_UNAVAILABLE")
+        uncertain = delta < 0
+        if uncertain and (error is None or previous_error is None or -delta > previous_error + error):
             raise ContractError("PRECIPITATION_ACCUMULATOR_REGRESSION")
         precipitation = max(0.0, delta)
         precipitation_previous = accumulated
+        previous_error = error
         u, v = series["U_10M"][instant], series["V_10M"][instant]
         rows[instant] = {
             "temperatureC": round(t, 2),
             "dewPointC": round(td, 2),
             "cloudCoverPct": round(max(0.0, min(100.0, series["CLCT"][instant])), 1),
             "relativeHumidityPct": round(rh_from_temperature(t, td), 1),
-            "precipitationMm": round(precipitation, 3),
+            # Keep any positive precipitation positive under the approved zero-rain gate.
+            "precipitationMm": precipitation,
             "windSpeedKmh": round(math.hypot(u, v) * 3.6, 1),
             "windGustKmh": round(max(0.0, series["VMAX_10M"][instant]) * 3.6, 1),
         }
+        if uncertain:
+            rows[instant]["precipitationUncertain"] = True
     return rows
 
 
@@ -179,6 +205,8 @@ def weather_gate(weather: dict) -> tuple[bool, list[str]]:
     if any(not isinstance(weather.get(key), (int, float)) or not math.isfinite(weather[key]) for key in fields):
         return False, ["METEO_INCOMPLETO"]
     reasons = []
+    if "precipitationUncertain" in weather and weather["precipitationUncertain"] is not False:
+        reasons.append("PRECIPITAZIONE_NON_DETERMINABILE")
     if weather["cloudCoverPct"] > WEATHER_LIMITS["cloudCoverPct"]: reasons.append("NUVOLOSITA_SOPRA_20_PERCENTO")
     if weather["relativeHumidityPct"] > WEATHER_LIMITS["relativeHumidityPct"]: reasons.append("UMIDITA_SOPRA_90_PERCENTO")
     if weather["precipitationMm"] > WEATHER_LIMITS["precipitationMm"]: reasons.append("PIOGGIA_PRESENTE")
@@ -396,7 +424,7 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
             "nightWindow": {"fromUtc": utc(instants[0]), "toUtcExclusive": utc(instants[-1] + dt.timedelta(hours=1))},
             "method": {"id": "BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.2", "ephemerisMode": "EXPLICIT_MOSEPH_NO_FALLBACK", "scoreWeights": f8["method"]["scoreWeights"], "displayFilter": "solarAltitudeDeg <= -18 and targetAltitudeDeg >= 20", "minimumTargetAltitudeDeg": MIN_TARGET_ALTITUDE_DEG,
                         "lunarFactor": "1 - illuminatedFraction * max(0,sin(radians(clamp(moonAltitudeDeg,0,90)))) * max(0,1-separationDeg/90)"},
-            "weatherPolicy": {"id": "DSG-F9-PLANNER-WEATHER-GATE@1.1", "limits": WEATHER_LIMITS,
+            "weatherPolicy": {"id": "DSG-F9-PLANNER-WEATHER-GATE@1.2", "limits": WEATHER_LIMITS,
                               "cloudLimitRationale": "OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT",
                               "authority": "ADVISORY_PLANNING_ONLY"},
             "setupProfiles": f8["setupProfiles"], "targetProfiles": targets, "targetCatalog": {"catalogId": catalog["catalogId"], "catalogCompleteness": catalog["catalogCompleteness"], "candidateCount": len(catalog["targets"])}, "suitabilityEvidence": suitability_public, "hourly": rows, "rankings": rankings,
@@ -451,7 +479,7 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
             or method.get("lunarFactor") != "1 - illuminatedFraction * max(0,sin(radians(clamp(moonAltitudeDeg,0,90)))) * max(0,1-separationDeg/90)"
             or method.get("scoreWeights") != expected_score_weights):
         raise ContractError("ASTRONOMY_METHOD")
-    expected_policy = {"id": "DSG-F9-PLANNER-WEATHER-GATE@1.1", "limits": WEATHER_LIMITS,
+    expected_policy = {"id": "DSG-F9-PLANNER-WEATHER-GATE@1.2", "limits": WEATHER_LIMITS,
                        "cloudLimitRationale": "OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT",
                        "authority": "ADVISORY_PLANNING_ONLY"}
     if data.get("weatherPolicy") != expected_policy:
@@ -485,6 +513,7 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
                 or not isinstance(row.get("moonIlluminatedFraction"), (int, float)) or not 0 <= row["moonIlluminatedFraction"] <= 1):
             raise ContractError("ASTRONOMY_VALUES")
         if (not 0 <= weather.get("cloudCoverPct", -1) <= 100 or not 0 <= weather.get("relativeHumidityPct", -1) <= 100
+                or ("precipitationUncertain" in weather and type(weather["precipitationUncertain"]) is not bool)
                 or weather.get("precipitationMm", -1) < 0 or weather.get("windSpeedKmh", -1) < 0 or weather.get("windGustKmh", -1) < 0
                 or any(not isinstance(weather.get(key), (int, float)) or not math.isfinite(weather[key]) for key in ("temperatureC", "dewPointC"))
                 or set(row.get("targets", {})) != target_keys):
@@ -552,6 +581,7 @@ def acquire(now: dt.datetime, run: str | None = None) -> dict:
     # Resolve all seven listings before downloading any raw input.
     files = {variable: discover_file(run, variable) for variable in VARIABLES}
     series, evidence, total = {}, [], 0
+    precipitation_errors = {}
     with tempfile.TemporaryDirectory(prefix="dsg-f9-grib-") as temporary:
         root = Path(temporary)
         for variable in VARIABLES:
@@ -561,10 +591,11 @@ def acquire(now: dt.datetime, run: str | None = None) -> dict:
             total += size
             if total > MAX_TOTAL_BYTES:
                 raise ContractError("GRIB_TOTAL_BOUND_EXCEEDED")
-            values, unit = read_series(path, geo["latitudeDeg"], geo["longitudeDeg"])
+            values, unit = read_series(path, geo["latitudeDeg"], geo["longitudeDeg"],
+                                       precipitation_errors if variable == "TOT_PREC" else None)
             series[variable] = values
             evidence.append({"variable": variable, "sha256": digest, "byteLength": size, "unit": unit})
-        weather = weather_rows(series)
+        weather = weather_rows(series, precipitation_errors)
         projection = build_projection(now, run, dt.datetime.now(dt.timezone.utc), weather, evidence, site,
                                       json.loads(F8_PATH.read_text(encoding="utf-8")), json.loads(SUITABILITY_PATH.read_text(encoding="utf-8")))
     validate_projection(projection)

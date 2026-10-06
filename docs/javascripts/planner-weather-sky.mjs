@@ -13,6 +13,7 @@ export function summarizeNightSky(d, now = Date.now()) {
   let clouds = 0, rain = 0, wetHours = 0;
   for (const [i, row] of rows.entries()) {
     const {cloudCoverPct: c, precipitationMm: p} = row.weather || {};
+    if ('precipitationUncertain' in (row.weather || {}) && row.weather.precipitationUncertain !== false) return null;
     if (Date.parse(row.validAtUtc) !== from + i * HOUR || !Number.isFinite(c) ||
         c < 0 || c > 100 || !Number.isFinite(p) || p < 0) return null;
     clouds += c; rain += p; if (p > 0) wetHours++;
