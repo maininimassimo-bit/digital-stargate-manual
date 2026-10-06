@@ -206,6 +206,7 @@
       if(!frozen){
         const sessionIds=[...q('sessions').querySelectorAll('input:checked')].map(node=>node.value);
         const historical=q('origin').value==='HISTORICAL';
+        if(historical && options.historicalIntakeEnabled===false)throw new Error('Le nuove richieste storiche sono temporaneamente sospese. Le evidenze precedenti restano conservate.');
         if(historical ? !q('historical-target').value.trim() || !q('provenance').value.trim() || !q('historical-attest').checked : !sessionIds.length || !q('attest').checked)throw new Error(historical?'Indica oggetto e provenienza e conferma la dichiarazione storica.':'Seleziona le sessioni e conferma l’associazione ai master.');
         if(!q('directory').value.trim() || !q('prompt').value.trim())throw new Error('Indica la cartella completa e il risultato desiderato.');
         const image=q('parent').value===''?null:options.images[Number(q('parent').value)];

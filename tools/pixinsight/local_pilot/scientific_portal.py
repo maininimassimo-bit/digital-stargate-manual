@@ -7,7 +7,7 @@ import re
 from .broker import decode, encode, require, opaque
 from .worker import NONLINEAR_RECIPE, NONLINEAR_RECIPES, RECIPE_MODES, actions
 from .intake import IntakeMixin
-from .historical_source import historical, validate_historical, historical_review
+from .historical_source import historical, validate_historical, historical_review, historical_intake_enabled
 from tools.scientific_registry.ingestion_storage import immutable, Conflict
 from tools.scientific_registry.photo_ingestion import build_review
 from tools.scientific_registry.ingestion_security import sanitize_preview
@@ -78,7 +78,7 @@ class ScientificPortal(IntakeMixin):
         parsed = decode(catalog)
         require(parsed.get("schemaVersion") == "1.5" and parsed.get("catalogStatus") == "VERSIONED_ANALYTICS_PROJECTION", "CATALOG_PROFILE")
         gallery = self.gallery_loader()
-        return {"inputs": inputs, "catalogSha256": digest(catalog),
+        return {"inputs": inputs, "historicalIntakeEnabled": historical_intake_enabled(), "catalogSha256": digest(catalog),
                 "sessions": [{"sessionId": s["sessionId"], "target": s["target"], "observationDate": s.get("observationDate")}
                              for s in parsed["sessions"] if known_target(s.get('target'))],
                 "images": [{k: row[k] for k in ("imageId", "imageVersionId", "workflowId", "title", "target")}

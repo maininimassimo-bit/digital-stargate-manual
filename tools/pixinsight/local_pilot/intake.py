@@ -8,7 +8,7 @@ from .broker import decode, encode, opaque, require
 from .worker import NONLINEAR_RECIPE, NONLINEAR_RECIPES, RECIPE_MODES, actions, input_roles, expected_outputs, processing_settings, field_settings
 from .source_profile import source_profile, selected_panels
 from .preparation_flow import PreparationFlowMixin
-from .historical_source import historical, historical_review
+from .historical_source import historical, historical_review, historical_intake_enabled
 from tools.scientific_registry.ingestion_storage import immutable
 from tools.scientific_registry.photo_ingestion import build_review
 
@@ -51,6 +51,7 @@ class IntakeMixin(PreparationFlowMixin):
         if existing:
             require(decode(existing)['selection'] == value, 'IDEMPOTENCY_CONFLICT')
         else:
+            require(not historical(value) or historical_intake_enabled(), 'HISTORICAL_INTAKE_SUSPENDED')
             catalog = self.catalog_loader() if not historical(value) else None
             require(historical(value) or hashlib.sha256(catalog).hexdigest() == value['catalogSha256'], 'CATALOG_CHANGED_REFRESH')
             from .scientific_portal import same_target, known_target

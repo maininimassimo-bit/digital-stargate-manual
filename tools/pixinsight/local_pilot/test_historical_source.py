@@ -70,6 +70,17 @@ class HistoricalTests(unittest.TestCase):
         self.assertNotIn('observationDate',self.portal.intake(selection['requestId'])['selection'])
         with self.assertRaises(ProtocolError):validate_historical({**selection,'processingDate':'2026-02-30'})
 
+    def test_suspension_blocks_new_historical_intakes_but_retains_existing_receipts_and_withdrawal(self):
+        selection,proposal=self.propose()
+        with patch.dict('os.environ',{'DSG_PIAI_HISTORICAL_INTAKE':'0'}):
+            self.assertFalse(self.portal.options()['historicalIntakeEnabled'])
+            self.portal.create_intake(selection)
+            with self.assertRaisesRegex(ProtocolError,'HISTORICAL_INTAKE_SUSPENDED'):
+                self.portal.create_intake({**selection,'requestId':'7'*32})
+            self.portal.withdraw_intake(selection['requestId'],{})
+            self.assertEqual(self.portal.intakes()[0]['state'],'WITHDRAWN')
+            self.assertTrue(self.store.exists('science/plans/'+selection['requestId']))
+
     def test_registration_requires_matching_historical_intake_and_no_direct_bypass(self):
         value={'inputRef':'5'*32,'target':'M31','recipe':OSC_RECIPE,'manifestSha256':'6'*64}
         with self.assertRaisesRegex(ProtocolError,'TARGET_NOT_IMPORTED'):self.portal.register(value)

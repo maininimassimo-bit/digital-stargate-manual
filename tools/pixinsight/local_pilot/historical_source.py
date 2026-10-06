@@ -1,5 +1,6 @@
 """Explicit private historical provenance; never fabricates catalog/session records."""
 import re
+import os
 from datetime import date
 
 from .broker import require
@@ -8,6 +9,11 @@ from tools.pixinsight.workflow_archive.archive import build_packet
 
 def historical(selection):
     return 'historicalSource' in selection
+
+
+def historical_intake_enabled():
+    # Suspension retains new-schema readers and authoritative withdrawal guards.
+    return os.environ.get('DSG_PIAI_HISTORICAL_INTAKE', '1') == '1'
 
 
 def validate_historical(selection):
