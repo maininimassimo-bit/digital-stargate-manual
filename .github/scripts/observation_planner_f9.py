@@ -116,7 +116,7 @@ def download(url: str, destination: Path) -> tuple[int, str]:
 
 def read_series(path: Path, latitude: float, longitude: float,
                 precipitation_errors: dict | None = None) -> tuple[dict[dt.datetime, float], str]:
-    from eccodes import codes_get, codes_grib_find_nearest, codes_grib_new_from_file, codes_release
+    from eccodes import codes_get, codes_get_long, codes_grib_find_nearest, codes_grib_new_from_file, codes_release
     result: dict[dt.datetime, float] = {}
     unit = ""
     accumulator_identity = None
@@ -140,7 +140,7 @@ def read_series(path: Path, latitude: float, longitude: float,
                     # Compare only one accumulation origin, grid and nearest point.
                     # Identity stays in memory; protected grid coordinates are never published.
                     identity = (codes_get(gid, "dataDate"), codes_get(gid, "dataTime"),
-                                codes_get(gid, "startStep"), codes_get(gid, "md5GridSection"), nearest["index"])
+                                codes_get_long(gid, "startStep"), codes_get(gid, "md5GridSection"), nearest["index"])
                     error = float(codes_get(gid, "packingError"))
                     if (unit != "kg m**-2" or codes_get(gid, "stepType") != "accum"
                             or identity[2] != 0 or (accumulator_identity is not None and identity != accumulator_identity)
