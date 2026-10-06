@@ -393,6 +393,22 @@ class SessionTests(HttpHarness):
         self.assertEqual(self.session.cycle(native_stopped=True)["state"], "RECOVERY_REQUIRED")
         self.assertTrue((self.root / "active-job.json").exists())
 
+    def test_confirmed_native_stop_without_receipt_requires_recovery(self):
+        item=self.create();self.session.cycle()
+        job=self.root/item['jobId']
+        worker.write_new(job/'events/0000-started.json',{'event':'started','jobId':item['jobId']})
+        self.assertEqual(self.session.cycle()['state'],'RUNNING')
+        self.assertEqual(self.session.cycle(native_stopped=True)['state'],'RECOVERY_REQUIRED')
+        self.assertTrue((self.root/'active-job.json').exists())
+        self.assertTrue((self.root/'transport/active.json').exists())
+        self.assertEqual(self.session.cycle()['state'],'RECOVERY_REQUIRED')
+        second={**REQUEST,'requestId':'e'*32};self.broker.create(second)
+        self.assertEqual(self.broker.claim(WORKER,self.session.root_id)['jobId'],item['jobId'])
+
+    def test_confirmed_stop_before_any_run_keeps_native_wait(self):
+        self.create();self.session.cycle()
+        self.assertEqual(self.session.cycle(native_stopped=True)['state'],'AWAITING_NATIVE')
+
     def test_network_failure_and_concurrent_cycle_do_not_prepare(self):
         self.create()
         with patch.object(self.client, "post", side_effect=ProtocolError("offline")):

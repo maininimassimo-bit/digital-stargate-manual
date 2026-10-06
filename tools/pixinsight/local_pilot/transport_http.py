@@ -121,6 +121,22 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                     return self.send(200, scientific.create(self.body()))
                 if self.command == "POST" and path == "/v1/worker/science/register":
                     return self.send(200, scientific.register(self.body()))
+                revisions = re.fullmatch(r"/v1/science/(PIAI_[a-f0-9]{32})/revisions", path)
+                if revisions and self.command == 'GET':
+                    return self.send(200, {'revisions':scientific.revisions(revisions[1])})
+                revision = re.fullmatch(r"/v1/(worker/)?science/(PIAI_[a-f0-9]{32})/revisions/([a-f0-9]{32})/(result|preview|workflow|correlations|decision)", path)
+                if revision:
+                    worker_route, job_id, revision_id, action = revision.groups()
+                    if worker_route and self.command == 'POST' and action == 'result':
+                        result = scientific.deliver_revision(job_id,revision_id,self.body(9*1024*1024))
+                        return self.send(200, {'jobId':job_id,'revisionId':revision_id,'reviewSha256':result['reviewSha256'],'publication':'NONE'})
+                    if not worker_route and self.command == 'GET' and action == 'result':
+                        return self.send(200,scientific.revision(job_id,revision_id))
+                    if not worker_route and self.command == 'GET' and action in {'preview','workflow','correlations'}:
+                        return self.send(200,scientific.revision_asset(job_id,revision_id,action),
+                                         'image/jpeg' if action == 'preview' else 'application/json' if action == 'correlations' else 'text/plain; charset=utf-8')
+                    if not worker_route and self.command == 'POST' and action == 'decision':
+                        return self.send(200,scientific.decide_revision(job_id,revision_id,self.body()))
                 match = re.fullmatch(r"/v1/(worker/)?science/(PIAI_[a-f0-9]{32})/(context|result|preview|workflow|correlations|decision)", path)
                 if match:
                     worker_route, job_id, action = match.groups()

@@ -52,20 +52,23 @@
       const url=URL.createObjectURL(blob),anchor=el('a','',root);anchor.href=url;anchor.download=name;anchor.click();anchor.remove();
       setTimeout(()=>URL.revokeObjectURL(url),1000);
     }
-    async function showResult(jobId) {
-      const next=await call(`/v1/science/${jobId}/result`);
-      const image=await call(`/v1/science/${jobId}/preview`,undefined,true);
+    const resultPath = (jobId,revisionId) => `/v1/science/${jobId}${revisionId ? `/revisions/${revisionId}` : ''}`;
+    async function showResult(jobId,revisionId) {
+      const path=resultPath(jobId,revisionId);
+      const next=await call(`${path}/result`);
+      const image=await call(`${path}/preview`,undefined,true);
       if(previewUrl)URL.revokeObjectURL(previewUrl);
       result=next;previewUrl=URL.createObjectURL(image);q('preview').src=previewUrl;q('review').hidden=false;
       q('summary').replaceChildren();
       el('p',`${result.context.selection.title} · versione privata del pilota · ${result.imageId} · ${result.imageVersionId}`,q('summary'));
+      if(result.revisionId)el('p',`${result.label} · ${result.processingDate}. Correzioni successive alla prima consegna, conservata separatamente. Il workflow descrive queste correzioni; la ricevuta collega la versione precedente.`,q('summary'));
       if(result.context.intent){
         el('p',`Prompt concordato: ${result.context.intent.intake.selection.prompt}`,q('summary'));
         el('p',`Piano confermato: ${result.context.intent.plan.rationale}`,q('summary'));
       }
       el('p',`Workflow: ${result.workflowId}. Originale: ${result.original.width} × ${result.original.height}, non lineare.`,q('summary'));
       el('p',result.context.selection.historicalSource ? `Riprese storiche: ${result.context.selection.historicalSource.target}. Provenienza dichiarata: ${result.context.selection.historicalSource.provenance}. Sessioni non importate; nessuna associazione al catalogo.` : `Sessioni dichiarate: ${result.context.selection.sessionIds.join(', ')}`,q('summary'));
-      el('p','Il PC ha verificato l’esecuzione; il servizio conserva il rapporto del worker senza attestazione indipendente. Il workflow descrive la nuova ricetta e la preparazione dei master quando presente; la History precedente resta da verificare.',q('summary'));
+      el('p',result.revisionId ? 'Il servizio conserva la consegna del PC senza attestazione indipendente. La History a monte resta da verificare.' : 'Il PC ha verificato l’esecuzione; il servizio conserva il rapporto del worker senza attestazione indipendente. Il workflow descrive la nuova ricetta e la preparazione dei master quando presente; la History precedente resta da verificare.',q('summary'));
       el('p',result.decision?`Valutazione conservata: ${result.decision.decision}. Nessuna pubblicazione.`:'In attesa della tua valutazione scientifica.',q('summary'));
       q('steps').replaceChildren();const list=el('ol','',q('steps'));
       result.steps.forEach(step=>el('li',step.processId,list));lock();
@@ -153,6 +156,13 @@
         if(job.report)el('p',`${job.report.processCount} operazioni · ${job.report.outputCount} checkpoint`,card);
         if(job.state==='COMPLETED'){
           const button=el('button','Apri anteprima e workflow',card);button.type='button';button.addEventListener('click',()=>run(()=>showResult(job.jobId)));
+          let revisions=[];
+          try {({revisions}=await call(`/v1/science/${job.jobId}/revisions`));}
+          catch(error){if(error.status!==404)throw error;}
+          for(const revision of revisions){
+            const revised=el('button',`${revision.label} · ${revision.processingDate}`,card);revised.type='button';
+            revised.addEventListener('click',()=>run(()=>showResult(job.jobId,revision.revisionId)));
+          }
         } else if(!['FAILED','CANCELLED','RECOVERY_REQUIRED'].includes(job.state)){
           const button=el('button','Annulla richiesta',card);button.type='button';button.addEventListener('click',()=>run(async()=>{
             await call(`/v1/jobs/${job.jobId}/cancel`,{});message('Annullamento richiesto. Un processo già in corso può terminare prima dell’arresto.');await refresh();}));
@@ -227,12 +237,12 @@
     q('retry').addEventListener('click',()=>run(submitFrozen));
     q('refresh').addEventListener('click',()=>run(refresh));
     for(const [name,decision] of [['accept','ACCEPT_PRIVATE'],['reject','REJECT']])q(name).addEventListener('click',()=>run(async()=>{
-      await call(`/v1/science/${result.jobId}/decision`,{reviewSha256:result.reviewSha256,decision});await showResult(result.jobId);
+      await call(`${resultPath(result.jobId,result.revisionId)}/decision`,{reviewSha256:result.reviewSha256,decision});await showResult(result.jobId,result.revisionId);
       message(decision==='ACCEPT_PRIVATE'?'Risultato accettato privatamente. Nessuna pubblicazione eseguita.':'Valutazione conservata. Puoi preparare una nuova richiesta; nessun nuovo job avviato automaticamente.');
     }));
-    q('workflow').addEventListener('click',()=>run(async()=>save(await call(`/v1/science/${result.jobId}/workflow`,undefined,true),`${result.workflowId}.js`)));
-    q('correlations').addEventListener('click',()=>run(async()=>save(await call(`/v1/science/${result.jobId}/correlations`,undefined,true),`${result.workflowId}-correlazioni.json`)));
-    q('receipt').addEventListener('click',()=>save(new Blob([JSON.stringify(result,null,2)],{type:'application/json'}),`${result.jobId}-collegamenti.json`));
+    q('workflow').addEventListener('click',()=>run(async()=>save(await call(`${resultPath(result.jobId,result.revisionId)}/workflow`,undefined,true),`${result.workflowId}.js`)));
+    q('correlations').addEventListener('click',()=>run(async()=>save(await call(`${resultPath(result.jobId,result.revisionId)}/correlations`,undefined,true),`${result.workflowId}-correlazioni.json`)));
+    q('receipt').addEventListener('click',()=>save(new Blob([JSON.stringify(result,null,2)],{type:'application/json'}),`${result.imageVersionId}-collegamenti.json`));
     q('target').addEventListener('change',()=>{if(options && !frozen)renderSources();});
     q('origin').addEventListener('change',()=>{if(options && !frozen){q('attest').checked=false;q('historical-attest').checked=false;renderSources();}});
     q('mode').addEventListener('change',()=>{q('bayer-label').hidden=q('mode').value!=='OSC_CFA';});

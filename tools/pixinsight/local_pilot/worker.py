@@ -317,7 +317,8 @@ def prepare(root: Path, request: dict) -> Path:
         # JSON is data. The only executed code is this repository library.
         manifest_path = json.dumps((job / "manifest.json").as_posix())
         launcher = include + 'DSGExecuteLocalPilot(JSON.parse(File.readTextFile(' + manifest_path + ')));\n'
-        with (job / "run.js").open("x", encoding="utf-8", newline="\n") as stream:
+        # Windows PJSR requires CRLF to terminate preprocessor directives.
+        with (job / "run.js").open("x", encoding="utf-8", newline="\r\n") as stream:
             stream.write(launcher)
         return job
     except Exception as error:

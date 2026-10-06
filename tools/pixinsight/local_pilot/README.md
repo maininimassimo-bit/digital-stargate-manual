@@ -169,6 +169,17 @@ Assistant actions are explicit one-shot `list`, `inventory`, `inspect`, `propose
 `python -m unittest tools.pixinsight.local_pilot.test_intake` exercises synthetic states and actual loopback HTTP with synthetic identities, not a native/Owner OAT.
 # Local common preparation candidate
 
+The [P6 refinement/recovery candidate](../../../docs/project/PIAI-P6-CANDIDATE-2026-10-06.md)
+adds immutable private versions beside completed deliveries, with separate exact-digest
+Owner review and no native dispatch/publication. `revision_delivery` reads a selected
+local bundle and verifies RGB Float32 pixels before an explicit outbound submission.
+It requires a confirmed nonlinear declaration; pixel range alone is not proof of
+processing domain. The candidate is not deployed or operationally accepted.
+
+Explicit native-stop confirmation after runtime events without a terminal receipt
+retains reservations and reports `RECOVERY_REQUIRED`; it cannot restart execution or
+release another job. An offline diagnostic alone never establishes native stop.
+
 `preparation.prepare(root, request)` creates an immutable private request, verified input copies, runtime snapshots and a supervised launcher. It does not start PixInsight or create an Owner portal job. `DSGExecuteMasterPreparation` preflights every selected image before Debayer/reprojection/merge and saves linear checkpoints. `preparation.collect(root, job_id)` independently verifies source/copy/output hashes, headers, every mono/RGB pixel, process sequence and source dependencies before closing the matching native reservation.
 
 This contract currently accepts only completed local preparation jobs. Failed/cancelled jobs retain their reservation for separate integrity recovery. Native instance source is parsed as data and parameters are bound to the approved preparation envelope. The candidate bridge separately checks exact Owner intake/approval, runtime, original/copy/checkpoint hashes and journal before nonlinear preparation. The source-selection approval in the portal is separate and cannot authorize local execution by itself. Headers containing master History are bounded at 4 MiB. Release validation and authenticated Owner end-to-end remain pending; no service change is implied by local tests.

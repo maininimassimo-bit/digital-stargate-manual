@@ -37,7 +37,7 @@ class Transport:
         return self.request(path, value)
 
     def request(self, path, value=None):
-        require(re.fullmatch(r"/v1/worker/(?:claim|PIAI_[a-f0-9]{32}/report|science/register|science/intakes(?:/[a-f0-9]{32}/(?:plan|sources|preparation|prepared))?|science/PIAI_[a-f0-9]{32}/(?:context|result))", path), "ROUTE_INVALID")
+        require(re.fullmatch(r"/v1/worker/(?:claim|PIAI_[a-f0-9]{32}/report|science/register|science/intakes(?:/[a-f0-9]{32}/(?:plan|sources|preparation|prepared))?|science/PIAI_[a-f0-9]{32}/(?:context|result|revisions/[a-f0-9]{32}/result))", path), "ROUTE_INVALID")
         raw = encode(value) if value is not None else None
         limit = 9 * 1024 * 1024 if path.endswith('/result') else 65536 if '/science/intakes/' in path else 16384
         require(raw is None or len(raw) <= limit, "REQUEST_SIZE")
@@ -200,6 +200,11 @@ class SessionWorker:
             manifest = self._read(job / "manifest.json")
             require(manifest["jobId"] == binding["jobId"] and manifest["recipe"] == envelope["recipe"] and
                     manifest["workerRoot"] == self.root.as_posix() and manifest["jobDirectory"] == job.as_posix(), "MANIFEST_BINDING")
+            if native_stopped and not (job / 'terminal.json').exists() and any((job / 'events').glob('*.json')):
+                # Explicit confirmation of a stopped native instance, with evidence
+                # of a run but no terminal receipt, cannot remain a running job.
+                self._report(binding, remote, 'RECOVERY_REQUIRED')
+                return {'state':'RECOVERY_REQUIRED','jobId':binding['jobId']}
             if (job / "terminal.json").exists() and native_stopped:
                 try:
                     result = worker.collect(self.root, binding["jobId"])
