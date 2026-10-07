@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '22'
       - name: Test synthetic preflight rejection and multi-image selection
-        run: node --test tools/pixinsight/local_pilot/preflight.test.mjs tools/pixinsight/local_pilot/executor.test.mjs tools/pixinsight/local_pilot/owner_check.test.mjs tools/pixinsight/local_pilot/scientific_portal.test.mjs tools/pixinsight/local_pilot/source_preparation.test.mjs tools/pixinsight/local_pilot/preparation_executor.test.mjs
+        run: node --test tools/pixinsight/local_pilot/preflight.test.mjs tools/pixinsight/local_pilot/executor.test.mjs tools/pixinsight/local_pilot/owner_check.test.mjs tools/pixinsight/local_pilot/p6_owner_check.test.mjs tools/pixinsight/local_pilot/scientific_portal.test.mjs tools/pixinsight/local_pilot/source_preparation.test.mjs tools/pixinsight/local_pilot/preparation_executor.test.mjs
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'

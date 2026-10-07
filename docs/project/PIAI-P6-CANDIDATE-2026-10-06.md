@@ -102,3 +102,8 @@ readers and withdrawal guards; do not restore legacy code that ignores them.
 The single C-to-F root compatibility junction remains pending the Owner's explicit
 confirmation that PixInsight has been closed. Per-folder compatibility and the
 verified approved delivery on F are retained in the meantime.
+
+
+## Riconciliazione del 7 ottobre — ambiente isolato
+
+Owner approva servizio, due bucket privati, identità e credenziale di prova dedicate. Ambiente cloud isolato attivo sul digest già rilasciato; concorrenza Owner e recupero nativo cloud reali ancora da eseguire. CFA/SHO reali e download CFA riconciliati con limiti espliciti. P6 resta aperta; accettazione operativa finale pendente. Nessuna mutazione del pilota operativo, gallery, dispositivi o Safety. BKL-051 Planned dopo chiusura P6. Piano corrente: [PIAI-P6-ISOLATED-OAT-2026-10-07.md](PIAI-P6-ISOLATED-OAT-2026-10-07.md)

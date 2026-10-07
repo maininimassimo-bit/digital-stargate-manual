@@ -637,3 +637,8 @@ dall'Owner; evidenza pubblica minimizzata, ricevute scientifiche conservate priv
 Riconciliazione secondo DSG-AEM-001/W-DSG-AEM-RULESET-001, con propri gate.
 [Stato corrente](HANDOVER_2026-10-06-BKL049-M31.md),
 [evidenza](evidence/BKL-049-WORK-RECONCILIATION-2026-10-06.json).
+
+
+## 2026-10-07 — approvazione del collaudo P6 isolato
+
+Owner approva servizio, due bucket privati, identità e credenziale di prova dedicate. Ambiente cloud isolato attivo sul digest già rilasciato; concorrenza Owner e recupero nativo cloud reali ancora da eseguire. CFA/SHO reali e download CFA riconciliati con limiti espliciti. P6 resta aperta; accettazione operativa finale pendente. Nessuna mutazione del pilota operativo, gallery, dispositivi o Safety. BKL-051 Planned dopo chiusura P6. Piano corrente: [PIAI-P6-ISOLATED-OAT-2026-10-07.md](PIAI-P6-ISOLATED-OAT-2026-10-07.md)

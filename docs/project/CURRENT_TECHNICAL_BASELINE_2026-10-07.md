@@ -21,3 +21,8 @@ Questa baseline aggiorna sequencing ed evidenza locale, senza ricertificare depl
 L'accettazione privata SHO riguarda il prodotto e non prova una nuova catena Owner HTTP → nativo → download né chiude i residui P6. History e classificazioni restano limitate alle evidenze effettive; nessuna pubblicazione gallery è implicita. Nessun dato scientifico privato è incluso nella presente baseline.
 
 [Piano BKL-051](BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md), [dossier P6](PIAI-P6-CANDIDATE-2026-10-06.md), [evidenza minimizzata](evidence/BKL-051-OWNER-PLAN-2026-10-07.json).
+
+
+## Incremento P6 isolato
+
+Owner approva servizio, due bucket privati, identità e credenziale di prova dedicate. Ambiente cloud isolato attivo sul digest già rilasciato; concorrenza Owner e recupero nativo cloud reali ancora da eseguire. CFA/SHO reali e download CFA riconciliati con limiti espliciti. P6 resta aperta; accettazione operativa finale pendente. Nessuna mutazione del pilota operativo, gallery, dispositivi o Safety. BKL-051 Planned dopo chiusura P6. Piano corrente: [PIAI-P6-ISOLATED-OAT-2026-10-07.md](PIAI-P6-ISOLATED-OAT-2026-10-07.md)
