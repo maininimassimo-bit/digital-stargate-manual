@@ -1,5 +1,9 @@
 # Digital StarGate AI Bootstrap
 
+## Stato corrente — 8 ottobre 2026
+
+L'Owner ha approvato la proposta PC locale + consultazione privata nel portale, le query minime a ESA Gaia/NASA-IPAC IRSA/MAST e il criterio raccomandato per scegliere il campo pilota. Nessun campo è stato nominato: selezione locale guidata da date reali e stessa banda. [Handover corrente](docs/project/HANDOVER_2026-10-08-BKL051-S2.md). S1 non è chiusa; S2 avviata come verifica limitata di ingressi/accesso, senza astrometria accettata, classificazioni, soglie operative o runtime del modulo. P6 resta Accepted con limiti. Trasporto privato concreto ancora da revisionare; nessuna nuova risorsa, credenziale o pubblicazione di fotografie. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati.
+
 ## Aggiornamento corrente — 7 ottobre 2026
 
 P6 accettata operativamente dall’Owner il 7 ottobre 2026 con tutti i limiti del dossier, dopo collaudi reali e HOO completato. [Chiusura](docs/project/BKL-049-EXT-PIAI-P6-CLOSURE-2026-10-07.md); [handover corrente](docs/project/HANDOVER_2026-10-07-BKL051-S1.md). BKL-051 è il prossimo package approvato, preparazione S1 con fonti/probe pubblici e intake offline proposto; consegna P6 verificata nella PR #499. Decisioni architettura/query/dataset pendenti; nessun modulo operativo o runtime attivato. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10 e Safety invariati. Le sezioni precedenti sono snapshot storici, superati soltanto nei perimetri della chiusura accettata.
