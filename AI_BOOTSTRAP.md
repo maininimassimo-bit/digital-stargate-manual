@@ -2,16 +2,16 @@
 
 ## Aggiornamento corrente — 7 ottobre 2026
 
-Priorità Owner: chiudere operativamente BKL-049-EXT-PIAI/P6, poi sviluppare [BKL-051 — candidati transienti](docs/project/BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md). BKL-051 è **Planned**, non avviata. Ultima SHO reale accettata privatamente; P6 resta aperta per riconciliazione e accettazione complessiva. BKL-043 F4 attende lifecycle, F5 segue F4; BKL-050 resta conclusiva anche dopo BKL-051. [Handover corrente](docs/project/HANDOVER_2026-10-07-P6-BKL051.md), [baseline corrente](docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md). Gli stati precedenti restano snapshot nei rispettivi perimetri.
+P6 accettata operativamente dall’Owner il 7 ottobre 2026 con tutti i limiti del dossier, dopo collaudi reali e HOO completato. [Chiusura](docs/project/BKL-049-EXT-PIAI-P6-CLOSURE-2026-10-07.md); [handover corrente](docs/project/HANDOVER_2026-10-07-P6-CLOSURE.md). BKL-051 è il prossimo package approvato, preparazione S1; sviluppo subordinato alla consegna P6 verificata nella PR #499. Nessun modulo implementato o runtime attivato. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10 e Safety invariati. Le sezioni precedenti sono snapshot storici, superati soltanto nei perimetri della chiusura accettata.
 
 
-> Stato corrente al 7 ottobre 2026: [handover P6/BKL-051](docs/project/HANDOVER_2026-10-07-P6-BKL051.md) e [baseline](docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
+> Stato corrente al 7 ottobre 2026: [handover P6/BKL-051](docs/project/HANDOVER_2026-10-07-P6-CLOSURE.md) e [baseline](docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
 
 | Campo | Valore |
 |---|---|
-| Versione | 8.9 |
+| Versione | 8.10 |
 | Baseline | 07/10/2026 |
-| Stato | Current root bootstrap — P6 operational closure first; BKL-051 Planned next; BKL-043 lifecycle pending; S10 unavailable |
+| Stato | Current root bootstrap — P6 Owner operational acceptance recorded; BKL-051 S1 preparation after verified P6 delivery; BKL-043 lifecycle pending; S10 unavailable |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -20,7 +20,7 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni e proje
 
 ## 2. Sequenza obbligatoria di lettura
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-10-07-P6-BKL051.md`
+2. `docs/project/HANDOVER_2026-10-07-P6-CLOSURE.md`
 3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
@@ -109,3 +109,11 @@ Il piano conserva ruoli R/G/B/L, dimensioni, selezione esplicita dell’immagine
 ## P6 — collaudo isolato approvato il 7 ottobre 2026
 
 Owner approva servizio, due bucket privati, identità e credenziale di prova dedicate. Ambiente cloud isolato attivo sul digest già rilasciato; concorrenza Owner e recupero nativo cloud reali ancora da eseguire. CFA/SHO reali e download CFA riconciliati con limiti espliciti. P6 resta aperta; accettazione operativa finale pendente. Nessuna mutazione del pilota operativo, gallery, dispositivi o Safety. BKL-051 Planned dopo chiusura P6. Piano corrente: [PIAI-P6-ISOLATED-OAT-2026-10-07.md](docs/project/PIAI-P6-ISOLATED-OAT-2026-10-07.md)
+
+## P6 — collaudo completo, accettazione operativa pendente
+
+Concorrenza Owner HTTPS reale, interruzione nativa isolata e nuovo worker, offline oltre 120 s, restart/rollback/forward del servizio di prova: PASS nei limiti documentati. Ambiente sospeso, archivi e prenotazioni conservati; stato della coda operativa byte-identico al baseline. HOO nativo sui master reali Drizzle2 ora PASS tecnico: 26 processi, 14 checkpoint, 26 coppie History, originali invariati; non accettazione estetica. P6 resta aperta per accettazione operativa; CFA è fixture tecnica da singola esposizione con decisione scientifica pendente. BKL-051 Planned dopo chiusura P6; F4/F5 e BKL-050 invariati. [Dossier finale e limiti](docs/project/PIAI-P6-OPERATIONAL-ACCEPTANCE-2026-10-07.md). Questa nota supera soltanto i residui tecnici provati, conserva snapshot e gate di consegna.
+
+## P6 — accettazione operativa Owner
+
+L’Owner conferma «Accetto operativamente P6 con i limiti del dossier». Nessuna esclusione HOO: collaudo nativo completato. Accettazione distinta da valutazione estetica e pubblicazione; CFA resta prova tecnica su singola esposizione, History a monte non attestata e recupero soltanto conservativo. [Chiusura](docs/project/BKL-049-EXT-PIAI-P6-CLOSURE-2026-10-07.md), [handover](docs/project/HANDOVER_2026-10-07-P6-CLOSURE.md). Gate di consegna exact-head e post-merge nella PR #499; nessun PASS anticipato.

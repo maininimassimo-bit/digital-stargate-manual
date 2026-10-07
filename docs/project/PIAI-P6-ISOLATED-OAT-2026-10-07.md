@@ -42,3 +42,11 @@ Una prova interrotta resta FAILED/PENDING, mai promossa a PASS. Non sono dimostr
 La pagina richiede CI sull'head esatto, ARB e Release Quality separate, merge protetto dall'expected head e Pages verificata prima del collaudo reale. La prova deve riferire anche il digest backend precedente, distinto dall'head frontend. P6 resta aperta fino a riconciliazione finale dei residui/profili, disposition dei limiti e accettazione operativa Owner. BKL-051 resta Planned; nessuna pubblicazione gallery.
 
 Rollback: revert governato della sola pagina diagnostica e relativi script/test; sospendere accesso e invocazioni al servizio isolato conservando tutte le risorse e ricevute. Non ripristinare la coda del pilota, non modificare prenotazioni native o decisioni scientifiche immutabili. La chiusura finale manterrà la distinzione fra accettazione privata e operativa, BKL-043 F4/F5 invariati e BKL-050 conclusiva.
+
+## P6 — collaudo completo, accettazione operativa pendente
+
+Concorrenza Owner HTTPS reale, interruzione nativa isolata e nuovo worker, offline oltre 120 s, restart/rollback/forward del servizio di prova: PASS nei limiti documentati. Ambiente sospeso, archivi e prenotazioni conservati; stato della coda operativa byte-identico al baseline. HOO nativo sui master reali Drizzle2 ora PASS tecnico: 26 processi, 14 checkpoint, 26 coppie History, originali invariati; non accettazione estetica. P6 resta aperta per accettazione operativa; CFA è fixture tecnica da singola esposizione con decisione scientifica pendente. BKL-051 Planned dopo chiusura P6; F4/F5 e BKL-050 invariati. [Dossier finale e limiti](PIAI-P6-OPERATIONAL-ACCEPTANCE-2026-10-07.md). Questa nota supera soltanto i residui tecnici provati, conserva snapshot e gate di consegna.
+
+## P6 — accettazione operativa Owner
+
+L’Owner conferma «Accetto operativamente P6 con i limiti del dossier». Nessuna esclusione HOO: collaudo nativo completato. Accettazione distinta da valutazione estetica e pubblicazione; CFA resta prova tecnica su singola esposizione, History a monte non attestata e recupero soltanto conservativo. [Chiusura](BKL-049-EXT-PIAI-P6-CLOSURE-2026-10-07.md), [handover](HANDOVER_2026-10-07-P6-CLOSURE.md). Gate di consegna exact-head e post-merge nella PR #499; nessun PASS anticipato.

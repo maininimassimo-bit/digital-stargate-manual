@@ -3,17 +3,17 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-BASELINE-20261007 |
-| Versione | 1.0 |
-| Stato | P6 aperta; ultima SHO accettata privatamente; BKL-051 Planned dopo P6 |
-| Handover | [7 ottobre](HANDOVER_2026-10-07-P6-BKL051.md) |
+| Versione | 1.1 |
+| Stato | P6 Accepted operativamente con limiti; PR #499 delivery gate; BKL-051 S1 preparazione |
+| Handover | [7 ottobre](HANDOVER_2026-10-07-P6-CLOSURE.md) |
 
 Questa baseline aggiorna sequencing ed evidenza locale, senza ricertificare deployment o runtime. La [baseline del 6 ottobre](CURRENT_TECHNICAL_BASELINE_2026-10-06.md) resta valida per le identità dei servizi e i limiti dei rilasci descritti.
 
 | Area | Stato corrente |
 |---|---|
 | BKL-049 archivio | Closed nel perimetro accettato, non riaperta |
-| BKL-049-EXT-PIAI/P6 | In Progress; elaborazione SHO reale e ultima proposta accettata privatamente il 07/10; riconciliazione e accettazione operativa complessiva ancora aperte |
-| BKL-051 | Planned e approvata dall'Owner; prossimo sviluppo dopo chiusura operativa P6; nessuna implementazione, nuovo servizio o scansione attivati |
+| BKL-049-EXT-PIAI/P6 | Accepted operativamente 07/10 con limiti del dossier, inclusi HOO tecnico e CFA singola esposizione; gate di consegna PR #499 |
+| BKL-051 | In Progress — preparazione S1; sviluppo dopo delivery P6 verificata, nessun modulo/servizio/scansione implementati |
 | BKL-043 F4/F5 | F4 lifecycle reale e accettazione finale pendenti; F5 solo dopo piena accettazione F4 |
 | BKL-050 | Planned, ultima dopo BKL-051 e tutte le altre dipendenze approvate |
 | S10 e Safety | S10 UNAVAILABLE; interlock locali e authority dei dispositivi invariati |
@@ -26,3 +26,11 @@ L'accettazione privata SHO riguarda il prodotto e non prova una nuova catena Own
 ## Incremento P6 isolato
 
 Owner approva servizio, due bucket privati, identità e credenziale di prova dedicate. Ambiente cloud isolato attivo sul digest già rilasciato; concorrenza Owner e recupero nativo cloud reali ancora da eseguire. CFA/SHO reali e download CFA riconciliati con limiti espliciti. P6 resta aperta; accettazione operativa finale pendente. Nessuna mutazione del pilota operativo, gallery, dispositivi o Safety. BKL-051 Planned dopo chiusura P6. Piano corrente: [PIAI-P6-ISOLATED-OAT-2026-10-07.md](PIAI-P6-ISOLATED-OAT-2026-10-07.md)
+
+## P6 — collaudo completo, accettazione operativa pendente
+
+Concorrenza Owner HTTPS reale, interruzione nativa isolata e nuovo worker, offline oltre 120 s, restart/rollback/forward del servizio di prova: PASS nei limiti documentati. Ambiente sospeso, archivi e prenotazioni conservati; stato della coda operativa byte-identico al baseline. HOO nativo sui master reali Drizzle2 ora PASS tecnico: 26 processi, 14 checkpoint, 26 coppie History, originali invariati; non accettazione estetica. P6 resta aperta per accettazione operativa; CFA è fixture tecnica da singola esposizione con decisione scientifica pendente. BKL-051 Planned dopo chiusura P6; F4/F5 e BKL-050 invariati. [Dossier finale e limiti](PIAI-P6-OPERATIONAL-ACCEPTANCE-2026-10-07.md). Questa nota supera soltanto i residui tecnici provati, conserva snapshot e gate di consegna.
+
+## P6 — accettazione operativa Owner
+
+L’Owner conferma «Accetto operativamente P6 con i limiti del dossier». Nessuna esclusione HOO: collaudo nativo completato. Accettazione distinta da valutazione estetica e pubblicazione; CFA resta prova tecnica su singola esposizione, History a monte non attestata e recupero soltanto conservativo. [Chiusura](BKL-049-EXT-PIAI-P6-CLOSURE-2026-10-07.md), [handover](HANDOVER_2026-10-07-P6-CLOSURE.md). Gate di consegna exact-head e post-merge nella PR #499; nessun PASS anticipato.
