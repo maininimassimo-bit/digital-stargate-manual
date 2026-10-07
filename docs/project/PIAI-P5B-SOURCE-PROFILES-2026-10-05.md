@@ -90,3 +90,7 @@ Validazione sintetica locale: 136 Python e 74 JavaScript PASS, inclusi limiti de
 
 
 Sospensione delle nuove richieste storiche: impostare DSG_PIAI_HISTORICAL_INTAKE=0 sul servizio corrente, mantenendo lettura delle ricevute, ritiro e guardie della coda. Non ripristinare il vecchio backend che ignora i ritiri o la provenienza storica dopo che questi record sono stati creati. Un recupero del codice deve conservare tali controlli e i record immutabili; eventuali job autorizzati seguono annullamento e recupero supervisionati.
+
+## P6 — collaudo completo, accettazione operativa pendente
+
+Concorrenza Owner HTTPS reale, interruzione nativa isolata e nuovo worker, offline oltre 120 s, restart/rollback/forward del servizio di prova: PASS nei limiti documentati. Ambiente sospeso, archivi e prenotazioni conservati; stato della coda operativa byte-identico al baseline. HOO nativo sui master reali Drizzle2 ora PASS tecnico: 26 processi, 14 checkpoint, 26 coppie History, originali invariati; non accettazione estetica. P6 resta aperta per accettazione operativa; CFA è fixture tecnica da singola esposizione con decisione scientifica pendente. BKL-051 Planned dopo chiusura P6; F4/F5 e BKL-050 invariati. [Dossier finale e limiti](PIAI-P6-OPERATIONAL-ACCEPTANCE-2026-10-07.md). Questa nota supera soltanto i residui tecnici provati, conserva snapshot e gate di consegna.
