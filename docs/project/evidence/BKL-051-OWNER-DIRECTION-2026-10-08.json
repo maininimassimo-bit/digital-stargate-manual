@@ -13,6 +13,16 @@
   "numericThresholds": "NOT_GRANTED",
   "runtime": "NOT_ACTIVATED",
   "s1Acceptance": "NOT_CLAIMED",
-  "s2Status": "INPUT_AND_ACCESS_PARTIAL_ASTROMETRY_UNVERIFIED",
-  "publicPrivateImageDataIncluded": false
+  "s2Status": "INPUT_ACCESS_AND_NATIVE_SOLVE_PARTIAL_INDEPENDENT_VALIDATION_PENDING",
+  "publicPrivateImageDataIncluded": false,
+  "nativeEvidence": {
+    "completedSolutions": 3,
+    "solver": "PixInsight ImageSolver 6.5.0",
+    "catalog": "LOCAL_GAIA_DR3_XPSD",
+    "unchangedOriginals": true,
+    "identicalScientificPixels": true,
+    "failedBranchesRetained": true,
+    "independentAstrometricValidation": false,
+    "candidateClassification": false
+  }
 }

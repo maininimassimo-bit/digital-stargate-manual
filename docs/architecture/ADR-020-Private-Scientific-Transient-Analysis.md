@@ -28,7 +28,7 @@ No numeric association radius, S/N cutoff, magnitude-change threshold, ranking o
 
 ## Verification and rollout
 
-Current evidence is private input inspection, History export and one bounded authorized Gaia access sample. Full astrometric validation, proper-motion known-answer tests, independent matching, photometry/recovery/false-positive baseline, private transport tests and Owner operating acceptance remain outstanding. P6 tests do not count as tests of this new module.
+Current evidence is private input inspection, History export, one bounded authorized Gaia access sample and three completed native local-Gaia DR3 solutions on new copies with identical pixels and unchanged originals. Failed initialization/alignment branches are retained. Solver fitting residuals are in-sample evidence, not independent scientific validation. Full astrometric validation, proper-motion known-answer tests, independent matching, photometry/recovery/false-positive baseline, private transport tests and Owner operating acceptance remain outstanding. P6 tests do not count as tests of this new module.
 
 No runtime is deployed by this document. New dependencies or materially different transport alternatives remain decisions before implementation. S1/S2 remain open, F4 lifecycle pending, F5 after F4, BKL-050 final, S10 unavailable and device/Safety authority unchanged.
 
