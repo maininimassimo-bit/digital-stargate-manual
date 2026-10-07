@@ -1,0 +1,22 @@
+name: Scientific transients S1 preparation
+on:
+  pull_request:
+    paths: ['tools/scientific_transients/**', 'docs/project/BKL-051-S1-*', 'docs/project/evidence/BKL-051-S1-*', '.github/workflows/scientific-transients-s1.yml']
+  push:
+    branches: [main]
+    paths: ['tools/scientific_transients/**', 'docs/project/BKL-051-S1-*', 'docs/project/evidence/BKL-051-S1-*', '.github/workflows/scientific-transients-s1.yml']
+permissions:
+  contents: read
+jobs:
+  offline-contract:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify proposed intake rejects unsafe scientific claims without network
+        run: node --test tools/scientific_transients/contract.test.mjs tools/scientific_transients/reference.test.mjs
