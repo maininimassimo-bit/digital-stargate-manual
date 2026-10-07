@@ -17,6 +17,7 @@ test('PS1 sentinel is unavailable magnitude, never zero or new-source evidence',
   assert.equal(result.sources[0].measurementQuality,'UNKNOWN');
   assert.equal(result.catalogCompleteness,'NOT_ESTABLISHED');
   assert.equal(result.photometryPerformed,false);
+  assert.deepEqual(inspectPublicSample(ps1.replaceAll('-999.0','-9.99e2'),'PS1_DR2_PUBLIC_SAMPLE').sources[0].magnitudes,{g:null,r:null});
 });
 test('missing proper motion remains unknown, not stationary',()=>{
   const result=inspectPublicSample(gaia.replace('2.31,-0.48',','),'GAIA_DR3_PUBLIC_SAMPLE');

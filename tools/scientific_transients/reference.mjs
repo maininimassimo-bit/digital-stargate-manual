@@ -53,7 +53,10 @@ export function inspectPublicSample(text, provider) {
       normalized.epochPropagation='NOT_PERFORMED_COVARIANCE_AND_METHOD_PENDING';
     } else {
       const detections=numeric(row.nDetections); if (!Number.isSafeInteger(detections) || detections < 0) fail();
-      const magnitude = value => value === '' || value === '-999.0' || value === '-999' ? null : numeric(value);
+      const magnitude = value => {
+        if (value === '') return null;
+        const result=numeric(value); return result === -999 ? null : result;
+      };
       normalized.catalogDetectionCount=detections;
       normalized.magnitudes={g:magnitude(row.gMeanPSFMag),r:magnitude(row.rMeanPSFMag)};
       normalized.observationEpoch='UNKNOWN_AGGREGATE_IS_NOT_SINGLE_EPOCH';
