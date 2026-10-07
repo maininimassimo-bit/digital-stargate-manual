@@ -2,10 +2,10 @@
   "schemaVersion": "2.2",
   "updatedAt": "2026-10-07",
   "authority": "DSG-RGM-001",
-  "projectStatus": "Owner decision 2026-10-07: BKL-049-EXT-PIAI/P6 operational closure is the immediate priority; the latest real SHO result is privately accepted, not overall P6 acceptance or publication. BKL-051 is approved/planned as the next development after P6 closure and explicit operational acceptance. BKL-043 F4 lifecycle remains pending, F5 follows full F4 acceptance, and BKL-050 remains final after BKL-051 and all other approved dependencies. No new runtime, cloud resources, scientific upload, reporting, device or Safety authority is activated by this planning update. Earlier release/evidence history is retained in docs/project/HANDOVER_2026-10-06-BKL049-M31.md and its baseline. BKL-049 archive remains closed; M31/P5 releases and S10 UNAVAILABLE unchanged. Current handover: docs/project/HANDOVER_2026-10-07-P6-BKL051.md Preserved accepted foundation: BKL-031 and BKL-032 are CLOSED / ACCEPTED / POST-MERGE VERIFIED; S10 production runtime unavailable; live source/transport and public runtime GO remain separately gated; no scheduling, automatic target selection, commands or Safety Authority is authorized.",
-  "currentPackage": "BKL-049-EXT-PIAI",
-  "nextMilestone": "BKL-049-EXT-PIAI",
-  "target": "Owner decision 2026-10-07: BKL-049-EXT-PIAI/P6 operational closure is the immediate priority; the latest real SHO result is privately accepted, not overall P6 acceptance or publication. BKL-051 is approved/planned as the next development after P6 closure and explicit operational acceptance. BKL-043 F4 lifecycle remains pending, F5 follows full F4 acceptance, and BKL-050 remains final after BKL-051 and all other approved dependencies. No new runtime, cloud resources, scientific upload, reporting, device or Safety authority is activated by this planning update. Plan: docs/project/BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md No scheduler, automatic target selection, device command or Safety Authority is authorized.",
+  "projectStatus": "P6 Owner operational acceptance recorded 2026-10-07 after isolated real cloud OAT and real native HOO. Scope LRGB, OSC RGB/CFA, mosaic, SHO/HOO with dossier limits: CFA single calibrated exposure technical fixture, upstream History not established, no power-loss or automatic recovery claim, no gallery publication. Formal delivery governed by PR #499 exact-head and post-merge/Pages gates. BKL-049 archive unchanged. Next approved package BKL-051 S1 preparation; implementation only after verified P6 delivery. BKL-043 F4 lifecycle pending, F5 follows full F4 acceptance, BKL-050 remains final; S10 UNAVAILABLE, device and Safety authority unchanged. No new scientific analysis runtime, credentials or paid APIs introduced by this closure.",
+  "currentPackage": "BKL-051",
+  "nextMilestone": "BKL-051",
+  "target": "Verify PR #499 P6 delivery, then BKL-051 S1 feasibility and scientific/architecture contract within the Owner-approved plan. No quantitative scientific thresholds, new structural dependencies, runtime or external scientific upload implied. BKL-050 remains final after all approved dependencies.",
   "streams": [
     {
       "id": "rc2-enterprise-portal",
@@ -298,8 +298,8 @@
         {
           "id": "BKL-051",
           "title": "Ricerca di sorgenti variabili e candidati transienti",
-          "status": "planned",
-          "note": "Owner decision 2026-10-07: BKL-049-EXT-PIAI/P6 operational closure is the immediate priority; the latest real SHO result is privately accepted, not overall P6 acceptance or publication. BKL-051 is approved/planned as the next development after P6 closure and explicit operational acceptance. BKL-043 F4 lifecycle remains pending, F5 follows full F4 acceptance, and BKL-050 remains final after BKL-051 and all other approved dependencies. No new runtime, cloud resources, scientific upload, reporting, device or Safety authority is activated by this planning update. Private image/catalog/multi-epoch comparison, uncertainties and false-positive verification; candidate detection is not a confirmed discovery. Plan: docs/project/BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md"
+          "status": "active",
+          "note": "Owner-approved next package, S1 preparation only; implementation after verified P6 delivery PR #499. No module, new runtime, paid API, credential, scientific upload, discovery or report implemented. Plan docs/project/BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md"
         },
         {
           "id": "BKL-050",
@@ -310,8 +310,9 @@
         {
           "id": "BKL-049-EXT-PIAI",
           "title": "PixInsight AI Local Processing Pilot",
-          "status": "active",
-          "note": "P6 remains OPEN. P5/P5b and historical intake released; latest real native SHO result privately accepted on 2026-10-07. Reconcile all real/synthetic operational and profile evidence before overall operational acceptance. No new Owner portal-chain acceptance or gallery publication inferred. BKL-051 development starts only after P6 closure. Current handover: docs/project/HANDOVER_2026-10-07-P6-BKL051.md"
+          "note": "Owner operational acceptance 2026-10-07 with dossier limits; real HOO completed before acceptance. Isolated OAT suspended, evidence/reservations preserved, production unchanged. Scientific private acceptance and gallery remain distinct. Release gates PR #499.",
+          "statusSource": "completion-report",
+          "evidencePath": "docs/project/BKL-049-EXT-PIAI-P6-CLOSURE-2026-10-07.md"
         }
       ]
     }
@@ -964,8 +965,8 @@
       "itemRef": "BKL-051",
       "title": "Ricerca privata di sorgenti variabili e candidati transienti",
       "date": null,
-      "status": "planned",
-      "description": "Owner-approved 2026-10-07; development after BKL-049-EXT-PIAI/P6 operational closure and acceptance, before final BKL-050. Private NASA/ESA reference comparison and candidate verification; no automatic discovery claim or reporting. Plan: docs/project/BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md",
+      "status": "active",
+      "description": "S1 preparation of Owner-approved private transient-candidate module after accepted P6; implementation follows verified P6 delivery. No module/runtime or discovery claim yet. BKL-050 remains final.",
       "image": null
     },
     {

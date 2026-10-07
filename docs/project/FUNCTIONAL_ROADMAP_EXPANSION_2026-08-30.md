@@ -2,7 +2,7 @@
 
 ## Aggiornamento corrente — 7 ottobre 2026
 
-Priorità Owner: chiudere operativamente BKL-049-EXT-PIAI/P6, poi sviluppare [BKL-051 — candidati transienti](BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md). BKL-051 è **Planned**, non avviata. Ultima SHO reale accettata privatamente; P6 resta aperta per riconciliazione e accettazione complessiva. BKL-043 F4 attende lifecycle, F5 segue F4; BKL-050 resta conclusiva anche dopo BKL-051. [Handover corrente](HANDOVER_2026-10-07-P6-BKL051.md), [baseline corrente](CURRENT_TECHNICAL_BASELINE_2026-10-07.md). Gli stati precedenti restano snapshot nei rispettivi perimetri.
+P6 accettata operativamente dall’Owner il 7 ottobre 2026 con tutti i limiti del dossier, dopo collaudi reali e HOO completato. [Chiusura](BKL-049-EXT-PIAI-P6-CLOSURE-2026-10-07.md); [handover corrente](HANDOVER_2026-10-07-P6-CLOSURE.md). BKL-051 è il prossimo package approvato, preparazione S1; sviluppo subordinato alla consegna P6 verificata nella PR #499. Nessun modulo implementato o runtime attivato. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10 e Safety invariati. Le sezioni precedenti sono snapshot storici, superati soltanto nei perimetri della chiusura accettata.
 
 
 | Campo | Valore |
@@ -338,3 +338,7 @@ The F4 guard increment passed separate ARB/RQ after M01/M02 remediation, 19/19 e
 ## 2026-10-02 — BKL-049 closure in revised scope
 
 BKL-049 is CLOSED / ACCEPTED for the bounded available-history archive and exact gallery linkage. Separate real external registration/admission, retained delivery and local restore verified; Owner-approved JPEG and 21 DECLARED process names published through PR #471, with actual desktop/mobile/keyboard/exact-link OAT PASS. PARTIAL metadata, UNKNOWN quality and incomplete execution/history remain explicit. Owner subsequently removed the gallery expiry: the same exact approved record and JPEG remain published until explicit withdrawal; no new material or cloud permission is authorized. Closure: docs/project/BKL-049-CLOSURE-2026-10-02.md. Same-volume recovery only; no native observer, processing or device authority. BKL-043 remains current and its operational/lifecycle gates are unchanged; BKL-050 remains final. See [closure record](BKL-049-CLOSURE-2026-10-02.md).
+
+## P6 — accettazione operativa Owner
+
+L’Owner conferma «Accetto operativamente P6 con i limiti del dossier». Nessuna esclusione HOO: collaudo nativo completato. Accettazione distinta da valutazione estetica e pubblicazione; CFA resta prova tecnica su singola esposizione, History a monte non attestata e recupero soltanto conservativo. [Chiusura](BKL-049-EXT-PIAI-P6-CLOSURE-2026-10-07.md), [handover](HANDOVER_2026-10-07-P6-CLOSURE.md). Gate di consegna exact-head e post-merge nella PR #499; nessun PASS anticipato.

@@ -2,23 +2,23 @@
 
 ## Aggiornamento corrente — 7 ottobre 2026
 
-Priorità Owner: chiudere operativamente BKL-049-EXT-PIAI/P6, poi sviluppare [BKL-051 — candidati transienti](BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md). BKL-051 è **Planned**, non avviata. Ultima SHO reale accettata privatamente; P6 resta aperta per riconciliazione e accettazione complessiva. BKL-043 F4 attende lifecycle, F5 segue F4; BKL-050 resta conclusiva anche dopo BKL-051. [Handover corrente](HANDOVER_2026-10-07-P6-BKL051.md), [baseline corrente](CURRENT_TECHNICAL_BASELINE_2026-10-07.md). Gli stati precedenti restano snapshot nei rispettivi perimetri.
+P6 accettata operativamente dall’Owner il 7 ottobre 2026 con tutti i limiti del dossier, dopo collaudi reali e HOO completato. [Chiusura](BKL-049-EXT-PIAI-P6-CLOSURE-2026-10-07.md); [handover corrente](HANDOVER_2026-10-07-P6-CLOSURE.md). BKL-051 è il prossimo package approvato, preparazione S1; sviluppo subordinato alla consegna P6 verificata nella PR #499. Nessun modulo implementato o runtime attivato. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10 e Safety invariati. Le sezioni precedenti sono snapshot storici, superati soltanto nei perimetri della chiusura accettata.
 
 
-> Stato corrente al 7 ottobre 2026: [handover P6/BKL-051](HANDOVER_2026-10-07-P6-BKL051.md) e [baseline](CURRENT_TECHNICAL_BASELINE_2026-10-07.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
+> Stato corrente al 7 ottobre 2026: [handover P6/BKL-051](HANDOVER_2026-10-07-P6-CLOSURE.md) e [baseline](CURRENT_TECHNICAL_BASELINE_2026-10-07.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
 
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 4.14 |
+| Versione | 4.15 |
 | Stato | Active context baseline |
 | Data baseline | 07/10/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch autorevole | `main` |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Continuity handover | `docs/project/HANDOVER_2026-10-07-P6-BKL051.md` |
+| Continuity handover | `docs/project/HANDOVER_2026-10-07-P6-CLOSURE.md` |
 | Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md` |
-| Current governed package | BKL-049-EXT-PIAI/P6 in corso; BKL-051 Planned dopo P6; BKL-043 F4 lifecycle pending; S10 UNAVAILABLE |
+| Current governed package | P6 Accepted con limiti; BKL-051 S1 preparation after verified P6 delivery; BKL-043 F4 lifecycle pending; S10 UNAVAILABLE |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo e gerarchia
@@ -230,3 +230,7 @@ Owner approva servizio, due bucket privati, identità e credenziale di prova ded
 ## P6 — collaudo completo, accettazione operativa pendente
 
 Concorrenza Owner HTTPS reale, interruzione nativa isolata e nuovo worker, offline oltre 120 s, restart/rollback/forward del servizio di prova: PASS nei limiti documentati. Ambiente sospeso, archivi e prenotazioni conservati; stato della coda operativa byte-identico al baseline. HOO nativo sui master reali Drizzle2 ora PASS tecnico: 26 processi, 14 checkpoint, 26 coppie History, originali invariati; non accettazione estetica. P6 resta aperta per accettazione operativa; CFA è fixture tecnica da singola esposizione con decisione scientifica pendente. BKL-051 Planned dopo chiusura P6; F4/F5 e BKL-050 invariati. [Dossier finale e limiti](PIAI-P6-OPERATIONAL-ACCEPTANCE-2026-10-07.md). Questa nota supera soltanto i residui tecnici provati, conserva snapshot e gate di consegna.
+
+## P6 — accettazione operativa Owner
+
+L’Owner conferma «Accetto operativamente P6 con i limiti del dossier». Nessuna esclusione HOO: collaudo nativo completato. Accettazione distinta da valutazione estetica e pubblicazione; CFA resta prova tecnica su singola esposizione, History a monte non attestata e recupero soltanto conservativo. [Chiusura](BKL-049-EXT-PIAI-P6-CLOSURE-2026-10-07.md), [handover](HANDOVER_2026-10-07-P6-CLOSURE.md). Gate di consegna exact-head e post-merge nella PR #499; nessun PASS anticipato.

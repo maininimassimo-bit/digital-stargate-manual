@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-051 |
-| Versione | 1.0 |
+| Versione | 1.1 |
 | Data | 2026-10-07 |
-| Stato | Planned — estensione e sequenza approvate dall'Owner; sviluppo non avviato |
+| Stato | In Progress — preparazione S1; sviluppo dopo delivery P6 verificata, nessun modulo implementato |
 | Priorità | P2; prossimo sviluppo dopo chiusura operativa P6 |
 | Dipendenza di avvio | Chiusura BKL-049-EXT-PIAI/P6, con riconciliazione dei collaudi e accettazione operativa Owner |
 | Milestone | M-BKL051-SCIENTIFIC-TRANSIENT-CANDIDATES |
@@ -73,3 +73,7 @@ Il rollback della pianificazione è un revert governato dei documenti e rigenera
 - [Backlog](BACKLOG.md), [roadmap funzionale](FUNCTIONAL_ROADMAP_EXPANSION_2026-08-30.md), [dossier P6](PIAI-P6-CANDIDATE-2026-10-06.md), [milestone finale](BKL-050-FINAL-PORTAL-QUALITY-MILESTONE-2026-09-23.md).
 
 Versione 1.0: registrazione dell'approvazione Owner e della sequenza, 07/10/2026. Nessuna implementazione o analisi scientifica avviata da questo aggiornamento.
+
+## Dipendenza P6 accettata il 7 ottobre
+
+L’Owner ha accettato operativamente P6 con i limiti del [dossier finale](PIAI-P6-OPERATIONAL-ACCEPTANCE-2026-10-07.md), dopo HOO richiesto e completato. [Chiusura](BKL-049-EXT-PIAI-P6-CLOSURE-2026-10-07.md). Il package BKL-051 passa alla preparazione S1; iniziare lo sviluppo solo dopo verifica della consegna P6 nella PR #499. Nessuna scelta strutturale, soglia scientifica, nuova risorsa, credenziale o analisi su foto è introdotta da questo passaggio. La roadmap v1.0 sopra resta snapshot di pianificazione precedente.
