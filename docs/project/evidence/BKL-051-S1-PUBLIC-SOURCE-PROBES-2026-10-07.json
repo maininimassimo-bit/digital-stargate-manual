@@ -1,0 +1,89 @@
+{
+  "kind": "BKL051_S1_PUBLIC_FEASIBILITY_EVIDENCE_V1",
+  "date": "2026-10-07",
+  "state": "PREPARATION_ONLY_OWNER_DECISIONS_PENDING",
+  "p6MergeDependencyVerified": "0bd6e20df0b449cd163543ed30bd69d9264862b0",
+  "ownerImagesOrCoordinatesTransmitted": false,
+  "scientificAnalysisPerformed": false,
+  "sources": [
+    {
+      "id": "ps1_dr2_metadata",
+      "probeScope": "PUBLIC_SCHEMA_OR_DOCUMENTED_EXAMPLE_NOT_OWNER_FIELD",
+      "attempts": [
+        {
+          "status": "UNAVAILABLE",
+          "httpStatus": null,
+          "bytes": null,
+          "sha256": null
+        },
+        {
+          "status": "HTTP_SUCCESS_NOT_SCIENTIFIC_VALIDATION",
+          "httpStatus": 200,
+          "bytes": 47967,
+          "sha256": "50306ef42d8c4b43ef629e5856c1d0b51b7ee346c92dad6d12548b9ff6d1f1fe"
+        }
+      ]
+    },
+    {
+      "id": "ztf_science_metadata",
+      "probeScope": "PUBLIC_SCHEMA_OR_DOCUMENTED_EXAMPLE_NOT_OWNER_FIELD",
+      "attempts": [
+        {
+          "status": "HTTP_SUCCESS_NOT_SCIENTIFIC_VALIDATION",
+          "httpStatus": 200,
+          "bytes": 2974,
+          "sha256": "f57778539ec81da85ab449af62e2064f075a4e6522e7562a9b19289ed148406f"
+        },
+        {
+          "status": "HTTP_SUCCESS_NOT_SCIENTIFIC_VALIDATION",
+          "httpStatus": 200,
+          "bytes": 2974,
+          "sha256": "f57778539ec81da85ab449af62e2064f075a4e6522e7562a9b19289ed148406f"
+        }
+      ]
+    },
+    {
+      "id": "ps1_documented_m101_example",
+      "probeScope": "PUBLIC_SCHEMA_OR_DOCUMENTED_EXAMPLE_NOT_OWNER_FIELD",
+      "attempts": [
+        {
+          "status": "UNAVAILABLE",
+          "httpStatus": null,
+          "bytes": null,
+          "sha256": null
+        },
+        {
+          "status": "HTTP_SUCCESS_NOT_SCIENTIFIC_VALIDATION",
+          "httpStatus": 200,
+          "bytes": 667,
+          "sha256": "5dd5b9c21b9704b7891817391b11c72d4511b26c4c6ca2f935920891273c391d"
+        }
+      ]
+    },
+    {
+      "id": "gaia_dr3",
+      "probeScope": "ARBITRARY_PUBLIC_TOP_1_NOT_OWNER_FIELD",
+      "previousSchemaJsonStatuses": [
+        500,
+        500
+      ],
+      "csvProbe": {
+        "status": "PUBLIC_TABLE_ACCESS_PASS_NOT_SCIENTIFIC_VALIDATION",
+        "httpStatus": 200,
+        "bytes": 141,
+        "sha256": "66d85d8643447eda20e077dcaea1aebbf6f4dad24b157ef3c7544f42883a5c6d",
+        "releasePinned": "Gaia DR3"
+      }
+    }
+  ],
+  "limitations": [
+    "HTTP_SUCCESS_IS_NOT_SCIENTIFIC_VALIDATION",
+    "NO_OWNER_FIELD_COVERAGE_TEST",
+    "NO_SLA_OR_FULL_CATALOG_COMPLETENESS_CLAIM",
+    "NEGATIVE_ATTEMPTS_RETAINED",
+    "NO_PROVIDER_QUERY_FROM_FRONTEND",
+    "NO_NEW_RUNTIME_OR_CREDENTIALS",
+    "SCIENTIFIC_THRESHOLDS_NOT_DEFINED",
+    "S1_NOT_ACCEPTED"
+  ]
+}
