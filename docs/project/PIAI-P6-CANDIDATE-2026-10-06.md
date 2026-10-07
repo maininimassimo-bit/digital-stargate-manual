@@ -1,5 +1,10 @@
 # P6 — released private refinements and conservative native recovery
 
+## Aggiornamento del 7 ottobre 2026 — P6 ancora aperta
+
+Sono ora disponibili una prova nativa reale SHO SII/Hα/OIII Drizzle2 e l'accettazione privata dell'ultima proposta. Superano la precedente nota sui master SHO ancora da selezionare, senza costituire accettazione operativa globale o nuova catena Owner/portale. Le ulteriori evidenze OSC/CFA e dei casi operativi richiedono riconciliazione puntuale; non sono promosse da questo aggiornamento. Dopo chiusura e accettazione operativa P6, l'Owner ha approvato l'avvio di [BKL-051](BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md). [Stato corrente](HANDOVER_2026-10-07-P6-BKL051.md); dettagli e ricevute scientifiche restano privati.
+
+
 Status: increment released in PR #491; overall P6 operational acceptance pending. BKL-049 remains closed in its accepted archive scope;
 BKL-049-EXT-PIAI and its operational acceptance remain open. No scientific image,
 workflow parameters, local paths, credentials or production receipts are included here.

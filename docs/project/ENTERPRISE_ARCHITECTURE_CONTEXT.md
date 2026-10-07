@@ -1,19 +1,24 @@
 # Digital StarGate Enterprise Architecture Context
 
-> Stato corrente al 6 ottobre 2026: [handover M31](HANDOVER_2026-10-06-BKL049-M31.md) e [baseline](CURRENT_TECHNICAL_BASELINE_2026-10-06.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
+## Aggiornamento corrente — 7 ottobre 2026
+
+Priorità Owner: chiudere operativamente BKL-049-EXT-PIAI/P6, poi sviluppare [BKL-051 — candidati transienti](BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md). BKL-051 è **Planned**, non avviata. Ultima SHO reale accettata privatamente; P6 resta aperta per riconciliazione e accettazione complessiva. BKL-043 F4 attende lifecycle, F5 segue F4; BKL-050 resta conclusiva anche dopo BKL-051. [Handover corrente](HANDOVER_2026-10-07-P6-BKL051.md), [baseline corrente](CURRENT_TECHNICAL_BASELINE_2026-10-07.md). Gli stati precedenti restano snapshot nei rispettivi perimetri.
+
+
+> Stato corrente al 7 ottobre 2026: [handover P6/BKL-051](HANDOVER_2026-10-07-P6-BKL051.md) e [baseline](CURRENT_TECHNICAL_BASELINE_2026-10-07.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
 
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-CTX-001 |
-| Versione | 4.13 |
+| Versione | 4.14 |
 | Stato | Active context baseline |
-| Data baseline | 06/10/2026 |
+| Data baseline | 07/10/2026 |
 | Repository | `maininimassimo-bit/digital-stargate-manual` |
 | Branch autorevole | `main` |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Continuity handover | `docs/project/HANDOVER_2026-10-06-BKL049-M31.md` |
-| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-06.md` |
-| Current governed package | BKL-043 F4 lifecycle pending; BKL-049 archive closed; local PixInsight AI pilot |
+| Continuity handover | `docs/project/HANDOVER_2026-10-07-P6-BKL051.md` |
+| Technical baseline | `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md` |
+| Current governed package | BKL-049-EXT-PIAI/P6 in corso; BKL-051 Planned dopo P6; BKL-043 F4 lifecycle pending; S10 UNAVAILABLE |
 | Owner | Massimo Mainini |
 
 ## 1. Scopo e gerarchia

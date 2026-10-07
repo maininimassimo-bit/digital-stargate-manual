@@ -1,15 +1,20 @@
 # Repository Knowledge Map
 
-> Stato corrente al 6 ottobre 2026: [handover M31](HANDOVER_2026-10-06-BKL049-M31.md) e [baseline](CURRENT_TECHNICAL_BASELINE_2026-10-06.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
+## Aggiornamento corrente — 7 ottobre 2026
+
+Priorità Owner: chiudere operativamente BKL-049-EXT-PIAI/P6, poi sviluppare [BKL-051 — candidati transienti](BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md). BKL-051 è **Planned**, non avviata. Ultima SHO reale accettata privatamente; P6 resta aperta per riconciliazione e accettazione complessiva. BKL-043 F4 attende lifecycle, F5 segue F4; BKL-050 resta conclusiva anche dopo BKL-051. [Handover corrente](HANDOVER_2026-10-07-P6-BKL051.md), [baseline corrente](CURRENT_TECHNICAL_BASELINE_2026-10-07.md). Gli stati precedenti restano snapshot nei rispettivi perimetri.
+
+
+> Stato corrente al 7 ottobre 2026: [handover P6/BKL-051](HANDOVER_2026-10-07-P6-BKL051.md) e [baseline](CURRENT_TECHNICAL_BASELINE_2026-10-07.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
 
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-GOV-KM-001 |
-| Versione | 6.13 |
+| Versione | 6.14 |
 | Stato | Active |
-| Data | 06/10/2026 |
+| Data | 07/10/2026 |
 | Root bootstrap | `AI_BOOTSTRAP.md` |
-| Current governed package | BKL-043 F4 lifecycle pending; BKL-049 archive closed; local PixInsight AI pilot; S10 production runtime `UNAVAILABLE` |
+| Current governed package | BKL-049-EXT-PIAI/P6 in corso; BKL-051 Planned dopo P6; BKL-043 F4 lifecycle pending; S10 UNAVAILABLE |
 
 ## 1. Scopo
 
@@ -18,8 +23,8 @@ Mappa domini, authority, projection e percorsi di conoscenza. Non sostituisce le
 ## 2. Continuity hierarchy
 
 1. `AI_BOOTSTRAP.md`;
-2. `docs/project/HANDOVER_2026-10-06-BKL049-M31.md`;
-3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-06.md`;
+2. `docs/project/HANDOVER_2026-10-07-P6-BKL051.md`;
+3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md`;
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`;
 5. questo Knowledge Map;
 6. `DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md`;
@@ -35,7 +40,7 @@ Riferimenti di continuità storici mantenuti per la verificabilità delle capabi
 
 ## 2.1 Current continuity reconciliation
 
-AP-007 è Accepted with conditions come architecture baseline e AP-008 è chiuso nel suo perimetro bounded read-only. La catena corrente è `AI_BOOTSTRAP.md` → `HANDOVER_2026-10-06-BKL049-M31.md` → `CURRENT_TECHNICAL_BASELINE_2026-10-06.md` → roadmap source → BKL-043 F1/F2/F3/F4 evidence → Traceability Register. BKL-043 resta corrente: F4 attende lifecycle e accettazione finale secondo BKL-043-F4-STATUS-2026-10-01. BKL-049 archivio è chiusa; il pilota locale è una nuova estensione autorizzata.
+AP-007 è Accepted with conditions come architecture baseline e AP-008 è chiuso nel suo perimetro bounded read-only. La catena corrente è `AI_BOOTSTRAP.md` → `HANDOVER_2026-10-07-P6-BKL051.md` → `CURRENT_TECHNICAL_BASELINE_2026-10-07.md` → roadmap source → BKL-043 F1/F2/F3/F4 evidence → Traceability Register. La priorità corrente è chiudere P6, poi sviluppare BKL-051. BKL-043 resta aperta: F4 attende lifecycle e accettazione finale secondo BKL-043-F4-STATUS-2026-10-01. BKL-049 archivio è chiusa; il pilota locale è una nuova estensione autorizzata.
 
 ## 3. Authority / projection map
 
@@ -59,7 +64,7 @@ BKL-046 è CLOSED / ACCEPTED / POST-MERGE VERIFIED come capability deterministic
 
 BKL-031 è **CLOSED / ACCEPTED / POST-MERGE VERIFIED** tramite PR #301 e merge `4a509d574a004fe7fb72bc6c678c9e7f71fe821f`. F1/F2, F3-A1/A2/A3/B/C, F4-A/B/C/D, F5/F6/F7/F8 e F9 sono accettati; F3-C are Accepted / Post-Merge Verified; F4-A and ADR-011 are Accepted / Post-Merge Verified; F8 is Accepted / Post-Merge Verified. F9 ha verificato il refresh repeatable MeteoHub, astronomia della notte corrente, suitability setup/target, ranking esplicabile e pagina pubblica di Manciano. Budget provider storico `2/2_EXHAUSTED`; budget sito protetto `1/1_EXHAUSTED`; Recurring provider traffic is not authorized. Il budget monetario resta €0, senza limite giornaliero imposto dal workflow, fail-closed e GRIB effimeri senza retention. BKL-032 conserva la readiness/go-no-go authority; local physical interlocks remain Safety Authority; S10 production runtime is `UNAVAILABLE`; il planner resta read-only/advisory senza scheduler, selezione automatica, device command o Safety Authority.
 
-BKL-042 è CLOSED / ACCEPTED come retrieval advisory bounded read-only. BKL-043 è il package corrente: F1 source/population discovery e F2 two-plane design sono completati; F4 attende lifecycle e accettazione finale secondo lo stato del 1 ottobre; la presente revisione non ne estende il runtime.
+BKL-042 è CLOSED / ACCEPTED come retrieval advisory bounded read-only. BKL-043 rimane un package aperto, distinto dalla priorità P6 → BKL-051: F1 source/population discovery e F2 two-plane design sono completati; F4 attende lifecycle e accettazione finale secondo lo stato del 1 ottobre; la presente revisione non ne estende il runtime.
 
 ## 7. BKL-032 closed baseline
 
