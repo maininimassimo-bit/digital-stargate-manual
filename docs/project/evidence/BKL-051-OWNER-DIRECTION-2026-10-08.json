@@ -1,0 +1,28 @@
+{
+  "kind": "BKL051_OWNER_DIRECTION_QUERY_DECISION_V1",
+  "clientDate": "2026-10-08",
+  "humanStatement": "approvo tutti e 3 le domande",
+  "privateApprovalEventSha256": "bf4904157385155166bf079b0cb2dfba7d9c02395028d32c6d99283f4cf9cb9b",
+  "approvedDirection": "OWNER_PC_PROCESSING_PRIVATE_PORTAL_CONSULTATION",
+  "approvedProviders": [
+    "ESA_GAIA",
+    "NASA_IPAC_IRSA",
+    "MAST"
+  ],
+  "pilotDecision": "RECOMMENDED_SELECTION_CRITERIA_NO_SPECIFIC_FIELD_NAMED",
+  "numericThresholds": "NOT_GRANTED",
+  "runtime": "NOT_ACTIVATED",
+  "s1Acceptance": "NOT_CLAIMED",
+  "s2Status": "INPUT_ACCESS_AND_NATIVE_SOLVE_PARTIAL_INDEPENDENT_VALIDATION_PENDING",
+  "publicPrivateImageDataIncluded": false,
+  "nativeEvidence": {
+    "completedSolutions": 3,
+    "solver": "PixInsight ImageSolver 6.5.0",
+    "catalog": "LOCAL_GAIA_DR3_XPSD",
+    "unchangedOriginals": true,
+    "identicalScientificPixels": true,
+    "failedBranchesRetained": true,
+    "independentAstrometricValidation": false,
+    "candidateClassification": false
+  }
+}

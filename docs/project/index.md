@@ -1,6 +1,10 @@
 # Project Governance Center
 
-## Aggiornamento corrente — 7 ottobre 2026
+## Stato corrente — 8 ottobre 2026
+
+L'Owner ha approvato la proposta PC locale + consultazione privata nel portale, le query minime a ESA Gaia/NASA-IPAC IRSA/MAST e il criterio raccomandato per scegliere il campo pilota. Nessun campo è stato nominato: selezione locale guidata da date reali e stessa banda. [Handover corrente](HANDOVER_2026-10-08-BKL051-S2.md). S1 non è chiusa; S2 avviata come verifica limitata di ingressi/accesso, senza astrometria accettata, classificazioni, soglie operative o runtime del modulo. P6 resta Accepted con limiti. Trasporto privato concreto ancora da revisionare; nessuna nuova risorsa, credenziale o pubblicazione di fotografie. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati.
+
+## Snapshot storico — 7 ottobre 2026
 
 Priorità Owner: chiudere operativamente BKL-049-EXT-PIAI/P6, poi sviluppare [BKL-051 — candidati transienti](BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md). BKL-051 è **Planned**, non avviata. Ultima SHO reale accettata privatamente; P6 resta aperta per riconciliazione e accettazione complessiva. BKL-043 F4 attende lifecycle, F5 segue F4; BKL-050 resta conclusiva anche dopo BKL-051. [Handover corrente](HANDOVER_2026-10-07-P6-BKL051.md), [baseline corrente](CURRENT_TECHNICAL_BASELINE_2026-10-07.md). Gli stati precedenti restano snapshot nei rispettivi perimetri.
 
@@ -11,7 +15,7 @@ Il Project Governance Center raccoglie le regole che governano sviluppo, pubblic
 
 Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 
-## Stato aggiornato del 7 ottobre 2026
+## Snapshot del 7 ottobre 2026
 
 [Handover P6 e BKL-051](HANDOVER_2026-10-07-P6-BKL051.md), [baseline tecnica](CURRENT_TECHNICAL_BASELINE_2026-10-07.md) ed [evidenza minimizzata](evidence/BKL-051-OWNER-PLAN-2026-10-07.json) definiscono la ripresa corrente. P6 resta in corso; ultima SHO accettata privatamente; BKL-051 pianificata dopo P6. Le sezioni di continuità precedenti sono snapshot.
 
@@ -20,7 +24,7 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | Documento | Ruolo |
 |---|---|
 | `AI_BOOTSTRAP.md` | Root bootstrap |
-| [P6 e BKL-051 Handover 07/10/2026](HANDOVER_2026-10-07-P6-BKL051.md) | Handover corrente |
+| [BKL-051 S2 Handover 08/10/2026](HANDOVER_2026-10-08-BKL051-S2.md) | Handover corrente |
 | [Current Technical Baseline 07/10/2026](CURRENT_TECHNICAL_BASELINE_2026-10-07.md) | Baseline tecnica corrente |
 | [DSG-AEM-001 Continuous Autonomous Execution Mandate](DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md) | Mandato owner-authorized e deroga ruleset condizionata |
 | [PR #196 DSG-AEM-001 AI-Assisted ARB Review](../architecture/reviews/ARB-PR196-DSG-AEM-001-Governance-AI-Assisted-Review-2026-09-15.md) | Approved — 99/100; non equivalente ad approvazione umana indipendente |

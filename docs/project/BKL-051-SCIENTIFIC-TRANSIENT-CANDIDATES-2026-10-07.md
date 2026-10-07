@@ -1,5 +1,9 @@
 # BKL-051 — Ricerca di sorgenti variabili e candidati transienti
 
+## Stato corrente — 8 ottobre 2026
+
+L'Owner ha approvato la proposta PC locale + consultazione privata nel portale, le query minime a ESA Gaia/NASA-IPAC IRSA/MAST e il criterio raccomandato per scegliere il campo pilota. Nessun campo è stato nominato: selezione locale guidata da date reali e stessa banda. [Handover corrente](HANDOVER_2026-10-08-BKL051-S2.md). S1 non è chiusa; S2 avviata come verifica limitata di ingressi/accesso, senza astrometria accettata, classificazioni, soglie operative o runtime del modulo. P6 resta Accepted con limiti. Trasporto privato concreto ancora da revisionare; nessuna nuova risorsa, credenziale o pubblicazione di fotografie. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati.
+
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-051 |
