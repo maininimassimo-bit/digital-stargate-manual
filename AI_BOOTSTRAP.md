@@ -1,12 +1,17 @@
 # Digital StarGate AI Bootstrap
 
-> Stato corrente al 6 ottobre 2026: [handover M31](docs/project/HANDOVER_2026-10-06-BKL049-M31.md) e [baseline](docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-06.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
+## Aggiornamento corrente — 7 ottobre 2026
+
+Priorità Owner: chiudere operativamente BKL-049-EXT-PIAI/P6, poi sviluppare [BKL-051 — candidati transienti](docs/project/BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md). BKL-051 è **Planned**, non avviata. Ultima SHO reale accettata privatamente; P6 resta aperta per riconciliazione e accettazione complessiva. BKL-043 F4 attende lifecycle, F5 segue F4; BKL-050 resta conclusiva anche dopo BKL-051. [Handover corrente](docs/project/HANDOVER_2026-10-07-P6-BKL051.md), [baseline corrente](docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md). Gli stati precedenti restano snapshot nei rispettivi perimetri.
+
+
+> Stato corrente al 7 ottobre 2026: [handover P6/BKL-051](docs/project/HANDOVER_2026-10-07-P6-BKL051.md) e [baseline](docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
 
 | Campo | Valore |
 |---|---|
-| Versione | 8.8 |
-| Baseline | 06/10/2026 |
-| Stato | Current root bootstrap — BKL-043 F4 lifecycle pending; BKL-049 archive closed; PixInsight AI extension pilot; S10 unavailable |
+| Versione | 8.9 |
+| Baseline | 07/10/2026 |
+| Stato | Current root bootstrap — P6 operational closure first; BKL-051 Planned next; BKL-043 lifecycle pending; S10 unavailable |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro sul repository `maininimassimo-bit/digital-stargate-manual`.
 
@@ -15,8 +20,8 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni e proje
 
 ## 2. Sequenza obbligatoria di lettura
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-10-06-BKL049-M31.md`
-3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-06.md`
+2. `docs/project/HANDOVER_2026-10-07-P6-BKL051.md`
+3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
 6. `docs/project/BACKLOG.md`
@@ -66,7 +71,7 @@ Gli handover e le baseline precedenti restano snapshot storici.
 ## 6. Disciplina di delivery
 Exact-head CI → ARB → Release Quality sullo stesso SHA → expected-head merge → post-merge verification → acceptance reconciliation. Nessuna acceptance o runtime claim può precedere l'evidence reale.
 
-## 7. Punto di ripresa
+## 7. Punto di ripresa storico del pilota — superato dal riepilogo del 7 ottobre
 Riprendere dall’handover del 5 ottobre v2.0 e dal runbook PIAI-P4-CLOUD-ACTIVATION-2026-10-05.md v1.1. P1–P3 e candidato P4 consegnati #479–#482; attivazione #483 post-merge verificata. P4 Owner HTTP sintetico, non-Owner negato, IAM/restore, restart/lost-ack, CAS GCS concorrente amministrativo e trasporto nativo amministrativo M27 verificati. P4 acceptance operativa resta aperta e concorrenza HTTP Owner soltanto sintetica; P5 è tecnicamente completata: prova scientifica Owner UI/nativa/consegna privata verificata; P6 e accettazione scientifica Owner sono successive. SESSION_ASSISTED senza nuove API IA; M27 pubblicata invariata, BKL-043 conserva i propri gate, nessuna authority dispositivi/Safety. Consegna CI/review e Pages della riconciliazione attuale da tracciare sulla PR.
 
 

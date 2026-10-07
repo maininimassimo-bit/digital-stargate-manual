@@ -1,5 +1,10 @@
 # Technical Debt Register
 
+## Riesame del 7 ottobre 2026
+
+L'inserimento di [BKL-051](BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md) è pianificazione e non introduce codice o nuovo debito implementativo. Copertura dei provider, comparabilità fotometrica, falsi positivi, soglie scientifiche e scelte infrastrutturali restano decisioni e gate S1 del piano, da validare dopo P6; non sono debiti dichiarati risolti. Il registro esistente resta invariato.
+
+
 > Stato corrente al 6 ottobre 2026: [gate residui e baseline](CURRENT_TECHNICAL_BASELINE_2026-10-06.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
 
 | Campo | Valore |

@@ -1,5 +1,10 @@
 # BKL-050 — Final Portal Quality and Accessibility Acceptance
 
+## Dipendenza aggiunta il 7 ottobre 2026
+
+L'Owner ha approvato [BKL-051](BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md), da sviluppare dopo la chiusura operativa P6. BKL-050 rimane **ultima**, anche dopo BKL-051 e BKL-043 F4/F5. L'aggiunta non chiude P6, non anticipa F5 e non fissa nuove date.
+
+
 | Campo | Valore |
 |---|---|
 | Stato | Planned |

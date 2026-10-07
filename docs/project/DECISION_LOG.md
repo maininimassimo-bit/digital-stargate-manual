@@ -1,5 +1,10 @@
 # Decision Log
 
+## Aggiornamento corrente — 7 ottobre 2026
+
+Priorità Owner: chiudere operativamente BKL-049-EXT-PIAI/P6, poi sviluppare [BKL-051 — candidati transienti](BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md). BKL-051 è **Planned**, non avviata. Ultima SHO reale accettata privatamente; P6 resta aperta per riconciliazione e accettazione complessiva. BKL-043 F4 attende lifecycle, F5 segue F4; BKL-050 resta conclusiva anche dopo BKL-051. [Handover corrente](HANDOVER_2026-10-07-P6-BKL051.md), [baseline corrente](CURRENT_TECHNICAL_BASELINE_2026-10-07.md). Gli stati precedenti restano snapshot nei rispettivi perimetri.
+
+
 ## 2026-10-02 — Actual Owner login verified before photo procedure activation
 
 After PR #475 exact merge-SHA checks and actual Pages publication, the Google

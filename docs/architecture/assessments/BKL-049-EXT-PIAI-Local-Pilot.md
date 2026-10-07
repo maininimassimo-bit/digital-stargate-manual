@@ -1,5 +1,10 @@
 # BKL-049-EXT-PIAI — Pilota locale PixInsight con IA
 
+## Continuità del 7 ottobre 2026
+
+P6 resta aperta; ultima elaborazione SHO reale accettata privatamente, senza nuova certificazione end-to-end del portale. [Handover corrente](../../project/HANDOVER_2026-10-07-P6-BKL051.md). L'Owner ha approvato [BKL-051](../../project/BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md) come prossimo sviluppo dopo chiusura e accettazione operativa P6. Nessuna elaborazione o chiusura viene avviata dalla sola pianificazione.
+
+
 > Stato corrente al 6 ottobre 2026: [baseline dei rilasci](../../project/CURRENT_TECHNICAL_BASELINE_2026-10-06.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
 
 | Campo | Valore |
