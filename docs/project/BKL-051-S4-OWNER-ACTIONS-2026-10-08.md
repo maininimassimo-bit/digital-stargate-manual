@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-051-S4-OWNER-ACTIONS |
-| Versione | 1.0 |
+| Versione | 1.1 |
 | Data | 2026-10-08 |
 | Stato | Candidate; CI/review/Pages gates pending; authenticated OAT and science acceptance pending |
 | Baseline | PR #513 merge `1c713f37b2522458e0d364c519756edc1f7ba2ba`, 20 exact-head checks, ARB/RQ, 19 post-merge workflows, 10 HTTP checks PASS |
@@ -54,9 +54,9 @@ remoto riflesso. Non è un parser raw di chiavi JSON duplicate né verifica di b
 
 ## Validazione e gate
 
-37 prove componente DOM/fetch/Google simulati, incluse le otto viste generate dal vero MemoryStore: richieste
+39 prove componente DOM/fetch/Google simulati, incluse le otto viste e la risposta review generate dal vero MemoryStore: richieste
 esplicite, lost-ack prima/dopo commit, retry identico, restore senza invio, binding/report/decision conflict,
-storage write/removal failure, concorrenza click, logout in-flight, cancel terminale e qualificazioni scientifiche.
+storage write/removal failure e modifica concorrente dell'intent, concorrenza click, logout in-flight, cancel terminale e qualificazioni scientifiche.
 Suite precedenti e fixture drift check preservati. Sono prove sintetiche di protocollo/UI, non cloud/Google/PC OAT,
 nuove esposizioni astronomiche o validazione quantitativa. Nessun processo PixInsight o elaborazione approvata ripetuto.
 
@@ -75,3 +75,8 @@ History, maschere, checkpoint e archivio genitore. Baseline stabile PR #513; nes
 ## Revisioni
 
 1.0 — Candidato comandi Owner su contratti esistenti, conservazione intent e limiti espliciti.
+
+1.1 — Remediation ARB sul primo head `1823d5df3900b1462f46b1c38cce147634608028`: risposta REVIEW distinta dal job,
+verificata sulla fixture prodotta da queue.review, e rilettura/correlazione dell'intent persistito prima di
+riconciliazione e rimozione. Due finding P2 risolti nel nuovo candidato; il rapporto CHANGES_REQUIRED resta
+archiviato. CI e ARB/RQ devono essere ripetute sul nuovo head, senza ereditare l'approvazione del precedente.

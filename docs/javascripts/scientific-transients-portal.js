@@ -42,6 +42,11 @@
     else require(false);
     return {...value,binding,body:JSON.parse(JSON.stringify(body))};
   }
+  function inspectReview(review) {
+    require(fields(review,['request','recordedAt','authority'])&&fields(review.request,['decisionId','reportSha256','decision'])
+      &&opaque(review.request.decisionId)&&hash(review.request.reportSha256)&&Object.hasOwn(decisions,review.request.decision)
+      &&instant(review.recordedAt)&&review.authority==='OWNER_DECLARED');return review;
+  }
   function inspectJobs(value) {
     require(fields(value,['jobs']) && Array.isArray(value.jobs) && value.jobs.length<=32);
     const ids=new Set();
@@ -77,10 +82,8 @@
       require(Array.isArray(job.reviews)&&job.reviews.length<=32&&(job.state==='COMPLETED'||job.reviews.length===0));
       const reviews=new Set();
       for(const review of job.reviews) {
-        require(fields(review,['request','recordedAt','authority']) && fields(review.request,['decisionId','reportSha256','decision'])
-          && opaque(review.request.decisionId) && !reviews.has(review.request.decisionId)
-          && review.request.reportSha256===job.result.reportSha256 && Object.hasOwn(decisions,review.request.decision)
-          && instant(review.recordedAt) && review.authority==='OWNER_DECLARED'); reviews.add(review.request.decisionId);
+        inspectReview(review);require(!reviews.has(review.request.decisionId)&&review.request.reportSha256===job.result.reportSha256);
+        reviews.add(review.request.decisionId);
       }
     }
     // The boundary validates only received structure/correlation, not bytes on the PC or science.
@@ -200,6 +203,7 @@
     }
     function reconcile() {
       retryAllowed=false;if(!pending)return '';
+      verifyStoredIntent();
       const registered=bindings.find(b=>b.bindingRef===pending.binding.bindingRef);
       require(registered&&same(registered,pending.binding));
       const job=jobs.find(j=>j.jobId===pending.jobId);let confirmed=false,noEffect=false;
@@ -213,6 +217,7 @@
           if(review){require(same(review.request,pending.body));confirmed=true;}else retryAllowed=true;}
       }
       if(confirmed||noEffect) {
+        verifyStoredIntent();
         try{sessionStorage.removeItem(pendingKey);require(sessionStorage.getItem(pendingKey)===null);}
         catch{storageBlocked=true;throw Error('Storage unavailable');}
         const action=pending.action;pending=null;
@@ -235,6 +240,11 @@
       q('group').value='';message(result||'Stato letto dal servizio privato. Il rapporto completo va verificato sul PC.');
     }
     function identifier() {return Array.from(crypto.getRandomValues(new Uint8Array(16)),v=>v.toString(16).padStart(2,'0')).join('');}
+    function verifyStoredIntent() {
+      try {const stored=sessionStorage.getItem(pendingKey);require(typeof stored==='string'&&stored.length<=2048);
+        require(same(inspectPending(JSON.parse(stored)),pending));}
+      catch{storageBlocked=true;throw Error('Storage intent conflict');}
+    }
     async function start(action,job,body) {
       require(ready&&!pending&&!storageBlocked&&token);
       try {require(sessionStorage.getItem(pendingKey)===null);}catch{storageBlocked=true;throw Error('Storage unavailable');}
@@ -245,11 +255,13 @@
     }
     async function send() {
       require(pending&&!storageBlocked&&token&&ready);
-      const saved=inspectPending(JSON.parse(sessionStorage.getItem(pendingKey)));require(same(saved,pending));
+      verifyStoredIntent();
       retryAllowed=false;ready=false;lock();
       const path=pending.action==='CREATE'?'/jobs':'/jobs/'+pending.jobId+'/'+(pending.action==='CANCEL'?'cancel':'review');
       const value=await call(path,'POST',pending.body);if(value===null)return;
-      const acknowledged=inspectJobs({jobs:[value]})[0];require(acknowledged.jobId===pending.jobId&&same(inspectBinding(acknowledged.binding),pending.binding));
+      if(pending.action==='REVIEW')require(same(inspectReview(value).request,pending.body));
+      else {const acknowledged=inspectJobs({jobs:[value]})[0];
+        require(acknowledged.jobId===pending.jobId&&same(inspectBinding(acknowledged.binding),pending.binding));}
       await refresh();
     }
     async function run(action) {

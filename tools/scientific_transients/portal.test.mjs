@@ -54,8 +54,8 @@ function harness({jobs=[fixture()],status=200,fail=false,deferred=false,googleMi
           const job=jobs.find(j=>url.includes(j.jobId));assert.ok(job);
           if(url.endsWith('/cancel')) {if(!['COMPLETED','FAILED','CANCELLED','RECOVERY_REQUIRED'].includes(job.state)){
             job.cancelRequested=true;if(job.state==='QUEUED')job.state='CANCELLED';}}
-          else if(!job.reviews.some(r=>r.request.decisionId===body.decisionId))job.reviews.push({request:body,recordedAt:job.updatedAt,authority:'OWNER_DECLARED'});
-          responseBody=job;
+          else if(!job.reviews.some(r=>r.request.decisionId===body.decisionId))job.reviews.push({...structuredClone(queueViews.reviewResponse),request:body,recordedAt:job.updatedAt});
+          responseBody=url.endsWith('/review')?job.reviews.find(r=>r.request.decisionId===body.decisionId):job;
         }
         if(postFailure==='after')throw Error('LOST_ACK');
       } else {assert.equal(options.method,'GET');assert.equal(options.body,undefined);}
@@ -279,5 +279,17 @@ test('duplicate review ID with a different declaration freezes reconciliation',a
   const changed=fixture(),body=JSON.parse(posts(h)[0].options.body);
   changed.reviews=[{request:{...body,decision:'REJECT_CANDIDATE'},recordedAt:changed.updatedAt,authority:'OWNER_DECLARED'}];
   h.setJobs([changed]);await h.refresh();assert.equal(h.storage.size,1);assert.equal(h.controls.retry.disabled,true);
+  assert.equal(posts(h).length,1);
+});
+test('changed persisted intent before acknowledgement is retained and blocks reconciliation',async()=>{
+  const h=harness({postDeferred:true});await h.login();await h.create();
+  const key='dsg-bkl051-owner-pending-v1',changed=JSON.parse(h.storage.get(key));changed.binding.inputRef='f'.repeat(32);
+  const raw=JSON.stringify(changed);h.storage.set(key,raw);h.release();await tick();
+  assert.equal(h.storage.get(key),raw);assert.equal(h.controls.create.disabled,true);assert.equal(h.controls.retry.disabled,true);
+  assert.equal(posts(h).length,1);
+});
+test('removed persisted intent before acknowledgement freezes instead of creating a replacement',async()=>{
+  const h=harness({postDeferred:true});await h.login();await h.create();h.storage.clear();h.release();await tick();
+  assert.equal(h.storage.size,0);assert.equal(h.controls.create.disabled,true);assert.equal(h.controls.retry.disabled,true);
   assert.equal(posts(h).length,1);
 });
