@@ -716,3 +716,8 @@ L'Owner ha approvato la proposta PC locale + consultazione privata nel portale, 
 ## BKL-051 — rapporto locale, 8 ottobre 2026
 
 [Incremento candidato](BKL-051-S4-LOCAL-REPORT-2026-10-08.md): esportazione passiva privata del journal sigillato, digest tecnico distinto dal derivato, misure del kernel e limiti conservati. Non modifica coda/authority o acceptance. Driver/recovery, workflow scientifico completo, OAT e reporting restano aperti; nessun nuovo collaudo nativo o attivazione. Gate nella PR.
+
+
+## BKL-051 — driver locale candidato, 8 ottobre 2026
+
+PR #515 integrata e post-merge verificata; [driver locale e riconciliazione](BKL-051-S4-LOCAL-DRIVER-2026-10-08.md) candidati per una prenotazione fornita dal chiamante fidato. Nessun claim, replay, credenziale su disco o reset della recovery server; ACK storico distinto dallo stato corrente. Undici test mock/MemoryStore, non OAT nativa/cloud. Claim sicuro e recovery server restano aperti insieme al workflow scientifico, policy, reporting e acceptance. Runtime/invii disattivati; BKL-051 OPEN. Gate exact-head nella PR; rollback conservativo tramite revert, nessun cleanup delle evidenze.

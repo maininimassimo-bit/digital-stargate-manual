@@ -2,7 +2,7 @@
 
 ## Stato corrente — 8 ottobre 2026
 
-P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #514 integrata su `fc57631112f3ec098d8dbc7f443e6cb50b757f62`: comandi Owner pubblicati con intent e riconciliazione manuale; gate e verifica post-merge nella PR. Nuovo incremento candidato: rapporto locale JSON/HTML da attempt sigillato, digest tecnico pinned, byte e misure del kernel correlati; nessun avvio PixInsight ripetuto. Unità normalizzate e variance/significatività sconosciute; CALLER_REPORTED_NOT_ATTESTED, NOT_ATTESTED e NOT_VALIDATED preservati. Rapporto del kernel disponibile, workflow scientifico completo ancora aperto. Restano driver/recovery, accessi/PC/cloud OAT, validation, policy e reporting. Runtime transient e invii non attivati. S1/S2 aperte, S3 parziale, S4 incompleta, S5 non accettata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](docs/project/HANDOVER_2026-10-08-BKL051-LOCAL-REPORT.md).
+P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #515 integrata su `46e8e9e75d9549f50b4473eed9182dd9cb3799dc`: rapporto locale privato rilasciato, 16 check exact-head, ARB/RQ e 15 workflow post-merge SUCCESS; cinque endpoint Pages verificati. Nuovo incremento candidato: driver per un solo tentativo già prenotato e riconciliazione esplicita dopo riavvio, senza claim, replay nativo o reset del server. Cadence locale esplicita; ACK storico e stato remoto corrente distinti. Nessuna nuova elaborazione PixInsight. Unità normalizzate, variance/significatività sconosciute e NOT_VALIDATED invariati. Restano claim completo, recovery server, workflow scientifico, accessi/PC/cloud OAT, validation, policy e reporting. Runtime e invii disattivati. S1/S2 aperte, S3 parziale, S4 incompleta, S5 non accettata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](docs/project/HANDOVER_2026-10-08-BKL051-LOCAL-DRIVER.md).
 
 ## Snapshot storico — 7 ottobre 2026
 
@@ -13,7 +13,7 @@ P6 accettata operativamente dall’Owner il 7 ottobre 2026 con tutti i limiti de
 
 | Campo | Valore |
 |---|---|
-| Versione | 8.26 |
+| Versione | 8.27 |
 | Baseline | 08/10/2026 |
 | Stato | Current root bootstrap — P6 accepted; BKL-051 Owner local/query direction approved, S1 open, S2 native solves with independent validation pending; BKL-043 lifecycle pending; S10 unavailable |
 
@@ -24,7 +24,7 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni e proje
 
 ## 2. Sequenza obbligatoria di lettura
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-10-08-BKL051-LOCAL-REPORT.md`
+2. `docs/project/HANDOVER_2026-10-08-BKL051-LOCAL-DRIVER.md`
 3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
