@@ -35,7 +35,10 @@ un secondo avvio, ulteriori tick o una terminazione del processo. La riconciliaz
 ## Riconciliazione esplicita
 
 `reconcile_retained()` richiede una outbox riaperta e lo stesso journal. Verifica snapshot, eventi e byte degli
-artefatti; esegue una GET worker autenticata tramite il trasporto già governato. Identità remota correlata,
+artefatti. Per COMPLETED usa il validatore esistente `queue_receipt` per verificare digest, identità e parent
+di `report.json` contro il sigillo journal, prima di qualunque GET o nuovo ACK. Non accoda né trasmette
+la receipt restituita dal validatore; `localCompletedReportVerified` distingue questa verifica dagli altri stati.
+Poi esegue una GET worker autenticata tramite il trasporto già governato. Identità remota correlata,
 riconciliazione della sola ultima ricevuta: ACK quando i byte/stadio coincidono, oppure evidenza di recovery
 come previsto dalla outbox. Nessuna POST, lease renewal, riscrittura del journal o avvio nativo.
 La GET può materializzare la scadenza del lease sul server secondo il contratto esistente; non è una promessa
@@ -49,17 +52,22 @@ non ricrea lease/ownership e non rende validi i dati scientifici. La risoluzione
 
 ## Verifica e limiti
 
-Dodici prove nuove con mock di processo e MemoryStore: percorso COMPLETED, cadence/no replay, cancel prima
+Tredici prove nuove con mock di processo e MemoryStore: percorso COMPLETED, cadence/no replay, cancel prima
 di start, ACK perso e riconciliazione senza POST, ACK storico/stato remoto divergente, PREPARED e root alternative,
 clock invalido/regressione, byte corrotti, preparazione parziale conservata, timeout senza process kill,
 identità remota conflittuale, outbox live rifiutata ed eccezione inattesa durante start senza replay.
+Rapporto COMPLETED corrotto, anche JSON valido con conteggi cambiati: rifiutato prima di GET/ACK.
 Non sono native/cloud OAT; nessuna nuova elaborazione,
 solve, detection o aperture eseguita. CI Windows/Linux e revisioni exact-head restano gate della PR.
 CALLER_REPORTED_NOT_ATTESTED, History a monte NOT_ATTESTED, NORMALIZED_SAMPLE_SUM e science NOT_VALIDATED
 restano invariati. Nessuna unità, variance, significatività, soglia o classificazione nuova.
-Suite locale complessiva: 108 prove Python, 107 PASS e un symlink skip per privilegi Windows;
+Suite locale complessiva: 109 prove Python, 108 PASS e un symlink skip per privilegi Windows;
 104 prove Node PASS. MkDocs strict, fixture portale e coerenza/generator roadmap/projection PASS.
 Questi risultati locali non sostituiscono CI e review sul commit esatto.
+La prima ARB sullo SHA `032243d1097b5d251f9d4542fe874353857a61b5` ha richiesto remediation
+per un P2: report COMPLETED corrotto non controllato dalla sola verifica snapshot/checkpoint.
+Il nuovo ramo usa il validatore report già esistente e aggiunge il caso negativo prima di GET/ACK;
+nuovi gate exact-head e ARB/RQ richiesti. Rapporti e prima revisione conservati nell'archivio privato.
 
 BKL-051 OPEN: claim completo, recovery server, workflow scientifico, noise/covariance/passband, validation,
 policy, accessi/PC/cloud OAT e reporting CBAT/TNS/VSX/MPC ancora aperti. Runtime e invii disattivati.

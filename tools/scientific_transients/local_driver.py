@@ -107,8 +107,13 @@ def reconcile_retained(journal, outbox, transport):
     """
     require(outbox.reopened and outbox.journal is journal, 'DRIVER_REOPENED_OUTBOX_REQUIRED')
     events = journal._events()
-    journal._snapshot()
-    journal._verify_artifacts(events)
+    completed_report_verified = events[-1]['kind'] == 'COMPLETED'
+    if completed_report_verified:
+        # Existing journal verifier binds report bytes, identity and parent to the sealed event.
+        # This is inspection only: queue_receipt neither enqueues nor transmits anything.
+        journal.queue_receipt(1)
+    else:
+        journal._verify_artifacts(events)
     rows = outbox._records()
     remote = transport.request('/v1/transient-analysis/worker/jobs/' + outbox.identity['jobId'])
     observed_schema(remote, outbox.identity)
@@ -116,6 +121,7 @@ def reconcile_retained(journal, outbox, transport):
     current_match = bool(rows and remote['lastReceipt'] == rows[-1][1]['receipt']
                          and remote['state'] == rows[-1][1]['receipt']['stage'])
     return {'localState': events[-1]['kind'], 'remoteState': remote['state'],
+            'localCompletedReportVerified': completed_report_verified,
             'cancelRequested': remote['cancelRequested'], 'receiptDisposition': disposition,
             'currentRemoteMatchesLastReceipt': current_match,
             'restartReplay': False, 'processOwnership': 'NOT_REACQUIRED',

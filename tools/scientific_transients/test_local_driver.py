@@ -1,9 +1,10 @@
 """Mock process and MemoryStore integration; no native or cloud execution."""
 import datetime as dt
+import json
 import unittest
 from unittest.mock import patch
 
-from tools.pixinsight.local_pilot.broker import ProtocolError
+from tools.pixinsight.local_pilot.broker import ProtocolError, encode
 from tools.scientific_transients import test_native_supervisor as fixtures
 from tools.scientific_transients.attempt_journal import AttemptJournal
 from tools.scientific_transients.receipt_coordinator import ReceiptOutbox
@@ -135,6 +136,20 @@ class DriverTests(unittest.TestCase):
         self.time = 2
         with self.assertRaises(ProtocolError): d.step()
         self.assertEqual(self.f.starts, 0)
+
+    def test_completed_report_verified_and_corruption_refused_before_remote_get(self):
+        d = self.prepare(); d.start(); self.f.native('COMPLETED'); self.time = 2; d.step()
+        journal, outbox = self.reopened(d)
+        result = reconcile_retained(journal, outbox, self.f.transport)
+        self.assertTrue(result['localCompletedReportVerified'])
+        self.assertTrue(result['currentRemoteMatchesLastReceipt'])
+        path = journal.directory / 'report.json'
+        modified = json.loads(path.read_bytes()); modified['qualityCounts']['measured'] = 1
+        for raw in [b'corrupted', encode(modified)]:
+            path.write_bytes(raw)
+            with patch.object(self.f.transport, 'request', wraps=self.f.transport.request) as request:
+                with self.assertRaises(ProtocolError): reconcile_retained(journal, outbox, self.f.transport)
+                request.assert_not_called()
 
 
 if __name__ == '__main__':
