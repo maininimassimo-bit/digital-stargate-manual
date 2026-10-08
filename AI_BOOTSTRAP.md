@@ -2,7 +2,7 @@
 
 ## Stato corrente — 8 ottobre 2026
 
-P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta: trasporto concreto approvato Owner, richieste/stato nel servizio privato esistente e dettagli/immagini sul PC, worker dedicato. Coda separata implementata e sottoposta a test sintetici/HTTP loopback; nessun deployment, IAM o credenziale modificati. S1/S2 scientifiche aperte, S3 parziale, S4 iniziata ma percorso Owner completo mancante, S5 non accettata. Soglie e incertezza completa restano gated; nessuna classificazione o fotografia pubblicata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](docs/project/HANDOVER_2026-10-08-BKL051-PRIVATE-QUEUE.md). Consegna della coda ancora nei propri gate di rilascio.
+P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #505 integrata e verificata sul merge `d15529722cdd9e2ac8b9a629e2fc2aff4cd83e01`: coda privata candidata, disabilitata per default; nessun deployment, IAM o credenziale modificati. Owner approva anche dossier e segnalazioni CBAT/TNS/AAVSO-VSX/MPC, incluse ricerca di oggetti mobili e capacità di invio autonomo condizionata; funzionalità da realizzare, nessun invio attivato. S1/S2 scientifiche aperte, S3 parziale, S4 incompleta, S5 non accettata. Soglie, policy autonoma e accettazione finale restano gated. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](docs/project/HANDOVER_2026-10-08-BKL051-REPORTING-PLAN.md).
 
 ## Snapshot storico — 7 ottobre 2026
 
@@ -13,7 +13,7 @@ P6 accettata operativamente dall’Owner il 7 ottobre 2026 con tutti i limiti de
 
 | Campo | Valore |
 |---|---|
-| Versione | 8.16 |
+| Versione | 8.17 |
 | Baseline | 08/10/2026 |
 | Stato | Current root bootstrap — P6 accepted; BKL-051 Owner local/query direction approved, S1 open, S2 native solves with independent validation pending; BKL-043 lifecycle pending; S10 unavailable |
 
@@ -24,7 +24,7 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni e proje
 
 ## 2. Sequenza obbligatoria di lettura
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-10-08-BKL051-PRIVATE-QUEUE.md`
+2. `docs/project/HANDOVER_2026-10-08-BKL051-REPORTING-PLAN.md`
 3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
