@@ -1,5 +1,9 @@
 # Digital StarGate Enterprise Architecture Context
 
+## Stato corrente — 8 ottobre 2026
+
+P6 resta Accepted nei limiti del dossier. BKL-051: direzione locale/portale e query minime approvate; evidenze private successive riconciliate e ispettore offline di misura proposto, con 24 test locali. Astrometria/ripetibilità, trasferimento condizionale di unità, iniezioni sintetiche e casi pubblici multi-epoca sono prove parziali, non validazione completa. S1/S2 aperte, S3 parziale, nessun runtime S4 o accettazione S5; soglie, trasporto concreto e modello completo del rumore restano gated. Nessuna classificazione o fotografia pubblicata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](HANDOVER_2026-10-08-BKL051-MEASUREMENT.md). Consegna di questo incremento ancora da verificare nei gate della PR.
+
 ## Aggiornamento corrente — 7 ottobre 2026
 
 P6 accettata operativamente dall’Owner il 7 ottobre 2026 con tutti i limiti del dossier, dopo collaudi reali e HOO completato. [Chiusura](BKL-049-EXT-PIAI-P6-CLOSURE-2026-10-07.md); [handover corrente](HANDOVER_2026-10-07-P6-CLOSURE.md). BKL-051 è il prossimo package approvato, preparazione S1; sviluppo subordinato alla consegna P6 verificata nella PR #499. Nessun modulo implementato o runtime attivato. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10 e Safety invariati. Le sezioni precedenti sono snapshot storici, superati soltanto nei perimetri della chiusura accettata.

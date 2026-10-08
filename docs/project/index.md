@@ -2,7 +2,7 @@
 
 ## Stato corrente — 8 ottobre 2026
 
-L'Owner ha approvato la proposta PC locale + consultazione privata nel portale, le query minime a ESA Gaia/NASA-IPAC IRSA/MAST e il criterio raccomandato per scegliere il campo pilota. Nessun campo è stato nominato: selezione locale guidata da date reali e stessa banda. [Handover corrente](HANDOVER_2026-10-08-BKL051-S2.md). S1 non è chiusa; S2 avviata come verifica limitata di ingressi/accesso, senza astrometria accettata, classificazioni, soglie operative o runtime del modulo. P6 resta Accepted con limiti. Trasporto privato concreto ancora da revisionare; nessuna nuova risorsa, credenziale o pubblicazione di fotografie. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati.
+P6 resta Accepted nei limiti del dossier. BKL-051: direzione locale/portale e query minime approvate; evidenze private successive riconciliate e ispettore offline di misura proposto, con 24 test locali. Astrometria/ripetibilità, trasferimento condizionale di unità, iniezioni sintetiche e casi pubblici multi-epoca sono prove parziali, non validazione completa. S1/S2 aperte, S3 parziale, nessun runtime S4 o accettazione S5; soglie, trasporto concreto e modello completo del rumore restano gated. Nessuna classificazione o fotografia pubblicata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](HANDOVER_2026-10-08-BKL051-MEASUREMENT.md). Consegna di questo incremento ancora da verificare nei gate della PR.
 
 ## Snapshot storico — 7 ottobre 2026
 
@@ -24,7 +24,7 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | Documento | Ruolo |
 |---|---|
 | `AI_BOOTSTRAP.md` | Root bootstrap |
-| [BKL-051 S2 Handover 08/10/2026](HANDOVER_2026-10-08-BKL051-S2.md) | Handover corrente |
+| [BKL-051 Measurement Handover 08/10/2026](HANDOVER_2026-10-08-BKL051-MEASUREMENT.md) | Handover corrente |
 | [Current Technical Baseline 07/10/2026](CURRENT_TECHNICAL_BASELINE_2026-10-07.md) | Baseline tecnica corrente |
 | [DSG-AEM-001 Continuous Autonomous Execution Mandate](DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md) | Mandato owner-authorized e deroga ruleset condizionata |
 | [PR #196 DSG-AEM-001 AI-Assisted ARB Review](../architecture/reviews/ARB-PR196-DSG-AEM-001-Governance-AI-Assisted-Review-2026-09-15.md) | Approved — 99/100; non equivalente ad approvazione umana indipendente |

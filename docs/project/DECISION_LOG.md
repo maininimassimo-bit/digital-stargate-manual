@@ -1,5 +1,9 @@
 # Decision Log
 
+## 2026-10-08 — BKL-051 evidenze di misura proposte, senza policy operativa
+
+Riconciliate le prove private posteriori alla PR #501 e preparata un’ispezione offline delle evidenze, con nove nuovi test (24 complessivi). [Dossier e residui](BKL-051-S1-MEASUREMENT-EVIDENCE-2026-10-08.md), [handover](HANDOVER_2026-10-08-BKL051-MEASUREMENT.md). Non è una nuova decisione Owner su soglie o trasporto: ADR-020 rimane direction-only, S1/S2 aperte, S3 parziale. Due aperture pubbliche difettose/sature vengono rifiutate localmente; le restanti non diventano misure validate. Sorgenti raggruppate richiedono trattamento separato, nessun default di produzione promosso. Nessuna fotografia o dettaglio privato pubblicato. Consegna subordinata a CI/review/merge/post-merge; P6/F4/F5/BKL-050/S10/Safety invariati.
+
 ## Aggiornamento corrente — 7 ottobre 2026
 
 P6 accettata operativamente dall’Owner il 7 ottobre 2026 con tutti i limiti del dossier, dopo collaudi reali e HOO completato. [Chiusura](BKL-049-EXT-PIAI-P6-CLOSURE-2026-10-07.md); [handover corrente](HANDOVER_2026-10-07-P6-CLOSURE.md). BKL-051 è il prossimo package approvato, preparazione S1; sviluppo subordinato alla consegna P6 verificata nella PR #499. Nessun modulo implementato o runtime attivato. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10 e Safety invariati. Le sezioni precedenti sono snapshot storici, superati soltanto nei perimetri della chiusura accettata.

@@ -1,5 +1,9 @@
 # Technical Debt Register
 
+## BKL-051 — residui di validazione, 8 ottobre 2026
+
+L’[ispezione proposta delle evidenze](BKL-051-S1-MEASUREMENT-EVIDENCE-2026-10-08.md) non introduce un runtime operativo. Parser di trasporto stretto, verifica indipendente delle dichiarazioni/byte, modello completo di incertezza, gestione delle sorgenti confuse, validazione dei falsi positivi e adapter privato rimangono acceptance gate S1–S5, non capacità completate o fallback impliciti. Nessuna soglia numerica accettata, nessuna nuova infrastruttura o deroga ai gate. P6 resta Accepted nei propri limiti.
+
 ## Riesame del 7 ottobre 2026
 
 L'inserimento di [BKL-051](BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md) è pianificazione e non introduce codice o nuovo debito implementativo. Copertura dei provider, comparabilità fotometrica, falsi positivi, soglie scientifiche e scelte infrastrutturali restano decisioni e gate S1 del piano, da validare dopo P6; non sono debiti dichiarati risolti. Il registro esistente resta invariato.

@@ -19,4 +19,4 @@ jobs:
         with:
           node-version: '22'
       - name: Verify proposed intake rejects unsafe scientific claims without network
-        run: node --test tools/scientific_transients/contract.test.mjs tools/scientific_transients/reference.test.mjs
+        run: node --test tools/scientific_transients/contract.test.mjs tools/scientific_transients/reference.test.mjs tools/scientific_transients/measurement.test.mjs
