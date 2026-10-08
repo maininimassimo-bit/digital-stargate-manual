@@ -2,7 +2,7 @@
 
 ## Stato corrente — 8 ottobre 2026
 
-L'Owner ha approvato la proposta PC locale + consultazione privata nel portale, le query minime a ESA Gaia/NASA-IPAC IRSA/MAST e il criterio raccomandato per scegliere il campo pilota. Nessun campo è stato nominato: selezione locale guidata da date reali e stessa banda. [Handover corrente](docs/project/HANDOVER_2026-10-08-BKL051-S2.md). S1 non è chiusa; S2 avviata come verifica limitata di ingressi/accesso, senza astrometria accettata, classificazioni, soglie operative o runtime del modulo. P6 resta Accepted con limiti. Trasporto privato concreto ancora da revisionare; nessuna nuova risorsa, credenziale o pubblicazione di fotografie. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati.
+P6 resta Accepted nei limiti del dossier. BKL-051: direzione locale/portale e query minime approvate; evidenze private successive riconciliate e ispettore offline di misura proposto, con 24 test locali. Astrometria/ripetibilità, trasferimento condizionale di unità, iniezioni sintetiche e casi pubblici multi-epoca sono prove parziali, non validazione completa. S1/S2 aperte, S3 parziale, nessun runtime S4 o accettazione S5; soglie, trasporto concreto e modello completo del rumore restano gated. Nessuna classificazione o fotografia pubblicata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](docs/project/HANDOVER_2026-10-08-BKL051-MEASUREMENT.md). Consegna di questo incremento ancora da verificare nei gate della PR.
 
 ## Snapshot storico — 7 ottobre 2026
 
@@ -13,7 +13,7 @@ P6 accettata operativamente dall’Owner il 7 ottobre 2026 con tutti i limiti de
 
 | Campo | Valore |
 |---|---|
-| Versione | 8.12 |
+| Versione | 8.13 |
 | Baseline | 08/10/2026 |
 | Stato | Current root bootstrap — P6 accepted; BKL-051 Owner local/query direction approved, S1 open, S2 native solves with independent validation pending; BKL-043 lifecycle pending; S10 unavailable |
 
@@ -24,7 +24,7 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni e proje
 
 ## 2. Sequenza obbligatoria di lettura
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-10-08-BKL051-S2.md`
+2. `docs/project/HANDOVER_2026-10-08-BKL051-MEASUREMENT.md`
 3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
