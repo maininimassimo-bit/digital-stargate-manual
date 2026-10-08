@@ -152,7 +152,8 @@ class ReceiptOutbox:
             write_new(path / "ack.json", {"receiptSha256": sha, "remote": remote})
             return "ACKNOWLEDGED"
         # Restarts never renew a lease or deliver an old active-stage receipt.
-        if self.reopened or remote["state"] in TERMINAL or remote["cancelRequested"] or remote["sequence"] != message["receipt"]["sequence"] - 1:
+        cancel_terminal = message["receipt"]["stage"] in {"CANCELLED", "RECOVERY_REQUIRED"}
+        if self.reopened or remote["state"] in TERMINAL or (remote["cancelRequested"] and not cancel_terminal) or remote["sequence"] != message["receipt"]["sequence"] - 1:
             write_new(path / "recovery.json", {"receiptSha256": sha, "remote": remote, "state": "RECONCILIATION_REQUIRED"})
             return "RECONCILIATION_REQUIRED"
         return "NOT_ACKNOWLEDGED"

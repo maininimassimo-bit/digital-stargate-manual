@@ -61,6 +61,16 @@ class CoordinatorTests(unittest.TestCase):
             self.assertNotIn(self.lease.encode(), raw)
             self.assertNotIn(b"leaseToken", raw); self.assertNotIn(b"Bearer", raw)
 
+    def test_requested_cancel_accepts_non_renewing_cancel_terminal(self):
+        self.queue.cancel(self.claim['jobId']); self.journal.terminal('CANCELLED'); self.outbox.enqueue()
+        self.assertEqual(self.deliver(), 'ACKNOWLEDGED')
+        self.assertEqual(self.queue.status(self.claim['jobId'])['state'], 'CANCELLED')
+
+    def test_requested_cancel_accepts_non_renewing_recovery_terminal(self):
+        self.queue.cancel(self.claim['jobId']); self.journal.terminal('RECOVERY_REQUIRED'); self.outbox.enqueue()
+        self.assertEqual(self.deliver(), 'ACKNOWLEDGED')
+        self.assertEqual(self.queue.status(self.claim['jobId'])['state'], 'RECOVERY_REQUIRED')
+
     def test_lost_response_reconciles_without_second_post(self):
         self.running(); self.transport.lose = True
         with self.assertRaisesRegex(ProtocolError, "UNCONFIRMED"): self.deliver()

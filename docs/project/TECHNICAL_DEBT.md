@@ -182,3 +182,7 @@ P6 delivery verificata sulla PR #499 e sul merge `0bd6e20df0b449cd163543ed30bd69
 ## BKL-051 — produttore nativo, 8 ottobre 2026
 
 [Adapter e collector candidati](BKL-051-S4-NATIVE-APERTURE-2026-10-08.md): kernel installato, unità normalizzate e History/receipt conservate. Prove numeriche native e MemoryStore locale, non full workflow scientifico/cloud OAT. Restano supervisore operativo, recovery, report/calibrazione/variance/policy/UI e reporting. Nessuna attivazione o acceptance finale.
+
+## BKL-051 — supervisore nativo, 8 ottobre 2026
+
+[Lifecycle candidato](BKL-051-S4-NATIVE-SUPERVISOR-2026-10-08.md): avvio dopo ACK, handle corrente, cancel al punto sicuro; timeout/receipt mancanti non autorizzano terminate/replay. Prove componente native e MemoryStore, non cloud OAT o validazione scientifica. Restano driver/recovery/UI/OAT e workflow/report/variance/policy/reporting completi.

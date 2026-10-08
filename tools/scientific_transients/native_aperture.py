@@ -69,7 +69,7 @@ def prepare_run(input_path, run_root, operation_ref, image, parameters, targets,
     return directory
 
 
-def collect_run(directory, expected_operation, *, engine=ENGINE, catalog=CATALOG):
+def inspect_prepared_run(directory, expected_operation, *, engine=ENGINE, catalog=CATALOG):
     directory = safe_path(directory)
     require(opaque(expected_operation) and directory.name == expected_operation, 'AP_OPERATION')
     manifest, _ = read_json(directory / 'parameters.json')
@@ -89,6 +89,13 @@ def collect_run(directory, expected_operation, *, engine=ENGINE, catalog=CATALOG
             and manifest['runtime']['engineSha256'] == preflight['engine']['sha256']
             and manifest['runtime']['catalogSha256'] == preflight['catalog']['sha256']
             and expected_input_sha == preflight['input']['sha256'], 'AP_RUNTIME_BINDING')
+    return manifest
+
+
+def collect_run(directory, expected_operation, *, engine=ENGINE, catalog=CATALOG):
+    directory = safe_path(directory)
+    manifest = inspect_prepared_run(directory, expected_operation, engine=engine, catalog=catalog)
+    image, expected_input_sha = manifest['input'], manifest['input']['sha256']
     terminal, _ = read_json(directory / 'terminal.json')
     require(terminal.get('state') == 'COMPLETED', 'AP_RUN_NOT_COMPLETED')
     fields(terminal, {'protocol','operationRef','state','runtime','inputSha256','imageIndex','rows','changedPixels',
