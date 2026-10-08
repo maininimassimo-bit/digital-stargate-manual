@@ -2,6 +2,10 @@
 
 Stato: preparazione offline proposta, non contratto operativo accettato. P6 rimane Accepted nei limiti del dossier; S1/S2 restano aperte. Nessun runtime del modulo, soglia, classificazione o trasporto privato attivato. La decisione Owner [ADR-020](../architecture/ADR-020-Private-Scientific-Transient-Analysis.md) resta invariata.
 
+## Riconciliazione successiva delle origini pixel
+
+[Contratto e ramo corretto](BKL-051-S2-PIXEL-CONVENTION-2026-10-08.md). Export WCS fitted nativi richiedono indice+0,5 una sola volta; aperture sample-index usano distanze campione-campione. Le vecchie misure e diagnostiche restano storiche, non valide per inferenza. Coorte comune raccordata dopo correzione; budget dipendenti dalle aperture ancora da riconciliare. Nessuna soglia/precisione scientifica accettata.
+
 ## Evidenze riconciliate
 
 Le prove private successive alla PR #501 comprendono selezione di qualità sulle esposizioni originali, tre epoche distinte con ripetizioni nella stessa notte, soluzioni astrometriche native e confronto esterno limitato. Pixel dei derivati astrometrici identici e originali invariati. Il confronto esterno non certifica epoca/moto proprio, indipendenza dei cataloghi o accuratezza fotometrica.
