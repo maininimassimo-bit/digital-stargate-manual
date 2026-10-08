@@ -721,3 +721,8 @@ L'Owner ha approvato la proposta PC locale + consultazione privata nel portale, 
 ## BKL-051 — driver locale candidato, 8 ottobre 2026
 
 PR #515 integrata e post-merge verificata; [driver locale e riconciliazione](BKL-051-S4-LOCAL-DRIVER-2026-10-08.md) candidati per una prenotazione fornita dal chiamante fidato. Nessun claim, replay, credenziale su disco o reset della recovery server; ACK storico distinto dallo stato corrente. Tredici test mock/MemoryStore, non OAT nativa/cloud. Claim sicuro e recovery server restano aperti insieme al workflow scientifico, policy, reporting e acceptance. Runtime/invii disattivati; BKL-051 OPEN. Gate exact-head nella PR; rollback conservativo tramite revert, nessun cleanup delle evidenze.
+
+
+## BKL-051 — prenotazione esplicita candidata, 9 ottobre 2026
+
+PR #516 rilasciata e verificata. [Intent di prenotazione](BKL-051-S4-RESERVATION-INTENT-2026-10-09.md) candidato: selezione esplicita, singola POST, nessun lease su duplicazione o replay dopo incertezza. Recovery server e requisiti scientifici/OAT restano aperti; nessuna attivazione runtime o invio. Gate exact-head pending. BKL-051 OPEN.

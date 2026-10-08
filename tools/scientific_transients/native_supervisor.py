@@ -13,6 +13,24 @@ from tools.scientific_transients.queue import TERMINAL, digest, fields
 EXE = Path('C:/Program Files/PixInsight/bin/PixInsight.exe')
 
 
+def inspect_registered_prepared_run(registry, directory, operation_ref, binding, manifest_sha256,
+                                    *, engine=ENGINE, catalog=CATALOG):
+    """Shared preflight for the trusted driver/reservation caller; no launch or network."""
+    directory = safe_path(directory)
+    manifest = inspect_prepared_run(directory, operation_ref, engine=engine, catalog=catalog)
+    require(not (directory / 'started.json').exists() and not (directory / 'terminal.json').exists(),
+            'SUPERVISOR_REPLAY_REFUSED')
+    registered = registry.verify(binding['bindingRef'], manifest_sha256)
+    require(registered['binding'] == binding, 'SUPERVISOR_BINDING')
+    for role, name in [('INPUT', 'input.xisf'), ('PARAMETERS', 'parameters.json'), ('ALGORITHM', 'native_aperture.jsh')]:
+        relative = (directory / name).relative_to(registry.artifacts).as_posix()
+        expected = fingerprint(directory / name)
+        require(any(row['role'] == role and row['path'] == relative
+                    and all(row[k] == expected[k] for k in ['sha256', 'bytes'])
+                    for row in registered['files']), 'SUPERVISOR_REGISTERED_BYTES')
+    return manifest
+
+
 class NativeProcess:
     """Owns only the handle created here; persisted PIDs never grant ownership after restart."""
     def __init__(self, directory):
@@ -58,19 +76,9 @@ class NativeSupervisor:
                   'runtime': self.manifest['runtime'], 'scienceValidation': 'NOT_VALIDATED'})
 
     def _preflight(self):
-        manifest = inspect_prepared_run(self.directory, self.operation, engine=self.engine, catalog=self.catalog)
-        require(not (self.directory / 'started.json').exists() and not (self.directory / 'terminal.json').exists(),
-                'SUPERVISOR_REPLAY_REFUSED')
         anchor = self.journal.anchor['identity']
-        registered = self.registry.verify(anchor['binding']['bindingRef'], anchor['manifestSha256'])
-        require(registered['binding'] == anchor['binding'], 'SUPERVISOR_BINDING')
-        for role, name in [('INPUT', 'input.xisf'), ('PARAMETERS', 'parameters.json'), ('ALGORITHM', 'native_aperture.jsh')]:
-            relative = (self.directory / name).relative_to(self.registry.artifacts).as_posix()
-            expected = fingerprint(self.directory / name)
-            require(any(row['role'] == role and row['path'] == relative
-                        and all(row[k] == expected[k] for k in ['sha256', 'bytes'])
-                        for row in registered['files']), 'SUPERVISOR_REGISTERED_BYTES')
-        return manifest
+        return inspect_registered_prepared_run(self.registry, self.directory, self.operation,
+                    anchor['binding'], anchor['manifestSha256'], engine=self.engine, catalog=self.catalog)
 
     def _remote(self):
         value = self.transport.request('/v1/transient-analysis/worker/jobs/' + self.outbox.identity['jobId'])
