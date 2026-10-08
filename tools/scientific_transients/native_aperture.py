@@ -16,6 +16,24 @@ LIBRARY = Path(__file__).with_suffix('.jsh')
 def finite(value): return type(value) in {int, float} and math.isfinite(value)
 
 
+def validate_row(row, target):
+    fields(row, {'sourceRef','x','y','clipped','backgroundAvailable','fluxNormalizedSampleSum','area','background',
+                 'skyNoiseDiagnostic','skySampleCount','fullVariance','significance','scienceValidation'})
+    require(all(row[k] == target[k] for k in ['sourceRef','x','y']) and type(row['clipped']) is bool
+            and type(row['backgroundAvailable']) is bool and row['fullVariance'] is None
+            and row['significance'] is None and row['scienceValidation'] == 'NOT_VALIDATED', 'AP_ROW')
+    require(type(row['skySampleCount']) is int and row['skySampleCount'] >= 0, 'AP_ROW')
+    if row['clipped']:
+        require(row['backgroundAvailable'] is False and row['area'] is None and row['skySampleCount'] == 0, 'AP_ROW')
+    else:
+        require(finite(row['area']) and row['area'] > 0 and row['backgroundAvailable'] == (row['skySampleCount'] > 0), 'AP_ROW')
+    if row['backgroundAvailable']:
+        require(all(finite(row[k]) for k in ['fluxNormalizedSampleSum','background','skyNoiseDiagnostic'])
+                and row['skyNoiseDiagnostic'] >= 0, 'AP_ROW')
+    else:
+        require(all(row[k] is None for k in ['fluxNormalizedSampleSum','background','skyNoiseDiagnostic']), 'AP_ROW')
+
+
 def validate(image, parameters, targets):
     fields(image, {'imageIndex', 'width', 'height', 'channels', 'linearity'})
     require(type(image['imageIndex']) is int and 0 <= image['imageIndex'] < 16, 'AP_IMAGE_INDEX')
@@ -112,22 +130,8 @@ def collect_run(directory, expected_operation, *, engine=ENGINE, catalog=CATALOG
     require(type(terminal['rows']) is list and len(terminal['rows']) == len(manifest['targets']), 'AP_ROWS')
     clipped = 0
     for i, (row, target) in enumerate(zip(terminal['rows'], manifest['targets']), 1):
-        fields(row, {'sourceRef','x','y','clipped','backgroundAvailable','fluxNormalizedSampleSum','area','background',
-                     'skyNoiseDiagnostic','skySampleCount','fullVariance','significance','scienceValidation'})
-        require(all(row[k] == target[k] for k in ['sourceRef','x','y']) and type(row['clipped']) is bool
-                and type(row['backgroundAvailable']) is bool and row['fullVariance'] is None
-                and row['significance'] is None and row['scienceValidation'] == 'NOT_VALIDATED', 'AP_ROW')
-        require(type(row['skySampleCount']) is int and row['skySampleCount'] >= 0, 'AP_ROW')
-        if row['clipped']:
-            clipped += 1
-            require(row['backgroundAvailable'] is False and row['area'] is None and row['skySampleCount'] == 0, 'AP_ROW')
-        else:
-            require(finite(row['area']) and row['area'] > 0 and row['backgroundAvailable'] == (row['skySampleCount'] > 0), 'AP_ROW')
-        if row['backgroundAvailable']:
-            require(all(finite(row[k]) for k in ['fluxNormalizedSampleSum','background','skyNoiseDiagnostic'])
-                    and row['skyNoiseDiagnostic'] >= 0, 'AP_ROW')
-        else:
-            require(all(row[k] is None for k in ['fluxNormalizedSampleSum','background','skyNoiseDiagnostic']), 'AP_ROW')
+        validate_row(row, target)
+        clipped += row['clipped']
         require(read_json(directory / ('measurement-' + str(i).zfill(5) + '.json'))[0] == row, 'AP_ROW_CHANGED')
     # Kernel reads do not add process instances to native image History; preserve both exports and receipt.
     history = {'scope': 'NATIVE_OPENED_VIEW_HISTORY_PLUS_READ_ONLY_KERNEL_RECEIPT', 'upstreamAcquisitionHistory': 'NOT_ATTESTED',

@@ -194,3 +194,8 @@ P6 delivery verificata sulla PR #499 e sul merge `0bd6e20df0b449cd163543ed30bd69
 ## BKL-051 — comandi Owner, 8 ottobre 2026
 
 [Incremento candidato](BKL-051-S4-OWNER-ACTIONS-2026-10-08.md): contratti di coda esistenti, selezione esplicita e intent immutabile conservato prima del POST, riconciliazione dopo lost-ack e dichiarazione Owner sul report esatto. Nessun runtime/claim/query/invio. Storage per sessione/tab, non backup durevole; recovery e cloud OAT pendenti.
+
+
+## BKL-051 — rapporto locale, 8 ottobre 2026
+
+[Incremento candidato](BKL-051-S4-LOCAL-REPORT-2026-10-08.md): esportazione passiva privata del journal sigillato, digest tecnico distinto dal derivato, misure del kernel e limiti conservati. Non modifica coda/authority o acceptance. Driver/recovery, workflow scientifico completo, OAT e reporting restano aperti; nessun nuovo collaudo nativo o attivazione. Gate nella PR.
