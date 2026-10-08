@@ -695,3 +695,7 @@ L'Owner ha approvato la proposta PC locale + consultazione privata nel portale, 
 ## BKL-051 — coordinatore ricevute, 8 ottobre 2026
 
 [Library/loopback candidati](BKL-051-S4-RECEIPT-COORDINATOR-2026-10-08.md): outbox senza credenziali, GET worker dedicata e ACK dell'envelope completo; perdita risposta e restart conservati senza rilancio. Restano producer/cancel/crash/recovery operativa, scientific report/UI/cloud OAT e scientific validation/reporting. Nessuna attivazione o soglia/acceptance.
+
+## BKL-051 — produttore nativo, 8 ottobre 2026
+
+[Adapter e collector candidati](BKL-051-S4-NATIVE-APERTURE-2026-10-08.md): kernel installato, unità normalizzate e History/receipt conservate. Prove numeriche native e MemoryStore locale, non full workflow scientifico/cloud OAT. Restano supervisore operativo, recovery, report/calibrazione/variance/policy/UI e reporting. Nessuna attivazione o acceptance finale.
