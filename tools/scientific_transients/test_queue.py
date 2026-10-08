@@ -226,6 +226,14 @@ class HttpTests(unittest.TestCase):
         self.assertEqual(self.store.items, {})
         self.assertEqual(self.request(base, BINDING, TOKEN)[0], 200)
 
+    def test_repeated_denied_posts_deliver_403_without_storage_mutation(self):
+        # Exercise the Windows unread-body reset path, not just a single timing sample.
+        for i in range(30):
+            value = {"fixture": "x" * (i * 100)}
+            code, response = self.request("/v1/transient-analysis/jobs", value, "non-owner", True)
+            self.assertEqual((code, response), (403, {"error": "ACCESS_DENIED"}))
+        self.assertEqual(self.store.items, {})
+
     def test_owner_worker_role_separation_and_private_http_flow(self):
         base = "/v1/transient-analysis"
         self.request(base + "/worker/register", BINDING, TOKEN)
