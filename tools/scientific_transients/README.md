@@ -8,7 +8,7 @@ Run `node --test tools/scientific_transients/contract.test.mjs tools/scientific_
 
 The limited fixture is synthetic. This tool does not change AP-013/AP-014 or ADR-019 registration/admission/quality semantics. Existing original source text, exact revisions, registry authority and byte-verification remain external prerequisites. Unknown acquisition dates and upstream History remain unknown. Input filter hashes do not establish band compatibility, and disjoint declarations do not independently prove frame independence.
 
-See the [S1 proposal](../../docs/project/BKL-051-S1-FEASIBILITY-AND-CONTRACT-2026-10-07.md). Operational use, provider queries for an Owner field, new infrastructure/dependencies and numerical scientific thresholds remain pending the documented decisions and validation.
+See the [S1 proposal](../../docs/project/BKL-051-S1-FEASIBILITY-AND-CONTRACT-2026-10-07.md) and subsequent [ADR-020 Owner direction](../../docs/architecture/ADR-020-Private-Scientific-Transient-Analysis.md). Minimal Gaia/IRSA/MAST queries and the local PC/private portal direction were approved; this offline tool itself performs no query. Operational runtime/transport, new infrastructure and numerical scientific thresholds remain gated by their documented decisions and validation.
 
 `reference.mjs` inspects bounded public CSV samples offline: exact string IDs, PS1 unavailable-magnitude sentinels and Gaia TCB epochs/proper-motion convention. It does not infer catalog completeness, quality, match absence or variability. Six negative/known-answer tests are synthetic and have no external I/O; the raw sample responses are retained separately in the private preparation dossier.
 
