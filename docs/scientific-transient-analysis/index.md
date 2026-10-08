@@ -25,6 +25,7 @@
     <p data-dsg-transients-observed></p>
     <div data-dsg-transients-jobs></div>
   </section>
+  <p>Per una recovery, verifica sul PC che il processo sia fermo e le evidenze conservate. La chiusura richiede la tua dichiarazione e l’impronta del dossier locale: conserva il tentativo incerto e consente solo un nuovo lavoro distinto.</p>
   <p>Il completamento tecnico non conferma un candidato o una scoperta. Le valutazioni già registrate dall’Owner restano dichiarazioni distinte dalla validazione scientifica. Il download contiene solo la ricevuta dello stato: non verifica i byte del rapporto locale.</p>
   <p><a href="../project/BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07/">Stato e piano della funzione</a> · <a href="../pixinsight-pilot/">Elabora con PixInsight e IA</a></p>
   <noscript>La consultazione privata richiede JavaScript e l’accesso Owner.</noscript>

@@ -2,7 +2,7 @@
 
 ## Stato corrente — 9 ottobre 2026
 
-P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #516 integrata su `2ad11bf0551d89909d179df1b451464fff44f2c0`: driver locale e riconciliazione rilasciati, 16 gate exact-head, ARB/RQ e 15 workflow post-merge SUCCESS; cinque endpoint Pages verificati. Nuovo incremento candidato: prenotazione esplicita di un solo job tramite intent locale esclusivo. Una risposta persa o duplicata non autorizza retry, adozione del lease o avvio nativo. Nessuna nuova elaborazione PixInsight. Recovery server, workflow scientifico, accessi/PC/cloud OAT, validation, policy e reporting restano aperti. Runtime e invii disattivati; unità normalizzate, variance/significatività sconosciute e NOT_VALIDATED invariati. S1/S2 aperte, S3 parziale, S4 incompleta, S5 non accettata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](docs/project/HANDOVER_2026-10-09-BKL051-RESERVATION-INTENT.md).
+P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #517 integrata su `544fb860522918d0ffd00e8b172865abe647a8fa`: prenotazione esplicita con intent conservato rilasciata; 17 workflow exact-head e 17 post-merge SUCCESS, ARB/RQ approvate e cinque endpoint Pages verificati. Nuovo incremento candidato: chiusura dichiarata della recovery da parte dell’Owner, approvata il 9 ottobre. Il precedente job resta RECOVERY_REQUIRED e conservato; nessun replay o arresto dedotto dal lease. Runtime e invii disattivati. Restano caller operativo completo, PC/cloud OAT, workflow scientifico, calibrazione/uncertainty, validation, policy e reporting. S1/S2 aperte, S3 parziale, S4 incompleta, S5 non accettata. Nessuna nuova elaborazione PixInsight. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](docs/project/HANDOVER_2026-10-09-BKL051-OWNER-RECOVERY.md).
 
 ## Snapshot storico — 7 ottobre 2026
 
@@ -13,7 +13,7 @@ P6 accettata operativamente dall’Owner il 7 ottobre 2026 con tutti i limiti de
 
 | Campo | Valore |
 |---|---|
-| Versione | 8.28 |
+| Versione | 8.29 |
 | Baseline | 09/10/2026 |
 | Stato | Current root bootstrap — P6 accepted; BKL-051 Owner local/query direction approved, S1 open, S2 native solves with independent validation pending; BKL-043 lifecycle pending; S10 unavailable |
 
@@ -24,7 +24,7 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni e proje
 
 ## 2. Sequenza obbligatoria di lettura
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-10-09-BKL051-RESERVATION-INTENT.md`
+2. `docs/project/HANDOVER_2026-10-09-BKL051-OWNER-RECOVERY.md`
 3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`

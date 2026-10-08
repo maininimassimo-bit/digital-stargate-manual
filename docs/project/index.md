@@ -1,8 +1,8 @@
 # Project Governance Center
 
-## Stato corrente — 8 ottobre 2026
+## Stato corrente — 9 ottobre 2026
 
-P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #516 integrata su `2ad11bf0551d89909d179df1b451464fff44f2c0`: driver locale e riconciliazione rilasciati, 16 gate exact-head, ARB/RQ e 15 workflow post-merge SUCCESS; cinque endpoint Pages verificati. Nuovo incremento candidato: prenotazione esplicita di un solo job tramite intent locale esclusivo. Una risposta persa o duplicata non autorizza retry, adozione del lease o avvio nativo. Nessuna nuova elaborazione PixInsight. Recovery server, workflow scientifico, accessi/PC/cloud OAT, validation, policy e reporting restano aperti. Runtime e invii disattivati; unità normalizzate, variance/significatività sconosciute e NOT_VALIDATED invariati. S1/S2 aperte, S3 parziale, S4 incompleta, S5 non accettata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](HANDOVER_2026-10-09-BKL051-RESERVATION-INTENT.md).
+P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #517 integrata su `544fb860522918d0ffd00e8b172865abe647a8fa`: prenotazione esplicita con intent conservato rilasciata; 17 workflow exact-head e 17 post-merge SUCCESS, ARB/RQ approvate e cinque endpoint Pages verificati. Nuovo incremento candidato: chiusura dichiarata della recovery da parte dell’Owner, approvata il 9 ottobre. Il precedente job resta RECOVERY_REQUIRED e conservato; nessun replay o arresto dedotto dal lease. Runtime e invii disattivati. Restano caller operativo completo, PC/cloud OAT, workflow scientifico, calibrazione/uncertainty, validation, policy e reporting. S1/S2 aperte, S3 parziale, S4 incompleta, S5 non accettata. Nessuna nuova elaborazione PixInsight. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](HANDOVER_2026-10-09-BKL051-OWNER-RECOVERY.md).
 
 ## Snapshot storico — 7 ottobre 2026
 

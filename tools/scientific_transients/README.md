@@ -39,3 +39,5 @@ See the [S1 proposal](../../docs/project/BKL-051-S1-FEASIBILITY-AND-CONTRACT-202
 `local_driver.py` prepares and explicitly polls one trusted current reservation; no claim, daemon or credential loading. `reconcile_retained` verifies reopened evidence and obtains a fresh worker GET without POST/replay or clearing server recovery. Historical ACK and current remote match remain separate. Thirteen mock/MemoryStore tests. [Contract and residuals](../../docs/project/BKL-051-S4-LOCAL-DRIVER-2026-10-08.md).
 
 `reservation_intent.py` reserves one explicitly selected job with an exclusive durable intent; duplicate or uncertain dispatch freezes without retry, lease adoption or native launch. [Contract](../../docs/project/BKL-051-S4-RESERVATION-INTENT-2026-10-09.md).
+
+Owner-only recovery closure preserves RECOVERY_REQUIRED and all prior attempt evidence. Exact immutable declaration permits a distinct queued job; no replay or process ownership inference. [Contract](../../docs/project/BKL-051-S4-OWNER-RECOVERY-2026-10-09.md).

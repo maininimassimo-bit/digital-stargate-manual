@@ -11,6 +11,7 @@ PROTOCOL = "DSG_TRANSIENT_QUEUE_V1"
 TERMINAL = {"COMPLETED", "FAILED", "CANCELLED", "RECOVERY_REQUIRED"}
 LEASE_SECONDS = 900  # Operational lease only; no scientific threshold.
 BINDING_FIELDS = {"bindingRef", "inputRef", "referenceRef", "algorithmRef", "contractRef"}
+RECOVERY_FIELDS = {"decisionId", "attemptId", "rootId", "bindingRef", "evidenceSha256", "quiescenceConfirmed"}
 LIMIT = 1024 * 1024
 
 
@@ -83,6 +84,8 @@ class TransientQueue:
         result.pop("reservationIntent", None)
         if not worker:
             result.pop("leaseToken", None)
+        else:
+            result.pop("recoveryClosure", None)
         result["executionEvidence"] = "WORKER_REPORTED_NOT_ATTESTED"
         result["scientificValidation"] = "NOT_VALIDATED"
         result["detailsLocation"] = "OWNER_PC"
@@ -141,6 +144,30 @@ class TransientQueue:
                     ["jobId", "attemptId", "rootId", "binding", "state", "cancelRequested", "sequence", "result"]} | {"lastReceipt": receipt}
         return self._mutate(operation)
 
+    @staticmethod
+    def _blocks_reservation(job):
+        if job["state"] in {"RESERVED", "RUNNING"}:
+            return True
+        if job["state"] != "RECOVERY_REQUIRED":
+            return False
+        if "recoveryClosure" not in job:
+            return True
+        closure = job["recoveryClosure"]
+        fields(closure, {"request", "recordedAt", "authority"})
+        request = closure["request"]; fields(request, RECOVERY_FIELDS)
+        require(closure["authority"] == "OWNER_DECLARED"
+                and all(opaque(request[k]) for k in ["decisionId", "attemptId", "rootId", "bindingRef"])
+                and digest(request["evidenceSha256"]) and request["quiescenceConfirmed"] is True
+                and request["attemptId"] == job.get("attemptId") and request["rootId"] == job.get("rootId")
+                and request["bindingRef"] == job["binding"]["bindingRef"], "TRANSIENT_RECOVERY_CORRUPT")
+        try:
+            recorded = dt.datetime.fromisoformat(closure["recordedAt"])
+            require(recorded.tzinfo is not None and recorded.utcoffset() == dt.timedelta(0)
+                    and recorded >= dt.datetime.fromisoformat(job["updatedAt"]), "TRANSIENT_RECOVERY_CLOCK")
+        except (ValueError, TypeError):
+            raise ProtocolError("TRANSIENT_RECOVERY_CLOCK") from None
+        return False
+
     def claim(self, request):
         fields(request, {"workerId", "rootId"})
         require(request["workerId"] == self.worker_id and opaque(request["rootId"]), "TRANSIENT_WORKER_ID")
@@ -148,7 +175,7 @@ class TransientQueue:
         def operation(state, now):
             require(state["rootId"] in {None, request["rootId"]}, "TRANSIENT_ROOT_MISMATCH")
             state["rootId"] = request["rootId"]
-            active = [j for j in state["jobs"] if j["state"] in {"RESERVED", "RUNNING", "RECOVERY_REQUIRED"}]
+            active = [j for j in state["jobs"] if self._blocks_reservation(j)]
             require(len(active) <= 1, "TRANSIENT_QUEUE_INVARIANT")
             if active:
                 return {"job": self._view(active[0], worker=True)}
@@ -177,7 +204,7 @@ class TransientQueue:
             job = self._job(state, request["jobId"])
             require(job["binding"]["bindingRef"] == request["bindingRef"], "TRANSIENT_RESERVATION_BINDING")
             require(job["state"] == "QUEUED" and not job["cancelRequested"], "TRANSIENT_RESERVATION_NOT_FRESH")
-            require(not any(j["state"] in {"RESERVED", "RUNNING", "RECOVERY_REQUIRED"} for j in state["jobs"]),
+            require(not any(self._blocks_reservation(j) for j in state["jobs"]),
                     "TRANSIENT_ATTEMPT_ACTIVE")
             state["rootId"] = request["rootId"]
             job.update(state="RESERVED", rootId=request["rootId"], attemptId=attempt, leaseToken=token,
@@ -211,6 +238,7 @@ class TransientQueue:
             require(all(type(v) is int and 0 <= v <= 10000000 for v in counts.values()), "TRANSIENT_COUNTS")
         def operation(state, now):
             job = self._job(state, job_id)
+            require("recoveryClosure" not in job, "TRANSIENT_RECOVERY_CLOSED")
             require(job.get("attemptId") == request["attemptId"] and secrets.compare_digest(job.get("leaseToken", ""), request["leaseToken"]), "TRANSIENT_STALE_WORKER")
             if request["sequence"] == job["sequence"]:
                 require(job.get("lastEvent") == request, "TRANSIENT_REPORT_CONFLICT")
@@ -243,4 +271,28 @@ class TransientQueue:
             review = {"request": copy.deepcopy(request), "recordedAt": now.isoformat(), "authority": "OWNER_DECLARED"}
             job["reviews"].append(review)
             return copy.deepcopy(review)
+        return self._mutate(operation)
+
+    def close_recovery(self, job_id, request):
+        """Owner-declared quiescence, not process attestation or a successful terminal result."""
+        fields(request, RECOVERY_FIELDS)
+        require(all(opaque(request[k]) for k in ["decisionId", "attemptId", "rootId", "bindingRef"])
+                and digest(request["evidenceSha256"]) and request["quiescenceConfirmed"] is True,
+                "TRANSIENT_RECOVERY_DECLARATION")
+        def operation(state, now):
+            job = self._job(state, job_id)
+            require(job["state"] == "RECOVERY_REQUIRED" and job.get("attemptId") == request["attemptId"]
+                    and job.get("rootId") == request["rootId"]
+                    and job["binding"]["bindingRef"] == request["bindingRef"], "TRANSIENT_RECOVERY_IDENTITY")
+            require(now >= dt.datetime.fromisoformat(job["updatedAt"]), "TRANSIENT_RECOVERY_CLOCK")
+            existing = job.get("recoveryClosure")
+            if existing is not None:
+                self._blocks_reservation(job)
+                require(existing["request"] == request, "TRANSIENT_RECOVERY_CONFLICT")
+                return self._view(job)
+            require(not any(j.get("recoveryClosure", {}).get("request", {}).get("decisionId")
+                            == request["decisionId"] for j in state["jobs"]), "TRANSIENT_RECOVERY_DECISION_REUSED")
+            job["recoveryClosure"] = {"request":copy.deepcopy(request), "recordedAt":now.isoformat(),
+                                       "authority":"OWNER_DECLARED"}
+            return self._view(job)  # Retain state, timestamps, attempt, result, lease and prior receipt.
         return self._mutate(operation)
