@@ -518,3 +518,8 @@ L’Owner conferma «Accetto operativamente P6 con i limiti del dossier». Nessu
 ## BKL-051 S1 — preparazione autonoma del 7 ottobre
 
 P6 delivery verificata sulla PR #499 e sul merge `0bd6e20df0b449cd163543ed30bd69d9264862b0`: 16/16 workflow post-merge SUCCESS incluse Pages e proiezioni pubbliche conformi. [Handover corrente](HANDOVER_2026-10-07-BKL051-S1.md), [fattibilità e contratto proposto](BKL-051-S1-FEASIBILITY-AND-CONTRACT-2026-10-07.md). Accessi pubblici limitati verificati, tentativi negativi conservati, nove test di intake offline. S1 non accettata: decisioni su architettura/trasporto, query minime su campi Owner e dataset pilota ancora pendenti. Nessuna soglia, analisi Owner, runtime o foto pubblicata. Le sezioni precedenti restano snapshot storici.
+
+
+## BKL-051 — rapporto locale, 8 ottobre 2026
+
+[Incremento candidato](BKL-051-S4-LOCAL-REPORT-2026-10-08.md): esportazione passiva privata del journal sigillato, digest tecnico distinto dal derivato, misure del kernel e limiti conservati. Non modifica coda/authority o acceptance. Driver/recovery, workflow scientifico completo, OAT e reporting restano aperti; nessun nuovo collaudo nativo o attivazione. Gate nella PR.
