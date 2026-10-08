@@ -24,4 +24,4 @@ jobs:
         with:
           python-version: '3.13'
       - name: Test dedicated private queue lifecycle and HTTP roles
-        run: python -m unittest tools.scientific_transients.test_queue tools.scientific_transients.test_local_registry tools.scientific_transients.test_attempt_journal tools.scientific_transients.test_receipt_coordinator tools.scientific_transients.test_native_aperture
+        run: python -m unittest tools.scientific_transients.test_queue tools.scientific_transients.test_local_registry tools.scientific_transients.test_attempt_journal tools.scientific_transients.test_receipt_coordinator tools.scientific_transients.test_native_aperture tools.scientific_transients.test_native_supervisor
