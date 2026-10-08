@@ -675,3 +675,7 @@ L'Owner ha approvato la proposta PC locale + consultazione privata nel portale, 
 ## BKL-051 — trasporto concreto approvato, 8 ottobre 2026
 
 [Decisione Owner](evidence/BKL-051-OWNER-TRANSPORT-2026-10-08.json) e [coda candidata](BKL-051-S4-PRIVATE-QUEUE-2026-10-08.md). Implementazione separata e collaudi locali; attivazione, IAM/credenziale dedicata e percorso S4 completo ancora da verificare. Nessuna soglia/acceptance scientifica, nuova risorsa o fotografia pubblicata. Le precedenti decisioni pending sono snapshot superati soltanto per la scelta di trasporto.
+
+## BKL-051 — segnalazioni approvate nello scope, 8 ottobre 2026
+
+[Piano](BKL-051-SCIENTIFIC-REPORTING-PLAN-2026-10-08.md) e [evento Owner](evidence/BKL-051-OWNER-REPORTING-SCOPE-2026-10-08.json). Dossier, oggetti mobili, invio assistito e capacità autonoma condizionata sono requisiti da realizzare nella milestone. Adapters, formati, identità/credenziali, riconciliazione di esito e collaudi restano aperti; nessun invio attivo o policy quantitativa accettata. Rollback dei futuri invii conserva ledger/ricevute e non ritira automaticamente quanto già consegnato.

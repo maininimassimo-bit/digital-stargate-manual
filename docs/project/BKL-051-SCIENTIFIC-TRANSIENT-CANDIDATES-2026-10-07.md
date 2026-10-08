@@ -2,14 +2,14 @@
 
 ## Stato corrente — 8 ottobre 2026
 
-P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta: trasporto concreto approvato Owner, richieste/stato nel servizio privato esistente e dettagli/immagini sul PC, worker dedicato. Coda separata implementata e sottoposta a test sintetici/HTTP loopback; nessun deployment, IAM o credenziale modificati. S1/S2 scientifiche aperte, S3 parziale, S4 iniziata ma percorso Owner completo mancante, S5 non accettata. Soglie e incertezza completa restano gated; nessuna classificazione o fotografia pubblicata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](HANDOVER_2026-10-08-BKL051-PRIVATE-QUEUE.md). Consegna della coda ancora nei propri gate di rilascio.
+P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #505 integrata e verificata sul merge `d15529722cdd9e2ac8b9a629e2fc2aff4cd83e01`: coda privata candidata, disabilitata per default; nessun deployment, IAM o credenziale modificati. Owner approva anche dossier e segnalazioni CBAT/TNS/AAVSO-VSX/MPC, incluse ricerca di oggetti mobili e capacità di invio autonomo condizionata; funzionalità da realizzare, nessun invio attivato. S1/S2 scientifiche aperte, S3 parziale, S4 incompleta, S5 non accettata. Soglie, policy autonoma e accettazione finale restano gated. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](HANDOVER_2026-10-08-BKL051-REPORTING-PLAN.md).
 
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-051 |
-| Versione | 1.1 |
-| Data | 2026-10-07 |
-| Stato | In Progress — preparazione S1; sviluppo dopo delivery P6 verificata, nessun modulo implementato |
+| Versione | 1.2 |
+| Data | 2026-10-08 |
+| Stato | In Progress — coda candidata consegnata; analisi, segnalazioni e accettazione ancora aperte |
 | Priorità | P2; prossimo sviluppo dopo chiusura operativa P6 |
 | Dipendenza di avvio | Chiusura BKL-049-EXT-PIAI/P6, con riconciliazione dei collaudi e accettazione operativa Owner |
 | Milestone | M-BKL051-SCIENTIFIC-TRANSIENT-CANDIDATES |
@@ -27,6 +27,10 @@ Offrire all'Owner un modulo privato nel portale per confrontare le proprie ripre
 
 L'analisi parte da master lineari e, quando disponibili, singoli scatti calibrati con data/ora, filtri, esposizione e provenienza. Le immagini estetiche con deconvoluzione, denoise, rimozione stelle o stretch possono visualizzare le segnalazioni ma non sostituiscono la base di misura. La calibrazione SPCC di una SHO non la rende direttamente comparabile con fotometria broadband. Dati storici senza sessioni sono ammessi con dichiarazione esplicita, senza associazioni inventate; epoca mancante o integrazione su più notti limita il risultato e non viene colmata con la data di elaborazione.
 
+## Estensione Owner — 8 ottobre 2026
+
+Il [piano di segnalazione](BKL-051-SCIENTIFIC-REPORTING-PLAN-2026-10-08.md) aggiunge dossier e invii CBAT/TNS/VSX/MPC, ricerca di possibili asteroidi, percorso assistito e capacità di invio autonomo condizionata. S1-R/S3-M/S4-R/S5-R entrano nei requisiti di chiusura BKL-051. [Evento Owner](evidence/BKL-051-OWNER-REPORTING-SCOPE-2026-10-08.json). Nessuna attivazione, soglia, account o pubblicazione autorizzata da questa registrazione. Le precedenti esclusioni di invio implicito restano valide per il runtime corrente; il nuovo sviluppo esplicito è disciplinato dal piano.
+
 ## Perimetro funzionale previsto
 
 1. Selezione privata dell'immagine e controllo di formato, integrità, linearità, metadati temporali, filtri e qualità disponibile.
@@ -36,6 +40,7 @@ L'analisi parte da master lineari e, quando disponibili, singoli scatti calibrat
 5. Verifica dei candidati nei singoli scatti o sottointegrazioni indipendenti, esclusione motivata di artefatti e controllo di variabili e oggetti in movimento noti.
 6. Scheda privata con immagine, riferimento, differenza quando valida, coordinate, epoche, misure/incertezze, limiti e motivazione. Stati di candidato, scartato o da approfondire distinti dalla conferma esterna.
 7. Rapporto esportabile e decisione umana tracciata. La conferma può richiedere osservazioni indipendenti e spettroscopia.
+8. Ricerca e associazione temporale di possibili asteroidi sui dati adatti; dossier e segnalazioni per destinatario, anteprima/conferma Owner, ricevute e capacità autonoma condizionata secondo il piano dell’8 ottobre.
 
 ## Fonti e architettura da definire nella prima fase
 
@@ -59,6 +64,8 @@ L'approvazione autorizza pianificazione e sviluppo successivo a P6 entro lo scop
 | S3 — candidati e falsi positivi | Confronti multi-epoca e differenze compatibili; campioni reali con eventi noti e campi di controllo; artefatti, stelle sature/confuse, oggetti mobili e filtri incompatibili verificati. Test sintetici etichettati e separati dai dati reali. |
 | S4 — modulo privato e report | Percorso Owner completo selezione → analisi → evidenze → revisione/esportazione; accessi negati verificati; ripresa/annullamento/idempotenza definiti; originali e provenienza preservati. |
 | S5 — collaudo e accettazione | Misure di recupero e falsi positivi con limiti/dataset dichiarati, soglie approvate nel contratto, UI accessibile e regressioni; gate CI/review/rilascio e accettazione operativa Owner. Nessuna equivalenza tra test sintetico, candidato e scoperta. |
+
+S1/S3/S4/S5 includono ora gli incrementi R/M del [piano di segnalazione](BKL-051-SCIENTIFIC-REPORTING-PLAN-2026-10-08.md); i loro criteri sono necessari alla chiusura, senza attribuire acceptance a funzionalità ancora pianificate.
 
 ## Privacy, pubblicazione e rollback
 
