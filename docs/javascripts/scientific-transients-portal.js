@@ -37,6 +37,8 @@
     if(value.action==='CREATE')require(fields(body,['requestId','bindingRef'])&&opaque(body.requestId)
       &&value.jobId==='TRN_'+body.requestId&&body.bindingRef===binding.bindingRef);
     else if(value.action==='CANCEL')require(fields(body,[]));
+    else if(value.action==='RECOVERY') {inspectRecoveryRequest(body);
+      require(body.bindingRef===binding.bindingRef);}
     else if(value.action==='REVIEW')require(fields(body,['decisionId','reportSha256','decision'])&&opaque(body.decisionId)
       &&hash(body.reportSha256)&&Object.hasOwn(decisions,body.decision));
     else require(false);
@@ -47,13 +49,22 @@
       &&opaque(review.request.decisionId)&&hash(review.request.reportSha256)&&Object.hasOwn(decisions,review.request.decision)
       &&instant(review.recordedAt)&&review.authority==='OWNER_DECLARED');return review;
   }
+  function inspectRecoveryRequest(body) {
+    require(fields(body,['decisionId','attemptId','rootId','bindingRef','evidenceSha256','quiescenceConfirmed'])
+      &&['decisionId','attemptId','rootId','bindingRef'].every(k=>opaque(body[k]))
+      &&hash(body.evidenceSha256)&&body.quiescenceConfirmed===true);return body;
+  }
+  function inspectClosure(closure) {
+    require(fields(closure,['request','recordedAt','authority'])&&instant(closure.recordedAt)&&closure.authority==='OWNER_DECLARED');
+    inspectRecoveryRequest(closure.request);return closure;
+  }
   function inspectJobs(value) {
     require(fields(value,['jobs']) && Array.isArray(value.jobs) && value.jobs.length<=32);
     const ids=new Set();
     for(const job of value.jobs) {
       require(fields(job,['jobId','request','binding','state','cancelRequested','sequence','result','reviews',
         'createdAt','updatedAt','executionEvidence','scientificValidation','detailsLocation','publication'],
-        ['rootId','attemptId','leaseIssuedAt','leaseExpiresAt']));
+        ['rootId','attemptId','leaseIssuedAt','leaseExpiresAt','recoveryClosure']));
       require(fields(job.request,['requestId','bindingRef']) && opaque(job.request.requestId) && opaque(job.request.bindingRef)
         && job.jobId==='TRN_'+job.request.requestId && !ids.has(job.jobId)); ids.add(job.jobId);
       require(fields(job.binding,['bindingRef','inputRef','referenceRef','algorithmRef','contractRef'])
@@ -68,6 +79,10 @@
         && instant(job.leaseExpiresAt) && Date.parse(job.leaseExpiresAt)>=Date.parse(job.leaseIssuedAt)
         : !['rootId','leaseIssuedAt','leaseExpiresAt'].some(key=>Object.hasOwn(job,key)));
       require(!['RESERVED','RUNNING','COMPLETED','FAILED','RECOVERY_REQUIRED'].includes(job.state)||attempted);
+      if(Object.hasOwn(job,'recoveryClosure')) {const closure=inspectClosure(job.recoveryClosure);
+        require(job.state==='RECOVERY_REQUIRED'&&closure.request.attemptId===job.attemptId
+          &&closure.request.rootId===job.rootId&&closure.request.bindingRef===job.binding.bindingRef
+          &&Date.parse(closure.recordedAt)>=Date.parse(job.updatedAt));}
       require(job.sequence===0||attempted);
       require(job.state!=='RESERVED'||job.sequence===0);
       require(!['RUNNING','FAILED'].includes(job.state)||job.sequence>=1);
@@ -153,7 +168,11 @@
         el('p',job.jobId,card);el('p','Ultimo aggiornamento del servizio: '+job.updatedAt,card);
         if(job.cancelRequested&&!['CANCELLED','RECOVERY_REQUIRED'].includes(job.state))
           el('p','Annullamento richiesto: l’arresto del processo non è ancora confermato.',card);
-        if(job.state==='RECOVERY_REQUIRED')el('p','Stato incerto. Conserva il tentativo e verifica il PC con l’assistente prima di riprendere.',card);
+        if(job.state==='RECOVERY_REQUIRED') {
+          if(job.recoveryClosure)el('p','Recovery chiusa su dichiarazione Owner del '+job.recoveryClosure.recordedAt+
+            '. Il tentativo resta incerto e conservato; può essere richiesto un nuovo lavoro distinto.',card);
+          else el('p','Stato incerto. Conserva il tentativo e verifica sul PC che il processo sia fermo prima di chiudere la recovery.',card);
+        }
         const refs=el('details','',card);el('summary','Riferimenti della richiesta',refs);
         const list=el('dl','',refs);
         for(const [key,label] of [['bindingRef','Gruppo registrato'],['inputRef','Immagine'],['referenceRef','Riferimento'],
@@ -170,6 +189,17 @@
           const cancel=el('button','Richiedi annullamento',card);cancel.type='button';cancel.dataset.mutation='true';
           cancel.addEventListener('click',()=>run(()=>start('CANCEL',job,{})));
         }
+        if(job.state==='RECOVERY_REQUIRED'&&!job.recoveryClosure) {
+          el('p','Tentativo da verificare sul PC: '+job.attemptId+' · postazione '+job.rootId,card);
+          const digestLabel=el('label','Impronta SHA256 del dossier di recovery verificato sul PC',card);
+          const evidence=el('input','',digestLabel);evidence.type='text';evidence.maxLength=64;
+          const checkLabel=el('label','',card),checked=el('input','',checkLabel);checked.type='checkbox';
+          el('span',' Ho verificato che il processo sia fermo e le evidenze conservate. Questa dichiarazione non conferma un risultato scientifico.',checkLabel);
+          const close=el('button','Chiudi recovery con dichiarazione Owner',card);close.type='button';close.dataset.mutation='true';
+          close.addEventListener('click',()=>{if(checked.checked&&hash(evidence.value))
+            run(()=>start('RECOVERY',job,{decisionId:identifier(),attemptId:job.attemptId,rootId:job.rootId,
+              bindingRef:job.binding.bindingRef,evidenceSha256:evidence.value,quiescenceConfirmed:true}));});
+        }
         if(job.result) {
           const label=el('label','',card),confirmed=el('input','',label);confirmed.type='checkbox';
           el('span',' Ho consultato sul PC il rapporto con questa impronta. La valutazione non conferma una scoperta.',label);
@@ -184,7 +214,7 @@
       q('observed').textContent='Consultazione aggiornata ora. Nessun controllo periodico; il PC potrebbe avere uno stato successivo.';
     }
     async function call(path,method='GET',body) {
-      require(path==='/options'||path==='/jobs'||/^\/jobs\/TRN_[a-f0-9]{32}\/(?:cancel|review)$/.test(path));
+      require(path==='/options'||path==='/jobs'||/^\/jobs\/TRN_[a-f0-9]{32}\/(?:cancel|review|close-recovery)$/.test(path));
       const session=epoch,credential=token;require(current()&&credential);controller=new AbortController();
       const requestController=controller;
       const timer=setTimeout(()=>requestController.abort(),30000);
@@ -212,6 +242,9 @@
       else {require(job);
         if(pending.action==='CANCEL') {confirmed=job.cancelRequested;
           noEffect=!confirmed&&['COMPLETED','FAILED','CANCELLED','RECOVERY_REQUIRED'].includes(job.state);retryAllowed=!confirmed&&!noEffect;}
+        else if(pending.action==='RECOVERY') {require(job.state==='RECOVERY_REQUIRED'&&job.attemptId===pending.body.attemptId
+          &&job.rootId===pending.body.rootId);
+          if(job.recoveryClosure){require(same(job.recoveryClosure.request,pending.body));confirmed=true;}else retryAllowed=true;}
         else {require(job.state==='COMPLETED'&&job.result.reportSha256===pending.body.reportSha256);
           const review=job.reviews.find(r=>r.request.decisionId===pending.body.decisionId);
           if(review){require(same(review.request,pending.body));confirmed=true;}else retryAllowed=true;}
@@ -223,6 +256,7 @@
         const action=pending.action;pending=null;
         return noEffect?'Il lavoro è già terminale: nessun annullamento attribuito a questa richiesta.':
           action==='CANCEL'?'Richiesta di annullamento registrata. Lo stato del PC va verificato separatamente.':
+          action==='RECOVERY'?'Recovery chiusa sulla dichiarazione Owner. Il vecchio tentativo resta incerto e non verrà rilanciato.':
           action==='REVIEW'?'Valutazione Owner dichiarata registrata sul rapporto esatto.':'Richiesta di analisi registrata. Il completamento resta da verificare.';
       }
       return 'Esito del comando ancora da verificare. Puoi ripetere esplicitamente la medesima richiesta.';
@@ -257,11 +291,12 @@
       require(pending&&!storageBlocked&&token&&ready);
       verifyStoredIntent();
       retryAllowed=false;ready=false;lock();
-      const path=pending.action==='CREATE'?'/jobs':'/jobs/'+pending.jobId+'/'+(pending.action==='CANCEL'?'cancel':'review');
+      const path=pending.action==='CREATE'?'/jobs':'/jobs/'+pending.jobId+'/'+(pending.action==='CANCEL'?'cancel':pending.action==='RECOVERY'?'close-recovery':'review');
       const value=await call(path,'POST',pending.body);if(value===null)return;
       if(pending.action==='REVIEW')require(same(inspectReview(value).request,pending.body));
       else {const acknowledged=inspectJobs({jobs:[value]})[0];
-        require(acknowledged.jobId===pending.jobId&&same(inspectBinding(acknowledged.binding),pending.binding));}
+        require(acknowledged.jobId===pending.jobId&&same(inspectBinding(acknowledged.binding),pending.binding));
+        if(pending.action==='RECOVERY')require(acknowledged.recoveryClosure&&same(acknowledged.recoveryClosure.request,pending.body));}
       await refresh();
     }
     async function run(action) {

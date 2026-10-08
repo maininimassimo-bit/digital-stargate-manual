@@ -298,6 +298,54 @@
           }
         ]
       }
+    },
+    {
+      "stage": "RECOVERY_CLOSED",
+      "response": {
+        "jobs": [
+          {
+            "attemptId": "99999999999999999999999999999999",
+            "binding": {
+              "algorithmRef": "44444444444444444444444444444444",
+              "bindingRef": "11111111111111111111111111111111",
+              "contractRef": "55555555555555555555555555555555",
+              "inputRef": "22222222222222222222222222222222",
+              "referenceRef": "33333333333333333333333333333333"
+            },
+            "cancelRequested": false,
+            "createdAt": "2026-10-08T00:00:00+00:00",
+            "jobId": "TRN_66666666666666666666666666666666",
+            "leaseExpiresAt": "2026-10-08T00:15:00+00:00",
+            "leaseIssuedAt": "2026-10-08T00:00:00+00:00",
+            "recoveryClosure": {
+              "authority": "OWNER_DECLARED",
+              "recordedAt": "2026-10-08T00:15:00+00:00",
+              "request": {
+                "attemptId": "99999999999999999999999999999999",
+                "bindingRef": "11111111111111111111111111111111",
+                "decisionId": "cccccccccccccccccccccccccccccccc",
+                "evidenceSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+                "quiescenceConfirmed": true,
+                "rootId": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+              }
+            },
+            "request": {
+              "bindingRef": "11111111111111111111111111111111",
+              "requestId": "66666666666666666666666666666666"
+            },
+            "result": null,
+            "reviews": [],
+            "rootId": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "sequence": 0,
+            "state": "RECOVERY_REQUIRED",
+            "updatedAt": "2026-10-08T00:15:00+00:00",
+            "executionEvidence": "WORKER_REPORTED_NOT_ATTESTED",
+            "scientificValidation": "NOT_VALIDATED",
+            "detailsLocation": "OWNER_PC",
+            "publication": "NONE"
+          }
+        ]
+      }
     }
   ],
   "reviewResponse": {

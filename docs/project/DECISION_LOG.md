@@ -726,3 +726,8 @@ PR #515 integrata e post-merge verificata; [driver locale e riconciliazione](BKL
 ## BKL-051 — prenotazione esplicita candidata, 9 ottobre 2026
 
 PR #516 rilasciata e verificata. [Intent di prenotazione](BKL-051-S4-RESERVATION-INTENT-2026-10-09.md) candidato: selezione esplicita, singola POST, nessun lease su duplicazione o replay dopo incertezza. Recovery server e requisiti scientifici/OAT restano aperti; nessuna attivazione runtime o invio. Gate exact-head pending. BKL-051 OPEN.
+
+
+## BKL-051 — recovery Owner candidata, 9 ottobre 2026
+
+PR #517 rilasciata e verificata. [Recovery dichiarata](BKL-051-S4-OWNER-RECOVERY-2026-10-09.md) approvata come modalità dall’Owner: conserva RECOVERY_REQUIRED e consente solo nuovi job distinti, nessun replay o process kill. Gate release pending. RQ517 P3 conteggio test corretto in questo incremento. Caller/OAT, scientific workflow, validation/policy e reporting restano aperti; runtime e invii disattivati. BKL-051 OPEN.

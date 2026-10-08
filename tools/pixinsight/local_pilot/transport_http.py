@@ -126,7 +126,7 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                     return self.send(200, transient.claim(self.body()))
                 if self.command == "POST" and path == "/v1/transient-analysis/worker/reserve":
                     return self.send(200, transient.reserve_once(self.body()))
-                match = re.fullmatch(r"/v1/transient-analysis/(worker/)?jobs/(TRN_[a-f0-9]{32})(?:/(cancel|report|review))?", path)
+                match = re.fullmatch(r"/v1/transient-analysis/(worker/)?jobs/(TRN_[a-f0-9]{32})(?:/(cancel|report|review|close-recovery))?", path)
                 if match:
                     worker_route, job_id, action = match.groups()
                     if worker_route and self.command == "GET" and action is None:
@@ -135,6 +135,8 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                         return self.send(200, transient.report(job_id, self.body()))
                     if not worker_route and self.command == "GET" and action is None:
                         return self.send(200, transient.status(job_id))
+                    if not worker_route and self.command == "POST" and action == "close-recovery":
+                        return self.send(200, transient.close_recovery(job_id, self.body()))
                     if not worker_route and self.command == "POST" and action == "cancel":
                         require(self.body() == {}, "REQUEST_FIELDS")
                         return self.send(200, transient.cancel(job_id))

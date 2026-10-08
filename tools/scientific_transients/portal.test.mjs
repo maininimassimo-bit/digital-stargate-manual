@@ -32,7 +32,7 @@ function harness({jobs=[fixture()],status=200,fail=false,deferred=false,googleMi
       setItem(key,value){if(storageFail)throw Error('PRIVATE_STORAGE_ERROR');assert.equal(value.includes('OWNER_ONLY_IN_MEMORY'),false);storage.set(key,value);},
       removeItem(key){if(removeFail)throw Error('PRIVATE_STORAGE_ERROR');storage.delete(key);}},
     async fetch(url,options){
-      requests.push({url,options});assert.match(url,/^https:\/\/dsg-pixinsight-pilot-183451329061.europe-west1.run.app\/v1\/transient-analysis\/(?:options|jobs(?:\/TRN_[a-f0-9]{32}\/(?:cancel|review))?)$/);
+      requests.push({url,options});assert.match(url,/^https:\/\/dsg-pixinsight-pilot-183451329061.europe-west1.run.app\/v1\/transient-analysis\/(?:options|jobs(?:\/TRN_[a-f0-9]{32}\/(?:cancel|review|close-recovery))?)$/);
       assert.equal(options.cache,'no-store');
       assert.equal(options.redirect,'error');assert.equal(options.credentials,'omit');
       assert.equal(options.headers.Authorization,'Bearer OWNER_ONLY_IN_MEMORY');
@@ -54,6 +54,7 @@ function harness({jobs=[fixture()],status=200,fail=false,deferred=false,googleMi
           const job=jobs.find(j=>url.includes(j.jobId));assert.ok(job);
           if(url.endsWith('/cancel')) {if(!['COMPLETED','FAILED','CANCELLED','RECOVERY_REQUIRED'].includes(job.state)){
             job.cancelRequested=true;if(job.state==='QUEUED')job.state='CANCELLED';}}
+          else if(url.endsWith('/close-recovery'))job.recoveryClosure={request:body,recordedAt:job.updatedAt,authority:'OWNER_DECLARED'};
           else if(!job.reviews.some(r=>r.request.decisionId===body.decisionId))job.reviews.push({...structuredClone(queueViews.reviewResponse),request:body,recordedAt:job.updatedAt});
           responseBody=url.endsWith('/review')?job.reviews.find(r=>r.request.decisionId===body.decisionId):job;
         }
@@ -117,10 +118,10 @@ test('pending cancel cannot be shown as a stopped native process',async()=>{
   const h=harness({jobs:[job]});await h.login();assert.match(text(h),/arresto del processo non è ancora confermato/);
   assert.equal(h.requests.some(r=>r.options.method!=='GET'),false);
 });
-test('recovery remains uncertain without relaunch or resolution commands',async()=>{
+test('recovery remains uncertain and closure is never automatic',async()=>{
   const job=fixture();Object.assign(job,{state:'RECOVERY_REQUIRED',result:null,reviews:[]});
   const h=harness({jobs:[job]});await h.login();assert.match(text(h),/Stato incerto/);assert.match(text(h),/Conserva il tentativo/);
-  assert.equal(h.controls.jobs.querySelectorAll('button').length,1);
+  assert.equal(h.controls.jobs.querySelectorAll('button').length,2);assert.equal(posts(h).length,0);
 });
 test('queued cancellation without native attempt is a valid preserved receipt',async()=>{
   const job=fixture();Object.assign(job,{state:'CANCELLED',result:null,cancelRequested:true,sequence:0});
@@ -292,4 +293,47 @@ test('removed persisted intent before acknowledgement freezes instead of creatin
   const h=harness({postDeferred:true});await h.login();await h.create();h.storage.clear();h.release();await tick();
   assert.equal(h.storage.size,0);assert.equal(h.controls.create.disabled,true);assert.equal(h.controls.retry.disabled,true);
   assert.equal(posts(h).length,1);
+});
+
+const recoveryFixture=()=>structuredClone(queueViews.cases.find(c=>c.stage==='RECOVERY_REQUIRED').response.jobs[0]);
+async function closeRecovery(h) {
+  const inputs=h.controls.jobs.querySelectorAll('input');inputs[0].value='e'.repeat(64);inputs[1].checked=true;
+  h.controls.jobs.querySelectorAll('button').find(b=>b.textContent==='Chiudi recovery con dichiarazione Owner').click();await tick();
+}
+test('recovery closure requires exact evidence hash and explicit PC declaration',async()=>{
+  const h=harness({jobs:[recoveryFixture()]});await h.login();
+  const close=h.controls.jobs.querySelectorAll('button').find(b=>b.textContent==='Chiudi recovery con dichiarazione Owner');
+  close.click();await tick();assert.equal(posts(h).length,0);
+  await closeRecovery(h);assert.equal(posts(h).length,1);assert.equal(h.storage.size,0);
+  assert.match(text(h),/Recovery chiusa su dichiarazione Owner/);assert.match(text(h),/tentativo resta incerto/);
+  assert.equal(h.controls.jobs.querySelectorAll('button').some(b=>b.textContent==='Chiudi recovery con dichiarazione Owner'),false);
+});
+test('lost recovery acknowledgement reconciles exact declaration without second POST',async()=>{
+  const h=harness({jobs:[recoveryFixture()],postFailure:'after'});await h.login();await closeRecovery(h);
+  assert.equal(h.storage.size,1);await h.refresh();assert.equal(h.storage.size,0);assert.equal(posts(h).length,1);
+});
+test('changed recovery attempt prevents pending retry',async()=>{
+  const h=harness({jobs:[recoveryFixture()],postFailure:'before'});await h.login();await closeRecovery(h);
+  const changed=recoveryFixture();changed.attemptId='f'.repeat(32);h.setJobs([changed]);await h.refresh();
+  assert.equal(h.storage.size,1);assert.equal(h.controls.retry.disabled,true);assert.equal(posts(h).length,1);
+});
+test('hostile recovery closure attached to completed state rejects whole snapshot',async()=>{
+  const job=fixture();job.recoveryClosure={request:{decisionId:'a'.repeat(32),attemptId:job.attemptId,
+    rootId:job.rootId,bindingRef:job.binding.bindingRef,evidenceSha256:'e'.repeat(64),quiescenceConfirmed:true},
+    recordedAt:job.updatedAt,authority:'OWNER_DECLARED'};
+  const h=harness({jobs:[job]});await h.login();assert.equal(h.controls.jobs.children.length,0);
+});
+
+test('conflicting retained recovery declaration freezes without another POST',async()=>{
+  const h=harness({jobs:[recoveryFixture()],postFailure:'before'});await h.login();await closeRecovery(h);
+  const changed=recoveryFixture(),body=JSON.parse(posts(h)[0].options.body);
+  changed.recoveryClosure={request:{...body,evidenceSha256:'a'.repeat(64)},recordedAt:changed.updatedAt,authority:'OWNER_DECLARED'};
+  h.setJobs([changed]);await h.refresh();assert.equal(h.storage.size,1);assert.equal(h.controls.retry.disabled,true);
+  assert.equal(posts(h).length,1);
+});
+test('restored recovery intent reads fresh state and resends only after explicit click',async()=>{
+  const first=harness({jobs:[recoveryFixture()],postFailure:'before'});await first.login();await closeRecovery(first);
+  const h=harness({jobs:[recoveryFixture()],storage:first.storage});await h.login();assert.equal(posts(h).length,0);
+  assert.equal(h.controls.retry.disabled,false);h.controls.retry.click();await tick();assert.equal(posts(h).length,1);
+  assert.equal(h.storage.size,0);
 });
