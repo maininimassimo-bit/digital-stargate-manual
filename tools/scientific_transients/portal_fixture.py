@@ -6,6 +6,7 @@ from tools.scientific_transients.queue import TransientQueue, LEASE_SECONDS
 
 def cases():
     result = []
+    review_response = None
     for stage in ['QUEUED', 'QUEUED_CANCELLED', 'RESERVED', 'RUNNING', 'COMPLETED',
                   'FAILED', 'CANCELLED', 'RECOVERY_REQUIRED']:
         now = dt.datetime(2026, 10, 8, tzinfo=dt.timezone.utc)
@@ -31,8 +32,8 @@ def cases():
                         queue.cancel(job['jobId'])
                     queue.report(job['jobId'], envelope)
                     if stage == 'COMPLETED':
-                        queue.review(job['jobId'], dict(decisionId='8' * 32, reportSha256='7' * 64,
-                                                        decision='FOLLOW_UP'))
+                        review_response = queue.review(job['jobId'], dict(decisionId='8' * 32, reportSha256='7' * 64,
+                                                                         decision='FOLLOW_UP'))
             if stage == 'RECOVERY_REQUIRED':
                 now += dt.timedelta(seconds=LEASE_SECONDS)
         view = queue.status()
@@ -40,7 +41,8 @@ def cases():
         if 'attemptId' in view['jobs'][0]:
             view['jobs'][0]['attemptId'] = '9' * 32
         result.append(dict(stage=stage, response=view))
-    return {'kind': 'SYNTHETIC_QUEUE_OWNER_VIEWS_NOT_CLOUD_OAT', 'cases': result}
+    return {'kind': 'SYNTHETIC_QUEUE_OWNER_VIEWS_NOT_CLOUD_OAT', 'cases': result,
+            'reviewResponse': review_response}
 
 
 if __name__ == '__main__':
