@@ -667,3 +667,7 @@ L'Owner ha approvato la proposta PC locale + consultazione privata nel portale, 
 ## BKL-051 — 8 ottobre 2026: incertezza proposta
 
 [Contratto offline](BKL-051-S1-UNCERTAINTY-CONTRACT-2026-10-08.md) con dati ignoti espliciti, covarianze e controllo del doppio rumore di lettura. Nessuna accettazione di modello completo, soglia, classificazione o runtime; residui scientifici e di trasporto invariati. La prova numerica non chiude BKL-051.
+
+## BKL-051 — propagazione d’epoca proposta, 8 ottobre 2026
+
+[Modello e verifiche](BKL-051-S1-EPOCH-MODEL-2026-10-08.md): sette test aggiuntivi e sei controlli numerici ESA, senza accettazione del matching o covarianze. Prosecuzione autonoma e revisioni ARB/RQ autorizzate; trasporto concreto e policy scientifica restano decisioni separate.

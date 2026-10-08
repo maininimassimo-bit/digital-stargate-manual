@@ -2,7 +2,7 @@
 
 ## Stato corrente — 8 ottobre 2026
 
-P6 resta Accepted nei limiti del dossier. BKL-051: direzione locale/portale e query minime approvate; evidenze private successive riconciliate e ispettori offline di misura e incertezza proposti, con 37 test locali; propagazione condizionale del primo ordine, nessuna significatività scientifica. Astrometria/ripetibilità, trasferimento condizionale di unità, iniezioni sintetiche e casi pubblici multi-epoca sono prove parziali, non validazione completa. S1/S2 aperte, S3 parziale, nessun runtime S4 o accettazione S5; soglie, trasporto concreto e modello completo del rumore restano gated. Nessuna classificazione o fotografia pubblicata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](HANDOVER_2026-10-08-BKL051-UNCERTAINTY.md). Consegna di questo incremento ancora da verificare nei gate della PR.
+P6 resta Accepted nei limiti del dossier. BKL-051: direzione locale/portale e query minime approvate; evidenze private successive riconciliate e ispettori offline di misura e incertezza proposti, con 44 test locali; modello baricentrico d’epoca proposto e propagazione condizionale del primo ordine, nessuna significatività scientifica. Astrometria/ripetibilità, trasferimento condizionale di unità, iniezioni sintetiche e casi pubblici multi-epoca sono prove parziali, non validazione completa. S1/S2 aperte, S3 parziale, nessun runtime S4 o accettazione S5; soglie, trasporto concreto e modello completo del rumore restano gated. Nessuna classificazione o fotografia pubblicata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](HANDOVER_2026-10-08-BKL051-EPOCH.md). Consegna di questo incremento ancora da verificare nei gate della PR.
 
 ## Snapshot storico — 7 ottobre 2026
 
@@ -24,7 +24,7 @@ Il punto di ingresso unico è `AI_BOOTSTRAP.md`.
 | Documento | Ruolo |
 |---|---|
 | `AI_BOOTSTRAP.md` | Root bootstrap |
-| [BKL-051 Uncertainty Handover 08/10/2026](HANDOVER_2026-10-08-BKL051-UNCERTAINTY.md) | Handover corrente |
+| [BKL-051 Epoch Handover 08/10/2026](HANDOVER_2026-10-08-BKL051-EPOCH.md) | Handover corrente |
 | [Current Technical Baseline 07/10/2026](CURRENT_TECHNICAL_BASELINE_2026-10-07.md) | Baseline tecnica corrente |
 | [DSG-AEM-001 Continuous Autonomous Execution Mandate](DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md) | Mandato owner-authorized e deroga ruleset condizionata |
 | [PR #196 DSG-AEM-001 AI-Assisted ARB Review](../architecture/reviews/ARB-PR196-DSG-AEM-001-Governance-AI-Assisted-Review-2026-09-15.md) | Approved — 99/100; non equivalente ad approvazione umana indipendente |
