@@ -1,10 +1,14 @@
 # ADR-020 — Private scientific transient analysis
 
-**Status:** Owner-approved direction and provider-query boundary; concrete runtime/transport and scientific operating policy not accepted or activated.
+**Status:** Owner-approved direction, provider-query boundary and concrete private transport; implementation candidate not activated, scientific operating policy not accepted.
 
 **Date:** 2026-10-08
 
 **Scope:** BKL-051, additive private local analysis and governed portal consultation.
+
+## Concrete transport decision — 8 October 2026
+
+The Owner authorized the pending concrete proposal: separate transient-analysis namespace in the existing private HTTPS service, dedicated worker identity, remote opaque references/status/aggregate counts/report digest, detailed images and reports on the Owner PC. No new cloud resources or scientific upload. [Minimized event](../project/evidence/BKL-051-OWNER-TRANSPORT-2026-10-08.json), [reviewable contract and implementation](../project/BKL-051-S4-PRIVATE-QUEUE-2026-10-08.md). Authentication, permissions, leases, cancellation/recovery and complete Owner workflow still require reviewed implementation and real tests before activation. This supersedes earlier direction-only transport-pending wording; earlier evidence remains historical. No scientific policy or final milestone acceptance is granted.
 
 ## Decision and evidence
 

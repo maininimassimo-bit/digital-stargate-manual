@@ -2,7 +2,7 @@
 
 ## Stato corrente — 8 ottobre 2026
 
-P6 resta Accepted nei limiti del dossier. BKL-051: direzione locale/portale e query minime approvate; evidenze private successive riconciliate e ispettori offline di misura e incertezza proposti, con 44 test locali; modello baricentrico d’epoca proposto e propagazione condizionale del primo ordine, nessuna significatività scientifica. Astrometria/ripetibilità, trasferimento condizionale di unità, iniezioni sintetiche e casi pubblici multi-epoca sono prove parziali, non validazione completa. S1/S2 aperte, S3 parziale, nessun runtime S4 o accettazione S5; soglie, trasporto concreto e modello completo del rumore restano gated. Nessuna classificazione o fotografia pubblicata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](HANDOVER_2026-10-08-BKL051-EPOCH.md). Consegna di questo incremento ancora da verificare nei gate della PR.
+P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta: trasporto concreto approvato Owner, richieste/stato nel servizio privato esistente e dettagli/immagini sul PC, worker dedicato. Coda separata implementata e sottoposta a test sintetici/HTTP loopback; nessun deployment, IAM o credenziale modificati. S1/S2 scientifiche aperte, S3 parziale, S4 iniziata ma percorso Owner completo mancante, S5 non accettata. Soglie e incertezza completa restano gated; nessuna classificazione o fotografia pubblicata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](HANDOVER_2026-10-08-BKL051-PRIVATE-QUEUE.md). Consegna della coda ancora nei propri gate di rilascio.
 
 ## Snapshot storico — 7 ottobre 2026
 

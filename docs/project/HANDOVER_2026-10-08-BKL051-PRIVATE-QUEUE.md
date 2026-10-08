@@ -1,0 +1,13 @@
+# Handover 8 ottobre 2026 — BKL-051 coda privata
+
+Baseline verificata: PR #504 merge `0f1545a2d17591b0207b92443da2aa22283c1d6e`, 15 workflow post-merge SUCCESS, cinque documenti HTTP 200 e due proiezioni integralmente conformi. Modello d'epoca offline consegnato nei limiti del suo dossier.
+
+L'Owner risponde «autorizzo» alla proposta concreta rimasta pendente: servizio HTTPS esistente con namespace separato, richieste/stato remoti, dettagli e immagini sul PC, identità worker dedicata e nessuna nuova risorsa cloud. [Evento minimizzato](evidence/BKL-051-OWNER-TRANSPORT-2026-10-08.json). «Autorizzo le revisioni per tutta BKL-051» autorizza ARB/RQ distinti e sequenziali sul commit esatto dopo i controlli, senza domande ripetute per PR.
+
+[Coda privata candidata](BKL-051-S4-PRIVATE-QUEUE-2026-10-08.md): binding immutabili, idempotenza, lease per tentativo, scadenza/clock regressivo in recupero conservativo, annullamento e revisione legata all'hash del rapporto. Google Owner invariato; credenziali PIAI/transient separate e nessun upload scientifico. Attivazione assente per default. Nessun secret, IAM, bucket, traffico, root C→F, archivio o originali modificati.
+
+Tre prove numeriche ESA sui primi cinque errori formali sono superate dopo correzione offline della decodifica BINARY2. Il primo decoder TABLEDATA fallito, risposte originali, metadati del provider e v2 sono conservati su F. Zero nuove query per la correzione. Non è propagazione completa del rumore/WCS o validazione del matching.
+
+P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta: trasporto concreto approvato Owner, richieste/stato nel servizio privato esistente e dettagli/immagini sul PC, worker dedicato. Coda separata implementata e sottoposta a test sintetici/HTTP loopback; nessun deployment, IAM o credenziale modificati. S1/S2 scientifiche aperte, S3 parziale, S4 iniziata ma percorso Owner completo mancante, S5 non accettata. Soglie e incertezza completa restano gated; nessuna classificazione o fotografia pubblicata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati.
+
+Gate di questa consegna ancora da attestare: CI exact-head → ARB → RQ → expected-head merge → post-merge/Pages. Prossimo lavoro autorizzato: journal/adapter locale con verifica byte e ricevute, UI Owner e report sul PC, revisione dei permessi della sola chiave transient, provisioning separato e collaudi reali dopo i gate. Non ripetere P6 o elaborazioni approvate. S2/S3 richiedono validazione indipendente e recupero/falsi positivi reali; soglie e acceptance finale Owner restano decisioni successive al dossier.

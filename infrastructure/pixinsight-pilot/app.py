@@ -7,6 +7,20 @@ from tools.scientific_registry.ingestion_storage import BackedUpStore, GCSStore
 from tools.pixinsight.local_pilot.scientific_portal import ScientificPortal
 from tools.pixinsight.local_pilot.broker import decode
 import urllib.request
+from tools.scientific_transients.queue import TransientQueue
+
+
+def transient_component(store, legacy_worker_id, legacy_digest):
+    """Optional namespace; absent settings leave the accepted PIAI runtime alone."""
+    activation = os.environ.get("DSG_TRANSIENT_ACTIVATION")
+    if activation is None:
+        return None, None
+    require(activation == "OWNER_AUTHORIZED", "TRANSIENT_ACTIVATION_REQUIRED")
+    worker_id = os.environ["DSG_TRANSIENT_WORKER_ID"]
+    worker_digest = os.environ["DSG_TRANSIENT_WORKER_SHA256"]
+    require(worker_id != legacy_worker_id and worker_digest != legacy_digest,
+            "TRANSIENT_DISTINCT_IDENTITY_REQUIRED")
+    return TransientQueue(store, worker_id), worker_digest
 
 
 def public_bytes(url):
@@ -32,8 +46,10 @@ def main():
     scientific = ScientificPortal(broker,
         lambda: public_bytes(settings[names[6]] + "/digital-stargate-manual/data/scientific-session-catalog.json"),
         lambda: decode(public_bytes("https://dsg-scientific-photo-ingestion-183451329061.europe-west1.run.app/v1/gallery")))
+    transient, transient_digest = transient_component(store, settings[names[2]], settings[names[3]])
     handler = handler_for(broker,
-        lambda token: google_owner(token, settings[names[4]], settings[names[5]]), settings[names[6]], settings[names[3]], scientific)
+        lambda token: google_owner(token, settings[names[4]], settings[names[5]]), settings[names[6]], settings[names[3]], scientific,
+        transient, transient_digest)
     HTTPServer(("0.0.0.0", int(os.environ.get("PORT", "8080"))), handler).serve_forever()
 
 
