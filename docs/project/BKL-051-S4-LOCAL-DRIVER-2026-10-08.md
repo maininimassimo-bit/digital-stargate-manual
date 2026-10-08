@@ -29,6 +29,8 @@ il limite minimo non garantisce una frequenza massima effettiva e i timeout HTTP
 Terminato o incerto il tentativo, niente secondo start/tick. Avvio, cancel al punto sicuro, timeout e
 chiusura dell'handle corrente restano responsabilità del supervisore già rilasciato. Nessun PID persistito
 concede ownership e nessuna istanza PixInsight Owner viene terminata da questo incremento.
+Eccezioni inattese durante start/tick e clock invalido dopo start congelano il driver; non autorizzano
+un secondo avvio, ulteriori tick o una terminazione del processo. La riconciliazione resta esplicita.
 
 ## Riconciliazione esplicita
 
@@ -47,14 +49,15 @@ non ricrea lease/ownership e non rende validi i dati scientifici. La risoluzione
 
 ## Verifica e limiti
 
-Undici prove nuove con mock di processo e MemoryStore: percorso COMPLETED, cadence/no replay, cancel prima
+Dodici prove nuove con mock di processo e MemoryStore: percorso COMPLETED, cadence/no replay, cancel prima
 di start, ACK perso e riconciliazione senza POST, ACK storico/stato remoto divergente, PREPARED e root alternative,
 clock invalido/regressione, byte corrotti, preparazione parziale conservata, timeout senza process kill,
-identità remota conflittuale e outbox live rifiutata. Non sono native/cloud OAT; nessuna nuova elaborazione,
+identità remota conflittuale, outbox live rifiutata ed eccezione inattesa durante start senza replay.
+Non sono native/cloud OAT; nessuna nuova elaborazione,
 solve, detection o aperture eseguita. CI Windows/Linux e revisioni exact-head restano gate della PR.
 CALLER_REPORTED_NOT_ATTESTED, History a monte NOT_ATTESTED, NORMALIZED_SAMPLE_SUM e science NOT_VALIDATED
 restano invariati. Nessuna unità, variance, significatività, soglia o classificazione nuova.
-Suite locale complessiva: 107 prove Python, 106 PASS e un symlink skip per privilegi Windows;
+Suite locale complessiva: 108 prove Python, 107 PASS e un symlink skip per privilegi Windows;
 104 prove Node PASS. MkDocs strict, fixture portale e coerenza/generator roadmap/projection PASS.
 Questi risultati locali non sostituiscono CI e review sul commit esatto.
 

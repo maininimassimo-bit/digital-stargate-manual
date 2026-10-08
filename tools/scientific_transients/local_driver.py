@@ -75,18 +75,22 @@ class LocalDriver:
         require(not self.started and not self.finished, 'DRIVER_REPLAY_REFUSED')
         self.last_tick = self._now()
         self.started = True  # Set before launch; an exception never permits a second start.
-        result = self.supervisor.start()
+        try:
+            result = self.supervisor.start()
+        except Exception:
+            self.finished = True
+            raise
         self.finished = result['state'] != 'RUNNING'
         return result
 
     def step(self):
         """One explicit poll, no wait/loop or automatic next-job acquisition."""
         require(self.started and not self.finished, 'DRIVER_NOT_RUNNING')
-        now = self._now()
-        if now - self.last_tick < self.interval:
-            return {'state': 'POLL_NOT_DUE', 'scienceValidation': 'NOT_VALIDATED'}
-        self.last_tick = now
         try:
+            now = self._now()
+            if now - self.last_tick < self.interval:
+                return {'state': 'POLL_NOT_DUE', 'scienceValidation': 'NOT_VALIDATED'}
+            self.last_tick = now
             result = self.supervisor.tick()
         except Exception:
             self.finished = True  # Freeze uncertain exceptions; no implicit retry.

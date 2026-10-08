@@ -84,6 +84,8 @@ class DriverTests(unittest.TestCase):
         d = self.prepare(); d.start(); self.time = -1
         with self.assertRaises(ProtocolError): d.step()
         self.assertFalse(self.f.process.closed)
+        self.time = 2
+        with self.assertRaises(ProtocolError): d.step()
 
     def test_corrupt_local_or_remote_evidence_refuses_reconciliation(self):
         d = self.prepare(); d.start(); journal, outbox = self.reopened(d)
@@ -123,6 +125,15 @@ class DriverTests(unittest.TestCase):
             remote = original(path); remote['rootId'] = 'f' * 32; return remote
         self.f.transport.request = mismatch
         with self.assertRaises(ProtocolError): reconcile_retained(journal, outbox, self.f.transport)
+        self.assertEqual(self.f.starts, 0)
+
+    def test_unexpected_start_exception_freezes_without_replay_or_tick(self):
+        d = self.prepare()
+        with patch.object(d.supervisor, 'start', side_effect=OSError('synthetic persistence failure')):
+            with self.assertRaises(OSError): d.start()
+        with self.assertRaises(ProtocolError): d.start()
+        self.time = 2
+        with self.assertRaises(ProtocolError): d.step()
         self.assertEqual(self.f.starts, 0)
 
 
