@@ -37,3 +37,5 @@ See the [S1 proposal](../../docs/project/BKL-051-S1-FEASIBILITY-AND-CONTRACT-202
 `local_report.py` exports private JSON/HTML from an already sealed attempt with an independently supplied exact technical report digest. It verifies retained bytes and kernel correlations without new native work, remote ACK, scientific acceptance or complete dependency-archive claims. Eight synthetic tests, no network. [Contract and residuals](../../docs/project/BKL-051-S4-LOCAL-REPORT-2026-10-08.md).
 
 `local_driver.py` prepares and explicitly polls one trusted current reservation; no claim, daemon or credential loading. `reconcile_retained` verifies reopened evidence and obtains a fresh worker GET without POST/replay or clearing server recovery. Historical ACK and current remote match remain separate. Thirteen mock/MemoryStore tests. [Contract and residuals](../../docs/project/BKL-051-S4-LOCAL-DRIVER-2026-10-08.md).
+
+`reservation_intent.py` reserves one explicitly selected job with an exclusive durable intent; duplicate or uncertain dispatch freezes without retry, lease adoption or native launch. [Contract](../../docs/project/BKL-051-S4-RESERVATION-INTENT-2026-10-09.md).

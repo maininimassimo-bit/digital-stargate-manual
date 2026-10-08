@@ -124,6 +124,8 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                     return self.send(200, transient.register(self.body()))
                 if self.command == "POST" and path == "/v1/transient-analysis/worker/claim":
                     return self.send(200, transient.claim(self.body()))
+                if self.command == "POST" and path == "/v1/transient-analysis/worker/reserve":
+                    return self.send(200, transient.reserve_once(self.body()))
                 match = re.fullmatch(r"/v1/transient-analysis/(worker/)?jobs/(TRN_[a-f0-9]{32})(?:/(cancel|report|review))?", path)
                 if match:
                     worker_route, job_id, action = match.groups()

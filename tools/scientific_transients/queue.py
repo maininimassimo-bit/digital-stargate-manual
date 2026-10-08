@@ -80,6 +80,7 @@ class TransientQueue:
     def _view(job, worker=False):
         result = copy.deepcopy(job)
         result.pop("lastEvent", None)
+        result.pop("reservationIntent", None)
         if not worker:
             result.pop("leaseToken", None)
         result["executionEvidence"] = "WORKER_REPORTED_NOT_ATTESTED"
@@ -157,6 +158,32 @@ class TransientQueue:
                            leaseIssuedAt=now.isoformat(), leaseExpiresAt=(now + dt.timedelta(seconds=LEASE_SECONDS)).isoformat(),
                            updatedAt=now.isoformat())
             return {"job": self._view(job, worker=True) if job else None}
+        return self._mutate(operation)
+
+    def reserve_once(self, request):
+        """Explicit selected job and durable local intent; an existing intent never returns a lease."""
+        fields(request, {"workerId", "rootId", "jobId", "bindingRef", "reservationRef"})
+        require(request["workerId"] == self.worker_id and all(opaque(request[k]) for k in
+                ["rootId", "bindingRef", "reservationRef"]), "TRANSIENT_RESERVATION_ID")
+        token, attempt = secrets.token_hex(32), secrets.token_hex(16)
+        def operation(state, now):
+            require(state["rootId"] in {None, request["rootId"]}, "TRANSIENT_ROOT_MISMATCH")
+            existing = [j for j in state["jobs"] if j.get("reservationIntent", {}).get("reservationRef")
+                        == request["reservationRef"]]
+            if existing:
+                require(len(existing) == 1 and existing[0]["reservationIntent"] == request,
+                        "TRANSIENT_RESERVATION_CONFLICT")
+                return {"disposition": "RECONCILIATION_REQUIRED", "job": None}
+            job = self._job(state, request["jobId"])
+            require(job["binding"]["bindingRef"] == request["bindingRef"], "TRANSIENT_RESERVATION_BINDING")
+            require(job["state"] == "QUEUED" and not job["cancelRequested"], "TRANSIENT_RESERVATION_NOT_FRESH")
+            require(not any(j["state"] in {"RESERVED", "RUNNING", "RECOVERY_REQUIRED"} for j in state["jobs"]),
+                    "TRANSIENT_ATTEMPT_ACTIVE")
+            state["rootId"] = request["rootId"]
+            job.update(state="RESERVED", rootId=request["rootId"], attemptId=attempt, leaseToken=token,
+                       leaseIssuedAt=now.isoformat(), leaseExpiresAt=(now + dt.timedelta(seconds=LEASE_SECONDS)).isoformat(),
+                       updatedAt=now.isoformat(), reservationIntent=copy.deepcopy(request))
+            return {"disposition": "CREATED", "job": self._view(job, worker=True)}
         return self._mutate(operation)
 
     def cancel(self, job_id):

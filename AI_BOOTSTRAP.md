@@ -1,8 +1,8 @@
 # Digital StarGate AI Bootstrap
 
-## Stato corrente — 8 ottobre 2026
+## Stato corrente — 9 ottobre 2026
 
-P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #515 integrata su `46e8e9e75d9549f50b4473eed9182dd9cb3799dc`: rapporto locale privato rilasciato, 16 check exact-head, ARB/RQ e 15 workflow post-merge SUCCESS; cinque endpoint Pages verificati. Nuovo incremento candidato: driver per un solo tentativo già prenotato e riconciliazione esplicita dopo riavvio, senza claim, replay nativo o reset del server. Cadence locale esplicita; ACK storico e stato remoto corrente distinti. Nessuna nuova elaborazione PixInsight. Unità normalizzate, variance/significatività sconosciute e NOT_VALIDATED invariati. Restano claim completo, recovery server, workflow scientifico, accessi/PC/cloud OAT, validation, policy e reporting. Runtime e invii disattivati. S1/S2 aperte, S3 parziale, S4 incompleta, S5 non accettata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](docs/project/HANDOVER_2026-10-08-BKL051-LOCAL-DRIVER.md).
+P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #516 integrata su `2ad11bf0551d89909d179df1b451464fff44f2c0`: driver locale e riconciliazione rilasciati, 16 gate exact-head, ARB/RQ e 15 workflow post-merge SUCCESS; cinque endpoint Pages verificati. Nuovo incremento candidato: prenotazione esplicita di un solo job tramite intent locale esclusivo. Una risposta persa o duplicata non autorizza retry, adozione del lease o avvio nativo. Nessuna nuova elaborazione PixInsight. Recovery server, workflow scientifico, accessi/PC/cloud OAT, validation, policy e reporting restano aperti. Runtime e invii disattivati; unità normalizzate, variance/significatività sconosciute e NOT_VALIDATED invariati. S1/S2 aperte, S3 parziale, S4 incompleta, S5 non accettata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](docs/project/HANDOVER_2026-10-09-BKL051-RESERVATION-INTENT.md).
 
 ## Snapshot storico — 7 ottobre 2026
 
@@ -13,8 +13,8 @@ P6 accettata operativamente dall’Owner il 7 ottobre 2026 con tutti i limiti de
 
 | Campo | Valore |
 |---|---|
-| Versione | 8.27 |
-| Baseline | 08/10/2026 |
+| Versione | 8.28 |
+| Baseline | 09/10/2026 |
 | Stato | Current root bootstrap — P6 accepted; BKL-051 Owner local/query direction approved, S1 open, S2 native solves with independent validation pending; BKL-043 lifecycle pending; S10 unavailable |
 
 Questo file è il punto di ingresso obbligatorio per ogni nuova sessione di lavoro sul repository `maininimassimo-bit/digital-stargate-manual`.
@@ -24,7 +24,7 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni e proje
 
 ## 2. Sequenza obbligatoria di lettura
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-10-08-BKL051-LOCAL-DRIVER.md`
+2. `docs/project/HANDOVER_2026-10-09-BKL051-RESERVATION-INTENT.md`
 3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`

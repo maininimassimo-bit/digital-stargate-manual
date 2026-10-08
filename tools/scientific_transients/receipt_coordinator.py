@@ -45,7 +45,7 @@ def observed_schema(value, expected):
 class TransientTransport(OriginTransport):
     """One-shot, bounded dedicated routes; inherited TLS/origin/no-proxy/no-redirect policy."""
     def request(self, path, value=None):
-        require(re.fullmatch(r"/v1/transient-analysis/worker/(?:claim|register|jobs/TRN_[a-f0-9]{32}(?:/report)?)", path), "TRANSIENT_ROUTE_INVALID")
+        require(re.fullmatch(r"/v1/transient-analysis/worker/(?:claim|reserve|register|jobs/TRN_[a-f0-9]{32}(?:/report)?)", path), "TRANSIENT_ROUTE_INVALID")
         is_read = bool(re.fullmatch(r"/v1/transient-analysis/worker/jobs/TRN_[a-f0-9]{32}", path))
         require((value is None) == is_read, "TRANSIENT_METHOD_INVALID")
         raw = None if is_read else encode(value)
