@@ -3,3 +3,7 @@
 .dsg-transients dt { font-weight: 600; }
 .dsg-transients summary { cursor: pointer; padding: .4rem 0; }
 .dsg-transients button { background: var(--md-default-bg-color); color: var(--md-default-fg-color); }
+.dsg-transients select {max-width:100%;color:var(--md-default-fg-color);background:var(--md-default-bg-color);border:1px solid var(--md-default-fg-color--lighter);padding:.4rem;}
+.dsg-transients label {display:block;margin:.6rem 0;overflow-wrap:anywhere;}
+.dsg-transients input[type="checkbox"] {margin-right:.3rem;}
+.dsg-transients select:focus-visible,.dsg-transients input:focus-visible {outline:3px solid var(--md-accent-fg-color);outline-offset:3px;}

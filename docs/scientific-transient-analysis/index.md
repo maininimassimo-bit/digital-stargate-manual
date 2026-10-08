@@ -9,6 +9,16 @@
   <button type="button" data-dsg-transients-connect>Accedi con Google</button>
   <button type="button" data-dsg-transients-disconnect disabled>Termina accesso</button>
   <div data-dsg-transients-signin></div>
+  <section aria-label="Richiesta di analisi">
+    <h2>Gruppo verificato sul PC</h2>
+    <p>Scegli solo un gruppo già registrato e verificato sul computer. Il portale non legge le cartelle e non carica le immagini.</p>
+    <label>Gruppo <select data-dsg-transients-group disabled></select></label>
+    <p data-dsg-transients-group-details></p>
+    <label><input type="checkbox" data-dsg-transients-verified disabled> Ho verificato sul PC immagine, riferimento, algoritmo e contratto di questo gruppo.</label>
+    <button type="button" data-dsg-transients-create disabled>Richiedi analisi</button>
+    <p data-dsg-transients-pending role="status" aria-live="polite"></p>
+    <button type="button" data-dsg-transients-retry disabled>Ripeti la stessa richiesta</button>
+  </section>
   <section aria-label="Stato delle analisi">
     <h2>Stato ed evidenze</h2>
     <button type="button" data-dsg-transients-refresh disabled>Aggiorna stato</button>

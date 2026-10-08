@@ -2,7 +2,7 @@
 
 ## Stato corrente — 8 ottobre 2026
 
-P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #512 integrata e verificata sul merge `1e0a476b93329a9479db2b2c282005d14ac5f768`: 16 check exact-commit (15 nel rollup PR e sync manuale), ARB/RQ, 15 workflow post-merge e sette HTTP/projection PASS. Supervisore locale PJSR consegnato nel perimetro same-session; prove native locali e MemoryStore, non cloud OAT. Nuova vista Owner di sola consultazione candidata: stati, riferimenti opachi, conteggi e download della ricevuta minimizzata; rapporto completo e immagini sul PC. Servizio transient e invii non attivati. Unità normalizzate, variance/significatività sconosciute, NOT_VALIDATED. Restano selezione/analisi/revisione/report scientifico completi, driver/recovery e accessi/PC/cloud OAT, validation e reporting. S1/S2 aperte, S3 parziale, S4 incompleta, S5 non accettata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](docs/project/HANDOVER_2026-10-08-BKL051-OWNER-EVIDENCE-VIEW.md).
+P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #513 integrata e verificata sul merge `1c713f37b2522458e0d364c519756edc1f7ba2ba`: 20 check exact-head, ARB/RQ senza finding, 19 workflow post-merge e dieci HTTP/artifact/projection PASS; pagina privata pubblicata, visualmente verificata senza login. Nuovo incremento candidato: selezione esplicita del gruppo registrato, richiesta/annullamento e valutazione Owner legata al digest del rapporto, con intent conservato e riconciliazione manuale dopo risposte perse. Servizio transient e invii non attivati. Rapporto completo e immagini sul PC; WORKER_REPORTED_NOT_ATTESTED, OWNER_DECLARED e NOT_VALIDATED preservati. Unità normalizzate e variance/significatività sconosciute. Restano driver/recovery operativa, rapporto scientifico locale completo, accessi/PC/cloud OAT, validation e reporting. S1/S2 aperte, S3 parziale, S4 incompleta, S5 non accettata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](docs/project/HANDOVER_2026-10-08-BKL051-OWNER-ACTIONS.md).
 
 ## Snapshot storico — 7 ottobre 2026
 
@@ -13,7 +13,7 @@ P6 accettata operativamente dall’Owner il 7 ottobre 2026 con tutti i limiti de
 
 | Campo | Valore |
 |---|---|
-| Versione | 8.24 |
+| Versione | 8.25 |
 | Baseline | 08/10/2026 |
 | Stato | Current root bootstrap — P6 accepted; BKL-051 Owner local/query direction approved, S1 open, S2 native solves with independent validation pending; BKL-043 lifecycle pending; S10 unavailable |
 
@@ -24,7 +24,7 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni e proje
 
 ## 2. Sequenza obbligatoria di lettura
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-10-08-BKL051-OWNER-EVIDENCE-VIEW.md`
+2. `docs/project/HANDOVER_2026-10-08-BKL051-OWNER-ACTIONS.md`
 3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`

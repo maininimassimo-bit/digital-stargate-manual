@@ -707,3 +707,7 @@ L'Owner ha approvato la proposta PC locale + consultazione privata nel portale, 
 ## BKL-051 — consultazione Owner, 8 ottobre 2026
 
 [Vista candidata](BKL-051-S4-OWNER-EVIDENCE-VIEW-2026-10-08.md): solo GET manuale e ricevuta minimizzata, senza verifica del rapporto locale o attestazione scientifica. UI logged-out locale e contratti sintetici, non cloud OAT. Restano percorso selezione/decisione/report completi, driver/recovery, accessi/PC/cloud e validation/reporting.
+
+## BKL-051 — comandi Owner, 8 ottobre 2026
+
+[Incremento candidato](BKL-051-S4-OWNER-ACTIONS-2026-10-08.md): contratti di coda esistenti, selezione esplicita e intent immutabile conservato prima del POST, riconciliazione dopo lost-ack e dichiarazione Owner sul report esatto. Nessun runtime/claim/query/invio. Storage per sessione/tab, non backup durevole; recovery e cloud OAT pendenti.

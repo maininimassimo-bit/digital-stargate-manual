@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {readFileSync} from 'node:fs';
+import {webcrypto} from 'node:crypto';
 const source=readFileSync(new URL('../../docs/javascripts/scientific-transients-portal.js',import.meta.url),'utf8');
 const queueViews=JSON.parse(readFileSync(new URL('portal-queue-fixture.json',import.meta.url),'utf8'));
 const tick=async()=>{for(let i=0;i<8;i++)await new Promise(resolve=>setTimeout(resolve,2));};
@@ -11,37 +12,62 @@ const fixture=()=>({jobId:'TRN_'+'6'.repeat(32),request:{requestId:'6'.repeat(32
     qualityCounts:{measured:0,excluded:0,incomplete:2}},reviews:[],createdAt:'2026-10-08T10:00:00+00:00',updatedAt:'2026-10-08T10:01:00.123456+00:00',
   rootId:'8'.repeat(32),attemptId:'9'.repeat(32),leaseIssuedAt:'2026-10-08T10:00:00+00:00',leaseExpiresAt:'2026-10-08T10:15:00+00:00',
   executionEvidence:'WORKER_REPORTED_NOT_ATTESTED',scientificValidation:'NOT_VALIDATED',detailsLocation:'OWNER_PC',publication:'NONE'});
-function harness({jobs=[fixture()],status=200,fail=false,deferred=false,googleMissing=false,rawBody,media='application/json',contentLength=null,timeout=false}={}) {
+function harness({jobs=[fixture()],status=200,fail=false,deferred=false,googleMissing=false,rawBody,media='application/json',contentLength=null,timeout=false,
+  bindings=[fixture().binding],storage=new Map(),storageFail=false,removeFail=false,postFailure='',postDeferred=false}={}) {
   function node(tag='div'){return {tag,dataset:{},children:[],callbacks:{},disabled:false,isConnected:true,
-    textContent:'',addEventListener(type,callback){this.callbacks[type]=callback;},append(...items){this.children.push(...items);},
+    textContent:'',value:'',checked:false,setAttribute(){},addEventListener(type,callback){this.callbacks[type]=callback;},append(...items){this.children.push(...items);},
     replaceChildren(){this.children=[];},querySelectorAll(selector){return this.children.flatMap(n=>[...(n.tag===selector?[n]:[]),...n.querySelectorAll(selector)]);},
     click(){if(!this.disabled)this.callbacks.click?.();}};}
-  const controls=Object.fromEntries(['message','connect','disconnect','signin','refresh','observed','jobs'].map(key=>[key,node()]));
+  const controls=Object.fromEntries(['message','connect','disconnect','signin','refresh','observed','jobs','group','verified','create','retry','pending','group-details'].map(key=>[key,node()]));
   const root=node();root.querySelector=selector=>controls[selector.match(/data-dsg-transients-(.+)\]/)[1]];
   let currentRoot=root,login,subscribe,release,abortByTimeout;
   const requests=[],blobs=[],revoked=[],created=[];
   const google={accounts:{id:{initialize(value){login=value.callback;},renderButton(){}}}};
   const context={document:{readyState:'complete',querySelector:()=>currentRoot,createElement:tag=>{const n=node(tag);created.push(n);return n;},head:node()},
     window:{google:googleMissing?undefined:google},google,document$:{subscribe(callback){subscribe=callback;}},
-    Blob,TextDecoder,AbortController,setTimeout(callback,delay){if(delay===30000)abortByTimeout=callback;return setTimeout(callback,delay);},clearTimeout,
+    Blob,TextDecoder,AbortController,crypto:webcrypto,Uint8Array,setTimeout(callback,delay){if(delay===30000)abortByTimeout=callback;return setTimeout(callback,delay);},clearTimeout,
     URL:{createObjectURL(blob){blobs.push(blob);return 'blob:'+blobs.length;},revokeObjectURL(url){revoked.push(url);}},
-    localStorage:{setItem(){assert.fail('credential persistence forbidden');}},sessionStorage:{setItem(){assert.fail('credential persistence forbidden');}},
+    localStorage:{setItem(){assert.fail('credential persistence forbidden');}},sessionStorage:{
+      getItem:key=>storage.has(key)?storage.get(key):null,
+      setItem(key,value){if(storageFail)throw Error('PRIVATE_STORAGE_ERROR');assert.equal(value.includes('OWNER_ONLY_IN_MEMORY'),false);storage.set(key,value);},
+      removeItem(key){if(removeFail)throw Error('PRIVATE_STORAGE_ERROR');storage.delete(key);}},
     async fetch(url,options){
-      requests.push({url,options});assert.equal(url,'https://dsg-pixinsight-pilot-183451329061.europe-west1.run.app/v1/transient-analysis/jobs');
-      assert.equal(options.method,'GET');assert.equal(options.body,undefined);assert.equal(options.cache,'no-store');
+      requests.push({url,options});assert.match(url,/^https:\/\/dsg-pixinsight-pilot-183451329061.europe-west1.run.app\/v1\/transient-analysis\/(?:options|jobs(?:\/TRN_[a-f0-9]{32}\/(?:cancel|review))?)$/);
+      assert.equal(options.cache,'no-store');
       assert.equal(options.redirect,'error');assert.equal(options.credentials,'omit');
       assert.equal(options.headers.Authorization,'Bearer OWNER_ONLY_IN_MEMORY');
       if(timeout)await new Promise((resolve,reject)=>options.signal.addEventListener('abort',()=>reject(Error('ABORTED'))));
       if(deferred)await new Promise(resolve=>{release=resolve;});
       if(fail)throw Error('HOSTILE_PRIVATE_ERROR');
+      let responseBody=url.endsWith('/options')?{bindings}:{jobs};
+      if(options.method==='POST') {
+        assert.equal(options.headers['Content-Type'],'application/json');
+        if(postDeferred)await new Promise(resolve=>{release=resolve;});
+        if(postFailure==='before')throw Error('LOST_ACK');
+        const body=JSON.parse(options.body);
+        if(url.endsWith('/jobs')) {
+          let job=jobs.find(j=>j.jobId==='TRN_'+body.requestId);
+          if(!job){job={...fixture(),jobId:'TRN_'+body.requestId,request:body,binding:bindings.find(b=>b.bindingRef===body.bindingRef),state:'QUEUED',sequence:0,result:null};
+            for(const key of ['rootId','attemptId','leaseIssuedAt','leaseExpiresAt'])delete job[key];jobs.push(job);}
+          responseBody=job;
+        } else {
+          const job=jobs.find(j=>url.includes(j.jobId));assert.ok(job);
+          if(url.endsWith('/cancel')) {if(!['COMPLETED','FAILED','CANCELLED','RECOVERY_REQUIRED'].includes(job.state)){
+            job.cancelRequested=true;if(job.state==='QUEUED')job.state='CANCELLED';}}
+          else if(!job.reviews.some(r=>r.request.decisionId===body.decisionId))job.reviews.push({request:body,recordedAt:job.updatedAt,authority:'OWNER_DECLARED'});
+          responseBody=job;
+        }
+        if(postFailure==='after')throw Error('LOST_ACK');
+      } else {assert.equal(options.method,'GET');assert.equal(options.body,undefined);}
       return {status,ok:status===200,headers:{get:key=>key==='Content-Length'?contentLength:media},
-        body:new ReadableStream({start(controller){controller.enqueue(rawBody instanceof Uint8Array?rawBody:new TextEncoder().encode(rawBody??JSON.stringify({jobs})));controller.close();}})};
+        body:new ReadableStream({start(controller){controller.enqueue(rawBody instanceof Uint8Array?rawBody:new TextEncoder().encode(rawBody??JSON.stringify(responseBody)));controller.close();}})};
     }};
   vm.runInNewContext(source,context);
-  return {controls,root,requests,blobs,revoked,created,
+  return {controls,root,requests,blobs,revoked,created,storage,
     async login(){controls.connect.click();await tick();login({credential:'OWNER_ONLY_IN_MEMORY'});await tick();},
     async refresh(){controls.refresh.click();await tick();},
-    setStatus(value){status=value;},setJobs(value){jobs=value;},release(){release?.();},fireTimeout(){abortByTimeout();},
+    setStatus(value){status=value;},setJobs(value){jobs=value;},setBindings(value){bindings=value;},setPostFailure(value){postFailure=value;},release(){release?.();},fireTimeout(){abortByTimeout();},
+    async create(){controls.group.value=bindings[0].bindingRef;controls.group.callbacks.change();controls.verified.checked=true;controls.verified.callbacks.change();controls.create.click();await tick();},
     navigate(){root.isConnected=false;currentRoot=null;subscribe();},
     repeatInitialize(){subscribe();},loginCallback(){return login;},context};
 }
@@ -56,12 +82,12 @@ test('other portal pages do not initialize authentication or requests',()=>{
 
 test('no reads or commands before Owner action; initialization is idempotent',async()=>{
   const h=harness();assert.equal(h.requests.length,0);assert.equal(h.controls.refresh.disabled,true);
-  h.repeatInitialize();await h.login();assert.equal(h.requests.length,1);await h.refresh();assert.equal(h.requests.length,2);
+  h.repeatInitialize();await h.login();assert.equal(h.requests.length,2);await h.refresh();assert.equal(h.requests.length,4);
 });
 test('completion remains worker-reported, incomplete and scientifically unvalidated',async()=>{
   const h=harness();await h.login();assert.match(text(h),/Completamento tecnico/);assert.match(text(h),/incompleti 2/);
   assert.match(text(h),/Validazione scientifica non completata/);assert.match(text(h),/senza attestazione indipendente/);
-  assert.equal(h.controls.jobs.querySelectorAll('button').length,1);
+  assert.equal(h.controls.jobs.querySelectorAll('button').length,2);
 });
 test('download contains a minimized snapshot with no token and no local-byte verification',async()=>{
   const h=harness();await h.login();h.controls.jobs.querySelectorAll('button')[0].click();
@@ -83,7 +109,7 @@ test('denied Owner access clears earlier private cards and disables refresh',asy
 test('unavailable service clears a previous snapshot; manual read only',async()=>{
   const h=harness();await h.login();h.setStatus(503);await h.refresh();
   assert.equal(h.controls.jobs.children.length,0);assert.match(h.controls.message.textContent,/Nessun risultato mostrato/);
-  assert.equal(h.requests.length,2);
+  assert.equal(h.requests.length,3);
 });
 test('empty state is explicit',async()=>{const h=harness({jobs:[]});await h.login();assert.match(text(h),/Nessuna analisi registrata/);});
 test('pending cancel cannot be shown as a stopped native process',async()=>{
@@ -128,7 +154,7 @@ test('disconnect during an in-flight read prevents late private rendering',async
 });
 test('Instant Navigation clears token, cards, downloads and rejects old sign-in callbacks',async()=>{
   const h=harness();await h.login();h.controls.jobs.querySelectorAll('button')[0].click();const old=h.loginCallback();
-  h.navigate();old({credential:'OWNER_ONLY_IN_MEMORY'});await tick();assert.equal(h.requests.length,1);
+  h.navigate();old({credential:'OWNER_ONLY_IN_MEMORY'});await tick();assert.equal(h.requests.length,2);
   assert.equal(h.controls.jobs.children.length,0);assert.deepEqual(h.revoked,['blob:1']);
 });
 test('late response after navigation cannot restore a removed private page',async()=>{
@@ -160,4 +186,98 @@ test('operational read timeout clears results and exposes a manual retry error',
   const h=harness({timeout:true});await h.login();h.fireTimeout();await tick();
   assert.equal(h.controls.jobs.children.length,0);assert.match(h.controls.message.textContent,/riprova manualmente/);
   assert.equal(h.controls.refresh.disabled,false);assert.equal(h.requests.length,1);
+});
+
+const posts=h=>h.requests.filter(r=>r.options.method==='POST');
+test('create requires a selected group and explicit PC confirmation; no automatic commands',async()=>{
+  const h=harness();await h.login();assert.equal(h.controls.create.disabled,true);assert.equal(posts(h).length,0);
+  h.controls.group.value=fixture().binding.bindingRef;h.controls.group.callbacks.change();assert.equal(h.controls.create.disabled,true);
+  await h.create();assert.equal(posts(h).length,1);const body=JSON.parse(posts(h)[0].options.body);
+  assert.match(body.requestId,/^[a-f0-9]{32}$/);assert.equal(body.bindingRef,fixture().binding.bindingRef);
+  assert.equal(h.storage.size,0);assert.match(h.controls.message.textContent,/Richiesta di analisi registrata/);
+});
+test('lost create acknowledgement is reconciled by read, without a second POST',async()=>{
+  const h=harness({postFailure:'after'});await h.login();await h.create();assert.equal(h.storage.size,1);
+  assert.equal(h.controls.create.disabled,true);await h.refresh();assert.equal(h.storage.size,0);assert.equal(posts(h).length,1);
+});
+test('uncommitted create retains immutable intent and retries only on explicit click',async()=>{
+  const h=harness({postFailure:'before'});await h.login();await h.create();const body=posts(h)[0].options.body;
+  await h.refresh();assert.equal(h.controls.retry.disabled,false);assert.equal(posts(h).length,1);
+  h.setPostFailure('');h.controls.retry.click();await tick();assert.equal(posts(h).length,2);
+  assert.equal(posts(h)[1].options.body,body);assert.equal(h.storage.size,0);
+});
+test('restored intent never sends automatically; changed immutable binding freezes retry',async()=>{
+  const first=harness({postFailure:'before'});await first.login();await first.create();
+  const changed={...fixture().binding,inputRef:'f'.repeat(32)};
+  const h=harness({storage:first.storage,jobs:[],bindings:[changed]});await h.login();
+  assert.equal(posts(h).length,0);assert.equal(h.controls.retry.disabled,true);assert.equal(h.controls.create.disabled,true);
+  assert.equal(h.storage.size,1);
+});
+test('invalid stored intent is retained and blocks commands without reflecting contents',async()=>{
+  const storage=new Map([['dsg-bkl051-owner-pending-v1','{"path":"PRIVATE_SECRET"}']]);
+  const h=harness({storage});await h.login();assert.equal(h.controls.create.disabled,true);assert.equal(h.controls.retry.disabled,true);
+  assert.equal(storage.size,1);assert.equal(h.controls.pending.textContent.includes('PRIVATE_SECRET'),false);assert.equal(posts(h).length,0);
+});
+test('storage failure prevents POST; removal failure blocks further commands',async()=>{
+  const h=harness({storageFail:true});await h.login();await h.create();assert.equal(posts(h).length,0);assert.equal(h.controls.create.disabled,true);
+  const other=harness({removeFail:true});await other.login();await other.create();assert.equal(posts(other).length,1);
+  assert.equal(other.storage.size,1);assert.equal(other.controls.create.disabled,true);assert.equal(other.controls.retry.disabled,true);
+});
+test('queued cancellation retains job and acknowledges request, not native termination',async()=>{
+  const queued=structuredClone(queueViews.cases.find(c=>c.stage==='QUEUED').response.jobs[0]);
+  const h=harness({jobs:[queued]});await h.login();h.controls.jobs.querySelectorAll('button').find(b=>b.textContent==='Richiedi annullamento').click();await tick();
+  assert.equal(posts(h).length,1);assert.equal(posts(h)[0].options.body,'{}');assert.match(text(h),/Annullamento confermato/);
+  assert.match(h.controls.message.textContent,/PC va verificato separatamente/);assert.equal(h.storage.size,0);
+});
+test('review requires explicit local consultation and pins exact report hash',async()=>{
+  const h=harness();await h.login();const button=h.controls.jobs.querySelectorAll('button').find(b=>b.textContent==='Registra valutazione dichiarata');
+  button.click();await tick();assert.equal(posts(h).length,0);
+  h.controls.jobs.querySelectorAll('input')[0].checked=true;h.controls.jobs.querySelectorAll('select')[0].value='FOLLOW_UP';
+  button.click();await tick();assert.equal(posts(h).length,1);
+  const body=JSON.parse(posts(h)[0].options.body);assert.equal(body.reportSha256,fixture().result.reportSha256);assert.equal(body.decision,'FOLLOW_UP');
+  assert.match(text(h),/Owner dichiarata: Approfondire/);assert.equal(h.storage.size,0);
+});
+test('lost review acknowledgement reconciles exact declared decision without resubmission',async()=>{
+  const h=harness({postFailure:'after'});await h.login();h.controls.jobs.querySelectorAll('input')[0].checked=true;
+  h.controls.jobs.querySelectorAll('select')[0].value='KEEP_FOR_REVIEW';
+  h.controls.jobs.querySelectorAll('button').find(b=>b.textContent==='Registra valutazione dichiarata').click();await tick();
+  assert.equal(h.storage.size,1);await h.refresh();assert.equal(h.storage.size,0);assert.equal(posts(h).length,1);
+});
+test('disconnect during POST preserves intent and prevents later rendering or further requests',async()=>{
+  const h=harness({postDeferred:true});await h.login();await h.create();const count=h.requests.length;
+  h.controls.disconnect.click();h.release();await tick();assert.equal(h.requests.length,count);assert.equal(h.storage.size,1);
+  assert.equal(h.controls.jobs.children.length,0);assert.match(h.controls.message.textContent,/Accesso terminato/);
+});
+test('restored valid create can only resend the same payload after fresh reads',async()=>{
+  const first=harness({postFailure:'before'});await first.login();await first.create();
+  const h=harness({storage:first.storage,jobs:[]});await h.login();assert.equal(posts(h).length,0);
+  assert.equal(h.controls.retry.disabled,false);h.controls.retry.click();await tick();
+  assert.equal(posts(h)[0].options.body,posts(first)[0].options.body);assert.equal(h.storage.size,0);
+});
+test('two rapid create clicks produce one intent and one POST',async()=>{
+  const h=harness({postDeferred:true});await h.login();await h.create();h.controls.create.click();await tick();
+  assert.equal(posts(h).length,1);h.release();await tick();assert.equal(h.storage.size,0);
+});
+test('a completed job before cancellation retry is reported as no effect',async()=>{
+  const running=fixture();Object.assign(running,{state:'RUNNING',result:null,sequence:2});
+  const h=harness({jobs:[running],postFailure:'before'});await h.login();
+  h.controls.jobs.querySelectorAll('button').find(b=>b.textContent==='Richiedi annullamento').click();await tick();
+  h.setJobs([fixture()]);await h.refresh();assert.equal(h.storage.size,0);assert.equal(posts(h).length,1);
+  assert.match(h.controls.message.textContent,/nessun annullamento attribuito/);
+});
+test('review retry freezes when the report changes, without substituting the new digest',async()=>{
+  const h=harness({postFailure:'before'});await h.login();h.controls.jobs.querySelectorAll('input')[0].checked=true;
+  h.controls.jobs.querySelectorAll('select')[0].value='FOLLOW_UP';
+  h.controls.jobs.querySelectorAll('button').find(b=>b.textContent==='Registra valutazione dichiarata').click();await tick();
+  const changed=fixture();changed.result.reportSha256='e'.repeat(64);h.setJobs([changed]);await h.refresh();
+  assert.equal(h.storage.size,1);assert.equal(h.controls.retry.disabled,true);assert.equal(posts(h).length,1);
+});
+test('duplicate review ID with a different declaration freezes reconciliation',async()=>{
+  const h=harness({postFailure:'before'});await h.login();h.controls.jobs.querySelectorAll('input')[0].checked=true;
+  h.controls.jobs.querySelectorAll('select')[0].value='FOLLOW_UP';
+  h.controls.jobs.querySelectorAll('button').find(b=>b.textContent==='Registra valutazione dichiarata').click();await tick();
+  const changed=fixture(),body=JSON.parse(posts(h)[0].options.body);
+  changed.reviews=[{request:{...body,decision:'REJECT_CANDIDATE'},recordedAt:changed.updatedAt,authority:'OWNER_DECLARED'}];
+  h.setJobs([changed]);await h.refresh();assert.equal(h.storage.size,1);assert.equal(h.controls.retry.disabled,true);
+  assert.equal(posts(h).length,1);
 });
