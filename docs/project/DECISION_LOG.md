@@ -679,3 +679,7 @@ L'Owner ha approvato la proposta PC locale + consultazione privata nel portale, 
 ## BKL-051 — segnalazioni approvate nello scope, 8 ottobre 2026
 
 [Piano](BKL-051-SCIENTIFIC-REPORTING-PLAN-2026-10-08.md) e [evento Owner](evidence/BKL-051-OWNER-REPORTING-SCOPE-2026-10-08.json). Dossier, oggetti mobili, invio assistito e capacità autonoma condizionata sono requisiti da realizzare nella milestone. Adapters, formati, identità/credenziali, riconciliazione di esito e collaudi restano aperti; nessun invio attivo o policy quantitativa accettata. Rollback dei futuri invii conserva ledger/ricevute e non ritira automaticamente quanto già consegnato.
+
+## BKL-051 — origini pixel e misure raccordate, 8 ottobre 2026
+
+[Contratto proposto](BKL-051-S2-PIXEL-CONVENTION-2026-10-08.md): unità/origini esplicite, nessuna API attestata dal solo input dichiarato. Tre fixture native e due known-answer di apertura, vecchi export/misure conservati; ensemble comune raccordato per identità. Doppio/mancato offset risolto nel ramo corretto; budget dipendenti dalle aperture e covarianze complete ancora aperti. 55 test offline locali; CI/review/post-merge nella PR, non acceptance scientifica. Coda/invii rimangono disabilitati.

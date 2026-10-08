@@ -2,7 +2,7 @@
 
 ## Stato corrente — 8 ottobre 2026
 
-P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #505 integrata e verificata sul merge `d15529722cdd9e2ac8b9a629e2fc2aff4cd83e01`: coda privata candidata, disabilitata per default; nessun deployment, IAM o credenziale modificati. Owner approva anche dossier e segnalazioni CBAT/TNS/AAVSO-VSX/MPC, incluse ricerca di oggetti mobili e capacità di invio autonomo condizionata; funzionalità da realizzare, nessun invio attivato. S1/S2 scientifiche aperte, S3 parziale, S4 incompleta, S5 non accettata. Soglie, policy autonoma e accettazione finale restano gated. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](HANDOVER_2026-10-08-BKL051-REPORTING-PLAN.md).
+P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #506 integrata e verificata sul merge `14d53228a7ab4a34e90070fea99033a1f84360f6`: requisiti di segnalazione pubblicati; nessun invio attivato. Coda privata candidata disabilitata per default. Contratto offline esplicito delle origini pixel e nuove evidenze native/private riconciliate; 55 test numerici locali, non accettazione scientifica. Coorte M27 comune verificata dopo correzione delle aperture, budget completi di rumore/covarianza ancora aperti. S1/S2 scientifiche aperte, S3 parziale, S4 incompleta, S5 non accettata. Soglie, policy autonoma e accettazione finale restano gated. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](HANDOVER_2026-10-08-BKL051-PIXEL-CONVENTION.md).
 
 | Campo | Valore |
 |---|---|

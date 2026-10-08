@@ -2,7 +2,7 @@
 
 Offline, dependency-free preparation of a **proposed** private measurement intake contract. Not an image reader, astrometric solver, photometry pipeline, catalog client or operational portal integration. It neither establishes the truth of metadata nor manufactures consent from an actor/status field.
 
-Run `node --test tools/scientific_transients/contract.test.mjs tools/scientific_transients/reference.test.mjs tools/scientific_transients/measurement.test.mjs tools/scientific_transients/uncertainty.test.mjs tools/scientific_transients/epoch.test.mjs`.
+Run `node --test tools/scientific_transients/contract.test.mjs tools/scientific_transients/reference.test.mjs tools/scientific_transients/measurement.test.mjs tools/scientific_transients/uncertainty.test.mjs tools/scientific_transients/epoch.test.mjs tools/scientific_transients/pixel.test.mjs`.
 
 `parseIntake` rejects unknown/duplicate keys, nonfinite values, oversized/deep input, invalid dates and reused master digests as independent evidence. `inspectIntake` always returns `NO_ANALYSIS_EXECUTED` and `OWNER_CONTRACT_DECISIONS_PENDING`; even an apparently complete input receives no candidate/discovery classification. No I/O, credentials, owner paths, coordinates, scientific thresholds or external requests are present.
 
@@ -19,3 +19,5 @@ See the [S1 proposal](../../docs/project/BKL-051-S1-FEASIBILITY-AND-CONTRACT-202
 `epoch.mjs` computes only a proposed barycentric rectilinear six-dimensional position model with explicit Julian-year TCB epochs and pmRA × cos(dec). Missing motion/distance/epoch remains incomplete. It does not propagate covariance, compute apparent place, grant matching acceptance or execute requests. Seven tests and six privately retained ESA numerical checks cover known answers, wrap and poles. See [epoch model and limits](../../docs/project/BKL-051-S1-EPOCH-MODEL-2026-10-08.md).
 
 `queue.py` adds the Owner-approved dedicated private control namespace, tested by `python -m unittest tools.scientific_transients.test_queue`. It has no image processing or provider query; no native worker/UI/deployed OAT is claimed. Default-disabled integration and remaining gates: [S4 contract](../../docs/project/BKL-051-S4-PRIVATE-QUEUE-2026-10-08.md). Earlier offline-only descriptions apply to the individual JavaScript inspectors, not this additive candidate.
+
+`pixel.mjs` converts explicit sample-index/native-geometric/FITS-one-based declarations offline. Unknown conventions stay incomplete; no WCS, orientation correction or science acceptance. Eleven known-answer/negative tests; [native evidence and aperture reconciliation](../../docs/project/BKL-051-S2-PIXEL-CONVENTION-2026-10-08.md). API origins require independent attestation by the future adapter.
