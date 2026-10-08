@@ -2,7 +2,7 @@
 
 ## Stato corrente — 8 ottobre 2026
 
-P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #509 integrata e verificata sul merge `b634c0d5f3be9cfd00334d7c13f2a16cf2f7fb9a`: snapshot/journal e teardown; 17 workflow post-merge e Pages PASS. Coordinatore receipt/outbox e GET worker candidati, prove MemoryStore e HTTP loopback; niente retry dopo restart non riconciliato. Produttore nativo, recovery operativa, rapporto scientifico completo, UI/OAT e budget scientifici restano incompleti. Nessuna significatività o scoperta attestata. Coda/invii disabilitati. S1/S2 aperte, S3 parziale, S4 incompleta, S5 non accettata; soglie/policy e acceptance finale Owner. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](HANDOVER_2026-10-08-BKL051-RECEIPT-COORDINATOR.md).
+P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #510 integrata sul merge `53fb275a117b32adb4312d9672705c522670b2ff`: 19 CI, ARB/RQ, 17 workflow post-merge e sette HTTP/projection PASS. Nuovo produttore di aperture PJSR e collector locale candidati, verificati su controlli numerici; integrazione con journal/outbox in MemoryStore, senza cloud OAT. Unità normalizzate, full variance e significatività sconosciute; rapporto NOT_VALIDATED. Workflow fotometrico completo, coordinatore operativo/recovery, rapporto scientifico, UI/OAT e validation/reporting restano necessari. Coda e invii disabilitati. S1/S2 aperte, S3 parziale, S4 incompleta, S5 non accettata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](HANDOVER_2026-10-08-BKL051-NATIVE-APERTURE.md).
 
 | Campo | Valore |
 |---|---|
