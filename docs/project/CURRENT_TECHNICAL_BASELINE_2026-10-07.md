@@ -2,7 +2,7 @@
 
 ## Stato corrente — 8 ottobre 2026
 
-P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #508 integrata e verificata sul merge `a0950bcad358f9e5de52e4071bb3bed6e5e2525a`: registro locale e budget parziali; 15 workflow post-merge e Pages PASS. Snapshot/journal per attempt e bridge MemoryStore candidati; ricevute native solo dichiarate, produttore/coordinatore HTTP/UI/OAT incompleti. Teardown 403 corretto senza modificare autorizzazioni. Budget scientifici completi e significatività ancora non disponibili. Coda/invii disabilitati. S1/S2 scientifiche aperte, S3 parziale, S4 incompleta, S5 non accettata; soglie/policy e acceptance finale Owner. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](HANDOVER_2026-10-08-BKL051-ATTEMPT-JOURNAL.md).
+P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #509 integrata e verificata sul merge `b634c0d5f3be9cfd00334d7c13f2a16cf2f7fb9a`: snapshot/journal e teardown; 17 workflow post-merge e Pages PASS. Coordinatore receipt/outbox e GET worker candidati, prove MemoryStore e HTTP loopback; niente retry dopo restart non riconciliato. Produttore nativo, recovery operativa, rapporto scientifico completo, UI/OAT e budget scientifici restano incompleti. Nessuna significatività o scoperta attestata. Coda/invii disabilitati. S1/S2 aperte, S3 parziale, S4 incompleta, S5 non accettata; soglie/policy e acceptance finale Owner. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](HANDOVER_2026-10-08-BKL051-RECEIPT-COORDINATOR.md).
 
 | Campo | Valore |
 |---|---|
