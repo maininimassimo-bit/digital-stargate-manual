@@ -166,3 +166,7 @@ P6 delivery verificata sulla PR #499 e sul merge `0bd6e20df0b449cd163543ed30bd69
 ## BKL-051 — origini pixel e misure raccordate, 8 ottobre 2026
 
 [Contratto proposto](BKL-051-S2-PIXEL-CONVENTION-2026-10-08.md): unità/origini esplicite, nessuna API attestata dal solo input dichiarato. Tre fixture native e due known-answer di apertura, vecchi export/misure conservati; ensemble comune raccordato per identità. Doppio/mancato offset risolto nel ramo corretto; budget dipendenti dalle aperture e covarianze complete ancora aperti. 55 test offline locali; CI/review/post-merge nella PR, non acceptance scientifica. Coda/invii rimangono disabilitati.
+
+## BKL-051 — registro locale e budget parziali, 8 ottobre 2026
+
+[Library e limiti](BKL-051-S4-LOCAL-EVIDENCE-REGISTRY-2026-10-08.md): verifica dei byte puntuale, manifest/receipt esclusivi privati; non execution snapshot, native journal o attestazione scientifica. Budget corretti raccordati senza promuovere sky-only a varianza completa. Restano adapter/report/UI/OAT e scientific noise/covariance validation; CI/review/post-merge nella PR, non acceptance.
