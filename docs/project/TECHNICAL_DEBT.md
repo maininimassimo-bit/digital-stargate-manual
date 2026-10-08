@@ -186,3 +186,7 @@ P6 delivery verificata sulla PR #499 e sul merge `0bd6e20df0b449cd163543ed30bd69
 ## BKL-051 — supervisore nativo, 8 ottobre 2026
 
 [Lifecycle candidato](BKL-051-S4-NATIVE-SUPERVISOR-2026-10-08.md): avvio dopo ACK, handle corrente, cancel al punto sicuro; timeout/receipt mancanti non autorizzano terminate/replay. Prove componente native e MemoryStore, non cloud OAT o validazione scientifica. Restano driver/recovery/UI/OAT e workflow/report/variance/policy/reporting completi.
+
+## BKL-051 — consultazione Owner, 8 ottobre 2026
+
+[Vista candidata](BKL-051-S4-OWNER-EVIDENCE-VIEW-2026-10-08.md): solo GET manuale e ricevuta minimizzata, senza verifica del rapporto locale o attestazione scientifica. UI logged-out locale e contratti sintetici, non cloud OAT. Restano percorso selezione/decisione/report completi, driver/recovery, accessi/PC/cloud e validation/reporting.
