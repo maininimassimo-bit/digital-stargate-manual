@@ -46,7 +46,8 @@ class ReservationIntent:
         return result
 
     def _verify_intent(self):
-        require(read_json(self.records / 'request.json')[1] == self.request_sha
+        request, request_sha = read_json(self.records / 'request.json')
+        require(request == self.request and request_sha == self.request_sha
                 and read_json(self.records / 'expectation.json')[1] == self.expectation_sha
                 and read_json(self.directory / 'reservation-intent.json')[1] == self.marker_sha,
                 'RESERVATION_INTENT_CHANGED')

@@ -151,6 +151,12 @@ class ReservationTests(unittest.TestCase):
         self.assertEqual(self.f.starts, 0)
 
 
+    def test_mutated_in_memory_request_refuses_dispatch(self):
+        intent = self.prepare(); intent.request['reservationRef'] = 'b'*32
+        with self.assertRaises(ProtocolError): intent.reserve(self.transport)
+        self.assertEqual(self.transport.calls, [])
+        self.assertEqual(self.f.starts, 0)
+
     def test_input_changed_after_intent_prevents_dispatch(self):
         intent = self.prepare()
         (self.f.directory / 'input.xisf').write_bytes(b'changed scientific input')
