@@ -170,7 +170,7 @@ test('failed Google script load exposes a usable error without network reads',as
 });
 test('bounded body, declared size, JSON media and UTF-8 reject malformed delivery',async()=>{
   for(const options of [{rawBody:'x'.repeat(1048577)},{contentLength:'1048577'},{contentLength:'-1'},
-    {media:'text/html'},{rawBody:new Uint8Array([255])},{rawBody:'{"jobs":['}]){
+    {media:'text/html'},{rawBody:new Uint8Array([255])},{rawBody:'{"jobs":['},{rawBody:'null'},{rawBody:'[]'}]){
     const h=harness(options);await h.login();assert.equal(h.controls.jobs.children.length,0);
     assert.match(h.controls.message.textContent,/Nessun risultato mostrato/);
   }

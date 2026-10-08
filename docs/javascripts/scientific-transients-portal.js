@@ -198,7 +198,7 @@
         if(!response.ok)throw new Error('Servizio non disponibile. Premi Aggiorna stato per una nuova consultazione.');
         require((response.headers.get('Content-Type')||'').split(';')[0].trim()==='application/json');
         const text=await readResponse(response);
-        require(current()&&session===epoch);return JSON.parse(text);
+        require(current()&&session===epoch);const value=JSON.parse(text);require(object(value));return value;
       } finally {clearTimeout(timer);}
     }
     function reconcile() {
