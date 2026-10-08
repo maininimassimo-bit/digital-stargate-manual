@@ -1,10 +1,10 @@
 name: Scientific transients S1 preparation
 on:
   pull_request:
-    paths: ['tools/scientific_transients/**', 'docs/project/BKL-051-S1-*', 'docs/project/evidence/BKL-051-S1-*', '.github/workflows/scientific-transients-s1.yml']
+    paths: ['tools/scientific_transients/**', 'tools/pixinsight/local_pilot/transport_http.py', 'infrastructure/pixinsight-pilot/**', 'docs/project/BKL-051-S1-*', 'docs/project/evidence/BKL-051-*', '.github/workflows/scientific-transients-s1.yml']
   push:
     branches: [main]
-    paths: ['tools/scientific_transients/**', 'docs/project/BKL-051-S1-*', 'docs/project/evidence/BKL-051-S1-*', '.github/workflows/scientific-transients-s1.yml']
+    paths: ['tools/scientific_transients/**', 'tools/pixinsight/local_pilot/transport_http.py', 'infrastructure/pixinsight-pilot/**', 'docs/project/BKL-051-S1-*', 'docs/project/evidence/BKL-051-*', '.github/workflows/scientific-transients-s1.yml']
 permissions:
   contents: read
 jobs:
@@ -20,3 +20,8 @@ jobs:
           node-version: '22'
       - name: Verify proposed intake rejects unsafe scientific claims without network
         run: node --test tools/scientific_transients/contract.test.mjs tools/scientific_transients/reference.test.mjs tools/scientific_transients/measurement.test.mjs tools/scientific_transients/uncertainty.test.mjs tools/scientific_transients/epoch.test.mjs
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Test dedicated private queue lifecycle and HTTP roles
+        run: python -m unittest tools.scientific_transients.test_queue

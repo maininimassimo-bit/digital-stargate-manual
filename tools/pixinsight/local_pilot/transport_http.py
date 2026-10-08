@@ -25,8 +25,13 @@ def google_owner(token, client_id, owner_email):
         raise AuthError() from None
 
 
-def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scientific=None):
+def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scientific=None,
+                transient=None, transient_worker_digest=None):
     require(re.fullmatch(r"[a-f0-9]{64}", worker_digest) is not None, "WORKER_DIGEST_INVALID")
+    if transient is not None:
+        require(isinstance(transient_worker_digest, str) and
+                re.fullmatch(r"[a-f0-9]{64}", transient_worker_digest) is not None and
+                transient_worker_digest != worker_digest, "TRANSIENT_DISTINCT_CREDENTIAL_REQUIRED")
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *_):
             pass
@@ -43,7 +48,7 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
             self.end_headers()
             self.wfile.write(raw)
 
-        def authenticate(self, worker=False):
+        def authenticate(self, worker=False, expected_digest=None):
             if len(self.headers.get_all("Authorization", [])) != 1:
                 raise AuthError()
             header = self.headers.get("Authorization", "")
@@ -53,7 +58,7 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
             if worker:
                 if self.headers.get("Origin") is not None or not re.fullmatch(r"[a-f0-9]{64}", token):
                     raise AuthError()
-                if not secrets.compare_digest(hashlib.sha256(token.encode()).hexdigest(), worker_digest):
+                if not secrets.compare_digest(hashlib.sha256(token.encode()).hexdigest(), expected_digest or worker_digest):
                     raise AuthError()
             else:
                 if self.headers.get("Origin") != portal_origin:
@@ -82,6 +87,34 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
 
         def dispatch(self):
             path = self.path
+            if path == "/v1/transient-analysis" or path.startswith("/v1/transient-analysis/"):
+                if transient is None:
+                    return self.send(404, {"error": "NOT_FOUND"})
+                is_worker = path.startswith("/v1/transient-analysis/worker/")
+                self.authenticate(is_worker, transient_worker_digest)
+                if self.command == "GET" and path == "/v1/transient-analysis/options":
+                    return self.send(200, transient.options())
+                if self.command == "GET" and path == "/v1/transient-analysis/jobs":
+                    return self.send(200, transient.status())
+                if self.command == "POST" and path == "/v1/transient-analysis/jobs":
+                    return self.send(200, transient.create(self.body()))
+                if self.command == "POST" and path == "/v1/transient-analysis/worker/register":
+                    return self.send(200, transient.register(self.body()))
+                if self.command == "POST" and path == "/v1/transient-analysis/worker/claim":
+                    return self.send(200, transient.claim(self.body()))
+                match = re.fullmatch(r"/v1/transient-analysis/(worker/)?jobs/(TRN_[a-f0-9]{32})(?:/(cancel|report|review))?", path)
+                if match:
+                    worker_route, job_id, action = match.groups()
+                    if worker_route and self.command == "POST" and action == "report":
+                        return self.send(200, transient.report(job_id, self.body()))
+                    if not worker_route and self.command == "GET" and action is None:
+                        return self.send(200, transient.status(job_id))
+                    if not worker_route and self.command == "POST" and action == "cancel":
+                        require(self.body() == {}, "REQUEST_FIELDS")
+                        return self.send(200, transient.cancel(job_id))
+                    if not worker_route and self.command == "POST" and action == "review":
+                        return self.send(200, transient.review(job_id, self.body()))
+                return self.send(404, {"error": "NOT_FOUND"})
             if self.command == "GET" and path == "/health":
                 return self.send(200, {"protocol": "DSG_PIAI_QUEUE_V1", "aiMode": "SESSION_ASSISTED", "providerRequests": 0})
             worker = path.startswith("/v1/worker/")

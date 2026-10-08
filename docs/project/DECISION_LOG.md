@@ -671,3 +671,7 @@ L'Owner ha approvato la proposta PC locale + consultazione privata nel portale, 
 ## BKL-051 — propagazione d’epoca proposta, 8 ottobre 2026
 
 [Modello e verifiche](BKL-051-S1-EPOCH-MODEL-2026-10-08.md): sette test aggiuntivi e sei controlli numerici ESA, senza accettazione del matching o covarianze. Prosecuzione autonoma e revisioni ARB/RQ autorizzate; trasporto concreto e policy scientifica restano decisioni separate.
+
+## BKL-051 — trasporto concreto approvato, 8 ottobre 2026
+
+[Decisione Owner](evidence/BKL-051-OWNER-TRANSPORT-2026-10-08.json) e [coda candidata](BKL-051-S4-PRIVATE-QUEUE-2026-10-08.md). Implementazione separata e collaudi locali; attivazione, IAM/credenziale dedicata e percorso S4 completo ancora da verificare. Nessuna soglia/acceptance scientifica, nuova risorsa o fotografia pubblicata. Le precedenti decisioni pending sono snapshot superati soltanto per la scelta di trasporto.
