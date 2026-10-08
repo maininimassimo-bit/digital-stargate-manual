@@ -1,0 +1,303 @@
+{
+  "kind": "SYNTHETIC_QUEUE_OWNER_VIEWS_NOT_CLOUD_OAT",
+  "cases": [
+    {
+      "stage": "QUEUED",
+      "response": {
+        "jobs": [
+          {
+            "binding": {
+              "algorithmRef": "44444444444444444444444444444444",
+              "bindingRef": "11111111111111111111111111111111",
+              "contractRef": "55555555555555555555555555555555",
+              "inputRef": "22222222222222222222222222222222",
+              "referenceRef": "33333333333333333333333333333333"
+            },
+            "cancelRequested": false,
+            "createdAt": "2026-10-08T00:00:00+00:00",
+            "jobId": "TRN_66666666666666666666666666666666",
+            "request": {
+              "bindingRef": "11111111111111111111111111111111",
+              "requestId": "66666666666666666666666666666666"
+            },
+            "result": null,
+            "reviews": [],
+            "sequence": 0,
+            "state": "QUEUED",
+            "updatedAt": "2026-10-08T00:00:00+00:00",
+            "executionEvidence": "WORKER_REPORTED_NOT_ATTESTED",
+            "scientificValidation": "NOT_VALIDATED",
+            "detailsLocation": "OWNER_PC",
+            "publication": "NONE"
+          }
+        ]
+      }
+    },
+    {
+      "stage": "QUEUED_CANCELLED",
+      "response": {
+        "jobs": [
+          {
+            "binding": {
+              "algorithmRef": "44444444444444444444444444444444",
+              "bindingRef": "11111111111111111111111111111111",
+              "contractRef": "55555555555555555555555555555555",
+              "inputRef": "22222222222222222222222222222222",
+              "referenceRef": "33333333333333333333333333333333"
+            },
+            "cancelRequested": true,
+            "createdAt": "2026-10-08T00:00:00+00:00",
+            "jobId": "TRN_66666666666666666666666666666666",
+            "request": {
+              "bindingRef": "11111111111111111111111111111111",
+              "requestId": "66666666666666666666666666666666"
+            },
+            "result": null,
+            "reviews": [],
+            "sequence": 0,
+            "state": "CANCELLED",
+            "updatedAt": "2026-10-08T00:00:00+00:00",
+            "executionEvidence": "WORKER_REPORTED_NOT_ATTESTED",
+            "scientificValidation": "NOT_VALIDATED",
+            "detailsLocation": "OWNER_PC",
+            "publication": "NONE"
+          }
+        ]
+      }
+    },
+    {
+      "stage": "RESERVED",
+      "response": {
+        "jobs": [
+          {
+            "attemptId": "99999999999999999999999999999999",
+            "binding": {
+              "algorithmRef": "44444444444444444444444444444444",
+              "bindingRef": "11111111111111111111111111111111",
+              "contractRef": "55555555555555555555555555555555",
+              "inputRef": "22222222222222222222222222222222",
+              "referenceRef": "33333333333333333333333333333333"
+            },
+            "cancelRequested": false,
+            "createdAt": "2026-10-08T00:00:00+00:00",
+            "jobId": "TRN_66666666666666666666666666666666",
+            "leaseExpiresAt": "2026-10-08T00:15:00+00:00",
+            "leaseIssuedAt": "2026-10-08T00:00:00+00:00",
+            "request": {
+              "bindingRef": "11111111111111111111111111111111",
+              "requestId": "66666666666666666666666666666666"
+            },
+            "result": null,
+            "reviews": [],
+            "rootId": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "sequence": 0,
+            "state": "RESERVED",
+            "updatedAt": "2026-10-08T00:00:00+00:00",
+            "executionEvidence": "WORKER_REPORTED_NOT_ATTESTED",
+            "scientificValidation": "NOT_VALIDATED",
+            "detailsLocation": "OWNER_PC",
+            "publication": "NONE"
+          }
+        ]
+      }
+    },
+    {
+      "stage": "RUNNING",
+      "response": {
+        "jobs": [
+          {
+            "attemptId": "99999999999999999999999999999999",
+            "binding": {
+              "algorithmRef": "44444444444444444444444444444444",
+              "bindingRef": "11111111111111111111111111111111",
+              "contractRef": "55555555555555555555555555555555",
+              "inputRef": "22222222222222222222222222222222",
+              "referenceRef": "33333333333333333333333333333333"
+            },
+            "cancelRequested": false,
+            "createdAt": "2026-10-08T00:00:00+00:00",
+            "jobId": "TRN_66666666666666666666666666666666",
+            "leaseExpiresAt": "2026-10-08T00:15:00+00:00",
+            "leaseIssuedAt": "2026-10-08T00:00:00+00:00",
+            "request": {
+              "bindingRef": "11111111111111111111111111111111",
+              "requestId": "66666666666666666666666666666666"
+            },
+            "result": null,
+            "reviews": [],
+            "rootId": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "sequence": 1,
+            "state": "RUNNING",
+            "updatedAt": "2026-10-08T00:00:00+00:00",
+            "executionEvidence": "WORKER_REPORTED_NOT_ATTESTED",
+            "scientificValidation": "NOT_VALIDATED",
+            "detailsLocation": "OWNER_PC",
+            "publication": "NONE"
+          }
+        ]
+      }
+    },
+    {
+      "stage": "COMPLETED",
+      "response": {
+        "jobs": [
+          {
+            "attemptId": "99999999999999999999999999999999",
+            "binding": {
+              "algorithmRef": "44444444444444444444444444444444",
+              "bindingRef": "11111111111111111111111111111111",
+              "contractRef": "55555555555555555555555555555555",
+              "inputRef": "22222222222222222222222222222222",
+              "referenceRef": "33333333333333333333333333333333"
+            },
+            "cancelRequested": false,
+            "createdAt": "2026-10-08T00:00:00+00:00",
+            "jobId": "TRN_66666666666666666666666666666666",
+            "leaseExpiresAt": "2026-10-08T00:15:00+00:00",
+            "leaseIssuedAt": "2026-10-08T00:00:00+00:00",
+            "request": {
+              "bindingRef": "11111111111111111111111111111111",
+              "requestId": "66666666666666666666666666666666"
+            },
+            "result": {
+              "bindingRef": "11111111111111111111111111111111",
+              "qualityCounts": {
+                "excluded": 0,
+                "incomplete": 2,
+                "measured": 0
+              },
+              "reportSha256": "7777777777777777777777777777777777777777777777777777777777777777"
+            },
+            "reviews": [
+              {
+                "authority": "OWNER_DECLARED",
+                "recordedAt": "2026-10-08T00:00:00+00:00",
+                "request": {
+                  "decision": "FOLLOW_UP",
+                  "decisionId": "88888888888888888888888888888888",
+                  "reportSha256": "7777777777777777777777777777777777777777777777777777777777777777"
+                }
+              }
+            ],
+            "rootId": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "sequence": 2,
+            "state": "COMPLETED",
+            "updatedAt": "2026-10-08T00:00:00+00:00",
+            "executionEvidence": "WORKER_REPORTED_NOT_ATTESTED",
+            "scientificValidation": "NOT_VALIDATED",
+            "detailsLocation": "OWNER_PC",
+            "publication": "NONE"
+          }
+        ]
+      }
+    },
+    {
+      "stage": "FAILED",
+      "response": {
+        "jobs": [
+          {
+            "attemptId": "99999999999999999999999999999999",
+            "binding": {
+              "algorithmRef": "44444444444444444444444444444444",
+              "bindingRef": "11111111111111111111111111111111",
+              "contractRef": "55555555555555555555555555555555",
+              "inputRef": "22222222222222222222222222222222",
+              "referenceRef": "33333333333333333333333333333333"
+            },
+            "cancelRequested": false,
+            "createdAt": "2026-10-08T00:00:00+00:00",
+            "jobId": "TRN_66666666666666666666666666666666",
+            "leaseExpiresAt": "2026-10-08T00:15:00+00:00",
+            "leaseIssuedAt": "2026-10-08T00:00:00+00:00",
+            "request": {
+              "bindingRef": "11111111111111111111111111111111",
+              "requestId": "66666666666666666666666666666666"
+            },
+            "result": null,
+            "reviews": [],
+            "rootId": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "sequence": 2,
+            "state": "FAILED",
+            "updatedAt": "2026-10-08T00:00:00+00:00",
+            "executionEvidence": "WORKER_REPORTED_NOT_ATTESTED",
+            "scientificValidation": "NOT_VALIDATED",
+            "detailsLocation": "OWNER_PC",
+            "publication": "NONE"
+          }
+        ]
+      }
+    },
+    {
+      "stage": "CANCELLED",
+      "response": {
+        "jobs": [
+          {
+            "attemptId": "99999999999999999999999999999999",
+            "binding": {
+              "algorithmRef": "44444444444444444444444444444444",
+              "bindingRef": "11111111111111111111111111111111",
+              "contractRef": "55555555555555555555555555555555",
+              "inputRef": "22222222222222222222222222222222",
+              "referenceRef": "33333333333333333333333333333333"
+            },
+            "cancelRequested": true,
+            "createdAt": "2026-10-08T00:00:00+00:00",
+            "jobId": "TRN_66666666666666666666666666666666",
+            "leaseExpiresAt": "2026-10-08T00:15:00+00:00",
+            "leaseIssuedAt": "2026-10-08T00:00:00+00:00",
+            "request": {
+              "bindingRef": "11111111111111111111111111111111",
+              "requestId": "66666666666666666666666666666666"
+            },
+            "result": null,
+            "reviews": [],
+            "rootId": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "sequence": 2,
+            "state": "CANCELLED",
+            "updatedAt": "2026-10-08T00:00:00+00:00",
+            "executionEvidence": "WORKER_REPORTED_NOT_ATTESTED",
+            "scientificValidation": "NOT_VALIDATED",
+            "detailsLocation": "OWNER_PC",
+            "publication": "NONE"
+          }
+        ]
+      }
+    },
+    {
+      "stage": "RECOVERY_REQUIRED",
+      "response": {
+        "jobs": [
+          {
+            "attemptId": "99999999999999999999999999999999",
+            "binding": {
+              "algorithmRef": "44444444444444444444444444444444",
+              "bindingRef": "11111111111111111111111111111111",
+              "contractRef": "55555555555555555555555555555555",
+              "inputRef": "22222222222222222222222222222222",
+              "referenceRef": "33333333333333333333333333333333"
+            },
+            "cancelRequested": false,
+            "createdAt": "2026-10-08T00:00:00+00:00",
+            "jobId": "TRN_66666666666666666666666666666666",
+            "leaseExpiresAt": "2026-10-08T00:15:00+00:00",
+            "leaseIssuedAt": "2026-10-08T00:00:00+00:00",
+            "request": {
+              "bindingRef": "11111111111111111111111111111111",
+              "requestId": "66666666666666666666666666666666"
+            },
+            "result": null,
+            "reviews": [],
+            "rootId": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "sequence": 0,
+            "state": "RECOVERY_REQUIRED",
+            "updatedAt": "2026-10-08T00:15:00+00:00",
+            "executionEvidence": "WORKER_REPORTED_NOT_ATTESTED",
+            "scientificValidation": "NOT_VALIDATED",
+            "detailsLocation": "OWNER_PC",
+            "publication": "NONE"
+          }
+        ]
+      }
+    }
+  ]
+}
