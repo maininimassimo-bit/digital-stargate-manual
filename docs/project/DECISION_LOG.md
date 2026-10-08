@@ -663,3 +663,7 @@ P6 delivery verificata sulla PR #499 e sul merge `0bd6e20df0b449cd163543ed30bd69
 ## Stato corrente — 8 ottobre 2026
 
 L'Owner ha approvato la proposta PC locale + consultazione privata nel portale, le query minime a ESA Gaia/NASA-IPAC IRSA/MAST e il criterio raccomandato per scegliere il campo pilota. Nessun campo è stato nominato: selezione locale guidata da date reali e stessa banda. [Handover corrente](HANDOVER_2026-10-08-BKL051-S2.md). S1 non è chiusa; S2 avviata come verifica limitata di ingressi/accesso, senza astrometria accettata, classificazioni, soglie operative o runtime del modulo. P6 resta Accepted con limiti. Trasporto privato concreto ancora da revisionare; nessuna nuova risorsa, credenziale o pubblicazione di fotografie. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati.
+
+## BKL-051 — 8 ottobre 2026: incertezza proposta
+
+[Contratto offline](BKL-051-S1-UNCERTAINTY-CONTRACT-2026-10-08.md) con dati ignoti espliciti, covarianze e controllo del doppio rumore di lettura. Nessuna accettazione di modello completo, soglia, classificazione o runtime; residui scientifici e di trasporto invariati. La prova numerica non chiude BKL-051.
