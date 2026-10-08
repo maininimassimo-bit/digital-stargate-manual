@@ -2,6 +2,8 @@
 import hashlib
 import re
 import secrets
+import socket
+import time
 from http.server import BaseHTTPRequestHandler
 
 from tools.pixinsight.local_pilot.broker import ProtocolError, decode, encode, require, opaque
@@ -64,6 +66,26 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                 if self.headers.get("Origin") != portal_origin:
                     raise AuthError()
                 authenticate_owner(token)
+
+        def deny_access(self):
+            # RFC 9112 §9.6: immediate close with unread POST bytes can reset TCP
+            # before the client receives 403. Half-close output, then discard a
+            # bounded amount without parsing, authenticating or dispatching it.
+            self.close_connection = True
+            self.send(403, {"error": "ACCESS_DENIED"})
+            self.wfile.flush()
+            try:
+                self.connection.shutdown(socket.SHUT_WR)
+                deadline, remaining = time.monotonic() + 0.25, 65536
+                while remaining > 0:
+                    timeout = deadline - time.monotonic()
+                    if timeout <= 0: break
+                    self.connection.settimeout(timeout)
+                    raw = self.rfile.read1(min(8192, remaining))
+                    if not raw: break
+                    remaining -= len(raw)
+            except OSError:
+                pass  # Denial already sent; never retry or dispatch the request.
 
         def body(self, limit=16384):
             require(len(self.headers.get_all("Content-Length", [])) == 1 and not self.headers.get("Transfer-Encoding"), "BODY_SIZE")
@@ -209,7 +231,7 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
             try:
                 self.dispatch()
             except AuthError:
-                self.send(403, {"error": "ACCESS_DENIED"})
+                self.deny_access()
             except (ProtocolError, IngestionError, ArchiveError) as error:
                 self.send(400, {"error": str(error)})
             except Conflict:
