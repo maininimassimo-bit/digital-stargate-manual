@@ -127,6 +127,8 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                 match = re.fullmatch(r"/v1/transient-analysis/(worker/)?jobs/(TRN_[a-f0-9]{32})(?:/(cancel|report|review))?", path)
                 if match:
                     worker_route, job_id, action = match.groups()
+                    if worker_route and self.command == "GET" and action is None:
+                        return self.send(200, transient.worker_receipt(job_id))
                     if worker_route and self.command == "POST" and action == "report":
                         return self.send(200, transient.report(job_id, self.body()))
                     if not worker_route and self.command == "GET" and action is None:

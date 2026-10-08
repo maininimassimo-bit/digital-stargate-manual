@@ -128,6 +128,18 @@ class TransientQueue:
             return self._view(self._job(state, job_id)) if job_id else {"jobs": [self._view(j) for j in state["jobs"]]}
         return self._mutate(operation)
 
+    def worker_receipt(self, job_id):
+        """Authenticated worker route only; no lease or Owner reviews returned."""
+        def operation(state, _):
+            job = self._job(state, job_id)
+            require("attemptId" in job, "TRANSIENT_ATTEMPT_NOT_RESERVED")
+            receipt = copy.deepcopy(job.get("lastEvent"))
+            if receipt is not None:
+                receipt.pop("leaseToken")
+            return {key: copy.deepcopy(job[key]) for key in
+                    ["jobId", "attemptId", "rootId", "binding", "state", "cancelRequested", "sequence", "result"]} | {"lastReceipt": receipt}
+        return self._mutate(operation)
+
     def claim(self, request):
         fields(request, {"workerId", "rootId"})
         require(request["workerId"] == self.worker_id and opaque(request["rootId"]), "TRANSIENT_WORKER_ID")

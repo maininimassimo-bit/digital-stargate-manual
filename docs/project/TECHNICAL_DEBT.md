@@ -174,3 +174,7 @@ P6 delivery verificata sulla PR #499 e sul merge `0bd6e20df0b449cd163543ed30bd69
 ## BKL-051 — snapshot/journal tentativi e teardown, 8 ottobre 2026
 
 [Incremento candidato](BKL-051-S4-ATTEMPT-JOURNAL-2026-10-08.md): copie verificate, eventi esclusivi, parametri/runtime/checkpoint/History correlati e rapporto tecnico; receipt caller-reported, non native attestate. Bridge MemoryStore non trasporto operativo. Restano producer/coordinatore/outbox/report scientifico/UI/OAT e validation; native/rates/policy non dedotti. Handler condiviso gestisce diniego TCP con scarto raw bounded dopo 403; auth invariata, nessun deployment.
+
+## BKL-051 — coordinatore ricevute, 8 ottobre 2026
+
+[Library/loopback candidati](BKL-051-S4-RECEIPT-COORDINATOR-2026-10-08.md): outbox senza credenziali, GET worker dedicata e ACK dell'envelope completo; perdita risposta e restart conservati senza rilancio. Restano producer/cancel/crash/recovery operativa, scientific report/UI/cloud OAT e scientific validation/reporting. Nessuna attivazione o soglia/acceptance.
