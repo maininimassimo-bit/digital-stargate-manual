@@ -11,3 +11,7 @@ Audit: TPV WCS leggibile, geometrie science/mask correlate, posizioni dell’eff
 DR13 documenta OBSJD/OBSMJD dei FITS come inizio esposizione: per EXPTIME=30s preparato il midpoint nominale +15s. Incertezza assoluta/shutter e associazione temporale delle effemeridi restano sconosciute. La documentazione generale della tabella finale MOST descrive tempi centrali, mentre obsjd della tabella ZTF intermedia è metadata d’inizio: nessun residuo astrometrico accettabile finché riconciliati. Magnitudine V prevista non è g misurata; pixel DN documentati non autorizzano a reinterpretare NORMALIZED_SAMPLE_SUM del kernel tecnico come ADU o magnitudine calibrata.
 
 Dataset preselected con oggetto noto, non blind recovery. Tre esposizioni in due notti non sono un dossier MPC pronto: mancano misure/covarianze/timing/calibrazione validati, identità osservatorio, revisione e requisiti correnti del destinatario. Fonte/template/manifest non concedono detection, nuova scoperta, classificazione o authority di invio. M3 resta aperta; ulteriori casi/misure native e controlli indipendenti devono precedere policy quantitativa e accettazione scientifica.
+
+## Evidenza successiva
+
+Questa preparazione è uno snapshot precedente alle prove native. Vedere [diagnostica e limite di ripresa](BKL-051-S3-NATIVE-DIAGNOSTICS-2026-10-09.md): V3 invalid mask, V4 non confermato, nessuna misura scientifica accettata.

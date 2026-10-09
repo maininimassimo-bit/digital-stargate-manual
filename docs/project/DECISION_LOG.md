@@ -743,3 +743,7 @@ PR #519 caller rilasciata, 15 workflow post-merge e sette endpoint verificati. [
 ## BKL-051 — build verificata, OAT preparato, 9 ottobre 2026
 
 PR #520 dossier DRAFT rilasciata e verificata. [Build/OAT](BKL-051-S4-BUILD-READINESS-2026-10-09.md): due tentativi autorizzati separatamente, primo fallito conservato, secondo SUCCESS 155/155 prove offline/digest immutabile. Runtime P6 invariato, attivazione proposta privata pending. [Dataset pubblico Atami](BKL-051-S3-MOVING-DATASET-PREPARATION-2026-10-09.md) preparato senza misure o validazione. OAT reale, pipeline scientifica, policy/moving/reporting produttivo ancora aperti; nessuna chiusura BKL-051.
+
+## BKL-051 — diagnostica nativa non validata, 9 ottobre 2026
+
+[Atami](BKL-051-S3-NATIVE-DIAGNOSTICS-2026-10-09.md): V3 INVALID per offset signed FITS provato su tutti i pixel; segnale e originali invariati. V4 path error conservato, esecuzione/fermata non confermate; genitore 49 file salvati/verificati, V5 solo preparato. Nessun nuovo lancio prima della verifica reale. Attivazione/OAT distinta ancora da autorizzare; scientific acceptance e chiusura BKL-051 assenti.
