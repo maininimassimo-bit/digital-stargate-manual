@@ -31,7 +31,7 @@ Versioni installate e requisiti obbligatori sono verificati con i metadati delle
 
 Dieci test sintetici: centro noto, mezzo pixel, polinomio di secondo ordine contro formula gnomonica indipendente, frame mancante, digest/geometria, coordinate invalide e duplicati, WCS incompatibili/duplicati/ordine, unità/proiezione/PV mancanti, estensione/troncamento, versioni/limite byte. Il confronto numerico è un known-answer sintetico, non precisione astrometrica assoluta.
 
-Applicazione locale ai centri già conservati: sei FITS reali e 108 fit PSF, 72 nel campo pubblico Atami e 36 nel controllo noto AT 2018cow. Solo trasformazione, nessun nuovo lancio nativo o query per questa regressione. Ricevute private ancorate al digest del componente. Astrometria assoluta e associazioni rimangono non validate.
+Applicazione locale ai centri già conservati: sei FITS reali e 108 fit PSF, 72 nel campo pubblico Atami e 36 nel controllo noto AT 2018cow. Solo trasformazione, nessun nuovo lancio nativo o query per questa regressione. Ricevute private ancorate al digest del componente. Un secondo controllo privato valuta direttamente i 40 termini polinomiali TPV NASA e la proiezione gnomonica senza usare Astropy WCS per il calcolo indipendente: i 108 centri differiscono al massimo di 2,143 × 10⁻¹⁰ arcsec numerici sui sei header, con LONPOLE 180. La tolleranza è numerica e non una soglia astronomica; non prova precisione assoluta del WCS originale. Astrometria assoluta e associazioni rimangono non validate.
 
 ## Evidenze scientifiche nuove, distinte dal rilascio precedente
 
