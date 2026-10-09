@@ -1,4 +1,10 @@
 {% extends "base.html" %}
+{% block extrahead %}
+{{ super() }}
+{% if page and page.file.src_uri == 'index.md' %}
+<meta name="google-site-verification" content="EZzC9QHiEhEOYf65I7XshI_fzqH1OjNyOwhTJRwiRIc" />
+{% endif %}
+{% endblock %}
 {% block content %}
 {% set scenes = {"analytics/index.md": "atlas", "ai-post-processing-assistant/index.md": "atlas", "anomaly-trend-center/index.md": "atlas", "architecture/index.md": "atlas", "bkl042-advisory/index.md": "atlas", "documentation/index.md": "atlas", "equipment-performance/index.md": "atlas", "mission-control/index.md": "atlas", "observation-planner/index.md": "atlas", "operations/index.md": "observatory", "scientific-data-quality/index.md": "atlas", "scientific-image-gallery/index.md": "atlas", "scientific-platform/index.md": "atlas", "scientific-platform-intelligence/index.md": "atlas", "scientific-session-catalog/index.md": "atlas", "scientific-session-detail/index.md": "atlas", "session-comparison/index.md": "atlas", "index.md": "gateway", "status/index.md": "observatory"} %}
 {% set scene_kind = scenes.get(page.file.src_uri, '') if page else '' %}
