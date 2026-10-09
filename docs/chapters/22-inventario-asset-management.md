@@ -61,7 +61,7 @@ DSG-CAM-001
 | DSG-NET-001 | Connettività/router primario | Starlink, servizio residenziale con IP condiviso | Operativo; ingresso Internet Allsky tramite servizio separato in preparazione |
 | DSG-NET-002 | Router failover/VPN | Teltonika RUT955, firmware RUT9XX_R_00.06.09.5 | Operativo; nuovo tunnel Allsky da collaudare end-to-end |
 | DSG-PC-001 | Computer di controllo | PrimaLuceLab EAGLE3 | Operativo |
-| DSG-PC-003 | Computer Allsky | Raspberry Pi 4 Model B Rev 1.2, RAM 4 GB | Acquisizione e sito locale operativi, verificati 09/10/2026 |
+| DSG-PC-009 | Computer Allsky | Raspberry Pi 4 Model B Rev 1.2, RAM 4 GB | Acquisizione e sito locale operativi, verificati 09/10/2026 |
 | DSG-MNT-001 | Montatura | Celestron CGX-L | Operativo |
 | DSG-OTA-001 | Telescopio | Celestron C8 XLT | Operativo |
 | DSG-OTA-002 | Telescopio | Sky-Watcher Quattro 200P | Operativo |
@@ -78,7 +78,7 @@ Gli identificativi Allsky sono assegnati in questo aggiornamento documentale. Se
 
 | Categoria | Configurazione / stato al 09/10/2026 |
 |---|---|
-| Sistema operativo DSG-PC-003 | Raspberry Pi OS / Raspbian 11 Bullseye, userland armhf e kernel aarch64 |
+| Sistema operativo DSG-PC-009 | Raspberry Pi OS / Raspbian 11 Bullseye, userland armhf e kernel aarch64 |
 | Applicazione Allsky | AllskyTeam/allsky v2026.10.01, aggiornata il 09/10/2026 |
 | Dipendenza corretta | NumPy 1.24.4; importazioni SciPy/OpenCV/Astropy verificate |
 | Rete RUT955 | Nuovo profilo OpenVPN `allskyip`; tunnel RMS esistente conservato |
