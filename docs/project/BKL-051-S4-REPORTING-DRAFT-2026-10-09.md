@@ -1,6 +1,6 @@
 # BKL-051 S4-R — dossier preliminare privato
 
-Stato: Candidate; exact-head CI, ARB/RQ e rilascio pending. BKL-051 OPEN. Estensione reporting già approvata dall’Owner; questo incremento prepara evidenze, senza invii.
+Stato: Released via PR #520, merge `bb68404e836c532986453c682846105e7fb5ce3a`; 15 workflow exact-head e 15 post-merge SUCCESS, ARB/RQ APPROVED zero finding, sette endpoint Pages verificati. BKL-051 OPEN. Estensione reporting già approvata dall’Owner; questo incremento prepara evidenze, senza invii.
 
 ## Comportamento
 
