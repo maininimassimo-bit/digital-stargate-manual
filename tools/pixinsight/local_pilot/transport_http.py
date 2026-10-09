@@ -16,11 +16,11 @@ class AuthError(ValueError):
     pass
 
 
-def google_owner(token, client_id, owner_email):
+def google_owner(token, client_id, owner_email, *, request=None):
     from google.auth.transport.requests import Request
     from google.oauth2 import id_token
     try:
-        claims = id_token.verify_oauth2_token(token, Request(), client_id)
+        claims = id_token.verify_oauth2_token(token, Request() if request is None else request, client_id)
         if claims.get("email_verified") is not True or claims.get("email", "").lower() != owner_email.lower():
             raise AuthError()
     except Exception:

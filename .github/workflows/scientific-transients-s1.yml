@@ -1,10 +1,10 @@
 name: Scientific transients S1 preparation
 on:
   pull_request:
-    paths: ['tools/scientific_transients/**', 'docs/javascripts/scientific-transients-portal.js', 'docs/scientific-transient-analysis/**', 'docs/styles/scientific-transients.css', 'tools/pixinsight/local_pilot/transport_http.py', 'infrastructure/pixinsight-pilot/**', 'docs/project/BKL-051-S1-*', 'docs/project/evidence/BKL-051-*', '.github/workflows/scientific-transients-s1.yml']
+    paths: ['tools/scientific_transients/**', 'docs/javascripts/scientific-transients-portal.js', 'docs/javascripts/s4-lab-*', 'docs/scientific-transients-lab/**', 'docs/scientific-transient-analysis/**', 'docs/styles/scientific-transients.css', 'tools/pixinsight/local_pilot/transport_http.py', 'infrastructure/scientific-transients-lab/**', 'infrastructure/pixinsight-pilot/**', 'docs/project/BKL-051-S1-*', 'docs/project/evidence/BKL-051-*', '.github/workflows/scientific-transients-s1.yml']
   push:
     branches: [main]
-    paths: ['tools/scientific_transients/**', 'docs/javascripts/scientific-transients-portal.js', 'docs/scientific-transient-analysis/**', 'docs/styles/scientific-transients.css', 'tools/pixinsight/local_pilot/transport_http.py', 'infrastructure/pixinsight-pilot/**', 'docs/project/BKL-051-S1-*', 'docs/project/evidence/BKL-051-*', '.github/workflows/scientific-transients-s1.yml']
+    paths: ['tools/scientific_transients/**', 'docs/javascripts/scientific-transients-portal.js', 'docs/javascripts/s4-lab-*', 'docs/scientific-transients-lab/**', 'docs/scientific-transient-analysis/**', 'docs/styles/scientific-transients.css', 'tools/pixinsight/local_pilot/transport_http.py', 'infrastructure/scientific-transients-lab/**', 'infrastructure/pixinsight-pilot/**', 'docs/project/BKL-051-S1-*', 'docs/project/evidence/BKL-051-*', '.github/workflows/scientific-transients-s1.yml']
 permissions:
   contents: read
 jobs:
@@ -25,11 +25,31 @@ jobs:
           node-version: '22'
       - name: Verify proposed intake rejects unsafe scientific claims without network
         run: node --test tools/scientific_transients/contract.test.mjs tools/scientific_transients/reference.test.mjs tools/scientific_transients/measurement.test.mjs tools/scientific_transients/uncertainty.test.mjs tools/scientific_transients/photometry.test.mjs tools/scientific_transients/epoch.test.mjs tools/scientific_transients/pixel.test.mjs tools/scientific_transients/native_aperture.test.mjs tools/scientific_transients/portal.test.mjs
+      - name: Verify isolated browser Owner sequencing and token privacy without Google access
+        run: node --test tools/scientific_transients/lab_owner.test.mjs
+      - name: Verify bounded isolated gateway and public source staging without cloud access
+        run: python -m unittest tools.scientific_transients.test_lab_gateway tools.scientific_transients.test_lab_runtime tools.scientific_transients.test_lab_release_plan tools.scientific_transients.test_lab_cli -v
       - name: Test dedicated private queue lifecycle and HTTP roles
         run: python -m unittest tools.scientific_transients.test_queue tools.scientific_transients.test_local_registry tools.scientific_transients.test_attempt_journal tools.scientific_transients.test_receipt_coordinator tools.scientific_transients.test_native_aperture tools.scientific_transients.test_native_supervisor tools.scientific_transients.test_local_report tools.scientific_transients.test_local_driver tools.scientific_transients.test_reservation_intent tools.scientific_transients.test_owner_recovery tools.scientific_transients.test_operator_run tools.scientific_transients.test_reporting_draft tools.scientific_transients.test_mpc_export tools.scientific_transients.test_cbat_preview tools.scientific_transients.test_channel_review tools.scientific_transients.test_preview_review_ledger tools.scientific_transients.test_isolated_concurrency
       - name: Validate private synthetic MPC XML against pinned official submission schema
         shell: pwsh
         run: ./.github/scripts/test-transient-mpc-schema.ps1
+  isolated-lab-sdk-api-checks:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Install existing cloud dependency family for offline lab API compatibility
+        run: python -m pip install --requirement infrastructure/scientific-transients-lab/requirements.txt
+      - name: Verify dependency compatibility
+        run: python -m pip check
+      - name: Verify SDK interfaces and synthetic 412 accounting with ADC and network replaced
+        run: python -m unittest tools.scientific_transients.lab_sdk_checks -v
   local-tpv-coordinate-checks:
     strategy:
       matrix:
