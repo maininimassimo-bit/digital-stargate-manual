@@ -1,7 +1,8 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 0.1 Draft
+**Revisione:** 0.2 — aggiornamento operativo 09/10/2026
+**Stato:** acquisizione e sito locale operativi; pubblicazione Internet in preparazione
 
 ## 27.1 Scopo
 
@@ -13,14 +14,19 @@ Il sistema non sostituisce i sensori di sicurezza certificati o dedicati, ma cos
 
 | Componente | Configurazione |
 |---|---|
-| computer | Raspberry Pi o piattaforma equivalente |
+| computer | Raspberry Pi 4 Model B Rev 1.2, RAM 4 GB |
 | camera | ZWO ASI290MC |
-| ottica | fisheye 8 mm |
+| ottica | fisheye 1,8 mm, confermata fisicamente dall'Owner il 09/10/2026 |
 | copertura | cupola trasparente protettiva |
 | rete | LAN/Wi-Fi dell'osservatorio |
 | funzione | immagini, monitoraggio e timelapse |
+| sistema operativo | Raspberry Pi OS / Raspbian 11 Bullseye, userland armhf e kernel aarch64 |
+| software | AllskyTeam/allsky v2026.10.01, aggiornato il 09/10/2026 |
+| fotogramma | 1936 × 1096 pixel |
+| directory applicazione | `/home/pi/allsky` |
+| sito locale | `/home/pi/allsky/html/allsky`, pagina `/allsky/index.php` |
 
-> **DA VALIDARE:** modello del Raspberry Pi, sistema operativo, software AllSky e indirizzo di rete.
+I dati derivano dalla verifica del sistema e della configurazione effettuata il 09/10/2026. Indirizzi LAN, coordinate precise, seriali, credenziali e chiavi private restano nella documentazione operativa riservata e non sono pubblicati nel manuale.
 
 ## 27.3 Architettura funzionale
 
@@ -127,8 +133,8 @@ Per un sistema con copertura emisferica, il riscaldamento deve:
 
 ## 27.10 Sicurezza informatica
 
-- non esporre l'interfaccia direttamente su Internet;
-- accedere tramite VPN;
+- mantenere l'interfaccia amministrativa WebUI, SSH, log e configurazioni riservate accessibili soltanto tramite LAN o VPN;
+- predisporre l'accesso Internet alla sola pagina pubblica e ai media Allsky tramite HTTPS, con regole dedicate e verifica degli URL consentiti;
 - sostituire le credenziali predefinite;
 - aggiornare il sistema operativo in finestre controllate;
 - mantenere una copia della configurazione e della scheda di memoria.
@@ -145,8 +151,59 @@ Per un sistema con copertura emisferica, il riscaldamento deve:
 
 ## 27.12 Dati da validare
 
-> **DA VALIDARE:** software AllSky e versione installata.
-
 > **DA VALIDARE:** frequenza di acquisizione, esposizioni diurne/notturne e retention.
 
-> **DA VALIDARE:** percorso reale dell'archivio e strategia di backup.
+> **DA VALIDARE:** retention e ripristino completo da backup; riscaldatore, alimentatore e supporto di storage non sono stati censiti fisicamente nella sessione.
+
+## 27.13 Aggiornamento e ripristino — 9 ottobre 2026
+
+L'installazione precedente v2023 è stata aggiornata alla release v2026.10.01 del progetto [AllskyTeam/allsky](https://github.com/AllskyTeam/allsky). Le copie di ripristino sono in `/home/pi/allsky-backup-20261009` e `/home/pi/allsky-OLD`.
+
+Durante l'aggiornamento è stata corretta una sovrapposizione di installazioni NumPy incompatibili. L'ambiente risultante usa NumPy 1.24.4; sono state verificate le importazioni di SciPy 1.8.1, OpenCV 4.6.0 e Astropy 6.0.1. Un aggiornamento successivo deve ricontrollare le dipendenze e la produzione di una nuova immagine prima di essere considerato operativo.
+
+Il ripristino va eseguito in una finestra di manutenzione: conservare prima la configurazione corrente e i media nuovi, confrontare i backup, fermare l'acquisizione, ripristinare una configurazione coerente con la versione scelta e verificare camera, timestamp, overlay e sito locale. Il ripristino completo non è stato collaudato nella sessione.
+
+## 27.14 Personalizzazione della ripresa e del sito
+
+- Logo e titolo Digital Stargate; overlay superiore sinistro con data/ora, esposizione, guadagno, temperatura camera e fase lunare.
+- Overlay inferiore sinistro con temperatura CPU Raspberry, utilizzo RAM, spazio libero e uptime, senza sostituire quello superiore.
+- Overlay personalizzato in `config/overlay/config/overlay-Digital-Stargate.json`; moduli `allsky_pistatus` e `allsky_solarsystem` con aggiornamento periodico ogni 60 secondi. Elevazione impostata a 100 m s.l.m. su indicazione Owner.
+- Fotogramma completo mantenendo il rapporto d'aspetto, bordi neri laterali e superiori/inferiori; mappa celeste dimensionata sul cerchio della ripresa e ricollocata secondo i limiti reali dell'immagine visualizzata.
+- Orologio della mappa aggiornato al timestamp del fotogramma tramite `Last-Modified`; orientamento regolato sul riferimento solare visibile. Questa regolazione è preliminare e non costituisce calibrazione astrometrica: resta da verificare con stelle riconoscibili.
+- Sfondo scuro con dettagli stellari e Via Lattea semitrasparente; immagine `digital-stargate-via-lattea.png`, opacità finale 0,23.
+
+File interessati: `allsky.css`, `controller.js`, `configuration.json` e `index.php` nel sito Allsky. Le personalizzazioni vanno confrontate con i nuovi file upstream a ogni aggiornamento.
+
+## 27.15 Accesso pubblico — stato e attività residue
+
+Il collegamento Starlink residenziale usa un IP condiviso. L'Owner ha scelto IPStatico PRO con ingresso condiviso e hostname dynDNS.it, così il visitatore potrà raggiungere il sito senza una propria VPN. Il tunnel OpenVPN resta necessario sul router verso il servizio di ingresso.
+
+| Elemento | Stato al 09/10/2026 |
+|---|---|
+| Router | Teltonika RUT955, firmware `RUT9XX_R_00.06.09.5` |
+| Tunnel | Profilo OpenVPN `allskyip` importato e abilitato; connessione attiva osservata nel portale provider, stato router discrepante da riconciliare |
+| DNS | Hostname corrente configurato verso l'ingresso IPStatico; nessun aggiornamento automatico verso l'IP Starlink |
+| HTTPS | RapidSSL acquistato, CSR generato sul Raspberry e configurazione inviata |
+| Emissione certificato | Ultima verifica della sessione: `Certificate not yet issued` |
+| Inoltro e servizio pubblico | Non ancora completati o verificati dall'esterno |
+
+La chiave privata TLS rimane sul Raspberry e non deve entrare nel repository. Per gli hostname dynDNS.it, la [procedura ufficiale](https://dyndns.it/news/un-certificato-ssl-per-il-tuo-host-dyndns-it/) richiede validazione email gestita dal provider. È stato pianificato un controllo dello stato ogni 30 minuti, con notifica solo su disponibilità, errore significativo o intervento richiesto.
+
+Passi residui: confermare il tunnel effettivo, recuperare il certificato emesso e verificarne hostname/chiave/catena, configurare il servizio HTTPS pubblico limitato ai media e alla pagina Allsky, predisporre la regola router sulla porta assegnata, quindi provare da una rete esterna. Verificare che WebUI, SSH e percorsi riservati siano esclusi. Il manuale non attesta una pubblicazione già riuscita.
+
+## 27.16 Allsky Map
+
+La [documentazione ufficiale Allsky](https://alex-developer.github.io/docs/allsky_guide/howtos/allsky_map.html) prevede iscrizione automatica tramite **Show On Map**, aggiornamento alla modifica dei dati e ogni due giorni. La mappa mostra posizione, attrezzatura e, se configurata, l'ultima immagine con collegamento al sito.
+
+Nella sessione l'opzione è risultata già attiva, con nome **Observatory Digital Stargate**, camera ZWO ASI290MC, lente 1,8 mm e Raspberry Pi 4. I campi **Website URL** e **Image URL** erano vuoti: la camera può avere un segnaposto senza immagine pubblica. Non è stata attestata la presenza effettiva del segnaposto sulla mappa.
+
+Dopo il collaudo esterno, impostare gli URL HTTPS definitivi del sito `/allsky/` e dell'immagine `/current/image.jpg`, inclusa la porta pubblica se necessaria. Prima dell'invio alla mappa confermare la classificazione pubblica della posizione: la mappa consente di localizzare la camera, mentre le coordinate precise restano protette nel repository. Non modificare le coordinate usate per alba/tramonto per ottenere un posizionamento approssimativo senza valutare l'effetto sull'acquisizione.
+
+## 27.17 Registro revisioni
+
+| Revisione | Data | Modifica |
+|---|---|---|
+| 0.1 | Baseline precedente | Prima descrizione del sistema e dati da validare |
+| 0.2 | 09/10/2026 | Hardware verificato e ottica confermata Owner; aggiornamento software, overlay, sito, backup e pubblicazione in preparazione |
+
+Inventario correlato: [Capitolo 22](22-inventario-asset-management.md).
