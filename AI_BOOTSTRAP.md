@@ -1,6 +1,10 @@
 # Digital StarGate AI Bootstrap
 
-## Stato corrente — 9 ottobre 2026
+## Aggiornamento corrente — OAT e V5, 9 ottobre 2026
+
+P6 Accepted con i limiti del dossier; BKL-051 OPEN. Dopo PR #522, due OAT cloud autorizzati e conclusi con rollback verificato: completamento tecnico sintetico Owner/nativo, annullamento prima dell’avvio, cinque GET negative e riconciliazione di ACK già ricevuto. Non provano risposta persa, CAS concorrente, cancel durante il nativo o account Google non-Owner. V4 osservato e chiuso; byte eseguiti ancora non attestati. V5 diagnostico completato: 639/206/1075 sorgenti, audit indipendente senza discrepanze di maschere/segnale e originali invariati; associazione Atami non accettata. Runtime corrente P6, transient disattivato; nessuna nuova build, invio o fotografia pubblicata. Pipeline scientifica, covarianze/calibrazione/timing, prove cieche/policy, lifecycle residuo, adattatori e accettazione finale restano aperti. Riconciliazione candidata ai gate, non chiusura milestone. [Handover corrente](docs/project/HANDOVER_2026-10-09-BKL051-OAT-RECONCILIATION.md). F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; Safety e C→F invariati. [Riconciliazione OAT e diagnostica](docs/project/BKL-051-OAT-NATIVE-RECONCILIATION-2026-10-09.md).
+
+## Snapshot precedente — prima degli OAT e di V5
 
 P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #521 riconcilia build e preparazione OAT sul merge `94f0b7aeb034499208d640de4c0e63f2a3a51ae8`: ARB poi RQ APPROVED zero finding, 16 check exact-head SUCCESS; post-merge e Pages attestati nella ricevuta privata di rilascio. Build autorizzata R2 SUCCESS con 155/155 prove offline e digest verificato; runtime P6 invariato, attivazione/OAT specifica ancora da autorizzare. Dossier locale #520 solo DRAFT, caller #519 e recovery #518 rilasciati. Dataset pubblico Atami: diagnostica nativa V3 completata ma INVALIDA per offset della maschera FITS; confronto di tutti i pixel prova +32768. Segnale importato invariato, nessuna misura o scoperta accettata. V4 ha un errore di destinazione conservato e nessuna esecuzione/fermata attestata entro il limite; genitore salvato e verificato su 49 file. Nessun nuovo lancio prima della verifica reale di processo/provenienza; V5 soltanto preparato, non autorizzato al lancio. Originali, History, checkpoint e tentativi conservati. Restano OAT PC/cloud, workflow scientifico, covarianze, calibrazione, blind validation, policy, moving objects e adattatori produttivi. S1/S2 aperte, S3 parziale, S4 incompleta, S5 non accettata. Nessun invio o pubblicazione fotografie; nessuna nuova elaborazione P6. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety e C→F junction invariati. [Handover corrente](docs/project/HANDOVER_2026-10-09-BKL051-NATIVE-DIAGNOSTICS.md).
 
@@ -13,7 +17,7 @@ P6 accettata operativamente dall’Owner il 7 ottobre 2026 con tutti i limiti de
 
 | Campo | Valore |
 |---|---|
-| Versione | 8.33 |
+| Versione | 8.34 |
 | Baseline | 09/10/2026 |
 | Stato | Current root bootstrap — P6 accepted; BKL-051 Owner local/query direction approved, S1 open, S2 native solves with independent validation pending; BKL-043 lifecycle pending; S10 unavailable |
 
@@ -24,7 +28,7 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni e proje
 
 ## 2. Sequenza obbligatoria di lettura
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-10-09-BKL051-NATIVE-DIAGNOSTICS.md`
+2. `docs/project/HANDOVER_2026-10-09-BKL051-OAT-RECONCILIATION.md`
 3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
