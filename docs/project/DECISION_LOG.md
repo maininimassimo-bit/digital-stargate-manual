@@ -764,3 +764,8 @@ PR #520 dossier DRAFT rilasciata e verificata. [Build/OAT](BKL-051-S4-BUILD-READ
 ## 2026-10-09 — cronologia privata delle revisioni
 
 Snapshot e catena di eventi locali con digest indipendenti, revoca append-only e nessuna authority. PR539 conclusa con verifiche post-merge. Nessuna nuova architettura, dipendenza o policy.
+
+
+## 2026-10-09 — gate PR540 non conforme
+
+PR540 è MERGED sul commit `93be5531da5243c79c3f3f03f9762095700a6f45`, ma il gate pre-merge behind-main è fallito dopo avanzamento PR541 e il comando di merge è stato eseguito erroneamente. Questa non conformità storica non è sanata retroattivamente. Il rilascio del registro resta INCOMPLETE in attesa del presente incremento correttivo, CI esatta, nuove ARB poi RQ sull’albero corrente e gate pre/post-merge validi. Il delta concorrente di sei file Allsky/SEO/nav/template è stato letto integralmente: nessuna sovrapposizione con i sorgenti del registro, preservati senza modifica. BKL-051 OPEN / NOT_VALIDATED; nessuna accettazione scientifica o authority. Tutti i residui scientifici, servizio/Owner/reporting/S4/S5 e i limiti precedenti restano interi; nessuna nuova sessione cloud, credenziale, soglia, fotografia o prova nativa. P6 Accepted nei limiti, F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; Safety e C→F invariati.
