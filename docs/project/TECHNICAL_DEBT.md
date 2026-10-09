@@ -242,3 +242,8 @@ PR #520 dossier DRAFT rilasciata e verificata. [Build/OAT](BKL-051-S4-BUILD-READ
 ## BKL-051 — diagnostica nativa non validata, 9 ottobre 2026
 
 [Atami](BKL-051-S3-NATIVE-DIAGNOSTICS-2026-10-09.md): V3 INVALID per offset signed FITS provato su tutti i pixel; segnale e originali invariati. V4 path error conservato, esecuzione/fermata non confermate; genitore 49 file salvati/verificati, V5 solo preparato. Nessun nuovo lancio prima della verifica reale. Attivazione/OAT distinta ancora da autorizzare; scientific acceptance e chiusura BKL-051 assenti.
+
+
+## BKL-051 — residui dopo il registro privato
+
+Il registro locale non autentica attori e non concede invio. Integrazione privata autenticata, policy Owner, formati provider, trasporto, duplicati, timeout, esiti, validazione scientifica e S5 restano requisiti interi. Nessuna soglia o sessione cloud nuova.
