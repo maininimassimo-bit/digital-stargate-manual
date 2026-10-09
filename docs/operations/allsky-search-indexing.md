@@ -67,6 +67,26 @@ Su autorizzazione dell’owner è stata inviata una richiesta di rivalutazione t
 
 Il test dell’URL Allsky pubblicato, eseguito da Google il 09/10/2026 alle 21:07 Europe/Rome, riporta **L’URL è disponibile per Google / La pagina può essere indicizzata**. La successiva richiesta di indicizzazione è stata accettata e l’URL aggiunto alla coda prioritaria. Questo esito distingue la recuperabilità della Home dal problema del report Sitemap e non annulla la segnalazione di sicurezza. L’indicizzazione effettiva resta una decisione di Google.
 
+## Esiti dopo la pubblicazione del portale
+
+La modifica è stata pubblicata con la [PR #541](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/541). Il merge `fcc2560b15e26c1c1a22aaff90f61040c0ac4480` è incluso nel successivo `93be5531da5243c79c3f3f03f9762095700a6f45`, il cui workflow Pages `37979592720` è concluso con successo. Sono stati verificati HTTP 200 della Home, della pagina Allsky, di questa procedura, del capitolo 27 revisione 0.6 e della sitemap; il browser riceve l’anteprima live a risoluzione originale 1936 px, ridimensionata nel riquadro.
+
+| Operazione del 09/10/2026 | Esito osservato |
+|---|---|
+| Proprietà Search Console del portale | Verificata con Tag HTML dopo la pubblicazione |
+| Proprietà Search Console Allsky | Verificata con Tag HTML |
+| Sitemap del portale | Invio confermato; report iniziale «Impossibile recuperare» |
+| Sitemap Allsky | Invio confermato; report iniziale «Impossibile recuperare» |
+| Home del portale | Richiesta di indicizzazione accettata nella coda prioritaria |
+| Pagina Allsky nel portale | Richiesta di indicizzazione accettata nella coda prioritaria |
+| Home del sito Allsky | Test pubblico positivo e richiesta di indicizzazione accettata |
+| Report sicurezza del portale | «Nessun problema rilevato» al controllo |
+| Classificazione Navigazione sicura Allsky | Richiesta di rivalutazione inviata; esito pendente |
+
+La verifica HTTP delle sitemap, anche con user-agent Googlebot, restituisce 200 e XML valido: 955 URL / 194.522 byte nel portale e 5 URL / 513 byte in Allsky. Tutti gli URL appartengono al rispettivo prefisso e i file rispettano i limiti di 50.000 URL e 50 MB. Sono conteggi del controllo, non valori immutabili del catalogo. Non è stata identificata la causa dell’errore iniziale in Search Console; non sono state effettuate reinoltri ripetuti né dichiarata la lettura riuscita.
+
+Al momento delle richieste i tre URL risultavano sconosciuti all’indice. **Indicizzazione richiesta** è la conferma della coda, non la prova della comparsa nei risultati. Il prossimo controllo deve verificare lettura delle sitemap, decisione di Navigazione sicura e stato indicizzato degli URL, senza duplicare le richieste già accettate.
+
 ## Verifica tecnica e ripristino
 
 Sono stati verificati sintassi PHP e lighttpd, risposta HTTP 200 della Home e dei due file SEO, struttura XML con cinque URL e risposta 403 degli ingressi amministrativi pubblici controllati. Sul portale: compilazione MkDocs rigorosa, canonical, descrizioni, tag Google, nuova voce sitemap e test delle anteprime Home/Stato.
