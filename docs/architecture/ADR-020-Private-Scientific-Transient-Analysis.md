@@ -1,10 +1,14 @@
 # ADR-020 — Private scientific transient analysis
 
-**Status:** Owner-approved direction, provider-query boundary and concrete private transport; implementation candidate not activated, scientific operating policy not accepted.
+**Status:** Owner-approved direction, provider-query boundary, concrete private transport and explicit local TPV dependencies; scientific operating policy not accepted.
 
-**Date:** 2026-10-08
+**Date:** 2026-10-09
 
 **Scope:** BKL-051, additive private local analysis and governed portal consultation.
+
+## Explicit local TPV dependency decision — 9 October 2026
+
+The Owner authorized Astropy 8.0.1 and NumPy 2.5.3 as explicit local-worker dependencies for a TPV coordinate adapter, retaining PixInsight native measurements. [Minimized decision](../project/evidence/BKL-051-OWNER-LOCAL-TPV-2026-10-09.json), [contract and evidence](../project/BKL-051-S2-LOCAL-TPV-ADAPTER-2026-10-09.md). The adapter reads a hash-verified bounded local FITS snapshot and the original TPV coefficients; it does not edit image pixels/headers or replace TPV with undistorted TAN. Its output remains private NOT_VALIDATED, without accepted frame/epoch, proper motion, positional covariance or association. Optional dependencies and their transitive versions are pinned separately; CI exercises the optional adapter explicitly on Windows/Linux, without adding dependencies to cloud runtime images or silently activating it in the worker. No cloud session, credential, quantitative scientific policy, submission or photograph publication is authorized by this decision. Earlier dependency-pending wording remains historical for choices outside this precise scope.
 
 ## Concrete transport decision — 8 October 2026
 
