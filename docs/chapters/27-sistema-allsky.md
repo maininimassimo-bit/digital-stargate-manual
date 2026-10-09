@@ -1,7 +1,7 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 0.6 — overlay esteso e predisposizione indicizzazione Google 09/10/2026
+**Revisione:** 0.7 — pannelli esterni, meteo locale e informazioni astronomiche 09/10/2026
 **Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
@@ -165,8 +165,8 @@ Il ripristino va eseguito in una finestra di manutenzione: conservare prima la c
 
 ## 27.14 Personalizzazione della ripresa e del sito
 
-- Logo e titolo Digital Stargate; overlay superiore sinistro con data/ora, esposizione, guadagno, temperatura camera e fase lunare.
-- Overlay inferiore sinistro con temperatura CPU Raspberry, utilizzo RAM, spazio libero e uptime, senza sostituire quello superiore.
+- Nel fotogramma rimangono soltanto logo e scritta Digital Stargate ridotti, in basso a sinistra. Le precedenti scritte di acquisizione e Raspberry sono state trasferite nei pannelli del sito, fuori dalla ripresa (§27.26).
+- A sinistra: “La notte a Manciano” in alto e acquisizione in basso. A destra: meteo CloudWatcher e cielo/eventi. Temperatura CPU Raspberry, utilizzo RAM, spazio libero e uptime occupano una fascia inferiore separata.
 - Overlay personalizzato in `config/overlay/config/overlay-Digital-Stargate.json`; moduli `allsky_pistatus` e `allsky_solarsystem` con aggiornamento periodico ogni 60 secondi. Elevazione impostata a 100 m s.l.m. su indicazione Owner.
 - Fotogramma completo mantenendo il rapporto d'aspetto, bordi neri laterali e superiori/inferiori; mappa celeste dimensionata sul cerchio della ripresa e ricollocata secondo i limiti reali dell'immagine visualizzata.
 - Orologio della mappa aggiornato al timestamp del fotogramma tramite `Last-Modified`; la regolazione iniziale sul Sole è stata sostituita da una calibrazione sulle stelle, con riscontro su un secondo fotogramma (§27.20). Overlay automatico notturno, pianeti e nomi abilitati (§27.21).
@@ -200,6 +200,7 @@ Registrazione aggiornata il 09/10/2026 con lo script ufficiale `postToMap.sh`; r
 | 0.4 | 09/10/2026 | Documentate anteprime Home/Status, allineamento ai badge, refresh e modalità essenziale; nessuna variazione hardware |
 | 0.5 | 09/10/2026 | Integrati progetto tecnico, NTP, calibrazione stellare, overlay notturno e pianeti, archivio meteore, verifiche e procedure di ripristino |
 | 0.6 | 09/10/2026 | Nomi delle stelle e radianti indicativi; pagina divulgativa Allsky, metadati SEO, sitemap, robots.txt e gestione Search Console |
+| 0.7 | 09/10/2026 | Pannelli fuori dalla ripresa; CloudWatcher locale, stelle rilevate, candidati della notte, previsioni ISS, Aircraft adsb.fi e informazioni Sole/Luna/alba |
 
 Inventario correlato: [Capitolo 22](22-inventario-asset-management.md).
 
@@ -235,13 +236,13 @@ Percorsi relativi a `/home/pi/allsky`, salvo diversa indicazione:
 | File | Responsabilità |
 |---|---|
 | `config/settings.json` | Camera, acquisizione e conservazione degli originali |
-| `config/overlay/config/overlay-Digital-Stargate.json` | Sovraimpressioni impresse nel fotogramma |
+| `config/overlay/config/overlay-Digital-Stargate.json` | Solo logo e scritta ridotti impressi nel fotogramma; dati testuali nei pannelli web |
 | `html/allsky/configuration.json` | Opzioni sito, mappa, calibrazione, pianeti e default notturno |
 | `html/allsky/data.json` | Orari di alba/tramonto e stato dell’acquisizione diurna/notturna |
 | `html/allsky/js/controller.js` | Caricamento immagini, clock del fotogramma, geometria e default della mappa |
 | `html/allsky/virtualsky/virtualsky.js` | Proiezione celeste e correzione dell’inclinazione della camera |
 | `config/myFiles/modules/allsky_meteorarchive.py` | Rilevazione e archiviazione automatica dei candidati |
-| `config/modules/postprocessing_night.json` | Attivazione e parametri del modulo meteore |
+| `config/modules/postprocessing_night.json` | Archivio meteore e conteggio stelle prima dell’overlay e del salvataggio |
 | `/etc/systemd/timesyncd.conf` | Impostazioni di sincronizzazione dell’orologio di sistema |
 
 Le configurazioni complete possono contenere informazioni riservate: conservarle nel backup operativo protetto. Il repository pubblica descrizione e parametri tecnici selezionati, non copie integrali delle configurazioni, chiavi o profili di accesso.
@@ -400,3 +401,11 @@ Restano aperti i collaudi fisici elencati nel §27.12, la prova di failover sul 
 ## 27.25 Pubblicazione e indicizzazione Google
 
 La [pagina divulgativa Allsky](../allsky/index.md) integra anteprima live, descrizione del cielo di Manciano e collegamenti a timelapse, startrail, keogrammi e meteore candidate. I dettagli di metadati SEO, sitemap, robots.txt, proprietà Google, segnalazione iniziale di sicurezza e ripristino sono nella [procedura di indicizzazione](../operations/allsky-search-indexing.md). Disponibilità del sito e richiesta di scansione non equivalgono a indicizzazione effettiva.
+
+## 27.26 Pannelli informativi esterni alla ripresa
+
+Dal 09/10/2026 acquisizione, meteo e conteggi sono presentati fuori dalla fotografia. In alto a sinistra “La notte a Manciano” mostra fase del cielo, altezza del Sole, altezza della Luna e prossima alba; sotto resta l’acquisizione. A destra compaiono meteo CloudWatcher e cielo/eventi; i dati Raspberry sono nella fascia inferiore. Nella ripresa rimangono soltanto logo e scritta ridotti in basso a sinistra. La mappa celeste è confinata al rettangolo della foto, mantenendo la calibrazione precedente.
+
+Il collector legge le sorgenti locali Allsky e le proiezioni esterne autorizzate, pubblicando solo i campi selezionati ogni 30 secondi. CloudWatcher proviene dal flusso locale già raccolto su EAGLE; Aircraft usa adsb.fi nell’area approssimata di Manciano. Le stelle sono conteggiate con una maschera dedicata; i candidati della notte sono fotogrammi e tracce archiviati, senza conferma automatica. ISS indica passaggi visibili previsti, non eventi riconosciuti nella foto. Dati scaduti o sorgenti non disponibili sono esplicitamente segnalati.
+
+I pannelli non sono incorporati nel JPEG o nelle anteprime Home/Status. Nessun nuovo hardware, contratto Observatory Status o comando di sicurezza è introdotto. [Sorgenti, frequenze, limiti, verifiche e ripristino](../operations/allsky-live-panels.md).
