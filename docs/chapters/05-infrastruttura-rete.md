@@ -133,7 +133,7 @@ Il RUT955, l’EAGLE3 e gli altri sistemi devono utilizzare sorgenti temporali a
 Comandi di esempio da una postazione Windows autorizzata:
 
 ```powershell
-Test-Connection -ComputerName <gateway-Teltonika-da-inventario-riservato> -Count 4
+Test-Connection -ComputerName 'INDIRIZZO_GATEWAY_DA_INVENTARIO_RISERVATO' -Count 4
 ```
 
 Gli indirizzi privati sono raggiungibili solo quando il computer è collegato alla rete o VPN corretta.
