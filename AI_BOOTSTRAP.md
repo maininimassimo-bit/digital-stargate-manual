@@ -1,5 +1,11 @@
 # Digital StarGate AI Bootstrap
 
+## Aggiornamento corrente — calibrazione fotometrica, 9 ottobre 2026
+
+P6 Accepted nei limiti del dossier; BKL-051 OPEN / NOT_VALIDATED. PR #527 rilasciata e verificata: 15 workflow post-merge SUCCESS e sette endpoint Pages. Nuovo inspector fotometrico offline proposto: quattro variabili, sei covarianze, colore esplicito; semantica irrisolta blocca sigma e prodotti già calibrati/aperture non corrette non ricevono zero point. Fattorizzazione condivisa con contratto di coppia invariato. Audit dei tre cataloghi pubblici conservati: 76.932 righe compatibili con precisione decimale/float32, incertezza di calibrazione ancora irrisolta; richiesta IRSA autorizzata inviata, nessuna risposta attestata. Gate del nuovo package ancora da completare. Nessuna nuova query, credenziale, sessione cloud, fotografia o segnalazione astronomica. Cinque OAT, due build e due probe GCS conclusi. Restano pipeline e rapporto scientifico completi, timing/matching, multi-epoca, prove cieche/policy, intero servizio, reporting e S5. F4/F5, BKL-050, S10/Safety e C→F invariati. [Contratto e limiti](docs/project/BKL-051-S1-PHOTOMETRIC-CALIBRATION-2026-10-09.md). [Handover corrente](docs/project/HANDOVER_2026-10-09-BKL051-PHOTOMETRIC-CALIBRATION.md).
+
+## Snapshot precedente — prima del contratto fotometrico
+
 ## Aggiornamento corrente — coda/backup GCS, 9 ottobre 2026
 
 P6 Accepted con i limiti del dossier; BKL-051 OPEN. PR #526 rilasciata e verificata: 15 workflow post-merge SUCCESS e sette endpoint Pages. Secondo probe coda/backup GCS singolo autorizzato PASS in 4,672 secondi: 43 richieste, due HTTP 412 reali, registrazioni e creazioni concorrenti conservate dopo retry, idempotenza senza riscrittura e sei backup verificati, compresi due candidati respinti non equivalenti a head. Primo tentativo fallito prima dello storage conservato. Codice invariato, namespace diagnostico nei due bucket esistenti: nessun control object operativo letto/scritto, servizio/IAM/traffico modificato o PixInsight avviato. Prova del nucleo coda/storage, non dell’intero servizio o login. Due autorizzazioni del probe consumate; cinque OAT e due build precedenti concluse. Restano intero servizio/regressioni, rapporto scientifico completo, calibrazione/covarianze/timing, pipeline multi-epoca, prove cieche/policy, reporting e S5. Nessuna scoperta, invio o fotografia pubblicata; F4/F5, BKL-050, S10/Safety e C→F invariati. [Evidenze](docs/project/BKL-051-S4-GCS-QUEUE-BACKUP-EVIDENCE-2026-10-09.md). [Handover corrente](docs/project/HANDOVER_2026-10-09-BKL051-GCS-QUEUE-BACKUP.md).
@@ -40,7 +46,7 @@ P6 accettata operativamente dall’Owner il 7 ottobre 2026 con tutti i limiti de
 
 | Campo | Valore |
 |---|---|
-| Versione | 8.38 |
+| Versione | 8.39 |
 | Baseline | 09/10/2026 |
 | Stato | Current root bootstrap — P6 accepted; BKL-051 Owner local/query direction approved, S1 open, S2 native solves with independent validation pending; BKL-043 lifecycle pending; S10 unavailable |
 
@@ -51,7 +57,7 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni e proje
 
 ## 2. Sequenza obbligatoria di lettura
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-10-09-BKL051-GCS-QUEUE-BACKUP.md`
+2. `docs/project/HANDOVER_2026-10-09-BKL051-PHOTOMETRIC-CALIBRATION.md`
 3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
