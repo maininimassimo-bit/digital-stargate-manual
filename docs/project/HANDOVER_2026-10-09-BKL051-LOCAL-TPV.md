@@ -1,0 +1,11 @@
+# Handover — BKL-051 adapter locale TPV, 9 ottobre 2026
+
+P6 Accepted nei limiti; BKL-051 OPEN / NOT_VALIDATED. PR #529 rilasciata sul merge 2b66c184964ced44ec4b168b6740f024f255929d, 15 workflow post-merge e sette endpoint Pages verificati. Owner autorizza Astropy8.0.1/NumPy2.5.3 per il solo adapter locale TPV, PixInsight resta per misure native; nessun cloud/credenziale/soglia/invio. Adapter diagnostico, 10 test sintetici e trasformazione di 108 centri su sei FITS reali; non attesta frame/epoca/moto/covarianza o matching. Nuove PSF native: Atami72 e AT2018cow36, pixel e originali verificati, checkpoint/History/rami conservati; evento noto non cieco, fotometria non accettata. SN2023ixf primo prodotto404 conservato. IRSA ticket ricevuto, semantica UNC ancora irrisolta. Gate nuovo package pendenti. Restano pipeline scientifica completa, prove cieche/policy, rapporto/servizio completo, reporting e S5. Autorizzazioni cloud precedenti concluse. F4/F5, BKL-050, S10/Safety e C→F invariati.
+
+[Contratto e dossier](BKL-051-S2-LOCAL-TPV-ADAPTER-2026-10-09.md), [decisione Owner](evidence/BKL-051-OWNER-LOCAL-TPV-2026-10-09.json), [ADR-020](../architecture/ADR-020-Private-Scientific-Transient-Analysis.md).
+
+Branch: codex/bkl051-local-tpv-adapter. Package: adapter Python locale/dipendenze opzionali, dieci prove sintetiche e CI dedicata; riconciliazione delle evidenze successive alla PR529. Nessuna attivazione del percorso nel servizio o nel portale.
+
+Prossimo passo: gate exact-head ARB→RQ/merge/Pages di questo incremento, poi validazione astrometrica indipendente e workflow fotometrico su dati reali. Non ripetere fit o collaudi completati senza nuovo motivo. Conservarne archivio/genitori e versioni fallite. Non adottare l'interpretazione UNC come varianze prima di chiarimento verificato. Non confondere calcolo WCS, associazione di sorgenti, candidato e scoperta. Completeness/falsi positivi/policy/reporting/accettazione restano requisiti di chiusura.
+
+La proposta locale è approvata; nessuna nuova autorizzazione cloud o segnalazione astronomica. Cinque OAT, due build e due probe GCS precedenti conclusi. Non riusare credenziali o sessioni. S10/Safety e collegamento radice invariati. Le sezioni storiche precedenti restano prove, non stato corrente.
