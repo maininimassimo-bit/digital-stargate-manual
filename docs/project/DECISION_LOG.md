@@ -1,5 +1,9 @@
 # Decision Log
 
+## 2026-10-09 — anteprima CBAT locale nello scope reporting approvato
+
+Incremento locale ASCII per possibile nova dichiarata, senza nuova authority, architettura, policy, dipendenza o invio. Null e precisione conservati, classificazione e controlli non attestati; nessuna discovery dedotta. PR534 rilasciata e refunc pubblico acquisito privatamente; semantica del rumore completa e risposta IRSA ancora non attestate. [Dossier](BKL-051-S1-CBAT-NOVA-PREVIEW-2026-10-09.md).
+
 ## 2026-10-09 — export ADES locale e comunicazione IRSA
 
 Incremento nello scope reporting già approvato: anteprima privata, nessun invio astronomico, nuova policy o decisione strutturale. Owner autorizza un solo nuovo messaggio IRSA rumore/provenienza: invio completato e ricevuta privata conservata; calibrazione IRSASD-21929 separata. Validazione scientifica e accettazione BKL-051 non acquisite. [Dossier](BKL-051-S1-MPC-ADES-PREVIEW-2026-10-09.md).
