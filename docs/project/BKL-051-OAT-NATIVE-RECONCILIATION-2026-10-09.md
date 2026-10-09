@@ -22,7 +22,15 @@ V5 è un nuovo ramo con script e applicazione verificati mediante digest prima d
 
 StarDetector nativo restituisce 639, 206 e 1075 sorgenti. Audit indipendente completo: zero discrepanze tra maschere raw corrette e FITS originali, zero discrepanze nelle maschere binarie a 8 bit, zero discrepanze nel segnale normalizzato float32 e zero pixel scientifici alterati. Nessuna trasformazione automatica in magnitudini o varianze calibrate. History a monte NOT_ATTESTED; rilevatore in lettura e maschera manuale tracciati tramite script e ricevute, senza dichiarare una History di processi integralmente riproducibile o un archivio standalone delle dipendenze.
 
-Il confronto diagnostico con l'effemeride trova distanze minime circa 11,42, 14,80 e 0,88 secondi d'arco. Non costituisce associazione accettata: timing, covarianza astrometrica, PSF/confusione e policy quantitativa non sono validati. Non dichiarare Atami recuperato in tutte le epoche. Campo selezionato con effemeride nota, non ricerca cieca.
+Il primo confronto diagnostico con l'effemeride, usando la conversione proposta meno mezzo pixel, trova distanze minime circa 11,42, 14,80 e 0,88 secondi d'arco. Non costituisce associazione accettata: timing, covarianza astrometrica, PSF/confusione e policy quantitativa non sono validati. Non dichiarare Atami recuperato in tutte le epoche. Campo selezionato con effemeride nota, non ricerca cieca.
+
+## Controllo indipendente con cataloghi PSF pubblici
+
+Tre richieste pubbliche circoscritte hanno acquisito i cataloghi PSF delle medesime esposizioni, con ricevute HTTP 200 e digest conservati. Nessuna immagine Owner trasmessa e nessun rilancio PixInsight. IRSA documenta il prodotto `psfcat.fits` e la derivazione del suo percorso dalla metadata: [ZTF Metadata/API](https://irsa.ipac.caltech.edu/docs/program_interface/ztf_metadata.html).
+
+I cataloghi riportano sorgenti a circa 0,15/0,19/0,20 secondi d'arco dalle posizioni previste. Sono misure del provider, non nostre associazioni accettate o fotometria calibrata. I valori del catalogo non sostituiscono un modello completo di incertezza; le magnitudini strumentali non vanno presentate come magnitudini calibrate. Le due prime sorgenti vicine all'effemeride non sono recuperate dal rilevatore V5, mentre la terza lo è soltanto come confronto diagnostico. Il controllo del footprint nelle zone previste non trova pixel esclusi o saturi; non autorizza abbassamenti automatici di soglia.
+
+Sulla stessa popolazione di tutte le sorgenti native finite, senza selezione per distanza o flusso, il confronto con il vicino di catalogo più prossimo è stato ripetuto per tre offset prestabiliti: -0,5, 0 e +0,5 pixel. L'offset nullo dà mediane circa 0,082/0,084/0,054 secondi d'arco; la sottrazione di mezzo pixel dà circa 0,705/0,719/0,703. Questo evidenzia una convenzione del rilevatore da verificare separatamente rispetto alle coordinate geometriche delle aperture. Il contratto generale non è cambiato e le analisi storiche sono conservate. Vicini più prossimi e mediane non costituiscono identità validate, calibrazione astrometrica assoluta o prova cieca di completezza. Ripresa scientifica: verificare la convenzione specifica di StarDetector e la sensibilità/PSF prima di nuove associazioni.
 
 ## Matrice dei requisiti residui
 
