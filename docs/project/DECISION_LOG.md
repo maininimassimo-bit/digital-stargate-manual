@@ -739,3 +739,7 @@ PR #518 recovery Owner rilasciata e verificata. [Caller locale](BKL-051-S4-OPERA
 ## BKL-051 — dossier preliminare candidato, 9 ottobre 2026
 
 PR #519 caller rilasciata, 15 workflow post-merge e sette endpoint verificati. [Dossier privato candidato](BKL-051-S4-REPORTING-DRAFT-2026-10-09.md): solo DRAFT e 12 prove sintetiche; nessun invio, validazione o authority derivata. Build proposta privata pending; PC/cloud OAT, scientific validation, moving objects e reporting produttivo restano aperti.
+
+## BKL-051 — build verificata, OAT preparato, 9 ottobre 2026
+
+PR #520 dossier DRAFT rilasciata e verificata. [Build/OAT](BKL-051-S4-BUILD-READINESS-2026-10-09.md): due tentativi autorizzati separatamente, primo fallito conservato, secondo SUCCESS 155/155 prove offline/digest immutabile. Runtime P6 invariato, attivazione proposta privata pending. [Dataset pubblico Atami](BKL-051-S3-MOVING-DATASET-PREPARATION-2026-10-09.md) preparato senza misure o validazione. OAT reale, pipeline scientifica, policy/moving/reporting produttivo ancora aperti; nessuna chiusura BKL-051.
