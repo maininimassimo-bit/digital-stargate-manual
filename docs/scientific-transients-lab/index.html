@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Digital StarGate · Collaudo isolato S4</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0d1726;color:#eaf0f8;font:17px/1.6 system-ui,sans-serif}
+main{max-width:850px;margin:4vh auto;padding:28px}h1{font-size:clamp(28px,5vw,42px);line-height:1.2}
+.tag{color:#90c7ff;font-size:14px;letter-spacing:.08em}section{padding:22px;margin:24px 0;border:1px solid #3a4c67;border-radius:12px;background:#162237}
+label{display:block;margin:14px 0 5px}input{width:100%;font:inherit;padding:10px;border-radius:6px;border:1px solid #7185a3;background:#0d1726;color:#fff}
+button{font:inherit;padding:11px 18px;border-radius:7px;border:0;background:#a7d3ff;color:#102034;margin:12px 8px 0 0;cursor:pointer}button:disabled{opacity:.45;cursor:default}
+#status{white-space:pre-wrap;overflow-wrap:anywhere}a{color:#a7d3ff}.small{font-size:14px;color:#c4d2e6}
+</style></head><body><main>
+<div class="tag">DIGITAL STARGATE · BKL-051</div><h1>Collaudo isolato S4</h1>
+<p>Pagina preparata per una futura sessione autorizzata. Nessun ambiente cloud viene avviato da questa pagina.</p>
+<section><h2>1. Verifica il pacchetto</h2>
+<p>Carica il descrittore privato della nuova sessione e inserisci la sua impronta approvata. Contiene due richieste sintetiche, senza immagini o dati astronomici.</p>
+<label for="descriptor">Descrittore della sessione</label><input id="descriptor" type="file" accept=".json,application/json">
+<label for="digest">Codice di verifica approvato</label><input id="digest" inputmode="text" maxlength="64" autocomplete="off" spellcheck="false">
+<button id="verify">Verifica descrittore</button></section>
+<section><h2>2. Accedi come Owner</h2><p>L’accesso Google è richiesto solo dopo la verifica. Il token rimane in memoria e viene cancellato al termine della prova.</p>
+<button id="login" disabled>Carica accesso Google</button><div id="google"></div></section>
+<section><h2>3. Esegui la coppia autorizzata</h2><p>Prima dell’avvio, il controller deve aver registrato i due binding e predisposto la fase CREATE. In caso di risposta incerta, la sessione si ferma senza ripetere le scritture.</p>
+<button id="run" disabled>Esegui collaudo della coppia</button><button id="download" disabled>Scarica ricevuta</button></section>
+<p id="status" role="status" aria-live="polite">In attesa del descrittore approvato.</p>
+<p class="small">La ricevuta descrive la prova tecnica e non chiude S4 o la milestone. Restano la verifica indipendente dello storage, l’arresto del servizio e l’accettazione Owner.</p>
+<p><a href="../project/BKL-051-S4-LAB-CLOUD-CANDIDATE-2026-10-09/">Leggi il perimetro del collaudo</a></p>
+</main><script type="module" src="../javascripts/s4-lab-page.mjs"></script></body></html>
