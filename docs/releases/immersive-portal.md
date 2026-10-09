@@ -10,7 +10,7 @@
 
 ## Esperienza realizzata
 
-Il portale usa una shell comune per tutte le pagine Material. La home e 18 hub
+La baseline del 29/09/2026 usa una shell comune per tutte le pagine Material. La home e 18 hub
 integrano modelli Three.js procedurali: StarGate/atlante celeste oppure cupola e
 strumentazione illustrativa. Tipografia, pannelli, tabelle, focus e navigazione
 ricevono un trattamento coerente in light/dark. I manuali e le pagine di dettaglio
@@ -93,3 +93,17 @@ Navigazione di sezione prima del contenuto su tutte le pagine; nuova mappa compl
 ## Incremento: Roadmap compatta e Planner allineato
 
 Stato progetto e target restano integrali in dettagli espandibili; schede package e milestone più compatte. Il progresso usa un indicatore prospettico leggero con percentuale e conteggi governati, senza duplicare la barra. Nel Planner cielo e atlante sono affiancati e allineati sotto l'introduzione, oppure impilati su mobile. [Implementazione e verifiche](../ui/immersive-portal-implementation.md). Nessuna variazione a dati, freshness, authority o policy; rollback tramite revert della PR e rebuild.
+
+## Incremento: anteprime live Allsky Home e Status — 09/10/2026
+
+La Home mostra il JPEG live Allsky al posto dello StarGate, con contenitore e badge preservati, pulsante Allsky e Vista essenziale. Observatory Status mantiene la cupola collegata al badge e aggiunge sotto l’anteprima Allsky; i due riquadri sono allineati alla colonna dei badge, con disposizione impilata su mobile. Immagine intera senza ritaglio, aggiornamento ogni 30 secondi e stati espliciti per pausa o collegamento indisponibile. L’ora di ricezione non equivale alla data di acquisizione. [Implementazione, manutenzione e rollback](../ui/immersive-portal-implementation.md#anteprime-allsky-nella-home-e-in-observatory-status-9-ottobre-2026).
+
+| Incremento | Evidence pubblicata |
+|---|---|
+| Home | [PR #532](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/532), merge `e586c993297908b5c72a91210c64d172808653f1`; [Pages](https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/37960111465) riuscito |
+| Cupola e Allsky allineate in Status | [PR #533](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/533), merge `cba2d3a942fd5b1608a95bc42bbd2ba736bf9cbe`; [Pages](https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/37962809653) riuscito |
+| Coerenza degli asset in cache | [PR #535](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/535), merge `e895b7febadf132b8a0bee31582a35c5d8e77f8b`; [Pages](https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/37964637276) riuscito |
+
+I check richiesti sui rispettivi head e i workflow post-merge sono riusciti. I test browser usano fixture e bloccano provider esterni; il riscontro successivo sul sito pubblico ha verificato separatamente il JPEG reale 1936 × 1096 e l’allineamento in Status. La verifica live ha rilevato la cache di asset precedenti: la PR #535 ha corretto il problema tramite riferimenti di versione, verificati anche nella scheda già aperta.
+
+Le modifiche sono di presentazione read-only: non cambiano telemetria, policy di freshness, autorità safety o configurazioni dell’Allsky. La disponibilità osservata del JPEG non costituisce un monitoraggio continuo o una conferma della sicurezza del cielo. Restano i limiti di collaudo fisico e assistivo della baseline.
