@@ -30,3 +30,6 @@
   <p><a href="../project/BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07/">Stato e piano della funzione</a> · <a href="../pixinsight-pilot/">Elabora con PixInsight e IA</a></p>
   <noscript>La consultazione privata richiede JavaScript e l’accesso Owner.</noscript>
 </div>
+
+
+La [preparazione della concorrenza isolata](../project/BKL-051-S4-ISOLATED-CONCURRENCY-PREPARATION-2026-10-09.md) verifica soltanto due esecutori HTTP locali su storage sintetico. Autenticazione Google, GCS e attivazione dell’ambiente restano gate aperti.

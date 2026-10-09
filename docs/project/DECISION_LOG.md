@@ -1,5 +1,11 @@
 # Decision Log
 
+## Aggiornamento corrente — preparazione concorrenza isolata
+
+Owner approva la preparazione dell’ambiente isolato a due esecutori, distinta da una nuova attivazione cloud. Controller offline con due HTTPServer indipendenti, handler/coda di produzione invariati e storage MemoryStore sintetico comune; rendezvous dopo lettura della stessa generazione, due conflitti CAS sintetici, quattro commit e sei copie di backup verificate. Sei test dedicati PASS; credenziali e Google Owner sintetici, nessun HTTP412 provider attestato. L’immagine/gateway cloud, autenticazione Google, trasporto GCS e controller live restano da implementare e revisionare prima di chiedere attivazione. PR542 correttiva completata sul merge 765dee4e8e3f73e0817f0853ca260ba34ac84a35, 15 workflow post-merge e sette risorse verificate; PR540 resta storicamente non conforme, nessuna sanatoria. BKL-051 OPEN / NOT_VALIDATED: S1/S2 aperte, S3 parziale, S4 incompleta, S5 non accettata; IRSA21929/21930 risposte tecniche non attestate nell’ultima verifica conservata. Restano calibrazione/rumore/covarianze, astrometria/timing, pipeline/rapporto completi, recuperi ciechi/falsi positivi, moving objects/tracklet, integrazione autenticata di revisioni/formati provider/trasporto/esiti e policy quantitativa Owner. P6 Accepted nei limiti; F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva. Nessuna nuova sessione cloud, credenziale, fotografia, soglia scientifica, invio astronomico o prova nativa; Safety e collegamento C→F invariati. [Handover corrente](HANDOVER_2026-10-09-BKL051-ISOLATED-CONCURRENCY.md).
+
+## Snapshot precedente — prima della preparazione isolata
+
 ## 2026-10-09 — schede locali TNS/VSX nello scope reporting approvato
 
 Schede private API/CLI per categorie dichiarate, senza schema provider, mapping ID o readiness attestati. Richiesta SHA fissata/registro verificato, precisione e unknown conservati; nessuna nuova authority, dipendenza, policy, architettura o invio. PR536 rilasciata e post-merge verificata. [Dossier](BKL-051-S1-TNS-VSX-REVIEW-2026-10-09.md).
