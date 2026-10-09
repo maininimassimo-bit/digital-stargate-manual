@@ -1,5 +1,10 @@
 # Digital StarGate AI Bootstrap
 
+## Aggiornamento corrente — accessi Google e ciclo nativo, 9 ottobre 2026
+
+P6 Accepted con i limiti del dossier; BKL-051 OPEN. PR #523 rilasciata e verificata dopo merge. Terza OAT Google conclusa: Owner HTTP 200, secondo account reale HTTP 403 e zero schede private; rollback e stato invariato verificati indipendentemente. Nuova prova locale PixInsight: cancellazione durante misure, checkpoint e History conservati, 4096 campioni invariati, handle proprio fermato. Due nuove prove con interruzione reale del socket loopback verificano riconciliazione senza seconda POST oppure recovery senza replay; storage sintetico, non OAT cloud. V6 diagnostico: 1033/439/1354 sorgenti, due posizioni su tre recuperate diagnosticamente; nessuna associazione o soglia accettata. Runtime corrente P6, transient disattivato. Restano ciclo completo portale/cloud, CAS concorrente reale, recovery/review/export Owner, pipeline scientifica, calibrazione/covarianze, prove cieche/policy, reporting e accettazione finale. Nessuna build, invio o fotografia pubblicata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; Safety e C→F invariati. [Evidenze](docs/project/BKL-051-ACCESS-LIFECYCLE-EVIDENCE-2026-10-09.md). [Handover corrente](docs/project/HANDOVER_2026-10-09-BKL051-ACCESS-LIFECYCLE.md).
+
+## Snapshot precedente
 ## Aggiornamento corrente — OAT e V5, 9 ottobre 2026
 
 P6 Accepted con i limiti del dossier; BKL-051 OPEN. Dopo PR #522, due OAT cloud autorizzati e conclusi con rollback verificato: completamento tecnico sintetico Owner/nativo, annullamento prima dell’avvio, cinque GET negative e riconciliazione di ACK già ricevuto. Non provano risposta persa, CAS concorrente, cancel durante il nativo o account Google non-Owner. V4 osservato e chiuso; byte eseguiti ancora non attestati. V5 diagnostico completato: 639/206/1075 sorgenti, audit indipendente senza discrepanze di maschere/segnale e originali invariati; associazione Atami non accettata. Runtime corrente P6, transient disattivato; nessuna nuova build, invio o fotografia pubblicata. Pipeline scientifica, covarianze/calibrazione/timing, prove cieche/policy, lifecycle residuo, adattatori e accettazione finale restano aperti. Riconciliazione candidata ai gate, non chiusura milestone. [Handover corrente](docs/project/HANDOVER_2026-10-09-BKL051-OAT-RECONCILIATION.md). F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; Safety e C→F invariati. [Riconciliazione OAT e diagnostica](docs/project/BKL-051-OAT-NATIVE-RECONCILIATION-2026-10-09.md).
@@ -17,7 +22,7 @@ P6 accettata operativamente dall’Owner il 7 ottobre 2026 con tutti i limiti de
 
 | Campo | Valore |
 |---|---|
-| Versione | 8.34 |
+| Versione | 8.35 |
 | Baseline | 09/10/2026 |
 | Stato | Current root bootstrap — P6 accepted; BKL-051 Owner local/query direction approved, S1 open, S2 native solves with independent validation pending; BKL-043 lifecycle pending; S10 unavailable |
 
@@ -28,7 +33,7 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni e proje
 
 ## 2. Sequenza obbligatoria di lettura
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-10-09-BKL051-OAT-RECONCILIATION.md`
+2. `docs/project/HANDOVER_2026-10-09-BKL051-ACCESS-LIFECYCLE.md`
 3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
