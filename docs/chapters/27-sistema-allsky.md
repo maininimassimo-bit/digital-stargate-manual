@@ -1,7 +1,7 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 0.3 — riconciliazione operativa 09/10/2026
+**Revisione:** 0.4 — integrazione nel portale 09/10/2026
 **Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
@@ -196,6 +196,15 @@ Registrazione aggiornata il 09/10/2026 con lo script ufficiale `postToMap.sh`; r
 |---|---|---|
 | 0.1 | Baseline precedente | Prima descrizione del sistema e dati da validare |
 | 0.2 | 09/10/2026 | Hardware verificato e ottica confermata Owner; aggiornamento software, overlay, sito, backup e pubblicazione in preparazione |
+| 0.4 | 09/10/2026 | Documentate anteprime Home/Status, allineamento ai badge, refresh e modalità essenziale; nessuna variazione hardware |
 | 0.3 | 09/10/2026 | Retention verificata; tunnel, certificato e HTTPS pubblici collaudati; mappa aggiornata con anteprima non disponibile, residui fisici conservati |
 
 Inventario correlato: [Capitolo 22](22-inventario-asset-management.md).
+
+## 27.18 Anteprime nel portale Digital StarGate
+
+La [Home del portale](../index.md) mostra l’immagine live Allsky nella hero originale. La pagina [Stato osservatorio](../status/index.md) affianca ai badge operativi due riquadri di uguale larghezza: cupola sopra e anteprima Allsky sotto, con bordi superiore e inferiore allineati al gruppo badge. Sugli schermi piccoli i riquadri si dispongono sotto i badge.
+
+L’anteprima usa il JPEG pubblico HTTPS, contiene l’intero fotogramma senza ritagli e richiede una nuova immagine ogni 30 secondi. Il tasto **Allsky** apre il sito completo. **Vista essenziale** sospende gli aggiornamenti e **Attiva il live** li riprende; la preferenza è condivisa con i controlli visuali del portale. L’ora di ultima ricezione è distinta dall’ora di acquisizione mostrata nel fotogramma. Collegamento indisponibile e riprova sono segnalati esplicitamente.
+
+Si tratta di un’anteprima fotografica aggiornata, non di uno stream video continuo o di una fonte Safety Authority. Non modifica l’acquisizione sul Raspberry Pi, le immagini archiviate o i contratti di telemetria. [Dettagli tecnici e manutenzione](../ui/immersive-portal-implementation.md#anteprime-allsky-nella-home-e-in-observatory-status-9-ottobre-2026); [PR e verifiche di pubblicazione](../releases/immersive-portal.md#incremento-anteprime-live-allsky-home-e-status-09102026).

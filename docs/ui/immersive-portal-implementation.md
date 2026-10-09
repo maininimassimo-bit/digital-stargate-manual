@@ -3,12 +3,12 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-UI-IMMERSIVE-001 |
-| Versione | 1.0 |
-| Data | 29/09/2026 |
+| Versione | 1.1 |
+| Data | 09/10/2026 |
 | Stato | Pubblicato — evidence e limiti nelle note di rilascio |
 | Richiesta | Redesign completo del portale, mantenendo dati e contenuti, con aggiornamento tecnico |
-| Baseline | `d0779f1d31f539cf45c0883c3d4bfca94dd6f301` |
-| Boundary | Presentation-only; nessuna nuova fonte, policy, autorità o comando |
+| Baseline iniziale | `d0779f1d31f539cf45c0883c3d4bfca94dd6f301` |
+| Boundary | Presentazione read-only; fonti pubbliche esistenti, nessuna modifica a policy, autorità o comandi |
 
 ## 1. Ambito realizzato
 
@@ -19,7 +19,7 @@ dalla pipeline mantengono URL, testo, anchor e binding originali.
 
 Il CSS condiviso aggiorna tipografia, superfici, bordi, gerarchie, navigazione
 laterale, focus, tabelle e card in entrambi i temi. I 19 hub selezionati integrano
-una scena WebGL. Le pagine documentali mantengono la navigazione laterale e non
+un riquadro visuale: la Home usa ora la ripresa Allsky, gli altri hub una scena WebGL. Le pagine documentali mantengono la navigazione laterale e non
 caricano Three.js. La sidebar primaria dei soli hub è sostituita visivamente dalla
 navigazione globale già esistente; drawer, ricerca e indice restano disponibili.
 
@@ -27,8 +27,8 @@ navigazione globale già esistente; drawer, ricerca e indice restano disponibili
 
 | Pagina | Rappresentazione |
 |---|---|
-| Home | StarGate: anelli solidi, globo di particelle, orbite, halo procedurale |
-| Stato osservatorio | Cupola, basamento, montatura, tubo ottico e camera schematici |
+| Home | Anteprima JPEG live Allsky; contenitore e badge originali preservati |
+| Stato osservatorio | Cupola schematica collegata al badge; anteprima live Allsky in un secondo riquadro sotto |
 | Operations | Modello illustrativo dell'osservatorio |
 | Mission Control, Analytics, Architettura, Documentazione | Atlante celeste illustrativo |
 | Catalogo e dettaglio sessioni, Scientific Image Gallery, Scientific Platform, Scientific Intelligence | Atlante celeste illustrativo |
@@ -48,6 +48,7 @@ la build lo sostituisce con il partial. Non è un binding dati. I blocchi genera
 | `overrides/main.html` | Estensione di `base.html`, preserva `super()`, applica shell e composizione |
 | `overrides/partials/immersive-scene.html` | Canvas decorativo, etichette, poster statico, controlli accessibili |
 | `docs/styles/immersive-portal.css` | Sistema visuale condiviso, responsive, light/dark, stampa |
+| `docs/javascripts/allsky-live-preview.js` | Anteprima pubblica Allsky, refresh, errori, pausa e lifecycle |
 | `docs/javascripts/immersive-portal.js` | Bootstrap idempotente, lazy load, preferenze e lifecycle |
 | `docs/javascripts/immersive-renderer.mjs` | Renderer, camera, input, osservatori, limiti GPU, disposal |
 | `docs/javascripts/immersive-gateway.mjs` | Geometria procedurale dello StarGate/atlante |
@@ -119,6 +120,9 @@ node .github/scripts/verify-portal-search.mjs
 python -m mkdocs build --strict --config-file mkdocs.pages.yml
 python .github/scripts/verify-published-site.py --site site --base-path /digital-stargate-manual/
 node .github/scripts/test-immersive-portal.cjs
+node .github/scripts/test-allsky-live-preview.cjs
+node .github/scripts/test-status-allsky-layout.cjs
+node .github/scripts/test-immersive-dome-sync.cjs
 ```
 
 Il browser test richiede Playwright 1.62.1 e un server locale. Impostare
@@ -142,7 +146,7 @@ non li sostituisce. Evidence e limiti di verifica sono registrati nelle
 
 Per abilitare una nuova scena, aggiungere la pagina alla mappa del template e il
 marker al suo hero, senza collocarlo in contenuto rigenerato automaticamente.
-Mantenere una sola scena per pagina. Le pagine senza marker restano editoriali.
+Mantenere una sola scena WebGL per pagina; la seconda superficie Allsky di Status è un’immagine HTML e non una seconda scena WebGL. Le pagine senza marker restano editoriali.
 
 Per aggiornare Three.js sostituire entrambi i moduli dalla stessa versione,
 conservare MIT, aggiornare il manifest SHA-256 e ripetere i test browser/fallback.
@@ -233,8 +237,20 @@ Nel Planner i bordi del cielo previsto e del Celestial Atlas sono allineati sott
 
 File: `docs/styles/roadmap.css`, `docs/javascripts/roadmap.js`, le due pagine Markdown e `docs/styles/planner-weather-sky.css`. Il test `test-immersive-compact-layout.cjs` confronta titoli, stati, note e summary con la projection, verifica apertura da tastiera, overflow a 390/768/1157/1440 pixel e allineamento del Planner. La suite di navigazione verifica separatamente canvas e controlli. Temi chiaro/scuro e screenshot sono verificati in browser; non equivale a un audit assistivo completo. Nessuna modifica alla canonical source o alla projection roadmap. Rollback: revert della PR di presentazione e rebuild Pages; CI, review e pubblicazione nella PR.
 
-## Anteprima live Allsky nella Home — 9 ottobre 2026
+## Anteprime Allsky nella Home e in Observatory Status — 9 ottobre 2026
 
-La sola hero della Home usa la ripresa pubblica Allsky al posto del modello illustrativo. Dimensioni originali del contenitore e stile del badge restano invariati; immagine con object-fit contain tra intestazione e controlli. Aggiornamento ogni 30 s tramite JPEG pubblico HTTPS, senza credenziali; ultima ricezione non equivale alla data di acquisizione mostrata nel fotogramma. Il pulsante Allsky apre il sito completo e Dall’alto è rimosso soltanto nella Home. Vista essenziale condivide la preferenza esistente e sospende i refresh; Attiva il live li riprende. Scheda nascosta e navigazione sospendono/terminano il timer. Errori hanno stato esplicito e riprova automatica. Nessun dato governato o comando agli apparati modificato.
+La Home sostituisce il modello StarGate della hero con la ripresa pubblica Allsky, mantenendo dimensioni originali del contenitore, font e stile del badge. Il pulsante **Allsky** apre il sito completo in una nuova scheda; **Dall’alto** è rimosso soltanto dalla Home. La Home non importa il renderer WebGL per questa anteprima.
 
-Regressioni con immagine fixture, senza interrogare provider: ridimensionamento, timer, preferenza persistente, errore/ripristino e teardown. Il collegamento reale va verificato nel browser dopo pubblicazione. Rollback: revert della modifica Home e rebuild Pages.
+In Observatory Status, `.dsg-status-overview` affianca il gruppo di otto badge a `.dsg-status-visuals`: cupola ridimensionata sopra e Allsky sotto. I due riquadri hanno la stessa larghezza; la sommità della cupola e il fondo dell’Allsky coincidono con i bordi del gruppo badge. La griglia usa due righe di altezza uguale, con minimo 20 rem, distanziate di 1 rem. Fino a 850 px i badge precedono i due pannelli impilati, alti 22 rem ciascuno. Il canvas della cupola occupa soltanto lo spazio tra titolo e controlli. Il collegamento a **Cupola osservata**, le viste libere e gli stati UNKNOWN/STALE restano quelli documentati sopra.
+
+Il marker `<!-- DSG:ALLSKY-PREVIEW -->` compone la seconda superficie in Status. Il partial riusa il componente della Home con `status_preview`; il pannello Allsky non espone `data-dsg-scene`, preservando un solo bootstrap WebGL. Il controllo `data-dsg-allsky-mode` condivide la preferenza `dsg-immersive-essential` e l’evento `dsg:visual-mode-change` con cupola e strumenti.
+
+La sorgente è il JPEG pubblico HTTPS `https://digitalstargate.freeddns.it:23232/current/image.jpg`, senza credenziali. L’immagine usa `object-fit: contain`, senza ritaglio. Non è uno stream video continuo: il browser richiede un nuovo fotogramma ogni 30 secondi dopo la ricezione precedente. **Ultima ricezione** indica l’ora del browser; non certifica la data di acquisizione, riportata nell’overlay del fotogramma. L’anteprima non è un indicatore di safety né di freshness della telemetria.
+
+**Vista essenziale** sospende il refresh e mantiene l’ultima immagine ricevuta, se disponibile; **Attiva il live** lo riprende. La preferenza persiste tra pagine. Una scheda nascosta sospende le richieste; il cambio pagina rilascia timer e listener. Un errore di caricamento nasconde l’immagine e mostra uno stato esplicito con riprova automatica; un timeout di 15 secondi segnala l’aggiornamento non disponibile, senza attestare come corrente un nuovo fotogramma.
+
+CSS, bootstrap, script Allsky e import del renderer usano il riferimento di versione `status-allsky-20261009`. Aggiornare questo riferimento quando cambiano asset coordinati: una scheda può altrimenti combinare HTML nuovo con CSS o controlli precedenti in cache. Non riguarda la cache dei contratti o dei dati governati.
+
+Verifiche: build strict; test di contenimento e allineamento a 1440/1007/768/390 px; refresh, preferenza persistente, errore/ripristino e teardown con fixture; regressione della cupola OPEN/CLOSED/UNKNOWN e degli altri hub. La verifica pubblica nel browser ha confermato immagine reale 1936 × 1096, stato ready, contenimento e allineamento. Evidence e commit sono nelle [note di rilascio](../releases/immersive-portal.md#incremento-anteprime-live-allsky-home-e-status-09102026).
+
+Rollback: revert delle PR Home/Status/cache nell’ordine inverso e rebuild Pages. Nessun ripristino di immagini, telemetria o configurazioni degli apparati è richiesto.
