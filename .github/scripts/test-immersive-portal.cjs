@@ -62,7 +62,7 @@ const routes = Object.keys(JSON.parse(fs.readFileSync('overrides/main.html', 'ut
     const offline=await page();await offline.route('**/assets/vendor/three-*/**',r=>r.abort());await offline.goto(base);
     await offline.goto(base+'mission-control/');await offline.locator('[data-dsg-scene]').scrollIntoViewIfNeeded();
     await offline.waitForFunction(()=>document.querySelector('[data-dsg-scene]').dataset.dsgSceneState==='unavailable');
-    assert(await offline.locator('.dsg-domain-card').count()===6);
+    await offline.goto(base);assert(await offline.locator('.dsg-domain-card').count()===6);
     const nojs=await page({javaScriptEnabled:false});await nojs.goto(base+'status/');
     assert((await nojs.locator('[data-observatory-status="quality"]').innerText()).includes('UNKNOWN'));
     assert.equal(await nojs.locator('[data-dsg-scene-mode]').isVisible(),false);
