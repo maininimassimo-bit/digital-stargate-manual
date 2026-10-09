@@ -735,3 +735,7 @@ PR #517 rilasciata e verificata. [Recovery dichiarata](BKL-051-S4-OWNER-RECOVERY
 ## BKL-051 — caller locale candidato, 9 ottobre 2026
 
 PR #518 recovery Owner rilasciata e verificata. [Caller locale](BKL-051-S4-OPERATOR-CALLER-2026-10-09.md) per un job selezionato, preflight offline e intento conservato; 15 prove sintetiche, release pending. Nessuna attivazione/credenziale/IAM o misura scientifica nuova. PC/cloud OAT, workflow scientifico, validation/policy, oggetti mobili e reporting restano aperti; BKL-051 OPEN.
+
+## BKL-051 — dossier preliminare candidato, 9 ottobre 2026
+
+PR #519 caller rilasciata, 15 workflow post-merge e sette endpoint verificati. [Dossier privato candidato](BKL-051-S4-REPORTING-DRAFT-2026-10-09.md): solo DRAFT e 12 prove sintetiche; nessun invio, validazione o authority derivata. Build proposta privata pending; PC/cloud OAT, scientific validation, moving objects e reporting produttivo restano aperti.
