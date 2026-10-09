@@ -1,3 +1,4 @@
+import {conditionalCovarianceSigma} from './covariance.mjs';
 // PROPOSED OFFLINE CONTRACT. Arithmetic on declarations; no scientific operating policy.
 export const UNCERTAINTY = 'BKL051_PAIR_UNCERTAINTY_PROPOSED_V1';
 const finite = v => typeof v === 'number' && Number.isFinite(v);
@@ -8,45 +9,10 @@ const sha = v => typeof v === 'string' && /^[a-f0-9]{64}$/.test(v);
 const member = (v, k) => k.includes(v);
 const fail = () => { throw new Error('INVALID_PAIR_UNCERTAINTY'); };
 const vector = v => Array.isArray(v) && v.length === 3 && v.every(knownNumber);
-const pairIndices = [[0, 1], [0, 2], [1, 2]];
 const omissions = ['MASTER_CALIBRATION', 'RESAMPLING_COVARIANCE', 'SKY_ESTIMATOR', 'CROWDED_PSF', 'SCALE_ESTIMATION', 'PASSBAND_RESPONSE', 'UNKNOWN'];
 
-function validateKnownCovariances(variances, covariances) {
-  for (let k = 0; k < 3; k++) {
-    const [i, j] = pairIndices[k], c = covariances[k];
-    if (c === null) continue;
-    if ((variances[i] === 0 || variances[j] === 0) && c !== 0) fail();
-    if (variances[i] !== null && variances[j] !== null
-        && Math.abs(c) > Math.sqrt(variances[i]) * Math.sqrt(variances[j])) fail();
-  }
-}
 function conditionalSigma(variances, covariances, gradient) {
-  if (variances.includes(null) || covariances.includes(null)) return null;
-  // Factor a normalized covariance matrix, including singular cases.
-  // This tolerance handles floating point rounding, not source acceptance.
-  const tolerance = 64 * Number.EPSILON;
-  const std = variances.map(Math.sqrt), corr = variances.map((v, i) => [0, 0, 0].map((_, j) => i === j && v > 0 ? 1 : 0));
-  for (let k = 0; k < 3; k++) {
-    const [i, j] = pairIndices[k];
-    corr[i][j] = corr[j][i] = std[i] === 0 || std[j] === 0 ? 0 : covariances[k] / (std[i] * std[j]);
-  }
-  const lower = Array.from({length: 3}, () => [0, 0, 0]);
-  for (let i = 0; i < 3; i++) for (let j = 0; j <= i; j++) {
-    let residual = corr[i][j];
-    for (let k = 0; k < j; k++) residual -= lower[i][k] * lower[j][k];
-    if (i === j) {
-      if (residual < -tolerance) fail();
-      lower[i][j] = Math.sqrt(Math.max(0, residual));
-    } else if (lower[j][j] === 0) {
-      if (Math.abs(residual) > tolerance) fail();
-    } else lower[i][j] = residual / lower[j][j];
-  }
-  const weights = gradient.map((g, i) => g * std[i]);
-  if (!weights.every(finite)) fail();
-  const transformed = [0, 1, 2].map(j => weights.reduce((sum, w, i) => sum + w * lower[i][j], 0));
-  const sigma = Math.hypot(...transformed);
-  if (!finite(sigma)) fail();
-  return sigma;
+  return conditionalCovarianceSigma(variances, covariances, gradient, fail);
 }
 export function inspectPairUncertainty(input) {
   if (!keys(input, ['kind', 'classification', 'origin', 'images', 'estimates', 'budget', 'comparability'])
@@ -74,9 +40,8 @@ export function inspectPairUncertainty(input) {
       || !member(c.psf, ['COMPATIBLE_DECLARED', 'CROWDED_OR_UNVERIFIED'])
       || !member(c.quality, ['LOCAL_CHECKS_ONLY', 'SATURATED_OR_DEFECTIVE', 'UNKNOWN'])
       || !member(c.epochs, ['DISTINCT_EPOCHS_DECLARED', 'SAME_ACQUISITION', 'UNKNOWN'])) fail();
-  validateKnownCovariances(b.variances, b.covariances);
-  // A complete but impossible matrix is invalid even if flux/scale is unknown.
-  if (!b.variances.includes(null) && !b.covariances.includes(null)) conditionalSigma(b.variances, b.covariances, [0, 0, 0]);
+  conditionalSigma(b.variances, b.covariances, [0, 0, 0]);
+  // An impossible declared matrix rejects even if flux/scale is unknown.
   const reasons = ['DECLARATIONS_NOT_INDEPENDENTLY_VERIFIED', 'FULL_UNCERTAINTY_NOT_VALIDATED', 'NO_BLIND_SEARCH_OR_INDEPENDENT_CONFIRMATION'];
   if (input.origin === 'SYNTHETIC_TEST') reasons.push('SYNTHETIC_NOT_REAL_EVIDENCE');
   if (b.variances.includes(null)) reasons.push('UNKNOWN_VARIANCE_NOT_REPLACED_WITH_ZERO');
