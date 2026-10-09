@@ -1,6 +1,6 @@
 # BKL-051 S4 — Caller locale per un solo job selezionato
 
-Stato: Candidate; CI exact-head, ARB poi RQ, merge e pubblicazione pending.
+Stato: Released tramite PR #519, merge `19e78cf0197cc74e62d43260825c6ea196a43a2f`; 15 workflow exact-head e 15 post-merge SUCCESS, ARB/RQ APPROVED senza finding e sette endpoint Pages verificati. Runtime disattivato. I gate descritti nel seguito sono stati completati nel perimetro di codice e pubblicazione, senza OAT reale.
 Baseline rilasciata: PR #518, merge `0f5b2df4378cdec049468de92677f046c3d4979d`, 17 gate exact-head e 17 post-merge SUCCESS, sette endpoint pubblici verificati. Recovery Owner disponibile come funzione, runtime disattivato.
 
 ## Contratto

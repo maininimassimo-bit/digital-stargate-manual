@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "status": "CANDIDATE_EXACT_HEAD_GATES_PENDING",
+  "status": "RELEASED_POST_MERGE_VERIFIED",
   "baselineMerge": "0f5b2df4378cdec049468de92677f046c3d4979d",
   "newPythonTests": 15,
   "testScope": "MEMORYSTORE_OWNED_MOCK_NOT_NATIVE_OR_CLOUD_OAT",
@@ -10,5 +10,9 @@
   "credentialsProvisioned": false,
   "runtimeActivated": false,
   "scienceValidation": "NOT_VALIDATED",
-  "milestone": "OPEN"
+  "milestone": "OPEN",
+  "releaseMerge": "19e78cf0197cc74e62d43260825c6ea196a43a2f",
+  "exactHeadWorkflows": 15,
+  "postMergeWorkflows": 15,
+  "publicEndpointsVerified": 7
 }

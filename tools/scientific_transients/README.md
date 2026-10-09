@@ -41,3 +41,5 @@ See the [S1 proposal](../../docs/project/BKL-051-S1-FEASIBILITY-AND-CONTRACT-202
 `reservation_intent.py` reserves one explicitly selected job with an exclusive durable intent; duplicate or uncertain dispatch freezes without retry, lease adoption or native launch. [Contract](../../docs/project/BKL-051-S4-RESERVATION-INTENT-2026-10-09.md).
 
 Owner-only recovery closure preserves RECOVERY_REQUIRED and all prior attempt evidence. Exact immutable declaration permits a distinct queued job; no replay or process ownership inference. [Contract](../../docs/project/BKL-051-S4-OWNER-RECOVERY-2026-10-09.md).
+
+`reporting_draft.py` exports an exclusive private preliminary dossier for an explicitly declared CBAT/TNS/VSX/MPC channel. Registered bytes and independently pinned request hashes establish point-in-time integrity only. Always DRAFT/NOT_VALIDATED: no automatic classification, credentials, network, productive payload or submission authority. Twelve synthetic offline tests. [Contract and remaining gates](../../docs/project/BKL-051-S4-REPORTING-DRAFT-2026-10-09.md).
