@@ -1,5 +1,9 @@
 # Technical Debt Register
 
+## BKL-051 — residui dopo le schede TNS/VSX, 9 ottobre 2026
+
+Le schede sono preparazione locale e non payload provider: mappature/formati correnti, evidenze scientifiche reali, percorso integrato Owner, ledger/revoca/receipt/trasporto/autorizzazione, test provider/servizio e S5 restano requisiti interi; TNS apertura403 preservata. Nessun requisito eliminato o debito accettato implicitamente, dipendenza runtime o soglia nuova. [Dossier](BKL-051-S1-TNS-VSX-REVIEW-2026-10-09.md).
+
 ## BKL-051 — residui CBAT e reporting, 9 ottobre 2026
 
 Anteprima CBAT API locale limitata a nova dichiarata; CLI/portale, dossier scientifico completo, controlli reali/provider, conferma payload/destinatario, ledger/invio/revoca/riconciliazione e TNS/VSX/estensioni MPC restano requisiti e gate. Non sono debito accettato o scope eliminato. Nessuna nuova dipendenza runtime, soglia o workaround operativo. [Dossier](BKL-051-S1-CBAT-NOVA-PREVIEW-2026-10-09.md).

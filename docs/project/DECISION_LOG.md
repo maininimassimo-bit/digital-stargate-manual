@@ -1,5 +1,9 @@
 # Decision Log
 
+## 2026-10-09 — schede locali TNS/VSX nello scope reporting approvato
+
+Schede private API/CLI per categorie dichiarate, senza schema provider, mapping ID o readiness attestati. Richiesta SHA fissata/registro verificato, precisione e unknown conservati; nessuna nuova authority, dipendenza, policy, architettura o invio. PR536 rilasciata e post-merge verificata. [Dossier](BKL-051-S1-TNS-VSX-REVIEW-2026-10-09.md).
+
 ## 2026-10-09 — anteprima CBAT locale nello scope reporting approvato
 
 Incremento locale ASCII per possibile nova dichiarata, senza nuova authority, architettura, policy, dipendenza o invio. Null e precisione conservati, classificazione e controlli non attestati; nessuna discovery dedotta. PR534 rilasciata e refunc pubblico acquisito privatamente; semantica del rumore completa e risposta IRSA ancora non attestate. [Dossier](BKL-051-S1-CBAT-NOVA-PREVIEW-2026-10-09.md).
