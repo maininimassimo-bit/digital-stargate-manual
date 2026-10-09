@@ -41,7 +41,8 @@
       "properties": {
         "observed_state": {"enum": ["SAFE", "UNSAFE", "UNKNOWN"]},
         "authority": {"enum": ["LOCAL_SAFETY_AUTHORITY", "NINA_SAFETY_MONITOR_OBSERVATION"]},
-        "reasons": {"type": "array", "items": {"type": "string"}}
+        "reasons": {"type": "array", "items": {"type": "string"}},
+        "observation": {"$ref": "#/$defs/safetyObservation"}
       },
       "additionalProperties": false
     }
@@ -57,6 +58,24 @@
         "quality": {"enum": ["CURRENT", "DEGRADED", "STALE", "UNKNOWN"]},
         "source": {"type": ["string", "null"]}
       }
+    },
+    "safetyObservation": {
+      "type": "object",
+      "required": ["state", "quality", "observed_at_utc", "fresh_until_utc", "source", "source_instance", "is_safe", "safeties_raw", "power_fault_mask", "power_fault", "no_hardware_commands"],
+      "properties": {
+        "state": {"enum": ["SAFE", "UNSAFE", "UNKNOWN"]},
+        "quality": {"enum": ["CURRENT", "DEGRADED", "STALE", "UNKNOWN"]},
+        "observed_at_utc": {"type": ["string", "null"], "format": "date-time"},
+        "fresh_until_utc": {"type": ["string", "null"], "format": "date-time"},
+        "source": {"type": "string", "minLength": 1},
+        "source_instance": {"type": ["string", "null"]},
+        "is_safe": {"type": ["boolean", "null"]},
+        "safeties_raw": {"type": ["integer", "null"]},
+        "power_fault_mask": {"type": ["integer", "null"]},
+        "power_fault": {"type": ["boolean", "null"]},
+        "no_hardware_commands": {"const": true}
+      },
+      "additionalProperties": false
     },
     "dome": {
       "allOf": [{"$ref": "#/$defs/baseSignal"}, {"type": "object", "properties": {"state": {"enum": ["OPEN", "CLOSED", "MOVING", "FAULT", "UNKNOWN"]}, "open_sensor": {"type": ["boolean", "null"]}, "closed_sensor": {"type": ["boolean", "null"]}, "safe_signal": {"type": ["boolean", "null"]}}}]
