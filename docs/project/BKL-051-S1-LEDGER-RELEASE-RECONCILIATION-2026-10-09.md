@@ -1,0 +1,13 @@
+# BKL-051 — riconciliazione del gate di rilascio del registro
+
+PR540 è MERGED sul commit `93be5531da5243c79c3f3f03f9762095700a6f45`, ma il gate pre-merge behind-main è fallito dopo avanzamento PR541 e il comando di merge è stato eseguito erroneamente. Questa non conformità storica non è sanata retroattivamente. Il rilascio del registro resta INCOMPLETE in attesa del presente incremento correttivo, CI esatta, nuove ARB poi RQ sull’albero corrente e gate pre/post-merge validi. Il delta concorrente di sei file Allsky/SEO/nav/template è stato letto integralmente: nessuna sovrapposizione con i sorgenti del registro, preservati senza modifica. BKL-051 OPEN / NOT_VALIDATED; nessuna accettazione scientifica o authority. Tutti i residui scientifici, servizio/Owner/reporting/S4/S5 e i limiti precedenti restano interi; nessuna nuova sessione cloud, credenziale, soglia, fotografia o prova nativa. P6 Accepted nei limiti, F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; Safety e C→F invariati.
+
+## Incidente e correzione
+
+Il commit revisionato era `6a2977aaaa7c526c1f427a3ff802c7839dacad2f`, base `3c4ab0a0aee8cc86f41c6223261fff040719a522`. CI 18 check/15 workflow e ARB poi RQ APPROVED appartengono esclusivamente a tale albero. Al pre-merge main era `fcc2560b15e26c1c1a22aaff90f61040c0ac4480`; il controllo behind-main ha fallito prima di produrre la ricevuta. L’orchestrazione ha atteso i comandi senza controllare il loro exit code e ha eseguito comunque il merge. Nessuna ricevuta pre-merge valida viene inventata e nessuna review precedente viene estesa al nuovo albero.
+
+Il package correttivo qualifica il codice già integrato e immutato sul contesto corrente: verifica locale e browser aggiornate, CI esatta, review separate nuove, guardie esplicite che interrompono l’orchestrazione a ogni exit code non zero, sincronizzazione prima del merge e verifica sul merge reale. Ogni ulteriore avanzamento di main impone nuova integrazione/CI/review; nessun merge deve seguire un gate fallito. Non si ritira codice privo di finding tecnici, non si riscrive storia e non si altera il cambiamento Allsky indipendente. La non conformità iniziale rimane nel registro.
+
+## Limiti
+
+Il registro rimane API locale, identità/UTC dichiarati, snapshot di anteprime e catena di revisioni private con revoca conservativa, senza authority, provider ACK o invio. [Contratto](BKL-051-S1-PREVIEW-REVIEW-LEDGER-2026-10-09.md). [Mandato e gate](DSG-AEM-001-CONTINUOUS-AUTONOMOUS-EXECUTION-MANDATE-2026-09-15.md). La ricevuta finale correttiva potrà attestare il rilascio software corrente, mai la conformità storica di PR540 né la chiusura scientifica.
