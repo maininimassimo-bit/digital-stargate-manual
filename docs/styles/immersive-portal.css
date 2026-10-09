@@ -85,6 +85,10 @@ body:has(.dsg-immersive-page) .md-content__inner { min-width: 0; }
 }
 .dsg-scene [hidden] { display: none !important; }
 .dsg-scene__canvas { position: absolute; width: 100%; height: 100%; inset: 0; touch-action: pan-y; }
+.dsg-scene[data-dsg-allsky-live] .dsg-scene__canvas { display: none; }
+.dsg-allsky-preview { position: absolute; inset: 4.5rem .75rem 8rem; display: grid; place-items: center; }
+.dsg-allsky-preview img { display: block; width: 100%; height: 100%; min-height: 0; object-fit: contain; background: #000; border-radius: .35rem; }
+.md-typeset .dsg-allsky-link { display: inline-flex; align-items: center; padding: .4rem .6rem; min-height: 44px; font-size: max(.6rem, 12px); line-height: 1.3; background: #214b5d; color: #a6fbf6; border: 1px solid #8addd7; border-radius: .35rem; }
 .dsg-scene:not(.is-ready) .dsg-scene__canvas { visibility: hidden; }
 .dsg-scene__heading { position: absolute; left: 1rem; right: 1rem; top: 1rem; pointer-events: none; z-index: 2; }
 .dsg-scene__eyebrow { display: block; color: #acf1f3; font: .6rem/1.5 ui-monospace, monospace; letter-spacing: .12em; }

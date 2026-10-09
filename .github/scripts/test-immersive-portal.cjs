@@ -12,6 +12,7 @@ const routes = Object.keys(JSON.parse(fs.readFileSync('overrides/main.html', 'ut
     const p = await browser.newPage(options);
     p.on('pageerror', error => errors.push(error.message));
     await p.route('**/*', route => new URL(route.request().url()).origin === new URL(base).origin ? route.continue() : route.abort());
+    await p.route('https://digitalstargate.freeddns.it:23232/current/image.jpg*', route => route.fulfill({ contentType: 'image/jpeg', body: fs.readFileSync('docs/assets/images/osservatorio-hero.jpg') }));
     return p;
   }
   try {
@@ -59,9 +60,9 @@ const routes = Object.keys(JSON.parse(fs.readFileSync('overrides/main.html', 'ut
     await reduced.goto(base);await reduced.waitForTimeout(500);
     assert(!requests.some(url=>url.includes('/vendor/three-')||url.includes('immersive-renderer')), 'Reduced motion must not download WebGL.');
     const offline=await page();await offline.route('**/assets/vendor/three-*/**',r=>r.abort());await offline.goto(base);
-    await offline.locator('[data-dsg-scene]').scrollIntoViewIfNeeded();
+    await offline.goto(base+'mission-control/');await offline.locator('[data-dsg-scene]').scrollIntoViewIfNeeded();
     await offline.waitForFunction(()=>document.querySelector('[data-dsg-scene]').dataset.dsgSceneState==='unavailable');
-    assert(await offline.locator('.dsg-domain-card').count()===6);
+    await offline.goto(base);assert(await offline.locator('.dsg-domain-card').count()===6);
     const nojs=await page({javaScriptEnabled:false});await nojs.goto(base+'status/');
     assert((await nojs.locator('[data-observatory-status="quality"]').innerText()).includes('UNKNOWN'));
     assert.equal(await nojs.locator('[data-dsg-scene-mode]').isVisible(),false);
