@@ -27,6 +27,8 @@ jobs:
         run: node --test tools/scientific_transients/contract.test.mjs tools/scientific_transients/reference.test.mjs tools/scientific_transients/measurement.test.mjs tools/scientific_transients/uncertainty.test.mjs tools/scientific_transients/photometry.test.mjs tools/scientific_transients/epoch.test.mjs tools/scientific_transients/pixel.test.mjs tools/scientific_transients/native_aperture.test.mjs tools/scientific_transients/portal.test.mjs
       - name: Verify isolated browser Owner sequencing and token privacy without Google access
         run: node --test tools/scientific_transients/lab_owner.test.mjs
+      - name: Verify catalog formal covariance and shared-reference epoch blocks
+        run: python -m unittest tools.scientific_transients.test_reference_covariance -v
       - name: Verify bounded isolated gateway and public source staging without cloud access
         run: python -m unittest tools.scientific_transients.test_lab_gateway tools.scientific_transients.test_lab_runtime tools.scientific_transients.test_lab_release_plan tools.scientific_transients.test_lab_cli -v
       - name: Test dedicated private queue lifecycle and HTTP roles
