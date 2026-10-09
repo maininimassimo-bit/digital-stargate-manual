@@ -1,7 +1,7 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 0.5 — progetto tecnico e configurazione verificata 09/10/2026
+**Revisione:** 0.6 — overlay esteso e predisposizione indicizzazione Google 09/10/2026
 **Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
@@ -199,6 +199,7 @@ Registrazione aggiornata il 09/10/2026 con lo script ufficiale `postToMap.sh`; r
 | 0.3 | 09/10/2026 | Retention verificata; tunnel, certificato e HTTPS pubblici collaudati; mappa aggiornata con anteprima non disponibile, residui fisici conservati |
 | 0.4 | 09/10/2026 | Documentate anteprime Home/Status, allineamento ai badge, refresh e modalità essenziale; nessuna variazione hardware |
 | 0.5 | 09/10/2026 | Integrati progetto tecnico, NTP, calibrazione stellare, overlay notturno e pianeti, archivio meteore, verifiche e procedure di ripristino |
+| 0.6 | 09/10/2026 | Nomi delle stelle e radianti indicativi; pagina divulgativa Allsky, metadati SEO, sitemap, robots.txt e gestione Search Console |
 
 Inventario correlato: [Capitolo 22](22-inventario-asset-management.md).
 
@@ -297,6 +298,8 @@ Ricalibrare dopo spostamento della camera, sostituzione della lente, modifica di
 | `overlayAutoNight` | `true` — personalizzazione Digital Stargate |
 | `showOverlayAtStartup` | `false` — attesa della classificazione giorno/notte |
 | `showplanets` / `showplanetlabels` | `true` / `true` |
+| `showstarlabels` | `true` — nomi delle stelle principali |
+| `meteorshowers` | `true` — radianti indicativi del catalogo VirtualSky |
 | `planets` | `virtualsky/virtualsky-planets.js` |
 | `live` | `false` — clock comandato dal fotogramma |
 
@@ -305,6 +308,8 @@ Il controller usa la classificazione giorno/notte esistente in Allsky, derivata 
 Il visitatore può cambiare manualmente la visibilità: la scelta resta valida nel periodo corrente. Un nuovo caricamento o il successivo cambio giorno/notte riapplica il default. La transizione rimuove lo stile di visualizzazione lasciato dall’animazione manuale, così che `ng-show` possa mostrare o nascondere la mappa. Il passaggio avviene al successivo ciclo del controller, non mediante un timer separato al secondo esatto del tramonto.
 
 I pianeti e i nomi sono abilitati esplicitamente; il plugin calcola le effemeridi anziché usare il vecchio JSON statico del sito. Le posizioni condividono clock e proiezione della mappa. Non tutti i pianeti sono necessariamente sopra l’orizzonte o dentro la porzione del fotogramma; un simbolo non garantisce che l’oggetto sia distinguibile nella ripresa.
+
+Dal 09/10/2026 sono abilitati anche i nomi delle stelle principali e i radianti degli sciami. I radianti sono riferimenti del catalogo fornito da VirtualSky, non rilevamenti della camera né conferme di meteore. Il file `virtualsky/showers.json` richiama un calendario IMO 2012: non va presentato come previsione verificata per il 2026. Le griglie equatoriale, azimutale e galattica restano disabilitate. Backup della modifica: `/home/pi/allsky-private-archive/stars-showers-20261009-204402`.
 
 Verifiche effettuate: caricamento serale con overlay attivo senza clic, opzioni dei pianeti presenti nella pagina pubblicata, assenza di errori nel log browser e test della logica per avvio notturno/diurno, scelta manuale e cambio di periodo. Il passaggio reale all’alba non è stato atteso durante il collaudo; la prova browser è stata svolta in Europe/Rome. Comportamento dei confini orari con browser in altri fusi da verificare.
 
@@ -391,3 +396,7 @@ Dopo il ripristino, aggiornare il riferimento di versione del controller e ricar
 | Immagine assente nella mappa globale | Limite della porta 23232 del §27.16, distinto dal funzionamento del sito pubblico |
 
 Restano aperti i collaudi fisici elencati nel §27.12, la prova di failover sul posto, l’accuratezza della calibrazione nelle zone non verificate, il primo aggancio NTP dopo riavvio, la transizione reale all’alba e i fusi browser diversi. Nessuna funzione Allsky autorizza automaticamente apertura della cupola o sostituisce gli interlock locali.
+
+## 27.25 Pubblicazione e indicizzazione Google
+
+La [pagina divulgativa Allsky](../allsky/index.md) integra anteprima live, descrizione del cielo di Manciano e collegamenti a timelapse, startrail, keogrammi e meteore candidate. I dettagli di metadati SEO, sitemap, robots.txt, proprietà Google, segnalazione iniziale di sicurezza e ripristino sono nella [procedura di indicizzazione](../operations/allsky-search-indexing.md). Disponibilità del sito e richiesta di scansione non equivalgono a indicizzazione effettiva.

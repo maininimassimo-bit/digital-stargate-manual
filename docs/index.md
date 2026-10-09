@@ -1,6 +1,6 @@
 ---
-title: Digital StarGate
-description: Portale operativo, scientifico e documentale dell'osservatorio astronomico remoto di Manciano.
+title: Osservatorio astronomico e cielo live a Manciano
+description: Digital Stargate, osservatorio astronomico remoto a Manciano, in Toscana. Guarda il cielo live con Allsky e scopri immagini, sessioni scientifiche e il progetto.
 hide:
   - toc
 ---
@@ -110,6 +110,7 @@ hide:
 <section class="dsg-quick-section" aria-labelledby="dsg-quick-title">
   <div class="dsg-section-intro"><span class="dsg-section-kicker">ACCESSO RAPIDO</span><h2 id="dsg-quick-title">I punti di ingresso principali</h2></div>
   <div class="dsg-quick-grid">
+    <a class="dsg-quick-card" href="./allsky/"><strong>Allsky · cielo live</strong><span>Il cielo di Manciano, timelapse e meteore candidate.</span><em>Guarda il cielo</em></a>
     <a class="dsg-quick-card" href="./mission-control/"><strong>Mission Control</strong><span>Vista sintetica della piattaforma.</span><em>Apri</em></a>
     <a class="dsg-quick-card" href="./roadmap/"><strong>Roadmap</strong><span>Avanzamento e prossima milestone.</span><em>Apri</em></a>
     <a class="dsg-quick-card" href="./session-reports/"><strong>Report sessioni</strong><span>Report Markdown e PDF pubblicati.</span><em>Apri</em></a>
