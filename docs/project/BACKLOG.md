@@ -1,6 +1,10 @@
 # Project Backlog
 
-## Stato corrente — 8 ottobre 2026
+## Aggiornamento corrente — OAT e V5, 9 ottobre 2026
+
+P6 Accepted con i limiti del dossier; BKL-051 OPEN. Dopo PR #522, due OAT cloud autorizzati e conclusi con rollback verificato: completamento tecnico sintetico Owner/nativo, annullamento prima dell’avvio, cinque GET negative e riconciliazione di ACK già ricevuto. Non provano risposta persa, CAS concorrente, cancel durante il nativo o account Google non-Owner. V4 osservato e chiuso; byte eseguiti ancora non attestati. V5 diagnostico completato: 639/206/1075 sorgenti, audit indipendente senza discrepanze di maschere/segnale e originali invariati; associazione Atami non accettata. Runtime corrente P6, transient disattivato; nessuna nuova build, invio o fotografia pubblicata. Pipeline scientifica, covarianze/calibrazione/timing, prove cieche/policy, lifecycle residuo, adattatori e accettazione finale restano aperti. Riconciliazione candidata ai gate, non chiusura milestone. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; Safety e C→F invariati. [Riconciliazione OAT e diagnostica](BKL-051-OAT-NATIVE-RECONCILIATION-2026-10-09.md).
+
+## Snapshot precedente — prima degli OAT e di V5
 
 P6 resta Accepted nei limiti del dossier. BKL-051 resta aperta. PR #513 integrata e verificata sul merge `1c713f37b2522458e0d364c519756edc1f7ba2ba`: 20 check exact-head, ARB/RQ senza finding, 19 workflow post-merge e dieci HTTP/artifact/projection PASS; pagina privata pubblicata, visualmente verificata senza login. Nuovo incremento candidato: selezione esplicita del gruppo registrato, richiesta/annullamento e valutazione Owner legata al digest del rapporto, con intent conservato e riconciliazione manuale dopo risposte perse. Servizio transient e invii non attivati. Rapporto completo e immagini sul PC; WORKER_REPORTED_NOT_ATTESTED, OWNER_DECLARED e NOT_VALIDATED preservati. Unità normalizzate e variance/significatività sconosciute. Restano driver/recovery operativa, rapporto scientifico locale completo, accessi/PC/cloud OAT, validation e reporting. S1/S2 aperte, S3 parziale, S4 incompleta, S5 non accettata. F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; S10/Safety invariati. [Handover corrente](HANDOVER_2026-10-08-BKL051-OWNER-ACTIONS.md).
 
