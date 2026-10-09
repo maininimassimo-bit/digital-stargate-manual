@@ -19,7 +19,7 @@ const base=process.env.DSG_TEST_BASE_URL||'http://127.0.0.1:8766/digital-stargat
   if(process.env.DSG_DOME_SCREENSHOTS)await stage.screenshot({path:process.env.DSG_DOME_SCREENSHOTS+'/cupola-closed.png'});
   state='OPEN';await refresh();await view('section');assert.equal(await stage.getAttribute('data-dsg-view-mode'),'auto');
   if(process.env.DSG_DOME_SCREENSHOTS)await stage.screenshot({path:process.env.DSG_DOME_SCREENSHOTS+'/cupola-open.png'});
-  await p.locator('[data-dsg-scene-view="top"]').click();await view('top');assert.match(await p.locator('.dsg-scene__status').innerText(),/Vista libera/);
+  await p.locator('[data-dsg-scene-view="top"]').click();await view('top');assert.match(await stage.locator('.dsg-scene__status').innerText(),/Vista libera/);
   await refresh();await view('top'); // Unchanged snapshots do not cancel manual inspection.
   await p.locator('[data-dsg-follow-dome]').click();await view('section');
   state='CLOSED';await refresh();await view('exterior');
