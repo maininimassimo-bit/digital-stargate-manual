@@ -1,7 +1,7 @@
 # Capitolo 22 – Inventario tecnico e Asset Management
 
 **Codice documento:** DSG-TM-001-22  
-**Revisione:** 0.2 — aggiornamento Allsky 09/10/2026
+**Revisione:** 0.3 — riconciliazione verifiche rete e Allsky 09/10/2026
 
 ## 22.1 Scopo
 
@@ -58,8 +58,9 @@ DSG-CAM-001
 
 | Asset ID | Componente | Modello | Stato |
 |---|---|---|---|
-| DSG-NET-001 | Connettività/router primario | Starlink, servizio residenziale con IP condiviso | Operativo; ingresso Internet Allsky tramite servizio separato in preparazione |
-| DSG-NET-002 | Router failover/VPN | Teltonika RUT955, firmware RUT9XX_R_00.06.09.5 | Operativo; nuovo tunnel Allsky da collaudare end-to-end |
+| DSG-NET-001 | Connettività/router primario | Starlink, servizio residenziale con IP condiviso | Operativo; WAN cablata primaria del Teltonika, sito Allsky pubblicato tramite servizio separato |
+| DSG-NET-002 | Router failover/VPN | Teltonika RUT955, firmware RUT9XX_R_00.06.09.5 | Operativo; tunnel pubblico Allsky collaudato; configurazione failover verificata, prova fisica pendente |
+| DSG-NET-003 | SIM di backup, slot 1 | Iliad, collegamento 4G LTE | Registrata e con IP assegnato il 09/10/2026; subentro alla WAN non ancora provato |
 | DSG-PC-001 | Computer di controllo | PrimaLuceLab EAGLE3 | Operativo |
 | DSG-PC-009 | Computer Allsky | Raspberry Pi 4 Model B Rev 1.2, RAM 4 GB | Acquisizione e sito locale operativi, verificati 09/10/2026 |
 | DSG-MNT-001 | Montatura | Celestron CGX-L | Operativo |
@@ -81,10 +82,12 @@ Gli identificativi Allsky sono assegnati in questo aggiornamento documentale. Se
 | Sistema operativo DSG-PC-009 | Raspberry Pi OS / Raspbian 11 Bullseye, userland armhf e kernel aarch64 |
 | Applicazione Allsky | AllskyTeam/allsky v2026.10.01, aggiornata il 09/10/2026 |
 | Dipendenza corretta | NumPy 1.24.4; importazioni SciPy/OpenCV/Astropy verificate |
-| Rete RUT955 | Nuovo profilo OpenVPN `allskyip`; tunnel RMS esistente conservato |
-| Ingresso Internet | IPStatico PRO condiviso; regole di pubblicazione e verifica esterna ancora da completare |
-| Nome pubblico | dynDNS.it, hostname corrente dell'osservatorio; dettagli di accesso riservati |
-| Certificato | RapidSSL, copertura acquistata per un anno; CSR inviato, emissione ancora pendente all'ultima verifica |
+| Rete RUT955 | Client OpenVPN Allsky operativo; tunnel RMS esistente conservato. Firmware RUT9XX_R_00.06.09.5 verificato in WebUI |
+| Ingresso Internet | IPStatico PRO condiviso; HTTPS pubblico sulla porta 23232 verificato dall’esterno; porta 443 esclusa dal piano corrente |
+| Nome pubblico | dynDNS.it, hostname pubblico digitalstargate.freeddns.it; dettagli di accesso riservati |
+| Certificato | RapidSSL emesso e installato; corrispondenza chiave, hostname e catena verificata. Scadenza del certificato: 25/04/2027 23:59:59 UTC, distinta dalla durata commerciale annuale |
+| Failover | WAN cablata principale, SIM 1 Iliad come backup; Wi-Fi WAN esclusa. Controllo WAN ogni 10 s su 8.8.8.8, timeout 1 s, 3 errori per subentro e 3 successi per rientro; prova fisica non eseguita |
+| Wi-Fi esterno proposto | Omada EAP610-Outdoor consigliato, collegamento Ethernet/PoE e copertura da verificare sul posto; acquisto e installazione non attestati, nessun asset operativo assegnato |
 | Componenti fisici non censiti | Alimentatore, scheda/storage, contenitore e riscaldatore: modello, capacità, potenza e seriale da verificare |
 
 I servizi di rete e il certificato sono dipendenze operative, non nuovi asset hardware. Nessuna chiave privata, credenziale, indirizzo LAN, coordinata precisa o numero di serie è incluso in questa scheda pubblica. Procedura, backup e attività residue: [Capitolo 27 — Sistema Allsky](27-sistema-allsky.md).
@@ -131,7 +134,11 @@ Devono essere identificati i ricambi con elevato impatto sulla continuità opera
 
 ## 22.10 Dati da validare
 
-> **DA VALIDARE:** numeri di serie e date di installazione.
+Le verifiche del 09/10/2026 attestano modello/firmware RUT955, Raspberry Pi 4 con 4 GB, camera ASI290MC, ottica 1,8 mm (conferma fisica Owner), SIM 1 Iliad e configurazione failover. Il collaudo esterno attesta il sito pubblico Allsky, non la commutazione fisica Starlink → SIM.
+
+> **DA VALIDARE:** numeri di serie e date di installazione; nessuna lettura delle etichette o documento di acquisto acquisito.
+
+> **DA VALIDARE:** APN e stato/configurazione SIM 2; prova fisica del failover e rientro; copertura Wi-Fi esterna dopo eventuale installazione.
 
 > **DA VALIDARE:** disponibilità e posizione dei ricambi critici.
 
@@ -141,3 +148,4 @@ Devono essere identificati i ricambi con elevato impatto sulla continuità opera
 |---|---|---|
 | 0.1 | Baseline precedente | Inventario iniziale |
 | 0.2 | 09/10/2026 | Raspberry, camera e ottica Allsky censiti; firmware router e dipendenze software/rete aggiornati con limiti di verifica |
+| 0.3 | 09/10/2026 | SIM 1 e failover riconciliati con WebUI; HTTPS/tunnel e certificato collaudati; access point solo proposto e verifiche fisiche residue esplicite |

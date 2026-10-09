@@ -1,8 +1,8 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 0.2 — aggiornamento operativo 09/10/2026
-**Stato:** acquisizione e sito locale operativi; pubblicazione Internet in preparazione
+**Revisione:** 0.3 — riconciliazione operativa 09/10/2026
+**Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
 
@@ -151,9 +151,9 @@ Per un sistema con copertura emisferica, il riscaldamento deve:
 
 ## 27.12 Dati da validare
 
-> **DA VALIDARE:** frequenza di acquisizione, esposizioni diurne/notturne e retention.
+Verificata nella configurazione: conservazione immagini originali per 14 giorni e archivi del sito locale senza scadenza automatica (`keeplocalwebsitedays=0`). Frequenza/esposizioni operative e dimensionamento disco nel tempo restano da validare.
 
-> **DA VALIDARE:** retention e ripristino completo da backup; riscaldatore, alimentatore e supporto di storage non sono stati censiti fisicamente nella sessione.
+> **DA VALIDARE:** adeguatezza della retention e ripristino completo da backup; riscaldatore, alimentatore e supporto di storage non sono stati censiti fisicamente nella sessione.
 
 ## 27.13 Aggiornamento e ripristino — 9 ottobre 2026
 
@@ -174,30 +174,21 @@ Il ripristino va eseguito in una finestra di manutenzione: conservare prima la c
 
 File interessati: `allsky.css`, `controller.js`, `configuration.json` e `index.php` nel sito Allsky. Le personalizzazioni vanno confrontate con i nuovi file upstream a ogni aggiornamento.
 
-## 27.15 Accesso pubblico — stato e attività residue
+## 27.15 Accesso pubblico — verifiche concluse e limiti
 
-Il collegamento Starlink residenziale usa un IP condiviso. L'Owner ha scelto IPStatico PRO con ingresso condiviso e hostname dynDNS.it, così il visitatore potrà raggiungere il sito senza una propria VPN. Il tunnel OpenVPN resta necessario sul router verso il servizio di ingresso.
+Il sito pubblico è operativo all’indirizzo [Digital Stargate Allsky](https://digitalstargate.freeddns.it:23232/allsky/). Starlink residenziale resta su IP condiviso; l’ingresso IPStatico PRO condiviso avviene tramite client OpenVPN sul Teltonika. Il visitatore non necessita di VPN.
 
-| Elemento | Stato al 09/10/2026 |
-|---|---|
-| Router | Teltonika RUT955, firmware `RUT9XX_R_00.06.09.5` |
-| Tunnel | Profilo OpenVPN `allskyip` importato e abilitato; connessione attiva osservata nel portale provider, stato router discrepante da riconciliare |
-| DNS | Hostname corrente configurato verso l'ingresso IPStatico; nessun aggiornamento automatico verso l'IP Starlink |
-| HTTPS | RapidSSL acquistato, CSR generato sul Raspberry e configurazione inviata |
-| Emissione certificato | Ultima verifica della sessione: `Certificate not yet issued` |
-| Inoltro e servizio pubblico | Non ancora completati o verificati dall'esterno |
+Il 09/10/2026 sono stati verificati tunnel, inoltro TCP sulla porta assegnata 23232, homepage, immagine corrente e gallerie dall’esterno. La configurazione HTTPS dedicata esclude WebUI amministrativa, comandi, overlay riservati e log (risposte 403 sui percorsi provati); amministrazione locale preservata. Chiavi private e profili VPN completi sono custoditi fuori dal repository.
 
-La chiave privata TLS rimane sul Raspberry e non deve entrare nel repository. Per gli hostname dynDNS.it, la [procedura ufficiale](https://dyndns.it/news/un-certificato-ssl-per-il-tuo-host-dyndns-it/) richiede validazione email gestita dal provider. È stato pianificato un controllo dello stato ogni 30 minuti, con notifica solo su disponibilità, errore significativo o intervento richiesto.
+RapidSSL è stato emesso e installato: hostname, corrispondenza con la chiave e catena verificati. Scadenza effettiva **25/04/2027 23:59:59 UTC**, distinta dalla durata commerciale annuale del servizio. Il controllo periodico dell’emissione è stato disattivato dopo la conferma.
 
-Passi residui: confermare il tunnel effettivo, recuperare il certificato emesso e verificarne hostname/chiave/catena, configurare il servizio HTTPS pubblico limitato ai media e alla pagina Allsky, predisporre la regola router sulla porta assegnata, quindi provare da una rete esterna. Verificare che WebUI, SSH e percorsi riservati siano esclusi. Il manuale non attesta una pubblicazione già riuscita.
+Il piano condiviso assegna le porte 23232–23263 e non include 443. L’Owner ha scelto di mantenere il servizio attuale, senza attivare un IP dedicato. Configurazione failover verificata nel [Capitolo 5](05-infrastruttura-rete.md); commutazione fisica e continuità del sito durante il cambio WAN ancora da provare sul posto.
 
 ## 27.16 Allsky Map
 
-La [documentazione ufficiale Allsky](https://alex-developer.github.io/docs/allsky_guide/howtos/allsky_map.html) prevede iscrizione automatica tramite **Show On Map**, aggiornamento alla modifica dei dati e ogni due giorni. La mappa mostra posizione, attrezzatura e, se configurata, l'ultima immagine con collegamento al sito.
+Registrazione aggiornata il 09/10/2026 con lo script ufficiale `postToMap.sh`; risposta del servizio di aggiornamento confermata e segnaposto **Astrocampo Manciano / Observatory Digital Stargate** osservato sulla [mappa pubblica](https://www.thomasjacquin.com/allsky-map/). Camera ASI290MC, lente 1,8 mm e Raspberry Pi 4 riconciliati con l’inventario. URL del sito e dell’immagine corrente configurati con HTTPS e porta 23232.
 
-Nella sessione l'opzione è risultata già attiva, con nome **Observatory Digital Stargate**, camera ZWO ASI290MC, lente 1,8 mm e Raspberry Pi 4. I campi **Website URL** e **Image URL** erano vuoti: la camera può avere un segnaposto senza immagine pubblica. Non è stata attestata la presenza effettiva del segnaposto sulla mappa.
-
-Dopo il collaudo esterno, impostare gli URL HTTPS definitivi del sito `/allsky/` e dell'immagine `/current/image.jpg`, inclusa la porta pubblica se necessaria. Prima dell'invio alla mappa confermare la classificazione pubblica della posizione: la mappa consente di localizzare la camera, mentre le coordinate precise restano protette nel repository. Non modificare le coordinate usate per alba/tramonto per ottenere un posizionamento approssimativo senza valutare l'effetto sull'acquisizione.
+**Limite aperto:** il server della mappa restituisce connessione rifiutata verso l’immagine sulla porta 23232, mentre il download diretto funziona e una prova del proxy verso un’immagine HTTPS su 443 riesce. Restrizione delle connessioni in uscita del server della mappa come causa probabile, non verificata accedendo al suo firewall. Segnaposto e link restano disponibili; anteprima immagine non disponibile. Nessun passaggio alla porta 443 acquistato o configurato.
 
 ## 27.17 Registro revisioni
 
@@ -205,5 +196,6 @@ Dopo il collaudo esterno, impostare gli URL HTTPS definitivi del sito `/allsky/`
 |---|---|---|
 | 0.1 | Baseline precedente | Prima descrizione del sistema e dati da validare |
 | 0.2 | 09/10/2026 | Hardware verificato e ottica confermata Owner; aggiornamento software, overlay, sito, backup e pubblicazione in preparazione |
+| 0.3 | 09/10/2026 | Retention verificata; tunnel, certificato e HTTPS pubblici collaudati; mappa aggiornata con anteprima non disponibile, residui fisici conservati |
 
 Inventario correlato: [Capitolo 22](22-inventario-asset-management.md).
