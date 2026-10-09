@@ -538,3 +538,7 @@ PR #516 rilasciata e verificata. [Intent di prenotazione](BKL-051-S4-RESERVATION
 ## BKL-051 — recovery Owner candidata, 9 ottobre 2026
 
 PR #517 rilasciata e verificata. [Recovery dichiarata](BKL-051-S4-OWNER-RECOVERY-2026-10-09.md) approvata come modalità dall’Owner: conserva RECOVERY_REQUIRED e consente solo nuovi job distinti, nessun replay o process kill. Gate release pending. RQ517 P3 conteggio test corretto in questo incremento. Caller/OAT, scientific workflow, validation/policy e reporting restano aperti; runtime e invii disattivati. BKL-051 OPEN.
+
+## BKL-051 — caller locale candidato, 9 ottobre 2026
+
+PR #518 recovery Owner rilasciata e verificata. [Caller locale](BKL-051-S4-OPERATOR-CALLER-2026-10-09.md) per un job selezionato, preflight offline e intento conservato; 15 prove sintetiche, release pending. Nessuna attivazione/credenziale/IAM o misura scientifica nuova. PC/cloud OAT, workflow scientifico, validation/policy, oggetti mobili e reporting restano aperti; BKL-051 OPEN.

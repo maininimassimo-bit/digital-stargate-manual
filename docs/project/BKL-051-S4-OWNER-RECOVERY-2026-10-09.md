@@ -1,6 +1,6 @@
 # BKL-051 S4 — Chiusura dichiarata della recovery
 
-Stato: Candidate; CI sul commit esatto, ARB/RQ, merge e release pending.
+Stato: Released tramite PR #518, merge `0f5b2df4378cdec049468de92677f046c3d4979d`; 17 workflow exact-head e 17 post-merge SUCCESS, ARB/RQ APPROVED senza finding, sette endpoint pubblici verificati. Runtime disattivato.
 Baseline: PR #517, merge `544fb860522918d0ffd00e8b172865abe647a8fa`, 17 gate exact-head e 17 post-merge SUCCESS, pubblicazione verificata.
 
 ## Decisione Owner

@@ -123,3 +123,4 @@ Per lo stato corrente consultare, nell'ordine:
 ---
 
 **Digital StarGate** — osservatorio remoto, piattaforma scientifica e repository enterprise governati come un unico sistema.
+BKL-051: recovery Owner PR #518 rilasciata e verificata; [caller locale candidato](docs/project/BKL-051-S4-OPERATOR-CALLER-2026-10-09.md), runtime disattivato e milestone aperta.
