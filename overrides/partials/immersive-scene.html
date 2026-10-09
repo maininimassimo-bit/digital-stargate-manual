@@ -1,17 +1,21 @@
 {% set dome_sync = page and page.file.src_uri == 'status/index.md' %}
-<section class="dsg-scene" data-dsg-scene="{{ scene_kind }}" {% if dome_sync %}data-dsg-dome-sync data-dsg-observed-dome="UNKNOWN"{% endif %} aria-label="Visualizzazione tridimensionale illustrativa">
+{% set allsky_live = page and page.file.src_uri == 'index.md' %}
+<section class="dsg-scene" data-dsg-scene="{{ scene_kind }}" {% if allsky_live %}data-dsg-allsky-live{% endif %} {% if dome_sync %}data-dsg-dome-sync data-dsg-observed-dome="UNKNOWN"{% endif %} aria-label="{{ 'Anteprima live Allsky Digital Stargate' if allsky_live else 'Visualizzazione tridimensionale illustrativa' }}">
   <canvas class="dsg-scene__canvas" aria-hidden="true"></canvas>
   <div class="dsg-scene__heading">
-    <span class="dsg-scene__eyebrow">DIGITAL STARGATE / {{ 'OBSERVATORY' if scene_kind == 'observatory' else 'CELESTIAL ATLAS' }}</span>
-    <span class="dsg-scene__caption">{{ 'Modello schematico · vista collegata al badge Cupola osservata' if dome_sync else 'Modello illustrativo · non rappresenta lo stato degli apparati' if scene_kind == 'observatory' else 'Scena illustrativa · non rappresenta coordinate o dati scientifici' }}</span>
+    <span class="dsg-scene__eyebrow">DIGITAL STARGATE / {{ 'ALLSKY' if allsky_live else 'OBSERVATORY' if scene_kind == 'observatory' else 'CELESTIAL ATLAS' }}</span>
+    <span class="dsg-scene__caption">{{ 'Il cielo di Manciano · immagine aggiornata automaticamente' if allsky_live else 'Modello schematico · vista collegata al badge Cupola osservata' if dome_sync else 'Modello illustrativo · non rappresenta lo stato degli apparati' if scene_kind == 'observatory' else 'Scena illustrativa · non rappresenta coordinate o dati scientifici' }}</span>
   </div>
   <div class="dsg-scene__poster" aria-hidden="true"><span></span><span></span><span></span></div>
+  {% if allsky_live %}<div class="dsg-allsky-preview"><img data-dsg-allsky-image alt="Ripresa corrente del cielo dall’Allsky Digital Stargate" referrerpolicy="no-referrer" hidden></div>{% endif %}
   <div class="dsg-scene__toolbar">
     <div class="dsg-scene__views" aria-label="Solo visualizzazione, nessun comando agli apparati" hidden>
       {% if dome_sync %}<button type="button" data-dsg-follow-dome aria-pressed="true">Segui badge</button>{% endif %}
+      {% if allsky_live %}<a class="dsg-allsky-link" aria-label="Allsky · apri il sito completo in una nuova scheda" href="https://digitalstargate.freeddns.it:23232/allsky/" target="_blank" rel="noopener noreferrer">Allsky</a>{% else %}
       <button type="button" data-dsg-scene-view="section" aria-pressed="true">{{ 'Interno' if dome_sync else 'Strumenti' if scene_kind == 'observatory' else 'Orbita' }}</button>
       {% if scene_kind == 'observatory' %}<button type="button" data-dsg-scene-view="exterior" aria-pressed="false">Esterno</button>{% endif %}
       <button type="button" data-dsg-scene-view="top" aria-pressed="false">Dall’alto</button>
+      {% endif %}
     </div>
     <button type="button" class="dsg-scene__mode" data-dsg-scene-mode aria-pressed="false" hidden>Vista essenziale</button>
   </div>

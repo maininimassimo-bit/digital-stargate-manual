@@ -17,6 +17,7 @@
     const { signal } = controller;
     const stage = root.querySelector('[data-dsg-scene]');
     if (!stage) { dispose = () => controller.abort(); return; }
+    if (stage.hasAttribute('data-dsg-allsky-live')) { dispose = () => controller.abort(); return; }
     const mode = stage.querySelector('[data-dsg-scene-mode]');
     const status = stage.querySelector('.dsg-scene__status');
     const views = stage.querySelector('.dsg-scene__views');
