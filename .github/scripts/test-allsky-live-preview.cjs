@@ -13,7 +13,8 @@ const base=process.env.DSG_TEST_BASE_URL||'http://127.0.0.1:8766/';
    await p.setViewportSize({width,height:900});const f=await s.evaluate(e=>{const i=e.querySelector('img'),b=i.getBoundingClientRect(),h=e.querySelector('.dsg-scene__heading').getBoundingClientRect(),t=e.querySelector('.dsg-scene__toolbar').getBoundingClientRect();return {fit:getComputedStyle(i).objectFit,top:b.top,bottom:b.bottom,heading:h.bottom,toolbar:t.top,height:b.height,natural:i.naturalWidth};});
    assert.equal(f.fit,'contain');assert(f.top>=f.heading&&f.bottom<=f.toolbar&&f.height>100&&f.natural>0,JSON.stringify(f));
   }
-  await p.clock.runFor(31000);await p.waitForFunction(()=>document.querySelector("[data-dsg-scene-state]").dataset.dsgSceneState==="ready");assert(requests>=2);
+  const refreshed=p.waitForResponse(r=>r.url().startsWith('https://digitalstargate.freeddns.it:23232/current/image.jpg'));
+  await p.clock.runFor(31000);await refreshed;await p.waitForFunction(()=>document.querySelector("[data-dsg-scene-state]").dataset.dsgSceneState==="ready");assert(requests>=2);
   await s.getByRole('button',{name:'Vista essenziale',exact:true}).click();const frozen=requests;await p.clock.runFor(61000);assert.equal(requests,frozen);
   await p.reload();assert.equal(await s.getAttribute('data-dsg-scene-state'),'essential');assert.equal(requests,frozen);
   await s.getByRole('button',{name:'Attiva il live',exact:true}).click();await p.waitForSelector('[data-dsg-scene-state="ready"]');

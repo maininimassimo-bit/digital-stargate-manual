@@ -36,6 +36,8 @@ DTD, resolver XML e riferimenti esterni dello schema sono disabilitati; nessun e
 
 L'esportatore conserva `schemaValidation: NOT_EXECUTED_BY_EXPORTER`; le ricevute di test XSD sono separate e non vengono trasferite come validazione automatica di futuri output. Stato sempre `PRIVATE_PREVIEW`, `scienceValidation: NOT_VALIDATED`, `declarationsAttested: false`, `submissionAuthorized: false`, `externalSubmission: NONE`. Nessuna ricezione, scoperta, classificazione o accettazione MPC viene dedotta dalla sintassi.
 
+La prima CI del package ha rilevato una race nel test Allsky ereditato da main: lo stato ready dell'immagine precedente poteva soddisfare l'attesa prima della risposta del refresh. Il test ora attende tale risposta prima della stessa asserzione sul numero di richieste; nessun comportamento del prodotto o criterio ridotto. Fallimento conservato; prova locale su server loopback proprio PASS con provider live bloccati. I gate exact-head vanno ripetuti sul commit corretto prima delle revisioni.
+
 ## Riconciliazione scientifica e comunicazioni private
 
 PR #530 è conclusa sul merge `39d6e39977caaae2a68b56f493ec172417e6da4b`, con ARB/RQ e verifiche finali conservate. Le prove precedenti non vengono rilanciate per questa consegna. Gaia TOP100 con velocità radiale resta campione incompleto; i tempi dei tre science frame restano condizionali; i controlli AT2018cow restano scelti su evento noto, non ciechi.
