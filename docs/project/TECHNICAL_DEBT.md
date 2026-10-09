@@ -1,5 +1,9 @@
 # Technical Debt Register
 
+## BKL-051 — residui di reporting ADES, 9 ottobre 2026
+
+Export ristretto oggetti numerati/CCD/CMO/Gaia3, senza fotometria/PSV/altre designazioni o submission. Estensioni, aggiornamento requisiti provider, sito, astrometria/timing reali, dati mobili/tracklet, policy, payload approval, altri canali e test di invio sono requisiti pianificati e gate, non debito accettato o perimetro eliminato. Nessuna nuova dipendenza runtime o workaround operativo. [Dossier](BKL-051-S1-MPC-ADES-PREVIEW-2026-10-09.md).
+
 ## BKL-051 — residui di validazione, 8 ottobre 2026
 
 L’[ispezione proposta delle evidenze](BKL-051-S1-MEASUREMENT-EVIDENCE-2026-10-08.md) non introduce un runtime operativo. Parser di trasporto stretto, verifica indipendente delle dichiarazioni/byte, modello completo di incertezza, gestione delle sorgenti confuse, validazione dei falsi positivi e adapter privato rimangono acceptance gate S1–S5, non capacità completate o fallback impliciti. Nessuna soglia numerica accettata, nessuna nuova infrastruttura o deroga ai gate. P6 resta Accepted nei propri limiti.

@@ -1,5 +1,9 @@
 # Decision Log
 
+## 2026-10-09 — export ADES locale e comunicazione IRSA
+
+Incremento nello scope reporting già approvato: anteprima privata, nessun invio astronomico, nuova policy o decisione strutturale. Owner autorizza un solo nuovo messaggio IRSA rumore/provenienza: invio completato e ricevuta privata conservata; calibrazione IRSASD-21929 separata. Validazione scientifica e accettazione BKL-051 non acquisite. [Dossier](BKL-051-S1-MPC-ADES-PREVIEW-2026-10-09.md).
+
 ## 2026-10-08 — BKL-051 evidenze di misura proposte, senza policy operativa
 
 Riconciliate le prove private posteriori alla PR #501 e preparata un’ispezione offline delle evidenze, con nove nuovi test (24 complessivi). [Dossier e residui](BKL-051-S1-MEASUREMENT-EVIDENCE-2026-10-08.md), [handover](HANDOVER_2026-10-08-BKL051-MEASUREMENT.md). Non è una nuova decisione Owner su soglie o trasporto: ADR-020 rimane direction-only, S1/S2 aperte, S3 parziale. Due aperture pubbliche difettose/sature vengono rifiutate localmente; le restanti non diventano misure validate. Sorgenti raggruppate richiedono trattamento separato, nessun default di produzione promosso. Nessuna fotografia o dettaglio privato pubblicato. Consegna subordinata a CI/review/merge/post-merge; P6/F4/F5/BKL-050/S10/Safety invariati.
