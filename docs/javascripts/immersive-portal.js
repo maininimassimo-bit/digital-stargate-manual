@@ -1,7 +1,7 @@
 /* Presentation-only bootstrap. No data fetch, evaluator or telemetry binding. */
 (() => {
   'use strict';
-  const moduleURL = new URL('./immersive-renderer.mjs', document.currentScript.src).href;
+  const moduleURL = new URL('./immersive-renderer.mjs?v=status-allsky-20261009', document.currentScript.src).href;
   const storageKey = 'dsg-immersive-essential';
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let essential = false;
