@@ -1,0 +1,9 @@
+# Handover — coda e backup GCS BKL-051
+
+P6 Accepted nei limiti del dossier; BKL-051 OPEN, scienza NOT_VALIDATED. PR #526 rilasciata sul merge `78dad45ec4241b9b3b6de2f7a863a931cf80217b`, 15 workflow post-merge SUCCESS e sette endpoint Pages verificati. Questo incremento è candidato ai gate del proprio commit.
+
+[Dossier e limiti](BKL-051-S4-GCS-QUEUE-BACKUP-EVIDENCE-2026-10-09.md). Secondo probe coda/backup autorizzato PASS: 4,672 secondi, 43 richieste GCS e due HTTP 412; due registrazioni e due creazioni concorrenti conservate dopo retry, idempotenza senza riscrittura, sei backup verificati e head stabile. Primo tentativo fallito prima dello storage conservato. Codice di produzione invariato; namespace diagnostico nei due bucket esistenti, nessun control object operativo letto/scritto. Non prova dell'intero servizio Cloud Run, login o immagine runtime. Nessun processo PixInsight avviato, servizio/permesso modificato o oggetto eliminato.
+
+Entrambe le singole autorizzazioni del probe sono concluse; token solo in memoria e sessione HTTP chiusa. Nessuna estrazione o nuovo live implicitamente autorizzato. Le cinque OAT precedenti e due build restano concluse. Conservare archivi genitori, History/checkpoint, tentativi respinti, versioni degli audit e tutti gli oggetti diagnostici.
+
+Prossimo lavoro: completare i gate di questa riconciliazione e sviluppare/verificare pipeline scientifica locale e dossier quantitativo; predisporre i residui dell'intero servizio senza scambiare il probe del nucleo per accettazione S4. Restano S1/S2, S3 scientifica, rapporto completo, reporting approvato CBAT/TNS/VSX/MPC e S5. Policy e ulteriori credenziali/sessioni richiedono decisioni concrete secondo mandato. Nessuna chiusura per sottrazione di requisiti. F4/F5, BKL-050, S10/Safety e C→F invariati; nessuna fotografia pubblicata o segnalazione inviata.

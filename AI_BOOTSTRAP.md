@@ -1,5 +1,11 @@
 # Digital StarGate AI Bootstrap
 
+## Aggiornamento corrente — coda/backup GCS, 9 ottobre 2026
+
+P6 Accepted con i limiti del dossier; BKL-051 OPEN. PR #526 rilasciata e verificata: 15 workflow post-merge SUCCESS e sette endpoint Pages. Secondo probe coda/backup GCS singolo autorizzato PASS in 4,672 secondi: 43 richieste, due HTTP 412 reali, registrazioni e creazioni concorrenti conservate dopo retry, idempotenza senza riscrittura e sei backup verificati, compresi due candidati respinti non equivalenti a head. Primo tentativo fallito prima dello storage conservato. Codice invariato, namespace diagnostico nei due bucket esistenti: nessun control object operativo letto/scritto, servizio/IAM/traffico modificato o PixInsight avviato. Prova del nucleo coda/storage, non dell’intero servizio o login. Due autorizzazioni del probe consumate; cinque OAT e due build precedenti concluse. Restano intero servizio/regressioni, rapporto scientifico completo, calibrazione/covarianze/timing, pipeline multi-epoca, prove cieche/policy, reporting e S5. Nessuna scoperta, invio o fotografia pubblicata; F4/F5, BKL-050, S10/Safety e C→F invariati. [Evidenze](docs/project/BKL-051-S4-GCS-QUEUE-BACKUP-EVIDENCE-2026-10-09.md). [Handover corrente](docs/project/HANDOVER_2026-10-09-BKL051-GCS-QUEUE-BACKUP.md).
+
+## Snapshot precedente — prima del probe coda/backup GCS
+
 ## Aggiornamento corrente — ciclo nativo attivo, 9 ottobre 2026
 
 P6 Accepted con i limiti del dossier; BKL-051 OPEN. PR #525 rilasciata e verificata: 15 workflow post-merge SUCCESS e sette endpoint Pages. Quinta OAT singola autorizzata conclusa in 792,91 secondi: due nuovi job e istanze native sintetiche. Owner annulla durante le misure: nativo/job CANCELLED dopo 292 righe. Fault locale dopo prima misura e prima del terminale: nativo CANCELLED dopo 13 righe, supervisore/job RECOVERY_REQUIRED; quiescenza e dichiarazione Owner sul dossier esatto verificate, nessun reset o replay. Entrambi i processi dedicati fermi; checkpoint e dump History conservati, 4.194.304 campioni bitwise invariati per ciascuna fixture. 66 richieste worker e 18 operazioni Owner entro limiti, 18 OPTIONS. Ripristino P6 100%, configurazione e permesso temporanei rimossi, verifica indipendente PASS. Le cinque autorizzazioni OAT sono consumate. Restano concorrenza/retry dell’intero servizio, rapporto scientifico completo, calibrazione/covarianze/timing, pipeline multi-epoca, prove cieche/policy, reporting e S5. Nessuna scoperta, invio o fotografia pubblicata; F4/F5, BKL-050, S10/Safety e C→F invariati. [Evidenze](docs/project/BKL-051-S4-ACTIVE-LIFECYCLE-EVIDENCE-2026-10-09.md). [Handover corrente](docs/project/HANDOVER_2026-10-09-BKL051-ACTIVE-LIFECYCLE.md).
@@ -34,7 +40,7 @@ P6 accettata operativamente dall’Owner il 7 ottobre 2026 con tutti i limiti de
 
 | Campo | Valore |
 |---|---|
-| Versione | 8.37 |
+| Versione | 8.38 |
 | Baseline | 09/10/2026 |
 | Stato | Current root bootstrap — P6 accepted; BKL-051 Owner local/query direction approved, S1 open, S2 native solves with independent validation pending; BKL-043 lifecycle pending; S10 unavailable |
 
@@ -45,7 +51,7 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni e proje
 
 ## 2. Sequenza obbligatoria di lettura
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-10-09-BKL051-ACTIVE-LIFECYCLE.md`
+2. `docs/project/HANDOVER_2026-10-09-BKL051-GCS-QUEUE-BACKUP.md`
 3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
