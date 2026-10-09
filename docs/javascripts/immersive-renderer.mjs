@@ -88,7 +88,7 @@ export async function mountScene(stage, { signal }) {
     const resize = () => {
       const width = stage.clientWidth;
       let height = stage.clientHeight;
-      if (!observatory) {
+      if (!observatory || domeSync) {
         const heading = stage.querySelector('.dsg-scene__heading');
         const toolbar = stage.querySelector('.dsg-scene__toolbar');
         const top = heading.offsetTop + heading.offsetHeight + 12;
@@ -141,7 +141,7 @@ export async function mountScene(stage, { signal }) {
       stage.querySelector('.dsg-scene__status').textContent = 'Modello 3D illustrativo · controlli solo visuali'; if(domeSync) updateViewControls(); resize();
     });
     resizeObserver = new ResizeObserver(resize); resizeObserver.observe(stage);
-    if (!observatory) {
+    if (!observatory || domeSync) {
       resizeObserver.observe(stage.querySelector('.dsg-scene__heading'));
       resizeObserver.observe(stage.querySelector('.dsg-scene__toolbar'));
     }

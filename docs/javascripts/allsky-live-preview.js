@@ -11,7 +11,7 @@
     if (!stage) return;
     const controller = new AbortController(), { signal } = controller;
     const image = stage.querySelector('[data-dsg-allsky-image]');
-    const mode = stage.querySelector('[data-dsg-scene-mode]');
+    const mode = stage.querySelector('[data-dsg-scene-mode], [data-dsg-allsky-mode]');
     const status = stage.querySelector('.dsg-scene__status');
     let essential = false, timer, pending = false, lastReceived = '';
     try { essential = localStorage.getItem(key) === 'true'; } catch { /* Private mode. */ }

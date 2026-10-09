@@ -6,7 +6,8 @@
 {% set directory %}{% if page and page.file.src_uri == "portal-map/index.md" %}{% include "partials/portal-directory.html" %}{% endif %}{% endset %}
 {% include "partials/section-navigation.html" %}
 {% set stage %}{% include "partials/immersive-scene.html" %}{% endset %}
+{% set allsky_stage %}{% with status_preview = true %}{% include "partials/immersive-scene.html" %}{% endwith %}{% endset %}
 <div class="dsg-immersive-page" data-dsg-page="{{ page.file.src_uri if page else '404' }}" data-dsg-scene-kind="{{ scene_kind }}">
-  {{ original | replace('<!-- DSG:IMMERSIVE-SCENE -->', stage) | replace('<!-- DSG:PORTAL-DIRECTORY -->', directory) | safe }}
+  {{ original | replace('<!-- DSG:IMMERSIVE-SCENE -->', stage) | replace('<!-- DSG:ALLSKY-PREVIEW -->', allsky_stage) | replace('<!-- DSG:PORTAL-DIRECTORY -->', directory) | safe }}
 </div>
 {% endblock %}
