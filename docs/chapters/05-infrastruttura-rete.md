@@ -1,7 +1,7 @@
 # Capitolo 5 – Infrastruttura di rete e accesso remoto
 
 **Codice documento:** DSG-TM-001-05  
-**Revisione:** 0.2 Draft  
+**Revisione:** 0.3 — verifiche del 09/10/2026
 **Classificazione:** Engineering Documentation
 
 ## 5.1 Scopo
@@ -12,22 +12,17 @@ La rete è una componente critica ma non deve essere confusa con la sicurezza fi
 
 ## 5.2 Componenti principali
 
-| ID | Componente | Funzione | Indirizzo noto |
+| ID | Componente | Funzione | Stato verificato al 09/10/2026 |
 |---|---|---|---|
-| NET-01 | Router Starlink | Connettività primaria | 192.168.1.254 |
-| NET-02 | Teltonika RUT955 | Gateway, VPN, failover e firewall | 192.168.1.1 |
-| NET-03 | SIM1 | Backup LTE prioritario | DA VALIDARE |
-| NET-04 | SIM2 | Backup LTE secondario | DA VALIDARE |
-| NET-05 | EAGLE3 | Host di controllo dell’osservatorio | DA VALIDARE |
-| NET-06 | AllSky | Monitoraggio del cielo | DA VALIDARE |
-| NET-07 | Switch/AP eventuale | Distribuzione LAN/Wi-Fi | DA VALIDARE |
+| NET-01 | Starlink residenziale | Connettività primaria | Collegamento cablato alla WAN del Teltonika, WAN attiva osservata |
+| NET-02 | Teltonika RUT955 | Gateway, VPN, failover e firewall | Firmware RUT9XX_R_00.06.09.5, accesso RMS operativo |
+| NET-03 | SIM1 Iliad | Backup LTE | Slot 1 Ready, registrata su rete 4G e con indirizzo assegnato |
+| NET-04 | SIM2 | Eventuale backup secondario | Presenza, operatore e commutazione DA VALIDARE |
+| NET-05 | EAGLE3 | Host di controllo | Indirizzamento non verificato in questa sessione |
+| NET-06 | AllSky | Monitoraggio del cielo | Raspberry Pi 4 / ASI290MC, accesso locale e sito pubblico verificati |
+| NET-07 | Access point esterno | Estensione Wi-Fi | EAP610-Outdoor proposto, non acquistato/installato secondo le evidenze disponibili |
 
-SSID noti:
-
-- `Starlink`;
-- `RUT955_AF2`.
-
-Le password e le chiavi non devono essere archiviate nel repository.
+Gli ID NET sono riferimenti locali del capitolo; i codici asset ufficiali sono nel [Capitolo 22](22-inventario-asset-management.md). Password, chiavi, MAC e indirizzi LAN effettivi restano nell’inventario riservato. Le precedenti attribuzioni degli indirizzi Starlink/Teltonika erano invertite e sono ritirate da questa versione pubblica.
 
 ## 5.3 Topologia logica
 
@@ -35,10 +30,8 @@ Le password e le chiavi non devono essere archiviate nel repository.
                      INTERNET
                          │
                     STARLINK
-                192.168.1.254
                          │
                 WAN / LAN RUT955
-                192.168.1.1
         ┌────────────────┼────────────────┐
         │                │                │
       VPN           LTE SIM1         LTE SIM2
@@ -51,7 +44,7 @@ Le password e le chiavi non devono essere archiviate nel repository.
       EAGLE3           AllSky       altri apparati
 ```
 
-> **DA VALIDARE:** verificare la modalità esatta di collegamento tra router Starlink e RUT955, inclusi NAT, DHCP e subnet effettive.
+Verificato: WAN cablata del RUT955 in DHCP verso Starlink e LAN del Teltonika attiva. Osservata sovrapposizione delle subnet WAN/LAN: configurazione preservata, revisione del piano di indirizzamento ancora da valutare; nessuna riconfigurazione effettuata.
 
 ## 5.4 Ruolo del Teltonika RUT955
 
@@ -60,7 +53,7 @@ Il RUT955 costituisce il centro di controllo della rete e svolge indicativamente
 - funzione di gateway della LAN;
 - terminazione o client VPN;
 - monitoraggio della WAN;
-- failover tra Starlink, SIM1 e SIM2;
+- failover configurato tra Starlink cablata e Mobile; commutazione SIM1/SIM2 non verificata;
 - firewall;
 - DHCP o inoltro DHCP;
 - DNS forwarding;
@@ -69,11 +62,12 @@ Il RUT955 costituisce il centro di controllo della rete e svolge indicativamente
 
 ## 5.5 Priorità delle connessioni
 
-La priorità prevista è:
+La priorità osservata in WebUI è:
 
-1. Starlink;
-2. LTE su SIM1;
-3. LTE su SIM2.
+1. Starlink sulla WAN cablata, selezionata come Main WAN;
+2. Mobile come backup abilitato, SIM 1 Iliad attualmente in uso.
+
+La modalità selezionata è WAN Failover, non Load Balancing. Wi-Fi WAN non è selezionata come backup e non ha un IP assegnato; la priorità tra due SIM non è stata verificata. I client del Wi-Fi/LAN Teltonika beneficiano del failover se lo usano come gateway. Il Wi-Fi diretto Starlink non beneficia del failover del RUT955.
 
 Il failover deve basarsi su verifiche di raggiungibilità sufficientemente robuste da distinguere:
 
@@ -83,7 +77,7 @@ Il failover deve basarsi su verifiche di raggiungibilità sufficientemente robus
 - degradazione prolungata;
 - ripristino della linea primaria.
 
-> **DA VALIDARE:** intervalli di health check, host di test, timeout e criteri di rientro sulla WAN primaria.
+Parametri verificati il 09/10/2026: WAN cablata ogni 10 s, Mobile ogni 5 s; host ICMP 8.8.8.8, timeout 1 s, 3 tentativi falliti per dichiarare down e 3 riusciti per recovery su entrambe le interfacce. Per la WAN il tempo indicativo è circa 30 s, non un tempo misurato. Il controllo verifica raggiungibilità IP, non direttamente DNS o qualità applicativa. **Da collaudare sul posto:** perdita WAN, subentro SIM e rientro automatico.
 
 ## 5.6 Accesso VPN
 
@@ -106,15 +100,7 @@ Requisiti:
 
 Il piano IP deve essere stabile, leggibile e documentato.
 
-Tabella di censimento:
-
-| Dispositivo | Nome host | IP | Metodo | MAC | Note |
-|---|---|---|---|---|---|
-| RUT955 | DA VALIDARE | 192.168.1.1 | statico | DA VALIDARE | gateway |
-| Starlink | DA VALIDARE | 192.168.1.254 | noto | DA VALIDARE | WAN primaria |
-| EAGLE3 | DA VALIDARE | DA VALIDARE | prenotazione/statico | DA VALIDARE | controllo |
-| AllSky | DA VALIDARE | DA VALIDARE | prenotazione/statico | DA VALIDARE | Raspberry/ASI290MC |
-| Apparato cupola | DA VALIDARE | DA VALIDARE | DA VALIDARE | DA VALIDARE | se IP |
+Il piano dettagliato di IP, MAC e prenotazioni DHCP è riservato. Nella sessione sono stati verificati il gateway Teltonika e l’accesso LAN Allsky; hostname/MAC EAGLE3, prenotazioni e apparati cupola restano da censire. La sovrapposizione WAN/LAN richiede una revisione separata e non è stata modificata.
 
 L’utilizzo di indirizzi fissi o prenotazioni DHCP è raccomandato per i dispositivi che devono essere raggiunti da procedure, monitoraggi o desktop remoto.
 
@@ -147,8 +133,7 @@ Il RUT955, l’EAGLE3 e gli altri sistemi devono utilizzare sorgenti temporali a
 Comandi di esempio da una postazione Windows autorizzata:
 
 ```powershell
-Test-Connection 192.168.1.1 -Count 4
-Test-Connection 192.168.1.254 -Count 4
+Test-Connection -ComputerName <gateway-Teltonika-da-inventario-riservato> -Count 4
 ```
 
 Gli indirizzi privati sono raggiungibili solo quando il computer è collegato alla rete o VPN corretta.
@@ -211,7 +196,7 @@ Comportamento previsto:
 2. attiva SIM1;
 3. ristabilisce il routing Internet;
 4. la VPN viene ricostituita;
-5. se SIM1 non è disponibile, viene utilizzata SIM2;
+5. l’eventuale utilizzo di SIM2 richiede una configurazione e un collaudo separati, non verificati nella sessione;
 6. al ripristino, la politica di rientro riporta il traffico su Starlink.
 
 Il passaggio di WAN può interrompere sessioni TCP e desktop remoto. Le applicazioni astronomiche locali sull’EAGLE3 non devono dipendere dalla persistenza della sessione desktop.
@@ -305,17 +290,11 @@ I timestamp devono essere coerenti con quelli dell’EAGLE3 per correlare eventi
 
 ## 5.18 Dati da validare
 
-> **DA VALIDARE:** topologia reale tra Starlink e RUT955, inclusa la gestione del NAT.
+Verificati il 09/10/2026: collegamento primario cablato in DHCP, firmware RUT955, Main WAN/backup Mobile, SIM 1 Iliad e parametri di controllo/rientro. Client OpenVPN per ingresso pubblico Allsky operativo e tunnel RMS conservato; sito HTTPS verificato da rete esterna.
 
-> **DA VALIDARE:** indirizzo IP, hostname e MAC dell’EAGLE3 e dell’AllSky.
+> **DA VALIDARE:** prova fisica failover/rientro e continuità RMS/Allsky durante il cambio; revisione subnet WAN/LAN sovrapposte; piano IP/MAC e prenotazioni riservate; APN e configurazione SIM2; procedura di aggiornamento firmware e ripristino completo; NTP dei sistemi.
 
-> **DA VALIDARE:** configurazione OpenVPN, ruolo server/client e metodo di raggiungibilità.
-
-> **DA VALIDARE:** APN, operatori e priorità effettiva delle SIM.
-
-> **DA VALIDARE:** health check e timeout del failover.
-
-> **DA VALIDARE:** firmware installato sul RUT955 e procedura di aggiornamento approvata.
+L’Owner eseguirà la prova di failover sul posto. L’estensione Wi-Fi proposta prevede un access point EAP610-Outdoor cablato e PoE: copertura 10–50 m da misurare dopo installazione, nessuna prestazione attestata.
 
 ## 5.19 Riferimenti interni
 
