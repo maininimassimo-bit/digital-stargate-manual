@@ -1,5 +1,11 @@
 # Digital StarGate AI Bootstrap
 
+## Aggiornamento corrente — ciclo nativo attivo, 9 ottobre 2026
+
+P6 Accepted con i limiti del dossier; BKL-051 OPEN. PR #525 rilasciata e verificata: 15 workflow post-merge SUCCESS e sette endpoint Pages. Quinta OAT singola autorizzata conclusa in 792,91 secondi: due nuovi job e istanze native sintetiche. Owner annulla durante le misure: nativo/job CANCELLED dopo 292 righe. Fault locale dopo prima misura e prima del terminale: nativo CANCELLED dopo 13 righe, supervisore/job RECOVERY_REQUIRED; quiescenza e dichiarazione Owner sul dossier esatto verificate, nessun reset o replay. Entrambi i processi dedicati fermi; checkpoint e dump History conservati, 4.194.304 campioni bitwise invariati per ciascuna fixture. 66 richieste worker e 18 operazioni Owner entro limiti, 18 OPTIONS. Ripristino P6 100%, configurazione e permesso temporanei rimossi, verifica indipendente PASS. Le cinque autorizzazioni OAT sono consumate. Restano concorrenza/retry dell’intero servizio, rapporto scientifico completo, calibrazione/covarianze/timing, pipeline multi-epoca, prove cieche/policy, reporting e S5. Nessuna scoperta, invio o fotografia pubblicata; F4/F5, BKL-050, S10/Safety e C→F invariati. [Evidenze](docs/project/BKL-051-S4-ACTIVE-LIFECYCLE-EVIDENCE-2026-10-09.md). [Handover corrente](docs/project/HANDOVER_2026-10-09-BKL051-ACTIVE-LIFECYCLE.md).
+
+## Snapshot precedente — prima della quinta OAT
+
 ## Aggiornamento corrente — quarta OAT e recovery Owner, 9 ottobre 2026
 
 P6 Accepted con i limiti del dossier; BKL-051 OPEN. PR #524 rilasciata e verificata: 15 workflow post-merge SUCCESS e sette endpoint Pages. Quarta OAT singola autorizzata conclusa in 930,74 secondi: tre nuovi job e tre istanze native sintetiche, tutti i processi dedicati fermi; checkpoint e History conservati. Recovery con perdita di osservazione locale dopo terminale nativo già presente, dichiarazione Owner legata al dossier esatto; vecchio tentativo ancora RECOVERY_REQUIRED. Risposta cloud COMPLETED scartata localmente prima dell’ACK, riconciliazione GET senza seconda POST o replay. Valutazione personale KEEP_FOR_REVIEW e ricevuta scaricata nel browser integrato, verificata contro rapporto e stato cloud. Annullamento durante il job NON superato: richiesta arrivata dopo COMPLETED, nessun rilancio. Probe GCS isolato: due scritture con stessa generazione, una riesce e una precondizione fallisce; non prova retry CAS dell’intero servizio. Ripristino P6 100%, configurazione e permesso temporanei rimossi, verifica indipendente PASS. Restano cancellazione integrata durante il nativo, recovery prima del terminale, concorrenza completa, pipeline e validazione scientifica, reporting e accettazione S5. Nessuna scoperta, invio o fotografia pubblicata; F4/F5, BKL-050, S10/Safety e C→F invariati. [Evidenze](docs/project/BKL-051-S4-FINAL-OAT-EVIDENCE-2026-10-09.md). [Handover corrente](docs/project/HANDOVER_2026-10-09-BKL051-FINAL-OAT.md).
@@ -28,7 +34,7 @@ P6 accettata operativamente dall’Owner il 7 ottobre 2026 con tutti i limiti de
 
 | Campo | Valore |
 |---|---|
-| Versione | 8.36 |
+| Versione | 8.37 |
 | Baseline | 09/10/2026 |
 | Stato | Current root bootstrap — P6 accepted; BKL-051 Owner local/query direction approved, S1 open, S2 native solves with independent validation pending; BKL-043 lifecycle pending; S10 unavailable |
 
@@ -39,7 +45,7 @@ Il repository GitHub è l'unica fonte autorevole. Memoria, conversazioni e proje
 
 ## 2. Sequenza obbligatoria di lettura
 1. `AI_BOOTSTRAP.md`
-2. `docs/project/HANDOVER_2026-10-09-BKL051-FINAL-OAT.md`
+2. `docs/project/HANDOVER_2026-10-09-BKL051-ACTIVE-LIFECYCLE.md`
 3. `docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-07.md`
 4. `docs/project/ENTERPRISE_ARCHITECTURE_CONTEXT.md`
 5. `docs/project/REPOSITORY_KNOWLEDGE_MAP.md`
