@@ -1,5 +1,9 @@
 # Technical Debt Register
 
+## BKL-051 — residui CBAT e reporting, 9 ottobre 2026
+
+Anteprima CBAT API locale limitata a nova dichiarata; CLI/portale, dossier scientifico completo, controlli reali/provider, conferma payload/destinatario, ledger/invio/revoca/riconciliazione e TNS/VSX/estensioni MPC restano requisiti e gate. Non sono debito accettato o scope eliminato. Nessuna nuova dipendenza runtime, soglia o workaround operativo. [Dossier](BKL-051-S1-CBAT-NOVA-PREVIEW-2026-10-09.md).
+
 ## BKL-051 — residui di reporting ADES, 9 ottobre 2026
 
 Export ristretto oggetti numerati/CCD/CMO/Gaia3, senza fotometria/PSV/altre designazioni o submission. Estensioni, aggiornamento requisiti provider, sito, astrometria/timing reali, dati mobili/tracklet, policy, payload approval, altri canali e test di invio sono requisiti pianificati e gate, non debito accettato o perimetro eliminato. Nessuna nuova dipendenza runtime o workaround operativo. [Dossier](BKL-051-S1-MPC-ADES-PREVIEW-2026-10-09.md).
