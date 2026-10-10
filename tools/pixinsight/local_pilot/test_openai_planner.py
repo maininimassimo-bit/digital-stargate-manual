@@ -15,6 +15,8 @@ from .openai_planner import OpenAIPlanner, validate_evidence, VERSION
 from . import test_intake as intake_fixtures
 from .test_scientific_portal import WORKER, TOKEN
 from .transport_http import handler_for
+from .scientific_portal import ScientificPortal
+from tools.scientific_registry.ingestion_storage import Conflict
 from . import worker
 from .planning_agent import cycle, scope
 
@@ -131,6 +133,26 @@ class FlowTests(unittest.TestCase):
         self.assertEqual(self.portal.generate_openai(request_id, payload)['state'], 'AI_FAILED_NO_RETRY')
         self.assertEqual(len(sends), 1)
         self.assertNotIn('private provider', encode(self.portal.openai_state(request_id)).decode())
+
+    def test_result_storage_failure_restart_keeps_paid_send_reserved(self):
+        request_id, payload = self.enable()
+        original = self.store.put
+        def failing(key, raw, generation=0):
+            if key.startswith('science/openai-results/'):
+                raise Conflict('synthetic result write failure')
+            return original(key, raw, generation)
+        with patch.object(self.store, 'put', side_effect=failing), self.assertRaises(Conflict):
+            self.portal.generate_openai(request_id, payload)
+        restarted = ScientificPortal(self.broker, lambda: self.catalog, lambda: self.gallery, self.portal.planner)
+        self.assertEqual(restarted.generate_openai(request_id, payload)['state'], 'AI_REQUEST_RESERVED_NO_RETRY')
+        self.assertEqual(len(self.calls), 1)
+        self.assertEqual(restarted.jobs(), [])
+
+    def test_reservation_storage_failure_sends_nothing(self):
+        request_id, payload = self.enable()
+        with patch.object(self.broker, '_mutate', side_effect=Conflict('synthetic reserve failure')), self.assertRaises(Conflict):
+            self.portal.generate_openai(request_id, payload)
+        self.assertEqual(self.calls, [])
 
     def test_concurrent_same_request_one_send_and_ambiguous_crash_reserved(self):
         entered, release = threading.Event(), threading.Event()
