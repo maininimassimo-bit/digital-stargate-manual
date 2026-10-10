@@ -1,7 +1,7 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 0.7 — pannelli esterni, meteo locale e informazioni astronomiche 09/10/2026
+**Revisione:** 0.8 — backup privato e snapshot pubblico della configurazione 10/10/2026
 **Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
@@ -201,6 +201,7 @@ Registrazione aggiornata il 09/10/2026 con lo script ufficiale `postToMap.sh`; r
 | 0.5 | 09/10/2026 | Integrati progetto tecnico, NTP, calibrazione stellare, overlay notturno e pianeti, archivio meteore, verifiche e procedure di ripristino |
 | 0.6 | 09/10/2026 | Nomi delle stelle e radianti indicativi; pagina divulgativa Allsky, metadati SEO, sitemap, robots.txt e gestione Search Console |
 | 0.7 | 09/10/2026 | Pannelli fuori dalla ripresa; CloudWatcher locale, stelle rilevate, candidati della notte, previsioni ISS, Aircraft adsb.fi e informazioni Sole/Luna/alba |
+| 0.8 | 10/10/2026 | Backup configurazione privato, copia pubblica sanificata, manifest SHA-256 e procedura di ripristino controllato |
 
 Inventario correlato: [Capitolo 22](22-inventario-asset-management.md).
 
@@ -409,3 +410,7 @@ Dal 09/10/2026 acquisizione, meteo e conteggi sono presentati fuori dalla fotogr
 Il collector legge le sorgenti locali Allsky e le proiezioni esterne autorizzate, pubblicando solo i campi selezionati ogni 30 secondi. CloudWatcher proviene dal flusso locale già raccolto su EAGLE; Aircraft usa adsb.fi nell’area approssimata di Manciano. Le stelle sono conteggiate con una maschera dedicata; i candidati della notte sono fotogrammi e tracce archiviati, senza conferma automatica. ISS indica passaggi visibili previsti, non eventi riconosciuti nella foto. Dati scaduti o sorgenti non disponibili sono esplicitamente segnalati.
 
 I pannelli non sono incorporati nel JPEG o nelle anteprime Home/Status. Nessun nuovo hardware, contratto Observatory Status o comando di sicurezza è introdotto. [Sorgenti, frequenze, limiti, verifiche e ripristino](../operations/allsky-live-panels.md).
+
+## 27.27 Backup della configurazione
+
+Il 10/10/2026 è stato acquisito uno snapshot privato della configurazione e delle personalizzazioni, con copia locale per l'owner. Una copia ridotta e sanificata è conservata nel repository; non contiene credenziali, database, certificati o coordinate precise. La [procedura di backup e ripristino](../operations/allsky-configuration-backup.md) elenca inclusioni, esclusioni, checksum e limiti del collaudo. È un backup della configurazione, non un'immagine della scheda SD; il ripristino su supporto separato resta da collaudare.
