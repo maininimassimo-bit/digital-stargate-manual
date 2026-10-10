@@ -3,14 +3,22 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-049-EXT-PIAI-OPENAI-P1 |
-| Versione | 1.0 |
+| Versione | 1.1 |
 | Data | 2026-10-10 |
-| Stato | Candidato implementato; attivazione provider e OAT reale pendenti |
+| Stato | Codice integrato e configurazione API attiva; OAT provider/scientifico pendente |
 | Autorizzazione | Owner approva integrazione OpenAI e aggiornamento dei documenti, 10 ottobre 2026 |
 | Baseline | P6 Accepted con limiti; main di partenza `2edf1131` |
 | Perimetro | Pianificazione API, conferma Owner, esecutore nativo supervisionato |
 
 ## Stato corrente e risultato previsto
+
+Consegna tecnica: [PR #553](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/553), head revisionato `d14a6e9d85c1815cf8a3c1d91c2f80179134398b`, merge `432eb2a1176dc7b85b841c0d847126b2618cb52b`. ARB poi Release Quality AI-assistite separate APPROVED con zero finding; 26 check exact-head e 21 workflow post-merge, inclusa Pages, SUCCESS. Validazione locale: 164 Python, 83 Node e MkDocs strict PASS. Gate registrati nella PR con DSG-AEM-001 / W-DSG-AEM-RULESET-001.
+
+Build cloud `02a13388-3206-431f-9ac2-099632546d47` SUCCESS dal pacchetto pubblico del merge, con 14 test dedicati nel container. Immagine `sha256:27719c014dcdd1e018aa1c5def125a62f087fabbf4719e5eab28297ba271102b`; revisione `dsg-pixinsight-pilot-openai-active-v2-20261010`, 100% traffico verificato. Owner sceglie `gpt-6-luna`; cap iniziale una richiesta al giorno UTC. Secret Manager esistente, versione 1, collegato soltanto al backend; accessor aggiunto sul solo secret all'identità dedicata PixInsight, senza leggere la chiave. Health reale `OPENAI_API_PLANNING_AVAILABLE` non attesta chiamate provider: `providerRequests=null` indica conteggio non esposto, non zero.
+
+Configurazione/identità P4 ritrovate nell'archivio privato conservato su F tramite i riferimenti del runbook. Worker aggiornato al medesimo merge in directory di sorgente separata, wrapper precedente conservato, root e registry esistenti invariati. Preset M27 e M31 derivati dalle selezioni/campi già approvati; target con preset ambigui non aggiunti. Ciclo HTTPS autenticato PASS con zero richieste API pendenti e `nativeStarted=false`. Processo locale ogni 30 s avviato dopo esplicita autorizzazione Owner; nessun scheduled task, autoavvio al login o avvio nativo installato. Un arresto del PC/processo o errore del polling richiede riavvio deliberato; l'integrazione non promette disponibilità continua.
+
+Conservati tentativi di deploy: prima configurazione modello malformata rifiutata all'avvio, nessuna chiamata provider; corretta prima dello switch riuscito. Il primo avvio del processo in background è stato rifiutato dal controllo automatico; ripetuto solo dopo autorizzazione Owner esplicita. Provider reale, usage/costo effettivo e OAT scientifico completo restano **non verificati**. La configurazione attiva non promuove acceptance scientifica o P6.
 
 Il pilota accettato usa SESSION_ASSISTED: la chat interpreta il prompt, verifica i master e propone la ricetta. La nuova modalità OPENAI_API_PLANNING trasferisce la pianificazione al servizio già esistente e a un collegamento locale di pianificazione. Non cambia l'accettazione P6, l'archivio BKL-049 o l'assistente deterministico BKL-046. BKL-051 e i suoi residui restano separati.
 
@@ -79,13 +87,13 @@ python -m tools.pixinsight.local_pilot.planning_agent --config <private-worker-c
 
 Il token worker viene fornito dal wrapper DPAPI esistente per la durata del processo; nessun nuovo recupero o stampa della credenziale. Nessun servizio Windows/scheduled task viene installato da questo codice. Il loop continua finché il processo è attivo, con polling ogni 30 s; il costo cloud del polling deve essere incluso nella configurazione operativa. Ctrl+C ferma la pianificazione senza annullare i job. Il lancio PixInsight resta separato e supervisionato.
 
-Prima del live: fissare modello/costi, inserire il secret protetto, build del codice revisionato, verificare digest e deploy sul servizio previsto; aggiornare prima il worker PC compatibile con la nuova modalità coda. Non riattivare il servizio isolato P6 o il lab BKL-051. Configurazione cloud reale, chiave e OAT provider non sono verificati dal presente candidato.
+Configurazione cloud e collegamento worker sono ora verificati nei limiti riportati sopra. Non riattivare il servizio isolato P6 o il lab BKL-051. La chiave non è stata acquisita dall'assistente; accesso provider effettivo e OAT restano da verificare mediante richiesta Owner con consenso dalla pagina.
 
 ## Validazione e gate residui
 
 La suite dedicata verifica payload minimizzato, consenso/provider disabilitato, schema/refusal/tool/incomplete, parametri fuori limite, duplicati e concorrenza, cap giornaliero, withdrawal, autenticazione HTTP reale loopback, conferma esatta e fingerprint locale. Provider, Google e storage sono sintetici nelle prove nuove; nessuna fatturazione o elaborazione nativa è attestata dai test.
 
-Le regressioni Python/Node e MkDocs devono essere registrate sul codice finale. CI exact-head, ARB poi Release Quality separate, merge/post-merge e Pages restano gate di consegna. Nessuna review AI-assistita viene presentata come approvazione umana indipendente. Il candidato non è dichiarato produzione accettata.
+Regressioni, CI exact-head, ARB poi Release Quality separate, merge/post-merge e Pages del codice sono registrati sopra. La presente riconciliazione documentale richiede i propri gate; le verifiche del codice non attestano il nuovo head documentale. Nessuna review AI-assistita viene presentata come approvazione umana indipendente. Il servizio non è dichiarato scientificamente accettato per la nuova modalità.
 
 OAT richiesto: un campo già revisionato, verifica worker → provider reale → piano visualizzato → conferma Owner → copie/nativo supervisionato → risultato privato; verificare assenza di duplicati, usage effettivo, originali invariati e rollback. Non ripetere automaticamente una chiamata ambigua per ottenere un test PASS.
 
