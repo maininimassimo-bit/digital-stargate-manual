@@ -29,6 +29,8 @@ jobs:
         run: node --test tools/scientific_transients/lab_owner.test.mjs
       - name: Verify catalog formal covariance and shared-reference epoch blocks
         run: python -m unittest tools.scientific_transients.test_reference_covariance -v
+      - name: Verify private retained report archive without native or cloud access
+        run: python -m unittest tools.scientific_transients.test_report_bundle -v
       - name: Verify bounded isolated gateway and public source staging without cloud access
         run: python -m unittest tools.scientific_transients.test_lab_gateway tools.scientific_transients.test_lab_runtime tools.scientific_transients.test_lab_release_plan tools.scientific_transients.test_lab_cli -v
       - name: Test dedicated private queue lifecycle and HTTP roles
