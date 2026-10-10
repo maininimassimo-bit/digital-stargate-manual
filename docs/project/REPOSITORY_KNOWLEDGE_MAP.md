@@ -1,5 +1,11 @@
 # Repository Knowledge Map
 
+## Aggiornamento corrente — accessibilità rapporto locale
+
+Correzione candidata del renderer del rapporto locale: regioni scorrevoli nominate e raggiungibili da tastiera, caption/focus e identificativi lunghi a capo. Quattro test aggiuntivi; gate exact-head, ARB poi RQ e post-merge nelle ricevute del presente incremento. Il candidato privato precedente aveva 12 test PASS e verifica browser circoscritta, non acceptance S5. JSON, sigillo, unità, coda e authority invariati; rapporti storici conservati. BKL-051 OPEN / NOT_VALIDATED, tutti i residui S1–S5 e reporting interi; cloud isolato concluso/spento, nessun nuovo nativo/cloud/invio/fotografia. P6/F4/F5/BKL-050/Safety/C→F invariati. [Dossier](BKL-051-S4-LOCAL-REPORT-ACCESSIBILITY-2026-10-10.md). [Handover corrente](HANDOVER_2026-10-10-BKL051-LOCAL-REPORT-ACCESSIBILITY.md).
+
+## Snapshot precedente — prima della correzione del rapporto
+
 ## Aggiornamento corrente — archivio privato del rapporto conservato
 
 [Exporter locale](BKL-051-S4-RETAINED-REPORT-BUNDLE-2026-10-10.md), `tools/scientific_transients/report_bundle.py` e cinque test sintetici: rapporto/journal/artefatti referenziati nello stesso ZIP privato con CRC/SHA256, nessuna scansione di file estranei o esecuzione. Dipendenze complete e validazione scientifica restano esterne; CI/review/rilascio propri. [Handover](HANDOVER_2026-10-10-BKL051-RETAINED-REPORT-BUNDLE.md). BKL-051 OPEN / NOT_VALIDATED, cloud isolato spento, P6/F4/F5/BKL-050/Safety/C→F invariati.

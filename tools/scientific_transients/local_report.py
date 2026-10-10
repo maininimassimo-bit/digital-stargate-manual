@@ -95,7 +95,7 @@ def render(value):
     def esc(v): return html.escape('sconosciuta' if v is None else 'sì' if v is True else 'no' if v is False else str(v))
     parts = ['<!doctype html><html lang="it"><meta charset="utf-8"><meta name="viewport" content="width=device-width">',
              '<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;">',
-             '<title>Rapporto scientifico privato</title><style>body{font:17px system-ui;max-width:1100px;margin:2rem auto;padding:1rem;background:#101823;color:#edf3ff}td,th{padding:.5rem;text-align:left;border-bottom:1px solid #536070}table{border-collapse:collapse}code{overflow-wrap:anywhere}.scroll{overflow:auto}</style>',
+             '<title>Rapporto scientifico privato</title><style>body{overflow-wrap:anywhere;font:17px system-ui;max-width:1100px;margin:2rem auto;padding:1rem;background:#101823;color:#edf3ff}td,th{padding:.5rem;text-align:left;border-bottom:1px solid #536070}table{border-collapse:collapse;width:100%;min-width:640px}code,td{overflow-wrap:anywhere}.scroll{overflow:auto;max-width:100%}.scroll:focus-visible{outline:3px solid #ffd479;outline-offset:3px}caption{font-weight:600;text-align:left;padding:.5rem}</style>',
              '<h1>Rapporto scientifico privato</h1><p>Completamento tecnico. Validazione scientifica: NOT_VALIDATED. ',
              'Questo rapporto non attesta un candidato, una scoperta, un limite di non rilevamento o una segnalazione.</p>',
              '<p>Ricevuta tecnica mostrata nel portale: <code>' + esc(value['technicalReportSha256']) + '</code></p>',
@@ -103,7 +103,7 @@ def render(value):
              '<p>Unità del flusso: NORMALIZED_SAMPLE_SUM, non ADU calibrati. Varianza completa e significatività sconosciute. ',
              'Coordinate: PI_NATIVE_GEOMETRIC. Misure a posizioni dichiarate; nessuna ricerca cieca attestata.</p>']
     for measurement in value['measurements']:
-        parts.append('<h2>Operazione ' + esc(measurement['operationRef']) + '</h2><div class="scroll"><table><thead><tr>')
+        parts.append('<h2>Operazione ' + esc(measurement['operationRef']) + '</h2><div class="scroll" role="region" tabindex="0" aria-label="Tabella delle misure, scorrimento orizzontale"><table><caption>Misure diagnostiche; incertezze complete non disponibili</caption><thead><tr>')
         keys = ['sourceRef', 'fluxNormalizedSampleSum', 'background', 'clipped', 'fullVariance', 'significance']
         labels = ['Sorgente', 'Flusso (somma normalizzata)', 'Fondo', 'Apertura tagliata', 'Varianza completa', 'Significatività']
         parts.extend('<th scope="col">' + esc(k) + '</th>' for k in labels)
