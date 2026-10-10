@@ -1,5 +1,11 @@
 # Digital StarGate Enterprise Architecture Context
 
+## Aggiornamento corrente — leggibilità dossier preliminare
+
+Dossier preliminare privato con note e percorsi lunghi a capo, viewport e struttura main; due regressioni permanenti. Candidato byte-identico verificato manualmente su schermate Owner, con viewport/zoom non attestati e senza audit completo di accessibilità. Gate del rilascio esatto nella PR e ricevute. BKL-051 OPEN / NOT_VALIDATED, residui S1–S5 interi; nessun nuovo nativo/cloud/invio/spesa. Rapporti storici immutabili; P6/F4/F5/BKL-050/Safety/C→F invariati. [Dossier](BKL-051-S4-DRAFT-READABILITY-2026-10-10.md). [Handover corrente](HANDOVER_2026-10-10-BKL051-DRAFT-READABILITY.md).
+
+## Snapshot precedente — prima della leggibilità del dossier
+
 ## Aggiornamento corrente — accessibilità rapporto locale
 
 Correzione candidata del renderer del rapporto locale: regioni scorrevoli nominate e raggiungibili da tastiera, caption/focus e identificativi lunghi a capo. Quattro test aggiuntivi; gate exact-head, ARB poi RQ e post-merge nelle ricevute del presente incremento. Il candidato privato precedente aveva 12 test PASS e verifica browser circoscritta, non acceptance S5. JSON, sigillo, unità, coda e authority invariati; rapporti storici conservati. BKL-051 OPEN / NOT_VALIDATED, tutti i residui S1–S5 e reporting interi; cloud isolato concluso/spento, nessun nuovo nativo/cloud/invio/fotografia. P6/F4/F5/BKL-050/Safety/C→F invariati. [Dossier](BKL-051-S4-LOCAL-REPORT-ACCESSIBILITY-2026-10-10.md). [Handover corrente](HANDOVER_2026-10-10-BKL051-LOCAL-REPORT-ACCESSIBILITY.md).
