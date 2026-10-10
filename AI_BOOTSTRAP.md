@@ -1,5 +1,9 @@
 # Digital StarGate AI Bootstrap
 
+## Incremento PixInsight OpenAI autorizzato, candidato
+
+Owner approva il 10 ottobre l’integrazione API OpenAI e l’aggiornamento tecnico. Candidato di pianificazione implementato: opt-in dalla pagina, worker locale con radici/preset verificati, Responses strutturata, prenotazione CAS di un solo invio, limite giornaliero e provenienza nel piano confermato. Chiave solo backend, master locali, nessun avvio nativo automatico. Attivazione protetta, provider/OAT reale e gate di rilascio restano pendenti; P6 Accepted e BKL-051 invariati. [Contratto e gate](docs/project/PIAI-OPENAI-PLANNING-2026-10-10.md). Il lavoro BKL-051 corrente rimane quello documentato sotto.
+
 ## Aggiornamento corrente — accessibilità rapporto locale
 
 Correzione candidata del renderer del rapporto locale: regioni scorrevoli nominate e raggiungibili da tastiera, caption/focus e identificativi lunghi a capo. Quattro test aggiuntivi; gate exact-head, ARB poi RQ e post-merge nelle ricevute del presente incremento. Il candidato privato precedente aveva 12 test PASS e verifica browser circoscritta, non acceptance S5. JSON, sigillo, unità, coda e authority invariati; rapporti storici conservati. BKL-051 OPEN / NOT_VALIDATED, tutti i residui S1–S5 e reporting interi; cloud isolato concluso/spento, nessun nuovo nativo/cloud/invio/fotografia. P6/F4/F5/BKL-050/Safety/C→F invariati. [Dossier](docs/project/BKL-051-S4-LOCAL-REPORT-ACCESSIBILITY-2026-10-10.md). [Handover corrente](docs/project/HANDOVER_2026-10-10-BKL051-LOCAL-REPORT-ACCESSIBILITY.md).

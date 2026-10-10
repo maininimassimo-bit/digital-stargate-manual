@@ -37,7 +37,7 @@ class Transport:
         return self.request(path, value)
 
     def request(self, path, value=None):
-        require(re.fullmatch(r"/v1/worker/(?:claim|PIAI_[a-f0-9]{32}/report|science/register|science/intakes(?:/[a-f0-9]{32}/(?:plan|sources|preparation|prepared))?|science/PIAI_[a-f0-9]{32}/(?:context|result|revisions/[a-f0-9]{32}/result))", path), "ROUTE_INVALID")
+        require(re.fullmatch(r"/v1/worker/(?:claim|PIAI_[a-f0-9]{32}/report|science/register|science/intakes(?:/[a-f0-9]{32}/(?:plan|sources|preparation|prepared|openai-plan))?|science/PIAI_[a-f0-9]{32}/(?:context|result|revisions/[a-f0-9]{32}/result))", path), "ROUTE_INVALID")
         raw = encode(value) if value is not None else None
         limit = 9 * 1024 * 1024 if path.endswith('/result') else 65536 if '/science/intakes/' in path else 16384
         require(raw is None or len(raw) <= limit, "REQUEST_SIZE")
@@ -131,7 +131,7 @@ class SessionWorker:
             envelope = remote["request"]
             require(set(envelope) == {"schemaVersion", "requestId", "inputRef", "recipe", "aiMode"} and
                     envelope["schemaVersion"] == "1.0" and opaque(envelope["requestId"]) and opaque(envelope["inputRef"]) and
-                    remote["jobId"] == "PIAI_" + envelope["requestId"] and envelope["aiMode"] == "SESSION_ASSISTED" and
+                    remote["jobId"] == "PIAI_" + envelope["requestId"] and envelope["aiMode"] in {'SESSION_ASSISTED', 'OPENAI_API_PLANNING'} and
                     envelope["recipe"] in {worker.RECIPE} | worker.NONLINEAR_RECIPES, "ENVELOPE_INVALID")
             require(isinstance(remote.get("leaseToken"), str) and re.fullmatch(r"[a-f0-9]{64}", remote["leaseToken"]) and
                     remote.get("rootId") == self.root_id and type(remote.get("sequence")) is int and

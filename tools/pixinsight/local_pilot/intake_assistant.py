@@ -100,10 +100,10 @@ def _propose_locked(config_path, intake, plan, mapping, transport):
     trace=None
     if prepared:
         from .preparation_bridge import prepared_inputs
-        from .preparation_flow import sha
+        from .preparation_flow import sha as preparation_sha
         require(mapping is None,'APPROVED_PREPARED_INPUTS_REQUIRED')
         inputs,trace=prepared_inputs(config['workerRoot'],intake['selection']['requestId'])
-        require(intake['preparationResultSha256']==sha(intake['preparationResult']) and
+        require(intake['preparationResultSha256']==preparation_sha(intake['preparationResult']) and
                 all(trace[k]==intake['preparationResult'][k] for k in trace if k!='requestId'),'PREPARATION_REMOTE_RESULT_BINDING')
     elif plan['recipe'] == worker.NONLINEAR_RECIPE:
         inputs = inspect(intake, mapping)
@@ -112,6 +112,11 @@ def _propose_locked(config_path, intake, plan, mapping, transport):
         inputs = [{k:r[k] for k in ('role','path','sha256','imageIndex','width','height')} for r in rows]
     request = {'schemaVersion': '1.0', 'jobId': 'IntakeRegistration', 'recipe': plan['recipe'],
                'background': plan['background'], 'processing': plan['processing'], 'inputs': inputs}
+    from .openai_flow import api_requested
+    if api_requested(intake['selection']):
+        draft = intake.get('openai', {})
+        require(draft.get('state') == 'AI_DRAFT_READY' and draft.get('plan') == plan and
+                draft['evidence']['inputSetSha256'] == sha(inputs), 'AI_LOCAL_INPUT_BINDING')
     if 'field' in plan:
         request['field'] = plan['field']
     if trace:request['preparationTrace']=trace

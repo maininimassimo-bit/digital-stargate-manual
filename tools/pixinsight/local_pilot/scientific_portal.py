@@ -7,6 +7,7 @@ import re
 from .broker import decode, encode, require, opaque
 from .worker import NONLINEAR_RECIPE, NONLINEAR_RECIPES, RECIPE_MODES, actions
 from .intake import IntakeMixin
+from .openai_flow import OpenAIFlowMixin
 from .scientific_revisions import RevisionMixin
 from .historical_source import historical, validate_historical, historical_review, historical_intake_enabled
 from tools.scientific_registry.ingestion_storage import immutable, Conflict
@@ -35,10 +36,11 @@ def known_target(value):
     return isinstance(value,str) and bool(value.strip()) and value.strip().upper() not in {'UNKNOWN','UNSPECIFIED','N/A'}
 
 
-class ScientificPortal(IntakeMixin, RevisionMixin):
-    def __init__(self, broker, catalog_loader, gallery_loader):
+class ScientificPortal(OpenAIFlowMixin, IntakeMixin, RevisionMixin):
+    def __init__(self, broker, catalog_loader, gallery_loader, planner=None):
         self.broker, self.store = broker, broker.store
         self.catalog_loader, self.gallery_loader = catalog_loader, gallery_loader
+        self.planner = planner
 
     def register(self, value):
         fields={"inputRef", "target", "recipe", "manifestSha256"}
@@ -79,7 +81,8 @@ class ScientificPortal(IntakeMixin, RevisionMixin):
         parsed = decode(catalog)
         require(parsed.get("schemaVersion") == "1.5" and parsed.get("catalogStatus") == "VERSIONED_ANALYTICS_PROJECTION", "CATALOG_PROFILE")
         gallery = self.gallery_loader()
-        return {"inputs": inputs, "historicalIntakeEnabled": historical_intake_enabled(), "catalogSha256": digest(catalog),
+        return {"inputs": inputs, "openaiPlanningEnabled": self.planner is not None,
+                "historicalIntakeEnabled": historical_intake_enabled(), "catalogSha256": digest(catalog),
                 "sessions": [{"sessionId": s["sessionId"], "target": s["target"], "observationDate": s.get("observationDate")}
                              for s in parsed["sessions"] if known_target(s.get('target'))],
                 "images": [{k: row[k] for k in ("imageId", "imageVersionId", "workflowId", "title", "target")}
@@ -99,7 +102,7 @@ class ScientificPortal(IntakeMixin, RevisionMixin):
                     intent["proposalSha256"] == digest(saved_plan) and
                     value["inputRef"] == intent["plan"]["inputRef"], "APPROVED_PLAN_REQUIRED")
             expected = {k:v for k,v in intent['intake']['selection'].items()
-                        if k not in {'masterDirectory', 'prompt', 'sourceProfile'}}
+                        if k not in {'masterDirectory', 'prompt', 'sourceProfile', 'openaiPlanning'}}
             expected['inputRef'] = intent['plan']['inputRef']
             require(value == expected, 'APPROVED_SELECTION_REQUIRED')
         key = "science/contexts/PIAI_" + value["requestId"]
@@ -143,7 +146,8 @@ class ScientificPortal(IntakeMixin, RevisionMixin):
                 immutable(self.store, "science/catalogs/" + digest(catalog), catalog)
             immutable(self.store, key, encode(context))
         envelope = {"schemaVersion": "1.0", "requestId": value["requestId"], "inputRef": value["inputRef"],
-                    "recipe": context['input']['recipe'], "aiMode": "SESSION_ASSISTED"}
+                    "recipe": context['input']['recipe'],
+                    "aiMode": context.get('intent', {}).get('intake', {}).get('aiMode', 'SESSION_ASSISTED')}
         return self.broker.create(envelope, digest(encode(context)))
 
     def context(self, job_id):

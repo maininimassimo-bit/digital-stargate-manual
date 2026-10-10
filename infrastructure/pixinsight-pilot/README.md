@@ -1,5 +1,9 @@
 # Current P5 technical result (2026-10-05)
 
+## Estensione OpenAI — candidato del 10 ottobre 2026
+
+Owner approva il 10 ottobre l’integrazione API OpenAI e l’aggiornamento tecnico. Candidato di pianificazione implementato: opt-in dalla pagina, worker locale con radici/preset verificati, Responses strutturata, prenotazione CAS di un solo invio, limite giornaliero e provenienza nel piano confermato. Chiave solo backend, master locali, nessun avvio nativo automatico. Attivazione protetta, provider/OAT reale e gate di rilascio restano pendenti; P6 Accepted e BKL-051 invariati. [Documentazione tecnica aggiornata](../../docs/project/PIAI-OPENAI-PLANNING-2026-10-10.md). Le sezioni precedenti descrivono la modalità SESSION_ASSISTED storica.
+
 > Stato corrente al 6 ottobre 2026: [baseline dei servizi](../../docs/project/CURRENT_TECHNICAL_BASELINE_2026-10-06.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
 
 Real Owner portal request, 16 exact M27 sessions and published parent, new supervised native execution (29 operations/15 checkpoints), verified unchanged masters and all final pixels, private delivery and authenticated preview/29 workflow steps: PASS. Stored asset integrity verified by administrative CLI/local comparison; browser local download persistence remains unverified (Owner check requested). Deployed revision `dsg-pixinsight-pilot-p5-target-01` uses reviewed PR #487 digest. P6 and human scientific acceptance remain open. Published M27 unchanged; no automatic publication or paid AI API request. Earlier pending statements below are historical snapshots.
