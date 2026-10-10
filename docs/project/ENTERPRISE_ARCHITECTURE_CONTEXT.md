@@ -2,7 +2,7 @@
 
 ## Incremento autorizzato — pianificazione OpenAI, 10 ottobre 2026
 
-Owner approva il 10 ottobre l’integrazione API OpenAI e l’aggiornamento tecnico. Candidato di pianificazione implementato: opt-in dalla pagina, worker locale con radici/preset verificati, Responses strutturata, prenotazione CAS di un solo invio, limite giornaliero e provenienza nel piano confermato. Chiave solo backend, master locali, nessun avvio nativo automatico. Attivazione protetta, provider/OAT reale e gate di rilascio restano pendenti; P6 Accepted e BKL-051 invariati. [Contratto e runbook](PIAI-OPENAI-PLANNING-2026-10-10.md).
+Integrazione autorizzata il 10 ottobre, rilasciata con PR #553 e runtime attivo riconciliato nella PR #555. Primo collaudo reale M27: provider gpt-6-luna, piano registrato e visualizzato, conferma Owner esplicita, un solo job QUEUED e una sola prenotazione API; usage 455 input / 769 output. Alias privato M 27/M27 verificato sui master con backup, nessuna nuova selezione scientifica. Chiave solo backend, master locali, nessun avvio nativo automatico. OAT nativo/scientifico e costo monetario restano non verificati; P6 Accepted e BKL-051 invariati. [Contratto, esito e runbook](PIAI-OPENAI-PLANNING-2026-10-10.md).
 
 ## Aggiornamento corrente — leggibilità dossier preliminare
 

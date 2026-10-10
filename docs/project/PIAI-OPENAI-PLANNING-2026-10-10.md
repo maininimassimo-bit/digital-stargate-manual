@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-049-EXT-PIAI-OPENAI-P1 |
-| Versione | 1.1 |
+| Versione | 1.2 |
 | Data | 2026-10-10 |
-| Stato | Codice integrato e configurazione API attiva; OAT provider/scientifico pendente |
+| Stato | Provider reale e conferma Owner verificati; job in coda, OAT nativo/scientifico pendente |
 | Autorizzazione | Owner approva integrazione OpenAI e aggiornamento dei documenti, 10 ottobre 2026 |
 | Baseline | P6 Accepted con limiti; main di partenza `2edf1131` |
 | Perimetro | Pianificazione API, conferma Owner, esecutore nativo supervisionato |
@@ -18,7 +18,17 @@ Build cloud `02a13388-3206-431f-9ac2-099632546d47` SUCCESS dal pacchetto pubblic
 
 Configurazione/identità P4 ritrovate nell'archivio privato conservato su F tramite i riferimenti del runbook. Worker aggiornato al medesimo merge in directory di sorgente separata, wrapper precedente conservato, root e registry esistenti invariati. Preset M27 e M31 derivati dalle selezioni/campi già approvati; target con preset ambigui non aggiunti. Ciclo HTTPS autenticato PASS con zero richieste API pendenti e `nativeStarted=false`. Processo locale ogni 30 s avviato dopo esplicita autorizzazione Owner; nessun scheduled task, autoavvio al login o avvio nativo installato. Un arresto del PC/processo o errore del polling richiede riavvio deliberato; l'integrazione non promette disponibilità continua.
 
-Conservati tentativi di deploy: prima configurazione modello malformata rifiutata all'avvio, nessuna chiamata provider; corretta prima dello switch riuscito. Il primo avvio del processo in background è stato rifiutato dal controllo automatico; ripetuto solo dopo autorizzazione Owner esplicita. Provider reale, usage/costo effettivo e OAT scientifico completo restano **non verificati**. La configurazione attiva non promuove acceptance scientifica o P6.
+Conservati tentativi di deploy: prima configurazione modello malformata rifiutata all'avvio, nessuna chiamata provider; corretta prima dello switch riuscito. Il primo avvio del processo in background è stato rifiutato dal controllo automatico; ripetuto solo dopo autorizzazione Owner esplicita. La configurazione attiva non promuove acceptance scientifica o P6.
+
+### Collaudo reale del 10 ottobre 2026
+
+Owner autorizza il collaudo dalla pagina e successivamente conferma espressamente il piano presentato. Campo LRGB M27 già revisionato: quattro master locali, geometria 4634 × 2808, indice 0, associazioni e versione di riferimento già registrate. Il primo accesso alla pagina incontra un 503 delle opzioni causato dalla dipendenza gallery temporaneamente indisponibile (429); ripetuti soltanto accesso/letture dopo il recupero, senza invii API duplicati.
+
+La prima verifica locale richiede review perché il catalogo identifica `M 27` e il preset privato usa `M27`. Verificati offline scope, mapping e fingerprint dei quattro master, aggiunto soltanto l'alias esatto al preset privato con backup. Nessuna selezione scientifica nuova o modifica del codice worker; la stessa richiesta prosegue.
+
+Provider reale `gpt-6-luna` PASS: risposta strutturata valida e provenienza conservata privatamente, 455 token input, 769 output, 1224 totali. Piano registrato dopo rilettura degli input, visualizzato nel browser e confermato su autorizzazione Owner: 29 operazioni, 15 checkpoint. Stato durevole verificato: una prenotazione provider e un solo job corrispondente `QUEUED`; aggiornare la pagina non ha generato altre prenotazioni. Usage verificato, addebito monetario **non verificato**. Il contatore nullo della health non viene usato come prova.
+
+Il piano dichiara esplicitamente di non avere accesso alle immagini e di non attestare misure o qualità scientifica. Il PC registra `nativeStarted=false`; nessun nuovo avvio PixInsight, risultato, pubblicazione o acceptance scientifica. Il messaggio della pagina per `PLAN_READY` viene corretto per indicare che il PC ha già verificato e registrato il piano; il draft provider conservato resta `AI_DRAFT_READY`, distinto dallo stato del piano/job. Ricevute ricche, prompt, identificativi provider e screenshot contenenti percorsi restano privati.
 
 Il pilota accettato usa SESSION_ASSISTED: la chat interpreta il prompt, verifica i master e propone la ricetta. La nuova modalità OPENAI_API_PLANNING trasferisce la pianificazione al servizio già esistente e a un collegamento locale di pianificazione. Non cambia l'accettazione P6, l'archivio BKL-049 o l'assistente deterministico BKL-046. BKL-051 e i suoi residui restano separati.
 
@@ -87,7 +97,7 @@ python -m tools.pixinsight.local_pilot.planning_agent --config <private-worker-c
 
 Il token worker viene fornito dal wrapper DPAPI esistente per la durata del processo; nessun nuovo recupero o stampa della credenziale. Nessun servizio Windows/scheduled task viene installato da questo codice. Il loop continua finché il processo è attivo, con polling ogni 30 s; il costo cloud del polling deve essere incluso nella configurazione operativa. Ctrl+C ferma la pianificazione senza annullare i job. Il lancio PixInsight resta separato e supervisionato.
 
-Configurazione cloud e collegamento worker sono ora verificati nei limiti riportati sopra. Non riattivare il servizio isolato P6 o il lab BKL-051. La chiave non è stata acquisita dall'assistente; accesso provider effettivo e OAT restano da verificare mediante richiesta Owner con consenso dalla pagina.
+Configurazione cloud, collegamento worker, accesso provider e conferma del primo piano sono verificati nei limiti riportati sopra. Non riattivare il servizio isolato P6 o il lab BKL-051. La chiave non è stata acquisita dall'assistente; OAT nativo/scientifico resta da completare sul job confermato con avvio supervisionato.
 
 ## Validazione e gate residui
 
