@@ -1,5 +1,9 @@
 # BKL-049-EXT-PIAI — Pilota locale PixInsight con IA
 
+## Estensione OpenAI — candidato del 10 ottobre 2026
+
+Owner approva il 10 ottobre l’integrazione API OpenAI e l’aggiornamento tecnico. Candidato di pianificazione implementato: opt-in dalla pagina, worker locale con radici/preset verificati, Responses strutturata, prenotazione CAS di un solo invio, limite giornaliero e provenienza nel piano confermato. Chiave solo backend, master locali, nessun avvio nativo automatico. Attivazione protetta, provider/OAT reale e gate di rilascio restano pendenti; P6 Accepted e BKL-051 invariati. [Documentazione tecnica aggiornata](../../project/PIAI-OPENAI-PLANNING-2026-10-10.md). Le sezioni precedenti descrivono la modalità SESSION_ASSISTED storica.
+
 ## Continuità del 7 ottobre 2026
 
 P6 resta aperta; ultima elaborazione SHO reale accettata privatamente, senza nuova certificazione end-to-end del portale. [Handover corrente](../../project/HANDOVER_2026-10-07-P6-BKL051.md). L'Owner ha approvato [BKL-051](../../project/BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md) come prossimo sviluppo dopo chiusura e accettazione operativa P6. Nessuna elaborazione o chiusura viene avviata dalla sola pianificazione.

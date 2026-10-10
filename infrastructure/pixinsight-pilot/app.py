@@ -8,6 +8,7 @@ from tools.pixinsight.local_pilot.scientific_portal import ScientificPortal
 from tools.pixinsight.local_pilot.broker import decode
 import urllib.request
 from tools.scientific_transients.queue import TransientQueue
+from tools.pixinsight.local_pilot.openai_planner import OpenAIPlanner
 
 
 def transient_component(store, legacy_worker_id, legacy_digest):
@@ -45,7 +46,8 @@ def main():
     broker = Broker(store, settings[names[2]])
     scientific = ScientificPortal(broker,
         lambda: public_bytes(settings[names[6]] + "/digital-stargate-manual/data/scientific-session-catalog.json"),
-        lambda: decode(public_bytes("https://dsg-scientific-photo-ingestion-183451329061.europe-west1.run.app/v1/gallery")))
+        lambda: decode(public_bytes("https://dsg-scientific-photo-ingestion-183451329061.europe-west1.run.app/v1/gallery")),
+        planner=OpenAIPlanner.from_environment())
     transient, transient_digest = transient_component(store, settings[names[2]], settings[names[3]])
     handler = handler_for(broker,
         lambda token: google_owner(token, settings[names[4]], settings[names[5]]), settings[names[6]], settings[names[3]], scientific,

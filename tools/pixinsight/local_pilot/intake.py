@@ -38,10 +38,15 @@ class IntakeMixin(PreparationFlowMixin):
         return decode(raw)
 
     def create_intake(self, value):
+        from .openai_flow import api_requested
+        from .openai_planner import safe_text
         fields = {'requestId', 'masterDirectory', 'prompt', 'catalogSha256', 'sessionIds',
                   'parent', 'title', 'processingDate', 'associationConfirmed'}
-        require(isinstance(value, dict) and set(value) in (fields, fields | {'sourceProfile'},
-                fields | {'historicalSource'}, fields | {'sourceProfile', 'historicalSource'}) and opaque(value['requestId']), 'INTAKE_FIELDS')
+        optional = {'sourceProfile', 'historicalSource', 'openaiPlanning'}
+        require(isinstance(value, dict) and fields <= set(value) <= fields | optional and opaque(value['requestId']), 'INTAKE_FIELDS')
+        if 'openaiPlanning' in value:
+            require(api_requested(value), 'AI_DATA_TRANSFER_CONSENT_REQUIRED')
+            safe_text(value['prompt'])
         local_directory(value['masterDirectory'])
         source_profile(value)
         require(isinstance(value['prompt'], str) and 1 <= len(value['prompt'].strip()) <= 4000 and
@@ -51,6 +56,7 @@ class IntakeMixin(PreparationFlowMixin):
         if existing:
             require(decode(existing)['selection'] == value, 'IDEMPOTENCY_CONFLICT')
         else:
+            require(not api_requested(value) or self.planner is not None, 'AI_PROVIDER_DISABLED')
             require(not historical(value) or historical_intake_enabled(), 'HISTORICAL_INTAKE_SUSPENDED')
             catalog = self.catalog_loader() if not historical(value) else None
             require(historical(value) or hashlib.sha256(catalog).hexdigest() == value['catalogSha256'], 'CATALOG_CHANGED_REFRESH')
@@ -69,7 +75,8 @@ class IntakeMixin(PreparationFlowMixin):
                 require(len(rows) == 1 and same_target(rows[0]['target'], review['target']), 'PARENT_NOT_CURRENT')
             immutable(self.store, 'science/intakes/' + value['requestId'], encode({
                 'selection': copy.deepcopy(value), 'createdAt': self.broker.clock().isoformat(),
-                'target': review['target'], 'authority': 'PLANNING_ONLY', 'aiMode': 'SESSION_ASSISTED'}))
+                'target': review['target'], 'authority': 'PLANNING_ONLY',
+                'aiMode': 'OPENAI_API_PLANNING' if api_requested(value) else 'SESSION_ASSISTED'}))
         def index(state, _now):
             require(value['requestId'] not in state.get('withdrawnIntakes', []), 'INTAKE_WITHDRAWN')
             rows = state.setdefault('scientificIntakes', [])
@@ -93,6 +100,7 @@ class IntakeMixin(PreparationFlowMixin):
                 decode(approval_raw)['sourcePlanSha256'] == sha(source_plan))
             jobs = [j for j in state['jobs'] if j['jobId'] == 'PIAI_' + request_id]
             rows.append({**item, 'plan': plan, 'proposalSha256': sha(plan) if plan else None,
+                         'openai': self.openai_state(request_id) if 'openaiPlanning' in item['selection'] else None,
                          **self.preparation_state(request_id),
                          'sourcePlan':source_plan,'sourcePlanSha256':sha(source_plan) if source_plan else None,
                          'sourceSelectionApproved':source_approved,
@@ -186,6 +194,9 @@ class IntakeMixin(PreparationFlowMixin):
         require(len({(m['width'], m['height']) for m in masters}) == 1, 'PLAN_GEOMETRY')
         plan = {**copy.deepcopy(value), 'steps': [a[1] for a in actions(value['recipe'])],
                 'checkpointCount': len(expected_outputs(value['recipe'])), 'verification': 'WORKER_REPORTED_NOT_ATTESTED'}
+        from .openai_flow import api_requested
+        if api_requested(intake['selection']):
+            plan['aiProvenance'] = self.validate_openai_plan(request_id, value)
         if prepared:
             plan['preparation']={'plan':preparation['preparationPlan'],'planSha256':preparation['preparationPlanSha256'],
                                  'result':preparation['preparationResult'],'resultSha256':preparation['preparationResultSha256']}
@@ -199,6 +210,6 @@ class IntakeMixin(PreparationFlowMixin):
         require(raw is not None, 'PLAN_PENDING')
         plan = decode(raw)
         require(value['proposalSha256'] == sha(plan), 'PLAN_CHANGED')
-        selection = {k: v for k, v in intake['selection'].items() if k not in {'masterDirectory', 'prompt', 'sourceProfile'}}
+        selection = {k: v for k, v in intake['selection'].items() if k not in {'masterDirectory', 'prompt', 'sourceProfile', 'openaiPlanning'}}
         selection['inputRef'] = plan['inputRef']
         return self.create(selection, intent={'intake': intake, 'plan': plan, 'proposalSha256': sha(plan)})

@@ -1,5 +1,9 @@
 # P5b — master, prompt e profili scientifici
 
+## Estensione OpenAI — candidato del 10 ottobre 2026
+
+Owner approva il 10 ottobre l’integrazione API OpenAI e l’aggiornamento tecnico. Candidato di pianificazione implementato: opt-in dalla pagina, worker locale con radici/preset verificati, Responses strutturata, prenotazione CAS di un solo invio, limite giornaliero e provenienza nel piano confermato. Chiave solo backend, master locali, nessun avvio nativo automatico. Attivazione protetta, provider/OAT reale e gate di rilascio restano pendenti; P6 Accepted e BKL-051 invariati. [Documentazione tecnica aggiornata](PIAI-OPENAI-PLANNING-2026-10-10.md). Le sezioni precedenti descrivono la modalità SESSION_ASSISTED storica.
+
 > Stato corrente al 6 ottobre 2026: [handover M31](HANDOVER_2026-10-06-BKL049-M31.md). Le sezioni precedenti conservano gli snapshot e i limiti delle prove; le note di candidato o consegna pendente sono superate soltanto nei perimetri del riepilogo corrente.
 
 Stato: **codice, API e pagina P5b pubblicati; collaudo Owner della nuova procedura e acceptance dei profili aperti**. L'accettazione privata del precedente risultato M27 non equivale all'accettazione di questi profili.

@@ -95,7 +95,9 @@ class Broker:
     def create(self, request, scientific_context_sha=None):
         require(isinstance(request, dict) and set(request) == {"schemaVersion", "requestId", "inputRef", "recipe", "aiMode"}, "REQUEST_FIELDS")
         require(request["schemaVersion"] == "1.0" and opaque(request["requestId"]) and opaque(request["inputRef"]), "REQUEST_IDENTITY")
-        require(request["recipe"] in {RECIPE} | NONLINEAR_RECIPES and request["aiMode"] == "SESSION_ASSISTED", "RECIPE_OR_AI_MODE")
+        require(request["recipe"] in {RECIPE} | NONLINEAR_RECIPES and request["aiMode"] in
+                {'SESSION_ASSISTED', 'OPENAI_API_PLANNING'}, "RECIPE_OR_AI_MODE")
+        require(request['aiMode'] != 'OPENAI_API_PLANNING' or scientific_context_sha is not None, 'AI_APPROVED_CONTEXT_REQUIRED')
         def operation(state, now):
             require(request['requestId'] not in state.get('withdrawnIntakes', []), 'INTAKE_WITHDRAWN')
             for item in state["jobs"]:

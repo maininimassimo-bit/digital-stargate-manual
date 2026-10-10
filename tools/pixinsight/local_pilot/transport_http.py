@@ -144,10 +144,16 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                         return self.send(200, transient.review(job_id, self.body()))
                 return self.send(404, {"error": "NOT_FOUND"})
             if self.command == "GET" and path == "/health":
+                if scientific is not None and scientific.planner is not None:
+                    return self.send(200, {'protocol': 'DSG_PIAI_QUEUE_V1', 'aiMode': 'OPENAI_API_PLANNING_AVAILABLE',
+                                           'providerRequests': None})
                 return self.send(200, {"protocol": "DSG_PIAI_QUEUE_V1", "aiMode": "SESSION_ASSISTED", "providerRequests": 0})
             worker = path.startswith("/v1/worker/")
             self.authenticate(worker)
             if scientific:
+                ai_match = re.fullmatch(r'/v1/worker/science/intakes/([a-f0-9]{32})/openai-plan', path)
+                if ai_match and self.command == 'POST':
+                    return self.send(200, scientific.generate_openai(ai_match[1], self.body(16384)))
                 if self.command == "GET" and path in {"/v1/science/intakes", "/v1/worker/science/intakes"}:
                     return self.send(200, {"intakes": scientific.intakes()})
                 if self.command == "POST" and path == "/v1/science/intakes":
