@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-049-EXT-PIAI-OPENAI-P1 |
-| Versione | 1.2 |
+| Versione | 1.3 |
 | Data | 2026-10-10 |
-| Stato | Provider reale e conferma Owner verificati; job in coda, OAT nativo/scientifico pendente |
+| Stato | Catena provider → conferma → nativo → consegna privata verificata su M27; revisione scientifica Owner pendente |
 | Autorizzazione | Owner approva integrazione OpenAI e aggiornamento dei documenti, 10 ottobre 2026 |
 | Baseline | P6 Accepted con limiti; main di partenza `2edf1131` |
 | Perimetro | Pianificazione API, conferma Owner, esecutore nativo supervisionato |
@@ -29,6 +29,16 @@ La prima verifica locale richiede review perché il catalogo identifica `M 27` e
 Provider reale `gpt-6-luna` PASS: risposta strutturata valida e provenienza conservata privatamente, 455 token input, 769 output, 1224 totali. Piano registrato dopo rilettura degli input, visualizzato nel browser e confermato su autorizzazione Owner: 29 operazioni, 15 checkpoint. Stato durevole verificato: una prenotazione provider e un solo job corrispondente `QUEUED`; aggiornare la pagina non ha generato altre prenotazioni. Usage verificato, addebito monetario **non verificato**. Il contatore nullo della health non viene usato come prova.
 
 Il piano dichiara esplicitamente di non avere accesso alle immagini e di non attestare misure o qualità scientifica. Il PC registra `nativeStarted=false`; nessun nuovo avvio PixInsight, risultato, pubblicazione o acceptance scientifica. Il messaggio della pagina per `PLAN_READY` viene corretto per indicare che il PC ha già verificato e registrato il piano; il draft provider conservato resta `AI_DRAFT_READY`, distinto dallo stato del piano/job. Ricevute ricche, prompt, identificativi provider e screenshot contenenti percorsi restano privati.
+
+### Esecuzione supervisionata e consegna successiva
+
+Dopo il successivo «ok procedi» Owner, il worker HTTPS prepara copie verificate, prenotazione esclusiva e snapshot del runtime del merge `432eb2a1176d`. Avvio deliberato di una sola istanza isolata PixInsight con il launcher revisionato; nessun nuovo comando automatico dalla pagina. Il journal reale percorre 29 operazioni e 15 checkpoint. Ricevuta terminale `COMPLETED`, PixInsight 1.9.5 build 1706, handle esclusivo verificato e viste originali non modificate; completamento nativo alle 21:17:19 Europe/Rome del 10 ottobre.
+
+Raccolta dopo fine dell'esecuzione: SHA256 originali/copie/checkpoint/runtime verificati, workflow con 29 istanze native e correlazioni reali. Finale RGB Float32 non lineare 4634 × 2808; tutti i campioni finiti e normalizzati, canali non costanti. Sono presenti campioni a zero e saturi: conteggi conservati nel rapporto privato, **nessuna dichiarazione di clipping assente**. Header e controllo numerico non attestano calibrazione fotometrica, risoluzione recuperata o accettabilità scientifica. Il journal conserva parametri dei processi realmente eseguiti; versioni dei modelli ML effettivamente caricati non sono attestate indipendentemente.
+
+Worker trasmette il completamento e consegna privatamente anteprima JPEG, workflow e correlazioni mediante il percorso esistente. Ack `publication=NONE`; pagina Owner verificata con stato tecnico completato, anteprima, 29 passaggi, comandi di download e revisione. Nessuna decisione `ACCEPT_PRIVATE` o pubblicazione eseguita. Il collaudo circoscritto della catena API → piano → conferma → copie → nativo → consegna privata è PASS con questi limiti; acceptance scientifica e disponibilità operativa universale non sono promosse.
+
+I 15 checkpoint, master e ricevute restano nell'archivio privato esterno al repository. Archivio delle istanze/correlazioni non è un replay autonomo né la History completa a monte (`NOT_ESTABLISHED`). L’istanza isolata di automazione è terminata dopo la ricevuta, senza kill o chiusura manuale. Sono conservati gli XISF e le istanze native realmente eseguite; non è esportato un progetto interattivo completo e la History delle viste in memoria non è attestata come recuperabile. Questo limite resta aperto per la riproducibilità completa, senza inventare esportazioni retroattive. Il wrapper di consegna usa ora il medesimo sorgente revisionato con backup del wrapper precedente. Nessuna nuova chiamata OpenAI durante il nativo: `providerRequests=0` della ricevuta nativa riguarda soltanto l'esecutore e non annulla la singola chiamata API di pianificazione già documentata.
 
 Il pilota accettato usa SESSION_ASSISTED: la chat interpreta il prompt, verifica i master e propone la ricetta. La nuova modalità OPENAI_API_PLANNING trasferisce la pianificazione al servizio già esistente e a un collegamento locale di pianificazione. Non cambia l'accettazione P6, l'archivio BKL-049 o l'assistente deterministico BKL-046. BKL-051 e i suoi residui restano separati.
 
@@ -97,7 +107,7 @@ python -m tools.pixinsight.local_pilot.planning_agent --config <private-worker-c
 
 Il token worker viene fornito dal wrapper DPAPI esistente per la durata del processo; nessun nuovo recupero o stampa della credenziale. Nessun servizio Windows/scheduled task viene installato da questo codice. Il loop continua finché il processo è attivo, con polling ogni 30 s; il costo cloud del polling deve essere incluso nella configurazione operativa. Ctrl+C ferma la pianificazione senza annullare i job. Il lancio PixInsight resta separato e supervisionato.
 
-Configurazione cloud, collegamento worker, accesso provider e conferma del primo piano sono verificati nei limiti riportati sopra. Non riattivare il servizio isolato P6 o il lab BKL-051. La chiave non è stata acquisita dall'assistente; OAT nativo/scientifico resta da completare sul job confermato con avvio supervisionato.
+Configurazione cloud, collegamento worker e catena del primo piano fino alla consegna privata sono verificati nei limiti riportati sopra. Non riattivare il servizio isolato P6 o il lab BKL-051. La chiave non è stata acquisita dall'assistente; resta la revisione scientifica Owner dell'esatto risultato consegnato.
 
 ## Validazione e gate residui
 
