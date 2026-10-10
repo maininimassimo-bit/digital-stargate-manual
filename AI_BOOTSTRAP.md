@@ -1,8 +1,8 @@
 # Digital StarGate AI Bootstrap
 
-## Incremento PixInsight OpenAI attivo, OAT nativo pendente
+## Incremento PixInsight OpenAI attivo, consegna privata verificata
 
-Integrazione autorizzata il 10 ottobre, rilasciata con PR #553 e runtime attivo riconciliato nella PR #555. Primo collaudo reale M27: provider gpt-6-luna, piano registrato e visualizzato, conferma Owner esplicita, un solo job QUEUED e una sola prenotazione API; usage 455 input / 769 output. Alias privato M 27/M27 verificato sui master con backup, nessuna nuova selezione scientifica. Chiave solo backend, master locali, nessun avvio nativo automatico. OAT nativo/scientifico e costo monetario restano non verificati; P6 Accepted e BKL-051 invariati. [Contratto, esito e runbook](docs/project/PIAI-OPENAI-PLANNING-2026-10-10.md). Il lavoro BKL-051 corrente rimane quello documentato sotto.
+Integrazione OpenAI autorizzata e rilasciata (PR #553/#555/#556). Collaudo reale M27 completato fino alla consegna privata: piano gpt-6-luna, conferma Owner esplicita, copie verificate, una esecuzione supervisionata PixInsight 1.9.5 build 1706, 29 operazioni e 15 checkpoint, originali invariati e pixel finiti/normalizzati. Una chiamata API (455 input / 769 output); nessuna chiamata aggiuntiva dal nativo. Presenza di clipping misurata privatamente, History a monte NOT_ESTABLISHED e modello ML caricato non attestato indipendentemente. Risultato privato visualizzato; nessuna accettazione scientifica o pubblicazione. Costo monetario non verificato; P6 Accepted e BKL-051 invariati. [Contratto, esito e runbook](docs/project/PIAI-OPENAI-PLANNING-2026-10-10.md). Il lavoro BKL-051 corrente rimane quello documentato sotto.
 
 ## Aggiornamento corrente — leggibilità dossier preliminare
 
