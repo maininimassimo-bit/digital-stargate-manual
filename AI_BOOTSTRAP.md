@@ -1,5 +1,11 @@
 # Digital StarGate AI Bootstrap
 
+## Aggiornamento corrente — accessibilità rapporto locale
+
+Correzione candidata del renderer del rapporto locale: regioni scorrevoli nominate e raggiungibili da tastiera, caption/focus e identificativi lunghi a capo. Quattro test aggiuntivi; gate exact-head, ARB poi RQ e post-merge nelle ricevute del presente incremento. Il candidato privato precedente aveva 12 test PASS e verifica browser circoscritta, non acceptance S5. JSON, sigillo, unità, coda e authority invariati; rapporti storici conservati. BKL-051 OPEN / NOT_VALIDATED, tutti i residui S1–S5 e reporting interi; cloud isolato concluso/spento, nessun nuovo nativo/cloud/invio/fotografia. P6/F4/F5/BKL-050/Safety/C→F invariati. [Dossier](docs/project/BKL-051-S4-LOCAL-REPORT-ACCESSIBILITY-2026-10-10.md). [Handover corrente](docs/project/HANDOVER_2026-10-10-BKL051-LOCAL-REPORT-ACCESSIBILITY.md).
+
+## Snapshot precedente — prima della correzione del rapporto
+
 ## Aggiornamento corrente — archivio privato del rapporto conservato
 
 Candidato locale passivo dopo PR549 merge `37955d323b36bd107c69acd4abebef9ac272395b`: ZIP privato del rapporto, journal e soli artefatti referenziati dell'attempt sigillato, copie streaming e verifica CRC/SHA256, fallimenti conservati. Cinque test sintetici Windows e 19 regressioni collegate PASS; CI/revisioni/rilascio sul proprio head obbligatori. Non archivio completo delle dipendenze o accettazione scientifica. Cloud isolato concluso e spento, nessun nuovo login/build/nativo/invio. BKL-051 OPEN / NOT_VALIDATED; tutti i residui S1–S5, P6/F4/F5/BKL-050/Safety/C→F invariati. [Dossier](docs/project/BKL-051-S4-RETAINED-REPORT-BUNDLE-2026-10-10.md). [Handover corrente](docs/project/HANDOVER_2026-10-10-BKL051-RETAINED-REPORT-BUNDLE.md).

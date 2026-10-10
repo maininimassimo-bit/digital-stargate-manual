@@ -102,4 +102,48 @@ class LocalReportTests(unittest.TestCase):
         with self.assertRaises(FileExistsError):export(self.journal, self.sha, self.output)
 
 
+    def test_each_table_has_named_keyboard_region_and_caption(self):
+        from html.parser import HTMLParser
+        class Tables(HTMLParser):
+            def __init__(self):
+                super().__init__(); self.regions = []; self.captions = 0
+            def handle_starttag(self, tag, attributes):
+                attributes = dict(attributes)
+                if tag == 'div' and attributes.get('class') == 'scroll':
+                    self.regions.append(attributes)
+                if tag == 'caption': self.captions += 1
+        value = inspect(self.journal, self.sha)
+        value['measurements'].append(copy.deepcopy(value['measurements'][0]))
+        parser = Tables(); parser.feed(render(value))
+        self.assertEqual(len(parser.regions), 2)
+        self.assertEqual(parser.captions, 2)
+        for region in parser.regions:
+            self.assertEqual(region['tabindex'], '0')
+            self.assertEqual(region['role'], 'region')
+            self.assertTrue(region['aria-label'])
+
+    def test_render_preserves_missing_uncertainty_and_report(self):
+        value = inspect(self.journal, self.sha); before = copy.deepcopy(value)
+        page = render(value)
+        self.assertEqual(value, before)
+        self.assertIn('NOT_VALIDATED', page)
+        self.assertIn('sconosciuta', page)
+        for measurement in value['measurements']:
+            for row in measurement['rows']:
+                self.assertIsNone(row['fullVariance'])
+                self.assertIsNone(row['significance'])
+
+    def test_scroll_and_long_identifier_focus_styles(self):
+        page = render(inspect(self.journal, self.sha))
+        self.assertIn('body{overflow-wrap:anywhere;', page)
+        self.assertIn('.scroll{overflow:auto;max-width:100%}', page)
+        self.assertIn('.scroll:focus-visible{outline:3px solid #ffd479;', page)
+
+    def test_operation_identifier_remains_escaped_in_heading(self):
+        value = inspect(self.journal, self.sha)
+        value['measurements'][0]['operationRef'] = '<script>invalid</script>'
+        page = render(value)
+        self.assertNotIn('<script>', page)
+        self.assertIn('&lt;script&gt;invalid&lt;/script&gt;', page)
+
 if __name__ == '__main__': unittest.main()
