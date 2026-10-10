@@ -92,7 +92,7 @@
             AI_DRAFT_READY:'Piano OpenAI ricevuto. Il PC deve verificarlo e registrarlo prima della conferma.',
             AI_REQUEST_RESERVED_NO_RETRY:'Richiesta OpenAI prenotata. Se lo stato resta invariato, occorre verificare la ricevuta; nessuna nuova chiamata automatica.',
             AI_FAILED_NO_RETRY:'OpenAI non ha restituito un piano valido. Richiesta conservata; nessuna ripetizione API automatica.'};
-          el('p',aiLabels[aiState] || 'Pianificazione OpenAI da verificare.',card);
+          el('p',intake.state==='PLAN_READY' ? 'Piano OpenAI verificato e registrato dal PC. Pronto per la conferma.' : aiLabels[aiState] || 'Pianificazione OpenAI da verificare.',card);
         }
         if(!intake.preparationApproved){
           const withdraw=el('button','Ritira richiesta',card);withdraw.type='button';
