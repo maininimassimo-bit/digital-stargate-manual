@@ -86,6 +86,14 @@
         if(intake.state==='WITHDRAWN'){el('p','Richiesta ritirata. Piano ed evidenze conservati; nessuna elaborazione autorizzata da questa richiesta.',card);continue;}
         if(selection.sourceProfile)el('p',`Master: ${selection.sourceProfile.mode} · ${selection.sourceProfile.layout==='PANELS'?'pannelli da unire':'campo singolo'} · oggetto ${intake.target || ''}.`,card);
         if(intake.state==='JOB_CREATED'){el('p','Piano confermato: elaborazione presente nello stato qui sotto.',card);continue;}
+        if(intake.selection.openaiPlanning){
+          const aiState=intake.openai?.state || 'AWAITING_LOCAL_EVIDENCE';
+          const aiLabels={AWAITING_LOCAL_EVIDENCE:'Il PC deve verificare i master e la configurazione del campo.',
+            AI_DRAFT_READY:'Piano OpenAI ricevuto. Il PC deve verificarlo e registrarlo prima della conferma.',
+            AI_REQUEST_RESERVED_NO_RETRY:'Richiesta OpenAI prenotata. Se lo stato resta invariato, occorre verificare la ricevuta; nessuna nuova chiamata automatica.',
+            AI_FAILED_NO_RETRY:'OpenAI non ha restituito un piano valido. Richiesta conservata; nessuna ripetizione API automatica.'};
+          el('p',aiLabels[aiState] || 'Pianificazione OpenAI da verificare.',card);
+        }
         if(!intake.preparationApproved){
           const withdraw=el('button','Ritira richiesta',card);withdraw.type='button';
           withdraw.addEventListener('click',()=>run(async()=>{
@@ -131,8 +139,9 @@
             }));
           }
         }
-        if(!intake.plan){el('p',intake.preparationResult?'L’assistente proporrà il piano di elaborazione finale sui master verificati.':intake.preparationApproved?'L’assistente completerà la verifica dei master preparati e proporrà il piano finale.':'In attesa della verifica e del piano dell’assistente. Nessuna elaborazione avviata.',card);continue;}
+        if(!intake.plan){el('p',intake.selection.openaiPlanning?'Aggiorna lo stato per consultare il piano quando il PC lo avrà registrato. Nessuna elaborazione avviata.':intake.preparationResult?'L’assistente proporrà il piano di elaborazione finale sui master verificati.':intake.preparationApproved?'L’assistente completerà la verifica dei master preparati e proporrà il piano finale.':'In attesa della verifica e del piano dell’assistente. Nessuna elaborazione avviata.',card);continue;}
         const plan=intake.plan;
+        if(plan.aiProvenance)el('p',`Piano proposto da OpenAI · modello ${plan.aiProvenance.model}. Validazione dei parametri completata; qualità scientifica da valutare.`,card);
         el('p',plan.rationale,card);el('p',`Limiti: ${plan.limitations}`,card);
         el('p',`Master verificati dal PC: ${plan.masters.map(m=>`${m.role} ${m.width} × ${m.height}, indice ${m.imageIndex}`).join('; ')}.`,card);
         el('p',`Fondo: grado ${plan.background.polyDegree}, campione ${plan.background.boxSize}, separazione ${plan.background.boxSeparation}. ${plan.steps.length} processi · ${plan.checkpointCount} checkpoint.`,card);
@@ -186,6 +195,10 @@
     }
     async function loadOptions() {
       options=await call('/v1/science/options');q('target').replaceChildren();
+      if(q('openai-option')){
+        q('openai-option').disabled=options.openaiPlanningEnabled!==true;
+        q('openai-option').textContent=options.openaiPlanningEnabled===true?'OpenAI dalla pagina':'OpenAI dalla pagina · servizio non attivo';
+      }
       const targets=[...new Set(options.sessions.map(s=>targetKey(s.target)))];
       targets.forEach(target=>{el('option',target,q('target')).value=target;});q('target').value=targets[0] || '';
       renderSources();
@@ -210,7 +223,8 @@
         throw error;
       }
       if(isIntake?job.requestId!==frozen.requestId:job.jobId!==`PIAI_${frozen.requestId}`)throw new Error('Identità della risposta non valida. Conserva la richiesta.');
-      sessionStorage.removeItem(KEY);frozen=null;await refresh();message(isIntake?'Cartella e prompt conservati. L’assistente deve verificare i master e proporre il piano; nessun job PixInsight avviato.':'Richiesta scientifica conservata.');
+      const openai=Boolean(frozen.openaiPlanning);
+      sessionStorage.removeItem(KEY);frozen=null;await refresh();message(openai?'Richiesta OpenAI conservata. Il collegamento attivo sul PC verificherà i master e preparerà il piano; nessun job PixInsight avviato.':isIntake?'Cartella e prompt conservati. L’assistente deve verificare i master e proporre il piano; nessun job PixInsight avviato.':'Richiesta scientifica conservata.');
     }
     q('form').addEventListener('submit',event=>{event.preventDefault();run(async()=>{
       if(!frozen){
@@ -219,6 +233,8 @@
         if(historical && options.historicalIntakeEnabled===false)throw new Error('Le nuove richieste storiche sono temporaneamente sospese. Le evidenze precedenti restano conservate.');
         if(historical ? !q('historical-target').value.trim() || !q('provenance').value.trim() || !q('historical-attest').checked : !sessionIds.length || !q('attest').checked)throw new Error(historical?'Indica oggetto e provenienza e conferma la dichiarazione storica.':'Seleziona le sessioni e conferma l’associazione ai master.');
         if(!q('directory').value.trim() || !q('prompt').value.trim())throw new Error('Indica la cartella completa e il risultato desiderato.');
+        const openai=q('planning-mode')?.value==='OPENAI_API';
+        if(openai && (options.openaiPlanningEnabled!==true || !q('openai-consent')?.checked))throw new Error('Verifica la disponibilità del servizio e conferma l’invio dei dati a OpenAI.');
         const image=q('parent').value===''?null:options.images[Number(q('parent').value)];
         const mode=q('mode').value,layout=q('layout').value;
         const additionalDirectories=layout==='PANELS'?q('additional').value.split(/\r?\n/).map(v=>v.trim()).filter(Boolean):[];
@@ -230,6 +246,7 @@
           parent:!historical&&image?{imageId:image.imageId,imageVersionId:image.imageVersionId,workflowId:image.workflowId}:null,
           title:q('title').value,processingDate:q('date').value,associationConfirmed:!historical};
         if(historical)frozen.historicalSource={target:q('historical-target').value.trim(),provenance:q('provenance').value.trim(),attested:true};
+        if(openai)frozen.openaiPlanning={dataTransferConfirmed:true};
         sessionStorage.setItem(KEY,JSON.stringify(frozen));
       }
       await submitFrozen();
@@ -247,6 +264,10 @@
     q('origin').addEventListener('change',()=>{if(options && !frozen){q('attest').checked=false;q('historical-attest').checked=false;renderSources();}});
     q('mode').addEventListener('change',()=>{q('bayer-label').hidden=q('mode').value!=='OSC_CFA';});
     q('layout').addEventListener('change',()=>{q('additional-label').hidden=q('layout').value!=='PANELS';});
+    q('planning-mode')?.addEventListener('change',()=>{
+      q('openai-consent').checked=false;
+      q('openai-consent-label').hidden=q('planning-mode').value!=='OPENAI_API';
+    });
     q('connect').addEventListener('click',()=>run(async()=>{
       if(!window.google?.accounts?.id)await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='https://accounts.google.com/gsi/client';script.onload=resolve;script.onerror=reject;document.head.append(script);});
       google.accounts.id.initialize({client_id:CLIENT,callback:response=>run(async()=>{token=response.credential;try{await loadOptions();}catch(error){token='';throw error;}})});

@@ -15,3 +15,7 @@ Due regressioni permanenti verificano conservazione di note ostili/lunghe, finge
 BKL-051 OPEN / NOT_VALIDATED: S1/S2 aperte, S3 parziale, S4 incompleta, S5 non accettata. Restano rumore/calibrazione/provenienza ZTF e risposta tecnica IRSA; PSF con errore completo e confronto indipendente; centroidi/WCS/frame/tempi/covarianze; recuperi reali indipendenti, nulli/falsi e tracklet adeguati; percorso privato completo/recovery/reporting; policy quantitativa e accettazione Owner. IRSA sola non chiude la milestone. Nessuna nuova elaborazione nativa, cloud, spesa o segnalazione astronomica. P6 Accepted nei limiti, F4 lifecycle pending, F5 dopo F4/BKL-050 finale, Safety e C→F invariati.
 
 Rollback: revert dell'incremento renderer/test/documentazione conservando rapporti, journal, evidenze e archivi storici.
+
+## Riconciliazione della baseline
+
+Durante le revisioni del primo head `62350d5b2597c0427dab3335773a2d8f798634ce`, main è avanzata al merge PR553 `432eb2a1176dc7b85b841c0d847126b2618cb52b`. Il gate behind-main ha fermato il rilascio prima del merge. L’incremento concorrente PixInsight/OpenAI è conservato integralmente, compresi entrambi gli aggiornamenti nei sette registri condivisi; nessuna attivazione del provider o nativa. Renderer e due regressioni invariati. CI e nuove ARB poi RQ sul successore sono obbligatorie; le prime ricevute restano storiche e non autorizzano il merge aggiornato.

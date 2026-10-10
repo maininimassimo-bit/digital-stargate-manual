@@ -1,5 +1,9 @@
 # ADR-008 — PixInsight Provenance Capture Strategy
 
+## Estensione OpenAI — candidato del 10 ottobre 2026
+
+Owner approva il 10 ottobre l’integrazione API OpenAI e l’aggiornamento tecnico. Candidato di pianificazione implementato: opt-in dalla pagina, worker locale con radici/preset verificati, Responses strutturata, prenotazione CAS di un solo invio, limite giornaliero e provenienza nel piano confermato. Chiave solo backend, master locali, nessun avvio nativo automatico. Attivazione protetta, provider/OAT reale e gate di rilascio restano pendenti; P6 Accepted e BKL-051 invariati. [Documentazione tecnica aggiornata](../project/PIAI-OPENAI-PLANNING-2026-10-10.md). Le sezioni precedenti descrivono la modalità SESSION_ASSISTED storica.
+
 **Status:** Accepted — applied by BKL-045 F3/F4 and closure; BKL-049 available-workflow archive F0 accepted; F1 architecture accepted; F2 bounded importer accepted; F3 private evidence adapter accepted via PR #451; F4 guard increment accepted via PR #452; full F4 open; dedicated Google Cloud preview architecture Owner-selected
 **Date:** 09/09/2026  
 **Decision owner:** Digital StarGate Architecture  

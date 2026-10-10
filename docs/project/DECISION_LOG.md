@@ -1,5 +1,9 @@
 # Decision Log
 
+## Incremento autorizzato — pianificazione OpenAI, 10 ottobre 2026
+
+Owner approva il 10 ottobre l’integrazione API OpenAI e l’aggiornamento tecnico. Candidato di pianificazione implementato: opt-in dalla pagina, worker locale con radici/preset verificati, Responses strutturata, prenotazione CAS di un solo invio, limite giornaliero e provenienza nel piano confermato. Chiave solo backend, master locali, nessun avvio nativo automatico. Attivazione protetta, provider/OAT reale e gate di rilascio restano pendenti; P6 Accepted e BKL-051 invariati. [Contratto e runbook](PIAI-OPENAI-PLANNING-2026-10-10.md).
+
 ## Aggiornamento corrente — leggibilità dossier preliminare
 
 Dossier preliminare privato con note e percorsi lunghi a capo, viewport e struttura main; due regressioni permanenti. Candidato byte-identico verificato manualmente su schermate Owner, con viewport/zoom non attestati e senza audit completo di accessibilità. Gate del rilascio esatto nella PR e ricevute. BKL-051 OPEN / NOT_VALIDATED, residui S1–S5 interi; nessun nuovo nativo/cloud/invio/spesa. Rapporti storici immutabili; P6/F4/F5/BKL-050/Safety/C→F invariati. [Dossier](BKL-051-S4-DRAFT-READABILITY-2026-10-10.md). [Handover corrente](HANDOVER_2026-10-10-BKL051-DRAFT-READABILITY.md).

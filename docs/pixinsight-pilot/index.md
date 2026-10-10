@@ -2,13 +2,18 @@
 
 <div class="dsg-photo-upload" data-piai-science>
   <h1>Elabora con PixInsight e IA</h1>
-  <p>Indica l’oggetto, le cartelle dei master e il risultato desiderato. L’assistente di questa sessione verifica i file sul PC e propone un piano, che confermi prima di creare l’elaborazione. L’avvio in PixInsight resta supervisionato. Nessuna nuova chiamata API IA a pagamento.</p>
+  <p>Indica l’oggetto, le cartelle dei master e il risultato desiderato. Puoi richiedere un piano OpenAI direttamente da questa pagina quando il servizio è attivo, oppure usare l’assistenza della chat. Confermi sempre il piano prima di creare l’elaborazione. L’avvio in PixInsight sul PC resta supervisionato.</p>
   <p data-p5-message role="status">Accedi per preparare una richiesta.</p>
   <button type="button" data-p5-connect>Accedi con Google</button>
   <div data-p5-signin></div>
   <form data-p5-form>
     <fieldset disabled data-p5-fields>
       <legend>1. Prepara l’elaborazione</legend>
+      <label>Pianificazione<select data-p5-planning-mode><option value="SESSION_ASSISTED">Con l’assistente della chat</option><option value="OPENAI_API" data-p5-openai-option disabled>OpenAI dalla pagina · disponibilità da verificare</option></select></label>
+      <div data-p5-openai-consent-label hidden>
+        <label><input type="checkbox" data-p5-openai-consent>Autorizzo l’invio a OpenAI del testo della richiesta, dell’oggetto e dei metadati minimi dei master per generare un piano.</label>
+        <p>La richiesta API può avere un costo. Immagini, percorsi e hash dei singoli file non vengono inviati a OpenAI. Non inserire password, chiavi, percorsi o dati personali nel testo. Il servizio effettua al massimo una chiamata per richiesta, con un limite giornaliero configurato.</p>
+      </div>
       <label>Origine dei master<select data-p5-origin><option value="CATALOG">Sessioni già importate</option><option value="HISTORICAL">Riprese storiche senza sessioni nel portale</option></select></label>
       <label data-p5-catalog-label>Oggetto delle sessioni importate<select data-p5-target required></select></label>
       <div data-p5-historical-fields hidden>
@@ -40,7 +45,7 @@
   <p data-p5-pending hidden></p>
   <button type="button" data-p5-retry hidden>Ripeti la stessa richiesta</button>
   <section aria-label="Piani di elaborazione"><h2>2. Verifica e conferma il piano</h2>
-    <p>Dopo l’invio scrivi «richiesta inviata» nella chat con l’assistente. L’assistente identifica i master e i pannelli, verifica le immagini nei contenitori e prepara la proposta; non è un servizio in esecuzione continua. Bias, dark, riferimenti di normalizzazione, mappe di rigetto e varianti drizzle non vengono scelti tacitamente. Premi «Aggiorna stato» per vedere il piano disponibile.</p>
+    <p>Con OpenAI dalla pagina, il collegamento di pianificazione attivo sul PC verifica i master nei campi già configurati e il servizio propone il piano. Premi «Aggiorna stato» per consultarlo. Per un nuovo campo occorre prima verificare la regione di fondo e la configurazione locale; per CFA e mosaici occorre completare la preparazione approvata. Con la modalità chat, comunica all’assistente che hai inviato la richiesta. Bias, dark, mappe di rigetto e varianti drizzle non vengono scelti tacitamente.</p>
     <div data-p5-plans></div>
   </section>
   <section aria-label="Richieste scientifiche"><h2>3. Stato delle elaborazioni</h2>
