@@ -127,4 +127,40 @@ class DraftTests(unittest.TestCase):
         self.assertTrue((self.output / self.request['dossierRef'] / 'failed.json').exists())
 
 
+    def test_long_note_and_dependency_paths_remain_passive_and_complete(self):
+        self.request['note'] = 'identificativo_' * 60 + '<script>alert(1)</script>'
+        directory = self.export()
+        value = decode((directory / 'dossier.json').read_bytes())
+        rendered = (directory / 'dossier.html').read_text(encoding='utf-8')
+        self.assertEqual(value['declarations']['note'], self.request['note'])
+        self.assertIn('identificativo_' * 60, rendered)
+        self.assertIn('&lt;script&gt;alert(1)&lt;/script&gt;', rendered)
+        self.assertNotIn('<script>', rendered)
+        self.assertIn('NOT_VALIDATED', rendered)
+        self.assertFalse(value['submissionAuthorized'])
+        receipt = decode((directory / 'export.json').read_bytes())
+        self.assertEqual(fingerprint(directory / 'dossier.html'), receipt['files']['dossier.html'])
+
+    def test_dossier_structure_preserves_long_values_without_external_assets(self):
+        from html.parser import HTMLParser
+        class Parser(HTMLParser):
+            def __init__(self):
+                super().__init__(); self.tags = []; self.meta = []; self.text = []
+            def handle_starttag(self, tag, attrs):
+                self.tags.append(tag)
+                if tag == 'meta': self.meta.append(dict(attrs))
+            def handle_data(self, data): self.text.append(data)
+        value = {'declarations': {'categoryDeclared': 'MOVING_OBJECT_CANDIDATE',
+            'channelDeclared': 'MPC', 'dataOriginDeclared': 'SYNTHETIC', 'note': 'nota_' * 200},
+            'selectedEvidence': [{'path': 'cartella/' + 'nome_' * 200, 'sha256': 'a' * 64}],
+            'missingGates': list(draft.GAPS), 'artifactRoot': 'fixture/' + 'percorso_' * 200}
+        rendered = draft.render(value); parser = Parser(); parser.feed(rendered)
+        for tag in ('head', 'body', 'main'): self.assertEqual(parser.tags.count(tag), 1)
+        for tag in ('script', 'img', 'link', 'iframe', 'a'): self.assertNotIn(tag, parser.tags)
+        for text in (value['declarations']['note'], value['selectedEvidence'][0]['path'], value['artifactRoot']):
+            self.assertIn(text, ''.join(parser.text))
+        csp = next(m['content'] for m in parser.meta if m.get('http-equiv') == 'Content-Security-Policy')
+        for rule in ("default-src 'none'", "base-uri 'none'", "form-action 'none'"):
+            self.assertIn(rule, csp)
+
 if __name__ == '__main__': unittest.main()

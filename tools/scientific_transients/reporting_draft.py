@@ -51,10 +51,16 @@ def inspect(registry, request_path, expected_sha):
 def render(value):
     esc = lambda v: html.escape(str(v), quote=True)
     declarations = value['declarations']
-    return ('<!doctype html><html lang="it"><meta charset="utf-8">'
+    return ('<!doctype html><html lang="it"><head><meta charset="utf-8">'
+            '<meta name="viewport" content="width=device-width,initial-scale=1">'
             '<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; '
-            'base-uri &#39;none&#39;; form-action &#39;none&#39;">'
-            '<title>Dossier preliminare privato</title><h1>Dossier preliminare privato</h1>'
+            'base-uri &#39;none&#39;; form-action &#39;none&#39;; style-src &#39;unsafe-inline&#39;">'
+            '<title>Dossier preliminare privato</title>'
+            '<style>body{font:18px/1.55 system-ui,sans-serif;margin:0;background:#f4f6f8;color:#182331;overflow-wrap:anywhere}'
+            'main{max-width:1000px;margin:auto;padding:24px}h1,h2{line-height:1.25}'
+            'pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;padding:16px;border:1px solid #64748b;background:#fff}'
+            'li{margin:.75rem 0}@media(max-width:600px){main{padding:16px}}</style></head><body><main>'
+            '<h1>Dossier preliminare privato</h1>'
             '<p>BOZZA. Nessuna scoperta attestata, autorizzazione o segnalazione inviata.</p>'
             '<p>Categoria e canale dichiarati: ' + esc(declarations['categoryDeclared']) + ' / '
             + esc(declarations['channelDeclared']) + '. Origine dichiarata: '
@@ -66,7 +72,7 @@ def render(value):
             + '</ul><p>Integrità dei byte al momento della verifica. Validazione scientifica: '
             'NOT_VALIDATED. Nessuna misura, unità, banda o data osservativa viene dedotta dalla bozza.</p>'
             '<p>Archivio dipendenze non completo: conservare la radice privata ' + esc(value['artifactRoot'])
-            + ' e il registro genitore.</p></html>')
+            + ' e il registro genitore.</p></main></body></html>')
 
 
 def export(registry, request_path, expected_sha, output_root):
