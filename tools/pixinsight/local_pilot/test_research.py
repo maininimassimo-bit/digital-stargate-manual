@@ -68,7 +68,30 @@ class ResearchTests(unittest.TestCase):
             self.assertEqual(resumed[key],stopped[key])
         raw,_=self.store.get('science/research-resumptions/'+self.request_id+'/'+offer['stateSha256'])
         self.assertEqual(sha(decode(raw)),resumed['resumptions'][0]['receiptSha256'])
-        with self.assertRaises(ProtocolError):self.portal.research_resume(self.request_id,confirmation)
+        self.assertEqual(self.portal.research_resume(self.request_id,confirmation),resumed)
+
+    def test_resume_recovers_saved_receipt_after_state_write_failure_and_lost_ack(self):
+        from datetime import timedelta
+        self.calibration_to_stretch();self.action='STOP';self.selected=None
+        stopped=self.post('decision',comparison=self.comparison());offer=self.portal.research_resume_offer(self.request_id)
+        value={k:offer[k] for k in ('stateSha256','policySha256','lineageSha256')};value['reviewedEvidenceConfirmed']=True
+        original=self.store.put
+        def interrupted(key,*args,**kwargs):
+            if key == 'control/piai-state.json':raise RuntimeError('state write interrupted')
+            return original(key,*args,**kwargs)
+        with patch.object(self.store,'put',side_effect=interrupted):
+            with self.assertRaises(RuntimeError):self.portal.research_resume(self.request_id,value)
+        key='science/research-resumptions/'+self.request_id+'/'+offer['stateSha256']
+        raw,_=self.store.get(key);saved=decode(raw)
+        self.assertEqual(self.portal.research_state(self.request_id),stopped)
+        moment=self.broker.clock()+timedelta(seconds=1)
+        with patch.object(self.broker,'clock',return_value=moment):resumed=self.portal.research_resume(self.request_id,value)
+        self.assertEqual(resumed['resumptions'][0]['receiptSha256'],sha(saved))
+        self.assertEqual(resumed['resumptions'][0]['confirmedAt'],saved['confirmedAt'])
+        self.action='STOP';self.post('decision',comparison=self.comparison())
+        later=self.portal.research_state(self.request_id)
+        self.assertEqual(self.portal.research_resume(self.request_id,value),later)
+        self.assertEqual(later['status'],'STOPPED_FOR_REVIEW')
 
     def test_resume_never_reopens_indeterminate_cancelled_or_unknown_native_state(self):
         self.calibration_to_stretch();self.action='STOP';self.selected=None

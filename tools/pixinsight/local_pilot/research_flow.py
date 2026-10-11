@@ -9,7 +9,7 @@ from .source_profile import source_profile
 from .research_knowledge import packet as knowledge_packet
 from . import research_contract as contract
 from .research_provenance import calibration_lineage
-from tools.scientific_registry.ingestion_storage import immutable
+from tools.scientific_registry.ingestion_storage import immutable, Conflict
 
 
 # Research image dependencies are needed only when the feature is used.
@@ -205,15 +205,34 @@ class ResearchFlowMixin:
     def research_resume(self, request_id, value):
         require(isinstance(value,dict) and set(value) ==
                 {'stateSha256','policySha256','lineageSha256','reviewedEvidenceConfirmed'} and
-                value['reviewedEvidenceConfirmed'] is True, 'RESEARCH_OWNER_RESUME_REQUIRED')
+                value['reviewedEvidenceConfirmed'] is True and
+                all(contract.digest(value[k]) for k in ('stateSha256','policySha256','lineageSha256')),
+                'RESEARCH_OWNER_RESUME_REQUIRED')
+        row=self._research(request_id)
+        require(self.research_enabled() and row is not None,'RESEARCH_OWNER_RESUME_STATE')
+        key='science/research-resumptions/'+request_id+'/'+value['stateSha256']
+        raw,_=self.store.get(key)
+        if raw is not None:
+            previous=decode(raw)
+            require(previous['requestId'] == request_id and previous['confirmation'] == value,
+                    'RESEARCH_RESUME_RECEIPT_CHANGED')
+            if any(r['receiptSha256'] == sha(previous) for r in row.get('resumptions',[])):
+                return row  # Lost acknowledgement: never reopen a later STOP or reset counters.
         offer=self.research_resume_offer(request_id)
         require(all(value[k] == offer[k] for k in ('stateSha256','policySha256','lineageSha256')),
                 'RESEARCH_RESUME_EVIDENCE_CHANGED')
-        receipt={'requestId':request_id,'confirmation':value,'evidence':offer,
+        receipt=decode(raw) if raw is not None else {'requestId':request_id,'confirmation':value,'evidence':offer,
                  'confirmedAt':self.broker.clock().isoformat()}
+        require(receipt['evidence'] == offer,'RESEARCH_RESUME_RECEIPT_CHANGED')
+        try:immutable(self.store,key,encode(receipt))
+        except Conflict:
+            saved,_=self.store.get(key)
+            require(saved is not None,'RESEARCH_RESUME_RECEIPT_REQUIRED')
+            receipt=decode(saved)
+            require(receipt['requestId'] == request_id and receipt['confirmation'] == value and
+                    receipt['evidence'] == offer,'RESEARCH_RESUME_RECEIPT_CHANGED')
         def apply(row,_now):
             require(sha(row) == offer['stateSha256'], 'RESEARCH_RESUME_STATE_CHANGED')
-            immutable(self.store,'science/research-resumptions/'+request_id+'/'+offer['stateSha256'],encode(receipt))
             row.setdefault('resumptions',[]).append({'receiptSha256':sha(receipt),
                 'priorStateSha256':offer['stateSha256'],'lineageSha256':offer['lineageSha256'],
                 'confirmedAt':receipt['confirmedAt']})
