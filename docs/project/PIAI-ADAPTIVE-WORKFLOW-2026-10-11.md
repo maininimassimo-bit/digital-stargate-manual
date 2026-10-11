@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-049-EXT-PIAI-ADAPTIVE |
-| Versione | 1.0 |
+| Versione | 1.1 |
 | Stato | Owner-authorized / In Progress; analisi locale candidata, ciclo adattivo non operativo |
 | Data | 2026-10-11 |
 
@@ -15,11 +15,25 @@ Quota giornaliera disabilitata nella revisione Cloud Run `dsg-pixinsight-pilot-q
 
 Primo modulo locale candidato `tools/pixinsight/local_pilot/image_analysis.py`: diagnostica read-only di export nativi XISF singoli Float32 non compressi planari. Hash atteso obbligatorio, controllato prima/dopo. Tutti i pixel verificati senza imporre [0,1] ai dati lineari; momenti/clipping esatti e quantili/MAD su griglia dichiarata. Nove prove sintetiche PASS; tre checkpoint M27 già conservati analizzati privatamente senza modifiche, avvio nativo o API: RGB lineare, RGB processato lineare e LRGB finale, 4634×2808. Non è un OAT del ciclo adattivo.
 
-Differenze numeriche prima/dopo esportabili, ma `scientificComparison=NOT_ESTABLISHED`: stessa geometria non prova registrazione o dominio. Nessuna soglia/score di miglioramento; PSF e rumore di fondo indisponibili, MAD del campo non è SNR. Layout compressi/multi-image/Float64 richiedono il futuro adapter nativo, senza fallback silenzioso.
+Differenze numeriche prima/dopo esportabili, ma `scientificComparison=NOT_ESTABLISHED`: stessa geometria non prova registrazione o dominio. Nessuna soglia/score di miglioramento; PSF e rumore di fondo indisponibili, MAD del campo non è SNR. Layout compressi/Float64 richiedono il futuro adapter nativo, senza fallback silenzioso; multi-image supportato nel nuovo candidato solo con indice esplicito.
 
-Il modulo non è ancora collegato a planner/portale/esecutore; ricetta V1 invariata. Restano requisiti aperti: adapter master/export, maschere/background/PSF validati, catalogo/grafo V2, piano da immagini, segmentazione, decisioni checkpoint multiple e accounting persistente, recovery/OAT e History/progetto. Non sono debito accettato o scope escluso. P6 e BKL-051 invariati; nessuna accettazione o pubblicazione immagini.
+Il candidato successivo collega il modulo al worker di pianificazione e al payload numerico OpenAI, con consenso separato nel portale. Runtime cloud/worker non ancora aggiornati: opzione disabilitata fino alla verifica coordinata. Ricetta V1 invariata. Restano requisiti aperti: adapter master/export, maschere/background/PSF validati, catalogo/grafo V2, piano da immagini, segmentazione, decisioni checkpoint multiple e accounting persistente, recovery/OAT e History/progetto. Non sono debito accettato o scope escluso. P6 e BKL-051 invariati; nessuna accettazione o pubblicazione immagini.
 
 Uso locale: `python -m tools.pixinsight.local_pilot.image_analysis --input <export-privato.xisf> --sha256 <sha256-verificato> --output <nuovo-rapporto-privato.json>`. Rapporto con hash da conservare privatamente, output create-only. Nessuna rete, enumerazione cartelle, token o avvio PixInsight.
+
+### Collegamento delle misure al pianificatore
+
+Contratto opzionale `openaiPlanning.pixelStatisticsConfirmed=true`, distinto dal consenso al testo/metadati. Richieste precedenti conservano il payload originario. Backend espone `pixelStatisticsEnabled` soltanto con `DSG_PIAI_PIXEL_STATISTICS=LOCAL_WORKER_VERIFIED` e provider configurato; nuove richieste statistiche rifiutate finché disabilitato. Attivazione richiede worker aggiornato e ciclo locale verificato, prima di abilitare l'opzione.
+
+`planning_agent.evidence_for` analizza ogni master già selezionato e verificato; non enumera nuove directory. Per questa versione Float32 non compresso, indice esplicito verificato dal worker anche in file multi-image. L'indice è parte dell'evidence: senza indice esplicito la CLI conserva il rifiuto dei file multi-image. Mappe ausiliarie di rigetto/peso non sono master. Formato non supportato/hash cambiato produce `LOCAL_REVIEW_REQUIRED` prima della richiesta a pagamento, senza fallback a soli metadati dopo il consenso alle misure. CFA/mosaici restano subordinati alla preparazione verificata.
+
+Il backend valida ruoli, geometria, canali, finitezza e campionamento; campi/testi aggiunti, conteggi impossibili e dichiarazioni non attestate sono rifiutati prima della prenotazione. SHA256 delle sorgenti e delle misure entrano nel binding durevole conservato privatamente. Payload provider conserva solo ruolo, geometria e statistiche; omette hash e percorsi. Il risultato esatto resta associato all'evidence: replay restituisce la ricevuta, dati cambiati non autorizzano un secondo invio. Valore numerico è evidence riferita dal worker autenticato, non attestazione indipendente del provider.
+
+Verifica locale reale dell'11 ottobre: quattro master M27 originali, ciascuno con immagine Float32 principale e immagine ausiliaria UInt8. Analizzato esclusivamente l'indice 0 già selezionato, 4634×2808 mono; tutti i pixel selezionati finiti e hash prima/dopo invariati. Rapporti/hash conservati privatamente; nessuna nuova chiamata API, scrittura sui master o esecuzione nativa. Il primo tentativo single-image era stato rifiutato prima delle misure; non è stato aggirato selezionando un'immagine tacitamente. Non certifica calibrazione, linearità, PSF o qualità.
+
+Questa integrazione motiva i parametri della ricetta V1, senza scegliere ancora un grafo o verificare checkpoint nel ciclo operativo. Nessuna immagine condivisa o chiamata reale aggiuntiva nel collaudo offline; `gpt-6-luna` conservato. Le [API per input visivi](https://developers.openai.com/api/docs/guides/images-vision) distinguono testo e immagini: qui vengono inviati soltanto numeri. Compatibilità visiva del modello scelto non attestata e non necessaria per questo payload testuale.
+
+Rollback: disabilitare `DSG_PIAI_PIXEL_STATISTICS`, impedendo nuovi intake con statistiche, e mantenere sorgente aggiornato per terminare quelli già conservati. Non avviare un worker legacy per intake con il nuovo consenso: produrrebbe evidence incompleta e sarebbe rifiutato. Prima di rollback completo verificare assenza di intake statistici pendenti; conservare richieste, risultati e prenotazioni. La quota giornaliera resta 0; il limite tecnico V1 di 16 tentativi non è ancora sostituito dalla ledger adattiva.
 
 ## Contratto di prodotto
 

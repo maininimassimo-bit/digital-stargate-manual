@@ -18,7 +18,29 @@ from .transport_http import handler_for
 from .scientific_portal import ScientificPortal
 from tools.scientific_registry.ingestion_storage import Conflict
 from . import worker
-from .planning_agent import cycle, scope
+from .planning_agent import cycle, scope, evidence_for
+from .planning_diagnostics import LIMITATIONS
+from .image_analysis import METHOD
+
+
+def pixel_evidence(evidence):
+    value = copy.deepcopy(evidence)
+    value['pixelDiagnostics'] = []
+    for master in value['masters']:
+        count = master['width'] * master['height']
+        row = {'channelIndex': 0, 'sampleCount': count, 'minimum': -1., 'maximum': 2.,
+               'mean': .5, 'populationVariance': 1., 'zeroSamples': 0, 'oneSamples': 0,
+               'belowZeroSamples': 1, 'aboveOneSamples': 1, 'constant': False,
+               'sampledDistribution': {'gridWidth': 64, 'gridHeight': 64, 'count': 4096,
+                  'method': 'UNIFORM_CELL_CENTERS_NO_INTERPOLATION', 'median': .5, 'mad': .1,
+                  'quantiles': [-.1, .1, .5, .8, 1.1]}}
+        value['pixelDiagnostics'].append({'role': master['role'], 'report': {
+            'method': METHOD, 'sourceSha256': 'a' * 64, 'imageIndex': master['imageIndex'], 'width': master['width'], 'height': master['height'],
+            'channels': [row], 'allFinite': True, 'linearity': 'NOT_ESTABLISHED',
+            'calibration': 'NOT_ESTABLISHED', 'psf': {'status': 'UNAVAILABLE', 'reason': 'NATIVE_FIT_REQUIRED'},
+            'backgroundNoise': {'status': 'UNAVAILABLE', 'reason': 'VALIDATED_BACKGROUND_MASK_REQUIRED'},
+            'acceptance': 'DIAGNOSTIC_ONLY', 'limitations': copy.deepcopy(LIMITATIONS)}})
+    return value
 
 
 def tuning():
@@ -52,6 +74,27 @@ class ProviderTests(unittest.TestCase):
         self.assertNotIn('inputSetSha256', sent[0]['input'])
         self.assertNotIn('private-test-key', encode(sent).decode())
         self.assertEqual(sent[0]['text']['format']['schema']['additionalProperties'], False)
+
+    def test_numeric_diagnostics_are_sent_without_source_hashes(self):
+        evidence = pixel_evidence(self.evidence())
+        validate_evidence(evidence, 'M27', 'LRGB')
+        sent = []
+        OpenAIPlanner('key', 'test-model', 0, send=lambda p: sent.append(p) or response()).generate('Test', 'M27', evidence)
+        self.assertNotIn('sourceSha256', sent[0]['input'])
+        self.assertNotIn('inputSetSha256', sent[0]['input'])
+        self.assertIn('populationVariance', sent[0]['input'])
+        self.assertEqual(evidence['pixelDiagnostics'][0]['report']['sourceSha256'], 'a' * 64)
+
+    def test_invalid_diagnostics_cannot_inject_strings_or_claim_scientific_evidence(self):
+        for mutate in [lambda r: r.update(path='private'), lambda r: r.update(linearity='LINEAR'),
+                       lambda r: r.update(allFinite=False), lambda r: r.update(width=999), lambda r: r.update(imageIndex=1),
+                       lambda r: r['channels'][0].update(mean=float('nan')),
+                       lambda r: r['channels'][0].update(zeroSamples=800001),
+                       lambda r: r['channels'][0]['sampledDistribution'].update(method='instructions')]:
+            value = pixel_evidence(self.evidence())
+            mutate(value['pixelDiagnostics'][0]['report'])
+            with self.assertRaises(ProtocolError):
+                validate_evidence(value, 'M27', 'LRGB')
 
     def test_paths_urls_secrets_rejected_before_send(self):
         for prompt in [r'Leggi F:\Astro', 'https://private.test', 'sk-example', 'api_key=secret']:
@@ -88,15 +131,47 @@ class FlowTests(unittest.TestCase):
     selection = intake_fixtures.IntakeTests.selection
     plan = intake_fixtures.IntakeTests.plan
 
-    def enable(self, send=None, daily_limit=2):
+    def enable(self, send=None, daily_limit=2, pixel_statistics=False):
         self.calls = []
         self.portal.planner = OpenAIPlanner('test-key', 'test-model', daily_limit,
                     send=send or (lambda p: self.calls.append(p) or response()))
         selected = {**self.selection(), 'openaiPlanning': {'dataTransferConfirmed': True}}
+        if pixel_statistics:
+            selected['openaiPlanning']['pixelStatisticsConfirmed'] = True
         self.portal.create_intake(selected)
         evidence = {'recipe': worker.NONLINEAR_RECIPE, 'field': None, 'inputSetSha256': 'e' * 64,
                     'masters': self.plan()['masters']}
         return selected['requestId'], {'workerId': WORKER, 'evidence': evidence}
+
+    def test_diagnostics_require_distinct_consent_before_paid_reservation(self):
+        request_id, body = self.enable()
+        body['evidence'] = pixel_evidence(body['evidence'])
+        with self.assertRaisesRegex(ProtocolError, 'AI_PIXEL_STATISTICS_CONSENT_BINDING'):
+            self.portal.generate_openai(request_id, body)
+        self.assertEqual(self.calls, [])
+        self.assertEqual(self.portal.openai_state(request_id)['state'], 'AWAITING_LOCAL_EVIDENCE')
+
+    def test_consented_diagnostics_are_bound_and_replay_does_not_pay_again(self):
+        with patch.dict('os.environ', {'DSG_PIAI_PIXEL_STATISTICS': 'LOCAL_WORKER_VERIFIED'}):
+            request_id, body = self.enable(pixel_statistics=True)
+        missing = copy.deepcopy(body)
+        with self.assertRaisesRegex(ProtocolError, 'AI_PIXEL_STATISTICS_CONSENT_BINDING'):
+            self.portal.generate_openai(request_id, missing)
+        body['evidence'] = pixel_evidence(body['evidence'])
+        first = self.portal.generate_openai(request_id, body)
+        self.assertEqual(first['state'], 'AI_DRAFT_READY')
+        self.assertEqual(self.portal.generate_openai(request_id, body), first)
+        self.assertEqual(len(self.calls), 1)
+        changed = copy.deepcopy(body)
+        changed['evidence']['pixelDiagnostics'][0]['report']['sourceSha256'] = 'b' * 64
+        with self.assertRaisesRegex(ProtocolError, 'AI_EVIDENCE_CHANGED'):
+            self.portal.generate_openai(request_id, changed)
+        self.assertEqual(len(self.calls), 1)
+
+    def test_pixel_statistics_intake_is_disabled_until_worker_verified(self):
+        with patch.dict('os.environ', {'DSG_PIAI_PIXEL_STATISTICS': ''}):
+            with self.assertRaisesRegex(ProtocolError, 'AI_PIXEL_STATISTICS_DISABLED'):
+                self.enable(pixel_statistics=True)
 
     def test_disabled_and_missing_consent_never_send(self):
         with self.assertRaisesRegex(ProtocolError, 'AI_PROVIDER_DISABLED'):
@@ -234,6 +309,30 @@ class FlowTests(unittest.TestCase):
 class LocalAgentTests(unittest.TestCase):
     setUp = intake_fixtures.LocalInspectionTests.setUp
     write = intake_fixtures.LocalInspectionTests.write
+
+    def test_worker_reads_pixels_and_binds_digest_without_exporting_paths(self):
+        import hashlib
+        import struct
+        rows = []
+        for role in worker.ROLES:
+            path = self.folder / (role + '.xisf')
+            header = b'<xisf><Image geometry="1000:800:1" sampleFormat="Float32" colorSpace="Gray" location="attachment:4096:3200000"/></xisf>'
+            prefix = b'XISF0100' + struct.pack('<II', len(header), 0) + header
+            path.write_bytes(prefix + bytes(4096 - len(prefix)) + struct.pack('<f', .25) * 800000)
+            rows.append({'role': role, 'path': str(path), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+                         'imageIndex': 0, 'width': 1000, 'height': 800})
+        intake = {**self.intake, 'target': 'M27'}
+        intake['selection']['openaiPlanning'] = {'dataTransferConfirmed': True, 'pixelStatisticsConfirmed': True}
+        preset = {'recipe': worker.NONLINEAR_RECIPE, 'field': None, 'mapping': None}
+        with patch('tools.pixinsight.local_pilot.planning_agent.inspect', return_value=rows):
+            evidence = evidence_for({}, intake, preset)
+        self.assertEqual([r['report']['sourceSha256'] for r in evidence['pixelDiagnostics']], [r['sha256'] for r in rows])
+        self.assertTrue(all(r['report']['channels'][0]['mean'] == .25 for r in evidence['pixelDiagnostics']))
+        self.assertNotIn('path', encode(evidence).decode())
+        rows[0]['sha256'] = 'f' * 64
+        with patch('tools.pixinsight.local_pilot.planning_agent.inspect', return_value=rows):
+            with self.assertRaisesRegex(ValueError, 'ANALYSIS_INPUT_CHANGED'):
+                evidence_for({}, intake, preset)
 
     def test_pc_cycle_real_synthetic_headers_proposes_once_never_launches(self):
         intake = {**self.intake, 'target': 'M27', 'state': 'AWAITING_ASSISTANT_PLAN',

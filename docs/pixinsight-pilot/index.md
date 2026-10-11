@@ -12,7 +12,8 @@
       <label>Pianificazione<select data-p5-planning-mode><option value="SESSION_ASSISTED">Con l’assistente della chat</option><option value="OPENAI_API" data-p5-openai-option disabled>OpenAI dalla pagina · disponibilità da verificare</option></select></label>
       <div data-p5-openai-consent-label hidden>
         <label><input type="checkbox" data-p5-openai-consent>Autorizzo l’invio a OpenAI del testo della richiesta, dell’oggetto e dei metadati minimi dei master per generare un piano.</label>
-        <p>La richiesta API può avere un costo. Immagini, percorsi e hash dei singoli file non vengono inviati a OpenAI. Non inserire password, chiavi, percorsi o dati personali nel testo. Il servizio effettua al massimo una chiamata per richiesta, con un limite giornaliero configurato.</p>
+        <label><input type="checkbox" data-p5-pixel-consent>Autorizzo anche l’analisi locale dei pixel e l’invio delle statistiche numeriche a OpenAI per motivare i parametri del piano.</label>
+        <p>La richiesta API può avere un costo. Immagini, percorsi e hash dei singoli file non vengono inviati a OpenAI. Non inserire password, chiavi, percorsi o dati personali nel testo. Non è attivo un limite giornaliero; questo pianificatore effettua una chiamata per richiesta. Le statistiche non certificano rumore, PSF o qualità e non attivano ancora la scelta adattiva dei processi.</p>
       </div>
       <label>Origine dei master<select data-p5-origin><option value="CATALOG">Sessioni già importate</option><option value="HISTORICAL">Riprese storiche senza sessioni nel portale</option></select></label>
       <label data-p5-catalog-label>Oggetto delle sessioni importate<select data-p5-target required></select></label>

@@ -50,6 +50,11 @@ def evidence_for(config, intake, preset):
         inputs = [{k: r[k] for k in ('role', 'path', 'sha256', 'imageIndex', 'width', 'height')} for r in rows]
     evidence = {'recipe': preset['recipe'], 'field': preset['field'], 'inputSetSha256': sha(inputs),
                 'masters': [{k: r[k] for k in ('role', 'width', 'height', 'imageIndex')} for r in inputs]}
+    if intake['selection'].get('openaiPlanning', {}).get('pixelStatisticsConfirmed') is True:
+        from .image_analysis import analyze
+        evidence['pixelDiagnostics'] = [
+            {'role': r['role'], 'report': analyze(Path(r['path']), expected_sha256=r['sha256'], image_index=r['imageIndex'])}
+            for r in inputs]
     return validate_evidence(evidence, intake['target'], profile['mode'])
 
 
