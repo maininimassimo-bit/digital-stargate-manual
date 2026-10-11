@@ -14,7 +14,7 @@ class AdaptiveWorkerTests(unittest.TestCase):
         self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
         self.root=Path(self.tmp.name);(self.root/'transport').mkdir()
         (self.root/'transport/root-identity.json').write_bytes(encode({'workerId':'worker-fixture','rootId':'1'*32}))
-        for module in ('adaptive_worker','adaptive_native_adapter','native_analysis','source_profile'):
+        for module in ('adaptive_worker','adaptive_native_adapter','native_analysis','intake'):
             guard=patch('tools.pixinsight.local_pilot.'+module+'.local_directory',lambda p:p)
             guard.start();self.addCleanup(guard.stop)
         self.transport=Mock()
