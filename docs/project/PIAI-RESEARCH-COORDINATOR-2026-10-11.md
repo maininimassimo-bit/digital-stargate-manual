@@ -2,8 +2,8 @@
 
 | Campo | Valore |
 |---|---|
-| Versione | Candidato `DSG_PIAI_RESEARCH_V1`, 11/10/2026 |
-| Stato | Implementato nel branch; SPCC e ramo correction only nativi verificati su copie M27; review, distribuzione e OAT dal portale pendenti |
+| Versione | `DSG_PIAI_RESEARCH_V1`, rilascio tecnico 11/10/2026 |
+| Stato | PR579 integrata, backend/worker/portale attivi; nuova analisi M27 pronta alla conferma del perimetro; OAT API/nativo e accettazione finale pendenti |
 | Perimetro | LRGB, campo singolo, campionamento originale, inventario QHY695A/ZWO RGB/Optolong L-Pro L |
 | Conoscenza | `DSG_PIAI_RESEARCH_KNOWLEDGE_V1`, distinta dal pacchetto scientifico storico V1 |
 
@@ -60,8 +60,18 @@ Prenotazioni, risposte, conoscenza, approvazioni e prodotti sono conservati con 
 
 ## Attivazione, compatibilità e collaudo
 
-Il candidato è disabilitato fino a verifica del worker: `DSG_PIAI_RESEARCH=LOCAL_WORKER_VERIFIED`, insieme al gate adattivo esistente. Il profilo locale protetto `research.profilePath`/`profileFileSha256` contiene le curve installate e le basi Gaia; `research.backgroundROI` deve coincidere con una regione misurata e con il binding dell'analisi. Niente chiave OpenAI o token nel file del profilo.
+Il gate `DSG_PIAI_RESEARCH=LOCAL_WORKER_VERIFIED` è attivo dopo la verifica in sola lettura del worker, insieme al gate adattivo esistente. Il profilo locale protetto `research.profilePath`/`profileFileSha256` contiene le curve installate e le basi Gaia; `research.backgroundROI` deve coincidere con una regione misurata e con il binding dell'analisi. Niente chiave OpenAI o token nel file del profilo.
 
 Il vecchio contratto V2, i job conclusi e il pacchetto scientifico V1 rimangono distinti. SHO/HOO/OSC, mosaici, BIN2, maschere, starless, MLDenoise e correzioni di gradiente non appartengono a questo primo catalogo autonomo. La guida può citarli ma non li abilita. Non dichiarare l'intera conoscenza operativa di PixInsight disponibile da un catalogo finito.
 
-Prima dell'attivazione: ARB e RQ separate sull'exact HEAD; CI Linux/Windows e controlli del portale; distribuzione coordinata con rollback alla revisione scientifica V1 e al worker precedente; OAT autenticato dal portale con le API reali e verifica dei risultati al 100%. I test sintetici del ciclo fino alla revisione privata e la prova nativa SPCC non sostituiscono questo OAT.
+## Evidenze del rilascio tecnico
+
+PR [579](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/579), head revisionato `5ef1460ac8273fca4f4827993b749d261b870fae`, merge `e2b13c7abd2f861284d973a7ea6914b6820145d2`: ARB poi RQ AI-assistite, separate, APPROVED senza finding residui; 15/15 controlli exact-head e 16/16 post-merge SUCCESS, inclusa pubblicazione Pages. Applicata la deroga continuativa `W-DSG-AEM-RULESET-001` con tutti i gate sostitutivi verificati. I CRLF del controller sono preservati con `-text` per le impronte dei byte.
+
+Build `29241fb7-1955-4e33-82cf-59248301e35d` SUCCESS; immagine `sha256:cab5d08bb29c8c997796391383585d0d5691df4f3ba3bb1b88f6f15169881083`; revisione `dsg-pixinsight-pilot-research-v1-20261011`, traffico 100%. Prima della promozione: health HTTP200, dati privati/options HTTP403 anonimi; ambiente precedente, identità, risorse, concorrenza e timeout invariati, salvo il nuovo gate. Nessuna nuova credenziale o modifica IAM.
+
+Worker aggiornato con moduli revisionati e byte nativi V2 preservati. Preflight in sola lettura: R/G/B/L, griglia 4634 × 2808, profilo e factory approvata verificati; zero chiamate provider e avvii nativi. Primo polling interrotto durante il cambio di backend; successiva diagnostica autenticata di elenco e contesto precedente, ciclo singolo e riavvio completati. La causa dell'interruzione non è accertata; non è una prova generale di recovery automatico. Ricevute e tentativo conservati.
+
+Nuova richiesta M27 creata dall'interfaccia Owner con le stesse 16 sessioni già dichiarate per i master. Analisi iniziale completata; portale in `AWAITING_OWNER_PERIMETER`, zero prove/API. Verificata la catena portale → worker → analisi → conferma richiesta; OAT conferma → API → prove → consegna e accettazione scientifica ancora pendenti. I test sintetici e le prove native di sviluppo non li sostituiscono.
+
+Rollback: ripristinare il traffico su `dsg-pixinsight-pilot-scientific-v1-20261011` e il wrapper/worker precedente, preservando impostazioni, tentativi e ricevute. Spegnere il gate blocca nuove approvazioni, decisioni e avvii; risposte o avvii indeterminati non vengono ripetuti automaticamente.

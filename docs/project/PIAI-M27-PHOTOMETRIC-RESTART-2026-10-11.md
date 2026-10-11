@@ -3,12 +3,12 @@
 | Campo | Valore |
 |---|---|
 | Data | 11/10/2026 |
-| Stato | Conoscenza V1 attiva; coordinatore di rami implementato nel candidato, SPCC nativo su copie verificato; review, distribuzione coordinata e OAT del nuovo ciclo pendenti |
+| Stato | Coordinatore integrato e attivo nel portale; analisi iniziale M27 pronta alla conferma del perimetro; OAT API/nativo pendente |
 | Obiettivo | Migliorare leggibilità del segnale acquisito, dettaglio e vividezza con calibrazione cromatica fotometrica e confronti motivati |
 
 ## Richiesta e dati confermati
 
-Il [coordinatore di prove LRGB](PIAI-RESEARCH-COORDINATOR-2026-10-11.md) descrive il candidato implementato, il protocollo trasferito all'API, i criteri di selezione e le evidenze SPCC reali. La prova di sviluppo ha restituito 70 stelle comuni RGB e conservato originali, History e checkpoint. Non è l'OAT autenticato del nuovo ciclo né una chiamata API reale.
+Il [coordinatore di prove LRGB](PIAI-RESEARCH-COORDINATOR-2026-10-11.md) descrive il modulo rilasciato, il protocollo trasferito all'API, i criteri di selezione e le evidenze SPCC reali. La prova di sviluppo ha restituito 70 stelle comuni RGB e conservato originali, History e checkpoint. La nuova richiesta dal portale ha completato l'analisi locale iniziale; questo non è ancora l'OAT delle decisioni API e delle prove autonome.
 
 Owner chiede di ripartire dai master lineari, misurarli, usare una calibrazione fotometrica del colore e sviluppare il workflow in autonomia tramite API, impiegando processi e documentazione PixInsight. Conferma camera QHY695A, filtri RGB ZWO e Optolong L-Pro come luminanza. [Inventario fisico](../chapters/22-inventario-asset-management.md#2250-inventario-fisico-e-associazione-ai-master-m27). La versione COLOR/STRETCH/COMBINE già consegnata resta distinta; l'autorizzazione al suo grafo esatto non è un'autorizzazione tecnica a eseguire un nuovo grafo sul vecchio job.
 
