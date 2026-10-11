@@ -1,7 +1,7 @@
 # Capitolo 10 – Camere astronomiche, filtri e treno ottico
 
 **Codice documento:** DSG-TM-001-10  
-**Revisione:** 0.3 Draft consolidato  
+**Revisione:** 0.4 — conferma camera e filtri M27 11/10/2026
 **Sistema:** Acquisizione scientifica e fotografica
 
 ## 10.1 Scopo
@@ -13,6 +13,8 @@ L’obiettivo è rendere ogni configurazione riproducibile e verificabile nel te
 ## 10.2 Inventario delle camere
 
 ### 10.2.1 QHY695A
+
+Modello riconfermato dall'Owner il 11/10/2026 per i quattro master M27: metadati camera `695A-M`. Questa conferma non verifica firmware, seriale o caratteristiche del sensore elencate nella baseline.
 
 | Parametro | Dato |
 |---|---|
@@ -66,6 +68,8 @@ Nel sistema risultano utilizzate o disponibili camere quali QHY8IIM, ASI120Mini 
 - L-Extreme.
 
 Per ogni filtro devono essere registrati produttore, diametro/formato, posizione nella ruota, offset di fuoco e data di installazione.
+
+Per M27 Owner conferma il 11/10/2026 filtri R/G/B **ZWO** e **Optolong L-Pro usato come luminanza** con QHY695A. Gli asset e i limiti sono registrati nel [capitolo 22, inventario fisico M27](22-inventario-asset-management.md#2250-inventario-fisico-e-associazione-ai-master-m27). L-Pro è impiegato anche in questa acquisizione monocromatica, non soltanto in OSC. Il suo uso come L non equivale a un filtro L broadband neutro e non estende la stessa risposta spettrale ai canali RGB. Marca/uso sono confermati; serie dei filtri RGB, formato, seriali, posizioni effettive e curve misurate restano da identificare. La tabella seguente conserva posizioni indicative della baseline, non verificate dalla conferma M27.
 
 | Posizione | Filtro | Tipo | Offset fuoco | Note |
 |---|---|---|---:|---|

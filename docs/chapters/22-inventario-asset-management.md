@@ -1,7 +1,7 @@
 # Capitolo 22 – Inventario tecnico e Asset Management
 
 **Codice documento:** DSG-TM-001-22  
-**Revisione:** 0.3 — riconciliazione verifiche rete e Allsky 09/10/2026
+**Revisione:** 0.4 — inventario camera e filtri M27 confermato dall'Owner 11/10/2026
 
 ## 22.1 Scopo
 
@@ -66,12 +66,24 @@ DSG-CAM-001
 | DSG-MNT-001 | Montatura | Celestron CGX-L | Operativo |
 | DSG-OTA-001 | Telescopio | Celestron C8 XLT | Operativo |
 | DSG-OTA-002 | Telescopio | Sky-Watcher Quattro 200P | Operativo |
-| DSG-CAM-001 | Camera mono | QHY695A | Operativo |
+| DSG-CAM-001 | Camera mono | QHY695A | Operativo; modello riconfermato dall'Owner per M27 il 11/10/2026 |
 | DSG-CAM-002 | Camera OSC | ToupTek 294MC Pro | Operativo |
 | DSG-CAM-003 | Camera Allsky | ZWO ASI290MC, fotogramma 1936 × 1096 pixel | Operativa, verificata 09/10/2026 |
 | DSG-OPT-001 | Ottica Allsky | Fisheye 1,8 mm | Confermata fisicamente dall'Owner il 09/10/2026 |
 | DSG-FOC-001 | Fuocheggiatore | Pegasus FocusCube | Operativo |
 | DSG-FOC-002 | Fuocheggiatore | ESATTO 2" | Operativo |
+| DSG-FLT-001 | Filtro rosso | ZWO R, serie/formato da identificare | Utilizzato per il master R M27; dichiarazione Owner 11/10/2026 |
+| DSG-FLT-002 | Filtro verde | ZWO G, serie/formato da identificare | Utilizzato per il master G M27; dichiarazione Owner 11/10/2026 |
+| DSG-FLT-003 | Filtro blu | ZWO B, serie/formato da identificare | Utilizzato per il master B M27; dichiarazione Owner 11/10/2026 |
+| DSG-FLT-004 | Filtro anti-inquinamento luminoso, usato come luminanza | Optolong L-Pro | Utilizzato per il master L M27; dichiarazione Owner 11/10/2026 |
+
+### 22.5.0 Inventario fisico e associazione ai master M27
+
+Owner conferma il 11/10/2026 camera QHY695A, marca ZWO dei filtri RGB e Optolong L-Pro usato come luminanza. I quattro master M27 originali, già attestati WBPP pre-stretch, sono stati riverificati SHA256: geometria scientifica 4634×2808 mono, metadati camera `695A-M` e filtri `Red`, `Green`, `Blu`, `L-Pro`. La marca e l'uso della luminanza derivano dalla dichiarazione Owner, non sono inferiti dai nomi dei file. L-Pro non va aggiunto alle curve RGB per questa acquisizione: è il canale L separato, non un filtro dichiarato in combinazione con R/G/B.
+
+Gli identificativi dei quattro filtri sono assegnati in questa revisione documentale. Non sono stati acquisiti seriali, foto delle etichette, formato/diametro, revisione commerciale, posizione effettiva nella ruota, curve misurate o date di installazione. Le posizioni indicative del capitolo 10 restano da verificare fisicamente. La dichiarazione è riferita a M27 e non sostituisce l'inventario di altri set di filtri o la provenienza di altre riprese.
+
+Nel database SPCC installato sono presenti curve nominali `ZWO R`, `ZWO G`, `ZWO B` e `OPTOLONG L-PRO Light Pollution`. La presenza di una curva non attesta equivalenza alla trasmissione misurata dell'esemplare fisico. La calibrazione del colore richiede inoltre soluzione astrometrica valida, catalogo spettrale, riferimento bianco e risposta del sensore documentati. Stato della nuova richiesta: [ripartenza lineare e calibrazione fotometrica](../project/PIAI-M27-PHOTOMETRIC-RESTART-2026-10-11.md).
 
 ### 22.5.1 Baseline Allsky e servizi associati
 
@@ -149,3 +161,4 @@ Le verifiche del 09/10/2026 attestano modello/firmware RUT955, Raspberry Pi 4 co
 | 0.1 | Baseline precedente | Inventario iniziale |
 | 0.2 | 09/10/2026 | Raspberry, camera e ottica Allsky censiti; firmware router e dipendenze software/rete aggiornati con limiti di verifica |
 | 0.3 | 09/10/2026 | SIM 1 e failover riconciliati con WebUI; HTTPS/tunnel e certificato collaudati; access point solo proposto e verifiche fisiche residue esplicite |
+| 0.4 | 11/10/2026 | Camera QHY695A riconfermata; filtri RGB ZWO e Optolong L-Pro come luminanza M27 censiti con provenienza Owner, limiti fisici e distinzione dalle curve nominali SPCC |
