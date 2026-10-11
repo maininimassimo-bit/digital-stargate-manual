@@ -183,11 +183,15 @@ class AdaptiveFlowMixin:
         # A cancellation after durable reservation must block the paid send.
         state, _ = self.broker._state()
         journal._live(state, job_id)
+        from .scientific_knowledge import packet
+        knowledge, knowledge_sha = packet()
+        immutable(self.store, 'science/scientific-knowledge/' + knowledge_sha, encode(knowledge))
         try:
             decision, receipt = self.adaptive_provider.generate_initial(reservation, evidence, value['bindings'], assets,
                 data_transfer_confirmed=consent['dataTransferConfirmed'],
                 statistics_transfer_confirmed=consent['pixelStatisticsConfirmed'],
-                preview_transfer_confirmed=consent['previewTransferConfirmed'])
+                preview_transfer_confirmed=consent['previewTransferConfirmed'],
+                scientific_knowledge_sha256=knowledge_sha)
         except Exception:
             # Preserve unknown usage and reservation; no paid resend on restart.
             return self.adaptive_state(request_id)

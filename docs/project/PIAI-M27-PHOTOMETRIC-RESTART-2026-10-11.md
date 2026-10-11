@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Data | 11/10/2026 |
-| Stato | Richiesta Owner e verifica preliminare read-only; nuovo ciclo non implementato né eseguito |
+| Stato | Sviluppo autorizzato; nuove misure read-only concluse, conoscenza API candidata; ciclo SPCC e selezione autonoma ancora da implementare e validare |
 | Obiettivo | Migliorare leggibilità del segnale acquisito, dettaglio e vividezza con calibrazione cromatica fotometrica e confronti motivati |
 
 ## Richiesta e dati confermati
@@ -13,6 +13,8 @@ Owner chiede di ripartire dai master lineari, misurarli, usare una calibrazione 
 Verifica preliminare: i quattro SHA256 originali coincidono con quelli già registrati; indice scientifico 0, geometria 4634×2808 mono. Le intestazioni contengono proprietà AstrometricSolution, ma la loro presenza non dimostra corrispondenza alla griglia autocrop/drizzle né accuratezza. PixInsight installato contiene manuale SPCC e ImageSolver; esiste un precedente SPCC nativo su un altro dataset SHO, che non trasferisce filtri, parametri o qualità a M27. Database locale: curve nominali ZWO R/G/B e Optolong L-Pro disponibili; una QE specifica QHY695A/ICX695 non è stata individuata nel database `filters.xspd` esaminato. La scelta di una curva nominale/sostitutiva deve essere esplicita, con relativo limite, non un'attestazione di risposta strumentale misurata.
 
 Questa verifica legge intestazioni e hash. Non è una nuova misura nativa dei pixel, una soluzione astrometrica accettata, un'esecuzione SPCC o una nuova richiesta OpenAI.
+
+Aggiornamento successivo: Owner autorizza lo sviluppo e precisa che il modulo finale deve funzionare dal portale web; richiede trasferimento della conoscenza della skill alle API. Nuove misure native read-only dei quattro master concluse su cinque regioni per canale con originali/copie/History invariati. [Pacchetto di conoscenza e stato del candidato](PIAI-SCIENTIFIC-KNOWLEDGE-2026-10-11.md). SPCC, astrometria accettata e controller di prove non sono dimostrati da queste misure.
 
 ## Ciclo necessario
 
