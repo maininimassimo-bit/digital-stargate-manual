@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Versione | `DSG_PIAI_RESEARCH_V1`, rilascio tecnico 11/10/2026 |
-| Stato | PR579 integrata, backend/worker/portale attivi; nuova analisi M27 pronta alla conferma del perimetro; OAT API/nativo e accettazione finale pendenti |
+| Stato | PR579 integrata, backend/worker/portale attivi; perimetro M27 confermato; prima API senza decisione validata, arresto senza prove native; OAT completo e accettazione finale pendenti |
 | Perimetro | LRGB, campo singolo, campionamento originale, inventario QHY695A/ZWO RGB/Optolong L-Pro L |
 | Conoscenza | `DSG_PIAI_RESEARCH_KNOWLEDGE_V1`, distinta dal pacchetto scientifico storico V1 |
 
@@ -75,3 +75,10 @@ Worker aggiornato con moduli revisionati e byte nativi V2 preservati. Preflight 
 Nuova richiesta M27 creata dall'interfaccia Owner con le stesse 16 sessioni già dichiarate per i master. Analisi iniziale completata; portale in `AWAITING_OWNER_PERIMETER`, zero prove/API. Verificata la catena portale → worker → analisi → conferma richiesta; OAT conferma → API → prove → consegna e accettazione scientifica ancora pendenti. I test sintetici e le prove native di sviluppo non li sostituiscono.
 
 Rollback: ripristinare il traffico su `dsg-pixinsight-pilot-scientific-v1-20261011` e il wrapper/worker precedente, preservando impostazioni, tentativi e ricevute. Spegnere il gate blocca nuove approvazioni, decisioni e avvii; risposte o avvii indeterminati non vengono ripetuti automaticamente.
+
+
+## Primo OAT dal portale e diagnostica candidata
+
+L’Owner ha confermato il perimetro M27 `b013b0bb` il 11/10/2026: fino a 16 prove native e 32 richieste API, tre alternative per fase, copie alla risoluzione originale e approssimazioni SPCC dichiarate. La prima chiamata è stata riservata e tentata; il servizio ha restituito un errore dopo circa 7,8 secondi e lo stato autenticato è `API_INDETERMINATE_NO_RETRY`, contatore API 1, nessuna decisione validata e nessuna prova nativa. Il tempo di risposta non identifica la causa. Non sono disponibili risposta/uso del provider nella ricevuta storica: non attestare consumo zero né successo del passaggio della conoscenza. Nessun reinvio automatico e nessuna accettazione.
+
+La correzione candidata conserva per i futuri errori una ricevuta immutabile minimizzata: ragione da elenco chiuso, presenza/stato della risposta, eventuale ID, uso coerente dei token, causa ammessa di risposta incompleta e codice HTTP. Non conserva messaggi d’eccezione, corpi HTTP, prompt, chiavi o immagini. Hash e riepilogo accompagnano lo stato autenticato, mantenendo l’arresto senza retry. Non recupera il dettaglio del tentativo storico e non autorizza una nuova chiamata distinta. OAT scientifico e consegna restano aperti.

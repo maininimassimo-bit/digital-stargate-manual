@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Data | 11/10/2026 |
-| Stato | Coordinatore integrato e attivo nel portale; analisi iniziale M27 pronta alla conferma del perimetro; OAT API/nativo pendente |
+| Stato | Coordinatore attivo, perimetro M27 confermato; prima API indeterminata senza decisione validata, zero prove native; OAT completo pendente |
 | Obiettivo | Migliorare leggibilità del segnale acquisito, dettaglio e vividezza con calibrazione cromatica fotometrica e confronti motivati |
 
 ## Richiesta e dati confermati
@@ -40,3 +40,8 @@ Il nuovo coordinatore deve collegare decisioni API a funzioni native validate: l
 «Utilizzare a pieno PixInsight» richiede una libreria progressivamente verificata di adapter e riferimenti, non l'assunzione che il modello conosca correttamente ogni processo/versione. Gli adapter devono preservare ricette precedenti e job già approvati. Nel nuovo perimetro dichiarare processi, alternative ammesse, massimo di prove/chiamate, costi e condizioni di arresto; conservare deduplicazione e divieto di retry ambiguo. La conferma iniziale del perimetro e la revisione finale sono distinte dalle decisioni autonome tra le prove consentite.
 
 L'inventario è ora aggiornato, ma astrometria verificata, SPCC M27, misure appaiate, controller di prove, catalogo/portale/API del nuovo perimetro e OAT reale restano da implementare e validare. Nessun nuovo avvio nativo o costo API è avvenuto in questa verifica preliminare.
+
+
+## Esito iniziale del coordinatore dal portale
+
+Perimetro della nuova richiesta M27 approvato dall’Owner: 16 prove native, 32 richieste API e tre alternative per fase. Prima richiesta API nello stato `API_INDETERMINATE_NO_RETRY`, nessuna decisione validata, uso dei token non disponibile e zero prove native. Causa non accertata e tentativo conservato senza reinvio. Questo esito non valida un workflow scientifico né modifica il risultato storico. [Ricevuta e diagnostica candidata](PIAI-RESEARCH-COORDINATOR-2026-10-11.md#primo-oat-dal-portale-e-diagnostica-candidata).
