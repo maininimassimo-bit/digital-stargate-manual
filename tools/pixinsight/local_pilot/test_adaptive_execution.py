@@ -3,6 +3,7 @@ import base64
 import copy
 import json
 import unittest
+from unittest.mock import patch
 
 from . import test_adaptive_flow as fixture
 from .adaptive_execution import VERIFICATION_VERSION
@@ -149,8 +150,20 @@ class ExecutionTests(unittest.TestCase):
                           'previewBase64':base64.b64encode(raw).decode(),'previewSha256':png['sha256']}}
         changed=copy.deepcopy(body);changed['verification']['outputs'][0]['sha256']='f'*64
         with self.assertRaises(ProtocolError):self.portal.adaptive_final(self.request_id,changed)
+        original_mutate=self.broker._mutate
+        def interrupt_completion(fn):
+            if fn.__name__=='complete':
+                raise RuntimeError('simulated interruption after final journal commit')
+            return original_mutate(fn)
+        with patch.object(self.broker,'_mutate',side_effect=interrupt_completion):
+            with self.assertRaises(RuntimeError):
+                self.portal.adaptive_final(self.request_id,body)
+        interrupted=self.portal.adaptive_state(self.request_id)
+        self.assertEqual(interrupted['cursor']['state'],'READY_FOR_OWNER_REVIEW')
+        self.assertNotEqual(interrupted['job']['state'],'COMPLETED')
+        paid_calls=len(self.calls)
         self.portal.adaptive_final(self.request_id,body)
-        self.portal.adaptive_final(self.request_id,body)
+        self.assertEqual(len(self.calls),paid_calls)
         result=self.portal.adaptive_result(self.request_id)
         self.assertEqual(result['scientificAcceptance'],'NONE')
         self.assertEqual(result['publication'],'NONE')

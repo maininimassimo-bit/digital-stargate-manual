@@ -176,6 +176,21 @@ class AdaptiveWorker:
             require(fingerprint(path)==source['sha256'],'ADAPTIVE_CONFIGURED_SOURCE_CHANGED')
         return sources
 
+    def reconcile_previous_lease(self,context,session):
+        lease=self.root/'active-job.json'
+        if not lease.exists():return
+        held=read(safe_path(lease,self.root))
+        if held.get('jobId')!=context['job']['jobId']:return
+        ordinal=context['cursor']['ordinal']
+        if not ordinal:return
+        previous=session/('segment-'+str(ordinal-1))
+        binding=read(safe_path(previous/'binding.json',previous))
+        require(binding['jobId']==held['jobId'] and binding['permit']['ordinal']==ordinal-1 and
+                binding['permitSha256']==held['permitSha256'],'ADAPTIVE_PREVIOUS_LEASE_BINDING')
+        result=verify(previous,expected_manifest_sha256=binding['manifestSha256'],write_receipt=False)
+        require(result['verification']==context['checkpoint'],'ADAPTIVE_PREVIOUS_BACKEND_RECEIPT_CHANGED')
+        self.close_lease(previous,binding)
+
     def advance(self, request_id):
         context=self.transport.request(self.route(request_id,'context'))
         require(context['executionPolicy'] is not None,'ADAPTIVE_OWNER_WORKFLOW_REQUIRED')
@@ -183,6 +198,7 @@ class AdaptiveWorker:
         cursor=context['cursor'];session=self.directory/('PIAI_'+request_id)
         session.mkdir(exist_ok=True)
         require(not session.is_symlink() and not session.is_junction(),'ADAPTIVE_SESSION_REPARSE_POINT')
+        self.reconcile_previous_lease(context,session)
         if context['job']['state']=='COMPLETED':return 'READY_FOR_OWNER_REVIEW'
         if context['job']['cancelRequested']:
             attempt=session/('segment-'+str(cursor['ordinal']))
@@ -193,7 +209,7 @@ class AdaptiveWorker:
                                                 'localReceiptSha256':fingerprint(attempt/'native-done.json')})
                     self.close_lease(attempt,binding)
             return 'CANCEL_REQUESTED'
-        if cursor['state']=='AWAITING_FINAL_VERIFICATION':
+        if cursor['state'] in {'AWAITING_FINAL_VERIFICATION','READY_FOR_OWNER_REVIEW'}:
             return self.deliver(request_id,context,session)
         if cursor['state']=='STOP_FOR_REVIEW':
             previous=session/('segment-'+str(cursor['ordinal']-1))/'binding.json'

@@ -64,5 +64,35 @@ class AdaptiveWorkerTests(unittest.TestCase):
         with self.assertRaises(ValueError):self.runner.deliver('a'*32,{},session)
         self.transport.post.assert_not_called()
 
+    def test_committed_checkpoint_lost_reply_reconciles_owned_lease_before_decision(self):
+        request_id='a'*32;job_id='PIAI_'+request_id
+        session=self.runner.directory/job_id;session.mkdir()
+        previous=session/'segment-0';previous.mkdir()
+        binding={'jobId':job_id,'permitSha256':'b'*64,'manifestSha256':'c'*64,'permit':{'ordinal':0}}
+        (previous/'binding.json').write_bytes(encode(binding))
+        (previous/'native-done.json').write_bytes(encode({'status':'OWNED_VIEWS_CLOSED','permitSha256':'b'*64}))
+        (self.root/'active-job.json').write_bytes(encode({'jobId':job_id,'permitSha256':'b'*64}))
+        result={'verification':{'ordinal':0,'outputs':['FIXTURE']}}
+        (previous/'verification.json').write_bytes(encode(result));(previous/'decision.json').write_bytes(encode({'fixture':'decision'}))
+        context={'executionPolicy':{},'analysis':{},'cursor':{'ordinal':1,'state':'AWAITING_DECISION'},
+                 'job':{'jobId':job_id,'state':'RUNNING','cancelRequested':False},'checkpoint':result['verification']}
+        self.transport.request.return_value=context
+        with patch('tools.pixinsight.local_pilot.adaptive_worker.verify',return_value=result) as physical:
+            self.assertEqual(self.runner.advance(request_id),'CHECKPOINT_DECISION')
+        physical.assert_called_once_with(previous,expected_manifest_sha256='c'*64,write_receipt=False)
+        self.assertFalse((self.root/'active-job.json').exists())
+        self.assertTrue((previous/'native-lease-closed.json').exists())
+        self.assertEqual(self.transport.post.call_count,1)
+        self.assertTrue(self.transport.post.call_args.args[0].endswith('/adaptive-decision'))
+
+    def test_ready_cursor_with_unfinished_job_reconciles_final_delivery_without_native(self):
+        request_id='a'*32
+        self.transport.request.return_value={'executionPolicy':{},'analysis':{},
+            'cursor':{'ordinal':1,'state':'READY_FOR_OWNER_REVIEW'},
+            'job':{'jobId':'PIAI_'+request_id,'state':'RUNNING','cancelRequested':False}}
+        with patch.object(self.runner,'deliver',return_value='READY_FOR_OWNER_REVIEW') as delivery:
+            self.assertEqual(self.runner.advance(request_id),'READY_FOR_OWNER_REVIEW')
+        delivery.assert_called_once();self.transport.post.assert_not_called()
+
 
 if __name__=='__main__':unittest.main()
