@@ -9,7 +9,6 @@ from tools.pixinsight.local_pilot.broker import decode
 import urllib.request
 from tools.scientific_transients.queue import TransientQueue
 from tools.pixinsight.local_pilot.openai_planner import OpenAIPlanner
-from tools.pixinsight.local_pilot.checkpoint_provider import CheckpointProvider
 
 
 def transient_component(store, legacy_worker_id, legacy_digest):
@@ -50,6 +49,7 @@ def main():
     if os.environ.get('DSG_PIAI_ADAPTIVE') is not None:
         require(os.environ['DSG_PIAI_ADAPTIVE'] == 'LOCAL_WORKER_VERIFIED' and planner is not None,
                 'ADAPTIVE_COORDINATED_ACTIVATION_REQUIRED')
+        from tools.pixinsight.local_pilot.checkpoint_provider import CheckpointProvider
         adaptive = CheckpointProvider(os.environ.get('OPENAI_API_KEY',''), planner.model)
     scientific = ScientificPortal(broker,
         lambda: public_bytes(settings[names[6]] + "/digital-stargate-manual/data/scientific-session-catalog.json"),
