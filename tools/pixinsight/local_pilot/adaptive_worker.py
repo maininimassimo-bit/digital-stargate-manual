@@ -96,6 +96,30 @@ class AdaptiveWorker:
     def post(self,request_id,action,value):
         return self.transport.post(self.route(request_id,action),{'workerId':self.worker_id,**value})
 
+    def initial_analysis(self,intake):
+        request_id=intake['selection']['requestId']
+        exact=self.settings.get('initialAnalyses',{}).get(request_id)
+        if exact:return exact
+        catalog=self.settings.get('initialAnalysisCatalog',[])
+        require(isinstance(catalog,list) and len(catalog)<=64,'ADAPTIVE_INITIAL_CATALOG')
+        if not catalog:return None
+        from .source_profile import source_profile
+        profile=source_profile(intake['selection'])
+        selected=Path(local_directory(intake['selection']['masterDirectory']))
+        selected=safe_path(selected,selected.parent)
+        matches=[]
+        for entry in catalog:
+            require(isinstance(entry,dict) and set(entry)=={'masterDirectory','mode','layout','analysis'} and
+                    isinstance(entry['analysis'],dict),'ADAPTIVE_INITIAL_CATALOG_ENTRY')
+            folder=Path(local_directory(entry['masterDirectory']))
+            folder=safe_path(folder,folder.parent)
+            if folder==selected and entry['mode']==profile['mode'] and entry['layout']==profile['layout']:
+                matches.append(entry['analysis'])
+        require(len(matches)<=1,'ADAPTIVE_AMBIGUOUS_INITIAL_ANALYSIS')
+        # The build still rechecks every original SHA, native receipt, runtime,
+        # source profile and upstream trace. Matching a folder grants no facts.
+        return matches[0] if matches else None
+
     def run_native(self, request_id, attempt, binding):
         """One exact prepared launcher. Never replay an ambiguous local launch."""
         require(self.execute_approved,'ADAPTIVE_SUPERVISED_LAUNCH_REQUIRED')
@@ -371,7 +395,7 @@ class AdaptiveWorker:
                 try:
                     adaptive=intake.get('adaptive') or {}
                     if not adaptive.get('executionPolicy'):
-                        analysis=self.settings.get('initialAnalyses',{}).get(request_id)
+                        analysis=self.initial_analysis(intake)
                         if not analysis or adaptive.get('plan'):
                             state='AWAITING_OWNER_OR_SUPERVISED_ANALYSIS'
                         else:
