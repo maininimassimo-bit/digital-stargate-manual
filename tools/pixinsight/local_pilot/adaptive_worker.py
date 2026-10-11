@@ -404,6 +404,13 @@ class AdaptiveWorker:
         try:
             rows=self.transport.request('/v1/worker/science/intakes')['intakes'];result=[]
             for intake in rows:
+                if intake['selection'].get('researchPlanning') and intake['state'] != 'WITHDRAWN':
+                    request_id=intake['selection']['requestId']
+                    try:
+                        from .research_worker import ResearchWorker
+                        state=ResearchWorker(self).advance(intake)
+                    except Exception:state='RESEARCH_LOCAL_REVIEW_REQUIRED_NO_NATIVE_REPLAY'
+                    result.append({'requestId':request_id,'state':state});continue
                 if not intake['selection'].get('adaptivePlanning') or intake['state']=='WITHDRAWN':continue
                 request_id=intake['selection']['requestId']
                 try:

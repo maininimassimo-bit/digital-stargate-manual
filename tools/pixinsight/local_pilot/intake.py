@@ -42,8 +42,18 @@ class IntakeMixin(PreparationFlowMixin):
         from .openai_planner import safe_text
         fields = {'requestId', 'masterDirectory', 'prompt', 'catalogSha256', 'sessionIds',
                   'parent', 'title', 'processingDate', 'associationConfirmed'}
-        optional = {'sourceProfile', 'historicalSource', 'openaiPlanning', 'adaptivePlanning'}
+        optional = {'sourceProfile', 'historicalSource', 'openaiPlanning', 'adaptivePlanning', 'researchPlanning'}
         require(isinstance(value, dict) and fields <= set(value) <= fields | optional and opaque(value['requestId']), 'INTAKE_FIELDS')
+        require(len({'openaiPlanning','adaptivePlanning','researchPlanning'} & set(value)) <= 1,
+                'AI_PLANNING_MODE_CONFLICT')
+        if 'researchPlanning' in value:
+            require(self.research_enabled() and source_profile(value)['mode'] == 'LRGB' and
+                    source_profile(value)['layout'] == 'SINGLE', 'RESEARCH_LRGB_DISABLED_OR_UNSUPPORTED')
+            consent=value['researchPlanning']
+            require(isinstance(consent,dict) and set(consent) ==
+                    {'dataTransferConfirmed','pixelStatisticsConfirmed','previewTransferConfirmed'} and
+                    all(v is True for v in consent.values()),'RESEARCH_CONSENT_REQUIRED')
+            safe_text(value['prompt'])
         if 'adaptivePlanning' in value:
             require('openaiPlanning' not in value and self.adaptive_enabled(), 'ADAPTIVE_DISABLED_OR_MODE_CONFLICT')
             consent = value['adaptivePlanning']
@@ -85,7 +95,8 @@ class IntakeMixin(PreparationFlowMixin):
             immutable(self.store, 'science/intakes/' + value['requestId'], encode({
                 'selection': copy.deepcopy(value), 'createdAt': self.broker.clock().isoformat(),
                 'target': review['target'], 'authority': 'PLANNING_ONLY',
-                'aiMode': 'OPENAI_API_ADAPTIVE' if 'adaptivePlanning' in value else
+                'aiMode': 'OPENAI_API_RESEARCH' if 'researchPlanning' in value else
+                          'OPENAI_API_ADAPTIVE' if 'adaptivePlanning' in value else
                           'OPENAI_API_PLANNING' if api_requested(value) else 'SESSION_ASSISTED'}))
         def index(state, _now):
             require(value['requestId'] not in state.get('withdrawnIntakes', []), 'INTAKE_WITHDRAWN')
@@ -110,6 +121,8 @@ class IntakeMixin(PreparationFlowMixin):
                 decode(approval_raw)['sourcePlanSha256'] == sha(source_plan))
             jobs = [j for j in state['jobs'] if j['jobId'] == 'PIAI_' + request_id]
             rows.append({**item, 'plan': plan, 'proposalSha256': sha(plan) if plan else None,
+                         'research': self.research_state(request_id) if 'researchPlanning' in item['selection'] and
+                                     request_id not in state.get('withdrawnIntakes', []) else None,
                          'adaptive': self.adaptive_state(request_id) if 'adaptivePlanning' in item['selection'] and
                                      request_id not in state.get('withdrawnIntakes', []) else None,
                          'openai': self.openai_state(request_id) if 'openaiPlanning' in item['selection'] else None,
@@ -125,6 +138,8 @@ class IntakeMixin(PreparationFlowMixin):
         require(self.store.exists('science/intakes/' + request_id), 'INTAKE_NOT_FOUND')
         def operation(state, _now):
             require(not any(j['jobId'] == 'PIAI_' + request_id for j in state['jobs']), 'JOB_ALREADY_CREATED')
+            require(not state.get('researchSessions',{}).get(request_id,{}).get('approved'),
+                    'RESEARCH_ALREADY_APPROVED_USE_CANCEL')
             require(request_id not in state.get('preparationAuthorizedIntakes', []) and
                     not self.store.exists('science/preparation-approvals/' + request_id), 'PREPARATION_ALREADY_APPROVED')
             rows = state.setdefault('withdrawnIntakes', [])
@@ -156,7 +171,7 @@ class IntakeMixin(PreparationFlowMixin):
 
     def propose(self, request_id, value):
         intake = self.intake(request_id)
-        require(intake.get('aiMode') != 'OPENAI_API_ADAPTIVE', 'ADAPTIVE_DISTINCT_PLAN_REQUIRED')
+        require(intake.get('aiMode') not in ('OPENAI_API_ADAPTIVE','OPENAI_API_RESEARCH'), 'ADAPTIVE_DISTINCT_PLAN_REQUIRED')
         profile = source_profile(intake['selection'])
         from .scientific_portal import is_m27
         prepared=profile['mode']=='OSC_CFA' or profile['layout']=='PANELS'

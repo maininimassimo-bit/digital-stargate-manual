@@ -9,7 +9,7 @@
   <form data-p5-form>
     <fieldset disabled data-p5-fields>
       <legend>1. Prepara l’elaborazione</legend>
-      <label>Pianificazione<select data-p5-planning-mode><option value="SESSION_ASSISTED">Con l’assistente della chat</option><option value="OPENAI_API" data-p5-openai-option disabled>OpenAI dalla pagina · disponibilità da verificare</option><option value="OPENAI_ADAPTIVE" data-p5-adaptive-option disabled>OpenAI con analisi delle immagini · disponibilità da verificare</option></select></label>
+      <label>Pianificazione<select data-p5-planning-mode><option value="SESSION_ASSISTED">Con l’assistente della chat</option><option value="OPENAI_API" data-p5-openai-option disabled>OpenAI dalla pagina · disponibilità da verificare</option><option value="OPENAI_ADAPTIVE" data-p5-adaptive-option disabled>OpenAI con analisi delle immagini · disponibilità da verificare</option><option value="OPENAI_RESEARCH" data-p5-research-option disabled>OpenAI · scelta e confronto dei rami LRGB</option></select></label>
       <div data-p5-openai-consent-label hidden>
         <label><input type="checkbox" data-p5-openai-consent>Autorizzo l’invio a OpenAI del testo della richiesta, dell’oggetto e dei metadati minimi dei master per generare un piano.</label>
         <label><input type="checkbox" data-p5-pixel-consent>Autorizzo anche l’analisi locale dei pixel dei master e, nella modalità adattiva, dei risultati intermedi, e l’invio delle statistiche numeriche a OpenAI per motivare le scelte di elaborazione.</label>

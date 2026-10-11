@@ -151,6 +151,19 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
             worker = path.startswith("/v1/worker/")
             self.authenticate(worker)
             if scientific:
+                research_match=re.fullmatch(r'/v1/(worker/)?science/intakes/([a-f0-9]{32})/research-(analysis|approve|state|reserve|start|checkpoint|decision|context|final|result|review|cancel|halt)',path)
+                if research_match:
+                    worker_research,request_id,action=research_match.groups()
+                    if self.command == 'GET' and action == 'state':
+                        return self.send(200,scientific.research_state(request_id))
+                    if self.command == 'GET' and ((worker_research and action == 'context') or
+                                                 (not worker_research and action == 'result')):
+                        return self.send(200,getattr(scientific,'research_'+action)(request_id))
+                    allowed={'analysis','reserve','start','checkpoint','decision','final','halt'} if worker_research else {'approve','cancel','review'}
+                    if self.command == 'POST' and action in allowed:
+                        limit=6291456 if action in {'analysis','decision','final'} else 262144 if action == 'checkpoint' else 65536
+                        return self.send(200,getattr(scientific,'research_'+action)(request_id,self.body(limit)))
+                    return self.send(404,{'error':'NOT_FOUND'})
                 adaptive_match = re.fullmatch(r'/v1/(worker/)?science/intakes/([a-f0-9]{32})/adaptive-(analysis|approve|state|reserve|start|checkpoint|decision|context|final|result|review|halt)', path)
                 if adaptive_match:
                     worker_adaptive, request_id, action = adaptive_match.groups()

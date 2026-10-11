@@ -5,12 +5,12 @@ import {readFileSync} from 'node:fs';
 import {webcrypto} from 'node:crypto';
 const source=readFileSync(new URL('../../../docs/javascripts/pixinsight-pilot.js',import.meta.url),'utf8');
 const tick=async()=>{for(let i=0;i<12;i++)await new Promise(resolve=>setTimeout(resolve,3));};
-function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=false,plansReady=false,sourcePlanReady=false,preparationReady=false,completedRevision=false,legacyRevisions=false,openaiEnabled=false,pixelEnabled=false,adaptiveEnabled=false,adaptivePlanReady=false,adaptiveCompleted=false}={}) {
+function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=false,plansReady=false,sourcePlanReady=false,preparationReady=false,completedRevision=false,legacyRevisions=false,openaiEnabled=false,pixelEnabled=false,adaptiveEnabled=false,adaptivePlanReady=false,adaptiveCompleted=false,researchEnabled=false,researchReady=false}={}) {
   function node(){return {dataset:{},children:[],callbacks:{},value:'',checked:false,isConnected:true,
     addEventListener(type,callback){this.callbacks[type]=callback;},append(...items){this.children.push(...items);},
     replaceChildren(){this.children=[];},querySelectorAll(){return this.children.flatMap(label=>label.children).filter(x=>x.type==='checkbox'&&x.checked);},
     click(){this.callbacks.click?.();},setAttribute(key,value){this[key]=value;},remove(){}};}
-  const controls=Object.fromEntries(['planning-mode','openai-option','adaptive-option','openai-consent','pixel-consent','preview-consent','preview-consent-label','openai-consent-label','origin','catalog-label','parent-label','session-fields','historical-fields','historical-target','provenance','historical-attest','message','connect','signin','form','fields','input','directory','prompt','target','mode','layout','bayer','bayer-label','additional','additional-label','plans','parent','title','date','sessions','attest','create','pending','retry','refresh','jobs','review','summary','preview','steps','workflow','correlations','receipt','accept','reject'].map(name=>[name,node()]));
+  const controls=Object.fromEntries(['planning-mode','openai-option','adaptive-option','research-option','openai-consent','pixel-consent','preview-consent','preview-consent-label','openai-consent-label','origin','catalog-label','parent-label','session-fields','historical-fields','historical-target','provenance','historical-attest','message','connect','signin','form','fields','input','directory','prompt','target','mode','layout','bayer','bayer-label','additional','additional-label','plans','parent','title','date','sessions','attest','create','pending','retry','refresh','jobs','review','summary','preview','steps','workflow','correlations','receipt','accept','reject'].map(name=>[name,node()]));
   controls.title.value='M27 test';controls.date.value='2026-10-05';controls.attest.checked=true;
   controls.mode.value='LRGB';controls.layout.value='SINGLE';controls.additional.value='';controls.directory.value='F:\\Astro\\M27\\Master';controls.prompt.value='Dettaglio interno, fondo naturale';
   const root=node();root.querySelector=selector=>controls[selector.match(/data-p5-(.+)\]/)[1]];
@@ -32,7 +32,7 @@ function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=fal
         if(url.endsWith('/decision'))return {ok:true,json:async()=>({publication:'NONE'})};
         return {ok:true,blob:async()=>new Blob(['private fixture'])};
       }
-      if(url.endsWith('/options'))return {ok:true,json:async()=>({adaptivePlanningEnabled:adaptiveEnabled,openaiPlanningEnabled:openaiEnabled,pixelStatisticsEnabled:pixelEnabled,inputs:[{inputRef:'b'.repeat(32),target:'M27'}],images:[],catalogSha256:'a'.repeat(64),sessions:[{sessionId:'SESSION-M27',target:'M27'}]})};
+      if(url.endsWith('/options'))return {ok:true,json:async()=>({researchPlanningEnabled:researchEnabled,adaptivePlanningEnabled:adaptiveEnabled,openaiPlanningEnabled:openaiEnabled,pixelStatisticsEnabled:pixelEnabled,inputs:[{inputRef:'b'.repeat(32),target:'M27'}],images:[],catalogSha256:'a'.repeat(64),sessions:[{sessionId:'SESSION-M27',target:'M27'}]})};
       if(url.endsWith('/science/intakes')){
         if(options.method==='POST'){
           if(rejected)return {ok:false,status:400,json:async()=>({error:'CATALOG_CHANGED_REFRESH'})};
@@ -43,10 +43,12 @@ function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=fal
         if(intake&&plansReady&&intake.state!=='WITHDRAWN'){intake.state='PLAN_READY';intake.proposalSha256='d'.repeat(64);intake.plan={rationale:'Piano per il prompt',limitations:'M27 soltanto',masters:[{role:'R',width:1000,height:800,imageIndex:0}],background:{polyDegree:1,boxSize:16,boxSeparation:32},steps:['ChannelCombination'],checkpointCount:15,processing:{sharpenL:0.5,sharpenRGB:0.45,denoiseL:0.65,denoiseRGB:0.7,contrastLarge:0.22,contrastSmall:0.28,targetBackground:0.085}};}
         if(intake&&sourcePlanReady){intake.sourcePlanSha256='e'.repeat(64);intake.sourcePlan={rationale:'Selezione esplicita',limitations:'Astrometria da verificare',panels:[{panelId:'P1',directory:'F:\\Astro',sessionIds:['SESSION-M27'],masters:{RGB:{filename:'<img src=x>.xisf',imageIndex:0}}},{panelId:'P2',directory:'F:\\Astro',sessionIds:['SESSION-M27'],masters:{RGB:{filename:'Panel2.xisf',imageIndex:0}}}]};}
         if(intake&&preparationReady){intake.preparationPlanSha256='f'.repeat(64);intake.preparationPlan={rationale:'Preparazione CFA verificata',limitations:'Piano finale separato',masters:[{panelId:'P1',role:'CFA',filename:'<img src=x>.xisf',width:1000,height:800,imageIndex:0}],bayerPattern:'RGGB',canvas:null,nativeProcessCount:1,checkpointCount:2};}
+        if(intake&&researchReady)intake.research ||= {status:'AWAITING_OWNER_PERIMETER',stage:'CALIBRATION',nativeTrials:0,apiCalls:0,policySha256:'7'.repeat(64),policy:{maxApiCalls:32,maxNativeTrials:16},decisions:[],approved:false,final:null};
         if(intake&&adaptivePlanReady){intake.adaptive ||= {proposalSha256:'7'.repeat(64),plan:{decision:{action:'PROPOSE_GRAPH',rationale:'Confrontare le immagini vere',limitations:'Nessuna accettazione',graph:{steps:[{process:'STRETCH',parameters:{targetBackground:.12}}]}}},cursor:{state:'AWAITING_EXECUTION',usage:{input_tokens:100,output_tokens:20},usageComplete:true},job:{jobId:'PIAI_'+intake.selection.requestId,state:'QUEUED',cancelRequested:false},executionPolicy:null};}
         if(intake&&adaptiveCompleted){intake.adaptive.cursor.state='READY_FOR_OWNER_REVIEW';intake.adaptive.job.state='COMPLETED';intake.adaptive.executionPolicy={};}
         return {ok:true,json:async()=>({intakes:intake?[intake]:[]})};
       }
+      if(url.endsWith('/research-approve')){intake.research.approved=true;intake.research.status='AWAITING_DECISION';return {ok:true,json:async()=>intake.research};}
       if(url.endsWith('/adaptive-approve')){intake.adaptive.executionPolicy=JSON.parse(options.body);return {ok:true,json:async()=>intake.adaptive};}
       if(url.endsWith('/adaptive-result'))return {ok:true,json:async()=>({deliverySha256:'6'.repeat(64),ownerReview:intake.ownerReview || null,
         delivery:{previewBase64:'UE5HX0ZJWFRVUkU=',artifacts:[{role:'RGB',localPath:'F:/private/RGB.xisf'}],archive:{localPath:'F:/private/workflow.zip'}}})};
@@ -315,4 +317,32 @@ test('adaptive delivery remains private and Owner review binds the exact deliver
   const value=JSON.parse(h.requests.find(x=>x.url.endsWith('/adaptive-review')).options.body);
   assert.equal(value.deliverySha256,'6'.repeat(64));assert.equal(value.decision,'ACCEPTED_PRIVATELY');
   assert.equal(h.requests.some(x=>/publish|gallery|api\.openai/.test(x.url)),false);
+});
+
+test('research portal requires three consents and a separate exact-perimeter native confirmation',async()=>{
+  const h=harness({researchEnabled:true,researchReady:true});await h.login();
+  h.controls.planningMode='OPENAI_RESEARCH';h.controls['planning-mode'].value='OPENAI_RESEARCH';
+  h.controls['openai-consent'].checked=true;h.controls['pixel-consent'].checked=true;
+  await h.submit();assert.equal(h.requests.filter(x=>x.url.endsWith('/science/intakes')&&x.options.method==='POST').length,0);
+  h.controls['preview-consent'].checked=true;await h.submit();
+  const intake=h.requests.find(x=>x.url.endsWith('/science/intakes')&&x.options.method==='POST');
+  assert.deepEqual(JSON.parse(intake.options.body).researchPlanning,{dataTransferConfirmed:true,pixelStatisticsConfirmed:true,previewTransferConfirmed:true});
+  assert.equal(JSON.parse(intake.options.body).adaptivePlanning,undefined);
+  const card=h.controls.plans.children[0],approve=card.children.find(x=>x.textContent==='Conferma perimetro e avvia le prove');
+  assert.ok(approve);assert.equal(approve.disabled,true);approve.click();await tick();
+  assert.equal(h.requests.filter(x=>x.url.endsWith('/research-approve')).length,0);
+  const checks=card.children.flatMap(x=>x.children).filter(x=>x.type==='checkbox');
+  assert.equal(checks.length,2);checks.forEach(x=>{x.checked=true;x.callbacks.change();});
+  approve.click();await tick();
+  const request=h.requests.find(x=>x.url.endsWith('/research-approve'));
+  assert.deepEqual(JSON.parse(request.options.body),{policySha256:'7'.repeat(64),nativeExecutionConfirmed:true,approximationAcknowledged:true});
+  assert.equal(h.requests.filter(x=>x.url.includes('/worker/')).length,0);
+});
+
+test('unsupported research recipe stays editable and never freezes or sends an intake',async()=>{
+  const h=harness({researchEnabled:true});await h.login();
+  h.controls['planning-mode'].value='OPENAI_RESEARCH';h.controls.mode.value='SHO';
+  for(const key of ['openai-consent','pixel-consent','preview-consent'])h.controls[key].checked=true;
+  await h.submit();assert.equal(h.requests.filter(x=>x.url.endsWith('/science/intakes')&&x.options.method==='POST').length,0);
+  assert.equal(h.controls.fields.disabled,false);assert.equal(h.stored.size,0);
 });
