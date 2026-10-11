@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-049-EXT-PIAI-ADAPTIVE |
-| Versione | 1.2 |
+| Versione | 1.3 |
 | Stato | Owner-authorized / In Progress; statistiche master abilitate sul backend, ciclo adattivo non operativo |
 | Data | 2026-10-11 |
 
@@ -27,13 +27,31 @@ Build `6f6da9c7-84a3-4351-87a9-378040b674f0` SUCCESS con 23 test planner a provi
 
 Revisione `dsg-pixinsight-pilot-pixels-20261011` creata a traffico 0, Ready/digest/model `gpt-6-luna`/quota0/flag `LOCAL_WORKER_VERIFIED` verificati, poi traffico 100%. Secret esistente preservato senza lettura della chiave. Health disponibile, conteggio provider non esposto. Pagina pubblicata ricaricata; accesso Google non completato nel browser di verifica: opzione autenticata e nuova richiesta reale con consenso statistico non collaudate. Nessuna chiamata API aggiuntiva nel rilascio. La revisione quota0 precedente resta disponibile per rollback.
 
-### Fondazione V2 candidata
+### Fondazione V2 integrata, non attivata
+
+PR [#562](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/562), head `f0ae5a22e944fa22305d3035fea21c4093daf4ad`, merge `59d3e670195fb65330748c61581f2948a3526f76`: ARB poi RQ indipendenti APPROVED, zero finding; 15 check PR SUCCESS, main allineato e merge protetto sull'head atteso. 290 test Python PixInsight PASS con due skip già previsti; MkDocs strict PASS. [Ricevuta dei gate](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/562#issuecomment-6107749078). Il merge non attiva il ciclo V2.
+
+Tutti i 14 workflow applicabili sul merge effettivo SUCCESS, incluse prove Windows/Linux e deploy Pages. Pagina pubblica verificata con il metodo scientifico e il controllo di dominio corretto. Runtime cloud/worker V1 invariati.
 
 `adaptive_catalog.py` valida grafi DIRECT/STARLESS per LRGB/OSC/SHO/HOO e un insieme finito di processi/parametri. Nessuna espressione PixelMath, comando, percorso o codice prodotto dal modello è ammesso. Prerequisiti di dominio, registrazione, fondo, riferimenti stellari, runtime e maschera restano fatti del worker con provenienza distinta; una statistica del campo non può promuoverli. Ordine e dipendenze sono controllati. I valori ammessi ereditano i limiti della V1: sono limiti tecnici, non ottimi scientifici dimostrati.
 
 `adaptive_ledger.py` conserva richieste/risultati immutabili e un cursore compatto con ordinali assegnati dal server. Policy Owner, sorgenti, catalogo e runtime sono invarianti; solo l'evidence cambia al checkpoint successivo. Un risultato del modello resta `AWAITING_EXECUTION` fino alla distinta ricevuta nativa legata a checkpoint e History. Crash dopo il risultato recupera il risultato senza invio; risposta persa conserva prenotazione e usage incompleto, senza nuovo ordinale. Annullamento/ritiro impediscono nuove prenotazioni. Capacità finita 16 decisioni/sessione e 16 sessioni: vincolo del candidato, nessuna quota giornaliera o budget monetario.
 
-Quindici prove offline PASS incluso il rifiuto del denoise con dominio non attestato, su concorrenza, crash, doppia ripresa, sostituzione di binding, dati non finiti, dipendenze e incertezze. Questi moduli non sono collegati a endpoint, provider, worker o esecutore attivi. Il broker V1 non ammette `OPENAI_API_ADAPTIVE`: non costituiscono attivazione V2, validazione di adapter scientifici, OAT o chiusura dei residui.
+Quindici prove offline PASS su concorrenza, crash, doppia ripresa, sostituzione di binding, dati non finiti, dipendenze e incertezze, incluso il rifiuto del denoise con dominio non attestato. Questi moduli non sono collegati a endpoint, provider, worker o esecutore attivi. Il broker V1 non ammette `OPENAI_API_ADAPTIVE`: non costituiscono attivazione V2, validazione di adapter scientifici, OAT o chiusura dei residui.
+
+### Misure native candidate: rumore e profili stellari
+
+`measurements.jsh` usa API locali documentate nell'installazione PixInsight: `Image.noiseMRS`, StarDetector V2 e DynamicPSF. Lavora sulla vista della copia selezionata, senza processi di trasformazione dei pixel, salvataggio del master o rete. Regioni dichiarate in coordinate intere, massimo otto; selezioni ripristinate anche in caso di errore. StarDetector opera sul campo completo, selezionando deterministicamente la sorgente isolata più luminosa per cella di una griglia 16×16, massimo 256 candidati. I fit gaussiani sono registrati separatamente per canale, compresi background, ampiezza, centro, assi, angolo e residuo. Fit mancanti restano mancanti; non sono sostituiti con una PSF ipotetica.
+
+Ogni ROI conserva tre stime MRS, con 4, 3 e 2 strati, e il numero di campioni del supporto. La deviazione standard è espressa nelle unità normalizzate dell'immagine, senza divisione per Sn. È una stima della componente gaussiana secondo il modello wavelet: un supporto piccolo o variabile fra strati richiede interpretazione, non un voto automatico. Una ROI coincidente con tutto il campo non diventa automaticamente cielo vuoto; questi valori non sono SNR, rumore di fondo validato o prova di conservazione del segnale. Non viene applicato un fallback silenzioso né mediato il risultato dei diversi strati.
+
+`native_measurements.py` controlla forma, conteggi, finitezza, geometria, ruoli dei fit e binding verso hash/indice della sorgente e impronte del componente e di StarDetector. Per una Gaussiana ellittica calcola soltanto descrittori matematici: `FWHM_major = 2√(2 ln 2) max(sx, sy)`, analogo per l'asse minore, ed eccentricità `√(1 − (min(sx, sy)/max(sx, sy))²)`. Un profilo non gaussiano può essere descritto male da quel modello; residui, saturazione, blending e selezione delle stelle vanno esaminati prima di usare le misure per un confronto. Il campione delle stelle più luminose non è una stima imparziale di tutte le stelle o del seeing.
+
+Il validatore non autentica da solo un file JSON e non certifica ciò che è avvenuto sul PC. L'adapter chiamante deve verificare fisicamente file, impronte, runtime e ricevuta locale prima di conservarlo. Tutte le attestazioni di linearità, registrazione, validità del fondo e accettazione restano `NOT_ESTABLISHED`; il componente non le promuove usando i fit. Sei test Python sintetici e quattro test JavaScript con API simulate verificano questo contratto, distintamente dal collaudo nativo.
+
+Prova privata read-only sul master L M27, indice 0, 4634×2808 mono, PixInsight 1.9.5 build 1706: 3.165 sorgenti rilevate, 255 selezionate, 253 fit gaussiani riusciti. Hash originale/copia e History invariati. Launcher, log e rapporto conservati privatamente; nessuna richiesta OpenAI, trasformazione dei master, accettazione o pubblicazione di immagini. L'istanza del lavoro precedente è rimasta aperta; soltanto l'istanza isolata della prova è stata chiusa dopo la ricevuta. Questa prova riguarda la misura, non il ciclo adattivo: collegamento al worker, attestate precondizioni scientifiche, endpoint V2, esecuzione segmentata e verifica dei checkpoint restano requisiti aperti.
+
+Riferimenti primari consultati: documentazione PJSR locale `Image/Image.html`, `PSF/PSF.html` e `StarDetector/StarDetector.html`, header `StarDetector.jsh` V2.01 rilasciato il 15/09/2026 e script nativo `FWHMEccentricity.js`. Le dipendenze e i moduli/modelli effettivamente caricati devono essere attestati nel futuro manifest runtime completo: il solo hash dell'header StarDetector non certifica tutte le sue dipendenze o un modello ML.
 
 Uso locale: `python -m tools.pixinsight.local_pilot.image_analysis --input <export-privato.xisf> --sha256 <sha256-verificato> --output <nuovo-rapporto-privato.json>`. Rapporto con hash da conservare privatamente, output create-only. Nessuna rete, enumerazione cartelle, token o avvio PixInsight.
 
