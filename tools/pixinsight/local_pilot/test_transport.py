@@ -222,6 +222,8 @@ class ResearchCheckpointSizeTests(HttpHarness):
         class ScientificFixture:
             def research_checkpoint(self,request_id,value):return {'bytes':len(encode(value))}
             def adaptive_checkpoint(self,request_id,value):return {'bytes':len(encode(value))}
+            def research_resume_offer(self,request_id):return {'offer':True}
+            def research_resume(self,request_id,value):return {'resumed':True}
         self.scientific=ScientificFixture()
         super().setUp()
 
@@ -234,6 +236,15 @@ class ResearchCheckpointSizeTests(HttpHarness):
         oversized={'fixture':'x'*(RESEARCH_CHECKPOINT_LIMIT+1-len(encode({'fixture':''})))}
         with self.assertRaisesRegex(ProtocolError,'REQUEST_SIZE'):self.client.post(path,oversized)
         self.assertEqual(self.declared_size(path,RESEARCH_CHECKPOINT_LIMIT+1,TOKEN),400)
+
+    def test_research_resumption_is_owner_only_and_worker_cannot_self_resume(self):
+        path='/v1/science/intakes/'+'d'*32+'/research-resume'
+        self.assertEqual(self.request(path,token='synthetic-owner',origin='https://portal.invalid'),(200,{'offer':True}))
+        self.assertEqual(self.request(path,{},'synthetic-owner','https://portal.invalid'),(200,{'resumed':True}))
+        for body in (None,{}):
+            self.assertEqual(self.request(path,body,TOKEN)[0],403)
+            self.assertEqual(self.request(path,body)[0],403)
+            self.assertEqual(self.request(path.replace('/v1/','/v1/worker/'),body,TOKEN)[0],404)
 
     def test_larger_research_receipts_preserve_auth_and_legacy_checkpoint_bound(self):
         root='/v1/worker/science/intakes/'+'d'*32

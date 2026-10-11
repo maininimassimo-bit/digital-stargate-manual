@@ -48,7 +48,7 @@ def generate(provider, state, projection, assets, *, owner, knowledge_sha256, re
     require(state['apiCalls'] <= contract.MAX_CALLS and state['status'] == 'API_RESERVED',
             'RESEARCH_API_RESERVATION_REQUIRED')
     require(isinstance(projection, dict) and set(projection) ==
-            {'intent', 'stage', 'selectedId', 'checkpoints', 'instrument', 'comparisonLimitations'},
+            {'intent', 'stage', 'selectedId', 'checkpoints', 'instrument', 'comparisonLimitations', 'calibrationLineage'},
             'RESEARCH_PROJECTION_FIELDS')
     safe_text(projection['intent'])
     require(projection['stage'] == state['stage'] and projection['selectedId'] == state['selectedId'] and
@@ -74,8 +74,11 @@ def generate(provider, state, projection, assets, *, owner, knowledge_sha256, re
                'SELECT advances the stage and may omit only optional stages. '
                'Use supplied native evidence and common-display previews; do not assert missing '
                'paired fits, photometric validity or scientific acceptance. '
-               'Check SPCC fit evidence before selecting calibration. Preserve the control if '
-               'a stronger setting has no supported benefit. Stop when evidence is inadequate.\n'+guide,
+               'Check SPCC fit evidence before selecting calibration. '
+               'Read calibrationLineage for the verified SPCC ancestor and the exact transformations since it. '
+               'A null photometry on a later checkpoint means no new local SPCC fit, not absence of the ancestral fit. '
+               'Do not confuse inspected ancestral calibration with established downstream photometric validity. '
+               'Preserve the control if a stronger setting has no supported benefit. Stop when evidence is inadequate.\n'+guide,
                'input': [{'role': 'user', 'content': content}],
                'tools': [{'type': 'function', 'name': 'choose_pixinsight_action',
                           'description': 'Request one admitted trial, select a verified sibling, finish for Owner review, or stop.',

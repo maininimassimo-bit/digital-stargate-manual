@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Versione | `DSG_PIAI_RESEARCH_V1`, rilascio tecnico 11/10/2026 |
-| Stato | PR579 integrata, backend/worker/portale attivi; perimetro M27 confermato; prima API senza decisione validata, arresto senza prove native; OAT completo e accettazione finale pendenti |
+| Stato | Backend/worker/portale attivi; richiesta M27 2ffd1ae8 fermata in COMBINE dopo 10 API / 5 prove; correzione candidata della provenienza SPCC e ripresa Owner senza azzerare budget. Consuntivo seguente. Tentativi precedenti conservati, accettazione scientifica Owner separata |
 | Perimetro | LRGB, campo singolo, campionamento originale, inventario QHY695A/ZWO RGB/Optolong L-Pro L |
 | Conoscenza | `DSG_PIAI_RESEARCH_KNOWLEDGE_V1`, distinta dal pacchetto scientifico storico V1 |
 
@@ -100,3 +100,45 @@ PR582 integrata nel merge `a994380310cf330241bd67a68ba5b6a23748a39b`, ARB poi RQ
 Nuova richiesta distinta `2ffd1ae8` autorizzata dall’Owner con medesimo perimetro. Prima decisione TEST/SPCC validata dal contratto: padre CP000, `checkpointId` null, conoscenza SHA `5b2bc101e9b9a98d34dc24f9527e57985294df4faf510bc0f73d55c34b0daaf2`. Uso noto 10.613 input e 485 output, totale 11.098 token. CP001 è stata eseguita in nuova istanza dedicata su copie; ricevute native/History e tutti i pixel verificati localmente, originali invariati, fit SPCC `NATIVE_FIT_INSPECTABLE`, viste possedute chiuse. La selezione della calibrazione resta una decisione successiva e non è attestata dal solo completamento.
 
 La ricevuta di checkpoint, con misure di RGB/L prima e dopo, occupa 536.433 byte nella codifica canonica. Il limite client di 262.144 byte ha bloccato l’invio prima della richiesta HTTP: backend ancora `NATIVE_STARTED`, nessun nuovo tentativo nativo o API. La correzione candidata usa un limite condiviso finito di 2MiB per il solo `research-checkpoint`; conserva 256KiB per V2, autenticazione, validazione scientifica, hash, original guard e limiti del catalogo. I test HTTP verificano ricevute di dimensione reale, limite esatto, rifiuto oltre limite e conservazione di ruoli/limite V2. Dopo il rilascio il worker deve riverificare e consegnare la stessa ricevuta, senza rieseguire SPCC. Recupero effettivo, decisioni successive e consegna finale ancora da verificare.
+
+
+## Consuntivo OAT M27
+
+La richiesta distinta `2ffd1ae806a968db8d4240957fc3b900` è stata autorizzata dall'Owner con schema corretto, stessi master e dati OpenAI, `gpt-6-luna`, 16 prove native / 32 richieste e massimo tre alternative per fase. Le decisioni sono prodotte dall'API e applicate dal worker entro il perimetro confermato dal portale. I tentativi b013b0bb e 1f377a51 restano conservati senza reinvio; i loro esiti non descrivono lo stato corrente.
+
+### Recupero della ricevuta SPCC e rilascio PR583
+
+PR [583](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/583), head `e3eddeb44306e1bced2d580b7a9e96bd34322782`, merge `2ecbdfead8880decc05910cb443a4a994f23b901`: ARB poi RQ separate APPROVED, zero finding, 62 test research/transport e MkDocs strict PASS; 15/15 check head e 16/16 post-merge SUCCESS. Pages pubblicata con run38173608664. Build `964a21a6-c157-43ec-91d8-8320fb3f655e` SUCCESS; digest `14be9b31334e57075f5f827ebb5aa4a24f7a1679fb833670dce8260e8a38f713`; backend `dsg-pixinsight-pilot-research-cp-v1-20261011` attivo al 100% dopo health200/protetti403 anonimi e confronto della configurazione. Ambiente, identità, risorse, segreti e byte nativi preservati; rollback research-bind-v1 disponibile.
+
+Il worker è stato aggiornato sotto lock di manutenzione fra cicli, preservando lease, impostazioni, profilo e tentativo CP001. Preflight sul prodotto reale: ricevuta canonica 536.433 byte entro 2MiB, originali invariati, verifica SHA `6771c7db001386232da378186f6af51d1fd6c69a060e54fa55857d6a07fd4f5d`. La stessa ricevuta è stata riverificata e consegnata; nessuna nuova esecuzione SPCC. Il backend ha ripreso da AWAITING_DECISION e l'API ha selezionato CP001.
+
+### Scelte realmente osservate
+
+CP001 conserva SPCC sul RGB lineare con 70 stelle comuni esportate, curve ZWO nominali, QE ideale sostitutiva e L-Pro escluso dai filtri RGB. Fit nativi ispezionabili e riferimento bianco entro gli intervalli esportati sono precondizioni soddisfatte per selezionare il checkpoint; non certificano la risposta strumentale reale, una calibrazione assoluta o l'accettazione scientifica.
+
+In DETAIL sono stati confrontati CP001 senza ulteriore trattamento, CP002 BlurXTerminator correction only e CP003 deconvoluzione moderata (`sharpenL=0,2`, `sharpenRGB=0,1`). Entrambi i candidati hanno lo stesso genitore CP001: nessuna sovrapposizione delle deconvoluzioni. L'API ha conservato il controllo, dichiarando beneficio visivo non convincente sui dettagli deboli e rischio alle alte luci. Le FWHM inferiori dei candidati sono descrittive di popolazioni nuovamente rilevate, non prova di maggiore risoluzione.
+
+| Checkpoint | Campioni esattamente 1, R / G / B | Campioni esattamente 1, L |
+|---|---|---|
+| CP001 controllo | 0 / 0 / 0 | 0 |
+| CP002 correction only | 1.147 / 1.134 / 1.278 | 2.920 |
+| CP003 deconvoluzione | 1.165 / 1.170 / 1.304 | 2.895 |
+
+Ogni canale comprende 13.012.272 campioni. Le verifiche non trovano campioni negativi, maggiori di uno o esattamente zero in questi tre checkpoint. La decisione API parla di clipping: il fatto verificato è l'aumento dei campioni al limite superiore e la riduzione del margine nelle alte luci. Il conteggio, senza ispezione locale dei nuclei e dell'operazione interna, non prova da solo il meccanismo della saturazione. Le prove scartate restano nell'archivio e non fanno parte della catena finale.
+
+In NOISE, CP004 applica NoiseXTerminator 0,3 a L e RGB sul controllo CP001. L'API lo ha selezionato dopo confronto comune, descrivendo tessitura lievemente più uniforme senza perdita morfologica evidente nel crop disponibile; non ha ritenuto necessaria una prova più intensa. MRS sul campo completo, quattro livelli, passa da 1,5338e-4 / 1,4858e-4 / 3,7092e-4 a 4,3574e-5 / 4,2340e-5 / 9,3694e-5 per RGB e da 6,9373e-5 a 4,9185e-5 per L. Scala e supporto sono conservati nelle ricevute. Denoise cambia correlazioni e supporto: non dedurre un aumento di SNR da questi rapporti. Sulla ROI L la stima a quattro livelli restituisce sigma=0 e supporto=0 dopo denoise: stima non utilizzabile a quella scala, non assenza di rumore.
+
+Le decisioni successive e la consegna devono essere riconciliate con le ricevute terminali; l'accettazione Owner resta distinta. Le sezioni di rilascio precedenti sono snapshot storici.
+
+
+### Arresto in COMBINE e correzione della provenienza
+
+L'API ha selezionato CP005, MaskedStretch con target di fondo 0,06, come risultato non lineare più leggibile rispetto al controllo lineare a display identità. Il target è tonale, non un campione di cielo vuoto e non una sottrazione del fondo. La ricevuta registra 130 campioni esattamente zero in R e L, massimi sotto uno: non ignorare il limite nelle successive valutazioni.
+
+La decima decisione è STOP in COMBINE: il modello dichiara assenti i prodotti SPCC perché vede `photometry=null` su CP005. La calibrazione è invece conservata e verificata in CP001, già selezionato. Causa tecnica individuata nella proiezione API: comprende soltanto controllo e fratelli correnti e omette il fit dell'antenato. L'arresto è conservato, non convertito in approvazione scientifica. Consumo noto della richiesta fino allo STOP: 109.205 token input, 5.476 output, 114.681 totali; cinque prove native. Nessuna fusione, saturazione o consegna finale.
+
+La correzione candidata aggiunge `calibrationLineage`: catena esatta del checkpoint selezionato fino a CP000, processi e dominio; checkpoint SPCC, impronta della sua ricevuta e prodotti aggregati originali. Controlla presenza, verifica, assenza di cicli, profilo strumentale e hash del fit prima di prenotare una nuova chiamata. Un fit di un ramo estraneo non diventa un antenato. Non duplica il fit nei checkpoint successivi e non deduce che denoise/stretch/fusione preservino rapporti fotometrici. La validità fotometrica a valle e l'accettazione restano NOT_ESTABLISHED.
+
+Dal portale l'Owner può esaminare il fit dell'antenato e la catena, poi confermare la ripresa della stessa richiesta. GET/POST `research-resume` sono esclusivamente Owner: il worker non può riaprire il ciclo. La conferma vincola stato, policy e nuova evidenza con SHA; ricevuta immutabile e cronologia dell'arresto conservate. La ripresa non invoca OpenAI o PixInsight nell'endpoint: il worker torna alla scelta seguente, che può ancora essere STOP. Stessi parametri, sorgenti, runtime, conoscenza e massimali; non azzera prove, chiamate o selezioni, non riesegue SPCC. Nel caso corrente restano 11 prove e 22 richieste API. Gli stati indeterminati API, prenotazioni pendenti, avvii incerti, richieste annullate e finali consegnati non sono riapribili tramite questo controllo. Pubblicazione e accettazione finale non cambiano.
+
+Rilascio della correzione, conferma della ripresa, fusione e OAT della consegna restano da verificare. Questo è un consuntivo parziale reale, non un workflow finale accettato.

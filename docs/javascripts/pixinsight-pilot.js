@@ -124,6 +124,27 @@
           }
           const decisions=el('ol','',card);
           for(const item of research.decisions || [])el('li',`${item.decision.action}: ${item.decision.rationale} Limiti: ${item.decision.limitations}`,decisions);
+          if(research.status==='STOPPED_FOR_REVIEW' && !research.cancelRequested && research.decisions?.at(-1)?.decision.action==='STOP'){
+            const inspect=el('button','Rivedi provenienza della calibrazione',card);inspect.type='button';
+            inspect.addEventListener('click',()=>run(async()=>{
+              const evidence=await call(`/v1/science/intakes/${selection.requestId}/research-resume`);
+              inspect.disabled=true;
+              const fit=evidence.calibrationLineage.calibration;
+              el('p',`Fit SPCC nativo conservato in ${fit.checkpointId}. Catena selezionata: ${evidence.calibrationLineage.chain.map(n=>n.id).join(' → ')}. Il fit appartiene al genitore lineare; denoise e stretch non ripetono SPCC. La validità fotometrica dopo le trasformazioni e l’accettazione scientifica restano non stabilite.`,card);
+              el('p',`Ripresa nella stessa richiesta: restano ${evidence.remainingNativeTrials} prove native e ${evidence.remainingApiCalls} richieste API. Arresto, prove e contatori conservati; possibili costi OpenAI. Il coordinatore può fermarsi di nuovo.`,card);
+              const label=el('label',' Ho esaminato la provenienza e autorizzo la ripresa entro il perimetro già confermato.',card);
+              const check=el('input','',label);check.type='checkbox';
+              const resume=el('button','Conferma revisione e riprendi',card);resume.type='button';resume.disabled=true;
+              check.addEventListener('change',()=>{resume.disabled=!check.checked;});
+              resume.addEventListener('click',()=>run(async()=>{
+                if(!check.checked)return;
+                await call(`/v1/science/intakes/${selection.requestId}/research-resume`,{
+                  stateSha256:evidence.stateSha256,policySha256:evidence.policySha256,
+                  lineageSha256:evidence.lineageSha256,reviewedEvidenceConfirmed:true});
+                await refresh();message('Revisione confermata: ripresa con prove e contatori conservati.');
+              }));
+            }));
+          }
           if(research.approved && !research.final && !research.cancelRequested){
             const cancel=el('button','Interrompi le prove',card);cancel.type='button';
             cancel.addEventListener('click',()=>run(async()=>{await call(`/v1/science/intakes/${selection.requestId}/research-cancel`,{});await refresh();}));

@@ -5,7 +5,7 @@ import {readFileSync} from 'node:fs';
 import {webcrypto} from 'node:crypto';
 const source=readFileSync(new URL('../../../docs/javascripts/pixinsight-pilot.js',import.meta.url),'utf8');
 const tick=async()=>{for(let i=0;i<12;i++)await new Promise(resolve=>setTimeout(resolve,3));};
-function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=false,plansReady=false,sourcePlanReady=false,preparationReady=false,completedRevision=false,legacyRevisions=false,openaiEnabled=false,pixelEnabled=false,adaptiveEnabled=false,adaptivePlanReady=false,adaptiveCompleted=false,researchEnabled=false,researchReady=false}={}) {
+function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=false,plansReady=false,sourcePlanReady=false,preparationReady=false,completedRevision=false,legacyRevisions=false,openaiEnabled=false,pixelEnabled=false,adaptiveEnabled=false,adaptivePlanReady=false,adaptiveCompleted=false,researchEnabled=false,researchReady=false,researchStopped=false}={}) {
   function node(){return {dataset:{},children:[],callbacks:{},value:'',checked:false,isConnected:true,
     addEventListener(type,callback){this.callbacks[type]=callback;},append(...items){this.children.push(...items);},
     replaceChildren(){this.children=[];},querySelectorAll(){return this.children.flatMap(label=>label.children).filter(x=>x.type==='checkbox'&&x.checked);},
@@ -44,11 +44,16 @@ function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=fal
         if(intake&&sourcePlanReady){intake.sourcePlanSha256='e'.repeat(64);intake.sourcePlan={rationale:'Selezione esplicita',limitations:'Astrometria da verificare',panels:[{panelId:'P1',directory:'F:\\Astro',sessionIds:['SESSION-M27'],masters:{RGB:{filename:'<img src=x>.xisf',imageIndex:0}}},{panelId:'P2',directory:'F:\\Astro',sessionIds:['SESSION-M27'],masters:{RGB:{filename:'Panel2.xisf',imageIndex:0}}}]};}
         if(intake&&preparationReady){intake.preparationPlanSha256='f'.repeat(64);intake.preparationPlan={rationale:'Preparazione CFA verificata',limitations:'Piano finale separato',masters:[{panelId:'P1',role:'CFA',filename:'<img src=x>.xisf',width:1000,height:800,imageIndex:0}],bayerPattern:'RGGB',canvas:null,nativeProcessCount:1,checkpointCount:2};}
         if(intake&&researchReady)intake.research ||= {status:'AWAITING_OWNER_PERIMETER',stage:'CALIBRATION',nativeTrials:0,apiCalls:0,policySha256:'7'.repeat(64),policy:{maxApiCalls:32,maxNativeTrials:16},decisions:[],approved:false,final:null};
+        if(intake&&researchStopped)intake.research ||= {status:'STOPPED_FOR_REVIEW',stage:'COMBINE',nativeTrials:5,apiCalls:10,policySha256:'7'.repeat(64),policy:{maxApiCalls:32,maxNativeTrials:16},decisions:[{decision:{action:'STOP',rationale:'Fit non visibile',limitations:'Revisione necessaria'}}],approved:true,final:null};
         if(intake&&adaptivePlanReady){intake.adaptive ||= {proposalSha256:'7'.repeat(64),plan:{decision:{action:'PROPOSE_GRAPH',rationale:'Confrontare le immagini vere',limitations:'Nessuna accettazione',graph:{steps:[{process:'STRETCH',parameters:{targetBackground:.12}}]}}},cursor:{state:'AWAITING_EXECUTION',usage:{input_tokens:100,output_tokens:20},usageComplete:true},job:{jobId:'PIAI_'+intake.selection.requestId,state:'QUEUED',cancelRequested:false},executionPolicy:null};}
         if(intake&&adaptiveCompleted){intake.adaptive.cursor.state='READY_FOR_OWNER_REVIEW';intake.adaptive.job.state='COMPLETED';intake.adaptive.executionPolicy={};}
         return {ok:true,json:async()=>({intakes:intake?[intake]:[]})};
       }
       if(url.endsWith('/research-approve')){intake.research.approved=true;intake.research.status='AWAITING_DECISION';return {ok:true,json:async()=>intake.research};}
+      if(url.endsWith('/research-resume')){
+        if(options.method==='POST'){intake.research.status='AWAITING_DECISION';return {ok:true,json:async()=>intake.research};}
+        return {ok:true,json:async()=>({stateSha256:'1'.repeat(64),policySha256:'7'.repeat(64),lineageSha256:'2'.repeat(64),remainingNativeTrials:11,remainingApiCalls:22,calibrationLineage:{calibration:{checkpointId:'CP001'},chain:[{id:'CP000'},{id:'CP001'},{id:'CP004'},{id:'CP005'}]}})};
+      }
       if(url.endsWith('/adaptive-approve')){intake.adaptive.executionPolicy=JSON.parse(options.body);return {ok:true,json:async()=>intake.adaptive};}
       if(url.endsWith('/adaptive-result'))return {ok:true,json:async()=>({deliverySha256:'6'.repeat(64),ownerReview:intake.ownerReview || null,
         delivery:{previewBase64:'UE5HX0ZJWFRVUkU=',artifacts:[{role:'RGB',localPath:'F:/private/RGB.xisf'}],archive:{localPath:'F:/private/workflow.zip'}}})};
@@ -336,6 +341,26 @@ test('research portal requires three consents and a separate exact-perimeter nat
   approve.click();await tick();
   const request=h.requests.find(x=>x.url.endsWith('/research-approve'));
   assert.deepEqual(JSON.parse(request.options.body),{policySha256:'7'.repeat(64),nativeExecutionConfirmed:true,approximationAcknowledged:true});
+  assert.equal(h.requests.filter(x=>x.url.includes('/worker/')).length,0);
+});
+
+test('research stopped session requires evidence review and exact confirmation before resuming',async()=>{
+  const h=harness({researchEnabled:true,researchStopped:true});await h.login();
+  h.controls['planning-mode'].value='OPENAI_RESEARCH';
+  for(const key of ['openai-consent','pixel-consent','preview-consent'])h.controls[key].checked=true;
+  await h.submit();const card=h.controls.plans.children[0];
+  const inspect=card.children.find(x=>x.textContent==='Rivedi provenienza della calibrazione');
+  assert.ok(inspect);assert.equal(h.requests.some(x=>x.url.endsWith('/research-resume')),false);
+  inspect.click();await tick();
+  const resume=card.children.find(x=>x.textContent==='Conferma revisione e riprendi');
+  assert.ok(resume);assert.equal(resume.disabled,true);resume.click();await tick();
+  assert.equal(h.requests.filter(x=>x.url.endsWith('/research-resume')&&x.options.method==='POST').length,0);
+  assert.ok(card.children.some(x=>/CP000 → CP001 → CP004 → CP005/.test(x.textContent || '')));
+  const check=card.children.flatMap(x=>x.children).find(x=>x.type==='checkbox');
+  check.checked=true;check.callbacks.change();resume.click();await tick();
+  const posts=h.requests.filter(x=>x.url.endsWith('/research-resume')&&x.options.method==='POST');
+  assert.equal(posts.length,1);assert.deepEqual(JSON.parse(posts[0].options.body),{
+    stateSha256:'1'.repeat(64),policySha256:'7'.repeat(64),lineageSha256:'2'.repeat(64),reviewedEvidenceConfirmed:true});
   assert.equal(h.requests.filter(x=>x.url.includes('/worker/')).length,0);
 });
 

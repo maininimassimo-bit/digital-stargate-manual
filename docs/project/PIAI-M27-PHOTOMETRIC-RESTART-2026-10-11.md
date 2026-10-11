@@ -3,12 +3,12 @@
 | Campo | Valore |
 |---|---|
 | Data | 11/10/2026 |
-| Stato | Coordinatore attivo, perimetro M27 confermato; prima API indeterminata senza decisione validata, zero prove native; OAT completo pendente |
+| Stato | Coordinatore attivo; richiesta distinta 2ffd1ae8 con 10 API / 5 prove, STOP prima di LRGB; provenienza SPCC e ripresa Owner candidate, finale pendente |
 | Obiettivo | Migliorare leggibilità del segnale acquisito, dettaglio e vividezza con calibrazione cromatica fotometrica e confronti motivati |
 
 ## Richiesta e dati confermati
 
-Il [coordinatore di prove LRGB](PIAI-RESEARCH-COORDINATOR-2026-10-11.md) descrive il modulo rilasciato, il protocollo trasferito all'API, i criteri di selezione e le evidenze SPCC reali. La prova di sviluppo ha restituito 70 stelle comuni RGB e conservato originali, History e checkpoint. La nuova richiesta dal portale ha completato l'analisi locale iniziale; questo non è ancora l'OAT delle decisioni API e delle prove autonome.
+Il [coordinatore di prove LRGB](PIAI-RESEARCH-COORDINATOR-2026-10-11.md) descrive protocollo, criteri e [consuntivo OAT corrente](PIAI-RESEARCH-COORDINATOR-2026-10-11.md#consuntivo-oat-m27). M27 2ffd1ae8 ha verificato cinque prove e dieci decisioni API: SPCC selezionato, controllo conservato dopo confronto BXT, denoise0,3 e stretch0,06 selezionati. Il modello si è fermato prima della fusione perché la proiezione perde il fit SPCC dell'antenato CP001. La correzione candidata rende verificabile la provenienza e prevede revisione Owner per riprendere senza nuova richiesta né azzerare contatori. Finale e accettazione scientifica restano aperti. Le verifiche preliminari e le note sui tentativi precedenti riportate sotto sono storiche.
 
 Owner chiede di ripartire dai master lineari, misurarli, usare una calibrazione fotometrica del colore e sviluppare il workflow in autonomia tramite API, impiegando processi e documentazione PixInsight. Conferma camera QHY695A, filtri RGB ZWO e Optolong L-Pro come luminanza. [Inventario fisico](../chapters/22-inventario-asset-management.md#2250-inventario-fisico-e-associazione-ai-master-m27). La versione COLOR/STRETCH/COMBINE già consegnata resta distinta; l'autorizzazione al suo grafo esatto non è un'autorizzazione tecnica a eseguire un nuovo grafo sul vecchio job.
 
@@ -33,7 +33,7 @@ Aggiornamento successivo: Owner autorizza lo sviluppo e precisa che il modulo fi
 
 Requisito Owner memorizzato: il coordinatore deve ricevere la conoscenza corretta per decidere i rami alternativi, non soltanto nomi di processi e intervalli di parametri. Per ogni famiglia di prove, documentare perché usarla o ometterla, precondizioni e controindicazioni, metriche applicabili e loro limiti, difetti da cercare nelle anteprime/ritagli, comparabilità dei genitori e criteri per promuovere o scartare un ramo. Il protocollo versionato e i riferimenti dei processi installati devono accompagnare le misure reali; il modello deve motivare la decisione con queste evidenze, dichiarando ciò che non è misurato. Una metrica isolata non certifica la migliore elaborazione.
 
-Il servizio attivo V2 offre un catalogo finito e il modello può adattare solo i parametri del prossimo processo nel grafo approvato. `COLOR` è ColorCalibration empirica, non SPCC. Non dispone ancora di un ciclo autonomo per generare/eseguire/selezionare rami alternativi. Un prompt più ambizioso non aggiunge queste capacità.
+Il servizio storico V2 offre un catalogo finito e il modello può adattare solo i parametri del prossimo processo nel grafo approvato. `COLOR` è ColorCalibration empirica, non SPCC. Non dispone ancora di un ciclo autonomo per generare/eseguire/selezionare rami alternativi. Un prompt più ambizioso non aggiunge queste capacità.
 
 Il nuovo coordinatore deve collegare decisioni API a funzioni native validate: lettura del manuale del processo/versione installata, ammissione delle precondizioni, misure, astrometria/SPCC, prova su copie/ritagli, confronto appaiato, promozione del ramo e verifica finale. Il modello seleziona operazioni e parametri; il worker controlla input, sorgenti, dipendenze, perimetro approvato e ricevute prima dell'esecuzione. Non esegue codice o espressioni arbitrarie prodotti dal modello. Le [funzioni OpenAI](https://developers.openai.com/api/docs/guides/function-calling) collegano il modello alle azioni dell'applicazione: l'API non dispone da sola di PixInsight o di accesso al PC.
 
