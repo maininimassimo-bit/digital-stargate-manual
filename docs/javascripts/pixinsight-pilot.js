@@ -93,6 +93,60 @@
         if(intake.state==='WITHDRAWN'){el('p','Richiesta ritirata. Piano ed evidenze conservati; nessuna elaborazione autorizzata da questa richiesta.',card);continue;}
         if(selection.sourceProfile)el('p',`Master: ${selection.sourceProfile.mode} · ${selection.sourceProfile.layout==='PANELS'?'pannelli da unire':'campo singolo'} · oggetto ${intake.target || ''}.`,card);
         const upstreamRequired=selection.sourceProfile?.mode==='OSC_CFA' || selection.sourceProfile?.layout==='PANELS';
+        if(selection.researchPlanning){
+          const research=intake.research;
+          if(!research){el('p','Il PC deve verificare i master lineari e la configurazione fotometrica.',card);continue;}
+          const labels={AWAITING_OWNER_PERIMETER:'Analisi pronta: conferma il perimetro prima delle prove.',
+            AWAITING_DECISION:'Scelta del prossimo ramo in attesa.',API_RESERVED:'Valutazione API in corso; nessun reinvio automatico.',
+            API_INDETERMINATE_NO_RETRY:'Risposta API indeterminata: ciclo fermo per verifica.',
+            NATIVE_PENDING:'Prova scelta: preparazione sul PC.',NATIVE_RESERVED:'Prova prenotata sul PC.',
+            NATIVE_STARTED:'PixInsight sta elaborando una copia privata.',STOPPED_FOR_REVIEW:'Ciclo fermo: consulta la motivazione.',
+            RECOVERY_REQUIRED:'Verifica locale necessaria; nessuna ripetizione automatica.',
+            AWAITING_FINAL_DELIVERY:'Preparazione della consegna privata.',READY_FOR_OWNER_REVIEW:'Risultato pronto per la tua valutazione.'};
+          el('p',labels[research.status] || research.status,card);
+          el('p',`Fase: ${research.stage}. Prove: ${research.nativeTrials}/${research.policy.maxNativeTrials}. Richieste API: ${research.apiCalls}/${research.policy.maxApiCalls}.`,card);
+          if(research.instrument)el('p',`Camera ${research.instrument.camera}; RGB ${research.instrument.rgbFilters.join(', ')}; L ${research.instrument.luminanceFilter}; QE ${research.instrument.qe}; bianco ${research.instrument.whiteReference}. Griglia ${research.inputGeometry.join(' × ')}. Regione di fondo operativa [${research.backgroundROI.join(', ')}], senza certificazione di cielo vuoto.`,card);
+          if(research.status==='AWAITING_OWNER_PERIMETER'){
+            el('p','LRGB alla risoluzione originale. Il coordinatore può provare e confrontare SPCC, correzione ottica/deconvoluzione, riduzione del rumore, stretch, fusione LRGB e saturazione moderata. Massimo tre alternative per fase. Le chiamate OpenAI possono avere un costo.',card);
+            const nativeLabel=el('label',' Autorizzo PixInsight su copie e le valutazioni API dei risultati intermedi.',card);
+            const nativeCheck=el('input','',nativeLabel);nativeCheck.type='checkbox';
+            const approxLabel=el('label',' Prendo atto delle curve nominali ZWO, della QE sostitutiva e di L-Pro usato soltanto per L. La neutralizzazione del fondo non è inclusa in SPCC.',card);
+            const approxCheck=el('input','',approxLabel);approxCheck.type='checkbox';
+            const approve=el('button','Conferma perimetro e avvia le prove',card);approve.type='button';approve.disabled=true;
+            const update=()=>{approve.disabled=!(nativeCheck.checked && approxCheck.checked);};
+            nativeCheck.addEventListener('change',update);approxCheck.addEventListener('change',update);
+            approve.addEventListener('click',()=>run(async()=>{
+              if(!nativeCheck.checked || !approxCheck.checked)return;
+              await call(`/v1/science/intakes/${selection.requestId}/research-approve`,{
+                policySha256:research.policySha256,nativeExecutionConfirmed:true,approximationAcknowledged:true});
+              await refresh();message('Perimetro confermato. Il PC eseguirà le prove e conserverà le alternative.');
+            }));
+          }
+          const decisions=el('ol','',card);
+          for(const item of research.decisions || [])el('li',`${item.decision.action}: ${item.decision.rationale} Limiti: ${item.decision.limitations}`,decisions);
+          if(research.approved && !research.final && !research.cancelRequested){
+            const cancel=el('button','Interrompi le prove',card);cancel.type='button';
+            cancel.addEventListener('click',()=>run(async()=>{await call(`/v1/science/intakes/${selection.requestId}/research-cancel`,{});await refresh();}));
+          }
+          if(research.final){
+            const show=el('button','Apri risultato e ricevute',card);show.type='button';
+            show.addEventListener('click',()=>run(async()=>{
+              const delivery=await call(`/v1/science/intakes/${selection.requestId}/research-result`);
+              show.disabled=true;const image=el('img','',card);image.src='data:image/png;base64,'+delivery.previewBase64;image.alt='Risultato privato del workflow con confronto dei rami';
+              for(const artifact of delivery.artifacts)el('p',`${artifact.role}: ${artifact.localPath}`,card);
+              el('p',`Archivio delle prove: ${delivery.archive.localPath}. Richiede i master originali, PixInsight e i moduli con licenza per una ripetizione.`,card);
+              const receipt=el('button','Salva ricevuta',card);receipt.type='button';
+              receipt.addEventListener('click',()=>save(new Blob([JSON.stringify({research,delivery},null,2)],{type:'application/json'}),`${selection.requestId}-prove.json`));
+              if(!research.review)for(const [text,decision] of [['Accetta privatamente','ACCEPT'],['Rifiuta risultato','REJECT']]){
+                const button=el('button',text,card);button.type='button';
+                button.addEventListener('click',()=>run(async()=>{await call(`/v1/science/intakes/${selection.requestId}/research-review`,{
+                  finalSha256:research.final.receiptSha256,decision});await refresh();}));
+              }
+            }));
+            if(research.review)el('p',`Valutazione privata: ${research.review.decision}. Nessuna pubblicazione.`,card);
+          }
+          continue;
+        }
         if(selection.adaptivePlanning && (!upstreamRequired || intake.preparationResult)){
           const adaptive=intake.adaptive || {}, proposal=adaptive.plan, cursor=adaptive.cursor;
           if(proposal?.provider?.scientificKnowledgeSha256)el('p','L’analisi usa il protocollo scientifico PixInsight versionato: misure native, confronto dei checkpoint e conservazione della provenienza.',card);
@@ -281,6 +335,7 @@
         q('openai-option').textContent=options.openaiPlanningEnabled===true?'OpenAI dalla pagina':'OpenAI dalla pagina · servizio non attivo';
         if(q('pixel-consent'))q('pixel-consent').disabled=options.pixelStatisticsEnabled!==true;
       }
+      if(q('research-option')){q('research-option').disabled=options.researchPlanningEnabled!==true;}
       if(q('adaptive-option')){
         q('adaptive-option').disabled=options.adaptivePlanningEnabled!==true;
         q('adaptive-option').textContent=options.adaptivePlanningEnabled===true?'OpenAI con analisi delle immagini':'OpenAI con analisi delle immagini · servizio non attivo';
@@ -309,7 +364,7 @@
         throw error;
       }
       if(isIntake?job.requestId!==frozen.requestId:job.jobId!==`PIAI_${frozen.requestId}`)throw new Error('Identità della risposta non valida. Conserva la richiesta.');
-      const openai=Boolean(frozen.openaiPlanning || frozen.adaptivePlanning);
+      const openai=Boolean(frozen.openaiPlanning || frozen.adaptivePlanning || frozen.researchPlanning);
       sessionStorage.removeItem(KEY);frozen=null;await refresh();message(openai?'Richiesta OpenAI conservata. Il collegamento attivo sul PC verificherà i master e preparerà il piano; nessun job PixInsight avviato.':isIntake?'Cartella e prompt conservati. L’assistente deve verificare i master e proporre il piano; nessun job PixInsight avviato.':'Richiesta scientifica conservata.');
     }
     q('form').addEventListener('submit',event=>{event.preventDefault();run(async()=>{
@@ -320,13 +375,15 @@
         if(historical ? !q('historical-target').value.trim() || !q('provenance').value.trim() || !q('historical-attest').checked : !sessionIds.length || !q('attest').checked)throw new Error(historical?'Indica oggetto e provenienza e conferma la dichiarazione storica.':'Seleziona le sessioni e conferma l’associazione ai master.');
         if(!q('directory').value.trim() || !q('prompt').value.trim())throw new Error('Indica la cartella completa e il risultato desiderato.');
         const openai=q('planning-mode')?.value==='OPENAI_API';
-        const adaptive=q('planning-mode')?.value==='OPENAI_ADAPTIVE';
-        if(adaptive && (options.adaptivePlanningEnabled!==true || !q('openai-consent')?.checked ||
+        const research=q('planning-mode')?.value==='OPENAI_RESEARCH';
+        const adaptive=q('planning-mode')?.value==='OPENAI_ADAPTIVE' || research;
+        if(adaptive && ((research?options.researchPlanningEnabled:options.adaptivePlanningEnabled)!==true || !q('openai-consent')?.checked ||
            !q('pixel-consent')?.checked || !q('preview-consent')?.checked))throw new Error('Verifica la disponibilità dell’analisi e conferma l’invio di dati, statistiche e anteprime.');
         if(openai && (options.openaiPlanningEnabled!==true || !q('openai-consent')?.checked))throw new Error('Verifica la disponibilità del servizio e conferma l’invio dei dati a OpenAI.');
         if(openai && q('pixel-consent')?.checked && options.pixelStatisticsEnabled!==true)throw new Error('Analisi dei pixel non ancora disponibile. Aggiorna la pagina.');
         const image=q('parent').value===''?null:options.images[Number(q('parent').value)];
         const mode=q('mode').value,layout=q('layout').value;
+        if(research && (mode!=='LRGB' || layout!=='SINGLE'))throw new Error('Le prove autonome sono disponibili per LRGB a campo singolo.');
         const additionalDirectories=layout==='PANELS'?q('additional').value.split(/\r?\n/).map(v=>v.trim()).filter(Boolean):[];
         const bayerPattern=mode==='OSC_CFA'?q('bayer').value:null;
         if(mode==='OSC_CFA' && !bayerPattern)throw new Error('Indica lo schema Bayer verificato; non viene dedotto dal nome del file.');
@@ -338,7 +395,7 @@
         if(historical)frozen.historicalSource={target:q('historical-target').value.trim(),provenance:q('provenance').value.trim(),attested:true};
         if(openai)frozen.openaiPlanning={dataTransferConfirmed:true};
         if(openai && q('pixel-consent')?.checked)frozen.openaiPlanning.pixelStatisticsConfirmed=true;
-        if(adaptive)frozen.adaptivePlanning={dataTransferConfirmed:true,pixelStatisticsConfirmed:true,previewTransferConfirmed:true};
+        if(adaptive)frozen[research?'researchPlanning':'adaptivePlanning']={dataTransferConfirmed:true,pixelStatisticsConfirmed:true,previewTransferConfirmed:true};
         sessionStorage.setItem(KEY,JSON.stringify(frozen));
       }
       await submitFrozen();
@@ -360,8 +417,9 @@
       q('openai-consent').checked=false;
       if(q('pixel-consent'))q('pixel-consent').checked=false;
       if(q('preview-consent'))q('preview-consent').checked=false;
-      const adaptive=q('planning-mode').value==='OPENAI_ADAPTIVE';
-      q('openai-consent-label').hidden=!['OPENAI_API','OPENAI_ADAPTIVE'].includes(q('planning-mode').value);
+      const research=q('planning-mode').value==='OPENAI_RESEARCH';
+      const adaptive=q('planning-mode').value==='OPENAI_ADAPTIVE' || research;
+      q('openai-consent-label').hidden=!['OPENAI_API','OPENAI_ADAPTIVE','OPENAI_RESEARCH'].includes(q('planning-mode').value);
       if(q('preview-consent-label'))q('preview-consent-label').hidden=!adaptive;
       if(q('pixel-consent'))q('pixel-consent').disabled=adaptive?options?.adaptivePlanningEnabled!==true:options?.pixelStatisticsEnabled!==true;
     });

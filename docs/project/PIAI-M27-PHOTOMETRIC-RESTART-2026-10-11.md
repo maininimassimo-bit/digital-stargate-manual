@@ -3,10 +3,12 @@
 | Campo | Valore |
 |---|---|
 | Data | 11/10/2026 |
-| Stato | Sviluppo autorizzato; nuove misure read-only concluse, conoscenza API rilasciata e backend attivo; ciclo SPCC e selezione autonoma ancora da implementare e validare |
+| Stato | Conoscenza V1 attiva; coordinatore di rami implementato nel candidato, SPCC nativo su copie verificato; review, distribuzione coordinata e OAT del nuovo ciclo pendenti |
 | Obiettivo | Migliorare leggibilità del segnale acquisito, dettaglio e vividezza con calibrazione cromatica fotometrica e confronti motivati |
 
 ## Richiesta e dati confermati
+
+Il [coordinatore di prove LRGB](PIAI-RESEARCH-COORDINATOR-2026-10-11.md) descrive il candidato implementato, il protocollo trasferito all'API, i criteri di selezione e le evidenze SPCC reali. La prova di sviluppo ha restituito 70 stelle comuni RGB e conservato originali, History e checkpoint. Non è l'OAT autenticato del nuovo ciclo né una chiamata API reale.
 
 Owner chiede di ripartire dai master lineari, misurarli, usare una calibrazione fotometrica del colore e sviluppare il workflow in autonomia tramite API, impiegando processi e documentazione PixInsight. Conferma camera QHY695A, filtri RGB ZWO e Optolong L-Pro come luminanza. [Inventario fisico](../chapters/22-inventario-asset-management.md#2250-inventario-fisico-e-associazione-ai-master-m27). La versione COLOR/STRETCH/COMBINE già consegnata resta distinta; l'autorizzazione al suo grafo esatto non è un'autorizzazione tecnica a eseguire un nuovo grafo sul vecchio job.
 
@@ -28,6 +30,8 @@ Aggiornamento successivo: Owner autorizza lo sviluppo e precisa che il modulo fi
 «Potenziare il segnale» significa rendere più leggibile l'informazione già acquisita. Stretch/saturazione non aumentano fotoni raccolti; denoise e deconvoluzione non dimostrano da soli maggiore SNR o nuovo dettaglio fisico. La calibrazione fotometrica del colore non equivale a calibrazione assoluta di flusso né certifica una resa estetica successiva.
 
 ## Autonomia API: capacità attuale e sviluppo richiesto
+
+Requisito Owner memorizzato: il coordinatore deve ricevere la conoscenza corretta per decidere i rami alternativi, non soltanto nomi di processi e intervalli di parametri. Per ogni famiglia di prove, documentare perché usarla o ometterla, precondizioni e controindicazioni, metriche applicabili e loro limiti, difetti da cercare nelle anteprime/ritagli, comparabilità dei genitori e criteri per promuovere o scartare un ramo. Il protocollo versionato e i riferimenti dei processi installati devono accompagnare le misure reali; il modello deve motivare la decisione con queste evidenze, dichiarando ciò che non è misurato. Una metrica isolata non certifica la migliore elaborazione.
 
 Il servizio attivo V2 offre un catalogo finito e il modello può adattare solo i parametri del prossimo processo nel grafo approvato. `COLOR` è ColorCalibration empirica, non SPCC. Non dispone ancora di un ciclo autonomo per generare/eseguire/selezionare rami alternativi. Un prompt più ambizioso non aggiunge queste capacità.
 

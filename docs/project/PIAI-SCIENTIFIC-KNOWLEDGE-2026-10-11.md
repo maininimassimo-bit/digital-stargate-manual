@@ -3,11 +3,13 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-PIAI-SCIENTIFIC-KNOWLEDGE-001 |
-| Versione | 1.1 |
+| Versione | 1.2 — coordinatore candidato |
 | Data | 11/10/2026 |
 | Stato | Conoscenza API rilasciata e backend attivo; ciclo autonomo SPCC/prove ancora in sviluppo |
 
 ## Obiettivo e confini
+
+Il nuovo [coordinatore di prove](PIAI-RESEARCH-COORDINATOR-2026-10-11.md) aggiunge il protocollo versionato per decidere i rami al pacchetto scientifico storico, senza alterare i job V2. È implementato nel candidato e comprende un adapter SPCC provato realmente su copie M27; review, distribuzione e OAT dal portale restano pendenti.
 
 Owner richiede che il modulo funzioni dal portale web, senza dipendere da una chat, e che le API ricevano la conoscenza della skill `pixinsight-scientific`. La conoscenza è ora una risorsa del servizio, distinta dalle misure native e dalle capacità effettivamente implementate. Il modello rimane `gpt-6-luna`; chiave sul backend, master sul PC e ricevute immutabili conservati.
 

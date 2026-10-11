@@ -27,6 +27,7 @@ jobs:
         run: |
           python -m pip install "Pillow>=11,<13" "numpy>=2,<3"
           python -m unittest tools.pixinsight.local_pilot.test_scientific_knowledge
+          python -m unittest tools.pixinsight.local_pilot.test_research
           python -m unittest tools.pixinsight.local_pilot.test_adaptive_segments tools.pixinsight.local_pilot.test_adaptive_preparation tools.pixinsight.local_pilot.test_adaptive_execution tools.pixinsight.local_pilot.test_adaptive_native_adapter tools.pixinsight.local_pilot.test_adaptive_initial tools.pixinsight.local_pilot.test_adaptive_worker
           node --test tools/pixinsight/local_pilot/adaptive-native.test.mjs
       - name: Test local coordinator reservation and private retention

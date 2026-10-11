@@ -10,6 +10,7 @@ from .intake import IntakeMixin
 from .openai_flow import OpenAIFlowMixin
 from .adaptive_flow import AdaptiveFlowMixin
 from .adaptive_execution import AdaptiveExecutionMixin
+from .research_flow import ResearchFlowMixin
 from .scientific_revisions import RevisionMixin
 from .historical_source import historical, validate_historical, historical_review, historical_intake_enabled
 from tools.scientific_registry.ingestion_storage import immutable, Conflict
@@ -38,7 +39,7 @@ def known_target(value):
     return isinstance(value,str) and bool(value.strip()) and value.strip().upper() not in {'UNKNOWN','UNSPECIFIED','N/A'}
 
 
-class ScientificPortal(AdaptiveExecutionMixin, AdaptiveFlowMixin, OpenAIFlowMixin, IntakeMixin, RevisionMixin):
+class ScientificPortal(ResearchFlowMixin, AdaptiveExecutionMixin, AdaptiveFlowMixin, OpenAIFlowMixin, IntakeMixin, RevisionMixin):
     def __init__(self, broker, catalog_loader, gallery_loader, planner=None, adaptive_provider=None):
         self.broker, self.store = broker, broker.store
         self.catalog_loader, self.gallery_loader = catalog_loader, gallery_loader
@@ -87,6 +88,7 @@ class ScientificPortal(AdaptiveExecutionMixin, AdaptiveFlowMixin, OpenAIFlowMixi
         return {"inputs": inputs, "openaiPlanningEnabled": self.planner is not None,
                 "pixelStatisticsEnabled": self.pixel_statistics_enabled(),
                 "adaptivePlanningEnabled": self.adaptive_enabled(),
+                "researchPlanningEnabled": self.research_enabled(),
                 "historicalIntakeEnabled": historical_intake_enabled(), "catalogSha256": digest(catalog),
                 "sessions": [{"sessionId": s["sessionId"], "target": s["target"], "observationDate": s.get("observationDate")}
                              for s in parsed["sessions"] if known_target(s.get('target'))],

@@ -21,5 +21,8 @@ data/sessions/**/raw/** -text
 # Vendored distribution and license bytes must match the pinned SHA-256 manifest.
 docs/assets/vendor/three-0.180.0/** -text
 
+# The research executor is pinned by raw SHA on both the PC and cloud backend.
+tools/pixinsight/local_pilot/research_executor.jsh -text
+
 infrastructure/bkl-031-f3-a3-gcp/container/** text eol=lf
 infrastructure/bkl-031-f3-a3-gcp/.dockerignore text eol=lf
