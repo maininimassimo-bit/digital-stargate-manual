@@ -3,13 +3,25 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-049-EXT-PIAI-ADAPTIVE |
-| Versione | 2.0 |
-| Stato | Owner-authorized / In Progress; statistiche master abilitate sul backend, ciclo adattivo non operativo |
+| Versione | 2.1 |
+| Stato | Backend adattivo e worker di analisi attivi; OAT astronomico con provider in corso |
 | Data | 2026-10-11 |
 
 Owner autorizza analisi delle immagini, verifica dei risultati intermedi e scelta del workflow IA dal tipo indicato nel portale. Richiesta successiva: rimozione della quota di una chiamata API al giorno.
 
 ## Stato implementato e residui
+
+### Attivazione coordinata — 11 ottobre 2026
+
+PR [#570](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/570) integrata nel merge `af51880b2d73f26c22e09f5648cbddf8896e1ac1`, head `04061a091f2434f20c88c1024aef5da94db0e1ed`: ARB poi RQ indipendenti APPROVED, zero finding; nove check PR SUCCESS, compresi Linux e Windows. Il test del catalogo isola il guard dei percorsi temporanei, senza indebolire il guard del prodotto. Suite locali: 290 Python, 106 Node e MkDocs strict PASS; gli 11 test worker interessati sono stati ripetuti dopo la correzione. I nove workflow post-merge di PR569 sono SUCCESS; quelli di PR570 sono verificati separatamente.
+
+La revisione `dsg-pixinsight-pilot-adaptive-on-20261011` serve il 100% del traffico, con digest `sha256:a2c8dabadc8b84e5c7359da0f63bc210cabbd61ce5f05f53ae9b0b644ab703f5`, sorgenti server PR569 e flag `DSG_PIAI_ADAPTIVE=LOCAL_WORKER_VERIFIED`. Conservati `gpt-6-luna`, quota giornaliera 0, secret backend e autenticazione esistente. La precedente revisione pixels resta disponibile per rollback. L'accesso Owner reale conferma la disponibilità dell'opzione adattiva nel portale.
+
+Il worker privato usa le sorgenti revisionate PR570, il token DPAPI preesistente e il percorso fisico della coda comune. Il polling ogni 30 secondi è attivo; il ciclo singolo ha restituito `supervisedNativeLaunchEnabled=false`. Il catalogo locale contiene solo i quattro master M27 verificati. I tre file nativi conservano i byte collaudati: il binding privato documenta SHA Git archive e SHA collaudato, con uguaglianza del testo dopo normalizzazione CRLF/LF. Nessuna chiave OpenAI è sul worker. L'avvio nativo resta subordinato al nuovo piano esatto e al comando supervisionato.
+
+Owner ha autorizzato esplicitamente prompt, metadati minimi, statistiche e anteprime/ritagli M27 e degli intermedi verso OpenAI. Tale consenso è distinto dalla conferma del nuovo grafo e dalla valutazione scientifica finale. L'OAT reale è ancora in corso: non dedurre esecuzione, qualità o accettazione dal rilascio tecnico.
+
+La prima richiesta M27 reale ha prodotto `STOP_FOR_REVIEW`, con 4890 token in ingresso e 1396 in uscita: il modello ha richiesto riferimenti di colore/fondo e maschere più giustificati. Nessun segmento nativo è stato avviato. L'arresto resta conservato e non viene ritentato o trasformato in approvazione. La revisione tecnica ha individuato due prerequisiti aggiunti dal modello che non appartengono al catalogo: `COLOR` è empirico, non richiede una certificazione fotometrica; una maschera è obbligatoria per `LOCAL_CONTRAST`, può essere pianificata con `MASK_BUILD` e deve essere verificata prima dell'uso, mentre non è requisito universale per denoise/deconvoluzione. Il nuovo candidato proietta esplicitamente queste regole e il significato limitato delle ROI/PSF al provider. Non rimuove il diritto di arrestarsi per evidenza insufficiente e non promuove l'ROI a cielo vuoto certificato. Ogni nuova analisi resta una richiesta distinta e tracciata.
 
 ### Collegamento operativo in sviluppo: analisi, segmenti e consegna
 

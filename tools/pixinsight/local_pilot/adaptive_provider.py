@@ -117,6 +117,13 @@ class AdaptiveProvider(OpenAIPlanner):
             'attestedPrerequisites':{k:v for k,v in facts.items() if k not in {'sourceSha256','recordSha256'}},
             'measurements':numerical,'catalog':graph_schema(sampling=sampling),
             'registrationMeaning':'Common working grid and recorded lineage only; astrometric accuracy remains not established.',
+            'processPrerequisites':{
+                'domainRules':catalog.DOMAIN_RULES,'factRules':catalog.FACT_RULES,
+                'commonFacts':['registration','runtime'],
+                'backgroundROIMeaning':'Verified operational region for robust background estimation; not a certificate of empty sky or absence of faint emission.',
+                'stellarPSFMeaning':'Verified selected native stellar fits; not seeing, optical transfer or resolution certification.',
+                'colorMeaning':'Empirical native ColorCalibration using the verified operational background ROI and native white-reference selection; no photometric calibration prerequisite and no photometric flux claim.',
+                'maskMeaning':'Only LOCAL_CONTRAST requires a verified mask. MASK_BUILD can plan it later, but execution must verify the native mask before LOCAL_CONTRAST. DENOISE and DECONVOLVE do not require a mask in this catalog; their suitability still requires evidence and checkpoint review.'},
             'displayLimitations':'Eight-bit derived display projections, never scientific sample data or scientific acceptance.'}
         require(len(encode(projection))<=32768,'ADAPTIVE_PROVIDER_TEXT_LIMIT')
         content.insert(0,{'type':'input_text','text':encode(projection).decode()})
@@ -132,6 +139,9 @@ class AdaptiveProvider(OpenAIPlanner):
                 'Whole-field variance is not SNR. Gaussian fit summaries are selected-star descriptors, not resolution proof. '
                 'SHO/HOO palette is not broadband photometric calibration. Include only necessary operations and explain omissions. '
                 'COLOR denotes empirical native ColorCalibration, never SPCC or validated photometric flux. '
+                'Use the supplied process prerequisites literally; do not add photometric certification or an initial mask as universal prerequisites. '
+                'An operational background ROI need not certify empty sky; uncertainty about diffuse emission remains a real limitation and can justify stopping. '
+                'Prerequisite satisfaction permits consideration, never requires a process or overrides scientific uncertainty. '
                 'Stop for review if evidence is insufficient or inconsistent. Explain decisions and limitations in Italian. '
                 'Never claim a best workflow or scientific acceptance without verified intermediate results.'),
             'input':[{'role':'user','content':content}],

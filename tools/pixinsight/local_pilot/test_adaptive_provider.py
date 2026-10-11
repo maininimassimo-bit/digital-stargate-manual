@@ -38,6 +38,12 @@ class ProviderTests(unittest.TestCase):
         self.assertEqual(decision['action'],'PROPOSE_GRAPH');self.assertEqual(receipt['usage']['total_tokens'],120)
         payload=json.dumps(calls[0]);self.assertNotIn('sourceSha256',payload);self.assertNotIn('recordSha256',payload)
         self.assertIn('data:image/png;base64,',payload);self.assertFalse(calls[0]['store'])
+        projection=json.loads(calls[0]['input'][0]['content'][0]['text'])
+        prerequisites=projection['processPrerequisites']
+        self.assertEqual(prerequisites['factRules']['LOCAL_CONTRAST'],'mask')
+        self.assertNotIn('DENOISE',prerequisites['factRules'])
+        self.assertIn('no photometric calibration prerequisite',prerequisites['colorMeaning'])
+        self.assertIn('not a certificate of empty sky',prerequisites['backgroundROIMeaning'])
     def test_missing_consent_or_changed_evidence_prevents_send(self):
         calls=[];p=AdaptiveProvider('mock','gpt-6-luna',send=lambda payload:calls.append(payload))
         with self.assertRaises(ValueError):p.generate_initial(*inputs())
