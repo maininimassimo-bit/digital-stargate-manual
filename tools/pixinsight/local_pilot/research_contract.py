@@ -111,9 +111,25 @@ def decide(value, state):
     return copy.deepcopy(value)
 
 
-def schema(binding, stage):
+def schema(state):
+    binding,stage,parent=sha(state),state['stage'],state['selectedId']
     require(digest(binding) and stage in STAGES, 'RESEARCH_SCHEMA_BINDING')
+    require(checkpoint_id(parent) and parent in state['checkpoints'],'RESEARCH_SCHEMA_PARENT')
     from .adaptive_provider import graph_schema
+    from .broker import ProtocolError
+    targets=[]
+    for target in state['checkpoints']:
+        try:
+            decide({'action':'SELECT','bindingSha256':binding,'parentId':parent,
+                    'checkpointId':target,'step':None,'rationale':'Schema','limitations':'Schema'},state)
+        except ProtocolError:continue
+        targets.append(target)
+    siblings=[n for n in state['checkpoints'].values() if n.get('parentId') == parent and n.get('stage') == stage]
+    can_test=(stage != 'FINAL' and state['nativeTrials'] < MAX_TRIALS and len(siblings) < 3 and
+              (stage not in ('CALIBRATION','COMBINE') or not siblings))
+    actions=(['TEST'] if can_test else [])+(['SELECT'] if targets else [])
+    if stage == 'FINAL' and state['checkpoints'][parent]['domain'] == 'NONLINEAR_ATTESTED':actions.append('FINISH')
+    actions.append('STOP')
     variants = graph_schema()['properties']['steps']['items']['anyOf']
     selected = [v for v in variants if v['properties']['process']['enum'][0] in PROCESSES[stage]]
     if stage == 'CALIBRATION':
@@ -122,9 +138,11 @@ def schema(binding, stage):
     if stage == 'PRESENTATION':
         selected.append(object_schema({'process': {'type': 'string', 'enum': ['VIVIDNESS']},
                                        'parameters': object_schema({'saturation': {'type': 'number'}})}))
-    return object_schema({'action': {'type': 'string', 'enum': ['TEST', 'SELECT', 'FINISH', 'STOP']},
+    return object_schema({'action': {'type': 'string', 'enum': actions},
                           'bindingSha256': {'type': 'string', 'enum': [binding]},
-                          'parentId': {'type': 'string'},
-                          'checkpointId': {'type': ['string', 'null']},
-                          'step': {'anyOf': selected + [{'type': 'null'}]},
+                          'parentId': {'type': 'string','enum':[parent],
+                                       'description':'Exact existing parent. Never invent or replace this ID.'},
+                          'checkpointId': {'type': ['string', 'null'],'enum':targets+[None],
+                                           'description':'Null for TEST, STOP and FINISH. SELECT uses an admitted verified checkpoint.'},
+                          'step': {'anyOf': (selected if can_test else []) + [{'type': 'null'}]},
                           'rationale': {'type': 'string'}, 'limitations': {'type': 'string'}})

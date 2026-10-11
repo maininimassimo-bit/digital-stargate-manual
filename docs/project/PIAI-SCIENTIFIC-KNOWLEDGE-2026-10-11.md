@@ -53,3 +53,6 @@ Test: trasferimento della guida nei payload iniziali/checkpoint, impronta costan
 |---|---|
 | 1.0 | Pacchetto scientifico portabile e versionato nelle API; vincolo ai checkpoint e indicazione dal portale; preparazione della nuova autonomia |
 | 1.1 | Rilascio PR577 e attivazione backend verificati; requisito operativo interamente dal portale e limiti OAT espliciti |
+
+
+La [diagnostica rilasciata e i vincoli della decisione API](PIAI-RESEARCH-COORDINATOR-2026-10-11.md#diagnostica-rilasciata-e-vincoli-della-decisione-api) registrano anche il secondo tentativo distinto autorizzato: risposta completa, decisione rifiutata per vincolo del padre/ID TEST, 11.172 token noti e zero prove native. Schema più vincolante candidato; nessun riuso o reinvio automatico. OAT scientifico e accettazione restano aperti.

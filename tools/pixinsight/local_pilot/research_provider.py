@@ -67,6 +67,10 @@ def generate(provider, state, projection, assets, *, owner, knowledge_sha256, re
                'parallel_tool_calls': False,
                'instructions': 'Choose one bounded PixInsight experiment or selection. '
                'TEST creates a sibling of the exact selected parent, never a cumulative trial. '
+               'For TEST set parentId to selectedId and checkpointId to null; the server assigns the new checkpoint ID. '
+               'For SELECT use an admitted verified checkpointId and step null. '
+               'For STOP and FINISH use checkpointId null and step null. '
+               'Keep rationale and limitations each within 300 Unicode characters. '
                'SELECT advances the stage and may omit only optional stages. '
                'Use supplied native evidence and common-display previews; do not assert missing '
                'paired fits, photometric validity or scientific acceptance. '
@@ -75,7 +79,7 @@ def generate(provider, state, projection, assets, *, owner, knowledge_sha256, re
                'input': [{'role': 'user', 'content': content}],
                'tools': [{'type': 'function', 'name': 'choose_pixinsight_action',
                           'description': 'Request one admitted trial, select a verified sibling, finish for Owner review, or stop.',
-                          'strict': True, 'parameters': contract.schema(sha(state), state['stage'])}],
+                          'strict': True, 'parameters': contract.schema(state)}],
                'tool_choice': {'type': 'function', 'name': 'choose_pixinsight_action'}}
     provider._sent.add(owner)
     response = None

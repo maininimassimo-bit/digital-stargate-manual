@@ -45,3 +45,6 @@ L'inventario è ora aggiornato, ma astrometria verificata, SPCC M27, misure appa
 ## Esito iniziale del coordinatore dal portale
 
 Perimetro della nuova richiesta M27 approvato dall’Owner: 16 prove native, 32 richieste API e tre alternative per fase. Prima richiesta API nello stato `API_INDETERMINATE_NO_RETRY`, nessuna decisione validata, uso dei token non disponibile e zero prove native. Causa non accertata e tentativo conservato senza reinvio. Questo esito non valida un workflow scientifico né modifica il risultato storico. [Ricevuta e diagnostica candidata](PIAI-RESEARCH-COORDINATOR-2026-10-11.md#primo-oat-dal-portale-e-diagnostica-candidata).
+
+
+La [diagnostica rilasciata e i vincoli della decisione API](PIAI-RESEARCH-COORDINATOR-2026-10-11.md#diagnostica-rilasciata-e-vincoli-della-decisione-api) registrano anche il secondo tentativo distinto autorizzato: risposta completa, decisione rifiutata per vincolo del padre/ID TEST, 11.172 token noti e zero prove native. Schema più vincolante candidato; nessun riuso o reinvio automatico. OAT scientifico e accettazione restano aperti.
