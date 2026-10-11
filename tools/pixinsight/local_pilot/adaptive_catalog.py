@@ -40,11 +40,13 @@ def fingerprint():
     return sha({'version': VERSION, 'order': PROCESS_ORDER,
                 'initialDomains': ATTESTED_DOMAINS, 'domainRules': DOMAIN_RULES, 'factRules': FACT_RULES,
                 'commonFacts': ['registration', 'runtime'], 'colorModes': ['LRGB', 'OSC'],
+                'registrationMeaning':'COMMON_WORKING_GRID_AND_RECORDED_LINEAGE_NOT_ASTROMETRIC_ACCURACY',
                 'colorMeaning': 'EMPIRICAL_NATIVE_COLORCALIBRATION_NOT_SPCC',
                 'opticalMeaning': 'BLURX_CORRECT_ONLY_LINEAR',
                 'transition': {'STRETCH': 'NONLINEAR_ATTESTED'},
                 'maskPlanning': 'MASK_BUILD_CONDITIONAL_NATIVE_VERIFICATION_BEFORE_LOCAL_CONTRAST',
                 'checkpointScope': 'NEXT_STEP_PARAMETERS_ONLY',
+                'workingSampling': ['ORIGINAL', 'BIN2_AVERAGE'],
                 'branches': {'DIRECT': {'forbidden': ['SEPARATE', 'RECOMBINE']},
                              'STARLESS': {'required': ['SEPARATE', 'STRETCH', 'RECOMBINE']}},
                 'parameters': {key: {p: [lo, hi, kind.__name__] for p, (lo, hi, kind) in bounds.items()}
@@ -69,10 +71,12 @@ def validate_graph(value, mode, facts):
     facts = provenance(facts)
     require(facts['domain'] in ATTESTED_DOMAINS, 'ADAPTIVE_ATTESTED_DOMAIN_REQUIRED')
     require(isinstance(mode, str) and mode in MODES, 'ADAPTIVE_MODE')
-    require(isinstance(value, dict) and set(value) == {'catalog', 'catalogSha256', 'branch', 'steps', 'rationale', 'limitations'},
+    require(isinstance(value, dict) and set(value) == {'catalog', 'catalogSha256', 'branch', 'workingSampling', 'steps', 'rationale', 'limitations'},
             'ADAPTIVE_GRAPH_FIELDS')
     require(value['catalog'] == VERSION and value['catalogSha256'] == fingerprint(), 'ADAPTIVE_CATALOG_BINDING')
     require(isinstance(value['branch'], str) and value['branch'] in {'DIRECT', 'STARLESS'}, 'ADAPTIVE_BRANCH')
+    require(isinstance(value['workingSampling'], str) and value['workingSampling'] in {'ORIGINAL','BIN2_AVERAGE'},
+            'ADAPTIVE_WORKING_SAMPLING')
     safe_text(value['rationale'])
     safe_text(value['limitations'])
     steps = value['steps']

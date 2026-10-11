@@ -13,7 +13,7 @@ def facts():
 
 
 def graph():
-    return {'catalog': VERSION, 'catalogSha256': fingerprint(), 'branch': 'DIRECT',
+    return {'catalog': VERSION, 'catalogSha256': fingerprint(), 'branch': 'DIRECT', 'workingSampling':'ORIGINAL',
             'steps': [{'process': 'DECONVOLVE', 'parameters': {'sharpenL': .18, 'sharpenRGB': .08}},
                       {'process': 'DENOISE', 'parameters': {'denoiseL': .4, 'denoiseRGB': .3}},
                       {'process': 'STRETCH', 'parameters': {'targetBackground': .08}}],

@@ -65,6 +65,23 @@ class AdaptiveFlowTests(unittest.TestCase):
         self.assertIsNone(state['executionPolicy'])
         self.assertIsNone(self.broker.claim(self.broker.worker_id,'2'*32))
         self.assertEqual(self.portal.generate_adaptive(self.request_id,body),state)
+
+    def test_prepared_mosaic_requires_exact_approved_upstream_outputs_before_paid_send(self):
+        body=self.body()
+        with patch('tools.pixinsight.local_pilot.adaptive_flow.source_profile',return_value={'mode':'LRGB','layout':'PANELS'}):
+            body['preparationTrace']={'requestId':self.request_id,'preparationPlanSha256':'1'*64,
+                'sourceManifestSha256':'2'*64,'verificationSha256':'3'*64,'nativeInstancesSha256':'4'*64,
+                'outputManifestSha256':sha([{k:r[k] for k in ('role','sha256','imageIndex','width','height')} for r in body['inputs']])}
+            with self.assertRaises(ValueError):self.portal.generate_adaptive(self.request_id,body)
+            self.assertEqual(self.calls,[])
+            result={k:v for k,v in body['preparationTrace'].items() if k!='requestId'}
+            result.update(status='COMPLETED',masters=[{k:r[k] for k in ('role','imageIndex','width','height')} for r in body['inputs']])
+            with patch.object(self.portal,'preparation_state',return_value={'preparationApproved':True,'preparationResult':result}):
+                changed=copy.deepcopy(body);changed['preparationTrace']['outputManifestSha256']='9'*64
+                with self.assertRaises(ValueError):self.portal.generate_adaptive(self.request_id,changed)
+                self.assertEqual(self.calls,[])
+                state=self.portal.generate_adaptive(self.request_id,body)
+                self.assertIsNotNone(state['plan']);self.assertEqual(len(self.calls),1)
         self.assertEqual(len(self.calls),1)
 
     def test_exact_owner_approval_is_separate_from_analysis_and_not_acceptance(self):
@@ -147,6 +164,17 @@ class AdaptiveFlowTests(unittest.TestCase):
         self.assertEqual(denied.exception.code,403)
         approved=post('/v1/science/intakes/'+self.request_id+'/adaptive-approve',approval,'owner-test',origin)
         self.assertEqual(approved['executionPolicy']['adaptationScope'],'NEXT_STEP_PARAMETERS_ONLY')
+        for action in ('reserve','start','checkpoint','decision','final','halt'):
+            with self.subTest(action=action):
+                with self.assertRaises(urllib.error.HTTPError) as denied:
+                    post(base+'/adaptive-'+action,{},'owner-test',origin)
+                self.assertEqual(denied.exception.code,403)
+                with self.assertRaises(urllib.error.HTTPError) as denied:
+                    post('/v1/science/intakes/'+self.request_id+'/adaptive-'+action,{},'owner-test',origin)
+                self.assertEqual(denied.exception.code,404)
+        with self.assertRaises(urllib.error.HTTPError) as denied:
+            post('/v1/science/intakes/'+self.request_id+'/adaptive-review',{},worker_token)
+        self.assertEqual(denied.exception.code,403)
 
     def test_cancellation_blocks_new_paid_send_and_plan_approval(self):
         body=self.body();state=self.portal.generate_adaptive(self.request_id,body)

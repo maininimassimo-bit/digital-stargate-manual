@@ -88,6 +88,27 @@ function DSGAdaptiveNativeStep(step, tracks, context, callbacks) {
       callbacks.secondary(fresh[0], role + '_STARS');
       tracks[role + '_STARS'] = fresh[0];
    }
+   function spectral(processFactory, prefix) {
+      if(context.mode==='SHO' || context.mode==='HOO') {
+         need(typeof callbacks.extract==='function','Independent narrowband channel adapter required');
+         var channels=[];
+         for(var c=0;c<3;++c) {
+            var mono=callbacks.extract(rgb,c,prefix+'_BAND_'+c);
+            need(mono && !mono.isNull && mono.mainView.image.numberOfNominalChannels===1 &&
+                 mono.mainView.image.width===width && mono.mainView.image.height===height,
+                 'Independent narrowband geometry');
+            run(processFactory(false),mono,prefix+'_BAND_'+c);channels.push(mono);
+         }
+         var combination=new ChannelCombination;combination.colorSpace=ChannelCombination.RGB;
+         combination.inheritAstrometricSolution=true;
+         combination.channels=channels.map(function(w){
+            need(/^[A-Za-z_][A-Za-z0-9_]*$/.test(w.mainView.id),'Trusted narrowband identifier');
+            return [true,w.mainView.id];
+         });
+         run(combination,rgb,'RGB');
+      } else run(processFactory(false),rgb,'RGB');
+      run(processFactory(true),lum,'L');
+   }
    var instance;
    switch (step.process) {
    case 'BACKGROUND':
@@ -100,10 +121,11 @@ function DSGAdaptiveNativeStep(step, tracks, context, callbacks) {
       });
       break;
    case 'OPTICAL_CORRECT':
-      instance = model(new BlurXTerminator, 'BLURX'); instance.correct_only = true;
-      instance.auto_nonstellar_psf = true; instance.sharpen_stars = 0; instance.sharpen_nonstellar = 0;
-      instance.adjust_star_halos = 0;
-      run(instance, rgb, 'RGB');
+      spectral(function() {
+         var correct=model(new BlurXTerminator,'BLURX');correct.correct_only=true;
+         correct.auto_nonstellar_psf=true;correct.sharpen_stars=0;correct.sharpen_nonstellar=0;
+         correct.adjust_star_halos=0;return correct;
+      },'OPTICAL_CORRECT');
       break;
    case 'COLOR':
       need(context.mode === 'LRGB' || context.mode === 'OSC', 'Assigned palette is not empirical colour calibration');
@@ -114,20 +136,19 @@ function DSGAdaptiveNativeStep(step, tracks, context, callbacks) {
       roi(instance, true); instance.backgroundHigh = 0.05; run(instance, rgb, 'RGB');
       break;
    case 'DECONVOLVE':
-      [rgb,lum].forEach(function(w,k) {
-         instance = model(new BlurXTerminator, 'BLURX'); instance.correct_only = false;
-         instance.auto_nonstellar_psf = true;
-         instance.sharpen_stars = 0.25; instance.sharpen_nonstellar = k ? p.sharpenL : p.sharpenRGB;
-         instance.adjust_star_halos = 0; run(instance, w, k ? 'L' : 'RGB');
-      });
+      spectral(function(isL) {
+         var sharpen=model(new BlurXTerminator,'BLURX');sharpen.correct_only=false;
+         sharpen.auto_nonstellar_psf=true;sharpen.sharpen_stars=0.25;
+         sharpen.sharpen_nonstellar=isL?p.sharpenL:p.sharpenRGB;sharpen.adjust_star_halos=0;return sharpen;
+      },'DECONVOLVE');
       break;
    case 'DENOISE':
-      [rgb,lum].forEach(function(w,k) {
-         instance = model(new NoiseXTerminator, 'NOISEX'); instance.denoise = k ? p.denoiseL : p.denoiseRGB;
-         instance.denoise_intensity = 0.65; instance.denoise_color = 0.80;
-         instance.enable_color_separation = !k; instance.enable_frequency_separation = false; instance.iterations = 2;
-         run(instance, w, k ? 'L' : 'RGB');
-      });
+      spectral(function(isL) {
+         var denoise=model(new NoiseXTerminator,'NOISEX');denoise.denoise=isL?p.denoiseL:p.denoiseRGB;
+         denoise.denoise_intensity=0.65;denoise.denoise_color=0.80;
+         denoise.enable_color_separation=!isL && context.mode!=='SHO' && context.mode!=='HOO';
+         denoise.enable_frequency_separation=false;denoise.iterations=2;return denoise;
+      },'DENOISE');
       break;
    case 'SEPARATE':
       need(context.branch === 'STARLESS' && !tracks.RGB_STARS && !tracks.L_STARS, 'Distinct stars branch required');

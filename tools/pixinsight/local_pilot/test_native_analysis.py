@@ -40,6 +40,9 @@ class NativeAnalysisTests(unittest.TestCase):
         self.assertEqual(receipt['status'],'READ_ONLY_VERIFIED');self.assertEqual(bindings['L']['sourceSha256'],original)
         self.assertEqual(fingerprint(self.source),original)
         self.assertIn(b'\r\n',(self.directory/'run.js').read_bytes())
+        self.assertEqual(verify(self.directory,expected_manifest_sha256=expected,write_receipt=False)[2],receipt)
+        (self.directory/'verification.json').write_bytes(encode({**receipt,'status':'FORGED'}))
+        with self.assertRaises(ValueError):verify(self.directory,expected_manifest_sha256=expected,write_receipt=False)
         with self.assertRaises(FileExistsError):verify(self.directory,expected_manifest_sha256=expected)
 
     def test_manifest_source_and_region_substitution_fail_verification(self):

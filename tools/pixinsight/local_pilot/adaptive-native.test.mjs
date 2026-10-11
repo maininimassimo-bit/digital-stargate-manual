@@ -15,11 +15,12 @@ function fixture() {
   const context={ImageWindow:{windows},Number,Object,Array,Error};
   for(const name of ['AutomaticBackgroundExtractor','BlurXTerminator','NoiseXTerminator','StarXTerminator',
       'BackgroundNeutralization','ColorCalibration','MaskedStretch','PixelMath','ArcsinhStretch',
-      'LocalHistogramEqualization','LRGBCombination']) {
+      'LocalHistogramEqualization','LRGBCombination','ChannelCombination']) {
     context[name]=function(){this.kind=name;};
   }
   context.AutomaticBackgroundExtractor.Correction_Subtract=1;
   context.MaskedStretch.MaskType_Intensity=1;
+  context.ChannelCombination.RGB=0;
   vm.createContext(context);vm.runInContext(source,context);
   const tracks={RGB:window('DSG_RGB'),L:window('DSG_L',1)};
   const settings={mode:'LRGB',domain:'LINEAR_ATTESTED',branch:'DIRECT',
@@ -68,6 +69,27 @@ test('SHO and HOO cannot invoke empirical broadband color calibration',()=>{
     const f=fixture();f.settings.mode=mode;assert.throws(()=>f.run({process:'COLOR',parameters:{}}));
     assert.equal(f.calls.length,0);
   }
+});
+test('narrowband ML operates on independent monochrome channels before recombination',()=>{
+  for(const mode of ['SHO','HOO']) {
+    const f=fixture();f.settings.mode=mode;
+    f.callbacks.extract=(w,c,role)=>({isNull:false,mainView:{id:'DSG_'+role,
+      image:{width:64,height:64,numberOfNominalChannels:1}}});
+    f.run({process:'DENOISE',parameters:{denoiseL:.4,denoiseRGB:.3}});
+    const ml=f.calls.filter(c=>c.p.kind==='NoiseXTerminator');
+    assert.equal(ml.length,4);
+    assert.ok(ml.every(c=>c.w.mainView.image.numberOfNominalChannels===1));
+    assert.equal(f.calls.filter(c=>c.p.kind==='ChannelCombination').length,1);
+    assert.equal(ml.at(-1).role,'L');
+  }
+});
+test('narrowband requires a compatible independent channel adapter before ML',()=>{
+  const f=fixture();f.settings.mode='SHO';
+  assert.throws(()=>f.run({process:'DENOISE',parameters:{denoiseL:.4,denoiseRGB:.3}}));
+  assert.equal(f.calls.length,0);
+  f.callbacks.extract=()=>({isNull:false,mainView:{image:{width:32,height:64,numberOfNominalChannels:1}}});
+  assert.throws(()=>f.run({process:'DENOISE',parameters:{denoiseL:.4,denoiseRGB:.3}}));
+  assert.equal(f.calls.length,0);
 });
 test('starless secondary tracks are retained with selected model and screened recombination',()=>{
   const f=fixture();f.settings.branch='STARLESS';f.run({process:'SEPARATE',parameters:{}});
