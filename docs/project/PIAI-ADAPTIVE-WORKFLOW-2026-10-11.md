@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-049-EXT-PIAI-ADAPTIVE |
-| Versione | 2.2 |
+| Versione | 2.3 |
 | Stato | Backend adattivo e worker di analisi attivi; OAT astronomico con provider in corso |
 | Data | 2026-10-11 |
 
@@ -12,6 +12,10 @@ Owner autorizza analisi delle immagini, verifica dei risultati intermedi e scelt
 ## Stato implementato e residui
 
 ### Attivazione coordinata — 11 ottobre 2026
+
+PR572 integrata (`0678a9c2814e96e213438a6fea81e7ebdf19871c`), head `796d8f52e710edf45981eb784174c469c6d541e7`: ARB poi RQ APPROVED zero finding, nove check PR e otto workflow post-merge SUCCESS. Il controllo Windows post-merge è stato ripetuto sullo stesso SHA dopo un'interruzione loopback WinError10053. Suite completa 291 Python e MkDocs strict PASS; Pages e riferimento v2.2 HTTP200. Build `aabab7dd-b918-4b2e-b7f4-8d1129a2ee86` SUCCESS, digest `sha256:af123065c9da6fdb208f3decae88045d13d54342ef2da30238b5e59f60a88cff`; revisione `dsg-pixinsight-pilot-adaptive-lrgb-20261011` Ready, health200 e traffico100%. Worker privato sullo stesso head con byte nativi collaudati e impostazioni multi-regione preservati; ciclo singolo senza avvio nativo verificato.
+
+La terza proposta incompleta è stata annullata nel portale conservando le evidenze. Una quarta richiesta distinta con il catalogo corretto resta `RESERVED`: non esiste un piano validato e il consumo è indeterminato, non zero. Il servizio non ripete la chiamata e non autorizza alcun segmento. La causa non è recuperabile dal precedente adapter, che non conservava la fase dell'errore. Il nuovo candidato aggiunge un messaggio diagnostico con sole categorie fisse: fase SEND/RESPONSE/OUTPUT/DECISION/GRAPH/SAMPLING/USAGE, ragione ammessa o OTHER e stato risposta completed/incomplete/failed/UNKNOWN. Non registra testo dell'eccezione o del provider, prompt, immagini, percorsi o credenziali. Non recupera retroattivamente la quarta risposta e non modifica prenotazione, validazione, consumo o divieto di retry. Gli stati seguenti sono snapshot storici; l'OAT astronomico resta incompleto.
 
 PR571 integrata (`6cc459d844d1d84be00ebeb88ac2270664da8f64`), head `d38a8e834b83fa6d85b1a0632406f05386114d77`, ARB poi RQ APPROVED zero finding, nove check PR e otto workflow post-merge SUCCESS, Pages comprese. Il backend attivo è ora `dsg-pixinsight-pilot-adaptive-rules-20261011`, digest `sha256:9c67e1078944bdcb68adec55e3878574cf8a23c44860fc8ce8ae7a4877491826`, build `ac49633b-0389-438b-b8a2-d30503929a66` SUCCESS; modello, quota0, attivazione, autenticazione e secret esistenti conservati. Avviso della pagina aggiornato e verificato pubblicamente.
 

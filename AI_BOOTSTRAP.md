@@ -1,5 +1,9 @@
 # Digital StarGate AI Bootstrap
 
+## PixInsight — catalogo LRGB attivo, diagnostica candidata
+
+PR572 integrata (merge `0678a9c2814e96e213438a6fea81e7ebdf19871c`), ARB poi RQ zero finding, nove check PR e otto post-merge SUCCESS, 291 Python/MkDocs strict PASS. Backend adaptive-lrgb a traffico100%, worker head796d8f52 con impostazioni e byte nativi preservati. Quarta richiesta distinta RESERVED senza piano validato; consumo indeterminato, nessun retry o esecuzione nativa. Candidato registra soltanto categorie fisse della fase/ragione/stato dell'errore, senza payload privati e senza recupero retroattivo. [Stato v2.3](docs/project/PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md). Restano diagnosi, proposta valida e OAT astronomico supervisionato. I paragrafi seguenti sono snapshot storici.
+
 ## PixInsight — completamento LRGB candidato dopo le analisi reali
 
 PR571 integrata (`6cc459d844d1d84be00ebeb88ac2270664da8f64`), nove check PR e otto workflow post-merge SUCCESS; backend adaptive-rules attivo e avviso trasferimento verificato. Due richieste reali STOP conservate; confronto read-only su quattro regioni periferiche/campo completo verificato. Terza analisi reale propone COLOR/DENOISE/STRETCH, ma senza fusione LRGB: nessuna approvazione o esecuzione. Nuovo candidato impone COMBINE dopo STRETCH in LRGB e aggiorna il fingerprint/proiezione del catalogo; occorre una nuova proposta distinta. Coordinatore attualmente a cicli singoli dopo rifiuto automatico del riavvio in background. [Stato v2.2](docs/project/PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md). Restano OAT astronomico, esatto grafo e avvio supervisionato. Gli snapshot seguenti descrivono stati precedenti.
