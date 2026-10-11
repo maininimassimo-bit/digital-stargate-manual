@@ -14,6 +14,7 @@ def curve(median,target=.2):
     if type(target) not in (int,float) or not math.isfinite(target) or not .05<=target<=.5:
         raise ValueError('PREVIEW_TARGET')
     m=median*(target-1)/(2*target*median-target-median)
+    if not math.isfinite(m) or not 0<m<1:raise ValueError('PREVIEW_DEGENERATE_CURVE')
     return {'method':'MTF_DISPLAY_ONLY','black':0.,'white':1.,'midtones':m,
             'parentMedian':median,'displayTarget':target}
 
@@ -34,7 +35,7 @@ def render(samples,display_curve,region=None):
     c=validate_curve(display_curve)
     if samples.ndim!=3 or samples.shape[2] not in (1,3) or samples.dtype.kind!='f':raise ValueError('PREVIEW_ARRAY')
     h,w,channels=samples.shape
-    if not 32<=w<=12000 or not 32<=h<=12000 or not np.isfinite(samples).all():raise ValueError('PREVIEW_GEOMETRY_OR_FINITE')
+    if not 32<=w<=12000 or not 32<=h<=12000:raise ValueError('PREVIEW_GEOMETRY_OR_FINITE')
     if region is not None:
         if not isinstance(region,list) or len(region)!=4 or not all(type(v) is int for v in region):raise ValueError('PREVIEW_REGION')
         x0,y0,x1,y1=region
@@ -42,9 +43,20 @@ def render(samples,display_curve,region=None):
         selected=samples[y0:y1,x0:x1]; kind='NATIVE_PIXEL_CROP';resampling='NONE'
     else:
         selected=samples;kind='FULL_FIELD';resampling='BOX_AFTER_DISPLAY_CURVE'
-    x=np.clip(selected,0,1);m=c['midtones']
-    mapped=((m-1)*x)/((2*m-1)*x-m)
-    pixels=np.rint(np.clip(mapped,0,1)*255).astype(np.uint8)
+    # Float64 blocks avoid scalar promotion rounding m to 0/1 in Float32,
+    # without allocating full-field Float64 transformation buffers.
+    pixels=np.empty(selected.shape,dtype=np.uint8);m=c['midtones']
+    for start in range(0,selected.shape[0],128):
+        chunk=np.asarray(selected[start:start+128],dtype=np.float64)
+        if not np.isfinite(chunk).all():raise ValueError('PREVIEW_GEOMETRY_OR_FINITE')
+        x=np.clip(chunk,0,1)
+        try:
+            with np.errstate(divide='raise',invalid='raise',over='raise'):
+                mapped=((m-1)*x)/((2*m-1)*x-m)
+        except FloatingPointError as error:
+            raise ValueError('PREVIEW_TRANSFORM_NOT_FINITE') from error
+        if not np.isfinite(mapped).all():raise ValueError('PREVIEW_TRANSFORM_NOT_FINITE')
+        pixels[start:start+128]=np.rint(np.clip(mapped,0,1)*255).astype(np.uint8)
     im=Image.fromarray(pixels[:,:,0] if channels==1 else pixels)
     if region is None:
         scale=min(1,512/max(im.size));size=tuple(max(1,round(n*scale)) for n in im.size)

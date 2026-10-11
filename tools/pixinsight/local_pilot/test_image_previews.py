@@ -15,6 +15,15 @@ class PreviewTests(unittest.TestCase):
         parent=np.full((32,32,1),.05,dtype=np.float32)
         a,_=render(parent,curve(.05));b,_=render(parent*2,curve(.05))
         self.assertNotEqual(a,b)
+    def test_degenerate_curve_rejected_and_float32_endpoint_kept_white(self):
+        with self.assertRaisesRegex(ValueError,'DEGENERATE'):curve(.9999999999999999)
+        # A nondegenerate double m very close to one must not round to one
+        # during arithmetic on a Float32 scientific input.
+        x=np.full((32,32,1),1.,dtype=np.float32)
+        raw,_=render(x,curve(.99999999))
+        from PIL import Image
+        import io
+        self.assertEqual(Image.open(io.BytesIO(raw)).getpixel((0,0)),255)
     def test_native_crop_is_not_rescaled(self):
         raw,r=render(np.full((300,400,3),.1,dtype=np.float32),curve(.1),[10,20,210,220])
         self.assertEqual(r['displayGeometry'],[200,200]);self.assertEqual(r['resampling'],'NONE')
