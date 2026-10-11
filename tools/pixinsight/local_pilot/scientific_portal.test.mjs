@@ -5,12 +5,12 @@ import {readFileSync} from 'node:fs';
 import {webcrypto} from 'node:crypto';
 const source=readFileSync(new URL('../../../docs/javascripts/pixinsight-pilot.js',import.meta.url),'utf8');
 const tick=async()=>{for(let i=0;i<12;i++)await new Promise(resolve=>setTimeout(resolve,3));};
-function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=false,plansReady=false,sourcePlanReady=false,preparationReady=false,completedRevision=false,legacyRevisions=false,openaiEnabled=false}={}) {
+function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=false,plansReady=false,sourcePlanReady=false,preparationReady=false,completedRevision=false,legacyRevisions=false,openaiEnabled=false,pixelEnabled=false}={}) {
   function node(){return {dataset:{},children:[],callbacks:{},value:'',checked:false,isConnected:true,
     addEventListener(type,callback){this.callbacks[type]=callback;},append(...items){this.children.push(...items);},
     replaceChildren(){this.children=[];},querySelectorAll(){return this.children.flatMap(label=>label.children).filter(x=>x.type==='checkbox'&&x.checked);},
     click(){this.callbacks.click?.();},remove(){}};}
-  const controls=Object.fromEntries(['planning-mode','openai-option','openai-consent','openai-consent-label','origin','catalog-label','parent-label','session-fields','historical-fields','historical-target','provenance','historical-attest','message','connect','signin','form','fields','input','directory','prompt','target','mode','layout','bayer','bayer-label','additional','additional-label','plans','parent','title','date','sessions','attest','create','pending','retry','refresh','jobs','review','summary','preview','steps','workflow','correlations','receipt','accept','reject'].map(name=>[name,node()]));
+  const controls=Object.fromEntries(['planning-mode','openai-option','openai-consent','pixel-consent','openai-consent-label','origin','catalog-label','parent-label','session-fields','historical-fields','historical-target','provenance','historical-attest','message','connect','signin','form','fields','input','directory','prompt','target','mode','layout','bayer','bayer-label','additional','additional-label','plans','parent','title','date','sessions','attest','create','pending','retry','refresh','jobs','review','summary','preview','steps','workflow','correlations','receipt','accept','reject'].map(name=>[name,node()]));
   controls.title.value='M27 test';controls.date.value='2026-10-05';controls.attest.checked=true;
   controls.mode.value='LRGB';controls.layout.value='SINGLE';controls.additional.value='';controls.directory.value='F:\\Astro\\M27\\Master';controls.prompt.value='Dettaglio interno, fondo naturale';
   const root=node();root.querySelector=selector=>controls[selector.match(/data-p5-(.+)\]/)[1]];
@@ -32,7 +32,7 @@ function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=fal
         if(url.endsWith('/decision'))return {ok:true,json:async()=>({publication:'NONE'})};
         return {ok:true,blob:async()=>new Blob(['private fixture'])};
       }
-      if(url.endsWith('/options'))return {ok:true,json:async()=>({openaiPlanningEnabled:openaiEnabled,inputs:[{inputRef:'b'.repeat(32),target:'M27'}],images:[],catalogSha256:'a'.repeat(64),sessions:[{sessionId:'SESSION-M27',target:'M27'}]})};
+      if(url.endsWith('/options'))return {ok:true,json:async()=>({openaiPlanningEnabled:openaiEnabled,pixelStatisticsEnabled:pixelEnabled,inputs:[{inputRef:'b'.repeat(32),target:'M27'}],images:[],catalogSha256:'a'.repeat(64),sessions:[{sessionId:'SESSION-M27',target:'M27'}]})};
       if(url.endsWith('/science/intakes')){
         if(options.method==='POST'){
           if(rejected)return {ok:false,status:400,json:async()=>({error:'CATALOG_CHANGED_REFRESH'})};
@@ -137,6 +137,20 @@ test('disabled backend refuses OpenAI choice without freezing or sending a reque
   h.controls['planning-mode'].value='OPENAI_API';h.controls['openai-consent'].checked=true;
   await h.submit();assert.equal(h.requests.some(r=>r.options.method==='POST'),false);
   assert.equal(h.stored.size,0);
+});
+
+test('pixel statistics require distinct consent and verified worker availability',async()=>{
+  for(const enabled of [false,true]){
+    const h=harness({openaiEnabled:true,pixelEnabled:enabled});await h.login();
+    assert.equal(h.controls['pixel-consent'].disabled,!enabled);
+    h.controls['planning-mode'].value='OPENAI_API';h.controls['openai-consent'].checked=true;
+    h.controls['pixel-consent'].checked=true;await h.submit();
+    const post=h.requests.find(r=>r.url.endsWith('/science/intakes')&&r.options.method==='POST');
+    if(enabled)assert.deepEqual(JSON.parse(post.options.body).openaiPlanning,
+      {dataTransferConfirmed:true,pixelStatisticsConfirmed:true});
+    else {assert.equal(post,undefined);assert.equal(h.stored.size,0);}
+    h.controls['planning-mode'].callbacks.change();assert.equal(h.controls['pixel-consent'].checked,false);
+  }
 });
 
 test('historical mosaic clears catalog choices and sends declared target without fake sessions',async()=>{

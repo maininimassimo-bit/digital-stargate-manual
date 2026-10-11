@@ -1,5 +1,6 @@
 """Opt-in planning with durable one-send reservation and exact draft binding."""
 import copy
+import os
 import secrets
 
 from .broker import decode, encode, require, opaque
@@ -11,10 +12,16 @@ from tools.scientific_registry.ingestion_storage import immutable
 
 def api_requested(selection):
     value = selection.get('openaiPlanning')
-    return isinstance(value, dict) and set(value) == {'dataTransferConfirmed'} and value['dataTransferConfirmed'] is True
+    return (isinstance(value, dict) and
+            set(value) in ({'dataTransferConfirmed'}, {'dataTransferConfirmed', 'pixelStatisticsConfirmed'}) and
+            value['dataTransferConfirmed'] is True and
+            ('pixelStatisticsConfirmed' not in value or value['pixelStatisticsConfirmed'] is True))
 
 
 class OpenAIFlowMixin:
+    def pixel_statistics_enabled(self):
+        return self.planner is not None and os.environ.get('DSG_PIAI_PIXEL_STATISTICS') == 'LOCAL_WORKER_VERIFIED'
+
     def openai_state(self, request_id):
         state, _ = self.broker._state()
         attempt = state.get('openaiAttempts', {}).get(request_id)
@@ -34,6 +41,9 @@ class OpenAIFlowMixin:
         prep = self.preparation_state(request_id) if prepared else None
         require(not prepared or prep['preparationApproved'] and prep['preparationResult'], 'PREPARATION_RESULT_REQUIRED')
         evidence = validate_evidence(value['evidence'], intake['target'], profile['mode'])
+        require(('pixelDiagnostics' in evidence) ==
+                (intake['selection']['openaiPlanning'].get('pixelStatisticsConfirmed') is True),
+                'AI_PIXEL_STATISTICS_CONSENT_BINDING')
         require(not prepared or evidence['masters'] == prep['preparationResult']['masters'], 'AI_PREPARATION_BINDING')
         safe_text(intake['selection']['prompt'])
         safe_text(intake['target'], 160)

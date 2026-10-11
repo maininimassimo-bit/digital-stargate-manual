@@ -46,6 +46,8 @@ class IntakeMixin(PreparationFlowMixin):
         require(isinstance(value, dict) and fields <= set(value) <= fields | optional and opaque(value['requestId']), 'INTAKE_FIELDS')
         if 'openaiPlanning' in value:
             require(api_requested(value), 'AI_DATA_TRANSFER_CONSENT_REQUIRED')
+            require(not value['openaiPlanning'].get('pixelStatisticsConfirmed') or
+                    self.pixel_statistics_enabled(), 'AI_PIXEL_STATISTICS_DISABLED')
             safe_text(value['prompt'])
         local_directory(value['masterDirectory'])
         source_profile(value)

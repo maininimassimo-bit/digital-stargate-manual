@@ -1,5 +1,10 @@
 # Technical Debt Register
 
+## PixInsight — integrazione statistica candidata
+
+Incremento autorizzato del ciclo adattivo: consenso separato per statistiche dei pixel, analisi locale dei master selezionati, evidence validata/binding immutabile e payload OpenAI senza hash o percorsi. Opzione disabilitata fino alla verifica coordinata backend/worker; nessuna nuova chiamata reale o esecuzione nativa. Il planner conserva la ricetta V1: catalogo, analisi PSF/background, segmentazione e decisioni checkpoint multiple restano aperti. Quota0 attiva e P6/BKL-051 invariati. [Contratto e rollback](PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md#collegamento-delle-misure-al-pianificatore).
+
+
 ## PixInsight — requisiti adattivi aperti, 11 ottobre 2026
 
 Diagnostica iniziale locale candidata, non workflow adattivo completato. Adapter native/maschere/PSF, prerequisiti di calibrazione e linearità, catalogo/grafo, segmentazione, decisioni multiple, storage per decisione senza capacity globale V1, accounting/recovery, History/progetto e OAT sono requisiti aperti dell'estensione autorizzata. Nessuna soglia universale o rinuncia implicita; non debito accettato. Quota giornaliera rimossa nel runtime compatibile PR558, singolo piano/capacità16 V1 ancora presenti. [Contratto e acceptance](PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md).

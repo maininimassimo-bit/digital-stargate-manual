@@ -198,6 +198,7 @@
       if(q('openai-option')){
         q('openai-option').disabled=options.openaiPlanningEnabled!==true;
         q('openai-option').textContent=options.openaiPlanningEnabled===true?'OpenAI dalla pagina':'OpenAI dalla pagina · servizio non attivo';
+        if(q('pixel-consent'))q('pixel-consent').disabled=options.pixelStatisticsEnabled!==true;
       }
       const targets=[...new Set(options.sessions.map(s=>targetKey(s.target)))];
       targets.forEach(target=>{el('option',target,q('target')).value=target;});q('target').value=targets[0] || '';
@@ -235,6 +236,7 @@
         if(!q('directory').value.trim() || !q('prompt').value.trim())throw new Error('Indica la cartella completa e il risultato desiderato.');
         const openai=q('planning-mode')?.value==='OPENAI_API';
         if(openai && (options.openaiPlanningEnabled!==true || !q('openai-consent')?.checked))throw new Error('Verifica la disponibilità del servizio e conferma l’invio dei dati a OpenAI.');
+        if(openai && q('pixel-consent')?.checked && options.pixelStatisticsEnabled!==true)throw new Error('Analisi dei pixel non ancora disponibile. Aggiorna la pagina.');
         const image=q('parent').value===''?null:options.images[Number(q('parent').value)];
         const mode=q('mode').value,layout=q('layout').value;
         const additionalDirectories=layout==='PANELS'?q('additional').value.split(/\r?\n/).map(v=>v.trim()).filter(Boolean):[];
@@ -247,6 +249,7 @@
           title:q('title').value,processingDate:q('date').value,associationConfirmed:!historical};
         if(historical)frozen.historicalSource={target:q('historical-target').value.trim(),provenance:q('provenance').value.trim(),attested:true};
         if(openai)frozen.openaiPlanning={dataTransferConfirmed:true};
+        if(openai && q('pixel-consent')?.checked)frozen.openaiPlanning.pixelStatisticsConfirmed=true;
         sessionStorage.setItem(KEY,JSON.stringify(frozen));
       }
       await submitFrozen();
@@ -266,6 +269,7 @@
     q('layout').addEventListener('change',()=>{q('additional-label').hidden=q('layout').value!=='PANELS';});
     q('planning-mode')?.addEventListener('change',()=>{
       q('openai-consent').checked=false;
+      if(q('pixel-consent'))q('pixel-consent').checked=false;
       q('openai-consent-label').hidden=q('planning-mode').value!=='OPENAI_API';
     });
     q('connect').addEventListener('click',()=>run(async()=>{

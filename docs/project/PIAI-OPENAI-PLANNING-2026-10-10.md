@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-049-EXT-PIAI-OPENAI-P1 |
-| Versione | 1.4 |
+| Versione | 1.5 |
 | Data | 2026-10-10 |
 | Stato | Catena provider → conferma → nativo → consegna privata verificata su M27; revisione scientifica Owner pendente |
 | Autorizzazione | Owner approva integrazione OpenAI e aggiornamento dei documenti, 10 ottobre 2026 |
@@ -13,6 +13,8 @@
 ## Stato corrente e risultato previsto
 
 ### Estensione autorizzata l'11 ottobre 2026
+
+Candidato integrazione statistica: consenso separato, misure locali validate e legate alla prenotazione, payload OpenAI senza hash/percorsi. Opzione runtime disabilitata fino al coordinamento backend/worker. Questo incremento sceglie parametri nella ricetta V1; catalogo adattivo e decisioni checkpoint restano aperti. [Contratto, verifiche e rollback](PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md#collegamento-delle-misure-al-pianificatore).
 
 Quota giornaliera zero attiva sulla revisione `dsg-pixinsight-pilot-quota0-20261011`, 100% traffico verificato. PR #558 merge `fdd41047a3679c07dc68763416da106743d03a2b`, build `540516ac-cf0f-46ec-b26c-f615c480eea0` SUCCESS, digest `sha256:11c3df286c7eaa5b4143752038524ab4676375535d0145b1c86fd911d18853bc`. La quota iniziale 1 e la revisione del 10 ottobre nelle sezioni storiche sono superate soltanto da questa configurazione; contratto di singolo piano V1 invariato. [Estensione e requisiti aperti](PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md).
 

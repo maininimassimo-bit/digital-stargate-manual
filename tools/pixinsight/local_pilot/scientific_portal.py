@@ -82,6 +82,7 @@ class ScientificPortal(OpenAIFlowMixin, IntakeMixin, RevisionMixin):
         require(parsed.get("schemaVersion") == "1.5" and parsed.get("catalogStatus") == "VERSIONED_ANALYTICS_PROJECTION", "CATALOG_PROFILE")
         gallery = self.gallery_loader()
         return {"inputs": inputs, "openaiPlanningEnabled": self.planner is not None,
+                "pixelStatisticsEnabled": self.pixel_statistics_enabled(),
                 "historicalIntakeEnabled": historical_intake_enabled(), "catalogSha256": digest(catalog),
                 "sessions": [{"sessionId": s["sessionId"], "target": s["target"], "observationDate": s.get("observationDate")}
                              for s in parsed["sessions"] if known_target(s.get('target'))],
