@@ -1,7 +1,7 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 0.8 — backup privato e snapshot pubblico della configurazione 10/10/2026
+**Revisione:** 0.9 — startrail ripristinati, anteprime Messier e nuovo backup 11/10/2026
 **Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
@@ -202,6 +202,7 @@ Registrazione aggiornata il 09/10/2026 con lo script ufficiale `postToMap.sh`; r
 | 0.6 | 09/10/2026 | Nomi delle stelle e radianti indicativi; pagina divulgativa Allsky, metadati SEO, sitemap, robots.txt e gestione Search Console |
 | 0.7 | 09/10/2026 | Pannelli fuori dalla ripresa; CloudWatcher locale, stelle rilevate, candidati della notte, previsioni ISS, Aircraft adsb.fi e informazioni Sole/Luna/alba |
 | 0.8 | 10/10/2026 | Backup configurazione privato, copia pubblica sanificata, manifest SHA-256 e procedura di ripristino controllato |
+| 0.9 | 11/10/2026 | Ripristino soglia startrail 0,30, blocco trascinamento overlay, 110 anteprime Messier DSS2 e nuovo snapshot verificato |
 
 Inventario correlato: [Capitolo 22](22-inventario-asset-management.md).
 
@@ -413,4 +414,27 @@ I pannelli non sono incorporati nel JPEG o nelle anteprime Home/Status. Nessun n
 
 ## 27.27 Backup della configurazione
 
-Il 10/10/2026 è stato acquisito uno snapshot privato della configurazione e delle personalizzazioni, con copia locale per l'owner. Una copia ridotta e sanificata è conservata nel repository; non contiene credenziali, database, certificati o coordinate precise. La [procedura di backup e ripristino](../operations/allsky-configuration-backup.md) elenca inclusioni, esclusioni, checksum e limiti del collaudo. È un backup della configurazione, non un'immagine della scheda SD; il ripristino su supporto separato resta da collaudare.
+Il 10/10/2026 è stato acquisito un primo snapshot privato della configurazione e delle personalizzazioni, con copia locale per l'owner. Il nuovo snapshot dell’11/10/2026 alle 10:49 Europe/Rome conserva anche il ripristino startrail e il catalogo delle anteprime Messier; il precedente resta disponibile come riferimento storico. Una copia ridotta e sanificata è conservata nel repository; non contiene credenziali, database, certificati o coordinate precise. La [procedura di backup e ripristino](../operations/allsky-configuration-backup.md) elenca inclusioni, esclusioni, checksum e limiti del collaudo. È un backup della configurazione, non un'immagine della scheda SD; il ripristino su supporto separato resta da collaudare.
+
+
+## 27.28 Ripristino della generazione startrail — 11 ottobre 2026
+
+Nel vecchio `allsky-OLD/config/config.sh` la soglia `BRIGHTNESS_THRESHOLD` era **0,30**. Dopo l’aggiornamento `startrailsbrightnessthreshold` era **0,10**: nelle due generazioni del 10 e 11 ottobre la selezione aveva accettato rispettivamente zero e un fotogramma. I JPEG esistevano, ma non potevano mostrare scie stellari composte.
+
+È stata ripristinata soltanto la soglia a **0,30**; gli altri parametri startrail risultavano equivalenti. La selezione usa la luminosità media del fotogramma, non una soglia di magnitudine delle stelle. Esposizione, guadagno e calibrazione non sono stati modificati. Il collegamento fisico fra `settings.json` e `settings_ZWO_ASI290MC.json` è stato conservato.
+
+La prova sulla notte osservativa `20261010` ha accettato **624 immagini su 663**, escludendone 39. Sono stati rigenerati e ripubblicati i prodotti delle notti `20261009` e `20261010`, con miniature aggiornate. SHA-256 dei JPEG amministrativi e pubblici, e delle rispettive miniature, coincidenti. La camera è rimasta attiva. Gli avvisi e le statistiche delle elaborazioni precedenti possono restare nello storico: non descrivono necessariamente i file rigenerati manualmente.
+
+Backup mirato precedente alla correzione: `/home/pi/allsky-private-archive/startrails-restore-20261011`. Comprende impostazioni e prodotti sostituiti. Prima di nuovi aggiornamenti confrontare il valore nel vecchio `config.sh` con il campo della nuova configurazione; non ripristinare indiscriminatamente l’intera configurazione precedente.
+
+## 27.29 Overlay bloccato e anteprime Messier — 11 ottobre 2026
+
+`config.mouse=false` disabilita rotazione/trascinamento manuale della mappa, mantenendo il passaggio del mouse sui marcatori. La sincronizzazione continua a usare `Last-Modified` del fotogramma e `setClock(..., "camera-frame")`; nel controllo browser i due `data-frame-time` erano identici. Parametri `overlayCalibration`, coordinate del sito, dimensioni e controller della sincronizzazione sono rimasti invariati. Il pulsante della mappa conserva il controllo della visibilità.
+
+Il catalogo `virtualsky/messier.json` conserva i **110 oggetti** e tutte le coordinate originali; aggiunge per ciascuno una proprietà `preview` con immagine locale, URL della sorgente, credito e campo angolare. Le miniature JPEG 192 × 192 sono in `virtualsky/messier-preview/`; la scheda le mostra a 160 × 160 con nome, dicitura **Immagine di archivio** e credito. Non rappresentano osservazioni o rilevazioni della camera Allsky. Le miniature sono ritagli DSS2 color ottenuti dal servizio [CDS HiPS2FITS](https://alasky.cds.unistra.fr/hips-image-services/hips2fits); crediti STScI/NASA/CDS, provenienza individuale nel catalogo e attribuzioni in `CREDITS.txt`, con riferimento ai [diritti DSS](https://archive.stsci.edu/dss/copyright.html).
+
+Il loader `virtualsky/virtualsky.js` costruisce le schede usando nodi DOM e percorsi locali limitati al catalogo. Il rilevamento converte i pixel dello schermo nei pixel del canvas; la zona del marcatore è di circa 8 pixel visualizzati. La scheda resta entro il canvas. Questo adattamento riguarda l’interazione, non la proiezione celeste. Il riferimento versionato nella Home e la richiesta versionata del catalogo evitano copie precedenti nella cache.
+
+Controlli: sintassi JavaScript, 110 JPEG e integrità del catalogo, coordinate originali invariate, accesso HTTPS pubblico al catalogo e alle immagini, prova browser con M1 e miniatura caricata, clock immagine/mappa coincidente e nessun errore console nel controllo. La presenza dei singoli oggetti dipende dall’orizzonte e dal campo; non è stato collaudato manualmente il passaggio del mouse su tutti i 110 oggetti o su tutti i browser. La funzionalità riguarda gli oggetti Messier, non miniature di stelle, pianeti o figure di costellazioni.
+
+Backup mirati: `/home/pi/allsky-private-archive/overlay-mouse-lock-20261011` e `/home/pi/allsky-private-archive/messier-previews-20261011`. Il secondo conserva renderer, catalogo e Home precedenti. Per annullare l’integrazione ripristinare soltanto quei file e aggiornare il riferimento di cache, mantenendo `mouse=false` se si vuole conservare il blocco. Non toccare la calibrazione o il controller del clock.
