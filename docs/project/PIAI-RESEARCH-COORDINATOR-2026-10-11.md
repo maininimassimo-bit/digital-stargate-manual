@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Versione | `DSG_PIAI_RESEARCH_V1`, rilascio tecnico 11/10/2026 |
-| Stato | Backend/worker/portale attivi; richiesta M27 2ffd1ae8 fermata in COMBINE dopo 10 API / 5 prove; correzione candidata della provenienza SPCC e ripresa Owner senza azzerare budget. Consuntivo seguente. Tentativi precedenti conservati, accettazione scientifica Owner separata |
+| Stato | Backend research-lineage-v1 attivo e portale pubblicato; M27 2ffd1ae8: 12 API note / 6 prove native, STOP dopo confronto della fusione CP006; controllo CP005 conservato, nessun finale consegnato o accettato |
 | Perimetro | LRGB, campo singolo, campionamento originale, inventario QHY695A/ZWO RGB/Optolong L-Pro L |
 | Conoscenza | `DSG_PIAI_RESEARCH_KNOWLEDGE_V1`, distinta dal pacchetto scientifico storico V1 |
 
@@ -141,4 +141,23 @@ La correzione candidata aggiunge `calibrationLineage`: catena esatta del checkpo
 
 Dal portale l'Owner può esaminare il fit dell'antenato e la catena, poi confermare la ripresa della stessa richiesta. GET/POST `research-resume` sono esclusivamente Owner: il worker non può riaprire il ciclo. La conferma vincola stato, policy e nuova evidenza con SHA; ricevuta immutabile e cronologia dell'arresto conservate. La ripresa non invoca OpenAI o PixInsight nell'endpoint: il worker torna alla scelta seguente, che può ancora essere STOP. Stessi parametri, sorgenti, runtime, conoscenza e massimali; non azzera prove, chiamate o selezioni, non riesegue SPCC. Nel caso corrente restano 11 prove e 22 richieste API. Gli stati indeterminati API, prenotazioni pendenti, avvii incerti, richieste annullate e finali consegnati non sono riapribili tramite questo controllo. Pubblicazione e accettazione finale non cambiano.
 
-Rilascio della correzione, conferma della ripresa, fusione e OAT della consegna restano da verificare. Questo è un consuntivo parziale reale, non un workflow finale accettato.
+Il paragrafo precedente descrive lo snapshot prima del rilascio; l’esito successivo è riportato qui sotto. La consegna finale resta aperta.
+
+### Fusione LRGB: prova non promossa e limite operativo
+
+PR [584](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/584), head `97b72aebbb4b791f371ddfbd8ba243767f2242aa`, merge `6a943ab9a9138021ef190a2487c31f10496b3e87`: ARB poi RQ separate APPROVED zero finding; 15/15 check PR e 16/16 post-merge SUCCESS, Pages38176433284 SUCCESS. Build330689a5-d30c-45fe-a431-30fc48e1ace5 SUCCESS, digest72d2d85e4bd1e76f8a5a1df15e6b818121d346b874b89320d40a084b65dfecf3. Backend research-lineage-v1-20261011 attivo100%, configurazione preservata e rollback research-cp-v1 disponibile. Ricevuta canonica di ripresa recuperabile dopo crash prima del CAS; replay già applicato non riapre un successivo STOP.
+
+Owner autenticato nel portale reale. Dopo revisione della provenienza, ripresa della stessa richiesta con 10 API/5 prove invariati e STOP precedente conservato. Undicesima API TEST COMBINE dal genitore esatto CP005; CP006 completato e verificato. Dodicesima API STOP: non promuove CP006, mantiene CP005 e dichiara beneficio non dimostrato sui dettagli deboli, rischio cromatico ai limiti, campo intero/fit stellari appaiati non stabiliti. Il nuovo contesto ha correttamente conservato il fit SPCC ancestrale; questo arresto ha una motivazione diversa dal precedente errore di provenienza.
+
+| Checkpoint | Esattamente 0, R / G / B | Esattamente 1, R / G / B |
+|---|---|---|
+| CP005 controllo | 131 / 0 / 0 | 0 / 0 / 0 |
+| CP006 fusione non promossa | 8.574 / 975 / 0 | 685 / 0 / 1.348 |
+
+Ogni canale ha 13.012.272 campioni; nessun negativo o valore maggiore di uno. L resta invariata: 130 zeri, nessun uno, massimo0,893953681. Il precedente riepilogo di130zeri in R era impreciso: la ricevuta RGB registra131. I campioni al bordo sono un rischio concreto da localizzare; non provano da soli la natura o rilevanza di ogni artefatto, né perdita generalizzata del segnale. La factory usa LRGBCombination con `mL=0.5`, `mc=0.5`, `clipHighlights=true`, `noiseReduction=false`, luminanza L-Pro nel solo canale L. L'abilitazione del clipping è verificata nel codice; la causalità pixel per pixel richiede confronto locale. L'immagine più luminosa non prova aumento di segnale acquisito, SNR o dettaglio fisico.
+
+Il catalogo V1 ammette COMBINE con parametri vuoti e una sola prova. La selezione avanza per fasi; non consente al modello di modificare peso/trasformazione della luminanza o protezione delle alte luci, né tornare allo stretch. L'autonomia attuale raggiunge quindi un limite operativo reale: può rifiutare il risultato ma non esplorare un'alternativa di fusione. Restano10prove/20API nel budget, senza alternative COMBINE eseguibili. Non riaprire il ciclo allo stesso contenuto per forzare SELECT o FINISH.
+
+Per proseguire serve progettare e verificare una famiglia di fusioni alternative: parametri nativi limitati, precondizioni di dominio e scala L/RGB, controllo dello stesso genitore, criteri di rischio alle alte luci e al nero, confronto su più regioni comprendenti nuclei stellari/nebulosità debole/bordi, ed eventuale revisione dello stretch con provenienza esplicita. Queste sono capacità richieste, non implementate o già validate. Ogni alternativa deve rispondere a un'ipotesi concreta; nessuna prescrizione di aumentare saturazione o luminosità senza evidenza. Un pacchetto di conoscenza deve descrivere quando conservarne il controllo o arrestare, oltre a come provarla. Nuove capacità/impronte richiedono un perimetro coerente, senza mutare silenziosamente la policy già approvata.
+
+Consuntivo corrente: 12 API completate con uso noto, 131.118 token input / 6.121 output /137.239totali; sei prove native verificate, originali invariati. Nessuna saturazione o finale consegnato; CP005 è un controllo per revisione, CP006 una prova scartata, non finali LRGB approvati. Nessuna accettazione scientifica Owner. L'archivio terminale del worker non è generato finché il coordinatore non raggiunge FINISH: i tentativi e le ricevute locali restano conservati. I limiti nominali di curve ZWO/QE sostitutiva, fit SPCC e osservazione su anteprime/crop continuano ad applicarsi.
