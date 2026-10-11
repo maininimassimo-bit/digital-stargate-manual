@@ -48,3 +48,6 @@ Perimetro della nuova richiesta M27 approvato dall’Owner: 16 prove native, 32 
 
 
 La [diagnostica rilasciata e i vincoli della decisione API](PIAI-RESEARCH-COORDINATOR-2026-10-11.md#diagnostica-rilasciata-e-vincoli-della-decisione-api) registrano anche il secondo tentativo distinto autorizzato: risposta completa, decisione rifiutata per vincolo del padre/ID TEST, 11.172 token noti e zero prove native. Schema più vincolante candidato; nessun riuso o reinvio automatico. OAT scientifico e accettazione restano aperti.
+
+
+Successivo OAT distinto autorizzato `2ffd1ae8`: prima decisione SPCC validata e prova CP001 verificata localmente su copie, 11.098 token noti. Ricevuta di misure fermata prima dell’HTTP perché supera il limite 256KiB; nessun replay nativo. [Stato e correzione del limite di trasporto](PIAI-RESEARCH-COORDINATOR-2026-10-11.md#prima-prova-spcc-reale-e-dimensione-della-ricevuta). Selezione, workflow completo e accettazione restano pendenti.
