@@ -253,4 +253,3 @@ Salvare XISF, maschere, History/progetto e dipendenze prima dell'uscita dell'ist
 Non dichiarare il perimetro concluso dopo il solo schema, l'analisi statistica o una nuova chiamata del modello. Rollback arresta la pianificazione adattiva, conserva tutti i segmenti e ripristina la modalità V1 senza replay dei job adattivi.
 
 Il recupero riconcilia la ricevuta fisica del segmento precedente con il checkpoint backend prima di liberare il lease locale: una risposta HTTP persa non ripete il segmento. La consegna può riprendere dal cursore READY_FOR_OWNER_REVIEW quando l'interruzione precede la registrazione COMPLETED del job. Regressioni offline coprono entrambe le finestre di crash senza nuovi invii provider o avvii nativi.
-

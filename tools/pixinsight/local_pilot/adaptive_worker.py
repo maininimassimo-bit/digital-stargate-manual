@@ -248,7 +248,8 @@ class AdaptiveWorker:
                 binding=read(attempt/'binding.json')
                 verify(attempt,expected_manifest_sha256=binding['manifestSha256'])
             if (attempt/'verification.json').exists():
-                result=read(attempt/'verification.json');binding=read(attempt/'binding.json')
+                binding=read(attempt/'binding.json')
+                result=verify(attempt,expected_manifest_sha256=binding['manifestSha256'],write_receipt=False)
                 self.post(request_id,'checkpoint',{'permit':binding['permit'],'verification':result['verification']})
                 self.close_lease(attempt,binding)
                 return 'CHECKPOINT_RECONCILED'

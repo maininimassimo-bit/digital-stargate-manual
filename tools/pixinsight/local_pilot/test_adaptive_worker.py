@@ -106,12 +106,30 @@ class AdaptiveWorkerTests(unittest.TestCase):
         self.transport.request.return_value={'executionPolicy':{},'analysis':{},
             'cursor':{'ordinal':1,'state':'AWAITING_EXECUTION'},
             'job':{'jobId':job_id,'state':'RUNNING','cancelRequested':False}}
-        with patch.object(self.runner,'run_native',side_effect=AssertionError('No native replay')):
+        with patch.object(self.runner,'run_native',side_effect=AssertionError('No native replay')), \
+             patch('tools.pixinsight.local_pilot.adaptive_worker.verify',return_value={'verification':{'ordinal':1,'outputs':['FIXTURE']}}) as physical:
             self.assertEqual(self.runner.advance(request_id),'CHECKPOINT_RECONCILED')
+        physical.assert_called_once_with(current,expected_manifest_sha256='c'*64,write_receipt=False)
         self.assertFalse((self.root/'active-job.json').exists())
         self.assertTrue((current/'native-lease-closed.json').exists())
         self.assertEqual(self.transport.post.call_count,1)
         self.assertTrue(self.transport.post.call_args.args[0].endswith('/adaptive-checkpoint'))
+
+    def test_changed_current_checkpoint_keeps_lease_and_cannot_advance_backend(self):
+        request_id='a'*32;job_id='PIAI_'+request_id
+        session=self.runner.directory/job_id;session.mkdir()
+        current=session/'segment-1';current.mkdir()
+        binding={'jobId':job_id,'permitSha256':'b'*64,'manifestSha256':'c'*64,'permit':{'ordinal':1}}
+        (current/'binding.json').write_bytes(encode(binding))
+        (current/'verification.json').write_bytes(encode({'verification':{'ordinal':1}}))
+        (self.root/'active-job.json').write_bytes(encode({'jobId':job_id,'permitSha256':'b'*64}))
+        self.transport.request.return_value={'executionPolicy':{},'analysis':{},
+            'cursor':{'ordinal':1,'state':'AWAITING_EXECUTION'},
+            'job':{'jobId':job_id,'state':'RUNNING','cancelRequested':False}}
+        with patch('tools.pixinsight.local_pilot.adaptive_worker.verify',side_effect=ValueError('changed physical source/output/runtime/History')):
+            with self.assertRaises(ValueError):self.runner.advance(request_id)
+        self.transport.post.assert_not_called()
+        self.assertTrue((self.root/'active-job.json').exists())
 
 
 if __name__=='__main__':unittest.main()
