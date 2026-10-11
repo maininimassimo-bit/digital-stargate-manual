@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-PIAI-SCIENTIFIC-KNOWLEDGE-001 |
-| Versione | 1.0 |
+| Versione | 1.1 |
 | Data | 11/10/2026 |
-| Stato | Incremento candidato: conoscenza collegata ai provider; rilascio e attivazione da verificare |
+| Stato | Conoscenza API rilasciata e backend attivo; ciclo autonomo SPCC/prove ancora in sviluppo |
 
 ## Obiettivo e confini
 
@@ -29,7 +29,9 @@ Le prove devono partire dal medesimo genitore, preservando controllo, rami scart
 
 ## Portale e nuova autonomia
 
-Nel candidato il portale indica quando una proposta usa il protocollo versionato. Le misure, il grafo, le decisioni intermedie e i consumi continuano a essere consultabili nella richiesta privata. Non è richiesta una chat per usare il pacchetto scientifico.
+Il portale indica quando una nuova proposta usa il protocollo versionato. Le misure, il grafo, le decisioni intermedie e i consumi continuano a essere consultabili nella richiesta privata. Non è richiesta una chat per usare il pacchetto scientifico.
+
+Requisito di accettazione dell'estensione: l'intero percorso operativo deve essere accessibile dal portale. L'Owner seleziona dati, ricetta e obiettivo; il servizio acquisisce le misure dal worker, presenta il perimetro delle prove, registra la conferma e decide/esegue/verifica le alternative autorizzate. Arresto, problemi di provenienza o configurazione, consumi, motivazione della scelta e risultato finale devono comparire nella richiesta privata. Una conferma in chat, una skill del profilo Codex o un agente Codex presente durante l'esecuzione non devono essere dipendenze del modulo finale. Il worker locale e PixInsight restano necessari sul PC. Questo requisito descrive il nuovo ciclo richiesto, non capacità SPCC già disponibili nel V2.
 
 Il servizio V2 conserva il proprio perimetro: grafo esatto e soli parametri del prossimo passo. La [ripartenza SPCC e selezione autonoma](PIAI-M27-PHOTOMETRIC-RESTART-2026-10-11.md) è l'estensione successiva in sviluppo: richiede funzioni native validate, nuovi contratti, conferma del perimetro dal portale, confronti appaiati e OAT. Trasferire la skill non completa queste capacità. L'Owner indica ricetta/obiettivo nel portale; il target è esecuzione autonoma delle alternative ammesse, con controllo iniziale del perimetro e revisione finale distinte.
 
@@ -37,10 +39,15 @@ Il servizio V2 conserva il proprio perimetro: grafo esatto e soli parametri del 
 
 Una nuova raccolta read-only M27 è stata eseguita nativamente su copie dei quattro master originali: geometria 4634×2808 mono, cinque regioni per canale, MRS e PSF native, originali/copie/History verificati invariati e istanza dedicata chiusa. I costruttori SPCC e Gaia sono stati ispezionati senza applicare calibrazione o inviare dati al provider. Un primo probe fallito prima delle misure per nome errato del costruttore Gaia è conservato separatamente; la successiva istanza usa `Gaia` correttamente. Nessuna qualità SPCC o validità WCS viene dedotta dai costruttori.
 
-Test: trasferimento della guida nei payload iniziali/checkpoint, impronta costante, arresto prima dell'invio su guida cambiata, assenza dei percorsi personali e compatibilità dei job storici. I test con provider simulato non sono nuove chiamate API reali. Gate: suite pertinente, MkDocs strict, CI exact-head, ARB poi RQ, merge e post-merge; attivazione richiede distribuire l'immagine backend revisionata e verificarne configurazione/digest. Rollback sulla precedente revisione backend, senza riscrivere job o cancellare guide/risultati.
+PR577: head `b89d873f8a1987f17cabc92492056b2955699765`, merge `a6408267da05d3be8f1adf4e5205de4f95f80103`; ARB poi RQ APPROVED, zero finding, nove check PR e otto workflow post-merge SUCCESS. MkDocs strict e test pertinenti PASS; Pages HTTP200 con pacchetto e requisito senza chat presenti. Waiver `W-DSG-AEM-RULESET-001` applicata e ricevuta nella PR.
+
+Backend attivo al 100% sulla revisione `dsg-pixinsight-pilot-scientific-v1-20261011`, immagine `sha256:198beb5c994d4c41c257d96e033f2b8376e4a6d6d625f79dfcbc4391a8660fc5`, build `3301a0a7-3311-4268-a137-ae5a9e28d700` SUCCESS. Contesto pubblico allowlisted dall'head revisionato; modello, riferimento al secret, quota, identità, risorse, concorrenza e timeout confrontati invariati. Verifica della revisione a traffico zero prima della promozione: health200, opzioni/job privati403 senza credenziale; health200 anche sull'URL principale dopo la promozione. Nessuna nuova risorsa IAM, chiave trasferita al PC o modifica del worker nativo.
+
+Test: trasferimento della guida nei payload iniziali/checkpoint, impronta costante, arresto prima dell'invio su guida cambiata, assenza dei percorsi personali e compatibilità dei job storici. I test con provider simulato non sono nuove chiamate API reali: l'OAT di una nuova proposta con guida archiviata e del ciclo SPCC rimane pendente. Rollback del backend sulla revisione `dsg-pixinsight-pilot-adaptive-diag-20261011`, senza riscrivere job o cancellare guide/risultati; mantenere il pacchetto corrispondente per ogni nuovo job iniziato.
 
 ## Revisioni
 
 | Versione | Modifica |
 |---|---|
 | 1.0 | Pacchetto scientifico portabile e versionato nelle API; vincolo ai checkpoint e indicazione dal portale; preparazione della nuova autonomia |
+| 1.1 | Rilascio PR577 e attivazione backend verificati; requisito operativo interamente dal portale e limiti OAT espliciti |

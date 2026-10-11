@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Data | 11/10/2026 |
-| Stato | Sviluppo autorizzato; nuove misure read-only concluse, conoscenza API candidata; ciclo SPCC e selezione autonoma ancora da implementare e validare |
+| Stato | Sviluppo autorizzato; nuove misure read-only concluse, conoscenza API rilasciata e backend attivo; ciclo SPCC e selezione autonoma ancora da implementare e validare |
 | Obiettivo | Migliorare leggibilità del segnale acquisito, dettaglio e vividezza con calibrazione cromatica fotometrica e confronti motivati |
 
 ## Richiesta e dati confermati
