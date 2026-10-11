@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from unittest.mock import Mock,patch
 
-from .adaptive_worker import AdaptiveWorker
+from .adaptive_worker import AdaptiveWorker,final_preview
 from .broker import encode
 from .image_analysis import fingerprint
 
@@ -26,6 +26,38 @@ class AdaptiveWorkerTests(unittest.TestCase):
         with self.assertRaises(ValueError):self.runner.run_native('a'*32,self.root,{})
         self.transport.post.assert_not_called()
         self.assertFalse((self.root/'launch.json').exists())
+
+    def test_supervised_timeout_admission_precedes_native_launch(self):
+        for timeout in (None,True,0,29,7201,'1800'):
+            settings={**self.settings,'nativeTimeoutSeconds':timeout}
+            with self.subTest(timeout=timeout),patch('tools.pixinsight.local_pilot.adaptive_worker.subprocess.Popen') as launch:
+                with self.assertRaisesRegex(ValueError,'ADAPTIVE_NATIVE_TIMEOUT_REQUIRED'):
+                    AdaptiveWorker(self.config,settings,self.transport,execute_approved=True)
+                launch.assert_not_called()
+                self.transport.post.assert_not_called()
+        settings={**self.settings,'nativeTimeoutSeconds':1800}
+        runner=AdaptiveWorker(self.config,settings,self.transport,execute_approved=True)
+        self.assertEqual(runner.native_timeout(),1800)
+        settings.pop('nativeTimeoutSeconds')
+        with patch('tools.pixinsight.local_pilot.adaptive_worker.subprocess.Popen') as launch:
+            with self.assertRaisesRegex(ValueError,'ADAPTIVE_NATIVE_TIMEOUT_REQUIRED'):
+                runner.run_native('a'*32,self.root,{})
+            launch.assert_not_called()
+        self.assertFalse((self.root/'launch.json').exists())
+
+    def test_final_nonlinear_preview_preserves_native_tones_without_second_stretch(self):
+        import io
+        import numpy as np
+        from PIL import Image
+        samples=np.full((64,64,3),.06,dtype=np.float32)
+        before=samples.copy()
+        raw,_=final_preview(samples,'NONLINEAR_ATTESTED',.06)
+        with Image.open(io.BytesIO(raw)) as image:self.assertEqual(image.getpixel((0,0)),(15,15,15))
+        raw,_=final_preview(samples,'LINEAR_ATTESTED',.06)
+        with Image.open(io.BytesIO(raw)) as image:self.assertEqual(image.getpixel((0,0)),(51,51,51))
+        np.testing.assert_array_equal(samples,before)
+        with self.assertRaisesRegex(ValueError,'ADAPTIVE_FINAL_DISPLAY_DOMAIN'):
+            final_preview(samples,'UNKNOWN',.06)
 
     def test_initial_unprepared_intake_waits_without_provider_or_native_action(self):
         self.transport.request.return_value={'intakes':[{'selection':{'requestId':'a'*32,'adaptivePlanning':{}},
