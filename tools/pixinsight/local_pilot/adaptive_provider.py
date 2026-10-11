@@ -14,6 +14,7 @@ from tools.pixinsight.local_pilot import adaptive_catalog as catalog
 from tools.pixinsight.local_pilot.adaptive_ledger import VERSION as LEDGER_VERSION,digest
 from tools.pixinsight.local_pilot.native_measurements import validate as validate_measurements
 from .image_previews import provider_image,validate_curve
+from .scientific_knowledge import instructions as scientific_instructions
 
 VERSION='DSG_PIAI_MULTIMODAL_PROVIDER_V2'
 
@@ -54,7 +55,8 @@ class AdaptiveProvider(OpenAIPlanner):
         self._sent=set()
 
     def generate_initial(self,reservation,evidence,bindings,assets,*,preview_transfer_confirmed=False,
-                         data_transfer_confirmed=False,statistics_transfer_confirmed=False):
+                         data_transfer_confirmed=False,statistics_transfer_confirmed=False,
+                         scientific_knowledge_sha256=None):
         require(preview_transfer_confirmed is True and data_transfer_confirmed is True and
                 statistics_transfer_confirmed is True,'ADAPTIVE_PREVIEW_CONSENT_REQUIRED')
         require(isinstance(reservation,dict) and set(reservation)=={'sendAllowed','request','owner'} and
@@ -129,6 +131,7 @@ class AdaptiveProvider(OpenAIPlanner):
             'displayLimitations':'Eight-bit derived display projections, never scientific sample data or scientific acceptance.'}
         require(len(encode(projection))<=32768,'ADAPTIVE_PROVIDER_TEXT_LIMIT')
         content.insert(0,{'type':'input_text','text':encode(projection).decode()})
+        guidance, knowledge_sha = scientific_instructions(scientific_knowledge_sha256)
         owner=reservation['owner'];require(isinstance(owner,str) and re.fullmatch('[a-f0-9]{32}',owner) and owner not in self._sent,
                 'ADAPTIVE_SEND_ALREADY_ATTEMPTED')
         # This in-process fence supplements, never replaces, durable reservation.
@@ -145,7 +148,7 @@ class AdaptiveProvider(OpenAIPlanner):
                 'An operational background ROI need not certify empty sky; uncertainty about diffuse emission remains a real limitation and can justify stopping. '
                 'Prerequisite satisfaction permits consideration, never requires a process or overrides scientific uncertainty. '
                 'Stop for review if evidence is insufficient or inconsistent. Explain decisions and limitations in Italian. '
-                'Never claim a best workflow or scientific acceptance without verified intermediate results.'),
+                'Never claim a best workflow or scientific acceptance without verified intermediate results.') + guidance,
             'input':[{'role':'user','content':content}],
             'text':{'format':{'type':'json_schema','name':VERSION,'strict':True,'schema':initial_schema(sampling=sampling)}}}
         phase='SEND'
@@ -181,7 +184,8 @@ class AdaptiveProvider(OpenAIPlanner):
             require(isinstance(usage,dict) and all(type(usage.get(k)) is int and 0<=usage[k]<=10**9 for k in keys) and
                     usage['total_tokens']==usage['input_tokens']+usage['output_tokens'],'ADAPTIVE_USAGE')
             return decision,{'responseId':response['id'],'requestedModel':self.model,'model':response['model'],
-                             'usage':{k:usage[k] for k in keys},'method':VERSION}
+                             'usage':{k:usage[k] for k in keys},'method':VERSION,
+                             'scientificKnowledgeSha256':knowledge_sha}
         except Exception as error:
             # Fixed categories only: never log exception text, provider text,
             # credentials, image data, source paths or owner intent.

@@ -95,6 +95,7 @@
         const upstreamRequired=selection.sourceProfile?.mode==='OSC_CFA' || selection.sourceProfile?.layout==='PANELS';
         if(selection.adaptivePlanning && (!upstreamRequired || intake.preparationResult)){
           const adaptive=intake.adaptive || {}, proposal=adaptive.plan, cursor=adaptive.cursor;
+          if(proposal?.provider?.scientificKnowledgeSha256)el('p','L’analisi usa il protocollo scientifico PixInsight versionato: misure native, confronto dei checkpoint e conservazione della provenienza.',card);
           const stateLabels={RESERVED:'Analisi prenotata: la richiesta non viene ripetuta automaticamente.',
             AWAITING_EXECUTION:'Piano pronto per la tua conferma.',STOP_FOR_REVIEW:'Analisi da rivedere prima di proseguire.',
             AWAITING_FINAL_VERIFICATION:'Verifica finale del PC in attesa.',READY_FOR_OWNER_REVIEW:'Risultato pronto per la tua valutazione.'};

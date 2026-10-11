@@ -15,6 +15,12 @@ from .image_previews import render, curve
 
 
 class ExecutionTests(unittest.TestCase):
+    def test_worker_context_retains_the_exact_initial_scientific_pack_for_archive(self):
+        context = self.portal.adaptive_context(self.request_id)
+        self.assertEqual(sha(context['scientificKnowledge']), context['plan']['provider']['scientificKnowledgeSha256'])
+        self.assertEqual(context['scientificKnowledge']['authority'],
+                         'GUIDANCE_ONLY_NEVER_CAPABILITIES_FACTS_OR_ACCEPTANCE')
+
     def setUp(self):
         fixture.AdaptiveFlowTests.setUp(self)
         self.body=lambda:fixture.AdaptiveFlowTests.body(self)

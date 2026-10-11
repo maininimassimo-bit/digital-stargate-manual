@@ -12,6 +12,7 @@ from .openai_planner import object_schema,safe_text
 from .image_previews import provider_image,validate_curve
 from .broker import require,encode,decode
 from .intake import sha
+from .scientific_knowledge import instructions as scientific_instructions
 
 VERSION='DSG_PIAI_CHECKPOINT_PROVIDER_V2'
 
@@ -25,7 +26,8 @@ def schema(binding,next_process):
 
 class CheckpointProvider(AdaptiveProvider):
     def generate_checkpoint(self,reservation,evidence,bindings,assets,*,data_transfer_confirmed=False,
-                            statistics_transfer_confirmed=False,preview_transfer_confirmed=False):
+                            statistics_transfer_confirmed=False,preview_transfer_confirmed=False,
+                            scientific_knowledge_sha256=None):
         require(data_transfer_confirmed is True and statistics_transfer_confirmed is True and
                 preview_transfer_confirmed is True,'ADAPTIVE_PREVIEW_CONSENT_REQUIRED')
         require(isinstance(reservation,dict) and set(reservation)=={'sendAllowed','request','owner'} and
@@ -111,6 +113,7 @@ class CheckpointProvider(AdaptiveProvider):
                 'backgroundValidity':'NOT_ESTABLISHED','scientificAcceptance':'NOT_ESTABLISHED'}}
         require(len(encode(projection))<=32768,'ADAPTIVE_PROVIDER_TEXT_LIMIT')
         content.insert(0,{'type':'input_text','text':encode(projection).decode()})
+        guidance, knowledge_sha = scientific_instructions(scientific_knowledge_sha256) if scientific_knowledge_sha256 else ('', None)
         owner=reservation['owner']
         require(isinstance(owner,str) and re.fullmatch('[a-f0-9]{32}',owner) and owner not in self._sent,
                 'ADAPTIVE_SEND_ALREADY_ATTEMPTED')
@@ -124,7 +127,7 @@ class CheckpointProvider(AdaptiveProvider):
                 'or resolution proof. Domain/ROI differences limit numerical comparisons; do not invent a quality score. '
                 'If evidence is uncertain or tradeoff damages signal/stellar morphology, stop for review. '
                 'After all steps, COMPLETE_FOR_REVIEW only denotes readiness for Owner review, never scientific acceptance. '
-                'Explain decisions, omitted alternatives and limits in Italian.'),
+                'Explain decisions, omitted alternatives and limits in Italian.') + guidance,
             'input':[{'role':'user','content':content}],
             'text':{'format':{'type':'json_schema','name':VERSION,'strict':True,'schema':schema(binding,next_process)}}}
         try:
@@ -146,6 +149,7 @@ class CheckpointProvider(AdaptiveProvider):
             require(isinstance(usage,dict) and all(type(usage.get(k)) is int and 0<=usage[k]<=10**9 for k in keys) and
                     usage['total_tokens']==usage['input_tokens']+usage['output_tokens'],'ADAPTIVE_USAGE')
             return decision,{'responseId':response['id'],'requestedModel':self.model,'model':response['model'],
-                             'usage':{k:usage[k] for k in keys},'method':VERSION}
+                             'usage':{k:usage[k] for k in keys},'method':VERSION,
+                             **({'scientificKnowledgeSha256':knowledge_sha} if knowledge_sha else {})}
         except Exception:
             require(False,'ADAPTIVE_PROVIDER_FAILED_NO_RETRY')

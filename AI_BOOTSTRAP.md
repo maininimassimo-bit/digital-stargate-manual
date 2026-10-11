@@ -1,5 +1,9 @@
 # Digital StarGate AI Bootstrap
 
+## PixInsight — conoscenza scientifica API e sviluppo dal portale
+
+Owner autorizza sviluppo SPCC/confronto autonomo e precisa uso finale dal portale, senza chat. Candidato trasferisce una proiezione portabile della skill `pixinsight-scientific` alle istruzioni API iniziali e ai checkpoint, con SHA256/pacchetto archiviato; job storici conservano metodo precedente. Nuove misure read-only M27 su cinque regioni concluse, originali/copie/History invariati, istanza dedicata chiusa. Nessuna nuova chiamata API o SPCC: guide non abilitano processi mancanti. [Contratto candidato](docs/project/PIAI-SCIENTIFIC-KNOWLEDGE-2026-10-11.md); gate/rilascio/attivazione e nuovo controller SPCC/prove ancora da completare. Le sezioni seguenti conservano lo stato precedente.
+
 ## PixInsight — nuova richiesta di ripartenza fotometrica
 
 Owner chiede nuova elaborazione M27 dai master lineari con misure, SPCC e selezione autonoma di prove tramite API. Camera QHY695A, RGB ZWO e Optolong L-Pro come luminanza confermati 11/10/2026 e registrati nei capitoli10/22. Originali SHA invariati e proprietà astrometriche presenti; validità sulla griglia non ancora verificata. Curve nominali ZWO/Optolong presenti nel database SPCC installato, QE specifica non individuata nel database esaminato. [Verifica preliminare e nuovo perimetro richiesto](docs/project/PIAI-M27-PHOTOMETRIC-RESTART-2026-10-11.md). Non è una nuova misura pixel/SPCC, un avvio nativo o una chiamata API. Il servizio V2 resta attivo e il finale precedente distinto: COLOR empirico, adattamento solo del prossimo passo, non selezione autonoma di rami. Implementazione, astrometria/SPCC M27 e OAT del nuovo ciclo restano necessari; non dichiararli completati dalla registrazione dell'inventario.

@@ -170,11 +170,18 @@ class AdaptiveExecutionMixin:
         state, _ = self.broker._state()
         journal._live(state,job_id)
         consent = self.intake(request_id)['selection']['adaptivePlanning']
+        knowledge_sha = self.adaptive_state(request_id)['plan']['provider'].get('scientificKnowledgeSha256')
+        if knowledge_sha:
+            from .scientific_knowledge import packet
+            knowledge, digest = packet(knowledge_sha)
+            stored = self.store.get('science/scientific-knowledge/' + digest)[0]
+            require(stored is not None and decode(stored) == knowledge, 'SCIENTIFIC_KNOWLEDGE_BINDING')
         try:
             decision, provider = self.adaptive_provider.generate_checkpoint(reservation,evidence,value['bindings'],assets,
                 data_transfer_confirmed=consent['dataTransferConfirmed'],
                 statistics_transfer_confirmed=consent['pixelStatisticsConfirmed'],
-                preview_transfer_confirmed=consent['previewTransferConfirmed'])
+                preview_transfer_confirmed=consent['previewTransferConfirmed'],
+                **({'scientific_knowledge_sha256':knowledge_sha} if knowledge_sha else {}))
         except Exception:
             return self.adaptive_state(request_id)
         validate_next_decision(decision,evidence['bindingSha256'],graph,evidence['mode'],
@@ -211,8 +218,15 @@ class AdaptiveExecutionMixin:
         decision=self.store.get('science/adaptive-checkpoint-decisions/PIAI_'+request_id+'/'+str(ordinal))[0] if ordinal else None
         checkpoints=[decode(self.store.get('science/adaptive-checkpoints/PIAI_'+request_id+'/'+str(n))[0])
                      for n in range(ordinal)]
+        knowledge_sha = state['plan']['provider'].get('scientificKnowledgeSha256') if state['plan'] else None
+        knowledge = None
+        if knowledge_sha:
+            raw = self.store.get('science/scientific-knowledge/' + knowledge_sha)[0]
+            require(raw is not None and sha(decode(raw)) == knowledge_sha, 'SCIENTIFIC_KNOWLEDGE_BINDING')
+            knowledge = decode(raw)
         return {**state,'intake':self.intake(request_id),'analysis':self._adaptive_analysis(request_id),'checkpoints':checkpoints,
-                'checkpoint':decode(checkpoint) if checkpoint else None,'checkpointDecision':decode(decision) if decision else None}
+                'checkpoint':decode(checkpoint) if checkpoint else None,'checkpointDecision':decode(decision) if decision else None,
+                **({'scientificKnowledge':knowledge} if knowledge else {})}
 
     def adaptive_final(self, request_id, value):
         require(self.adaptive_enabled() and isinstance(value,dict) and
