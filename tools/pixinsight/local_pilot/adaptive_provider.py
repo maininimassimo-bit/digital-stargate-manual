@@ -25,7 +25,7 @@ def graph_schema():
     return object_schema({'catalog':{'type':'string','enum':[catalog.VERSION]},
         'catalogSha256':{'type':'string','enum':[catalog.fingerprint()]},
         'branch':{'type':'string','enum':['DIRECT','STARLESS']},
-        'steps':{'type':'array','minItems':1,'maxItems':9,'items':{'anyOf':variants}},
+        'steps':{'type':'array','minItems':1,'maxItems':len(catalog.PROCESS_ORDER),'items':{'anyOf':variants}},
         'rationale':{'type':'string'},'limitations':{'type':'string'}})
 
 def initial_schema():
@@ -124,6 +124,7 @@ class AdaptiveProvider(OpenAIPlanner):
                 'Use numerical measurements for noise/PSF; describe possible visual artifacts cautiously. '
                 'Whole-field variance is not SNR. Gaussian fit summaries are selected-star descriptors, not resolution proof. '
                 'SHO/HOO palette is not broadband photometric calibration. Include only necessary operations and explain omissions. '
+                'COLOR denotes empirical native ColorCalibration, never SPCC or validated photometric flux. '
                 'Stop for review if evidence is insufficient or inconsistent. Explain decisions and limitations in Italian. '
                 'Never claim a best workflow or scientific acceptance without verified intermediate results.'),
             'input':[{'role':'user','content':content}],

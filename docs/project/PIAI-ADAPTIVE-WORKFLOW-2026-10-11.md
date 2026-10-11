@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-049-EXT-PIAI-ADAPTIVE |
-| Versione | 1.5 |
+| Versione | 1.6 |
 | Stato | Owner-authorized / In Progress; statistiche master abilitate sul backend, ciclo adattivo non operativo |
 | Data | 2026-10-11 |
 
@@ -79,7 +79,23 @@ Le misure native vengono validate contro binding locali indipendenti e proiettat
 
 La prenotazione durevole deve precedere la richiesta e legare l'evidence esatta; un secondo invio nello stesso processo è bloccato anche dopo timeout. Questa protezione in memoria integra la ledger, senza sostituirla. Risposte incomplete, rifiuti, codice/processi esterni al catalogo e usage incoerente sono rifiutati senza retry. L'adapter restituisce una proposta, non una ricevuta nativa o accettazione. Collegamento a policy, portale, ledger, checkpoint e dispatch rimane da completare.
 
-Undici test sintetici PASS sulle anteprime e sul provider simulato, incluse conservazione dei campioni, confronto con curva condivisa, consenso/binding e risposta persa. Renderer locale usa NumPy; decodifica provider richiede soltanto Pillow. Prova privata sul master L M27: campo e crop centrali ottenuti dai pixel veri, originale SHA256 invariato, mediana del genitore 0,00782873854, target display 0,2. Nessun trasferimento al provider, processo nativo o accettazione scientifica. La ricostruzione dei 328 input WBPP prosegue separatamente e non è ancora una nuova attestazione.
+Undici test sintetici PASS sulle anteprime e sul provider simulato, incluse conservazione dei campioni, confronto con curva condivisa, consenso/binding e risposta persa. Renderer locale usa NumPy; decodifica provider richiede soltanto Pillow. Prova privata sul master L M27: campo e crop centrali ottenuti dai pixel veri, originale SHA256 invariato, mediana del genitore 0,00782873854, target display 0,2. Nessun trasferimento al provider, processo nativo o accettazione scientifica.
+
+### Provenienza M27 completata: record upstream e conferma Owner
+
+La verifica privata dei record ha coperto tutti i 328 input selezionati di DrizzleIntegration: 14 B, 27 G, 263 L e 24 R. I 1.313 file esplicitamente riferiti sono stati controllati con hash completo prima e dopo. History degli input calibrati e registrati, riferimento comune di StarAlignment, geometrie e matrici finite sono coerenti; le quattro relazioni di autocrop sono già verificate su tutti i byte dei pixel. I file di normalizzazione locale sono identificati e verificati per hash, senza interpretarne il contenuto. Questo riscontro prova la corrispondenza dei record conservati; non sostituisce una ricevuta di esecuzione né misura l'accuratezza della registrazione.
+
+Owner conferma: «Sì, sono master WBPP ancora da elaborare». L'attestazione privata lega i quattro master esatti, indice 0 e impronte nuovamente verificate, ai rapporti di provenienza. `LINEAR_ATTESTED` indica qui lo stato computazionale prima dello stretch, senza deconvoluzione o denoise dopo l'integrazione; non certifica la linearità fisica del rivelatore. L'attestazione non si estende ad altri dataset e non autorizza da sola esecuzione nativa o trasferimento di anteprime. Fondo, adeguatezza delle stelle PSF, accuratezza astrometrica e accettazione scientifica richiedono evidenza distinta.
+
+### Decisioni checkpoint candidate: adattamento del prossimo passaggio
+
+Il catalogo candidato comprende `OPTICAL_CORRECT` da lineare e `MASK_BUILD` dopo lo stretch. La presenza della costruzione di maschera nel piano consente di descrivere una dipendenza futura, ma non promuove il fatto `mask=VERIFIED`: prima del dispatch di un processo mascherato serve una verifica fisica distinta. `COLOR` identifica ColorCalibration empirica, senza attribuire SPCC o calibrazione di flusso. I limiti dei parametri sono vincoli del catalogo, non ottimi scientifici dimostrati.
+
+`checkpoint_provider.py` confronta le tracce RGB e L del genitore e del checkpoint corrente. Ogni coppia visiva conserva ruolo, regione, geometria e la stessa curva di display ricavata dal genitore. Autostretch indipendenti, coppie incomplete, crop incoerenti e binding cambiati impediscono l'invio. Il payload espone separatamente uguaglianza del dominio registrato, regioni MRS e runtime di misura. Fit stellari rilevati nuovamente a ogni checkpoint non costituiscono stelle appaiate: differenze nelle mediane non dimostrano un miglioramento di risoluzione.
+
+La risposta può modificare soltanto i parametri del prossimo processo del grafo già approvato, entro i suoi limiti. Non può cambiare ordine, ramo o prefisso eseguito. `STOP_FOR_REVIEW` conserva l'incertezza; `COMPLETE_FOR_REVIEW` è ammesso soltanto dopo tutto il prefisso e indica revisione Owner, senza accettazione scientifica. Il chiamante deve verificare fisicamente il prefisso e i checkpoint: il contatore nel JSON non si autentica da solo.
+
+Questi contratti sono ancora candidati offline: il journal attuale non ammette la nuova azione finale, gli endpoint e il portale non li invocano, e il dispatch nativo segmentato resta da integrare. Nessuna nuova chiamata reale o elaborazione dei master è stata eseguita. Il collaudo operativo richiede consensi registrati, approvazione del grafo e policy di adattamento, ricevute native e verifica finale distinta.
 
 ### Modelli e input visivi: capacità documentate, attivazione separata
 

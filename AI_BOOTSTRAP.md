@@ -1,5 +1,9 @@
 # Digital StarGate AI Bootstrap
 
+## PixInsight — confronto dei checkpoint e provenienza M27
+
+La verifica privata dei 328 input WBPP e delle quattro relazioni di autocrop è completa. Owner conferma che i quattro master esatti sono WBPP prima dell'elaborazione: attestazione dello stato pre-stretch, distinta da linearità fisica e accuratezza astrometrica. Contratti candidati per confronto RGB/L con curva condivisa e modifiche ai soli parametri del prossimo processo; maschera pianificata distinta da maschera verificata. Provider e controlli offline non attivano endpoint o esecuzione V2; journal finale, portale, dispatch segmentato e OAT restano aperti. Quota0 e gpt-6-luna attivi invariati. [Metodo e stato corrente](docs/project/PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md).
+
 ## PixInsight — integrazione statistica candidata
 
 Incremento autorizzato del ciclo adattivo: consenso separato per statistiche dei pixel, analisi locale dei master selezionati, evidence validata/binding immutabile e payload OpenAI senza hash o percorsi. PR #560 integrata, 14 workflow post-merge PASS, backend/worker aggiornati e flag abilitato; quota0 e gpt-6-luna conservati. Accesso browser non completato: nuova opzione autenticata e richiesta statistica reale non collaudate; nessuna chiamata API aggiuntiva o avvio nativo nel rilascio. Il planner conserva la ricetta V1: catalogo, analisi PSF/background, segmentazione e decisioni checkpoint multiple restano aperti. Quota0 attiva e P6/BKL-051 invariati. [Contratto e rollback](docs/project/PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md#collegamento-delle-misure-al-pianificatore).
