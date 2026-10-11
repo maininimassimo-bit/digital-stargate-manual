@@ -26,6 +26,39 @@ def png(channels=1):
 
 
 class ResearchTests(unittest.TestCase):
+    def test_invalid_known_response_preserves_safe_usage_without_retry(self):
+        self.approve()
+        original=self.send
+        def invalid(payload):
+            response=original(payload)
+            response['output'][0]['arguments']='{}'
+            return response
+        self.portal.adaptive_provider._send=invalid
+        with self.assertRaises(ProtocolError):self.post('decision',comparison=self.comparison())
+        state=self.portal.research_state(self.request_id)
+        self.assertEqual(state['status'],'API_INDETERMINATE_NO_RETRY')
+        self.assertEqual(state['providerFailure']['reason'],'RESEARCH_DECISION_FIELDS')
+        self.assertEqual(state['providerFailure']['usage']['total_tokens'],120)
+        self.assertEqual(state['providerFailure']['responseId'],'resp_mock')
+        self.assertEqual(state['providerFailureSha256'],sha(state['providerFailure']))
+        raw,_=self.store.get('science/research-failures/'+self.request_id+'/1')
+        self.assertEqual(decode(raw),state['providerFailure'])
+        with self.assertRaises(ProtocolError):self.post('decision',comparison=self.comparison())
+        self.assertEqual(len(self.calls),1)
+
+    def test_failure_diagnostics_never_retain_private_exception_text(self):
+        from .research_provider import failure_evidence
+        from urllib.error import HTTPError
+        private='sk-private https://private.invalid C:/private/file prompt-private'
+        row=failure_evidence(HTTPError(private,400,private,{},None),None)
+        self.assertEqual(row,{'reason':'PROVIDER_HTTP_ERROR','responseReceived':False,'httpStatus':400})
+        self.assertNotIn('private',encode(row).decode())
+        row=failure_evidence(ValueError(private),{'status':'incomplete',
+            'id':private,'usage':{'input_tokens':1,'output_tokens':2,'total_tokens':99},
+            'incomplete_details':{'reason':'max_output_tokens'},'output':private})
+        self.assertEqual(row,{'reason':'OTHER','responseReceived':True,
+            'responseStatus':'incomplete','incompleteReason':'max_output_tokens'})
+
     def setUp(self):
         intake_fixture.IntakeTests.setUp(self)
         self.activation=patch.dict('os.environ',{'DSG_PIAI_ADAPTIVE':'LOCAL_WORKER_VERIFIED','DSG_PIAI_RESEARCH':'LOCAL_WORKER_VERIFIED'})

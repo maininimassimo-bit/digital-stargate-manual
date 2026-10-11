@@ -1,5 +1,6 @@
 """One reserved Responses function call; no provider/native retries."""
 import re
+from urllib.error import HTTPError
 from .broker import require, encode, decode
 from .intake import sha
 from .openai_planner import safe_text
@@ -8,7 +9,40 @@ from .research_knowledge import instructions
 from . import research_contract as contract
 
 
-def generate(provider, state, projection, assets, *, owner, knowledge_sha256):
+def failure_evidence(error, response):
+    """Bounded diagnostics: never retain exception text, body, prompt or key."""
+    reasons = {'RESEARCH_PROVIDER_RESPONSE', 'RESEARCH_PROVIDER_TOOL_REQUIRED',
+        'RESEARCH_PROVIDER_TOOL', 'RESEARCH_PROVIDER_SINGLE_TOOL', 'RESEARCH_USAGE',
+        'RESEARCH_PROVIDER_MODEL', 'RESEARCH_DECISION_FIELDS', 'RESEARCH_DECISION_CHANGED',
+        'RESEARCH_DECISION_TEXT_LIMIT', 'RESEARCH_ACTION', 'RESEARCH_STATE',
+        'RESEARCH_EXACT_PARENT_REQUIRED', 'RESEARCH_STAGE_PROCESS', 'RESEARCH_TRIAL_LIMIT',
+        'RESEARCH_STAGE_TRIAL_LIMIT', 'RESEARCH_FIXED_STAGE_ALREADY_TESTED',
+        'RESEARCH_IDENTICAL_TRIAL_REPLAY', 'RESEARCH_SELECTION_FIELDS',
+        'RESEARCH_VERIFIED_SELECTION', 'RESEARCH_REQUIRED_STAGE', 'RESEARCH_SIBLING_REQUIRED',
+        'RESEARCH_NATIVE_SPCC_RECEIPT_REQUIRED', 'RESEARCH_TERMINAL_FIELDS',
+        'RESEARCH_FINAL_PREFIX_REQUIRED', 'RESEARCH_STEP_FIELDS', 'RESEARCH_SPCC_PINNED_PROFILE',
+        'RESEARCH_VIVIDNESS_BOUND', 'AI_TEXT_PRIVATE_OR_INVALID', 'JSON_INVALID'}
+    result = {'reason': str(error) if str(error) in reasons else 'OTHER',
+              'responseReceived': isinstance(response, dict)}
+    if isinstance(error, HTTPError):
+        result['reason'] = 'PROVIDER_HTTP_ERROR'
+        result['httpStatus'] = error.code if type(error.code) is int and 100 <= error.code <= 599 else None
+    if isinstance(response, dict):
+        result['responseStatus'] = response.get('status') if response.get('status') in ('completed','incomplete','failed') else 'UNKNOWN'
+        identifier = response.get('id')
+        if isinstance(identifier,str) and re.fullmatch('resp_[A-Za-z0-9_-]{1,160}',identifier):
+            result['responseId'] = identifier
+        usage = response.get('usage')
+        if isinstance(usage,dict) and all(type(usage.get(k)) is int and usage[k] >= 0 for k in
+                ('input_tokens','output_tokens','total_tokens')) and usage['input_tokens']+usage['output_tokens'] == usage['total_tokens']:
+            result['usage'] = {k:usage[k] for k in ('input_tokens','output_tokens','total_tokens')}
+        incomplete = response.get('incomplete_details')
+        if isinstance(incomplete,dict) and incomplete.get('reason') in ('max_output_tokens','content_filter'):
+            result['incompleteReason'] = incomplete['reason']
+    return result
+
+
+def generate(provider, state, projection, assets, *, owner, knowledge_sha256, record_failure=None):
     require(isinstance(owner, str) and contract.digest(owner) and owner not in provider._sent,
             'RESEARCH_SINGLE_RESERVED_SEND')
     require(state['apiCalls'] <= contract.MAX_CALLS and state['status'] == 'API_RESERVED',
@@ -44,6 +78,7 @@ def generate(provider, state, projection, assets, *, owner, knowledge_sha256):
                           'strict': True, 'parameters': contract.schema(sha(state), state['stage'])}],
                'tool_choice': {'type': 'function', 'name': 'choose_pixinsight_action'}}
     provider._sent.add(owner)
+    response = None
     try:
         response = provider._send(payload)
         require(isinstance(response, dict) and response.get('status') == 'completed' and
@@ -70,5 +105,7 @@ def generate(provider, state, projection, assets, *, owner, knowledge_sha256):
         return {'decision': decision, 'provider': {'responseId': response['id'], 'model': actual_model,
                 'requestedModel': provider.model, 'knowledgeSha256': digest,
                 'usage': {k: usage[k] for k in ('input_tokens', 'output_tokens', 'total_tokens')}}}
-    except Exception:
+    except Exception as error:
+        if record_failure is not None:
+            record_failure(failure_evidence(error,response))
         require(False, 'RESEARCH_PROVIDER_FAILED_NO_RETRY')

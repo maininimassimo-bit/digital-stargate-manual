@@ -224,11 +224,18 @@ class ResearchFlowMixin:
                     current['status'] == 'API_RESERVED' and current['pending'] == reserved['pending'] and
                     current['policySha256'] == reserved['policySha256'], 'RESEARCH_CANCELLED_OR_CHANGED_BEFORE_SEND')
             result = generate(self.adaptive_provider,reserved,projection,assets,owner=owner,
-                              knowledge_sha256=reserved['policy']['knowledgeSha256'])
+                              knowledge_sha256=reserved['policy']['knowledgeSha256'],
+                              record_failure=lambda evidence: immutable(self.store,
+                                  'science/research-failures/'+request_id+'/'+str(reserved['apiCalls']),
+                                  encode(evidence)))
         except Exception:
+            failure_raw,_=self.store.get('science/research-failures/'+request_id+'/'+str(reserved['apiCalls']))
             def fail(current,_now):
                 if current['pending'] and current['pending'].get('owner') == owner:
                     current['status'] = 'API_INDETERMINATE_NO_RETRY' if owner in self.adaptive_provider._sent else 'VALIDATION_STOPPED_NO_SEND'
+                    if failure_raw is not None:
+                        current['providerFailure'] = decode(failure_raw)
+                        current['providerFailureSha256'] = sha(current['providerFailure'])
                 return current
             self._research_mutate(request_id,fail)
             raise

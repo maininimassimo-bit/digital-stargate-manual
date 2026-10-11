@@ -5,11 +5,11 @@
 | Identificativo | DSG-PIAI-SCIENTIFIC-KNOWLEDGE-001 |
 | Versione | 1.3 — coordinatore rilasciato tecnicamente |
 | Data | 11/10/2026 |
-| Stato | Conoscenza e coordinatore rilasciati nel portale; primo OAT API/nativo pendente |
+| Stato | Conoscenza e coordinatore rilasciati; primo OAT arrestato dopo la prima API, nessuna prova nativa |
 
 ## Obiettivo e confini
 
-Il nuovo [coordinatore di prove](PIAI-RESEARCH-COORDINATOR-2026-10-11.md) aggiunge il protocollo versionato per decidere i rami al pacchetto scientifico storico, senza alterare i job V2. Integrato con PR579 e disponibile nel portale, comprende adapter SPCC e correzione ottica provati su copie M27. Review e distribuzione completate; prima analisi dal portale pronta alla conferma del perimetro. L'OAT delle decisioni API e delle prove autonome resta pendente.
+Il nuovo [coordinatore di prove](PIAI-RESEARCH-COORDINATOR-2026-10-11.md) aggiunge il protocollo versionato per decidere i rami al pacchetto scientifico storico, senza alterare i job V2. Integrato con PR579 e disponibile nel portale, comprende adapter SPCC e correzione ottica provati su copie M27. Review e distribuzione completate; perimetro M27 confermato nel portale. La prima richiesta API non ha prodotto una decisione validata e resta `API_INDETERMINATE_NO_RETRY`; nessuna prova nativa è partita. L’OAT completo resta pendente.
 
 Owner richiede che il modulo funzioni dal portale web, senza dipendere da una chat, e che le API ricevano la conoscenza della skill `pixinsight-scientific`. La conoscenza è ora una risorsa del servizio, distinta dalle misure native e dalle capacità effettivamente implementate. Il modello rimane `gpt-6-luna`; chiave sul backend, master sul PC e ricevute immutabili conservati.
 
