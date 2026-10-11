@@ -4,6 +4,7 @@ import copy
 import hashlib
 import io
 import json
+import tempfile
 from pathlib import Path
 import unittest
 from unittest.mock import patch
@@ -150,6 +151,61 @@ class ResearchTests(unittest.TestCase):
         state=self.post('decision',comparison={'previews':[],'assetsBase64':[]})
         self.assertEqual(state['status'],'STOPPED_FOR_REVIEW');self.assertEqual(len(state['decisions']),1)
         self.assertEqual(state['decisions'][0]['provider']['usage']['total_tokens'],120)
+
+    def test_cancel_after_reservation_prevents_paid_send(self):
+        from . import research_flow
+        self.approve();original=research_flow.immutable
+        def cancelling(store,key,value):
+            result=original(store,key,value)
+            if key.startswith('science/research-reservations/'):
+                self.portal.research_cancel(self.request_id,{})
+            return result
+        with patch.object(research_flow,'immutable',side_effect=cancelling):
+            with self.assertRaisesRegex(ProtocolError,'BEFORE_SEND'):
+                self.post('decision',comparison={'previews':[],'assetsBase64':[]})
+        self.assertEqual(self.calls,[])
+        self.assertEqual(self.portal.research_state(self.request_id)['status'],'VALIDATION_STOPPED_NO_SEND')
+
+    def test_factory_must_match_approved_bytes_including_snapshot(self):
+        from .research_native import validate_factory
+        library=Path(__file__).parent
+        runtime={'executorSha256':sha({'controller':hashlib.sha256((library/'adaptive_executor.jsh').read_bytes()).hexdigest(),
+            'factory':hashlib.sha256((library/'adaptive_native.jsh').read_bytes()).hexdigest()})}
+        validate_factory(runtime)
+        with tempfile.TemporaryDirectory() as temp:
+            factory=Path(temp)/'adaptive_native.jsh'
+            factory.write_bytes((library/'adaptive_native.jsh').read_bytes()+b'\n// altered\n')
+            with self.assertRaisesRegex(ProtocolError,'APPROVED_FACTORY_CHANGED'):
+                validate_factory(runtime,factory)
+
+    def test_delivery_replay_rechecks_native_files_and_archive(self):
+        from . import research_worker
+        coordinator=object.__new__(research_worker.ResearchWorker)
+        coordinator.post=__import__('unittest.mock',fromlist=['Mock']).Mock(return_value={'status':'READY_FOR_OWNER_REVIEW'})
+        with tempfile.TemporaryDirectory() as temp:
+            session=Path(temp);attempt=session/'CP001';attempt.mkdir()
+            (attempt/'result.json').write_text('{}',encoding='utf-8')
+            (attempt/'binding.json').write_text('{}',encoding='utf-8')
+            image=session/'RGB.xisf';image.write_bytes(b'original pixels')
+            archive=session/'evidence.zip';archive.write_bytes(b'original archive')
+            rows=[{'role':'RGB','path':str(image),'sha256':research_worker.fingerprint(image)}]
+            coordinator.artifacts=lambda *_:rows
+            context={'state':{'requestId':self.request_id,'selectedId':'CP001'}}
+            body={'checkpointId':'CP001','artifacts':[{'role':'RGB','localPath':str(image),'sha256':rows[0]['sha256']}],
+                'archive':{'localPath':str(archive),'sha256':research_worker.fingerprint(archive)}}
+            (session/'delivery.json').write_text(json.dumps(body),encoding='utf-8')
+            with patch.object(research_worker.native,'verify') as verify:
+                self.assertEqual(coordinator.deliver(context,session),'READY_FOR_OWNER_REVIEW')
+                verify.assert_called_once();coordinator.post.reset_mock()
+                archive.write_bytes(b'changed archive')
+                with self.assertRaisesRegex(ProtocolError,'ARCHIVE_CHANGED'):coordinator.deliver(context,session)
+                coordinator.post.assert_not_called()
+                image.write_bytes(b'changed pixels')
+                with self.assertRaisesRegex(ProtocolError,'FILE_CHANGED'):coordinator.deliver(context,session)
+                coordinator.post.assert_not_called()
+            with patch.object(research_worker.native,'verify',side_effect=ProtocolError('NATIVE_CHANGED')):
+                with self.assertRaisesRegex(ProtocolError,'NATIVE_CHANGED'):coordinator.deliver(context,session)
+                coordinator.post.assert_not_called()
 
     def test_native_start_has_no_replay_and_requires_exact_permit(self):
         self.approve();self.post('decision',comparison={'previews':[],'assetsBase64':[]})

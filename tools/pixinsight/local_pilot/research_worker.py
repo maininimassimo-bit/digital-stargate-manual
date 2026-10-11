@@ -200,11 +200,19 @@ class ResearchWorker:
 
     def deliver(self,context,session):
         request=context['state']['requestId'];path=session/'delivery.json'
-        if path.exists():return self.post(request,'final',read(path))['status']
         rows=self.artifacts(session,context['state']['selectedId'])
         for attempt in sorted(session.glob('CP*')):
             if (attempt/'result.json').exists():native.verify(attempt,read(attempt/'binding.json'))
         for row in rows:require(fingerprint(Path(row['path'])) == row['sha256'],'RESEARCH_FINAL_FILE_CHANGED')
+        if path.exists():
+            body=read(safe_path(path,session))
+            require(body['checkpointId'] == context['state']['selectedId'] and
+                    body['artifacts'] == [{'role':r['role'],'sha256':r['sha256'],
+                        'localPath':str(Path(r['path']))} for r in rows], 'RESEARCH_FINAL_REPLAY_BINDING')
+            archive=safe_path(body['archive']['localPath'],session)
+            require(archive == (session/'evidence.zip').resolve() and
+                    fingerprint(archive) == body['archive']['sha256'], 'RESEARCH_FINAL_ARCHIVE_CHANGED')
+            return self.post(request,'final',body)['status']
         worker.write_new(session/'context-final.json',context)
         archive=session/'evidence.zip'
         require(not archive.exists(),'RESEARCH_ARCHIVE_INTERRUPTED_REQUIRES_LOCAL_REVIEW')

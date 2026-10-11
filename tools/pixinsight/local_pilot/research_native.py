@@ -16,6 +16,14 @@ from .research_contract import step, digest
 VERSION='DSG_PIAI_RESEARCH_NATIVE_V1'
 
 
+def validate_factory(runtime, factory=None):
+    library=Path(__file__).parent
+    require(runtime['executorSha256'] == sha({
+        'controller':fingerprint(library/'adaptive_executor.jsh'),
+        'factory':fingerprint(factory or library/'adaptive_native.jsh')}),
+        'RESEARCH_APPROVED_FACTORY_CHANGED')
+
+
 def prepare(directory, *, context, permit, sources, runtime_files, pixinsight_root,
             allowed_roots, background_roi, profile, native_lease, parent=None):
     state=context['state']; analysis=context['analysis']['analysis']
@@ -26,6 +34,7 @@ def prepare(directory, *, context, permit, sources, runtime_files, pixinsight_ro
     require(sha(profile) == context['analysis']['instrument']['profileSha256'], 'RESEARCH_NATIVE_PROFILE_CHANGED')
     validate_runtime_files(analysis['runtime'],runtime_files)
     require_installed_dependencies(runtime_files,pixinsight_root)
+    validate_factory(analysis['runtime'])
     directory=Path(directory);require(not directory.exists(), 'RESEARCH_ATTEMPT_ALREADY_EXISTS')
     safe_path(directory.parent,directory.parent.parent)
     directory.mkdir();(directory/'outputs').mkdir()
@@ -53,6 +62,7 @@ def prepare(directory, *, context, permit, sources, runtime_files, pixinsight_ro
     for name in ('research_executor.jsh','adaptive_native.jsh','measurements.jsh'):
         shutil.copyfile(library/name,directory/name)
         runtime.append({'path':(directory/name).as_posix(),'sha256':fingerprint(directory/name)})
+    validate_factory(analysis['runtime'],directory/'adaptive_native.jsh')
     require(fingerprint(directory/'research_executor.jsh') == context['analysis']['executorSha256'] and
             fingerprint(directory/'measurements.jsh') == analysis['runtime']['measurementSha256'],
             'RESEARCH_EXECUTOR_SNAPSHOT_CHANGED')

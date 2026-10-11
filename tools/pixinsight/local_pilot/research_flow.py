@@ -200,6 +200,10 @@ class ResearchFlowMixin:
                 'cropCoverage':'ONE_CENTRAL_256_PIXEL_CROP_PER_TRACK_NOT_FULL_FIELD_ARTIFACT_SURVEY',
                 'interpretation':'Use observed native measures and common-display images; do not infer photon SNR or new resolution.'}}
         try:
+            current = self._research(request_id)
+            require(current and current['approved'] and not current['cancelRequested'] and
+                    current['status'] == 'API_RESERVED' and current['pending'] == reserved['pending'] and
+                    current['policySha256'] == reserved['policySha256'], 'RESEARCH_CANCELLED_OR_CHANGED_BEFORE_SEND')
             result = generate(self.adaptive_provider,reserved,projection,assets,owner=owner,
                               knowledge_sha256=reserved['policy']['knowledgeSha256'])
         except Exception:
