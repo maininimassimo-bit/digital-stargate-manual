@@ -151,6 +151,16 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
             worker = path.startswith("/v1/worker/")
             self.authenticate(worker)
             if scientific:
+                adaptive_match = re.fullmatch(r'/v1/(worker/)?science/intakes/([a-f0-9]{32})/adaptive-(analysis|approve|state)', path)
+                if adaptive_match:
+                    worker_adaptive, request_id, action = adaptive_match.groups()
+                    if worker_adaptive and action == 'analysis' and self.command == 'POST':
+                        return self.send(200, scientific.generate_adaptive(request_id, self.body(6291456)))
+                    if not worker_adaptive and action == 'approve' and self.command == 'POST':
+                        return self.send(200, scientific.approve_adaptive(request_id, self.body()))
+                    if action == 'state' and self.command == 'GET':
+                        return self.send(200, scientific.adaptive_state(request_id))
+                    return self.send(404, {'error':'NOT_FOUND'})
                 ai_match = re.fullmatch(r'/v1/worker/science/intakes/([a-f0-9]{32})/openai-plan', path)
                 if ai_match and self.command == 'POST':
                     return self.send(200, scientific.generate_openai(ai_match[1], self.body(16384)))

@@ -4,6 +4,13 @@
   const ORIGIN = 'https://dsg-pixinsight-pilot-183451329061.europe-west1.run.app';
   const CLIENT = '183451329061-8iedbjrn60u6iau42u1tlsonn6bi6hjd.apps.googleusercontent.com';
   const KEY = 'dsg-piai-scientific-request-v1';
+  const workflowLabels={BACKGROUND:'Correzione del fondo',OPTICAL_CORRECT:'Correzione ottica',COLOR:'Calibrazione cromatica empirica',
+    DECONVOLVE:'Deconvoluzione',DENOISE:'Riduzione del rumore',SEPARATE:'Separazione delle stelle',STRETCH:'Stretch',
+    MASK_BUILD:'Costruzione della maschera',LOCAL_CONTRAST:'Contrasto locale',COMBINE:'Composizione con la luminanza',RECOMBINE:'Ricombinazione delle stelle'};
+  const parameterLabels={polyDegree:'grado',boxSize:'dimensione campione',boxSeparation:'separazione campioni',
+    sharpenL:'dettaglio L',sharpenRGB:'dettaglio RGB',denoiseL:'rumore L',denoiseRGB:'rumore RGB',
+    targetBackground:'fondo dopo stretch',maskLow:'limite inferiore',maskHigh:'limite superiore',
+    contrastLarge:'contrasto ampio',contrastSmall:'contrasto fine'};
   const labels = {QUEUED:'In coda',RESERVED:'Preso in carico dal PC',PREPARING:'Preparazione delle copie',
     PREPARED:'Copie pronte',AWAITING_NATIVE:'Avvia lo script preparato in PixInsight con l’assistente',
     RUNNING:'Elaborazione in corso',COMPLETED:'Elaborazione tecnica completata',FAILED:'Elaborazione non riuscita',
@@ -85,6 +92,48 @@
         if(selection.historicalSource)el('p',`Origine storica dichiarata: ${selection.historicalSource.provenance}. Sessioni non importate; nessuna associazione al catalogo.`,card);
         if(intake.state==='WITHDRAWN'){el('p','Richiesta ritirata. Piano ed evidenze conservati; nessuna elaborazione autorizzata da questa richiesta.',card);continue;}
         if(selection.sourceProfile)el('p',`Master: ${selection.sourceProfile.mode} · ${selection.sourceProfile.layout==='PANELS'?'pannelli da unire':'campo singolo'} · oggetto ${intake.target || ''}.`,card);
+        if(selection.adaptivePlanning){
+          const adaptive=intake.adaptive || {}, proposal=adaptive.plan, cursor=adaptive.cursor;
+          const stateLabels={RESERVED:'Analisi prenotata: la richiesta non viene ripetuta automaticamente.',
+            AWAITING_EXECUTION:'Piano pronto per la tua conferma.',STOP_FOR_REVIEW:'Analisi da rivedere prima di proseguire.',
+            AWAITING_FINAL_VERIFICATION:'Verifica finale del PC in attesa.',READY_FOR_OWNER_REVIEW:'Risultato pronto per la tua valutazione.'};
+          el('p',stateLabels[cursor?.state] || 'Il PC deve verificare i master e preparare l’analisi delle immagini.',card);
+          if(cursor?.usage)el('p',`Consumo API registrato: ${cursor.usage.input_tokens} token in ingresso, ${cursor.usage.output_tokens} in uscita.${cursor.usageComplete?'':' Consumo dell’ultima richiesta ancora non determinato.'}`,card);
+          if(proposal){
+            el('p',proposal.decision.rationale,card);el('p',`Limiti: ${proposal.decision.limitations}`,card);
+            if(proposal.decision.graph){
+              const steps=el('ol','',card);
+              proposal.decision.graph.steps.forEach(step=>{
+                const parameters=Object.entries(step.parameters).map(([key,value])=>`${parameterLabels[key] || key} ${value}`).join('; ');
+                el('li',`${workflowLabels[step.process] || step.process}${parameters?': '+parameters:''}`,steps);
+              });
+              el('p','Durante i controlli intermedi, l’IA potrà modificare soltanto i parametri del prossimo passaggio entro i limiti previsti. Ordine e passaggi già eseguiti restano legati a questo piano.',card);
+              if(!adaptive.executionPolicy && !adaptive.job?.cancelRequested && cursor?.state==='AWAITING_EXECUTION'){
+                const approve=el('button','Conferma workflow e controlli intermedi',card);approve.type='button';
+                approve.addEventListener('click',()=>run(async()=>{
+                  await call(`/v1/science/intakes/${selection.requestId}/adaptive-approve`,{
+                    proposalSha256:adaptive.proposalSha256,adaptationScope:'NEXT_STEP_PARAMETERS_ONLY',nativeExecutionConfirmed:true});
+                  await refresh();message('Workflow confermato. L’avvio in PixInsight resta supervisionato sul PC.');
+                }));
+              }
+              if(adaptive.executionPolicy)el('p','Workflow e adattamento dei parametri confermati. La valutazione scientifica del risultato rimane separata.',card);
+            }
+          }
+          if(adaptive.job && !['CANCELLED','FAILED','COMPLETED','RECOVERY_REQUIRED'].includes(adaptive.job.state)){
+            const cancel=el('button','Annulla elaborazione',card);cancel.type='button';
+            cancel.addEventListener('click',()=>run(async()=>{
+              await call(`/v1/jobs/${adaptive.job.jobId}/cancel`,{});await refresh();message('Annullamento richiesto. I controlli e le ricevute restano conservati.');
+            }));
+          }
+          if(!adaptive.job){
+            const withdraw=el('button','Ritira richiesta',card);withdraw.type='button';
+            withdraw.addEventListener('click',()=>run(async()=>{
+              await call(`/v1/science/intakes/${selection.requestId}/withdraw`,{});await refresh();
+              message('Richiesta ritirata. Analisi e dati già conservati rimangono disponibili, senza elaborazione autorizzata.');
+            }));
+          }
+          continue;
+        }
         if(intake.state==='JOB_CREATED'){el('p','Piano confermato: elaborazione presente nello stato qui sotto.',card);continue;}
         if(intake.selection.openaiPlanning){
           const aiState=intake.openai?.state || 'AWAITING_LOCAL_EVIDENCE';
@@ -200,6 +249,10 @@
         q('openai-option').textContent=options.openaiPlanningEnabled===true?'OpenAI dalla pagina':'OpenAI dalla pagina · servizio non attivo';
         if(q('pixel-consent'))q('pixel-consent').disabled=options.pixelStatisticsEnabled!==true;
       }
+      if(q('adaptive-option')){
+        q('adaptive-option').disabled=options.adaptivePlanningEnabled!==true;
+        q('adaptive-option').textContent=options.adaptivePlanningEnabled===true?'OpenAI con analisi delle immagini':'OpenAI con analisi delle immagini · servizio non attivo';
+      }
       const targets=[...new Set(options.sessions.map(s=>targetKey(s.target)))];
       targets.forEach(target=>{el('option',target,q('target')).value=target;});q('target').value=targets[0] || '';
       renderSources();
@@ -224,7 +277,7 @@
         throw error;
       }
       if(isIntake?job.requestId!==frozen.requestId:job.jobId!==`PIAI_${frozen.requestId}`)throw new Error('Identità della risposta non valida. Conserva la richiesta.');
-      const openai=Boolean(frozen.openaiPlanning);
+      const openai=Boolean(frozen.openaiPlanning || frozen.adaptivePlanning);
       sessionStorage.removeItem(KEY);frozen=null;await refresh();message(openai?'Richiesta OpenAI conservata. Il collegamento attivo sul PC verificherà i master e preparerà il piano; nessun job PixInsight avviato.':isIntake?'Cartella e prompt conservati. L’assistente deve verificare i master e proporre il piano; nessun job PixInsight avviato.':'Richiesta scientifica conservata.');
     }
     q('form').addEventListener('submit',event=>{event.preventDefault();run(async()=>{
@@ -235,10 +288,14 @@
         if(historical ? !q('historical-target').value.trim() || !q('provenance').value.trim() || !q('historical-attest').checked : !sessionIds.length || !q('attest').checked)throw new Error(historical?'Indica oggetto e provenienza e conferma la dichiarazione storica.':'Seleziona le sessioni e conferma l’associazione ai master.');
         if(!q('directory').value.trim() || !q('prompt').value.trim())throw new Error('Indica la cartella completa e il risultato desiderato.');
         const openai=q('planning-mode')?.value==='OPENAI_API';
+        const adaptive=q('planning-mode')?.value==='OPENAI_ADAPTIVE';
+        if(adaptive && (options.adaptivePlanningEnabled!==true || !q('openai-consent')?.checked ||
+           !q('pixel-consent')?.checked || !q('preview-consent')?.checked))throw new Error('Verifica la disponibilità dell’analisi e conferma l’invio di dati, statistiche e anteprime.');
         if(openai && (options.openaiPlanningEnabled!==true || !q('openai-consent')?.checked))throw new Error('Verifica la disponibilità del servizio e conferma l’invio dei dati a OpenAI.');
         if(openai && q('pixel-consent')?.checked && options.pixelStatisticsEnabled!==true)throw new Error('Analisi dei pixel non ancora disponibile. Aggiorna la pagina.');
         const image=q('parent').value===''?null:options.images[Number(q('parent').value)];
         const mode=q('mode').value,layout=q('layout').value;
+        if(adaptive && (mode==='OSC_CFA' || layout==='PANELS'))throw new Error('Per l’analisi adattiva servono master già preparati su campo singolo. La preparazione CFA e mosaici resta nel percorso assistito.');
         const additionalDirectories=layout==='PANELS'?q('additional').value.split(/\r?\n/).map(v=>v.trim()).filter(Boolean):[];
         const bayerPattern=mode==='OSC_CFA'?q('bayer').value:null;
         if(mode==='OSC_CFA' && !bayerPattern)throw new Error('Indica lo schema Bayer verificato; non viene dedotto dal nome del file.');
@@ -250,6 +307,7 @@
         if(historical)frozen.historicalSource={target:q('historical-target').value.trim(),provenance:q('provenance').value.trim(),attested:true};
         if(openai)frozen.openaiPlanning={dataTransferConfirmed:true};
         if(openai && q('pixel-consent')?.checked)frozen.openaiPlanning.pixelStatisticsConfirmed=true;
+        if(adaptive)frozen.adaptivePlanning={dataTransferConfirmed:true,pixelStatisticsConfirmed:true,previewTransferConfirmed:true};
         sessionStorage.setItem(KEY,JSON.stringify(frozen));
       }
       await submitFrozen();
@@ -270,7 +328,11 @@
     q('planning-mode')?.addEventListener('change',()=>{
       q('openai-consent').checked=false;
       if(q('pixel-consent'))q('pixel-consent').checked=false;
-      q('openai-consent-label').hidden=q('planning-mode').value!=='OPENAI_API';
+      if(q('preview-consent'))q('preview-consent').checked=false;
+      const adaptive=q('planning-mode').value==='OPENAI_ADAPTIVE';
+      q('openai-consent-label').hidden=!['OPENAI_API','OPENAI_ADAPTIVE'].includes(q('planning-mode').value);
+      if(q('preview-consent-label'))q('preview-consent-label').hidden=!adaptive;
+      if(q('pixel-consent'))q('pixel-consent').disabled=adaptive?options?.adaptivePlanningEnabled!==true:options?.pixelStatisticsEnabled!==true;
     });
     q('connect').addEventListener('click',()=>run(async()=>{
       if(!window.google?.accounts?.id)await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='https://accounts.google.com/gsi/client';script.onload=resolve;script.onerror=reject;document.head.append(script);});

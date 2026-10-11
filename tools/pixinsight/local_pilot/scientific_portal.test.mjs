@@ -5,12 +5,12 @@ import {readFileSync} from 'node:fs';
 import {webcrypto} from 'node:crypto';
 const source=readFileSync(new URL('../../../docs/javascripts/pixinsight-pilot.js',import.meta.url),'utf8');
 const tick=async()=>{for(let i=0;i<12;i++)await new Promise(resolve=>setTimeout(resolve,3));};
-function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=false,plansReady=false,sourcePlanReady=false,preparationReady=false,completedRevision=false,legacyRevisions=false,openaiEnabled=false,pixelEnabled=false}={}) {
+function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=false,plansReady=false,sourcePlanReady=false,preparationReady=false,completedRevision=false,legacyRevisions=false,openaiEnabled=false,pixelEnabled=false,adaptiveEnabled=false,adaptivePlanReady=false}={}) {
   function node(){return {dataset:{},children:[],callbacks:{},value:'',checked:false,isConnected:true,
     addEventListener(type,callback){this.callbacks[type]=callback;},append(...items){this.children.push(...items);},
     replaceChildren(){this.children=[];},querySelectorAll(){return this.children.flatMap(label=>label.children).filter(x=>x.type==='checkbox'&&x.checked);},
     click(){this.callbacks.click?.();},remove(){}};}
-  const controls=Object.fromEntries(['planning-mode','openai-option','openai-consent','pixel-consent','openai-consent-label','origin','catalog-label','parent-label','session-fields','historical-fields','historical-target','provenance','historical-attest','message','connect','signin','form','fields','input','directory','prompt','target','mode','layout','bayer','bayer-label','additional','additional-label','plans','parent','title','date','sessions','attest','create','pending','retry','refresh','jobs','review','summary','preview','steps','workflow','correlations','receipt','accept','reject'].map(name=>[name,node()]));
+  const controls=Object.fromEntries(['planning-mode','openai-option','adaptive-option','openai-consent','pixel-consent','preview-consent','preview-consent-label','openai-consent-label','origin','catalog-label','parent-label','session-fields','historical-fields','historical-target','provenance','historical-attest','message','connect','signin','form','fields','input','directory','prompt','target','mode','layout','bayer','bayer-label','additional','additional-label','plans','parent','title','date','sessions','attest','create','pending','retry','refresh','jobs','review','summary','preview','steps','workflow','correlations','receipt','accept','reject'].map(name=>[name,node()]));
   controls.title.value='M27 test';controls.date.value='2026-10-05';controls.attest.checked=true;
   controls.mode.value='LRGB';controls.layout.value='SINGLE';controls.additional.value='';controls.directory.value='F:\\Astro\\M27\\Master';controls.prompt.value='Dettaglio interno, fondo naturale';
   const root=node();root.querySelector=selector=>controls[selector.match(/data-p5-(.+)\]/)[1]];
@@ -32,7 +32,7 @@ function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=fal
         if(url.endsWith('/decision'))return {ok:true,json:async()=>({publication:'NONE'})};
         return {ok:true,blob:async()=>new Blob(['private fixture'])};
       }
-      if(url.endsWith('/options'))return {ok:true,json:async()=>({openaiPlanningEnabled:openaiEnabled,pixelStatisticsEnabled:pixelEnabled,inputs:[{inputRef:'b'.repeat(32),target:'M27'}],images:[],catalogSha256:'a'.repeat(64),sessions:[{sessionId:'SESSION-M27',target:'M27'}]})};
+      if(url.endsWith('/options'))return {ok:true,json:async()=>({adaptivePlanningEnabled:adaptiveEnabled,openaiPlanningEnabled:openaiEnabled,pixelStatisticsEnabled:pixelEnabled,inputs:[{inputRef:'b'.repeat(32),target:'M27'}],images:[],catalogSha256:'a'.repeat(64),sessions:[{sessionId:'SESSION-M27',target:'M27'}]})};
       if(url.endsWith('/science/intakes')){
         if(options.method==='POST'){
           if(rejected)return {ok:false,status:400,json:async()=>({error:'CATALOG_CHANGED_REFRESH'})};
@@ -43,8 +43,10 @@ function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=fal
         if(intake&&plansReady&&intake.state!=='WITHDRAWN'){intake.state='PLAN_READY';intake.proposalSha256='d'.repeat(64);intake.plan={rationale:'Piano per il prompt',limitations:'M27 soltanto',masters:[{role:'R',width:1000,height:800,imageIndex:0}],background:{polyDegree:1,boxSize:16,boxSeparation:32},steps:['ChannelCombination'],checkpointCount:15,processing:{sharpenL:0.5,sharpenRGB:0.45,denoiseL:0.65,denoiseRGB:0.7,contrastLarge:0.22,contrastSmall:0.28,targetBackground:0.085}};}
         if(intake&&sourcePlanReady){intake.sourcePlanSha256='e'.repeat(64);intake.sourcePlan={rationale:'Selezione esplicita',limitations:'Astrometria da verificare',panels:[{panelId:'P1',directory:'F:\\Astro',sessionIds:['SESSION-M27'],masters:{RGB:{filename:'<img src=x>.xisf',imageIndex:0}}},{panelId:'P2',directory:'F:\\Astro',sessionIds:['SESSION-M27'],masters:{RGB:{filename:'Panel2.xisf',imageIndex:0}}}]};}
         if(intake&&preparationReady){intake.preparationPlanSha256='f'.repeat(64);intake.preparationPlan={rationale:'Preparazione CFA verificata',limitations:'Piano finale separato',masters:[{panelId:'P1',role:'CFA',filename:'<img src=x>.xisf',width:1000,height:800,imageIndex:0}],bayerPattern:'RGGB',canvas:null,nativeProcessCount:1,checkpointCount:2};}
+        if(intake&&adaptivePlanReady){intake.adaptive ||= {proposalSha256:'7'.repeat(64),plan:{decision:{action:'PROPOSE_GRAPH',rationale:'Confrontare le immagini vere',limitations:'Nessuna accettazione',graph:{steps:[{process:'STRETCH',parameters:{targetBackground:.12}}]}}},cursor:{state:'AWAITING_EXECUTION',usage:{input_tokens:100,output_tokens:20},usageComplete:true},job:{jobId:'PIAI_'+intake.selection.requestId,state:'QUEUED',cancelRequested:false},executionPolicy:null};}
         return {ok:true,json:async()=>({intakes:intake?[intake]:[]})};
       }
+      if(url.endsWith('/adaptive-approve')){intake.adaptive.executionPolicy=JSON.parse(options.body);return {ok:true,json:async()=>intake.adaptive};}
       if(/\/science\/intakes\/[a-f0-9]+\/approve-sources$/.test(url)){
         assert.equal(JSON.parse(options.body).sourcePlanSha256,intake.sourcePlanSha256);
         intake.sourceSelectionApproved=true;
@@ -253,4 +255,35 @@ test('definitive rejection with uncertain job status retains frozen request',asy
   const h=harness({rejected:true,unknownStatus:true});await h.login();await h.submit();
   assert.equal(h.stored.size,1);assert.equal(h.controls.fields.disabled,true);
   assert.equal(h.requests.filter(x=>x.url.endsWith('/options')).length,1);
+});
+
+test('adaptive analysis requires three consents and preserves its distinct intake authority',async()=>{
+  const h=harness({adaptiveEnabled:true});await h.login();h.controls['planning-mode'].value='OPENAI_ADAPTIVE';
+  h.controls['planning-mode'].callbacks.change();h.controls['openai-consent'].checked=true;h.controls['pixel-consent'].checked=true;
+  await h.submit();assert.equal(h.requests.some(x=>x.options.method==='POST'),false);
+  h.controls['preview-consent'].checked=true;await h.submit();
+  const created=h.requests.find(x=>x.options.method==='POST'&&x.url.endsWith('/science/intakes'));
+  assert.deepEqual(JSON.parse(created.options.body).adaptivePlanning,{dataTransferConfirmed:true,pixelStatisticsConfirmed:true,previewTransferConfirmed:true});
+  assert.equal(JSON.parse(created.options.body).openaiPlanning,undefined);
+  assert.equal(h.requests.some(x=>x.url.includes('/worker/')||x.url.includes('api.openai.com')),false);
+});
+
+test('adaptive native policy approval binds exact proposal and only the next-step parameter scope',async()=>{
+  const h=harness({adaptiveEnabled:true,adaptivePlanReady:true});await h.login();h.controls['planning-mode'].value='OPENAI_ADAPTIVE';
+  for(const name of ['openai-consent','pixel-consent','preview-consent'])h.controls[name].checked=true;
+  await h.submit();assert.equal(h.requests.some(x=>x.url.endsWith('/adaptive-approve')),false);
+  const button=h.controls.plans.children[0].children.find(x=>x.textContent==='Conferma workflow e controlli intermedi');
+  assert.ok(button);button.click();await tick();
+  const post=h.requests.find(x=>x.url.endsWith('/adaptive-approve'));
+  assert.deepEqual(JSON.parse(post.options.body),{proposalSha256:'7'.repeat(64),adaptationScope:'NEXT_STEP_PARAMETERS_ONLY',nativeExecutionConfirmed:true});
+  assert.equal(h.requests.some(x=>/\/approve$|\/science\/jobs/.test(x.url)&&x.options.method==='POST'),false);
+});
+
+test('disabled adaptive mode and unprepared CFA prevent submission',async()=>{
+  for(const available of [false,true]){
+    const h=harness({adaptiveEnabled:available});await h.login();h.controls['planning-mode'].value='OPENAI_ADAPTIVE';
+    for(const name of ['openai-consent','pixel-consent','preview-consent'])h.controls[name].checked=true;
+    if(available){h.controls.mode.value='OSC_CFA';h.controls.bayer.value='RGGB';}
+    await h.submit();assert.equal(h.requests.some(x=>x.options.method==='POST'),false);assert.equal(h.stored.size,0);
+  }
 });

@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-049-EXT-PIAI-ADAPTIVE |
-| Versione | 1.6 |
+| Versione | 1.7 |
 | Stato | Owner-authorized / In Progress; statistiche master abilitate sul backend, ciclo adattivo non operativo |
 | Data | 2026-10-11 |
 
@@ -95,7 +95,21 @@ Il catalogo candidato comprende `OPTICAL_CORRECT` da lineare e `MASK_BUILD` dopo
 
 La risposta può modificare soltanto i parametri del prossimo processo del grafo già approvato, entro i suoi limiti. Non può cambiare ordine, ramo o prefisso eseguito. `STOP_FOR_REVIEW` conserva l'incertezza; `COMPLETE_FOR_REVIEW` è ammesso soltanto dopo tutto il prefisso e indica revisione Owner, senza accettazione scientifica. Il chiamante deve verificare fisicamente il prefisso e i checkpoint: il contatore nel JSON non si autentica da solo.
 
-Questi contratti sono ancora candidati offline: il journal attuale non ammette la nuova azione finale, gli endpoint e il portale non li invocano, e il dispatch nativo segmentato resta da integrare. Nessuna nuova chiamata reale o elaborazione dei master è stata eseguita. Il collaudo operativo richiede consensi registrati, approvazione del grafo e policy di adattamento, ricevute native e verifica finale distinta.
+PR [#566](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/566), head `8ff78bd1ac8c365c82ec73b8f419445099399d2d`, merge `5725659ea7d2b619c4be73e990ad7e08c5aafb84`: ARB poi RQ indipendenti APPROVED zero finding, nove check PR e otto workflow post-merge SUCCESS. 242 test Python del coordinatore e MkDocs strict PASS; pagina pubblicata verificata. [Ricevuta post-merge](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/566#issuecomment-6108775507). Il merge integra questi contratti, senza attivazione del ciclo.
+
+### Ammissione adattiva candidata: portale, backend e raccolta nativa
+
+Il nuovo candidato aggiunge `adaptivePlanning` alla richiesta Owner con tre consensi separati obbligatori: testo/metadati, statistiche e anteprime. `OPENAI_API_ADAPTIVE` è distinto dalla V1. L'opzione resta disabilitata senza provider e flag coordinato `DSG_PIAI_ADAPTIVE=LOCAL_WORKER_VERIFIED`; la revisione cloud attiva non è stata modificata. In questa ammissione servono master già preparati su campo singolo: CFA e mosaici richiedono ancora il collegamento del relativo adapter alla preparazione già presente.
+
+Il worker autenticato propone input esatti, misure e binding, runtime con versioni ML selezionate diverse da zero e impronte, evidence e PNG limitati. Il backend lega selezione Owner, input, runtime e catalogo a una policy immutabile prima della prenotazione durevole. Il modello riceve i consensi salvati dal portale; non può riceverli da campi arbitrari del worker. Il servizio conserva un job di sola pianificazione: il worker V1 non può reclamarlo né inviare rapporti di esecuzione V1. Nessuna History precedente viene eseguita.
+
+Una proposta iniziale conserva motivazione, limiti e usage effettivo. Replay restituisce la proposta senza un nuovo invio; crash dopo la sua pubblicazione recupera l'accounting dalla stessa risposta. Una risposta persa resta prenotata con usage incompleto, senza retry. Il portale mostra il grafo e richiede un'approvazione distinta, legata all'impronta della proposta e allo scope `NEXT_STEP_PARAMETERS_ONLY`. Per un risultato di presentazione, master pre-stretch richiedono uno stretch esplicito e LRGB richiede la composizione con L. Una policy presente nello storage ma non ammessa dal cursore non viene mostrata come approvazione operativa.
+
+Il journal candidato richiede anche il consenso alle anteprime e ammette `COMPLETE_FOR_REVIEW` soltanto da checkpoint. Tale risposta porta a `AWAITING_FINAL_VERIFICATION`, senza marcare il risultato pronto. Serve una distinta ricevuta nativa legata ad approvazione, runtime, ultimo checkpoint, output, History e verifica degli originali; il validatore del journal controlla quei binding, senza autenticare da solo la verità fisica di un JSON. Accettazione scientifica e pubblicazione rimangono assenti. Claim/dispatch nativo adattivo, invocazione dei checkpoint e consegna finale restano da collegare prima dell'attivazione.
+
+`native_analysis.py` prepara copie di input espliciti, con controllo dello scope locale, rifiuto di UNC/reparse point, geometria/indice e hash. `analysis.jsh` misura soltanto le copie; verifica History e hash prima/dopo ogni master e ricontrolla tutte le sorgenti alla fine. Il verificatore Python usa l'impronta del manifest conservata dal chiamante e controlla componenti, geometrie, regioni e binding prima della ricevuta. Il preparatore non avvia PixInsight e non accede a credenziali o rete.
+
+Prova privata read-only sui quattro master M27, PixInsight 1.9.5 build 1706: R 1.727 sorgenti/255 selezionate/254 fit; G 1.827/255/253; B 588/225/225; L 3.165/255/253. Rumore MRS conservato per tutti i ruoli. Originali e copie invariati, istanza precedente preservata, sola istanza isolata chiusa dopo verifica. Il primo controllo del comando prima della chiusura non corrispondeva per separatori del percorso: nessun processo chiuso; identità esatta poi verificata e chiusa correttamente. Questi conteggi non sono soglie, score, seeing o accettazione. Nessuna chiamata reale OpenAI, deconvoluzione, denoise o stretch eseguiti nella prova.
 
 ### Modelli e input visivi: capacità documentate, attivazione separata
 

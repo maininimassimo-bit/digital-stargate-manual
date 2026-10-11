@@ -127,8 +127,13 @@ class Broker:
             active = [x for x in state["jobs"] if x["state"] in (STAGES - TERMINAL) | {"RECOVERY_REQUIRED"}]
             require(len(active) <= 1, "QUEUE_INVARIANT")
             if active:
+                # Adaptive jobs have a separate dispatcher and Owner graph gate.
+                # A legacy worker must never receive their native lease or plan.
+                if active[0]['request'].get('aiMode') == 'OPENAI_API_ADAPTIVE':
+                    return None
                 return self._view(active[0], worker=True)
-            pending = next((x for x in state["jobs"] if x["state"] == "QUEUED"), None)
+            pending = next((x for x in state["jobs"] if x["state"] == "QUEUED" and
+                            x['request'].get('aiMode') != 'OPENAI_API_ADAPTIVE'), None)
             if pending:
                 pending.update(state="RESERVED", leaseToken=token, rootId=root_id, updatedAt=now)
                 return self._view(pending, worker=True)
@@ -168,6 +173,7 @@ class Broker:
             require(type(request[name]) is int and 0 <= request[name] <= maximum, "COUNTS_INVALID")
         def operation(state, now):
             item = self._job(state, job_id)
+            require(item['request'].get('aiMode') != 'OPENAI_API_ADAPTIVE', 'ADAPTIVE_DISTINCT_REPORT_REQUIRED')
             require(secrets.compare_digest(item.get("leaseToken", ""), request["leaseToken"]), "LEASE_MISMATCH")
             if request["sequence"] == item["sequence"]:
                 require(item["report"] == request, "REPORT_CONFLICT")
