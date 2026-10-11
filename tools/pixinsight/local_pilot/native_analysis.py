@@ -24,8 +24,14 @@ def local_file(value, roots):
     path=Path(text)
     # Reject reparse links before resolution, including every existing ancestor.
     require(all(not p.is_symlink() and not p.is_junction() for p in (path,*path.parents)), 'ANALYSIS_REPARSE_POINT')
+    scoped_roots=[]
+    for root in roots:
+        root_path=Path(local_directory(str(root)))
+        require(all(not p.is_symlink() and not p.is_junction() for p in (root_path,*root_path.parents)),
+                'ANALYSIS_SCOPE_REPARSE_POINT')
+        scoped_roots.append(root_path.resolve(strict=True))
     resolved=path.resolve(strict=True)
-    require(any(resolved.is_relative_to(Path(local_directory(str(root))).resolve(strict=True)) for root in roots),
+    require(any(resolved.is_relative_to(root) for root in scoped_roots),
             'ANALYSIS_OUTSIDE_SCOPE')
     require(resolved.is_file() and resolved.stat().st_size<=1073741824,'ANALYSIS_INPUT_SIZE')
     return resolved
@@ -80,7 +86,7 @@ def prepare(directory, inputs, *, allowed_roots, pixinsight_root):
     return manifest
 
 
-def verify(directory, *, expected_manifest_sha256):
+def verify(directory, *, expected_manifest_sha256, write_receipt=True):
     directory=Path(directory)
     require(digest(expected_manifest_sha256) and fingerprint(directory/'manifest.json')==expected_manifest_sha256,
             'ANALYSIS_MANIFEST_BINDING')
@@ -109,5 +115,8 @@ def verify(directory, *, expected_manifest_sha256):
     receipt={'version':VERSION,'manifestSha256':fingerprint(directory/'manifest.json'),
              'reportSha256':fingerprint(directory/'report.json'),'status':'READ_ONLY_VERIFIED',
              'scientificAcceptance':'NOT_ESTABLISHED'}
-    with (directory/'verification.json').open('xb') as stream:stream.write(encode(receipt))
+    if write_receipt:
+        with (directory/'verification.json').open('xb') as stream:stream.write(encode(receipt))
+    else:
+        require(decode((directory/'verification.json').read_bytes())==receipt,'ANALYSIS_SAVED_RECEIPT_CHANGED')
     return report,bindings,receipt

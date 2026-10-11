@@ -9,6 +9,7 @@ from .worker import NONLINEAR_RECIPE, NONLINEAR_RECIPES, RECIPE_MODES, actions
 from .intake import IntakeMixin
 from .openai_flow import OpenAIFlowMixin
 from .adaptive_flow import AdaptiveFlowMixin
+from .adaptive_execution import AdaptiveExecutionMixin
 from .scientific_revisions import RevisionMixin
 from .historical_source import historical, validate_historical, historical_review, historical_intake_enabled
 from tools.scientific_registry.ingestion_storage import immutable, Conflict
@@ -37,7 +38,7 @@ def known_target(value):
     return isinstance(value,str) and bool(value.strip()) and value.strip().upper() not in {'UNKNOWN','UNSPECIFIED','N/A'}
 
 
-class ScientificPortal(AdaptiveFlowMixin, OpenAIFlowMixin, IntakeMixin, RevisionMixin):
+class ScientificPortal(AdaptiveExecutionMixin, AdaptiveFlowMixin, OpenAIFlowMixin, IntakeMixin, RevisionMixin):
     def __init__(self, broker, catalog_loader, gallery_loader, planner=None, adaptive_provider=None):
         self.broker, self.store = broker, broker.store
         self.catalog_loader, self.gallery_loader = catalog_loader, gallery_loader

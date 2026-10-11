@@ -1,4 +1,4 @@
-"""Candidate multimodal boundary; not wired to a route or an active worker.
+"""Multimodal boundary behind the explicit adaptive activation gate.
 
 The trusted caller must durably reserve before calling this adapter. Immutable
 evidence contains local bindings; the provider only receives a projection.
@@ -16,7 +16,7 @@ from .image_previews import provider_image,validate_curve
 
 VERSION='DSG_PIAI_MULTIMODAL_PROVIDER_V2'
 
-def graph_schema():
+def graph_schema(*, sampling=('ORIGINAL','BIN2_AVERAGE')):
     variants=[]
     for name,bounds in catalog.PARAMETERS.items():
         parameters=object_schema({k:{'type':'integer' if kind is int else 'number','minimum':lo,'maximum':hi}
@@ -25,12 +25,13 @@ def graph_schema():
     return object_schema({'catalog':{'type':'string','enum':[catalog.VERSION]},
         'catalogSha256':{'type':'string','enum':[catalog.fingerprint()]},
         'branch':{'type':'string','enum':['DIRECT','STARLESS']},
+        'workingSampling':{'type':'string','enum':list(sampling)},
         'steps':{'type':'array','minItems':1,'maxItems':len(catalog.PROCESS_ORDER),'items':{'anyOf':variants}},
         'rationale':{'type':'string'},'limitations':{'type':'string'}})
 
-def initial_schema():
+def initial_schema(*, sampling=('ORIGINAL','BIN2_AVERAGE')):
     return object_schema({'action':{'type':'string','enum':['PROPOSE_GRAPH','STOP_FOR_REVIEW']},
-        'graph':{'anyOf':[graph_schema(),{'type':'null'}]},
+        'graph':{'anyOf':[graph_schema(sampling=sampling),{'type':'null'}]},
         'rationale':{'type':'string'},'limitations':{'type':'string'}})
 
 def measurement_projection(report,binding):
@@ -107,9 +108,15 @@ class AdaptiveProvider(OpenAIPlanner):
             content.append({'type':'input_text','text':encode({k:v for k,v in preview.items() if k!='sha256'}).decode()})
             content.append(provider_image(raw,preview['sha256'],expected_geometry=expected_geometry,
                                           expected_channels=measured['channels']))
+        width,height=numerical[0]['report']['width'],numerical[0]['report']['height']
+        regions=[r['report']['regions'][0] for r in numerical]
+        bin2_roi=all(r==regions[0] and r[2]//2-(r[0]+1)//2>=32 and
+                     r[3]//2-(r[1]+1)//2>=32 for r in regions)
+        sampling=('ORIGINAL','BIN2_AVERAGE') if width%2==0 and height%2==0 and min(width,height)>=64 and bin2_roi else ('ORIGINAL',)
         projection={'mode':mode,'intent':evidence['intent'],
             'attestedPrerequisites':{k:v for k,v in facts.items() if k not in {'sourceSha256','recordSha256'}},
-            'measurements':numerical,'catalog':graph_schema(),
+            'measurements':numerical,'catalog':graph_schema(sampling=sampling),
+            'registrationMeaning':'Common working grid and recorded lineage only; astrometric accuracy remains not established.',
             'displayLimitations':'Eight-bit derived display projections, never scientific sample data or scientific acceptance.'}
         require(len(encode(projection))<=32768,'ADAPTIVE_PROVIDER_TEXT_LIMIT')
         content.insert(0,{'type':'input_text','text':encode(projection).decode()})
@@ -128,7 +135,7 @@ class AdaptiveProvider(OpenAIPlanner):
                 'Stop for review if evidence is insufficient or inconsistent. Explain decisions and limitations in Italian. '
                 'Never claim a best workflow or scientific acceptance without verified intermediate results.'),
             'input':[{'role':'user','content':content}],
-            'text':{'format':{'type':'json_schema','name':VERSION,'strict':True,'schema':initial_schema()}}}
+            'text':{'format':{'type':'json_schema','name':VERSION,'strict':True,'schema':initial_schema(sampling=sampling)}}}
         try:
             response=self._send(payload)
             require(isinstance(response,dict) and response.get('status')=='completed' and
@@ -146,7 +153,9 @@ class AdaptiveProvider(OpenAIPlanner):
             decision=decode(texts[0])
             require(isinstance(decision,dict) and set(decision)=={'action','graph','rationale','limitations'},'ADAPTIVE_DECISION')
             safe_text(decision['rationale']);safe_text(decision['limitations'])
-            if decision['action']=='PROPOSE_GRAPH':decision['graph']=catalog.validate_graph(decision['graph'],mode,facts)
+            if decision['action']=='PROPOSE_GRAPH':
+                decision['graph']=catalog.validate_graph(decision['graph'],mode,facts)
+                require(decision['graph']['workingSampling'] in sampling,'ADAPTIVE_UNSUPPORTED_SAMPLING')
             else:require(decision['action']=='STOP_FOR_REVIEW' and decision['graph'] is None,'ADAPTIVE_ACTION')
             usage=response.get('usage',{});keys=('input_tokens','output_tokens','total_tokens')
             require(isinstance(usage,dict) and all(type(usage.get(k)) is int and 0<=usage[k]<=10**9 for k in keys) and

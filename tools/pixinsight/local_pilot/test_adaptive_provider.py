@@ -21,7 +21,7 @@ def inputs():
     return reservation,evidence,bindings,[raw]
 
 def response():
-    graph={'catalog':catalog.VERSION,'catalogSha256':catalog.fingerprint(),'branch':'DIRECT',
+    graph={'catalog':catalog.VERSION,'catalogSha256':catalog.fingerprint(),'branch':'DIRECT','workingSampling':'ORIGINAL',
         'steps':[{'process':'DENOISE','parameters':{'denoiseL':.4,'denoiseRGB':.3}}],
         'rationale':'Riduzione moderata da verificare','limitations':'Misure descrittive, nessuna accettazione'}
     return {'status':'completed','id':'resp_mock','model':'gpt-6-luna','output':[{'type':'message','role':'assistant',

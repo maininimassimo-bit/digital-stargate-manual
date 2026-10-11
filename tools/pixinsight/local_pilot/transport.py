@@ -37,9 +37,13 @@ class Transport:
         return self.request(path, value)
 
     def request(self, path, value=None):
-        require(re.fullmatch(r"/v1/worker/(?:claim|PIAI_[a-f0-9]{32}/report|science/register|science/intakes(?:/[a-f0-9]{32}/(?:plan|sources|preparation|prepared|openai-plan))?|science/PIAI_[a-f0-9]{32}/(?:context|result|revisions/[a-f0-9]{32}/result))", path), "ROUTE_INVALID")
+        require(re.fullmatch(r"/v1/worker/(?:claim|PIAI_[a-f0-9]{32}/report|science/register|science/intakes(?:/[a-f0-9]{32}/(?:plan|sources|preparation|prepared|openai-plan|adaptive-(?:analysis|state|reserve|start|checkpoint|decision|context|final|halt)))?|science/PIAI_[a-f0-9]{32}/(?:context|result|revisions/[a-f0-9]{32}/result))", path), "ROUTE_INVALID")
         raw = encode(value) if value is not None else None
         limit = 9 * 1024 * 1024 if path.endswith('/result') else 65536 if '/science/intakes/' in path else 16384
+        if path.endswith(('/adaptive-analysis','/adaptive-decision','/adaptive-final')):
+            limit = 6 * 1024 * 1024
+        elif path.endswith('/adaptive-checkpoint'):
+            limit = 262144
         require(raw is None or len(raw) <= limit, "REQUEST_SIZE")
         req = urllib.request.Request(self.origin + path, raw, method="POST" if raw is not None else "GET",
                 headers={"Authorization": "Bearer " + self.token, "Content-Type": "application/json"})
@@ -48,6 +52,8 @@ class Transport:
                 require(response.status == 200 and response.url == self.origin + path and
                         response.headers.get_content_type() == "application/json", "RESPONSE_INVALID")
                 response_limit = 8 * 1024 * 1024 if path.endswith('/intakes') else 512 * 1024 if path.endswith('/context') else 16384
+                if '/adaptive-' in path:
+                    response_limit = 512 * 1024
                 data = response.read(response_limit + 1)
                 require(len(data) <= response_limit, "RESPONSE_SIZE")
                 return decode(data)

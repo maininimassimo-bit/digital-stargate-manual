@@ -2,7 +2,7 @@
 
 ## PixInsight — preparazione e segmenti candidati
 
-PR567 integrata e post-merge verificato, runtime adattivo ancora disabilitato. Nuovo incremento non operativo: contratto esplicito di composizione/campionamento, permessi di segmento senza riavvio ambiguo e factory nativa finita. Nessun endpoint di dispatch o launcher collegato. Owner conferma i quattro master M27 WBPP pre-stretch; misure gaussiane motivano una valutazione del campionamento prima della deconvoluzione, senza binning eseguito o miglioramento assunto. Baseline preparata, runtime fisico, ROI/registrazione, checkpoint, consegna e OAT restano necessari prima dell'attivazione. [Contratto v1.8](docs/project/PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md).
+PR568 integrata e post-merge verificato (`fe0200b2855e47f7f4fb629d9afe1595ebbfd90e`), runtime adattivo ancora disabilitato. Il nuovo incremento locale collega analisi da ricevuta nativa supervisionata, endpoint di segmento/checkpoint, coordinatore, esecutore finito e consegna privata con valutazione Owner distinta; non è ancora revisionato o distribuito. Campionamento e ROI entrano nell'approvazione esatta; SHO/HOO conservano intermedi monocromatici indipendenti. L'archivio di evidenze richiede ambiente nativo, licenze e rilocazione dei percorsi: non è replay autonomo. Owner conferma i quattro master M27 WBPP pre-stretch; nessun nuovo workflow fisico M27 o invio immagini al provider è stato eseguito. Collaudo del collegamento CFA/mosaici, ROI/registrazione con ambito dichiarato, collaudo fisico, recovery, revisioni, distribuzione e OAT autenticato restano necessari prima dell'attivazione. [Contratto v1.9](docs/project/PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md).
 
 ## PixInsight — ammissione adattiva candidata (snapshot precedente)
 

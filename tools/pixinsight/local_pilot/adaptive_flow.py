@@ -13,6 +13,7 @@ from .source_profile import source_profile
 from .adaptive_ledger import DecisionJournal, VERSION, digest
 from . import adaptive_catalog as catalog
 from .native_measurements import validate as validate_measurement
+from .adaptive_preparation import preparation
 from tools.scientific_registry.ingestion_storage import immutable
 
 EXECUTION_POLICY_VERSION = 'DSG_PIAI_ADAPTIVE_EXECUTION_POLICY_V2'
@@ -35,7 +36,14 @@ class AdaptiveFlowMixin:
         approved_policy = decode(approval) if approval else None
         if not jobs or not approved_policy or jobs[0].get('adaptiveExecutionApprovalSha256') != sha(approved_policy):
             approved_policy = None
-        return {'plan': decode(raw) if raw else None,
+        plan = decode(raw) if raw else None
+        preview_preparation = None
+        if plan and plan['decision']['action'] == 'PROPOSE_GRAPH':
+            analysis = decode(self.store.get('science/adaptive-analysis/' + request_id)[0])
+            preview_preparation = preparation(analysis['evidence']['mode'], analysis['inputs'],
+                                              plan['decision']['graph']['workingSampling'])
+            preview_preparation['backgroundROI'] = self._working_background(analysis,preview_preparation['factor'])
+        return {'plan': plan, 'preparation':preview_preparation,
                 'proposalSha256': sha(decode(raw)) if raw else None,
                 'cursor': public_cursor,
                 'job': self.broker._view(jobs[0]) if jobs else None,
@@ -50,16 +58,27 @@ class AdaptiveFlowMixin:
         require(isinstance(consent, dict) and all(consent.get(k) is True for k in
                 ('dataTransferConfirmed', 'pixelStatisticsConfirmed', 'previewTransferConfirmed')),
                 'ADAPTIVE_CONSENT_REQUIRED')
-        fields = {'workerId', 'inputs', 'runtime', 'evidence', 'bindings', 'assetsBase64'}
+        profile = source_profile(intake['selection'])
+        upstream_required=profile['layout']=='PANELS' or profile['mode']=='OSC_CFA'
+        fields = {'workerId', 'inputs', 'runtime', 'evidence', 'bindings', 'assetsBase64'} | ({'preparationTrace'} if upstream_required else set())
         require(isinstance(value, dict) and set(value) == fields and
                 value['workerId'] == self.broker.worker_id, 'ADAPTIVE_ANALYSIS_FIELDS')
-        profile = source_profile(intake['selection'])
-        require(profile['layout'] == 'SINGLE' and profile['mode'] in catalog.MODES,
-                'ADAPTIVE_VERIFIED_PREPARATION_ADAPTER_REQUIRED')
+        mode='OSC' if profile['mode']=='OSC_CFA' else profile['mode']
+        require(mode in catalog.MODES,'ADAPTIVE_VERIFIED_PREPARATION_ADAPTER_REQUIRED')
+        upstream=None
+        if upstream_required:
+            upstream=self.preparation_state(request_id)
+            require(upstream['preparationApproved'] and upstream['preparationResult'] and
+                    upstream['preparationResult']['status']=='COMPLETED','ADAPTIVE_UPSTREAM_PREPARATION_REQUIRED')
+            trace=value['preparationTrace']
+            keys={'requestId','preparationPlanSha256','sourceManifestSha256','verificationSha256','nativeInstancesSha256','outputManifestSha256'}
+            require(isinstance(trace,dict) and set(trace)==keys and trace['requestId']==request_id and
+                    all(trace[k]==upstream['preparationResult'][k] for k in keys-{'requestId'}),
+                    'ADAPTIVE_UPSTREAM_TRACE_CHANGED')
         evidence = value['evidence']
-        require(isinstance(evidence, dict) and evidence.get('mode') == profile['mode'] and
+        require(isinstance(evidence, dict) and evidence.get('mode') == mode and
                 evidence.get('intent') == intake['selection']['prompt'], 'ADAPTIVE_INTAKE_BINDING')
-        roles = {'LRGB':['R','G','B','L'], 'OSC':['RGB'], 'SHO':['SII','Ha','OIII'], 'HOO':['Ha','OIII']}[profile['mode']]
+        roles = {'LRGB':['R','G','B','L'], 'OSC':['RGB'], 'SHO':['SII','Ha','OIII'], 'HOO':['Ha','OIII']}[mode]
         inputs = value['inputs']
         require(isinstance(inputs, list) and len(inputs) == len(roles), 'ADAPTIVE_INPUTS')
         for row, role in zip(inputs, roles):
@@ -69,6 +88,11 @@ class AdaptiveFlowMixin:
                     type(row['channels']) is int and row['channels'] == (3 if role == 'RGB' else 1), 'ADAPTIVE_INPUT_DESCRIPTOR')
         require(len({(row['sha256'],row['imageIndex']) for row in inputs}) == len(inputs),
                 'ADAPTIVE_ROLE_SOURCE_REUSED')
+        if upstream_required:
+            require(sha([{k:r[k] for k in ('role','sha256','imageIndex','width','height')} for r in inputs])==
+                    value['preparationTrace']['outputManifestSha256'],'ADAPTIVE_PREPARED_INPUTS_CHANGED')
+            require([{k:r[k] for k in ('role','imageIndex','width','height')} for r in inputs]==
+                    upstream['preparationResult']['masters'],'ADAPTIVE_PREPARED_GEOMETRY_CHANGED')
         input_sha = sha(inputs)
         facts = catalog.provenance(evidence.get('provenance'))
         require(facts['sourceSha256'] == input_sha, 'ADAPTIVE_INPUT_SET_BINDING')
@@ -114,11 +138,12 @@ class AdaptiveFlowMixin:
             require(len(raw) <= 1048576, 'ADAPTIVE_ASSET_LIMIT')
             assets.append(raw)
         policy = {'version':VERSION, 'catalogSha256':catalog.fingerprint(), 'runtimeSha256':sha(runtime),
-                  'inputSetSha256':input_sha, 'mode':profile['mode'], 'model':self.adaptive_provider.model, **consent}
+                  'inputSetSha256':input_sha, 'mode':mode, 'model':self.adaptive_provider.model, **consent}
         policy_sha = sha(policy)
         immutable(self.store, 'science/adaptive-policies/' + policy_sha, encode(policy))
         analysis = {'intakeSha256':sha(intake), 'inputs':inputs, 'runtime':runtime,
                     'evidence':evidence, 'bindings':value['bindings'], 'policySha256':policy_sha}
+        if upstream_required:analysis['preparationTrace']=value['preparationTrace']
         immutable(self.store, 'science/adaptive-analysis/' + request_id, encode(analysis))
         job_id = 'PIAI_' + request_id
 
@@ -191,7 +216,10 @@ class AdaptiveFlowMixin:
                 'ADAPTIVE_PRESENTATION_STRETCH_REQUIRED')
         require(analysis['evidence']['mode'] != 'LRGB' or 'COMBINE' in processes,
                 'ADAPTIVE_LRGB_COMPOSITION_REQUIRED')
-        approval = {'version':EXECUTION_POLICY_VERSION, **value, 'graphSha256':sha(graph),
+        prepared = preparation(analysis['evidence']['mode'], analysis['inputs'], graph['workingSampling'])
+        prepared['backgroundROI'] = self._working_background(analysis,prepared['factor'])
+        approval = {'version':EXECUTION_POLICY_VERSION, **value, 'graphSha256':sha(graph),'branch':graph['branch'],
+                    'preparation':prepared,
                     'analysisSha256':sha(analysis), 'policySha256':analysis['policySha256'],
                     'scientificAcceptance':'NONE', 'publication':'NONE'}
         state, _ = self.broker._state()
@@ -209,3 +237,13 @@ class AdaptiveFlowMixin:
             job.update(adaptiveExecutionApprovalSha256=sha(approval), updatedAt=now)
         self.broker._mutate(approve)
         return self.adaptive_state(request_id)
+
+    @staticmethod
+    def _working_background(analysis, factor):
+        regions = [r['report']['regions'][0] for r in analysis['evidence']['measurements']]
+        require(regions and all(r == regions[0] for r in regions),'ADAPTIVE_COMMON_BACKGROUND_REGION')
+        r = regions[0]
+        # Inward rounding retains only complete averaged source blocks.
+        result = [(r[0]+factor-1)//factor,(r[1]+factor-1)//factor,r[2]//factor,r[3]//factor]
+        require(result[2]-result[0]>=32 and result[3]-result[1]>=32,'ADAPTIVE_WORKING_BACKGROUND_SIZE')
+        return result

@@ -92,16 +92,47 @@
         if(selection.historicalSource)el('p',`Origine storica dichiarata: ${selection.historicalSource.provenance}. Sessioni non importate; nessuna associazione al catalogo.`,card);
         if(intake.state==='WITHDRAWN'){el('p','Richiesta ritirata. Piano ed evidenze conservati; nessuna elaborazione autorizzata da questa richiesta.',card);continue;}
         if(selection.sourceProfile)el('p',`Master: ${selection.sourceProfile.mode} · ${selection.sourceProfile.layout==='PANELS'?'pannelli da unire':'campo singolo'} · oggetto ${intake.target || ''}.`,card);
-        if(selection.adaptivePlanning){
+        const upstreamRequired=selection.sourceProfile?.mode==='OSC_CFA' || selection.sourceProfile?.layout==='PANELS';
+        if(selection.adaptivePlanning && (!upstreamRequired || intake.preparationResult)){
           const adaptive=intake.adaptive || {}, proposal=adaptive.plan, cursor=adaptive.cursor;
           const stateLabels={RESERVED:'Analisi prenotata: la richiesta non viene ripetuta automaticamente.',
             AWAITING_EXECUTION:'Piano pronto per la tua conferma.',STOP_FOR_REVIEW:'Analisi da rivedere prima di proseguire.',
             AWAITING_FINAL_VERIFICATION:'Verifica finale del PC in attesa.',READY_FOR_OWNER_REVIEW:'Risultato pronto per la tua valutazione.'};
           el('p',stateLabels[cursor?.state] || 'Il PC deve verificare i master e preparare l’analisi delle immagini.',card);
           if(cursor?.usage)el('p',`Consumo API registrato: ${cursor.usage.input_tokens} token in ingresso, ${cursor.usage.output_tokens} in uscita.${cursor.usageComplete?'':' Consumo dell’ultima richiesta ancora non determinato.'}`,card);
+          if(adaptive.job?.state==='RUNNING')el('p',`Elaborazione sul PC: passaggio ${(cursor?.ordinal || 0)+1}. Originali, checkpoint e History restano separati.`,card);
+          if(adaptive.job?.state==='RECOVERY_REQUIRED')el('p','Il ciclo è fermo per una verifica locale. L’ultima operazione non viene ripetuta automaticamente.',card);
+          if(cursor?.state==='READY_FOR_OWNER_REVIEW' && adaptive.job?.state==='COMPLETED'){
+            const show=el('button','Apri risultato e consegna privata',card);show.type='button';
+            show.addEventListener('click',()=>run(async()=>{
+              const result=await call(`/v1/science/intakes/${selection.requestId}/adaptive-result`);
+              show.disabled=true;
+              const image=el('img','',card);image.alt='Anteprima del risultato nativo PixInsight';
+              image.src='data:image/png;base64,'+result.delivery.previewBase64;
+              el('p','Anteprima di visualizzazione. I file XISF e l’archivio del workflow sono conservati sul tuo PC.',card);
+              result.delivery.artifacts.forEach(item=>el('p',`${item.role}: ${item.localPath}`,card));
+              el('p',`Archivio con sorgenti, checkpoint e History: ${result.delivery.archive.localPath}`,card);
+              if(result.ownerReview){el('p',result.ownerReview.decision==='ACCEPTED_PRIVATELY'?'Risultato accettato in privato.':'Revisione richiesta; la consegna resta conservata.',card);return;}
+              const note=el('textarea','',card);note.setAttribute('aria-label','Nota per la valutazione privata');
+              [['ACCEPTED_PRIVATELY','Accetta risultato in privato'],['REVISION_REQUESTED','Richiedi revisione']].forEach(([decision,label])=>{
+                const review=el('button',label,card);review.type='button';
+                review.addEventListener('click',()=>run(async()=>{
+                  await call(`/v1/science/intakes/${selection.requestId}/adaptive-review`,{
+                    deliverySha256:result.deliverySha256,decision,note:note.value.trim() || 'Valutazione privata dal portale'});
+                  await refresh();message('Valutazione privata registrata sui file esatti.');
+                }));
+              });
+            }));
+          }
           if(proposal){
             el('p',proposal.decision.rationale,card);el('p',`Limiti: ${proposal.decision.limitations}`,card);
             if(proposal.decision.graph){
+              if(adaptive.preparation){
+                const p=adaptive.preparation;
+                el('p',`Preparazione: ${p.mode}; ${p.sampling==='BIN2_AVERAGE'?'media 2×':'campionamento originale'}; ${p.sourceGeometry.join(' × ')} → ${p.workingGeometry.join(' × ')} pixel.`,card);
+                el('p',`Regione di fondo sulla griglia di lavoro: ${p.backgroundROI.join(', ')}. Le misure restano descrittive e non dimostrano da sole che la regione sia cielo vuoto.`,card);
+                el('p',`Canali colore: ${p.rgbMapping.join(' / ')}. ${p.luminance.kind==='RGB_WEIGHTED_PSEUDO_L'?'Luminanza sintetica pesata, non fotometrica.':'Luminanza dal canale '+p.luminance.role+'.'}${p.colorMeaning==='ASSIGNED_PALETTE'?' Palette assegnata, non colori naturali.':''}`,card);
+              }
               const steps=el('ol','',card);
               proposal.decision.graph.steps.forEach(step=>{
                 const parameters=Object.entries(step.parameters).map(([key,value])=>`${parameterLabels[key] || key} ${value}`).join('; ');
@@ -295,7 +326,6 @@
         if(openai && q('pixel-consent')?.checked && options.pixelStatisticsEnabled!==true)throw new Error('Analisi dei pixel non ancora disponibile. Aggiorna la pagina.');
         const image=q('parent').value===''?null:options.images[Number(q('parent').value)];
         const mode=q('mode').value,layout=q('layout').value;
-        if(adaptive && (mode==='OSC_CFA' || layout==='PANELS'))throw new Error('Per l’analisi adattiva servono master già preparati su campo singolo. La preparazione CFA e mosaici resta nel percorso assistito.');
         const additionalDirectories=layout==='PANELS'?q('additional').value.split(/\r?\n/).map(v=>v.trim()).filter(Boolean):[];
         const bayerPattern=mode==='OSC_CFA'?q('bayer').value:null;
         if(mode==='OSC_CFA' && !bayerPattern)throw new Error('Indica lo schema Bayer verificato; non viene dedotto dal nome del file.');

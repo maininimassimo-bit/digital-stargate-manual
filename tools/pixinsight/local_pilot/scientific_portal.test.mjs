@@ -5,11 +5,11 @@ import {readFileSync} from 'node:fs';
 import {webcrypto} from 'node:crypto';
 const source=readFileSync(new URL('../../../docs/javascripts/pixinsight-pilot.js',import.meta.url),'utf8');
 const tick=async()=>{for(let i=0;i<12;i++)await new Promise(resolve=>setTimeout(resolve,3));};
-function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=false,plansReady=false,sourcePlanReady=false,preparationReady=false,completedRevision=false,legacyRevisions=false,openaiEnabled=false,pixelEnabled=false,adaptiveEnabled=false,adaptivePlanReady=false}={}) {
+function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=false,plansReady=false,sourcePlanReady=false,preparationReady=false,completedRevision=false,legacyRevisions=false,openaiEnabled=false,pixelEnabled=false,adaptiveEnabled=false,adaptivePlanReady=false,adaptiveCompleted=false}={}) {
   function node(){return {dataset:{},children:[],callbacks:{},value:'',checked:false,isConnected:true,
     addEventListener(type,callback){this.callbacks[type]=callback;},append(...items){this.children.push(...items);},
     replaceChildren(){this.children=[];},querySelectorAll(){return this.children.flatMap(label=>label.children).filter(x=>x.type==='checkbox'&&x.checked);},
-    click(){this.callbacks.click?.();},remove(){}};}
+    click(){this.callbacks.click?.();},setAttribute(key,value){this[key]=value;},remove(){}};}
   const controls=Object.fromEntries(['planning-mode','openai-option','adaptive-option','openai-consent','pixel-consent','preview-consent','preview-consent-label','openai-consent-label','origin','catalog-label','parent-label','session-fields','historical-fields','historical-target','provenance','historical-attest','message','connect','signin','form','fields','input','directory','prompt','target','mode','layout','bayer','bayer-label','additional','additional-label','plans','parent','title','date','sessions','attest','create','pending','retry','refresh','jobs','review','summary','preview','steps','workflow','correlations','receipt','accept','reject'].map(name=>[name,node()]));
   controls.title.value='M27 test';controls.date.value='2026-10-05';controls.attest.checked=true;
   controls.mode.value='LRGB';controls.layout.value='SINGLE';controls.additional.value='';controls.directory.value='F:\\Astro\\M27\\Master';controls.prompt.value='Dettaglio interno, fondo naturale';
@@ -44,9 +44,13 @@ function harness({lostCreate=false,denied=false,rejected=false,unknownStatus=fal
         if(intake&&sourcePlanReady){intake.sourcePlanSha256='e'.repeat(64);intake.sourcePlan={rationale:'Selezione esplicita',limitations:'Astrometria da verificare',panels:[{panelId:'P1',directory:'F:\\Astro',sessionIds:['SESSION-M27'],masters:{RGB:{filename:'<img src=x>.xisf',imageIndex:0}}},{panelId:'P2',directory:'F:\\Astro',sessionIds:['SESSION-M27'],masters:{RGB:{filename:'Panel2.xisf',imageIndex:0}}}]};}
         if(intake&&preparationReady){intake.preparationPlanSha256='f'.repeat(64);intake.preparationPlan={rationale:'Preparazione CFA verificata',limitations:'Piano finale separato',masters:[{panelId:'P1',role:'CFA',filename:'<img src=x>.xisf',width:1000,height:800,imageIndex:0}],bayerPattern:'RGGB',canvas:null,nativeProcessCount:1,checkpointCount:2};}
         if(intake&&adaptivePlanReady){intake.adaptive ||= {proposalSha256:'7'.repeat(64),plan:{decision:{action:'PROPOSE_GRAPH',rationale:'Confrontare le immagini vere',limitations:'Nessuna accettazione',graph:{steps:[{process:'STRETCH',parameters:{targetBackground:.12}}]}}},cursor:{state:'AWAITING_EXECUTION',usage:{input_tokens:100,output_tokens:20},usageComplete:true},job:{jobId:'PIAI_'+intake.selection.requestId,state:'QUEUED',cancelRequested:false},executionPolicy:null};}
+        if(intake&&adaptiveCompleted){intake.adaptive.cursor.state='READY_FOR_OWNER_REVIEW';intake.adaptive.job.state='COMPLETED';intake.adaptive.executionPolicy={};}
         return {ok:true,json:async()=>({intakes:intake?[intake]:[]})};
       }
       if(url.endsWith('/adaptive-approve')){intake.adaptive.executionPolicy=JSON.parse(options.body);return {ok:true,json:async()=>intake.adaptive};}
+      if(url.endsWith('/adaptive-result'))return {ok:true,json:async()=>({deliverySha256:'6'.repeat(64),ownerReview:intake.ownerReview || null,
+        delivery:{previewBase64:'UE5HX0ZJWFRVUkU=',artifacts:[{role:'RGB',localPath:'F:/private/RGB.xisf'}],archive:{localPath:'F:/private/workflow.zip'}}})};
+      if(url.endsWith('/adaptive-review')){intake.ownerReview=JSON.parse(options.body);return {ok:true,json:async()=>({publication:'NONE'})};}
       if(/\/science\/intakes\/[a-f0-9]+\/approve-sources$/.test(url)){
         assert.equal(JSON.parse(options.body).sourcePlanSha256,intake.sourcePlanSha256);
         intake.sourceSelectionApproved=true;
@@ -279,11 +283,36 @@ test('adaptive native policy approval binds exact proposal and only the next-ste
   assert.equal(h.requests.some(x=>/\/approve$|\/science\/jobs/.test(x.url)&&x.options.method==='POST'),false);
 });
 
-test('disabled adaptive mode and unprepared CFA prevent submission',async()=>{
+test('disabled adaptive mode blocks intake; CFA intake preserves explicit Bayer without native approval',async()=>{
   for(const available of [false,true]){
     const h=harness({adaptiveEnabled:available});await h.login();h.controls['planning-mode'].value='OPENAI_ADAPTIVE';
     for(const name of ['openai-consent','pixel-consent','preview-consent'])h.controls[name].checked=true;
     if(available){h.controls.mode.value='OSC_CFA';h.controls.bayer.value='RGGB';}
-    await h.submit();assert.equal(h.requests.some(x=>x.options.method==='POST'),false);assert.equal(h.stored.size,0);
+    await h.submit();
+    const posts=h.requests.filter(x=>x.options.method==='POST');
+    if(!available){assert.equal(posts.length,0);assert.equal(h.stored.size,0);}
+    else {
+      assert.equal(posts.length,1);assert.match(posts[0].url,/\/science\/intakes$/);
+      const value=JSON.parse(posts[0].options.body);
+      assert.equal(value.sourceProfile.mode,'OSC_CFA');assert.equal(value.sourceProfile.bayerPattern,'RGGB');
+      assert.equal(value.adaptivePlanning.previewTransferConfirmed,true);
+      assert.equal(h.requests.some(x=>x.options.method==='POST' && /adaptive-approve|\/science\/jobs/.test(x.url)),false);
+    }
   }
+});
+test('adaptive delivery remains private and Owner review binds the exact delivery only on click',async()=>{
+  const h=harness({adaptiveEnabled:true,adaptivePlanReady:true,adaptiveCompleted:true});await h.login();
+  h.controls['planning-mode'].value='OPENAI_ADAPTIVE';
+  for(const name of ['openai-consent','pixel-consent','preview-consent'])h.controls[name].checked=true;
+  await h.submit();
+  const card=h.controls.plans.children[0];
+  const show=card.children.find(x=>x.textContent==='Apri risultato e consegna privata');assert.ok(show);
+  assert.equal(h.requests.some(x=>x.url.endsWith('/adaptive-review')),false);
+  show.click();await tick();
+  assert.ok(card.children.some(x=>x.src==='data:image/png;base64,UE5HX0ZJWFRVUkU='));
+  assert.equal(h.requests.some(x=>x.url.endsWith('/adaptive-review')),false);
+  card.children.find(x=>x.textContent==='Accetta risultato in privato').click();await tick();
+  const value=JSON.parse(h.requests.find(x=>x.url.endsWith('/adaptive-review')).options.body);
+  assert.equal(value.deliverySha256,'6'.repeat(64));assert.equal(value.decision,'ACCEPTED_PRIVATELY');
+  assert.equal(h.requests.some(x=>/publish|gallery|api\.openai/.test(x.url)),false);
 });

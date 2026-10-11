@@ -151,11 +151,20 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
             worker = path.startswith("/v1/worker/")
             self.authenticate(worker)
             if scientific:
-                adaptive_match = re.fullmatch(r'/v1/(worker/)?science/intakes/([a-f0-9]{32})/adaptive-(analysis|approve|state)', path)
+                adaptive_match = re.fullmatch(r'/v1/(worker/)?science/intakes/([a-f0-9]{32})/adaptive-(analysis|approve|state|reserve|start|checkpoint|decision|context|final|result|review|halt)', path)
                 if adaptive_match:
                     worker_adaptive, request_id, action = adaptive_match.groups()
                     if worker_adaptive and action == 'analysis' and self.command == 'POST':
                         return self.send(200, scientific.generate_adaptive(request_id, self.body(6291456)))
+                    if worker_adaptive and action in {'reserve','start','checkpoint','decision','final','halt'} and self.command == 'POST':
+                        method = getattr(scientific,'adaptive_' + action)
+                        return self.send(200,method(request_id,self.body(6291456 if action in {'decision','final'} else 262144)))
+                    if worker_adaptive and action=='context' and self.command=='GET':
+                        return self.send(200,scientific.adaptive_context(request_id))
+                    if not worker_adaptive and action=='result' and self.command=='GET':
+                        return self.send(200,scientific.adaptive_result(request_id))
+                    if not worker_adaptive and action=='review' and self.command=='POST':
+                        return self.send(200,scientific.adaptive_review(request_id,self.body()))
                     if not worker_adaptive and action == 'approve' and self.command == 'POST':
                         return self.send(200, scientific.approve_adaptive(request_id, self.body()))
                     if action == 'state' and self.command == 'GET':

@@ -8,7 +8,7 @@ def facts():
         'mask':'NOT_ESTABLISHED'}
 
 def graph():
-    return {'catalog':catalog.VERSION,'catalogSha256':catalog.fingerprint(),'branch':'DIRECT',
+    return {'catalog':catalog.VERSION,'catalogSha256':catalog.fingerprint(),'branch':'DIRECT','workingSampling':'ORIGINAL',
         'steps':[{'process':'STRETCH','parameters':{'targetBackground':.08}},
                  {'process':'MASK_BUILD','parameters':{'maskLow':.1,'maskHigh':.6}},
                  {'process':'LOCAL_CONTRAST','parameters':{'contrastLarge':.2,'contrastSmall':.2}}],
