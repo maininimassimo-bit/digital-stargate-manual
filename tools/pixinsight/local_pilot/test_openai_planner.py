@@ -35,7 +35,7 @@ def pixel_evidence(evidence):
                   'method': 'UNIFORM_CELL_CENTERS_NO_INTERPOLATION', 'median': .5, 'mad': .1,
                   'quantiles': [-.1, .1, .5, .8, 1.1]}}
         value['pixelDiagnostics'].append({'role': master['role'], 'report': {
-            'method': METHOD, 'sourceSha256': 'a' * 64, 'width': master['width'], 'height': master['height'],
+            'method': METHOD, 'sourceSha256': 'a' * 64, 'imageIndex': master['imageIndex'], 'width': master['width'], 'height': master['height'],
             'channels': [row], 'allFinite': True, 'linearity': 'NOT_ESTABLISHED',
             'calibration': 'NOT_ESTABLISHED', 'psf': {'status': 'UNAVAILABLE', 'reason': 'NATIVE_FIT_REQUIRED'},
             'backgroundNoise': {'status': 'UNAVAILABLE', 'reason': 'VALIDATED_BACKGROUND_MASK_REQUIRED'},
@@ -87,7 +87,7 @@ class ProviderTests(unittest.TestCase):
 
     def test_invalid_diagnostics_cannot_inject_strings_or_claim_scientific_evidence(self):
         for mutate in [lambda r: r.update(path='private'), lambda r: r.update(linearity='LINEAR'),
-                       lambda r: r.update(allFinite=False), lambda r: r.update(width=999),
+                       lambda r: r.update(allFinite=False), lambda r: r.update(width=999), lambda r: r.update(imageIndex=1),
                        lambda r: r['channels'][0].update(mean=float('nan')),
                        lambda r: r['channels'][0].update(zeroSamples=800001),
                        lambda r: r['channels'][0]['sampledDistribution'].update(method='instructions')]:

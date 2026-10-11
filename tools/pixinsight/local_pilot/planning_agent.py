@@ -52,9 +52,8 @@ def evidence_for(config, intake, preset):
                 'masters': [{k: r[k] for k in ('role', 'width', 'height', 'imageIndex')} for r in inputs]}
     if intake['selection'].get('openaiPlanning', {}).get('pixelStatisticsConfirmed') is True:
         from .image_analysis import analyze
-        require(all(r['imageIndex'] == 0 for r in inputs), 'ANALYSIS_NATIVE_EXPORT_REQUIRED')
         evidence['pixelDiagnostics'] = [
-            {'role': r['role'], 'report': analyze(Path(r['path']), expected_sha256=r['sha256'])}
+            {'role': r['role'], 'report': analyze(Path(r['path']), expected_sha256=r['sha256'], image_index=r['imageIndex'])}
             for r in inputs]
     return validate_evidence(evidence, intake['target'], profile['mode'])
 

@@ -42,6 +42,25 @@ class AnalysisTests(unittest.TestCase):
         self.assertEqual([r['mean'] for r in rows], [.5, 0, 2])
         self.assertEqual([r['constant'] for r in rows], [False, False, True])
 
+    def test_multi_image_requires_explicit_index_and_measures_selected_attachment(self):
+        header = b'<xisf><Image geometry="2:1:1" sampleFormat="Float32" colorSpace="Gray" location="attachment:4096:8"/><Image geometry="2:1:1" sampleFormat="Float32" colorSpace="Gray" location="attachment:4104:8"/></xisf>'
+        prefix = b'XISF0100' + struct.pack('<II', len(header), 0) + header
+        self.path.write_bytes(prefix + bytes(4096 - len(prefix)) + struct.pack('<4f', -1, 1, 6, 10))
+        digest = hashlib.sha256(self.path.read_bytes()).hexdigest()
+        with self.assertRaisesRegex(ValueError, 'Single output image required'):
+            candidate.analyze(self.path, expected_sha256=digest)
+        result = candidate.analyze(self.path, expected_sha256=digest, image_index=1)
+        self.assertEqual(result['imageIndex'], 1)
+        self.assertEqual(result['channels'][0]['mean'], 8)
+        for invalid in [-1, 2, True]:
+            with self.assertRaisesRegex(ValueError, 'ANALYSIS_IMAGE_INDEX'):
+                candidate.analyze(self.path, expected_sha256=digest, image_index=invalid)
+
+    def test_named_auxiliary_rejection_map_is_not_a_master(self):
+        digest = self.write([0, 1], extra='id="rejection_low"')
+        with self.assertRaisesRegex(ValueError, 'ANALYSIS_AUXILIARY_IMAGE'):
+            candidate.analyze(self.path, expected_sha256=digest, image_index=0)
+
     def test_stream_boundary_moments_and_sparse_sampling(self):
         # 12000x6 crosses the 65536-sample block boundary.
         values = [float(n % 2) for n in range(72000)]

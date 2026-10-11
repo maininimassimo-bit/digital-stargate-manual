@@ -3,13 +3,8 @@ import math
 import re
 
 from .broker import require
-from .image_analysis import METHOD
+from .image_analysis import METHOD, LIMITATIONS
 from . import worker
-
-LIMITATIONS = ['Whole-field variance/MAD are not background noise or SNR.',
-              'Exact zero/one counts are not detector saturation evidence.',
-              'Sampled quantiles do not describe every pixel or prove absence of artifacts.']
-
 
 def number(value):
     return type(value) in (int, float) and math.isfinite(value)
@@ -17,7 +12,7 @@ def number(value):
 
 def validate_reports(rows, masters, recipe):
     require(isinstance(rows, list) and len(rows) == len(masters), 'AI_DIAGNOSTICS_ROLES')
-    report_fields = {'method', 'sourceSha256', 'width', 'height', 'channels', 'allFinite',
+    report_fields = {'method', 'sourceSha256', 'imageIndex', 'width', 'height', 'channels', 'allFinite',
                      'linearity', 'calibration', 'psf', 'backgroundNoise', 'acceptance', 'limitations'}
     channel_fields = {'channelIndex', 'sampleCount', 'minimum', 'maximum', 'mean',
                       'populationVariance', 'zeroSamples', 'oneSamples', 'belowZeroSamples',
@@ -31,7 +26,7 @@ def validate_reports(rows, masters, recipe):
                 re.fullmatch(r'[a-f0-9]{64}', report['sourceSha256']) and
                 type(report['width']) is int and type(report['height']) is int and
                 (report['width'], report['height']) == (master['width'], master['height']) and
-                master['imageIndex'] == 0 and report['allFinite'] is True and
+                type(report['imageIndex']) is int and report['imageIndex'] == master['imageIndex'] and report['allFinite'] is True and
                 report['linearity'] == report['calibration'] == 'NOT_ESTABLISHED' and
                 report['psf'] == {'status': 'UNAVAILABLE', 'reason': 'NATIVE_FIT_REQUIRED'} and
                 report['backgroundNoise'] == {'status': 'UNAVAILABLE', 'reason': 'VALIDATED_BACKGROUND_MASK_REQUIRED'} and
