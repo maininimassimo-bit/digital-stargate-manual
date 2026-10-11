@@ -183,6 +183,15 @@ class AdaptiveWorker:
         if held.get('jobId')!=context['job']['jobId']:return
         ordinal=context['cursor']['ordinal']
         if not ordinal:return
+        current=session/('segment-'+str(ordinal))/'binding.json'
+        if current.exists():
+            binding=read(safe_path(current,current.parent))
+            if binding.get('permitSha256')==held.get('permitSha256'):
+                require(binding['jobId']==held['jobId'] and binding['permit']['ordinal']==ordinal and
+                        context['cursor']['state']=='AWAITING_EXECUTION','ADAPTIVE_CURRENT_LEASE_BINDING')
+                # The current attempt has not advanced the backend yet. Its
+                # native receipt is reconciled by the normal recovery branch.
+                return
         previous=session/('segment-'+str(ordinal-1))
         binding=read(safe_path(previous/'binding.json',previous))
         require(binding['jobId']==held['jobId'] and binding['permit']['ordinal']==ordinal-1 and
