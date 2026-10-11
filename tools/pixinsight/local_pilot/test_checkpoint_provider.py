@@ -87,8 +87,8 @@ class CheckpointProviderTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'ALREADY_ATTEMPTED'):provider.generate_checkpoint(*args,**CONSENTS)
         self.assertEqual(len(calls),1)
     def test_completion_is_owner_review_and_not_scientific_acceptance(self):
-        args=inputs();args[1]['completedSteps']=3;args[1]['currentProvenance']['mask']='VERIFIED'
-        args[0]['request']['ordinal']=3;args[0]['request']['evidenceSha256']=sha(args[1])
+        args=inputs();args[1]['completedSteps']=4;args[1]['currentProvenance']['mask']='VERIFIED'
+        args[0]['request']['ordinal']=4;args[0]['request']['evidenceSha256']=sha(args[1])
         provider=CheckpointProvider('mock','gpt-6-luna',send=lambda payload:response(decision('COMPLETE_FOR_REVIEW')))
         value,_=provider.generate_checkpoint(*args,**CONSENTS)
         self.assertEqual(value['action'],'COMPLETE_FOR_REVIEW');self.assertIsNone(value['nextStep'])

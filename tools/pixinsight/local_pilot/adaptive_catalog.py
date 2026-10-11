@@ -47,6 +47,7 @@ def fingerprint():
                 'maskPlanning': 'MASK_BUILD_CONDITIONAL_NATIVE_VERIFICATION_BEFORE_LOCAL_CONTRAST',
                 'checkpointScope': 'NEXT_STEP_PARAMETERS_ONLY',
                 'workingSampling': ['ORIGINAL', 'BIN2_AVERAGE'],
+                'lrgbNonlinearCompletion':'COMBINE_REQUIRED_AFTER_STRETCH',
                 'branches': {'DIRECT': {'forbidden': ['SEPARATE', 'RECOMBINE']},
                              'STARLESS': {'required': ['SEPARATE', 'STRETCH', 'RECOMBINE']}},
                 'parameters': {key: {p: [lo, hi, kind.__name__] for p, (lo, hi, kind) in bounds.items()}
@@ -112,6 +113,8 @@ def validate_graph(value, mode, facts):
                 ids.index('SEPARATE') < ids.index('STRETCH'), 'ADAPTIVE_STARLESS_DEPENDENCIES')
     else:
         require('SEPARATE' not in ids and 'RECOMBINE' not in ids, 'ADAPTIVE_DIRECT_DEPENDENCIES')
+    require(mode != 'LRGB' or 'STRETCH' not in ids or 'COMBINE' in ids,
+            'ADAPTIVE_LRGB_NONLINEAR_COMBINATION_REQUIRED')
     # Canonical JSON also rejects NaN/Infinity. This graph is still not a receipt.
     encode(value)
     return copy.deepcopy(value)

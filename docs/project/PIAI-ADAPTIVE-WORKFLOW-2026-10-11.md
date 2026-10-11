@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-049-EXT-PIAI-ADAPTIVE |
-| Versione | 2.1 |
+| Versione | 2.2 |
 | Stato | Backend adattivo e worker di analisi attivi; OAT astronomico con provider in corso |
 | Data | 2026-10-11 |
 
@@ -12,6 +12,14 @@ Owner autorizza analisi delle immagini, verifica dei risultati intermedi e scelt
 ## Stato implementato e residui
 
 ### Attivazione coordinata — 11 ottobre 2026
+
+PR571 integrata (`6cc459d844d1d84be00ebeb88ac2270664da8f64`), head `d38a8e834b83fa6d85b1a0632406f05386114d77`, ARB poi RQ APPROVED zero finding, nove check PR e otto workflow post-merge SUCCESS, Pages comprese. Il backend attivo è ora `dsg-pixinsight-pilot-adaptive-rules-20261011`, digest `sha256:9c67e1078944bdcb68adec55e3878574cf8a23c44860fc8ce8ae7a4877491826`, build `ac49633b-0389-438b-b8a2-d30503929a66` SUCCESS; modello, quota0, attivazione, autenticazione e secret esistenti conservati. Avviso della pagina aggiornato e verificato pubblicamente.
+
+La seconda richiesta distinta ha conservato un altro STOP, con 5287/677 token, sul rischio di cancellare emissione debole con il fondo. Sono state aggiunte misure native read-only sulle quattro regioni periferiche e sul campo completo, con originali, copie e History invariati e chiusura della sola nuova istanza. Mediane L: 0,007365 / 0,007524 / 0,007496 / 0,007713; intervallo relativo al minimo circa 4,72%. Mediane/MAD e MRS sono descrittivi: non certificano cielo vuoto. Una terza richiesta con nuove evidenze e preferenza per l'omissione di processi opzionali rischiosi ha proposto COLOR, DENOISE 0,3/0,3 e STRETCH 0,06, campionamento originale, 6668/1567 token. Nessun piano è stato approvato o segmento astronomico eseguito.
+
+La verifica tecnica della terza proposta ha rilevato l'assenza della fusione LRGB. Il nuovo candidato rende obbligatorio `COMBINE` dopo `STRETCH` per un grafo LRGB non lineare e include tale dipendenza nel fingerprint del catalogo e nella proiezione al provider. Il controller elabora RGB e L separatamente: due artefatti stirati non costituiscono ancora un'immagine LRGB. La fusione deve essere un passaggio nativo approvato, registrato e verificato, prima dell'eventuale RECOMBINE. Il candidato non modifica l'ordine o la factory nativa, non inserisce processi dopo un'approvazione e non riutilizza l'approvazione V1. La proposta incompleta resta conservata e richiede una nuova analisi con il catalogo corretto.
+
+Il worker con analisi multi-regione ha superato il ciclo singolo senza avvio nativo. Un riavvio in background è stato rifiutato dal controllo automatico senza motivazione specifica; il coordinatore adattivo è attualmente eseguito a cicli singoli. Il precedente planner V1 resta separato. L'OAT astronomico, l'esatto nuovo grafo e l'avvio supervisionato sono ancora da completare.
 
 PR [#570](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/570) integrata nel merge `af51880b2d73f26c22e09f5648cbddf8896e1ac1`, head `04061a091f2434f20c88c1024aef5da94db0e1ed`: ARB poi RQ indipendenti APPROVED, zero finding; nove check PR SUCCESS, compresi Linux e Windows. Il test del catalogo isola il guard dei percorsi temporanei, senza indebolire il guard del prodotto. Suite locali: 290 Python, 106 Node e MkDocs strict PASS; gli 11 test worker interessati sono stati ripetuti dopo la correzione. I nove workflow post-merge di PR569 sono SUCCESS; quelli di PR570 sono verificati separatamente.
 

@@ -11,7 +11,8 @@ def graph():
     return {'catalog':catalog.VERSION,'catalogSha256':catalog.fingerprint(),'branch':'DIRECT','workingSampling':'ORIGINAL',
         'steps':[{'process':'STRETCH','parameters':{'targetBackground':.08}},
                  {'process':'MASK_BUILD','parameters':{'maskLow':.1,'maskHigh':.6}},
-                 {'process':'LOCAL_CONTRAST','parameters':{'contrastLarge':.2,'contrastSmall':.2}}],
+                 {'process':'LOCAL_CONTRAST','parameters':{'contrastLarge':.2,'contrastSmall':.2}},
+                 {'process':'COMBINE','parameters':{}}],
         'rationale':'Proteggere il fondo dopo lo stretch','limitations':'Verificare realmente la maschera'}
 
 def decision(action='CONTINUE',step=None):
@@ -45,8 +46,8 @@ class CheckpointControlTests(unittest.TestCase):
     def test_completion_requires_full_prefix_and_runtime(self):
         current={**facts(),'domain':'NONLINEAR_ATTESTED','mask':'VERIFIED'}
         value=decision('COMPLETE_FOR_REVIEW')
-        catalog.validate_next_decision(value,'c'*64,graph(),'LRGB',facts(),current,3)
-        for completed,modified in ((2,current),(3,{**current,'runtime':'NOT_ESTABLISHED'}),(3,facts())):
+        catalog.validate_next_decision(value,'c'*64,graph(),'LRGB',facts(),current,4)
+        for completed,modified in ((3,current),(4,{**current,'runtime':'NOT_ESTABLISHED'}),(4,facts())):
             with self.subTest(completed=completed),self.assertRaises(ValueError):
                 catalog.validate_next_decision(value,'c'*64,graph(),'LRGB',facts(),modified,completed)
     def test_unknown_domain_can_stop_but_cannot_continue(self):

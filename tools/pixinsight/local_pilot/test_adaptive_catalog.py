@@ -16,7 +16,8 @@ def graph():
     return {'catalog': VERSION, 'catalogSha256': fingerprint(), 'branch': 'DIRECT', 'workingSampling':'ORIGINAL',
             'steps': [{'process': 'DECONVOLVE', 'parameters': {'sharpenL': .18, 'sharpenRGB': .08}},
                       {'process': 'DENOISE', 'parameters': {'denoiseL': .4, 'denoiseRGB': .3}},
-                      {'process': 'STRETCH', 'parameters': {'targetBackground': .08}}],
+                      {'process': 'STRETCH', 'parameters': {'targetBackground': .08}},
+                      {'process': 'COMBINE', 'parameters': {}}],
             'rationale': 'Ipotesi da confrontare sui checkpoint.',
             'limitations': 'La resa non dimostra recupero di dettaglio reale.'}
 
@@ -33,7 +34,13 @@ class CatalogTests(unittest.TestCase):
             self.assertEqual(validate_graph(starless, mode, facts()), starless)
         detached = validate_graph(direct, 'LRGB', facts())
         detached['steps'].clear()
-        self.assertEqual(len(direct['steps']), 3)
+        self.assertEqual(len(direct['steps']), 4)
+
+    def test_nonlinear_lrgb_cannot_finish_with_separate_rgb_and_l_tracks(self):
+        value=graph();value['steps'].pop()
+        with self.assertRaisesRegex(ProtocolError,'LRGB_NONLINEAR_COMBINATION_REQUIRED'):
+            validate_graph(value,'LRGB',facts())
+        self.assertEqual(validate_graph(value,'OSC',facts()),value)
 
     def test_whole_field_statistics_cannot_attest_linearity_or_psf(self):
         for key, missing in [('domain', 'NOT_ESTABLISHED'), ('domain', 'NONLINEAR_ATTESTED'),
@@ -58,7 +65,7 @@ class CatalogTests(unittest.TestCase):
 
     def test_native_masked_stretch_requires_a_verified_background_region(self):
         value = graph()
-        value['steps'] = [value['steps'][-1]]
+        value['steps'] = [value['steps'][-2]]
         unknown = facts()
         unknown['backgroundROI'] = 'NOT_ESTABLISHED'
         with self.assertRaisesRegex(ProtocolError, 'BACKGROUND_REQUIRED'):
@@ -89,7 +96,7 @@ class CatalogTests(unittest.TestCase):
             with self.assertRaisesRegex(ProtocolError, 'PALETTE'):
                 validate_graph(color, mode, facts())
         contrast = graph()
-        contrast['steps'].append({'process': 'LOCAL_CONTRAST', 'parameters': {'contrastLarge': .2, 'contrastSmall': .1}})
+        contrast['steps'].insert(-1, {'process': 'LOCAL_CONTRAST', 'parameters': {'contrastLarge': .2, 'contrastSmall': .1}})
         missing = facts()
         missing['mask'] = 'NOT_ESTABLISHED'
         with self.assertRaisesRegex(ProtocolError, 'MASK'):

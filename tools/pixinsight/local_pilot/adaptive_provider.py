@@ -120,6 +120,7 @@ class AdaptiveProvider(OpenAIPlanner):
             'processPrerequisites':{
                 'domainRules':catalog.DOMAIN_RULES,'factRules':catalog.FACT_RULES,
                 'commonFacts':['registration','runtime'],
+                'lrgbNonlinearCompletion':'If LRGB includes STRETCH, COMBINE is mandatory after it: the native executor processes RGB and L separately, and COMBINE actually inserts the L channel into RGB with native LRGBCombination. A stretched RGB plus a separate L artifact is not a completed LRGB result.',
                 'backgroundROIMeaning':'Verified operational region for robust background estimation; not a certificate of empty sky or absence of faint emission.',
                 'stellarPSFMeaning':'Verified selected native stellar fits; not seeing, optical transfer or resolution certification.',
                 'colorMeaning':'Empirical native ColorCalibration using the verified operational background ROI and native white-reference selection; no photometric calibration prerequisite and no photometric flux claim.',
