@@ -37,6 +37,31 @@ class AdaptiveWorkerTests(unittest.TestCase):
         self.assertFalse(result['supervisedNativeLaunchEnabled'])
         self.transport.post.assert_not_called()
 
+    def test_initial_catalog_reuses_verified_setup_for_new_intakes_without_inventing_consents(self):
+        profile={'mode':'LRGB','layout':'SINGLE','bayerPattern':None,'panels':[],'additionalDirectories':[]}
+        setup={'fixture':'bound native analysis'}
+        entry={'masterDirectory':str(self.root),'mode':'LRGB','layout':'SINGLE','analysis':setup}
+        self.settings['initialAnalysisCatalog']=[entry]
+        for request_id in ('a'*32,'b'*32):
+            intake={'selection':{'requestId':request_id,'masterDirectory':str(self.root),'sourceProfile':profile}}
+            self.assertEqual(self.runner.initial_analysis(intake),setup)
+            self.assertNotIn('adaptivePlanning',intake['selection'])
+        other=self.root/'other';other.mkdir()
+        intake['selection']['masterDirectory']=str(other)
+        self.assertIsNone(self.runner.initial_analysis(intake))
+        intake['selection']['masterDirectory']=str(self.root)
+        intake['selection']['sourceProfile']={**profile,'mode':'SHO'}
+        self.assertIsNone(self.runner.initial_analysis(intake))
+        self.transport.post.assert_not_called()
+
+    def test_duplicate_initial_catalog_entries_cannot_choose_an_arbitrary_analysis(self):
+        entry={'masterDirectory':str(self.root),'mode':'LRGB','layout':'SINGLE','analysis':{'fixture':'native'}}
+        self.settings['initialAnalysisCatalog']=[entry,entry]
+        intake={'selection':{'requestId':'a'*32,'masterDirectory':str(self.root),'sourceProfile':
+            {'mode':'LRGB','layout':'SINGLE','bayerPattern':None,'panels':[],'additionalDirectories':[]}}}
+        with self.assertRaises(ValueError):self.runner.initial_analysis(intake)
+        self.transport.post.assert_not_called()
+
     def test_close_lease_requires_exact_cleanup_receipt_and_owned_identity(self):
         attempt=self.runner.directory/'attempt';attempt.mkdir()
         binding={'jobId':'PIAI_'+'a'*32,'permitSha256':'b'*64}
