@@ -13,6 +13,7 @@ function DSGAdaptiveExecute(m) {
    need(hash(m.startAcknowledgement)===m.startAcknowledgementSha256 && ack.executeAllowed===true &&
         ack.ordinal===m.permit.ordinal,'Acknowledged single-use native start required');
    var owned=[],events=[],tracks={},sources={},intermediates={},parent=[],current=[],lease=new File;
+   function owns(window) {return owned.some(function(w){return !w.isNull && w.mainView.id===window.mainView.id;});}
    function guard() {
       var core={major:CoreApplication.versionMajor,minor:CoreApplication.versionMinor,
          release:CoreApplication.versionRelease,revision:CoreApplication.versionRevision,build:CoreApplication.versionBuild};
@@ -59,7 +60,7 @@ function DSGAdaptiveExecute(m) {
       try {need(process.executeOn(w.mainView)===true,'Native process failed');}
       finally {
          ImageWindow.windows.forEach(function(window){
-            if(existing.indexOf(window.mainView.id)<0 && owned.indexOf(window)<0) {
+            if(existing.indexOf(window.mainView.id)<0 && !owns(window)) {
                owned.push(window);intermediates['UNASSIGNED_NATIVE_'+owned.length]=window;
             }
          });
@@ -139,8 +140,10 @@ function DSGAdaptiveExecute(m) {
             return out;
          },
          secondary:function(w,role){
-            if(owned.indexOf(w)<0)owned.push(w);
-            Object.keys(intermediates).forEach(function(key){if(intermediates[key]===w)delete intermediates[key];});
+            if(!owns(w))owned.push(w);
+            Object.keys(intermediates).forEach(function(key){
+               if(intermediates[key].mainView.id===w.mainView.id)delete intermediates[key];
+            });
             events.push({kind:'secondary',role:role,target:w.mainView.id});}});
       current=snapshot('current');
       var intermediateArtifacts=Object.keys(intermediates).map(function(role){return save(intermediates[role],role,'intermediate');});
