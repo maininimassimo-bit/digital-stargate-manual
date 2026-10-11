@@ -1,5 +1,9 @@
 # Digital StarGate AI Bootstrap
 
+## PixInsight — OAT astronomico supervisionato e guard candidato
+
+PR573 integrata272c09fe, nove check PR/otto post-merge SUCCESS, backend adaptive-diag100%, riferimento2.3HTTP200. Owner ha autorizzato una nuova richiesta distinta dopo il tentativo indeterminato e poi il piano esatto COLOR/STRETCH0,06/COMBINE su master M27 originali. Tre segmenti nativi PHYSICALLY_VERIFIED, originali conservati; primi due controlli API CONTINUE senza cambio parametri. Timeout1800s aggiunto alla configurazione privata dopo il primo avvio, riconciliato senza rilancio. Candidato impedisce l'avvio supervisionato senza timeout valido e mantiene curva identità per l'anteprima finale non lineare. [Stato v2.4](docs/project/PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md). Restano ultimo controllo API, consegna/archivio privati e valutazione Owner; nessuna accettazione scientifica. I paragrafi seguenti sono snapshot storici.
+
 ## PixInsight — catalogo LRGB attivo, diagnostica candidata
 
 PR572 integrata (merge `0678a9c2814e96e213438a6fea81e7ebdf19871c`), ARB poi RQ zero finding, nove check PR e otto post-merge SUCCESS, 291 Python/MkDocs strict PASS. Backend adaptive-lrgb a traffico100%, worker head796d8f52 con impostazioni e byte nativi preservati. Quarta richiesta distinta RESERVED senza piano validato; consumo indeterminato, nessun retry o esecuzione nativa. Candidato registra soltanto categorie fisse della fase/ragione/stato dell'errore, senza payload privati e senza recupero retroattivo. [Stato v2.3](docs/project/PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md). Restano diagnosi, proposta valida e OAT astronomico supervisionato. I paragrafi seguenti sono snapshot storici.

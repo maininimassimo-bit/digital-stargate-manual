@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-049-EXT-PIAI-ADAPTIVE |
-| Versione | 2.3 |
+| Versione | 2.4 |
 | Stato | Backend adattivo e worker di analisi attivi; OAT astronomico con provider in corso |
 | Data | 2026-10-11 |
 
@@ -12,6 +12,14 @@ Owner autorizza analisi delle immagini, verifica dei risultati intermedi e scelt
 ## Stato implementato e residui
 
 ### Attivazione coordinata — 11 ottobre 2026
+
+PR573 integrata (`272c09fe16a471d3989eb97960016c8e02bbe3f1`), head `4fe7d09fc6a351c53abfb1573c2fd44da23dd96f`: ARB poi RQ APPROVED zero finding, nove check PR e otto post-merge SUCCESS, Pages comprese. Build `6be7ed82-5bb7-4837-af5e-0beee7de46c4` SUCCESS, digest `sha256:f1a36c668d708a355a2ca0ebc579c0c638f856594129ca5a3f2247f7c48a46af`; revisione `dsg-pixinsight-pilot-adaptive-diag-20261011` Ready/health200 e traffico100%. Riferimento v2.3 HTTP200 verificato.
+
+Owner ha autorizzato una quinta richiesta distinta dopo il quarto tentativo indeterminato e ha poi approvato espressamente il nuovo piano e l'esecuzione supervisionata. Il piano valido usa campionamento originale 4634×2808 e tre passaggi COLOR, STRETCH con targetBackground0,06, COMBINE; omette fondo, deconvoluzione, denoise, separazione stellare e contrasto locale perché non sufficientemente giustificati. Consumo iniziale6725/1536 token. Tre segmenti astronomici nativi sono PHYSICALLY_VERIFIED: originali invariati, copie e History separate, ricevute OWNED_VIEWS_CLOSED. Il primo avvio ha evidenziato l'assenza del timeout nel wrapper privato: parametro1800s aggiunto, lo stesso tentativo completato e riconciliato senza rilancio, quindi chiusa soltanto l'istanza posseduta. Nessuna modifica dei pixel o dell'ordine per recuperare l'errore.
+
+Il controllo API dopo COLOR ha dato CONTINUE verso STRETCH0,06 (4828/741 token); dopo STRETCH ha dato CONTINUE verso COMBINE (4744/821 token), senza adattamenti dei parametri. I confronti RGB usano curve condivise; il cambio di dominio è esplicito. La calibrazione empirica ha ridotto la dominante blu visibile, ma nessun display attesta fedeltà cromatica, SNR o risoluzione. L'ultimo controllo API e la consegna privata devono ancora essere completati; nessuna accettazione scientifica è registrata.
+
+Il candidato valida `nativeTimeoutSeconds` intero30–7200 prima di ammettere un worker supervisionato e di avviare un processo, così un parametro assente non può lasciare un processo appena avviato senza monitoraggio. L'anteprima finale di un risultato NONLINEAR_ATTESTED usa una curva identità; soltanto un artefatto lineare usa lo stretch derivato per la visualizzazione. Nessun secondo stretch viene applicato ai dati XISF. Le prove verificano rifiuto prima di Popen, divieto di rilancio e preservazione dei toni nativi e dei campioni. Gli stati successivi sono snapshot storici.
 
 PR572 integrata (`0678a9c2814e96e213438a6fea81e7ebdf19871c`), head `796d8f52e710edf45981eb784174c469c6d541e7`: ARB poi RQ APPROVED zero finding, nove check PR e otto workflow post-merge SUCCESS. Il controllo Windows post-merge è stato ripetuto sullo stesso SHA dopo un'interruzione loopback WinError10053. Suite completa 291 Python e MkDocs strict PASS; Pages e riferimento v2.2 HTTP200. Build `aabab7dd-b918-4b2e-b7f4-8d1129a2ee86` SUCCESS, digest `sha256:af123065c9da6fdb208f3decae88045d13d54342ef2da30238b5e59f60a88cff`; revisione `dsg-pixinsight-pilot-adaptive-lrgb-20261011` Ready, health200 e traffico100%. Worker privato sullo stesso head con byte nativi collaudati e impostazioni multi-regione preservati; ciclo singolo senza avvio nativo verificato.
 

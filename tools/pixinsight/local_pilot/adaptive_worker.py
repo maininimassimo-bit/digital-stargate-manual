@@ -70,6 +70,13 @@ def comparison(context, result):
     return {'evidence':evidence,'bindings':result['bindings'],'assetsBase64':assets}
 
 
+def final_preview(data,domain,median):
+    """Display a native nonlinear result without applying another stretch."""
+    require(domain in ('LINEAR_ATTESTED','NONLINEAR_ATTESTED'),'ADAPTIVE_FINAL_DISPLAY_DOMAIN')
+    display=curve(.5,.5) if domain=='NONLINEAR_ATTESTED' else curve(median)
+    return render(data,display)
+
+
 class AdaptiveWorker:
     def __init__(self, config, settings, transport, *, execute_approved=False):
         self.config,self.settings,self.transport=config,settings,transport
@@ -89,6 +96,12 @@ class AdaptiveWorker:
             worker.write_new(identity,value)
         self.root_id=read(identity)['rootId']
         self.execute_approved=execute_approved
+        if execute_approved:self.native_timeout()
+
+    def native_timeout(self):
+        timeout=self.settings.get('nativeTimeoutSeconds')
+        require(type(timeout) is int and 30<=timeout<=7200,'ADAPTIVE_NATIVE_TIMEOUT_REQUIRED')
+        return timeout
 
     def route(self,request_id,action):
         return '/v1/worker/science/intakes/'+request_id+'/adaptive-'+action
@@ -123,6 +136,7 @@ class AdaptiveWorker:
     def run_native(self, request_id, attempt, binding):
         """One exact prepared launcher. Never replay an ambiguous local launch."""
         require(self.execute_approved,'ADAPTIVE_SUPERVISED_LAUNCH_REQUIRED')
+        timeout=self.native_timeout()
         require(fingerprint(attempt/'manifest.json')==binding['manifestSha256'] and
                 fingerprint(attempt/'run.js')==binding['launcherSha256'],'ADAPTIVE_LAUNCH_BINDING')
         marker=attempt/'launch.json'
@@ -139,7 +153,7 @@ class AdaptiveWorker:
         with (attempt/'stdout.log').open('xb') as stdout,(attempt/'stderr.log').open('xb') as stderr:
             process=subprocess.Popen(args,stdout=stdout,stderr=stderr,startupinfo=startup)
             worker.write_new(attempt/'process.json',{'pid':process.pid,'executable':str(executable),'args':args})
-            deadline=time.monotonic()+self.settings['nativeTimeoutSeconds']
+            deadline=time.monotonic()+timeout
             while not (attempt/'native-done.json').exists():
                 if process.poll() is not None:break
                 if time.monotonic()>deadline:
@@ -370,8 +384,8 @@ class AdaptiveWorker:
         rgb=next(r for r in result['currentArtifacts'] if r['role']=='RGB')
         parent_l=next(r for r in result['currentArtifacts'] if r['role']=='L')
         import numpy as np
-        data=pixels(Path(parent_l['path']),parent_l['sha256']);display=curve(float(np.median(data[::8,::8])));del data
-        data=pixels(Path(rgb['path']),rgb['sha256']);raw,png=render(data,display);del data
+        data=pixels(Path(parent_l['path']),parent_l['sha256']);median=float(np.median(data[::8,::8]));del data
+        data=pixels(Path(rgb['path']),rgb['sha256']);raw,png=final_preview(data,v['currentProvenance']['domain'],median);del data
         body={'verification':{'outputs':v['outputs'],'historySha256':v['historySha256'],
                               'sourceGuard':v['sourceGuard'],'status':'FINAL_FILES_REVERIFIED'},
               'delivery':{'version':'DSG_PIAI_ADAPTIVE_PRIVATE_DELIVERY_V2',
