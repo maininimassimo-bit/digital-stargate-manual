@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-049-EXT-PIAI-ADAPTIVE |
-| Versione | 1.3 |
+| Versione | 1.4 |
 | Stato | Owner-authorized / In Progress; statistiche master abilitate sul backend, ciclo adattivo non operativo |
 | Data | 2026-10-11 |
 
@@ -39,7 +39,9 @@ Tutti i 14 workflow applicabili sul merge effettivo SUCCESS, incluse prove Windo
 
 Quindici prove offline PASS su concorrenza, crash, doppia ripresa, sostituzione di binding, dati non finiti, dipendenze e incertezze, incluso il rifiuto del denoise con dominio non attestato. Questi moduli non sono collegati a endpoint, provider, worker o esecutore attivi. Il broker V1 non ammette `OPENAI_API_ADAPTIVE`: non costituiscono attivazione V2, validazione di adapter scientifici, OAT o chiusura dei residui.
 
-### Misure native candidate: rumore e profili stellari
+### Misure native integrate, non collegate al ciclo: rumore e profili stellari
+
+PR [#563](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/563), head `07809d1f8a8996de7d308050d750a44dd67bfcf5`, merge `f4a864da0f69207a8e2d88fc77377bff861c1f9d`: ARB poi RQ indipendenti APPROVED, zero finding; nove check PR SUCCESS, main allineato e merge protetto. 296 test Python PASS, con due skip già previsti, 88 Node PASS e MkDocs strict PASS. Tutti gli otto workflow applicabili sul merge SUCCESS, Pages incluse; pagina pubblica verificata. [Ricevuta dei gate](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/563#issuecomment-6107867825). Nessuna attivazione di un nuovo endpoint o dispatch.
 
 `measurements.jsh` usa API locali documentate nell'installazione PixInsight: `Image.noiseMRS`, StarDetector V2 e DynamicPSF. Lavora sulla vista della copia selezionata, senza processi di trasformazione dei pixel, salvataggio del master o rete. Regioni dichiarate in coordinate intere, massimo otto; selezioni ripristinate anche in caso di errore. StarDetector opera sul campo completo, selezionando deterministicamente la sorgente isolata più luminosa per cella di una griglia 16×16, massimo 256 candidati. I fit gaussiani sono registrati separatamente per canale, compresi background, ampiezza, centro, assi, angolo e residuo. Fit mancanti restano mancanti; non sono sostituiti con una PSF ipotetica.
 
@@ -53,6 +55,24 @@ Prova privata read-only sul master L M27, indice 0, 4634×2808 mono, PixInsight 
 
 Riferimenti primari consultati: documentazione PJSR locale `Image/Image.html`, `PSF/PSF.html` e `StarDetector/StarDetector.html`, header `StarDetector.jsh` V2.01 rilasciato il 15/09/2026 e script nativo `FWHMEccentricity.js`. Le dipendenze e i moduli/modelli effettivamente caricati devono essere attestati nel futuro manifest runtime completo: il solo hash dell'header StarDetector non certifica tutte le sue dipendenze o un modello ML.
 
+### Provenienza candidata: History e relazione di autocrop
+
+`source_provenance.py` legge la proprietà nativa `PixInsight:ProcessingHistory` della sola immagine XISF esplicitamente selezionata. Conserva hash della proprietà e nomi dei processi registrati, senza eseguire né importare le istanze. Una History di DrizzleIntegration non contiene necessariamente calibrazione e allineamento dei suoi input: la copertura è `RECORDED_VIEW_OPERATIONS_ONLY`, upstream, dominio, registrazione e accettazione restano non stabiliti.
+
+La relazione di autocrop è verificata su tutti i byte dei pixel selezionati, canale per canale, rispetto a un genitore indicato esplicitamente e verificato con SHA256. La regione proviene dal record `WBPPCROP`, controllato contro le geometrie reali; nessuna interpolazione, normalizzazione o approssimazione tollerata. La History del figlio deve coincidere con quella del genitore. Questa prova stabilisce una relazione fra file, senza attribuire un dominio lineare ai dati che precedono il crop.
+
+Il confronto con un contenitore XPSM verifica gli input e ogni campo che modifica i pixel del processo DrizzleIntegration. Differenze nelle sole opzioni di interfaccia sono esposte; campi nuovi, incompleti o corrispondenze ambigue sono rifiutati. Il contenitore salvato documenta impostazioni, non una ricevuta di esecuzione. I log WBPP e i file di calibrazione/registrazione referenziati richiedono ulteriori riconciliazioni prima di promuovere una precondizione scientifica.
+
+Letture read-only, hash prima/dopo, XML senza DTD/entità, massimo 16 immagini e indice obbligatorio; header limitato a 4 MiB, allineato all'inventario sorgenti, contenitore a 16 MiB. La prova dei pixel supporta esclusivamente Float32 non compresso planare little-endian, con attachment delimitato e geometria/canali verificati. Nessuna enumerazione di directory, rete, ricerca automatica di genitori o fallback silenzioso. Il limite separato di 1 MiB della diagnostica V1 attiva rimane invariato.
+
+Dieci test sintetici PASS. Riconciliazione privata reale dei quattro master M27 R/G/B/L: pixel di ciascun crop byte-identici al rispettivo genitore 5504×4320, regione `(456,656)–(5090,3464)`, risultato 4634×2808. Input e 25 campi del contenitore DrizzleIntegration corrispondono univocamente, con la sola differenza `showImages` dichiarata. I file sono rimasti invariati. Il primo tentativo si era fermato sul parent L con header 1.123.713 byte: rifiuto conservato, reader di provenienza reso compatibile con il limite documentato di 4 MiB e tutte e quattro le prove ripetute; nessuna modifica alla V1 o avvio nativo/API. Rapporti e impronte conservati privatamente.
+
+### Modelli e input visivi: capacità documentate, attivazione separata
+
+La [scheda ufficiale GPT-6 Luna](https://developers.openai.com/api/docs/models/gpt-6-luna) conferma input di immagini e Responses. Il modello richiesto resta `gpt-6-luna`; la capacità documentata non certifica un collaudo multimodale del servizio. La V1 invia ancora soltanto numeri. Anteprime limitate, trasformazioni di visualizzazione dichiarate e consenso distinto devono precedere il collegamento visivo V2; niente immagini prodotte da generatori o pixel da fotografie di riferimento.
+
+La [documentazione della suite RC Astro](https://www.rc-astro.com/unified-pixinsight-rc-astro-suite/) specifica che `ml_version=0` sceglie il modello più recente disponibile; un altro valore numerico seleziona quella versione. Le precedenti ricevute M27 riportano zero, non una versione ML chiamata “0”. Per il nuovo runtime occorrono selezioni esplicite e impronte: sul PC sono stati verificati i file ONNX BlurXTerminator 4, NoiseXTerminator 3.1 e StarXTerminator 11 e la DLL della suite. Probe isolati dei soli costruttori confermano che i valori 4/3.1/11 sono mantenuti; nessun processo sui pixel o caricamento di modelli attestato. File, selezione e modello effettivamente caricato sono evidenze distinte. Nessun aggiornamento o download di modelli eseguito, istanza PixInsight precedente preservata.
+
 Uso locale: `python -m tools.pixinsight.local_pilot.image_analysis --input <export-privato.xisf> --sha256 <sha256-verificato> --output <nuovo-rapporto-privato.json>`. Rapporto con hash da conservare privatamente, output create-only. Nessuna rete, enumerazione cartelle, token o avvio PixInsight.
 
 ### Collegamento delle misure al pianificatore
@@ -65,7 +85,7 @@ Il backend valida ruoli, geometria, canali, finitezza e campionamento; campi/tes
 
 Verifica locale reale dell'11 ottobre: quattro master M27 originali, ciascuno con immagine Float32 principale e immagine ausiliaria UInt8. Analizzato esclusivamente l'indice 0 già selezionato, 4634×2808 mono; tutti i pixel selezionati finiti e hash prima/dopo invariati. Rapporti/hash conservati privatamente; nessuna nuova chiamata API, scrittura sui master o esecuzione nativa. Il primo tentativo single-image era stato rifiutato prima delle misure; non è stato aggirato selezionando un'immagine tacitamente. Non certifica calibrazione, linearità, PSF o qualità.
 
-Questa integrazione motiva i parametri della ricetta V1, senza scegliere ancora un grafo o verificare checkpoint nel ciclo operativo. Nessuna immagine condivisa o chiamata reale aggiuntiva nel collaudo offline; `gpt-6-luna` conservato. Le [API per input visivi](https://developers.openai.com/api/docs/guides/images-vision) distinguono testo e immagini: qui vengono inviati soltanto numeri. Compatibilità visiva del modello scelto non attestata e non necessaria per questo payload testuale.
+Questa integrazione motiva i parametri della ricetta V1, senza scegliere ancora un grafo o verificare checkpoint nel ciclo operativo. Nessuna immagine condivisa o chiamata reale aggiuntiva nel collaudo offline; `gpt-6-luna` conservato. Le [API per input visivi](https://developers.openai.com/api/docs/guides/images-vision) distinguono testo e immagini: qui vengono inviati soltanto numeri. Compatibilità visiva documentata nella scheda del modello; collegamento multimodale V2 non collaudato.
 
 Rollback: disabilitare `DSG_PIAI_PIXEL_STATISTICS`, impedendo nuovi intake con statistiche, e mantenere sorgente aggiornato per terminare quelli già conservati. Non avviare un worker legacy per intake con il nuovo consenso: produrrebbe evidence incompleta e sarebbe rifiutato. Prima di rollback completo verificare assenza di intake statistici pendenti; conservare richieste, risultati e prenotazioni. La quota giornaliera resta 0; il limite tecnico V1 di 16 tentativi non è ancora sostituito dalla ledger adattiva.
 
