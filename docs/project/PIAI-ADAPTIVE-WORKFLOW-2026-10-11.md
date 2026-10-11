@@ -3,13 +3,49 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-049-EXT-PIAI-ADAPTIVE |
-| Versione | 2.4 |
-| Stato | Backend adattivo e worker di analisi attivi; OAT astronomico con provider in corso |
+| Versione | 2.5 |
+| Stato | Ciclo adattivo M27 LRGB tecnicamente completato; worker supervisionato in background; revisione scientifica Owner pendente |
 | Data | 2026-10-11 |
 
 Owner autorizza analisi delle immagini, verifica dei risultati intermedi e scelta del workflow IA dal tipo indicato nel portale. Richiesta successiva: rimozione della quota di una chiamata API al giorno.
 
 ## Stato implementato e residui
+
+### Consegna M27 e servizio dal portale — stato corrente
+
+PR574 integrata nel merge `f8134b0827ba1d2c4b5dd9d788889cd203ee5378`, head `9d077656079102ee6fcef072f9bfc32c630bf4ac`: ARB poi RQ indipendenti APPROVED, zero finding; nove check PR e otto workflow post-merge SUCCESS. I 13 test worker e MkDocs strict sono PASS. Pages v2.4 HTTP200 verificata. Worker privato aggiornato allo stesso head, impostazioni conservate e tre file PJSR con byte nativi collaudati preservati; il binding documenta la sola differenza CRLF/LF rispetto al Git archive. Il backend resta quello PR573 già verificato: questa correzione locale non richiede una nuova distribuzione cloud.
+
+La quinta richiesta M27 ha concluso tre segmenti nativi sulle copie, alla risoluzione originale 4634×2808. L'ultimo controllo API restituisce `COMPLETE_FOR_REVIEW`, non accettazione scientifica. La consegna registra `FINAL_FILES_REVERIFIED`, cursore `READY_FOR_OWNER_REVIEW` e job tecnicamente `COMPLETED`. Originali, ricevute fisiche, History e runtime sono stati riverificati prima della registrazione. Nessuna modifica del grafo dopo l'approvazione e nessuna ripetizione del primo segmento durante il recupero del timeout.
+
+| Fase della quinta richiesta | Decisione / processo | Token ingresso | Token uscita |
+|---|---|---:|---:|
+| Piano iniziale | COLOR → STRETCH 0,06 → COMBINE | 6725 | 1536 |
+| Dopo COLOR | CONTINUE, STRETCH 0,06 invariato | 4828 | 741 |
+| Dopo STRETCH | CONTINUE, COMBINE invariato | 4744 | 821 |
+| Dopo COMBINE | COMPLETE_FOR_REVIEW, nessun prossimo processo | 4694 | 1127 |
+| Totale della richiesta completata | Quattro chiamate registrate, gpt-6-luna | 20991 | 4225 |
+
+Il totale è 25.216 token per questa richiesta, non il costo monetario né il consumo totale di tutti i tentativi. Il quarto tentativo storico mantiene consumo indeterminato: non è stato ritentato e non deve essere interpretato come consumo zero. La quota giornaliera resta 0, cioè senza il precedente limite di una chiamata; restano i limiti tecnici del contratto, inclusi 16 decisioni per sessione.
+
+Prodotto RGB LRGB finale Float32, SHA256 `28125461dd6e1337935b1c1a56609b08666812f0a9df541a230f39c9928308fe`. Luminanza conservata separatamente, SHA256 `fa85a162c8e917ced6aca6f59fec36d85431c99616e8c0b9dd1339fd4bde18b1`. Archivio privato `workflow-native.zip`, 2.349.694.493 byte, SHA256 `cd3e19c987236487fa2a53620c8ebf180024d49cb313b41f248176c0c4454f5f`: CRC verificato, sorgenti, checkpoint, History, contesto approvato e file runtime inclusi. È un archivio di evidenze, non un replay autonomo: licenze PixInsight/RC Astro e adattamento dei percorsi locali restano dipendenze esterne. Non contiene la chiave OpenAI o il token DPAPI. Anteprima finale 512×310, curva identità sul prodotto già non lineare, SHA256 `b57ec833088da84d4a2e42a411b7c027de6b250befa447d74c9e57ef1971adea`; non applica un secondo stretch ai pixel XISF. Copie di consegna e anteprima sono state verificate contro questi hash.
+
+Il portale Owner reale mostra «Risultato pronto per la tua valutazione», il consumo 20991/4225, anteprima e percorsi dei due XISF/archivio, con azioni distinte «Accetta risultato in privato» e «Richiedi revisione». Nessuna delle due è stata eseguita per conto dell'Owner. Nessuna pubblicazione o accettazione scientifica automatica.
+
+Owner ha autorizzato espressamente il nuovo worker in background, con token DPAPI esistente, intervallo di 30 secondi fra cicli e avvio nativo soltanto per un piano esatto confermato nel portale. Avviato nascosto e verificato su più cicli: `supervisedNativeLaunchEnabled=true`, M27 resta pronto per revisione, nessun nuovo avvio PixInsight o retry del tentativo indeterminato; stderr vuoto. Il polling non implica avvio al boot e la durata di un ciclo può superare 30 secondi durante elaborazione/verifiche. Il worker conserva originali e istanza Owner preesistente; la chiave OpenAI rimane sul backend. Il precedente rifiuto automatico di un avvio in background è uno snapshot storico; il nuovo avvio esplicitamente autorizzato è riuscito.
+
+Per i master M27 già verificati il flusso disponibile è: scegli OpenAI con analisi delle immagini, ricetta e obiettivo; conferma i consensi; consulta e conferma il piano esatto; attendi i controlli intermedi e valuta la consegna privata. Non serve inviare la richiesta alla chat. Il catalogo iniziale locale attualmente verificato comprende soltanto questi quattro master M27 LRGB. Una cartella/ricetta nuova non eredita la provenienza: richiede registrazione e analisi locale supervisionata. CFA e mosaici richiedono la loro preparazione approvata. Gli OAT astronomici adattivi SHO/HOO, OSC, CFA e mosaici e il confronto automatico fra rami alternativi non sono dimostrati da questo collaudo LRGB; restano verifiche di copertura da completare su dati pertinenti.
+
+### Decisione scientifica applicata a M27
+
+La ricetta LRGB determina i ruoli dei quattro canali; non impone denoise o deconvoluzione. La decisione usa provenienza WBPP pre-stretch attestata dall'Owner, geometria e autocrop verificati, misure native su quattro regioni periferiche/campo completo, campioni stellari e anteprime con curva dichiarata. Il modello ha proposto una catena minima compatibile con queste evidenze e con l'obiettivo di un finale privato non lineare. Non sono stati esplorati tutti i workflow possibili: «migliore» qui significa scelta motivata entro il catalogo e i vincoli disponibili, non ottimo globale misurato.
+
+COLOR applica una calibrazione cromatica empirica: la riduzione della dominante blu nelle anteprime non dimostra correttezza fotometrica. STRETCH con targetBackground0,06 trasforma esplicitamente il dominio di RGB e L, senza cambiare la griglia. COMBINE fonde poi la luminanza nel colore RGB; due immagini stirate separate non sarebbero da sole una consegna LRGB. Ogni segmento ha History, misure native e confronto genitore/risultato prima del passaggio successivo. Il confronto display usa curve condivise e dichiara il cambio di dominio; una proiezione a 8 bit non equivale ai campioni Float32.
+
+Le mediane delle quattro regioni L variano da 0,007365 a 0,007713 (circa 4,72% rispetto al minimo): questo descrive una variazione spaziale, non identifica un gradiente da rimuovere né prova cielo vuoto. Sottrarre un fondo non validato può eliminare emissione debole, perciò il piano conserva il fondo acquisito. Denoise, deconvoluzione, separazione delle stelle e contrasto locale sono omessi perché le evidenze disponibili non giustificano il relativo rischio. Non si deduce che tali processi sarebbero sempre dannosi o inutili.
+
+MRS stima una componente gaussiana secondo un modello wavelet, con supporto e scala espliciti: non è SNR. FWHM/eccentricità dei fit Gaussiani selezionati descrivono quel campione, non seeing, risoluzione angolare o guadagno di dettaglio; le stelle non sono appaiate fra checkpoint. ROI «VERIFIED» significa verifica operativa e di provenienza, non assenza di nebulosità. SHA, finitezza, runtime e History attestano integrità/esecuzione, non qualità astronomica. I tre CONTINUE/COMPLETE non sostituiscono l'esame al 100% di stelle, aloni, clipping, struttura debole e colore da parte dell'Owner.
+
+### Snapshot precedenti
 
 ### Attivazione coordinata — 11 ottobre 2026
 
@@ -237,7 +273,7 @@ Anteprime e ROI condivise con il provider solo secondo un consenso esplicito coe
 
 ### Metodo tecnico e scientifico di scelta
 
-Il tipo LRGB/OSC/SHO/HOO stabilisce quali canali comporre e quali relazioni conservare. La scelta della sequenza considera invece lo stato dei dati, i trattamenti precedenti, le misure disponibili e l'obiettivo dichiarato. «Migliore» significa una soluzione motivata fra le alternative supportate e confrontabili, con incertezze esplicite; non un massimo universale ottenuto da un voto dell'IA. Il metodo seguente è il target V2, non una capacità già attivata dalla sola integrazione delle statistiche.
+Il tipo LRGB/OSC/SHO/HOO stabilisce quali canali comporre e quali relazioni conservare. La scelta della sequenza considera invece lo stato dei dati, i trattamenti precedenti, le misure disponibili e l'obiettivo dichiarato. «Migliore» significa una soluzione motivata fra le alternative supportate e confrontabili, con incertezze esplicite; non un massimo universale ottenuto da un voto dell'IA. Questi principi governano il ciclo V2; lo stato corrente in apertura distingue quanto verificato sul caso M27 dalle capacità target e dalle ricette ancora prive di OAT astronomico adattivo.
 
 Un modello osservativo semplificato è `I = S ⊗ PSF + B + N`: segnale astronomico convoluto con la risposta del sistema, fondo e rumore. Dai soli valori di `I` non si separano univocamente questi termini. Per questo varianza e MAD sull'intero campo comprendono stelle, nebulosità e gradienti oltre al rumore. Un denoise può ridurre la varianza eliminando anche filamenti; uno sharpening può aumentare le alte frequenze amplificando rumore o ringing. Nessuna di queste variazioni prova da sola dettaglio recuperato.
 
@@ -254,7 +290,7 @@ Un modello osservativo semplificato è `I = S ⊗ PSF + B + N`: segnale astronom
 
 Per BlurXTerminator, il manuale del produttore richiede dati lineari appropriati, sconsiglia il denoise precedente e l'accumulo di deconvoluzioni, e descrive l'uso delle stelle come riferimenti PSF locali. Campi con poche stelle richiedono particolare attenzione alla stima automatica. Queste condizioni motivano il gate del catalogo; non attestano la versione del modello caricata nell'istanza locale. [Manuale tecnico RC Astro](https://www.rc-astro.com/blurxterminator-technical-manual/).
 
-Una prova candidata parte dal medesimo genitore, applica una variazione identificabile su ritagli rappresentativi e mantiene stessi crop, orientazione, maschere e trasformazione di confronto. Le misure hanno metodo, unità, campione e stato di comparabilità. Un confronto non valido resta `NOT_ESTABLISHED`; non viene trasformato in uno zero né in un esito positivo. Solo dopo una scelta motivata si applica il segmento al campo completo e si ricontrollano regioni centrali e bordi.
+Per confrontare automaticamente varianti, una prova candidata deve partire dal medesimo genitore, applicare una variazione identificabile su ritagli rappresentativi e mantenere stessi crop, orientazione, maschere e trasformazione di confronto. Le misure hanno metodo, unità, campione e stato di comparabilità. Un confronto non valido resta `NOT_ESTABLISHED`; non viene trasformato in uno zero né in un esito positivo. Questo confronto fra varianti è un target, non una prova eseguita nel caso M27: il ciclo attuale applica il prossimo segmento approvato al campo completo e ne valuta il checkpoint prima di continuare.
 
 La verifica del checkpoint ha due livelli: controlli deterministici di identità/integrità e valutazione motivata del tradeoff. L'IA espone processo scelto, alternativa scartata, evidence pertinente e incertezze. Una continuazione è permessa solo sul checkpoint esatto verificato; un risultato incerto conserva il ramo e richiede revisione. Non vengono inventate soglie universali o una somma pesata di FWHM, rumore e contrasto. Accettazione scientifica e pubblicazione rimangono eventi Owner distinti.
 
