@@ -92,10 +92,21 @@ class AdaptiveProvider(OpenAIPlanner):
                     preview['role'] in roles,'ADAPTIVE_PREVIEW_FIELDS')
             validate_curve(preview['displayCurve'])
             region=preview['region']
-            require(region is None or isinstance(region,list) and len(region)==4 and all(type(v) is int and v>=0 for v in region),
-                    'ADAPTIVE_PREVIEW_REGION')
+            measured=next(r['report'] for r in numerical if r['role']==preview['role'])
+            width,height=measured['width'],measured['height']
+            if region is None:
+                scale=min(1,512/max(width,height))
+                expected_geometry=[max(1,round(v*scale)) for v in (width,height)]
+            else:
+                require(isinstance(region,list) and len(region)==4 and all(type(v) is int for v in region),
+                        'ADAPTIVE_PREVIEW_REGION')
+                x0,y0,x1,y1=region
+                require(0<=x0<x1<=width and 0<=y0<y1<=height and x1-x0<=256 and y1-y0<=256,
+                        'ADAPTIVE_PREVIEW_REGION')
+                expected_geometry=[x1-x0,y1-y0]
             content.append({'type':'input_text','text':encode({k:v for k,v in preview.items() if k!='sha256'}).decode()})
-            content.append(provider_image(raw,preview['sha256']))
+            content.append(provider_image(raw,preview['sha256'],expected_geometry=expected_geometry,
+                                          expected_channels=measured['channels']))
         projection={'mode':mode,'intent':evidence['intent'],
             'attestedPrerequisites':{k:v for k,v in facts.items() if k not in {'sourceSha256','recordSha256'}},
             'measurements':numerical,'catalog':graph_schema(),

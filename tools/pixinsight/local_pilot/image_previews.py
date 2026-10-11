@@ -57,12 +57,18 @@ def render(samples,display_curve,region=None):
         'resampling':resampling,'encoding':'PNG_UINT8','sha256':hashlib.sha256(raw).hexdigest(),
         'scientificPixelData':False,'acceptance':'NOT_ESTABLISHED'}
 
-def provider_image(raw,expected_sha256):
+def provider_image(raw,expected_sha256,*,expected_geometry=None,expected_channels=None):
     """Re-encode bounded pixels to strip metadata before any provider request."""
     if not isinstance(raw,bytes) or not 0<len(raw)<=1024*1024 or hashlib.sha256(raw).hexdigest()!=expected_sha256:
         raise ValueError('PREVIEW_ASSET_BINDING')
     with Image.open(io.BytesIO(raw)) as im:
         if im.format!='PNG' or im.mode not in ('L','RGB') or getattr(im,'n_frames',1)!=1 or not all(1<=n<=512 for n in im.size):raise ValueError('PREVIEW_FORMAT')
+        if expected_geometry is not None and (not isinstance(expected_geometry,(list,tuple)) or
+                len(expected_geometry)!=2 or not all(type(v) is int for v in expected_geometry) or
+                tuple(expected_geometry)!=im.size):raise ValueError('PREVIEW_GEOMETRY_BINDING')
+        if expected_channels is not None and (type(expected_channels) is not int or
+                expected_channels not in (1,3) or im.mode!=('L' if expected_channels==1 else 'RGB')):
+            raise ValueError('PREVIEW_CHANNEL_BINDING')
         im.load();clean=Image.frombytes(im.mode,im.size,im.tobytes())
     out=io.BytesIO();clean.save(out,format='PNG')
     return {'type':'input_image','image_url':'data:image/png;base64,'+base64.b64encode(out.getvalue()).decode('ascii'),'detail':'low'}

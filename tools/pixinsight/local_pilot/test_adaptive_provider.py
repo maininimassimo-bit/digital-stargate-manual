@@ -51,6 +51,21 @@ class ProviderTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'NO_RETRY'):p.generate_initial(*args,**CONSENTS)
         with self.assertRaisesRegex(ValueError,'ALREADY_ATTEMPTED'):p.generate_initial(*args,**CONSENTS)
         self.assertEqual(len(calls),1)
+    def test_declared_crop_and_png_geometry_checked_before_send(self):
+        for region in ([60,60,70,70],[10,10,0,0],[0,0,32,32],[True,0,64,64]):
+            args=inputs();args[1]['previews'][0]['region']=region
+            args[0]['request']['evidenceSha256']=sha(args[1]);calls=[]
+            p=AdaptiveProvider('mock','gpt-6-luna',send=lambda payload:calls.append(payload))
+            with self.subTest(region=region),self.assertRaises(ValueError):p.generate_initial(*args,**CONSENTS)
+            self.assertEqual(calls,[])
+    def test_full_field_size_and_png_channels_checked_before_send(self):
+        for shape in ((32,32,1),(64,64,3)):
+            args=list(inputs());raw,report=render(np.full(shape,.05,dtype=np.float32),curve(.05))
+            args[3]=[raw];args[1]['previews'][0]['sha256']=report['sha256']
+            args[0]['request']['evidenceSha256']=sha(args[1]);calls=[]
+            p=AdaptiveProvider('mock','gpt-6-luna',send=lambda payload:calls.append(payload))
+            with self.subTest(shape=shape),self.assertRaises(ValueError):p.generate_initial(*args,**CONSENTS)
+            self.assertEqual(calls,[])
     def test_code_unknown_step_refusal_and_bad_usage_fail(self):
         variants=[]
         r=response();r['usage']['total_tokens']=121;variants.append(r)
