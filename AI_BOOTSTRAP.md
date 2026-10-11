@@ -1,5 +1,9 @@
 # Digital StarGate AI Bootstrap
 
+## PixInsight — completamento LRGB candidato dopo le analisi reali
+
+PR571 integrata (`6cc459d844d1d84be00ebeb88ac2270664da8f64`), nove check PR e otto workflow post-merge SUCCESS; backend adaptive-rules attivo e avviso trasferimento verificato. Due richieste reali STOP conservate; confronto read-only su quattro regioni periferiche/campo completo verificato. Terza analisi reale propone COLOR/DENOISE/STRETCH, ma senza fusione LRGB: nessuna approvazione o esecuzione. Nuovo candidato impone COMBINE dopo STRETCH in LRGB e aggiorna il fingerprint/proiezione del catalogo; occorre una nuova proposta distinta. Coordinatore attualmente a cicli singoli dopo rifiuto automatico del riavvio in background. [Stato v2.2](docs/project/PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md). Restano OAT astronomico, esatto grafo e avvio supervisionato. Gli snapshot seguenti descrivono stati precedenti.
+
 ## PixInsight — backend adattivo attivo e prima analisi reale
 
 PR570 integrata (`af51880b2d73f26c22e09f5648cbddf8896e1ac1`), head `04061a091f2434f20c88c1024aef5da94db0e1ed`, ARB poi RQ APPROVED zero finding e nove check PR SUCCESS. Backend `adaptive-on-20261011` al 100%, flag adattivo attivo, gpt-6-luna/quota0 e secret esistenti conservati. Worker privato con catalogo M27 e polling30s attivo, avvio nativo disabilitato per default. Accesso Owner reale e opzione adattiva verificati. Consenso esplicito a prompt/statistiche/anteprime M27 e intermedi verso OpenAI. Prima analisi reale: STOP_FOR_REVIEW, 4890/1396 token, nessun segmento nativo. Candidato successivo chiarisce al provider i prerequisiti empirici del catalogo e aggiorna l'avviso di trasferimento della pagina; non forza la prosecuzione e conserva l'arresto. OAT astronomico e nuovo grafo esatto restano da completare. [Stato e metodo v2.1](docs/project/PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md). I paragrafi seguenti sono snapshot storici.
