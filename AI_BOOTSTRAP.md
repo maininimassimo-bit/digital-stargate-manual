@@ -1,5 +1,9 @@
 # Digital StarGate AI Bootstrap
 
+## PixInsight — ammissione adattiva candidata
+
+PR566 integrata, otto workflow post-merge SUCCESS e Pages verificate. Nuovo candidato per consensi distinti, proposta iniziale e policy Owner sul grafo esatto; isolamento dai claim/rapporti V1, prenotazione/accounting senza retry ambiguo e verifica finale distinta. Portale/route presenti nel candidato, flag adattivo disabilitato nel runtime attivo. Raccolta read-only dei quattro master M27 verificata nativamente, originali/copie/History invariati. Dispatch segmentato, invocazione checkpoint, preparazione CFA/mosaici e consegna/OAT adattivi restano aperti. Nessuna nuova chiamata reale, denoise o stretch; quota0 e gpt-6-luna attivi invariati. [Contratto e stato](docs/project/PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md).
+
 ## PixInsight — confronto dei checkpoint e provenienza M27
 
 La verifica privata dei 328 input WBPP e delle quattro relazioni di autocrop è completa. Owner conferma che i quattro master esatti sono WBPP prima dell'elaborazione: attestazione dello stato pre-stretch, distinta da linearità fisica e accuratezza astrometrica. Contratti candidati per confronto RGB/L con curva condivisa e modifiche ai soli parametri del prossimo processo; maschera pianificata distinta da maschera verificata. Provider e controlli offline non attivano endpoint o esecuzione V2; journal finale, portale, dispatch segmentato e OAT restano aperti. Quota0 e gpt-6-luna attivi invariati. [Metodo e stato corrente](docs/project/PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md).

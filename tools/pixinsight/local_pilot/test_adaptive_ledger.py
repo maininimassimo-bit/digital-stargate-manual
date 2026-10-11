@@ -19,7 +19,8 @@ class JournalTests(unittest.TestCase):
         self.journal = DecisionJournal(self.broker)
         self.policy = {'version': VERSION, 'catalogSha256': 'a' * 64, 'runtimeSha256': 'b' * 64,
                        'inputSetSha256': 'c' * 64, 'mode': 'LRGB', 'model': 'test-model',
-                       'dataTransferConfirmed': True, 'pixelStatisticsConfirmed': True}
+                       'dataTransferConfirmed': True, 'pixelStatisticsConfirmed': True,
+                       'previewTransferConfirmed': True}
         self.policy_sha = sha(self.policy)
         immutable(self.store, 'science/adaptive-policies/' + self.policy_sha, encode(self.policy))
         # Future adapter authority is synthetic here. V1 Broker.create cannot
@@ -123,6 +124,40 @@ class JournalTests(unittest.TestCase):
         self.broker._mutate(lambda state, now: state['jobs'][0].update(cancelRequested=False))
         self.broker._mutate(lambda state, now: state.update(withdrawnIntakes=[JOB.removeprefix('PIAI_')]))
         with self.assertRaisesRegex(ProtocolError, 'JOB_INACTIVE'):
+            self.journal.reserve(JOB, self.refs)
+
+    def test_preview_consent_cannot_be_inferred_from_statistics(self):
+        for consent in (False, None):
+            policy = {**self.policy, 'previewTransferConfirmed': consent}
+            policy_sha = sha(policy)
+            immutable(self.store, 'science/adaptive-policies/' + policy_sha, encode(policy))
+            with self.assertRaisesRegex(ProtocolError, 'POLICY_FIELDS'):
+                self.journal.open(JOB, policy_sha)
+
+    def test_final_model_decision_needs_physical_receipt_and_exact_owner_approval(self):
+        cursor = self.record(self.journal.reserve(JOB, self.refs))
+        parent = self.receipt(cursor)
+        self.journal.checkpoint(JOB, parent, cursor['resultSha256'])
+        cursor = self.record(self.journal.reserve(JOB, {**self.refs, 'evidenceSha256':'8'*64}),
+                             'COMPLETE_FOR_REVIEW')
+        self.assertEqual(cursor['state'], 'AWAITING_FINAL_VERIFICATION')
+        with self.assertRaisesRegex(ProtocolError, 'FINAL_RECEIPT_REQUIRED'):
+            self.journal.final_verification(JOB, cursor['resultSha256'], cursor['resultSha256'])
+        value = {'version': NATIVE_RECEIPT_VERSION, 'jobId': JOB, 'ordinal':1,
+                 'decisionResultSha256':cursor['resultSha256'], 'runtimeSha256':'b'*64,
+                 'parentReceiptSha256':parent, 'approvalSha256':'4'*64,
+                 'outputsSha256':'5'*64, 'historySha256':'6'*64, 'sourceGuardSha256':'7'*64,
+                 'status':'FINAL_VERIFIED_FOR_OWNER_REVIEW'}
+        receipt_sha = sha(value)
+        immutable(self.store, 'science/adaptive-native/' + receipt_sha, encode(value))
+        with self.assertRaisesRegex(ProtocolError, 'FINAL_BINDING'):
+            self.journal.final_verification(JOB, receipt_sha, cursor['resultSha256'])
+        self.broker._mutate(lambda state, now: state['jobs'][0].update(adaptiveExecutionApprovalSha256='4'*64))
+        ready = self.journal.final_verification(JOB, receipt_sha, cursor['resultSha256'])
+        self.assertEqual(ready['state'], 'READY_FOR_OWNER_REVIEW')
+        self.assertEqual(ready, self.journal.final_verification(JOB, receipt_sha, cursor['resultSha256']))
+        self.assertNotIn('scientificAccepted', ready)
+        with self.assertRaisesRegex(ProtocolError, 'PHASE_CLOSED'):
             self.journal.reserve(JOB, self.refs)
 
 

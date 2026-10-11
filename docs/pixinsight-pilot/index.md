@@ -9,10 +9,11 @@
   <form data-p5-form>
     <fieldset disabled data-p5-fields>
       <legend>1. Prepara l’elaborazione</legend>
-      <label>Pianificazione<select data-p5-planning-mode><option value="SESSION_ASSISTED">Con l’assistente della chat</option><option value="OPENAI_API" data-p5-openai-option disabled>OpenAI dalla pagina · disponibilità da verificare</option></select></label>
+      <label>Pianificazione<select data-p5-planning-mode><option value="SESSION_ASSISTED">Con l’assistente della chat</option><option value="OPENAI_API" data-p5-openai-option disabled>OpenAI dalla pagina · disponibilità da verificare</option><option value="OPENAI_ADAPTIVE" data-p5-adaptive-option disabled>OpenAI con analisi delle immagini · disponibilità da verificare</option></select></label>
       <div data-p5-openai-consent-label hidden>
         <label><input type="checkbox" data-p5-openai-consent>Autorizzo l’invio a OpenAI del testo della richiesta, dell’oggetto e dei metadati minimi dei master per generare un piano.</label>
-        <label><input type="checkbox" data-p5-pixel-consent>Autorizzo anche l’analisi locale dei pixel e l’invio delle statistiche numeriche a OpenAI per motivare i parametri del piano.</label>
+        <label><input type="checkbox" data-p5-pixel-consent>Autorizzo anche l’analisi locale dei pixel dei master e, nella modalità adattiva, dei risultati intermedi, e l’invio delle statistiche numeriche a OpenAI per motivare le scelte di elaborazione.</label>
+        <label data-p5-preview-consent-label hidden><input type="checkbox" data-p5-preview-consent>Autorizzo l’invio a OpenAI di anteprime e ritagli dei master e dei risultati intermedi per scegliere il workflow e verificare i passaggi.</label>
         <p>La richiesta API può avere un costo. Immagini, percorsi e hash dei singoli file non vengono inviati a OpenAI. Non inserire password, chiavi, percorsi o dati personali nel testo. Non è attivo un limite giornaliero; questo pianificatore effettua una chiamata per richiesta. Le statistiche non certificano rumore, PSF o qualità e non attivano ancora la scelta adattiva dei processi.</p>
       </div>
       <label>Origine dei master<select data-p5-origin><option value="CATALOG">Sessioni già importate</option><option value="HISTORICAL">Riprese storiche senza sessioni nel portale</option></select></label>

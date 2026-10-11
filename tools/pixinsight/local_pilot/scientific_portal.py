@@ -8,6 +8,7 @@ from .broker import decode, encode, require, opaque
 from .worker import NONLINEAR_RECIPE, NONLINEAR_RECIPES, RECIPE_MODES, actions
 from .intake import IntakeMixin
 from .openai_flow import OpenAIFlowMixin
+from .adaptive_flow import AdaptiveFlowMixin
 from .scientific_revisions import RevisionMixin
 from .historical_source import historical, validate_historical, historical_review, historical_intake_enabled
 from tools.scientific_registry.ingestion_storage import immutable, Conflict
@@ -36,11 +37,12 @@ def known_target(value):
     return isinstance(value,str) and bool(value.strip()) and value.strip().upper() not in {'UNKNOWN','UNSPECIFIED','N/A'}
 
 
-class ScientificPortal(OpenAIFlowMixin, IntakeMixin, RevisionMixin):
-    def __init__(self, broker, catalog_loader, gallery_loader, planner=None):
+class ScientificPortal(AdaptiveFlowMixin, OpenAIFlowMixin, IntakeMixin, RevisionMixin):
+    def __init__(self, broker, catalog_loader, gallery_loader, planner=None, adaptive_provider=None):
         self.broker, self.store = broker, broker.store
         self.catalog_loader, self.gallery_loader = catalog_loader, gallery_loader
         self.planner = planner
+        self.adaptive_provider = adaptive_provider
 
     def register(self, value):
         fields={"inputRef", "target", "recipe", "manifestSha256"}
@@ -83,6 +85,7 @@ class ScientificPortal(OpenAIFlowMixin, IntakeMixin, RevisionMixin):
         gallery = self.gallery_loader()
         return {"inputs": inputs, "openaiPlanningEnabled": self.planner is not None,
                 "pixelStatisticsEnabled": self.pixel_statistics_enabled(),
+                "adaptivePlanningEnabled": self.adaptive_enabled(),
                 "historicalIntakeEnabled": historical_intake_enabled(), "catalogSha256": digest(catalog),
                 "sessions": [{"sessionId": s["sessionId"], "target": s["target"], "observationDate": s.get("observationDate")}
                              for s in parsed["sessions"] if known_target(s.get('target'))],

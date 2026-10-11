@@ -48,11 +48,12 @@ class DecisionJournal:
         policy = decode(raw)
         require(isinstance(policy, dict) and set(policy) ==
                 {'version', 'catalogSha256', 'runtimeSha256', 'inputSetSha256', 'mode', 'model',
-                 'dataTransferConfirmed', 'pixelStatisticsConfirmed'} and policy['version'] == VERSION and
+                 'dataTransferConfirmed', 'pixelStatisticsConfirmed', 'previewTransferConfirmed'} and policy['version'] == VERSION and
                 all(digest(policy[k]) for k in ('catalogSha256', 'runtimeSha256', 'inputSetSha256')) and
                 policy['mode'] in ('LRGB', 'OSC', 'SHO', 'HOO') and isinstance(policy['model'], str) and
                 re.fullmatch('[a-zA-Z0-9][a-zA-Z0-9._-]{1,119}', policy['model']) and
-                policy['dataTransferConfirmed'] is True and policy['pixelStatisticsConfirmed'] is True,
+                policy['dataTransferConfirmed'] is True and policy['pixelStatisticsConfirmed'] is True and
+                policy['previewTransferConfirmed'] is True,
                 'ADAPTIVE_POLICY_FIELDS')
 
         def operation(state, now):
@@ -122,10 +123,11 @@ class DecisionJournal:
         require(cursor['ordinal'] == ordinal and cursor['state'] == 'RESERVED' and
                 cursor['pending'] == {'requestSha256': sha(request), 'owner': reservation['owner']}, 'ADAPTIVE_RESERVATION_BINDING')
         require(isinstance(decision, dict) and set(decision) == {'action', 'decisionSha256'} and
-                decision['action'] in ('EXECUTE_GRAPH', 'CONTINUE', 'STOP_FOR_REVIEW') and
+                decision['action'] in ('EXECUTE_GRAPH', 'CONTINUE', 'STOP_FOR_REVIEW', 'COMPLETE_FOR_REVIEW') and
                 digest(decision['decisionSha256']), 'ADAPTIVE_RESULT_REFERENCE')
         require(decision['action'] != 'EXECUTE_GRAPH' or ordinal == 0, 'ADAPTIVE_INITIAL_ONLY')
         require(decision['action'] != 'CONTINUE' or ordinal > 0, 'ADAPTIVE_CHECKPOINT_ONLY')
+        require(decision['action'] != 'COMPLETE_FOR_REVIEW' or ordinal > 0, 'ADAPTIVE_CHECKPOINT_ONLY')
         require(isinstance(usage, dict) and set(usage) == {'input_tokens', 'output_tokens', 'total_tokens'} and
                 all(type(v) is int and 0 <= v <= 10**9 for v in usage.values()) and
                 usage['total_tokens'] == usage['input_tokens'] + usage['output_tokens'], 'ADAPTIVE_USAGE')
@@ -150,9 +152,49 @@ class DecisionJournal:
             for key in cursor['usage']:
                 cursor['usage'][key] += result['usage'][key]
             cursor['usageComplete'] = True
-            cursor['state'] = 'STOP_FOR_REVIEW' if result['decision']['action'] == 'STOP_FOR_REVIEW' else 'AWAITING_EXECUTION'
+            cursor['state'] = {'STOP_FOR_REVIEW': 'STOP_FOR_REVIEW',
+                               'COMPLETE_FOR_REVIEW': 'AWAITING_FINAL_VERIFICATION'}.get(
+                                   result['decision']['action'], 'AWAITING_EXECUTION')
             return copy.deepcopy(cursor)
 
+        return self.broker._mutate(operation)
+
+    def final_verification(self, job, receipt_sha, decision_result_sha):
+        """Final readiness needs a distinct physical adapter receipt, never AI acceptance.
+
+        The adapter verifies the approved full prefix, outputs, original sources,
+        History and masks before publishing this immutable reference. This method
+        validates bindings, not the truth of a worker's physical measurements.
+        """
+        require(digest(receipt_sha) and digest(decision_result_sha), 'ADAPTIVE_FINAL_HASH')
+        raw, _ = self.store.get('science/adaptive-native/' + receipt_sha)
+        require(raw is not None and len(raw) <= 4096 and sha(decode(raw)) == receipt_sha,
+                'ADAPTIVE_FINAL_RECEIPT_REQUIRED')
+        receipt = decode(raw)
+        fields = {'version', 'jobId', 'ordinal', 'decisionResultSha256', 'runtimeSha256',
+                  'parentReceiptSha256', 'approvalSha256', 'outputsSha256', 'historySha256',
+                  'sourceGuardSha256', 'status'}
+        require(isinstance(receipt, dict) and set(receipt) == fields and
+                receipt['version'] == NATIVE_RECEIPT_VERSION and receipt['jobId'] == job and
+                type(receipt['ordinal']) is int and receipt['status'] == 'FINAL_VERIFIED_FOR_OWNER_REVIEW' and
+                receipt['decisionResultSha256'] == decision_result_sha and
+                all(digest(receipt[k]) for k in fields - {'version', 'jobId', 'ordinal', 'status'}),
+                'ADAPTIVE_FINAL_RECEIPT_FIELDS')
+
+        def operation(state, now):
+            item = self._live(state, job)
+            cursor = self._cursor(state, job)
+            if cursor['state'] == 'READY_FOR_OWNER_REVIEW':
+                require(cursor.get('finalReceiptSha256') == receipt_sha, 'ADAPTIVE_FINAL_CHANGED')
+                return copy.deepcopy(cursor)
+            require(cursor['state'] == 'AWAITING_FINAL_VERIFICATION' and
+                    cursor['ordinal'] == receipt['ordinal'] and cursor['resultSha256'] == decision_result_sha and
+                    cursor['parentReceiptSha256'] == receipt['parentReceiptSha256'] and
+                    cursor['scope']['runtimeSha256'] == receipt['runtimeSha256'] and
+                    item.get('adaptiveExecutionApprovalSha256') == receipt['approvalSha256'],
+                    'ADAPTIVE_FINAL_BINDING')
+            cursor.update(state='READY_FOR_OWNER_REVIEW', finalReceiptSha256=receipt_sha)
+            return copy.deepcopy(cursor)
         return self.broker._mutate(operation)
 
     def checkpoint(self, job, receipt_sha, decision_result_sha):

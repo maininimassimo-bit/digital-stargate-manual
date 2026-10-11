@@ -44,10 +44,17 @@ def main():
     require(settings[names[6]].startswith("https://"), "PORTAL_HTTPS_REQUIRED")
     store = BackedUpStore(GCSStore(settings[names[0]]), GCSStore(settings[names[1]]))
     broker = Broker(store, settings[names[2]])
+    planner = OpenAIPlanner.from_environment()
+    adaptive = None
+    if os.environ.get('DSG_PIAI_ADAPTIVE') is not None:
+        require(os.environ['DSG_PIAI_ADAPTIVE'] == 'LOCAL_WORKER_VERIFIED' and planner is not None,
+                'ADAPTIVE_COORDINATED_ACTIVATION_REQUIRED')
+        from tools.pixinsight.local_pilot.checkpoint_provider import CheckpointProvider
+        adaptive = CheckpointProvider(os.environ.get('OPENAI_API_KEY',''), planner.model)
     scientific = ScientificPortal(broker,
         lambda: public_bytes(settings[names[6]] + "/digital-stargate-manual/data/scientific-session-catalog.json"),
         lambda: decode(public_bytes("https://dsg-scientific-photo-ingestion-183451329061.europe-west1.run.app/v1/gallery")),
-        planner=OpenAIPlanner.from_environment())
+        planner=planner, adaptive_provider=adaptive)
     transient, transient_digest = transient_component(store, settings[names[2]], settings[names[3]])
     handler = handler_for(broker,
         lambda token: google_owner(token, settings[names[4]], settings[names[5]]), settings[names[6]], settings[names[3]], scientific,
