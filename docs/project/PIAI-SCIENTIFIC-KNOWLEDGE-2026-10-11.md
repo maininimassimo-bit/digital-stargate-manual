@@ -3,13 +3,13 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-PIAI-SCIENTIFIC-KNOWLEDGE-001 |
-| Versione | 1.4 — evidenze dei rami e provenienza della calibrazione |
+| Versione | 1.5 — fusione non promossa e confini decisionali |
 | Data | 11/10/2026 |
-| Stato | Conoscenza e coordinatore attivi; OAT M27 10 API / 5 prove, STOP prima della fusione; correzione della provenienza candidata |
+| Stato | Backend research-lineage-v1 attivo e portale pubblicato; M27 2ffd1ae8: 12 API note / 6 prove native, STOP dopo confronto della fusione CP006; controllo CP005 conservato, nessun finale consegnato o accettato |
 
 ## Obiettivo e confini
 
-Il [coordinatore di prove](PIAI-RESEARCH-COORDINATOR-2026-10-11.md) trasferisce il protocollo per scegliere i rami. La richiesta distinta M27 2ffd1ae8 ha eseguito e verificato SPCC, due alternative BXT, denoise e stretch, conservando le decisioni API. STOP in COMBINE causato dall'omissione del fit SPCC dell'antenato dal contesto corrente: il prodotto nativo esiste in CP001. Correzione candidata della provenienza e ripresa Owner senza azzerare budget; nessuna fusione o consegna finale. [Consuntivo OAT e limiti](PIAI-RESEARCH-COORDINATOR-2026-10-11.md#consuntivo-oat-m27). Le note successive sul primo OAT sono snapshot storici.
+La correzione della provenienza SPCC è rilasciata con PR584 e la richiesta M27 è stata ripresa dal portale dopo verifica Owner. Il modello riceve il fit originale CP001 nella catena CP000→CP001→CP004→CP005. Ha provato la fusione LRGB CP006, quindi si è fermato per il rischio ai limiti dei canali RGB e beneficio non dimostrato. Consuntivo: 12 chiamate API note, sei prove native, 131.118 token input / 6.121 output / 137.239 totali. CP005 resta selezionato; CP006 è conservato come prova non promossa. Nessuna saturazione, consegna finale o accettazione scientifica. [Evidenze e limite del catalogo](PIAI-RESEARCH-COORDINATOR-2026-10-11.md#fusione-lrgb-prova-non-promossa-e-limite-operativo). Le verifiche preliminari e i consuntivi precedenti sono snapshot storici.
 
 Owner richiede che il modulo funzioni dal portale web, senza dipendere da una chat, e che le API ricevano la conoscenza della skill `pixinsight-scientific`. La conoscenza è ora una risorsa del servizio, distinta dalle misure native e dalle capacità effettivamente implementate. Il modello rimane `gpt-6-luna`; chiave sul backend, master sul PC e ricevute immutabili conservati.
 
