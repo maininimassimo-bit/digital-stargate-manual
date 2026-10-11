@@ -1,5 +1,10 @@
 # Decision Log
 
+## PixInsight — analisi adattiva in sviluppo, quota giornaliera rimossa
+
+Owner approva l’11 ottobre analisi immagini/checkpoint e scelta workflow IA dal tipo LRGB/SHO/HOO/OSC indicato nel portale. PR558 rilasciata; quota0 attiva, revisione `dsg-pixinsight-pilot-quota0-20261011` al 100%, nessuna quota giornaliera. Il piano V1 conserva singolo invio/capacità16. Primo modulo diagnostico locale candidato: nove test e tre checkpoint M27 privati verificati read-only; non ancora collegato a planner/portale/esecutore. Catalogo, analisi scientifica/native export, segmentazione, decisioni multiple, accounting/recovery e OAT restano requisiti aperti. [Direzione, stato e acceptance](PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md). Non promuove acceptance P6/BKL-051 o pubblicazione immagini.
+
+
 ## Estensione PixInsight autorizzata — 11 ottobre 2026
 
 Owner autorizza analisi dei master, verifica dei checkpoint e scelta del workflow IA compatibile con il tipo LRGB/SHO/HOO/OSC selezionato nel portale. Sviluppo adattivo aperto, non attivato né validato scientificamente. Richiesta successiva: rimuovere la quota di una chiamata API al giorno. Candidato compatibile con `DSG_PIAI_OPENAI_DAILY_LIMIT=0`: nessuna quota giornaliera, idempotenza e capacità tecnica V1 conservate; default 1 per installazioni non aggiornate. Attivazione del nuovo valore subordinata al deploy del codice compatibile e verifica della revisione effettiva. [Contratto e limiti](PIAI-OPENAI-PLANNING-2026-10-10.md). P6, BKL-051 e pubblicazione scientifica invariati.

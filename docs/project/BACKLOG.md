@@ -1,5 +1,10 @@
 # Project Backlog
 
+## PixInsight — analisi adattiva in sviluppo, quota giornaliera rimossa
+
+Owner approva l’11 ottobre analisi immagini/checkpoint e scelta workflow IA dal tipo LRGB/SHO/HOO/OSC indicato nel portale. PR558 rilasciata; quota0 attiva, revisione `dsg-pixinsight-pilot-quota0-20261011` al 100%, nessuna quota giornaliera. Il piano V1 conserva singolo invio/capacità16. Primo modulo diagnostico locale candidato: nove test e tre checkpoint M27 privati verificati read-only; non ancora collegato a planner/portale/esecutore. Catalogo, analisi scientifica/native export, segmentazione, decisioni multiple, accounting/recovery e OAT restano requisiti aperti. [Direzione, stato e acceptance](PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md). Non promuove acceptance P6/BKL-051 o pubblicazione immagini.
+
+
 ## Incremento autorizzato — pianificazione OpenAI, 10 ottobre 2026
 
 Integrazione OpenAI autorizzata e rilasciata (PR #553/#555/#556). Collaudo reale M27 completato fino alla consegna privata: piano gpt-6-luna, conferma Owner esplicita, copie verificate, una esecuzione supervisionata PixInsight 1.9.5 build 1706, 29 operazioni e 15 checkpoint, originali invariati e pixel finiti/normalizzati. Una chiamata API (455 input / 769 output); nessuna chiamata aggiuntiva dal nativo. Presenza di clipping misurata privatamente, History a monte NOT_ESTABLISHED e modello ML caricato non attestato indipendentemente. Risultato privato visualizzato; nessuna accettazione scientifica o pubblicazione. Costo monetario non verificato; P6 Accepted e BKL-051 invariati. [Contratto, esito e runbook](PIAI-OPENAI-PLANNING-2026-10-10.md).

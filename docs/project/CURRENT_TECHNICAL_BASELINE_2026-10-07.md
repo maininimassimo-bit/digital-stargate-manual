@@ -1,5 +1,10 @@
 # Current Technical Baseline — 2026-10-07
 
+## PixInsight — analisi adattiva in sviluppo, quota giornaliera rimossa
+
+Owner approva l’11 ottobre analisi immagini/checkpoint e scelta workflow IA dal tipo LRGB/SHO/HOO/OSC indicato nel portale. PR558 rilasciata; quota0 attiva, revisione `dsg-pixinsight-pilot-quota0-20261011` al 100%, nessuna quota giornaliera. Il piano V1 conserva singolo invio/capacità16. Primo modulo diagnostico locale candidato: nove test e tre checkpoint M27 privati verificati read-only; non ancora collegato a planner/portale/esecutore. Catalogo, analisi scientifica/native export, segmentazione, decisioni multiple, accounting/recovery e OAT restano requisiti aperti. [Direzione, stato e acceptance](PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md). Non promuove acceptance P6/BKL-051 o pubblicazione immagini.
+
+
 ## Incremento autorizzato — pianificazione OpenAI, 10 ottobre 2026
 
 Owner approva il 10 ottobre l’integrazione API OpenAI e l’aggiornamento tecnico. Candidato di pianificazione implementato: opt-in dalla pagina, worker locale con radici/preset verificati, Responses strutturata, prenotazione CAS di un solo invio, limite giornaliero e provenienza nel piano confermato. Chiave solo backend, master locali, nessun avvio nativo automatico. Attivazione protetta, provider/OAT reale e gate di rilascio restano pendenti; P6 Accepted e BKL-051 invariati. [Contratto e runbook](PIAI-OPENAI-PLANNING-2026-10-10.md).

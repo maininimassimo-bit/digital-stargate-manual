@@ -1,5 +1,9 @@
 # Technical Debt Register
 
+## PixInsight — requisiti adattivi aperti, 11 ottobre 2026
+
+Diagnostica iniziale locale candidata, non workflow adattivo completato. Adapter native/maschere/PSF, prerequisiti di calibrazione e linearità, catalogo/grafo, segmentazione, decisioni multiple, storage per decisione senza capacity globale V1, accounting/recovery, History/progetto e OAT sono requisiti aperti dell'estensione autorizzata. Nessuna soglia universale o rinuncia implicita; non debito accettato. Quota giornaliera rimossa nel runtime compatibile PR558, singolo piano/capacità16 V1 ancora presenti. [Contratto e acceptance](PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md).
+
 ## Incremento autorizzato — pianificazione OpenAI, 10 ottobre 2026
 
 Integrazione OpenAI autorizzata e rilasciata (PR #553/#555/#556). Collaudo reale M27 completato fino alla consegna privata: piano gpt-6-luna, conferma Owner esplicita, copie verificate, una esecuzione supervisionata PixInsight 1.9.5 build 1706, 29 operazioni e 15 checkpoint, originali invariati e pixel finiti/normalizzati. Una chiamata API (455 input / 769 output); nessuna chiamata aggiuntiva dal nativo. Presenza di clipping misurata privatamente, History a monte NOT_ESTABLISHED e modello ML caricato non attestato indipendentemente. Risultato privato visualizzato; nessuna accettazione scientifica o pubblicazione. Costo monetario non verificato; P6 Accepted e BKL-051 invariati. [Contratto, esito e runbook](PIAI-OPENAI-PLANNING-2026-10-10.md).
