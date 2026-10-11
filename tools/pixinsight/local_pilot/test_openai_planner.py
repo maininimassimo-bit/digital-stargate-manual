@@ -187,6 +187,30 @@ class FlowTests(unittest.TestCase):
             self.portal.generate_openai(request_id, payload)
         self.assertEqual(self.calls, [])
 
+    def test_disabled_daily_quota_allows_distinct_requests_and_keeps_idempotency(self):
+        request_id, payload = self.enable(daily_limit=0)
+        first = self.portal.generate_openai(request_id, payload)
+        second_id = '2' * 32
+        self.portal.create_intake({**self.selection(), 'requestId': second_id,
+                                  'openaiPlanning': {'dataTransferConfirmed': True}})
+        self.assertEqual(self.portal.generate_openai(second_id, payload)['state'], 'AI_DRAFT_READY')
+        self.assertEqual(self.portal.generate_openai(request_id, payload), first)
+        self.assertEqual(len(self.calls), 2)
+
+    def test_disabled_daily_quota_does_not_disable_storage_capacity(self):
+        request_id, payload = self.enable(daily_limit=0)
+        def fill(state, now):
+            state['openaiAttempts'] = {format(n, '032x'): {'day': now[:10]} for n in range(16)}
+        self.broker._mutate(fill)
+        with self.assertRaisesRegex(ProtocolError, 'AI_ATTEMPT_CAPACITY'):
+            self.portal.generate_openai(request_id, payload)
+        self.assertEqual(self.calls, [])
+
+    def test_invalid_daily_configuration_rejected(self):
+        for value in (-1, 17, True, 0.0, '0'):
+            with self.subTest(value=value), self.assertRaisesRegex(ProtocolError, 'AI_DAILY_LIMIT'):
+                OpenAIPlanner('test-key', 'test-model', value)
+
     def test_http_owner_cannot_use_worker_provider_route(self):
         request_id, payload = self.enable()
         server = HTTPServer(('127.0.0.1', 0), handler_for(self.broker, lambda token: None,

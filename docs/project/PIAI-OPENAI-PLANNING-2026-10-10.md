@@ -12,6 +12,14 @@
 
 ## Stato corrente e risultato previsto
 
+### Estensione autorizzata l'11 ottobre 2026
+
+Owner autorizza analisi delle immagini, verifica dei risultati intermedi e scelta del workflow da parte dell'IA; il portale continua a raccogliere il tipo di elaborazione LRGB/SHO/HOO/OSC. Questa autorizzazione amplia lo sviluppo, ma non rende già operativo un esecutore adattivo: il runtime V1 conserva la ricetta fissa e una decisione per intake fino al rilascio dei nuovi contratti. Nessuna soglia di qualità scientifica universale viene dedotta dall'autorizzazione.
+
+Owner richiede anche la rimozione del limite di una chiamata API. Il candidato introduce `DSG_PIAI_OPENAI_DAILY_LIMIT=0`, che disabilita esplicitamente la quota giornaliera; l'assenza della configurazione conserva il default prudenziale 1 e i valori da 1 a 16 conservano la quota corrispondente. La configurazione cloud effettiva deve essere verificata dopo il deploy del codice compatibile: impostare 0 su una revisione precedente provoca un errore all'avvio.
+
+Questa modifica della quota non aggiunge decisioni multiple allo stesso intake V1: la prenotazione durevole e il risultato immutabile impediscono ancora un secondo invio dello stesso piano. Rimangono capacità tecnica 16 tentativi conservati, timeout, limiti di output e nessun retry ambiguo. La capacità non è una quota giornaliera né un budget monetario; non viene eliminata senza introdurre lo storage scalabile del ciclo adattivo. Usage e costi restano distinti; niente spesa infinita o promessa di tariffa verificata.
+
 Consegna tecnica: [PR #553](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/553), head revisionato `d14a6e9d85c1815cf8a3c1d91c2f80179134398b`, merge `432eb2a1176dc7b85b841c0d847126b2618cb52b`. ARB poi Release Quality AI-assistite separate APPROVED con zero finding; 26 check exact-head e 21 workflow post-merge, inclusa Pages, SUCCESS. Validazione locale: 164 Python, 83 Node e MkDocs strict PASS. Gate registrati nella PR con DSG-AEM-001 / W-DSG-AEM-RULESET-001.
 
 Build cloud `02a13388-3206-431f-9ac2-099632546d47` SUCCESS dal pacchetto pubblico del merge, con 14 test dedicati nel container. Immagine `sha256:27719c014dcdd1e018aa1c5def125a62f087fabbf4719e5eab28297ba271102b`; revisione `dsg-pixinsight-pilot-openai-active-v2-20261010`, 100% traffico verificato. Owner sceglie `gpt-6-luna`; cap iniziale una richiesta al giorno UTC. Secret Manager esistente, versione 1, collegato soltanto al backend; accessor aggiunto sul solo secret all'identità dedicata PixInsight, senza leggere la chiave. Health reale `OPENAI_API_PLANNING_AVAILABLE` non attesta chiamate provider: `providerRequests=null` indica conteggio non esposto, non zero.
@@ -78,7 +86,7 @@ Il provider riceve il prompt esplicitamente autorizzato, l'oggetto e metadati mi
 
 Le ricevute nel servizio privato seguono la conservazione già configurata dei bucket con versioning e backup: nessuna nuova cancellazione o promessa di scadenza. Repository e portale pubblicano soltanto codice, contratti, documenti e prove sintetiche. Non pubblicare prompt reali, ricevute ricche, token, chiavi o file scientifici.
 
-`OPENAI_API_KEY` è fornita al processo backend mediante Secret Manager con versione fissata e accesso limitato alla sola identità del servizio. Non usarla nel browser, nel worker PC, nei comandi in chiaro o nel repository. L'attivazione richiede `DSG_PIAI_OPENAI_ACTIVATION=OWNER_AUTHORIZED`, `DSG_PIAI_OPENAI_MODEL` esplicito e `DSG_PIAI_OPENAI_DAILY_LIMIT` da 1 a 16; se manca l'attivazione il runtime precedente resta disponibile. Configurazione incompleta con attivazione presente fallisce all'avvio.
+`OPENAI_API_KEY` è fornita al processo backend mediante Secret Manager con versione fissata e accesso limitato alla sola identità del servizio. Non usarla nel browser, nel worker PC, nei comandi in chiaro o nel repository. L'attivazione richiede `DSG_PIAI_OPENAI_ACTIVATION=OWNER_AUTHORIZED`, `DSG_PIAI_OPENAI_MODEL` esplicito e `DSG_PIAI_OPENAI_DAILY_LIMIT` da 0 a 16 (0 disabilita la quota giornaliera nel codice compatibile, default 1); se manca l'attivazione il runtime precedente resta disponibile. Configurazione incompleta con attivazione presente fallisce all'avvio.
 
 ## Costi, duplicati e recupero
 

@@ -1,5 +1,10 @@
 # Decision Log
 
+## Estensione PixInsight autorizzata — 11 ottobre 2026
+
+Owner autorizza analisi dei master, verifica dei checkpoint e scelta del workflow IA compatibile con il tipo LRGB/SHO/HOO/OSC selezionato nel portale. Sviluppo adattivo aperto, non attivato né validato scientificamente. Richiesta successiva: rimuovere la quota di una chiamata API al giorno. Candidato compatibile con `DSG_PIAI_OPENAI_DAILY_LIMIT=0`: nessuna quota giornaliera, idempotenza e capacità tecnica V1 conservate; default 1 per installazioni non aggiornate. Attivazione del nuovo valore subordinata al deploy del codice compatibile e verifica della revisione effettiva. [Contratto e limiti](PIAI-OPENAI-PLANNING-2026-10-10.md). P6, BKL-051 e pubblicazione scientifica invariati.
+
+
 ## Incremento autorizzato — pianificazione OpenAI, 10 ottobre 2026
 
 Integrazione OpenAI autorizzata e rilasciata (PR #553/#555/#556). Collaudo reale M27 completato fino alla consegna privata: piano gpt-6-luna, conferma Owner esplicita, copie verificate, una esecuzione supervisionata PixInsight 1.9.5 build 1706, 29 operazioni e 15 checkpoint, originali invariati e pixel finiti/normalizzati. Una chiamata API (455 input / 769 output); nessuna chiamata aggiuntiva dal nativo. Presenza di clipping misurata privatamente, History a monte NOT_ESTABLISHED e modello ML caricato non attestato indipendentemente. Risultato privato visualizzato; nessuna accettazione scientifica o pubblicazione. Costo monetario non verificato; P6 Accepted e BKL-051 invariati. [Contratto, esito e runbook](PIAI-OPENAI-PLANNING-2026-10-10.md).

@@ -50,7 +50,9 @@ class OpenAIFlowMixin:
                 require(attempts[request_id]['bindingSha256'] == binding, 'AI_EVIDENCE_CHANGED')
                 return False
             require(len(attempts) < 16, 'AI_ATTEMPT_CAPACITY')
-            require(sum(a['day'] == now[:10] for a in attempts.values()) < self.planner.daily_limit, 'AI_DAILY_LIMIT_REACHED')
+            require(self.planner.daily_limit == 0 or
+                    sum(a['day'] == now[:10] for a in attempts.values()) < self.planner.daily_limit,
+                    'AI_DAILY_LIMIT_REACHED')
             attempts[request_id] = {'bindingSha256': binding, 'owner': owner, 'day': now[:10]}
             return True
 
