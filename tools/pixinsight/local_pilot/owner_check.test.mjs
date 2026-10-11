@@ -5,7 +5,6 @@ import {readFileSync} from 'node:fs';
 import {webcrypto} from 'node:crypto';
 const source = readFileSync(new URL('../../../docs/javascripts/pixinsight-pilot-check.js', import.meta.url), 'utf8');
 const ORIGIN = 'https://dsg-pixinsight-pilot-183451329061.europe-west1.run.app';
-const tick = async () => { for (let i=0;i<10;i++) await new Promise(resolve => setTimeout(resolve, 5)); };
 function harness({failCancel=false}={}) {
   const controls = Object.fromEntries(['origin','connect','signin','message','probe','result'].map(name=>[name, {
     value: ORIGIN, disabled: name==='probe', textContent:'', callbacks:{},
@@ -29,8 +28,8 @@ function harness({failCancel=false}={}) {
       return {ok:true,json:async()=>({job:{...job},publication:'NONE',executionEvidence:'WORKER_REPORTED_NOT_ATTESTED'})};
     }};
   vm.runInNewContext(source,context);
-  return {controls,requests,async connect(){controls.connect.callbacks.click();await tick();},
-    login(){signIn({credential:'PRIVATE_TEST_TOKEN'});},async probe(){controls.probe.callbacks.click();await tick();}};
+  return {controls,requests,async connect(){await controls.connect.callbacks.click();},
+    login(){signIn({credential:'PRIVATE_TEST_TOKEN'});},async probe(){await controls.probe.callbacks.click();}};
 }
 test('credential stays in memory and synthetic Owner probe cancels before native',async()=>{
   const h=harness();await h.connect();h.login();await h.probe();

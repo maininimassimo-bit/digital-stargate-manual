@@ -56,6 +56,14 @@ class CatalogTests(unittest.TestCase):
             known['domain'] = domain
             self.assertEqual(validate_graph(value, 'LRGB', known), value)
 
+    def test_native_masked_stretch_requires_a_verified_background_region(self):
+        value = graph()
+        value['steps'] = [value['steps'][-1]]
+        unknown = facts()
+        unknown['backgroundROI'] = 'NOT_ESTABLISHED'
+        with self.assertRaisesRegex(ProtocolError, 'BACKGROUND_REQUIRED'):
+            validate_graph(value, 'LRGB', unknown)
+
     def test_order_duplicates_unknown_processes_and_code_are_rejected(self):
         values = []
         reordered = graph()
