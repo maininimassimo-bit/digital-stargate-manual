@@ -26,6 +26,39 @@ def png(channels=1):
 
 
 class ResearchTests(unittest.TestCase):
+    def test_initial_schema_cannot_invent_parent_or_new_checkpoint_id(self):
+        state=self.approve();schema=contract.schema(state)['properties']
+        self.assertEqual(schema['parentId']['enum'],['CP000'])
+        self.assertEqual(schema['checkpointId']['enum'],[None])
+        self.assertEqual(schema['action']['enum'],['TEST','STOP'])
+        self.post('decision',comparison=self.comparison())
+        payload=self.calls[0]
+        self.assertIn('checkpointId to null',payload['instructions'])
+        self.assertEqual(payload['tools'][0]['parameters']['properties']['parentId']['enum'],['CP000'])
+
+    def test_schema_admits_only_verified_selection_and_current_stage_actions(self):
+        self.approve();self.post('decision',comparison=self.comparison());state=self.checkpoint()
+        schema=contract.schema(state)['properties']
+        self.assertEqual(schema['checkpointId']['enum'],['CP001',None])
+        self.assertEqual(schema['action']['enum'],['SELECT','STOP'])
+        self.assertEqual(schema['step'],{'anyOf':[{'type':'null'}]})
+        self.action='SELECT';self.selected='CP001'
+        state=self.post('decision',comparison=self.comparison())
+        schema=contract.schema(state)['properties']
+        self.assertEqual(schema['parentId']['enum'],['CP001'])
+        self.assertEqual(schema['checkpointId']['enum'],['CP001',None])
+        self.assertEqual(schema['action']['enum'],['TEST','SELECT','STOP'])
+        state['checkpoints']['CP001']['verified']=False
+        self.assertEqual(contract.schema(state)['properties']['checkpointId']['enum'],[None])
+
+    def test_final_schema_has_no_trial_or_selection(self):
+        state=self.approve();state['stage']='FINAL'
+        state['checkpoints']['CP000']['domain']='NONLINEAR_ATTESTED'
+        schema=contract.schema(state)['properties']
+        self.assertEqual(schema['action']['enum'],['FINISH','STOP'])
+        self.assertEqual(schema['checkpointId']['enum'],[None])
+        self.assertEqual(schema['step'],{'anyOf':[{'type':'null'}]})
+
     def test_invalid_known_response_preserves_safe_usage_without_retry(self):
         self.approve()
         original=self.send
