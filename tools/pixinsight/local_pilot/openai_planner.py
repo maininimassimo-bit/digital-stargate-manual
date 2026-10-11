@@ -80,7 +80,9 @@ class OpenAIPlanner:
     def __init__(self, api_key, model, daily_limit, *, send=None):
         require(isinstance(api_key, str) and api_key.strip() and not any(c.isspace() for c in api_key), 'AI_KEY_REQUIRED')
         require(isinstance(model, str) and re.fullmatch(r'[a-zA-Z0-9][a-zA-Z0-9._-]{1,119}', model), 'AI_MODEL_REQUIRED')
-        require(type(daily_limit) is int and 1 <= daily_limit <= 16, 'AI_DAILY_LIMIT')
+        # Zero explicitly disables the daily quota; omitted configuration retains
+        # the conservative default. Idempotency and storage capacity are separate.
+        require(type(daily_limit) is int and 0 <= daily_limit <= 16, 'AI_DAILY_LIMIT')
         self._key, self.model, self.daily_limit = api_key, model, daily_limit
         self._send = send or self._http
 
