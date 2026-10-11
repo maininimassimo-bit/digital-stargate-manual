@@ -177,7 +177,8 @@ class HttpHarness(unittest.TestCase):
             if token != "synthetic-owner":
                 raise AuthError()
         self.server = HTTPServer(("127.0.0.1", 0), handler_for(self.broker, authenticate,
-                              "https://portal.invalid", hashlib.sha256(TOKEN.encode()).hexdigest()))
+                              "https://portal.invalid", hashlib.sha256(TOKEN.encode()).hexdigest(),
+                              getattr(self,'scientific',None)))
         self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
         self.thread.start()
         self.origin = f"http://127.0.0.1:{self.server.server_port}"
@@ -206,6 +207,41 @@ class HttpHarness(unittest.TestCase):
 
     def create(self):
         return self.request("/v1/jobs", REQUEST, "synthetic-owner", "https://portal.invalid")[1]
+
+
+class ResearchCheckpointSizeTests(HttpHarness):
+    def declared_size(self,path,size,token=None):
+        headers={'Content-Type':'application/json','Content-Length':str(size)}
+        if token is not None:headers['Authorization']='Bearer '+token
+        request=urllib.request.Request(self.origin+path,b'{}',headers)
+        try:
+            with urllib.request.urlopen(request,timeout=5) as response:return response.status
+        except urllib.error.HTTPError as error:return error.code
+
+    def setUp(self):
+        class ScientificFixture:
+            def research_checkpoint(self,request_id,value):return {'bytes':len(encode(value))}
+            def adaptive_checkpoint(self,request_id,value):return {'bytes':len(encode(value))}
+        self.scientific=ScientificFixture()
+        super().setUp()
+
+    def test_research_checkpoint_exact_bound_and_oversize_at_both_boundaries(self):
+        from .transport import RESEARCH_CHECKPOINT_LIMIT
+        path='/v1/worker/science/intakes/'+'d'*32+'/research-checkpoint'
+        for size in (536433,RESEARCH_CHECKPOINT_LIMIT):
+            value={'fixture':'x'*(size-len(encode({'fixture':''})))}
+            self.assertEqual(self.client.post(path,value),{'bytes':size})
+        oversized={'fixture':'x'*(RESEARCH_CHECKPOINT_LIMIT+1-len(encode({'fixture':''})))}
+        with self.assertRaisesRegex(ProtocolError,'REQUEST_SIZE'):self.client.post(path,oversized)
+        self.assertEqual(self.declared_size(path,RESEARCH_CHECKPOINT_LIMIT+1,TOKEN),400)
+
+    def test_larger_research_receipts_preserve_auth_and_legacy_checkpoint_bound(self):
+        root='/v1/worker/science/intakes/'+'d'*32
+        value={'fixture':'x'*536433}
+        self.assertEqual(self.declared_size(root+'/research-checkpoint',536433),403)
+        self.assertEqual(self.declared_size(root+'/research-checkpoint',536433,'synthetic-owner'),403)
+        with self.assertRaisesRegex(ProtocolError,'REQUEST_SIZE'):self.client.post(root+'/adaptive-checkpoint',value)
+        self.assertEqual(self.declared_size(root+'/adaptive-checkpoint',536433,TOKEN),400)
 
 
 class HttpTests(HttpHarness):

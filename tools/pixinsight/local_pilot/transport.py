@@ -14,6 +14,7 @@ from urllib.parse import urlsplit
 from tools.pixinsight.local_pilot import worker
 from tools.pixinsight.local_pilot.broker import decode, encode, opaque, require, ProtocolError, TERMINAL
 
+RESEARCH_CHECKPOINT_LIMIT = 2 * 1024 * 1024
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, *_):
@@ -42,7 +43,9 @@ class Transport:
         limit = 9 * 1024 * 1024 if path.endswith('/result') else 65536 if '/science/intakes/' in path else 16384
         if path.endswith(('/adaptive-analysis','/adaptive-decision','/adaptive-final','/research-analysis','/research-decision','/research-final')):
             limit = 6 * 1024 * 1024
-        elif path.endswith(('/adaptive-checkpoint','/research-checkpoint')):
+        elif path.endswith('/research-checkpoint'):
+            limit = RESEARCH_CHECKPOINT_LIMIT
+        elif path.endswith('/adaptive-checkpoint'):
             limit = 262144
         require(raw is None or len(raw) <= limit, "REQUEST_SIZE")
         req = urllib.request.Request(self.origin + path, raw, method="POST" if raw is not None else "GET",

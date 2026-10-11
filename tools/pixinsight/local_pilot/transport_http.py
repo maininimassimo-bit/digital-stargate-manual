@@ -10,6 +10,7 @@ from tools.pixinsight.local_pilot.broker import ProtocolError, decode, encode, r
 from tools.scientific_registry.ingestion_storage import Conflict
 from tools.scientific_registry.photo_ingestion import IngestionError
 from tools.pixinsight.workflow_archive.archive import ArchiveError
+from tools.pixinsight.local_pilot.transport import RESEARCH_CHECKPOINT_LIMIT
 
 
 class AuthError(ValueError):
@@ -161,7 +162,7 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                         return self.send(200,getattr(scientific,'research_'+action)(request_id))
                     allowed={'analysis','reserve','start','checkpoint','decision','final','halt'} if worker_research else {'approve','cancel','review'}
                     if self.command == 'POST' and action in allowed:
-                        limit=6291456 if action in {'analysis','decision','final'} else 262144 if action == 'checkpoint' else 65536
+                        limit=6291456 if action in {'analysis','decision','final'} else RESEARCH_CHECKPOINT_LIMIT if action == 'checkpoint' else 65536
                         return self.send(200,getattr(scientific,'research_'+action)(request_id,self.body(limit)))
                     return self.send(404,{'error':'NOT_FOUND'})
                 adaptive_match = re.fullmatch(r'/v1/(worker/)?science/intakes/([a-f0-9]{32})/adaptive-(analysis|approve|state|reserve|start|checkpoint|decision|context|final|result|review|halt)', path)
