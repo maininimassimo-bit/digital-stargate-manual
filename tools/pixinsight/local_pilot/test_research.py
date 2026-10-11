@@ -182,7 +182,10 @@ class ResearchTests(unittest.TestCase):
         from . import research_worker
         coordinator=object.__new__(research_worker.ResearchWorker)
         coordinator.post=__import__('unittest.mock',fromlist=['Mock']).Mock(return_value={'status':'READY_FOR_OWNER_REVIEW'})
-        with tempfile.TemporaryDirectory() as temp:
+        # The production worker accepts Windows paths only. On Linux CI adapt
+        # that boundary while exercising the real file hashes and delivery flow.
+        with tempfile.TemporaryDirectory() as temp, patch.object(research_worker,'safe_path',
+                side_effect=lambda value,root:Path(value).resolve()) if __import__('os').name != 'nt' else __import__('contextlib').nullcontext():
             session=Path(temp);attempt=session/'CP001';attempt.mkdir()
             (attempt/'result.json').write_text('{}',encoding='utf-8')
             (attempt/'binding.json').write_text('{}',encoding='utf-8')
