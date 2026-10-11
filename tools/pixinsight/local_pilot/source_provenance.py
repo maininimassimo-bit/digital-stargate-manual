@@ -23,6 +23,18 @@ OUTPUT_FIELDS = {'imageData','integratedPixels','integrationImageId','numberOfCh
 def _hash(value):
     require(isinstance(value,str) and re.fullmatch('[a-f0-9]{64}',value),'SOURCE_PROVENANCE_HASH')
 
+def _xml(raw,code):
+    # XISF headers and XPSM are UTF-8. Check decoded text before ElementTree
+    # can autodetect another encoding or resolve an internal entity.
+    try:
+        text=raw.decode('utf-8-sig') if isinstance(raw,bytes) else raw
+    except UnicodeDecodeError:
+        require(False,code)
+    require('\x00' not in text and '<!DOCTYPE' not in text and '<!ENTITY' not in text,code)
+    declaration=re.match(r'\s*<\?xml\s+[^?]*encoding=[\"\x27]([^\"\x27]+)',text)
+    require(declaration is None or declaration.group(1).lower()=='utf-8',code)
+    return ET.fromstring(text)
+
 def _image(path,index):
     with path.open('rb') as stream:
         require(stream.read(8)==b'XISF0100','SOURCE_PROVENANCE_SIGNATURE')
@@ -32,8 +44,8 @@ def _image(path,index):
         # 1 MiB limit used by the active V1 pixel diagnostics.
         require(0<length<=4*1024*1024 and reserved==0,'SOURCE_PROVENANCE_HEADER_LIMIT')
         raw=stream.read(length)
-    require(len(raw)==length and b'<!DOCTYPE' not in raw and b'<!ENTITY' not in raw,'SOURCE_PROVENANCE_XML')
-    elements=[e for e in ET.fromstring(raw) if e.tag.split('}')[-1]=='Image']
+    require(len(raw)==length,'SOURCE_PROVENANCE_XML')
+    elements=[e for e in _xml(raw,'SOURCE_PROVENANCE_XML') if e.tag.split('}')[-1]=='Image']
     require(1<=len(elements)<=16 and type(index) is int and 0<=index<len(elements),'SOURCE_PROVENANCE_IMAGE_INDEX')
     element=elements[index]
     require(element.get('id') not in {'rejection_low','rejection_high','slope_map','weight_map','crop_mask','drizzle_weights'},
@@ -64,8 +76,7 @@ def _property(element,name):
 
 def _history(element):
     raw=_property(element,'PixInsight:ProcessingHistory')
-    require('<!DOCTYPE' not in raw and '<!ENTITY' not in raw,'SOURCE_HISTORY_XML')
-    root=ET.fromstring(raw)
+    root=_xml(raw,'SOURCE_HISTORY_XML')
     require(root.tag=='ProcessingHistory' and root.get('version')=='1.0','SOURCE_HISTORY_VERSION')
     instances=list(root)
     require(1<=len(instances)<=256 and all(e.tag=='instance' and
@@ -125,8 +136,7 @@ def match_drizzle_container(path,container,*,source_sha256,container_sha256,imag
     require(len(instances)==1 and instances[0].get('class')=='DrizzleIntegration','SOURCE_DRIZZLE_HISTORY_REQUIRED')
     require(container.stat().st_size<=16*1024*1024,'SOURCE_CONTAINER_LIMIT')
     raw=container.read_bytes()
-    require(b'<!DOCTYPE' not in raw and b'<!ENTITY' not in raw,'SOURCE_CONTAINER_XML')
-    tree=ET.fromstring(raw)
+    tree=_xml(raw,'SOURCE_CONTAINER_XML')
     require(tree.tag=='{http://www.pixinsight.com/xpsm}xpsm','SOURCE_CONTAINER_ROOT')
     candidates=[e for e in tree.iter() if e.get('class')=='DrizzleIntegration']
     require(1<=len(candidates)<=16,'SOURCE_CONTAINER_COUNT')

@@ -66,6 +66,19 @@ class SourceProvenanceTests(unittest.TestCase):
     def test_header_over_four_mib_rejected_before_xml_or_attachment_read(self):
         self.child.write_bytes(b'XISF0100'+struct.pack('<II',4*1024*1024+1,0))
         with self.assertRaisesRegex(ValueError,'HEADER_LIMIT'):inspect(self.child,expected_sha256=fingerprint(self.child),image_index=0)
+    def test_utf16_container_entities_rejected_before_parser_resolution(self):
+        text=self.container.read_bytes().decode().replace('>2<','>&scale;<')
+        text='<!DOCTYPE xpsm [<!ENTITY scale "2">]>'+text
+        for encoding in ('utf-16','utf-16-le','utf-16-be'):
+            self.container.write_bytes(text.encode(encoding))
+            with self.subTest(encoding=encoding),self.assertRaisesRegex(ValueError,'CONTAINER_XML'):self.match()
+    def test_utf16_header_entities_rejected_before_parser_resolution(self):
+        text='<xisf><Image geometry="1:2:1" sampleFormat="Float32" colorSpace="Gray" location="attachment:4096:8"/></xisf>'
+        for encoding in ('utf-16','utf-16-le','utf-16-be'):
+            raw=('<!DOCTYPE xisf [<!ENTITY value "2">]>'+text).encode(encoding)
+            self.child.write_bytes(b'XISF0100'+struct.pack('<II',len(raw),0)+raw+bytes(4096-16-len(raw))+bytes(8))
+            with self.subTest(encoding=encoding),self.assertRaisesRegex(ValueError,'PROVENANCE_XML'):
+                inspect(self.child,expected_sha256=fingerprint(self.child),image_index=0)
     def test_matches_pixel_parameters_and_exposes_ui_difference(self):
         r=self.match();self.assertEqual(r['containerIndex'],0);self.assertEqual(r['uiDifferences'],['showImages'])
         self.assertEqual(r['executionReceipt'],'NOT_ESTABLISHED');self.assertEqual(r['linearity'],'NOT_ESTABLISHED')
