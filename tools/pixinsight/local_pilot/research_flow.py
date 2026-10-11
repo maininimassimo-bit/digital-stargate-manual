@@ -6,12 +6,31 @@ from pathlib import Path
 from .broker import require, encode, decode, opaque
 from .intake import sha
 from .source_profile import source_profile
-from .adaptive_provider import measurement_projection
-from .image_previews import provider_image, validate_curve
 from .research_knowledge import packet as knowledge_packet
-from .research_provider import generate
 from . import research_contract as contract
 from tools.scientific_registry.ingestion_storage import immutable
+
+
+# Research image dependencies are needed only when the feature is used.
+# Preserve the existing stdlib-only import path for disabled services.
+def measurement_projection(*args, **kwargs):
+    from .adaptive_provider import measurement_projection as project
+    return project(*args, **kwargs)
+
+
+def provider_image(*args, **kwargs):
+    from .image_previews import provider_image as image
+    return image(*args, **kwargs)
+
+
+def validate_curve(*args, **kwargs):
+    from .image_previews import validate_curve as validate
+    return validate(*args, **kwargs)
+
+
+def generate(*args, **kwargs):
+    from .research_provider import generate as send
+    return send(*args, **kwargs)
 
 
 class ResearchFlowMixin:

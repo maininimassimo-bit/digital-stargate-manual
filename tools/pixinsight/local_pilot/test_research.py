@@ -118,6 +118,13 @@ class ResearchTests(unittest.TestCase):
         self.assertLess(len(encode(value)),49152)
         with self.assertRaisesRegex(ProtocolError,'KNOWLEDGE_CHANGED'):instructions('f'*64)
 
+    def test_disabled_service_import_has_no_image_dependency(self):
+        import subprocess
+        import sys
+        subprocess.run([sys.executable,'-S','-c',
+            'import sys; import tools.pixinsight.local_pilot.scientific_portal; '
+            'assert "PIL" not in sys.modules; assert "numpy" not in sys.modules'],check=True)
+
     def test_analysis_is_idempotent_and_cannot_launch_without_owner(self):
         body=self.analysis();state=self.portal.research_analysis(self.request_id,body)
         self.assertEqual(self.portal.research_analysis(self.request_id,decode(encode(body))),state)
