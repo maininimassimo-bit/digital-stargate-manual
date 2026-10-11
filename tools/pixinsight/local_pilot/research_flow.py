@@ -8,6 +8,7 @@ from .intake import sha
 from .source_profile import source_profile
 from .research_knowledge import packet as knowledge_packet
 from . import research_contract as contract
+from .research_provenance import calibration_lineage
 from tools.scientific_registry.ingestion_storage import immutable
 
 
@@ -186,6 +187,40 @@ class ResearchFlowMixin:
         require(raw is not None and sha(decode(raw)) == row['policy']['knowledgeSha256'], 'RESEARCH_KNOWLEDGE_BINDING')
         return {'state':row,'analysis':analysis,'scientificKnowledge':decode(raw)}
 
+    def research_resume_offer(self, request_id):
+        row=self._research(request_id)
+        require(self.research_enabled() and row and row['approved'] and not row['cancelRequested'] and
+                row['status'] == 'STOPPED_FOR_REVIEW' and row['pending'] is None and row['final'] is None and
+                row['decisions'] and row['decisions'][-1]['decision']['action'] == 'STOP' and
+                row['apiCalls'] < contract.MAX_CALLS and row['nativeTrials'] <= contract.MAX_TRIALS and
+                row['policySha256'] == sha(row['policy']) and
+                row['policy']['catalogSha256'] == contract.fingerprint(), 'RESEARCH_OWNER_RESUME_STATE')
+        knowledge_packet(row['policy']['knowledgeSha256'])
+        lineage=calibration_lineage(row)
+        require(lineage['status'] == 'VERIFIED_NATIVE_SPCC_ANCESTOR', 'RESEARCH_RESUME_SPCC_ANCESTRY_REQUIRED')
+        return {'stateSha256':sha(row),'policySha256':row['policySha256'],'lineageSha256':sha(lineage),
+                'calibrationLineage':lineage,'remainingApiCalls':contract.MAX_CALLS-row['apiCalls'],
+                'remainingNativeTrials':contract.MAX_TRIALS-row['nativeTrials']}
+
+    def research_resume(self, request_id, value):
+        require(isinstance(value,dict) and set(value) ==
+                {'stateSha256','policySha256','lineageSha256','reviewedEvidenceConfirmed'} and
+                value['reviewedEvidenceConfirmed'] is True, 'RESEARCH_OWNER_RESUME_REQUIRED')
+        offer=self.research_resume_offer(request_id)
+        require(all(value[k] == offer[k] for k in ('stateSha256','policySha256','lineageSha256')),
+                'RESEARCH_RESUME_EVIDENCE_CHANGED')
+        receipt={'requestId':request_id,'confirmation':value,'evidence':offer,
+                 'confirmedAt':self.broker.clock().isoformat()}
+        def apply(row,_now):
+            require(sha(row) == offer['stateSha256'], 'RESEARCH_RESUME_STATE_CHANGED')
+            immutable(self.store,'science/research-resumptions/'+request_id+'/'+offer['stateSha256'],encode(receipt))
+            row.setdefault('resumptions',[]).append({'receiptSha256':sha(receipt),
+                'priorStateSha256':offer['stateSha256'],'lineageSha256':offer['lineageSha256'],
+                'confirmedAt':receipt['confirmedAt']})
+            row['status']='AWAITING_DECISION'
+            return row
+        return self._research_mutate(request_id,apply)
+
     def research_decision(self, request_id, value):
         require(self.research_enabled() and isinstance(value,dict) and set(value) == {'workerId','comparison'} and
                 value['workerId'] == self.broker.worker_id, 'RESEARCH_DECISION_REQUEST')
@@ -199,6 +234,7 @@ class ResearchFlowMixin:
         require(row and row['approved'] and row['status'] == 'AWAITING_DECISION' and
                 not row['cancelRequested'] and row['apiCalls'] < contract.MAX_CALLS, 'RESEARCH_DECISION_STATE')
         knowledge_packet(row['policy']['knowledgeSha256'])
+        lineage=calibration_lineage(row)
         assets = self._research_comparison(row, value['comparison'])
         owner = secrets.token_hex(32)
         binding = sha(row)
@@ -212,6 +248,7 @@ class ResearchFlowMixin:
         context = self.research_context(request_id); analysis = context['analysis']
         projection = {'intent':analysis['analysis']['evidence']['intent'],'stage':reserved['stage'],
             'selectedId':reserved['selectedId'],'instrument':analysis['instrument'],
+            'calibrationLineage':lineage,
             'checkpoints':[{k:v for k,v in n.items() if k not in ('artifacts',)} for n in reserved['checkpoints'].values()
                 if n['id'] == reserved['selectedId'] or n.get('parentId') == reserved['selectedId'] and n.get('stage') == reserved['stage']],
             'comparisonLimitations':{'pairedStellarFits':'NOT_ESTABLISHED_NEW_DETECTION_PER_CHECKPOINT',

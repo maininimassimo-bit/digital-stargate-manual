@@ -3,13 +3,13 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-PIAI-SCIENTIFIC-KNOWLEDGE-001 |
-| Versione | 1.3 — coordinatore rilasciato tecnicamente |
+| Versione | 1.4 — evidenze dei rami e provenienza della calibrazione |
 | Data | 11/10/2026 |
-| Stato | Conoscenza e coordinatore rilasciati; primo OAT arrestato dopo la prima API, nessuna prova nativa |
+| Stato | Conoscenza e coordinatore attivi; OAT M27 10 API / 5 prove, STOP prima della fusione; correzione della provenienza candidata |
 
 ## Obiettivo e confini
 
-Il nuovo [coordinatore di prove](PIAI-RESEARCH-COORDINATOR-2026-10-11.md) aggiunge il protocollo versionato per decidere i rami al pacchetto scientifico storico, senza alterare i job V2. Integrato con PR579 e disponibile nel portale, comprende adapter SPCC e correzione ottica provati su copie M27. Review e distribuzione completate; perimetro M27 confermato nel portale. La prima richiesta API non ha prodotto una decisione validata e resta `API_INDETERMINATE_NO_RETRY`; nessuna prova nativa è partita. L’OAT completo resta pendente.
+Il [coordinatore di prove](PIAI-RESEARCH-COORDINATOR-2026-10-11.md) trasferisce il protocollo per scegliere i rami. La richiesta distinta M27 2ffd1ae8 ha eseguito e verificato SPCC, due alternative BXT, denoise e stretch, conservando le decisioni API. STOP in COMBINE causato dall'omissione del fit SPCC dell'antenato dal contesto corrente: il prodotto nativo esiste in CP001. Correzione candidata della provenienza e ripresa Owner senza azzerare budget; nessuna fusione o consegna finale. [Consuntivo OAT e limiti](PIAI-RESEARCH-COORDINATOR-2026-10-11.md#consuntivo-oat-m27). Le note successive sul primo OAT sono snapshot storici.
 
 Owner richiede che il modulo funzioni dal portale web, senza dipendere da una chat, e che le API ricevano la conoscenza della skill `pixinsight-scientific`. La conoscenza è ora una risorsa del servizio, distinta dalle misure native e dalle capacità effettivamente implementate. Il modello rimane `gpt-6-luna`; chiave sul backend, master sul PC e ricevute immutabili conservati.
 
@@ -59,3 +59,6 @@ La [diagnostica rilasciata e i vincoli della decisione API](PIAI-RESEARCH-COORDI
 
 
 Successivo OAT distinto autorizzato `2ffd1ae8`: prima decisione SPCC validata e prova CP001 verificata localmente su copie, 11.098 token noti. Ricevuta di misure fermata prima dell’HTTP perché supera il limite 256KiB; nessun replay nativo. [Stato e correzione del limite di trasporto](PIAI-RESEARCH-COORDINATOR-2026-10-11.md#prima-prova-spcc-reale-e-dimensione-della-ricevuta). Selezione, workflow completo e accettazione restano pendenti.
+
+
+Requisito di continuità della conoscenza: l'API deve ricevere il checkpoint di calibrazione della catena selezionata con ricevuta e trasformazioni successive. Assenza di un nuovo fit locale non cancella la calibrazione storica; presenza del fit storico non prova validità fotometrica del finale. La proiezione candidata trasmette questa distinzione e mantiene il pacchetto di guide approvato. La scelta dei rami BXT ha conservato il controllo per beneficio non conclusivo e rischio nelle alte luci; una FWHM minore da stelle non appaiate non è un criterio sufficiente. Per denoise, supporto MRS zero rende inutilizzabile quella stima, non prova rumore nullo. Rilascio/ripresa e OAT finale restano aperti.

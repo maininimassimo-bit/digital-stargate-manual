@@ -26,6 +26,74 @@ def png(channels=1):
 
 
 class ResearchTests(unittest.TestCase):
+    def calibration_to_stretch(self):
+        self.approve();self.post('decision',comparison=self.comparison());self.checkpoint()
+        self.action='SELECT';self.selected='CP001'
+        self.post('decision',comparison=self.comparison())  # calibration
+        self.post('decision',comparison=self.comparison())  # omit detail
+        self.action='TEST';self.selected=None;self.process='DENOISE'
+        self.parameters={'denoiseL':.3,'denoiseRGB':.3}
+        self.post('decision',comparison=self.comparison());self.checkpoint()
+        self.action='SELECT';self.selected='CP002';self.post('decision',comparison=self.comparison())
+        self.action='TEST';self.selected=None;self.process='STRETCH';self.parameters={'targetBackground':.06}
+        self.post('decision',comparison=self.comparison());self.checkpoint()
+        self.action='SELECT';self.selected='CP003'
+        return self.post('decision',comparison=self.comparison())
+
+    def test_native_spcc_ancestry_reaches_later_paid_decision_without_claiming_new_fit(self):
+        state=self.calibration_to_stretch()
+        self.assertIsNone(state['checkpoints']['CP003']['photometry'])
+        self.action='STOP';self.selected=None
+        self.post('decision',comparison=self.comparison())
+        payload=self.calls[-1];projection=json.loads(payload['input'][0]['content'][0]['text'])
+        lineage=projection['calibrationLineage']
+        self.assertEqual([r['id'] for r in lineage['chain']],['CP000','CP001','CP002','CP003'])
+        self.assertEqual(lineage['calibration']['checkpointId'],'CP001')
+        self.assertEqual(lineage['calibration']['receiptSha256'],sha(lineage['calibration']['nativeFit']))
+        self.assertEqual(lineage['downstreamPhotometricValidity'],'NOT_ESTABLISHED')
+        self.assertIn('not absence of the ancestral fit',payload['instructions'])
+        self.assertNotIn('localPath',json.dumps(payload));self.assertNotIn('sourceSha256',json.dumps(payload))
+
+    def test_owner_resume_preserves_stop_budget_policy_and_native_results(self):
+        self.calibration_to_stretch();self.action='STOP';self.selected=None
+        stopped=self.post('decision',comparison=self.comparison())
+        offer=self.portal.research_resume_offer(self.request_id)
+        confirmation={k:offer[k] for k in ('stateSha256','policySha256','lineageSha256')}
+        confirmation['reviewedEvidenceConfirmed']=True
+        with self.assertRaises(ProtocolError):self.portal.research_resume(self.request_id,{**confirmation,'lineageSha256':'f'*64})
+        before=len(self.calls)
+        resumed=self.portal.research_resume(self.request_id,confirmation)
+        self.assertEqual(resumed['status'],'AWAITING_DECISION');self.assertEqual(len(self.calls),before)
+        for key in ('decisions','apiCalls','nativeTrials','checkpoints','policy','policySha256','selectedId','stage'):
+            self.assertEqual(resumed[key],stopped[key])
+        raw,_=self.store.get('science/research-resumptions/'+self.request_id+'/'+offer['stateSha256'])
+        self.assertEqual(sha(decode(raw)),resumed['resumptions'][0]['receiptSha256'])
+        with self.assertRaises(ProtocolError):self.portal.research_resume(self.request_id,confirmation)
+
+    def test_resume_never_reopens_indeterminate_cancelled_or_unknown_native_state(self):
+        self.calibration_to_stretch();self.action='STOP';self.selected=None
+        stopped=self.post('decision',comparison=self.comparison())
+        for status in ('API_INDETERMINATE_NO_RETRY','API_RESERVED','NATIVE_STARTED','RECOVERY_REQUIRED','READY_FOR_OWNER_REVIEW'):
+            self.portal._research_mutate(self.request_id,lambda row,now:row.update(status=status) or row)
+            with self.assertRaises(ProtocolError):self.portal.research_resume_offer(self.request_id)
+        self.portal._research_mutate(self.request_id,lambda row,now:row.update(status='STOPPED_FOR_REVIEW',cancelRequested=True) or row)
+        with self.assertRaises(ProtocolError):self.portal.research_resume_offer(self.request_id)
+        self.assertEqual(self.portal.research_state(self.request_id)['apiCalls'],stopped['apiCalls'])
+
+    def test_invalid_ancestor_receipt_and_cycles_fail_before_reserving_or_sending(self):
+        state=self.calibration_to_stretch();before=len(self.calls)
+        def change(row,now):
+            row['checkpoints']['CP001']['photometricReceiptSha256']='f'*64
+            return row
+        self.portal._research_mutate(self.request_id,change)
+        with self.assertRaisesRegex(ProtocolError,'LINEAGE_SPCC_RECEIPT'):
+            self.post('decision',comparison=self.comparison())
+        self.assertEqual(len(self.calls),before)
+        self.assertEqual(self.portal.research_state(self.request_id)['apiCalls'],state['apiCalls'])
+        from .research_provenance import calibration_lineage
+        state['checkpoints']['CP000']['parentId']='CP003'
+        with self.assertRaisesRegex(ProtocolError,'LINEAGE_CHAIN'):calibration_lineage(state)
+
     def test_initial_schema_cannot_invent_parent_or_new_checkpoint_id(self):
         state=self.approve();schema=contract.schema(state)['properties']
         self.assertEqual(schema['parentId']['enum'],['CP000'])
