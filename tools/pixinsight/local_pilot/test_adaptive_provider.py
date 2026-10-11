@@ -81,4 +81,26 @@ class ProviderTests(unittest.TestCase):
             p=AdaptiveProvider('mock','gpt-6-luna',send=lambda payload:r)
             with self.assertRaisesRegex(ValueError,'NO_RETRY'):p.generate_initial(*inputs(),**CONSENTS)
 
+    def test_failure_logs_only_fixed_stage_without_exception_payload_and_no_resend(self):
+        calls=[]
+        def failed(payload):
+            calls.append(payload)
+            raise RuntimeError('secret sk-example F:/private/image.xisf')
+        p=AdaptiveProvider('mock','gpt-6-luna',send=failed)
+        args=inputs()
+        with self.assertLogs('tools.pixinsight.local_pilot.adaptive_provider',level='WARNING') as logs:
+            with self.assertRaisesRegex(ValueError,'NO_RETRY'):p.generate_initial(*args,**CONSENTS)
+        self.assertEqual(logs.output,['WARNING:tools.pixinsight.local_pilot.adaptive_provider:ADAPTIVE_INITIAL_FAILED_NO_RETRY phase=SEND reason=OTHER status=UNKNOWN'])
+        with self.assertRaisesRegex(ValueError,'ALREADY_ATTEMPTED'):p.generate_initial(*args,**CONSENTS)
+        self.assertEqual(len(calls),1)
+
+    def test_missing_lrgb_fusion_has_bounded_diagnostic(self):
+        r=response();d=json.loads(r['output'][0]['content'][0]['text'])
+        d['graph']['steps']=[{'process':'STRETCH','parameters':{'targetBackground':.06}}]
+        r['output'][0]['content'][0]['text']=json.dumps(d)
+        p=AdaptiveProvider('mock','gpt-6-luna',send=lambda payload:r)
+        with self.assertLogs('tools.pixinsight.local_pilot.adaptive_provider',level='WARNING') as logs:
+            with self.assertRaisesRegex(ValueError,'NO_RETRY'):p.generate_initial(*inputs(),**CONSENTS)
+        self.assertIn('phase=GRAPH reason=LRGB_FUSION_REQUIRED status=completed',logs.output[0])
+
 if __name__=='__main__':unittest.main()

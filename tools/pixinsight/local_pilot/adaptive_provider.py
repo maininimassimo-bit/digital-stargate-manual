@@ -4,6 +4,7 @@ The trusted caller must durably reserve before calling this adapter. Immutable
 evidence contains local bindings; the provider only receives a projection.
 """
 import copy
+import logging
 import re
 import statistics
 from tools.pixinsight.local_pilot.broker import require,encode,decode
@@ -147,12 +148,16 @@ class AdaptiveProvider(OpenAIPlanner):
                 'Never claim a best workflow or scientific acceptance without verified intermediate results.'),
             'input':[{'role':'user','content':content}],
             'text':{'format':{'type':'json_schema','name':VERSION,'strict':True,'schema':initial_schema(sampling=sampling)}}}
+        phase='SEND'
+        response=None
         try:
             response=self._send(payload)
+            phase='RESPONSE'
             require(isinstance(response,dict) and response.get('status')=='completed' and
                     isinstance(response.get('id'),str) and re.fullmatch('resp_[A-Za-z0-9_-]{1,160}',response['id']) and
                     isinstance(response.get('model'),str) and re.fullmatch('[A-Za-z0-9][A-Za-z0-9._-]{1,119}',response['model']),
                     'ADAPTIVE_RESPONSE')
+            phase='OUTPUT'
             texts=[]
             for item in response.get('output',[]):
                 require(item.get('type') in {'reasoning','message'},'ADAPTIVE_TOOLS_FORBIDDEN')
@@ -161,17 +166,30 @@ class AdaptiveProvider(OpenAIPlanner):
                     for chunk in item.get('content',[]):
                         require(chunk.get('type')=='output_text','ADAPTIVE_REFUSAL_OR_INVALID');texts.append(chunk['text'])
             require(len(texts)==1 and isinstance(texts[0],str) and len(texts[0])<=32768,'ADAPTIVE_OUTPUT')
+            phase='DECISION'
             decision=decode(texts[0])
             require(isinstance(decision,dict) and set(decision)=={'action','graph','rationale','limitations'},'ADAPTIVE_DECISION')
             safe_text(decision['rationale']);safe_text(decision['limitations'])
             if decision['action']=='PROPOSE_GRAPH':
+                phase='GRAPH'
                 decision['graph']=catalog.validate_graph(decision['graph'],mode,facts)
+                phase='SAMPLING'
                 require(decision['graph']['workingSampling'] in sampling,'ADAPTIVE_UNSUPPORTED_SAMPLING')
             else:require(decision['action']=='STOP_FOR_REVIEW' and decision['graph'] is None,'ADAPTIVE_ACTION')
+            phase='USAGE'
             usage=response.get('usage',{});keys=('input_tokens','output_tokens','total_tokens')
             require(isinstance(usage,dict) and all(type(usage.get(k)) is int and 0<=usage[k]<=10**9 for k in keys) and
                     usage['total_tokens']==usage['input_tokens']+usage['output_tokens'],'ADAPTIVE_USAGE')
             return decision,{'responseId':response['id'],'requestedModel':self.model,'model':response['model'],
                              'usage':{k:usage[k] for k in keys},'method':VERSION}
-        except Exception:
+        except Exception as error:
+            # Fixed categories only: never log exception text, provider text,
+            # credentials, image data, source paths or owner intent.
+            reasons={'ADAPTIVE_LRGB_NONLINEAR_COMBINATION_REQUIRED':'LRGB_FUSION_REQUIRED',
+                     'ADAPTIVE_GRAPH_ORDER':'GRAPH_ORDER','ADAPTIVE_PARAMETER_BOUND':'PARAMETER_BOUND',
+                     'ADAPTIVE_RESPONSE':'RESPONSE_INVALID','AI_TEXT_PRIVATE_OR_INVALID':'TEXT_INVALID'}
+            reason=reasons.get(str(error),'OTHER')
+            status=response.get('status') if isinstance(response,dict) else None
+            status=status if status in ('completed','incomplete','failed') else 'UNKNOWN'
+            logging.getLogger(__name__).warning('ADAPTIVE_INITIAL_FAILED_NO_RETRY phase=%s reason=%s status=%s',phase,reason,status)
             require(False,'ADAPTIVE_PROVIDER_FAILED_NO_RETRY')
