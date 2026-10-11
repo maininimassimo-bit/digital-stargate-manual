@@ -26,15 +26,17 @@ PARAMETERS = {
     'LOCAL_CONTRAST': {'contrastLarge': (0, .4, float), 'contrastSmall': (0, .4, float)},
     'COMBINE': {}, 'RECOMBINE': {},
 }
-DOMAIN_RULES = {k: 'LINEAR_ATTESTED' for k in ('BACKGROUND', 'COLOR', 'DECONVOLVE', 'STRETCH')}
-DOMAIN_RULES.update({k: 'NONLINEAR_ATTESTED' for k in ('LOCAL_CONTRAST', 'COMBINE', 'RECOMBINE')})
+ATTESTED_DOMAINS = ('LINEAR_ATTESTED', 'NONLINEAR_ATTESTED')
+DOMAIN_RULES = {k: ('LINEAR_ATTESTED',) for k in ('BACKGROUND', 'COLOR', 'DECONVOLVE', 'STRETCH')}
+DOMAIN_RULES.update({k: ('NONLINEAR_ATTESTED',) for k in ('LOCAL_CONTRAST', 'COMBINE', 'RECOMBINE')})
+DOMAIN_RULES.update({k: ATTESTED_DOMAINS for k in ('DENOISE', 'SEPARATE')})
 FACT_RULES = {'BACKGROUND': 'backgroundROI', 'COLOR': 'backgroundROI',
               'DECONVOLVE': 'stellarPSF', 'LOCAL_CONTRAST': 'mask'}
 
 
 def fingerprint():
     return sha({'version': VERSION, 'order': PROCESS_ORDER,
-                'domainRules': DOMAIN_RULES, 'factRules': FACT_RULES,
+                'initialDomains': ATTESTED_DOMAINS, 'domainRules': DOMAIN_RULES, 'factRules': FACT_RULES,
                 'commonFacts': ['registration', 'runtime'], 'colorModes': ['LRGB', 'OSC'],
                 'transition': {'STRETCH': 'NONLINEAR_ATTESTED'},
                 'branches': {'DIRECT': {'forbidden': ['SEPARATE', 'RECOMBINE']},
@@ -59,6 +61,7 @@ def provenance(value):
 def validate_graph(value, mode, facts):
     """A finite graph, with conservative prerequisites; no quality assertion."""
     facts = provenance(facts)
+    require(facts['domain'] in ATTESTED_DOMAINS, 'ADAPTIVE_ATTESTED_DOMAIN_REQUIRED')
     require(isinstance(mode, str) and mode in MODES, 'ADAPTIVE_MODE')
     require(isinstance(value, dict) and set(value) == {'catalog', 'catalogSha256', 'branch', 'steps', 'rationale', 'limitations'},
             'ADAPTIVE_GRAPH_FIELDS')
@@ -86,8 +89,10 @@ def validate_graph(value, mode, facts):
     domain = facts['domain']
     for process in ids:
         if process in DOMAIN_RULES:
-            require(domain == DOMAIN_RULES[process], 'ADAPTIVE_LINEAR_REQUIRED' if DOMAIN_RULES[process] ==
-                    'LINEAR_ATTESTED' else 'ADAPTIVE_NONLINEAR_REQUIRED')
+            allowed = DOMAIN_RULES[process]
+            code = 'ADAPTIVE_LINEAR_REQUIRED' if allowed == ('LINEAR_ATTESTED',) else (
+                'ADAPTIVE_NONLINEAR_REQUIRED' if allowed == ('NONLINEAR_ATTESTED',) else 'ADAPTIVE_ATTESTED_DOMAIN_REQUIRED')
+            require(domain in allowed, code)
         if process in FACT_RULES:
             key = FACT_RULES[process]
             require(facts[key] == 'VERIFIED', {'backgroundROI': 'ADAPTIVE_BACKGROUND_REQUIRED',

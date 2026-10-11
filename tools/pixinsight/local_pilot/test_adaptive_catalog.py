@@ -44,6 +44,18 @@ class CatalogTests(unittest.TestCase):
             with self.subTest(key=key, missing=missing), self.assertRaises(ProtocolError):
                 validate_graph(graph(), 'LRGB', value)
 
+    def test_isolated_denoise_requires_an_explicit_supported_domain(self):
+        value = graph()
+        value['steps'] = [value['steps'][1]]
+        unknown = facts()
+        unknown['domain'] = 'NOT_ESTABLISHED'
+        with self.assertRaisesRegex(ProtocolError, 'ATTESTED_DOMAIN_REQUIRED'):
+            validate_graph(value, 'LRGB', unknown)
+        for domain in ('LINEAR_ATTESTED', 'NONLINEAR_ATTESTED'):
+            known = facts()
+            known['domain'] = domain
+            self.assertEqual(validate_graph(value, 'LRGB', known), value)
+
     def test_order_duplicates_unknown_processes_and_code_are_rejected(self):
         values = []
         reordered = graph()
