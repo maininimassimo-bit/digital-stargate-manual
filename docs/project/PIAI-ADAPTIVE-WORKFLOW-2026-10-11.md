@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-049-EXT-PIAI-ADAPTIVE |
-| Versione | 1.7 |
+| Versione | 1.8 |
 | Stato | Owner-authorized / In Progress; statistiche master abilitate sul backend, ciclo adattivo non operativo |
 | Data | 2026-10-11 |
 
@@ -110,6 +110,26 @@ Il journal candidato richiede anche il consenso alle anteprime e ammette `COMPLE
 `native_analysis.py` prepara copie di input espliciti, con controllo dello scope locale, rifiuto di UNC/reparse point, geometria/indice e hash. `analysis.jsh` misura soltanto le copie; verifica History e hash prima/dopo ogni master e ricontrolla tutte le sorgenti alla fine. Il verificatore Python usa l'impronta del manifest conservata dal chiamante e controlla componenti, geometrie, regioni e binding prima della ricevuta. Il preparatore non avvia PixInsight e non accede a credenziali o rete.
 
 Prova privata read-only sui quattro master M27, PixInsight 1.9.5 build 1706: R 1.727 sorgenti/255 selezionate/254 fit; G 1.827/255/253; B 588/225/225; L 3.165/255/253. Rumore MRS conservato per tutti i ruoli. Originali e copie invariati, istanza precedente preservata, sola istanza isolata chiusa dopo verifica. Il primo controllo del comando prima della chiusura non corrispondeva per separatori del percorso: nessun processo chiuso; identità esatta poi verificata e chiusa correttamente. Questi conteggi non sono soglie, score, seeing o accettazione. Nessuna chiamata reale OpenAI, deconvoluzione, denoise o stretch eseguiti nella prova.
+
+PR [#567](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/567) integra questa ammissione, merge `dbf5159349b7822069b61f443dcddc62b2c2fc96`: revisioni ARB poi RQ sull'head finale, 16 check PR e dieci workflow post-merge SUCCESS. Il workflow transients Windows ha richiesto un rerun dopo un errore di connessione locale, sullo stesso SHA. [Ricevuta verificabile](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/567#issuecomment-6109147077). Il runtime adattivo resta disabilitato.
+
+### Preparazione e segmenti: incremento candidato non operativo
+
+`adaptive_preparation.py` descrive una preparazione esplicita, ancora da collegare alla proposta e all'esecutore. LRGB associa R/G/B e conserva L; OSC conserva RGB e definisce una pseudo-luminanza pesata 0,2126/0,7152/0,0722, non una misura fotometrica. SHO associa SII/Ha/OIII e HOO Ha/OIII/OIII, con Ha come traccia di luminanza: sono palette assegnate. L'identità delle sorgenti, l'indice dell'immagine e la geometria comune sono obbligatori; la stessa immagine non può essere riutilizzata come due master distinti.
+
+Il campionamento è una scelta esplicita `ORIGINAL` oppure `BIN2_AVERAGE`, senza selezione automatica dalla sola FWHM. Il contratto candidato rifiuta dimensioni dispari nel binning e uscite minori di 32 pixel, anziché presumere il comportamento di rifilatura. Conserva geometria originale, geometria di lavoro e trasformazione degli spigoli dei pixel; non attribuisce uno spostamento ai centroidi. Una baseline nativa salvata e misurata sulla griglia di lavoro deve precedere i confronti del grafo. Per M27 le geometrie sarebbero rispettivamente 4634×2808 e 2317×1404; nessun ricampionamento è stato eseguito.
+
+`adaptive_segments.py` riserva un permesso legato al grafo approvato, al risultato esatto, al runtime e al root locale. La concorrenza ammette un solo vincitore; una prenotazione o un avvio persi non autorizzano un nuovo avvio automatico. Una cancellazione fra prenotazione e avvio impedisce il processo. I nonce restano nelle viste worker. Il modulo non ha ancora route HTTP, launcher o ricevute fisiche di checkpoint.
+
+`adaptive_native.jsh` è una factory finita dei processi del catalogo, con parametri limitati, selettori ML espliciti, controllo delle tracce RGB/L e conservazione delle dipendenze stellari e delle maschere. Lo stretch richiede una ROI di fondo attestata anche nel catalogo. Il controllore esterno deve verificare copie, permesso, runtime, History e checkpoint: la factory e i test con API simulate non costituiscono esecuzione nativa o accettazione. Preparazione, parametri nativi fissi e dipendenze dovranno comparire nella policy esatta prima di abilitare il dispatch.
+
+### M27: stato iniziale e decisione sul campionamento
+
+Owner conferma «Sì, sono master WBPP ancora da elaborare». L'attestazione privata è legata ai quattro SHA256 e agli indici selezionati: stabilisce lo stato computazionale pre-stretch, senza dimostrare linearità fisica del sensore, accuratezza della registrazione o qualità finale.
+
+Sul campione gaussiano nativo, le FWHM mediane sull'asse maggiore sono R 15,93, G 13,26, B 13,07 e L 14,90 pixel della griglia drizzle 2×. Il [manuale BlurXTerminator](https://www.rc-astro.com/blurxterminator-technical-manual/) documenta il limite PSF manuale di 8 pixel e suggerisce IntegerResample 2× per dati sovracampionati. Questo motiva una valutazione del campionamento; non dimostra che ogni stella del campo sia adatta al modello, né che il binning migliori la risoluzione. Il binning medio è un filtro passa-basso: cambia griglia e correlazioni, perciò rumore e FWHM non si confrontano come se fossero rimasti sullo stesso campionamento. Residui, saturazione, blending e bias del campione gaussiano restano da valutare.
+
+Le nuove anteprime dei quattro ruoli usano la stessa curva di visualizzazione derivata da L, sia sul campo sia sui ritagli. Sono proiezioni dei pixel reali: non calibrazione cromatica e non prova di miglioramento. I confronti diagnostici dei centroidi fra canali e L conservano corrispondenze candidate e outlier, senza promuovere automaticamente `registration=VERIFIED` o una soglia universale di accettazione.
 
 ### Modelli e input visivi: capacità documentate, attivazione separata
 

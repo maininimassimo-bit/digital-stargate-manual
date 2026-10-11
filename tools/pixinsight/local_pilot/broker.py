@@ -88,6 +88,8 @@ class Broker:
         value = copy.deepcopy(item)
         if not worker:
             value.pop("leaseToken", None)
+            for permit in value.get('adaptiveSegmentPermits', {}).values():
+                permit.pop('owner', None)
             if value.get("report"):
                 value["report"].pop("leaseToken", None)
         return value
