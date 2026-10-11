@@ -3,7 +3,7 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-049-EXT-PIAI-ADAPTIVE |
-| Versione | 1.4 |
+| Versione | 1.5 |
 | Stato | Owner-authorized / In Progress; statistiche master abilitate sul backend, ciclo adattivo non operativo |
 | Data | 2026-10-11 |
 
@@ -55,7 +55,9 @@ Prova privata read-only sul master L M27, indice 0, 4634×2808 mono, PixInsight 
 
 Riferimenti primari consultati: documentazione PJSR locale `Image/Image.html`, `PSF/PSF.html` e `StarDetector/StarDetector.html`, header `StarDetector.jsh` V2.01 rilasciato il 15/09/2026 e script nativo `FWHMEccentricity.js`. Le dipendenze e i moduli/modelli effettivamente caricati devono essere attestati nel futuro manifest runtime completo: il solo hash dell'header StarDetector non certifica tutte le sue dipendenze o un modello ML.
 
-### Provenienza candidata: History e relazione di autocrop
+### Provenienza integrata, non collegata al ciclo: History e relazione di autocrop
+
+PR [#564](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/564), head `ef8acee525776ab2b790bb9ab870b794ece7850a`, merge `aefb8a2a189400f1f65f2144b788ba1b82d7dd35`: ARB poi RQ indipendenti APPROVED zero finding, nove check PR SUCCESS, main allineato e merge protetto. 217 test del coordinatore locale PASS, MkDocs strict PASS. La review iniziale ha individuato il bypass del blocco entità con UTF-16: corretto prima del merge, con regressioni in entrambi i reader. [Ricevuta di revisione](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/564#issuecomment-6108333773). Il merge non attiva endpoint o dispatch V2; la verifica post-merge è distinta.
 
 `source_provenance.py` legge la proprietà nativa `PixInsight:ProcessingHistory` della sola immagine XISF esplicitamente selezionata. Conserva hash della proprietà e nomi dei processi registrati, senza eseguire né importare le istanze. Una History di DrizzleIntegration non contiene necessariamente calibrazione e allineamento dei suoi input: la copertura è `RECORDED_VIEW_OPERATIONS_ONLY`, upstream, dominio, registrazione e accettazione restano non stabiliti.
 
@@ -65,7 +67,19 @@ Il confronto con un contenitore XPSM verifica gli input e ogni campo che modific
 
 Letture read-only, hash prima/dopo, XML senza DTD/entità, massimo 16 immagini e indice obbligatorio; header limitato a 4 MiB, allineato all'inventario sorgenti, contenitore a 16 MiB. La prova dei pixel supporta esclusivamente Float32 non compresso planare little-endian, con attachment delimitato e geometria/canali verificati. Nessuna enumerazione di directory, rete, ricerca automatica di genitori o fallback silenzioso. Il limite separato di 1 MiB della diagnostica V1 attiva rimane invariato.
 
-Dieci test sintetici PASS. Riconciliazione privata reale dei quattro master M27 R/G/B/L: pixel di ciascun crop byte-identici al rispettivo genitore 5504×4320, regione `(456,656)–(5090,3464)`, risultato 4634×2808. Input e 25 campi del contenitore DrizzleIntegration corrispondono univocamente, con la sola differenza `showImages` dichiarata. I file sono rimasti invariati. Il primo tentativo si era fermato sul parent L con header 1.123.713 byte: rifiuto conservato, reader di provenienza reso compatibile con il limite documentato di 4 MiB e tutte e quattro le prove ripetute; nessuna modifica alla V1 o avvio nativo/API. Rapporti e impronte conservati privatamente.
+Dodici test sintetici PASS, incluse DTD/entità in UTF-16 con e senza BOM rifiutate prima del parsing. Riconciliazione privata reale dei quattro master M27 R/G/B/L: pixel di ciascun crop byte-identici al rispettivo genitore 5504×4320, regione `(456,656)–(5090,3464)`, risultato 4634×2808. Input e 25 campi del contenitore DrizzleIntegration corrispondono univocamente, con la sola differenza `showImages` dichiarata. I file sono rimasti invariati. Il primo tentativo si era fermato sul parent L con header 1.123.713 byte: rifiuto conservato, reader di provenienza reso compatibile con il limite documentato di 4 MiB e tutte e quattro le prove ripetute; nessuna modifica alla V1 o avvio nativo/API. Rapporti e impronte conservati privatamente.
+
+### Provider multimodale candidato, non attivato
+
+`image_previews.py` produce proiezioni di visualizzazione dai campioni reali, senza modificare gli originali. Campo completo limitato al lato maggiore di 512 pixel; ritagli di massimo 256 pixel per lato conservano la scala dei pixel. Si applica la funzione midtones `MTF(m,x)=(m−1)x/((2m−1)x−m)`, con estremi di display 0 e 1 e parametro ricavato dalla mediana del genitore e dal target dichiarato. Clipping e quantizzazione PNG a otto bit riguardano soltanto la proiezione. Il ridimensionamento del campo usa BOX dopo la curva. La mediana del campo non viene interpretata come cielo vuoto. Curve degeneri sono rifiutate; trasformazione in blocchi Float64 e verifica di finitezza precedono la quantizzazione. Curve, geometria, crop, metodo e impronta sono registrati; prima/dopo devono usare la stessa curva del genitore, senza normalizzazione indipendente che mascheri una perdita di segnale.
+
+`adaptive_provider.py` prepara una richiesta Responses con massimo quattro PNG, ciascuno di massimo 1 MiB, testo numerico limitato e output strutturato. Gli asset sono verificati con SHA256, geometria/canali e crop contro il ruolo sorgente, e decodificati/ricodificati per eliminare metadati; nessun URL remoto o immagine sintetica. Servono tre consensi distinti e veri: dati generali, statistiche e anteprime. L'adapter chiamante deve ricavarli dall'approvazione Owner registrata, non da un'attestazione arbitraria del worker. La policy e gli endpoint attuali non sono ancora estesi a questo trasferimento: nessun invio visivo abilitato dal solo modulo.
+
+Le misure native vengono validate contro binding locali indipendenti e proiettate in descrittori per canale, conteggi, supporto MRS e mediana dei fit gaussiani. Hash sorgenti, History, percorsi e binding privati non sono inviati al provider. Le mediane descrivono il campione selezionato, senza score di qualità, SNR o certificazione di risoluzione. Il modello può proporre solo un grafo del catalogo o fermarsi per revisione; il validatore ricontrolla parametri, ordine, dominio e prerequisiti, senza promuovere fatti sconosciuti dalla valutazione visiva.
+
+La prenotazione durevole deve precedere la richiesta e legare l'evidence esatta; un secondo invio nello stesso processo è bloccato anche dopo timeout. Questa protezione in memoria integra la ledger, senza sostituirla. Risposte incomplete, rifiuti, codice/processi esterni al catalogo e usage incoerente sono rifiutati senza retry. L'adapter restituisce una proposta, non una ricevuta nativa o accettazione. Collegamento a policy, portale, ledger, checkpoint e dispatch rimane da completare.
+
+Undici test sintetici PASS sulle anteprime e sul provider simulato, incluse conservazione dei campioni, confronto con curva condivisa, consenso/binding e risposta persa. Renderer locale usa NumPy; decodifica provider richiede soltanto Pillow. Prova privata sul master L M27: campo e crop centrali ottenuti dai pixel veri, originale SHA256 invariato, mediana del genitore 0,00782873854, target display 0,2. Nessun trasferimento al provider, processo nativo o accettazione scientifica. La ricostruzione dei 328 input WBPP prosegue separatamente e non è ancora una nuova attestazione.
 
 ### Modelli e input visivi: capacità documentate, attivazione separata
 
