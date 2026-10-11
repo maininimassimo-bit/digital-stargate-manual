@@ -3,8 +3,8 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-049-EXT-PIAI-ADAPTIVE |
-| Versione | 1.1 |
-| Stato | Owner-authorized / In Progress; analisi locale candidata, ciclo adattivo non operativo |
+| Versione | 1.2 |
+| Stato | Owner-authorized / In Progress; statistiche master abilitate sul backend, ciclo adattivo non operativo |
 | Data | 2026-10-11 |
 
 Owner autorizza analisi delle immagini, verifica dei risultati intermedi e scelta del workflow IA dal tipo indicato nel portale. Richiesta successiva: rimozione della quota di una chiamata API al giorno.
@@ -17,7 +17,23 @@ Primo modulo locale candidato `tools/pixinsight/local_pilot/image_analysis.py`: 
 
 Differenze numeriche prima/dopo esportabili, ma `scientificComparison=NOT_ESTABLISHED`: stessa geometria non prova registrazione o dominio. Nessuna soglia/score di miglioramento; PSF e rumore di fondo indisponibili, MAD del campo non è SNR. Layout compressi/Float64 richiedono il futuro adapter nativo, senza fallback silenzioso; multi-image supportato nel nuovo candidato solo con indice esplicito.
 
-Il candidato successivo collega il modulo al worker di pianificazione e al payload numerico OpenAI, con consenso separato nel portale. Runtime cloud/worker non ancora aggiornati: opzione disabilitata fino alla verifica coordinata. Ricetta V1 invariata. Restano requisiti aperti: adapter master/export, maschere/background/PSF validati, catalogo/grafo V2, piano da immagini, segmentazione, decisioni checkpoint multiple e accounting persistente, recovery/OAT e History/progetto. Non sono debito accettato o scope escluso. P6 e BKL-051 invariati; nessuna accettazione o pubblicazione immagini.
+PR [#560](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/560) collega il modulo al worker di pianificazione e al payload numerico OpenAI, con consenso separato nel portale. Runtime cloud/worker aggiornati e flag abilitato dopo verifica coordinata. Ricetta V1 invariata. Restano requisiti aperti: adapter master/export, maschere/background/PSF validati, catalogo/grafo V2, piano da immagini, segmentazione, decisioni checkpoint multiple e accounting persistente, recovery/OAT e History/progetto. Non sono debito accettato o scope escluso. P6 e BKL-051 invariati; nessuna accettazione o pubblicazione immagini.
+
+### Ricevuta di attivazione statistiche
+
+Head revisionato `83ae02bb3763e78ad853b80abae7ebae18c74473`, ARB poi RQ indipendenti APPROVED zero finding, 15 check PR SUCCESS e main allineato prima del merge protetto. Merge `16119b01ffd66294e8d395b407c0fa08648885a9`; 14 workflow applicabili post-merge SUCCESS, incluse Pages e prove Windows/Linux. 184 test Python, 84 Node e MkDocs strict PASS. [Ricevuta completa](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/560#issuecomment-6107578919).
+
+Build `6f6da9c7-84a3-4351-87a9-378040b674f0` SUCCESS con 23 test planner a provider simulato. Digest `sha256:132e9a16d8075ec32427850c5dc0c7a3527819a34c0028f8c463aad1570b3b30`; sorgenti pubblici verificati sul Git archive revisionato. Le conversioni CRLF/LF del Git archive Windows non sono identità byte con i blob Git grezzi. Worker aggiornato allo stesso pacchetto, ciclo singolo PASS e polling 30 s ripreso con token DPAPI esistente; nessun avvio nativo. Backup del wrapper conservato; errore iniziale di sostituzione corretto dopo verifica dei file esatti.
+
+Revisione `dsg-pixinsight-pilot-pixels-20261011` creata a traffico 0, Ready/digest/model `gpt-6-luna`/quota0/flag `LOCAL_WORKER_VERIFIED` verificati, poi traffico 100%. Secret esistente preservato senza lettura della chiave. Health disponibile, conteggio provider non esposto. Pagina pubblicata ricaricata; accesso Google non completato nel browser di verifica: opzione autenticata e nuova richiesta reale con consenso statistico non collaudate. Nessuna chiamata API aggiuntiva nel rilascio. La revisione quota0 precedente resta disponibile per rollback.
+
+### Fondazione V2 candidata
+
+`adaptive_catalog.py` valida grafi DIRECT/STARLESS per LRGB/OSC/SHO/HOO e un insieme finito di processi/parametri. Nessuna espressione PixelMath, comando, percorso o codice prodotto dal modello è ammesso. Prerequisiti di dominio, registrazione, fondo, riferimenti stellari, runtime e maschera restano fatti del worker con provenienza distinta; una statistica del campo non può promuoverli. Ordine e dipendenze sono controllati. I valori ammessi ereditano i limiti della V1: sono limiti tecnici, non ottimi scientifici dimostrati.
+
+`adaptive_ledger.py` conserva richieste/risultati immutabili e un cursore compatto con ordinali assegnati dal server. Policy Owner, sorgenti, catalogo e runtime sono invarianti; solo l'evidence cambia al checkpoint successivo. Un risultato del modello resta `AWAITING_EXECUTION` fino alla distinta ricevuta nativa legata a checkpoint e History. Crash dopo il risultato recupera il risultato senza invio; risposta persa conserva prenotazione e usage incompleto, senza nuovo ordinale. Annullamento/ritiro impediscono nuove prenotazioni. Capacità finita 16 decisioni/sessione e 16 sessioni: vincolo del candidato, nessuna quota giornaliera o budget monetario.
+
+Quattordici prove offline PASS su concorrenza, crash, doppia ripresa, sostituzione di binding, dati non finiti, dipendenze e incertezze. Questi moduli non sono collegati a endpoint, provider, worker o esecutore attivi. Il broker V1 non ammette `OPENAI_API_ADAPTIVE`: non costituiscono attivazione V2, validazione di adapter scientifici, OAT o chiusura dei residui.
 
 Uso locale: `python -m tools.pixinsight.local_pilot.image_analysis --input <export-privato.xisf> --sha256 <sha256-verificato> --output <nuovo-rapporto-privato.json>`. Rapporto con hash da conservare privatamente, output create-only. Nessuna rete, enumerazione cartelle, token o avvio PixInsight.
 
@@ -50,6 +66,31 @@ Diagnostica: finitezza e intervallo reale (senza imporre [0,1] ai master lineari
 Anteprime e ROI condivise con il provider solo secondo un consenso esplicito coerente con il nuovo payload. Ogni anteprima conserva geometria, trasformazione/stretches e sorgente esatta; confronto prima/dopo con identica trasformazione. Pixel scientifici e diagnostica quantitativa restano distinti dalle immagini di presentazione RGB8.
 
 ## Decisioni e catalogo
+
+### Metodo tecnico e scientifico di scelta
+
+Il tipo LRGB/OSC/SHO/HOO stabilisce quali canali comporre e quali relazioni conservare. La scelta della sequenza considera invece lo stato dei dati, i trattamenti precedenti, le misure disponibili e l'obiettivo dichiarato. «Migliore» significa una soluzione motivata fra le alternative supportate e confrontabili, con incertezze esplicite; non un massimo universale ottenuto da un voto dell'IA. Il metodo seguente è il target V2, non una capacità già attivata dalla sola integrazione delle statistiche.
+
+Un modello osservativo semplificato è `I = S ⊗ PSF + B + N`: segnale astronomico convoluto con la risposta del sistema, fondo e rumore. Dai soli valori di `I` non si separano univocamente questi termini. Per questo varianza e MAD sull'intero campo comprendono stelle, nebulosità e gradienti oltre al rumore. Un denoise può ridurre la varianza eliminando anche filamenti; uno sharpening può aumentare le alte frequenze amplificando rumore o ringing. Nessuna di queste variazioni prova da sola dettaglio recuperato.
+
+| Valutazione | Evidence necessaria | Effetto sulla decisione |
+|---|---|---|
+| Integrità e identità | SHA256, indice XISF esplicito, canali, geometria, finitezza, ricevuta runtime | Dati incoerenti fermano il ramo; nessuna decisione IA li supera |
+| Dominio e calibrazione | Provenienza dell'integrazione e dei processi; trattamento precedente verificabile | Consente solo processi appropriati allo stato attestato; Float32 e istogramma non attestano linearità |
+| Gradiente/fondo | Campioni di cielo validati, maschera e distribuzione spaziale | Evita di sottrarre nebulosità debole come fondo; una ROI numerica da sola non prova cielo vuoto |
+| PSF e stelle | Stelle adatte al fit, residui, distribuzione centro/bordi, pixel scale verificata quando disponibile | Motiva deconvoluzione e raggi spaziali; FWHM in pixel non è automaticamente risoluzione angolare |
+| Rumore e segnale debole | Stesso checkpoint, ROI e maschere validati, metodo/scala e trattamenti precedenti | Confronta riduzione del rumore con perdita di segnale e artefatti; non usa MAD del campo come SNR |
+| Stretch e clipping | Distribuzioni per canale, pixel ai limiti, stelle/nuclei e ROI al 100% | Controlla neri chiusi, alte luci e colore; output senza saturazione non dimostra acquisizione non satura |
+| Contrasto e separazione stelle | Maschere, rami/ricombinazione, checkpoint comune e prove su ritagli | Confronta DIRECT/STARLESS e trattamento locale conservando stelle, aloni e struttura diffusa |
+| Colore | Filtri, mapping, procedura di calibrazione e provenienza | Distingue calibrazione cromatica dalla palette SHO/HOO di presentazione |
+
+Per BlurXTerminator, il manuale del produttore richiede dati lineari appropriati, sconsiglia il denoise precedente e l'accumulo di deconvoluzioni, e descrive l'uso delle stelle come riferimenti PSF locali. Campi con poche stelle richiedono particolare attenzione alla stima automatica. Queste condizioni motivano il gate del catalogo; non attestano la versione del modello caricata nell'istanza locale. [Manuale tecnico RC Astro](https://www.rc-astro.com/blurxterminator-technical-manual/).
+
+Una prova candidata parte dal medesimo genitore, applica una variazione identificabile su ritagli rappresentativi e mantiene stessi crop, orientazione, maschere e trasformazione di confronto. Le misure hanno metodo, unità, campione e stato di comparabilità. Un confronto non valido resta `NOT_ESTABLISHED`; non viene trasformato in uno zero né in un esito positivo. Solo dopo una scelta motivata si applica il segmento al campo completo e si ricontrollano regioni centrali e bordi.
+
+La verifica del checkpoint ha due livelli: controlli deterministici di identità/integrità e valutazione motivata del tradeoff. L'IA espone processo scelto, alternativa scartata, evidence pertinente e incertezze. Una continuazione è permessa solo sul checkpoint esatto verificato; un risultato incerto conserva il ramo e richiede revisione. Non vengono inventate soglie universali o una somma pesata di FWHM, rumore e contrasto. Accettazione scientifica e pubblicazione rimangono eventi Owner distinti.
+
+La risposta strutturata serve a limitare la forma dei dati, non a provare correttezza scientifica. Rifiuti, risposte incomplete e valori fuori contratto arrestano quella decisione; una risposta persa non provoca un retry ambiguo. [Structured Outputs OpenAI](https://developers.openai.com/api/docs/guides/structured-outputs).
 
 Responses strutturata seleziona esclusivamente processi/varianti e parametri ammessi. Non genera codice eseguibile. Il catalogo definisce ruoli, stato lineare/non lineare, moduli, dipendenze, checkpoint, maschere e condizioni di confronto.
 
