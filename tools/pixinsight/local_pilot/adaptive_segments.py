@@ -116,4 +116,3 @@ class SegmentPermits:
             state['lastSeen'] = now
             return {'executeAllowed': True, 'ordinal': permit['ordinal']}
         return self.broker._mutate(operation)
-
