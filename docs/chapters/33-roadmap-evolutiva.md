@@ -50,6 +50,7 @@ Ogni evoluzione deve:
 | Breve termine | Immagine dinamica dell’ultima osservazione con Aladin Lite | Alta | Completata |
 | Breve termine | Contratto dati `latest-observation.json` | Alta | Completata |
 | Breve termine | Aggiornamento automatico dell’ultima osservazione dalla pipeline Analytics | Alta | Completata |
+| Breve termine | BKL-046 — AI Post-Processing Assistant for PixInsight: studio e validazione | P2 | Riaperta / In corso dal 13/10/2026 |
 | Breve termine | Validazione sensori e procedure safe | Alta | Pianificata |
 | Breve termine | Capability 002 – Weather Safety Interlock in shadow mode | Alta | Proposta |
 | Breve termine | Backup configurazioni automatizzato | Alta | Pianificata |
@@ -103,3 +104,7 @@ La componente **Live Observatory è attualmente in standby**. Rimane confermata 
 - maggiore autonomia;
 - mantenibilità documentata;
 - disponibilità di una vista coerente e aggiornata sullo stato dell’osservatorio.
+
+## 33.9 Riapertura BKL-046 — 13/10/2026
+
+BKL-046 è riaperta su richiesta dell’Owner per completare lo studio verificabile della versione installata di PixInsight, consolidare conoscenza e lacune e definire la validazione scientifica. La precedente chiusura F1–F5 riguarda la sola baseline advisory deterministica read-only e resta storica. La riapertura non attiva conoscenze nel portale e non riavvia M27. Per perimetro, vincoli e criteri di nuova chiusura vedere il [record di riapertura](../project/BKL-046-REOPENING-2026-10-13.md).

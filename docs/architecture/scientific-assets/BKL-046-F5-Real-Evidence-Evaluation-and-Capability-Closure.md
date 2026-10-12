@@ -3,7 +3,8 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-046-F5 |
-| Stato | CLOSED / ACCEPTED / POST-MERGE VERIFIED |
+| Stato | Historical F5 baseline — BKL-046 reopened 2026-10-13 |
+| Esito storico F5 | CLOSED / ACCEPTED / POST-MERGE VERIFIED |
 | Versione | 0.6 |
 | Data | 13/09/2026 |
 | Package | BKL-046 — AI Post-Processing Assistant for PixInsight |
@@ -12,6 +13,8 @@
 | Repository baseline | `3d680dd3a05c70b2a4654c4187c293e36b0af4a7` |
 | Release impact | F5-C contract 2.0 accepted as bounded deterministic closure |
 | Authority | Deterministic, read-only, human-only, non-production and non-Safety |
+
+> **Aggiornamento di stato del 13/10/2026:** BKL-046 è riaperta nel [nuovo perimetro di studio e validazione](../../project/BKL-046-REOPENING-2026-10-13.md). Contratti, risultati e acceptance F5 qui descritti restano riferiti alla baseline storica, senza estensione della sua efficacia scientifica.
 
 ## 1. Purpose
 
