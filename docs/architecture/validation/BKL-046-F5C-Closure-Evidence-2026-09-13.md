@@ -3,13 +3,16 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | BKL-046-F5C-EVIDENCE-001 |
-| Stato | Accepted — post-merge and live Pages verified |
+| Stato | Historical evidence — milestone reopened 2026-10-13 |
+| Esito storico F5-C | Accepted — post-merge and live Pages verified |
 | Data | 13/09/2026 |
 | Baseline | `main` @ `3d680dd3a05c70b2a4654c4187c293e36b0af4a7` |
 | F5-C PR | [#181](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/181) |
 | Scope | Technical closure of the deterministic read-only capability only |
 
-## 1. Outcome
+> BKL-046 è riaperta dal 13/10/2026: vedere il [record di riapertura](../../project/BKL-046-REOPENING-2026-10-13.md). Le prove qui conservate riguardano la baseline F5-C del 13/09 e non attestano la chiusura del nuovo perimetro.
+
+## 1. Outcome storico
 
 La real import evidence, la candidate validation, le review autorizzate, il merge e la verifica post-merge consentono di accettare:
 
