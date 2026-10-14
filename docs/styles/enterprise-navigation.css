@@ -107,8 +107,10 @@
 }
 
 .dsg-enterprise-nav__brand img {
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .dsg-enterprise-nav__brand strong,
@@ -330,6 +332,19 @@
 }
 
 @media (max-width: 62rem) {
+  .md-header__inner .md-header__button.md-logo {
+    display: block;
+    flex-shrink: 0;
+    margin-inline: 0.2rem;
+    padding: 0;
+  }
+
+  .md-header__inner .md-header__button.md-logo img {
+    width: 1.8rem;
+    height: 1.8rem;
+    object-fit: contain;
+  }
+
   .md-header__inner {
     position: relative;
     width: auto;

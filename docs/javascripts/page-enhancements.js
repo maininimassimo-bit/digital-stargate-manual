@@ -153,14 +153,14 @@
     let navigation = header.querySelector('.dsg-enterprise-nav');
     if (!navigation) {
       const nativeLogo = document.querySelector('.md-header__button.md-logo');
-      const logoSource = nativeLogo?.querySelector('img')?.src || href('assets/images/dsg-logo.svg');
+      const logoSource = nativeLogo?.querySelector('img')?.src || href('assets/images/dsg-brand-mark.png');
 
       navigation = document.createElement('nav');
       navigation.className = 'dsg-enterprise-nav';
       navigation.setAttribute('aria-label', 'Navigazione principale');
       navigation.innerHTML = `
         <a class="dsg-enterprise-nav__brand" href="${href()}">
-          <img src="${logoSource}" alt="">
+          <img src="${logoSource}" alt="" width="44" height="44">
           <div><strong>DIGITAL STARGATE</strong><small>MANCIANO OBSERVATORY</small></div>
         </a>
         <div class="dsg-enterprise-nav__links">

@@ -54,6 +54,11 @@ jobs:
       - name: Verify session publication lineage
         run: node --test .github/scripts/test-scientific-session-publication.mjs
 
+      - name: Verify dynamic session package transfer
+        run: |
+          node --test .github/scripts/test-session-package-transfer.mjs
+          node .github/scripts/generate-session-package-transfer.mjs --write
+
       - name: Configura Python
         uses: actions/setup-python@v5
         with:
