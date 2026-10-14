@@ -7,11 +7,12 @@ test('joins by identity, not array position; preserves all published scores',()=
  const p=read('scientific-data-quality-projection'), c=read('scientific-session-catalog');
  c.sessions.reverse();
  const result=buildQualityTrend(p,c);
- assert.equal(result.series.length,2); assert.equal(result.unknownSetup,2);
+ const knownIds=new Set(c.sessions.filter(s=>s.configurationId && s.configurationId!=='UNKNOWN').map(s=>s.sessionId));
+ const expected=p.assessments.filter(a=>knownIds.has(a.sessionId) && a.projectionRecordState==='AVAILABLE');
+ assert.equal(result.unknownSetup,p.assessments.filter(a=>!knownIds.has(a.sessionId)).length);
  const points=result.series.flatMap(g=>g.points).filter(p=>p.value!==null);
- assert.equal(points.length,10);
- for(const point of points) assert.equal(point.value,p.assessments.find(a=>a.sessionId===point.sessionId).assessment.score.value);
- assert.equal(result.series.find(g=>g.id==='QUATTRO200_TOUPTEK294_BIN1').points.filter(p=>p.value!==null).length,1);
+ assert.deepEqual(points.map(point=>[point.sessionId,point.value]).sort(),expected.map(a=>[a.sessionId,a.assessment.score.value]).sort());
+ for(const group of result.series) for(const point of group.points) assert.equal(c.sessions.find(s=>s.sessionId===point.sessionId).configurationId,group.id);
 });
 test('new imported session appears without a hardcoded setup/date/value; unavailable is not zero',()=>{
  const catalog={sessions:[{sessionId:'new',configurationId:'THIRD',telescope:'T',camera:'C',observationDate:'2026-10-01'}]};
