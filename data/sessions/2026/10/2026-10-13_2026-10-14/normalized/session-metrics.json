@@ -1,0 +1,78 @@
+{
+  "schema_version": "0.2.0",
+  "session_id": "2026-10-13_2026-10-14",
+  "generated_at": "2026-10-14T06:03:42.937270+00:00",
+  "scientific": {
+    "target_name": "NGC 281",
+    "ra_deg": 13.10416667,
+    "dec_deg": 56.565,
+    "epoch": "J2000",
+    "telescope": "Sky-Watcher Quattro 200P",
+    "camera": "ToupTek 294MC PRO",
+    "binning": 1,
+    "source": "nina-log",
+    "configuration_id": "QUATTRO200_TOUPTEK294_BIN1"
+  },
+  "nina": {
+    "camera_exposures_total": 125,
+    "light_started": 57,
+    "light_completed": 57,
+    "light_failed_explicit": 0,
+    "light_interrupted_unmatched": 0,
+    "technical_exposures_estimated": 68,
+    "integration_seconds": 34200.0,
+    "autofocus_started": 12,
+    "autofocus_completed": 6,
+    "autofocus_failed_explicit": 0,
+    "autofocus_unmatched": 6,
+    "dither_requests": 113,
+    "nina_errors": 20,
+    "nina_warnings": 97
+  },
+  "phd2": {
+    "guide_segments": 7,
+    "guide_samples_total": 14950,
+    "guide_samples_valid": 14500,
+    "guide_samples_saturated": 0,
+    "guide_samples_rejected": 0,
+    "guide_samples_settling_excluded": 450,
+    "guide_samples_unscaled": 0,
+    "settling_failures": 6,
+    "equipment_profiles": [
+      "SW4P_EVO"
+    ],
+    "rms_method": "PHD2 RARawDistance/DECRawDistance multiplied by the active segment pixel scale; ErrorCode 0 and STAR_SATURATED (1) included; settling excluded.",
+    "rms_ra_arcsec": 1.056,
+    "rms_dec_arcsec": 1.331,
+    "rms_total_arcsec": 1.699,
+    "lost_star_events": 0,
+    "pulse_guide_failures": 0
+  },
+  "weather": {
+    "weather_rows_total": 3958,
+    "weather_rows_unsafe_full_window": 104,
+    "weather_safe_transitions_full_window": 1,
+    "weather_unsafe_pct_full_window": 2.63,
+    "weather_scope_note": "Valori riferiti alla finestra CSV importata; non penalizzano la severita finche non sono correlati alla sequenza attiva/cupola aperta."
+  },
+  "sqm": {
+    "state": "AVAILABLE",
+    "quality": "AVAILABLE",
+    "start": "2026-10-13T17:00:13.0000000Z",
+    "end": "2026-10-14T03:59:50.0000000Z",
+    "min_mag_arcsec2": 11.7,
+    "max_mag_arcsec2": 20.91,
+    "mean_mag_arcsec2": 20.5353,
+    "median_mag_arcsec2": 20.84,
+    "valid_samples": 1285,
+    "temporal_coverage": 0.9727,
+    "source_path": "data/sessions/2026/10/2026-10-13_2026-10-14/raw/sqm/sqm-summary.json",
+    "source": "AAG CloudWatcher SOLO HTTP / lightmpsas",
+    "serial": "2382",
+    "firmware": "5.88"
+  },
+  "severity": "GREEN",
+  "severity_reasons": [
+    "Nessuna anomalia grave rilevata dai criteri v0.2.0."
+  ]
+}

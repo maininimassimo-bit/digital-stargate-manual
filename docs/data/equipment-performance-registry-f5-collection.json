@@ -7,7 +7,7 @@
     "f3_projection": "docs/data/equipment-performance-registry-f3-multisession.json",
     "f5_contract": "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md"
   },
-  "population_count": 9,
+  "population_count": 10,
   "views": [
     {
       "population_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ",
@@ -2090,6 +2090,511 @@
           "value": 0.3595,
           "method_id": "BKL039-F3-FWHM-SAMPLE-STDDEV-V1",
           "sample_count": 38
+        }
+      ],
+      "limitations": [
+        "SOURCE_NATIVE_FWHM_UNIT_IS_NOT_PHYSICALLY_CALIBRATED",
+        "NO_EQUIPMENT_HEALTH_RANKING_THRESHOLD_OR_RECOMMENDATION",
+        "HISTORICAL_READ_ONLY_PROJECTION_NOT_SAFETY_AUTHORITY"
+      ]
+    },
+    {
+      "population_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0",
+      "configuration_id": "QUATTRO200_TOUPTEK294_BIN1",
+      "session_id": "2026-10-13_2026-10-14",
+      "target_name": "NGC 281",
+      "filter_name": "UHC",
+      "frame_type": "LIGHT",
+      "metric_name": "FWHM",
+      "measurement_count": 55,
+      "coverage": "COMPLETE_FOR_DECLARED_POPULATION",
+      "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+      "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+      "angular_calibration_state": "NOT_PROVEN",
+      "measurement_method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+      "authority": "projection",
+      "action_authority": "NONE",
+      "source_record_refs": [
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=567",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=590",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=629",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=644",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=676",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=703",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=725",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=736",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=807",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=841",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=852",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=878",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=900",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=933",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=959",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=970",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=992",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1019",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1041",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1063",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1089",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1111",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1133",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1159",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1180",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1247",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1285",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1387",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1421",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1436",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1458",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1480",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1517",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1528",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1549",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1635",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1658",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1675",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1706",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1717",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1774",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1803",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1815",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1848",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1867",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1927",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1953",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1975",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=2009",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=2024",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=2046",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=2069",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=2095",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=2118",
+        "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=2184"
+      ],
+      "citation_refs": [
+        "data/analytics/history/target-exposures.csv",
+        "data/analytics/history/target-summary.csv",
+        "data/analytics/metadata/session-scientific-metadata.csv"
+      ],
+      "provenance_refs": [
+        "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+        "data/sessions/2026/10/2026-10-13_2026-10-14/normalized/session-metrics.json"
+      ],
+      "measurements": [
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0000",
+          "sequence_number": "0000",
+          "timestamp": "2026-10-13T19:53:48.494900+02:00",
+          "value": 6.46,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=567"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0001",
+          "sequence_number": "0001",
+          "timestamp": "2026-10-13T20:04:13.928700+02:00",
+          "value": 6.49,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=590"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0002",
+          "sequence_number": "0002",
+          "timestamp": "2026-10-13T20:14:34.075500+02:00",
+          "value": 6.77,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=629"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0003",
+          "sequence_number": "0003",
+          "timestamp": "2026-10-13T20:24:49.455300+02:00",
+          "value": 6.94,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=644"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0004",
+          "sequence_number": "0004",
+          "timestamp": "2026-10-13T20:35:08.810700+02:00",
+          "value": 6.75,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=676"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0005",
+          "sequence_number": "0005",
+          "timestamp": "2026-10-13T20:45:32.519400+02:00",
+          "value": 6.94,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=703"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0006",
+          "sequence_number": "0006",
+          "timestamp": "2026-10-13T20:55:50.946300+02:00",
+          "value": 7.41,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=725"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0007",
+          "sequence_number": "0007",
+          "timestamp": "2026-10-13T21:06:07.490300+02:00",
+          "value": 7.61,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=736"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0008",
+          "sequence_number": "0008",
+          "timestamp": "2026-10-13T21:19:34.715300+02:00",
+          "value": 6.83,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=807"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0009",
+          "sequence_number": "0009",
+          "timestamp": "2026-10-13T21:29:55.697800+02:00",
+          "value": 6.98,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=841"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0010",
+          "sequence_number": "0010",
+          "timestamp": "2026-10-13T21:40:13.031800+02:00",
+          "value": 6.59,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=852"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0011",
+          "sequence_number": "0011",
+          "timestamp": "2026-10-13T21:50:34.050800+02:00",
+          "value": 6.69,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=878"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0012",
+          "sequence_number": "0012",
+          "timestamp": "2026-10-13T22:00:54.039900+02:00",
+          "value": 6.62,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=900"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0013",
+          "sequence_number": "0013",
+          "timestamp": "2026-10-13T22:11:13.431700+02:00",
+          "value": 6.52,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=933"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0014",
+          "sequence_number": "0014",
+          "timestamp": "2026-10-13T22:21:35.644000+02:00",
+          "value": 6.76,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=959"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0015",
+          "sequence_number": "0015",
+          "timestamp": "2026-10-13T22:31:47.949500+02:00",
+          "value": 6.79,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=970"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0016",
+          "sequence_number": "0016",
+          "timestamp": "2026-10-13T22:42:06.216000+02:00",
+          "value": 6.73,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=992"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0017",
+          "sequence_number": "0017",
+          "timestamp": "2026-10-13T22:52:32.503600+02:00",
+          "value": 6.74,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1019"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0018",
+          "sequence_number": "0018",
+          "timestamp": "2026-10-13T23:02:51.029000+02:00",
+          "value": 6.23,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1041"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0019",
+          "sequence_number": "0019",
+          "timestamp": "2026-10-13T23:13:16.864800+02:00",
+          "value": 6.67,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1063"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0020",
+          "sequence_number": "0020",
+          "timestamp": "2026-10-13T23:23:41.949000+02:00",
+          "value": 6.58,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1089"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0021",
+          "sequence_number": "0021",
+          "timestamp": "2026-10-13T23:34:06.587900+02:00",
+          "value": 6.58,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1111"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0022",
+          "sequence_number": "0022",
+          "timestamp": "2026-10-13T23:44:40.597700+02:00",
+          "value": 7.05,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1133"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0023",
+          "sequence_number": "0023",
+          "timestamp": "2026-10-13T23:55:18.051900+02:00",
+          "value": 7.73,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1159"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0024",
+          "sequence_number": "0024",
+          "timestamp": "2026-10-14T00:05:36.655000+02:00",
+          "value": 7.73,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1180"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0025",
+          "sequence_number": "0025",
+          "timestamp": "2026-10-14T00:19:04.338900+02:00",
+          "value": 6.72,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1247"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0026",
+          "sequence_number": "0026",
+          "timestamp": "2026-10-14T00:29:37.388800+02:00",
+          "value": 7.35,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1285"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0027",
+          "sequence_number": "0027",
+          "timestamp": "2026-10-14T01:01:10.160800+02:00",
+          "value": 7.62,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1387"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0028",
+          "sequence_number": "0028",
+          "timestamp": "2026-10-14T01:11:53.258900+02:00",
+          "value": 7.26,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1421"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0029",
+          "sequence_number": "0029",
+          "timestamp": "2026-10-14T01:22:11.792800+02:00",
+          "value": 6.97,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1436"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0030",
+          "sequence_number": "0030",
+          "timestamp": "2026-10-14T01:32:32.812400+02:00",
+          "value": 7.3,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1458"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0031",
+          "sequence_number": "0031",
+          "timestamp": "2026-10-14T01:42:52.430500+02:00",
+          "value": 6.71,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1480"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0032",
+          "sequence_number": "0032",
+          "timestamp": "2026-10-14T01:53:31.456900+02:00",
+          "value": 7.23,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1517"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0033",
+          "sequence_number": "0033",
+          "timestamp": "2026-10-14T02:03:46.404300+02:00",
+          "value": 8.12,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1528"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0034",
+          "sequence_number": "0034",
+          "timestamp": "2026-10-14T02:14:26.343800+02:00",
+          "value": 7.99,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1549"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0035",
+          "sequence_number": "0035",
+          "timestamp": "2026-10-14T02:28:04.562400+02:00",
+          "value": 7.31,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1635"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0036",
+          "sequence_number": "0036",
+          "timestamp": "2026-10-14T02:38:22.639600+02:00",
+          "value": 7.52,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1658"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0037",
+          "sequence_number": "0037",
+          "timestamp": "2026-10-14T02:48:44.982500+02:00",
+          "value": 7.55,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1675"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0038",
+          "sequence_number": "0038",
+          "timestamp": "2026-10-14T02:59:06.253100+02:00",
+          "value": 7.35,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1706"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0039",
+          "sequence_number": "0039",
+          "timestamp": "2026-10-14T03:09:27.128700+02:00",
+          "value": 7.74,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1717"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0040",
+          "sequence_number": "0040",
+          "timestamp": "2026-10-14T03:20:57.875800+02:00",
+          "value": 8.03,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1774"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0041",
+          "sequence_number": "0041",
+          "timestamp": "2026-10-14T03:30:59.019400+02:00",
+          "value": 7.99,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1803"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0042",
+          "sequence_number": "0042",
+          "timestamp": "2026-10-14T03:41:08.052100+02:00",
+          "value": 7.14,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1815"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0043",
+          "sequence_number": "0043",
+          "timestamp": "2026-10-14T03:51:27.764300+02:00",
+          "value": 7.13,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1848"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0044",
+          "sequence_number": "0044",
+          "timestamp": "2026-10-14T04:01:44.444100+02:00",
+          "value": 7.39,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1867"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0045",
+          "sequence_number": "0045",
+          "timestamp": "2026-10-14T04:19:42.053000+02:00",
+          "value": 8.31,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1927"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0046",
+          "sequence_number": "0046",
+          "timestamp": "2026-10-14T04:30:22.830000+02:00",
+          "value": 7.9,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1953"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0047",
+          "sequence_number": "0047",
+          "timestamp": "2026-10-14T04:41:01.855700+02:00",
+          "value": 7.13,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=1975"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0048",
+          "sequence_number": "0048",
+          "timestamp": "2026-10-14T04:51:35.596900+02:00",
+          "value": 6.72,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=2009"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0049",
+          "sequence_number": "0049",
+          "timestamp": "2026-10-14T05:01:58.269300+02:00",
+          "value": 7.06,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=2024"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0050",
+          "sequence_number": "0050",
+          "timestamp": "2026-10-14T05:12:26.589100+02:00",
+          "value": 7.8,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=2046"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0051",
+          "sequence_number": "0051",
+          "timestamp": "2026-10-14T05:23:07.374100+02:00",
+          "value": 7.94,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=2069"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0052",
+          "sequence_number": "0052",
+          "timestamp": "2026-10-14T05:33:53.108300+02:00",
+          "value": 7.43,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=2095"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0053",
+          "sequence_number": "0053",
+          "timestamp": "2026-10-14T05:44:36.950000+02:00",
+          "value": 7.53,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=2118"
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0054",
+          "sequence_number": "0054",
+          "timestamp": "2026-10-14T05:58:22.368900+02:00",
+          "value": 8.66,
+          "source_record_ref": "data/analytics/history/target-exposures.csv#2026-10-13_2026-10-14:line=2184"
+        }
+      ],
+      "statistics": [
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-S-MEAN",
+          "statistic_type": "MEAN",
+          "value": 7.2016,
+          "method_id": "BKL039-F3-FWHM-MEAN-V1",
+          "sample_count": 55
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-S-MINIMUM",
+          "statistic_type": "MINIMUM",
+          "value": 6.23,
+          "method_id": "BKL039-F3-FWHM-MIN-V1",
+          "sample_count": 55
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-S-MAXIMUM",
+          "statistic_type": "MAXIMUM",
+          "value": 8.66,
+          "method_id": "BKL039-F3-FWHM-MAX-V1",
+          "sample_count": 55
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xM18yMDI2LTEwLTE0fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-S-SAMPLE_STDDEV",
+          "statistic_type": "SAMPLE_STDDEV",
+          "value": 0.5454,
+          "method_id": "BKL039-F3-FWHM-SAMPLE-STDDEV-V1",
+          "sample_count": 55
         }
       ],
       "limitations": [

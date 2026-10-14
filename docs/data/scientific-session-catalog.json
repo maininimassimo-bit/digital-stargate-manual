@@ -23569,6 +23569,1266 @@
         "temporalCoverage": 0.9841
       },
       "qualityState": "ATTENTION_REQUIRED"
+    },
+    {
+      "sessionId": "2026-10-13_2026-10-14",
+      "observationDate": "2026-10-13",
+      "start": "2026-10-13T17:00:13.0000000Z",
+      "end": "2026-10-14T03:59:50.0000000Z",
+      "target": "NGC 281",
+      "raDeg": 13.10416667,
+      "decDeg": 56.565,
+      "coordinateSource": "canonical-session-metrics",
+      "configurationId": "QUATTRO200_TOUPTEK294_BIN1",
+      "telescope": "Sky-Watcher Quattro 200P",
+      "camera": "ToupTek 294MC PRO",
+      "filter": "UHC",
+      "binning": "1",
+      "gain": 910,
+      "offset": 99,
+      "exposureSeconds": 600,
+      "integrationHours": 9.5,
+      "targetIntegrationHours": 9.1667,
+      "lightStarted": 57,
+      "lightCompleted": 57,
+      "completionPct": 100,
+      "rmsTotalArcsec": 1.699,
+      "severity": "GREEN",
+      "analyticsState": "VALIDATED_ANALYTICS",
+      "metadataState": "CANONICAL_EVIDENCE",
+      "transferState": "NOT_REPRESENTED",
+      "manifestState": "VERSIONED",
+      "evidenceState": "SOURCE_METRICS_AVAILABLE",
+      "sourceMetricsPath": "data/sessions/2026/10/2026-10-13_2026-10-14/normalized/session-metrics.json",
+      "weather": {
+        "state": "AVAILABLE",
+        "rowsTotal": 3958,
+        "rowsUnsafe": 104,
+        "unsafePct": 2.63,
+        "safePct": 97.37,
+        "safeTransitions": 1,
+        "scopeNote": "Valori riferiti alla finestra CSV importata; non penalizzano la severita finche non sono correlati alla sequenza attiva/cupola aperta.",
+        "detail": {
+          "sourcePath": "data/sessions/2026/10/2026-10-13_2026-10-14/raw/weather/CloudWatcher_2026-10-13_2026-10-14.csv",
+          "firstTimestamp": "2026-10-13T19:00:07",
+          "lastTimestamp": "2026-10-14T05:59:53",
+          "ambientTemperature": {
+            "min": 15.8,
+            "avg": 17.24,
+            "max": 19.3
+          },
+          "relativeHumidity": {
+            "min": 40,
+            "avg": 49.45,
+            "max": 57
+          },
+          "dewPoint": {
+            "min": 3.4,
+            "avg": 6.51,
+            "max": 8.6
+          },
+          "windValue": {
+            "min": 0,
+            "avg": 6.56,
+            "max": 15.5
+          },
+          "cloudValue": {
+            "min": -7.8,
+            "avg": -5.99,
+            "max": -4
+          },
+          "dominantCloudCondition": "Clear",
+          "dominantRainCondition": "Dry",
+          "dominantWindCondition": "Calm",
+          "samples": [
+            {
+              "timestamp": "2026-10-13T19:00:07",
+              "ambientTemperature": 19.1,
+              "relativeHumidity": 47,
+              "dewPoint": 7.5,
+              "windValue": 6.9,
+              "cloudValue": -5.6,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T19:14:07",
+              "ambientTemperature": 19.2,
+              "relativeHumidity": 47,
+              "dewPoint": 7.8,
+              "windValue": 6.9,
+              "cloudValue": -5.8,
+              "safeStatus": "Unsafe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T19:28:08",
+              "ambientTemperature": 19.3,
+              "relativeHumidity": 48,
+              "dewPoint": 7.9,
+              "windValue": 4.4,
+              "cloudValue": -6,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T19:42:18",
+              "ambientTemperature": 19.1,
+              "relativeHumidity": 49,
+              "dewPoint": 8.1,
+              "windValue": 5,
+              "cloudValue": -6,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T19:56:18",
+              "ambientTemperature": 18.8,
+              "relativeHumidity": 50,
+              "dewPoint": 8.1,
+              "windValue": 3.8,
+              "cloudValue": -5.9,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T20:10:18",
+              "ambientTemperature": 18.5,
+              "relativeHumidity": 51,
+              "dewPoint": 8.3,
+              "windValue": 4.8,
+              "cloudValue": -6,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T20:24:18",
+              "ambientTemperature": 18.2,
+              "relativeHumidity": 53,
+              "dewPoint": 8.4,
+              "windValue": 6.1,
+              "cloudValue": -6,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T20:38:18",
+              "ambientTemperature": 18,
+              "relativeHumidity": 54,
+              "dewPoint": 8.5,
+              "windValue": 3,
+              "cloudValue": -5.8,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T20:52:28",
+              "ambientTemperature": 17.9,
+              "relativeHumidity": 54,
+              "dewPoint": 8.6,
+              "windValue": 7.6,
+              "cloudValue": -5.6,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T21:06:28",
+              "ambientTemperature": 17.6,
+              "relativeHumidity": 55,
+              "dewPoint": 8.6,
+              "windValue": 7.9,
+              "cloudValue": -5.9,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T21:20:28",
+              "ambientTemperature": 17.6,
+              "relativeHumidity": 55,
+              "dewPoint": 8.5,
+              "windValue": 9.3,
+              "cloudValue": -5.4,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T21:34:28",
+              "ambientTemperature": 17.6,
+              "relativeHumidity": 55,
+              "dewPoint": 8.5,
+              "windValue": 6.8,
+              "cloudValue": -5.6,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T21:48:28",
+              "ambientTemperature": 17.5,
+              "relativeHumidity": 55,
+              "dewPoint": 8.5,
+              "windValue": 7.2,
+              "cloudValue": -5.6,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T22:02:28",
+              "ambientTemperature": 17.3,
+              "relativeHumidity": 56,
+              "dewPoint": 8.4,
+              "windValue": 8.5,
+              "cloudValue": -5.5,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T22:16:38",
+              "ambientTemperature": 17.3,
+              "relativeHumidity": 55,
+              "dewPoint": 8.3,
+              "windValue": 10.7,
+              "cloudValue": -5.6,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T22:30:38",
+              "ambientTemperature": 17.2,
+              "relativeHumidity": 55,
+              "dewPoint": 8.3,
+              "windValue": 9.7,
+              "cloudValue": -5.5,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T22:44:38",
+              "ambientTemperature": 17.1,
+              "relativeHumidity": 56,
+              "dewPoint": 8.1,
+              "windValue": 9.4,
+              "cloudValue": -5.3,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T22:58:38",
+              "ambientTemperature": 17.1,
+              "relativeHumidity": 55,
+              "dewPoint": 8,
+              "windValue": 7.5,
+              "cloudValue": -5,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T23:12:38",
+              "ambientTemperature": 17.3,
+              "relativeHumidity": 54,
+              "dewPoint": 8,
+              "windValue": 5.2,
+              "cloudValue": -4.9,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T23:26:48",
+              "ambientTemperature": 17.1,
+              "relativeHumidity": 55,
+              "dewPoint": 8.1,
+              "windValue": 6.1,
+              "cloudValue": -5.1,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T23:40:48",
+              "ambientTemperature": 16.9,
+              "relativeHumidity": 56,
+              "dewPoint": 8.1,
+              "windValue": 5.8,
+              "cloudValue": -4.9,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-13T23:54:48",
+              "ambientTemperature": 16.8,
+              "relativeHumidity": 56,
+              "dewPoint": 8,
+              "windValue": 5.2,
+              "cloudValue": -5,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T00:08:48",
+              "ambientTemperature": 17.1,
+              "relativeHumidity": 53,
+              "dewPoint": 7.3,
+              "windValue": 2.5,
+              "cloudValue": -5.9,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T00:22:48",
+              "ambientTemperature": 16.9,
+              "relativeHumidity": 51,
+              "dewPoint": 6.8,
+              "windValue": 1.3,
+              "cloudValue": -6.1,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T00:36:58",
+              "ambientTemperature": 16.8,
+              "relativeHumidity": 52,
+              "dewPoint": 6.8,
+              "windValue": 5.2,
+              "cloudValue": -5.7,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T00:50:58",
+              "ambientTemperature": 16.5,
+              "relativeHumidity": 53,
+              "dewPoint": 6.9,
+              "windValue": 2.8,
+              "cloudValue": -6.2,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T01:04:58",
+              "ambientTemperature": 16.4,
+              "relativeHumidity": 50,
+              "dewPoint": 6,
+              "windValue": 8.3,
+              "cloudValue": -5.7,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T01:18:58",
+              "ambientTemperature": 16.9,
+              "relativeHumidity": 47,
+              "dewPoint": 5.7,
+              "windValue": 8,
+              "cloudValue": -6,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T01:32:58",
+              "ambientTemperature": 16.8,
+              "relativeHumidity": 48,
+              "dewPoint": 5.8,
+              "windValue": 9.3,
+              "cloudValue": -6.3,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T01:47:08",
+              "ambientTemperature": 16.7,
+              "relativeHumidity": 48,
+              "dewPoint": 5.7,
+              "windValue": 8,
+              "cloudValue": -6.6,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T02:01:08",
+              "ambientTemperature": 16.7,
+              "relativeHumidity": 46,
+              "dewPoint": 4.9,
+              "windValue": 5.1,
+              "cloudValue": -6.4,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T02:15:08",
+              "ambientTemperature": 17.2,
+              "relativeHumidity": 44,
+              "dewPoint": 4.7,
+              "windValue": 9.8,
+              "cloudValue": -6.3,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T02:29:08",
+              "ambientTemperature": 17.1,
+              "relativeHumidity": 44,
+              "dewPoint": 4.8,
+              "windValue": 9.2,
+              "cloudValue": -6.4,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T02:43:08",
+              "ambientTemperature": 17.1,
+              "relativeHumidity": 44,
+              "dewPoint": 4.8,
+              "windValue": 6.4,
+              "cloudValue": -6.7,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T02:57:18",
+              "ambientTemperature": 16.5,
+              "relativeHumidity": 46,
+              "dewPoint": 4.8,
+              "windValue": 7.5,
+              "cloudValue": -6.4,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T03:11:19",
+              "ambientTemperature": 16.5,
+              "relativeHumidity": 46,
+              "dewPoint": 4.8,
+              "windValue": 7.2,
+              "cloudValue": -6.5,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T03:25:34",
+              "ambientTemperature": 16.9,
+              "relativeHumidity": 42,
+              "dewPoint": 4.1,
+              "windValue": 8.7,
+              "cloudValue": -6.3,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T03:39:33",
+              "ambientTemperature": 16.8,
+              "relativeHumidity": 43,
+              "dewPoint": 4.2,
+              "windValue": 5.9,
+              "cloudValue": -6.4,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T03:53:33",
+              "ambientTemperature": 15.9,
+              "relativeHumidity": 46,
+              "dewPoint": 4.3,
+              "windValue": 4.7,
+              "cloudValue": -6,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T04:07:33",
+              "ambientTemperature": 15.9,
+              "relativeHumidity": 46,
+              "dewPoint": 4.4,
+              "windValue": 2.8,
+              "cloudValue": -6.4,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T04:21:43",
+              "ambientTemperature": 16.4,
+              "relativeHumidity": 45,
+              "dewPoint": 4.5,
+              "windValue": 2.1,
+              "cloudValue": -6.8,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T04:35:43",
+              "ambientTemperature": 17,
+              "relativeHumidity": 44,
+              "dewPoint": 4.5,
+              "windValue": 6.8,
+              "cloudValue": -6.4,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T04:49:43",
+              "ambientTemperature": 16.9,
+              "relativeHumidity": 44,
+              "dewPoint": 4.6,
+              "windValue": 0,
+              "cloudValue": -7.2,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T05:03:43",
+              "ambientTemperature": 16.4,
+              "relativeHumidity": 45,
+              "dewPoint": 4.4,
+              "windValue": 7.2,
+              "cloudValue": -6.1,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T05:17:43",
+              "ambientTemperature": 17,
+              "relativeHumidity": 43,
+              "dewPoint": 4.2,
+              "windValue": 10.8,
+              "cloudValue": -6.5,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T05:31:53",
+              "ambientTemperature": 17,
+              "relativeHumidity": 41,
+              "dewPoint": 3.8,
+              "windValue": 6.9,
+              "cloudValue": -6.4,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T05:45:53",
+              "ambientTemperature": 16.9,
+              "relativeHumidity": 42,
+              "dewPoint": 3.9,
+              "windValue": 2.2,
+              "cloudValue": -6.7,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            },
+            {
+              "timestamp": "2026-10-14T05:59:53",
+              "ambientTemperature": 17,
+              "relativeHumidity": 41,
+              "dewPoint": 3.6,
+              "windValue": 12.4,
+              "cloudValue": -6.2,
+              "safeStatus": "Safe",
+              "cloudCondition": "Clear"
+            }
+          ]
+        }
+      },
+      "guiding": {
+        "state": "AVAILABLE",
+        "sampleCount": 14500,
+        "segmentCount": 7,
+        "rmsRaArcsec": 1.056,
+        "rmsDecArcsec": 1.331,
+        "rmsTotalArcsec": 1.699,
+        "lostStarEvents": 0,
+        "pulseGuideFailures": 0,
+        "scopeNote": "Proiezione scientifica storica derivata dal PHD2 GuideLog. Usa gli stessi campioni validi dell analytics (settling escluso, ErrorCode=0) e non rappresenta telemetria operativa realtime.",
+        "detail": {
+          "sourcePath": "data/sessions/2026/10/2026-10-13_2026-10-14/raw/phd2/PHD2_GuideLog_2026-10-13_143229.txt",
+          "sampleCount": 13022,
+          "segmentCount": 7,
+          "rmsRaArcsec": 0.221,
+          "rmsDecArcsec": 0.25,
+          "rmsTotalArcsec": 0.333,
+          "p95TotalArcsec": 0.559,
+          "maxTotalArcsec": 15.5,
+          "samples": [
+            {
+              "segment": 1,
+              "elapsedSeconds": 15.206,
+              "raArcsec": 0.224,
+              "decArcsec": 0,
+              "totalArcsec": 0.224
+            },
+            {
+              "segment": 1,
+              "elapsedSeconds": 338.963,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 1,
+              "elapsedSeconds": 659.408,
+              "raArcsec": -0.16,
+              "decArcsec": 0,
+              "totalArcsec": 0.16
+            },
+            {
+              "segment": 1,
+              "elapsedSeconds": 1002.913,
+              "raArcsec": -0.255,
+              "decArcsec": 0,
+              "totalArcsec": 0.255
+            },
+            {
+              "segment": 1,
+              "elapsedSeconds": 1321.408,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 1,
+              "elapsedSeconds": 1655.652,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 1,
+              "elapsedSeconds": 1980.638,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 1,
+              "elapsedSeconds": 2326.213,
+              "raArcsec": -0.315,
+              "decArcsec": 0,
+              "totalArcsec": 0.315
+            },
+            {
+              "segment": 1,
+              "elapsedSeconds": 2658.344,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 1,
+              "elapsedSeconds": 2998.342,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 1,
+              "elapsedSeconds": 3317.195,
+              "raArcsec": 0.166,
+              "decArcsec": 0,
+              "totalArcsec": 0.166
+            },
+            {
+              "segment": 1,
+              "elapsedSeconds": 3653.17,
+              "raArcsec": -0.376,
+              "decArcsec": 0,
+              "totalArcsec": 0.376
+            },
+            {
+              "segment": 1,
+              "elapsedSeconds": 3970.261,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 1,
+              "elapsedSeconds": 4311.267,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 1,
+              "elapsedSeconds": 4662.931,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 1,
+              "elapsedSeconds": 5003.798,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 90.219,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 417.135,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 765.473,
+              "raArcsec": -0.272,
+              "decArcsec": 0,
+              "totalArcsec": 0.272
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 1098.448,
+              "raArcsec": 0.204,
+              "decArcsec": 0.644,
+              "totalArcsec": 0.676
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 1449.815,
+              "raArcsec": 0.559,
+              "decArcsec": -0.502,
+              "totalArcsec": 0.751
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 1773.318,
+              "raArcsec": 0.201,
+              "decArcsec": 0,
+              "totalArcsec": 0.201
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 2114.229,
+              "raArcsec": 0.206,
+              "decArcsec": 0,
+              "totalArcsec": 0.206
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 2435.613,
+              "raArcsec": -0.169,
+              "decArcsec": 0,
+              "totalArcsec": 0.169
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 2784.317,
+              "raArcsec": -0.27,
+              "decArcsec": 0,
+              "totalArcsec": 0.27
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 3130.406,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 3453.755,
+              "raArcsec": -0.396,
+              "decArcsec": 0,
+              "totalArcsec": 0.396
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 3789.91,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 4119.906,
+              "raArcsec": -0.635,
+              "decArcsec": 0,
+              "totalArcsec": 0.635
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 4466.289,
+              "raArcsec": 0.168,
+              "decArcsec": 0.396,
+              "totalArcsec": 0.43
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 4793.186,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 5134.694,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 5474.452,
+              "raArcsec": 0.271,
+              "decArcsec": 0,
+              "totalArcsec": 0.271
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 5825.505,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 6153.952,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 6493.381,
+              "raArcsec": -0.262,
+              "decArcsec": 0,
+              "totalArcsec": 0.262
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 6812.388,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 7154.426,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 7498.203,
+              "raArcsec": -0.199,
+              "decArcsec": 0,
+              "totalArcsec": 0.199
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 7820.058,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 8166.651,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 8488.273,
+              "raArcsec": 0.179,
+              "decArcsec": 0,
+              "totalArcsec": 0.179
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 8838.669,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 9163.801,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 9517.752,
+              "raArcsec": 0.191,
+              "decArcsec": 0,
+              "totalArcsec": 0.191
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 9839.535,
+              "raArcsec": 0.255,
+              "decArcsec": 0,
+              "totalArcsec": 0.255
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 10180.841,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 2,
+              "elapsedSeconds": 10506.262,
+              "raArcsec": 0.297,
+              "decArcsec": 0,
+              "totalArcsec": 0.297
+            },
+            {
+              "segment": 3,
+              "elapsedSeconds": 257.454,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 3,
+              "elapsedSeconds": 576.864,
+              "raArcsec": 0.221,
+              "decArcsec": 0,
+              "totalArcsec": 0.221
+            },
+            {
+              "segment": 3,
+              "elapsedSeconds": 926.743,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 3,
+              "elapsedSeconds": 1247.496,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 4,
+              "elapsedSeconds": 336.907,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 4,
+              "elapsedSeconds": 1318.021,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 4,
+              "elapsedSeconds": 1643.155,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 4,
+              "elapsedSeconds": 1991.911,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 4,
+              "elapsedSeconds": 2334.837,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 4,
+              "elapsedSeconds": 2675.667,
+              "raArcsec": -0.171,
+              "decArcsec": 0,
+              "totalArcsec": 0.171
+            },
+            {
+              "segment": 4,
+              "elapsedSeconds": 3001.68,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 4,
+              "elapsedSeconds": 3363.67,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 4,
+              "elapsedSeconds": 3690.066,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 4,
+              "elapsedSeconds": 4033.852,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 4,
+              "elapsedSeconds": 4362.4,
+              "raArcsec": -0.213,
+              "decArcsec": 0,
+              "totalArcsec": 0.213
+            },
+            {
+              "segment": 4,
+              "elapsedSeconds": 4726.272,
+              "raArcsec": 0.212,
+              "decArcsec": 0,
+              "totalArcsec": 0.212
+            },
+            {
+              "segment": 5,
+              "elapsedSeconds": 21.551,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 5,
+              "elapsedSeconds": 353.717,
+              "raArcsec": 0,
+              "decArcsec": -1.235,
+              "totalArcsec": 1.235
+            },
+            {
+              "segment": 5,
+              "elapsedSeconds": 700.015,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 5,
+              "elapsedSeconds": 1041.13,
+              "raArcsec": -0.218,
+              "decArcsec": 0,
+              "totalArcsec": 0.218
+            },
+            {
+              "segment": 5,
+              "elapsedSeconds": 1396.961,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 5,
+              "elapsedSeconds": 1733.534,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 5,
+              "elapsedSeconds": 2083.754,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 5,
+              "elapsedSeconds": 2420.883,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 5,
+              "elapsedSeconds": 2784.362,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 5,
+              "elapsedSeconds": 3176.12,
+              "raArcsec": -0.517,
+              "decArcsec": 0,
+              "totalArcsec": 0.517
+            },
+            {
+              "segment": 5,
+              "elapsedSeconds": 3542.375,
+              "raArcsec": -0.322,
+              "decArcsec": 0,
+              "totalArcsec": 0.322
+            },
+            {
+              "segment": 5,
+              "elapsedSeconds": 3993.962,
+              "raArcsec": 0.22,
+              "decArcsec": 0,
+              "totalArcsec": 0.22
+            },
+            {
+              "segment": 5,
+              "elapsedSeconds": 4415.431,
+              "raArcsec": -1.084,
+              "decArcsec": 0,
+              "totalArcsec": 1.084
+            },
+            {
+              "segment": 5,
+              "elapsedSeconds": 4771.206,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 5,
+              "elapsedSeconds": 5125.164,
+              "raArcsec": -0.245,
+              "decArcsec": 0,
+              "totalArcsec": 0.245
+            },
+            {
+              "segment": 5,
+              "elapsedSeconds": 5449.827,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 5,
+              "elapsedSeconds": 5786.023,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 5,
+              "elapsedSeconds": 6110.375,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 6,
+              "elapsedSeconds": 203.498,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 6,
+              "elapsedSeconds": 1201.288,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 6,
+              "elapsedSeconds": 1528.233,
+              "raArcsec": -0.22,
+              "decArcsec": 0,
+              "totalArcsec": 0.22
+            },
+            {
+              "segment": 6,
+              "elapsedSeconds": 2525.515,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 6,
+              "elapsedSeconds": 2848.526,
+              "raArcsec": 0.384,
+              "decArcsec": 0,
+              "totalArcsec": 0.384
+            },
+            {
+              "segment": 6,
+              "elapsedSeconds": 3190.978,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 6,
+              "elapsedSeconds": 3553.502,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 6,
+              "elapsedSeconds": 3888.544,
+              "raArcsec": 0.132,
+              "decArcsec": 0,
+              "totalArcsec": 0.132
+            },
+            {
+              "segment": 7,
+              "elapsedSeconds": 107.894,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 7,
+              "elapsedSeconds": 432.708,
+              "raArcsec": 0,
+              "decArcsec": 0,
+              "totalArcsec": 0
+            },
+            {
+              "segment": 7,
+              "elapsedSeconds": 801.284,
+              "raArcsec": 0.307,
+              "decArcsec": 0,
+              "totalArcsec": 0.307
+            },
+            {
+              "segment": 7,
+              "elapsedSeconds": 1145.261,
+              "raArcsec": -0.129,
+              "decArcsec": 0,
+              "totalArcsec": 0.129
+            },
+            {
+              "segment": 7,
+              "elapsedSeconds": 1518.596,
+              "raArcsec": -0.901,
+              "decArcsec": 1.078,
+              "totalArcsec": 1.405
+            },
+            {
+              "segment": 7,
+              "elapsedSeconds": 1882.667,
+              "raArcsec": -0.669,
+              "decArcsec": 0,
+              "totalArcsec": 0.669
+            }
+          ]
+        }
+      },
+      "sqm": {
+        "state": "AVAILABLE",
+        "minMagArcsec2": 11.7,
+        "maxMagArcsec2": 20.91,
+        "meanMagArcsec2": 20.5353,
+        "medianMagArcsec2": 20.84,
+        "validSamples": 1285,
+        "temporalCoverage": 0.9727
+      },
+      "qualityState": "VALIDATED_ANALYTICS"
     }
   ]
 }
