@@ -15,11 +15,11 @@ export async function projectSessionPackage(repoRoot, sessionId) {
     manifest=JSON.parse((await readFile(path,'utf8')).replace(/^\uFEFF/,''));
   }
   catch { return record; }
-  if (manifest.schema_version!=='1.0' || manifest.session_id!==sessionId || manifest.report_status!=='COMPLETE' || !Array.isArray(manifest.files) || !manifest.files.length || manifest.files.length>1000) return {...record,state:'INVALID'};
+  if (!manifest || typeof manifest!=='object' || Array.isArray(manifest) || manifest.schema_version!=='1.0' || manifest.session_id!==sessionId || manifest.report_status!=='COMPLETE' || !Array.isArray(manifest.files) || !manifest.files.length || manifest.files.length>1000) return {...record,state:'INVALID'};
   record.fileCount=manifest.files.length;
   const names=new Set();
   for (const file of manifest.files) {
-    if (typeof file.path!=='string' || !/^raw\/[A-Za-z0-9_./ -]+$/.test(file.path) || file.path.split('/').some(p=>!p || p==='.' || p==='..') || names.has(file.path) || !Number.isSafeInteger(file.size_bytes) || file.size_bytes<0 || !/^[a-f0-9]{64}$/i.test(file.sha256 || '')) return {...record,state:'INVALID'};
+    if (!file || typeof file!=='object' || Array.isArray(file) || typeof file.path!=='string' || !/^raw\/[A-Za-z0-9_./ -]+$/.test(file.path) || file.path.split('/').some(p=>!p || p==='.' || p==='..') || names.has(file.path) || !Number.isSafeInteger(file.size_bytes) || file.size_bytes<0 || !/^[a-f0-9]{64}$/i.test(file.sha256 || '')) return {...record,state:'INVALID'};
     names.add(file.path);
   }
   const directory=await realpath(resolve(repoRoot,relative,'..'));
