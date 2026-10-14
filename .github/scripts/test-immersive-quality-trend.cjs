@@ -1,4 +1,5 @@
 const assert=require('node:assert/strict');
+const fs=require('node:fs');
 const {chromium}=require('playwright');
 const base=process.env.DSG_TEST_BASE_URL || 'http://127.0.0.1:8766/digital-stargate-manual/';
 (async()=>{
@@ -11,9 +12,15 @@ const base=process.env.DSG_TEST_BASE_URL || 'http://127.0.0.1:8766/digital-starg
   await page.goto(base+'scientific-data-quality/');
   const chart=page.locator('[data-quality-trend]');
   await chart.locator('svg').waitFor();
-  assert.equal(await chart.locator('[data-toggle]').count(),2);
-  assert.equal(await chart.locator('svg a').count(),10);
-  assert.equal(await chart.locator('tbody tr').count(),20);
+  const catalog=JSON.parse(fs.readFileSync('site/data/scientific-session-catalog.json','utf8'));
+  const projection=JSON.parse(fs.readFileSync('site/data/scientific-data-quality-projection.json','utf8'));
+  const known=new Map(catalog.sessions.filter(s=>s.configurationId && s.configurationId!=='UNKNOWN').map(s=>[s.sessionId,s.configurationId]));
+  const represented=projection.assessments.filter(a=>known.has(a.sessionId));
+  const published=represented.filter(a=>a.projectionRecordState==='AVAILABLE');
+  assert.equal(await chart.locator('[data-toggle]').count(),new Set(represented.map(a=>known.get(a.sessionId))).size);
+  const plottedIds=await chart.locator('svg a').evaluateAll(links=>links.map(link=>new URL(link.href.baseVal || link.getAttribute('href'),document.baseURI).searchParams.get('sessionId')));
+  assert.deepEqual(plottedIds.sort(),published.map(a=>a.sessionId).sort());
+  assert.equal(await chart.locator('tbody tr').count(),represented.length);
   const first=chart.locator('svg a').first();await first.focus();
   assert((await chart.locator('.dsg-trend-readout').textContent()).includes('score'));
   await chart.locator('[data-toggle="0"]').click();

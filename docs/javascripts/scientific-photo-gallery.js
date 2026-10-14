@@ -13,7 +13,7 @@
       grid.replaceChildren();status.textContent=`${filtered.length} immagini pubblicate`;
       if(!filtered.length)el('p',records.length?'Nessun risultato.':'Nessuna immagine ancora pubblicata.',grid);
       for(const record of filtered){
-        const card=el('article',undefined,grid);card.className='dsg-image-card';const image=el('img',undefined,card);image.src=record.previewUrl;image.alt=record.title;image.loading='lazy';image.style.maxWidth='100%';
+        const card=el('article',undefined,grid);card.className='dsg-image-card';card.id=record.imageVersionId;const image=el('img',undefined,card);image.src=record.previewUrl;image.alt=record.title;image.loading='lazy';image.style.maxWidth='100%';
         el('h2',record.title,card);el('p',`${record.target} · elaborazione ${record.processingDate}`,card);
         for(const id of record.sessionIds){const link=el('a',id,card);const url=new URL('scientific-session-detail/',window.DSGPhotoApi.base);url.searchParams.set('sessionId',id);link.href=url.href;el('br',undefined,card);}
         el('p',`Versione ${record.imageVersionId}`,card);el('p',`${record.associationEvidence==='HISTORICAL_OWNER_DECLARATION'?'Riprese storiche dichiarate dall’autore; sessioni non importate.':'Sessioni dichiarate dall’autore.'} Workflow ${record.captureCompleteness==='PARTIAL'?'parziale':'non disponibile'}. Esecuzione non verificata.`,card);
@@ -22,6 +22,7 @@
         if(!record.steps.length)el('p','Nessun passaggio disponibile per questa versione.',details);
         el('p','Visibile fino al ritiro esplicito.',details);
       }
+      const selected=document.getElementById(location.hash.slice(1));if(selected && grid.contains(selected))selected.scrollIntoView({block:'start'});
     };
     const load=async()=>{
       const current=++sequence;
