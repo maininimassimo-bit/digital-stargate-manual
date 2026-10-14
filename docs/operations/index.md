@@ -23,7 +23,7 @@
 <div class="dsg-operations-kpis">
   <div class="dsg-operations-kpi"><span>AUTOMAZIONE</span><strong>Governata</strong><small>NINA, CPWI, PHD2 e ASCOM</small></div>
   <div class="dsg-operations-kpi"><span>SAFETY</span><strong>Locale e indipendente</strong><small>Interblocchi non delegati al portale</small></div>
-  <div class="dsg-operations-kpi"><span>TRANSFER</span><strong>07:30</strong><small>COPY_ONLY, un file per run</small></div>
+  <div class="dsg-operations-kpi"><span>TRANSFER</span><strong>COPY_ONLY</strong><small>Baseline accettata: massimo 30 file/run; non stato runtime</small></div>
   <div class="dsg-operations-kpi"><span>RUNBOOK</span><strong>Versionati</strong><small>Avvio, acquisizione, chiusura e recovery</small></div>
 </div>
 
@@ -136,16 +136,16 @@
 </section>
 
 <section class="dsg-operations-section">
-  <span>CURRENT OPERATIONAL BOUNDARY</span>
-  <h2>AP-013 Morning Transfer</h2>
+  <span>DOCUMENTED OPERATIONAL BOUNDARY</span>
+  <h2>AP-013 — baseline documentata</h2>
   <div class="dsg-operations-boundary">
     <article><strong>Modalità</strong><span>COPY_ONLY</span></article>
-    <article><strong>Finestra</strong><span>07:30–08:15</span></article>
+    <article><strong>Scheduler storico</strong><span>Avvio 07:30–08:05; completamento previsto 08:15</span></article>
     <article><strong>Integrità</strong><span>SHA-256</span></article>
-    <article><strong>Limite</strong><span>1 file per run</span></article>
+    <article><strong>Limite accettato</strong><span>≤ 30 file per run</span></article>
   </div>
   <div class="dsg-operations-warning">
-    Bulk transfer, overwrite e source cleanup restano non autorizzati fino al completamento delle evidenze operative e del readiness review.
+    Baseline AP-013B Limited Production: COPY_ONLY, massimo 30 file/run, no overwrite e no source/transport automatic cleanup. Non è un’attestazione dell’ultimo run o dello stato attuale dei dispositivi. <a href="../architecture/validation/AP-013-Operational-Acceptance/">Acceptance</a> · <a href="../architecture/validation/AP-013-Morning-Transfer-Scheduler-Evidence/">Scheduler storico</a> · <a href="../mission-control/">Proiezione corrente in Mission Control</a> · <a href="../developer/session-lineage-and-mission-control/">Riferimento tecnico</a>.
   </div>
 </section>
 

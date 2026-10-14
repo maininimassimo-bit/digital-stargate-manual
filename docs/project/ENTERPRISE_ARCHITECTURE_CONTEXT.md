@@ -1,5 +1,11 @@
 # Digital StarGate Enterprise Architecture Context
 
+## Aggiornamento del portale — 14 ottobre 2026
+
+PR587, PR588 e PR589 integrate e verificate fino a Pages; ultimo merge `9ea5f2ca377eca2e48af1c081fc64c4e7bb5b582`. Catena sessione e Mission Control rileggono fonti correnti ogni minuto visibile e manualmente; asset/versioni sono associati con ID esatto, Transfer verifica il pacchetto documentale EAGLE, logo/header/favicon usano il PNG Owner comune. AP-013 espone il limite documentato 30 file/run e discovery/scheduler storici, senza attestazioni sui dispositivi attuali. Consultare [riferimento tecnico](../developer/session-lineage-and-mission-control.md) e [ricevute di rilascio](../releases/2026-10-14-session-lineage-and-brand.md).
+
+Questo aggiornamento è limitato al portale; non sostituisce gli snapshot e le authority dei package scientifici sotto riportati e non chiude BKL-050 o i residui RAW/provenance/runtime.
+
 ## PixInsight — integrazione statistica candidata
 
 Incremento autorizzato del ciclo adattivo: consenso separato per statistiche dei pixel, analisi locale dei master selezionati, evidence validata/binding immutabile e payload OpenAI senza hash o percorsi. PR #560 integrata, 14 workflow post-merge PASS, backend/worker aggiornati e flag abilitato; quota0 e gpt-6-luna conservati. Accesso browser non completato: nuova opzione autenticata e richiesta statistica reale non collaudate; nessuna chiamata API aggiuntiva o avvio nativo nel rilascio. Il planner conserva la ricetta V1: catalogo, analisi PSF/background, segmentazione e decisioni checkpoint multiple restano aperti. Quota0 attiva e P6/BKL-051 invariati. [Contratto e rollback](PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md#collegamento-delle-misure-al-pianificatore).

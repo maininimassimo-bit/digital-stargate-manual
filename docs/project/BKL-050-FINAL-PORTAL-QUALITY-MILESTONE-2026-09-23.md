@@ -1,5 +1,9 @@
 # BKL-050 — Final Portal Quality and Accessibility Acceptance
 
+## Evidenza di manutenzione del portale — 14 ottobre 2026
+
+[Rilascio PR587–589](../releases/2026-10-14-session-lineage-and-brand.md): eliminati i placeholder di catena, introdotti refresh coerente, manifest verificato e copertura aggregata, corrette qualificazione AP-013 e identità visiva. È evidence di correzioni circoscritte, non acceptance complessiva BKL-050. La [procedura di verifica](../developer/session-lineage-and-mission-control.md) conserva RAW/provenance parziali e separa la qualità del consumer dalla certificazione scientifica/runtime.
+
 ## Dipendenza aggiunta il 7 ottobre 2026
 
 L'Owner ha approvato [BKL-051](BKL-051-SCIENTIFIC-TRANSIENT-CANDIDATES-2026-10-07.md), da sviluppare dopo la chiusura operativa P6. BKL-050 rimane **ultima**, anche dopo BKL-051 e BKL-043 F4/F5. L'aggiunta non chiude P6, non anticipa F5 e non fissa nuove date.

@@ -107,3 +107,7 @@ La Home mostra il JPEG live Allsky al posto dello StarGate, con contenitore e ba
 I check richiesti sui rispettivi head e i workflow post-merge sono riusciti. I test browser usano fixture e bloccano provider esterni; il riscontro successivo sul sito pubblico ha verificato separatamente il JPEG reale 1936 × 1096 e l’allineamento in Status. La verifica live ha rilevato la cache di asset precedenti: la PR #535 ha corretto il problema tramite riferimenti di versione, verificati anche nella scheda già aperta.
 
 Le modifiche sono di presentazione read-only: non cambiano telemetria, policy di freshness, autorità safety o configurazioni dell’Allsky. La disponibilità osservata del JPEG non costituisce un monitoraggio continuo o una conferma della sicurezza del cielo. Restano i limiti di collaudo fisico e assistivo della baseline.
+
+## Manutenzione successiva — 14 ottobre 2026
+
+[Rilascio PR587–589](2026-10-14-session-lineage-and-brand.md): brand Owner comune/header/favicon e correzioni di catena/sessione/Mission Control pubblicate e verificate. Il [riferimento tecnico](../developer/session-lineage-and-mission-control.md) documenta fonti, refresh e limiti; le prove immersive originarie e le loro condizioni restano storiche e distinte.

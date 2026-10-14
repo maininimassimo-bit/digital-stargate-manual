@@ -755,3 +755,9 @@ Successivamente:
 3. implementare il parser e la modalità dry-run su filesystem simulato;
 4. eseguire il dry-run su una sessione reale;
 5. autorizzare separatamente una copia nella sola area `F:\_DSG_TEST`.
+
+## Nota di integrazione del portale — 14 ottobre 2026
+
+La baseline/modello sopra mantiene il proprio scope storico. I consumer pubblici rilasciati PR587–589 distinguono il manifest di **reporting AP-014** (documenti/log/telemetria EAGLE) da inventario/manifest/trasporto dei binari scientifici **AP-013**. La projection `SESSION_DOCUMENT_PACKAGE` verifica size/SHA-256 dei documenti nel repository; non completa gli schemi, l'inventario fotografico, le copie fisiche o la provenance dei frame del modello DSDM. Le versioni gallery sono associate con session IDs dichiarati Owner e workflow parziali/esecuzione non stabilita.
+
+[Riferimento implementativo](../../developer/session-lineage-and-mission-control.md) e [ricevute di rilascio](../../releases/2026-10-14-session-lineage-and-brand.md). Non usare lo stato Transfer del portale come attestazione di import AP-013 o autorizzazione a cleanup, overwrite, nuove schedulazioni o safety.

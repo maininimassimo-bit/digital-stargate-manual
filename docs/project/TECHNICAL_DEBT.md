@@ -1,5 +1,11 @@
 # Technical Debt Register
 
+## Riconciliazione del portale — 14 ottobre 2026
+
+Risolti con PR587–589 i placeholder Processing/Publication e Scientific assets, link metriche404, Transfer non proiettato, rinnovo limitato a gallery/pacchetti con catalogo stale, tile Mission Control fisse e limite pilot 1 file presentato come corrente. Null/malformed manifest e config gallery senza deadline sono stati corretti prima delle approvazioni finali. Brand unico senza modifica dei pixel. [Ricevute](../releases/2026-10-14-session-lineage-and-brand.md), [manutenzione](../developer/session-lineage-and-mission-control.md).
+
+Residui dichiarati: inventario RAW fotografici per sessione non esposto, contributi dei frame ed esecuzione completa non attestati; metriche generali di dettaglio conservate come ultima lettura quando il catalogo fallisce. Dati dinamici osservabili solo dopo la loro pubblicazione; un timer browser non sana una pipeline fallita. Nessuna certificazione scientifica/safety o chiusura BKL-050 deriva da questi fix. Lo scan link locale PR589 interrotto resta tale; scansioni GitHub complete SUCCESS.
+
 ## PixInsight — integrazione statistica candidata
 
 Incremento autorizzato del ciclo adattivo: consenso separato per statistiche dei pixel, analisi locale dei master selezionati, evidence validata/binding immutabile e payload OpenAI senza hash o percorsi. PR #560 integrata, 14 workflow post-merge PASS, backend/worker aggiornati e flag abilitato; quota0 e gpt-6-luna conservati. Accesso browser non completato: nuova opzione autenticata e richiesta statistica reale non collaudate; nessuna chiamata API aggiuntiva o avvio nativo nel rilascio. Il planner conserva la ricetta V1: catalogo, analisi PSF/background, segmentazione e decisioni checkpoint multiple restano aperti. Quota0 attiva e P6/BKL-051 invariati. [Contratto e rollback](PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md#collegamento-delle-misure-al-pianificatore).

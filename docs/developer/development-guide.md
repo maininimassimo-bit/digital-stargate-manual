@@ -107,3 +107,7 @@ La workflow `.github/workflows/developer-foundation.yml` esegue restore, build R
 ## Ambito escluso
 
 La Release 1.5 non introduce database reale, Event Bus, N.I.N.A., ASCOM, PHD2, PixInsight, scheduler completo, Kubernetes o alta disponibilità. Queste capability appartengono alla Release 2.0.
+
+## Consumer del portale — riferimento aggiornato al14 ottobre 2026
+
+Per gli script Scientific Data Engine, session detail, Mission Control e manifest di reporting, seguire [DSG-PORTAL-LINEAGE-REF-001](session-lineage-and-mission-control.md). Il riferimento integra la fondazione .NET con le letture pubbliche MkDocs effettivamente rilasciate: fonti/schema, projection build-only, deadline/size, refresh e failure, test/generatori, brand e rollback. [Rilascio verificato](../releases/2026-10-14-session-lineage-and-brand.md).

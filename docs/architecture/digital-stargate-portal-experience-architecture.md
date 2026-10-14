@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSGP-SOL-001 |
-| Versione | 1.0 |
+| Versione | 1.1 |
 | Stato | Accepted |
-| Data | 10/09/2026 |
+| Data | 14/10/2026 |
 | Ambito | GitHub Pages, MkDocs Material, presentation boundary |
 | Governing vision | DSGP-VIS-001 |
 | Design system | DSG-UI-001 v2.0 |
@@ -105,7 +105,7 @@ Dopo ogni sessione COMPLETE promossa:
 4. la homepage legge roadmap, catalogo e latest observation direttamente a runtime con cache no-store;
 5. loading e failure state non espongono valori storici plausibili.
 
-Questa soluzione non richiede nuovi permessi, push o deploy nei workflow privilegiati esistenti. Il file homepage resta strutturale; sono le projection versionate già governate a cambiare dopo l'import.
+La projection dei pacchetti aggiunta da PR588 viene generata nel build autorevole Pages: non richiede un nuovo commit del bot né l’aggiunta del JSON derivato ai governed_paths. Il commit dei manifest/projection esistenti continua ad attivare il deploy. Le correzioni non richiedono nuovi permessi o un ulteriore proprietario del deploy. Il file homepage resta strutturale; sono le projection versionate già governate a cambiare dopo l'import.
 
 Il passo Pages `refresh_homepage.py` è mantenuto per compatibilità con il workflow, ma opera come validator non mutante: verifica binding obbligatori e rifiuta fallback stale invece di reiniettare dati statici.
 
@@ -114,6 +114,9 @@ Il passo Pages `refresh_homepage.py` è mantenuto per compatibilità con il work
 | Homepage | roadmap.json + catalogo + latest observation | hydration runtime dopo il deploy delle projection |
 | Ultima osservazione | docs/data/realtime/latest-observation.json | rigenerazione e commit |
 | Catalogo | docs/data/scientific-session-catalog.json | rigenerazione e commit |
+| Dettaglio sessione | catalogo + gallery pubblica + pacchetti | no-store a load/visibilità/60s visibili/manuale dopo pubblicazione |
+| Mission Control | catalogo + gallery + pacchetti + scientific-platform-status.json | aggregazione e rinnovo delle fonti correnti; baseline AP-013 non-runtime |
+| Pacchetti documentali | docs/data/session-package-transfer.json | generazione build Pages da manifest canonici e size/SHA-256; non committato |
 | Session Comparison | docs/data/session-comparison-projection.json | rigenerazione e commit |
 | Equipment Performance | projection BKL-039 | rigenerazione e commit |
 | Report sessioni | docs/session-reports e indice | rigenerazione e commit |
@@ -217,3 +220,7 @@ L'addendum non estende l'approvazione ARB-UI-7 alla nuova implementazione.
 [Implementazione e boundary](../ui/immersive-portal-implementation.md) e
 [note di rilascio](../releases/immersive-portal.md) tracciano il nuovo perimetro,
 le review AI-assistite e la pubblicazione della PR #429.
+
+## Integrazione implementata — 14 ottobre 2026
+
+PR587–589 correggono le superfici read-only mantenendo AP-013/AP-014 autorevoli. Scientific assets include versioni pubblicate con associazione esatta Owner, ma mantiene RAW/provenance parziali; Transfer è il pacchetto di reporting EAGLE. Mission Control usa denominatori dell'intero catalogo e non etichette statiche; i pannelli AP-013 distinguono evidence storica/limite accettato 30 file da telemetria/safety presente. Logo/fallback/favicon condividono il PNG Owner invariato con dimensionamento CSS. La v1.1 documenta l'implementazione correttiva, senza nuova acceptance delle architetture scientifiche. [Fonti, limiti, failure e rollback](../developer/session-lineage-and-mission-control.md), [ricevute effettive](../releases/2026-10-14-session-lineage-and-brand.md).

@@ -4,11 +4,12 @@
 
 <section class="dsg-intelligence-hero">
   <span class="dsg-intelligence-kicker">DIGITAL STARGATE · SCIENTIFIC PLATFORM INTELLIGENCE</span>
-  <h1>Stato pubblicato della pipeline scientifica</h1>
+  <h1>Snapshot storico della pipeline scientifica</h1>
   <p>
     Vista sintetica su discovery, parsing, transfer, manifest, provenance e readiness AP-013.
     I valori derivano dalla baseline versionata e non rappresentano telemetria live dell’EAGLE o del PC Principale.
   </p>
+  <p>Questa pagina conserva il precedente snapshot del pilot AP-013: conteggi, limite 1 file e stati Planned/In evolution sotto riportati non descrivono la baseline attuale. Per lo stato corrente usare <a href="../../mission-control/">Mission Control</a>, la <a href="../../architecture/validation/AP-013-Operational-Acceptance/">Formal Operational Acceptance</a> e il <a href="../../developer/session-lineage-and-mission-control/">riferimento tecnico aggiornato</a>; il limite accettato è 30 file/run e la provenance pubblica resta parziale.</p>
   <div class="dsg-intelligence-actions">
     <a href="../">Scientific Platform Center</a>
     <a href="../../architecture/packages/AP-013-Scientific-Image-Repository-Architecture/">AP-013</a>

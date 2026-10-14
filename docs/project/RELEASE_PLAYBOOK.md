@@ -108,3 +108,9 @@ Il rollback deve identificare:
 ## 10. Definition of Done
 
 La release è completata solo quando commit, push, workflow, deployment, verifica visiva e aggiornamento governance risultano tutti tracciati.
+
+## Verifica delle catene informative — riferimento del14 ottobre 2026
+
+Per rilasci che toccano dettaglio sessione, Mission Control o brand aggiungere le verifiche applicabili di [DSG-PORTAL-LINEAGE-REF-001](../developer/session-lineage-and-mission-control.md): generatori/check, regressioni dei consumer, build autorevole e scan dei link; poi osservare su Pages ID/versioni, count/manifest, qualificazione storico/runtime, rinnovo manuale e minuto visibile. Confrontare gli asset serviti con i Git blob del merge reale quando si corregge il consumer. Gli scan interrotti/non eseguiti restano distinti dai PASS di CI.
+
+[Ricevute PR587–589](../releases/2026-10-14-session-lineage-and-brand.md) mostrano il metodo già applicato. Revert/redeploy del package UI preserva file canonici, gallery e runtime. La consegna documentale successiva richiede i propri gate e non viene dichiarata pubblicata dalla ricevuta del package precedente.
