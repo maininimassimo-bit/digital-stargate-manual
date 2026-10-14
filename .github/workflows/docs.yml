@@ -51,6 +51,9 @@ jobs:
       - name: Verifica routing dettaglio sessione
         run: node --test .github/scripts/test-scientific-session-detail-routing.mjs
 
+      - name: Verify session publication lineage
+        run: node --test .github/scripts/test-scientific-session-publication.mjs
+
       - name: Configura Python
         uses: actions/setup-python@v5
         with:

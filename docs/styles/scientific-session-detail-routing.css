@@ -48,3 +48,7 @@
     grid-template-columns: 1fr;
   }
 }
+.dsg-session-detail .dsg-graph-node small,.dsg-session-detail .dsg-lineage-step small,.dsg-session-detail [data-detail-publications] span{overflow-wrap:anywhere;min-width:0}
+.dsg-session-detail [data-detail-publication-refresh]{padding:.6rem 1rem;border:1px solid var(--sd-border);border-radius:.5rem;cursor:pointer;color:inherit}
+.dsg-session-detail [data-detail-publication-refresh]:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.dsg-session-detail [data-detail-publication-refresh]:disabled{cursor:wait;opacity:.6}

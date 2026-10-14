@@ -223,7 +223,7 @@
     ]
   });
 
-  const getLineage = (session) => {
+  const getLineage = (session, publication) => {
     const manifestAvailable = representedState(session.manifestState);
     const transferAvailable = representedState(session.transferState);
     return [
@@ -232,8 +232,8 @@
       { label: 'Scientific assets', state: 'partial', detail: 'paths and binary inventory not exposed in this catalog' },
       { label: 'Manifest', state: manifestAvailable ? 'represented' : 'missing', detail: session.manifestState },
       { label: 'Transfer', state: transferAvailable ? 'represented' : 'missing', detail: session.transferState },
-      { label: 'Processing', state: 'missing', detail: 'not represented' },
-      { label: 'Publication', state: 'missing', detail: 'not represented' }
+      { label: 'Processing', ...(publication?.processing || {state:'missing', detail:'not represented'}) },
+      { label: 'Publication', ...(publication?.publication || {state:'missing', detail:'not represented'}) }
     ];
   };
 
