@@ -83,3 +83,11 @@ ore indeterminate, coerentemente con il totale. Test consumer aggiornati per
 tracce positive, zero, limite 0,001 e picco indeterminato. Solo presentazione:
 non è necessaria una nuova acquisizione GRIB. Rollback limitato a questo
 incremento conserva il recupero e i reader compatibili delle PR #494/#495.
+
+## Integrazione del 14 ottobre 2026
+
+La policy 1.3 aggiunge una tolleranza advisory esplicita di 1e-12 mm alle sole
+tracce positive numericamente trascurabili; i numeri originali restano auditabili.
+I risultati e il criterio 1.2 sopra descritti restano evidenza storica. La gestione
+delle regressioni GRIB e delle ore indeterminate è conservata.
+[Contratto corrente e handover](HANDOVER_2026-10-14-PLANNER-NUMERICAL-PRECIPITATION.md).

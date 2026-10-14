@@ -1,5 +1,9 @@
 # Project Backlog
 
+## Planner: correzione delle tracce numeriche — 14 ottobre 2026
+
+Su richiesta Owner, la policy advisory F9 1.3 distingue i residui fino a 1e-12 mm dalla pioggia positiva superiore a tale tolleranza. Il valore originale resta nella projection; cielo, tabella, semafori, fattori meteo e finestre usano la medesima normalizzazione. La ri-derivazione non rinnova gli orologi del forecast. Ore indeterminate, pioggia debole e altri vincoli restano bloccanti; nessuna modifica della Safety o di BKL-032. [Handover, evidenze e rollback](HANDOVER_2026-10-14-PLANNER-NUMERICAL-PRECIPITATION.md).
+
 ## Integrazione TVCC interna pubblica — 14 ottobre 2026
 
 Richiesta Owner: ripresa interna pubblica, senza audio, tramite ponte privato RTSP e proiezione JPEG/MJPEG HTTPS. Vista Interno manuale o automatica con badge OPEN; freshness e rimozione del video indipendenti dalla telemetria. Nessun comando o Safety Authority. Configurazione autenticata esclusa dal repository. [Contratto e rollback](../developer/dome-camera-public-relay.md), [handover e limiti della verifica](HANDOVER_2026-10-14-PUBLIC-DOME-CAMERA.md). La ricevuta della PR deve attestare separatamente installazione e collaudo reale; nessun package scientifico viene promosso da questa integrazione.

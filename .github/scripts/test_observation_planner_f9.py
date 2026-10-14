@@ -6,6 +6,7 @@ import unittest
 from unittest.mock import patch
 import urllib.error
 import sys
+import math
 import tempfile
 import types
 
@@ -25,7 +26,7 @@ def valid_projection():
       'forecast':{'providerId':'METEOHUB','upstreamAuthorityId':'ITALIAMETEO_ARPAE','modelId':'ICON_2I','freshnessState':'FRESH','runInitialisationUtc':'2026-09-17T00:00:00Z','retrievedAtUtc':'2026-09-17T01:00:00Z','runAgeHoursAtRetrieval':1.0,
         'sourceFiles':[{'variable':name,'sha256':'0'*64,'byteLength':1,'unit':'unit'} for name in f9.VARIABLES]},
       'nightWindow':{'fromUtc':stamp(instants[0]),'toUtcExclusive':stamp(instants[-1]+dt.timedelta(hours=1))},
-      'method':{'id':'BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.2','ephemerisMode':'EXPLICIT_MOSEPH_NO_FALLBACK','scoreWeights':{'astronomy':0.6,'weather':0.3,'setupSuitability':0.1},'displayFilter':'solarAltitudeDeg <= -18 and targetAltitudeDeg >= 20','minimumTargetAltitudeDeg':20.0,'lunarFactor':'1 - illuminatedFraction * max(0,sin(radians(clamp(moonAltitudeDeg,0,90)))) * max(0,1-separationDeg/90)'},'weatherPolicy':{'id':'DSG-F9-PLANNER-WEATHER-GATE@1.2','limits':f9.WEATHER_LIMITS,'cloudLimitRationale':'OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT','authority':'ADVISORY_PLANNING_ONLY'},'attribution':{'license':'CC BY 4.0'},
+      'method':{'id':'BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.2','ephemerisMode':'EXPLICIT_MOSEPH_NO_FALLBACK','scoreWeights':{'astronomy':0.6,'weather':0.3,'setupSuitability':0.1},'displayFilter':'solarAltitudeDeg <= -18 and targetAltitudeDeg >= 20','minimumTargetAltitudeDeg':20.0,'lunarFactor':'1 - illuminatedFraction * max(0,sin(radians(clamp(moonAltitudeDeg,0,90)))) * max(0,1-separationDeg/90)'},'weatherPolicy':f9.weather_policy(),'attribution':{'license':'CC BY 4.0'},
       'setupProfiles':[{'setupId':'S'}],'targetProfiles':[{'targetKey':'T'}],
       'suitabilityEvidence':{'methodId':f9.SUITABILITY_METHOD_ID,'componentWeights':f9.SUITABILITY_WEIGHTS,'cases':[{'setupId':'S','targetKey':'T','components':{'framing':80,'filterSignal':90,'imageScaleObjectClass':85},'aggregateScore':aggregate,'reasonCodes':['TEST']} ]},
       'hourly':[{'validAtUtc':stamp(instant),'solarAltitudeDeg':-30,'moonAltitudeDeg':60,'moonIlluminatedFraction':0.5,'weather':{'temperatureC':15,'dewPointC':4,'cloudCoverPct':10,'relativeHumidityPct':20,'precipitationMm':0,'windSpeedKmh':3,'windGustKmh':4},'targets':{'T':{'altitudeDeg':30,'moonSeparationDeg':45,'lunarSuitabilityFactor':lunar,'astronomyFactor':astronomy,'weatherFactor':weather_factor}}} for instant in instants],
@@ -168,6 +169,45 @@ class F9Tests(unittest.TestCase):
         rows=f9.weather_rows(values,errors)
         self.assertGreater(rows[times[1]]['precipitationMm'],0)
         self.assertIn('PIOGGIA_PRESENTE',f9.weather_gate(rows[times[1]])[1])
+
+    def test_observed_numerical_dust_and_floor_boundary(self):
+        for value in (2.946505750977754e-16, f9.PRECIPITATION_NUMERICAL_ZERO_MM):
+            weather=f9.normalize_precipitation({'precipitationMm':value})
+            self.assertEqual(weather['precipitationMm'],0)
+            self.assertEqual(weather['precipitationNumericalTraceMm'],value)
+            self.assertEqual(f9.normalize_precipitation(weather),weather)
+        for value in (math.nextafter(f9.PRECIPITATION_NUMERICAL_ZERO_MM,math.inf),1e-7,0.0001,0.001):
+            weather=f9.normalize_precipitation({'precipitationMm':value})
+            self.assertEqual(weather['precipitationMm'],value)
+            self.assertNotIn('precipitationNumericalTraceMm',weather)
+
+    def test_rederivation_preserves_source_and_recomputes_windows(self):
+        value=valid_projection()
+        value['targetProfiles'][0].update(targetName='Synthetic T',acquisitionState='NOT_YET_ACQUIRED')
+        value['weatherPolicy']={k:v for k,v in value['weatherPolicy'].items() if k!='precipitationNumericalZeroMm'}
+        value['weatherPolicy']['id']='DSG-F9-PLANNER-WEATHER-GATE@1.2'
+        value['hourly'][0]['weather']['precipitationMm']=2.946505750977754e-16
+        before=json.loads(json.dumps(value))
+        result=f9.normalize_existing_projection(value,dt.datetime(2026,9,17,14,tzinfo=dt.timezone.utc))
+        self.assertEqual(value,before)
+        self.assertEqual(result['forecast'],value['forecast'])
+        self.assertEqual(result['generatedAtUtc'],value['generatedAtUtc'])
+        self.assertEqual(result['hourly'][0]['weather']['precipitationMm'],0)
+        self.assertTrue(f9.weather_gate(result['hourly'][0]['weather'])[0])
+        self.assertEqual(f9.normalize_existing_projection(result,dt.datetime(2026,9,17,14,tzinfo=dt.timezone.utc)),result)
+        f9.validate_projection(result)
+
+    def test_numerical_zero_does_not_clear_uncertainty(self):
+        value=valid_projection()['hourly'][0]['weather']
+        value.update(precipitationMm=1e-16,precipitationUncertain=True)
+        self.assertFalse(f9.weather_gate(f9.normalize_precipitation(value))[0])
+
+    def test_normalization_contract_rejects_invalid_trace_and_legacy_reuse(self):
+        for trace in (True,0,-1,1e-7,float('nan')):
+            value=valid_projection();value['hourly'][0]['weather']['precipitationNumericalTraceMm']=trace
+            with self.assertRaisesRegex(f9.ContractError,'NORMALIZATION'):f9.validate_projection(value)
+        value=valid_projection();value['weatherPolicy']['id']='DSG-F9-PLANNER-WEATHER-GATE@1.2'
+        self.assertFalse(f9.reusable_projection(value,'2026091700',dt.datetime(2026,9,17,14,tzinfo=dt.timezone.utc)))
 
     def test_uncertain_hour_cannot_enter_a_ranked_window(self):
         value=valid_projection();value['hourly'][1]['weather']['precipitationUncertain']=True

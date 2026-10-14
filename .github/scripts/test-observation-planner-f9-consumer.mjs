@@ -6,12 +6,13 @@ import {summarizeNightSky,formatPrecipitation} from '../../docs/javascripts/plan
 // Run the actual consumer with a minimal DOM and a governed public projection.
 const source=fs.readFileSync(new URL('../../docs/javascripts/observation-planner-f9.js',import.meta.url),'utf8').replace(/^import .*;\r?\n/,'');
 const baseline=JSON.parse(fs.readFileSync(new URL('../../docs/data/observation-planner-f9-current-night.json',import.meta.url)));
-async function render(uncertain,policy='DSG-F9-PLANNER-WEATHER-GATE@1.2',trace=0){
+async function render(uncertain,policy='DSG-F9-PLANNER-WEATHER-GATE@1.3',trace=0,numericalTrace=0){
   const data=structuredClone(baseline);data.weatherPolicy.id=policy;
   // Keep this test independent of the age of the checked-in forecast.
   const now=Date.parse(data.generatedAtUtc);
-  for(const row of data.hourly){Object.assign(row.weather,{cloudCoverPct:0,relativeHumidityPct:20,precipitationMm:0,temperatureC:15,dewPointC:4,windSpeedKmh:0,windGustKmh:0});}
+  for(const row of data.hourly){Object.assign(row.weather,{cloudCoverPct:0,relativeHumidityPct:20,precipitationMm:0,temperatureC:15,dewPointC:4,windSpeedKmh:0,windGustKmh:0});delete row.weather.precipitationNumericalTraceMm;}
   if(trace>0)data.hourly[0].weather.precipitationMm=trace;
+  if(numericalTrace>0)data.hourly[0].weather.precipitationNumericalTraceMm=numericalTrace;
   if(uncertain)data.hourly[0].weather.precipitationUncertain=true;
   const controls=new Map(['setup','status','category','results'].map(k=>['#dsg-f9-'+k,{value:k==='setup'?data.setupProfiles[0].setupId:'ALL',innerHTML:'',addEventListener(){}}]));
   let panel='';const root={isConnected:true,innerHTML:'',querySelector:s=>controls.get(s)||null,querySelectorAll:s=>s==='.dsg-op-panel'?[{}, {insertAdjacentHTML:(_,html)=>{panel=html;}}]:[],prepend(){}};
@@ -42,8 +43,12 @@ assert.equal(formatPrecipitation(0.0000001),'<0,001');
 assert.equal(formatPrecipitation(0.001),'0,001');
 assert.equal(formatPrecipitation(0.01),'0,010');
 assert.equal(formatPrecipitation(NaN),'non disponibile');
-const trace=await render(false,'DSG-F9-PLANNER-WEATHER-GATE@1.2',0.0000001);
+const trace=await render(false,'DSG-F9-PLANNER-WEATHER-GATE@1.3',0.0000001);
 assert.match(trace.panel,/&lt;0,001 mm/);
 assert.match(trace.panel,/pioggia/);
 assert.equal(summarizeNightSky(trace.data,trace.now)?.state,'rain');
+const numerical=await render(false,'DSG-F9-PLANNER-WEATHER-GATE@1.3',0,2.946505750977754e-16);
+assert.equal(summarizeNightSky(numerical.data,numerical.now)?.state,'clear');
+assert.match(numerical.panel,/aria-label="Meteo GO"/);
+assert.doesNotMatch(numerical.panel,/weather-reasons[^>]*>pioggia/);
 console.log('F9 consumer: uncertainty, dry baseline, sky and legacy-policy checks PASS');

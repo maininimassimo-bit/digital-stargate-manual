@@ -36,6 +36,25 @@ MIN_TARGET_ALTITUDE_DEG = 20.0
 SUITABILITY_METHOD_ID = "BKL031-F9-SETUP-SUITABILITY@1.0"
 SUITABILITY_WEIGHTS = {"framing": 0.45, "filterSignal": 0.30, "imageScaleObjectClass": 0.25}
 SUITABILITY_WEIGHT_PERCENT = {"framing": 45, "filterSignal": 30, "imageScaleObjectClass": 25}
+PRECIPITATION_NUMERICAL_ZERO_MM = 1e-12
+WEATHER_POLICY_ID = "DSG-F9-PLANNER-WEATHER-GATE@1.3"
+
+
+def weather_policy() -> dict:
+    return {"id": WEATHER_POLICY_ID, "limits": WEATHER_LIMITS,
+            "cloudLimitRationale": "OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT",
+            "authority": "ADVISORY_PLANNING_ONLY",
+            "precipitationNumericalZeroMm": PRECIPITATION_NUMERICAL_ZERO_MM}
+
+
+def normalize_precipitation(weather: dict) -> dict:
+    """Advisory numerical floor, never blanket clipping to GRIB packingError."""
+    result = dict(weather)
+    value = result.get("precipitationMm")
+    if isinstance(value, (int, float)) and not isinstance(value, bool) and 0 < value <= PRECIPITATION_NUMERICAL_ZERO_MM:
+        result["precipitationNumericalTraceMm"] = value
+        result["precipitationMm"] = 0.0
+    return result
 
 
 class ContractError(RuntimeError):
@@ -189,13 +208,14 @@ def weather_rows(series: dict[str, dict[dt.datetime, float]],
             "dewPointC": round(td, 2),
             "cloudCoverPct": round(max(0.0, min(100.0, series["CLCT"][instant])), 1),
             "relativeHumidityPct": round(rh_from_temperature(t, td), 1),
-            # Keep any positive precipitation positive under the approved zero-rain gate.
+            # Preserve rain above the explicitly versioned numerical floor.
             "precipitationMm": precipitation,
             "windSpeedKmh": round(math.hypot(u, v) * 3.6, 1),
             "windGustKmh": round(max(0.0, series["VMAX_10M"][instant]) * 3.6, 1),
         }
         if uncertain:
             rows[instant]["precipitationUncertain"] = True
+        rows[instant] = normalize_precipitation(rows[instant])
     return rows
 
 
@@ -369,6 +389,26 @@ def reusable_projection(projection: dict, run: str, now: dt.datetime) -> bool:
         return False
 
 
+def normalize_existing_projection(data: dict, now: dt.datetime) -> dict:
+    """Re-derive public data without claiming a new provider retrieval."""
+    import copy
+    result = copy.deepcopy(data)
+    legacy = {"id": "DSG-F9-PLANNER-WEATHER-GATE@1.2", "limits": WEATHER_LIMITS,
+              "cloudLimitRationale": "OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT",
+              "authority": "ADVISORY_PLANNING_ONLY"}
+    if result.get("weatherPolicy") not in (legacy, weather_policy()):
+        raise ContractError("NORMALIZATION_SOURCE_POLICY")
+    result["weatherPolicy"] = weather_policy()
+    for row in result.get("hourly", []):
+        row["weather"] = normalize_precipitation(row["weather"])
+        for target in row["targets"].values():
+            _, target["weatherFactor"] = factors(row["weather"], {**row, **target})
+    result["rankings"] = rank_targets(result["hourly"], result["setupProfiles"],
+                                     result["targetProfiles"], result["suitabilityEvidence"]["cases"])
+    validate_projection(result, now)
+    return result
+
+
 def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather: dict, files: list[dict], site: dict, f8: dict, suitability: dict) -> dict:
     run_time = dt.datetime.strptime(run, "%Y%m%d%H").replace(tzinfo=dt.timezone.utc)
     age = (retrieval - run_time).total_seconds() / 3600
@@ -424,9 +464,7 @@ def build_projection(now: dt.datetime, run: str, retrieval: dt.datetime, weather
             "nightWindow": {"fromUtc": utc(instants[0]), "toUtcExclusive": utc(instants[-1] + dt.timedelta(hours=1))},
             "method": {"id": "BKL031-F9-SWISSEPH-MOSHIER-SIDEREAL@1.2", "ephemerisMode": "EXPLICIT_MOSEPH_NO_FALLBACK", "scoreWeights": f8["method"]["scoreWeights"], "displayFilter": "solarAltitudeDeg <= -18 and targetAltitudeDeg >= 20", "minimumTargetAltitudeDeg": MIN_TARGET_ALTITUDE_DEG,
                         "lunarFactor": "1 - illuminatedFraction * max(0,sin(radians(clamp(moonAltitudeDeg,0,90)))) * max(0,1-separationDeg/90)"},
-            "weatherPolicy": {"id": "DSG-F9-PLANNER-WEATHER-GATE@1.2", "limits": WEATHER_LIMITS,
-                              "cloudLimitRationale": "OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT",
-                              "authority": "ADVISORY_PLANNING_ONLY"},
+            "weatherPolicy": weather_policy(),
             "setupProfiles": f8["setupProfiles"], "targetProfiles": targets, "targetCatalog": {"catalogId": catalog["catalogId"], "catalogCompleteness": catalog["catalogCompleteness"], "candidateCount": len(catalog["targets"])}, "suitabilityEvidence": suitability_public, "hourly": rows, "rankings": rankings,
             "boundaries": {"recurringTraffic": True, "monetaryBudgetEur": 0, "rawGribRetention": "NONE_EPHEMERAL_ONLY",
                            "readinessAuthority": False, "automaticTargetSelection": False, "schedulingAuthority": False, "actionAuthority": "NONE", "commandAuthority": "NONE",
@@ -479,9 +517,7 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
             or method.get("lunarFactor") != "1 - illuminatedFraction * max(0,sin(radians(clamp(moonAltitudeDeg,0,90)))) * max(0,1-separationDeg/90)"
             or method.get("scoreWeights") != expected_score_weights):
         raise ContractError("ASTRONOMY_METHOD")
-    expected_policy = {"id": "DSG-F9-PLANNER-WEATHER-GATE@1.2", "limits": WEATHER_LIMITS,
-                       "cloudLimitRationale": "OWNER_PLANNING_CONSTRAINT_STRICTER_THAN_BKL032_50_PERCENT",
-                       "authority": "ADVISORY_PLANNING_ONLY"}
+    expected_policy = weather_policy()
     if data.get("weatherPolicy") != expected_policy:
         raise ContractError("WEATHER_POLICY")
     if data.get("attribution", {}).get("license") != "CC BY 4.0":
@@ -508,6 +544,17 @@ def validate_projection(data: dict, now: dt.datetime | None = None) -> None:
         raise ContractError("PROFILE_BINDING")
     for row in hourly:
         weather = row.get("weather", {})
+        if any(isinstance(weather.get(key), bool) or not isinstance(weather.get(key), (int, float))
+               or not math.isfinite(weather[key]) for key in
+               ("temperatureC", "dewPointC", "cloudCoverPct", "relativeHumidityPct", "precipitationMm", "windSpeedKmh", "windGustKmh")):
+            raise ContractError("HOURLY_WEATHER_NON_FINITE")
+        value = weather.get("precipitationMm")
+        trace = weather.get("precipitationNumericalTraceMm")
+        if (isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value)
+                or 0 < value <= PRECIPITATION_NUMERICAL_ZERO_MM
+                or (trace is not None and (isinstance(trace, bool) or not isinstance(trace, (int, float))
+                    or not math.isfinite(trace) or not 0 < trace <= PRECIPITATION_NUMERICAL_ZERO_MM or value != 0))):
+            raise ContractError("PRECIPITATION_NORMALIZATION")
         if (not isinstance(row.get("solarAltitudeDeg"), (int, float)) or not -90 <= row["solarAltitudeDeg"] <= 90
                 or not isinstance(row.get("moonAltitudeDeg"), (int, float)) or not -90 <= row["moonAltitudeDeg"] <= 90
                 or not isinstance(row.get("moonIlluminatedFraction"), (int, float)) or not 0 <= row["moonIlluminatedFraction"] <= 1):
@@ -607,7 +654,14 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
     parser.add_argument("--validate", type=Path)
     parser.add_argument("--skip-unchanged", action="store_true")
+    parser.add_argument("--normalize-existing", type=Path)
     args = parser.parse_args()
+    if args.normalize_existing:
+        projection = normalize_existing_projection(json.loads(args.normalize_existing.read_text(encoding="utf-8")),
+                                                   dt.datetime.now(dt.timezone.utc))
+        args.output.write_text(json.dumps(projection, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print("F9 public projection re-derived; original retrieval timestamps preserved")
+        return
     if args.validate:
         validate_projection(json.loads(args.validate.read_text(encoding="utf-8")), dt.datetime.now(dt.timezone.utc))
         print("F9 projection verification OK")

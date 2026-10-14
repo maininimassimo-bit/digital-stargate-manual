@@ -55,8 +55,8 @@ at most 20 km/h, and relative humidity at most 90%. The dew-point margin is
 computed per hourly sample as ambient temperature minus dew-point temperature;
 a margin at or below 3 °C is NO-GO, and only a value above 3 °C passes this
 planner check. This owner-selected F9 planning threshold is versioned as
-`DSG-F9-PLANNER-WEATHER-GATE@1.2` (precision handling added on 2026-10-06;
-all owner-selected thresholds are unchanged). On 2026-09-27 the owner separately amended
+`DSG-F9-PLANNER-WEATHER-GATE@1.3` (numerical zero handling added on 2026-10-14;
+physical weather limits are unchanged after the explicitly declared normalization below). On 2026-09-27 the owner separately amended
 the BKL-032 dew-point readiness threshold to the same ≤3 °C blocking boundary
 (DLG-144); this does not merge the planner and readiness policies, whose other
 weather constraints remain distinct. The 20% cloud limit is the owner's stricter
@@ -92,8 +92,9 @@ an extra fixed tolerance. That hour carries `precipitationUncertain: true`;
 its numeric placeholder is zero, but both publisher and consumer exclude it
 from eligible windows and display its precipitation as indeterminate, including
 the nightly total. Larger regressions or missing precision evidence abort
-publication. Positive amounts remain positive even below display precision;
-the approved zero-rain threshold is unchanged. Version 1.1 projections cannot
+publication. Policy 1.2 retained every positive amount even below display precision;
+policy 1.3 introduces only the bounded numerical-zero convention described below.
+Version 1.1 projections cannot
 be reused as version 1.2, and older consumers suspend their ranking when they
 see the new policy identifier.
 
@@ -101,6 +102,35 @@ This interpretation follows the [ECMWF ecCodes packing-precision explanation](ht
 The ECMWF product-specific fixed thresholds are not adopted for ICON-2I.
 
 The approved monetary budget is EUR 0. MeteoHub is a no-fee open-data path and standard GitHub-hosted runners are free for this public repository. The explicit activation guard remains enabled. The workflow uploads no artifacts and commits only the sanitised JSON projection. GRIB retention is `NONE_EPHEMERAL_ONLY`.
+
+### Numerical zero for negligible positive traces — 14 October 2026
+
+The published ICON-2I run 2026101412 contained hourly increments up to
+2.946505750977754e-16 mm. The strict positive-value comparison classified all
+16 samples as rain despite mean cloud cover 4.65625%. The Owner requested correction.
+The new **advisory numerical convention** treats only values in (0, 1e-12] mm
+as numerical zero. This is an explicit fixed tolerance, nine orders below the
+0.001 mm display precision; it is not an ecCodes-derived error bound, nor proof
+that the original model values are bitwise zero. The original positive values
+remain in `precipitationNumericalTraceMm` for audit.
+
+Do not clip arbitrary increments to the GRIB `packingError`: a small real shower
+can lie below that uncertainty. Values above 1e-12 mm remain positive, including
+1e-7 mm and 0.0001 mm; indeterminate hours remain ineligible. Temperature, cloud,
+wind, gust, humidity and dewpoint constraints and the negative-accumulator checks
+are preserved. Publisher normalization precedes weather factors and ranking;
+the consumer requires policy 1.3 and validates the normalized fields. The sky
+summary, table, gates and windows therefore use the same effective precipitation.
+
+`--normalize-existing` re-derives a sanitized public projection deterministically,
+recomputes weather factors and windows, and runs the full validator. Run, source
+hashes, retrieval/generation timestamps and astronomy are preserved: conversion
+does not make stale data fresh. Unrecognized policies fail closed. Scheduled
+acquisition applies the same normalization to every new run.
+
+Rollback must restore a matching producer/consumer policy and re-derive or freshly
+acquire its projection; older consumers suspend ranking on 1.3. Never remove the
+uncertainty handling from the 6 October correction or silently change BKL-032.
 
 ## Acceptance boundary
 
