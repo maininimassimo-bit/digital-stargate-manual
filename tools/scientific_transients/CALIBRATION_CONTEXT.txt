@@ -1,0 +1,38 @@
+BKL-051 — contesto di calibrazione nel flusso degli input
+14 ottobre 2026. R04 parziale; nessuna accettazione scientifica.
+
+calibration_context.inspect_context rilegge la provenienza originale/derivato,
+il budget M27 v4, la scelta camera M5:N5 e la ricevuta delle mappe del solo
+rumore nominale di lettura. Ogni documento deve avere un SHA256 atteso.
+Rilegge master flat, sorgente del processo e mappe; controlla i parametri del
+manifest contro la scelta camera e ricalcola RN_e/g nella convenzione ADU
+dichiarata. Budget v4 e stati delle otto componenti sono riconosciuti in modo
+esplicito: un documento di significato diverso richiede un nuovo adattatore.
+
+Il risultato BKL051_CALIBRATION_CONTEXT_V1 omette percorsi, nomi degli originali
+e dettagli privati dei documenti. Mantiene identificativi e hash degli input,
+fonte dei parametri, unità, statistiche dichiarate delle mappe e limiti.
+Le statistiche e l'uguaglianza save/reopen provengono dalla ricevuta nativa
+conservata, non sono ricalcolate sui pixel in questo import.
+L'associazione della mappa è soltanto per filtro: non attesta la sua applicazione
+alla singola LIGHT, né il contributo a un'apertura, a un flusso o a una differenza.
+
+Il portale legge in memoria due file: provenienza minimizzata e contesto.
+Accetta solo ricevute con stesso pin di provenienza, manifest candidato,
+identificativi, hash e filtri. Un abbinamento incoerente cancella il risultato.
+Letture tardive non sovrascrivono scelte successive; massimo 1 MiB per file.
+Non viene eseguito alcun upload, salvataggio, job, lettura di immagini o lancio.
+
+M5:N5 dà nominalmente g=0,674574061667327 e-/ADU e RN=12,9148650793138 e-;
+RN/g=19,145214459317437 ADU, condizionale alla convenzione non attestata.
+Incertezze dei parametri, dark finito/temporale, normalizzazione, covarianze,
+stimatore/fondo/PSF/WCS restano mancanti o parziali. I dark2024 su LIGHT2026
+mantengono stabilità sconosciuta. Nessuna covarianza sconosciuta è posta a zero.
+CompleteUncertainty e significance null, qualifiedControls0. R04 non è chiuso.
+
+Prodotto reale minimizzato:
+F:/DigitalStarGate/BKL051/contesto-calibrazione-portale-M27-20261014
+Da abbinare alla Provenienza-minimizzata-portale.json già conservata in
+F:/DigitalStarGate/BKL051/provenienza-piloti-M27-20261014.
+La ricevuta di importazione conserva l'hash dell'archivio storico ricontrollato
+e i pin dei documenti estratti in memoria; nessun processo nativo ripetuto.

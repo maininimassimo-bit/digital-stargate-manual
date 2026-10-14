@@ -1,0 +1,69 @@
+BKL-051 — confronto preliminare multi-epoca collegato al piano
+14 ottobre 2026. R07 parziale, non classificazione scientifica.
+
+multi_epoch.compare rilegge piano, testa corrente, budget per hash e TUTTI i
+tentativi collegati al caso, usando inspect_triplet e local_report.inspect.
+Non sceglie tre completamenti favorevoli omettendo errori o tentativi extra.
+Il budget fissa sorgente opaca, immagine di riferimento e due confronti che
+coprono le altre immagini. Ogni riga deriva da una sola misura della sorgente
+nei rapporti sigillati; sorgente mancante/ambigua, aperture tagliate e fondo
+non disponibile non generano un confronto. Sono esposti fondo e apertura.
+Il rapporto viene ricontrollato anche al termine per intercettare modifiche.
+
+Filtro, DATE-OBS ed esposizione sono riletti dagli header della copia INPUT
+nel journal. Mancanze non vengono riempite col budget. Filtri incompatibili,
+epoca registrata uguale, metadati mancanti, aperture/anelli differenti e
+copertura tecnica incompleta bloccano la differenza. Uno stesso filtro o
+raggio non attesta risposta spettrale, PSF, geometria angolare o calibrazione.
+Uno stesso identificativo opaco non attesta la stessa sorgente fisica.
+
+Non si assume scala1, neppure con esposizioni uguali. Scale, varianze e
+covarianze sono dichiarazioni parziali, esplicite e pin-nate nel budget.
+D = L-sR; gradiente[1,-s,-R]; sigma condizionale=sqrt(g^T C g).
+Ordine delle varianze:[L,R,s]; covarianze:[L/R,L/s,R/s]. Unità dei due flussi:
+NORMALIZED_SAMPLE_SUM, quindi varianze di flusso in tale unità al quadrato,
+varianza di scala adimensionale e covarianze nelle unità dei rispettivi termini.
+Nessuna conversione implicita in ADU o flusso calibrato. Flussi negativi
+rimangono firmati, non diventano limiti di non rilevamento.
+
+Propagazione del primo ordine, non distribuzione esatta del prodotto.
+Riferimento metodologico NIST TN1297, appendiceA, consultato il14/10/2026:
+https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-appendix-law-propagation-uncertainty
+La legge comprende sensibilità e covarianze; il modello di misura deve
+comprendere le fonti d'incertezza pertinenti. Non giustifica covarianze nulle
+inventate o un modello dichiarato completo mentre omette componenti.
+Photutils, documentazione ufficiale consultata nella stessa data:
+https://photutils.readthedocs.io/en/stable/api/photutils.aperture.aperture_photometry.html
+La somma d'apertura richiede dati col fondo sottratto e non converte da sola
+le unità. Questa consultazione non installa né esegue Photutils: il kernel
+rimane quello diagnostico PixInsight esistente, con i limiti già conservati.
+
+Matrici complete devono essere PSD; vincoli noti fra coppie anche nei budget
+parziali. Covarianza o varianza ignota impedisce sigma, non viene posta a zero.
+Una scala ignota impedisce anche D. Doppio conteggio dichiarato del rumore
+di lettura respinto; contabilità ignota resta esplicita. Almeno una componente
+omessa obbligatoria. Sigma0 non genera significatività infinita o test superato.
+
+Il browser usa la stessa implementazione JS di covarianza degli inspector
+offline: codice comune in docs/javascripts/scientific-covariance.js;
+tools/scientific_transients/covariance.mjs ne riesporta la funzione. Nessuna
+variazione della formula; regressioni degli inspector incluse nei test.
+Il browser ricontrolla piano/head, tutti i tentativi, copertura, blocchi e
+aritmetica. I due calcoli Python/JS confrontano le stesse dichiarazioni,
+non costituiscono validazione scientifica indipendente. Lettura solo in memoria.
+
+CLI offline, senza launch o credenziali:
+python -m tools.scientific_transients.multi_epoch --plan F:/.../version
+ --plan-sha <sha> --case <caseRef> --journals F:/.../journal-map.json
+ --budget F:/.../budget.json --budget-sha <sha> --output F:/.../nuovo-confronto.json
+Riunire gli argomenti su una riga. Output create-only; budget e journal da
+conservare in privato. La ricevuta è uno snapshot tecnico, non storage immutabile.
+
+Dimostrazione conservata: F:/DigitalStarGate/BKL051/dimostrazione-multi-epoca-20261014.
+Tre processi MOCK, header, flussi e budget SINTETICI. Un confronto con valori
+parziali noti e un secondo con scala/covarianze ignote; nessun pixel reale M27
+misurato in questa fase. Nessun nuovo processo nativo o query astronomica.
+Stato sempreNOT_VALIDATED, classificazioneNOT_EVALUATED, fullVariance e
+significance null, controlli qualificati0. Nessuna immagine differenza.
+Restano PSF/registrazione, confronto scientifico reale, stima di scala e
+budget completi, campioni indipendenti e validazione. R07 non è chiuso.

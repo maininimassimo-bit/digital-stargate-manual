@@ -1,0 +1,26 @@
+BKL-051 - Scheda unificata del caso, 15 ottobre 2026
+
+case_workspace assemble / CLI prepara una sola ricevuta minimizzata da:
+piano corrente, pacchetto dossier e ledger con impronte/testa esatte.
+Il pacchetto deve essere integro e il piano corrente coincidere con il piano
+congelato nel dossier; una revisione storica non viene presentata come corrente.
+Include vista piano, tripletta, dossier, eventuale confronto e recupero di
+contesto. Dimensione massima esportabile/importabile 1 MiB. Scrittura create-only.
+
+La pagina "Dal piano al dossier" verifica ogni componente con il rispettivo
+validatore esistente e impone piano/testa/caso comuni. Il recupero di contesto
+e obbligatoriamente etichettato come non applicabile alla validazione del caso.
+Un'importazione errata cancella quella precedente; risposte tardive o pannelli
+scollegati non possono mostrare dati obsoleti. Nessuna rete o persistenza.
+
+La verifica Python riguarda i byte conservati nel pacchetto, non un nuovo
+collaudo della pipeline ne il riesame di tutti gli originali/journal esterni.
+La verifica JavaScript riguarda struttura e coerenza di una ricevuta importata:
+non attesta autonomamente i byte locali, l'identita Owner o i tempi.
+Non crea piani, job, revisioni o permessi di invio. Nessuna qualifica scientifica.
+
+Dimostrazione F:/DigitalStarGate/BKL051/scheda-unificata-caso-20261015:
+riusa i job MOCK esistenti e il dossier con esperimento M27 sintetico allegato
+solo come contesto. Non qualifica un controllo o un recupero reale del caso.
+R09/R12/R14 parziali; autenticazione del percorso operativo, pipeline completa,
+verifica visiva corrente, acceptance e rilascio restano aperti.

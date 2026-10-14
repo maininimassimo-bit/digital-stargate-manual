@@ -77,6 +77,10 @@ class MPCExportTests(unittest.TestCase):
         row = copy.deepcopy(self.request['observations'][0]); row['permID'] = '2'
         self.request['observations'].append(row)
         self.assertEqual(len(ET.parse(self.export() / 'preview.xml').findall('.//optical')), 2)
+    def test_numbered_object_cannot_reuse_image_with_another_time(self):
+        row=copy.deepcopy(self.request['observations'][0]);row['obsTime']='2026-10-09T01:03:03.12Z'
+        self.request['observations'].append(row)
+        with self.assertRaisesRegex(ProtocolError,'MPC_REUSED_IMAGE_FOR_OBJECT'):self.export()
 
     def test_invalid_decimal_range_precision_and_types_rejected(self):
         row = self.request['observations'][0]
@@ -172,6 +176,14 @@ def schema_fixtures(output):
                               ('bad-range', b'359.999999999', b'360.0'),
                               ('bad-order', b'<rmsTime>0.01</rmsTime>', b'<unexpected>0.01</unexpected>')]:
             (output / (name + '.xml')).write_bytes(raw.replace(old, new))
+        case.request['protocol']=mpc.REQUEST_V2;case.request['exportRef']='c'*32
+        row=case.request['observations'][0];del row['permID']
+        row['objectID']={'kind':'TRKSUB','value':'SYN-0001'}
+        directory=case.export();raw=(directory/'preview.xml').read_bytes()
+        (output/'valid-TRKSUB.xml').write_bytes(raw)
+        for name,new in [('bad-trksub-length',b'SYN-00001'),('bad-trksub-character',b'SYN/0001')]:
+            (output/(name+'.xml')).write_bytes(raw.replace(b'SYN-0001',new))
+        (output/'bad-trksub-missing-id.xml').write_bytes(raw.replace(b'<trkSub>SYN-0001</trkSub>',b''))
     finally: case.doCleanups()
 
 

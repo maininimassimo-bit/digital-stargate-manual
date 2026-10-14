@@ -1,0 +1,55 @@
+BKL-051 - Anteprima MPC con identificativo locale, 15 ottobre 2026
+
+R13 parziale. mpc_export conserva il contratto numerato V1 e accetta richieste
+DSG_MPC_ADES_REQUEST_V2. Ogni osservazione V2 ha objectID {kind,value}:
+PERMID per un numero dichiarato oppure TRKSUB per un identificativo locale.
+Scelta esclusiva, mai conversione automatica fra le due identita. TRKSUB:
+1-8 caratteri ASCII lettere/cifre/trattino/underscore, senza troncamento.
+Non sono supportate da questo incremento le designazioni provvisorie provID.
+
+L'anteprima esterna resta DSG_MPC_ADES_PREVIEW_V1: stessa struttura privata,
+stessa assenza di invio, nuove dichiarazioni riconoscibili dal protocollo V2.
+Il ledger di revisione esistente puo congelare l'anteprima. La revisione
+non attribuisce autorizzazione di invio o validazione dell'associazione.
+I duplicati sono verificati su tipo ID + valore ID + istante UTC effettivo.
+Campi di incertezza sconosciuti restano omessi e dichiarati sconosciuti.
+
+Verifica 15 ottobre: schema submit.xsd corrente e schema fissato al commit
+f4158f96a049b83dfcf848fa33eaac4391db9460 coincidono (SHA256
+2a5d049808e947cffa11a973a2395c1dde09f00207313a496450b0ef1be27026).
+https://github.com/IAU-ADES/ADES-Master/blob/master/xsd/submit.xsd
+https://docs.minorplanetcenter.net/mpc-ops-docs/observations/ades-format/
+https://docs.minorplanetcenter.net/mpc-ops-docs/observations/command-line-submissions/
+Le istruzioni MPC distinguono endpoint di prova e produzione; una ricevuta
+di trasporto non attesta scoperta o qualita scientifica. Nessun endpoint di
+invio o prova e stato chiamato. Letture della documentazione/schema soltanto.
+
+Evidenze F:/DigitalStarGate/BKL051/mpc-tracklet-preview-20261015:
+fixture privata con tre osservazioni SINTETICHE, nessun dato di scoperta;
+registrazione locale + anteprima + ledger senza decisioni Owner.
+29 test Python dell'esportatore e 20 del ledger. Dieci verifiche XSD indipendenti .NET:
+un XML valido e quattro controlli negativi su ciascuna delle due copie schema.
+Lo schema non verifica verita scientifica, associazione, duplicati globali,
+autenticazione, codice osservatorio reale o policy del destinatario.
+Questa non e una prova provider e non chiude R08/R13 o la milestone.
+
+Gate ancora aperti: astrometria e tempi finali, associazioni reali e controlli
+su oggetti noti, verifica aggiornata duplicati, codice sito reale, credenziali,
+contenuto/destinatario esatti, autorizzazione, trasporto/ricevute/riconciliazione
+e collaudo Owner. Nessun permID viene inventato per un oggetto non identificato.
+
+CORREZIONE DELLA DIMOSTRAZIONE / UNICITA INPUT
+La prima fixture a tre righe riutilizzava INPUT.dat per lo stesso oggetto a
+orari diversi. La validita XSD resta solo una prova del formato: quella fixture
+non prova tre osservazioni distinte. E conservata, ma il verificatore aggiornato
+la respinge con MPC_REUSED_IMAGE_FOR_OBJECT. Non e una prova scientifica storica.
+La nuova fixture F:/DigitalStarGate/BKL051/mpc-distinct-inputs-20261015 usa tre
+file sintetici con tre hash differenti. Il controllo usa hash + tipo ID + ID:
+rinominare una copia identica non consente una seconda osservazione dello stesso
+oggetto. Oggetti distinti possono condividere un'immagine. Non si inferiscono
+indipendenza, associazioni vere o provenienza scientifica dai soli hash distinti.
+Il formato V1 numerato e V2 locale applicano entrambi questo controllo.
+
+Il gate XSD della CI ora copre anche TRKSUB: tre XML validi (CCD, CMO e ID
+locale) e sei negativi, inclusi ID locale troppo lungo, carattere non ammesso
+e ID assente. Queste nove prove di formato non sono richieste al provider.

@@ -1,0 +1,59 @@
+BKL-051 — preflight dei derivati e lettura nativa dei campioni firmati
+14 ottobre 2026 — candidato locale, NOT_VALIDATED
+
+CORREZIONE DEL KERNEL
+native_aperture.jsh ora apre input.xisf con ImageWindow.open(path,'','no-normalize').
+L'apertura precedente senza hint non era adatta a garantire conservazione di
+valori Float64 negativi o superiori a uno. Le nuove preparazioni copiano la
+nuova libreria e registrano il suo nuovo SHA256. Non modificare i run, i piani
+congelati o le copie storiche: mantengono identità e limiti precedenti.
+Un nuovo algoritmo richiede una nuova versione del piano; non aggiornare il
+digest del vecchio piano per farlo coincidere con quello del codice corrente.
+
+PROVA NATIVA NUOVA, NON RIPETIZIONE DEI PILOTI M27
+F:/DigitalStarGate/BKL051/native-signed-kernel-regression-20261014
+Una sola istanza isolata di proprietà del lavoro; nessuna istanza utente toccata.
+Fixture numerica 64x64 monocromatica Float64, un campione -0,25, uno 1,25,
+fondo 0,01 e un campione centrale 0,31. Il motore installato conserva tutti i
+4096 valori, errore massimo assoluto 0. Anche il checkpoint riaperto con
+no-normalize ha errore massimo 0, un valore negativo e uno superiore a uno.
+Il kernel completa la misura diagnostica mantenendo fullVariance/significance
+null e changedPixels=0. History iniziale/corrente, input/checkpoint, sorgente,
+log e terminali conservati; chiusa soltanto l'istanza posseduta DOPO il terminale.
+Questo prova lettura/conservazione sul caso sintetico Float64, non fotometria
+scientifica su cielo reale, calibrazione M27 o assenza di clipping acquisito.
+Le dipendenze installate sono registrate per hash; non è un replay standalone.
+
+PREFLIGHT DERIVED_INPUT_PREFLIGHT
+derived_input_preflight.preflight rilegge piano, caso e immagine scelti,
+OperatorPlan e registro locale, ricevuta di provenienza ed eventuale prova
+nativa firmata ancorata per SHA256. Confronta originale del caso, manifest
+candidato, input derivato preparato, algoritmo/regole congelati e libreria
+del kernel. L'evidenza nativa opzionale deve riferirsi allo stesso SHA256 della
+libreria e conservare i byte di input, checkpoint, sorgente e terminali.
+Nessun network, claim, prenotazione o lancio è eseguito dal preflight.
+
+Anche se tutti i confronti sono veri, lo stato resta BLOCKED e
+executionAuthorized=false. Per il collegamento archivistico usare ora
+DerivedInputBinding, descritto in DERIVED_INPUT_BINDING.txt, e il parametro
+derived di PlanExecution: non sostituire rawSha256 col digest della copia.
+Il preflight da solo non archivia né autorizza. Restano calibrazione, incertezza completa
+e attestazioni confermative. Questo componente prepara il contratto e verifica
+le associazioni, non concede autorità e non crea qualificazioni.
+
+CLI SOLO OFFLINE
+python -m tools.scientific_transients.derived_input_preflight --plan F:/.../<versionRef>
+ --plan-sha256 <sha> --case <caseRef> --frame <frameRef>
+ --operator F:/.../operator-plan.json --operator-sha256 <sha>
+ --lineage-directory F:/.../native-metadata-copy --lineage-receipt-sha256 <sha>
+ --draft F:/.../manifest-candidato.json --draft-sha256 <sha> --output F:/.../preflight.json
+ --signed-evidence-directory F:/.../native-signed-regression --signed-evidence-sha256 <sha>
+
+Riunire gli argomenti su una sola riga. L'output è create-only e minimizzato,
+senza percorsi o lease. I quattro piloti M27 importati restano fuori dal campione
+di 59 candidati e non possono essere associati a quei casi da questo preflight.
+
+STATO UI
+Nessuna modifica al frontend in questa fase. La nuova sezione di provenienza
+rimane da controllare visivamente quando l'Owner sarà disponibile; non serve
+interromperlo per queste prove backend. I precedenti riscontri restano distinti.

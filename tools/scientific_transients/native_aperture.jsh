@@ -36,7 +36,7 @@ function DSGNativeAperture(m) {
       need(JSON.stringify(JSON.parse(File.readTextFile(root+'/parameters.json')))===JSON.stringify(m),'NATIVE_PARAMETERS_CHANGED');
       var parametersSha=sha(root+'/parameters.json');
       write('started.json',{operationRef:m.operationRef,at:new Date().toISOString(),runtime:m.runtime,input:m.input,parameters:m.parameters,targets:m.targets});
-      owned=ImageWindow.open(root+'/input.xisf');need(owned.length>m.input.imageIndex,'NATIVE_IMAGE_INDEX');window=owned[m.input.imageIndex];
+      owned=ImageWindow.open(root+'/input.xisf','','no-normalize');need(owned.length>m.input.imageIndex,'NATIVE_IMAGE_INDEX');window=owned[m.input.imageIndex];
       var image=window.mainView.image;
       need(!image.isComplex && image.width===m.input.width && image.height===m.input.height && image.numberOfNominalChannels===1,'NATIVE_IMAGE_GEOMETRY');
       image.selectedChannel=0;

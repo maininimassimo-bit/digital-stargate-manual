@@ -25,6 +25,14 @@ test('native adapter keeps normalized units and unknown uncertainty, preserves e
  assert.equal(result.fullAperturePhotometryWorkflowExecuted,false);assert.equal(f.window.closed,true);
  for(const name of ['input-initial.js','input-current.js','checkpoint-initial.js','checkpoint-current.js','measurement-00001.json','terminal.json'])assert(f.files.has(f.root+'/'+name));
 });
+test('signed samples require no-normalize at open and survive diagnostic measurement unchanged',()=>{
+ const f=fixture();let opened=false;
+ f.pixels[0]=-.25;f.pixels[1]=1.25;
+ f.context.ImageWindow.open=(path,id,hints)=>{assert.equal(path,f.root+'/input.xisf');assert.equal(id,'');assert.equal(hints,'no-normalize');opened=true;return [f.window];};
+ f.context.PhotometryPixels.Measure=pixels=>{assert.deepEqual([...pixels.data],[-.25,1.25]);return {clipped:false,flux:1,area:50,background:0,peak:1.25,noise:0,localCount:248};};
+ const result=f.run();assert.equal(opened,true);assert.equal(result.state,'COMPLETED');assert.equal(result.changedPixels,0);
+ assert.deepEqual([...f.pixels],[-.25,1.25]);assert.equal(result.rows[0].fullVariance,null);assert.equal(result.rows[0].significance,null);
+});
 test('completed native reservation refuses replay without rewriting',()=>{
  const f=fixture();f.run();const old=f.files.get(f.root+'/terminal.json');assert.throws(f.run,/REPLAY_REFUSED/);assert.equal(f.files.get(f.root+'/terminal.json'),old);
 });

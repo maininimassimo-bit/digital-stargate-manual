@@ -1,5 +1,10 @@
 # Digital StarGate AI Bootstrap
 
+## BKL-051 — continuità del candidato, 15 ottobre 2026
+
+Per il lavoro BKL-051 leggere il [nuovo handover](docs/project/HANDOVER_2026-10-15-BKL051-PLAN-CASE-WORKSPACE.md) e il [dossier del candidato](docs/project/BKL-051-PLAN-CASE-WORKSPACE-2026-10-15.md). Piano versionato, dispatch vincolato, contesti parziali, dossier e scheda passiva integrati localmente. Python445 OK (uno skip symlink), JavaScript274 e Pages992HTML PASS; ARB poi RQ locali APPROVED sul tree applicativo. Non attestano CI/review del commit finale, rilascio, servizio attivo o acceptance. Milestone OPEN / NOT_VALIDATED, stima37%, zero controlli qualificati; tripletta reale preparata non eseguita. Tutti i residui scientifici/operativi e IRSA restano aperti. Nessun nuovo cloud, costo, invio astronomico o fotografia pubblicata. Questa continuità riguarda BKL-051 e preserva gli altri package e gli snapshot sotto riportati.
+
+
 ## Portale pubblico — catene informative e brand, 14 ottobre 2026
 
 PR587–589 integrate/pubblicate/verificate; baseline applicativa `9ea5f2ca377eca2e48af1c081fc64c4e7bb5b582`. Per lavori sul dettaglio sessione, Mission Control, manifest del reporting o brand, leggere anche [DSG-PORTAL-LINEAGE-REF-001](docs/developer/session-lineage-and-mission-control.md) e [ricevute di rilascio](docs/releases/2026-10-14-session-lineage-and-brand.md). Il passo Scientific assets include le versioni pubblicate con session ID esatto ma conserva RAW/provenance parziali; Transfer indica documenti/telemetria EAGLE, non RAW fotografici. Entrambe le pagine rileggono le fonti ogni 60s visibili e manualmente. Logo Owner comune; AP-013 storico/documentale, nessuna nuova authority/schedulazione.

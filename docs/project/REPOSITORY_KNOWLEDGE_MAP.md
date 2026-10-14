@@ -1,5 +1,10 @@
 # Repository Knowledge Map
 
+## BKL-051 — piano e scheda del caso, 15 ottobre 2026
+
+Punti di ingresso: `tools/scientific_transients/test_plan.py`, `plan_execution.py`, `plan_readiness.py`, `triplet_report.py`, `case_dossier.py`, `case_workspace.py`; guide operative `.txt` nella stessa directory e importatori `docs/javascripts/scientific-*.js`. [Componenti, prove, gate residui e rollback](BKL-051-PLAN-CASE-WORKSPACE-2026-10-15.md).
+
+
 ## Planner: correzione delle tracce numeriche — 14 ottobre 2026
 
 Su richiesta Owner, la policy advisory F9 1.3 distingue i residui fino a 1e-12 mm dalla pioggia positiva superiore a tale tolleranza. Il valore originale resta nella projection; cielo, tabella, semafori, fattori meteo e finestre usano la medesima normalizzazione. La ri-derivazione non rinnova gli orologi del forecast. Ore indeterminate, pioggia debole e altri vincoli restano bloccanti; nessuna modifica della Safety o di BKL-032. [Handover, evidenze e rollback](HANDOVER_2026-10-14-PLANNER-NUMERICAL-PRECIPITATION.md).

@@ -1,0 +1,51 @@
+BKL-051 — provenienza delle copie sperimentali
+14 ottobre 2026 — candidato locale, NOT_VALIDATED
+
+input_lineage.inspect_lineage importa il contratto storico di una prova nativa
+COMPLETED_METADATA_BOUND_SIGNED_PILOT. Richiede SHA256 attesi della ricevuta e
+del manifest candidato; verifica manifest/terminale/script contro la ricevuta,
+rilegge gli hash di tutti i genitori e dei prodotti scientifici referenziati,
+verifica che il terminale sia uguale a quello conservato nella ricevuta e che
+ogni originale osservativo, calibrata e derivata abbiano tre identità distinte.
+Nessuna analisi nativa, rete, upload o esecuzione viene richiesta.
+
+Il valore maxAbsolutePixelDifference=0 resta una misura dichiarata dalla prova
+nativa precedente. Questo import non rilegge pixel o History per rimisurarlo,
+non ripete la calibrazione e non attesta la trasformazione originale->calibrata.
+Il bordo calibrata->derivata rappresenta la copia dei metadati descritta dal
+contratto storico, non una nuova calibrazione. La semantica scientifica resta
+NOT_ATTESTED_BY_THIS_IMPORT anche se tutti i byte corrispondono.
+
+Il risultato BKL051_INPUT_LINEAGE_V1 elimina percorsi, nomi file, proprietà
+private, coordinate del sito e informazioni personali. Contiene solo hash,
+identificativi opachi, filtro, stati conservativi e appartenenza dell'originale
+al manifest candidato ESATTO identificato dal suo hash. Questa appartenenza
+non equivale a qualificazione e non è collegata automaticamente a una versione
+del piano modificabile o a un tentativo. I piloti precedenti possono restare
+fuori dal campione selezionato: non sostituire i suoi casi con questi prodotti.
+
+CLI OFFLINE
+python -m tools.scientific_transients.input_lineage --directory F:/.../native
+  --receipt-sha256 <sha> --draft F:/.../bozza.json --draft-sha256 <sha>
+  --output F:/.../provenienza-nuova.json
+
+Usare una sola riga. L'output è create-only. Nel portale importare soltanto la
+ricevuta minimizzata, nella sezione Provenienza delle copie sperimentali.
+L'import nel browser verifica struttura e identità dichiarate, non i byte del
+PC o l'autenticità della ricevuta. Limite 1 MiB, letture tardive isolate e
+cancellazione dei risultati precedenti in caso di lettura invalida.
+
+I moduli di esecuzione continuano a richiedere corrispondenza esatta degli input:
+questa ricevuta non abilita l'uso automatico di un derivato al posto di un raw,
+non aggira il controllo degli hash e non autorizza un lancio.
+
+M27, ESEMPIO REALE IMPORTATO
+F:/DigitalStarGate/BKL051/provenienza-piloti-M27-20261014
+L'import ha usato la ricevuta conservata nell'archivio tecnico v2, verificando
+l'hash dell'archivio contro la ricevuta storica e poi i file attuali. Quattro
+piloti con filtri L-Pro/Red/Blu/Green, tutti FUORI dal manifest candidato di
+59 triplette; zero qualificati. Nessuna elaborazione nativa o misura di pixel
+ripetuta. Il solo fatto di essere calibrati nominalmente non rende gli input
+scientificamente validati: dark 2024, rumore/covarianze, tempo/WCS e metrologia
+conservano i limiti precedenti. Usare i parametri Owner correnti M5:N5; questa
+ricevuta non applica conversioni e non rivalida gain o rumore di lettura.
