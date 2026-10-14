@@ -78,7 +78,7 @@ const routes = Object.keys(JSON.parse(fs.readFileSync('overrides/main.html', 'ut
       preference: window.DSGThemeService.getTheme().preference
     }));
     const darkTheme = await themeState();
-    await scientific.locator('[data-md-component="palette"] label[for="__palette_0"]').click();
+    await scientific.locator('[data-dsg-theme]').click();
     await scientific.waitForFunction(() => document.documentElement.dataset.dsgThemeResolved === 'light');
     const lightTheme = await themeState();
     assert.equal(lightTheme.material, 'default');
