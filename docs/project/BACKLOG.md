@@ -1,5 +1,9 @@
 # Project Backlog
 
+## Integrazione TVCC interna pubblica — 14 ottobre 2026
+
+Richiesta Owner: ripresa interna pubblica, senza audio, tramite ponte privato RTSP e proiezione JPEG/MJPEG HTTPS. Vista Interno manuale o automatica con badge OPEN; freshness e rimozione del video indipendenti dalla telemetria. Nessun comando o Safety Authority. Configurazione autenticata esclusa dal repository. [Contratto e rollback](../developer/dome-camera-public-relay.md), [handover e limiti della verifica](HANDOVER_2026-10-14-PUBLIC-DOME-CAMERA.md). La ricevuta della PR deve attestare separatamente installazione e collaudo reale; nessun package scientifico viene promosso da questa integrazione.
+
 ## Correzioni del portale consegnate — 14 ottobre 2026
 
 Concluse e verificate PR587–589: pubblicazione/workflow M27, link metriche, Transfer del pacchetto documentale, brand condiviso, asset e catena aggiornati, copertura Mission Control e qualificazione storica AP-013. [Ricevute](../releases/2026-10-14-session-lineage-and-brand.md). La manutenzione documentale successiva ha gate propri. Non costituisce chiusura BKL-050 né modifica dello stato dei package scientifici; RAW, esecuzione/provenance completa e runtime safety restano fuori dalla prova di questo consumer.

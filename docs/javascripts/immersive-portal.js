@@ -25,7 +25,7 @@
     const disabled = () => essential || reduced.matches || navigator.connection?.saveData;
     const reset = () => {
       epoch++; sceneController?.abort(); stopScene(); stopScene = () => {};
-      stage.classList.remove('is-ready'); views.hidden = true;
+      stage.classList.remove('is-ready'); views.hidden = !stage.hasAttribute('data-dsg-dome-camera');
       root.querySelector('.dsg-magnetic-reticle')?.setAttribute('hidden', '');
     };
     const updateMode = () => {

@@ -1,5 +1,9 @@
 # Digital StarGate Enterprise Architecture Context
 
+## Integrazione TVCC interna pubblica — 14 ottobre 2026
+
+Richiesta Owner: ripresa interna pubblica, senza audio, tramite ponte privato RTSP e proiezione JPEG/MJPEG HTTPS. Vista Interno manuale o automatica con badge OPEN; freshness e rimozione del video indipendenti dalla telemetria. Nessun comando o Safety Authority. Configurazione autenticata esclusa dal repository. [Contratto e rollback](../developer/dome-camera-public-relay.md), [handover e limiti della verifica](HANDOVER_2026-10-14-PUBLIC-DOME-CAMERA.md). La ricevuta della PR deve attestare separatamente installazione e collaudo reale; nessun package scientifico viene promosso da questa integrazione.
+
 ## Aggiornamento del portale — 14 ottobre 2026
 
 PR587, PR588 e PR589 integrate e verificate fino a Pages; ultimo merge `9ea5f2ca377eca2e48af1c081fc64c4e7bb5b582`. Catena sessione e Mission Control rileggono fonti correnti ogni minuto visibile e manualmente; asset/versioni sono associati con ID esatto, Transfer verifica il pacchetto documentale EAGLE, logo/header/favicon usano il PNG Owner comune. AP-013 espone il limite documentato 30 file/run e discovery/scheduler storici, senza attestazioni sui dispositivi attuali. Consultare [riferimento tecnico](../developer/session-lineage-and-mission-control.md) e [ricevute di rilascio](../releases/2026-10-14-session-lineage-and-brand.md).

@@ -1,5 +1,9 @@
 # Technical Debt Register
 
+## Integrazione TVCC interna pubblica — 14 ottobre 2026
+
+Richiesta Owner: ripresa interna pubblica, senza audio, tramite ponte privato RTSP e proiezione JPEG/MJPEG HTTPS. Vista Interno manuale o automatica con badge OPEN; freshness e rimozione del video indipendenti dalla telemetria. Nessun comando o Safety Authority. Configurazione autenticata esclusa dal repository. [Contratto e rollback](../developer/dome-camera-public-relay.md), [handover e limiti della verifica](HANDOVER_2026-10-14-PUBLIC-DOME-CAMERA.md). La ricevuta della PR deve attestare separatamente installazione e collaudo reale; nessun package scientifico viene promosso da questa integrazione.
+
 ## Riconciliazione del portale — 14 ottobre 2026
 
 Risolti con PR587–589 i placeholder Processing/Publication e Scientific assets, link metriche404, Transfer non proiettato, rinnovo limitato a gallery/pacchetti con catalogo stale, tile Mission Control fisse e limite pilot 1 file presentato come corrente. Null/malformed manifest e config gallery senza deadline sono stati corretti prima delle approvazioni finali. Brand unico senza modifica dei pixel. [Ricevute](../releases/2026-10-14-session-lineage-and-brand.md), [manutenzione](../developer/session-lineage-and-mission-control.md).

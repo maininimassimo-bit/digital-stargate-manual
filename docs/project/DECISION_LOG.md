@@ -1,5 +1,9 @@
 # Decision Log
 
+## Integrazione TVCC interna pubblica — 14 ottobre 2026
+
+Richiesta Owner: ripresa interna pubblica, senza audio, tramite ponte privato RTSP e proiezione JPEG/MJPEG HTTPS. Vista Interno manuale o automatica con badge OPEN; freshness e rimozione del video indipendenti dalla telemetria. Nessun comando o Safety Authority. Configurazione autenticata esclusa dal repository. [Contratto e rollback](../developer/dome-camera-public-relay.md), [handover e limiti della verifica](HANDOVER_2026-10-14-PUBLIC-DOME-CAMERA.md). La ricevuta della PR deve attestare separatamente installazione e collaudo reale; nessun package scientifico viene promosso da questa integrazione.
+
 ## 14 ottobre 2026 — consumer di catena e fonte unica del brand
 
 Correzione di presentazione entro AP-013/AP-014/DSGP-SOL-001: associare pubblicazioni tramite ID esatto Owner, proiettare Transfer dal manifest documentale e byte reali, rileggere catalogo/gallery/pacchetti ogni 60s visibili e manualmente, aggregare Mission Control con denominatori e distinguere baseline AP-013/storico dai dispositivi presenti. PNG Owner copiato invariato e ridimensionato via CSS comune. Non introduce ADR, authority, nuova pubblicazione astronomica o modifica runtime. PR587–589 consegnate; [decisioni, limiti e ricevute](../releases/2026-10-14-session-lineage-and-brand.md). Questo aggiornamento registra fatti del portale e non sostituisce le decisioni dei package seguenti.

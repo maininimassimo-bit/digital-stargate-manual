@@ -1,7 +1,7 @@
 {% set status_preview = status_preview | default(false) %}
 {% set dome_sync = page and page.file.src_uri == 'status/index.md' and not status_preview %}
 {% set allsky_live = status_preview or (page and page.file.src_uri == 'index.md') %}
-<section class="dsg-scene" {% if not status_preview %}data-dsg-scene="{{ scene_kind }}"{% endif %} {% if allsky_live %}data-dsg-allsky-live{% endif %} {% if dome_sync %}data-dsg-dome-sync data-dsg-observed-dome="UNKNOWN"{% endif %} aria-label="{{ 'Anteprima live Allsky Digital Stargate' if allsky_live else 'Visualizzazione tridimensionale illustrativa' }}">
+<section class="dsg-scene" {% if not status_preview %}data-dsg-scene="{{ scene_kind }}"{% endif %} {% if allsky_live %}data-dsg-allsky-live{% endif %} {% if dome_sync %}data-dsg-dome-sync data-dsg-dome-camera data-dsg-observed-dome="UNKNOWN"{% endif %} aria-label="{{ 'Anteprima live Allsky Digital Stargate' if allsky_live else 'Visualizzazione tridimensionale illustrativa' }}">
   <canvas class="dsg-scene__canvas" aria-hidden="true"></canvas>
   <div class="dsg-scene__heading">
     <span class="dsg-scene__eyebrow">DIGITAL STARGATE / {{ 'ALLSKY' if allsky_live else 'OBSERVATORY' if scene_kind == 'observatory' else 'CELESTIAL ATLAS' }}</span>
@@ -9,6 +9,7 @@
   </div>
   <div class="dsg-scene__poster" aria-hidden="true"><span></span><span></span><span></span></div>
   {% if allsky_live %}<div class="dsg-allsky-preview"><img data-dsg-allsky-image alt="Ripresa corrente del cielo dall’Allsky Digital Stargate" referrerpolicy="no-referrer" hidden></div>{% endif %}
+  {% if dome_sync %}<div class="dsg-dome-camera" data-dsg-camera-panel hidden><img data-dsg-camera-image alt="Ripresa live della TVCC interna alla cupola Digital StarGate" referrerpolicy="no-referrer" hidden><p data-dsg-camera-note>Collegamento alla TVCC interna…</p></div>{% endif %}
   <div class="dsg-scene__toolbar">
     <div class="dsg-scene__views" aria-label="Solo visualizzazione, nessun comando agli apparati" hidden>
       {% if dome_sync %}<button type="button" data-dsg-follow-dome aria-pressed="true">Segui badge</button>{% endif %}
