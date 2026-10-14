@@ -40,28 +40,20 @@
 
   <article class="dsg-mission-panel">
     <div class="dsg-mission-panel__heading">
-      <div><span>AP-013 PIPELINE</span><h2>Stato pubblicato</h2></div>
+      <div><span>AP-013 PIPELINE</span><h2>Baseline documentata</h2></div>
     </div>
-    <div class="dsg-mission-status">
-      <div><span>Discovery</span><strong class="is-green">Validated</strong></div>
-      <div><span>Filename parsing</span><strong class="is-green">203 / 203</strong></div>
-      <div><span>Transfer mode</span><strong class="is-amber">COPY_ONLY</strong></div>
-      <div><span>Pilot boundary</span><strong class="is-amber">1 file / run</strong></div>
-      <div><span>Overwrite</span><strong>Disabled</strong></div>
-      <div><span>Source cleanup</span><strong>Disabled</strong></div>
-    </div>
+    <p class="dsg-mission-lineage-status" data-mission-pipeline-status>Verifica della baseline documentata…</p>
+    <div class="dsg-mission-status" data-mission-pipeline></div>
+    <p class="dsg-mission-lineage-status"><a href="../architecture/validation/AP-013-Session-Discovery-Execution-Evidence/">Discovery storica</a> · <a href="../architecture/validation/AP-013-Operational-Acceptance/">Acceptance e vincoli</a></p>
   </article>
 
   <article class="dsg-mission-panel">
     <div class="dsg-mission-panel__heading">
       <div><span>OBSERVATORY OVERVIEW</span><h2>Boundary operativo</h2></div>
     </div>
-    <div class="dsg-mission-status">
-      <div><span>Safety</span><strong class="is-green">Local independent</strong></div>
-      <div><span>Transfer window</span><strong>07:30–08:15</strong></div>
-      <div><span>Integrity</span><strong>SHA-256</strong></div>
-      <div><span>Telemetry</span><strong class="is-muted">Not live</strong></div>
-    </div>
+    <p class="dsg-mission-lineage-status" data-mission-boundary-status>Verifica dei vincoli documentati…</p>
+    <div class="dsg-mission-status" data-mission-boundary></div>
+    <p class="dsg-mission-lineage-status"><a href="../architecture/validation/AP-013-Morning-Transfer-Scheduler-Evidence/">Orari e finestra: evidenza storica dello scheduler</a></p>
   </article>
 
   <article class="dsg-mission-panel dsg-mission-panel--wide">
@@ -69,16 +61,9 @@
       <div><span>KNOWLEDGE &amp; LINEAGE</span><h2>Copertura corrente</h2></div>
       <a href="../scientific-platform-intelligence/">Apri intelligence →</a>
     </div>
-    <div class="dsg-mission-knowledge">
-      <article><strong>Target</strong><span>Rappresentato</span></article>
-      <article><strong>Sessione</strong><span>Rappresentata</span></article>
-      <article><strong>Equipment</strong><span>Rappresentato</span></article>
-      <article><strong>Metrics</strong><span>Rappresentate</span></article>
-      <article class="is-partial"><strong>Scientific assets</strong><span>Parziale</span></article>
-      <article class="is-missing"><strong>Manifest</strong><span>Non rappresentato</span></article>
-      <article class="is-missing"><strong>Processing</strong><span>Non rappresentato</span></article>
-      <article class="is-missing"><strong>Publication</strong><span>Non rappresentata</span></article>
-    </div>
+    <button type="button" data-mission-refresh>Aggiorna copertura</button>
+    <p class="dsg-mission-lineage-status" role="status" data-mission-lineage-status>Caricamento delle fonti correnti…</p>
+    <div class="dsg-mission-knowledge" data-mission-knowledge><p>Verifica della copertura in corso…</p></div>
   </article>
 </section>
 
@@ -106,4 +91,6 @@
 </div>
 
 <script src="../javascripts/scientific-data-engine.js"></script>
+<script src="../javascripts/scientific-photo-api.js"></script>
+<script src="../javascripts/mission-control-lineage.js"></script>
 <script src="../javascripts/mission-control.js"></script>

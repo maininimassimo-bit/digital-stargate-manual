@@ -4,6 +4,7 @@
   const VERSION = '2.1.2-rc1';
   const engineScript = document.currentScript?.src;
   const workflowSource = engineScript ? new URL('../data/bkl049-public-workflows.json', engineScript).href : null;
+  const platformSource = engineScript ? new URL('../data/scientific-platform-status.json', engineScript).href : null;
   const transferSource = engineScript ? new URL('../data/session-package-transfer.json', engineScript).href : null;
   const cache = new Map();
   const metrics = {
@@ -209,7 +210,7 @@
     return Boolean(normalized) && !['UNKNOWN', 'N/A', 'NOT_REPRESENTED', 'MISSING'].includes(normalized);
   };
 
-  const getKnowledgeGraph = (session, transfer) => ({
+  const getKnowledgeGraph = (session, transfer, catalogState = 'ready') => ({
     target: { type: 'TARGET', id: session.target, label: session.target },
     session: { type: 'SESSION', id: session.sessionId, label: session.sessionId },
     equipment: [
@@ -218,20 +219,22 @@
       { type: 'FILTER', id: session.filter, label: session.filter }
     ],
     outputs: [
-      { type: 'METRICS', state: session.evidenceState, available: representedState(session.evidenceState) },
-      { type: 'MANIFEST', state: session.manifestState, available: representedState(session.manifestState) },
+      { type: 'METRICS', state: catalogState === 'ready' ? session.evidenceState : 'Catalogo corrente non verificabile', available: catalogState === 'ready' && representedState(session.evidenceState) },
+      { type: 'MANIFEST', state: catalogState === 'ready' ? session.manifestState : 'Catalogo corrente non verificabile', available: catalogState === 'ready' && representedState(session.manifestState) },
       { type: 'TRANSFER', state: transfer?.detail || session.transferState, label: transfer?.label, available: transfer ? transfer.state==='represented' : representedState(session.transferState) }
     ]
   });
 
-  const getLineage = (session, publication, transfer) => {
+  const getLineage = (session, publication, transfer, catalogState = 'ready') => {
     const manifestAvailable = representedState(session.manifestState);
     const transferAvailable = representedState(session.transferState);
+    const catalogDetail = catalogState === 'loading' ? 'Verifica del catalogo in corso…' : 'Catalogo non disponibile: stato corrente non verificabile';
+    const catalogStep = (step) => catalogState === 'ready' ? step : {...step, state:'partial', detail:catalogDetail};
     return [
-      { label: 'Observation session', state: 'represented', detail: session.sessionId },
-      { label: 'Acquisition metrics', state: representedState(session.evidenceState) ? 'represented' : 'missing', detail: `${session.lightCompleted} completed light frames` },
-      { label: 'Scientific assets', state: 'partial', detail: 'paths and binary inventory not exposed in this catalog' },
-      { label: 'Manifest', state: manifestAvailable ? 'represented' : 'missing', detail: session.manifestState },
+      catalogStep({ label: 'Observation session', state: 'represented', detail: session.sessionId }),
+      catalogStep({ label: 'Acquisition metrics', state: representedState(session.evidenceState) ? 'represented' : 'missing', detail: `${session.lightCompleted} completed light frames` }),
+      { label: 'Scientific assets', ...(publication?.assets || {state:'partial', detail:'Inventario RAW fotografici non esposto; pubblicazioni non ancora verificate'}) },
+      catalogStep({ label: 'Manifest', state: manifestAvailable ? 'represented' : 'missing', detail: session.manifestState }),
       { ...(transfer || {state:transferAvailable ? 'represented' : 'missing',detail:session.transferState}), label: 'Transfer · pacchetto sessione' },
       { label: 'Processing', ...(publication?.processing || {state:'missing', detail:'not represented'}) },
       { label: 'Publication', ...(publication?.publication || {state:'missing', detail:'not represented'}) }
@@ -317,6 +320,21 @@
     }finally{clearTimeout(timer);if(reader){await reader.cancel().catch(()=>{});reader.releaseLock();}}
   };
 
+  const getCurrentSessions = async (source) => {
+    const context = await getPhotoUploadContext(source);
+    if (!Array.isArray(context.sessions) || context.sessions.length > 1000 || context.sessions.some(s => !s || typeof s !== 'object' || Array.isArray(s) || typeof s.sessionId !== 'string')) throw new Error('SESSION_CATALOG_INVALID');
+    const ids = context.sessions.map(s => s.sessionId);
+    if (new Set(ids).size !== ids.length) throw new Error('SESSION_CATALOG_INVALID');
+    return normalize({sessions:context.sessions}).sessions;
+  };
+
+  const getCurrentSession = async (source, sessionId) => {
+    const sessions = await getCurrentSessions(source);
+    const session = sessions.find(s => s.sessionId === sessionId);
+    if (!session) throw new Error('SESSION_NOT_CURRENT');
+    return Object.freeze(session);
+  };
+
   const getSessionPhotoCollection = async () => {
     const config = await window.DSGPhotoApi.config();
     const url = config.serviceUrl + '/v1/gallery';
@@ -346,6 +364,21 @@
     } finally {clearTimeout(timer);if(reader){await reader.cancel().catch(()=>{});reader.releaseLock();}}
   };
 
+  const getMissionPlatformState = async () => {
+    if(!platformSource || new URL(platformSource).origin!==location.origin)throw new Error('PLATFORM_UNAVAILABLE');
+    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);let reader;
+    try{
+      const response=await fetch(platformSource,{signal:controller.signal,cache:'no-store',redirect:'error',credentials:'omit',mode:'same-origin'});
+      if(!response.ok || response.url!==platformSource || !response.body)throw new Error('PLATFORM_UNAVAILABLE');
+      reader=response.body.getReader();let raw='',bytes=0;const decoder=new TextDecoder('utf-8',{fatal:true});
+      while(true){const item=await reader.read();if(item.done)break;bytes+=item.value.byteLength;if(bytes>128*1024)throw new Error('PLATFORM_LIMIT');raw+=decoder.decode(item.value,{stream:true});}
+      raw+=decoder.decode();const value=JSON.parse(raw),d=value?.historicalDiscovery,t=value?.transfer;
+      const count=n=>Number.isSafeInteger(n)&&n>=0;
+      if(value?.schemaVersion!=='1.0' || value.authorityBoundary?.projectionOnly!==true || value.authorityBoundary.runtimeTelemetry!==false || value.authorityBoundary.safetyAuthority!=='LOCAL_PHYSICAL_INTERLOCKS' || !/^\d{4}-\d{2}-\d{2}$/.test(value.updatedAt) || !d || !/^\d{4}-\d{2}-\d{2}$/.test(d.asOf) || ![d.files,d.sessions,d.parsed,d.ambiguous,d.failed].every(count) || d.parsed+d.ambiguous+d.failed!==d.files || !t || t.mode!=='COPY_ONLY' || t.status!=='Limited Production' || !count(t.maxFilesPerRun) || !t.maxFilesPerRun || t.hashAlgorithm!=='SHA-256' || t.overwriteExisting!==false || t.sourceCleanupAuthorized!==false || !/^([01]\d|2[0-3]):[0-5]\d$/.test(value.scheduler?.timeLocal) || value.safety?.commandAuthority!==false || value.safety.automaticRemediationAuthority!==false || value.safety.presentTimeSafetyInferenceFromHistoricalEvidence!==false)throw new Error('PLATFORM_INVALID');
+      return value;
+    }finally{clearTimeout(timer);if(reader){await reader.cancel().catch(()=>{});reader.releaseLock();}}
+  };
+
   const getSessionTransferCollection=async()=>{
     if(!transferSource || new URL(transferSource).origin!==location.origin)throw new Error('TRANSFER_UNAVAILABLE');
     const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);let reader;
@@ -369,6 +402,9 @@
     version: VERSION,
     getPublicWorkflowCollection,
     getSessionPhotoCollection,
+    getCurrentSession,
+    getCurrentSessions,
+    getMissionPlatformState,
     getSessionTransferCollection,
     getPhotoUploadContext,
     loadCatalog,

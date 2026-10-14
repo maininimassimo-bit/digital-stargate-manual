@@ -8,26 +8,31 @@
     const node=(k,l,v,s='')=>`<article class="dsg-graph-node ${s}"><span>${esc(k)}</span><strong>${esc(l)}</strong><small>${esc(v)}</small></article>`;
     const renderGraph=(session,m)=>{const eq=m.equipment.filter(i=>isKnown(i.label));const nodes=eq.length?eq.map(i=>i.type==='TELESCOPE'?node(i.type,i.label,displayValue(session.configurationId)):i.type==='CAMERA'?node(i.type,i.label,isKnown(session.binning)?`${session.binning}${session.gain!==null?` · gain ${session.gain}`:''}`:'Metadata parziali'):node(i.type,i.label,session.exposureSeconds!==null?`${session.exposureSeconds} s exposures`:'Metadata parziali')).join(''):node('EQUIPMENT','Metadata non attestati',session.metadataState||'INCOMPLETE','is-missing');graph.innerHTML=`<div class="dsg-graph-row">${node(m.target.type,m.target.label,'Scientific object','is-target')}</div><div class="dsg-graph-connector">↓ observed in</div><div class="dsg-graph-row">${node(m.session.type,m.session.label,displayDate(session.observationDate),'is-session')}</div><div class="dsg-graph-connector">↓ acquired with</div><div class="dsg-graph-row dsg-graph-row--triple">${nodes}</div><div class="dsg-graph-connector">↓ produces</div><div class="dsg-graph-row dsg-graph-row--triple">${m.outputs.map(o=>node(o.type,o.label || (o.available?'Session metrics':'Not represented'),o.state,o.available?'is-available':'is-missing')).join('')}</div>`;};
     const renderLineage=(steps)=>{lineage.innerHTML=steps.map((s,i)=>`<article class="dsg-lineage-step is-${esc(s.state)}"><span>${String(i+1).padStart(2,'0')}</span><strong>${esc(s.label)}</strong><small>${esc(s.detail)}</small></article>`).join('');};
+    let latestSession;
     const refreshPublications=async(session)=>{
+      session=latestSession || session;
       let transfer=window.DSGSessionTransfer.describe(session.sessionId,null,'loading');
       const publication=window.DSGSessionPublication,button=q('[data-detail-publication-refresh]'),status=q('[data-detail-publication-status]'),links=q('[data-detail-publications]');
       if(button.disabled)return;button.disabled=true;links.replaceChildren();
-      renderGraph(session,engine.getKnowledgeGraph(session,transfer));renderLineage(engine.getLineage(session,publication.describe([], 'loading'),transfer));
-      status.textContent='Verifica della gallery in corso…';
+      renderGraph(session,engine.getKnowledgeGraph(session,transfer,'loading'));renderLineage(engine.getLineage(session,publication.describe([], 'loading'),transfer,'loading'));
+      status.textContent='Verifica del catalogo, del pacchetto di sessione e della gallery in corso…';
+      let catalogState='unavailable';
       try{
         const transferPromise=engine.getSessionTransferCollection().then(collection=>window.DSGSessionTransfer.describe(session.sessionId,collection),()=>window.DSGSessionTransfer.describe(session.sessionId,null,'unavailable'));
-        const [galleryResult,transferView]=await Promise.all([engine.getSessionPhotoCollection().then(value=>({value}),()=>({error:true})),transferPromise]);if(!root.isConnected)return;transfer=transferView;renderGraph(session,engine.getKnowledgeGraph(session,transfer));
+        const [galleryResult,transferView,catalogResult]=await Promise.all([engine.getSessionPhotoCollection().then(value=>({value}),()=>({error:true})),transferPromise,engine.getCurrentSession(source,session.sessionId).then(value=>({value}),()=>({error:true}))]);if(!root.isConnected)return;transfer=transferView;
+        if(!catalogResult.error){session=catalogResult.value;latestSession=session;catalogState='ready';render(session);}
+        renderGraph(session,engine.getKnowledgeGraph(session,transfer,catalogState));
         if(transfer.manifestUrl){const manifestLink=document.createElement('a');manifestLink.href=transfer.manifestUrl;manifestLink.textContent='Manifest del pacchetto di sessione';links.append(manifestLink);}
         if(galleryResult.error)throw new Error('PHOTO_GALLERY_UNAVAILABLE');const collection=galleryResult.value;
         const records=publication.select(session.sessionId,collection);
-        renderLineage(engine.getLineage(session,publication.describe(records),transfer));
-        status.textContent=`${records.length} ${records.length===1?'immagine pubblicata associata':'immagini pubblicate associate'} · verificato alle ${new Intl.DateTimeFormat('it-IT',{timeStyle:'medium'}).format(new Date())}. Trasferimento e pubblicazioni aggiornati all’apertura e ogni minuto mentre la pagina è visibile.`;
+        renderLineage(engine.getLineage(session,publication.describe(records),transfer,catalogState));
+        status.textContent=`${records.length} ${records.length===1?'immagine pubblicata associata':'immagini pubblicate associate'} · verificato alle ${new Intl.DateTimeFormat('it-IT',{timeStyle:'medium'}).format(new Date())}. ${catalogState==='ready'?'Catalogo aggiornato.':'Catalogo non disponibile: metadati generali mostrati dall’ultima lettura; stato corrente non verificabile.'} Catena riletta all’apertura e ogni minuto mentre la pagina è visibile.`;
         if(records.length){
           const row=document.createElement('div');row.className='dsg-graph-row';
           row.innerHTML=records.map(record=>node('IMAGE / VERSION',record.title,`${record.imageId} · ${record.imageVersionId} · sessione dichiarata dall’autore`,'is-available')+node('WORKFLOW',record.workflowId,`${record.steps.length} passaggi disponibili · ${record.captureCompleteness==='PARTIAL'?'parziale':'non disponibile'} · esecuzione non verificata`,'is-partial')).join('');graph.append(row);
         }
         for(const record of records){const link=document.createElement('a');link.href=publication.galleryUrl(window.DSGPhotoApi.base,session.sessionId,record.imageVersionId);const title=document.createElement('strong');title.textContent=`${record.title} · immagine pubblicata e workflow`;const detail=document.createElement('span');detail.textContent=`${record.imageVersionId} · ${record.workflowId}`;link.append(title,detail);links.append(link);}
-      }catch{if(!root.isConnected)return;renderLineage(engine.getLineage(session,publication.describe([], 'unavailable'),transfer));status.textContent='Gallery non disponibile. Pubblicazione e workflow non verificabili; riprova con Aggiorna catena informativa.';}
+      }catch{if(!root.isConnected)return;renderLineage(engine.getLineage(session,publication.describe([], 'unavailable'),transfer,catalogState));status.textContent=`Gallery non disponibile: asset pubblicati, pubblicazione e workflow non verificabili. ${catalogState==='ready'?'Catalogo aggiornato.':'Catalogo non disponibile: metadati generali mostrati dall’ultima lettura.'} Rinnovo automatico ogni minuto; riprova con Aggiorna catena informativa.`;}
       finally{button.disabled=false;}
     };
     const startPublicationRefresh=session=>{
