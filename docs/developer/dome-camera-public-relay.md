@@ -59,6 +59,8 @@ di 8 secondi. Scadenza, schema non valido o indisponibilità rimuovono il video
 e mostrano un messaggio; il ripristino è automatico. La vista essenziale, la pagina
 nascosta e la navigazione sospendono richieste e stream. Movimento ridotto o
 risparmio dati sospendono l'avvio automatico; Interno consente scelta manuale.
+La riattivazione dopo Vista essenziale conserva anche la selezione manuale:
+il nuovo mount del renderer non deve reimpostarla sulla vista del badge.
 
 ## Installazione, verifiche e rollback
 
