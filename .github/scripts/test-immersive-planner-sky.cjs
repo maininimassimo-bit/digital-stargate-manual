@@ -22,7 +22,7 @@ const original = JSON.parse(fs.readFileSync('docs/data/observation-planner-f9-cu
   const sky = page.locator('[data-weather-sky]');
   async function scenario(state, mutate=()=>{}) {
     fixture=structuredClone(original);
-    fixture.hourly.forEach(row=>{row.weather.cloudCoverPct=0;row.weather.precipitationMm=0;});
+    fixture.hourly.forEach(row=>{row.weather.cloudCoverPct=0;row.weather.precipitationMm=0;delete row.weather.precipitationNumericalTraceMm;});
     mutate(fixture); requests=0;
     await page.goto(base+'observation-planner/');
     await page.waitForFunction(s=>document.querySelector('[data-weather-sky]')?.dataset.skyState===s,state);
@@ -34,6 +34,9 @@ const original = JSON.parse(fs.readFileSync('docs/data/observation-planner-f9-cu
   try {
     await scenario('clear');
     assert.match(await sky.innerText(),/Nuvole medie 0,0%/);
+    await scenario('clear',d=>d.hourly.forEach(row=>{row.weather.precipitationNumericalTraceMm=2.946505750977754e-16;}));
+    assert.match(await sky.innerText(),/Pioggia totale 0,000 mm/);
+    assert.match(await sky.innerText(),/0\/16 campioni con pioggia/);
     await scenario('clear', d=>d.hourly.forEach(r=>r.weather.cloudCoverPct=20));
     await scenario('cloudy', d=>d.hourly.forEach(r=>r.weather.cloudCoverPct=75));
     await scenario('rain', d=>d.hourly[0].weather.precipitationMm=0.01);
