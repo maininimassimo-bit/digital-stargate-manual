@@ -121,7 +121,7 @@ La telemetria realtime è deliberatamente separata dalla storia scientifica. La 
 | RMS totale | <span data-latest-scientific="rms">—</span> |
 
 Per la cronologia completa usare [Session Reports](../session-reports/) e [Scientific Platform](../scientific-platform/). Questi dati sono proiezioni storiche versionate e restano semanticamente separati dalla telemetria realtime mostrata sopra.
-# Ripresa TVCC interna
+## Ripresa TVCC interna
 
 Nella vista della cupola, **Interno** mostra la ripresa pubblica senza audio.
 **Segui badge** la seleziona automaticamente quando il badge indica OPEN.

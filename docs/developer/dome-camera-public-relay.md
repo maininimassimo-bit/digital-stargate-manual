@@ -35,6 +35,9 @@ La freshness scade dopo 8 secondi dall'ultimo JPEG ricevuto dal ponte: non è
 una misura indipendente dell'orologio o dell'esposizione della camera.
 Senza frame corrente le immagini rispondono 503 e i timestamp sono null.
 Le risposte hanno `Cache-Control: no-store`; CORS autorizza l'origine del portale.
+Nel proxy annullare le intestazioni additive ereditate e impostare esplicitamente
+`no-store`: la regola AllSky di cache immutabile non deve aggiungere una seconda
+intestazione ai percorsi TVCC. Verificare gli header sulla risposta HTTPS finale.
 
 Un producer condiviso limita la decodifica; watchdog senza frame 15 secondi,
 riconnessione 1–10 secondi, frame massimo 1 MiB, massimo 8 stream e 24 connessioni.
