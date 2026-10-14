@@ -18,9 +18,11 @@ export async function mountScene(stage, { signal }) {
   let disposed = false, lost = false, visible = true, frame = 0, timer = 0, until = 0, last = 0, time = 0;
   let view = 'section', px = 0, py = 0, angle = .73, elevation = .51, progress = 0;
   const domeSync = stage.hasAttribute('data-dsg-dome-sync');
-  let following = domeSync;
+  const keepManual = domeSync && stage.hasAttribute('data-dsg-dome-camera') && stage.dataset.dsgViewMode === 'manual';
+  let following = domeSync && !keepManual;
   const observedView = () => ({CLOSED:'exterior',OPEN:'section'})[stage.dataset.dsgObservedDome] || 'neutral';
-  if (domeSync) view = observedView();
+  if (domeSync) view = keepManual && ['section','exterior','top','neutral'].includes(stage.dataset.dsgSelectedView)
+    ? stage.dataset.dsgSelectedView : observedView();
   stage.querySelectorAll('[data-dsg-scene-view]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.dsgSceneView === view)));
   const listeners = new AbortController();
   const stop = () => { cancelAnimationFrame(frame); clearTimeout(timer); frame = timer = 0; };
