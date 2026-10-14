@@ -6,13 +6,15 @@
   const describe = (records, state = 'ready') => {
     if (state !== 'ready') {
       const detail = state === 'loading' ? 'Verifica della gallery in corso…' : 'Gallery non disponibile: stato non verificabile';
-      return {processing: {state:'partial', detail}, publication: {state:'partial', detail}};
+      return {assets: {state:'partial', detail: `${detail}; inventario RAW fotografici non esposto`}, processing: {state:'partial', detail}, publication: {state:'partial', detail}};
     }
     if (!records.length) return {
+      assets: {state:'partial', detail:'Nessuna immagine pubblicata associata nella gallery corrente; inventario RAW fotografici non esposto'},
       processing: {state:'missing', detail:'Nessun workflow pubblico associato alla sessione'},
       publication: {state:'missing', detail:'Nessuna immagine attualmente pubblicata con questa sessione dichiarata'}
     };
     return {
+      assets: {state:'partial', detail: `${records.length} ${records.length === 1 ? 'immagine pubblicata associata' : 'immagini pubblicate associate'}: ${records.map(r => `${r.title} · ${r.imageVersionId}`).join(' · ')}; sessione dichiarata dall’autore; inventario RAW fotografici non esposto`},
       processing: {state:'partial', detail:records.map(r => `${r.workflowId}: ${r.steps.length} passaggi disponibili; workflow ${r.captureCompleteness === 'PARTIAL' ? 'parziale' : 'non disponibile'}; esecuzione non verificata`).join(' · ')},
       publication: {state:'represented', detail:records.map(r => `${r.title} · ${r.imageVersionId} · sessione dichiarata dall’autore`).join(' · ')}
     };

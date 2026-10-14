@@ -1,0 +1,23 @@
+# Session assets and complete lineage refresh — 14 October 2026
+
+Follow-up to PR588 (merged b5b170a6ee560328cf23bab99acd6c24b3a710ef): owner asks whether Scientific assets and the complete session chain are coherent and automatically refreshed.
+
+## Findings and correction
+
+The Scientific assets step was an unconditional static placeholder, even for M27 with a current exact session association. Acquisition metrics and manifest remained from the initial indefinitely cached catalog, while transfer and publication were refreshed.
+
+Scientific assets now derives published image titles and exact version IDs from the same freshly validated gallery collection and exact OWNER_DECLARED session join as Publication. It remains partial: the public gallery attests published versions, not photographic RAW inventory, physical RAW transfer or frame contribution. Withdrawal and unavailable/loading gallery states clear earlier positive asset claims; no same-target inference is introduced. The EAGLE manifest remains a distinct document/telemetry package (six verified files for 19–20 September).
+
+Each existing initialization, visible-minute, visibility-return and manual refresh now also rereads the same-origin catalog via the existing no-store, 15-second/16MiB bounded reader. Exact unique session identity is required; missing, ambiguous or unreadable current records mark catalog-derived lineage and graph outputs unverifiable independently of gallery/transfer. General metadata retains the last good read with an explicit status message. Successful rereads update general metadata, metrics, weather, guiding, sources, graph and lineage. All three reads run concurrently; no stale positive lineage is retained during a reread. Server publication continues through the existing canonical manifest bot/Pages pipeline. Refresh can observe only evidence already published; it does not create missing inventories or establish full scientific provenance.
+
+## Mission Control follow-up
+
+Owner also requested Mission Control coverage. Its eight labels were hardcoded and KPIs/recent sessions loaded only once. Coverage now aggregates the entire freshly read catalog (explicit session denominators), public gallery exact OWNER_DECLARED session associations, and verified document package counts. Manifest metadata availability remains distinct from SHA package integrity. Scientific assets and Processing retain partial provenance boundaries. Publication can be represented for some sessions without claiming full-catalog coverage; withdrawn versions and unavailable sources cannot retain success. KPIs and recent sessions use the same fresh catalog. Initial/visible-minute/visibility-return/manual refresh and SPA lifecycle mirror session detail. Shared CSS gives labels and descriptions separate lines.
+
+## AP-013 and Observatory overview follow-up
+
+Owner additionally marked both operational panels. The static pilot limit of one file was obsolete: formal OA-AP013-001 acceptance and the existing generated scientific-platform-status.json define Limited Production with MaxFilesPerRun <=30. Discovery 203/203 is historical evidence dated 4 August, not a current inventory. The static 07:30–08:15 label conflated allowed start (07:30–08:05) and expected completion (08:15) in historic scheduler evidence. Mission Control now rereads the existing governed platform projection alongside its other sources, displays the documented trigger with an explicitly historical label and links the canonical window evidence. No claim of present task/device/safety state is made. AP-013 mode, accepted batch limit, no-overwrite/no-cleanup constraints and local Safety Authority are projected read-only; authority flags and values are validated, reads bounded/no-store. Unavailable projection clears its earlier claims. The canonical generator/data/authority and runtime schedules are unchanged.
+
+## Validation and release
+
+33 targeted tests include actual detail-controller visible timer, hidden suppression, visibility return, manual refresh, changed frame metrics, image withdrawal, catalog failure and recovery; exact-ID and unavailable-source regressions remain covered. Mission coverage and controller tests also exercise all three refresh triggers, all-source rereads, hidden suppression, changing denominators, unavailable catalog/gallery and recovery. Strict build, independent ARB then RQ, exact-head checks, expected-head merge and post-merge deployment/live checks must be recorded in the delivery PR under DSG-AEM-001 / W-DSG-AEM-RULESET-001. No scientific acceptance, roadmap or private runtime authority changed. Rollback: revert this UI correction and redeploy; canonical data and existing transfer/gallery endpoints are untouched.
