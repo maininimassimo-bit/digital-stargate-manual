@@ -31,7 +31,7 @@ Il percorso `raw/` nel manifest della sessione contiene log/telemetria del repor
 3. `.github/workflows/deploy-pages.yml`, unico proprietario del deploy, genera anche la projection dei pacchetti prima del build. `generate-session-package-transfer.mjs` legge gli ID del catalogo e `projectSessionPackage` verifica i file canonici reali con size e SHA-256 streaming.
 4. Pages pubblica l'artefatto. I consumer rileggono le projection pubblicate e la gallery corrente. Un rinnovo del browser non genera dati assenti e non sostituisce il completamento della pipeline server.
 
-Il generatore accetta solo identità esatte e inventory non vuoti/bounded; rifiuta oggetti null/malformati, ID discordanti, duplicati, traversal e percorsi fuori repository/sessione. Preservare i byte dei log secondo `.gitattributes` (`raw/** -text`): una normalizzazione delle righe può invalidare un hash senza cambiare il significato del testo. Non rigenerare SHA nel manifest per mascherare una discrepanza. I record espongono solo `sessionId`, `scope`, `state`, `manifestRef`, `fileCount`, `verifiedFileCount`.
+Il generatore accetta solo identità esatte e inventory non vuoti/bounded; rifiuta oggetti null/malformati, ID discordanti, duplicati, traversal e percorsi fuori repository/sessione. Preservare i byte dei log secondo `.gitattributes` (`data/sessions/**/raw/** -text`): una normalizzazione delle righe può invalidare un hash senza cambiare il significato del testo. Non rigenerare SHA nel manifest per mascherare una discrepanza. I record espongono solo `sessionId`, `scope`, `state`, `manifestRef`, `fileCount`, `verifiedFileCount`.
 
 | Stato pacchetto | Significato |
 |---|---|
@@ -81,6 +81,8 @@ Entrambe le pagine rileggono all'inizializzazione, al ritorno di visibilità, og
 | Gallery | 10s dopo configurazione | 2 MiB; no-store, credentials omit, redirect error; validazione collection/record/preview/version/workflow |
 | Pacchetti | 10s | 1 MiB; same-origin, no-store, credentials omit, redirect error; <=1000 record, scope/count/manifestRef coerenti |
 | Baseline AP-013 | 10s | 128 KiB; same-origin, no-store, credentials omit, redirect error; authority non-runtime e vincoli validati |
+
+Nel dettaglio, la risoluzione iniziale dell’ID passa prima dallo store esistente `getSessions/getSession`: `loadCatalog` mantiene cache con `maxAgeMs=Infinity` di default e non imposta una deadline propria. I limiti15s della tabella riguardano la successiva lettura corrente `getCurrentSession`, che aggira quella cache. Il timer si avvia dopo la risoluzione iniziale; un bootstrap catalogo bloccato non equivale a un rinnovo riuscito. Mission Control usa direttamente `getCurrentSessions`.
 
 Configurazione e gallery sono due fasi consecutive: il rinnovo complessivo può attendere fino alle rispettive scadenze, non un unico timeout10s. Le altre fonti sono lette in parallelo.
 
