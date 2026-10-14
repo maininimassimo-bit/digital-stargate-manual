@@ -15,7 +15,7 @@ Links bind session and exact image-version fragment in the gallery. Metrics poin
 ## Validation and limits
 
 - Seven regression tests cover M27/version/workflow, exact associations, multiple versions, withdrawal, unknown/error, gallery URLs and canonical metrics paths; seven existing routing tests also pass.
-- CI exposed a pre-existing quality-trend test fixed at ten scores and one QUATTRO score, invalidated by the latest session import. The test now compares all exact published session/score pairs and setup membership; production scoring is unchanged.
+- CI exposed pre-existing quality-trend unit/browser tests fixed at ten scores, one QUATTRO score and twenty table rows, invalidated by the latest session import. Tests now compare all exact published session/score pairs, plotted session links, setup membership and available rows; production scoring is unchanged.
 - MkDocs Pages strict build and inline-JavaScript gate passed before the final small presentation updates; final exact-head CI remains required.
 - Local browser verification used a separately saved public gallery snapshot: M27/80 steps, withdrawal, failure and recovery passed. Live gallery requests from localhost are rejected by the existing cross-origin policy; this does not establish the final Pages-origin integration.
 - Final CI, applicable reviews, merge, deployment and live-origin verification must be recorded on the PR. No released/accepted claim is made by this handover.
