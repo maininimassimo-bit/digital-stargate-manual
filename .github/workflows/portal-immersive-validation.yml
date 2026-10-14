@@ -6,6 +6,7 @@ on:
       - 'overrides/**'
       - 'hooks/**'
       - 'mkdocs*.yml'
+      - 'tools/dome_camera/**'
       - '.github/scripts/*immersive*'
       - '.github/scripts/test-bkl049-gallery-browser.cjs'
       - '.github/workflows/portal-immersive-validation.yml'
@@ -30,6 +31,8 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Verify presentation boundary and vendored files
         run: node .github/scripts/verify-immersive-assets.mjs
+      - name: Dome camera relay contracts
+        run: python -m unittest discover -s tools/dome_camera -p 'test_*.py'
       - name: Build site
         run: python -m mkdocs build --strict --config-file mkdocs.pages.yml
       - name: Executive dashboard generation
@@ -51,6 +54,7 @@ jobs:
           node .github/scripts/test-status-allsky-layout.cjs
           node .github/scripts/test-immersive-instruments.cjs
           node .github/scripts/test-immersive-dome-sync.cjs
+          node .github/scripts/test-immersive-dome-camera.cjs
           node .github/scripts/test-immersive-planner-sky.cjs
           node .github/scripts/test-immersive-navigation.cjs
           node .github/scripts/test-immersive-planner-refresh.cjs

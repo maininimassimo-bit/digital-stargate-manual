@@ -1,0 +1,11 @@
+# Add mod_proxy once, preserving existing modules and public allowlist.
+server.modules += ( "mod_proxy" )
+$SERVER["socket"] == ":23232" {
+    $HTTP["url"] =~ "^/dome-camera/(status\.json|frame\.jpg|live\.mjpg)$" {
+        proxy.server = ( "" => (( "host" => "127.0.0.1", "port" => 8076 )) )
+        server.stream-response-body = 2
+    }
+}
+# In the existing negative public URL allowlist also allow ONLY the exact regex:
+# ^/dome-camera/(status\.json|frame\.jpg|live\.mjpg)$
+# Never replace the existing allowlist with a permissive /dome-camera/ prefix.
