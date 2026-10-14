@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-DEV-001 |
-| Versione | 2.0 |
+| Versione | 2.1 |
 | Stato | Active |
-| Data | 10/09/2026 |
+| Data | 14/10/2026 |
 | Release | UI 7.0 |
 
 ## 1. Purpose
@@ -60,7 +60,7 @@ Il workflow analyze-session-automatic.yml deve rigenerare e pubblicare insieme l
 - Session Comparison;
 - ulteriori projection esplicitamente dichiarate nel workflow.
 
-L'aggiunta di una nuova projection session-driven richiede modifica atomica a generatore, governed_paths, test e documentazione. Un nuovo consumer di projection esistenti non deve ampliare permessi o automazioni di push/deploy.
+Per una projection committata dal bot, l’aggiunta richiede modifica atomica a generatore, governed_paths, test e documentazione. Una projection prodotta solo nel build Pages, come session-package-transfer.json, deve invece essere generata prima del build/publish e restare fuori Git: non ampliare governed_paths per un artefatto ignorato. Un nuovo consumer di projection esistenti non deve ampliare permessi o automazioni di push/deploy.
 
 ## 6. UX and accessibility checklist
 
@@ -94,8 +94,8 @@ Il rollback ripristina file UI, navigation e generatori del commit precedente. N
 | Versione | Data | Stato | Descrizione |
 |---|---|---|---|
 | 1.0 | 26/07/2026 | Superseded | Workflow editoriale UI 6.1 |
-| 2.0 | 10/09/2026 | Active | Governance dinamica e quality gate UI 7.0; ARB-UI-7 APPROVED |
-
+| 2.0 | 10/09/2026 | Baseline storica | Governance dinamica e quality gate UI 7.0; ARB-UI-7 APPROVED |
+| 2.1 | 14/10/2026 | Active | Consumer di catena, artefatto manifest build-only e brand comune; nessuna nuova authority |
 
 ## Addendum — manutenzione del portale immersivo (29/09/2026)
 
@@ -111,3 +111,9 @@ Il rollback ripristina file UI, navigation e generatori del commit precedente. N
 - Il workflow Immersive portal validation esegue soltanto verifiche; il proprietario
   del deployment resta `deploy-pages.yml`.
 - Registrare separatamente test locali, exact-head CI, review e deployment verificato.
+
+## Manutenzione delle catene e del brand — 14 ottobre 2026
+
+Usare il [riferimento implementativo](session-lineage-and-mission-control.md) per session detail e Mission Control: fonti distinte, identificatori esatti, fetch bounded/no-store, refresh visibile/manuale, ritiro e failure indipendenti. Valori correnti, inventario e pubblicazione non si correggono copiando i conteggi delle ricevute nelle tile. Discovery 203/203 e scheduler documentati sono storici, Manifest catalogo non equivale a pacchetto verificato, associazione Owner non equivale a esecuzione o RAW inventory.
+
+Il logo comune è `docs/assets/images/dsg-brand-mark.png`: configurarlo in MkDocs/header/favicon e preservare trasparenza/proporzioni con CSS, senza introdurre copie per pagina. [Esiti PR587–589](../releases/2026-10-14-session-lineage-and-brand.md). Una riconciliazione documentale ha CI/review/merge/Pages propri; non riscrive retroattivamente le evidenze di acceptance.

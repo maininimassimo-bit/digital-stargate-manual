@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | AP14-OPS-EAGLE-AUTO-001 |
-| Versione | 1.5 |
+| Versione | 1.6 |
 | Stato | Deployed; Reporting 1.0.8 runtime validated; historical AP-014 OAT preserved |
-| Data | 2026-09-03 |
+| Data | 2026-10-14 |
 | Host | EAGLE / PrimaLuceLab |
 
 ## Objective
@@ -228,3 +228,13 @@ Reporting 1.0.8 closes the observed Git stderr PowerShell 5.1 bug and exact evid
 - formal reconciliation/restoration of all historical Reporting quality-gate checks while retaining current regression tests; track as `TD-011`.
 
 Do not reinterpret these open hardening items as failure of the validated 1.0.8 recovery.
+
+## Addendum 1.6 — verifica della pubblicazione e catena del portale
+
+Aggiornamento documentale del14 ottobre 2026; non prova una nuova installazione Reporting o una modifica della task EAGLE. La baseline runtime e gli OAT sopra restano le evidenze che effettivamente attestano.
+
+Il manifest generato dal reporting contiene documenti/log/telemetria della sessione. Dopo il commit COMPLETE con ID coerente, il bot `analyze-session-automatic.yml` produce report/projection; il build autorevole `deploy-pages.yml` genera `session-package-transfer.json` verificando file size e SHA-256 del pacchetto canonico. Il JSON derivato è ignorato da Git e non va aggiunto al publish set committato. Le proprietà `raw/` dei log non significano RAW fotografici.
+
+Verifica read-only della pubblicazione: controllare il bot e Pages sul relativo commit, poi aprire il dettaglio dell'ID esatto, verificare link manifest/stato/count e aggiornamento. Session detail rilegge catalogo/gallery/pacchetti; Mission Control aggrega catalogo e versioni correnti. Entrambi ogni 60s visibili, ritorno di visibilità e pulsante manuale. Mancanza della gallery non invalida un pacchetto verificato; mancanza del catalogo impedisce di attestare dati correnti. Una nuova pubblicazione gallery può apparire al rinnovo senza un nuovo deploy, tramite il servizio esistente.
+
+Per errori: leggere lo stato preciso INVALID/INCOMPLETE/UNAVAILABLE, verificare manifest e pipeline, non editare manualmente la projection e non rieseguire producer/task o copie fotografiche come tentativo di correggere il frontend. [Fonti, test e troubleshooting](../developer/session-lineage-and-mission-control.md); [rilasci verificati](../releases/2026-10-14-session-lineage-and-brand.md). Transfer del portale non attesta i run AP-013 C→F né modifica la loro finestra operativa.

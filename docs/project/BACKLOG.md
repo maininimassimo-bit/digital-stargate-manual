@@ -1,5 +1,9 @@
 # Project Backlog
 
+## Correzioni del portale consegnate — 14 ottobre 2026
+
+Concluse e verificate PR587–589: pubblicazione/workflow M27, link metriche, Transfer del pacchetto documentale, brand condiviso, asset e catena aggiornati, copertura Mission Control e qualificazione storica AP-013. [Ricevute](../releases/2026-10-14-session-lineage-and-brand.md). La manutenzione documentale successiva ha gate propri. Non costituisce chiusura BKL-050 né modifica dello stato dei package scientifici; RAW, esecuzione/provenance completa e runtime safety restano fuori dalla prova di questo consumer.
+
 ## PixInsight — integrazione statistica candidata
 
 Incremento autorizzato del ciclo adattivo: consenso separato per statistiche dei pixel, analisi locale dei master selezionati, evidence validata/binding immutabile e payload OpenAI senza hash o percorsi. PR #560 integrata, 14 workflow post-merge PASS, backend/worker aggiornati e flag abilitato; quota0 e gpt-6-luna conservati. Accesso browser non completato: nuova opzione autenticata e richiesta statistica reale non collaudate; nessuna chiamata API aggiuntiva o avvio nativo nel rilascio. Il planner conserva la ricetta V1: catalogo, analisi PSF/background, segmentazione e decisioni checkpoint multiple restano aperti. Quota0 attiva e P6/BKL-051 invariati. [Contratto e rollback](PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md#collegamento-delle-misure-al-pianificatore).

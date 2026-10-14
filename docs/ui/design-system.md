@@ -3,9 +3,9 @@
 | Campo | Valore |
 |---|---|
 | Identificativo | DSG-UI-001 |
-| Versione | 2.1 |
+| Versione | 2.2 |
 | Stato | Baseline 2.0 Accepted; addendum immersivo pubblicato con limiti registrati |
-| Data | 29/09/2026 |
+| Data | 14/10/2026 |
 | Ambito | GitHub Pages, MkDocs, dashboard e hub |
 | Release | UI 7.0 |
 | Responsabile | Massimo Mainini |
@@ -219,3 +219,9 @@ nelle [note di rilascio](../releases/immersive-portal.md).
 Specifiche, mappa delle scene, dipendenze e gestione risorse:
 [DSG-UI-IMMERSIVE-001](immersive-portal-implementation.md).
 Evidence e stato di rilascio: [Immersive Portal](../releases/immersive-portal.md).
+
+## Addendum 2.2 — brand e stato delle catene, 14 ottobre 2026
+
+Asset Owner unico `docs/assets/images/dsg-brand-mark.png`, PNG trasparente 1254×1254 e SHA-256 `15c42df78d0dad73350005c6a2022f4a50174cca5526c95eb9c71fe73a51e52a`. Header custom/Material, fallback e favicon usano lo stesso asset. Nessun ritocco dei pixel; `object-fit:contain`, desktop 2.75 rem, mobile 1.8 rem sotto 62 rem e dimensioni intrinseche preservano proporzioni. Non inserire versioni locali per singola pagina.
+
+Tile Mission Control: titolo e descrizione su blocchi separati, wrapping degli ID, denominatori espliciti. Scientific assets/Processing restano parziali quando provenance è incompleta; unknown per errore è distinto da zero/assenza dopo lettura riuscita. I metadati conservati come ultima lettura non vengono descritti come freschi. [Riferimento tecnico](../developer/session-lineage-and-mission-control.md), [verifiche effettuate](../releases/2026-10-14-session-lineage-and-brand.md). La revisione2.2 documenta questa correzione e non estende l'acceptance immersiva o l'audit di accessibilità a prove non eseguite.

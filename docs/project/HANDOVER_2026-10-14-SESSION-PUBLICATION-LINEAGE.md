@@ -21,3 +21,9 @@ Links bind session and exact image-version fragment in the gallery. Metrics poin
 - Final CI, applicable reviews, merge, deployment and live-origin verification must be recorded on the PR. No released/accepted claim is made by this handover.
 
 Rollback: revert this bounded UI/CI change and redeploy Pages; gallery records, scientific files and private services are untouched. BKL-046 reopening, M27 research STOP, BKL-051 OPEN/NOT_VALIDATED, P6 acceptance limits, BKL-043 lifecycle, BKL-050 and Safety remain unchanged.
+
+## Esito finale registrato — 14 ottobre 2026
+
+Il gate di rilascio inizialmente pending sopra è concluso per questo package: [PR587 / ricevuta post-merge](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/587#issuecomment-6165144093), head revisionato `552c0b9ef456d5dd652b942d7e903ab3d801d437`, merge `67a391d549c266f510c0d1a0a886cf9a3535d5f4`. ARB e poi RQ IA separate APPROVED sullo stesso head; CI PR10/10 e workflow sul merge9/9 SUCCESS, [Pages38540952820](https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/38540952820) SUCCESS e verifica live registrata. Expected-head e zero-behind documentati sotto W-DSG-AEM-RULESET-001.
+
+Le sezioni di implementazione restano lo snapshot del rispettivo incremento. Per lo stato consolidato dopo PR589 leggere il [riferimento tecnico](../developer/session-lineage-and-mission-control.md) e le [ricevute complete](../releases/2026-10-14-session-lineage-and-brand.md): gli incrementi successivi ampliano il rinnovo al catalogo/Mission Control e non stabiliscono nuova accettazione scientifica.

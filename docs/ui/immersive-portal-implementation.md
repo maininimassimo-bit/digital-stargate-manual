@@ -254,3 +254,7 @@ CSS, bootstrap, script Allsky e import del renderer usano il riferimento di vers
 Verifiche: build strict; test di contenimento e allineamento a 1440/1007/768/390 px; refresh, preferenza persistente, errore/ripristino e teardown con fixture; regressione della cupola OPEN/CLOSED/UNKNOWN e degli altri hub. La verifica pubblica nel browser ha confermato immagine reale 1936 × 1096, stato ready, contenimento e allineamento. Evidence e commit sono nelle [note di rilascio](../releases/immersive-portal.md#incremento-anteprime-live-allsky-home-e-status-09102026).
 
 Rollback: revert delle PR Home/Status/cache nell’ordine inverso e rebuild Pages. Nessun ripristino di immagini, telemetria o configurazioni degli apparati è richiesto.
+
+## Aggiornamento del consumer e del brand — 14 ottobre 2026
+
+Il portale mantiene scene/marker e URL; PR587–589 correggono il consumer Scientific Data Engine, il dettaglio sessione e Mission Control, non il motore WebGL o le fonti fisiche. Lo stato di catena è letto da catalogo, gallery e pacchetti; AP-013 espone baseline documentale distinta dallo stato presente. Brand/header/favicon usano il PNG Owner condiviso, ridimensionato via CSS. [Manutenzione implementativa](../developer/session-lineage-and-mission-control.md), [ricevute](../releases/2026-10-14-session-lineage-and-brand.md). Non attribuire questi aggiornamenti a una nuova validazione scientifica, della safety o di tutte le scene immersive.

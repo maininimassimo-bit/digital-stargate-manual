@@ -70,3 +70,9 @@ Sono stati confrontati:
 ## 6. Conclusione
 
 Il rischio principale non era soltanto grafico: la homepage duplicava valori fuori dal ciclo automatico di aggiornamento scientifico. UI 7.0 elimina la duplicazione e consuma le projection già aggiornate dal workflow, senza ampliare permessi o automazioni di push/deploy.
+
+## Follow-up del14 ottobre 2026 — catene del portale
+
+Questo addendum non riscrive l'audit storico del10 settembre. PR587–589 hanno corretto ulteriori fonti stale: placeholder Processing/Publication/Scientific assets, Transfer non proiettato, catalogo non riletto, copertura Mission Control fissa e pilot 1 file presentato come corrente. Il build Pages verifica ora i pacchetti documentali; entrambi i consumer rileggono fonti bounded/no-store a load/visibilità/60s visibili/manuale. Discovery 203/203 resta snapshot4 agosto; AP-013 limite accettato 30 file e scheduler storico sono qualificati.
+
+[Verifiche online ed esiti dei gate](../releases/2026-10-14-session-lineage-and-brand.md), [contratto di manutenzione](../developer/session-lineage-and-mission-control.md). I conteggi del controllo14 ottobre sono snapshot, non nuovi fallback statici; RAW/provenance non attestati restano espliciti.

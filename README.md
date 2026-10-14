@@ -124,3 +124,7 @@ Per lo stato corrente consultare, nell'ordine:
 
 **Digital StarGate** — osservatorio remoto, piattaforma scientifica e repository enterprise governati come un unico sistema.
 BKL-051: recovery Owner PR #518 rilasciata e verificata; [caller locale candidato](docs/project/BKL-051-S4-OPERATOR-CALLER-2026-10-09.md), runtime disattivato e milestone aperta.
+
+## Riferimenti tecnici del portale — 14 ottobre 2026
+
+Le correzioni pubblicate PR587–589 sono descritte in [Catene informative e Mission Control](docs/developer/session-lineage-and-mission-control.md) e nelle [ricevute di rilascio](docs/releases/2026-10-14-session-lineage-and-brand.md). I riferimenti distinguono catalogo, manifest documentale EAGLE, gallery, provenienza parziale e brand condiviso; includono rinnovo automatico, verifica, guasti e rollback.

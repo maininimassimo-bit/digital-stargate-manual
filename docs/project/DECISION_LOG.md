@@ -1,5 +1,9 @@
 # Decision Log
 
+## 14 ottobre 2026 — consumer di catena e fonte unica del brand
+
+Correzione di presentazione entro AP-013/AP-014/DSGP-SOL-001: associare pubblicazioni tramite ID esatto Owner, proiettare Transfer dal manifest documentale e byte reali, rileggere catalogo/gallery/pacchetti ogni 60s visibili e manualmente, aggregare Mission Control con denominatori e distinguere baseline AP-013/storico dai dispositivi presenti. PNG Owner copiato invariato e ridimensionato via CSS comune. Non introduce ADR, authority, nuova pubblicazione astronomica o modifica runtime. PR587–589 consegnate; [decisioni, limiti e ricevute](../releases/2026-10-14-session-lineage-and-brand.md). Questo aggiornamento registra fatti del portale e non sostituisce le decisioni dei package seguenti.
+
 ## PixInsight — integrazione statistica candidata
 
 Incremento autorizzato del ciclo adattivo: consenso separato per statistiche dei pixel, analisi locale dei master selezionati, evidence validata/binding immutabile e payload OpenAI senza hash o percorsi. PR #560 integrata, 14 workflow post-merge PASS, backend/worker aggiornati e flag abilitato; quota0 e gpt-6-luna conservati. Accesso browser non completato: nuova opzione autenticata e richiesta statistica reale non collaudate; nessuna chiamata API aggiuntiva o avvio nativo nel rilascio. Il planner conserva la ricetta V1: catalogo, analisi PSF/background, segmentazione e decisioni checkpoint multiple restano aperti. Quota0 attiva e P6/BKL-051 invariati. [Contratto e rollback](PIAI-ADAPTIVE-WORKFLOW-2026-10-11.md#collegamento-delle-misure-al-pianificatore).

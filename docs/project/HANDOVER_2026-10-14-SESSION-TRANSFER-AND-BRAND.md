@@ -17,3 +17,9 @@ Owner's transparent PNG copied byte-for-byte to the shared theme brand asset, SH
 ## Validation and release
 
 Eleven transfer/reader/configuration regressions plus14 publication/routing regressions passed locally; strict Pages build and no-inline-script gate passed. Local browser: verified6/6 -> synthetic incomplete3/6 -> restored6/6; gallery unavailability remains independent. Mobile390px shows the unchanged logo at36px with no horizontal overflow; desktop logo uses contain sizing, light/dark checked. Final exact-head CI, separate ARB then RQ and merge/deployment/live checks remain required and will be recorded in the delivery PR. Rollback: revert UI/build-generator/brand configuration and redeploy; canonical packages, scheduler, private gallery and device/safety authority remain untouched. BKL statuses and M27 scientific acceptance remain unchanged.
+
+## Esito finale registrato — 14 ottobre 2026
+
+Il gate di rilascio inizialmente pending sopra è concluso per questo package: [PR588 / ricevuta post-merge](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/588#issuecomment-6165888912), head revisionato `23ca6caeb91d882edf0430533a79e8d0f765adc3`, merge `b5b170a6ee560328cf23bab99acd6c24b3a710ef`. ARB e poi RQ IA separate APPROVED sullo stesso head; CI PR17/17 e workflow sul merge16/16 SUCCESS, [Pages38545910838](https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/38545910838) SUCCESS e verifica live registrata. Expected-head e zero-behind documentati sotto W-DSG-AEM-RULESET-001.
+
+Le sezioni di implementazione restano lo snapshot del rispettivo incremento. Per lo stato consolidato dopo PR589 leggere il [riferimento tecnico](../developer/session-lineage-and-mission-control.md) e le [ricevute complete](../releases/2026-10-14-session-lineage-and-brand.md): gli incrementi successivi ampliano il rinnovo al catalogo/Mission Control e non stabiliscono nuova accettazione scientifica.
