@@ -1,10 +1,10 @@
 name: Scientific transients S1 preparation
 on:
   pull_request:
-    paths: ['tools/scientific_transients/**', 'docs/javascripts/scientific-transients-portal.js', 'docs/javascripts/s4-lab-*', 'docs/scientific-transients-lab/**', 'docs/scientific-transient-analysis/**', 'docs/styles/scientific-transients.css', 'tools/pixinsight/local_pilot/transport_http.py', 'infrastructure/scientific-transients-lab/**', 'infrastructure/pixinsight-pilot/**', 'docs/project/BKL-051-S1-*', 'docs/project/evidence/BKL-051-*', '.github/workflows/scientific-transients-s1.yml']
+    paths: ['tools/scientific_transients/**', 'docs/javascripts/scientific-*.js', 'docs/javascripts/dsg-theme-manager.js', 'docs/javascripts/s4-lab-*', 'docs/scientific-transients-lab/**', 'docs/scientific-transient-analysis/**', 'docs/styles/scientific-transients.css', 'tools/pixinsight/local_pilot/transport_http.py', 'infrastructure/scientific-transients-lab/**', 'infrastructure/pixinsight-pilot/**', 'docs/project/BKL-051-S1-*', 'docs/project/evidence/BKL-051-*', '.github/workflows/scientific-transients-s1.yml', '.github/scripts/test-transient-mpc-schema.ps1']
   push:
     branches: [main]
-    paths: ['tools/scientific_transients/**', 'docs/javascripts/scientific-transients-portal.js', 'docs/javascripts/s4-lab-*', 'docs/scientific-transients-lab/**', 'docs/scientific-transient-analysis/**', 'docs/styles/scientific-transients.css', 'tools/pixinsight/local_pilot/transport_http.py', 'infrastructure/scientific-transients-lab/**', 'infrastructure/pixinsight-pilot/**', 'docs/project/BKL-051-S1-*', 'docs/project/evidence/BKL-051-*', '.github/workflows/scientific-transients-s1.yml']
+    paths: ['tools/scientific_transients/**', 'docs/javascripts/scientific-*.js', 'docs/javascripts/dsg-theme-manager.js', 'docs/javascripts/s4-lab-*', 'docs/scientific-transients-lab/**', 'docs/scientific-transient-analysis/**', 'docs/styles/scientific-transients.css', 'tools/pixinsight/local_pilot/transport_http.py', 'infrastructure/scientific-transients-lab/**', 'infrastructure/pixinsight-pilot/**', 'docs/project/BKL-051-S1-*', 'docs/project/evidence/BKL-051-*', '.github/workflows/scientific-transients-s1.yml', '.github/scripts/test-transient-mpc-schema.ps1']
 permissions:
   contents: read
 jobs:
@@ -23,18 +23,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Verify proposed intake rejects unsafe scientific claims without network
-        run: node --test tools/scientific_transients/contract.test.mjs tools/scientific_transients/reference.test.mjs tools/scientific_transients/measurement.test.mjs tools/scientific_transients/uncertainty.test.mjs tools/scientific_transients/photometry.test.mjs tools/scientific_transients/epoch.test.mjs tools/scientific_transients/pixel.test.mjs tools/scientific_transients/native_aperture.test.mjs tools/scientific_transients/portal.test.mjs
-      - name: Verify isolated browser Owner sequencing and token privacy without Google access
-        run: node --test tools/scientific_transients/lab_owner.test.mjs
-      - name: Verify catalog formal covariance and shared-reference epoch blocks
-        run: python -m unittest tools.scientific_transients.test_reference_covariance -v
-      - name: Verify private retained report archive without native or cloud access
-        run: python -m unittest tools.scientific_transients.test_report_bundle -v
-      - name: Verify bounded isolated gateway and public source staging without cloud access
-        run: python -m unittest tools.scientific_transients.test_lab_gateway tools.scientific_transients.test_lab_runtime tools.scientific_transients.test_lab_release_plan tools.scientific_transients.test_lab_cli -v
-      - name: Test dedicated private queue lifecycle and HTTP roles
-        run: python -m unittest tools.scientific_transients.test_queue tools.scientific_transients.test_local_registry tools.scientific_transients.test_attempt_journal tools.scientific_transients.test_receipt_coordinator tools.scientific_transients.test_native_aperture tools.scientific_transients.test_native_supervisor tools.scientific_transients.test_local_report tools.scientific_transients.test_local_driver tools.scientific_transients.test_reservation_intent tools.scientific_transients.test_owner_recovery tools.scientific_transients.test_operator_run tools.scientific_transients.test_reporting_draft tools.scientific_transients.test_mpc_export tools.scientific_transients.test_cbat_preview tools.scientific_transients.test_channel_review tools.scientific_transients.test_preview_review_ledger tools.scientific_transients.test_isolated_concurrency
+      - name: Verify all scientific transient browser contracts and private local views
+        shell: pwsh
+        run: |
+          $testFiles = Get-ChildItem -LiteralPath tools/scientific_transients -Filter '*.test.mjs' | ForEach-Object { $_.FullName }
+          if ($testFiles.Count -eq 0) { throw 'No scientific transient browser tests found' }
+          node --test @testFiles
+      - name: Verify all offline scientific transient Python contracts and lifecycle checks
+        shell: pwsh
+        run: |
+          $testModules = Get-ChildItem -LiteralPath tools/scientific_transients -Filter 'test_*.py' | ForEach-Object { 'tools.scientific_transients.' + $_.BaseName }
+          if ($testModules.Count -eq 0) { throw 'No scientific transient Python tests found' }
+          python -m unittest @testModules -v
       - name: Validate private synthetic MPC XML against pinned official submission schema
         shell: pwsh
         run: ./.github/scripts/test-transient-mpc-schema.ps1

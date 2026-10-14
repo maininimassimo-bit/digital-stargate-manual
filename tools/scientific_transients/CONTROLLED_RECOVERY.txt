@@ -1,0 +1,35 @@
+BKL-051 - Recupero controllato esplorativo M27, 15 ottobre 2026
+
+Evidenze: F:\DigitalStarGate\BKL051\recupero-controllato-M27-20261015
+Protocollo congelato prima delle due esecuzioni native. Sedici gaussiane
+deterministiche, sigma 2 pixel, flussi .003/.01/.03/.1 in somma di campioni
+normalizzati, su un solo fondo Green calibrato sperimentale. Nessun rumore
+Poisson aggiunto, nessuna PSF fisica misurata. Raggio diagnostico 3 pixel.
+Nessuna selezione per evitare stelle; tutte le inserzioni nel denominatore.
+
+Esito: 1/16 recuperi diagnostici, 15 mancate, 0 ambigue. Nessun ritocco dei
+parametri e nessuna ripetizione per migliorare il risultato. Le 4344/4345
+sorgenti rilevate nelle due copie non sono falsi positivi. Le sonde sul fondo
+non sono controlli nulli astronomici qualificati. Indipendenza non attestata.
+Controlli nulli qualificati 0; limite FP non disponibile; nessuna accettazione.
+
+Il worker riceve immagini opache senza posizioni/verita delle inserzioni:
+separazione strutturale del payload, non cecita indipendentemente attestata.
+Il sigillo archivistico e successivo al primo scoring: non e prova pre-verita.
+History, log, script, manifest e ricevute dei due processi propri sono conservati.
+Entrambi i processi propri sono terminati; nessuna istanza utente modificata.
+Originale invariato. Copie salvate/riaperte senza clipping o normalizzazione;
+pixel negativi e sopra uno conservati. Non equivalgono a validazione scientifica.
+
+Flusso misurato, varianza completa, significativita e bias non disponibili.
+Maschera ammette tutti i pixel; qualita bad-pixel non validata. Parametri del
+rilevatore esplorativi, non policy scientifica approvata. Revisione visiva pendente.
+Portale: importa Risultato-minimizzato-portale-v2.json; verifica struttura e
+contatori, non ripete il rilevamento ne autentica autonomamente i byte originali.
+
+Correzione software successiva alla prima analisi: una sorgente associata a
+piu inserzioni rende ambigue tutte le associazioni coinvolte. Non si sceglie
+un vincitore e non si contano due recuperi della stessa sorgente. Questa regola
+non era esplicitata nel primo scorer: non e una decisione pre-registrata.
+La ricevuta M27 non contiene sorgenti condivise; il ricalcolo resta identico.
+Originali e prima implementazione sono conservati nel pacchetto precedente.

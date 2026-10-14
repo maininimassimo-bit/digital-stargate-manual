@@ -1,5 +1,10 @@
 # Project Backlog
 
+## BKL-051 — piano e scheda del caso, 15 ottobre 2026
+
+Incremento locale candidato del percorso piano/campione, esecuzione vincolata, evidenze e dossier. Python445 OK (uno skip symlink), JavaScript274 PASS, Pages992HTML PASS, MPC49/XSD9 PASS; ARB poi RQ locali APPROVED sul tree applicativo, non sul rilascio remoto. BKL-051 OPEN / NOT_VALIDATED, stima37%, zero controlli qualificati; nessuna voce di acceptance chiusa. [Componenti, prove, gate residui e rollback](BKL-051-PLAN-CASE-WORKSPACE-2026-10-15.md).
+
+
 ## Planner: correzione delle tracce numeriche — 14 ottobre 2026
 
 Su richiesta Owner, la policy advisory F9 1.3 distingue i residui fino a 1e-12 mm dalla pioggia positiva superiore a tale tolleranza. Il valore originale resta nella projection; cielo, tabella, semafori, fattori meteo e finestre usano la medesima normalizzazione. La ri-derivazione non rinnova gli orologi del forecast. Ore indeterminate, pioggia debole e altri vincoli restano bloccanti; nessuna modifica della Safety o di BKL-032. [Handover, evidenze e rollback](HANDOVER_2026-10-14-PLANNER-NUMERICAL-PRECIPITATION.md).

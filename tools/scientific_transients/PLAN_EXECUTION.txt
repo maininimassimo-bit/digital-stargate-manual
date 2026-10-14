@@ -1,0 +1,63 @@
+BKL-051 — collegamento diagnostico piano/caso/immagine/job
+14 ottobre 2026 — candidato locale, non rilasciato, NOT_VALIDATED
+
+plan_execution.PlanExecution aggiunge un vincolo prima del dispatch senza
+modificare lo schema della coda o l'authority del chiamante esistente.
+
+PREPARAZIONE
+PlanExecution.prepare riceve un PlanVersion verificato, caso e singola immagine,
+OperatorPlan già verificato, testa attesa della cronologia, dichiarazione del
+revisore, motivazione e radice isolata dell'archivio. Richiede corrispondenza
+esatta fra INPUT e immagine scelta, ALGORITHM e algoritmo congelato, CONTRACT
+e regole congelate. Verifica i byte nel registro esistente. Seleziona un job
+esplicito: non crea job, non prende il prossimo disponibile e non cambia coda.
+
+Il binding create-only conserva hash del piano e della sua testa, caso,
+immagine, job, manifest, piano operativo e copia della motivazione. Contiene
+soltanto PRELIMINARY_DIAGNOSTIC e SINGLE_FRAME_OF_TRIPLET: non accetta un piano
+confermativo e non dichiara copertura dell'intera tripletta.
+
+CLI SOLO OFFLINE
+python -m tools.scientific_transients.plan_execution --plan F:/.../<versionRef>
+  --plan-sha256 <sha> --head <head> --case <caseRef> --frame <frameRef>
+  --operator F:/.../operator-plan.json --operator-sha256 <sha>
+  --root F:/.../plan-bindings --actor <32-hex> --utc <UTC-ISO>
+  --rationale F:/.../motivazione.txt
+
+Riunire gli argomenti su una sola riga nel proprio terminale. Non esistono flag
+di lancio o caricamento credenziali in questa CLI. Le cartelle devono esistere;
+il binding usa come nome il reservationRef del piano operativo. Un percorso
+preesistente o una preparazione parziale non sono sovrascritti o riparati.
+
+ESECUZIONE API PER CHIAMANTI FIDATI
+run_selected riusa OperatorPlan.run_selected e ReservationIntent. Richiede il
+booleano native_launch_authorized=True e consuma l'istanza prima del dispatch.
+Ricontrolla binding, piano e testa, piano operativo e motivazione prima della
+prenotazione, delle letture pre-avvio e immediatamente prima dello spawn.
+Nessun processo parte per il solo prepare/verify. Nessun daemon o batch.
+
+Non usare questa API per aggirare autorizzazioni native/cloud o gate del
+progetto. L'implementazione e le sue prove non autorizzano esecuzioni reali.
+
+RISULTATI E RECOVERY
+Dopo l'esito tecnico, il chiamante conserva una ricevuta separata. Riusa
+PlanVersion.link_attempt, AttemptJournal e il verificatore del report per
+registrare il tentativo nel piano e produrre la normale ricevuta del portale.
+Un errore prima/durante il dispatch resta incerto e non permette replay.
+Se il piano cambia durante il lavoro, il risultato tecnico rimane conservato
+e il collegamento resta RECONCILIATION_REQUIRED: non si rilancia il job per
+riparare l'evento mancante. Una ricevuta di collegamento mancante può anche
+essere successiva a un evento effettivamente scritto: ispezionare la catena.
+Il binding non riacquisisce handle di processi o lease dopo restart e non
+attesta la fermata di un processo in un esito incerto.
+
+PORTALE E LIMITI
+La ricevuta PlanVersion.view risultante è compatibile con la vista esistente;
+l'audit dei prerequisiti può rileggere il journal e mantiene BLOCKED, zero
+qualificati e statistica non disponibile. Non è un nuovo pulsante di lancio
+nel portale e non è l'esecutore scientifico delle tre immagini.
+
+Prove conservate su F: con coda MemoryStore, trasporto locale in memoria e
+processo simulato. Nessuna rete, credenziale, risorsa cloud o istanza reale
+PixInsight usata. L'algoritmo scientifico completo, l'esecuzione della tripletta,
+l'avvio autenticato dal portale, le attestazioni e la validazione restano aperti.

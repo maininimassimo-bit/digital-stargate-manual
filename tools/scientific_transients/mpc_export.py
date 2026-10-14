@@ -1,4 +1,4 @@
-"""Private ADES 2022 preview for declared numbered-object astrometry. Never sends."""
+"""Private ADES 2022 preview for declared object astrometry. Never sends."""
 import datetime as dt
 from decimal import Decimal
 import os
@@ -11,6 +11,7 @@ from tools.scientific_transients.local_registry import safe_path, fingerprint, r
 from tools.scientific_transients.queue import fields, digest
 
 PROTOCOL = 'DSG_MPC_ADES_PREVIEW_V1'
+REQUEST_V2 = 'DSG_MPC_ADES_REQUEST_V2'
 SCHEMA_COMMIT = 'f4158f96a049b83dfcf848fa33eaac4391db9460'
 SCHEMA_SHA256 = '2a5d049808e947cffa11a973a2395c1dde09f00207313a496450b0ef1be27026'
 SCHEMA_URL = f'https://raw.githubusercontent.com/IAU-ADES/ADES-Master/{SCHEMA_COMMIT}/xsd/submit.xsd'
@@ -39,13 +40,24 @@ def names(values):
     return [text(v, 100) for v in values]
 
 
+def object_id(row,version2):
+    if not version2:
+        require(type(row['permID']) is str and re.fullmatch('[1-9][0-9]{0,24}',row['permID']),'MPC_NUMBERED_OBJECT')
+        return 'permID',row['permID']
+    identity=row['objectID'];fields(identity,{'kind','value'})
+    require(type(identity['kind']) is str and identity['kind'] in {'PERMID','TRKSUB'} and type(identity['value']) is str,'MPC_OBJECT_ID')
+    kind,value=identity['kind'],identity['value']
+    require(re.fullmatch('[1-9][0-9]{0,24}' if kind=='PERMID' else '[-A-Za-z0-9_]{1,8}',value) is not None,'MPC_OBJECT_ID_VALUE')
+    return ('permID' if kind=='PERMID' else 'trkSub'),value
+
+
 def inspect(registry, request_path, expected_sha):
     require(digest(expected_sha), 'MPC_EXPECTED_DIGEST')
     request, actual = read_json(request_path)
     require(actual == expected_sha, 'MPC_REQUEST_CHANGED')
     fields(request, {'protocol', 'exportRef', 'bindingRef', 'manifestSha256',
                      'sourceOriginDeclared', 'context', 'observations'})
-    require(request['protocol'] == PROTOCOL and opaque(request['exportRef'])
+    require(type(request['protocol']) is str and request['protocol'] in {PROTOCOL,REQUEST_V2} and opaque(request['exportRef'])
             and opaque(request['bindingRef']) and digest(request['manifestSha256']), 'MPC_IDENTITY')
     require(type(request['sourceOriginDeclared']) is str
             and request['sourceOriginDeclared'] in {'REAL', 'SYNTHETIC', 'NOT_ATTESTED'}, 'MPC_ORIGIN')
@@ -61,12 +73,13 @@ def inspect(registry, request_path, expected_sha):
     require(type(rows) is list and 1 <= len(rows) <= 1024, 'MPC_OBSERVATIONS')
     manifest = registry.verify(request['bindingRef'], request['manifestSha256'])
     records = {r['path']: r for r in manifest['files']}
-    seen, missing, selected = set(), [], set()
+    seen, seen_object_images, missing, selected = set(), set(), [], set()
+    version2=request['protocol']==REQUEST_V2
     for row in rows:
-        fields(row, {'permID', 'obsTime', 'timeMeaningDeclared', 'coordinateMeaningDeclared',
+        fields(row, {'objectID' if version2 else 'permID', 'obsTime', 'timeMeaningDeclared', 'coordinateMeaningDeclared',
                      'uncertaintyConventionDeclared', 'ra', 'dec', 'rmsRA', 'rmsDec', 'rmsCorr',
                      'rmsTime', 'astCat', 'imagePath', 'reductionPath'})
-        require(type(row['permID']) is str and re.fullmatch('[1-9][0-9]{0,24}', row['permID']), 'MPC_NUMBERED_OBJECT')
+        id_kind,id_value=object_id(row,version2)
         require(type(row['obsTime']) is str and re.fullmatch(
             r'[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]{1,6})?Z', row['obsTime']), 'MPC_UTC_TEXT')
         try:
@@ -76,7 +89,7 @@ def inspect(registry, request_path, expected_sha):
         require(row['timeMeaningDeclared'] == 'MID_EXPOSURE_UTC'
                 and row['coordinateMeaningDeclared'] == 'J2000_ASTROMETRIC_DEGREES'
                 and row['uncertaintyConventionDeclared'] == 'RANDOM_1SIGMA_ARCSEC_RA_COSDEC_TIME_SECONDS', 'MPC_CONVENTIONS')
-        key = (row['permID'], instant)
+        key = (id_kind,id_value,instant)
         require(key not in seen, 'MPC_DUPLICATE_OBJECT_TIME'); seen.add(key)
         decimal(row['ra'], 0, 360, 13, 9); require(Decimal(row['ra']) < 360, 'MPC_RA_RANGE')
         decimal(row['dec'], -90, 90, 13, 9)
@@ -91,7 +104,10 @@ def inspect(registry, request_path, expected_sha):
             decimal(row['rmsCorr'], -1, 1, 14, 11, False)
         for key in ('imagePath', 'reductionPath'):
             relative(row[key]); require(row[key] in records, 'MPC_UNREGISTERED_EVIDENCE'); selected.add(row[key])
-        missing.append({'permID': row['permID'], 'obsTime': row['obsTime'], 'unknownFields': absent})
+        image_key=(id_kind,id_value,records[row['imagePath']]['sha256'])
+        require(image_key not in seen_object_images,'MPC_REUSED_IMAGE_FOR_OBJECT');seen_object_images.add(image_key)
+        missing.append({**({'objectID':row['objectID']} if version2 else {'permID':row['permID']}),
+                        'obsTime': row['obsTime'], 'unknownFields': absent})
     return {'protocol': PROTOCOL, 'requestSha256': actual, 'declarations': request,
             'manifest': manifest, 'selectedEvidence': [records[p] for p in sorted(selected)],
             'unknownFieldsByObservation': missing, 'declarationsAttested': False,
@@ -122,7 +138,8 @@ def render(value):
     data = ET.SubElement(block, 'obsData')
     for row in request['observations']:
         observation = ET.SubElement(data, 'optical')
-        add(observation, 'permID', row['permID']); add(observation, 'mode', context['telescope']['detector'])
+        id_kind,id_value=object_id(row,request['protocol']==REQUEST_V2)
+        add(observation,id_kind,id_value); add(observation, 'mode', context['telescope']['detector'])
         add(observation, 'stn', context['mpcCode'])
         for key in ('obsTime', 'rmsTime', 'ra', 'dec', 'rmsRA', 'rmsDec', 'rmsCorr', 'astCat'):
             if row[key] is not None: add(observation, key, row[key])

@@ -1,0 +1,35 @@
+BKL-051 — associazione privata originale / derivato / tentativo
+14 ottobre 2026. Solo diagnostica preliminare, NOT_VALIDATED.
+
+DerivedInputBinding.prepare rilegge il preflight completo: originale nel caso
+e nel manifest candidato, stessa bozza candidata, derivato corrispondente
+all'INPUT preparato, algoritmo e regole congelati, libreria corrente e prova
+nativa no-normalize ancorata per hash. Tutti i confronti devono essere veri.
+Scrive una nuova prova privata create-only che mantiene distinti rawSha256
+e derivedSha256, piano/caso/frame, job/manifest/OperatorPlan e pin delle fonti.
+I percorsi restano in archivio privato; non esportarli nel portale.
+
+PlanExecution.prepare(..., derived=proof) accetta esclusivamente un'istanza
+DerivedInputBinding verificata. Il controllo viene ripetuto prima delle
+richieste di prenotazione e prima dello spawn. Restano autorizzazione esplicita
+del lancio, consumo al primo tentativo e divieto di replay automatico.
+Non esiste un comando CLI che lanci o recuperi automaticamente un processo.
+
+Al termine link_attempt rilegge fonti e journal; verifica job/manifest/INPUT,
+conserva una copia della prova nell'evento INPUT_DERIVATION e registra il suo
+SHA256. La copertura si riferisce all'originale del caso, mai a un hash raw
+riscritto. Se il piano o le fonti cambiano durante il lavoro, il risultato
+tecnico rimane conservato e il collegamento richiede riconciliazione, senza
+rilancio. Un file mancante o cambiato non viene sostituito con una dichiarazione.
+
+La vista V1 storica rimane compatibile. Le viste contenenti derivati usano V2
+e mostrano solo il digest della prova con l'avviso di calibrazione non attestata.
+Readiness e rapporto tripletta riaprono la prova archiviata e ricontrollano
+le fonti correnti: un originale alterato rende la verifica indisponibile,
+senza cancellare lo stato tecnico storico. Nessuna combinazione fotometrica,
+varianza completa, significatività, controllo qualificato o PASS statistico.
+
+Le prove automatiche nuove usano esclusivamente fixture e processi MOCK.
+La fixture della ricevuta nativa nei test non è una nuova prova PixInsight.
+La prova nativa reale precedente rimane separata e non è stata ripetuta.
+I quattro piloti M27 fuori dal campione di 59 restano non associabili.

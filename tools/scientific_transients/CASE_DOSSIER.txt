@@ -1,0 +1,94 @@
+BKL-051 — dossier del caso e revisione interna sul contenuto esatto
+15 ottobre 2026. R12 parziale, nessun invio o acceptance scientifica.
+
+case_dossier.freeze conserva una nuova cartella create-only con copia del
+piano congelato e della catena di eventi, evidenze referenziate dei tentativi
+del caso, vista del piano, tripletta ed eventuale confronto multi-epoca con
+budget originale per hash. Copia dati disponibili, preserva fallimenti e
+conta esplicitamente riferimenti mancanti/modificati e legami non verificati.
+Un dossier con lacune non diventa completo mediante una revisione.
+Non copia cartelle arbitrarie del runtime né lease o credenziali. I file
+referenziati sono distinti dalle dipendenze scientifiche rimaste esterne.
+
+MAX8GiB e4096 sorgenti sono limiti di archiviazione, non soglie scientifiche;
+spazio libero verificato prima della copia. Nessuna troncatura silenziosa.
+Interruzioni/modifiche lasciano fallimento e file parziali, non overwrite.
+File, piano copiato e vincoli preview/caso vengono ricontrollati prima di
+consegnare il pacchetto. Un hash locale non è un'identità autenticata o storage
+fisicamente immutabile. La provenienza a monte e le dipendenze esterne non
+diventano un archivio autonomamente riproducibile per la sola copia del journal.
+
+La sottocartella preview contiene esattamente preview.json, preview.txt ed
+export.json. Il registro PreviewReviewLedger già esistente ora accetta il
+formato SCIENTIFIC_INTERNAL oltre ai quattro formati storici CBAT/MPC/TNS/VSX.
+È un tipo INTERNO, non un destinatario o servizio remoto. Le sue azioni sono
+KEEP_FOR_REVIEW, REJECT_CANDIDATE, FOLLOW_UP e REVOKE_REVIEW: nessuna APPROVE,
+scientificAcceptance o submissionAuthorized. Vecchi canali e archivi preservati.
+
+Il registro congela i tre file di anteprima, che elencano le impronte delle
+evidenze conservate. La vista collega separatamente packageSHA, ledgerAnchorSHA,
+ledgerHeadSHA e testa del piano. Un nuovo evento del piano rende il dossier
+storico; non trasferisce una decisione al contenuto nuovo. Un pacchetto
+modificato o indisponibile blocca nuove revisioni ma lascia consultabile la
+catena del registro; la revoca resta consentita sul registro congelato e
+conserva la decisione originale. Motivazioni, identità opache e UTC sono
+dichiarazioni conservate, non autenticazione Owner o prova temporale esterna.
+
+Il portale importa solo la vista minimizzata e mostra stato del pacchetto,
+confronto col piano corrente, lacune, cronologia, revoche e impronte complete.
+Il modulo genera un identificativo locale solo a richiesta dell'utente. Il
+bottone di salvataggio prepara un JSON da applicare sul PC: non registra già
+una revisione. Nuovo file cancella azione/target/motivazione precedenti, letture
+tardive non sostituiscono quelle successive. Massimo1MiB, nessuna persistenza,
+upload, autorizzazione o lancio. Le motivazioni complete restano nel registro
+privato, non nell'export minimizzato. Nessuna foto o immagine viene pubblicata.
+
+CLI OFFLINE
+python -m tools.scientific_transients.case_dossier freeze --plan F:/.../version
+ --plan-sha <sha> --case <caseRef> --journals F:/.../map.json --output-root F:/.../dossiers
+ --budget F:/.../budget.json --budget-sha <sha> --origin SYNTHETIC_TEST
+python -m tools.scientific_transients.case_dossier prepare-review --package F:/.../<dossierRef>
+ --package-sha <sha> --ledger-root F:/.../ledgers --ledger-ref <opaqueRef>
+python -m tools.scientific_transients.case_dossier view --package F:/.../<dossierRef>
+ --package-sha <sha> --ledger F:/.../<ledgerRef> --anchor-sha <sha> --head-sha <sha>
+ --current-plan F:/.../version --current-plan-sha <sha> --output F:/.../nuova-vista.json
+python -m tools.scientific_transients.case_dossier apply-review --package F:/.../<dossierRef>
+ --package-sha <sha> --ledger F:/.../<ledgerRef> --anchor-sha <sha>
+ --request F:/.../richiesta.json --request-sha <sha>
+Riunire gli argomenti di ciascun comando su una riga. Nuove esportazioni
+create-only. Conservare le ricevute e usare la testa restituita dal registro;
+testa obsoleta, richiesta modificata o pacchetto differente vengono respinti.
+
+DIMOSTRAZIONE
+F:/DigitalStarGate/BKL051/dimostrazione-dossier-caso-20261015
+Riutilizza i tre MOCK job della dimostrazione multi-epoca precedente, senza
+nuovi job o processi nativi.69 file referenziati conservati. Tre viste distinte:
+prima della revisione, dopo FOLLOW_UP sintetico, dopo REVOKE_REVIEW sintetico.
+Gli eventi sono esclusivamente simulazioni software, NON decisioni Owner.
+Piano e journal precedenti non sono modificati. Dossier e registro sono nuovi.
+Il pacchetto/registro privato contiene i percorsi nelle rispettive cartelle;
+le viste minimizzate sono distinte e non li esportano nel portale.
+
+Limiti: validazione scientifica mancante, immagini e sorgenti native a monte
+non validate, file scientifici conservati ma nessuna anteprima immagine
+automatica nuova, archivi esterni e identità dichiarate. Il percorso completo
+su evidenze reali e con Owner autenticato non è accettato. R12/BKL-051 OPEN.
+R13 resta distinto: selezione del canale, requisiti provider, policy e invio
+non derivano da questo dossier. Nessun controllo indipendente qualificato.
+
+ALLEGATO DI CONTESTO (15 ottobre)
+freeze accetta un descrittore privato --recovery con --recovery-sha esatto.
+Campi: directory, prelaunchSha256, sealSha256, resultSha256. Il verificatore
+ricontrolla l'esperimento e il risultato prima di copiare tutti i file del
+sigillo, il sigillo stesso e la ricevuta v2. Limiti di spazio e byte invariati.
+La vista V2 espone solo CONTEXT_ONLY_NOT_CASE_RECOVERY_OR_VALIDATION; la V1
+precedente resta leggibile. Nessuna posizione, percorso o immagine nel JSON
+minimizzato. Il contesto non cambia piano, esiti o conteggi qualificati.
+Dipendenze esterne e originale scientifico a monte non diventano archiviati
+o validati solo per questa copia. Package completo di dipendenze: false.
+
+PIANI SENZA EVENTI
+Il congelamento conserva anche la cartella events vuota: un piano non ancora
+eseguito/revisionato deve riaprirsi senza inventare eventi. Il primo tentativo
+su input reali ha evidenziato questa omissione; il pacchetto fallito e conservato
+e quello corretto ha un nuovo identificativo. Nessuna esecuzione implicita.

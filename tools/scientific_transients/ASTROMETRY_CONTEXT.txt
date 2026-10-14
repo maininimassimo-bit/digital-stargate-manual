@@ -1,0 +1,52 @@
+BKL-051 — astrometria candidata e tempi nel flusso degli input
+14 ottobre 2026. R05 parziale, non validazione scientifica.
+
+inspect_context collega originale Green, derivato precedente e nuova copia
+con WCS mediante la provenienza minimizzata e le ricevute native conservate.
+Verifica i byte di tutti i prodotti delle due ricevute, i parent delle copie,
+i manifest, gli script e l'identità dell'originale già presente nella lineage.
+Le librerie installate attuali non vengono eseguite né trattate come replay
+standalone della precedente installazione. Nessuna nuova query Gaia/IRSA.
+
+Il lettore XISF controlla firma, dimensione dell'header, singola immagine,
+geometria, keyword duplicate e assenza di DTD/entità. Non decodifica i pixel.
+Confronta DATE-OBS, DATE-AVG, EXPTIME e FILTER del parent copiato con l'originale;
+mantiene distinta l'immagine con WCS, senza promuoverla automaticamente a input
+del caller. La dichiarazione di pixel invariati resta quella del run nativo,
+non una nuova misura dei pixel durante l'importazione.
+
+Ricalcola dai centroidi conservati dx,dy,RMS radiale,residuo maggiore e quota
+della somma quadratica. Rilegge gli identificatori delle partizioni e respinge
+duplicazioni, overlap training/holdout, riferimento mancante e centroidi usati
+più volte. Per le associazioni presenti applica linearmente il quadrato +/-3
+pixel effettivo del chiamante; non lo presenta come taglio radiale o soglia
+scientifica. Le entry senza match o esterne non hanno coordinate predette
+sufficienti nel terminale: stati conservati, NON nuovamente riassociati.
+
+Il contesto mostra Gaia DR3 e propagazione nativa condizionale, convenzione
+geometrica del chiamante PixInsight, WCS candidata, covarianza completa null.
+La dispersione sui riferimenti selezionati non è incertezza per sorgente né
+prova indipendente del catalogo, della WCS, della propagazione o del clock.
+Non esporta coordinate, sourceId, sorgenti catalogo, posizione osservatorio,
+nomi dei file originali o percorsi privati.
+
+Le sottrazioni degli header usano Decimal sul PC e BigInt nel browser, fino a
+12 cifre frazionarie. Non passano attraverso i millisecondi Date di JavaScript.
+DATE-AVG meno DATE-OBS meno EXPTIME/2 resta scarto aritmetico, non correzione.
+La scala temporale fisica, clock e shutter non vengono attestati. Un tempo di
+fine presente solo nel derivato è esplicitamente distinto dai tempi acquisiti.
+
+M27 ricontrollato:914 riferimenti training,219 holdout,46 matched,1 senza match,
+172 esterni/non proiettabili. RMS0,38173440308151013 pixel; massimo1,948138788544815,
+quota quadratica56,61862940066125%. Originale DATE-OBS .2582853, copia .258;
+scarto -0,0002853s; DATE-AVG preservato; scarto dal mezzo dell'esposizione
+-2,9600412s. Nessun valore viene aggiustato e nessun clock accettato.
+
+Prodotto attuale:
+F:/DigitalStarGate/BKL051/contesto-astrometria-portale-M27-20261014-v2
+Abbinare la provenienza della cartella provenienza-piloti-M27-20261014.
+La prima esportazione locale resta conservata; la v2 esplicita che i casi
+esterni/senza associazione non sono stati riassociati. Non è un nuovo run nativo.
+La sezione del portale importa solo le due ricevute in memoria, massimo1MiB
+ciascuna, confronta i pin/identificativi e cancella risultati non corrispondenti.
+Zero controlli qualificati, significatività null, nessuna autorizzazione al run.

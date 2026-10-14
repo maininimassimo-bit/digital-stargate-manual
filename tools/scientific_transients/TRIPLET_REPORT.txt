@@ -1,0 +1,56 @@
+BKL-051 — copertura tecnica delle tre immagini
+14 ottobre 2026 — candidato locale, non pubblicato, NOT_VALIDATED
+
+triplet_report.inspect_triplet legge una versione verificata del piano e la
+testa degli eventi. Include TUTTI i tentativi ATTEMPT collegati al caso; non
+seleziona i tre migliori e non elimina fallimenti o tentativi aggiuntivi.
+Ogni journal viene riaperto con l'identità esatta registrata e la testa attesa.
+Un solo INPUT deve corrispondere a una delle tre immagini distinte del caso.
+ALGORITHM e CONTRACT devono coincidere con algoritmo e regole del piano.
+Per COMPLETED viene rieseguito local_report.inspect con il digest tecnico.
+
+TECHNICAL_COVERAGE_COMPLETE richiede esattamente tre tentativi collegati,
+ognuno completato e ricontrollato, uno per ogni immagine distinta. Mancanze,
+fonti alterate, associazioni errate, ripetizioni o fallimenti danno INCOMPLETE.
+Lo stato di fallimento resta visibile nella ricevuta e nel piano. La verifica
+di un journal fallito non pretende di verificare tutti i suoi checkpoint.
+
+La copertura tecnica NON è un confronto fotometrico o multi-epoca. Il kernel
+attuale restituisce somme normalizzate diagnostiche, con varianza completa e
+significatività sconosciute. Questa ricevuta non combina flussi e non calcola
+significatività, rumore completo o statistiche sui falsi positivi.
+Mantiene qualifiedControls=0, scienceValidation=NOT_VALIDATED,
+photometricComparability=NOT_VALIDATED, confirmatoryEligible=false,
+crossEpochResult/fullVariance/significance/statisticalResult=null.
+
+CLI READ-ONLY
+python -m tools.scientific_transients.triplet_report --plan F:/.../<versionRef>
+  --sha256 <plan-sha256> --case <caseRef>
+  --journal-map F:/.../mappa-privata.json --output F:/.../tripletta-nuova.json
+
+Usare una sola riga. La mappa privata associa attemptId opachi a directory
+locali dei journal; non va importata nel portale. Il comando scrive soltanto
+una nuova ricevuta con creazione esclusiva: nessun lancio, rete o replay.
+Le directory dei journal possono essere distinte; tutti i byte sono riletti.
+
+PORTALE
+Caricare prima BKL051_TEST_PLAN_REVIEW_V1, poi aprire "Controlla la copertura
+tecnica delle tre immagini" e importare BKL051_TRIPLET_TECHNICAL_V1.
+La vista richiede la stessa versione del piano e la medesima testa della
+cronologia, lo stesso caso e tutti i tentativi. Ricalcola la coerenza dei
+conteggi e dello stato tecnico rispetto alle corrispondenze dichiarate.
+Non autentica il documento e non rilegge i byte locali: anche una copertura
+completa resta "secondo la ricevuta". Dati invalidi o import di un nuovo piano
+cancellano il risultato precedente; letture tardive non lo ripristinano.
+Massimo 1 MiB; nessuna rete, upload o persistenza automatica.
+
+PROVENIENZA DELLE PROVE
+Esempio conservato su F:/DigitalStarGate/BKL051/integrazione-tripletta-sintetica-20261014.
+Tre input sintetici distinti, tre job esplicitamente selezionati, coda in memoria,
+tre processi MOCK, journal/report/binding conservati, ricevuta compatibile col
+portale. Zero processi PixInsight reali e zero richieste di rete. Non contiene
+misure M27 e non attesta comparabilità/tempi/WCS/covarianze o indipendenza.
+
+I tre singoli lavori sono chiamate esplicite del caller PlanExecution già
+esistente, senza un batch operativo o un avvio autenticato dal portale. Il
+vero algoritmo scientifico della tripletta e la qualificazione restano aperti.

@@ -11,7 +11,8 @@ PROTOCOL = 'DSG_PRIVATE_PREVIEW_REVIEW_LEDGER_V1'
 FORMATS = {'CBAT': ('DSG_CBAT_NOVA_PREVIEW_V1', 'PRIVATE_PREVIEW', 'preview.json', 'preview.txt'),
            'MPC': ('DSG_MPC_ADES_PREVIEW_V1', 'PRIVATE_PREVIEW', 'preview.json', 'preview.xml'),
            'TNS': ('DSG_CHANNEL_REVIEW_V1', 'PRIVATE_REVIEW_WORKSHEET', 'worksheet.json', 'worksheet.txt'),
-           'VSX': ('DSG_CHANNEL_REVIEW_V1', 'PRIVATE_REVIEW_WORKSHEET', 'worksheet.json', 'worksheet.txt')}
+           'VSX': ('DSG_CHANNEL_REVIEW_V1', 'PRIVATE_REVIEW_WORKSHEET', 'worksheet.json', 'worksheet.txt'),
+           'SCIENTIFIC_INTERNAL': ('DSG_PLAN_CASE_DOSSIER_V1', 'PRIVATE_PREVIEW', 'preview.json', 'preview.txt')}
 ACTIONS = {'KEEP_FOR_REVIEW', 'REJECT_CANDIDATE', 'FOLLOW_UP', 'REVOKE_REVIEW'}
 MAX_EVENTS = 128
 

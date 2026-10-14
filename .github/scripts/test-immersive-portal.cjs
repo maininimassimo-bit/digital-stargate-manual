@@ -66,6 +66,31 @@ const routes = Object.keys(JSON.parse(fs.readFileSync('overrides/main.html', 'ut
     const nojs=await page({javaScriptEnabled:false});await nojs.goto(base+'status/');
     assert((await nojs.locator('[data-observatory-status="quality"]').innerText()).includes('UNKNOWN'));
     assert.equal(await nojs.locator('[data-dsg-scene-mode]').isVisible(),false);
+    // A dark OS preference must not override an explicit light palette, including
+    // the shared design tokens and the preference restored on a fresh document.
+    const scientific = await page({ viewport: { width: 1440, height: 1000 }, colorScheme: 'dark' });
+    await scientific.goto(base + 'scientific-transient-analysis/');
+    await scientific.waitForFunction(() => window.DSGThemeService && document.documentElement.dataset.dsgThemeResolved === 'dark' && document.body.dataset.mdColorScheme === 'slate');
+    const themeState = () => scientific.evaluate(() => ({
+      material: document.body.dataset.mdColorScheme,
+      resolved: document.documentElement.dataset.dsgThemeResolved,
+      paper: getComputedStyle(document.body).getPropertyValue('--dsg-paper').trim(),
+      preference: window.DSGThemeService.getTheme().preference
+    }));
+    const darkTheme = await themeState();
+    await scientific.locator('[data-dsg-theme]').click();
+    await scientific.waitForFunction(() => document.documentElement.dataset.dsgThemeResolved === 'light' && document.body.dataset.mdColorScheme === 'default');
+    const lightTheme = await themeState();
+    assert.equal(lightTheme.material, 'default');
+    assert.equal(lightTheme.preference, 'light');
+    assert.notEqual(lightTheme.paper, darkTheme.paper, 'Light theme must replace dark surface tokens.');
+    await scientific.reload();
+    await scientific.waitForFunction(() => window.DSGThemeService && document.documentElement.dataset.dsgThemeResolved === 'light' && document.body.dataset.mdColorScheme === 'default');
+    assert.deepEqual(await themeState(), lightTheme, 'Reload must retain explicit light mode on a dark OS.');
+    await scientific.locator('[data-dsg-theme]').click();
+    await scientific.waitForFunction(() => document.documentElement.dataset.dsgThemeResolved === 'dark' && document.body.dataset.mdColorScheme === 'slate');
+    assert.equal((await themeState()).material, 'slate');
+    await scientific.close();
     assert.deepEqual([...new Set(errors)],[]);
     console.log('PASS: light theme, data invariance, view controls, essential preference/remount, document mode, search/Escape, reduced-motion, blocked WebGL and no-JS fallback.');
   } finally { await browser.close(); }

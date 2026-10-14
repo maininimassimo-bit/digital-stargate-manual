@@ -1,0 +1,86 @@
+BKL-051 — ipotesi di associazione temporale nel portale
+14 ottobre 2026. R08 parziale, nessun tracklet accettato.
+
+Il documento del9ottobre sul tentativo AtamiV4 non è lo stato più recente.
+La riconciliazione conservata del10ottobre documenta V4 chiuso con errore
+NO_OVERWRITE e V5/V6 conclusi. Non sono stati ripetuti. La verifica corrente
+non ha trovato processi PixInsight, ma non usa un PID ricostruito per attribuire
+identità o riparare la provenienza storica: i limiti V4 restano conservati.
+
+motion_hypotheses.inspect riceve un pool esplicito di tre esposizioni e la
+lista privata di fonti da ricontrollare per SHA256. Immagine, catalogo, tempi
+nominali, riferimenti opachi e coordinate sul piano tangente sono distinti.
+Duplicazioni di input o rilevamenti, cronologia non crescente e differenze
+incoerenti fra JD e secondi relativi sono respinte. La tolleranza1microsecondo
+verifica rappresentazioni numeriche, non l'orologio fisico.
+
+Enumera TUTTE le combinazioni del pool senza taglio sui residui, graduatoria
+di accettazione o scelta automatica. Ogni combinazione seleziona un rilevamento
+per esposizione. Fit lineare non pesato su X eY del piano tangente, con tempi
+centrati; velocità in unità proiettate arcsec/ora, intercetta, residui per
+esposizione, RMS e massimo. Nessuna orbita. Pesi uguali di calcolo non implicano
+incertezze uguali. Covarianze di posizione, fra epoche e velocità sconosciute.
+Non stima tali covarianze dalla dispersione di soli tre punti.
+
+Pool vuoto: EMPTY_POOL_NOT_NONDETECTION. Numero combinazioni oltre4096:
+RESOURCE_LIMIT_NO_PARTIAL_SELECTION, nessun sottoinsieme fatto passare per
+ricerca completa. Fino a256 candidati per esposizione è un limite di input,
+non una soglia fisica. Sono limiti di risorse, mai criteri di rilevazione.
+Il modello non propone soglie, significatività o policy scientifiche.
+
+IMPORT REALE ATAMI, SU PROVE NATIVE PRECEDENTI
+F:/DigitalStarGate/BKL051/associazioni-moto-Atami-20261014-v3
+Ricontrollati i sei FITS originali, tre cataloghi nativi V6 e le evidenze
+conservate di timing, selezione e audit pixel/maschere. Il manifest storico
+del10ottobre è ancorato all'impronta già conservata nella sua revisione.
+Le coordinate celesti sono quelle dell'audit WCS precedente: non vengono
+misurati nuovi centroidi o ricalcolata una WCS. La proiezione al piano tangente
+usa prodotti scalari con la base est/nord del centro dichiarato, conserva
+correttamente l'attraversamento di RA0 e rifiuta l'emisfero opposto.
+Il pool seleziona gli stessi tre vicini diagnostici per esposizione già
+conservati nell'audit; la selezione ha usato l'effemeride nota. È un controllo
+pre-selezionato, NON ricerca cieca o prova di completezza su tutti i cataloghi.
+Il detector precedente non aveva usato la coordinata; questo non rende
+cieca la successiva scelta dei tre vicini.
+
+Cataloghi conservati1033/439/1354 sorgenti; pool3/3/3. Tutte le27 ipotesi
+calcolate e mostrate, nessuna selezionata. La seconda esposizione manteneva
+il riferimento vicino a15arcsec dalla previsione: non viene scartata né
+chiamata misura di Atami. Tutte le combinazioni restano ipotesi non revisionate.
+La distanza diagnostica conservata dalla previsione nota è mostrata per ogni
+candidato, dove disponibile, con temporizzazione e associazione non accettate.
+Questo campo è opzionale per mantenere leggibili le esportazioni precedenti.
+Non nasce un tracklet dall'accostamento di tre numeri. Due notti e tre
+esposizioni non attestano un dossier MPC pronto. Il campione M27di59 resta
+distinto: nessun controllo aggiunto o qualificato.
+
+I tempi del pool sono midpoint nominali da startJD+EXPTIME/2, nelle semantiche
+condizionali già documentate; incertezza clock/shutter non accettata. I molti
+decimali sono rappresentazione aritmetica, non accuratezza assoluta.
+Byte ricontrollati non sono validazione scientifica di WCS, centroidi,
+effemeridi o associazioni. Originali e parent restano esterni; non è archivio
+standalone completo. Fonti-private.json contiene percorsi e non va pubblicato.
+
+Il portale importa la sola ricevuta minimizzata, massimo4MiB, ricontrolla tutte
+le combinazioni e ricalcola il fit. Tabella raggiungibile da tastiera, origine
+sintetica/pubblica e selezione precedente esplicite. Non legge i file originali
+o verifica in browser le loro impronte: questa resta attestazione della
+ricevuta locale, non un'identità autenticata. Nessuna rete o persistenza.
+
+CLI offline:
+python -m tools.scientific_transients.motion_hypotheses --pool F:/.../pool.json
+ --pool-sha <sha> --evidence F:/.../Fonti-private.json --evidence-sha <sha>
+ --output F:/.../nuove-ipotesi.json
+Riunire su una riga. Nessun parametro di lancio o invio; output create-only.
+
+Per contesto metodologico consultata la documentazione primaria IAU SOFA:
+https://www.iausofa.org/cookbooks
+La libreria descrive strumenti vettoriali e matriciali astronomici. Nessuna
+installazione SOFA o affermazione di equivalenza validata del nostro fit alla
+sua libreria. I test di geometria e moto sono controlli numerici separati.
+
+Restano rilevamento/associazione scientifica sull'intero campo, WCS e tempi,
+covarianze, artefatti/confusione, traiettorie adeguate, confronto con oggetti
+noti, recuperi e falsi collegamenti reali con protocollo congelato e policy
+approvata. R08 e BKL-051 OPEN/NOT_VALIDATED. Zero controlli qualificati,
+nessuna discovery, tracklet, autorizzazione o invio esterno.

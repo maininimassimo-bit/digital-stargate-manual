@@ -47,8 +47,8 @@ foreach ($file in (Get-ChildItem -LiteralPath $fixtures -Filter '*.xml')) {
     if ($valid -ne $expectedValid) { throw ('MPC_XSD_UNEXPECTED_RESULT: ' + $file.Name + ' ' + ($validationErrors -join ' ')) }
     $results.Add(@{ file = $file.Name; schemaValid = $valid; errors = $validationErrors.ToArray() })
 }
-if ($results.Count -ne 5) { throw 'MPC_SCHEMA_FIXTURE_COUNT' }
+if ($results.Count -ne 9 -or @($results | Where-Object { $_.schemaValid }).Count -ne 3) { throw 'MPC_SCHEMA_FIXTURE_COUNT' }
 @{ schemaUrl = $schemaUrl; schemaSHA256 = $expectedHash; validator = 'System.Xml W3C XSD';
    results = $results; scientificValidation = 'NOT_VALIDATED'; externalSubmission = 'NONE' } |
     ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $workspace 'verification.json') -Encoding utf8
-Write-Output "MPC_SCHEMA_TWO_POSITIVE_THREE_NEGATIVE_PASS evidence=$workspace"
+Write-Output "MPC_SCHEMA_THREE_POSITIVE_SIX_NEGATIVE_PASS evidence=$workspace"
