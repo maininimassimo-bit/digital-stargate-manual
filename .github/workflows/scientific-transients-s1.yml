@@ -1,10 +1,10 @@
 name: Scientific transients S1 preparation
 on:
   pull_request:
-    paths: ['tools/scientific_transients/**', 'docs/javascripts/scientific-*.js', 'docs/javascripts/s4-lab-*', 'docs/scientific-transients-lab/**', 'docs/scientific-transient-analysis/**', 'docs/styles/scientific-transients.css', 'tools/pixinsight/local_pilot/transport_http.py', 'infrastructure/scientific-transients-lab/**', 'infrastructure/pixinsight-pilot/**', 'docs/project/BKL-051-S1-*', 'docs/project/evidence/BKL-051-*', '.github/workflows/scientific-transients-s1.yml', '.github/scripts/test-transient-mpc-schema.ps1']
+    paths: ['tools/scientific_transients/**', 'docs/javascripts/scientific-*.js', 'docs/javascripts/dsg-theme-manager.js', 'docs/javascripts/s4-lab-*', 'docs/scientific-transients-lab/**', 'docs/scientific-transient-analysis/**', 'docs/styles/scientific-transients.css', 'tools/pixinsight/local_pilot/transport_http.py', 'infrastructure/scientific-transients-lab/**', 'infrastructure/pixinsight-pilot/**', 'docs/project/BKL-051-S1-*', 'docs/project/evidence/BKL-051-*', '.github/workflows/scientific-transients-s1.yml', '.github/scripts/test-transient-mpc-schema.ps1']
   push:
     branches: [main]
-    paths: ['tools/scientific_transients/**', 'docs/javascripts/scientific-*.js', 'docs/javascripts/s4-lab-*', 'docs/scientific-transients-lab/**', 'docs/scientific-transient-analysis/**', 'docs/styles/scientific-transients.css', 'tools/pixinsight/local_pilot/transport_http.py', 'infrastructure/scientific-transients-lab/**', 'infrastructure/pixinsight-pilot/**', 'docs/project/BKL-051-S1-*', 'docs/project/evidence/BKL-051-*', '.github/workflows/scientific-transients-s1.yml', '.github/scripts/test-transient-mpc-schema.ps1']
+    paths: ['tools/scientific_transients/**', 'docs/javascripts/scientific-*.js', 'docs/javascripts/dsg-theme-manager.js', 'docs/javascripts/s4-lab-*', 'docs/scientific-transients-lab/**', 'docs/scientific-transient-analysis/**', 'docs/styles/scientific-transients.css', 'tools/pixinsight/local_pilot/transport_http.py', 'infrastructure/scientific-transients-lab/**', 'infrastructure/pixinsight-pilot/**', 'docs/project/BKL-051-S1-*', 'docs/project/evidence/BKL-051-*', '.github/workflows/scientific-transients-s1.yml', '.github/scripts/test-transient-mpc-schema.ps1']
 permissions:
   contents: read
 jobs:

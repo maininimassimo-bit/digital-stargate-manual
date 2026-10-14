@@ -57,6 +57,15 @@ La verifica manuale Owner riguarda la scheda preliminare importata: **zero tenta
 copertura incompleta, zero controlli qualificati**. Non copre temi, tutte le
 dimensioni, navigazione, tastiera, console, accessibilità o acceptance autenticata.
 
+Nel controllo successivo l'Owner ha rilevato che il comando del tema cambiava
+icona/scritta mentre la pagina restava scura. Riprodotto il disallineamento tra
+palette Material e attributi del tema condiviso, compresa la perdita della scelta
+al refresh. Il gestore ora sincronizza entrambi i livelli per una scelta esplicita;
+le selezioni programmatiche conservano invece la modalità di sistema. Quattro
+regressioni dedicate: tre fallivano prima della correzione, tutte passano dopo.
+La verifica visiva della correzione resta da acquisire; quella precedente non è
+promossa a PASS. I filtri CI includono il gestore condiviso del tema.
+
 Le prove scientifiche private sono contestuali: il recupero esplorativo M27 ha
 prodotto 1 recupero e 15 mancati recuperi su 16 inserzioni, nello stesso fondo.
 Non sono 16 controlli indipendenti; il sigillo archivistico successivo allo scoring

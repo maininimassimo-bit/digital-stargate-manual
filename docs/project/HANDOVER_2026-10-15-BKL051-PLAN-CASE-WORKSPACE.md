@@ -11,6 +11,11 @@ ARB poi RQ locali APPROVED. Questo aggiornamento documentale richiede i propri
 gate sul commit finale. CI remota, verifiche visive più ampie, premerge e postmerge
 non sono attestati dalle ricevute locali.
 
+Finding visivo Owner: il comando del tema cambia ma la pagina resta scura.
+Correzione del gestore condiviso con quattro regressioni PASS; nuova verifica
+visiva e CI/review del successore necessarie. Non usare i gate del primo commit
+per attestare il successore.
+
 BKL-051 **OPEN / NOT_VALIDATED**, stima37%, zero controlli qualificati. Tripletta
 reale preliminare non eseguita; dossier MOCK e recuperi sintetici solo contestuali.
 Validazione scientifica, servizio operativo autenticato, policy, reporting

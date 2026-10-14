@@ -13,6 +13,7 @@
   let listenersBound = false;
   let systemListenerBound = false;
   let preference = 'system';
+  let synchronizingPalette = false;
   const subscribers = new Set();
   const systemMedia = window.matchMedia(SYSTEM_QUERY);
 
@@ -107,7 +108,14 @@
     document.documentElement.dataset.dsgThemePreference = preference;
     document.documentElement.dataset.dsgThemeResolved = resolvedTheme;
 
-    if (targetInput && !targetInput.checked) targetInput.click();
+    if (targetInput && !targetInput.checked) {
+      synchronizingPalette = true;
+      try {
+        targetInput.click();
+      } finally {
+        synchronizingPalette = false;
+      }
+    }
 
     window.requestAnimationFrame(() => {
       updateControls();
@@ -167,10 +175,13 @@
         if (!event.target.matches(PALETTE_SELECTOR)) return;
 
         const materialTheme = themeFromInput(event.target);
-        if (preference !== 'system' && VALID_PREFERENCES.includes(materialTheme)) {
+        if (!synchronizingPalette && VALID_PREFERENCES.includes(materialTheme)) {
           preference = materialTheme;
           persistPreference(preference);
         }
+
+        document.documentElement.dataset.dsgThemePreference = preference;
+        document.documentElement.dataset.dsgThemeResolved = resolveTheme();
 
         window.requestAnimationFrame(() => {
           updateControls();
