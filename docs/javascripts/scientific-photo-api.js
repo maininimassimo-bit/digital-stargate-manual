@@ -5,7 +5,9 @@
   let token = '', configuration;
   const config = async () => {
     if (configuration) return configuration;
-    const response = await fetch(new URL('data/photo-ingestion-config.json', base), {cache:'no-store',redirect:'error'});
+    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);
+    try {
+    const response = await fetch(new URL('data/photo-ingestion-config.json', base), {cache:'no-store',redirect:'error',signal:controller.signal});
     if (!response.ok) throw new Error('Servizio di caricamento non disponibile.');
     const value = await response.json();
     if (value.schemaVersion !== '1.0' || !value.serviceUrl) throw new Error('Il servizio di caricamento deve ancora essere attivato.');
@@ -13,6 +15,7 @@
     if(url.protocol!=='https:' || !/^[a-z0-9-]+\.(?:[a-z0-9-]+\.)?run\.app$/.test(url.hostname) || url.pathname!=='/' || url.search || url.hash || url.username || url.password) throw new Error('Configurazione del servizio non valida.');
     configuration = Object.freeze({...value, serviceUrl:url.origin});
     return configuration;
+    } finally {clearTimeout(timer);}
   };
   const request = async (path, {method='GET',body,publicRead=false,binary=false}={}) => {
     const configuration=await config();

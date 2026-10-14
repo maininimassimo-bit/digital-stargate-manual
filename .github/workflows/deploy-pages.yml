@@ -60,6 +60,9 @@ jobs:
       - name: Generate scientific observation index
         run: node .github/scripts/generate-scientific-catalog.mjs --write
 
+      - name: Verify transferred session packages and generate transfer projection
+        run: node .github/scripts/generate-session-package-transfer.mjs --write
+
       - name: Set up Python
         uses: actions/setup-python@v6
         with:

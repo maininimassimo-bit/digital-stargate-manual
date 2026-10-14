@@ -1,0 +1,12 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import {projectSessionPackage} from './session-package-transfer.mjs';
+const mode=process.argv[2] || '--write';
+if(!['--write','--check'].includes(mode))throw new Error('Unsupported mode');
+const catalog=JSON.parse(await readFile('docs/data/scientific-session-catalog.json','utf8'));
+const records=[];
+for(const session of [...catalog.sessions].sort((a,b)=>a.sessionId.localeCompare(b.sessionId)))records.push(await projectSessionPackage('.',session.sessionId));
+const output=JSON.stringify({schemaVersion:'1.0',kind:'SESSION_PACKAGE_TRANSFER_PROJECTION',authority:'projection',scope:'SESSION_DOCUMENT_PACKAGE',records},null,2)+'\n';
+const path='docs/data/session-package-transfer.json';
+if(mode==='--write')await writeFile(path,output,'utf8');
+else if(await readFile(path,'utf8')!==output)throw new Error('Session package projection drift');
+console.log(`Session package transfer projection: ${records.length} sessions, ${records.filter(r=>r.state==='VERIFIED').length} verified packages.`);

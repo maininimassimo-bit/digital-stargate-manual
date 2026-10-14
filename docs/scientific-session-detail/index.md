@@ -41,7 +41,7 @@
 
   <section class="dsg-session-detail__section">
     <span>KNOWLEDGE GRAPH</span><h2>Relazioni della sessione</h2><div class="dsg-session-graph" data-detail-graph></div>
-    <p class="dsg-session-detail__note">Il grafo combina le evidenze del catalogo con le immagini attualmente pubblicate nella gallery. Le associazioni alle sessioni sono dichiarate dall’autore; un workflow parziale non prova l’esecuzione o il contributo dei singoli frame.</p>
+    <p class="dsg-session-detail__note">Transfer indica il pacchetto documentale inviato da EAGLE al repository: dimensioni e SHA-256 sono verificati contro il manifest, senza attestare la copia dei RAW fotografici. Il grafo comprende anche le immagini pubblicate nella gallery; le associazioni alle sessioni sono dichiarate dall’autore e un workflow parziale non prova l’esecuzione o il contributo dei singoli frame.</p>
   </section>
 
   <section class="dsg-session-detail__section"><span>DATA LINEAGE</span><h2>Catena informativa corrente</h2><button type="button" data-detail-publication-refresh>Aggiorna pubblicazioni</button><p class="dsg-session-detail__note" role="status" data-detail-publication-status></p><div class="dsg-session-lineage" data-detail-lineage></div><div class="dsg-session-detail__sources" data-detail-publications></div></section>
@@ -52,6 +52,7 @@
 <script src="../javascripts/scientific-data-engine.js"></script>
 <script src="../javascripts/scientific-photo-api.js"></script>
 <script src="../javascripts/scientific-session-publication.js"></script>
+<script src="../javascripts/scientific-session-transfer.js"></script>
 <script src="../javascripts/scientific-session-detail-routing.js"></script>
 <script src="../javascripts/scientific-session-detail.js"></script>
 <script src="../javascripts/session-coordinate-overlay.js"></script>

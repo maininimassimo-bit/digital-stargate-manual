@@ -4,6 +4,7 @@
   const VERSION = '2.1.2-rc1';
   const engineScript = document.currentScript?.src;
   const workflowSource = engineScript ? new URL('../data/bkl049-public-workflows.json', engineScript).href : null;
+  const transferSource = engineScript ? new URL('../data/session-package-transfer.json', engineScript).href : null;
   const cache = new Map();
   const metrics = {
     requests: 0,
@@ -208,7 +209,7 @@
     return Boolean(normalized) && !['UNKNOWN', 'N/A', 'NOT_REPRESENTED', 'MISSING'].includes(normalized);
   };
 
-  const getKnowledgeGraph = (session) => ({
+  const getKnowledgeGraph = (session, transfer) => ({
     target: { type: 'TARGET', id: session.target, label: session.target },
     session: { type: 'SESSION', id: session.sessionId, label: session.sessionId },
     equipment: [
@@ -219,11 +220,11 @@
     outputs: [
       { type: 'METRICS', state: session.evidenceState, available: representedState(session.evidenceState) },
       { type: 'MANIFEST', state: session.manifestState, available: representedState(session.manifestState) },
-      { type: 'TRANSFER', state: session.transferState, available: representedState(session.transferState) }
+      { type: 'TRANSFER', state: transfer?.detail || session.transferState, label: transfer?.label, available: transfer ? transfer.state==='represented' : representedState(session.transferState) }
     ]
   });
 
-  const getLineage = (session, publication) => {
+  const getLineage = (session, publication, transfer) => {
     const manifestAvailable = representedState(session.manifestState);
     const transferAvailable = representedState(session.transferState);
     return [
@@ -231,7 +232,7 @@
       { label: 'Acquisition metrics', state: representedState(session.evidenceState) ? 'represented' : 'missing', detail: `${session.lightCompleted} completed light frames` },
       { label: 'Scientific assets', state: 'partial', detail: 'paths and binary inventory not exposed in this catalog' },
       { label: 'Manifest', state: manifestAvailable ? 'represented' : 'missing', detail: session.manifestState },
-      { label: 'Transfer', state: transferAvailable ? 'represented' : 'missing', detail: session.transferState },
+      { ...(transfer || {state:transferAvailable ? 'represented' : 'missing',detail:session.transferState}), label: 'Transfer · pacchetto sessione' },
       { label: 'Processing', ...(publication?.processing || {state:'missing', detail:'not represented'}) },
       { label: 'Publication', ...(publication?.publication || {state:'missing', detail:'not represented'}) }
     ];
@@ -345,10 +346,30 @@
     } finally {clearTimeout(timer);if(reader){await reader.cancel().catch(()=>{});reader.releaseLock();}}
   };
 
+  const getSessionTransferCollection=async()=>{
+    if(!transferSource || new URL(transferSource).origin!==location.origin)throw new Error('TRANSFER_UNAVAILABLE');
+    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);let reader;
+    try{
+      const response=await fetch(transferSource,{signal:controller.signal,cache:'no-store',redirect:'error',credentials:'omit',mode:'same-origin'});
+      if(!response.ok || response.url!==transferSource || !response.body)throw new Error('TRANSFER_UNAVAILABLE');
+      reader=response.body.getReader();let text='',bytes=0;const decoder=new TextDecoder('utf-8',{fatal:true});
+      while(true){const item=await reader.read();if(item.done)break;bytes+=item.value.byteLength;if(bytes>1024*1024)throw new Error('TRANSFER_LIMIT');text+=decoder.decode(item.value,{stream:true});}
+      text+=decoder.decode();const value=JSON.parse(text);
+      if(value.schemaVersion!=='1.0' || value.kind!=='SESSION_PACKAGE_TRANSFER_PROJECTION' || value.authority!=='projection' || value.scope!=='SESSION_DOCUMENT_PACKAGE' || !Array.isArray(value.records) || value.records.length>1000)throw new Error('TRANSFER_INVALID');
+      const ids=new Set();
+      for(const record of value.records){
+        if(!/^\d{4}-\d{2}-\d{2}_\d{4}-\d{2}-\d{2}$/.test(record.sessionId) || ids.has(record.sessionId) || record.scope!=='SESSION_DOCUMENT_PACKAGE' || !['VERIFIED','INCOMPLETE','INVALID','UNAVAILABLE'].includes(record.state) || record.manifestRef!==`data/sessions/${record.sessionId.slice(0,4)}/${record.sessionId.slice(5,7)}/${record.sessionId}/manifest.json` || !Number.isInteger(record.fileCount) || record.fileCount<0 || record.fileCount>1000 || !Number.isInteger(record.verifiedFileCount) || record.verifiedFileCount<0 || record.verifiedFileCount>record.fileCount || (record.state==='VERIFIED' && (!record.fileCount || record.verifiedFileCount!==record.fileCount)))throw new Error('TRANSFER_INVALID');
+        ids.add(record.sessionId);
+      }
+      return value;
+    }finally{clearTimeout(timer);if(reader){await reader.cancel().catch(()=>{});reader.releaseLock();}}
+  };
+
   window.DSGScientificDataEngine = Object.freeze({
     version: VERSION,
     getPublicWorkflowCollection,
     getSessionPhotoCollection,
+    getSessionTransferCollection,
     getPhotoUploadContext,
     loadCatalog,
     preload,
