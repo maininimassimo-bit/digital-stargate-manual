@@ -96,6 +96,22 @@ class CampaignHttpTests(unittest.TestCase):
         self.assertNotIn('review',self.request(WORKER+'/'+ref(10)+'/executions',r,TOKEN)[1])
         self.assertIsNone(view['statisticalResult']);self.assertEqual(view['status'],'BLOCKED')
         self.assertNotIn('leaseToken',str(view));self.assertEqual(len(self.queue.status()['jobs']),3)
+        code,receipt=self.request(BASE+'/'+ref(10)+'/review-receipt',token='synthetic-owner',owner=True)
+        self.assertEqual(code,200);self.assertEqual(receipt['executions'][0]['review']['request'],review)
+        self.assertNotIn('leaseToken',str(receipt));self.assertEqual(len(self.queue.status()['jobs']),3)
+
+    def test_owner_receipt_cannot_be_read_by_worker_or_used_as_write_route(self):
+        path=BASE+'/'+ref(10)+'/review-receipt'
+        for token,origin in [(None,False),(TOKEN,False),(LEGACY_TOKEN,False),('not-owner',True)]:
+            self.assertEqual(self.request(path,token=token,owner=origin)[0],403)
+        before=self.fixture.store.get(self.fixture.service.key)
+        code,receipt=self.request(path,token='synthetic-owner',owner=True)
+        self.assertEqual(code,200);self.assertEqual(receipt['events'][0]['kind'],'CREATE')
+        self.assertEqual(before,self.fixture.store.get(self.fixture.service.key))
+        self.assertEqual(self.request(path,{},'synthetic-owner',True)[0],404)
+        self.assertEqual(self.request(BASE+'/'+ref(999)+'/review-receipt',token='synthetic-owner',owner=True)[0],400)
+        self.server.RequestHandlerClass=self.handler(enabled=False)
+        self.assertEqual(self.request(path,token='synthetic-owner',owner=True)[0],404)
 
     def test_disabled_composition_keeps_authenticated_404(self):
         self.server.RequestHandlerClass=self.handler(enabled=False)

@@ -141,11 +141,13 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                 match = re.fullmatch(campaign_worker + r'/([a-f0-9]{32})/executions', path)
                 if match and self.command == 'POST':
                     return self.send(200, campaigns.record_execution(match[1], self.body()))
-                match = re.fullmatch(campaign_base + r'/([a-f0-9]{32})(?:/(freeze|review-outcome|finalize|revoke))?', path)
+                match = re.fullmatch(campaign_base + r'/([a-f0-9]{32})(?:/(freeze|review-outcome|finalize|revoke|review-receipt))?', path)
                 if match:
                     plan_ref, action = match.groups()
                     if self.command == 'GET' and action is None:
                         return self.send(200, campaigns.view(plan_ref))
+                    if self.command == 'GET' and action == 'review-receipt':
+                        return self.send(200, campaigns.review_receipt(plan_ref))
                     actions = {'freeze':campaigns.freeze, 'review-outcome':campaigns.review_outcome,
                                'finalize':campaigns.finalize, 'revoke':campaigns.revoke}
                     if self.command == 'POST' and action in actions:

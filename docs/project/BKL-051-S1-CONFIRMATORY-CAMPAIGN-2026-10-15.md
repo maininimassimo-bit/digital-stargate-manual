@@ -77,6 +77,19 @@ ritenta soltanto conflitti sui metadati, senza ripetere operazioni scientifiche.
 Non migra né modifica registri preliminari o stati legacy. Limiti V1: 500
 testimonianze, otto piani, stato massimo 8 MiB; il limite HTTP esistente resta.
 
+Il successivo candidato di interfaccia aggiunge la lettura Owner
+`GET /v1/transient-analysis/campaigns/<planRef>/review-receipt`: una sola lettura
+coerente restituisce piano, riepilogo, cronologia ed esecuzioni con decisioni.
+La ricevuta `BKL051_CONFIRMATORY_OWNER_RECEIPT_V1` permette di confrontare una
+richiesta di metadati con il relativo evento dopo una risposta persa; la lettura
+non ripete la richiesta e non avvia job. La presenza di un evento diverso non
+conferma una richiesta: identificativo e contenuto esatto devono corrispondere.
+I dati restano una vista autenticata del servizio, con `localBytesVerified=false`;
+non attestano i file privati sul PC. Nessun lease token o credenziale è incluso.
+Il worker non può leggere la ricevuta e la rotta non accetta scritture. La
+composizione di produzione resta disabilitata. L'interfaccia operativa completa
+e la sua verifica restano da implementare sul candidato successivo.
+
 Il ritorno alla composizione senza adattatore disabilita le nuove rotte senza
 cancellare lo stato. Un'eventuale attivazione richiede separata valutazione di
 configurazione, capacità, permessi e costi; non è autorizzata da questo documento.

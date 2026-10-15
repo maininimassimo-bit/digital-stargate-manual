@@ -444,3 +444,19 @@ class ConfirmatoryCampaigns:
 
     def input_view(self, ref):
         return self._mutate(lambda state,_: self._input(state,ref))
+
+    def review_receipt(self, ref):
+        """Owner-only atomic snapshot for exact metadata acknowledgement reconciliation.
+
+        Contains no queue lease, credential, private path or image. Input review
+        proofs remain available through the existing Owner-only input view.
+        Reading never retries a decision or dispatches a job.
+        """
+        def snapshot(state, _):
+            plan=self._plan(state,ref)
+            return {'schema':'BKL051_CONFIRMATORY_OWNER_RECEIPT_V1',
+                    'campaign':self._summary(state,plan),'plan':plan['request'],
+                    'events':plan['events'],'executions':plan['executions'],
+                    'source':'AUTHENTICATED_SERVICE_VIEW','localBytesVerified':False,
+                    'publication':'NONE','implicitDispatch':False}
+        return self._mutate(snapshot)
