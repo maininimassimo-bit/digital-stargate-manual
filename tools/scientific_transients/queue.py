@@ -24,13 +24,17 @@ def fields(value, expected):
 
 
 class TransientQueue:
-    def __init__(self, store, worker_id, clock=None):
+    def __init__(self, store, worker_id, clock=None, *, state_ref=None):
         require(opaque(worker_id), "TRANSIENT_WORKER_ID")
+        require(state_ref is None or opaque(state_ref), "TRANSIENT_STATE_REF")
         self.store, self.worker_id = store, worker_id
+        # An explicit deployment choice, never an automatic identity migration.
+        self.state_key = (STATE_KEY if state_ref is None else
+                          "control/transient-analysis/" + state_ref + "/state-v1.json")
         self.clock = clock or (lambda: dt.datetime.now(dt.timezone.utc))
 
     def _read(self):
-        raw, generation = self.store.get(STATE_KEY)
+        raw, generation = self.store.get(self.state_key)
         if raw is None:
             return {"protocol": PROTOCOL, "workerId": self.worker_id, "rootId": None,
                     "bindings": [], "jobs": []}, generation
@@ -62,7 +66,7 @@ class TransientQueue:
             require(len(raw) <= LIMIT, "TRANSIENT_STATE_LIMIT")
             try:
                 if original != raw:
-                    self.store.put(STATE_KEY, raw, generation)
+                    self.store.put(self.state_key, raw, generation)
                 if failure is not None:
                     raise failure
                 return result

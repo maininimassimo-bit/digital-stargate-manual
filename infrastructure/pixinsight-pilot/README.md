@@ -161,8 +161,35 @@ Primary references: [Cloud Run billing](https://docs.cloud.google.com/run/docs/c
 
 ## Verification
 
+### Transient control state isolation
+
+The optional transient component accepts `DSG_TRANSIENT_STATE_REF`, a deployment
+setting containing exactly 32 lowercase hexadecimal characters. When explicitly
+set, the control object is `control/transient-analysis/<ref>/state-v1.json`.
+No arbitrary object path, portal input or automatic namespace selection is accepted.
+Omitting the setting preserves `control/transient-analysis-state-v1.json` and its
+existing worker/root identity guards. An empty or malformed setting refuses startup.
+
+Use a separately approved reference for a new campaign that must preserve an older
+worker's control state. The component does not migrate, reset, adopt or delete that
+state or its recovery copies. Reusing a reference with a different worker still
+fails identity validation. Primary generation guards and immutable backups apply
+to the selected object as before. Provision only the separately approved exact-object
+IAM condition; a namespace-prefix grant is unnecessary. An existing deployment
+image does not gain this capability from documentation or a repository merge.
+
+The 15 October real OAT stopped at its first worker registration: HTTP 400,
+preexisting control state associated with another worker, no new job or native
+execution. Previous traffic and the temporary IAM addition were restored. This
+local correction is not evidence of a subsequent cloud OAT, deployment permission
+or scientific acceptance. A new image/revision and a different exact-object IAM
+condition require a fresh operational proposal. Existing queue limits (32 bindings,
+32 jobs and 1 MiB) remain; this correction does not establish capacity for the
+full 59-triplet campaign.
+
 ```text
 python -m unittest tools.pixinsight.local_pilot.test_transport
+python -m unittest tools.scientific_transients.test_control_namespace
 ```
 
 Synthetic persistence and actual loopback HTTP cover Owner/worker separation,

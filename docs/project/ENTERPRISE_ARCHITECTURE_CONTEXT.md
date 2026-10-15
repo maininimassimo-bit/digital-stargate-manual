@@ -1,5 +1,9 @@
 # Digital StarGate Enterprise Architecture Context
 
+## BKL-051 — isolamento della persistenza di controllo, 15 ottobre 2026
+
+Candidato compatibile: riferimento attendibile opzionale per il solo registro dei transitori, con guardie worker/root, CAS e backup invariati. Nessuna scelta dal portale, migrazione o nuovo endpoint. Permesso limitato all’oggetto esatto solo dopo consenso operativo; nessuna authority scientifica derivata. [Contratto e rollback](BKL-051-CONTROL-STATE-ISOLATION-2026-10-15.md).
+
 ## Importazione sessioni — recupero del 15 ottobre 2026
 
 Correzione richiesta Owner: separazione calibrazione/LIGHT nell'analizzatore e

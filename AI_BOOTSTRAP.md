@@ -1,5 +1,9 @@
 # Digital StarGate AI Bootstrap
 
+## BKL-051 — prova operativa e isolamento del registro, 15 ottobre 2026
+
+PR594 integrata e portale pubblicato; le precedenti note di candidato restano storiche. La prova reale successiva si è fermata alla prima registrazione worker: stato cloud preesistente con identità diversa, HTTP400, zero nuovi job e avvii nativi. Traffico e permesso temporaneo ripristinati. Correzione locale con riferimento di registro esplicito, compatibilità storica e nessuna migrazione; non distribuita. [Contratto, prove e residui](docs/project/BKL-051-CONTROL-STATE-ISOLATION-2026-10-15.md). BKL-051 OPEN / NOT_VALIDATED, stima37%, zero controlli qualificati; niente nuova prova o deployment autorizzati da questo codice.
+
 ## BKL-051 — continuità del candidato, 15 ottobre 2026
 
 Per il lavoro BKL-051 leggere il [nuovo handover](docs/project/HANDOVER_2026-10-15-BKL051-PLAN-CASE-WORKSPACE.md) e il [dossier del candidato](docs/project/BKL-051-PLAN-CASE-WORKSPACE-2026-10-15.md). Piano versionato, dispatch vincolato, contesti parziali, dossier e scheda passiva integrati localmente. Python445 OK (uno skip symlink), JavaScript274 e Pages992HTML PASS; ARB poi RQ locali APPROVED sul tree applicativo. Non attestano CI/review del commit finale, rilascio, servizio attivo o acceptance. Milestone OPEN / NOT_VALIDATED, stima37%, zero controlli qualificati; tripletta reale preparata non eseguita. Tutti i residui scientifici/operativi e IRSA restano aperti. Nessun nuovo cloud, costo, invio astronomico o fotografia pubblicata. Questa continuità riguarda BKL-051 e preserva gli altri package e gli snapshot sotto riportati.

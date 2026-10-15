@@ -1,5 +1,9 @@
 # Repository Knowledge Map
 
+## BKL-051 — registro di campagna, 15 ottobre 2026
+
+[Isolamento esplicito e prova reale fermata](BKL-051-CONTROL-STATE-ISOLATION-2026-10-15.md): queue.py possiede la selezione del registro; app.py legge il riferimento attendibile; test_control_namespace.py copre conservazione dello stato storico, identità, riavvio e input invalidi. Nessuna attivazione dal codice o chiusura scientifica.
+
 ## Importazione sessioni — recupero del 15 ottobre 2026
 
 Correzione richiesta Owner: separazione calibrazione/LIGHT nell'analizzatore e
