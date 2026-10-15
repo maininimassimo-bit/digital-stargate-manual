@@ -314,7 +314,7 @@
       while(true){const item=await reader.read();if(item.done)break;length+=item.value.length;if(length>16*1024*1024)throw new Error('PHOTO_CATALOG_LIMIT');chunks.push(item.value);}
       const bytes=new Uint8Array(length);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length;}
       const catalog=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
-      if(!['1.5','1.6'].includes(catalog.schemaVersion) || catalog.catalogStatus!=='VERSIONED_ANALYTICS_PROJECTION' || !Array.isArray(catalog.sessions))throw new Error('PHOTO_CATALOG_PROFILE');
+      if(catalog.schemaVersion!=='1.5' || catalog.catalogStatus!=='VERSIONED_ANALYTICS_PROJECTION' || !Array.isArray(catalog.sessions))throw new Error('PHOTO_CATALOG_PROFILE');
       const digest=await crypto.subtle.digest('SHA-256',bytes);
       return {catalogSha256:[...new Uint8Array(digest)].map(x=>x.toString(16).padStart(2,'0')).join(''),sessions:catalog.sessions};
     }finally{clearTimeout(timer);if(reader){await reader.cancel().catch(()=>{});reader.releaseLock();}}

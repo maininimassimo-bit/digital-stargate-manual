@@ -2,7 +2,7 @@
 
 ## Mandato e metodo versionato
 
-Owner autorizza l’integrazione dai log già importati. Questo incremento sostituisce, solo quando misurabile, il sentinel di copertura F4 con `DSG-GUIDING-LIGHT-TEMPORAL-1.0`. Il precedente handover di presentazione resta uno snapshot storico. Il catalogo passa da 1.5 a **1.6**, aggiungendo `guiding.temporalCoverage`; i consumer con verifica esplicita accettano entrambe le versioni. Nessun RAW o report storico viene riscritto.
+Owner autorizza l’integrazione dai log già importati. Questo incremento sostituisce, solo quando misurabile, il sentinel di copertura F4 con `DSG-GUIDING-LIGHT-TEMPORAL-1.0`. Il precedente handover di presentazione resta uno snapshot storico. Il catalogo conserva **schemaVersion 1.5**, aggiungendo il campo facoltativo `guiding.temporalCoverage` con metodo versionato separatamente: i servizi già installati con allowlist 1.5 restano compatibili. Nessun RAW o report storico viene riscritto.
 
 ## Denominatore e numeratore
 

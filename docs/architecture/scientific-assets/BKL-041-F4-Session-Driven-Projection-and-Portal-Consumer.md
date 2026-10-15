@@ -122,4 +122,4 @@ L'estensione scientifica del denominatore/metodo resta futura e richiede review.
 
 ## Incremento autorizzato — copertura temporale 15 ottobre 2026
 
-Il mapping storico con sentinel zero è superseded, esclusivamente per sessioni con misura verificabile, dal metodo `DSG-GUIDING-LIGHT-TEMPORAL-1.0` nel catalogo 1.6. Il metodo e il denominatore sono versionati, con review indipendente prima del rilascio. [Contratto, provenance, effetti su confidence e rollback](../../project/HANDOVER_2026-10-15-GUIDING-TEMPORAL-INTEGRATION.md). Il profilo sperimentale e i gate produttivi F5 restano invariati.
+Il mapping storico con sentinel zero è superseded, esclusivamente per sessioni con misura verificabile, dal metodo `DSG-GUIDING-LIGHT-TEMPORAL-1.0` nel catalogo 1.5 con campo additivo. Il metodo e il denominatore sono versionati, con review indipendente prima del rilascio. [Contratto, provenance, effetti su confidence e rollback](../../project/HANDOVER_2026-10-15-GUIDING-TEMPORAL-INTEGRATION.md). Il profilo sperimentale e i gate produttivi F5 restano invariati.
