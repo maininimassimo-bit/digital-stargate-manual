@@ -460,3 +460,8 @@ P6 delivery verificata sulla PR #499 e sul merge `0bd6e20df0b449cd163543ed30bd69
 ### BKL-051 — capacità candidata offline (2026-10-15)
 
 [Profilo esplicito del registro](BKL-051-S1-CAMPAIGN-CAPACITY-2026-10-15.md): backend storico 32 binding/job, 1 MiB; profilo trusted CANDIDATE_59X3_V1 su registro isolato 512/8 MiB. Browser sola lettura 512/8 MiB. Nessuna adozione, migrazione, attivazione o replay impliciti. Milestone OPEN / NOT_VALIDATED, 37% indicativo, zero controlli qualificati. Rilascio subordinato a review indipendenti e gate sul commit esatto; cloud richiede nuovo perimetro approvato con conservazione di backup e versioni.
+
+
+### BKL-051 — preparazione locale dei derivati, 2026-10-15
+
+[Contratto e vista candidati](BKL-051-S1-DERIVED-PREPARATION-VIEW-2026-10-15.md): ricevuta passiva per tre operatori senza job selezionati, con piano/provenienza/head corrispondenti, otto associazioni e quattro blocchi conservati. Produttore locale e lettore in memoria; nessun avvio o nuova autorità. Preparazioni e tentativi restano distinti. R01/R02/R09/R10/R14 parziali; milestone OPEN / NOT_VALIDATED, 37% indicativo, zero controlli qualificati. Nessuna nuova attivazione cloud o spesa; rilascio subordinato ai gate esatti e a verifiche postmerge.

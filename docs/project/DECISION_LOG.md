@@ -886,3 +886,8 @@ PR540 è MERGED sul commit `93be5531da5243c79c3f3f03f9762095700a6f45`, ma il gat
 ## BKL-051 — profilo capacità candidato, 2026-10-15
 
 [Capacità esplicita del registro candidato](BKL-051-S1-CAMPAIGN-CAPACITY-2026-10-15.md): implementazione offline 512 binding/job e 8 MiB con profilo trusted e registro isolato; default backend 32/1 MiB conservato. Browser: lettura massima 512/8 MiB. Prove sintetiche e verifica visiva locale, gate di rilascio ancora separati. Nessuna attivazione cloud; costi futuri da stimare includendo backup progressivi e versioni. BKL-051 OPEN / NOT_VALIDATED, 37% indicativo, zero controlli qualificati; R09 resta aperto per il collaudo operativo completo.
+
+
+### BKL-051 — preparazione locale dei derivati, 2026-10-15
+
+[Contratto e vista candidati](BKL-051-S1-DERIVED-PREPARATION-VIEW-2026-10-15.md): ricevuta passiva per tre operatori senza job selezionati, con piano/provenienza/head corrispondenti, otto associazioni e quattro blocchi conservati. Produttore locale e lettore in memoria; nessun avvio o nuova autorità. Preparazioni e tentativi restano distinti. R01/R02/R09/R10/R14 parziali; milestone OPEN / NOT_VALIDATED, 37% indicativo, zero controlli qualificati. Nessuna nuova attivazione cloud o spesa; rilascio subordinato ai gate esatti e a verifiche postmerge.

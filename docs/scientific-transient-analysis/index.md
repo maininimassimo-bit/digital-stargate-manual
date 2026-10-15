@@ -141,6 +141,16 @@
     </details>
     <p>Il congelamento preliminare sul PC conserva una nuova versione e le impronte di algoritmo e regole senza sovrascrivere le precedenti. Per un derivato associato dal controllo locale, la ricevuta mostra la presenza della prova archiviata: originale e copia usata restano distinti. La calibrazione scientifica resta da attestare. Un’impronta importata non dimostra da sola i byte, l’identità dell’autore o la data di congelamento. Le dichiarazioni documentate restano da revisionare; non sono controlli indipendenti validati. Nessuna ricevuta può assegnare un test superato o un’approvazione scientifica.</p>
   </section>
+  <section data-dsg-derived-preparation aria-label="Preparazione locale delle copie calibrate">
+    <h2>Preparazione locale delle copie calibrate</h2>
+    <p>Confronta la versione preliminare del piano, la provenienza e la ricevuta delle tre copie preparate sul PC. La preparazione è distinta da un job selezionato e da un tentativo eseguito.</p>
+    <label>Versione del piano <input data-plan type="file" accept="application/json,.json"></label>
+    <label>Provenienza delle copie <input data-lineage type="file" accept="application/json,.json"></label>
+    <label>Preparazione delle tre copie <input data-preparation type="file" accept="application/json,.json"></label>
+    <p role="status" aria-live="polite">Nessuna preparazione caricata.</p>
+    <div data-result></div>
+    <p>Lettura locale in memoria, massimo 1 MiB per file, senza invio o conservazione. Il produttore locale verifica i frame del piano; il browser confronta le dichiarazioni importate e non verifica i byte privati. Otto associazioni dichiarate non eliminano i blocchi scientifici e non autorizzano un avvio.</p>
+  </section>
   <section aria-label="Richiesta di analisi">
     <h2>Gruppo verificato sul PC</h2>
     <p>Scegli solo un gruppo già registrato e verificato sul computer. Il portale non legge le cartelle e non carica le immagini.</p>
