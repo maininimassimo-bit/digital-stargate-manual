@@ -35,7 +35,12 @@ const routes = Object.keys(JSON.parse(fs.readFileSync('overrides/main.html', 'ut
           for (const text of await rows.allTextContents()) {
             assert(text.includes('copertura temporale non disponibile'), text);
             assert(!text.includes('coverage 0%'), text);
+            assert(text.includes(' \u00b7 '), 'Evidence separator must remain UTF-8');
           }
+          const qualityText = await p.locator('[data-scientific-data-quality]').textContent();
+          assert(qualityText.includes('SHA-256 \u2713'), 'Freshness badge must remain UTF-8');
+          assert(qualityText.includes('Apri sessione \u2192'), 'Session links must remain UTF-8');
+          assert(!/\u00c2\u00b7|\u00c3\u00a8|\u00e2\u20ac|\u00e2\u2020|\u00e2\u0153/.test(qualityText), 'Corrupted public text');
           await p.locator('.dsg-dq-record').first().locator('summary').click();
           assert(await p.locator('.dsg-dq-record').first().locator('.dsg-dq-coverage-note').isVisible());
         }
