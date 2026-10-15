@@ -3,6 +3,10 @@
   'use strict';
   const ORIGIN = 'https://dsg-pixinsight-pilot-183451329061.europe-west1.run.app';
   const CLIENT = '183451329061-8iedbjrn60u6iau42u1tlsonn6bi6hjd.apps.googleusercontent.com';
+  // Read-only upper bounds for explicitly configured campaigns. These do not
+  // increase the service's default limits or authorize any analysis or replay.
+  const MAX_CAMPAIGN_ITEMS = 512;
+  const MAX_RESPONSE_BYTES = 8 * 1024 * 1024;
   const labels = {QUEUED:'In coda', RESERVED:'Prenotato dal PC', RUNNING:'Operazione in corso',
     COMPLETED:'Completamento tecnico comunicato dal PC', FAILED:'Tentativo non riuscito',
     CANCELLED:'Annullamento confermato', RECOVERY_REQUIRED:'Recupero supervisionato necessario'};
@@ -35,7 +39,7 @@
     return Object.fromEntries(bindingKeys.map(key=>[key,value[key]]));
   }
   function inspectOptions(value) {
-    require(fields(value,['bindings'])&&Array.isArray(value.bindings)&&value.bindings.length<=32);
+    require(fields(value,['bindings'])&&Array.isArray(value.bindings)&&value.bindings.length<=MAX_CAMPAIGN_ITEMS);
     const bindings=value.bindings.map(inspectBinding);
     require(new Set(bindings.map(b=>b.bindingRef)).size===bindings.length);return bindings;
   }
@@ -69,7 +73,7 @@
     inspectRecoveryRequest(closure.request);return closure;
   }
   function inspectJobs(value) {
-    require(fields(value,['jobs']) && Array.isArray(value.jobs) && value.jobs.length<=32);
+    require(fields(value,['jobs']) && Array.isArray(value.jobs) && value.jobs.length<=MAX_CAMPAIGN_ITEMS);
     const ids=new Set();
     for(const job of value.jobs) {
       require(fields(job,['jobId','request','binding','state','cancelRequested','sequence','result','reviews',
@@ -116,13 +120,13 @@
   }
   async function readResponse(response) {
     const length=response.headers.get('Content-Length');
-    require(length===null||(/^\d{1,7}$/.test(length)&&Number(length)<=1048576));
+    require(length===null||(/^\d{1,7}$/.test(length)&&Number(length)<=MAX_RESPONSE_BYTES));
     require(response.body&&typeof response.body.getReader==='function');
     const reader=response.body.getReader(),decoder=new TextDecoder('utf-8',{fatal:true});
     let text='',bytes=0;
     try {
       while(true){const part=await reader.read();if(part.done)break;bytes+=part.value.byteLength;
-        require(bytes<=1048576);text+=decoder.decode(part.value,{stream:true});}
+        require(bytes<=MAX_RESPONSE_BYTES);text+=decoder.decode(part.value,{stream:true});}
       return text+decoder.decode();
     } catch(error){try{await reader.cancel();}catch{}throw error;}
     finally {reader.releaseLock();}

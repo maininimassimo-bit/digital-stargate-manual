@@ -44,6 +44,18 @@ const fixture=()=>({jobId:'TRN_'+'6'.repeat(32),request:{requestId:'6'.repeat(32
     qualityCounts:{measured:0,excluded:0,incomplete:2}},reviews:[],createdAt:'2026-10-08T10:00:00+00:00',updatedAt:'2026-10-08T10:01:00.123456+00:00',
   rootId:'8'.repeat(32),attemptId:'9'.repeat(32),leaseIssuedAt:'2026-10-08T10:00:00+00:00',leaseExpiresAt:'2026-10-08T10:15:00+00:00',
   executionEvidence:'WORKER_REPORTED_NOT_ATTESTED',scientificValidation:'NOT_VALIDATED',detailsLocation:'OWNER_PC',publication:'NONE'});
+function campaignJobs(count,reviews=0) {
+  const id=n=>n.toString(16).padStart(32,'0');
+  return Array.from({length:count},(_,i)=>{
+    const job=fixture(),bindingRef=id(10000+i);
+    job.jobId='TRN_'+id(1000+i);job.request={requestId:id(1000+i),bindingRef};
+    job.binding={...job.binding,bindingRef,inputRef:id(20000+i)};
+    job.result={...job.result,bindingRef};job.attemptId=id(30000+i);
+    job.reviews=Array.from({length:reviews},(_,j)=>({request:{decisionId:id(40000+j),
+      reportSha256:job.result.reportSha256,decision:'REJECT_CANDIDATE'},recordedAt:job.updatedAt,authority:'OWNER_DECLARED'}));
+    return job;
+  });
+}
 function harness({jobs=[fixture()],status=200,fail=false,deferred=false,googleMissing=false,rawBody,media='application/json',contentLength=null,timeout=false,
   bindings=[fixture().binding],storage=new Map(),storageFail=false,removeFail=false,postFailure='',postDeferred=false}={}) {
   function node(tag='div'){return {tag,dataset:{},children:[],callbacks:{},disabled:false,isConnected:true,
@@ -176,10 +188,27 @@ test('hostile HTML, credentials, added details and malformed claims fail closed'
     assert.equal(h.controls.jobs.children.length,0);assert.match(h.controls.message.textContent,/Nessun risultato mostrato/);}
 });
 test('duplicate jobs, oversized collection and duplicate review IDs are rejected',async()=>{
-  for(const jobs of [[fixture(),fixture()],Array.from({length:33},fixture)]){
+  for(const jobs of [[fixture(),fixture()],campaignJobs(513)]){
     const h=harness({jobs});await h.login();assert.equal(h.controls.jobs.children.length,0);}
   const job=fixture(),review={request:{decisionId:'a'.repeat(32),reportSha256:job.result.reportSha256,decision:'KEEP_FOR_REVIEW'},recordedAt:job.updatedAt,authority:'OWNER_DECLARED'};
   job.reviews=[review,review];const h=harness({jobs:[job]});await h.login();assert.equal(h.controls.jobs.children.length,0);
+});
+
+test('177 and 512 distinct campaign rows remain passive and unvalidated',async()=>{
+  for(const count of [177,512]) {
+    const jobs=campaignJobs(count,count===512?32:1),bindings=jobs.map(j=>j.binding);
+    if(count===512)assert.ok(new TextEncoder().encode(JSON.stringify({jobs})).length>1048576);
+    const h=harness({jobs,bindings});await h.login();
+    assert.equal(h.controls.jobs.children.length,count);
+    assert.equal(h.controls.group.children.length,count+1);
+    assert.equal(h.requests.length,2);assert.equal(posts(h).length,0);assert.equal(h.storage.size,0);
+  }
+});
+
+test('binding 513 is refused without a private jobs request',async()=>{
+  const h=harness({jobs:[],bindings:campaignJobs(513).map(j=>j.binding)});await h.login();
+  assert.equal(h.controls.jobs.children.length,0);assert.equal(h.requests.length,1);
+  assert.match(h.controls.message.textContent,/Nessun risultato mostrato/);
 });
 test('disconnect during an in-flight read prevents late private rendering',async()=>{
   const h=harness({deferred:true});await h.login();h.controls.disconnect.click();h.release();await tick();
@@ -203,7 +232,7 @@ test('failed Google script load exposes a usable error without network reads',as
   assert.match(h.controls.message.textContent,/Consultazione non riuscita/);assert.equal(h.requests.length,0);assert.equal(h.controls.connect.disabled,false);
 });
 test('bounded body, declared size, JSON media and UTF-8 reject malformed delivery',async()=>{
-  for(const options of [{rawBody:'x'.repeat(1048577)},{contentLength:'1048577'},{contentLength:'-1'},
+  for(const options of [{rawBody:'x'.repeat(8388609)},{contentLength:'8388609'},{contentLength:'-1'},
     {media:'text/html'},{rawBody:new Uint8Array([255])},{rawBody:'{"jobs":['},{rawBody:'null'},{rawBody:'[]'}]){
     const h=harness(options);await h.login();assert.equal(h.controls.jobs.children.length,0);
     assert.match(h.controls.message.textContent,/Nessun risultato mostrato/);
