@@ -108,3 +108,14 @@ I failure sono osservabili nel workflow e nel consumer. Il rollback consiste nel
 ## 10. Acceptance record
 
 F4 è Accepted tramite PR #162 e merge `ed9ffcc92e1a5252b0d8c37634bc652397f3cde1`. ARB ha espresso `APPROVED` 98/100 e Release Quality `READY FOR MERGE` senza waiver. I gate post-merge applicabili sono risultati verdi, inclusi BKL-041 F4 Governance #4, Developer Foundation #1295, Validate documentation #928 e Pages #761.
+
+## Chiarimento di presentazione — 15 ottobre 2026
+
+La coverage zero del mapping GUIDING_STABILITY resta il valore prudenziale
+sperimentale per un denominatore temporale non rappresentato. Il consumer la
+mostra come «copertura temporale non disponibile» quando è presente la relativa
+limitation della projection: non è un'osservazione fisica pari a 0%.
+RMS e campioni restano disponibili, mentre score/confidence/coverage aggregata,
+pesi e gate F5 restano invariati. Null o dati assenti non sono convertiti in zero.
+L'estensione scientifica del denominatore/metodo resta futura e richiede review.
+[Audit e verifiche](../../project/HANDOVER_2026-10-15-GUIDING-COVERAGE-PRESENTATION.md).

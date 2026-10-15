@@ -26,6 +26,19 @@ const routes = Object.keys(JSON.parse(fs.readFileSync('overrides/main.html', 'ut
         try { await p.waitForFunction(() => document.querySelector('[data-dsg-scene]').dataset.dsgSceneState === 'ready'); }
         catch (error) { console.error(await stage.getAttribute('data-dsg-scene-state'), await stage.locator('.dsg-scene__status').textContent(), await stage.evaluate(e=>e.getBoundingClientRect().toJSON()), errors); fs.mkdirSync('artifacts',{recursive:true}); await p.screenshot({path:'artifacts/portal-test-failure.png'}); throw error; }
         assert.equal(await p.locator('.md-content h1').count(), 1, route);
+        if (route === 'scientific-data-quality/index.md') {
+          await p.locator('.dsg-dq-record').first().waitFor();
+          const inputs = JSON.parse(fs.readFileSync('docs/data/scientific-data-quality-projection.json','utf8'))
+            .assessments.flatMap(item => item.inputEvidence).filter(item => item.dimension === 'GUIDING_STABILITY');
+          const rows = p.locator('.dsg-dq-evidence li').filter({hasText:'GUIDING_STABILITY'});
+          assert.equal(await rows.count(), inputs.length);
+          for (const text of await rows.allTextContents()) {
+            assert(text.includes('copertura temporale non disponibile'), text);
+            assert(!text.includes('coverage 0%'), text);
+          }
+          await p.locator('.dsg-dq-record').first().locator('summary').click();
+          assert(await p.locator('.dsg-dq-record').first().locator('.dsg-dq-coverage-note').isVisible());
+        }
         assert(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `Horizontal overflow: ${route} at ${viewport.width}`);
         assert.equal(await stage.locator('canvas').count(), 1);
       }

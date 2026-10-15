@@ -40,6 +40,9 @@
 .dsg-dq-record summary{cursor:pointer;font-weight:750}
 .dsg-dq-evidence{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem;padding:0;list-style:none}
 .dsg-dq-evidence li{display:flex;justify-content:space-between;gap:.5rem;border:1px solid var(--dsg-border);border-radius:.55rem;padding:.55rem;font-size:.72rem}
+.dsg-dq-evidence li>*{min-width:0;overflow-wrap:anywhere}
+.dsg-dq-evidence li>span{text-align:right}
+.dsg-dq-coverage-note{font-size:.75rem;line-height:1.5;color:var(--dsg-text-soft)}
 .dsg-dq-table-wrap{overflow:auto}
 .dsg-dq-table-wrap table{min-width:58rem;font-size:.72rem}
 .dsg-dq-source{font-size:.72rem}
