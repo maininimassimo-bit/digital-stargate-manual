@@ -21,7 +21,8 @@ def transient_component(store, legacy_worker_id, legacy_digest):
     worker_digest = os.environ["DSG_TRANSIENT_WORKER_SHA256"]
     require(worker_id != legacy_worker_id and worker_digest != legacy_digest,
             "TRANSIENT_DISTINCT_IDENTITY_REQUIRED")
-    return TransientQueue(store, worker_id), worker_digest
+    return TransientQueue(store, worker_id,
+                          state_ref=os.environ.get("DSG_TRANSIENT_STATE_REF")), worker_digest
 
 
 def public_bytes(url):

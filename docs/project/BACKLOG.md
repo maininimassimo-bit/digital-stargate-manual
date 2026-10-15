@@ -10,6 +10,10 @@ istruzioni tipizzate non sono dichiarate validate dall'audit. RAW e manifest
 invariati. [Metodo, evidenza riproducibile, gate e rollback](HANDOVER_2026-10-15-LIGHT-CALIBRATION-AUDIT.md).
 
 
+## BKL-051 — registro isolato, 15 ottobre 2026
+
+Prova reale fermata e riconciliata prima di creare job o avviare PixInsight. Candidato locale: riferimento esplicito per separare il nuovo registro da quello storico senza cancellazioni o riuso di identità. Restano gate exact-head, nuova proposta operativa, capacità per 177 job e tutti i requisiti scientifici. [Evidenze e limiti](BKL-051-CONTROL-STATE-ISOLATION-2026-10-15.md). Nessuna acceptance chiusa; 37%, zero controlli qualificati.
+
 ## Importazione sessioni — recupero del 15 ottobre 2026
 
 Correzione richiesta Owner: separazione calibrazione/LIGHT nell'analizzatore e

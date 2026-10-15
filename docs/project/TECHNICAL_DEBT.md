@@ -10,6 +10,10 @@ istruzioni tipizzate non sono dichiarate validate dall'audit. RAW e manifest
 invariati. [Metodo, evidenza riproducibile, gate e rollback](HANDOVER_2026-10-15-LIGHT-CALIBRATION-AUDIT.md).
 
 
+## BKL-051 — stato storico e capacità della coda, 15 ottobre 2026
+
+Registro unico incompatibile con la nuova identità: rifiuto reale preservato; correzione locale a selezione esplicita, senza migrazione. Rimangono 32 binding/job e 1MiB: non coprono il collaudo completo di 59 triplette/177 job. Sono requisiti da completare, non scope eliminato o debito accettato. [Contratto e gate](BKL-051-CONTROL-STATE-ISOLATION-2026-10-15.md). Nessuna nuova attivazione attestata.
+
 ## Importazione sessioni — recupero del 15 ottobre 2026
 
 Correzione richiesta Owner: separazione calibrazione/LIGHT nell'analizzatore e
