@@ -40,6 +40,9 @@ dell'indipendenza e della separazione dallo sviluppo. Include impronta del piano
 delle revisioni selezionate e del registro corrente. Riutilizzi successivi per
 sviluppo non riscrivono lo snapshot; nuove informazioni invalidanti richiedono
 una revoca esplicita, conservata nella cronologia.
+Il riuso confronta sia gli hash dei file sia gli identificativi stabili di
+immagine ed esposizione contro lo sviluppo e i campioni già congelati: una
+ricodifica con byte diversi non rende indipendente la stessa osservazione.
 
 Ogni esito collega tre job e attempt effettivi della coda, creati dopo il
 congelamento, con input, algoritmo, regole, report e binding corrispondenti.

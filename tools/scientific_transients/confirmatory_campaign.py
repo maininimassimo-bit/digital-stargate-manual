@@ -246,14 +246,17 @@ class ConfirmatoryCampaigns:
         development_refs = ({w['request']['witnessRef'] for w in state['inputs']
                              if w['request']['purpose']=='DEVELOPMENT'} if plan['frozenUTC'] is None
                             else set(plan['developmentWitnessRefsAtFreeze']))
-        development = {f['sha256'] for w in state['inputs']
-                       if w['request']['witnessRef'] in development_refs for f in w['request']['frames']}
-        if development.intersection(hashes): reasons.append('DEVELOPMENT_INPUT_OVERLAP')
+        selected = {'sha256':set(hashes), 'frameRef':set(frame_refs), 'exposureRef':set(exposures)}
+        development = [f for w in state['inputs']
+                       if w['request']['witnessRef'] in development_refs for f in w['request']['frames']]
+        if any(selected[key].intersection(f[key] for f in development) for key in selected):
+            reasons.append('DEVELOPMENT_INPUT_OVERLAP')
         for other in state['plans']:
             if other is plan or other['frozenUTC'] is None: continue
-            used={f['sha256'] for ref in other['request']['inputWitnessRefs']
-                  for f in self._input(state, ref)['request']['frames']}
-            if used.intersection(hashes): reasons.append('EARLIER_FROZEN_SAMPLE_REUSED')
+            used=[f for ref in other['request']['inputWitnessRefs']
+                  for f in self._input(state, ref)['request']['frames']]
+            if any(selected[key].intersection(f[key] for f in used) for key in selected):
+                reasons.append('EARLIER_FROZEN_SAMPLE_REUSED')
         return sorted(set(reasons))
 
     def _selected_reviews_sha(self, state, plan):

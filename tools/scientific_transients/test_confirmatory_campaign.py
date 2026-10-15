@@ -157,6 +157,60 @@ class CampaignTests(unittest.TestCase):
         self.service.register_inputs(r)
         self.assertIn('DEVELOPMENT_INPUT_OVERLAP',self.service.view(ref(10))['blockers'])
 
+    def development_identity_alias(self, identity):
+        r=copy.deepcopy(self.inputs[0]);r['witnessRef']=ref(33001);r['purpose']='DEVELOPMENT'
+        for j,f in enumerate(r['frames']):
+            f['sha256']=sha(50000+j)
+            f['frameRef']=ref(51000+j)
+            f['exposureRef']=ref(52000+j)
+        # Only one stable identity matches; every file hash and other identity differs.
+        r['frames'][0][identity]=self.inputs[0]['frames'][0][identity]
+        self.service.register_inputs(r)
+        for i in range(59):self.review(i)
+        self.assertIn('DEVELOPMENT_INPUT_OVERLAP',self.service.view(ref(10))['blockers'])
+        with self.assertRaisesRegex(ProtocolError,'FREEZE_BLOCKED'):
+            self.service.freeze(ref(10),self.freeze_request())
+
+    def test_changed_hash_development_exposure_identity_blocks_freeze(self):
+        self.development_identity_alias('exposureRef')
+
+    def test_changed_hash_development_frame_identity_blocks_freeze(self):
+        self.development_identity_alias('frameRef')
+
+    def earlier_campaign_identity_alias(self, identity):
+        self.freeze();old=copy.deepcopy(self.inputs)
+        original_frozen_utc=self.service.view(ref(10))['frozenUTC']
+        for i,r in enumerate(self.inputs):
+            r=copy.deepcopy(r);r['witnessRef']=ref(40000+i);r['correlationRef']=ref(41000+i)
+            for j,f in enumerate(r['frames']):
+                f['sha256']=sha(50000+3*i+j)
+                f['frameRef']=ref(51000+3*i+j)
+                f['exposureRef']=ref(52000+3*i+j)
+            if i==0 and identity is not None:r['frames'][0][identity]=old[0]['frames'][0][identity]
+            self.service.register_inputs(r);self.inputs[i]=r;self.review(i)
+        request=copy.deepcopy(self.request);request['planRef']=ref(11)
+        request['inputWitnessRefs']=[r['witnessRef'] for r in self.inputs]
+        self.service.create(request)
+        if identity is None:
+            self.service.freeze(ref(11),self.freeze_request(ref(11)))
+            self.assertEqual(self.service.view(ref(11))['blockers'],['COMPLETE_REVIEWED_SAMPLE_MISSING'])
+            self.assertEqual(self.service.view(ref(10))['frozenUTC'],original_frozen_utc)
+            self.assertEqual(self.service.view(ref(10))['blockers'],['COMPLETE_REVIEWED_SAMPLE_MISSING'])
+            return
+        self.assertIn('EARLIER_FROZEN_SAMPLE_REUSED',self.service.view(ref(11))['blockers'])
+        with self.assertRaisesRegex(ProtocolError,'FREEZE_BLOCKED'):
+            self.service.freeze(ref(11),self.freeze_request(ref(11)))
+        self.assertEqual(self.service.view(ref(10))['frozenUTC'],original_frozen_utc)
+
+    def test_changed_hash_earlier_campaign_exposure_identity_blocks_freeze(self):
+        self.earlier_campaign_identity_alias('exposureRef')
+
+    def test_changed_hash_earlier_campaign_frame_identity_blocks_freeze(self):
+        self.earlier_campaign_identity_alias('frameRef')
+
+    def test_disjoint_second_campaign_freezes_without_invalidating_first_snapshot(self):
+        self.earlier_campaign_identity_alias(None)
+
     def test_later_development_use_does_not_rewrite_frozen_registry_snapshot(self):
         self.freeze();r=copy.deepcopy(self.inputs[0]);r['witnessRef']=ref(33000);r['purpose']='DEVELOPMENT'
         self.service.register_inputs(r)
