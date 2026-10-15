@@ -94,6 +94,35 @@ def test_real_quattro_touptek_session():
     assert parsed['binning']==1,parsed
     assert MOD.resolve_configuration(ROOT,parsed)=='QUATTRO200_TOUPTEK294_BIN1',parsed
 
+def test_calibration_and_reconnected_camera(root):
+    folder=root/'mixed-night'; folder.mkdir()
+    path=folder/'session.log'
+    lines=[
+        'Successfully connected Camera. Id: 695A-M Name: 695A-M DisplayName: QHY',
+        'Target: Bias RA: 00:00:00; Dec: 00° 00\' 00"; Epoch: J2000',
+        'Saved image to BIAS_1x1_Bias_Celestron C8.xisf',
+        'Disconnected Camera',
+        'Successfully connected Camera. Id: ToupTek_1 Name: ATR294C DisplayName: ATR294C',
+        'Target: NGC 281 RA: 00:52:25; Dec: 56° 33\' 54"; Epoch: J2000',
+        'Saved image to LIGHT_1x1_NGC 281_Skywatcher quattro 200p__UHC.xisf',
+        'Disconnected Camera',
+        'Successfully connected Camera. Id: 695A-M Name: 695A-M DisplayName: QHY',
+    ]
+    path.write_text('\n'.join(lines),encoding='utf-8')
+    parsed=MOD.parse_nina(folder)['scientific']
+    assert parsed['target_name']=='NGC 281',parsed
+    assert parsed['telescope']=='Sky-Watcher Quattro 200P',parsed
+    assert parsed['camera']=='ToupTek 294MC PRO',parsed
+    assert MOD.resolve_configuration(ROOT,parsed)=='QUATTRO200_TOUPTEK294_BIN1',parsed
+    # A second actual LIGHT instrument is ambiguous; do not invent a pair.
+    path.write_text('\n'.join(lines+['Saved image to LIGHT_1x1_M 27_Celestron C8__Red.xisf']),encoding='utf-8')
+    ambiguous=MOD.parse_nina(folder)['scientific']
+    assert ambiguous['telescope'] is None and ambiguous['camera'] is None,ambiguous
+    path.write_text('\n'.join(lines[:3]),encoding='utf-8')
+    calibration=MOD.parse_nina(folder)['scientific']
+    assert calibration['target_name'] is None and calibration['telescope'] is None,calibration
+
+
 def main():
     with tempfile.TemporaryDirectory() as td:
         root=Path(td); nina=root/'nina'; nina.mkdir(); (nina/'session.log').write_text('2026-09-01|INFO| Target: M 27 RA: 19:59:36; Dec: +22° 43\' 16"; Epoch: J2000\nSaved image to D:\\Images NINA\\Target\\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-9.96C_Red_0027.xisf\nQHYCCD: Closing camera 695A-M-0037ec709603ca4e3\n',encoding='utf-8')
@@ -102,5 +131,6 @@ def main():
         test_phd2_profile_aware_rms(root)
         test_real_c8_session()
         test_real_quattro_touptek_session()
+        test_calibration_and_reconnected_camera(root)
     print('Scientific session evidence regression gates passed.')
 if __name__=='__main__': main()

@@ -6,6 +6,7 @@ from pathlib import Path
 SESSION_RE=re.compile(r'^\d{4}-\d{2}-\d{2}_\d{4}-\d{2}-\d{2}$'); PHD_BEGIN=re.compile(r'^Guiding Begins at ')
 TARGET_COORD_RE=re.compile(r'Target:\s*(?P<target>.+?)\s+RA:\s*(?P<rah>\d{1,2}):(?P<ram>\d{1,2}):(?P<ras>\d+(?:\.\d+)?)\s*;\s*Dec:\s*(?P<sign>[+-]?)(?P<decd>\d{1,2})[^\d]+(?P<decm>\d{1,2})[^\d]+(?P<decs>\d+(?:\.\d+)?)',re.I)
 LIGHT_BIN_RE=re.compile(r'LIGHT_(?P<bin>\d+)x(?P=bin)_',re.I)
+CALIBRATION_TARGET_RE=re.compile(r'^(?:bias|dark|flat|dark[ _-]?flat)(?:\b|_)',re.I)
 # USB watcher messages describe devices present on the host, not necessarily
 # the camera selected by N.I.N.A.  Use only the explicit QHY disconnect line
 # as the legacy fallback; the active connection line has higher authority.
@@ -29,7 +30,7 @@ def canonical_telescope(value):
     return value or None
 def telescope_from_line(line):
     if re.search(r'(?<![A-Za-z0-9])Celestron C8(?: XLT)?(?=_|\s|$)',line,re.I): return 'Celestron C8 XLT'
-    if re.search(r'(?<![A-Za-z0-9])(?:Sky-Watcher\s+)?Quattro\s*200P(?=_|\s|$)',line,re.I): return 'Sky-Watcher Quattro 200P'
+    if re.search(r'(?<![A-Za-z0-9])(?:Sky-?Watcher\s+)?Quattro\s*200P(?=_|\s|$)',line,re.I): return 'Sky-Watcher Quattro 200P'
     return None
 def camera_from_connection_line(line):
     match=CONNECTED_CAMERA_RE.search(line)
@@ -40,17 +41,23 @@ def camera_from_connection_line(line):
     return None
 def parse_nina(folder):
     m={'camera_exposures_total':0,'light_started':0,'light_completed':0,'light_failed_explicit':0,'light_interrupted_unmatched':0,'technical_exposures_estimated':0,'integration_seconds':0.0,'autofocus_started':0,'autofocus_completed':0,'autofocus_failed_explicit':0,'autofocus_unmatched':0,'dither_requests':0,'nina_errors':0,'nina_warnings':0}; scientific={'target_name':None,'ra_deg':None,'dec_deg':None,'epoch':None,'telescope':None,'camera':None,'binning':None,'source':'nina-log'}; connected_camera=None; fallback_camera=None; pending_light=pending_af=0; durations=[]; dur_re=re.compile(r'(?:ExposureTime|Duration|Exposure)\D{0,20}(?P<sec>\d+(?:\.\d+)?)\s*(?:s|sec|seconds?)',re.I)
+    light_telescopes=set(); light_cameras=set(); light_binnings=set()
     for _,text in files(folder):
         for line in text.splitlines():
             low=line.lower(); coord=TARGET_COORD_RE.search(line)
-            if coord and scientific['ra_deg'] is None:
+            if coord and scientific['ra_deg'] is None and not CALIBRATION_TARGET_RE.match(coord.group('target').strip()):
                 h=float(coord.group('rah')); mi=float(coord.group('ram')); sec=float(coord.group('ras')); dd=float(coord.group('decd')); dm=float(coord.group('decm')); ds=float(coord.group('decs')); scientific['target_name']=coord.group('target').strip(); scientific['ra_deg']=round((h+mi/60+sec/3600)*15,8); scientific['dec_deg']=round((-1 if coord.group('sign')=='-' else 1)*(dd+dm/60+ds/3600),8); scientific['epoch']='J2000' if 'J2000' in line else None
             image=LIGHT_BIN_RE.search(line)
-            if image: scientific['binning']=scientific['binning'] or int(image.group('bin'))
-            telescope=telescope_from_line(line)
-            if telescope: scientific['telescope']=scientific['telescope'] or telescope
+            # Instrument names in calibration images or setup messages do not
+            # describe the scientific LIGHT acquisition. Keep only LIGHT saves.
+            if image and ('saved image to ' in low or 'successfully saved file at ' in low):
+                light_binnings.add(int(image.group('bin')))
+                telescope=telescope_from_line(line)
+                if telescope: light_telescopes.add(telescope)
+                if connected_camera: light_cameras.add(connected_camera)
             connected=camera_from_connection_line(line)
             if connected: connected_camera=connected
+            elif 'disconnected camera' in low: connected_camera=None
             camera=QHY_CAMERA_RE.search(line)
             if camera: fallback_camera=fallback_camera or canonical_camera(camera.group('camera'))
             if '|error|' in low: m['nina_errors']+=1
@@ -68,7 +75,10 @@ def parse_nina(folder):
             elif 'autofocus failed' in low: m['autofocus_failed_explicit']+=1; pending_af=max(0,pending_af-1)
             elif any(x in low for x in ('autofocus completed','autofocus finished','autofocus successful')): m['autofocus_completed']+=1; pending_af=max(0,pending_af-1)
             if 'dither' in low and any(x in low for x in ('start','request','execute','dithering')): m['dither_requests']+=1
-    m['light_interrupted_unmatched']=max(0,m['light_started']-m['light_completed']-m['light_failed_explicit']); m['autofocus_unmatched']=max(0,m['autofocus_started']-m['autofocus_completed']-m['autofocus_failed_explicit']); m['technical_exposures_estimated']=max(0,m['camera_exposures_total']-m['light_started']); m['integration_seconds']=sum(durations[:m['light_completed']]) if durations else (m['light_completed']*600.0 if m['light_completed']>0 else 0.0); scientific['camera']=connected_camera or fallback_camera; m['scientific']=scientific; return m
+    scientific['telescope']=next(iter(light_telescopes)) if len(light_telescopes)==1 else None
+    scientific['binning']=next(iter(light_binnings)) if len(light_binnings)==1 else None
+    scientific['camera']=next(iter(light_cameras)) if len(light_cameras)==1 else (fallback_camera if not light_cameras else None)
+    m['light_interrupted_unmatched']=max(0,m['light_started']-m['light_completed']-m['light_failed_explicit']); m['autofocus_unmatched']=max(0,m['autofocus_started']-m['autofocus_completed']-m['autofocus_failed_explicit']); m['technical_exposures_estimated']=max(0,m['camera_exposures_total']-m['light_started']); m['integration_seconds']=sum(durations[:m['light_completed']]) if durations else (m['light_completed']*600.0 if m['light_completed']>0 else 0.0); m['scientific']=scientific; return m
 def parse_phd2(folder):
     ra=[]; dec=[]; segments=lost=pulse=settling_failures=0
     samples_total=saturated=rejected=settling_excluded=unscaled=0

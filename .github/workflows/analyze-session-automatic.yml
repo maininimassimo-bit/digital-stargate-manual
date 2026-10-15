@@ -18,7 +18,7 @@ on:
         required: true
         type: string
   push:
-    branches: [main, 'session/**']
+    branches: [main]
     paths: ['data/sessions/**/manifest.json']
 permissions: { contents: write, actions: write }
 concurrency:
@@ -52,7 +52,7 @@ jobs:
             *) echo 'F4_INVALID_PROBE_MODE'; exit 1 ;;
           esac
   analyze:
-    if: github.event_name != 'workflow_dispatch' || inputs.telemetry_probe == 'off' || inputs.telemetry_probe == ''
+    if: github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch' || inputs.telemetry_probe == 'off' || inputs.telemetry_probe == '')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

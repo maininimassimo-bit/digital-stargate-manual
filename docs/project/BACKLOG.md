@@ -1,5 +1,15 @@
 # Project Backlog
 
+## Importazione sessioni — recupero del 15 ottobre 2026
+
+Correzione richiesta Owner: separazione calibrazione/LIGHT nell'analizzatore e
+promozione del pacchetto su main corrente con merge limitato, SHA-256, retry
+concorrenza e nessun force push. Analisi solo dopo promozione su main. Sessione
+14–15 ottobre da recuperare dal ramo upload conservato; zero errori nella
+riproduzione corretta, gate di rilascio e riscontro pubblico da attestare nella PR.
+[Diagnosi, contratto, prove e rollback](HANDOVER_2026-10-15-SESSION-IMPORT-RECOVERY.md).
+
+
 ## BKL-051 — piano e scheda del caso, 15 ottobre 2026
 
 Incremento locale candidato del percorso piano/campione, esecuzione vincolata, evidenze e dossier. Python445 OK (uno skip symlink), JavaScript274 PASS, Pages992HTML PASS, MPC49/XSD9 PASS; ARB poi RQ locali APPROVED sul tree applicativo, non sul rilascio remoto. BKL-051 OPEN / NOT_VALIDATED, stima37%, zero controlli qualificati; nessuna voce di acceptance chiusa. [Componenti, prove, gate residui e rollback](BKL-051-PLAN-CASE-WORKSPACE-2026-10-15.md).

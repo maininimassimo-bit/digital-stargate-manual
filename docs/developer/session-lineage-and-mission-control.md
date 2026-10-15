@@ -119,3 +119,18 @@ Controlli browser: ID esatto19–20 settembre, M27/versione/workflow, manifest6/
 Revert normale del package interessato e nuovo deploy Pages; validare artefatto e fonti/URL dopo il ripristino. Conservare sessioni, gallery, originali e servizi privati; non eseguire cleanup, force push, task runtime o reingestion come parte del rollback UI. Una regressione del brand si ripristina nella configurazione/asset condivisi.
 
 Restano non attestati l'inventario fotografico completo per sessione, il contributo dei frame e l'esecuzione completa del workflow pubblico. I conteggi nelle ricevute sono snapshot datati, non costanti da reinserire nelle pagine. Le correzioni non chiudono BKL-050, non promuovono accettazione scientifica M27/P6/BKL-051 e non concedono comandi/safety authority.
+
+## 9. Promozione sessioni e calibrazioni — correzione 15 ottobre 2026
+
+Il pacchetto EAGLE arriva nel ramo session/ID. La promozione usa ora main
+corrente e un merge limitato a pacchetto/report della sessione, con manifest
+COMPLETE, hash e dimensioni verificati. Un aggiornamento concorrente di main
+si ritenta senza force push; conflitti o modifiche fuori scope bloccano.
+L'analisi e la pubblicazione partono su main dopo la promozione. Il workflow
+supporta recupero manuale con session_id e rilancio idempotente.
+
+Le evidenze di calibrazione non identificano il target o telescopio LIGHT:
+il parser usa i salvataggi scientifici e la camera attiva in quei momenti.
+Più strumenti differenti restano indeterminati. Non aggiungere una nuova
+configurazione per compensare un accoppiamento errato nel parser.
+[Diagnosi, prove e rollback](../project/HANDOVER_2026-10-15-SESSION-IMPORT-RECOVERY.md).
