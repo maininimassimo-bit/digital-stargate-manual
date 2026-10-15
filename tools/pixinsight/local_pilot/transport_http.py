@@ -68,12 +68,12 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                     raise AuthError()
                 authenticate_owner(token)
 
-        def deny_access(self):
+        def reject(self, code, value):
             # RFC 9112 §9.6: immediate close with unread POST bytes can reset TCP
-            # before the client receives 403. Half-close output, then discard a
+            # before the client receives the rejection. Half-close output, then discard a
             # bounded amount without parsing, authenticating or dispatching it.
             self.close_connection = True
-            self.send(403, {"error": "ACCESS_DENIED"})
+            self.send(code, value)
             self.wfile.flush()
             try:
                 self.connection.shutdown(socket.SHUT_WR)
@@ -86,7 +86,10 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                     if not raw: break
                     remaining -= len(raw)
             except OSError:
-                pass  # Denial already sent; never retry or dispatch the request.
+                pass  # Rejection already sent; never retry or dispatch the request.
+
+        def deny_access(self):
+            return self.reject(403, {"error": "ACCESS_DENIED"})
 
         def body(self, limit=16384):
             require(len(self.headers.get_all("Content-Length", [])) == 1 and not self.headers.get("Transfer-Encoding"), "BODY_SIZE")
@@ -100,7 +103,7 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
 
         def do_OPTIONS(self):
             if self.headers.get("Origin") != portal_origin:
-                return self.send(403, {"error": "ACCESS_DENIED"})
+                return self.reject(403, {"error": "ACCESS_DENIED"})
             self.send_response(204)
             self.send_header("Access-Control-Allow-Origin", portal_origin)
             self.send_header("Access-Control-Allow-Headers", "Authorization, Content-Type")
@@ -112,7 +115,7 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
             path = self.path
             if path == "/v1/transient-analysis" or path.startswith("/v1/transient-analysis/"):
                 if transient is None:
-                    return self.send(404, {"error": "NOT_FOUND"})
+                    return self.reject(404, {"error": "NOT_FOUND"})
                 is_worker = path.startswith("/v1/transient-analysis/worker/")
                 self.authenticate(is_worker, transient_worker_digest)
                 if self.command == "GET" and path == "/v1/transient-analysis/options":
@@ -143,7 +146,7 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                         return self.send(200, transient.cancel(job_id))
                     if not worker_route and self.command == "POST" and action == "review":
                         return self.send(200, transient.review(job_id, self.body()))
-                return self.send(404, {"error": "NOT_FOUND"})
+                return self.reject(404, {"error": "NOT_FOUND"})
             if self.command == "GET" and path == "/health":
                 if scientific is not None and scientific.planner is not None:
                     return self.send(200, {'protocol': 'DSG_PIAI_QUEUE_V1', 'aiMode': 'OPENAI_API_PLANNING_AVAILABLE',
@@ -166,7 +169,7 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                     if self.command == 'POST' and action in allowed:
                         limit=6291456 if action in {'analysis','decision','final'} else RESEARCH_CHECKPOINT_LIMIT if action == 'checkpoint' else 65536
                         return self.send(200,getattr(scientific,'research_'+action)(request_id,self.body(limit)))
-                    return self.send(404,{'error':'NOT_FOUND'})
+                    return self.reject(404,{'error':'NOT_FOUND'})
                 adaptive_match = re.fullmatch(r'/v1/(worker/)?science/intakes/([a-f0-9]{32})/adaptive-(analysis|approve|state|reserve|start|checkpoint|decision|context|final|result|review|halt)', path)
                 if adaptive_match:
                     worker_adaptive, request_id, action = adaptive_match.groups()
@@ -185,7 +188,7 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                         return self.send(200, scientific.approve_adaptive(request_id, self.body()))
                     if action == 'state' and self.command == 'GET':
                         return self.send(200, scientific.adaptive_state(request_id))
-                    return self.send(404, {'error':'NOT_FOUND'})
+                    return self.reject(404, {'error':'NOT_FOUND'})
                 ai_match = re.fullmatch(r'/v1/worker/science/intakes/([a-f0-9]{32})/openai-plan', path)
                 if ai_match and self.command == 'POST':
                     return self.send(200, scientific.generate_openai(ai_match[1], self.body(16384)))
@@ -272,7 +275,7 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                 request = self.body()
                 require(isinstance(request, dict) and set(request) == {"workerId", "report"}, "REQUEST_FIELDS")
                 return self.send(200, broker.report(match[1], request["workerId"], request["report"]))
-            return self.send(404, {"error": "NOT_FOUND"})
+            return self.reject(404, {"error": "NOT_FOUND"})
 
         def handle_request(self):
             try:
@@ -280,10 +283,10 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
             except AuthError:
                 self.deny_access()
             except (ProtocolError, IngestionError, ArchiveError) as error:
-                self.send(400, {"error": str(error)})
+                self.reject(400, {"error": str(error)})
             except Conflict:
-                self.send(409, {"error": "CONFLICT_RETRY_IDENTICAL"})
+                self.reject(409, {"error": "CONFLICT_RETRY_IDENTICAL"})
             except Exception:
-                self.send(503, {"error": "UNAVAILABLE_RETRY_IDENTICAL"})
+                self.reject(503, {"error": "UNAVAILABLE_RETRY_IDENTICAL"})
         do_GET = do_POST = handle_request
     return Handler

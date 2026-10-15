@@ -1,5 +1,12 @@
 # Project Backlog
 
+## BKL-051 — risposte rifiutate, 15 ottobre 2026
+
+Conservare il fallimento postmerge Windows della PR601; completare la correzione
+dei dati POST residui e i nuovi gate, prima di attestare il rilascio del successore.
+[Dettagli](BKL-051-S1-REJECTED-HTTP-RESPONSES-2026-10-15.md). Capacità del campione,
+scienza e acceptance restano requisiti aperti; nessuna nuova prova cloud autorizzata.
+
 ## BKL-051 — evidenza delle coordinate WCS, 15 ottobre 2026
 
 Correzione candidata del verificatore locale: respingere prove di copia con

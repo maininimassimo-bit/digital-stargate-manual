@@ -1,5 +1,12 @@
 # Technical Debt Register
 
+## BKL-051 — chiusura con dati POST residui, 15 ottobre 2026
+
+Il 404 può andare perso su Windows se la connessione chiude con dati non letti.
+Correzione candidata riusa i limiti esistenti del rifiuto 403 anche per gli altri
+errori. Non mascherare l'errore con retry o promuovere il gate precedente.
+[Evidenze e regressioni](BKL-051-S1-REJECTED-HTTP-RESPONSES-2026-10-15.md).
+
 ## BKL-051 — confronto nativo delle coordinate, 15 ottobre 2026
 
 Le coordinate vuote di un vecchio script non dimostrano equivalenza WCS.

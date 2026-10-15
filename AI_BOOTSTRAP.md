@@ -1,5 +1,16 @@
 # Digital StarGate AI Bootstrap
 
+## BKL-051 — errore HTTP postmerge e correzione, 15 ottobre 2026
+
+PR601 integrata dopo 18 controlli e ARB poi RQ; postmerge scientifico Windows
+fallito per connessione interrotta su un percorso worker che deve restare 404.
+Il gate precedente resta fallito. Correzione candidata riusa la chiusura
+controllata delle risposte negate per tutti gli errori, senza cambiare accessi,
+percorsi o idempotenza. [Evidenze, limiti e gate](docs/project/BKL-051-S1-REJECTED-HTTP-RESPONSES-2026-10-15.md).
+Nessuna nuova attivazione cloud o ripetizione di analisi. BKL-051 OPEN /
+NOT_VALIDATED, stima37%, zero controlli qualificati. Le note seguenti conservano
+gli snapshot precedenti.
+
 ## BKL-051 — prove private della tripletta e controllo WCS, 15 ottobre 2026
 
 PR599 rilasciata; ripresa autorizzata conclusa con tre tentativi RAW diagnostici

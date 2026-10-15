@@ -4,13 +4,14 @@ import datetime as dt
 import hashlib
 import importlib.util
 import os
+import socket
 from pathlib import Path
 import threading
 import unittest
 import urllib.error
 import urllib.request
 from http.server import HTTPServer
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from tools.scientific_transients.queue import TransientQueue, STATE_KEY, LEASE_SECONDS
 from tools.pixinsight.local_pilot.broker import Broker, ProtocolError, decode, encode
@@ -233,6 +234,45 @@ class HttpTests(unittest.TestCase):
             code, response = self.request("/v1/transient-analysis/jobs", value, "non-owner", True)
             self.assertEqual((code, response), (403, {"error": "ACCESS_DENIED"}))
         self.assertEqual(self.store.items, {})
+
+    def test_repeated_unknown_posts_deliver_404_without_storage_mutation(self):
+        # The forbidden worker close-recovery route exposed an unread-body
+        # connection abort on Windows after merge; it must still return 404.
+        for path,token,owner in (
+                ('/v1/transient-analysis/worker/jobs/TRN_'+'f'*32+'/close-recovery',TOKEN,False),
+                ('/v1/transient-analysis/unknown','synthetic-owner',True),
+                ('/v1/worker/unknown',LEGACY_TOKEN,False)):
+            for i in range(10):
+                code,response=self.request(path,{'fixture':'x'*(i*300)},token,owner)
+                self.assertEqual((code,response),(404,{'error':'NOT_FOUND'}))
+        self.assertEqual(self.store.items,{})
+
+    def test_rejections_half_close_without_parsing_or_dispatching_body(self):
+        for status in (400,403,404,409,503):
+            with self.subTest(status=status):
+                handler=object.__new__(self.server.RequestHandlerClass)
+                handler.send=Mock();handler.wfile=Mock();handler.connection=Mock();handler.rfile=Mock()
+                handler.rfile.read1.side_effect=[b'not-json',b'']
+                handler.body=Mock(side_effect=AssertionError('Rejected body must not be parsed'))
+                handler.reject(status,{'error':'synthetic'})
+                handler.send.assert_called_once_with(status,{'error':'synthetic'})
+                handler.wfile.flush.assert_called_once()
+                handler.connection.shutdown.assert_called_once_with(socket.SHUT_WR)
+                self.assertTrue(handler.close_connection);handler.body.assert_not_called()
+                self.assertEqual(handler.rfile.read1.call_count,2)
+                for call in handler.rfile.read1.call_args_list:self.assertLessEqual(call.args[0],8192)
+
+    def test_rejection_discard_keeps_existing_byte_and_time_bounds(self):
+        handler=object.__new__(self.server.RequestHandlerClass)
+        handler.send=Mock();handler.wfile=Mock();handler.connection=Mock();handler.rfile=Mock()
+        handler.rfile.read1.side_effect=lambda size:b'x'*size
+        handler.reject(404,{'error':'NOT_FOUND'})
+        self.assertEqual(sum(c.args[0] for c in handler.rfile.read1.call_args_list),65536)
+        handler.rfile.reset_mock()
+        with patch('tools.pixinsight.local_pilot.transport_http.time') as clock:
+            clock.monotonic.side_effect=[0,0.3]
+            handler.reject(404,{'error':'NOT_FOUND'})
+        handler.rfile.read1.assert_not_called()
 
     def test_owner_worker_role_separation_and_private_http_flow(self):
         base = "/v1/transient-analysis"

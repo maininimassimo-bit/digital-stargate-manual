@@ -1,5 +1,12 @@
 # Decision Log
 
+## BKL-051 — consegna degli errori HTTP, 15 ottobre 2026
+
+Riutilizzare la chiusura half-close e lo scarto limitato per tutti i rifiuti del
+gestore, mantenendo i controlli di accesso e senza interpretare o ripetere i dati
+scartati. Fallimento postmerge PR601 conservato; gate del successore separati.
+[Motivazione e rollback](BKL-051-S1-REJECTED-HTTP-RESPONSES-2026-10-15.md).
+
 ## BKL-051 — rifiuto delle prove WCS vuote, 15 ottobre 2026
 
 Il verificatore candidato distingue stato terminale e prova del confronto
