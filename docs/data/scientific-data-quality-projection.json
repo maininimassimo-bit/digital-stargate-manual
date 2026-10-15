@@ -3,12 +3,12 @@
   "projectionType": "SCIENTIFIC_DATA_QUALITY_PROJECTION",
   "projectionId": "BKL041-F4-CATALOG-V1",
   "projectionState": "EXPERIMENTAL_NOT_ACCEPTED",
-  "generatedAt": "2026-10-15T07:00:52.453Z",
+  "generatedAt": "2026-10-15T07:19:23.464Z",
   "sourceCatalog": {
     "path": "docs/data/scientific-session-catalog.json",
     "schemaVersion": "1.5",
     "catalogStatus": "VERSIONED_ANALYTICS_PROJECTION",
-    "digest": "ed50f0dc4029f5b1afa6dcc4bfab1b35a6fe6e8c8b816eb321903272c07e36a7",
+    "digest": "0b776af92555144057e00f0a185b7922f0646b7d122545a40e5e9c546ebc0586",
     "sessionCount": 24,
     "sessionIds": [
       "2026-07-14_2026-07-15",
@@ -3008,7 +3008,7 @@
         },
         {
           "dimension": "ACQUISITION_COMPLETION",
-          "value": 0.8529000000000001,
+          "value": 1,
           "unit": "ratio",
           "evidenceClass": "DECLARED",
           "quality": "VALID",
@@ -3053,17 +3053,17 @@
       "assessment": {
         "schemaVersion": "1.0",
         "assessmentType": "SCIENTIFIC_DATA_QUALITY_ASSESSMENT",
-        "assessmentId": "BKL041-F3-07a6359362a0f3d16c8d94ba",
+        "assessmentId": "BKL041-F3-2afe50a68d0c49598ff344fb",
         "sessionId": "2026-10-14_2026-10-15",
         "profileId": "DSG-SCIENTIFIC-QUALITY-SYNTHETIC-DEMONSTRATOR",
         "profileVersion": "1.0.0-f3",
         "profileDigest": "7bf87e894d26054e51c97b10e9519fb5861926d0770de968b3f9d74a7b97f157",
         "algorithmId": "DSG-WEIGHTED-LINEAR-SCORE",
         "algorithmVersion": "1.0.0",
-        "evidenceSnapshotDigest": "f04c3b3efbe96a0fca2ec16e2e240259419444696179053714941dcc68b39896",
+        "evidenceSnapshotDigest": "b6d2f1a674917ec96f02799adf8089066209c8efdaacf93f741a2b6c16ed0f9d",
         "assessmentState": "AVAILABLE",
         "score": {
-          "value": 82.47,
+          "value": 86.89,
           "scaleMin": 0,
           "scaleMax": 100,
           "roundingDigits": 2
@@ -3093,11 +3093,11 @@
           {
             "dimension": "ACQUISITION_COMPLETION",
             "state": "AVAILABLE",
-            "rawValue": 0.8529000000000001,
+            "rawValue": 1,
             "unit": "ratio",
-            "normalizedValue": 0.8529,
+            "normalizedValue": 1,
             "weight": 0.3,
-            "contribution": 0.25587,
+            "contribution": 0.3,
             "confidenceFactor": 0.8,
             "evidenceRefs": [
               "data/sessions/2026/10/2026-10-14_2026-10-15/normalized/session-metrics.json#nina"
@@ -3157,7 +3157,7 @@
           "actionAuthority": "NONE",
           "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
         },
-        "assessmentDigest": "bd3bda841f77d33812d790e775583ed0e384d39b8d39f83d9f7d97984e295723"
+        "assessmentDigest": "24da99dbd694c7795e47c076f3d3fed8068fe6c5ec6747eae8582b26921736dd"
       },
       "generationError": null
     }
@@ -3181,5 +3181,5 @@
     "actionAuthority": "NONE",
     "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
   },
-  "projectionDigest": "aa0047ad9ed7747d3be70c9564676950323cf32a142f13e56b3d66d34fcff6c5"
+  "projectionDigest": "7d48c082508a8c74780104329e89c03582c04df4ac62f4ea45396649daf50bc9"
 }
