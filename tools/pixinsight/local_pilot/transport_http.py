@@ -29,12 +29,15 @@ def google_owner(token, client_id, owner_email, *, request=None):
 
 
 def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scientific=None,
-                transient=None, transient_worker_digest=None):
+                transient=None, transient_worker_digest=None, campaigns=None):
     require(re.fullmatch(r"[a-f0-9]{64}", worker_digest) is not None, "WORKER_DIGEST_INVALID")
-    if transient is not None:
+    if transient is not None or campaigns is not None:
         require(isinstance(transient_worker_digest, str) and
                 re.fullmatch(r"[a-f0-9]{64}", transient_worker_digest) is not None and
                 transient_worker_digest != worker_digest, "TRANSIENT_DISTINCT_CREDENTIAL_REQUIRED")
+    if campaigns is not None:
+        require(transient is not None and campaigns.worker_id == transient.worker_id,
+                'CAMPAIGN_TRANSIENT_WORKER_BINDING')
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *_):
             pass
@@ -113,6 +116,41 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
 
         def dispatch(self):
             path = self.path
+            campaign_base = '/v1/transient-analysis/campaigns'
+            campaign_worker = '/v1/transient-analysis/worker/campaigns'
+            if (path == campaign_base or path.startswith(campaign_base + '/') or
+                    path == campaign_worker or path.startswith(campaign_worker + '/')):
+                if transient is None:
+                    return self.reject(404, {'error':'NOT_FOUND'})
+                is_campaign_worker = path == campaign_worker or path.startswith(campaign_worker + '/')
+                self.authenticate(is_campaign_worker, transient_worker_digest)
+                if campaigns is None:
+                    return self.reject(404, {'error':'NOT_FOUND'})
+                if self.command == 'POST' and path == campaign_worker + '/inputs':
+                    return self.send(200, campaigns.register_inputs(self.body()))
+                if not is_campaign_worker and path == campaign_base:
+                    if self.command == 'POST': return self.send(200, campaigns.create(self.body()))
+                    if self.command == 'GET': return self.send(200, campaigns.view())
+                match = re.fullmatch(campaign_base + r'/inputs/([a-f0-9]{32})(/review)?', path)
+                if match:
+                    witness_ref, action = match.groups()
+                    if self.command == 'GET' and action is None:
+                        return self.send(200, campaigns.input_view(witness_ref))
+                    if self.command == 'POST' and action == '/review':
+                        return self.send(200, campaigns.review_input(witness_ref, self.body()))
+                match = re.fullmatch(campaign_worker + r'/([a-f0-9]{32})/executions', path)
+                if match and self.command == 'POST':
+                    return self.send(200, campaigns.record_execution(match[1], self.body()))
+                match = re.fullmatch(campaign_base + r'/([a-f0-9]{32})(?:/(freeze|review-outcome|finalize|revoke))?', path)
+                if match:
+                    plan_ref, action = match.groups()
+                    if self.command == 'GET' and action is None:
+                        return self.send(200, campaigns.view(plan_ref))
+                    actions = {'freeze':campaigns.freeze, 'review-outcome':campaigns.review_outcome,
+                               'finalize':campaigns.finalize, 'revoke':campaigns.revoke}
+                    if self.command == 'POST' and action in actions:
+                        return self.send(200, actions[action](plan_ref, self.body()))
+                return self.reject(404, {'error':'NOT_FOUND'})
             if path == "/v1/transient-analysis" or path.startswith("/v1/transient-analysis/"):
                 if transient is None:
                     return self.reject(404, {"error": "NOT_FOUND"})
