@@ -121,6 +121,12 @@ def test_calibration_and_reconnected_camera(root):
     path.write_text('\n'.join(lines[:3]),encoding='utf-8')
     calibration=MOD.parse_nina(folder)['scientific']
     assert calibration['target_name'] is None and calibration['telescope'] is None,calibration
+    unknown_connection='Successfully connected Camera. Id: unknown Name: New camera DisplayName: New'
+    light='Saved image to LIGHT_1x1_NGC 281_Skywatcher quattro 200p__UHC.xisf'
+    path.write_text('\n'.join([lines[0],unknown_connection,light,'QHYCCD: Closing camera 695A-M']),encoding='utf-8')
+    assert MOD.parse_nina(folder)['scientific']['camera'] is None
+    path.write_text('\n'.join([lines[0],light,'Disconnected Camera',light]),encoding='utf-8')
+    assert MOD.parse_nina(folder)['scientific']['camera'] is None
 
 
 def main():

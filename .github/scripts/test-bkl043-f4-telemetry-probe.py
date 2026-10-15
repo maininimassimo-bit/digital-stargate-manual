@@ -12,10 +12,12 @@ class Tests(unittest.TestCase):
     def test_scientific_job_unchanged_except_guard(self):
         job=dict(NEW['jobs']['analyze']);guard=job.pop('if')
         self.assertEqual(job,BASE['jobs']['analyze'])
-        self.assertEqual(guard,"github.event_name != 'workflow_dispatch' || inputs.telemetry_probe == 'off' || inputs.telemetry_probe == ''")
+        self.assertEqual(guard,"github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch' || inputs.telemetry_probe == 'off' || inputs.telemetry_probe == '')")
     def test_trigger_and_session_input_preserved(self):
         self.assertEqual(NEW['name'],BASE['name'])
-        self.assertEqual(NEW['on']['push'],BASE['on']['push'])
+        # Scientific work starts only after the package is promoted to main.
+        self.assertEqual(NEW['on']['push']['branches'],['main'])
+        self.assertEqual(NEW['on']['push']['paths'],BASE['on']['push']['paths'])
         self.assertEqual(NEW['on']['workflow_dispatch']['inputs']['session_id'],BASE['on']['workflow_dispatch']['inputs']['session_id'])
     def test_probe_cannot_checkout_or_request_permissions(self):
         job=NEW['jobs']['telemetry_probe']

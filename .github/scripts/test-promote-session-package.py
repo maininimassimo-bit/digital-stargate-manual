@@ -92,6 +92,20 @@ class PromotionTests(unittest.TestCase):
             MOD.promote(self.repo, ID, source)
         self.assertEqual(self.remote_head(), before)
 
+    def test_rename_into_package_cannot_remove_external_file(self):
+        self.git("switch", "session-test")
+        self.git("mv", "README.md", f"{PACKAGE}/raw/nina/readme.txt")
+        self.commit("rename into package")
+        source = self.git("rev-parse", "HEAD").stdout.strip()
+        before = self.remote_head()
+        with self.assertRaisesRegex(ValueError, "outside its package"):
+            MOD.promote(self.repo, ID, source)
+        # The identical scope gate is used again for the final merged candidate.
+        with self.assertRaisesRegex(ValueError, "outside its package"):
+            MOD.checked_scope(self.repo, self.base, source, ID)
+        self.assertEqual(self.remote_head(), before)
+        self.assertEqual(self.git("show", f"{before}:README.md").stdout, "baseline\n")
+
     def test_conflicting_session_evidence_stops(self):
         path = self.repo / PACKAGE / "raw/nina/log.txt"
         path.parent.mkdir(parents=True)

@@ -27,7 +27,7 @@ def git(repo: Path, *args: str, check: bool = True) -> subprocess.CompletedProce
 def checked_scope(repo: Path, base: str, source: str, session_id: str) -> None:
     prefixes = (f"data/sessions/{session_id[:4]}/{session_id[5:7]}/{session_id}/",
                 f"docs/session-reports/{session_id[:4]}/{session_id[5:7]}/{session_id}/")
-    paths = git(repo, "diff", "--name-only", "-z", base, source).stdout.split("\0")
+    paths = git(repo, "diff", "--no-renames", "--name-only", "-z", base, source).stdout.split("\0")
     if any(path and not path.startswith(prefixes) for path in paths):
         raise ValueError("Session branch contains changes outside its package")
 
