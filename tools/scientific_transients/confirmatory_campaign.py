@@ -17,6 +17,7 @@ from tools.scientific_transients.queue import fields, digest
 
 PROTOCOL = 'DSG_CONFIRMATORY_CAMPAIGNS_V1'
 LIMIT = 8 * 1024 * 1024
+NON_CONFIRMATORY_PURPOSES = frozenset({'DEVELOPMENT', 'SYNTHETIC'})
 FRAME_FIELDS = {'frameRef', 'sha256', 'exposureRef', 'role', 'acquiredUTC',
                 'metadataSha256', 'bandpassSha256', 'calibration', 'uncertainty', 'timeStatus'}
 
@@ -244,7 +245,7 @@ class ConfirmatoryCampaigns:
         if any(len(set(v)) != 177 for v in (hashes,frame_refs,exposures)):
             reasons.append('OBSERVATION_REUSED')
         development_refs = ({w['request']['witnessRef'] for w in state['inputs']
-                             if w['request']['purpose']=='DEVELOPMENT'} if plan['frozenUTC'] is None
+                             if w['request']['purpose'] in NON_CONFIRMATORY_PURPOSES} if plan['frozenUTC'] is None
                             else set(plan['developmentWitnessRefsAtFreeze']))
         selected = {'sha256':set(hashes), 'frameRef':set(frame_refs), 'exposureRef':set(exposures)}
         development = [f for w in state['inputs']
@@ -285,7 +286,7 @@ class ConfirmatoryCampaigns:
                     and not self._sample_blockers(state,p),
                     'CAMPAIGN_FREEZE_BLOCKED')
             p['developmentWitnessRefsAtFreeze']=[w['request']['witnessRef'] for w in state['inputs']
-                                                if w['request']['purpose']=='DEVELOPMENT']
+                                                if w['request']['purpose'] in NON_CONFIRMATORY_PURPOSES]
             p['registrySnapshotSha256']=fingerprint(state['inputs'])
             p['frozenUTC']=stamp
             return self._event(p,'FREEZE',request,stamp,'AUTHENTICATED_OWNER_SCIENTIFIC_DECISION',

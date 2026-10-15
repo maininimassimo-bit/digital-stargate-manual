@@ -157,8 +157,8 @@ class CampaignTests(unittest.TestCase):
         self.service.register_inputs(r)
         self.assertIn('DEVELOPMENT_INPUT_OVERLAP',self.service.view(ref(10))['blockers'])
 
-    def development_identity_alias(self, identity):
-        r=copy.deepcopy(self.inputs[0]);r['witnessRef']=ref(33001);r['purpose']='DEVELOPMENT'
+    def development_identity_alias(self, identity, purpose='DEVELOPMENT'):
+        r=copy.deepcopy(self.inputs[0]);r['witnessRef']=ref(33001);r['purpose']=purpose
         for j,f in enumerate(r['frames']):
             f['sha256']=sha(50000+j)
             f['frameRef']=ref(51000+j)
@@ -176,6 +176,24 @@ class CampaignTests(unittest.TestCase):
 
     def test_changed_hash_development_frame_identity_blocks_freeze(self):
         self.development_identity_alias('frameRef')
+
+    def test_synthetic_hash_alias_cannot_become_reserved_real(self):
+        self.development_identity_alias('sha256','SYNTHETIC')
+
+    def test_synthetic_frame_alias_cannot_become_reserved_real(self):
+        self.development_identity_alias('frameRef','SYNTHETIC')
+
+    def test_synthetic_exposure_alias_cannot_become_reserved_real(self):
+        self.development_identity_alias('exposureRef','SYNTHETIC')
+
+    def test_freeze_retains_disjoint_synthetic_witness_in_exclusion_snapshot(self):
+        r=copy.deepcopy(self.inputs[0]);r['witnessRef']=ref(33002);r['purpose']='SYNTHETIC'
+        for j,f in enumerate(r['frames']):
+            f['sha256']=sha(50000+j);f['frameRef']=ref(51000+j);f['exposureRef']=ref(52000+j)
+        self.service.register_inputs(r);self.freeze()
+        state=decode(self.store.get(self.service.key)[0])
+        self.assertIn(r['witnessRef'],state['plans'][0]['developmentWitnessRefsAtFreeze'])
+        self.assertEqual(self.service.view(ref(10))['blockers'],['COMPLETE_REVIEWED_SAMPLE_MISSING'])
 
     def earlier_campaign_identity_alias(self, identity):
         self.freeze();old=copy.deepcopy(self.inputs)

@@ -43,6 +43,10 @@ una revoca esplicita, conservata nella cronologia.
 Il riuso confronta sia gli hash dei file sia gli identificativi stabili di
 immagine ed esposizione contro lo sviluppo e i campioni già congelati: una
 ricodifica con byte diversi non rende indipendente la stessa osservazione.
+L'insieme di esclusione congelato comprende sia `DEVELOPMENT` sia `SYNTHETIC`:
+un nuovo witness dichiarato reale non può riqualificare osservazioni già note
+come sintetiche. Il nome V1 `developmentWitnessRefsAtFreeze` identifica questo
+insieme di esclusione completo, non la sola categoria di sviluppo.
 
 Ogni esito collega tre job e attempt effettivi della coda, creati dopo il
 congelamento, con input, algoritmo, regole, report e binding corrispondenti.
