@@ -5,7 +5,7 @@ import vm from 'node:vm';
 
 const source = readFileSync(new URL('../../docs/javascripts/dsg-theme-manager.js', import.meta.url), 'utf8');
 
-function page({ darkSystem = true, storage = new Map() } = {}) {
+function page({ darkSystem = true, storage = new Map(), materialSubscriber = true } = {}) {
   const handlers = new Map();
   const system = { matches: darkSystem, addEventListener: (_, fn) => { system.changed = fn; } };
   const root = { dataset: {} };
@@ -18,7 +18,7 @@ function page({ darkSystem = true, storage = new Map() } = {}) {
     matches: () => true,
     click() {
       for (const radio of radios) radio.checked = radio === this;
-      body.dataset.mdColorScheme = scheme;
+      if (materialSubscriber) body.dataset.mdColorScheme = scheme;
       emit('change', this);
     }
   }));
@@ -49,6 +49,18 @@ test('Material light selection replaces a dark system theme in both theme layers
   assert.equal(p.root.dataset.dsgThemeResolved, 'light');
   assert.equal(p.service.getTheme().preference, 'light');
   assert.equal(p.service.getTheme().materialTheme, 'light');
+});
+
+test('theme changes immediately without the Material subscriber in a local preview', () => {
+  const p = page({ materialSubscriber: false });
+  p.service.setTheme('light');
+  assert.equal(p.body.dataset.mdColorScheme, 'default');
+  assert.equal(p.root.dataset.dsgThemeResolved, 'light');
+  p.service.setTheme('dark');
+  assert.equal(p.body.dataset.mdColorScheme, 'slate');
+  p.select('default');
+  assert.equal(p.body.dataset.mdColorScheme, 'default');
+  assert.equal(page({ storage: p.storage, materialSubscriber: false }).body.dataset.mdColorScheme, 'default');
 });
 
 test('explicit Material choice survives refresh and overrides the system preference', () => {

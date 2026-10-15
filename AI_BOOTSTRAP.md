@@ -1,5 +1,16 @@
 # Digital StarGate AI Bootstrap
 
+## BKL-051 — dispersione locale dei dark, 15 ottobre 2026
+
+Misurata localmente la dispersione dei 50 dark del2024, con tre mappe Float64,
+originali invariati e ricomputazione indipendente completa. Contesto passivo
+candidato nel portale: distingue dispersione e s²/50 condizionale, senza
+associare varianze alle LIGHT o validare il master con rigetto. Gate del nuovo
+codice/rilascio da verificare. [Perimetro e limiti](docs/project/BKL-051-DARK-DISPERSION-CONTEXT-2026-10-15.md).
+OPEN / NOT_VALIDATED, stima37%, zero controlli qualificati; nessuna nuova
+operazione cloud, analisi nativa, query o segnalazione autorizzata dal codice.
+Gli snapshot sotto riportati restano storici.
+
 ## BKL-051 — errore HTTP postmerge e correzione, 15 ottobre 2026
 
 PR601 integrata dopo 18 controlli e ARB poi RQ; postmerge scientifico Windows
