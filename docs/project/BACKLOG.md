@@ -1,5 +1,14 @@
 # Project Backlog
 
+## Copertura temporale della guida — 15 ottobre 2026
+
+Audit delle 24 sessioni:21 con evidence di guida e sentinel prudenziale zero,
+3 senza evidence eleggibile. Corretto il consumer: il denominatore assente è
+mostrato come copertura temporale non disponibile, conservando RMS e spiegazione.
+Modello, score/confidence/coverage aggregata, digest e readiness invariati;
+nessuna percentuale inventata dai campioni. [Audit, semantica e rollback](HANDOVER_2026-10-15-GUIDING-COVERAGE-PRESENTATION.md).
+
+
 ## Audit LIGHT e calibrazioni — 15 ottobre 2026
 
 Su richiesta Owner, audit del catalogo completo (24 sessioni) per il falso

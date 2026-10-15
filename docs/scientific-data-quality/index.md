@@ -15,6 +15,7 @@
 <section class="dsg-dq-notice" aria-label="Stato sperimentale">
   <strong>Capability sperimentale validata; profilo non pronto per l’uso produttivo.</strong>
   <p>F5 valuta automaticamente l’intera cohort reale e pubblica i gap di readiness. I valori disponibili non sono ranking, soglie di qualità, giudizi sull’immagine o decisioni di accettazione.</p>
+  <p>La copertura temporale della guida è indicata come non disponibile quando manca il denominatore: l’RMS può essere disponibile anche senza una percentuale temporale misurabile. La copertura complessiva delle evidenze resta un indicatore del modello sperimentale.</p>
 </section>
 
 <div data-scientific-data-quality>

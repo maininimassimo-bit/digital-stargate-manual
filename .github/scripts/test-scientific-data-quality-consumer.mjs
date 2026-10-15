@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import test from 'node:test';
 import { buildScientificDataQualityProjection } from './scientific-data-quality-projection.mjs';
-import { validateProjectionContract, validateProjectionFreshness } from '../../docs/javascripts/scientific-data-quality-core.mjs';
+import { evidenceCoverageView, validateProjectionContract, validateProjectionFreshness } from '../../docs/javascripts/scientific-data-quality-core.mjs';
 
 const profile = JSON.parse(fs.readFileSync('docs/data/scientific-data-quality-f3-fixture.json', 'utf8')).profile;
 const session = id => ({
@@ -46,4 +46,32 @@ test('authority escalation fails closed before rendering', () => {
   const projection = structuredClone(build(catalog));
   projection.authority.productionUseAuthorized = true;
   assert.throws(() => validateProjectionContract(projection), /production authority drift/);
+});
+
+test('missing guiding denominator is unavailable, not measured zero coverage', () => {
+  const projection = build(catalog);
+  const input = projection.assessments[0].inputEvidence.find(item => item.dimension === 'GUIDING_STABILITY');
+  const before = JSON.stringify(projection);
+  assert.deepEqual(evidenceCoverageView(input, projection.limitations), {
+    state: 'UNAVAILABLE', value: null, reason: 'GUIDING_TEMPORAL_DENOMINATOR_MISSING'
+  });
+  assert.equal(JSON.stringify(projection), before, 'presentation must not change score inputs or digests');
+  assert.equal(evidenceCoverageView({ dimension: 'SKY_QUALITY_COVERAGE', coverage: 0 }).value, 0);
+  assert.equal(evidenceCoverageView({ dimension: 'GUIDING_STABILITY', coverage: 0 }).value, 0);
+  assert.equal(evidenceCoverageView({ dimension: 'GUIDING_STABILITY', coverage: 0.5 }, projection.limitations).value, 0.5);
+  for (const coverage of [null, undefined, NaN, -1, 2]) {
+    assert.equal(evidenceCoverageView({ dimension: 'SKY_QUALITY_COVERAGE', coverage }).state, 'UNAVAILABLE');
+  }
+});
+
+test('all published guiding evidence carries the missing-denominator presentation', () => {
+  const projection = JSON.parse(fs.readFileSync('docs/data/scientific-data-quality-projection.json', 'utf8'));
+  for (const item of projection.assessments.flatMap(record => record.inputEvidence)) {
+    const view = evidenceCoverageView(item, projection.limitations);
+    if (item.dimension === 'GUIDING_STABILITY') {
+      assert.equal(view.reason, 'GUIDING_TEMPORAL_DENOMINATOR_MISSING');
+    } else {
+      assert.equal(view.value, item.coverage);
+    }
+  }
 });
