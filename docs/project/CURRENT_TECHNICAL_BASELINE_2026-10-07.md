@@ -1,5 +1,9 @@
 # Current Technical Baseline — 2026-10-07
 
+## BKL-051 — accesso e prova diagnostica, 15 ottobre 2026
+
+PR596 rilasciata e prova autorizzata interrotta dopo una esecuzione diagnostica collegata al piano: seconda richiesta non confermata per rifiuto di accesso, nessun reinvio, ripristino completo di traffico/configurazione/IAM. Candidato frontend previene richieste con accesso scaduto o prossimo alla scadenza; 49 test locali PASS, gate exact-head e rilascio del successore ancora necessari. [Stato, limiti e residui](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md). Copertura 1/3, zero controlli qualificati; milestone OPEN / NOT_VALIDATED, 37% indicativo. Snapshot successivi storici.
+
 ## Aggiornamento del portale — 14 ottobre 2026
 
 PR587, PR588 e PR589 integrate e verificate fino a Pages; ultimo merge `9ea5f2ca377eca2e48af1c081fc64c4e7bb5b582`. Catena sessione e Mission Control rileggono fonti correnti ogni minuto visibile e manualmente; asset/versioni sono associati con ID esatto, Transfer verifica il pacchetto documentale EAGLE, logo/header/favicon usano il PNG Owner comune. AP-013 espone il limite documentato 30 file/run e discovery/scheduler storici, senza attestazioni sui dispositivi attuali. Consultare [riferimento tecnico](../developer/session-lineage-and-mission-control.md) e [ricevute di rilascio](../releases/2026-10-14-session-lineage-and-brand.md).

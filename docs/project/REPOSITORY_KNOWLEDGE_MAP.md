@@ -1,5 +1,11 @@
 # Repository Knowledge Map
 
+## BKL-051 — scadenza dell'accesso, 15 ottobre 2026
+
+[Controllo preventivo Owner e stato della prova](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md): scientific-transients-portal.js verifica la scadenza prima di HTTP e nuovo intento; portal.test.mjs usa credenziali sintetiche e clock controllato per verificare stop locale e conservazione degli intenti incerti. Nessuna attestazione di firma dal browser o modifica cloud.
+
+
+
 ## Copertura temporale della guida — 15 ottobre 2026
 
 Audit delle 24 sessioni:21 con evidence di guida e sentinel prudenziale zero,

@@ -1,5 +1,11 @@
 # Decision Log
 
+## BKL-051 — scadenza locale e richieste incerte, 15 ottobre 2026
+
+Prima di HTTP o di un nuovo intento richiedere oltre 30 secondi residui sulla scadenza dichiarata dalla credenziale Google. È un controllo preventivo del browser, senza attestazione d'identità o sostituzione delle verifiche server. Disconnessione locale e nuovo accesso esplicito; richieste incerte preservate e nessun reinvio automatico. [Prove e confine](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md).
+
+
+
 ## Copertura temporale della guida — 15 ottobre 2026
 
 Audit delle 24 sessioni:21 con evidence di guida e sentinel prudenziale zero,

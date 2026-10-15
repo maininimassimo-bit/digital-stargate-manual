@@ -1,5 +1,11 @@
 # Technical Debt Register
 
+## BKL-051 — continuità dell'accesso, 15 ottobre 2026
+
+Rifiuto reale di accesso interrompe la prova dopo un completamento diagnostico. Candidato locale verifica preventivamente la scadenza senza sostituire l'autenticazione server e conserva gli intenti incerti. 49 test locali PASS; consegna del commit e collaudo reale aperti. Capacità del campione, scienza e nuova finestra autorizzata restano necessari. [Limiti](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md).
+
+
+
 ## Copertura temporale della guida — 15 ottobre 2026
 
 Audit delle 24 sessioni:21 con evidence di guida e sentinel prudenziale zero,

@@ -1,5 +1,11 @@
 # Digital StarGate Enterprise Architecture Context
 
+## BKL-051 — scadenza preventiva, 15 ottobre 2026
+
+Candidato frontend controlla la sola scadenza dichiarata prima di HTTP e nuovo intento. Firma, identità e authority restano sul servizio; nessun token persistito, rinnovo automatico o reinvio di richieste incerte. Prova precedente interrotta dopo un completamento diagnostico e ripristinata integralmente; nessuna nuova attivazione. [Stato e limiti](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md).
+
+
+
 ## Copertura temporale della guida — 15 ottobre 2026
 
 Audit delle 24 sessioni:21 con evidence di guida e sentinel prudenziale zero,
