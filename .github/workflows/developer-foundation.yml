@@ -27,6 +27,7 @@ jobs:
       - { name: Test EAGLE health portal projection, shell: pwsh, run: ./.github/scripts/test-eagle-health-portal-projection.ps1 }
       - { name: Test EAGLE health portal bounded history, shell: pwsh, run: ./.github/scripts/test-eagle-health-portal-history.ps1 }
       - { name: Test session promotion fail-safe contract, shell: pwsh, run: ./.github/scripts/test-session-promotion.ps1 }
+      - { name: Test concurrent session promotion, run: python .github/scripts/test-promote-session-package.py }
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with: { node-version: "22" }

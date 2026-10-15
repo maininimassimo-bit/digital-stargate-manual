@@ -1,6 +1,12 @@
 name: Promote session package to main
 
 on:
+  workflow_dispatch:
+    inputs:
+      session_id:
+        description: Session ID to recover from its uploaded branch
+        required: true
+        type: string
   push:
     branches:
       - 'session/**'
@@ -20,17 +26,21 @@ jobs:
   promote:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout session branch
+      - name: Checkout trusted current main
         uses: actions/checkout@v6
         with:
+          ref: main
           fetch-depth: 0
 
       - name: Resolve and validate session identity
         id: session
         shell: bash
+        env:
+          MANUAL_ID: ${{ inputs.session_id }}
         run: |
           set -euo pipefail
           branch="${GITHUB_REF_NAME}"
+          if [[ "$GITHUB_EVENT_NAME" == workflow_dispatch ]]; then branch="session/$MANUAL_ID"; fi
           [[ "$branch" =~ ^session/([0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{4}-[0-9]{2}-[0-9]{2})$ ]] || {
             echo "Invalid session branch: $branch"
             exit 1
@@ -39,27 +49,24 @@ jobs:
           year="${id:0:4}"
           month="${id:5:2}"
           root="data/sessions/$year/$month/$id"
-          test -f "$root/manifest.json" || { echo "Manifest missing: $root/manifest.json"; exit 1; }
+          git fetch origin "refs/heads/$branch"
+          source="$(git rev-parse FETCH_HEAD)"
+          if [[ "$GITHUB_EVENT_NAME" == push && "$source" != "$GITHUB_SHA" ]]; then
+            echo "Uploaded branch advanced; newer push owns promotion."; exit 1
+          fi
+          echo "source=$source" >> "$GITHUB_OUTPUT"
           echo "id=$id" >> "$GITHUB_OUTPUT"
           echo "root=$root" >> "$GITHUB_OUTPUT"
 
-      - name: Fetch current main
-        shell: bash
-        run: git fetch origin main
+      - uses: actions/setup-python@v6
+        with: { python-version: '3.13' }
 
-      - name: Validate promotion contract
-        shell: pwsh
-        run: |
-          ./.github/scripts/validate-session-promotion.ps1 `
-            -SessionId '${{ steps.session.outputs.id }}' `
-            -Root '${{ steps.session.outputs.root }}' `
-            -BaseRef 'origin/main'
-
-      - name: Promote package by fast-forwarding main
+      - name: Validate and merge bounded package onto current main
+        env:
+          SESSION_ID: ${{ steps.session.outputs.id }}
+          SOURCE_SHA: ${{ steps.session.outputs.source }}
         shell: bash
-        run: |
-          set -euo pipefail
-          git push origin HEAD:main
+        run: python .github/scripts/promote-session-package.py --session-id "$SESSION_ID" --source-sha "$SOURCE_SHA"
 
       - name: Dispatch downstream analytics and catalog pipeline
         env:

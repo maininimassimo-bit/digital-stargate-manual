@@ -1,5 +1,15 @@
 # Technical Debt Register
 
+## Importazione sessioni — recupero del 15 ottobre 2026
+
+Correzione richiesta Owner: separazione calibrazione/LIGHT nell'analizzatore e
+promozione del pacchetto su main corrente con merge limitato, SHA-256, retry
+concorrenza e nessun force push. Analisi solo dopo promozione su main. Sessione
+14–15 ottobre da recuperare dal ramo upload conservato; zero errori nella
+riproduzione corretta, gate di rilascio e riscontro pubblico da attestare nella PR.
+[Diagnosi, contratto, prove e rollback](HANDOVER_2026-10-15-SESSION-IMPORT-RECOVERY.md).
+
+
 ## BKL-051 — piano e scheda del caso, 15 ottobre 2026
 
 Residui espliciti: qualificazione e campione indipendente, modello di incertezza completo, astrometria/tempi/riferimenti validati, confronti e moto reali, recuperi indipendenti, servizio e revisione autenticati, reporting produttivo, accessibilità e acceptance. Sono requisiti aperti, non debito accettato o scope eliminato. Skip symlink Windows da coprire su runner idoneo; CI exact-head e QA visiva ampia restano gate. [Componenti, prove, gate residui e rollback](BKL-051-PLAN-CASE-WORKSPACE-2026-10-15.md).

@@ -1,5 +1,15 @@
 # Repository Knowledge Map
 
+## Importazione sessioni — recupero del 15 ottobre 2026
+
+Correzione richiesta Owner: separazione calibrazione/LIGHT nell'analizzatore e
+promozione del pacchetto su main corrente con merge limitato, SHA-256, retry
+concorrenza e nessun force push. Analisi solo dopo promozione su main. Sessione
+14–15 ottobre da recuperare dal ramo upload conservato; zero errori nella
+riproduzione corretta, gate di rilascio e riscontro pubblico da attestare nella PR.
+[Diagnosi, contratto, prove e rollback](HANDOVER_2026-10-15-SESSION-IMPORT-RECOVERY.md).
+
+
 ## BKL-051 — piano e scheda del caso, 15 ottobre 2026
 
 Punti di ingresso: `tools/scientific_transients/test_plan.py`, `plan_execution.py`, `plan_readiness.py`, `triplet_report.py`, `case_dossier.py`, `case_workspace.py`; guide operative `.txt` nella stessa directory e importatori `docs/javascripts/scientific-*.js`. [Componenti, prove, gate residui e rollback](BKL-051-PLAN-CASE-WORKSPACE-2026-10-15.md).

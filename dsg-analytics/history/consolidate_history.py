@@ -661,6 +661,8 @@ def main() -> int:
     print(f"Storico: {DEFAULT_CSV}")
     print(f"Sessioni: {report['row_count']} | Errori: {report['error_count']} | Avvisi: {report['warning_count']} | Stato: {report['status']}")
     if report["error_count"]:
+        for error in report["errors"]:
+            print(f"ERROR session={error['session_id']} field={error['field']}: {error['message']}", file=sys.stderr)
         return 2
     if args.strict_warnings and report["warning_count"]:
         return 3
