@@ -1,17 +1,17 @@
 # Report sessione 2026-10-14_2026-10-15
 
-**Stato:** `YELLOW`
+**Stato:** `GREEN`
 
 ## Executive summary
 
 | KPI | Valore |
 |---|---:|
-| Pose LIGHT avviate | 68 |
+| Pose LIGHT avviate | 58 |
 | Pose LIGHT completate | 58 |
 | Pose LIGHT fallite esplicitamente | 0 |
-| Pose LIGHT non abbinate/interrotte | 10 |
+| Pose LIGHT non abbinate/interrotte | 0 |
 | Esposizioni camera totali | 125 |
-| Esposizioni tecniche stimate | 57 |
+| Esposizioni tecniche stimate | 67 |
 | Integrazione LIGHT totale | 9.67 h |
 | Autofocus avviati | 10 |
 | Autofocus completati | 5 |
@@ -38,7 +38,7 @@
 
 ## Anomalie e osservazioni
 
-- Pose LIGHT da verificare: fallite=0, non abbinate=10
+- Nessuna anomalia grave rilevata dai criteri v0.2.0.
 
 ## Note metodologiche
 

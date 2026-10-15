@@ -6,6 +6,8 @@ from pathlib import Path
 SESSION_RE=re.compile(r'^\d{4}-\d{2}-\d{2}_\d{4}-\d{2}-\d{2}$'); PHD_BEGIN=re.compile(r'^Guiding Begins at ')
 TARGET_COORD_RE=re.compile(r'Target:\s*(?P<target>.+?)\s+RA:\s*(?P<rah>\d{1,2}):(?P<ram>\d{1,2}):(?P<ras>\d+(?:\.\d+)?)\s*;\s*Dec:\s*(?P<sign>[+-]?)(?P<decd>\d{1,2})[^\d]+(?P<decm>\d{1,2})[^\d]+(?P<decs>\d+(?:\.\d+)?)',re.I)
 LIGHT_BIN_RE=re.compile(r'LIGHT_(?P<bin>\d+)x(?P=bin)_',re.I)
+IMAGE_TYPE_RE=re.compile(r'\bImageType\s*[:=]?\s*(?P<type>[A-Za-z_]+)',re.I)
+CALIBRATION_IMAGE_TYPES=frozenset({'BIAS','DARK','FLAT','DARKFLAT','FLATDARK','DARK_FLAT','FLAT_DARK'})
 CALIBRATION_TARGET_RE=re.compile(r'^(?:bias|dark|flat|dark[ _-]?flat)(?:\b|_)',re.I)
 # USB watcher messages describe devices present on the host, not necessarily
 # the camera selected by N.I.N.A.  Use only the explicit QHY disconnect line
@@ -43,6 +45,7 @@ def parse_nina(folder):
     m={'camera_exposures_total':0,'light_started':0,'light_completed':0,'light_failed_explicit':0,'light_interrupted_unmatched':0,'technical_exposures_estimated':0,'integration_seconds':0.0,'autofocus_started':0,'autofocus_completed':0,'autofocus_failed_explicit':0,'autofocus_unmatched':0,'dither_requests':0,'nina_errors':0,'nina_warnings':0}; scientific={'target_name':None,'ra_deg':None,'dec_deg':None,'epoch':None,'telescope':None,'camera':None,'binning':None,'source':'nina-log'}; connected_camera=None; fallback_camera=None; pending_light=pending_af=0; durations=[]; dur_re=re.compile(r'(?:ExposureTime|Duration|Exposure)\D{0,20}(?P<sec>\d+(?:\.\d+)?)\s*(?:s|sec|seconds?)',re.I)
     light_telescopes=set(); light_cameras=set(); light_binnings=set(); explicit_camera_connection=False
     for _,text in files(folder):
+        active_exposure_type=None
         for line in text.splitlines():
             low=line.lower(); coord=TARGET_COORD_RE.search(line)
             if coord and scientific['ra_deg'] is None and not CALIBRATION_TARGET_RE.match(coord.group('target').strip()):
@@ -66,12 +69,19 @@ def parse_nina(folder):
             if 'starting exposure' in low or 'capture - starting' in low: m['camera_exposures_total']+=1
             is_light=(('takeexposure' in low and any(x in low for x in ('starting instruction','starting','executing'))) or ('imagetype' in low and 'light' in low and any(x in low for x in ('starting','execute'))))
             if is_light:
+                image_type=IMAGE_TYPE_RE.search(line)
+                active_exposure_type=image_type.group('type').upper() if image_type else None
+                # TakeExposure also acquires BIAS/DARK/FLAT. An explicit type
+                # explicitly naming a calibration must not enter LIGHT counters.
+                # Unknown/untyped legacy instructions retain prior interpretation.
+                if active_exposure_type in CALIBRATION_IMAGE_TYPES: continue
                 m['light_started']+=1; pending_light+=1; mm=dur_re.search(line)
                 if mm: durations.append(float(mm.group('sec')))
                 continue
-            if any(x in low for x in ('takeexposure failed','exposure failed','exposure aborted','exposure cancelled','camera exposure error')): m['light_failed_explicit']+=1; pending_light=max(0,pending_light-1); continue
-            if 'takeexposure' in low and any(x in low for x in ('finishing instruction','finished instruction','completed')): m['light_completed']+=1; pending_light=max(0,pending_light-1); continue
-            if pending_light>0 and any(x in low for x in ('image saved','saved image','file saved')) and ('light' in low or 'takeexposure' in low): m['light_completed']+=1; pending_light-=1; continue
+            if active_exposure_type not in CALIBRATION_IMAGE_TYPES:
+                if any(x in low for x in ('takeexposure failed','exposure failed','exposure aborted','exposure cancelled','camera exposure error')): m['light_failed_explicit']+=1; pending_light=max(0,pending_light-1); continue
+                if 'takeexposure' in low and any(x in low for x in ('finishing instruction','finished instruction','completed')): m['light_completed']+=1; pending_light=max(0,pending_light-1); continue
+                if pending_light>0 and any(x in low for x in ('image saved','saved image','file saved')) and ('light' in low or 'takeexposure' in low): m['light_completed']+=1; pending_light-=1; continue
             if any(x in low for x in ('autofocus starting','starting autofocus','autofocus started')): m['autofocus_started']+=1; pending_af+=1
             elif 'autofocus failed' in low: m['autofocus_failed_explicit']+=1; pending_af=max(0,pending_af-1)
             elif any(x in low for x in ('autofocus completed','autofocus finished','autofocus successful')): m['autofocus_completed']+=1; pending_af=max(0,pending_af-1)
@@ -177,13 +187,13 @@ def parse_sqm(folder):
     summary=folder/'sqm-summary.json'
     if not summary.exists(): return {'state':'NOT_AVAILABLE','quality':'NOT_AVAILABLE','source_path':None}
     try: data=json.loads(summary.read_text(encoding='utf-8-sig'))
-    except (OSError,json.JSONDecodeError): return {'state':'INVALID','quality':'INVALID','source_path':str(summary)}
+    except (OSError,json.JSONDecodeError): return {'state':'INVALID','quality':'INVALID','source_path':summary.as_posix()}
     stats=data.get('statistics') if isinstance(data.get('statistics'),dict) else data; quality=data.get('quality'); state=(quality.get('state') if isinstance(quality,dict) else quality) or data.get('state') or 'AVAILABLE'; quality_value=(quality.get('quality') if isinstance(quality,dict) else quality) or state
     def pick(*keys):
         for key in keys:
             if key in stats and stats[key] is not None: return stats[key]
         return None
-    return {'state':str(state).upper(),'quality':str(quality_value).upper(),'start':data.get('start') or stats.get('start'),'end':data.get('end') or stats.get('end'),'min_mag_arcsec2':pick('min','minimum','min_mag_arcsec2'),'max_mag_arcsec2':pick('max','maximum','max_mag_arcsec2'),'mean_mag_arcsec2':pick('mean','average','mean_mag_arcsec2'),'median_mag_arcsec2':pick('median','median_mag_arcsec2'),'valid_samples':pick('valid_samples','samples_valid','count'),'temporal_coverage':pick('temporal_coverage','coverage'),'source_path':str(summary),'source':data.get('source'),'serial':data.get('serial'),'firmware':data.get('firmware')}
+    return {'state':str(state).upper(),'quality':str(quality_value).upper(),'start':data.get('start') or stats.get('start'),'end':data.get('end') or stats.get('end'),'min_mag_arcsec2':pick('min','minimum','min_mag_arcsec2'),'max_mag_arcsec2':pick('max','maximum','max_mag_arcsec2'),'mean_mag_arcsec2':pick('mean','average','mean_mag_arcsec2'),'median_mag_arcsec2':pick('median','median_mag_arcsec2'),'valid_samples':pick('valid_samples','samples_valid','count'),'temporal_coverage':pick('temporal_coverage','coverage'),'source_path':summary.as_posix(),'source':data.get('source'),'serial':data.get('serial'),'firmware':data.get('firmware')}
 def resolve_configuration(repo_root,scientific):
     registry=repo_root/'data'/'analytics'/'configurations'/'equipment-registry.csv'
     if not registry.exists(): return None

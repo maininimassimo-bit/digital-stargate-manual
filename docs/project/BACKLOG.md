@@ -1,5 +1,15 @@
 # Project Backlog
 
+## Audit LIGHT e calibrazioni — 15 ottobre 2026
+
+Su richiesta Owner, audit del catalogo completo (24 sessioni) per il falso
+positivo TakeExposure/BIAS: una sola sessione interessata, 14–15 ottobre.
+Parser corretto senza cambiare soglie; 58/58 LIGHT, zero non abbinati; stati
+derivati VALIDATED_ANALYTICS. Altre 23 severity conservate; due sessioni senza
+istruzioni tipizzate non sono dichiarate validate dall'audit. RAW e manifest
+invariati. [Metodo, evidenza riproducibile, gate e rollback](HANDOVER_2026-10-15-LIGHT-CALIBRATION-AUDIT.md).
+
+
 ## Importazione sessioni — recupero del 15 ottobre 2026
 
 Correzione richiesta Owner: separazione calibrazione/LIGHT nell'analizzatore e

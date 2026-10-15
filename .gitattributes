@@ -10,6 +10,7 @@
 *.yaml text eol=lf
 *.json text eol=lf
 *.md text eol=lf
+data/analytics/**/*.csv text eol=lf
 
 *.ps1 text eol=crlf
 *.bat text eol=crlf
@@ -17,6 +18,9 @@
 
 # Scientific session raw evidence must remain byte-identical to the manifest SHA-256.
 data/sessions/**/raw/** -text
+
+# Generated PDF byte offsets must survive Windows checkout and staging unchanged.
+docs/session-reports/**/*.pdf binary
 
 # Vendored distribution and license bytes must match the pinned SHA-256 manifest.
 docs/assets/vendor/three-0.180.0/** -text

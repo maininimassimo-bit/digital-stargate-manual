@@ -1,0 +1,428 @@
+{
+  "kind": "DSG_LIGHT_CALIBRATION_AUDIT_V1",
+  "baselineRevision": "377db8c118f3bdfd4c45b72fcdb4c763f918b314",
+  "scope": "EXPLICIT_CALIBRATION_AS_LIGHT_ONLY",
+  "sessionCount": 24,
+  "affectedSessionCount": 1,
+  "records": [
+    {
+      "sessionId": "2026-07-14_2026-07-15",
+      "instructionTypes": {
+        "LIGHT": 49
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/07/2026-07-14_2026-07-15/raw/nina/20260713-154938-3.2.0.9001.4940-202607.log",
+          "sha256": "7c50c821c2fbee4ebdd0404ce3fe6ec2d0afd2cf09a5edbc4458630557f8a715"
+        },
+        {
+          "path": "data/sessions/2026/07/2026-07-14_2026-07-15/raw/nina/20260715-154048-3.2.0.9001.6864-202607.log",
+          "sha256": "0619352e30ab609d3eba04ee6c42e60c10a009699337dd5666f6d4913f137bd2"
+        }
+      ],
+      "baselineSeverity": "RED",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-07-15_2026-07-16",
+      "instructionTypes": {
+        "LIGHT": 81
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/07/2026-07-15_2026-07-16/raw/nina/20260713-154938-3.2.0.9001.4940-202607.log",
+          "sha256": "7c50c821c2fbee4ebdd0404ce3fe6ec2d0afd2cf09a5edbc4458630557f8a715"
+        },
+        {
+          "path": "data/sessions/2026/07/2026-07-15_2026-07-16/raw/nina/20260715-154048-3.2.0.9001.6864-202607.log",
+          "sha256": "2e121a74dd14e745cee37533d77a56b234cc9fb8cbf046df2e0ae51320850665"
+        }
+      ],
+      "baselineSeverity": "GREEN",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-07-16_2026-07-17",
+      "instructionTypes": {
+        "LIGHT": 63
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/07/2026-07-16_2026-07-17/raw/nina/20260715-154048-3.2.0.9001.6864-202607.log",
+          "sha256": "2e121a74dd14e745cee37533d77a56b234cc9fb8cbf046df2e0ae51320850665"
+        },
+        {
+          "path": "data/sessions/2026/07/2026-07-16_2026-07-17/raw/nina/20260716-164709-3.2.0.9001.8236-202607.log",
+          "sha256": "9c6914053eca106d745b2f487374494859120e20a70a36c4b2cb633b74c0c9b1"
+        }
+      ],
+      "baselineSeverity": "GREEN",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-08-10_2026-08-11",
+      "instructionTypes": {},
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/08/2026-08-10_2026-08-11/raw/nina/20260810-204106-3.2.0.9001.7156-202608.log",
+          "sha256": "c634638fbead2cba0a048b9507a52b065fff7e4dac9a4b1ee2b06d44b08d20d6"
+        }
+      ],
+      "baselineSeverity": "GREEN",
+      "state": "NO_TYPED_EXPOSURE_EVIDENCE"
+    },
+    {
+      "sessionId": "2026-08-14_2026-08-15",
+      "instructionTypes": {
+        "LIGHT": 37
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/08/2026-08-14_2026-08-15/raw/nina/20260814-201744-3.2.0.9001.3996-202608.log",
+          "sha256": "940f288ecffa4b9883a8c5071c0baca02252cd7fb5cf9f82186359286712dd96"
+        }
+      ],
+      "baselineSeverity": "GREEN",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-08-15_2026-08-16",
+      "instructionTypes": {
+        "LIGHT": 71
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/08/2026-08-15_2026-08-16/raw/nina/20260814-201744-3.2.0.9001.3996-202608.log",
+          "sha256": "dd19c9d978686cfa564df5dce7931419f4e2e86f0bfe714f168c485f7322c2be"
+        },
+        {
+          "path": "data/sessions/2026/08/2026-08-15_2026-08-16/raw/nina/20260815-204018-3.2.0.9001.6188-202608.log",
+          "sha256": "357a3fadf75154f0686a9c40e1603df00621a4f3db9b619658b8b23599f95fcf"
+        }
+      ],
+      "baselineSeverity": "YELLOW",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-08-26_2026-08-27",
+      "instructionTypes": {},
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/08/2026-08-26_2026-08-27/raw/nina/20260820-210144-3.2.0.9001.4576-202608.log",
+          "sha256": "c3bfa95d6dfe4e94945d94ec78a2b4f0a144e2213fa3c57707fff2b0f3783488"
+        },
+        {
+          "path": "data/sessions/2026/08/2026-08-26_2026-08-27/raw/nina/20260826-214655-3.2.0.9001.1908-202608.log",
+          "sha256": "e5fac62d13dedf940983ab21a505fa15c95921e43998afbe162ee571d0c1dd7e"
+        },
+        {
+          "path": "data/sessions/2026/08/2026-08-26_2026-08-27/raw/nina/20260826-215158-3.2.0.9001.3164-202608.log",
+          "sha256": "b9e57d650f052da824768a8a988275dcc308a2b3e1a88da4004a00190a9bd9a7"
+        },
+        {
+          "path": "data/sessions/2026/08/2026-08-26_2026-08-27/raw/nina/20260826-222557-3.2.0.9001.11032-202608.log",
+          "sha256": "cda09de8204ef53519c8cc897a1018090b4ae23ffd1e8aa5b117dcffb5db1c7a"
+        }
+      ],
+      "baselineSeverity": "GREEN",
+      "state": "NO_TYPED_EXPOSURE_EVIDENCE"
+    },
+    {
+      "sessionId": "2026-08-31_2026-09-01",
+      "instructionTypes": {
+        "LIGHT": 32
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/08/2026-08-31_2026-09-01/raw/nina/20260831-000743-3.2.0.9001.7800-202608.log",
+          "sha256": "c5d3fedcc38971d1e57ee9a2ad106c6f42ae1f6b9cae57e855a60da6e53ba264"
+        },
+        {
+          "path": "data/sessions/2026/08/2026-08-31_2026-09-01/raw/nina/20260831-000743-3.2.0.9001.7800-202609.log",
+          "sha256": "70fc92a7d6a9309632319070626a00f3af0b7a09588e1daa24ef1be2c98f8931"
+        }
+      ],
+      "baselineSeverity": "YELLOW",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-09-01_2026-09-02",
+      "instructionTypes": {
+        "LIGHT": 59
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/09/2026-09-01_2026-09-02/raw/nina/20260831-000743-3.2.0.9001.7800-202609.log",
+          "sha256": "70fc92a7d6a9309632319070626a00f3af0b7a09588e1daa24ef1be2c98f8931"
+        },
+        {
+          "path": "data/sessions/2026/09/2026-09-01_2026-09-02/raw/nina/20260901-081351-3.2.0.9001.10348-202609.log",
+          "sha256": "684294ca267c0df52419a75a888e52dc150e9f891aeb31bd000e0128536fc71e"
+        }
+      ],
+      "baselineSeverity": "YELLOW",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-09-02_2026-09-03",
+      "instructionTypes": {
+        "LIGHT": 78
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/09/2026-09-02_2026-09-03/raw/nina/20260901-081351-3.2.0.9001.10348-202609.log",
+          "sha256": "6c149d526b8b411c0eaa6d16e1dc6149776bb45ea2f373ca08e48a7761781819"
+        },
+        {
+          "path": "data/sessions/2026/09/2026-09-02_2026-09-03/raw/nina/20260902-195036-3.2.0.9001.11864-202609.log",
+          "sha256": "5030512c255c99fafbf1be18fb66cbb67ece320246af10d9dab10a71b24b7a34"
+        },
+        {
+          "path": "data/sessions/2026/09/2026-09-02_2026-09-03/raw/nina/20260902-195919-3.2.0.9001.1000-202609.log",
+          "sha256": "7224e52370ee367c48b8afb4ca0fd507fc8f7835d518598438f2fe5e8ef2a875"
+        }
+      ],
+      "baselineSeverity": "YELLOW",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-09-03_2026-09-04",
+      "instructionTypes": {
+        "LIGHT": 34
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/09/2026-09-03_2026-09-04/raw/nina/20260903-180229-3.2.0.9001.10404-202609.log",
+          "sha256": "b9be2f8245aad3a3750b39a89e87a79868571ac9449693fc8535476105f1048c"
+        }
+      ],
+      "baselineSeverity": "YELLOW",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-09-04_2026-09-05",
+      "instructionTypes": {
+        "LIGHT": 42
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/09/2026-09-04_2026-09-05/raw/nina/20260904-181340-3.2.0.9001.12520-202609.log",
+          "sha256": "e1dc0b371ebacef0ea34cb140e23f5319900700787c3b29c7e5cd85a82ada7cb"
+        }
+      ],
+      "baselineSeverity": "YELLOW",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-09-05_2026-09-06",
+      "instructionTypes": {
+        "LIGHT": 34
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/09/2026-09-05_2026-09-06/raw/nina/20260905-171016-3.2.0.9001.312-202609.log",
+          "sha256": "c6f19c7cc73aa2b36a83fc0d7b1fb800aef2b029c6f0cbd1dfbcd9f22871f529"
+        }
+      ],
+      "baselineSeverity": "GREEN",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-09-06_2026-09-07",
+      "instructionTypes": {
+        "LIGHT": 37
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/09/2026-09-06_2026-09-07/raw/nina/20260906-204039-3.2.0.9001.11996-202609.log",
+          "sha256": "57eee9200e5fc238cdc02c435aa436304e70551c7fbba8dca90fe8eb5b24c18b"
+        }
+      ],
+      "baselineSeverity": "YELLOW",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-09-07_2026-09-08",
+      "instructionTypes": {
+        "LIGHT": 6
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/09/2026-09-07_2026-09-08/raw/nina/20260907-164646-3.2.0.9001.5680-202609.log",
+          "sha256": "5c3ce38a3f19de64774d2b67cd1a21cc2d3b65b508cf9f2d380b5696f6ad3db9"
+        },
+        {
+          "path": "data/sessions/2026/09/2026-09-07_2026-09-08/raw/nina/20260907-234621-3.2.0.9001.3560-202609.log",
+          "sha256": "ef82e0a7894e9fb6cf6e8d10c3cdc481170c0fb9effbf9ca348771746ca13c5c"
+        }
+      ],
+      "baselineSeverity": "YELLOW",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-09-12_2026-09-13",
+      "instructionTypes": {
+        "LIGHT": 29
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/09/2026-09-12_2026-09-13/raw/nina/20260912-180244-3.2.0.9001.1808-202609.log",
+          "sha256": "f37941e0b1452b733c95f3bc5bff30e744673f02344ba15de86c93fd97ed486d"
+        }
+      ],
+      "baselineSeverity": "GREEN",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-09-13_2026-09-14",
+      "instructionTypes": {
+        "LIGHT": 27
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/09/2026-09-13_2026-09-14/raw/nina/20260913-183146-3.2.0.9001.1604-202609.log",
+          "sha256": "ebb8c92203adca15ae5895af8f87f5391c4d502102df4008411eb55e4a335ec2"
+        }
+      ],
+      "baselineSeverity": "YELLOW",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-09-14_2026-09-15",
+      "instructionTypes": {
+        "LIGHT": 22
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/09/2026-09-14_2026-09-15/raw/nina/20260914-192915-3.2.0.9001.2184-202609.log",
+          "sha256": "dadda85116c5b6edb286cfe243158671c90732c41db2ee308631a18458dad17b"
+        }
+      ],
+      "baselineSeverity": "YELLOW",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-09-15_2026-09-16",
+      "instructionTypes": {
+        "LIGHT": 28
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/09/2026-09-15_2026-09-16/raw/nina/20260915-173212-3.2.0.9001.2824-202609.log",
+          "sha256": "09ed567014b6dfeea583d5573983ba983b9c6afe899cdc5506f5fb8a99a909f2"
+        }
+      ],
+      "baselineSeverity": "YELLOW",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-09-19_2026-09-20",
+      "instructionTypes": {
+        "LIGHT": 16
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/09/2026-09-19_2026-09-20/raw/nina/20260919-124835-3.2.0.9001.9036-202609.log",
+          "sha256": "12eb7a076fb4a04c991ccf8aa556eb7c07e626cb8c939c402a94d9dc5704038d"
+        }
+      ],
+      "baselineSeverity": "YELLOW",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-09-21_2026-09-22",
+      "instructionTypes": {
+        "LIGHT": 41
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/09/2026-09-21_2026-09-22/raw/nina/20260921-152451-3.2.0.9001.4640-202609.log",
+          "sha256": "4d34aaf0ba9783d2de0a39e9320576ec82fe006452eea63ecbce1607956c5658"
+        }
+      ],
+      "baselineSeverity": "YELLOW",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-09-22_2026-09-23",
+      "instructionTypes": {
+        "LIGHT": 41
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/09/2026-09-22_2026-09-23/raw/nina/20260921-152451-3.2.0.9001.4640-202609.log",
+          "sha256": "09d8b757fc2a71965aa41dfcbb2643af87b9db5970c15140ada66fb7eb4109cb"
+        }
+      ],
+      "baselineSeverity": "YELLOW",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-10-13_2026-10-14",
+      "instructionTypes": {
+        "LIGHT": 57
+      },
+      "excludedNonLightStarts": 0,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/10/2026-10-13_2026-10-14/raw/nina/20261012-144703-3.2.0.9001.10268-202610.log",
+          "sha256": "ef1c98f66555d2b51b994eee181bd567b25df3edc0ca9ea497960a3e5a19557b"
+        }
+      ],
+      "baselineSeverity": "GREEN",
+      "state": "NO_CALIBRATION_FALSE_POSITIVE"
+    },
+    {
+      "sessionId": "2026-10-14_2026-10-15",
+      "instructionTypes": {
+        "BIAS": 10,
+        "LIGHT": 58
+      },
+      "excludedNonLightStarts": 10,
+      "rawLogDigests": [
+        {
+          "path": "data/sessions/2026/10/2026-10-14_2026-10-15/raw/nina/20261014-130044-3.2.0.9001.4568-202610.log",
+          "sha256": "1715d622353707d1365f0183b121d8667990c2c23865496b6aa480f0c296d92a"
+        }
+      ],
+      "baselineSeverity": "YELLOW",
+      "state": "AFFECTED",
+      "baselineCounters": {
+        "light_started": 68,
+        "light_completed": 58,
+        "light_failed_explicit": 0,
+        "light_interrupted_unmatched": 10,
+        "technical_exposures_estimated": 57
+      },
+      "correctedCounters": {
+        "light_started": 58,
+        "light_completed": 58,
+        "light_failed_explicit": 0,
+        "light_interrupted_unmatched": 0,
+        "technical_exposures_estimated": 67
+      }
+    }
+  ]
+}
