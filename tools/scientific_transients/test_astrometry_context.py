@@ -1,6 +1,7 @@
 """Synthetic XISF headers and retained declarations; no scientific image run."""
 import copy
 import json
+import math
 import struct
 import unittest
 from tools.pixinsight.local_pilot.broker import ProtocolError
@@ -44,7 +45,9 @@ class AstrometryContextTests(unittest.TestCase):
                 {'sourceId':'3','status':'UNIQUE_DIAGNOSTIC_MATCH','predicted':[50,50],'measured':[50.5,50.4],'dx':.5,'dy':.4},
                 {'sourceId':'4','status':'NO_MATCH'}]}
         self.wt={'status':'COMPLETED_SIGNED_GREEN_WITH_CANDIDATE_WCS','scienceValidation':'NOT_VALIDATED',
-            'output':str(self.wcs_output),'pixelDifference':0}
+            'output':str(self.wcs_output),'pixelDifference':0,
+            'coordinateChecks':[{'pixel':p,'reference':[299.9,22.7],'derived':[299.9,22.7]}
+                for p in ([0.5,0.5],[32,32],[63.5,63.5])]}
         self.persist()
 
     def save(self,path,value):
@@ -80,6 +83,34 @@ class AstrometryContextTests(unittest.TestCase):
             raw=p.read_bytes();p.write_bytes(b'changed')
             with self.assertRaises(ProtocolError):self.inspect()
             p.write_bytes(raw)
+
+    def test_missing_or_empty_native_coordinate_copy_evidence_rejected(self):
+        valid=copy.deepcopy(self.wt)
+        for checks in (None,[],[{'pixel':p,'reference':{},'derived':{}}
+                for p in ([0.5,0.5],[32,32],[63.5,63.5])]):
+            with self.subTest(checks=checks):
+                self.wt=copy.deepcopy(valid)
+                if checks is None:self.wt.pop('coordinateChecks')
+                else:self.wt['coordinateChecks']=checks
+                self.persist()
+                with self.assertRaisesRegex(ProtocolError,'ASTROMETRY_COORDINATE_COPY_'):self.inspect()
+
+    def test_mismatched_nonfinite_or_wrong_coordinate_probes_rejected(self):
+        valid=copy.deepcopy(self.wt)
+        for key,value in (('reference',[True,22.7]),('reference',[None,None]),
+                ('reference',[float('nan'),22.7]),('derived',[299.9,float('inf')]),
+                ('derived',[299.91,22.7]),('pixel',[1,1]),('pixel',[True,0.5])):
+            with self.subTest(key=key,value=value):
+                self.wt=copy.deepcopy(valid);self.wt['coordinateChecks'][0][key]=value;self.persist()
+                # Nonfinite JSON is rejected by the retained-file reader before
+                # the native-coordinate evidence check is reached.
+                expected=('JSON_INVALID' if any(type(n) is float and not math.isfinite(n)
+                    for n in value) else 'ASTROMETRY_COORDINATE_COPY_')
+                with self.assertRaisesRegex(ProtocolError,expected):self.inspect()
+        for value in ([360,22.7],[299.9,91]):
+            self.wt=copy.deepcopy(valid)
+            self.wt['coordinateChecks'][0].update(reference=value,derived=value);self.persist()
+            with self.assertRaisesRegex(ProtocolError,'ASTROMETRY_COORDINATE_COPY_MISMATCH'):self.inspect()
 
     def test_overlapping_partition_and_centroid_reuse_rejected(self):
         self.split['training'][0]['SourceID']='2';self.persist()

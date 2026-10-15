@@ -1,5 +1,17 @@
 # Digital StarGate AI Bootstrap
 
+## BKL-051 — prove private della tripletta e controllo WCS, 15 ottobre 2026
+
+PR599 rilasciata; ripresa autorizzata conclusa con tre tentativi RAW diagnostici
+collegati al piano e ripristino del servizio. Calibrazione, provenienza e WCS
+candidate delle tre esatte immagini verificate privatamente e lette nel portale;
+non riassegnare i tentativi RAW ai derivati. Correzione candidata del verificatore
+respinge confronti di coordinate mancanti o vuoti; gate del candidato separati
+dalle prove native già concluse. [Stato, evidenze e limiti](docs/project/BKL-051-S1-WCS-COPY-EVIDENCE-2026-10-15.md).
+Milestone OPEN / NOT_VALIDATED, stima37%, zero controlli qualificati. Nessuna nuova
+prova cloud, query IRSA o segnalazione autorizzata da questa continuità.
+Le sezioni seguenti conservano gli snapshot precedenti.
+
 ## BKL-051 — accesso Owner, 15 ottobre 2026
 
 PR596 rilasciata; prova reale interrotta dopo un completamento diagnostico collegato al piano. Richiesta successiva non confermata, nessun reinvio; servizio, configurazione e IAM ripristinati. Candidato locale: controllo preventivo della scadenza prima di HTTP e nuovo intento, conservando gli intenti incerti. 49 test del portale locali PASS; CI/review/rilascio del successore da verificare. [Stato e limiti](docs/project/BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md). Milestone OPEN / NOT_VALIDATED, 37%, zero controlli qualificati. Le note seguenti conservano gli snapshot precedenti.

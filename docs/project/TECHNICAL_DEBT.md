@@ -1,5 +1,13 @@
 # Technical Debt Register
 
+## BKL-051 — confronto nativo delle coordinate, 15 ottobre 2026
+
+Le coordinate vuote di un vecchio script non dimostrano equivalenza WCS.
+Correzione candidata: richiedere tre coppie finite e coincidenti, conservando
+gli esperimenti precedenti senza sanatoria retroattiva. Restano sconosciuti
+covarianza completa, accuratezza temporale e astrometrica; sono requisiti aperti,
+non debito scientifico accettato. [Evidenze e gate](BKL-051-S1-WCS-COPY-EVIDENCE-2026-10-15.md).
+
 ## Copertura temporale di guida — integrazione candidata 15 ottobre 2026
 
 Metodo versionato da intervalli LIGHT N.I.N.A. e campioni PHD2 sul clock locale condiviso, con provenienza SHA-256 e missingness esplicita. Catalogo 1.5 con campo additivo e aggiornamento automatico dopo importazione; F4/F5 sperimentali, nessuna nuova authority. [Metodo, audit, limiti e rollback](HANDOVER_2026-10-15-GUIDING-TEMPORAL-INTEGRATION.md). Il risultato preliminare sulla presenza degli orari non è una misura pubblicabile senza i controlli di coerenza.

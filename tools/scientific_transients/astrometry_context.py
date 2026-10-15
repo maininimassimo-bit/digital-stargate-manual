@@ -130,6 +130,29 @@ def retained(directory,receipt_sha,flag,status):
     return receipt,terminal,pinned_json(directory/'manifest.json',products['manifest.json'])
 
 
+def coordinate_copy_checks(terminal,geometry):
+    """Check retained native copy probes, not absolute astrometric accuracy.
+
+    PJSR imageToCelestial returns a Point. Older callers that indexed it like
+    an array compared undefined values and serialized empty objects. A success
+    status and zero pixel difference do not repair that missing evidence.
+    """
+    rows=terminal.get('coordinateChecks')
+    width,height,_=geometry
+    probes=[[0.5,0.5],[width/2,height/2],[width-0.5,height-0.5]]
+    require(type(rows) is list and len(rows)==len(probes),'ASTROMETRY_COORDINATE_COPY_PROBES')
+    for row,probe in zip(rows,probes):
+        require(type(row) is dict and type(row.get('pixel')) is list
+            and len(row['pixel'])==2 and all(type(n) in {int,float} and math.isfinite(n)
+                for n in row['pixel']) and row['pixel']==probe,'ASTROMETRY_COORDINATE_COPY_PROBES')
+        reference,derived=row.get('reference'),row.get('derived')
+        require(type(reference) is list and type(derived) is list and len(reference)==len(derived)==2
+            and all(type(n) in {int,float} and math.isfinite(n) for n in reference+derived),
+            'ASTROMETRY_COORDINATE_COPY_MISSING')
+        require(0<=reference[0]<360 and -90<=reference[1]<=90
+            and reference==derived,'ASTROMETRY_COORDINATE_COPY_MISMATCH')
+
+
 def inspect_context(lineage_directory,lineage_sha,draft_path,draft_sha,solver_directory,solver_sha,wcs_directory,wcs_sha):
     lineage=inspect_lineage(lineage_directory,lineage_sha,draft_path,draft_sha)
     sr,st,sm=retained(solver_directory,solver_sha,'inputHashUnchanged','COMPLETED_CANDIDATE_WCS_WITH_HELD_OUT_REFERENCES')
@@ -150,6 +173,7 @@ def inspect_context(lineage_directory,lineage_sha,draft_path,draft_sha,solver_di
     require(pre_wcs['geometry']==source['geometry']==derived['geometry']
         and all(pre_wcs['keywords'].get(k)==source['keywords'].get(k)
                 for k in ('DATE-OBS','DATE-AVG','EXPTIME','FILTER')),'ASTROMETRY_GEOMETRY_OR_TIMING_PARENT')
+    coordinate_copy_checks(wt,source['geometry'])
     require(fingerprint(Path(solver_directory)/'entry.js')['sha256']==sm['entrySHA256']
         and fingerprint(Path(wcs_directory)/'entry.js')['sha256']==wm['scriptSHA256'],'ASTROMETRY_SCRIPT')
     split=pinned_json(Path(solver_directory)/'catalog-split.json',sr['products']['catalog-split.json'])

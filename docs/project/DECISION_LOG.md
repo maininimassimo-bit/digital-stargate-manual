@@ -1,5 +1,13 @@
 # Decision Log
 
+## BKL-051 — rifiuto delle prove WCS vuote, 15 ottobre 2026
+
+Il verificatore candidato distingue stato terminale e prova del confronto
+geometrico: proprietà JavaScript mancanti o oggetti vuoti non valgono come
+coordinate. Richiedere tre sonde native finite e coincidenti senza tolleranze
+scientifiche inventate, nuovi avvii o modifica delle ricevute storiche.
+[Motivo, prove e rollback](BKL-051-S1-WCS-COPY-EVIDENCE-2026-10-15.md).
+
 ## Copertura temporale di guida — integrazione candidata 15 ottobre 2026
 
 Metodo versionato da intervalli LIGHT N.I.N.A. e campioni PHD2 sul clock locale condiviso, con provenienza SHA-256 e missingness esplicita. Catalogo 1.5 con campo additivo e aggiornamento automatico dopo importazione; F4/F5 sperimentali, nessuna nuova authority. [Metodo, audit, limiti e rollback](HANDOVER_2026-10-15-GUIDING-TEMPORAL-INTEGRATION.md). Il risultato preliminare sulla presenza degli orari non è una misura pubblicabile senza i controlli di coerenza.
