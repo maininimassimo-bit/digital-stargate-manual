@@ -1,5 +1,13 @@
 # Project Backlog
 
+## BKL-051 — evidenza delle coordinate WCS, 15 ottobre 2026
+
+Correzione candidata del verificatore locale: respingere prove di copia con
+coordinate mancanti, vuote, non finite o differenti. Tre contesti reali corretti
+restano leggibili; ricevute storiche incomplete conservate e non promosse.
+[Prove e limiti](BKL-051-S1-WCS-COPY-EVIDENCE-2026-10-15.md). Gate del rilascio
+ancora da verificare; milestone OPEN / NOT_VALIDATED, stima37%, zero qualificati.
+
 ## Copertura temporale di guida — integrazione candidata 15 ottobre 2026
 
 Metodo versionato da intervalli LIGHT N.I.N.A. e campioni PHD2 sul clock locale condiviso, con provenienza SHA-256 e missingness esplicita. Catalogo 1.5 con campo additivo e aggiornamento automatico dopo importazione; F4/F5 sperimentali, nessuna nuova authority. [Metodo, audit, limiti e rollback](HANDOVER_2026-10-15-GUIDING-TEMPORAL-INTEGRATION.md). Il risultato preliminare sulla presenza degli orari non è una misura pubblicabile senza i controlli di coerenza.

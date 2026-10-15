@@ -1,5 +1,15 @@
 # Project Governance Center
 
+## BKL-051 — tripletta privata e integrità WCS, 15 ottobre 2026
+
+Tre tentativi RAW diagnostici collegati al piano; servizio ripristinato. Tre
+copie calibrate con WCS candidate verificate privatamente e lette nel portale,
+senza riassegnare i tentativi precedenti. Il verificatore candidato ora richiede
+coordinate native finite e coincidenti nelle prove di copia; gate del suo
+rilascio separati dalle prove native. [Evidenze e limiti](BKL-051-S1-WCS-COPY-EVIDENCE-2026-10-15.md).
+BKL-051 resta OPEN / NOT_VALIDATED, stima37%, zero controlli qualificati.
+Le note seguenti conservano gli snapshot precedenti.
+
 ## Aggiornamento corrente — riconciliazione gate registro
 
 PR540 è MERGED sul commit `93be5531da5243c79c3f3f03f9762095700a6f45`, ma il gate pre-merge behind-main è fallito dopo avanzamento PR541 e il comando di merge è stato eseguito erroneamente. Questa non conformità storica non è sanata retroattivamente. Il rilascio del registro resta INCOMPLETE in attesa del presente incremento correttivo, CI esatta, nuove ARB poi RQ sull’albero corrente e gate pre/post-merge validi. Il delta concorrente di sei file Allsky/SEO/nav/template è stato letto integralmente: nessuna sovrapposizione con i sorgenti del registro, preservati senza modifica. BKL-051 OPEN / NOT_VALIDATED; nessuna accettazione scientifica o authority. Tutti i residui scientifici, servizio/Owner/reporting/S4/S5 e i limiti precedenti restano interi; nessuna nuova sessione cloud, credenziale, soglia, fotografia o prova nativa. P6 Accepted nei limiti, F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; Safety e C→F invariati. [Dossier corrente](BKL-051-S1-LEDGER-RELEASE-RECONCILIATION-2026-10-09.md).
