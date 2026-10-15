@@ -134,3 +134,13 @@ il parser usa i salvataggi scientifici e la camera attiva in quei momenti.
 Più strumenti differenti restano indeterminati. Non aggiungere una nuova
 configurazione per compensare un accoppiamento errato nel parser.
 [Diagnosi, prove e rollback](../project/HANDOVER_2026-10-15-SESSION-IMPORT-RECOVERY.md).
+
+## 10. Contatori LIGHT e stato analytics — 15 ottobre 2026
+
+Gli avvii TakeExposure con ImageType BIAS/DARK/FLAT e varianti DarkFlat
+esplicite non sono avvii LIGHT. Completamenti/errori della calibrazione non
+modificano i contatori LIGHT. I tipi sconosciuti/privi di tipo mantengono la
+precedente interpretazione conservativa; criteri severity invariati.
+qualityState eredita analyticsState quando i metadati sono completi: i due
+ATTENTION_REQUIRED non sono necessariamente due guasti distinti.
+[Audit su tutte le sessioni, correzione e limiti](../project/HANDOVER_2026-10-15-LIGHT-CALIBRATION-AUDIT.md).

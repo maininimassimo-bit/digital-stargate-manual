@@ -25,9 +25,9 @@ Report generato dallo storico delle sessioni Digital StarGate.
 - Durata complessiva: **82.9766 h**
 - Integrazione complessiva: **63.6666 h**
 - Efficienza di integrazione: **76.73%**
-- Completamento medio: **86.0429%**
+- Completamento medio: **88.1443%**
 - RMS totale medio: **1.085″**
-- Frame: 382 completati, 115 falliti, 497 avviati
+- Frame: 382 completati, 105 falliti, 487 avviati
 - Periodo: `2026-07-14T18:00:00` – `2026-10-15T04:00:00.0000000Z`
 
 ## UNKNOWN

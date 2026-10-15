@@ -1,5 +1,15 @@
 # Repository Knowledge Map
 
+## Audit LIGHT e calibrazioni — 15 ottobre 2026
+
+Su richiesta Owner, audit del catalogo completo (24 sessioni) per il falso
+positivo TakeExposure/BIAS: una sola sessione interessata, 14–15 ottobre.
+Parser corretto senza cambiare soglie; 58/58 LIGHT, zero non abbinati; stati
+derivati VALIDATED_ANALYTICS. Altre 23 severity conservate; due sessioni senza
+istruzioni tipizzate non sono dichiarate validate dall'audit. RAW e manifest
+invariati. [Metodo, evidenza riproducibile, gate e rollback](HANDOVER_2026-10-15-LIGHT-CALIBRATION-AUDIT.md).
+
+
 ## BKL-051 — registro di campagna, 15 ottobre 2026
 
 [Isolamento esplicito e prova reale fermata](BKL-051-CONTROL-STATE-ISOLATION-2026-10-15.md): queue.py possiede la selezione del registro; app.py legge il riferimento attendibile; test_control_namespace.py copre conservazione dello stato storico, identità, riavvio e input invalidi. Nessuna attivazione dal codice o chiusura scientifica.

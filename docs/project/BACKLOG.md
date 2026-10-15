@@ -1,5 +1,15 @@
 # Project Backlog
 
+## Audit LIGHT e calibrazioni — 15 ottobre 2026
+
+Su richiesta Owner, audit del catalogo completo (24 sessioni) per il falso
+positivo TakeExposure/BIAS: una sola sessione interessata, 14–15 ottobre.
+Parser corretto senza cambiare soglie; 58/58 LIGHT, zero non abbinati; stati
+derivati VALIDATED_ANALYTICS. Altre 23 severity conservate; due sessioni senza
+istruzioni tipizzate non sono dichiarate validate dall'audit. RAW e manifest
+invariati. [Metodo, evidenza riproducibile, gate e rollback](HANDOVER_2026-10-15-LIGHT-CALIBRATION-AUDIT.md).
+
+
 ## BKL-051 — registro isolato, 15 ottobre 2026
 
 Prova reale fermata e riconciliata prima di creare job o avviare PixInsight. Candidato locale: riferimento esplicito per separare il nuovo registro da quello storico senza cancellazioni o riuso di identità. Restano gate exact-head, nuova proposta operativa, capacità per 177 job e tutti i requisiti scientifici. [Evidenze e limiti](BKL-051-CONTROL-STATE-ISOLATION-2026-10-15.md). Nessuna acceptance chiusa; 37%, zero controlli qualificati.

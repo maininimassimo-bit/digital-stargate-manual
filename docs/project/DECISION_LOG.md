@@ -1,5 +1,15 @@
 # Decision Log
 
+## Audit LIGHT e calibrazioni — 15 ottobre 2026
+
+Su richiesta Owner, audit del catalogo completo (24 sessioni) per il falso
+positivo TakeExposure/BIAS: una sola sessione interessata, 14–15 ottobre.
+Parser corretto senza cambiare soglie; 58/58 LIGHT, zero non abbinati; stati
+derivati VALIDATED_ANALYTICS. Altre 23 severity conservate; due sessioni senza
+istruzioni tipizzate non sono dichiarate validate dall'audit. RAW e manifest
+invariati. [Metodo, evidenza riproducibile, gate e rollback](HANDOVER_2026-10-15-LIGHT-CALIBRATION-AUDIT.md).
+
+
 ## BKL-051 — conservare il registro preesistente, 15 ottobre 2026
 
 Dopo il rifiuto HTTP400 della prova reale, conservare registro, worker e backup storici. La correzione tecnica candidata permette un riferimento opaco esplicito di configurazione, senza percorso arbitrario, fallback automatico o adozione dello stato altrui. Assenza del parametro conserva il contratto precedente. L’uso operativo richiede una proposta distinta; non estende il consenso alla precedente immagine. [Dettagli](BKL-051-CONTROL-STATE-ISOLATION-2026-10-15.md).

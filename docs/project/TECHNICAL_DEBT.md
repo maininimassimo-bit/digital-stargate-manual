@@ -1,5 +1,15 @@
 # Technical Debt Register
 
+## Audit LIGHT e calibrazioni — 15 ottobre 2026
+
+Su richiesta Owner, audit del catalogo completo (24 sessioni) per il falso
+positivo TakeExposure/BIAS: una sola sessione interessata, 14–15 ottobre.
+Parser corretto senza cambiare soglie; 58/58 LIGHT, zero non abbinati; stati
+derivati VALIDATED_ANALYTICS. Altre 23 severity conservate; due sessioni senza
+istruzioni tipizzate non sono dichiarate validate dall'audit. RAW e manifest
+invariati. [Metodo, evidenza riproducibile, gate e rollback](HANDOVER_2026-10-15-LIGHT-CALIBRATION-AUDIT.md).
+
+
 ## BKL-051 — stato storico e capacità della coda, 15 ottobre 2026
 
 Registro unico incompatibile con la nuova identità: rifiuto reale preservato; correzione locale a selezione esplicita, senza migrazione. Rimangono 32 binding/job e 1MiB: non coprono il collaudo completo di 59 triplette/177 job. Sono requisiti da completare, non scope eliminato o debito accettato. [Contratto e gate](BKL-051-CONTROL-STATE-ISOLATION-2026-10-15.md). Nessuna nuova attivazione attestata.

@@ -1,5 +1,15 @@
 # Digital StarGate Enterprise Architecture Context
 
+## Audit LIGHT e calibrazioni — 15 ottobre 2026
+
+Su richiesta Owner, audit del catalogo completo (24 sessioni) per il falso
+positivo TakeExposure/BIAS: una sola sessione interessata, 14–15 ottobre.
+Parser corretto senza cambiare soglie; 58/58 LIGHT, zero non abbinati; stati
+derivati VALIDATED_ANALYTICS. Altre 23 severity conservate; due sessioni senza
+istruzioni tipizzate non sono dichiarate validate dall'audit. RAW e manifest
+invariati. [Metodo, evidenza riproducibile, gate e rollback](HANDOVER_2026-10-15-LIGHT-CALIBRATION-AUDIT.md).
+
+
 ## BKL-051 — isolamento della persistenza di controllo, 15 ottobre 2026
 
 Candidato compatibile: riferimento attendibile opzionale per il solo registro dei transitori, con guardie worker/root, CAS e backup invariati. Nessuna scelta dal portale, migrazione o nuovo endpoint. Permesso limitato all’oggetto esatto solo dopo consenso operativo; nessuna authority scientifica derivata. [Contratto e rollback](BKL-051-CONTROL-STATE-ISOLATION-2026-10-15.md).

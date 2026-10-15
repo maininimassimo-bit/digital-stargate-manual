@@ -129,6 +129,53 @@ def test_calibration_and_reconnected_camera(root):
     assert MOD.parse_nina(folder)['scientific']['camera'] is None
 
 
+def test_calibration_exposure_counters(root):
+    folder=root/'calibration-counts'; folder.mkdir()
+    lines=[]
+    for kind in ('BIAS','DARK','FLAT','DARKFLAT','FLATDARK','DARK_FLAT','FLAT_DARK'):
+        lines.extend([f'Starting instruction TakeExposure, ExposureTime 10 s, ImageType {kind}',
+                      'Starting exposure', f'Saved image to {kind}_1x1_test.xisf',
+                      'TakeExposure completed', 'Exposure failed'])
+    for _ in range(2):
+        lines.extend(['Starting instruction TakeExposure, ExposureTime 600 s, ImageType LIGHT',
+                      'Starting exposure', 'Saved image to LIGHT_1x1_target.xisf'])
+    (folder/'session.log').write_text('\n'.join(lines),encoding='utf-8')
+    parsed=MOD.parse_nina(folder)
+    assert parsed['light_started']==parsed['light_completed']==2,parsed
+    assert parsed['light_failed_explicit']==parsed['light_interrupted_unmatched']==0,parsed
+    assert parsed['integration_seconds']==1200,parsed
+    # A real LIGHT failure and unmatched instruction must still be classified.
+    lines.extend(['Starting instruction TakeExposure, ImageType LIGHT', 'Exposure failed',
+                  'Starting instruction TakeExposure, ImageType LIGHT',
+                  'Starting instruction TakeExposure, ImageType LIGHT'])
+    (folder/'session.log').write_text('\n'.join(lines),encoding='utf-8')
+    parsed=MOD.parse_nina(folder)
+    assert parsed['light_failed_explicit']==1 and parsed['light_interrupted_unmatched']==2,parsed
+    severity,reasons=MOD.classify({'nina':parsed,'phd2':{'pulse_guide_failures':0,'lost_star_events':0}})
+    assert severity=='YELLOW' and any('Pose LIGHT' in reason for reason in reasons),(severity,reasons)
+    # Calibration completions cannot consume older unmatched LIGHT instructions.
+    (folder/'session.log').write_text('\n'.join([
+        'Starting instruction TakeExposure, ImageType LIGHT',
+        'Starting instruction TakeExposure, ImageType LIGHT',
+        'Starting instruction TakeExposure, ImageType=dark',
+        'TakeExposure completed', 'Exposure failed',
+    ]),encoding='utf-8')
+    pending=MOD.parse_nina(folder)
+    assert pending['light_started']==pending['light_interrupted_unmatched']==2,pending
+    assert pending['light_completed']==pending['light_failed_explicit']==0,pending
+    (folder/'session.log').write_text('Starting instruction TakeExposure, ImageType UNKNOWN\nStarting instruction TakeExposure\n',encoding='utf-8')
+    legacy=MOD.parse_nina(folder)
+    assert legacy['light_started']==legacy['light_interrupted_unmatched']==2,legacy
+
+
+def test_real_calibration_night():
+    folder=ROOT/'data/sessions/2026/10/2026-10-14_2026-10-15/raw/nina'
+    parsed=MOD.parse_nina(folder)
+    assert parsed['light_started']==parsed['light_completed']==58,parsed
+    assert parsed['light_interrupted_unmatched']==parsed['light_failed_explicit']==0,parsed
+    assert parsed['scientific']['target_name']=='NGC 281',parsed
+
+
 def main():
     with tempfile.TemporaryDirectory() as td:
         root=Path(td); nina=root/'nina'; nina.mkdir(); (nina/'session.log').write_text('2026-09-01|INFO| Target: M 27 RA: 19:59:36; Dec: +22° 43\' 16"; Epoch: J2000\nSaved image to D:\\Images NINA\\Target\\LIGHT_1x1_600.00s_15_132_M 27_Celestron C8__-9.96C_Red_0027.xisf\nQHYCCD: Closing camera 695A-M-0037ec709603ca4e3\n',encoding='utf-8')
@@ -138,5 +185,7 @@ def main():
         test_real_c8_session()
         test_real_quattro_touptek_session()
         test_calibration_and_reconnected_camera(root)
+        test_calibration_exposure_counters(root)
+        test_real_calibration_night()
     print('Scientific session evidence regression gates passed.')
 if __name__=='__main__': main()
