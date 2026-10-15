@@ -41,8 +41,13 @@ const routes = Object.keys(JSON.parse(fs.readFileSync('overrides/main.html', 'ut
           assert(qualityText.includes('SHA-256 \u2713'), 'Freshness badge must remain UTF-8');
           assert(qualityText.includes('Apri sessione \u2192'), 'Session links must remain UTF-8');
           assert(!/\u00c2\u00b7|\u00c3\u00a8|\u00e2\u20ac|\u00e2\u2020|\u00e2\u0153/.test(qualityText), 'Corrupted public text');
-          await p.locator('.dsg-dq-record').first().locator('summary').click();
-          assert(await p.locator('.dsg-dq-record').first().locator('.dsg-dq-coverage-note').isVisible());
+          if (inputs.length) {
+            const explained = p.locator('.dsg-dq-record').filter({has:p.locator('.dsg-dq-coverage-note')}).first();
+            await explained.locator('summary').click();
+            assert(await explained.locator('.dsg-dq-coverage-note').isVisible());
+          } else {
+            assert.equal(await p.locator('.dsg-dq-coverage-note').count(), 0);
+          }
         }
         assert(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `Horizontal overflow: ${route} at ${viewport.width}`);
         assert.equal(await stage.locator('canvas').count(), 1);
