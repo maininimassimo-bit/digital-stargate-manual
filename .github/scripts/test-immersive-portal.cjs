@@ -26,6 +26,29 @@ const routes = Object.keys(JSON.parse(fs.readFileSync('overrides/main.html', 'ut
         try { await p.waitForFunction(() => document.querySelector('[data-dsg-scene]').dataset.dsgSceneState === 'ready'); }
         catch (error) { console.error(await stage.getAttribute('data-dsg-scene-state'), await stage.locator('.dsg-scene__status').textContent(), await stage.evaluate(e=>e.getBoundingClientRect().toJSON()), errors); fs.mkdirSync('artifacts',{recursive:true}); await p.screenshot({path:'artifacts/portal-test-failure.png'}); throw error; }
         assert.equal(await p.locator('.md-content h1').count(), 1, route);
+        if (route === 'scientific-data-quality/index.md') {
+          await p.locator('.dsg-dq-record').first().waitFor();
+          const inputs = JSON.parse(fs.readFileSync('docs/data/scientific-data-quality-projection.json','utf8'))
+            .assessments.flatMap(item => item.inputEvidence).filter(item => item.dimension === 'GUIDING_STABILITY');
+          const rows = p.locator('.dsg-dq-evidence li').filter({hasText:'GUIDING_STABILITY'});
+          assert.equal(await rows.count(), inputs.length);
+          for (const text of await rows.allTextContents()) {
+            assert(text.includes('copertura temporale non disponibile'), text);
+            assert(!text.includes('coverage 0%'), text);
+            assert(text.includes(' \u00b7 '), 'Evidence separator must remain UTF-8');
+          }
+          const qualityText = await p.locator('[data-scientific-data-quality]').textContent();
+          assert(qualityText.includes('SHA-256 \u2713'), 'Freshness badge must remain UTF-8');
+          assert(qualityText.includes('Apri sessione \u2192'), 'Session links must remain UTF-8');
+          assert(!/\u00c2\u00b7|\u00c3\u00a8|\u00e2\u20ac|\u00e2\u2020|\u00e2\u0153/.test(qualityText), 'Corrupted public text');
+          if (inputs.length) {
+            const explained = p.locator('.dsg-dq-record').filter({has:p.locator('.dsg-dq-coverage-note')}).first();
+            await explained.locator('summary').click();
+            assert(await explained.locator('.dsg-dq-coverage-note').isVisible());
+          } else {
+            assert.equal(await p.locator('.dsg-dq-coverage-note').count(), 0);
+          }
+        }
         assert(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `Horizontal overflow: ${route} at ${viewport.width}`);
         assert.equal(await stage.locator('canvas').count(), 1);
       }

@@ -1,4 +1,4 @@
-import { validateProjectionFreshness, validateRealEvidenceFreshness } from './scientific-data-quality-core.mjs';
+import { evidenceCoverageView, validateProjectionFreshness, validateRealEvidenceFreshness } from './scientific-data-quality-core.mjs';
 import { renderQualityTrend } from './scientific-quality-trend.mjs';
 
 const host = document.querySelector('[data-scientific-data-quality]');
@@ -22,9 +22,14 @@ if (host) {
 
   const bar = (label, value, suffix = '/ 100') => `<div class="dsg-dq-meter"><div><span>${esc(label)}</span><strong>${number(value)} ${esc(suffix)}</strong></div><div class="dsg-dq-meter__track"><i style="width:${Math.max(0, Math.min(100, Number(value) || 0))}%"></i></div></div>`;
   const dimension = item => `<tr><th scope="row">${esc(item.dimension)}</th><td>${esc(item.state)}</td><td>${number(item.rawValue)} ${esc(item.unit)}</td><td>${number(item.normalizedValue)}</td><td>${number(item.weight)}</td><td>${number(item.contribution)}</td><td>${esc(item.exclusionReason || '—')}</td></tr>`;
-  const evidence = item => `<li><strong>${esc(item.dimension)}</strong><span>${number(item.value)} ${esc(item.unit)} · coverage ${pct((item.coverage ?? 0) * 100)}</span></li>`;
+  const evidence = (item, limitations) => {
+    const coverage = evidenceCoverageView(item, limitations);
+    const label = coverage.state === 'AVAILABLE' ? `coverage ${pct(coverage.value * 100)}`
+      : coverage.reason === 'GUIDING_TEMPORAL_DENOMINATOR_MISSING' ? 'copertura temporale non disponibile' : 'copertura non disponibile';
+    return `<li><strong>${esc(item.dimension)}</strong><span>${number(item.value)} ${esc(item.unit)} · ${esc(label)}</span></li>`;
+  };
 
-  const record = item => {
+  const record = (item, limitations) => {
     const available = item.projectionRecordState === 'AVAILABLE';
     const assessment = item.assessment;
     const reasons = assessment?.decomposition?.filter(entry => entry.state !== 'AVAILABLE').map(entry => `${entry.dimension}: ${entry.exclusionReason}`) || [];
@@ -34,7 +39,8 @@ if (host) {
       ${available ? `<div class="dsg-dq-score-grid">${bar('Score sperimentale', assessment.score.value)}${bar('Confidence evidence', assessment.confidence.value)}${bar('Evidence coverage', assessment.evidenceCoverage * 100, '%')}</div>` : `<div class="dsg-dq-unavailable"><strong>Nessun valore aggregato pubblicabile</strong><p>${esc(reasons.join(' · ') || 'Evidence required non disponibile.')}</p></div>`}
       <div class="dsg-dq-meta"><span>Aggiornata: ${esc(date(item.observedAt))}</span><a href="../scientific-session-detail/?sessionId=${encodeURIComponent(item.sessionId)}">Apri sessione →</a></div>
       <details><summary>Evidence e spiegazione</summary>
-        <ul class="dsg-dq-evidence">${item.inputEvidence.map(evidence).join('') || '<li>Nessuna evidence eleggibile.</li>'}</ul>
+        <ul class="dsg-dq-evidence">${item.inputEvidence.map(entry => evidence(entry, limitations)).join('') || '<li>Nessuna evidence eleggibile.</li>'}</ul>
+        ${item.inputEvidence.some(entry => evidenceCoverageView(entry, limitations).reason === 'GUIDING_TEMPORAL_DENOMINATOR_MISSING') ? '<p class="dsg-dq-coverage-note">RMS di guida disponibile; copertura temporale non determinabile dal catalogo. Il numero di campioni validi non indica la frazione della notte coperta. Questa lacuna resta considerata nella confidence e nella copertura complessiva del modello sperimentale.</p>' : ''}
         ${assessment ? `<div class="dsg-dq-table-wrap"><table><thead><tr><th>Dimensione</th><th>Stato</th><th>Raw</th><th>Normalizzato</th><th>Peso</th><th>Contributo</th><th>Esclusione</th></tr></thead><tbody>${assessment.decomposition.map(dimension).join('')}</tbody></table></div>` : ''}
         <p class="dsg-dq-source">Source: <code>${esc(item.sourceMetricsPath || 'UNAVAILABLE')}</code></p>
       </details>
@@ -51,7 +57,7 @@ if (host) {
     </section>
     <section class="dsg-dq-panel dsg-dq-validation"><div><span>F5 · REAL-EVIDENCE VALIDATION</span><h2>Capability sperimentale accettata · uso produttivo non pronto</h2><p>La cohort include tutte le ${validation.cohort.sessionCount} sessioni canoniche senza outcome filtering. ${validation.summary.failedCriteria}/${validation.summary.totalCriteria} gate di readiness produttiva non sono soddisfatti: nessun profilo produttivo è autorizzato.</p></div><span class="dsg-dq-state is-unavailable">${esc(validation.decision.productionReadiness)}</span></section>
     <section class="dsg-dq-panel dsg-dq-fresh"><div><span>FRESHNESS VERIFIED</span><h2>Projection allineata al catalogo</h2><p>Generata ${esc(date(projection.generatedAt))} · profilo <code>${esc(projection.profile.profileVersion)}</code> · digest <code>${esc(projection.projectionDigest.slice(0, 12))}…</code></p></div><span class="dsg-dq-fresh__badge">SHA-256 ✓</span></section>
-    <section class="dsg-dq-panel"><div class="dsg-dq-toolbar"><div><label for="dq-search">Cerca sessione o target</label><input id="dq-search" type="search" placeholder="es. M 27 o 2026-09"></div><div><label for="dq-filter">Stato</label><select id="dq-filter"><option value="ALL">Tutti</option><option value="AVAILABLE">Disponibile</option><option value="UNAVAILABLE">Non disponibile</option><option value="INVALID">Fuori profilo</option></select></div></div><p class="dsg-dq-result" data-dq-result></p><div class="dsg-dq-records">${items.map(record).join('')}</div></section>`;
+    <section class="dsg-dq-panel"><div class="dsg-dq-toolbar"><div><label for="dq-search">Cerca sessione o target</label><input id="dq-search" type="search" placeholder="es. M 27 o 2026-09"></div><div><label for="dq-filter">Stato</label><select id="dq-filter"><option value="ALL">Tutti</option><option value="AVAILABLE">Disponibile</option><option value="UNAVAILABLE">Non disponibile</option><option value="INVALID">Fuori profilo</option></select></div></div><p class="dsg-dq-result" data-dq-result></p><div class="dsg-dq-records">${items.map(item => record(item, projection.limitations)).join('')}</div></section>`;
 
     const search = host.querySelector('#dq-search');
     const filter = host.querySelector('#dq-filter');

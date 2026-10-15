@@ -7,6 +7,19 @@ const requiredLimitations = [
 
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
 const nonEmpty = value => typeof value === 'string' && value.trim().length > 0;
+// F4 uses a conservative zero for a missing guiding denominator. This is
+// presentation only: preserve scoring inputs, distinguish the sentinel from 0%.
+export function evidenceCoverageView(evidence, limitations = []) {
+  const guidingGap = evidence?.dimension === 'GUIDING_STABILITY'
+    && evidence.coverage === 0
+    && limitations.includes('GUIDING_TEMPORAL_COVERAGE_NOT_REPRESENTED_IN_SOURCE_CATALOG');
+  if (guidingGap) return { state: 'UNAVAILABLE', value: null, reason: 'GUIDING_TEMPORAL_DENOMINATOR_MISSING' };
+  const value = evidence?.coverage;
+  if (!Number.isFinite(value) || value < 0 || value > 1) {
+    return { state: 'UNAVAILABLE', value: null, reason: 'COVERAGE_NOT_AVAILABLE' };
+  }
+  return { state: 'AVAILABLE', value, reason: null };
+}
 const exactKeys = (value, expected, label) => {
   assert(value && typeof value === 'object' && !Array.isArray(value), `${label} non valido`);
   const actual = Object.keys(value).sort();
