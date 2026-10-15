@@ -58,9 +58,9 @@ export function mapCatalogSessionToF3Inputs(session) {
 
   const guiding = session.guiding;
   if (source && guiding?.state === 'AVAILABLE' && finite(guiding.rmsTotalArcsec) && guiding.sampleCount > 0) {
-    // The catalog does not expose a governed temporal denominator for guiding.
-    // Coverage therefore remains zero; the score is experimental and confidence exposes the gap.
-    inputs.push(evidence('GUIDING_STABILITY', guiding.rmsTotalArcsec, 'arcsec', 0, `${source}#phd2`));
+    const temporal = guiding.temporalCoverage;
+    const measured = temporal?.methodVersion === 'DSG-GUIDING-LIGHT-TEMPORAL-1.0' && temporal.state === 'AVAILABLE' && finite(temporal.coverage) && temporal.coverage >= 0 && temporal.coverage <= 1 && finite(temporal.lightSeconds) && temporal.lightSeconds > 0 && temporal.clockBasis === 'SHARED_LOCAL_WALL_CLOCK' && temporal.maxGapExposures === 3 && Math.abs(temporal.coverage - temporal.coveredSeconds / temporal.lightSeconds) <= 0.000001 && finite(temporal.coveredSeconds) && temporal.coveredSeconds >= 0 && temporal.coveredSeconds <= temporal.lightSeconds;
+    inputs.push(evidence('GUIDING_STABILITY', guiding.rmsTotalArcsec, 'arcsec', measured ? temporal.coverage : 0, measured ? `${F4_SOURCE_CATALOG_PATH}#${session.sessionId}/guiding/temporalCoverage` : `${source}#phd2`));
   }
 
   const sqm = session.sqm;
@@ -160,7 +160,7 @@ export function buildScientificDataQualityProjection(catalog, profile, { generat
     limitations: [
       'EXPERIMENTAL_F4_NOT_ACCEPTED_FOR_PRODUCTION_USE',
       'SYNTHETIC_DEMONSTRATOR_PROFILE_NOT_SCIENTIFIC_CALIBRATION',
-      'GUIDING_TEMPORAL_COVERAGE_NOT_REPRESENTED_IN_SOURCE_CATALOG',
+      'GUIDING_TEMPORAL_COVERAGE_REQUIRES_VERSIONED_LIGHT_INTERVAL_METHOD',
       'NO_RANKING_THRESHOLD_RECOMMENDATION_OR_AUTOMATIC_ACCEPTANCE',
       'NO_SAFETY_OR_ACTION_AUTHORITY'
     ],

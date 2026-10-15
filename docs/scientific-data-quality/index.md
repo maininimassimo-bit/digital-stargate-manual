@@ -31,3 +31,9 @@
   <p>Questa pagina non accetta o rifiuta sessioni, non genera raccomandazioni e non dispone di remediation o device command. La Safety Authority rimane nei sistemi e negli interlock fisici locali.</p>
 </section>
 </div>
+
+## Copertura temporale della guida
+
+La copertura confronta gli intervalli delle esposizioni LIGHT con gli intervalli sostenuti da campioni PHD2 validi. Il metodo `DSG-GUIDING-LIGHT-TEMPORAL-1.0` esclude assestamenti, pause, errori e vuoti superiori a tre esposizioni della camera di guida. Non estende i campioni fino ai bordi della posa. La scheda mostra i secondi coperti e quelli totali. Una percentuale bassa indica una copertura documentata limitata; non prova da sola che il telescopio fosse privo di guida.
+
+Log incompleti, tempi ambigui o orologio condiviso non documentato rendono la copertura non disponibile. Il calcolo viene ripetuto automaticamente dalla pubblicazione del catalogo. Il profilo di scoring resta sperimentale: la nuova evidenza può modificare confidence e copertura aggregata, senza autorizzare uso produttivo o azioni operative.

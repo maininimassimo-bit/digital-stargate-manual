@@ -1,5 +1,9 @@
 # Technical Debt Register
 
+## Copertura temporale di guida — integrazione candidata 15 ottobre 2026
+
+Metodo versionato da intervalli LIGHT N.I.N.A. e campioni PHD2 sul clock locale condiviso, con provenienza SHA-256 e missingness esplicita. Catalogo 1.5 con campo additivo e aggiornamento automatico dopo importazione; F4/F5 sperimentali, nessuna nuova authority. [Metodo, audit, limiti e rollback](HANDOVER_2026-10-15-GUIDING-TEMPORAL-INTEGRATION.md). Il risultato preliminare sulla presenza degli orari non è una misura pubblicabile senza i controlli di coerenza.
+
 ## BKL-051 — continuità dell'accesso, 15 ottobre 2026
 
 Rifiuto reale di accesso interrompe la prova dopo un completamento diagnostico. Candidato locale verifica preventivamente la scadenza senza sostituire l'autenticazione server e conserva gli intenti incerti. 49 test locali PASS; consegna del commit e collaudo reale aperti. Capacità del campione, scienza e nuova finestra autorizzata restano necessari. [Limiti](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md).

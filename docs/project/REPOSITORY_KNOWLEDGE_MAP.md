@@ -1,5 +1,9 @@
 # Repository Knowledge Map
 
+## Copertura temporale di guida — integrazione candidata 15 ottobre 2026
+
+Metodo versionato da intervalli LIGHT N.I.N.A. e campioni PHD2 sul clock locale condiviso, con provenienza SHA-256 e missingness esplicita. Catalogo 1.5 con campo additivo e aggiornamento automatico dopo importazione; F4/F5 sperimentali, nessuna nuova authority. [Metodo, audit, limiti e rollback](HANDOVER_2026-10-15-GUIDING-TEMPORAL-INTEGRATION.md). Il risultato preliminare sulla presenza degli orari non è una misura pubblicabile senza i controlli di coerenza.
+
 ## BKL-051 — scadenza dell'accesso, 15 ottobre 2026
 
 [Controllo preventivo Owner e stato della prova](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md): scientific-transients-portal.js verifica la scadenza prima di HTTP e nuovo intento; portal.test.mjs usa credenziali sintetiche e clock controllato per verificare stop locale e conservazione degli intenti incerti. Nessuna attestazione di firma dal browser o modifica cloud.

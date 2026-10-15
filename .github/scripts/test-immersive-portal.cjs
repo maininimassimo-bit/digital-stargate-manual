@@ -32,10 +32,15 @@ const routes = Object.keys(JSON.parse(fs.readFileSync('overrides/main.html', 'ut
             .assessments.flatMap(item => item.inputEvidence).filter(item => item.dimension === 'GUIDING_STABILITY');
           const rows = p.locator('.dsg-dq-evidence li').filter({hasText:'GUIDING_STABILITY'});
           assert.equal(await rows.count(), inputs.length);
-          for (const text of await rows.allTextContents()) {
-            assert(text.includes('copertura temporale non disponibile'), text);
-            assert(!text.includes('coverage 0%'), text);
+          for (const item of JSON.parse(fs.readFileSync('docs/data/scientific-data-quality-projection.json','utf8')).assessments) {
+            const input=item.inputEvidence.find(e=>e.dimension==='GUIDING_STABILITY');
+            if(!input)continue;
+            const card=p.locator('.dsg-dq-record').filter({hasText:item.sessionId});
+            const text=await card.locator('.dsg-dq-evidence li').filter({hasText:'GUIDING_STABILITY'}).textContent();
+            const measured=input.evidenceRefs.some(ref=>ref.endsWith('/guiding/temporalCoverage'));
+            assert(text.includes(measured ? `copertura temporale ${Number(input.coverage*100).toLocaleString('it-IT',{maximumFractionDigits:2})}%` : 'copertura temporale non disponibile'), text);
             assert(text.includes(' \u00b7 '), 'Evidence separator must remain UTF-8');
+            assert.equal(await card.locator('.dsg-dq-method-note').count(),1);
           }
           const qualityText = await p.locator('[data-scientific-data-quality]').textContent();
           assert(qualityText.includes('SHA-256 \u2713'), 'Freshness badge must remain UTF-8');

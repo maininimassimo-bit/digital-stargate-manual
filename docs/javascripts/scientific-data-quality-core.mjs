@@ -12,7 +12,7 @@ const nonEmpty = value => typeof value === 'string' && value.trim().length > 0;
 export function evidenceCoverageView(evidence, limitations = []) {
   const guidingGap = evidence?.dimension === 'GUIDING_STABILITY'
     && evidence.coverage === 0
-    && limitations.includes('GUIDING_TEMPORAL_COVERAGE_NOT_REPRESENTED_IN_SOURCE_CATALOG');
+    && (limitations.includes('GUIDING_TEMPORAL_COVERAGE_NOT_REPRESENTED_IN_SOURCE_CATALOG') || (limitations.includes('GUIDING_TEMPORAL_COVERAGE_REQUIRES_VERSIONED_LIGHT_INTERVAL_METHOD') && !evidence.evidenceRefs?.some(ref => ref.endsWith('/guiding/temporalCoverage'))));
   if (guidingGap) return { state: 'UNAVAILABLE', value: null, reason: 'GUIDING_TEMPORAL_DENOMINATOR_MISSING' };
   const value = evidence?.coverage;
   if (!Number.isFinite(value) || value < 0 || value > 1) {

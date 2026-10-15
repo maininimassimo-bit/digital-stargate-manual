@@ -64,14 +64,21 @@ test('missing guiding denominator is unavailable, not measured zero coverage', (
   }
 });
 
-test('all published guiding evidence carries the missing-denominator presentation', () => {
+test('published cohort distinguishes measured coverage and unavailable sentinel', () => {
   const projection = JSON.parse(fs.readFileSync('docs/data/scientific-data-quality-projection.json', 'utf8'));
   for (const item of projection.assessments.flatMap(record => record.inputEvidence)) {
     const view = evidenceCoverageView(item, projection.limitations);
     if (item.dimension === 'GUIDING_STABILITY') {
-      assert.equal(view.reason, 'GUIDING_TEMPORAL_DENOMINATOR_MISSING');
+      if (item.evidenceRefs.some(ref => ref.endsWith('/guiding/temporalCoverage'))) assert.equal(view.value, item.coverage);
+      else assert.equal(view.reason, 'GUIDING_TEMPORAL_DENOMINATOR_MISSING');
     } else {
       assert.equal(view.value, item.coverage);
     }
   }
+});
+
+test('mixed cohort preserves measured zero independently of unavailable sentinel',()=>{
+  const limitations=['GUIDING_TEMPORAL_COVERAGE_REQUIRES_VERSIONED_LIGHT_INTERVAL_METHOD'];
+  assert.equal(evidenceCoverageView({dimension:'GUIDING_STABILITY',coverage:0,evidenceRefs:['catalog#session/guiding/temporalCoverage']},limitations).value,0);
+  assert.equal(evidenceCoverageView({dimension:'GUIDING_STABILITY',coverage:0,evidenceRefs:['metrics#phd2']},limitations).state,'UNAVAILABLE');
 });

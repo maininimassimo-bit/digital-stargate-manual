@@ -119,3 +119,7 @@ RMS e campioni restano disponibili, mentre score/confidence/coverage aggregata,
 pesi e gate F5 restano invariati. Null o dati assenti non sono convertiti in zero.
 L'estensione scientifica del denominatore/metodo resta futura e richiede review.
 [Audit e verifiche](../../project/HANDOVER_2026-10-15-GUIDING-COVERAGE-PRESENTATION.md).
+
+## Incremento autorizzato — copertura temporale 15 ottobre 2026
+
+Il mapping storico con sentinel zero è superseded, esclusivamente per sessioni con misura verificabile, dal metodo `DSG-GUIDING-LIGHT-TEMPORAL-1.0` nel catalogo 1.5 con campo additivo. Il metodo e il denominatore sono versionati, con review indipendente prima del rilascio. [Contratto, provenance, effetti su confidence e rollback](../../project/HANDOVER_2026-10-15-GUIDING-TEMPORAL-INTEGRATION.md). Il profilo sperimentale e i gate produttivi F5 restano invariati.
