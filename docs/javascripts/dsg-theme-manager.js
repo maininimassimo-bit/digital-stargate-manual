@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const VERSION = '2.1.0-rc2';
+  const VERSION = '2.1.0-rc3';
   const STORAGE_KEY = 'dsg-theme-preference';
   const CONTROL_SELECTOR = '[data-dsg-theme]';
   const PALETTE_SELECTOR = '[data-md-component="palette"] input[name="__palette"]';
@@ -117,6 +117,10 @@
       }
     }
 
+    // Local previews can lack Material's palette subscriber. Keep the actual
+    // CSS scope synchronized even when clicking a radio only checks the input.
+    if (document.body) document.body.dataset.mdColorScheme = resolvedTheme === 'dark' ? 'slate' : 'default';
+
     window.requestAnimationFrame(() => {
       updateControls();
       publish(source);
@@ -182,6 +186,7 @@
 
         document.documentElement.dataset.dsgThemePreference = preference;
         document.documentElement.dataset.dsgThemeResolved = resolveTheme();
+        if (document.body) document.body.dataset.mdColorScheme = resolveTheme() === 'dark' ? 'slate' : 'default';
 
         window.requestAnimationFrame(() => {
           updateControls();

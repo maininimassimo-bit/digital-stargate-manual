@@ -68,3 +68,7 @@ Rollback: revert del package del contesto, preservando evidenze e originali.
 Il rilascio della pagina non attiva il servizio, non ripete la prova cloud,
 non avvia PixInsight e non invia dati astronomici. R04 e R14 restano parziali;
 gli altri requisiti, IRSA e accettazione Owner restano aperti.
+
+### Correzione candidata del tema
+
+La verifica manuale del candidato ha rilevato cambio tema effettivo soltanto dopo ricaricamento e contenuti non completamente visibili. Il gestore sincronizza ora immediatamente anche lo scope CSS Material sul body, senza dipendere dal subscriber Material nella preview locale. I testi del portale scientifico seguono i colori del tema e il campo file resta entro la larghezza disponibile. Regressione mirata: 13 controlli superati, incluso subscriber Material assente e persistenza. Verifica visiva della nuova build e nuove review sul successore ancora richieste; nessuna pubblicazione o accettazione scientifica.
