@@ -42,6 +42,14 @@
     <div data-result></div>
     <p>Lettura locale in memoria, senza invio o conservazione. Le componenti mancanti restano sconosciute e non autorizzano un esito scientifico positivo.</p>
   </section>
+  <section data-dsg-dark-dispersion aria-label="Dispersione dei dark e limiti del master">
+    <h2>Dispersione dei dark e limiti del master</h2>
+    <p>Consulta le tre mappe preparate sul PC dai 50 dark del 2024: media, dispersione senza rigetto e stima condizionata della varianza della media. La dispersione osservata non è automaticamente l’incertezza del master costruito con rigetto sigma.</p>
+    <label>Ricevuta della dispersione <input type="file" accept="application/json,.json"></label>
+    <p role="status" aria-live="polite">Nessuna dispersione caricata.</p>
+    <div data-result></div>
+    <p>Lettura locale in memoria, massimo 1 MiB, senza invio o conservazione. La stabilità dal 2024 al 2026 resta sconosciuta; questa ricevuta non assegna varianze agli input e non completa la calibrazione.</p>
+  </section>
   <section data-dsg-astrometry-context aria-label="Astrometria candidata e tempi">
     <h2>Astrometria candidata e tempi</h2>
     <p>Confronta il contesto WCS esportato sul PC con la provenienza dello stesso input. Tempi degli header, arrotondamenti e metadati derivati restano distinti. I residui sui riferimenti esclusi dal fit non costituiscono un’incertezza astrometrica completa.</p>
