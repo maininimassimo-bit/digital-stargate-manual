@@ -1,10 +1,10 @@
 # Technical Debt Register
 
-<<<<<<< HEAD
 ## BKL-051 — continuità dell'accesso, 15 ottobre 2026
 
 Rifiuto reale di accesso interrompe la prova dopo un completamento diagnostico. Candidato locale verifica preventivamente la scadenza senza sostituire l'autenticazione server e conserva gli intenti incerti. 49 test locali PASS; consegna del commit e collaudo reale aperti. Capacità del campione, scienza e nuova finestra autorizzata restano necessari. [Limiti](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md).
-=======
+
+
 ## Audit LIGHT e calibrazioni — 15 ottobre 2026
 
 Su richiesta Owner, audit del catalogo completo (24 sessioni) per il falso
@@ -14,7 +14,6 @@ derivati VALIDATED_ANALYTICS. Altre 23 severity conservate; due sessioni senza
 istruzioni tipizzate non sono dichiarate validate dall'audit. RAW e manifest
 invariati. [Metodo, evidenza riproducibile, gate e rollback](HANDOVER_2026-10-15-LIGHT-CALIBRATION-AUDIT.md).
 
->>>>>>> origin/main
 
 ## BKL-051 — stato storico e capacità della coda, 15 ottobre 2026
 
