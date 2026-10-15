@@ -115,7 +115,7 @@ non verificabile bloccano i comandi. Le risposte tardive non ripristinano viste
 dopo la fine della sessione. La verifica visiva del nuovo pannello resta un gate.
 
 Le richieste locali usano `BKL051_OWNER_CAMPAIGN_ACTION_V1`, con soli campi
-`schema`, `action`, `planRef`, `witnessRef`, `request`. `witnessRef` è presente
+`schema`, `action`, `planRef`, `witnessRef`, `request`. `witnessRef` è non nullo
 solo per `INPUT_REVIEW`, altrimenti è null. Le azioni consentite sono `CREATE`,
 `INPUT_REVIEW`, `FREEZE`, `OUTCOME_REVIEW`, `FINALIZE`, `REVOKE`; `request`
 contiene il rispettivo contratto server, senza campi di identità o authority.
@@ -135,8 +135,9 @@ revoche e confine statistico 58/59. Il caso positivo sintetico non qualifica
 alcun dato astronomico reale. Gli esiti della suite e le review indipendenti
 devono essere acquisiti sul candidato esatto prima dell'integrazione.
 
-Restano da collaudare il nuovo pannello e la sua integrazione; adattatori delle evidenze reali,
-orchestrazione e recupero autorizzati, campione reale indipendente con verità
-nulla verificabile, modello scientifico completo, revisione Owner autenticata
-e tutti gli altri requisiti R01–R14. Nessun requisito complessivo è dichiarato
+Restano da completare il collaudo del nuovo pannello e della sua integrazione,
+gli adattatori delle evidenze reali, l'orchestrazione e il recupero autorizzati,
+la qualificazione del campione reale indipendente con verità nulla verificabile,
+il modello scientifico completo e la revisione Owner autenticata sui dati reali,
+oltre agli altri requisiti R01–R14. Nessun requisito complessivo è dichiarato
 completo sulla sola base di questo incremento.
