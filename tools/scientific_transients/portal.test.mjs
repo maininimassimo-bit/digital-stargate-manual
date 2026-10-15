@@ -6,6 +6,38 @@ import {webcrypto} from 'node:crypto';
 const source=readFileSync(new URL('../../docs/javascripts/scientific-transients-portal.js',import.meta.url),'utf8');
 const queueViews=JSON.parse(readFileSync(new URL('portal-queue-fixture.json',import.meta.url),'utf8'));
 const tick=async()=>{for(let i=0;i<8;i++)await new Promise(resolve=>setTimeout(resolve,2));};
+const loginTime=1792050000000;
+const credentialFor=exp=>'eyJhbGciOiJSUzI1NiJ9.'+Buffer.from(JSON.stringify({exp})).toString('base64url')+'.SYNTHETIC_NOT_SIGNED';
+const ownerCredential=credentialFor(loginTime/1000+3600);
+
+test('expired Owner credential prevents reads and retains no authentication data',async()=>{
+  const h=harness();await h.login(credentialFor(loginTime/1000));
+  assert.equal(h.requests.length,0);assert.equal(h.storage.size,0);
+  assert.equal(h.controls.refresh.disabled,true);assert.match(h.controls.message.textContent,/scaduto/);
+});
+
+test('Owner credential near expiry prevents a new create before persisting intent',async()=>{
+  const h=harness({jobs:[]});await h.login();h.advanceClock(3600000-30000);
+  await h.create();assert.equal(h.requests.length,2);assert.equal(h.storage.size,0);
+  assert.equal(h.controls.refresh.disabled,true);assert.match(h.controls.message.textContent,/scaduto/);
+});
+
+test('expiry preserves an uncertain create and never retries it automatically',async()=>{
+  const h=harness({jobs:[],postFailure:'before'});await h.login();await h.create();
+  const retained=[...h.storage.entries()];assert.equal(retained.length,1);
+  h.advanceClock(3600000);await h.refresh();
+  assert.deepEqual([...h.storage.entries()],retained);assert.equal(posts(h).length,1);
+  assert.equal(h.requests.length,3);assert.equal(h.controls.retry.disabled,true);
+  assert.match(h.controls.message.textContent,/scaduto/);
+});
+
+test('malformed credential expiry cannot trigger a private request',async()=>{
+  for(const credential of ['OWNER_ONLY_IN_MEMORY',credentialFor(null),credentialFor('9999999999'),credentialFor(-1),credentialFor(1.5),credentialFor(Number.MAX_SAFE_INTEGER)]) {
+    const h=harness();await h.login(credential);assert.equal(h.requests.length,0);
+    assert.equal(h.controls.refresh.disabled,true);assert.equal(h.storage.size,0);
+    assert.equal(h.controls.message.textContent.includes(credential),false);
+  }
+});
 const fixture=()=>({jobId:'TRN_'+'6'.repeat(32),request:{requestId:'6'.repeat(32),bindingRef:'1'.repeat(32)},
   binding:{bindingRef:'1'.repeat(32),inputRef:'2'.repeat(32),referenceRef:'3'.repeat(32),algorithmRef:'4'.repeat(32),contractRef:'5'.repeat(32)},
   state:'COMPLETED',cancelRequested:false,sequence:4,result:{reportSha256:'7'.repeat(64),bindingRef:'1'.repeat(32),
@@ -20,22 +52,22 @@ function harness({jobs=[fixture()],status=200,fail=false,deferred=false,googleMi
     click(){if(!this.disabled)this.callbacks.click?.();}};}
   const controls=Object.fromEntries(['message','connect','disconnect','signin','refresh','observed','jobs','group','verified','create','retry','pending','group-details'].map(key=>[key,node()]));
   const root=node();root.querySelector=selector=>controls[selector.match(/data-dsg-transients-(.+)\]/)[1]];
-  let currentRoot=root,login,subscribe,release,abortByTimeout;
+  let currentRoot=root,login,subscribe,release,abortByTimeout,now=loginTime;
   const requests=[],blobs=[],revoked=[],created=[];
   const google={accounts:{id:{initialize(value){login=value.callback;},renderButton(){}}}};
   const context={document:{readyState:'complete',querySelector:()=>currentRoot,createElement:tag=>{const n=node(tag);created.push(n);return n;},head:node()},
     window:{google:googleMissing?undefined:google},google,document$:{subscribe(callback){subscribe=callback;}},
-    Blob,TextDecoder,AbortController,crypto:webcrypto,Uint8Array,setTimeout(callback,delay){if(delay===30000)abortByTimeout=callback;return setTimeout(callback,delay);},clearTimeout,
+    Blob,TextDecoder,AbortController,crypto:webcrypto,Uint8Array,atob,Date:class extends Date {static now(){return now;}},setTimeout(callback,delay){if(delay===30000)abortByTimeout=callback;return setTimeout(callback,delay);},clearTimeout,
     URL:{createObjectURL(blob){blobs.push(blob);return 'blob:'+blobs.length;},revokeObjectURL(url){revoked.push(url);}},
     localStorage:{setItem(){assert.fail('credential persistence forbidden');}},sessionStorage:{
       getItem:key=>storage.has(key)?storage.get(key):null,
-      setItem(key,value){if(storageFail)throw Error('PRIVATE_STORAGE_ERROR');assert.equal(value.includes('OWNER_ONLY_IN_MEMORY'),false);storage.set(key,value);},
+      setItem(key,value){if(storageFail)throw Error('PRIVATE_STORAGE_ERROR');assert.equal(value.includes(ownerCredential),false);storage.set(key,value);},
       removeItem(key){if(removeFail)throw Error('PRIVATE_STORAGE_ERROR');storage.delete(key);}},
     async fetch(url,options){
       requests.push({url,options});assert.match(url,/^https:\/\/dsg-pixinsight-pilot-183451329061.europe-west1.run.app\/v1\/transient-analysis\/(?:options|jobs(?:\/TRN_[a-f0-9]{32}\/(?:cancel|review|close-recovery))?)$/);
       assert.equal(options.cache,'no-store');
       assert.equal(options.redirect,'error');assert.equal(options.credentials,'omit');
-      assert.equal(options.headers.Authorization,'Bearer OWNER_ONLY_IN_MEMORY');
+      assert.equal(options.headers.Authorization,'Bearer '+ownerCredential);
       if(timeout)await new Promise((resolve,reject)=>options.signal.addEventListener('abort',()=>reject(Error('ABORTED'))));
       if(deferred)await new Promise(resolve=>{release=resolve;});
       if(fail)throw Error('HOSTILE_PRIVATE_ERROR');
@@ -65,7 +97,8 @@ function harness({jobs=[fixture()],status=200,fail=false,deferred=false,googleMi
     }};
   vm.runInNewContext(source,context);
   return {controls,root,requests,blobs,revoked,created,storage,
-    async login(){controls.connect.click();await tick();login({credential:'OWNER_ONLY_IN_MEMORY'});await tick();},
+    async login(credential=ownerCredential){controls.connect.click();await tick();login({credential});await tick();},
+    advanceClock(milliseconds){now+=milliseconds;},
     async refresh(){controls.refresh.click();await tick();},
     setStatus(value){status=value;},setJobs(value){jobs=value;},setBindings(value){bindings=value;},setPostFailure(value){postFailure=value;},release(){release?.();},fireTimeout(){abortByTimeout();},
     async create(){controls.group.value=bindings[0].bindingRef;controls.group.callbacks.change();controls.verified.checked=true;controls.verified.callbacks.change();controls.create.click();await tick();},

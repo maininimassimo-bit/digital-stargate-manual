@@ -1,5 +1,9 @@
 # Repository Knowledge Map
 
+## BKL-051 — scadenza dell'accesso, 15 ottobre 2026
+
+[Controllo preventivo Owner e stato della prova](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md): scientific-transients-portal.js verifica la scadenza prima di HTTP e nuovo intento; portal.test.mjs usa credenziali sintetiche e clock controllato per verificare stop locale e conservazione degli intenti incerti. Nessuna attestazione di firma dal browser o modifica cloud.
+
 ## BKL-051 — registro di campagna, 15 ottobre 2026
 
 [Isolamento esplicito e prova reale fermata](BKL-051-CONTROL-STATE-ISOLATION-2026-10-15.md): queue.py possiede la selezione del registro; app.py legge il riferimento attendibile; test_control_namespace.py copre conservazione dello stato storico, identità, riavvio e input invalidi. Nessuna attivazione dal codice o chiusura scientifica.

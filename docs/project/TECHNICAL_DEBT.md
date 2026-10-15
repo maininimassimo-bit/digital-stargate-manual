@@ -1,5 +1,9 @@
 # Technical Debt Register
 
+## BKL-051 — continuità dell'accesso, 15 ottobre 2026
+
+Rifiuto reale di accesso interrompe la prova dopo un completamento diagnostico. Candidato locale verifica preventivamente la scadenza senza sostituire l'autenticazione server e conserva gli intenti incerti. 49 test locali PASS; consegna del commit e collaudo reale aperti. Capacità del campione, scienza e nuova finestra autorizzata restano necessari. [Limiti](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md).
+
 ## BKL-051 — stato storico e capacità della coda, 15 ottobre 2026
 
 Registro unico incompatibile con la nuova identità: rifiuto reale preservato; correzione locale a selezione esplicita, senza migrazione. Rimangono 32 binding/job e 1MiB: non coprono il collaudo completo di 59 triplette/177 job. Sono requisiti da completare, non scope eliminato o debito accettato. [Contratto e gate](BKL-051-CONTROL-STATE-ISOLATION-2026-10-15.md). Nessuna nuova attivazione attestata.

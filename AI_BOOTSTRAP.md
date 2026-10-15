@@ -1,5 +1,9 @@
 # Digital StarGate AI Bootstrap
 
+## BKL-051 — accesso Owner, 15 ottobre 2026
+
+PR596 rilasciata; prova reale interrotta dopo un completamento diagnostico collegato al piano. Richiesta successiva non confermata, nessun reinvio; servizio, configurazione e IAM ripristinati. Candidato locale: controllo preventivo della scadenza prima di HTTP e nuovo intento, conservando gli intenti incerti. 49 test del portale locali PASS; CI/review/rilascio del successore da verificare. [Stato e limiti](docs/project/BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md). Milestone OPEN / NOT_VALIDATED, 37%, zero controlli qualificati. Le note seguenti conservano gli snapshot precedenti.
+
 ## BKL-051 — prova operativa e isolamento del registro, 15 ottobre 2026
 
 PR594 integrata e portale pubblicato; le precedenti note di candidato restano storiche. La prova reale successiva si è fermata alla prima registrazione worker: stato cloud preesistente con identità diversa, HTTP400, zero nuovi job e avvii nativi. Traffico e permesso temporaneo ripristinati. Correzione locale con riferimento di registro esplicito, compatibilità storica e nessuna migrazione; non distribuita. [Contratto, prove e residui](docs/project/BKL-051-CONTROL-STATE-ISOLATION-2026-10-15.md). BKL-051 OPEN / NOT_VALIDATED, stima37%, zero controlli qualificati; niente nuova prova o deployment autorizzati da questo codice.

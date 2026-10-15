@@ -1,5 +1,9 @@
 # Handover BKL-051 — piano e scheda unificata del caso
 
+## Aggiornamento — prova reale e accesso Owner
+
+PR594 e PR596 rilasciate; prova reale successiva interrotta dopo un completamento diagnostico collegato al piano. La scheda corrente contiene un tentativo, copertura incompleta e zero controlli qualificati; le schede precedenti senza tentativi restano storiche. Seconda richiesta non confermata per rifiuto di accesso: preservare la sessione e riconciliare prima di ripetere. Traffico, configurazione e IAM ripristinati. Candidato locale previene richieste con credenziale scaduta o prossima alla scadenza; gate del successore e nuova finestra operativa restano da autorizzare/verificare. [Dettagli](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md). I paragrafi seguenti conservano gli snapshot precedenti.
+
 Candidato locale integrato sulla main `31d02d916f19b5dc1b9de0b67e935d6227b39042`;
 nessun rilascio attestato da questo handover. Piano versionato, dispatch vincolato,
 provenienza, contesti scientifici parziali, dossier e scheda passiva del caso;

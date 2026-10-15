@@ -20,6 +20,16 @@
   const canonical=value=>object(value)?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):
     Array.isArray(value)?value.map(canonical):value;
   const same=(a,b)=>JSON.stringify(canonical(a))===JSON.stringify(canonical(b));
+  // Expiry is only a local request guard. The service still verifies identity and authority.
+  function credentialExpiry(credential) {
+    require(typeof credential==='string'&&credential.length<=16384);
+    const parts=credential.split('.');
+    require(parts.length===3&&parts.every(part=>/^[A-Za-z0-9_-]+$/.test(part)));
+    const payload=parts[1].replace(/-/g,'+').replace(/_/g,'/');
+    const claims=JSON.parse(atob(payload+'='.repeat((4-payload.length%4)%4)));
+    require(object(claims)&&Number.isSafeInteger(claims.exp)&&claims.exp>0&&Number.isSafeInteger(claims.exp*1000));
+    return claims.exp*1000;
+  }
   function inspectBinding(value) {
     require(fields(value,bindingKeys)&&Object.values(value).every(opaque));
     return Object.fromEntries(bindingKeys.map(key=>[key,value[key]]));
@@ -124,7 +134,7 @@
     active?.dispose(); active=null;
     if(!root)return;
     const q=name=>root.querySelector(`[data-dsg-transients-${name}]`);
-    let token='', busy=false, controller, disposed=false, epoch=0, url;
+    let token='', tokenExpiresAt=0, busy=false, controller, disposed=false, epoch=0, url;
     let bindings=[],jobs=[],ready=false,pending=null,storageBlocked=false,retryAllowed=false;
     try {const stored=sessionStorage.getItem(pendingKey);if(stored!==null){require(stored.length<=2048);pending=inspectPending(JSON.parse(stored));}}
     catch {storageBlocked=true;}
@@ -147,9 +157,15 @@
       q('pending').textContent=storageBlocked?'La memoria della richiesta non è verificabile. Nessun nuovo comando è consentito; conserva questa sessione per il recupero supervisionato.':
         pending?(token?'Richiesta conservata: '+pending.action+' · '+pending.jobId+'. Aggiorna lo stato prima di ripetere lo stesso comando.':'Una richiesta è conservata in questa sessione. Accedi per verificarne lo stato.') : '';
     }
-    function disconnect() {epoch++;token='';controller?.abort();clear();q('signin').replaceChildren();
+    function disconnect() {epoch++;token='';tokenExpiresAt=0;controller?.abort();clear();q('signin').replaceChildren();
       message('Accesso terminato. Le evidenze sul PC e sul servizio sono conservate.');lock();}
-    active={root,dispose(){disposed=true;epoch++;token='';controller?.abort();clear();q('signin').replaceChildren();}};
+    function usableAccess() {
+      if(!current()||!token)return false;
+      if(Date.now()+30000<tokenExpiresAt)return true;
+      disconnect();message('Accesso scaduto o prossimo alla scadenza. Accedi di nuovo con l’account Owner. Le richieste conservate restano da verificare.');
+      return false;
+    }
+    active={root,dispose(){disposed=true;epoch++;token='';tokenExpiresAt=0;controller?.abort();clear();q('signin').replaceChildren();}};
     const el=(tag,text,parent)=>{const node=document.createElement(tag);node.textContent=text;parent.append(node);return node;};
     function download(job) {
       if(!current()||!token||busy)return;
@@ -215,6 +231,7 @@
     }
     async function call(path,method='GET',body) {
       require(path==='/options'||path==='/jobs'||/^\/jobs\/TRN_[a-f0-9]{32}\/(?:cancel|review|close-recovery)$/.test(path));
+      if(!usableAccess())return null;
       const session=epoch,credential=token;require(current()&&credential);controller=new AbortController();
       const requestController=controller;
       const timer=setTimeout(()=>requestController.abort(),30000);
@@ -280,6 +297,7 @@
       catch{storageBlocked=true;throw Error('Storage intent conflict');}
     }
     async function start(action,job,body) {
+      if(!usableAccess())return;
       require(ready&&!pending&&!storageBlocked&&token);
       try {require(sessionStorage.getItem(pendingKey)===null);}catch{storageBlocked=true;throw Error('Storage unavailable');}
       pending=inspectPending({kind:'BKL051_OWNER_PENDING_ACTION_V1',action,jobId:job.jobId,binding:job.binding,body});
@@ -324,7 +342,7 @@
       const loginEpoch=++epoch;
       google.accounts.id.initialize({client_id:CLIENT,callback:response=>{
         if(!current()||loginEpoch!==epoch||typeof response.credential!=='string'||!response.credential)return;
-        run(async()=>{clear();token=response.credential;lock();await refresh();});
+        run(async()=>{clear();token='';tokenExpiresAt=0;tokenExpiresAt=credentialExpiry(response.credential);token=response.credential;lock();await refresh();});
       }});
       q('signin').replaceChildren();google.accounts.id.renderButton(q('signin'),{theme:'outline',size:'large'});
       message('Accedi con l’account Owner per leggere lo stato privato.');

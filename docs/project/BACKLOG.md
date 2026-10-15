@@ -1,5 +1,9 @@
 # Project Backlog
 
+## BKL-051 — scadenza dell'accesso Owner, 15 ottobre 2026
+
+Una esecuzione diagnostica reale collegata al piano; seconda richiesta non confermata per rifiuto di accesso. Ripristino verificato. Candidato locale impedisce richieste con credenziale scaduta o prossima alla scadenza, prima di un nuovo intento. 49 test locali PASS; gate exact-head e nuova prova autorizzata restano necessari. [Stato](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md). Nessun controllo qualificato o acceptance.
+
 ## BKL-051 — registro isolato, 15 ottobre 2026
 
 Prova reale fermata e riconciliata prima di creare job o avviare PixInsight. Candidato locale: riferimento esplicito per separare il nuovo registro da quello storico senza cancellazioni o riuso di identità. Restano gate exact-head, nuova proposta operativa, capacità per 177 job e tutti i requisiti scientifici. [Evidenze e limiti](BKL-051-CONTROL-STATE-ISOLATION-2026-10-15.md). Nessuna acceptance chiusa; 37%, zero controlli qualificati.

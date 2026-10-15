@@ -1,5 +1,9 @@
 # Digital StarGate Enterprise Architecture Context
 
+## BKL-051 — scadenza preventiva, 15 ottobre 2026
+
+Candidato frontend controlla la sola scadenza dichiarata prima di HTTP e nuovo intento. Firma, identità e authority restano sul servizio; nessun token persistito, rinnovo automatico o reinvio di richieste incerte. Prova precedente interrotta dopo un completamento diagnostico e ripristinata integralmente; nessuna nuova attivazione. [Stato e limiti](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md).
+
 ## BKL-051 — isolamento della persistenza di controllo, 15 ottobre 2026
 
 Candidato compatibile: riferimento attendibile opzionale per il solo registro dei transitori, con guardie worker/root, CAS e backup invariati. Nessuna scelta dal portale, migrazione o nuovo endpoint. Permesso limitato all’oggetto esatto solo dopo consenso operativo; nessuna authority scientifica derivata. [Contratto e rollback](BKL-051-CONTROL-STATE-ISOLATION-2026-10-15.md).

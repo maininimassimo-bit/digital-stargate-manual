@@ -1,5 +1,9 @@
 # Decision Log
 
+## BKL-051 — scadenza locale e richieste incerte, 15 ottobre 2026
+
+Prima di HTTP o di un nuovo intento richiedere oltre 30 secondi residui sulla scadenza dichiarata dalla credenziale Google. È un controllo preventivo del browser, senza attestazione d'identità o sostituzione delle verifiche server. Disconnessione locale e nuovo accesso esplicito; richieste incerte preservate e nessun reinvio automatico. [Prove e confine](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md).
+
 ## BKL-051 — conservare il registro preesistente, 15 ottobre 2026
 
 Dopo il rifiuto HTTP400 della prova reale, conservare registro, worker e backup storici. La correzione tecnica candidata permette un riferimento opaco esplicito di configurazione, senza percorso arbitrario, fallback automatico o adozione dello stato altrui. Assenza del parametro conserva il contratto precedente. L’uso operativo richiede una proposta distinta; non estende il consenso alla precedente immagine. [Dettagli](BKL-051-CONTROL-STATE-ISOLATION-2026-10-15.md).
