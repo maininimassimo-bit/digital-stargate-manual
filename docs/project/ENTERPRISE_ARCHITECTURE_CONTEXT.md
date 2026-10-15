@@ -1,5 +1,9 @@
 # Digital StarGate Enterprise Architecture Context
 
+## Copertura temporale di guida — integrazione candidata 15 ottobre 2026
+
+Metodo versionato da intervalli LIGHT N.I.N.A. e campioni PHD2 sul clock locale condiviso, con provenienza SHA-256 e missingness esplicita. Catalogo 1.6 e aggiornamento automatico dopo importazione; F4/F5 sperimentali, nessuna nuova authority. [Metodo, audit, limiti e rollback](HANDOVER_2026-10-15-GUIDING-TEMPORAL-INTEGRATION.md). Il risultato preliminare sulla presenza degli orari non è una misura pubblicabile senza i controlli di coerenza.
+
 ## BKL-051 — scadenza preventiva, 15 ottobre 2026
 
 Candidato frontend controlla la sola scadenza dichiarata prima di HTTP e nuovo intento. Firma, identità e authority restano sul servizio; nessun token persistito, rinnovo automatico o reinvio di richieste incerte. Prova precedente interrotta dopo un completamento diagnostico e ripristinata integralmente; nessuna nuova attivazione. [Stato e limiti](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md).

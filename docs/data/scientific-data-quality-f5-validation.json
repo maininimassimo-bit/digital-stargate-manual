@@ -3,10 +3,10 @@
   "validationType": "SCIENTIFIC_DATA_QUALITY_REAL_EVIDENCE_VALIDATION",
   "validationId": "BKL041-F5-REAL-EVIDENCE-V1",
   "validationState": "COMPLETE",
-  "generatedAt": "2026-10-15T07:19:23.464Z",
+  "generatedAt": "2026-10-15T10:15:59.008Z",
   "sourceCatalog": {
     "path": "docs/data/scientific-session-catalog.json",
-    "digest": "0b776af92555144057e00f0a185b7922f0646b7d122545a40e5e9c546ebc0586",
+    "digest": "73fbe4e906eae94ba9196f99ec1862ea21e599da263bb3c901443d2e5ffb8406",
     "sessionCount": 24,
     "sessionIds": [
       "2026-07-14_2026-07-15",
@@ -37,7 +37,7 @@
   },
   "sourceProjection": {
     "path": "docs/data/scientific-data-quality-projection.json",
-    "digest": "7d48c082508a8c74780104329e89c03582c04df4ac62f4ea45396649daf50bc9",
+    "digest": "546b23f42c9cefc9b40ad20e3cfe1b350f961937041adfd0ac7aead7bc4e337c",
     "projectionId": "BKL041-F4-CATALOG-V1",
     "profileId": "DSG-SCIENTIFIC-QUALITY-SYNTHETIC-DEMONSTRATOR",
     "profileVersion": "1.0.0-f3"
@@ -64,7 +64,7 @@
       "metadataLineage": 22,
       "acquisitionCompletion": 22,
       "guidingRms": 21,
-      "guidingTemporalCoverage": 0,
+      "guidingTemporalCoverage": 4,
       "sqm": 17
     },
     "assessmentStates": {
@@ -184,7 +184,7 @@
       "evidence": [
         {
           "name": "governedNonZero",
-          "value": 0,
+          "value": 4,
           "unit": "count"
         },
         {
@@ -193,7 +193,7 @@
           "unit": "count"
         }
       ],
-      "reason": "Sample count without a governed temporal denominator is insufficient."
+      "reason": "Versioned LIGHT/valid-guide overlap is counted only where reconstructible; missing or zero coverage cannot satisfy the full-cohort nonzero criterion."
     },
     {
       "criterionId": "REFERENCE_GROUND_TRUTH",
@@ -272,5 +272,5 @@
     "actionAuthority": "NONE",
     "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
   },
-  "validationDigest": "115f0f213899367b5a62bf089d7bf4994278a0a43a7a3216fcc9723009d27224"
+  "validationDigest": "ee774b70568f15b1d4385321ae87c46a9eabb01d70fe8cd804f79499852f5651"
 }

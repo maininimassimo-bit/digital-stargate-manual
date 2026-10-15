@@ -82,3 +82,17 @@ test('duplicate catalog session IDs fail closed', () => {
 test('catalog authority drift fails closed', () => {
   assert.throws(() => buildScientificDataQualityProjection({ schemaVersion: '1.5', catalogStatus: 'AUTHORITATIVE', sessions: [] }, profile, { generatedAt: at }), /authority\/status/);
 });
+
+
+test('versioned measured coverage is admitted only with a coherent temporal denominator', () => {
+  const valid={methodVersion:'DSG-GUIDING-LIGHT-TEMPORAL-1.0',state:'AVAILABLE',coverage:0.6,lightSeconds:10,coveredSeconds:6,clockBasis:'SHARED_LOCAL_WALL_CLOCK',maxGapExposures:3};
+  const make=t=>session('2026-09-01_2026-09-02',{guiding:{state:'AVAILABLE',sampleCount:10,rmsTotalArcsec:1,temporalCoverage:t}});
+  const input=t=>mapCatalogSessionToF3Inputs(make(t)).find(e=>e.dimension==='GUIDING_STABILITY');
+  assert.equal(input(valid).coverage,0.6);
+  assert(input(valid).evidenceRefs[0].endsWith('/guiding/temporalCoverage'));
+  for(const mutation of [{coverage:0.9},{lightSeconds:Infinity},{coveredSeconds:-1},{clockBasis:'UNKNOWN'},{maxGapExposures:99},{methodVersion:'unknown'}]) {
+    assert.equal(input({...valid,...mutation}).coverage,0);
+    assert(!input({...valid,...mutation}).evidenceRefs[0].endsWith('/guiding/temporalCoverage'));
+  }
+  assert(input({...valid,coverage:0,coveredSeconds:0}).evidenceRefs[0].endsWith('/guiding/temporalCoverage'));
+});

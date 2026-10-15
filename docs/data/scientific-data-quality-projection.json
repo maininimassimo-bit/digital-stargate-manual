@@ -3,12 +3,12 @@
   "projectionType": "SCIENTIFIC_DATA_QUALITY_PROJECTION",
   "projectionId": "BKL041-F4-CATALOG-V1",
   "projectionState": "EXPERIMENTAL_NOT_ACCEPTED",
-  "generatedAt": "2026-10-15T07:19:23.464Z",
+  "generatedAt": "2026-10-15T10:15:59.008Z",
   "sourceCatalog": {
     "path": "docs/data/scientific-session-catalog.json",
-    "schemaVersion": "1.5",
+    "schemaVersion": "1.6",
     "catalogStatus": "VERSIONED_ANALYTICS_PROJECTION",
-    "digest": "0b776af92555144057e00f0a185b7922f0646b7d122545a40e5e9c546ebc0586",
+    "digest": "73fbe4e906eae94ba9196f99ec1862ea21e599da263bb3c901443d2e5ffb8406",
     "sessionCount": 24,
     "sessionIds": [
       "2026-07-14_2026-07-15",
@@ -382,11 +382,11 @@
           "evidenceClass": "DECLARED",
           "quality": "VALID",
           "completeness": "COMPLETE",
-          "coverage": 0,
+          "coverage": 0.99943,
           "calibrationState": "NOT_APPLICABLE",
           "eligibility": "ELIGIBLE_FOR_FUTURE_NORMALIZATION",
           "evidenceRefs": [
-            "data/sessions/2026/08/2026-08-14_2026-08-15/normalized/session-metrics.json#phd2"
+            "docs/data/scientific-session-catalog.json#2026-08-14_2026-08-15/guiding/temporalCoverage"
           ]
         }
       ],
@@ -1438,7 +1438,7 @@
           "calibrationState": "NOT_APPLICABLE",
           "eligibility": "ELIGIBLE_FOR_FUTURE_NORMALIZATION",
           "evidenceRefs": [
-            "data/sessions/2026/09/2026-09-06_2026-09-07/normalized/session-metrics.json#phd2"
+            "docs/data/scientific-session-catalog.json#2026-09-06_2026-09-07/guiding/temporalCoverage"
           ]
         },
         {
@@ -1460,14 +1460,14 @@
       "assessment": {
         "schemaVersion": "1.0",
         "assessmentType": "SCIENTIFIC_DATA_QUALITY_ASSESSMENT",
-        "assessmentId": "BKL041-F3-57cbd41229050a53e6958027",
+        "assessmentId": "BKL041-F3-5abb623a914956cb93cd8460",
         "sessionId": "2026-09-06_2026-09-07",
         "profileId": "DSG-SCIENTIFIC-QUALITY-SYNTHETIC-DEMONSTRATOR",
         "profileVersion": "1.0.0-f3",
         "profileDigest": "7bf87e894d26054e51c97b10e9519fb5861926d0770de968b3f9d74a7b97f157",
         "algorithmId": "DSG-WEIGHTED-LINEAR-SCORE",
         "algorithmVersion": "1.0.0",
-        "evidenceSnapshotDigest": "aabfee89d21aaba0fb3a855f392cf04ab1000f0533ed023103c71bcd1d2abcd1",
+        "evidenceSnapshotDigest": "08606e1da11c7437ce71908d3360e9da7ab455d27ffcffa7c30bb5549b3f3fa6",
         "assessmentState": "AVAILABLE",
         "score": {
           "value": 82.82,
@@ -1521,7 +1521,7 @@
             "contribution": 0.1168,
             "confidenceFactor": 0,
             "evidenceRefs": [
-              "data/sessions/2026/09/2026-09-06_2026-09-07/normalized/session-metrics.json#phd2"
+              "docs/data/scientific-session-catalog.json#2026-09-06_2026-09-07/guiding/temporalCoverage"
             ],
             "exclusionReason": null
           },
@@ -1564,7 +1564,7 @@
           "actionAuthority": "NONE",
           "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
         },
-        "assessmentDigest": "29322e4e544602cda73e2769e92b6cf784f8090cff42a915b4aea7f3a29a28ed"
+        "assessmentDigest": "06b737026bdec8d14c9606857769d4bfef5f345476e23a8e534b2ea34eb1e71b"
       },
       "generationError": null
     },
@@ -2353,11 +2353,11 @@
           "evidenceClass": "DECLARED",
           "quality": "VALID",
           "completeness": "COMPLETE",
-          "coverage": 0,
+          "coverage": 0.041088,
           "calibrationState": "NOT_APPLICABLE",
           "eligibility": "ELIGIBLE_FOR_FUTURE_NORMALIZATION",
           "evidenceRefs": [
-            "data/sessions/2026/09/2026-09-19_2026-09-20/normalized/session-metrics.json#phd2"
+            "docs/data/scientific-session-catalog.json#2026-09-19_2026-09-20/guiding/temporalCoverage"
           ]
         },
         {
@@ -2379,14 +2379,14 @@
       "assessment": {
         "schemaVersion": "1.0",
         "assessmentType": "SCIENTIFIC_DATA_QUALITY_ASSESSMENT",
-        "assessmentId": "BKL041-F3-1e61836f0af722eeb42edb40",
+        "assessmentId": "BKL041-F3-3be1dcd1aa12f49954416151",
         "sessionId": "2026-09-19_2026-09-20",
         "profileId": "DSG-SCIENTIFIC-QUALITY-SYNTHETIC-DEMONSTRATOR",
         "profileVersion": "1.0.0-f3",
         "profileDigest": "7bf87e894d26054e51c97b10e9519fb5861926d0770de968b3f9d74a7b97f157",
         "algorithmId": "DSG-WEIGHTED-LINEAR-SCORE",
         "algorithmVersion": "1.0.0",
-        "evidenceSnapshotDigest": "0c0af67522b0498dab703a3c62a2f3b3802cd0fd9f765e52de89c80c58b70cd3",
+        "evidenceSnapshotDigest": "3ad885d82387318c1bc8dde81866a19e38849434f69c8aab644760274e69a427",
         "assessmentState": "AVAILABLE",
         "score": {
           "value": 83.16,
@@ -2395,12 +2395,12 @@
           "roundingDigits": 2
         },
         "confidence": {
-          "value": 59.53,
+          "value": 60.35,
           "scaleMin": 0,
           "scaleMax": 100,
           "semantic": "EVIDENCE_SUPPORT_NOT_PROBABILITY"
         },
-        "evidenceCoverage": 0.744125,
+        "evidenceCoverage": 0.754397,
         "decomposition": [
           {
             "dimension": "METADATA_LINEAGE_INTEGRITY",
@@ -2438,9 +2438,9 @@
             "normalizedValue": 0.5208,
             "weight": 0.25,
             "contribution": 0.1302,
-            "confidenceFactor": 0,
+            "confidenceFactor": 0.0328704,
             "evidenceRefs": [
-              "data/sessions/2026/09/2026-09-19_2026-09-20/normalized/session-metrics.json#phd2"
+              "docs/data/scientific-session-catalog.json#2026-09-19_2026-09-20/guiding/temporalCoverage"
             ],
             "exclusionReason": null
           },
@@ -2483,7 +2483,7 @@
           "actionAuthority": "NONE",
           "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
         },
-        "assessmentDigest": "4e7c14d18ebbd6f22fd78910b82f77fd8fdfaa72b49462827b892bc3ef26a5e1"
+        "assessmentDigest": "9e28f125ce548478f08266a0ddbdf27da372f714d3766a8f8083673b44e311ca"
       },
       "generationError": null
     },
@@ -2852,11 +2852,11 @@
           "evidenceClass": "DECLARED",
           "quality": "VALID",
           "completeness": "COMPLETE",
-          "coverage": 0,
+          "coverage": 0.892659,
           "calibrationState": "NOT_APPLICABLE",
           "eligibility": "ELIGIBLE_FOR_FUTURE_NORMALIZATION",
           "evidenceRefs": [
-            "data/sessions/2026/10/2026-10-13_2026-10-14/normalized/session-metrics.json#phd2"
+            "docs/data/scientific-session-catalog.json#2026-10-13_2026-10-14/guiding/temporalCoverage"
           ]
         },
         {
@@ -2878,14 +2878,14 @@
       "assessment": {
         "schemaVersion": "1.0",
         "assessmentType": "SCIENTIFIC_DATA_QUALITY_ASSESSMENT",
-        "assessmentId": "BKL041-F3-cae9e459cc6f1cbf8ab12400",
+        "assessmentId": "BKL041-F3-dc03ab0ec38f84d3532df508",
         "sessionId": "2026-10-13_2026-10-14",
         "profileId": "DSG-SCIENTIFIC-QUALITY-SYNTHETIC-DEMONSTRATOR",
         "profileVersion": "1.0.0-f3",
         "profileDigest": "7bf87e894d26054e51c97b10e9519fb5861926d0770de968b3f9d74a7b97f157",
         "algorithmId": "DSG-WEIGHTED-LINEAR-SCORE",
         "algorithmVersion": "1.0.0",
-        "evidenceSnapshotDigest": "d637fc50a88dbb6ba019819dcd2a954a7e07c80ee359cd727cf81b79e367e925",
+        "evidenceSnapshotDigest": "4dacb708fd9935873b7ae713b7aeafed281afa6f2806efa7ffddfbeec8b81171",
         "assessmentState": "AVAILABLE",
         "score": {
           "value": 83.3,
@@ -2894,12 +2894,12 @@
           "roundingDigits": 2
         },
         "confidence": {
-          "value": 59.45,
+          "value": 77.31,
           "scaleMin": 0,
           "scaleMax": 100,
           "semantic": "EVIDENCE_SUPPORT_NOT_PROBABILITY"
         },
-        "evidenceCoverage": 0.743175,
+        "evidenceCoverage": 0.96633975,
         "decomposition": [
           {
             "dimension": "METADATA_LINEAGE_INTEGRITY",
@@ -2937,9 +2937,9 @@
             "normalizedValue": 0.5204,
             "weight": 0.25,
             "contribution": 0.1301,
-            "confidenceFactor": 0,
+            "confidenceFactor": 0.7141272,
             "evidenceRefs": [
-              "data/sessions/2026/10/2026-10-13_2026-10-14/normalized/session-metrics.json#phd2"
+              "docs/data/scientific-session-catalog.json#2026-10-13_2026-10-14/guiding/temporalCoverage"
             ],
             "exclusionReason": null
           },
@@ -2982,7 +2982,7 @@
           "actionAuthority": "NONE",
           "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
         },
-        "assessmentDigest": "9ae457b1ad9712cf7af1a66cbd09a7a87b3ee7ab7e3faeb6e395a5b12861d96f"
+        "assessmentDigest": "c5d4208454f2153165656fb5ff7237c55884dbcf3bd71acd885a543d9e407fed"
       },
       "generationError": null
     },
@@ -3027,11 +3027,11 @@
           "evidenceClass": "DECLARED",
           "quality": "VALID",
           "completeness": "COMPLETE",
-          "coverage": 0,
+          "coverage": 0.946396,
           "calibrationState": "NOT_APPLICABLE",
           "eligibility": "ELIGIBLE_FOR_FUTURE_NORMALIZATION",
           "evidenceRefs": [
-            "data/sessions/2026/10/2026-10-14_2026-10-15/normalized/session-metrics.json#phd2"
+            "docs/data/scientific-session-catalog.json#2026-10-14_2026-10-15/guiding/temporalCoverage"
           ]
         },
         {
@@ -3053,14 +3053,14 @@
       "assessment": {
         "schemaVersion": "1.0",
         "assessmentType": "SCIENTIFIC_DATA_QUALITY_ASSESSMENT",
-        "assessmentId": "BKL041-F3-2afe50a68d0c49598ff344fb",
+        "assessmentId": "BKL041-F3-ddcff7a9579dcd835a739e3e",
         "sessionId": "2026-10-14_2026-10-15",
         "profileId": "DSG-SCIENTIFIC-QUALITY-SYNTHETIC-DEMONSTRATOR",
         "profileVersion": "1.0.0-f3",
         "profileDigest": "7bf87e894d26054e51c97b10e9519fb5861926d0770de968b3f9d74a7b97f157",
         "algorithmId": "DSG-WEIGHTED-LINEAR-SCORE",
         "algorithmVersion": "1.0.0",
-        "evidenceSnapshotDigest": "b6d2f1a674917ec96f02799adf8089066209c8efdaacf93f741a2b6c16ed0f9d",
+        "evidenceSnapshotDigest": "49ff9b6dfb12ba11d85bc3f3217acf9d2cc4ec02d2f18b8cad192e94374c2f9b",
         "assessmentState": "AVAILABLE",
         "score": {
           "value": 86.89,
@@ -3069,12 +3069,12 @@
           "roundingDigits": 2
         },
         "confidence": {
-          "value": 59.59,
+          "value": 78.52,
           "scaleMin": 0,
           "scaleMax": 100,
           "semantic": "EVIDENCE_SUPPORT_NOT_PROBABILITY"
         },
-        "evidenceCoverage": 0.7449,
+        "evidenceCoverage": 0.981499,
         "decomposition": [
           {
             "dimension": "METADATA_LINEAGE_INTEGRITY",
@@ -3112,9 +3112,9 @@
             "normalizedValue": 0.664,
             "weight": 0.25,
             "contribution": 0.166,
-            "confidenceFactor": 0,
+            "confidenceFactor": 0.7571168,
             "evidenceRefs": [
-              "data/sessions/2026/10/2026-10-14_2026-10-15/normalized/session-metrics.json#phd2"
+              "docs/data/scientific-session-catalog.json#2026-10-14_2026-10-15/guiding/temporalCoverage"
             ],
             "exclusionReason": null
           },
@@ -3157,7 +3157,7 @@
           "actionAuthority": "NONE",
           "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
         },
-        "assessmentDigest": "24da99dbd694c7795e47c076f3d3fed8068fe6c5ec6747eae8582b26921736dd"
+        "assessmentDigest": "459aafc658a0d670adb7b3f06607f4553e8dc0d45441adc5362d71f94c129f35"
       },
       "generationError": null
     }
@@ -3165,7 +3165,7 @@
   "limitations": [
     "EXPERIMENTAL_F4_NOT_ACCEPTED_FOR_PRODUCTION_USE",
     "SYNTHETIC_DEMONSTRATOR_PROFILE_NOT_SCIENTIFIC_CALIBRATION",
-    "GUIDING_TEMPORAL_COVERAGE_NOT_REPRESENTED_IN_SOURCE_CATALOG",
+    "GUIDING_TEMPORAL_COVERAGE_REQUIRES_VERSIONED_LIGHT_INTERVAL_METHOD",
     "NO_RANKING_THRESHOLD_RECOMMENDATION_OR_AUTOMATIC_ACCEPTANCE",
     "NO_SAFETY_OR_ACTION_AUTHORITY"
   ],
@@ -3181,5 +3181,5 @@
     "actionAuthority": "NONE",
     "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
   },
-  "projectionDigest": "7d48c082508a8c74780104329e89c03582c04df4ac62f4ea45396649daf50bc9"
+  "projectionDigest": "546b23f42c9cefc9b40ad20e3cfe1b350f961937041adfd0ac7aead7bc4e337c"
 }

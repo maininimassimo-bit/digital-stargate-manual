@@ -1,5 +1,9 @@
 # Decision Log
 
+## Copertura temporale di guida — integrazione candidata 15 ottobre 2026
+
+Metodo versionato da intervalli LIGHT N.I.N.A. e campioni PHD2 sul clock locale condiviso, con provenienza SHA-256 e missingness esplicita. Catalogo 1.6 e aggiornamento automatico dopo importazione; F4/F5 sperimentali, nessuna nuova authority. [Metodo, audit, limiti e rollback](HANDOVER_2026-10-15-GUIDING-TEMPORAL-INTEGRATION.md). Il risultato preliminare sulla presenza degli orari non è una misura pubblicabile senza i controlli di coerenza.
+
 ## BKL-051 — scadenza locale e richieste incerte, 15 ottobre 2026
 
 Prima di HTTP o di un nuovo intento richiedere oltre 30 secondi residui sulla scadenza dichiarata dalla credenziale Google. È un controllo preventivo del browser, senza attestazione d'identità o sostituzione delle verifiche server. Disconnessione locale e nuovo accesso esplicito; richieste incerte preservate e nessun reinvio automatico. [Prove e confine](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md).

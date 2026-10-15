@@ -24,12 +24,12 @@ if (host) {
   const dimension = item => `<tr><th scope="row">${esc(item.dimension)}</th><td>${esc(item.state)}</td><td>${number(item.rawValue)} ${esc(item.unit)}</td><td>${number(item.normalizedValue)}</td><td>${number(item.weight)}</td><td>${number(item.contribution)}</td><td>${esc(item.exclusionReason || '—')}</td></tr>`;
   const evidence = (item, limitations) => {
     const coverage = evidenceCoverageView(item, limitations);
-    const label = coverage.state === 'AVAILABLE' ? `coverage ${pct(coverage.value * 100)}`
+    const label = coverage.state === 'AVAILABLE' ? `${item.dimension === 'GUIDING_STABILITY' ? 'copertura temporale' : 'coverage'} ${pct(coverage.value * 100)}`
       : coverage.reason === 'GUIDING_TEMPORAL_DENOMINATOR_MISSING' ? 'copertura temporale non disponibile' : 'copertura non disponibile';
     return `<li><strong>${esc(item.dimension)}</strong><span>${number(item.value)} ${esc(item.unit)} · ${esc(label)}</span></li>`;
   };
 
-  const record = (item, limitations) => {
+  const record = (item, limitations, temporal) => {
     const available = item.projectionRecordState === 'AVAILABLE';
     const assessment = item.assessment;
     const reasons = assessment?.decomposition?.filter(entry => entry.state !== 'AVAILABLE').map(entry => `${entry.dimension}: ${entry.exclusionReason}`) || [];
@@ -41,13 +41,14 @@ if (host) {
       <details><summary>Evidence e spiegazione</summary>
         <ul class="dsg-dq-evidence">${item.inputEvidence.map(entry => evidence(entry, limitations)).join('') || '<li>Nessuna evidence eleggibile.</li>'}</ul>
         ${item.inputEvidence.some(entry => evidenceCoverageView(entry, limitations).reason === 'GUIDING_TEMPORAL_DENOMINATOR_MISSING') ? '<p class="dsg-dq-coverage-note">RMS di guida disponibile; copertura temporale non determinabile dal catalogo. Il numero di campioni validi non indica la frazione della notte coperta. Questa lacuna resta considerata nella confidence e nella copertura complessiva del modello sperimentale.</p>' : ''}
+        ${temporal ? `<p class="dsg-dq-method-note">${temporal.state === 'AVAILABLE' ? `Copertura temporale: ${number(temporal.coveredSeconds)} s coperti su ${number(temporal.lightSeconds)} s di esposizioni LIGHT. Continuità ricostruita tra campioni validi distanti al massimo tre esposizioni di guida; assestamenti e vuoti lunghi esclusi.` : `Copertura non calcolabile con i log disponibili: ${esc(temporal.reason)}.`} Metodo <code>${esc(temporal.methodVersion)}</code> · orologio locale condiviso richiesto.</p>` : ''}
         ${assessment ? `<div class="dsg-dq-table-wrap"><table><thead><tr><th>Dimensione</th><th>Stato</th><th>Raw</th><th>Normalizzato</th><th>Peso</th><th>Contributo</th><th>Esclusione</th></tr></thead><tbody>${assessment.decomposition.map(dimension).join('')}</tbody></table></div>` : ''}
         <p class="dsg-dq-source">Source: <code>${esc(item.sourceMetricsPath || 'UNAVAILABLE')}</code></p>
       </details>
     </article>`;
   };
 
-  const render = (projection, validation) => {
+  const render = (projection, validation, catalog) => {
     const items = [...projection.assessments].reverse();
     host.innerHTML = `<section class="dsg-dq-kpis" aria-label="Riepilogo quality projection">
       <article><span>SESSIONI</span><strong>${projection.summary.totalSessions}</strong></article>
@@ -57,7 +58,7 @@ if (host) {
     </section>
     <section class="dsg-dq-panel dsg-dq-validation"><div><span>F5 · REAL-EVIDENCE VALIDATION</span><h2>Capability sperimentale accettata · uso produttivo non pronto</h2><p>La cohort include tutte le ${validation.cohort.sessionCount} sessioni canoniche senza outcome filtering. ${validation.summary.failedCriteria}/${validation.summary.totalCriteria} gate di readiness produttiva non sono soddisfatti: nessun profilo produttivo è autorizzato.</p></div><span class="dsg-dq-state is-unavailable">${esc(validation.decision.productionReadiness)}</span></section>
     <section class="dsg-dq-panel dsg-dq-fresh"><div><span>FRESHNESS VERIFIED</span><h2>Projection allineata al catalogo</h2><p>Generata ${esc(date(projection.generatedAt))} · profilo <code>${esc(projection.profile.profileVersion)}</code> · digest <code>${esc(projection.projectionDigest.slice(0, 12))}…</code></p></div><span class="dsg-dq-fresh__badge">SHA-256 ✓</span></section>
-    <section class="dsg-dq-panel"><div class="dsg-dq-toolbar"><div><label for="dq-search">Cerca sessione o target</label><input id="dq-search" type="search" placeholder="es. M 27 o 2026-09"></div><div><label for="dq-filter">Stato</label><select id="dq-filter"><option value="ALL">Tutti</option><option value="AVAILABLE">Disponibile</option><option value="UNAVAILABLE">Non disponibile</option><option value="INVALID">Fuori profilo</option></select></div></div><p class="dsg-dq-result" data-dq-result></p><div class="dsg-dq-records">${items.map(item => record(item, projection.limitations)).join('')}</div></section>`;
+    <section class="dsg-dq-panel"><div class="dsg-dq-toolbar"><div><label for="dq-search">Cerca sessione o target</label><input id="dq-search" type="search" placeholder="es. M 27 o 2026-09"></div><div><label for="dq-filter">Stato</label><select id="dq-filter"><option value="ALL">Tutti</option><option value="AVAILABLE">Disponibile</option><option value="UNAVAILABLE">Non disponibile</option><option value="INVALID">Fuori profilo</option></select></div></div><p class="dsg-dq-result" data-dq-result></p><div class="dsg-dq-records">${items.map(item => record(item, projection.limitations, catalog.sessions.find(session => session.sessionId === item.sessionId)?.guiding?.temporalCoverage)).join('')}</div></section>`;
 
     const search = host.querySelector('#dq-search');
     const filter = host.querySelector('#dq-filter');
@@ -92,7 +93,7 @@ if (host) {
     await validateRealEvidenceFreshness(validation, projection, catalog);
     const key = projection.projectionDigest + JSON.stringify(validation);
     if (key === renderedKey) return;
-    render(projection, validation);
+    render(projection, validation, catalog);
     const trend = document.querySelector('[data-quality-trend]');
     if (trend) renderQualityTrend(trend, projection, catalog);
     renderedKey = key;

@@ -1,11 +1,12 @@
 {
-  "schemaVersion": "1.5",
+  "schemaVersion": "1.6",
   "generatedFrom": [
     "data/analytics/history/sessions.csv",
     "data/analytics/history/targets.csv",
     "data/analytics/metadata/session-scientific-metadata.csv",
     "session-metrics.json",
     "raw/weather/*.csv",
+    "raw/nina/*.log",
     "raw/phd2/PHD2_GuideLog_*.txt"
   ],
   "catalogStatus": "VERSIONED_ANALYTICS_PROJECTION",
@@ -1256,6 +1257,34 @@
               "raArcsec": 0,
               "decArcsec": 0,
               "totalArcsec": 0
+            }
+          ]
+        },
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "UNPAIRED_LIGHT_EXPOSURE",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/07/2026-07-14_2026-07-15/raw/nina/20260713-154938-3.2.0.9001.4940-202607.log",
+              "sha256": "7c50c821c2fbee4ebdd0404ce3fe6ec2d0afd2cf09a5edbc4458630557f8a715"
+            },
+            {
+              "path": "data/sessions/2026/07/2026-07-14_2026-07-15/raw/nina/20260715-154048-3.2.0.9001.6864-202607.log",
+              "sha256": "0619352e30ab609d3eba04ee6c42e60c10a009699337dd5666f6d4913f137bd2"
+            },
+            {
+              "path": "data/sessions/2026/07/2026-07-14_2026-07-15/raw/phd2/PHD2_GuideLog_2026-07-13_202012.txt",
+              "sha256": "6fc98e030ea7d125e55d3f5b64c7f5c5b54fedd3db1f85a3eafb37e022d75d38"
+            },
+            {
+              "path": "data/sessions/2026/07/2026-07-14_2026-07-15/raw/phd2/PHD2_GuideLog_2026-07-14_191817.txt",
+              "sha256": "bc60597d32fcc08fd006cd9be6dbaa8ceedfa15d5c0966402a62feda2f91eaf9"
             }
           ]
         }
@@ -2509,6 +2538,34 @@
               "totalArcsec": 0
             }
           ]
+        },
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "UNPAIRED_LIGHT_EXPOSURE",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/07/2026-07-15_2026-07-16/raw/nina/20260713-154938-3.2.0.9001.4940-202607.log",
+              "sha256": "7c50c821c2fbee4ebdd0404ce3fe6ec2d0afd2cf09a5edbc4458630557f8a715"
+            },
+            {
+              "path": "data/sessions/2026/07/2026-07-15_2026-07-16/raw/nina/20260715-154048-3.2.0.9001.6864-202607.log",
+              "sha256": "2e121a74dd14e745cee37533d77a56b234cc9fb8cbf046df2e0ae51320850665"
+            },
+            {
+              "path": "data/sessions/2026/07/2026-07-15_2026-07-16/raw/phd2/PHD2_GuideLog_2026-07-14_191817.txt",
+              "sha256": "bc60597d32fcc08fd006cd9be6dbaa8ceedfa15d5c0966402a62feda2f91eaf9"
+            },
+            {
+              "path": "data/sessions/2026/07/2026-07-15_2026-07-16/raw/phd2/PHD2_GuideLog_2026-07-15_185007.txt",
+              "sha256": "bd03f2d978b62d6defa398d6de81488a2527b2f8cc7e2ceac80f8ff53c666a04"
+            }
+          ]
         }
       },
       "qualityState": "VALIDATED_ANALYTICS"
@@ -3758,6 +3815,34 @@
               "raArcsec": 0,
               "decArcsec": 0,
               "totalArcsec": 0
+            }
+          ]
+        },
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "NON_MONOTONIC_NINA_CLOCK",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/07/2026-07-16_2026-07-17/raw/nina/20260715-154048-3.2.0.9001.6864-202607.log",
+              "sha256": "2e121a74dd14e745cee37533d77a56b234cc9fb8cbf046df2e0ae51320850665"
+            },
+            {
+              "path": "data/sessions/2026/07/2026-07-16_2026-07-17/raw/nina/20260716-164709-3.2.0.9001.8236-202607.log",
+              "sha256": "9c6914053eca106d745b2f487374494859120e20a70a36c4b2cb633b74c0c9b1"
+            },
+            {
+              "path": "data/sessions/2026/07/2026-07-16_2026-07-17/raw/phd2/PHD2_GuideLog_2026-07-15_185007.txt",
+              "sha256": "bd03f2d978b62d6defa398d6de81488a2527b2f8cc7e2ceac80f8ff53c666a04"
+            },
+            {
+              "path": "data/sessions/2026/07/2026-07-16_2026-07-17/raw/phd2/PHD2_GuideLog_2026-07-16_172424.txt",
+              "sha256": "d926ceace0fb643679f2e4ef136a96d9446e2581aefbd491d268efb6c175aa98"
             }
           ]
         }
@@ -5011,6 +5096,26 @@
               "totalArcsec": 0.33
             }
           ]
+        },
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "SHARED_CLOCK_NOT_EVIDENCED",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/08/2026-08-10_2026-08-11/raw/nina/20260810-204106-3.2.0.9001.7156-202608.log",
+              "sha256": "c634638fbead2cba0a048b9507a52b065fff7e4dac9a4b1ee2b06d44b08d20d6"
+            },
+            {
+              "path": "data/sessions/2026/08/2026-08-10_2026-08-11/raw/phd2/PHD2_GuideLog_2026-08-10_204006.txt",
+              "sha256": "d7e802ccdcd4f3c962fad6e7140c83c4c94297f9812642ed23b897dfdc7564a8"
+            }
+          ]
         }
       },
       "qualityState": "METADATA_INCOMPLETE"
@@ -6260,6 +6365,27 @@
               "raArcsec": -0.157,
               "decArcsec": 0.396,
               "totalArcsec": 0.426
+            }
+          ]
+        },
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "AVAILABLE",
+          "reason": null,
+          "coverage": 0.99943,
+          "lightSeconds": 22200,
+          "coveredSeconds": 22187.347,
+          "lightExposureCount": 37,
+          "clockBasis": "SHARED_LOCAL_WALL_CLOCK",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/08/2026-08-14_2026-08-15/raw/nina/20260814-201744-3.2.0.9001.3996-202608.log",
+              "sha256": "940f288ecffa4b9883a8c5071c0baca02252cd7fb5cf9f82186359286712dd96"
+            },
+            {
+              "path": "data/sessions/2026/08/2026-08-14_2026-08-15/raw/phd2/PHD2_GuideLog_2026-08-14_201508.txt",
+              "sha256": "eece2bc0d55c6da09d747954a6c2e0a2d1b634b8056e942fba050a3085274c33"
             }
           ]
         }
@@ -7513,6 +7639,34 @@
               "totalArcsec": 0.426
             }
           ]
+        },
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "UNPAIRED_LIGHT_EXPOSURE",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/08/2026-08-15_2026-08-16/raw/nina/20260814-201744-3.2.0.9001.3996-202608.log",
+              "sha256": "dd19c9d978686cfa564df5dce7931419f4e2e86f0bfe714f168c485f7322c2be"
+            },
+            {
+              "path": "data/sessions/2026/08/2026-08-15_2026-08-16/raw/nina/20260815-204018-3.2.0.9001.6188-202608.log",
+              "sha256": "357a3fadf75154f0686a9c40e1603df00621a4f3db9b619658b8b23599f95fcf"
+            },
+            {
+              "path": "data/sessions/2026/08/2026-08-15_2026-08-16/raw/phd2/PHD2_GuideLog_2026-08-14_201508.txt",
+              "sha256": "376e6cd783382946d6b8c976250bcb7b88b1b9d04ec15e746b8b78d4080649eb"
+            },
+            {
+              "path": "data/sessions/2026/08/2026-08-15_2026-08-16/raw/phd2/PHD2_GuideLog_2026-08-15_203750.txt",
+              "sha256": "6a5e411834dc55d3a80952bf24677945c7210d48b7e084d605c28270e0e2bc33"
+            }
+          ]
         }
       },
       "qualityState": "ATTENTION_REQUIRED"
@@ -8081,7 +8235,39 @@
         "lostStarEvents": 0,
         "pulseGuideFailures": 0,
         "scopeNote": "Proiezione scientifica storica derivata dal PHD2 GuideLog. Usa gli stessi campioni validi dell analytics (settling escluso, ErrorCode=0) e non rappresenta telemetria operativa realtime.",
-        "detail": null
+        "detail": null,
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "SHARED_CLOCK_NOT_EVIDENCED",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/08/2026-08-26_2026-08-27/raw/nina/20260820-210144-3.2.0.9001.4576-202608.log",
+              "sha256": "c3bfa95d6dfe4e94945d94ec78a2b4f0a144e2213fa3c57707fff2b0f3783488"
+            },
+            {
+              "path": "data/sessions/2026/08/2026-08-26_2026-08-27/raw/nina/20260826-214655-3.2.0.9001.1908-202608.log",
+              "sha256": "e5fac62d13dedf940983ab21a505fa15c95921e43998afbe162ee571d0c1dd7e"
+            },
+            {
+              "path": "data/sessions/2026/08/2026-08-26_2026-08-27/raw/nina/20260826-215158-3.2.0.9001.3164-202608.log",
+              "sha256": "b9e57d650f052da824768a8a988275dcc308a2b3e1a88da4004a00190a9bd9a7"
+            },
+            {
+              "path": "data/sessions/2026/08/2026-08-26_2026-08-27/raw/nina/20260826-222557-3.2.0.9001.11032-202608.log",
+              "sha256": "cda09de8204ef53519c8cc897a1018090b4ae23ffd1e8aa5b117dcffb5db1c7a"
+            },
+            {
+              "path": "data/sessions/2026/08/2026-08-26_2026-08-27/raw/phd2/PHD2_GuideLog_2026-08-26_231155.txt",
+              "sha256": "bacf9f1bc48e3f71293a66e639c83504059c29b21c96c6a91fed443034af90f9"
+            }
+          ]
+        }
       },
       "qualityState": "METADATA_INCOMPLETE"
     },
@@ -9330,6 +9516,30 @@
               "raArcsec": -0.642,
               "decArcsec": 15.847,
               "totalArcsec": 15.86
+            }
+          ]
+        },
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "UNPAIRED_LIGHT_EXPOSURE",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/08/2026-08-31_2026-09-01/raw/nina/20260831-000743-3.2.0.9001.7800-202608.log",
+              "sha256": "c5d3fedcc38971d1e57ee9a2ad106c6f42ae1f6b9cae57e855a60da6e53ba264"
+            },
+            {
+              "path": "data/sessions/2026/08/2026-08-31_2026-09-01/raw/nina/20260831-000743-3.2.0.9001.7800-202609.log",
+              "sha256": "70fc92a7d6a9309632319070626a00f3af0b7a09588e1daa24ef1be2c98f8931"
+            },
+            {
+              "path": "data/sessions/2026/08/2026-08-31_2026-09-01/raw/phd2/PHD2_GuideLog_2026-08-31_193403.txt",
+              "sha256": "886ae550226b881cd33cedc1140a1bb68e19d556f1401a09d6570fe96416eb44"
             }
           ]
         }
@@ -10592,6 +10802,34 @@
               "totalArcsec": 15.86
             }
           ]
+        },
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "SHARED_CLOCK_NOT_EVIDENCED",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/09/2026-09-01_2026-09-02/raw/nina/20260831-000743-3.2.0.9001.7800-202609.log",
+              "sha256": "70fc92a7d6a9309632319070626a00f3af0b7a09588e1daa24ef1be2c98f8931"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-01_2026-09-02/raw/nina/20260901-081351-3.2.0.9001.10348-202609.log",
+              "sha256": "684294ca267c0df52419a75a888e52dc150e9f891aeb31bd000e0128536fc71e"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-01_2026-09-02/raw/phd2/PHD2_GuideLog_2026-08-31_193403.txt",
+              "sha256": "886ae550226b881cd33cedc1140a1bb68e19d556f1401a09d6570fe96416eb44"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-01_2026-09-02/raw/phd2/PHD2_GuideLog_2026-09-01_192106.txt",
+              "sha256": "97e1cf94e33ca614a77f5ea20b6ead27b6d67b094a257029985cf9ad2117b459"
+            }
+          ]
         }
       },
       "sqm": {
@@ -11850,6 +12088,34 @@
               "raArcsec": 1.524,
               "decArcsec": 0,
               "totalArcsec": 1.524
+            }
+          ]
+        },
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "UNPAIRED_LIGHT_EXPOSURE",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/09/2026-09-02_2026-09-03/raw/nina/20260901-081351-3.2.0.9001.10348-202609.log",
+              "sha256": "6c149d526b8b411c0eaa6d16e1dc6149776bb45ea2f373ca08e48a7761781819"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-02_2026-09-03/raw/nina/20260902-195036-3.2.0.9001.11864-202609.log",
+              "sha256": "5030512c255c99fafbf1be18fb66cbb67ece320246af10d9dab10a71b24b7a34"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-02_2026-09-03/raw/nina/20260902-195919-3.2.0.9001.1000-202609.log",
+              "sha256": "7224e52370ee367c48b8afb4ca0fd507fc8f7835d518598438f2fe5e8ef2a875"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-02_2026-09-03/raw/phd2/PHD2_GuideLog_2026-09-02_194945.txt",
+              "sha256": "43c3c06574a46e4264f51f6c2a01de23cd164ab2c036c815f3c38dde6abb90a0"
             }
           ]
         }
@@ -13112,6 +13378,26 @@
               "totalArcsec": 64.956
             }
           ]
+        },
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "AMBIGUOUS_LIGHT_CAPTURE",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/09/2026-09-03_2026-09-04/raw/nina/20260903-180229-3.2.0.9001.10404-202609.log",
+              "sha256": "b9be2f8245aad3a3750b39a89e87a79868571ac9449693fc8535476105f1048c"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-03_2026-09-04/raw/phd2/PHD2_GuideLog_2026-09-03_180136.txt",
+              "sha256": "0049d7068137eb89bbb1b8ce8b5cfe0bb0d1c51109f9830577363b0d3499241f"
+            }
+          ]
         }
       },
       "sqm": {
@@ -14370,6 +14656,26 @@
               "raArcsec": 1.478,
               "decArcsec": -0.523,
               "totalArcsec": 1.568
+            }
+          ]
+        },
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "UNPAIRED_LIGHT_EXPOSURE",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/09/2026-09-04_2026-09-05/raw/nina/20260904-181340-3.2.0.9001.12520-202609.log",
+              "sha256": "e1dc0b371ebacef0ea34cb140e23f5319900700787c3b29c7e5cd85a82ada7cb"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-04_2026-09-05/raw/phd2/PHD2_GuideLog_2026-09-04_181259.txt",
+              "sha256": "bd33de7a44290ef810957f0518c73805269af0a24dded5245846038c998a5b87"
             }
           ]
         }
@@ -15632,6 +15938,26 @@
               "totalArcsec": 0.423
             }
           ]
+        },
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "AMBIGUOUS_LIGHT_CAPTURE",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/09/2026-09-05_2026-09-06/raw/nina/20260905-171016-3.2.0.9001.312-202609.log",
+              "sha256": "c6f19c7cc73aa2b36a83fc0d7b1fb800aef2b029c6f0cbd1dfbcd9f22871f529"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-05_2026-09-06/raw/phd2/PHD2_GuideLog_2026-09-05_170930.txt",
+              "sha256": "05b060a71c4f199f00efe02f453227695ce07287252645736f0d8c20214ada08"
+            }
+          ]
         }
       },
       "sqm": {
@@ -16892,6 +17218,27 @@
               "totalArcsec": 0.506
             }
           ]
+        },
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "AVAILABLE",
+          "reason": null,
+          "coverage": 0,
+          "lightSeconds": 22200,
+          "coveredSeconds": 0,
+          "lightExposureCount": 37,
+          "clockBasis": "SHARED_LOCAL_WALL_CLOCK",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/09/2026-09-06_2026-09-07/raw/nina/20260906-204039-3.2.0.9001.11996-202609.log",
+              "sha256": "57eee9200e5fc238cdc02c435aa436304e70551c7fbba8dca90fe8eb5b24c18b"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-06_2026-09-07/raw/phd2/PHD2_GuideLog_2026-09-06_155318.txt",
+              "sha256": "fb9ea0708d0eb1efa3a050533fb7f3629be6ecf76edf03754cbaa20b875a53e0"
+            }
+          ]
         }
       },
       "sqm": {
@@ -17469,7 +17816,31 @@
         "lostStarEvents": 0,
         "pulseGuideFailures": 0,
         "scopeNote": "Proiezione scientifica storica derivata dal PHD2 GuideLog. Usa gli stessi campioni validi dell analytics (settling escluso, ErrorCode=0) e non rappresenta telemetria operativa realtime.",
-        "detail": null
+        "detail": null,
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "AMBIGUOUS_LIGHT_CAPTURE",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/09/2026-09-07_2026-09-08/raw/nina/20260907-164646-3.2.0.9001.5680-202609.log",
+              "sha256": "5c3ce38a3f19de64774d2b67cd1a21cc2d3b65b508cf9f2d380b5696f6ad3db9"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-07_2026-09-08/raw/nina/20260907-234621-3.2.0.9001.3560-202609.log",
+              "sha256": "ef82e0a7894e9fb6cf6e8d10c3cdc481170c0fb9effbf9ca348771746ca13c5c"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-07_2026-09-08/raw/phd2/PHD2_GuideLog_2026-09-07_182347.txt",
+              "sha256": "0f0cb85d15916914dbb36f8b0dcc3609532fcb565f57b778ba17477814aeb4cb"
+            }
+          ]
+        }
       },
       "sqm": {
         "state": "AVAILABLE",
@@ -18729,6 +19100,26 @@
               "totalArcsec": 0.824
             }
           ]
+        },
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "AMBIGUOUS_LIGHT_CAPTURE",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/09/2026-09-12_2026-09-13/raw/nina/20260912-180244-3.2.0.9001.1808-202609.log",
+              "sha256": "f37941e0b1452b733c95f3bc5bff30e744673f02344ba15de86c93fd97ed486d"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-12_2026-09-13/raw/phd2/PHD2_GuideLog_2026-09-12_175412.txt",
+              "sha256": "e886587ee3ade813d15a49ef542d3ef24730921378cddf7f0876b1d80832f5cd"
+            }
+          ]
         }
       },
       "sqm": {
@@ -19306,7 +19697,27 @@
         "lostStarEvents": 346,
         "pulseGuideFailures": 0,
         "scopeNote": "Proiezione scientifica storica derivata dal PHD2 GuideLog. Usa gli stessi campioni validi dell analytics (settling escluso, ErrorCode=0) e non rappresenta telemetria operativa realtime.",
-        "detail": null
+        "detail": null,
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "VALID_GUIDE_TIMESTAMPS_NOT_AVAILABLE",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/09/2026-09-13_2026-09-14/raw/nina/20260913-183146-3.2.0.9001.1604-202609.log",
+              "sha256": "ebb8c92203adca15ae5895af8f87f5391c4d502102df4008411eb55e4a335ec2"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-13_2026-09-14/raw/phd2/PHD2_GuideLog_2026-09-13_183051.txt",
+              "sha256": "24ef0b5d525a07cfd435eeb10386d63d16be120462dbe3d287c7ff5fa674014b"
+            }
+          ]
+        }
       },
       "sqm": {
         "state": "AVAILABLE",
@@ -19883,7 +20294,27 @@
         "lostStarEvents": 321,
         "pulseGuideFailures": 0,
         "scopeNote": "Proiezione scientifica storica derivata dal PHD2 GuideLog. Usa gli stessi campioni validi dell analytics (settling escluso, ErrorCode=0) e non rappresenta telemetria operativa realtime.",
-        "detail": null
+        "detail": null,
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "AMBIGUOUS_LIGHT_CAPTURE",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/09/2026-09-14_2026-09-15/raw/nina/20260914-192915-3.2.0.9001.2184-202609.log",
+              "sha256": "dadda85116c5b6edb286cfe243158671c90732c41db2ee308631a18458dad17b"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-14_2026-09-15/raw/phd2/PHD2_GuideLog_2026-09-14_192742.txt",
+              "sha256": "155110a8914ecec42272621205ca09310d4247e2672cea17ad83df1be1b65e06"
+            }
+          ]
+        }
       },
       "sqm": {
         "state": "AVAILABLE",
@@ -20460,7 +20891,27 @@
         "lostStarEvents": 50,
         "pulseGuideFailures": 0,
         "scopeNote": "Proiezione scientifica storica derivata dal PHD2 GuideLog. Usa gli stessi campioni validi dell analytics (settling escluso, ErrorCode=0) e non rappresenta telemetria operativa realtime.",
-        "detail": null
+        "detail": null,
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "VALID_GUIDE_TIMESTAMPS_NOT_AVAILABLE",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/09/2026-09-15_2026-09-16/raw/nina/20260915-173212-3.2.0.9001.2824-202609.log",
+              "sha256": "09ed567014b6dfeea583d5573983ba983b9c6afe899cdc5506f5fb8a99a909f2"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-15_2026-09-16/raw/phd2/PHD2_GuideLog_2026-09-15_185518.txt",
+              "sha256": "31954696919aaac788ab6cab25697648f13bdfa2c46a1ef08d61091336cbec76"
+            }
+          ]
+        }
       },
       "sqm": {
         "state": "AVAILABLE",
@@ -21718,6 +22169,27 @@
               "raArcsec": -0.835,
               "decArcsec": 0,
               "totalArcsec": 0.835
+            }
+          ]
+        },
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "AVAILABLE",
+          "reason": null,
+          "coverage": 0.041088,
+          "lightSeconds": 9600,
+          "coveredSeconds": 394.448,
+          "lightExposureCount": 16,
+          "clockBasis": "SHARED_LOCAL_WALL_CLOCK",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/09/2026-09-19_2026-09-20/raw/nina/20260919-124835-3.2.0.9001.9036-202609.log",
+              "sha256": "12eb7a076fb4a04c991ccf8aa556eb7c07e626cb8c939c402a94d9dc5704038d"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-19_2026-09-20/raw/phd2/PHD2_GuideLog_2026-09-19_184910.txt",
+              "sha256": "1282daaabb2dec640b039be0b4aa48ac88f8261b9aa57869d00908eb1eaf5921"
             }
           ]
         }
@@ -22980,6 +23452,26 @@
               "totalArcsec": 1.476
             }
           ]
+        },
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "AMBIGUOUS_LIGHT_CAPTURE",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/09/2026-09-21_2026-09-22/raw/nina/20260921-152451-3.2.0.9001.4640-202609.log",
+              "sha256": "4d34aaf0ba9783d2de0a39e9320576ec82fe006452eea63ecbce1607956c5658"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-21_2026-09-22/raw/phd2/PHD2_GuideLog_2026-09-21_153308.txt",
+              "sha256": "6dc47c67150c33474addcb42c30f488d34ecfa8ed1694e44b19b21b790b88fa0"
+            }
+          ]
         }
       },
       "sqm": {
@@ -23557,7 +24049,27 @@
         "lostStarEvents": 0,
         "pulseGuideFailures": 0,
         "scopeNote": "Proiezione scientifica storica derivata dal PHD2 GuideLog. Usa gli stessi campioni validi dell analytics (settling escluso, ErrorCode=0) e non rappresenta telemetria operativa realtime.",
-        "detail": null
+        "detail": null,
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "UNAVAILABLE",
+          "reason": "AMBIGUOUS_LIGHT_CAPTURE",
+          "coverage": null,
+          "lightSeconds": null,
+          "coveredSeconds": null,
+          "clockBasis": "NOT_VERIFIED",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/09/2026-09-22_2026-09-23/raw/nina/20260921-152451-3.2.0.9001.4640-202609.log",
+              "sha256": "09d8b757fc2a71965aa41dfcbb2643af87b9db5970c15140ada66fb7eb4109cb"
+            },
+            {
+              "path": "data/sessions/2026/09/2026-09-22_2026-09-23/raw/phd2/PHD2_GuideLog_2026-09-22_195501.txt",
+              "sha256": "c69137f8b1bd57a0649fdd2b1540296ba857bfdad92c2cd72936b18b16a77508"
+            }
+          ]
+        }
       },
       "sqm": {
         "state": "AVAILABLE",
@@ -24815,6 +25327,27 @@
               "raArcsec": -0.669,
               "decArcsec": 0,
               "totalArcsec": 0.669
+            }
+          ]
+        },
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "AVAILABLE",
+          "reason": null,
+          "coverage": 0.892659,
+          "lightSeconds": 34200,
+          "coveredSeconds": 30528.93,
+          "lightExposureCount": 57,
+          "clockBasis": "SHARED_LOCAL_WALL_CLOCK",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/10/2026-10-13_2026-10-14/raw/nina/20261012-144703-3.2.0.9001.10268-202610.log",
+              "sha256": "ef1c98f66555d2b51b994eee181bd567b25df3edc0ca9ea497960a3e5a19557b"
+            },
+            {
+              "path": "data/sessions/2026/10/2026-10-13_2026-10-14/raw/phd2/PHD2_GuideLog_2026-10-13_143229.txt",
+              "sha256": "6d0d76568eaef554e2d54d0f4f4829a2bf2f02d7ac40f5e66b1529b9f3e2822c"
             }
           ]
         }
@@ -26075,6 +26608,27 @@
               "raArcsec": 0,
               "decArcsec": 0,
               "totalArcsec": 0
+            }
+          ]
+        },
+        "temporalCoverage": {
+          "methodVersion": "DSG-GUIDING-LIGHT-TEMPORAL-1.0",
+          "state": "AVAILABLE",
+          "reason": null,
+          "coverage": 0.946396,
+          "lightSeconds": 34800,
+          "coveredSeconds": 32934.573,
+          "lightExposureCount": 58,
+          "clockBasis": "SHARED_LOCAL_WALL_CLOCK",
+          "maxGapExposures": 3,
+          "sourceRefs": [
+            {
+              "path": "data/sessions/2026/10/2026-10-14_2026-10-15/raw/nina/20261014-130044-3.2.0.9001.4568-202610.log",
+              "sha256": "1715d622353707d1365f0183b121d8667990c2c23865496b6aa480f0c296d92a"
+            },
+            {
+              "path": "data/sessions/2026/10/2026-10-14_2026-10-15/raw/phd2/PHD2_GuideLog_2026-10-14_150540.txt",
+              "sha256": "c4cab95e45b0da105d7c6d4c9d6213d2f77b2e93bf8701bfafd5e74acfa0da28"
             }
           ]
         }

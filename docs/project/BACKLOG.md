@@ -1,5 +1,9 @@
 # Project Backlog
 
+## Copertura temporale di guida — integrazione candidata 15 ottobre 2026
+
+Metodo versionato da intervalli LIGHT N.I.N.A. e campioni PHD2 sul clock locale condiviso, con provenienza SHA-256 e missingness esplicita. Catalogo 1.6 e aggiornamento automatico dopo importazione; F4/F5 sperimentali, nessuna nuova authority. [Metodo, audit, limiti e rollback](HANDOVER_2026-10-15-GUIDING-TEMPORAL-INTEGRATION.md). Il risultato preliminare sulla presenza degli orari non è una misura pubblicabile senza i controlli di coerenza.
+
 ## BKL-051 — scadenza dell'accesso Owner, 15 ottobre 2026
 
 Una esecuzione diagnostica reale collegata al piano; seconda richiesta non confermata per rifiuto di accesso. Ripristino verificato. Candidato locale impedisce richieste con credenziale scaduta o prossima alla scadenza, prima di un nuovo intento. 49 test locali PASS; gate exact-head e nuova prova autorizzata restano necessari. [Stato](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md). Nessun controllo qualificato o acceptance.
