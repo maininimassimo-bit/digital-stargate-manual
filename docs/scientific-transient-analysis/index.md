@@ -9,6 +9,26 @@
   <button type="button" data-dsg-transients-connect>Accedi con Google</button>
   <button type="button" data-dsg-transients-disconnect disabled>Termina accesso</button>
   <div data-dsg-transients-signin></div>
+  <section data-dsg-campaign-owner aria-label="Collaudo confermativo privato">
+    <h2>Collaudo confermativo privato</h2>
+    <p>Consulta il piano congelato, tutti i controlli e le decisioni registrate dall’Owner. Il registro richiede un’attivazione separata; l’accesso alla pagina non lo attiva. Questi comandi registrano metadati e non avviano analisi o invii.</p>
+    <button type="button" data-campaign-refresh disabled>Aggiorna campagne</button>
+    <label>Campagna <select data-campaign-select disabled><option value="">Seleziona una campagna</option></select></label>
+    <button type="button" data-campaign-open disabled>Apri ricevuta privata</button>
+    <p data-campaign-status role="status" aria-live="polite">Accedi e aggiorna le campagne per consultare il collaudo.</p>
+    <div data-campaign-result></div>
+    <details>
+      <summary>Registra un piano o una decisione Owner</summary>
+      <p>Apri una richiesta minimizzata preparata sul PC per creare il piano, rivedere un controllo o un esito, congelare, accettare o revocare la sola campagna. I documenti scientifici restano sul PC: verifica che le impronte corrispondano ai file esaminati. Caricare la richiesta non registra una decisione.</p>
+      <label>Richiesta di registrazione (JSON, massimo 16 KiB) <input type="file" data-campaign-file accept="application/json,.json" disabled></label>
+      <div data-campaign-preview></div>
+      <label><input type="checkbox" data-campaign-confirmed disabled> Ho esaminato le prove private indicate dalle impronte e autorizzo questa sola registrazione sul servizio.</label>
+      <button type="button" data-campaign-send disabled>Registra la richiesta confermata</button>
+      <p data-campaign-pending role="status" aria-live="polite"></p>
+      <button type="button" data-campaign-retry disabled>Ripeti la stessa registrazione</button>
+      <p>Se la risposta si perde, la richiesta resta conservata in questa sessione. Aggiorna le campagne per riconciliarla: nessuna ripetizione è automatica. Una richiesta non risolta blocca nuove decisioni e nuovi avvii dal portale. Le credenziali non sono conservate con la richiesta.</p>
+    </details>
+  </section>
   <section data-dsg-test-plan aria-label="Piano locale di collaudo">
     <h2>Piano locale di collaudo</h2>
     <p>Apri una bozza minimizzata preparata sul PC per consultare il campione candidato. Il file viene letto nel browser senza essere inviato al servizio o conservato. Usa il formato BKL051_TEST_PLAN_DRAFT_V1, privo di percorsi e metadati personali.</p>

@@ -57,17 +57,17 @@ function campaignJobs(count,reviews=0) {
   });
 }
 function harness({jobs=[fixture()],status=200,fail=false,deferred=false,googleMissing=false,rawBody,media='application/json',contentLength=null,timeout=false,
-  bindings=[fixture().binding],storage=new Map(),storageFail=false,removeFail=false,postFailure='',postDeferred=false}={}) {
+  bindings=[fixture().binding],storage=new Map(),storageFail=false,removeFail=false,postFailure='',postDeferred=false,campaignAdapter=null}={}) {
   function node(tag='div'){return {tag,dataset:{},children:[],callbacks:{},disabled:false,isConnected:true,
     textContent:'',value:'',checked:false,setAttribute(){},addEventListener(type,callback){this.callbacks[type]=callback;},append(...items){this.children.push(...items);},
     replaceChildren(){this.children=[];},querySelectorAll(selector){return this.children.flatMap(n=>[...(n.tag===selector?[n]:[]),...n.querySelectorAll(selector)]);},
     click(){if(!this.disabled)this.callbacks.click?.();}};}
   const controls=Object.fromEntries(['message','connect','disconnect','signin','refresh','observed','jobs','group','verified','create','retry','pending','group-details'].map(key=>[key,node()]));
-  const root=node();root.querySelector=selector=>controls[selector.match(/data-dsg-transients-(.+)\]/)[1]];
+  const panel=node(),root=node();root.querySelector=selector=>selector==='[data-dsg-campaign-owner]'?panel:controls[selector.match(/data-dsg-transients-(.+)\]/)[1]];
   let currentRoot=root,login,subscribe,release,abortByTimeout,now=loginTime;
   const requests=[],blobs=[],revoked=[],created=[];
   const google={accounts:{id:{initialize(value){login=value.callback;},renderButton(){}}}};
-  const context={document:{readyState:'complete',querySelector:()=>currentRoot,createElement:tag=>{const n=node(tag);created.push(n);return n;},head:node()},
+  const context={...(campaignAdapter?{DSGCampaignOwner:campaignAdapter}:{}),document:{readyState:'complete',querySelector:()=>currentRoot,createElement:tag=>{const n=node(tag);created.push(n);return n;},head:node()},
     window:{google:googleMissing?undefined:google},google,document$:{subscribe(callback){subscribe=callback;}},
     Blob,TextDecoder,AbortController,crypto:webcrypto,Uint8Array,atob,Date:class extends Date {static now(){return now;}},setTimeout(callback,delay){if(delay===30000)abortByTimeout=callback;return setTimeout(callback,delay);},clearTimeout,
     URL:{createObjectURL(blob){blobs.push(blob);return 'blob:'+blobs.length;},revokeObjectURL(url){revoked.push(url);}},
@@ -76,14 +76,16 @@ function harness({jobs=[fixture()],status=200,fail=false,deferred=false,googleMi
       setItem(key,value){if(storageFail)throw Error('PRIVATE_STORAGE_ERROR');assert.equal(value.includes(ownerCredential),false);storage.set(key,value);},
       removeItem(key){if(removeFail)throw Error('PRIVATE_STORAGE_ERROR');storage.delete(key);}},
     async fetch(url,options){
-      requests.push({url,options});assert.match(url,/^https:\/\/dsg-pixinsight-pilot-183451329061.europe-west1.run.app\/v1\/transient-analysis\/(?:options|jobs(?:\/TRN_[a-f0-9]{32}\/(?:cancel|review|close-recovery))?)$/);
+      requests.push({url,options});
+      if(campaignAdapter&&url.endsWith('/campaigns'))assert.match(url,/^https:\/\/dsg-pixinsight-pilot-183451329061.europe-west1.run.app\/v1\/transient-analysis\/campaigns$/);
+      else assert.match(url,/^https:\/\/dsg-pixinsight-pilot-183451329061.europe-west1.run.app\/v1\/transient-analysis\/(?:options|jobs(?:\/TRN_[a-f0-9]{32}\/(?:cancel|review|close-recovery))?)$/);
       assert.equal(options.cache,'no-store');
       assert.equal(options.redirect,'error');assert.equal(options.credentials,'omit');
       assert.equal(options.headers.Authorization,'Bearer '+ownerCredential);
       if(timeout)await new Promise((resolve,reject)=>options.signal.addEventListener('abort',()=>reject(Error('ABORTED'))));
       if(deferred)await new Promise(resolve=>{release=resolve;});
       if(fail)throw Error('HOSTILE_PRIVATE_ERROR');
-      let responseBody=url.endsWith('/options')?{bindings}:{jobs};
+      let responseBody=url.endsWith('/campaigns')?{campaigns:[]}:url.endsWith('/options')?{bindings}:{jobs};
       if(options.method==='POST') {
         assert.equal(options.headers['Content-Type'],'application/json');
         if(postDeferred)await new Promise(resolve=>{release=resolve;});
@@ -118,6 +120,39 @@ function harness({jobs=[fixture()],status=200,fail=false,deferred=false,googleMi
     repeatInitialize(){subscribe();},loginCallback(){return login;},context};
 }
 const text=h=>JSON.stringify(h.controls.jobs.children);
+
+test('campaign bridge reuses private Owner transport and rejects worker routes',async()=>{
+  let bridge,session;
+  const h=harness({campaignAdapter:{mount(root,host){bridge=host;return {hasPending:()=>false,
+    update(value){session=value;},reset(){},dispose(){}};}}});
+  assert.equal(session.authorized,false);assert.equal(h.requests.length,0);await h.login();
+  assert.equal(session.authorized,true);assert.equal(h.requests.length,2);
+  assert.equal(Object.hasOwn(bridge,'token'),false);assert.equal(Object.hasOwn(bridge,'credential'),false);
+  await bridge.run(async()=>{await bridge.request('/campaigns');});
+  assert.equal(h.requests.length,3);assert.ok(h.requests[2].url.endsWith('/campaigns'));
+  await assert.rejects(bridge.request('/worker/campaigns/inputs'));
+  h.controls.disconnect.click();assert.equal(session.authorized,false);
+});
+
+test('uncertain campaign command blocks queue mutation and uncertain queue command blocks campaign mutation',async()=>{
+  let bridge,campaignPending=false;
+  const h=harness({jobs:[],postFailure:'before',campaignAdapter:{mount(root,host){bridge=host;return {
+    hasPending:()=>campaignPending,update(){},reset(){},dispose(){}};}}});
+  await h.login();campaignPending=true;bridge.changed();await h.create();assert.equal(posts(h).length,0);
+  campaignPending=false;bridge.changed();await h.create();assert.equal(posts(h).length,1);
+  assert.equal(bridge.canMutate(),false);assert.equal(h.storage.size,1);
+});
+
+test('uncertain campaign metadata does not prevent explicit cancellation of existing analysis',async()=>{
+  const job=fixture();Object.assign(job,{state:'RUNNING',result:null,reviews:[],sequence:2});
+  let bridge;
+  const h=harness({jobs:[job],campaignAdapter:{mount(root,host){bridge=host;return {
+    hasPending:()=>true,update(){},reset(){},dispose(){}};}}});
+  await h.login();const cancel=h.controls.jobs.querySelectorAll('button').find(b=>b.textContent==='Richiedi annullamento');
+  assert.equal(cancel.disabled,false);cancel.click();await tick();
+  assert.equal(posts(h).length,1);assert.ok(posts(h)[0].url.endsWith('/cancel'));
+  assert.equal(h.controls.create.disabled,true);assert.match(text(h),/arresto del processo non è ancora confermato/);
+});
 
 test('other portal pages do not initialize authentication or requests',()=>{
   let callback;

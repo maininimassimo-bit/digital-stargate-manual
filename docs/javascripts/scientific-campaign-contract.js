@@ -177,5 +177,55 @@
     if(!events.length)return 'NOT_OBSERVED';
     return events.length===1&&same(events[0].request,request)?'CONFIRMED':'CONFLICT';
   }
-  globalThis.DSGCampaignContract=Object.freeze({summary,receipt,reconcile});
+  function inputReview(r){
+    check(exact(r,['decisionId','witnessSha256','nullReferenceSha256','independenceSha256','modelReviewSha256',
+      'separationEvidenceSha256','algorithmSha256','contractSha256','acceptNullReference','acceptIndependence',
+      'acceptScienceModel','acceptDevelopmentSeparation'])&&ref(r.decisionId));
+    for(const [k,value] of Object.entries(r)){
+      if(k.endsWith('Sha256'))check(hash(value));if(k.startsWith('accept'))check(value===true);
+    }
+  }
+  function action(v){
+    check(exact(v,['schema','action','planRef','witnessRef','request'])&&v.schema==='BKL051_OWNER_CAMPAIGN_ACTION_V1'&&ref(v.planRef));
+    if(v.action==='CREATE'){plan(v.request);check(v.witnessRef===null&&v.request.planRef===v.planRef);}
+    else if(v.action==='INPUT_REVIEW'){check(ref(v.witnessRef));inputReview(v.request);}
+    else{
+      const kinds={FREEZE:'FREEZE',OUTCOME_REVIEW:'OUTCOME_REVIEW',FINALIZE:'FINAL_OWNER_ACCEPTANCE',REVOKE:'REVOCATION'};
+      check(Object.hasOwn(kinds,v.action)&&v.witnessRef===null&&object(v.request));
+      eventRequest({kind:kinds[v.action],request:v.request,previous:v.request.planHeadSha256},null);
+    }
+    return freeze(structuredClone(v));
+  }
+  async function input(v){
+    v=structuredClone(v);
+    check(exact(v,['request','sha256','recordedUTC','evidenceOrigin','review'])&&hash(v.sha256)&&utc(v.recordedUTC)
+      &&v.evidenceOrigin==='AUTHENTICATED_WORKER_REPORTED_NOT_ATTESTED');
+    const r=v.request;check(exact(r,['witnessRef','reportSha256','purpose','correlationRef','frames'])
+      &&ref(r.witnessRef)&&hash(r.reportSha256)&&ref(r.correlationRef)
+      &&['CONFIRMATORY_RESERVED_REAL','DEVELOPMENT','SYNTHETIC'].includes(r.purpose)&&Array.isArray(r.frames)&&r.frames.length===3);
+    for(const f of r.frames){
+      check(exact(f,['frameRef','sha256','exposureRef','role','acquiredUTC','metadataSha256','bandpassSha256','calibration','uncertainty','timeStatus'])
+        &&ref(f.frameRef)&&ref(f.exposureRef)&&['sha256','metadataSha256','bandpassSha256'].every(k=>hash(f[k]))
+        &&['SCIENCE','TEMPLATE','DIFFERENCE','UNKNOWN'].includes(f.role)&&(f.acquiredUTC===null||utc(f.acquiredUTC))
+        &&['VERIFIED_FOR_DECLARED_MODEL','UNKNOWN'].includes(f.calibration)
+        &&['COMPLETE_FOR_DECLARED_MODEL','UNKNOWN'].includes(f.uncertainty)&&['ACQUIRED_VERIFIED','UNKNOWN'].includes(f.timeStatus));
+    }
+    check(await digest(r)===v.sha256);
+    if(v.review!==null){
+      check(exact(v.review,['request','recordedUTC','authority','actorRef'])&&utc(v.review.recordedUTC)&&ref(v.review.actorRef)
+        &&v.review.authority==='AUTHENTICATED_OWNER_SCIENTIFIC_DECISION');
+      inputReview(v.review.request);check(v.review.request.witnessSha256===v.sha256);
+    }
+    freeze(v);validated.add(v);return v;
+  }
+  function reconcileInput(value,request){
+    check(validated.has(value)&&Object.hasOwn(value,'review'));inputReview(request);
+    if(value.review===null)return 'NOT_OBSERVED';
+    return same(value.review.request,request)?'CONFIRMED':'CONFLICT';
+  }
+  function reconcileCreate(value,request){
+    check(validated.has(value)&&Object.hasOwn(value,'events'));plan(request);
+    return same(value.plan,request)?'CONFIRMED':'CONFLICT';
+  }
+  globalThis.DSGCampaignContract=Object.freeze({summary,receipt,reconcile,action,input,reconcileInput,reconcileCreate});
 })();

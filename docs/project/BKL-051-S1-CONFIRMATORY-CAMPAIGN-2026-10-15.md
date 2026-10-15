@@ -87,8 +87,40 @@ conferma una richiesta: identificativo e contenuto esatto devono corrispondere.
 I dati restano una vista autenticata del servizio, con `localBytesVerified=false`;
 non attestano i file privati sul PC. Nessun lease token o credenziale è incluso.
 Il worker non può leggere la ricevuta e la rotta non accetta scritture. La
-composizione di produzione resta disabilitata. L'interfaccia operativa completa
-e la sua verifica restano da implementare sul candidato successivo.
+composizione di produzione resta disabilitata.
+
+Il candidato del pannello Owner usa esclusivamente la sessione Google esistente,
+senza esporre il token ai nuovi componenti. Offre consultazione di tutte le 59
+righe, piano, impronte dei documenti privati ed eventi; importa richieste
+minimizzate di creazione, revisione input/esito, congelamento, decisione finale
+e revoca. Ogni scrittura richiede una conferma esplicita dopo la consultazione.
+La lettura locale di una richiesta non è autenticazione né una decisione già
+registrata. Nessun comando del pannello crea job o invia dati astronomici.
+
+La richiesta esatta viene conservata in `sessionStorage` prima del POST, senza
+credenziali, immagini o percorsi. Solo un riscontro coerente dal servizio la
+riconcilia. Risposta persa, rifiuto o ricevuta non verificabile non diventano
+successo. L'assenza da una ricevuta consente soltanto la ripetizione manuale
+della medesima registrazione, mai un nuovo tentativo scientifico implicito.
+Un conflitto resta conservato per recupero supervisionato. Nessuna richiesta
+irrisolta può essere eliminata dal pannello o sostituita con un'altra decisione.
+Questo limite conservativo non completa il recupero operativo R09.
+
+Le richieste incerte della coda e del collaudo bloccano reciprocamente nuove
+decisioni e nuovi avvii; l'annullamento esplicito di un'analisi già presente
+rimane disponibile. Non implica arresto del processo, né terminazione forzata.
+Logout, scadenza e navigazione cancellano le viste private; conservano gli
+intenti incerti per la successiva lettura autenticata. Dati incoerenti o memoria
+non verificabile bloccano i comandi. Le risposte tardive non ripristinano viste
+dopo la fine della sessione. La verifica visiva del nuovo pannello resta un gate.
+
+Le richieste locali usano `BKL051_OWNER_CAMPAIGN_ACTION_V1`, con soli campi
+`schema`, `action`, `planRef`, `witnessRef`, `request`. `witnessRef` è presente
+solo per `INPUT_REVIEW`, altrimenti è null. Le azioni consentite sono `CREATE`,
+`INPUT_REVIEW`, `FREEZE`, `OUTCOME_REVIEW`, `FINALIZE`, `REVOKE`; `request`
+contiene il rispettivo contratto server, senza campi di identità o authority.
+Il browser rifiuta campi aggiuntivi e file oltre 16 KiB. Le impronte devono
+derivare dalle prove reali conservate sul PC, non essere inventate dal pannello.
 
 Il ritorno alla composizione senza adattatore disabilita le nuove rotte senza
 cancellare lo stato. Un'eventuale attivazione richiede separata valutazione di
@@ -103,7 +135,7 @@ revoche e confine statistico 58/59. Il caso positivo sintetico non qualifica
 alcun dato astronomico reale. Gli esiti della suite e le review indipendenti
 devono essere acquisiti sul candidato esatto prima dell'integrazione.
 
-Restano da completare interfaccia operativa, adattatori delle evidenze reali,
+Restano da collaudare il nuovo pannello e la sua integrazione; adattatori delle evidenze reali,
 orchestrazione e recupero autorizzati, campione reale indipendente con verità
 nulla verificabile, modello scientifico completo, revisione Owner autenticata
 e tutti gli altri requisiti R01–R14. Nessun requisito complessivo è dichiarato
