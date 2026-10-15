@@ -1,5 +1,12 @@
 # Project Governance Center
 
+## BKL-051 — correzione del rifiuto HTTP, 15 ottobre 2026
+
+Postmerge PR601: errore di connessione nella suite Windows sul 404 worker;
+gate fallito conservato. Correzione candidata della chiusura delle risposte,
+senza nuova authority o attivazione. [Prove e gate del successore](BKL-051-S1-REJECTED-HTTP-RESPONSES-2026-10-15.md).
+Milestone OPEN / NOT_VALIDATED, stima37%, zero qualificati.
+
 ## BKL-051 — tripletta privata e integrità WCS, 15 ottobre 2026
 
 Tre tentativi RAW diagnostici collegati al piano; servizio ripristinato. Tre
