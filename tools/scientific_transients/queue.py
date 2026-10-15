@@ -13,6 +13,9 @@ LEASE_SECONDS = 900  # Operational lease only; no scientific threshold.
 BINDING_FIELDS = {"bindingRef", "inputRef", "referenceRef", "algorithmRef", "contractRef"}
 RECOVERY_FIELDS = {"decisionId", "attemptId", "rootId", "bindingRef", "evidenceSha256", "quiescenceConfirmed"}
 LIMIT = 1024 * 1024
+CAMPAIGN_PROFILE = "CANDIDATE_59X3_V1"
+CAMPAIGN_LIMIT = 8 * 1024 * 1024
+CAMPAIGN_CAPACITY = 512
 
 
 def digest(value):
@@ -24,10 +27,20 @@ def fields(value, expected):
 
 
 class TransientQueue:
-    def __init__(self, store, worker_id, clock=None, *, state_ref=None):
+    def __init__(self, store, worker_id, clock=None, *, state_ref=None, capacity_profile=None):
         require(opaque(worker_id), "TRANSIENT_WORKER_ID")
         require(state_ref is None or opaque(state_ref), "TRANSIENT_STATE_REF")
+        require(capacity_profile is None or
+                type(capacity_profile) is str and capacity_profile == CAMPAIGN_PROFILE,
+                "TRANSIENT_CAPACITY_PROFILE")
+        require(capacity_profile is None or state_ref is not None,
+                "TRANSIENT_CAPACITY_ISOLATED_STATE_REQUIRED")
         self.store, self.worker_id = store, worker_id
+        # Trusted deployment choice only. Never inferred from an incoming job,
+        # an existing oversized state or the candidate's scientific eligibility.
+        self.capacity_profile = capacity_profile
+        self.capacity = 32 if capacity_profile is None else CAMPAIGN_CAPACITY
+        self.state_limit = LIMIT if capacity_profile is None else CAMPAIGN_LIMIT
         # An explicit deployment choice, never an automatic identity migration.
         self.state_key = (STATE_KEY if state_ref is None else
                           "control/transient-analysis/" + state_ref + "/state-v1.json")
@@ -36,12 +49,21 @@ class TransientQueue:
     def _read(self):
         raw, generation = self.store.get(self.state_key)
         if raw is None:
-            return {"protocol": PROTOCOL, "workerId": self.worker_id, "rootId": None,
-                    "bindings": [], "jobs": []}, generation
-        require(len(raw) <= LIMIT, "TRANSIENT_STATE_LIMIT")
+            state = {"protocol": PROTOCOL, "workerId": self.worker_id, "rootId": None,
+                     "bindings": [], "jobs": []}
+            if self.capacity_profile is not None:
+                state["capacityProfile"] = self.capacity_profile
+            return state, generation
+        require(len(raw) <= self.state_limit, "TRANSIENT_STATE_LIMIT")
         state = decode(raw)
         require(state["protocol"] == PROTOCOL and state["workerId"] == self.worker_id,
                 "TRANSIENT_STATE_IDENTITY")
+        require(state.get("capacityProfile") == self.capacity_profile
+                and ("capacityProfile" in state) == (self.capacity_profile is not None),
+                "TRANSIENT_CAPACITY_STATE_MISMATCH")
+        require(type(state["bindings"]) is list and type(state["jobs"]) is list
+                and len(state["bindings"]) <= self.capacity and len(state["jobs"]) <= self.capacity,
+                "TRANSIENT_STATE_CAPACITY")
         return state, generation
 
     def _mutate(self, operation):
@@ -63,7 +85,7 @@ class TransientQueue:
                 failure = error
                 state = decode(expired)
             raw = encode(state)
-            require(len(raw) <= LIMIT, "TRANSIENT_STATE_LIMIT")
+            require(len(raw) <= self.state_limit, "TRANSIENT_STATE_LIMIT")
             try:
                 if original != raw:
                     self.store.put(self.state_key, raw, generation)
@@ -104,7 +126,7 @@ class TransientQueue:
             if existing:
                 require(existing == request, "TRANSIENT_BINDING_CONFLICT")
                 return copy.deepcopy(existing)
-            require(len(state["bindings"]) < 32, "TRANSIENT_BINDING_CAPACITY")
+            require(len(state["bindings"]) < self.capacity, "TRANSIENT_BINDING_CAPACITY")
             state["bindings"].append(copy.deepcopy(request))
             return copy.deepcopy(request)
         return self._mutate(operation)
@@ -122,7 +144,7 @@ class TransientQueue:
                 return self._view(existing)
             binding = next((b for b in state["bindings"] if b["bindingRef"] == request["bindingRef"]), None)
             require(binding is not None, "TRANSIENT_BINDING_NOT_REGISTERED")
-            require(len(state["jobs"]) < 32, "TRANSIENT_JOB_CAPACITY")
+            require(len(state["jobs"]) < self.capacity, "TRANSIENT_JOB_CAPACITY")
             job = {"jobId": "TRN_" + request["requestId"], "request": copy.deepcopy(request),
                    "binding": copy.deepcopy(binding), "state": "QUEUED", "cancelRequested": False,
                    "sequence": 0, "result": None, "reviews": [],

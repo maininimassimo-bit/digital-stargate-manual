@@ -362,3 +362,8 @@ Il registro locale non autentica attori e non concede invio. Integrazione privat
 ## 2026-10-09 — gate PR540 non conforme
 
 PR540 è MERGED sul commit `93be5531da5243c79c3f3f03f9762095700a6f45`, ma il gate pre-merge behind-main è fallito dopo avanzamento PR541 e il comando di merge è stato eseguito erroneamente. Questa non conformità storica non è sanata retroattivamente. Il rilascio del registro resta INCOMPLETE in attesa del presente incremento correttivo, CI esatta, nuove ARB poi RQ sull’albero corrente e gate pre/post-merge validi. Il delta concorrente di sei file Allsky/SEO/nav/template è stato letto integralmente: nessuna sovrapposizione con i sorgenti del registro, preservati senza modifica. BKL-051 OPEN / NOT_VALIDATED; nessuna accettazione scientifica o authority. Tutti i residui scientifici, servizio/Owner/reporting/S4/S5 e i limiti precedenti restano interi; nessuna nuova sessione cloud, credenziale, soglia, fotografia o prova nativa. P6 Accepted nei limiti, F4 lifecycle pending, F5 dopo F4, BKL-050 conclusiva; Safety e C→F invariati.
+
+
+## BKL-051 — profilo capacità candidato, 2026-10-15
+
+[Capacità esplicita del registro candidato](BKL-051-S1-CAMPAIGN-CAPACITY-2026-10-15.md): implementazione offline 512 binding/job e 8 MiB con profilo trusted e registro isolato; default backend 32/1 MiB conservato. Browser: lettura massima 512/8 MiB. Prove sintetiche e verifica visiva locale, gate di rilascio ancora separati. Nessuna attivazione cloud; costi futuri da stimare includendo backup progressivi e versioni. BKL-051 OPEN / NOT_VALIDATED, 37% indicativo, zero controlli qualificati; R09 resta aperto per il collaudo operativo completo.

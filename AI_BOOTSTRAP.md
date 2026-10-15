@@ -345,3 +345,8 @@ Concorrenza Owner HTTPS reale, interruzione nativa isolata e nuovo worker, offli
 ## P6 — accettazione operativa Owner
 
 L’Owner conferma «Accetto operativamente P6 con i limiti del dossier». Nessuna esclusione HOO: collaudo nativo completato. Accettazione distinta da valutazione estetica e pubblicazione; CFA resta prova tecnica su singola esposizione, History a monte non attestata e recupero soltanto conservativo. [Chiusura](docs/project/BKL-049-EXT-PIAI-P6-CLOSURE-2026-10-07.md), [handover](docs/project/HANDOVER_2026-10-07-BKL051-S1.md). Gate di consegna exact-head e post-merge nella PR #499; nessun PASS anticipato.
+
+
+### BKL-051 — capacità candidata offline (2026-10-15)
+
+[Profilo esplicito del registro](docs/project/BKL-051-S1-CAMPAIGN-CAPACITY-2026-10-15.md): backend storico 32 binding/job, 1 MiB; profilo trusted CANDIDATE_59X3_V1 su registro isolato 512/8 MiB. Browser sola lettura 512/8 MiB. Nessuna adozione, migrazione, attivazione o replay impliciti. Milestone OPEN / NOT_VALIDATED, 37% indicativo, zero controlli qualificati. Rilascio subordinato a review indipendenti e gate sul commit esatto; cloud richiede nuovo perimetro approvato con conservazione di backup e versioni.

@@ -227,3 +227,8 @@ Backlog, Technical Debt, Decision Log, Development Workflow, Coding Standards e 
 ## Safety boundary
 
 Comparison, analytics, score e AI non sono Safety Authority e non autorizzano device command o remediation.
+
+
+## BKL-051 — profilo capacità candidato, 2026-10-15
+
+[Capacità esplicita del registro candidato](BKL-051-S1-CAMPAIGN-CAPACITY-2026-10-15.md): implementazione offline 512 binding/job e 8 MiB con profilo trusted e registro isolato; default backend 32/1 MiB conservato. Browser: lettura massima 512/8 MiB. Prove sintetiche e verifica visiva locale, gate di rilascio ancora separati. Nessuna attivazione cloud; costi futuri da stimare includendo backup progressivi e versioni. BKL-051 OPEN / NOT_VALIDATED, 37% indicativo, zero controlli qualificati; R09 resta aperto per il collaudo operativo completo.
