@@ -35,11 +35,11 @@ Report generato dallo storico delle sessioni Digital StarGate.
 - ID: `UNKNOWN`
 - Telescopio: —
 - Camera: —
-- Sessioni: **2**
-- Durata complessiva: **26 h**
+- Sessioni: **3**
+- Durata complessiva: **36.9908 h**
 - Integrazione complessiva: **0 h**
 - Efficienza di integrazione: **0%**
 - Completamento medio: **—%**
 - RMS totale medio: **0.226″**
 - Frame: 0 completati, 0 falliti, 0 avviati
-- Periodo: `2026-08-10T18:00:00` – `2026-08-27T07:00:00`
+- Periodo: `2026-08-10T18:00:00` – `2026-10-16T03:59:41.0000000Z`
