@@ -73,6 +73,7 @@
   }
   function eventRequest(e,p){
     const r=e.request;
+    if(globalThis.DSGCampaignDispatchContract?.kinds.includes(e.kind))return;
     if(e.kind==='CREATE'){plan(r);check(same(r,p));return;}
     if(e.kind==='EXECUTION'){check(exact(r,['executionSha256'])&&hash(r.executionSha256));return;}
     const shapes={FREEZE:['decisionId','planHeadSha256','approveAlgorithm','approveRules','expectedInputReviewSha256',
@@ -96,7 +97,9 @@
     summary(v.campaign);plan(v.plan);check(v.plan.planRef===v.campaign.planRef
       &&await digest(v.plan)===v.campaign.planSha256
       &&same(v.plan.inputWitnessRefs,v.campaign.cases.map(c=>c.witnessRef)));
-    check(Array.isArray(v.events)&&v.events.length>=1&&v.events.length<=512
+    // A complete protected lifecycle has at least 534 events; keep a finite
+    // allowance for reconciliations while the transport remains bounded at8MiB.
+    check(Array.isArray(v.events)&&v.events.length>=1&&v.events.length<=1024
       &&Array.isArray(v.executions)&&v.executions.length===v.campaign.executionRecords);
     let previous=null,lastTime=null,owner=null,worker=null;const decisions=new Set(),eventHashes=new Set();
     for(const [i,e] of v.events.entries()){
@@ -104,15 +107,18 @@
         &&hash(e.sha256)&&ref(e.actorRef)&&utc(e.recordedUTC)&&e.previous===previous&&!eventHashes.has(e.sha256));
       const stamp=instantKey(e.recordedUTC);check(lastTime===null||stamp>=lastTime);lastTime=stamp;
       check((i===0)===(e.kind==='CREATE'));eventRequest(e,v.plan);
-      const workerEvent=e.kind==='EXECUTION';
-      check(e.authority===(workerEvent?'AUTHENTICATED_WORKER_REPORTED_NOT_ATTESTED':
+      const technical=globalThis.DSGCampaignDispatchContract?.kinds.includes(e.kind)?
+        await globalThis.DSGCampaignDispatchContract.inspect(e,v.plan,v.events.slice(0,i),
+          {check,exact,ref,hash,utc,instantKey,same,digest}):null;
+      const workerEvent=e.kind==='EXECUTION'||technical?.worker===true;
+      check(e.authority===(technical?technical.authority:workerEvent?'AUTHENTICATED_WORKER_REPORTED_NOT_ATTESTED':
         e.kind==='CREATE'?'AUTHENTICATED_OWNER_REQUEST':'AUTHENTICATED_OWNER_SCIENTIFIC_DECISION'));
       if(workerEvent){if(worker===null)worker=e.actorRef;check(worker===e.actorRef);}
       else{if(owner===null)owner=e.actorRef;check(owner===e.actorRef);}
       if(e.kind==='FREEZE')check(exact(e.facts,['registrySnapshotSha256','inputReviewSnapshotSha256'])
         &&hash(e.facts.registrySnapshotSha256)&&e.facts.inputReviewSnapshotSha256===e.request.expectedInputReviewSha256
         &&e.recordedUTC===v.campaign.frozenUTC);
-      else check(e.facts===null);
+      else if(!technical)check(e.facts===null);
       if(e.request.decisionId){check(!decisions.has(e.request.decisionId));decisions.add(e.request.decisionId);}
       const {sha256,...payload}=e;check(await digest(payload)===sha256);previous=sha256;eventHashes.add(sha256);
     }
@@ -148,6 +154,7 @@
           &&instantKey(s.createdAt)>instantKey(v.campaign.frozenUTC)&&instantKey(s.updatedAt)>=instantKey(s.createdAt));
         if(record.technicalCompleted)check(s.state==='COMPLETED'&&ref(j.attemptId)&&hash(j.reportSha256));
       }
+      globalThis.DSGCampaignDispatchContract?.execution(record,v.events,{check,hash});
       const logged=v.events.filter(e=>e.kind==='EXECUTION'&&e.request.executionSha256===record.sha256);
       check(logged.length===1&&logged[0].recordedUTC===record.recordedUTC);
       if(r.outcome!=='INCONCLUSIVE')check(record.technicalCompleted&&r.pipelineStatus==='COMPLETE_UNDER_FROZEN_RULES');

@@ -27,7 +27,9 @@
     EARLIER_FROZEN_SAMPLE_REUSED:'Campione congelato precedente riutilizzato',PLAN_NOT_FROZEN:'Piano non congelato',PLAN_REVOKED:'Piano revocato',
     COMPLETE_REVIEWED_SAMPLE_MISSING:'Campione completo e revisionato mancante',ZERO_EVENT_CRITERION_FAILED:'Criterio a zero false segnalazioni non soddisfatto'};
   const events={CREATE:'Creazione del piano',FREEZE:'Congelamento',EXECUTION:'Esito comunicato dal PC',OUTCOME_REVIEW:'Revisione dell’esito',
-    FINAL_OWNER_ACCEPTANCE:'Accettazione della sola campagna',REVOCATION:'Revoca'};
+    FINAL_OWNER_ACCEPTANCE:'Accettazione della sola campagna',REVOCATION:'Revoca',DISPATCH_INTENT:'Preparazione tecnica Owner',
+    START_ADMISSION:'Ammissione tecnica del frame',FRAME_CLOSURE:'Chiusura tecnica dichiarata',
+    UNRESERVED_FENCED_CLOSURE:'Chiusura senza avvio dopo annullamento verificato'};
   const check=ok=>{if(!ok)throw Error('Operazione del collaudo non verificabile.');};
   function mount(root,host){
     const api=globalThis.DSGCampaignContract;check(api);
