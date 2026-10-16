@@ -137,6 +137,15 @@ def _pin(path, expected, limit):
             self.assertEqual(original, current)
             self.assertNotEqual(original_identity, current_identity)
 
+    def test_live_source_attestation_includes_verified_bootstrap_buffers(self):
+        self.scenario(source=b"def main(session):\n    from pathlib import Path\n    import hashlib\n    rows=session.attest_sources()\n    assert set(rows)=={'tools.synthetic','_dsg_verified_bootstrap','_dsg_pinned_source_loader'}\n    for row in rows.values():\n        raw=Path(row['path']).read_bytes()\n        assert hashlib.sha256(raw).hexdigest()==row['sha256']\n        assert len(raw)==row['byteLength']\n    rows['tools.synthetic']['sha256']='0'*64\n    assert session.attest_sources()['tools.synthetic']['sha256']!='0'*64\n    print('SYNTHETIC_ENTRY_REACHED')\n")
+
+    def test_bootstrap_attestation_is_a_copy_and_matches_live_runtime(self):
+        self.scenario(source=b"def main(session):\n    import sys,hashlib\n    from pathlib import Path\n    b=session.attest_bootstrap()\n    assert b['expectedPythonVersion']==sys.version\n    assert b['pythonExecutable']==Path(sys.executable).as_posix()\n    assert b['pythonExecutableSha256']==hashlib.sha256(Path(sys.executable).read_bytes()).hexdigest()\n    b['bootstrapManifestSha256']='0'*64\n    assert session.attest_bootstrap()['bootstrapManifestSha256']!='0'*64\n    print('SYNTHETIC_ENTRY_REACHED')\n")
+
+    def test_source_attestation_refuses_changed_source_instead_of_hashing_it_as_executed(self):
+        self.scenario(source=b"def main(session):\n    from pathlib import Path\n    Path(__file__).write_bytes(b'# altered source')\n    session.attest_sources()\n    print('SYNTHETIC_ENTRY_REACHED')\n",success=False,error='SOURCE_IDENTITY_CHANGED')
+
 
 if __name__ == '__main__':
     unittest.main()

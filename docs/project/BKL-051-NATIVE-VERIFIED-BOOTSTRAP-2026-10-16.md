@@ -25,6 +25,21 @@ identità dei file di bootstrap, runtime, caricatore e dei due manifest.
 Viene eseguito prima e dopo il comando; il futuro supervisore deve richiamarlo
 prima di ciascuna decisione sensibile.
 
+La sessione espone inoltre due attestazioni vive, precedute e seguite dal
+medesimo controllo: `attest_sources()` restituisce copie delle impronte dei
+buffer approvati, inclusi gli initializer e i due moduli eseguiti dal bootstrap;
+`attest_bootstrap()` restituisce le impronte di manifest/entry/sorgenti del
+bootstrap e i dati del runtime verificato. L'elenco delle sorgenti comprende
+anche i moduli autorizzati non ancora importati; le identità dei moduli
+effettivamente caricati sono controllate separatamente dal loader. I namespace
+senza sorgente non diventano file inventati. Non viene calcolata una nuova
+impronta per accettare un file alterato come codice già eseguito.
+
+Il supervisore dovrà usare queste attestazioni per confrontare il proprio
+controllo di avvio, verificando anche i ruoli di runtime e bootstrap. Le copie
+restituite non conferiscono autorità fuori dalla sessione viva né sostituiscono
+il futuro controllo dell'handle del processo.
+
 Percorsi assoluti canonici, file regolari privati, assenza di alias e limiti
 sono verificati. Manifest e sorgenti bootstrap/loader hanno ciascuno limite
 1 MiB; eseguibile Python 16 MiB; le sorgenti locali mantengono i limiti del

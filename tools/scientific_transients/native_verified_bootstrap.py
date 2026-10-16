@@ -84,8 +84,11 @@ def _pin(path, expected, limit):
 
 class BootstrapSession:
     """Live gates for verified loader plus the bootstrap's own pinned closure."""
-    def __init__(self, loader, snapshots):
+    def __init__(self, loader, snapshots, extra_sources, bootstrap_binding):
         self.loader, self.snapshots = loader, tuple(snapshots)
+        self._extra_sources = tuple((name, path, hashlib.sha256(raw).hexdigest(), len(raw))
+                                    for name, (path, raw) in extra_sources.items())
+        self._bootstrap_binding = dict(bootstrap_binding)
 
     def assert_intact(self):
         self.loader.assert_intact()
@@ -93,6 +96,27 @@ class BootstrapSession:
             current, current_identity = _bytes(path, limit)
             _require(current == raw and current_identity == identity, 'BOOTSTRAP_CLOSURE_CHANGED')
         return True
+
+    def attest_sources(self):
+        """Copy of all allowed verified buffers; live loaded identities gated separately.
+
+        Includes the two bootstrap-executed modules outside the tools namespace.
+        Namespace prefixes have no source bytes and never become invented files.
+        """
+        self.assert_intact()
+        result = {name: {'path': path.as_posix(), 'sha256': digest, 'byteLength': len(raw)}
+                  for name, (path, raw, digest, package) in self.loader.sources.items()}
+        for name, path, digest, size in self._extra_sources:
+            _require(name not in result, 'BOOTSTRAP_SOURCE_COLLISION')
+            result[name] = {'path': Path(path).as_posix(), 'sha256': digest, 'byteLength': size}
+        self.assert_intact()
+        return result
+
+    def attest_bootstrap(self):
+        self.assert_intact()
+        result = dict(self._bootstrap_binding)
+        self.assert_intact()
+        return result
 
 
 def _bootstrap_main(manifest_path, expected_manifest_sha256):
@@ -130,7 +154,13 @@ def _bootstrap_main(manifest_path, expected_manifest_sha256):
     library = types.ModuleType('_dsg_pinned_source_loader')
     exec(compile(loader_raw, manifest['loaderPath'], 'exec', dont_inherit=True), library.__dict__)
     loader = library.VerifiedSources(sources_raw, manifest['sourcesManifestSha256']).install()
-    session = BootstrapSession(loader, snapshots)
+    session = BootstrapSession(loader, snapshots,
+        {'_dsg_verified_bootstrap': (__verified_bootstrap_path__, __verified_bootstrap_bytes__),
+         '_dsg_pinned_source_loader': (manifest['loaderPath'], loader_raw)},
+        {'bootstrapManifestSha256': expected_manifest_sha256, 'bootstrapEntrySha256': manifest['entrySha256'],
+         'bootstrapSourceSha256': manifest['bootstrapSha256'], 'loaderSha256': manifest['loaderSha256'],
+         'sourcesManifestSha256': manifest['sourcesManifestSha256'], 'expectedPythonVersion': sys.version,
+         'pythonExecutable': Path(sys.executable).as_posix(), 'pythonExecutableSha256': manifest['pythonExecutableSha256']})
     session.assert_intact()
     _require(manifest['entryModule'] in loader.sources, 'BOOTSTRAP_ENTRY_NOT_PINNED')
     module = __import__(manifest['entryModule'], fromlist=[manifest['entryCallable']])
