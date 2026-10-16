@@ -47,5 +47,31 @@
     return {action:'PROJECT_JOB',planRef:proposal.planRef,proposalSha256,operationKeySha256,
       relativePath:'/v1/transient-analysis/campaigns/'+proposal.planRef+'/dispatch-intents/'+receipt.intentSha256+'/jobs/'+ordinal+'/project',request:{}};
   }
-  globalThis.DSGCampaignOwnerReceipt=Object.freeze({intent,projection});
+  async function projected(raw,proposal,receipt,ordinal,technical){
+    raw=structuredClone(raw);proposal=structuredClone(proposal);receipt=structuredClone(receipt);technical=structuredClone(technical);
+    const selection=await projection(raw,proposal,receipt,ordinal);
+    const {event}=await inspect(raw,proposal),job=proposal.request.jobs[ordinal];
+    const identity={planRef:proposal.planRef,intentSha256:receipt.intentSha256,queueNamespaceSha256:receipt.queueNamespaceSha256,
+      contextSha256:proposal.request.contextSha256,archiveSha256:proposal.request.archiveSha256,
+      workerId:proposal.request.workerId,rootId:proposal.request.rootId,ordinal,jobId:'TRN_'+job.requestId,
+      requestId:job.requestId,bindingRef:job.binding.bindingRef,bindingSha256:await digest(job.binding),
+      inputSha256:event.facts.context.frames[ordinal].sha256};
+    check(exact(technical,[...Object.keys(identity),'protocol','requestSelectionSha256','projectionState','revoked',
+      'reservationConsumed','launchAuthorized','scientificValidation'])
+      &&technical.protocol==='DSG_CAMPAIGN_TECHNICAL_CONTEXT_V1'&&technical.revoked===false
+      &&technical.launchAuthorized===false&&technical.scientificValidation==='NOT_VALIDATED'
+      &&typeof technical.reservationConsumed==='boolean'
+      &&['QUEUED','RESERVED','RUNNING','COMPLETED','FAILED','CANCELLED','RECOVERY_REQUIRED'].includes(technical.projectionState)
+      &&Object.entries(identity).every(([key,value])=>technical[key]===value));
+    check(technical.requestSelectionSha256===await digest({protocol:'DSG_CAMPAIGN_REQUEST_SELECTION_V1',...identity}));
+    // Existence can be confirmed after consumption; this never grants a fresh reservation.
+    const value={protocol:'DSG_CAMPAIGN_OWNER_PROJECTION_RECEIPT_V1',planRef:proposal.planRef,
+      intentSha256:receipt.intentSha256,queueNamespaceSha256:receipt.queueNamespaceSha256,ordinal,jobId:identity.jobId,
+      requestSelectionSha256:technical.requestSelectionSha256,projectionObserved:true,
+      reservationFreshness:'NOT_ATTESTED',operationKeySha256:selection.operationKeySha256,
+      requestSha256:await digest({protocol:'DSG_CAMPAIGN_OWNER_REQUEST_V1',request:{}}),
+      launchAuthorized:false,scientificValidation:'NOT_VALIDATED'};
+    return {...value,receiptSha256:await digest(value)};
+  }
+  globalThis.DSGCampaignOwnerReceipt=Object.freeze({intent,projection,projected});
 })();
